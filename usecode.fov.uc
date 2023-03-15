@@ -8629,14 +8629,15 @@ void Func0311 shape#(0x311) ()
 					var0001[0x0003] = (var0001[0x0003] + 0x0001);
 					if (UI_is_not_blocked(var0001, var0004, 0x0000))
 					{
-						// I see no way other than this
-						goto labelFunc0311_00DA;
+						break;
 					}
 				}
-				UI_flash_mouse(0x0000);
-				return;
+				nobreak
+				{
+					UI_flash_mouse(0x0000);
+					return;
+				}
 			}
-labelFunc0311_00DA:
 			UI_close_gumps();
 			var0009 = UI_create_new_object(var0004);
 			if (var0009)
