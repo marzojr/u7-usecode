@@ -1,3 +1,5 @@
+#game "blackgate"
+
 // externs
 extern void Func08FF 0x8FF (var var0000);
 extern var Func0829 0x829 (var var0000);
@@ -1727,6 +1729,7 @@ void Func012F shape#(0x12F) ()
 
 // externs
 extern var Func0802 0x802 (var var0000, var var0001);
+extern void Func0615 object#(0x615) ();
 
 void Func0133 shape#(0x133) ()
 {
@@ -2868,6 +2871,9 @@ void Func018A shape#(0x18A) ()
 	return;
 }
 
+// externs
+extern void Func060D object#(0x60D) ();
+
 void Func019A shape#(0x19A) ()
 {
 	var var0000;
@@ -2964,6 +2970,7 @@ void Func01A2 shape#(0x1A2) ()
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern var Func092D 0x92D (var var0000);
 extern var Func0827 0x827 (var var0000, var var0001);
+extern void Func068F object#(0x68F) ();
 
 void Func01AF shape#(0x1AF) ()
 {
@@ -3813,6 +3820,7 @@ void Func01F7 shape#(0x1F7) ()
 
 // externs
 extern var Func090A 0x90A ();
+extern void Func03A7 shape#(0x3A7) ();
 
 void Func01F8 shape#(0x1F8) ()
 {
@@ -4429,6 +4437,7 @@ void Func0269 shape#(0x269) ()
 extern void Func0690 object#(0x690) ();
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern var Func092D 0x92D (var var0000);
+extern void Func0691 object#(0x691) ();
 
 void Func026F shape#(0x26F) ()
 {
@@ -5883,6 +5892,7 @@ void Func0288 shape#(0x288) ()
 // externs
 extern void Func0835 0x835 (var var0000, var var0001, var var0002);
 extern void Func08FD 0x8FD (var var0000);
+extern void Func0603 object#(0x603) ();
 
 void Func0289 shape#(0x289) ()
 {
@@ -6400,6 +6410,10 @@ extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, 
 extern var Func0944 0x944 (var var0000);
 extern var Func0945 0x945 (var var0000);
 extern var Func092D 0x92D (var var0000);
+extern void Func0717 object#(0x717) ();
+extern void Func068B object#(0x68B) ();
+extern void Func068C object#(0x68C) ();
+extern void Func068D object#(0x68D) ();
 
 void Func029C shape#(0x29C) ()
 {
@@ -6910,6 +6924,7 @@ void Func02BD shape#(0x2BD) ()
 extern void Func08FE 0x8FE (var var0000);
 extern void Func0925 0x925 (var var0000);
 extern var Func0932 0x932 (var var0000);
+extern void Func02C0 shape#(0x2C0) ();
 
 void Func02BE shape#(0x2BE) ()
 {
@@ -7026,6 +7041,7 @@ void Func02C0 shape#(0x2C0) ()
 
 // externs
 extern void Func06F6 object#(0x6F6) ();
+extern void Func03DE shape#(0x3DE) ();
 
 void Func02C3 shape#(0x2C3) ()
 {
@@ -7593,6 +7609,7 @@ void Func02D3 shape#(0x2D3) ()
 // externs
 extern var Func0937 0x937 (var var0000);
 extern void Func0904 0x904 (var var0000, var var0001);
+extern void Func060A object#(0x60A) ();
 
 void Func02D5 shape#(0x2D5) ()
 {
@@ -8220,6 +8237,7 @@ extern var Func08E7 0x8E7 ();
 extern void Func06F6 object#(0x6F6) ();
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern var Func092D 0x92D (var var0000);
+extern void Func0350 shape#(0x350) ();
 
 void Func02F8 shape#(0x2F8) ()
 {
@@ -9385,6 +9403,7 @@ void Func0326 shape#(0x326) ()
 extern var Func083A 0x83A ();
 extern var Func083C 0x83C (var var0000);
 extern void Func0933 0x933 (var var0000, var var0001, var var0002);
+extern void Func060B object#(0x60B) ();
 
 void Func0329 shape#(0x329) ()
 {
@@ -9460,6 +9479,10 @@ extern var Func0944 0x944 (var var0000);
 extern var Func0945 0x945 (var var0000);
 extern var Func092D 0x92D (var var0000);
 extern var Func093C 0x93C (var var0000, var var0001);
+extern void Func0692 object#(0x692) ();
+extern void Func0693 object#(0x693) ();
+extern void Func0694 object#(0x694) ();
+extern void Func0695 object#(0x695) ();
 
 void Func032A shape#(0x32A) ()
 {
@@ -10077,6 +10100,7 @@ extern var Func0908 0x908 ();
 extern void Func08FF 0x8FF (var var0000);
 extern var Func0932 0x932 (var var0000);
 extern void Func08FE 0x8FE (var var0000);
+extern void Func0609 object#(0x609) ();
 
 void Func0334 shape#(0x334) ()
 {
@@ -10400,79 +10424,79 @@ void Func0334 shape#(0x334) ()
 			{
 				var000A = ["THE", "THRONE", "ROOM", "OF", "LORD", "BRITISH"];
 			}
-			else if (var0001 == 0x0031)
-			{
-				var000A = ["SEE IF", "THOU ART", "THE NEXT", "LORD OF", "BRITANNIA"];
-			}
-			else if (var0001 == 0x0032)
-			{
-				var000A = ["in", "lovi*", "memory", "of", "mama"];
-			}
-			else if (var0001 == 0x0033)
-			{
-				var000A = ["BEWARE", "THE", "DRAGON"];
-			}
-			else if (var0001 == 0x0034)
-			{
-				var000A = ["for", "(e", "love", "of", "marney"];
-			}
-			else if (var0001 == 0x0035)
-			{
-				var000A = ["|j|r|r|t|", "a|gr+t", "man", "a|gr+t", "writer"];
-			}
-			else if (var0001 == 0x0036)
-			{
-				var000A = ["THE", "BRITANNIAN", "LENS"];
-			}
-			else if (var0001 == 0x0037)
-			{
-				var000A = ["THE", "GARGOYLE", "LENS"];
-			}
-			else if (var0001 == 0x0038)
-			{
-				var000A = ["EX", "POR"];
-			}
-			else if (var0001 == 0x0039)
-			{
-				var000A = ["(e", "te,", "of", "love"];
-			}
-			else if (var0001 == 0x003A)
-			{
-				var000A = ["(e", "te,", "of", "courage"];
-			}
-			else if (var0001 == 0x003B)
-			{
-				var000A = ["nor(", "is", "(e", "way"];
-			}
-			else if (var0001 == 0x003C)
-			{
-				var000A = ["tru(", "is", "tru("];
-			}
-			else if (var0001 == 0x003D)
-			{
-				var000A = ["only", "app+rances", "are", "deceptive"];
-			}
-			else if (var0001 == 0x003E)
-			{
-				var000A = ["well", "done"];
-			}
-			else if (var0001 == 0x003F)
-			{
-				var000A = ["(e", "keys", "of", "tru("];
-			}
-			else if (var0001 == 0x0040)
-			{
-				var000A = ["tru,|not", "always|(e", "obvious", "path"];
-			}
-			else if (var0001 == 0x0041)
-			{
-				var000A = ["(ou", "do,|not", "wish|to", "see|(is"];
-			}
-			else
-			{
-				UI_display_runes(0x0033, var000A);
-				return;
-			}
+		}
+		else if (var0001 == 0x0031)
+		{
+			var000A = ["SEE IF", "THOU ART", "THE NEXT", "LORD OF", "BRITANNIA"];
+		}
+		else if (var0001 == 0x0032)
+		{
+			var000A = ["in", "lovi*", "memory", "of", "mama"];
+		}
+		else if (var0001 == 0x0033)
+		{
+			var000A = ["BEWARE", "THE", "DRAGON"];
+		}
+		else if (var0001 == 0x0034)
+		{
+			var000A = ["for", "(e", "love", "of", "marney"];
+		}
+		else if (var0001 == 0x0035)
+		{
+			var000A = ["|j|r|r|t|", "a|gr+t", "man", "a|gr+t", "writer"];
+		}
+		else if (var0001 == 0x0036)
+		{
+			var000A = ["THE", "BRITANNIAN", "LENS"];
+		}
+		else if (var0001 == 0x0037)
+		{
+			var000A = ["THE", "GARGOYLE", "LENS"];
+		}
+		else if (var0001 == 0x0038)
+		{
+			var000A = ["EX", "POR"];
+		}
+		else if (var0001 == 0x0039)
+		{
+			var000A = ["(e", "te,", "of", "love"];
+		}
+		else if (var0001 == 0x003A)
+		{
+			var000A = ["(e", "te,", "of", "courage"];
+		}
+		else if (var0001 == 0x003B)
+		{
+			var000A = ["nor(", "is", "(e", "way"];
+		}
+		else if (var0001 == 0x003C)
+		{
+			var000A = ["tru(", "is", "tru("];
+		}
+		else if (var0001 == 0x003D)
+		{
+			var000A = ["only", "app+rances", "are", "deceptive"];
+		}
+		else if (var0001 == 0x003E)
+		{
+			var000A = ["well", "done"];
+		}
+		else if (var0001 == 0x003F)
+		{
+			var000A = ["(e", "keys", "of", "tru("];
+		}
+		else if (var0001 == 0x0040)
+		{
+			var000A = ["tru,|not", "always|(e", "obvious", "path"];
+		}
+		else if (var0001 == 0x0041)
+		{
+			var000A = ["(ou", "do,|not", "wish|to", "see|(is"];
+		}
+		else
+		{
+			UI_display_runes(0x0033, var000A);
+			return;
 		}
 	}
 }
@@ -10868,6 +10892,7 @@ void Func0353 shape#(0x353) ()
 
 // externs
 extern var Func090A 0x90A ();
+extern void Func06F9 object#(0x6F9) ();
 
 void Func0356 shape#(0x356) ()
 {
@@ -11880,6 +11905,8 @@ extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
 extern void Func092E 0x92E (var var0000);
+extern void Func06AA object#(0x6AA) ();
+extern void Func06FA object#(0x6FA) ();
 
 void Func0401 object#(0x401) ()
 {
@@ -16006,117 +16033,113 @@ void Func040B object#(0x40B) ()
 				say();
 				abort;
 			}
-			else
-			{
-				case "name":
-					message("\"I am called Petre,\" the man sniffs.");
-					say();
-					UI_remove_answer("name");
+			case "name":
+				message("\"I am called Petre,\" the man sniffs.");
+				say();
+				UI_remove_answer("name");
 
-				case "job":
-					message("\"I am the stables caretaker.\"");
-					say();
-					UI_add_answer("stables");
+			case "job":
+				message("\"I am the stables caretaker.\"");
+				say();
+				UI_add_answer("stables");
 
-				case "stables":
-					message("\"I have worked here for years. I can sell thee a nice horse and carriage if thou dost want one. The animal and the carriage are located in a small shelter just outside the north gate of the town.\"");
+			case "stables":
+				message("\"I have worked here for years. I can sell thee a nice horse and carriage if thou dost want one. The animal and the carriage are located in a small shelter just outside the north gate of the town.\"");
+				say();
+				if (!gflags[0x0057])
+				{
+					message("\"Right now the place gives me the creeps!\"~~His eyes are wild with fright.");
 					say();
-					if (!gflags[0x0057])
+				}
+				else
+				{
+					message("\"The Mayor did not let me clean in there until twenty-four hours after thou didst leave Trinsic. He thought we had to keep the place of the crime unsullied. Well, if thou dost ask me, I can tell thee that it still stinks like the end of the world in there!\"");
+					say();
+				}
+				UI_remove_answer("stables");
+				UI_add_answer("carriage");
+
+			case "murder":
+				message("\"I discovered poor Christopher and Inamo earlier this morning. I did not touch a thing. Made me sick, it did!\"");
+				say();
+				UI_remove_answer("murder");
+				UI_add_answer(["Christopher", "Inamo"]);
+
+			case "Christopher":
+				message("\"Nice man. He made the shoes for mine horses.\"");
+				say();
+				UI_remove_answer("Christopher");
+
+			case "Inamo":
+				message("\"He worked for very little money. Did basic chores around the stables and the pub. I let him sleep in the little back room. He must have been in the wrong place at the wrong time.\"");
+				say();
+				UI_remove_answer("Inamo");
+
+			case "carriage":
+				message("\"The horse and carriage combination sells for 60 gold. Dost thou want a title?\"");
+				say();
+				var0005 = Func090A();
+				if (var0005)
+				{
+					var0006 = UI_count_objects(0xFE9B, 0x0284, 0xFE99, 0xFE99);
+					if (var0006 >= 0x003C)
 					{
-						message("\"Right now the place gives me the creeps!\"~~His eyes are wild with fright.");
-						say();
-					}
-					else
-					{
-						message("\"The Mayor did not let me clean in there until twenty-four hours after thou didst leave Trinsic. He thought we had to keep the place of the crime unsullied. Well, if thou dost ask me, I can tell thee that it still stinks like the end of the world in there!\"");
-						say();
-					}
-					UI_remove_answer("stables");
-					UI_add_answer("carriage");
-
-				case "murder":
-					message("\"I discovered poor Christopher and Inamo earlier this morning. I did not touch a thing. Made me sick, it did!\"");
-					say();
-					UI_remove_answer("murder");
-					UI_add_answer(["Christopher", "Inamo"]);
-
-				case "Christopher":
-					message("\"Nice man. He made the shoes for mine horses.\"");
-					say();
-					UI_remove_answer("Christopher");
-
-				case "Inamo":
-					message("\"He worked for very little money. Did basic chores around the stables and the pub. I let him sleep in the little back room. He must have been in the wrong place at the wrong time.\"");
-					say();
-					UI_remove_answer("Inamo");
-
-				case "carriage":
-					message("\"The horse and carriage combination sells for 60 gold. Dost thou want a title?\"");
-					say();
-					var0005 = Func090A();
-					if (var0005)
-					{
-						var0006 = UI_count_objects(0xFE9B, 0x0284, 0xFE99, 0xFE99);
-						if (var0006 >= 0x003C)
+						var0007 = UI_add_party_items(0x0001, 0x031D, 0x001C, 0xFE99, false);
+						if (var0007)
 						{
-							var0007 = UI_add_party_items(0x0001, 0x031D, 0x001C, 0xFE99, false);
-							if (var0007)
-							{
-								message("\"Very good. Nothing like a little business transaction to take my mind off the ghastly scene in the stables.\"");
-								say();
-								var0008 = UI_remove_party_items(0x003C, 0x0284, 0xFE99, 0xFE99, true);
-							}
-							else
-							{
-								message("\"Oh, my. Thine hands are too full to take the title!\"");
-								say();
-							}
+							message("\"Very good. Nothing like a little business transaction to take my mind off the ghastly scene in the stables.\"");
+							say();
+							var0008 = UI_remove_party_items(0x003C, 0x0284, 0xFE99, 0xFE99, true);
 						}
 						else
 						{
-							message("\"Oh. Thou dost not have enough gold to buy the title.\"");
+							message("\"Oh, my. Thine hands are too full to take the title!\"");
 							say();
 						}
 					}
 					else
 					{
-						message("\"Some other time, then.\"");
+						message("\"Oh. Thou dost not have enough gold to buy the title.\"");
 						say();
 					}
-					UI_remove_answer("carriage");
-
-				case "footprints":
-					message("\"They doth lead out the back way, yes? They must be the tracks of the murderer!\"~~His eyes widen a bit more.~~\"Or... murderers!\"");
+				}
+				else
+				{
+					message("\"Some other time, then.\"");
 					say();
-					UI_remove_answer("footprints");
+				}
+				UI_remove_answer("carriage");
 
-				case "Fellowship":
-					message("\"I do not want to join them, but they seem all right.\"");
+			case "footprints":
+				message("\"They doth lead out the back way, yes? They must be the tracks of the murderer!\"~~His eyes widen a bit more.~~\"Or... murderers!\"");
+				say();
+				UI_remove_answer("footprints");
+
+			case "Fellowship":
+				message("\"I do not want to join them, but they seem all right.\"");
+				say();
+				UI_remove_answer("Fellowship");
+
+			case "Klog":
+				message("\"I do not know the man too well. I have no dealings with him.\"");
+				say();
+				UI_remove_answer("Klog");
+
+			case "Spark":
+				if (!(0xFFFE in var0001))
+				{
+					message("\"That be Christopher's son. Nice lad.\"");
 					say();
-					UI_remove_answer("Fellowship");
-
-				case "Klog":
-					message("\"I do not know the man too well. I have no dealings with him.\"");
+				}
+				else
+				{
+					message("Petre ruffles the boy's hair.~~\"This here is Christopher's son. He's a good lad, is Spark, when he's not pilfering things from honest shopkeepers.\"");
 					say();
-					UI_remove_answer("Klog");
+				}
+				UI_remove_answer("Spark");
 
-				case "Spark":
-					if (!(0xFFFE in var0001))
-					{
-						message("\"That be Christopher's son. Nice lad.\"");
-						say();
-					}
-					else
-					{
-						message("Petre ruffles the boy's hair.~~\"This here is Christopher's son. He's a good lad, is Spark, when he's not pilfering things from honest shopkeepers.\"");
-						say();
-					}
-					UI_remove_answer("Spark");
-
-				case "bye":
-					break;
-
-			}
+			case "bye":
+				break;
 		}
 		message("\"Goodbye,\" the man sniffs.*");
 		say();
@@ -16166,38 +16189,39 @@ void Func040C object#(0x40C) ()
 		var0001 = Func0908();
 		var0002 = Func08F7(0xFFFE);
 		var0003 = UI_is_pc_female();
-		if ((gflags[0x005A] == true) && (gflags[0x0048] == false))
+		do
 		{
-			message("\"Hast thou properly searched the stables?\"");
-			say();
-			if (Func090A())
+			if ((gflags[0x005A] == true) && (gflags[0x0048] == false))
 			{
-				message("\"What didst thou find?\"");
+				message("\"Hast thou properly searched the stables?\"");
 				say();
-				UI_clear_answers();
-				var0004 = ["nothing", "a bucket", "a body"];
-				if (gflags[0x003C])
+				if (Func090A())
 				{
-					var0004 = (var0004 & "a key");
-				}
-				var0005 = Func090B(var0004);
-				if (var0005 == "a key")
-				{
-					if (!var0002)
+					message("\"What didst thou find?\"");
+					say();
+					UI_clear_answers();
+					var0004 = ["nothing", "a bucket", "a body"];
+					if (gflags[0x003C])
 					{
-						message("\"Hmmm, a key. Perhaps if thou dost ask Christopher's son about it, he may know what it is for.\"");
-						say();
+						var0004 = (var0004 & "a key");
 					}
-					else
+					var0005 = Func090B(var0004);
+					if (var0005 == "a key")
 					{
-						message("\"Ask Spark about it. He may know something.\"");
-						say();
+						if (!var0002)
+						{
+							message("\"Hmmm, a key. Perhaps if thou dost ask Christopher's son about it, he may know what it is for.\"");
+							say();
+						}
+						else
+						{
+							message("\"Ask Spark about it. He may know something.\"");
+							say();
+						}
+						gflags[0x0048] = true;
+						break;
 					}
-					gflags[0x0048] = true;
-				}
-				else
-				{
-					if (var0005 == "a body")
+					else if (var0005 == "a body")
 					{
 						message("\"I know that! What ELSE didst thou find? Thou shouldst look again, Avatar!\"*");
 						say();
@@ -16223,120 +16247,120 @@ void Func040C object#(0x40C) ()
 					abort;
 				}
 			}
-		}
-		if (gflags[0x0059])
-		{
-			message("\"Hmmm. Hast thou reconsidered mine offer to investigate the murder?\"");
-			say();
-			if (Func090A())
+			if (gflags[0x0059])
 			{
-				message("\"Splendid. Then thou must really be the Avatar after all!\"");
+				message("\"Hmmm. Hast thou reconsidered mine offer to investigate the murder?\"");
 				say();
-				gflags[0x0059] = false;
-				Func0883();
+				if (Func090A())
+				{
+					message("\"Splendid. Then thou must really be the Avatar after all!\"");
+					say();
+					gflags[0x0059] = false;
+					Func0883();
+				}
+				else
+				{
+					message("\"Then leave our people to work it out for themselves.\"*");
+					say();
+					UI_remove_npc_face(0xFFF4);
+					var0006 = Func08F7(0xFFFF);
+					if (var0006)
+					{
+						UI_show_npc_face(0xFFFF, 0x0000);
+						message("\"Avatar! I am ashamed of thee! Thou shouldst reconsider!\"*");
+						say();
+						UI_remove_npc_face(0xFFFF);
+					}
+					abort;
+				}
 			}
-			else
+			else if (!gflags[0x004C])
 			{
-				message("\"Then leave our people to work it out for themselves.\"*");
+				UI_halt_scheduled(item);
+				UI_set_schedule_type(UI_get_npc_object(0xFFF4), 0x000B);
+				message("You see a middle-aged nobleman.");
 				say();
-				UI_remove_npc_face(0xFFF4);
+				gflags[0x004C] = true;
 				var0006 = Func08F7(0xFFFF);
 				if (var0006)
 				{
+					message("\"Iolo! Who is this stranger?\"*");
+					say();
 					UI_show_npc_face(0xFFFF, 0x0000);
-					message("\"Avatar! I am ashamed of thee! Thou shouldst reconsider!\"*");
+					message("\"Why, this is the Avatar!\" Iolo proudly proclaims. \"Canst thou believe it? May I introduce thee? This is Finnigan, the Town Mayor. And this is ");
+					message(var0001);
+					message(", the Avatar!");
+					say();
+					if (var0003)
+					{
+						message("\"I simply cannot believe she is here!\"*");
+						say();
+					}
+					else
+					{
+						message("\"I simply cannot believe he is here!\"*");
+						say();
+					}
+					UI_show_npc_face(0xFFF4, 0x0000);
+					message("The Mayor looks you up and down, not sure if he believes Iolo or not. He looks at Iolo skeptically.");
+					say();
+					UI_show_npc_face(0xFFFF, 0x0000);
+					message("\"I swear to thee, it is the Avatar!\"");
 					say();
 					UI_remove_npc_face(0xFFFF);
-				}
-				abort;
-			}
-		}
-		else if (!gflags[0x004C])
-		{
-			UI_halt_scheduled(item);
-			UI_set_schedule_type(UI_get_npc_object(0xFFF4), 0x000B);
-			message("You see a middle-aged nobleman.");
-			say();
-			gflags[0x004C] = true;
-			var0006 = Func08F7(0xFFFF);
-			if (var0006)
-			{
-				message("\"Iolo! Who is this stranger?\"*");
-				say();
-				UI_show_npc_face(0xFFFF, 0x0000);
-				message("\"Why, this is the Avatar!\" Iolo proudly proclaims. \"Canst thou believe it? May I introduce thee? This is Finnigan, the Town Mayor. And this is ");
-				message(var0001);
-				message(", the Avatar!");
-				say();
-				if (var0003)
-				{
-					message("\"I simply cannot believe she is here!\"*");
-					say();
-				}
-				else
-				{
-					message("\"I simply cannot believe he is here!\"*");
-					say();
-				}
-				UI_show_npc_face(0xFFF4, 0x0000);
-				message("The Mayor looks you up and down, not sure if he believes Iolo or not. He looks at Iolo skeptically.");
-				say();
-				UI_show_npc_face(0xFFFF, 0x0000);
-				message("\"I swear to thee, it is the Avatar!\"");
-				say();
-				UI_remove_npc_face(0xFFFF);
-				UI_show_npc_face(0xFFF4, 0x0000);
-			}
-			else
-			{
-				message("\"I have heard that thou art the Avatar. I am not certain that I believe it.");
-				say();
-			}
-			message("The mayor looks at you again as if he were studying every pore on your face. Finally, he smiles.");
-			say();
-			message("\"Welcome, Avatar.\"");
-			say();
-			message("But just as suddenly, Finnigan's face becomes stern.");
-			say();
-			message("\"A horrible murder has occurred. If thou art truly the Avatar, perhaps thou canst help us solve it. I would feel better if thou takest this matter into thine hands. Thou shalt be handsomely rewarded if thou dost discover the name of the killer. Dost thou accept?\"");
-			say();
-			var0005 = Func090A();
-			if (var0005)
-			{
-				var0007 = Func08F7(0xFFF5);
-				if (var0007)
-				{
-					message("\"Petre here knows something about all of this.\"*");
-					say();
-					UI_show_npc_face(0xFFF5, 0x0000);
-					message("The peasant interjects. \"I discovered poor Christopher and the Gargoyle Inamo early this morning.\"*");
-					say();
-					UI_remove_npc_face(0xFFF5);
-				}
-				else
-				{
 					UI_show_npc_face(0xFFF4, 0x0000);
-					message("\"Petre, the stables caretaker, discovered poor Christopher and Inamo early this morning.\"");
+				}
+				else
+				{
+					message("\"I have heard that thou art the Avatar. I am not certain that I believe it.");
 					say();
 				}
-				UI_show_npc_face(0xFFF4, 0x0000);
-				message("The Mayor continues. \"Hast thou searched the stables?\"");
+				message("The mayor looks at you again as if he were studying every pore on your face. Finally, he smiles.");
 				say();
-				Func0885();
+				message("\"Welcome, Avatar.\"");
+				say();
+				message("But just as suddenly, Finnigan's face becomes stern.");
+				say();
+				message("\"A horrible murder has occurred. If thou art truly the Avatar, perhaps thou canst help us solve it. I would feel better if thou takest this matter into thine hands. Thou shalt be handsomely rewarded if thou dost discover the name of the killer. Dost thou accept?\"");
+				say();
+				var0005 = Func090A();
+				if (var0005)
+				{
+					var0007 = Func08F7(0xFFF5);
+					if (var0007)
+					{
+						message("\"Petre here knows something about all of this.\"*");
+						say();
+						UI_show_npc_face(0xFFF5, 0x0000);
+						message("The peasant interjects. \"I discovered poor Christopher and the Gargoyle Inamo early this morning.\"*");
+						say();
+						UI_remove_npc_face(0xFFF5);
+					}
+					else
+					{
+						UI_show_npc_face(0xFFF4, 0x0000);
+						message("\"Petre, the stables caretaker, discovered poor Christopher and Inamo early this morning.\"");
+						say();
+					}
+					UI_show_npc_face(0xFFF4, 0x0000);
+					message("The Mayor continues. \"Hast thou searched the stables?\"");
+					say();
+					Func0885();
+				}
+				else
+				{
+					message("\"Well, thou could not be the real Avatar then!\"*");
+					say();
+					gflags[0x0059] = true;
+					abort;
+				}
 			}
 			else
 			{
-				message("\"Well, thou could not be the real Avatar then!\"*");
+				message("\"Yes, Avatar?\" Finnigan asks.");
 				say();
-				gflags[0x0059] = true;
-				abort;
 			}
-		}
-		else
-		{
-			message("\"Yes, Avatar?\" Finnigan asks.");
-			say();
-		}
+		} while (false);
 		UI_add_answer(["name", "job", "murder", "bye"]);
 		if (gflags[0x005B])
 		{
@@ -28729,6 +28753,7 @@ void Func044E object#(0x44E) ()
 				}
 				else
 				{
+					// This should be var0000 == 0x001A
 					if (0x001A)
 					{
 						message("\"Please come by if thou wouldst like to rest thy weary feet for the night!\"");
@@ -36956,28 +36981,27 @@ void Func047A object#(0x47A) ()
 					{
 						message("\"How much wouldst thou like to bet that Sprellic defeats all three of his challengers?\"");
 						say();
-						var0012 = UI_input_numeric_value(0x0000, 0x00C8, 0x000A, 0x0000);
-						if (var0012 == 0x0000)
+						do
 						{
-							message("\"Perhaps thou art not truly serious about thy convictions. Mayhaps Daphne will take thy line of bets.\"");
-							say();
-						}
-						else
-						{
+							var0012 = UI_input_numeric_value(0x0000, 0x00C8, 0x000A, 0x0000);
+							if (var0012 == 0x0000)
+							{
+								message("\"Perhaps thou art not truly serious about thy convictions. Mayhaps Daphne will take thy line of bets.\"");
+								say();
+								goto labelFunc047A_0447;
+							}
 							message("\"Thou wouldst bet ");
 							message(var0012);
 							message(" gold that Sprellic will win?\"");
 							say();
 							var0013 = Func090A();
-							if (!var0013)
+							if (var0013)
 							{
-								message("\"Very well. How much wouldst thou like to bet?\"");
-								say();
+								break;
 							}
-						}
-					}
-					else
-					{
+							message("\"Very well. How much wouldst thou like to bet?\"");
+							say();
+						} while (true);
 						var000F = UI_count_objects(0xFE9B, 0x0284, 0xFE99, 0xFE99);
 						if (var000F >= var0012)
 						{
@@ -37013,6 +37037,7 @@ void Func047A object#(0x47A) ()
 						say();
 					}
 				}
+labelFunc047A_0447:
 				UI_remove_answer("betting");
 
 			case "winnings":
@@ -37265,28 +37290,27 @@ void Func047B object#(0x47B) ()
 					{
 						message("\"How much wouldst thou like to bet?\"");
 						say();
-						var000B = UI_input_numeric_value(0x0000, 0x00C8, 0x000A, 0x0000);
-						if (var000B == 0x0000)
+						do
 						{
-							message("\"Perhaps thou art not truly serious about thy convictions. Mayhaps the princess will take thy line of bets.\"");
-							say();
-						}
-						else
-						{
+							var000B = UI_input_numeric_value(0x0000, 0x00C8, 0x000A, 0x0000);
+							if (var000B == 0x0000)
+							{
+								message("\"Perhaps thou art not truly serious about thy convictions. Mayhaps the princess will take thy line of bets.\"");
+								say();
+								goto labelFunc047B_0352;
+							}
 							message("\"Thou wouldst bet ");
 							message(var000B);
 							message(" gold that Sprellic will lose?\"");
 							say();
 							var000C = Func090A();
-							if (!var000C)
+							if (var000C)
 							{
-								message("\"Very well. How much wouldst thou like to bet?\"");
-								say();
+								break;
 							}
-						}
-					}
-					else
-					{
+							message("\"Very well. How much wouldst thou like to bet?\"");
+							say();
+						} while (true);
 						var000D = UI_count_objects(0xFE9B, 0x0284, 0xFE99, 0xFE99);
 						if (var000D >= var000B)
 						{
@@ -37320,6 +37344,7 @@ void Func047B object#(0x47B) ()
 						say();
 					}
 				}
+labelFunc047B_0352:
 				UI_remove_answer("gambling");
 
 			case "winnings":
@@ -37726,100 +37751,97 @@ void Func047D object#(0x47D) ()
 					message("\"So, thou wishes to fight for the cowardly Sprellic! Meet us at the duelling area at next noon!\"");
 					say();
 				}
-				else
+				UI_add_answer(["name", "job", "bye"]);
+				converse (0)
 				{
-					UI_add_answer(["name", "job", "bye"]);
-					converse (0)
-					{
-						case "name":
-							message("\"My name is Vokes, ");
-							message(var0000);
-							message(". As big as a mountain, as strong as an ox, as fierce as... well, more fierce than anything thou hast ever fought!\"");
-							say();
-							UI_remove_answer("name");
+					case "name":
+						message("\"My name is Vokes, ");
+						message(var0000);
+						message(". As big as a mountain, as strong as an ox, as fierce as... well, more fierce than anything thou hast ever fought!\"");
+						say();
+						UI_remove_answer("name");
 
-						case "job":
-							message("\"Job! I am not in the habit of plowing fields or peddling vegetables, ");
-							message(var0000);
-							message("! I earn my gold with this sword arm,\" he says as he flexes a mighty bicep. \"Right now I am in Jhelom continuing my studies in my trade with De Snel, and when I am finished my price is going to go up!\"");
-							say();
-							UI_add_answer("Jhelom");
+					case "job":
+						message("\"Job! I am not in the habit of plowing fields or peddling vegetables, ");
+						message(var0000);
+						message("! I earn my gold with this sword arm,\" he says as he flexes a mighty bicep. \"Right now I am in Jhelom continuing my studies in my trade with De Snel, and when I am finished my price is going to go up!\"");
+						say();
+						UI_add_answer("Jhelom");
 
-						case "Jhelom":
-							message("\"I was born here! Is it not magnificent?! Why, in any hour of any day thou canst get into a duel with anyone for no reason at all! Now that is what I call the benefits of civilization!\"");
-							say();
-							UI_add_answer("duel");
-							UI_remove_answer("Jhelom");
+					case "Jhelom":
+						message("\"I was born here! Is it not magnificent?! Why, in any hour of any day thou canst get into a duel with anyone for no reason at all! Now that is what I call the benefits of civilization!\"");
+						say();
+						UI_add_answer("duel");
+						UI_remove_answer("Jhelom");
 
-						case "duel":
-							message("\"A responsibility, yes, even a necessity. The cost of being honorable is that one must defend one's honor. There is no telling just where or when the next stain on one's honor may appear. Like this Sprellic fool, for instance. The perfect example!\"*");
+					case "duel":
+						message("\"A responsibility, yes, even a necessity. The cost of being honorable is that one must defend one's honor. There is no telling just where or when the next stain on one's honor may appear. Like this Sprellic fool, for instance. The perfect example!\"*");
+						say();
+						if (var0005)
+						{
+							UI_show_npc_face(0xFF82, 0x0000);
+							message("\"I'll make a stain on his honor, that's for sure. A blood red one!\"*");
 							say();
-							if (var0005)
+							UI_remove_npc_face(0xFF82);
+							UI_show_npc_face(0xFF83, 0x0000);
+						}
+						UI_add_answer("Sprellic");
+						UI_remove_answer("duel");
+
+					case "Sprellic":
+						if (!gflags[0x0164])
+						{
+							message("\"The bloody idiot had no idea that when he took our honor flag he would be seen doing it. Hence, he never considered the fact that he would have to fight a duel over our sullied honor. But now that the whole town is talking of the incident there is no way that we could refrain from standing up for ourselves. Especially since he has refused to return what he has taken from us.\"*");
+							say();
+							if (var0006)
 							{
-								UI_show_npc_face(0xFF82, 0x0000);
-								message("\"I'll make a stain on his honor, that's for sure. A blood red one!\"*");
+								UI_show_npc_face(0xFF81, 0x0000);
+								message("\"Were he not such a cad, he would see the foolishness of his actions. 'Tis now up to us to show him!\"*");
 								say();
-								UI_remove_npc_face(0xFF82);
+								UI_remove_npc_face(0xFF81);
 								UI_show_npc_face(0xFF83, 0x0000);
 							}
-							UI_add_answer("Sprellic");
-							UI_remove_answer("duel");
-
-						case "Sprellic":
-							if (!gflags[0x0164])
+							UI_add_answer("honor flag");
+							if (gflags[0x0186])
 							{
-								message("\"The bloody idiot had no idea that when he took our honor flag he would be seen doing it. Hence, he never considered the fact that he would have to fight a duel over our sullied honor. But now that the whole town is talking of the incident there is no way that we could refrain from standing up for ourselves. Especially since he has refused to return what he has taken from us.\"*");
-								say();
-								if (var0006)
-								{
-									UI_show_npc_face(0xFF81, 0x0000);
-									message("\"Were he not such a cad, he would see the foolishness of his actions. 'Tis now up to us to show him!\"*");
-									say();
-									UI_remove_npc_face(0xFF81);
-									UI_show_npc_face(0xFF83, 0x0000);
-								}
-								UI_add_answer("honor flag");
-								if (gflags[0x0186])
-								{
-									UI_add_answer("misunderstanding");
-								}
+								UI_add_answer("misunderstanding");
 							}
-							else
-							{
-								message("\"If he had not returned the honor flag to us we would have had to kill him dead as sure as I am standing here.\"");
-								say();
-							}
-							UI_remove_answer("Sprellic");
-
-						case "honor flag":
-							message("\"There is a widely known and long-standing tradition concerning the honor flag of the Library of Scars. It is said that taking the flag from the wall is a signal meaning that the person who takes the flag can beat anyone who studies at the school in a fight. It is also a grossly insulting way of saying that thou dost think the method of fighting a school teaches is inferior, which the Library of Scars most certainly is not!\"");
+						}
+						else
+						{
+							message("\"If he had not returned the honor flag to us we would have had to kill him dead as sure as I am standing here.\"");
 							say();
-							UI_add_answer("Library of Scars");
-							UI_remove_answer("honor flag");
+						}
+						UI_remove_answer("Sprellic");
 
-						case "misunderstanding":
-							message("\"I have heard that rot about it all being a misunderstanding. The only thing misunderstood is how bad Sprellic will look when we finish with him!\"");
-							say();
-							UI_remove_answer("misunderstanding");
+					case "honor flag":
+						message("\"There is a widely known and long-standing tradition concerning the honor flag of the Library of Scars. It is said that taking the flag from the wall is a signal meaning that the person who takes the flag can beat anyone who studies at the school in a fight. It is also a grossly insulting way of saying that thou dost think the method of fighting a school teaches is inferior, which the Library of Scars most certainly is not!\"");
+						say();
+						UI_add_answer("Library of Scars");
+						UI_remove_answer("honor flag");
 
-						case "Library of Scars":
-							message("\"The Library of Scars teaches the supreme fighting style! One that enables thee to get the advantage against thine opponents and soundly defeat them through the brilliantly conceived subterfuge of Master De Snel!\"");
-							say();
-							UI_add_answer("De Snel");
-							UI_remove_answer("Library of Scars");
+					case "misunderstanding":
+						message("\"I have heard that rot about it all being a misunderstanding. The only thing misunderstood is how bad Sprellic will look when we finish with him!\"");
+						say();
+						UI_remove_answer("misunderstanding");
 
-						case "De Snel":
-							message("\"He is a genius. Perhaps the greatest military mind that ever lived. He told us so!\"");
-							say();
-							UI_remove_answer("De Snel");
+					case "Library of Scars":
+						message("\"The Library of Scars teaches the supreme fighting style! One that enables thee to get the advantage against thine opponents and soundly defeat them through the brilliantly conceived subterfuge of Master De Snel!\"");
+						say();
+						UI_add_answer("De Snel");
+						UI_remove_answer("Library of Scars");
 
-						case "bye":
-							break;
+					case "De Snel":
+						message("\"He is a genius. Perhaps the greatest military mind that ever lived. He told us so!\"");
+						say();
+						UI_remove_answer("De Snel");
 
-					}
-					message("\"If I am not killed and thou art not killed perhaps we may raise a\tglass together some day!\"*");
-					say();
+					case "bye":
+						break;
+
 				}
+				message("\"If I am not killed and thou art not killed perhaps we may raise a\tglass together some day!\"*");
+				say();
 			}
 		}
 	}
@@ -38126,65 +38148,62 @@ void Func047F object#(0x47F) ()
 					message(", I must prove myself to De Snel. If thou art the one who suffers, so be it! Meet us at the dueling area at next noon!\"*");
 					say();
 				}
-				else
+				UI_add_answer(["name", "job", "bye"]);
+				converse (0)
 				{
-					UI_add_answer(["name", "job", "bye"]);
-					converse (0)
-					{
-						case "name":
-							message("\"Timmons is my name, ");
-							message(var0000);
-							message(".\"");
+					case "name":
+						message("\"Timmons is my name, ");
+						message(var0000);
+						message(".\"");
+						say();
+						UI_remove_answer("name");
+
+					case "job":
+						message("\"At the moment I have no job. I left all that behind in New Magincia. I have come to Jhelom to study under Master De Snel in the Library of Scars.\"");
+						say();
+						UI_add_answer(["Jhelom", "Library of Scars"]);
+
+					case "Jhelom":
+						message("\"I am afraid I would not be able to help thee. I know little of this town, except for the duels. I am newly arrived here myself. Perhaps thou shouldst ask someone else.\"");
+						say();
+						UI_add_answer("duels");
+						UI_remove_answer("Jhelom");
+
+					case "duels":
+						if (!gflags[0x0164])
+						{
+							message("\"I had heard of this man Sprellic who claims he is a greater fighter than any in the Library of Scars and how he had stolen the honor flag from their wall. So I sought this man out and challenged him to a duel myself.\"");
 							say();
-							UI_remove_answer("name");
-
-						case "job":
-							message("\"At the moment I have no job. I left all that behind in New Magincia. I have come to Jhelom to study under Master De Snel in the Library of Scars.\"");
+							UI_add_answer("Library of Scars");
+						}
+						else
+						{
+							message("\"Unfortunately, the duels with Sprellic were called off before I had the opportunity to impress Master De Snel.\"");
 							say();
-							UI_add_answer(["Jhelom", "Library of Scars"]);
+						}
+						UI_remove_answer("duels");
 
-						case "Jhelom":
-							message("\"I am afraid I would not be able to help thee. I know little of this town, except for the duels. I am newly arrived here myself. Perhaps thou shouldst ask someone else.\"");
+					case "Library of Scars":
+						if (!gflags[0x0164])
+						{
+							message("\"A sailor on a ship at port in New Magincia first told me of the Library of Scars, of how it was the greatest fighting guild in Britannia and how its trainer, Master De Snel, had created the perfect fighting style. I immediately spent every coin I had to come here. But De Snel now refuses to accept me as a student. I know if I can defeat a fighter who claims to be better than anyone in the guild, and help restore its honor in the process, De Snel will have to finally accept me.\"");
 							say();
-							UI_add_answer("duels");
-							UI_remove_answer("Jhelom");
+						}
+						else
+						{
+							message("\"Master De Snel, the trainer at the Library of Scars, has refused me entry until I have proven myself in combat. The only way to prove oneself in combat in the town of Jhelom is by duelling. But my mother raised me to be a perfect gentleman. So far I have not succeeded in offending anyone sufficiently to have them challenge me to a duel. Hmmm. Perhaps I am just not suited to be a member of the Library of Scars.\"");
+							say();
+						}
+						UI_remove_answer("Library of Scars");
 
-						case "duels":
-							if (!gflags[0x0164])
-							{
-								message("\"I had heard of this man Sprellic who claims he is a greater fighter than any in the Library of Scars and how he had stolen the honor flag from their wall. So I sought this man out and challenged him to a duel myself.\"");
-								say();
-								UI_add_answer("Library of Scars");
-							}
-							else
-							{
-								message("\"Unfortunately, the duels with Sprellic were called off before I had the opportunity to impress Master De Snel.\"");
-								say();
-							}
-							UI_remove_answer("duels");
+					case "bye":
+						break;
 
-						case "Library of Scars":
-							if (!gflags[0x0164])
-							{
-								message("\"A sailor on a ship at port in New Magincia first told me of the Library of Scars, of how it was the greatest fighting guild in Britannia and how its trainer, Master De Snel, had created the perfect fighting style. I immediately spent every coin I had to come here. But De Snel now refuses to accept me as a student. I know if I can defeat a fighter who claims to be better than anyone in the guild, and help restore its honor in the process, De Snel will have to finally accept me.\"");
-								say();
-							}
-							else
-							{
-								message("\"Master De Snel, the trainer at the Library of Scars, has refused me entry until I have proven myself in combat. The only way to prove oneself in combat in the town of Jhelom is by duelling. But my mother raised me to be a perfect gentleman. So far I have not succeeded in offending anyone sufficiently to have them challenge me to a duel. Hmmm. Perhaps I am just not suited to be a member of the Library of Scars.\"");
-								say();
-							}
-							UI_remove_answer("Library of Scars");
-
-						case "bye":
-							break;
-
-					}
-					message("\"It was a pleasure speaking to thee, ");
-					message(var0000);
-					message(".\"*");
-					say();
 				}
+				message("\"It was a pleasure speaking to thee, ");
+				message(var0000);
+				message(".\"*");
+				say();
 			}
 		}
 	}
@@ -46175,7 +46194,7 @@ void Func04A6 object#(0x4A6) ()
 					say();
 					if (Func090A())
 					{
-						while (1)
+						while (true)
 						{
 							var0004 = UI_count_objects(0xFE9B, 0x0284, 0xFE99, 0xFE99);
 							if (var0004 >= 0x000C)
@@ -63972,6 +63991,7 @@ void Func0500 object#(0x500) ()
 			message("\"Now for the information 'you' seek. 'This' dimension known as 'Britannia' is under attack by an entity called 'The Guardian'.~~\"'The Guardian' lives in another dimension. 'Xorinia' sometimes trades information with this entity. Do 'you' want to know more about 'The Guardian'?\"");
 			say();
 			var0004 = Func090A();
+			// This should probably be var0004
 			if (0x0614)
 			{
 				message("\"'Xorinia' has digested information about 'The Guardian' and can state the following facts:~~\"'The Guardian' possesses qualities which human entities label 'vain', 'greedy', 'egocentric', and 'malevolent'. 'The Guardian' thrives on power and domination. 'The Guardian' takes 'pleasure' from conquering other worlds. His sensory organs are now focused on 'this' dimension known as 'Britannia'.~~\"'The Guardian' is attempting to enter 'this' dimension by means of an item human entities call a 'Moongate'. This 'Moongate' is not a 'red' color or 'blue' color 'Moongate', which 'Xorinia' knows is the standard form of this item. 'The Guardian' is building a 'Moongate' of the color 'black'.\"");
@@ -64657,6 +64677,8 @@ void Func060D object#(0x60D) ()
 extern var Func08F9 0x8F9 (var var0000, var var0001, var var0002);
 extern var Func093C 0x93C (var var0000, var var0001);
 extern var Func0938 0x938 (var var0000);
+extern void Func0619 object#(0x619) ();
+extern void Func0610 object#(0x610) ();
 
 void Func060E object#(0x60E) ()
 {
@@ -64697,7 +64719,7 @@ void Func060E object#(0x60E) ()
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		UI_play_music(0x00FF, 0x0000);
 		UI_play_music(0x0011, 0x0000);
-		UI_UNKNOWN_83();
+		//UI_UNKNOWN_83();
 		var0000 = UI_get_dead_party(item);
 		for (var0003 in var0000 with var0001 to var0002)
 		{
@@ -65209,6 +65231,9 @@ void Func0617 object#(0x617) ()
 	return;
 }
 
+// externs
+extern void Func061A object#(0x61A) ();
+
 void Func0618 object#(0x618) ()
 {
 	var var0000;
@@ -65218,9 +65243,9 @@ void Func0618 object#(0x618) ()
 		UI_clear_item_flag(0xFE9C, 0x0010);
 		script 0xFE9C
 		{
-			step WEST, 0;
-			step WEST, 0;
-			step WEST, 0;
+			step 6, 0;
+			step 6, 0;
+			step 6, 0;
 			wait 10;
 			call Func0401;
 			call Func061A;
@@ -65240,7 +65265,7 @@ void Func0619 object#(0x619) ()
 void Func061A object#(0x61A) ()
 {
 	var var0000;
-	UI_UNKNOWN_70();
+	//UI_UNKNOWN_70();
 	return;
 }
 
@@ -65696,6 +65721,8 @@ extern void Func093F 0x93F (var var0000, var var0001);
 extern void Func0940 0x940 (var var0000);
 extern void Func093A 0x93A (var var0000, var var0001);
 extern var Func093C 0x93C (var var0000, var var0001);
+extern void Func0636 object#(0x636) ();
+extern void Func0623 object#(0x623) ();
 
 void Func0622 object#(0x622) ()
 {
@@ -65887,6 +65914,7 @@ extern void Func093F 0x93F (var var0000, var var0001);
 extern var Func081B 0x81B (var var0000);
 extern var Func081F 0x81F (var var0000);
 extern void Func084A 0x84A ();
+extern void Func063C object#(0x63C) ();
 
 void Func0625 object#(0x625) ()
 {
@@ -66286,6 +66314,9 @@ void Func0629 object#(0x629) ()
 // externs
 extern var Func0945 0x945 (var var0000);
 extern void Func08E6 0x8E6 (var var0000);
+extern void Func0636 object#(0x636) ();
+extern void Func063F object#(0x63F) ();
+extern void Func0713 object#(0x713) ();
 
 void Func062C object#(0x62C) ()
 {
@@ -67730,6 +67761,9 @@ void Func063E object#(0x63E) ()
 	return;
 }
 
+//externs
+extern void Func0716 object#(0x716) ();
+
 void Func063F object#(0x63F) ()
 {
 	var var0000;
@@ -68010,7 +68044,7 @@ void Func0645 object#(0x645) ()
 		UI_halt_scheduled(item);
 		do
 		{
-			if (!(gflags[gotpassword] == false))
+			if (!(gflags[0x003D] == false))
 			{
 				UI_item_say(item, "@Kal Lor@");
 				if (Func0906())
@@ -70055,6 +70089,7 @@ extern var Func0906 0x906 ();
 extern var Func0934 0x934 (var var0000);
 extern void Func093F 0x93F (var var0000, var var0001);
 extern void Func0933 0x933 (var var0000, var var0001, var var0002);
+extern void Func0688 object#(0x688) ();
 
 void Func0669 object#(0x669) ()
 {
@@ -70758,6 +70793,7 @@ void Func0673 object#(0x673) ()
 // externs
 extern var Func0906 0x906 ();
 extern var Func0934 0x934 (var var0000);
+extern void Func068A object#(0x68A) ();
 
 void Func0674 object#(0x674) ()
 {
@@ -71341,6 +71377,7 @@ void Func067B object#(0x67B) ()
 		{
 			var0000 = true;
 		}
+		// This should probably be var0000 == true
 		if (0x0606 == true)
 		{
 			script item
@@ -72173,6 +72210,9 @@ void Func068C object#(0x68C) ()
 	return;
 }
 
+// externs
+extern void Func068E object#(0x68E) ();
+
 void Func068D object#(0x68D) ()
 {
 	var var0000;
@@ -72203,6 +72243,7 @@ void Func068D object#(0x68D) ()
 
 // externs
 extern var Func0837 0x837 (var var0000, var var0001, var var0002, var var0003, var var0004);
+extern void Func068F object#(0x68F) ();
 
 void Func068E object#(0x68E) ()
 {
@@ -72535,6 +72576,8 @@ void Func0695 object#(0x695) ()
 // externs
 extern void Func087D 0x87D ();
 extern var Func0881 0x881 ();
+extern void Func0697 object#(0x697) ();
+extern void Func069D object#(0x69D) ();
 
 void Func0696 object#(0x696) ()
 {
@@ -72780,6 +72823,8 @@ void Func0696 object#(0x696) ()
 
 // externs
 extern var Func0881 0x881 ();
+extern void Func0698 object#(0x698) ();
+extern void Func069D object#(0x69D) ();
 
 void Func0697 object#(0x697) ()
 {
@@ -73018,6 +73063,7 @@ void Func0698 object#(0x698) ()
 
 // externs
 extern var Func0881 0x881 ();
+extern void Func069C object#(0x69C) ();
 
 void Func0699 object#(0x699) ()
 {
@@ -73135,6 +73181,7 @@ void Func0699 object#(0x699) ()
 // externs
 extern void Func087D 0x87D ();
 extern var Func092D 0x92D (var var0000);
+extern void Func069B object#(0x69B) ();
 
 void Func069A object#(0x69A) ()
 {
@@ -73187,6 +73234,7 @@ void Func069B object#(0x69B) ()
 
 // externs
 extern var Func0881 0x881 ();
+extern void Func069E object#(0x69E) ();
 
 void Func069C object#(0x69C) ()
 {
@@ -73247,7 +73295,7 @@ void Func069D object#(0x69D) ()
 	var var0006;
 	if (event == 0x0007)
 	{
-		UI_UNKNOWN_70();
+		//UI_UNKNOWN_70();
 		return;
 	}
 	var0000 = Func0881();
@@ -73291,6 +73339,9 @@ void Func069D object#(0x69D) ()
 	Func0828(var0005, var0001, var0002, 0x0000, 0x069D, var0005, 0x0007);
 	return;
 }
+
+// externs
+extern void Func069F object#(0x69F) ();
 
 void Func069E object#(0x69E) ()
 {
@@ -73338,6 +73389,7 @@ void Func069E object#(0x69E) ()
 
 // externs
 extern void Func087E 0x87E (var var0000, var var0001, var var0002, var var0003);
+extern void Func06A0 object#(0x6A0) ();
 
 void Func069F object#(0x69F) ()
 {
@@ -73450,6 +73502,10 @@ void Func069F object#(0x69F) ()
 	UI_play_sound_effect(0x0043);
 	return;
 }
+
+// externs
+extern void Func06A1 object#(0x6A1) ();
+extern void Func06A2 object#(0x6A2) ();
 
 void Func06A0 object#(0x6A0) ()
 {
@@ -73619,6 +73675,9 @@ void Func06A0 object#(0x6A0) ()
 	return;
 }
 
+// externs
+extern void Func06F5 object#(0x6F5) ();
+
 void Func06A1 object#(0x6A1) ()
 {
 	var var0000;
@@ -73672,6 +73731,9 @@ void Func06A1 object#(0x6A1) ()
 	UI_play_sound_effect(0x0044);
 	return;
 }
+
+// externs
+extern void Func06A0 object#(0x6A0) ();
 
 void Func06A2 object#(0x6A2) ()
 {
@@ -73728,6 +73790,7 @@ void Func06A2 object#(0x6A2) ()
 // externs
 extern void Func08EB 0x8EB (var var0000, var var0001, var var0002);
 extern void Func01F8 shape#(0x1F8) ();
+extern void Func06F7 object#(0x6F7) ();
 
 void Func06A3 object#(0x6A3) ()
 {
@@ -74247,6 +74310,9 @@ void Func06A9 object#(0x6A9) ()
 	}
 	return;
 }
+
+// externs
+extern void Func06AA object#(0x6AA) ();
 
 void Func06AA object#(0x6AA) ()
 {
@@ -75771,6 +75837,7 @@ void Func06E2 object#(0x6E2) ()
 
 // externs
 extern var Func0881 0x881 ();
+extern void Func069D object#(0x69D) ();
 
 void Func06F5 object#(0x6F5) ()
 {
@@ -75841,6 +75908,9 @@ extern var Func0847 0x847 (var var0000);
 extern var Func08E7 0x8E7 ();
 extern void Func06FC object#(0x6FC) ();
 extern var Func092D 0x92D (var var0000);
+extern void Func06F9 object#(0x6F9) ();
+extern void Func070B object#(0x70B) ();
+extern void Func070F object#(0x70F) ();
 
 void Func06F6 object#(0x6F6) ()
 {
@@ -76771,6 +76841,7 @@ labelFunc06F6_0B89:
 
 // externs
 extern void Func08E6 0x8E6 (var var0000);
+extern void Func06F7 object#(0x6F7) ();
 
 void Func06F7 object#(0x6F7) ()
 {
@@ -77203,6 +77274,7 @@ extern void Func087D 0x87D ();
 extern var Func0881 0x881 ();
 extern void Func08FF 0x8FF (var var0000);
 extern void Func08E6 0x8E6 (var var0000);
+extern void Func069D object#(0x69D) ();
 
 void Func06F8 object#(0x6F8) ()
 {
@@ -78138,6 +78210,7 @@ void Func06FA object#(0x6FA) ()
 
 // externs
 extern void Func08DD 0x8DD ();
+extern void Func06FA object#(0x6FA) ();
 
 void Func06FB object#(0x6FB) ()
 {
@@ -78184,6 +78257,8 @@ void Func06FB object#(0x6FB) ()
 
 // externs
 extern var Func092D 0x92D (var var0000);
+extern void Func0708 object#(0x708) ();
+extern void Func06FD object#(0x6FD) ();
 
 void Func06FC object#(0x6FC) ()
 {
@@ -78340,6 +78415,8 @@ void Func06FC object#(0x6FC) ()
 // externs
 extern var Func0887 0x887 (var var0000, var var0001, var var0002);
 extern void Func0888 0x888 (var var0000);
+extern void Func0708 object#(0x708) ();
+extern void Func06FD object#(0x6FD) ();
 
 void Func06FD object#(0x6FD) ()
 {
@@ -79180,6 +79257,7 @@ void Func070E object#(0x70E) ()
 
 // externs
 extern void Func08E6 0x8E6 (var var0000);
+extern void Func06F7 object#(0x6F7) ();
 
 void Func070F object#(0x70F) ()
 {
@@ -79347,6 +79425,7 @@ extern void Func08FE 0x8FE (var var0000);
 extern var Func0814 0x814 ();
 extern void Func08E6 0x8E6 (var var0000);
 extern void Func08FF 0x8FF (var var0000);
+extern void Func0714 object#(0x714) ();
 
 void Func0710 object#(0x710) ()
 {
@@ -80595,36 +80674,36 @@ void Func0813 0x813 (var var0002, var var0001, var var0000)
 						var0007 = "@Burp@";
 					}
 				}
-				else if (var0005 < 0x0014)
+			}
+			else if (var0005 < 0x0014)
+			{
+				if (UI_get_item_shape(var0002) == 0x034A)
 				{
-					if (UI_get_item_shape(var0002) == 0x034A)
-					{
-						var0007 = "@Yum, garlic!@";
-					}
-					var0007 = "@Ahh, very tasty.@";
-					if ((var0006 > 0x0018) && (var0008 < 0x0003))
-					{
-						var0007 = "@Belch@";
-					}
+					var0007 = "@Yum, garlic!@";
 				}
-				else if (gflags[0x009B] && (var0008 < 0x0002))
+				var0007 = "@Ahh, very tasty.@";
+				if ((var0006 > 0x0018) && (var0008 < 0x0003))
 				{
-					var0007 = "@I'll soon be plump.@";
+					var0007 = "@Belch@";
 				}
-				else if (var0008 < 0x0005)
-				{
-					var0007 = "@I'll soon be plump.@";
-				}
-				else if (!(var0007 == ""))
-				{
-					if (Func0937(var0003))
-					{
-						UI_item_say(var0003, var0007);
-					}
-				}
-				var0009 = UI_set_npc_prop(var0003, 0x0009, var0001);
+			}
+			else if (gflags[0x009B] && (var0008 < 0x0002))
+			{
+				var0007 = "@I'll soon be plump.@";
+			}
+			else if (var0008 < 0x0005)
+			{
+				var0007 = "@I'll soon be plump.@";
 			}
 		}
+		if (!(var0007 == ""))
+		{
+			if (Func0937(var0003))
+			{
+				UI_item_say(var0003, var0007);
+			}
+		}
+		var0009 = UI_set_npc_prop(var0003, 0x0009, var0001);
 	}
 	return;
 }
@@ -88103,6 +88182,7 @@ var Func0886 0x886 ()
 
 // externs
 extern void Func0888 0x888 (var var0000);
+extern void Func0708 object#(0x708) ();
 
 var Func0887 0x887 (var var0002, var var0001, var var0000)
 {
