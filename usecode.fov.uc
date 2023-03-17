@@ -2951,7 +2951,7 @@ void Func019A shape#(0x19A) ()
 			{
 				repeat 24
 				{
-					// Unknown script command: '0x0000'; this is likely a usecode bug.
+					frame 0;
 					next frame cycle;
 					continue;
 					sfx 15;
@@ -3629,7 +3629,7 @@ void Func01DF shape#(0x1DF) ()
 							var0003 = Func093C(var0008, var0003);
 						}
 					}
-					while (1)
+					while (true)
 					{
 						var0002 = UI_die_roll(0x0001, 0x0004);
 						if (!var0003)
@@ -15682,10 +15682,7 @@ void Func040A object#(0x40A) ()
 				UI_remove_answer("introduce");
 				fallthrough;
 
-			// This is supposed to be reached regardless of what (if anything) was
-			// matched up to this point.
-			// I have no idea how to do this in UCC without modifying it to
-			// allow this kind of construct.
+			always:
 				if (gflags[0x001D] && (!var0013))
 				{
 					if ((var0004 in var0002) || (UI_get_array_size(var0003) == 0x0000))
@@ -15709,10 +15706,7 @@ void Func040A object#(0x40A) ()
 				var001F = 0x0003;
 				fallthrough;
 
-			// This is supposed to be reached regardless of what (if anything) was
-			// matched up to this point.
-			// I have no idea how to do this in UCC without modifying it to
-			// allow this kind of construct.
+			always:
 				if (var001F > 0x0000)
 				{
 					if ((!gflags[0x015F]) || (!gflags[0x001D]))
@@ -16005,10 +15999,7 @@ void Func040A object#(0x40A) ()
 				}
 				fallthrough;
 
-			// This is supposed to be reached regardless of what (if anything) was
-			// matched up to this point.
-			// I have no idea how to do this in UCC without modifying it to
-			// allow this kind of construct.
+			always:
 				var0029 = false;
 				fallthrough;
 
@@ -16016,10 +16007,7 @@ void Func040A object#(0x40A) ()
 				var0029 = true;
 				fallthrough;
 
-			// This is supposed to be reached regardless of what (if anything) was
-			// matched up to this point.
-			// I have no idea how to do this in UCC without modifying it to
-			// allow this kind of construct.
+			always:
 				if ((var000C && var000B) && (!var0012))
 				{
 					message("\"Speaking of caves and mountains, there are some who dwell near, or perhaps in, the cave of bees. They are hermits.\"");
@@ -19184,6 +19172,7 @@ labelFunc0417_0743:
 			event = 0x0001;
 			// I see no way other than this
 			goto labelFunc0417_000C;
+			// Dead code
 			abort;
 		}
 		if (!gflags[0x030D])
@@ -67588,7 +67577,7 @@ void Func060E object#(0x60E) ()
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		UI_play_music(0x00FF, 0x0000);
 		UI_play_music(0x0011, 0x0000);
-		//UI_UNKNOWN_83();
+		(@0x83)();
 		var0000 = UI_get_dead_party(item);
 		for (var0003 in var0000 with var0001 to var0002)
 		{
@@ -68134,7 +68123,7 @@ void Func0619 object#(0x619) ()
 void Func061A object#(0x61A) ()
 {
 	var var0000;
-	//UI_UNKNOWN_70();
+	(@0x70)();
 	return;
 }
 
@@ -76164,7 +76153,7 @@ void Func069D object#(0x69D) ()
 	var var0006;
 	if (event == 0x0007)
 	{
-		//UI_UNKNOWN_70();
+		(@0x70)();
 		return;
 	}
 	var0000 = Func0881();
@@ -82419,7 +82408,7 @@ void Func0710 object#(0x710) ()
 			{
 				nohalt;
 				call Func0714;
-				// Unknown script command: '0x02'; this is likely a usecode bug.
+				nop2;
 			}
 		}
 	}
@@ -82649,7 +82638,7 @@ void Func0714 object#(0x714) ()
 		script var0007 after 76 ticks
 		{
 			call Func062C;
-			// Unknown script command: '0x02'; this is likely a usecode bug.
+			nop2;
 		}
 	}
 	return;
@@ -90266,10 +90255,7 @@ void Func087C 0x87C ()
 			say();
 			abort;
 
-		// This is supposed to be reached regardless of what (if anything) was
-		// matched up to this point.
-		// I have no idea how to do this in UCC without modifying it to
-		// allow this kind of construct.
+		always:
 			UI_remove_answer(["Want honey?", "Go away!"]);
 	}
 	return;
@@ -97767,53 +97753,50 @@ void Func08D1 0x8D1 ()
 	UI_add_answer(["-I- am the Avatar!", "I -am- the Avatar!", "I am -the- Avatar!", "I am the -Avatar-!"]);
 	converse (0)
 	{
-	default:
-		message("\"No, no, no! That is all wrong! Thou art the 'Avatar'! Thou must feel like the Avatar! Thou must sound like the Avatar! Thou must -be- the Avatar! Try it again.\"");
-		say();
-	}
-	UI_clear_answers();
-	UI_add_answer(["-I- am the Avatar!", "I -am- the Avatar!", "I am -the- Avatar!", "I am the -Avatar-!"]);
-	converse (0)
-	{
-	default:
-		message("\"Better... better... but I think perhaps thou dost need a prop.\"");
-		say();
-	}
-	UI_clear_answers();
-	converse (0)
-	{
-		var0001 = Func08F7(0xFFE4);
-		if (var0001)
-		{
-			message("\"Jesse, hand our friend thy staff.\"*");
+		default:
+			message("\"No, no, no! That is all wrong! Thou art the 'Avatar'! Thou must feel like the Avatar! Thou must sound like the Avatar! Thou must -be- the Avatar! Try it again.\"");
 			say();
-			if (var0000)
+			fallthrough;
+		always:
+			UI_clear_answers();
+			UI_add_answer(["-I- am the Avatar!", "I -am- the Avatar!", "I am -the- Avatar!", "I am the -Avatar-!"]);
+		default:
+			message("\"Better... better... but I think perhaps thou dost need a prop.\"");
+			say();
+		always:
+			UI_clear_answers();
+			var0001 = Func08F7(0xFFE4);
+			if (var0001)
 			{
-				UI_show_npc_face(0xFFE4, 0x0001);
-				message("\"Here it is, milady.\"*");
+				message("\"Jesse, hand our friend thy staff.\"*");
 				say();
-				UI_remove_npc_face(0xFFE4);
+				if (var0000)
+				{
+					UI_show_npc_face(0xFFE4, 0x0001);
+					message("\"Here it is, milady.\"*");
+					say();
+					UI_remove_npc_face(0xFFE4);
+				}
+				else
+				{
+					UI_show_npc_face(0xFFE4, 0x0000);
+					message("\"Here it is, milord.\"*");
+					say();
+					UI_remove_npc_face(0xFFE4);
+				}
 			}
 			else
 			{
-				UI_show_npc_face(0xFFE4, 0x0000);
-				message("\"Here it is, milord.\"*");
+				message("Raymundo hands you a staff.");
 				say();
-				UI_remove_npc_face(0xFFE4);
 			}
-		}
-		else
-		{
-			message("Raymundo hands you a staff.");
+			UI_show_npc_face(0xFFE5, 0x0000);
+			message("With the staff in hand, you try the lines once more. This time you feel like a true actor. The lines flow from your lips as if the Avatar were really saying them. You feel an excitement you have never before felt. You like this 'acting' thing. You crave more! You anxiously await Raymundo's critique...");
 			say();
-		}
-		UI_show_npc_face(0xFFE5, 0x0000);
-		message("With the staff in hand, you try the lines once more. This time you feel like a true actor. The lines flow from your lips as if the Avatar were really saying them. You feel an excitement you have never before felt. You like this 'acting' thing. You crave more! You anxiously await Raymundo's critique...");
-		say();
-		message("Raymundo takes the staff and says, \"Hmmmm. Yes, that's fine. I thank thee. Fine. We shall be in touch, yes? Thank thee for coming in. If thou hast a resume, just leave it by the door, yes? Thank thee.\"*");
-		say();
-		Func0911(0x0014);
-		abort;
+			message("Raymundo takes the staff and says, \"Hmmmm. Yes, that's fine. I thank thee. Fine. We shall be in touch, yes? Thank thee for coming in. If thou hast a resume, just leave it by the door, yes? Thank thee.\"*");
+			say();
+			Func0911(0x0014);
+			abort;
 	}
 	return;
 }
@@ -99670,10 +99653,7 @@ void Func08ED 0x8ED ()
 			say();
 			abort;
 
-		// This is supposed to be reached regardless of what (if anything) was
-		// matched up to this point.
-		// I have no idea how to do this in UCC without modifying it to
-		// allow this kind of construct.
+		always:
 			UI_remove_answer(["Want honey?", "Go away!"]);
 	}
 	return;
@@ -100120,10 +100100,7 @@ void Func08F3 0x8F3 (var var0000)
 			var0003 = true;
 			fallthrough;
 
-		// This is supposed to be reached regardless of what (if anything) was
-		// matched up to this point.
-		// I have no idea how to do this in UCC without modifying it to
-		// allow this kind of construct.
+		always:
 			if (var0002)
 			{
 				var0002 = false;
