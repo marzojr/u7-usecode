@@ -7927,7 +7927,6 @@ void Func02E3 shape#(0x2E3) ()
 {
 	var var0000;
 	return;
-	return;
 }
 
 // externs
@@ -81447,7 +81446,6 @@ void Func0708 object#(0x708) ()
 	var var0000;
 	UI_remove_item(item);
 	return;
-	return;
 }
 
 void Func0709 object#(0x709) ()
@@ -82893,7 +82891,6 @@ var Func0802 0x802 (var var0001, var var0000)
 		}
 	}
 	return var0002;
-	return 0;
 }
 
 // externs
@@ -83238,7 +83235,6 @@ var Func080C 0x80C (var var0000)
 		}
 	}
 	return 0x00C7;
-	return 0;
 }
 
 var Func080D 0x80D ()
@@ -83259,7 +83255,6 @@ var Func080D 0x80D ()
 		}
 	}
 	return true;
-	return 0;
 }
 
 // externs
@@ -83612,7 +83607,6 @@ var Func0814 0x814 ()
 		}
 	}
 	return var0000;
-	return 0;
 }
 
 // externs
@@ -83953,7 +83947,6 @@ void Func081A 0x81A (var var0000)
 var Func081B 0x81B (var var0000)
 {
 	return (UI_get_item_frame(var0000) % 0x0004);
-	return 0;
 }
 
 void Func081C 0x81C (var var0001, var var0000)
@@ -83984,7 +83977,6 @@ var Func081D 0x81D (var var0005, var var0004, var var0003, var var0002, var var0
 		var0007 = UI_update_last_created(var0006);
 	}
 	return true;
-	return 0;
 }
 
 // externs
@@ -84054,7 +84046,6 @@ var Func081F 0x81F (var var0000)
 		}
 	}
 	return true;
-	return 0;
 }
 
 // externs
@@ -84092,7 +84083,6 @@ var Func0820 0x820 (var var0000)
 		}
 	}
 	return true;
-	return 0;
 }
 
 void Func0821 0x821 (var var0000)
@@ -84119,7 +84109,6 @@ var Func0822 0x822 (var var0000)
 	var0001[0x0002] = var0000[0x0003];
 	var0001[0x0003] = var0000[0x0004];
 	return var0001;
-	return 0;
 }
 
 var Func0823 0x823 (var var0000)
@@ -84142,7 +84131,6 @@ var Func0823 0x823 (var var0000)
 	var0005[0x0002] = var0002[var0004];
 	var0005[0x0003] = var0003[var0004];
 	return var0005;
-	return 0;
 }
 
 // externs
@@ -84241,7 +84229,6 @@ var Func0825 0x825 (var var0002, var var0001, var var0000)
 		}
 	}
 	return var0002;
-	return 0;
 }
 
 var Func0826 0x826 (var var0000)
@@ -84263,7 +84250,6 @@ var Func0826 0x826 (var var0000)
 var Func0827 0x827 (var var0001, var var0000)
 {
 	return UI_find_direction(var0001, var0000);
-	return 0;
 }
 
 void Func0828 0x828 (var var0006, var var0005, var var0004, var var0003, var var0002, var var0001, var var0000)
@@ -84429,7 +84415,6 @@ var Func082A 0x82A (var var0002, var var0001, var var0000)
 		var0000[var0003] = (var0000[var0003] + var0001[var0003]);
 	} while (!(var0003 == var0002));
 	return var0002;
-	return 0;
 }
 
 var Func082B 0x82B (var var0001, var var0000)
@@ -84443,7 +84428,6 @@ var Func082B 0x82B (var var0001, var var0000)
 		var0000[var0002] = (var0000[var0002] * 0xFFFF);
 	} while (!(var0002 == var0001));
 	return var0001;
-	return 0;
 }
 
 // externs
@@ -84467,7 +84451,6 @@ var Func082C 0x82C (var var0003, var var0002, var var0001, var var0000)
 		}
 	}
 	return false;
-	return 0;
 }
 
 // externs
@@ -84486,7 +84469,6 @@ var Func082D 0x82D (var var0002, var var0001, var var0000)
 		var0002 = Func082A(var0002, var0001, 0x0003);
 	}
 	return var0002;
-	return 0;
 }
 
 // externs
@@ -84915,7 +84897,6 @@ var Func0834 0x834 ()
 		}
 	}
 	return true;
-	return 0;
 }
 
 void Func0835 0x835 (var var0002, var var0001, var var0000)
@@ -85138,7 +85119,6 @@ var Func083A 0x83A ()
 	var0001 = UI_get_object_position(var0000[0x0001]);
 	var0001 = (var0001 & var0000[0x0001]);
 	return var0001;
-	return 0;
 }
 
 var Func083B 0x83B ()
@@ -85190,7 +85170,6 @@ var Func083B 0x83B ()
 		var000B = false;
 	}
 	return [var000A, var000B];
-	return 0;
 }
 
 var Func083C 0x83C (var var0000)
@@ -85213,7 +85192,6 @@ var Func083C 0x83C (var var0000)
 		}
 	}
 	return var0001;
-	return 0;
 }
 
 // externs
@@ -85790,7 +85768,6 @@ var Func0844 0x844 (var var0000)
 		}
 	}
 	return 0x0000;
-	return 0;
 }
 
 void Func0845 0x845 (var var0000)
@@ -85850,7 +85827,6 @@ var Func0846 0x846 ()
 		}
 	}
 	return 0x0001;
-	return 0;
 }
 
 var Func0847 0x847 (var var0000)
@@ -85880,7 +85856,6 @@ var Func0847 0x847 (var var0000)
 		return 0x0001;
 	}
 	return 0x0000;
-	return 0;
 }
 
 var Func0848 0x848 (var var0000)
@@ -85958,7 +85933,6 @@ var Func0848 0x848 (var var0000)
 		return 0x0001;
 	}
 	return 0x0000;
-	return 0;
 }
 
 var Func0849 0x849 (var var0000)
@@ -85988,7 +85962,6 @@ var Func0849 0x849 (var var0000)
 		return 0x0001;
 	}
 	return 0x0000;
-	return 0;
 }
 
 void Func084A 0x84A ()
@@ -88519,7 +88492,6 @@ var Func0865 0x865 ()
 		var0003 = (var0002 + "s");
 	}
 	return [var0002, var0003];
-	return 0;
 }
 
 var Func0866 0x866 ()
@@ -88540,7 +88512,6 @@ var Func0866 0x866 ()
 		var0003 = (var0002 + "s");
 	}
 	return [var0002, var0003];
-	return 0;
 }
 
 var Func0867 0x867 ()
@@ -88558,7 +88529,6 @@ var Func0867 0x867 ()
 	var0001 = UI_die_roll(0x0001, UI_get_array_size(var0000));
 	var0003 = var0000[var0001];
 	return [var0002, var0003];
-	return 0;
 }
 
 var Func0868 0x868 ()
@@ -88586,7 +88556,6 @@ var Func0868 0x868 ()
 		var0004 = (var0002 + "ing");
 	}
 	return [var0002, var0003, var0004];
-	return 0;
 }
 
 var Func0869 0x869 ()
@@ -88613,7 +88582,6 @@ var Func0869 0x869 ()
 		var0004 = (var0002 + "ing");
 	}
 	return [var0002, var0003, var0004];
-	return 0;
 }
 
 var Func086A 0x86A ()
@@ -88627,7 +88595,6 @@ var Func086A 0x86A ()
 	var0001 = UI_die_roll(0x0001, UI_get_array_size(var0000));
 	var0002 = var0000[var0001];
 	return var0002;
-	return 0;
 }
 
 var Func086B 0x86B ()
@@ -88641,7 +88608,6 @@ var Func086B 0x86B ()
 	var0001 = UI_die_roll(0x0001, UI_get_array_size(var0000));
 	var0002 = var0000[var0001];
 	return var0002;
-	return 0;
 }
 
 var Func086C 0x86C ()
@@ -88662,7 +88628,6 @@ var Func086C 0x86C ()
 		var0003 = (var0002 + "s");
 	}
 	return [var0002, var0003];
-	return 0;
 }
 
 var Func086D 0x86D ()
@@ -88682,7 +88647,6 @@ var Func086D 0x86D ()
 		var0003 = (var0002 + "s");
 	}
 	return [var0002, var0003];
-	return 0;
 }
 
 var Func086E 0x86E ()
@@ -88695,7 +88659,6 @@ var Func086E 0x86E ()
 	var0001 = UI_die_roll(0x0001, UI_get_array_size(var0000));
 	var0002 = var0000[var0001];
 	return var0002;
-	return 0;
 }
 
 // externs
@@ -89017,7 +88980,6 @@ var Func086F 0x86F ()
 		var0000 = (var0000 - 0x0001);
 	}
 	return (var0012 + var000F);
-	return 0;
 }
 
 // externs
@@ -90531,7 +90493,6 @@ var Func0881 0x881 ()
 		}
 	}
 	return 0x0000;
-	return 0;
 }
 
 // externs
@@ -91230,7 +91191,6 @@ var Func0887 0x887 (var var0002, var var0001, var var0000)
 		}
 	}
 	return var0002;
-	return 0;
 }
 
 void Func0888 0x888 (var var0000)
@@ -94985,7 +94945,6 @@ var Func08B3 0x8B3 (var var0000)
 		}
 	}
 	return false;
-	return 0;
 }
 
 // externs
@@ -99385,7 +99344,6 @@ var Func08E7 0x8E7 ()
 		}
 	}
 	return 0x0000;
-	return 0;
 }
 
 var Func08E8 0x8E8 (var var0000)
@@ -99406,7 +99364,6 @@ var Func08E8 0x8E8 (var var0000)
 		}
 	}
 	return 0x0000;
-	return 0;
 }
 
 var Func08E9 0x8E9 (var var0000)
@@ -99429,7 +99386,6 @@ var Func08E9 0x8E9 (var var0000)
 		return 0x0001;
 	}
 	return 0x0000;
-	return 0;
 }
 
 var Func08EA 0x8EA (var var0000)
@@ -99444,7 +99400,6 @@ var Func08EA 0x8EA (var var0000)
 		return 0x0001;
 	}
 	return 0x0000;
-	return 0;
 }
 
 void Func08EB 0x8EB (var var0002, var var0001, var var0000)
@@ -99893,7 +99848,6 @@ var Func08F1 0x8F1 (var var0000)
 		var0002 = var0001[UI_die_roll(0x0001, UI_get_array_size(var0001))];
 	}
 	return var0002;
-	return 0;
 }
 
 // externs
@@ -100342,7 +100296,6 @@ var Func08F5 0x8F5 (var var0001, var var0000)
 		gflags[0x015F] = true;
 	}
 	return var0000;
-	return 0;
 }
 
 var Func08F6 0x8F6 (var var0000)
@@ -100360,7 +100313,6 @@ var Func08F6 0x8F6 (var var0000)
 		var0002 = (var0002 / 0x0002);
 	}
 	return var0003;
-	return 0;
 }
 
 var Func08F7 0x8F7 (var var0000)
@@ -100375,7 +100327,6 @@ var Func08F7 0x8F7 (var var0000)
 		var0002 = false;
 	}
 	return var0002;
-	return 0;
 }
 
 var Func08F8 0x8F8 (var var0006, var var0005, var var0004, var var0003, var var0002, var var0001, var var0000)
@@ -100470,7 +100421,6 @@ var Func08F8 0x8F8 (var var0006, var var0005, var var0004, var var0003, var var0
 		}
 	}
 	return var000A;
-	return 0;
 }
 
 var Func08F9 0x8F9 (var var0002, var var0001, var var0000)
@@ -100489,7 +100439,6 @@ var Func08F9 0x8F9 (var var0002, var var0001, var var0000)
 		}
 	}
 	return true;
-	return 0;
 }
 
 // externs
@@ -100508,7 +100457,6 @@ void Func08FA 0x8FA (var var0000)
 var Func08FB 0x8FB ()
 {
 	return UI_get_npc_name(UI_get_party_list());
-	return 0;
 }
 
 var Func08FC 0x8FC (var var0001, var var0000)
@@ -100543,7 +100491,6 @@ void Func08FE 0x8FE (var var0000)
 	var var0001;
 	var0001 = Func0900();
 	Func0904(var0001, var0000);
-	return;
 	return;
 }
 
@@ -100597,7 +100544,6 @@ var Func0901 0x901 ()
 		}
 	}
 	return 0xFE9C;
-	return 0;
 }
 
 var Func0902 0x902 ()
@@ -100621,7 +100567,6 @@ var Func0902 0x902 ()
 		}
 	}
 	return 0xFE9C;
-	return 0;
 }
 
 void Func0903 0x903 (var var0001, var var0000)
@@ -100718,13 +100663,11 @@ var Func0906 0x906 ()
 var Func0907 0x907 (var var0000)
 {
 	return UI_give_last_created(UI_get_npc_object(var0000));
-	return 0;
 }
 
 var Func0908 0x908 ()
 {
 	return UI_get_npc_name(UI_get_avatar_ref());
-	return 0;
 }
 
 var Func0909 0x909 ()
@@ -100766,7 +100709,6 @@ var Func090B 0x90B (var var0000)
 	var0001 = UI_select_from_menu();
 	UI_pop_answers();
 	return var0001;
-	return 0;
 }
 
 var Func090C 0x90C (var var0000)
@@ -100778,7 +100720,6 @@ var Func090C 0x90C (var var0000)
 	var0001 = UI_select_from_menu2();
 	UI_pop_answers();
 	return var0001;
-	return 0;
 }
 
 // externs
@@ -100803,7 +100744,6 @@ var Func090D 0x90D ()
 		return 0x0000;
 	}
 	return UI_get_npc_number(var0004);
-	return 0;
 }
 
 // externs
@@ -100827,19 +100767,16 @@ var Func090E 0x90E ()
 		return 0x0000;
 	}
 	return UI_get_npc_number(var0004);
-	return 0;
 }
 
 var Func090F 0x90F (var var0000)
 {
 	return UI_get_npc_name(UI_get_npc_object(var0000));
-	return 0;
 }
 
 var Func0910 0x910 (var var0001, var var0000)
 {
 	return UI_get_npc_prop(UI_get_npc_object(var0001), var0000);
-	return 0;
 }
 
 void Func0911 0x911 (var var0000)
@@ -100881,7 +100818,6 @@ var Func0913 0x913 (var var0001, var var0000)
 		}
 	}
 	return 0x0000;
-	return 0;
 }
 
 // externs
@@ -101087,7 +101023,6 @@ var Func091B 0x91B (var var0004, var var0003, var var0002, var var0001, var var0
 	}
 	var0005 = (((((var0005 + "for ") + var0001) + " gold") + var0000) + ".");
 	return var0005;
-	return 0;
 }
 
 var Func091C 0x91C (var var0004, var var0003, var var0002, var var0001, var var0000)
@@ -101096,7 +101031,6 @@ var Func091C 0x91C (var var0004, var var0003, var var0002, var var0001, var var0
 
 	var0005 = ((((((("To sell " + var0004) + var0003) + " for ") + var0001) + " gold") + var0000) + ".");
 	return var0005;
-	return 0;
 }
 
 // externs
@@ -101189,7 +101123,6 @@ var Func0920 0x920 ()
 	say();
 	var0000 = Func090D();
 	return var0000;
-	return 0;
 }
 
 // externs
@@ -101252,7 +101185,6 @@ var Func0921 0x921 (var var0000)
 		var000C = 0x0000;
 	}
 	return var000C;
-	return 0;
 }
 
 // externs
@@ -101292,7 +101224,6 @@ var Func0922 0x922 (var var0003, var var0002, var var0001, var var0000)
 		return 0x0002;
 	}
 	return 0x0003;
-	return 0;
 }
 
 // externs
@@ -101340,7 +101271,6 @@ var Func0923 0x923 (var var0001, var var0000)
 		}
 	}
 	return var0003;
-	return 0;
 }
 
 // externs
@@ -101388,7 +101318,6 @@ var Func0924 0x924 (var var0001, var var0000)
 		}
 	}
 	return var0003;
-	return 0;
 }
 
 void Func0925 0x925 (var var0000)
@@ -101616,7 +101545,6 @@ var Func092B 0x92B (var var0000)
 		var0001 = (var0001 + 0x0001);
 	}
 	return var0001;
-	return 0;
 }
 
 void Func092C 0x92C (var var0000)
@@ -101628,7 +101556,6 @@ void Func092C 0x92C (var var0000)
 var Func092D 0x92D (var var0000)
 {
 	return UI_direction_from(0xFE9C, var0000);
-	return 0;
 }
 
 // externs
@@ -101877,7 +101804,6 @@ var Func0930 0x930 (var var0001, var var0000)
 
 	var0002 = UI_delayed_execute_usecode_array(var0001, var0000, 0xFFFF);
 	return var0002;
-	return 0;
 }
 
 var Func0931 0x931 (var var0004, var var0003, var var0002, var var0001, var var0000)
@@ -101903,7 +101829,6 @@ var Func0932 0x932 (var var0000)
 		var0000 = (var0000 * 0xFFFF);
 	}
 	return var0000;
-	return 0;
 }
 
 // externs
@@ -101969,7 +101894,6 @@ var Func0935 0x935 (var var0001, var var0000)
 		}
 	}
 	return var0002;
-	return 0;
 }
 
 void Func0936 0x936 (var var0001, var var0000)
@@ -102021,7 +101945,6 @@ var Func0939 0x939 (var var0000)
 		var0001 = var0000;
 	}
 	return var0001;
-	return 0;
 }
 
 // externs
@@ -102118,7 +102041,6 @@ var Func093C 0x93C (var var0001, var var0000)
 		}
 	}
 	return var0002;
-	return 0;
 }
 
 var Func093D 0x93D (var var0001, var var0000)
@@ -102153,7 +102075,6 @@ var Func093D 0x93D (var var0001, var var0000)
 		}
 	}
 	return var0001;
-	return 0;
 }
 
 // externs
@@ -102167,7 +102088,6 @@ var Func093E 0x93E ()
 	var0000 = [0x0390, 0x0810, 0x0000];
 	var0001 = [0x0450, 0x0930, 0x000F];
 	return Func08F9(UI_get_object_position(0xFE9C), var0000, var0001);
-	return 0;
 }
 
 // externs
@@ -102283,7 +102203,6 @@ var Func0944 0x944 (var var0000)
 		}
 	}
 	return var0001;
-	return 0;
 }
 
 var Func0945 0x945 (var var0000)
@@ -102298,7 +102217,6 @@ var Func0945 0x945 (var var0000)
 		var0001 = UI_get_container(var0001);
 	}
 	return var0002;
-	return 0;
 }
 
 // externs
