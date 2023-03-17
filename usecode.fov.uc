@@ -102904,7 +102904,7 @@ var Func094B 0x94B (var var0001, var var0000)
 				}
 			}
 		}
-		if (var0004 >= var000C[0x0004])
+		else if (var0004 >= var000C[0x0004])
 		{
 			if (var0007 >= 0x0028)
 			{
@@ -102939,13 +102939,13 @@ var Func094B 0x94B (var var0001, var var0000)
 				say();
 				return 0x0000;
 			}
-			message("\"To charge more next time. To have sold to you too cheaply!\"");
-			say();
+			else
+			{
+				message("\"To charge more next time. To have sold to you too cheaply!\"");
+				say();
+			}
 		}
-		else
-		{
-			return var0003;
-		}
+		return var0003;
 	}
 	return 0;
 }
@@ -103587,13 +103587,10 @@ void Func0951 0x951 ()
 						message("\"Thou dost not have enough gold for that!\"");
 						say();
 					}
-					else
-					{
-						message("\"Wouldst thou like something else?\"");
-						say();
-						var0001 = Func090A();
-					}
 				}
+				message("\"Wouldst thou like something else?\"");
+				say();
+				var0001 = Func090A();
 			}
 		}
 	}
@@ -103673,13 +103670,10 @@ void Func0952 0x952 ()
 					message("\"Thou dost not have enough gold for that!\"");
 					say();
 				}
-				else
-				{
-					message("\"Wouldst thou like something else?\"");
-					say();
-					var0000 = Func090A();
-				}
 			}
+			message("\"Wouldst thou like something else?\"");
+			say();
+			var0000 = Func090A();
 		}
 	}
 	UI_pop_answers();
