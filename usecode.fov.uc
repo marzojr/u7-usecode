@@ -296,12 +296,14 @@ void Func009A shape#(0x9A) ()
 				message("He once again notices your presence. \"Now, do not let any strange ideas of destruction enter thy mind, Avatar. I shan't let thee deprive me of this chance to experience a true wonder of the world. Run along now... Is there not a right to be wronged, somewhere else?");
 				say();
 				UI_remove_answer("the Psyche returns");
+				fallthrough;
 
 			case "great evil":
 				UI_show_npc_face(0xFEE2, 0x0001);
 				message("The elderly mage frowns. \"I sense no great evil, but then I never did quite get the knack of cosmic awareness. Nevertheless, don't worry thyself over much. These things tend to work themselves out.\" You feel as if you've just been patted on the head and asked to go play elsewhere.");
 				say();
 				UI_remove_answer("great evil");
+				fallthrough;
 
 			case "Talisman of Infinity":
 				if (!gflags[0x030F])
@@ -364,6 +366,7 @@ void Func009A shape#(0x9A) ()
 					}
 				}
 				UI_remove_answer("Talisman of Infinity");
+				fallthrough;
 
 			case "powerful artifact":
 				message("\"I once attempted to create a sword of great power.\" Erethian frowns in concentration then says, \"if thou wishest to continue my work, thou shalt have need of some few pieces of forging equipment... And a place to put them... I know just the spot. Come with me and I'll see what I can do to help thee.\"*");
@@ -396,11 +399,13 @@ void Func009A shape#(0x9A) ()
 				}
 				gflags[0x0338] = true;
 				UI_remove_answer(["black sword", "daemon gem"]);
+				fallthrough;
 
 			case "problems":
 				message("\"This is thy choice to make. Apparently thou hast need to make this sword function, but if the daemon is thy only recourse, I pity thee. For as surely as Arcadion will be bound within the sword, thou wilt be bound to possess it. I can tell thee no more.\"");
 				say();
 				UI_remove_answer("problems");
+				fallthrough;
 
 			case "name":
 				message("The mage gives you a half smile, \"'Twould seem that thy memory is failing thee, ");
@@ -408,6 +413,7 @@ void Func009A shape#(0x9A) ()
 				message(". As I have said, my name is Erethian.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am a follower of the principle of Truth. But unlike those of the Lyceaum, I would prefer to seek out the knowledge instead of waiting for it to come to me.");
@@ -420,11 +426,13 @@ void Func009A shape#(0x9A) ()
 				say();
 				UI_remove_answer("job");
 				UI_add_answer(["Mondain", "Minax", "Exodus", "subjects", "blindness"]);
+				fallthrough;
 
 			case "subjects":
 				message("\"If thou art interested, feel free to inspect them. This is no library.\" As if regretting his gracious gesture, he adds, \"However, I trust that thou wilt take utmost care with the older ones.\" He stops, on the verge of saying more.");
 				say();
 				UI_remove_answer("subjects");
+				fallthrough;
 
 			case "blindness":
 				if (!gflags[0x032B])
@@ -432,12 +440,9 @@ void Func009A shape#(0x9A) ()
 					var0014 = true;
 					break;
 				}
-				else
-				{
-					message("\"Thou art a tiresome child. Leave me be!\" He ignores your presence.*");
-					say();
-					abort;
-				}
+				message("\"Thou art a tiresome child. Leave me be!\" He ignores your presence.*");
+				say();
+				abort;
 
 			case "Mondain":
 				message("Erethian scowls, \"Now there was a mighty wizard. A bit twisted but then who knows what happens to the human mind when 'tis subjected to the powers he wielded.");
@@ -448,6 +453,7 @@ void Func009A shape#(0x9A) ()
 				say();
 				UI_add_answer(["Gem of Immortality", "skull"]);
 				UI_remove_answer("Mondain");
+				fallthrough;
 
 			case "Minax":
 				message("A sad sweet smile comes to the wizard's face, \"She was quite a comely lass at one time, with a mind forever searching.\" His expression darkens, \"But then Mondain forced all of the good sense from her.");
@@ -476,6 +482,7 @@ void Func009A shape#(0x9A) ()
 				}
 				UI_add_answer("Enilno");
 				UI_remove_answer("Minax");
+				fallthrough;
 
 			case "Exodus":
 				message("\"That being has become a passion of mine, lately.\" He almost glows with excitement. \"Indeed, 'tis what brought me here. While I\twas at the Lyceaum, I happened upon a passage in a manuscript that described an Island of Fire.");
@@ -484,6 +491,7 @@ void Func009A shape#(0x9A) ()
 				say();
 				UI_add_answer(["two parts", "interface"]);
 				UI_remove_answer("Exodus");
+				fallthrough;
 
 			case "two parts":
 				message("\"One part, his psyche we shall call it, was taken by the gargoyles who live below us in a realm on the other side of the world. A truly fascinating culture they have, but I digress...\" You begin to wonder just how long this old man has\tbeen out of circulation.");
@@ -502,6 +510,7 @@ void Func009A shape#(0x9A) ()
 					UI_add_answer("Dark Core");
 				}
 				UI_remove_answer("two parts");
+				fallthrough;
 
 			case "interface":
 				message("His expression is unreadable, \"The machine that thou destroyed was Exodus' means of communication with and control of the world.");
@@ -521,6 +530,7 @@ void Func009A shape#(0x9A) ()
 					UI_add_answer("Dark Core");
 				}
 				UI_remove_answer("interface");
+				fallthrough;
 
 			case "gargoyles":
 				message("\"Interesting creatures, thou mightest call them balrons, but they are not the beasts that history has made of them.");
@@ -530,12 +540,14 @@ void Func009A shape#(0x9A) ()
 				message("He turns his head in your direction with a puzzled expression in his eyes, \"I have the oddest feeling that thou hast heard all of this before...\" Erethian falls silent.");
 				say();
 				UI_remove_answer("gargoyles");
+				fallthrough;
 
 			case "psyche":
 				message("\"Eventually, I shall turn my studies to that being. The gargoyles have placed it within a statue, in a shrine they dedicated to their principle of Diligence.");
 				say();
 				var0016 = true;
 				UI_remove_answer("psyche");
+				fallthrough;
 
 			case "Dark Core":
 				if (UI_find_nearest(UI_get_npc_object(0xFE9C), 0x03DE, 0x0007))
@@ -555,6 +567,7 @@ void Func009A shape#(0x9A) ()
 				say();
 				var0017 = true;
 				UI_remove_answer("Dark Core");
+				fallthrough;
 
 			case "Enilno":
 				message("\"Ah, now there's a question. I've heard naught of it's existence since the Age of Darkness ended. Would that I knew its location.");
@@ -573,6 +586,7 @@ void Func009A shape#(0x9A) ()
 					say();
 				}
 				UI_remove_answer("Enilno");
+				fallthrough;
 
 			case "Gem of Immortality":
 				message("Milky eyes glitter up at you like twin marbles, \"Ah, yes. But thou knowest all too well about that little bauble.");
@@ -582,56 +596,66 @@ void Func009A shape#(0x9A) ()
 				message("So much power that even in a shattered state, its magic still flowed. 'Tis sad to lose such an artifact.\" As if suddenly remembering with whom he is speaking, he ammends, \"Much better than having Mondain running about mucking with things, I suppose.\"");
 				say();
 				UI_remove_answer("Gem of Immortality");
+				fallthrough;
 
 			case "skull":
 				message("\"'Twould seem that someone,\" he pauses dramatically, \"let that slip into a volcano...\" His wry smile belies his careless tone.");
 				say();
 				UI_remove_answer("skull");
+				fallthrough;
 
 			case "daemon mirror":
 				message("\"Ah, so thou hast met that old windbag. Truly, I feel that I would do better to free myself of that burdensome beast, but he sometimes proves to be useful. If it weren't for his whining, perhaps he and I would get along better.\"");
 				say();
 				UI_add_answer(["whining", "free"]);
 				UI_remove_answer("daemon mirror");
+				fallthrough;
 
 			case "whining":
 				message("\"'Tis his favorite passtime. He begs, pleads, and threatens me to free him from that stupid mirror. Believe me, if I could I would have done it long ago.\" Erethian's lined face shows his chagrin.");
 				say();
 				UI_remove_answer("whining");
+				fallthrough;
 
 			case "free":
 				message("\"He wants this special bauble. I once possessed this gem he seeks, and I don't think he'd be very happy once he gets it. I have tried to tell him that 'twould only imprison\thim in a more mobile jail, but alas, his head is made of stone.\"");
 				say();
 				UI_add_answer("jail");
 				UI_remove_answer("free");
+				fallthrough;
 
 			case "jail":
 				message("\"Quite. Arcadion seeks to have dominion over Britannia and believes that the gem will give him the ability to exert his power here. In truth, the Ether Gem works in the reverse, his power will become accessible to the one who possesses the gem.\"");
 				say();
 				UI_add_answer("Ether Gem");
 				UI_remove_answer("jail");
+				fallthrough;
 
 			case "Ether Gem":
 				message("\"The gem was pilfered from me by an ill tempered dragon. She blew her way into this castle, waylayed the golems that protect the Shrine of Principle, then destroyed a perfectly good secret door on her way to the Test of Courage. I'd have liked to see her squeeze through the hole she made, 'tis hardly big enough for a creature of her bulk.\" The mage's milky eyes twinkle with suppressed mirth.");
 				say();
 				UI_add_answer(["golems", "Shrine of Principle", "Test of Courage"]);
 				UI_remove_answer("Ether Gem");
+				fallthrough;
 
 			case "golems":
 				message("\"Mmmm... Yes. This pair of manshaped, magical constucts used to guard the Shrine of Principle, but alas, one fell pray to falling rocks when the dragon assaulted the castle. The other picked up his, ah... brother, for lack of a better word, and carried him off through the portal to the Test of Love.\"");
 				say();
 				UI_add_answer("Test of Love");
 				UI_remove_answer("golems");
+				fallthrough;
 
 			case "Shrine of Principle":
 				message("\"The shrine lies through the doors at the rear of the main hall. There thou canst find three statues, each one dedicated to a Principle set forth by Lord Britsh at the beginning of the Age of Enlightenment.\" Conspiratorially he adds, \"A bit stuffy, but they make nice cloakracks.\"");
 				say();
 				UI_remove_answer("Shrine of Principle");
+				fallthrough;
 
 			case "Test of Love":
 				message("\"I not had the chance to inspect that oddity yet, however, thou art welcome to peruse it at thy leisure.\" He smiles like a grandfather giving a present to a child.");
 				say();
 				UI_remove_answer("Test of Love");
+				fallthrough;
 
 			case "Test of Courage":
 				if (UI_is_pc_female())
@@ -647,6 +671,7 @@ void Func009A shape#(0x9A) ()
 				message(" fighting ability and courage. The statues in the back of this castle can tell thee more about the tests, though.\" Erethian grins mysteriously.");
 				say();
 				UI_remove_answer("Test of Courage");
+				fallthrough;
 
 			case "daemon gem":
 				message("\"So... thou hast made a servant of Arcadion. 'Tis good to be rid of his incessant whining. I hope that thou findest him to be as useful as I didst.\" You're not sure, but his words might be construed as a curse.");
@@ -663,12 +688,14 @@ void Func009A shape#(0x9A) ()
 					UI_show_npc_face(0xFEE2, 0x0000);
 				}
 				UI_remove_answer("daemon gem");
+				fallthrough;
 
 			case "daemon blade":
 				message("\"I see that thou didst not heed my warning. Alas, my pity shall be thine eternally. And so, what wouldst thou have of me, Master and Slave of the Shade Blade.\"");
 				say();
 				gflags[0x0339] = true;
 				UI_remove_answer("daemon blade");
+				fallthrough;
 
 			case "bye":
 				if (!gflags[0x0338])
@@ -682,7 +709,6 @@ void Func009A shape#(0x9A) ()
 					say();
 				}
 				abort;
-
 		}
 		if (var0014)
 		{
@@ -766,20 +792,24 @@ void Func009B shape#(0x9B) ()
 				message("\"I am... the Ferryman.\" His voice creaks like the rocking\tof the boat.");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("The Ferryman doesn't respond at first, shaking his head from side to side in puzzlement. \"I am... the Ferryman.\"");
 				say();
+				fallthrough;
 
 			case "Ferryman":
 				message("\"Yes, if you pay me... I can take you across the Misty Channel.\"");
 				say();
 				UI_remove_answer("Ferryman");
+				fallthrough;
 
 			case "Misty Channel":
 				message("He turns to the side and waves his skeletal hand in a sweeping gesture over the water upon which his boat rests. \"This... is the Misty Channel.\"");
 				say();
 				UI_remove_answer("Misty Channel");
+				fallthrough;
 
 			case "Skara Brae":
 				if (!gflags[0x0197])
@@ -823,6 +853,7 @@ void Func009B shape#(0x9B) ()
 					say();
 				}
 				UI_remove_answer("Skara Brae");
+				fallthrough;
 
 			case "pay", "return":
 				if (!gflags[0x0197])
@@ -880,6 +911,7 @@ void Func009B shape#(0x9B) ()
 					}
 				}
 				UI_remove_answer(["pay", "return"]);
+				fallthrough;
 
 			case "sacrifice":
 				if (!gflags[0x0199])
@@ -895,12 +927,12 @@ void Func009B shape#(0x9B) ()
 					say();
 					UI_remove_answer("sacrifice");
 				}
+				fallthrough;
 
 			case "bye":
 				message("Without acknowledging your goodbye, the Ferryman lowers his head and holds his pole across his chest.*");
 				say();
 				abort;
-
 		}
 	}
 	if (event == 0x0000)
@@ -2831,14 +2863,15 @@ void Func018A shape#(0x18A) ()
 				message("\"I am a guard.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("The man looks at you like you are an ignoramus. \"I am a guard for the palace, idiot. Thou shouldst go about thy business.\"");
 				say();
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye.\"*");
 		say();
@@ -3634,31 +3667,35 @@ void Func01DF shape#(0x1DF) ()
 					var0009 = "she";
 				}
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"No job is had by me. Food is gathered by me.\"");
 				say();
 				UI_add_answer("food");
+				fallthrough;
 
 			case "food":
 				message("\"Fruit, milk, cheese are eaten by Emps.");
 				say();
 				UI_add_answer(["fruits", "milk", "cheese"]);
+				fallthrough;
 
 			case "cheese", "milk":
 				message("\"Cheese and milk are liked by Emps, but they are hard to find. Only from humans can these foods be found.\"");
 				say();
 				UI_remove_answer(["cheese", "milk"]);
+				fallthrough;
 
 			case "fruits":
 				message("\"Fruits are found easily in the forest,\" ");
 				message(var0009);
 				message(" says. \"They are what Emps use as food most often.\"");
 				say();
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Farewell is said to you.\"*");
 		say();
@@ -4261,10 +4298,12 @@ void Func0269 shape#(0x269) ()
 			message("\"I am known as the Time Lord.\"");
 			say();
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			message("\"I ensure that time flows smoothly through space.\" He shrugs his shoulders. \"Do not ask me to explain this. It is beyond mortal beings' comprehension.\"");
 			say();
+			fallthrough;
 
 		case "about time":
 			message("\"It was I who sent the red moongate to thine homeland to lure thee to Britannia! It took every bit of my strength to make it functional, and still something went wrong. Thou didst arrive in Trinsic, which was not mine intention. It has therefore taken thee much longer to reach me than I anticipated.");
@@ -4273,6 +4312,7 @@ void Func0269 shape#(0x269) ()
 			say();
 			UI_remove_answer("about time");
 			UI_add_answer("Wisps");
+			fallthrough;
 
 		case "crisis":
 			message("\"The land is under attack by a powerful and malicious being from another dimension, and thou art the only one who can stop him! I have been trapped here by a trick, due to a sorcery which The Guardian has performed. The Guardian has put a wrinkle in the space-time continuum by creating a powerful 'generator' which has made the Moongates and thine Orb of the Moons mostly inoperable.");
@@ -4304,6 +4344,7 @@ void Func0269 shape#(0x269) ()
 				}
 			}
 			UI_remove_answer("crisis");
+			fallthrough;
 
 		case "mission":
 			message("\"I knew thou wouldst not let me down.~~\"Go at once to the Serpent's Spine area. Search for the entrance to a dungeon somewhere northwest of Britain. I believe it may be called 'Dungeon Despise'. This will lead thee to the generator causing the problem. If mine hunch is correct, it will resemble a large Sphere.");
@@ -4329,21 +4370,25 @@ void Func0269 shape#(0x269) ()
 			}
 			gflags[0x01D3] = true;
 			UI_remove_answer("mission");
+			fallthrough;
 
 		case "Wisps":
 			message("\"Oddly aloof creatures. They have made good messengers in the past.\"");
 			say();
 			UI_remove_answer("Wisps");
+			fallthrough;
 
 		case "The Guardian":
 			message("\"He is an embodiment of supreme evil. He must be stopped. He thrives on domination and control.\"");
 			say();
 			UI_remove_answer("The Guardian");
+			fallthrough;
 
 		case "Sphere":
 			message("\"It is a magic generator that The Guardian was able to send from his world. Its purpose is to disable the Moongates. Thou must break its outer defense and enter the structure, taking the smaller Sphere floating inside. Keep the small Sphere, as it will be useful later.\"");
 			say();
 			UI_remove_answer("Sphere");
+			fallthrough;
 
 		case "Moongate":
 			message("\"The Sphere's outer defense sends thy party back to a specific position in space. Until this defense is broken, thou canst not enter the generator. Thou must find Nicodemus' hourglass.~~\"If I am correct in mine hypothesis, the Sphere's inner defense will involve Moongates. Look for a visual pattern to help thee solve this mystery.\"");
@@ -4351,6 +4396,7 @@ void Func0269 shape#(0x269) ()
 			gflags[0x01D2] = true;
 			UI_remove_answer("Moongate");
 			UI_add_answer(["hourglass", "Nicodemus"]);
+			fallthrough;
 
 		case "hourglass":
 			if (!gflags[0x0004])
@@ -4365,11 +4411,13 @@ void Func0269 shape#(0x269) ()
 				say();
 				UI_remove_answer("hourglass");
 			}
+			fallthrough;
 
 		case "Nicodemus":
 			message("\"He is a mage that lives west of the forest of Yew.\"");
 			say();
 			UI_remove_answer("Nicodemus");
+			fallthrough;
 
 		case "fix magic":
 			if (!gflags[0x0003])
@@ -4384,22 +4432,26 @@ void Func0269 shape#(0x269) ()
 				say();
 			}
 			UI_remove_answer("fix magic");
+			fallthrough;
 
 		case "Tetrahedron":
 			message("\"It is a magic generator that The Guardian has sent from his world. It is controlling the ether which is depended upon by the mages to perform magic. Like the Sphere, thou must penetrate its outer defense, enter the structure, and take the smaller Tetrahedron floating inside.\"");
 			say();
 			UI_remove_answer("Tetrahedron");
+			fallthrough;
 
 		case "ethereal defense":
 			message("\"It is not surprising that the Tetrahedron has such a defense. Penumbra in Moonglow should be able to help thee with that. It is obvious now that the Tetrahedron must be destroyed before thou canst destroy the Sphere.~~\"I am not sure what kind of inner defense the Tetrahedron may hold. It may be dangerous. Be sure to be well-armed when entering it.\"");
 			say();
 			gflags[0x0007] = true;
 			UI_remove_answer("ethereal defense");
+			fallthrough;
 
 		case "Penumbra":
 			message("\"She is an elderly mage who lives in Moonglow.\"");
 			say();
 			UI_remove_answer("Penumbra");
+			fallthrough;
 
 		case "Cube":
 			if (!(gflags[0x0004] || gflags[0x0003]))
@@ -4417,16 +4469,17 @@ void Func0269 shape#(0x269) ()
 			{
 				UI_add_answer("Cube defense");
 			}
+			fallthrough;
 
 		case "Cube defense", "noise":
 			message("\"This outer defense can be conquered by using special helmets which cover your ears. The helmets must be made from a rare mineral called 'Caddellite'. It is present in meteors. Seek out Brion, at the Observatory near the Lycaeum. He can give thee more advice on finding this mineral.~~\"The inner defense will most likely involve The Guardian himself. Do not listen to what he might tell thee.\"");
 			say();
 			gflags[0x0008] = true;
 			UI_remove_answer(["Cube defense", "noise"]);
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	message("\"Farewell, Avatar. Good luck to thee.\"*");
 	say();
@@ -9357,11 +9410,13 @@ void Func0326 shape#(0x326) ()
 			message("\"My name is not important.\"");
 			say();
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			message("\"I keep villains and knaves out of Trinsic and keep a record of all who leave. Thou must have a password to leave.\"");
 			say();
 			UI_add_answer("password");
+			fallthrough;
 
 		case "password":
 			message("\"What is the password?\"");
@@ -9389,10 +9444,10 @@ void Func0326 shape#(0x326) ()
 				say();
 				gflags[0x0042] = true;
 			}
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	message("\"Goodbye.\"*");
 	say();
@@ -11498,14 +11553,15 @@ void Func03B2 shape#(0x3B2) ()
 			message("\"I am a guard.\"");
 			say();
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			message("The man looks at you like you are an ignoramus. \"I am a guard, idiot. Thou shouldst go about thy business.\"");
 			say();
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	message("\"Goodbye.\"*");
 	say();
@@ -12129,6 +12185,7 @@ void Func0401 object#(0x401) ()
 				message("? Thou dost not know thine old friend Iolo?\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "stables":
 				message("\"Thou must see for thyself, ");
@@ -12142,6 +12199,7 @@ void Func0401 object#(0x401) ()
 				say();
 				UI_add_answer("Avatar");
 				UI_remove_answer("job");
+				fallthrough;
 
 			case "Avatar":
 				message("\"Why, there is no doubt -thou- art the Avatar, ");
@@ -12150,11 +12208,13 @@ void Func0401 object#(0x401) ()
 				say();
 				UI_remove_answer("Avatar");
 				UI_add_answer(["trouble", "friends"]);
+				fallthrough;
 
 			case "trouble":
 				message("\"Well, after all, thou hast been gone for 200 years! Most of those who would recognize thee are long gone! Sorry to be blunt and all, my friend, but there it is.\"");
 				say();
 				UI_remove_answer("trouble");
+				fallthrough;
 
 			case "murder":
 				if (!gflags[0x003D])
@@ -12169,6 +12229,7 @@ void Func0401 object#(0x401) ()
 					say();
 				}
 				UI_remove_answer("murder");
+				fallthrough;
 
 			case "Lord British":
 				var000A = true;
@@ -12190,6 +12251,7 @@ void Func0401 object#(0x401) ()
 				}
 				UI_add_answer("information");
 				UI_remove_answer("Lord British");
+				fallthrough;
 
 			case "information":
 				message("\"Certainly. LB is always a repository of the most amazing facts, eh? Probably something to do with listening and not always talking.\"");
@@ -12202,12 +12264,14 @@ void Func0401 object#(0x401) ()
 				message("\"Speaking of information, reminds me of something! I have a little item which might be useful to thee. 'Tis an abacus. Use it to tally up all of our gold.\"");
 				say();
 				UI_remove_answer("information");
+				fallthrough;
 
 			case "friends":
 				message("\"Thou must mean Shamino and Dupre.\"");
 				say();
 				UI_remove_answer("friends");
 				UI_add_answer(["Shamino", "Dupre"]);
+				fallthrough;
 
 			case "Dupre":
 				var000C = Func08F7(0xFFFC);
@@ -12247,6 +12311,7 @@ void Func0401 object#(0x401) ()
 					}
 				}
 				UI_remove_answer("Dupre");
+				fallthrough;
 
 			case "Shamino":
 				if (var0009)
@@ -12275,17 +12340,20 @@ void Func0401 object#(0x401) ()
 					}
 				}
 				UI_remove_answer("Shamino");
+				fallthrough;
 
 			case "Trinsic":
 				message("\"The town has changed little, has it not? Everyone seems a little defensive, though. When we ran into each other, I was passing through and had stopped to visit my friend Finnigan.\"");
 				say();
 				UI_remove_answer("Trinsic");
 				UI_add_answer(["defensive", "Finnigan"]);
+				fallthrough;
 
 			case "defensive":
 				message("\"I think it best for thee to speak with them thyself. There have been many changes since last thou didst visit, Avatar. I think thou wilt feel at times a bit... well, old-fashioned.\"");
 				say();
 				UI_remove_answer("defensive");
+				fallthrough;
 
 			case "Britain":
 				var000B = true;
@@ -12297,16 +12365,19 @@ void Func0401 object#(0x401) ()
 					UI_add_answer("Lord British");
 				}
 				UI_add_answer("Paws");
+				fallthrough;
 
 			case "Paws":
 				message("\"It still lies between Britain and Trinsic, but it has grown further into Britain itself.\"");
 				say();
 				UI_remove_answer("Paws");
+				fallthrough;
 
 			case "Finnigan":
 				message("\"He is a good man. The Mayor of Trinsic, he is. I have known him for years.\"");
 				say();
 				UI_remove_answer("Finnigan");
+				fallthrough;
 
 			case "Christopher":
 				message("\"I did not know him, ");
@@ -12314,12 +12385,14 @@ void Func0401 object#(0x401) ()
 				message(".\"");
 				say();
 				UI_remove_answer("Christopher");
+				fallthrough;
 
 			case "Inamo":
 				message("\"I never spoke with him. It is truly a shame. There are not many gargoyles living amongst the humans. This will only discourage the practice even more.\"");
 				say();
 				UI_remove_answer("Inamo");
 				UI_add_answer("gargoyles");
+				fallthrough;
 
 			case "leave":
 				message("Iolo looks hurt. \"Thou dost really want me to leave?\"");
@@ -12348,11 +12421,9 @@ void Func0401 object#(0x401) ()
 						abort;
 					}
 				}
-				else
-				{
-					message("\"Whew. Thou didst frighten me!\"");
-					say();
-				}
+				message("\"Whew. Thou didst frighten me!\"");
+				say();
+				fallthrough;
 
 			case "join":
 				message("\"I was waiting until thou didst ask me!\"");
@@ -12373,25 +12444,28 @@ void Func0401 object#(0x401) ()
 					message("\"It seems that thou hast enough members travelling with thee already! I shall wait until someone leaves the group.\"");
 					say();
 				}
+				fallthrough;
 
 			case "gargoyles":
 				message("\"Since thou wert last in Britannia, the Gargoyles have begun to integrate with the humans. Most of them live on Sutek's old island, which was renamed 'Terfin'. However, thou mayest see one here and there throughout the land.\"");
 				say();
 				UI_remove_answer("gargoyles");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"I do not know much about them, except that they originated about twenty Britannian years ago. They seem to do good deeds and are looked at with favor by most everyone. They have branch offices all over Britannia. I have not personally had any dealings with them.\"");
 				say();
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "Petre":
 				message("\"He is just an acquaintance.\"");
 				say();
 				UI_remove_answer("Petre");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"'Tis always a pleasure to speak with thee, my friend.\"*");
 		say();
@@ -12551,21 +12625,25 @@ void Func0402 object#(0x402) ()
 				message("\"I have always been called Spark.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I have no job. I am only fourteen, so I am just learning how to best help Father in the smithy,\" he says, proudly. But then he suddenly realizes something which terrifies him. \"And now that Father is dead, I am an orphan!\"");
 				say();
 				UI_add_answer(["smithy", "Father", "orphan"]);
+				fallthrough;
 
 			case "smithy":
 				message("\"Father was the best blacksmith in Britannia. People were always coming from everywhere to get him to make this and that.\"");
 				say();
 				UI_remove_answer("smithy");
+				fallthrough;
 
 			case "orphan":
 				message("\"My mother died a long time ago. I can just barely remember her.\"");
 				say();
 				UI_remove_answer("orphan");
+				fallthrough;
 
 			case "murder":
 				if (!gflags[0x0043])
@@ -12593,6 +12671,7 @@ void Func0402 object#(0x402) ()
 					}
 				}
 				UI_remove_answer("murder");
+				fallthrough;
 
 			case "chest":
 				if (gflags[0x003E])
@@ -12606,40 +12685,47 @@ void Func0402 object#(0x402) ()
 					say();
 				}
 				UI_remove_answer("chest");
+				fallthrough;
 
 			case "my story":
 				message("\"It is so strange. I -dreamed- it was happening. Well, in a way.~~\"Last night I was having a nightmare about Father. I dreamed that he screamed, and it woke me up. I looked around the house, but he was not in his bed. I was wide awake, so I went out to find him.\"");
 				say();
 				UI_remove_answer("my story");
 				UI_add_answer(["find", "nightmare"]);
+				fallthrough;
 
 			case "nightmare":
 				message("\"I know it sounds witless, but... I dreamed that a big red-faced man was watching down on everything and... He looked down... And he noticed Father... That is all I remember.\"");
 				say();
 				UI_remove_answer("nightmare");
+				fallthrough;
 
 			case "find":
 				message("\"No, I did not find him. At least, not right away. But I did see something.\"");
 				say();
 				UI_add_answer("something");
 				UI_remove_answer("find");
+				fallthrough;
 
 			case "something":
 				message("\"I was in front of the stables. I saw a man and a wingless gargoyle running from behind the building. They ran toward the dock. Then I went inside and found... Father.\"~~Spark's voice falters, and he begins to sob a little.");
 				say();
 				UI_add_answer(["man", "gargoyle"]);
 				UI_remove_answer("something");
+				fallthrough;
 
 			case "man":
 				message("\"All I saw of him was that the man had a hook for a right hand.\"");
 				say();
 				UI_add_answer("hook");
 				UI_remove_answer("man");
+				fallthrough;
 
 			case "gargoyle":
 				message("\"I cannot tell one gargoyle from another. I could not identify him, except that he had no wings.\"");
 				say();
 				UI_remove_answer("gargoyle");
+				fallthrough;
 
 			case "hook":
 				if (!gflags[0x0043])
@@ -12705,6 +12791,7 @@ void Func0402 object#(0x402) ()
 					say();
 				}
 				UI_remove_answer("hook");
+				fallthrough;
 
 			case "join":
 				message("\"'Tis about time thou didst ask again!\"");
@@ -12729,6 +12816,7 @@ void Func0402 object#(0x402) ()
 				}
 				UI_remove_answer("join");
 				UI_add_answer("leave");
+				fallthrough;
 
 			case "leave":
 				message("\"Don't make me go!\" Spark cries. \"Dost thou really want me to go?\" He looks at you with puppy-dog eyes.");
@@ -12764,12 +12852,14 @@ void Func0402 object#(0x402) ()
 					message("\"Thou wilt not be sorry!\"");
 					say();
 				}
+				fallthrough;
 
 			case "Father":
 				message("\"Father was the blacksmith. I cannot believe that he has been murdered! He had no enemies that I know of. Unless it was The Fellowship.\"");
 				say();
 				UI_add_answer("Fellowship");
 				UI_remove_answer("Father");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"Well, at first they harassed Father and me when they came around asking us to join. I suppose they do good things. Many people like them. Father eventually joined the group after he went to Britain and took one of their tests.\"");
@@ -12777,33 +12867,39 @@ void Func0402 object#(0x402) ()
 				UI_add_answer("tests");
 				gflags[0x003F] = true;
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "tests":
 				message("\"I do not know anything about them. I never took one. Maybe thou shouldst ask the man at the Fellowship Branch. Klog.\"");
 				say();
 				UI_add_answer(["branch", "Klog"]);
 				UI_remove_answer("tests");
+				fallthrough;
 
 			case "branch":
 				message("\"The Fellowship has branches all over Britannia.\"");
 				say();
 				UI_remove_answer("branch");
+				fallthrough;
 
 			case "Klog":
 				message("\"He is the head of the Fellowship Branch here in Trinsic. He and Father got into an argument a week ago when Klog and two of his friends came over to talk with Father.\"");
 				say();
 				UI_add_answer(["argument", "friends"]);
 				UI_remove_answer("Klog");
+				fallthrough;
 
 			case "argument":
 				message("\"I don't know what it was about. Perhaps thou shouldst ask Klog.\"");
 				say();
 				UI_remove_answer("argument");
+				fallthrough;
 
 			case "friends":
 				message("\"I do not remember what they look like. I did not recognize them.\tThey were most likely some other members of The Fellowship.\"");
 				say();
 				UI_remove_answer("friends");
+				fallthrough;
 
 			case "key":
 				if (gflags[0x003E])
@@ -12826,6 +12922,7 @@ void Func0402 object#(0x402) ()
 					}
 				}
 				UI_remove_answer("key");
+				fallthrough;
 
 			case "gold":
 				message("The boy's eyes widen. \"I had no idea that Father had that much money hidden away!\"");
@@ -12834,12 +12931,14 @@ void Func0402 object#(0x402) ()
 				say();
 				UI_remove_answer("gold");
 				var0006 = true;
+				fallthrough;
 
 			case "medallion":
 				message("\"Father was a member of The Fellowship. I don't know why the medallion was in the chest -- he usually wore it.\"");
 				say();
 				UI_remove_answer("medallion");
 				var0007 = true;
+				fallthrough;
 
 			case "scroll":
 				message("\"I am not sure if it's the same one, but I think I saw Father with a scroll just like that one or two days ago. I know he was making something special for someone. I am fairly certain it was at his shop.\"");
@@ -12847,20 +12946,22 @@ void Func0402 object#(0x402) ()
 				UI_add_answer("shop");
 				UI_remove_answer("scroll");
 				var0005 = true;
+				fallthrough;
 
 			case "shop":
 				message("\"It's in the southwest corner of town.\"");
 				say();
 				UI_remove_answer("shop");
+				fallthrough;
 
 			case "Inamo":
 				message("\"He was a very nice gargoyle. He helped Father a lot and did tasks in the stables. I cannot think why anyone would want to kill him!\"");
 				say();
 				UI_remove_answer("Inamo");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"All right, I will speak with thee later.\"*");
 		say();
@@ -12957,6 +13058,7 @@ void Func0403 object#(0x403) ()
 				message("Your friend looks at you like you have lost your head. \"'Tis Shamino. -Sha-mi-no-.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I should hope 'twould be adventuring with thee! I am weary of loitering about Britain. There is much we could be accomplishing! Where hast thou been, anyway?\"");
@@ -12968,18 +13070,21 @@ void Func0403 object#(0x403) ()
 					UI_add_answer("murder in Trinsic");
 				}
 				UI_add_answer(["Britain", "accomplishing"]);
+				fallthrough;
 
 			case "accomplishing":
 				message("\"Well, I do not know if thou art aware, but we are having many problems with magic in general, and with the Moongates.\"");
 				say();
 				UI_remove_answer("accomplishing");
 				UI_add_answer(["magic", "Moongates"]);
+				fallthrough;
 
 			case "Britain":
 				message("\"Yes, I have been in Britain as of late, attempting to find work. Thou dost know that adventuring comes around too infrequently. One must find -other- diversions. Which reminds me... I have thy pocketwatch.\"");
 				say();
 				UI_remove_answer("Britain");
 				UI_add_answer(["diversions", "pocketwatch"]);
+				fallthrough;
 
 			case "pocketwatch":
 				if (!gflags[0x00D9])
@@ -13007,6 +13112,7 @@ void Func0403 object#(0x403) ()
 					say();
 				}
 				UI_remove_answer("pocketwatch");
+				fallthrough;
 
 			case "diversions":
 				message("\"The usual. I do not see our old friends often, and Lord British rarely finds work for me. I certainly have no time\tfor wenching or drinking -- I have grown up a bit.\"*");
@@ -13033,6 +13139,7 @@ void Func0403 object#(0x403) ()
 					say();
 					UI_add_answer(["Amber", "friends", "Lord British"]);
 				}
+				fallthrough;
 
 			case "Lord British":
 				if (!gflags[0x0098])
@@ -13047,12 +13154,14 @@ void Func0403 object#(0x403) ()
 					say();
 				}
 				UI_remove_answer("Lord British");
+				fallthrough;
 
 			case "friends":
 				message("\"Thou dost mean Iolo and Dupre, I presume?\"");
 				say();
 				UI_remove_answer("friends");
 				UI_add_answer(["Iolo", "Dupre"]);
+				fallthrough;
 
 			case "Iolo":
 				var0005 = Func08F7(0xFFFF);
@@ -13074,6 +13183,7 @@ void Func0403 object#(0x403) ()
 					say();
 				}
 				UI_remove_answer("Iolo");
+				fallthrough;
 
 			case "Dupre":
 				var0006 = Func08F7(0xFFFC);
@@ -13119,6 +13229,7 @@ void Func0403 object#(0x403) ()
 					}
 				}
 				UI_remove_answer("Dupre");
+				fallthrough;
 
 			case "join":
 				var0007 = 0x0000;
@@ -13140,6 +13251,7 @@ void Func0403 object#(0x403) ()
 				}
 				UI_add_answer("leave");
 				UI_remove_answer("join");
+				fallthrough;
 
 			case "leave":
 				message("\"Hmmm. Dost thou merely want me to wait here or dost thou want me to go home?\"");
@@ -13154,20 +13266,18 @@ void Func0403 object#(0x403) ()
 					UI_set_schedule_type(UI_get_npc_object(0xFFFD), 0x000F);
 					abort;
 				}
-				else
-				{
-					message("\"I really hate to, but if thou dost insist.\" Shamino\tgrudgingly gathers his belongings.*");
-					say();
-					UI_remove_from_party(0xFFFD);
-					UI_set_schedule_type(UI_get_npc_object(0xFFFD), 0x000B);
-					abort;
-				}
+				message("\"I really hate to, but if thou dost insist.\" Shamino\tgrudgingly gathers his belongings.*");
+				say();
+				UI_remove_from_party(0xFFFD);
+				UI_set_schedule_type(UI_get_npc_object(0xFFFD), 0x000B);
+				abort;
 
 			case "murder in Trinsic":
 				message("Shamino listens as you tell him the story. \"I would be honored to join and help thee in investigating this matter.\"");
 				say();
 				gflags[0x00D5] = true;
 				UI_remove_answer("murder in Trinsic");
+				fallthrough;
 
 			case "Moongates":
 				if (!gflags[0x0004])
@@ -13181,6 +13291,7 @@ void Func0403 object#(0x403) ()
 					say();
 				}
 				UI_remove_answer("Moongates");
+				fallthrough;
 
 			case "magic":
 				if (!gflags[0x0003])
@@ -13205,21 +13316,23 @@ void Func0403 object#(0x403) ()
 					say();
 				}
 				UI_remove_answer("magic");
+				fallthrough;
 
 			case "Amber":
 				message("You see a light shine in Shamino's eyes as you mention her name. He is obviously smitten.~~\"She is an actress I know.\"");
 				say();
 				UI_remove_answer("Amber");
 				gflags[0x006B] = true;
+				fallthrough;
 
 			case "settle down":
 				message("\"That woman! She cannot understand that I must have mine adventuring! I cannot settle down. -Yet-! Soon maybe.\"~~Shamino looks concerned. \"I have grown up. A bit.\"");
 				say();
 				UI_remove_answer("settle down");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("Shamino bows slightly.*");
 		say();
@@ -13353,6 +13466,7 @@ void Func0404 object#(0x404) ()
 					}
 				}
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				if (!gflags[0x016D])
@@ -13369,12 +13483,14 @@ void Func0404 object#(0x404) ()
 					say();
 					UI_add_answer("friends");
 				}
+				fallthrough;
 
 			case "friends":
 				message("\"Our old friends -- Iolo and Shamino.\"");
 				say();
 				UI_remove_answer("friends");
 				UI_add_answer(["Iolo", "Shamino"]);
+				fallthrough;
 
 			case "join":
 				var000F = 0x0000;
@@ -13397,6 +13513,7 @@ void Func0404 object#(0x404) ()
 					say();
 				}
 				UI_remove_answer("join");
+				fallthrough;
 
 			case "leave":
 				message("\"Dost thou want me to wait here or dost thou truly want me to leave and go home?\"");
@@ -13423,17 +13540,20 @@ void Func0404 object#(0x404) ()
 					UI_add_answer("join");
 					UI_remove_answer("leave");
 				}
+				fallthrough;
 
 			case "Jhelom":
 				message("\"It is something like the old times of Britannia, during the days of thy last visit, only more bloodthirsty. The local sport in Jhelom is duelling.\"");
 				say();
 				UI_remove_answer("Jhelom");
 				UI_add_answer(["old times", "duelling"]);
+				fallthrough;
 
 			case "old times":
 				message("\"These people still believe that any problem can be solved by hitting something or stabbing someone. They remind me of a more primitive but less complicated time. Perhaps that is why people live here-- to escape their modern problems.\"");
 				say();
 				UI_remove_answer("old times");
+				fallthrough;
 
 			case "duelling":
 				if (!gflags[0x016A])
@@ -13456,6 +13576,7 @@ void Func0404 object#(0x404) ()
 					say();
 				}
 				UI_remove_answer("duelling");
+				fallthrough;
 
 			case "Sprellic":
 				if (var000A)
@@ -13481,6 +13602,7 @@ void Func0404 object#(0x404) ()
 					}
 				}
 				UI_remove_answer("Sprellic");
+				fallthrough;
 
 			case "foolhardy":
 				message("\"To this Sprellic fellow, foolhardy would be a compliment! He looks like he has never been in a fight in his entire life. I do not know why he would provoke someone into a duel. It is a puzzlement.\"");
@@ -13490,11 +13612,13 @@ void Func0404 object#(0x404) ()
 				{
 					UI_add_answer("misunderstanding");
 				}
+				fallthrough;
 
 			case "misunderstanding":
 				message("You tell Dupre what Sprellic told you. \"Hmmm. I suppose I judged the man too harshly. I think thou, er, we shouldst do something about this!\"");
 				say();
 				UI_remove_answer("misunderstanding");
+				fallthrough;
 
 			case "innkeeper":
 				if (!gflags[0x0186])
@@ -13508,6 +13632,7 @@ void Func0404 object#(0x404) ()
 					say();
 				}
 				UI_remove_answer("innkeeper");
+				fallthrough;
 
 			case "Iolo":
 				if (var0007)
@@ -13539,11 +13664,13 @@ void Func0404 object#(0x404) ()
 					}
 				}
 				UI_remove_answer("Iolo");
+				fallthrough;
 
 			case "fighters":
 				message("\"Two men and a woman. Their names are Timmons, Vokes, and Syria. Respectively.\"");
 				say();
 				UI_remove_answer("fighters");
+				fallthrough;
 
 			case "Shamino":
 				if (var0008)
@@ -13573,6 +13700,7 @@ void Func0404 object#(0x404) ()
 					}
 				}
 				UI_remove_answer("Shamino");
+				fallthrough;
 
 			case "Fellowship":
 				if (var000E)
@@ -13583,6 +13711,7 @@ void Func0404 object#(0x404) ()
 				message("\"I still cannot believe that thou hast joined The Fellowship. If thou didst wish to prove that thou wouldst do anything, no matter how ridiculous to fulfill thy quest, then thou hast succeeded.\"");
 				say();
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "Spark":
 				if (var0009)
@@ -13598,10 +13727,10 @@ void Func0404 object#(0x404) ()
 					say();
 				}
 				UI_remove_answer("Spark");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"I shall speak with thee later, then.\"*");
 		say();
@@ -13690,6 +13819,7 @@ void Func0405 object#(0x405) ()
 					UI_add_answer("Lord Heather");
 				}
 				gflags[0x00EF] = true;
+				fallthrough;
 
 			case "job":
 				message("\"I have been the Cove Healer for some time now, and can provide thee with mine healing services. Since magic is not reliable, I have been yearning to join a party of adventurers, such as mine old friends. I miss the old life!\"");
@@ -13700,6 +13830,7 @@ void Func0405 object#(0x405) ()
 				{
 					UI_add_answer("join");
 				}
+				fallthrough;
 
 			case "heal":
 				if (var0001 in UI_get_party_list())
@@ -13726,12 +13857,14 @@ void Func0405 object#(0x405) ()
 				{
 					Func089E(0x001E, 0x000F, 0x0190);
 				}
+				fallthrough;
 
 			case "friends":
 				message("\"Our old friends -- Iolo, Shamino, and Dupre. The men who conquer evil in the name of Lord British!\"");
 				say();
 				UI_remove_answer("friends");
 				UI_add_answer(["Iolo", "Shamino", "Dupre", "Lord British"]);
+				fallthrough;
 
 			case "join":
 				var0004 = 0x0000;
@@ -13755,6 +13888,7 @@ void Func0405 object#(0x405) ()
 					message("\"I do believe thou dost have too many members travelling in thy group. I shall wait until someone leaves and thou dost ask me again.\"");
 					say();
 				}
+				fallthrough;
 
 			case "leave":
 				message("\"Dost thou want me to wait here or should I go home?\"");
@@ -13769,14 +13903,11 @@ void Func0405 object#(0x405) ()
 					UI_set_schedule_type(UI_get_npc_object(0xFFFB), 0x000F);
 					abort;
 				}
-				else
-				{
-					message("\"I shall obey thy wish. I would be happy to re-join if thou shouldst ask. Goodbye.\"*");
-					say();
-					UI_remove_from_party(0xFFFB);
-					UI_set_schedule_type(UI_get_npc_object(0xFFFB), 0x000B);
-					abort;
-				}
+				message("\"I shall obey thy wish. I would be happy to re-join if thou shouldst ask. Goodbye.\"*");
+				say();
+				UI_remove_from_party(0xFFFB);
+				UI_set_schedule_type(UI_get_npc_object(0xFFFB), 0x000B);
+				abort;
 
 			case "magic":
 				if (!gflags[0x0003])
@@ -13790,6 +13921,7 @@ void Func0405 object#(0x405) ()
 					say();
 				}
 				UI_remove_answer("magic");
+				fallthrough;
 
 			case "Lord Heather":
 				message("Jaana blushes. \"Yes, I have been seeing our Town Mayor for some time now.\"");
@@ -13816,6 +13948,7 @@ void Func0405 object#(0x405) ()
 					UI_remove_npc_face(0xFFB3);
 					UI_show_npc_face(0xFFFB, 0x0000);
 				}
+				fallthrough;
 
 			case "Iolo":
 				var000B = Func08F7(0xFFFF);
@@ -13837,6 +13970,7 @@ void Func0405 object#(0x405) ()
 					say();
 				}
 				UI_remove_answer("Iolo");
+				fallthrough;
 
 			case "Shamino":
 				var000C = Func08F7(0xFFFD);
@@ -13858,6 +13992,7 @@ void Func0405 object#(0x405) ()
 					say();
 				}
 				UI_remove_answer("Shamino");
+				fallthrough;
 
 			case "Dupre":
 				var000D = Func08F7(0xFFFC);
@@ -13897,15 +14032,16 @@ void Func0405 object#(0x405) ()
 				}
 				UI_remove_answer("Dupre");
 				UI_show_npc_face(0xFFFB, 0x0000);
+				fallthrough;
 
 			case "Lord British":
 				message("\"I have not seen our liege in many years.\"");
 				say();
 				UI_remove_answer("Lord British");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye, ");
 		message(var0000);
@@ -14058,6 +14194,7 @@ void Func0406 object#(0x406) ()
 				message("\"My name is still Trellek.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("He gives you a puzzled look.~~\"The meaning of `job' is not clear to me. Is `work' the word meant by you?\"");
@@ -14074,68 +14211,80 @@ void Func0406 object#(0x406) ()
 					message("\"No job is had by me.\"");
 					say();
 				}
+				fallthrough;
 
 			case "gatherer":
 				message("\"All Emps are food-gatherers. Mainly fruits are sought by us.\"");
 				say();
 				UI_remove_answer("gatherer");
 				UI_add_answer(["fruits", "Emps"]);
+				fallthrough;
 
 			case "fruits":
 				message("\"Fruits are pleasant-tasting, like the honey you gave us!\"");
 				say();
 				UI_remove_answer("fruits");
+				fallthrough;
 
 			case "Emps":
 				message("\"I am an Emp. Saralek is an Emp. Salamon is an Emp. You,\" he smiles, \"are a human.\"");
 				say();
 				UI_remove_answer("Emps");
 				UI_add_answer(["Saralek", "Salamon"]);
+				fallthrough;
 
 			case "Saralek":
 				message("\"Saralek is my bonded-one. `Wife' is what you would call her. My home is her home.\"");
 				say();
 				UI_add_answer("home");
 				UI_remove_answer("Saralek");
+				fallthrough;
 
 			case "home":
 				message("\"Silverleaf trees are our homes,\" he nods.");
 				say();
 				UI_remove_answer("home");
 				UI_add_answer("Silverleaf trees");
+				fallthrough;
 
 			case "Silverleaf trees":
 				message("\"Silverleaf trees cannot be explained by me in human terms. I am sorry. Another human should be asked by you?\" he shrugs, imitating the human gesture rather well.");
 				say();
 				UI_remove_answer("Silverleaf trees");
+				fallthrough;
 
 			case "Salamon":
 				message("\"Salamon is the wisest Emp. Humans have been met by her. -Many- things have been seen by her. She is very experienced and knowledgeable.\"");
 				say();
 				UI_remove_answer("Salamon");
+				fallthrough;
 
 			case "wisps":
 				message("\"Wisps are known to me,\" he nods. \"Wisps are found in the woods. What is your concern?\"");
 				say();
 				UI_add_answer(["woods", "talk to wisps"]);
 				UI_remove_answer("wisps");
+				fallthrough;
 
 			case "No permission":
 				message("\"For you to talk to wisps is still your wish? Then helping you is my goal. A whistle can be made by me.\"");
 				say();
 				UI_remove_answer("No permission");
 				UI_add_answer("whistle");
+				fallthrough;
 
 			case "Saralek's idea":
 				message("\"Correct was my bonded-one. A whistle can be made by me.\"");
 				say();
 				UI_add_answer("whistle");
 				UI_remove_answer("Saralek's idea");
+				fallthrough;
 
 			case "woods":
 				message("\"The residence of the wisps is a stone building in a mountain in the middle of the forest.\"");
 				say();
 				UI_remove_answer("woods");
+				fallthrough;
 
 			case "whistle":
 				message("\"A whistling sound is made by Emps when talking is done by us. An imitation of that sound can be created by a special whistle,\" he says enthusiastically.~~He begins quickly searching around for a dead, hollow, fallen tree branch. Shortly he finds one that meets his satisfaction. Apparently embarrassed, he turns his back to you, and makes motions similar to one twisting a cork from a flagon.~~After a few minutes of this, he turns around and presents the whistle to you.");
@@ -14154,6 +14303,7 @@ void Func0406 object#(0x406) ()
 					say();
 				}
 				UI_remove_answer("whistle");
+				fallthrough;
 
 			case "talk to wisps":
 				message("\"Your statement is a mystery. For me to talk to wisps is what you want?\"");
@@ -14171,6 +14321,7 @@ void Func0406 object#(0x406) ()
 					say();
 				}
 				UI_remove_answer("talk to wisps");
+				fallthrough;
 
 			case "Julius":
 				UI_play_music(0x001A, 0x0000);
@@ -14178,6 +14329,7 @@ void Func0406 object#(0x406) ()
 				say();
 				gflags[0x0129] = true;
 				UI_remove_answer("Julius");
+				fallthrough;
 
 			case "join", "go there":
 				message("\"Your wish is for me to travel with you?\"");
@@ -14198,10 +14350,10 @@ void Func0406 object#(0x406) ()
 				}
 				var0003 = true;
 				UI_remove_answer(["go there", "join"]);
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good luck is hoped for you.\"*");
 		say();
@@ -14303,6 +14455,7 @@ void Func0407 object#(0x407) ()
 				message("\"Thou dost not remember me? I am Sentri! We have gone adventuring together in the past!\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"When I am not adventuring with old friends, I am a trainer in Britain. I specialize in combat involving swordsmanship. I am quite good at that, as thou dost remember.\"");
@@ -14315,17 +14468,20 @@ void Func0407 object#(0x407) ()
 					UI_add_answer("join");
 				}
 				UI_add_answer(["Britain", "swordsmanship", "train", "friends"]);
+				fallthrough;
 
 			case "friends":
 				message("\"I do not see our old friends Iolo, Shamino, or Dupre much.\"");
 				say();
 				UI_remove_answer("friends");
 				UI_add_answer(["Iolo", "Shamino", "Dupre"]);
+				fallthrough;
 
 			case "swordsmanship":
 				message("Sentri draws his sword so quickly it is like a flash of lightning. He does a few fancy moves, slashing the air with the blade. \"No foe shall stand after I am finished with him!\"");
 				say();
 				UI_remove_answer("swordsmanship");
+				fallthrough;
 
 			case "join":
 				var0006 = 0x0000;
@@ -14348,6 +14504,7 @@ void Func0407 object#(0x407) ()
 					say();
 				}
 				UI_remove_answer("join");
+				fallthrough;
 
 			case "leave":
 				message("\"Dost thou want me to wait here or go home?\"");
@@ -14363,29 +14520,28 @@ void Func0407 object#(0x407) ()
 					UI_set_schedule_type(UI_get_npc_object(0xFFF9), 0x000F);
 					abort;
 				}
-				else
-				{
-					message("\"Farewell, ");
-					message(var0004);
-					message(". If thou dost need my services again, I shall be only too happy to comply.\"*");
-					say();
-					gflags[0x00DB] = false;
-					UI_remove_from_party(0xFFF9);
-					UI_set_schedule_type(UI_get_npc_object(0xFFF9), 0x000B);
-					abort;
-				}
+				message("\"Farewell, ");
+				message(var0004);
+				message(". If thou dost need my services again, I shall be only too happy to comply.\"*");
+				say();
+				gflags[0x00DB] = false;
+				UI_remove_from_party(0xFFF9);
+				UI_set_schedule_type(UI_get_npc_object(0xFFF9), 0x000B);
+				abort;
 
 			case "Britain":
 				message("\"I am becoming weary of the place. It is having growth pains of which the bourgeoisie are unaware. All is not as serene as the noblemen present it.\"");
 				say();
 				UI_remove_answer("Britain");
 				UI_add_answer("not serene");
+				fallthrough;
 
 			case "not serene":
 				message("\"Well, for example, try going to one of the smaller towns, say, Paws. It is a poor man's place. It reeks, too. And 'tis only just beyond the Britain town limits. More money should be put into improving the land as a whole, not just in building new buildings in the capitol city. I do not know what Lord British is thinking!\"");
 				say();
 				UI_remove_answer("not serene");
 				UI_add_answer("Lord British");
+				fallthrough;
 
 			case "train":
 				if (!gflags[0x00DB])
@@ -14418,6 +14574,7 @@ void Func0407 object#(0x407) ()
 					say();
 					Func08E5(0x0001, 0x0000);
 				}
+				fallthrough;
 
 			case "Iolo":
 				var000B = Func08F7(0xFFFF);
@@ -14439,6 +14596,7 @@ void Func0407 object#(0x407) ()
 					say();
 				}
 				UI_remove_answer("Iolo");
+				fallthrough;
 
 			case "Shamino":
 				var000C = Func08F7(0xFFFD);
@@ -14467,6 +14625,7 @@ void Func0407 object#(0x407) ()
 					say();
 				}
 				UI_remove_answer("Shamino");
+				fallthrough;
 
 			case "Dupre":
 				var000D = Func08F7(0xFFFC);
@@ -14509,15 +14668,16 @@ void Func0407 object#(0x407) ()
 					say();
 				}
 				UI_remove_answer("Dupre");
+				fallthrough;
 
 			case "Lord British":
 				message("\"I never see him much. He stays in that castle of his all the time. He never gets out. No wonder he hasn't a clue what is going on in this country.\"");
 				say();
 				UI_remove_answer("Lord British");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Until later.\"*");
 		say();
@@ -14604,6 +14764,7 @@ void Func0408 object#(0x408) ()
 				message("? 'Tis I, Julia!\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				if (gflags[0x011F])
@@ -14625,11 +14786,13 @@ void Func0408 object#(0x408) ()
 					gflags[0x011F] = true;
 					UI_add_answer(["murders", "Minoc"]);
 				}
+				fallthrough;
 
 			case "tinker":
 				message("\"It is not really what I wish to do with the rest of my life. I do not have the patience to be a proper tinkerer. If thou didst ask me, I would say I have sacrificed enough!\"");
 				say();
 				UI_remove_answer("tinker");
+				fallthrough;
 
 			case "join":
 				var0005 = 0x0000;
@@ -14661,6 +14824,7 @@ void Func0408 object#(0x408) ()
 					say();
 				}
 				UI_remove_answer("join");
+				fallthrough;
 
 			case "leave":
 				message("\"Art thou sure thou dost want me to leave?\"");
@@ -14698,23 +14862,27 @@ void Func0408 object#(0x408) ()
 					say();
 				}
 				UI_remove_answer("leave");
+				fallthrough;
 
 			case "Minoc":
 				message("\"'Tis a terrible thing to be happening in our town, these murders. Minoc was once a safe and quiet place.\"");
 				say();
 				UI_remove_answer("Minoc");
 				UI_add_answer(["safe and quiet", "murders"]);
+				fallthrough;
 
 			case "safe and quiet":
 				message("\"Well, at least safe, if not necessarily quiet. Especially with all the commotion caused by Owen and his monument.\"");
 				say();
 				UI_remove_answer("safe and quiet");
 				UI_add_answer(["Owen", "monument"]);
+				fallthrough;
 
 			case "Owen":
 				message("\"Owen is our local shipwright. Frankly, I think he is something of a fool.\"");
 				say();
 				UI_remove_answer("Owen");
+				fallthrough;
 
 			case "monument":
 				message("\"The Fellowship wanted to build a statue of Owen. That way they can use him as an example of the success of the Fellowship philosophy. It would also increase Owen's business to the point of upsetting the local economy and driving the Artist's Guild out of business!\"");
@@ -14725,22 +14893,26 @@ void Func0408 object#(0x408) ()
 					say();
 				}
 				UI_remove_answer("monument");
+				fallthrough;
 
 			case "murders":
 				message("\"Frederico and Tania were killed at the Minoc sawmill in a manner most gruesome.\"");
 				say();
 				UI_remove_answer("murders");
 				UI_add_answer(["Frederico and Tania", "gruesome"]);
+				fallthrough;
 
 			case "Frederico and Tania":
 				message("\"Frederico was the leader of the Gypsies, and Tania was his wife. They lived outside of town. I know nothing more about them.\"");
 				say();
 				UI_remove_answer("Frederico and Tania");
+				fallthrough;
 
 			case "gruesome":
 				message("\"The manner in which Frederico and Tania were murdered suggests a ritual killing. From what I have been hearing it is similar to one that thou hast run across in Trinsic\tand one that occurred in Britain a while ago. 'Tis a most puzzling mystery.\"");
 				say();
 				UI_remove_answer("gruesome");
+				fallthrough;
 
 			case "plans":
 				var000A = Func0931(0xFE9B, 0x0001, 0x031D, 0x000B, 0xFE99);
@@ -14756,6 +14928,7 @@ void Func0408 object#(0x408) ()
 					say();
 				}
 				UI_remove_answer("plans");
+				fallthrough;
 
 			case "Iolo":
 				var000B = Func08F7(0xFFFF);
@@ -14775,6 +14948,7 @@ void Func0408 object#(0x408) ()
 					UI_show_npc_face(0xFFF8, 0x0000);
 				}
 				UI_remove_answer("Iolo");
+				fallthrough;
 
 			case "Shamino":
 				var000C = Func08F7(0xFFFD);
@@ -14794,6 +14968,7 @@ void Func0408 object#(0x408) ()
 					UI_show_npc_face(0xFFF8, 0x0000);
 				}
 				UI_remove_answer("Shamino");
+				fallthrough;
 
 			case "Dupre":
 				var000D = Func08F7(0xFFFC);
@@ -14821,6 +14996,7 @@ void Func0408 object#(0x408) ()
 					UI_show_npc_face(0xFFF8, 0x0000);
 				}
 				UI_remove_answer("Dupre");
+				fallthrough;
 
 			case "Spark":
 				message("\"And who is this fine young lad?\"");
@@ -14841,10 +15017,10 @@ void Func0408 object#(0x408) ()
 					gflags[0x0121] = true;
 				}
 				UI_remove_answer("Spark");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye, ");
 		message(var0003);
@@ -14929,17 +15105,20 @@ void Func0409 object#(0x409) ()
 				say();
 				UI_add_answer(["old companions", "time"]);
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "old companions":
 				message("\"Ah, yes, Iolo, Shamino, and Dupre.\"");
 				say();
 				UI_remove_answer("old companions");
 				UI_add_answer(["Iolo", "Shamino", "Dupre"]);
+				fallthrough;
 
 			case "time":
 				message("\"Although there is a vast difference in how time passes in our world and in this one, I am certain I have aged at least a bit,\" she says pleasantly.");
 				say();
 				UI_remove_answer("time");
+				fallthrough;
 
 			case "job":
 				if (!(var0002 in var0001))
@@ -14962,11 +15141,13 @@ void Func0409 object#(0x409) ()
 					say();
 					UI_add_answer("New Magincia");
 				}
+				fallthrough;
 
 			case "shepherd":
 				message("\"I watch over my flock, and the townspeople as well, when they need me.\"");
 				say();
 				UI_remove_answer("shepherd");
+				fallthrough;
 
 			case "join":
 				var0007 = 0x0000;
@@ -14991,6 +15172,7 @@ void Func0409 object#(0x409) ()
 					say();
 				}
 				UI_remove_answer("join");
+				fallthrough;
 
 			case "leave":
 				message("\"Dost thou want me to wait here or shall I go on home?\"");
@@ -15013,12 +15195,14 @@ void Func0409 object#(0x409) ()
 					UI_set_schedule_type(UI_get_npc_object(0xFFF7), 0x000B);
 					abort;
 				}
+				fallthrough;
 
 			case "New Magincia":
 				message("\"We are isolated here. We get no news from the world outside. Life is much the same as it was the last time thou didst visit Britannia two hundred years ago. I have many friends here.\"");
 				say();
 				UI_add_answer("isolated");
 				UI_remove_answer("New Magincia");
+				fallthrough;
 
 			case "isolated":
 				message("\"That is the way we like it here. Now we have three other strangers on the island -- besides thee. Of course, thou couldst hardly be called a stranger. This is the largest number of visitors we have had in years.~~\"But, never fear, ");
@@ -15027,28 +15211,33 @@ void Func0409 object#(0x409) ()
 				say();
 				UI_remove_answer("isolated");
 				UI_add_answer(["lonely", "visitors"]);
+				fallthrough;
 
 			case "lonely":
 				message("\"I have many friends here. When I am lonely, I speak with Alagner the Sage, Russell the shipwright, or Henry the peddler.\"");
 				say();
 				UI_remove_answer("lonely");
 				UI_add_answer(["Alagner", "Russell", "Henry"]);
+				fallthrough;
 
 			case "Alagner":
 				message("\"He is a wise man who knows many things and tells wonderful stories. Alagner came here to retreat from the outside world. I know not why.\"");
 				say();
 				UI_remove_answer("Alagner");
+				fallthrough;
 
 			case "Russell":
 				message("\"He has a sailor's heart, an artist's soul and a craftsman's hands. He never lived his dream of sailing the world. His ships do that for him.\"");
 				say();
 				UI_remove_answer("Russell");
+				fallthrough;
 
 			case "Henry":
 				message("\"Henry has been a very dear friend for years. He is a simple but good man who does not have an ounce of hate in his heart for anyone. I am so fond of him that I gave him a valuable heirloom.\"");
 				say();
 				UI_remove_answer("Henry");
 				UI_add_answer("heirloom");
+				fallthrough;
 
 			case "locket", "heirloom":
 				message("\"Since he does not have much money, I gave Henry my gold locket so he could present it to his sweetheart Constance. I have not talked to him lately, but I must confess I am worried about him.\"");
@@ -15056,17 +15245,20 @@ void Func0409 object#(0x409) ()
 				UI_remove_answer("locket");
 				UI_remove_answer("heirloom");
 				UI_add_answer("worried");
+				fallthrough;
 
 			case "worried":
 				message("\"Soon after Henry left carrying the locket, I saw the three strangers on the island, wandering off in the same direction.\"");
 				say();
 				UI_remove_answer("worried");
+				fallthrough;
 
 			case "visitors", "strangers":
 				message("\"The three visitors come from Buccaneer's Den. I met them shortly after their arrival and we spoke briefly. Robin is the one dressed like a gambler and the other two, Battles and Leavell, appear to be bullies.\"");
 				say();
 				UI_remove_answer(["strangers", "visitors"]);
 				gflags[0x0180] = true;
+				fallthrough;
 
 			case "Iolo":
 				if (!var0005)
@@ -15088,6 +15280,7 @@ void Func0409 object#(0x409) ()
 					UI_show_npc_face(0xFFF7, 0x0000);
 				}
 				UI_remove_answer("Iolo");
+				fallthrough;
 
 			case "Shamino":
 				if (!var0004)
@@ -15109,6 +15302,7 @@ void Func0409 object#(0x409) ()
 					UI_show_npc_face(0xFFF7, 0x0000);
 				}
 				UI_remove_answer("Shamino");
+				fallthrough;
 
 			case "Dupre":
 				if (!var0006)
@@ -15133,10 +15327,10 @@ void Func0409 object#(0x409) ()
 					UI_show_npc_face(0xFFF7, 0x0000);
 				}
 				UI_remove_answer("Dupre");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Pleasant days, ");
 		message(var0003);
@@ -15341,12 +15535,14 @@ void Func040A object#(0x40A) ()
 						UI_add_answer("Avatar");
 					}
 				}
+				fallthrough;
 
 			case "Avatar":
 				UI_remove_answer("Avatar");
 				gflags[0x0161] = true;
 				message("\"The Avatar! This is a strange chance. Tell me Avatar, by what name art thou called?\"");
 				say();
+				fallthrough;
 
 			case var0000:
 				UI_remove_answer(var0000);
@@ -15371,6 +15567,7 @@ void Func040A object#(0x40A) ()
 					say();
 					UI_add_answer("introduce");
 				}
+				fallthrough;
 
 			case "Fellowship":
 				UI_remove_answer("Fellowship");
@@ -15398,6 +15595,7 @@ void Func040A object#(0x40A) ()
 					say();
 					UI_add_answer(var0006);
 				}
+				fallthrough;
 
 			case var0006:
 				UI_remove_answer(var0006);
@@ -15440,11 +15638,13 @@ void Func040A object#(0x40A) ()
 					Func08F2(var0000, var0006);
 					abort;
 				}
+				fallthrough;
 
 			case "Lady M.":
 				UI_remove_answer("Lady M.");
 				message("\"Youth is hers forever.\"");
 				say();
+				fallthrough;
 
 			case "job":
 				if (!var000A)
@@ -15475,76 +15675,85 @@ void Func040A object#(0x40A) ()
 					UI_add_answer("forest");
 					UI_add_answer("caves");
 				}
+				fallthrough;
 
 			case "introduce":
 				var0003 = Func08F5(var0002, var0003);
 				UI_remove_answer("introduce");
+				fallthrough;
 
-		// This is supposed to be reached both when "introduce" is matched above,
-		// *and* when nothing is matched up to this point.
-		// I have no idea how to do this in UCC without modifying it to
-		// allow this kind of construct.
-			if (gflags[0x001D] && (!var0013))
-			{
-				if ((var0004 in var0002) || (UI_get_array_size(var0003) == 0x0000))
+			// This is supposed to be reached regardless of what (if anything) was
+			// matched up to this point.
+			// I have no idea how to do this in UCC without modifying it to
+			// allow this kind of construct.
+				if (gflags[0x001D] && (!var0013))
 				{
-					UI_add_answer("Fellowship");
-					var0013 = true;
+					if ((var0004 in var0002) || (UI_get_array_size(var0003) == 0x0000))
+					{
+						UI_add_answer("Fellowship");
+						var0013 = true;
+					}
 				}
-			}
 			var001F = 0x0000;
+				fallthrough;
+
 			case "forest":
 				var001F = 0x0001;
+				fallthrough;
 
 			case "caves", "secret places":
 				var001F = 0x0002;
+				fallthrough;
 
 			case "knowledge":
 				var001F = 0x0003;
+				fallthrough;
 
-		// This is supposed to be reached both when "knowledge" is matched above,
-		// *and* when nothing is matched up to this point.
-		// I have no idea how to do this in UCC without modifying it to
-		// allow this kind of construct.
-			if (var001F > 0x0000)
-			{
-				if ((!gflags[0x015F]) || (!gflags[0x001D]))
+			// This is supposed to be reached regardless of what (if anything) was
+			// matched up to this point.
+			// I have no idea how to do this in UCC without modifying it to
+			// allow this kind of construct.
+				if (var001F > 0x0000)
 				{
-					var0020 = ["We may speak more after introductions...", "Perhaps introductions are in order first."];
-					var0021 = var0020[UI_die_roll(0x0001, UI_get_array_size(var0020))];
-					message("\"");
-					message(var0021);
-					message("\"");
-					say();
-					var001F = 0x0000;
-					UI_add_answer("introduce");
+					if ((!gflags[0x015F]) || (!gflags[0x001D]))
+					{
+						var0020 = ["We may speak more after introductions...", "Perhaps introductions are in order first."];
+						var0021 = var0020[UI_die_roll(0x0001, UI_get_array_size(var0020))];
+						message("\"");
+						message(var0021);
+						message("\"");
+						say();
+						var001F = 0x0000;
+						UI_add_answer("introduce");
+					}
 				}
-			}
-			if (var001F == 0x0001)
-			{
-				var000D = true;
-				message("\"The forest is a wild place, but tamed somewhat in recent years. Within, ");
-				message(var001C);
-				message(", thou mayest still find creatures spoken of only in legend.\"");
-				say();
-				UI_add_answer("creatures");
-			}
-			if (var001F == 0x0002)
-			{
-				var000C = true;
-				message("\"North of my hut is a deep bore-hole into the mountains. Within live bees of a size to rival sheep, or hounds. Their wings stir up leaves as they fly, and they humm with a noise to make men flee in fear.\"");
-				say();
-				message("\"Some have entered, never to return. Perhaps they are there still... Death is greedy, and holds a fate for those of like intent.\"");
-				say();
-				UI_add_answer(["mountains", "bees", "death"]);
-			}
-			if (var001F == 0x0003)
-			{
-				UI_remove_answer("knowledge");
-				message("\"Many years have I dwelt by the mountains. Many spans have vanished under my roaming feet. Into the depths of the dark swamp I have gone, and to the heights of the mountains. I know the trees of the forest, and the secret places in the earth.\"");
-				say();
-				UI_add_answer(["mountains", "swamp", "secret places"]);
-			}
+				if (var001F == 0x0001)
+				{
+					var000D = true;
+					message("\"The forest is a wild place, but tamed somewhat in recent years. Within, ");
+					message(var001C);
+					message(", thou mayest still find creatures spoken of only in legend.\"");
+					say();
+					UI_add_answer("creatures");
+				}
+				if (var001F == 0x0002)
+				{
+					var000C = true;
+					message("\"North of my hut is a deep bore-hole into the mountains. Within live bees of a size to rival sheep, or hounds. Their wings stir up leaves as they fly, and they humm with a noise to make men flee in fear.\"");
+					say();
+					message("\"Some have entered, never to return. Perhaps they are there still... Death is greedy, and holds a fate for those of like intent.\"");
+					say();
+					UI_add_answer(["mountains", "bees", "death"]);
+				}
+				if (var001F == 0x0003)
+				{
+					UI_remove_answer("knowledge");
+					message("\"Many years have I dwelt by the mountains. Many spans have vanished under my roaming feet. Into the depths of the dark swamp I have gone, and to the heights of the mountains. I know the trees of the forest, and the secret places in the earth.\"");
+					say();
+					UI_add_answer(["mountains", "swamp", "secret places"]);
+				}
+				fallthrough;
+
 			case "swamp":
 				UI_remove_answer("swamp");
 				message("\"North of the mountain spur is a dense swamp. Killing slime [lurk within, guarding a clear spring. All about the water is foul and noisome.");
@@ -15554,6 +15763,7 @@ void Func040A object#(0x40A) ()
 				message("East, North, and West that mire is drained. Through Yew and past the Abbey the westward river flows. The others both bend north into the sea.\"");
 				say();
 				UI_add_answer(["slime", "Yew", "Abbey", "sea"]);
+				fallthrough;
 
 			case "Abbey":
 				UI_remove_answer("Abbey");
@@ -15562,6 +15772,7 @@ void Func040A object#(0x40A) ()
 				message(". They practice ancient arts there, the eldest being the fermentation and distillation of spirits. Demand for their products is high in Yew.\"");
 				say();
 				UI_add_answer("Yew");
+				fallthrough;
 
 			case "Yew":
 				UI_remove_answer("Yew");
@@ -15569,6 +15780,7 @@ void Func040A object#(0x40A) ()
 				say();
 				message("\"East of my dwelling the wood is thick, but a woodcrafty traveller may find the houses there.\"");
 				say();
+				fallthrough;
 
 			case "sea":
 				UI_remove_answer("sea");
@@ -15587,23 +15799,27 @@ void Func040A object#(0x40A) ()
 					message("\"Perhaps thou art not as fond of the sea as I...\"");
 					say();
 				}
+				fallthrough;
 
 			case "pirates":
 				UI_remove_answer("pirates");
 				message("\"Perhaps they land to cache their booty in the forest. I have never followed them.\"");
 				say();
+				fallthrough;
 
 			case "mountains":
 				var000B = true;
 				message("\"Vaulting in from the coast looms a narrow spine. Dangerous and sharp rear the crags of those mountains. Caves there hold danger, and death for the unwary.\"");
 				say();
 				UI_add_answer(["caves", "death"]);
+				fallthrough;
 
 			case "death":
 				UI_remove_answer("death");
 				message("\"Death for the greedy. Death for any who steal from the dwellers in the caves.\"");
 				say();
 				UI_add_answer("caves");
+				fallthrough;
 
 			case "creatures":
 				UI_remove_answer("creatures");
@@ -15612,6 +15828,7 @@ void Func040A object#(0x40A) ()
 				message("\"Good game live also in the forest: Foxes and the like.\"");
 				say();
 				UI_add_answer(["slime", "foxes", "harpies", "bees"]);
+				fallthrough;
 
 			case "harpies":
 				UI_remove_answer("harpies");
@@ -15625,6 +15842,7 @@ void Func040A object#(0x40A) ()
 					message("\"A malformed flying horror. Thou wouldst not want to meet one.\"");
 					say();
 				}
+				fallthrough;
 
 			case "slime":
 				var000E = true;
@@ -15637,6 +15855,7 @@ void Func040A object#(0x40A) ()
 					message("\"Attack it with flame! Slime has no defense against it.\"");
 					say();
 				}
+				fallthrough;
 
 			case "foxes":
 				var000F = true;
@@ -15648,6 +15867,7 @@ void Func040A object#(0x40A) ()
 				message(var001D);
 				message("\"");
 				say();
+				fallthrough;
 
 			case "bees":
 				var0011 = true;
@@ -15670,6 +15890,7 @@ void Func040A object#(0x40A) ()
 						UI_add_answer(["join", "arrows"]);
 					}
 				}
+				fallthrough;
 
 			case "arrows":
 				UI_remove_answer("arrows");
@@ -15736,6 +15957,7 @@ void Func040A object#(0x40A) ()
 						say();
 					}
 				}
+				fallthrough;
 
 			case "join":
 				UI_remove_answer("join");
@@ -15755,6 +15977,7 @@ void Func040A object#(0x40A) ()
 					message(", that thou already hast more than enough travelling companions.\"");
 					say();
 				}
+				fallthrough;
 
 			case "leave":
 				var0027 = true;
@@ -15780,112 +16003,118 @@ void Func040A object#(0x40A) ()
 					UI_set_schedule_type(UI_get_npc_object(0xFFF6), 0x000B);
 					abort;
 				}
+				fallthrough;
 
-		// This is supposed to be reached both when "leave" is matched above,
-		// *and* when nothing is matched up to this point.
-		// I have no idea how to do this in UCC without modifying it to
-		// allow this kind of construct.
-			var0029 = false;
+			// This is supposed to be reached regardless of what (if anything) was
+			// matched up to this point.
+			// I have no idea how to do this in UCC without modifying it to
+			// allow this kind of construct.
+				var0029 = false;
+				fallthrough;
+
 			case "hermits":
 				var0029 = true;
+				fallthrough;
 
-		// This is supposed to be reached both when "hermits" is matched above,
-		// *and* when nothing is matched up to this point.
-		// I have no idea how to do this in UCC without modifying it to
-		// allow this kind of construct.
-			if ((var000C && var000B) && (!var0012))
-			{
-				message("\"Speaking of caves and mountains, there are some who dwell near, or perhaps in, the cave of bees. They are hermits.\"");
-				say();
-				var0029 = true;
-				var0012 = true;
-				UI_add_answer("bees");
-			}
-			if (var0029)
-			{
-				UI_remove_answer("hermits");
-				if (!gflags[0x0152])
+			// This is supposed to be reached regardless of what (if anything) was
+			// matched up to this point.
+			// I have no idea how to do this in UCC without modifying it to
+			// allow this kind of construct.
+				if ((var000C && var000B) && (!var0012))
 				{
-					message("\"One day I glimpsed a man and a woman deep within the cave as I was hunting. Since then I have seen them twice. I believe they are former citizens of Yew, though I do not know how they live in harmony with the bees.\"");
+					message("\"Speaking of caves and mountains, there are some who dwell near, or perhaps in, the cave of bees. They are hermits.\"");
 					say();
-					if (var001B)
-					{
-						message("\"These are the people I saw!\"");
-						say();
-					}
-					gflags[0x0152] = true;
+					var0029 = true;
+					var0012 = true;
 					UI_add_answer("bees");
 				}
-				else
+				if (var0029)
 				{
-					if (var001B)
+					UI_remove_answer("hermits");
+					if (!gflags[0x0152])
 					{
-						message("\"These people are the hermits I spoke of before.\"");
+						message("\"One day I glimpsed a man and a woman deep within the cave as I was hunting. Since then I have seen them twice. I believe they are former citizens of Yew, though I do not know how they live in harmony with the bees.\"");
+						say();
+						if (var001B)
+						{
+							message("\"These are the people I saw!\"");
+							say();
+						}
+						gflags[0x0152] = true;
+						UI_add_answer("bees");
+					}
+					else
+					{
+						if (var001B)
+						{
+							message("\"These people are the hermits I spoke of before.\"");
+							say();
+						}
+						else
+						{
+							message("\"Perhaps those hermits are still living in the cave.\"");
+							say();
+						}
+					}
+					var0012 = true;
+				}
+				if ((var000E && var000F) && (!var0010))
+				{
+					message("\"This puts me in mind of a story. Wouldst thou like to hear it?\"");
+					say();
+					if (Func090A())
+					{
+						message("\"One day while walking along the edge of the swamp I happened upon a strange sight. A fox was held at bay on a small hillock in the midst of the swamp, and all about the hillock writhed green slime.");
+						say();
+						message("Slowly the slime crept up toward the fox, when suddenly the fox trotted directly across the surface of the ooze!");
+						say();
+						message("Unharmed, the fox dashed off into the wood, leaving the slime writhing behind. By this I guess that the victims of slime are those caught sleeping, or unaware.\"");
 						say();
 					}
 					else
 					{
-						message("\"Perhaps those hermits are still living in the cave.\"");
+						message("\"Perhaps another time.\"");
 						say();
 					}
+					var0010 = true;
 				}
-				var0012 = true;
-			}
-			if ((var000E && var000F) && (!var0010))
-			{
-				message("\"This puts me in mind of a story. Wouldst thou like to hear it?\"");
-				say();
-				if (Func090A())
+				if (var000E)
 				{
-					message("\"One day while walking along the edge of the swamp I happened upon a strange sight. A fox was held at bay on a small hillock in the midst of the swamp, and all about the hillock writhed green slime.");
-					say();
-					message("Slowly the slime crept up toward the fox, when suddenly the fox trotted directly across the surface of the ooze!");
-					say();
-					message("Unharmed, the fox dashed off into the wood, leaving the slime writhing behind. By this I guess that the victims of slime are those caught sleeping, or unaware.\"");
-					say();
+					UI_remove_answer("slime");
 				}
-				else
+				if (var000F)
 				{
-					message("\"Perhaps another time.\"");
-					say();
+					UI_remove_answer("foxes");
 				}
-				var0010 = true;
-			}
-			if (var000E)
-			{
-				UI_remove_answer("slime");
-			}
-			if (var000F)
-			{
-				UI_remove_answer("foxes");
-			}
-			if (var0011)
-			{
-				UI_remove_answer("bees");
-			}
-			if (var000C)
-			{
-				UI_remove_answer("caves");
-				UI_remove_answer("secret places");
-				UI_remove_answer("death");
-			}
-			if (var000B)
-			{
-				UI_remove_answer("mountains");
-			}
-			if (var000D)
-			{
-				UI_remove_answer("forest");
-			}
-			if (gflags[0x0161] && ((var0004 in var0002) && (!gflags[0x0162])))
-			{
-				Func08F3(var0002);
-				gflags[0x0162] = true;
-			}
-			if (var0004 in var0002)
-			{
-				UI_remove_answer("join");
-			}
+				if (var0011)
+				{
+					UI_remove_answer("bees");
+				}
+				if (var000C)
+				{
+					UI_remove_answer("caves");
+					UI_remove_answer("secret places");
+					UI_remove_answer("death");
+				}
+				if (var000B)
+				{
+					UI_remove_answer("mountains");
+				}
+				if (var000D)
+				{
+					UI_remove_answer("forest");
+				}
+				if (gflags[0x0161] && ((var0004 in var0002) && (!gflags[0x0162])))
+				{
+					Func08F3(var0002);
+					gflags[0x0162] = true;
+				}
+				if (var0004 in var0002)
+				{
+					UI_remove_answer("join");
+				}
+				fallthrough;
+
 			case "bye":
 				if ((var0004 in var0002) || var0027)
 				{
@@ -16037,11 +16266,13 @@ void Func040B object#(0x40B) ()
 				message("\"I am called Petre,\" the man sniffs.");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the stables caretaker.\"");
 				say();
 				UI_add_answer("stables");
+				fallthrough;
 
 			case "stables":
 				message("\"I have worked here for years. I can sell thee a nice horse and carriage if thou dost want one. The animal and the carriage are located in a small shelter just outside the north gate of the town.\"");
@@ -16058,22 +16289,26 @@ void Func040B object#(0x40B) ()
 				}
 				UI_remove_answer("stables");
 				UI_add_answer("carriage");
+				fallthrough;
 
 			case "murder":
 				message("\"I discovered poor Christopher and Inamo earlier this morning. I did not touch a thing. Made me sick, it did!\"");
 				say();
 				UI_remove_answer("murder");
 				UI_add_answer(["Christopher", "Inamo"]);
+				fallthrough;
 
 			case "Christopher":
 				message("\"Nice man. He made the shoes for mine horses.\"");
 				say();
 				UI_remove_answer("Christopher");
+				fallthrough;
 
 			case "Inamo":
 				message("\"He worked for very little money. Did basic chores around the stables and the pub. I let him sleep in the little back room. He must have been in the wrong place at the wrong time.\"");
 				say();
 				UI_remove_answer("Inamo");
+				fallthrough;
 
 			case "carriage":
 				message("\"The horse and carriage combination sells for 60 gold. Dost thou want a title?\"");
@@ -16109,21 +16344,25 @@ void Func040B object#(0x40B) ()
 					say();
 				}
 				UI_remove_answer("carriage");
+				fallthrough;
 
 			case "footprints":
 				message("\"They doth lead out the back way, yes? They must be the tracks of the murderer!\"~~His eyes widen a bit more.~~\"Or... murderers!\"");
 				say();
 				UI_remove_answer("footprints");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"I do not want to join them, but they seem all right.\"");
 				say();
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "Klog":
 				message("\"I do not know the man too well. I have no dealings with him.\"");
 				say();
 				UI_remove_answer("Klog");
+				fallthrough;
 
 			case "Spark":
 				if (!(0xFFFE in var0001))
@@ -16137,6 +16376,7 @@ void Func040B object#(0x40B) ()
 					say();
 				}
 				UI_remove_answer("Spark");
+				fallthrough;
 
 			case "bye":
 				break;
@@ -16384,11 +16624,13 @@ void Func040C object#(0x40C) ()
 				message("\"My name is Finnigan.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the Mayor of Trinsic and have been since I arrived here three years ago.\"");
 				say();
 				UI_add_answer("Trinsic");
+				fallthrough;
 
 			case "Trinsic":
 				if (var0003)
@@ -16407,6 +16649,7 @@ void Func040C object#(0x40C) ()
 				say();
 				UI_remove_answer("Trinsic");
 				UI_add_answer("password");
+				fallthrough;
 
 			case "Pay me now, please":
 				message("\"Of course, ");
@@ -16429,6 +16672,7 @@ void Func040C object#(0x40C) ()
 					gflags[0x0044] = true;
 				}
 				UI_remove_answer("Pay me now, please");
+				fallthrough;
 
 			case "murder":
 				if (!gflags[0x003D])
@@ -16448,27 +16692,32 @@ void Func040C object#(0x40C) ()
 					message("\"I hope thou art progressing on the murder investigation.\"");
 					say();
 				}
+				fallthrough;
 
 			case "Britain":
 				message("\"'Twas before I came to Trinsic. There was a murder with strikingly similar aspects. A body was found mutilated exactly like poor Christopher. It appeared to be a ritualistic killing. I would wager that whoever was responsible for that murder is the culprit behind this one.\"");
 				say();
 				UI_remove_answer("Britain");
+				fallthrough;
 
 			case "son":
 				message("\"Christopher's son is called Spark. Their house is in the northwest area of town.\"");
 				say();
 				UI_remove_answer("son");
+				fallthrough;
 
 			case "Gilberto":
 				message("\"He was struck from behind early this morning and was knocked senseless. Johnson, the morning watch, found him unconscious. He is recuperating at Chantu the Healer's house on the west side of town.\"");
 				say();
 				UI_remove_answer("Gilberto");
 				UI_add_answer(["Johnson", "Chantu"]);
+				fallthrough;
 
 			case "Chantu":
 				message("\"He is our town healer. He hath been here for years. Nice fellow.\"");
 				say();
 				UI_remove_answer("Chantu");
+				fallthrough;
 
 			case "report":
 				if (gflags[0x0044])
@@ -16511,32 +16760,38 @@ void Func040C object#(0x40C) ()
 					}
 				}
 				UI_remove_answer("report");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"Why, they are an extremely helpful group. Their branch office is just east of mine. Very optimistic group of people.\"");
 				say();
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "Klog":
 				message("\"He is the Fellowship branch leader. Kind man.\"");
 				say();
 				UI_remove_answer("Klog");
+				fallthrough;
 
 			case "Johnson":
 				message("\"He is probably at the dock right now.\"");
 				say();
 				UI_remove_answer("Johnson");
+				fallthrough;
 
 			case "Christopher":
 				message("\"Christopher was the local blacksmith. He lives, or rather -lived-, with his son in the northwest part of town. The blacksmith's shop is in the southwest corner. Christopher was not a rich man by any means -- he barely kept himself and his son alive. But he certainly enjoyed his work.\"");
 				say();
 				UI_remove_answer("Christopher");
 				UI_add_answer("son");
+				fallthrough;
 
 			case "Inamo":
 				message("\"The Gargoyle Inamo slept in the stables, as I understand it. I believe he emigrated here from Terfin a few months ago. It seems that he was merely a chance victim of someone intent on violence.\"");
 				say();
 				UI_remove_answer("Inamo");
+				fallthrough;
 
 			case "password":
 				if (gflags[0x0044] && (!gflags[0x003D]))
@@ -16577,10 +16832,10 @@ void Func040C object#(0x40C) ()
 					gflags[0x0042] = true;
 				}
 				UI_remove_answer("password");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("The Mayor nods his head at you and goes on about his business.*");
 		say();
@@ -16669,33 +16924,39 @@ void Func040D object#(0x40D) ()
 			message("\"I am Gilberto.\"");
 			say();
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			message("\"I have the night watch at the dock gate.\"");
 			say();
+			fallthrough;
 
 		case "murder":
 			message("\"It must have occurred shortly before I was knocked out.\"");
 			say();
 			UI_add_answer("knocked");
 			UI_remove_answer("murder");
+			fallthrough;
 
 		case "knocked":
 			message("\"It was just about sunrise. I was looking out to the sea. All of a sudden, I felt a blow on the back of mine head.\"~~ He winces in pain.");
 			say();
 			UI_add_answer(["blow", "pain"]);
 			UI_remove_answer("knocked");
+			fallthrough;
 
 		case "pain":
 			message("Gilberto still seems a little wobbly, but his gesture indicates that he does not desire your aid.~\"My skull is still ringing, but I shall be all right momentarily.\"");
 			say();
 			UI_remove_answer("pain");
+			fallthrough;
 
 		case "blow":
 			message("\"The next thing I knew, I was on the ground. Johnson, the guard for the next watch, was shaking me. I had been out about ten minutes. I knew that because the sun had just peeked over the horizon. And 'The Crown Jewel' had gone and sailed!\"");
 			say();
 			UI_add_answer(["Johnson", "Crown Jewel"]);
 			UI_remove_answer("blow");
+			fallthrough;
 
 		case "Crown Jewel":
 			message("\"Did I forget to say? That is a ship that was docked here all night. I believe it was about to sail for Britain. Thou couldst ask Gargan the Shipwright to make sure. Anyway, I did not see mine attackers,\" the guard grumbles.");
@@ -16703,22 +16964,26 @@ void Func040D object#(0x40D) ()
 			gflags[0x0040] = true;
 			UI_add_answer(["attackers", "Gargan"]);
 			UI_remove_answer("Crown Jewel");
+			fallthrough;
 
 		case "attackers":
 			message("\"Hmmm. I wonder if they jumped onto the ship! They could be all the way to Britain by now!\"");
 			say();
 			UI_remove_answer("attackers");
+			fallthrough;
 
 		case "Gargan":
 			message("\"He is a good man but thou mayest not wish to stand too close to him. Thou mayest catch something.\"");
 			say();
 			UI_remove_answer("Gargan");
+			fallthrough;
 
 		case "ship":
 			message("\"If thou dost want a ship, thou must get a deed from the shipwright. Thou must also have the password to leave town.\"");
 			say();
 			UI_remove_answer("ship");
 			UI_add_answer("password");
+			fallthrough;
 
 		case "password":
 			message("\"What is it?\"");
@@ -16749,30 +17014,34 @@ void Func040D object#(0x40D) ()
 				message("\"Thou dost not know the password. The Mayor can give thee the proper password.\"");
 				say();
 			}
+			fallthrough;
 
 		case "Johnson":
 			message("\"He takes the morning watch at the dock.\"");
 			say();
 			UI_remove_answer("Johnson");
+			fallthrough;
 
 		case "Fellowship":
 			message("He shrugs.~~\"Thou art asking the wrong man. I suppose they are all right. I have never had trouble with them.\"");
 			say();
 			UI_remove_answer("Fellowship");
+			fallthrough;
 
 		case "Hook":
 			message("The guard thinks a moment.~~\"No. I cannot say that I saw a man with a hook.\"");
 			say();
 			UI_remove_answer("Hook");
+			fallthrough;
 
 		case "Klog":
 			message("\"I have not had many dealings with him.\"");
 			say();
 			UI_remove_answer("Klog");
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	message("\"Goodbye. Watch thy back.\"*");
 	say();
@@ -16848,21 +17117,25 @@ void Func040E object#(0x40E) ()
 			message("\"Johnson.\"");
 			say();
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			message("\"I have the morning watch guarding the dock. I authorize the comings and goings of every ship.\"");
 			say();
 			UI_add_answer("ship");
+			fallthrough;
 
 		case "murder":
 			message("\"I did hear of this. When I arrived at my post at sunrise, I found Gilberto lying felled on the ground. If thou art asking if I saw anything -- I did not. No one hath passed by me since I arrived at the dock.\"");
 			say();
 			UI_remove_answer("murder");
+			fallthrough;
 
 		case "Crown Jewel":
 			message("\"The boat left just after sunrise. It did sail to Britain, I believe. Thou canst ask Gargan the Shipwright about that.\"");
 			say();
 			UI_remove_answer("Crown Jewel");
+			fallthrough;
 
 		case "Fellowship":
 			message("\"Yes, I am a member. Wouldst thou like to join?\"");
@@ -16879,17 +17152,20 @@ void Func040E object#(0x40E) ()
 				say();
 			}
 			UI_remove_answer("Fellowship");
+			fallthrough;
 
 		case "Klog":
 			message("\"Good man. He is our branch leader here in Trinsic.\"");
 			say();
 			UI_remove_answer("Klog");
+			fallthrough;
 
 		case "ship":
 			message("\"If thou dost want a ship, thou must get a deed from the shipwright. Thou must also have the password to leave town.\"");
 			say();
 			UI_add_answer(["password", "deed"]);
 			UI_remove_answer("ship");
+			fallthrough;
 
 		case "password":
 			message("\"What is it?\"");
@@ -16921,20 +17197,22 @@ void Func040E object#(0x40E) ()
 				say();
 				gflags[0x0042] = true;
 			}
+			fallthrough;
 
 		case "Hook":
 			message("\"A man with a hook? No, I saw no one all night or all morning.\"");
 			say();
 			UI_remove_answer("Hook");
+			fallthrough;
 
 		case "deed":
 			message("\"Thou canst purchase that from Gargan the Shipwright.\"");
 			say();
 			UI_remove_answer("deed");
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	message("\"Good day.\"*");
 	say();
@@ -16979,6 +17257,7 @@ void Func040F object#(0x40F) ()
 			message("\"My name is Eiko.\"");
 			say();
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			if (!gflags[0x02DD])
@@ -16993,6 +17272,7 @@ void Func040F object#(0x40F) ()
 				say();
 			}
 			UI_add_answer("Amanda");
+			fallthrough;
 
 		case "quest":
 			message("\"Eighteen years ago my father was murdered by a cyclops called Iskander Ironheart. Mine half-sister Amanda and I are his only surviving kin and we have vowed to avenge him.\"");
@@ -17000,6 +17280,7 @@ void Func040F object#(0x40F) ()
 			gflags[0x02DB] = true;
 			UI_remove_answer("quest");
 			UI_add_answer(["father", "Iskander"]);
+			fallthrough;
 
 		case "father":
 			message("\"Our father was a mage named Kalideth. He was working to find a cause of the disturbances of the ethereal waves that have been preventing magic from working for the past twenty years and more, as well as the madness that has afflicted all mages since then.\"");
@@ -17018,6 +17299,7 @@ void Func040F object#(0x40F) ()
 				UI_show_npc_face(0xFFF1, 0x0000);
 			}
 			UI_remove_answer("father");
+			fallthrough;
 
 		case "Amanda":
 			message("\"Neither one of us knew that the other existed until after the death of our father.\"");
@@ -17031,11 +17313,13 @@ void Func040F object#(0x40F) ()
 				UI_show_npc_face(0xFFF1, 0x0000);
 			}
 			UI_remove_answer("Amanda");
+			fallthrough;
 
 		case "Iskander":
 			message("\"Yes, I know I am not pronouncing it correctly. I understand he has a more human nickname that is actually a translation from the ancient cyclops language. But I do not know what it is.\"");
 			say();
 			UI_remove_answer("Iskander");
+			fallthrough;
 
 		case "Stay thine hand!":
 			message("You explain to Eiko what you have learned. Kalideth had gone mad when he fought with Iskander and the source of what is causing the problems with magic and the mage's minds was the thing that really killed Kalideth!");
@@ -17055,10 +17339,10 @@ void Func040F object#(0x40F) ()
 				}
 			}
 			UI_remove_answer("Stay thine hand!");
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	message("\"Farewell.\"");
 	say();
@@ -17128,11 +17412,13 @@ void Func0410 object#(0x410) ()
 				message("\"My name is Klog.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the Trinsic branch leader for The Fellowship. I work here with my wife Ellen.\"");
 				say();
 				UI_add_answer(["Fellowship", "Ellen"]);
+				fallthrough;
 
 			case "murder":
 				if (var0003)
@@ -17147,6 +17433,7 @@ void Func0410 object#(0x410) ()
 				}
 				UI_remove_answer("murder");
 				UI_add_answer(["Christopher", "Inamo"]);
+				fallthrough;
 
 			case "Fellowship":
 				if (!gflags[0x0006])
@@ -17162,15 +17449,18 @@ void Func0410 object#(0x410) ()
 					say();
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "Ellen":
 				message("\"She is my wife and bookkeeper for our branch.\"");
 				say();
 				UI_remove_answer("Ellen");
+				fallthrough;
 
 			case "philosophy":
 				Func091A();
 				UI_remove_answer("philosophy");
+				fallthrough;
 
 			case "Christopher":
 				message("\"Christopher was a valued member of The Fellowship for some time. Unfortunately, we got into a petty argument last week.\"");
@@ -17180,28 +17470,33 @@ void Func0410 object#(0x410) ()
 				{
 					UI_add_answer("argument");
 				}
+				fallthrough;
 
 			case "Inamo":
 				message("\"I did not know the gargoyle. It sounds as if he was in the wrong place at the wrong time. 'Tis a pity.\"");
 				say();
 				UI_remove_answer("Inamo");
+				fallthrough;
 
 			case "argument":
 				message("\"Last week Christopher stated that he wanted to leave The Fellowship! Canst thou imagine? Well, we simply attempted to speak with him and alter his decision. The man verbally assaulted me and my companions with no provocation!\"");
 				say();
 				UI_remove_answer("argument");
 				UI_add_answer("companions");
+				fallthrough;
 
 			case "test":
 				message("\"Batlin in Britain will be happy to administer our test to thee. Thou shouldst certainly take it. Who knows? Thou mayest find something within thee that needs improving.\"");
 				say();
 				UI_remove_answer("test");
+				fallthrough;
 
 			case "companions":
 				message("\"They have gone to Fellowship Headquarters in Britain. They were here delivering Fellowship funds. Their names are Elizabeth and Abraham.\"");
 				say();
 				gflags[0x0041] = true;
 				UI_remove_answer("companions");
+				fallthrough;
 
 			case "gold":
 				if (var0003)
@@ -17216,16 +17511,19 @@ void Func0410 object#(0x410) ()
 					say();
 				}
 				UI_remove_answer("gold");
+				fallthrough;
 
 			case "Black Gate":
 				message("\"All I know is that it is being built on the Isle of the Avatar.\"");
 				say();
 				UI_remove_answer("Black Gate");
+				fallthrough;
 
 			case "medallion":
 				message("\"Christopher had expressed interest in leaving The Fellowship. Perhaps he had stored it for safekeeping.\"");
 				say();
 				UI_remove_answer("medallion");
+				fallthrough;
 
 			case "scroll":
 				if (var0003)
@@ -17239,6 +17537,7 @@ void Func0410 object#(0x410) ()
 					say();
 				}
 				UI_remove_answer("scroll");
+				fallthrough;
 
 			case "Crown Jewel":
 				if (var0003)
@@ -17252,6 +17551,7 @@ void Func0410 object#(0x410) ()
 					say();
 				}
 				UI_remove_answer("Crown Jewel");
+				fallthrough;
 
 			case "Hook":
 				if (var0003)
@@ -17265,10 +17565,10 @@ void Func0410 object#(0x410) ()
 					say();
 				}
 				UI_remove_answer("Hook");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"If there is anything else I may help thee with, ");
 		message(var0000);
@@ -17322,18 +17622,22 @@ void Func0411 object#(0x411) ()
 				message("\"My name is Chantu,\" he says with a slight bow.");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the Trinsic healer. I can perform a heal, a poison cure, or a resurrection on any of thy friends. Or on thee, of course.\"");
 				say();
+				fallthrough;
 
 			case "murder":
 				message("\"'Tis a sad state for Britannia when events such as these happen. Christopher was a good man. I hope that the villain is caught.\"");
 				say();
 				UI_remove_answer("murder");
+				fallthrough;
 
 			case "services":
 				Func0860(0x001E, 0x0032, 0x0190);
+				fallthrough;
 
 			case "Fellowship":
 				message("The healer frowns. \"The Fellowship does not appreciate the efforts of healers in Britannia. Although they do admirable things, The Fellowship is short-sighted when evaluating the need for healers. They believe that our work can be done through their so-called 'Triad of Inner Strength'.\"");
@@ -17348,15 +17652,16 @@ void Func0411 object#(0x411) ()
 					say();
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "Klog":
 				message("The healer shrugs. \"He does his duty as he sees fit. And I do mine.\"");
 				say();
 				UI_remove_answer("Klog");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye.\"*");
 		say();
@@ -17478,6 +17783,7 @@ void Func0412 object#(0x412) ()
 				message("\"My name is Dell. Did I not say that already?\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("Dell looks disgruntled. \"I sell weapons, armour, and provisions when I am not doing work for The Fellowship.\"");
@@ -17489,6 +17795,7 @@ void Func0412 object#(0x412) ()
 					say();
 				}
 				UI_add_answer("Fellowship");
+				fallthrough;
 
 			case "murder":
 				message("\"I am afraid I know nothing about it save for what is being said in the street, so do not ask me. If thou art not going to buy anything, then thou art wasting my time. Go away.\"");
@@ -17503,14 +17810,17 @@ void Func0412 object#(0x412) ()
 					UI_remove_npc_face(0xFFFF);
 					UI_show_npc_face(0xFFEE, 0x0000);
 				}
+				fallthrough;
 
 			case "Fellowship":
 				Func0919();
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "philosophy":
 				Func091A();
 				UI_remove_answer("philosophy");
+				fallthrough;
 
 			case "buy":
 				if (var0003 == 0x0007)
@@ -17527,22 +17837,26 @@ void Func0412 object#(0x412) ()
 					message("\"Come to my shop during business hours.\"");
 					say();
 				}
+				fallthrough;
 
 			case "weapons":
 				Func0872();
+				fallthrough;
 
 			case "armour":
 				Func0873();
+				fallthrough;
 
 			case "provisions":
 				Func0874();
+				fallthrough;
 
 			case "nothing":
 				UI_pop_answers();
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Hmpf.\"");
 		say();
@@ -17650,6 +17964,7 @@ void Func0413 object#(0x413) ()
 				message("");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"Why, I run the Honorable Hound Pub and Inn,\" she purrs.");
@@ -17671,27 +17986,32 @@ void Func0413 object#(0x413) ()
 					say();
 				}
 				UI_add_answer(["Honorable Hound"]);
+				fallthrough;
 
 			case "Honorable Hound":
 				message("\"I can think of no better place in all of Trinsic to lay thine head to rest or to nibble upon treats to satisfy thine appetite.\"");
 				say();
 				UI_remove_answer("Honorable Hound");
+				fallthrough;
 
 			case "murder":
 				message("Apollonia shuts her eyes and shakes her head as if she had just bitten into a very sour lemon. \"Oooh. That was so... hideous! How could anyone do something so horrible? Art thou searching for information? I do hope thou dost find the person responsible.\"");
 				say();
 				UI_remove_answer("murder");
+				fallthrough;
 
 			case "food":
 				message("\"We serve the finest meat, fish, and cake. Our specialty is a Silverleaf meal. If thou wouldst like to buy something, please say so!\"");
 				say();
 				UI_add_answer("Silverleaf");
 				UI_remove_answer("food");
+				fallthrough;
 
 			case "drink":
 				message("\"I can offer thee mead, wine and ale.\"");
 				say();
 				UI_remove_answer("drink");
+				fallthrough;
 
 			case "room":
 				message("\"Our rooms are cheap. Only 6 gold per person per night. Want a room?\"");
@@ -17735,11 +18055,13 @@ void Func0413 object#(0x413) ()
 					say();
 				}
 				UI_remove_answer("room");
+				fallthrough;
 
 			case "Silverleaf":
 				message("\"Mmmm. What a delicacy! It is the most wonderful delicacy that thou shalt ever eat! It is worth every gold piece spent.\"");
 				say();
 				UI_remove_answer("Silverleaf");
+				fallthrough;
 
 			case "flirt":
 				message("Apollonia blushes and bats her eyelashes. \"Oh, ");
@@ -17747,13 +18069,14 @@ void Func0413 object#(0x413) ()
 				message("! I would wager that thou dost say that to all the barmaids!\"");
 				say();
 				UI_remove_answer("flirt");
+				fallthrough;
 
 			case "buy":
 				Func0842();
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		if (!var0004)
 		{
@@ -17806,21 +18129,25 @@ void Func0414 object#(0x414) ()
 				message("\"I am Markus the trainer.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am a trainer here in Trinsic,\" he says gruffly. \"If thou dost wish to increase thy skill in combat I can help thee.\"");
 				say();
 				UI_add_answer(["Trinsic", "train"]);
+				fallthrough;
 
 			case "murder":
 				message("\"I heard about it, but I assure thee I know nothing of the details.\" Markus yawns.");
 				say();
 				UI_remove_answer("murder");
+				fallthrough;
 
 			case "Trinsic":
 				message("The fighter shrugs. \"The town is all right.\" He sniffs.");
 				say();
 				UI_remove_answer("Trinsic");
+				fallthrough;
 
 			case "train":
 				if (var0001 == 0x0007)
@@ -17843,10 +18170,10 @@ void Func0414 object#(0x414) ()
 					say();
 					UI_remove_answer("train");
 				}
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye,\" the fighter bows.*");
 		say();
@@ -17918,6 +18245,7 @@ void Func0415 object#(0x415) ()
 				{
 					Func088D();
 				}
+				fallthrough;
 
 			case "job":
 				message("\"I am the Trinsic shipwright. If thou wouldst like to know about a ship or a sextant, just say so.\"");
@@ -17930,6 +18258,7 @@ void Func0415 object#(0x415) ()
 				{
 					Func088D();
 				}
+				fallthrough;
 
 			case "ship":
 				message("\"Thou dost want to buy a ship?\" the old man asks, smiling. (Apparently not too many folks buy ships these days.)~\"My ships are sturdy and well built. They may not be built by Owen, but they are fine vessels! But thou must first purchase a deed.\"");
@@ -17943,6 +18272,7 @@ void Func0415 object#(0x415) ()
 				{
 					Func088D();
 				}
+				fallthrough;
 
 			case "sextant":
 				if (!(var0001 == 0x001E))
@@ -17986,6 +18316,7 @@ void Func0415 object#(0x415) ()
 						Func088D();
 					}
 				}
+				fallthrough;
 
 			case "Owen":
 				message("\"Thou hast not heard of Owen? Finest shipwright in the land. He lives in Minoc.\"~Gargan coughs.");
@@ -17996,6 +18327,7 @@ void Func0415 object#(0x415) ()
 				{
 					Func088D();
 				}
+				fallthrough;
 
 			case "deed":
 				if (!(var0001 == 0x001E))
@@ -18054,6 +18386,7 @@ void Func0415 object#(0x415) ()
 				{
 					Func088D();
 				}
+				fallthrough;
 
 			case "murder":
 				message("\"I heard about that. Terrible thing to happen. Can't say I saw or heard anything, though.\"~Gargan coughs, clears his throat loudly, then spits.");
@@ -18073,6 +18406,7 @@ void Func0415 object#(0x415) ()
 				{
 					Func088D();
 				}
+				fallthrough;
 
 			case "Crown Jewel":
 				message("\"Yes, that ship was docked overnight.\" He consults his log. \"She sailed for Britain at sunrise. I do not recall seeing anyone get on or off.\"~Gargan snorts and coughs a couple of times.");
@@ -18083,6 +18417,7 @@ void Func0415 object#(0x415) ()
 				{
 					Func088D();
 				}
+				fallthrough;
 
 			case "Hook":
 				message("\"Matey, I have always seen pirates and sailors with peglegs and hooks. If thou hast seen one, thou hast seen another.\" But the man suddenly frowns. \"Hmm. Now that thou dost mention it, I -did- see a man with a hook late last night after sundown. I was leaving the shop and saw him outside. There was a wingless gargoyle with him. They were walking east.\"");
@@ -18104,6 +18439,7 @@ void Func0415 object#(0x415) ()
 				{
 					Func088D();
 				}
+				fallthrough;
 
 			case "Fellowship":
 				message("\"I am too old to pay attention to them.\"~Gargan wipes his runny nose on his sleeve.");
@@ -18114,10 +18450,10 @@ void Func0415 object#(0x415) ()
 				{
 					Func088D();
 				}
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"May thy day have smooth sailing,\" the sailor starts to say, but a coughing spasm interrupts him.*");
 		say();
@@ -18180,40 +18516,46 @@ void Func0416 object#(0x416) ()
 				message("\"My parents named me Caroline,\" she says proudly.");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I have no 'job' per se. I have devoted mine energies to helping The Fellowship. I hope to recruit new members.\"");
 				say();
 				UI_add_answer("Fellowship");
+				fallthrough;
 
 			case "murder":
 				message("She looks concerned. \"'Tis awful! Christopher was a nice man. Didst thou know he was one of our members? I cannot believe he is dead...\"");
 				say();
 				UI_remove_answer("murder");
 				UI_add_answer("members");
+				fallthrough;
 
 			case "members":
 				message("\"Of The Fellowship. We meet every night at the hall. Thou shouldst visit!\"");
 				say();
 				UI_remove_answer("members");
+				fallthrough;
 
 			case "Fellowship":
 				Func0919();
 				UI_remove_answer("Fellowship");
 				UI_add_answer(["society", "philosophy"]);
+				fallthrough;
 
 			case "society":
 				message("\"Every night at nine o'clock we have a meeting in the Fellowship hall. Thou mayest consider thyself invited to attend.\"");
 				say();
 				UI_remove_answer("society");
+				fallthrough;
 
 			case "philosophy":
 				Func091A();
 				UI_remove_answer("philosophy");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye!\"*");
 		say();
@@ -18358,6 +18700,7 @@ labelFunc0417_000C:
 				message("Lord British laughs. \"What, art thou joking, Avatar? Dost thou not recognize thine old friend?\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("Lord British rolls his eyes. \"Must we go through this formality?\" He laughs, shaking his head.");
@@ -18365,12 +18708,14 @@ labelFunc0417_000C:
 				message("\"Very well. As thou well knowest, I am sovereign of Britannia and have been for some time now. Even though I come from thine homeland, I have chosen to live my life here.\"");
 				say();
 				UI_add_answer(["Britannia", "homeland"]);
+				fallthrough;
 
 			case "homeland":
 				message("\"I know that it has been many a year since I visited our Earth, but surely thou dost remember that the two of us hail from the same time and place? And, as brothers in origin, thou shouldst also remember that thou canst ask me for aid at any time thou mightest require it.\"");
 				say();
 				UI_remove_answer("homeland");
 				UI_add_answer("aid");
+				fallthrough;
 
 			case "aid":
 				message("\"Do not forget, Avatar, that I have the power to heal thee. That is one bit of magic that still seems to work for me. And I could probably provide thee with some equipment and a spellbook.\"");
@@ -18382,6 +18727,7 @@ labelFunc0417_000C:
 				}
 				gflags[0x00D3] = true;
 				UI_remove_answer("aid");
+				fallthrough;
 
 			case "Britannia":
 				message("\"The state of the land could not be more prosperous. Dost thou realize that thou hast been away for 200 Britannian years?\" Lord British wags a finger at you.~~ \"I am certain that thy friends have rued thine absence. 'Tis a shame thou didst stay away so long! But... I am so very happy to see thee. Britannia is prosperous and abundant. Look around thee. Explore the newly refurbished castle. Travel the land. Peace is prominent in all quarters.~~\"Yes, Britannia has never been better. Well, almost never.\"");
@@ -18392,11 +18738,13 @@ labelFunc0417_000C:
 				{
 					UI_add_answer("magic");
 				}
+				fallthrough;
 
 			case "almost never":
 				message("\"Well, 'things' are indeed fine. It is the 'people' I am concerned about.~~\"There is something wrong in Britannia, but I do not know what it is. Something is hanging over the heads of the Britannian people. They are unhappy. One can see it in their eyes. There is nothing that is unifying the population, since there has been peace for so long.~~\"Perhaps thou couldst determine what is happening. I implore thee to go out amongst the people. Watch them in their daily tasks. Speak with them. Work with them. Break bread with them. Perhaps they need someone like the Avatar to take an interest in their lives.\"");
 				say();
 				UI_remove_answer("almost never");
+				fallthrough;
 
 			case "red Moongate":
 				message("You relate the story of how a red Moongate appeared behind your house and mysteriously took you to Trinsic.~~Lord British's brow creases as you speak. Finally he says, \"I did not send the red Moongate to fetch thee. Someone or something must have activated that Moongate. And that is strange indeed, because we have been having a bit of trouble with Moongates as of late. In fact, we have been having trouble with magic in general!\"");
@@ -18410,6 +18758,7 @@ labelFunc0417_000C:
 				{
 					UI_add_answer("magic");
 				}
+				fallthrough;
 
 			case "Orb of the Moons":
 				message("\"Mine has not worked since the troubles with magic began. In fact, none of the Moongates have been working reliably for quite a while!");
@@ -18449,17 +18798,20 @@ labelFunc0417_000C:
 				{
 					UI_add_answer("magic");
 				}
+				fallthrough;
 
 			case "castle":
 				message("\"Yes, it has been redecorated since thy last visit. The architects and workers did a splendid job.\"~~The ruler leans toward you with a sour look on his face.~~ \"The only mar in the entire complex is that damn nursery!\"");
 				say();
 				UI_remove_answer("castle");
 				UI_add_answer("nursery");
+				fallthrough;
 
 			case "nursery":
 				message("\"I will not go near the place! Kings and dirty diapers do not mix. The Great Council talked me into implementing the nursery after several of my staff started having families. Although it was probably a necessity, I shall pretend it does not exist!\"");
 				say();
 				UI_remove_answer("nursery");
+				fallthrough;
 
 			case "Trinsic":
 				message("\"I have not been down there in many years. Has something happened there?\"");
@@ -18467,12 +18819,14 @@ labelFunc0417_000C:
 				UI_remove_answer("Trinsic");
 				UI_push_answers();
 				UI_add_answer(["a murder", "nothing much"]);
+				fallthrough;
 
 			case "nothing much":
 				message("\"Indeed. Then it seems that Trinsic has not changed much since I saw it last.\" His eyes twinkle.");
 				say();
 				UI_pop_answers();
 				UI_remove_answer("nothing much");
+				fallthrough;
 
 			case "a murder":
 				message("\"Murder? In Trinsic?\" The ruler looks concerned.~~\"I have heard nothing about it. Art thou investigating it?\"");
@@ -18493,12 +18847,14 @@ labelFunc0417_000C:
 				UI_remove_answer("a murder");
 				UI_pop_answers();
 				UI_add_answer(["ritualistic", "killer"]);
+				fallthrough;
 
 			case "ritualistic":
 				message("\"I do not recall many details. Thou shouldst ask Patterson, the town mayor, about it. He may remember more.\"");
 				say();
 				UI_remove_answer("ritualistic");
 				gflags[0x00D1] = true;
+				fallthrough;
 
 			case "killer":
 				message("\"That is, of course, only an assumption on my part. But that is all we have had to work with. Unless thou hast already uncovered some useful information?\"");
@@ -18512,38 +18868,45 @@ labelFunc0417_000C:
 				{
 					UI_add_answer("Crown Jewel");
 				}
+				fallthrough;
 
 			case "Fellowship":
 				message("\"They are an extremely useful and productive group of citizens. Thou shouldst most certainly visit the Fellowship Headquarters here in Britain and speak with Batlin. The Fellowship has done many good deeds throughout Britannia, including feeding the poor, educating and helping those in need, and promoting general good will and peace.\"");
 				say();
 				UI_remove_answer("Fellowship");
 				UI_add_answer(["Batlin", "Headquarters"]);
+				fallthrough;
 
 			case "Headquarters":
 				message("\"Yes, it is not far from the castle, to the southwest. It is just south of the theatre.\"");
 				say();
 				UI_remove_answer("Headquarters");
+				fallthrough;
 
 			case "Batlin":
 				message("\"He is a druid who began The Fellowship about twenty years ago. He is highly intelligent, and is a warm and gentle human being.\"");
 				say();
 				UI_remove_answer("Batlin");
+				fallthrough;
 
 			case "Hook":
 				message("\"A man with a hook?\" The king rubs his chin.~~\"No, I do not recall ever meeting a man with a hook.\"");
 				say();
 				UI_remove_answer("Hook");
+				fallthrough;
 
 			case "Crown Jewel":
 				message("\"I am afraid I cannot possibly know of every ship that comes through our ports. Thou shouldst check with Clint the Shipwright if thou hast not done so.\"");
 				say();
 				UI_remove_answer("Crown Jewel");
+				fallthrough;
 
 			case "friends":
 				message("\"Thou must mean Iolo, Shamino, and Dupre, of course.\"");
 				say();
 				UI_remove_answer("friends");
 				UI_add_answer(["Iolo", "Shamino", "Dupre"]);
+				fallthrough;
 
 			case "Iolo":
 				message("\"I have seen our friend rarely over the years. I understand he has been spending most of his time in Trinsic.\"");
@@ -18560,6 +18923,7 @@ labelFunc0417_000C:
 				}
 				UI_remove_answer("Iolo");
 				UI_add_answer("Trinsic");
+				fallthrough;
 
 			case "Shamino":
 				message("\"That rascal does not come around very often, though I understand he spends most of his time in Britain these days!\"");
@@ -18584,6 +18948,7 @@ labelFunc0417_000C:
 					UI_show_npc_face(0xFFE9, 0x0000);
 				}
 				UI_remove_answer("Shamino");
+				fallthrough;
 
 			case "Dupre":
 				message("\"I have not seen that one since I knighted him. Typical -- I do the man a favor and he disappears! I heard he might be in Jhelom.\"");
@@ -18606,11 +18971,13 @@ labelFunc0417_000C:
 				}
 				UI_remove_answer("Dupre");
 				UI_add_answer("Jhelom");
+				fallthrough;
 
 			case "Jhelom":
 				message("\"A rather violent place, by all accounts. I have not had the pleasure of a visit in quite a while.\"");
 				say();
 				UI_remove_answer("Jhelom");
+				fallthrough;
 
 			case "magic":
 				message("\"Something is awry. Magic has not been working for the longest time. I even have trouble creating food with magic! It must be something to do with the magical ether.~~\"There are those who say that magic is dying, what with the trouble with the Moongates and the situation with Nystul. I am beginning to suspect that they might be right!\"");
@@ -18627,6 +18994,7 @@ labelFunc0417_000C:
 				{
 					UI_add_answer("Moongates");
 				}
+				fallthrough;
 
 			case "Nystul":
 				if (!gflags[0x0003])
@@ -18648,6 +19016,7 @@ labelFunc0417_000C:
 					say();
 				}
 				UI_remove_answer("Nystul");
+				fallthrough;
 
 			case "Moongates":
 				message("\"The Moongates are not functioning! We cannot use them as we have in the past. Not only are they dysfunctional, they are, in fact, dangerous! One of my trusted sages used mine own Orb of the Moons to travel to the Shrine of Humility, and his body did shatter upon entering the gate! If only that mage in Cove hadn't gone mad!\"");
@@ -18655,6 +19024,7 @@ labelFunc0417_000C:
 				UI_remove_answer("Moongates");
 				UI_add_answer(["mad mage", "Cove"]);
 				var0007 = true;
+				fallthrough;
 
 			case "mad mage":
 				message("The ruler leans forward and speaks quietly.~~\"There is a mad mage in Cove by the name of Rudyom. Dost thou remember him? Rudyom was working with a magical substance called 'blackrock'. Before he went mad, he claimed that this mineral could solve the problems of the Moongates. I suggest that thou shouldst go to Cove and find him. Try to learn what it was he was doing with this blackrock material. It could be our only hope.\"");
@@ -18663,6 +19033,7 @@ labelFunc0417_000C:
 				Func0911(0x0014);
 				UI_remove_answer("mad mage");
 				UI_add_answer("Rudyom");
+				fallthrough;
 
 			case "Rudyom":
 				message("\"He was a brilliant and respected mage. But something happened to him in recent years. He seemed to go completely senile.\"");
@@ -18673,42 +19044,50 @@ labelFunc0417_000C:
 					say();
 				}
 				UI_remove_answer("Rudyom");
+				fallthrough;
 
 			case "Cove":
 				message("\"Surely thou dost remember Cove. It is a very pleasant town to the east of Britain. Quite relaxing.\"");
 				say();
 				UI_remove_answer("Cove");
+				fallthrough;
 
 			case "The Guardian":
 				message("\"I do not know of a 'Guardian'. Art thou sure he really exists? Thou shouldst investigate further.\"");
 				say();
 				gflags[0x00D4] = true;
 				UI_remove_answer("The Guardian");
+				fallthrough;
 
 			case "spellbook":
 				message("\"Yes, I have a spellbook stored away with the rest of the equipment.\"");
 				say();
 				UI_remove_answer("spellbook");
+				fallthrough;
 
 			case "equipment":
 				message("\"Thou art welcome to any of mine equipment. I keep it in a locked storeroom here in the castle. Thou wilt find the key in my study.\"");
 				say();
 				UI_remove_answer("equipment");
 				UI_add_answer(["storeroom", "study"]);
+				fallthrough;
 
 			case "storeroom":
 				message("\"I am sure thou canst find it.\"~~The ruler smiles slyly. \"Consider it something of a game!\"");
 				say();
 				UI_remove_answer("storeroom");
+				fallthrough;
 
 			case "study":
 				message("\"'Tis in the western end of the castle.\"");
 				say();
 				UI_remove_answer("study");
+				fallthrough;
 
 			case "heal":
 				Func08B4(0x0000, 0x0000, 0x0000);
 				var0006 = true;
+				fallthrough;
 
 			case "Weston":
 				message("Lord British listens to your story about Weston. He looks concerned.~~\"I do not recall this case. Let me check... Hmmm...\" He quickly scans a large scroll.~~\"Imprisoned for the theft of one apple from the Royal Orchards... Ludicrous! Someone must have usurped mine authority. Thou mayest consider this man pardoned. An investigation will commence immediately into the circumstances surrounding his arrest, and into this fellow, Figg. My thanks to thee, Avatar.\"");
@@ -18717,12 +19096,14 @@ labelFunc0417_000C:
 				Func0911(0x0014);
 				UI_remove_npc(0xFFBB);
 				UI_remove_answer("Weston");
+				fallthrough;
 
 			case "rumble":
 				message("Lord British looks at you gravely, \"The foundation of Britannia was shaken with the rising of an island. This event was no random disaster, it was one of sorcerous intent.\"");
 				say();
 				UI_add_answer("island");
 				UI_remove_answer("rumble");
+				fallthrough;
 
 			case "island":
 				message("\"Yes, ");
@@ -18731,6 +19112,7 @@ labelFunc0417_000C:
 				say();
 				UI_add_answer(["Isle of Fire", "Exodus"]);
 				UI_remove_answer("island");
+				fallthrough;
 
 			case "Isle of Fire":
 				message("\"");
@@ -18745,15 +19127,16 @@ labelFunc0417_000C:
 				say();
 				Func08B5();
 				UI_remove_answer("Isle of Fire");
+				fallthrough;
 
 			case "Exodus":
 				message("\"Thy battle with that strange mixture of machine and spirit is now legendary. Do be careful if thou art going to the isle, for the remains of that being now reside in one of the chambers of the Castle of Fire.\"");
 				say();
 				UI_remove_answer("Exodus");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye, ");
 		message(var0001);
@@ -18885,6 +19268,7 @@ void Func0418 object#(0x418) ()
 				say();
 			}
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			if (!gflags[0x0003])
@@ -18898,6 +19282,7 @@ void Func0418 object#(0x418) ()
 				say();
 			}
 			UI_add_answer(["magic", "Lord British"]);
+			fallthrough;
 
 		case "magic":
 			if (!gflags[0x0003])
@@ -18923,6 +19308,7 @@ void Func0418 object#(0x418) ()
 			}
 			UI_remove_answer("magic");
 			UI_add_answer(["spells", "reagents"]);
+			fallthrough;
 
 		case "spells":
 			message("\"Dost thou wish to buy some spells?\"");
@@ -18937,6 +19323,7 @@ void Func0418 object#(0x418) ()
 				message("\"Oh. Never mind, then.\"");
 				say();
 			}
+			fallthrough;
 
 		case "reagents":
 			message("\"Dost thou wish to buy some reagents?\"");
@@ -18951,6 +19338,7 @@ void Func0418 object#(0x418) ()
 				message("\"Oh. Never mind, then.\"");
 				say();
 			}
+			fallthrough;
 
 		case "Lord British":
 			if (!gflags[0x0003])
@@ -18964,10 +19352,10 @@ void Func0418 object#(0x418) ()
 				say();
 			}
 			UI_remove_answer("Lord British");
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	if (!gflags[0x0003])
 	{
@@ -19020,11 +19408,13 @@ void Func0419 object#(0x419) ()
 				say();
 				UI_remove_answer("name");
 				UI_add_answer("Game");
+				fallthrough;
 
 			case "job":
 				message("\"I was, am, and shall be the Court...Fool! I could give thee a clue if I wish, but for now my job is to play The Game.\"");
 				say();
 				UI_add_answer("Game");
+				fallthrough;
 
 			case "clue":
 				if (!gflags[0x006F])
@@ -19048,6 +19438,7 @@ void Func0419 object#(0x419) ()
 					say();
 					UI_remove_answer("clue");
 				}
+				fallthrough;
 
 			case "Game":
 				message("\"Thou must play The Game if thou dost want to speak with me.\"");
@@ -19056,19 +19447,23 @@ void Func0419 object#(0x419) ()
 				UI_add_answer(["I don't understand", "What are the rules?", "I know The Game", "Explain it"]);
 				UI_remove_answer("Game");
 				gflags[0x0073] = true;
+				fallthrough;
 
 			case "I don't understand":
 				Func0861();
 				UI_remove_answer("I don't understand");
+				fallthrough;
 
 			case "Explain it":
 				Func0861();
 				UI_remove_answer("Explain it");
+				fallthrough;
 
 			case "What are the rules?":
 				message("\"Thou must just learn The Game and then jump in and play it!\"");
 				say();
 				UI_remove_answer("What are the rules?");
+				fallthrough;
 
 			case "I know The Game":
 				message("\"Then just play it!\"");
@@ -19087,14 +19482,17 @@ void Func0419 object#(0x419) ()
 				{
 					Func0861();
 				}
+				fallthrough;
 
 			case "the weather":
 				Func0861();
 				UI_remove_answer("weather");
+				fallthrough;
 
 			case "Lord British":
 				Func0861();
 				UI_remove_answer("Lord British");
+				fallthrough;
 
 			case "thou":
 				message("\"Why dost thou want to speak of me? Canst thou not think of a thing much more fun of which to speak?\"");
@@ -19102,20 +19500,24 @@ void Func0419 object#(0x419) ()
 				UI_remove_answer("thou");
 				UI_clear_answers();
 				UI_add_answer(["women", "girls", "food", "supper"]);
+				fallthrough;
 
 			case "a joke":
 				message("\"I do not think I can tell a good joke whilst I play The Game! 'Twould be hard! Hmm. Ah! I have one! Why did the hen cross the road? To get to the side she was not on!\"");
 				say();
 				UI_remove_answer("a joke");
+				fallthrough;
 
 			case "women":
 				Func0861();
 				UI_remove_answer("women");
+				fallthrough;
 
 			case "girls":
 				message("\"There be a lot of fine girls in our fair town! Or is it 'fair girls in our fine town'?\" Chuckles shrugs his shoulders.");
 				say();
 				UI_remove_answer("girls");
+				fallthrough;
 
 			case "food":
 				message("\"There is good food at the pub! As for me, I like to eat on the floor of my room!\"");
@@ -19133,14 +19535,15 @@ void Func0419 object#(0x419) ()
 				{
 					Func0861();
 				}
+				fallthrough;
 
 			case "supper":
 				Func0861();
 				UI_remove_answer("supper");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		if (gflags[0x0073])
 		{
@@ -19410,64 +19813,75 @@ void Func041A object#(0x41A) ()
 				message("\"My name, good friend, is Batlin. And indeed it is truly a privilege to meet the Avatar in the flesh.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I was once a druid. Now I am the leader and the originator of The Fellowship. It is rapidly growing throughout Britannia and keeps me very busy, as thou canst well imagine. Ha! Ha! Ha!\"");
 				say();
 				UI_add_answer("Fellowship");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"The Fellowship was formed twenty years ago with the full approval and support of Lord British. It is a society of spiritual seekers who strive to reach the highest levels of human potential and to share this knowledge freely with all people.\"");
 				say();
 				UI_remove_answer("Fellowship");
 				UI_add_answer("spiritual");
+				fallthrough;
 
 			case "spiritual":
 				message("\"The Fellowship advances the philosophy of sanguine cognition, a way to apply a positive order of thought to one's life through what is called the Triad of Inner Strength.\"");
 				say();
 				UI_remove_answer("spiritual");
 				UI_add_answer(["sanguine cognition", "Triad"]);
+				fallthrough;
 
 			case "sanguine cognition":
 				message("\"We strive to avoid the mistakes made by mystics and sages since the dawn of time. They apply the standards of the past, such as the virtues, for example, to qualify the present, and thus they do not perceive it correctly. We seek to examine our present lives each on our own terms and see the world the way it is.\"");
 				say();
 				UI_remove_answer("sanguine cognition");
 				UI_add_answer("virtues");
+				fallthrough;
 
 			case "virtues":
 				message("\"They are perfectly adequate for those who feel that they still need them for whatever reason. But no one, not even thyself, thou must admit, Avatar, can fulfill them perfectly. Therefore they are a philosophy that is ultimately based upon failure. We have never claimed that our teachings are a substitute for the virtues. However, ours is a belief that is based upon success, not failure.\"");
 				say();
 				UI_remove_answer("virtues");
+				fallthrough;
 
 			case "Triad":
 				message("\"The Triad of Inner Strength is simply three basic values that, when applied in unison, enable one to be more creative, satisfied and successful in life.\"");
 				say();
 				UI_remove_answer("Triad");
 				UI_add_answer("values");
+				fallthrough;
 
 			case "values":
 				message("\"The three values of the Triad of Inner Strength are Strive For Unity, Trust Thy Brother and Worthiness Precedes Reward.\"");
 				say();
 				UI_remove_answer("values");
 				UI_add_answer(["Unity", "Trust", "Worthiness"]);
+				fallthrough;
 
 			case "Unity":
 				message("\"When we say Strive For Unity, it is simply our way of expressing how the people of Britannia should all cooperate and work together. A worthwhile sentiment, I am certain thou wouldst concur.\"");
 				say();
 				UI_remove_answer("Unity");
 				UI_add_answer("join");
+				fallthrough;
 
 			case "Trust":
 				message("\"What The Fellowship means by this is that people are all the same and the world is, generally speaking, a supportive, nurturing place. The trust we place in each other is like the pinions that hold our society together. Quite true, wouldst thou not say?\"");
 				say();
 				UI_remove_answer("Trust");
 				UI_add_answer("join");
+				fallthrough;
 
 			case "Worthiness":
 				message("\"Allow me to explain the meaning of Worthiness Precedes Reward. Each one of us seeks something which we desire from life and we must strive to be worthy of that which we seek. It would be difficult for thee to disagree I am quite sure.\"");
 				say();
 				UI_remove_answer("Worthiness");
 				UI_add_answer("join");
+				fallthrough;
 
 			case "Elizabeth and Abraham":
 				if (!gflags[0x0105])
@@ -19498,6 +19912,7 @@ void Func041A object#(0x41A) ()
 					say();
 				}
 				UI_remove_answer("Elizabeth and Abraham");
+				fallthrough;
 
 			case "join":
 				if (gflags[0x0006])
@@ -19518,6 +19933,7 @@ void Func041A object#(0x41A) ()
 					}
 				}
 				UI_remove_answer("join");
+				fallthrough;
 
 			case "package":
 				if (gflags[0x00D7] && (!gflags[0x008F]))
@@ -19543,12 +19959,14 @@ void Func041A object#(0x41A) ()
 				{
 					Func0851();
 				}
+				fallthrough;
 
 			case "delivered package":
 				message("\"Congratulations, Avatar, and our thanks to thee for successfully delivering our package to Elynor of Minoc. Now we have another task at hand before thou canst join The Fellowship. Because thou didst deliver the package thou hast proven thyself worthy of performing another mission.\"");
 				say();
 				UI_remove_answer("delivered package");
 				UI_add_answer("mission");
+				fallthrough;
 
 			case "package delivered":
 				message("\"Avatar, didst thou deliver the package to Elynor of Minoc?\"");
@@ -19600,6 +20018,7 @@ void Func041A object#(0x41A) ()
 					}
 				}
 				UI_remove_answer("package delivered");
+				fallthrough;
 
 			case "mission":
 				message("\"Thou shalt visit the dungeon of Destard, which is in the mountains just west of Trinsic. Do not worry, it is completely deserted. There thou shalt find a chest of Fellowship funds which was hidden for safekeeping just a few days ago. Thou wilt know the chest because it will contain not only gold but two Fellowship medallions. The site is also most likely marked with a Fellowship staff. Bring these funds back to us without losing a single coin and thou wilt have successfully completed thy mission. No need to bring the chest, just the gold. Now, thou must be on thy way!\"*");
@@ -19608,36 +20027,42 @@ void Func041A object#(0x41A) ()
 				Func0911(0x0064);
 				UI_remove_answer("mission");
 				abort;
+				fallthrough;
 
 			case "chest":
 				message("\"Ah yes, thou hast returned from Dungeon Destard! But wait! I do not see the Fellowship funds that thou wast to bring back! What has happened?!\"");
 				say();
 				UI_add_answer(["a highwayman", "monsters", "pirates", "ship sunk"]);
 				UI_remove_answer("chest");
+				fallthrough;
 
 			case "a highwayman":
 				message("\"Why, thy tale is outlandish! I refuse to believe it!\" Batlin sniffs in irritation.");
 				say();
 				UI_remove_answer("a highwayman");
 				UI_add_answer("join");
+				fallthrough;
 
 			case "monsters":
 				message("\"Monsters! There are monsters lurking in dungeon Destard?! Well then, I do apologize for thine inconvenience.\"");
 				say();
 				UI_remove_answer(["monsters", "a highwayman", "ship sunk", "pirates"]);
 				UI_add_answer("join");
+				fallthrough;
 
 			case "pirates":
 				message("\"Surely thou canst do better than that! If thou simply dost not wish to answer my question why dost thou not say so?\"");
 				say();
 				UI_remove_answer("pirates");
 				UI_add_answer("join");
+				fallthrough;
 
 			case "ship sunk":
 				message("Batlin slowly rolls his eyes. \"Thou ought to have been a bard, thou dost regale me with such stories!\"");
 				say();
 				UI_remove_answer("ship sunk");
 				UI_add_answer("join");
+				fallthrough;
 
 			case "medallion":
 				var0002 = UI_add_party_items(0x0001, 0x03BB, 0xFE99, 0x0001, false);
@@ -19654,11 +20079,13 @@ void Func041A object#(0x41A) ()
 					say();
 					break;
 				}
+				fallthrough;
 
 			case "apples":
 				message("\"While thou art here, please feel free to enjoy an apple. The finest in all of Britannia, I am certain thou wilt find. They are provided to The Fellowship by the Royal Orchards.\"");
 				say();
 				UI_remove_answer("apples");
+				fallthrough;
 
 			case "voice":
 				if (gflags[0x0096])
@@ -19674,6 +20101,7 @@ void Func041A object#(0x41A) ()
 					UI_add_answer("test");
 				}
 				UI_remove_answer("voice");
+				fallthrough;
 
 			case "test":
 				message("\"Oh, art thou ready to join The Fellowship?\"");
@@ -19689,15 +20117,16 @@ void Func041A object#(0x41A) ()
 					UI_add_answer("join");
 				}
 				UI_remove_answer("test");
+				fallthrough;
 
 			case "Meditation Retreat":
 				message("\"It is a retreat from the pressures and distractions of everyday life where new members of The Fellowship may go and study the philosophies of The Fellowship. It is located on an island east of Serpent's Hold.\"");
 				say();
 				UI_remove_answer("Meditation Retreat");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Until we meet again, Avatar.\"*");
 		say();
@@ -19759,6 +20188,7 @@ void Func041B object#(0x41B) ()
 				message("\"I am Raymundo.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"Why, I am famous throughout the land! Hast thou not heard of me?\"");
@@ -19787,6 +20217,7 @@ void Func041B object#(0x41B) ()
 					say();
 				}
 				UI_add_answer(["Royal Theatre", "play"]);
+				fallthrough;
 
 			case "play":
 				message("\"It's a little something I wrote entitled 'The Trials of the Avatar'. It's about a legendary figure in Britannian history.\" The artist looks you up and down.");
@@ -19814,18 +20245,16 @@ void Func041B object#(0x41B) ()
 					gflags[0x0067] = true;
 					abort;
 				}
-				else
-				{
-					message("\"No? Thou hast never dreamed of performing on the stage? Seeing thy name in torches? Donning the olde grease paint and wig? Bowing to thunderous applause? Well, begone then, I have not the time for chatting with the public.\"*");
-					say();
-					abort;
-				}
+				message("\"No? Thou hast never dreamed of performing on the stage? Seeing thy name in torches? Donning the olde grease paint and wig? Bowing to thunderous applause? Well, begone then, I have not the time for chatting with the public.\"*");
+				say();
+				abort;
 
 			case "Royal Theatre":
 				message("\"'Tis a wonderful space, dost thou not think? 'Twas opened only last year, thanks to the sponsorship of a few wealthy citizens of our great city.\"");
 				say();
 				UI_remove_answer("Royal Theatre");
 				UI_add_answer(["sponsorship", "citizens"]);
+				fallthrough;
 
 			case "sponsorship":
 				message("\"The construction of the actual theatre building was paid for by the Royal Mint, but the theatre company relies solely on the support of individuals such as thyself. Wouldst thou like to make a modest contribution of, say, ten gold pieces to our theatre company?\"");
@@ -19851,6 +20280,7 @@ void Func041B object#(0x41B) ()
 					say();
 				}
 				UI_remove_answer("sponsorship");
+				fallthrough;
 
 			case "audition":
 				if (var0001 == 0x0007)
@@ -19875,6 +20305,7 @@ void Func041B object#(0x41B) ()
 					say();
 					abort;
 				}
+				fallthrough;
 
 			case "Miranda":
 				message("Raymundo takes a deep breath and smiles.");
@@ -19882,6 +20313,7 @@ void Func041B object#(0x41B) ()
 				message("\"Ah, lovely woman. 'Tis a pity she is more interested in politics than the stage. But I must say that we get along famously!\"");
 				say();
 				UI_remove_answer("Miranda");
+				fallthrough;
 
 			case "Max":
 				message("\"He is quite a character, is he not?\" Raymundo's face fills with pride.");
@@ -19889,17 +20321,20 @@ void Func041B object#(0x41B) ()
 				message("\"Takes after his old man, I must say. He is sure to be a great actor. Or writer. Or director. Or producer.\"");
 				say();
 				UI_remove_answer("Max");
+				fallthrough;
 
 			case "citizens":
 				message("\"Well, I am really not at liberty to divulge the names of our patrons. But most of them belong to The Fellowship.\"");
 				say();
 				UI_remove_answer("citizens");
 				UI_add_answer(["patrons", "Fellowship"]);
+				fallthrough;
 
 			case "patrons":
 				message("\"These are people who contribute to our theatre. They come from all walks of life and have little in common besides a love of fine theatre.\"");
 				say();
 				UI_remove_answer("patrons");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"For non-artists, they have given generous contributions to the theatre. They are -fine- people in my book!\" He rubs his hands with glee.");
@@ -19907,10 +20342,10 @@ void Func041B object#(0x41B) ()
 				message("\"I am not a member, though.\"");
 				say();
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Leaving? Sorry, I do not give autographs.\"*");
 		say();
@@ -20014,47 +20449,54 @@ void Func041C object#(0x41C) ()
 					message("He slaps his own face and speaks in a normal register, \"Oops, sorry! I am so entrenched in the role that I sometimes forget that I am not a woman!\"");
 					say();
 				}
+				fallthrough;
 
 			case "job":
 				message("\"I work at the Royal Theatre as an actor. I have played -all- the great roles in my career. I now have the chance to play the part of a lifetime -- the Avatar!\"");
 				say();
 				UI_add_answer(["Royal Theatre", "Avatar"]);
+				fallthrough;
 
 			case "Royal Theatre":
 				message("\"Because it must cater to the masses, we never have the opportunity to do experimental works -- only the traditional gruel of mediocrity. But 'tis a wonderful space and it has marvelous acoustics.\"");
 				say();
 				UI_add_answer(["masses", "experimental works"]);
 				UI_remove_answer("Royal Theatre");
+				fallthrough;
 
 			case "masses":
 				message("\"People like to see tales of heroic adventures, knights in armour, beautiful princesses, wise kings, wizards, evil monsters. All that rot.\"");
 				say();
 				UI_remove_answer("masses");
+				fallthrough;
 
 			case "Avatar":
 				message("\"The role is very challenging. I have a plethora of lines and I had to work with a trainer for weeks to prepare for the enormous amount of activity required. This role will make 'Jesse' a household name!\"");
 				say();
 				UI_add_answer(["challenging", "lines"]);
 				UI_remove_answer("Avatar");
+				fallthrough;
 
 			case "challenging":
 				message("\"It is easily the most ambitious theatrical production ever conceived. There is over a hundred hours of play time. That is a long time for an audience.\"");
 				say();
 				UI_remove_answer("challenging");
+				fallthrough;
 
 			case "lines":
 				message("\"My biggest lines are:~~\"Name!\"~~\"Job!\"~~\"Bye!\"");
 				say();
 				UI_remove_answer("lines");
+				fallthrough;
 
 			case "experimental works":
 				message("\"My favorite piece is something Raymundo wrote for me entitled 'Three on a Codpiece'. I stand on stage and invite the audience to join me in tearing an undergarment into tiny pieces, after which they are placed in funeral urns and mixed with wheat paste. The pieces of cloth, not the audience members. Then the audience may glue the pieces anywhere on my body that they wish.\"");
 				say();
 				UI_remove_answer("experimental works");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye. Be sure to come to the show when it opens!\"*");
 		say();
@@ -20126,16 +20568,19 @@ void Func041D object#(0x41D) ()
 				say();
 				UI_remove_answer("name");
 				UI_add_answer("Laurence");
+				fallthrough;
 
 			case "job":
 				message("\"I am the greatest actor who ever lived,\" he proclaims with absolutely no modesty. \"I am playing the character 'Iolo' in the new play.\"");
 				say();
 				UI_add_answer("Iolo");
+				fallthrough;
 
 			case "Laurence":
 				message("\"'Tis the name of a particular hero of mine.\"");
 				say();
 				UI_remove_answer("Laurence");
+				fallthrough;
 
 			case "Iolo":
 				message("Stuart's feathers are obviously ruffled. \"Yes. I have been cast as second banana yet again! I am much more suited to play the Avatar, but did Raymundo cast me? Noooo!\"");
@@ -20163,26 +20608,29 @@ void Func041D object#(0x41D) ()
 				}
 				UI_add_answer(["Raymundo", "Avatar"]);
 				UI_remove_answer("Iolo");
+				fallthrough;
 
 			case "Raymundo":
 				message("\"I suppose he's a good director. He never casts me in the right roles, though. And to think I went to school with him! We were on our first stage crew together!\"");
 				say();
 				UI_remove_answer("Raymundo");
+				fallthrough;
 
 			case "Avatar":
 				message("Stuart whispers to you, \"Jesse is all wrong! Why, -thou- wouldst make a better Avatar than he! And -thou- probably couldst not act thy way out of a reagent bag! That is not a reflection on thee, but on Jesse.\"");
 				say();
 				UI_add_answer("act");
 				UI_remove_answer("Avatar");
+				fallthrough;
 
 			case "act":
 				message("\"Acting is the highest form of art. It allows one to step outside oneself and become another person. 'Tis like a game!\"");
 				say();
 				UI_remove_answer("act");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye. Be sure to come to the show when it opens!\"*");
 		say();
@@ -20259,48 +20707,57 @@ void Func041E object#(0x41E) ()
 				message("\"I am Amber.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am an actress at the Royal Theatre. I am playing the role of Sherry the Mouse in the new play.\"");
 				say();
 				UI_add_answer(["Royal Theatre", "Sherry", "play"]);
+				fallthrough;
 
 			case "Royal Theatre":
 				message("\"'Tis a lovely space in which to perform. I have dedicated my life to acting, thou knowest.\"");
 				say();
 				UI_remove_answer("Royal Theatre");
 				UI_add_answer(["space", "dedicated"]);
+				fallthrough;
 
 			case "space":
 				message("\"Raymundo himself had a hand in the design of the theatre.\"");
 				say();
 				UI_remove_answer("space");
+				fallthrough;
 
 			case "dedicated":
 				message("\"Actually, this will be my debut theatrical performance. I have been working as a barmaid waiting for my first chance to be in the theatre.\"");
 				say();
 				UI_remove_answer("dedicated");
+				fallthrough;
 
 			case "play":
 				message("\"Between thee and me, methinks the play stinks.\" She winks at you.");
 				say();
 				UI_remove_answer("play");
+				fallthrough;
 
 			case "Sherry":
 				message("\"Canst thou imagine such drivel? I do not believe there ever was a Sherry the Mouse. Who ever heard of a mouse that could talk! Especially these lines! I would rather play a queen. Much more fitting for me, I would say.\"");
 				say();
 				UI_remove_answer("Sherry");
 				UI_add_answer(["lines", "queen"]);
+				fallthrough;
 
 			case "lines":
 				message("\"I have to memorize this preposterous children's story called 'Hubert's Hair-Raising Adventure'.");
 				say();
 				UI_remove_answer("lines");
+				fallthrough;
 
 			case "queen":
 				message("\"I asked Raymundo about this and he threw a tantrum. He said that it would not be historically accurate. Ha! As if that were something of any significance!\"");
 				say();
 				UI_remove_answer("queen");
+				fallthrough;
 
 			case "Shamino":
 				var0001 = Func08F7(0xFFFD);
@@ -20324,10 +20781,10 @@ void Func041E object#(0x41E) ()
 				gflags[0x006D] = true;
 				gflags[0x006E] = true;
 				UI_remove_answer("Shamino");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Adieu!\"*");
 		say();
@@ -20404,6 +20861,7 @@ void Func041F object#(0x41F) ()
 					UI_show_npc_face(0xFFE1, 0x0000);
 				}
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				var0001 = UI_get_schedule_type(0xFFE1);
@@ -20421,21 +20879,25 @@ void Func041F object#(0x41F) ()
 					say();
 					UI_add_answer(["sing", "horsey", "Rosa", "winner"]);
 				}
+				fallthrough;
 
 			case "sing":
 				message("Kristy is more than happy to do so. \"A-B-C-D-E-F-G! H-I-K-M-M-M-O-P! Q-T-W-Y-X-Z!\" She is proud of her song, although she didn't get it quite right.");
 				say();
 				UI_remove_answer("sing");
+				fallthrough;
 
 			case "horsey":
 				message("\"I love horsey!\" She rocks hard on the rocking horse.");
 				say();
 				UI_remove_answer("horsey");
+				fallthrough;
 
 			case "Rosa":
 				message("Kristy hugs her baby doll tight. \"Rosa!\"");
 				say();
 				UI_remove_answer("Rosa");
+				fallthrough;
 
 			case "winner":
 				message("\"I am winner!\" she proclaims loudly.");
@@ -20449,10 +20911,10 @@ void Func041F object#(0x41F) ()
 					UI_show_npc_face(0xFFE1, 0x0000);
 				}
 				UI_remove_answer("winner");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Bye bye!\"*");
 		say();
@@ -20525,6 +20987,7 @@ void Func0420 object#(0x420) ()
 					UI_show_npc_face(0xFFE0, 0x0000);
 				}
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				var0001 = UI_get_schedule_type(0xFFE0);
@@ -20542,26 +21005,29 @@ void Func0420 object#(0x420) ()
 					say();
 					UI_add_answer(["funny boy", "sing"]);
 				}
+				fallthrough;
 
 			case "funny boy":
 				message("\"Thou funny boy, -too-!\" Max laughs madly as he throws his pacifier at you. He points at it and says, \"Binky!\"");
 				say();
 				UI_add_answer("Binky");
 				UI_remove_answer("funny boy");
+				fallthrough;
 
 			case "Binky":
 				message("Max nods furiously. \"Binky! Get Binky! Get Binky!\" ~~You realize that the boy wants you to pick it up. Apparently it is some kind of game that only toddlers understand. You pick it up and hand it to him. He immediately plugs it into his mouth.");
 				say();
 				UI_remove_answer("Binky");
+				fallthrough;
 
 			case "sing":
 				message("Max stands upright and bellows, \"Old Lord British had a farm, -e-i-e-i-o-! On this farm he had a drake, -e-i-e-i-o-! With a -roar- -roar- here, a -roar- -roar- there, here a -roar-, there a -roar-, everywhere a -roar- -roar-!    Old Lord British had a farm, -e-i-e-i-o-!\"");
 				say();
 				UI_remove_answer("sing");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Bye bye!\"*");
 		say();
@@ -20637,6 +21103,7 @@ void Func0421 object#(0x421) ()
 					say();
 				}
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				var0001 = UI_get_schedule_type(0xFFDF);
@@ -20666,6 +21133,7 @@ void Func0421 object#(0x421) ()
 					say();
 				}
 				UI_add_answer(["wet", "diaper"]);
+				fallthrough;
 
 			case "wet":
 				message("You notice that Nicholas' diaper is wet.");
@@ -20680,6 +21148,7 @@ void Func0421 object#(0x421) ()
 				message("\"Yeeee! Dia-per! Geeee!\" Nicholas says happily.");
 				say();
 				UI_remove_answer("wet");
+				fallthrough;
 
 			case "diaper":
 				if (var0000)
@@ -20695,10 +21164,10 @@ void Func0421 object#(0x421) ()
 					say();
 				}
 				UI_remove_answer("diaper");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Bye bye!\"*");
 		say();
@@ -20793,11 +21262,13 @@ void Func0422 object#(0x422) ()
 				message("\"Oh, everyone simply calls me 'Nanna'.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I watch over the Royal Nursery. I am the nanny of these wonderful children.\"");
 				say();
 				UI_add_answer(["Royal Nursery", "nanny", "children"]);
+				fallthrough;
 
 			case "Royal Nursery":
 				message("\"There have been a great number of babies born in Britannia in recent years, so Lord British established this nursery. It is nice that the noblemen and noblewomen have this luxury so that they may attend to their daily duties.\"");
@@ -20825,22 +21296,26 @@ void Func0422 object#(0x422) ()
 					UI_show_npc_face(0xFFDE, 0x0000);
 				}
 				UI_remove_answer("Royal Nursery");
+				fallthrough;
 
 			case "nanny":
 				message("\"Well, I feed them and change their diapers and read aloud all the books thou dost see lying around. Luckily, I have Sherry to help me.\"");
 				say();
 				UI_remove_answer("nanny");
 				UI_add_answer(["books", "Sherry"]);
+				fallthrough;
 
 			case "books":
 				message("\"Lord British brought them from his homeland. They are very foreign to us here in Britannia, but the children enjoy them just the same.\"");
 				say();
 				UI_remove_answer("books");
+				fallthrough;
 
 			case "Sherry":
 				message("\"Sherry is a special mouse who has lived here in the castle for many, many years. She recites stories for the children.\"");
 				say();
 				UI_remove_answer("Sherry");
+				fallthrough;
 
 			case "children":
 				message("\"They are lovely, are they not? Every day they seem to learn more and more. Most of the time they are a joy.\" Nanna whispers to you conspiratorially, \"And other times I could happily throw them out with the bathwater!\"");
@@ -20853,23 +21328,27 @@ void Func0422 object#(0x422) ()
 					UI_add_answer("Sherry");
 				}
 				UI_remove_answer("children");
+				fallthrough;
 
 			case "luxury":
 				message("\"Yes, I suppose it really is a luxury. The poorer people in Britannia certainly do not have such a service for caring for their children. The rich do have an advantage.\" You detect a hint of bitterness in her voice.");
 				say();
 				UI_remove_answer("luxury");
 				UI_add_answer("advantage");
+				fallthrough;
 
 			case "advantage":
 				message("\"I do not mean to complain by any means. I adore my work. But contrary to the thinking of many of the noblemen and women, a class structure exists in Britannia more than ever before. Taxes are unbearable. The rich get richer, and the poor get poorer, as the saying goes.\"");
 				say();
 				UI_remove_answer("advantage");
 				UI_add_answer(["class structure", "taxes"]);
+				fallthrough;
 
 			case "taxes":
 				message("\"The Britannian Tax Council drains us all dry. Especially the lower and middle classes.\"");
 				say();
 				UI_remove_answer("taxes");
+				fallthrough;
 
 			case "class structure":
 				message("\"Well, look around! There are rich men who live in opulent castles. And right outside are poor people who live in hovels. Thou dost know how there are winged gargoyles and wingless gargoyles? Well, it seems the human race is getting to be just as divided. There is no unity in the land anymore. It is why I have joined The Fellowship.\"");
@@ -20877,10 +21356,12 @@ void Func0422 object#(0x422) ()
 				UI_remove_answer("class structure");
 				UI_add_answer(["Fellowship", "philosophy"]);
 				gflags[0x0082] = true;
+				fallthrough;
 
 			case "Fellowship":
 				Func0919();
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "philosophy":
 				if (var0002)
@@ -20895,10 +21376,10 @@ void Func0422 object#(0x422) ()
 					Func091A();
 				}
 				UI_remove_answer("philosophy");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good day! Do come back and visit again soon!\"*");
 		say();
@@ -20949,22 +21430,26 @@ void Func0423 object#(0x423) ()
 				say();
 				UI_remove_answer("name");
 				UI_add_answer("advanced");
+				fallthrough;
 
 			case "job":
 				message("\"I am Britain's healer, and have been for many years. If thou wishest to employ my services, please say so. I shall be only too happy to help.\"");
 				say();
+				fallthrough;
 
 			case "advanced":
 				message("\"When my name was Abrams, I lived on the island of New Magincia and did mine apprentice work there. My practice grew, and soon I was travelling by ship to Moonglow to see patients there.\"");
 				say();
 				UI_remove_answer("advanced");
 				UI_add_answer(["patients", "practice"]);
+				fallthrough;
 
 			case "patients":
 				message("\"Soon I had patients on three islands. It was then that Lord British received word of my practice.\"");
 				say();
 				UI_remove_answer("patients");
 				UI_add_answer("Lord British");
+				fallthrough;
 
 			case "practice":
 				message("\"My practice grew swiftly. I am a modest man, but I do not mind saying that I was a popular healer.\"");
@@ -20991,12 +21476,14 @@ void Func0423 object#(0x423) ()
 					UI_remove_npc_face(0xFFFD);
 					UI_show_npc_face(0xFFDD, 0x0000);
 				}
+				fallthrough;
 
 			case "Lord British":
 				message("\"Well, Lord British himself was struck down with some sort of malady. He sent for me. I arrived at the castle as soon as I could leave my patients, and I examined the king. It appeared to me that something had infested his blood. I have a theory about it, which I am convinced is correct. Others, however, do not share my view.\"");
 				say();
 				UI_remove_answer("Lord British");
 				UI_add_answer(["theory", "others"]);
+				fallthrough;
 
 			case "theory":
 				message("\"I believe that most sicknesses are caused by tiny living things. We cannot see these things with the naked eye. However, I am working on developing an instrument which -can- see these creatures. I believe that someday, healing will not depend on magic at all, but on some form of treatment which makes one less vulnerable to these living creatures. Since these animals are biological, I call this theorized treatment 'antibiotics'. What dost thou think, Avatar? Am I on the right track?\"");
@@ -21013,6 +21500,7 @@ void Func0423 object#(0x423) ()
 					message("\"No? Hmmm.\" Csil looks concerned. \"Well, I cannot believe in the archaic tradition of bleeding a person until the sickness has left his body. There must be another way...\"~~Csil looks at his notes, worried that his theory is invalid.");
 					say();
 				}
+				fallthrough;
 
 			case "others":
 				message("\"There is a group of people who do not encourage my studies. We do not get along at all. I think they have something against healers which goes beyond simple distrust. Dost thou know whom I mean?\"");
@@ -21030,18 +21518,20 @@ void Func0423 object#(0x423) ()
 				}
 				UI_remove_answer("others");
 				UI_add_answer("Fellowship");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"They have a doctrine which outlines their beliefs. They believe if one is faced with pain, then he has no choice but to go through it in order to be a 'better person'. I do not agree with this. No one should ever go through needless pain. But... they are entitled to their own opinions.\"");
 				say();
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "services":
 				Func0870(0x0028, 0x001E, 0x01C2);
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye, Avatar.\"*");
 		say();
@@ -21086,38 +21576,45 @@ void Func0424 object#(0x424) ()
 				message("\"My name is Zella.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am a trainer. I specialize in hand-to-hand combat. After all, a fighter never knows when he might encounter an adversary and suddenly realize he is unarmed. I call it 'boxing'. Boxing is not only a method of fighting -- it is an art.\"");
 				say();
 				UI_add_answer(["combat", "train"]);
+				fallthrough;
 
 			case "combat":
 				message("\"The field of battle contains many arenas. Almost any situation could arise. Every fighter should be knowledgeable and adept at many forms of combat. I have mine own theory of fighting.\"");
 				say();
 				UI_remove_answer("combat");
 				UI_add_answer(["arenas", "theory"]);
+				fallthrough;
 
 			case "arenas":
 				message("\"All the various arenas of combat, all the various styles one may learn in fighting with various weapons, are not fighting in its purest form. To truly be a great fighter one must go to the source of all fighting knowledge.\"");
 				say();
 				UI_remove_answer("arenas");
+				fallthrough;
 
 			case "theory":
 				message("\"Just as a castle is built from the foundation up, so must a fighter. One cannot simply begin by learning to fight with weapons. Weapons are merely an extension of a person's extremities. A true fighter learns by using those extremities first.\"");
 				say();
 				UI_remove_answer("theory");
 				UI_add_answer(["fighter", "extremities"]);
+				fallthrough;
 
 			case "fighter":
 				message("\"Make no mistake. Fighters are made, not born. All the natural talent in the world will avail thee naught if one does not have the heart and the will to win. Part of that will is the courage to seek out thine own limitations and strive to better them.\"");
 				say();
 				UI_remove_answer("fighter");
+				fallthrough;
 
 			case "extremities":
 				message("\"Thine arms. Thy legs. Thy fists. This is what makes 'boxing'.\"");
 				say();
 				UI_remove_answer("extremities");
+				fallthrough;
 
 			case "train":
 				if (var0001 == 0x001D)
@@ -21140,10 +21637,10 @@ void Func0424 object#(0x424) ()
 					say();
 					UI_remove_answer("train");
 				}
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good day to thee.\"*");
 		say();
@@ -21263,6 +21760,7 @@ void Func0425 object#(0x425) ()
 				message("\"I'm Lucy!\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I run The Blue Boar. Oldest tavern in Britannia.\"");
@@ -21293,6 +21791,7 @@ void Func0425 object#(0x425) ()
 					message("\"I shall be happy to serve thee something if thou dost come to the pub during open hours!\"");
 					say();
 				}
+				fallthrough;
 
 			case "Blue Boar":
 				message("\"Smashing place for a revel! It hath been here for ages! I inherited it from my grandfather. I enjoy it because I love to cook. And eat.\" She laughs. \"And drink!\" She laughs again.~~\"But mostly I like it because I meet so many interesting people. Just like thee, ");
@@ -21301,6 +21800,7 @@ void Func0425 object#(0x425) ()
 				say();
 				UI_remove_answer("Blue Boar");
 				UI_add_answer(["revel", "people"]);
+				fallthrough;
 
 			case "revel":
 				message("\"Thou dost look like the kind of person who doth enjoy a fair bit of revelry!");
@@ -21318,11 +21818,13 @@ void Func0425 object#(0x425) ()
 				}
 				UI_remove_answer("revel");
 				UI_add_answer("revelry");
+				fallthrough;
 
 			case "revelry":
 				message("Lucy laughs. \"Revelry! Singing! Dancing! Eating! Drinking! All in a time and place where one may stop and enjoy life! I can see it hath been too long since thou hast sampled the simple pleasures of life in Britannia!\"");
 				say();
 				UI_remove_answer("revelry");
+				fallthrough;
 
 			case "The Avatars":
 				message("\"They are a popular local singing group. I am sure thou wilt like them, ");
@@ -21330,34 +21832,39 @@ void Func0425 object#(0x425) ()
 				message("!\"");
 				say();
 				UI_remove_answer("The Avatars");
+				fallthrough;
 
 			case "people":
 				message("\"Oh, I so enjoy meeting men who like to go out and 'kill' things!\"");
 				say();
 				UI_remove_answer("people");
+				fallthrough;
 
 			case "food":
 				message("\"Everything I serve is delicious. I highly recommend that thou tasteth the Silverleaf dish. Worth every gold piece spent!\"");
 				say();
 				UI_remove_answer("food");
 				UI_add_answer("Silverleaf");
+				fallthrough;
 
 			case "drink":
 				message("\"I serve Britain's finest ale and wine.\"");
 				say();
 				UI_remove_answer("drink");
+				fallthrough;
 
 			case "Silverleaf":
 				message("\"It's made from the root of a very rare tree. Quite superb, it is!\"");
 				say();
 				UI_remove_answer("Silverleaf");
+				fallthrough;
 
 			case "buy":
 				Func08B7();
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Talk to thee later!\"*");
 		say();
@@ -21412,50 +21919,59 @@ void Func0426 object#(0x426) ()
 				message("\"Why, my name is Greg. It is good to see thee.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"Why, I run the Provisioner's Shop here in Britain. A second home to the intrepid, it is.\"");
 				say();
 				UI_add_answer(["Provisioner's Shop", "Britain", "buy"]);
+				fallthrough;
 
 			case "Provisioner's Shop":
 				message("\"Why, thou dost look to be a person to whom adventure is no stranger. Whether thou art climbing a mountain, sailing the ocean, crossing a desert, exploring a dungeon or sleeping under the stars I have just what thou mayest need.\"");
 				say();
 				UI_remove_answer("Provisioner's Shop");
 				UI_add_answer("need");
+				fallthrough;
 
 			case "Britain":
 				message("\"I have moved my store here as a service to Lord British, who uses me exclusively to outfit all of his various expeditions. It is true!\"");
 				say();
 				UI_remove_answer("Britain");
 				UI_add_answer(["moved", "Lord British"]);
+				fallthrough;
 
 			case "moved":
 				message("\"I used to have my shop in Paws. But no one in Paws has the money to buy much of anything.\"");
 				say();
 				UI_remove_answer("moved");
+				fallthrough;
 
 			case "need":
 				message("\"What every adventurer needs is good luck! There is just something about this shop, about the items bought here, something about me and my shop that is simply very lucky. I can give thee an example of what I mean.\"");
 				say();
 				UI_remove_answer("need");
 				UI_add_answer(["lucky", "example"]);
+				fallthrough;
 
 			case "example":
 				message("\"A fighting man named Gorn once bought a shovel from me and he told me that it saved his life.\"");
 				say();
 				UI_add_answer(["Gorn", "saved his life"]);
 				UI_remove_answer("example");
+				fallthrough;
 
 			case "Gorn":
 				message("\"Perhaps thou knowest of Gorn. He speaks with a most peculiar accent!\"");
 				say();
 				UI_remove_answer("Gorn");
+				fallthrough;
 
 			case "saved his life":
 				message("\"Gorn wanted to dig for some buried treasure somewhere, when he heard some noises behind him. Upon turning, he was horrified to see a swarm of undead skeletons rushing toward him! In his haste to dig up the treasure, he had unbuckled his belt and laid down his sword. The only thing in his hands was the shovel. He immediately began swinging it and ended up knocking all the skeletons to bits! He now considers it his 'lucky shovel'!\"");
 				say();
 				UI_remove_answer("saved his life");
+				fallthrough;
 
 			case "Lord British":
 				message("\"This is Lord British's favorite provisionary shop. He told me so himself. All sorts of famous adventurers pass through these doors. Why, just last week, we had the Avatar himself in this, my very own store!\"");
@@ -21475,26 +21991,31 @@ void Func0426 object#(0x426) ()
 				}
 				UI_add_answer("another Avatar?");
 				UI_remove_answer("Lord British");
+				fallthrough;
 
 			case "another Avatar?":
 				message("\"Well, he said he was the Avatar. But then it is not all that unusual encountering some loon or fool who claims to be the Avatar!\" He looks at you and for a moment appears a little embarrassed.");
 				say();
 				UI_remove_answer("another Avatar?");
+				fallthrough;
 
 			case "dressed like Avatar":
 				message("\"He was dressed like the Avatar, similarly to how thou art presently attired. At first I thought it was Jesse, the actor who is playing the Avatar in the play by that director... What is his name again?~~\"Oh, well. It was not him.\"");
 				say();
 				UI_remove_answer("dressed like Avatar");
+				fallthrough;
 
 			case "robbed you blind?":
 				message("\"Thou wouldst think that one who appears to be like the Avatar would be worthy of trust. But, no. In this day and age there is no telling what to expect!\"");
 				say();
 				UI_remove_answer("robbed you blind?");
+				fallthrough;
 
 			case "lucky":
 				message("\"My customers are all people who go out and perform dangerous feats of bravery and derring-do. But most keep returning to buy more provisions time and again. With all the dangerous things my customers do, it is a wonder I have not lost them all and gone out of business!\"");
 				say();
 				UI_remove_answer("lucky");
+				fallthrough;
 
 			case "buy":
 				if (!(var0002 == 0x0007))
@@ -21509,10 +22030,10 @@ void Func0426 object#(0x426) ()
 					Func0899();
 				}
 				UI_remove_answer("buy");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good day to thee, ");
 		message(var0000);
@@ -21599,37 +22120,42 @@ void Func0427 object#(0x427) ()
 				message("The musician nods at you. \"I am Neno.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am studying to be the greatest bard that Britannia has ever known. I probably already -am- the greatest bard Britannia has ever known.\" You note that Neno is not at all modest.");
 				say();
 				UI_add_answer(["bard", "studying"]);
+				fallthrough;
 
 			case "bard":
 				message("\"It is a great honor to be a bard. Thou art someone who gives pleasure to other people, while at the same time fulfilling a creative urge within thyself. It is truly magical. I know this from mine experience playing with The Avatars.\"");
 				say();
 				UI_remove_answer("bard");
 				UI_add_answer("The Avatars");
+				fallthrough;
 
 			case "studying":
 				message("\"The Music Hall provides a great environment for study. Judith is a wonderful teacher, and the opportunities here are of the highest quality. One day I shall travel the world and entertain the common folk and nobles alike.\"");
 				say();
 				UI_remove_answer("studying");
 				UI_add_answer("entertain");
+				fallthrough;
 
 			case "entertain":
 				message("\"It is my dream to be famous throughout the land. I shall tour the country every year, and play in the largest pubs in every town.\" He winks at you. \"I shall be assured of wooing the women, dost thou not think?\"");
 				say();
 				UI_remove_answer("entertain");
+				fallthrough;
 
 			case "The Avatars":
 				message("\"'Tis a singing group I play with. We play at The Blue Boar every evening. Please, come listen to us.\" Neno leans in to whisper, \"But I plan to begin performing alone very soon. I am obviously the most talented member of the quartet.\"");
 				say();
 				UI_remove_answer("The Avatars");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Farewell! Thou must watch the postings for our performance dates!\"*");
 		say();
@@ -21688,45 +22214,53 @@ void Func0428 object#(0x428) ()
 				message("\"I am Judith. And I already know who thou art!\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I teach music at The Music Hall. I also fatten my purse a bit by playing with The Avatars!\"");
 				say();
 				UI_add_answer(["music", "Music Hall", "The Avatars"]);
+				fallthrough;
 
 			case "music":
 				message("\"Music is my life. I know I will never be a famous bard, but I receive great pleasure from playing and performing. I enjoy teaching as well.\"");
 				say();
 				UI_remove_answer("music");
 				UI_add_answer("teaching");
+				fallthrough;
 
 			case "Music Hall":
 				message("\"Lord British appointed me music teacher a couple of years ago. It is a wonderful job!\"");
 				say();
 				UI_remove_answer("Music Hall");
+				fallthrough;
 
 			case "The Avatars":
 				message("\"We are a singing group. We play at the Blue Boar every evening. Please come and hear us! My pupil, Neno, is in the group. We hope to tour the country next year, if we can raise the funds.\"");
 				say();
 				UI_remove_answer("The Avatars");
+				fallthrough;
 
 			case "teaching":
 				message("\"It fulfills my life's purpose to teach others. It also gives me time away from home.\"");
 				say();
 				UI_remove_answer("teaching");
 				UI_add_answer("home");
+				fallthrough;
 
 			case "home":
 				message("\"Oh, I do not want to speak about mine home. Mine husband and I... well, we are not altogether... happy.\"");
 				say();
 				UI_remove_answer("home");
 				UI_add_answer("husband");
+				fallthrough;
 
 			case "husband":
 				message("\"Thou mightest know him. He is Patterson, the Town Mayor. He is an intelligent and honest man, but we have our differences.~~\"I do not know why I am telling thee all of this!\"");
 				say();
 				UI_remove_answer("husband");
 				UI_add_answer("differences");
+				fallthrough;
 
 			case "differences":
 				message("\"Well, for one thing, he is a member of that group, The Fellowship. Another thing is that he does not spend too much time at home. I cannot believe he works so much.\"");
@@ -21734,20 +22268,22 @@ void Func0428 object#(0x428) ()
 				gflags[0x0081] = true;
 				UI_remove_answer("differences");
 				UI_add_answer(["Fellowship", "works"]);
+				fallthrough;
 
 			case "Fellowship":
 				message("\"They seem to have taken over our lives. They seem to have taken over our country!\"");
 				say();
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "works":
 				message("\"He is always saying he has to work late. Some nights he comes home before dawn. Other nights he is out the entire night.~~\"Well, I must not think about it. I only become saddened. I must concentrate on my music.\"");
 				say();
 				UI_remove_answer("works");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("Judith goes back to her instrument after a smile and a wave.*");
 		say();
@@ -21838,6 +22374,7 @@ void Func0429 object#(0x429) ()
 				message("\"My name is Candice,\" she says brightly. \"I must say I am honored to meet the Avatar!\" She curtsies.");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the curator of the Royal Museum.");
@@ -21855,12 +22392,14 @@ void Func0429 object#(0x429) ()
 				message("\"I spend the rest of my time working with The Fellowship.\"");
 				say();
 				UI_add_answer(["Royal Museum", "exhibits", "Fellowship"]);
+				fallthrough;
 
 			case "Royal Museum":
 				message("\"It has been in Britain for many, many years. It contains historical artifacts, as well as works of art.\"");
 				say();
 				UI_remove_answer("Royal Museum");
 				UI_add_answer(["artifacts", "works of art"]);
+				fallthrough;
 
 			case "exhibits":
 				if (var0000 == 0x0007)
@@ -21875,11 +22414,13 @@ void Func0429 object#(0x429) ()
 					say();
 				}
 				UI_remove_answer("exhibits");
+				fallthrough;
 
 			case "artifacts":
 				message("\"There are relics from early Britannia and even from the Three Ages of Darkness -- back when Britannia was known as Sosaria.\"");
 				say();
 				UI_remove_answer("artifacts");
+				fallthrough;
 
 			case "Avatar artifacts":
 				message("\"Well, thou surely must recognize them. They are supposed to be authentic! Things like the Silver Horn and the eight stones. I understand the stones were used for teleportation, and if mages were not so sick in the head these days, they could cast a 'Recall' spell on them to teleport to specific places around Britannia. I believe if one casts a 'Mark' spell on one, thou canst re-assign the teleportation location! But I suppose none of that works anymore.\"");
@@ -21894,11 +22435,13 @@ void Func0429 object#(0x429) ()
 					UI_show_npc_face(0xFFD7, 0x0000);
 				}
 				UI_remove_answer("Avatar artifacts");
+				fallthrough;
 
 			case "works of art":
 				message("\"Britannia is proud of the artists who donate their works to the museum. Thou wilt see pieces all over the country by Britannian artists Watson, Richard Fox, Randi Frank, Glen Johnson, and Denis Loubet.\"");
 				say();
 				UI_remove_answer("works of art");
+				fallthrough;
 
 			case "Fellowship":
 				if (!var0001)
@@ -21915,18 +22458,21 @@ void Func0429 object#(0x429) ()
 				say();
 				UI_remove_answer("Fellowship");
 				UI_add_answer(["purpose", "secret"]);
+				fallthrough;
 
 			case "purpose":
 				message("\"I want to attain a higher level of acceptance in The Fellowship. I want to hear the 'voice'. That is mine one true goal.\"");
 				say();
 				UI_remove_answer("purpose");
 				UI_add_answer("voice");
+				fallthrough;
 
 			case "voice":
 				message("\"Dost thou not know? The longer one is a member of The Fellowship, the greater the chances that one will hear the 'voice'. Supposedly, it is a man's voice that thou wilt hear -- perhaps in thy dreams, perhaps while thou art concentrating on something else -- it is a voice that tells thee things, suggests things. I do not know, really. I have not heard it yet, so I am only speaking of what I have heard from others more fortunate than I.\"");
 				say();
 				UI_remove_answer("voice");
 				gflags[0x008C] = true;
+				fallthrough;
 
 			case "secret":
 				message("\"What secret? I do -not- have a secret! It was a slip of the tongue. I cannot really speak to anyone about it. Why, if word got out that the Mayor and I... I mean, uhm, -may- I... er, ask thee to forget that I said anything?\"~~Candice turns beet red and turns away.*");
@@ -21936,7 +22482,6 @@ void Func0429 object#(0x429) ()
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good day, Avatar.\"*");
 		say();
@@ -22004,17 +22549,20 @@ void Func042A object#(0x42A) ()
 				message("\"My name is Cynthia.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the teller at the Mint. I am also a member of the Britannian Tax Council.\"");
 				say();
 				UI_add_answer(["Mint", "Britannian Tax Council"]);
+				fallthrough;
 
 			case "Mint":
 				message("\"Here at the Mint we store gold, oversee production of coins and keep an accurate count of how much money the kingdom has available for such things as farming, building the roads, developing sources of fresh water, seeing to the health of the citizenry, maintaining the estates of nobles, raising the guard militia and carrying out the decrees of Lord British.\"");
 				say();
 				UI_remove_answer("Mint");
 				UI_add_answer(["money", "farms", "roads", "water", "health", "estates", "guards"]);
+				fallthrough;
 
 			case "Britannian Tax Council":
 				message("\"The Britannian Tax Council is in charge of the accounting, assessment and collection of the taxes. If thou wilt be earning any money here in Britannia thou wilt need to take this paper.\"");
@@ -22031,6 +22579,7 @@ void Func042A object#(0x42A) ()
 					say();
 				}
 				UI_remove_answer("Britannian Tax Council");
+				fallthrough;
 
 			case "money":
 				message("\"In order to keep the standard of money constant, we also operate as an exchange for those who possess quantities of gold.~~We supply the equivalent value of their gold in spendable coin of the realm and then transform the gold we receive into more money. So, as thou canst see, it is a very efficient system.\"");
@@ -22038,41 +22587,49 @@ void Func042A object#(0x42A) ()
 				gflags[0x00DC] = true;
 				UI_remove_answer("money");
 				UI_add_answer(["exchange", "system"]);
+				fallthrough;
 
 			case "farms":
 				message("\"As I am certain thou dost know, the seven year drought, which thankfully ended several years ago, has left much of the farming in the Kingdom in disarray. That is why the cost of food is so expensive. But without the support of the Royal Treasury, the prices would be even higher.\"");
 				say();
 				UI_remove_answer("farms");
+				fallthrough;
 
 			case "roads":
 				message("\"The increased use of wagons has caused many of the roads throughout Britannia to rapidly deteriorate. It costs a lot of money to build new roads and keep them all repaired.\"");
 				say();
 				UI_remove_answer("roads");
+				fallthrough;
 
 			case "water":
 				message("\"It is of the utmost importance to the Kingdom to insure its populous a clean water supply, and that requires a regular supply of new and fresh wells.\"");
 				say();
 				UI_remove_answer("water");
+				fallthrough;
 
 			case "health":
 				message("\"As Britannia's population has greatly increased in the last two hundred years, so has the risk of infectious diseases, such as the mysterious skin deterioration that afflicts those who partake in the venom of the silver serpent. The number of healers that the Kingdom needs has risen dramatically.\"");
 				say();
 				UI_remove_answer("health");
+				fallthrough;
 
 			case "estates":
 				message("\"The local Lords and Mayors all have residences that are maintained through the auspices of the Kingdom.\"");
 				say();
 				UI_remove_answer("estates");
+				fallthrough;
 
 			case "guards":
 				message("\"The military training is conducted at Serpent's Hold, where the guards that protect all of the towns and cities of Britannia are instructed. 'Tis funded by the Royal Treasury.\"");
 				say();
 				UI_remove_answer("guards");
+				fallthrough;
 
 			case "system":
 				message("\"It not only applies to gold but it also applies to all minerals. We oversee the sale and rate of exchange for precious ores extracted by the Britannian Mining Company. But we do not handle the sale of gems. There is a jeweler in town who handles that.\"");
 				say();
 				UI_remove_answer("system");
+				fallthrough;
 
 			case "exchange":
 				var0003 = UI_get_schedule_type(UI_get_npc_object(0xFFD6));
@@ -22138,16 +22695,17 @@ void Func042A object#(0x42A) ()
 					say();
 				}
 				UI_remove_answer("exchange");
+				fallthrough;
 
 			case "James":
 				message("\"James is mine husband and I am very worried about him. I know he is feeling very unhappy lately and he dislikes his job. If thou dost speak to him please tell him that even though we have not been speaking very much lately, that I am still thinking of him and that I still care about him.\"");
 				say();
 				UI_remove_answer("James");
 				gflags[0x0092] = true;
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good day, ");
 		message(var0000);
@@ -22262,17 +22820,20 @@ void Func042B object#(0x42B) ()
 				message("\"I am Patterson. Named after my father.\" He holds his hand out, takes yours, and shakes it firmly. \"It is such a pleasure to meet the Avatar!\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"Why, I am the Town Mayor! The Town Mayor of Britain, that is! I would have thee know that mine election was an overwhelming victory! Mine opponent never had a chance!~~ \"I am also President of the Britannian Tax Council.\"");
 				say();
 				UI_add_answer(["election", "opponent", "Tax Council"]);
+				fallthrough;
 
 			case "election":
 				message("\"It was held two years ago. I received 84 percent of the votes. It was an impressive victory, I must admit.~~ \"Of course, when one has a group like The Fellowship behind them...\"");
 				say();
 				UI_remove_answer("election");
 				UI_add_answer("Fellowship");
+				fallthrough;
 
 			case "opponent":
 				message("\"He was an old farmer named Brownie. Didn't have much money to put into a campaign. Even the peasants didn't support him.\"");
@@ -22280,6 +22841,7 @@ void Func042B object#(0x42B) ()
 				UI_remove_answer("opponent");
 				UI_add_answer("peasants");
 				gflags[0x007F] = true;
+				fallthrough;
 
 			case "Fellowship":
 				message("\"My life has improved greatly since I joined. I find that mine honesty is impeccable, my leadership is unchallengeable, and my love for my wife is irreproachable.");
@@ -22296,12 +22858,14 @@ void Func042B object#(0x42B) ()
 				}
 				UI_remove_answer("Fellowship");
 				UI_add_answer(["honesty", "wife"]);
+				fallthrough;
 
 			case "peasants":
 				message("\"Did I say that? I certainly did not mean it. There is no class system in Britain anymore, nor in the entire country, for that matter! What I meant is that the 'peasantry', that is, those people who are not of superior lineage -- which is the type of man Brownie is -- -they- did not support him either. They knew who would be the best leader!\"");
 				say();
 				UI_remove_answer("peasants");
 				UI_add_answer("superior");
+				fallthrough;
 
 			case "superior":
 				message("\"Did I say that? I do not think I really meant that the way it sounded. What I meant to say was that there are people who come from families of better standing than others. And Brownie is not one of them! But do not misunderstand me -- I still maintain that the class system in Britannia has been abolished!\"");
@@ -22311,11 +22875,13 @@ void Func042B object#(0x42B) ()
 				{
 					UI_add_answer("Nanna");
 				}
+				fallthrough;
 
 			case "Nanna":
 				message("\"She said what? Well, she's wrong! And to think she is a 'brother'. One of The Fellowship! I shall have to speak to Batlin about her.\"~~You notice that Patterson seems ill-at-ease.");
 				say();
 				UI_remove_answer("Nanna");
+				fallthrough;
 
 			case "honesty":
 				message("\"I am obviously the most honest person in Britain! Perhaps I should move to Moonglow! Ha!\"");
@@ -22325,16 +22891,19 @@ void Func042B object#(0x42B) ()
 				{
 					UI_add_answer("Judith suspicious");
 				}
+				fallthrough;
 
 			case "wife":
 				message("\"Her name is Judith. She's the music teacher at The Music Hall. Perhaps thou hast met her. We have a wonderful relationship.\"");
 				say();
 				UI_remove_answer("wife");
+				fallthrough;
 
 			case "Tax Council":
 				message("\"The land must have some way of generating income. Taxes are the only solution. Every merchant and farmer is taxed. Anyone who works for a living is taxed.\"~~ \"The Britannian Tax Council has its main office in the Royal Mint.\"");
 				say();
 				UI_remove_answer("Tax Council");
+				fallthrough;
 
 			case "Judith suspicious":
 				message("\"Why, I do not know what she is talking about! I work late, that is all!\"");
@@ -22349,33 +22918,37 @@ void Func042B object#(0x42B) ()
 					UI_show_npc_face(0xFFD5, 0x0000);
 				}
 				UI_remove_answer("Judith suspicious");
+				fallthrough;
 
 			case "Candice":
 				message("Patterson's eyes widen and for a moment looks very nervous. But very quickly he regains his composure.~~ \"Candice? Why, she is a friend! A 'brother' at The Fellowship! That is all!\"");
 				say();
 				UI_remove_answer("Candice");
+				fallthrough;
 
 			case "body":
 				message("You relate what Lord British said about the murder in Britain a few years ago. Patterson nods.~~\"I remember it well. Quite gruesome, it was. There was a man named Finster who was running for public office. He was quite outspoken in his opinions, and I suppose this got him into trouble.\"");
 				say();
 				UI_remove_answer("body");
 				UI_add_answer("opinions");
+				fallthrough;
 
 			case "opinions":
 				message("\"He was trying to make many social changes. He wanted more power for the Great Council and the Britannian Tax Council, and he wanted to disband The Fellowship. Finster was a nobleman with too much ambition. Anyway, his beliefs must have provided him with a few enemies.\"");
 				say();
 				UI_remove_answer("opinions");
 				UI_add_answer("enemies");
+				fallthrough;
 
 			case "enemies":
 				message("\"How should I know? Anyway, his body was found in an abandoned building which is no longer standing. It used to be a storehouse of some kind, up near the castle. It was torn down a couple of years ago. The body was mutilated beyond belief. It was as if someone tied the poor man down with stakes and cut off all of his limbs. Finster was then beheaded. It was almost... what is the word... ritualistic!~~\"And that is all I remember. No one was ever arrested for the crime.\"");
 				say();
 				Func0911(0x0014);
 				UI_remove_answer("enemies");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("Patterson nods his head at you.*");
 		say();
@@ -22448,6 +23021,7 @@ void Func042C object#(0x42C) ()
 				message("\"From out the dawn, when sun doth rise,~\"Until next morn when moon must go,~\"I answer to thy beck and cries,~\"thine humble servant, Carrocio!\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"The puppet's curtain I unfurl,~\"And from mine hands the story's told,~\"For pleasure of a boy or girl,~\"To see doth cost one coin of gold.~\"To take good measure of thy power,~\"Forged in fire of virtue's heart,~\"To ring the bell this very hour,~\"Do test thy strength 'til thy muscles smart.\"");
@@ -22460,12 +23034,14 @@ void Func042C object#(0x42C) ()
 				message("\"Or dost thou wish to be a king?~\"Yonder sticks a sword in stone.~\"If thou canst only pull it out~ \"Thou wilt be the next upon the throne!\"");
 				say();
 				UI_add_answer(["puppet show", "see", "strength test"]);
+				fallthrough;
 
 			case "puppet show":
 				message("\"My childhood's eye spied father's toil,~\"A puppet's show of splendor royal.~\"Time's breeze has blown, My father's gone,~\"His child has grown, Regrets anon,~\"Gears and wheels move the moppets now, in need of no one,~\"And so I keep his carnival song playing on and on alone.\"");
 				say();
 				UI_remove_answer("puppet show");
 				UI_add_answer(["regrets", "gears and wheels"]);
+				fallthrough;
 
 			case "strength test":
 				if (!(var0002 == 0x0007))
@@ -22479,44 +23055,52 @@ void Func042C object#(0x42C) ()
 					say();
 				}
 				UI_remove_answer("strength test");
+				fallthrough;
 
 			case "gears and wheels":
 				message("\"I fear an end to my family craft, where the show is run by human heart,~\"But bones do age, not so machines, and we cannot simply replace a part.~\"I carry on as best I can, A machine to play my father's role,~\"Control the marionettes unseen, struggling to imbue them with a soul.\"");
 				say();
 				UI_remove_answer("gears and wheels");
+				fallthrough;
 
 			case "regrets":
 				message("\"The faces pressed before me, fleeting moments chance of glee, From the lowly mongrel beggar to the resident of throne,~\"Each know their place and gave me chase to find the one for me, Woman whom my life may share, this heart that waits alone.\"");
 				say();
 				UI_remove_answer("regrets");
 				UI_add_answer(["mongrel beggar", "resident of throne", "woman"]);
+				fallthrough;
 
 			case "mongrel beggar":
 				message("\"A beggar man called Snaz will come to watch my show, ~\"to steal and sell all my best jokes, mine own personal foe.\"");
 				say();
 				UI_remove_answer("mongrel beggar");
+				fallthrough;
 
 			case "resident of throne":
 				message("\"Thine ignorance doth make me skittish,~\"surely thou hast heard of wise Lord British.\"");
 				say();
 				UI_remove_answer("resident of throne");
+				fallthrough;
 
 			case "woman":
 				message("\"The awakening of mine heart's idyll,~\"Lies 'neath me for I see her still,~\"No bard could e'er describe nor tell,~\"the tenderness of my fair Nell.\"");
 				say();
 				UI_remove_answer("woman");
 				UI_add_answer("Nell");
+				fallthrough;
 
 			case "Nell":
 				message("\"'Tis said love is a fiery angel,~\"Riding soft silk wings of pure redemption,~\"My puppet's heart still as an anvil,~\"At the wicked thrill of her attention.~\"By mine angel Nell I am anointed,~\"Humble cowardice felled by Passion's blade,~\"As her beloved I was hence appointed,~\"Perchance through destiny a marriage made.\"");
 				say();
 				UI_remove_answer("Nell");
 				UI_add_answer(["wicked thrill", "marriage"]);
+				fallthrough;
 
 			case "wicked thrill":
 				message("Carrocio looks as if he is lost in a memory. After a moment he returns to reality.~~\"I would not be a gentleman if I spoke of this more, Forgive me the candor of mine heart's open door.\"~He appears somewhat embarrassed and clears his throat loudly several times.");
 				say();
 				UI_remove_answer("wicked thrill");
+				fallthrough;
 
 			case "marriage":
 				message("\"My coins are arrows rushing to make good,~\"'Til the day when the jeweller sells his ring,~\"For my sure heart is not but carved from wood,~\"And she doth tend to the bed of a king.\"");
@@ -22526,6 +23110,7 @@ void Func042C object#(0x42C) ()
 				{
 					UI_add_answer("Nell with child");
 				}
+				fallthrough;
 
 			case "Nell with child":
 				message("Carrocio gives you a shocked look and drops to his knees before you. \"I beseech thee, ");
@@ -22549,6 +23134,7 @@ void Func042C object#(0x42C) ()
 					}
 				}
 				UI_remove_answer("Nell with child");
+				fallthrough;
 
 			case "Charles is angry":
 				message("\"I am grateful for thine honesty about thy lack of care,~\"But why hast thou placed thyself in the center of our affair?~\"For Nell's sake I could not bring myself to cause harm to her brother,~\"I shall convince him of mine intentions,~\"I love Nell and no other.~\"Leave me now for I must use this time to properly prepare.\"");
@@ -22577,7 +23163,6 @@ void Func042C object#(0x42C) ()
 
 			case "bye":
 				break;
-
 		}
 		message("\"Perchance to find in mercy's ear, A voice to know as gentle friend,~\"I bid thee well, but hark return, If thou wouldst see the puppet's play or test thy strength again.\"");
 		say();
@@ -22694,38 +23279,45 @@ void Func042D object#(0x42D) ()
 				message("\"I am Figg.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the caretaker of the Royal Orchards here in Britain.\"");
 				say();
 				UI_add_answer(["caretaker", "Royal Orchards"]);
+				fallthrough;
 
 			case "caretaker":
 				message("\"My responsibilities include caring for the trees, watching over the pickers at harvest time and protecting the Royal Orchard from thieves.\"");
 				say();
 				UI_add_answer(["trees", "pickers", "thieves"]);
 				UI_remove_answer("caretaker");
+				fallthrough;
 
 			case "trees":
 				message("\"Apple trees require constant care. I must make sure the trees all have enough water but not too much. I must keep all trees properly trimmed and be watchful so that the crop does not get infested by bugs or worms. I am also required to pick up all of the fallen apples, which is a job in itself.\"");
 				say();
 				UI_remove_answer("trees");
+				fallthrough;
 
 			case "pickers":
 				message("\"Most of them are migrant farmers from Paws. Because they were once farmers, they are convinced they know more about the upkeep of the orchard than I! Of course that is preposterous. Also the pickers do not take orders very well.\"");
 				say();
 				UI_remove_answer("pickers");
+				fallthrough;
 
 			case "thieves":
 				message("\"They would rob us down to the last twig if I gave them the chance! I should be awarded a medal from Lord British himself the way I risk my very life and limb protecting this orchard. Why, I just caught another thief recently. His name was Weston.\"");
 				say();
 				UI_remove_answer("thieves");
 				UI_add_answer("Weston");
+				fallthrough;
 
 			case "Royal Orchards":
 				message("\"Here are grown the finest apples in all of Britannia. I would let thee sample one but it would be against the law as thou art obviously not of noble stock.\"");
 				say();
 				UI_remove_answer("Royal Orchards");
+				fallthrough;
 
 			case "Weston":
 				message("\"He now resides in the prison, thanks to me! I knew what he was up to from the moment I saw him! He had the look of a hardened apple thief so I had him nicked by the town guard.\"");
@@ -22736,22 +23328,26 @@ void Func042D object#(0x42D) ()
 					UI_add_answer("Fellowship");
 				}
 				UI_remove_answer("Weston");
+				fallthrough;
 
 			case "prison":
 				message("\"Yes, Weston is now living in our local prison. If thou dost not believe me, thou canst go there and see for thyself!\"");
 				say();
 				UI_remove_answer("prison");
+				fallthrough;
 
 			case "apple thief":
 				message("\"Oh, he came here with some sob story. But when one is as astute an observer of human behavior as I am, one can tell the true intent of people, which is often contrary to what they will say to thee!\"");
 				say();
 				UI_remove_answer("apple thief");
 				UI_add_answer(["sob story", "observer"]);
+				fallthrough;
 
 			case "sob story":
 				message("\"I do not recall, exactly. Something about his impoverished wife and family starving to death in Paws or some load of rubbish.\"");
 				say();
 				UI_remove_answer("sob story");
+				fallthrough;
 
 			case "observer":
 				message("\"Yes, I do consider myself to be a more than passable judge of character. And dost thou know how I became so?\"");
@@ -22769,10 +23365,12 @@ void Func042D object#(0x42D) ()
 					Func0919();
 				}
 				UI_remove_answer("observer");
+				fallthrough;
 
 			case "philosophy":
 				Func091A();
 				UI_remove_answer("philosophy");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"I am a member of the Fellowship, yes. But it would be a crime for me to give apples from the Royal Orchard to The Fellowship, and it would be a violation of my sacred duty. While selling apples is also a violation, I was only trying to do this man Weston a favor. And I suppose these accusations are the thanks I get? Hmph!\"");
@@ -22800,6 +23398,7 @@ void Func042D object#(0x42D) ()
 					UI_add_answer("buy");
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "buy":
 				message("\"I can do thee a favor as well. Wouldst thou like to buy one of these beautiful apples for the merest pittance of five gold coins?\"");
@@ -22847,10 +23446,10 @@ void Func042D object#(0x42D) ()
 					}
 				}
 				UI_remove_answer("buy");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"I can see that thou shouldst be on thy way.\"*");
 		say();
@@ -22912,28 +23511,33 @@ void Func042E object#(0x42E) ()
 				message("\"My name is James.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the proprietor of the inn.\"");
 				say();
 				UI_add_answer(["proprietor", "inn"]);
+				fallthrough;
 
 			case "proprietor":
 				message("\"It is just another way of saying that I am the man who is the desk clerk. Which thou mayest think is an easy job although it is not, I can assure thee.\"");
 				say();
 				UI_remove_answer("proprietor");
 				UI_add_answer(["desk clerk", "not easy"]);
+				fallthrough;
 
 			case "inn":
 				message("\"This place is called the Wayfarer's Inn. It has a long and substantial history in Britain. If thy grandparents ever came to town this is probably where they stayed.\"");
 				say();
 				UI_remove_answer("inn");
+				fallthrough;
 
 			case "desk clerk":
 				message("\"Of course, being desk clerk is not all I do. I must spend all day listening to people talk about their problems as if I am supposed to solve them!\"");
 				say();
 				UI_remove_answer("desk clerk");
 				UI_add_answer(["listening", "solve"]);
+				fallthrough;
 
 			case "listening":
 				message("\"That is correct, ");
@@ -22941,29 +23545,34 @@ void Func042E object#(0x42E) ()
 				message(". So if thou dost have a problem, allow me the courtesy of not having to hear all about it. Now what was it that I was saying again?\"");
 				say();
 				UI_remove_answer("listening");
+				fallthrough;
 
 			case "solve":
 				message("\"Maybe solving people's problems is an easy task for other innkeepers, but, not only am I bad at it, I have mine own problems as well.\"");
 				say();
 				UI_remove_answer("solve");
 				UI_add_answer("problems");
+				fallthrough;
 
 			case "problems":
 				message("\"I do not like my job! I never wanted to be an innkeeper, I just wanted to keep the place going after my father passed on. Now that I am married to Cynthia, I am more tied down than ever!\"");
 				say();
 				UI_remove_answer("problems");
 				UI_add_answer(["innkeeper", "Cynthia"]);
+				fallthrough;
 
 			case "innkeeper":
 				message("\"Instead of being an innkeeper I always secretly wanted to be a pirate! When I was not sailing the seas I would be living in Buccaneer's Den.\"");
 				say();
 				UI_remove_answer("innkeeper");
 				UI_add_answer(["pirate", "Buccaneer's Den"]);
+				fallthrough;
 
 			case "Buccaneer's Den":
 				message("\"As I understand it they have an excellent House of Games there as well as opulent baths. Or at least so I have heard from Gordon, the man who sells fish and chips.\"");
 				say();
 				UI_remove_answer("Buccaneer's Den");
+				fallthrough;
 
 			case "Cynthia":
 				message("\"Do not mistake my words, ");
@@ -22972,38 +23581,45 @@ void Func042E object#(0x42E) ()
 				say();
 				UI_remove_answer("Cynthia");
 				UI_add_answer("good husband");
+				fallthrough;
 
 			case "pirate":
 				message("\"Thou knowest for certain that few if any people would pour their troubles out to pirates. If I were a pirate I could get this bad foot replaced with a peg, too!\"");
 				say();
 				UI_remove_answer("pirate");
+				fallthrough;
 
 			case "good husband":
 				message("\"How can I make Cynthia happy on the pittance an innkeeper makes when all day long she is counting all that money in the mint? I know I cannot.\"");
 				say();
 				UI_remove_answer("good husband");
 				UI_add_answer(["happy", "mint"]);
+				fallthrough;
 
 			case "mint":
 				message("\"I know the nature of the heart, my good friend. After being exposed to such large sums of money she shall begin to covet it. As I cannot provide it, she shall leave me to give her heart to a wealthy man. Perhaps a merchant or a nobleman. The thought of it makes my blood boil.\"");
 				say();
 				UI_remove_answer("mint");
+				fallthrough;
 
 			case "not easy":
 				message("\"When one is an innkeeper one must run around all day long. If anyone wants anything thou art the one who must take care of it for them!\"");
 				say();
 				UI_remove_answer("not easy");
 				UI_add_answer(["run around", "room"]);
+				fallthrough;
 
 			case "run around":
 				message("\"I spend so much time running around that I have gotten a bad foot.\"");
 				say();
 				UI_remove_answer("run around");
+				fallthrough;
 
 			case "happy":
 				message("\"Already I can sense she is worried about our marriage. I know that there is something wrong between us.\"");
 				say();
 				UI_remove_answer("happy");
+				fallthrough;
 
 			case "room":
 				if (var0002 == 0x0007)
@@ -23055,15 +23671,16 @@ void Func042E object#(0x42E) ()
 					say();
 				}
 				UI_remove_answer("room");
+				fallthrough;
 
 			case "Cynthia said":
 				message("You repeat the words that Cynthia had said to you about him. A smile comes across his face. \"Aww, who wants to be a pirate anyway? I would hate that!\" With that he goes back to wiping the bar, but you notice that the smile is still there.");
 				say();
 				UI_remove_answer("Cynthia");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Oh, thou shalt just come back again wanting something else from me! I just know it!\"*");
 		say();
@@ -23115,6 +23732,7 @@ void Func042F object#(0x42F) ()
 				message("\"Jeanette, at thy service!\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I work for Lucy at the Blue Boar. I serve food and drinks.");
@@ -23144,25 +23762,30 @@ void Func042F object#(0x42F) ()
 					message("\"I work during the day and evening hours. Thou shouldst come by the pub then and we shall talk more!\"");
 					say();
 				}
+				fallthrough;
 
 			case "food":
 				message("\"Lucy is a good cook. I recommend everything. Especially Silverleaf.\"");
 				say();
 				UI_add_answer("Silverleaf");
 				UI_remove_answer("food");
+				fallthrough;
 
 			case "Silverleaf":
 				message("\"Wonderful dish. Try it!\"");
 				say();
 				UI_remove_answer("Silverleaf");
+				fallthrough;
 
 			case "drink":
 				message("\"Thou dost look like thou dost need a good drink!\"");
 				say();
 				UI_remove_answer("drink");
+				fallthrough;
 
 			case "buy":
 				Func08A0();
+				fallthrough;
 
 			case "Charles":
 				message("\"He spoke of me, did he? Well, he may think again! I cannot bring myself to socialize with the upper class. Those bourgeoisie rich men are obnoxious and egotistical. Besides, I am in love with another.\"");
@@ -23170,11 +23793,13 @@ void Func042F object#(0x42F) ()
 				gflags[0x007D] = true;
 				UI_remove_answer("Charles");
 				UI_add_answer(["upper class", "another"]);
+				fallthrough;
 
 			case "upper class":
 				message("\"They are all alike. They work in castles and have piles of gold and can have any woman they want! On the other hand, a humble merchant is the perfect man.\"");
 				say();
 				UI_remove_answer("upper class");
+				fallthrough;
 
 			case "another":
 				message("\"'Tis Willy the Baker! But he does not know it yet!\" she giggles.");
@@ -23199,10 +23824,10 @@ void Func042F object#(0x42F) ()
 				gflags[0x007E] = true;
 				Func0911(0x0014);
 				UI_remove_answer("another");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Farewell!\"*");
 		say();
@@ -23256,6 +23881,7 @@ void Func0430 object#(0x430) ()
 			message("\"My name is Amanda.\"");
 			say();
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			if (gflags[0x02DE])
@@ -23271,6 +23897,7 @@ void Func0430 object#(0x430) ()
 				UI_add_answer("quest");
 			}
 			UI_add_answer("half-sister");
+			fallthrough;
 
 		case "half-sister":
 			if (gflags[0x02DE])
@@ -23294,16 +23921,19 @@ void Func0430 object#(0x430) ()
 				UI_show_npc_face(0xFFD0, 0x0000);
 			}
 			UI_remove_answer("half-sister");
+			fallthrough;
 
 		case "inner peace":
 			message("\"Yes. Our lives have been dedicated to vengeance for so long that we feel adrift, aimless without it. We must find a new reason for living.~~\"We are considering joining The Fellowship, as they offer guidance for lost souls. But we must consider this longer. We are still unsure.\"");
 			say();
+			fallthrough;
 
 		case "quest":
 			message("\"We are on the trail of our father's murderer.\"");
 			say();
 			UI_remove_answer("quest");
 			UI_add_answer("killer");
+			fallthrough;
 
 		case "killer":
 			message("\"Our father was slain in a most violent manner by a vicious and terrible cyclops. He was impaled on a spear. It took several hours for him to die.\"~~She looks up, eyes glittering. \"Hast thou ever watched anyone die from a belly wound, ");
@@ -23312,6 +23942,7 @@ void Func0430 object#(0x430) ()
 			say();
 			UI_remove_answer("killer");
 			UI_add_answer(["cyclops", "impaled"]);
+			fallthrough;
 
 		case "cyclops":
 			message("\"We have been tracking this creature for years, ever since we completed our training. We have followed him from one end of Britannia to another. Sometimes he was just one step ahead of us. But now we know that we are nearer to him than we have ever been before.\"");
@@ -23325,6 +23956,7 @@ void Func0430 object#(0x430) ()
 				UI_show_npc_face(0xFFD0, 0x0000);
 			}
 			UI_remove_answer("cyclops");
+			fallthrough;
 
 		case "impaled":
 			message("\"Our father fought bravely for his life. He did not die easily. He died a hero's death. Although we may both die in the effort, we intend to give his murderer a death fit for a true villain.\"");
@@ -23338,6 +23970,7 @@ void Func0430 object#(0x430) ()
 				UI_show_npc_face(0xFFD0, 0x0000);
 			}
 			UI_remove_answer("impaled");
+			fallthrough;
 
 		case "Stay thine hand!":
 			message("You explain to Amanda what you have learned. Kalideth had gone mad when he fought with Iskander and the source of what is causing the problems with magic and the mage's minds - the thing that really killed Kalideth - has been destroyed.~~\"Thou hast robbed me of my rightful vengeance! How dare thee!\"");
@@ -23361,11 +23994,12 @@ void Func0430 object#(0x430) ()
 				gflags[0x02DE] = true;
 			}
 			abort;
+			// Dead code
 			UI_remove_answer("Stay thine hand!");
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	message("\"Good journey to thee, ");
 	message(var0000);
@@ -23407,11 +24041,13 @@ void Func0431 object#(0x431) ()
 				message("\"I am Denby.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am a trainer. I specialize in a form of combat which relies on one's ability to use intelligence and physical ability to activate minor magical effects. But I am not a mage. I am a fighter.\"");
 				say();
 				UI_add_answer(["magical effects", "fighter", "train"]);
+				fallthrough;
 
 			case "magical effects":
 				message("\"For example, I simply teach a combination of physical and mental exercises which increases one's intelligence. This, in turn, gives one an advantage if one desires to practice magic.\"");
@@ -23422,11 +24058,13 @@ void Func0431 object#(0x431) ()
 					say();
 				}
 				UI_remove_answer("magical effects");
+				fallthrough;
 
 			case "fighter":
 				message("\"Although I am a fighter, I have dedicated my life to peace. There has been too much fighting in the world as it is. Let history take care of the adversarial qualities which exist in man. I believe in using my skills as a deterrent.\"");
 				say();
 				UI_remove_answer("fighter");
+				fallthrough;
 
 			case "train":
 				if (var0001 == 0x0007)
@@ -23449,10 +24087,10 @@ void Func0431 object#(0x431) ()
 					say();
 					UI_remove_answer("train");
 				}
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("Denby puts his palms together and bows.*");
 		say();
@@ -23505,44 +24143,52 @@ void Func0432 object#(0x432) ()
 				message("\"My name is Fred.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I sell meats here at the Farmer's Market in Britain.\"");
 				say();
 				UI_add_answer(["meats", "Farmer's Market"]);
+				fallthrough;
 
 			case "meats":
 				message("\"They are the tastiest meats that thou canst buy. Do thyself a favor and try some.\"");
 				say();
 				UI_remove_answer("meats");
 				UI_add_answer("buy");
+				fallthrough;
 
 			case "Farmer's Market":
 				message("\"Here at the Farmer's Market we sell vegetables bought from the farmers just outside of town, as well as meats from the slaughterhouse in Paws.\"");
 				say();
 				UI_remove_answer("Farmer's Market");
 				UI_add_answer(["slaughterhouse", "Paws"]);
+				fallthrough;
 
 			case "slaughterhouse":
 				message("\"It is run by a man named Morfin, a very successful merchant from Buccaneer's Den.\"");
 				say();
 				UI_remove_answer("slaughterhouse");
 				UI_add_answer(["Morfin", "Buccaneer's Den"]);
+				fallthrough;
 
 			case "Morfin":
 				message("\"Morfin is an unusual character. If I did not know any better I would say he was involved with a number of shady business activities.\"");
 				say();
 				UI_remove_answer("Morfin");
+				fallthrough;
 
 			case "Buccaneer's Den":
 				message("\"Morfin left that place because he saw all of the commerce that was developing there as competition to his own business activities and moved to Paws.\"");
 				say();
 				UI_remove_answer("Buccaneer's Den");
+				fallthrough;
 
 			case "Paws":
 				message("\"Paws is a good place to go to buy things for low prices. Many of the people are rather poor, I am sorry to say. There is little active commerce there, however. In Paws, one must deal with people on a more personal level.\"");
 				say();
 				UI_remove_answer("Paws");
+				fallthrough;
 
 			case "buy":
 				if (!(var0002 == 0x0007))
@@ -23570,10 +24216,10 @@ void Func0432 object#(0x432) ()
 					}
 				}
 				UI_remove_answer("buy");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye, ");
 		message(var0000);
@@ -23656,53 +24302,63 @@ void Func0433 object#(0x433) ()
 				message(".\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"Mine husband Fred and I run the Farmer's Market.\"");
 				say();
 				UI_add_answer(["Fred", "Farmer's Market", "buy"]);
+				fallthrough;
 
 			case "Fred":
 				message("\"My Fred is one of the most respected merchants in Britain. He sells the eggs and vegetables grown by Brownie and Mack, as well as exotic imported fruits.\"");
 				say();
 				UI_remove_answer("Fred");
 				UI_add_answer(["eggs", "fruits and vegetables", "Brownie", "Mack"]);
+				fallthrough;
 
 			case "Farmer's Market":
 				message("\"The Farmer's Market is where most of Britain buys its food. Why even the people in Paws will come here to buy eggs and vegetables. Fred has never raised the price of anything since opening this market many years ago.\"");
 				say();
 				UI_remove_answer("Farmer's Market");
 				UI_add_answer(["Britain", "Paws"]);
+				fallthrough;
 
 			case "eggs":
 				message("\"Farmer Mack's chickens lay plenty of eggs. It is a good thing the people here have such healthy appetites!\"");
 				say();
 				UI_remove_answer("eggs");
+				fallthrough;
 
 			case "fruits and vegetables":
 				message("\"We sell those mostly to older people. Thou dost know, I am sure, how children do not like to eat their vegetables. Some people do not want to keep a lot of fruit in their home as they are afraid of attracting fruit flies.\"");
 				say();
 				UI_remove_answer("fruits and vegetables");
+				fallthrough;
 
 			case "Brownie":
 				message("\"Brownie is a good man. I do hope he runs for the mayorship again. If he does thou must be sure to vote for him.\"");
 				say();
 				UI_remove_answer("Brownie");
+				fallthrough;
 
 			case "Mack":
 				message("\"I do believe that poor old Mack has been cooped up with his chickens for too long. He is a good person. Do not be put off by the strange stories he doth tell. He rarely ever sleeps as he spends most of the night staring at the sky. Of course his rooster crows at dawn and no farmer can afford to sleep past the dawn. So his mind is a bit ragged.\"");
 				say();
 				UI_remove_answer("Mack");
+				fallthrough;
 
 			case "Britain":
 				message("\"Oh, in Britain they look for quality produce. I see the people who buy here look over every egg for cracks and every vegetable for any sign of spoilage.\"");
 				say();
 				UI_remove_answer("Britain");
+				fallthrough;
 
 			case "Paws":
 				message("\"The people of Paws are always short of money. Mine heart goes out to them. They are always looking to buy the least expensive items for it is all they can afford.\"");
 				say();
 				UI_remove_answer("Paws");
+				fallthrough;
 
 			case "buy":
 				if (!(var0002 == 0x0007))
@@ -23728,10 +24384,10 @@ void Func0433 object#(0x433) ()
 					}
 				}
 				UI_remove_answer("buy");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good day to thee, ");
 		message(var0000);
@@ -23840,6 +24496,7 @@ void Func0434 object#(0x434) ()
 				message("\"My given name is Wilhelm, although no one calls me that. I prefer to be addressed as Willy. Thank thee very much.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the baker here in Britain and I make the sweetest bread thou hast ever tasted! ");
@@ -23905,6 +24562,7 @@ void Func0434 object#(0x434) ()
 					message("\"Please come to the bakery when it is open in daytime hours and thou shalt sample some!\"");
 					say();
 				}
+				fallthrough;
 
 			case "baker":
 				message("He nods. \"Yes, I am a baker and I have many secret recipes passed down to me by my father and mother. Why, there are even those who say I am a master baker!");
@@ -23913,17 +24571,20 @@ void Func0434 object#(0x434) ()
 				say();
 				UI_remove_answer("baker");
 				UI_add_answer(["secret recipes", "father and mother", "master baker", "doughnut"]);
+				fallthrough;
 
 			case "secret recipes":
 				message("\"Oh, dear. Do not tell me that thou art yet another person who is trying to pry one of my secret recipes out of me! If that is what thou art after then thou wilt just be disappointed!\"");
 				say();
 				UI_remove_answer("secret recipes");
+				fallthrough;
 
 			case "father and mother":
 				message("Willy wipes away a tear. \"Gone. Both of them. Gone to join mine ancestors in that great kitchen in the sky. I will never be able to cook as they did. Still I plod along, trying to keep the family name alive, and that is why I am a baker. But I suppose it is not the only reason.\"");
 				say();
 				UI_remove_answer("father and mother");
 				UI_add_answer("why");
+				fallthrough;
 
 			case "master baker":
 				message("\"Yes, many people tell me that. Now thou dost say it, too. If thou dost say so, then it must be true!\"");
@@ -23931,45 +24592,53 @@ void Func0434 object#(0x434) ()
 				message("Willy takes a bite of his own bread. \"Mmmm. I -am- a master baker!\"");
 				say();
 				UI_remove_answer("master baker");
+				fallthrough;
 
 			case "doughnut":
 				message("He gives you a long puzzled look. After a moment he takes one of his loaves of bread and swats you over the head with it.");
 				say();
 				UI_remove_answer("doughnut");
+				fallthrough;
 
 			case "why":
 				message("\"Actually, there is a very good reason why I am a baker.\"");
 				say();
 				UI_remove_answer("why");
 				UI_add_answer("reason");
+				fallthrough;
 
 			case "reason":
 				message("\"Because the way to a woman's heart is through her stomach. Why, I have two women in love with me right now and I did not even have to pursue either one.\"");
 				say();
 				UI_remove_answer("reason");
 				UI_add_answer("two women");
+				fallthrough;
 
 			case "two women":
 				message("He sighs. \"If thou must know, their names are Jeanette and Gaye.\"");
 				say();
 				UI_remove_answer("two women");
 				UI_add_answer(["Jeanette", "Gaye"]);
+				fallthrough;
 
 			case "Jeanette":
 				message("\"Jeanette is a pleasant enough girl, but to be honest I cannot see myself with a tavern wench. She thinks I have not noticed how she feels about me. Frankly, I wish she would just leave me alone.\"");
 				say();
 				UI_remove_answer("Jeanette");
+				fallthrough;
 
 			case "Gaye":
 				message("\"Gaye, who runs the costume shoppe, is of more interest to me. But she is a Fellowship member and I have no wish to become one. I hope that it does not prevent us from courting.\"");
 				say();
 				UI_remove_answer("Gaye");
+				fallthrough;
 
 			case "bread":
 				message("\"My bread is the finest in Britannia. It is renown for both its pleasant taste and its very reasonable price. But it is a lot of work making enough to satisfy the constant demand for it. I need to hire someone to help me.\"");
 				say();
 				UI_remove_answer("bread");
 				UI_add_answer(["buy", "hire"]);
+				fallthrough;
 
 			case "buy":
 				if (var0002 == 0x0012)
@@ -23993,6 +24662,7 @@ void Func0434 object#(0x434) ()
 					say();
 				}
 				UI_remove_answer("buy");
+				fallthrough;
 
 			case "hire":
 				if (var0002 == 0x0012)
@@ -24031,18 +24701,20 @@ void Func0434 object#(0x434) ()
 					say();
 				}
 				UI_remove_answer("hire");
+				fallthrough;
 
 			case "made bread":
 				Func0947();
 				UI_remove_answer("made bread");
+				fallthrough;
 
 			case "sell flour":
 				Func0948();
 				UI_remove_answer("sell flour");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good day to thee, ");
 		message(var0000);
@@ -24155,16 +24827,19 @@ void Func0435 object#(0x435) ()
 				message("\"My name is Gaye.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I oversee the clothier's here in Britain when I am not pursuing the teachings of The Fellowship.\"");
 				say();
 				UI_add_answer(["clothiers", "buy", "Fellowship"]);
+				fallthrough;
 
 			case "clothiers":
 				message("\"At our clothier's shop we have the finest silks and garments to buy that thou hast ever seen, imported from every corner of Britannia to cater to all tastes.\"");
 				say();
 				UI_remove_answer("clothiers");
+				fallthrough;
 
 			case "buy":
 				if (!(var0003 == 0x0013))
@@ -24232,6 +24907,7 @@ void Func0435 object#(0x435) ()
 					}
 				}
 				UI_remove_answer("buy");
+				fallthrough;
 
 			case "Fellowship":
 				if (!var0001)
@@ -24242,15 +24918,16 @@ void Func0435 object#(0x435) ()
 				say();
 				UI_remove_answer("Fellowship");
 				UI_remove_answer("philosophy");
+				fallthrough;
 
 			case "Willy":
 				message("\"Yes, he is a very amusing fellow. I am quite taken with him and I do see him against my better judgment. He does not seem like the type to join The Fellowship, though. Since The Fellowship is my whole life, I do not know if there is a place in it for him. I have not made up my mind about that yet.\"");
 				say();
 				UI_remove_answer("Willy");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good day, ");
 		message(var0000);
@@ -24403,6 +25080,7 @@ void Func0436 object#(0x436) ()
 				message("\"My name is Coop.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the manager of Iolo's Bows! Master Iolo has entrusted me with this responsibility!");
@@ -24419,11 +25097,13 @@ void Func0436 object#(0x436) ()
 					say();
 				}
 				UI_add_answer(["Iolo's Bows", "responsibility"]);
+				fallthrough;
 
 			case "Iolo's Bows":
 				message("\"Iolo opened this shoppe many, many years ago. He opened Iolo's South in Serpent's Hold more recently. He is becoming quite an entrepreneur!\"");
 				say();
 				UI_remove_answer("Iolo's Bows");
+				fallthrough;
 
 			case "responsibility":
 				message("\"I sell many goods but I also plan to perpetuate the good name of Iolo by becoming a master archer! Iolo has taught me well!\"*");
@@ -24441,6 +25121,7 @@ void Func0436 object#(0x436) ()
 				say();
 				UI_remove_answer("responsibility");
 				UI_add_answer("singing");
+				fallthrough;
 
 			case "Iolo":
 				message("\"Hello, boss!\"*");
@@ -24453,29 +25134,33 @@ void Func0436 object#(0x436) ()
 				message("\"The same to thee, milord!\"*");
 				say();
 				UI_remove_answer("Iolo");
+				fallthrough;
 
 			case "singing":
 				message("\"My group is called... well, it is called 'The Avatars'. I hope that does not offend thee.\"");
 				say();
 				UI_remove_answer("singing");
 				UI_add_answer("The Avatars");
+				fallthrough;
 
 			case "The Avatars":
 				message("\"The band is just me and two musicians from The Music Hall. We play at the Blue Boar every night. I sing and write lyrics. The other two play the instruments. Please come to hear us!\"");
 				say();
 				UI_remove_answer("The Avatars");
+				fallthrough;
 
 			case "bows and arrows":
 				message("\"We sell all kinds of bows, along with arrows and bolts. If thou dost wish to buy something, please say so!\"");
 				say();
 				UI_remove_answer("bows and arrows");
+				fallthrough;
 
 			case "buy":
 				Func0863();
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye!\"*");
 		say();
@@ -24579,11 +25264,13 @@ void Func0437 object#(0x437) ()
 				message(". A humble and honest man.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"Why, here in Britain I sell the best armour and weapons that money can buy. In my spare time, I do deeds for The Fellowship.\"");
 				say();
 				UI_add_answer(["buy", "Fellowship"]);
+				fallthrough;
 
 			case "armour":
 				message("Grayson looks you up and down. \"Dost thou truly believe that thou art sufficiently protected in what thou art wearing? In truth I fear for thy safety if thou shouldst become involved in combat. Are thou interested in buying something today?\"");
@@ -24599,6 +25286,7 @@ void Func0437 object#(0x437) ()
 					UI_pop_answers();
 				}
 				UI_remove_answer("armour");
+				fallthrough;
 
 			case "weapons":
 				message("After looking at you, Grayson says, \"I can see that thou art in sore need of weaponry. Dost thou want to buy something today?\"");
@@ -24614,6 +25302,7 @@ void Func0437 object#(0x437) ()
 					UI_pop_answers();
 				}
 				UI_remove_answer("weapons");
+				fallthrough;
 
 			case "buy":
 				message("\"I sell a complete line of armour and weapons.\"");
@@ -24630,6 +25319,7 @@ void Func0437 object#(0x437) ()
 					message("\"Please come to the shop when it is open.\"");
 					say();
 				}
+				fallthrough;
 
 			case "Fellowship":
 				if (var0000)
@@ -24641,26 +25331,29 @@ void Func0437 object#(0x437) ()
 				say();
 				UI_remove_answer("Fellowship");
 				UI_add_answer(["beneficial", "out of business"]);
+				fallthrough;
 
 			case "beneficial":
 				message("\"I was never sufficiently forward or aggressive enough to be successful as a merchant but The Fellowship changed all that for me.\"");
 				say();
 				UI_remove_answer("beneficial");
 				UI_add_answer("changed");
+				fallthrough;
 
 			case "changed":
 				message("\"By applying the values of the Triad of Inner Strength to my life I have accomplished what I have set out to do with my life. Mine armour and weapon shop is successful and I have a place where I belong in The Fellowship.\"");
 				say();
 				UI_remove_answer("changed");
+				fallthrough;
 
 			case "out of business":
 				message("\"Thou dost see, I am convinced that my failures were all due to my bad attitude. It took the teachings of The Fellowship to change the way I used my mind and to turn me in the proper direction.\"");
 				say();
 				UI_remove_answer("out of business");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye and farewell, ");
 		message(var0004);
@@ -24745,22 +25438,26 @@ void Func0438 object#(0x438) ()
 				message("\"My name is Diane.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"My job is to oversee the stables here in Britain and sell thee a horse and carriage if thou dost want one.\"");
 				say();
 				UI_add_answer(["stables", "Britain", "carriage"]);
+				fallthrough;
 
 			case "stables":
 				message("\"Here thou wilt find a selection of the finest horses produced by Lord British's personal horse breeder. If thou dost wish to buy one, I am sure we can come to some sort of arrangement. They come with a carriage, of course.\"");
 				say();
 				UI_remove_answer("stables");
+				fallthrough;
 
 			case "Britain":
 				message("\"Britain is such a grand city, but it can be somewhat disconcerting if thou dost not know anyone. Fortunately, I know many people here.\"");
 				say();
 				UI_remove_answer("Britain");
 				UI_add_answer("people");
+				fallthrough;
 
 			case "carriage":
 				message("\"The horse and carriage combination sells for 120 gold. Thou shalt find it in a small shelter just south of the stables, across the street. Dost thou want a title?\"");
@@ -24796,40 +25493,46 @@ void Func0438 object#(0x438) ()
 					say();
 				}
 				UI_remove_answer("carriage");
+				fallthrough;
 
 			case "people":
 				message("\"I have many friends in Britannia. Among them are Greg, James, Brownie and Mack.\"");
 				say();
 				UI_remove_answer("people");
 				UI_add_answer(["Greg", "James", "Brownie", "Mack"]);
+				fallthrough;
 
 			case "Greg":
 				message("\"Greg runs a shop that sells provisions. If thou art planning any sort of expedition he is just the person to see. He seems to be lucky. Perhaps some of it will rub off on thee.\"");
 				say();
 				UI_remove_answer("Greg");
+				fallthrough;
 
 			case "James":
 				message("\"James, who runs an inn not far from here, wanted a life of adventure. His family wanted him to run the inn after his father died and he has been discontent ever since. Still, I think he fancies Cynthia who works at the Mint.\"");
 				say();
 				UI_remove_answer("James");
+				fallthrough;
 
 			case "Brownie":
 				message("\"Brownie is a decent and honest man who would have made a much better mayor than Patterson if thou dost want mine opinion. He uses our horses to plow his fields in the spring.\"");
 				say();
 				UI_remove_answer("Brownie");
+				fallthrough;
 
 			case "Mack":
 				message("\"One word of warning about Mack. Do not let him start talking about the sky. Other than that he is perfectly fine, I can assure thee.\"");
 				say();
 				UI_remove_answer("Mack");
+				fallthrough;
 
 			case "Fellowship":
 				message("Diane notices your Fellowship medallion. \"It is odd. If thou dost not mind me saying so, thou dost not seem like a Fellowship member. There is something about thee. I cannot place it.\"");
 				say();
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good day to thee, ");
 		message(var0000);
@@ -24894,23 +25597,27 @@ void Func0439 object#(0x439) ()
 				message("\"I be Clint.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"In my youth I was a sailor who sailed across the sea in tall ships. Now I must content myself solely with selling ships and sextants to others.\"");
 				say();
 				UI_add_answer(["sailor", "buy"]);
+				fallthrough;
 
 			case "sailor":
 				message("\"Of course this was in the day when it took mighty men to be a sailor. Nowadays those who set out to sea would not have lasted a day. But I suppose it is the nature of the universe that everything slowly becomes more tame.\"");
 				say();
 				UI_remove_answer("sailor");
 				UI_add_answer("tame");
+				fallthrough;
 
 			case "tame":
 				message("\"Soon all the monsters will die off and the whole world will join together in trust and worthiness and unity like all those Fellowship people say. Bah! The world was a better place when everybody fought everybody else, I say.\"");
 				say();
 				UI_remove_answer("tame");
 				UI_add_answer("Fellowship");
+				fallthrough;
 
 			case "Fellowship":
 				if (var0003)
@@ -24925,6 +25632,7 @@ void Func0439 object#(0x439) ()
 					say();
 					UI_remove_answer("Fellowship");
 				}
+				fallthrough;
 
 			case "buy":
 				if (var0001 == 0x0007)
@@ -24941,6 +25649,7 @@ void Func0439 object#(0x439) ()
 					say();
 				}
 				UI_remove_answer("buy");
+				fallthrough;
 
 			case "buy ship deed":
 				if (gflags[0x00D2])
@@ -24986,6 +25695,7 @@ void Func0439 object#(0x439) ()
 					}
 				}
 				UI_remove_answer("buy ship deed");
+				fallthrough;
 
 			case "buy sextant":
 				message("\"A sextant costs one hundred gold pieces. Does thou wish to buy one?\"");
@@ -25020,6 +25730,7 @@ void Func0439 object#(0x439) ()
 					say();
 				}
 				UI_remove_answer("buy sextant");
+				fallthrough;
 
 			case "Crown Jewel":
 				if (!gflags[0x0086])
@@ -25035,10 +25746,10 @@ void Func0439 object#(0x439) ()
 					UI_remove_answer("Crown Jewel");
 				}
 				UI_remove_answer("Crown Jewel");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"May thy travels do well.\" *");
 		say();
@@ -25145,11 +25856,13 @@ void Func043A object#(0x43A) ()
 				message("\"My name is Gordon.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I sell fish and chips from my wagon.\"");
 				say();
 				UI_add_answer(["fish and chips", "wagon"]);
+				fallthrough;
 
 			case "fish and chips":
 				if (!(var0003 == 0x0007))
@@ -25195,23 +25908,27 @@ void Func043A object#(0x43A) ()
 					}
 				}
 				UI_remove_answer("fish and chips");
+				fallthrough;
 
 			case "wagon":
 				message("\"I just painted my wagon recently. It receives more attention. Business is much better now. I am saving my money to travel to Buccaneer's Den.\"");
 				say();
 				UI_remove_answer("wagon");
 				UI_add_answer(["business", "Buccaneer's Den"]);
+				fallthrough;
 
 			case "business":
 				message("\"Ever since I became a member of The Fellowship, business has been increasing steadily. I have refined and improved the recipe for my fish batter and it has since become a favorite meal of nearly everyone in Britain. I have even served my fish and chips to Lord British himself.\"");
 				say();
 				UI_add_answer(["Fellowship", "Lord British"]);
 				UI_remove_answer("business");
+				fallthrough;
 
 			case "Lord British":
 				message("\"Thou dost know-- the bloke who wears a crown and acts like a king.\"");
 				say();
 				UI_remove_answer("Lord British");
+				fallthrough;
 
 			case "Fellowship":
 				if (var0001)
@@ -25235,35 +25952,40 @@ void Func043A object#(0x43A) ()
 					Func0919();
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "philosophy":
 				Func091A();
 				UI_remove_answer("philosophy");
+				fallthrough;
 
 			case "Buccaneer's Den":
 				message("\"I wish to win some money at Buccaneer's Den. It is a pirate resort and they have a fabulous House of Games there.\"");
 				say();
 				UI_add_answer(["pirate resort", "House of Games"]);
 				UI_remove_answer("Buccaneer's Den");
+				fallthrough;
 
 			case "pirate resort":
 				message("\"As I am certain thou knowest, Buccaneer's Den was once a den of thieves and villains. As such, it held a romantic appeal for those who longed for a taste of such an adventurous existence. I confess, I am one of those people. When thou dost spend thy life selling fish from a wagon, thou art in need of excitement. The pirates eventually realized just how much they are secretly envied, and so they have turned their island into a place of thrilling amusements.\"");
 				say();
 				UI_remove_answer("pirate resort");
+				fallthrough;
 
 			case "House of Games":
 				message("\"It is said they have several games of chance there! Gold can be won wagering on the outcome of a race of fine stallions.\"");
 				say();
 				UI_remove_answer("House of Games");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"I saw thee receive thy medallion. I can certainly say the Fellowship has done wonders for my life and I know it will be the same for thee as well.\" He gives thee a knowing grin.");
 				say();
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Have a pleasant day, ");
 		message(var0000);
@@ -25383,28 +26105,33 @@ void Func043B object#(0x43B) ()
 				message("\"My name is Sean.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"When not tending to Fellowship affairs, I am a jeweller here in Britain. If thou dost wish to buy something, say so!\"");
 				say();
 				UI_add_answer(["Fellowship", "jeweller", "Britain", "buy"]);
+				fallthrough;
 
 			case "jeweller":
 				message("\"It is very delicate work. It requires a special touch that only a few have. Thou must know precisely how to handle precious materials. Only the finest of craftsmen become jewellers and they receive the highest compensation.\"");
 				say();
 				UI_remove_answer("jeweller");
 				UI_add_answer(["precious materials", "finest craftsmen"]);
+				fallthrough;
 
 			case "precious materials":
 				message("\"I constantly require new materials with which to create my very special jewelry. I am always in the market to buy gems. If thou dost ever come across any, I am the man to come to if thou shouldst want to sell them and make money.\"");
 				say();
 				UI_remove_answer("precious materials");
 				UI_add_answer("gems");
+				fallthrough;
 
 			case "finest craftsmen":
 				message("\"As I have told thee, only the finest of craftsmen become jewellers, and I am the finest of jewellers. Does that not tell thee something?\" Sean sniffs. \"My business makes more money than the mint!\" He laughs forcibly.");
 				say();
 				UI_remove_answer("finest craftsmen");
+				fallthrough;
 
 			case "gems":
 				if (!(var0002 == 0x0007))
@@ -25489,6 +26216,7 @@ void Func043B object#(0x43B) ()
 					}
 				}
 				UI_remove_answer("gems");
+				fallthrough;
 
 			case "Fellowship":
 				if (var0003)
@@ -25506,6 +26234,7 @@ void Func043B object#(0x43B) ()
 				}
 				UI_remove_answer("Fellowship");
 				UI_add_answer("philosophy");
+				fallthrough;
 
 			case "philosophy":
 				message("\"Thou art really interested in hearing more?\"");
@@ -25521,12 +26250,14 @@ void Func043B object#(0x43B) ()
 					say();
 				}
 				UI_remove_answer("philosophy");
+				fallthrough;
 
 			case "Britain":
 				message("\"I moved mine entire business here to Britain to be near the main branch of The Fellowship. Thou hast no idea how much my business improved after I joined The Fellowship.\"");
 				say();
 				UI_remove_answer("Britain");
 				UI_add_answer("Fellowship");
+				fallthrough;
 
 			case "buy":
 				if (var0002 == 0x0007)
@@ -25549,10 +26280,10 @@ void Func043B object#(0x43B) ()
 					say();
 				}
 				UI_remove_answer("buy");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"I am sure thou must be on thy way.\" Sean smiles.*");
 		say();
@@ -25638,28 +26369,33 @@ void Func043C object#(0x43C) ()
 				message("\"I am Brownie.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"Well, I ran for the office of Mayor of Britain once, but I lost. Now I am back doing what I have been doing since I was a boy. Working the farm.\"");
 				say();
 				UI_add_answer(["Mayor", "farm"]);
+				fallthrough;
 
 			case "Mayor":
 				message("\"Patterson won the election. He spent a lot of money on his campaign. Most of it to buy votes. But I am not bitter. I was just not meant to be Mayor.\"");
 				say();
 				UI_remove_answer("Mayor");
 				UI_add_answer(["Patterson", "election"]);
+				fallthrough;
 
 			case "Patterson":
 				message("\"Patterson courted the support of The Fellowship. They forced a vote from all their members. Once word spread, my support drained away. No one wants to be on the losing side.\" Brownie sighs.");
 				say();
 				UI_remove_answer("Patterson");
 				UI_add_answer(["Fellowship", "losing"]);
+				fallthrough;
 
 			case "election":
 				message("\"I do not really have any wish to succeed in politics. It just made me ill seeing all of the people with riches mistreat all of the people who are poor, and then have to listen to them talk about how the class system has been abolished.\"");
 				say();
 				UI_remove_answer("election");
+				fallthrough;
 
 			case "Fellowship":
 				if (var0001)
@@ -25673,45 +26409,53 @@ void Func043C object#(0x43C) ()
 					say();
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "losing":
 				message("\"Of course, I could have won the election if I had wanted to. I had information about Patterson that would have ruined any chances of him winning.\"");
 				say();
 				UI_remove_answer("losing");
 				UI_add_answer("information");
+				fallthrough;
 
 			case "information":
 				message("\"I could have revealed a secret about Patterson but if I did it would have hurt someone close to him very much. I did not want to be mayor that badly.\"");
 				say();
 				UI_remove_answer("information");
 				UI_add_answer("secret");
+				fallthrough;
 
 			case "secret":
 				message("\"Patterson does little to hide his secret. If thou dost keep an eye on him thou wilt surely learn of it sooner or later.\"");
 				say();
 				UI_remove_answer("secret");
+				fallthrough;
 
 			case "farm":
 				message("\"I feel more at home on the farm growing vegetables. There is another farmer named Mack who works a farm near Britain as well. He raises chickens.\"");
 				say();
 				UI_remove_answer("farm");
 				UI_add_answer(["vegetables", "Mack"]);
+				fallthrough;
 
 			case "Mack":
 				message("\"I like him. He even voted for me. But to tell thee the truth about Mack, he is a lunatic.\"");
 				say();
 				UI_remove_answer("Mack");
+				fallthrough;
 
 			case "vegetables":
 				message("\"I raise pumpkins. But I am in a bind at the moment and need some help.\"");
 				say();
 				UI_remove_answer("vegetables");
 				UI_add_answer(["bind", "help"]);
+				fallthrough;
 
 			case "bind":
 				message("\"I strained my back the other day lifting heavy pumpkins. I cannot so much as lift a small one today! And I need help with the harvest of pumpkins so that I can get them to the market.\"");
 				say();
 				UI_remove_answer("bind");
+				fallthrough;
 
 			case "help":
 				message("\"There are piles of pumpkins at the north end of the field. I need them brought down near my farmhouse. If thou wilt help me by bringing the pumpkins to me, I will gladly pay thee for thy work. How does one gold coin for every pumpkin carried sound?\"");
@@ -25739,6 +26483,7 @@ void Func043C object#(0x43C) ()
 					say();
 				}
 				UI_remove_answer("help");
+				fallthrough;
 
 			case "pumpkins":
 				if (gflags[0x00CE])
@@ -25751,10 +26496,10 @@ void Func043C object#(0x43C) ()
 					say();
 				}
 				UI_remove_answer("pumpkins");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good day, ");
 		message(var0000);
@@ -25810,39 +26555,46 @@ void Func043D object#(0x43D) ()
 				message("\"I am Mack.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am a farmer, though most folks just call me a lunatic.\"");
 				say();
 				UI_add_answer(["farmer", "lunatic"]);
+				fallthrough;
 
 			case "farmer":
 				message("\"On my farm I raise chickens and grow vegetables. If thou dost need work, talk to me!\"");
 				say();
 				UI_remove_answer("farmer");
 				UI_add_answer("work");
+				fallthrough;
 
 			case "lunatic":
 				message("\"Thou dost also think so, eh? But I tell thee what I say is true! There are creatures visiting us from another place in the stars! I have seen them!\"");
 				say();
 				UI_remove_answer("lunatic");
 				UI_add_answer(["creatures", "another place", "seen them"]);
+				fallthrough;
 
 			case "creatures":
 				message("\"They are big mean ugly liontigers! Or is that tigerlions? They are ferocious and they want to eat us!\"");
 				say();
 				UI_remove_answer("creatures");
+				fallthrough;
 
 			case "another place":
 				message("\"All I can say is that there are certainly no such creatures in this world! Nor is their ship like any that has ever been seen anywhere in Britannia.\"");
 				say();
 				UI_remove_answer("another place");
+				fallthrough;
 
 			case "seen them":
 				message("\"With mine own eyes I have seen a star creature and the inexplicable conveyance which enabled it to travel to Britannia! I swear to thee! I am completely sane! I have proof!\"");
 				say();
 				UI_remove_answer("seen them");
 				UI_add_answer("proof");
+				fallthrough;
 
 			case "proof":
 				if (!gflags[0x0093])
@@ -25871,6 +26623,7 @@ void Func043D object#(0x43D) ()
 						UI_add_answer("story");
 					}
 				}
+				fallthrough;
 
 			case "story":
 				if (!gflags[0x0095])
@@ -25886,68 +26639,80 @@ void Func043D object#(0x43D) ()
 					say();
 					UI_remove_answer("story");
 				}
+				fallthrough;
 
 			case "bright lights":
 				message("\"I always watch for moving bright lights in the night sky. That is part of why people in the town say I am a loonie. But is what I do so different from what they do in the orrery?\"");
 				say();
 				UI_remove_answer("bright lights");
+				fallthrough;
 
 			case "lands":
 				message("\"After the explosion and crash I ran out to my field. There I saw the strange machine that thou hast seen, only it was glowing hot. I was terrified. But then the top of the machine started to open.\"");
 				say();
 				UI_remove_answer("lands");
 				UI_add_answer(["machine", "open"]);
+				fallthrough;
 
 			case "machine":
 				message("\"It resembled a bird, but it was not a bird!\"");
 				say();
 				UI_remove_answer("machine");
+				fallthrough;
 
 			case "open":
 				message("\"I could not move from the spot as I saw the strange ship open. From out of the top came the vicious tigerlion. There was a savage hunger in its eyes.\"");
 				say();
 				UI_remove_answer("open");
 				UI_add_answer(["tigerlion", "hunger"]);
+				fallthrough;
 
 			case "hunger":
 				message("\"In other words, it looked like it might eat me!\"");
 				say();
 				UI_remove_answer("hunger");
+				fallthrough;
 
 			case "tigerlion":
 				message("\"It came at me like a predator comes after prey. It was so fast that I could not even move. I thought I was going to be killed for certain. It reached me in a second. It looked into mine eyes, and then it died.\"");
 				say();
 				UI_remove_answer("tigerlion");
 				UI_add_answer("died");
+				fallthrough;
 
 			case "died":
 				message("\"What it and I had failed to notice was that I was holding mine hoe. It had once been accidentally enchanted by a passing mage, and it works wondrously in the fields. I use it for everything! The tigerlion had run itself through upon it. As it died, the thing spoke.\"");
 				say();
 				UI_remove_answer("died");
 				UI_add_answer(["spoke", "hoe"]);
+				fallthrough;
 
 			case "spoke":
 				message("\"It said two words. \"Kill Wrathy.\" I do not know who this Wrathy person is, or why the tigerlion wanted me to kill him. But I do know I sure get worried now whenever I see moving lights in the night sky.\"");
 				say();
 				UI_remove_answer("spoke");
 				UI_add_answer("Kill Wrathy");
+				fallthrough;
 
 			case "hoe":
 				message("\"I am sure thou dost know about the plague of looniness that has come to afflict all of the mages in the world. It was several years ago that I brought my broken hoe to a mage called Mumb. Fixing things was all he was good for anymore. There was also some fighter who wanted Mumb to enchant his sword, turning it into \"The Sword of Death\". It appears poor Mumb got confused and that fighter came back and killed him because the man wound up with a sword that was only good for cutting weeds. I could never figure out exactly what happened. It appears that old Mumb made mine hoe into the Hoe of Destruction! Unfortunately, the hoe is lost.\"");
 				say();
 				UI_remove_answer("hoe");
 				UI_add_answer("lost");
+				fallthrough;
 
 			case "lost":
 				message("\"Well, 'tis not really lost. It is locked up in my shed. It is the key to the shed that is lost! I think I might have accidentally used it as a fishhook when I was fishing on the banks of Lock Lake. So now I cannot get into my shed. One would think I -am- a looney!\"");
 				say();
 				UI_remove_answer("lost");
+				fallthrough;
 
 			case "Kill Wrathy":
 				message("\"I am quite certain that was it, or something like that. Anyway the tigerlion itself proved to be quite delicious.\"");
 				say();
 				gflags[0x0095] = true;
 				UI_remove_answer("Kill Wrathy");
+				fallthrough;
 
 			case "work":
 				message("\"I need someone to work for me and help gather all the eggs being laid by the chickens! When that big thing came crashing down it scared them all so much that they cannot stop laying eggs! Wilt thou work for me? I will pay thee 1 gold per egg.\"");
@@ -25965,14 +26730,15 @@ void Func043D object#(0x43D) ()
 					say();
 				}
 				UI_remove_answer("work");
+				fallthrough;
 
 			case "picked eggs":
 				Func08B8();
 				UI_remove_answer("picked eggs");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"I thank thee for thy decency and consideration.\"");
 		say();
@@ -26035,16 +26801,19 @@ void Func043E object#(0x43E) ()
 				message("\"I am called Snaz.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I have no job for I am a beggar. For a gold coin I shall tell thee a joke.\"");
 				say();
 				UI_add_answer(["beggar", "tell a joke"]);
+				fallthrough;
 
 			case "beggar":
 				message("\"When I was just a little boy I was made an orphan and left homeless and penniless. That was a joke life played on me. 'Tis a funny joke, eh?~~\"But I would not charge thee a gold piece for that one.\"");
 				say();
 				UI_remove_answer("beggar");
+				fallthrough;
 
 			case "tell a joke":
 				message("\"Dost thou wish to hear one?\"");
@@ -26073,17 +26842,20 @@ void Func043E object#(0x43E) ()
 					say();
 				}
 				UI_remove_answer("tell a joke");
+				fallthrough;
 
 			case "Fellowship joke":
 				message("\"I was discussing philosophy with a Fellowship member the other day and he asked me, 'What, in thine opinion, is the height of stupidity?'~~\"So I said, 'I do not know. How tall art thou?'~~\"No, really, I make sport of The Fellowship, but I mean it sincerely...\"");
 				say();
 				UI_remove_answer("Fellowship joke");
 				UI_add_answer(["Fellowship", "Lord British joke"]);
+				fallthrough;
 
 			case "Fellowship":
 				message("\"That is what I dearly love about The Fellowship. They could always take a joke!~~\"And from what I hear they play funny jokes themselves! Like the joke they played in Trinsic!\"");
 				say();
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "Lord British joke":
 				message("\"For a gold coin I will tell thee another. Dost thou wish to hear it?\"");
@@ -26112,11 +26884,13 @@ void Func043E object#(0x43E) ()
 						UI_remove_answer("Lord British joke");
 					}
 				}
+				fallthrough;
 
 			case "Lord British":
 				message("\"Poor Lord British! When faced with a gigantic menace that threatens his entire kingdom he is an extremely capable ruler.~~\"But what happens when there are a myriad of smaller things that all threaten the welfare of his people indirectly?~~\"There is a riddle for thee to solve!\"");
 				say();
 				UI_remove_answer("Lord British");
+				fallthrough;
 
 			case "Weston joke":
 				message("\"For a gold coin I will tell thee another. Dost thou wish to hear it?\"");
@@ -26147,11 +26921,13 @@ void Func043E object#(0x43E) ()
 						UI_remove_answer("Weston joke");
 					}
 				}
+				fallthrough;
 
 			case "Weston":
 				message("\"Weston now sits in the castle prison, where he shall most certainly rot for the rest of his life. Heh-heh-heh! ~~\"Try as I might, I cannot best that little jest!\"");
 				say();
 				UI_remove_answer("Weston");
+				fallthrough;
 
 			case "mage joke":
 				message("\"For a gold coin I will tell thee another. Dost thou wish to hear it?\"");
@@ -26180,11 +26956,13 @@ void Func043E object#(0x43E) ()
 						UI_remove_answer("mage joke");
 					}
 				}
+				fallthrough;
 
 			case "mages":
 				message("\"All of the mages have gone daft or mad! What other proper response is there in a world that is so terrifically funny?!\"");
 				say();
 				UI_remove_answer("mages");
+				fallthrough;
 
 			case "Sullivan joke":
 				message("\"Thou art a brave Avatar! Dost thou wish to hear another?\"");
@@ -26212,11 +26990,13 @@ void Func043E object#(0x43E) ()
 						say();
 					}
 				}
+				fallthrough;
 
 			case "Sullivan":
 				message("\"Yes, I know the man they call Sullivan the Trickster! In fact thou dost remind me of him!~~\"Or does he remind me of thee?~~\"He is so tricky that just talking about him has caused me to trick myself! Heh-Hee-Haa!\"");
 				say();
 				UI_remove_answer("Sullivan");
+				fallthrough;
 
 			case "gold joke":
 				message("\"I have amused thee so far! Wouldst thou like to hear another? It is a joke about gold!\"");
@@ -26264,6 +27044,7 @@ void Func043E object#(0x43E) ()
 					say();
 				}
 				UI_remove_answer("gold joke");
+				fallthrough;
 
 			case "bye":
 				break;
@@ -26372,11 +27153,13 @@ void Func043F object#(0x43F) ()
 				message("\"My name is Millie,\" she giggles coyly.");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I suppose I have no job, but is that really so bad? I am a member of The Fellowship and I talk to people about them all day long.\"");
 				say();
 				UI_add_answer(["Fellowship", "talk"]);
+				fallthrough;
 
 			case "Fellowship":
 				if (var0001)
@@ -26404,18 +27187,21 @@ void Func043F object#(0x43F) ()
 						UI_add_answer("philosophy");
 					}
 				}
+				fallthrough;
 
 			case "philosophy":
 				Func091A();
 				message("\"If thou dost wish, thou mayest attend tonight's meeting at the Fellowship Hall. It begins at nine o'clock sharp. Just tell them that thou art my guest. I shall see thee there, I hope.\" Millie giggles and looks away shyly.");
 				say();
 				UI_remove_answer("philosophy");
+				fallthrough;
 
 			case "talk":
 				message("\"I spend all my time trying to recruit, er... spread the word of The Fellowship. It is better than having a job! I learned how to do this at the Meditation Retreat.\"");
 				say();
 				UI_remove_answer("talk");
 				UI_add_answer("Meditation Retreat");
+				fallthrough;
 
 			case "Meditation Retreat":
 				message("\"'Tis located on an island in south Britannia near Serpent's Hold. Most new Fellowship members spend some time down there learning the tenets of the group. One can also learn to hear 'the voice' at the retreat.\"");
@@ -26423,21 +27209,23 @@ void Func043F object#(0x43F) ()
 				UI_add_answer("the voice");
 				UI_remove_answer("Meditation Retreat");
 				gflags[0x008B] = true;
+				fallthrough;
 
 			case "the voice":
 				message("\"Fellowship members have an inner voice which speaks to them. I have not heard it yet, but I am working toward it. I may need to spend another few days at the Meditation Retreat in order to do so. Batlin tells me not to be discouraged, though. He says I will hear it when I have made myself worthy.\"");
 				say();
 				UI_remove_answer("the voice");
 				gflags[0x008A] = true;
+				fallthrough;
 
 			case "Thad":
 				message("Millie rolls her eyes. \"Thou hast met my brother? Thou poor thing! He is really a candidate for the asylum, I wouldst say! He believes The Fellowship kidnapped me and charmed me into following them. Well, I joined of mine own free will, without a second thought, and it was a pure lark! No one coerced me! Thad can go hang! Mama always said he was the impulsive one in the family!\"");
 				say();
 				UI_remove_answer("Thad");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"I shall see thee later! Maybe even at tonight's Fellowship meeting!\"*");
 		say();
@@ -26511,38 +27299,45 @@ void Func0440 object#(0x440) ()
 				message("Geoffrey chuckles. \"Art thou joking? I am Geoffrey!\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"These days I remain in my position as Captain of the Guard. I am Lord British's personal bodyguard, and I am in charge of security at the castle. I do not have much time or use for adventuring now.\"");
 				say();
 				UI_add_answer("adventuring");
+				fallthrough;
 
 			case "adventuring":
 				message("\"I have aged a bit over the last 200 years. I am afraid I shall not be joining thee this time. But my thoughts are with thee, and if I may offer some assistance, I shall be glad to do so.\"");
 				say();
 				UI_remove_answer("adventuring");
 				UI_add_answer(["aged", "assistance"]);
+				fallthrough;
 
 			case "aged":
 				message("\"Yes, it has been a long time by Britannian reckoning since I have seen mine homeland. When thou hast finished with thy business, do come back and tell me news of what is happening in our homeworld.\"");
 				say();
 				UI_remove_answer("aged");
+				fallthrough;
 
 			case "assistance":
 				message("\"Mine advice to thee is to build up thine experience and skills as soon as possible. Thou hast been away from Britannia for a long time. Thou mightest not be in the same shape thou wert in at the end of thy last adventure here.\"");
 				say();
 				UI_remove_answer("assistance");
 				UI_add_answer(["experience", "shape"]);
+				fallthrough;
 
 			case "shape":
 				message("\"It is apparently another difference in our two worlds. Whenever thou shalt return it is as if thy physical body has arrived here for the first time. It is the reason why many of\tthine own companions have chosen to stay here even though they have aged in Britannian time.\"");
 				say();
 				UI_remove_answer("shape");
+				fallthrough;
 
 			case "experience":
 				message("\"Go and search for monsters. Vanquish them. Take their gold! Gain experience! Use that experience when thou dost visit trainers. Increase thy strength, dexterity, and intelligence, as well as thy combat skill and ability to perform magic. Thou wilt be lost without this necessary evolution of experience!\"");
 				say();
 				UI_remove_answer("experience");
+				fallthrough;
 
 			case "Nystul":
 				if (!gflags[0x0003])
@@ -26556,10 +27351,10 @@ void Func0440 object#(0x440) ()
 					say();
 				}
 				UI_remove_answer("Nystul");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Have courage. Have faith. Be strong. Be wise.\"*");
 		say();
@@ -26604,33 +27399,39 @@ void Func0441 object#(0x441) ()
 				say();
 				UI_remove_answer("name");
 				UI_add_answer("Wislem");
+				fallthrough;
 
 			case "Wislem":
 				message("To be the word for `wise man.'\"");
 				say();
 				UI_remove_answer("Wislem");
+				fallthrough;
 
 			case "job":
 				message("\"To be advisor to Lord British, and act as representative for my race here in Britain. To be honored to be in long line of advisors to the king.\"");
 				say();
 				UI_add_answer("advisor");
+				fallthrough;
 
 			case "advisor":
 				message("\"To make sure the gargoyle race is heard in the castle. To have been a long road to acceptance and integration into Britannian society.\"");
 				say();
 				UI_add_answer(["integration", "society"]);
 				UI_remove_answer("advisor");
+				fallthrough;
 
 			case "integration":
 				message("\"To tell you that, not long after your last visit, the gargoyles settled upon Terfin, an island to the southeast. To have moved, little by little, onto the mainland.\"");
 				say();
 				UI_remove_answer("integration");
+				fallthrough;
 
 			case "society":
 				message("\"To be accepted in most places. To feel sad, however, that there are still towns that do not accept us. But our Lord and King, Draxinusom, is still alive and is doing a magnificent job. To know and help all gargoyles who are alive.\"");
 				say();
 				UI_add_answer("Inamo");
 				UI_remove_answer("society");
+				fallthrough;
 
 			case "Inamo":
 				message("Wislem listens to your story about the murders in Trinsic. \"To be sad to hear this. To suggest that you visit Lord Draxinusom in Terfin and tell him about Inamo. He will know who Inamo's parent gargoyle is. To recommend you relay this news as soon as possible.~~\"To go soon and tell Draxinusom about Inamo?\"");
@@ -26647,10 +27448,10 @@ void Func0441 object#(0x441) ()
 					say();
 				}
 				UI_remove_answer("Inamo");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"To bid farewell.\"*");
 		say();
@@ -26706,6 +27507,7 @@ void Func0442 object#(0x442) ()
 				message("?\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				var0002 = UI_get_schedule_type(0xFFBE);
@@ -26721,22 +27523,26 @@ void Func0442 object#(0x442) ()
 					say();
 					UI_add_answer(["Royal Nursery", "castle", "mouse food"]);
 				}
+				fallthrough;
 
 			case "Royal Nursery":
 				message("\"The children are so much fun. I like to read them their favorite story. It happens to be Lord British's favorite children's story, too! He read it to me oh, those many years ago.\"");
 				say();
 				UI_remove_answer("Royal Nursery");
 				UI_add_answer(["children", "story"]);
+				fallthrough;
 
 			case "children":
 				message("\"If thou hast not had the chance yet, do look around and meet them. They are most wonderful and amusing.\"");
 				say();
 				UI_remove_answer("children");
+				fallthrough;
 
 			case "castle":
 				message("\"It is much the same as it was when thou wert last here. There has been a bit of remodeling. After all, it has been 200 years since thou wert last here! I believe Lord British has a storeroom with quite a bit of equipment inside.\"");
 				say();
 				UI_remove_answer("castle");
+				fallthrough;
 
 			case "mouse food":
 				message("\"Well, cheese is my favorite. If thou dost ever have cheese to give away, I will gladly eat it. But I will generally eat most anything. Dost thou have any cheese for me?\"");
@@ -26786,6 +27592,7 @@ void Func0442 object#(0x442) ()
 					say();
 				}
 				UI_remove_answer("mouse food");
+				fallthrough;
 
 			case "story":
 				message("\"Dost thou want to hear the story? It is called 'Hubert's Hair-Raising Adventure'.\"");
@@ -26803,10 +27610,10 @@ void Func0442 object#(0x442) ()
 					say();
 				}
 				UI_remove_answer("story");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Farewell, ");
 		message(var0001);
@@ -26875,27 +27682,32 @@ void Func0443 object#(0x443) ()
 				message("\"All my brothers and sisters called me 'Boots' when I was a baby, and it hath remained my name ever since.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"Why, I am Lord British's personal cook! I prepare meals for the entire castle.\"");
 				say();
 				UI_add_answer("meals");
+				fallthrough;
 
 			case "meals":
 				message("\"Just go to the dining room at breakfast or supper time and mine husband Bennie will serve thee!\"");
 				say();
 				UI_add_answer(["breakfast", "supper", "Bennie"]);
 				UI_remove_answer("meals");
+				fallthrough;
 
 			case "breakfast":
 				message("\"For breakfast I usually prepare a dish that my Liege brought with him from his homeland. Here we call it Eggs British. It is served with assorted fruits and tea, of course. It is the King's favorite.\"");
 				say();
 				UI_remove_answer("breakfast");
+				fallthrough;
 
 			case "supper":
 				message("\"This meal is usually whatever meat or game or fish Lord British requests, accompanied by several additional courses and a fine dessert.\"");
 				say();
 				UI_remove_answer("supper");
+				fallthrough;
 
 			case "Bennie":
 				message("\"He's a dear, but he has become a little absent-minded in his later years. He never remembers to bring enough meat from the slaughterhouse in Paws. In fact, we are short this week!\"");
@@ -26903,11 +27715,13 @@ void Func0443 object#(0x443) ()
 				UI_add_answer(["absent-minded", "short"]);
 				UI_remove_answer("Bennie");
 				gflags[0x0071] = true;
+				fallthrough;
 
 			case "absent-minded":
 				message("\"Last week I asked him to put a little garlic into some soup. He put in the garlic and then forgot about it. So he went and put some more in. Then he forgot he did that. So he put in more. Well, thou canst imagine the look on Lord British's face when he finally did taste that soup! It is a good thing we live and work in the castle of such a just ruler.\"");
 				say();
 				UI_remove_answer("absent-minded");
+				fallthrough;
 
 			case "short":
 				message("\"That is right, we do not have enough. If thou couldst bring me mutton from the slaughterhouse, I will pay thee 5 gold for every portion thou canst bring. All right?\"");
@@ -26925,16 +27739,17 @@ void Func0443 object#(0x443) ()
 					say();
 				}
 				UI_remove_answer("short");
+				fallthrough;
 
 			case "mutton":
 				message("\"Splendid! Let's see, we agreed on 5 gold per portion, if I remember correctly.\"");
 				say();
 				Func0854();
 				UI_remove_answer("mutton");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Bye now!\"*");
 		say();
@@ -26993,16 +27808,19 @@ void Func0444 object#(0x444) ()
 				message("\"All my friends call me Bennie.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the Head Servant at the castle. My job consists of keeping the other servants in line and serving the meals.\"");
 				say();
 				UI_add_answer(["Head Servant", "meals"]);
+				fallthrough;
 
 			case "Head Servant":
 				message("\"Yes, I have been Head Servant for many years. Mine entire family works for Lord British. My son is the king's gentleman's gentleman. My daughter is the Royal Chambermaid. My wife is Head Cook. We are pleased to work for Lord British.\"");
 				say();
 				UI_remove_answer("Head Servant");
+				fallthrough;
 
 			case "meals":
 				message("\"My wife, Boots, is the head cook. Her specialty is roast beef. She makes wonderful pastries, too. Enough of those will give thee a very un-Avatar-like figure!");
@@ -27067,15 +27885,16 @@ void Func0444 object#(0x444) ()
 					say();
 				}
 				UI_remove_answer("meals");
+				fallthrough;
 
 			case "absent-minded":
 				message("\"Yes, I suppose I am. I am also becoming a little hard-of-hearing. When thou hast seen as many years as I have, one's faculties are no longer perfect.\"");
 				say();
 				UI_remove_answer("absent-minded");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Safe journeys, ");
 		message(var0000);
@@ -27125,6 +27944,7 @@ void Func0445 object#(0x445) ()
 			message("\"I am Weston.\"");
 			say();
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			message("\"I have none so long as I am left to rot here in this prison.\"");
@@ -27138,6 +27958,7 @@ void Func0445 object#(0x445) ()
 				UI_show_npc_face(0xFFBB, 0x0000);
 			}
 			UI_add_answer("prison");
+			fallthrough;
 
 		case "prison":
 			message("\"My crime was stealing apples from the Royal Orchards. This I did and I admit it freely. If given the same set of circumstances I would do it again.\"");
@@ -27152,6 +27973,7 @@ void Func0445 object#(0x445) ()
 			}
 			UI_remove_answer("prison");
 			UI_add_answer(["stealing apples", "circumstances"]);
+			fallthrough;
 
 		case "stealing apples":
 			message("\"I had offered to buy them first, but Figg, the caretaker of the orchard, set an exorbitant price which I am certain he would have pocketed for himself. So, yes, I admit to stealing them.\"");
@@ -27166,6 +27988,7 @@ void Func0445 object#(0x445) ()
 			}
 			UI_remove_answer("stealing apples");
 			UI_add_answer(["Figg", "admit"]);
+			fallthrough;
 
 		case "Figg":
 			message("\"He gives baskets of fruit free to The Fellowship without Lord British's consent, I am quite certain.\"");
@@ -27182,11 +28005,13 @@ void Func0445 object#(0x445) ()
 				UI_show_npc_face(0xFFBB, 0x0000);
 			}
 			UI_remove_answer("Figg");
+			fallthrough;
 
 		case "admit":
 			message("\"Mine only regrets are that I did not try to steal something bigger and that\tI did not get away with it.\"");
 			say();
 			UI_remove_answer("admit");
+			fallthrough;
 
 		case "circumstances":
 			message("\"I am not from Britain, ");
@@ -27203,6 +28028,7 @@ void Func0445 object#(0x445) ()
 			}
 			UI_remove_answer("circumstances");
 			UI_add_answer("Paws");
+			fallthrough;
 
 		case "Paws":
 			message("\"Paws is a town where thou mayest feel the icy grip of poverty about thine heart.\"");
@@ -27217,11 +28043,13 @@ void Func0445 object#(0x445) ()
 				UI_remove_npc_face(0xFEFE);
 				UI_show_npc_face(0xFFBB, 0x0000);
 			}
+			fallthrough;
 
 		case "town":
 			message("\"Not so long ago Paws was a thriving rustic coastal village. But as Britain grew larger most of our local businesses moved there. We became a farming town and the seven year drought gave us a lashing that we have yet to recover from.\"");
 			say();
 			UI_remove_answer("town");
+			fallthrough;
 
 		case "poverty":
 			message("\"I do not wish to bemoan my fate, but my family lives in Paws -- my wife Alina and my child Cassie. They were starving and I came to Britain to get food for them.\"");
@@ -27236,11 +28064,13 @@ void Func0445 object#(0x445) ()
 			}
 			UI_remove_answer("poverty");
 			UI_add_answer(["family", "starving"]);
+			fallthrough;
 
 		case "family":
 			message("\"I do not want any mercy for myself. I have admitted my guilt. But my life does not only belong to myself. It belongs to my wife and family as well. Without me they will suffer unbearable hardships, such as they might not survive.\"");
 			say();
 			UI_remove_answer("family");
+			fallthrough;
 
 		case "starving":
 			message("\"Although there are fools who will speak otherwise, the people of Britannia are being crushed by the vicious tyranny of the class system. While a few have more than they could ever enjoy, there are many who go to sleep hungry every night. My wife and daughter to name two of them.\"");
@@ -27255,11 +28085,13 @@ void Func0445 object#(0x445) ()
 			}
 			UI_remove_answer("starving");
 			UI_add_answer(["fools", "class system"]);
+			fallthrough;
 
 		case "fools":
 			message("\"Fools like our good friend the guard would have us believe that nothing has changed in Britannia for over two hundred years. That we can live our lives as if all of our problems do not exist. I say to thee that it is people like that who cause our problems in the first place.\"");
 			say();
 			UI_remove_answer("fools");
+			fallthrough;
 
 		case "class system":
 			message("\"While I am certain Lord British is a just and fair ruler, he must be quite unaware of all that goes on in his kingdom. Surely he would not tolerate such inequity.\"");
@@ -27287,10 +28119,10 @@ void Func0445 object#(0x445) ()
 				abort;
 			}
 			UI_remove_answer("class system");
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	message("\"I thank thee for visiting me.\" *");
 	say();
@@ -27347,28 +28179,33 @@ void Func0446 object#(0x446) ()
 				message("\"I am Miranda.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I serve on the Great Council. Today we are working on a bill of law. When I am not here in the castle, I am kept busy with a young child.\"");
 				say();
 				UI_add_answer(["Great Council", "bill", "child"]);
+				fallthrough;
 
 			case "Great Council":
 				message("\"The Great Council supports Lord British in the legislation of Britannia's laws. I am honored to be one of the three women serving on the Council.\"");
 				say();
 				UI_add_answer("women");
 				UI_remove_answer("Great Council");
+				fallthrough;
 
 			case "women":
 				message("\"I am particularly concerned about women's duties and privileges and their available opportunities in the land. Our history has been kind to women in general, but there is still room for improvement.\"");
 				say();
 				UI_add_answer("improvement");
 				UI_remove_answer("women");
+				fallthrough;
 
 			case "improvement":
 				message("\"More women could hold public office, for one thing. And I would personally like to be rid of those scantily-clad women in heroic fantasy paintings.\"");
 				say();
 				UI_remove_answer("improvement");
+				fallthrough;
 
 			case "child":
 				message("Miranda smiles. \"Yes, my son's name is Max.");
@@ -27403,6 +28240,7 @@ void Func0446 object#(0x446) ()
 				say();
 				gflags[0x0069] = true;
 				UI_remove_answer("child");
+				fallthrough;
 
 			case "bill":
 				if ((var0001 == 0x0002) || ((var0001 == 0x0003) || ((var0001 == 0x0004) || (var0001 == 0x0005))))
@@ -27417,6 +28255,7 @@ void Func0446 object#(0x446) ()
 					say();
 				}
 				UI_remove_answer("bill");
+				fallthrough;
 
 			case "Cove":
 				message("\"Art thou travelling to Cove?\"");
@@ -27454,6 +28293,7 @@ void Func0446 object#(0x446) ()
 					say();
 				}
 				UI_remove_answer("Cove");
+				fallthrough;
 
 			case "signed":
 				message("\"Didst thou have Lord Heather sign the bill?\"");
@@ -27499,10 +28339,10 @@ void Func0446 object#(0x446) ()
 					say();
 				}
 				UI_remove_answer("signed");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"We shall see thee again soon, I hope, Avatar.\"*");
 		say();
@@ -27544,75 +28384,87 @@ void Func0447 object#(0x447) ()
 				say();
 				UI_remove_answer("name");
 				UI_add_answer("Inwisloklem");
+				fallthrough;
 
 			case "Inwisloklem":
 				message("\"To mean `interpreter' in your language.\"");
 				say();
 				UI_remove_answer("Inwisloklem");
+				fallthrough;
 
 			case "job":
 				message("\"To be, indeed, an interpreter in my homeland. To be now on the Great Council to serve our most noble ruler, Lord British. To be honored as one of the two gargoyles on the Council.\"");
 				say();
 				UI_add_answer(["gargoyles", "Great Council"]);
+				fallthrough;
 
 			case "gargoyles":
 				message("\"To be one of the surviving gargoyles, and to preserve our heritage is my life work. To tell you our race emigrated to Britannia many, many years ago. To have settled on the island known as Terfin.\"");
 				say();
 				UI_add_answer(["surviving", "Terfin"]);
 				UI_remove_answer("gargoyles");
+				fallthrough;
 
 			case "surviving":
 				message("\"To be so many of my people killed two hundred years ago in the War of the False Prophet. To be the war that you ended by bringing peace between our races.\"");
 				say();
 				UI_remove_answer("surviving");
+				fallthrough;
 
 			case "Terfin":
 				message("\"To be a lonely place. To be desolate. To be not what humans call `homey'. To desire to establish a new way of life for gargoyles in Britannia, and to eliminate the hatred and misunderstanding of our race in humans. To know that ignorance breeds bigotry. To be one of those who are correcting this.\"");
 				say();
 				UI_add_answer(["way of life", "those"]);
 				UI_remove_answer("Terfin");
+				fallthrough;
 
 			case "way of life":
 				message("\"To desire a world where humans and gargoyles could live together in peace as equals in Britannian society.\"");
 				say();
 				UI_remove_answer("way of life");
+				fallthrough;
 
 			case "those":
 				message("\"To be called The Fellowship.\"");
 				say();
 				UI_add_answer("Fellowship");
 				UI_remove_answer("those");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"To be dedicated to promoting good will and trust in the land. To be thinking of joining the group soon!\"");
 				say();
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "Great Council":
 				message("\"To create the laws of the land. To inform you that my colleague, Miranda, can tell you more of what we are doing now. To be unfortunate that most of the Council is away now.\"");
 				say();
 				UI_add_answer(["Miranda", "away"]);
 				UI_remove_answer("Great Council");
+				fallthrough;
 
 			case "Miranda":
 				message("\"To inform you that Miranda is an intelligent woman who has great concern for the well being of all of Britannia's citizens. To be one of Lord British's most trusted advisors.\"");
 				say();
 				UI_remove_answer("Miranda");
+				fallthrough;
 
 			case "away":
 				message("\"To be on holiday at the moment. To have only Miranda and myself present to enact this new law.\"");
 				say();
 				UI_add_answer("law");
 				UI_remove_answer("away");
+				fallthrough;
 
 			case "law":
 				message("\"To tell you to ask Miranda about it, for she knows more than I.\"");
 				say();
 				UI_remove_answer("law");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"To say farewell.\"*");
 		say();
@@ -27698,39 +28550,46 @@ void Func0448 object#(0x448) ()
 				message("\"I told thee my name is Nell.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am a chambermaid. I am responsible for keeping the castle tidy. Just a servant girl, really.\"");
 				say();
 				UI_add_answer(["castle", "servant"]);
+				fallthrough;
 
 			case "castle":
 				message("\"It is very large. Keeps me very busy. Thou wouldst not believe how dusty it gets.\"");
 				say();
 				UI_remove_answer("castle");
+				fallthrough;
 
 			case "servant":
 				message("\"I suppose I'll always be a servant. My parents are servants. My brother is a servant. My fiance is a servant. My child will probably be a servant.\"");
 				say();
 				UI_add_answer(["parents", "brother", "fiance", "child"]);
 				UI_remove_answer("servant");
+				fallthrough;
 
 			case "parents":
 				message("\"They work in the castle as well. Boots is my mother. Bennie is my father. They have been here for years. I was born in this castle and played in the nursery.\"");
 				say();
 				UI_remove_answer("parents");
+				fallthrough;
 
 			case "brother":
 				message("\"Thou mightest run into him. He is also a servant in the castle. Charles. Other than not being as smart as I am, he is all right. For a bumbling ass, that is!\" She laughs.");
 				say();
 				gflags[0x0076] = true;
 				UI_remove_answer("brother");
+				fallthrough;
 
 			case "fiance":
 				message("\"That would be Carrocio, that dear man who runs the Punch and Judy Show. He writes the loveliest love poetry. We are getting married as soon as Carrocio can afford a wedding ring.\"");
 				say();
 				gflags[0x0075] = true;
 				UI_remove_answer("fiance");
+				fallthrough;
 
 			case "child":
 				message("Nell looks worried. \"Shhh! I do not want anyone to know. 'Tis not showing yet, is it? Carrocio and I are getting married as soon as possible. He -is- the father. I think. Then again, it could be... no, probably not him. Or could it be...? Hmmm. That would be interesting! Wait! What am I saying? The father is most definitely Carrocio! Please do not tell anyone. 'Twould be embarrassing. All right?\"");
@@ -27752,10 +28611,10 @@ void Func0448 object#(0x448) ()
 				}
 				UI_remove_answer("child");
 				gflags[0x007A] = true;
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye, ");
 		message(var0002);
@@ -27817,22 +28676,26 @@ void Func0449 object#(0x449) ()
 				message("\"I am Charles.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am a servant in Lord British's castle. I serve as a gentleman's gentleman, among other things. Right now I am serving wine.\"");
 				say();
 				UI_add_answer(["servant", "wine"]);
+				fallthrough;
 
 			case "servant":
 				message("\"My family has been employed by Lord British for many years. My father, Bennie, once held the position I now hold. He is the head servant. I shall be head servant one day, I suppose. Then perhaps my sweetheart will love me.\"");
 				say();
 				UI_remove_answer("servant");
 				UI_add_answer(["family", "sweetheart"]);
+				fallthrough;
 
 			case "family":
 				message("\"Thou wilt encounter them. My mother cooks in the kitchen. My prudish sister is the chambermaid.\"");
 				say();
 				UI_remove_answer("family");
+				fallthrough;
 
 			case "sweetheart":
 				message("Charles sighs. He is clearly smitten. \"She is Jeanette. She works in the Blue Boar. But I am afraid I am not 'up to her standards'. I believe she has her eye set on someone else. I do not know what to do about it.\"");
@@ -27840,11 +28703,13 @@ void Func0449 object#(0x449) ()
 				gflags[0x007B] = true;
 				UI_remove_answer("sweetheart");
 				UI_add_answer("Jeanette");
+				fallthrough;
 
 			case "Jeanette":
 				message("\"She does not love me, I know. She would rather marry a rich man. I have not a chance.\"");
 				say();
 				UI_remove_answer("Jeanette");
+				fallthrough;
 
 			case "Thou art in luck":
 				message("You tell Charles what Jeanette said.");
@@ -27862,6 +28727,7 @@ void Func0449 object#(0x449) ()
 				{
 					UI_add_answer("child");
 				}
+				fallthrough;
 
 			case "child":
 				message("You remember what Nell told you about her 'condition'. Do you mention it to Charles?");
@@ -27878,12 +28744,10 @@ void Func0449 object#(0x449) ()
 					gflags[0x0089] = true;
 					abort;
 				}
-				else
-				{
-					message("Your conscience rests easy, knowing that you resisted the temptation to carry tales.");
-					say();
-					UI_remove_answer("child");
-				}
+				message("Your conscience rests easy, knowing that you resisted the temptation to carry tales.");
+				say();
+				UI_remove_answer("child");
+				fallthrough;
 
 			case "wine":
 				message("\"Wouldst thou like some wine?\"");
@@ -27915,10 +28779,10 @@ void Func0449 object#(0x449) ()
 					say();
 				}
 				UI_remove_answer("wine");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("Charles nods his head at you, then goes about his business.*");
 		say();
@@ -27976,6 +28840,7 @@ void Func044A object#(0x44A) ()
 			message("\"That I know. My name is Rudyom.\"");
 			say();
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			if (!gflags[0x0003])
@@ -27990,6 +28855,7 @@ void Func044A object#(0x44A) ()
 				say();
 			}
 			UI_add_answer(["magic", "spells", "reagents"]);
+			fallthrough;
 
 		case "magic":
 			if (!gflags[0x0003])
@@ -28003,6 +28869,7 @@ void Func044A object#(0x44A) ()
 				say();
 			}
 			UI_remove_answer("magic");
+			fallthrough;
 
 		case "carpet":
 			message("\"The big blue carpet. 'Tis a flying carpet. It does not work like it should.\"");
@@ -28012,6 +28879,7 @@ void Func044A object#(0x44A) ()
 			message("\"Funny. It was here a while ago. Oh! I remember now. Some adventurers borrowed my flying carpet a few weeks ago. When they returned they said they had lost it near Serpent's Spine. Somewhere in the vicinity of the Lost River. I suppose\tif thou didst want to go and find it, thou couldst keep it. It did not work very well. Perhaps thou canst make it work. I did not like the color, anyway!\"");
 			say();
 			UI_remove_answer("carpet");
+			fallthrough;
 
 		case "spells":
 			message("\"Dost thou wish to buy some spells?\"");
@@ -28026,6 +28894,7 @@ void Func044A object#(0x44A) ()
 				message("\"Oh. Never mind, then.\"");
 				say();
 			}
+			fallthrough;
 
 		case "reagents":
 			message("\"Dost thou wish to buy some reagents?\"");
@@ -28040,12 +28909,14 @@ void Func044A object#(0x44A) ()
 				message("\"Oh. Never mind, then.\"");
 				say();
 			}
+			fallthrough;
 
 		case "blackrock":
 			message("\"Do not mention that foul mineral's name to me! It hast caused me much frustration! Before my mind lost me I was conducting experiments with the infernal material. But now I cannot for the life of me remember what it was I was trying to do.\"");
 			say();
 			UI_add_answer("experiments");
 			UI_remove_answer("blackrock");
+			fallthrough;
 
 		case "Moongates":
 			if (!gflags[0x0004])
@@ -28059,27 +28930,30 @@ void Func044A object#(0x44A) ()
 				say();
 			}
 			UI_remove_answer("Moongates");
+			fallthrough;
 
 		case "experiments":
 			message("\"I wrote them all down in my notebook, which is somewhere around here. Thou art welcome to look at it. But stay away from that damned transmuter -- 'tis dangerous!\"");
 			say();
 			UI_add_answer(["transmuter", "notebook"]);
 			UI_remove_answer("experiments");
+			fallthrough;
 
 		case "notebook":
 			message("\"I used it to record mine experiments with blackrock and the blackrock transmuter.\"");
 			say();
 			UI_remove_answer("notebook");
+			fallthrough;
 
 		case "transmuter":
 			message("\"'Tis that wand-like thing. It was supposed to magnetize and magically transmute blackrock, but it doth not work correctly. Try pointing it at a piece of blackrock and thou wilt see what I mean. But do not stand too close! Thou art welcome to take it if thou dost want a piece of garbage!\"");
 			say();
 			Func0911(0x0032);
 			UI_remove_answer("transmuter");
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	if (!gflags[0x0003])
 	{
@@ -28182,33 +29056,39 @@ void Func044B object#(0x44B) ()
 			message("\"I am Nastassia.\"");
 			say();
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			message("She thinks a moment. \"I suppose my job is to keep the Shrine of Compassion pristine, though it is not an official position.\"");
 			say();
 			UI_add_answer("Shrine");
+			fallthrough;
 
 		case "Shrine":
 			message("\"The Shrine of Compassion has been here for many generations, as have all the shrines in Britannia. My great-great-grandmother Ariana made a request in her will that her family line take care of this particular shrine.\"");
 			say();
 			UI_add_answer(["all shrines", "take care"]);
 			UI_remove_answer("Shrine");
+			fallthrough;
 
 		case "all shrines":
 			message("\"Many of the shrines have fallen into disuse or have been overgrown to the point of being lost. It is sad.\"");
 			say();
 			UI_remove_answer("all shrines");
+			fallthrough;
 
 		case "take care":
 			message("\"I am afraid that thou mightest find the other shrines in poor condition. I keep this one... well, nice. And I do it not only to keep alive my great-great-grandmother's tradition, but... for other reasons, too.\"");
 			say();
 			UI_remove_answer("take care");
 			UI_add_answer(["tradition", "reasons"]);
+			fallthrough;
 
 		case "tradition":
 			message("\"Some people may think it odd that a young person would cling to the old ways so. But it is something that gives me great comfort. It gives me the feeling that there is something in this world that I belong to.\"");
 			say();
 			UI_remove_answer("tradition");
+			fallthrough;
 
 		case "reasons":
 			if (!gflags[0x00E0])
@@ -28222,6 +29102,7 @@ void Func044B object#(0x44B) ()
 				say();
 			}
 			UI_remove_answer("reasons");
+			fallthrough;
 
 		case "Ariana":
 			if (var0004)
@@ -28238,17 +29119,20 @@ void Func044B object#(0x44B) ()
 			say();
 			UI_remove_answer("Ariana");
 			UI_add_answer("I am the Avatar");
+			fallthrough;
 
 		case "Julius":
 			message("\"Thou dost know of my father? I suppose the townsfolk have been talking again. I wish I had known him. There is something within me that yearns for some news of him. Anything at all.\"");
 			say();
 			UI_remove_answer("Julius");
 			gflags[0x00E1] = true;
+			fallthrough;
 
 		case "Nadia":
 			message("\"My mother. She died horribly, and by her own hand. That is the true reason I pay homage to this Shrine. I hope someday to provide her with the means to rest in peace.\"");
 			say();
 			UI_remove_answer("Nadia");
+			fallthrough;
 
 		case "Yew":
 			message("\"My father died in the Great Forest there. Some wild animal or something killed him. Art thou perhaps travelling to Yew?\"");
@@ -28296,6 +29180,7 @@ void Func044B object#(0x44B) ()
 				say();
 			}
 			UI_remove_answer("Yew");
+			fallthrough;
 
 		case "kiss":
 			if (gflags[0x00E6] && var0003)
@@ -28317,6 +29202,7 @@ void Func044B object#(0x44B) ()
 				UI_remove_answer("kiss");
 				UI_add_answer("kiss again");
 			}
+			fallthrough;
 
 		case "kiss again":
 			if (!var0002)
@@ -28331,11 +29217,13 @@ void Func044B object#(0x44B) ()
 				message("You kiss Nastassia and she moans.");
 				say();
 			}
+			fallthrough;
 
 		case "I am the Avatar":
 			message("Nastassia studies your features.~~\"Somehow I knew it. It hath been said that thou wouldst return.\"");
 			say();
 			UI_remove_answer("I am the Avatar");
+			fallthrough;
 
 		case "News of your father":
 			message("You tell Nastassia what you learned from Trellek. She closes her eyes and it seems a great weight has lifted from her shoulders.~~The woman raises her arms to the sky and cries out, \"Didst thou hear that, mother? Thine husband was only trying to provide for his family! And he died... a hero! He was not a vagabond! Dost thou hear? Thou canst rest thy tortured soul now. Please, mother, forgive him. Do so, so that I can now forgive thee.\"~~She wipes the tears from her face and looks at you.");
@@ -28356,6 +29244,7 @@ void Func044B object#(0x44B) ()
 			}
 			Func0911(0x0032);
 			UI_remove_answer("News of your father");
+			fallthrough;
 
 		case "bye":
 			script item
@@ -28364,7 +29253,6 @@ void Func044B object#(0x44B) ()
 				music 26;
 			}
 			break;
-
 	}
 	if (!var0004)
 	{
@@ -28447,26 +29335,31 @@ void Func044C object#(0x44C) ()
 					UI_add_answer("Pamela");
 				}
 				gflags[0x00EE] = true;
+				fallthrough;
 
 			case "job":
 				message("\"I am a trainer. I specialize in a style of combat that relies on concentration and meditation. It shall boost thy dexterity and intelligence, as well as thy combat skill.\"");
 				say();
 				UI_add_answer(["meditation", "train"]);
+				fallthrough;
 
 			case "Regal":
 				message("\"He is an exceptionally smart animal. He understands the meditative way of life.\"~~Rayburt throws the dog a cookie, which is snarfed up in the blink of an eye. \"He is cute, too,\" Rayburt says with complete seriousness.");
 				say();
 				UI_remove_answer("Regal");
+				fallthrough;
 
 			case "Pamela":
 				message("You see a hint of a smile on Rayburt's face. \"She and I are one person.\"");
 				say();
 				UI_remove_answer("Pamela");
+				fallthrough;
 
 			case "meditation":
 				message("\"Most of all combat occurs in the mind before the first blow is ever struck. The key to victory is to first win the inner battle in the mind. Winning that inner battle is what I help my students to learn.\"");
 				say();
 				UI_remove_answer("meditation");
+				fallthrough;
 
 			case "train":
 				if (var0001 == 0x001B)
@@ -28489,10 +29382,10 @@ void Func044C object#(0x44C) ()
 					say();
 					UI_remove_answer("train");
 				}
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("Rayburt bows.*");
 		say();
@@ -28551,28 +29444,33 @@ void Func044D object#(0x44D) ()
 				message("\"I am Lord Heather. And I recognize thee, Avatar!\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the Town Mayor of Cove, home of the Shrine of Compassion.\"");
 				say();
 				UI_add_answer(["Cove", "Shrine"]);
+				fallthrough;
 
 			case "Cove":
 				message("\"It's a small place, I know. Many of our residents have moved away to the larger towns, especially Britain. But we have maintained a small core of loyal Covites.\"");
 				say();
 				UI_remove_answer("Cove");
+				fallthrough;
 
 			case "Shrine":
 				message("\"We are proud of our Shrine. One of our residents takes good care of it. Thou must try and visit the Shrine if thou hast not already. It is a monument to all the lovers in town.\"");
 				say();
 				UI_add_answer("lovers");
 				UI_remove_answer("Shrine");
+				fallthrough;
 
 			case "lovers":
 				message("\"Britain may be the city of Compassion, but Cove has become the city of Passion. Everyone here seems to fall in love rather easily. Thou wilt find that everyone loves someone. Almost everyone, that is.\"");
 				say();
 				UI_remove_answer("lovers");
 				UI_add_answer(["everyone", "almost everyone"]);
+				fallthrough;
 
 			case "everyone":
 				message("\"Well, let's see... I am in love with Jaana, our healer.\tAnd she is in love with me, of course. Then there is Zinaida, who runs the Emerald. She has an interest in De Maria, our local bard. And vice versa. Rayburt, our trainer, is courting Pamela, the innkeeper.\"");
@@ -28617,12 +29515,14 @@ void Func044D object#(0x44D) ()
 					UI_remove_npc_face(0xFFFB);
 					UI_show_npc_face(0xFFB3, 0x0000);
 				}
+				fallthrough;
 
 			case "almost everyone":
 				message("\"Except for Nastassia.\"");
 				say();
 				UI_remove_answer("almost everyone");
 				UI_add_answer("Nastassia");
+				fallthrough;
 
 			case "Nastassia":
 				if (!gflags[0x00E0])
@@ -28647,6 +29547,7 @@ void Func044D object#(0x44D) ()
 					say();
 				}
 				UI_remove_answer("Nastassia");
+				fallthrough;
 
 			case "bill":
 				if (!gflags[0x00DE])
@@ -28670,15 +29571,16 @@ void Func044D object#(0x44D) ()
 					say();
 				}
 				UI_remove_answer("bill");
+				fallthrough;
 
 			case "Lock Lake":
 				message("\"It has gotten so putrid that on hot summer days the stink is suffocating. I believe that the Britannian Mining Company in Minoc is the source of the problem. Mining waste is being deposited in the Lake. Thou shouldst be glad it is nearly winter!\"");
 				say();
 				UI_remove_answer("Lock Lake");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Do come and visit again, Avatar!\"*");
 		say();
@@ -28741,6 +29643,7 @@ void Func044E object#(0x44E) ()
 					UI_add_answer("Rayburt");
 				}
 				gflags[0x00F0] = true;
+				fallthrough;
 
 			case "job":
 				message("\"I am the Innkeeper at the Out'n'Inn.\"");
@@ -28761,6 +29664,7 @@ void Func044E object#(0x44E) ()
 					}
 				}
 				UI_add_answer("Out'n Inn");
+				fallthrough;
 
 			case "room":
 				message("\"The room is quite inexpensive. Only 8 gold per person. Want one?\"");
@@ -28802,26 +29706,29 @@ void Func044E object#(0x44E) ()
 					say();
 				}
 				UI_remove_answer("room");
+				fallthrough;
 
 			case "Out'n Inn":
 				message("\"Well... Cove is the city of Love and Passion, didst thou not know? Thou must be careful. If thou dost stay too long in Cove, thou wilt fall in love with someone! Mark my words!\"");
 				say();
 				UI_remove_answer("Out'n Inn");
+				fallthrough;
 
 			case "Rayburt":
 				message("\"Oooh, he is such a wonderful man, dost thou not think? He is so intense and serious. Handsome, too! Oh, and\tI like Regal as well.\"");
 				say();
 				UI_remove_answer("Rayburt");
 				UI_add_answer("Regal");
+				fallthrough;
 
 			case "Regal":
 				message("\"As far as dogs go, he is handsome, too!\"");
 				say();
 				UI_remove_answer("Regal");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"See thee soon!\"*");
 		say();
@@ -28875,6 +29782,7 @@ void Func044F object#(0x44F) ()
 					UI_add_answer("De Maria");
 				}
 				gflags[0x00F1] = true;
+				fallthrough;
 
 			case "job":
 				message("\"I am the owner and manager of The Emerald.\"");
@@ -28890,38 +29798,44 @@ void Func044F object#(0x44F) ()
 					message("\"Please come to the pub when it is open and I shall be happy to serve thee!\"");
 					say();
 				}
+				fallthrough;
 
 			case "food":
 				message("\"The Emerald is pleased to serve thee the finest cuisine this side of Britain. Thou mightest wish to try the special -- Silverleaf.\"");
 				say();
 				UI_add_answer("Silverleaf");
+				fallthrough;
 
 			case "Silverleaf":
 				message("She winks at you. \"Some say it is a powerful aphrodisiac... It is delicious, regardless. It comes from the root of an exotic tree growing somewhere in Britannia.\"");
 				say();
 				UI_remove_answer("Silverleaf");
+				fallthrough;
 
 			case "drink":
 				message("\"The Emerald serves only the best wine and ale. I cannot recommend the water, however. Thanks to Lock Lake.\"");
 				say();
 				UI_add_answer("Lock Lake");
+				fallthrough;
 
 			case "buy":
 				Func0951();
+				fallthrough;
 
 			case "De Maria":
 				message("\"He is the light of my life. A finer man does not exist.\" She beams.");
 				say();
 				UI_remove_answer("De Maria");
+				fallthrough;
 
 			case "Lock Lake":
 				message("\"The stench has made our water taste terrible. That mining company must cease pouring their sewage into what was once a fine lake!\"");
 				say();
 				UI_remove_answer("Lock Lake");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Come again soon!\"*");
 		say();
@@ -28984,6 +29898,7 @@ void Func0450 object#(0x450) ()
 					UI_add_answer("Zinaida");
 				}
 				gflags[0x00F2] = true;
+				fallthrough;
 
 			case "job":
 				message("\"I spin tales and sing songs!\"");
@@ -28994,6 +29909,7 @@ void Func0450 object#(0x450) ()
 					say();
 					UI_add_answer(["tale", "song", "folks"]);
 				}
+				fallthrough;
 
 			case "tale", "song", "folks":
 				message("\"What if I combine all three? Shall I sing a song which is a tale about the people of Cove?\"");
@@ -29013,6 +29929,7 @@ void Func0450 object#(0x450) ()
 					say();
 				}
 				UI_remove_answer(["tale", "song", "folks"]);
+				fallthrough;
 
 			case "Nastassia":
 				message("\"Ah, dear Nastassia. Wouldst thou like to hear her tale?\"");
@@ -29033,6 +29950,7 @@ void Func0450 object#(0x450) ()
 					say();
 					UI_remove_answer("Nastassia");
 				}
+				fallthrough;
 
 			case "Zinaida":
 				message("\"My love! My flower! Mine angel! The provider of the sweetest nectar my mouth has ever known! She is the light of my day! The notes of my songs! The flesh of my...\"~~");
@@ -29049,10 +29967,10 @@ void Func0450 object#(0x450) ()
 				message("De Maria stops his reverie, sighs, and smiles at you. \"Thou dost apprehend my meaning...\"");
 				say();
 				UI_remove_answer("Zinaida");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Do take care of thyself!\"*");
 		say();
@@ -29140,6 +30058,7 @@ void Func0451 object#(0x451) ()
 				message("She straightens her shoulders and looks you in the eye.~~\"I am Elynor.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				if (gflags[0x011F])
@@ -29186,6 +30105,7 @@ void Func0451 object#(0x451) ()
 					gflags[0x011F] = true;
 					UI_add_answer("murders");
 				}
+				fallthrough;
 
 			case "Minoc":
 				if (!gflags[0x00F7])
@@ -29201,6 +30121,7 @@ void Func0451 object#(0x451) ()
 					UI_add_answer("Owen");
 				}
 				UI_remove_answer("Minoc");
+				fallthrough;
 
 			case "murders":
 				message("\"I am saddened at the loss of life but cannot say I am surprised. Frederico and Tania were antagonistic people. The same may be said of most gypsies. I have nothing against them personally, of course.\"");
@@ -29215,6 +30136,7 @@ void Func0451 object#(0x451) ()
 				{
 					UI_add_answer("Hook");
 				}
+				fallthrough;
 
 			case "deliver":
 				var0006 = false;
@@ -29337,6 +30259,7 @@ void Func0451 object#(0x451) ()
 					say();
 				}
 				UI_remove_answer("deliver");
+				fallthrough;
 
 			case "Owen":
 				if (!gflags[0x00F7])
@@ -29350,16 +30273,19 @@ void Func0451 object#(0x451) ()
 					say();
 				}
 				UI_remove_answer("Owen");
+				fallthrough;
 
 			case "antagonistic":
 				message("\"Frederico and Tania treated all members of our Fellowship as if we were diseased. Frederico particularly would often bully our members. Thou dost know, it is common knowledge that we are pacifists. He had a reputation for cruelty, even among his own people. It is not surprising he came to a violent end.\"");
 				say();
 				UI_remove_answer("antagonistic");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"The Fellowship is highly regarded in Minoc. Why, even the Mayor himself is a member. I brought him into The Fellowship myself. He was the first new member of our local branch. Gregor, the head of The Fellowship here, directs the Britannian Mining Company. Many Fellowship members pass through Minoc.\"");
 				say();
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "Elizabeth and Abraham":
 				if (!gflags[0x0217])
@@ -29374,6 +30300,7 @@ void Func0451 object#(0x451) ()
 					say();
 				}
 				UI_remove_answer("Elizabeth and Abraham");
+				fallthrough;
 
 			case "Hook":
 				if (var0001)
@@ -29387,6 +30314,7 @@ void Func0451 object#(0x451) ()
 					say();
 				}
 				UI_remove_answer("Hook");
+				fallthrough;
 
 			case "Crown Jewel":
 				if (var0001)
@@ -29400,11 +30328,13 @@ void Func0451 object#(0x451) ()
 					say();
 				}
 				UI_remove_answer("Crown Jewel");
+				fallthrough;
 
 			case "Gregor":
 				message("\"Thou dost dare to spy upon Gregor and I as we share our moments together?! Dost thou have no decency?! Gregor and I have a right to privacy the same as do any lovers!\"");
 				say();
 				UI_remove_answer("Gregor");
+				fallthrough;
 
 			case "candelabra":
 				if (var0001)
@@ -29426,15 +30356,16 @@ void Func0451 object#(0x451) ()
 					say();
 				}
 				UI_remove_answer("candelabra");
+				fallthrough;
 
 			case "gypsies":
 				message("\"They have set up camp southeast of town. Near the sawmill. That is suspicious, dost thou not think?\"");
 				say();
 				UI_remove_answer("gypsies");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"I have a feeling that we shall see each other again.\"*");
 		say();
@@ -29514,6 +30445,7 @@ void Func0452 object#(0x452) ()
 				message("\"My name is Gregor.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				if (gflags[0x011F])
@@ -29531,49 +30463,58 @@ void Func0452 object#(0x452) ()
 					gflags[0x011F] = true;
 					UI_add_answer("murders");
 				}
+				fallthrough;
 
 			case "Minoc":
 				message("\"Our town is a major center of trade in Britannia, and it is a place of social change.\"");
 				say();
 				UI_remove_answer("Minoc");
 				UI_add_answer(["trade", "social change"]);
+				fallthrough;
 
 			case "Britannian Mining Company":
 				message("\"The Britannian Mining Company produces a wide variety of minerals that are essential to the continuation of progress in\tBritannia.\"");
 				say();
 				UI_remove_answer("Britannian Mining Company");
+				fallthrough;
 
 			case "trade":
 				message("\"Here in Minoc we have one of the largest mining operations in Britannia, a sawmill, an inn, the Artist's Guild, and a shipwright.\"");
 				say();
 				UI_add_answer(["sawmill", "inn", "Artist's Guild", "shipwright"]);
 				UI_remove_answer("trade");
+				fallthrough;
 
 			case "social change":
 				message("\"Here in Minoc we are erecting a monument to our good shipwright Owen, a master craftsman whose name will soon be known throughout Britannia. We also have a very active Fellowship branch.\"");
 				say();
 				UI_remove_answer("social change");
 				UI_add_answer(["monument", "Fellowship"]);
+				fallthrough;
 
 			case "sawmill":
 				message("\"A long-standing and profitable business. A shame it will become more renowned for the murders that were committed there than for any of the fine work it does.\"");
 				say();
 				UI_remove_answer("sawmill");
+				fallthrough;
 
 			case "inn":
 				message("\"The Checquered Cork is famous for its rustic character and atmosphere. It is a fine place. Do not be put off by its apparent uncleanliness.\"");
 				say();
 				UI_remove_answer("inn");
+				fallthrough;
 
 			case "Artist's Guild":
 				message("\"The Artist's Guild is a small collection of craftspeople who have huddled together to sell their little trinkets. They pride themselves on being the local dissenters of everything.\"");
 				say();
 				UI_remove_answer("Artist's Guild");
+				fallthrough;
 
 			case "shipwright":
 				message("\"I may have already mentioned Owen, the shipwright. He builds the finest ships that have ever set sail.\"");
 				say();
 				UI_remove_answer("shipwright");
+				fallthrough;
 
 			case "monument":
 				message("\"I helped to organize things with Mayor Burnside to get the monument built.\"");
@@ -29584,25 +30525,28 @@ void Func0452 object#(0x452) ()
 					say();
 				}
 				UI_remove_answer("monument");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"They have done immeasurable good for Minoc, helping to counter the disunity that can plague a town such as ours where so many people are fixated upon monetary gain.\"");
 				say();
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "murders":
 				message("\"It is terrible! The gypsies Frederico and Tania have been found murdered in William's sawmill!\"");
 				say();
 				UI_remove_answer("murders");
+				fallthrough;
 
 			case "Elynor":
 				message("\"Leave us in peace, damn thee! Elynor and I are in love and we wish to be alone together! Find thy cheap excitations elsewhere!\"");
 				say();
 				UI_remove_answer("Elynor");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Be on thy way then.\"*");
 		say();
@@ -29667,38 +30611,45 @@ void Func0453 object#(0x453) ()
 			message("\"Margareta at thy service,\" she speaks slowly.");
 			say();
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			message("The gypsy woman smiles slightly. \"To tell thy destiny.\"");
 			say();
 			UI_add_answer("destiny");
+			fallthrough;
 
 		case "murders":
 			message("\"I knew it vould happen. I varned Frederico. He vouldn't listen.\"");
 			say();
 			UI_remove_answer("murders");
+			fallthrough;
 
 		case "Frederico":
 			message("\"He vas my brother-in-law. His death makes me very sad.\"");
 			say();
 			UI_remove_answer("Frederico");
 			UI_add_answer("husband");
+			fallthrough;
 
 		case "Tania":
 			message("\"She vas Frederico's vife, but thou dost know that already, no? She vas a good voman.\"");
 			say();
 			UI_remove_answer("Tania");
+			fallthrough;
 
 		case "Sasha":
 			message("Margareta is silent a moment.~~\"He has been led astray. It is unfortunate that he vill realize his mistake only as a result ov the death ov his parents.\"");
 			say();
 			UI_add_answer(["astray", "mistake"]);
 			UI_remove_answer("Sasha");
+			fallthrough;
 
 		case "astray":
 			message("\"There are many, many others like Sasha who have been led astray. For them, I see no future.\"");
 			say();
 			UI_remove_answer("astray");
+			fallthrough;
 
 		case "mistake":
 			message("\"Thou dost know vhat I mean.");
@@ -29715,6 +30666,7 @@ void Func0453 object#(0x453) ()
 			}
 			UI_add_answer("Fellowship");
 			UI_remove_answer("mistake");
+			fallthrough;
 
 		case "Fellowship":
 			if (var0000 && (!gflags[0x0006]))
@@ -29735,19 +30687,21 @@ void Func0453 object#(0x453) ()
 				say();
 			}
 			UI_remove_answer("Fellowship");
+			fallthrough;
 
 		case "destiny":
 			Func08BA();
 			UI_remove_answer("destiny");
+			fallthrough;
 
 		case "husband":
 			message("\"Jergi is mine husband, ov course. Now he has the veight ov guiding the gypsy race in these\ttroubled times.\"");
 			say();
 			UI_remove_answer("husband");
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	message("\"Fairvell. Go in peace.\"*");
 	say();
@@ -29789,43 +30743,51 @@ void Func0454 object#(0x454) ()
 			message("\"My name is Sasha.\"");
 			say();
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			message("\"I am too young to have a job. I am a gypsy as my parents vere gypsies. I am also a member of The Fellowship.\"");
 			say();
 			UI_add_answer(["parents", "gypsies", "Fellowship"]);
+			fallthrough;
 
 		case "parents":
 			message("\"My parents - Frederico and Tania - vere murdered. I do not know vhy anyone vould vant to harm them.\" The words choke out of the boy. Suddenly he is overwhelmed by grief and is unable to speak further.");
 			say();
 			UI_remove_answer("parents");
 			UI_add_answer("murders");
+			fallthrough;
 
 		case "murders":
 			message("\"It happened at the sawmill in Minoc.\"");
 			say();
 			UI_remove_answer("murders");
+			fallthrough;
 
 		case "Fellowship":
 			Func0919();
 			message("\"For the past veek I have been avay from home doing vork for The Fellowship.\"");
 			say();
 			UI_remove_answer("Fellowship");
+			fallthrough;
 
 		case "philosophy":
 			Func091A();
 			UI_remove_answer("philosophy");
+			fallthrough;
 
 		case "gypsies":
 			message("\"I have returned to be vith Margareta and Jergi to grieve for my parents. They did not approve of my joining The Fellowship but I know that they vere concerned out of their love for me, just as I loved them.\"");
 			say();
 			UI_remove_answer("gypsies");
 			UI_add_answer(["Margareta", "Jergi"]);
+			fallthrough;
 
 		case "Margareta":
 			message("\"She is very vise and knows many things but vhen I asked her if I should go back to The Fellowship or stay with them she did not answer me.\"");
 			say();
 			UI_remove_answer("Margareta");
+			fallthrough;
 
 		case "Jergi":
 			message("\"He vas my father's brother. He is a good man and vise. Now he is the leader of our people. He vill do what is right for us.\"");
@@ -29836,10 +30798,10 @@ void Func0454 object#(0x454) ()
 				say();
 			}
 			UI_remove_answer("Jergi");
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	message("The lad stoically nods and turns away.*");
 	say();
@@ -29882,6 +30844,7 @@ void Func0455 object#(0x455) ()
 				message(". At thy service.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				if (gflags[0x011F])
@@ -29897,39 +30860,46 @@ void Func0455 object#(0x455) ()
 					gflags[0x011F] = true;
 					UI_add_answer("murders");
 				}
+				fallthrough;
 
 			case "Minoc":
 				message("\"There is active commerce here in Minoc sufficient to keep the Artist's Guild financially solvent. But in recent weeks I have come to fear we may not keep it going for very much longer. Unlike The Fellowship or Owen's monument, we do not have much political power. Now other events make our troubles seem less important.\"");
 				say();
 				UI_remove_answer("Minoc");
 				UI_add_answer(["Fellowship", "monument", "power", "events"]);
+				fallthrough;
 
 			case "power":
 				message("\"The Artist's Guild is taxed mercilessly by the Britannian Tax Council. Even in our best year it is a struggle to make ends meet. It seems that we are not considered important enough to be given an even chance.\"");
 				say();
 				UI_remove_answer("power");
+				fallthrough;
 
 			case "events":
 				message("\"Surely thou hast heard about the murders of Frederico and Tania?!\"");
 				say();
 				UI_remove_answer("events");
 				UI_add_answer("murders");
+				fallthrough;
 
 			case "Artist's Guild":
 				message("\"The Artist's Guild is a group of local craftsmen. We sell our wares here in Minoc. While we are organized as a guild of equal members, I am tentatively the Guild head.\"");
 				say();
 				UI_remove_answer("Artist's Guild");
+				fallthrough;
 
 			case "murders":
 				message("\"I shudder to think such foul deeds are so freely committed in our fair town. Art thou investigating it? I wish thee all success in tracking the culprit. I barely knew Frederico or Tania, but I did meet their son Sasha once.\"");
 				say();
 				UI_add_answer("Sasha");
 				UI_remove_answer("murders");
+				fallthrough;
 
 			case "Sasha":
 				message("\"He befriended Seara and stayed the night with us once. He seemed like a nice young man, but misguided.\"");
 				say();
 				UI_remove_answer("Sasha");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"We do not get along very well with those people. I believe we have been unofficially marked as enemies of The Fellowship ever since all of the members of the Artist's Guild refused Elynor's invitation to join. They dislike us because they consider us to be indisposed toward Unity.\"");
@@ -29952,6 +30922,7 @@ void Func0455 object#(0x455) ()
 					}
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "monument":
 				if (!gflags[0x00F7])
@@ -29967,26 +30938,29 @@ void Func0455 object#(0x455) ()
 					abort;
 				}
 				UI_remove_answer("monument");
+				fallthrough;
 
 			case "statue":
 				message("\"I fear we have grievously miscalculated by thinking that if we boycotted the statue, it would not be built. It seems all the talk of it has made Owen into some sort of bizarre legend around this area, and the bloody statue hasn't even gone up yet! But that, I fear, is not the worst of the situation.\"");
 				say();
 				UI_remove_answer("statue");
 				UI_add_answer("worst");
+				fallthrough;
 
 			case "worst":
 				message("\"Once the statue is built, orders for ship-building are bound to increase even more! It won't take long before all local commerce will become affected by it. Owen will be purchasing more of the local resources, which will cause prices to rise, especially at the sawmill, and that will surely force the Artist's Guild into bankruptcy.\"");
 				say();
 				UI_remove_answer("worst");
+				fallthrough;
 
 			case "glass":
 				message("\"I regret that I do not have any of my work for sale at present. Like our other artists I have a backlog of orders that will keep me busy for the foreseeable future. But there are several examples of my work, of which I am most proud, in the Guild Hall on display. If thou art interested, please have a look at them.\"");
 				say();
 				UI_remove_answer("glass");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good journey, my friend.\"*");
 		say();
@@ -30032,6 +31006,7 @@ void Func0456 object#(0x456) ()
 				message("\"Hello, my name is Xanthia.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				if (gflags[0x011F])
@@ -30047,17 +31022,20 @@ void Func0456 object#(0x456) ()
 					gflags[0x011F] = true;
 					UI_add_answer("murders");
 				}
+				fallthrough;
 
 			case "Artist's Guild":
 				message("\"We are a guild of artists and craftspeople united for the common good and dedicated to the advancement of the arts, as well as showing other artists that it is possible to exist solely by thine own efforts without sacrificing thy creativity.\"");
 				say();
 				UI_remove_answer("Artist's Guild");
+				fallthrough;
 
 			case "candelabras":
 				message("\"I make simple candelabras, but sometimes I will do commissioned work, making more specific ones. I was hired by The Fellowship to make the candelabras for all of their Fellowship halls.\"");
 				say();
 				UI_remove_answer("candelabras");
 				UI_add_answer("Fellowship");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"Elynor, the head of the local Fellowship branch, showed me a picture of the Fellowship symbol and I based the design for my candelabra on that.\"");
@@ -30068,12 +31046,14 @@ void Func0456 object#(0x456) ()
 				{
 					UI_add_answer("candelabra at murder site");
 				}
+				fallthrough;
 
 			case "Elynor":
 				message("\"Yes, she's quite a recruiter. Why, she got Burnside, our Mayor, to join, as well as Gregor, the local head of the Britannian Mining Company, and Owen, our shipwright. He is soon to be famous, I am sorry to say. She has never asked me to join, thank goodness.\"");
 				say();
 				UI_remove_answer("Elynor");
 				UI_add_answer("Owen");
+				fallthrough;
 
 			case "candelabra at murder site":
 				message("You describe the candelabra found at the murder scene to Xanthia. Her eyes widen with recognition. \"Yes, that is one of the candelabras I made. 'Twas in the sawmill at the murder site?\"");
@@ -30091,32 +31071,36 @@ void Func0456 object#(0x456) ()
 				}
 				gflags[0x0125] = true;
 				UI_remove_answer("candelabra at murder site");
+				fallthrough;
 
 			case "Minoc":
 				message("\"With the success of the mine, Minoc is a prosperous city. Not a place where one is used to having murders happen. A good place for our Artist's Guild to do well. But things have always been hard for us here. Now I fear they may get worse.\"");
 				say();
 				UI_remove_answer("Minoc");
 				UI_add_answer(["worse", "murders"]);
+				fallthrough;
 
 			case "worse":
 				message("\"That is what Gladstone says. Thou hadst better ask him about it.\"");
 				say();
 				UI_remove_answer("worse");
+				fallthrough;
 
 			case "murders":
 				message("\"It is so terrible! I never knew Frederico or Tania personally, but I did meet their son, Sasha, once. He was a nice boy, if somewhat misguided. He spent the night with us once at the Artist's Guild, as a guest of Seara.\"");
 				say();
 				gflags[0x00FE] = true;
 				UI_remove_answer("murders");
+				fallthrough;
 
 			case "Owen":
 				message("\"They are to build a monument to Owen for some reason or another. Owen and Elynor refuse to use anyone from the Guild to help build it! Rather rude of them, dost thou not think?\"");
 				say();
 				UI_remove_answer("Owen");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Farewell, ");
 		message(var0000);
@@ -30180,6 +31164,7 @@ void Func0457 object#(0x457) ()
 				message("\"I am Zorn.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				if (gflags[0x011F])
@@ -30195,18 +31180,21 @@ void Func0457 object#(0x457) ()
 					gflags[0x011F] = true;
 					UI_add_answer("murders");
 				}
+				fallthrough;
 
 			case "blacksmith":
 				message("\"I make weapons and armour.\"");
 				say();
 				UI_remove_answer("blacksmith");
 				UI_add_answer("weapons and armour");
+				fallthrough;
 
 			case "Minoc":
 				message("\"Minoc is quite a city. Money changes hands here. But it does not keep people happy. They find something to squabble over. And now these terrible murders have everyone afraid.\"");
 				say();
 				UI_remove_answer("Minoc");
 				UI_add_answer(["squabble", "murders"]);
+				fallthrough;
 
 			case "weapons and armour":
 				if (var0002 == 0x000D)
@@ -30221,6 +31209,7 @@ void Func0457 object#(0x457) ()
 					say();
 				}
 				UI_remove_answer("weapons and armour");
+				fallthrough;
 
 			case "buy weapons":
 				if (!(var0002 == 0x000D))
@@ -30234,6 +31223,7 @@ void Func0457 object#(0x457) ()
 					say();
 					Func0952();
 				}
+				fallthrough;
 
 			case "buy armour":
 				if (!(var0002 == 0x000D))
@@ -30247,33 +31237,39 @@ void Func0457 object#(0x457) ()
 					say();
 					Func0953();
 				}
+				fallthrough;
 
 			case "squabble":
 				message("\"This noise over Owen's monument, for instance. People ought to tend to their own business and let others handle their own, foolish or not.\"");
 				say();
 				UI_add_answer(["Owen", "monument"]);
 				UI_remove_answer("squabble");
+				fallthrough;
 
 			case "Owen":
 				message("\"He is our town shipwright. He is a man who has an exceedingly high opinion of himself.\"");
 				say();
 				UI_remove_answer("Owen");
+				fallthrough;
 
 			case "monument":
 				message("\"Owen is building a monument to himself. It is forty feet tall, depicting him holding up a roll of plans. Pigeons will have a place to sit, forevermore. Why argue over something as unimportant as that?\"");
 				say();
 				UI_remove_answer("monument");
+				fallthrough;
 
 			case "murders":
 				message("\"No one in this town ever really hated the gypsies, at least not that I have ever been aware of. Who could have done such a thing?\"");
 				say();
 				UI_remove_answer("murders");
+				fallthrough;
 
 			case "Caddellite":
 				message("You present the Caddellite to Zorn. \"This is amazing! Why I thought that the only place to find Caddellite was the lost island of Ambrosia. What should I make with this?\"");
 				say();
 				UI_remove_answer("Caddellite");
 				UI_add_answer("helmet");
+				fallthrough;
 
 			case "helmet":
 				message("You describe the sort of helmet that you require, one that can block out the dangerous sound from the cube generator. Zorn nods. \"Yes, I can make some for thee. I shall start work immediately.\"");
@@ -30344,10 +31340,10 @@ void Func0457 object#(0x457) ()
 					}
 				}
 				UI_remove_answer("helmet");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye, ");
 		message(var0000);
@@ -30425,6 +31421,7 @@ void Func0458 object#(0x458) ()
 				message(". A pleasure to meet thee.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				if (gflags[0x011F])
@@ -30442,39 +31439,46 @@ void Func0458 object#(0x458) ()
 					gflags[0x011F] = true;
 					UI_add_answer("murders");
 				}
+				fallthrough;
 
 			case "Artist's Guild":
 				message("\"Yes, we have an Artist's Guild here in Minoc. I am a member. The other members are Xanthia and Gladstone. Thou canst purchase some of the finest crafts available anywhere in Britannia there. I, for example, make clocks.\"");
 				say();
 				UI_add_answer(["Xanthia", "Gladstone", "clocks"]);
 				UI_remove_answer("Artist's Guild");
+				fallthrough;
 
 			case "Xanthia":
 				message("\"Xanthia is a very talented young woman. She makes very elaborate and distinctive candelabras.\"");
 				say();
 				UI_remove_answer("Xanthia");
+				fallthrough;
 
 			case "Gladstone":
 				message("\"Gladstone is a sculptor and a glassblower. He also is in charge of most of the business decisions for the Guild.\"");
 				say();
 				UI_remove_answer("Gladstone");
+				fallthrough;
 
 			case "clocks":
 				message("\"I make all types of clocks and watches that tell the time reliably to the second. I would be happy to sell thee one but right now I have a two year backlog to fill.\"");
 				say();
 				UI_remove_answer("clocks");
+				fallthrough;
 
 			case "Minoc":
 				message("\"Until the monument was to be built and now these murders I believed this town to be a good place to live.\"");
 				say();
 				UI_remove_answer("Minoc");
 				UI_add_answer(["monument", "murders"]);
+				fallthrough;
 
 			case "murders":
 				message("\"It is horrible. Frederico and Tania were looking for their son, Sasha. He had run away to join the Fellowship. How could this have happened to them?\" Seara slowly shakes his head.");
 				say();
 				UI_remove_answer("murders");
 				UI_add_answer("Sasha");
+				fallthrough;
 
 			case "Sasha":
 				if (!gflags[0x00FF])
@@ -30492,11 +31496,13 @@ void Func0458 object#(0x458) ()
 					UI_remove_answer("Sasha");
 					UI_add_answer("Fellowship");
 				}
+				fallthrough;
 
 			case "gypsies":
 				message("\"Their camp is just outside of town. There are not too many of them left. I understand that Sasha's aunt, Margareta, is an amazing fortune teller. For a few gold coins, she can tell thee many things that may be very useful to thee.\"");
 				say();
 				UI_remove_answer("gypsies");
+				fallthrough;
 
 			case "Fellowship":
 				if (var0001)
@@ -30512,21 +31518,23 @@ void Func0458 object#(0x458) ()
 					UI_remove_answer("philosophy");
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "monument":
 				message("\"That shipwright Owen is a self-righteous fool. His statue will be nothing more than a monument to all the hurtful bad feelings he has caused in this town. I cannot believe that such a meaningless and obvious charade\tcould jeopardize our Guild's future.\"");
 				say();
 				UI_remove_answer("monument");
 				UI_add_answer("future");
+				fallthrough;
 
 			case "future":
 				message("\"Thou hadst best ask Gladstone about that.\"");
 				say();
 				UI_remove_answer("future");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"A pleasant day to thee, ");
 		message(var0000);
@@ -30594,6 +31602,7 @@ void Func0459 object#(0x459) ()
 			}
 			UI_remove_answer("name");
 			UI_add_answer("Minoc");
+			fallthrough;
 
 		case "job":
 			message("\"Job?! Art thou mad, ");
@@ -30607,11 +31616,13 @@ void Func0459 object#(0x459) ()
 			say();
 			UI_remove_answer("Minoc");
 			UI_add_answer(["murders", "monument", "Fellowship"]);
+			fallthrough;
 
 		case "murders":
 			message("\"Hmmph. Why should that be any concern of mine? People kill each other every day. Oh, thou art investigating the crime! Well, do not let me keep thee from it. After thou dost catch the murderer thou canst build a statue of him.\"");
 			say();
 			UI_remove_answer("murders");
+			fallthrough;
 
 		case "Fellowship":
 			if (var0002)
@@ -30626,6 +31637,7 @@ void Func0459 object#(0x459) ()
 				say();
 				abort;
 			}
+			fallthrough;
 
 		case "monument":
 			message("\"Owen, the shipwright, dost deserve to have a monument built to him. It should be in the shape of a gallows and it should have him hanging from it.\"*");
@@ -30637,22 +31649,26 @@ void Func0459 object#(0x459) ()
 			say();
 			UI_remove_answer("brother");
 			UI_add_answer(["Owen", "several ships"]);
+			fallthrough;
 
 		case "Owen":
 			message("\"I confronted Owen with this and he denied that it had anything to do with his workmanship. I returned that night and stole the plans he had drafted, so at least no other ships would ever be built like them again. But it left me so angry at the world that I knew I could not live among people ever again. I went away to live up in the mountains. The only times I ever come back are to fetch a few supplies and maybe have a drink of Rutherford's fine ale once in a while.\"");
 			say();
 			UI_remove_answer("Owen");
 			UI_add_answer(["plans", "fine ale"]);
+			fallthrough;
 
 		case "several ships":
 			message("\"Three other ships that were built from Owen's basic designs all sunk within the first year of their launch. Over a dozen lives were lost due to that vainglorious bastard!\"");
 			say();
 			UI_remove_answer("several ships");
+			fallthrough;
 
 		case "fine ale":
 			message("\"If not for Rutherford's fine ale, there would no purpose to the existence of civilization.\"");
 			say();
 			UI_remove_answer("fine ale");
+			fallthrough;
 
 		case "plans":
 			message("\"I still have those plans up in my cabin. Every once in a while I try to figure them out. I suspect no one in town, save for Owen himself, could understand them. Maybe Julia, the tinker, would be able to shed some light on them. But she would never listen to an old mountain man like me.\"");
@@ -30669,17 +31685,20 @@ void Func0459 object#(0x459) ()
 			gflags[0x010B] = true;
 			UI_remove_answer("plans");
 			UI_add_answer(["Julia", "mountain man"]);
+			fallthrough;
 
 		case "mountain man":
 			message("\"Far away from the mire of present day society is where I belong. In the wilderness thou canst know what is what.\"");
 			say();
 			UI_remove_answer("mountain man");
+			fallthrough;
 
 		case "Julia":
 			message("\"If thou dost want to show Julia the plans, I will give them to thee. They are in my cabin southeast of the BMC office.\"");
 			say();
 			gflags[0x0120] = true;
 			UI_remove_answer("Julia");
+			fallthrough;
 
 		case "follow":
 			message("\"Make up thy mind! Art thou following me or not?! If thou art following me then close thy mouth, move thy feet and let us get on.\"");
@@ -30688,7 +31707,6 @@ void Func0459 object#(0x459) ()
 
 		case "bye":
 			break;
-
 	}
 	if (gflags[0x00F7])
 	{
@@ -30800,6 +31818,7 @@ void Func045A object#(0x45A) ()
 				say();
 				gflags[0x0123] = true;
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job", "statue is cancelled":
 				if (gflags[0x011F])
@@ -30832,29 +31851,34 @@ void Func045A object#(0x45A) ()
 					gflags[0x011F] = true;
 					UI_add_answer("murders");
 				}
+				fallthrough;
 
 			case "greatest":
 				message("\"And dost thou know how I became that way? I shall tell thee! I started to hear a voice in mine head! Oh, I know that thou shalt think me mad...\"");
 				say();
 				UI_remove_answer("greatest");
 				UI_add_answer(["mad", "voices"]);
+				fallthrough;
 
 			case "voices":
 				message("\"These were not the voices of anyone I have ever known. But still these voices had a profound effect on me...\"");
 				say();
 				UI_remove_answer("voices");
+				fallthrough;
 
 			case "mad":
 				message("\"After searching for a meaning to this voice - which proved difficult, for how dost thou tell someone, especially a stranger, that thou art hearing a voice in thine head - I came across The Fellowship. They taught me what the voice was.\"");
 				say();
 				UI_remove_answer("mad");
 				UI_add_answer(["voice", "Fellowship"]);
+				fallthrough;
 
 			case "voice":
 				message("\"This was the voice of reason within mine own mind which sought to guide my life in its proper direction. The Fellowship taught me how to trust this voice and heed what it says. And thou canst see the results in mine own life! I have mastered my craft and advanced the techniques of ship-building through the methods I have devised.\"");
 				say();
 				UI_remove_answer("voice");
 				UI_add_answer("methods");
+				fallthrough;
 
 			case "buy":
 				if (var0001 == 0x0007)
@@ -30942,6 +31966,7 @@ void Func045A object#(0x45A) ()
 					say();
 				}
 				UI_remove_answer("buy");
+				fallthrough;
 
 			case "methods":
 				message("\"I have even written a book describing the advances I have made in the methods of ship-building. It is very advanced but I have tried to write it so that it is accessible to the layman. Wouldst thou be interested in purchasing a copy?\"");
@@ -30989,6 +32014,7 @@ void Func045A object#(0x45A) ()
 					say();
 				}
 				UI_remove_answer("methods");
+				fallthrough;
 
 			case "ship":
 				if (!gflags[0x00F7])
@@ -31026,18 +32052,21 @@ void Func045A object#(0x45A) ()
 					}
 				}
 				UI_remove_answer("ship");
+				fallthrough;
 
 			case "Minoc":
 				message("\"Despite all this business with murders, I must confess that I love it here. This is the place where I was born. They love me. They are going to be building a monument here in mine honor. I suppose I have been worthy of it, but still I can't help but be flattered.\"");
 				say();
 				UI_add_answer(["murders", "monument"]);
 				UI_remove_answer("Minoc");
+				fallthrough;
 
 			case "ungrateful":
 				message("\"Apparently, building the greatest ships to ever set sail in history and all that that has done for Minoc are no longer enough! No! Thanks to that pompous idiot of a mayor I am denied the rightful tribute of which I have proven myself more than worthy. Design flaws, bah! How many ships has Mayor Burnside built in his miserable little life?!\"");
 				say();
 				UI_add_answer("there were deaths");
 				UI_remove_answer("ungrateful");
+				fallthrough;
 
 			case "murders":
 				if (!gflags[0x0122])
@@ -31051,6 +32080,7 @@ void Func045A object#(0x45A) ()
 					say();
 				}
 				UI_remove_answer("murders");
+				fallthrough;
 
 			case "there were deaths":
 				message("You tell him about the many innocent civilians who lost their lives on the ship he built. Owen shakes his head slowly. \"I do not know. I have no idea how it could have happened. It is difficult to conceive of the pain such great loss of life brings into this world. But I did my best when I built those ships. I did not want those men to die. Thou must believe me.\"");
@@ -31059,6 +32089,7 @@ void Func045A object#(0x45A) ()
 				say();
 				UI_remove_answer("there were deaths");
 				UI_add_answer("tribute");
+				fallthrough;
 
 			case "Fellowship":
 				if (!gflags[0x00F7])
@@ -31075,10 +32106,12 @@ void Func045A object#(0x45A) ()
 					UI_add_answer("personal life");
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "philosophy":
 				Func091A();
 				UI_remove_answer("philosophy");
+				fallthrough;
 
 			case "personal life":
 				if (!gflags[0x00F7])
@@ -31088,6 +32121,7 @@ void Func045A object#(0x45A) ()
 					UI_add_answer("darkness");
 				}
 				UI_remove_answer("personal life");
+				fallthrough;
 
 			case "darkness":
 				if (!gflags[0x00F7])
@@ -31101,11 +32135,13 @@ void Func045A object#(0x45A) ()
 					say();
 				}
 				UI_remove_answer("darkness");
+				fallthrough;
 
 			case "monument":
 				message("\"Oh, thou canst ask anyone in town about it. They all know.\"");
 				say();
 				UI_remove_answer("monument");
+				fallthrough;
 
 			case "tribute":
 				message("\"I know! My work will stand as my monument! My name will endure long after any statue has worn away to dust! People will remember -me-, I promise thee that!\"");
@@ -31131,6 +32167,7 @@ void Func045A object#(0x45A) ()
 					say();
 				}
 				UI_remove_answer("Crown Jewel");
+				fallthrough;
 
 			case "Hook":
 				if (!gflags[0x00FA])
@@ -31147,10 +32184,10 @@ void Func045A object#(0x45A) ()
 					say();
 				}
 				UI_remove_answer("Hook");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		if (!gflags[0x00F7])
 		{
@@ -31237,6 +32274,7 @@ void Func045B object#(0x45B) ()
 				message("\"Burnside is my name.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				if (gflags[0x011F])
@@ -31254,17 +32292,20 @@ void Func045B object#(0x45B) ()
 					gflags[0x011F] = true;
 					UI_add_answer("murders");
 				}
+				fallthrough;
 
 			case "Minoc":
 				message("\"Apart from this business of the murders we are a town run by commerce. Gold runs this town. As goes the money, so goes Minoc. Take this monument affair, for instance.\"");
 				say();
 				UI_remove_answer("Minoc");
 				UI_add_answer(["murders", "monument"]);
+				fallthrough;
 
 			case "murders":
 				message("\"As Frederico and Tania were not actually residents of Minoc there is little I can do as Mayor other than increase the town guard. The investigation falls somewhat beyond my jurisdiction. It would appear the killer or killers were from out of town and are probably long gone by now. Thank goodness.\"");
 				say();
 				UI_remove_answer("murders");
+				fallthrough;
 
 			case "monument":
 				if (!gflags[0x00F7])
@@ -31279,17 +32320,20 @@ void Func045B object#(0x45B) ()
 					say();
 				}
 				UI_remove_answer("monument");
+				fallthrough;
 
 			case "vanity":
 				message("\"But in this special case it does immeasurable good for the town. It increases our prestige. People will come from all over Britannia for the unveiling.\"");
 				say();
 				UI_remove_answer("vanity");
 				UI_add_answer("unveiling");
+				fallthrough;
 
 			case "unveiling":
 				message("\"Why, even Lord British himself will be in attendance! It is a special opportunity when one gets a private audience.\"");
 				say();
 				UI_remove_answer("unveiling");
+				fallthrough;
 
 			case "Fellowship":
 				if (var0004)
@@ -31304,6 +32348,7 @@ void Func045B object#(0x45B) ()
 				}
 				UI_remove_answer("Fellowship");
 				UI_add_answer("Elynor");
+				fallthrough;
 
 			case "Elynor":
 				if (var0004)
@@ -31320,6 +32365,7 @@ void Func045B object#(0x45B) ()
 					UI_add_answer("feelings");
 					UI_remove_answer("Elynor");
 				}
+				fallthrough;
 
 			case "member":
 				message("\"I was given an honorary membership when the Fellowship branch was first opened in Minoc. I do not attend regular meetings. I hope thou'rt not disappointed in me?\"");
@@ -31337,6 +32383,7 @@ void Func045B object#(0x45B) ()
 					UI_add_answer("feelings");
 				}
 				UI_remove_answer("member");
+				fallthrough;
 
 			case "feelings":
 				message("\"Avatar, may I tell thee a secret?\"");
@@ -31353,23 +32400,27 @@ void Func045B object#(0x45B) ()
 					say();
 				}
 				UI_remove_answer("feelings");
+				fallthrough;
 
 			case "plans":
 				message("You show the Mayor the plans Owen had drawn, making sure to carefully point out the flaws discovered by Julia. The Mayor is aghast.~~\"This is terrible! No one must see this! It would ruin Owen and cause irreparable damage to our town if it became known that our shipwright caused those deaths!\"");
 				say();
 				UI_remove_answer("plans");
 				UI_add_answer(["damage", "deaths"]);
+				fallthrough;
 
 			case "damage":
 				message("\"But very few suspect the deaths are attributable to Owen's shipbuilding! We can destroy the plans and the truth would never get out! It would save the town from disgrace and possible ruin!\"");
 				say();
 				UI_remove_answer("damage");
+				fallthrough;
 
 			case "deaths":
 				message("\"Then again, the ships Owen builds will continue to sink. It would harm Minoc even more if it were to become known as the place where the \"death ships\" are made. A town that built a monument to an incompetent.\"");
 				say();
 				UI_remove_answer(["deaths", "damage"]);
 				UI_add_answer("statue");
+				fallthrough;
 
 			case "statue":
 				message("\"There are no two ways about it. The statue must be stopped. I am hereby cancelling the erection of the statue.\"");
@@ -31378,10 +32429,10 @@ void Func045B object#(0x45B) ()
 				say();
 				gflags[0x00F7] = true;
 				UI_remove_answer("statue");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"A pleasure, friend Avatar. A pleasure.\"*");
 		say();
@@ -31456,6 +32507,7 @@ void Func045C object#(0x45C) ()
 				message("He lets out a sharp cough to clear his throat. \"Rutherford's me name. Pleased ta meet 'chur.\"~~ He extends his greasy hand for you to shake and does not retract it until it is clasped.");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				if (gflags[0x011F])
@@ -31486,6 +32538,7 @@ void Func045C object#(0x45C) ()
 					say();
 					gflags[0x011F] = true;
 				}
+				fallthrough;
 
 			case "buy":
 				if (var0002 == 0x0017)
@@ -31500,6 +32553,7 @@ void Func045C object#(0x45C) ()
 					say();
 				}
 				UI_remove_answer("buy");
+				fallthrough;
 
 			case "room":
 				if (var0002 == 0x0017)
@@ -31551,6 +32605,7 @@ void Func045C object#(0x45C) ()
 					say();
 				}
 				UI_remove_answer("room");
+				fallthrough;
 
 			case "Minoc":
 				message("\"Yep, this town's usually bloody quiet. That was until recently!\" His squinting eye suddenly opens wide and stares straight at you.");
@@ -31561,17 +32616,20 @@ void Func045C object#(0x45C) ()
 					say();
 				}
 				UI_remove_answer("Minoc");
+				fallthrough;
 
 			case "events":
 				message("\"Before all this evil at the sawmill, the buzz were all about the monument.\"");
 				say();
 				UI_remove_answer("events");
 				UI_add_answer(["monument", "sawmill"]);
+				fallthrough;
 
 			case "murders":
 				message("\"Well, I suppose that clears thee from the list o' possible murderers. If'n thou wert the murderer, thou wouldst not have to be askin' questions o'people about wha' 'appened regardin' the murders. Thou wouldst already know, havin' been there.\"");
 				say();
 				UI_remove_answer("murders");
+				fallthrough;
 
 			case "sawmill":
 				message("\"Say, thou be not from around here?\" He looks at you skeptically. \"Thou art not from the Fellowship by any chance, art thou?\"");
@@ -31590,6 +32648,7 @@ void Func045C object#(0x45C) ()
 					UI_add_answer(["murders", "Fellowship"]);
 				}
 				UI_remove_answer("sawmill");
+				fallthrough;
 
 			case "Hook":
 				message("\"I know him! He be a pirate who lives in Buccaneer's Den. They say Hook is so mean he'd kill his own mudder for the right price, an' I would wager they's right.~~\"Why, I got into a fight with this Hook once. I was lucky and I escaped losin' only my right arm and still with one good eye left. It was somewhere around that time that I started having second thoughts about my career as a pirate and now here I be.");
@@ -31599,25 +32658,28 @@ void Func045C object#(0x45C) ()
 				gflags[0x0104] = true;
 				Func0911(0x000A);
 				UI_remove_answer("Hook");
+				fallthrough;
 
 			case "Crown Jewel":
 				message("\"That ship was, indeed, here of late. In fact, 'twas the night of the murders! Could there be a connection? Hmmm...\"");
 				say();
 				UI_remove_answer("Crown Jewel");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"Thank goodness that with all the town at each others' throats in recent weeks we have the Fellowship tryin' to hold the town together. I be no member or nothin', but I just a'heared of all the good things they done. Feedin' the poor an' such.\"");
 				say();
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "monument":
 				message("\"Oh, thou must mean thet statuer they are goin' ta build of our shipwright. His name is Owen, a local boy. I understan' it is to be as tall as a man on horseback and shows Owen gazin' through a telerscope or some such thing like that.\"");
 				say();
 				UI_remove_answer("monument");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"I shall see thee later... At least I will if thou dost stay in the front o' me good eye.\"*");
 		say();
@@ -31692,6 +32754,7 @@ void Func045D object#(0x45D) ()
 				message(".\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				if (gflags[0x011F])
@@ -31707,17 +32770,20 @@ void Func045D object#(0x45D) ()
 					gflags[0x011F] = true;
 					UI_add_answer("murders");
 				}
+				fallthrough;
 
 			case "sawmill":
 				message("\"I take the logs that are made from all the trees that are cut down by the logger in Yew, and cut them into planks in the local sawmill. Then I sell the planks - mostly to Owen the shipwright, and some to the Artist's Guild as well.\"");
 				say();
 				UI_remove_answer("sawmill");
+				fallthrough;
 
 			case "Minoc":
 				message("\"It was such a quiet town until these murders happened. I cannot believe it.\"");
 				say();
 				UI_remove_answer("Minoc");
 				UI_add_answer("murders");
+				fallthrough;
 
 			case "murders":
 				if (!gflags[0x010A])
@@ -31733,6 +32799,7 @@ void Func045D object#(0x45D) ()
 				}
 				UI_remove_answer("murders");
 				UI_add_answer("Fellowship");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"I have been a member of The Fellowship for only a short time. I have only of late begun attending Elynor's meetings. Only since they announced the monument was to be built.\"");
@@ -31759,19 +32826,21 @@ void Func045D object#(0x45D) ()
 				}
 				UI_remove_answer("Fellowship");
 				UI_add_answer("monument");
+				fallthrough;
 
 			case "philosophy":
 				Func091A();
 				UI_remove_answer("philosophy");
+				fallthrough;
 
 			case "monument":
 				message("\"Thou dost know! The monument of Owen the shipwright standing on the bow of a tall ship. Everyone in town doth know of it!\"");
 				say();
 				UI_remove_answer("monument");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("As soon as he has dismissed you, the overwrought William hides his face in his hands.*");
 		say();
@@ -31829,6 +32898,7 @@ void Func045E object#(0x45E) ()
 				message("\"I answer to Karenna, and to nothing else.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				if (gflags[0x011F])
@@ -31846,17 +32916,20 @@ void Func045E object#(0x45E) ()
 					gflags[0x011F] = true;
 					UI_add_answer("murders");
 				}
+				fallthrough;
 
 			case "Minoc":
 				message("\"Minoc was usually busy, but quiet. Then our town was bothered by this nonsense over Owen's monument, and now these murders.\"");
 				say();
 				UI_add_answer(["monument", "murders"]);
 				UI_remove_answer("Minoc");
+				fallthrough;
 
 			case "murders":
 				message("\"Shocking! Such things do not normally happen here. It well proves the value of knowing how to defend oneself.\"");
 				say();
 				UI_remove_answer("murders");
+				fallthrough;
 
 			case "Jakher":
 				message("\"He is quite an able trainer in his own right. Not as skilled as myself, obviously. But I do think he is cute, though I bid thee, do not tell him that I spoke of this. It will only encourage him.\"");
@@ -31875,6 +32948,7 @@ void Func045E object#(0x45E) ()
 				}
 				gflags[0x00F6] = true;
 				UI_remove_answer("Jakher");
+				fallthrough;
 
 			case "teacher":
 				if (var0002 == 0x001B)
@@ -31898,23 +32972,27 @@ void Func045E object#(0x45E) ()
 					say();
 					UI_remove_answer("teacher");
 				}
+				fallthrough;
 
 			case "monument":
 				message("\"I understand it is to be thirty feet high and will display our local shipwright as he holds aloft a sextant. Thou wouldst not believe a thing as benign as this could create such trouble.\"");
 				say();
 				UI_remove_answer("monument");
 				UI_add_answer("trouble");
+				fallthrough;
 
 			case "trouble":
 				message("\"It would seem the increase in hostilities amongst the fair citizenry over our shipwright's monument has filled much of the local populace with a burning desire to acquire combative skills. Business has never been better!\"");
 				say();
 				UI_remove_answer("trouble");
 				UI_add_answer("hostilities");
+				fallthrough;
 
 			case "hostilities":
 				message("\"Everyone in town is all up in arms about this and that. But surely others would know more of these local politics. I care not.\"");
 				say();
 				UI_remove_answer("hostilities");
+				fallthrough;
 
 			case "attractive":
 				message("\"Jakher told thee he doth find me attractive? He denies it, of course, but I have known for years that he doth have feelings for me.\"");
@@ -31932,21 +33010,23 @@ void Func045E object#(0x45E) ()
 					UI_show_npc_face(0xFFA2, 0x0000);
 				}
 				UI_remove_answer("attractive");
+				fallthrough;
 
 			case "gypsies":
 				message("\"Frederico, the leader of the Gypsies, and his wife, Tania, were good people. Why, the worst thing I ever knew either of them to do was a simple prank.\"");
 				say();
 				UI_remove_answer("gypsies");
 				UI_add_answer("prank");
+				fallthrough;
 
 			case "prank":
 				message("\"Once Frederico threw a rock through the window of the local Fellowship branch... Oh, well, I thought it was amusing!\"");
 				say();
 				UI_remove_answer("prank");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Farewell. May all thy journeys be interesting ones.\"*");
 		say();
@@ -32002,6 +33082,7 @@ void Func045F object#(0x45F) ()
 				say();
 				UI_remove_answer("name");
 				UI_add_answer("Minoc");
+				fallthrough;
 
 			case "job":
 				if (gflags[0x011F])
@@ -32017,6 +33098,7 @@ void Func045F object#(0x45F) ()
 					gflags[0x011F] = true;
 					UI_add_answer("murders");
 				}
+				fallthrough;
 
 			case "trainer":
 				if (var0002 == 0x001B)
@@ -32041,23 +33123,27 @@ void Func045F object#(0x45F) ()
 					say();
 					UI_remove_answer("trainer");
 				}
+				fallthrough;
 
 			case "Minoc":
 				message("\"Ours is a city of commerce, although lately its primary trade seems to be gossip and envy. Before these murders, the latest local scandal had been the statue to be built of Owen, the shipwright.\"");
 				say();
 				UI_remove_answer("Minoc");
 				UI_add_answer(["murders", "Owen"]);
+				fallthrough;
 
 			case "murders":
 				message("\"I suspect the killer -- or killers -- are from out of town, and probably long gone by now. There has not been a local murder for\tsome time before today. Our fair measure of prosperity has made the people here mostly tolerant of each other. That is why the gypsies settled here. The apparent lack of motive is puzzling.\"");
 				say();
 				UI_remove_answer("murders");
 				UI_add_answer(["gone", "gypsies"]);
+				fallthrough;
 
 			case "gone":
 				message("\"I doubt that anyone in our community is the killer. If the stranger, or strangers, involved were to remain for long after the crime, they would soon be revealed. Therefore,the killers are no longer in town.\"");
 				say();
 				UI_remove_answer("gone");
+				fallthrough;
 
 			case "Karenna":
 				message("\"A skillful and fierce battler, but a bit short-sighted when it comes to tactics, I'm afraid. Still, a woman as attractive as\tshe is diverting enough when encountered. But do not mention to her that I said that. It would just encourage her. It is uncomfortable enough sharing the same roof with her as it is.\"");
@@ -32077,6 +33163,7 @@ void Func045F object#(0x45F) ()
 				UI_remove_answer("Karenna");
 				var0004 = true;
 				UI_add_answer(["short-sighted", "roof"]);
+				fallthrough;
 
 			case "short-sighted":
 				message("\"She is the sort of person who labors under the belief that all problems can be solved in one of three ways. Hit them harder. Hit them faster. Or, hit them some more.\"");
@@ -32094,32 +33181,36 @@ void Func045F object#(0x45F) ()
 					UI_show_npc_face(0xFFA1, 0x0000);
 				}
 				UI_remove_answer("short-sighted");
+				fallthrough;
 
 			case "roof":
 				message("\"There used to be two training halls in Minoc but one of them burned down after being struck by lightning. Now we are both forced to share this one.\"");
 				say();
 				UI_remove_answer("roof");
+				fallthrough;
 
 			case "cute":
 				message("\"Ah, so Karenna said I was cute, did she? Yes, I have known she has had her sights set on me for years.\"");
 				say();
 				UI_remove_answer("cute");
+				fallthrough;
 
 			case "Owen":
 				message("\"I have known Owen as long as anyone in this town. Several years ago, three ships that he built sank. The brother of Karl, one of our more colorful local residents, was killed. No investigation was ever made into the cause of the sinkings, but Owen once confided to me that he secretly blamed himself. He started drinking heavily, and eventually took up with The Fellowship.\"");
 				say();
 				UI_remove_answer("Owen");
 				gflags[0x00F8] = true;
+				fallthrough;
 
 			case "gypsies":
 				message("\"Thou wouldst do better to ask Karenna. She is a good friend of the gypsies and would know more about them than I.\"");
 				say();
 				UI_remove_answer("gypsies");
 				gflags[0x00F4] = true;
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"It has been a pleasure speaking with thee.\"*");
 		say();
@@ -32173,79 +33264,92 @@ void Func0460 object#(0x460) ()
 			message("\"I am Jergi. Pleased to make thine acqvaintance.\"");
 			say();
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			message("\"I am the King ov the Gypsies.\"");
 			say();
 			UI_add_answer("gypsies");
+			fallthrough;
 
 		case "gypsies":
 			message("\"My people have almost completely died out in this vorld. Now that I am their leader I am making their velfare my sole responsibility. Soon I vill decide if ve vill leave Minoc.\"");
 			say();
 			UI_remove_answer("gypsies");
 			UI_add_answer(["died out", "Minoc"]);
+			fallthrough;
 
 		case "died out":
 			message("\"Ve gypsies are a people who live to vander. But there are fewer and fewer places vhere ve are velcome. Ve are victimized by the ancient hatreds that have plagued our kind since the days ov ancient Sosaria.\"");
 			say();
 			UI_remove_answer("died out");
+			fallthrough;
 
 		case "Minoc":
 			message("\"Our people came here because ve thought ve vould be accepted. It seemed for a very long time that ve vere. But after these savage murders it looks like it is time for us to roam vonce again.\"");
 			say();
 			UI_remove_answer("Minoc");
 			UI_add_answer(["accepted", "murders"]);
+			fallthrough;
 
 		case "accepted":
 			message("\"Ve have alvays been subject to the prejudices ov others! Ve are called thieves and vorse! But ve are a people that only vish to play our music, and dance, and live in peace. I thought the people here understood this.\"");
 			say();
 			UI_remove_answer("accepted");
+			fallthrough;
 
 		case "murders":
 			message("\"Frederico vas mine only brother, and no vone loved Tania more than I did, save for Frederico himself. Vhat happened to them vas unspeakable. I vish I could tell thee more. If thou vishest thou may speak to Sasha, but only briefly. Now is the time for him to mourn.\"");
 			say();
 			UI_remove_answer("murders");
 			UI_add_answer(["Frederico", "Tania", "Sasha"]);
+			fallthrough;
 
 		case "Frederico":
 			message("\"Some thought ov my brother Frederico as a harsh man, but those ov us who knew him could see that he vas simply governed by the same prides and passions that rule all gypsies.\"");
 			say();
 			UI_remove_answer("Frederico");
+			fallthrough;
 
 		case "Tania":
 			message("\"She vas the most beautiful voman I had ever seen. Both my brother and I vere in love vith her. Ve both tried to vin her heart. I failed and thought that I vould spend the rest ov my life vith no vone. It vas not until last year that my vife Margareta and I vere married and my secretly broken heart vas mended.\"");
 			say();
 			UI_remove_answer("Tania");
+			fallthrough;
 
 		case "Sasha":
 			message("\"He is the son ov Frederico and Tania. He left us to learn more about The Fellowship. Ov course, he feels responsible for vhat happened...\"");
 			say();
 			UI_remove_answer("Sasha");
 			UI_add_answer(["responsible", "Fellowship"]);
+			fallthrough;
 
 		case "responsible":
 			message("\"Ve do not blame Sasha for vhat happened. Ve vill not punish him.\"");
 			say();
 			UI_remove_answer("responsible");
+			fallthrough;
 
 		case "Fellowship":
 			message("\"Sasha vill have to decide if he vants to stay vith his people or return to The Fellowship. I believe he vill make the right choice.\"");
 			say();
 			UI_remove_answer("Fellowship");
+			fallthrough;
 
 		case "Margareta":
 			message("\"My vife is a vise voman who has some ov the necessary talents to see the future. Thou shouldst speak vith her.\"");
 			say();
 			UI_remove_answer("Margareta");
+			fallthrough;
 
 		case "hourglass":
 			message("\"I do not know vhat thou art talking about. I know nothing of a mage named Nicodemus, nor of his hourglass. Be vary -- mages are quite mad these days!\"");
 			say();
 			UI_remove_answer("hourglass");
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	message("\"Mayest thou have much fortune in thine endeavors.\"*");
 	say();
@@ -32307,47 +33411,54 @@ void Func0461 object#(0x461) ()
 			message("\"I am Mikos.\"");
 			say();
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			message("\"I am the foreman of the Minoc mine.\"");
 			say();
 			UI_add_answer(["Minoc", "mine"]);
+			fallthrough;
 
 		case "Minoc":
 			message("He spits on the ground. \"A pox on them! Down here I am safe from all of their arguing. Next, they will be killing each other.\"");
 			say();
 			UI_remove_answer("Minoc");
+			fallthrough;
 
 		case "mine":
 			message("\"This mine is run by the Britannian Mining Company. It is inside what was once the dungeon Covetous. They mine for iron ore, lead and other minerals with highly trained miners and special mining machinery.\"");
 			say();
 			UI_remove_answer("mine");
 			UI_add_answer(["miners", "machinery"]);
+			fallthrough;
 
 		case "miners":
 			message("\"Currently most of the miners are away as the machines are being repaired. Right now we have two engineers, Owings and Malloy, down in a branch of the main tunnel. Do not disturb them, for they are involved in a special project. We also have a gargoyle, Fodus, who is helping to maintain a semblance of the mine's usual operations.\"");
 			say();
 			UI_remove_answer("miners");
 			UI_add_answer("Owings and Malloy");
+			fallthrough;
 
 		case "machinery":
 			message("\"This place is full of machinery that is very dangerous if thou dost not know what thou art doing. Thou dost not wish to see what one of those digging contraptions can do to a man if he gets too close!\"");
 			say();
 			UI_remove_answer("machinery");
+			fallthrough;
 
 		case "Owings and Malloy":
 			message("Mikos shakes his head slowly. \"I am not sure where the Britannian Mining Company found them.\"");
 			say();
 			UI_remove_answer("Owings and Malloy");
+			fallthrough;
 
 		case "silver fluid":
 			message("You repeat the words to Mikos that you heard Fodus say. Mikos gives you a shocked look. \"I have no idea what he is talking about, but I would say it is typical for a gargoyle. Just trying to shirk of his duty. Say, thou hadst better leave this place if thou ist spending all thy time disrupting the work of the mine!\"*");
 			say();
 			abort;
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	message("\"Do not wander around down here, ");
 	message(var0002);
@@ -32426,17 +33537,20 @@ void Func0462 object#(0x462) ()
 				{
 					UI_add_answer("Trellek");
 				}
+				fallthrough;
 
 			case "job":
 				message("\"`Job' is not understood. Family is what you mean?\"");
 				say();
 				UI_add_answer("family");
+				fallthrough;
 
 			case "family":
 				message("\"Yes, I am part of a family. The Silverleaf tree is my home. I am bonded with Trellek.\"");
 				say();
 				UI_remove_answer("family");
 				UI_add_answer(["Silverleaf tree", "Trellek"]);
+				fallthrough;
 
 			case "Trellek":
 				message("\"Trellek is my husband.\"");
@@ -32452,17 +33566,20 @@ void Func0462 object#(0x462) ()
 					}
 				}
 				UI_remove_answer("Trellek");
+				fallthrough;
 
 			case "Silverleaf tree":
 				message("\"There are fewer and fewer Silverleaf trees. Many are cut down often. Soon, no Silverleaf trees will be around for our homes.\"");
 				say();
 				UI_add_answer("cut down");
 				UI_remove_answer("Silverleaf tree");
+				fallthrough;
 
 			case "cut down":
 				message("\"The trees are cut by a human with a shiny, sharp item.\"");
 				say();
 				UI_remove_answer("cut down");
+				fallthrough;
 
 			case "join party":
 				message("\"To join you is his desire?\"");
@@ -32483,11 +33600,13 @@ void Func0462 object#(0x462) ()
 					say();
 				}
 				UI_remove_answer("join party");
+				fallthrough;
 
 			case "Salamon":
 				message("\"She is a very wise Emp. Many humans have been met by her. Knowledge and experience are her talents.\"");
 				say();
 				UI_remove_answer("Salamon");
+				fallthrough;
 
 			case "Salamon's permission":
 				message("Her eyes begin to mist over.~~ \"I am sorry. A lie was told by me. Trellek's leaving is not desired by me. Permission will not be given.\"~~ Her expression changes.~~ \"What is the reason you asked him?\"");
@@ -32499,16 +33618,19 @@ void Func0462 object#(0x462) ()
 				}
 				gflags[0x0158] = true;
 				UI_remove_answer("Salamon's permission");
+				fallthrough;
 
 			case "adventure":
 				message("\"Adventure is not Trellek's desire.\"");
 				say();
 				UI_remove_answer("adventure");
+				fallthrough;
 
 			case "never mind":
 				message("She shrugs.");
 				say();
 				UI_remove_answer("never mind");
+				fallthrough;
 
 			case "wisps":
 				message("She smiles excitedly.~~\"Your wish is to meet wisps?\"");
@@ -32526,10 +33648,10 @@ void Func0462 object#(0x462) ()
 					say();
 				}
 				UI_remove_answer(["adventure", "never mind", "wisps"]);
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye is said to you, human.\"*");
 		say();
@@ -32574,11 +33696,13 @@ void Func0463 object#(0x463) ()
 				message("\"To be named Fodus.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"To be a digger in the mines. To be looking for iron ore and lead and...\"");
 				say();
 				UI_add_answer("and...");
+				fallthrough;
 
 			case "and...":
 				message("\"The secret ore...\"");
@@ -32588,26 +33712,29 @@ void Func0463 object#(0x463) ()
 				gflags[0x0107] = true;
 				UI_remove_answer("and...");
 				UI_add_answer(["secret ore", "silver fluid"]);
+				fallthrough;
 
 			case "secret ore":
 				message("\"To be called... blackrock.\"");
 				say();
 				UI_remove_answer("secret ore");
 				UI_add_answer("blackrock");
+				fallthrough;
 
 			case "blackrock":
 				message("\"To be the lode located in a hidden area of the mine...\" The gargoyle's eyes roll up into his head. He is obviously sick.");
 				say();
 				UI_remove_answer("blackrock");
+				fallthrough;
 
 			case "silver fluid":
 				message("\"To need the venom... to have more venom...\"");
 				say();
 				UI_remove_answer("silver fluid");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"To be going back to work now, Mikos...\"*");
 		say();
@@ -32674,6 +33801,7 @@ void Func0464 object#(0x464) ()
 				message("\"Tavenor is my name.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				if (!gflags[0x012E])
@@ -32688,6 +33816,7 @@ void Func0464 object#(0x464) ()
 					say();
 					UI_add_answer("food");
 				}
+				fallthrough;
 
 			case "explain job":
 				message("\"`Job' now understood by me. No job is had by me. Food is gathered by me and my family.\" He watches you carefully. \"Your job is to cut down Silverleaf trees, yes?\"");
@@ -32726,12 +33855,14 @@ void Func0464 object#(0x464) ()
 					gflags[0x012E] = true;
 				}
 				UI_add_answer(["food", "Silverleaf trees"]);
+				fallthrough;
 
 			case "food":
 				message("\"Fruit and milk are Emp foods. Especially fruits are liked by me. Meats,\" he shakes his head,~~\"are -not- liked by Emps.\"");
 				say();
 				UI_remove_answer("food");
 				UI_add_answer(["meats", "fruits", "milk"]);
+				fallthrough;
 
 			case "milk":
 				message("\"Milk is good. Milk with honey is preferred by me.\"");
@@ -32741,16 +33872,19 @@ void Func0464 object#(0x464) ()
 					UI_add_answer("honey");
 				}
 				UI_remove_answer("milk");
+				fallthrough;
 
 			case "Silverleaf trees":
 				message("\"Silverleaf trees are Emp homes.\"");
 				say();
 				UI_remove_answer("Silverleaf trees");
+				fallthrough;
 
 			case "meats":
 				message("\"Meats are from killed animals. Killing is bad. Destroying is bad.\"");
 				say();
 				UI_remove_answer("meats");
+				fallthrough;
 
 			case "fruits":
 				message("\"Fruits are good and sweet -- like honey!\"");
@@ -32760,16 +33894,17 @@ void Func0464 object#(0x464) ()
 				{
 					UI_add_answer("honey");
 				}
+				fallthrough;
 
 			case "honey":
 				message("\"Honey is favorite food of all Emps!\"");
 				say();
 				var0001 = true;
 				UI_remove_answer("honey");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"You are told `goodbye.'\"*");
 		say();
@@ -32848,6 +33983,7 @@ void Func0465 object#(0x465) ()
 				message("\"I am Salamon,\" she says.");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am without job. All Emps are without jobs. Food gathering and shelter-building are Emp jobs.\"");
@@ -32860,33 +33996,39 @@ void Func0465 object#(0x465) ()
 					UI_add_answer("Trellek");
 				}
 				UI_add_answer(["food-gathering", "shelter-building"]);
+				fallthrough;
 
 			case "shelter-building":
 				message("\"Silverleaf trees are where Emp's homes can be found.\"");
 				say();
 				UI_remove_answer("shelter-building");
+				fallthrough;
 
 			case "food-gathering":
 				message("\"Only fruits, vegetables, and milk-stuffs are eaten by Emps. Bread is also eaten.\"");
 				say();
 				UI_remove_answer("food-gathering");
 				UI_add_answer(["fruits and vegetables", "milk-stuffs", "bread", "-only-?"]);
+				fallthrough;
 
 			case "milk-stuffs":
 				message("\"Milk and cheese and butter are milk-stuffs.\"");
 				say();
 				UI_remove_answer("milk-stuffs");
+				fallthrough;
 
 			case "bread":
 				message("\"Bread is hard to make for Emps. No stoves or ovens are owned by Emps. But bread is well liked.\"");
 				say();
 				UI_remove_answer("bread");
+				fallthrough;
 
 			case "fruits and vegetables":
 				message("\"Fruits and vegetables are our favorites. Many are sweet.\"");
 				say();
 				UI_remove_answer("fruits and vegetables");
 				UI_add_answer("sweet");
+				fallthrough;
 
 			case "sweet":
 				message("\"Sweet things are desired by Emps. Honey is sweetest! More honey is had by you?\"");
@@ -32924,22 +34066,26 @@ void Func0465 object#(0x465) ()
 					say();
 				}
 				UI_remove_answer("sweet");
+				fallthrough;
 
 			case "-only-?":
 				message("\"No dead animal flesh -- what is called `meat' by humans -- is eaten by an Emp.\"");
 				say();
 				UI_add_answer(["dead animal flesh", "meat"]);
 				UI_remove_answer("-only-?");
+				fallthrough;
 
 			case "meat":
 				message("\"Meat is without a good taste,\" she shudders. \"It is not preferred!\"");
 				say();
 				UI_remove_answer("meat");
+				fallthrough;
 
 			case "dead animal flesh":
 				message("\"All violence is abhorred by Emps. No killing is desired, even for what you humans call food.\"");
 				say();
 				UI_remove_answer("dead animal flesh");
+				fallthrough;
 
 			case "Trellek":
 				if (gflags[0x0130])
@@ -32989,10 +34135,10 @@ void Func0465 object#(0x465) ()
 					say();
 				}
 				UI_remove_answer("Trellek");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"My hope is for your welfare, human.\"*");
 		say();
@@ -33103,6 +34249,7 @@ void Func0466 object#(0x466) ()
 				say();
 			}
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			if (!gflags[0x0003])
@@ -33117,6 +34264,7 @@ void Func0466 object#(0x466) ()
 				say();
 			}
 			UI_add_answer(["spells", "reagents"]);
+			fallthrough;
 
 		case "magic":
 			if (!gflags[0x0003])
@@ -33130,6 +34278,7 @@ void Func0466 object#(0x466) ()
 				say();
 			}
 			UI_remove_answer("magic");
+			fallthrough;
 
 		case "spells":
 			message("\"Dost thou wish to buy some spells?\"");
@@ -33144,6 +34293,7 @@ void Func0466 object#(0x466) ()
 				message("\"Never mind, then!\"");
 				say();
 			}
+			fallthrough;
 
 		case "reagents":
 			message("\"Dost thou wish to buy some reagents?\"");
@@ -33158,6 +34308,7 @@ void Func0466 object#(0x466) ()
 				message("\"Never mind, then!\"");
 				say();
 			}
+			fallthrough;
 
 		case "potions":
 			if (!gflags[0x0003])
@@ -33203,6 +34354,7 @@ void Func0466 object#(0x466) ()
 				say();
 			}
 			UI_remove_answer("potions");
+			fallthrough;
 
 		case "Time Lord":
 			if (!gflags[0x0003])
@@ -33230,11 +34382,13 @@ void Func0466 object#(0x466) ()
 			}
 			UI_remove_answer("Time Lord");
 			UI_add_answer("Knight's Bridge");
+			fallthrough;
 
 		case "Knight's Bridge":
 			message("\"'Tis a life-size board game. I have a book around here somewhere which contains the rules.\"");
 			say();
 			UI_remove_answer("Knight's Bridge");
+			fallthrough;
 
 		case "hourglass":
 			if (gflags[0x012D])
@@ -33269,6 +34423,7 @@ void Func0466 object#(0x466) ()
 				}
 			}
 			UI_remove_answer("hourglass");
+			fallthrough;
 
 		case "enchant":
 			if (!gflags[0x0003])
@@ -33296,10 +34451,10 @@ void Func0466 object#(0x466) ()
 				}
 			}
 			UI_remove_answer("enchant");
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	if (!gflags[0x0003])
 	{
@@ -33369,17 +34524,20 @@ void Func0467 object#(0x467) ()
 				message(".\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"Job? I have not the time for a job. I am on a quest to rid this land of that which plagues it!\"");
 				say();
 				UI_add_answer(["quest", "plague"]);
+				fallthrough;
 
 			case "quest":
 				message("\"I have devoted mine entire life to this, nothing will get in my way, not even Batlin.\"");
 				say();
 				UI_remove_answer("quest");
 				UI_add_answer("Batlin");
+				fallthrough;
 
 			case "Batlin":
 				message("\"He is the leader of the cursed organization, The Fellowship!\"");
@@ -33389,6 +34547,7 @@ void Func0467 object#(0x467) ()
 					UI_add_answer("The Fellowship");
 				}
 				UI_remove_answer("Batlin");
+				fallthrough;
 
 			case "plague":
 				message("\"Surely thou hast heard of The Fellowship, a most foul and evil organization. It has even infested the lovely forest of Yew!\"");
@@ -33399,6 +34558,7 @@ void Func0467 object#(0x467) ()
 					UI_add_answer("The Fellowship");
 				}
 				UI_remove_answer("plague");
+				fallthrough;
 
 			case "The Fellowship":
 				message("\"I know little about their practices, but I do know they live outside the bounds of moral decency. They have kidnapped my beloved sister, Millie, and have cast a spell of enchantment. Now she lives as they do. I have vowed to remove this wicked spell and will slay the entire organization should that prove necessary!~~ \"Thou, also, hast taken up a similar cause, I expect. Yes?\"");
@@ -33430,15 +34590,16 @@ void Func0467 object#(0x467) ()
 				}
 				var0003 = true;
 				UI_remove_answer("The Fellowship");
+				fallthrough;
 
 			case "Yew":
 				message("\"I know the land, but not the people. There is nothing useful I have to tell thee.\" He appears thoughtful for a moment. \"Perhaps I can aid thee a bit. I do know that there are two hunters who sometimes frequent this area. One, a woman, carries a spear. The other is an archer. That is all I can tell thee.\"");
 				say();
 				UI_remove_answer("Yew");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"May thine endeavors reach fruition, ");
 		message(var0002);
@@ -33489,6 +34650,7 @@ void Func0468 object#(0x468) ()
 				message("\"I am Bradman.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"Why, 'tis my job to train the many who visit Yew to become more agile.\"");
@@ -33498,22 +34660,26 @@ void Func0468 object#(0x468) ()
 				{
 					UI_add_answer("Penni");
 				}
+				fallthrough;
 
 			case "many":
 				message("\"The forest attracts a lot of people who want to spend some time away from the larger towns like Minoc and Britain. So they come to Yew.~~\"And, something about the woods makes most people want to explore.\" He pats his bow.~~\"That is where this comes in. The bow is the tool of survival in the forest. And I,\" he jerks his thumb to his chest, \"teach proficiency with the bow.\"");
 				say();
 				UI_remove_answer("many");
 				UI_add_answer(["explore", "bow"]);
+				fallthrough;
 
 			case "explore":
 				message("\"There are many exciting things to see in the forest. Not a day goes by when I do not see something interesting: a new type of bird, a beautiful butterfly, or, best of all -- a deer.\"");
 				say();
 				UI_remove_answer("explore");
+				fallthrough;
 
 			case "bow":
 				message("\"'Tis my weapon of choice. It takes a keen eye and a steady arm to shoot accurately. I think it has more finesse than a sword or a spear, for example.\"");
 				say();
 				UI_remove_answer("bow");
+				fallthrough;
 
 			case "Yew":
 				message("\"I love the forest. It is very beautiful. Also,\" he raises his bow, \"I moved out here to be near the two great archers, Iolo and Tseramed.\"*");
@@ -33543,11 +34709,13 @@ void Func0468 object#(0x468) ()
 					UI_add_answer("Tseramed");
 				}
 				UI_remove_answer("Yew");
+				fallthrough;
 
 			case "Tseramed":
 				message("\"He is a great archer who resides in the forest. He moved here to get away from the far-too-quickly growing towns.\"");
 				say();
 				UI_remove_answer("Tseramed");
+				fallthrough;
 
 			case "train":
 				message("\"If thou wantest to train, my charge is 30 gold. Art thou still interested?\"");
@@ -33563,15 +34731,16 @@ void Func0468 object#(0x468) ()
 					message(".\"");
 					say();
 				}
+				fallthrough;
 
 			case "Penni":
 				message("\"Thou hast met Penni? I hope thou hast not trained with her,\" he winks. \"She is a valuable friend, but she hunts as well as a weed and she is as clumsy as an ox. I am afraid she knows nothing about fighting.\"");
 				say();
 				UI_remove_answer("Penni");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"May the trees part around thee, ");
 		message(var0000);
@@ -33620,34 +34789,40 @@ void Func0469 object#(0x469) ()
 				message(".\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the High Court official at the prison here in the Abbey.\"");
 				say();
 				UI_add_answer(["official", "Abbey"]);
+				fallthrough;
 
 			case "official":
 				message("\"I am the judiciary part of Britannia's government. It is my job to see that criminals are brought to justice.\"");
 				say();
 				UI_add_answer("criminals");
 				UI_remove_answer("official");
+				fallthrough;
 
 			case "criminals":
 				message("\"We have two prisoners already, but there are many scoundrels who still roam free.\"");
 				say();
 				UI_add_answer(["prisoners", "scoundrels"]);
 				UI_remove_answer("criminals");
+				fallthrough;
 
 			case "prisoners":
 				message("\"Thou, of course, hast never met them,\" he says, his brow narrowing, \"but we have a pirate, and,\" he pauses, \"a troll. If thou dost wish to see them, speak with Goth, the jailer.\"");
 				say();
 				UI_add_answer("Goth");
 				UI_remove_answer("prisoners");
+				fallthrough;
 
 			case "scoundrels":
 				message("\"See for thyself, the posted bills for known villains are in the log book in the courtroom.\"");
 				say();
 				UI_remove_answer("scoundrels");
+				fallthrough;
 
 			case "Goth":
 				message("\"He has only been working here for a few weeks, but I already know he is not trustworthy. There is something obviously unscrupulous about him. He is not a friend of thine, is he?\"");
@@ -33665,15 +34840,16 @@ void Func0469 object#(0x469) ()
 					say();
 				}
 				UI_remove_answer("Goth");
+				fallthrough;
 
 			case "Abbey":
 				message("\"The monks live and study there, but they do little more than winemaking. Well, I know one of them tends the garden.\"");
 				say();
 				UI_remove_answer("Abbey");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Keep thine heart and mind on the straight path, ");
 		message(var0000);
@@ -33724,17 +34900,20 @@ void Func046A object#(0x46A) ()
 				message(".\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"Eh, 'ow's that? Oh, m'job. Why, Oi take good care o' me buddies in the graveyard 'ere in Empath Abbey, Oi do.\"");
 				say();
 				UI_add_answer(["Empath Abbey", "buddies"]);
+				fallthrough;
 
 			case "Empath Abbey":
 				message("\"What do ye mean did Oi 'umpeth Abby. 'Course Oi didn't. Oi never went anywhere near Abby. 'Oo told ye that?\"");
 				say();
 				UI_add_answer("'Umpeth Abby");
 				UI_remove_answer("Empath Abbey");
+				fallthrough;
 
 			case "'Umpeth Abby":
 				message("\"Empath Abbey? Why, this 'ere's Empath Abbey, ");
@@ -33742,23 +34921,27 @@ void Func046A object#(0x46A) ()
 				message(". Oi don't mean to pry, but if ye knowest not where ye be, why 'ave ye come 'ere?\" He shakes his head. \"It's just as Oi was tellin' Darek the other day, `If ye never want to be lost,' Oi said, `don't ever go nowheres.'\"");
 				say();
 				UI_remove_answer("'Umpeth Abby");
+				fallthrough;
 
 			case "buddies":
 				message("\"What wrong with the bodies? Oi don' do nothing more than bury 'em! A fellow could get in lots o' trouble spreading rumors like that.\"");
 				say();
 				UI_add_answer(["bury", "bodies"]);
 				UI_remove_answer("buddies");
+				fallthrough;
 
 			case "bury":
 				message("\"Barry? Oh, 'im. Oi don't know what ye's talkin' about. Oi never met Barry's woife! 'Twas just a lie they's spreadin' about me.\"");
 				say();
 				UI_remove_answer("bury");
 				UI_add_answer("Barry");
+				fallthrough;
 
 			case "Barry":
 				message("\"Oi already told ye that's m'job.\"");
 				say();
 				UI_remove_answer("Barry");
+				fallthrough;
 
 			case "bodies":
 				message("\"That's right. M'buddies! Oi bury 'em. It's m'job.\" He squints at you. \"Unless, ");
@@ -33767,6 +34950,7 @@ void Func046A object#(0x46A) ()
 				say();
 				UI_add_answer("people");
 				UI_remove_answer("bodies");
+				fallthrough;
 
 			case "people":
 				message("\"No! Of course Oi don't use peep holes. What sort o' question is that to ask a fellow, ");
@@ -33775,6 +34959,7 @@ void Func046A object#(0x46A) ()
 				say();
 				UI_add_answer("peep hole");
 				UI_remove_answer("people");
+				fallthrough;
 
 			case "peep hole":
 				message("\"Well, Oi only know a few people 'ere, but Oi'll try an' 'elp as best as Oi am able. 'Oo do ye want to know about? My two best friends are Garth an' Darek, but Oi often talk to Nina an' Bart when Oi get the chance.~~");
@@ -33796,10 +34981,10 @@ void Func046A object#(0x46A) ()
 					say();
 				}
 				UI_remove_answer("peep hole");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"G'day, ");
 		message(var0001);
@@ -33856,23 +35041,27 @@ void Func046B object#(0x46B) ()
 			message("\"I am of the clan Ironheart, the eleventh son of Valador. They call me Iskander.\"");
 			say();
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			message("\"My cyclopean people say I am a hero. Many of you humans say I am a monster. No doubt, the truth is somewhere in between.\"");
 			say();
 			UI_add_answer(["hero", "monster"]);
+			fallthrough;
 
 		case "hero":
 			message("\"One hundred and eighty-nine years ago I slew the seven Gazer Princes when they used their magic to steal the eye from the leader of our tribe, but such things are now ancient history and are no longer of any consequence.\"");
 			say();
 			UI_remove_answer("hero");
 			UI_add_answer(["tribe", "eye", "ancient history"]);
+			fallthrough;
 
 		case "monster":
 			message("\"On numerous occasions I have caused the unpleasant end of human interlopers who mistakenly believed our race was fit for nothing save to be plundered. But I have no quarrel with thee.\" He pauses to scrutinize you. \"For the moment.\"");
 			say();
 			UI_remove_answer("monster");
 			UI_add_answer("thee");
+			fallthrough;
 
 		case "thee":
 			message("\"Thou dost know my name, but I still do not know the name of thee. I like to know to whom I am speaking. What is thy name?\"");
@@ -33893,62 +35082,73 @@ void Func046B object#(0x46B) ()
 				gflags[0x02D5] = true;
 			}
 			UI_remove_answer("thee");
+			fallthrough;
 
 		case "tribe":
 			message("\"Those of my tribe are a quiet people. They farm the rocky soil, but are also very good tool makers. I was sent to find them a new homeland.\"");
 			say();
 			UI_remove_answer("tribe");
 			UI_add_answer("homeland");
+			fallthrough;
 
 		case "eye":
 			message("\"The eye of a cyclops is considered quite a delicacy to some of the less genteel races of Britannia. Twice have foul creatures tried to take mine, and twice have I dined on their hearts.\"");
 			say();
 			UI_remove_answer("eye");
+			fallthrough;
 
 		case "ancient history":
 			message("\"Then they called me 'Wonder Boy'. For nearly a hundred years that was the nickname by which I was known. I was most grateful when they stopped doing that!\"");
 			say();
 			UI_remove_answer("ancient history");
 			UI_add_answer("Wonder Boy");
+			fallthrough;
 
 		case "Wonder Boy":
 			message("Iskander squints his eye at you. \"Do not start that again!\"");
 			say();
 			UI_remove_answer("Wonder Boy");
+			fallthrough;
 
 		case "homeland":
 			message("\"My village lies a great many days' journey away. The people there desire a place where they can live in peace with their surroundings. I have not found such a place yet, but I will search everywhere until I do.\"");
 			say();
 			UI_remove_answer("homeland");
 			UI_add_answer(["peace", "everywhere"]);
+			fallthrough;
 
 		case "peace":
 			message("\"While I am two hundred and six, not long in years for one of my race, I already have the heart of an old man. A hero's adventures have no more attraction for me. I long to settle down with my people and spend my days tending the fields or in my workshop building things.\"");
 			say();
 			UI_remove_answer("peace");
+			fallthrough;
 
 		case "everywhere":
 			message("\"My searches have brought me to this dreadful place. I incorrectly surmised that since magic does not work it would be relatively safe. It is here that I have been perplexed by a terrible riddle.\"");
 			say();
 			UI_remove_answer("everywhere");
 			UI_add_answer(["magic", "riddle"]);
+			fallthrough;
 
 		case "riddle":
 			message("\"Standing at the doorway of one room in this place, I saw an enormous image of a tetrahedron. As I tried to near it a wave of amnesia passed over me. Once more I was standing in the doorway. I could remember nothing more.\"");
 			say();
 			UI_remove_answer("riddle");
 			UI_add_answer(["tetrahedron", "amnesia"]);
+			fallthrough;
 
 		case "tetrahedron":
 			message("\"I believe that is word you humans use to describe a polyhedron with four faces.\"");
 			say();
 			UI_remove_answer("tetrahedron");
+			fallthrough;
 
 		case "amnesia":
 			message("\"This same wave of amnesia struck me every time I tried to approach the tetrahedron. I do not know what sort of foul magic this is.\"");
 			say();
 			UI_remove_answer("amnesia");
 			UI_add_answer("foul magic");
+			fallthrough;
 
 		case "foul magic":
 			if (gflags[0x0003])
@@ -33970,6 +35170,7 @@ void Func046B object#(0x46B) ()
 				}
 			}
 			UI_remove_answer("foul magic");
+			fallthrough;
 
 		case "magic":
 			if (!gflags[0x0003])
@@ -33983,27 +35184,30 @@ void Func046B object#(0x46B) ()
 				say();
 			}
 			UI_remove_answer("magic");
+			fallthrough;
 
 		case "Eiko and Amanda":
 			message("\"Yes, I have heard those names before. Those are the names of two warriors who have been after me for revenge. They say I killed their father and I must admit to thee that it is true. I did kill their father.\"");
 			say();
 			UI_remove_answer("Eiko and Amanda");
 			UI_add_answer(["revenge", "killed their father"]);
+			fallthrough;
 
 		case "revenge":
 			message("\"I know that Eiko and Amanda have been after me for some time looking for vengeance. I say let them come. I will not stand still for them nor shall I run from them. When they find me they are welcome to try and take their justice from me. If they win then it was meant to be. If they do not I will have no regrets.\"");
 			say();
 			UI_remove_answer("revenge");
+			fallthrough;
 
 		case "killed their father":
 			message("\"Their father's name was Kalideth. He suffered from the mage madness. His attack on me was unprovoked. For some reason he blamed the failure of magic upon my people. His own magics were still quite potent and I barely survived the encounter. I killed Kalideth in self-defense, but I did not want to kill him. I wish there to still be some magic left in this world and I mourned his passing as much as anyone.\"");
 			say();
 			var0004 = true;
 			UI_remove_answer("killed their father");
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	if (gflags[0x02D6])
 	{
@@ -34109,6 +35313,7 @@ void Func046C object#(0x46C) ()
 				message("\"I am Reyna,\" she says, brushing the hair out of her face.");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am a healer. I have chosen to set up shop here near the forest.\"");
@@ -34123,17 +35328,20 @@ void Func046C object#(0x46C) ()
 				{
 					UI_add_answer("animals");
 				}
+				fallthrough;
 
 			case "forest":
 				message("\"I wanted to live and work here because the land is very beautiful. I have found many things to do and see. Unfortunately, the forest is so spread out that I have yet to meet many of the others who live in this area. I do know that the Abbey is just across the way from mine house.~~\"And somewhere nearby is a scholar.\" She appears thoughtful for a moment. \"Also, I believe there is a prison just east of the Abbey.");
 				say();
 				UI_remove_answer("forest");
 				UI_add_answer(["Abbey", "scholar", "prison"]);
+				fallthrough;
 
 			case "prison":
 				message("\"I've never actually seen it,\" she laughs, \"but rumor has it that the cells are located right next to the court, for quick, easy imprisonment after the trial.\"");
 				say();
 				UI_remove_answer("prison");
+				fallthrough;
 
 			case "scholar":
 				message("\"From Aimi I have heard that he is brilliant, and... also a bit overzealous to instruct those interested in increasing their knowledge.\"");
@@ -34143,6 +35351,7 @@ void Func046C object#(0x46C) ()
 					UI_add_answer("Aimi");
 				}
 				UI_remove_answer("scholar");
+				fallthrough;
 
 			case "Aimi":
 				var0003 = true;
@@ -34157,6 +35366,7 @@ void Func046C object#(0x46C) ()
 					say();
 				}
 				UI_remove_answer("Aimi");
+				fallthrough;
 
 			case "Abbey":
 				message("\"That is how this area -- Empath Abbey -- got its name, from the monks who live at the abbey of the Brotherhood of the Rose. They are said to make delicious wine. One of the monks cares for a beautiful garden in her spare time. In fact, I often buy flowers from her.~~ But,\" she grins, \"as for the other monks, all that I\tever see them do is make wine and wander the countryside.\"");
@@ -34164,6 +35374,7 @@ void Func046C object#(0x46C) ()
 				gflags[0x015A] = true;
 				UI_remove_answer("Abbey");
 				UI_add_answer(["flowers", "others"]);
+				fallthrough;
 
 			case "others":
 				message("\"Aimi is the only one I have met, but I know there are one or two others who make wine there.\"");
@@ -34173,6 +35384,7 @@ void Func046C object#(0x46C) ()
 					UI_add_answer("Aimi");
 				}
 				UI_remove_answer("others");
+				fallthrough;
 
 			case "flowers":
 				message("\"Yes, I get them for my mother.\"");
@@ -34182,6 +35394,7 @@ void Func046C object#(0x46C) ()
 					UI_add_answer("mother");
 				}
 				UI_remove_answer("flowers");
+				fallthrough;
 
 			case "mother", "cemetery":
 				gflags[0x0128] = true;
@@ -34208,6 +35421,7 @@ void Func046C object#(0x46C) ()
 				{
 					UI_add_answer("have flowers");
 				}
+				fallthrough;
 
 			case "brought flowers", "have flowers":
 				message("Her eyes light up as she sees the bouquet of flowers.~~ \"They are lovely! Thou art too kind, ");
@@ -34231,6 +35445,7 @@ void Func046C object#(0x46C) ()
 				Func0911(var000E);
 				gflags[0x0139] = true;
 				UI_remove_answer(["have flowers", "brought flowers"]);
+				fallthrough;
 
 			case "heal":
 				if ((var0001 == 0x0003) || ((var0001 == 0x0004) || (var0001 == 0x0005)))
@@ -34259,6 +35474,7 @@ void Func046C object#(0x46C) ()
 					say();
 					UI_add_answer("emergency");
 				}
+				fallthrough;
 
 			case "emergency":
 				var0010 = UI_get_party_list();
@@ -34305,15 +35521,16 @@ void Func046C object#(0x46C) ()
 					say();
 				}
 				UI_remove_answer("emergency");
+				fallthrough;
 
 			case "animals":
 				message("She smiles shyly.~~\"I very much love animals. When I was very young, I found an ailing dove that I was unable to nurse back to health. Since that time, I began to study the healing arts, so that I would be able to help other animals who might need healing.~~ \"Of course,\" she laughs, \"now that I have the skills, I use them to help people, too.\"");
 				say();
 				UI_remove_answer("animals");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye, ");
 		message(var0000);
@@ -34373,12 +35590,14 @@ void Func046D object#(0x46D) ()
 				message(".\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"My job? Well, I, er, do not truly have one at the moment.\" He looks down at his feet.");
 				say();
 				UI_remove_answer("job");
 				UI_add_answer("at the moment");
+				fallthrough;
 
 			case "at the moment":
 				message("\"Yes, I am... Well, I am lost, ");
@@ -34387,33 +35606,39 @@ void Func046D object#(0x46D) ()
 				say();
 				UI_remove_answer("at the moment");
 				UI_add_answer(["lost", "Abbey"]);
+				fallthrough;
 
 			case "lost":
 				message("\"Well... I am sure it is not permanent.\" He blushes. \"I just need to get my bearings, that's all,\" he says unconvincingly.");
 				say();
 				UI_remove_answer("lost");
+				fallthrough;
 
 			case "Abbey":
 				message("\"I am a monk of the Brotherhood of the Rose. I study geography and nature with a brother named Taylor.\"");
 				say();
 				UI_remove_answer("Abbey");
 				UI_add_answer(["geography", "nature", "Taylor"]);
+				fallthrough;
 
 			case "geography":
 				message("\"Well,\" he shrugs, \"I suppose I should have studied a little bit better.\" He smiles sheepishly.");
 				say();
 				UI_remove_answer("geography");
+				fallthrough;
 
 			case "nature":
 				message("\"There are so many beautiful things to see in Britannia. Both animals and plants alike offer excitement to the observer.\"");
 				say();
 				UI_remove_answer("nature");
 				UI_add_answer(["animals", "plants"]);
+				fallthrough;
 
 			case "Taylor":
 				message("\"Well, I haven't actually seen him for some time. I assume he is still continuing his studies.\"");
 				say();
 				UI_remove_answer("Taylor");
+				fallthrough;
 
 			case "plants":
 				message("\"Ah, yes, ");
@@ -34424,16 +35649,19 @@ void Func046D object#(0x46D) ()
 				say();
 				UI_remove_answer("plants");
 				UI_add_answer(["flowers", "trees", "birds"]);
+				fallthrough;
 
 			case "trees":
 				message("\"Ah, my least favorite subject. I find the trees much less interesting than the birds.\"");
 				say();
 				UI_remove_answer("trees");
+				fallthrough;
 
 			case "birds":
 				message("\"My favorite type of animal! The birds are so free, able to fly vast distances. How I wish I could roam about the open skies... most especially considering my current situation. Thou canst see so much more from the air, I am certain of it!\"");
 				say();
 				UI_remove_answer("birds");
+				fallthrough;
 
 			case "flowers":
 				message("\"Very, very lovely plants. All the colors of the rainbow, and then some. One of the monks at the Abbey had a lovely flower garden. She may still tend it for all that I know, ");
@@ -34445,6 +35673,7 @@ void Func046D object#(0x46D) ()
 				{
 					UI_add_answer("She still does.");
 				}
+				fallthrough;
 
 			case "She still does.":
 				message("\"Excellent, ");
@@ -34453,20 +35682,22 @@ void Func046D object#(0x46D) ()
 				say();
 				UI_remove_answer("She still does.");
 				UI_add_answer("other pastime");
+				fallthrough;
 
 			case "other pastime":
 				message("\"Aimi also paints. Or rather, makes a bold attempt. I must, of course, commend her for her efforts.\"");
 				say();
 				UI_remove_answer("other pastime");
+				fallthrough;
 
 			case "animals":
 				message("\"My favorite ones are the birds, especially the Golden-Cheeked Warbler. I love to follow and watch them. They do not seem to have a very good sense of direction, however.\" He sighs. \"But there is a great variety of species in this land.\"");
 				say();
 				UI_remove_answer("animals");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"May thy good fortune guide thee down the trail of life.\"*");
 		say();
@@ -34553,6 +35784,7 @@ void Func046E object#(0x46E) ()
 			}
 			UI_remove_answer("name");
 			UI_add_answer("Tax Council");
+			fallthrough;
 
 		case "job":
 			if (!gflags[0x0003])
@@ -34567,6 +35799,7 @@ void Func046E object#(0x46E) ()
 				say();
 				UI_add_answer(["mage", "ethereal waves"]);
 			}
+			fallthrough;
 
 		case "mage":
 			if (!gflags[0x0003])
@@ -34582,6 +35815,7 @@ void Func046E object#(0x46E) ()
 				UI_add_answer("lost");
 			}
 			UI_remove_answer("mage");
+			fallthrough;
 
 		case "correct", "ethereal waves":
 			if (!gflags[0x0003])
@@ -34597,17 +35831,20 @@ void Func046E object#(0x46E) ()
 			message("\"I attributed it to a disturbance in the ethereal waves! I had to find out what was happening. So here I am!\"");
 			say();
 			UI_remove_answer(["correct", "ethereal waves"]);
+			fallthrough;
 
 		case "thine head":
 			message("\"There is a voice in mine head. Some demon of some sort. It is always congratulating me on things. And then other times it scolds me for things. I -know- it is not my conscience. I -know- what -he- sounds like! This is... someone else.\"");
 			say();
 			UI_remove_answer("thine head");
 			UI_add_answer("voice");
+			fallthrough;
 
 		case "voice":
 			message("\"I started hearing it around the time my magic began to fail. I do not find it amusing.\"");
 			say();
 			UI_remove_answer("voice");
+			fallthrough;
 
 		case "lost":
 			if (!gflags[0x0003])
@@ -34626,11 +35863,13 @@ void Func046E object#(0x46E) ()
 				UI_add_answer("wrong dungeon");
 			}
 			UI_add_answer("way out");
+			fallthrough;
 
 		case "wrong dungeon":
 			message("You explain to Garok that the Tetrahedron Generator is located in Dungeon Deceit.~~\"Hmmmm. Correct idea. Wrong dungeon.\"");
 			say();
 			UI_remove_answer("wrong dungeon");
+			fallthrough;
 
 		case "way out":
 			message("\"Dost thou know the way out?\"");
@@ -34678,16 +35917,19 @@ void Func046E object#(0x46E) ()
 				say();
 			}
 			UI_remove_answer("way out");
+			fallthrough;
 
 		case "Tax Council":
 			message("\"Grrrr! They are a thorn in my side! They have been seeking me for the past three years! I neglected to report a certain amount of income for reagent distribution, and somehow they found me out. By the way, if thou shouldst ever care to visit me in the mountains, I can sell thee reagents at reduced prices!\"");
 			say();
 			UI_remove_answer("Tax Council");
+			fallthrough;
 
 		case "Brother Wayne":
 			message("\"Yes, I remember him! He is lost, too! Dost thou know if he found his way out? Give him my best when thou dost speak to him.\"");
 			say();
 			UI_remove_answer("Brother Wayne");
+			fallthrough;
 
 		case "bye":
 			break;
@@ -34732,33 +35974,39 @@ void Func046F object#(0x46F) ()
 				message("\"I Gharl.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("He shakes his head. \"No job. Hunt. Eat. Sleep. Now,\" he gestures around the cell, \"no hunt, no eat, just sleep.\"");
 				say();
 				UI_add_answer(["hunt", "eat", "sleep"]);
+				fallthrough;
 
 			case "hunt":
 				message("\"I good hunter. Catch many things.\"");
 				say();
 				UI_remove_answer("hunt");
+				fallthrough;
 
 			case "sleep":
 				message("\"I still do that,\" he says, shrugging. \"But not as good as when home.\"");
 				say();
 				UI_remove_answer("sleep");
 				UI_add_answer("home");
+				fallthrough;
 
 			case "home":
 				message("He stares at you oddly and says, \"With other trolls, fleshface! Under bridges.\"");
 				say();
 				UI_remove_answer("home");
+				fallthrough;
 
 			case "eat":
 				message("\"No eat.\" He shakes his head. \"Not feed. Hate jailer!\" he growls.");
 				say();
 				UI_remove_answer("eat");
 				UI_add_answer("offer food");
+				fallthrough;
 
 			case "offer food":
 				message("\"You give me food?\" His face displays a mixture of surprise and hope. \"You give me food, I tell you secret. Yes?\"");
@@ -34787,15 +36035,16 @@ void Func046F object#(0x46F) ()
 					abort;
 				}
 				UI_remove_answer("offer food");
+				fallthrough;
 
 			case "secret":
 				message("\"Trolls have powerful ally. He warn us in head when trouble around corner.\"");
 				say();
 				UI_remove_answer("secret");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("He grunts and turns away.*");
 		say();
@@ -34851,12 +36100,14 @@ void Func0470 object#(0x470) ()
 				say();
 				UI_add_answer(["wretch", "care"]);
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "wretch":
 				message("\"They've put me in here to rot, they have!\"");
 				say();
 				UI_remove_answer("wretch");
 				UI_add_answer(["they", "rot"]);
+				fallthrough;
 
 			case "they":
 				message("\"The Britannian Tax Council done it. They and the two here -- Sir Jeff and Goth.\"");
@@ -34867,27 +36118,32 @@ void Func0470 object#(0x470) ()
 				{
 					UI_add_answer("Britannian Tax Council");
 				}
+				fallthrough;
 
 			case "rot":
 				message("\"They told me I'd be here for the rest of my life. I have no reason to doubt them either!\"");
 				say();
 				UI_remove_answer("rot");
+				fallthrough;
 
 			case "Sir Jeff":
 				message("\"That stuffed cock believes he's above everyone in Britannia. Just because he presides over the High Court he thinks he can pass judgement over any and everyone.\"");
 				say();
 				UI_remove_answer("Sir Jeff");
+				fallthrough;
 
 			case "Goth":
 				message("\"That thieving scoundrel belongs in here more than I do! Don't trust him if ye've gotta choice.\"");
 				say();
 				UI_remove_answer("Goth");
+				fallthrough;
 
 			case "Britannian Tax Council":
 				message("\"Thieves, the whole lot of 'em! Tryin' to take a person's hard-earned gold. Mayhaps they wouldn't need to take all of our money if they would go out and earn their own!\"");
 				say();
 				var0002 = true;
 				UI_remove_answer("Britannian Tax Council");
+				fallthrough;
 
 			case "care":
 				message("\"Ye care, do ye? All right, then. I'll tell ye my name if ye tell me thine, deal?\"");
@@ -34907,11 +36163,13 @@ void Func0470 object#(0x470) ()
 					say();
 				}
 				UI_remove_answer("care");
+				fallthrough;
 
 			case "job":
 				message("\"None now. But 'til I made this mine home, I was a sailor, a... privateer, out of Buccaneer's Den.\"");
 				say();
 				UI_add_answer(["thine home", "Buccaneer's Den"]);
+				fallthrough;
 
 			case "thine home":
 				message("\"Well, actually I am in here for not paying my taxes. After all, I... earned the money, why should I give it to the Britannian Tax Council?\"");
@@ -34921,6 +36179,7 @@ void Func0470 object#(0x470) ()
 				{
 					UI_add_answer("Britannian Tax Council");
 				}
+				fallthrough;
 
 			case "Buccaneer's Den":
 				message("\"Thou hast heard of Buccaneer's Den, hast thou not? 'Tis the island due east of the mainland. Home of the sort of men who walk with peg-legs, have hooks for hands, and carry parrots on their shoulders! Har! Har!\"");
@@ -34930,6 +36189,7 @@ void Func0470 object#(0x470) ()
 				{
 					UI_add_answer("Hook");
 				}
+				fallthrough;
 
 			case "Hook":
 				message("\"Yeah, I know Hook. Lookin' for him, are ye? He be from Buccaneer's Den. He usually travels with some gargoyle named Forskis or something like that. If ye see him, give him my... hello, for me.\" He gestures to his clenched fist.");
@@ -34937,10 +36197,10 @@ void Func0470 object#(0x470) ()
 				UI_remove_answer("Hook");
 				gflags[0x0135] = true;
 				Func0911(0x000A);
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Aye, get thy face from my sight!\"*");
 		say();
@@ -35008,12 +36268,14 @@ void Func0471 object#(0x471) ()
 				{
 					UI_add_answer("-thy- name");
 				}
+				fallthrough;
 
 			case "-thy- name":
 				message("\"My name? You can call\tme what you want, but I will only respond to Smith.\"");
 				say();
 				UI_add_answer("Smith");
 				UI_remove_answer("-thy- name");
+				fallthrough;
 
 			case "job":
 				message("\"Job? -Job-? I'm a horse, what kind of job could I have?\" He looks off in the distance. \"I can see it now: Smith -- Baker extraordinaire.~~\"Actually, I have gotten quite good at interior decorating. See how I arranged my abode? You like it, don't you?\"");
@@ -35032,12 +36294,14 @@ void Func0471 object#(0x471) ()
 					say();
 					abort;
 				}
+				fallthrough;
 
 			case "living room", "bedroom":
 				message("\"You always did have bad taste!\"");
 				say();
 				UI_remove_answer(["living room", "bedroom"]);
 				UI_pop_answers();
+				fallthrough;
 
 			case "Smith":
 				if (var0002)
@@ -35065,11 +36329,13 @@ void Func0471 object#(0x471) ()
 					say();
 					abort;
 				}
+				fallthrough;
 
 			case "money":
 				message("\"From a horse? Right! Like I've got some to give you.\"");
 				say();
 				UI_remove_answer(["money", "advice", "a clue", "happiness", "to save Britannia"]);
+				fallthrough;
 
 			case "advice":
 				message("\"Don't talk to horses!\"*");
@@ -35080,17 +36346,20 @@ void Func0471 object#(0x471) ()
 				message("\"Who doesn't?\"");
 				say();
 				UI_remove_answer(["money", "advice", "a clue", "happiness", "to save Britannia"]);
+				fallthrough;
 
 			case "to save Britannia":
 				message("\"You really expect me to believe that? You're just in this for the money.\"");
 				say();
 				UI_remove_answer(["money", "advice", "a clue", "happiness", "to save Britannia"]);
+				fallthrough;
 
 			case "a clue":
 				message("\"Now we're getting to the nitty-gritty. O.K., I'll give you a clue, but what's in it for me? Let me guess. Money? Love? No, knowing you it's probably nothing. With any luck, you'll go away and leave me alone.\"");
 				say();
 				UI_remove_answer(["money", "advice", "a clue", "happiness", "to save Britannia"]);
 				UI_add_answer(["money", "love", "nothing", "will not make you glue"]);
+				fallthrough;
 
 			case "nothing":
 				message("\"I've already got that!\"*");
@@ -35124,6 +36393,7 @@ void Func0471 object#(0x471) ()
 					abort;
 				}
 				UI_remove_answer("will not make you glue");
+				fallthrough;
 
 			case "bye":
 				message("\"That's just fine. I was getting tired of you anyway.\"");
@@ -35147,7 +36417,6 @@ void Func0471 object#(0x471) ()
 				message("*");
 				say();
 				abort;
-
 		}
 	}
 	if (event == 0x0000)
@@ -35211,6 +36480,7 @@ void Func0472 object#(0x472) ()
 					UI_add_answer("garden");
 				}
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"As a monk, I am not sure how to answer thy question. I often help to make wine. However, ");
@@ -35222,22 +36492,26 @@ void Func0472 object#(0x472) ()
 				{
 					UI_add_answer("Kreg");
 				}
+				fallthrough;
 
 			case "Abbey":
 				message("\"I have spent little time with others in the area. Thou mayest wish to speak with Taylor, for he knows much more about the people, animals, and sights in this area than I do.\"");
 				say();
 				UI_add_answer("Taylor");
 				UI_remove_answer("Abbey");
+				fallthrough;
 
 			case "Taylor":
 				message("\"He is a fellow monk. He spends his time studying the plants, animals, and geography of Britannia.\"");
 				say();
 				UI_remove_answer("Taylor");
+				fallthrough;
 
 			case "paint":
 				message("\"Yes,\" she blushes, \"I have long admired those who are able to express themselves visually. Sadly,\" she says, laughing, \"I am not very good. However, I also collect art. In fact, I have an original Sterling hanging in my room. Perhaps thou couldst see it sometime.\"");
 				say();
 				UI_remove_answer("paint");
+				fallthrough;
 
 			case "garden":
 				var0001 = true;
@@ -35245,11 +36519,13 @@ void Func0472 object#(0x472) ()
 				say();
 				UI_add_answer(["aesthetics", "buy"]);
 				UI_remove_answer("garden");
+				fallthrough;
 
 			case "aesthetics":
 				message("\"It refers to the practice or study of all things beautiful.\"");
 				say();
 				UI_remove_answer("aesthetics");
+				fallthrough;
 
 			case "buy":
 				message("\"Thou wishest to buy a bouquet?\"");
@@ -35327,11 +36603,13 @@ void Func0472 object#(0x472) ()
 					say();
 				}
 				UI_remove_answer("buy");
+				fallthrough;
 
 			case "Kreg":
 				message("\"I am afraid I do not know of such a person.\"");
 				say();
 				UI_remove_answer("Kreg");
+				fallthrough;
 
 			case "bye":
 				message("\"Fare thee well, ");
@@ -35339,7 +36617,6 @@ void Func0472 object#(0x472) ()
 				message(". May the sweet scent of beauty never pass thee by.\"*");
 				say();
 				abort;
-
 		}
 	}
 	if (event == 0x0000)
@@ -35406,6 +36683,7 @@ void Func0473 object#(0x473) ()
 				{
 					UI_add_answer("Addom");
 				}
+				fallthrough;
 
 			case "job":
 				message("\"I have no occupation, ");
@@ -35421,22 +36699,26 @@ void Func0473 object#(0x473) ()
 						var0002 = true;
 					}
 				}
+				fallthrough;
 
 			case "enjoy":
 				message("\"I have loved close-quarter fighting since I was old enough to grasp my first spear. That's why I moved to Yew.\"");
 				say();
 				UI_remove_answer("enjoy");
 				UI_add_answer(["spear", "Yew"]);
+				fallthrough;
 
 			case "spear":
 				message("\"It is my choice in arms. The spear combines the best of both range and power. It is the perfect hunting weapon.\"");
 				say();
 				UI_remove_answer("spear");
+				fallthrough;
 
 			case "Yew":
 				message("\"I moved here to hunt, of course. The forest is full of game. I would not think of living anywhere else!\"");
 				say();
 				UI_remove_answer("Yew");
+				fallthrough;
 
 			case "train":
 				if (var0004 == 0x0007)
@@ -35460,6 +36742,7 @@ void Func0473 object#(0x473) ()
 					message(", but I am not training at this moment. Perhaps if thou wert to return between 9 in the morning and 6 in the evening, I will be able to help thee.\"");
 					say();
 				}
+				fallthrough;
 
 			case "Bradman":
 				message("\"Yes,\" she nods her head, grinning, \"I know Bradman. We go hunting together. Of course, he rarely catches anything with that toothpick shooter of his.\"");
@@ -35481,6 +36764,7 @@ void Func0473 object#(0x473) ()
 					say();
 				}
 				UI_remove_answer("Bradman");
+				fallthrough;
 
 			case "Addom":
 				message("\"Addom is mine husband. But how did...?\" She appears confused, but suddenly directs her gaze at you. \"Hast thou seen him?\"");
@@ -35510,10 +36794,10 @@ void Func0473 object#(0x473) ()
 				}
 				UI_remove_answer("Addom");
 				var0003 = true;
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good journeying, ");
 		message(var0001);
@@ -35569,6 +36853,7 @@ void Func0474 object#(0x474) ()
 				say();
 				UI_remove_answer("name");
 				UI_add_answer(["Yew", "forest"]);
+				fallthrough;
 
 			case "job":
 				message("\"I be a logger, ");
@@ -35581,11 +36866,13 @@ void Func0474 object#(0x474) ()
 				{
 					UI_add_answer("Silverleaf");
 				}
+				fallthrough;
 
 			case "Yew":
 				message("\"It was once a large town, but now, 'tis but a smattering of cottages livin' throughout the woods.\"");
 				say();
 				UI_remove_answer("Yew");
+				fallthrough;
 
 			case "forest":
 				message("\"I am afraid, ");
@@ -35594,16 +36881,19 @@ void Func0474 object#(0x474) ()
 				say();
 				UI_add_answer(["sawmill", "high court"]);
 				UI_remove_answer("forest");
+				fallthrough;
 
 			case "sawmill":
 				message("\"The sawyer there is named William.\"");
 				say();
 				UI_remove_answer("sawmill");
+				fallthrough;
 
 			case "high court":
 				message("\"'Tis in the building just northeast of the Brotherhood. I know they keep prisoners there.\"");
 				say();
 				UI_remove_answer("high court");
+				fallthrough;
 
 			case "Silverleaf":
 				message("\"Why, yes, ");
@@ -35640,11 +36930,13 @@ void Func0474 object#(0x474) ()
 				}
 				UI_add_answer("one area");
 				UI_remove_answer("Silverleaf");
+				fallthrough;
 
 			case "one area":
 				message("\"They mainly populate the east part o' the Great Forest, way on the other side.\"");
 				say();
 				UI_remove_answer("one area");
+				fallthrough;
 
 			case "Emps":
 				message("\"What in the bloody 'ell are emps?\"~~After you quickly explain the Silverleaf Tree situation to him, he exclaims, \"Oh, well, that's 'orrible. I did not realize anyone -- er -- any other creature used the Silverleaf trees. What\tkin I do about it?\"");
@@ -35652,6 +36944,7 @@ void Func0474 object#(0x474) ()
 				UI_pop_answers();
 				UI_add_answer("sign contract");
 				UI_remove_answer("Emps");
+				fallthrough;
 
 			case "sign contract":
 				message("\"Why, o' course I'll sign. No more Silverleaf trees for me.\"");
@@ -35684,10 +36977,10 @@ void Func0474 object#(0x474) ()
 				}
 				UI_pop_answers();
 				UI_remove_answer("sign contract");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"G'bye, ");
 		message(var0000);
@@ -35747,23 +37040,27 @@ void Func0475 object#(0x475) ()
 				message("\"Goth. Not that it is any of thy business!\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"What does it look like I do?\" he says, holding up a ring of keys. \"Gardening?\"");
 				say();
 				UI_add_answer(["keys", "gardening"]);
+				fallthrough;
 
 			case "gardening":
 				message("\"What? Art thou daft?\" He shakes his head. \"Well, at least thou art in the right area for gardening.\"");
 				say();
 				UI_add_answer("area");
 				UI_remove_answer("gardening");
+				fallthrough;
 
 			case "area":
 				message("\"Empath Abbey, dolt!\"");
 				say();
 				UI_add_answer("Empath Abbey");
 				UI_remove_answer("area");
+				fallthrough;
 
 			case "Empath Abbey":
 				message("\"As a matter of fact,  know quite a bit about the people who live here. And I just might even tell thee. What is it worth to thee in gold?\"");
@@ -35771,15 +37068,18 @@ void Func0475 object#(0x475) ()
 				UI_push_answers();
 				UI_add_answer(["nothing", "2", "3", "4", "5"]);
 				UI_remove_answer("Empath Abbey");
+				fallthrough;
 
 			case "nothing":
 				UI_pop_answers();
 				message("\"Fine by me!\"");
 				say();
+				fallthrough;
 
 			case "2", "3", "4":
 				message("He glowers at you. \"Thou must do better than that, fool!\"");
 				say();
+				fallthrough;
 
 			case "5":
 				UI_pop_answers();
@@ -35796,12 +37096,14 @@ void Func0475 object#(0x475) ()
 					say();
 				}
 				UI_remove_answer(["2", "3", "4", "5"]);
+				fallthrough;
 
 			case "keys":
 				message("\"These? They are for the prisoner's cells, witless knave!\"");
 				say();
 				UI_add_answer(["prisoners", "buy keys"]);
 				UI_remove_answer("keys");
+				fallthrough;
 
 			case "prisoners":
 				message("\"I will tell thee for 5 gold. Interested?\"");
@@ -35830,6 +37132,7 @@ void Func0475 object#(0x475) ()
 					abort;
 				}
 				UI_remove_answer("prisoners");
+				fallthrough;
 
 			case "another prisoner":
 				message("\"Another, eh. Hast thou 5 more gold for me?\"");
@@ -35858,6 +37161,7 @@ void Func0475 object#(0x475) ()
 					abort;
 				}
 				UI_remove_answer("another prisoner");
+				fallthrough;
 
 			case "buy keys":
 				message("\"Thou dost want these, eh?\" he asks, holding up keys. \"'Twill cost thee... 20 gold. Still want them?\"");
@@ -35887,10 +37191,10 @@ void Func0475 object#(0x475) ()
 					abort;
 				}
 				UI_remove_answer("buy keys");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Indeed, knave. Get thee gone!\"*");
 		say();
@@ -35944,6 +37248,7 @@ void Func0476 object#(0x476) ()
 				message("\"I am Carlyn.\" She smiles broadly.");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the tailor of Moonglow.\"");
@@ -35959,6 +37264,7 @@ void Func0476 object#(0x476) ()
 					}
 				}
 				UI_add_answer(["tailor", "Moonglow"]);
+				fallthrough;
 
 			case "buy refreshment":
 				message("\"Wouldst thou prefer food or drink, ");
@@ -35968,16 +37274,19 @@ void Func0476 object#(0x476) ()
 				UI_push_answers();
 				UI_add_answer(["food", "drink"]);
 				UI_remove_answer("buy refreshment");
+				fallthrough;
 
 			case "food":
 				Func085D();
 				UI_pop_answers();
 				UI_remove_answer("food");
+				fallthrough;
 
 			case "drink":
 				Func085E();
 				UI_pop_answers();
 				UI_remove_answer("drink");
+				fallthrough;
 
 			case "Phearcy":
 				if (var0001 == 0x0007)
@@ -35995,6 +37304,7 @@ void Func0476 object#(0x476) ()
 				var0002 = true;
 				UI_remove_answer("Phearcy");
 				UI_add_answer("Fellowship");
+				fallthrough;
 
 			case "Moonglow":
 				message("\"'Tis a very pleasant town, ");
@@ -36006,28 +37316,33 @@ void Func0476 object#(0x476) ()
 					UI_add_answer("Phearcy");
 				}
 				UI_remove_answer("Moonglow");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"I know little about the group. Every night at 9 they have a meeting or some such of all the members. And, if I remember correctly, the leader of that branch doth give a speech -- a sermon is what I believe it is called.~~\"There is another member in town, if thou hast questions about The Fellowship.\"");
 				say();
 				UI_add_answer(["another", "leader"]);
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "another":
 				message("\"I believe his name is Tolemac. He is a farmer, from what I have heard. Phearcy would know more than I. Or thou couldst ask their clerk.\"");
 				say();
 				UI_add_answer("clerk");
 				UI_remove_answer("another");
+				fallthrough;
 
 			case "clerk":
 				message("\"'Tis a woman, I know that, but I do not know her name.\"");
 				say();
 				UI_remove_answer("clerk");
+				fallthrough;
 
 			case "leader":
 				message("\"His name is Rankin. I do not believe he has been here terribly long.\"");
 				say();
 				UI_remove_answer("leader");
+				fallthrough;
 
 			case "tailor":
 				if ((var0001 == 0x0003) || ((var0001 == 0x0004) || ((var0001 == 0x0005) || (var0001 == 0x0006))))
@@ -36053,6 +37368,7 @@ void Func0476 object#(0x476) ()
 					say();
 				}
 				UI_remove_answer("tailor");
+				fallthrough;
 
 			case "bye":
 				message("\"Fare thee well, ");
@@ -36060,7 +37376,6 @@ void Func0476 object#(0x476) ()
 				message(".\"*");
 				say();
 				abort;
-
 		}
 	}
 	if (event == 0x0000)
@@ -36134,22 +37449,26 @@ void Func0477 object#(0x477) ()
 				message("\"I am called Master De Snel.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I operate the famous fighting school here in Jhelom, the Library of Scars. I also train fighters personally from time to time, if they show potential.\"");
 				say();
 				UI_add_answer(["Jhelom", "Library of Scars", "potential"]);
+				fallthrough;
 
 			case "potential":
 				message("\"I teach a fighting style of mine own invention. It enables one to gain complete mastery over his opponent. I could arrange a little demonstration for thee...\"");
 				say();
 				UI_add_answer("demonstration");
 				UI_remove_answer("potential");
+				fallthrough;
 
 			case "Jhelom":
 				message("\"This city is devoted to the art of combat. Not mere slavish military discipline, but pure violent confrontation. It is a place after mine own heart.\"");
 				say();
 				UI_remove_answer("Jhelom");
+				fallthrough;
 
 			case "Library of Scars":
 				if (var0002 == 0x0007)
@@ -36165,11 +37484,13 @@ void Func0477 object#(0x477) ()
 					abort;
 				}
 				UI_remove_answer("Library of Scars");
+				fallthrough;
 
 			case "fighters":
 				message("\"I train my students to be fierce and ruthless fighters!\"");
 				say();
 				UI_remove_answer("fighters");
+				fallthrough;
 
 			case "weaponry":
 				message("He unsheathes his own sword and shows it to you. The sword has an elaborate serpentine pattern engraved in it. \"Thou mayest recognize a weapon of the Library of Scars by its engraving. It is the sign of the snake. Striking quick, silent, deadly, as are we!\"");
@@ -36180,6 +37501,7 @@ void Func0477 object#(0x477) ()
 				{
 					UI_add_answer("dagger");
 				}
+				fallthrough;
 
 			case "dagger":
 				message("You produce the dagger found at the scene of the murders in Minoc. The serpentine engraving matches the markings of the Library of Scars exactly. De Snel looks at it and then back at you. He cannot conceal his surprise.~\"From where didst thou get that dagger?\"");
@@ -36215,6 +37537,7 @@ void Func0477 object#(0x477) ()
 				UI_add_answer("demonstration");
 				gflags[0x016C] = true;
 				Func0911(0x0032);
+				fallthrough;
 
 			case "demonstration":
 				if (gflags[0x016C])
@@ -36240,11 +37563,13 @@ void Func0477 object#(0x477) ()
 						UI_remove_answer("demonstration");
 					}
 				}
+				fallthrough;
 
 			case "Sprellic":
 				message("\"As thou hast probably seen, a few of our members had a dispute with a local troublemaker over our honor flag. We of the Library of Scars have a fierce dedication to our institution. I do not know what exactly happened to this upstart, but I understand that he is now dead. I am not trying to suggest the Library of Scars had anything to do with it, of course. Only that it would be wise not to cross us.\"");
 				say();
 				UI_remove_answer("Sprellic");
+				fallthrough;
 
 			case "duellists":
 				message("\"I have heard that thou didst kill several of our members while champion of a duel defending the thief of our honor flag.\" His eyes narrow as he stares at you intensely. \"Outstanding! I am a man who values nothing higher than the application of skill. I salute thee on thy victory. Perhaps thou wouldst like to join our group?\"");
@@ -36266,15 +37591,16 @@ void Func0477 object#(0x477) ()
 					}
 				}
 				UI_remove_answer("duellists");
+				fallthrough;
 
 			case "honor flag":
 				message("\"Fortunately for Sprellic our honor flag was returned. If it had not been we would have had no choice but to regain our honor with his blood.\"");
 				say();
 				UI_remove_answer("honor flag");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		if (gflags[0x016C])
 		{
@@ -36336,55 +37662,65 @@ void Func0478 object#(0x478) ()
 				message("\"My name is Joseph.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"Presently, I am the mayor of Jhelom.\"");
 				say();
 				UI_add_answer(["mayor", "Jhelom"]);
+				fallthrough;
 
 			case "mayor":
 				message("\"I may seem a bit young for the job, but in a town such as this I am called upon to help keep order as often as administrate. I use my sword and pen in equal measure.\"");
 				say();
 				UI_remove_answer("mayor");
+				fallthrough;
 
 			case "Jhelom":
 				message("\"This town is a rough place. A fine place for fighting men and women to live. Perhaps thou hast seen our local sport?\"");
 				say();
 				UI_remove_answer("Jhelom");
 				UI_add_answer("sport");
+				fallthrough;
 
 			case "sport":
 				message("\"Why, 'tis duelling! At twelve noon every day, the town square becomes a battlefield.\"");
 				say();
 				UI_add_answer(["duelling", "battlefield"]);
 				UI_remove_answer("sport");
+				fallthrough;
 
 			case "duelling":
 				message("\"Well, the sound is worse than the act. 'Tis actually just a form of training and exercise. The fighters practice with targets and such. That is where I can be found, keeping mine own skills sharp.\"");
 				say();
 				UI_remove_answer("duelling");
+				fallthrough;
 
 			case "battlefield":
 				message("\"I am exaggerating. Many of the fighters in town gather to spar with the training dummies and practice various methods of combat. There are a few harmless matches at times. Some are a bit rough every now and then. Some folks take wagers on it and turn a profit.\"");
 				say();
 				UI_remove_answer("battlefield");
 				UI_add_answer(["spar", "take wagers"]);
+				fallthrough;
 
 			case "spar":
 				message("\"Ahem... Of course most duels are simply to the blood, not to the death. It is a practice that helps restrain the passing knaves and rogues.\"");
 				say();
 				UI_remove_answer("spar");
+				fallthrough;
 
 			case "take wagers":
 				message("\"Speak to Daphne or Ophelia at the Bunk and Stool, our town pub and inn.\"");
 				say();
 				UI_remove_answer("take wagers");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"That is what many of the duels are fought over! Some say The Fellowship is a load of rot, some say it is the only truth. Others say it is foolishness. Of course, as Mayor I remain neutral on such matters.\"");
 				say();
 				UI_remove_answer("Fellowship");
 				UI_add_answer(["truth", "foolishness"]);
+				fallthrough;
 
 			case "Elizabeth and Abraham":
 				if (!gflags[0x0088])
@@ -36400,12 +37736,14 @@ void Func0478 object#(0x478) ()
 				}
 				UI_add_answer("Fellowship");
 				UI_remove_answer("Elizabeth and Abraham");
+				fallthrough;
 
 			case "truth":
 				message("\"De Snel, the leader of the Library of Scars, requires that his members fight in many duels. One week they will fight for one cause and the next week for the opposite side.\"");
 				say();
 				UI_remove_answer("truth");
 				UI_add_answer(["De Snel", "Library of Scars"]);
+				fallthrough;
 
 			case "foolishness":
 				if (var0001)
@@ -36421,47 +37759,54 @@ void Func0478 object#(0x478) ()
 					say();
 				}
 				UI_remove_answer("foolishness");
+				fallthrough;
 
 			case "De Snel":
 				message("\"De Snel says he only wishes the best for his school. If his fighters are ever beaten he throws them out and recruits the winner to join the Library of Scars.\"");
 				say();
 				UI_remove_answer("De Snel");
+				fallthrough;
 
 			case "Library of Scars":
 				message("\"It attracts fighters from all over Britannia who want to learn from De Snel. They are an unruly bunch. Thou wouldst do best to stay clear of them.\"");
 				say();
 				UI_remove_answer("Library of Scars");
+				fallthrough;
 
 			case "Sprellic":
 				message("\"Yes, I have heard of the events surrounding this fellow Sprellic and the duels against the Library of Scars, but frankly, mine official policy has been to not get involved in these sort of personal disputes.\"");
 				say();
 				UI_remove_answer("Sprellic");
 				UI_add_answer(["get involved", "personal dispute"]);
+				fallthrough;
 
 			case "get involved":
 				message("\"De Snel and I have an understanding. He works his side of the street and I work mine. It is hard enough to maintain order in this town without jeopardizing that. If I intervene De Snel will challenge me to a duel and if I am killed then his control of our town would be absolute.\"");
 				say();
 				UI_remove_answer("get involved");
 				UI_add_answer(["challenge", "understanding"]);
+				fallthrough;
 
 			case "personal dispute":
 				message("\"As Mayor and the peacekeeper I have to pick and choose my fights very carefully. There is no love lost between myself and the members of the Library of Scars, but they can legitimately claim that they have been wronged. I am required to remain impartial in this matter. As far as I can see, Sprellic brought this on himself when he took the honor flag. If thou dost wish to stop the duel, thou dost need only convince him to give it back.\"");
 				say();
 				UI_remove_answer("personal dispute");
+				fallthrough;
 
 			case "understanding":
 				message("\"Believe me, we are not in each other's company so often because we are friends. We do so to maintain a careful watch on each other. Keep thy friends close, but keep thine enemies closer. Words to live by in Jhelom.\"");
 				say();
 				UI_remove_answer("understanding");
+				fallthrough;
 
 			case "challenge":
 				message("\"When I say that De Snel would challenge me to a duel I do not mean to insinuate that it would in any way be a fair or honorable contest-- more like a dagger in the back from one of his bullies as I was walking down a dark alley somewhere. That it would be a duel is just the story he would tell to make mine assassination somehow honorable.\"");
 				say();
 				UI_remove_answer("challenge");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Enjoy thy stay in my city. But if thou hast no stomach for fighting thou shouldst not stay long.\"*");
 		say();
@@ -36526,11 +37871,13 @@ void Func0479 object#(0x479) ()
 				message("\"I am Kliftin.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"In my day I was a pretty damned good soldier. Now I am the master of the Armoury here in Jhelom.\"");
 				say();
 				UI_add_answer(["soldier", "Armoury", "Jhelom", "buy"]);
+				fallthrough;
 
 			case "buy":
 				if ((var0002 == 0x0007) || (var0002 == 0x0013))
@@ -36548,34 +37895,41 @@ void Func0479 object#(0x479) ()
 					say();
 				}
 				UI_remove_answer("buy");
+				fallthrough;
 
 			case "armour":
 				Func08AA();
+				fallthrough;
 
 			case "weapons":
 				Func08A9();
+				fallthrough;
 
 			case "soldier":
 				message("\"Surely thou dost not want to listen to old war stories?! I have seen my share of death and destruction. Leave it at that.\"");
 				say();
 				UI_remove_answer("soldier");
+				fallthrough;
 
 			case "Armoury":
 				message("\"I sell and collect weapons of all types. Business is always excellent, although my best customers keep getting killed in duels!\"");
 				say();
 				UI_remove_answer("Armoury");
 				UI_add_answer(["duels", "buy"]);
+				fallthrough;
 
 			case "Jhelom":
 				message("\"Jhelom is a rough place. If thou dost not like trouble then I can think of many better places for thee to be than here.\"");
 				say();
 				UI_remove_answer("Jhelom");
+				fallthrough;
 
 			case "duels":
 				message("\"Every day at noon in the Town Square people come to settle their differences. They fight to the blood or to the death. It is a madness! Like that Sprellic fellow for instance.\"");
 				say();
 				UI_remove_answer("duels");
 				UI_add_answer("Sprellic");
+				fallthrough;
 
 			case "Sprellic":
 				if (!gflags[0x0186])
@@ -36599,34 +37953,40 @@ void Func0479 object#(0x479) ()
 					}
 				}
 				UI_remove_answer("Sprellic");
+				fallthrough;
 
 			case "fighters":
 				message("\"Thou canst ask about the entire matter at the pub if thou dost wish to know more about it.\"");
 				say();
 				UI_remove_answer("fighters");
+				fallthrough;
 
 			case "dissuade":
 				message("\"The only thing that can dissuade them from wanting to kill poor Sprellic is to return the honor flag! It must have been taken away by Sullivan, but the duellists do not know that! If we had a duplicate of the honor flag we could give them that instead!\"");
 				say();
 				UI_remove_answer("dissuade");
 				UI_add_answer("duplicate");
+				fallthrough;
 
 			case "duplicate":
 				message("\"In my day I was fairly handy at stitching wounds... Hmmm, perhaps I can make a duplicate of the honor flag. The deception only has to work long enough for them to formally call off the duel.\"");
 				say();
 				UI_remove_answer("duplicate");
 				UI_add_answer(["deception", "sewing"]);
+				fallthrough;
 
 			case "sewing":
 				message("\"I stitched so many of my comrades back together after all the battles I fought in. Now that I am retired, sewing has sort of become mine hobby.\" He looks at you with a little embarrassment. \"There is nothing wrong with that!\"");
 				say();
 				UI_remove_answer("sewing");
+				fallthrough;
 
 			case "deception":
 				message("\"Even if they notice that it is not their true honor flag they would never admit it. To do so would make them look foolish. They would rather simply challenge anyone who might say it is not their honor flag to yet another\tduel! But let us deal with one duel at a time here.\"");
 				say();
 				UI_remove_answer("deception");
 				UI_add_answer("honor flag");
+				fallthrough;
 
 			case "honor flag":
 				message("\"Dost thou want me to make an honor flag that can be given to the Library of Scars so the duels can be stopped?\"");
@@ -36667,6 +38027,7 @@ void Func0479 object#(0x479) ()
 					}
 				}
 				UI_remove_answer("honor flag");
+				fallthrough;
 
 			case "false flag":
 				var0004 = UI_get_timer(0x0000);
@@ -36693,10 +38054,10 @@ void Func0479 object#(0x479) ()
 					}
 				}
 				UI_remove_answer("false flag");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good day.\"*");
 		say();
@@ -36823,11 +38184,13 @@ void Func047A object#(0x47A) ()
 				message(".\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am a barmaid. I do most of the work at The Bunk and Stool here in Jhelom.\"");
 				say();
 				UI_add_answer(["work", "Bunk and Stool", "Jhelom"]);
+				fallthrough;
 
 			case "work":
 				message("\"Ever since Sprellic, the owner, was challenged to those duels by the three students at the Library of Scars, he has been busy preparing himself. I have been running the place all by myself... although Daphne has been helping me, I suppose.\"");
@@ -36835,6 +38198,7 @@ void Func047A object#(0x47A) ()
 				gflags[0x016E] = true;
 				UI_remove_answer("work");
 				UI_add_answer(["Sprellic", "Library", "Daphne"]);
+				fallthrough;
 
 			case "Daphne":
 				message("\"Honestly, I cannot imagine why thou wouldst be interested in her.\" She lets out a throaty laugh.*");
@@ -36855,27 +38219,32 @@ void Func047A object#(0x47A) ()
 					UI_show_npc_face(0xFF86, 0x0000);
 				}
 				UI_remove_answer("Daphne");
+				fallthrough;
 
 			case "Bunk and Stool":
 				message("\"'Tis said that indeed many strange things happen at this bar. As of late, in addition to being an inn and a pub, where thou mayest buy fine food and drink, it has become a betting parlor.\"");
 				say();
 				UI_remove_answer("Bunk and Stool");
 				UI_add_answer(["strange", "food", "room", "betting"]);
+				fallthrough;
 
 			case "Jhelom":
 				message("\"It is a pretty rough place to work, but,\" she whispers to you in confidence, \"I must confess I find myself attracted to the type of men that live here.\"");
 				say();
 				UI_remove_answer("Jhelom");
+				fallthrough;
 
 			case "Library":
 				message("\"Surely thou hast heard of our famous school for fighters by now! What kind of a world traveller art thou? Do not answer. 'Twas a rhetorical question,\" she sniffs.");
 				say();
 				UI_remove_answer("Library");
+				fallthrough;
 
 			case "food":
 				message("\"Thou shalt have to see Daphne about that. Thou wouldst not expect me to have to go into the kitchen?\" Ophelia laughs.");
 				say();
 				UI_remove_answer("food");
+				fallthrough;
 
 			case "room":
 				if (var0003 == 0x0010)
@@ -36929,24 +38298,28 @@ void Func047A object#(0x47A) ()
 					say();
 				}
 				UI_remove_answer("room");
+				fallthrough;
 
 			case "Sprellic":
 				message("\"No one knows old Sprellic better than myself. Although he does not look it, he may well be the deadliest fighting master in all of Britannia.\"");
 				say();
 				UI_remove_answer("Sprellic");
 				UI_add_answer("master");
+				fallthrough;
 
 			case "master":
 				message("\"After he defeats the fighters of the Library of Scars, he may open his own school teaching his own unique style of fighting.\"");
 				say();
 				UI_remove_answer("master");
 				UI_add_answer("school");
+				fallthrough;
 
 			case "school":
 				message("\"It will be a great fighting school. Already, fighting men and women are coming to Jhelom to become Sprellic's students. They all long to know the secret that I can tell thee right now.\"");
 				say();
 				UI_remove_answer("school");
 				UI_add_answer("secret");
+				fallthrough;
 
 			case "secret":
 				if (!var0001)
@@ -36960,11 +38333,13 @@ void Func047A object#(0x47A) ()
 					say();
 				}
 				UI_remove_answer("secret");
+				fallthrough;
 
 			case "strange":
 				message("\"In case thou hast not noticed, this is a rough town. We see all types of odd characters in this place.\" She looks you over carefully.");
 				say();
 				UI_remove_answer("strange");
+				fallthrough;
 
 			case "betting":
 				if (var0006 || (var0005 || (var0007 || var0008)))
@@ -37039,6 +38414,7 @@ void Func047A object#(0x47A) ()
 				}
 labelFunc047A_0447:
 				UI_remove_answer("betting");
+				fallthrough;
 
 			case "winnings":
 				if (!gflags[0x016F])
@@ -37065,6 +38441,7 @@ labelFunc047A_0447:
 					say();
 				}
 				UI_remove_answer("winnings");
+				fallthrough;
 
 			case "Cosmo":
 				message("\"Who? Oh, he is a local boy who comes in here and moons over me on occasion. Do not concern thyself with him. I do not.\"");
@@ -37084,6 +38461,7 @@ labelFunc047A_0447:
 					UI_show_npc_face(0xFF86, 0x0000);
 				}
 				UI_remove_answer("Cosmo");
+				fallthrough;
 
 			case "Sprellic dead":
 				message("\"Hmpf! If thou didst bet against him, then I suppose thou shalt be rich! I wouldst bet that thou wert the one who killed him, too!\"");
@@ -37092,10 +38470,10 @@ labelFunc047A_0447:
 				say();
 				UI_remove_answer("Sprellic dead");
 				abort;
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Do come and visit us again, ");
 		message(var0000);
@@ -37197,11 +38575,13 @@ void Func047B object#(0x47B) ()
 				message("\"I am Daphne.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"That is an easy one. I am the workhorse in residence of the Bunk and Stool. While our resident princess flirts with the customers I do all the cooking, cleaning and serving.\"");
 				say();
 				UI_add_answer(["workhorse", "princess", "buy", "Bunk and Stool", "room"]);
+				fallthrough;
 
 			case "buy":
 				if (var0002 == 0x0017)
@@ -37216,23 +38596,27 @@ void Func047B object#(0x47B) ()
 					say();
 				}
 				UI_remove_answer("buy");
+				fallthrough;
 
 			case "workhorse":
 				message("\"Ever since the owner, Sprellic, got himself into trouble with the Library of Scars, there hath been no one else to run the place. Ohh, mine aching back!\"");
 				say();
 				UI_remove_answer("workhorse");
 				UI_add_answer(["Sprellic", "Library of Scars"]);
+				fallthrough;
 
 			case "princess":
 				message("\"Hmmph! That would be Ophelia.\"");
 				say();
 				UI_remove_answer("princess");
 				UI_add_answer("Ophelia");
+				fallthrough;
 
 			case "room":
 				message("\"Thou shalt have to ask Ophelia about that. My domain is the kitchen!\"");
 				say();
 				UI_remove_answer("room");
+				fallthrough;
 
 			case "Ophelia":
 				message("\"Ophelia this! Ophelia that! That is all I ever hear all bloody day! If all thou dost want to talk about is her, talk to someone else!\"");
@@ -37257,23 +38641,27 @@ void Func047B object#(0x47B) ()
 					UI_show_npc_face(0xFF85, 0x0000);
 				}
 				UI_remove_answer("Ophelia");
+				fallthrough;
 
 			case "Bunk and Stool":
 				message("\"The Bunk and Stool is where the fighters and ruffians come to drink in Jhelom. 'Tis not an easy job keeping such a lot happy with all their drinking and duelling and gambling.\"");
 				say();
 				UI_remove_answer("Bunk and Stool");
 				UI_add_answer("gambling");
+				fallthrough;
 
 			case "Sprellic":
 				message("\"The fool was caught stealing the honor flag from the wall of the Library of Scars! Now the three students who challenged him will kill him on the duelling field. 'Tis a tragedy.\"");
 				say();
 				gflags[0x016E] = true;
 				UI_remove_answer("Sprellic");
+				fallthrough;
 
 			case "Library of Scars":
 				message("\"That is the fighting club in Jhelom which produces perhaps the toughest fighters in all Britannia. Sprellic has never fought before in his entire life.\"");
 				say();
 				UI_remove_answer("Library of Scars");
+				fallthrough;
 
 			case "gambling":
 				if (var0004)
@@ -37346,6 +38734,7 @@ void Func047B object#(0x47B) ()
 				}
 labelFunc047B_0352:
 				UI_remove_answer("gambling");
+				fallthrough;
 
 			case "winnings":
 				var0011 = UI_count_objects(0xFE9B, 0x0399, 0xFE99, 0x0001);
@@ -37366,10 +38755,10 @@ labelFunc047B_0352:
 					say();
 				}
 				UI_remove_answer("winnings");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Enjoy thyself.\"*");
 		say();
@@ -37452,11 +38841,13 @@ void Func047C object#(0x47C) ()
 				message("\"My name is Sprellic.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the proprietor of the Bunk and Stool here in Jhelom.\"");
 				say();
 				UI_add_answer(["Bunk and Stool", "Jhelom"]);
+				fallthrough;
 
 			case "Bunk and Stool":
 				message("\"It is the local inn where all the fighters from the Library of Scars come to drink. They would wreck the place every night if not for Ophelia and Daphne.\"");
@@ -37469,32 +38860,38 @@ void Func047C object#(0x47C) ()
 				}
 				UI_remove_answer("Bunk and Stool");
 				UI_add_answer(["Library of Scars", "Ophelia", "Daphne"]);
+				fallthrough;
 
 			case "Jhelom":
 				message("\"This is a town of fighters who pass their time fighting each other in bloody duels. It is no place for me. I should never have left Minoc!\"");
 				say();
 				UI_remove_answer("Jhelom");
+				fallthrough;
 
 			case "Library of Scars":
 				message("\"It is the club of fighters run by Master De Snel! Second home to the fiercest and most ruthless fighters in all of Britannia.\"");
 				say();
 				UI_remove_answer("Library of Scars");
+				fallthrough;
 
 			case "Ophelia":
 				message("\"Ophelia is one of my barmaids. She is gorgeous. If Daphne cannot handle our patrons when they become unruly, Ophelia will simply charm them.\"");
 				say();
 				UI_remove_answer("Ophelia");
+				fallthrough;
 
 			case "Daphne":
 				message("\"Daphne is one of my barmaids. She is, ahem, rather large. If Ophelia cannot charm our patrons when they become unruly, Daphne wrestles them to the ground.\"");
 				say();
 				UI_remove_answer("Daphne");
+				fallthrough;
 
 			case "this time", "dead?":
 				message("\"'Tis a long story. I shall probably be dead before I can finish it.\"");
 				say();
 				UI_remove_answer(["this time", "dead?"]);
 				UI_add_answer("story");
+				fallthrough;
 
 			case "story":
 				message("\"My tale is a strange one. It may disturb and puzzle thee. Art thou certain thou wouldst like to hear it?\"");
@@ -37519,6 +38916,7 @@ void Func047C object#(0x47C) ()
 					UI_add_answer("stranger");
 				}
 				UI_remove_answer("story");
+				fallthrough;
 
 			case "stranger":
 				message("\"His eccentricity seemed to be surpassed only by his wealth. He booked both rooms in the inn so that he could try each bed and decide for himself which one was the most comfortable. As for food, he was voracious.");
@@ -37535,72 +38933,85 @@ void Func047C object#(0x47C) ()
 				}
 				UI_remove_answer("stranger");
 				UI_add_answer(["eccentricity", "food"]);
+				fallthrough;
 
 			case "eccentricity":
 				message("\"I fear that this stranger was not who he claimed to be at all. I was a victim of a great and terrible deception that was perpetrated upon me.\"");
 				say();
 				UI_remove_answer("eccentricity");
+				fallthrough;
 
 			case "food":
 				message("\"This stranger ordered one of every kind of food and drink on the menu. So if he ever wanted anything, it would be right there to eat. I was cooking for hours. But then it got worse. He went to bed.\"");
 				say();
 				UI_remove_answer("food");
 				UI_add_answer(["cooking", "bed"]);
+				fallthrough;
 
 			case "cooking":
 				message("\"Of course most of the food he left was uneaten! I had to give it away once it started to spoil!\"");
 				say();
 				UI_remove_answer("cooking");
+				fallthrough;
 
 			case "bed":
 				message("\"After he went to bed, he complained that he was too cold. I brought him more and more blankets, but it was not enough. Finally, he had every blanket in the inn. And he was still cold!\"");
 				say();
 				UI_remove_answer("bed");
 				UI_add_answer("cold");
+				fallthrough;
 
 			case "cold":
 				message("\"In desperation I ran down the street. It was the middle of the night. All of the shops were closed. The only thing I could find was some sort of old tapestry hanging on a wall. So I took it down.\"");
 				say();
 				UI_remove_answer("cold");
 				UI_add_answer(["night", "tapestry"]);
+				fallthrough;
 
 			case "night":
 				message("\"Actually, now as I recall being out in the night air, it was a quite tolerable evening. Alas, I was oblivious to little else but the prospect of earning a goodly sum in the service of the stranger. Woe is me!\"");
 				say();
 				UI_remove_answer("night");
+				fallthrough;
 
 			case "tapestry":
 				message("\"The next thing I remember there was an angry woman chasing after me. For some reason she wanted to kill me! I managed to get away from her and get back to the inn and cover the stranger with the tapestry. Finally he fell asleep.\"");
 				say();
 				UI_remove_answer("tapestry");
 				UI_add_answer(["angry woman", "asleep"]);
+				fallthrough;
 
 			case "angry woman":
 				message("\"Actually, I had seen this angry woman before. She would enter mine establishment upon occasion. Unfortunately, this was our first formal acquaintance.\"");
 				say();
 				UI_remove_answer("angry woman");
+				fallthrough;
 
 			case "asleep":
 				message("\"I also fell asleep, only I slept late. When I awoke the guest was gone. He had not paid his bill and had taken all the blankets, even the tapestry. Before I could go look for him I had a visitor.\"");
 				say();
 				UI_remove_answer("asleep");
 				UI_add_answer(["gone", "visitor"]);
+				fallthrough;
 
 			case "gone":
 				message("\"As I have said, I was rooked by a professional. A Master Criminal, no doubt -- and one who is still at large!\"");
 				say();
 				UI_remove_answer("gone");
+				fallthrough;
 
 			case "visitor":
 				message("\"It was the woman who had chased me the night before. Her name was Syria. She said I had stolen the honor flag from the wall of the Library of Scars. She also challenged me to a duel to the death unless I gave it back. And she is much bigger than I! When I tried to explain that I could not give it back, she hit me. It hurt. A lot!\"");
 				say();
 				UI_remove_answer("visitor");
 				UI_add_answer(["hit", "duel"]);
+				fallthrough;
 
 			case "hit":
 				message("\"I will say this of the Lady Syria. She is quite beautiful when she is angry... At least, the visions of her that swam through mine head after she had hit me were quite beautiful. Tragically, I awoke.\"");
 				say();
 				UI_remove_answer("hit");
+				fallthrough;
 
 			case "duel":
 				message("\"Later that day I ran into a man named Vokes. He is a fighter at the Library of Scars. He asked me to return the honor flag and when I tried to tell him I could not, he hit me. Then he challenged me to a duel to the death to be fought right after my duel with Syria.");
@@ -37611,21 +39022,25 @@ void Func047C object#(0x47C) ()
 				say();
 				UI_remove_answer("duel");
 				UI_add_answer(["Timmons", "Vokes", "Syria", "demise"]);
+				fallthrough;
 
 			case "Timmons":
 				message("\"Timmons has come to Jhelom only recently. I can tell thee nothing more of him.\"");
 				say();
 				UI_remove_answer("Timmons");
+				fallthrough;
 
 			case "Vokes":
 				message("\"He is a fearless warrior, who cherishes any opportunity for combat. Beware of him.\"");
 				say();
 				UI_remove_answer("Vokes");
+				fallthrough;
 
 			case "Syria":
 				message("\"She is not as bad as she may appear to be. No doubt that woman has a temper. But I am sure she is quite nice once thou hast gotten the chance to know her. If not for these sad circumstances, we might have gotten the chance to get to know each other better.\"");
 				say();
 				UI_remove_answer("Syria");
+				fallthrough;
 
 			case "demise":
 				message("\"Mine only hope for survival is to find a champion who could stand up to the fiercest fighters in Jhelom.\"");
@@ -37633,6 +39048,7 @@ void Func047C object#(0x47C) ()
 				gflags[0x0186] = true;
 				UI_remove_answer("demise");
 				UI_add_answer("champion");
+				fallthrough;
 
 			case "champion":
 				message("\"Wouldst thou be my champion, Avatar?\"");
@@ -37650,6 +39066,7 @@ void Func047C object#(0x47C) ()
 					say();
 				}
 				UI_remove_answer("champion");
+				fallthrough;
 
 			case "thou art safe now":
 				message("You tell Sprellic that the situation has been resolved and how it was done.");
@@ -37659,6 +39076,7 @@ void Func047C object#(0x47C) ()
 				message("\"How can I ever thank thee? Thou art the most noble person I have ever met! I shalt be forever in thy debt! I thank thee!\"");
 				say();
 				UI_remove_answer("thou art safe now");
+				fallthrough;
 
 			case "I have false flag":
 				message("You tell Sprellic that Kliftin made you a false flag.");
@@ -37666,10 +39084,10 @@ void Func047C object#(0x47C) ()
 				message("\"How ingenious! Please! Deliver it to Syria as soon as thou art able! And I thank thee for thy trouble in helping me!\"");
 				say();
 				UI_remove_answer("I have false flag");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good day to thee, Avatar.\"");
 		say();
@@ -37760,6 +39178,7 @@ void Func047D object#(0x47D) ()
 						message(". As big as a mountain, as strong as an ox, as fierce as... well, more fierce than anything thou hast ever fought!\"");
 						say();
 						UI_remove_answer("name");
+						fallthrough;
 
 					case "job":
 						message("\"Job! I am not in the habit of plowing fields or peddling vegetables, ");
@@ -37767,12 +39186,14 @@ void Func047D object#(0x47D) ()
 						message("! I earn my gold with this sword arm,\" he says as he flexes a mighty bicep. \"Right now I am in Jhelom continuing my studies in my trade with De Snel, and when I am finished my price is going to go up!\"");
 						say();
 						UI_add_answer("Jhelom");
+						fallthrough;
 
 					case "Jhelom":
 						message("\"I was born here! Is it not magnificent?! Why, in any hour of any day thou canst get into a duel with anyone for no reason at all! Now that is what I call the benefits of civilization!\"");
 						say();
 						UI_add_answer("duel");
 						UI_remove_answer("Jhelom");
+						fallthrough;
 
 					case "duel":
 						message("\"A responsibility, yes, even a necessity. The cost of being honorable is that one must defend one's honor. There is no telling just where or when the next stain on one's honor may appear. Like this Sprellic fool, for instance. The perfect example!\"*");
@@ -37787,6 +39208,7 @@ void Func047D object#(0x47D) ()
 						}
 						UI_add_answer("Sprellic");
 						UI_remove_answer("duel");
+						fallthrough;
 
 					case "Sprellic":
 						if (!gflags[0x0164])
@@ -37813,32 +39235,36 @@ void Func047D object#(0x47D) ()
 							say();
 						}
 						UI_remove_answer("Sprellic");
+						fallthrough;
 
 					case "honor flag":
 						message("\"There is a widely known and long-standing tradition concerning the honor flag of the Library of Scars. It is said that taking the flag from the wall is a signal meaning that the person who takes the flag can beat anyone who studies at the school in a fight. It is also a grossly insulting way of saying that thou dost think the method of fighting a school teaches is inferior, which the Library of Scars most certainly is not!\"");
 						say();
 						UI_add_answer("Library of Scars");
 						UI_remove_answer("honor flag");
+						fallthrough;
 
 					case "misunderstanding":
 						message("\"I have heard that rot about it all being a misunderstanding. The only thing misunderstood is how bad Sprellic will look when we finish with him!\"");
 						say();
 						UI_remove_answer("misunderstanding");
+						fallthrough;
 
 					case "Library of Scars":
 						message("\"The Library of Scars teaches the supreme fighting style! One that enables thee to get the advantage against thine opponents and soundly defeat them through the brilliantly conceived subterfuge of Master De Snel!\"");
 						say();
 						UI_add_answer("De Snel");
 						UI_remove_answer("Library of Scars");
+						fallthrough;
 
 					case "De Snel":
 						message("\"He is a genius. Perhaps the greatest military mind that ever lived. He told us so!\"");
 						say();
 						UI_remove_answer("De Snel");
+						fallthrough;
 
 					case "bye":
 						break;
-
 				}
 				message("\"If I am not killed and thou art not killed perhaps we may raise a\tglass together some day!\"*");
 				say();
@@ -37954,17 +39380,20 @@ void Func047E object#(0x47E) ()
 				message("\"I am Syria, a fighter from the south.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"Currently I am resting from my last voyage as a mercenary. I am\tstudying in Jhelom with the fighting trainer De Snel\tat the Library of Scars.\"");
 				say();
 				UI_add_answer(["Jhelom", "De Snel", "Library of Scars"]);
+				fallthrough;
 
 			case "Jhelom":
 				message("\"This is a city of fighters and duels. If thou dost not like it the way it is, then leave. Duels are fought here for many reasons. I have mine own reasons for fighting them.\"");
 				say();
 				UI_add_answer("duels");
 				UI_remove_answer("Jhelom");
+				fallthrough;
 
 			case "duels":
 				if (!gflags[0x0164])
@@ -37980,6 +39409,7 @@ void Func047E object#(0x47E) ()
 					UI_add_answer("Sprellic");
 				}
 				UI_remove_answer("duels");
+				fallthrough;
 
 			case "return":
 				message("\"Since Sprellic has not done this, it proves that he is sincere in the grievous insult that he has made against us.\"*");
@@ -37993,6 +39423,7 @@ void Func047E object#(0x47E) ()
 					UI_show_npc_face(0xFF82, 0x0000);
 				}
 				UI_remove_answer("return");
+				fallthrough;
 
 			case "Sprellic":
 				if (!gflags[0x0164])
@@ -38006,6 +39437,7 @@ void Func047E object#(0x47E) ()
 					say();
 				}
 				UI_remove_answer("Sprellic");
+				fallthrough;
 
 			case "Library of Scars":
 				message("\"The Library of Scars is the greatest guild of fighters in Britannia.\"*");
@@ -38019,11 +39451,13 @@ void Func047E object#(0x47E) ()
 					UI_show_npc_face(0xFF82, 0x0000);
 				}
 				UI_remove_answer("Library of Scars");
+				fallthrough;
 
 			case "De Snel":
 				message("\"Master De Snel teaches a style of pure fighting which takes thee beyond all previous disciplines that thou mayest have learned. He is a great man.\"");
 				say();
 				UI_remove_answer("De Snel");
+				fallthrough;
 
 			case "return flag":
 				message("\"I understand that coward Sprellic has given thee the flag so that it may be returned to us. Thou hadst better hand it over.\"");
@@ -38064,10 +39498,10 @@ void Func047E object#(0x47E) ()
 					abort;
 				}
 				UI_remove_answer("return flag");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"We do not appreciate people who interfere in our private matters. We shall be watching thee.\"*");
 		say();
@@ -38157,17 +39591,20 @@ void Func047F object#(0x47F) ()
 						message(".\"");
 						say();
 						UI_remove_answer("name");
+						fallthrough;
 
 					case "job":
 						message("\"At the moment I have no job. I left all that behind in New Magincia. I have come to Jhelom to study under Master De Snel in the Library of Scars.\"");
 						say();
 						UI_add_answer(["Jhelom", "Library of Scars"]);
+						fallthrough;
 
 					case "Jhelom":
 						message("\"I am afraid I would not be able to help thee. I know little of this town, except for the duels. I am newly arrived here myself. Perhaps thou shouldst ask someone else.\"");
 						say();
 						UI_add_answer("duels");
 						UI_remove_answer("Jhelom");
+						fallthrough;
 
 					case "duels":
 						if (!gflags[0x0164])
@@ -38182,6 +39619,7 @@ void Func047F object#(0x47F) ()
 							say();
 						}
 						UI_remove_answer("duels");
+						fallthrough;
 
 					case "Library of Scars":
 						if (!gflags[0x0164])
@@ -38195,10 +39633,10 @@ void Func047F object#(0x47F) ()
 							say();
 						}
 						UI_remove_answer("Library of Scars");
+						fallthrough;
 
 					case "bye":
 						break;
-
 				}
 				message("\"It was a pleasure speaking to thee, ");
 				message(var0000);
@@ -38267,11 +39705,13 @@ void Func0480 object#(0x480) ()
 				say();
 			}
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			message("Iriale smiles devilishly.~~\"I bar people from entering. Thou hast disobeyed the rule of the Meditation Retreat. Ian will be most displeased. Thou had best leave now.\"");
 			say();
 			UI_add_answer(["rule", "Meditation Retreat"]);
+			fallthrough;
 
 		case "rule":
 			message("\"Thou dost know it. Attendees of the Retreat must stay out of this cave.\"");
@@ -38288,11 +39728,13 @@ void Func0480 object#(0x480) ()
 				UI_remove_npc_face(0xFFFF);
 				UI_show_npc_face(0xFF80, 0x0000);
 			}
+			fallthrough;
 
 		case "Gorn":
 			message("\"Is that the name of that smelly barbarian who was here? If thou dost see him on the -way out-, tell him that if he approaches me again, I shall cut off his head!\"");
 			say();
 			UI_remove_answer("Gorn");
+			fallthrough;
 
 		case "Meditation Retreat":
 			message("\"Yes, I work for the Meditation Retreat.~~\"And I work for -him-. -He- does not want thee here. I give thee only one chance to turn around and leave.");
@@ -38313,10 +39755,10 @@ void Func0480 object#(0x480) ()
 				UI_set_schedule_type(UI_get_npc_object(0xFF80), 0x0000);
 				abort;
 			}
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	message("\"Away with thee!\"*");
 	say();
@@ -38386,11 +39828,13 @@ void Func0481 object#(0x481) ()
 				message("\"I am Russell, a shipwright.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I build ships in New Magincia. It is a profession I enjoy very much. I also sell deeds for my ships, and sextants by which one can navigate the open seas.\"");
 				say();
 				UI_add_answer(["New Magincia", "deeds", "sextants"]);
+				fallthrough;
 
 			case "deeds":
 				if (var0002 == 0x0007)
@@ -38449,6 +39893,7 @@ void Func0481 object#(0x481) ()
 					say();
 				}
 				UI_remove_answer("deeds");
+				fallthrough;
 
 			case "sextants":
 				if (var0002 == 0x0007)
@@ -38495,29 +39940,34 @@ void Func0481 object#(0x481) ()
 					say();
 				}
 				UI_remove_answer("sextants");
+				fallthrough;
 
 			case "New Magincia":
 				message("\"Things have been very peaceful in New Magincia. There has been little trouble from outsiders lately.\"");
 				say();
 				UI_add_answer("outsiders");
 				UI_remove_answer("New Magincia");
+				fallthrough;
 
 			case "outsiders":
 				message("\"Before thine arrival there had not been a stranger in New Magincia for years, save for the survivors of the shipwreck.\"");
 				say();
 				UI_add_answer("shipwreck");
 				UI_remove_answer("outsiders");
+				fallthrough;
 
 			case "shipwreck":
 				message("\"I found the wreckage. Three men were clinging to it for their lives.\"");
 				say();
 				UI_add_answer(["wreckage", "three men"]);
 				UI_remove_answer("shipwreck");
+				fallthrough;
 
 			case "wreckage":
 				message("\"I had never seen a ship like it before. The markings show it was constructed by a Minoc shipwright named Owen. It was not very well constructed.\"");
 				say();
 				UI_remove_answer("wreckage");
+				fallthrough;
 
 			case "three men", "strangers":
 				message("\"They were from Buccaneer's Den. Most people that come here come because they are lost on their way to or from Buccaneer's Den.\"");
@@ -38525,6 +39975,7 @@ void Func0481 object#(0x481) ()
 				gflags[0x0180] = true;
 				UI_add_answer("Buccaneer's Den");
 				UI_remove_answer(["strangers", "three men"]);
+				fallthrough;
 
 			case "Buccaneer's Den":
 				message("\"The three men wish to go back. They say there is a house of games in Buccaneer's Den.\" Russell shrugs. \"As if that would be a reason to go there.");
@@ -38532,22 +39983,26 @@ void Func0481 object#(0x481) ()
 				message("\"I offered to sell them a ship, but they had no money. They actually seemed offended when I would not give it to them for free!\"");
 				say();
 				UI_remove_answer("Buccaneer's Den");
+				fallthrough;
 
 			case "locket":
 				message("\"The three strangers tried to offer me some kind of trinket to build or sell them a ship. It sounds like the locket thou art describing.\"");
 				say();
 				UI_add_answer("trinket");
 				UI_remove_answer("locket");
+				fallthrough;
 
 			case "trinket":
 				message("\"I would not have accepted their offer, but I was curious. Later they said nothing when I wanted to see the trinket again. I doubt they have it.\"");
 				say();
 				UI_remove_answer("trinket");
+				fallthrough;
 
 			case "medallion":
 				message("\"I could not help noticing your medallion. It does look somewhat sinister. I cannot recall ever having seen one like it before.\"");
 				say();
 				UI_remove_answer("medallion");
+				fallthrough;
 
 			case "Crown Jewel":
 				if (!gflags[0x0181])
@@ -38562,6 +40017,7 @@ void Func0481 object#(0x481) ()
 					say();
 				}
 				UI_remove_answer("Crown Jewel");
+				fallthrough;
 
 			case "Hook":
 				if (!gflags[0x0182])
@@ -38576,10 +40032,10 @@ void Func0481 object#(0x481) ()
 					say();
 				}
 				UI_remove_answer("Hook");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Fare thee well, ");
 		message(var0000);
@@ -38730,11 +40186,13 @@ void Func0482 object#(0x482) ()
 				message("\"Call me Boris.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I run The Modest Damsel, here in New Magincia.\"");
 				say();
 				UI_add_answer(["Modest Damsel", "New Magincia"]);
+				fallthrough;
 
 			case "Modest Damsel":
 				if (var0002 == 0x0017)
@@ -38749,16 +40207,19 @@ void Func0482 object#(0x482) ()
 					say();
 				}
 				UI_remove_answer("Modest Damsel");
+				fallthrough;
 
 			case "Magenta":
 				message("\"She became the mayor of New Magincia after the death of the old mayor, her father, several years ago. She has done such a good job that no one has opposed her for the position yet.\"");
 				say();
 				UI_remove_answer("Magenta");
+				fallthrough;
 
 			case "eat or drink":
 				message("\"I am certain thou wilt enjoy our food and drink.\"");
 				say();
 				Func0855();
+				fallthrough;
 
 			case "room":
 				message("\"Why dost thou not stay the night? For but 3 gold thou canst let one of our rooms. Dost thou wish to stay the night?\"");
@@ -38802,46 +40263,54 @@ void Func0482 object#(0x482) ()
 					say();
 				}
 				UI_remove_answer("room");
+				fallthrough;
 
 			case "New Magincia":
 				message("\"In all of Britannia thou shalt not find a place that changes so little. Even the people always seem the same.\"");
 				say();
 				UI_add_answer("people");
 				UI_remove_answer("New Magincia");
+				fallthrough;
 
 			case "people":
 				message("\"There are merchants and laborers, as well as a few new folks.\"");
 				say();
 				UI_add_answer(["merchants", "laborers", "new folks"]);
 				UI_remove_answer("people");
+				fallthrough;
 
 			case "merchants":
 				message("\"They would be Russell, the shipwright; Henry, the peddler; and Sam, the flower man.\"");
 				say();
 				UI_add_answer(["Russell", "Henry", "Sam"]);
 				UI_remove_answer("merchants");
+				fallthrough;
 
 			case "laborers":
 				message("\"They would be Katrina, the shepherd, and Constance, the water carrier.\"");
 				say();
 				UI_add_answer(["Katrina", "Constance"]);
 				UI_remove_answer("laborers");
+				fallthrough;
 
 			case "new folks":
 				message("\"Except for the three strangers, the only relatively new person on the island is Alagner, the sage.\"");
 				say();
 				UI_add_answer(["Alagner", "strangers"]);
 				UI_remove_answer("new folks");
+				fallthrough;
 
 			case "Alagner":
 				message("\"Alagner is not from New Magincia, of course, but has settled here after studying the world, for he well knows the value of our peace and solitude.\"");
 				say();
 				UI_remove_answer("Alagner");
+				fallthrough;
 
 			case "Russell":
 				message("\"A brilliant artist and craftsman, Russell cares little for wealth or notoriety. He is content simply building his fine ships and watching them sail.\"");
 				say();
 				UI_remove_answer("Russell");
+				fallthrough;
 
 			case "Katrina":
 				message("\"Katrina has come to the aid of the people of this town on more than one occasion. She gets an interesting smile on her face whenever thy name is mentioned.\"");
@@ -38865,27 +40334,32 @@ void Func0482 object#(0x482) ()
 					UI_show_npc_face(0xFF7E, 0x0000);
 				}
 				UI_remove_answer("Katrina");
+				fallthrough;
 
 			case "Henry":
 				message("\"Henry's parents were so poor it is a wonder he did not starve to death. I think Constance kept him going. He has loved her since they were children.\"");
 				say();
 				UI_remove_answer("Henry");
+				fallthrough;
 
 			case "Constance":
 				message("\"Constance is an orphan who was raised mostly by Katrina. Her innocence is surpassed only by her beauty. She is loved by all.\" Boris stares off into space for a few seconds before coming to his senses.");
 				say();
 				UI_remove_answer("Constance");
+				fallthrough;
 
 			case "Sam":
 				message("Boris laughs. \"Thou wouldst have to meet Sam for thyself. He is an incredible person who is perfecting the art of enjoying life.\"");
 				say();
 				UI_remove_answer("Sam");
+				fallthrough;
 
 			case "strangers":
 				message("\"A shipwreck has brought three strangers to our island. Rumor has it one of them is a monied gentleman from Buccaneer's Den, and the other two are his hired swords. They were in here drinking one night. They are not the sort of crowd I would wish to serve at mine establishment.\"");
 				say();
 				gflags[0x0180] = true;
 				UI_remove_answer("strangers");
+				fallthrough;
 
 			case "locket":
 				if (gflags[0x017F])
@@ -38915,10 +40389,10 @@ void Func0482 object#(0x482) ()
 					}
 				}
 				UI_remove_answer("locket");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good journey!\"*");
 		say();
@@ -38977,56 +40451,66 @@ void Func0483 object#(0x483) ()
 				say();
 				UI_remove_answer("name");
 				UI_add_answer("New Magincia");
+				fallthrough;
 
 			case "job":
 				message("\"I am the Mayor of New Magincia, and the wife of Boris.\"");
 				say();
 				UI_add_answer(["Mayor", "Boris"]);
+				fallthrough;
 
 			case "Mayor":
 				message("\"It is a job that requires little actual administration. I mostly try to make sure that everyone is getting along with everyone else. Apart from that, the town practically runs itself.\"");
 				say();
 				UI_remove_answer("Mayor");
 				UI_add_answer("administration");
+				fallthrough;
 
 			case "administration":
 				message("\"Why even the taxes here are less severe than anywhere else in Britannia. The Britannian Tax Council sometimes forgets to come collecting here for years on end.\"");
 				say();
 				UI_remove_answer("administration");
+				fallthrough;
 
 			case "Boris":
 				message("\"Boris is the local innkeeper and a bit of a scoundrel if I say so myself. But he pours a good drink and tells a good story. Although I have to keep an eye on him, I love him.\"");
 				say();
 				UI_remove_answer("Boris");
+				fallthrough;
 
 			case "New Magincia":
 				message("\"Oh, nothing is ever new in New Magincia, as the joke around here goes. But that is how we like it. We have few visitors here.\"");
 				say();
 				UI_add_answer("visitors");
 				UI_remove_answer("New Magincia");
+				fallthrough;
 
 			case "visitors", "strangers":
 				message("\"I hear there are three other new arrivals wandering around here somewhere. I always try to give people the benefit of the doubt, but be careful of them.\"");
 				say();
 				UI_add_answer("new arrivals");
 				UI_remove_answer(["strangers", "visitors"]);
+				fallthrough;
 
 			case "new arrivals":
 				message("\"Certainly some of the other townsfolk must have seen them by now. Perhaps they will have more information.\"");
 				say();
 				UI_remove_answer("new arrivals");
+				fallthrough;
 
 			case "locket":
 				message("You see the locket Henry described to you hanging around Magenta's neck. \"Is it not beautiful? I found it in the secret hiding place behind mine husband's bar.\"");
 				say();
 				UI_add_answer("found");
 				UI_remove_answer("locket");
+				fallthrough;
 
 			case "found":
 				message("\"I would never have suspected anything so romantic from Boris. The locket must be a surprise for me!\"");
 				say();
 				UI_add_answer(["romantic", "surprise"]);
 				UI_remove_answer("found");
+				fallthrough;
 
 			case "romantic":
 				if (!gflags[0x017F])
@@ -39041,6 +40525,7 @@ void Func0483 object#(0x483) ()
 				}
 				UI_add_answer("carousing");
 				UI_remove_answer("romantic");
+				fallthrough;
 
 			case "carousing":
 				message("\"Say, dost thou think that Boris could have meant to give this locket to someone else?\"");
@@ -39087,6 +40572,7 @@ void Func0483 object#(0x483) ()
 					say();
 				}
 				UI_remove_answer("carousing");
+				fallthrough;
 
 			case "surprise":
 				if (!gflags[0x017F])
@@ -39128,10 +40614,10 @@ void Func0483 object#(0x483) ()
 					say();
 				}
 				UI_remove_answer("surprise");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"I look forward to the next time when I will see thee.\"*");
 		say();
@@ -39192,6 +40678,7 @@ void Func0484 object#(0x484) ()
 				message(".\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				if (!(gflags[0x017D] || gflags[0x01CD]))
@@ -39206,40 +40693,47 @@ void Func0484 object#(0x484) ()
 					say();
 					UI_add_answer("New Magincia");
 				}
+				fallthrough;
 
 			case "New Magincia":
 				message("\"I have lived here all of my life and have never known anyplace else. It is a basically a very nice place where people still adhere to the old ways and values. The rest of the world must think it has passed us by, but it is they who have lost what once was.\"");
 				say();
 				UI_remove_answer("New Magincia");
+				fallthrough;
 
 			case "broken heart":
 				message("\"I have been rejected by the woman I love.\"");
 				say();
 				UI_add_answer("woman");
 				UI_remove_answer("broken heart");
+				fallthrough;
 
 			case "woman":
 				message("His eyes light up. \"Her name is Constance, she is the most beautiful woman in the world, and for a time we were in love.\" His face falls, and he sighs deeply. \"But that was before I made a terrible mistake...\"");
 				say();
 				UI_add_answer(["Constance", "mistake"]);
 				UI_remove_answer("woman");
+				fallthrough;
 
 			case "Constance":
 				message("\"She is the waterbearer of the town. She carries water from the well of Humility to all the homes in town.\"");
 				say();
 				UI_remove_answer("Constance");
+				fallthrough;
 
 			case "mistake":
 				message("\"I promised to give her a very old and valuable locket as a token of mine affection. My childhood friend, Katrina, had given the locket to me.\"");
 				say();
 				UI_remove_answer("mistake");
 				UI_add_answer(["locket", "Katrina"]);
+				fallthrough;
 
 			case "locket":
 				message("\"Before I could give her the locket, I lost it. I have searched everywhere but I cannot find it. Now, Constance thinks I am a cad and has forsaken me.\"");
 				say();
 				UI_remove_answer("locket");
 				UI_add_answer("lost");
+				fallthrough;
 
 			case "Katrina":
 				message("\"Katrina is a shepherd here on New Magincia. She has been a friend of mine since I was a boy.\"");
@@ -39260,6 +40754,7 @@ void Func0484 object#(0x484) ()
 					UI_show_npc_face(0xFF7C, 0x0000);
 				}
 				UI_remove_answer("Katrina");
+				fallthrough;
 
 			case "lost":
 				message("\"I noticed I had lost the locket right after I spoke with those three strangers yesterday. Wouldst thou help me find it?\"");
@@ -39281,12 +40776,14 @@ void Func0484 object#(0x484) ()
 					say();
 				}
 				UI_remove_answer("lost");
+				fallthrough;
 
 			case "strangers":
 				message("\"There are three other strangers in New Magincia. They arrived a few days before thee. Their ship was sunk and they barely made it here with their lives.\"");
 				say();
 				UI_remove_answer("strangers");
 				gflags[0x0180] = true;
+				fallthrough;
 
 			case "found":
 				message("\"Thou hast found the locket!\"");
@@ -39317,10 +40814,10 @@ void Func0484 object#(0x484) ()
 					say();
 				}
 				UI_remove_answer("found");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Travel safely and be well.\"*");
 		say();
@@ -39391,11 +40888,13 @@ void Func0485 object#(0x485) ()
 				message(", is Constance.\" She shyly lowers her eyes.");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I carry water from the well of humility to all of the homes here in New Magincia.\"");
 				say();
 				UI_add_answer(["well of humility", "New Magincia"]);
+				fallthrough;
 
 			case "well of humility":
 				message("\"The water from the well is pure and cool. If thou wouldst like I will pour thee some.\"");
@@ -39451,6 +40950,7 @@ void Func0485 object#(0x485) ()
 					say();
 				}
 				UI_remove_answer("well of humility");
+				fallthrough;
 
 			case "strangers":
 				message("\"There are three strangers on the island! They have been shipwrecked here! I have met them. Their leader's name is Robin.\"");
@@ -39458,12 +40958,14 @@ void Func0485 object#(0x485) ()
 				UI_add_answer("Robin");
 				UI_remove_answer("strangers");
 				gflags[0x0180] = true;
+				fallthrough;
 
 			case "New Magincia":
 				message("\"I was born in New Magincia and I have lived here mine entire life. But now I wish to leave for mine heart hath been broken.\"");
 				say();
 				UI_remove_answer("New Magincia");
 				UI_add_answer("heart");
+				fallthrough;
 
 			case "heart":
 				if (!gflags[0x0184])
@@ -39478,6 +40980,7 @@ void Func0485 object#(0x485) ()
 					say();
 				}
 				UI_remove_answer("heart");
+				fallthrough;
 
 			case "locket found":
 				message("You tell Constance of how you have returned the locket that has been stolen from Henry. \"Oh, how could I ever have doubted my dear darling Henry?\" she frowns. \"I thank thee for telling me the truth.\"");
@@ -39494,59 +40997,68 @@ void Func0485 object#(0x485) ()
 					UI_show_npc_face(0xFF7B, 0x0000);
 				}
 				UI_remove_answer("locket found");
+				fallthrough;
 
 			case "another":
 				message("\"There is a charming and mysterious stranger on the island named Robin. He says one day he may show me the world and buy me many fine things.\" Constance sighs. \"He even gave me some lovely flowers.\"");
 				say();
 				UI_remove_answer("another");
 				UI_add_answer("Robin");
+				fallthrough;
 
 			case "Robin":
 				message("\"He is a wealthy man and his two friends are big, strong men. They have been telling me about a very wonderful-sounding place called Buccaneer's Den.\"");
 				say();
 				UI_remove_answer("Robin");
 				UI_add_answer(["friends", "Buccaneer's Den"]);
+				fallthrough;
 
 			case "friends":
 				message("\"Their names were Battles and Leavell. Both of them treated me like proper gentlemen.\"");
 				say();
 				UI_remove_answer("friends");
 				UI_add_answer(["Battles", "Leavell"]);
+				fallthrough;
 
 			case "Buccaneer's Den":
 				message("\"Buccaneer's Den must be a wonderland. There is a spinning wheel that gives thee money! Canst thou imagine! And opulent, luxurious baths.\"");
 				say();
 				UI_remove_answer("Buccaneer's Den");
 				UI_add_answer(["spinning wheel", "baths"]);
+				fallthrough;
 
 			case "Battles":
 				message("\"Battles was quiet at first. I thought he was mean-looking, but he is nice once thou dost get to know him. He told me of the various monsters he fought, and exciting stories of how he raided ships in the south seas.\"");
 				say();
 				UI_remove_answer("Battles");
+				fallthrough;
 
 			case "Leavell":
 				message("\"Leavell was charming and witty. He can always make me laugh.\"");
 				say();
 				UI_remove_answer("Leavell");
+				fallthrough;
 
 			case "spinning wheel":
 				message("\"Well, they certainly have nothing like that in New Magincia. I had never even heard of such a thing before!\"");
 				say();
 				UI_remove_answer("spinning wheel");
+				fallthrough;
 
 			case "baths":
 				message("\"Doth that not sound nice?\"");
 				say();
 				UI_remove_answer("baths");
+				fallthrough;
 
 			case "scoundrels":
 				message("You gently explain to Constance that Robin, Battles and Leavell were scoundrels with intent to do her great harm. She is quite alarmed. Then you explain that they will not be troubling her anymore. She thanks you.");
 				say();
 				UI_remove_answer("scoundrels");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"It was a pleasure speaking with thee, ");
 		message(var0000);
@@ -39628,11 +41140,13 @@ void Func0486 object#(0x486) ()
 				gflags[0x018F] = true;
 				UI_remove_answer("name");
 				UI_add_answer("New Magincia");
+				fallthrough;
 
 			case "job":
 				message("\"My father, a well-respected nobleman whose name I will not defame by mentioning, bastardized and disowned me. But he did teach me mine occupation.\"");
 				say();
 				UI_add_answer("occupation");
+				fallthrough;
 
 			case "occupation":
 				message("\"Why, that most glamorous and respected of occupations, ");
@@ -39640,72 +41154,85 @@ void Func0486 object#(0x486) ()
 				message(". Winning at games of chance.\"");
 				say();
 				UI_remove_answer("occupation");
+				fallthrough;
 
 			case "New Magincia":
 				message("\"I am not from here. My colleagues and I had to quickly leave Buccaneer's Den after a dispute with the casino owner. And a rough voyage it was, too.\"");
 				say();
 				UI_add_answer(["colleagues", "Buccaneer's Den", "dispute", "voyage"]);
 				UI_remove_answer("New Magincia");
+				fallthrough;
 
 			case "colleagues":
 				message("\"My friends are Battles and Leavell. Their job is to protect me and my winnings. In exchange they share in my profits.\"");
 				say();
 				UI_add_answer(["Battles", "Leavell"]);
 				UI_remove_answer("colleagues");
+				fallthrough;
 
 			case "Battles":
 				message("\"I rescued him from his captain who was about to make him walk the plank. I diced with that Captain for the lad's life. Later, Battles led a mutiny that took the ship, and... well, that is another story.\"");
 				say();
 				UI_remove_answer("Battles");
+				fallthrough;
 
 			case "Leavell":
 				message("\"I rescued him from a gaggle of angry noblemen's daughters who had just discovered he was courting all of them simultaneously. If not for me he would have certainly perished! But I am ahead of myself.\"");
 				say();
 				UI_remove_answer("Leavell");
+				fallthrough;
 
 			case "Buccaneer's Den":
 				message("\"It is where we live most of the year. There are a lot of rough characters there and it is not a place to be seen carrying large amounts of money.\"");
 				say();
 				UI_add_answer("rough characters");
 				UI_remove_answer("Buccaneer's Den");
+				fallthrough;
 
 			case "dispute":
 				message("\"I won a vulgar amount of the casino's gold and 'The Mister' of the place, Gordy, accused me of cheating. He sent his legbreaker, Sintag, after us. Pirates do not like to lose!\"");
 				say();
 				UI_remove_answer("dispute");
 				UI_add_answer("The Mister");
+				fallthrough;
 
 			case "The Mister":
 				message("\"Do not ask me why he is called that! Everyone there calls him that, though!\"");
 				say();
 				UI_remove_answer("The Mister");
+				fallthrough;
 
 			case "voyage":
 				message("\"We took the first ship out, but before we got back to the mainland it had sunk. The three of us barely managed to make it to New Magincia with our lives. Now we are marooned here.\"");
 				say();
 				UI_remove_answer("voyage");
 				UI_add_answer("marooned");
+				fallthrough;
 
 			case "strangers":
 				message("\"I do not know of any. I only just arrived here myself.\"");
 				say();
 				UI_remove_answer("strangers");
+				fallthrough;
 
 			case "rough characters":
 				message("\"One rough character in particular to stay away from is a man called Hook. He would kill thee for a trifle. Thou canst tell him by the hook he has for a hand.\"");
 				say();
 				UI_add_answer("Hook");
 				UI_remove_answer("rough characters");
+				fallthrough;
 
 			case "Hook":
 				message("\"I know nothing more. If thou thinkest that I would willingly cross paths with the likes of him thou must have me mistaken for someone else!\"");
 				say();
 				UI_remove_answer("Hook");
+				fallthrough;
 
 			case "locket":
 				message("\"We are trying to return to Buccaneer's Den. I was hoping to sell a gold locket which came into my possession to buy our passage back, but I fear it is lost. If thou dost come across it be sure to let me know.\"");
 				say();
 				UI_remove_answer("locket");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"Thou art a member of The Fellowship! For years I have been seeing Fellowship members winning heavy stakes at the House of Games. Canst thou tell me their secret?\"");
@@ -39722,6 +41249,7 @@ void Func0486 object#(0x486) ()
 					say();
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "marooned":
 				message("\"That is right. We cannot afford the stinking ship sold by the shipwright.");
@@ -39741,18 +41269,21 @@ void Func0486 object#(0x486) ()
 					say();
 				}
 				UI_remove_answer("marooned");
+				fallthrough;
 
 			case "pay":
 				message("\"Of course, I cannot pay thee right now at this moment.\tBut when we reach Buccaneer's Den, I promise thee, I shall be able to get mine hands on a lot of money.\"");
 				say();
 				UI_remove_answer("pay");
 				UI_add_answer("money");
+				fallthrough;
 
 			case "money":
 				message("\"Yes, money! For I have found something here in New Magincia that will be worth more than gold in Buccaneer's Den.\"");
 				say();
 				UI_remove_answer("money");
 				UI_add_answer("something");
+				fallthrough;
 
 			case "something":
 				message("\"Before I tell thee what it is, wilt thou promise to take me and my mates back to Buccaneer's Den?\"");
@@ -39772,6 +41303,7 @@ void Func0486 object#(0x486) ()
 					abort;
 				}
 				UI_remove_answer("something");
+				fallthrough;
 
 			case "bringing back":
 				if (!var0004)
@@ -39785,6 +41317,7 @@ void Func0486 object#(0x486) ()
 					say();
 				}
 				UI_remove_answer("bringing back");
+				fallthrough;
 
 			case "show locket":
 				message("\"Now that I know I can trust thee, I can let thee in on our plan. I intend to take another passenger in thy boat back with us to Buccaneer's Den. Her name is Constance and she should fetch a goodly price from Glenno, operator of the baths. Enough to pay my debts, pay thee for passage and still have plenty left over for another go at the House of Games!\"");
@@ -39793,6 +41326,7 @@ void Func0486 object#(0x486) ()
 				gflags[0x0184] = true;
 				UI_add_answer("boat");
 				UI_remove_answer("show locket");
+				fallthrough;
 
 			case "boat":
 				message("\"Thou must get thy boat ready to leave this place immediately. My lads and I shall get Constance and then we shall join thee. But wilt thou tell me where thy boat is located?\"");
@@ -39812,10 +41346,10 @@ void Func0486 object#(0x486) ()
 				UI_set_schedule_type(var0002, 0x0000);
 				UI_set_schedule_type(var0003, 0x0000);
 				abort;
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"It has been a pleasure speaking with thee, ");
 		message(var0000);
@@ -39875,11 +41409,13 @@ void Func0487 object#(0x487) ()
 				say();
 				UI_add_answer("New Magincia");
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I be hired as a bodyguard for Master Robin, as is me partner, Leavell. The pay be good.\"");
 				say();
 				UI_add_answer(["Robin", "Leavell"]);
+				fallthrough;
 
 			case "Robin":
 				message("\"Robin be a high stakes gamblin' gent who makes his living inna casino at Buccaneer's Den.\"");
@@ -39897,6 +41433,7 @@ void Func0487 object#(0x487) ()
 				}
 				UI_remove_answer("Robin");
 				UI_add_answer(["gamblin' gent", "casino"]);
+				fallthrough;
 
 			case "gamblin' gent":
 				message("\"Gamblin' is how Robin makes his living. I do not think he has had a regular post in all of his life!\"");
@@ -39910,11 +41447,13 @@ void Func0487 object#(0x487) ()
 					UI_show_npc_face(0xFF79, 0x0000);
 				}
 				UI_remove_answer("gamblin' gent");
+				fallthrough;
 
 			case "casino":
 				message("\"The casino in Buccaneer's Den is called the House of Games and it the most fabulous place I have ever seen in me life. I shall never forget the first time Robin took me there. He walked away with a hundred gold pieces for less than an hour's work!\"");
 				say();
 				UI_remove_answer("casino");
+				fallthrough;
 
 			case "Leavell":
 				message("\"He's a lady's man, he is. But do not be thinkin' he cannot handle hissel' inna fight. T'would be yer last mistake.\"");
@@ -39932,6 +41471,7 @@ void Func0487 object#(0x487) ()
 				}
 				UI_remove_answer("Leavell");
 				UI_add_answer(["lady's man", "fight"]);
+				fallthrough;
 
 			case "lady's man":
 				message("\"Why, I reckon Leavell has broken near as many hearts as I have made stop beating!\"");
@@ -39945,42 +41485,48 @@ void Func0487 object#(0x487) ()
 					UI_show_npc_face(0xFF79, 0x0000);
 				}
 				UI_remove_answer("lady's man");
+				fallthrough;
 
 			case "fight":
 				message("\"Just the practice Leavell has had in fending off jealous husbands 'twould make any man a master combatant!\"");
 				say();
 				UI_remove_answer("fight");
+				fallthrough;
 
 			case "strangers":
 				message("\"Strangers? ~~Thou must mean us!\" Battles snorts loudly.");
 				say();
 				UI_remove_answer("strangers");
+				fallthrough;
 
 			case "New Magincia":
 				message("\"We be looking to get off this boring rock, New Magincia, and back to Buccaneer's Den. If ye have a way to get us there, and away from these peasant knaves, Master Robin shall pay ye well.\"");
 				say();
 				UI_remove_answer("New Magincia");
 				UI_add_answer(["boring rock", "peasant knaves"]);
+				fallthrough;
 
 			case "boring rock":
 				message("\"Canst thou imagine spending thine entire life here with nothing happening day after day after day? 'Tis enough to drive a man mad!\"");
 				say();
 				UI_remove_answer("boring rock");
+				fallthrough;
 
 			case "peasant knaves":
 				message("\"The people here are so lacking in education that they never even heard of gamblin' before! Never heard of gamblin'? That is what life is all about!\"");
 				say();
 				UI_remove_answer("peasant knaves");
+				fallthrough;
 
 			case "locket":
 				message("\"I sar a locket jus' like the one thou be describin' in the possession o' Master Robin. The last time I sar it was... Lessee... It was right before the three of us went drinkin' at the Modest Damsel.\"");
 				say();
 				gflags[0x0185] = true;
 				UI_remove_answer("locket");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Be seein' ye.\"*");
 		say();
@@ -40037,16 +41583,19 @@ void Func0488 object#(0x488) ()
 				message("\"I am Leavell.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"Along with Battles, I am a bodyguard for Master Robin. If not for him, I would have landed in prison instead of in New Magincia.\"");
 				say();
 				UI_add_answer(["Battles", "Robin", "prison", "New Magincia"]);
+				fallthrough;
 
 			case "strangers":
 				message("\"I do not know what thou art talking about.\"");
 				say();
 				UI_remove_answer("strangers");
+				fallthrough;
 
 			case "Battles":
 				message("\"He has an eye like a hawk, and is quicker than a cat. 'Twould be wise of thee to pay him respect.\"");
@@ -40061,32 +41610,38 @@ void Func0488 object#(0x488) ()
 				}
 				UI_remove_answer("Battles");
 				UI_add_answer(["eye", "quick", "respect"]);
+				fallthrough;
 
 			case "eye":
 				message("\"If Battles had not spotted that approaching storm we would have all been dead men for certain!\"");
 				say();
 				UI_remove_answer("eye");
 				UI_add_answer("storm");
+				fallthrough;
 
 			case "storm":
 				message("\"It took a terrible toll on our boat, but if truth be told I have seen far worse.\"");
 				say();
 				UI_remove_answer("storm");
+				fallthrough;
 
 			case "quick":
 				message("\"I have seen Battles has reflexes faster than a snake.\"");
 				say();
 				UI_remove_answer("quick");
+				fallthrough;
 
 			case "prison":
 				message("\"Yes, I have done things to be put in prison for. But I am not ashamed of my life. I do not have to be held accountable to thee about it.\"");
 				say();
 				UI_remove_answer("prison");
+				fallthrough;
 
 			case "respect":
 				message("\"And while thou art about it, thou mayest show respect to me, too.\" Leavell says with a sneer.");
 				say();
 				UI_remove_answer("respect");
+				fallthrough;
 
 			case "Robin":
 				message("\"He is a gambler by profession, who earns his winnings at the House of Games's tables on Buccaneer's Den.\"");
@@ -40101,6 +41656,7 @@ void Func0488 object#(0x488) ()
 				}
 				UI_add_answer(["profession", "Buccaneer's Den"]);
 				UI_remove_answer("Robin");
+				fallthrough;
 
 			case "profession":
 				message("\"Gambling is what Robin does for money. But he spends so much time talking about Lord British that thou wouldst think he was royalty or something!\"");
@@ -40116,23 +41672,27 @@ void Func0488 object#(0x488) ()
 					UI_show_npc_face(0xFF78, 0x0000);
 				}
 				UI_remove_answer("profession");
+				fallthrough;
 
 			case "Buccaneer's Den":
 				message("\"We ran into some misfortune the last time we were there. The Mister at the House of Games learned\tof Master Robin's system and caused him to lose much of his gold.\"");
 				say();
 				UI_add_answer(["The Mister", "system"]);
 				UI_remove_answer("Buccaneer's Den");
+				fallthrough;
 
 			case "system":
 				message("\"He had devised a clever method of cheating at all the various games at the House of Chance. It had earned him several times his weight in gold coins, I am certain.\"");
 				say();
 				UI_remove_answer("system");
+				fallthrough;
 
 			case "The Mister":
 				message("\"When Master Robin could not pay his debts, The Mister sent his legbreaker, Sintag, and his knaves after us. We had to leave on the first ship out of Buccaneer's Den. I do not know why he is called 'The Mister'.\"");
 				say();
 				UI_add_answer(["Sintag", "ship"]);
 				UI_remove_answer("The Mister");
+				fallthrough;
 
 			case "Sintag":
 				message("\"Battles and myself are more than capable of taking care of Sintag...\" *");
@@ -40148,47 +41708,54 @@ void Func0488 object#(0x488) ()
 				message("\"But Gordy had hired a troupe of ruffians to chase after us. 'Tis a pity. I would have liked to teach him a lesson or two. In fact, one day I think I shall.\"");
 				say();
 				UI_remove_answer("Sintag");
+				fallthrough;
 
 			case "ship":
 				message("\"The ship we sailed on sank, leaving us stranded here. We were lucky to make it to New Magincia with our lives!\"");
 				say();
 				UI_add_answer(["sank", "stranded"]);
 				UI_remove_answer("ship");
+				fallthrough;
 
 			case "sank":
 				message("\"The crew could not believe it! The vessel was almost new. It had sailed all the way from Minoc without a problem. In fact, that was the first storm that ship had ever encountered. None of the crew survived, poor buggers.\"");
 				say();
 				UI_remove_answer("sank");
+				fallthrough;
 
 			case "stranded":
 				message("\"If thou wouldst have some way of getting us back to Buccaneer's Den, Master Robin would reward thee handsomely.\"");
 				say();
 				UI_remove_answer("stranded");
+				fallthrough;
 
 			case "New Magincia":
 				message("\"Peasant fools and sheep. The only thing worth a second look in this whole town is Constance.\"");
 				say();
 				UI_add_answer(["fools and sheep", "Constance"]);
 				UI_remove_answer("New Magincia");
+				fallthrough;
 
 			case "fools and sheep":
 				message("\"Here, what is not one is the other. This place is so isolated that it is backward. What is worse, they prefer it this way!\"");
 				say();
 				UI_remove_answer("fools and sheep");
+				fallthrough;
 
 			case "Constance":
 				message("\"She doth put a spring in a man's step! We have our eye on her, we do!\" Leavell quickly clears his throat and he looks away from you momentarily.");
 				say();
 				UI_remove_answer("Constance");
+				fallthrough;
 
 			case "locket":
 				message("\"While I myself have seen no such locket, perhaps thou shouldst ask Master Robin about it.\"");
 				say();
 				UI_remove_answer("locket");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("With that Leavell goes back to playing with his dagger.*");
 		say();
@@ -40297,45 +41864,53 @@ void Func0489 object#(0x489) ()
 				}
 				UI_pop_answers();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"The way I perceive it I do not really have a job. I sell flowers to the people of New Magincia. Although I am paid for it, it is something I enjoy doing very much. I wonder, does that still qualify as a job?\" He scratches his chin thoughtfully.");
 				say();
 				UI_add_answer(["flowers", "New Magincia"]);
+				fallthrough;
 
 			case "flowers":
 				message("\"I grow all of the flowers that I sell in a greenhouse which is also mine home. I sell a lot of red roses but I have many varieties. If thou art interested in buying some, please say so!\"");
 				say();
 				UI_add_answer(["greenhouse", "buy"]);
 				UI_remove_answer("flowers");
+				fallthrough;
 
 			case "greenhouse":
 				message("\"I built my greenhouse by hand. When I am not selling flowers I am engaged in various studies of plants and nature there. I find it fascinating. As thou mayest have noticed, I prefer to grow them big!\"");
 				say();
 				UI_remove_answer("greenhouse");
 				UI_add_answer(["studies", "big"]);
+				fallthrough;
 
 			case "studies":
 				message("\"Presently I am studying possible uses and applications of wheatgrass. One day soon I shall begin compiling my notes but it will require a long effort for there is much that I have learned. It is mostly to support my work that I operate my flower wagon.\"");
 				say();
 				UI_add_answer("wagon");
 				UI_remove_answer("studies");
+				fallthrough;
 
 			case "big":
 				message("\"It is because of what I learn in my studies that I may grow my flowers to be so large and healthy.\"");
 				say();
 				UI_remove_answer("big");
+				fallthrough;
 
 			case "wagon":
 				message("\"Actually my business does quite well and I do like the way my flowers brighten the whole place. But who really cares about business anyway, so why shouldst thou ask? Suffice it to say that life is sweet!\"");
 				say();
 				UI_remove_answer("wagon");
 				UI_add_answer("life");
+				fallthrough;
 
 			case "life":
 				message("\"Thou hast enough money as long as thou dost have a place to live and can afford food, so I consider myself a wealthy man. I enjoy a good drink and round of song at the Modest Damsel nightly. I have a thriving business and stimulating work. I consider every resident of this island a good friend. I feel anger towards no one and do not desire anything more. I have never had reason to feel lonely, worried or bored. What else is there? Life is good!\"");
 				say();
 				UI_remove_answer("life");
+				fallthrough;
 
 			case "buy":
 				if (var0003 == 0x0007)
@@ -40402,41 +41977,47 @@ void Func0489 object#(0x489) ()
 					say();
 				}
 				UI_remove_answer("buy");
+				fallthrough;
 
 			case "strangers":
 				message("\"There are three strangers on this island that have washed ashore in a shipwreck. Perhaps thou shalt meet them.\"");
 				say();
 				UI_remove_answer("strangers");
 				gflags[0x0180] = true;
+				fallthrough;
 
 			case "locket":
 				message("\"Yes, I saw Henry walking past my shop with that locket looking for Constance. It must have been shortly after he received it from Katrina. I remember it because I gave him a flower to give to Constance. Poor fellow, by the time he found her it was all he had to give her.\"");
 				say();
 				UI_remove_answer("locket");
+				fallthrough;
 
 			case "Robin":
 				message("\"Why, he sounds like one of those three strangers! I have met him. He talked as if he wanted to buy some flowers but he just walked away. Later I noticed a bouquet of flowers was missing from my wagon. The scoundrel must have pilfered them!\"");
 				say();
 				UI_remove_answer("Robin");
+				fallthrough;
 
 			case "Battles":
 				message("\"He must be one of those shipwrecked visitors we have on our island. Yes, when the three of them came up to my wagon he gave me a stare that sent a chill through my blood. I did my best to ignore him. I absolutely abhor violence.\"");
 				say();
 				UI_remove_answer("Battles");
+				fallthrough;
 
 			case "Leavell":
 				message("\"So that is the name of one of our uninvited guests! When the three of them came to my wagon earlier, he was very friendly while talking to me, but I saw through him. He mentioned noticing Constance, but the others gestured for him to be quiet.\"");
 				say();
 				UI_remove_answer("Leavell");
+				fallthrough;
 
 			case "New Magincia":
 				message("\"I was not born here. I came here as a young man. My father was a nobleman who was more interested in my counting gold than devoting myself to my studies. For a time I travelled the world until I landed here. It is a special place unlike any other in all of Britannia. So while thou art here please help us take good care of it.\"");
 				say();
 				UI_remove_answer("New Magincia");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Enjoy thy life, friend.\"*");
 		say();
@@ -40529,57 +42110,67 @@ void Func048A object#(0x48A) ()
 			message("The warrior's eyes narrow. \"I am Gorn, as if thou didst not remember! It is good to see thee again.\" He laughs and slaps you on the shoulder.");
 			say();
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			message("\"My job is a never-ending qvest of high adventure. Ever since I vas a child und vas taken from mine homeland of Balema, I haf spent my life in search of heroic deeds to perform.\"");
 			say();
 			UI_add_answer(["Balema", "heroic deeds"]);
+			fallthrough;
 
 		case "Balema":
 			message("\"Yah, Balema is vere I vas born. I vas a child dere. It is a vonderland ov snow-covered mountains und dark forests. It vas not an easy life, but it vas a place dat made young boys into strong heroic men. Dat vas long before I came to Britannia.\"");
 			say();
 			UI_remove_answer("Balema");
 			UI_add_answer("Britannia");
+			fallthrough;
 
 		case "Britannia":
 			message("\"Yah! I came to Britannia t'rough vone ov de Moongates, de same as thee. Dat vas many, many years ago.\"");
 			say();
 			UI_remove_answer("Britannia");
+			fallthrough;
 
 		case "heroic deeds":
 			message("\"I perform heroic deeds in honor ov Brom. Everyting I do is in service to him.\"");
 			say();
 			UI_remove_answer("heroic deeds");
 			UI_add_answer("Brom");
+			fallthrough;
 
 		case "Brom":
 			message("\"He is my master, und de master ov all ov de people ov Balema. Brom is all powerful und if I am strong he vill aid me. Sometimes I hear de voice ov Brom inside ov mine head.\"");
 			say();
 			UI_remove_answer("Brom");
 			UI_add_answer(["master", "voice"]);
+			fallthrough;
 
 		case "master":
 			message("\"Ya! Brom he is my master. If he vishes me to do someting, I must do it! If he does not vant me to do someting, I must not do it!\"");
 			say();
 			UI_remove_answer("master");
+			fallthrough;
 
 		case "voice":
 			message("\"Ya! Only recently I haf begun to hear his voice in mine head. His voice tells me vat to do! As I came tovard dis cave de voice ov Brom became clearer.\"");
 			say();
 			UI_remove_answer("voice");
 			UI_add_answer(["what to do", "cave", "clearer"]);
+			fallthrough;
 
 		case "what to do":
 			message("\"Vhen I first heard de voice ov Brom, he told me dat I should follow him. But how does one follow de voice ov someone dat thou cannot see vhen de voice is coming from inside ov thine head?\"");
 			say();
 			UI_remove_answer("what to do");
 			UI_add_answer("follow");
+			fallthrough;
 
 		case "follow":
 			message("\"Dis vas very, very difficult for me but after a vhile I vas able to figure out how to do it. Vhen I came nearer to da camp surrounding dis cave da voice vould get louder. Vhen I vould move avay de voice vould be qvieter.\"");
 			say();
 			UI_remove_answer("follow");
 			UI_add_answer(["camp"]);
+			fallthrough;
 
 		case "camp":
 			message("\"It vas very simple for a trained varrior like myself to slip into de camp ov dose who are holding Brom prisoner. Dey posed no threat vatsoever. So dat means dat de danger must be vaiting down here. But I cannot find it!\"");
@@ -40599,6 +42190,7 @@ void Func048A object#(0x48A) ()
 			}
 			UI_remove_answer("camp");
 			UI_add_answer("danger");
+			fallthrough;
 
 		case "danger":
 			message("\"Zo far de only danger I haf found down here has been a female fighter. She vas beautiful. Vhen I vent to talk to her she hit me over de head mit her svord. Vhen I voke up she vas gone. I bet she tought she had killed me but mine head is harder dan dat. I vas not even vounded.\"");
@@ -40618,30 +42210,35 @@ void Func048A object#(0x48A) ()
 				UI_show_npc_face(0xFF76, 0x0000);
 			}
 			UI_remove_answer("danger");
+			fallthrough;
 
 		case "cave":
 			message("\"I know dat Brom is somevhere down in dis cave, und I vill not leave dis place until I find him!\"");
 			say();
 			UI_remove_answer("cave");
 			UI_add_answer("find Brom");
+			fallthrough;
 
 		case "clearer":
 			message("\"The nearer I haf come to dis cave, the more times I haf been hearing de voice ov Brom. But lately he has been saying tings to me dat are very, very strange!\"");
 			say();
 			UI_remove_answer("clearer");
 			UI_add_answer("strange");
+			fallthrough;
 
 		case "strange":
 			message("\"De first strange ting dat he says to me is \"Strive For Unity\". I say, yah, dat is vhy I am performing mine heroic deeds. Den Brom says someting else dat is strange.\"");
 			say();
 			UI_remove_answer("strange");
 			UI_add_answer("something else strange");
+			fallthrough;
 
 		case "something else strange":
 			message("\"Next de voice ov Brom says to me \"Trust My Brothers\". Dis is strange because all ov my brothers are back in Balema, und I vould never trust dem anyvays. Dey vere all bigger den me and vere alvays beating me. But even dat vas not as strange as da next strange ting.\"");
 			say();
 			UI_remove_answer("something else strange");
 			UI_add_answer("next strange thing");
+			fallthrough;
 
 		case "next strange thing":
 			message("\"De voice ov Brom tells me dat \"Worldliness Receives Avard\". I haf been tinking about dat von for a long time und I still haf not figured it out. But I vill not give up until I find Brom.\"");
@@ -40658,6 +42255,7 @@ void Func048A object#(0x48A) ()
 			}
 			UI_remove_answer("next strange thing");
 			UI_add_answer("find Brom");
+			fallthrough;
 
 		case "find Brom":
 			message("\"Wouldst thou help me find Brom?\"");
@@ -40677,6 +42275,7 @@ void Func048A object#(0x48A) ()
 				UI_add_answer(["look for Brom", "it's a trick"]);
 			}
 			UI_remove_answer("find Brom");
+			fallthrough;
 
 		case "look for Brom":
 			message("\"If dat is how thou vants it. Den I shall go on searching for Brom mit no vone else but myself. Good luck in vhatever qvest thou art on, Avatar. Farewell to thee!\"*");
@@ -40694,10 +42293,10 @@ void Func048A object#(0x48A) ()
 			message("\"Dat is de name ov de female fighter who has been guarding dis place. I haf fought her vonce already. She is a strong fighter! I haf to find her so I can make her to tell me vhere is Brom!\"");
 			say();
 			UI_remove_answer("Iriale");
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	message("\"Until ve meet again, Avatar.\"*");
 	say();
@@ -40823,11 +42422,13 @@ void Func048C object#(0x48C) ()
 					}
 				}
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"Why, I run this fine establishment, the Keg O' Spirits.\" For a moment he becomes serious. \"This place once drew folk from all across Britannia, gargoyle and human alike. Until the fire, that is.\"");
 				say();
 				UI_add_answer(["Keg O' Spirits", "fire"]);
+				fallthrough;
 
 			case "fire":
 				message("He looks uncomfortable, \"Caine blew the town to the four winds, and now we're all trapped here, slaves of that bastard Horance.\" Tiny blue flames appear in the pupils of his glazed eyes, then go out as he regains his composure.");
@@ -40849,23 +42450,27 @@ void Func048C object#(0x48C) ()
 				message(" he was tryin' ta help us when he called the proverbial fires o' Hell down on us. It just rankles me to have died in my prime.\" His roguish smile once again lightens his ghostly visage.");
 				say();
 				UI_remove_answer("fire");
+				fallthrough;
 
 			case "Caine":
 				message("A look of disgust comes to his disfigured features. \"That tortured soul haunts the crater made by his foolish mistake. I wouldn't go near him though, he's a bit daft, ya know.\" He refills his mug from the cask at his side and swigs down most of the wine in one swallow.");
 				say();
 				UI_add_answer("tortured soul");
 				UI_remove_answer("Caine");
+				fallthrough;
 
 			case "tortured soul":
 				message("\"That's just the name the rest of us in Skara Brae call him -- the Tortured One,\" he grins, embarrassed.");
 				say();
 				UI_remove_answer("tortured soul");
 				UI_add_answer("Skara Brae");
+				fallthrough;
 
 			case "Skara Brae":
 				message("\"That's the name o' the island yer on.\" He shakes his head.");
 				say();
 				UI_remove_answer("Skara Brae");
+				fallthrough;
 
 			case "Horance":
 				message("\"For all the years I've been in Skara Brae, he's been a raving lunatic. What with all o' them silly rhymes and his crazy laughter.~~\"Then one night, we all hears thunder when there isn't a cloud in the starry sky, and I seem to recall a full moon...\" He gets a thoughtful look on his face. \"But as I was sayin', there was this thunder, then this deep, dark laughter coming from the tower on the northern point -- Horance's Dark Tower.\" After this he falls silent for a moment.");
@@ -40881,11 +42486,13 @@ void Func048C object#(0x48C) ()
 				message("After a brief swig, he continues, \"Then, even worse... I'm out checkin' on the cows when I hears a sound like moanin'. It's off to the east, so I look that way, into the graveyard y'know, and what do I see?~~\"I'll tell ya what I seen. The graves, rippin' open like the people in 'em got a place to go.\" Eyes wide, he tips back another sip.");
 				say();
 				UI_remove_answer("Horance");
+				fallthrough;
 
 			case "Keg O' Spirits":
 				message("He truly looks sad as he says, \"This place was once my pride and joy. The Keg was known all 'round Britannia, and a few other places, too. Well, now it don't look like too much, but in it's heyday, it saw the likes of nobles, knights, minstrels, and merchants. And o' course, a bit o' riff raff to be sure.\" He winks at you. His spirit seems indomitable.");
 				say();
 				UI_remove_answer("Keg O' Spirits");
+				fallthrough;
 
 			case "sacrifice":
 				if (!gflags[0x019A])
@@ -40901,12 +42508,12 @@ void Func048C object#(0x48C) ()
 					abort;
 				}
 				UI_remove_answer("sacrifice");
+				fallthrough;
 
 			case "bye":
 				message("\"Oh, are ya leavin' then? Well, ya take care now. And watch out for those walkin' dead. Some o' them aren't too happy about their state, and none too picky about who they complain to, neither.\"*");
 				say();
 				abort;
-
 		}
 	}
 	if (event == 0x0000)
@@ -41050,17 +42657,20 @@ void Func048D object#(0x48D) ()
 				say();
 				UI_remove_answer("name");
 				UI_add_answer(["Lord Horance", "Lord British"]);
+				fallthrough;
 
 			case "Lord Horance":
 				message("\"Ah, it is good to hear such an obeisance from the Avatar. Perhaps thou wilt have a place in my New Order.\" The Liche looks at you with an expression somewhere between malice and humor.");
 				say();
 				UI_remove_answer("Lord Horance");
 				UI_add_answer(["obeisance", "New Order"]);
+				fallthrough;
 
 			case "obeisance":
 				message("\"Why, what else wouldst thou call it? Surely thou art truly humbled by my `majestic' presence.\"");
 				say();
 				UI_remove_answer("obeisance");
+				fallthrough;
 
 			case "New Order":
 				message("An expression of zeal lights the dead face of the Liche.~~\"Yes, ");
@@ -41070,6 +42680,7 @@ void Func048D object#(0x48D) ()
 				UI_remove_answer("New Order");
 				UI_push_answers();
 				UI_add_answer(["Over my dead body!", "Fine!"]);
+				fallthrough;
 
 			case "Over my dead body!":
 				message("\"Why, ");
@@ -41077,17 +42688,20 @@ void Func048D object#(0x48D) ()
 				message(". I thought that was understood. It will be my pleasure to help thee enter the realm of the dead.\"");
 				say();
 				UI_pop_answers();
+				fallthrough;
 
 			case "Fine!":
 				message("\"Yes, I thought thou wouldst see the wisdom of my vision.\" He looks at you like a cat toying with a mouse.");
 				say();
 				UI_pop_answers();
+				fallthrough;
 
 			case "Lord British":
 				message("`Evil' is a mild word for the sneer that appears on the Liche's cracked lips. \"It has recently come to my attention that a certain ore found in the Britannian surface can, if fashioned properly, become the bane of the vaunted Lord British.~~\"I know this ore and have used it\tbefore for other purposes. I will use it once again to destroy that so-called Lord.\"");
 				say();
 				UI_add_answer(["ore", "other purposes"]);
 				UI_remove_answer("Lord British");
+				fallthrough;
 
 			case "other purposes":
 				if (!gflags[0x0003])
@@ -41101,6 +42715,7 @@ void Func048D object#(0x48D) ()
 					say();
 				}
 				UI_remove_answer("other purposes");
+				fallthrough;
 
 			case "job":
 				message("A harsh cackle escapes his dry throat. \"I am the illustrious Lord of the Dead, soon to be Lord of all Britannia. Dost thou have any idea of the number of dead people and creatures there are? I thought not.~~\"The dead of the ages are mine to summon and control. The graves of beloved ancestors will spew forth their contents into an army. A special treat for the living, mine undead monsters will be. Imagine a skeletal dragon that cannot be killed. Consider a cabal of everliving mages eternally enthralled to me.~~\"And the most beautiful part of my plot is that, as the living die in these battles, and they will die, they will swell the ranks of the undead host. I will rule supreme -- a world of the dead!\" A terrifying glimpse of his sick and twisted future causes you to shiver\tever so slightly.~~\"And I will have a queen, the lovely Rowena.\"");
@@ -41114,6 +42729,7 @@ void Func048D object#(0x48D) ()
 					UI_remove_npc_face(0xFF70);
 					UI_show_npc_face(0xFF73, 0x0000);
 				}
+				fallthrough;
 
 			case "Rowena":
 				if (var0002)
@@ -41127,11 +42743,13 @@ void Func048D object#(0x48D) ()
 					say();
 				}
 				UI_remove_answer("Rowena");
+				fallthrough;
 
 			case "ore":
 				message("\"Now, now, Avatar, that would be revealing. Then I would have no secret from thee, would I?\"");
 				say();
 				UI_remove_answer("ore");
+				fallthrough;
 
 			case "bye":
 				message("\"It is truly sad to see thee go.\" He says with a sardonic smile.*");
@@ -41160,7 +42778,6 @@ void Func048D object#(0x48D) ()
 				message("\"Feel free to explore mine humble abode. Though, have a care. My guardians are none too intelligent and will most likely assault anything living.\" He smiles with his death's head grin.*");
 				say();
 				abort;
-
 		}
 	}
 	return;
@@ -41271,6 +42888,7 @@ void Func048E object#(0x48E) ()
 					}
 				}
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "something":
 				message("\"I cannot find the iron cage!\" he shouts. \"Some fool must have taken it! When I find out who did it and where it is, that fool will sorely regret having removed it from my shop!\"*");
@@ -41281,6 +42899,7 @@ void Func048E object#(0x48E) ()
 				message("\"Art thou blind! Canst thou not see that I am a smith?\" He doesn't seem the sort for idle conversation.");
 				say();
 				UI_remove_answer("job");
+				fallthrough;
 
 			case "iron cage":
 				message("Anger radiates from the large ghost in almost tangible waves. He looks up from the cage and you see that the light of fire isn't coming from the forge, it's coming from his eyes. \"I build this cage to destroy that bastard, Horance, who took my wife from me.\"~~For a moment, you think he is going to strike out at you, then he unclenches his fists with a heavy sigh and returns to his work.");
@@ -41288,22 +42907,26 @@ void Func048E object#(0x48E) ()
 				var0003 = true;
 				UI_remove_answer("iron cage");
 				UI_add_answer(["Horance", "wife"]);
+				fallthrough;
 
 			case "Horance":
 				message("His whole body tenses as you speak.~~\"Horance...\" The word comes out like a curse. \"I will see his foul spirit burn before mine eyes. Then I will laugh as he cries out pitifully for mercy.\" For some reason you think that you'd rather avoid hearing that laugh.");
 				say();
 				UI_remove_answer("Horance");
+				fallthrough;
 
 			case "wife":
 				message("One hot tear slips from the ghost's eye and falls on a heated piece of the iron cage. It sizzles, and then is gone.~~\"Rowena was my life, mine only joy in this world.\" His voice is almost tender, but then he returns to his guttural tones. \"He killed her and took that joy from me. Now I am only a hollow shell of a man, burning with hatred.\"");
 				say();
 				UI_remove_answer("wife");
 				UI_add_answer(["Rowena", "killed"]);
+				fallthrough;
 
 			case "killed":
 				message("\"In an attempt to steal her away from my side, the evil fiend sent his undead minions to bring her to the dark tower. The mindless creatures slew her as she struggled.\" The ghost turns to you in anguish, \"I could do nought to save her... the sheer numbers of skeletal warriors bore me to the ground as she was bereft of life.\"~~Insane determination flickers in the big ghost's eyes, \"For this I will never forgive and never forget.");
 				say();
 				UI_remove_answer("killed");
+				fallthrough;
 
 			case "Rowena":
 				message("He holds up one hand as you say the name of his late wife. \"Please, do not say that name. It takes from me\ta little of mine Hatred, which is all I have now. Wouldst thou rob me of the one thing that keeps me alive?\" It would seem that he is unaware of the fact that he is, indeed, no longer alive. An odd expression crosses his face.~~\"I gave her a music box for our wedding, and now it is all I have left to remember her by.\" His tone changes.~~\"Do thou see what thou hast done?! I cannot work when I think of her!\" He returns to his work with renewed passion.");
@@ -41315,6 +42938,7 @@ void Func048E object#(0x48E) ()
 					say();
 				}
 				UI_remove_answer("Rowena");
+				fallthrough;
 
 			case "ring":
 				var0005 = UI_remove_party_items(0x0001, 0x0127, 0x0000, 0xFE99, false);
@@ -41330,12 +42954,12 @@ void Func048E object#(0x48E) ()
 				UI_remove_answer(["iron cage", "name", "job", "Horance", "wife", "Rowena", "killed", "ring", "bye"]);
 				gflags[0x01C1] = true;
 				Func08EF();
+				fallthrough;
 
 			case "bye":
 				message("If he heard you, he ignores the fact as you take your leave. You truly feel pity for this deeply wounded spirit.*");
 				say();
 				abort;
-
 		}
 	}
 	if (event == 0x0000)
@@ -41491,16 +43115,19 @@ void Func048F object#(0x48F) ()
 				message(". As I have told thee, I am known as Mordra.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I was the healer of this town before the fire erupted that shattered the lives of those here. I also dabbled in secret magical arts for a while.\" She winks at you slyly.");
 				say();
 				UI_add_answer(["lives", "fire", "magical arts"]);
+				fallthrough;
 
 			case "ingredients":
 				message("\"If I tell thee, thou must be sure to get them right. Otherwise, what happened when I told that blasted mayor will happen again. And, while we here in Skara Brae have no more lives to lose, thou hast quite a valuable one! ~~\"The ingredients necessary for the concoction to dissolve the liche are a potion of invisibility, a dose of a potion of curing, and one\tvial of the essence of mandrake -- I have one set aside somewhere in mine house. Remember, only -one- vial of the mandrake!\"");
 				say();
 				UI_remove_answer("ingredients");
+				fallthrough;
 
 			case "cage made":
 				UI_remove_answer("cage made");
@@ -41512,6 +43139,7 @@ void Func048F object#(0x48F) ()
 					UI_add_answer("formula");
 				}
 				var0004 = true;
+				fallthrough;
 
 			case "formula":
 				message("\"Thou must have Caine's assistance in creating the formula, but I can give thee the ingredients.\"");
@@ -41519,6 +43147,7 @@ void Func048F object#(0x48F) ()
 				gflags[0x01C0] = true;
 				UI_remove_answer("formula");
 				UI_add_answer("ingredients");
+				fallthrough;
 
 			case "Dark Tower":
 				message("\"The Dark Tower lies on the northwestern point of Skara Brae. There is something odd about its construction, for I find it very hard to penetrate with my magical senses.~Within it,\" she says, \"thou wilt find the Well of Souls.\"");
@@ -41529,6 +43158,7 @@ void Func048F object#(0x48F) ()
 					UI_add_answer("Well of Souls");
 				}
 				var0013 = true;
+				fallthrough;
 
 			case "Well of Souls":
 				var0007 = true;
@@ -41536,6 +43166,7 @@ void Func048F object#(0x48F) ()
 				say();
 				UI_remove_answer("Well of Souls");
 				var0007 = true;
+				fallthrough;
 
 			case "Black Service":
 				if (!gflags[0x01AA])
@@ -41557,6 +43188,7 @@ void Func048F object#(0x48F) ()
 					}
 				}
 				UI_remove_answer("Black Service");
+				fallthrough;
 
 			case "lives":
 				message("\"Wouldst thou like to know about the townsfolk of Skara Brae?\"");
@@ -41579,6 +43211,7 @@ void Func048F object#(0x48F) ()
 					say();
 				}
 				UI_remove_answer("lives");
+				fallthrough;
 
 			case "fire":
 				message("\"'Twas the doom of this town, although I place no blame upon the alchemist, Caine. For I was the one who told him the recipe that I am sure will rid us of Horance the Liche.\"");
@@ -41591,6 +43224,7 @@ void Func048F object#(0x48F) ()
 				UI_add_answer("recipe");
 				var000B = true;
 				var000C = true;
+				fallthrough;
 
 			case "recipe":
 				message("\"'Twas but a simple mixture of a few ingredients. It should have worked.\" Her eyes narrow.~~\"I expect that mayor of ours, Forsythe, fouled things up!\"");
@@ -41600,6 +43234,7 @@ void Func048F object#(0x48F) ()
 				{
 					UI_add_answer("mayor");
 				}
+				fallthrough;
 
 			case "mayor":
 				message("\"That man is a bumbling idiot. It is his fault that the island was destroyed. I gave him the exact portions of the reagents to be used in the magical formula, and he paraphrased it to the alchemist, Caine. By the size of the fire, I am sure he misquoted the amount of mandrake root by\ttenfold. Damn that foolish man!\"~~Her brow creases and you\tcan see that this is a subject that she likes to avoid.");
@@ -41610,17 +43245,20 @@ void Func048F object#(0x48F) ()
 				{
 					UI_add_answer("Caine");
 				}
+				fallthrough;
 
 			case "Caine":
 				message("\"Now those who reside here call him `the Tortured One.' That is because he is in eternal pain, caused by searing flames licking at his flesh.~~The pain is imagined, but to him, 'tis as real as thou or I... or, at least, as real as\tthou art!\"");
 				say();
 				var0005 = true;
 				UI_remove_answer("Caine");
+				fallthrough;
 
 			case "magical arts":
 				message("Her eyes twinkle mischievously. \"If I were to reveal them to thee, they wouldn't be secret any longer, now would they?\"");
 				say();
 				UI_remove_answer("magical arts");
+				fallthrough;
 
 			case "sacrifice":
 				if (!gflags[0x01A0])
@@ -41636,6 +43274,7 @@ void Func048F object#(0x48F) ()
 					abort;
 				}
 				UI_remove_answer("sacrifice");
+				fallthrough;
 
 			case "bye":
 				message("\"Goodbye, young ");
@@ -41643,7 +43282,6 @@ void Func048F object#(0x48F) ()
 				message(". Take care of thyself, but should ill befall thee, I hope that thou wilt come back here and let me minister to thine ailments.\" She smiles kindly as you leave.*");
 				say();
 				abort;
-
 		}
 	}
 	if (event == 0x0000)
@@ -41740,21 +43378,25 @@ void Func0490 object#(0x490) ()
 				message("\"I am called... Rowena\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("She stares blankly for a second, then, as if on cue, \"I am the Mistress of the Tower. I tend to my Lord Horance's needs and keep our place looking respectable.\" It would appear that she's been falling behind in the latter duty.");
 				say();
 				UI_add_answer("Horance");
+				fallthrough;
 
 			case "tower":
 				message("After a moment, \"This is a lovely tower, dost thou not agree?\" Before you can answer, she continues.~~ \"Dost thou see the lovely rays of light playing across the flagstones of the floor? Water sparkles in the fountain. This is truly a beautiful place in which to live.\" Her eyes fix upon the floor.");
 				say();
 				UI_remove_answer("tower");
+				fallthrough;
 
 			case "Horance":
 				message("She blinks once, then, \"Horance... What a wonderful name. He found me lost and lonely and brought me here to be a lady. Is he not truly the most magnificent of Lords?\"");
 				say();
 				UI_remove_answer("Horance");
+				fallthrough;
 
 			case "bye":
 				message("She pauses. \"Goodbye, ");
@@ -41762,7 +43404,6 @@ void Func0490 object#(0x490) ()
 				message(". I hope thou hast enjoyed thy visit to our glorious tower. Please, return whenever thou wishest.\" You feel as if you've been speaking to a statue.*");
 				say();
 				abort;
-
 		}
 	}
 	if (event == 0x0000)
@@ -41915,6 +43556,7 @@ void Func0491 object#(0x491) ()
 				message(", hast thou forgotten already? I am Paulette.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				if (var0001)
@@ -41940,6 +43582,7 @@ void Func0491 object#(0x491) ()
 				{
 					UI_add_answer("fire");
 				}
+				fallthrough;
 
 			case "buy":
 				message("\"Thou dost wish to purchase something?\"");
@@ -41969,6 +43612,7 @@ void Func0491 object#(0x491) ()
 					say();
 				}
 				UI_remove_answer("buy");
+				fallthrough;
 
 			case "Tortured One":
 				message("She appears puzzled for an instant, but then she nods her head.~~\"Oh, thou must be referring to Caine. He was the alchemist who was responsible for the fire.\"");
@@ -41978,6 +43622,7 @@ void Func0491 object#(0x491) ()
 				{
 					UI_add_answer("fire");
 				}
+				fallthrough;
 
 			case "fire":
 				message("\"Oh, yes. It was horrible! The tavern caught on fire. I ran to my room, hoping to escape the flames. But then I started coughing. I couldn't breathe.\" Her chest rises and falls quickly as if she's reliving the experience.~~\"Finally, I could take it no longer.\" She brings the back of her hand to her forehead, dramatically. \"I fainted. Then I was here again, just like thou dost see me now.\" Her smile is like that of a child.");
@@ -41989,11 +43634,13 @@ void Func0491 object#(0x491) ()
 				{
 					UI_add_answer("tavern");
 				}
+				fallthrough;
 
 			case "here again":
 				message("\"Yes, 'twas quite odd. When I awoke, it was as if I had never left when the fire began. In fact, were it not for the scorch marks everywhere, I would doubt the fire ever happened.\"");
 				say();
 				UI_remove_answer("here again");
+				fallthrough;
 
 			case "tavern", "here":
 				if (var0001)
@@ -42010,6 +43657,7 @@ void Func0491 object#(0x491) ()
 				say();
 				UI_remove_answer(["here", "tavern"]);
 				var0005 = true;
+				fallthrough;
 
 			case "sacrifice":
 				if (!gflags[0x019B])
@@ -42038,10 +43686,10 @@ void Func0491 object#(0x491) ()
 					abort;
 				}
 				UI_remove_answer("sacrifice");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		if (var0001)
 		{
@@ -42200,20 +43848,24 @@ void Func0492 object#(0x492) ()
 				message(".\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("He smiles at your question, \"I once roamed the sea, for days at a time, gathering mine harvest of fish.\"");
 				say();
+				fallthrough;
 
 			case "information":
 				message("\"I have been around for many, many years. And,\" he smiles, \"I have seen many, many things in that time.\"");
 				say();
 				UI_remove_answer("information");
+				fallthrough;
 
 			case "Tortured One":
 				message("\"Caine? He was an alchemist here on Skara Brae. Now he spends his days in eternal pain caused by his guilt from causing the fire that destroyed this town.\"");
 				say();
 				UI_remove_answer("Tortured One");
+				fallthrough;
 
 			case "shade":
 				message("\"My story is a long and a sad one. I hope thou hast some time.\" He appears thoughtful for a moment, and then begins.~~ [\"When I was a young man, I met a lovely woman by the name of Gwen. I made her my wife, and we lived for a time, happy and carefree. She brought a light into the world and we called her Marney, which means the cool breeze after a storm.\" He smiles to himself at some memory, then continues with a furrowed brow.");
@@ -42222,6 +43874,7 @@ void Func0492 object#(0x492) ()
 				say();
 				UI_remove_answer("shade");
 				UI_add_answer(["Marney", "fire"]);
+				fallthrough;
 
 			case "Marney":
 				message("\"After I was murdered, my good friend, Yorl, cared for her as his own. He tried his best, but her sickness only worsened. After several months she weakened, and died.\" He stops here, tears filling his ghostly eyes, then, angrily, he says, \"And now her spirit is held by Horance the Liche. Thou must rescue her from that foul beast!\" He attempts to grab you, but his hands pass through without resistance.*");
@@ -42249,12 +43902,14 @@ void Func0492 object#(0x492) ()
 					say();
 				}
 				UI_remove_answer("Marney");
+				fallthrough;
 
 			case "fire":
 				message("\"It seems that Mistress Mordra, the town healer, thought she had a plan to stop the Liche, Horance, which she told to the Mayor. I am not sure exactly what she planned, but it involved Trent, the town smith, and Caine, the alchemist. Not long after Caine began his work, a maelstrom of fire tore over the island, destroying everything. Skara Brae burned for days.\"");
 				say();
 				UI_remove_answer("fire");
 				UI_add_answer(["Mistress Mordra", "Liche", "Mayor", "Trent", "Caine"]);
+				fallthrough;
 
 			case "Liche":
 				message("\"Once, over two centuries ago, I knew a gifted mage named Horance. His two loves in life were the study of magic, and writing lovely poetry. The people of Skara Brae felt safe in the knowledge that this sort of mage protected the town. Then he began to change.~~\"First his beautiful sonnets became a rhyming doggerel. It became the only way in which he would speak. His spells, which he displayed before the townsfolk, became destructive and violent. People began to fear him. My death occurred at about this time. Not long after that, he became reclusive. He had a tower built on the northern point and never removed himself from it.~~ \"Then, one night, the graves in the graveyard opened and the dead began to walk.\"*");
@@ -42287,32 +43942,38 @@ void Func0492 object#(0x492) ()
 					}
 				}
 				UI_remove_answer("Liche");
+				fallthrough;
 
 			case "Mistress Mordra":
 				message("Quenton looks hopeful, \"If thou wouldst like to assist us, she is the best one to speak to. She seems to know the way to rid us of the Liche, at the least.\"");
 				say();
 				UI_remove_answer("Mistress Mordra");
+				fallthrough;
 
 			case "Mayor":
 				message("\"The mayor...,\" Quenton selects his words carefully. \"...well, he believes that discretion is the better part of Valor. So, he may be able to offer thee some aid, but thou art likely first to need convince him that thou'rt not here to hurt him.\"");
 				say();
 				UI_remove_answer("Mayor");
+				fallthrough;
 
 			case "Trent":
 				message("\"Ah, the poor man knows the spirit-wrenching feeling of loss almost as well as I. His wife, Rowena, was killed by the walking dead. And Mistress Mordra claims that she saw her sitting on a throne next to the Liche's own. I believe this has driven Trent somewhat mad. He works night and day upon some oddly formed cage. Strange, though, he never seems to finish it. He doth not seem to recall that he died in the fire, either, but a great hatred for Horance still burns in his heart.\"");
 				say();
 				UI_remove_answer("Trent");
+				fallthrough;
 
 			case "Caine":
 				message("He looks as if he expected your question. \"Alas, Caine, in his attempt to free us of the Liche, instead damned us to become slaves of the selfsame Liche.\"");
 				say();
 				UI_remove_answer("Caine");
 				UI_add_answer("slaves");
+				fallthrough;
 
 			case "slaves":
 				message("\"Yes, we are his slaves. Every night at midnight, we must go to the Dark Tower and become servants of his Black Mass. I only know this because Mordra tells us it is so. I have no recollection of ever having been to the Dark Tower at all.\" His expression betrays his fear.");
 				say();
 				UI_remove_answer("slaves");
+				fallthrough;
 
 			case "sacrifice":
 				if (!gflags[0x019C])
@@ -42329,10 +43990,10 @@ void Func0492 object#(0x492) ()
 					say();
 				}
 				UI_remove_answer("sacrifice");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye, ");
 		message(var0001);
@@ -42537,6 +44198,7 @@ void Func0493 object#(0x493) ()
 				message("\"As I told thee, my name is Forsythe.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("He seems confused by your question. \"Did I not already reveal that? I am the mayor.\"");
@@ -42545,6 +44207,7 @@ void Func0493 object#(0x493) ()
 				{
 					UI_add_answer("Tortured One");
 				}
+				fallthrough;
 
 			case "Liche":
 				message("\"Why yes, the Liche has been a horrible scourge on my poor town. First he drives away all visitors by raising the dead. Then, in an attempt to stop him, the town is destroyed in a terrible fire. Well, I suppose that is not strictly his fault, but, well, something had to be done about him.\" Forsythe looks a little flustered.");
@@ -42555,11 +44218,13 @@ void Func0493 object#(0x493) ()
 				{
 					UI_add_answer("fire");
 				}
+				fallthrough;
 
 			case "his fault":
 				message("\"Well, the alchemist is the one who started the fire!\"");
 				say();
 				UI_remove_answer("his fault");
+				fallthrough;
 
 			case "Tortured One":
 				message("\"That is what we call Caine. He is the alchemist who created the fire.\"");
@@ -42569,6 +44234,7 @@ void Func0493 object#(0x493) ()
 					UI_add_answer("fire");
 				}
 				UI_remove_answer("Tortured One");
+				fallthrough;
 
 			case "fire":
 				message("He puts his arm around your shoulders and whispers, \"Mistress Mordra, our healer, thought she found a way to get rid of Horance once and for all. All we have to do is make a gold cage, or was it an old cage. Well, no matter.~~\"We make this cage, and someone...\" He smiles at you, \"...lowers it into the Well of Souls to do something or other to it. When this is done, thou shalt catch the Liche off guard late at night and snap it tight around him. Sounds easy thus far, yes?~~ \"Well, now. After that, thou needest only pour on him the magic liquid that the alchemist was making.\" He pauses here as if a little embarrassed.~~");
@@ -42586,16 +44252,19 @@ void Func0493 object#(0x493) ()
 				{
 					UI_add_answer(["Horance", "Mistress Mordra", "proportions"]);
 				}
+				fallthrough;
 
 			case "proportions":
 				message("\"'Twas so long ago that I barely remember. A smattering of curing, a dash of a potion of invisibility, and... that's right, a -ton- of the essence of mandrake root!\"");
 				say();
 				UI_remove_answer("proportions");
+				fallthrough;
 
 			case "Horance":
 				message("\"Well, if I've got all this Liche lore straight, then, Horance, who used to be a good and kindly mage, has become a nasty, horrible, undead mage.\" He smiles patronizingly. \"Now run along. Thou canst ask Mordra if thou needest more information.\"");
 				say();
 				UI_remove_answer("Horance");
+				fallthrough;
 
 			case "Mistress Mordra":
 				message("\"She resides just across the way, and can help thee with everything thou mightest need to rid us of the Liche. Thank thee ever so much. It has been nice talking with thee. Goodbye.\" He scurries back into his corner and holds his ankh in a protective fashion.*");
@@ -42633,58 +44302,67 @@ void Func0493 object#(0x493) ()
 					}
 				}
 				UI_remove_answer("sacrifice");
+				fallthrough;
 
 			case "Caine":
 				message("\"Just look for the crater near the northeast coast. Thou shalt find him there.\"");
 				say();
 				UI_remove_answer(var0007);
+				fallthrough;
 
 			case "Rowena":
 				message("\"The town healer said something about Rowena sitting on a throne in the Dark Tower on the northwestern point.\"");
 				say();
 				UI_remove_answer(var0007);
+				fallthrough;
 
 			case "leave":
 				message("\"As thou wishest!\"");
 				say();
 				UI_remove_from_party(0xFF6D);
 				UI_set_schedule_type(0xFF6D, 0x000B);
+				fallthrough;
 
 			case "Trent":
 				message("\"Trent is in the smithy, not far from here, across the road.\"");
 				say();
 				UI_remove_answer(var0007);
+				fallthrough;
 
 			case "Mistress Mordra":
 				message("\"She can be found in her house, right across the road.\"");
 				say();
 				UI_remove_answer(var0007);
+				fallthrough;
 
 			case "Quenton":
 				message("\"Quen spends just about all of his time in the Keg Of Spirits tavern, near the ferry dock.\"");
 				say();
 				UI_remove_answer(var0007);
+				fallthrough;
 
 			case "Paulette":
 				message("\"Ah, that lovely girl is the barmaid of the Keg Of Spirits tavern, down by the ferry dock.\"");
 				say();
 				UI_remove_answer(var0007);
+				fallthrough;
 
 			case "Markham":
 				message("\"That cantankerous man runs the tavern, the Keg Of Spirits. Thou canst find it near the ferry dock.\"");
 				say();
 				UI_remove_answer(var0007);
+				fallthrough;
 
 			case "Ferryman":
 				message("\"Well, now. Just how didst thou come to this island? That is right. -That- ferryman. He is on the ferry of Skara Brae, to the southeast.\"");
 				say();
 				UI_remove_answer(var0007);
+				fallthrough;
 
 			case "bye":
 				message("\"Oh, yes, right. If I have forgotten to tell thee something, thou mayest come back and ask, all right.\" He sighs heavily as you start to leave, then returns to his vigil in the corner.*");
 				say();
 				abort;
-
 		}
 	}
 	if (event == 0x0000)
@@ -42762,11 +44440,13 @@ void Func0495 object#(0x495) ()
 			UI_show_npc_face(0xFEE8, 0x0000);
 			UI_remove_answer("name");
 			UI_add_answer(["Shandu", "Shanda", "Shando"]);
+			fallthrough;
 
 		case "Shandu":
 			message("\"That is me.\"~~Shandu smiles and licks his lips.~~ \"I like it when my food says my name!\"");
 			say();
 			UI_remove_answer("Shandu");
+			fallthrough;
 
 		case "Shanda":
 			UI_show_npc_face(0xFEE7, 0x0000);
@@ -42779,6 +44459,7 @@ void Func0495 object#(0x495) ()
 			UI_remove_npc_face(0xFEE6);
 			UI_show_npc_face(0xFEE8, 0x0000);
 			UI_remove_answer("Shanda");
+			fallthrough;
 
 		case "Shando":
 			UI_show_npc_face(0xFEE6, 0x0000);
@@ -42796,6 +44477,7 @@ void Func0495 object#(0x495) ()
 			UI_remove_npc_face(0xFEE6);
 			UI_show_npc_face(0xFEE8, 0x0000);
 			UI_remove_answer("Shando");
+			fallthrough;
 
 		case "job":
 			message("\"Job?\"");
@@ -42819,6 +44501,7 @@ void Func0495 object#(0x495) ()
 			UI_remove_npc_face(0xFEE6);
 			UI_show_npc_face(0xFEE8, 0x0000);
 			UI_add_answer("Caddellite");
+			fallthrough;
 
 		case "Caddellite":
 			if (var0000 == 0x0000)
@@ -42839,12 +44522,14 @@ void Func0495 object#(0x495) ()
 				UI_remove_answer("Caddellite");
 				UI_add_answer("guarding");
 			}
+			fallthrough;
 
 		case "What did he say?":
 			message("\"He wasn't talking to thee!\"");
 			say();
 			UI_remove_answer("What did he say?");
 			UI_add_answer("Caddellite");
+			fallthrough;
 
 		case "guarding":
 			UI_show_npc_face(0xFEE6, 0x0000);
@@ -42867,6 +44552,7 @@ void Func0495 object#(0x495) ()
 			say();
 			UI_remove_answer("guarding");
 			UI_add_answer(["echo", "protect"]);
+			fallthrough;
 
 		case "echo":
 			message("\"Hearing this creature repeat whatever we say is making me hungry!\"*");
@@ -42883,6 +44569,7 @@ void Func0495 object#(0x495) ()
 			message("\"Shanda says he wants something to eat!\"");
 			say();
 			UI_remove_answer("echo");
+			fallthrough;
 
 		case "protect":
 			message("\"I suppose we must protect the Caddellite from creatures like thee who come around once every 1000 years or so wanting to take it.\"*");
@@ -42898,6 +44585,7 @@ void Func0495 object#(0x495) ()
 			UI_show_npc_face(0xFEE8, 0x0000);
 			UI_remove_answer("protect");
 			UI_add_answer("steal");
+			fallthrough;
 
 		case "steal":
 			message("Shandu becomes enraged.~~\"I knew it! It is trying to steal our Caddellite!\"~~Shandu addresses his brothers.~~\"We must not delay any longer.\"*");
@@ -42928,7 +44616,6 @@ void Func0495 object#(0x495) ()
 			message("\"Thou cannot say 'bye' to us! How rude!\"");
 			say();
 			UI_remove_answer("bye");
-
 	}
 	message("\"Leaving so soon?\"*");
 	say();
@@ -43018,6 +44705,7 @@ void Func0496 object#(0x496) ()
 			message("\"I am Penumbra. Surely thou dost remember me?\"");
 			say();
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			if (!gflags[0x01E2])
@@ -43030,6 +44718,7 @@ void Func0496 object#(0x496) ()
 				message("\"I am a practicing mage. Once I get my business going again, I should be able to sell spells and reagents. After all, I have been asleep for 200 years!\"");
 				say();
 			}
+			fallthrough;
 
 		case "ether":
 			if (!gflags[0x0003])
@@ -43069,11 +44758,13 @@ void Func0496 object#(0x496) ()
 				say();
 			}
 			UI_remove_answer("ether");
+			fallthrough;
 
 		case "Draxinusom":
 			message("\"Thou shalt find him on the island of Terfin. Ask him about the ring.\"");
 			say();
 			UI_remove_answer("Draxinusom");
+			fallthrough;
 
 		case "Tetrahedron":
 			if (!gflags[0x0003])
@@ -43115,6 +44806,7 @@ void Func0496 object#(0x496) ()
 				say();
 			}
 			UI_remove_answer("Tetrahedron");
+			fallthrough;
 
 		case "protect":
 			message("\"I need some kind of barrier to protect me from the ethereal waves. There must be a material we could use!\"~~ Penumbra clutches her temples. She is obviously in great pain.");
@@ -43149,6 +44841,7 @@ void Func0496 object#(0x496) ()
 			say();
 			gflags[0x01DF] = true;
 			UI_remove_answer("protect");
+			fallthrough;
 
 		case "blackrock":
 			if (!gflags[0x0003])
@@ -43182,6 +44875,7 @@ void Func0496 object#(0x496) ()
 				say();
 				UI_remove_answer("blackrock");
 			}
+			fallthrough;
 
 		case "ring":
 			if (!gflags[0x0003])
@@ -43229,10 +44923,10 @@ void Func0496 object#(0x496) ()
 				say();
 			}
 			UI_remove_answer("ring");
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	if (!gflags[0x01E2])
 	{
@@ -43328,6 +45022,7 @@ void Func0497 object#(0x497) ()
 				message("\"But that -is- my name! Kissme! Kissme! It is true!\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"My purpose is to spread love dust all around and welcome thee to Ambrosia! I love thee! Yes, I do!\"");
@@ -43373,6 +45068,7 @@ void Func0497 object#(0x497) ()
 					UI_show_npc_face(0xFF69, 0x0000);
 				}
 				UI_add_answer(["Ambrosia", "love dust"]);
+				fallthrough;
 
 			case "Ambrosia":
 				message("\"That is where thou art! It is true! Oh, yes! Ambrosia!\"");
@@ -43389,34 +45085,40 @@ void Func0497 object#(0x497) ()
 				say();
 				UI_remove_answer("Ambrosia");
 				UI_add_answer("lost isle");
+				fallthrough;
 
 			case "love dust":
 				message("\"It does nothing that I know of! But it's pretty!\" Kissme giggles like a child. \"It's how I show thee I love thee! It's true!\"");
 				say();
 				UI_remove_answer("love dust");
+				fallthrough;
 
 			case "lost isle":
 				message("\"Ambrosia was hit by stones from the sky hundreds of years ago! Oh, yes indeed! The entire island was battered to bits! It is true!\"");
 				say();
 				UI_remove_answer("lost isle");
 				UI_add_answer(["stones", "years ago"]);
+				fallthrough;
 
 			case "stones":
 				message("\"I believe it is called Caddellite. Yes, I believe it's true!~~\"And I -do- love thee, it is so true!\"");
 				say();
 				UI_remove_answer("stones");
 				UI_add_answer("Caddellite");
+				fallthrough;
 
 			case "Caddellite":
 				message("\"Most of it is collected in the pit where the hydra sits. Thou shalt have to ask the hydra about it. It is true!\"");
 				say();
 				UI_remove_answer("Caddellite");
 				UI_add_answer("hydra");
+				fallthrough;
 
 			case "hydra":
 				message("\"The hydra is made up of three brothers -- all dragons! It is true! Thou shalt be careful not to make them angry, for they have a temper! Oh, yes indeed, they do! They are very protective of their Caddellite, so speak to them about it first!\"");
 				say();
 				UI_remove_answer("hydra");
+				fallthrough;
 
 			case "years ago":
 				message("\"Ambrosia was once very beautiful! Yes, it was! All of mine ancestors lived here then! Love dust was all around, and every day was like a jewel! Yes, it's true! Yes, thou wilt!~~\"Oh, I must kiss thee again!\"");
@@ -43428,6 +45130,7 @@ void Func0497 object#(0x497) ()
 				}
 				UI_remove_answer("years ago");
 				UI_add_answer("kiss");
+				fallthrough;
 
 			case "kiss":
 				if (var0000)
@@ -43476,10 +45179,10 @@ void Func0497 object#(0x497) ()
 					say();
 				}
 				UI_remove_answer("kiss");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye, my love! Oh yes! I love thee! It is true!\"*");
 		say();
@@ -43572,6 +45275,7 @@ void Func0498 object#(0x498) ()
 				{
 					UI_add_answer("Nelson's feelings");
 				}
+				fallthrough;
 
 			case "job":
 				message("\"I am the advisor at the Lycaeum.\"");
@@ -43581,17 +45285,20 @@ void Func0498 object#(0x498) ()
 				{
 					UI_add_answer("North East sea");
 				}
+				fallthrough;
 
 			case "Lycaeum":
 				message("She rolls her eyes. \"The Lycaeum is the building in which thou dost stand. It is a great library designed to house a wealth of knowledge. Though the structure has changed a bit over the past two hundred years, the essence of learning has not.\"");
 				say();
 				UI_remove_answer("Lycaeum");
+				fallthrough;
 
 			case "advisor":
 				message("\"Yes,\" she says. \"My job is to manage and regulate the events in the Lycaeum. And,\" she adds, \"provide assistance to the people here in Moonglow -- when they need it!\"");
 				say();
 				UI_remove_answer("advisor");
 				UI_add_answer(["events", "townspeople"]);
+				fallthrough;
 
 			case "events":
 				message("\"I am in charge of maintaining the reading areas and bringing in new books. In addition, I help organize special group sessions for Jillian's tutorials and set up educational entertainment programs.\"");
@@ -43601,11 +45308,13 @@ void Func0498 object#(0x498) ()
 				{
 					UI_add_answer("Jillian");
 				}
+				fallthrough;
 
 			case "North East sea":
 				message("\"I have not the time for these petty geography questions. Check an atlas!\"");
 				say();
 				UI_remove_answer("North East sea");
+				fallthrough;
 
 			case "townspeople":
 				message("\"I have little time for this,\" she sighs. \"I know only the Lycaeum head and his twin, Brion, at all well. The trainer also studies here in the Lycaeum.\" She looks up at the ceiling, as if reading from an invisible, overhead list.~~\"Thou dost already know about Penumbra. Mariah is here. If thou wishest to know about a member of The Fellowship, ask the clerk there. Otherwise,\" she eyes you coldly, \"let me return to my duties.\" As an afterthought, she adds, \"And keep thy voice down. People are trying to read.\"");
@@ -43616,11 +45325,13 @@ void Func0498 object#(0x498) ()
 					UI_add_answer("trainer");
 				}
 				UI_remove_answer("townspeople");
+				fallthrough;
 
 			case "Mariah":
 				message("\"Well, they say she used to be an adept mage, but all I see is a woman who wanders around complimenting the furniture. Thou mayest speak to her if thou wishest, but I doubt she will make sense to thee. And do not disorganize the shelves while looking for her!\"");
 				say();
 				UI_remove_answer("Mariah");
+				fallthrough;
 
 			case "Jillian", "trainer":
 				message("\"Jillian? She is very well-behaved. Also quiet and tidy. I believe she is an excellent scholar. If thou art going to seek her out, try not to overturn any shelves. Some new books have just arrived and I have not finished placing all of them.\"");
@@ -43628,12 +45339,14 @@ void Func0498 object#(0x498) ()
 				UI_remove_answer(["Jillian", "trainer"]);
 				var0002 = true;
 				UI_add_answer("new books");
+				fallthrough;
 
 			case "new books":
 				message("\"Yes, they arrived not long ago, including the recently rediscovered copy of DeMaria and Spector's work,`The Avatar Adventures.' If thou canst avoid creating too much of a disturbance, I recommend it to thee.\"");
 				say();
 				UI_remove_answer("new books");
 				UI_add_answer("Avatar Adventures");
+				fallthrough;
 
 			case "Avatar Adventures":
 				message("\"If I tell thee this last thing, wilt thou depart so I may return to my job?\"");
@@ -43661,6 +45374,7 @@ void Func0498 object#(0x498) ()
 					say();
 					abort;
 				}
+				fallthrough;
 
 			case "Penumbra":
 				if (var0003)
@@ -43676,11 +45390,13 @@ void Func0498 object#(0x498) ()
 				message(" waste my time in this manner?\" Looking back up at you, she says, \"Penumbra is the sage who put herself to sleep two centuries ago. Rumor has it that only the Avatar can awaken her.\"");
 				say();
 				UI_remove_answer("Penumbra");
+				fallthrough;
 
 			case "Lycaeum head":
 				message("\"Nelson is very competent, although a little eccentric. I do wish he would refrain from showing off his collection of trinkets to everyone who enters the building. It always makes such a commotion.\"");
 				say();
 				UI_remove_answer("Lycaeum head");
+				fallthrough;
 
 			case "Brion":
 				message("Her chilly expression melts away. \"Brion,\" she says, smiling, \"is very open-minded and idealistic. He knows the heavens quite well.\" She looks up to emphasize `heavens.' \"I find him very attractive. But, I do not know how to convey mine intentions.\" She turns away, shyly.~~\"Unless, perchance, ");
@@ -43711,6 +45427,7 @@ void Func0498 object#(0x498) ()
 				}
 				gflags[0x01DA] = true;
 				UI_remove_answer("Brion");
+				fallthrough;
 
 			case "Brion's feelings":
 				message("She looks down for a moment. \"I thought as much.\" As she raises her head, tears are visible in her eyes. \"I thank thee for trying.\"*");
@@ -43727,15 +45444,16 @@ void Func0498 object#(0x498) ()
 				{
 					UI_add_answer("second best?");
 				}
+				fallthrough;
 
 			case "second best?":
 				message("\"Well, his brother, Brion, is quite attractive, I think.\"");
 				say();
 				UI_remove_answer("second best?");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good day.\"*");
 		say();
@@ -43815,6 +45533,7 @@ void Func0499 object#(0x499) ()
 						say();
 					}
 					UI_remove_answer("name");
+					fallthrough;
 
 				case "job":
 					message("\"I sell spells, reagents, and sometimes a few potions here at the Lycaeum. Dost thou wish to buy any of these, ");
@@ -43822,12 +45541,15 @@ void Func0499 object#(0x499) ()
 					message("?\"");
 					say();
 					UI_add_answer(["spells", "reagents", "potions", "Lycaeum"]);
+					fallthrough;
 
 				case "spells":
 					Func08BB(0xFF67);
+					fallthrough;
 
 				case "reagents":
 					Func08BC("Reagents");
+					fallthrough;
 
 				case "potions":
 					message("\"I am afraid, ");
@@ -43835,11 +45557,13 @@ void Func0499 object#(0x499) ()
 					message(", that I have a very meager selection.\"");
 					say();
 					Func08BC("Potions");
+					fallthrough;
 
 				case "Lycaeum":
 					message("She shakes her head sadly. \"I have not been `myself' for so long that I no longer recognize this town.\" Her eyes widen.~~ \"There are so many buildings around the Lycaeum now, hast thou seen them?\"~~She pauses, looking at you.~~\"By the way, old friend. I assume thou art responsible for returning the ether to its normal state. I thank thee.\"");
 					say();
 					UI_remove_answer("Lycaeum");
+					fallthrough;
 
 				case "bye":
 					message("\"Fair days ahead, friend ");
@@ -43847,7 +45571,6 @@ void Func0499 object#(0x499) ()
 					message(".\"*");
 					say();
 					abort;
-
 			}
 		}
 		else
@@ -43872,59 +45595,68 @@ void Func0499 object#(0x499) ()
 						say();
 					}
 					UI_remove_answer("name");
+					fallthrough;
 
 				case "job":
 					message("She smiles. \"I have a very important job, I do. My, are not those shelves lovely? So neat and orderly.\" She looks back at you.~~\"Be careful! The ink wells are full, and the quills so sharp.\" She giggles.");
 					say();
 					UI_add_answer(["shelves", "ink wells", "quills"]);
+					fallthrough;
 
 				case "shelves":
 					message("\"Are not they the neatest, most orderly, and well-kept shelves thou hast seen? They do an excellent job of maintaining them!\"");
 					say();
 					UI_add_answer("they");
 					UI_remove_answer("shelves");
+					fallthrough;
 
 				case "ink wells":
 					message("\"They are always so full and ready for use. They are so good about keeping them filled and clean!\"");
 					say();
 					UI_add_answer("they");
 					UI_remove_answer("ink wells");
+					fallthrough;
 
 				case "quills":
 					message("\"Oh, yes, they are quite sharp! Always there when one needs to scribe a missive. They do an excellent job of having many ready at a moment's notice!\"");
 					say();
 					UI_add_answer("they");
 					UI_remove_answer("quills");
+					fallthrough;
 
 				case "they":
 					message("\"Yes, they do!\" Her face turns sad. \"But I only sell.\"");
 					say();
 					UI_add_answer("sell");
 					UI_remove_answer("they");
+					fallthrough;
 
 				case "sell":
 					message("\"Yes,\" she agrees, \"I do indeed sell. I even spell. In fact, I even sell spells! But, if thou desirest reagents, thou art out of luck, for I only sell those during one of the seven weekdays. Wouldst thou like to know which day?~~\"What a lovely set of books thou must have! I have just the item for thee to match thy shelves -- a potion. If thou wilt buy a spell or reagent from me, I will sell thee a potion for only its normal price!\"");
 					say();
 					UI_add_answer(["which day", "reagents", "potions"]);
 					UI_remove_answer("sell");
+					fallthrough;
 
 				case "which day":
 					message("\"Why, today. Thou art in luck. Buy a spell.\"");
 					say();
 					Func08BB(0xFF67);
 					UI_remove_answer("which day");
+					fallthrough;
 
 				case "reagents":
 					Func08BC("Reagents");
+					fallthrough;
 
 				case "potions":
 					Func08BC("Potions");
+					fallthrough;
 
 				case "bye":
 					message("\"Certainly, come back anytime and buy.\"*");
 					say();
 					abort;
-
 			}
 		}
 	}
@@ -44084,6 +45816,7 @@ void Func049A object#(0x49A) ()
 					}
 				}
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I torture prisoners,\" he says, thumping his chest proudly.*");
@@ -44154,6 +45887,7 @@ void Func049A object#(0x49A) ()
 					}
 				}
 				UI_add_answer(["torture", "prisoners"]);
+				fallthrough;
 
 			case "Fellowship":
 				var000E = UI_wearing_fellowship();
@@ -44170,16 +45904,19 @@ void Func049A object#(0x49A) ()
 					UI_add_answer("join");
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "strive", "worthy", "trust":
 				message("\"You don't know?\" He frowns.~~ \"You should learn before the voice become angry!\"");
 				say();
 				UI_remove_answer(["strive", "worthy", "trust"]);
+				fallthrough;
 
 			case "join":
 				message("\"Good, join. See Abraham or Danag about join.\"");
 				say();
 				UI_remove_answer("join");
+				fallthrough;
 
 			case "prisoners":
 				if (gflags[0x02E2] && gflags[0x02E1])
@@ -44205,6 +45942,7 @@ void Func049A object#(0x49A) ()
 					UI_show_npc_face(0xFF66, 0x0000);
 				}
 				UI_remove_answer("prisoners");
+				fallthrough;
 
 			case "torture":
 				message("\"Much fun! Prisoners scream loudly.\"*");
@@ -44231,6 +45969,7 @@ void Func049A object#(0x49A) ()
 					UI_add_answer("stop torturing");
 				}
 				UI_remove_answer("torture");
+				fallthrough;
 
 			case "stop torturing":
 				message("\"Oh, no! Grod love job! Grod never stop. You go away now.\"*");
@@ -44239,7 +45978,6 @@ void Func049A object#(0x49A) ()
 
 			case "bye":
 				break;
-
 		}
 		message("\"Come back and visit Grod. Hear victims squeal!\"*");
 		say();
@@ -44299,6 +46037,7 @@ void Func049B object#(0x49B) ()
 				say();
 				UI_add_answer("Moonglow");
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am a farmer, ");
@@ -44306,23 +46045,27 @@ void Func049B object#(0x49B) ()
 				message(". I manage my farm with the help of Tolemac, my brother, and Morz, our family friend.\"");
 				say();
 				UI_add_answer(["Tolemac", "Morz"]);
+				fallthrough;
 
 			case "Moonglow":
 				message("\"The city occupies the entire island now, including the Lycaeum. Most of the residents still live south, though. We are due east of Britain proper.\"");
 				say();
 				UI_add_answer("residents");
 				UI_remove_answer("Moonglow");
+				fallthrough;
 
 			case "Morz":
 				message("\"My brother and I have known Morz for most of our lives. He is very friendly when he is not too busy worrying about his stutter. Unfortunately, he listens to Tolemac too often.\"");
 				say();
 				UI_add_answer("stutter");
 				UI_remove_answer("Morz");
+				fallthrough;
 
 			case "stutter":
 				message("Cubolt looks down at the ground, shaking his head sadly. \"He started when he was five years old. He and my brother were wrestling in the back of a wagon driven by his parents. They hit a bump and he fell out -- and landed on his head. Ever since, he hath had his stutter.\" He looks back up at you. \"The odd thing is, neither he nor Tolemac remember the accident. Or at least, Tolemac doth not. I cannot convince Morz to talk about it.\"");
 				say();
 				UI_remove_answer("stutter");
+				fallthrough;
 
 			case "residents":
 				message("\"Zelda, the clerk at the Lycaeum, would be the best person to talk to about Moonglow's residents. Or the bartender, though I do not know his name. I know that the Observatory head and the Lycaeum head are twins, but I have never met either of them. I do know that thou dost not want to talk to Rankin or Balayna at The Fellowship. They are ill news to our once-pleasant city.\"");
@@ -44332,6 +46075,7 @@ void Func049B object#(0x49B) ()
 					UI_add_answer("Fellowship");
 				}
 				UI_remove_answer("residents");
+				fallthrough;
 
 			case "Tolemac":
 				message("\"He is my younger brother. Need I say more? I am a little concerned about him though. I am used to his rebellious behavior, but recently he has joined The Fellowship. That frightens me. They frighten me. I have tried to get him to come to his senses, but he is too busy enjoying making me worry to listen. Also, he is trying to get Morz to join. I wish I could get him to reconsider.\"");
@@ -44342,12 +46086,14 @@ void Func049B object#(0x49B) ()
 				}
 				UI_add_answer("reconsider");
 				UI_remove_answer("Tolemac");
+				fallthrough;
 
 			case "Fellowship":
 				message("He spits on the ground. \"A bane to Britannia is what The Fellowship is. They have some odd philosophy that teaches thee to forget who thou art and follow them. The process is dehumanizing, and I think it meshes poorly with the eight virtues. Not only that, but their leader here in Moonglow has persuaded Tolemac to join.\"");
 				say();
 				var0002 = true;
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "reconsider":
 				message("\"Unfortunately, Tolemac will not listen to me. However,\" he begins to smile hopefully, \"he just might listen to thee, ");
@@ -44357,10 +46103,10 @@ void Func049B object#(0x49B) ()
 				gflags[0x01D6] = true;
 				gflags[0x01D7] = true;
 				UI_remove_answer("reconsider");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Take care, ");
 		message(var0001);
@@ -44438,17 +46184,20 @@ void Func049C object#(0x49C) ()
 				message("She gives you a suspicious look. \"My name is Balayna.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the clerk for the Moonglow branch of The Fellowship.\"");
 				say();
 				UI_add_answer(["clerk", "Moonglow"]);
+				fallthrough;
 
 			case "clerk":
 				message("\"It is my job to keep records during the meetings, and to administrate the decisions of this branch.\"");
 				say();
 				UI_remove_answer("clerk");
 				UI_add_answer("meetings");
+				fallthrough;
 
 			case "liqueur":
 				var0005 = UI_remove_party_items(0x0001, 0x02ED, 0xFE99, 0x001E, false);
@@ -44466,6 +46215,7 @@ void Func049C object#(0x49C) ()
 					say();
 					UI_remove_answer("liqueur");
 				}
+				fallthrough;
 
 			case "meetings":
 				var0006 = UI_wearing_fellowship();
@@ -44481,33 +46231,39 @@ void Func049C object#(0x49C) ()
 					UI_add_answer("Rankin");
 				}
 				UI_remove_answer("meetings");
+				fallthrough;
 
 			case "Moonglow":
 				message("\"This seemed to be an... appropriate place to start up a branch. There are many good citizens here in Moonglow.\"");
 				say();
 				UI_add_answer(["good", "citizens"]);
 				UI_remove_answer("Moonglow");
+				fallthrough;
 
 			case "good":
 				message("She appears surprised at the statement. \"Well, I believe that many of the people are of strong mind and character. They are just the kind of people The Fellowship needs to go out and spread guidance and prosperity throughout Britannia.\"");
 				say();
 				UI_remove_answer("good");
 				UI_add_answer(["guidance", "prosperity"]);
+				fallthrough;
 
 			case "guidance":
 				message("\"Many of the people lack the discipline required to reach their highest potential.\"");
 				say();
 				UI_remove_answer("guidance");
+				fallthrough;
 
 			case "prosperity":
 				message("\"The Fellowship is designed to enrich the lives of everyone who resides in this fair land.\"");
 				say();
 				UI_remove_answer("prosperity");
+				fallthrough;
 
 			case "citizens":
 				message("\"I am so busy with my duties that I know very few people here. Phearcy, the bartender, is an outstanding member of the community, as is the farmer, Tolemac. Tolemac's friend, Morz, though shy, is well spoken of. Also, Morz has a brother.\" She glances up, thoughtfully. \"Or is he Tolemac's brother?~~ \"I am not positive whose brother he is, but I do know that I do not know that much about him,\" she sniffs.");
 				say();
 				UI_remove_answer("citizens");
+				fallthrough;
 
 			case "Fellowship":
 				var0007 = UI_wearing_fellowship();
@@ -44527,33 +46283,39 @@ void Func049C object#(0x49C) ()
 					UI_add_answer("Triad");
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "Triad":
 				message("The Triad is basically three principles that, when applied in unison, enable the individual to better reach creativity, satisfaction, and success in life.\"");
 				say();
 				UI_add_answer("principles");
 				UI_remove_answer("Triad");
+				fallthrough;
 
 			case "principles":
 				message("\"The three principles are: Strive for Unity, Trust thy Brother -- and sister -- and Worthiness precedes Reward.\"");
 				say();
 				UI_add_answer(["Strive", "Trust", "Worthiness"]);
 				UI_remove_answer("principles");
+				fallthrough;
 
 			case "Strive":
 				message("\"Essentially, this means that cooperation among people is not only a desirable means for reaching human potential in itself, but it also facilitates the entire process.\"");
 				say();
 				UI_remove_answer("Strive");
+				fallthrough;
 
 			case "Trust":
 				message("\"This tenet illustrates that, as people, we are all the same, and that neither hatred nor fear of one another is productive. In fact, it is destructive.\"");
 				say();
 				UI_remove_answer("Trust");
+				fallthrough;
 
 			case "Worthiness":
 				message("\"This basically means that individuals should strive to be worthy of that which they want in life. It is often misquoted as `thou dost receive what thou dost deserve,' but that tends to have negative connotations.\"");
 				say();
 				UI_remove_answer("Worthiness");
+				fallthrough;
 
 			case "Rankin":
 				message("\"He is the branch head here in Moonglow.\"~She glances around cautiously. \"Thou art travelling through the city, correct? And eventually going to visit another city -- Britain, perhaps?\" She shoots another glance, apparently checking for something. Finally, she leans forward, speaking with a whisper.~\"I am unsure whether Rankin is worthy of his position. I heard him talking to the new member, Tolemac, just before Rankin persuaded him to join. He admitted to having doubts about The Fellowship. He told Tolemac that he thought, perhaps, The Fellowship encouraged its members to be nothing more than sheep, and that those really `in charge' were charlatans, in it simply for the money. What does thou think about that?\" She leans back.");
@@ -44561,10 +46323,10 @@ void Func049C object#(0x49C) ()
 				gflags[0x01D8] = true;
 				var0003 = true;
 				UI_remove_answer("Rankin");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		if (gflags[0x01D8])
 		{
@@ -44658,16 +46420,19 @@ void Func049D object#(0x49D) ()
 				{
 					UI_add_answer("reconvert");
 				}
+				fallthrough;
 
 			case "job":
 				message("\"I help my brother tend our farm here in Moonglow.\"");
 				say();
 				UI_add_answer(["brother", "Moonglow"]);
+				fallthrough;
 
 			case "brother":
 				message("\"My brother is Cubolt.\" He frowns for a moment. \"He can be a bit overbearing at times, trying to `take care' of me. But,\" he shrugs, \"he means well, perhaps. I know I've caused him a bit of trouble every now and then,\" he says with a grin, \"but he deserves it.\"");
 				say();
 				UI_remove_answer("brother");
+				fallthrough;
 
 			case "Moonglow":
 				message("\"Yes, ");
@@ -44676,6 +46441,7 @@ void Func049D object#(0x49D) ()
 				say();
 				UI_add_answer("townspeople");
 				UI_remove_answer("Moonglow");
+				fallthrough;
 
 			case "townspeople":
 				message("\"I know only a few people here, ");
@@ -44684,27 +46450,32 @@ void Func049D object#(0x49D) ()
 				say();
 				UI_add_answer(["Morz", "Balayna", "Rankin", "Fellowship"]);
 				UI_remove_answer("townspeople");
+				fallthrough;
 
 			case "Rankin":
 				message("\"Rankin is very intelligent. He is the one who persuaded me to join The Fellowship. I have much respect for him.\"");
 				say();
 				UI_remove_answer("Rankin");
+				fallthrough;
 
 			case "Balayna":
 				message("\"She is the branch clerk. Most of the time, she is friendly. Sometimes, however, she seems a little cold.\"");
 				say();
 				UI_remove_answer("Balayna");
+				fallthrough;
 
 			case "Morz":
 				message("\"Morz and I grew up together. He is very sensitive about his stutter, though, so I would not bring it up.\"");
 				say();
 				UI_add_answer("stutter");
 				UI_remove_answer("Morz");
+				fallthrough;
 
 			case "stutter":
 				message("\"It is difficult to get him to talk about it. I think it was caused by an accident he had when he was a child. I barely remember the incident. My brother might remember more.\"");
 				say();
 				UI_remove_answer("stutter");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"Rankin or Balayna would be the best ones to ask, ");
@@ -44714,6 +46485,7 @@ void Func049D object#(0x49D) ()
 				message(", The Fellowship sponsors many feasts and festivals. I strongly recommend that thou ask Rankin about joining.\"");
 				say();
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "reconvert":
 				message("\"Reconvert? Why would I want to do that? Did my brother request this? He has always had a problem with letting me make mine own decisions. Nay, ");
@@ -44733,7 +46505,6 @@ void Func049D object#(0x49D) ()
 
 			case "bye":
 				break;
-
 		}
 		message("\"'Til next time, ");
 		message(var0000);
@@ -44788,23 +46559,27 @@ void Func049E object#(0x49E) ()
 				message("He points to the ground. \"That is here!\"");
 				say();
 				UI_remove_answer("Moonglow");
+				fallthrough;
 
 			case "name":
 				message("\"M-M-Morz.\"");
 				say();
 				UI_add_answer("stutter");
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I work with C-C-Cubolt, f-f-farming here.\"");
 				say();
 				UI_add_answer(["Cubolt", "C-C-Cubolt", "stutter", "here"]);
+				fallthrough;
 
 			case "here":
 				message("\"M-M-Moonglow.\"");
 				say();
 				UI_add_answer("Moonglow");
 				UI_remove_answer("here");
+				fallthrough;
 
 			case "C-C-Cubolt", "T-T-Tolemac":
 				message("\"That is n-n-not f-f-funny!\" He blushes, and angrily turns away.*");
@@ -44816,12 +46591,14 @@ void Func049E object#(0x49E) ()
 				say();
 				UI_add_answer(["Tolemac", "T-T-Tolemac", "stutter"]);
 				UI_remove_answer(["Cubolt", "C-C-Cubolt"]);
+				fallthrough;
 
 			case "Tolemac":
 				message("\"T-T-Tolemac is m-m-my f-f-friend. I've kn-kn-known h-h-him f-f-for a long t-t-time. He just joined The F-F-Fellowship. He wants m-m-me t-t-to join, t-t-too.\"");
 				say();
 				UI_add_answer("Fellowship");
 				UI_remove_answer(["Tolemac", "T-T-Tolemac"]);
+				fallthrough;
 
 			case "Fellowship":
 				message("\"T-T-Tolemac says they d-d-do m-m-many g-g-good things and they would h-h-help m-m-me m-m-make f-f-friends m-m-more easily. C-C-Cubolt thinks they're b-b-bad. I d-d-do not kn-kn-know what t-t-to d-d-do.\"");
@@ -44831,16 +46608,17 @@ void Func049E object#(0x49E) ()
 					UI_add_answer("don't join");
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "don't join":
 				message("\"Thou d-d-dost n-n-not think I should join? C-C-Cubolt does not want m-m-me t-t-to either. I s-s-suppose I won't. I thank thee.\"");
 				say();
 				Func0911(0x0014);
 				UI_remove_answer("don't join");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"B-b-bye.\"*");
 		say();
@@ -44893,6 +46671,7 @@ void Func049F object#(0x49F) ()
 				message(".\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am a scholar, ");
@@ -44904,16 +46683,19 @@ void Func049F object#(0x49F) ()
 				{
 					UI_add_answer("North East sea");
 				}
+				fallthrough;
 
 			case "Moonglow":
 				message("\"The town occupies almost the entire island of the same name. The island is located due east and a few degrees south of the city of Britain.\"");
 				say();
 				UI_remove_answer("Moonglow");
+				fallthrough;
 
 			case "North East sea":
 				message("\"Long ago there was a small continent -- an island really -- called Ambrosia. However, meteorites struck it, destroying its primary city. The island was located in the North East sea. I suppose the ruins still lie far beneath the rubble.\"");
 				say();
 				UI_remove_answer("North East sea");
+				fallthrough;
 
 			case "tutor":
 				var0002 = UI_part_of_day();
@@ -44936,10 +46718,10 @@ void Func049F object#(0x49F) ()
 					message("\"A better time to train thee would be when I am in my study.\"");
 					say();
 				}
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Fare thee well, ");
 		message(var0000);
@@ -45055,6 +46837,7 @@ void Func04A0 object#(0x4A0) ()
 				}
 				UI_add_answer(["Mikhail", "Moonglow"]);
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"Me? I do not have a job. Not a real one like my wife has. All I do all day is watch over my little Mikhail, here.\" He turns to look at the baby, taking on a patronizing tone. \"Yes, I take care of thee, do I not? Yes, I do. I sure do.\" He kisses the boy and then looks back up at you,\tembarrassed.~~\"Where was I? Oh yes. All I do is take care of the boy. What I should be doing is working, not staying at home. That should be Jillian's job. She belongs here at home, not me.\"");
@@ -45063,11 +46846,13 @@ void Func04A0 object#(0x4A0) ()
 				{
 					UI_add_answer("Jillian");
 				}
+				fallthrough;
 
 			case "Mikhail":
 				message("\"That is the name of my son. 'Tis a good name, yes?\"");
 				say();
 				UI_remove_answer("Mikhail");
+				fallthrough;
 
 			case "wife", "Jillian":
 				message("\"My wife? Jillian? She's the scholar. She is a very good one, too. Not that I could not have done well. I could have. Better, in fact. But it is not worth arguing about now. She has her occupation, even if I do not have one. I should have a job, though. Dost thou not agree, ");
@@ -45086,6 +46871,7 @@ void Func04A0 object#(0x4A0) ()
 				}
 				UI_remove_answer(["wife", "Jillian"]);
 				var0004 = true;
+				fallthrough;
 
 			case "Moonglow":
 				message("\"What about Moonglow?\" He shrugs, \"'Tis a fair town, but a little too crowded these days. I hear it was a much nicer place back when Moonglow was separate from the Lycaeum. Much smaller.~~\"This place is too large to really get to know anyone. Not that I have had much of an opportunity, having to stay at home and take care of my son.\" He looks down at the boy, smiles, and tickles the baby's nose.");
@@ -45100,10 +46886,10 @@ void Func04A0 object#(0x4A0) ()
 					UI_add_answer("wife");
 				}
 				UI_remove_answer("Moonglow");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		if (UI_is_pc_female())
 		{
@@ -45234,27 +47020,32 @@ void Func04A1 object#(0x4A1) ()
 				}
 				gflags[0x0203] = true;
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I teach expertise with light weapons here in Moonglow.\"");
 				say();
 				UI_add_answer(["train", "Moonglow"]);
+				fallthrough;
 
 			case "Moonglow":
 				message("\"Dost thou want the location of the city or to know about the townspeople?\"");
 				say();
 				UI_add_answer(["location", "townspeople"]);
 				UI_remove_answer("Moonglow");
+				fallthrough;
 
 			case "location":
 				message("\"Moonglow is on an island directly east of the border between Britain and Paws.\"");
 				say();
 				UI_remove_answer("location");
+				fallthrough;
 
 			case "townspeople":
 				message("\"The person to ask for that information would be Phearcy, the bartender. All I know are other bar patrons: Tolemac and Morz, two farmers.\"");
 				say();
 				UI_remove_answer("townspeople");
+				fallthrough;
 
 			case "train":
 				var0007 = UI_part_of_day();
@@ -45277,10 +47068,10 @@ void Func04A1 object#(0x4A1) ()
 						say();
 					}
 				}
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Remember, always keeps thy wits about and thy blade ready.\"*");
 		say();
@@ -45328,11 +47119,13 @@ void Func04A2 object#(0x4A2) ()
 				message(".\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the healer of the residents of this community.\"");
 				say();
 				UI_add_answer(["residents", "heal", "community"]);
+				fallthrough;
 
 			case "community":
 				message("\"Moonglow is mine home. I have lived in this town for mine entire life. But I am weary of my life here. 'Tis time, I think, to move on. If only I did not have such strong ties here.\"~He sighs sadly.");
@@ -45345,17 +47138,20 @@ void Func04A2 object#(0x4A2) ()
 				}
 				UI_add_answer("ties");
 				UI_remove_answer("community");
+				fallthrough;
 
 			case "traveller":
 				message("\"His name is Addom. While he is in town, I am letting him stay in one of my beds.\"");
 				say();
 				UI_remove_answer("traveller");
+				fallthrough;
 
 			case "heal":
 				message("\"Yes, I sell mine healing services to those who need them.\"");
 				say();
 				UI_add_answer("services");
 				UI_remove_answer("heal");
+				fallthrough;
 
 			case "services":
 				var0002 = UI_part_of_day();
@@ -45369,51 +47165,59 @@ void Func04A2 object#(0x4A2) ()
 					say();
 				}
 				UI_remove_answer("services");
+				fallthrough;
 
 			case "ties":
 				message("\"My patients here in Moonglow. Who will help them if not I?\"");
 				say();
 				UI_remove_answer("ties");
+				fallthrough;
 
 			case "residents":
 				message("\"There are many people in Moonglow. My father once told me that the town was much smaller during his time. In fact, he said that Moonglow used to be separate from the Lycaeum!~~\"But, I digress. Thou didst ask about the people. I know most of the residents here. Dost thou want to know about the Lycaeum, the observatory, The Fellowship, the farmers, the trainer, or the tavern?\"");
 				say();
 				UI_add_answer(["Lycaeum", "observatory", "Fellowship", "farmers", "trainer", "tavern"]);
 				UI_remove_answer("residents");
+				fallthrough;
 
 			case "Lycaeum":
 				message("\"The Lycaeum is run by a kind man named Nelson. His advisor is Zelda. Do not break any rules in her presence or thou wilt receive a sharp reprimand!~\"Jillian also studies there. She can teach thee many things. And do not worry about Mariah. She is harmless if thou wilt but leave her be.\"");
 				say();
 				UI_remove_answer("Lycaeum");
+				fallthrough;
 
 			case "observatory":
 				message("\"The head there is Brion. He is the twin of the head of the Lycaeum. I like him, although he and his brother are both a little eccentric.\"");
 				say();
 				UI_remove_answer("observatory");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"I know these people least of all. The branch opened here about five years ago under the direction of a man named Rankin. A few months ago, a clerk joined him. Her name is Balayna.\"");
 				say();
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "farmers":
 				message("\"Cubolt owns the farm. He manages it with his younger brother Tolemac and their friend Morz. I am not positive, but I believe Tolemac recently joined The Fellowship.\"");
 				say();
 				UI_remove_answer("farmers");
+				fallthrough;
 
 			case "tavern":
 				message("\"Phearcy tends the bar there. He is another good person with whom thou shouldst speak about the townspeople. However, he enjoys gossip, and may be a bit single-minded.\"");
 				say();
 				UI_remove_answer("tavern");
+				fallthrough;
 
 			case "trainer":
 				message("\"The trainer is named Chad. I believe he specializes in swift, skillful fighting, with knives and swords and such. See him if thou wishest to improve thy skills.\"");
 				say();
 				UI_remove_answer("trainer");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Leaving so soon, ");
 		message(var0001);
@@ -45548,22 +47352,26 @@ void Func04A3 object#(0x4A3) ()
 				message("\"I am Phearcy, at thy service.\" He gives a short bow.");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the bartender here in Moonglow.\"");
 				say();
 				UI_add_answer(["Moonglow", "buy"]);
+				fallthrough;
 
 			case "Fellowship":
 				message("\"Oh, thou referest to this?\" he asks, pointing to his medallion. \"Thou hast not heard of The Fellowship? I strongly recommend that thou speakest with Rankin or Balayna at the branch office. The Fellowship has done many things for our town, if not for all of Britannia. I am a firm believer in neo-realism.\"");
 				say();
 				UI_add_answer("neo-realism");
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "neo-realism":
 				message("\"That is the fundamental principle of The Fellowship. It is composed of the triad of inner strength, which is strive for unity, trust thy brother, and... one other one.... Oh, yes, thou dost get what thou deservest, or some such.\"");
 				say();
 				UI_remove_answer("neo-realism");
+				fallthrough;
 
 			case "Moonglow":
 				message("\"Thou wants to know about someone in the town? Thou hast asked the right person. I know all about the residents here in Moonglow. I would be happy to tell thee about any of the shop keepers, scholars, or farmers who live here. Or art thou interested in the trainer, healer, mage, or Fellowship leaders?");
@@ -45571,18 +47379,21 @@ void Func04A3 object#(0x4A3) ()
 				UI_remove_answer("Moonglow");
 				UI_push_answers();
 				UI_add_answer(["no one", "shop keeper", "scholars", "farmers", "trainer", "healer", "mage", "leaders"]);
+				fallthrough;
 
 			case "scholars":
 				message("\"Ah, the learned scholars. I can tell thee about Brion, Nelson, Zelda, and Jillian.\"");
 				say();
 				UI_push_answers();
 				UI_add_answer(["no one", "Brion", "Nelson", "Zelda", "Jillian"]);
+				fallthrough;
 
 			case "leaders":
 				message("\"Dost thou want to know about the one in charge or his clerk?\"");
 				say();
 				UI_push_answers();
 				UI_add_answer(["no one", "charge", "clerk"]);
+				fallthrough;
 
 			case "mage":
 				message("\"Ah, yes, Mariah is very nice.\"");
@@ -45601,6 +47412,7 @@ void Func04A3 object#(0x4A3) ()
 					}
 				}
 				UI_remove_answer("mage");
+				fallthrough;
 
 			case "shop keeper":
 				message("\"She is a tailor. Lovely woman, that Carlyn. She minds the bar when I go to the Fellowship meetings at night.\"");
@@ -45614,6 +47426,7 @@ void Func04A3 object#(0x4A3) ()
 					}
 				}
 				UI_remove_answer("shop keeper");
+				fallthrough;
 
 			case "Jillian":
 				message("\"Wonderful scholar. Very nice woman. Married to Effrem.\"");
@@ -45628,6 +47441,7 @@ void Func04A3 object#(0x4A3) ()
 					}
 				}
 				UI_remove_answer("Jillian");
+				fallthrough;
 
 			case "Effrem":
 				message("\"Friendly fellow -- I like him.\"");
@@ -45646,6 +47460,7 @@ void Func04A3 object#(0x4A3) ()
 					}
 				}
 				UI_remove_answer("Effrem");
+				fallthrough;
 
 			case "trainer":
 				message("\"Chad is a friendly fellow -- I like him.\"");
@@ -45659,6 +47474,7 @@ void Func04A3 object#(0x4A3) ()
 					}
 				}
 				UI_remove_answer("trainer");
+				fallthrough;
 
 			case "farmers":
 				message("\"Tolemac and Cubolt are brothers. With Morz's help, they run a farm.\"");
@@ -45672,6 +47488,7 @@ void Func04A3 object#(0x4A3) ()
 					}
 				}
 				UI_remove_answer("farmers");
+				fallthrough;
 
 			case "healer":
 				message("\"Friendly fellow -- I like him. His name is Elad.\"");
@@ -45690,6 +47507,7 @@ void Func04A3 object#(0x4A3) ()
 					}
 				}
 				UI_remove_answer("healer");
+				fallthrough;
 
 			case "Nelson":
 				message("\"He is Brion's twin brother.\"");
@@ -45703,16 +47521,19 @@ void Func04A3 object#(0x4A3) ()
 					}
 				}
 				UI_remove_answer("Nelson");
+				fallthrough;
 
 			case "charge":
 				message("\"Rankin is in charge of the entire local branch. If thou hast any questions about The Fellowship, he can answer them.\"");
 				say();
 				UI_remove_answer("charge");
+				fallthrough;
 
 			case "clerk":
 				message("\"If thou hast any questions about The Fellowship, Balayna can answer them.\"");
 				say();
 				UI_remove_answer("clerk");
+				fallthrough;
 
 			case "Brion", "Zelda":
 				if (gflags[0x01D9])
@@ -45727,10 +47548,12 @@ void Func04A3 object#(0x4A3) ()
 					var0004 = true;
 					UI_remove_answer(["Brion", "Zelda"]);
 				}
+				fallthrough;
 
 			case "no one":
 				UI_pop_answers();
 				UI_add_answer("bye");
+				fallthrough;
 
 			case "buy":
 				message("\"Food or drink, ");
@@ -45740,20 +47563,22 @@ void Func04A3 object#(0x4A3) ()
 				UI_push_answers();
 				UI_add_answer(["food", "drink"]);
 				UI_remove_answer("buy");
+				fallthrough;
 
 			case "food":
 				Func08CB();
 				UI_pop_answers();
 				UI_remove_answer("food");
+				fallthrough;
 
 			case "drink":
 				Func08CC();
 				UI_pop_answers();
 				UI_remove_answer("drink");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Remember! Tell them thou didst eat at the Friendly Knave!\"*");
 		say();
@@ -45812,6 +47637,7 @@ void Func04A4 object#(0x4A4) ()
 				message(".");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I travel the world in search of rare and unique items to sell to museums. I am not a resident of Moonglow.\"");
@@ -45821,6 +47647,7 @@ void Func04A4 object#(0x4A4) ()
 				{
 					UI_add_answer("crystal");
 				}
+				fallthrough;
 
 			case "travel":
 				message("\"I have been all over Britannia, ");
@@ -45829,6 +47656,7 @@ void Func04A4 object#(0x4A4) ()
 				say();
 				UI_add_answer("residents");
 				UI_remove_answer("travel");
+				fallthrough;
 
 			case "residents":
 				message("\"'Twas a joke, ");
@@ -45836,6 +47664,7 @@ void Func04A4 object#(0x4A4) ()
 				message(".\"");
 				say();
 				UI_remove_answer("residents");
+				fallthrough;
 
 			case "items":
 				message("\"I have found many odd artifacts. Many of the things thou hast seen in The Music Hall and the Lycaeum have been brought to them by me.\"");
@@ -45852,12 +47681,14 @@ void Func04A4 object#(0x4A4) ()
 					}
 				}
 				UI_remove_answer("items");
+				fallthrough;
 
 			case "Nelson":
 				message("\"He is in charge of the Lycaeum. He loves trinkets and rarities.\"");
 				say();
 				var0002 = true;
 				UI_remove_answer("Nelson");
+				fallthrough;
 
 			case "Moonglow":
 				message("\"I am afraid, ");
@@ -45869,12 +47700,14 @@ void Func04A4 object#(0x4A4) ()
 				UI_remove_answer("Moonglow");
 				UI_add_answer(["people", "Penni"]);
 				gflags[0x01DE] = true;
+				fallthrough;
 
 			case "people":
 				message("I have come to know the bartender and the healer.\"");
 				say();
 				UI_remove_answer("people");
 				UI_add_answer(["bartender", "healer"]);
+				fallthrough;
 
 			case "bartender":
 				message("\"Phearcy is quite friendly. But he does love to gossip. He has offered me a deal whereby I might earn free meals if I can discover why Nelson's assistant reacts differently to some man, or something like that. I am not going to bother, but pray, do not tell Phearcy that!\"");
@@ -45884,16 +47717,19 @@ void Func04A4 object#(0x4A4) ()
 					UI_add_answer("Nelson");
 				}
 				UI_remove_answer("bartender");
+				fallthrough;
 
 			case "healer":
 				message("\"Elad is very generous. In fact, he is letting me sleep in one of his spare beds while I am in town. His only charge,\" he laughs, \"is the stories I tell him about mine adventures.~~\"Not a bad trade if I say so myself,\" he shrugs.");
 				say();
 				UI_remove_answer("healer");
+				fallthrough;
 
 			case "Penni":
 				message("\"She teaches close-quarter combat. Everything I needed to know to survive on my journeys I learned from her.\"");
 				say();
 				UI_remove_answer("Penni");
+				fallthrough;
 
 			case "crystal":
 				message("\"Dost thou mean this?\" He pulls a small, clear, multi-faceted gem from a pouch beneath his cloak. \"I just found this recently. I was hoping to sell it to the Lycaeum, but, alas, they have no use for it. Dost thou want it, perhaps?\" he asks, hopefully. \"I will sell it to thee for 20 gold.\"");
@@ -45934,10 +47770,10 @@ void Func04A4 object#(0x4A4) ()
 					say();
 				}
 				UI_remove_answer("crystal");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"May thy days be always pleasant, ");
 		message(var0001);
@@ -45996,26 +47832,31 @@ void Func04A5 object#(0x4A5) ()
 					say();
 					UI_add_answer(["won't tell", var0000]);
 				}
+				fallthrough;
 
 			case var0000:
 				message("\"It is good that thou didst tell me. One should always be honest in one's dealings with others. By the by, thy voice crackles too much.\"");
 				say();
 				UI_remove_answer(["won't tell", var0000]);
+				fallthrough;
 
 			case "won't tell":
 				message("\"I am sorry to see that thou art not trusting enough to reveal thy name.\" He shrugs. \"By the by, thy voice crackles too much.\"");
 				say();
 				UI_remove_answer(["won't tell", var0000]);
+				fallthrough;
 
 			case "job":
 				message("\"I,\" he says, \"am on a quest. A quest for honesty.\" He sniffs the air, and then turns to you.~~ \"By the by, thou mightest have more friends if thou didst bathe a little more often.\"");
 				say();
 				UI_add_answer(["bathed", "friends"]);
+				fallthrough;
 
 			case "bathed":
 				message("\"Yes, as in `take a bath.' I must inform thee that thou dost truly stink!\"");
 				say();
 				UI_remove_answer("bathed");
+				fallthrough;
 
 			case "friends":
 				message("\"Speaking of thy friends, I have heard that thy companion, Dupre, is a drunken sot.\"");
@@ -46033,6 +47874,7 @@ void Func04A5 object#(0x4A5) ()
 				say();
 				UI_add_answer("companions");
 				UI_remove_answer("friends");
+				fallthrough;
 
 			case "companions":
 				message("\"I am glad thou didst ask, ");
@@ -46052,6 +47894,7 @@ void Func04A5 object#(0x4A5) ()
 				say();
 				UI_add_answer("teeth");
 				UI_remove_answer("companions");
+				fallthrough;
 
 			case "teeth":
 				message("\"That is the reason for thine offensive mouth odor. I have not seen anything that yellow since the time thy fellow Shamino ran away from a battle in fear.\"");
@@ -46074,12 +47917,14 @@ void Func04A5 object#(0x4A5) ()
 				say();
 				UI_add_answer("nose");
 				UI_remove_answer("teeth");
+				fallthrough;
 
 			case "bellicose":
 				message("\"Yes, bellicose, warlike, angry. If thou dost not know that, I believe thou needest to improve thy vocabulary. Thou art too unschooled.\"");
 				say();
 				UI_remove_answer("bellicose");
 				UI_add_answer("unschooled");
+				fallthrough;
 
 			case "unschooled":
 				message("\"Trust me, ");
@@ -46095,15 +47940,16 @@ void Func04A5 object#(0x4A5) ()
 					UI_show_npc_face(0xFF5B, 0x0000);
 				}
 				UI_remove_answer("unschooled");
+				fallthrough;
 
 			case "nose":
 				message("\"Truly quite large, and not in the least bit attractive.\"");
 				say();
 				UI_remove_answer("nose");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Thou hast the manners of a pig. 'Tis not polite to break conversation so abruptly.\"*");
 		say();
@@ -46175,17 +48021,20 @@ void Func04A6 object#(0x4A6) ()
 				message("\"I am Thurston.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I operate the mill here in Paws.\"");
 				say();
 				UI_add_answer(["mill", "Paws"]);
+				fallthrough;
 
 			case "mill":
 				message("\"The local economy depends upon the mill for flour. So I ensure that the mill runs. Sometimes, I feel that keeping the wheels turning is the only reason to live.\"");
 				say();
 				UI_add_answer(["flour", "reason to live"]);
 				UI_remove_answer("mill");
+				fallthrough;
 
 			case "flour":
 				if (var0002 == 0x0007)
@@ -46241,6 +48090,7 @@ void Func04A6 object#(0x4A6) ()
 					say();
 				}
 				UI_remove_answer("flour");
+				fallthrough;
 
 			case "Paws":
 				message("\"In case thou hadst not noticed, the people who live here are not so well off as their cousins who live in Britain. In fact, we have even had a theft recently.\"");
@@ -46250,6 +48100,7 @@ void Func04A6 object#(0x4A6) ()
 				{
 					UI_add_answer("theft");
 				}
+				fallthrough;
 
 			case "thief", "theft":
 				message("\"Indeed, thou shouldst be wary, ");
@@ -46259,11 +48110,13 @@ void Func04A6 object#(0x4A6) ()
 				gflags[0x0212] = true;
 				UI_remove_answer(["theft", "thief"]);
 				UI_add_answer("snake venom");
+				fallthrough;
 
 			case "snake venom":
 				message("\"It is procured from the Silver Serpent. I believe Gargoyles used it habitually in the old days. I am not so sure what it might do to a human. Perhaps Morfin can tell thee more.\"");
 				say();
 				UI_remove_answer("snake venom");
+				fallthrough;
 
 			case "delivery":
 				if (gflags[0x021D])
@@ -46293,12 +48146,14 @@ void Func04A6 object#(0x4A6) ()
 					}
 				}
 				UI_remove_answer("delivery");
+				fallthrough;
 
 			case "reason to live":
 				message("\"I have no wife or family. I have thought about joining The Fellowship, but I refuse. I have nothing but my work, and a drink at the Salty Dog now and then.\"");
 				say();
 				UI_remove_answer("reason to live");
 				UI_add_answer(["Fellowship", "Salty Dog"]);
+				fallthrough;
 
 			case "Fellowship":
 				message("\"I know they do good work here in town, but there is just something about them that makes me uncomfortable.\"");
@@ -46311,6 +48166,7 @@ void Func04A6 object#(0x4A6) ()
 					say();
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "Salty Dog":
 				if (!gflags[0x0216])
@@ -46325,6 +48181,7 @@ void Func04A6 object#(0x4A6) ()
 					say();
 				}
 				UI_remove_answer("Salty Dog");
+				fallthrough;
 
 			case "Polly":
 				if (!gflags[0x0231])
@@ -46339,6 +48196,7 @@ void Func04A6 object#(0x4A6) ()
 					say();
 				}
 				UI_remove_answer("Polly");
+				fallthrough;
 
 			case "bye":
 labelFunc04A6_02F6:
@@ -46449,11 +48307,13 @@ void Func04A7 object#(0x4A7) ()
 				message("\"My name is Feridwyn.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I run the Fellowship shelter with my wife Brita and my son Garritt here in Paws.\"");
 				say();
 				UI_add_answer(["Fellowship", "shelter", "Brita", "Garritt", "Paws"]);
+				fallthrough;
 
 			case "Fellowship":
 				if (!(var0001 && (!gflags[0x0006])))
@@ -46478,11 +48338,13 @@ void Func04A7 object#(0x4A7) ()
 					say();
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "shelter":
 				message("\"This is the only place in all of Britannia designed for the aid and care of the poor. It is hard work, but then one strives to be worthy of that which we wish to receive.\"");
 				say();
 				UI_remove_answer("shelter");
+				fallthrough;
 
 			case "Brita":
 				if (!gflags[0x0221])
@@ -46505,57 +48367,67 @@ void Func04A7 object#(0x4A7) ()
 					say();
 				}
 				UI_remove_answer("Brita");
+				fallthrough;
 
 			case "Garritt":
 				message("\"Thankfully, we have been able to raise our son properly by emphasizing the teachings of The Fellowship. Garritt shall not be trapped in the poverty of his surroundings. He shall be intellectually, spiritually, and morally superior. He's talented, too!\"");
 				say();
 				UI_remove_answer("Garritt");
 				UI_add_answer("talented");
+				fallthrough;
 
 			case "talented":
 				message("\"He plays the whistle panpipes extremely well for a lad his age! Brita and I are very proud. He could probably attend The Music Hall in Britain when he is older!\"");
 				say();
 				UI_remove_answer("talented");
+				fallthrough;
 
 			case "Paws":
 				message("\"As this is a small town with few privileges and little privacy, our family has come to know everyone in Paws quite well. Is there someone thou dost wish to hear about? I am well acquainted with these people.\"");
 				say();
 				UI_remove_answer("Paws");
 				UI_add_answer(["merchants", "farmers", "shelter residents", "beggars"]);
+				fallthrough;
 
 			case "merchants":
 				message("\"They would be Morfin, Andrew, Thurston, and Beverlea.\"");
 				say();
 				UI_add_answer(["Morfin", "Andrew", "Thurston", "Beverlea"]);
 				UI_remove_answer("merchants");
+				fallthrough;
 
 			case "Beverlea":
 				message("\"She is a nearly blind elderly woman who runs the antique shoppe on the east side of the river.\"");
 				say();
 				UI_remove_answer("Beverlea");
+				fallthrough;
 
 			case "farmers":
 				message("\"That would be Camille and her son Tobias.\"");
 				say();
 				UI_add_answer(["Camille", "Tobias"]);
 				UI_remove_answer("farmers");
+				fallthrough;
 
 			case "beggars":
 				message("\"Oh. Them. Komor and Fenn.\" Feridwyn rolls his eyes.");
 				say();
 				UI_add_answer(["Komor", "Fenn"]);
 				UI_remove_answer("beggars");
+				fallthrough;
 
 			case "shelter residents":
 				message("\"Our residents include Alina and her child, and Merrick.\"");
 				say();
 				UI_add_answer(["Alina", "Merrick"]);
 				UI_remove_answer("shelter residents");
+				fallthrough;
 
 			case "Alina":
 				message("\"Her husband is currently in Britain somewhere. I do not know the details. She has a small child.\"");
 				say();
 				UI_remove_answer("Alina");
+				fallthrough;
 
 			case "Elizabeth and Abraham":
 				if (!gflags[0x016B])
@@ -46570,32 +48442,38 @@ void Func04A7 object#(0x4A7) ()
 					say();
 				}
 				UI_remove_answer("Elizabeth and Abraham");
+				fallthrough;
 
 			case "Thurston":
 				message("\"Thurston owns the mill. He could do better if he ran his business with more of an eye toward profit.\"");
 				say();
 				UI_remove_answer("Thurston");
+				fallthrough;
 
 			case "Camille":
 				message("\"She's a sad woman -- a widow -- who is living in the past. 'Tis a pity, really. Fortunately her husband left her the farm which does happen to turn a profit.\"");
 				say();
 				UI_remove_answer("Camille");
+				fallthrough;
 
 			case "Merrick":
 				message("\"A splendid example of The Fellowship turning someone's life around. Presently he resides in our shelter.\"");
 				say();
 				UI_remove_answer("Merrick");
+				fallthrough;
 
 			case "Morfin":
 				message("\"Morfin is a clever and industrious member of The Fellowship. He runs the local slaughterhouse and is also a snake venom merchant.\"");
 				say();
 				UI_add_answer("snake venom");
 				UI_remove_answer("Morfin");
+				fallthrough;
 
 			case "Andrew":
 				message("\"Andrew is such a happy young man. He doth not notice the myriad of personal problems that he is afflicted with.\"");
 				say();
 				UI_remove_answer("Andrew");
+				fallthrough;
 
 			case "Tobias":
 				if (!gflags[0x0218])
@@ -46609,16 +48487,19 @@ void Func04A7 object#(0x4A7) ()
 					say();
 				}
 				UI_remove_answer("Tobias");
+				fallthrough;
 
 			case "Fenn":
 				message("\"Fenn is a beggar who refuses all aid from The Fellowship. A pathetic case. Not even his former friend Merrick can reach him any more.\"");
 				say();
 				UI_remove_answer("Fenn");
+				fallthrough;
 
 			case "Komor":
 				message("\"Komor is the most hateful man I have ever met. He is a bundle of bitterness. In all the time I have known him, Komor has never spoken a word to me that was not at best a thinly veiled insult.\"");
 				say();
 				UI_remove_answer("Komor");
+				fallthrough;
 
 			case "case solved":
 				if (gflags[0x0218] || var0002)
@@ -46632,17 +48513,20 @@ void Func04A7 object#(0x4A7) ()
 					say();
 				}
 				UI_remove_answer("case solved");
+				fallthrough;
 
 			case "snake venom":
 				message("\"Morfin, the local merchant, informs me that a quantity of silver serpent venom was stolen from him. The thief is still at large, so be wary! Of course, I do not know why anyone would want the vile substance. It is surely not good for one's health.\"");
 				say();
 				gflags[0x0212] = true;
 				UI_remove_answer("snake venom");
+				fallthrough;
 
 			case "take action":
 				message("\"I promise thee, I shall apply the necessary discipline to my son to insure that this bad habit he has picked up from the local riffraff will not trouble this community again.\"");
 				say();
 				UI_remove_answer("take action");
+				fallthrough;
 
 			case "found venom":
 				if (!gflags[0x0218])
@@ -46656,17 +48540,18 @@ void Func04A7 object#(0x4A7) ()
 					say();
 				}
 				UI_remove_answer("found venom");
+				fallthrough;
 
 			case "Garritt caught":
 				message("\"Thou dost say my son has admitted to stealing the venom?! I do not know what to say. My thanks, Avatar, for uncovering the truth.\"");
 				say();
 				UI_remove_answer("Garritt caught");
+				fallthrough;
 
 			case "bye":
 				message("\"Mayest thou walk with the Fellowship.\"*");
 				say();
 				abort;
-
 		}
 		if (var0003)
 		{
@@ -46732,11 +48617,13 @@ void Func04A8 object#(0x4A8) ()
 				message("\"I am Brita.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I help mine husband Feridwyn run The Fellowship's shelter in Paws.\"");
 				say();
 				UI_add_answer(["Feridwyn", "Fellowship", "shelter", "Paws"]);
+				fallthrough;
 
 			case "Feridwyn":
 				if (!gflags[0x0220])
@@ -46759,6 +48646,7 @@ void Func04A8 object#(0x4A8) ()
 					}
 				}
 				UI_remove_answer("Feridwyn");
+				fallthrough;
 
 			case "Fellowship":
 				if (!gflags[0x0006])
@@ -46772,11 +48660,13 @@ void Func04A8 object#(0x4A8) ()
 					say();
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "shelter":
 				message("\"Running the shelter is hard work for mine husband and me, but it is worth the effort to ease the suffering of those less fortunate than we.\"");
 				say();
 				UI_remove_answer("shelter");
+				fallthrough;
 
 			case "Paws":
 				message("\"We hear about everything that goes on in Paws. If I do not know about it then mine husband does. Is there anyone in particular thou dost wish to know about?\"");
@@ -46794,22 +48684,26 @@ void Func04A8 object#(0x4A8) ()
 					say();
 				}
 				UI_remove_answer("Paws");
+				fallthrough;
 
 			case "Alina":
 				message("\"Alina lives in the shelter with her baby, poor thing. Her husband is a common thief who even now sits in prison. But we shall help her get her life straightened out once we persuade her to join The Fellowship. She is not smart enough, thou knowest, to see the advantages for herself. She must be carefully instructed.\"");
 				say();
 				UI_remove_answer("Alina");
+				fallthrough;
 
 			case "Camille":
 				message("\"Camille is a farm widow. She tends to live in the past, following the old virtues and questioning the ways of The Fellowship. These country folk are so superstitious, thou knowest. It is a fault of their low intellect. She does not even notice what a hooligan her boy, Tobias, is growing up to be! Not at all like our son, Garritt.\"");
 				say();
 				UI_add_answer(["Tobias", "Garritt"]);
 				UI_remove_answer("Camille");
+				fallthrough;
 
 			case "Tobias":
 				message("\"A simply wretched little urchin. Always sulking. But then, one must realize that he has no father to discipline him properly.\"");
 				say();
 				UI_remove_answer("Tobias");
+				fallthrough;
 
 			case "venom found":
 				if (!gflags[0x0218])
@@ -46825,6 +48719,7 @@ void Func04A8 object#(0x4A8) ()
 					UI_add_answer("Garritt");
 				}
 				UI_remove_answer("venom found");
+				fallthrough;
 
 			case "Garritt":
 				if (!gflags[0x0218])
@@ -46839,16 +48734,19 @@ void Func04A8 object#(0x4A8) ()
 					say();
 				}
 				UI_remove_answer("Garritt");
+				fallthrough;
 
 			case "rewarded":
 				message("\"Garritt is so talented at the whistle panpipes! It is truly a gift!\"");
 				say();
 				UI_remove_answer("rewarded");
+				fallthrough;
 
 			case "Polly":
 				message("\"Polly runs the local tavern to be near people. She is a lonely soul and feels that there is simply no one who wishes for her heart. It makes me so sad to think of her. She could find all the companionship she could want if she would join The Fellowship.\"");
 				say();
 				UI_remove_answer("Polly");
+				fallthrough;
 
 			case "thief":
 				message("\"One of our members, a local merchant named Morfin, had a shipment of silver serpent venom stolen from him. Not that I care about the venom itself, but is it not shocking?\"");
@@ -46856,17 +48754,18 @@ void Func04A8 object#(0x4A8) ()
 				gflags[0x0212] = true;
 				UI_remove_answer("thief");
 				UI_add_answer("serpent venom");
+				fallthrough;
 
 			case "serpent venom":
 				message("\"I have never seen any myself. I have no idea what it does to someone, but it cannot possibly be good!\"");
 				say();
 				UI_remove_answer("serpent venom");
+				fallthrough;
 
 			case "bye":
 				message("\"Mayest thou walk with The Fellowship, Avatar.\"*");
 				say();
 				abort;
-
 		}
 	}
 	if (event == 0x0000)
@@ -46910,6 +48809,7 @@ void Func04A9 object#(0x4A9) ()
 				message("\"I am Alina.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I have none, ");
@@ -46917,11 +48817,13 @@ void Func04A9 object#(0x4A9) ()
 				message(", save for being the mother of my child. I am waiting for mine husband, Weston, to return from Britain.\"");
 				say();
 				UI_add_answer(["child", "Weston"]);
+				fallthrough;
 
 			case "child":
 				message("\"Cassie is my daughter. Just a wee babe, she is mine only joy.\"");
 				say();
 				UI_remove_answer("child");
+				fallthrough;
 
 			case "Weston":
 				if (gflags[0x00CC])
@@ -46938,6 +48840,7 @@ void Func04A9 object#(0x4A9) ()
 					UI_add_answer("stealing");
 				}
 				UI_remove_answer("Weston");
+				fallthrough;
 
 			case "stealing":
 				message("\"Mine husband is no thief, ");
@@ -46946,12 +48849,14 @@ void Func04A9 object#(0x4A9) ()
 				say();
 				UI_add_answer("eat");
 				UI_remove_answer("stealing");
+				fallthrough;
 
 			case "eat":
 				message("\"We are very poor. My baby and I are presently living in the Fellowship shelter because we have nowhere else to go.\"");
 				say();
 				UI_add_answer(["Fellowship", "shelter"]);
 				UI_remove_answer("eat");
+				fallthrough;
 
 			case "Fellowship":
 				if (!var0001)
@@ -46966,31 +48871,35 @@ void Func04A9 object#(0x4A9) ()
 					say();
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "shelter":
 				message("\"We are fortunate that we are able to live by The Fellowship's good graces, but I do not know how long we will be allowed to stay.\"");
 				say();
 				UI_add_answer("allowed");
 				UI_remove_answer("shelter");
+				fallthrough;
 
 			case "join them":
 				message("\"I cannot join The Fellowship without feeling that I am betraying mine husband. How could I become one of those who have falsely accused him? Yet, if I do not, they will not allow my child and me to live here.\"~~She sobs and covers her face with her hands. \"It is so unfair. I must choose between starvation and betrayal. If only Weston were here. I do not know what to do!\"");
 				say();
 				UI_remove_answer("join them");
+				fallthrough;
 
 			case "accused":
 				message("\"They say if I join they will attempt to free mine husband. But it was they who unjustly accused him. I cannot trust them, but I fear I may have no choice.\"");
 				say();
 				UI_remove_answer("accused");
+				fallthrough;
 
 			case "allowed":
 				message("\"They tell me the shelter is only for members of The Fellowship. Unless I join soon, I shall be asked to leave. And I have nowhere else to go.\"");
 				say();
 				UI_remove_answer("allowed");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Pleasant day to thee, ");
 		message(var0000);
@@ -47098,11 +49007,13 @@ void Func04AA object#(0x4AA) ()
 				message("\"I am Merrick.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I used to be a farmer here in Paws. Now I suppose I work for the Fellowship. I live in their shelter.\"");
 				say();
 				UI_add_answer(["farmer", "Paws", "Fellowship"]);
+				fallthrough;
 
 			case "apology":
 				message("\"I do most humbly apologize to thee, ");
@@ -47111,22 +49022,26 @@ void Func04AA object#(0x4AA) ()
 				say();
 				gflags[0x021E] = true;
 				UI_remove_answer("apology");
+				fallthrough;
 
 			case "farmer":
 				message("\"I was a farmer; of course, that was before the seven year drought. Komor, Fenn and myself were reduced to paupers.\"");
 				say();
 				UI_remove_answer("farmer");
 				UI_add_answer(["Komor", "Fenn", "paupers"]);
+				fallthrough;
 
 			case "theft solved":
 				message("\"I heard that Garritt was the one who stole the venom. Hmm! And to think I live under the same roof with the hoodlum. I shall have to guard my belongings more.\"");
 				say();
 				UI_remove_answer("theft solved");
+				fallthrough;
 
 			case "Paws":
 				message("\"I have lived here in Paws all my life. I will not leave it now. I shall never leave.\"");
 				say();
 				UI_remove_answer("Paws");
+				fallthrough;
 
 			case "Fellowship":
 				var0006 = UI_wearing_fellowship();
@@ -47141,45 +49056,52 @@ void Func04AA object#(0x4AA) ()
 				}
 				UI_remove_answer("Fellowship");
 				UI_add_answer("philosophy");
+				fallthrough;
 
 			case "philosophy":
 				Func091A();
 				UI_remove_answer("philosophy");
+				fallthrough;
 
 			case "thief":
 				message("\"I have heard that some of Morfin's venom hath been stolen. I cannot imagine who would do it, unless it was that brat that lives with the farmer widow.\"");
 				say();
 				UI_remove_answer("thief");
 				UI_add_answer(["brat", "widow"]);
+				fallthrough;
 
 			case "brat":
 				message("\"I believe his name is Tobias.\"");
 				say();
 				UI_remove_answer("brat");
+				fallthrough;
 
 			case "widow":
 				message("\"I believe her name is Camille.\"");
 				say();
 				UI_remove_answer("widow");
+				fallthrough;
 
 			case "Komor":
 				message("\"He once owned one of the largest farms in all of Britannia. He was born to wealthy parents. After he lost his farm he took to sleeping along the road. One night a gang of bullies wanted to steal his gold. He had none so they beat him until he was lame. He is a very bitter man. Tragic.\"");
 				say();
 				UI_remove_answer("Komor");
+				fallthrough;
 
 			case "Fenn":
 				message("\"Fenn was a farm laborer, and one of Komor's most trusted friends. With the farm gone Fenn just did not have any place to go or any way to live.\"");
 				say();
 				UI_remove_answer("Fenn");
+				fallthrough;
 
 			case "paupers":
 				message("\"For years Komor, Fenn and I lived off of the rubbish of others, sleeping by the side of the road. Then I found The Fellowship and my life was changed for the better. I have tried to share my newfound fortune with my friends but I fear they hate me for being more resourceful than they.\"");
 				say();
 				UI_remove_answer("paupers");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good day, ");
 		message(var0004);
@@ -47248,17 +49170,20 @@ void Func04AB object#(0x4AB) ()
 				say();
 				UI_add_answer(["Feridwyn", "Brita"]);
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am too young to learn a trade of mine own yet, but I do assist my parents in running the shelter. I hope to be a counselor in The Fellowship one day. Or a professional whistle panpipes player.\"");
 				say();
 				UI_add_answer(["shelter", "Fellowship", "panpipes"]);
+				fallthrough;
 
 			case "Feridwyn":
 				message("\"My father works for The Fellowship helping the poor people in Paws. He tries to recruit them, but most refuse.\"");
 				say();
 				UI_remove_answer("Feridwyn");
 				UI_add_answer(["Paws", "recruit", "poor people"]);
+				fallthrough;
 
 			case "Paws":
 				message("\"Actually, I do not like this town very much. The people here are all poor and the only one mine own age is Tobias.\"");
@@ -47274,11 +49199,13 @@ void Func04AB object#(0x4AB) ()
 				{
 					UI_add_answer("thief");
 				}
+				fallthrough;
 
 			case "panpipes":
 				message("\"I have been playing panpipes since I was little. I'm pretty good now, if I say so myself! I keep the whistle by my bed and practice every night before going to sleep!\"");
 				say();
 				UI_remove_answer("panpipes");
+				fallthrough;
 
 			case "Tobias":
 				if (gflags[0x0218])
@@ -47300,17 +49227,20 @@ void Func04AB object#(0x4AB) ()
 					}
 				}
 				UI_remove_answer("Tobias");
+				fallthrough;
 
 			case "recruit":
 				message("\"My father was once the head recruiter in Britain until they moved him here. I once heard him talking to mother about how The Fellowship was wasting its time here.\"");
 				say();
 				UI_remove_answer("recruit");
+				fallthrough;
 
 			case "poor people":
 				message("\"My father says that the poor people reject The Fellowship because the Triad of Inner Strength requires strength of character.\"");
 				say();
 				UI_remove_answer("poor people");
 				UI_add_answer("character");
+				fallthrough;
 
 			case "character":
 				message("\"My father says the poor are weak of character and that is why they are poor. They do not have to be. They are just too lazy to work. Dost thou agree?\"");
@@ -47335,16 +49265,19 @@ void Func04AB object#(0x4AB) ()
 					}
 				}
 				UI_remove_answer("character");
+				fallthrough;
 
 			case "Brita":
 				message("\"Oh, she is just my mother. She does whatever my father doth tell her to do.\"");
 				say();
 				UI_remove_answer("Brita");
+				fallthrough;
 
 			case "shelter":
 				message("\"Plenty of beds are available if thou wouldst like to stay in the shelter,\" he says with a condescending tone.");
 				say();
 				UI_remove_answer("shelter");
+				fallthrough;
 
 			case "Fellowship":
 				if (var0001)
@@ -47360,6 +49293,7 @@ void Func04AB object#(0x4AB) ()
 					UI_add_answer("philosophy");
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "philosophy":
 				message("\"I am also quite knowledgeable when it comes to our philosophy. We follow the Triad of Inner Strength and do let personal failures get in our way or slow us down.\"");
@@ -47378,6 +49312,7 @@ void Func04AB object#(0x4AB) ()
 					say();
 				}
 				UI_remove_answer("philosophy");
+				fallthrough;
 
 			case "found venom":
 				Func0911(0x0096);
@@ -47386,12 +49321,14 @@ void Func04AB object#(0x4AB) ()
 				gflags[0x0218] = true;
 				UI_add_answer(["planted", "parents"]);
 				UI_remove_answer("found venom");
+				fallthrough;
 
 			case "planted":
 				message("\"I stole the venom from Morfin so I could put the blame on Tobias.\"");
 				say();
 				UI_add_answer("Morfin");
 				UI_remove_answer("planted");
+				fallthrough;
 
 			case "Morfin":
 				message("\"I do not know why Morfin has it or what he does with it. I only knew that it was valuable and that it would cause everyone worry if it were stolen.\"");
@@ -47400,16 +49337,19 @@ void Func04AB object#(0x4AB) ()
 				say();
 				UI_remove_answer("Morfin");
 				UI_add_answer(["worry", "using venom?"]);
+				fallthrough;
 
 			case "using venom?":
 				message("Garritt shuffles his feet and frowns. \"Well... I tried it just once. I am sorry. I will never use it again.\"");
 				say();
 				UI_remove_answer("using venom?");
+				fallthrough;
 
 			case "worry":
 				message("\"I thought that if Tobias were accused of stealing something that everyone would notice, his mother would join The Fellowship and force him to join, too. It would improve their lives and force them to see the truth about themselves.\"");
 				say();
 				UI_remove_answer("worry");
+				fallthrough;
 
 			case "parents":
 				message("\"Wilt thou tell my parents?\"");
@@ -47436,16 +49376,17 @@ void Func04AB object#(0x4AB) ()
 					gflags[0x0219] = true;
 				}
 				UI_remove_answer("parents");
+				fallthrough;
 
 			case "thief":
 				message("\"There is a thief in this town! Our merchant Morfin had some valuable silver serpent venom stolen from him. The culprit is still free. So be wary!\"");
 				say();
 				gflags[0x0212] = true;
 				UI_remove_answer("thief");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye, then.\"*");
 		say();
@@ -47609,33 +49550,39 @@ void Func04AC object#(0x4AC) ()
 				message("\"My name is Morfin.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am a merchant who operates one of the most thriving businesses in Paws, which includes the slaughterhouse.\"");
 				say();
 				UI_add_answer(["merchant", "Paws", "slaughterhouse"]);
+				fallthrough;
 
 			case "merchant":
 				message("\"Oh, I sell a little of this and that, here and there. Wherever there is a demand, I try to supply it.\"");
 				say();
 				UI_add_answer(["demand", "supply"]);
 				UI_remove_answer("merchant");
+				fallthrough;
 
 			case "demand":
 				message("\"There is quite a demand for the venom of the silver serpent in certain areas, for instance.\"");
 				say();
 				UI_remove_answer("demand");
+				fallthrough;
 
 			case "supply":
 				message("\"I keep a small stock of silver serpent venom from time to time which I sell to the apothecary in Britannia for a modest profit. The government is trying to control sales of it until they can determine how dangerous the effects are.\"");
 				say();
 				UI_remove_answer("supply");
 				UI_add_answer(["apothecary", "effects"]);
+				fallthrough;
 
 			case "apothecary":
 				message("\"His name is Kessler.\"");
 				say();
 				UI_remove_answer("apothecary");
+				fallthrough;
 
 			case "Paws":
 				message("\"I do suppose my ventures are profitable enough for me to afford to move to Britain, but things are so much less expensive here. Of course, the theft has me a bit wary.~~\"If thou dost wish to know more about the people here, speak to the couple who run the Fellowship shelter, Feridwyn and Brita.\"");
@@ -47645,12 +49592,14 @@ void Func04AC object#(0x4AC) ()
 				{
 					UI_add_answer("theft");
 				}
+				fallthrough;
 
 			case "slaughterhouse":
 				message("\"I take it thou hast noticed the smell. If so I do apologize.\" He shrugs his shoulders, grinning, and holds his palms upward.~~\"I think of it as the smell of success. Thou mayest purchase some meat if thou so wishest.\"");
 				say();
 				UI_add_answer("buy meat");
 				UI_remove_answer("slaughterhouse");
+				fallthrough;
 
 			case "buy meat":
 				if (var0005 == 0x0007)
@@ -47666,11 +49615,13 @@ void Func04AC object#(0x4AC) ()
 					say();
 				}
 				UI_remove_answer("buy meat");
+				fallthrough;
 
 			case "nothing":
 				message("\"Some other time, perhaps.\"");
 				say();
 				UI_pop_answers();
+				fallthrough;
 
 			case "mutton":
 				message("\"'Twill cost thee 3 gold each. Still interested?\"");
@@ -47713,6 +49664,7 @@ void Func04AC object#(0x4AC) ()
 					say();
 				}
 				UI_remove_answer("mutton");
+				fallthrough;
 
 			case "beef":
 				message("\"'Twill cost thee 2 gold each. Still interested?\"");
@@ -47755,6 +49707,7 @@ void Func04AC object#(0x4AC) ()
 					say();
 				}
 				UI_remove_answer("beef");
+				fallthrough;
 
 			case "ham":
 				message("\"'Twill cost thee 4 gold each. Still interested?\"");
@@ -47797,6 +49750,7 @@ void Func04AC object#(0x4AC) ()
 					say();
 				}
 				UI_remove_answer("ham");
+				fallthrough;
 
 			case "venom":
 				message("\"A terrible crime, causing me no small amount of monetary distress. It has caused the surrounding community to worry about their possessions as well.\"");
@@ -47825,6 +49779,7 @@ void Func04AC object#(0x4AC) ()
 					say();
 				}
 				UI_remove_answer("venom");
+				fallthrough;
 
 			case "theft":
 				message("\"Thou art a stranger in Paws. Beware the thief who roams this town! The culprit has stolen a quantity of my valuable silver serpent venom!\"");
@@ -47832,6 +49787,7 @@ void Func04AC object#(0x4AC) ()
 				gflags[0x0212] = true;
 				UI_remove_answer("theft");
 				UI_add_answer("venom");
+				fallthrough;
 
 			case "apology":
 				message("\"I do apologize for my rudeness earlier, ");
@@ -47840,6 +49796,7 @@ void Func04AC object#(0x4AC) ()
 				say();
 				UI_remove_answer("apology");
 				gflags[0x0235] = true;
+				fallthrough;
 
 			case "ledger":
 				message("You tell Morfin that you have seen his ledger. \"Wait, ");
@@ -47848,23 +49805,27 @@ void Func04AC object#(0x4AC) ()
 				say();
 				UI_add_answer(["sell", "law"]);
 				UI_remove_answer("ledger");
+				fallthrough;
 
 			case "sell":
 				message("\"My supply comes from some old friends in Buccaneer's Den. Where they get it, who can say?\"");
 				say();
 				UI_remove_answer("sell");
+				fallthrough;
 
 			case "law":
 				message("\"I have a notarized contract with the Britannian Mining Company. They use it to keep their gargoyles working longer hours. It seems gargoyles have a greater resistance to the effects of Silver Serpent Venom. Poor devils.\" He grins maliciously at his own joke.");
 				say();
 				UI_remove_answer("law");
 				UI_add_answer("effects");
+				fallthrough;
 
 			case "effects":
 				message("\"They are widely known. Silver serpent venom is a reagent that, when ingested in small doses, temporarily enhances one's physical strength, stamina and quickness along with bringing a feeling of euphoria.~~\"After the effects\twear off, the subject feels quite drained. This tends to make them want to take it again.~~\"Prolonged use in such a fashion will bring about a condition that deteriorates the skin, eventually causing it to rot away.~~\"Finally, too great a dose, or too great an accumulation of doses, is fatal, as the venom is a deadly poison.~~\"It may very well have some healing properties when used in other ways we have yet to discover, but any user of the venom should not do so without caution.\"");
 				say();
 				UI_remove_answer("effects");
 				UI_add_answer("user");
+				fallthrough;
 
 			case "user", "Tobias stole venom":
 				if (gflags[0x0213])
@@ -47883,6 +49844,7 @@ void Func04AC object#(0x4AC) ()
 					say();
 				}
 				UI_remove_answer("user");
+				fallthrough;
 
 			case "Garritt":
 				message("\"Perhaps thou shouldst make a search of Garritt's belongings! Which reminds me-- I saw him earlier playing near the slaughterhouse. He dropped this key. Perhaps it opens something... significant.\"");
@@ -47900,6 +49862,7 @@ void Func04AC object#(0x4AC) ()
 					say();
 				}
 				UI_remove_answer("Garritt");
+				fallthrough;
 
 			case "return venom":
 				var001A = UI_remove_party_items(0x0001, 0x0289, 0xFE99, 0xFE99, true);
@@ -47919,10 +49882,10 @@ void Func04AC object#(0x4AC) ()
 					say();
 				}
 				UI_remove_answer("return venom");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good day to thee.\"*");
 		say();
@@ -47989,22 +49952,26 @@ void Func04AD object#(0x4AD) ()
 				message("\"My name is Beverlea.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"Why, I run the House of Items here in Paws.\"");
 				say();
 				UI_add_answer(["House of Items", "Paws"]);
+				fallthrough;
 
 			case "House of Items":
 				message("\"It is a shop that sells antiques and previously used items. Running this shop allows me to remain youthful and active. It is heartening to sell things to the poor people of this town that they might not otherwise be able to\tafford.\"");
 				say();
 				UI_remove_answer("House of Items");
 				UI_add_answer("buy");
+				fallthrough;
 
 			case "Paws":
 				message("\"Here in Paws the people have very little money, but it matters not, because they care for each other.\"");
 				say();
 				UI_remove_answer("Paws");
+				fallthrough;
 
 			case "buy":
 				if (var0002 == 0x0007)
@@ -48019,12 +49986,14 @@ void Func04AD object#(0x4AD) ()
 					say();
 				}
 				UI_remove_answer("buy");
+				fallthrough;
 
 			case "many fine things":
 				message("\"Let me see... There is a cradle for sale. A rocking horse. A bell. An hourglass. A spittoon. A lute. A sextant... Since I am moving a bit more slowly these days, I let my customers help themselves and take what they have bought. Providing they pay me first, of course. I do trust folks to pay me the correct amount. I am nearly blind, I am afraid.\"");
 				say();
 				UI_remove_answer("many fine things");
 				UI_add_answer(["cradle", "rocking horse", "bell", "hourglass", "spittoon", "lute", "sextant"]);
+				fallthrough;
 
 			case "cradle":
 				message("\"That old cradle was the cradle used to rock Gorn the Barbarian to sleep at night when he was just a baby. Thou canst see that there is a crack in its side proving that even as a child Gorn was a strong little tyke. I can let thee take it for ten gold coins. Dost thou wish to buy the cradle?\"");
@@ -48050,6 +50019,7 @@ void Func04AD object#(0x4AD) ()
 					say();
 				}
 				UI_remove_answer("cradle");
+				fallthrough;
 
 			case "rocking horse":
 				message("\"This is the rocking horse that once belonged to a little girl from Britain named Diane. She grew to be one of the finest equestriennes to ever sit upon a horse. I could let thee have this rare and unusual piece for twelve gold. Dost thou wish to buy it?\"");
@@ -48075,6 +50045,7 @@ void Func04AD object#(0x4AD) ()
 					say();
 				}
 				UI_remove_answer("rocking horse");
+				fallthrough;
 
 			case "bell":
 				message("\"That bell came from the High Court of Justice in Yew. It was rung to announce that court was in session. I can sell thee that interesting conversation piece for six gold coins.\tDost thou wish to buy it?\"");
@@ -48100,6 +50071,7 @@ void Func04AD object#(0x4AD) ()
 					say();
 				}
 				UI_remove_answer("bell");
+				fallthrough;
 
 			case "hourglass":
 				if (var0003)
@@ -48134,6 +50106,7 @@ void Func04AD object#(0x4AD) ()
 					say();
 				}
 				UI_remove_answer("hourglass");
+				fallthrough;
 
 			case "spittoon":
 				message("\"I also have an old spittoon. It was once used by... a great many people. Thou mayest have it for a gold piece. Take it! Please!\"");
@@ -48160,6 +50133,7 @@ void Func04AD object#(0x4AD) ()
 					say();
 				}
 				UI_remove_answer("spittoon");
+				fallthrough;
 
 			case "lute":
 				message("\"I have a lute for sale that once belonged to a travelling bard who lost it in a game of dice. I am asking twenty gold coins for it. A song! Wouldst thou like to buy it?\"");
@@ -48185,6 +50159,7 @@ void Func04AD object#(0x4AD) ()
 					say();
 				}
 				UI_remove_answer("lute");
+				fallthrough;
 
 			case "sextant":
 				message("\"I have a sextant that was sold by the world-famous shipwright Owen of Minoc. They are going to be building a monument to him, I understand. Anyway, the sailor who sold it to me had just suffered some harrowing experience out on the waters. He said when he sold it to me that he was going to retire. He obviously did not realize the value of this item. But I can let thee have it for twenty gold pieces. Dost thou wish to buy it?\"");
@@ -48210,10 +50185,10 @@ void Func04AD object#(0x4AD) ()
 					say();
 				}
 				UI_remove_answer("sextant");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"A good day to thee, ");
 		message(var0000);
@@ -48296,6 +50271,7 @@ void Func04AE object#(0x4AE) ()
 				message("\"My name is Komor.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am a dancer, ");
@@ -48312,12 +50288,14 @@ void Func04AE object#(0x4AE) ()
 					UI_remove_npc_face(0xFF51);
 					UI_show_npc_face(0xFF52, 0x0000);
 				}
+				fallthrough;
 
 			case "beggar":
 				message("\"I was not always a beggar. Like Fenn and Merrick, I used to be a farmer, too. But times got worse, and times are always bad in Paws.\"");
 				say();
 				UI_add_answer(["Fenn", "Merrick", "Paws", "give"]);
 				UI_remove_answer("beggar");
+				fallthrough;
 
 			case "Fenn":
 				message("\"Fenn and me are chums and will be to the day we die. We share in each other's vast expanses of wealth.\"*");
@@ -48333,6 +50311,7 @@ void Func04AE object#(0x4AE) ()
 					UI_remove_npc_face(0xFF51);
 					UI_show_npc_face(0xFF52, 0x0000);
 				}
+				fallthrough;
 
 			case "chums":
 				message("\"Fenn and me have been friends since we were little tiny babes.\"");
@@ -48349,43 +50328,51 @@ void Func04AE object#(0x4AE) ()
 					UI_show_npc_face(0xFF52, 0x0000);
 				}
 				UI_remove_answer("chums");
+				fallthrough;
 
 			case "wealth":
 				message("\"Yea verily, Fenn and I share all that we own. Which, in its totality, is the clothes on our backs and the snot in our\tthroats!\"");
 				say();
 				UI_remove_answer("wealth");
+				fallthrough;
 
 			case "Merrick":
 				message("\"A royal rotten egg, he is. Merrick turned his back on us and now spends each night in a warm, cozy bed. Which is more than either one of us have had for some time.\"");
 				say();
 				UI_add_answer(["turned his back", "bed"]);
 				UI_remove_answer("Merrick");
+				fallthrough;
 
 			case "Paws":
 				message("\"A veritable wonderland, is it not?\"");
 				say();
 				UI_remove_answer("Paws");
+				fallthrough;
 
 			case "turned his back":
 				message("\"The only thing worse than this miserable existence is having Merrick sniff around and try to recruit us! The bloody parasite!\"");
 				say();
 				UI_remove_answer("turned his back");
+				fallthrough;
 
 			case "bed":
 				message("\"Merrick sleeps in the shelter run by The Fellowship. They feed him, too. He had to join before they would help him.\"");
 				say();
 				UI_add_answer(["shelter", "Fellowship"]);
 				UI_remove_answer("bed");
+				fallthrough;
 
 			case "shelter":
 				message("\"The shelter? 'Tis the large building filled with fawning hypocrites. Thou shouldst have little trouble finding it!\"");
 				say();
 				UI_remove_answer("shelter");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"We could have joined, but they are a foul lot. Anybody acting so bloody nice must be up to no good. There are some compromises we will not make, even to survive.\"");
 				say();
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "give":
 				message("\"Wilt thou give me a bit of money?\"");
@@ -48426,10 +50413,10 @@ void Func04AE object#(0x4AE) ()
 					say();
 				}
 				UI_remove_answer("give");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Hold thine head high, ");
 		message(var0000);
@@ -48518,6 +50505,7 @@ void Func04AF object#(0x4AF) ()
 				message(".\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "thief":
 				if (gflags[0x0218])
@@ -48540,6 +50528,7 @@ void Func04AF object#(0x4AF) ()
 					}
 				}
 				UI_remove_answer("thief");
+				fallthrough;
 
 			case "job":
 				message("He looks away from you shamefully. \"I have none, ");
@@ -48547,12 +50536,14 @@ void Func04AF object#(0x4AF) ()
 				message(".\"");
 				say();
 				UI_add_answer("none");
+				fallthrough;
 
 			case "none":
 				message("\"I used to be a farmer in more prosperous times. I used to work with Komor and Merrick.\"");
 				say();
 				UI_add_answer(["Komor", "Merrick", "give"]);
 				UI_remove_answer("none");
+				fallthrough;
 
 			case "Komor":
 				message("\"He is my best friend and the bravest man I know.\"");
@@ -48569,46 +50560,54 @@ void Func04AF object#(0x4AF) ()
 					UI_show_npc_face(0xFF51, 0x0000);
 				}
 				UI_remove_answer("Komor");
+				fallthrough;
 
 			case "Merrick":
 				message("\"Merrick joined The Fellowship so he could live in their shelter, the poor sod.\"");
 				say();
 				UI_add_answer(["shelter", "Fellowship"]);
 				UI_remove_answer("Merrick");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"If The Fellowship truly wants to help people, why would they let us starve just because we do not want to join? They cannot answer that one!\"");
 				say();
 				UI_add_answer("starve");
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "shelter":
 				message("\"Hmf! If thou art so unfortunate as to want to live there, thou wouldst do better on the corner with Komor and I.\"");
 				say();
 				UI_remove_answer("shelter");
 				UI_add_answer("corner");
+				fallthrough;
 
 			case "corner":
 				message("\"Even when pockets are light, there is still some mercy left in this world. Begging for money is not a proud profession, but there are worse ones.\"");
 				say();
 				UI_add_answer("worse");
 				UI_remove_answer("corner");
+				fallthrough;
 
 			case "worse":
 				message("\"At least we do not have to do what Merrick does. He recruits for The Fellowship.\"");
 				say();
 				UI_remove_answer("worse");
+				fallthrough;
 
 			case "starve":
 				message("\"Do not worry. We shall not starve. Camille sends her son Tobias with food and clothing for us every so often.\"");
 				say();
 				UI_add_answer(["Camille", "Tobias"]);
 				UI_remove_answer("starve");
+				fallthrough;
 
 			case "Camille":
 				message("\"Camille is a good woman. She lives at the farm bordering the dairy.\"");
 				say();
 				UI_remove_answer("Camille");
+				fallthrough;
 
 			case "Tobias":
 				message("\"He is a fine lad, always willing to give us a hand. Unlike that rude urchin, Garritt.\"");
@@ -48619,23 +50618,27 @@ void Func04AF object#(0x4AF) ()
 				}
 				UI_add_answer("Garritt");
 				UI_remove_answer("Tobias");
+				fallthrough;
 
 			case "venom":
 				message("\"Tobias would not become involved with that sort of affair. I know for certain he is no thief.\"");
 				say();
 				UI_remove_answer("venom");
 				UI_add_answer("involved");
+				fallthrough;
 
 			case "involved":
 				message("\"If thou art seeking out this venom thief, thou wouldst do well to ask Andrew about it.\"");
 				say();
 				UI_add_answer("Andrew");
 				UI_remove_answer("involved");
+				fallthrough;
 
 			case "Andrew":
 				message("\"Andrew owns the dairy and lives across from Camille's farm and the slaughterhouse. He might have seen something.\"");
 				say();
 				UI_remove_answer("Andrew");
+				fallthrough;
 
 			case "Garritt":
 				message("\"He is the son of Feridwyn and Brita, who run the shelter. Garritt crosses the road to avoid us.\"");
@@ -48652,6 +50655,7 @@ void Func04AF object#(0x4AF) ()
 					UI_show_npc_face(0xFF51, 0x0000);
 				}
 				UI_remove_answer("Garritt");
+				fallthrough;
 
 			case "give":
 				message("\"Wilt thou give me a bit of money?\"");
@@ -48691,10 +50695,10 @@ void Func04AF object#(0x4AF) ()
 					say();
 				}
 				UI_remove_answer("give");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good fortune to ye, ");
 		message(var0000);
@@ -48793,17 +50797,20 @@ void Func04B0 object#(0x4B0) ()
 				message("?\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the owner and proprietor of the dairy here in Paws.\"");
 				say();
 				UI_add_answer(["dairy", "Paws"]);
+				fallthrough;
 
 			case "dairy":
 				message("\"Yes, I sell milk and cheese. Thou mayest find the dairy between Camille's farm and the slaughterhouse.\"");
 				say();
 				UI_remove_answer("dairy");
 				UI_add_answer(["Camille", "slaughterhouse", "milk", "cheese"]);
+				fallthrough;
 
 			case "milk":
 				if (var0002 == 0x0007)
@@ -48855,6 +50862,7 @@ void Func04B0 object#(0x4B0) ()
 					say();
 				}
 				UI_remove_answer("milk");
+				fallthrough;
 
 			case "cheese":
 				if (var0002 == 0x0007)
@@ -48905,27 +50913,32 @@ void Func04B0 object#(0x4B0) ()
 					say();
 				}
 				UI_remove_answer("cheese");
+				fallthrough;
 
 			case "Camille":
 				message("\"Camille is a good woman. She is still an advocate of the old virtues. She runs the farm by herself. Well, with the help of her son, Tobias.\"");
 				say();
 				UI_remove_answer("Camille");
 				UI_add_answer("Tobias");
+				fallthrough;
 
 			case "Tobias":
 				message("\"A rather defensive young lad, I cannot say that I know that much about him.\"");
 				say();
 				UI_remove_answer("Tobias");
+				fallthrough;
 
 			case "Paws":
 				message("\"Of course everyone is up in arms about this business concerning the missing venom.\"");
 				say();
 				UI_remove_answer("Paws");
+				fallthrough;
 
 			case "venom":
 				message("\"It could be hidden anywhere. With all the trade that occurs in this town, it would be easy to hide. I do not know much else about the substance. Perhaps Morfin himself would know what kinds of effects it might produce.\"");
 				say();
 				UI_remove_answer("venom");
+				fallthrough;
 
 			case "thief":
 				message("\"Be wary, for there is a thief in this town! Some silver serpent venom was stolen from Morfin.\"");
@@ -48937,11 +50950,13 @@ void Func04B0 object#(0x4B0) ()
 				{
 					UI_add_answer("Morfin");
 				}
+				fallthrough;
 
 			case "theft solved":
 				message("\"Thou hast put the people in our town at ease by finding the culprit!\"");
 				say();
 				UI_remove_answer("theft solved");
+				fallthrough;
 
 			case "slaughterhouse":
 				message("\"The slaughterhouse is run by Morfin, the merchant. He is always busy, coming and going at all hours, sometimes carrying things.\"");
@@ -48951,6 +50966,7 @@ void Func04B0 object#(0x4B0) ()
 				{
 					UI_add_answer("Morfin");
 				}
+				fallthrough;
 
 			case "Morfin":
 				message("\"He bought the slaughterhouse a few years ago, soon after he joined The Fellowship. I knew the previous owner.\"");
@@ -48958,11 +50974,13 @@ void Func04B0 object#(0x4B0) ()
 				UI_remove_answer("Morfin");
 				UI_add_answer("previous owner");
 				var0003 = true;
+				fallthrough;
 
 			case "previous owner":
 				message("\"I was just a lad when I first saw the old slaughterhouse. The old man who owned it even showed me the storeroom in there once. The door to it is locked. I think Morfin has the key somewhere in his house.\"");
 				say();
 				UI_remove_answer("previous owner");
+				fallthrough;
 
 			case "bye":
 labelFunc04B0_0332:
@@ -49051,6 +51069,7 @@ void Func04B1 object#(0x4B1) ()
 				say();
 				gflags[0x022A] = true;
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I run a small farm here in Paws with my son, Tobias. I am a widow.\"");
@@ -49060,12 +51079,14 @@ void Func04B1 object#(0x4B1) ()
 				{
 					UI_add_answer("farm");
 				}
+				fallthrough;
 
 			case "farm":
 				message("\"I grow a few crops. Especially carrots and wheat.\"");
 				say();
 				UI_add_answer(["carrots", "wheat"]);
 				UI_remove_answer("farm");
+				fallthrough;
 
 			case "carrots":
 				message("\"I believe my carrots are especially tasty. Wouldst thou like to purchase some? They would only cost thee one gold for three.\"");
@@ -49116,6 +51137,7 @@ void Func04B1 object#(0x4B1) ()
 					say();
 				}
 				UI_remove_answer("carrot");
+				fallthrough;
 
 			case "wheat":
 				message("\"That reminds me. This package needs to be taken to the mill today. If thou canst deliver it for me, Thurston will pay thee for it. Wilt thou?\"");
@@ -49142,12 +51164,14 @@ void Func04B1 object#(0x4B1) ()
 					say();
 				}
 				UI_remove_answer("wheat");
+				fallthrough;
 
 			case "Paws":
 				message("\"Life is hard here in Paws. It is a town of poor people with all the ills that poverty brings. At least The Fellowship brings us some relief.\"");
 				say();
 				UI_add_answer(["ills", "Fellowship"]);
 				UI_remove_answer("Paws");
+				fallthrough;
 
 			case "Tobias":
 				if (gflags[0x0213])
@@ -49158,17 +51182,20 @@ void Func04B1 object#(0x4B1) ()
 				message("\"He is basically a good boy. He works hard and misses his father.\"");
 				say();
 				UI_remove_answer("Tobias");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"I am not sure whether I trust The Fellowship. It has undoubtedly done some good things in this world so it cannot be all bad. Or, at least, the people in it cannot be all bad.\"");
 				say();
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "ills":
 				message("\"Recently, our town has been plagued by a thief.\"");
 				say();
 				UI_add_answer("thief");
 				UI_remove_answer("ills");
+				fallthrough;
 
 			case "thief":
 				if (!gflags[0x0213])
@@ -49183,20 +51210,22 @@ void Func04B1 object#(0x4B1) ()
 					say();
 				}
 				UI_remove_answer("thief");
+				fallthrough;
 
 			case "Feridwyn":
 				message("\"That man Feridwyn knows that I do not trust The Fellowship, and for\tthat he considers me his personal enemy. I do not know why he would seek to attack me through my son but he must not be allowed to succeed.\"");
 				say();
 				UI_remove_answer("Feridwyn");
+				fallthrough;
 
 			case "Tobias cleared":
 				message("You tell Camille how you discovered that Garritt was really the thief and that her son Tobias has been cleared. \"I want to thank thee for finding the thief in our town and clearing my son's name. It does mine heart good to see that the Avatar has returned to us once again and that thou dost care enough about the people of Britannia to help solve our local troubles here in Paws. Again Avatar, I thank thee.\"");
 				say();
 				UI_remove_answer("Tobias cleared");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Pleasant journey, Avatar.\"*");
 		say();
@@ -49274,11 +51303,13 @@ void Func04B2 object#(0x4B2) ()
 					say();
 				}
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am too young to have a job. I just help my mother on the farm.\"");
 				say();
 				UI_add_answer(["mother", "farm"]);
+				fallthrough;
 
 			case "mother":
 				message("\"Her name is Camille. She speaks of thee. Or rather she speaks of the Avatar, is what I meant to say. Some people in town think she is mad because she still believes in the Eight Virtues.\"");
@@ -49295,6 +51326,7 @@ void Func04B2 object#(0x4B2) ()
 				}
 				UI_remove_answer("mother");
 				UI_add_answer(["Avatar", "Eight Virtues"]);
+				fallthrough;
 
 			case "Avatar":
 				message("\"Art thou truly the Avatar?\"");
@@ -49327,12 +51359,14 @@ void Func04B2 object#(0x4B2) ()
 					}
 				}
 				UI_remove_answer("Avatar");
+				fallthrough;
 
 			case "Eight Virtues":
 				message("\"My mother once took me to the Shrine of Sacrifice when I was younger. That was soon after my father died so I do not remember it very well.~~I do not think it is there anymore, for she never talks about going back.~~I think that perhaps she does not want to mention it because there are so many in town who belong to The Fellowship. And because it makes her sad.\"");
 				say();
 				UI_remove_answer("Eight Virtues");
 				UI_add_answer("Fellowship");
+				fallthrough;
 
 			case "farm":
 				message("\"My mother grows grain.\"");
@@ -49354,56 +51388,66 @@ void Func04B2 object#(0x4B2) ()
 				}
 				UI_remove_answer("farm");
 				UI_add_answer(["grain", "shelter"]);
+				fallthrough;
 
 			case "grain":
 				message("\"She sells grain to Thurston the miller from time to time so that we may go to the pub or buy milk at the dairy every once in a while, but we usually just grow crops to keep ourselves fed.\"");
 				say();
 				UI_add_answer(["Thurston", "dairy"]);
 				UI_remove_answer("grain");
+				fallthrough;
 
 			case "shelter":
 				message("\"It's that place just south of here. It's run by The Fellowship.\"");
 				say();
 				UI_remove_answer("shelter");
 				UI_add_answer("Fellowship");
+				fallthrough;
 
 			case "Thurston":
 				message("\"He is one of the few people in town that I like. He is nice to us.\"");
 				say();
 				UI_remove_answer("Thurston");
+				fallthrough;
 
 			case "dairy":
 				message("\"The dairy is south of the shelter. Andrew -- the man who runs the dairy -- his father was friends with my father.\"");
 				say();
 				UI_remove_answer("dairy");
+				fallthrough;
 
 			case "Fellowship":
 				message("For the first time he looks you in the eye. \"I hate The Fellowship! The only other person in town mine own age is that cretin Garritt and it is all he ever talks about! He is always trying to convince my mother to join.\" He clenches his fist angrily. \"Please do not mention them again.\"");
 				say();
 				UI_add_answer(["Garritt", "mother join?"]);
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "mother join?":
 				message("\"Those bloody Fellowship people know that everyone is never more than a meal away from being penniless. They say that they want us to join immediately because the shelter is intended to help only Fellowship members. If we ever need to live there they may have to turn us away in favor of other Fellowship members.\"");
 				say();
 				UI_remove_answer("mother join?");
+				fallthrough;
 
 			case "thief":
 				message("\"There is a thief running free in Paws! He stole silver serpent venom from Morfin, owner of the slaughterhouse. No one knows who he is.\"");
 				say();
 				gflags[0x0212] = true;
 				UI_remove_answer("thief");
+				fallthrough;
 
 			case "venom":
 				message("\"I do not know anything about the stolen venom. I am falsely accused!\"");
 				say();
 				UI_remove_answer("venom");
 				UI_add_answer("falsely accused");
+				fallthrough;
 
 			case "falsely accused":
 				message("\"That is right! Garritt did it. I just know it. He was in my room the other day when I came in from the fields. He said he was looking for a ball, but I do not believe him. Thou canst believe me or not, I do not care. But if thou art truly the Avatar, thou wilt know I am telling the truth.\"");
 				say();
 				UI_remove_answer("falsely accused");
+				fallthrough;
 
 			case "Garritt":
 				if (gflags[0x0218])
@@ -49427,10 +51471,10 @@ void Func04B2 object#(0x4B2) ()
 					}
 				}
 				UI_remove_answer("Garritt");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		if (gflags[0x0218])
 		{
@@ -49517,6 +51561,7 @@ void Func04B3 object#(0x4B3) ()
 				message("\"I am Polly. It is a pleasure to meet thee.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"The owner and proprietor of the Salty Dog, the finest eating and drinking establishment in all of Paws, at thy service.\"");
@@ -49531,10 +51576,12 @@ void Func04B3 object#(0x4B3) ()
 					say();
 					UI_add_answer("Paws");
 				}
+				fallthrough;
 
 			case "buy":
 				Func08CD();
 				UI_remove_answer("buy");
+				fallthrough;
 
 			case "room":
 				message("\"For but 5 gold thou canst let one of our lovely rooms. Dost thou wish to stay here for the night?\"");
@@ -49580,38 +51627,43 @@ void Func04B3 object#(0x4B3) ()
 					say();
 				}
 				UI_remove_answer("room");
+				fallthrough;
 
 			case "Paws":
 				message("\"Actually, there are no other inns or pubs in Paws. It is a small place, but our food and drink here is quite good, honestly.\"");
 				say();
 				UI_remove_answer("Paws");
+				fallthrough;
 
 			case "thief":
 				message("\"There is a thief in this town! Silver serpent venom was stolen from Morfin, the merchant who operates the slaughterhouse.\"");
 				say();
 				gflags[0x0212] = true;
 				UI_remove_answer("thief");
+				fallthrough;
 
 			case "Merrick":
 				message("\"He used to be a farmer. He is not a bad sort. He has just had a bad run of luck. Now he is a devout Fellowship member.\"");
 				say();
 				UI_remove_answer("Merrick");
+				fallthrough;
 
 			case "Morfin":
 				message("\"Morfin is a very shrewd and successful merchant, and also a Fellowship member, but I cannot help but feel that he would sell his own mother if he could get the right price for her. 'Tis little wonder why the thief chose to steal from him.\"");
 				say();
 				UI_add_answer("thief");
 				UI_remove_answer("Morfin");
+				fallthrough;
 
 			case "Thurston":
 				message("You relate to Polly what you heard Thurston say about her. She is taken completely by surprise. \"Thurston really said that about me! I have always liked him, but in truth I have always thought I was not good enough for him!\"");
 				say();
 				gflags[0x021B] = true;
 				UI_remove_answer("Thurston");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good day to thee, ");
 		message(var0000);
@@ -49671,17 +51723,20 @@ void Func04B4 object#(0x4B4) ()
 				message(", Draxinusom.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"To ask about Job? To be unable to say that I truly have one at this time. To notice how the young ones no longer look to me for guidance any more. To look more to Teregus, or, more often, to those in The Fellowship.\"");
 				say();
 				UI_add_answer(["Teregus", "Fellowship"]);
+				fallthrough;
 
 			case "Terfin":
 				message("\"To be quite comfortable for our needs. To be, however, unfortunate that it was thought necessary to isolate us from the humans. To have engendered resentment and tension in our younger generations. To remember not the old days, my friend -- the days when we had to work together to survive.\" He smiles, reliving old memories, then shakes his head.~~\"To have had to give up many much when we moved.\"");
 				say();
 				UI_add_answer("give up");
 				UI_remove_answer("Terfin");
+				fallthrough;
 
 			case "give up":
 				message("\"To have been many favorite possessions. To be too much trouble to move so much.\" He sighs.");
@@ -49693,17 +51748,20 @@ void Func04B4 object#(0x4B4) ()
 					UI_add_answer(["selling", "Ethereal Ring"]);
 				}
 				UI_remove_answer("give up");
+				fallthrough;
 
 			case "Ethereal Ring":
 				message("\"Ah. To be, indeed, a lovely treasure. To have been quite useful. A shame to have been, really, to have had to sell it. To have been one of my favorites.\"");
 				say();
 				UI_remove_answer("Ethereal Ring");
+				fallthrough;
 
 			case "selling":
 				message("\"To have sold most of my treasures when we were... uh... asked, shall to say, to move to the island. To have all happened rather quickly, you see. To have sold most to the Sultan of Spektran.\"");
 				say();
 				UI_add_answer("Sultan");
 				UI_remove_answer("selling");
+				fallthrough;
 
 			case "Sultan":
 				message("\"To have seemed nice enough, for a human. To be a bit mad, he is, even for a human. To tell you he lives on an island just to the west of us. To know, at least, that my prized possessions would be safe in his hands.\"");
@@ -49712,11 +51770,13 @@ void Func04B4 object#(0x4B4) ()
 				gflags[0x023B] = true;
 				Func0911(0x0032);
 				UI_remove_answer("Sultan");
+				fallthrough;
 
 			case "safe":
 				message("He nods his head. \"To be rumored to have one of the best-guarded vaults in all of Britannia. To be supposedly enchanted. To know not details.\"");
 				say();
 				UI_remove_answer("safe");
+				fallthrough;
 
 			case "Inamo":
 				UI_remove_answer("Inamo");
@@ -49736,26 +51796,31 @@ void Func04B4 object#(0x4B4) ()
 					message("\"Ah. To be too bad. To tell you Teregus wanted to know how he was doing.\"");
 					say();
 				}
+				fallthrough;
 
 			case "well":
 				message("\"To be very good. To know Teregus will be pleased to learn that, as well!\"");
 				say();
 				UI_pop_answers();
+				fallthrough;
 
 			case "murdered":
 				message("\"To be terrible news! To have been such a fine gargoyle. To know Teregus will be heartbroken. To be wishing not for him to grieve, but to take to him the news immediately. To be better to hear it from you.\"");
 				say();
 				UI_pop_answers();
+				fallthrough;
 
 			case "Moongates":
 				message("\"Mine own Orb of the Moons exploded recently! To no longer be able to travel via Moongates. To be strange!\"");
 				say();
 				UI_remove_answer("Moongates");
+				fallthrough;
 
 			case "not well":
 				message("\"To be a shame. To be taking the news to Teregus of his youngling. To be wondering why we had not heard from Inamo recently.\"");
 				say();
 				UI_pop_answers();
+				fallthrough;
 
 			case "Teregus":
 				message("\"To be truly a fine young gargoyle. To be one of the most sensible, too. To have seen fit to adhere to the old ways, the ways of the altars. To see that some of the youngest still look up to him, but the majority seem to have been wooed away by the glamor of The Fellowship.\"");
@@ -49768,18 +51833,21 @@ void Func04B4 object#(0x4B4) ()
 					UI_add_answer("Inamo");
 				}
 				UI_remove_answer("Teregus");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"To know not what to think of them and their tenets. To seem not dangerous, but not to be following the old ways, the ways of Passion, Diligence, and Control. To feign worship to the shrines here in Terfin, of course, especially to Control, but not yet to trust them. To wait and see. To have forceful leaders who espouse doctrines of submission.\" He shrugs.~~\"To be genuinely inspired, perhaps, and perhaps not.\"");
 				say();
 				UI_add_answer(["Terfin", "leaders"]);
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "leaders":
 				message("\"To inform you that The Fellowship is directed by two winged brethren. To be called Runeb and Quan.\"");
 				say();
 				UI_add_answer(["Runeb", "Quan"]);
 				UI_remove_answer("leaders");
+				fallthrough;
 
 			case "Runeb":
 				message("\"To mean, in your language, `Red Mist'. To have been given that name because that is all he leaves behind of an adversary in battle. Before his conversion by The Fellowship, to have been known as a particularly cruel and dangerous gargoyle.\"");
@@ -49791,15 +51859,16 @@ void Func04B4 object#(0x4B4) ()
 					say();
 				}
 				UI_remove_answer("Runeb");
+				fallthrough;
 
 			case "Quan":
 				message("\"Ah, to be an interesting one. To be a strong, powerful personality, to be from one of the families most able to claim noble lineage in our society. To have been always most self-serving, striving only to gain status and wealth for himself. To have certainly changed his tune since joining The Fellowship. To have my doubts, however, that his goals have changed as well.\"");
 				say();
 				UI_remove_answer("Quan");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"To bid farewell, old friend. To not be hesitating to return if there is aught else I can do for you. To be lonely here now for an old gargoyle dedicated to the ancient ways...\"*");
 		say();
@@ -49847,11 +51916,13 @@ void Func04B5 object#(0x4B5) ()
 				say();
 				UI_remove_answer("name");
 				UI_add_answer("Inforlem");
+				fallthrough;
 
 			case "Inforlem":
 				message("\"To mean `make strong one.'\"");
 				say();
 				UI_remove_answer("Inforlem");
+				fallthrough;
 
 			case "job":
 				message("\"To train others in Terfin to be strong and powerful. To sell some weapons, also.\"");
@@ -49861,6 +51932,7 @@ void Func04B5 object#(0x4B5) ()
 				{
 					UI_add_answer("conflicts");
 				}
+				fallthrough;
 
 			case "buy":
 				if ((var0001 == 0x0003) || ((var0001 == 0x0004) || (var0001 == 0x0005)))
@@ -49872,6 +51944,7 @@ void Func04B5 object#(0x4B5) ()
 					message("\"To sell during shop hours. To ask you to come back to me at that time, please.\"");
 					say();
 				}
+				fallthrough;
 
 			case "train":
 				if ((var0001 == 0x0003) || ((var0001 == 0x0004) || (var0001 == 0x0005)))
@@ -49885,6 +51958,7 @@ void Func04B5 object#(0x4B5) ()
 					message("\"To train during training hours. To ask you to come back to me at that time, please.\"");
 					say();
 				}
+				fallthrough;
 
 			case "warrior":
 				message("\"To charge 50 gold for each training session. To be all right?\"");
@@ -49898,6 +51972,7 @@ void Func04B5 object#(0x4B5) ()
 					message("\"To apologize, but I must charge that amount!\"");
 					say();
 				}
+				fallthrough;
 
 			case "mage":
 				message("\"To charge 50 gold for each training session. To be acceptable?\"");
@@ -49911,6 +51986,7 @@ void Func04B5 object#(0x4B5) ()
 					message("\"To apologize, but I must charge that amount!\"");
 					say();
 				}
+				fallthrough;
 
 			case "conflicts":
 				message("\"To know of the conflicts between the altars and the Fellowship, but to have no information. To suggest you see Quan, The Fellowship leader here and ask him.\"");
@@ -49918,11 +51994,13 @@ void Func04B5 object#(0x4B5) ()
 				var0000 = true;
 				gflags[0x023C] = true;
 				UI_remove_answer("conflicts");
+				fallthrough;
 
 			case "Terfin":
 				message("\"To see there are troubles here, but to be unaware of the causes and solutions.\"");
 				say();
 				UI_remove_answer("Terfin");
+				fallthrough;
 
 			case "others":
 				message("\"To tell you Forbrak knows much about Terfin and its residents, and,\" he says, \"about its conflicts.\"");
@@ -49933,15 +52011,16 @@ void Func04B5 object#(0x4B5) ()
 				{
 					UI_add_answer("conflicts");
 				}
+				fallthrough;
 
 			case "Forbrak":
 				message("\"To be the tavernkeeper.\"");
 				say();
 				UI_remove_answer("Forbrak");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"To expect to see you again, human.\"*");
 		say();
@@ -49985,11 +52064,13 @@ void Func04B6 object#(0x4B6) ()
 				say();
 				UI_remove_answer("name");
 				UI_add_answer(["information", "Inmanilem"]);
+				fallthrough;
 
 			case "Inmanilem":
 				message("\"To be Gargoyle for `make healed one.'\"");
 				say();
 				UI_remove_answer("Inmanilem");
+				fallthrough;
 
 			case "job":
 				message("\"To be the healer.\"");
@@ -49999,6 +52080,7 @@ void Func04B6 object#(0x4B6) ()
 				{
 					UI_add_answer("conflicts");
 				}
+				fallthrough;
 
 			case "heal":
 				var0001 = UI_part_of_day();
@@ -50012,66 +52094,76 @@ void Func04B6 object#(0x4B6) ()
 					say();
 				}
 				UI_remove_answer("Heal");
+				fallthrough;
 
 			case "information":
 				message("\"To tell you to seek out Draxinusom, human, or Forbrak. To have much information about Terfin.\"");
 				say();
 				UI_remove_answer("information");
 				UI_add_answer(["Draxinusom", "Forbrak", "Terfin"]);
+				fallthrough;
 
 			case "Forbrak":
 				message("\"To be the tavernkeeper. To be very strong of body, and of mind.\"");
 				say();
 				UI_remove_answer("Forbrak");
+				fallthrough;
 
 			case "Terfin":
 				message("\"To be the city of gargoyles. To be the one of two towns where many gargoyles live. To like it here,\" he adds, smiling.");
 				say();
 				UI_remove_answer("Terfin");
 				UI_add_answer("one?");
+				fallthrough;
 
 			case "one?":
 				message("\"To tell you the other is called Vesper. To be in the desert in northeastern Britannia. To have also humans living there, unlike here.\"");
 				say();
 				UI_remove_answer("one?");
+				fallthrough;
 
 			case "Draxinusom":
 				message("\"To be our leader. To live near the Hall of Knowledge.\"");
 				say();
 				UI_remove_answer("Draxinusom");
 				UI_add_answer("Hall");
+				fallthrough;
 
 			case "Hall":
 				message("\"To be where the three altars of singularity are kept.\"");
 				say();
 				UI_remove_answer("Hall");
 				UI_add_answer("altars");
+				fallthrough;
 
 			case "altars":
 				message("\"To be Passion, Control, and Diligence. To be the values that most gargoyles hold as the key of our existence.\"");
 				say();
 				UI_remove_answer("altars");
 				UI_add_answer(["most gargoyles", "key"]);
+				fallthrough;
 
 			case "key":
 				message("He nods his head emphatically. \"To be quite similar to the human concept of virtues.\"");
 				say();
 				UI_remove_answer("key");
+				fallthrough;
 
 			case "most gargoyles":
 				message("\"There is a rival now -- The Fellowship. To know not if it is good or bad, but to know I do not follow it!\"");
 				say();
 				UI_remove_answer("most gargoyles");
+				fallthrough;
 
 			case "conflicts":
 				message("\"To know only of one dissatisfied gargoyle. To have always been problem, but now acting hostile and aggressive. To be named Silamo, the gardener.~~\"To recommend you talk to Silamo.\"");
 				say();
 				UI_remove_answer("conflicts");
 				gflags[0x023D] = true;
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"To wish you good health, human.\"*");
 		say();
@@ -50135,17 +52227,20 @@ void Func04B7 object#(0x4B7) ()
 					UI_add_answer("Inamo");
 				}
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"To be caring for the altars of Control, Passion, and Diligence. To be a position of great responsibility. To be especially important in these times of trouble.\"");
 				say();
 				UI_add_answer(["trouble", "altars"]);
+				fallthrough;
 
 			case "trouble":
 				message("\"To have been many disagreements in town lately. To be much tension between the followers of the principles of the altars and the followers of The Fellowship. To have heard rumors of threats to the altars.\"");
 				say();
 				UI_add_answer(["Fellowship", "rumors"]);
 				UI_remove_answer("trouble");
+				fallthrough;
 
 			case "Fellowship":
 				var0001 = UI_is_dead(0xFF48);
@@ -50161,6 +52256,7 @@ void Func04B7 object#(0x4B7) ()
 				}
 				UI_add_answer(["Quan", "Runeb"]);
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "rumors":
 				var0001 = UI_is_dead(UI_get_npc_object(0xFF48));
@@ -50176,6 +52272,7 @@ void Func04B7 object#(0x4B7) ()
 					gflags[0x0253] = true;
 				}
 				UI_remove_answer("rumors");
+				fallthrough;
 
 			case "evidence":
 				message("\"To have brought me something, some evidence about the rumors?\"");
@@ -50193,16 +52290,19 @@ void Func04B7 object#(0x4B7) ()
 					say();
 				}
 				UI_remove_answer("evidence");
+				fallthrough;
 
 			case "Quan":
 				message("\"To be sad to have lost Quan to The Fellowship, human. To have been a good gargoyle when young, but to have fallen into bad company later. To have concentrated mostly on self-aggrandizement and hedonism in the last few years. To be a shame.\"");
 				say();
 				UI_remove_answer("Quan");
+				fallthrough;
 
 			case "Runeb":
 				message("\"To have been a sad case. To have wished to have been able to save him. To always have been uncontrollable, but to have gotten worse in the last few years. To have seemed to want to start as many fights as possible. To have found a reason for using his strength against all those weaker when to have joined The Fellowship.\"");
 				say();
 				UI_remove_answer("Runeb");
+				fallthrough;
 
 			case "Inamo":
 				message("He smiles sadly, but with obvious pride.~");
@@ -50241,12 +52341,14 @@ void Func04B7 object#(0x4B7) ()
 					}
 				}
 				UI_remove_answer("Inamo");
+				fallthrough;
 
 			case "too late":
 				message("\"To be too late? To mean what by too late? To tell me what has happened!\"~~He seems very distraught.");
 				say();
 				UI_add_answer("murdered");
 				UI_remove_answer("too late");
+				fallthrough;
 
 			case "murdered":
 				message("\"To be murdered?\"~~He takes a step back, stunned by the news.~~\"To be murdered? To be unbelievable. To have no real enemies!\"~~He sighs heavily.~~\"To tell me, please, exactly what happened.\"~~You relate to him the particulars of Inamo's death. He sighs again.~~\"To be such a waste of gargoyle life. To be grateful if you would send news if you discover who was responsible for wanting him dead.\"~~ He is quiet for a few moments, getting accustomed to the situation.~~\"To apologize. To need some time to grieve. Please to come back later.\"~~He turns away.");
@@ -50272,6 +52374,7 @@ void Func04B7 object#(0x4B7) ()
 					message("\"Ah. To donate next time, perhaps.\"");
 					say();
 				}
+				fallthrough;
 
 			case "Control", "Passion", "Diligence":
 				message("\"To be an excellent choice. To meditate at the shrine for you for a donation of 5 gold. To be willing to donate 5 gold?\"");
@@ -50298,10 +52401,10 @@ void Func04B7 object#(0x4B7) ()
 				}
 				UI_remove_answer(["Control", "Passion", "Diligence"]);
 				UI_pop_answers();
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"To tell you goodbye for now, human. To return and be welcome.\"*");
 		say();
@@ -50383,15 +52486,18 @@ void Func04B8 object#(0x4B8) ()
 				{
 					UI_add_answer("frame Quan");
 				}
+				fallthrough;
 
 			case "job":
 				message("\"To be Fellowship clerk.\"");
 				say();
+				fallthrough;
 
 			case "Runeb":
 				message("\"To mean `busy one,'\" he says sarcastically.");
 				say();
 				UI_remove_answer("Runeb");
+				fallthrough;
 
 			case "Fellowship":
 				var0003 = UI_wearing_fellowship();
@@ -50406,6 +52512,7 @@ void Func04B8 object#(0x4B8) ()
 					say();
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "altar destruction", "frame Quan":
 				Func0911(0x0064);
@@ -50417,7 +52524,6 @@ void Func04B8 object#(0x4B8) ()
 
 			case "bye":
 				break;
-
 		}
 		message("He waits for you to leave before he returns to what he was doing.*");
 		say();
@@ -50478,11 +52584,13 @@ void Func04B9 object#(0x4B9) ()
 				say();
 				UI_remove_answer("name");
 				UI_add_answer("Quan");
+				fallthrough;
 
 			case "Quan":
 				message("\"To have no meaning in Gargish. To be a special name, specific to me,\" he smiles.");
 				say();
 				UI_remove_answer("Quan");
+				fallthrough;
 
 			case "job":
 				message("\"To head The Fellowship in Terfin.\"");
@@ -50492,27 +52600,32 @@ void Func04B9 object#(0x4B9) ()
 				{
 					UI_add_answer("voice");
 				}
+				fallthrough;
 
 			case "voice":
 				message("\"To be the inner voice of guidance that lives in all creatures. To become more distinct and frequent with stronger Fellowship ties.\"");
 				say();
 				UI_remove_answer("voice");
+				fallthrough;
 
 			case "Terfin":
 				message("\"To be the only gargoyle city in Britannia. To have fewer gargoyles in the land than during your last visit to Britannia, human.\" He shakes his head.");
 				say();
 				UI_add_answer(["fewer", "gargoyles"]);
 				UI_remove_answer("Terfin");
+				fallthrough;
 
 			case "fewer":
 				message("\"To have succumbed to the effects of disease and famine that have recently struck Britannia. To tell you that gargoyles breed less frequently, and we have not had the time to make up for losses in our population.~~\"To have new hope, however,\" he grins, \"with The Fellowship.\"");
 				say();
 				UI_remove_answer("fewer");
+				fallthrough;
 
 			case "gargoyles":
 				message("\"To suggest talking to Runeb, the Fellowship clerk, or Quaeven. To have jobs needing knowledge of others in Terfin.\" He grins apologetically.~~ \"To be too busy to know all in Terfin.\"");
 				say();
 				UI_remove_answer("gargoyles");
+				fallthrough;
 
 			case "Fellowship":
 				var0003 = UI_wearing_fellowship();
@@ -50541,6 +52654,7 @@ void Func04B9 object#(0x4B9) ()
 					UI_add_answer("altar conflicts");
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "Elizabeth and Abraham":
 				if (!gflags[0x0264])
@@ -50555,11 +52669,13 @@ void Func04B9 object#(0x4B9) ()
 					say();
 				}
 				UI_remove_answer("Elizabeth and Abraham");
+				fallthrough;
 
 			case "philosophy":
 				message("An almost gleeful expression fills his visage.~~ \"To be very similar to the altar of singularity. To have three principles called the Triad of Inner Strength. To apply three principles in unison to be more creative and happy.~~ \"To see the similarity? To have control, passion, and diligence mesh into one -- singularity. To have Triad -- Strive for Unity, Trust your Brother, and Worthiness Precedes Reward -- applied in unison!\"");
 				say();
 				UI_remove_answer("philosophy");
+				fallthrough;
 
 			case "altar conflicts":
 				message("\"To understand not,\" he says, puzzled.");
@@ -50569,6 +52685,7 @@ void Func04B9 object#(0x4B9) ()
 					UI_add_answer("altar destruction");
 				}
 				UI_remove_answer("altar conflicts");
+				fallthrough;
 
 			case "altar destruction":
 				message("\"To know nothing of this! To believe it not! To be not possible.~~ \"To know that all members are content with their lives, and incapable of such acts, even if the altars be outdated.~~ \"To tell you to speak with members themselves to see and believe.\"");
@@ -50583,17 +52700,20 @@ void Func04B9 object#(0x4B9) ()
 				{
 					UI_add_answer("Runeb assassinate");
 				}
+				fallthrough;
 
 			case "outdated":
 				message("\"To need the Triad for proper application to the individual gargoyle -- or person!\"");
 				say();
 				UI_remove_answer("outdated");
+				fallthrough;
 
 			case "members":
 				message("\"To talk to Runeb, Sarpling, and Quaeven.\"");
 				say();
 				UI_add_answer(["Runeb", "Sarpling", "Quaeven"]);
 				UI_remove_answer("members");
+				fallthrough;
 
 			case "Runeb":
 				var0004 = UI_is_dead(UI_get_npc_object(0xFF48));
@@ -50608,33 +52728,37 @@ void Func04B9 object#(0x4B9) ()
 					say();
 				}
 				UI_remove_answer("Runeb");
+				fallthrough;
 
 			case "Sarpling":
 				message("\"To sell magics and such at his shop.\"");
 				say();
 				UI_remove_answer("Sarpling");
 				gflags[0x0241] = true;
+				fallthrough;
 
 			case "Quaeven":
 				message("\"To be in charge of the learning center.\"");
 				say();
 				UI_remove_answer("Quaeven");
+				fallthrough;
 
 			case "Sarpling's note":
 				message("\"To be impossible for Runeb to be responsible.\" He smiles kindly. \"To be a practical joke.\"");
 				say();
 				UI_remove_answer("Sarpling's note");
 				gflags[0x0242] = true;
+				fallthrough;
 
 			case "Runeb assassinate":
 				message("\"To be too heinous a plot for Runeb.\" He frowns. \"To be some kind of bad joke.\"");
 				say();
 				UI_remove_answer("Runeb assassinate");
 				gflags[0x0242] = true;
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"To hope you find unity.\"*");
 		say();
@@ -50701,26 +52825,31 @@ void Func04BA object#(0x4BA) ()
 				say();
 				UI_remove_answer("name");
 				UI_add_answer("Quaeven");
+				fallthrough;
 
 			case "Quaeven":
 				message("\"To mean `problem finder.' To be an observant one.");
 				say();
 				UI_remove_answer("Quaeven");
+				fallthrough;
 
 			case "job":
 				message("\"To be master of the Recreation Facility and Learning Center. To be in charge of much information valuable to the gargoyle race.\"");
 				say();
 				UI_add_answer(["Recreation Facility", "Learning Center"]);
+				fallthrough;
 
 			case "Recreation Facility":
 				message("\"To be a good place for gargoyles to go to exercise their muscles. To have many resources available, including stuffed bags to punch and practice fighting skills.\"");
 				say();
 				UI_remove_answer("Recreation Facility");
+				fallthrough;
 
 			case "Learning Center":
 				message("\"To be located in the same building as the Recreation Center. To provide an excellent atmosphere for strengthening gargoyle minds. To have a large supply of books and educational material.\"");
 				say();
 				UI_remove_answer("Learning Center");
+				fallthrough;
 
 			case "Fellowship":
 				var0003 = UI_wearing_fellowship();
@@ -50741,12 +52870,14 @@ void Func04BA object#(0x4BA) ()
 					}
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "organization":
 				message("\"To be a group of spiritual seekers striving to reach the highest levels of gargoyle potential. To share with all gargoyles and humans.\"");
 				say();
 				UI_add_answer("share");
 				UI_remove_answer("organization");
+				fallthrough;
 
 			case "share":
 				message("\"To share tenets and material well-being.\"");
@@ -50757,12 +52888,14 @@ void Func04BA object#(0x4BA) ()
 					UI_add_answer("tenets");
 				}
 				UI_remove_answer("share");
+				fallthrough;
 
 			case "material well-being":
 				message("\"To support financially and personally a poorhouse in Paws. To organize feasts and festivals in Britannia to help morale. To be a much needed group by all gargoyles and men. To have needed The Fellowship myself!\"");
 				say();
 				UI_add_answer("needed The Fellowship");
 				UI_remove_answer("material well-being");
+				fallthrough;
 
 			case "tenets":
 				message("\"To apply an optimistic order of thought through the Triad of Inner Strength.\"");
@@ -50770,22 +52903,26 @@ void Func04BA object#(0x4BA) ()
 				UI_add_answer("Triad");
 				var0001 = true;
 				UI_remove_answer("tenets");
+				fallthrough;
 
 			case "Triad":
 				message("\"To be the three concepts of Strive for Unity, Trust your Brother, and Worthiness Precedes Reward.\"");
 				say();
 				UI_remove_answer("Triad");
+				fallthrough;
 
 			case "needed The Fellowship":
 				message("\"To have had poor life before The Fellowship. To have been pained, ignored, and mistreated by many.~~\"To be happy now in my new life and, to hope to hear the voice soon.\" His eyes widen in excitement. \"To be bringing happiness to another's life soon.\"");
 				say();
 				UI_add_answer(["voice", "another"]);
 				UI_remove_answer("needed The Fellowship");
+				fallthrough;
 
 			case "voice":
 				message("\"To be a good voice that will help me make choices, and to help win on Buccaneer's Den.\"");
 				say();
 				UI_remove_answer("voice");
+				fallthrough;
 
 			case "another":
 				message("He continues on, excitedly.~~\"To be working on my first convert. To know the joy and well-being I will bring. To feel content and happy.\"");
@@ -50793,20 +52930,22 @@ void Func04BA object#(0x4BA) ()
 				gflags[0x023E] = true;
 				UI_add_answer(["working", "convert"]);
 				UI_remove_answer("another");
+				fallthrough;
 
 			case "working":
 				message("\"To need a little more persuasion,\" he looks down, \"but to be almost ready to join!\"");
 				say();
 				UI_remove_answer("working");
+				fallthrough;
 
 			case "convert":
 				message("\"To be Betra, the provisioner. To feel confident he will join soon.\"");
 				say();
 				UI_remove_answer("convert");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"To hope for your well-being and happiness.\"*");
 		say();
@@ -50847,41 +52986,47 @@ void Func04BB object#(0x4BB) ()
 				}
 				UI_remove_answer("name");
 				UI_add_answer("Silamo");
+				fallthrough;
 
 			case "Silamo":
 				message("\"To know my name if I were winged.\" He scowls at you.");
 				say();
 				UI_remove_answer("Silamo");
+				fallthrough;
 
 			case "job":
 				message("\"To be the gardener,\" he shrugs, \"nothing more.\"~~ He does not seem to be interested in speaking with you.");
 				say();
+				fallthrough;
 
 			case "wingless status":
 				message("He stares at you for a moment.~~\"To be right, human.~~ \"To feel I am treated less for an absence of wings. To see Quaeven treated better since joining The Fellowship. To be devoted to the altar of singularity. But, perhaps to change if The Fellowship cares not about wings.\"");
 				say();
 				UI_add_answer(["treated", "Quaeven"]);
 				UI_remove_answer("wingless status");
+				fallthrough;
 
 			case "Quaeven":
 				message("\"To be also without wings, but to be respected as if he were winged.\"");
 				say();
 				UI_remove_answer("Quaeven");
+				fallthrough;
 
 			case "treated":
 				message("\"To see many others include him in many events from which I am excluded. To know others include him in many more decision-making councils, too.\"");
 				say();
 				UI_remove_answer("treated");
 				UI_add_answer("others");
+				fallthrough;
 
 			case "others":
 				message("\"Gargoyles in The Fellowship.\"");
 				say();
 				UI_remove_answer("others");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"To get back to work.\"*");
 		say();
@@ -50972,17 +53117,20 @@ void Func04BC object#(0x4BC) ()
 						UI_remove_answer("altar conflicts");
 					}
 				}
+				fallthrough;
 
 			case "job":
 				message("\"To provide various magics and items in Terfin.\"");
 				say();
 				UI_add_answer(["buy", "Terfin"]);
+				fallthrough;
 
 			case "Terfin":
 				message("\"To be the city in which you are located. To be the city of gargoyles.\"");
 				say();
 				UI_add_answer("gargoyles");
 				UI_remove_answer("Terfin");
+				fallthrough;
 
 			case "gargoyles":
 				message("\"To know Quan is the Fellowship leader. To believe he gives good guidance.\" He appears thoughtful.~~ \"To have spoken to Draxinusom?\"");
@@ -50999,22 +53147,26 @@ void Func04BC object#(0x4BC) ()
 					say();
 				}
 				UI_remove_answer("gargoyles");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"To be an important part of my life. To support The Fellowship fully.\"");
 				say();
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "altar conflicts":
 				message("\"To know nothing about the altars. To wonder what you mean?\"");
 				say();
 				UI_remove_answer("altar conflicts");
+				fallthrough;
 
 			case "found note":
 				message("A surprised expression, mixed with fear, covers his face.~~ \"To be all Runeb's decisions! To be all Runeb's doing! To want nothing to do with the destruction of the altars, or with the assassination plot!\"");
 				say();
 				UI_remove_answer("found note");
 				UI_add_answer("Assassination plot!");
+				fallthrough;
 
 			case "Assassination plot!":
 				message("\"To not already know about the plot?\" he wails.~~ \"To have caused problems this time, Sarpling,\" he says to himself. \"To have brought much trouble!~~ \"To tell you Runeb wanted to frame Quan for the altars. To kill Quan if plan failed, and to be in control of The Fellowship in Terfin. To be Runeb's goal.~~ \"To be in much danger you and me!\"*");
@@ -51035,18 +53187,20 @@ void Func04BC object#(0x4BC) ()
 					message("\"To sell you things when my shop is open.\"");
 					say();
 				}
+				fallthrough;
 
 			case "reagents":
 				Func08E2();
 				UI_remove_answer("reagents");
+				fallthrough;
 
 			case "jewelry and potions":
 				Func08E1();
 				UI_remove_answer("jewelry and potions");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"To give you farewell, human.\"*");
 		say();
@@ -51130,17 +53284,20 @@ void Func04BD object#(0x4BD) ()
 				say();
 				UI_remove_answer("name");
 				UI_add_answer("Forbrak");
+				fallthrough;
 
 			case "Forbrak":
 				message("\"To mean `strong arm' in the language of the gargoyles.\"");
 				say();
 				UI_remove_answer("Forbrak");
 				UI_add_answer("gargoyles");
+				fallthrough;
 
 			case "job":
 				message("He gestures around the room with an open hand.~~ \"To serve food and drink at the Hall of Refreshment.\"");
 				say();
 				UI_add_answer("buy");
+				fallthrough;
 
 			case "buy":
 				var0004 = UI_get_schedule_type(UI_get_npc_object(0xFF43));
@@ -51153,18 +53310,21 @@ void Func04BD object#(0x4BD) ()
 					message("\"To ask you to please come back when my shop is open.\"");
 					say();
 				}
+				fallthrough;
 
 			case "gargoyles":
 				message("\"To know many of the residents in town, and some of the troubles.\"");
 				say();
 				UI_add_answer(["residents", "troubles"]);
 				UI_remove_answer("gargoyles");
+				fallthrough;
 
 			case "troubles":
 				message("\"To know of only two. To see the conflict between the shrines and The Fellowship, and to know of the struggles of the wingless ones.\"");
 				say();
 				UI_add_answer(["shrine vs. Fellowship", "wingless vs. winged"]);
 				UI_remove_answer("troubles");
+				fallthrough;
 
 			case "shrine vs. Fellowship":
 				message("\"To believe there are disagreements between the old philosophy and the new. To expect no violence, but to ask you to seek the trainer and healer. To know they are observant and may have seen something. To also suggest you speak with members of The Fellowship.\"");
@@ -51181,12 +53341,14 @@ void Func04BD object#(0x4BD) ()
 				}
 				UI_add_answer("members");
 				gflags[0x0244] = true;
+				fallthrough;
 
 			case "members":
 				message("\"To recommend you talk to their leader and their clerk.\"");
 				say();
 				UI_add_answer(["leader", "clerk"]);
 				UI_remove_answer("members");
+				fallthrough;
 
 			case "wingless vs. winged":
 				message("\"To watch wingless friends be discontented with their lot. To wonder why, but to never ask. To talk to the healer and the trainer. To expect they will have seen evidence if there is evidence to be seen.\"");
@@ -51201,6 +53363,7 @@ void Func04BD object#(0x4BD) ()
 					UI_add_answer("trainer");
 				}
 				gflags[0x0244] = true;
+				fallthrough;
 
 			case "residents":
 				message("\"To know many gargoyles. To want to know about some of them?\"");
@@ -51218,23 +53381,27 @@ void Func04BD object#(0x4BD) ()
 					say();
 				}
 				UI_remove_answer("residents");
+				fallthrough;
 
 			case "trainer":
 				message("\"To be named Inforlem. To be very strong.\"");
 				say();
 				var0001 = true;
 				UI_remove_answer("trainer");
+				fallthrough;
 
 			case "healer":
 				message("\"To be named Inmanilem.\"");
 				say();
 				var0000 = true;
 				UI_remove_answer("healer");
+				fallthrough;
 
 			case "leader":
 				message("\"To be very friendly. To be called Quan.\"");
 				say();
 				UI_remove_answer("leader");
+				fallthrough;
 
 			case "clerk":
 				message("\"To be extremely violent.\" He shakes his head. \"To be named Runeb, which means `red mist.' To be all that he leaves of a foe after combat.\"");
@@ -51246,37 +53413,42 @@ void Func04BD object#(0x4BD) ()
 					message("\"To be dead now, though.\"");
 					say();
 				}
+				fallthrough;
 
 			case "learning center":
 				message("\"To be a wonderful place to gain knowledge and exercise. To be managed by a gargoyle name Quaeven. To be very educated, this Quaeven. Also, to be wingless, like Silamo.\"");
 				say();
 				UI_remove_answer("learning center");
 				UI_add_answer("Silamo");
+				fallthrough;
 
 			case "provisioner":
 				message("\"To be called Betra. To be one of two shopkeepers. To say the other is Sarpling.\"");
 				say();
 				UI_remove_answer("provisioner");
 				UI_add_answer("Sarpling");
+				fallthrough;
 
 			case "Teregus":
 				message("\"To be a sage. To be very well-educated, like Quaeven. To live here a long time.\"");
 				say();
 				UI_remove_answer("Teregus");
+				fallthrough;
 
 			case "Silamo":
 				message("\"To be the gardener who lives to the east of the mountains.\"");
 				say();
 				UI_remove_answer("Silamo");
+				fallthrough;
 
 			case "Sarpling":
 				message("\"To know him little, and to have never been in his shop, and, therefore, to be unable to tell you what he sells. To know his name means `snake tongue.'\"");
 				say();
 				UI_remove_answer("Sarpling");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"To wish you well, human.\"*");
 		say();
@@ -51345,38 +53517,45 @@ void Func04BE object#(0x4BE) ()
 				{
 					UI_add_answer("Quaeven");
 				}
+				fallthrough;
 
 			case "Betra":
 				message("\"To be the word for `small valor.'\"");
 				say();
 				UI_remove_answer("Betra");
+				fallthrough;
 
 			case "job":
 				message("\"To be the seller of provisions.\"");
 				say();
 				UI_add_answer("buy");
+				fallthrough;
 
 			case "Terfin":
 				message("\"To be the town set aside for us gargoyles who wish to reside in our own culture.\"");
 				say();
 				UI_remove_answer("Terfin");
 				UI_add_answer(["set aside", "culture"]);
+				fallthrough;
 
 			case "culture":
 				message("\"To have many things unique to our race -- other than our appearance -- that distinguish us from humans. To be different, but also equal.\"");
 				say();
 				UI_remove_answer("culture");
+				fallthrough;
 
 			case "set aside":
 				message("\"To have been put here by the humans. To be permitted to leave, and also to reside elsewhere, but to know that many humans do not like us.\"");
 				say();
 				UI_remove_answer("set aside");
 				UI_add_answer("dislike");
+				fallthrough;
 
 			case "dislike":
 				message("\"To be very ironic. To say that the only town with an equal number of humans and gargoyles is the one where most racial conflicts occur.\" ~~He shrugs. \"To have been unwise, perhaps, to put so many differences together. To be sad times.\"");
 				say();
 				UI_remove_answer("dislike");
+				fallthrough;
 
 			case "buy":
 				var0002 = UI_get_schedule_type(UI_get_npc_object(0xFF42));
@@ -51389,6 +53568,7 @@ void Func04BE object#(0x4BE) ()
 					message("\"To sell to you during the hours of 9 in the morning and 6 in the evening. To be sorry, but to sell nothing before or after those hours.\"");
 					say();
 				}
+				fallthrough;
 
 			case "Quaeven":
 				message("He smiles at the mention of the name.~~ \"To be a likable young gargoyle.\"");
@@ -51396,31 +53576,35 @@ void Func04BE object#(0x4BE) ()
 				var0000 = true;
 				UI_add_answer("join Fellowship?");
 				UI_remove_answer("Quaeven");
+				fallthrough;
 
 			case "join Fellowship?":
 				message("\"To join The Fellowship?\" He shakes his head. \"To be an organization not for me. To be quite happy as I am, devoted to the altars. To believe Quaeven to have been misled by the others in The Fellowship. To not trust them, especially Sarpling.\"");
 				say();
 				UI_add_answer(["misled", "Sarpling", "altars"]);
 				UI_remove_answer("join Fellowship?");
+				fallthrough;
 
 			case "misled":
 				message("\"To believe that there is deceit from The Fellowship, and to expect that is not what it appears. To believe promises of happiness made when Quaeven first joined came true from Quaeven, himself, not The Fellowship.\"");
 				say();
 				UI_remove_answer("misled");
+				fallthrough;
 
 			case "Sarpling":
 				message("\"To trust him as far as I could throw him, and to certainly throw him as far as I could.\"");
 				say();
 				UI_remove_answer("Sarpling");
+				fallthrough;
 
 			case "altars":
 				message("\"To have heard the rumors about destroying the altars. To be upset, but to have no evidence.~~ \"To know that only two gargoyles have easy access to such weapons. To be one of those gargoyles, and to know Sarpling is the other.\"");
 				say();
 				UI_remove_answer("altars");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"To wish you safe travels, human.\"*");
 		say();
@@ -51514,6 +53698,7 @@ void Func04BF object#(0x4BF) ()
 				message("The nobleman looks at you with impatience. \"I am Martingo, the Sultan of Spektran. Is that all right with thee?\" He rolls his eyes. He turns to his right side and whispers again to an imaginary person, \"I believe we have an ignoramus on our hands.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the Sultan of Spektran! What, is thy brain the size of a pea? Do not answer, 'twas a rhetorical question.\"");
@@ -51531,6 +53716,7 @@ void Func04BF object#(0x4BF) ()
 				message("Martingo then pulls out a banana and begins to peel it.");
 				say();
 				UI_add_answer(["Sultan", "Spektran", "banana"]);
+				fallthrough;
 
 			case "Sultan":
 				message("\"Come on, do not insult mine intelligence. Surely thou dost know what a Sultan is! Canst not thou see mine harem?\"");
@@ -51566,6 +53752,7 @@ void Func04BF object#(0x4BF) ()
 					}
 				}
 				UI_remove_answer("Sultan");
+				fallthrough;
 
 			case "Spektran":
 				message("\"'Tis the island thou dost stand upon!\" He turns to the invisible person on his left and whispers, \"Thou art correct -- this person really is a fool!\" ~~Martingo turns back to you. \"As I said, I am the Sultan here. I am the master of all of these subjects.\" He gestures\taround the room.");
@@ -51580,11 +53767,13 @@ void Func04BF object#(0x4BF) ()
 					UI_show_npc_face(0xFF41, 0x0000);
 				}
 				UI_remove_answer("Spektran");
+				fallthrough;
 
 			case "Lucinda":
 				message("\"She is beautiful, is she not?\" Martingo leans over and sticks his tongue in an ear that isn't there.");
 				say();
 				UI_remove_answer("Lucinda");
+				fallthrough;
 
 			case "banana":
 				if (!gflags[0x0258])
@@ -51639,32 +53828,36 @@ void Func04BF object#(0x4BF) ()
 					say();
 				}
 				UI_remove_answer("banana");
+				fallthrough;
 
 			case "Ethereal Ring":
 				message("Martingo looks suspicious. \"Art thou wanting to steal mine Ethereal Ring?\" He turns to his imaginary friend and whispers, \"Thou wert right. Our guest looks like a thief.\" He turns back to you and smiles. \"Yes, I do have an Ethereal Ring. I purchased it from the King of the Gargoyles. What was his name?\" He leans toward the invisible companion on his right. \"What? Oh yes, Draxinusom. I knew it all the time.\" He turns back to you. \"It is in my vault.\"");
 				say();
 				UI_remove_answer("Ethereal Ring");
 				UI_add_answer("vault");
+				fallthrough;
 
 			case "vault":
 				message("Martingo's eyes light up. \"My vault is the most protected vault in all Britannia. No one, and I repeat, -no one- can steal anything from my vault. I have many fine treasures there.\" He turns to 'Lucinda' and bites an nonexistent ear lobe.");
 				say();
 				UI_remove_answer("vault");
 				UI_add_answer(["treasures", "protected"]);
+				fallthrough;
 
 			case "treasures":
 				message("\"I collect magical items. The vault is full of them. Including this ring thou dost mention.\"");
 				say();
 				UI_remove_answer("treasures");
+				fallthrough;
 
 			case "protected":
 				message("\"The vault's security is my secret. Feel free to try and enter it. In fact, I dare thee! If thou canst succeed in getting inside, thou art welcome to take anything!\" Martingo laughs. \"All thou dost need is the key!\" He laughs with his imaginary harem, as if they were all laughing with him. \"I'm sure thou wilt find it!\" He breaks up, laughing so hard that tears begin to fall down his cheeks.");
 				say();
 				UI_remove_answer("protected");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Fine. Go away. It shall do thee good!\"*");
 		say();
@@ -51718,17 +53911,20 @@ void Func04C0 object#(0x4C0) ()
 				message(".\" He shakes your hand.");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am a trainer. I help warriors become bigger and stronger and better fighters. I also forge swords to match the strength in my students' arms.\"");
 				say();
 				UI_add_answer(["train", "forge", "students"]);
+				fallthrough;
 
 			case "students":
 				message("\"I have taught many a warrior how to use his -- or her -- force against an opponent.\"");
 				say();
 				UI_remove_answer("students");
 				UI_add_answer("force");
+				fallthrough;
 
 			case "force":
 				message("\"Yes, ");
@@ -51737,16 +53933,19 @@ void Func04C0 object#(0x4C0) ()
 				say();
 				UI_remove_answer("force");
 				UI_add_answer(["hard", "accurately"]);
+				fallthrough;
 
 			case "hard":
 				message("\"Physical strength permits the attacker a better chance of penetrating the other fighter's armour. Obviously, in a lethal combat, that is an important objective.\"");
 				say();
 				UI_remove_answer("hard");
+				fallthrough;
 
 			case "accurately":
 				message("\"Needless to say, some targets on an individual are better than others. 'Tis always best to hit something that will either seriously incapacitate one's foe, or create enough pain to distract him.\"");
 				say();
 				UI_remove_answer("accurately");
+				fallthrough;
 
 			case "train":
 				if (var0001 == 0x0007)
@@ -51768,6 +53967,7 @@ void Func04C0 object#(0x4C0) ()
 					message("\"Perhaps this would be a more appropriate topic when I am at work.\"");
 					say();
 				}
+				fallthrough;
 
 			case "forge":
 				message("\"Dost thou wish to make a sword?\"");
@@ -51803,10 +54003,10 @@ void Func04C0 object#(0x4C0) ()
 					say();
 				}
 				UI_remove_answer("forge");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"May the strength in thine arms always match the strength of thy will.\"*");
 		say();
@@ -51856,11 +54056,13 @@ void Func04C1 object#(0x4C1) ()
 				message("\"Thou mayest call me Sir Pendaran.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am a knight here in Serpent's Hold. 'Tis my job to help protect the citizens of Britannia.\"");
 				say();
 				UI_add_answer(["protect", "Serpent's Hold"]);
+				fallthrough;
 
 			case "protect":
 				message("\"Aye, ");
@@ -51869,11 +54071,13 @@ void Func04C1 object#(0x4C1) ()
 				say();
 				UI_remove_answer("protect");
 				UI_add_answer(["ruling faction", "soft"]);
+				fallthrough;
 
 			case "ruling faction":
 				message("\"Well, I mean Lord British and his advisors.\"");
 				say();
 				UI_remove_answer("ruling faction");
+				fallthrough;
 
 			case "soft", "worthless":
 				message("\"Though I'd follow the land's ideals to the ends of the land, I find it difficult to accept how poor the conditions are in Britannia. Brigands populate the land, disease overruns the towns, and corruption fills the councils. Were it not for The Fellowship, I would be hard pressed to avoid falling on mine own blade, despite how dishonorable an act that may seem.\"");
@@ -51881,6 +54085,7 @@ void Func04C1 object#(0x4C1) ()
 				var0001 = true;
 				UI_remove_answer(["soft", "worthless"]);
 				UI_add_answer("Fellowship");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"A noble group of people who strive to instill a greater sense of spiritual knowledge throughout all of Britannia. 'Twill be but a matter of time, ");
@@ -51888,12 +54093,14 @@ void Func04C1 object#(0x4C1) ()
 				message(", before all people will see the wisdom.\"");
 				say();
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "Serpent's Hold":
 				message("\"I live here in the hold with my lady.\"");
 				say();
 				UI_add_answer("lady");
 				UI_remove_answer("Serpent's Hold");
+				fallthrough;
 
 			case "lady":
 				message("\"Her name is Jehanne, ");
@@ -51901,6 +54108,7 @@ void Func04C1 object#(0x4C1) ()
 				message(",\" he says suspiciously. \"She is the provisioner.\"");
 				say();
 				UI_remove_answer("lady");
+				fallthrough;
 
 			case "statue":
 				message("\"Terrible shame, ");
@@ -51912,12 +54120,14 @@ void Func04C1 object#(0x4C1) ()
 					UI_add_answer("Thou didst do it!");
 				}
 				UI_remove_answer("statue");
+				fallthrough;
 
 			case "Thou didst do it!":
 				message("\"What! Thou art accusing me! Preposterous. I had nothing to do with it!\"");
 				say();
 				UI_remove_answer("Thou didst do it!");
 				UI_add_answer("Lady Jehanne");
+				fallthrough;
 
 			case "Lady Jehanne":
 				gflags[0x0276] = true;
@@ -51925,6 +54135,7 @@ void Func04C1 object#(0x4C1) ()
 				say();
 				UI_push_answers();
 				UI_add_answer(["'tis best", "no need"]);
+				fallthrough;
 
 			case "'tis best":
 				message("Nodding his agreement, he sighs again, and turns away.*");
@@ -51940,7 +54151,6 @@ void Func04C1 object#(0x4C1) ()
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good day to thee, ");
 		message(var0000);
@@ -52020,6 +54230,7 @@ void Func04C2 object#(0x4C2) ()
 						UI_add_answer("commons");
 					}
 				}
+				fallthrough;
 
 			case "job":
 				message("\"I am the provisioner of Serpent's Hold.\"");
@@ -52031,6 +54242,7 @@ void Func04C2 object#(0x4C2) ()
 					UI_add_answer("ship");
 				}
 				UI_add_answer(["Serpent's Hold", "provisions"]);
+				fallthrough;
 
 			case "ship":
 				message("\"Well, it was once the magnificent `Constellation.' However, 'twas destroyed by the ship's captain, himself, to prevent it from falling into the hands of attacking pirates. What little remained was rebuilt into an even finer ship, `The Dragon's Breath?' Art thou interested in purchasing it for 600 gold?\"");
@@ -52073,18 +54285,21 @@ void Func04C2 object#(0x4C2) ()
 					say();
 				}
 				UI_remove_answer("ship");
+				fallthrough;
 
 			case "Serpent's Hold":
 				message("\"Most of us here are knights, noble warriors sworn to protect Britannia and Lord British. Mine own lord,\" she beams with pride, \"is such a knight -- Sir Pendaran.\"");
 				say();
 				UI_remove_answer("Serpent's Hold");
 				UI_add_answer(["Sir Pendaran", "knights"]);
+				fallthrough;
 
 			case "Sir Pendaran":
 				message("\"We met three years ago. He's quite brave and strong. I just love to watch him fight.\" She smiles.~~\"I am not really sure he will mix well with the rest of The Fellowship, though.\"");
 				say();
 				UI_remove_answer("Sir Pendaran");
 				UI_add_answer(["fight", "Fellowship"]);
+				fallthrough;
 
 			case "fight":
 				message("\"He and Menion used to spar together, after their exercises. 'Twas a beautiful... sight, ");
@@ -52093,11 +54308,13 @@ void Func04C2 object#(0x4C2) ()
 				say();
 				UI_remove_answer("fight");
 				UI_add_answer("used to");
+				fallthrough;
 
 			case "used to":
 				message("\"At the time, Pendaran was the only man who could keep up with Menion. Now that Menion has begun instructing others, he no longer has the time to practice with my Lord.\"");
 				say();
 				UI_remove_answer("used to");
+				fallthrough;
 
 			case "Fellowship":
 				var0007 = UI_wearing_fellowship();
@@ -52112,11 +54329,13 @@ void Func04C2 object#(0x4C2) ()
 					say();
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "knights":
 				message("With but a few exceptions, myself included, all of the warriors here in the Hold are knights. Thou mayest wish to speak with Lord John-Paul. He is in charge of Serpent's Hold and might be better able to show thee around.");
 				say();
 				UI_remove_answer("knights");
+				fallthrough;
 
 			case "provisions":
 				var0008 = UI_get_schedule_type(UI_get_npc_object(0xFF3E));
@@ -52143,6 +54362,7 @@ void Func04C2 object#(0x4C2) ()
 					say();
 				}
 				UI_remove_answer("provisions");
+				fallthrough;
 
 			case "commons":
 				message("For an instant, you see indecisiveness in her expression, then she suddenly gives in, her words coming out in a torrent of information.~~\"I am afraid to speak, but knowing thou wouldst see through any facade, I can no longer silence the truth. My Lord, Sir Pendaran, has not been the same gentle soul since he joined the Fellowship.~~\"'Twas not too long ago that my Pendaran was a noble knight, one a lady could be proud of. But now,\" she shakes her head, \"in protest of a wrong he perceives in Britannia's government, he has defaced the statue of our beloved Lord British.\" She begins to sob.~~\"And, he has battled and wounded a fellow knight who chanced upon him during his hour of misdeed. He came to me,\" she tries to choke back her tears, \"with another's blood on his sword!\"~~After a few moments of your comforting, she regains her composure.~~\"Please do not be too harsh with him,\" she begs.");
@@ -52150,6 +54370,7 @@ void Func04C2 object#(0x4C2) ()
 				gflags[0x025D] = true;
 				UI_remove_answer("commons");
 				UI_add_answer("another");
+				fallthrough;
 
 			case "another":
 				message("\"I know not who, ");
@@ -52157,6 +54378,7 @@ void Func04C2 object#(0x4C2) ()
 				message(", and Pendaran would not say!\"");
 				say();
 				UI_remove_answer("another");
+				fallthrough;
 
 			case "bye":
 				message("\"May fortune follow thee, ");
@@ -52164,7 +54386,6 @@ void Func04C2 object#(0x4C2) ()
 				message(".\"*");
 				say();
 				abort;
-
 		}
 	}
 	if (event == 0x0000)
@@ -52313,40 +54534,47 @@ void Func04C3 object#(0x4C3) ()
 				}
 				UI_remove_answer("name");
 				UI_add_answer("Serpent's Hold");
+				fallthrough;
 
 			case "job":
 				message("\"I am charged with overseeing the Hold.\"");
 				say();
 				UI_add_answer("overseeing");
+				fallthrough;
 
 			case "overseeing":
 				message("\"It is not a difficult job. Sir Richter and Sir Horffe insure that things run smoothly as often as possible.\"");
 				say();
 				UI_remove_answer("overseeing");
 				UI_add_answer(["Sir Richter", "Sir Horffe"]);
+				fallthrough;
 
 			case "Sir Richter":
 				message("\"He is in charge of the Hold when I am otherwise occupied. He has seemed somewhat changed of late, but I trust him nonetheless.\"");
 				say();
 				UI_remove_answer("Sir Richter");
 				UI_add_answer("changed");
+				fallthrough;
 
 			case "changed":
 				message("\"It began when he joined The Fellowship. He became more... what is the word... orderly.\"~~He smiles. \"I suppose there is a regimented structure within The Fellowship that has done him good, no?\"");
 				say();
 				UI_remove_answer("changed");
 				UI_add_answer(["orderly", "Fellowship"]);
+				fallthrough;
 
 			case "Fellowship":
 				message("\"I'm afraid I know so little about them. They seem to help many people. However, I have noticed Sir Horffe has become rather apprehensive since Richter joined.\"");
 				say();
 				var0003 = true;
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "orderly":
 				message("\"It is difficult to explain. He seems more disciplined,\" he gives a short laugh, \"which, of course, is rather fitting for the Hold.\"");
 				say();
 				UI_remove_answer("orderly");
+				fallthrough;
 
 			case "Sir Horffe":
 				message("\"He is the captain of the guards. I would have no other for his position. He is the most honorable warrior I have ever met.\"");
@@ -52365,6 +54593,7 @@ void Func04C3 object#(0x4C3) ()
 					say();
 				}
 				UI_remove_answer("Sir Horffe");
+				fallthrough;
 
 			case "Serpent's Hold":
 				message("\"It has changed little since thy last visit, ");
@@ -52373,11 +54602,13 @@ void Func04C3 object#(0x4C3) ()
 				say();
 				UI_add_answer("people");
 				UI_remove_answer("Serpent's Hold");
+				fallthrough;
 
 			case "people":
 				message("\"I am afraid I must attend to other business shortly, and cannot show thee around. But I recommend that thou visitest the Hallowed Dock. Many of the Hold's knights frequent there in the evening.\"");
 				say();
 				UI_remove_answer("people");
+				fallthrough;
 
 			case "I am interested":
 				if (!gflags[0x0260])
@@ -52408,29 +54639,34 @@ void Func04C3 object#(0x4C3) ()
 					UI_add_answer("handled?");
 				}
 				UI_remove_answer("I am interested");
+				fallthrough;
 
 			case "handled?":
 				message("\"I have sent for a judge from the High Court in Yew. I realize thou dost not have the time for such petty matters.\"");
 				say();
 				UI_add_answer("I have the time");
 				UI_remove_answer("handled?");
+				fallthrough;
 
 			case "I have the time":
 				message("\"Yes, yes, thou art very kind, but I am sure there are much more important matters thou must attend to. I thank thee none the less.\"");
 				say();
 				UI_remove_answer("I have the time");
 				UI_add_answer("-I- -want- -to- -do- -it-!");
+				fallthrough;
 
 			case "-I- -want- -to- -do- -it-!":
 				message("\"Oh, I see. Well, in that case. The best way to begin is by speaking with Sir Denton, the tavernkeeper at the Hallowed Dock. His ability to solve puzzles and problems is remarkable. Please come to me with thy findings after thou hast solved this little mystery.\"");
 				say();
 				UI_remove_answer("-I- -want- -to- -do- -it-!");
+				fallthrough;
 
 			case "Sir Pendaran responsible":
 				message("He appears puzzled.~~\"I see. And how didst thou reach this conclusion?\"");
 				say();
 				UI_add_answer("Lady Jehanne");
 				UI_remove_answer("Sir Pendaran responsible");
+				fallthrough;
 
 			case "Lady Jehanne":
 				Func0911(0x0064);
@@ -52457,12 +54693,14 @@ void Func04C3 object#(0x4C3) ()
 				}
 				gflags[0x0261] = true;
 				UI_remove_answer("Lady Jehanne");
+				fallthrough;
 
 			case "Sir Horffe responsible":
 				message("He appears surprised.~~\"I see. And how didst thou reach this conclusion?\"");
 				say();
 				UI_add_answer("gargoyle blood on fragments");
 				UI_remove_answer("Sir Horffe responsible");
+				fallthrough;
 
 			case "gargoyle blood on fragments":
 				message("\"Very well.\" He is obviously troubled.");
@@ -52480,10 +54718,10 @@ void Func04C3 object#(0x4C3) ()
 				}
 				gflags[0x0262] = true;
 				UI_remove_answer("gargoyle blood on fragment");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Carry on, ");
 		message(var0000);
@@ -52596,6 +54834,7 @@ void Func04C4 object#(0x4C4) ()
 						UI_add_answer("gargoyle blood");
 					}
 				}
+				fallthrough;
 
 			case "more":
 				message("He clears his throat and examines you more closely.~~\"Ah, thou shouldst not mind my mumblings, ");
@@ -52604,71 +54843,84 @@ void Func04C4 object#(0x4C4) ()
 				say();
 				UI_add_answer("I mind");
 				UI_remove_answer("more");
+				fallthrough;
 
 			case "job":
 				message("\"I am the armourer of the Hold.\"");
 				say();
 				UI_add_answer(["armour", "weapons", "Hold"]);
+				fallthrough;
 
 			case "Hold":
 				message("\"Yes, thou art in Serpent's Hold, home to many noble and valiant knights.\"");
 				say();
 				UI_remove_answer("Hold");
 				UI_add_answer("knights");
+				fallthrough;
 
 			case "knights":
 				message("\"Lord John-Paul is charged with overseeing the Hold, though Sir Horffe is actually the captain of the guard. The rest of us, of course, are here to serve Lord British and the needs of Britannia.\"");
 				say();
 				UI_remove_answer("knights");
 				UI_add_answer(["John-Paul", "Horffe", "needs"]);
+				fallthrough;
 
 			case "gargoyle blood":
 				message("\"I should have known 'twould be Horffe.\" His eyes narrow. \"He has continually demonstrated an overall lack of morals and sense of unity. I will speak with John-Paul about this.\"");
 				say();
 				var0006 = true;
 				UI_remove_answer("gargoyle blood");
+				fallthrough;
 
 			case "John-Paul":
 				message("\"I trust his ability as I trust no other. I cannot tell thee how proud I was when he chose me to be his second in command!\"");
 				say();
 				UI_remove_answer("John-Paul");
+				fallthrough;
 
 			case "Horffe":
 				message("He appears thoughtful. \"I know the others trust him, and I, myself, do not doubt his fighting skills. But I cannot escape this feeling that he needs more moral discipline. I feel obligated to watch him at times.\"");
 				say();
 				UI_remove_answer("Horffe");
 				UI_add_answer(["others", "watch"]);
+				fallthrough;
 
 			case "watch":
 				message("\"I am not certain what it is that I am watching for. However, I expect him to fall into ways either aggressive or thieving. He simply does not seem to truly believe in the unity of the Hold.\"");
 				say();
 				UI_remove_answer("watch");
+				fallthrough;
 
 			case "others":
 				message("\"Well, it is obvious that John-Paul respects his abilities. Lady Tory has told me that she can sense his honesty, but I am not without skepticism.\"");
 				say();
 				UI_remove_answer("others");
 				UI_add_answer(["Tory", "sense"]);
+				fallthrough;
 
 			case "sense":
 				message("\"Lady Tory has the uncanny ability to empathize with others. She can determine another's intentions and emotions by doing nothing more than passing a simple greeting.\"");
 				say();
 				UI_remove_answer("sense");
+				fallthrough;
 
 			case "Tory":
 				message("\"She is the Hold advisor, often giving guidance to the knights.\" His expression becomes wistful. \"She is also quite, quite beautiful.\"");
 				say();
 				UI_remove_answer("Tory");
+				fallthrough;
 
 			case "needs":
 				message("\"Well, obviously there is many a vile beast looking to terrorize the countryside on the mainland. 'Tis our duty to protect the common man. In addition, we are here to provide examples of proper behavior to the general populace.\"");
 				say();
 				UI_remove_answer("needs");
+				fallthrough;
 
 			case "I mind":
 				message("Looking down, he shifts his weight from foot to foot for a moment. Glancing back up, eyes narrowed, he says, ~~\"Not long ago a man entered mine armoury who claimed to be the Avatar, just as thou dost claim. When I turned to reach for a weapon he had requested, he purloined several items and ran away.~~\"I assume,\" he says carefully, \"thou art not that rogue.\"");
 				say();
 				UI_remove_answer("I mind");
+				fallthrough;
 
 			case "armour":
 				if ((var0003 == 0x0007) || (var0003 == 0x000D))
@@ -52681,6 +54933,7 @@ void Func04C4 object#(0x4C4) ()
 					say();
 				}
 				UI_remove_answer("armour");
+				fallthrough;
 
 			case "Fellowship":
 				var0007 = UI_wearing_fellowship();
@@ -52695,10 +54948,12 @@ void Func04C4 object#(0x4C4) ()
 				}
 				UI_remove_answer("Fellowship");
 				UI_add_answer("philosophy");
+				fallthrough;
 
 			case "philosophy":
 				Func091A();
 				UI_remove_answer("philosophy");
+				fallthrough;
 
 			case "weapons":
 				if ((var0003 == 0x0007) || (var0003 == 0x000D))
@@ -52711,6 +54966,7 @@ void Func04C4 object#(0x4C4) ()
 					say();
 				}
 				UI_remove_answer("weapons");
+				fallthrough;
 
 			case "statue":
 				message("A look of disgust appears on his face.~~\"Obviously, someone who doth not seek unity did this! He is not worthy of reward!\"~~After a moment, he calms down.");
@@ -52742,10 +54998,10 @@ void Func04C4 object#(0x4C4) ()
 					}
 				}
 				UI_remove_answer("statue");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Pleasant journeys. Remember, trust thy brother.\"*");
 		say();
@@ -52815,32 +55071,38 @@ void Func04C5 object#(0x4C5) ()
 				message("\"To be named Horffe.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"To be the Captain of the guard. To serve and protect the people of Serpent's Hold.\"");
 				say();
 				UI_add_answer(["Captain", "Serpent's Hold"]);
+				fallthrough;
 
 			case "Captain":
 				message("\"To have been commanded to protect the people who live in Serpent's Hold and to maintain the general order of the knights.\"");
 				say();
 				UI_remove_answer("Captain");
 				UI_add_answer(["people", "knights"]);
+				fallthrough;
 
 			case "Serpent's Hold", "people":
 				message("\"To direct you to Sir Denton, the tavernkeeper at the Hallowed Dock. To know more about the Hold and the people than I.\"");
 				say();
 				UI_remove_answer(["people", "Serpent's Hold"]);
+				fallthrough;
 
 			case "Pendaran did it":
 				message("\"To thank you for this information. To be pleased to know the identity of my assailant.\"");
 				say();
 				UI_remove_answer("Pendaran did it");
+				fallthrough;
 
 			case "knights":
 				message("\"To inform you that many fine warriors take up residence between the Hold's walls. To have little fear of an attack from bandits or vicious animals.\"");
 				say();
 				UI_remove_answer("knights");
+				fallthrough;
 
 			case "statue":
 				message("\"To know nothing about that!\"");
@@ -52850,6 +55112,7 @@ void Func04C5 object#(0x4C5) ()
 					UI_add_answer("blood on fragments");
 				}
 				UI_remove_answer("statue");
+				fallthrough;
 
 			case "blood on fragments":
 				message("His rough demeanor softens.~~\"To be my blood.\" He sighs. \"But to be not the one who defaced the statue! To have been wounded while trying to stop the vandal.\"");
@@ -52857,32 +55120,36 @@ void Func04C5 object#(0x4C5) ()
 				UI_add_answer("vandal");
 				UI_remove_answer("blood on fragments");
 				gflags[0x0265] = true;
+				fallthrough;
 
 			case "vandal":
 				message("He looks down at his feet.~~\"To know not who he was. To have been very dark. To ask you not to tell Sir Richter.\"");
 				say();
 				UI_remove_answer("vandal");
 				UI_add_answer(["dark", "Sir Richter"]);
+				fallthrough;
 
 			case "dark":
 				message("\"To have been very poor visibility, but to be positive I was scuffling with an armed knight.\"");
 				say();
 				UI_remove_answer("dark");
+				fallthrough;
 
 			case "Sir Richter":
 				message("\"To know he will not believe one who openly defies The Fellowship.\"");
 				say();
 				UI_remove_answer("Sir Richter");
 				UI_add_answer("Fellowship");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"To know little about it. To like little about it.\"");
 				say();
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"To say goodbye.\"*");
 		say();
@@ -53006,17 +55273,20 @@ void Func04C6 object#(0x4C6) ()
 				message("\"As I told thee, my name is Sir Jordan.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I sell bows and crossbows here at Iolo's South.\"");
 				say();
 				UI_add_answer(["Iolo's South", "sell"]);
+				fallthrough;
 
 			case "Iolo's South":
 				message("\"The original branch is in Britain. But I do fine business here in the Hold.\"");
 				say();
 				UI_remove_answer("Iolo's South");
 				UI_add_answer(["original branch", "Hold"]);
+				fallthrough;
 
 			case "Hold":
 				message("\"Serpent's Hold, ");
@@ -53025,6 +55295,7 @@ void Func04C6 object#(0x4C6) ()
 				say();
 				UI_remove_answer("Hold");
 				UI_add_answer("knights");
+				fallthrough;
 
 			case "original branch":
 				message("\"The great archer himself, Iolo, started that branch more than two hundred years ago.\"");
@@ -53048,11 +55319,13 @@ void Func04C6 object#(0x4C6) ()
 					UI_remove_npc_face(0xFFFF);
 				}
 				UI_remove_answer("original branch");
+				fallthrough;
 
 			case "knights":
 				message("\"There are many who live within the walls of the Hold. Sir Denton, the bartender at the Hallowed Dock, knows them all.\"");
 				say();
 				UI_remove_answer("knights");
+				fallthrough;
 
 			case "sell":
 				var0007 = UI_get_schedule_type(UI_get_npc_object(0xFF3A));
@@ -53071,18 +55344,22 @@ void Func04C6 object#(0x4C6) ()
 					say();
 				}
 				UI_remove_answer("sell");
+				fallthrough;
 
 			case "weapons":
 				Func08A4();
+				fallthrough;
 
 			case "missiles":
 				Func08A3();
+				fallthrough;
 
 			case "statue":
 				message("He looks defensive. \"I had nothing to do with that.~~ \"But, I will tell thee that, on the night of the incident, I heard the sounds of scuffling in the commons. And, later on in the evening, I heard a woman cry out, as if in surprise!\"");
 				say();
 				UI_add_answer("woman");
 				UI_remove_answer("statue");
+				fallthrough;
 
 			case "woman":
 				message("\"I am not positive, ");
@@ -53091,10 +55368,10 @@ void Func04C6 object#(0x4C6) ()
 				say();
 				UI_remove_answer("woman");
 				gflags[0x025C] = true;
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"I hope to see thee again, ");
 		message(var0005);
@@ -53189,6 +55466,7 @@ void Func04C7 object#(0x4C7) ()
 						UI_add_answer("help");
 					}
 				}
+				fallthrough;
 
 			case "job":
 				message("\"I am the tavernkeeper, ");
@@ -53196,20 +55474,24 @@ void Func04C7 object#(0x4C7) ()
 				message(". I sell refreshment to the citizens of Britannia, most notably, the knights in Serpent's Hold.\"");
 				say();
 				UI_add_answer(["sell", "Serpent's Hold", "knights"]);
+				fallthrough;
 
 			case "knights":
 				message("\"Almost every resident here is a noble warrior. The exceptions would be Lady Jehanne, the provisioner; Lady Tory; Lady Leigh, the healer; and Menion, the trainer. I can also tell thee about all the other residents.\"");
 				say();
 				UI_add_answer(["Lady Jehanne", "Lady Tory", "Lady Leigh", "Menion", "residents"]);
 				UI_remove_answer("knights");
+				fallthrough;
 
 			case "sell":
 				Func0876();
+				fallthrough;
 
 			case "Serpent's Hold":
 				message("\"Serpent's Hold is located at precisely 53 degrees east and 165 degrees south.\"");
 				say();
 				UI_remove_answer("Serpent's Hold");
+				fallthrough;
 
 			case "residents":
 				message("\"Yes, ");
@@ -53218,26 +55500,31 @@ void Func04C7 object#(0x4C7) ()
 				say();
 				UI_push_answers();
 				UI_add_answer(["no one", "Lord John-Paul", "Sir Richter", "Sir Horffe", "Sir Jordan", "Sir Pendaran"]);
+				fallthrough;
 
 			case "no one":
 				UI_pop_answers();
 				UI_remove_answer("residents");
+				fallthrough;
 
 			case "Lord John-Paul":
 				message("\"He is the Lord of Serpent's Hold. He is a capable leader and a fair man.\"");
 				say();
 				UI_remove_answer("Lord John-Paul");
+				fallthrough;
 
 			case "Lady Leigh":
 				message("\"Her healing skills are said to be unparalleled.\"");
 				say();
 				UI_remove_answer("Lady Leigh");
+				fallthrough;
 
 			case "Sir Richter":
 				message("\"He is second in command to Lord John-Paul. He is teaching me how to gamble well. In fact, he began increasing the lessons after joining The Fellowship.\"");
 				say();
 				UI_add_answer("Fellowship");
 				UI_remove_answer("Sir Richter");
+				fallthrough;
 
 			case "Sir Horffe":
 				message("\"Sir Horffe is an excellent warrior. He is a gargoyle that was found by two knights when he was very young. They chose to raise him as their own child. He is very honorable.\"");
@@ -53247,37 +55534,44 @@ void Func04C7 object#(0x4C7) ()
 				{
 					UI_add_answer("Gargish accent");
 				}
+				fallthrough;
 
 			case "Gargish accent":
 				message("\"Sir Horffe has chosen to use the Gargish syntax of our language so he may better maintain his cultural ties.\"");
 				say();
 				UI_remove_answer("Gargish accent");
+				fallthrough;
 
 			case "Sir Jordan":
 				message("\"Despite his blindness, Sir Jordan perceives objects around him very well. He is an excellent tinkerer, and can repair many items.\"");
 				say();
 				UI_remove_answer("Sir Jordan");
+				fallthrough;
 
 			case "Lady Tory":
 				message("\"I believe she is a druid. She was showing me how to be more compassionate than I was before. She is very good at knowing what others are feeling and why they are experiencing such emotions.\"");
 				say();
 				UI_remove_answer("Lady Tory");
+				fallthrough;
 
 			case "Menion":
 				message("\"He is the fighting instructor. In his spare time, he likes to make swords. Menion has been kind enough to give me one of his creations.\"");
 				say();
 				UI_remove_answer("Menion");
+				fallthrough;
 
 			case "Sir Pendaran":
 				message("\"Sir Pendaran is a knight of the Hold. He is very friendly, but I have been told he can be overbearing at times.\"");
 				say();
 				UI_remove_answer("Sir Pendaran");
+				fallthrough;
 
 			case "Lady Jehanne":
 				message("\"She is the lady of Sir Pendaran. She has been helping me better my sense of humor.\"");
 				say();
 				UI_add_answer("humor");
 				UI_remove_answer("Lady Jehanne");
+				fallthrough;
 
 			case "humor":
 				message("\"My jokes are very bad. If thou wouldst like, I will tell thee one.\"");
@@ -53315,6 +55609,7 @@ void Func04C7 object#(0x4C7) ()
 					say();
 				}
 				UI_remove_answer("humor");
+				fallthrough;
 
 			case "I don't know":
 				UI_pop_answers();
@@ -53334,6 +55629,7 @@ void Func04C7 object#(0x4C7) ()
 				}
 				UI_remove_answer("I don't know");
 				UI_remove_answer("to get to the other side");
+				fallthrough;
 
 			case "to get to the other side":
 				UI_pop_answers();
@@ -53342,6 +55638,7 @@ void Func04C7 object#(0x4C7) ()
 				say();
 				UI_remove_answer("to get to the other side");
 				UI_remove_answer("I don't know");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"The Fellowship is a twenty-year-old organization that holds many festivals, parades, and celebrations. In addition, they maintain a shelter in the town of Paws. They have an underlying philosophy called the Triad of Inner Strength. This triad is broken into the three principles known as `strive for unity,' `trust thy brother,' and `worthiness precedes reward.'I will now explain the meaning of each principple.\"");
@@ -53375,6 +55672,7 @@ void Func04C7 object#(0x4C7) ()
 					}
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "help":
 				message("\"Yes, ");
@@ -53382,6 +55680,7 @@ void Func04C7 object#(0x4C7) ()
 				message(", I can help thee investigate the crime. I believe the best way to begin would be by speaking with Sir Richter, since he is the one who searched the statue after the incident.\"");
 				say();
 				UI_remove_answer("help");
+				fallthrough;
 
 			case "got fragments":
 				message("\"Perhaps thou shouldst have these stone chips examined by the healer, Lady Leigh.\"");
@@ -53391,15 +55690,16 @@ void Func04C7 object#(0x4C7) ()
 					UI_add_answer("gargoyle blood");
 				}
 				UI_remove_answer("got fragments");
+				fallthrough;
 
 			case "gargoyle blood":
 				message("\"That behavior does not seem typical of Sir Horffe. Thou mayest wish to report to Lord John-Paul, but I expect there is more to this. It would be a good idea to visit Lady Tory. She is very good at sensing the feelings of others, and may have learned something by observing the residents after the event.\"");
 				say();
 				UI_remove_answer("gargoyle blood");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good day, ");
 		message(var0001);
@@ -53476,11 +55776,13 @@ void Func04C8 object#(0x4C8) ()
 					UI_add_answer("Riky");
 				}
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"My job is to provide counsel for Lord John-Paul and anyone else in need of guidance here at the Hold.\"");
 				say();
 				UI_add_answer(["Lord John-Paul", "Hold"]);
+				fallthrough;
 
 			case "Riky":
 				if (gflags[0x0277])
@@ -53545,11 +55847,13 @@ void Func04C8 object#(0x4C8) ()
 					}
 				}
 				UI_remove_answer("Riky");
+				fallthrough;
 
 			case "statue":
 				message("\"Hmm,\" she appears thoughtful, \"when the incident was brought up to everyone here at the hold, I remember Sir Jordan becoming a bit nervous. Perhaps thou shouldst speak with him.\"");
 				say();
 				UI_remove_answer("statue");
+				fallthrough;
 
 			case "Hold":
 				message("\"I sense that thou wishest to know about the residents here at Serpent's Hold. Is this correct?\"");
@@ -53571,6 +55875,7 @@ void Func04C8 object#(0x4C8) ()
 					UI_add_answer(["healer", "armourer", "trainer", "provisioner"]);
 				}
 				UI_remove_answer("Hold");
+				fallthrough;
 
 			case "Lord John-Paul":
 				message("\"He is an extraordinary leader. Everyone looks up to him. Thou hast only to ask his captain.\"");
@@ -53578,34 +55883,40 @@ void Func04C8 object#(0x4C8) ()
 				UI_remove_answer("Lord John-Paul");
 				UI_add_answer("captain");
 				var0002 = true;
+				fallthrough;
 
 			case "healer":
 				message("\"Lady Leigh is very skilled as a healer. I have yet to see her lose a patient.\"");
 				say();
 				UI_remove_answer("healer");
+				fallthrough;
 
 			case "armourer":
 				message("\"Hmmm. Well, Sir Richter has changed much recently -- ever since he joined The Fellowship. He seems a little less compassionate.\"");
 				say();
 				UI_add_answer("Fellowship");
 				UI_remove_answer("armourer");
+				fallthrough;
 
 			case "tavernkeeper":
 				message("\"Sir Denton is the most astute man I have ever met. He is the only one I cannot sense. And I have never seen him remove his armour....\" She shrugs.");
 				say();
 				UI_remove_answer("tavernkeeper");
+				fallthrough;
 
 			case "trainer":
 				message("\"I know Menion least of all. He is very quiet, spending most of his spare time weaponsmithing. The tavernkeeper may know more about him.\"");
 				say();
 				UI_add_answer("tavernkeeper");
 				UI_remove_answer("trainer");
+				fallthrough;
 
 			case "provisioner":
 				message("\"Her name is Lady Jehanne. She is the Lady of Sir Pendaran,\" she says with a gleam in her eye.");
 				say();
 				UI_add_answer("Sir Pendaran");
 				UI_remove_answer("provisioner");
+				fallthrough;
 
 			case "captain":
 				message("\"The Captain of the guard, Sir Horffe, is a gargoyle. He was found by two humans who raised him to be a valiant knight. He is a very dedicated warrior, and rarely leaves Lord John-Paul's side.\"");
@@ -53615,22 +55926,26 @@ void Func04C8 object#(0x4C8) ()
 					UI_add_answer("Gargish accent");
 				}
 				UI_remove_answer("captain");
+				fallthrough;
 
 			case "Gargish accent":
 				message("\"Despite his human upbringing, Horffe has struggled to maintain his Gargish identity. By speaking in the same manner as his brethren, he feels he can better hold on to his background.\"");
 				say();
 				UI_remove_answer("Gargish accent");
+				fallthrough;
 
 			case "Sir Pendaran":
 				message("\"He is a brave and hearty fighter, and,\" she smiles, \"he is also a bit on the attractive side.\"");
 				say();
 				UI_remove_answer("Sir Pendaran");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"The Fellowship does not have a branch here, but two of our knights are members: Sir Richter and Sir Pendaran. I know they are interested in having Sir Jordan join as well.\"");
 				say();
 				UI_remove_answer("Fellowship");
 				UI_add_answer("Sir Jordan");
+				fallthrough;
 
 			case "Sir Jordan":
 				message("\"He is a wonder. Despite his blindness, he fights with amazing deftness. In fact, he also enjoys toying with mechanical items, and his loss of eyesight does not seem to affect that, either.~~\"However, I sense in him a very recent change, remarkably like that in Sir Richter. He would be an interesting one to speak with. Thou mayest find him at Iolo's South.\"*");
@@ -53647,10 +55962,10 @@ void Func04C8 object#(0x4C8) ()
 					UI_show_npc_face(0xFF38, 0x0000);
 				}
 				UI_remove_answer("Sir Jordan");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"I sense thou hast pressing engagements elsewhere. I bid thee farewell.\"*");
 		say();
@@ -53706,6 +56021,7 @@ void Func04C9 object#(0x4C9) ()
 				message("She blushes. \"I am Lady Leigh.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the Healer of Serpent's Hold.\"");
@@ -53716,6 +56032,7 @@ void Func04C9 object#(0x4C9) ()
 				{
 					UI_add_answer("examine chips");
 				}
+				fallthrough;
 
 			case "heal":
 				if (var0001 == 0x0007)
@@ -53728,12 +56045,14 @@ void Func04C9 object#(0x4C9) ()
 					say();
 				}
 				UI_remove_answer("heal");
+				fallthrough;
 
 			case "Serpent's Hold":
 				message("\"Lord Jean-Paul is in charge of keeping the order here, but Sir Denton would be an even better source of information about Serpent's Hold.\"");
 				say();
 				UI_add_answer(["John-Paul", "Denton"]);
 				UI_remove_answer("Serpent's Hold");
+				fallthrough;
 
 			case "John-Paul":
 				message("\"He is an easy man to find, for Sir Horffe hardly ever leaves his side. Watch for the tall, muscular gargoyle.\"");
@@ -53747,21 +56066,25 @@ void Func04C9 object#(0x4C9) ()
 				say();
 				UI_remove_answer("John-Paul");
 				UI_add_answer(["Horffe", "Richter"]);
+				fallthrough;
 
 			case "Horffe":
 				message("\"He was found at a very young age, apparently abandoned by his father. Two people took and raised him as their own. As thou couldst see simply by meeting him, he is a very noble person and a stout warrior.\"");
 				say();
 				UI_remove_answer("Horffe");
+				fallthrough;
 
 			case "Richter":
 				message("\"He is the armourer. His shop is in the back of the Hold.\"");
 				say();
 				UI_remove_answer("Richter");
+				fallthrough;
 
 			case "Denton":
 				message("\"He is the tavern keeper at the Hallowed Dock, just inside the Hold's doors. He is wonderful at remembering and discussing important facts.\"");
 				say();
 				UI_remove_answer("Denton");
+				fallthrough;
 
 			case "examine chips":
 				var0002 = Func0931(0xFE9B, 0x0001, 0x032F, 0xFE99, 0x0004);
@@ -53786,6 +56109,7 @@ void Func04C9 object#(0x4C9) ()
 					say();
 				}
 				UI_remove_answer("examine chips");
+				fallthrough;
 
 			case "gargoyle blood":
 				message("She appears thoughtful.~~\"What is odd, ");
@@ -53793,10 +56117,10 @@ void Func04C9 object#(0x4C9) ()
 				message(", is that there is only one gargoyle in Serpent's Hold. But I cannot imagine Sir Horffe would have had anything to do with this wanton destruction.\"");
 				say();
 				UI_remove_answer("gargoyle blood");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Farewell, ");
 		message(var0000);
@@ -53846,50 +56170,59 @@ void Func04CA object#(0x4CA) ()
 				message("\"I am Ian.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the director of this Meditation Retreat for Fellowship members.\"");
 				say();
 				UI_add_answer(["director", "Meditation Retreat"]);
+				fallthrough;
 
 			case "director":
 				message("\"I manage the various activities and lead the initiates in their exercises in meditation.\"");
 				say();
 				UI_remove_answer("director");
 				UI_add_answer(["activities", "exercises"]);
+				fallthrough;
 
 			case "activities":
 				message("\"The activities of the retreat consist of philosophical training and studies.\"");
 				say();
 				UI_remove_answer("activities");
+				fallthrough;
 
 			case "exercises":
 				message("\"The members must all grow to hear and understand the voice which guides them down the path of Inner Strength. The exercises in meditation accelerate this process.\"");
 				say();
 				UI_remove_answer("exercises");
 				UI_add_answer("voice");
+				fallthrough;
 
 			case "voice":
 				message("\"It is that voice which one hears inside. We all have the capability of hearing it. Some are able to hear it quite easily and do not have to attend sessions here at the Meditation Retreat. Others, however, find it more difficult to hear the voice. Then they require study at the Retreat.\"");
 				say();
 				UI_remove_answer("voice");
+				fallthrough;
 
 			case "Meditation Retreat":
 				message("\"It was set up by The Fellowship so that new members can attend and learn more about our group, get in touch with themselves, and help them to become better brothers in The Fellowship. Most of the work is done inside the barrier.\"");
 				say();
 				UI_remove_answer("Meditation Retreat");
 				UI_add_answer(["in touch", "barrier"]);
+				fallthrough;
 
 			case "in touch":
 				message("\"Most of the people who come to The Fellowship are wrestling with the failures in their lives. They are essentially\tafraid of themselves. Here at the Meditation Retreat people learn to believe in themselves. And they build up that belief by learning how to best apply the philosophy of The\tFellowship to their lives.\"");
 				say();
 				UI_remove_answer("in touch");
+				fallthrough;
 
 			case "barrier":
 				message("\"It was set up to keep out those who are not members. Inside the barrier, Fellowship members find it much easier to hear their inner voice. Each member is given a key which they may use at any time.\"");
 				say();
 				UI_remove_answer("barrier");
 				UI_add_answer("key");
+				fallthrough;
 
 			case "key":
 				if (var0000 && (!gflags[0x0006]))
@@ -53936,11 +56269,13 @@ void Func04CA object#(0x4CA) ()
 					say();
 				}
 				UI_remove_answer("key");
+				fallthrough;
 
 			case "rule":
 				message("\"Do not venture into the cave which thou wilt find inside the barrier. The cave is off-limits to attendees.\"");
 				say();
 				UI_remove_answer("rule");
+				fallthrough;
 
 			case "Elizabeth and Abraham":
 				if (!gflags[0x02A8])
@@ -53955,10 +56290,10 @@ void Func04CA object#(0x4CA) ()
 					say();
 				}
 				UI_remove_answer("Elizabeth and Abraham");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye.\"*");
 		say();
@@ -54050,22 +56385,26 @@ void Func04CB object#(0x4CB) ()
 					}
 				}
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I oversee the local branch of the Britannian Mining Company in Vesper. We mine many different minerals.\"");
 				say();
 				UI_add_answer(["Vesper", "We", "minerals"]);
+				fallthrough;
 
 			case "minerals":
 				message("\"Gold and lead.\"");
 				say();
 				UI_remove_answer("minerals");
+				fallthrough;
 
 			case "Vesper":
 				message("\"That is the name of our town. Liana at town hall can give thee any more information that thou mightest need, but I have lived here with my family since the branch opened.\"");
 				say();
 				UI_add_answer(["Liana", "family"]);
 				UI_remove_answer("Vesper");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"It is a wonderful organization. They perform many works of charity and special events -- parades and such.\"  He points to his medallion. \"As thou canst see, I am a member. I fully believe in the triad of inner strength.\"");
@@ -54077,46 +56416,53 @@ void Func04CB object#(0x4CB) ()
 				}
 				UI_add_answer("triad");
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "triad":
 				message("\"Those are The Fellowship's three basic principles: Strive for Unity, Trust thy Brother, and Worthiness Precedes Reward.\"");
 				say();
 				UI_remove_answer("triad");
+				fallthrough;
 
 			case "Elizabeth and Abraham":
 				message("\"They were the two Fellowship officials that were here! They only stayed for a minute or two. I have no idea where they are now.\"");
 				say();
 				UI_remove_answer("Elizabeth and Abraham");
+				fallthrough;
 
 			case "We":
 				message("\"I work with Mara and a gargoyle named Lap-Lem.\"");
 				say();
 				UI_add_answer(["Mara", "Lap-Lem"]);
 				UI_remove_answer("We");
+				fallthrough;
 
 			case "Mara":
 				message("\"She is a fantastic worker. Better than most men I have mined with.\"");
 				say();
 				UI_remove_answer("Mara");
+				fallthrough;
 
 			case "Lap-Lem":
 				message("\"Well, for a gargoyle, he is not too lazy. He works much harder than that other one who left, Anmanivas. But I would fain let him go if we did not need the extra hand.\"");
 				say();
 				UI_remove_answer("Lap-Lem");
+				fallthrough;
 
 			case "Liana":
 				message("\"She keeps the records at town hall.\"");
 				say();
 				UI_remove_answer("Liana");
+				fallthrough;
 
 			case "family":
 				message("\"Yes, my wife, Yvella, and my daughter, Catherine.\"");
 				say();
 				UI_remove_answer("family");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"It has been a pleasure, ");
 		message(var0000);
@@ -54205,58 +56551,67 @@ void Func04CC object#(0x4CC) ()
 					}
 				}
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("She flexes proudly, \"I am a miner in Vesper.\"");
 				say();
 				UI_add_answer("Vesper");
+				fallthrough;
 
 			case "Vesper":
 				message("\"This used to be a pleasant town,\" she looks around, apparently checking if anyone is near, \"'til the gargoyles became so unruly. Now most of us have to spend far too much time wondering when the gargoyles will decide they want to kill us.\"");
 				say();
 				UI_add_answer(["gargoyles", "us"]);
 				UI_remove_answer("Vesper");
+				fallthrough;
 
 			case "gargoyles":
 				message("She shrugs. \"There is naught to say, except that they are a menace. This town would be a much better place without them.\"");
 				say();
 				UI_remove_answer("gargoyles");
+				fallthrough;
 
 			case "us":
 				message("\"Well, I know Cador feels as I do, as does his wife. I have heard the mayor express his concern about them. I don't really know his clerk, Liana.\"");
 				say();
 				UI_add_answer(["Cador", "wife", "mayor", "Liana"]);
 				UI_remove_answer("us");
+				fallthrough;
 
 			case "wife":
 				message("\"Yvella is a lovely woman. She spends her days caring for their daughter, Catherine.\"");
 				say();
 				UI_remove_answer("wife");
+				fallthrough;
 
 			case "Liana":
 				message("\"I have only seen her a few times. I do not know her well enough to say this, but I think she is angry about something, for she is always in a bad mood.\"");
 				say();
 				UI_remove_answer("Liana");
+				fallthrough;
 
 			case "Cador":
 				message("\"He is in charge of managing the mines. Does a fair job, too. He usually joins me at the Gilded Lizard.\"");
 				say();
 				UI_add_answer("Gilded Lizard");
 				UI_remove_answer("Cador");
+				fallthrough;
 
 			case "mayor":
 				message("\"His name is Auston. I like him, but I suspect that Liana is the one who truly keeps Vesper in order.\"");
 				say();
 				UI_remove_answer("mayor");
+				fallthrough;
 
 			case "Gilded Lizard":
 				message("\"That is the tavern here in Vesper. Yongi's the barkeeper. He serves a passing fair tankard of ale.\"");
 				say();
 				UI_remove_answer("Gilded Lizard");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("Mara shakes your hand and slaps you on the back, saying, \"Fare thee well, friend!\"*");
 		say();
@@ -54306,55 +56661,65 @@ void Func04CD object#(0x4CD) ()
 				message("\"I am Zaksam,\" he states proudly.");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I teach others to be strong fighters. I am a trainer here in Vesper.\"");
 				say();
 				UI_add_answer(["Vesper", "train"]);
+				fallthrough;
 
 			case "Vesper":
 				message("\"I have taught here for many years. I like the town, but I am not too fond of some of the residents.\"");
 				say();
 				UI_add_answer(["town", "residents"]);
 				UI_remove_answer("Vesper");
+				fallthrough;
 
 			case "town":
 				message("\"The land to the northeast is a bit dry, but the oasis and nearby shores give us plenty of water for drinking and bathing.\"");
 				say();
 				UI_remove_answer("town");
+				fallthrough;
 
 			case "residents":
 				message("\"Most of us are respectable, but there are a few that I wonder about. Blorn and the mayor, for example.");
 				say();
 				UI_add_answer(["mayor", "Blorn"]);
 				UI_remove_answer("residents");
+				fallthrough;
 
 			case "mayor":
 				message("\"'Tis not that I do not trust him. I just wonder about his ability to run the town. His name is Auston. Talk to him and see for thyself what thou thinkest. Better yet, talk to his clerk, Liana.\"");
 				say();
 				UI_remove_answer("mayor");
+				fallthrough;
 
 			case "Blorn":
 				message("\"That one I do not like a bit. I do not trust him. He reminds me of those gargoyles.\"");
 				say();
 				UI_add_answer("gargoyles");
 				UI_remove_answer("Blorn");
+				fallthrough;
 
 			case "gargoyles":
 				message("\"What is there to say, but do not let them get too close or they will rob thee. Any day now they may try to use violence to take over the town. The mayor himself has asked that I fight if necessary. Though I have no fear of death, that is a battle I do not look forward to.\"");
 				say();
 				UI_remove_answer("gargoyles");
 				UI_add_answer(["rob", "violence"]);
+				fallthrough;
 
 			case "rob":
 				message("\"I have already heard that some of my fellow residents have had things stolen by those wretched creatures.\"");
 				say();
 				UI_remove_answer("rob");
+				fallthrough;
 
 			case "violence":
 				message("\"As thou must surely know, all gargoyles are prone to senseless fits of violence. 'Twould be quite natural to expect them to use it for their own selfish gain.\"");
 				say();
 				UI_remove_answer("violence");
+				fallthrough;
 
 			case "train":
 				if (var0002 == 0x0007)
@@ -54380,10 +56745,10 @@ void Func04CD object#(0x4CD) ()
 					message(". Please feel free to see me when it is open.\"");
 					say();
 				}
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"May thy strength be thy guide.\"*");
 		say();
@@ -54473,6 +56838,7 @@ void Func04CE object#(0x4CE) ()
 				message(".\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I, my friend, am the provisioner. And, if I may be immodest, also a counselor for Vesper. Perhaps I can someday give thee advice, ");
@@ -54480,6 +56846,7 @@ void Func04CE object#(0x4CE) ()
 				message(". For remember, that which does not kill us, makes us wounded.\"");
 				say();
 				UI_add_answer(["Vesper", "buy"]);
+				fallthrough;
 
 			case "Vesper":
 				message("\"Yes, ");
@@ -54488,11 +56855,13 @@ void Func04CE object#(0x4CE) ()
 				say();
 				UI_add_answer(["people", "advice"]);
 				UI_remove_answer("Vesper");
+				fallthrough;
 
 			case "advice":
 				message("\"Early to bed, early to rise, makes Jack a dull boy.\"");
 				say();
 				UI_remove_answer("advice");
+				fallthrough;
 
 			case "buy":
 				UI_remove_answer("buy");
@@ -54509,6 +56878,7 @@ void Func04CE object#(0x4CE) ()
 					message(".\"");
 					say();
 				}
+				fallthrough;
 
 			case "people":
 				message("\"About whom doth thou wish to know? Auston? The gargoyles? Liana? Cador? Perhaps Yongi?\"");
@@ -54516,21 +56886,25 @@ void Func04CE object#(0x4CE) ()
 				UI_push_answers();
 				UI_add_answer(["Auston", "gargoyles", "Liana", "Yongi", "Cador", "no one"]);
 				UI_remove_answer("people");
+				fallthrough;
 
 			case "Liana":
 				message("\"Liana is a very fine young woman who clerks at the townhall.\"");
 				say();
 				UI_remove_answer("Liana");
+				fallthrough;
 
 			case "Yongi":
 				message("\"He is the bartender at the Glided Gizzard.\" He stops, shakes his head, and then corrects himself. \"I mean the Lilded Lizard,\" he frowns. \"No, that's the Gilded Lizard. Yes that's it!\"");
 				say();
 				UI_remove_answer("Yongi");
+				fallthrough;
 
 			case "Cador":
 				message("\"Cador oversees the mines. He and his wife, Yvella, have a lovely daughter named Catherine.\"");
 				say();
 				UI_remove_answer("Cador");
+				fallthrough;
 
 			case "Auston":
 				message("\"The mayor? I would have thought thou wouldst have met him by now, ");
@@ -54538,6 +56912,7 @@ void Func04CE object#(0x4CE) ()
 				message(". He is performing an excellent job. Thou mayest not realize this,\" he blushes, \"but 'tis I who suggested he run for the office.\"");
 				say();
 				UI_remove_answer("Auston");
+				fallthrough;
 
 			case "gargoyles":
 				message("\"I fear they will stage an uprising. I know Auston holds the same thoughts, for very recently he approached me and asked for my guidance to prepare for just such an incident. I will warn thee just as I warned him. Always remember, ");
@@ -54545,14 +56920,15 @@ void Func04CE object#(0x4CE) ()
 				message(", the best defense is a good defense!\"");
 				say();
 				UI_remove_answer("gargoyles");
+				fallthrough;
 
 			case "no one":
 				UI_pop_answers();
 				UI_remove_answer("people");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Farewell, ");
 		message(var0000);
@@ -54684,11 +57060,13 @@ void Func04CF object#(0x4CF) ()
 						say();
 					}
 				}
+				fallthrough;
 
 			case "job":
 				message("\"Why, I tend me bar. And lend me ear ta the customers,\" he adds, touching his right ear for emphasis.");
 				say();
 				UI_add_answer(["customers", "buy"]);
+				fallthrough;
 
 			case "Vesper":
 				message("\"Why, I wouldna wanna live anyplace else. 'Course, this town would be a better place if we could rid ourselves of those jackals, the gargoyles.\"");
@@ -54698,6 +57076,7 @@ void Func04CF object#(0x4CF) ()
 					UI_add_answer("gargoyles");
 				}
 				UI_remove_answer("Vesper");
+				fallthrough;
 
 			case "gargoyles":
 				message("\"Gargoyles! What about them? They be the vilest, evilest, cruelest, most despicable things ever ta crawl upon this great land. I kinna tell ye too well ta stay away from them. I kin only imagine whata fine town this'd be if there weren't na more gargoyles. 'Course, I know those dogs are probably sayin' the same about us. Everybody knows they're gonna come an' kill allus in our sleep one evenin'.\"");
@@ -54712,12 +57091,14 @@ void Func04CF object#(0x4CF) ()
 				var0005 = true;
 				UI_remove_answer("gargoyles");
 				gflags[0x0283] = true;
+				fallthrough;
 
 			case "customers":
 				message("\"Well, all I really know in Vesper are me regulars: Cador, Mara, and Blorn. Ye might be wantin' ta talk to Auston, the mayor, or his clerk, Liana. Ah, now there's a fine, young lass.\" He winks at you.");
 				say();
 				UI_add_answer(["Cador", "Mara", "Blorn", "Vesper"]);
 				UI_remove_answer("customers");
+				fallthrough;
 
 			case "Cador":
 				var0008 = UI_is_dead(UI_get_npc_object(0xFF35));
@@ -54732,6 +57113,7 @@ void Func04CF object#(0x4CF) ()
 					say();
 				}
 				UI_remove_answer("Cador");
+				fallthrough;
 
 			case "Mara":
 				var0009 = UI_is_dead(UI_get_npc_object(0xFF34));
@@ -54746,6 +57128,7 @@ void Func04CF object#(0x4CF) ()
 					say();
 				}
 				UI_remove_answer("Mara");
+				fallthrough;
 
 			case "Blorn":
 				message("\"There be one who knows what's what. He knows what be wrong with this town! Gargoyles! That is what be wrong. He hates 'em, 'e does.\"");
@@ -54765,24 +57148,27 @@ void Func04CF object#(0x4CF) ()
 				}
 				UI_remove_answer("Blorn");
 				gflags[0x0283] = true;
+				fallthrough;
 
 			case "buy":
 				message("\"Be ye wantin' food or drink?\"");
 				say();
 				UI_add_answer(["food", "drink"]);
 				UI_remove_answer("buy");
+				fallthrough;
 
 			case "food":
 				Func094D();
 				UI_remove_answer("food");
+				fallthrough;
 
 			case "drink":
 				Func094E();
 				UI_remove_answer("drink");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"May the road rise up ta meet ye!\"*");
 		say();
@@ -54884,10 +57270,12 @@ void Func04D0 object#(0x4D0) ()
 				{
 					UI_add_answer("gargoyles");
 				}
+				fallthrough;
 
 			case "job":
 				message("\"I don't believe I wish to tell thee.\"");
 				say();
+				fallthrough;
 
 			case "gargoyles":
 				message("A growl escapes his throat.~~\"What about the bloody gargoyles? Don't tell me thou art a gargoyle lover.\"");
@@ -54924,6 +57312,7 @@ void Func04D0 object#(0x4D0) ()
 					gflags[0x0280] = true;
 				}
 				UI_remove_answer("gargoyles");
+				fallthrough;
 
 			case "return amulet":
 				message("He glares at you for a moment, then shrugs, muttering, \"It's not like he earned it honestly or anything...\"");
@@ -54942,6 +57331,7 @@ void Func04D0 object#(0x4D0) ()
 					abort;
 				}
 				UI_remove_answer("return amulet");
+				fallthrough;
 
 			case "Lap-Lem":
 				message("\"Thou hast killed the jackal?\"");
@@ -54958,10 +57348,10 @@ void Func04D0 object#(0x4D0) ()
 					say();
 				}
 				UI_remove_answer("Lap-Lem");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("He gives a slight nod and a quiet grunt, and returns to his business.*");
 		say();
@@ -55017,11 +57407,13 @@ void Func04D1 object#(0x4D1) ()
 				message("\"Please call me Auston.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("He sighs before responding. \"I am the Mayor of Vesper.\"");
 				say();
 				UI_add_answer("Vesper");
+				fallthrough;
 
 			case "Vesper":
 				message("\"It was a pleasant place in days past. But now, ");
@@ -55030,6 +57422,7 @@ void Func04D1 object#(0x4D1) ()
 				say();
 				UI_add_answer(["problems", "people"]);
 				UI_remove_answer("Vesper");
+				fallthrough;
 
 			case "problems":
 				message("\"I am worried that the gargoyles may get restless and attack us. Blorn has not helped things.\" He points to his chest. \"I am the one charged with maintaining order here. If there is not any, it will be my responsibility. I have asked Eldroth what to do in case of an uprising and I am trying to plan accordingly.\"");
@@ -55044,6 +57437,7 @@ void Func04D1 object#(0x4D1) ()
 					UI_add_answer("Blorn");
 				}
 				UI_remove_answer("problems");
+				fallthrough;
 
 			case "gargoyles":
 				message("\"I don't trust them any more than thou dost, ");
@@ -55051,11 +57445,13 @@ void Func04D1 object#(0x4D1) ()
 				message(", but, officially, they are citizens, too. I am afraid they may try to forcefully gain control of the town someday.\"");
 				say();
 				UI_remove_answer("gargoyles");
+				fallthrough;
 
 			case "Liana":
 				message("\"She is my clerk. She is very efficient. I couldn't govern Vesper without her.\"");
 				say();
 				UI_remove_answer("Liana");
+				fallthrough;
 
 			case "people":
 				var0004 = UI_is_dead(UI_get_npc_object(0xFF35));
@@ -55082,33 +57478,39 @@ void Func04D1 object#(0x4D1) ()
 					UI_add_answer("Blorn");
 				}
 				UI_remove_answer("people");
+				fallthrough;
 
 			case "shame":
 				message("\"I would have thought thou wouldst know.\" He strokes his beard.~~\"Cador was slain in a fight at the Gilded Lizard. 'Twas the first act of this kind ever in Vesper. Quite odd.\"");
 				say();
 				UI_remove_answer("shame");
+				fallthrough;
 
 			case "Eldroth":
 				message("\"Eldroth acts as our counselor. He has been giving advice to the people of our town for... well, longer than I can remember. He owns the provisions shop.\"");
 				say();
 				var0003 = true;
 				UI_remove_answer("Eldroth");
+				fallthrough;
 
 			case "trainer":
 				message("\"Zaksam is our trainer. He can teach thee how to better defend thyself. Should the gargoyles cause trouble, I am comforted that he would defend our side.\"");
 				say();
 				UI_remove_answer("trainer");
+				fallthrough;
 
 			case "Yongi":
 				message("\"He serves drinks at the tavern. Many have claimed him to be the best bartender on this side of the desert. People come from all around Britannia to speak with him,\" he says proudly.");
 				say();
 				UI_remove_answer("Yongi");
+				fallthrough;
 
 			case "Blorn":
 				message("\"I am not sure what to think about him. I do not know what he does for a living, but I know the gargoyles hate him more than they do the rest of us. I am frightened of what will happen, since it is obvious that he holds mutual feelings towards them.\"");
 				say();
 				var0002 = true;
 				UI_remove_answer("Blorn");
+				fallthrough;
 
 			case "Elizabeth and Abraham":
 				if (!gflags[0x01EF])
@@ -55123,10 +57525,10 @@ void Func04D1 object#(0x4D1) ()
 					say();
 				}
 				UI_remove_answer("Elizabeth and Abraham");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye, ");
 		message(var0001);
@@ -55177,28 +57579,33 @@ void Func04D2 object#(0x4D2) ()
 				message("Breaking from her work, the woman turns to look at you long enough to respond, \"My name is Liana.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the Mayor's clerk. I am responsible for keeping track of official records and documents in Vesper.\"");
 				say();
 				UI_add_answer(["Vesper", "mayor"]);
+				fallthrough;
 
 			case "Vesper":
 				message("\"I like the town, but 'tis so far from Britain that it attracts some truly... unusual people.\"");
 				say();
 				UI_add_answer(["people", "unusual"]);
 				UI_remove_answer("Vesper");
+				fallthrough;
 
 			case "mayor":
 				message("\"I respect Auston in an unofficial capacity. But,\" she adds, raising her eyebrows, \"as a mayor, he is far too spineless. He is afraid of taking sides on any issue. I do not think he should have volunteered for the election.\"");
 				say();
 				UI_remove_answer("mayor");
+				fallthrough;
 
 			case "unusual":
 				message("\"Well, there are a couple of strange ones: Mara and Yongi. And there is Blorn -- he is a mean one, and... well... of course, there is Eldroth. And,\" she says with a shudder, \"the gargoyles.\"");
 				say();
 				UI_add_answer(["Mara", "Yongi", "Blorn", "Eldroth", "gargoyles"]);
 				UI_remove_answer("unusual");
+				fallthrough;
 
 			case "Mara":
 				var0003 = UI_is_dead(UI_get_npc_object(0xFF34));
@@ -55213,22 +57620,26 @@ void Func04D2 object#(0x4D2) ()
 					say();
 				}
 				UI_remove_answer("Mara");
+				fallthrough;
 
 			case "Yongi":
 				message("\"Yongi is nothing more than a drunk. The only reason he opened a tavern was to have an excuse to purchase large amounts of alcohol at wholesale prices. And do not\task him about the gargoyles unless thou dost want him to talk thine ear off. He hates them almost as much as Blorn does!\"");
 				say();
 				UI_remove_answer("Yongi");
+				fallthrough;
 
 			case "Eldroth":
 				message("\"He is nice, I suppose, but he is also a doddering old fool. I do not think he hath had a brain for more than a decade.\"");
 				say();
 				UI_remove_answer("Eldroth");
+				fallthrough;
 
 			case "Blorn":
 				message("\"There is a troublemaker and thief if I have ever seen one. He needs to think about leaving town -- quickly, if he knows what is best for him. There is one thing I like about him, though -- he hates the gargoyles more than anyone!\"");
 				say();
 				UI_add_answer("gargoyles");
 				UI_remove_answer("Blorn");
+				fallthrough;
 
 			case "gargoyles":
 				message("\"Now there is a disgusting creature for thee. I think they were better named back when we called them daemons!\"");
@@ -55244,17 +57655,20 @@ void Func04D2 object#(0x4D2) ()
 					}
 				}
 				UI_remove_answer("gargoyles");
+				fallthrough;
 
 			case "people":
 				message("\"Well, there are Cador, Yvella, and Zaksam -- those are the\tnormal ones.\"");
 				say();
 				UI_add_answer(["Cador", "Yvella", "Zaksam"]);
 				UI_remove_answer("people");
+				fallthrough;
 
 			case "Zaksam":
 				message("\"He is the trainer. Quite a good fighter from what I hear.\"");
 				say();
 				UI_remove_answer("Zaksam");
+				fallthrough;
 
 			case "Cador":
 				var0005 = UI_is_dead(UI_get_npc_object(0xFF35));
@@ -55270,20 +57684,22 @@ void Func04D2 object#(0x4D2) ()
 					say();
 					UI_remove_answer("Cador");
 				}
+				fallthrough;
 
 			case "dead":
 				message("\"He was killed in a brutal slaughter in Yongi's tavern. No one really knows what happened, but I suppose that is how many people meet their death when drinking.\" She shrugs.");
 				say();
 				UI_remove_answer("dead");
+				fallthrough;
 
 			case "Yvella":
 				message("\"She is Cador's wife.\"");
 				say();
 				UI_remove_answer("Yvella");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("She nods at you as she returns to her business.*");
 		say();
@@ -55341,42 +57757,50 @@ void Func04D3 object#(0x4D3) ()
 				{
 					UI_add_answer("Blorn");
 				}
+				fallthrough;
 
 			case "Lap-Lem":
 				message("\"To mean `rock one.'\"");
 				say();
 				UI_remove_answer("Lap-Lem");
+				fallthrough;
 
 			case "job":
 				message("\"To be a miner. To be now the only miner of my race in this town.\"");
 				say();
 				UI_add_answer(["only miner", "race", "town"]);
+				fallthrough;
 
 			case "race":
 				message("\"To know of many gargoyles who work in the other mines, but to see the Vesper mine has only humans now.\"");
 				say();
 				UI_remove_answer("race");
+				fallthrough;
 
 			case "town":
 				message("\"To be called Vesper. To be the only place, other than parts of Britain, where gargoyles live with humans. To tell you that here are more conflicts.\" He sighs.~~\"To wonder if Terfin would be a better choice to maintain a home.\"");
 				say();
 				UI_remove_answer("town");
 				UI_add_answer(["conflicts", "Terfin"]);
+				fallthrough;
 
 			case "conflicts":
 				message("\"To see the humans grow in hostility to us. Sadly, to also see many gargoyles begin to show mutual feelings. To hope the situation never becomes violent.\"");
 				say();
 				UI_remove_answer("conflicts");
+				fallthrough;
 
 			case "Terfin":
 				message("\"To be the gargoyle home city. To have been constructed two hundred years ago when the codex was placed in the void and the gargoyles were without places to live. Though not prohibited, no humans reside there.\"");
 				say();
 				UI_remove_answer("Terfin");
+				fallthrough;
 
 			case "only miner":
 				message("\"To tell you that there was another -- Anmanivas. To have left because of racial hatred. To sit now in tavern all day with brother, Foranamo. To feel bad for Anmanivas and brother, but to need job.\" He shrugs.~~ \"To put up with hatred.\"");
 				say();
 				UI_remove_answer("only miner");
+				fallthrough;
 
 			case "Blorn":
 				message("\"To know of incident?");
@@ -55394,12 +57818,14 @@ void Func04D3 object#(0x4D3) ()
 				}
 				UI_add_answer("possession");
 				UI_remove_answer("Blorn");
+				fallthrough;
 
 			case "possession":
 				message("\"To have had an amulet with sentimental value. To have been stolen by the human.\" He looks down at his feet. \"To want it back.\"");
 				say();
 				UI_remove_answer("possession");
 				gflags[0x0282] = true;
+				fallthrough;
 
 			case "give amulet":
 				message("\"To have returned with amulet?\"");
@@ -55418,10 +57844,10 @@ void Func04D3 object#(0x4D3) ()
 					say();
 				}
 				UI_remove_answer("give amulet");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"To hope to see you again soon.\"*");
 		say();
@@ -55518,6 +57944,7 @@ void Func04D4 object#(0x4D4) ()
 				message(".\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I take care of my daughter, Catherine, while Cador is at work.\"");
@@ -55527,6 +57954,7 @@ void Func04D4 object#(0x4D4) ()
 					UI_add_answer("Cador");
 				}
 				UI_add_answer("Catherine");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"Thou hast not heard of The Fellowship? It is a wonderful organization. They hold parades and festivals and have even built shelters for homeless folk throughout Britannia. Mine husband learned of them some time ago, and we have been happy members ever since.\"");
@@ -55536,6 +57964,7 @@ void Func04D4 object#(0x4D4) ()
 					UI_add_answer("husband");
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "Cador", "husband":
 				if (var0003)
@@ -55558,17 +57987,20 @@ void Func04D4 object#(0x4D4) ()
 				UI_remove_answer(["Cador", "husband"]);
 				UI_add_answer("Vesper");
 				var0002 = true;
+				fallthrough;
 
 			case "woman":
 				message("\"Her name is Mara. She is a fellow miner. She is very nice, but also very beautiful. I do not like mine husband spending all that time with her.\"");
 				say();
 				UI_remove_answer("woman");
+				fallthrough;
 
 			case "Vesper":
 				message("\"Well, it would be a lovely town if it were not for those... those... gargoyles.  They are disgusting beings. I think Auston should have them run out of town.\"");
 				say();
 				UI_add_answer(["Auston", "gargoyles"]);
 				UI_remove_answer("Vesper");
+				fallthrough;
 
 			case "Auston":
 				message("\"He is our mayor. Eldroth recommended that we elect him, so, of course, we did. However, between the two of us, I think we ought to have someone new if Auston does not do something quickly. As a matter of fact, thou shouldst run for mayor, ");
@@ -55588,11 +58020,13 @@ void Func04D4 object#(0x4D4) ()
 				}
 				UI_add_answer("Eldroth");
 				UI_remove_answer("Auston");
+				fallthrough;
 
 			case "Eldroth":
 				message("\"He is our town advisor. Very wise man that Eldroth. He also sells provisions.\"");
 				say();
 				UI_remove_answer("Eldroth");
+				fallthrough;
 
 			case "gargoyles":
 				message("\"Perfectly wretched beasts. Thank goodness most of them stay on their side of the oasis. I do not know how Cador stands working with them. Well, for him, that is. There is only one who still works there.\"");
@@ -55604,12 +58038,14 @@ void Func04D4 object#(0x4D4) ()
 					say();
 				}
 				UI_remove_answer("gargoyles");
+				fallthrough;
 
 			case "Catherine":
 				message("\"I worry about her. Every day at noon, she seems to disappear for a few hours. She has these foolish notions that gargoyles are friendly and honorable. I am afraid she may be visiting the other side of the oasis. Oh, I do hope not.\"");
 				say();
 				gflags[0x027E] = true;
 				UI_remove_answer("Catherine");
+				fallthrough;
 
 			case "Catherine at noon":
 				message("\"Thou knowest where my daughter doth go at noon?\"");
@@ -55667,10 +58103,10 @@ void Func04D4 object#(0x4D4) ()
 					message("\"Oh, well. I thank thee for thy concern.\"");
 					say();
 				}
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Pleasant journey, ");
 		message(var0001);
@@ -55730,6 +58166,7 @@ void Func04D5 object#(0x4D5) ()
 				message(" Avatar.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I have no job, ");
@@ -55737,6 +58174,7 @@ void Func04D5 object#(0x4D5) ()
 				message(" Avatar. I live with my father and mother here in Vesper.\"");
 				say();
 				UI_add_answer(["father", "mother", "Vesper"]);
+				fallthrough;
 
 			case "father":
 				message("\"He is the overseer at the mines, ");
@@ -55750,6 +58188,7 @@ void Func04D5 object#(0x4D5) ()
 					say();
 				}
 				UI_remove_answer("father");
+				fallthrough;
 
 			case "mother":
 				message("\"Yes, ");
@@ -55757,6 +58196,7 @@ void Func04D5 object#(0x4D5) ()
 				message(" Avatar. She is there right now.\" She points, apparently indicating her house.");
 				say();
 				UI_remove_answer("mother");
+				fallthrough;
 
 			case "Vesper":
 				message("\"That is the name of our city, ");
@@ -55764,6 +58204,7 @@ void Func04D5 object#(0x4D5) ()
 				message(" Avatar. If thou art lost, thou mayest wish to speak with the town clerk.\"");
 				say();
 				UI_remove_answer("Vesper");
+				fallthrough;
 
 			case "gargoyle":
 				message("\"I'm sorry, ");
@@ -55831,43 +58272,51 @@ void Func04D6 object#(0x4D6) ()
 				say();
 				UI_remove_answer("name");
 				UI_add_answer("For-Lem");
+				fallthrough;
 
 			case "For-Lem":
 				message("\"To mean `strong one.'\"");
 				say();
 				UI_remove_answer("For-Lem");
+				fallthrough;
 
 			case "job":
 				message("\"To do odd jobs for others. Also, to record gargoyle legends in written form.\"");
 				say();
 				UI_add_answer(["others", "legends"]);
+				fallthrough;
 
 			case "others":
 				message("\"To be friends with Lap-Lem, and know he is a good miner. Also to know Ansikart, who reminds us of Singularity in these troubled times.\"");
 				say();
 				UI_add_answer("troubled times");
 				UI_remove_answer("others");
+				fallthrough;
 
 			case "troubled times":
 				message("\"To be angry with the humans. To be treated poorly and with contempt. To know not why,\" he shrugs.");
 				say();
 				UI_remove_answer("troubled times");
+				fallthrough;
 
 			case "legends":
 				message("\"To have many interesting stories about our race. To be writing them down for future generations.\"");
 				say();
 				UI_remove_answer("legends");
 				UI_add_answer(["stories", "generations"]);
+				fallthrough;
 
 			case "stories":
 				message("\"To have had many exciting myths from before the Avatar's encounters with our race. To share the concept of a hero with the humans, but to have had different heroes from our own history.\"");
 				say();
 				UI_remove_answer("stories");
+				fallthrough;
 
 			case "generations":
 				message("\"To be afraid for the future of gargoyle youths. To tell you they know little about their heritage. To feel it important to educate them and the offspring who follow them in our ways and history.\"");
 				say();
 				UI_remove_answer("generations");
+				fallthrough;
 
 			case "girl":
 				message("A look of concern quickly appears on his face.~~ \"To talk about the human girl, Catherine? To mean no harm to her.\" He holds out his hands.~~ \"To read gargoyle mythology to her during the day only. To have been asked by her!\" His eyes widen.~~ \"To ask you not to tell her parents, for they will punish her.\" He looks hopeful. \"To tell not, agreed?\"");
@@ -55886,10 +58335,10 @@ void Func04D6 object#(0x4D6) ()
 				Func0911(0x0032);
 				gflags[0x027D] = true;
 				UI_remove_answer("girl");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"To tell you goodbye, human.\"*");
 		say();
@@ -55937,16 +58386,19 @@ void Func04D7 object#(0x4D7) ()
 				say();
 				UI_add_answer("Ansikart");
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "Ansikart":
 				message("\"To mean `anti-dry-master.'\"");
 				say();
 				UI_remove_answer("Ansikart");
+				fallthrough;
 
 			case "job":
 				message("\"To serve food and drink to others.\"");
 				say();
 				UI_add_answer(["buy", "others"]);
+				fallthrough;
 
 			case "buy":
 				var0000 = UI_get_schedule_type(UI_get_npc_object(0xFF29));
@@ -55959,6 +58411,7 @@ void Func04D7 object#(0x4D7) ()
 					message("\"To apologize, but to ask you to return when I am open.\"");
 					say();
 				}
+				fallthrough;
 
 			case "others":
 				message("\"To know all the gargoyles in Vesper. To want to know about specific ones?\"");
@@ -55977,12 +58430,14 @@ void Func04D7 object#(0x4D7) ()
 				}
 				UI_add_answer("Vesper");
 				UI_remove_answer("others");
+				fallthrough;
 
 			case "Vesper":
 				message("\"To be a town full of hate -- to have the humans hate us and to know many hate them, especially Anmanivas and Foranamo. To be not a good thing.\" He appears saddened.");
 				say();
 				UI_add_answer(["Anmanivas", "Foranamo"]);
 				UI_remove_answer("Vesper");
+				fallthrough;
 
 			case "sage":
 				message("\"To be named Wis-Sur.\"");
@@ -55998,27 +58453,32 @@ void Func04D7 object#(0x4D7) ()
 					say();
 				}
 				UI_remove_answer("sage");
+				fallthrough;
 
 			case "provisioner":
 				message("\"To be Aurvidlem. To have become sullen lately, but to know not why.\"");
 				say();
 				UI_remove_answer("provisioner");
+				fallthrough;
 
 			case "For-Lem":
 				message("\"To be a laborer for the town.\"");
 				say();
 				UI_remove_answer("For-Lem");
+				fallthrough;
 
 			case "Lap-Lem":
 				message("\"To mine for the Mining company here. To be the only gargoyle still mining here.\" He nods his head.~~ \"To be very tolerant, like For-Lem.\"");
 				say();
 				UI_add_answer(["tolerant", "For-Lem"]);
 				UI_remove_answer("Lap-Lem");
+				fallthrough;
 
 			case "tolerant":
 				message("\"To work now with only humans, who hate and degrade him. To continue working, however, despite this. To be quite tolerant of human intolerance.\" He nods, as if to emphasize his point.");
 				say();
 				UI_remove_answer("tolerant");
+				fallthrough;
 
 			case "Anmanivas":
 				var0002 = UI_is_dead(UI_get_npc_object(0xFF27));
@@ -56038,6 +58498,7 @@ void Func04D7 object#(0x4D7) ()
 				say();
 				UI_add_answer("Lap-Lem");
 				UI_remove_answer("Anmanivas");
+				fallthrough;
 
 			case "Foranamo":
 				var0004 = UI_is_dead(UI_get_npc_object(0xFF26));
@@ -56054,10 +58515,10 @@ void Func04D7 object#(0x4D7) ()
 				message(" allowed no longer to visit the human side.\"");
 				say();
 				UI_remove_answer("Foranamo");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"To hope you will bring peace again to our people, Avatar.\"*");
 		say();
@@ -56121,56 +58582,66 @@ void Func04D8 object#(0x4D8) ()
 					message("\"To be named Wis-Sur, which means `wise sun.'\"");
 					say();
 					UI_remove_answer("name");
+					fallthrough;
 
 				case "job":
 					message("\"To sell magic to others.\"");
 					say();
 					UI_add_answer(["others", "magic"]);
+					fallthrough;
 
 				case "magic":
 					message("\"To be interested in spells, reagents, or potions?\"");
 					say();
 					UI_add_answer(["spells", "reagents", "potions"]);
 					UI_remove_answer("magic");
+					fallthrough;
 
 				case "spells":
 					Func094C();
+					fallthrough;
 
 				case "reagents":
 					Func094A();
+					fallthrough;
 
 				case "potions":
 					Func0949();
+					fallthrough;
 
 				case "others":
 					message("\"To be familiar with only the other gargoyles in Vesper. To tell you to ask Ansikart, who knows all other gargoyles here. To tell you about one of the following?\"");
 					say();
 					UI_remove_answer("others");
 					UI_add_answer(["Aurvidlem", "Lap-Lem", "For-Lem", "Anmanivas"]);
+					fallthrough;
 
 				case "Aurvidlem":
 					message("\"To be a provisioner in Vesper.\"");
 					say();
 					UI_remove_answer("Aurvidlem");
+					fallthrough;
 
 				case "For-Lem":
 					message("\"To perform assorted duties for town. To be a good, strong worker.\"");
 					say();
 					UI_remove_answer("For-Lem");
+					fallthrough;
 
 				case "Lap-Lem":
 					message("\"To be a miner for the Britannian Mining Company.\"");
 					say();
 					UI_remove_answer("Lap-Lem");
+					fallthrough;
 
 				case "Anmanivas":
 					message("\"To be a miner for the Britannian Mining Company.\"");
 					say();
 					UI_remove_answer("Anmanivas");
+					fallthrough;
 
 				case "bye":
 					break;
-
 			}
 			message("\"To say farewell, human.\"*");
 			say();
@@ -56188,6 +58659,7 @@ void Func04D8 object#(0x4D8) ()
 					message("\"To sell the few items I possess.\"");
 					say();
 					UI_add_answer("sell");
+					fallthrough;
 
 				case "sell":
 					message("\"To want to buy something?\" He looks at you carefully, as if he is unsure whether to sell to you.~~\"To be possible,\" he says, nodding. \"To ask what you need?\"");
@@ -56211,12 +58683,12 @@ void Func04D8 object#(0x4D8) ()
 					{
 						Func0949();
 					}
+					fallthrough;
 
 				case "bye":
 					message("\"To be good that you leave.\"*");
 					say();
 					abort;
-
 			}
 		}
 	}
@@ -56340,17 +58812,18 @@ void Func04D9 object#(0x4D9) ()
 							say();
 							abort;
 						}
+						fallthrough;
 
 					case "job":
 						message("\"To have none!\" He glares fiercly at you.\"");
 						say();
 						UI_remove_answer("job");
+						fallthrough;
 
 					case "bye":
 						message("He grunts his dismissal.*");
 						say();
 						abort;
-
 				}
 			}
 			else
@@ -56471,17 +58944,18 @@ void Func04DA object#(0x4DA) ()
 							say();
 							abort;
 						}
+						fallthrough;
 
 					case "job":
 						message("\"To have none!\" He glares fiercly at you.\"");
 						say();
 						UI_remove_answer("job");
+						fallthrough;
 
 					case "bye":
 						message("He grunts his dismissal.*");
 						say();
 						abort;
-
 				}
 			}
 			else
@@ -56530,16 +59004,19 @@ void Func04DB object#(0x4DB) ()
 				message("\"To be called Aurvidlem. To recognize you to be the Avatar.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"To provide provisions for others in Vesper.\"");
 				say();
 				UI_add_answer(["buy provisions", "others", "Vesper"]);
+				fallthrough;
 
 			case "Vesper":
 				message("\"To be a town filled with prejudice and hatred. To know the humans expect us to begin a violent confrontation.~~\"To believe the humans deserve it,\" he shrugs, \"but to hope my brethren display more control than that.\"");
 				say();
 				UI_remove_answer("Vesper");
+				fallthrough;
 
 			case "buy provisions":
 				var0000 = UI_get_schedule_type(UI_get_npc_object(0xFF25));
@@ -56559,6 +59036,7 @@ void Func04DB object#(0x4DB) ()
 					}
 				}
 				UI_remove_answer("buy provisions");
+				fallthrough;
 
 			case "others":
 				if (gflags[0x027F])
@@ -56573,21 +59051,23 @@ void Func04DB object#(0x4DB) ()
 					say();
 				}
 				UI_remove_answer("others");
+				fallthrough;
 
 			case "Ansikart":
 				message("His eyes shift quickly from left to right before finally settling on you.~~\"To know since change in Wis-Sur, Ansikart gained too much respect. To be sure that I have studied more and would be a wiser and better leader here. To be dissatisfied with Ansikart as choice.\"");
 				say();
 				UI_add_answer("change");
 				UI_remove_answer("Ansikart");
+				fallthrough;
 
 			case "change":
 				message("\"To be unsure when change happened, but has affected Wis-Sur greatly. To now see him avoid others and shut himself away. To be concerned for Wis-Sur.\"");
 				say();
 				UI_remove_answer("change");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"To bid you goodbye.\"*");
 		say();
@@ -56680,6 +59160,7 @@ void Func04DC object#(0x4DC) ()
 					say();
 					UI_add_answer("Oops");
 				}
+				fallthrough;
 
 			case "job":
 				message("\"Well, in all honesty, ");
@@ -56687,6 +59168,7 @@ void Func04DC object#(0x4DC) ()
 				message(", I have no job. Although, for a time, I was a thieving scoundrel.\"");
 				say();
 				UI_add_answer("scoundrel");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"'Tis truly a fantastic group of people, ");
@@ -56705,22 +59187,26 @@ void Func04DC object#(0x4DC) ()
 				}
 				UI_remove_answer("Fellowship");
 				UI_add_answer(["guidance", "prosperity", "displeased"]);
+				fallthrough;
 
 			case "guidance":
 				message("\"The Fellowship teaches people to follow their leaders like sheep. Canst thou think of better guidance?\"");
 				say();
 				UI_remove_answer("guidance");
+				fallthrough;
 
 			case "prosperity":
 				message("\"When a member behaves properly and follows directions and so forth, he -- or she -- can hear the `inner voice' that teaches one how to win at the games. 'Tis the very reason I joined!\" he grins broadly.~~\"However, I have yet to hear the voice.\"");
 				say();
 				UI_remove_answer("prosperity");
+				fallthrough;
 
 			case "displeased":
 				message("\"Well, apparently I hadn't striven hard enough to be deserving of the loan I... acquired from the money box upstairs.\"");
 				say();
 				UI_remove_answer("displeased");
 				UI_add_answer(["deserving", "loan"]);
+				fallthrough;
 
 			case "deserving":
 				message("As best he can, he leans toward you. For perhaps the first time in his entire life, he turns somber. \"Actually, deserve is a relative term. I have finally realized -- being on the racks for many hours during the day leaves time for quite a number of realizations -- the true nature of The Fellowship. Batlin and Abraham and Danag, they all are in error.~~When the Guardian makes his appearance here in Britannia, I have no doubt he will simply eliminate everyone, including The Fellowship leaders.\" His smile returns.~~\"That is why I decided to get everything out of The Fellowship and Britannia now, before we are all killed.\"");
@@ -56730,11 +59216,13 @@ void Func04DC object#(0x4DC) ()
 				{
 					UI_add_answer("racks");
 				}
+				fallthrough;
 
 			case "loan":
 				message("\"Well... I was going to return the money eventually. I just needed it to win more in the games.\"");
 				say();
 				UI_remove_answer("loan");
+				fallthrough;
 
 			case "Oops":
 				if (var0002)
@@ -56765,6 +59253,7 @@ void Func04DC object#(0x4DC) ()
 					}
 				}
 				UI_remove_answer("Oops");
+				fallthrough;
 
 			case "scoundrel":
 				message("\"Well, until I was caught, I would go from shop to shop all across Britannia, posing as `the Avatar.' The owners were all too happy to supply me with numerous gifts. Thou truly hast a good life, ");
@@ -56786,11 +59275,13 @@ void Func04DC object#(0x4DC) ()
 				}
 				UI_add_answer("gifts");
 				UI_remove_answer("scoundrel");
+				fallthrough;
 
 			case "gifts":
 				message("\"Oh, just anything I asked for -- weapons, armour, provisions, spells. Of course, I had no real use for the spells, but it was nice to acquire them for free, regardless.\"");
 				say();
 				UI_remove_answer("gifts");
+				fallthrough;
 
 			case "taxes":
 				message("He smiles.~~\"The Britannian Tax Council created a tax to raise money for the government. I did not feel like paying them,\" he shrugs, \"so I didn't. And, of course,\" he says, grinning, \"now they often put me on that fine rack.\"~~He stretches his neck and peers at the wooden slab.~~\"Very fine workmanship.\" He nods. \"Indeed, that is by far the best rack I have ever seen!\"");
@@ -56800,16 +59291,17 @@ void Func04DC object#(0x4DC) ()
 				{
 					UI_add_answer("racks");
 				}
+				fallthrough;
 
 			case "racks":
 				message("\"Is not that the finest rack thou hast ever seen? Exquisite workmanship, beautiful detail.\"");
 				say();
 				var0004 = true;
 				UI_remove_answer("racks");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Pleasant days, ");
 		message(var0000);
@@ -56962,11 +59454,13 @@ void Func04DD object#(0x4DD) ()
 				say();
 			}
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			message("She laughs aloud. \"Thou must be kidding!\" She composes herself and says, \"It is my duty to see that thou art comfortable whilst at The Baths.\"");
 			say();
 			UI_add_answer(["The Baths", "comfortable"]);
+			fallthrough;
 
 		case "The Baths":
 			message("\"I have been working here since it opened. I love it. I am not exploited in the least. I make piles of gold and live a great life.\" ");
@@ -56977,12 +59471,14 @@ void Func04DD object#(0x4DD) ()
 				say();
 			}
 			UI_remove_answer("The Baths");
+			fallthrough;
 
 		case "comfortable":
 			message("\"Well, we could have a swim in the spring pools, or thou couldst have a massage. Or we could just talk.~~\"Or... thou couldst come with me into the Community Room and I'll 'show' thee my 'job'!\"");
 			say();
 			UI_remove_answer("comfortable");
 			UI_add_answer(["swim", "massage", "talk", "Community Room"]);
+			fallthrough;
 
 		case "Community Room":
 			message("\"Thou dost want to join me in the Community Room?\"");
@@ -57004,16 +59500,19 @@ void Func04DD object#(0x4DD) ()
 				say();
 			}
 			UI_remove_answer("Community Room");
+			fallthrough;
 
 		case "swim":
 			message("Wench helps you with your clothing and leads you into the warm spring water. It feels terrific, and you would prefer to go to sleep, but you know you have a quest to fulfill. After a while, Wench helps you out of the water and you dress.");
 			say();
 			UI_remove_answer("swim");
+			fallthrough;
 
 		case "massage":
 			message("Wench helps you with your clothing and leads you to a comfortable table. You lie on your stomach and the woman expertly kneads and rubs your aching muscles, slowly sending you into a state of total relaxation. After a while, Wench helps you up and you dress.");
 			say();
 			UI_remove_answer("massage");
+			fallthrough;
 
 		case "talk":
 			message("Wench shrugs. \"Fine with me! What shall we talk about? I know! Want to know a secret?\"");
@@ -57031,10 +59530,10 @@ void Func04DD object#(0x4DD) ()
 			message("You and Wench speak of a number of other subjects when you realize that you are spending too much time in the spa. There is a quest to fulfill!");
 			say();
 			UI_remove_answer("talk");
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	message("\"Oh, please come again soon, ");
 	message(var0005);
@@ -57095,6 +59594,7 @@ void Func04DE object#(0x4DE) ()
 				message("\"Glenno at thy service!\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the manager of The Baths.");
@@ -57183,41 +59683,49 @@ void Func04DE object#(0x4DE) ()
 					message("\"Please come visit in the late evening hours when our hosts and hostesses are here!\"");
 					say();
 				}
+				fallthrough;
 
 			case "The Baths":
 				message("\"The Baths exist for the pleasure of visitors to Buccaneer's Den. Thou canst bathe in our spring pools. Thou canst lounge in our Community Room and socialize with our attractive hosts or hostesses. Thou canst drink fine wine and ale. Thou canst view our collection of fine artwork. Thou canst... escape into a dream-world!\"");
 				say();
 				UI_remove_answer("The Baths");
 				UI_add_answer(["spring pools", "hosts or hostesses", "Community Room", "fine artwork"]);
+				fallthrough;
 
 			case "drink":
 				Func088F();
+				fallthrough;
 
 			case "hosts or hostesses":
 				message("\"They have come from all over Britannia to serve thine every wish! I, Glenno, have assured them that The Baths is the most prestigious establishment of its kind anywhere in the known world. It is probably the only establishment of its kind in the known world!\"");
 				say();
 				UI_remove_answer("hosts or hostesses");
+				fallthrough;
 
 			case "spring pools":
 				message("\"The water is guaranteed to be pure, warm and cleansing.\"");
 				say();
 				UI_remove_answer("spring pools");
+				fallthrough;
 
 			case "Community Room":
 				message("\"Thou canst lie in comfort among the many soft cushions and pillows. Get to know thy neighbor. Get to know thy neighbor 'very well'!\"");
 				say();
 				UI_remove_answer("Community Room");
+				fallthrough;
 
 			case "fine artwork":
 				message("\"Ah, yes, those are erotic masterpieces from the brush of Britannian artist Glen Johnson. Notice how the curves on that one are extremely naturalistic, dost thou not agree?\"");
 				say();
 				UI_remove_answer("fine artwork");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"Yes, I am a member. If it were not for The Fellowship, I would not be manager of The Baths! I served the group well, trusted my many brothers, strived for unity, and... well, my worthiness preceded my reward! And all of this... was my reward!\" Glenno smiles as if he were a tomcat who had just swallowed a mouse.");
 				say();
 				UI_remove_answer("Fellowship");
 				UI_add_answer("reward");
+				fallthrough;
 
 			case "reward":
 				message("\"Yes, The Fellowship gave me this place. They own it, thou knowest.\" Suddenly Glenno holds his hand to his mouth, as if he has said something he shouldn't have. \"I mean, The Fellowship only owns the -land- on which it was built. I -built- The Baths with money with which I was rewarded by The Fellowship. So, enough of that -- enjoy thyself. I must tend to business!\" With that, Glenno turns away from you.*");
@@ -57227,7 +59735,6 @@ void Func04DE object#(0x4DE) ()
 
 			case "bye":
 				break;
-
 		}
 		message("\"Leaving so soon?\"*");
 		say();
@@ -57400,6 +59907,7 @@ void Func04DF object#(0x4DF) ()
 			message("\"The name I use here is Martine. Thou dost understand...\" She winks at you.");
 			say();
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			if (!var0004)
@@ -57415,6 +59923,7 @@ void Func04DF object#(0x4DF) ()
 			message("\"'Tis important that thou art comfortable whilst visiting The Baths.\"");
 			say();
 			UI_add_answer(["The Baths", "comfortable"]);
+			fallthrough;
 
 		case "The Baths":
 			message("\"'Tis a fabulous place to work. I absolutely love it. I would not work anywhere else. I have more gold than I could possibly spend.\"");
@@ -57425,12 +59934,14 @@ void Func04DF object#(0x4DF) ()
 				say();
 			}
 			UI_remove_answer("The Baths");
+			fallthrough;
 
 		case "comfortable":
 			message("\"Thou dost have many choices. We could take a swim in our spring pools. Or I could perform a massage on thee. Or we could simply talk.~~\"But if thou dost want to really get to know me better, we should visit the Community Room...\"");
 			say();
 			UI_remove_answer("comfortable");
 			UI_add_answer(["swim", "massage", "talk", "Community Room"]);
+			fallthrough;
 
 		case "Community Room":
 			message("\"Thou dost want to join me in the Community Room?\"");
@@ -57449,25 +59960,28 @@ void Func04DF object#(0x4DF) ()
 				say();
 			}
 			UI_remove_answer("Community Room");
+			fallthrough;
 
 		case "swim":
 			message("Martine helps you with your clothing and leads you into the warm spring water. It feels fabulous, and you would love to go to sleep; but you know you have a quest to finish. After a while, Martine helps you out of the water and you dress.");
 			say();
 			UI_remove_answer("swim");
+			fallthrough;
 
 		case "massage":
 			message("Martine helps you with your clothing and leads you to a comfortable table. You lie on your stomach and the woman expertly kneads and rubs your aching muscles, slowly sending you into a state of oblivion. After a while, Martine helps you up and you dress.");
 			say();
 			UI_remove_answer("massage");
+			fallthrough;
 
 		case "talk":
 			message("Martine smiles. \"That is just fine with me, honey. I would wager thou hast many stories to tell about adventuring, yes? Say! Hast thou been in the secret passages in the mountains? Didst thou know they are all connected? I know that there is a secret door that leads right into the back of this building!\" She whispers, \"I believe the entrance is through the House of Games.\"~~You and Martine speak of a number of other subjects until you realize you have spent too much time in the spa. There is a quest to finish!");
 			say();
 			UI_remove_answer("talk");
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	message("\"I hope to see thee again soon, honey!\"");
 	say();
@@ -57617,11 +60131,13 @@ void Func04E0 object#(0x4E0) ()
 				say();
 			}
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			message("Roberto smiles broadly. \"Thou dost not really want to know that, dost thou?\" He shakes his head, suppressing a laugh. \"Very well -- it is my task to see that thou art truly comfortable whilst at The Baths.\"");
 			say();
 			UI_add_answer(["The Baths", "comfortable"]);
+			fallthrough;
 
 		case "The Baths":
 			if (var0004)
@@ -57637,12 +60153,14 @@ void Func04E0 object#(0x4E0) ()
 			message("such as thyself!\"");
 			say();
 			UI_remove_answer("The Baths");
+			fallthrough;
 
 		case "comfortable":
 			message("\"What would suit thee? We could swim in the spring pools, or I could give thee a massage. If thou dost prefer to converse, we could simply talk. Or if thou wouldst like, we could wander into the Community Room and... communicate!\"");
 			say();
 			UI_remove_answer("comfortable");
 			UI_add_answer(["swim", "massage", "talk", "Community Room"]);
+			fallthrough;
 
 		case "Community Room":
 			message("\"Thou dost want to join me in the Community Room?\"");
@@ -57663,25 +60181,28 @@ void Func04E0 object#(0x4E0) ()
 				say();
 			}
 			UI_remove_answer("Community Room");
+			fallthrough;
 
 		case "swim":
 			message("Roberto helps you with your clothing and leads you into the warm spring water. It feels terrific, and you feel like going to sleep, but you know you have a quest to complete. After a while, Roberto helps you out of the water and you dress.");
 			say();
 			UI_remove_answer("swim");
+			fallthrough;
 
 		case "massage":
 			message("Roberto helps you with your clothing and leads you to a comfortable table. You lie face down and the man expertly kneads and rubs your aching muscles, slowly sending you over the edge into a state of total relaxation. After a while, Roberto helps you up and you dress.");
 			say();
 			UI_remove_answer("massage");
+			fallthrough;
 
 		case "talk":
 			message("Roberto smiles. \"That is all right. What shall we talk about? Adventuring? Secret passages and dungeons?\"~~ Roberto leans closer and whispers, \"Didst thou know that there are secret passages connecting the buildings on Buccaneer's Den? 'Tis true! I am fairly sure the entrance is through the House of Games, and I am quite sure there is a way into The Baths.\"~~You and Roberto speak of a number of other subjects until you realize that you are spending far too much time in the spa. There is a quest to fulfill!");
 			say();
 			UI_remove_answer("talk");
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	message("\"I hope to see thee again, ");
 	message(var0005);
@@ -57732,33 +60253,39 @@ void Func04E1 object#(0x4E1) ()
 				message("\"Sintag,\" the man grunts.");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the guard at the House of Games. I rid the place of trouble-makers.\"");
 				say();
 				UI_add_answer(["House of Games", "trouble-makers"]);
+				fallthrough;
 
 			case "House of Games":
 				message("\"I have worked for the House of Games since The Mister agreed to pay me and asked me to stay. I know all who go in or out. I see everything.\"");
 				say();
 				UI_remove_answer("House of Games");
 				UI_add_answer("The Mister");
+				fallthrough;
 
 			case "The Mister":
 				message("\"That would be Mister Gordy, the overseer of the House of Games. Thou might find him in his office during business hours.\"");
 				say();
 				UI_remove_answer("The Mister");
+				fallthrough;
 
 			case "trouble-makers":
 				message("\"We see all sorts of trouble-makers in this place. I especially do not like people who claim that they are the Avatar. I find it blasphemous. The last fellow who claimed to be an Avatar was caught cheating. He'll not be doin' that again!\"");
 				say();
 				UI_remove_answer("trouble-makers");
 				UI_add_answer(["all sorts", "not again"]);
+				fallthrough;
 
 			case "all sorts":
 				message("\"There is a man named Robin who used to come in here and cheat at the games. He had his two varlets named Battles and Leavell intimidate anyone who tried to stop him. One day my brothers came to visit and we ran Robin, Battles and Leavell all the way off the island! We have not seen them since!\"");
 				say();
 				UI_remove_answer("all sorts");
+				fallthrough;
 
 			case "not again":
 				if (var0002)
@@ -57775,6 +60302,7 @@ void Func04E1 object#(0x4E1) ()
 					say();
 				}
 				UI_remove_answer("not again");
+				fallthrough;
 
 			case "torture chamber":
 				if (var0002)
@@ -57788,11 +60316,13 @@ void Func04E1 object#(0x4E1) ()
 					say();
 				}
 				UI_remove_answer("torture chamber");
+				fallthrough;
 
 			case "left of him":
 				message("\"He has been in our care for a while now.\" Sintag smiles enigmatically.");
 				say();
 				UI_remove_answer("left of him");
+				fallthrough;
 
 			case "Hook":
 				if (var0001 == 0x0007)
@@ -57815,6 +60345,7 @@ void Func04E1 object#(0x4E1) ()
 					say();
 				}
 				UI_remove_answer("Hook");
+				fallthrough;
 
 			case "key":
 				message("\"Dost thou want the key?\"");
@@ -57840,10 +60371,10 @@ void Func04E1 object#(0x4E1) ()
 					say();
 				}
 				UI_remove_answer("key");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("Sintag grunts.*");
 		say();
@@ -57967,17 +60498,20 @@ void Func04E2 object#(0x4E2) ()
 				message("\"I am Blacktooth. See?\" The pirate smiles, revealing his teeth.");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"Making fishbait out of Avatars!\" He laughs aloud. \"I have had all I can stand of puny weaklings running around claiming they are an Avatar! I am seeking a particular Avatar that was here last week. A particular Avatar that is a Fellowship member!\"");
 				say();
 				UI_add_answer(["Avatar", "Fellowship"]);
+				fallthrough;
 
 			case "Avatar":
 				message("\"He was through here a week ago. Tried to filch some gold off of me! Imagine! The nerve of that bastard! He was gone before I had realized what he had done.\"");
 				say();
 				UI_remove_answer("Avatar");
 				UI_add_answer("filch");
+				fallthrough;
 
 			case "filch":
 				message("\"We were playing cards in the pub. Damn me if he did not deal from the bottom. I can usually spot tricks like that, but he was good!\"");
@@ -57988,6 +60522,7 @@ void Func04E2 object#(0x4E2) ()
 					say();
 				}
 				UI_remove_answer("filch");
+				fallthrough;
 
 			case "Fellowship":
 				if (var0001)
@@ -58003,11 +60538,14 @@ void Func04E2 object#(0x4E2) ()
 				say();
 				UI_remove_answer("Fellowship");
 				UI_add_answer(["Mole", "changed"]);
+				fallthrough;
 
 			case "Mole":
 				message("\"He is another aging pirate that has retired and lives on the island. We were mates for years, but then he joined that damned Fellowship. Now he thinks his droppings do not smell foul, if thou knowest what I mean.\"");
 				say();
 				UI_remove_answer("Mole");
+				fallthrough;
+				fallthrough;
 
 			case "changed":
 				message("\"He has abandoned all of his pirate ways! He is a bloody saint now, and whenever he sees me he tries to convince me to join The Fellowship. I avoid him at all costs now. I cannot stand to see him this way. It burns my blood!\"~~Then, in a moment of weakness, the tough pirate says in a small voice, \"I miss him, too. We were best mates.\" You could swear there are tears in his eyes.*");
@@ -58049,6 +60587,7 @@ void Func04E2 object#(0x4E2) ()
 				{
 					UI_add_answer("Mole says...");
 				}
+				fallthrough;
 
 			case "Mole says...":
 				message("\"He said that? Really?\" Blacktooth looks as if he may cry again.~~\"I must go take a look for him. I thank thee, ");
@@ -58063,7 +60602,6 @@ void Func04E2 object#(0x4E2) ()
 
 			case "bye":
 				break;
-
 		}
 		if (gflags[0x02A6] || (!gflags[0x02A5]))
 		{
@@ -58156,11 +60694,13 @@ void Func04E3 object#(0x4E3) ()
 				say();
 				UI_remove_answer("name");
 				UI_add_answer("story");
+				fallthrough;
 
 			case "job":
 				message("\"For years and years I roamed the seas, pillaging and raping and terrorizing. Now that I am past the age of fifty, I want to live the rest of my life in relative peace and quiet here on Buccaneer's Den.\"");
 				say();
 				UI_add_answer(["peace and quiet", "Buccaneer's Den"]);
+				fallthrough;
 
 			case "story":
 				message("\"Thou dost really want to hear it? 'Tis very long.\"");
@@ -58187,17 +60727,20 @@ void Func04E3 object#(0x4E3) ()
 				message("Mole shrugs. \"I thought I would make a long story short.\"");
 				say();
 				UI_remove_answer("story");
+				fallthrough;
 
 			case "peace and quiet":
 				message("\"It is a good life. I grew weary of pirating. I grew weary of the salt water and the raw meat and the sewage on deck and the parrot droppings and the fact that every other word one heard was 'Har!'\"");
 				say();
 				UI_remove_answer("peace and quiet");
+				fallthrough;
 
 			case "Buccaneer's Den":
 				message("\"I spend my time at the House of Games or the Fallen Virgin. I love the sound of the die as it bounces against the felt. I love the taste of warm ale as it splashes down my throat! And... I have The Fellowship.\"");
 				say();
 				UI_remove_answer("Buccaneer's Den");
 				UI_add_answer("Fellowship");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"The group has given me a new lease on life. I thought I had mates when I was an active pirate, but they were nothing compared to my brothers in The Fellowship.");
@@ -58211,28 +60754,33 @@ void Func04E3 object#(0x4E3) ()
 				say();
 				UI_remove_answer("Fellowship");
 				UI_add_answer(["Blacktooth", "mates"]);
+				fallthrough;
 
 			case "Blacktooth":
 				message("\"Blacktooth lives here on the island. We used to be the same link on a chain, knowest what I mean? But since I joined The Fellowship, he does not give me the shadow of a sundial! He acts as though I had the plague or something. I do not understand it. Makes me want to cut something up into mincemeat!\"");
 				say();
 				UI_remove_answer("Blacktooth");
+				fallthrough;
 
 			case "mates":
 				message("\"Blacktooth was like my brother. Not like my brothers in The Fellowship, but a 'real' brother, knowest what I mean? We did 'everything' together. We would share booty! We would share wenches! We did it all!\"");
 				say();
 				UI_remove_answer("mates");
 				UI_add_answer("brother");
+				fallthrough;
 
 			case "brother":
 				message("\"Well, he is not a brother now! He hates me! If he wants nothing to do with me, so be it!\" But Mole quickly adds, \"He does not realize what I did for him. I made his life livable! Who was it that nursed him when he had scurvy? Me! Who was it that patched him up when he was sliced to bits by that butcher Silverbeard? Me!\"");
 				say();
 				UI_remove_answer("brother");
 				UI_add_answer(["life", "Silverbeard"]);
+				fallthrough;
 
 			case "Silverbeard":
 				message("\"Oh, he was some old pirate with a temper. He's probably dead now, if he knows what's good for him!\"");
 				say();
 				UI_remove_answer("Silverbeard");
+				fallthrough;
 
 			case "life":
 				message("\"Yes, it was a different life in those days...\" Mole reflects on some past memory as his eyes glaze over temporarily. Finally he says, \"I may have dwelt too strongly on my Fellowship business. Perhaps I pushed him too hard. I am sorry. If he would give me another chance I would probably leave The Fellowship. They are not as wonderful as I made them sound. They are more crooked than the pirates I used to sail with!\" Mole frowns. \"Thou hast put me in a foul mood.\"");
@@ -58250,6 +60798,7 @@ void Func04E3 object#(0x4E3) ()
 					say();
 					abort;
 				}
+				fallthrough;
 
 			case "He misses thee":
 				message("You tell Mole what Blacktooth said. A change comes over the salty pirate, as if you had just given him a bouquet of flowers.~~\"Thou must be kidding me! Blackie misses me? I thought he hated mine innards! I shall have to go for a little walk and maybe I will run across that old dog! I thank thee, stranger, for imparting this information to me.\"~~With that, Mole turns away from you, doing a little jaunt.*");
@@ -58260,7 +60809,6 @@ void Func04E3 object#(0x4E3) ()
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye, stranger.\"*");
 		say();
@@ -58332,27 +60880,32 @@ void Func04E4 object#(0x4E4) ()
 				message("\"I am Lucky... in all things.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I make my living off the world! It gives... and I take!\" The pirate laughs boisterously. \"I am a worldly gentleman, friends -- that is my 'job'! Oh, and I train initiates for a bit of pocket change.\"");
 				say();
 				UI_add_answer(["world", "train"]);
+				fallthrough;
 
 			case "world":
 				message("\"The ways of the world, is what I mean. I am a man of the road; I am a seasoned traveller. I travel through the world as a hundred different men.\"");
 				say();
 				UI_add_answer(["traveller", "different"]);
 				UI_remove_answer("world");
+				fallthrough;
 
 			case "traveller":
 				message("\"In truth there are few places where I have not been and little that I have not done.\"");
 				say();
 				UI_remove_answer("traveller");
+				fallthrough;
 
 			case "different":
 				message("\"Thou canst be a different person just by assumption. 'Tis an attitude. I am an expert in the art of charismatic communication for the purposes of deception. It gives one many skills. For example, I can walk into any shop and make a purchase. But I will walk away with much more than I bought, for I know how to fool the shopkeeper. Little things like that.\"");
 				say();
 				UI_remove_answer("different");
+				fallthrough;
 
 			case "train":
 				if (var0001 == 0x0007)
@@ -58376,10 +60929,10 @@ void Func04E4 object#(0x4E4) ()
 					say();
 					UI_remove_answer("train");
 				}
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Be careful, my friend.\"*");
 		say();
@@ -58496,6 +61049,7 @@ void Func04E5 object#(0x4E5) ()
 				message("\"Budo the Fourth at thy service! 'Tis a fine day today, is it not?\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				if (var0001 == 0x0007)
@@ -58520,21 +61074,25 @@ void Func04E5 object#(0x4E5) ()
 				message("");
 				say();
 				UI_add_answer("Fellowship");
+				fallthrough;
 
 			case "armour":
 				message("\"Budo's carries nothing but the finest quality armour in all Britannia. I have all the best types of equipment available.\"");
 				say();
 				Func0859();
+				fallthrough;
 
 			case "weapons":
 				message("\"Budo's offers thee excellent weaponry with superb craftsmanship. Thou wilt not find a better buy for thy money anywhere else!\"");
 				say();
 				Func0858();
+				fallthrough;
 
 			case "provisions":
 				message("\"Budo's also carries a variety of useful things for thy convenience.\"");
 				say();
 				Func085A();
+				fallthrough;
 
 			case "ship deed":
 				if (gflags[0x02B6])
@@ -58578,39 +61136,46 @@ void Func04E5 object#(0x4E5) ()
 					}
 				}
 				UI_remove_answer("ship deed");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"The Fellowship has helped me to become a very rich man! Although the business is an inherited enterprise, I owe everything to The Fellowship!\"");
 				say();
 				UI_remove_answer("Fellowship");
 				UI_add_answer(["rich man", "inherited", "everything"]);
+				fallthrough;
 
 			case "rich man":
 				message("\"My great-grandfather started this business many, many years ago. He was moderately successful, thanks to the Thieves' Guild. But that era has passed.\"");
 				say();
 				UI_add_answer("Thieves' Guild");
 				UI_remove_answer("rich man");
+				fallthrough;
 
 			case "inherited":
 				message("\"My great-grandfather passed the shoppe on to his son, and so forth, down to me. We are born merchants! That is why I know why thou hast come to Budo's! Thou wantest to become a part of the great Budo Legacy! Thou dost need to buy something!\"");
 				say();
 				UI_remove_answer("inherited");
+				fallthrough;
 
 			case "everything":
 				message("\"There was a period shortly after my father died, just as I had inherited the shoppe, when business was poor. There was a danger that I would not be able to keep the shoppe open. But The Fellowship convinced me that I should join them. I proved my worthiness and The Fellowship helped me financially.\"");
 				say();
 				UI_remove_answer("everything");
 				UI_add_answer("worthiness");
+				fallthrough;
 
 			case "worthiness":
 				message("\"I do not mind telling thee. The Fellowship shares in one half of my profit.\"");
 				say();
 				UI_remove_answer("worthiness");
+				fallthrough;
 
 			case "Thieves' Guild":
 				message("\"It is no more. They dwindled away during my grandfather's time. By the time The Fellowship arrived, when I was a boy, there was no trace of them except in family mementos. Even the pirates are different.\"");
 				say();
 				UI_remove_answer("Thieves' Guild");
+				fallthrough;
 
 			case "Crown Jewel":
 				if (var0002)
@@ -58624,10 +61189,10 @@ void Func04E5 object#(0x4E5) ()
 					say();
 				}
 				UI_remove_answer("Crown Jewel");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"I hope I can help thee again some time, my friend!\"*");
 		say();
@@ -58716,6 +61281,7 @@ void Func04E6 object#(0x4E6) ()
 				message("\"I am Gordy.\" He grins widely offering you his hand. You notice that it is none too clean.");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am 'The Mister' of the House of Games. Inside mine House thou mayest challenge thy skill at games of chance.\" He eyes you carefully, measuring your worth and gullibility.");
@@ -58768,12 +61334,14 @@ void Func04E6 object#(0x4E6) ()
 					say();
 				}
 				UI_add_answer(["The Mister", "House of Games", "skill"]);
+				fallthrough;
 
 			case "House of Games":
 				message("\"The House of Games was established six years ago with the funds of... an interested party. It attracts people from all over Britannia who wish to live dangerously with their money. The business is very profitable.\" He pats his pouch, and coins clink. \"Very profitable.\" He grins.");
 				say();
 				UI_remove_answer("House of Games");
 				UI_add_answer(["party", "profitable"]);
+				fallthrough;
 
 			case "The Mister":
 				message("\"It refers to my being the overseer, but everyone here has always called me 'The Mister'. I am not sure why. But it appeals to me.\" He puffs up like a bantam rooster, trying to look important. He almost succeeds.");
@@ -58782,6 +61350,7 @@ void Func04E6 object#(0x4E6) ()
 				say();
 				UI_remove_answer("The Mister");
 				UI_add_answer("Mister Gordy");
+				fallthrough;
 
 			case "Mister Gordy":
 				message("\"Yes, what can I do for thee?\"");
@@ -58789,6 +61358,7 @@ void Func04E6 object#(0x4E6) ()
 				message("He grins, very pleased with himself.");
 				say();
 				UI_remove_answer("Mister Gordy");
+				fallthrough;
 
 			case "skill":
 				message("\"Each game requires a definite skill in determining the most profitable way to place a bet. Many visitors to the House of Games find that they have a skill. Others, sadly, do not.\"");
@@ -58802,11 +61372,13 @@ void Func04E6 object#(0x4E6) ()
 					}
 				}
 				UI_remove_answer("skill");
+				fallthrough;
 
 			case "profitable":
 				message("\"Well, Buccaneer's Den is not in the jurisdiction of the Britannian Tax Council. We are not subject to Britannia's taxes.\" Gordy smiles wickedly. \"And that... is very profitable!\"");
 				say();
 				UI_remove_answer("profitable");
+				fallthrough;
 
 			case "Hook":
 				var0008 = Func0931(0xFE9B, 0x0001, 0x03D5, 0xFE99, 0x0001);
@@ -58821,6 +61393,7 @@ void Func04E6 object#(0x4E6) ()
 					say();
 				}
 				UI_remove_answer("Hook");
+				fallthrough;
 
 			case "party":
 				var0008 = Func0931(0xFE9B, 0x0001, 0x03D5, 0xFE99, 0x0001);
@@ -58836,10 +61409,10 @@ void Func04E6 object#(0x4E6) ()
 					abort;
 				}
 				UI_remove_answer("party");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Farewell, friend. I look forward to thy return.\"*");
 		say();
@@ -58905,6 +61478,7 @@ void Func04E7 object#(0x4E7) ()
 				message("\"I am Mandy.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I run the Fallen Virgin Inn and Tavern. We are open for breakfast, dinner, and late night hours.");
@@ -58953,17 +61527,20 @@ void Func04E7 object#(0x4E7) ()
 					say();
 				}
 				UI_add_answer("Fallen Virgin");
+				fallthrough;
 
 			case "food":
 				message("\"We serve a good plate of slop, if I do say so myself! That Silverleaf is something. Thou shouldst try that.\"");
 				say();
 				UI_remove_answer("food");
 				UI_add_answer("Silverleaf");
+				fallthrough;
 
 			case "drink":
 				message("\"I can offer thee wine and ale.\"");
 				say();
 				UI_remove_answer("drink");
+				fallthrough;
 
 			case "room":
 				message("\"Our rooms are 10 gold per person. The only one available now is the southwest room. The other two already have occupants. Dost thou want one?\"");
@@ -59007,14 +61584,17 @@ void Func04E7 object#(0x4E7) ()
 					say();
 				}
 				UI_remove_answer("room");
+				fallthrough;
 
 			case "buy":
 				Func08B9();
+				fallthrough;
 
 			case "Silverleaf":
 				message("\"Best bloody swill thou wilt eat on the face of the earth!\"");
 				say();
 				UI_remove_answer("Silverleaf");
+				fallthrough;
 
 			case "Fallen Virgin":
 				message("\"Yes, I have run this tavern and inn since my wenching days.\" Mandy laughs. \"I was quite a beauty back then, but thou canst not tell it now. I know everyone in town and they all know me. If thou dost need to know something about anyone, let me know.\"");
@@ -59072,66 +61652,79 @@ void Func04E7 object#(0x4E7) ()
 				{
 					UI_add_answer("Hook");
 				}
+				fallthrough;
 
 			case "Danag":
 				message("\"He helps out at that Fellowship place. He is always interim branch leader for some reason. The real leader, a fellow named Abraham, is never here. Danag is all right. Kind of gullible.\"");
 				say();
 				UI_remove_answer("Danag");
+				fallthrough;
 
 			case "Blacktooth":
 				message("\"He is a former pirate and rogue, and he can be fairly mean. If he does not warm up to thee immediately, he may not at all. But once he does, thou wilt learn he is quite a sensitive man.\"");
 				say();
 				UI_remove_answer("Blacktooth");
+				fallthrough;
 
 			case "Mole":
 				message("\"I was a wench with Mole's gang of pirates back in... well, it seems a century ago. Mole was rough and tough and a trouble-maker. Until he joined The Fellowship. That changed him into...,\" Mandy shrugs. \"I know not, a middle-aged former pirate or some such.\"");
 				say();
 				UI_remove_answer("Mole");
+				fallthrough;
 
 			case "Budo":
 				message("\"His family has been on Buccaneer's Den for generations. Comes on a trifle too strong with the barking of wares, if thou dost ask me.\"");
 				say();
 				UI_remove_answer("Budo");
+				fallthrough;
 
 			case "Glenno":
 				message("\"He makes me laugh. He is a dear. Thou wouldst not find a more pleasant, and eager-to-please, man on the island. He is a surprisingly good person.\" Mandy pauses then adds, \"For a pimp.\"");
 				say();
 				UI_remove_answer("Glenno");
+				fallthrough;
 
 			case "Wench":
 				message("\"She is a very private person. Works at The Baths. I hear she won some kind of competition -- that is why she is fortunate to be there. I understand Glenno pays them well over there.\"");
 				say();
 				UI_remove_answer("Wench");
+				fallthrough;
 
 			case "Martine":
 				message("\"She is a very private person. Works at The Baths. I have not spoken three words to her in my life.\"");
 				say();
 				UI_remove_answer("Martine");
+				fallthrough;
 
 			case "Roberto":
 				message("\"He is a very private person, but, oh, is he an attractive man, I must say! He works at The Baths. I will admit I am one of his clients. He doth truly clean my dishes, if thou dost know what I mean.\"");
 				say();
 				UI_remove_answer("Roberto");
+				fallthrough;
 
 			case "Lucky":
 				message("\"He is a former rogue, I can tell thee that! And to think he makes a living now by teaching others to be the same!\" Mandy shrugs. \"To each their own.\"");
 				say();
 				UI_remove_answer("Lucky");
+				fallthrough;
 
 			case "Gordy":
 				message("\"I do not know him that well, although he seems to be a sincere man. He runs the House of Games like a ship. He is a former pirate as well. Must have been a captain.\"");
 				say();
 				UI_remove_answer("Gordy");
+				fallthrough;
 
 			case "Smithy":
 				message("\"He was another pirate. I know he works at the House of Games. I suppose he is the man in charge of the actual games. I do not know him well.\"");
 				say();
 				UI_remove_answer("Smithy");
+				fallthrough;
 
 			case "Sintag":
 				message("\"Brrrr! He is a scary man. Thou canst tell that he has killed. He is the guard at the House of Games. Thou dost not want to be caught cheating by him!\"");
 				say();
 				UI_remove_answer("Sintag");
+				fallthrough;
 
 			case "Hook":
 				var000E = Func0931(0xFE9B, 0x0001, 0x03D5, 0xFE99, 0x0001);
@@ -59146,32 +61739,36 @@ void Func04E7 object#(0x4E7) ()
 				say();
 				UI_remove_answer("Hook");
 				UI_add_answer("scares");
+				fallthrough;
 
 			case "scares":
 				message("\"Well, he is a killer. Some think he is the one responsible for the murder that happened last year.\"");
 				say();
 				UI_remove_answer("scares");
 				UI_add_answer(["killer", "murder"]);
+				fallthrough;
 
 			case "killer":
 				message("\"This man they call Hook has the way of the killer about him. Thou canst see it in his eyes. I would be extremely careful if I were to run afoul of him.\"");
 				say();
 				UI_remove_answer("killer");
+				fallthrough;
 
 			case "murder":
 				message("\"There was a thief named Duncan who had stolen funds from the House of Games and The Baths. I believe he may have broken into the Fellowship Hall as well. Anyway, he was arrested. But one morning, when the guard brought the man his breakfast, he was gone! Everyone thought he had escaped until his body was found in the house where old Blacktooth lives. This was before Blacktooth lived there.\"");
 				say();
 				UI_remove_answer("murder");
 				UI_add_answer("body");
+				fallthrough;
 
 			case "body":
 				message("\"It was mutilated -- his arms and legs had been cut off, and he had literally lost his head! To this day, no one knows who did it. But when Hook is around, people talk behind his back. He is certainly capable of doing it!\"");
 				say();
 				UI_remove_answer("body");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Nice talking with thee. I shall see thee later, I hope.\"*");
 		say();
@@ -59222,6 +61819,7 @@ void Func04E8 object#(0x4E8) ()
 				message("\"I am Smithy.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I run the games at the House of Games.");
@@ -59237,11 +61835,13 @@ void Func04E8 object#(0x4E8) ()
 					message("\"Please do come and try thy skill when the facility is open for business.\"");
 					say();
 				}
+				fallthrough;
 
 			case "cheat":
 				message("\"If thou art caught cheating, thou wilt be arrested. And we do prosecute!\"");
 				say();
 				UI_remove_answer("cheat");
+				fallthrough;
 
 			case "games":
 				message("\"There are three games that thou canst play. The first is Virtue Roulette. The second is The Rat Race. The third is Triples. Wouldst thou like to hear any rules?\"");
@@ -59278,10 +61878,10 @@ void Func04E8 object#(0x4E8) ()
 					message("\"Fine then. Thou art on thine own.\"");
 					say();
 				}
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"See thee again, ");
 		message(var0000);
@@ -59365,21 +61965,25 @@ void Func04E9 object#(0x4E9) ()
 				message("\"I am Paul. My colleagues' names are Meryl and Dustin.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"We perform a Passion Play about The Fellowship. It costs only 2 gold per person to see. If thou dost want us to perform it, please say so.\"");
 				say();
 				UI_add_answer(["Passion Play", "Fellowship", "perform"]);
+				fallthrough;
 
 			case "Passion Play":
 				message("\"A Passion Play is a morality tale performed on stage.\"");
 				say();
 				UI_remove_answer("Passion Play");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"It would be much simpler to view the play.\"");
 				say();
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "perform":
 				if (!(var0000 == 0x001D))
@@ -59432,10 +62036,10 @@ void Func04E9 object#(0x4E9) ()
 						abort;
 					}
 				}
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("The actor bows to you.*");
 		say();
@@ -59618,40 +62222,46 @@ void Func04EC object#(0x4EC) ()
 				message("\"My name is Ellen.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I do the bookkeeping at the Fellowship Branch. I work with mine husband, Klog.\"");
 				say();
 				UI_add_answer(["Fellowship", "Klog"]);
+				fallthrough;
 
 			case "murder":
 				message("\"'Tis awful, is it not? Of course, I was home with Klog all night.\"");
 				say();
 				UI_remove_answer("murder");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"Perhaps thou couldst call it a 'confident philosophy'. We meet here at the branch office every night.\"");
 				say();
 				UI_add_answer(["philosophy", "branch office"]);
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "branch office":
 				message("\"The Fellowship has branches all over Britannia. It is a most popular philosophical society.\"");
 				say();
 				UI_remove_answer("branch office");
+				fallthrough;
 
 			case "Klog":
 				message("\"Mine husband Klog is a wonderful branch leader. He is an inspiration to all of the Trinsic members.\"");
 				say();
 				UI_remove_answer("Klog");
+				fallthrough;
 
 			case "philosophy":
 				Func091A();
 				UI_remove_answer("philosophy");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye. I hope to see thee again, soon.\"*");
 		say();
@@ -59712,91 +62322,107 @@ void Func04ED object#(0x4ED) ()
 				message("\"My name is Kessler.\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I run the apothecary shop here in Britain.\"");
 				say();
 				UI_add_answer("apothecary");
+				fallthrough;
 
 			case "apothecary":
 				message("\"While the normal function of an apothecary is to administer potions and magical reagents, I am nowadays working almost exclusively for Lord British trying to study a specific problem.\"");
 				say();
 				UI_remove_answer("apothecary");
 				UI_add_answer(["potions", "study", "problem"]);
+				fallthrough;
 
 			case "potions":
 				message("\"They are certainly not a recent invention here in Britannia! Potions are liquids that possess certain magical qualities which are used for all sorts of purposes, such as the treatment of injury and disease. I have a quantity of them for sale if thou art interested.\"");
 				say();
 				UI_remove_answer("potions");
 				UI_add_answer(["magical qualities", "buy potions"]);
+				fallthrough;
 
 			case "magical qualities":
 				message("\"Since the mages have become so ineffective, we have been forced to develop other ways to accomplish all the things we used to be able to depend on mages to do. Unfortunately, many of these new methods are as yet untested.\"");
 				say();
 				UI_remove_answer("magical qualities");
 				UI_add_answer("untested");
+				fallthrough;
 
 			case "untested":
 				message("\"We still know very little about the effects of most of the substances we use. Many cause more problems than they solve, or react differently if taken in unison with other elements. Some might cause thee to become dependent on them for thine health and some may simply be poisonous.\"");
 				say();
 				UI_remove_answer("untested");
+				fallthrough;
 
 			case "study":
 				message("\"I am studying the effects of a particular substance known as silver snake venom. But I am encountering a number of difficulties.\"");
 				say();
 				UI_remove_answer("study");
 				UI_add_answer(["silver snake", "difficulties"]);
+				fallthrough;
 
 			case "silver snake":
 				message("\"As one may surmise from the name it is the venom taken from the dangerous silver snake. The fascination that many people possess for these creatures has created a great deal of curiosity about the venom itself.\"");
 				say();
 				UI_remove_answer("silver snake");
 				UI_add_answer("curiosity");
+				fallthrough;
 
 			case "curiosity":
 				message("\"There are those who claim that gargoyles take the venom which results in their becoming enhanced in combat and such. Now this may be just a myth, but the curiosity people feel is real enough.\"");
 				say();
 				UI_remove_answer("curiosity");
+				fallthrough;
 
 			case "difficulties":
 				message("\"My greatest difficulty is in finding any significant quantity of silver snake venom. But it is by no means mine only difficulty.\"");
 				say();
 				UI_remove_answer("difficulties");
 				UI_add_answer(["finding", "other difficulties"]);
+				fallthrough;
 
 			case "finding":
 				message("\"If by any chance thou wouldst come across any silver snake venom bring it back to me here. I shall pay thee fifty gold coins for every vial of it thou canst supply.\"");
 				say();
 				var0004 = true;
 				UI_remove_answer("finding");
+				fallthrough;
 
 			case "other difficulties":
 				message("\"People need to be alerted to how dangerous silver snake venom is. To this end I wish to announce my findings before Lord British and a consortium of lords and mayors, but to do that I must first finish my study.\"");
 				say();
 				UI_remove_answer("other difficulties");
+				fallthrough;
 
 			case "problem":
 				message("\"Recently there has been a dramatic rise in the use of a very strange substance. People have begun to purposefully ingest the venom of the silver snake.\"");
 				say();
 				UI_remove_answer("problem");
 				UI_add_answer("ingest");
+				fallthrough;
 
 			case "ingest":
 				message("\"The silver snake produces a venom that is extremely poisonous, but when taken in less than lethal amounts, it causes a variety of strange effects.\"");
 				say();
 				UI_remove_answer("ingest");
 				UI_add_answer("effects");
+				fallthrough;
 
 			case "effects":
 				message("\"For a time the venom will heighten one's physical and mental performance, such as allowing one to work harder, for example. But after the effects have worn off, it will impair the user permanently.\"");
 				say();
 				UI_remove_answer("effects");
 				UI_add_answer("impair");
+				fallthrough;
 
 			case "impair":
 				message("\"It first makes the user feel extremely tired and eventually causes a sloughing of the skin. The venom is a dangerous substance and thou shouldst not partake of it under any circumstances.\"");
 				say();
 				UI_remove_answer("impair");
+				fallthrough;
 
 			case "venom":
 				var0005 = UI_count_objects(0xFE9B, 0x0289, 0xFE99, 0xFE99);
@@ -59852,6 +62478,7 @@ void Func04ED object#(0x4ED) ()
 					}
 				}
 				UI_remove_answer("venom");
+				fallthrough;
 
 			case "buy potions":
 				if (!(var0001 == 0x0007))
@@ -59875,10 +62502,10 @@ void Func04ED object#(0x4ED) ()
 					}
 				}
 				UI_remove_answer("buy potions");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"It was good speaking with thee, ");
 		message(var0002);
@@ -59933,6 +62560,7 @@ void Func04EE object#(0x4EE) ()
 				say();
 				UI_remove_answer("name");
 				UI_add_answer("Empath Abbey");
+				fallthrough;
 
 			case "job":
 				message("\"I am a scholar, ");
@@ -59962,48 +62590,55 @@ void Func04EE object#(0x4EE) ()
 					message("\"Forgive me, I am a bit overzealous in my search for students. I hope thou wilt return in the future.\"");
 					say();
 				}
+				fallthrough;
 
 			case "Empath Abbey":
 				message("\"This is a pleasant location. I like the privacy, which gives me a chance to study when I need to. The Brotherhood is across the road, and I am near a healer. Also, I have begun a study on the effects of dealing with death for undertakers. I am using Tiery as a case study.\"");
 				say();
 				UI_add_answer(["Brotherhood", "healer", "Tiery"]);
 				UI_remove_answer("Empath Abbey");
+				fallthrough;
 
 			case "Brotherhood":
 				message("\"That is the abbey. The monks who reside there are famous for their ability to produce exquisite wine. Nearby is the Highcourt and a prison.\"");
 				say();
 				UI_remove_answer("Brotherhood");
 				UI_add_answer(["wine", "highcourt", "prison"]);
+				fallthrough;
 
 			case "wine":
 				message("\"Thou shouldst try some. The monks have been making it for more than three hundred years!\"");
 				say();
 				UI_remove_answer("wine");
+				fallthrough;
 
 			case "highcourt":
 				message("\"The official there is named Sir Jeff. From what I hear, he runs his ship very tight. I do not envy the jailer that works with him. It must be extremely difficult to be near such a strict disciplinarian all day long.\"");
 				say();
 				UI_remove_answer("highcourt");
+				fallthrough;
 
 			case "prison":
 				message("\"It is located just behind the court. And,\" he grins, \"I am proud to say that is at least one thing about which I know nothing.\"");
 				say();
 				UI_remove_answer("prison");
+				fallthrough;
 
 			case "Tiery":
 				message("\"He is the undertaker who lives just north of the Brotherhood.\"");
 				say();
 				UI_remove_answer("Tiery");
+				fallthrough;
 
 			case "healer":
 				message("\"I have yet to meet her, but I know she loves animals. I have seen her playing with the deer and squirrels that inhabit this region.\"");
 				say();
 				UI_remove_answer("healer");
 				gflags[0x013B] = true;
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Goodbye, ");
 		message(var0000);
@@ -60070,6 +62705,7 @@ void Func04EF object#(0x4EF) ()
 				}
 			}
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			if (var0001)
@@ -60100,6 +62736,7 @@ void Func04EF object#(0x4EF) ()
 				message("\"Normally I am digging, but as of late I cannot seem to find my partner Malloy. So I suppose my job is to look for him. I wonder where he has gone to?\"");
 				say();
 			}
+			fallthrough;
 
 		case "tremor":
 			message("Owings puts his hand on your shoulder and puts a finger up to his lips. \"Shhhhh! Be very quiet! This is an old tunnel. Mikos, the foreman, says that any sudden loud noise could trigger a cave-in!\"*");
@@ -60118,6 +62755,7 @@ void Func04EF object#(0x4EF) ()
 			gflags[0x02D8] = true;
 			UI_remove_answer("tremor");
 			UI_add_answer("eyes");
+			fallthrough;
 
 		case "eyes":
 			message("You reach up and tip Owings's helmet back so that it is no longer covering his eyes. He smiles at you thankfully. He takes off his helmet to scratch at the top of his head. He puts it back on and it immediately tilts back down over his eyes.*");
@@ -60132,6 +62770,7 @@ void Func04EF object#(0x4EF) ()
 			{
 				UI_add_answer("Owings's helmet");
 			}
+			fallthrough;
 
 		case "helmet":
 			message("\"Mikos, the foreman of this mine told us to always wear a helmet. It is very important. The two of us even sent a mining helmet to Lord British. A funny man dressed just like the Avatar told us of how Lord British had been hit in the head with falling objects - twice! So we sent a helmet to him.\"*");
@@ -60142,6 +62781,7 @@ void Func04EF object#(0x4EF) ()
 			UI_remove_npc_face(0xFF0D);
 			UI_show_npc_face(0xFF11, 0x0000);
 			UI_remove_answer("helmet");
+			fallthrough;
 
 		case "Owings's helmet":
 			message("\"Thou art a kind person to fix mine helmet for me,\" Owings says, giving you a big grin.");
@@ -60156,6 +62796,7 @@ void Func04EF object#(0x4EF) ()
 			UI_show_npc_face(0xFF11, 0x0000);
 			UI_remove_answer(["Owings's helmet", "eyes"]);
 			UI_add_answer("mine hat");
+			fallthrough;
 
 		case "mine hat":
 			message("Owings reaches over and takes the mining helmet off Malloy's head so carefully that he does not notice. Owings puts the helmet back on with a little sneaky laugh of triumph. Pointing to the hat he taps Malloy on the back to let him know what he's done.*");
@@ -60175,6 +62816,7 @@ void Func04EF object#(0x4EF) ()
 			UI_show_npc_face(0xFF11, 0x0000);
 			UI_remove_answer("mine hat");
 			UI_add_answer("cave-in");
+			fallthrough;
 
 		case "cave-in":
 			message("After a few moments of fearful anticipation, the tremor subsides. The tunnel is still standing, none the worse for wear. \"I thought I was done for!\" says Owings. With that, a large piece of rock falls from the ceiling and lands squarely on Owings's head. It makes a loud knocking noise. Owings starts to pout and cry very childishly.");
@@ -60187,10 +62829,10 @@ void Func04EF object#(0x4EF) ()
 			UI_remove_npc_face(0xFF0D);
 			UI_show_npc_face(0xFF11, 0x0000);
 			UI_remove_answer("cave-in");
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	if (var0001)
 	{
@@ -60273,6 +62915,7 @@ void Func04F0 object#(0x4F0) ()
 				}
 				UI_remove_answer("name");
 				UI_add_answer(["concerned", "stocks"]);
+				fallthrough;
 
 			case "job":
 				message("\"What kind of bloody stupid question is that? I am in the prison! What kind of job could I possibly have?\"");
@@ -60331,6 +62974,7 @@ void Func04F0 object#(0x4F0) ()
 					}
 				}
 				UI_show_npc_face(0xFF10, 0x0000);
+				fallthrough;
 
 			case "stocks":
 				if (var0004)
@@ -60348,21 +62992,25 @@ void Func04F0 object#(0x4F0) ()
 					UI_add_answer(["spying", "false", "they"]);
 				}
 				UI_remove_answer("stocks");
+				fallthrough;
 
 			case "concerned":
 				message("\"Well, so few people are, really.\"");
 				say();
 				UI_remove_answer("concerned");
+				fallthrough;
 
 			case "false":
 				message("\"Well, I am certainly not guilty of such an act!\"");
 				say();
 				UI_remove_answer("false");
+				fallthrough;
 
 			case "spying":
 				message("\"To think I would seek information for any reason other than to enhance myself with knowledge is more than preposterous! It is... it is... ludicrous is what it is!\"");
 				say();
 				UI_remove_answer("spying");
+				fallthrough;
 
 			case "they":
 				message("\"Why, The Fellowship, ");
@@ -60374,6 +63022,7 @@ void Func04F0 object#(0x4F0) ()
 				{
 					UI_add_answer("Fellowship");
 				}
+				fallthrough;
 
 			case "lashings":
 				message("\"The troll beats me many times during the day. I will not be able to survive for much longer.\"");
@@ -60389,11 +63038,13 @@ void Func04F0 object#(0x4F0) ()
 					UI_show_npc_face(0xFF10, 0x0000);
 				}
 				UI_remove_answer("lashings");
+				fallthrough;
 
 			case "Alagner":
 				message("\"He is a sage who resides in New Magincia. Perhaps the most learned man in all Britannia! And now,\" he sighs, \"I will no longer have the opportunity to glean knowledge from his voluminous body of wisdom.\"");
 				say();
 				UI_remove_answer("Alagner");
+				fallthrough;
 
 			case "Fellowship":
 				message("\"Why, they are a wonderful group of people who are constantly seeking to bring health, happiness, and spirituality to the people of Britannia.\"");
@@ -60406,10 +63057,10 @@ void Func04F0 object#(0x4F0) ()
 				}
 				var0003 = true;
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Do not hurry too much, ");
 		message(var0000);
@@ -60478,6 +63129,7 @@ void Func04F1 object#(0x4F1) ()
 			}
 			UI_remove_answer("name");
 			UI_add_answer("Where are thy clothes?");
+			fallthrough;
 
 		case "job":
 			if (var0000)
@@ -60491,6 +63143,7 @@ void Func04F1 object#(0x4F1) ()
 				say();
 			}
 			UI_add_answer(["Mama", "cave"]);
+			fallthrough;
 
 		case "Where are thy clothes?":
 			if (var0000)
@@ -60504,6 +63157,7 @@ void Func04F1 object#(0x4F1) ()
 				say();
 			}
 			UI_remove_answer("Where are thy clothes?");
+			fallthrough;
 
 		case "Mama":
 			if (var0000)
@@ -60517,6 +63171,7 @@ void Func04F1 object#(0x4F1) ()
 				say();
 			}
 			UI_remove_answer("Mama");
+			fallthrough;
 
 		case "cave":
 			if (var0000)
@@ -60540,6 +63195,7 @@ void Func04F1 object#(0x4F1) ()
 			}
 			UI_remove_answer("cave");
 			UI_add_answer(["bees", "honey", "mice"]);
+			fallthrough;
 
 		case "bees":
 			if (var0000)
@@ -60584,16 +63240,19 @@ void Func04F1 object#(0x4F1) ()
 			}
 			UI_remove_answer("bees");
 			UI_add_answer("friendly");
+			fallthrough;
 
 		case "honey":
 			message("The man rubs his belly and smiles, licking his lips.~~ \"Yummmmmmmmmmmmm!\"");
 			say();
 			UI_remove_answer("honey");
+			fallthrough;
 
 		case "mice":
 			message("The man rubs his belly and makes smacking noises with his mouth.~~\"Mmmmmmmmmmmmmmm!\"");
 			say();
 			UI_remove_answer("mice");
+			fallthrough;
 
 		case "friendly":
 			if (var0000)
@@ -60608,6 +63267,7 @@ void Func04F1 object#(0x4F1) ()
 			}
 			UI_remove_answer("friendly");
 			UI_add_answer("Mama and thee");
+			fallthrough;
 
 		case "Mama and thee":
 			if (var0000)
@@ -60630,6 +63290,7 @@ void Func04F1 object#(0x4F1) ()
 				UI_add_answer("babies");
 			}
 			UI_remove_answer("Mama and thee");
+			fallthrough;
 
 		case "babies":
 			message("The man nods. \"We babies then.\"");
@@ -60639,6 +63300,7 @@ void Func04F1 object#(0x4F1) ()
 			{
 				UI_add_answer("Art thou from Yew?");
 			}
+			fallthrough;
 
 		case "Art thou from Yew?":
 			message("The man's eyes widen, realizes you are serious, then rolls his eyes to the floor.~~\"Damn! All right. Thou didst catch me. Thou art right. Mama and I are from Yew,\" the man speaks in a perfect voice booming with intelligence. He then laughs heartily. \"We had thee going, though, did we not!\"");
@@ -60646,6 +63308,7 @@ void Func04F1 object#(0x4F1) ()
 			gflags[0x02D4] = true;
 			UI_remove_answer("Art thou from Yew?");
 			UI_add_answer("Yew");
+			fallthrough;
 
 		case "Yew":
 			message("\"That's right. My real name is Murray. Mama is really Myrtle. I was a fully licensed apothecary in the town until the Britannian Tax Council came after me. They wanted the shirt off my back, so I gave it to them!");
@@ -60656,7 +63319,6 @@ void Func04F1 object#(0x4F1) ()
 
 		case "bye":
 			break;
-
 	}
 	message("Papa smiles and waves.*");
 	say();
@@ -60713,16 +63375,19 @@ void Func04F2 object#(0x4F2) ()
 				{
 					UI_add_answer("Julius");
 				}
+				fallthrough;
 
 			case "job":
 				message("\"I study the local flora, fauna, and geography here at the monastery.\"");
 				say();
 				UI_add_answer(["flora", "fauna", "geography", "monastery"]);
+				fallthrough;
 
 			case "flora":
 				message("\"There are many beautiful plants in this area. I am working on learning about all of them.\"");
 				say();
 				UI_remove_answer("flora");
+				fallthrough;
 
 			case "fauna":
 				message("\"Many different species of animals reside in the forest. I have encountered some fascinating ones in my studies.\"");
@@ -60735,12 +63400,14 @@ void Func04F2 object#(0x4F2) ()
 					}
 				}
 				UI_remove_answer("fauna");
+				fallthrough;
 
 			case "monastery":
 				message("\"Our order is called the Brotherhood of the Rose.\"");
 				say();
 				UI_add_answer("order");
 				UI_remove_answer("monastery");
+				fallthrough;
 
 			case "order":
 				message("\"Yes, ");
@@ -60753,27 +63420,32 @@ void Func04F2 object#(0x4F2) ()
 					UI_add_answer("Kreg");
 				}
 				UI_remove_answer("order");
+				fallthrough;
 
 			case "painter":
 				message("He smiles. \"Between us, she is a far better gardener.\"");
 				say();
 				UI_remove_answer("painter");
+				fallthrough;
 
 			case "gardener":
 				message("\"She raises the most lovely flowers that I have ever seen! Thou must see them to believe of their existence.\"");
 				say();
 				UI_remove_answer("gardener");
+				fallthrough;
 
 			case "geography":
 				message("\"I use my knowledge of the local landscape to aid in my studies. The better I know the locale, the farther away I can travel from the Brotherhood Abbey and still be sure I will able to return -- unlike a fellow monk of mine.\"");
 				say();
 				UI_remove_answer("geography");
 				UI_add_answer("fellow");
+				fallthrough;
 
 			case "fellow":
 				message("\"He became lost some time ago while surveying the area for birds -- the Golden-Cheeked Warbler, I believe it was. Sadly, he travelled too far, and we have not heard from him since.~~\"I do not wish to suffer the same fate.\"");
 				say();
 				UI_remove_answer("fellow");
+				fallthrough;
 
 			case "Kreg":
 				message("\"That name does not sound familiar, ");
@@ -60781,11 +63453,13 @@ void Func04F2 object#(0x4F2) ()
 				message(". Perhaps he is not from this area.\"");
 				say();
 				UI_remove_answer("Kreg");
+				fallthrough;
 
 			case "Julius":
 				message("\"Julius? I cannot be certain, but 'tis possible he may be someone who now resides in the... cemetery. I have heard that name mentioned as someone who was brought to the Abbey to be buried, though I know not who brought him\tand I do not remember from whom I heard it. I do hope he was not a friend of thine,\" he says, apologetically.");
 				say();
 				UI_remove_answer("Julius");
+				fallthrough;
 
 			case "wisps":
 				message("\"The wisps?\" he laughs. \"I doubt they exist. I realize many people seem to believe in them, but I have never seen any.~~ \"If thou must know, popular legend maintains that they inhabit the forest area, near the Emps. Supposedly, the Emps are able to speak with them.\" He shrugs. \"Thou mayest look for them if that is thy wish, but I would not waste precious time, myself.\"");
@@ -60793,6 +63467,7 @@ void Func04F2 object#(0x4F2) ()
 				UI_add_answer(["precious time", "Emps"]);
 				gflags[0x0138] = true;
 				UI_remove_answer("wisps");
+				fallthrough;
 
 			case "precious time":
 				message("\"There are so many exciting things to investigate... tree flowers, for example, ");
@@ -60800,6 +63475,7 @@ void Func04F2 object#(0x4F2) ()
 				message(".\"");
 				say();
 				UI_remove_answer("precious time");
+				fallthrough;
 
 			case "Emps":
 				message("\"Ah, the Emps. I have not been able to glean much information about them.~~\"They live on the eastern edge of the deep forest, not too terribly far from here.~~\"They resemble apes, but only slightly. They are exceedingly shy, and will rarely feel comfortable enough to approach a human.~~ \"The only way I was able to view an Emp closely occurred when I happened to have honey in my pack which I had just picked up from Bee Cave. The creature appeared, stared at me for a few minutes, and then asked -- asked, I say -- for mine honey. I believe they are empathic, hence their name.~~ \"Quite an interesting species, dost thou not agree?\"");
@@ -60807,11 +63483,13 @@ void Func04F2 object#(0x4F2) ()
 				UI_add_answer(["honey", "Bee Cave"]);
 				var0002 = true;
 				UI_remove_answer("Emps");
+				fallthrough;
 
 			case "honey":
 				message("\"The honey from the caves is quite tasty, but rarely can one get it without a fight. The Bee Caves can be a rather dangerous place.\"");
 				say();
 				UI_remove_answer("honey");
+				fallthrough;
 
 			case "Bee Cave":
 				message("\"Bee Cave is located to the southwest of the Abbey. But if thou art planning a trip there, beware the giant bees that live in the caves. Their venom is very poisonous.~~");
@@ -60843,10 +63521,10 @@ void Func04F2 object#(0x4F2) ()
 					}
 				}
 				UI_remove_answer("Bee Cave");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"May thy knowledge increase with thine encounters with nature, ");
 		message(var0000);
@@ -60934,6 +63612,7 @@ void Func04F3 object#(0x4F3) ()
 				say();
 			}
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			if (!var0001)
@@ -60960,6 +63639,7 @@ void Func04F3 object#(0x4F3) ()
 				UI_show_npc_face(0xFF0D, 0x0000);
 			}
 			UI_add_answer(["mining engineers", "special project"]);
+			fallthrough;
 
 		case "mining engineers":
 			message("\"My partner and I are not exactly mining engineers, although we did travel to Minoc to become miners. We came here with a map...\"*");
@@ -60980,16 +63660,19 @@ void Func04F3 object#(0x4F3) ()
 			say();
 			UI_remove_answer("mining engineers");
 			UI_add_answer(["map", "funny man"]);
+			fallthrough;
 
 		case "map":
 			message("\"We paid nearly a hundred gold pieces for that map. It was supposed to lead to a spot of valuable minerals found over a hundred years ago. It was a terrific investment. The map was an antique, but it looked like it could not have been more than a few years old! Thou dost not see preservation like that every day!\"");
 			say();
 			UI_remove_answer("map");
+			fallthrough;
 
 		case "funny man":
 			message("\"Someone told us his name. Let me see if I can remember it... Sullivan, I think it was. Funny name for an Avatar, but there thou art!\"");
 			say();
 			UI_remove_answer("funny man");
+			fallthrough;
 
 		case "special project":
 			message("\"Owings and myself are now involved in a very important special project, but it is a secret. Can we trust thee?\"");
@@ -61019,11 +63702,13 @@ void Func04F3 object#(0x4F3) ()
 				UI_remove_answer("special project");
 				UI_add_answer(["tunnel", "schedule"]);
 			}
+			fallthrough;
 
 		case "tunnel":
 			message("Malloy looks at you and puts a finger to his lips. \"Shhhhhhhh!!! I asked thee not to speak of this to anyone!\"");
 			say();
 			UI_remove_answer("tunnel");
+			fallthrough;
 
 		case "schedule":
 			message("\"Owings, have a look at that schedule and find out how we are doing.\"");
@@ -61036,6 +63721,7 @@ void Func04F3 object#(0x4F3) ()
 			message("\"Give me that!\" says Malloy as he snatches a piece of the scroll away. He examines it for a moment. \"According to this we shall be finished in... one hundred and seventy three years! Owings, we have got to start working faster!\" The two of them go back to digging with their spoons. As they dig Malloy turns to Owings and says, \"This is another fine mess thou hast gotten me into!\"");
 			say();
 			UI_remove_answer("schedule");
+			fallthrough;
 
 		case "helmet on foot":
 			message("Malloy kicks out with his foot, trying to dislodge the helmet which is stuck there. He looks at Owings and pouts, \"Why dost thou not do something to help me?!\"");
@@ -61050,10 +63736,10 @@ void Func04F3 object#(0x4F3) ()
 			say();
 			UI_play_sound_effect(0x000F);
 			UI_remove_answer("helmet on foot");
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	if (var0001)
 	{
@@ -61109,12 +63795,14 @@ void Func04F4 object#(0x4F4) ()
 				message(".\"");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am a sell-sword. But at the moment, I am trying to help my friend regain his senses.\"");
 				say();
 				UI_remove_answer("job");
 				UI_add_answer(["friend", "senses"]);
+				fallthrough;
 
 			case "friend":
 				message("\"I was not about to let Cosmo venture down here by himself. So, I offered to accompany him, as did Kallibrus.\"");
@@ -61129,11 +63817,13 @@ void Func04F4 object#(0x4F4) ()
 					UI_add_answer("Kallibrus");
 				}
 				UI_remove_answer("friend");
+				fallthrough;
 
 			case "Kallibrus":
 				message("\"He is a comrade in arms of mine, and also a friend of Cosmo's. I have yet to meet a more trustworthy companion, for he more than disproves all the rumors about gargoyles.\"");
 				say();
 				UI_remove_answer("Kallibrus");
+				fallthrough;
 
 			case "senses":
 				message("\"'Tis a long story. Cosmo is looking for the unicorn that supposedly inhabits this cavern.\" He looks you in the eye and shrugs.~~\"He is a fool.\"");
@@ -61151,37 +63841,42 @@ void Func04F4 object#(0x4F4) ()
 				gflags[0x02E0] = true;
 				UI_remove_answer("senses");
 				UI_add_answer(["unicorn", "fool"]);
+				fallthrough;
 
 			case "unicorn":
 				message("\"The unicorn is traditionally a way to prove the purity of a young maiden. However, less commonly known is that it will also reveal a young man's, uh, lack of, um, wild oats.\"");
 				say();
 				UI_remove_answer("unicorn");
+				fallthrough;
 
 			case "fool":
 				message("\"Ophelia does not love him! She simply sent him on this quest to be rid of him. I doubt she expects him to find the unicorn, let alone return to her.\"");
 				say();
 				UI_remove_answer("fool");
 				UI_add_answer(["Ophelia", "rid"]);
+				fallthrough;
 
 			case "Ophelia":
 				message("\"He met her in Jhelom. She was serving in the Bunk and Stool. Apparently it was `love at first sight,' as he calls it.\"");
 				say();
 				UI_remove_answer("Ophelia");
+				fallthrough;
 
 			case "rid":
 				message("\"The nature of her request is quite ironic, for I would expect that the unicorn would have shunned her quite some time ago. He is not to her tastes, I would imagine, and, were he to truly know her, she would not be to his. But, alas, love is blind, as they say.\"");
 				say();
 				UI_add_answer("they");
 				UI_remove_answer("rid");
+				fallthrough;
 
 			case "they":
 				message("\"I do not know who `they' are, but that is what they say, is it not?\"");
 				say();
 				UI_remove_answer("they");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"'Til next time, ");
 		message(var0002);
@@ -61256,11 +63951,13 @@ void Func04F5 object#(0x4F5) ()
 					UI_add_answer("Thief!");
 				}
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am a monk here at the Abbey. I am working on an alchemical mixture.\"");
 				say();
 				UI_add_answer(["mixture", "Abbey"]);
+				fallthrough;
 
 			case "Thief!":
 				message("\"Ah! Found me out, didst thou? 'Tis too bad... for thee!\"*");
@@ -61280,6 +63977,7 @@ void Func04F5 object#(0x4F5) ()
 				message("\"Sadly, I am so involved with my studies that I have no time to visit the surrounding area or learn any new faces.\"");
 				say();
 				UI_remove_answer("Abbey");
+				fallthrough;
 
 			case "mixture":
 				message("\"Well, ");
@@ -61288,22 +63986,26 @@ void Func04F5 object#(0x4F5) ()
 				say();
 				UI_add_answer(["vow", "invisibility"]);
 				UI_remove_answer("mixture");
+				fallthrough;
 
 			case "vow":
 				message("\"Well,\" he looks embarrassed, \"after reading a book on how we compare to our predecessors, we learned that most people expect us to take a vow of silence.~~ \"So,\" he shrugs, \"we have chosen to do so, once I can make that potion. I realize that it sounds foolish, but I truly believe it will help us produce more wine.\"");
 				say();
 				UI_remove_answer("vow");
 				UI_add_answer(["predecessors", "wine"]);
+				fallthrough;
 
 			case "predecessors":
 				message("\"Surely thou knowest of what I speak? Meditation, silence, aesthetics, ascetics, and so forth.\"");
 				say();
 				UI_remove_answer("predecessors");
+				fallthrough;
 
 			case "wine":
 				message("\"The monks' wine is renowned throughout all of Britannia, or so I thought.\" A puzzled look fills his face.~~\"Ah, well, that is no matter. Regardless, I sincerely recommend to thee to try some of our exquisite drink.\"");
 				say();
 				UI_remove_answer("wine");
+				fallthrough;
 
 			case "invisibility":
 				message("\"As a matter of fact, my research has reached an impasse, for I cannot determine the nature of some critical reagents. What I need is a potion of invisibility to analyze. Then I could progress from there.\" He looks at you, hopefully. \"Wouldst thou be willing to obtain a potion for my studies? It is likely that thou couldst find one easily at the mage, Nicodemus'.\"");
@@ -61324,12 +64026,14 @@ void Func04F5 object#(0x4F5) ()
 					UI_add_answer("information");
 				}
 				UI_remove_answer("invisibility");
+				fallthrough;
 
 			case "information":
 				message("\"I will tell thee about Lord British, The Fellowship, or Buccaneer's Den if thou bringest me the potion of invisibility.\"");
 				say();
 				gflags[0x012F] = true;
 				UI_remove_answer("information");
+				fallthrough;
 
 			case "give potion":
 				var0007 = UI_remove_party_items(0x0001, 0x0154, 0xFE99, 0x0007, true);
@@ -61348,10 +64052,10 @@ void Func04F5 object#(0x4F5) ()
 					say();
 				}
 				UI_remove_answer("give potion");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("He nods farewell to you.*");
 		say();
@@ -61423,44 +64127,52 @@ void Func04F6 object#(0x4F6) ()
 					UI_pop_answers();
 					UI_remove_answer("name");
 				}
+				fallthrough;
 
 			case "job":
 				message("\"My profession -- rather, my destiny -- is to learn and know all things. I came to New Magincia to build my workshop and do so.\"");
 				say();
 				UI_add_answer(["New Magincia", "workshop"]);
+				fallthrough;
 
 			case "New Magincia":
 				message("The sage sighs. \"I left the Britannian mainland to come to the relative peace and quiet of New Magincia. I am content here because it is isolated and free from... the filth and corruption going on in Britannia. Not many see it.\"");
 				say();
 				UI_remove_answer("New Magincia");
 				UI_add_answer("corruption");
+				fallthrough;
 
 			case "workshop":
 				message("\"This is my workshop. I peruse my books and papers here. Occasionally, I invent things, such as this crystal ball.\"");
 				say();
 				UI_remove_answer("workshop");
 				UI_add_answer("crystal ball");
+				fallthrough;
 
 			case "crystal ball":
 				message("\"It is a device for recording. If I forget a procedure or a step in an experiment, I may look into the crystal ball and see yesterday's events. Please, feel free to use it. Thou wilt see what I was doing yesterday.\"");
 				say();
 				UI_remove_answer("crystal ball");
+				fallthrough;
 
 			case "Wisps":
 				message("\"They are unusually aloof creatures of another dimension. Thou wilt think they are thy friends, but they could very well be spying on -thee- for someone else! They have no loyalties to good or evil -- all they care about is the acquisition of information -- how they acquire it is sometimes honorable, sometimes not.\"");
 				say();
 				UI_remove_answer("Wisps");
+				fallthrough;
 
 			case "corruption":
 				message("\"The Britannian people are becoming careless and lazy. They do not seek true knowledge. They do not respect their land. They do not respect each other. The resources of our land are being wasted. Miners are experimenting with dangerous reagents. There is an evil in the land, and I am not so sure that it is in the people themselves.\"");
 				say();
 				UI_remove_answer("corruption");
 				UI_add_answer(["true knowledge", "evil"]);
+				fallthrough;
 
 			case "true knowledge":
 				message("\"True knowledge is the only way to complete fulfillment.\"");
 				say();
 				UI_remove_answer("true knowledge");
+				fallthrough;
 
 			case "evil":
 				if (var0001)
@@ -61479,27 +64191,32 @@ void Func04F6 object#(0x4F6) ()
 				say();
 				UI_remove_answer("evil");
 				UI_add_answer("proof");
+				fallthrough;
 
 			case "proof":
 				message("\"I am documenting this information in my notebook.\"");
 				say();
 				UI_remove_answer("proof");
 				UI_add_answer(["information", "notebook"]);
+				fallthrough;
 
 			case "information":
 				message("\"It is all contained within the notebook.\"");
 				say();
 				UI_remove_answer("information");
+				fallthrough;
 
 			case "under cover":
 				message("\"Thou didst join The Fellowship to study their ways? Thou dost suspect them as well? Perhaps thou hast more substance to thee than I thought. We are working towards the same goal.\"");
 				say();
 				UI_remove_answer("under cover");
+				fallthrough;
 
 			case "suspect":
 				message("\"Thou dost suspect The Fellowship of foul deeds? Well then! Thou art perceptive indeed! Perhaps we are working toward the same goal!\"");
 				say();
 				UI_remove_answer("suspect");
+				fallthrough;
 
 			case "notebook":
 				message("\"It is hidden in a safe place, along with mine other treasured sources of knowledge.\"");
@@ -61513,6 +64230,7 @@ void Func04F6 object#(0x4F6) ()
 					UI_add_answer("learn");
 				}
 				UI_remove_answer("notebook");
+				fallthrough;
 
 			case "learn":
 				message("\"Very well. Dost thou know the answers to the questions of Life and Death?\"");
@@ -61543,17 +64261,20 @@ void Func04F6 object#(0x4F6) ()
 					gflags[0x017C] = true;
 				}
 				UI_remove_answer("learn");
+				fallthrough;
 
 			case "Tortured One":
 				message("\"Alas, he is a poor soul who is doomed to haunt his abode throughout eternity.\"");
 				say();
 				UI_remove_answer("Tortured One");
 				UI_add_answer("abode");
+				fallthrough;
 
 			case "abode":
 				message("\"Seek him out in Skara Brae. But be careful. It is a dangerous place. I should also advise thee that thou must use Seance Spells to speak with anyone on that island. They are all undead.\"");
 				say();
 				UI_remove_answer("abode");
+				fallthrough;
 
 			case "answers":
 				message("\"Thou hast spoken to the Tortured One and learned the answers to the questions of Life and Death?\"");
@@ -61571,10 +64292,10 @@ void Func04F6 object#(0x4F6) ()
 					say();
 				}
 				UI_remove_answer("answers");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Farewell. May thy journeys be profitable.\"*");
 		say();
@@ -61677,11 +64398,13 @@ void Func04F7 object#(0x4F7) ()
 						}
 					}
 				}
+				fallthrough;
 
 			case "why?":
 				message("\"The flames, fool! The flames!\" Again he gasps.");
 				say();
 				UI_remove_answer("why?");
+				fallthrough;
 
 			case "job":
 				message("He smirks at your comment.~~\"Thou wishest to know my job? I will tell thee my job!\" he shouts.~\"To burn here in eternal flames for my crime against the fair city of Skara Brae! That,\" he pauses for emphasis, \"is my job!\"~After a moment, he calms down.~\"I apologize, ");
@@ -61699,6 +64422,7 @@ void Func04F7 object#(0x4F7) ()
 						}
 					}
 				}
+				fallthrough;
 
 			case "flames":
 				message("He looks down at the ground, a remorseful expression on his face.~~\"The flames are my punishment. Years ago, when the evil Liche first exerted his reign of death over Skara Brae, the healer, Mordra, conceived of a plan to remove the creature most foul.~~\"She designed a concoction that would destroy the magical bonds that form the Liche. The formula was presented to our mayor, who passed it on to me.~~\"But,\" he scowls, \"something went wrong when I was preparing the potion. The proportions were mixed improperly, or... I don't know!\" he shouts, fists clenched.~~\"All I remember is the shop exploding, and the fire! The fire! All those people dead... because of me... because of my mistake....\"");
@@ -61708,12 +64432,14 @@ void Func04F7 object#(0x4F7) ()
 				{
 					UI_add_answer("mayor");
 				}
+				fallthrough;
 
 			case "Skara Brae":
 				message("\"'Twas a thriving town -- before I destroyed it!\" His jaw tightens and his face clenches. \"Why? Why, why, why!\" He again gasps in agony, but quickly regains control.~~\"There were so many innocent people,\" he says, staring directly at you. \"I cannot believe I am responsible for all their deaths.\"");
 				say();
 				UI_add_answer("people");
 				UI_remove_answer("Skara Brae");
+				fallthrough;
 
 			case "sacrifice":
 				message("\"I am sorry, ");
@@ -61722,12 +64448,14 @@ void Func04F7 object#(0x4F7) ()
 				say();
 				gflags[0x01A1] = true;
 				UI_remove_answer("sacrifice");
+				fallthrough;
 
 			case "mayor", "Forsythe":
 				message("\"Forsythe is the mayor. Perhaps thou canst find him in the Town Hall, shouldst thou wish to speak with him.\"");
 				say();
 				var0000 = true;
 				UI_remove_answer(["Forsythe", "mayor"]);
+				fallthrough;
 
 			case "need formula":
 				message("\"Thou trusts me to tell thee the formula! After what I have done to this town? Art thou mad? I hope at least, that thou hast checked with Mordra for the correct proportions, yes?\"");
@@ -61746,11 +64474,13 @@ void Func04F7 object#(0x4F7) ()
 					say();
 				}
 				UI_remove_answer("need formula");
+				fallthrough;
 
 			case "instructions":
 				message("\"First thou wilt need the three potions. Then, thou must place each one just below a connecting tube -- the order matters not. Take an empty vial -- I should have one here in my lab -- and set it below the nozzle. Then, turn on the burner. After but a few minutes, the mixture will form, and the filled vial will be ready for thee.\"");
 				say();
 				UI_remove_answer("instructions");
+				fallthrough;
 
 			case "people":
 				message("\"Thou wishest to know whom I killed? I can only assume that all perished in the blaze: Markham and his Barmaid, Paulette; Trent and Forsythe; and, of course, Mordra the healer.\"");
@@ -61761,45 +64491,53 @@ void Func04F7 object#(0x4F7) ()
 					UI_add_answer("Forsythe");
 				}
 				UI_remove_answer("people");
+				fallthrough;
 
 			case "Trent":
 				message("\"He is -- was -- the blacksmith. Mine one consolation lay with him, for I thought there would be at least one advantage to his death. Sadly,\" he inhales quickly, \"even that did not occur.\"");
 				say();
 				UI_add_answer(["blacksmith", "advantage"]);
 				UI_remove_answer("Trent");
+				fallthrough;
 
 			case "blacksmith":
 				message("\"He was once a master of all things metal. Now all he does, so I am told, is work endlessly on that blasted cage!\"");
 				say();
 				UI_remove_answer("blacksmith");
 				UI_add_answer("cage");
+				fallthrough;
 
 			case "cage":
 				message("\"I know nothing about it other than that it was necessary to put the liche in it before my... potion could work on him.\"");
 				say();
 				UI_remove_answer("cage");
+				fallthrough;
 
 			case "advantage":
 				message("\"The liche took from Trent the one most valuable thing in the blacksmith's life -- his wife, Rowena. I had hoped his death would at least extinguish his pain.\" He smiles sardonically.~~\"Well, it did end his pain, in a manner of speaking.\"");
 				say();
 				UI_remove_answer("advantage");
 				UI_add_answer(["Rowena", "end"]);
+				fallthrough;
 
 			case "end":
 				message("\"The pain is gone, but only to be replaced by his obsessive anger. The poor fool does not even realize he is dead! He thrives on his anger.\"");
 				say();
 				UI_remove_answer("end");
+				fallthrough;
 
 			case "Rowena":
 				message("\"She was all he lived for. When the liche tried to take her from him, he was consumed by the emptiness of her death. But, after his own demise,\" he stares directly at you, \"his bitter feelings soured even further.~~\"I suspect there is no reasoning with him now.\"");
 				say();
 				UI_remove_answer("Rowena");
 				UI_add_answer("reasoning");
+				fallthrough;
 
 			case "reasoning":
 				message("\"I doubt he would believe even his own death, let alone care.\"");
 				say();
 				UI_remove_answer("reasoning");
+				fallthrough;
 
 			case "questions":
 				if (!gflags[0x01BC])
@@ -61848,6 +64586,7 @@ void Func04F7 object#(0x4F7) ()
 					}
 				}
 				UI_remove_answer("questions");
+				fallthrough;
 
 			case "Liche":
 				message("\"He is an evil spirit who inhabits poor dead Horance's body. He has a hold on every being in this town -- even me. He sucks the life forces -- the little that remain -- from our souls. Please, thou must free us from his power. Wilt thou try?\"");
@@ -61866,6 +64605,7 @@ void Func04F7 object#(0x4F7) ()
 					abort;
 				}
 				UI_remove_answer("Liche");
+				fallthrough;
 
 			case "bye":
 				break;
@@ -61962,6 +64702,7 @@ void Func04F8 object#(0x4F8) ()
 					UI_add_answer("Zelda's feelings");
 				}
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am the head of the observatory here in Moonglow,\" he says proudly. \"This is where the telescope is kept.\"");
@@ -61971,18 +64712,21 @@ void Func04F8 object#(0x4F8) ()
 				{
 					UI_add_answer("event");
 				}
+				fallthrough;
 
 			case "Moonglow":
 				message("\"Why, I love living here in Moonglow. I very much like the people here.\"");
 				say();
 				UI_add_answer("people");
 				UI_remove_answer("Moonglow");
+				fallthrough;
 
 			case "people":
 				message("\"Hast thou spoken with my twin, Nelson? He heads the Lycaeum. Or Elad? And surely thou knowest about the mage, Penumbra.\"");
 				say();
 				UI_add_answer(["Nelson", "Elad", "Penumbra"]);
 				UI_remove_answer("people");
+				fallthrough;
 
 			case "Zelda's feelings":
 				var0002 = true;
@@ -61990,39 +64734,46 @@ void Func04F8 object#(0x4F8) ()
 				message("\"Oh, I see,\" he shrugs. \"I never really thought about my brother's assistant in such a manner. That is too bad, for my time permits nothing but mine observations. Ah, well, what else can I help thee with?\"");
 				say();
 				UI_remove_answer("Zelda's feelings");
+				fallthrough;
 
 			case "Nelson":
 				message("\"I do not see him as often as I would like, for we are so heavily involved with our work. He will be easy to recognize shouldst thou see him, for people tell us we look identical. I do not see it, of course, for, not only was he born with the brains, but also the handsome face.\"");
 				say();
 				UI_remove_answer("Nelson");
+				fallthrough;
 
 			case "Elad":
 				message("\"Poor Elad. He sometimes joins me at night to view the heavens. He has been trying to leave Moonglow for many years. He likes the island, but is filled with wanderlust.\" He smiles.");
 				say();
 				UI_remove_answer("Elad");
+				fallthrough;
 
 			case "Penumbra":
 				message("\"Thou hast not heard? Why, two hundred years ago she put herself to sleep.\"");
 				say();
 				UI_remove_answer("Penumbra");
+				fallthrough;
 
 			case "telescope":
 				message("\"I have it upstairs, of course. Thou art welcome to use it as often as thou wishest. In fact, I also have an orrery, shouldst thou desire to see that as well.\"");
 				say();
 				UI_add_answer("orrery");
 				UI_remove_answer("telescope");
+				fallthrough;
 
 			case "Caddellite":
 				message("He looks at you strangely, shrugs, and says, \"Why, Caddellite is a mineral that is not native to Britannia. In fact, it only comes from meteorites.~~ \"And the last known meteor to strike the planet landed somewhere in the North East sea. Why dost thou want to know?\"");
 				say();
 				UI_add_answer("helmet");
 				UI_remove_answer("Caddellite");
+				fallthrough;
 
 			case "helmet":
 				message("\"Thou dost want a helmet made of Caddellite?\" He thinks carefully. \"Perhaps Zorn in Minoc would have the skills to build a helmet such as thou desirest. If thou findest the Caddellite, take it to him.~~\"I have heard rumors of an island that once existed in the North East sea. Perhaps my brother at the Lycaeum could help with that.\"");
 				say();
 				UI_remove_answer("helmet");
 				gflags[0x01F6] = true;
+				fallthrough;
 
 			case "orrery":
 				message("The orrery? Why, 'tis a model of all the planets in our solar system, including the two moons of Britannia. The orrery moves to match the actual, current orbits of our real system.");
@@ -62034,12 +64785,14 @@ void Func04F8 object#(0x4F8) ()
 					UI_add_answer("event");
 				}
 				UI_remove_answer("orrery");
+				fallthrough;
 
 			case "event":
 				message("\"Thou art referring to what we in the business call the Astronomical Alignment. The planets and the moons will all line up perfectly, something that happens only once every 800 years!\"");
 				say();
 				var0003 = true;
 				UI_remove_answer("event");
+				fallthrough;
 
 			case "bye":
 				if (gflags[0x01E8] && (gflags[0x01E9] && (gflags[0x01EA] && gflags[0x01DD])))
@@ -62057,9 +64810,11 @@ void Func04F8 object#(0x4F8) ()
 					UI_push_answers();
 					UI_add_answer(["moon", "sextant", "kite", "crystals", "nothing"]);
 				}
+				fallthrough;
 
 			case "nothing":
 				UI_pop_answers();
+				fallthrough;
 
 			case "moon":
 				var0004 = false;
@@ -62083,6 +64838,7 @@ void Func04F8 object#(0x4F8) ()
 				}
 				UI_remove_answer("moon");
 				gflags[0x01E8] = true;
+				fallthrough;
 
 			case "sextant":
 				var0009 = false;
@@ -62106,6 +64862,7 @@ void Func04F8 object#(0x4F8) ()
 				}
 				UI_remove_answer("sextant");
 				gflags[0x01E9] = true;
+				fallthrough;
 
 			case "kite":
 				var000D = UI_find_nearest(0xFE9C, 0x0149, 0xFFFF);
@@ -62121,6 +64878,7 @@ void Func04F8 object#(0x4F8) ()
 				}
 				UI_remove_answer("kite");
 				gflags[0x01EA] = true;
+				fallthrough;
 
 			case "crystals":
 				if (!gflags[0x01EE])
@@ -62146,6 +64904,7 @@ void Func04F8 object#(0x4F8) ()
 					gflags[0x01EE] = true;
 				}
 				UI_remove_answer("crystals");
+				fallthrough;
 
 			case "have crystal":
 				var000F = Func0931(0xFE9B, 0x0001, 0x02EA, 0xFE99, 0xFE99);
@@ -62166,6 +64925,7 @@ void Func04F8 object#(0x4F8) ()
 					message(", but I must have the crystal to complete the viewer.\"");
 					say();
 				}
+				fallthrough;
 
 			case "want crystal":
 				var0011 = UI_add_party_items(0x0001, 0x0302, 0xFE99, 0x0001, 0x0000);
@@ -62183,7 +64943,7 @@ void Func04F8 object#(0x4F8) ()
 					say();
 				}
 				UI_remove_answer("want crystal");
-
+				fallthrough;
 		}
 	}
 	if (event == 0x0000)
@@ -62259,27 +65019,32 @@ void Func04F9 object#(0x4F9) ()
 				{
 					UI_add_answer("North East sea");
 				}
+				fallthrough;
 
 			case "job":
 				message("\"I am the Lycaeum head here in Moonglow, but,\" he leans close to you, \"mine assistant, Zelda, does most of the work.\"");
 				say();
 				UI_add_answer(["Moonglow", "Zelda"]);
+				fallthrough;
 
 			case "Zelda":
 				message("\"She is an excellent assistant. The Lycaeum has never performed better. However, she is a little too stern, I believe, and,\" he leans in again, \"I think she is quite beautiful.\"");
 				say();
 				UI_add_answer(["stern", "beautiful"]);
 				UI_remove_answer("Zelda");
+				fallthrough;
 
 			case "North East sea":
 				message("\"I have heard the rumors of an island, but I know nothing else about it, I am afraid. Thou mightest wish to speak with Jillian -- she should know a little about the area.\"");
 				say();
 				UI_remove_answer("North East sea");
+				fallthrough;
 
 			case "stern":
 				message("\"She has put an extraordinary amount of time and effort into ensuring the activities in this edifice happen smoothly. And,\" he adds, \"she takes it personally when they do not!\"");
 				say();
 				UI_remove_answer("stern");
+				fallthrough;
 
 			case "beautiful":
 				message("\"Dost thou not agree? I am flushed whenever her fair presence passes by. But!\" he holds up his index finger, \"I fear she does not share a mutual attraction. And she is far too serious for me to feel comfortable with a proposal.\"");
@@ -62290,12 +65055,14 @@ void Func04F9 object#(0x4F9) ()
 					UI_add_answer("Zelda's feelings");
 				}
 				UI_remove_answer("beautiful");
+				fallthrough;
 
 			case "Moonglow":
 				message("\"I love the island and the people. Mostly the people.\"");
 				say();
 				UI_add_answer("people");
 				UI_remove_answer("Moonglow");
+				fallthrough;
 
 			case "people":
 				message("\"Hast thou met my twin brother? He heads the Observatory here. And somewhere in the Lycaeum thou canst find Mariah. Sadly, she is not well up here.\" He touches his head.~~\"Jillian, the sage, also studies here in the Lycaeum. A good person to see about other residents of Moonglow would be the bartender at the Friendly Knave. Phearcy knows almost all of us here on the island.~~\"Oh, and thou must not forget the legend of Penumbra. 'Twas two hundred years ago she cast herself into a deep slumber. Now that I think about it, ");
@@ -62306,31 +65073,37 @@ void Func04F9 object#(0x4F9) ()
 				say();
 				UI_remove_answer("people");
 				UI_add_answer(["twin", "Mariah", "Jillian", "Phearcy", "Penumbra"]);
+				fallthrough;
 
 			case "twin":
 				message("\"His name is Brion. People often mistake us for each other, but I think we are nothing alike -- he got all the looks -and- the brains!\"");
 				say();
 				UI_remove_answer("twin");
+				fallthrough;
 
 			case "Mariah":
 				message("\"She was once an adept mage, but ever since the wizards began losing their, er, faculties, she followed suit.\"");
 				say();
 				UI_remove_answer("Mariah");
+				fallthrough;
 
 			case "Jillian":
 				message("\"She rarely has time for visitors, but I know she takes on students every now and then.\"");
 				say();
 				UI_remove_answer("Jillian");
+				fallthrough;
 
 			case "Phearcy":
 				message("\"That one keeps up on his politics, or rather, his gossip,\" he says, grinning. \"If thou dost want to learn about a resident of Moonglow, visit him.\"");
 				say();
 				UI_remove_answer("Phearcy");
+				fallthrough;
 
 			case "Penumbra":
 				message("\"Interestingly enough, no one has ever discovered how to enter her house. I believe those mysterious signs on the door require one to have specific items to place next to the plaques.\"");
 				say();
 				UI_remove_answer("Penumbra");
+				fallthrough;
 
 			case "Zelda's response":
 				message("He smiles broadly. \"Truly that was her response? I am pleased to no end! I thank thee, ");
@@ -62338,11 +65111,13 @@ void Func04F9 object#(0x4F9) ()
 				message(", for bringing this joyful message.\"");
 				say();
 				UI_remove_answer("Zelda's response");
+				fallthrough;
 
 			case "Zelda's feelings":
 				message("\"Oh. Oh well,\" he shrugs in an attempt at indifference. \"She was not truly important anyway.\"");
 				say();
 				UI_remove_answer("Zelda's feelings");
+				fallthrough;
 
 			case "bye":
 				if (gflags[0x01E4] && (gflags[0x01E5] && (gflags[0x01E6] && gflags[0x01E7])))
@@ -62360,6 +65135,7 @@ void Func04F9 object#(0x4F9) ()
 					UI_push_answers();
 					UI_add_answer(["bookstand", "bookmark", "quill holder", "book", "nothing"]);
 				}
+				fallthrough;
 
 			case "bookstand":
 				var0002 = UI_find_nearest(0xFE9C, 0x02B9, 0xFFFF);
@@ -62375,6 +65151,7 @@ void Func04F9 object#(0x4F9) ()
 				}
 				UI_remove_answer("bookstand");
 				gflags[0x01E4] = true;
+				fallthrough;
 
 			case "bookmark":
 				var0003 = false;
@@ -62398,6 +65175,7 @@ void Func04F9 object#(0x4F9) ()
 				}
 				UI_remove_answer("bookmark");
 				gflags[0x01E5] = true;
+				fallthrough;
 
 			case "quill holder":
 				var0008 = false;
@@ -62438,6 +65216,7 @@ void Func04F9 object#(0x4F9) ()
 				}
 				UI_remove_answer("quill holder");
 				gflags[0x01E6] = true;
+				fallthrough;
 
 			case "book":
 				var0010 = false;
@@ -62461,10 +65240,10 @@ void Func04F9 object#(0x4F9) ()
 				}
 				UI_remove_answer("book");
 				gflags[0x01E7] = true;
+				fallthrough;
 
 			case "nothing":
 				UI_pop_answers();
-
 		}
 	}
 	if (event == 0x0000)
@@ -62574,6 +65353,7 @@ void Func04FA object#(0x4FA) ()
 						UI_add_answer("Balayna's accusation");
 					}
 				}
+				fallthrough;
 
 			case "job":
 				message("\"I am the new branch leader of The Fellowship here in Moonglow.\"");
@@ -62590,6 +65370,7 @@ void Func04FA object#(0x4FA) ()
 					}
 				}
 				UI_add_answer(["new", "Moonglow"]);
+				fallthrough;
 
 			case "Balayna":
 				Func0911(0x0032);
@@ -62640,11 +65421,13 @@ void Func04FA object#(0x4FA) ()
 					}
 				}
 				UI_remove_answer("Balayna");
+				fallthrough;
 
 			case "where":
 				message("\"She has conveniently stopped breathing!\" Rankin laughs.");
 				say();
 				UI_remove_answer("where");
+				fallthrough;
 
 			case "liqueur":
 				message("\"Yes, I told thee the merchant brought it from Britain. Didst thou give it to her?");
@@ -62662,12 +65445,14 @@ void Func04FA object#(0x4FA) ()
 					message("\"Ah, well. Then I hope thou wilt have the chance later.\" He stares at you oddly for a moment, and then smiles again.");
 					say();
 				}
+				fallthrough;
 
 			case "no problem":
 				message("\"Excellent, then.\"");
 				say();
 				UI_remove_answer("no problem");
 				UI_pop_answers();
+				fallthrough;
 
 			case "she died":
 				gflags[0x0210] = true;
@@ -62675,6 +65460,7 @@ void Func04FA object#(0x4FA) ()
 				message("\"What!\" he appears stunned. \"Died? How is that possible?\"");
 				say();
 				UI_add_answer(["don't know", "liqueur"]);
+				fallthrough;
 
 			case "don't know":
 				message("\"Well this is truly a tragedy! Please, ");
@@ -62701,6 +65487,7 @@ void Func04FA object#(0x4FA) ()
 					say();
 					abort;
 				}
+				fallthrough;
 
 			case "merchant":
 				message("\"Dost thou have any news of the travelling merchant who killed Balayna?");
@@ -62721,6 +65508,7 @@ void Func04FA object#(0x4FA) ()
 					say();
 				}
 				UI_remove_answer("merchant");
+				fallthrough;
 
 			case "not ready":
 				message("\"Very well, ");
@@ -62729,6 +65517,7 @@ void Func04FA object#(0x4FA) ()
 				say();
 				UI_remove_answer("not ready");
 				UI_pop_answers();
+				fallthrough;
 
 			case "dead":
 				message("\"Really!\" he seems genuinely surprised. \"How, ah, wonderful.\" Then I guess the murder has been avenged.\"");
@@ -62736,22 +65525,26 @@ void Func04FA object#(0x4FA) ()
 				gflags[0x020F] = false;
 				UI_remove_answer("dead");
 				UI_pop_answers();
+				fallthrough;
 
 			case "new":
 				message("\"He grins, obviously embarrassed. \"I am sorry. Though the branch opened here several years ago, it is the newest branch on Britannia. I still consider myself a new branch head here.\"");
 				say();
 				UI_remove_answer("new");
+				fallthrough;
 
 			case "Moonglow":
 				message("\"Ah, yes, Moonglow. It is a pleasant town. It is possible to find all sorts of people here.\"");
 				say();
 				UI_add_answer("people");
 				UI_remove_answer("Moonglow");
+				fallthrough;
 
 			case "people":
 				message("\"I am sorry, but I prefer not to gossip.\"");
 				say();
 				UI_remove_answer("people");
+				fallthrough;
 
 			case "Fellowship":
 				var0009 = UI_wearing_fellowship();
@@ -62776,10 +65569,12 @@ void Func04FA object#(0x4FA) ()
 					UI_add_answer("philosophy");
 				}
 				UI_remove_answer("Fellowship");
+				fallthrough;
 
 			case "philosophy":
 				Func091A();
 				UI_remove_answer("philosophy");
+				fallthrough;
 
 			case "voice":
 				if (gflags[0x0006])
@@ -62793,6 +65588,7 @@ void Func04FA object#(0x4FA) ()
 					say();
 				}
 				UI_remove_answer("voice");
+				fallthrough;
 
 			case "Elizabeth and Abraham":
 				if (!gflags[0x0243])
@@ -62807,6 +65603,7 @@ void Func04FA object#(0x4FA) ()
 					say();
 				}
 				UI_remove_answer("Elizabeth and Abraham");
+				fallthrough;
 
 			case "Balayna's accusation":
 				if (var0002)
@@ -62855,10 +65652,10 @@ void Func04FA object#(0x4FA) ()
 				}
 				UI_remove_answer("Balayna's accusation");
 				var0001 = true;
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		if (gflags[0x0006])
 		{
@@ -62949,17 +65746,20 @@ void Func04FB object#(0x4FB) ()
 				message("\"I am Danag, my friend.\" The man overdoes a majestic bow.");
 				say();
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				message("\"I am interim Fellowship Branch leader here on Buccaneer's Den. Our regular leader, Abraham, is away on Fellowship business at the moment.\"");
 				say();
 				UI_add_answer(["Fellowship", "Abraham"]);
+				fallthrough;
 
 			case "Fellowship":
 				message("\"The Fellowship has been present on Buccaneer's Den for a long time. This is one of the oldest branches in Britannia, second only to the headquarters in Britain. Thou mayest wonder why an island of such ill-repute would attract The Fellowship.\"");
 				say();
 				UI_remove_answer("Fellowship");
 				UI_add_answer("wonder");
+				fallthrough;
 
 			case "wonder":
 				message("\"The founders of The Fellowship felt that the people who inhabit this island would benefit the most from our organization.");
@@ -62978,6 +65778,7 @@ void Func04FB object#(0x4FB) ()
 				}
 				UI_remove_answer("wonder");
 				UI_add_answer("Buccaneer's Den");
+				fallthrough;
 
 			case "Buccaneer's Den":
 				message("\"Long ago it was merely a hideout for pirates, scavengers, and rogues. Look around.");
@@ -62998,6 +65799,7 @@ void Func04FB object#(0x4FB) ()
 				say();
 				UI_remove_answer("Buccaneer's Den");
 				UI_add_answer(["The Baths", "House of Games"]);
+				fallthrough;
 
 			case "The Baths":
 				if (var0002)
@@ -63013,6 +65815,7 @@ void Func04FB object#(0x4FB) ()
 				message("\"It is truly a jewel in the crown that is Britannia.\"");
 				say();
 				UI_remove_answer("The Baths");
+				fallthrough;
 
 			case "House of Games":
 				if (var0002)
@@ -63026,6 +65829,7 @@ void Func04FB object#(0x4FB) ()
 					say();
 				}
 				UI_remove_answer("House of Games");
+				fallthrough;
 
 			case "Abraham":
 				message("\"Abraham is one of the members of the inner circle of The Fellowship. He and his colleague Elizabeth travel the country periodically, usually distributing or collecting the organization's funds and doing business at the other branches.\"");
@@ -63039,6 +65843,7 @@ void Func04FB object#(0x4FB) ()
 				}
 				UI_remove_answer("Abraham");
 				UI_add_answer("Elizabeth");
+				fallthrough;
 
 			case "Elizabeth":
 				message("\"Elizabeth is an extremely intelligent woman who acts as Director of Special Projects. She usually works with Batlin in Britain, but she spends most of her time travelling from branch to branch.\"");
@@ -63050,6 +65855,7 @@ void Func04FB object#(0x4FB) ()
 				}
 				UI_remove_answer("Elizabeth");
 				UI_add_answer("Special Projects");
+				fallthrough;
 
 			case "Special Projects":
 				message("\"They might be anything from building a shelter for poor peasants to creating a new branch in a town without the benefit of a Fellowship Hall.\"");
@@ -63061,22 +65867,26 @@ void Func04FB object#(0x4FB) ()
 					UI_add_answer(["Black Gate", "complex"]);
 				}
 				UI_remove_answer("Special Projects");
+				fallthrough;
 
 			case "Black Gate":
 				message("Danag's eyes widen with excitement. \"It is the gateway for our coming Lord and Master! He will be coming through in virtually a few hours!\"");
 				say();
 				UI_remove_answer("Black Gate");
+				fallthrough;
 
 			case "complex":
 				message("\"It is inside a dungeon within the Shrine of the Codex. A barrier keeps out unwanted visitors. A special key opens the barrier, and only a few select people have one.\"");
 				say();
 				UI_remove_answer("complex");
 				UI_add_answer("key");
+				fallthrough;
 
 			case "key":
 				message("\"I do not own one. The only people that do are Elizabeth and Abraham, Batlin, and Hook himself. Hook probably keeps his key in his abode.\"");
 				say();
 				UI_remove_answer("key");
+				fallthrough;
 
 			case "Hook":
 				if (var0002)
@@ -63094,6 +65904,7 @@ void Func04FB object#(0x4FB) ()
 					say();
 				}
 				UI_remove_answer("Hook");
+				fallthrough;
 
 			case "Elizabeth and Abraham":
 				message("\"They usually travel together. They just arrived from our Meditation Retreat near Serpent's Hold and I believe they are somewhere on the island. Abraham told me I must keep working as interim branch leader until his return.\"");
@@ -63107,20 +65918,22 @@ void Func04FB object#(0x4FB) ()
 					say();
 				}
 				UI_remove_answer("Elizabeth and Abraham");
+				fallthrough;
 
 			case "executioner":
 				message("\"That's right. Hook does all the dirty work for The Fellowship. He was trained by Master De Snel in Jhelom. De Snel trained all the previous executioners as well. In fact, De Snel himself was The Fellowship's first executioner!\"");
 				say();
 				UI_remove_answer("executioner");
+				fallthrough;
 
 			case "Forskis":
 				message("\"I understand the gargoyle's name means 'henchman' in Gargish. He's a tough wingless gargoyle who helps Hook out. I believe he resides in the catacombs with Hook.\"");
 				say();
 				UI_remove_answer("Forskis");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Farewell!\"*");
 		say();
@@ -63172,6 +65985,7 @@ void Func04FC object#(0x4FC) ()
 				say();
 				UI_remove_answer("name");
 				UI_add_answer("Kallibrus");
+				fallthrough;
 
 			case "Kallibrus":
 				message("\"To be not my true name. To have been given this name by Cairbre, who could not pronounce my Gargish name.\"");
@@ -63181,6 +65995,7 @@ void Func04FC object#(0x4FC) ()
 				{
 					UI_add_answer("Cairbre");
 				}
+				fallthrough;
 
 			case "job":
 				message("\"To work as a warrior for hire most of the time. To be between jobs now. To help friend Cosmo find unicorn.\"");
@@ -63188,6 +66003,7 @@ void Func04FC object#(0x4FC) ()
 				gflags[0x02E0] = true;
 				UI_remove_answer("job");
 				UI_add_answer(["Cosmo", "unicorn"]);
+				fallthrough;
 
 			case "Cairbre":
 				message("\"To have been partners for many, many years. To have been bonded for even longer!\"");
@@ -63204,6 +66020,7 @@ void Func04FC object#(0x4FC) ()
 				}
 				var0002 = true;
 				UI_remove_answer("Cairbre");
+				fallthrough;
 
 			case "Cosmo":
 				message("\"To have known him for many years, but not as long as Cairbre. To be good friend.\"");
@@ -63213,12 +66030,14 @@ void Func04FC object#(0x4FC) ()
 				{
 					UI_add_answer("Cairbre");
 				}
+				fallthrough;
 
 			case "unicorn":
 				message("\"To be unsure but to think it has something to do with a woman and, to say how... sex?\"");
 				say();
 				UI_remove_answer("unicorn");
 				UI_add_answer(["woman", "sex"]);
+				fallthrough;
 
 			case "sex":
 				message("\"To know nothing about this word. To mean something similar to reproduce?\"");
@@ -63235,6 +66054,7 @@ void Func04FC object#(0x4FC) ()
 					say();
 				}
 				UI_remove_answer("sex");
+				fallthrough;
 
 			case "woman":
 				message("\"To be related to difference in genders, I know, but to see no such thing in gargoyles. To believe there is a certain human... woman... who sent him here.~~\"To have heard Cosmo say, `love,' but Cairbre claims there is no such thing. To comprehend not, but to help friends anyway.\"");
@@ -63252,10 +66072,10 @@ void Func04FC object#(0x4FC) ()
 					UI_show_npc_face(0xFF04, 0x0000);
 				}
 				UI_remove_answer("woman");
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"To say `til next time, ");
 		message(var0003);
@@ -63310,6 +66130,7 @@ void Func04FD object#(0x4FD) ()
 				gflags[0x02D7] = true;
 				UI_remove_answer("name");
 				UI_add_answer(["betrothed", "Ophelia"]);
+				fallthrough;
 
 			case "job":
 				message("\"I am, uh, searching for something, ");
@@ -63317,6 +66138,7 @@ void Func04FD object#(0x4FD) ()
 				message(".\"");
 				say();
 				UI_add_answer("searching");
+				fallthrough;
 
 			case "betrothed":
 				message("\"Aye, ");
@@ -63334,6 +66156,7 @@ void Func04FD object#(0x4FD) ()
 					UI_show_npc_face(0xFF03, 0x0000);
 				}
 				UI_remove_answer("betrothed");
+				fallthrough;
 
 			case "searching":
 				message("\"Well, ");
@@ -63357,6 +66180,7 @@ void Func04FD object#(0x4FD) ()
 				}
 				UI_add_answer("personal");
 				UI_remove_answer("searching");
+				fallthrough;
 
 			case "personal":
 				message("\"I would... rather... not discuss it, ");
@@ -63364,17 +66188,20 @@ void Func04FD object#(0x4FD) ()
 				message(",\" he stammers.");
 				say();
 				UI_remove_answer("personal");
+				fallthrough;
 
 			case "Ophelia":
 				message("\"She is the most beautiful woman in all Britannia. I still find it hard to believe she has agreed to marry me, a lowly warrior. I will travel to the ends of the world for her, if that be necessary, to keep her heart!\"");
 				say();
 				UI_remove_answer("Ophelia");
+				fallthrough;
 
 			case "proof":
 				message("He looks down at his feet. \"Milady Ophelia is concerned that I might not be... pure. I have waited mine entire life for someone like her. Can she not see that I held myself for marriage?\"");
 				say();
 				UI_add_answer(["held", "pure"]);
 				UI_remove_answer("proof");
+				fallthrough;
 
 			case "held":
 				message("\"Surely thou dost see the value in that, ");
@@ -63382,6 +66209,7 @@ void Func04FD object#(0x4FD) ()
 				message(". No woman would want me if I had not refrained from... well... thou dost understand.\"");
 				say();
 				UI_remove_answer("held");
+				fallthrough;
 
 			case "pure":
 				message("\"I must prove to the lovely Ophelia that I am still a virgin. To do this I need to demonstrate that a unicorn will allow me to touch it. My friends and I are here to find such a creature, for recent legend purports that one lives in this dungeon.\"");
@@ -63392,16 +66220,17 @@ void Func04FD object#(0x4FD) ()
 					UI_add_answer("the unicorn said no");
 				}
 				UI_remove_answer("pure");
+				fallthrough;
 
 			case "the unicorn said no":
 				message("\"Thou hast seen the unicorn?\" He frowns for a moment, but that quickly melts away.~~\"Nevertheless, I shall endeavor to seek it out. Nothing shall keep me from my beloved Ophelia.\"");
 				say();
 				UI_remove_answer("the unicorn said no");
 				gflags[0x02D0] = false;
+				fallthrough;
 
 			case "bye":
 				break;
-
 		}
 		message("\"Good day,");
 		message(var0000);
@@ -63454,11 +66283,13 @@ void Func04FE object#(0x4FE) ()
 			message("The creature speaks. \"My name is Lasher.\"");
 			say();
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			message("Lasher looks at you and blinks. \"Come now, Avatar! I do not live by the rules that govern the society of Mankind. There is what I am, which is a unicorn. Then there is my purpose, which is another thing altogether.\"");
 			say();
 			UI_add_answer(["unicorn", "purpose"]);
+			fallthrough;
 
 		case "unicorn":
 			message("Lasher stares at you, stupefied. \"Tell me, dost thou know what a unicorn is?\"");
@@ -63478,58 +66309,68 @@ void Func04FE object#(0x4FE) ()
 			say();
 			UI_remove_answer("unicorn");
 			UI_add_answer("wizard");
+			fallthrough;
 
 		case "purpose":
 			message("\"Oh, do not be coy with me, Avatar. Thou dost know very well the purpose of a unicorn. ~~We are foolproof virgin detectors!\"");
 			say();
 			UI_remove_answer("purpose");
 			UI_add_answer("virgin detector");
+			fallthrough;
 
 		case "wizard":
 			message("\"I do not remember the wizard's name, for much time has passed since then, but suffice it to say that he was a royal bastard. Anyway, for one reason or another, the chieftain of our clan, who at that time was a horse's ass named Sharp-Hoof, decided that rather than heed this wizard's rightful and properly performed ritual of calling, he was going to take the herd and chase after this bevy of really fine fillies.\"");
 			say();
 			UI_remove_answer("wizard");
 			UI_add_answer("Sharp-Hoof");
+			fallthrough;
 
 		case "Sharp-Hoof":
 			message("\"Where was I? Oh, yes, Sharp-Hoof! The next morning, after we had had our way with these fillies, this wizard called us again. This time Sharp-Hoof realized that we had best answer, and were we sorry that we did! The wizard was horribly angry! And, well, I will just say that our agreements with such people are very, very binding.\"");
 			say();
 			UI_remove_answer("Sharp-Hoof");
 			UI_add_answer("binding");
+			fallthrough;
 
 		case "binding":
 			message("\"Not only were we bound in service to this wizard for a thousand years, but he also placed a dreadful curse upon us.\"");
 			say();
 			UI_remove_answer("binding");
 			UI_add_answer(["service", "curse"]);
+			fallthrough;
 
 		case "service":
 			message("\"As it fell out, we did not actually have to serve the wizard for a thousand years. He reduced the time by a few weeks after placing that curse on us.\" Lasher snorts sarcastically, \"I was heartbroken.\"");
 			say();
 			UI_remove_answer("service");
+			fallthrough;
 
 		case "curse":
 			message("\"We nature spirits used to be renowned for our randiness, and this wizard had called upon us to assist him in the seduction of some maiden. When we stood him up... Well, let us just say that he was one magician who was having a problem convincing his magic wand to work. Anyway, in a pathetic attempt to bolster his diminished feelings of manhood, he ruined us with an awesomely powerful Curse of Chastity.\"");
 			say();
 			UI_remove_answer("curse");
 			UI_add_answer("Chastity");
+			fallthrough;
 
 		case "Chastity":
 			message("\"It was a terrible curse. First, it drove us to kill all of the female members of our clan. Then it afflicted us with the particular sensitivity for which we have become known.\"");
 			say();
 			UI_remove_answer("Chastity");
+			fallthrough;
 
 		case "virgin detector":
 			message("\"That is correct. So sensitive are members of my race to all forms of sexual energy that we can only tolerate physical contact with one who has not yet had any experience in that form of procreation - or recreation, if thou dost prefer.\"");
 			say();
 			UI_remove_answer("virgin detector");
 			UI_add_answer("sensitive");
+			fallthrough;
 
 		case "sensitive":
 			message("\"Yes, I find it most unpleasant to actually come into physical contact with anyone who is not a virgin, and I will avoid doing so whenever possible.\"");
 			say();
 			UI_remove_answer("sensitive");
 			UI_add_answer(["avoid", "unpleasant"]);
+			fallthrough;
 
 		case "avoid":
 			message("\"Yes, well, I did not wish to get this personal with thee, but if thou does not mind, art thou a virgin?\"");
@@ -63595,45 +66436,53 @@ void Func04FE object#(0x4FE) ()
 				}
 			}
 			UI_remove_answer("avoid");
+			fallthrough;
 
 		case "virginity":
 			message("\"Surely, Avatar, thou knowest that thou dost magically regain thy virginity each time upon returning to Britannia! Hast thou remained a virgin since then by choice or by circumstance?\"");
 			say();
 			UI_remove_answer("virginity");
 			UI_add_answer(["choice", "circumstance"]);
+			fallthrough;
 
 		case "choice":
 			message("\"Well, I am sure thou wilt find the right person one day.\"");
 			say();
 			UI_remove_answer(["choice", "circumstance"]);
+			fallthrough;
 
 		case "circumstance":
 			message("\"That is too bad, I am very sorry. I would love to be able to help thee, but that is no longer my purpose.\"");
 			say();
 			UI_remove_answer(["circumstance", "choice"]);
 			UI_add_answer("help");
+			fallthrough;
 
 		case "help":
 			message("\"Oh, I do not know. It has been so long since I was personally involved in such matters. Art thou seeking love or art thou seeking lust?\"");
 			say();
 			UI_add_answer(["love", "lust"]);
 			UI_remove_answer("help");
+			fallthrough;
 
 		case "love":
 			message("\"Hmmm, love is usually a very elusive quarry. I suppose that thou canst try thy luck in the city of Cove. It is a city of lovers, or so I have heard.\"");
 			say();
 			UI_remove_answer(["love", "lust"]);
+			fallthrough;
 
 		case "lust":
 			message("\"If quenching thy lust is thine only concern, then thou shouldst find satisfaction at the Baths, in Buccaneer's Den. But be sure to take a full purse.\"");
 			say();
 			UI_remove_answer(["love", "lust"]);
+			fallthrough;
 
 		case "unpleasant":
 			message("\"Actually, the part of being a virgin detector that I find the most intolerable is having to perform upon demand for some clever mage or bard or hero who wants a potential wife to try to touch me.\"");
 			say();
 			UI_remove_answer("unpleasant");
 			UI_add_answer("wife");
+			fallthrough;
 
 		case "wife":
 			message("\"It is a tragedy. The man always gets nervous, then places a condition on the marriage that his bride must be a virgin. They call me to put her to the test, and the man's bachelorhood is granted a reprieve. I have destroyed more engagements than the Bubonic Plague.\"");
@@ -63643,6 +66492,7 @@ void Func04FE object#(0x4FE) ()
 			{
 				UI_add_answer("bachelorhood");
 			}
+			fallthrough;
 
 		case "bachelorhood":
 			message("\"Just like those fools who are wandering around down here looking for me for the same reason, I would wager. Well, they can lose that notion. I like women, I truly do, and frankly, I am sick and tired of being used as the instrument of their humiliation.\"");
@@ -63657,34 +66507,38 @@ void Func04FE object#(0x4FE) ()
 				UI_add_answer("fools");
 			}
 			UI_remove_answer("bachelorhood");
+			fallthrough;
 
 		case "fools":
 			message("\"I am a magical creature. I can avoid them down here as long as I want. They will die of old age before they catch me. I refuse to assist them in weaseling out of some breach of promise. Thou canst tell them that if thou dost see them.\"");
 			say();
 			gflags[0x02D0] = true;
 			UI_remove_answer("fools");
+			fallthrough;
 
 		case "male virginity test":
 			message("\"They want the virginity test for a man who is getting married?!\" Lasher lets out a long surprised laugh. \"In all mine existence, I have never heard of such a thing!\"");
 			say();
 			UI_remove_answer("male virginity test");
 			UI_add_answer("getting married");
+			fallthrough;
 
 		case "getting married":
 			message("\"Oh, she must be quite a ravishing maiden if he is willing to risk life and limb to come down here and prove his virtue.\"");
 			say();
 			UI_remove_answer("getting married");
 			UI_add_answer("ravishing maiden");
+			fallthrough;
 
 		case "ravishing maiden":
 			message("\"This boy must be smitten something fierce by this maid. I suppose that I should go and investigate this further. If he is as sincere about this as thou dost say, then perhaps I will help the poor lad.\"");
 			say();
 			UI_remove_answer("ravishing maiden");
 			gflags[0x02D1] = true;
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	message("\"Fare thee well, Avatar.\"*");
 	say();
@@ -63780,6 +66634,7 @@ void Func04FF object#(0x4FF) ()
 				say();
 			}
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			if (!var0004)
@@ -63793,6 +66648,7 @@ void Func04FF object#(0x4FF) ()
 				say();
 			}
 			UI_add_answer(["live", "Papa", "cave"]);
+			fallthrough;
 
 		case "live":
 			if (!var0004)
@@ -63814,6 +66670,7 @@ void Func04FF object#(0x4FF) ()
 				say();
 			}
 			UI_remove_answer("live");
+			fallthrough;
 
 		case "Papa":
 			if (!var0004)
@@ -63827,6 +66684,7 @@ void Func04FF object#(0x4FF) ()
 				say();
 			}
 			UI_remove_answer("Papa");
+			fallthrough;
 
 		case "cave":
 			if (!var0004)
@@ -63840,10 +66698,10 @@ void Func04FF object#(0x4FF) ()
 				say();
 			}
 			UI_remove_answer("cave");
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	message("\"'Bye!\"*");
 	say();
@@ -63912,32 +66770,38 @@ void Func0500 object#(0x500) ()
 			say();
 			UI_remove_answer("name");
 			UI_add_answer("Wisp");
+			fallthrough;
 
 		case "Wisp":
 			message("\"This label has been implemented by human entities to name manifestations from the Xorinite dimension since the time when this dimension was discovered by Xorinite manifestations. Another common name is 'Will-o-the-wisp'.~~ \"The preceding sample of information was provided without charge. Usually there is a fee for information.\"");
 			say();
 			UI_remove_answer("Wisp");
+			fallthrough;
 
 		case "information":
 			message("\"The Undrian Council seeks information regarding a certain entity by the name of 'Alagner'. 'You' have access to this information. 'I' have information regarding a certain entity which 'you' are seeking. The Undrian Council proposes a trade.\"");
 			say();
 			UI_remove_answer("information");
 			UI_add_answer(["Undrian Council", "Alagner", "trade"]);
+			fallthrough;
 
 		case "Undrian Council":
 			message("\"The Council represents what 'your' language defines as 'government'.\"");
 			say();
 			UI_remove_answer("Undrian Council");
+			fallthrough;
 
 		case "job":
 			message("\"'Xorinia' is a conduit for information between different planes and dimensions. 'Xorinia' also catalogs information which is necessary for growth of the Xorinite community. 'You' have information which may be valuable to 'me'. 'I' also have information that 'you' want.\"");
 			say();
 			UI_add_answer("information");
+			fallthrough;
 
 		case "Alagner":
 			message("\"The Undrian Council has information that there is a human entity in 'your' dimension that has been called 'the wisest man in Britannia.' This entity is known as 'Alagner' and lives in 'your' colony of 'New Magincia'. 'Alagner' has what the entity calls a 'notebook'. The 'notebook' is a collection of information.\"");
 			say();
 			UI_remove_answer("Alagner");
+			fallthrough;
 
 		case "trade":
 			message("\"'I' want to absorb the information in Alagner's 'notebook'. If 'you' bring the 'notebook' here, the Undrian Council will release information useful to 'you'. Do 'you' agree to the trade?\"");
@@ -63957,6 +66821,7 @@ void Func0500 object#(0x500) ()
 				abort;
 			}
 			UI_remove_answer("trade");
+			fallthrough;
 
 		case "Time Lord":
 			if (!gflags[0x0133])
@@ -63971,6 +66836,7 @@ void Func0500 object#(0x500) ()
 				say();
 			}
 			UI_remove_answer("Time Lord");
+			fallthrough;
 
 		case "notebook":
 			message("\"The human entity is welcomed by 'Xorinia'. 'You' have brought the item 'notebook'. 'I' shall now absorb the information contained therein.\"~~The Wisp glows brightly for a few seconds. The notebook remains in your possession.~~\"'I' have completed my absorption of the information. 'You' may now return the item 'notebook' to the entity 'Alagner'.~~\"And now for the exchange of information and delivery of a message.\"");
@@ -63979,6 +66845,7 @@ void Func0500 object#(0x500) ()
 			Func0911(0x02BC);
 			UI_remove_answer("notebook");
 			UI_add_answer(["exchange", "message"]);
+			fallthrough;
 
 		case "message":
 			message("\"'Xorinia' must deliver a message to 'you'. The entity known as 'Time Lord' requests 'your' audience. 'Time Lord' is trapped at the plane known as the Shrine of Spirituality. 'You' can reach 'him' by using 'your' object 'Orb of the Moons' in the location directly to 'your' 'northwest'.");
@@ -63986,6 +66853,7 @@ void Func0500 object#(0x500) ()
 			gflags[0x0134] = true;
 			UI_remove_answer("message");
 			UI_add_answer("Time Lord");
+			fallthrough;
 
 		case "exchange":
 			message("\"Now for the information 'you' seek. 'This' dimension known as 'Britannia' is under attack by an entity called 'The Guardian'.~~\"'The Guardian' lives in another dimension. 'Xorinia' sometimes trades information with this entity. Do 'you' want to know more about 'The Guardian'?\"");
@@ -64005,16 +66873,17 @@ void Func0500 object#(0x500) ()
 				say();
 			}
 			UI_remove_answer("exchange");
+			fallthrough;
 
 		case "Black Gate":
 			message("\"The 'Black Gate' will be fully functional when the phenomenon known as 'Astronomical Alignment' next occurs.~~ \"Although 'Xorinia' does not normally seek to influence actions of other manifestations, 'Xorinia' warns 'you' that if 'The Guardian' enters 'this' dimension, it will be the end of the dimension known as 'Britannia'. 'The Guardian' is powerful in 'his' own dimension. In 'your' dimension, 'he' will be unstoppable.~~\"The Undrian Council sincerely hopes this information is useful. Transaction complete.\"*");
 			say();
 			gflags[0x0127] = true;
 			UI_remove_answer("Black Gate");
+			fallthrough;
 
 		case "bye":
 			break;
-
 	}
 	message("\"'Xorinia' always welcomes the exchange of information. Farewell.\"*");
 	say();
@@ -76072,6 +78941,7 @@ void Func06F6 object#(0x6F6) ()
 					UI_add_answer("daemon");
 				}
 				UI_remove_answer("name");
+				fallthrough;
 
 			case "job":
 				if (!gflags[0x0332])
@@ -76087,6 +78957,7 @@ void Func06F6 object#(0x6F6) ()
 					UI_add_answer("release");
 				}
 				UI_remove_answer("job");
+				fallthrough;
 
 			case "Erethian":
 				message("\"He is my master...\" The daemon's smile contorts into a scarcely hidden scowl of hatred. \"Until other... arrangements can be made.\" Arcadion's toothsome smile appears on his shadowy features.");
@@ -76096,12 +78967,14 @@ void Func06F6 object#(0x6F6) ()
 					UI_add_answer("daemon");
 				}
 				UI_remove_answer("Erethian");
+				fallthrough;
 
 			case "daemon":
 				message("\"That is how thy people address those of my race.\" You can't tell from Arcadion's tone of voice whether or not he minds that fact.");
 				say();
 				UI_remove_answer("daemon");
 				var0008 = true;
+				fallthrough;
 
 			case "serve":
 				message("The large daemon's eyes close as he appears to be restraining the force of horrific emotions,");
@@ -76131,12 +79004,14 @@ void Func06F6 object#(0x6F6) ()
 					say();
 					Func0843();
 				}
+				fallthrough;
 
 			case "release":
 				message("\"I'll need a special gem in which to house my essence when thou crackest this prison of a mirror.\" His eyes are alight with the possibility of his impending freedom.");
 				say();
 				UI_add_answer("gem");
 				UI_remove_answer("release");
+				fallthrough;
 
 			case "gem":
 				var0006 = UI_find_nearby(item, 0x02F8, 0x000F, 0x0000);
@@ -76184,7 +79059,6 @@ void Func06F6 object#(0x6F6) ()
 					say();
 				}
 				Func0843();
-
 		}
 		return;
 	}
@@ -76235,6 +79109,7 @@ void Func06F6 object#(0x6F6) ()
 					say();
 					UI_add_answer("bond");
 					UI_remove_answer("black sword");
+					fallthrough;
 
 				case "bond":
 					if (Func0846())
@@ -76278,11 +79153,13 @@ void Func06F6 object#(0x6F6) ()
 						say();
 					}
 					UI_remove_answer("bond");
+					fallthrough;
 
 				case "name":
 					message("\"My name is still Arcadion, although my prison has changed.\"");
 					say();
 					UI_remove_answer("name");
+					fallthrough;
 
 				case "job":
 					message("\"I am now thy servant.\tWhat is thy bidding, master?\"");
@@ -76292,6 +79169,7 @@ void Func06F6 object#(0x6F6) ()
 						UI_add_answer("master");
 					}
 					UI_remove_answer("job");
+					fallthrough;
 
 				case "wrath":
 					message("Arcadion sounds a bit pensive as he replies, \"Forgive my momentary indiscretion, master. My bitter emotions overcame my reasoning for a brief time. I shall not let it happen again.\"");
@@ -76301,6 +79179,7 @@ void Func06F6 object#(0x6F6) ()
 						UI_add_answer("master");
 					}
 					UI_remove_answer("wrath");
+					fallthrough;
 
 				case "trapped":
 					var0005 = false;
@@ -76319,6 +79198,7 @@ void Func06F6 object#(0x6F6) ()
 					gflags[0x0334] = true;
 					UI_add_answer("power");
 					UI_remove_answer("trapped");
+					fallthrough;
 
 				case "power":
 					if (!gflags[0x0333])
@@ -76389,6 +79269,7 @@ void Func06F6 object#(0x6F6) ()
 						}
 					}
 					UI_remove_answer("power");
+					fallthrough;
 
 				case "master":
 					message("The daemon pauses for a moment, \"Thou hast imprisoned my physical form, I am therefore bound to thy will by powers far older than thou or I wield. What wouldst thou have of me?\"");
@@ -76396,17 +79277,18 @@ void Func06F6 object#(0x6F6) ()
 					UI_add_answer("bound");
 					var0009 = true;
 					UI_remove_answer("master");
+					fallthrough;
 
 				case "bound":
 					message("\"Long ago, even by my accounting of time, my people were defeated by a powerful race of beings in an attempt to conquer this realm. This race lived here long before the coming of thy sovereign, Lord British. My poeple were defeated and they expected death, but these great and powerful beings were not destroyers. However, they also did not wish futher disruption by my kind. So they weaved enchantments beyond the ken of my race, binding us to the inhabitants of this realm. Thine own people merely use the existing enchantments to keep us enslaved, sometimes without an incling of how this was achieved.\"");
 					say();
 					UI_remove_answer("bound");
+					fallthrough;
 
 				case "bye":
 					message("\"Farewell my master.\" The gem seems to dim a little.*");
 					say();
 					abort;
-
 			}
 		}
 		else if (event == 0x0001)
@@ -76479,11 +79361,13 @@ void Func06F6 object#(0x6F6) ()
 					message("The daemon sword's tone is rather ominous as he says, \"I am, and ever shall be, thy servant Arcadion.\"");
 					say();
 					UI_remove_answer("name");
+					fallthrough;
 
 				case "job":
 					message("\"I am the Shade Blade. My destiny is to serve thee until we are...\" The sword pauses, \"parted.\"");
 					say();
 					UI_remove_answer("job");
+					fallthrough;
 
 				case "powers":
 					if (!UI_is_readied(UI_get_npc_object(0xFE9C), 0x0001, 0x02C3, 0xFE99))
@@ -76498,27 +79382,32 @@ void Func06F6 object#(0x6F6) ()
 						UI_push_answers();
 						UI_add_answer(["Magic", "Fire", "Death", "Return", "none"]);
 					}
+					fallthrough;
 
 				case "help":
 					message("Arcadion's voice is smug as he replies to your request for assistance. \"Yes, I can help thee if thou wishest to exile what remains of Exodus to the Void. Firstly, thou shalt have need of the lenses of which the doddering, old fool spoke. Next thou needs must have the three Talismans of Principle. And finally, make sure that there are lit torches upon the walls to either side of the pedestal upon which the Dark Core rests.");
 					say();
 					UI_add_answer(["lenses", "talismans"]);
 					UI_remove_answer("help");
+					fallthrough;
 
 				case "lenses":
 					message("\"The concave and convex lenses which thou used to place the Codex of Infinite Wisdom within the Void, I believe now sit forgotten in the Museum of Britannia. They must be placed between the Dark Core and the torches on either side of the pedestal\"");
 					say();
 					UI_remove_answer("lenses");
+					fallthrough;
 
 				case "talismans":
 					message("\"The Talismans of Principle must be placed upon the Dark Core like wedges in a pie.\"");
 					say();
 					UI_remove_answer("talismans");
+					fallthrough;
 
 				case "none":
 					message("\"As thou wish, master. I but seek to serve thee.\"");
 					say();
 					UI_pop_answers();
+					fallthrough;
 
 				case "Magic":
 					var0016 = UI_part_of_day();
@@ -76531,6 +79420,7 @@ void Func06F6 object#(0x6F6) ()
 						message("The blade croons quietly, \"Alas, master. My energies seem a trifle low. Perhaps if thou were to find some creature to slay, my power would be sufficient. After all, I have needs just as thou dost.\"");
 						say();
 					}
+					fallthrough;
 
 				case "Death":
 					message("\"Where is the corpse of which thou dost speak?\" The dark sword begins to vibrate in your hand.*");
@@ -76578,7 +79468,7 @@ void Func06F6 object#(0x6F6) ()
 									message("\"Guards!\"*");
 									say();
 									var0014 = true;
-									goto labelFunc06F6_0B89;
+									break;
 								}
 								else
 								{
@@ -76615,7 +79505,7 @@ void Func06F6 object#(0x6F6) ()
 										message("The daemon, possibly stung by the dragon's repartee, falls silent and goes to its bloody work.*");
 										say();
 										var0015 = true;
-										goto labelFunc06F6_0B89;
+										break;
 									}
 								}
 								else
@@ -76634,7 +79524,7 @@ void Func06F6 object#(0x6F6) ()
 										message("\"I owe thee quite a favor for this, master. I thank thee for allowing me this, my revenge!\"*");
 										say();
 										var0015 = true;
-										goto labelFunc06F6_0B89;
+										break;
 									}
 								}
 								else
@@ -76657,7 +79547,7 @@ void Func06F6 object#(0x6F6) ()
 									message("\"Very well, master. If thou cannot dispatch this foe thyself, I shall do it for thee.\"");
 									say();
 									var0015 = true;
-									goto labelFunc06F6_0B89;
+									break;
 								}
 								else
 								{
@@ -76707,6 +79597,7 @@ void Func06F6 object#(0x6F6) ()
 						message("\"Hast thou such a grudge against this inanimate object that thou wouldst see it perish forever?\" His voice is laden with undisguised sarcasm. \"I cannot take life from that which is already lifeless.\"");
 						say();
 					}
+					fallthrough;
 
 				case "Return":
 					if (!Func08E7())
@@ -76718,7 +79609,7 @@ void Func06F6 object#(0x6F6) ()
 							message("\"I see. Very well, master. But let us not forget this little favor...\" The gem in the hilt of the sword glows brightly then everything dims.*");
 							say();
 							var0013 = true;
-							goto labelFunc06F6_0B89;
+							break;
 						}
 						else
 						{
@@ -76731,19 +79622,20 @@ void Func06F6 object#(0x6F6) ()
 						message("\"Forgive me, master, but are we not already on or near the Isle of Fire? Though, why one would wish to remain here on this forsaken piece of rock, I have no\tidea.\"");
 						say();
 					}
+					fallthrough;
 
 				case "Fire":
 					message("\"And what, pray tell, is the intended target of thy immense and most puissant wrath, O' Master of Infinite Destruction?\"");
 					say();
 					UI_remove_npc_face(0xFEDC);
 					var0012 = true;
+					break;
 
 				case "bye":
 					message("\"Forgive me master, but I shan't be leaving. However, thou mayest cease thy speaking... if thou dost wish it.\"*");
 					say();
 					break;
 			}
-labelFunc06F6_0B89:
 			if (var0012)
 			{
 				item->Func06FC();
@@ -87367,13 +90259,18 @@ void Func087C 0x87C ()
 				say();
 				abort;
 			}
+			fallthrough;
 
 		case "Go away!":
 			message("It does.*");
 			say();
 			abort;
 
-		UI_remove_answer(["Want honey?", "Go away!"]);
+		// This is supposed to be reached regardless of what (if anything) was
+		// matched up to this point.
+		// I have no idea how to do this in UCC without modifying it to
+		// allow this kind of construct.
+			UI_remove_answer(["Want honey?", "Go away!"]);
 	}
 	return;
 }
@@ -88946,6 +91843,7 @@ void Func0890 0x890 ()
 				say();
 				abort;
 			}
+			fallthrough;
 
 		case "sacrificed":
 			message("You quickly relate the details of Bollux's death as he pulled the object from his chest and placed it in the other golem's.~\"He sacrificed himself by giving me his heart... the fool!\" His words are insulting but his tone is affectionate.");
@@ -88968,21 +91866,25 @@ void Func0890 0x890 ()
 				say();
 				abort;
 			}
+			fallthrough;
 
 		case "name":
 			UI_remove_answer("name");
 			message("\"I am the golem called Adjhar, at thy service.\"");
 			say();
+			fallthrough;
 
 		case "job":
 			message("\"I am one of the guardians of the Shrines of the Principles. That was exactly what Bollux and I were doing when the wall fell and crushed me.\"");
 			say();
 			UI_add_answer(["Bollux", "Shrines", "wall"]);
+			fallthrough;
 
 		case "Shrines":
 			UI_remove_answer("Shrines");
 			message("\"Surely thou hast heard of the Shrines of the Three Principles: Truth, Love, and Courage! We golems were fabricated to protect the Shrines, for only an Avatar -- -the- Avatar -- may utilize the awesome power they can convey.\"");
 			say();
+			fallthrough;
 
 		case "wall":
 			UI_remove_answer("wall");
@@ -88998,17 +91900,20 @@ void Func0890 0x890 ()
 				message("\"Strange,\" he says, puzzled. \"I am at a loss then to explain my arrival here.~Regardless, I -must- find a way to restore life to him!\"");
 				say();
 			}
+			fallthrough;
 
 		case "Bollux":
 			message("\"Hast thou not already met him? He is my older brother, and my friend.\"");
 			say();
 			UI_remove_answer("Bollux");
 			UI_add_answer("older");
+			fallthrough;
 
 		case "older":
 			message("\"Master Astelleron -- we actually called him our father -- created him before he did me. And he instilled Bollux with a personality first.\"");
 			say();
 			UI_remove_answer("older");
+			fallthrough;
 
 		case "what next":
 			UI_remove_answer("what next");
@@ -89036,6 +91941,7 @@ void Func0890 0x890 ()
 				say();
 				gflags[0x031F] = true;
 			}
+			fallthrough;
 
 		case "fool":
 			UI_remove_answer("fool");
@@ -89073,12 +91979,12 @@ void Func0890 0x890 ()
 				message("\"Then I recommend thou dost search within my master's chambers for it. The pages contain words which may help my companion.\"");
 				say();
 			}
+			fallthrough;
 
 		case "bye":
 			message("\"I can offer nothing more for thine assistance than my deepest appreciation. Please journey in peace.\"*");
 			say();
 			abort;
-
 	}
 	return;
 }
@@ -89120,12 +92026,14 @@ void Func0892 0x892 ()
 			message("\"As thou must know by now, my creator chose to call me Adjhar.\"");
 			say();
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			message("\"I was created to be one of many protectors to the Shrines of the Three Principles. However,\" he pauses, \"my duty also included being the keeper of the Talisman of Love.\"");
 			say();
 			UI_remove_answer("job");
 			UI_add_answer("Talisman");
+			fallthrough;
 
 		case "Talisman":
 			message("\"Dost thou want the Talisman of Love?\"");
@@ -89156,6 +92064,7 @@ void Func0892 0x892 ()
 				message("\"Thou art truly deserving of such an artifact. But if thou dost not wish to utilize the Shrines, I must respect thy wishes.\"");
 				say();
 			}
+			fallthrough;
 
 		case "bye":
 			message("\"I bid thee farewell.\"*");
@@ -89188,17 +92097,18 @@ void Func0893 0x893 ()
 			message("\"I am and always will be the one called Adjhar.\"");
 			say();
 			UI_remove_answer("name");
+			fallthrough;
 
 		case "job":
 			message("\"Now that thou hast mastered the Principle of Love, I no longer serve a function.\"");
 			say();
 			UI_remove_answer("job");
+			fallthrough;
 
 		case "bye":
 			message("\"Goodbye, Avatar. As always I thank thee for thy kindness in assisting two brothers in need. Forget not the lessons taught by the Shrines.\"*");
 			say();
 			abort;
-
 	}
 	return;
 }
@@ -89285,16 +92195,19 @@ void Func0894 0x894 (var var0000)
 				{
 					UI_add_answer("master");
 				}
+				fallthrough;
 
 			case "job":
 				message("\"I am a guardian of the Shrines of the Principles.\"");
 				say();
 				UI_add_answer("guardian");
+				fallthrough;
 
 			case "guardian":
 				UI_remove_answer("guardian");
 				message("\"We were... created to protect the Shrines of the Principles. Only the... Avatar should use their power. Adjhar and I were... keeping watch... when the wall fell on Adjhar. And the loud noise came...  I carried him here so that I could restore him, but I do not... know how.\"");
 				say();
+				fallthrough;
 
 			case "Creature?":
 				UI_remove_answer("Creature?");
@@ -89306,6 +92219,7 @@ void Func0894 0x894 (var var0000)
 					var0002 = true;
 				}
 				UI_add_answer("stone");
+				fallthrough;
 
 			case "master", "Astelleron":
 				UI_remove_answer(["Astelleron", "master"]);
@@ -89317,11 +92231,13 @@ void Func0894 0x894 (var var0000)
 					UI_add_answer("made");
 					var0002 = true;
 				}
+				fallthrough;
 
 			case "stone":
 				UI_remove_answer("stone");
 				message("\"We were... fashioned... out of the rock from the quarry on this small island.\"");
 				say();
+				fallthrough;
 
 			case "made":
 				var0002 = true;
@@ -89333,12 +92249,14 @@ void Func0894 0x894 (var var0000)
 				{
 					UI_add_answer("Astelleron");
 				}
+				fallthrough;
 
 			case "magic":
 				UI_remove_answer("magic");
 				message("\"I do not know what... it is, but there are many books in his house. Perhaps... there is something there about... magic.\"");
 				say();
 				UI_add_answer("books");
+				fallthrough;
 
 			case "books":
 				UI_remove_answer("books");
@@ -89364,11 +92282,13 @@ void Func0894 0x894 (var var0000)
 					message("\"There are several... more books lying about the house. I do not... know what they are about.  Adjhar read them.\"");
 					say();
 				}
+				fallthrough;
 
 			case "lonely":
 				UI_remove_answer("lonely");
 				message("\"Astelleron said it was how... a person feels when no one is around. He told us how... happy he felt after we were... born.~ He called me... a son.\"");
 				say();
+				fallthrough;
 
 			case "help":
 				UI_remove_answer("help");
@@ -89393,22 +92313,24 @@ void Func0894 0x894 (var var0000)
 					}
 				}
 				UI_add_answer("Adjhar");
+				fallthrough;
 
 			case "Adjhar":
 				UI_remove_answer("Adjhar");
 				message("\"He is my brother... and my friend. We protected the... Shrines together. We cannot let him... stay like that. Help me... assist him.\"");
 				say();
+				fallthrough;
 
 			case "blood":
 				UI_remove_answer("blood");
 				message("\"I did not... understand the book, but I remember... blood...\"");
 				say();
+				fallthrough;
 
 			case "bye":
 				message("\"Good... bye.\"*");
 				say();
 				abort;
-
 		}
 	}
 	return;
@@ -89454,16 +92376,17 @@ void Func0895 0x895 ()
 				say();
 				gflags[0x031D] = true;
 			}
+			fallthrough;
 
 		case "job":
 			message("\"I am here... to guard the Shrine... of Love.\"");
 			say();
+			fallthrough;
 
 		case "bye":
 			message("\"Fare thee... well.\"*");
 			say();
 			abort;
-
 	}
 	return;
 }
@@ -89489,17 +92412,18 @@ void Func0896 0x896 ()
 				say();
 				gflags[0x031D] = true;
 			}
+			fallthrough;
 
 		case "job":
 			message("\"I am here to guard....\" He pauses, obviously deep in thought.\"I am without a duty now.\"");
 			say();
 			UI_remove_answer("job");
+			fallthrough;
 
 		case "bye":
 			message("\"Good... bye.\"*");
 			say();
 			abort;
-
 	}
 	return;
 }
@@ -91992,11 +94916,13 @@ void Func08B2 0x8B2 ()
 				say();
 			}
 			UI_remove_answer("quest");
+			fallthrough;
 
 		case "Skara Brae":
 			message("\"I intend to restore this town and furthermore, make it a place of beauty and renown. I enjoin thee to return in future times to see if my boast doth come to pass.\"");
 			say();
 			UI_remove_answer("Skara Brae");
+			fallthrough;
 
 		case "bye":
 			message("\"Goodbye, ");
@@ -92004,7 +94930,6 @@ void Func08B2 0x8B2 ()
 			message(". I hope that thou farest well in thy quest.\" He turns away.*");
 			say();
 			abort;
-
 	}
 	if (event == 0x0000)
 	{
@@ -93184,23 +96109,27 @@ void Func08C0 0x8C0 ()
 			message("She glowers at you for a moment. \"I have nothing to say about -that- bumbling clod!\"");
 			say();
 			UI_remove_answer("Forsythe");
+			fallthrough;
 
 		case "Ferryman":
 			message("\"I know very little about that one. He's been here since the Liche called up the angry dead from their graves. I know one thing though: even shouldst thou defeat Horance, he will remain here under the geas he serves.\" She looks a little sad as she tells you this.");
 			say();
 			UI_remove_answer("Ferryman");
 			UI_add_answer("angry dead");
+			fallthrough;
 
 		case "angry dead":
 			message("\"The graves of our ancestors have spilled forth the dead of Skara Brae. Their minds and hearts are rotted and they care not for the living. Hence the name `Angry Dead.'\"");
 			say();
 			UI_remove_answer("angry dead");
+			fallthrough;
 
 		case "Markham":
 			message("She gives you a cocked smile. \"That rascal opened one of the best pubs this side of Buccaneer's Den, or so he'd have thee believe. He's a bit rough around the edges, but he knows how to buy good wine, that is for sure. And his taste in bar maids isn't half bad, either,\" she wink. \"If thou hast met Paulette, thou dost know of what I speak.\"");
 			say();
 			UI_remove_answer("Markham");
 			UI_add_answer("Paulette");
+			fallthrough;
 
 		case "Quenton":
 			message("\"That poor man has had a life fraught with grief, the one ailment none of my magics seems to be able to do much about.~~\"His wife, Gwen, was taken by a rather nasty group of men several years after the birth of their daughter, Marney. I know what happened to her, but I have spared Quenton this knowledge out of pity.~~\"The men thought she was a noble lady due to her unsurpassed beauty. When they found out she was the wife of a lowly fisherman, they raped her brutally and sold her to a disreputable brothel. Fortunately she died not long after her arrival there.\" Mordra looks profoundly saddened.");
@@ -93208,22 +96137,26 @@ void Func08C0 0x8C0 ()
 			UI_remove_answer("Quenton");
 			UI_add_answer("Marney");
 			var0000 = true;
+			fallthrough;
 
 		case "Marney":
 			message("\"Yes, yes, a half-told tale is no tale at all.\" She continues with her account of Quenton's sad life.~~\"Marney took ill after her mother's abduction and lived with one foot in the grave for several years more. Finally, Quenton could take it no longer. He borrowed money from a violent man named Michael, who went by the moniker, Blade. When he could not repay the loan, Blade slew him.~~\"However, this is not the end of my piteous tale, for even after his death, Quenton's shade was forced to remain in the town of Spirituality, where he had to watch his beloved Marney grow more ill and eventually die.~~\"Yorl, the man who cared for Marney after her father's death, built a shrine for her earthly\tbody.\" She grows silent for a while, eyes downcast. ~~\"It is my sincere hope that thou shalt rid us of Horance so that Quenton\tmay join his loved ones, wherever they may be.\"");
 			say();
 			UI_remove_answer("Marney");
 			UI_add_answer("Blade");
+			fallthrough;
 
 		case "Blade":
 			message("Her face becomes passionless for the first time since you met her.~~\"The reason I know of this story is because my late brother, Rinaldo, sat on the bench at the High Court in Yew. He wrote to me about the capture of not only Blade, but also of the pirates who abducted Quenton's wife. The pirates spent the rest of their days in the lowest cells of a dungeon, and Blade met his fate upon the edge of a guillotine.~~\"A fitting death, dost thou not think?\"");
 			say();
 			UI_remove_answer("Blade");
+			fallthrough;
 
 		case "Paulette":
 			message("\"She is quite a lovely girl, although a bit childlike in outlook. Her father was not of this world, I believe. He spoke with an odd inflection and his appearance was very unlike most other people of Britannia.~~\"But then thou well knowest that many people of other worlds come to this land. I've even heard it rumored that Lord British himself is an outworlder. Imagine that.\" A sly expression crosses her face.");
 			say();
 			UI_remove_answer("Paulette");
+			fallthrough;
 
 		case "Trent":
 			if (gflags[0x01A6])
@@ -93275,6 +96208,7 @@ void Func08C0 0x8C0 ()
 			}
 			UI_remove_answer("Trent");
 			var0001 = true;
+			fallthrough;
 
 		case "Rowena":
 			UI_remove_answer("Rowena");
@@ -93302,6 +96236,7 @@ void Func08C0 0x8C0 ()
 			}
 			UI_remove_answer("Rowena");
 			var0002 = true;
+			fallthrough;
 
 		case "Caine":
 			if (!gflags[0x01C0])
@@ -93338,11 +96273,13 @@ void Func08C0 0x8C0 ()
 				}
 			}
 			UI_remove_answer("Caine");
+			fallthrough;
 
 		case "ingredients":
 			message("\"If I tell thee, thou must be sure to get them right. Otherwise, what happened when I told that blasted mayor will happen again. And, while we here in Skara Brae have no more lives to lose, thou hast quite a valuable one! ~~\"The ingredients necessary to dissolve the liche are: a potion of invisibility, a potion of curing, and one vial of the essence of mandrake -- I have one somewhere in mine house. Remember, only -one-  vial!\"");
 			say();
 			UI_remove_answer("ingredients");
+			fallthrough;
 
 		case "Horance the Liche":
 			message("\"He is the blasted liche I was trying to destroy when the fire happened. Horance the mage apparently decided one day that mortality was not something for him. So, he began to research ways to avoid death. Finally, he came upon the formula required to make himself an undead -- an immortal undead -- liche. Unfortunately, this transformation, compounded with his already obsessive behavior, changed him into the evil thing he is today!~~\"And 'tis his evil, Black Service that commands us all!\"");
@@ -93350,6 +96287,7 @@ void Func08C0 0x8C0 ()
 			UI_remove_answer("Horance the Liche");
 			UI_add_answer("Black Service");
 			var0004 = true;
+			fallthrough;
 
 		case "Dark Tower":
 			message("\"The Dark Tower lies on the northwestern point of Skara Brae. There is something odd about its construction, for I find it very hard to penetrate with my magical senses.~Within it,\" she says, \"thou wilt find the Well of Souls.\"");
@@ -93360,6 +96298,7 @@ void Func08C0 0x8C0 ()
 				UI_add_answer("Well of Souls");
 			}
 			var0006 = true;
+			fallthrough;
 
 		case "Well of Souls":
 			var0005 = true;
@@ -93371,6 +96310,7 @@ void Func08C0 0x8C0 ()
 			}
 			UI_remove_answer("Well of Souls");
 			var0005 = true;
+			fallthrough;
 
 		case "Black Service":
 			if (!gflags[0x01AA])
@@ -93392,6 +96332,7 @@ void Func08C0 0x8C0 ()
 				}
 			}
 			UI_remove_answer("Black Service");
+			fallthrough;
 
 		case "no one":
 			message("\"I see. Of what wouldst thou speak, then?\"*");
@@ -93399,7 +96340,6 @@ void Func08C0 0x8C0 ()
 			UI_clear_answers();
 			UI_pop_answers();
 			break;
-
 	}
 	return;
 }
@@ -95311,12 +98251,12 @@ void Func08D6 0x8D6 ()
 					message(".\"");
 					say();
 				}
+				fallthrough;
 
 			case "bye":
 				message("The couple continue staring into one another's eyes as if to make up for all of the years they lost.*");
 				say();
 				abort;
-
 		}
 	}
 	return;
@@ -95367,17 +98307,18 @@ void Func08D7 0x8D7 ()
 					message("Her face lights up as you say her husband's name. \"He is the town smith. He hand crafted that music box thou didst use to awaken me from Horance's dark power.\"");
 					say();
 					UI_remove_answer("Trent");
+					fallthrough;
 
 				case "sacrifice":
 					message("\"I cannot do that to my poor Trent, at least not without seeing him one more time.\" She shakes her head in negation.");
 					say();
 					gflags[0x019D] = true;
+					fallthrough;
 
 				case "bye":
 					message("\"Yes, we must be getting to the smithy. Trent will be worrying about me.\"*");
 					say();
 					abort;
-
 			}
 		}
 	}
@@ -95977,12 +98918,12 @@ void Func08DF 0x8DF ()
 				abort;
 			}
 			UI_remove_answer(["Want honey?", "Go away!"]);
+			fallthrough;
 
 		case "Go away!":
 			message("It does.*");
 			say();
 			abort;
-
 	}
 	return;
 }
@@ -96020,12 +98961,12 @@ void Func08E0 0x8E0 ()
 				abort;
 			}
 			UI_remove_answer(["Want honey?", "Go away!"]);
+			fallthrough;
 
 		case "Go away!":
 			message("It does.*");
 			say();
 			abort;
-
 	}
 	return;
 }
@@ -96722,13 +99663,18 @@ void Func08ED 0x8ED ()
 				say();
 				abort;
 			}
+			fallthrough;
 
 		case "Go away!":
 			message("It does.*");
 			say();
 			abort;
 
-		UI_remove_answer(["Want honey?", "Go away!"]);
+		// This is supposed to be reached regardless of what (if anything) was
+		// matched up to this point.
+		// I have no idea how to do this in UCC without modifying it to
+		// allow this kind of construct.
+			UI_remove_answer(["Want honey?", "Go away!"]);
 	}
 	return;
 }
@@ -96766,12 +99712,12 @@ void Func08EE 0x8EE ()
 				abort;
 			}
 			UI_remove_answer(["Want honey?", "Go away!"]);
+			fallthrough;
 
 		case "Go away!":
 			message("It does.*");
 			say();
 			abort;
-
 	}
 	return;
 }
@@ -96839,6 +99785,7 @@ void Func08EF 0x8EF ()
 			message("\"This is a special cage, made to fit the shape of a man. Mistress Mordra says that it will contain the Liche, Horance, once it has been lowered into his Well of Souls.\" His voice seems much softer than before.");
 			say();
 			UI_remove_answer("Soul Cage");
+			fallthrough;
 
 		case "free":
 			message("\"Yes, thou wilt help me free her, wilt thou not?\" A tinge of the edge comes back to his voice.");
@@ -96856,6 +99803,7 @@ void Func08EF 0x8EF ()
 				abort;
 			}
 			UI_remove_answer("free");
+			fallthrough;
 
 		case "What next?":
 			var0004 = Func0931(0xFE9B, 0x0001, 0x0108, 0xFE99, 0xFE99);
@@ -96883,17 +99831,18 @@ void Func08EF 0x8EF ()
 				item->Func0617();
 				abort;
 			}
+			fallthrough;
 
 		case "sacrifice":
 			message("\"I cannot even consider that until I am reunited with my love.\" He seems very adamant about this.");
 			say();
 			UI_remove_answer("sacrifice");
+			fallthrough;
 
 		case "bye":
 			message("\"Please, hurry. Every second my love must endure Horance's foul presence is like a knife in my side.\" He begins to pace about his shop.*");
 			say();
 			abort;
-
 	}
 	return;
 }
@@ -96935,12 +99884,12 @@ void Func08F0 0x8F0 ()
 					say();
 				}
 				UI_remove_answer("sacrifice");
+				fallthrough;
 
 			case "bye":
 				message("The couple continue staring into one another's eyes as if to make up for all of the years they lost.*");
 				say();
 				abort;
-
 		}
 	}
 	else
@@ -97011,6 +99960,7 @@ void Func08F2 0x8F2 (var var0001, var var0000)
 			UI_remove_answer(var0008);
 			UI_remove_answer(var0007);
 			UI_add_answer(["My lie", "My deed", "My crime"]);
+			fallthrough;
 
 		case var0008:
 			break;
@@ -97037,6 +99987,7 @@ void Func08F2 0x8F2 (var var0001, var var0000)
 			{
 				UI_add_answer("Avatar");
 			}
+			fallthrough;
 
 		case "My deed":
 			message("\"Speak not of thy deed! Such deeds must deeds receive to equal their merit.\"");
@@ -97055,6 +100006,7 @@ void Func08F2 0x8F2 (var var0001, var var0000)
 			say();
 			var0002 = true;
 			gflags[0x0161] = true;
+			fallthrough;
 
 		case var0001:
 			var0004 = Func08F1("");
@@ -97068,7 +100020,6 @@ void Func08F2 0x8F2 (var var0001, var var0000)
 			say();
 			var0002 = true;
 			break;
-
 	}
 	if (!var0002)
 	{
@@ -97142,6 +100093,7 @@ void Func08F3 0x8F3 (var var0000)
 			UI_add_answer(["hand to hand", "ranged weaponry"]);
 			gflags[0x015E] = false;
 			var0001 = false;
+			fallthrough;
 
 		case "hand to hand":
 			UI_remove_answer("hand to hand");
@@ -97158,6 +100110,7 @@ void Func08F3 0x8F3 (var var0000)
 			message("\"But my preferences run to the bow. An ancient weapon, and elegant, a fine bow of Yew may bring down game sooner than a sword.\"");
 			say();
 			var0003 = true;
+			fallthrough;
 
 		case "ranged weaponry":
 			UI_remove_answer("ranged weaponry");
@@ -97165,8 +100118,10 @@ void Func08F3 0x8F3 (var var0000)
 			say();
 			var0002 = true;
 			var0003 = true;
-		// This is supposed to be reached both when "ranged weaponry" is
-		// matched above, *and* when nothing is matched up to this point.
+			fallthrough;
+
+		// This is supposed to be reached regardless of what (if anything) was
+		// matched up to this point.
 		// I have no idea how to do this in UCC without modifying it to
 		// allow this kind of construct.
 			if (var0002)
@@ -97202,6 +100157,7 @@ void Func08F3 0x8F3 (var var0000)
 			{
 				break;
 			}
+			fallthrough;
 
 		case "bye":
 			if (!var0001)
@@ -97820,7 +100776,6 @@ var Func090A 0x90A ()
 		case "No":
 			UI_pop_answers();
 			return false;
-
 	}
 	return 0;
 }
