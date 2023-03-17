@@ -82875,7 +82875,7 @@ var Func0801 0x801 (var var0000)
 	return 0;
 }
 
-var Func0802 0x802 (var var0001, var var0000)
+var Func0802 0x802 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -82883,9 +82883,9 @@ var Func0802 0x802 (var var0001, var var0000)
 	var var0005;
 
 	var0002 = [];
-	for (var0005 in var0000 with var0003 to var0004)
+	for (var0005 in var0001 with var0003 to var0004)
 	{
-		if (!(var0005 == var0001))
+		if (!(var0005 == var0000))
 		{
 			var0002 = (var0002 & var0005);
 		}
@@ -82932,7 +82932,7 @@ void Func0803 0x803 (var var0000)
 	return;
 }
 
-void Func0804 0x804 (var var0002, var var0001, var var0000)
+void Func0804 0x804 (var var0000, var var0001, var var0002)
 {
 	var var0003;
 	var var0004;
@@ -82941,13 +82941,13 @@ void Func0804 0x804 (var var0002, var var0001, var var0000)
 	var var0007;
 	var var0008;
 	var var0009;
-	var0003 = UI_find_nearby(0xFE9C, var0002, 0x001E, 0x0010);
+	var0003 = UI_find_nearby(0xFE9C, var0000, 0x001E, 0x0010);
 	var0004 = 0x0000;
 	for (var0007 in var0003 with var0005 to var0006)
 	{
 		var0008 = UI_get_item_frame(var0007);
 		var0009 = UI_get_item_quality(var0007);
-		if ((var0008 == var0001) && ((var0009 == var0000) || (var0000 == 0xFE99)))
+		if ((var0008 == var0001) && ((var0009 == var0002) || (var0002 == 0xFE99)))
 		{
 			var0004 = var0007;
 		}
@@ -82993,7 +82993,7 @@ void Func0805 0x805 (var var0000)
 	return;
 }
 
-void Func0806 0x806 (var var0001, var var0000)
+void Func0806 0x806 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -83001,11 +83001,11 @@ void Func0806 0x806 (var var0001, var var0000)
 	var var0005;
 	var var0006;
 	var var0007;
-	var0002 = UI_get_object_position(var0000);
-	var0003 = UI_find_nearby(var0002, var0001, 0x0014, 0x00B0);
-	var0003 = (var0003 & UI_find_nearby(var0002, (var0001 + 0x0001), 0x0014, 0x00B0));
-	var0003 = (var0003 & UI_find_nearby(var0002, (var0001 + 0x0002), 0x0014, 0x00B0));
-	var0003 = (var0003 & UI_find_nearby(var0002, (var0001 + 0x0003), 0x0014, 0x00B0));
+	var0002 = UI_get_object_position(var0001);
+	var0003 = UI_find_nearby(var0002, var0000, 0x0014, 0x00B0);
+	var0003 = (var0003 & UI_find_nearby(var0002, (var0000 + 0x0001), 0x0014, 0x00B0));
+	var0003 = (var0003 & UI_find_nearby(var0002, (var0000 + 0x0002), 0x0014, 0x00B0));
+	var0003 = (var0003 & UI_find_nearby(var0002, (var0000 + 0x0003), 0x0014, 0x00B0));
 	for (var0006 in var0003 with var0004 to var0005)
 	{
 		script var0006
@@ -83120,7 +83120,7 @@ void Func0809 0x809 (var var0000)
 	return;
 }
 
-void Func080A 0x80A (var var0001, var var0000)
+void Func080A 0x80A (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -83141,7 +83141,7 @@ void Func080A 0x80A (var var0001, var var0000)
 	var var0012;
 	var var0013;
 	var0002 = [];
-	var0003 = UI_find_nearby(0xFE9C, var0000, 0x000F, 0x0000);
+	var0003 = UI_find_nearby(0xFE9C, var0001, 0x000F, 0x0000);
 	for (var0006 in var0003 with var0004 to var0005)
 	{
 		var0007 = 0x0000;
@@ -83149,9 +83149,9 @@ void Func080A 0x80A (var var0001, var var0000)
 		for (var000B in var0003 with var0009 to var000A)
 		{
 			var0007 = (var0007 + 0x0001);
-			if ((var000B != 0x0000) && (var000B != var0001))
+			if ((var000B != 0x0000) && (var000B != var0000))
 			{
-				var000C = UI_get_distance(var0001, var000B);
+				var000C = UI_get_distance(var0000, var000B);
 				if (var000C < var0008)
 				{
 					var0008 = var000C;
@@ -83162,7 +83162,7 @@ void Func080A 0x80A (var var0001, var var0000)
 		var0002 = (var0002 & var0003[var000D]);
 		var0003[var000D] = 0x0000;
 	}
-	UI_sit_down(0xFE9C, var0001);
+	UI_sit_down(0xFE9C, var0000);
 	var000E = UI_get_array_size(var0002);
 	var000F = UI_get_party_list();
 	var0007 = 0x0002;
@@ -83382,7 +83382,7 @@ void Func080F 0x80F ()
 	return;
 }
 
-void Func0810 0x810 (var var0001, var var0000)
+void Func0810 0x810 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -83394,14 +83394,14 @@ void Func0810 0x810 (var var0001, var var0000)
 	var var0009;
 	var var000A;
 	var var000B;
-	if (var0001 == 0x0000)
+	if (var0000 == 0x0000)
 	{
-		var0001 = 0x0170;
+		var0000 = 0x0170;
 		var0002 = 0x0008;
 	}
 	else
 	{
-		var0001 = 0x0171;
+		var0000 = 0x0171;
 		var0002 = 0x0005;
 	}
 	var0003 = UI_get_object_position(item);
@@ -83412,8 +83412,8 @@ void Func0810 0x810 (var var0001, var var0000)
 	{
 		var0005 = (var0005 + 0x0001);
 		var0003 = UI_get_object_position(var0008);
-		var0009 = UI_find_nearby(var0003, var0001, 0x0001, 0x0000);
-		if (var0000 == 0x0001)
+		var0009 = UI_find_nearby(var0003, var0000, 0x0001, 0x0000);
+		if (var0001 == 0x0001)
 		{
 			if (var0009)
 			{
@@ -83426,7 +83426,7 @@ void Func0810 0x810 (var var0001, var var0000)
 		{
 			if (var0009 == 0x0000)
 			{
-				var000B = UI_create_new_object(var0001);
+				var000B = UI_create_new_object(var0000);
 				UI_set_item_frame(var000B, var0002);
 				var000A = UI_update_last_created(var0003);
 				var000A = UI_set_last_created(var0009);
@@ -83485,7 +83485,7 @@ extern void Func08FA 0x8FA (var var0000);
 extern void Func0925 0x925 (var var0000);
 extern var Func0937 0x937 (var var0000);
 
-void Func0813 0x813 (var var0002, var var0001, var var0000)
+void Func0813 0x813 (var var0000, var var0001, var var0002)
 {
 	var var0003;
 	var var0004;
@@ -83506,9 +83506,9 @@ void Func0813 0x813 (var var0002, var var0001, var var0000)
 		}
 		else
 		{
-			Func08FA(var0002);
-			UI_play_sound_effect2(var0000, item);
-			Func0925(var0002);
+			Func08FA(var0000);
+			UI_play_sound_effect2(var0002, item);
+			Func0925(var0000);
 			var0008 = UI_die_roll(0x0001, 0x000A);
 			if (var0005 <= 0x0004)
 			{
@@ -83533,7 +83533,7 @@ void Func0813 0x813 (var var0002, var var0001, var var0000)
 				}
 				else if (var0006 < 0x0014)
 				{
-					if (UI_get_item_shape(var0002) == 0x034A)
+					if (UI_get_item_shape(var0000) == 0x034A)
 					{
 						var0007 = "@Yum, garlic!@";
 					}
@@ -83553,7 +83553,7 @@ void Func0813 0x813 (var var0002, var var0001, var var0000)
 			}
 			else if (var0005 < 0x0014)
 			{
-				if (UI_get_item_shape(var0002) == 0x034A)
+				if (UI_get_item_shape(var0000) == 0x034A)
 				{
 					var0007 = "@Yum, garlic!@";
 				}
@@ -83949,30 +83949,30 @@ var Func081B 0x81B (var var0000)
 	return (UI_get_item_frame(var0000) % 0x0004);
 }
 
-void Func081C 0x81C (var var0001, var var0000)
+void Func081C 0x81C (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
-	var0002 = UI_get_item_frame(var0001);
+	var0002 = UI_get_item_frame(var0000);
 	var0003 = (var0002 % 0x0004);
-	UI_set_item_frame(var0001, ((var0002 - var0003) + var0000));
+	UI_set_item_frame(var0000, ((var0002 - var0003) + var0001));
 	return;
 }
 
 // externs
 extern void Func081C 0x81C (var var0000, var var0001);
 
-var Func081D 0x81D (var var0005, var var0004, var var0003, var var0002, var var0001, var var0000)
+var Func081D 0x81D (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005)
 {
 	var var0006;
 	var var0007;
 
-	Func081C(var0005, var0003);
-	UI_set_item_shape(var0005, var0004);
-	var0006 = UI_get_object_position(var0005);
-	var0006[0x0001] = (var0006[0x0001] + var0002);
-	var0006[0x0002] = (var0006[0x0002] + var0001);
-	if (UI_set_last_created(var0005))
+	Func081C(var0000, var0002);
+	UI_set_item_shape(var0000, var0001);
+	var0006 = UI_get_object_position(var0000);
+	var0006[0x0001] = (var0006[0x0001] + var0003);
+	var0006[0x0002] = (var0006[0x0002] + var0004);
+	if (UI_set_last_created(var0000))
 	{
 		var0007 = UI_update_last_created(var0006);
 	}
@@ -83983,7 +83983,7 @@ var Func081D 0x81D (var var0005, var var0004, var var0003, var var0002, var var0
 extern var Func081B 0x81B (var var0000);
 extern var Func081D 0x81D (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005);
 
-void Func081E 0x81E (var var0008, var var0007, var var0006, var var0005, var var0004, var var0003, var var0002, var var0001, var var0000)
+void Func081E 0x81E (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006, var var0007, var var0008)
 {
 	var var0009;
 	var var000A;
@@ -83992,13 +83992,13 @@ void Func081E 0x81E (var var0008, var var0007, var var0006, var var0005, var var
 	var var000D;
 	var var000E;
 	var var000F;
-	var0009 = UI_get_object_position(var0008);
-	var000A = var0009[var0005];
-	var000B = UI_find_nearby(var0008, var0007, 0x0007, 0x0000);
+	var0009 = UI_get_object_position(var0000);
+	var000A = var0009[var0003];
+	var000B = UI_find_nearby(var0000, var0001, 0x0007, 0x0000);
 	var000C = false;
 	for (var000F in var000B with var000D to var000E)
 	{
-		if ((Func081B(var000F) == var0006) && (var0009[var0005] == var000A))
+		if ((Func081B(var000F) == var0002) && (var0009[var0003] == var000A))
 		{
 			var000C = true;
 			break;
@@ -84006,7 +84006,7 @@ void Func081E 0x81E (var var0008, var var0007, var var0006, var var0005, var var
 	}
 	if (var000C)
 	{
-		var000C = Func081D(var000F, var0004, var0003, var0002, var0001, var0000);
+		var000C = Func081D(var000F, var0004, var0005, var0006, var0007, var0008);
 	}
 	return;
 }
@@ -84174,26 +84174,26 @@ void Func0824 0x824 (var var0000)
 	return;
 }
 
-var Func0825 0x825 (var var0002, var var0001, var var0000)
+var Func0825 0x825 (var var0000, var var0001, var var0002)
 {
 	var var0003;
 	var var0004;
 	var var0005;
 	var var0006;
 
-	if (var0002[var0000] >= var0001[var0000])
+	if (var0000[var0002] >= var0001[var0002])
 	{
-		if (var0000 == 0x0001)
+		if (var0002 == 0x0001)
 		{
-			var0003 = 0x36;
-			var0004 = 0x32;
+			var0003 = (byte)0x36;
+			var0004 = (byte)0x32;
 		}
-		if (var0000 == 0x0002)
+		if (var0002 == 0x0002)
 		{
-			var0003 = 0x30;
-			var0004 = 0x34;
+			var0003 = (byte)0x30;
+			var0004 = (byte)0x34;
 		}
-		if (var0002[var0000] == var0001[var0000])
+		if (var0000[var0002] == var0001[var0002])
 		{
 			var0005 = 0x0004;
 		}
@@ -84204,19 +84204,19 @@ var Func0825 0x825 (var var0002, var var0001, var var0000)
 	}
 	else
 	{
-		if (var0000 == 0x0001)
+		if (var0002 == 0x0001)
 		{
-			var0003 = 0x32;
-			var0004 = 0x36;
+			var0003 = (byte)0x32;
+			var0004 = (byte)0x36;
 		}
-		if (var0000 == 0x0002)
+		if (var0002 == 0x0002)
 		{
-			var0003 = 0x34;
-			var0004 = 0x30;
+			var0003 = (byte)0x34;
+			var0004 = (byte)0x30;
 		}
 		var0005 = 0xFFFD;
 	}
-	var0002[var0000] = (var0002[var0000] + var0005);
+	var0000[var0002] = (var0000[var0002] + var0005);
 	if (UI_get_npc_prop(0xFE9C, 0x0003) > 0x0000)
 	{
 		script 0xFE9C
@@ -84228,7 +84228,7 @@ var Func0825 0x825 (var var0002, var var0001, var var0000)
 			wait 1;
 		}
 	}
-	return var0002;
+	return var0000;
 }
 
 var Func0826 0x826 (var var0000)
@@ -84247,12 +84247,12 @@ var Func0826 0x826 (var var0000)
 	return 0;
 }
 
-var Func0827 0x827 (var var0001, var var0000)
+var Func0827 0x827 (var var0000, var var0001)
 {
-	return UI_find_direction(var0001, var0000);
+	return UI_find_direction(var0000, var0001);
 }
 
-void Func0828 0x828 (var var0006, var var0005, var var0004, var var0003, var var0002, var var0001, var var0000)
+void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006)
 {
 	var var0007;
 	var var0008;
@@ -84262,28 +84262,28 @@ void Func0828 0x828 (var var0006, var var0005, var var0004, var var0003, var var
 	var var000C;
 	var var000D;
 	var var000E;
-	if (UI_get_container(var0006))
+	if (UI_get_container(var0000))
 	{
 		UI_flash_mouse(0x0000);
 		abort;
 	}
 	UI_halt_scheduled(0xFE9C);
-	var0007 = UI_get_object_position(var0006);
-	if ((var0005 < 0x0000) && (UI_get_array_size(var0005) == 0x0001))
+	var0007 = UI_get_object_position(var0000);
+	if ((var0001 < 0x0000) && (UI_get_array_size(var0001) == 0x0001))
 	{
 		var0008 = var0003;
 		while (var0008 <= var0007[0x0003])
 		{
 			var0009[0x0003] = (var0007[0x0003] + var0008);
-			var000A = (0xFFFF * var0005);
-			while (var000A >= var0005)
+			var000A = (0xFFFF * var0001);
+			while (var000A >= var0001)
 			{
 				var0009[0x0001] = (var0007[0x0001] + var000A);
-				var000B = (0xFFFF * var0004);
-				while (var000B >= var0004)
+				var000B = (0xFFFF * var0002);
+				while (var000B >= var0002)
 				{
 					var0009[0x0002] = (var0007[0x0002] + var000B);
-					if (UI_path_run_usecode(var0009, var0002, var0001, var0000))
+					if (UI_path_run_usecode(var0009, var0004, var0005, var0006))
 					{
 						return;
 					}
@@ -84297,10 +84297,10 @@ void Func0828 0x828 (var var0006, var var0005, var var0004, var var0003, var var
 	else
 	{
 		var000C = 0x0000;
-		for (var000A in var0005 with var000D to var000E)
+		for (var000A in var0001 with var000D to var000E)
 		{
 			var000C = (var000C + 0x0001);
-			var000B = var0004[var000C];
+			var000B = var0002[var000C];
 			var0008 = var0003[var000C];
 			var0009[0x0001] = (var0007[0x0001] + var000A);
 			var0009[0x0002] = (var0007[0x0002] + var000B);
@@ -84310,7 +84310,7 @@ void Func0828 0x828 (var var0006, var var0005, var var0004, var var0003, var var
 				while (var0008 >= var0003)
 				{
 					var0009[0x0003] = (var0007[0x0003] + var0008);
-					if (UI_path_run_usecode(var0009, var0002, var0001, var0000))
+					if (UI_path_run_usecode(var0009, var0004, var0005, var0006))
 					{
 						return;
 					}
@@ -84327,7 +84327,7 @@ void Func0828 0x828 (var var0006, var var0005, var var0004, var var0003, var var
 				{
 					var0009[0x0003] = (var0007[0x0003] + var0008);
 				}
-				if (UI_path_run_usecode(var0009, var0002, var0001, var0000))
+				if (UI_path_run_usecode(var0009, var0004, var0005, var0006))
 				{
 					return;
 				}
@@ -84401,10 +84401,10 @@ var Func0829 0x829 (var var0000)
 	{
 		return false;
 	}
-	return 0;
+	return false;
 }
 
-var Func082A 0x82A (var var0002, var var0001, var var0000)
+var Func082A 0x82A (var var0000, var var0001, var var0002)
 {
 	var var0003;
 
@@ -84412,12 +84412,12 @@ var Func082A 0x82A (var var0002, var var0001, var var0000)
 	do
 	{
 		var0003 = (var0003 + 0x0001);
-		var0000[var0003] = (var0000[var0003] + var0001[var0003]);
-	} while (!(var0003 == var0002));
-	return var0002;
+		var0002[var0003] = (var0002[var0003] + var0001[var0003]);
+	} while (!(var0003 == var0000));
+	return var0000;
 }
 
-var Func082B 0x82B (var var0001, var var0000)
+var Func082B 0x82B (var var0000, var var0001)
 {
 	var var0002;
 
@@ -84425,15 +84425,15 @@ var Func082B 0x82B (var var0001, var var0000)
 	do
 	{
 		var0002 = (var0002 + 0x0001);
-		var0000[var0002] = (var0000[var0002] * 0xFFFF);
-	} while (!(var0002 == var0001));
-	return var0001;
+		var0001[var0002] = (var0001[var0002] * 0xFFFF);
+	} while (!(var0002 == var0000));
+	return var0000;
 }
 
 // externs
 extern var Func0932 0x932 (var var0000);
 
-var Func082C 0x82C (var var0003, var var0002, var var0001, var var0000)
+var Func082C 0x82C (var var0000, var var0001, var var0002, var var0003)
 {
 	var var0004;
 	var var0005;
@@ -84441,11 +84441,11 @@ var Func082C 0x82C (var var0003, var var0002, var var0001, var var0000)
 	var var0007;
 	var var0008;
 
-	var0004 = UI_find_nearby(var0003, 0xFE99, Func0932(var0001), 0x0020);
+	var0004 = UI_find_nearby(var0000, 0xFE99, Func0932(var0002), 0x0020);
 	for (var0007 in var0004 with var0005 to var0006)
 	{
 		var0008 = UI_get_object_position(var0007);
-		if ((var0008[0x0001] <= var0002[0x0001]) && ((var0008[0x0001] >= (var0002[0x0001] + var0001)) && ((var0008[0x0002] <= var0002[0x0002]) && ((var0008[0x0002] >= (var0002[0x0002] + var0001)) && ((var0008[0x0003] <= 0x0002) && ((!(var0007 == var0003)) && ((!(UI_get_item_shape(var0007) in var0000)) && UI_get_item_flag(var0003, 0x0018))))))))
+		if ((var0008[0x0001] <= var0001[0x0001]) && ((var0008[0x0001] >= (var0001[0x0001] + var0002)) && ((var0008[0x0002] <= var0001[0x0002]) && ((var0008[0x0002] >= (var0001[0x0002] + var0002)) && ((var0008[0x0003] <= 0x0002) && ((!(var0007 == var0000)) && ((!(UI_get_item_shape(var0007) in var0003)) && UI_get_item_flag(var0000, 0x0018))))))))
 		{
 			return true;
 		}
@@ -84457,18 +84457,18 @@ var Func082C 0x82C (var var0003, var var0002, var var0001, var var0000)
 extern var Func082B 0x82B (var var0000, var var0001);
 extern var Func082A 0x82A (var var0000, var var0001, var var0002);
 
-var Func082D 0x82D (var var0002, var var0001, var var0000)
+var Func082D 0x82D (var var0000, var var0001, var var0002)
 {
-	if (var0000 == 0x030D)
+	if (var0002 == 0x030D)
 	{
 		var0001 = Func082B(var0001, 0x0003);
-		var0002 = Func082A(var0002, var0001, 0x0003);
+		var0000 = Func082A(var0000, var0001, 0x0003);
 	}
-	if (var0000 == 0x0096)
+	if (var0002 == 0x0096)
 	{
-		var0002 = Func082A(var0002, var0001, 0x0003);
+		var0000 = Func082A(var0000, var0001, 0x0003);
 	}
-	return var0002;
+	return var0000;
 }
 
 // externs
@@ -84676,7 +84676,7 @@ void Func082F 0x82F ()
 	return;
 }
 
-void Func0830 0x830 (var var0001, var var0000)
+void Func0830 0x830 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -84686,22 +84686,22 @@ void Func0830 0x830 (var var0001, var var0000)
 	var var0007;
 	var var0008;
 	var var0009;
-	if (var0000 == 0x0001)
+	if (var0001 == 0x0001)
 	{
 		var0002 = 0xFFFC;
 		var0003 = 0x0058;
-		var0004 = UI_find_nearby(var0001[0x0001], 0x00C7, 0x0019, 0x0000);
+		var0004 = UI_find_nearby(var0000[0x0001], 0x00C7, 0x0019, 0x0000);
 		script var0004
 		{
 			music 21;
 		}
 	}
-	if (var0000 == 0x0000)
+	if (var0001 == 0x0000)
 	{
 		var0002 = 0x0004;
 		var0003 = 0x0057;
 	}
-	for (var0008 in var0001 with var0006 to var0007)
+	for (var0008 in var0000 with var0006 to var0007)
 	{
 		var0009 = UI_get_item_frame_rot(var0008);
 		UI_set_item_frame_rot(var0008, (var0009 + var0002));
@@ -84743,10 +84743,10 @@ void Func0831 0x831 (var var0000)
 	return;
 }
 
-void Func0832 0x832 (var var0001, var var0000)
+void Func0832 0x832 (var var0000, var var0001)
 {
 	var var0002;
-	script var0001
+	script var0000
 	{
 		frame 4;
 		repeat 3
@@ -84754,18 +84754,18 @@ void Func0832 0x832 (var var0001, var var0000)
 			previous frame cycle;
 			sfx 32;
 		};
-		call var0000;
+		call var0001;
 		sfx 33;
 	}
 	return;
 }
 
-void Func0833 0x833 (var var0001, var var0000)
+void Func0833 0x833 (var var0000, var var0001)
 {
 	var var0002;
-	script var0001
+	script var0000
 	{
-		call var0000;
+		call var0001;
 		repeat 3
 		{
 			next frame cycle;
@@ -84899,12 +84899,12 @@ var Func0834 0x834 ()
 	return true;
 }
 
-void Func0835 0x835 (var var0002, var var0001, var var0000)
+void Func0835 0x835 (var var0000, var var0001, var var0002)
 {
 	var var0003;
 	var var0004;
-	var0003 = UI_get_npc_prop(var0002, var0001);
-	var0004 = UI_set_npc_prop(var0002, var0001, (var0000 - var0003));
+	var0003 = UI_get_npc_prop(var0000, var0001);
+	var0004 = UI_set_npc_prop(var0000, var0001, (var0002 - var0003));
 	return;
 }
 
@@ -84912,7 +84912,7 @@ void Func0835 0x835 (var var0002, var var0001, var var0000)
 extern void Func0832 0x832 (var var0000, var var0001);
 extern void Func0833 0x833 (var var0000, var var0001);
 
-void Func0836 0x836 (var var0001, var var0000)
+void Func0836 0x836 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -84920,14 +84920,14 @@ void Func0836 0x836 (var var0001, var var0000)
 	var var0005;
 	var var0006;
 	var var0007;
-	var0002 = UI_get_item_quality(var0001);
+	var0002 = UI_get_item_quality(var0000);
 	var0003 = [];
-	if ((var0000 == 0x0001) || (var0000 == 0xFE99))
+	if ((var0001 == 0x0001) || (var0001 == 0xFE99))
 	{
 		var0003 = (var0003 & UI_find_nearby_avatar(0x012F));
 		var0003 = (var0003 & UI_find_nearby_avatar(0x036C));
 	}
-	if ((var0000 == 0x0000) || (var0000 == 0xFE99))
+	if ((var0001 == 0x0000) || (var0001 == 0xFE99))
 	{
 		var0003 = (var0003 & UI_find_nearby_avatar(0x03A8));
 		var0003 = (var0003 & UI_find_nearby_avatar(0x03A7));
@@ -84965,17 +84965,17 @@ void Func0836 0x836 (var var0001, var var0000)
 	return;
 }
 
-var Func0837 0x837 (var var0004, var var0003, var var0002, var var0001, var var0000)
+var Func0837 0x837 (var var0000, var var0001, var var0002, var var0003, var var0004)
 {
 	var var0005;
 	var var0006;
 	var var0007;
 	var var0008;
 
-	var0005 = UI_get_object_position(var0003);
+	var0005 = UI_get_object_position(var0001);
 	var0005[0x0001] = (var0005[0x0001] + var0002);
-	var0005[0x0002] = (var0005[0x0002] + var0001);
-	var0005[0x0003] = (var0005[0x0003] + var0000);
+	var0005[0x0002] = (var0005[0x0002] + var0003);
+	var0005[0x0003] = (var0005[0x0003] + var0004);
 	var0006 = UI_get_container(item);
 	var0007 = UI_get_object_position(item);
 	var0008 = UI_set_last_created(item);
@@ -85083,27 +85083,27 @@ void Func0838 0x838 (var var0000)
 	return;
 }
 
-void Func0839 0x839 (var var0002, var var0001, var var0000)
+void Func0839 0x839 (var var0000, var var0001, var var0002)
 {
-	if ((var0000 == 0x0001) || (var0000 == 0x0002))
+	if ((var0002 == 0x0001) || (var0002 == 0x0002))
 	{
-		UI_set_item_shape(var0002, var0001);
-		UI_halt_scheduled(var0002);
+		UI_set_item_shape(var0000, var0001);
+		UI_halt_scheduled(var0000);
 		UI_play_sound_effect(0x002E);
 		UI_set_light(item, true);
 	}
-	if (var0000 == 0x0007)
+	if (var0002 == 0x0007)
 	{
-		UI_set_item_shape(var0002, var0001);
-		UI_halt_scheduled(var0002);
+		UI_set_item_shape(var0000, var0001);
+		UI_halt_scheduled(var0000);
 		UI_play_sound_effect(0x002E);
 		UI_set_light(item, true);
 	}
-	if (var0000 == 0x0005)
+	if (var0002 == 0x0005)
 	{
 		UI_set_light(item, true);
 	}
-	if (var0000 == 0x0006)
+	if (var0002 == 0x0006)
 	{
 		UI_set_light(item, false);
 	}
@@ -85360,7 +85360,7 @@ extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, 
 extern var Func080E 0x80E (var var0000);
 extern void Func083F 0x83F (var var0000, var var0001);
 
-void Func083E 0x83E (var var0001, var var0000)
+void Func083E 0x83E (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -85369,15 +85369,15 @@ void Func083E 0x83E (var var0001, var var0000)
 	var var0006;
 	var var0007;
 	var var0008;
-	if (var0000 == 0x0001)
+	if (var0001 == 0x0001)
 	{
-		if (UI_in_usecode(var0001))
+		if (UI_in_usecode(var0000))
 		{
 			return;
 		}
-		Func0828(var0001, 0xFFFE, 0xFFFE, 0xFFFF, 0x0631, var0001, 0x0007);
+		Func0828(var0000, 0xFFFE, 0xFFFE, 0xFFFF, 0x0631, var0000, 0x0007);
 	}
-	if (var0000 == 0x0002)
+	if (var0001 == 0x0002)
 	{
 		var0002 = UI_get_item_quality(item);
 		var0003 = UI_find_nearby(item, 0x0366, 0x000F, 0x0000);
@@ -85414,7 +85414,7 @@ void Func083E 0x83E (var var0001, var var0000)
 // externs
 extern var Func0834 0x834 ();
 
-void Func083F 0x83F (var var0001, var var0000)
+void Func083F 0x83F (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -85426,10 +85426,10 @@ void Func083F 0x83F (var var0001, var var0000)
 	var0003 = false;
 	for (var0006 in var0002 with var0004 to var0005)
 	{
-		if (UI_get_item_quality(var0006) == UI_get_item_quality(var0001))
+		if (UI_get_item_quality(var0006) == UI_get_item_quality(var0000))
 		{
 			var0007 = Func0834();
-			script var0001
+			script var0000
 			{
 				frame 1;
 				repeat 6
@@ -85440,7 +85440,7 @@ void Func083F 0x83F (var var0001, var var0000)
 			var0003 = true;
 		}
 	}
-	if (var0003 && var0000)
+	if (var0003 && var0001)
 	{
 		script 0xFE9C
 		{
@@ -87190,7 +87190,7 @@ extern var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003);
 extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0915 0x915 (var var0000, var var0001);
 
-void Func0856 0x856 (var var0001, var var0000)
+void Func0856 0x856 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -87214,12 +87214,12 @@ void Func0856 0x856 (var var0001, var var0000)
 	}
 	if ((var0002 == 0xFFFF) || (var0002 == 0xFFF6))
 	{
-		var0000 = (var0000 / 0x0002);
+		var0001 = (var0001 / 0x0002);
 		message("\"I cannot charge a master such as thyself full price.\"");
 		say();
 	}
 	var0004 = 0x0002;
-	var0005 = Func0922(var0001, var0000, var0002, var0004);
+	var0005 = Func0922(var0000, var0001, var0002, var0004);
 	if (var0005 == 0x0000)
 	{
 		message("After a bit of target practice, he says, \"I am sorry to say this, but thou dost need more practice before I will be able to train thee. Perhaps at a later time thou wilt be in a better position to receive mine instruction.\"");
@@ -87233,7 +87233,7 @@ void Func0856 0x856 (var var0001, var var0000)
 		message(var0006);
 		message(" gold altogether.");
 		say();
-		if (var0006 < var0000)
+		if (var0006 < var0001)
 		{
 			message("\"Thou hast not the gold to train.\"");
 			say();
@@ -87246,9 +87246,9 @@ void Func0856 0x856 (var var0001, var var0000)
 		say();
 		return;
 	}
-	var0007 = UI_remove_party_items(var0000, 0x0284, 0xFE99, 0xFE99, true);
+	var0007 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 	message("You pay ");
-	message(var0000);
+	message(var0001);
 	message(" gold, and the training session begins.");
 	say();
 	if (var0002 == 0xFE9C)
@@ -87969,7 +87969,7 @@ extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0917 0x917 (var var0000, var var0001);
 extern void Func0915 0x915 (var var0000, var var0001);
 
-void Func085F 0x85F (var var0001, var var0000)
+void Func085F 0x85F (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -88005,7 +88005,7 @@ void Func085F 0x85F (var var0001, var var0000)
 	if (!(var0006 == 0x0000))
 	{
 		var0008 = 0x0003;
-		var0009 = Func0922(var0001, var0000, var0006, var0008);
+		var0009 = Func0922(var0000, var0001, var0006, var0008);
 		if (var0009 == 0x0000)
 		{
 			message("\"It seems that thou dost need a little more time to hone thy reflexes. If thou dost wish to return later, when thou hast more experience, I would be most happy to train thee.\"");
@@ -88018,7 +88018,7 @@ void Func085F 0x85F (var var0001, var var0000)
 			message(var000A);
 			message(" gold altogether.");
 			say();
-			if (var000A < var0000)
+			if (var000A < var0001)
 			{
 				message("\"Thou hast not enough gold to pay me. I am sorry but I cannot train thee now.\"");
 				say();
@@ -88033,9 +88033,9 @@ void Func085F 0x85F (var var0001, var var0000)
 		}
 		else
 		{
-			var000B = UI_remove_party_items(var0000, 0x0284, 0xFE99, 0xFE99, true);
+			var000B = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 			message("You pay ");
-			message(var0000);
+			message(var0001);
 			message(" gold, and the training session begins.");
 			say();
 			if (var0006 == 0xFE9C)
@@ -88083,7 +88083,7 @@ extern void Func091D 0x91D (var var0000, var var0001);
 extern void Func091E 0x91E (var var0000, var var0001);
 extern void Func091F 0x91F (var var0000, var var0001);
 
-void Func0860 0x860 (var var0002, var var0001, var var0000)
+void Func0860 0x860 (var var0000, var var0001, var var0002)
 {
 	var var0003;
 	var var0004;
@@ -88114,7 +88114,7 @@ void Func0860 0x860 (var var0002, var var0001, var var0000)
 				if (var0006 == "heal")
 				{
 					var0007 = "healed";
-					var0008 = var0002;
+					var0008 = var0000;
 				}
 				if (var0006 == "cure poison")
 				{
@@ -88151,7 +88151,7 @@ void Func0860 0x860 (var var0002, var var0001, var var0000)
 				}
 				message("\"Indeed, thy friend has departed this life. I will attempt to restore them to this world.\"");
 				say();
-				var0008 = var0000;
+				var0008 = var0002;
 			}
 			message("\"My price is ");
 			message(var0008);
@@ -88990,7 +88990,7 @@ extern void Func091D 0x91D (var var0000, var var0001);
 extern void Func091E 0x91E (var var0000, var var0001);
 extern void Func091F 0x91F (var var0000, var var0001);
 
-void Func0870 0x870 (var var0002, var var0001, var var0000)
+void Func0870 0x870 (var var0000, var var0001, var var0002)
 {
 	var var0003;
 	var var0004;
@@ -89019,7 +89019,7 @@ void Func0870 0x870 (var var0002, var var0001, var var0000)
 				if (var0005 == "heal")
 				{
 					var0006 = "healed";
-					var0007 = var0002;
+					var0007 = var0000;
 				}
 				if (var0005 == "cure poison")
 				{
@@ -89054,7 +89054,7 @@ void Func0870 0x870 (var var0002, var var0001, var var0000)
 				}
 				message("\"Thy friend is badly wounded. I will attempt to restore them.\"");
 				say();
-				var0007 = var0000;
+				var0007 = var0002;
 			}
 			message("\"My price is ");
 			message(var0007);
@@ -89514,7 +89514,7 @@ extern void Func0915 0x915 (var var0000, var var0001);
 extern void Func0916 0x916 (var var0000, var var0001);
 extern void Func0918 0x918 (var var0000, var var0001);
 
-void Func0875 0x875 (var var0001, var var0000)
+void Func0875 0x875 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -89543,7 +89543,7 @@ void Func0875 0x875 (var var0001, var var0000)
 		return;
 	}
 	var0005 = 0x0003;
-	var0006 = Func0922(var0001, var0000, var0002, var0005);
+	var0006 = Func0922(var0000, var0001, var0002, var0005);
 	if (var0006 == 0x0000)
 	{
 		message("\"I am sorry, but thou dost not have enough practical experience to train at this time. If thou couldst return at a later date, I would be most happy to train thee.\"");
@@ -89557,7 +89557,7 @@ void Func0875 0x875 (var var0001, var var0000)
 		message(var0007);
 		message(" gold altogether.");
 		say();
-		if (var0007 < var0000)
+		if (var0007 < var0001)
 		{
 			message("\"I regret that thou dost not seem to have enough gold to train here. Mayhaps at another time, when thy fortunes are more prosperous...\"");
 			say();
@@ -89570,9 +89570,9 @@ void Func0875 0x875 (var var0001, var var0000)
 		say();
 		return;
 	}
-	var0008 = UI_remove_party_items(var0000, 0x0284, 0xFE99, 0xFE99, true);
+	var0008 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 	message("You pay ");
-	message(var0000);
+	message(var0001);
 	message(" gold, and the training session begins.");
 	say();
 	if (var0003 == "you")
@@ -89776,7 +89776,7 @@ extern var Func0908 0x908 ();
 extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0917 0x917 (var var0000, var var0001);
 
-void Func0878 0x878 (var var0001, var var0000)
+void Func0878 0x878 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -89792,7 +89792,7 @@ void Func0878 0x878 (var var0001, var var0000)
 		return;
 	}
 	var0003 = 0x0002;
-	var0004 = Func0922(var0001, var0000, var0002, var0003);
+	var0004 = Func0922(var0000, var0001, var0002, var0003);
 	if (var0004 == 0x0000)
 	{
 		message("\"Thou dost not have enough practical experience to study fighting with me at this time!\" he scoffs.");
@@ -89806,7 +89806,7 @@ void Func0878 0x878 (var var0001, var var0000)
 		message(var0005);
 		message(" gold altogether.");
 		say();
-		if (var0005 < var0000)
+		if (var0005 < var0001)
 		{
 			message("\"Hmmm... it appears thou art without the necessary amount of gold. When thy coffers are more full, I might be able to help thee.\" He smirks.");
 			say();
@@ -89819,9 +89819,9 @@ void Func0878 0x878 (var var0001, var var0000)
 		say();
 		return;
 	}
-	var0006 = UI_remove_party_items(var0000, 0x0284, 0xFE99, 0xFE99, true);
+	var0006 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 	message("You pay ");
-	message(var0000);
+	message(var0001);
 	message(" gold, and the training session begins.");
 	say();
 	var0007 = Func090F(var0002);
@@ -89850,7 +89850,7 @@ extern void Func091D 0x91D (var var0000, var var0001);
 extern void Func091E 0x91E (var var0000, var var0001);
 extern void Func091F 0x91F (var var0000, var var0001);
 
-void Func0879 0x879 (var var0002, var var0001, var var0000)
+void Func0879 0x879 (var var0000, var var0001, var var0002)
 {
 	var var0003;
 	var var0004;
@@ -89879,7 +89879,7 @@ void Func0879 0x879 (var var0002, var var0001, var var0000)
 				if (var0005 == "heal")
 				{
 					var0006 = "healed";
-					var0007 = var0002;
+					var0007 = var0000;
 				}
 				if (var0005 == "cure poison")
 				{
@@ -89912,7 +89912,7 @@ void Func0879 0x879 (var var0002, var var0001, var var0000)
 					say();
 					break;
 				}
-				var0007 = var0000;
+				var0007 = var0002;
 			}
 			message("\"My price is ");
 			message(var0007);
@@ -90261,7 +90261,7 @@ void Func087D 0x87D ()
 extern void Func087F 0x87F (var var0000);
 extern void Func0880 0x880 (var var0000, var var0001);
 
-void Func087E 0x87E (var var0003, var var0002, var var0001, var var0000)
+void Func087E 0x87E (var var0000, var var0001, var var0002, var var0003)
 {
 	var var0004;
 	var var0005;
@@ -90269,18 +90269,18 @@ void Func087E 0x87E (var var0003, var var0002, var var0001, var var0000)
 	var var0007;
 	var var0008;
 	var var0009;
-	var0004 = UI_find_nearby(var0000, 0xFFFF, var0002, 0x0000);
+	var0004 = UI_find_nearby(var0003, 0xFFFF, var0001, 0x0000);
 	for (var0007 in var0004 with var0005 to var0006)
 	{
 		var0008 = UI_get_item_shape(var0007);
 		var0009 = UI_get_object_position(var0007);
-		if (var0009[0x0001] <= var0001[0x0001])
+		if (var0009[0x0001] <= var0002[0x0001])
 		{
-			if (var0009[0x0001] >= var0003[0x0001])
+			if (var0009[0x0001] >= var0000[0x0001])
 			{
-				if (var0009[0x0002] <= var0001[0x0002])
+				if (var0009[0x0002] <= var0002[0x0002])
 				{
-					if (var0009[0x0002] >= var0003[0x0002])
+					if (var0009[0x0002] >= var0000[0x0002])
 					{
 						if (var0009[0x0003] < 0x0005)
 						{
@@ -90292,7 +90292,7 @@ void Func087E 0x87E (var var0003, var var0002, var var0001, var var0000)
 								}
 								else
 								{
-									Func0880(var0007, var0001);
+									Func0880(var0007, var0002);
 								}
 							}
 						}
@@ -90408,60 +90408,60 @@ void Func087F 0x87F (var var0000)
 	return;
 }
 
-void Func0880 0x880 (var var0001, var var0000)
+void Func0880 0x880 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
 	var var0004;
-	var0002 = UI_get_item_shape(var0001);
-	var0003 = UI_get_item_frame(var0001);
-	var0004 = var0000;
-	var0004[0x0001] = (var0000[0x0001] + 0x0001);
-	var0004[0x0002] = (var0000[0x0002] + 0x0001);
+	var0002 = UI_get_item_shape(var0000);
+	var0003 = UI_get_item_frame(var0000);
+	var0004 = var0001;
+	var0004[0x0001] = (var0001[0x0001] + 0x0001);
+	var0004[0x0002] = (var0001[0x0002] + 0x0001);
 	if (!UI_is_not_blocked(var0004, var0002, var0003))
 	{
-		var0004[0x0001] = (var0000[0x0001] + 0x0001);
-		var0004[0x0002] = var0000[0x0002];
+		var0004[0x0001] = (var0001[0x0001] + 0x0001);
+		var0004[0x0002] = var0001[0x0002];
 		if (!UI_is_not_blocked(var0004, var0002, var0003))
 		{
-			var0004[0x0001] = var0000[0x0001];
-			var0004[0x0002] = (var0000[0x0002] + 0x0001);
+			var0004[0x0001] = var0001[0x0001];
+			var0004[0x0002] = (var0001[0x0002] + 0x0001);
 			if (!UI_is_not_blocked(var0004, var0002, var0003))
 			{
-				var0004[0x0001] = (var0000[0x0001] + 0x0001);
-				var0004[0x0002] = (var0000[0x0002] - 0x0001);
+				var0004[0x0001] = (var0001[0x0001] + 0x0001);
+				var0004[0x0002] = (var0001[0x0002] - 0x0001);
 				if (!UI_is_not_blocked(var0004, var0002, var0003))
 				{
-					var0004[0x0001] = (var0000[0x0001] - 0x0001);
-					var0004[0x0002] = (var0000[0x0002] + 0x0001);
+					var0004[0x0001] = (var0001[0x0001] - 0x0001);
+					var0004[0x0002] = (var0001[0x0002] + 0x0001);
 					if (!UI_is_not_blocked(var0004, var0002, var0003))
 					{
-						var0004[0x0001] = (var0000[0x0001] + 0x0001);
-						var0004[0x0002] = (var0000[0x0002] - 0x0002);
+						var0004[0x0001] = (var0001[0x0001] + 0x0001);
+						var0004[0x0002] = (var0001[0x0002] - 0x0002);
 						if (!UI_is_not_blocked(var0004, var0002, var0003))
 						{
-							var0004[0x0001] = (var0000[0x0001] - 0x0002);
-							var0004[0x0002] = (var0000[0x0002] + 0x0001);
+							var0004[0x0001] = (var0001[0x0001] - 0x0002);
+							var0004[0x0002] = (var0001[0x0002] + 0x0001);
 							if (!UI_is_not_blocked(var0004, var0002, var0003))
 							{
-								var0004[0x0001] = (var0000[0x0001] + 0x0001);
-								var0004[0x0002] = (var0000[0x0002] - 0x0003);
+								var0004[0x0001] = (var0001[0x0001] + 0x0001);
+								var0004[0x0002] = (var0001[0x0002] - 0x0003);
 								if (!UI_is_not_blocked(var0004, var0002, var0003))
 								{
-									var0004[0x0001] = (var0000[0x0001] - 0x0003);
-									var0004[0x0002] = (var0000[0x0002] + 0x0001);
+									var0004[0x0001] = (var0001[0x0001] - 0x0003);
+									var0004[0x0002] = (var0001[0x0002] + 0x0001);
 									if (!UI_is_not_blocked(var0004, var0002, var0003))
 									{
-										var0004[0x0001] = (var0000[0x0001] + 0x0001);
-										var0004[0x0002] = (var0000[0x0002] - 0x0004);
+										var0004[0x0001] = (var0001[0x0001] + 0x0001);
+										var0004[0x0002] = (var0001[0x0002] - 0x0004);
 										if (!UI_is_not_blocked(var0004, var0002, var0003))
 										{
-											var0004[0x0001] = (var0000[0x0001] - 0x0004);
-											var0004[0x0002] = (var0000[0x0002] + 0x0001);
+											var0004[0x0001] = (var0001[0x0001] - 0x0004);
+											var0004[0x0002] = (var0001[0x0002] + 0x0001);
 											if (!UI_is_not_blocked(var0004, var0002, var0003))
 											{
-												var0004[0x0001] = (var0000[0x0001] + 0x0001);
-												var0004[0x0002] = (var0000[0x0002] + 0x0001);
+												var0004[0x0001] = (var0001[0x0001] + 0x0001);
+												var0004[0x0002] = (var0001[0x0002] + 0x0001);
 											}
 										}
 									}
@@ -90473,7 +90473,7 @@ void Func0880 0x880 (var var0001, var var0000)
 			}
 		}
 	}
-	UI_move_object(var0001, var0004);
+	UI_move_object(var0000, var0004);
 	return;
 }
 
@@ -91028,7 +91028,7 @@ var Func0886 0x886 ()
 extern void Func0888 0x888 (var var0000);
 extern void Func0708 object#(0x708) ();
 
-var Func0887 0x887 (var var0002, var var0001, var var0000)
+var Func0887 0x887 (var var0000, var var0001, var var0002)
 {
 	var var0003;
 	var var0004;
@@ -91053,16 +91053,16 @@ var Func0887 0x887 (var var0002, var var0001, var var0000)
 	var0009 = false;
 	var000A = false;
 	var000B = false;
-	if (!(var0001[0x0001] == var0002[0x0001]))
+	if (!(var0001[0x0001] == var0000[0x0001]))
 	{
-		if (var0001[0x0001] < var0002[0x0001])
+		if (var0001[0x0001] < var0000[0x0001])
 		{
-			var0002[0x0001] = (var0002[0x0001] - 0x0001);
+			var0000[0x0001] = (var0000[0x0001] - 0x0001);
 			var0004 = true;
 		}
 		else
 		{
-			var0002[0x0001] = (var0002[0x0001] + 0x0001);
+			var0000[0x0001] = (var0000[0x0001] + 0x0001);
 			var0005 = true;
 		}
 	}
@@ -91070,11 +91070,11 @@ var Func0887 0x887 (var var0002, var var0001, var var0000)
 	{
 		var0003 = true;
 	}
-	if (!(var0001[0x0002] == var0002[0x0002]))
+	if (!(var0001[0x0002] == var0000[0x0002]))
 	{
-		if (var0001[0x0002] < var0002[0x0002])
+		if (var0001[0x0002] < var0000[0x0002])
 		{
-			var0002[0x0002] = (var0002[0x0002] - 0x0001);
+			var0000[0x0002] = (var0000[0x0002] - 0x0001);
 			if (var0004)
 			{
 				var0008 = true;
@@ -91095,7 +91095,7 @@ var Func0887 0x887 (var var0002, var var0001, var var0000)
 		}
 		else
 		{
-			var0002[0x0002] = (var0002[0x0002] + 0x0001);
+			var0000[0x0002] = (var0000[0x0002] + 0x0001);
 			if (var0004)
 			{
 				var0009 = true;
@@ -91116,16 +91116,16 @@ var Func0887 0x887 (var var0002, var var0001, var var0000)
 	{
 		if (var0003)
 		{
-			UI_sprite_effect(0x0004, (var0002[0x0001] - 0x0001), (var0002[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
+			UI_sprite_effect(0x0004, (var0000[0x0001] - 0x0001), (var0000[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_play_sound_effect(0x0009);
 			var000C = UI_create_new_object(0x0113);
 			UI_set_item_frame(var000C, 0x0006);
 			UI_set_item_flag(var000C, 0x0012);
 			var000D = UI_set_item_quality(var000C, 0x0097);
-			var000D = UI_update_last_created(var0002);
+			var000D = UI_update_last_created(var0000);
 			Func0888(var000C);
 			UI_remove_item(var000C);
-			UI_remove_item(var0000);
+			UI_remove_item(var0002);
 			UI_halt_scheduled(item);
 			script item
 			{
@@ -91138,59 +91138,59 @@ var Func0887 0x887 (var var0002, var var0001, var var0000)
 	if (var0004 || var0005)
 	{
 		var000F = UI_die_roll(0xFFFF, 0x0001);
-		var0002[0x0002] = (var0002[0x0002] + var000F);
+		var0000[0x0002] = (var0000[0x0002] + var000F);
 	}
 	if (var0006 || var0007)
 	{
 		var000F = UI_die_roll(0xFFFF, 0x0001);
-		var0002[0x0001] = (var0002[0x0001] + var000F);
+		var0000[0x0001] = (var0000[0x0001] + var000F);
 	}
 	var000F = UI_die_roll(0x0001, 0x0003);
 	if (var000A)
 	{
 		if (var000F == 0x0001)
 		{
-			var0002[0x0002] = (var0002[0x0002] + 0x0001);
+			var0000[0x0002] = (var0000[0x0002] + 0x0001);
 		}
 		if (var000F == 0x0002)
 		{
-			var0002[0x0001] = (var0002[0x0001] - 0x0001);
+			var0000[0x0001] = (var0000[0x0001] - 0x0001);
 		}
 	}
 	if (var0008)
 	{
 		if (var000F == 0x0001)
 		{
-			var0002[0x0002] = (var0002[0x0002] + 0x0001);
+			var0000[0x0002] = (var0000[0x0002] + 0x0001);
 		}
 		if (var000F == 0x0002)
 		{
-			var0002[0x0001] = (var0002[0x0001] + 0x0001);
+			var0000[0x0001] = (var0000[0x0001] + 0x0001);
 		}
 	}
 	if (var000B)
 	{
 		if (var000F == 0x0001)
 		{
-			var0002[0x0002] = (var0002[0x0002] - 0x0001);
+			var0000[0x0002] = (var0000[0x0002] - 0x0001);
 		}
 		if (var000F == 0x0002)
 		{
-			var0002[0x0001] = (var0002[0x0001] - 0x0001);
+			var0000[0x0001] = (var0000[0x0001] - 0x0001);
 		}
 	}
 	if (var0009)
 	{
 		if (var000F == 0x0001)
 		{
-			var0002[0x0002] = (var0002[0x0002] - 0x0001);
+			var0000[0x0002] = (var0000[0x0002] - 0x0001);
 		}
 		if (var000F == 0x0002)
 		{
-			var0002[0x0001] = (var0002[0x0001] + 0x0001);
+			var0000[0x0001] = (var0000[0x0001] + 0x0001);
 		}
 	}
-	return var0002;
+	return var0000;
 }
 
 void Func0888 0x888 (var var0000)
@@ -92664,7 +92664,7 @@ extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0916 0x916 (var var0000, var var0001);
 extern void Func0918 0x918 (var var0000, var var0001);
 
-void Func089A 0x89A (var var0001, var var0000)
+void Func089A 0x89A (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -92680,7 +92680,7 @@ void Func089A 0x89A (var var0001, var var0000)
 	if (!(var0002 == 0x0000))
 	{
 		var0004 = 0x0003;
-		var0005 = Func0922(var0001, var0000, var0002, var0004);
+		var0005 = Func0922(var0000, var0001, var0002, var0004);
 		if (var0005 == 0x0000)
 		{
 			message("\"To see you need more experience to train at this time.\"");
@@ -92693,7 +92693,7 @@ void Func089A 0x89A (var var0001, var var0000)
 			message(var0006);
 			message(" gold altogether.");
 			say();
-			if (var0006 < var0000)
+			if (var0006 < var0001)
 			{
 				message("\"To have not enough gold to train here.\"");
 				say();
@@ -92706,9 +92706,9 @@ void Func089A 0x89A (var var0001, var var0000)
 		}
 		else
 		{
-			var0007 = UI_remove_party_items(var0000, 0x0284, 0xFE99, 0xFE99, true);
+			var0007 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 			message("You pay ");
-			message(var0000);
+			message(var0001);
 			message(" gold, and the training session begins.");
 			say();
 			if (var0002 == 0xFE9C)
@@ -92746,7 +92746,7 @@ extern void Func0914 0x914 (var var0000, var var0001);
 extern void Func0915 0x915 (var var0000, var var0001);
 extern void Func0917 0x917 (var var0000, var var0001);
 
-void Func089B 0x89B (var var0001, var var0000)
+void Func089B 0x89B (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -92772,7 +92772,7 @@ void Func089B 0x89B (var var0001, var var0000)
 	if (!(var0002 == 0x0000))
 	{
 		var0005 = 0x0003;
-		var0006 = Func0922(var0001, var0000, var0002, var0005);
+		var0006 = Func0922(var0000, var0001, var0002, var0005);
 		if (var0006 == 0x0000)
 		{
 			message("\"To be without the practical experience required to train at this time.\"");
@@ -92785,7 +92785,7 @@ void Func089B 0x89B (var var0001, var var0000)
 			message(var0007);
 			message(" gold altogether.");
 			say();
-			if (var0007 < var0000)
+			if (var0007 < var0001)
 			{
 				message("\"To need more gold than you have. To need 50 gold.\"");
 				say();
@@ -92800,9 +92800,9 @@ void Func089B 0x89B (var var0001, var var0000)
 		}
 		else
 		{
-			var0008 = UI_remove_party_items(var0000, 0x0284, 0xFE99, 0xFE99, true);
+			var0008 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 			message("You pay ");
-			message(var0000);
+			message(var0001);
 			message(" gold, and the training session begins.");
 			say();
 			if (var0002 == 0xFE9C)
@@ -92929,7 +92929,7 @@ extern var Func090E 0x90E ();
 extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0912 0x912 (var var0000, var var0001, var var0002);
 
-void Func089D 0x89D (var var0002, var var0001, var var0000)
+void Func089D 0x89D (var var0000, var var0001, var var0002)
 {
 	var var0003;
 	var var0004;
@@ -92964,7 +92964,7 @@ void Func089D 0x89D (var var0002, var var0001, var var0000)
 				if (var0005 == "heal")
 				{
 					var0006 = "healed";
-					var0007 = var0002;
+					var0007 = var0000;
 				}
 				if (var0005 == "cure poison")
 				{
@@ -92998,7 +92998,7 @@ void Func089D 0x89D (var var0002, var var0001, var var0000)
 					}
 					message("\"To be sorely wounded. To attempt to restore them to this world.\"");
 					say();
-					var0007 = var0000;
+					var0007 = var0002;
 				}
 			}
 			message("\"To charge ");
@@ -93099,7 +93099,7 @@ extern void Func091D 0x91D (var var0000, var var0001);
 extern void Func091E 0x91E (var var0000, var var0001);
 extern void Func091F 0x91F (var var0000, var var0001);
 
-void Func089E 0x89E (var var0002, var var0001, var var0000)
+void Func089E 0x89E (var var0000, var var0001, var var0002)
 {
 	var var0003;
 	var var0004;
@@ -93141,7 +93141,7 @@ void Func089E 0x89E (var var0002, var var0001, var var0000)
 				if (var0007 == "heal")
 				{
 					var0008 = "healed";
-					var0009 = var0002;
+					var0009 = var0000;
 				}
 				if (var0007 == "cure poison")
 				{
@@ -93200,13 +93200,13 @@ void Func089E 0x89E (var var0002, var var0001, var var0000)
 				say();
 				if (var0003 in var0004)
 				{
-					var0000 = 0x0000;
+					var0002 = 0x0000;
 				}
 				else
 				{
-					var0000 = 0x0190;
+					var0002 = 0x0190;
 				}
-				var0009 = var0000;
+				var0009 = var0002;
 			}
 			if (var0003 in var0004)
 			{
@@ -93288,7 +93288,7 @@ extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0916 0x916 (var var0000, var var0001);
 extern void Func0914 0x914 (var var0000, var var0001);
 
-void Func089F 0x89F (var var0001, var var0000)
+void Func089F 0x89F (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -93309,7 +93309,7 @@ void Func089F 0x89F (var var0001, var var0000)
 	if (!(var0002 == 0x0000))
 	{
 		var0005 = 0x0002;
-		var0006 = Func0922(var0001, var0000, var0002, var0005);
+		var0006 = Func0922(var0000, var0001, var0002, var0005);
 		if (var0006 == 0x0000)
 		{
 			message("Jakher looks into your eyes, sizing you up intellectually. \"Thou dost need to learn more on the field of battle. If we spoke now I would be wasting my breath. Thou wouldst not understand a word I said.\"");
@@ -93322,7 +93322,7 @@ void Func089F 0x89F (var var0001, var var0000)
 			message(var0007);
 			message(" gold altogether.");
 			say();
-			if (var0007 < var0000)
+			if (var0007 < var0001)
 			{
 				message("\"Thou dost not seem to have as much gold as I require to train here. Mayhaps at another time, when thy fortunes are more prosperous...\"");
 				say();
@@ -93335,9 +93335,9 @@ void Func089F 0x89F (var var0001, var var0000)
 		}
 		else
 		{
-			var0008 = UI_remove_party_items(var0000, 0x0284, 0xFE99, 0xFE99, true);
+			var0008 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 			message("You pay ");
-			message(var0000);
+			message(var0001);
 			message(" gold, and the training session begins.");
 			say();
 			message("Jakher's eyes glow bright as he begins to explain some of the strategies used by great military leaders in awesome battles fought in ages past. He whispers to ");
@@ -93597,7 +93597,7 @@ extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0918 0x918 (var var0000, var var0001);
 extern void Func0916 0x916 (var var0000, var var0001);
 
-void Func08A2 0x8A2 (var var0001, var var0000)
+void Func08A2 0x8A2 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -93615,7 +93615,7 @@ void Func08A2 0x8A2 (var var0001, var var0000)
 	if (!(var0002 == 0x0000))
 	{
 		var0004 = 0x0002;
-		var0005 = Func0922(var0001, var0000, var0002, var0004);
+		var0005 = Func0922(var0000, var0001, var0002, var0004);
 		if (var0005 == 0x0000)
 		{
 			message("\"I am sorry, but it appears thou dost not have enough knowledge of elementary studies to train at this time. If thou couldst return at a future date, I could instruct thee then.\"");
@@ -93628,7 +93628,7 @@ void Func08A2 0x8A2 (var var0001, var var0000)
 			message(var0006);
 			message(" gold altogether.");
 			say();
-			if (var0006 < var0000)
+			if (var0006 < var0001)
 			{
 				message("\"I am sorry, but thou dost not seem to have enough gold to train now.\"");
 				say();
@@ -93641,9 +93641,9 @@ void Func08A2 0x8A2 (var var0001, var var0000)
 		}
 		else
 		{
-			var0007 = UI_remove_party_items(var0000, 0x0284, 0xFE99, 0xFE99, true);
+			var0007 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 			message("You pay ");
-			message(var0000);
+			message(var0001);
 			message(" gold, and the training session begins.");
 			say();
 			if (var0002 == 0xFE9C)
@@ -93906,7 +93906,7 @@ extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0915 0x915 (var var0000, var var0001);
 extern void Func0917 0x917 (var var0000, var var0001);
 
-void Func08A6 0x8A6 (var var0001, var var0000)
+void Func08A6 0x8A6 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -93947,7 +93947,7 @@ void Func08A6 0x8A6 (var var0001, var var0000)
 			}
 		}
 		var0008 = 0x0003;
-		var0009 = Func0922(var0001, var0000, var0002, var0008);
+		var0009 = Func0922(var0000, var0001, var0002, var0008);
 		if (var0009 == 0x0000)
 		{
 			message("Karenna looks at ");
@@ -93962,7 +93962,7 @@ void Func08A6 0x8A6 (var var0001, var var0000)
 			message(var000A);
 			message(" gold altogether.");
 			say();
-			if (var000A < var0000)
+			if (var000A < var0001)
 			{
 				message("Karenna gives you a cross look. \"I am not running a charity. Come back when thou dost have more money!\"");
 				say();
@@ -93977,9 +93977,9 @@ void Func08A6 0x8A6 (var var0001, var var0000)
 		}
 		else
 		{
-			var000B = UI_remove_party_items(var0000, 0x0284, 0xFE99, 0xFE99, true);
+			var000B = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 			message("You pay ");
-			message(var0000);
+			message(var0001);
 			message(" gold, and the training session begins.");
 			say();
 			message("Karenna leaps like a panther around the padded mat of the training ring. Her movements are so fast, they are a blur. She attacks. At first she lands her blows at will, causing stings of pain that send ");
@@ -94466,7 +94466,7 @@ extern void Func091D 0x91D (var var0000, var var0001);
 extern void Func091E 0x91E (var var0000, var var0001);
 extern void Func091F 0x91F (var var0000, var var0001);
 
-void Func08AC 0x8AC (var var0002, var var0001, var var0000)
+void Func08AC 0x8AC (var var0000, var var0001, var var0002)
 {
 	var var0003;
 	var var0004;
@@ -94495,7 +94495,7 @@ void Func08AC 0x8AC (var var0002, var var0001, var var0000)
 				if (var0005 == "heal")
 				{
 					var0006 = "healed";
-					var0007 = var0002;
+					var0007 = var0000;
 				}
 				if (var0005 == "cure poison")
 				{
@@ -94529,7 +94529,7 @@ void Func08AC 0x8AC (var var0002, var var0001, var var0000)
 					}
 					else
 					{
-						var0007 = var0000;
+						var0007 = var0002;
 						message("\"Indeed, this individual needs restoration!\"");
 						say();
 					}
@@ -94956,7 +94956,7 @@ extern void Func091D 0x91D (var var0000, var var0001);
 extern void Func091E 0x91E (var var0000, var var0001);
 extern void Func091F 0x91F (var var0000, var var0001);
 
-void Func08B4 0x8B4 (var var0002, var var0001, var var0000)
+void Func08B4 0x8B4 (var var0000, var var0001, var var0002)
 {
 	var var0003;
 	var var0004;
@@ -94984,7 +94984,7 @@ void Func08B4 0x8B4 (var var0002, var var0001, var var0000)
 				if (var0005 == "heal")
 				{
 					var0006 = "healed";
-					var0007 = var0002;
+					var0007 = var0000;
 				}
 				if (var0005 == "cure poison")
 				{
@@ -95024,7 +95024,7 @@ void Func08B4 0x8B4 (var var0002, var var0001, var var0000)
 				{
 					message("\"Indeed, this person is badly wounded. I will attempt to return them to health.\"");
 					say();
-					var0007 = var0000;
+					var0007 = var0002;
 				}
 			}
 			message("\"Of course, it will never cost thee anything to use mine healing services.\"");
@@ -95120,7 +95120,7 @@ extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, v
 extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0916 0x916 (var var0000, var var0001);
 
-void Func08B6 0x8B6 (var var0001, var var0000)
+void Func08B6 0x8B6 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -95136,7 +95136,7 @@ void Func08B6 0x8B6 (var var0001, var var0000)
 	if (!(var0002 == 0x0000))
 	{
 		var0003 = 0x0001;
-		var0004 = Func0922(var0001, var0000, var0002, var0003);
+		var0004 = Func0922(var0000, var0001, var0002, var0003);
 		if (var0004 == 0x0000)
 		{
 			message("\"Ah! But thou hast not the practical experience to train with me at this time! Go and experience life and return later.\"");
@@ -95149,7 +95149,7 @@ void Func08B6 0x8B6 (var var0001, var var0000)
 			message(var0005);
 			message(" gold altogether.");
 			say();
-			if (var0005 < var0000)
+			if (var0005 < var0001)
 			{
 				message("\"Hmm. Thou art a little short on gold. Perhaps thou couldst visit the House of Games, win some booty, then return!\"");
 				say();
@@ -95162,9 +95162,9 @@ void Func08B6 0x8B6 (var var0001, var var0000)
 		}
 		else
 		{
-			var0006 = UI_remove_party_items(var0000, 0x0284, 0xFE99, 0xFE99, true);
+			var0006 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 			message("You pay ");
-			message(var0000);
+			message(var0001);
 			message(" gold, and the training session begins.");
 			say();
 			message("Lucky produces a deck of cards, three sea shells and a rock, and a pair of dice. In turn, the pirate takes each item and begins to show various methods of utilizing them. He shows how to deal cards from the bottom of the deck, and how to do a false shuffle. With the shells and rock, he shows lightning-fast maneuvers which hide the rock under one of the shells, the one it couldn't possibly be under. Finally, he shows how to use saliva to weight the dice so that they always turn up lucky.");
@@ -95813,7 +95813,7 @@ extern var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003);
 extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0917 0x917 (var var0000, var var0001);
 
-void Func08BD 0x8BD (var var0001, var var0000)
+void Func08BD 0x8BD (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -95838,7 +95838,7 @@ void Func08BD 0x8BD (var var0001, var var0000)
 				var0004 = var0003;
 			}
 			var0005 = 0x0001;
-			var0006 = Func0922(var0001, var0000, var0002, var0005);
+			var0006 = Func0922(var0000, var0001, var0002, var0005);
 			if (var0006 == 0x0000)
 			{
 				message("\"I am afraid thou dost not have enough practical experience to train at this time. If thou couldst return at a later date, I would be most happy to provide thee with my services.\"");
@@ -95852,7 +95852,7 @@ void Func08BD 0x8BD (var var0001, var var0000)
 				message(var0007);
 				message(" altogether.");
 				say();
-				if (var0007 < var0000)
+				if (var0007 < var0001)
 				{
 					message("Markus stretches. He shrugs and says, \"I regret that thou dost not have enough gold to meet my price. Perhaps later, when thou hast made thy fortune pillaging the land...\"");
 					say();
@@ -95860,7 +95860,7 @@ void Func08BD 0x8BD (var var0001, var var0000)
 				}
 			}
 			message("You pay ");
-			message(var0000);
+			message(var0001);
 			message(" gold, and the training session begins.");
 			say();
 			if (var0006 == 0x0002)
@@ -95869,7 +95869,7 @@ void Func08BD 0x8BD (var var0001, var var0000)
 				say();
 				break;
 			}
-			var0008 = UI_remove_party_items(var0000, 0x0284, 0xFE99, 0xFE99, true);
+			var0008 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 			message("\"Very well,\" Markus says, stifling a yawn. \"Here we go.\"~~Markus wields his sword and faces ");
 			message(var0004);
 			message(". He gives ");
@@ -95900,7 +95900,7 @@ extern void Func0914 0x914 (var var0000, var var0001);
 extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0917 0x917 (var var0000, var var0001);
 
-void Func08BE 0x8BE (var var0001, var var0000)
+void Func08BE 0x8BE (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -95918,7 +95918,7 @@ void Func08BE 0x8BE (var var0001, var var0000)
 		if (!(var0002 == 0x0000))
 		{
 			var0003 = 0x0003;
-			var0004 = Func0922(var0001, var0000, var0002, var0003);
+			var0004 = Func0922(var0000, var0001, var0002, var0003);
 			if (var0004 == 0x0000)
 			{
 				message("\"I am sorry, but thou dost not have enough practical experience with weights to train at this time. Perhaps in the future, when thou art ready, I could train thee.\"");
@@ -95932,7 +95932,7 @@ void Func08BE 0x8BE (var var0001, var var0000)
 				message(var0005);
 				message(" gold altogether.");
 				say();
-				if (var0005 < var0000)
+				if (var0005 < var0001)
 				{
 					message("\"Thou dost not have enough gold to train here.\"");
 					say();
@@ -95959,9 +95959,9 @@ void Func08BE 0x8BE (var var0001, var var0000)
 			}
 			else
 			{
-				var0009 = UI_remove_party_items(var0000, 0x0284, 0xFE99, 0xFE99, true);
+				var0009 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 				message("You pay ");
-				message(var0000);
+				message(var0001);
 				message(" gold, and the training session begins.");
 				say();
 				var0006 = UI_get_npc_name(var0002);
@@ -96900,7 +96900,7 @@ extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0914 0x914 (var var0000, var var0001);
 extern void Func0917 0x917 (var var0000, var var0001);
 
-void Func08C8 0x8C8 (var var0001, var var0000)
+void Func08C8 0x8C8 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -96920,7 +96920,7 @@ void Func08C8 0x8C8 (var var0001, var var0000)
 		if (!(var0002 == 0x0000))
 		{
 			var0004 = 0x0002;
-			var0005 = Func0922(var0001, var0000, var0002, var0004);
+			var0005 = Func0922(var0000, var0001, var0002, var0004);
 			if (var0005 == 0x0000)
 			{
 				message("\"I am sorry, but thou hast overextended thy muscles. If thou couldst return at a later date, I would be quite willing to train thee.\"");
@@ -96933,7 +96933,7 @@ void Func08C8 0x8C8 (var var0001, var var0000)
 				message(var0006);
 				message(" gold altogether.");
 				say();
-				if (var0006 < var0000)
+				if (var0006 < var0001)
 				{
 					message("\"I regret that thou dost not seem to have the right amount of gold to train here. Mayhaps, at another time, when thy purses are more full...\"");
 					say();
@@ -96946,9 +96946,9 @@ void Func08C8 0x8C8 (var var0001, var var0000)
 				say();
 				break;
 			}
-			var0007 = UI_remove_party_items(var0000, 0x0284, 0xFE99, 0xFE99, true);
+			var0007 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 			message("You pay ");
-			message(var0000);
+			message(var0001);
 			message(" gold, and the training session begins.");
 			say();
 			if (var0002 == 0xFE9C)
@@ -97059,7 +97059,7 @@ extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0916 0x916 (var var0000, var var0001);
 extern void Func0918 0x918 (var var0000, var var0001);
 
-void Func08CA 0x8CA (var var0001, var var0000)
+void Func08CA 0x8CA (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -97079,7 +97079,7 @@ void Func08CA 0x8CA (var var0001, var var0000)
 		if (!(var0002 == 0x0000))
 		{
 			var0003 = 0x0003;
-			var0004 = Func0922(var0001, var0000, var0002, var0003);
+			var0004 = Func0922(var0000, var0001, var0002, var0003);
 			if (var0004 == 0x0000)
 			{
 				message("After a few moments of questioning, he says, \"I am sorry, but thou dost not have a strong enough grasp of my theories for me to be able to instruct thee. Perhaps when thou hast had more time to study...\"");
@@ -97092,7 +97092,7 @@ void Func08CA 0x8CA (var var0001, var var0000)
 				message(var0005);
 				message(" gold altogether.");
 				say();
-				if (var0005 < var0000)
+				if (var0005 < var0001)
 				{
 					message("\"I must apologize, but I need my full fee to permit me to continue my research. Mayhaps, at another time, when thou hast more money, I can teach thee.\"");
 					say();
@@ -97105,9 +97105,9 @@ void Func08CA 0x8CA (var var0001, var var0000)
 				say();
 				break;
 			}
-			var0006 = UI_remove_party_items(var0000, 0x0284, 0xFE99, 0xFE99, true);
+			var0006 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 			message("You pay ");
-			message(var0000);
+			message(var0001);
 			message(" gold, and the training session begins.");
 			say();
 			var0007 = UI_get_npc_name(var0002);
@@ -97595,7 +97595,7 @@ extern void Func0915 0x915 (var var0000, var var0001);
 extern void Func0916 0x916 (var var0000, var var0001);
 extern void Func0917 0x917 (var var0000, var var0001);
 
-void Func08D0 0x8D0 (var var0001, var var0000)
+void Func08D0 0x8D0 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -97635,7 +97635,7 @@ void Func08D0 0x8D0 (var var0001, var var0000)
 		if (!(var0002 == 0x0000))
 		{
 			var0007 = 0x0003;
-			var0008 = Func0922(var0001, var0000, var0002, var0007);
+			var0008 = Func0922(var0000, var0001, var0002, var0007);
 			if (var0008 == 0x0000)
 			{
 				message("\"I am sorry, but thou dost not have enough experience to train at this time. Return at a later date and I would be most happy to lead a session.\"");
@@ -97644,7 +97644,7 @@ void Func08D0 0x8D0 (var var0001, var var0000)
 			else if (var0008 == 0x0001)
 			{
 				var0009 = UI_count_objects(0xFE9B, 0x0284, 0xFE99, 0xFE99);
-				if (var0009 < var0000)
+				if (var0009 < var0001)
 				{
 					message("\"It seems that thou hast not enough gold. Do return when thou art a bit wealthier.\"");
 					say();
@@ -97657,7 +97657,7 @@ void Func08D0 0x8D0 (var var0001, var var0000)
 				say();
 				break;
 			}
-			var000A = UI_remove_party_items(var0000, 0x0284, 0xFE99, 0xFE99, true);
+			var000A = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 			message("Rayburt takes your money. \"The session shall begin.\"");
 			say();
 			message("Rayburt first instructs ");
@@ -97769,7 +97769,7 @@ extern void Func091D 0x91D (var var0000, var var0001);
 extern void Func091E 0x91E (var var0000, var var0001);
 extern void Func091F 0x91F (var var0000, var var0001);
 
-void Func08D2 0x8D2 (var var0002, var var0001, var var0000)
+void Func08D2 0x8D2 (var var0000, var var0001, var var0002)
 {
 	var var0003;
 	var var0004;
@@ -97800,7 +97800,7 @@ void Func08D2 0x8D2 (var var0002, var var0001, var var0000)
 				if (var0006 == "healing")
 				{
 					var0007 = "healed";
-					var0008 = var0002;
+					var0008 = var0000;
 				}
 				if (var0006 == "curing")
 				{
@@ -97823,7 +97823,7 @@ void Func08D2 0x8D2 (var var0002, var var0001, var var0000)
 			{
 				var000A = UI_get_avatar_ref();
 				var000B = UI_find_nearest(var000A, 0x0190, 0x0019);
-				var0008 = var0000;
+				var0008 = var0002;
 				if (var000B == 0x0000)
 				{
 					var000B = UI_find_nearest(var000A, 0x019E, 0x0019);
@@ -99181,7 +99181,7 @@ extern var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003);
 extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0915 0x915 (var var0000, var var0001);
 
-void Func08E5 0x8E5 (var var0001, var var0000)
+void Func08E5 0x8E5 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -99210,7 +99210,7 @@ void Func08E5 0x8E5 (var var0001, var var0000)
 		if (!(var0002 == 0x0000))
 		{
 			var0004 = 0x0001;
-			var0005 = Func0922(var0001, var0000, var0002, var0004);
+			var0005 = Func0922(var0000, var0001, var0002, var0004);
 			if (var0005 == 0x0000)
 			{
 				message("\"I am sorry, but thou dost not have enough practical experience to train at this time. Return another day after thou hast slain a few more creatures.\"");
@@ -99219,7 +99219,7 @@ void Func08E5 0x8E5 (var var0001, var var0000)
 			else if (var0005 == 0x0001)
 			{
 				var0006 = UI_count_objects(0xFE9B, 0x0284, 0xFE99, 0xFE99);
-				if (var0006 < var0000)
+				if (var0006 < var0001)
 				{
 					message("\"I regret that thou dost not seem to have enough gold to train here. Mayhaps at another time, when thy fortunes are more prosperous.\"");
 					say();
@@ -99232,7 +99232,7 @@ void Func08E5 0x8E5 (var var0001, var var0000)
 				say();
 				break;
 			}
-			var0007 = UI_remove_party_items(var0000, 0x0284, 0xFE99, 0xFE99, true);
+			var0007 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 			var0008 = UI_get_npc_name(var0002);
 			if (var0002 == 0xFE9C)
 			{
@@ -99402,7 +99402,7 @@ var Func08EA 0x8EA (var var0000)
 	return 0x0000;
 }
 
-void Func08EB 0x8EB (var var0002, var var0001, var var0000)
+void Func08EB 0x8EB (var var0000, var var0001, var var0002)
 {
 	var var0003;
 	var var0004;
@@ -99507,7 +99507,7 @@ void Func08EB 0x8EB (var var0002, var var0001, var var0000)
 		var0006[0x0001] = (var0005[0x0001] - 0x0002);
 		var0006[0x0002] = (var0005[0x0002] - 0x0002);
 	}
-	while (!UI_is_not_blocked(var0005, var0001, var0000))
+	while (!UI_is_not_blocked(var0005, var0001, var0002))
 	{
 		var0004 = (var0004 + 0x0001);
 		var0007 = UI_find_nearby(var0006, 0xFFFF, var0004, 0x0000);
@@ -99854,7 +99854,7 @@ var Func08F1 0x8F1 (var var0000)
 extern var Func08F1 0x8F1 (var var0000);
 extern var Func090A 0x90A ();
 
-void Func08F2 0x8F2 (var var0001, var var0000)
+void Func08F2 0x8F2 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -99869,7 +99869,7 @@ void Func08F2 0x8F2 (var var0001, var var0000)
 	var0003 = true;
 	var0004 = Func08F1("");
 	message("\"");
-	message(var0000);
+	message(var0001);
 	message("! Thou ");
 	message(var0004);
 	message("!\"");
@@ -99902,7 +99902,7 @@ void Func08F2 0x8F2 (var var0001, var var0000)
 		case "My lie":
 			UI_remove_answer(["My lie", "My deed", "My crime"]);
 			message("\"Of what lie speakest thou? Art thou not ");
-			message(var0000);
+			message(var0001);
 			message("?\"");
 			say();
 			if (Func090A())
@@ -99911,12 +99911,12 @@ void Func08F2 0x8F2 (var var0001, var var0000)
 			}
 			var0004 = Func08F1("");
 			message("\"Perhaps thou art not ");
-			message(var0000);
+			message(var0001);
 			message(", for I have never seen the ");
 			message(var0004);
 			message(". Confess now thy true identity!\"");
 			say();
-			UI_add_answer(var0001);
+			UI_add_answer(var0000);
 			if (!gflags[0x0161])
 			{
 				UI_add_answer("Avatar");
@@ -99942,14 +99942,14 @@ void Func08F2 0x8F2 (var var0001, var var0000)
 			gflags[0x0161] = true;
 			fallthrough;
 
-		case var0001:
+		case var0000:
 			var0004 = Func08F1("");
 			message("\"");
-			message(var0001);
+			message(var0000);
 			message("! Perhaps honesty shall lift thee above the ");
 			message(var0004);
 			message(" ");
-			message(var0000);
+			message(var0001);
 			message("...\"");
 			say();
 			var0002 = true;
@@ -100106,18 +100106,18 @@ void Func08F3 0x8F3 (var var0000)
 	return;
 }
 
-void Func08F4 0x8F4 (var var0001, var var0000)
+void Func08F4 0x8F4 (var var0000, var var0001)
 {
 	var var0002;
 	var0002 = "thee";
-	if (var0000 > 0x0002)
+	if (var0001 > 0x0002)
 	{
 		var0002 = "the party";
 	}
 	if (gflags[0x015D])
 	{
 		message("\"^");
-		message(var0001);
+		message(var0000);
 		message(", I have weighed thine actions against thy former conduct. Now that I am travelling with ");
 		message(var0002);
 		message("...");
@@ -100141,7 +100141,7 @@ void Func08F4 0x8F4 (var var0001, var var0000)
 	message("\"How may I assist ");
 	message(var0002);
 	message(", ");
-	message(var0001);
+	message(var0000);
 	message("?\"");
 	say();
 	UI_add_answer(["bees", "leave"]);
@@ -100154,7 +100154,7 @@ extern var Func093C 0x93C (var var0000, var var0001);
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090F 0x90F (var var0000);
 
-var Func08F5 0x8F5 (var var0001, var var0000)
+var Func08F5 0x8F5 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -100175,7 +100175,7 @@ var Func08F5 0x8F5 (var var0001, var var0000)
 	UI_push_answers();
 	var0002 = "nobody";
 	var0003 = [];
-	for (var0006 in var0000 with var0004 to var0005)
+	for (var0006 in var0001 with var0004 to var0005)
 	{
 		var0003 = (var0003 & UI_get_npc_name(var0006));
 	}
@@ -100191,9 +100191,9 @@ var Func08F5 0x8F5 (var var0001, var var0000)
 		}
 		else
 		{
-			var000A = var0000[var0009];
+			var000A = var0001[var0009];
 			var000B = UI_get_npc_number(var000A);
-			var0000 = Func093C(var000A, var0000);
+			var0001 = Func093C(var000A, var0001);
 			var0003 = Func093C(var0003[var0009], var0003);
 			var000C = false;
 			if (var000B == 0xFFFF)
@@ -100295,7 +100295,7 @@ var Func08F5 0x8F5 (var var0001, var var0000)
 	{
 		gflags[0x015F] = true;
 	}
-	return var0000;
+	return var0001;
 }
 
 var Func08F6 0x8F6 (var var0000)
@@ -100329,7 +100329,7 @@ var Func08F7 0x8F7 (var var0000)
 	return var0002;
 }
 
-var Func08F8 0x8F8 (var var0006, var var0005, var var0004, var var0003, var var0002, var var0001, var var0000)
+var Func08F8 0x8F8 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006)
 {
 	var var0007;
 	var var0008;
@@ -100345,17 +100345,17 @@ var Func08F8 0x8F8 (var var0006, var var0005, var var0004, var var0003, var var0
 	var var0012;
 
 	var0007 = UI_count_objects(0xFE9B, 0x0284, 0xFE99, 0xFE99);
-	if (var0002 == 0x0000)
+	if (var0004 == 0x0000)
 	{
 		var0008 = 0x0001;
 	}
 	else
 	{
-		var0008 = UI_input_numeric_value(var0001, var0002, 0x0001, 0x0001);
+		var0008 = UI_input_numeric_value(var0005, var0004, 0x0001, 0x0001);
 	}
-	if (var0004 > 0x0001)
+	if (var0002 > 0x0001)
 	{
-		var0009 = (var0004 * var0008);
+		var0009 = (var0002 * var0008);
 	}
 	else
 	{
@@ -100369,7 +100369,7 @@ var Func08F8 0x8F8 (var var0006, var var0005, var var0004, var var0003, var var0
 	{
 		if (var0007 >= (var0003 * var0008))
 		{
-			var000B = UI_add_party_items(var0009, var0006, 0xFE99, var0005, var0000);
+			var000B = UI_add_party_items(var0009, var0000, 0xFE99, var0001, var0006);
 			if (!(var000B == 0x0000))
 			{
 				var000A = 0x0001;
@@ -100384,7 +100384,7 @@ var Func08F8 0x8F8 (var var0006, var var0005, var var0004, var var0003, var var0
 						var000D = (var000D + 0x0001);
 						UI_show_npc_face(var0012, 0x0000);
 						var000E = true;
-						if (var0004 == 0x0001)
+						if (var0002 == 0x0001)
 						{
 							message("\"I will carry that.\"");
 							say();
@@ -100423,7 +100423,7 @@ var Func08F8 0x8F8 (var var0006, var var0005, var var0004, var var0003, var var0
 	return var000A;
 }
 
-var Func08F9 0x8F9 (var var0002, var var0001, var var0000)
+var Func08F9 0x8F9 (var var0000, var var0001, var var0002)
 {
 	var var0003;
 	var var0004;
@@ -100433,7 +100433,7 @@ var Func08F9 0x8F9 (var var0002, var var0001, var var0000)
 	var0003 = [0x0001, 0x0002, 0x0003];
 	for (var0006 in var0003 with var0004 to var0005)
 	{
-		if ((!(var0002[var0006] >= var0001[var0006])) || (!(var0002[var0006] <= var0000[var0006])))
+		if ((!(var0000[var0006] >= var0001[var0006])) || (!(var0000[var0006] <= var0002[var0006])))
 		{
 			return false;
 		}
@@ -100459,11 +100459,11 @@ var Func08FB 0x8FB ()
 	return UI_get_npc_name(UI_get_party_list());
 }
 
-var Func08FC 0x8FC (var var0001, var var0000)
+var Func08FC 0x8FC (var var0000, var var0001)
 {
 	var var0002;
 
-	var0002 = UI_get_distance(var0001, var0000);
+	var0002 = UI_get_distance(var0000, var0001);
 	if (var0002 < 0x0014)
 	{
 		return true;
@@ -100569,15 +100569,15 @@ var Func0902 0x902 ()
 	return 0xFE9C;
 }
 
-void Func0903 0x903 (var var0001, var var0000)
+void Func0903 0x903 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
 	var var0004;
 	var var0005;
-	if (UI_npc_nearby(var0001))
+	if (UI_npc_nearby(var0000))
 	{
-		if (var0001 == 0xFE9C)
+		if (var0000 == 0xFE9C)
 		{
 			var0002 = UI_is_pc_female();
 		}
@@ -100585,7 +100585,7 @@ void Func0903 0x903 (var var0001, var var0000)
 		{
 			var0002 = 0x0000;
 		}
-		UI_show_npc_face(var0001, var0002);
+		UI_show_npc_face(var0000, var0002);
 		if (UI_get_item_flag(item, 0x0019))
 		{
 			message("\"Oink\"");
@@ -100593,14 +100593,14 @@ void Func0903 0x903 (var var0001, var var0000)
 		}
 		else
 		{
-			for (var0005 in var0000 with var0003 to var0004)
+			for (var0005 in var0001 with var0003 to var0004)
 			{
 				message(var0005);
 				message("");
 				say();
 			}
 		}
-		UI_remove_npc_face(var0001);
+		UI_remove_npc_face(var0000);
 	}
 	return;
 }
@@ -100608,13 +100608,13 @@ void Func0903 0x903 (var var0001, var var0000)
 // externs
 extern void Func0933 0x933 (var var0000, var var0001, var var0002);
 
-void Func0904 0x904 (var var0001, var var0000)
+void Func0904 0x904 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
 	var var0004;
 	var var0005;
-	if (UI_npc_nearby(var0001))
+	if (UI_npc_nearby(var0000))
 	{
 		if (UI_get_item_flag(item, 0x0019))
 		{
@@ -100623,9 +100623,9 @@ void Func0904 0x904 (var var0001, var var0000)
 		else
 		{
 			var0002 = 0x0000;
-			for (var0005 in var0000 with var0003 to var0004)
+			for (var0005 in var0001 with var0003 to var0004)
 			{
-				Func0933(var0001, var0005, var0002);
+				Func0933(var0000, var0005, var0002);
 				var0002 = (var0002 + 0x0011);
 			}
 		}
@@ -100774,9 +100774,9 @@ var Func090F 0x90F (var var0000)
 	return UI_get_npc_name(UI_get_npc_object(var0000));
 }
 
-var Func0910 0x910 (var var0001, var var0000)
+var Func0910 0x910 (var var0000, var var0001)
 {
-	return UI_get_npc_prop(UI_get_npc_object(var0001), var0000);
+	return UI_get_npc_prop(UI_get_npc_object(var0000), var0001);
 }
 
 void Func0911 0x911 (var var0000)
@@ -100794,14 +100794,14 @@ void Func0911 0x911 (var var0000)
 	return;
 }
 
-void Func0912 0x912 (var var0002, var var0001, var var0000)
+void Func0912 0x912 (var var0000, var var0001, var var0002)
 {
 	var var0003;
-	var0003 = UI_set_npc_prop(UI_get_npc_object(var0002), var0001, var0000);
+	var0003 = UI_set_npc_prop(UI_get_npc_object(var0000), var0001, var0002);
 	return;
 }
 
-var Func0913 0x913 (var var0001, var var0000)
+var Func0913 0x913 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -100809,10 +100809,10 @@ var Func0913 0x913 (var var0001, var var0000)
 	var var0005;
 
 	var0002 = 0x0000;
-	for (var0005 in var0000 with var0003 to var0004)
+	for (var0005 in var0001 with var0003 to var0004)
 	{
 		var0002 = (var0002 + 0x0001);
-		if (var0001 == var0005)
+		if (var0000 == var0005)
 		{
 			return var0002;
 		}
@@ -100823,15 +100823,15 @@ var Func0913 0x913 (var var0001, var var0000)
 // externs
 extern void Func0912 0x912 (var var0000, var var0001, var var0002);
 
-void Func0914 0x914 (var var0001, var var0000)
+void Func0914 0x914 (var var0000, var var0001)
 {
 	var var0002;
 	var0002 = 0x0000;
-	while (var0002 < var0000)
+	while (var0002 < var0001)
 	{
-		Func0912(var0001, 0x0000, 0x0001);
-		Func0912(var0001, 0x0003, 0x0001);
-		Func0912(var0001, 0x0007, 0xFFFF);
+		Func0912(var0000, 0x0000, 0x0001);
+		Func0912(var0000, 0x0003, 0x0001);
+		Func0912(var0000, 0x0007, 0xFFFF);
 		var0002 = (var0002 + 0x0001);
 	}
 	return;
@@ -100841,7 +100841,7 @@ void Func0914 0x914 (var var0001, var var0000)
 extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0912 0x912 (var var0000, var var0001, var var0002);
 
-void Func0915 0x915 (var var0001, var var0000)
+void Func0915 0x915 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -100849,15 +100849,15 @@ void Func0915 0x915 (var var0001, var var0000)
 	var var0005;
 	var var0006;
 	var0002 = 0x0000;
-	while (var0002 < var0000)
+	while (var0002 < var0001)
 	{
-		var0003 = Func0910(var0001, 0x0001);
-		Func0912(var0001, 0x0001, 0x0001);
+		var0003 = Func0910(var0000, 0x0001);
+		Func0912(var0000, 0x0001, 0x0001);
 		var0004 = (var0003 + 0x0001);
-		var0005 = Func0910(var0001, 0x0004);
+		var0005 = Func0910(var0000, 0x0004);
 		var0006 = (((var0004 * var0005) + (var0003 - 0x0001)) / var0003);
-		Func0912(var0001, 0x0004, (var0006 - var0005));
-		Func0912(var0001, 0x0007, 0xFFFF);
+		Func0912(var0000, 0x0004, (var0006 - var0005));
+		Func0912(var0000, 0x0007, 0xFFFF);
 		var0002 = (var0002 + 0x0001);
 	}
 	return;
@@ -100867,16 +100867,16 @@ void Func0915 0x915 (var var0001, var var0000)
 extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0912 0x912 (var var0000, var var0001, var var0002);
 
-void Func0916 0x916 (var var0001, var var0000)
+void Func0916 0x916 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
 	var0002 = 0x0000;
-	while (var0002 < var0000)
+	while (var0002 < var0001)
 	{
-		var0003 = Func0910(var0001, 0x0002);
-		Func0912(var0001, 0x0002, 0x0001);
-		Func0912(var0001, 0x0007, 0xFFFF);
+		var0003 = Func0910(var0000, 0x0002);
+		Func0912(var0000, 0x0002, 0x0001);
+		Func0912(var0000, 0x0007, 0xFFFF);
 		var0002 = (var0002 + 0x0001);
 	}
 	return;
@@ -100886,17 +100886,17 @@ void Func0916 0x916 (var var0001, var var0000)
 extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0912 0x912 (var var0000, var var0001, var var0002);
 
-void Func0917 0x917 (var var0001, var var0000)
+void Func0917 0x917 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
 	var var0004;
 	var var0005;
 	var0002 = 0x0000;
-	while (var0002 < var0000)
+	while (var0002 < var0001)
 	{
-		var0003 = Func0910(var0001, 0x0001);
-		var0004 = Func0910(var0001, 0x0004);
+		var0003 = Func0910(var0000, 0x0001);
+		var0004 = Func0910(var0000, 0x0004);
 		var0005 = (((var0004 + var0003) + 0x0001) / 0x0002);
 		if (var0005 >= var0003)
 		{
@@ -100906,8 +100906,8 @@ void Func0917 0x917 (var var0001, var var0000)
 				var0005 = 0x001E;
 			}
 		}
-		Func0912(var0001, 0x0004, (var0005 - var0004));
-		Func0912(var0001, 0x0007, 0xFFFF);
+		Func0912(var0000, 0x0004, (var0005 - var0004));
+		Func0912(var0000, 0x0007, 0xFFFF);
 		var0002 = (var0002 + 0x0001);
 	}
 	return;
@@ -100917,17 +100917,17 @@ void Func0917 0x917 (var var0001, var var0000)
 extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0912 0x912 (var var0000, var var0001, var var0002);
 
-void Func0918 0x918 (var var0001, var var0000)
+void Func0918 0x918 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
 	var var0004;
 	var var0005;
 	var0002 = 0x0000;
-	while (var0002 < var0000)
+	while (var0002 < var0001)
 	{
-		var0003 = Func0910(var0001, 0x0002);
-		var0004 = Func0910(var0001, 0x0006);
+		var0003 = Func0910(var0000, 0x0002);
+		var0004 = Func0910(var0000, 0x0006);
 		var0005 = (((var0004 + var0003) + 0x0001) / 0x0002);
 		if (var0005 >= var0003)
 		{
@@ -100937,8 +100937,8 @@ void Func0918 0x918 (var var0001, var var0000)
 				var0005 = 0x001E;
 			}
 		}
-		Func0912(var0001, 0x0006, (var0005 - var0004));
-		Func0912(var0001, 0x0007, 0xFFFF);
+		Func0912(var0000, 0x0006, (var0005 - var0004));
+		Func0912(var0000, 0x0007, 0xFFFF);
 		var0002 = (var0002 + 0x0001);
 	}
 	return;
@@ -101008,11 +101008,11 @@ void Func091A 0x91A ()
 	return;
 }
 
-var Func091B 0x91B (var var0004, var var0003, var var0002, var var0001, var var0000)
+var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004)
 {
 	var var0005;
 
-	var0005 = ((var0004 + var0003) + " ");
+	var0005 = ((var0000 + var0001) + " ");
 	if (var0002 == 0x0001)
 	{
 		var0005 = (var0005 + "sell ");
@@ -101021,15 +101021,15 @@ var Func091B 0x91B (var var0004, var var0003, var var0002, var var0001, var var0
 	{
 		var0005 = (var0005 + "sells ");
 	}
-	var0005 = (((((var0005 + "for ") + var0001) + " gold") + var0000) + ".");
+	var0005 = (((((var0005 + "for ") + var0003) + " gold") + var0004) + ".");
 	return var0005;
 }
 
-var Func091C 0x91C (var var0004, var var0003, var var0002, var var0001, var var0000)
+var Func091C 0x91C (var var0000, var var0001, var var0002, var var0003, var var0004)
 {
 	var var0005;
 
-	var0005 = ((((((("To sell " + var0004) + var0003) + " for ") + var0001) + " gold") + var0000) + ".");
+	var0005 = ((((((("To sell " + var0000) + var0001) + " for ") + var0003) + " gold") + var0004) + ".");
 	return var0005;
 }
 
@@ -101037,27 +101037,27 @@ var Func091C 0x91C (var var0004, var var0003, var var0002, var var0001, var var0
 extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0912 0x912 (var var0000, var var0001, var var0002);
 
-void Func091D 0x91D (var var0001, var var0000)
+void Func091D 0x91D (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
 	var var0004;
 	var var0005;
 	var var0006;
-	var0002 = Func0910(var0001, 0x0000);
-	var0003 = Func0910(var0001, 0x0003);
-	var0004 = UI_get_npc_name(var0001);
+	var0002 = Func0910(var0000, 0x0000);
+	var0003 = Func0910(var0000, 0x0003);
+	var0004 = UI_get_npc_name(var0000);
 	if (var0002 > var0003)
 	{
 		var0005 = (var0002 - var0003);
-		Func0912(var0001, 0x0003, var0005);
-		var0006 = UI_remove_party_items(var0000, 0x0284, 0xFE99, 0xFE99, true);
+		Func0912(var0000, 0x0003, var0005);
+		var0006 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 		message("\"The wounds have been healed.\"");
 		say();
 	}
 	else
 	{
-		if (var0001 == 0xFE9C)
+		if (var0000 == 0xFE9C)
 		{
 			message("\"Thou seemest quite healthy!\"");
 			say();
@@ -101073,15 +101073,15 @@ void Func091D 0x91D (var var0001, var var0000)
 	return;
 }
 
-void Func091E 0x91E (var var0001, var var0000)
+void Func091E 0x91E (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
-	var0002 = UI_get_npc_object(var0001);
+	var0002 = UI_get_npc_object(var0000);
 	if (UI_get_item_flag(var0002, 0x0008))
 	{
 		UI_clear_item_flag(var0002, 0x0008);
-		var0003 = UI_remove_party_items(var0000, 0x0284, 0xFE99, 0xFE99, true);
+		var0003 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 		message("\"The wounds have been healed.\"");
 		say();
 	}
@@ -101093,16 +101093,16 @@ void Func091E 0x91E (var var0001, var var0000)
 	return;
 }
 
-void Func091F 0x91F (var var0001, var var0000)
+void Func091F 0x91F (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
-	var0002 = UI_resurrect(var0001);
+	var0002 = UI_resurrect(var0000);
 	if (var0002)
 	{
 		message("\"Breath doth return to the body. Thy comrade is alive!\"");
 		say();
-		var0003 = UI_remove_party_items(var0000, 0x0284, 0xFE99, 0xFE99, true);
+		var0003 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 	}
 	else
 	{
@@ -101190,7 +101190,7 @@ var Func0921 0x921 (var var0000)
 // externs
 extern var Func0910 0x910 (var var0000, var var0001);
 
-var Func0922 0x922 (var var0003, var var0002, var var0001, var var0000)
+var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003)
 {
 	var var0004;
 	var var0005;
@@ -101201,19 +101201,19 @@ var Func0922 0x922 (var var0003, var var0002, var var0001, var var0000)
 	var var000A;
 
 	var0004 = false;
-	var0005 = Func0910(var0001, 0x0007);
+	var0005 = Func0910(var0002, 0x0007);
 	var0006 = UI_count_objects(0xFE9B, 0x0284, 0xFE99, 0xFE99);
-	if (!(var0006 > var0002))
+	if (!(var0006 > var0001))
 	{
 		return 0x0001;
 	}
-	if (!(var0005 >= var0000))
+	if (!(var0005 >= var0003))
 	{
 		return 0x0000;
 	}
-	for (var0009 in var0003 with var0007 to var0008)
+	for (var0009 in var0000 with var0007 to var0008)
 	{
-		var000A = Func0910(var0001, var0009);
+		var000A = Func0910(var0002, var0009);
 		if (var000A < 0x001E)
 		{
 			var0004 = true;
@@ -101229,7 +101229,7 @@ var Func0922 0x922 (var var0003, var var0002, var var0001, var var0000)
 // externs
 extern var Func090A 0x90A ();
 
-var Func0923 0x923 (var var0001, var var0000)
+var Func0923 0x923 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -101245,15 +101245,15 @@ var Func0923 0x923 (var var0001, var var0000)
 	}
 	else
 	{
-		if (var0002 >= var0000)
+		if (var0002 >= var0001)
 		{
 			var0004 = UI_find_object(0xFE9B, 0x02F9, 0xFE99, 0xFE99);
 			if (var0004)
 			{
-				if (UI_add_spell(var0001, 0x0000, var0004))
+				if (UI_add_spell(var0000, 0x0000, var0004))
 				{
 					var0003 = 0x0001;
-					var0005 = UI_remove_party_items(var0000, 0x0284, 0xFE99, 0xFE99, true);
+					var0005 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 				}
 				else
 				{
@@ -101276,7 +101276,7 @@ var Func0923 0x923 (var var0001, var var0000)
 // externs
 extern var Func090A 0x90A ();
 
-var Func0924 0x924 (var var0001, var var0000)
+var Func0924 0x924 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -101292,15 +101292,15 @@ var Func0924 0x924 (var var0001, var var0000)
 	}
 	else
 	{
-		if (var0002 >= var0000)
+		if (var0002 >= var0001)
 		{
 			var0004 = UI_find_object(0xFE9B, 0x02F9, 0xFE99, 0xFE99);
 			if (var0004)
 			{
-				if (UI_add_spell(var0001, 0x0000, var0004))
+				if (UI_add_spell(var0000, 0x0000, var0004))
 				{
 					var0003 = 0x0001;
-					var0005 = UI_remove_party_items(var0000, 0x0284, 0xFE99, 0xFE99, true);
+					var0005 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 				}
 				else
 				{
@@ -101507,27 +101507,27 @@ void Func0929 0x929 ()
 	return;
 }
 
-void Func092A 0x92A (var var0001, var var0000)
+void Func092A 0x92A (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
 	var var0004;
-	if (UI_is_npc(var0001))
+	if (UI_is_npc(var0000))
 	{
-		var0002 = UI_get_npc_prop(var0001, 0x0000);
-		var0003 = UI_get_npc_prop(var0001, 0x0003);
-		if ((var0003 + var0000) < 0x0001)
+		var0002 = UI_get_npc_prop(var0000, 0x0000);
+		var0003 = UI_get_npc_prop(var0000, 0x0003);
+		if ((var0003 + var0001) < 0x0001)
 		{
-			var0000 = (0xFFFF * var0003);
+			var0001 = (0xFFFF * var0003);
 		}
 		else
 		{
-			if ((var0003 + var0000) > var0002)
+			if ((var0003 + var0001) > var0002)
 			{
-				var0000 = (var0002 - var0003);
+				var0001 = (var0002 - var0003);
 			}
 		}
-		var0004 = UI_set_npc_prop(var0001, 0x0003, var0000);
+		var0004 = UI_set_npc_prop(var0000, 0x0003, var0001);
 	}
 	return;
 }
@@ -101798,20 +101798,20 @@ void Func092F 0x92F (var var0000)
 	return;
 }
 
-var Func0930 0x930 (var var0001, var var0000)
+var Func0930 0x930 (var var0000, var var0001)
 {
 	var var0002;
 
-	var0002 = UI_delayed_execute_usecode_array(var0001, var0000, 0xFFFF);
+	var0002 = UI_delayed_execute_usecode_array(var0000, var0001, 0xFFFF);
 	return var0002;
 }
 
-var Func0931 0x931 (var var0004, var var0003, var var0002, var var0001, var var0000)
+var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004)
 {
 	var var0005;
 
-	var0005 = UI_count_objects(var0004, var0002, var0001, var0000);
-	if (var0005 >= var0003)
+	var0005 = UI_count_objects(var0000, var0002, var0003, var0004);
+	if (var0005 >= var0001)
 	{
 		return true;
 	}
@@ -101834,12 +101834,12 @@ var Func0932 0x932 (var var0000)
 // externs
 extern var Func0937 0x937 (var var0000);
 
-void Func0933 0x933 (var var0002, var var0001, var var0000)
+void Func0933 0x933 (var var0000, var var0001, var var0002)
 {
 	var var0003;
-	if (Func0937(var0002))
+	if (Func0937(var0000))
 	{
-		script UI_get_npc_object(var0002) after var0000 ticks
+		script UI_get_npc_object(var0000) after var0002 ticks
 		{
 			nohalt;
 			say var0001;
@@ -101878,17 +101878,17 @@ var Func0934 0x934 (var var0000)
 	return 0;
 }
 
-var Func0935 0x935 (var var0001, var var0000)
+var Func0935 0x935 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
 	var var0004;
 	var var0005;
 
-	var0002 = var0001[0x0001];
-	for (var0005 in var0001 with var0003 to var0004)
+	var0002 = var0000[0x0001];
+	for (var0005 in var0000 with var0003 to var0004)
 	{
-		if (UI_get_distance(var0000, var0005) < UI_get_distance(var0000, var0002))
+		if (UI_get_distance(var0001, var0005) < UI_get_distance(var0001, var0002))
 		{
 			var0002 = var0005;
 		}
@@ -101896,9 +101896,9 @@ var Func0935 0x935 (var var0001, var var0000)
 	return var0002;
 }
 
-void Func0936 0x936 (var var0001, var var0000)
+void Func0936 0x936 (var var0000, var var0001)
 {
-	UI_reduce_health(var0001, var0000, 0x0000);
+	UI_reduce_health(var0000, var0001, 0x0000);
 	return;
 }
 
@@ -101950,7 +101950,7 @@ var Func0939 0x939 (var var0000)
 // externs
 extern void Func093B 0x93B (var var0000, var var0001, var var0002, var var0003);
 
-void Func093A 0x93A (var var0001, var var0000)
+void Func093A 0x93A (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -101978,17 +101978,17 @@ void Func093A 0x93A (var var0001, var var0000)
 			UI_clear_item_flag(var0005, 0x0002);
 			UI_clear_item_flag(var0005, 0x0000);
 			UI_clear_item_flag(var0005, 0x0009);
-			Func093B(var0005, 0x0003, 0x0000, var0001);
-			Func093B(var0005, 0x0005, 0x0006, var0001);
-			var0006 = UI_set_npc_prop(var0005, 0x0009, (var0001 * 0xFFFF));
+			Func093B(var0005, 0x0003, 0x0000, var0000);
+			Func093B(var0005, 0x0005, 0x0006, var0000);
+			var0006 = UI_set_npc_prop(var0005, 0x0009, (var0000 * 0xFFFF));
 		}
 	}
-	var0007 = UI_find_nearby(var0000, 0x02BD, 0x001E, 0x0000);
-	var0007 = (var0007 & UI_find_nearby(var0000, 0x0152, 0x001E, 0x0000));
+	var0007 = UI_find_nearby(var0001, 0x02BD, 0x001E, 0x0000);
+	var0007 = (var0007 & UI_find_nearby(var0001, 0x0152, 0x001E, 0x0000));
 	for (var000A in var0007 with var0008 to var0009)
 	{
 		var000B = UI_get_item_quality(var000A);
-		if (var000B < (var0001 * 0x001E))
+		if (var000B < (var0000 * 0x001E))
 		{
 			UI_halt_scheduled(var000A);
 			var000C = UI_get_item_shape(var000A);
@@ -102004,28 +102004,28 @@ void Func093A 0x93A (var var0001, var var0000)
 		}
 		else
 		{
-			var0006 = UI_set_item_quality(var000A, (var000B - (var0001 * 0x001E)));
+			var0006 = UI_set_item_quality(var000A, (var000B - (var0000 * 0x001E)));
 		}
 	}
 	return;
 }
 
-void Func093B 0x93B (var var0003, var var0002, var var0001, var var0000)
+void Func093B 0x93B (var var0000, var var0001, var var0002, var var0003)
 {
 	var var0004;
 	var var0005;
 	var var0006;
-	var0004 = UI_get_npc_prop(var0003, var0002);
-	var0005 = (var0004 + (0x0002 * var0000));
-	if (var0005 > UI_get_npc_prop(var0003, var0001))
+	var0004 = UI_get_npc_prop(var0000, var0001);
+	var0005 = (var0004 + (0x0002 * var0003));
+	if (var0005 > UI_get_npc_prop(var0000, var0002))
 	{
-		var0005 = UI_get_npc_prop(var0003, var0001);
+		var0005 = UI_get_npc_prop(var0000, var0002);
 	}
-	var0006 = UI_set_npc_prop(var0003, var0002, (var0005 - var0004));
+	var0006 = UI_set_npc_prop(var0000, var0001, (var0005 - var0004));
 	return;
 }
 
-var Func093C 0x93C (var var0001, var var0000)
+var Func093C 0x93C (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -102033,9 +102033,9 @@ var Func093C 0x93C (var var0001, var var0000)
 	var var0005;
 
 	var0002 = [];
-	for (var0005 in var0000 with var0003 to var0004)
+	for (var0005 in var0001 with var0003 to var0004)
 	{
-		if (!(var0005 == var0001))
+		if (!(var0005 == var0000))
 		{
 			var0002 = (var0002 & var0005);
 		}
@@ -102043,14 +102043,14 @@ var Func093C 0x93C (var var0001, var var0000)
 	return var0002;
 }
 
-var Func093D 0x93D (var var0001, var var0000)
+var Func093D 0x93D (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
 	var var0004;
 	var var0005;
 
-	var0002 = UI_get_array_size(var0001);
+	var0002 = UI_get_array_size(var0000);
 	if (var0002 > 0x0001)
 	{
 		var0003 = true;
@@ -102060,21 +102060,21 @@ var Func093D 0x93D (var var0001, var var0000)
 			var0004 = 0x0001;
 			while (var0004 < var0002)
 			{
-				if (var0000[var0004] > var0000[(var0004 + 0x0001)])
+				if (var0001[var0004] > var0001[(var0004 + 0x0001)])
 				{
-					var0005 = var0000[var0004];
-					var0000[var0004] = var0000[(var0004 + 0x0001)];
-					var0000[(var0004 + 0x0001)] = var0005;
 					var0005 = var0001[var0004];
 					var0001[var0004] = var0001[(var0004 + 0x0001)];
 					var0001[(var0004 + 0x0001)] = var0005;
+					var0005 = var0000[var0004];
+					var0000[var0004] = var0000[(var0004 + 0x0001)];
+					var0000[(var0004 + 0x0001)] = var0005;
 					var0003 = true;
 				}
 				var0004 = (var0004 + 0x0001);
 			}
 		}
 	}
-	return var0001;
+	return var0000;
 }
 
 // externs
@@ -102093,17 +102093,17 @@ var Func093E 0x93E ()
 // externs
 extern var Func0939 0x939 (var var0000);
 
-void Func093F 0x93F (var var0001, var var0000)
+void Func093F 0x93F (var var0000, var var0001)
 {
 	var var0002;
 	var0002 = UI_get_party_list();
-	if ((Func0939(var0001) in var0002) && gflags[0x0039])
+	if ((Func0939(var0000) in var0002) && gflags[0x0039])
 	{
 		return;
 	}
 	else
 	{
-		UI_set_schedule_type(var0001, var0000);
+		UI_set_schedule_type(var0000, var0001);
 	}
 	return;
 }
@@ -102143,40 +102143,40 @@ void Func0941 0x941 (var var0000)
 // externs
 extern void Func0905 0x905 (var var0000);
 
-void Func0942 0x942 (var var0001, var var0000)
+void Func0942 0x942 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
 	var var0004;
 	var var0005;
-	var0002 = UI_get_item_frame(var0001);
-	if (!UI_get_item_quality(var0001))
+	var0002 = UI_get_item_frame(var0000);
+	if (!UI_get_item_quality(var0000))
 	{
-		var0003 = UI_set_item_quality(var0001, UI_die_roll(0x001E, 0x003C));
+		var0003 = UI_set_item_quality(var0000, UI_die_roll(0x001E, 0x003C));
 	}
-	if (UI_get_item_shape(var0001) == 0x0253)
+	if (UI_get_item_shape(var0000) == 0x0253)
 	{
-		if (UI_get_item_quality(var0001) == 0x00FF)
+		if (UI_get_item_quality(var0000) == 0x00FF)
 		{
-			UI_item_say(var0001, "Spent");
+			UI_item_say(var0000, "Spent");
 			return;
 		}
 	}
-	var0004 = UI_get_container(var0001);
+	var0004 = UI_get_container(var0000);
 	if ((var0004 == 0x0000) || UI_is_npc(var0004))
 	{
-		UI_set_item_shape(item, var0000);
+		UI_set_item_shape(item, var0001);
 		var0005 = UI_get_party_list();
 		if (var0004 in var0005)
 		{
-			Func0905(var0001);
+			Func0905(var0000);
 		}
 	}
 	else
 	{
 		UI_flash_mouse(0x0000);
 	}
-	UI_set_light(var0001, true);
+	UI_set_light(var0000, true);
 	UI_set_time_palette();
 	return;
 }
@@ -102691,7 +102691,7 @@ extern var Func090F 0x90F (var var0000);
 extern var Func090A 0x90A ();
 extern var Func0932 0x932 (var var0000);
 
-var Func094B 0x94B (var var0001, var var0000)
+var Func094B 0x94B (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -102707,8 +102707,8 @@ var Func094B 0x94B (var var0001, var var0000)
 	var var000D;
 
 	var0002 = 0x0000;
-	var0003 = var0001;
-	var0004 = var0001;
+	var0003 = var0000;
+	var0004 = var0000;
 	var0005 = true;
 	var0006 = false;
 	var0007 = 0x0000;
@@ -102723,7 +102723,7 @@ var Func094B 0x94B (var var0001, var var0000)
 		}
 		else
 		{
-			var0008 = Func090F(var0000);
+			var0008 = Func090F(var0001);
 			message("\"To want ");
 			message(var0003);
 			message(" gold.\"");
@@ -103175,7 +103175,7 @@ extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0914 0x914 (var var0000, var var0001);
 extern void Func0917 0x917 (var var0000, var var0001);
 
-void Func094F 0x94F (var var0001, var var0000)
+void Func094F 0x94F (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -103196,7 +103196,7 @@ void Func094F 0x94F (var var0001, var var0000)
 		if (!(var0002 == 0x0000))
 		{
 			var0004 = 0x0003;
-			var0005 = Func0922(var0001, var0000, var0002, var0004);
+			var0005 = Func0922(var0000, var0001, var0002, var0004);
 			if (var0005 == 0x0000)
 			{
 				message("After a very quick run, he turns and says, \"Thou dost not yet have the stamina. If thou so wishest, I could train thee at a later date.\"");
@@ -103210,7 +103210,7 @@ void Func094F 0x94F (var var0001, var var0000)
 				message(var0006);
 				message(" gold altogether.");
 				say();
-				if (var0006 < var0000)
+				if (var0006 < var0001)
 				{
 					message("\"It seems thou dost not have enough gold to train at this time.\"");
 					say();
@@ -103223,9 +103223,9 @@ void Func094F 0x94F (var var0001, var var0000)
 				say();
 				break;
 			}
-			var0007 = UI_remove_party_items(var0000, 0x0284, 0xFE99, 0xFE99, true);
+			var0007 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 			message("You pay ");
-			message(var0000);
+			message(var0001);
 			message(" gold, and the training session begins.");
 			say();
 			if (var0002 == 0xFE9C)
@@ -103281,7 +103281,7 @@ extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0915 0x915 (var var0000, var var0001);
 extern void Func0917 0x917 (var var0000, var var0001);
 
-void Func0950 0x950 (var var0001, var var0000)
+void Func0950 0x950 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
@@ -103339,7 +103339,7 @@ void Func0950 0x950 (var var0001, var var0000)
 		if (!(var0002 == 0x0000))
 		{
 			var000D = 0x0002;
-			var000E = Func0922(var0001, var0000, var0002, var000D);
+			var000E = Func0922(var0000, var0001, var0002, var000D);
 			if (var000E == 0x0000)
 			{
 				message("\"It appears that thou dost not have enough practical experience to train at this time. If thou couldst return later after thou hast gained more experience, I can help thee.\"");
@@ -103353,7 +103353,7 @@ void Func0950 0x950 (var var0001, var var0000)
 				message(var000F);
 				message(" gold altogether.");
 				say();
-				if (var000F < var0000)
+				if (var000F < var0001)
 				{
 					message("\"It appears that thou dost not seem to have enough gold to train here. If thou couldst return later after thy pockets are filled...\"");
 					say();
@@ -103367,10 +103367,10 @@ void Func0950 0x950 (var var0001, var var0000)
 				break;
 			}
 			message("You pay ");
-			message(var0000);
+			message(var0001);
 			message(" gold.");
 			say();
-			var0010 = UI_remove_party_items(var0000, 0x0284, 0xFE99, 0xFE99, true);
+			var0010 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 			message("Zella begins the session by showing ");
 			message(var0003);
 			message(" the proper stance when 'boxing'.~~\"'Tis all contingent on balance. Use thy weight to control thy movement. Step lightly. 'Tis almost like a dance.\" Zella shows ");
