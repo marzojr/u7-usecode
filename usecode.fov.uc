@@ -6,7 +6,6 @@ extern var Func0829 0x829 (var var0000);
 
 void Func0096 shape#(0x96) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		if (UI_get_item_flag(item, 0x000A))
@@ -62,7 +61,7 @@ void Func009A shape#(0x9A) ()
 	var var0017;
 	var var0018;
 	var var0019;
-	var var001A;
+
 	if (event == 0x0000)
 	{
 		var0000 = UI_find_nearest(item, 0x0150, 0x0001);
@@ -88,7 +87,7 @@ void Func009A shape#(0x9A) ()
 					UI_sprite_effect(0x0005, (var0008[0x0001] - 0x0001), (var0008[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
 					UI_play_sound_effect(0x0008);
 				}
-				script item
+				var0009 = script item
 				{
 					actor frame cast_up;
 					wait 1;
@@ -97,7 +96,7 @@ void Func009A shape#(0x9A) ()
 					wait 3;
 					actor frame cast_out;
 					wait 6;
-				}
+				};
 				return;
 			}
 		}
@@ -135,11 +134,11 @@ void Func009A shape#(0x9A) ()
 						if ((UI_get_item_frame(var000F) == 0x0004) && (UI_get_item_frame(item) >= 0x0010))
 						{
 							UI_item_say(item, "@Ah, a wall.@");
-							script item after 18 ticks
+							var0010 = script item after 18 ticks
 							{
 								nohalt;
 								say "@I'll follow it.@";
-							}
+							};
 							return;
 						}
 						else
@@ -162,12 +161,12 @@ void Func009A shape#(0x9A) ()
 		{
 			var0011 = Func092D(item);
 			var0012 = ((var0011 + 0x0004) % 0x0008);
-			script item
+			var0009 = script item
 			{
 				actor frame standing;
 				face var0012;
 				call Func009A;
-			}
+			};
 		}
 		else
 		{
@@ -739,7 +738,7 @@ void Func009B shape#(0x9B) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFEE3, 0x0000);
@@ -948,7 +947,7 @@ void Func009F shape#(0x9F) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_game_hour();
@@ -984,7 +983,7 @@ void Func009F shape#(0x9F) ()
 void Func00B2 shape#(0xB2) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_display_map();
@@ -1001,7 +1000,7 @@ void Func00D2 shape#(0xD2) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_item_quality(item);
@@ -1040,7 +1039,7 @@ extern void Func081A 0x81A (var var0000);
 void Func00E1 shape#(0xE1) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event != 0x0001)
 	{
 		return;
@@ -1092,7 +1091,7 @@ extern void Func081A 0x81A (var var0000);
 void Func00F6 shape#(0xF6) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event != 0x0001)
 	{
 		return;
@@ -1144,7 +1143,7 @@ extern void Func081A 0x81A (var var0000);
 void Func00FA shape#(0xFA) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event != 0x0001)
 	{
 		return;
@@ -1199,7 +1198,7 @@ void Func00FB shape#(0xFB) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event != 0x0001)
 	{
 		return;
@@ -1259,7 +1258,7 @@ void Func00FC shape#(0xFC) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_game_hour();
@@ -1291,7 +1290,7 @@ void Func0102 shape#(0x102) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		if (UI_in_usecode(item))
@@ -1319,12 +1318,12 @@ void Func0102 shape#(0x102) ()
 				var0002 = UI_update_last_created(var0000);
 			}
 		}
-		script 0xFE9C
+		var0002 = script 0xFE9C
 		{
 			face north;
 			continue;
 			actor frame bowing;
-		}
+		};
 	}
 	return;
 }
@@ -1340,11 +1339,11 @@ void Func0105 shape#(0x105) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0007)
 	{
 		UI_halt_scheduled(item);
-		script item
+		var0000 = script item
 		{
 			frame 0;
 			repeat 32
@@ -1354,9 +1353,9 @@ void Func0105 shape#(0x105) ()
 				sfx 6;
 			};
 			call Func0105;
-		}
+		};
 		var0001 = Func0827(0xFE9C, item);
-		script 0xFE9C
+		var0000 = script 0xFE9C
 		{
 			face var0001;
 			repeat 9
@@ -1366,7 +1365,7 @@ void Func0105 shape#(0x105) ()
 				actor frame standing;
 				wait 1;
 			};
-		}
+		};
 	}
 	if (event == 0x0002)
 	{
@@ -1396,7 +1395,6 @@ void Func0105 shape#(0x105) ()
 
 void Func010B shape#(0x10B) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		UI_play_music(0x0027, item);
@@ -1415,7 +1413,7 @@ extern void Func081A 0x81A (var var0000);
 void Func010E shape#(0x10E) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event != 0x0001)
 	{
 		return;
@@ -1464,7 +1462,7 @@ void Func011C shape#(0x11C) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_game_hour();
@@ -1495,7 +1493,6 @@ void Func011C shape#(0x11C) ()
 
 void Func0122 shape#(0x122) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		UI_set_item_shape(item, 0x0174);
@@ -1506,7 +1503,6 @@ void Func0122 shape#(0x122) ()
 
 void Func0123 shape#(0x123) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		UI_set_item_shape(item, 0x0142);
@@ -1575,11 +1571,11 @@ void Func0124 shape#(0x124) ()
 		{
 			Func080A(item, 0x0124);
 			var0002 = (UI_get_distance(item, 0xFE9C) + 0x000F);
-			script item after var0002 ticks
+			var0001 = script item after var0002 ticks
 			{
 				nohalt;
 				call Func0124;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -1648,7 +1644,7 @@ void Func0124 shape#(0x124) ()
 void Func0128 shape#(0x128) ()
 {
 	var var0000;
-	var var0001;
+
 	if ((event == 0x0005) || (event == 0x0006))
 	{
 		var0000 = UI_get_container(item);
@@ -1679,17 +1675,17 @@ void Func012A shape#(0x12A) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0005)
 	{
 		var0000 = UI_get_container(item);
 		if (var0000 && UI_is_npc(var0000))
 		{
 			UI_halt_scheduled(item);
-			script item after 100 ticks
+			var0001 = script item after 100 ticks
 			{
 				call Func012A;
-			}
+			};
 		}
 		else
 		{
@@ -1717,10 +1713,10 @@ void Func012A shape#(0x12A) ()
 					return;
 				}
 			}
-			script item after 100 ticks
+			var0001 = script item after 100 ticks
 			{
 				call Func012A;
-			}
+			};
 		}
 	}
 	return;
@@ -1731,7 +1727,6 @@ extern void Func0809 0x809 (var var0000);
 
 void Func012D shape#(0x12D) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		Func0809(item);
@@ -1744,7 +1739,6 @@ extern void Func0833 0x833 (var var0000, var var0001);
 
 void Func012F shape#(0x12F) ()
 {
-	var var0000;
 	if (event == 0x0002)
 	{
 		UI_set_item_shape(item, 0x012F);
@@ -1787,7 +1781,7 @@ void Func0133 shape#(0x133) ()
 	var var0013;
 	var var0014;
 	var var0015;
-	var var0016;
+
 	if (event == 0x0001)
 	{
 		if (UI_get_item_frame(item) == 0x0000)
@@ -1832,43 +1826,43 @@ void Func0133 shape#(0x133) ()
 							var0014 = UI_get_object_position(var0013);
 							if ((var0014[0x0001] == (var0000[0x0001] + 0x0001)) && ((var0014[0x0002] == (var0000[0x0002] + 0x0002)) && (var0014[0x0003] == (var0000[0x0003] + 0x0002))))
 							{
-								script item
+								var0015 = script item
 								{
 									next frame cycle;
 									sfx 67;
 									wait 10;
 									previous frame cycle;
-								}
-								script var0002 after 2 ticks
+								};
+								var0015 = script var0002 after 2 ticks
 								{
 									nohalt;
 									call Func0615;
-								}
-								script var0003 after 4 ticks
+								};
+								var0015 = script var0003 after 4 ticks
 								{
 									nohalt;
 									call Func0615;
-								}
-								script var0004 after 6 ticks
+								};
+								var0015 = script var0004 after 6 ticks
 								{
 									nohalt;
 									call Func0615;
-								}
-								script var000E
+								};
+								var0015 = script var000E
 								{
 									repeat 4
 									{
 										next frame cycle;
 									};
-								}
-								script var0013
+								};
+								var0015 = script var0013
 								{
 									repeat 3
 									{
 										next frame cycle;
 									};
 									frame 0;
-								}
+								};
 								gflags[0x01D0] = true;
 								abort;
 							}
@@ -1876,13 +1870,13 @@ void Func0133 shape#(0x133) ()
 					}
 				}
 			}
-			script item
+			var0015 = script item
 			{
 				next frame cycle;
 				sfx 69;
 				wait 10;
 				previous frame cycle;
-			}
+			};
 		}
 		else
 		{
@@ -1894,7 +1888,6 @@ void Func0133 shape#(0x133) ()
 
 void Func0142 shape#(0x142) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		UI_set_item_shape(item, 0x0123);
@@ -1915,7 +1908,7 @@ void Func0149 shape#(0x149) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (UI_in_usecode(item))
 	{
 		return;
@@ -1950,7 +1943,7 @@ void Func0149 shape#(0x149) ()
 	{
 		if (!UI_is_pc_inside())
 		{
-			script item
+			var0002 = script item
 			{
 				frame 0;
 				repeat 14
@@ -1972,8 +1965,8 @@ void Func0149 shape#(0x149) ()
 					previous frame;
 				};
 				frame 0;
-			}
-			script 0xFE9C
+			};
+			var0002 = script 0xFE9C
 			{
 				actor frame bowing;
 				actor frame standing;
@@ -1985,7 +1978,7 @@ void Func0149 shape#(0x149) ()
 					actor frame standing;
 					wait 2;
 				};
-			}
+			};
 		}
 		else
 		{
@@ -2000,7 +1993,6 @@ extern void Func0942 0x942 (var var0000, var var0001);
 
 void Func0150 shape#(0x150) ()
 {
-	var var0000;
 	if ((event == 0x0001) || (event == 0x0002))
 	{
 		Func0942(item, 0x0152);
@@ -2016,7 +2008,7 @@ void Func0152 shape#(0x152) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if ((event == 0x0001) || (event == 0x0002))
 	{
 		UI_set_item_shape(item, 0x0150);
@@ -2026,13 +2018,13 @@ void Func0152 shape#(0x152) ()
 	{
 		UI_set_item_shape(item, 0x0150);
 		var0000 = Func0827(0xFE9C, item);
-		script 0xFE9C
+		var0001 = script 0xFE9C
 		{
 			face var0000;
 			continue;
 			actor frame strike_2h;
 			actor frame standing;
-		}
+		};
 	}
 	if (event == 0x0005)
 	{
@@ -2057,7 +2049,7 @@ void Func0154 shape#(0x154) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		Func08FA(item);
@@ -2137,7 +2129,6 @@ void Func0154 shape#(0x154) ()
 
 void Func0174 shape#(0x174) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		UI_set_item_shape(item, 0x0122);
@@ -2157,7 +2148,7 @@ extern void Func081A 0x81A (var var0000);
 void Func0178 shape#(0x178) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event != 0x0001)
 	{
 		return;
@@ -2205,7 +2196,7 @@ void Func0179 shape#(0x179) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	var0000 = [0x0004, 0x0006, 0x0002, 0x0005, 0x0003, 0x0003, 0x0001, 0x000C, 0x0018, 0x0010, 0x0018, 0x0018, 0x0004, 0x0008, 0x0010, 0x0006, 0x0002, 0x0003, 0x0002, 0x0001, 0x0004, 0x0003, 0x0001, 0x0018, 0x0003, 0x0001, 0x0009, 0x0002, 0x001F, 0x0008, 0x0006, 0x0000];
 	var0001 = var0000[(UI_get_item_frame(item) + 0x0001)];
 	Func0813(item, var0001, 0x005B);
@@ -2219,7 +2210,7 @@ void Func017B shape#(0x17B) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event != 0x0001)
 	{
 		return;
@@ -2784,10 +2775,6 @@ void Func017B shape#(0x17B) ()
 		{
 			UI_display_runes(0x0031, ["follow", "(e", "fire"]);
 		}
-		else
-		{
-			return;
-		}
 	}
 }
 
@@ -2802,7 +2789,7 @@ extern void Func081A 0x81A (var var0000);
 void Func0188 shape#(0x188) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event != 0x0001)
 	{
 		return;
@@ -2849,7 +2836,7 @@ void Func018A shape#(0x18A) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	var0000 = UI_get_schedule_type(UI_get_npc_object(0x018A));
 	if (event == 0x0001)
 	{
@@ -2914,7 +2901,7 @@ void Func019A shape#(0x19A) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		UI_close_gumps();
@@ -2922,19 +2909,19 @@ void Func019A shape#(0x19A) ()
 		var0001 = UI_get_item_quality(item);
 		if ((var0001 == 0x0000) || (var0001 > 0x0003))
 		{
-			script item
+			var0002 = script item
 			{
 				frame 0;
 				frame 1;
 				sfx 37;
 				sfx 76;
-			}
+			};
 		}
 		else
 		{
 			var0003 = [0x0392, 0x0394, 0x0393];
 			var0004 = var0003[var0001];
-			script item
+			var0002 = script item
 			{
 				repeat 7
 				{
@@ -2946,8 +2933,8 @@ void Func019A shape#(0x19A) ()
 						sfx 8;
 					};
 				};
-			}
-			script var0000
+			};
+			var0002 = script var0000
 			{
 				repeat 24
 				{
@@ -2957,7 +2944,7 @@ void Func019A shape#(0x19A) ()
 					sfx 15;
 					call Func060D;
 				};
-			}
+			};
 		}
 	}
 	return;
@@ -2970,7 +2957,7 @@ void Func01A2 shape#(0x1A2) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_item_quality(item);
@@ -3023,7 +3010,7 @@ void Func01AF shape#(0x1AF) ()
 	var var000D;
 	var var000E;
 	var var000F;
-	var var0010;
+
 	var0000 = UI_get_item_frame(item);
 	if ((var0000 >= 0x0003) && (var0000 <= 0x0005))
 	{
@@ -3033,7 +3020,7 @@ void Func01AF shape#(0x1AF) ()
 		}
 		if (event == 0x0007)
 		{
-			script item
+			var0001 = script item
 			{
 				sfx 47;
 				continue;
@@ -3044,15 +3031,15 @@ void Func01AF shape#(0x1AF) ()
 				frame 4;
 				wait 1;
 				frame 3;
-			}
+			};
 			var0002 = Func092D(item);
-			script UI_get_npc_object(0xFE9C)
+			var0001 = script UI_get_npc_object(0xFE9C)
 			{
 				face var0002;
 				actor frame bowing;
 				wait 3;
 				actor frame standing;
-			}
+			};
 			var0003 = UI_find_nearest(item, 0x02E3, 0x0003);
 			var0004 = UI_get_item_frame(var0003);
 			var0005 = UI_find_nearest(item, 0x029C, 0x0003);
@@ -3061,17 +3048,17 @@ void Func01AF shape#(0x1AF) ()
 			{
 				if (var0004 == 0x0004)
 				{
-					script var0003
+					var0001 = script var0003
 					{
 						wait 1;
 						frame 5;
 						wait 15;
 						frame 4;
-					}
+					};
 				}
 				if (var0004 == 0x0005)
 				{
-					script var0003
+					var0001 = script var0003
 					{
 						wait 1;
 						frame 6;
@@ -3079,11 +3066,11 @@ void Func01AF shape#(0x1AF) ()
 						frame 5;
 						wait 15;
 						frame 4;
-					}
+					};
 				}
 				if (var0004 == 0x0006)
 				{
-					script var0003
+					var0001 = script var0003
 					{
 						wait 1;
 						frame 7;
@@ -3093,11 +3080,11 @@ void Func01AF shape#(0x1AF) ()
 						frame 5;
 						wait 15;
 						frame 4;
-					}
+					};
 				}
 				if (var0004 == 0x0007)
 				{
-					script var0003
+					var0001 = script var0003
 					{
 						wait 1;
 						frame 7;
@@ -3107,7 +3094,7 @@ void Func01AF shape#(0x1AF) ()
 						frame 5;
 						wait 15;
 						frame 4;
-					}
+					};
 					if (var0005)
 					{
 						var0007 = UI_get_object_position(var0003);
@@ -3129,17 +3116,17 @@ void Func01AF shape#(0x1AF) ()
 							{
 								if ((var0006 >= 0x000D) && (var0006 <= 0x000F))
 								{
-									script var0005
+									var0001 = script var0005
 									{
 										wait 2;
 										frame 8;
 										wait 25;
 										call Func068F;
-									}
+									};
 								}
 								if (var0006 == 0x0008)
 								{
-									script var0005
+									var0001 = script var0005
 									{
 										wait 2;
 										frame 9;
@@ -3147,11 +3134,11 @@ void Func01AF shape#(0x1AF) ()
 										frame 8;
 										wait 25;
 										call Func068F;
-									}
+									};
 								}
 								if (var0006 == 0x0009)
 								{
-									script var0005
+									var0001 = script var0005
 									{
 										wait 2;
 										frame 10;
@@ -3161,11 +3148,11 @@ void Func01AF shape#(0x1AF) ()
 										frame 8;
 										wait 25;
 										call Func068F;
-									}
+									};
 								}
 								if (var0006 == 0x000A)
 								{
-									script var0005
+									var0001 = script var0005
 									{
 										wait 2;
 										frame 11;
@@ -3177,11 +3164,11 @@ void Func01AF shape#(0x1AF) ()
 										frame 8;
 										wait 25;
 										call Func068F;
-									}
+									};
 								}
 								if ((var0006 == 0x000B) || (var0006 == 0x000C))
 								{
-									script var0005
+									var0001 = script var0005
 									{
 										wait 2;
 										frame 12;
@@ -3195,7 +3182,7 @@ void Func01AF shape#(0x1AF) ()
 										frame 8;
 										wait 25;
 										call Func068F;
-									}
+									};
 								}
 							}
 						}
@@ -3214,7 +3201,7 @@ void Func01AF shape#(0x1AF) ()
 		if (event == 0x0007)
 		{
 			UI_halt_scheduled(item);
-			script item
+			var000A = script item
 			{
 				sfx 47;
 				continue;
@@ -3234,10 +3221,10 @@ void Func01AF shape#(0x1AF) ()
 				frame 1;
 				wait 1;
 				frame 0;
-			}
+			};
 			var0002 = Func0827(0xFE9C, item);
 			UI_halt_scheduled(0xFE9C);
-			script 0xFE9C
+			var000A = script 0xFE9C
 			{
 				face var0002;
 				actor frame standing;
@@ -3248,14 +3235,14 @@ void Func01AF shape#(0x1AF) ()
 				actor frame bowing;
 				wait 3;
 				actor frame standing;
-			}
+			};
 			var000B = UI_find_nearby(item, 0x02E3, 0x0004, 0x00B0);
 			for (var000E in var000B with var000C to var000D)
 			{
 				var000F = UI_get_item_frame(var000E);
 				if (var000F == 0x0000)
 				{
-					script var000E
+					var000A = script var000E
 					{
 						nohalt;
 						sfx 47;
@@ -3263,8 +3250,8 @@ void Func01AF shape#(0x1AF) ()
 						frame 1;
 						frame 2;
 						frame 3;
-					}
-					script var000E after 18 ticks
+					};
+					var000A = script var000E after 18 ticks
 					{
 						finish;
 						frame 2;
@@ -3272,19 +3259,19 @@ void Func01AF shape#(0x1AF) ()
 						frame 1;
 						wait 3;
 						frame 0;
-					}
+					};
 				}
 				if (var000F == 0x0001)
 				{
-					script var000E
+					var000A = script var000E
 					{
 						nohalt;
 						sfx 47;
 						frame 1;
 						frame 2;
 						frame 3;
-					}
-					script var000E after 17 ticks
+					};
+					var000A = script var000E after 17 ticks
 					{
 						finish;
 						frame 2;
@@ -3292,18 +3279,18 @@ void Func01AF shape#(0x1AF) ()
 						frame 1;
 						wait 3;
 						frame 0;
-					}
+					};
 				}
 				if (var000F == 0x0002)
 				{
-					script var000E
+					var000A = script var000E
 					{
 						nohalt;
 						sfx 47;
 						frame 2;
 						frame 3;
-					}
-					script var000E after 16 ticks
+					};
+					var000A = script var000E after 16 ticks
 					{
 						finish;
 						frame 2;
@@ -3311,17 +3298,17 @@ void Func01AF shape#(0x1AF) ()
 						frame 1;
 						wait 3;
 						frame 0;
-					}
+					};
 				}
 				if (var000F == 0x0003)
 				{
-					script var000E
+					var000A = script var000E
 					{
 						nohalt;
 						sfx 47;
 						frame 3;
-					}
-					script var000E after 15 ticks
+					};
+					var000A = script var000E after 15 ticks
 					{
 						finish;
 						frame 2;
@@ -3329,7 +3316,7 @@ void Func01AF shape#(0x1AF) ()
 						frame 1;
 						wait 3;
 						frame 0;
-					}
+					};
 				}
 			}
 		}
@@ -3348,7 +3335,7 @@ extern void Func081A 0x81A (var var0000);
 void Func01B0 shape#(0x1B0) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event != 0x0001)
 	{
 		return;
@@ -3400,7 +3387,7 @@ extern void Func081A 0x81A (var var0000);
 void Func01B1 shape#(0x1B1) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event != 0x0001)
 	{
 		return;
@@ -3450,7 +3437,7 @@ void Func01B2 shape#(0x1B2) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		if (UI_in_usecode(item))
@@ -3478,12 +3465,12 @@ void Func01B2 shape#(0x1B2) ()
 				var0002 = UI_update_last_created(var0000);
 			}
 		}
-		script 0xFE9C
+		var0002 = script 0xFE9C
 		{
 			face north;
 			continue;
 			actor frame bowing;
-		}
+		};
 	}
 	return;
 }
@@ -3495,7 +3482,7 @@ void Func01B3 shape#(0x1B3) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if ((event == 0x0001) || (event == 0x0002))
 	{
 		UI_set_item_shape(item, 0x01E1);
@@ -3505,20 +3492,19 @@ void Func01B3 shape#(0x1B3) ()
 	{
 		UI_set_item_shape(item, 0x01E1);
 		var0000 = Func0827(0xFE9C, item);
-		script 0xFE9C
+		var0001 = script 0xFE9C
 		{
 			face var0000;
 			continue;
 			actor frame strike_2h;
 			actor frame standing;
-		}
+		};
 	}
 	return;
 }
 
 void Func01BF shape#(0x1BF) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		UI_item_say(item, "Arghh");
@@ -3534,7 +3520,7 @@ void Func01D6 shape#(0x1D6) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	var0000 = UI_get_cont_items(UI_get_npc_object(0xFE9C), 0x032A, 0xFE99, 0x0000);
 	if (var0000)
 	{
@@ -3563,7 +3549,7 @@ void Func01DF shape#(0x1DF) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0001)
 	{
 		var0000 = Func0931(0xFE9B, 0x0001, 0x0304, 0xFE99, 0xFE99);
@@ -3712,7 +3698,6 @@ extern void Func0942 0x942 (var var0000, var var0001);
 
 void Func01E1 shape#(0x1E1) ()
 {
-	var var0000;
 	if ((event == 0x0001) || (event == 0x0002))
 	{
 		Func0942(item, 0x01B3);
@@ -3723,7 +3708,7 @@ void Func01E1 shape#(0x1E1) ()
 void Func01EF shape#(0x1EF) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		UI_item_say(0xFE9C, "@Here kitty, kitty@");
@@ -3732,11 +3717,11 @@ void Func01EF shape#(0x1EF) ()
 		UI_set_oppressor(item, 0xFE9C);
 		if (UI_npc_nearby(0xFFFD))
 		{
-			script 0xFFFD after 4 ticks
+			var0000 = script 0xFFFD after 4 ticks
 			{
 				nohalt;
 				say "@I hate cats.@";
-			}
+			};
 		}
 	}
 	if (event == 0x0000)
@@ -3749,7 +3734,7 @@ void Func01EF shape#(0x1EF) ()
 void Func01F0 shape#(0x1F0) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		UI_item_say(0xFE9C, "@Good doggy.@");
@@ -3777,22 +3762,22 @@ void Func01F4 shape#(0x1F4) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_party_list();
 		for (var0003 in var0000 with var0001 to var0002)
 		{
-			script var0003 after UI_die_roll(0x0001, 0x000A) ticks
+			var0004 = script var0003 after UI_die_roll(0x0001, 0x000A) ticks
 			{
 				nohalt;
 				say "@Moo!@";
-			}
-			script var0003 after UI_die_roll(0x0015, 0x001E) ticks
+			};
+			var0004 = script var0003 after UI_die_roll(0x0015, 0x001E) ticks
 			{
 				nohalt;
 				say "@Moo!@";
-			}
+			};
 		}
 	}
 	if (event == 0x0000)
@@ -3808,7 +3793,7 @@ extern var Func090A 0x90A ();
 void Func01F7 shape#(0x1F7) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		if (UI_in_usecode(item))
@@ -3823,7 +3808,7 @@ void Func01F7 shape#(0x1F7) ()
 			if (Func090A())
 			{
 				var0000 = UI_remove_party_items(0x0001, 0x0284, 0xFE99, 0xFE99, 0xFE99);
-				script item
+				var0000 = script item
 				{
 					nohalt;
 					frame 0;
@@ -3832,8 +3817,8 @@ void Func01F7 shape#(0x1F7) ()
 						next frame cycle;
 					};
 					frame 0;
-				}
-				script item
+				};
+				var0000 = script item
 				{
 					nohalt;
 					wait 11;
@@ -3847,7 +3832,7 @@ void Func01F7 shape#(0x1F7) ()
 					sfx 83;
 					wait 2;
 					sfx 85;
-				}
+				};
 			}
 			UI_remove_npc_face(0xFFD4);
 		}
@@ -3876,7 +3861,7 @@ void Func01F8 shape#(0x1F8) ()
 	var var000C;
 	var var000D;
 	var var000E;
-	var var000F;
+
 	if (event == 0x0001)
 	{
 		return;
@@ -3949,7 +3934,7 @@ void Func01F8 shape#(0x1F8) ()
 			{
 				if (UI_get_item_quality(var0009) == 0x000A)
 				{
-					script var0009
+					var000A = script var0009
 					{
 						frame 4;
 						sfx 33;
@@ -3958,7 +3943,7 @@ void Func01F8 shape#(0x1F8) ()
 							previous frame cycle;
 						};
 						call Func03A7;
-					}
+					};
 				}
 			}
 			return;
@@ -4020,7 +4005,7 @@ extern void Func0639 object#(0x639) ();
 void Func01FA shape#(0x1FA) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0002)
 	{
 		UI_show_npc_face(0xFFE6, 0x0000);
@@ -4038,7 +4023,6 @@ void Func01FA shape#(0x1FA) ()
 
 void Func020A shape#(0x20A) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		UI_item_say(item, "Locked");
@@ -4054,7 +4038,7 @@ void Func020E shape#(0x20E) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if ((event == 0x0001) || (event == 0x0002))
 	{
 		var0000 = UI_find_nearby(item, 0x01B8, 0x000A, 0x0080);
@@ -4080,7 +4064,6 @@ extern void Func0500 object#(0x500) ();
 
 void Func0216 shape#(0x216) ()
 {
-	var var0000;
 	item->Func0500();
 	return;
 }
@@ -4096,7 +4079,7 @@ void Func0247 shape#(0x247) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if ((event == 0x0001) && (!UI_get_container(item)))
 	{
 		var0000 = UI_get_object_position(item);
@@ -4125,17 +4108,17 @@ void Func0247 shape#(0x247) ()
 	}
 	if (event == 0x0007)
 	{
-		script 0xFE9C
+		var0001 = script 0xFE9C
 		{
 			face north;
 			actor frame bowing;
 			actor frame standing;
-		}
-		script item
+		};
+		var0001 = script item
 		{
 			wait 2;
 			call Func0247;
-		}
+		};
 	}
 	if (event == 0x0002)
 	{
@@ -4150,7 +4133,6 @@ extern void Func0942 0x942 (var var0000, var var0001);
 
 void Func0253 shape#(0x253) ()
 {
-	var var0000;
 	if ((event == 0x0001) || (event == 0x0002))
 	{
 		Func0942(item, 0x02BD);
@@ -4163,7 +4145,6 @@ extern void Func0813 0x813 (var var0000, var var0001, var var0002);
 
 void Func0268 shape#(0x268) ()
 {
-	var var0000;
 	Func0813(item, 0x0001, 0x005A);
 	return;
 }
@@ -4178,7 +4159,7 @@ void Func0269 shape#(0x269) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -4504,7 +4485,7 @@ void Func026F shape#(0x26F) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0001)
 	{
 		if (!UI_is_readied(0xFE9C, 0x0001, 0x026F, 0xFE99))
@@ -4560,22 +4541,22 @@ void Func026F shape#(0x26F) ()
 		if ((var0005 >= 0x000D) && (var0005 <= 0x000F))
 		{
 			UI_item_say(var0007, "@The sword is not heated.@");
-			script var0007
+			var0009 = script var0007
 			{
 				face var0008;
-			}
+			};
 		}
 		if ((var0005 == 0x0008) || (var0005 == 0x0009))
 		{
 			UI_item_say(var0007, "@The sword is too cool.@");
-			script var0007
+			var0009 = script var0007
 			{
 				face var0008;
-			}
+			};
 		}
 		if ((var0005 >= 0x000A) && (var0005 <= 0x000C))
 		{
-			script var0007
+			var0009 = script var0007
 			{
 				face var0008;
 				actor frame ready;
@@ -4583,13 +4564,13 @@ void Func026F shape#(0x26F) ()
 				actor frame strike_1h;
 				actor frame ready;
 				actor frame standing;
-			}
+			};
 			var0002 = UI_find_nearest(UI_get_npc_object(0xFE9C), 0x03DF, 0x0003);
-			script var0002
+			var0009 = script var0002
 			{
 				wait 4;
 				call Func0691;
-			}
+			};
 		}
 	}
 	return;
@@ -4625,7 +4606,7 @@ void Func0270 shape#(0x270) ()
 	var var0014;
 	var var0015;
 	var var0016;
-	var var0017;
+
 	if (event == 0x0001)
 	{
 		if (!UI_is_readied(0xFE9C, 0x0001, 0x0270, 0xFE99))
@@ -4666,7 +4647,7 @@ void Func0270 shape#(0x270) ()
 				var000A = Func092D(var0008);
 			}
 		}
-		script 0xFE9C
+		var000B = script 0xFE9C
 		{
 			face var000A;
 			actor frame raise_1h;
@@ -4678,7 +4659,7 @@ void Func0270 shape#(0x270) ()
 			actor frame strike_1h;
 			wait 1;
 			call Func0270;
-		}
+		};
 	}
 	if (event == 0x0002)
 	{
@@ -4742,7 +4723,7 @@ void Func0273 shape#(0x273) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -4826,7 +4807,7 @@ void Func0275 shape#(0x275) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -4835,7 +4816,7 @@ void Func0275 shape#(0x275) ()
 	{
 		var0000 = item;
 	}
-	script 0xFE9C
+	var0001 = script 0xFE9C
 	{
 		nohalt;
 		actor frame ready;
@@ -4843,7 +4824,7 @@ void Func0275 shape#(0x275) ()
 		actor frame strike_2h;
 		attack;
 		actor frame ready;
-	}
+	};
 	var0001 = UI_set_to_attack(0xFE9C, var0000, 0x0275);
 	return;
 }
@@ -4852,7 +4833,7 @@ void Func0276 shape#(0x276) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -4862,7 +4843,7 @@ void Func0276 shape#(0x276) ()
 		var0000 = item;
 	}
 	UI_halt_scheduled(0xFE9C);
-	script 0xFE9C
+	var0001 = script 0xFE9C
 	{
 		nohalt;
 		actor frame ready;
@@ -4870,7 +4851,7 @@ void Func0276 shape#(0x276) ()
 		actor frame strike_2h;
 		attack;
 		actor frame ready;
-	}
+	};
 	var0001 = UI_set_to_attack(0xFE9C, var0000, 0x0276);
 	return;
 }
@@ -4886,7 +4867,7 @@ void Func0281 shape#(0x281) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -4924,11 +4905,9 @@ void Func0281 shape#(0x281) ()
 					if (var0004 == var0000)
 					{
 						var0005 = true;
+						break;
 					}
-					else
-					{
-						var0004 = UI_get_container(var0004);
-					}
+					var0004 = UI_get_container(var0004);
 				}
 				if (var0005)
 				{
@@ -4952,7 +4931,7 @@ void Func0282 shape#(0x282) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		var0000 = 0x0089;
@@ -5856,7 +5835,7 @@ extern void Func0933 0x933 (var var0000, var var0001, var var0002);
 void Func0284 shape#(0x284) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		UI_close_gumps();
@@ -5894,7 +5873,7 @@ extern void Func08FF 0x8FF (var var0000);
 void Func0285 shape#(0x285) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		var0000 = ("@I believe that the current exchange rate is " + "ten crowns per nugget at the mint in Britian.@");
@@ -5909,7 +5888,7 @@ extern void Func08FF 0x8FF (var var0000);
 void Func0286 shape#(0x286) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		var0000 = ("@I believe the current exchange rate is " + "one hundred crowns per bar at the Britannian mint.@");
@@ -5925,7 +5904,7 @@ extern void Func0925 0x925 (var var0000);
 void Func0288 shape#(0x288) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -5954,7 +5933,7 @@ void Func0289 shape#(0x289) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -5991,13 +5970,13 @@ void Func0289 shape#(0x289) ()
 			Func0835(var0000, 0x0001, var0002);
 			Func0835(var0000, 0x0002, var0003);
 			UI_play_sound_effect2(0x0048, item);
-			script var0000
+			var0004 = script var0000
 			{
 				nohalt;
 				wait 1 hours;
 				call Func0603;
 				sfx 71;
-			}
+			};
 			UI_remove_item(item);
 		}
 		else
@@ -6019,7 +5998,7 @@ void Func028A shape#(0x28A) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_object_position(0xFE9C);
@@ -6065,25 +6044,25 @@ void Func028B shape#(0x28B) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0007)
 	{
 		var0000 = UI_find_nearby(0xFE9C, 0x0369, 0x0001, 0x0000);
 		var0001 = 0x0000;
 		if (UI_get_array_size(var0000) > 0x0000)
 		{
-			script 0xFE9C
+			var0002 = script 0xFE9C
 			{
 				face west;
 				repeat 12
 				{
 					actor frame sitting;
 				};
-			}
+			};
 			var0001 = 0x0003;
 		}
 		UI_halt_scheduled(item);
-		script item after var0001 ticks
+		var0002 = script item after var0001 ticks
 		{
 			frame 0;
 			repeat 12
@@ -6093,7 +6072,7 @@ void Func028B shape#(0x28B) ()
 				sfx 6;
 			};
 			call Func028B;
-		}
+		};
 		return;
 	}
 	if (event == 0x0002)
@@ -6129,7 +6108,6 @@ extern void Func0809 0x809 (var var0000);
 
 void Func028C shape#(0x28C) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		Func0809(item);
@@ -6148,7 +6126,7 @@ void Func028D shape#(0x28D) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_container(item);
@@ -6201,7 +6179,7 @@ void Func028E shape#(0x28E) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_container(item);
@@ -6247,7 +6225,7 @@ void Func0291 shape#(0x291) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_item_frame(item);
@@ -6278,7 +6256,7 @@ void Func0292 shape#(0x292) ()
 	var var0005;
 	var var0006;
 	var var0007;
-	var var0008;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_item_frame(item);
@@ -6297,11 +6275,11 @@ void Func0292 shape#(0x292) ()
 					var0003 = UI_update_last_created(var0004);
 					if (var0003)
 					{
-						script item after 60 ticks
+						var0003 = script item after 60 ticks
 						{
 							nohalt;
 							call Func0292;
-						}
+						};
 						if (UI_die_roll(0x0001, 0x0002) == 0x0001)
 						{
 							Func08FE("@Do not over cook it!@");
@@ -6347,7 +6325,6 @@ extern void Func0809 0x809 (var var0000);
 
 void Func0294 shape#(0x294) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		Func0809(item);
@@ -6371,16 +6348,16 @@ void Func0296 shape#(0x296) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if ((event == 0x0001) || (event == 0x0004))
 	{
 		UI_close_gumps();
 		var0000 = UI_click_on_item();
-		script 0xFE9C
+		var0001 = script 0xFE9C
 		{
 			actor frame strike_1h;
 			actor frame standing;
-		}
+		};
 		if (!UI_is_water([var0000[0x0002], var0000[0x0003], var0000[0x0004]]))
 		{
 			UI_flash_mouse(0x0000);
@@ -6483,7 +6460,7 @@ void Func029C shape#(0x29C) ()
 	var var000A;
 	var var000B;
 	var var000C;
-	var var000D;
+
 	if (event == 0x0001)
 	{
 		if (UI_is_readied(0xFE9C, 0x0001, 0x026F, 0xFE99))
@@ -6529,30 +6506,30 @@ void Func029C shape#(0x29C) ()
 			}
 			else
 			{
-				script item
+				var0008 = script item
 				{
 					wait 2;
 					call Func029C;
-				}
+				};
 			}
 		}
 	}
 	if (event == 0x0007)
 	{
 		var0009 = Func092D(item);
-		script UI_get_npc_object(0xFE9C)
+		var0008 = script UI_get_npc_object(0xFE9C)
 		{
 			face var0009;
 			actor frame bowing;
 			wait 3;
 			actor frame standing;
 			call Func029C;
-		}
-		script item
+		};
+		var0008 = script item
 		{
 			wait 3;
 			call Func0717;
-		}
+		};
 	}
 	if (event == 0x0002)
 	{
@@ -6597,50 +6574,50 @@ void Func029C shape#(0x29C) ()
 	if (event == 0x0008)
 	{
 		var0009 = Func092D(item);
-		script UI_get_npc_object(0xFE9C)
+		var0008 = script UI_get_npc_object(0xFE9C)
 		{
 			face var0009;
 			actor frame bowing;
 			wait 3;
 			actor frame standing;
-		}
+		};
 		var000A = UI_get_cont_items(UI_get_npc_object(0xFE9C), 0x029C, 0xFE99, 0xFE99);
-		script var000A
+		var0008 = script var000A
 		{
 			wait 3;
 			call Func068B;
-		}
+		};
 	}
 	if (event == 0x0009)
 	{
 		var0009 = Func092D(item);
-		script UI_get_npc_object(0xFE9C)
+		var0008 = script UI_get_npc_object(0xFE9C)
 		{
 			face var0009;
 			actor frame bowing;
 			wait 3;
 			actor frame standing;
-		}
+		};
 		var000A = UI_get_cont_items(UI_get_npc_object(0xFE9C), 0x029C, 0xFE99, 0xFE99);
-		script var000A
+		var0008 = script var000A
 		{
 			wait 3;
 			call Func068C;
-		}
+		};
 	}
 	if (event == 0x000A)
 	{
 		var0009 = Func092D(item);
-		script UI_get_npc_object(0xFE9C)
+		var0008 = script UI_get_npc_object(0xFE9C)
 		{
 			face var0009;
 			actor frame bowing;
-		}
-		script item
+		};
+		var0008 = script item
 		{
 			wait 5;
 			call Func068D;
-		}
+		};
 	}
 	return;
 }
@@ -6653,7 +6630,7 @@ void Func02A3 shape#(0x2A3) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_item_frame(item);
@@ -6670,26 +6647,26 @@ void Func02A3 shape#(0x2A3) ()
 			{
 				if (UI_get_item_frame(var0001) == 0x000A)
 				{
-					script var0001
+					var0002 = script var0001
 					{
 						nohalt;
 						say "@I will tell!@";
-					}
-					script var0001 after 16 ticks
+					};
+					var0002 = script var0001 after 16 ticks
 					{
 						nohalt;
 						say "@The treasure is at@";
-					}
-					script var0001 after 32 ticks
+					};
+					var0002 = script var0001 after 32 ticks
 					{
 						nohalt;
 						say "@169 South@";
-					}
-					script var0001 after 48 ticks
+					};
+					var0002 = script var0001 after 48 ticks
 					{
 						nohalt;
 						say "@28 East@";
-					}
+					};
 				}
 			}
 		}
@@ -6698,65 +6675,65 @@ void Func02A3 shape#(0x2A3) ()
 			var0003 = UI_die_roll(0x0001, 0x0007);
 			if (var0003 == 0x0001)
 			{
-				script item
+				var0002 = script item
 				{
 					nohalt;
 					say "@Squawk!@";
-				}
+				};
 			}
 			if (var0003 == 0x0002)
 			{
-				script item
+				var0002 = script item
 				{
 					nohalt;
 					say "@Polly want a cracker?@";
-				}
+				};
 			}
 			if ((var0003 == 0x0003) || (var0003 == 0x0004))
 			{
-				script item
+				var0002 = script item
 				{
 					nohalt;
 					say "@I know where@";
-				}
-				script item after 16 ticks
+				};
+				var0002 = script item after 16 ticks
 				{
 					nohalt;
 					say "@the treasure is!@";
-				}
+				};
 			}
 			if (var0003 == 0x0005)
 			{
-				script item
+				var0002 = script item
 				{
 					nohalt;
 					say "@Gimmee a cracker!@";
-				}
+				};
 			}
 			if ((var0003 == 0x0006) || (var0003 == 0x0007))
 			{
-				script item
+				var0002 = script item
 				{
 					nohalt;
 					say "@Pretty bird!@";
-				}
+				};
 				if (UI_npc_nearby(0xFFFE))
 				{
-					script UI_get_npc_object(0xFFFE) after 16 ticks
+					var0002 = script UI_get_npc_object(0xFFFE) after 16 ticks
 					{
 						nohalt;
 						say "@Ugly Bird!@";
-					}
-					script item after 32 ticks
+					};
+					var0002 = script item after 32 ticks
 					{
 						nohalt;
 						say "@Ugly Boy!@";
-					}
-					script UI_get_npc_object(0xFFFE) after 48 ticks
+					};
+					var0002 = script UI_get_npc_object(0xFFFE) after 48 ticks
 					{
 						nohalt;
 						say "@Hey!!@";
-					}
+					};
 				}
 			}
 		}
@@ -6764,7 +6741,7 @@ void Func02A3 shape#(0x2A3) ()
 		{
 			if (!UI_in_usecode(item))
 			{
-				script item
+				var0002 = script item
 				{
 					repeat 12
 					{
@@ -6774,13 +6751,13 @@ void Func02A3 shape#(0x2A3) ()
 						frame 19;
 					};
 					frame 18;
-				}
+				};
 				if (UI_npc_nearby(0xFFFE))
 				{
-					script UI_get_npc_object(0xFFFE) after 4 ticks
+					var0002 = script UI_get_npc_object(0xFFFE) after 4 ticks
 					{
 						say "@That is really weird.@";
-					}
+					};
 				}
 			}
 		}
@@ -6792,13 +6769,13 @@ void Func02A3 shape#(0x2A3) ()
 		}
 		if (var0000 == 0x0014)
 		{
-			script item
+			var0002 = script item
 			{
 				repeat 4
 				{
 					sfx 23;
 				};
-			}
+			};
 		}
 	}
 	return;
@@ -6808,7 +6785,7 @@ void Func02A6 shape#(0x2A6) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_item_frame(item);
@@ -6828,7 +6805,6 @@ void Func02A6 shape#(0x2A6) ()
 
 void Func02B1 shape#(0x2B1) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		UI_play_music(0x0039, item);
@@ -6838,7 +6814,6 @@ void Func02B1 shape#(0x2B1) ()
 
 void Func02B2 shape#(0x2B2) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		UI_play_music(0x0038, item);
@@ -6848,7 +6823,6 @@ void Func02B2 shape#(0x2B2) ()
 
 void Func02B3 shape#(0x2B3) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		UI_play_music(0x003A, item);
@@ -6858,7 +6832,6 @@ void Func02B3 shape#(0x2B3) ()
 
 void Func02B4 shape#(0x2B4) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		UI_play_music(0x003B, item);
@@ -6872,7 +6845,7 @@ void Func02B5 shape#(0x2B5) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_play_music(0x0037, item);
@@ -6894,7 +6867,6 @@ extern void Func00FC shape#(0xFC) ();
 
 void Func02B7 shape#(0x2B7) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		item->Func00FC();
@@ -6907,7 +6879,6 @@ extern void Func0800 0x800 (var var0000);
 
 void Func02B8 shape#(0x2B8) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		Func0800(item);
@@ -6922,7 +6893,7 @@ void Func02BA shape#(0x2BA) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -6949,7 +6920,7 @@ void Func02BD shape#(0x2BD) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if ((event == 0x0001) || (event == 0x0002))
 	{
 		Func0839(item, 0x0253, event);
@@ -6957,13 +6928,13 @@ void Func02BD shape#(0x2BD) ()
 	if (event == 0x0007)
 	{
 		var0000 = Func0827(0xFE9C, item);
-		script 0xFE9C
+		var0001 = script 0xFE9C
 		{
 			face var0000;
 			continue;
 			actor frame strike_2h;
 			actor frame standing;
-		}
+		};
 		Func0839(item, 0x0253, event);
 	}
 	if (event == 0x0005)
@@ -6995,7 +6966,7 @@ void Func02BE shape#(0x2BE) ()
 	var var000B;
 	var var000C;
 	var var000D;
-	var var000E;
+
 	if (event == 0x0001)
 	{
 		UI_close_gumps();
@@ -7048,11 +7019,11 @@ void Func02BE shape#(0x2BE) ()
 		var0008 = UI_get_item_frame(item);
 		if (var0007 == 0x02C0)
 		{
-			script item after 1 ticks
+			var0009 = script item after 1 ticks
 			{
 				nohalt;
 				call Func02C0;
-			}
+			};
 			return;
 		}
 		if ((var0007 == 0x0178) || (var0007 == 0x010E))
@@ -7079,7 +7050,7 @@ void Func02C0 shape#(0x2C0) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if ((event == 0x0001) || (event == 0x0002))
 	{
 		var0000 = UI_get_container(item);
@@ -7099,7 +7070,7 @@ extern void Func03DE shape#(0x3DE) ();
 void Func02C3 shape#(0x2C3) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		item->Func06F6();
@@ -7109,11 +7080,11 @@ void Func02C3 shape#(0x2C3) ()
 		if (UI_get_item_shape(item) == 0x03DE)
 		{
 			UI_fade_palette(0x000C, 0x0001, 0x0000);
-			script item
+			var0000 = script item
 			{
 				wait 3;
 				call Func03DE;
-			}
+			};
 		}
 	}
 	return;
@@ -7123,7 +7094,7 @@ void Func02C4 shape#(0x2C4) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_item_frame(item);
@@ -7153,7 +7124,7 @@ void Func02C5 shape#(0x2C5) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_object_position(item);
@@ -7178,7 +7149,7 @@ void Func02CB shape#(0x2CB) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event != 0x0001)
 	{
 		return;
@@ -7615,7 +7586,7 @@ void Func02CF shape#(0x2CF) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	var0000 = UI_get_cont_items(UI_get_npc_object(0xFE9C), 0x032A, 0xFE99, 0x0001);
 	if (var0000)
 	{
@@ -7642,7 +7613,7 @@ extern var Func0908 0x908 ();
 void Func02D3 shape#(0x2D3) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		var0000 = Func0908();
@@ -7673,12 +7644,12 @@ void Func02D5 shape#(0x2D5) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if ((event == 0x0001) && (!UI_in_usecode(item)))
 	{
 		var0000 = UI_die_roll(0x0001, 0x0010);
 		UI_halt_scheduled(item);
-		script item
+		var0001 = script item
 		{
 			repeat var0000
 			{
@@ -7714,7 +7685,7 @@ void Func02D5 shape#(0x2D5) ()
 			next frame cycle;
 			sfx 29;
 			call Func060A;
-		}
+		};
 		if ((UI_game_hour() >= 0x000F) || (UI_game_hour() <= 0x0003))
 		{
 			if (Func0937(0xFF18))
@@ -7735,7 +7706,6 @@ void Func02D5 shape#(0x2D5) ()
 
 void Func02D8 shape#(0x2D8) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		if (UI_npc_nearby(0xFFFE))
@@ -7756,7 +7726,7 @@ void Func02D9 shape#(0x2D9) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_close_gumps();
@@ -7820,7 +7790,7 @@ void Func02DA shape#(0x2DA) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		if (UI_get_item_frame(item) == 0x0002)
@@ -7854,7 +7824,7 @@ void Func02DE shape#(0x2DE) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		if (!UI_in_usecode(item))
@@ -7862,14 +7832,14 @@ void Func02DE shape#(0x2DE) ()
 			if (UI_get_item_frame(item) < 0x0005)
 			{
 				UI_set_item_frame(item, 0x0000);
-				script item
+				var0000 = script item
 				{
 					repeat 4
 					{
 						sfx 35;
 						next frame cycle;
 					};
-				}
+				};
 			}
 			else
 			{
@@ -7877,7 +7847,7 @@ void Func02DE shape#(0x2DE) ()
 				var0001 = UI_get_item_frame(item);
 				if (var0001 < 0x000B)
 				{
-					script item
+					var0000 = script item
 					{
 						repeat 1
 						{
@@ -7885,17 +7855,17 @@ void Func02DE shape#(0x2DE) ()
 							next frame cycle;
 						};
 						sfx 35;
-					}
+					};
 				}
 				if (var0001 == 0x000B)
 				{
-					script item
+					var0000 = script item
 					{
 						sfx 35;
 						frame 12;
 						sfx 35;
 						frame 0;
-					}
+					};
 				}
 				if (var0001 == 0x000C)
 				{
@@ -7914,7 +7884,7 @@ extern void Func08FF 0x8FF (var var0000);
 void Func02DF shape#(0x2DF) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		var0000 = (("@I believe those are for the trainers to use.*" + "If thou art in need of practice, why not ") + "seek out a trainer?@");
@@ -7925,7 +7895,6 @@ void Func02DF shape#(0x2DF) ()
 
 void Func02E3 shape#(0x2E3) ()
 {
-	var var0000;
 	return;
 }
 
@@ -7938,7 +7907,7 @@ void Func02E4 shape#(0x2E4) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	var0000 = UI_get_cont_items(UI_get_npc_object(0xFE9C), 0x032A, 0xFE99, 0x0000);
 	if (var0000)
 	{
@@ -7961,7 +7930,7 @@ void Func02E5 shape#(0x2E5) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	var0000 = UI_get_cont_items(UI_get_npc_object(0xFE9C), 0x032A, 0xFE99, 0x0001);
 	if (var0000)
 	{
@@ -7987,7 +7956,6 @@ extern var Func0937 0x937 (var var0000);
 
 void Func02E6 shape#(0x2E6) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		if (UI_npc_nearby(0xFFFE) && Func0937(0xFFFE))
@@ -8011,7 +7979,7 @@ void Func02E7 shape#(0x2E7) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_close_gumps();
@@ -8023,13 +7991,13 @@ void Func02E7 shape#(0x2E7) ()
 	if (event == 0x0007)
 	{
 		var0003 = Func0827(0xFE9C, item);
-		script 0xFE9C
+		var0004 = script 0xFE9C
 		{
 			face var0003;
 			continue;
 			actor frame bowing;
 			actor frame standing;
-		}
+		};
 		var0005 = UI_get_npc_prop(0xFE9C, 0x0000);
 		if ((var0005 >= 0x0000) && (var0005 < 0x0004))
 		{
@@ -8077,22 +8045,22 @@ void Func02E7 shape#(0x2E7) ()
 		}
 		if (var0005 > 0x0007)
 		{
-			script item after (var0005 + 0x0001) ticks
+			var0004 = script item after (var0005 + 0x0001) ticks
 			{
 				nohalt;
 				sfx 24;
-			}
+			};
 			if (UI_npc_nearby(0xFFD4) && Func0937(0xFFD4))
 			{
-				script 0xFFD4 after 15 ticks
+				var0004 = script 0xFFD4 after 15 ticks
 				{
 					nohalt;
 					say "@Avatar wins a Dragon!@";
-				}
+				};
 				var0004 = UI_add_party_items(0x0001, 0x02E6, 0xFE99, 0x0000, false);
 			}
 		}
-		script item
+		var0004 = script item
 		{
 			frame 0;
 			sfx 4;
@@ -8105,14 +8073,13 @@ void Func02E7 shape#(0x2E7) ()
 				previous frame;
 			};
 			frame 0;
-		}
+		};
 	}
 	return;
 }
 
 void Func02E8 shape#(0x2E8) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		UI_wizard_eye(0x2710, 0x03E8);
@@ -8122,7 +8089,6 @@ void Func02E8 shape#(0x2E8) ()
 
 void Func02E9 shape#(0x2E9) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		UI_play_music(0x003A, item);
@@ -8136,7 +8102,7 @@ void Func02EB shape#(0x2EB) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_item_frame(item);
@@ -8177,7 +8143,7 @@ extern void Func0490 object#(0x490) ();
 void Func02F0 shape#(0x2F0) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_item_frame(item);
@@ -8214,7 +8180,7 @@ void Func02F2 shape#(0x2F2) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		if (UI_get_item_frame(item) == 0x0005)
@@ -8228,7 +8194,7 @@ void Func02F2 shape#(0x2F2) ()
 					var0002 = UI_find_nearby(item, 0x02EB, 0x0028, 0x0000);
 					if (var0002)
 					{
-						script var0002
+						var0003 = script var0002
 						{
 							frame 1;
 							sfx 45;
@@ -8239,16 +8205,16 @@ void Func02F2 shape#(0x2F2) ()
 							};
 							sfx 9;
 							remove;
-						}
+						};
 						var0004 = UI_get_object_position(var0002);
 						UI_sprite_effect(0x000C, (var0004[0x0001] - 0x0002), (var0004[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, 0xFFFF);
 						UI_remove_item(item);
 					}
-					script 0xFE9C
+					var0003 = script 0xFE9C
 					{
 						wait 28;
 						call Func02F2;
-					}
+					};
 				}
 			}
 		}
@@ -8275,7 +8241,6 @@ extern void Func0809 0x809 (var var0000);
 
 void Func02F5 shape#(0x2F5) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		Func0809(item);
@@ -8302,7 +8267,7 @@ void Func02F8 shape#(0x2F8) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	var0000 = UI_get_item_frame(item);
 	if (event == 0x0001)
 	{
@@ -8347,11 +8312,11 @@ void Func02F8 shape#(0x2F8) ()
 							return;
 						}
 						UI_close_gumps();
-						script item
+						var0003 = script item
 						{
 							wait 2;
 							call Func02F8;
-						}
+						};
 					}
 				}
 			}
@@ -8373,7 +8338,7 @@ void Func02F8 shape#(0x2F8) ()
 	if (event == 0x0007)
 	{
 		var0007 = Func092D(item);
-		script UI_get_npc_object(0xFE9C)
+		var0003 = script UI_get_npc_object(0xFE9C)
 		{
 			face var0007;
 			wait 2;
@@ -8383,20 +8348,20 @@ void Func02F8 shape#(0x2F8) ()
 			wait 2;
 			actor frame strike_1h;
 			sfx 37;
-		}
-		script item
+		};
+		var0003 = script item
 		{
 			wait 10;
 			frame 9;
-		}
+		};
 		var0008 = UI_get_cont_items(UI_get_npc_object(0xFE9C), 0x02F8, 0xFE99, 0x000C);
-		script var0008
+		var0003 = script var0008
 		{
 			wait 10;
 			frame 13;
 			wait 2;
 			call Func0350;
-		}
+		};
 		gflags[0x0313] = false;
 		gflags[0x0333] = false;
 		return;
@@ -8408,7 +8373,6 @@ extern void Func082F 0x82F ();
 
 void Func02FB shape#(0x2FB) ()
 {
-	var var0000;
 	if ((!UI_in_usecode(item)) && (event == 0x0001))
 	{
 		if ((UI_game_hour() >= 0x000F) || (UI_game_hour() <= 0x0003))
@@ -8427,7 +8391,7 @@ void Func0301 shape#(0x301) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if ((event == 0x0001) || (event == 0x0004))
 	{
 		UI_close_gumps();
@@ -8460,7 +8424,6 @@ extern void Func06E1 object#(0x6E1) ();
 
 void Func0302 shape#(0x302) ()
 {
-	var var0000;
 	if ((event == 0x0001) && Func0906())
 	{
 		UI_close_gumps();
@@ -8483,7 +8446,7 @@ void Func0303 shape#(0x303) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0004)
 	{
 		var0000 = item;
@@ -8499,20 +8462,20 @@ void Func0303 shape#(0x303) ()
 		if (var0001 == 0x0392)
 		{
 			var0002 = Func092D(var0000);
-			script var0000
+			var0003 = script var0000
 			{
 				wait 5;
 				remove;
-			}
+			};
 			var0003 = UI_set_to_attack(0xFE9C, var0000, 0x02C0);
-			script 0xFE9C
+			var0003 = script 0xFE9C
 			{
 				face var0002;
 				continue;
 				actor frame strike_1h;
 				actor frame standing;
 				attack;
-			}
+			};
 		}
 		if (var0001 == 0x0131)
 		{
@@ -8545,7 +8508,6 @@ extern void Func0809 0x809 (var var0000);
 
 void Func0305 shape#(0x305) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		Func0809(item);
@@ -8558,7 +8520,6 @@ extern void Func0809 0x809 (var var0000);
 
 void Func0306 shape#(0x306) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		Func0809(item);
@@ -8572,7 +8533,6 @@ extern var Func0829 0x829 (var var0000);
 
 void Func030D shape#(0x30D) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		if (UI_get_item_flag(item, 0x000A))
@@ -8599,7 +8559,7 @@ void Func030E shape#(0x30E) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		Func08FF("@Perhaps thou shouldst attack with it.@");
@@ -8615,11 +8575,11 @@ void Func030E shape#(0x30E) ()
 			var0003 = UI_update_last_created(var0001);
 			if (var0003)
 			{
-				script var0002 after 100 ticks
+				var0003 = script var0002 after 100 ticks
 				{
 					nohalt;
 					remove;
-				}
+				};
 			}
 			if (var0000[0x0004] == 0x0000)
 			{
@@ -8667,7 +8627,7 @@ void Func0311 shape#(0x311) ()
 	var var000E;
 	var var000F;
 	var var0010;
-	var var0011;
+
 	if (event == 0x0001)
 	{
 		if (gflags[0x0004])
@@ -8718,20 +8678,19 @@ void Func0311 shape#(0x311) ()
 				UI_play_music(0x0033, 0x0000);
 				UI_set_item_flag(var0009, 0x0012);
 				var000A = UI_set_item_quality(var0009, var0002);
-				script var0009
+				var000A = script var0009
 				{
 					frame 0;
 					repeat 10
 					{
-						next frame;
+						next frame cycle;
 					};
 					repeat 5
 					{
 						frame 4;
-						next frame;
 						repeat 5
 						{
-							next frame;
+							next frame cycle;
 						};
 					};
 					frame 4;
@@ -8740,12 +8699,16 @@ void Func0311 shape#(0x311) ()
 						previous frame cycle;
 					};
 					remove;
-				}
+				};
 				var000B = (0x0005 - UI_get_distance(0xFE9C, var0009));
-				var000C = [0x59, (0x30 + var0002)];
+				var000C = new script {
+					face ((byte)0x30 + var0002);
+				};
 				if (var000B > 0x0000)
 				{
-					var000C = (var000C & [0x27, var000B]);
+					var000C = var000C & new script {
+						wait var000B;
+					};
 				}
 				var000A = UI_execute_usecode_array(0xFE9C, var000C);
 				var000D = UI_get_object_position(0xFE9C);
@@ -8827,7 +8790,7 @@ void Func0313 shape#(0x313) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		UI_close_gumps();
@@ -8839,13 +8802,13 @@ void Func0313 shape#(0x313) ()
 	if (event == 0x0007)
 	{
 		var0003 = Func0827(0xFE9C, item);
-		script 0xFE9C
+		var0004 = script 0xFE9C
 		{
 			face var0003;
 			continue;
 			actor frame bowing;
 			actor frame standing;
-		}
+		};
 		Func0816(item);
 	}
 	if (event == 0x0002)
@@ -8875,7 +8838,7 @@ void Func0314 shape#(0x314) ()
 	var var0009;
 	var var000A;
 	var var000B;
-	var var000C;
+
 	if (event == 0x0001)
 	{
 		UI_close_gumps();
@@ -8889,13 +8852,13 @@ void Func0314 shape#(0x314) ()
 		if (event != 0x0002)
 		{
 			var0003 = Func0827(0xFE9C, item);
-			script 0xFE9C
+			var0004 = script 0xFE9C
 			{
 				face var0003;
 				continue;
 				actor frame strike_1h;
 				actor frame standing;
-			}
+			};
 		}
 		var0005 = UI_get_item_frame(item);
 		if ((var0005 % 0x0002) == 0x0000)
@@ -8932,7 +8895,7 @@ extern void Func0925 0x925 (var var0000);
 void Func0316 shape#(0x316) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -8959,7 +8922,6 @@ extern void Func0809 0x809 (var var0000);
 
 void Func031C shape#(0x31C) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		Func0809(item);
@@ -8975,7 +8937,7 @@ void Func031D shape#(0x31D) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	var0000 = UI_get_item_quality(item);
 	if (var0000 == 0x002D)
 	{
@@ -9370,7 +9332,6 @@ void Func031D shape#(0x31D) ()
 
 void Func031E shape#(0x31E) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		UI_set_item_shape(item, 0x031F);
@@ -9389,7 +9350,7 @@ void Func0326 shape#(0x326) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -9473,13 +9434,11 @@ void Func0329 shape#(0x329) ()
 	var var0009;
 	var var000A;
 	var var000B;
-	var var000C;
 
 	if ((event == 0x0001) && (!UI_in_usecode(item)))
 	{
 		UI_close_gumps();
-		Func083C(0x0000/*stack underflow*/);
-		var0000 = Func083A();
+		var0000 = Func083C(Func083A());
 		if ((UI_game_hour() >= 0x000F) || (UI_game_hour() <= 0x0003))
 		{
 			for (var0003 in var0000 with var0001 to var0002)
@@ -9505,7 +9464,7 @@ void Func0329 shape#(0x329) ()
 					{
 						var000A = (UI_die_roll(0x0000, 0x0002) * 0x0008);
 						UI_halt_scheduled(var0009);
-						script var0009
+						var000B = script var0009
 						{
 							repeat 22
 							{
@@ -9518,7 +9477,7 @@ void Func0329 shape#(0x329) ()
 								sfx 29;
 							};
 							call Func060B;
-						}
+						};
 					}
 				}
 			}
@@ -9575,7 +9534,7 @@ void Func032A shape#(0x32A) ()
 	var var0020;
 	var var0021;
 	var var0022;
-	var var0023;
+
 	if (event == 0x0001)
 	{
 		UI_close_gumps();
@@ -9601,11 +9560,11 @@ void Func032A shape#(0x32A) ()
 		else
 		{
 			UI_close_gumps();
-			script item
+			var0004 = script item
 			{
 				wait 2;
 				call Func032A;
-			}
+			};
 		}
 	}
 	if (event == 0x0003)
@@ -9614,37 +9573,37 @@ void Func032A shape#(0x32A) ()
 		var0005 = Func092D(var0003);
 		if (UI_is_npc(var0003))
 		{
-			script UI_get_npc_object(0xFE9C)
+			var0004 = script UI_get_npc_object(0xFE9C)
 			{
 				face var0005;
 				actor frame ready;
 				wait 3;
 				actor frame standing;
-			}
-			script item
+			};
+			var0004 = script item
 			{
 				wait 3;
 				call Func0692;
 				wait 2;
 				call Func032A;
-			}
+			};
 		}
 		else
 		{
-			script UI_get_npc_object(0xFE9C)
+			var0004 = script UI_get_npc_object(0xFE9C)
 			{
 				face var0005;
 				actor frame bowing;
 				wait 3;
 				actor frame standing;
-			}
-			script item
+			};
+			var0004 = script item
 			{
 				wait 3;
 				call Func0692;
 				wait 2;
 				call Func032A;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -9667,10 +9626,10 @@ void Func032A shape#(0x32A) ()
 				else
 				{
 					UI_item_say(UI_get_npc_object(0xFE9C), "@Ahhh, how refreshing.@");
-					script item
+					var0004 = script item
 					{
 						frame 0;
-					}
+					};
 				}
 			}
 			return;
@@ -9685,13 +9644,13 @@ void Func032A shape#(0x32A) ()
 			}
 			else
 			{
-				script var0006
+				var0004 = script var0006
 				{
 					repeat 50
 					{
 						wait 1;
 					};
-				}
+				};
 				Func0828(var0006, var0001, var0002, 0x0000, 0x032A, var0006, 0x0004);
 			}
 		}
@@ -9816,36 +9775,36 @@ void Func032A shape#(0x32A) ()
 		var000C = ((var000B + 0x0004) % 0x0008);
 		if (var0000 == 0x0002)
 		{
-			script item
+			var000D = script item
 			{
 				face var000C;
 				wait 2;
 				say "@Foul miscreant!@";
 				wait 5;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var000D = script item
 			{
 				face var000C;
 				wait 2;
 				say "@Hey, stop that!@";
 				wait 5;
-			}
+			};
 		}
-		script UI_get_npc_object(0xFE9C)
+		var000E = script UI_get_npc_object(0xFE9C)
 		{
 			face var000B;
 			actor frame strike_1h;
 			actor frame ready;
 			actor frame standing;
-		}
-		script var000A
+		};
+		var000F = script var000A
 		{
 			wait 2;
 			frame 0;
-		}
+		};
 	}
 	if (event == 0x0007)
 	{
@@ -9890,25 +9849,25 @@ void Func032A shape#(0x32A) ()
 				}
 			}
 			var0005 = Func092D(var0010);
-			script UI_get_npc_object(0xFE9C)
+			var000E = script UI_get_npc_object(0xFE9C)
 			{
 				face var0005;
 				actor frame bowing;
 				wait 2;
 				actor frame standing;
-			}
-			script var0010
+			};
+			var0014 = script var0010
 			{
 				wait 2;
 				frame var0012;
 				continue;
 				sfx 40;
-			}
-			script item
+			};
+			var000F = script item
 			{
 				wait 2;
 				frame var0013;
-			}
+			};
 		}
 	}
 	if (event == 0x0008)
@@ -9926,42 +9885,42 @@ void Func032A shape#(0x32A) ()
 			}
 			else if (var0015 == 0x0007)
 			{
-				script item
+				var0016 = script item
 				{
 					call Func0693;
 					continue;
 					previous frame cycle;
 					previous frame cycle;
 					previous frame cycle;
-				}
+				};
 			}
 			if (var0015 == 0x0006)
 			{
-				script item
+				var0016 = script item
 				{
 					call Func0693;
 					continue;
 					previous frame cycle;
 					previous frame cycle;
-				}
+				};
 			}
 			if (var0015 == 0x0005)
 			{
-				script item
+				var0016 = script item
 				{
 					call Func0693;
 					continue;
 					previous frame cycle;
-				}
+				};
 			}
 			var0005 = Func092D(item);
-			script UI_get_npc_object(0xFE9C)
+			var000E = script UI_get_npc_object(0xFE9C)
 			{
 				face var0005;
 				actor frame bowing;
 				wait 2;
 				actor frame standing;
-			}
+			};
 		}
 		if ((var0007 == 0x0152) || ((var0007 == 0x01B3) || (var0007 == 0x02BD)))
 		{
@@ -9970,7 +9929,7 @@ void Func032A shape#(0x32A) ()
 			{
 				var0018 = 0x0002;
 				var0005 = Func092D(item);
-				script UI_get_npc_object(0xFE9C)
+				var000E = script UI_get_npc_object(0xFE9C)
 				{
 					face var0005;
 					actor frame strike_1h;
@@ -9978,7 +9937,7 @@ void Func032A shape#(0x32A) ()
 					actor frame standing;
 					wait 1;
 					say "@I can't douse it.@";
-				}
+				};
 			}
 			else
 			{
@@ -10002,13 +9961,13 @@ void Func032A shape#(0x32A) ()
 				UI_set_item_frame(var001B, var0015);
 				var001C = UI_update_last_created(var0017);
 				var0005 = Func092D(item);
-				script UI_get_npc_object(0xFE9C)
+				var000E = script UI_get_npc_object(0xFE9C)
 				{
 					face var0005;
 					actor frame strike_1h;
 					actor frame ready;
 					actor frame standing;
-				}
+				};
 			}
 			if ((var0017[0x0003] == 0x0002) || (var0017[0x0003] == 0x0003))
 			{
@@ -10048,18 +10007,18 @@ void Func032A shape#(0x32A) ()
 			}
 			else
 			{
-				script item
+				var001E = script item
 				{
 					frame 0;
-				}
+				};
 				var0005 = Func092D(item);
-				script UI_get_npc_object(0xFE9C)
+				var000E = script UI_get_npc_object(0xFE9C)
 				{
 					face var0005;
 					actor frame bowing;
 					wait 2;
 					actor frame standing;
-				}
+				};
 				var001F = UI_get_object_position(item);
 				UI_sprite_effect(0x0009, var001F[0x0001], var001F[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x002E);
@@ -10070,13 +10029,13 @@ void Func032A shape#(0x32A) ()
 			if (var0015 == 0x0000)
 			{
 				var0005 = Func092D(item);
-				script UI_get_npc_object(0xFE9C)
+				var000E = script UI_get_npc_object(0xFE9C)
 				{
 					face var0005;
 					actor frame bowing;
 					wait 2;
 					actor frame standing;
-				}
+				};
 				UI_set_item_frame(item, 0x0002);
 			}
 		}
@@ -10093,7 +10052,7 @@ void Func032A shape#(0x32A) ()
 		{
 			var0021 = 0x000D;
 		}
-		script var0020
+		var0022 = script var0020
 		{
 			wait 1;
 			frame var0021;
@@ -10107,8 +10066,8 @@ void Func032A shape#(0x32A) ()
 			next frame cycle;
 			wait 1;
 			next frame cycle;
-		}
-		script UI_get_npc_object(0xFE9C)
+		};
+		var000E = script UI_get_npc_object(0xFE9C)
 		{
 			face east;
 			actor frame strike_1h;
@@ -10123,27 +10082,27 @@ void Func032A shape#(0x32A) ()
 			wait 1;
 			actor frame strike_1h;
 			wait 4;
-		}
-		script item
+		};
+		var000F = script item
 		{
 			wait 17;
 			call Func0695;
-		}
+		};
 	}
 	if (event == 0x000A)
 	{
-		script UI_get_npc_object(0xFE9C)
+		var000E = script UI_get_npc_object(0xFE9C)
 		{
 			face north;
 			actor frame bowing;
 			wait 3;
 			actor frame standing;
-		}
-		script item
+		};
+		var000F = script item
 		{
 			wait 3;
 			call Func0694;
-		}
+		};
 	}
 	return;
 }
@@ -10170,7 +10129,7 @@ void Func0334 shape#(0x334) ()
 	var var0009;
 	var var000A;
 	var var000B;
-	var var000C;
+
 	var0000 = item;
 	var0001 = UI_get_item_quality(var0000);
 	if (event == 0x0003)
@@ -10247,312 +10206,305 @@ void Func0334 shape#(0x334) ()
 	{
 		var000A = "This is not a valid plaque ";
 	}
-	else
+	else if (var0001 == 0x0000)
 	{
-		if (var0001 == 0x0000)
+		var000A = ["important", "event", "to|be", "recorded", "here"];
+	}
+	else if (var0001 == 0x0001)
+	{
+		var000A = ["tomb|of", "kronos", "forgotten", "but|not", "forgiven"];
+	}
+	else if (var0001 == 0x0002)
+	{
+		var000A = ["royal", "(+tre"];
+	}
+	else if (var0001 == 0x0003)
+	{
+		var000A = ["FELLOWSHIP", "HALL"];
+	}
+	else if (var0001 == 0x0004)
+	{
+		var000A = ["TEST", "OF", "STRENGTH"];
+	}
+	else if (var0001 == 0x0005)
+	{
+		var000A = ["MEDITATION", "RETREAT"];
+	}
+	else if (var0001 == 0x0006)
+	{
+		var000A = ["SHRINE OF", "THE CODEX"];
+	}
+	else if (var0001 == 0x0007)
+	{
+		var000A = ["hammer", "here", "to", "enter"];
+	}
+	else if (var0001 == 0x0008)
+	{
+		var000A = ["pick|item", "carefully", "to|k)p", "goi*"];
+		Func08FF(["By Jove, I think thou art on the right track!", "The sign appears to have changed!", "Look at it now!"]);
+	}
+	else if (var0001 == 0x0009)
+	{
+		var000A = ["a|golden", "ring|of", "tru(", "faces|()"];
+	}
+	else if (var0001 == 0x000A)
+	{
+		var000A = ["grasp", "not", "at", "(r+ds"];
+	}
+	else if (var0001 == 0x000B)
+	{
+		var000A = ["(e", "royal|mint", "shall|not", "hold|()", "back"];
+	}
+	else if (var0001 == 0x000C)
+	{
+		var000A = "GO THIS WAY";
+	}
+	else if (var0001 == 0x000D)
+	{
+		var000A = ["DO NOT", "GO", "THIS WAY"];
+	}
+	else if (var0001 == 0x000E)
+	{
+		var000A = ["DO NOT GO", "IN", "THE", "WOODEN DOOR"];
+	}
+	else if (var0001 == 0x000F)
+	{
+		var000A = ["DO NOT", "GO IN", "THE", "WINDOWED", "DOOR"];
+	}
+	else if (var0001 == 0x0010)
+	{
+		var000A = ["GO", "IN", "THE", "STEEL", "DOOR"];
+	}
+	else if (var0001 == 0x0011)
+	{
+		var000A = ["DO NOT", "GO", "IN THE", "GREEN DOOR"];
+	}
+	else if (var0001 == 0x0012)
+	{
+		var000A = ["ONLY", "ONE", "OF THESE", "SIGNS", "IS TRUE"];
+	}
+	else if (var0001 == 0x0013)
+	{
+		var000A = ["AT LEAST", "TWO SIGNS", "ARE", "FALSE"];
+	}
+	else if (var0001 == 0x0014)
+	{
+		var000A = ["NATIONAL", "BRANCH"];
+	}
+	else if (var0001 == 0x0015)
+	{
+		var000A = ["ART THOU", "AN", "AVATAR?"];
+	}
+	else if (var0001 == 0x0016)
+	{
+		var000A = ["RESERVE", "THY", "SEATS", "NOW!"];
+	}
+	else if (var0001 == 0x0017)
+	{
+		var000A = ["THE BONES OF", "ZOG:", "EARLIEST", "BRITANNIAN", "FOSSIL"];
+	}
+	else if (var0001 == 0x0018)
+	{
+		var000A = ["SWAMP BOOTS", "ONCE WORN", "BY THE", "AVATAR"];
+	}
+	else if (var0001 == 0x0019)
+	{
+		var000A = ["MANITTZI'S", "HARPSICORD", "USED WHILE", "COMPOSING"];
+	}
+	else if (var0001 == 0x001A)
+	{
+		var000A = ["|ANIA", "OF", "SPRING|"];
+	}
+	else if (var0001 == 0x001B)
+	{
+		var000A = ["|marney|", "skara|braes", "fine,", "flower"];
+	}
+	else if (var0001 == 0x001C)
+	{
+		var000A = ["(e", "wayfarers", "inn"];
+	}
+	else if (var0001 == 0x001D)
+	{
+		var000A = ["(e", "blue", "boar"];
+	}
+	else if (var0001 == 0x001E)
+	{
+		var000A = ["royal", "museum"];
+	}
+	else if (var0001 == 0x001F)
+	{
+		var000A = ["(e", "music", "hall"];
+	}
+	else if (var0001 == 0x0020)
+	{
+		var000A = ["town", "hall"];
+	}
+	else if (var0001 == 0x0021)
+	{
+		var000A = ["royal", "mint"];
+	}
+	else if (var0001 == 0x0022)
+	{
+		var000A = ["THE", "THRONE", "OF", "MANY", "CHANGES"];
+	}
+	else if (var0001 == 0x0023)
+	{
+		var000A = ["THE", "THRONE", "OF", "VIRTUE"];
+	}
+	else if (var0001 == 0x0024)
+	{
+		var000A = ["LORD", "BRITISH'S", "MUSKET"];
+	}
+	else if (var0001 == 0x0025)
+	{
+		var000A = ["THE", "STONES", "OF", "VIRTUE"];
+	}
+	else if (var0001 == 0x0026)
+	{
+		var000A = ["SILVER", "HORN", "ONCE USED", "BY THE", "GARGOYLES"];
+	}
+	else if (var0001 == 0x0027)
+	{
+		var000A = ["TO SUMMON", "THE", "SILVER", "SNAKES"];
+	}
+	else if (var0001 == 0x0028)
+	{
+		var000A = ["THE ANKH", "", "SYMBOL OF", "THE", "VIRTUES"];
+	}
+	else if (var0001 == 0x0029)
+	{
+		var000A = ["LORD", "BRITISH"];
+	}
+	else if (var0001 == 0x002A)
+	{
+		var000A = ["THE", "AVATAR"];
+	}
+	else if (var0001 == 0x002B)
+	{
+		var000A = ["THE", "VORTEX", "CUBE"];
+	}
+	else if (var0001 == 0x002C)
+	{
+		var000A = ["THE", "RUNES", "OF", "THE", "VIRTUES"];
+	}
+	else if (var0001 == 0x002D)
+	{
+		var000A = ["(e", "game", "of", "knights", "bridge"];
+	}
+	else if (var0001 == 0x002E)
+	{
+		var000A = ["DO NOT", "ENTER"];
+	}
+	else if (var0001 == 0x002F)
+	{
+		var000A = ["blow", "horn", "to", "summon", "ferry"];
+	}
+	else if (var0001 == 0x0030)
+	{
+		var0008 = UI_get_object_position(item);
+		var000B = UI_get_object_position(0xFFE9);
+		if ((Func0932((var0008[0x0001] - var000B[0x0001])) <= 0x0002) && (Func0932((var0008[0x0002] - var000B[0x0002])) <= 0x0002))
 		{
-			var000A = ["important", "event", "to|be", "recorded", "here"];
-		}
-		else if (var0001 == 0x0001)
-		{
-			var000A = ["tomb|of", "kronos", "forgotten", "but|not", "forgiven"];
-		}
-		else if (var0001 == 0x0002)
-		{
-			var000A = ["royal", "(+tre"];
-		}
-		else if (var0001 == 0x0003)
-		{
-			var000A = ["FELLOWSHIP", "HALL"];
-		}
-		else if (var0001 == 0x0004)
-		{
-			var000A = ["TEST", "OF", "STRENGTH"];
-		}
-		else if (var0001 == 0x0005)
-		{
-			var000A = ["MEDITATION", "RETREAT"];
-		}
-		else if (var0001 == 0x0006)
-		{
-			var000A = ["SHRINE OF", "THE CODEX"];
-		}
-		else if (var0001 == 0x0007)
-		{
-			var000A = ["hammer", "here", "to", "enter"];
-		}
-		else if (var0001 == 0x0008)
-		{
-			var000A = ["pick|item", "carefully", "to|k)p", "goi*"];
-			Func08FF(["By Jove, I think thou art on the right track!", "The sign appears to have changed!", "Look at it now!"]);
-		}
-		else if (var0001 == 0x0009)
-		{
-			var000A = ["a|golden", "ring|of", "tru(", "faces|()"];
-		}
-		else if (var0001 == 0x000A)
-		{
-			var000A = ["grasp", "not", "at", "(r+ds"];
-		}
-		else if (var0001 == 0x000B)
-		{
-			var000A = ["(e", "royal|mint", "shall|not", "hold|()", "back"];
-		}
-		else if (var0001 == 0x000C)
-		{
-			var000A = "GO THIS WAY";
-		}
-		else if (var0001 == 0x000D)
-		{
-			var000A = ["DO NOT", "GO", "THIS WAY"];
-		}
-		else if (var0001 == 0x000E)
-		{
-			var000A = ["DO NOT GO", "IN", "THE", "WOODEN DOOR"];
-		}
-		else if (var0001 == 0x000F)
-		{
-			var000A = ["DO NOT", "GO IN", "THE", "WINDOWED", "DOOR"];
-		}
-		else if (var0001 == 0x0010)
-		{
-			var000A = ["GO", "IN", "THE", "STEEL", "DOOR"];
-		}
-		else if (var0001 == 0x0011)
-		{
-			var000A = ["DO NOT", "GO", "IN THE", "GREEN DOOR"];
-		}
-		else if (var0001 == 0x0012)
-		{
-			var000A = ["ONLY", "ONE", "OF THESE", "SIGNS", "IS TRUE"];
-		}
-		else if (var0001 == 0x0013)
-		{
-			var000A = ["AT LEAST", "TWO SIGNS", "ARE", "FALSE"];
-		}
-		else if (var0001 == 0x0014)
-		{
-			var000A = ["NATIONAL", "BRANCH"];
-		}
-		else if (var0001 == 0x0015)
-		{
-			var000A = ["ART THOU", "AN", "AVATAR?"];
-		}
-		else if (var0001 == 0x0016)
-		{
-			var000A = ["RESERVE", "THY", "SEATS", "NOW!"];
-		}
-		else if (var0001 == 0x0017)
-		{
-			var000A = ["THE BONES OF", "ZOG:", "EARLIEST", "BRITANNIAN", "FOSSIL"];
-		}
-		else if (var0001 == 0x0018)
-		{
-			var000A = ["SWAMP BOOTS", "ONCE WORN", "BY THE", "AVATAR"];
-		}
-		else if (var0001 == 0x0019)
-		{
-			var000A = ["MANITTZI'S", "HARPSICORD", "USED WHILE", "COMPOSING"];
-		}
-		else if (var0001 == 0x001A)
-		{
-			var000A = ["|ANIA", "OF", "SPRING|"];
-		}
-		else if (var0001 == 0x001B)
-		{
-			var000A = ["|marney|", "skara|braes", "fine,", "flower"];
-		}
-		else if (var0001 == 0x001C)
-		{
-			var000A = ["(e", "wayfarers", "inn"];
-		}
-		else if (var0001 == 0x001D)
-		{
-			var000A = ["(e", "blue", "boar"];
-		}
-		else if (var0001 == 0x001E)
-		{
-			var000A = ["royal", "museum"];
-		}
-		else if (var0001 == 0x001F)
-		{
-			var000A = ["(e", "music", "hall"];
-		}
-		else if (var0001 == 0x0020)
-		{
-			var000A = ["town", "hall"];
-		}
-		else if (var0001 == 0x0021)
-		{
-			var000A = ["royal", "mint"];
-		}
-		else if (var0001 == 0x0022)
-		{
-			var000A = ["THE", "THRONE", "OF", "MANY", "CHANGES"];
-		}
-		else if (var0001 == 0x0023)
-		{
-			var000A = ["THE", "THRONE", "OF", "VIRTUE"];
-		}
-		else if (var0001 == 0x0024)
-		{
-			var000A = ["LORD", "BRITISH'S", "MUSKET"];
-		}
-		else if (var0001 == 0x0025)
-		{
-			var000A = ["THE", "STONES", "OF", "VIRTUE"];
-		}
-		else if (var0001 == 0x0026)
-		{
-			var000A = ["SILVER", "HORN", "ONCE USED", "BY THE", "GARGOYLES"];
-		}
-		else if (var0001 == 0x0027)
-		{
-			var000A = ["TO SUMMON", "THE", "SILVER", "SNAKES"];
-		}
-		else if (var0001 == 0x0028)
-		{
-			var000A = ["THE ANKH", "", "SYMBOL OF", "THE", "VIRTUES"];
-		}
-		else if (var0001 == 0x0029)
-		{
-			var000A = ["LORD", "BRITISH"];
-		}
-		else if (var0001 == 0x002A)
-		{
-			var000A = ["THE", "AVATAR"];
-		}
-		else if (var0001 == 0x002B)
-		{
-			var000A = ["THE", "VORTEX", "CUBE"];
-		}
-		else if (var0001 == 0x002C)
-		{
-			var000A = ["THE", "RUNES", "OF", "THE", "VIRTUES"];
-		}
-		else if (var0001 == 0x002D)
-		{
-			var000A = ["(e", "game", "of", "knights", "bridge"];
-		}
-		else if (var0001 == 0x002E)
-		{
-			var000A = ["DO NOT", "ENTER"];
-		}
-		else if (var0001 == 0x002F)
-		{
-			var000A = ["blow", "horn", "to", "summon", "ferry"];
-		}
-		else if (var0001 == 0x0030)
-		{
-			var0008 = UI_get_object_position(item);
-			var000B = UI_get_object_position(0xFFE9);
-			if ((Func0932((var0008[0x0001] - var000B[0x0001])) <= 0x0002) && (Func0932((var0008[0x0002] - var000B[0x0002])) <= 0x0002))
+			var0007 = script item
 			{
-				script item
-				{
-					call Func0609;
-					call Func0609;
-					call Func0609;
-					remove;
-				}
-				script 0xFFE9
-				{
-					wait 3;
-					sfx 19;
-					actor frame standing;
-					actor frame kneeling;
-					sfx 86;
-					continue;
-					actor frame sleeping;
-					call Func0334;
-				}
-				Func08FE(["", "@He's dead, Avatar!@", "@Yancey-Hausman will pay!@"]);
-				script 0xFE9C
-				{
-					nohalt;
-					speech 26;
-				}
-				return;
-			}
-			else
+				call Func0609;
+				call Func0609;
+				call Func0609;
+				remove;
+			};
+			var0007 = script 0xFFE9
 			{
-				var000A = ["THE", "THRONE", "ROOM", "OF", "LORD", "BRITISH"];
-			}
-		}
-		else if (var0001 == 0x0031)
-		{
-			var000A = ["SEE IF", "THOU ART", "THE NEXT", "LORD OF", "BRITANNIA"];
-		}
-		else if (var0001 == 0x0032)
-		{
-			var000A = ["in", "lovi*", "memory", "of", "mama"];
-		}
-		else if (var0001 == 0x0033)
-		{
-			var000A = ["BEWARE", "THE", "DRAGON"];
-		}
-		else if (var0001 == 0x0034)
-		{
-			var000A = ["for", "(e", "love", "of", "marney"];
-		}
-		else if (var0001 == 0x0035)
-		{
-			var000A = ["|j|r|r|t|", "a|gr+t", "man", "a|gr+t", "writer"];
-		}
-		else if (var0001 == 0x0036)
-		{
-			var000A = ["THE", "BRITANNIAN", "LENS"];
-		}
-		else if (var0001 == 0x0037)
-		{
-			var000A = ["THE", "GARGOYLE", "LENS"];
-		}
-		else if (var0001 == 0x0038)
-		{
-			var000A = ["EX", "POR"];
-		}
-		else if (var0001 == 0x0039)
-		{
-			var000A = ["(e", "te,", "of", "love"];
-		}
-		else if (var0001 == 0x003A)
-		{
-			var000A = ["(e", "te,", "of", "courage"];
-		}
-		else if (var0001 == 0x003B)
-		{
-			var000A = ["nor(", "is", "(e", "way"];
-		}
-		else if (var0001 == 0x003C)
-		{
-			var000A = ["tru(", "is", "tru("];
-		}
-		else if (var0001 == 0x003D)
-		{
-			var000A = ["only", "app+rances", "are", "deceptive"];
-		}
-		else if (var0001 == 0x003E)
-		{
-			var000A = ["well", "done"];
-		}
-		else if (var0001 == 0x003F)
-		{
-			var000A = ["(e", "keys", "of", "tru("];
-		}
-		else if (var0001 == 0x0040)
-		{
-			var000A = ["tru,|not", "always|(e", "obvious", "path"];
-		}
-		else if (var0001 == 0x0041)
-		{
-			var000A = ["(ou", "do,|not", "wish|to", "see|(is"];
+				wait 3;
+				sfx 19;
+				actor frame standing;
+				actor frame kneeling;
+				sfx 86;
+				continue;
+				actor frame sleeping;
+				call Func0334;
+			};
+			Func08FE(["", "@He's dead, Avatar!@", "@Yancey-Hausman will pay!@"]);
+			var0007 = script 0xFE9C
+			{
+				nohalt;
+				speech 26;
+			};
+			return;
 		}
 		else
 		{
-			UI_display_runes(0x0033, var000A);
-			return;
+			var000A = ["THE", "THRONE", "ROOM", "OF", "LORD", "BRITISH"];
 		}
 	}
+	else if (var0001 == 0x0031)
+	{
+		var000A = ["SEE IF", "THOU ART", "THE NEXT", "LORD OF", "BRITANNIA"];
+	}
+	else if (var0001 == 0x0032)
+	{
+		var000A = ["in", "lovi*", "memory", "of", "mama"];
+	}
+	else if (var0001 == 0x0033)
+	{
+		var000A = ["BEWARE", "THE", "DRAGON"];
+	}
+	else if (var0001 == 0x0034)
+	{
+		var000A = ["for", "(e", "love", "of", "marney"];
+	}
+	else if (var0001 == 0x0035)
+	{
+		var000A = ["|j|r|r|t|", "a|gr+t", "man", "a|gr+t", "writer"];
+	}
+	else if (var0001 == 0x0036)
+	{
+		var000A = ["THE", "BRITANNIAN", "LENS"];
+	}
+	else if (var0001 == 0x0037)
+	{
+		var000A = ["THE", "GARGOYLE", "LENS"];
+	}
+	else if (var0001 == 0x0038)
+	{
+		var000A = ["EX", "POR"];
+	}
+	else if (var0001 == 0x0039)
+	{
+		var000A = ["(e", "te,", "of", "love"];
+	}
+	else if (var0001 == 0x003A)
+	{
+		var000A = ["(e", "te,", "of", "courage"];
+	}
+	else if (var0001 == 0x003B)
+	{
+		var000A = ["nor(", "is", "(e", "way"];
+	}
+	else if (var0001 == 0x003C)
+	{
+		var000A = ["tru(", "is", "tru("];
+	}
+	else if (var0001 == 0x003D)
+	{
+		var000A = ["only", "app+rances", "are", "deceptive"];
+	}
+	else if (var0001 == 0x003E)
+	{
+		var000A = ["well", "done"];
+	}
+	else if (var0001 == 0x003F)
+	{
+		var000A = ["(e", "keys", "of", "tru("];
+	}
+	else if (var0001 == 0x0040)
+	{
+		var000A = ["tru,|not", "always|(e", "obvious", "path"];
+	}
+	else if (var0001 == 0x0041)
+	{
+		var000A = ["(ou", "do,|not", "wish|to", "see|(is"];
+	}
+	UI_display_runes(0x0033, var000A);
 }
 
 // externs
@@ -10564,7 +10516,7 @@ void Func0336 shape#(0x336) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_item_frame(item);
@@ -10625,7 +10577,7 @@ void Func0337 shape#(0x337) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_item_frame(item);
@@ -10704,7 +10656,7 @@ void Func033B shape#(0x33B) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -10764,7 +10716,7 @@ extern var Func081F 0x81F (var var0000);
 void Func033C shape#(0x33C) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event != 0x0001)
 	{
 		return;
@@ -10783,7 +10735,7 @@ extern void Func08FF 0x8FF (var var0000);
 void Func0345 shape#(0x345) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		var0000 = (("@Thou shouldst use the brush and pigments, " + Func0908()) + ".@");
@@ -10798,7 +10750,7 @@ extern void Func0269 shape#(0x269) ();
 void Func0347 shape#(0x347) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_item_frame(item);
@@ -10824,7 +10776,7 @@ void Func0348 shape#(0x348) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	var0000 = UI_get_barge(item);
 	if ((event == 0x0001) && (!(var0000 == 0x0000)))
 	{
@@ -10846,14 +10798,14 @@ void Func0348 shape#(0x348) ()
 		{
 			UI_clear_item_flag(item, 0x000A);
 			UI_clear_item_flag(item, 0x001A);
-			script var0000
+			var0001 = script var0000
 			{
 				repeat 10
 				{
 					descent;
 					nop;
 				};
-			}
+			};
 			UI_play_music(0x00FF, 0x0000);
 		}
 		else
@@ -10869,7 +10821,6 @@ extern void Func0813 0x813 (var var0000, var var0001, var var0002);
 
 void Func034A shape#(0x34A) ()
 {
-	var var0000;
 	if (UI_get_item_frame(item) == 0x0004)
 	{
 		Func0813(item, 0x0002, 0x005B);
@@ -10883,7 +10834,7 @@ extern var Func0820 0x820 (var var0000);
 void Func034D shape#(0x34D) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event != 0x0001)
 	{
 		return;
@@ -10902,15 +10853,16 @@ void Func0350 shape#(0x350) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_item_frame(item);
 		if (var0000 == 0x0003)
 		{
-			script item
+			var0001 = script item
 			{
 				sfx 67;
+				continue;
 				repeat 4
 				{
 					next frame cycle;
@@ -10918,7 +10870,7 @@ void Func0350 shape#(0x350) ()
 				};
 				wait 2;
 				call Func06F6;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -10935,7 +10887,7 @@ extern void Func08FF 0x8FF (var var0000);
 void Func0353 shape#(0x353) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		var0000 = (("@That appears to be fine cloth, no doubt it would fetch " + "a fair price in Minoc. Or, perhapse, thou couldst cut ") + "it into bandages with shears.@");
@@ -10957,7 +10909,7 @@ void Func0356 shape#(0x356) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0001)
 	{
 		if (gflags[0x0317])
@@ -10995,11 +10947,11 @@ void Func0356 shape#(0x356) ()
 			{
 				message("\"Very well. Prepare thyself.\" The voice falls silent.*");
 				say();
-				script item
+				var0001 = script item
 				{
 					wait 1;
 					call Func06F9;
-				}
+				};
 			}
 			else
 			{
@@ -11087,7 +11039,7 @@ void Func0356 shape#(0x356) ()
 			say();
 		}
 		UI_remove_npc_face(0xFEE1);
-		script UI_get_npc_object(0xFE9C)
+		var0002 = script UI_get_npc_object(0xFE9C)
 		{
 			wait 2;
 			actor frame bowing;
@@ -11097,12 +11049,12 @@ void Func0356 shape#(0x356) ()
 			actor frame bowing;
 			wait 2;
 			actor frame standing;
-		}
-		script item
+		};
+		var0001 = script item
 		{
 			wait 8;
 			call Func0356;
-		}
+		};
 	}
 	if (event == 0x0002)
 	{
@@ -11127,11 +11079,11 @@ void Func0356 shape#(0x356) ()
 					var0005 = UI_set_npc_prop(UI_get_npc_object(0xFE9C), 0x0005, (0x001E - var0004[0x0003]));
 				}
 				gflags[0x0318] = true;
-				script item
+				var0006 = script item
 				{
 					wait 15;
 					call Func0356;
-				}
+				};
 			}
 			else
 			{
@@ -11162,11 +11114,11 @@ void Func0356 shape#(0x356) ()
 					var0005 = UI_set_npc_prop(UI_get_npc_object(0xFE9C), 0x0004, (0x001E - var0004[0x0002]));
 				}
 				gflags[0x0327] = true;
-				script item
+				var0006 = script item
 				{
 					wait 15;
 					call Func0356;
-				}
+				};
 			}
 			else
 			{
@@ -11197,11 +11149,11 @@ void Func0356 shape#(0x356) ()
 					var0005 = UI_set_npc_prop(UI_get_npc_object(0xFE9C), 0x0003, (0x001E - var0004[0x0002]));
 				}
 				gflags[0x0341] = true;
-				script item
+				var0006 = script item
 				{
 					wait 15;
 					call Func0356;
-				}
+				};
 			}
 			else
 			{
@@ -11231,7 +11183,7 @@ void Func035F shape#(0x35F) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_item_frame(item);
@@ -11294,7 +11246,7 @@ extern void Func080A 0x80A (var var0000, var var0001);
 void Func0369 shape#(0x369) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_container(item);
@@ -11312,7 +11264,6 @@ extern void Func0833 0x833 (var var0000, var var0001);
 
 void Func036C shape#(0x36C) ()
 {
-	var var0000;
 	if (event == 0x0002)
 	{
 		UI_set_item_shape(item, 0x036C);
@@ -11339,7 +11290,7 @@ void Func0378 shape#(0x378) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		if (UI_get_item_frame(item) == 0x0001)
@@ -11389,7 +11340,7 @@ void Func0379 shape#(0x379) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if ((event == 0x0001) || (event == 0x0002))
 	{
 		var0000 = UI_create_new_object(0x01B8);
@@ -11418,7 +11369,7 @@ void Func037D shape#(0x37D) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_item_quality(item);
@@ -11471,7 +11422,6 @@ extern void Func0832 0x832 (var var0000, var var0001);
 
 void Func03A7 shape#(0x3A7) ()
 {
-	var var0000;
 	if (event == 0x0002)
 	{
 		UI_set_item_shape(item, 0x03A7);
@@ -11491,7 +11441,6 @@ extern void Func0832 0x832 (var var0000, var var0001);
 
 void Func03A8 shape#(0x3A8) ()
 {
-	var var0000;
 	if (event == 0x0002)
 	{
 		UI_set_item_shape(item, 0x03A8);
@@ -11512,7 +11461,7 @@ extern var Func0937 0x937 (var var0000);
 void Func03B0 shape#(0x3B0) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		if (UI_get_item_frame(item))
@@ -11522,10 +11471,10 @@ void Func03B0 shape#(0x3B0) ()
 				UI_item_say(0xFE9C, "ptui!");
 				if (!UI_in_gump_mode())
 				{
-					script item after 3 ticks
+					var0000 = script item after 3 ticks
 					{
 						sfx 24;
-					}
+					};
 				}
 			}
 		}
@@ -11536,7 +11485,7 @@ void Func03B0 shape#(0x3B0) ()
 void Func03B2 shape#(0x3B2) ()
 {
 	var var0000;
-	var var0001;
+
 	var0000 = UI_get_schedule_type(UI_get_npc_object(item));
 	if (event == 0x0000)
 	{
@@ -11572,7 +11521,6 @@ extern void Func083E 0x83E (var var0000, var var0001);
 
 void Func03B5 shape#(0x3B5) ()
 {
-	var var0000;
 	UI_close_gumps();
 	Func083E(item, event);
 	return;
@@ -11583,7 +11531,6 @@ extern void Func083E 0x83E (var var0000, var var0001);
 
 void Func03B6 shape#(0x3B6) ()
 {
-	var var0000;
 	UI_close_gumps();
 	Func083E(item, event);
 	return;
@@ -11598,7 +11545,7 @@ void Func03C8 shape#(0x3C8) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_item_frame(item);
@@ -11632,7 +11579,7 @@ void Func03D5 shape#(0x3D5) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -11662,12 +11609,48 @@ void Func03DB shape#(0x3DB) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_close_gumps();
-		var0000 = [0x46, 0x0000, 0x46, 0x0001, 0x46, 0x0002, 0x58, 0x0011, 0x46, 0x0002, 0x46, 0x0001, 0x46, 0x0000, 0x46, 0x0003, 0x46, 0x0004, 0x58, 0x0011, 0x46, 0x0004, 0x46, 0x0003, 0x46, 0x0000];
-		var0001 = UI_execute_usecode_array(item, (var0000 & [0x0B, 0xFFE6, 0x0002]));
+		// Equivalent code to everything up to, and including, the call
+		// to UI_execute_usecode_array:
+		//var0001 = script item
+		//{
+		//	repeat 2
+		//	{
+		//		frame 0;
+		//		frame 1;
+		//		frame 2;
+		//		sfx 17;
+		//		frame 2;
+		//		frame 1;
+		//		frame 0;
+		//		frame 3;
+		//		frame 4;
+		//		sfx 17;
+		//		frame 4;
+		//		frame 3;
+		//		frame 0;
+		//	};
+		//};
+		var0000 = new script
+		{
+			frame 0;
+			frame 1;
+			frame 2;
+			sfx 17;
+			frame 2;
+			frame 1;
+			frame 0;
+			frame 3;
+			frame 4;
+			sfx 17;
+			frame 4;
+			frame 3;
+			frame 0;
+		};
+		var0001 = UI_execute_usecode_array(item, (var0000 & [(byte)0x0B, 0xFFE6, 0x0002]));
 		if (UI_die_roll(0x0001, 0x000A) == 0x0001)
 		{
 			var0002 = UI_get_object_position(item);
@@ -11691,7 +11674,7 @@ void Func03DB shape#(0x3DB) ()
 void Func03DE shape#(0x3DE) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		if (!gflags[0x0301])
@@ -11701,7 +11684,7 @@ void Func03DE shape#(0x3DE) ()
 			message("You feel as if your mind is being probed, delicately at first, then with more insistance. Images of long past memories flit before your eyes and old emotions resurface. At one point, the images pause as you remember the words Love, Sol, Moons, and Death then a strange sense of deja vu comes over you as the vision comes up to the current time. The images cease and a vast wave of power overwhelms you. A wall of darkness falls...");
 			say();
 			UI_remove_npc_face(0xFE9C);
-			script UI_get_npc_object(0xFE9C)
+			var0000 = script UI_get_npc_object(0xFE9C)
 			{
 				actor frame bowing;
 				wait 1;
@@ -11711,12 +11694,12 @@ void Func03DE shape#(0x3DE) ()
 				{
 					wait 1;
 				};
-			}
-			script item
+			};
+			var0000 = script item
 			{
 				wait 5;
 				call Func02C3;
-			}
+			};
 		}
 		else
 		{
@@ -11728,7 +11711,7 @@ void Func03DE shape#(0x3DE) ()
 	if (event == 0x0002)
 	{
 		UI_fade_palette(0x000C, 0x0001, 0x0001);
-		script UI_get_npc_object(0xFE9C)
+		var0000 = script UI_get_npc_object(0xFE9C)
 		{
 			wait 3;
 			actor frame kneeling;
@@ -11736,7 +11719,7 @@ void Func03DE shape#(0x3DE) ()
 			actor frame bowing;
 			wait 1;
 			actor frame standing;
-		}
+		};
 	}
 	return;
 }
@@ -11750,7 +11733,7 @@ void Func03DF shape#(0x3DF) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		if (UI_is_readied(0xFE9C, 0x0001, 0x026F, 0xFE99))
@@ -11785,12 +11768,48 @@ void Func03E0 shape#(0x3E0) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_close_gumps();
-		var0000 = [0x46, 0x0000, 0x46, 0x0001, 0x46, 0x0002, 0x58, 0x0011, 0x46, 0x0002, 0x46, 0x0001, 0x46, 0x0000, 0x46, 0x0003, 0x46, 0x0004, 0x58, 0x0011, 0x46, 0x0004, 0x46, 0x0003, 0x46, 0x0000];
-		var0001 = UI_execute_usecode_array(item, (var0000 & [0x0B, 0xFFE6, 0x0002]));
+		// Equivalent code to everything up to, and including, the call
+		// to UI_execute_usecode_array:
+		//var0001 = script item
+		//{
+		//	repeat 2
+		//	{
+		//		frame 0;
+		//		frame 1;
+		//		frame 2;
+		//		sfx 17;
+		//		frame 2;
+		//		frame 1;
+		//		frame 0;
+		//		frame 3;
+		//		frame 4;
+		//		sfx 17;
+		//		frame 4;
+		//		frame 3;
+		//		frame 0;
+		//	};
+		//};
+		var0000 = new script
+		{
+			frame 0;
+			frame 1;
+			frame 2;
+			sfx 17;
+			frame 2;
+			frame 1;
+			frame 0;
+			frame 3;
+			frame 4;
+			sfx 17;
+			frame 4;
+			frame 3;
+			frame 0;
+		};
+		var0001 = UI_execute_usecode_array(item, (var0000 & [(byte)0x0B, 0xFFE6, 0x0002]));
 	}
 	return;
 }
@@ -11800,7 +11819,6 @@ extern void Func0800 0x800 (var var0000);
 
 void Func03F3 shape#(0x3F3) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		Func0800(item);
@@ -11812,14 +11830,50 @@ void Func03F5 shape#(0x3F5) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		if (!UI_in_usecode(item))
 		{
-			var0000 = [0x46, 0x0000, 0x46, 0x0001, 0x46, 0x0002, 0x58, 0x0011, 0x46, 0x0002, 0x46, 0x0001, 0x46, 0x0000, 0x46, 0x0003, 0x46, 0x0004, 0x58, 0x0011, 0x46, 0x0004, 0x46, 0x0003, 0x46, 0x0000];
+			// Equivalent code to everything up to, and including, the call
+			// to UI_execute_usecode_array:
+			//var0001 = script item
+			//{
+			//	repeat 2
+			//	{
+			//		frame 0;
+			//		frame 1;
+			//		frame 2;
+			//		sfx 17;
+			//		frame 2;
+			//		frame 1;
+			//		frame 0;
+			//		frame 3;
+			//		frame 4;
+			//		sfx 17;
+			//		frame 4;
+			//		frame 3;
+			//		frame 0;
+			//	};
+			//};
+			var0000 = new script
+			{
+				frame 0;
+				frame 1;
+				frame 2;
+				sfx 17;
+				frame 2;
+				frame 1;
+				frame 0;
+				frame 3;
+				frame 4;
+				sfx 17;
+				frame 4;
+				frame 3;
+				frame 0;
+			};
 			UI_halt_scheduled(item);
-			var0001 = UI_execute_usecode_array(item, (var0000 & [0x0B, 0xFFE6, 0x0002]));
+			var0001 = UI_execute_usecode_array(item, (var0000 & [(byte)0x0B, 0xFFE6, 0x0002]));
 		}
 	}
 	return;
@@ -11842,7 +11896,7 @@ void Func03F7 shape#(0x3F7) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		if (UI_get_cont_items(item, 0x031D, 0x00F3, 0x0004))
@@ -11947,7 +12001,6 @@ extern void Func0269 shape#(0x269) ();
 
 void Func03FD shape#(0x3FD) ()
 {
-	var var0000;
 	UI_get_npc_object(0x0269)->Func0269();
 	return;
 }
@@ -11984,7 +12037,7 @@ void Func0401 object#(0x401) ()
 	var var0010;
 	var var0011;
 	var var0012;
-	var var0013;
+
 	gflags[0x0014] = true;
 	var0000 = Func0908();
 	var0001 = UI_get_party_list();
@@ -11996,58 +12049,58 @@ void Func0401 object#(0x401) ()
 		if ((!gflags[0x003B]) && ((!gflags[0x005C]) && UI_get_item_flag(0xFE9C, 0x0010)))
 		{
 			UI_play_music(0x0023, 0x0000);
-			script UI_get_npc_object(0xFE9C) after 125 ticks
+			var0005 = script UI_get_npc_object(0xFE9C) after 125 ticks
 			{
 				nohalt;
 				call Func06AA;
-			}
-			script UI_get_npc_object(0xFFFF)
+			};
+			var0005 = script UI_get_npc_object(0xFFFF)
 			{
 				nohalt;
 				music 35;
 				continue;
 				say "@There, there...@";
-			}
-			script UI_get_npc_object(0xFFF5) after 16 ticks
+			};
+			var0005 = script UI_get_npc_object(0xFFF5) after 16 ticks
 			{
 				nohalt;
 				say "@'Tis horrible!@";
-			}
-			script UI_get_npc_object(0xFFFF) after 33 ticks
+			};
+			var0005 = script UI_get_npc_object(0xFFFF) after 33 ticks
 			{
 				nohalt;
 				say "@I know, 'tis shocking!@";
-			}
-			script UI_get_npc_object(0xFFF5) after 49 ticks
+			};
+			var0005 = script UI_get_npc_object(0xFFF5) after 49 ticks
 			{
 				nohalt;
 				say "@Who could have done it?@";
-			}
-			script UI_get_npc_object(0xFFFF) after 65 ticks
+			};
+			var0005 = script UI_get_npc_object(0xFFFF) after 65 ticks
 			{
 				nohalt;
 				say "@I know not...@";
-			}
-			script UI_get_npc_object(0xFFF5) after 81 ticks
+			};
+			var0005 = script UI_get_npc_object(0xFFF5) after 81 ticks
 			{
 				nohalt;
 				say "@He had no enemies...@";
-			}
-			script UI_get_npc_object(0xFFFF) after 97 ticks
+			};
+			var0005 = script UI_get_npc_object(0xFFFF) after 97 ticks
 			{
 				nohalt;
 				say "@Poor man.@";
-			}
-			script UI_get_npc_object(0xFFF5) after 113 ticks
+			};
+			var0005 = script UI_get_npc_object(0xFFF5) after 113 ticks
 			{
 				nohalt;
 				say "@What is to be done?@";
-			}
-			script UI_get_npc_object(0xFFFF) after 129 ticks
+			};
+			var0005 = script UI_get_npc_object(0xFFFF) after 129 ticks
 			{
 				nohalt;
 				say "@I know not...@";
-			}
+			};
 			gflags[0x005C] = true;
 			abort;
 		}
@@ -12089,13 +12142,13 @@ void Func0401 object#(0x401) ()
 			message("Iolo takes you aside and whispers, \"Avatar, for the sake of our mutual sanity, I strongly suggest that thou shouldst purchase a mouse.\"");
 			say();
 		}
-		script UI_get_npc_object(0xFE9C) after 5 ticks
+		var0007 = script UI_get_npc_object(0xFE9C) after 5 ticks
 		{
 			nohalt;
 			finish;
 			wait 20;
 			call Func06FA;
-		}
+		};
 		Func08DD();
 		UI_add_to_party(0xFFFF);
 		UI_set_schedule_type(UI_get_npc_object(0xFFF5), 0x0007);
@@ -12104,11 +12157,11 @@ void Func0401 object#(0x401) ()
 		UI_halt_scheduled(UI_get_npc_object(0xFFF5));
 		if (!gflags[0x003B])
 		{
-			script item
+			var0005 = script item
 			{
 				nohalt;
 				music 0;
-			}
+			};
 			gflags[0x003B] = true;
 		}
 		abort;
@@ -12505,7 +12558,7 @@ void Func0402 object#(0x402) ()
 	var var0010;
 	var var0011;
 	var var0012;
-	var var0013;
+
 	if (event == 0x0001)
 	{
 		var0000 = Func0908();
@@ -12996,7 +13049,7 @@ void Func0403 object#(0x403) ()
 	var var0009;
 	var var000A;
 	var var000B;
-	var var000C;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFFD, 0x0000);
@@ -13372,7 +13425,7 @@ void Func0404 object#(0x404) ()
 	var var0011;
 	var var0012;
 	var var0013;
-	var var0014;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFFC, 0x0000);
@@ -13536,9 +13589,10 @@ void Func0404 object#(0x404) ()
 					gflags[0x016D] = false;
 					UI_set_schedule_type(UI_get_npc_object(0xFFFC), 0x000B);
 					abort;
-					UI_add_answer("join");
-					UI_remove_answer("leave");
 				}
+				// Dead code
+				UI_add_answer("join");
+				UI_remove_answer("leave");
 				fallthrough;
 
 			case "Jhelom":
@@ -13767,7 +13821,7 @@ void Func0405 object#(0x405) ()
 	var var000C;
 	var var000D;
 	var var000E;
-	var var000F;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFFB, 0x0000);
@@ -14080,7 +14134,7 @@ void Func0406 object#(0x406) ()
 	var var000D;
 	var var000E;
 	var var000F;
-	var var0010;
+
 	if (event == 0x0001)
 	{
 		var0000 = Func0908();
@@ -14099,10 +14153,7 @@ void Func0406 object#(0x406) ()
 				say();
 				abort;
 			}
-			else
-			{
-				Func08EE();
-			}
+			Func08EE();
 		}
 		UI_add_answer(["name", "job", "bye"]);
 		if (gflags[0x0136])
@@ -14420,7 +14471,7 @@ void Func0407 object#(0x407) ()
 	var var000C;
 	var var000D;
 	var var000E;
-	var var000F;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFF9, 0x0000);
@@ -14713,7 +14764,7 @@ void Func0408 object#(0x408) ()
 	var var000B;
 	var var000C;
 	var var000D;
-	var var000E;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFF8, 0x0000);
@@ -15054,7 +15105,7 @@ void Func0409 object#(0x409) ()
 	var var0009;
 	var var000A;
 	var var000B;
-	var var000C;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFF7, 0x0000);
@@ -15400,7 +15451,7 @@ void Func040A object#(0x40A) ()
 	var var0028;
 	var var0029;
 	var var002A;
-	var var002B;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFF6, 0x0000);
@@ -16180,7 +16231,7 @@ void Func040B object#(0x40B) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		var0000 = Func0909();
@@ -16408,7 +16459,7 @@ void Func040C object#(0x40C) ()
 	var var000C;
 	var var000D;
 	var var000E;
-	var var000F;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFF4, 0x0000);
@@ -16869,7 +16920,7 @@ void Func040D object#(0x40D) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -17048,7 +17099,7 @@ void Func040E object#(0x40E) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -17214,7 +17265,7 @@ void Func040F object#(0x40F) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -17350,7 +17401,7 @@ void Func0410 object#(0x410) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		var0000 = Func0908();
@@ -17581,7 +17632,7 @@ void Func0411 object#(0x411) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFEF, 0x0000);
@@ -17710,7 +17761,7 @@ void Func0412 object#(0x412) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFEE, 0x0000);
@@ -17910,7 +17961,7 @@ void Func0413 object#(0x413) ()
 	var var000C;
 	var var000D;
 	var var000E;
-	var var000F;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_part_of_day();
@@ -18092,7 +18143,7 @@ void Func0414 object#(0x414) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFEC, 0x0000);
@@ -18190,7 +18241,7 @@ void Func0415 object#(0x415) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFEB, 0x0000);
@@ -18465,7 +18516,7 @@ void Func0416 object#(0x416) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFEA, 0x0000);
@@ -18609,7 +18660,7 @@ void Func0417 object#(0x417) ()
 	var var000F;
 	var var0010;
 	var var0011;
-	var var0012;
+
 	var0000 = false;
 	if (event == 0x0001)
 	{
@@ -19139,7 +19190,7 @@ labelFunc0417_0743:
 	{
 		var000B = Func092D(item);
 		var000C = ((var000B + 0x0004) % 0x0008);
-		script item
+		var000D = script item
 		{
 			face var000C;
 			wait 1;
@@ -19150,8 +19201,8 @@ labelFunc0417_0743:
 			wait 2;
 			wait 11;
 			call Func0417;
-		}
-		script UI_get_npc_object(0xFE9C)
+		};
+		var000E = script UI_get_npc_object(0xFE9C)
 		{
 			face var000B;
 			wait 1;
@@ -19162,7 +19213,7 @@ labelFunc0417_0743:
 			actor frame bowing;
 			wait 1;
 			actor frame standing;
-		}
+		};
 	}
 	if (event == 0x0002)
 	{
@@ -19216,7 +19267,7 @@ void Func0418 object#(0x418) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -19372,7 +19423,7 @@ void Func0419 object#(0x419) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFE7, 0x0000);
@@ -19601,7 +19652,7 @@ void Func041A object#(0x41A) ()
 	var var000B;
 	var var000C;
 	var var000D;
-	var var000E;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFE6, 0x0000);
@@ -19665,11 +19716,11 @@ void Func041A object#(0x41A) ()
 						message("\"Thou art too encumbered to receive thy Fellowship medallion. Thou must lighten thy load.\"*");
 						say();
 					}
-					script item
+					var0003 = script item
 					{
 						nohalt;
 						speech 23;
-					}
+					};
 					abort;
 				}
 				else
@@ -20144,7 +20195,7 @@ void Func041B object#(0x41B) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFE5, 0x0000);
@@ -20382,7 +20433,7 @@ void Func041C object#(0x41C) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_is_pc_female();
@@ -20533,7 +20584,7 @@ void Func041D object#(0x41D) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFE3, 0x0000);
@@ -20667,7 +20718,7 @@ void Func041E object#(0x41E) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFE2, 0x0000);
@@ -20818,7 +20869,7 @@ void Func041F object#(0x41F) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFE1, 0x0000);
@@ -20944,7 +20995,7 @@ void Func0420 object#(0x420) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFE0, 0x0000);
@@ -21057,7 +21108,7 @@ void Func0421 object#(0x421) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFDF, 0x0000);
@@ -21204,7 +21255,7 @@ void Func0422 object#(0x422) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFDE, 0x0000);
@@ -21392,7 +21443,7 @@ void Func0423 object#(0x423) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFDD, 0x0000);
@@ -21540,7 +21591,7 @@ void Func0424 object#(0x424) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFDC, 0x0000);
@@ -21658,7 +21709,7 @@ void Func0425 object#(0x425) ()
 	var var0005;
 	var var0006;
 	var var0007;
-	var var0008;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFDB, 0x0000);
@@ -21879,7 +21930,7 @@ void Func0426 object#(0x426) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFDA, 0x0000);
@@ -22069,7 +22120,7 @@ void Func0427 object#(0x427) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFD9, 0x0000);
@@ -22163,7 +22214,7 @@ void Func0428 object#(0x428) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFD8, 0x0000);
@@ -22296,7 +22347,7 @@ void Func0429 object#(0x429) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFD7, 0x0000);
@@ -22505,7 +22556,7 @@ void Func042A object#(0x42A) ()
 	var var000D;
 	var var000E;
 	var var000F;
-	var var0010;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFD6, 0x0000);
@@ -22719,7 +22770,7 @@ void Func042B object#(0x42B) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFD5, 0x0000);
@@ -22966,7 +23017,7 @@ void Func042C object#(0x42C) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFD4, 0x0000);
@@ -23141,10 +23192,10 @@ void Func042C object#(0x42C) ()
 					say();
 					var0006 = UI_find_nearby_avatar(0x01F7);
 					UI_halt_scheduled(var0006[0x0001]);
-					script var0006[0x0001] after 15 ticks
+					var0007 = script var0006[0x0001] after 15 ticks
 					{
 						call Func01F7;
-					}
+					};
 				}
 				UI_remove_answer("see");
 				abort;
@@ -23211,7 +23262,7 @@ void Func042D object#(0x42D) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFD3, 0x0000);
@@ -23468,7 +23519,7 @@ void Func042E object#(0x42E) ()
 	var var0009;
 	var var000A;
 	var var000B;
-	var var000C;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFD2, 0x0000);
@@ -23692,7 +23743,7 @@ void Func042F object#(0x42F) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFD1, 0x0000);
@@ -23836,7 +23887,7 @@ void Func0430 object#(0x430) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -24005,7 +24056,7 @@ void Func0431 object#(0x431) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFCF, 0x0000);
@@ -24104,7 +24155,7 @@ void Func0432 object#(0x432) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFCE, 0x0000);
@@ -24261,7 +24312,7 @@ void Func0433 object#(0x433) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFCD, 0x0000);
@@ -24443,7 +24494,7 @@ void Func0434 object#(0x434) ()
 	var var000C;
 	var var000D;
 	var var000E;
-	var var000F;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFCC, 0x0000);
@@ -24764,7 +24815,7 @@ void Func0435 object#(0x435) ()
 	var var0009;
 	var var000A;
 	var var000B;
-	var var000C;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFCB, 0x0000);
@@ -24973,7 +25024,7 @@ void Func0436 object#(0x436) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFCA, 0x0000);
@@ -25203,7 +25254,7 @@ void Func0437 object#(0x437) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFC9, 0x0000);
@@ -25395,7 +25446,7 @@ void Func0438 object#(0x438) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFC8, 0x0000);
@@ -25553,7 +25604,7 @@ void Func0439 object#(0x439) ()
 	var var0009;
 	var var000A;
 	var var000B;
-	var var000C;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFC7, 0x0000);
@@ -25795,7 +25846,7 @@ void Func043A object#(0x43A) ()
 	var var0008;
 	var var0009;
 	var var000A;
-	var var000B;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFC6, 0x0000);
@@ -26043,7 +26094,7 @@ void Func043B object#(0x43B) ()
 	var var0010;
 	var var0011;
 	var var0012;
-	var var0013;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFC5, 0x0000);
@@ -26327,7 +26378,7 @@ void Func043C object#(0x43C) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFC4, 0x0000);
@@ -26512,7 +26563,7 @@ void Func043D object#(0x43D) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFC3, 0x0000);
@@ -26764,7 +26815,7 @@ void Func043E object#(0x43E) ()
 	var var0010;
 	var var0011;
 	var var0012;
-	var var0013;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFC2, 0x0000);
@@ -27091,7 +27142,7 @@ void Func043F object#(0x43F) ()
 	var var0005;
 	var var0006;
 	var var0007;
-	var var0008;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFC1, 0x0000);
@@ -27258,7 +27309,7 @@ extern void Func092E 0x92E (var var0000);
 void Func0440 object#(0x440) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFC0, 0x0000);
@@ -27360,7 +27411,7 @@ extern var Func090A 0x90A ();
 void Func0441 object#(0x441) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -27465,7 +27516,7 @@ void Func0442 object#(0x442) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFBE, 0x0000);
@@ -27644,7 +27695,7 @@ extern void Func092E 0x92E (var var0000);
 void Func0443 object#(0x443) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFBD, 0x0000);
@@ -27767,7 +27818,7 @@ void Func0444 object#(0x444) ()
 	var var0008;
 	var var0009;
 	var var000A;
-	var var000B;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFBC, 0x0000);
@@ -27904,7 +27955,7 @@ void Func0445 object#(0x445) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -28135,7 +28186,7 @@ void Func0446 object#(0x446) ()
 	var var0005;
 	var var0006;
 	var var0007;
-	var var0008;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFBA, 0x0000);
@@ -28347,7 +28398,6 @@ extern void Func092F 0x92F (var var0000);
 
 void Func0447 object#(0x447) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFB9, 0x0000);
@@ -28477,7 +28527,7 @@ void Func0448 object#(0x448) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		var0000 = Func0908();
@@ -28630,7 +28680,7 @@ void Func0449 object#(0x449) ()
 	var var0005;
 	var var0006;
 	var var0007;
-	var var0008;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFB7, 0x0000);
@@ -28792,7 +28842,7 @@ void Func044A object#(0x44A) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -28972,14 +29022,14 @@ void Func044B object#(0x44B) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0000)
 	{
 		abort;
 	}
 	if (event == 0x0001)
 	{
-		script item
+		var0000 = script item
 		{
 			nohalt;
 			music 26;
@@ -28987,7 +29037,7 @@ void Func044B object#(0x44B) ()
 			continue;
 			call Func044B;
 			nop;
-		}
+		};
 		return;
 	}
 	UI_show_npc_face(0xFFB5, 0x0000);
@@ -29154,11 +29204,11 @@ void Func044B object#(0x44B) ()
 				{
 					message("Nastassia turns away and looks as if she might cry. \"Very well. Please leave me alone.\"*");
 					say();
-					script item
+					var0000 = script item
 					{
 						nohalt;
 						music 26;
-					}
+					};
 					abort;
 				}
 			}
@@ -29235,11 +29285,11 @@ void Func044B object#(0x44B) ()
 			fallthrough;
 
 		case "bye":
-			script item
+			var0000 = script item
 			{
 				nohalt;
 				music 26;
-			}
+			};
 			break;
 	}
 	if (!var0004)
@@ -29276,7 +29326,7 @@ void Func044C object#(0x44C) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFB4, 0x0000);
@@ -29399,7 +29449,7 @@ void Func044D object#(0x44D) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFB3, 0x0000);
@@ -29596,7 +29646,7 @@ void Func044E object#(0x44E) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFB2, 0x0000);
@@ -29735,7 +29785,7 @@ extern void Func092E 0x92E (var var0000);
 void Func044F object#(0x44F) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFB1, 0x0000);
@@ -29846,7 +29896,7 @@ void Func0450 object#(0x450) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFB0, 0x0000);
@@ -29992,7 +30042,7 @@ void Func0451 object#(0x451) ()
 	var var0008;
 	var var0009;
 	var var000A;
-	var var000B;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFAF, 0x0000);
@@ -30378,7 +30428,7 @@ void Func0452 object#(0x452) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFAE, 0x0000);
@@ -30554,7 +30604,7 @@ void Func0453 object#(0x453) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -30704,7 +30754,7 @@ extern void Func091A 0x91A ();
 void Func0454 object#(0x454) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -30806,7 +30856,7 @@ void Func0455 object#(0x455) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFAB, 0x0000);
@@ -30969,7 +31019,7 @@ void Func0456 object#(0x456) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFAA, 0x0000);
@@ -31122,7 +31172,7 @@ void Func0457 object#(0x457) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFA9, 0x0000);
@@ -31380,7 +31430,7 @@ void Func0458 object#(0x458) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFA8, 0x0000);
@@ -31546,7 +31596,7 @@ void Func0459 object#(0x459) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -31738,7 +31788,7 @@ void Func045A object#(0x45A) ()
 	var var000F;
 	var var0010;
 	var var0011;
-	var var0012;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFA6, 0x0000);
@@ -32209,7 +32259,7 @@ void Func045B object#(0x45B) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFA5, 0x0000);
@@ -32456,7 +32506,7 @@ void Func045C object#(0x45C) ()
 	var var000B;
 	var var000C;
 	var var000D;
-	var var000E;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFA4, 0x0000);
@@ -32695,7 +32745,7 @@ void Func045D object#(0x45D) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFA3, 0x0000);
@@ -32853,7 +32903,7 @@ void Func045E object#(0x45E) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFA2, 0x0000);
@@ -33040,7 +33090,7 @@ void Func045F object#(0x45F) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFFA1, 0x0000);
@@ -33218,7 +33268,7 @@ void Func0460 object#(0x460) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -33353,7 +33403,7 @@ void Func0461 object#(0x461) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -33466,7 +33516,7 @@ void Func0462 object#(0x462) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		var0000 = Func0931(0xFE9B, 0x0001, 0x0304, 0xFE99, 0xFE99);
@@ -33657,7 +33707,7 @@ extern var Func0909 0x909 ();
 void Func0463 object#(0x463) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -33742,7 +33792,7 @@ void Func0464 object#(0x464) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		var0000 = Func0931(0xFE9B, 0x0001, 0x0304, 0xFE99, 0xFE99);
@@ -33921,7 +33971,7 @@ void Func0465 object#(0x465) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0001)
 	{
 		var0000 = Func0931(0xFE9B, 0x0001, 0x0304, 0xFE99, 0xFE99);
@@ -34184,7 +34234,7 @@ void Func0466 object#(0x466) ()
 	var var0009;
 	var var000A;
 	var var000B;
-	var var000C;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -34471,7 +34521,7 @@ void Func0467 object#(0x467) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF99, 0x0000);
@@ -34613,7 +34663,7 @@ void Func0468 object#(0x468) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF98, 0x0000);
@@ -34750,7 +34800,7 @@ void Func0469 object#(0x469) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF97, 0x0000);
@@ -34860,7 +34910,7 @@ void Func046A object#(0x46A) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF96, 0x0000);
@@ -34998,7 +35048,7 @@ void Func046B object#(0x46B) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -35251,7 +35301,7 @@ void Func046C object#(0x46C) ()
 	var var0016;
 	var var0017;
 	var var0018;
-	var var0019;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF94, 0x0000);
@@ -35551,7 +35601,7 @@ extern void Func092E 0x92E (var var0000);
 void Func046D object#(0x46D) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF93, 0x0000);
@@ -35714,7 +35764,7 @@ void Func046E object#(0x46E) ()
 	var var0008;
 	var var0009;
 	var var000A;
-	var var000B;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -35939,7 +35989,7 @@ void Func046F object#(0x46F) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF91, 0x0000);
@@ -36060,7 +36110,7 @@ void Func0470 object#(0x470) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF90, 0x0000);
@@ -36214,7 +36264,7 @@ void Func0471 object#(0x471) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF8F, 0x0000);
@@ -36431,7 +36481,7 @@ void Func0472 object#(0x472) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF8E, 0x0000);
@@ -36632,7 +36682,7 @@ void Func0473 object#(0x473) ()
 	var var0005;
 	var var0006;
 	var var0007;
-	var var0008;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF8D, 0x0000);
@@ -36813,7 +36863,7 @@ void Func0474 object#(0x474) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF8C, 0x0000);
@@ -37001,7 +37051,7 @@ void Func0475 object#(0x475) ()
 	var var000A;
 	var var000B;
 	var var000C;
-	var var000D;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF8B, 0x0000);
@@ -37209,7 +37259,7 @@ void Func0476 object#(0x476) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF8A, 0x0000);
@@ -37395,7 +37445,7 @@ void Func0477 object#(0x477) ()
 	var var0008;
 	var var0009;
 	var var000A;
-	var var000B;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF89, 0x0000);
@@ -37618,7 +37668,7 @@ void Func0478 object#(0x478) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF88, 0x0000);
@@ -37823,7 +37873,7 @@ void Func0479 object#(0x479) ()
 	var var0005;
 	var var0006;
 	var var0007;
-	var var0008;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF87, 0x0000);
@@ -38117,7 +38167,7 @@ void Func047A object#(0x47A) ()
 	var var0017;
 	var var0018;
 	var var0019;
-	var var001A;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF86, 0x0000);
@@ -38505,7 +38555,7 @@ void Func047B object#(0x47B) ()
 	var var0012;
 	var var0013;
 	var var0014;
-	var var0015;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF85, 0x0000);
@@ -38773,7 +38823,7 @@ void Func047C object#(0x47C) ()
 	var var0005;
 	var var0006;
 	var var0007;
-	var var0008;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF84, 0x0000);
@@ -39102,7 +39152,7 @@ void Func047D object#(0x47D) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF83, 0x0000);
@@ -39281,7 +39331,7 @@ void Func047E object#(0x47E) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF82, 0x0000);
@@ -39513,7 +39563,7 @@ void Func047F object#(0x47F) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF81, 0x0000);
@@ -39651,7 +39701,7 @@ void Func0480 object#(0x480) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -39774,7 +39824,7 @@ void Func0481 object#(0x481) ()
 	var var0009;
 	var var000A;
 	var var000B;
-	var var000C;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF7F, 0x0000);
@@ -40062,7 +40112,7 @@ void Func0482 object#(0x482) ()
 	var var000D;
 	var var000E;
 	var var000F;
-	var var0010;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF7E, 0x0000);
@@ -40405,7 +40455,7 @@ void Func0483 object#(0x483) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF7D, 0x0000);
@@ -40631,7 +40681,7 @@ void Func0484 object#(0x484) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF7C, 0x0000);
@@ -40832,7 +40882,7 @@ void Func0485 object#(0x485) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF7B, 0x0000);
@@ -41080,7 +41130,7 @@ void Func0486 object#(0x486) ()
 	var var0008;
 	var var0009;
 	var var000A;
-	var var000B;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF7A, 0x0000);
@@ -41362,7 +41412,7 @@ void Func0487 object#(0x487) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF79, 0x0000);
@@ -41537,7 +41587,7 @@ void Func0488 object#(0x488) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF78, 0x0000);
@@ -41780,7 +41830,7 @@ void Func0489 object#(0x489) ()
 	var var000D;
 	var var000E;
 	var var000F;
-	var var0010;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF77, 0x0000);
@@ -42058,7 +42108,7 @@ void Func048A object#(0x48A) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -42305,7 +42355,7 @@ void Func048C object#(0x48C) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF74, 0x0000);
@@ -42533,7 +42583,7 @@ void Func048D object#(0x48D) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0001)
 	{
 		if (!gflags[0x01B5])
@@ -42785,7 +42835,7 @@ void Func048E object#(0x48E) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF72, 0x0000);
@@ -42990,7 +43040,7 @@ void Func048F object#(0x48F) ()
 	var var0012;
 	var var0013;
 	var var0014;
-	var var0015;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF71, 0x0000);
@@ -43293,7 +43343,7 @@ void Func0490 object#(0x490) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		if (!gflags[0x01B8])
@@ -43420,7 +43470,7 @@ void Func0491 object#(0x491) ()
 	var var0009;
 	var var000A;
 	var var000B;
-	var var000C;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF6F, 0x0000);
@@ -43715,7 +43765,7 @@ void Func0492 object#(0x492) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF6E, 0x0000);
@@ -44018,7 +44068,7 @@ void Func0493 object#(0x493) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF6D, 0x0000);
@@ -44368,7 +44418,7 @@ void Func0495 object#(0x495) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -44629,7 +44679,7 @@ void Func0496 object#(0x496) ()
 	var var0005;
 	var var0006;
 	var var0007;
-	var var0008;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -44948,7 +44998,7 @@ void Func0497 object#(0x497) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF69, 0x0000);
@@ -45221,7 +45271,7 @@ void Func0498 object#(0x498) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF68, 0x0000);
@@ -45469,7 +45519,7 @@ void Func0499 object#(0x499) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF67, 0x0000);
@@ -45707,7 +45757,7 @@ void Func049A object#(0x49A) ()
 	var var000C;
 	var var000D;
 	var var000E;
-	var var000F;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF66, 0x0000);
@@ -45988,7 +46038,7 @@ void Func049B object#(0x49B) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF65, 0x0000);
@@ -46124,7 +46174,7 @@ void Func049C object#(0x49C) ()
 	var var0005;
 	var var0006;
 	var var0007;
-	var var0008;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF64, 0x0000);
@@ -46349,7 +46399,7 @@ void Func049D object#(0x49D) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF63, 0x0000);
@@ -46515,7 +46565,7 @@ void Func049E object#(0x49E) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF62, 0x0000);
@@ -46630,7 +46680,7 @@ void Func049F object#(0x49F) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF61, 0x0000);
@@ -46742,7 +46792,7 @@ void Func04A0 object#(0x4A0) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF60, 0x0000);
@@ -46918,7 +46968,7 @@ void Func04A1 object#(0x4A1) ()
 	var var0005;
 	var var0006;
 	var var0007;
-	var var0008;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF5F, 0x0000);
@@ -47082,7 +47132,7 @@ void Func04A2 object#(0x4A2) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF5E, 0x0000);
@@ -47242,7 +47292,7 @@ void Func04A3 object#(0x4A3) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF5D, 0x0000);
@@ -47592,7 +47642,7 @@ void Func04A4 object#(0x4A4) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF5C, 0x0000);
@@ -47788,7 +47838,7 @@ void Func04A5 object#(0x4A5) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF5B, 0x0000);
@@ -47966,7 +48016,7 @@ void Func04A6 object#(0x4A6) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF5A, 0x0000);
@@ -48220,7 +48270,7 @@ void Func04A7 object#(0x4A7) ()
 	var var0005;
 	var var0006;
 	var var0007;
-	var var0008;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF59, 0x0000);
@@ -48567,7 +48617,7 @@ void Func04A8 object#(0x4A8) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF58, 0x0000);
@@ -48771,7 +48821,7 @@ void Func04A9 object#(0x4A9) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF57, 0x0000);
@@ -48918,7 +48968,7 @@ void Func04AA object#(0x4AA) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF56, 0x0000);
@@ -49122,7 +49172,7 @@ void Func04AB object#(0x4AB) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF55, 0x0000);
@@ -49452,7 +49502,7 @@ void Func04AC object#(0x4AC) ()
 	var var0018;
 	var var0019;
 	var var001A;
-	var var001B;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF54, 0x0000);
@@ -49912,7 +49962,7 @@ void Func04AD object#(0x4AD) ()
 	var var0011;
 	var var0012;
 	var var0013;
-	var var0014;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF53, 0x0000);
@@ -50233,7 +50283,7 @@ void Func04AE object#(0x4AE) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF52, 0x0000);
@@ -50462,7 +50512,7 @@ void Func04AF object#(0x4AF) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF51, 0x0000);
@@ -50746,7 +50796,7 @@ void Func04B0 object#(0x4B0) ()
 	var var000A;
 	var var000B;
 	var var000C;
-	var var000D;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF50, 0x0000);
@@ -50807,7 +50857,7 @@ void Func04B0 object#(0x4B0) ()
 					say();
 					if (Func090A())
 					{
-						while (1)
+						while (true)
 						{
 							var0004 = UI_remove_party_items(0x0003, 0x0284, 0xFE99, 0xFE99, true);
 							if (!var0004)
@@ -51004,7 +51054,7 @@ void Func04B1 object#(0x4B1) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF4F, 0x0000);
@@ -51235,7 +51285,7 @@ void Func04B2 object#(0x4B2) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF4E, 0x0000);
@@ -51502,7 +51552,7 @@ void Func04B3 object#(0x4B3) ()
 	var var0009;
 	var var000A;
 	var var000B;
-	var var000C;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF4D, 0x0000);
@@ -51675,7 +51725,7 @@ void Func04B4 object#(0x4B4) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF4C, 0x0000);
@@ -51879,7 +51929,7 @@ void Func04B5 object#(0x4B5) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF4B, 0x0000);
@@ -52028,7 +52078,7 @@ void Func04B6 object#(0x4B6) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF4A, 0x0000);
@@ -52176,7 +52226,7 @@ void Func04B7 object#(0x4B7) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF49, 0x0000);
@@ -52414,7 +52464,7 @@ void Func04B8 object#(0x4B8) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF48, 0x0000);
@@ -52536,7 +52586,7 @@ void Func04B9 object#(0x4B9) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF47, 0x0000);
@@ -52773,7 +52823,7 @@ void Func04BA object#(0x4BA) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF46, 0x0000);
@@ -52947,7 +52997,6 @@ void Func04BA object#(0x4BA) ()
 
 void Func04BB object#(0x4BB) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF45, 0x0000);
@@ -53040,7 +53089,7 @@ void Func04BC object#(0x4BC) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF44, 0x0000);
@@ -53215,7 +53264,7 @@ void Func04BD object#(0x4BD) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF43, 0x0000);
@@ -53458,7 +53507,7 @@ void Func04BE object#(0x4BE) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF42, 0x0000);
@@ -53623,7 +53672,7 @@ void Func04BF object#(0x4BF) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF41, 0x0000);
@@ -53870,7 +53919,7 @@ void Func04C0 object#(0x4C0) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF40, 0x0000);
@@ -54014,7 +54063,7 @@ void Func04C1 object#(0x4C1) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF3F, 0x0000);
@@ -54173,7 +54222,7 @@ void Func04C2 object#(0x4C2) ()
 	var var000A;
 	var var000B;
 	var var000C;
-	var var000D;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF3E, 0x0000);
@@ -54440,7 +54489,7 @@ void Func04C3 object#(0x4C3) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF3D, 0x0000);
@@ -54746,7 +54795,7 @@ void Func04C4 object#(0x4C4) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF3C, 0x0000);
@@ -55010,7 +55059,7 @@ void Func04C5 object#(0x4C5) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF3B, 0x0000);
@@ -55168,7 +55217,7 @@ void Func04C6 object#(0x4C6) ()
 	var var0005;
 	var var0006;
 	var var0007;
-	var var0008;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF3A, 0x0000);
@@ -55392,7 +55441,7 @@ void Func04C7 object#(0x4C7) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF39, 0x0000);
@@ -55721,7 +55770,7 @@ void Func04C8 object#(0x4C8) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF38, 0x0000);
@@ -55976,7 +56025,7 @@ void Func04C9 object#(0x4C9) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF37, 0x0000);
@@ -56131,7 +56180,7 @@ void Func04CA object#(0x4CA) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF36, 0x0000);
@@ -56309,7 +56358,7 @@ void Func04CB object#(0x4CB) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF35, 0x0000);
@@ -56481,7 +56530,7 @@ void Func04CC object#(0x4CC) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF34, 0x0000);
@@ -56625,7 +56674,7 @@ void Func04CD object#(0x4CD) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF33, 0x0000);
@@ -56798,7 +56847,7 @@ void Func04CE object#(0x4CE) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF32, 0x0000);
@@ -56979,7 +57028,7 @@ void Func04CF object#(0x4CF) ()
 	var var000B;
 	var var000C;
 	var var000D;
-	var var000E;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF31, 0x0000);
@@ -57211,7 +57260,7 @@ void Func04D0 object#(0x4D0) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF30, 0x0000);
@@ -57363,7 +57412,7 @@ void Func04D1 object#(0x4D1) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF2F, 0x0000);
@@ -57542,7 +57591,7 @@ void Func04D2 object#(0x4D2) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF2E, 0x0000);
@@ -57710,7 +57759,7 @@ void Func04D3 object#(0x4D3) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF2D, 0x0000);
@@ -57868,7 +57917,7 @@ void Func04D4 object#(0x4D4) ()
 	var var0009;
 	var var000A;
 	var var000B;
-	var var000C;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF2C, 0x0000);
@@ -58117,7 +58166,7 @@ void Func04D5 object#(0x4D5) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF2B, 0x0000);
@@ -58232,7 +58281,7 @@ void Func04D6 object#(0x4D6) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF2A, 0x0000);
@@ -58351,7 +58400,7 @@ void Func04D7 object#(0x4D7) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF29, 0x0000);
@@ -58529,7 +58578,7 @@ void Func04D8 object#(0x4D8) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF28, 0x0000);
@@ -58711,7 +58760,7 @@ void Func04D9 object#(0x4D9) ()
 	var var000D;
 	var var000E;
 	var var000F;
-	var var0010;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF27, 0x0000);
@@ -58852,7 +58901,7 @@ void Func04DA object#(0x4DA) ()
 	var var000C;
 	var var000D;
 	var var000E;
-	var var000F;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF26, 0x0000);
@@ -58970,7 +59019,7 @@ void Func04DB object#(0x4DB) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF25, 0x0000);
@@ -59084,7 +59133,7 @@ void Func04DC object#(0x4DC) ()
 	var var0005;
 	var var0006;
 	var var0007;
-	var var0008;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF24, 0x0000);
@@ -59320,7 +59369,7 @@ void Func04DD object#(0x4DD) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -59558,7 +59607,7 @@ void Func04DE object#(0x4DE) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF22, 0x0000);
@@ -59781,7 +59830,7 @@ void Func04DF object#(0x4DF) ()
 	var var0008;
 	var var0009;
 	var var000A;
-	var var000B;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -60005,7 +60054,7 @@ void Func04E0 object#(0x4E0) ()
 	var var0009;
 	var var000A;
 	var var000B;
-	var var000C;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -60212,7 +60261,7 @@ void Func04E1 object#(0x4E1) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF1F, 0x0000);
@@ -60420,7 +60469,7 @@ void Func04E2 object#(0x4E2) ()
 	var var0009;
 	var var000A;
 	var var000B;
-	var var000C;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF1E, 0x0000);
@@ -60649,7 +60698,7 @@ void Func04E3 object#(0x4E3) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF1D, 0x0000);
@@ -60844,7 +60893,7 @@ void Func04E4 object#(0x4E4) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF1C, 0x0000);
@@ -60981,7 +61030,7 @@ void Func04E5 object#(0x4E5) ()
 	var var000A;
 	var var000B;
 	var var000C;
-	var var000D;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF1B, 0x0000);
@@ -61237,7 +61286,7 @@ void Func04E6 object#(0x4E6) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF1A, 0x0000);
@@ -61437,7 +61486,7 @@ void Func04E7 object#(0x4E7) ()
 	var var000C;
 	var var000D;
 	var var000E;
-	var var000F;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF19, 0x0000);
@@ -61782,7 +61831,7 @@ void Func04E8 object#(0x4E8) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF18, 0x0000);
@@ -61930,7 +61979,7 @@ void Func04E9 object#(0x4E9) ()
 	var var000A;
 	var var000B;
 	var var000C;
-	var var000D;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF17, 0x0000);
@@ -62074,7 +62123,7 @@ void Func04EA object#(0x4EA) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF16, 0x0000);
@@ -62123,7 +62172,7 @@ void Func04EB object#(0x4EB) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF15, 0x0000);
@@ -62172,7 +62221,7 @@ void Func04EC object#(0x4EC) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF14, 0x0000);
@@ -62280,7 +62329,7 @@ void Func04ED object#(0x4ED) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF13, 0x0000);
@@ -62520,7 +62569,7 @@ void Func04EE object#(0x4EE) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF12, 0x0000);
@@ -62651,7 +62700,7 @@ void Func04EF object#(0x4EF) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -62850,7 +62899,7 @@ void Func04F0 object#(0x4F0) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF10, 0x0000);
@@ -63071,7 +63120,7 @@ void Func04F1 object#(0x4F1) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -63326,7 +63375,7 @@ void Func04F2 object#(0x4F2) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF0E, 0x0000);
@@ -63539,7 +63588,7 @@ void Func04F3 object#(0x4F3) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -63754,7 +63803,7 @@ void Func04F4 object#(0x4F4) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF0C, 0x0000);
@@ -63894,7 +63943,7 @@ void Func04F5 object#(0x4F5) ()
 	var var0005;
 	var var0006;
 	var var0007;
-	var var0008;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF0B, 0x0000);
@@ -64069,7 +64118,7 @@ void Func04F6 object#(0x4F6) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF0A, 0x0000);
@@ -64307,7 +64356,7 @@ void Func04F7 object#(0x4F7) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF09, 0x0000);
@@ -64638,7 +64687,7 @@ void Func04F8 object#(0x4F8) ()
 	var var000F;
 	var var0010;
 	var var0011;
-	var var0012;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF08, 0x0000);
@@ -64968,7 +65017,7 @@ void Func04F9 object#(0x4F9) ()
 	var var0011;
 	var var0012;
 	var var0013;
-	var var0014;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF07, 0x0000);
@@ -65266,7 +65315,7 @@ void Func04FA object#(0x4FA) ()
 	var var0009;
 	var var000A;
 	var var000B;
-	var var000C;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF06, 0x0000);
@@ -65677,7 +65726,7 @@ void Func04FB object#(0x4FB) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF05, 0x0000);
@@ -65946,7 +65995,7 @@ void Func04FC object#(0x4FC) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF04, 0x0000);
@@ -66087,7 +66136,7 @@ void Func04FD object#(0x4FD) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_show_npc_face(0xFF03, 0x0000);
@@ -66246,7 +66295,7 @@ void Func04FE object#(0x4FE) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -66543,7 +66592,7 @@ void Func04FF object#(0x4FF) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -66708,7 +66757,7 @@ void Func0500 object#(0x500) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0000)
 	{
 		abort;
@@ -66884,7 +66933,6 @@ extern void Func0326 shape#(0x326) ();
 
 void Func0501 object#(0x501) ()
 {
-	var var0000;
 	item->Func0326();
 	return;
 }
@@ -66894,7 +66942,6 @@ extern void Func0326 shape#(0x326) ();
 
 void Func0502 object#(0x502) ()
 {
-	var var0000;
 	item->Func0326();
 	return;
 }
@@ -66904,7 +66951,6 @@ extern void Func03B2 shape#(0x3B2) ();
 
 void Func0506 object#(0x506) ()
 {
-	var var0000;
 	item->Func03B2();
 	return;
 }
@@ -66914,7 +66960,6 @@ extern void Func03B2 shape#(0x3B2) ();
 
 void Func0507 object#(0x507) ()
 {
-	var var0000;
 	item->Func03B2();
 	return;
 }
@@ -66924,7 +66969,6 @@ extern void Func03B2 shape#(0x3B2) ();
 
 void Func0508 object#(0x508) ()
 {
-	var var0000;
 	item->Func03B2();
 	return;
 }
@@ -66934,7 +66978,6 @@ extern void Func03B2 shape#(0x3B2) ();
 
 void Func0509 object#(0x509) ()
 {
-	var var0000;
 	item->Func03B2();
 	return;
 }
@@ -66944,7 +66987,6 @@ extern void Func03B2 shape#(0x3B2) ();
 
 void Func050A object#(0x50A) ()
 {
-	var var0000;
 	item->Func03B2();
 	return;
 }
@@ -66954,7 +66996,6 @@ extern void Func03B2 shape#(0x3B2) ();
 
 void Func050D object#(0x50D) ()
 {
-	var var0000;
 	item->Func03B2();
 	return;
 }
@@ -66965,7 +67006,7 @@ void Func0600 object#(0x600) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	var0000 = (UI_get_item_quality(item) - 0x0001);
 	var0001 = UI_set_item_quality(item, var0000);
 	if (var0000 == 0x0000)
@@ -66989,10 +67030,10 @@ void Func0600 object#(0x600) ()
 	}
 	else
 	{
-		script item after 50 ticks
+		var0003 = script item after 50 ticks
 		{
 			call Func0600;
-		}
+		};
 	}
 	return;
 }
@@ -67007,7 +67048,7 @@ void Func0603 object#(0x603) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	var0000 = UI_set_npc_prop(item, 0x0000, 0xFFFA);
 	var0000 = UI_set_npc_prop(item, 0x0001, 0xFFFA);
 	var0000 = UI_set_npc_prop(item, 0x0002, 0xFFFA);
@@ -67035,7 +67076,7 @@ void Func0606 object#(0x606) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	var0000 = UI_get_object_position(item);
 	var0001 = var0000[0x0001];
 	var0002 = var0000[0x0002];
@@ -67049,7 +67090,7 @@ void Func0606 object#(0x606) ()
 void Func0607 object#(0x607) ()
 {
 	var var0000;
-	var var0001;
+
 	var0000 = (UI_get_lift(item) + 0x0001);
 	UI_set_lift(item, var0000);
 	return;
@@ -67073,7 +67114,7 @@ void Func0608 object#(0x608) ()
 	var var0009;
 	var var000A;
 	var var000B;
-	var var000C;
+
 	if (event == 0x0003)
 	{
 		Func0941(0x000D);
@@ -67141,7 +67182,7 @@ void Func0608 object#(0x608) ()
 void Func0609 object#(0x609) ()
 {
 	var var0000;
-	var var0001;
+
 	var0000 = (UI_get_lift(item) - 0x0001);
 	UI_set_lift(item, var0000);
 	return;
@@ -67172,7 +67213,7 @@ void Func060A object#(0x60A) ()
 	var var000F;
 	var var0010;
 	var var0011;
-	var var0012;
+
 	if (event != 0x0002)
 	{
 		return;
@@ -67301,7 +67342,6 @@ extern void Func083D 0x83D ();
 
 void Func060B object#(0x60B) ()
 {
-	var var0000;
 	if (event == 0x0002)
 	{
 		if (gflags[0x001F] && gflags[0x0020])
@@ -67352,7 +67392,7 @@ void Func060C object#(0x60C) ()
 	var var0015;
 	var var0016;
 	var var0017;
-	var var0018;
+
 	if (UI_get_schedule_type(0xFF18) == 0x0009)
 	{
 		UI_set_schedule_type(0xFF18, 0x000A);
@@ -67388,7 +67428,7 @@ void Func060C object#(0x60C) ()
 	{
 		var000C = 0x0003;
 	}
-	script var0006
+	var000D = script var0006
 	{
 		frame 1;
 		sfx 73;
@@ -67396,7 +67436,7 @@ void Func060C object#(0x60C) ()
 		sfx 74;
 		frame 1;
 		sfx 73;
-	}
+	};
 	if (gflags[0x0022] == false)
 	{
 		gflags[0x0022] = true;
@@ -67480,7 +67520,7 @@ void Func060D object#(0x60D) ()
 	var var000F;
 	var var0010;
 	var var0011;
-	var var0012;
+
 	if (event != 0x0002)
 	{
 		return;
@@ -67570,7 +67610,7 @@ void Func060E object#(0x60E) ()
 	var var001C;
 	var var001D;
 	var var001E;
-	var var001F;
+
 	if (event == 0x0004)
 	{
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
@@ -67582,11 +67622,11 @@ void Func060E object#(0x60E) ()
 		{
 			var0004 = UI_resurrect(var0003);
 		}
-		script item after 5 ticks
+		var0004 = script item after 5 ticks
 		{
 			nohalt;
 			call Func060E;
-		}
+		};
 	}
 	if (event == 0x0002)
 	{
@@ -67626,7 +67666,7 @@ void Func060E object#(0x60E) ()
 			UI_set_item_flag(0xFE9C, 0x0001);
 			var0011 = [0xFFFC, 0x0000, 0x0004, 0x0000, 0x0000, 0x0004, 0xFFFC, 0x0001, 0x0004, 0x0001, 0xFFFC, 0xFFFF, 0x0004, 0xFFFF, 0x0001, 0x0002, 0xFFFF, 0x0002];
 			var0012 = 0x0000;
-			var0013 = [0x32, var0012, 0x36, var0012, 0x30, var0012, 0x32, var0012, 0x36, var0012, 0x32, var0012, 0x36, var0012, 0x30, var0012, 0x30];
+			var0013 = [(byte)0x32, var0012, (byte)0x36, var0012, (byte)0x30, var0012, (byte)0x32, var0012, (byte)0x36, var0012, (byte)0x32, var0012, (byte)0x36, var0012, (byte)0x30, var0012, (byte)0x30];
 			var0014 = [0xFFF9, 0x0000, 0x0008, 0x0000, 0x0000, 0x0008, 0xFFF9, 0x0008, 0x0008, 0x0008, 0xFFEF, 0x0000, 0xFFEF, 0x0008];
 			var0015 = [0x000D, var0012, 0x000D, var0012, 0x001D, var0012, 0x001D, var0012, 0x001D, var0012, 0x000D, var0012, 0x000D];
 			var0016 = 0x0001;
@@ -67665,11 +67705,11 @@ void Func060E object#(0x60E) ()
 					UI_halt_scheduled(var0003);
 					if (!UI_get_item_flag(var0003, 0x0001))
 					{
-						script var0003
+						var0004 = script var0003
 						{
 							actor frame standing;
 							face var0013[var0016];
-						}
+						};
 						var001D = [(var0010[0x0001] + var0011[var0016]), (var0010[0x0002] + var0011[(var0016 + 0x0001)]), (var0010[0x0003] - 0x0001)];
 					}
 					else
@@ -67677,22 +67717,22 @@ void Func060E object#(0x60E) ()
 						var001D = [(var0010[0x0001] + var0014[var0016]), (var0010[0x0002] + var0014[(var0016 + 0x0001)]), var0010[0x0003]];
 						UI_set_item_frame(var0003, var0015[var0016]);
 						var001E = UI_die_roll(0x0001, 0x0014);
-						script var0003
+						var0004 = script var0003
 						{
 							wait var001E;
 							call Func0619;
-						}
+						};
 					}
 					UI_move_object(var0003, var001D);
 					var0016 = (var0016 + 0x0002);
 				}
 			}
 			UI_clear_item_flag(0xFE9C, 0x0004);
-			script 0xFE9C
+			var0004 = script 0xFE9C
 			{
 				wait 2;
 				call Func0610;
-			}
+			};
 		}
 		else
 		{
@@ -67706,7 +67746,7 @@ void Func060F object#(0x60F) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	var0000 = UI_get_object_position(item);
 	UI_sprite_effect(0x0011, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0x0001);
 	UI_play_sound_effect(0x003E);
@@ -67734,7 +67774,7 @@ void Func0610 object#(0x610) ()
 	var var0008;
 	var var0009;
 	var var000A;
-	var var000B;
+
 	UI_fade_palette(0x0024, 0x0001, 0x0001);
 	var0000 = UI_find_nearby(item, 0xFE99, 0x0023, 0x0004);
 	for (var0003 in var0000 with var0001 to var0002)
@@ -67813,7 +67853,7 @@ void Func0611 object#(0x611) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	var0000 = UI_get_item_shape(item);
 	if (var0000 == 0x0203)
 	{
@@ -67837,7 +67877,6 @@ void Func0611 object#(0x611) ()
 
 void Func0612 object#(0x612) ()
 {
-	var var0000;
 	UI_mark_virtue_stone(item);
 	return;
 }
@@ -67848,7 +67887,7 @@ void Func0613 object#(0x613) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	gflags[0x0039] = false;
 	var0000 = UI_get_party_list();
 	for (var0003 in var0000 with var0001 to var0002)
@@ -67862,7 +67901,7 @@ void Func0613 object#(0x613) ()
 void Func0614 object#(0x614) ()
 {
 	var var0000;
-	var var0001;
+
 	UI_show_npc_face(0xFEEB, 0x0000);
 	var0000 = UI_get_speech_track();
 	if (var0000 == 0x0001)
@@ -68040,7 +68079,6 @@ void Func0614 object#(0x614) ()
 
 void Func0615 object#(0x615) ()
 {
-	var var0000;
 	if (event == 0x0002)
 	{
 		UI_set_item_shape(item, 0x02F2);
@@ -68053,22 +68091,22 @@ void Func0617 object#(0x617) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	gflags[0x01A8] = true;
 	if (event == 0x0001)
 	{
-		script item after 20 ticks
+		var0000 = script item after 20 ticks
 		{
 			nohalt;
 			finish;
 			call Func0617;
-		}
+		};
 		var0001 = UI_find_nearest(item, 0x02EB, 0x0028);
-		script var0001 after 19 ticks
+		var0000 = script var0001 after 19 ticks
 		{
 			finish;
 			frame 1;
-		}
+		};
 	}
 	if (event == 0x0002)
 	{
@@ -68094,11 +68132,11 @@ extern void Func061A object#(0x61A) ();
 void Func0618 object#(0x618) ()
 {
 	var var0000;
-	var var0001;
+
 	if (UI_get_item_flag(0xFE9C, 0x0010))
 	{
 		UI_clear_item_flag(0xFE9C, 0x0010);
-		script 0xFE9C
+		var0000 = script 0xFE9C
 		{
 			step 6, 0;
 			step 6, 0;
@@ -68106,14 +68144,13 @@ void Func0618 object#(0x618) ()
 			wait 10;
 			call Func0401;
 			call Func061A;
-		}
+		};
 	}
 	return;
 }
 
 void Func0619 object#(0x619) ()
 {
-	var var0000;
 	UI_halt_scheduled(item);
 	UI_clear_item_flag(item, 0x0001);
 	return;
@@ -68121,7 +68158,6 @@ void Func0619 object#(0x619) ()
 
 void Func061A object#(0x61A) ()
 {
-	var var0000;
 	(@0x70)();
 	return;
 }
@@ -68133,37 +68169,58 @@ void Func061B object#(0x61B) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0002)
 	{
 		Func0806(0x00EA, item);
 		var0000 = UI_get_npc_object(0x0269);
 		UI_set_schedule_type(0x0269, 0x000F);
-		script 0x0269 after 25 ticks
+		var0001 = script 0x0269 after 25 ticks
 		{
 			nohalt;
 			call Func0269;
-		}
+		};
 	}
 	return;
 }
+
+// externs
+extern void Func0637 object#(0x637) ();
 
 void Func061C object#(0x61C) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	UI_set_item_flag(item, 0x001A);
 	if (!UI_in_usecode(item))
 	{
 		if (gflags[0x0197])
 		{
-			var0000 = [0x2C, 0x32, 0x21, 0x0B, 0xFFFE, 0x000B, 0x55, 0x0637];
+			var0000 = new script
+			{
+				finish;
+				repeat 11
+				{
+					step east;
+					nop;
+				};
+				call Func0637;
+			};
 			gflags[0x0197] = false;
 		}
 		else
 		{
-			var0000 = [0x2C, 0x36, 0x21, 0x0B, 0xFFFE, 0x000B, 0x55, 0x0637];
+			var0000 = new script
+			{
+				finish;
+				repeat 11
+				{
+					step west;
+					nop;
+				};
+				call Func0637;
+			};
 			gflags[0x0197] = true;
 		}
 		var0001 = UI_execute_usecode_array(item, var0000);
@@ -68178,16 +68235,17 @@ void Func061D object#(0x61D) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0002)
 	{
 		var0000 = UI_get_object_position(item);
 		Func0806(0x00EE, item);
-		script 0x0269 after 25 ticks
+		// This is likely meant to be 'item' instead of 0x0269.
+		var0001 = script 0x0269 after 25 ticks
 		{
 			nohalt;
 			call Func0269;
-		}
+		};
 	}
 	return;
 }
@@ -68201,7 +68259,7 @@ void Func061E object#(0x61E) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0002)
 	{
 		Func0806(0x00F2, item);
@@ -68215,14 +68273,12 @@ void Func061E object#(0x61E) ()
 
 void Func061F object#(0x61F) ()
 {
-	var var0000;
 	UI_clear_item_flag(item, 0x000F);
 	return;
 }
 
 void Func0620 object#(0x620) ()
 {
-	var var0000;
 	UI_set_item_flag(item, 0x000F);
 	return;
 }
@@ -68239,7 +68295,7 @@ void Func0621 object#(0x621) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0003)
 	{
 		var0000 = "";
@@ -68596,7 +68652,7 @@ void Func0622 object#(0x622) ()
 	var var000A;
 	var var000B;
 	var var000C;
-	var var000D;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_party_list();
@@ -68659,16 +68715,16 @@ void Func0622 object#(0x622) ()
 		{
 			Func093F(var0008, 0x000B);
 		}
-		script 0xFE9C
+		var000C = script 0xFE9C
 		{
 			wait 35;
-		}
-		script item after 33 ticks
+		};
+		var000C = script item after 33 ticks
 		{
 			nohalt;
 			call Func0636;
 			call Func0623;
-		}
+		};
 		UI_advance_time(var0009);
 	}
 	return;
@@ -68687,7 +68743,7 @@ void Func0623 object#(0x623) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0002)
 	{
 		var0000 = Func0900();
@@ -68725,7 +68781,7 @@ void Func0624 object#(0x624) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_close_gumps();
@@ -68743,20 +68799,20 @@ void Func0624 object#(0x624) ()
 	if (event == 0x0007)
 	{
 		UI_close_gumps();
-		script 0xFE9C
+		var0002 = script 0xFE9C
 		{
 			face north;
 			actor frame bowing;
 			wait 1;
 			actor frame standing;
-		}
+		};
 		if (var0002)
 		{
-			script item
+			var0002 = script item
 			{
 				wait 2;
 				call Func0624;
-			}
+			};
 		}
 	}
 	return;
@@ -68801,7 +68857,7 @@ void Func0625 object#(0x625) ()
 	var var0017;
 	var var0018;
 	var var0019;
-	var var001A;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_item_shape(item);
@@ -68894,7 +68950,12 @@ void Func0625 object#(0x625) ()
 				say();
 				UI_remove_npc_face(0xFEFE);
 				UI_halt_scheduled(0xFE9C);
-				var0013 = UI_delayed_execute_usecode_array(0xFE9C, [(byte)0x55, 0x0625, (byte)0x6E, (byte)0x27, 0x0005], 0x0002);
+				var0013 = script 0xFE9C after 2 ticks
+				{
+					call Func0625;
+					actor frame sleeping;
+					wait 5;
+				};
 				abort;
 			}
 		}
@@ -68921,11 +68982,11 @@ void Func0625 object#(0x625) ()
 			var0013 = Func081F(var0019);
 		}
 		Func084A();
-		script 0xFE9C
+		var0013 = script 0xFE9C
 		{
 			wait 1;
 			call Func063C;
-		}
+		};
 	}
 	return;
 }
@@ -68951,7 +69012,7 @@ void Func0626 object#(0x626) ()
 	var var000B;
 	var var000C;
 	var var000D;
-	var var000E;
+
 	var0000 = UI_get_item_shape(item);
 	if (var0000 == 0x0206)
 	{
@@ -68992,12 +69053,12 @@ void Func0626 object#(0x626) ()
 	{
 		if (!(UI_get_item_frame(item) == 0x0002))
 		{
-			script item
+			var000D = script item
 			{
 				sfx 37;
 				continue;
 				frame 2;
-			}
+			};
 		}
 		return;
 	}
@@ -69010,7 +69071,7 @@ void Func0627 object#(0x627) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	var0000 = UI_find_nearby(item, 0x0201, 0x0003, 0x0000);
 	var0001 = UI_get_cont_items(item, 0x0179, 0xFE99, 0xFE99);
 	if (var0001)
@@ -69058,7 +69119,7 @@ void Func0628 object#(0x628) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	var0000 = UI_create_new_object(0x0390);
 	if (var0000)
 	{
@@ -69075,10 +69136,10 @@ void Func0628 object#(0x628) ()
 				{
 					UI_set_item_frame(var0005, 0x0004);
 					UI_halt_scheduled(item);
-					script item after 16 ticks
+					var0007 = script item after 16 ticks
 					{
 						call Func0628;
-					}
+					};
 					return;
 				}
 			}
@@ -69100,10 +69161,10 @@ void Func0628 object#(0x628) ()
 			UI_item_say(0xFFFC, "@That is perfectly good beer!@");
 		}
 		UI_halt_scheduled(item);
-		script item after 16 ticks
+		var0007 = script item after 16 ticks
 		{
 			call Func0628;
-		}
+		};
 	}
 	return;
 }
@@ -69122,7 +69183,7 @@ void Func0629 object#(0x629) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	var0000 = UI_create_new_object(0x0390);
 	if (var0000)
 	{
@@ -69139,10 +69200,10 @@ void Func0629 object#(0x629) ()
 				{
 					UI_set_item_frame(var0005, 0x0003);
 					UI_halt_scheduled(item);
-					script item after 16 ticks
+					var0007 = script item after 16 ticks
 					{
 						call Func0629;
-					}
+					};
 					return;
 				}
 			}
@@ -69160,10 +69221,10 @@ void Func0629 object#(0x629) ()
 			Func08FE("@Thou art wasting it!@");
 		}
 		UI_halt_scheduled(item);
-		script item after 16 ticks
+		var0007 = script item after 16 ticks
 		{
 			call Func0629;
-		}
+		};
 	}
 	return;
 }
@@ -69197,7 +69258,7 @@ void Func062C object#(0x62C) ()
 	var var0011;
 	var var0012;
 	var var0013;
-	var var0014;
+
 	var0000 = item;
 	var0001 = Func0945(var0000);
 	var0002 = UI_find_nearby([0x09B7, 0x06C8, 0x0000], 0x014B, 0x0012, 0x0000);
@@ -69215,12 +69276,12 @@ void Func062C object#(0x62C) ()
 		}
 	}
 	var000E = UI_get_cont_items(var0001, 0x031D, 0xFE99, 0x0004);
-	script var0000
+	var000F = script var0000
 	{
 		nohalt;
 		finish;
 		remove;
-	}
+	};
 	if (UI_get_item_quality(var000E) == 0x00F3)
 	{
 		Func08E6(var0001);
@@ -69240,14 +69301,14 @@ void Func062C object#(0x62C) ()
 		{
 			UI_set_camera(var0012);
 			UI_fade_palette(0x000C, 0x0001, 0x0000);
-			script var0012
+			var0013 = script var0012
 			{
 				nohalt;
 				call Func0636;
 				call Func0713;
 				wait 30;
 				call Func063F;
-			}
+			};
 			return;
 		}
 	}
@@ -69271,7 +69332,7 @@ void Func062D object#(0x62D) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0007)
 	{
 		var0000 = UI_get_container(item);
@@ -69291,14 +69352,14 @@ void Func062D object#(0x62D) ()
 				}
 				else
 				{
-					script 0xFE9C
+					var0003 = script 0xFE9C
 					{
 						face var0001;
 						continue;
 						actor frame bowing;
 						actor frame standing;
 						call Func062D;
-					}
+					};
 				}
 			}
 			else
@@ -69348,7 +69409,7 @@ void Func062E object#(0x62E) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0007)
 	{
 		var0000 = UI_get_container(item);
@@ -69368,14 +69429,14 @@ void Func062E object#(0x62E) ()
 				}
 				else
 				{
-					script 0xFE9C
+					var0003 = script 0xFE9C
 					{
 						face var0001;
 						continue;
 						actor frame bowing;
 						actor frame standing;
 						call Func062E;
-					}
+					};
 				}
 			}
 			else
@@ -69424,7 +69485,7 @@ void Func0631 object#(0x631) ()
 	var var0005;
 	var var0006;
 	var var0007;
-	var var0008;
+
 	if (event == 0x0007)
 	{
 		var0000 = UI_get_item_quality(item);
@@ -69441,23 +69502,24 @@ void Func0631 object#(0x631) ()
 		}
 		if (Func080E(var0002))
 		{
-			script item
+			var0006 = script item
 			{
 				frame 1;
 				repeat 4
 				{
 					next frame cycle;
 				};
-			}
-			script 0xFE9C
+			};
+			var0006 = script 0xFE9C
 			{
 				face west;
+				continue;
 				repeat 2
 				{
 					actor frame bowing;
 					actor frame standing;
 				};
-			}
+			};
 			return;
 		}
 		if (gflags[0x003D])
@@ -69466,54 +69528,54 @@ void Func0631 object#(0x631) ()
 			{
 				if (Func0937(0xFFF2) && Func0937(0xFE9C))
 				{
-					script UI_get_npc_object(0xFFF2) after 1 ticks
+					var0006 = script UI_get_npc_object(0xFFF2) after 1 ticks
 					{
 						nohalt;
 						say "@What's the password?@";
-					}
-					script UI_get_avatar_ref() after 5 ticks
+					};
+					var0006 = script UI_get_avatar_ref() after 5 ticks
 					{
 						nohalt;
 						say "@Blackbird@";
-					}
-					script UI_get_npc_object(0xFFF2) after 11 ticks
+					};
+					var0006 = script UI_get_npc_object(0xFFF2) after 11 ticks
 					{
 						nohalt;
 						say "@Pass.@";
-					}
+					};
 				}
-				script item after 10 ticks
+				var0006 = script item after 10 ticks
 				{
 					nohalt;
 					call Func0631;
-				}
+				};
 				return;
 			}
 			if (Func08F7(0xFFE5) && (!gflags[0x0057]))
 			{
 				if (Func0937(0xFFE5) && Func0937(0xFE9C))
 				{
-					script UI_get_npc_object(0xFFE5) after 1 ticks
+					var0006 = script UI_get_npc_object(0xFFE5) after 1 ticks
 					{
 						nohalt;
 						say "@What's the password?@";
-					}
-					script UI_get_avatar_ref() after 5 ticks
+					};
+					var0006 = script UI_get_avatar_ref() after 5 ticks
 					{
 						nohalt;
 						say "@Blackbird@";
-					}
-					script UI_get_npc_object(0xFFE5) after 11 ticks
+					};
+					var0006 = script UI_get_npc_object(0xFFE5) after 11 ticks
 					{
 						nohalt;
 						say "@Pass.@";
-					}
+					};
 				}
-				script item after 10 ticks
+				var0006 = script item after 10 ticks
 				{
 					nohalt;
 					call Func0631;
-				}
+				};
 				return;
 			}
 			if (UI_find_nearest(0xFE9C, 0x0326, 0xFFFF) && (!gflags[0x0057]))
@@ -69521,27 +69583,27 @@ void Func0631 object#(0x631) ()
 				var0007 = UI_find_nearest(item, 0x0326, 0x0014);
 				if (Func0937(var0007) && Func0937(0xFE9C))
 				{
-					script var0007 after 1 ticks
+					var0006 = script var0007 after 1 ticks
 					{
 						nohalt;
 						say "@What's the password?@";
-					}
-					script UI_get_avatar_ref() after 5 ticks
+					};
+					var0006 = script UI_get_avatar_ref() after 5 ticks
 					{
 						nohalt;
 						say "@Blackbird@";
-					}
-					script var0007 after 11 ticks
+					};
+					var0006 = script var0007 after 11 ticks
 					{
 						nohalt;
 						say "@Pass.@";
-					}
+					};
 				}
-				script item after 10 ticks
+				var0006 = script item after 10 ticks
 				{
 					nohalt;
 					call Func0631;
-				}
+				};
 				return;
 			}
 			Func083F(item, true);
@@ -69550,22 +69612,22 @@ void Func0631 object#(0x631) ()
 		{
 			if (Func08F7(0xFFF2) && (!gflags[0x0057]))
 			{
-				script UI_get_npc_object(0xFFF2) after 1 ticks
+				var0006 = script UI_get_npc_object(0xFFF2) after 1 ticks
 				{
 					nohalt;
 					say "@What's the password?@";
-				}
+				};
 			}
 		}
 		if (Func08F7(0xFFE5) && (!gflags[0x0057]))
 		{
 			if (Func0937(0xFFE5))
 			{
-				script UI_get_npc_object(0xFFF2) after 1 ticks
+				var0006 = script UI_get_npc_object(0xFFF2) after 1 ticks
 				{
 					nohalt;
 					say "@What's the password?@";
-				}
+				};
 			}
 		}
 		if (UI_find_nearest(0xFE9C, 0x0326, 0xFFFF) && (!gflags[0x0057]))
@@ -69573,11 +69635,11 @@ void Func0631 object#(0x631) ()
 			var0007 = UI_find_nearest(item, 0x0326, 0x0014);
 			if (Func0937(var0007))
 			{
-				script var0007 after 1 ticks
+				var0006 = script var0007 after 1 ticks
 				{
 					nohalt;
 					say "@What's the password?@";
-				}
+				};
 			}
 		}
 	}
@@ -69592,24 +69654,24 @@ void Func0632 object#(0x632) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_object_position(0xFF92);
 		UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-		script item
+		var0001 = script item
 		{
 			nohalt;
 			continue;
 			actor frame cast_up;
 			actor frame cast_out;
 			actor frame strike_2h;
-		}
-		script item after 4 ticks
+		};
+		var0001 = script item after 4 ticks
 		{
 			nohalt;
 			call Func0632;
-		}
+		};
 	}
 	if (event == 0x0002)
 	{
@@ -69625,7 +69687,6 @@ extern void Func093F 0x93F (var var0000, var var0001);
 
 void Func0633 object#(0x633) ()
 {
-	var var0000;
 	if (event == 0x0001)
 	{
 		item->Func063A();
@@ -69673,7 +69734,7 @@ void Func0634 object#(0x634) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	var0000 = UI_get_barge(item);
 	if (var0000)
 	{
@@ -69724,17 +69785,17 @@ void Func0635 object#(0x635) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0003)
 	{
 		var0000 = UI_find_nearby(item, 0x0292, 0x0000, 0x0000);
 		if (var0000)
 		{
-			script var0000 after 60 ticks
+			var0001 = script var0000 after 60 ticks
 			{
 				nohalt;
 				call Func0635;
-			}
+			};
 			if (UI_die_roll(0x0001, 0x0002) == 0x0001)
 			{
 				Func08FE("@Do not over cook it!@");
@@ -69775,7 +69836,7 @@ void Func0635 object#(0x635) ()
 void Func0636 object#(0x636) ()
 {
 	var var0000;
-	var var0001;
+
 	UI_fade_palette(0x000C, 0x0001, 0x0001);
 	if (item == UI_get_npc_object(0xFE9C))
 	{
@@ -69787,7 +69848,6 @@ void Func0636 object#(0x636) ()
 
 void Func0637 object#(0x637) ()
 {
-	var var0000;
 	UI_clear_item_flag(item, 0x001A);
 	UI_set_camera(0xFE9C);
 	return;
@@ -69805,7 +69865,7 @@ void Func0638 object#(0x638) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	var0000 = UI_get_item_quality(item);
 	if ((event != 0x0001) && (event != 0x0002))
 	{
@@ -69817,10 +69877,10 @@ void Func0638 object#(0x638) ()
 		{
 			Func08FF("@Odd. The page is smudged with dirt here. I cannot make out this text.@");
 			var0001 = UI_set_item_quality(item, 0x0091);
-			script item
+			var0001 = script item
 			{
 				call Func0638;
-			}
+			};
 			return;
 		}
 		if (item == UI_get_npc_object(0xFE9C))
@@ -69829,12 +69889,8 @@ void Func0638 object#(0x638) ()
 			{
 				gflags[0x0325] = true;
 				Func08FF("@Why, a page has fallen out of the book!@");
-				return;
 			}
-			else
-			{
-				return;
-			}
+			return;
 		}
 	}
 	UI_play_sound_effect2(0x000E, item);
@@ -70373,10 +70429,10 @@ void Func0638 object#(0x638) ()
 		message("     However, finding the Stone is only half the battle, for now thou must perform magicks beyonds the abilities of normal men. With a ... thou must..........");
 		say();
 		UI_close_gumps();
-		script item
+		var0001 = script item
 		{
 			call Func0638;
-		}
+		};
 	}
 	if (var0000 == 0x0091)
 	{
@@ -70393,11 +70449,11 @@ void Func0638 object#(0x638) ()
 			var0004 = UI_set_item_quality(var0003, 0x002D);
 			var0005 = UI_update_last_created(UI_get_object_position(0xFE9C));
 		}
-		script 0xFE9C
+		var0006 = script 0xFE9C
 		{
 			nohalt;
 			call Func0638;
-		}
+		};
 	}
 	if (var0000 == 0x0092)
 	{
@@ -70440,11 +70496,11 @@ void Func0639 object#(0x639) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
-		script item
+		var0000 = script item
 		{
 			face north;
 			actor frame kneeling;
@@ -70455,7 +70511,7 @@ void Func0639 object#(0x639) ()
 			actor frame cast_out;
 			actor frame strike_2h;
 			call Func0639;
-		}
+		};
 	}
 	if (event == 0x0002)
 	{
@@ -70476,7 +70532,7 @@ void Func063A object#(0x63A) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_array_size(UI_get_party_list());
@@ -70509,16 +70565,16 @@ void Func063C object#(0x63C) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	UI_fade_palette(0x000C, 0x0001, 0x0001);
 	var0000 = UI_find_nearby(0xFE9C, 0x0178, 0x0006, 0x0000);
 	if (var0000)
 	{
-		script var0000 after 1 ticks
+		var0001 = script var0000 after 1 ticks
 		{
 			call Func010E;
 			frame 6;
-		}
+		};
 	}
 	return;
 }
@@ -70531,7 +70587,7 @@ void Func063D object#(0x63D) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_npc_number(item);
@@ -70565,7 +70621,7 @@ void Func063E object#(0x63E) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0003)
 	{
 		var0000 = UI_set_last_created(0xFFE9);
@@ -70576,11 +70632,11 @@ void Func063E object#(0x63E) ()
 			var0000 = UI_update_last_created(var0001);
 			UI_set_item_frame(0xFFE9, 0x0010);
 		}
-		script 0xFE9C after 1 ticks
+		var0000 = script 0xFE9C after 1 ticks
 		{
 			nohalt;
 			call Func063E;
-		}
+		};
 		var0000 = UI_set_npc_prop(0xFE9C, 0x0002, 0x0000);
 		var0000 = UI_set_npc_prop(0xFE9C, 0x0001, 0x0000);
 		var0000 = UI_set_npc_prop(0xFE9C, 0x0000, 0x000F);
@@ -70601,7 +70657,13 @@ void Func063E object#(0x63E) ()
 		UI_play_sound_effect(0x000F);
 		message("Judgement rendered.* Sentence selected:* Death.*");
 		say();
-		var0000 = UI_execute_usecode_array(0x56, 0x0015);
+		// Bug: using 0x56 as object. This probably should have been something
+		// like this instead:
+		//var0000 = script item
+		//{
+		//	speech 21;
+		//};
+		var0000 = UI_execute_usecode_array((byte)0x56, 0x0015);
 		var0002 = UI_get_party_list();
 		for (var0005 in var0002 with var0003 to var0004)
 		{
@@ -70624,16 +70686,16 @@ extern void Func0716 object#(0x716) ();
 void Func063F object#(0x63F) ()
 {
 	var var0000;
-	var var0001;
+
 	gflags[0x0326] = true;
 	UI_set_camera(0xFE9C);
-	script UI_get_cont_items(0xFE9C, 0xFE99, 0xFE99, 0xFE99)
+	var0000 = script UI_get_cont_items(0xFE9C, 0xFE99, 0xFE99, 0xFE99)
 	{
 		wait 2;
 		nohalt;
 		call Func0716;
 		call Func0636;
-	}
+	};
 	UI_fade_palette(0x000C, 0x0001, 0x0000);
 	return;
 }
@@ -70648,7 +70710,7 @@ void Func0640 object#(0x640) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
@@ -70657,28 +70719,28 @@ void Func0640 object#(0x640) ()
 		UI_item_say(item, "@An Zu@");
 		if (Func0906() && (var0000[0x0001] != 0x0000))
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				sfx 64;
 				actor frame raise_1h;
 				actor frame strike_1h;
-			}
-			script var0000 after 5 ticks
+			};
+			var0002 = script var0000 after 5 ticks
 			{
 				nohalt;
 				call Func0640;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -70704,19 +70766,19 @@ void Func0641 object#(0x641) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
 		UI_item_say(item, "@Rel Hur@");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame raise_1h;
 				actor frame strike_1h;
 				sfx 68;
-			}
+			};
 			var0001 = [0x0000, 0x0001, 0x0002];
 			if (UI_get_weather() == 0x0000)
 			{
@@ -70734,12 +70796,12 @@ void Func0641 object#(0x641) ()
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -70756,7 +70818,7 @@ void Func0642 object#(0x642) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
@@ -70766,23 +70828,23 @@ void Func0642 object#(0x642) ()
 		if (Func0906())
 		{
 			var0002 = UI_set_to_attack(item, var0000, 0x021C);
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				attack;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0004)
@@ -70791,10 +70853,10 @@ void Func0642 object#(0x642) ()
 		if (var0003 in [0x02BD, 0x020E, 0x0152, 0x01B3])
 		{
 			UI_telekenesis(var0003);
-			script item
+			var0002 = script item
 			{
 				call var0003;
-			}
+			};
 			UI_play_sound_effect(0x002E);
 		}
 		else
@@ -70812,29 +70874,29 @@ void Func0643 object#(0x643) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
 		UI_item_say(item, "@Bet Ort@");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame cast_out;
 				actor frame cast_up;
 				sfx 36;
 				call Func0643;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame cast_out;
 				actor frame cast_up;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -70851,30 +70913,30 @@ extern var Func0906 0x906 ();
 void Func0644 object#(0x644) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
 		UI_item_say(item, "@Bet Lor@");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				nohalt;
 				sfx 68;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0644;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -70895,7 +70957,7 @@ void Func0645 object#(0x645) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
@@ -70907,7 +70969,7 @@ void Func0645 object#(0x645) ()
 				if (Func0906())
 				{
 					gflags[0x0027] = true;
-					script item
+					var0000 = script item
 					{
 						sfx 64;
 						actor frame cast_up;
@@ -70917,7 +70979,7 @@ void Func0645 object#(0x645) ()
 						actor frame standing;
 						actor frame cast_up;
 						call Func0645;
-					}
+					};
 					var0001 = UI_get_party_list();
 					for (var0004 in var0001 with var0002 to var0003)
 					{
@@ -70929,7 +70991,7 @@ void Func0645 object#(0x645) ()
 					break;
 				}
 			}
-			script item
+			var0000 = script item
 			{
 				actor frame cast_up;
 				actor frame standing;
@@ -70938,7 +71000,7 @@ void Func0645 object#(0x645) ()
 				actor frame standing;
 				actor frame cast_up;
 				call Func0606;
-			}
+			};
 		} while (false);
 	}
 	if (event == 0x0002)
@@ -70960,7 +71022,7 @@ void Func0646 object#(0x646) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
@@ -70970,25 +71032,25 @@ void Func0646 object#(0x646) ()
 		if (Func0906())
 		{
 			var0002 = UI_set_to_attack(item, var0000, 0x0118);
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame strike_2h;
 				attack;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0004)
@@ -70997,11 +71059,11 @@ void Func0646 object#(0x646) ()
 		if (var0003 in [0x0253, 0x0379, 0x0150, 0x01E1])
 		{
 			UI_telekenesis(var0003);
-			script item
+			var0002 = script item
 			{
 				nohalt;
 				call var0003;
-			}
+			};
 		}
 		else
 		{
@@ -71017,28 +71079,28 @@ extern var Func0906 0x906 ();
 void Func0647 object#(0x647) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
 		UI_item_say(item, "@Vas Kal@");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame reach_2h;
 				actor frame strike_2h;
 				sfx 62;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame reach_2h;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -71057,31 +71119,31 @@ void Func0648 object#(0x648) ()
 	var var0005;
 	var var0006;
 	var var0007;
-	var var0008;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
 		UI_item_say(item, "@In Mani Ylem@");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				sfx 68;
 				actor frame reach_1h;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0648;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame reach_1h;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -71112,7 +71174,7 @@ void Func0649 object#(0x649) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -71123,42 +71185,42 @@ void Func0649 object#(0x649) ()
 		{
 			if (UI_is_npc(var0000))
 			{
-				script item
+				var0002 = script item
 				{
 					face var0001;
 					sfx 64;
 					actor frame reach_1h;
 					actor frame raise_1h;
 					actor frame strike_1h;
-				}
-				script var0000 after 6 ticks
+				};
+				var0002 = script var0000 after 6 ticks
 				{
 					nohalt;
 					call Func0649;
-				}
+				};
 			}
 			else
 			{
-				script item
+				var0002 = script item
 				{
 					face var0001;
 					actor frame reach_1h;
 					actor frame raise_1h;
 					actor frame strike_1h;
 					call Func0606;
-				}
+				};
 			}
 		}
 		else
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame reach_1h;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -71188,29 +71250,29 @@ void Func064A object#(0x64A) ()
 	var var000A;
 	var var000B;
 	var var000C;
-	var var000D;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
 		UI_item_say(item, "@Wis Jux@");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				sfx 66;
 				actor frame raise_1h;
 				actor frame strike_1h;
-			}
+			};
 			var0001 = Func08F6(0xFE9C);
 			var0002 = (0x0015 + var0001);
 			var0003 = UI_find_nearby(item, 0x00C8, var0002, 0x00B0);
 			for (var0006 in var0003 with var0004 to var0005)
 			{
-				script var0006 after 5 ticks
+				var0000 = script var0006 after 5 ticks
 				{
 					nohalt;
 					call Func064A;
-				}
+				};
 			}
 			var0007 = UI_find_nearby(item, 0x0320, var0002, 0x00B0);
 			var0008 = UI_find_nearby(item, 0x020A, var0002, 0x00B0);
@@ -71219,22 +71281,22 @@ void Func064A object#(0x64A) ()
 			{
 				if (UI_get_item_quality(var0006) == 0x00FF)
 				{
-					script var0006 after 5 ticks
+					var0000 = script var0006 after 5 ticks
 					{
 						nohalt;
 						call Func064A;
-					}
+					};
 				}
 			}
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -71262,19 +71324,19 @@ void Func064B object#(0x64B) ()
 	var var0009;
 	var var000A;
 	var var000B;
-	var var000C;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
 		UI_item_say(item, "@Vas An Flam@");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame reach_1h;
 				actor frame raise_1h;
 				actor frame strike_1h;
-			}
+			};
 			var0001 = 0x0019;
 			var0002 = [0x02BD, 0x020E, 0x0152, 0x01B3];
 			for (var0005 in var0002 with var0003 to var0004)
@@ -71285,23 +71347,23 @@ void Func064B object#(0x64B) ()
 					var000A = UI_get_item_shape(var0009);
 					var000B = ((UI_get_distance(item, var0009) / 0x0003) + 0x0002);
 					UI_telekenesis(var000A);
-					script var0009 after var000B ticks
+					var0000 = script var0009 after var000B ticks
 					{
 						nohalt;
 						call var000A;
-					}
+					};
 				}
 			}
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame reach_1h;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -71324,19 +71386,19 @@ void Func064C object#(0x64C) ()
 	var var0009;
 	var var000A;
 	var var000B;
-	var var000C;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
 		UI_item_say(item, "@Vas In Flam@");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame raise_1h;
 				actor frame reach_1h;
 				actor frame strike_1h;
-			}
+			};
 			var0001 = 0x0019;
 			var0002 = [0x0253, 0x0379, 0x0150, 0x01E1];
 			for (var0005 in var0002 with var0003 to var0004)
@@ -71347,23 +71409,23 @@ void Func064C object#(0x64C) ()
 					var000A = UI_get_item_shape(var0009);
 					var000B = ((UI_get_distance(item, var0009) / 0x0003) + 0x0002);
 					UI_telekenesis(var000A);
-					script var0009 after var000B ticks
+					var0000 = script var0009 after var000B ticks
 					{
 						nohalt;
 						call var000A;
-					}
+					};
 				}
 			}
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame raise_1h;
 				actor frame reach_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -71375,30 +71437,30 @@ extern var Func0906 0x906 ();
 void Func064D object#(0x64D) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
 		UI_item_say(item, "@In Lor@");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				nohalt;
 				sfx 68;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func064D;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -71420,13 +71482,13 @@ void Func064E object#(0x64E) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_item_say(item, "@In Wis@");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				sfx 67;
 				actor frame kneeling;
@@ -71434,17 +71496,17 @@ void Func064E object#(0x64E) ()
 				actor frame cast_up;
 				wait 4;
 				call Func064E;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame kneeling;
 				actor frame standing;
 				actor frame cast_up;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -71485,7 +71547,7 @@ void Func064F object#(0x64F) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_get_object_position(item);
@@ -71494,31 +71556,31 @@ void Func064F object#(0x64F) ()
 		if (Func0906())
 		{
 			UI_sprite_effect(0x0007, (var0000[0x0001] - 0x0002), (var0000[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
-			script item
+			var0001 = script item
 			{
 				sfx 68;
 				actor frame raise_1h;
 				actor frame strike_1h;
-			}
+			};
 			var0002 = 0x0019;
 			var0003 = UI_find_nearby(item, 0xFFFF, var0002, 0x0004);
 			for (var0006 in var0003 with var0004 to var0005)
 			{
-				script var0006
+				var0001 = script var0006
 				{
 					nohalt;
 					call Func064F;
-				}
+				};
 			}
 		}
 		else
 		{
-			script item
+			var0001 = script item
 			{
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -71544,7 +71606,7 @@ void Func0650 object#(0x650) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -71553,13 +71615,13 @@ void Func0650 object#(0x650) ()
 		UI_item_say(item, "@An Jux@");
 		if (Func0906())
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame strike_2h;
-			}
+			};
 			var0003 = UI_find_nearby(var0000, 0x00C8, 0x0002, 0x00B0);
 			for (var0006 in var0003 with var0004 to var0005)
 			{
@@ -71587,13 +71649,13 @@ void Func0650 object#(0x650) ()
 		}
 		else
 		{
-			script item
+			var0002 = script item
 			{
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -71615,7 +71677,7 @@ void Func0651 object#(0x651) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	var0000 = [0x02D2, 0x02D3];
 	var0001 = [0x022C, 0x01A1];
 	if (event == 0x0001)
@@ -71627,30 +71689,30 @@ void Func0651 object#(0x651) ()
 		UI_item_say(item, "@Ort Ylem@");
 		if (Func0906() && (var0003 in var0000))
 		{
-			script item
+			var0005 = script item
 			{
 				face var0004;
 				sfx 67;
 				actor frame reach_1h;
 				actor frame raise_1h;
 				actor frame strike_1h;
-			}
-			script var0002 after 4 ticks
+			};
+			var0005 = script var0002 after 4 ticks
 			{
 				nohalt;
 				call Func0651;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0005 = script item
 			{
 				face var0004;
 				actor frame reach_1h;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -71678,7 +71740,7 @@ void Func0652 object#(0x652) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if ((event == 0x0001) || (event == 0x0004))
 	{
 		UI_halt_scheduled(item);
@@ -71688,7 +71750,7 @@ void Func0652 object#(0x652) ()
 		if (Func0906())
 		{
 			var0002 = UI_set_to_attack(item, var0000, 0x0358);
-			script item
+			var0003 = script item
 			{
 				face var0001;
 				sfx 65;
@@ -71698,18 +71760,18 @@ void Func0652 object#(0x652) ()
 				actor frame strike_2h;
 				attack;
 				actor frame standing;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0003 = script item
 			{
 				face var0001;
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -71721,30 +71783,30 @@ extern var Func0906 0x906 ();
 void Func0653 object#(0x653) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
 		UI_item_say(item, "@Vas Lor@");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				nohalt;
 				sfx 68;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0653;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -71765,7 +71827,7 @@ void Func0654 object#(0x654) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
@@ -71774,24 +71836,24 @@ void Func0654 object#(0x654) ()
 		UI_item_say(item, "@Vas An Nox@");
 		if (Func0906())
 		{
-			script item
+			var0001 = script item
 			{
 				actor frame reach_1h;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				sfx 64;
 				call Func0654;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0001 = script item
 			{
 				actor frame reach_1h;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -71818,7 +71880,7 @@ void Func0655 object#(0x655) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
@@ -71827,32 +71889,32 @@ void Func0655 object#(0x655) ()
 		UI_item_say(item, "@Uus Sanct@");
 		if (Func0906() && UI_is_npc(var0000))
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				sfx 109;
 				actor frame cast_up;
 				actor frame raise_1h;
 				actor frame strike_2h;
-			}
-			script var0000 after 5 ticks
+			};
+			var0003 = script var0000 after 5 ticks
 			{
 				nohalt;
 				call Func0655;
-			}
+			};
 			var0004 = UI_get_object_position(var0000);
 			UI_obj_sprite_effect(item, 0x000D, 0xFFFE, 0xFFFE, 0x0000, 0x0000, 0x0000, 0xFFFF);
 		}
 		else
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame cast_up;
 				actor frame raise_1h;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -71874,7 +71936,7 @@ void Func0656 object#(0x656) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
@@ -71888,24 +71950,24 @@ void Func0656 object#(0x656) ()
 		if (Func0906() && ((!UI_is_npc(var0000)) && (var0000[0x0001] != 0x0000)))
 		{
 			var0002 = UI_set_to_attack(item, var0000, 0x01BB);
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				sfx 67;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				attack;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0004)
@@ -71915,19 +71977,19 @@ void Func0656 object#(0x656) ()
 		var0005 = UI_get_item_shape(item);
 		if (var0005 in var0004)
 		{
-			script item
+			var0002 = script item
 			{
 				call var0005;
-			}
+			};
 			return;
 		}
 		if (!(var0005 in var0003))
 		{
 			UI_telekenesis(var0005);
-			script item
+			var0002 = script item
 			{
 				call var0005;
-			}
+			};
 		}
 	}
 	return;
@@ -71940,13 +72002,13 @@ void Func0657 object#(0x657) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_item_say(item, "@Por Ort Wis@");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame cast_up;
 				sfx 67;
@@ -71954,18 +72016,18 @@ void Func0657 object#(0x657) ()
 				actor frame cast_up;
 				actor frame strike_2h;
 				call Func0657;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame cast_up;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -71986,7 +72048,7 @@ void Func0658 object#(0x658) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
@@ -71996,7 +72058,7 @@ void Func0658 object#(0x658) ()
 		if (Func0906() && (var0000[0x0001] != 0x0000))
 		{
 			var0002 = UI_set_to_attack(item, var0000, 0x0119);
-			script item
+			var0003 = script item
 			{
 				face var0001;
 				sfx 67;
@@ -72004,18 +72066,18 @@ void Func0658 object#(0x658) ()
 				actor frame cast_out;
 				actor frame strike_2h;
 				attack;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0003 = script item
 			{
 				face var0001;
 				actor frame raise_1h;
 				actor frame cast_out;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -72033,7 +72095,7 @@ void Func0659 object#(0x659) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -72042,7 +72104,7 @@ void Func0659 object#(0x659) ()
 		UI_item_say(item, "@Mani@");
 		if (Func0906() && UI_is_npc(var0000))
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame kneeling;
@@ -72051,16 +72113,16 @@ void Func0659 object#(0x659) ()
 				actor frame reach_1h;
 				actor frame raise_1h;
 				actor frame strike_1h;
-			}
-			script var0000 after 5 ticks
+			};
+			var0002 = script var0000 after 5 ticks
 			{
 				nohalt;
 				call Func0659;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame kneeling;
@@ -72069,7 +72131,7 @@ void Func0659 object#(0x659) ()
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -72094,31 +72156,31 @@ void Func065A object#(0x65A) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
 		UI_item_say(item, "@Kal Bet Xen@");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame strike_2h;
 				sfx 65;
 				call Func065A;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -72145,32 +72207,32 @@ void Func065B object#(0x65B) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_item_say(item, "@Vas Uus Sanct@");
 		if (Func0906())
 		{
 			UI_halt_scheduled(item);
-			script item
+			var0000 = script item
 			{
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame cast_up;
 				actor frame strike_2h;
 				call Func065B;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame cast_up;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -72198,7 +72260,7 @@ void Func065C object#(0x65C) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if ((event == 0x0001) || (event == 0x0004))
 	{
 		var0000 = UI_click_on_item();
@@ -72208,7 +72270,7 @@ void Func065C object#(0x65C) ()
 		if (Func0906() && (var0000[0x0001] != 0x0000))
 		{
 			var0002 = UI_set_to_attack(item, var0000, 0x0198);
-			script item
+			var0003 = script item
 			{
 				face var0001;
 				actor frame raise_1h;
@@ -72216,17 +72278,17 @@ void Func065C object#(0x65C) ()
 				actor frame strike_1h;
 				attack;
 				actor frame standing;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0003 = script item
 			{
 				face var0001;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -72238,31 +72300,31 @@ extern var Func0906 0x906 ();
 void Func065D object#(0x65D) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
 		UI_item_say(item, "@Vas Wis@");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				sfx 67;
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame cast_up;
 				call Func065D;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame cast_up;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -72282,7 +72344,7 @@ void Func065E object#(0x65E) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -72291,7 +72353,7 @@ void Func065E object#(0x65E) ()
 		if (Func0906() && (var0000[0x0001] != 0x0000))
 		{
 			var0002 = UI_set_to_attack(item, var0000, 0x01A8);
-			script item
+			var0003 = script item
 			{
 				face var0001;
 				sfx 110;
@@ -72300,17 +72362,17 @@ void Func065E object#(0x65E) ()
 				actor frame strike_1h;
 				attack;
 				actor frame standing;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0003 = script item
 			{
 				face var0001;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -72326,7 +72388,7 @@ void Func065F object#(0x65F) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -72336,7 +72398,7 @@ void Func065F object#(0x65F) ()
 		if (Func0906() && (var0000[0x0001] != 0x0000))
 		{
 			var0002 = UI_set_to_attack(item, var0000, 0x0048);
-			script item
+			var0003 = script item
 			{
 				face var0001;
 				actor frame raise_1h;
@@ -72344,17 +72406,17 @@ void Func065F object#(0x65F) ()
 				actor frame strike_1h;
 				attack;
 				actor frame standing;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0003 = script item
 			{
 				face var0001;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -72375,31 +72437,31 @@ void Func0660 object#(0x660) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
 		UI_item_say(item, "@Kal Xen@");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				sfx 65;
 				actor frame raise_1h;
 				actor frame reach_1h;
 				actor frame strike_1h;
 				call Func0660;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame raise_1h;
 				actor frame reach_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -72441,7 +72503,7 @@ void Func0661 object#(0x661) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if ((event == 0x0001) || (event == 0x0004))
 	{
 		var0000 = UI_click_on_item();
@@ -72451,7 +72513,7 @@ void Func0661 object#(0x661) ()
 		if (Func0906())
 		{
 			var0002 = UI_set_to_attack(item, var0000, 0x0327);
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame raise_1h;
@@ -72462,11 +72524,11 @@ void Func0661 object#(0x661) ()
 				actor frame strike_2h;
 				attack;
 				actor frame standing;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame raise_1h;
@@ -72474,7 +72536,7 @@ void Func0661 object#(0x661) ()
 				actor frame cast_out;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -72488,7 +72550,7 @@ void Func0662 object#(0x662) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
@@ -72500,31 +72562,31 @@ void Func0662 object#(0x662) ()
 				UI_item_say(item, "@Kal Por Ylem@");
 				if (Func0906() && (!gflags[0x0039]))
 				{
-					script var0000
+					var0001 = script var0000
 					{
 						nohalt;
 						call Func0612;
-					}
-					script item
+					};
+					var0002 = script item
 					{
 						sfx 67;
 						actor frame cast_up;
 						actor frame cast_out;
 						actor frame strike_2h;
-					}
+					};
 					var0001 = UI_get_object_position(item);
 					UI_sprite_effect(0x000D, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 					return;
 				}
 			}
 		}
-		script item
+		var0002 = script item
 		{
 			actor frame cast_up;
 			actor frame cast_out;
 			actor frame strike_2h;
 			call Func0606;
-		}
+		};
 	}
 	return;
 }
@@ -72543,7 +72605,7 @@ void Func0663 object#(0x663) ()
 	var var0005;
 	var var0006;
 	var var0007;
-	var var0008;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
@@ -72552,14 +72614,14 @@ void Func0663 object#(0x663) ()
 		{
 			var0000 = UI_get_object_position(item);
 			UI_sprite_effect(0x0007, (var0000[0x0001] - 0x0002), (var0000[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
-			script item
+			var0001 = script item
 			{
 				actor frame cast_up;
 				sfx 65;
 				actor frame cast_out;
 				actor frame cast_up;
 				actor frame strike_2h;
-			}
+			};
 			var0002 = 0x001E;
 			var0003 = Func0934(var0002);
 			var0004 = UI_get_party_list();
@@ -72572,25 +72634,25 @@ void Func0663 object#(0x663) ()
 					{
 						var0002 = UI_get_distance(item, var0007);
 						var0002 = ((var0002 / 0x0003) + 0x0005);
-						script var0007 after var0002 ticks
+						var0001 = script var0007 after var0002 ticks
 						{
 							nohalt;
 							call Func0663;
-						}
+						};
 					}
 				}
 			}
 		}
 		else
 		{
-			script item
+			var0001 = script item
 			{
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame cast_up;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -72608,7 +72670,7 @@ void Func0664 object#(0x664) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
@@ -72617,29 +72679,29 @@ void Func0664 object#(0x664) ()
 		UI_item_say(item, "@Kal Ort Por@");
 		if (Func0906() && (UI_get_item_shape(var0000) == 0x014A))
 		{
-			script item
+			var0002 = script item
 			{
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame strike_2h;
-			}
-			script var0000 after 6 ticks
+			};
+			var0002 = script var0000 after 6 ticks
 			{
 				nohalt;
 				call Func0613;
-			}
+			};
 			UI_sprite_effect(0x0007, var0000[0x0002], var0000[0x0003], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_obj_sprite_effect(item, 0x0007, 0xFFFE, 0xFFFE, 0x0000, 0x0000, 0x0000, 0xFFFF);
 		}
 		else
 		{
-			script item
+			var0002 = script item
 			{
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -72666,7 +72728,7 @@ void Func0665 object#(0x665) ()
 	var var000D;
 	var var000E;
 	var var000F;
-	var var0010;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
@@ -72675,13 +72737,13 @@ void Func0665 object#(0x665) ()
 		UI_item_say(item, "@Wis Quas@");
 		if (Func0906())
 		{
-			script item
+			var0002 = script item
 			{
 				sfx 67;
 				actor frame raise_1h;
 				actor frame reach_1h;
 				actor frame strike_1h;
-			}
+			};
 			var0003 = UI_get_object_position(item);
 			var0004 = [0xFFF1, 0xFFF1, 0xFFF1, 0xFFFB, 0xFFFB, 0xFFFB, 0x0005, 0x0005, 0x0005, 0x000F, 0x000F, 0x000F];
 			var0005 = [0xFFF9, 0x0002, 0x000B, 0xFFF9, 0x0002, 0x000B, 0xFFF9, 0x0002, 0x000B, 0xFFF9, 0x0002, 0x000B];
@@ -72706,11 +72768,11 @@ void Func0665 object#(0x665) ()
 			{
 				for (var000D in var0001 with var000E to var000F)
 				{
-					script var000D after 5 ticks
+					var0002 = script var000D after 5 ticks
 					{
 						nohalt;
 						call Func0665;
-					}
+					};
 					UI_obj_sprite_effect(var000D, 0x000D, 0xFFFF, 0xFFFF, 0x0000, 0x0000, 0x0000, 0xFFFF);
 				}
 			}
@@ -72721,13 +72783,13 @@ void Func0665 object#(0x665) ()
 		}
 		else
 		{
-			script item
+			var0002 = script item
 			{
 				actor frame raise_1h;
 				actor frame reach_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -72749,20 +72811,20 @@ void Func0666 object#(0x666) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
 		UI_item_say(item, "@Kal Wis Corp@");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				sfx 67;
 				actor frame reach_1h;
 				actor frame raise_1h;
 				actor frame strike_1h;
-			}
+			};
 			var0001 = UI_get_object_position(item);
 			var0002 = (var0001[0x0001] - 0x0002);
 			var0003 = (var0001[0x0002] - 0x0002);
@@ -72793,22 +72855,22 @@ void Func0666 object#(0x666) ()
 				var0006 = (var0006 + (0x003C - var0005));
 				var0006 = (var0006 * 0x0019);
 			}
-			script item after var0006 ticks
+			var0000 = script item after var0006 ticks
 			{
 				nohalt;
 				finish;
 				call Func0666;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame reach_1h;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -72842,7 +72904,7 @@ void Func0667 object#(0x667) ()
 	var var0005;
 	var var0006;
 	var var0007;
-	var var0008;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -72861,31 +72923,31 @@ void Func0667 object#(0x667) ()
 					var0005 = UI_get_item_frame(var0000);
 					if (((var0005 + 0x0001) % 0x0004) == 0x0000)
 					{
-						script item
+						var0006 = script item
 						{
 							face var0002;
 							actor frame reach_1h;
 							actor frame raise_1h;
 							actor frame strike_1h;
 							sfx 66;
-						}
-						script var0000 after 6 ticks
+						};
+						var0006 = script var0000 after 6 ticks
 						{
 							nohalt;
 							call Func0667;
-						}
+						};
 						break;
 					}
 				}
 			}
-			script item
+			var0006 = script item
 			{
 				face var0002;
 				actor frame reach_1h;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		} while (false);
 	}
 	if (event == 0x0002)
@@ -72906,7 +72968,7 @@ void Func0668 object#(0x668) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -72916,7 +72978,7 @@ void Func0668 object#(0x668) ()
 		if (Func0906())
 		{
 			var0002 = UI_set_to_attack(item, var0000, 0x0050);
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				sfx 68;
@@ -72924,18 +72986,18 @@ void Func0668 object#(0x668) ()
 				actor frame cast_out;
 				actor frame strike_2h;
 				attack;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame raise_1h;
 				actor frame cast_out;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -72961,32 +73023,32 @@ void Func0669 object#(0x669) ()
 	var var0008;
 	var var0009;
 	var var000A;
-	var var000B;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
 		UI_item_say(item, "@Por Xen@");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				sfx 67;
 				actor frame raise_1h;
 				actor frame cast_out;
 				actor frame strike_2h;
 				call Func0669;
-			}
+			};
 			UI_item_say(item, "@Everybody DANCE now!@");
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame raise_1h;
 				actor frame cast_out;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -73007,11 +73069,11 @@ void Func0669 object#(0x669) ()
 				var000A = UI_die_roll(0x000A, 0x0028);
 				Func0933(var0005, var0008[var0009], var000A);
 				var000A = UI_die_roll(0x0032, 0x004B);
-				script var0005 after var000A ticks
+				var0000 = script var0005 after var000A ticks
 				{
 					nohalt;
 					call Func0688;
-				}
+				};
 			}
 		}
 	}
@@ -73031,7 +73093,7 @@ void Func066A object#(0x66A) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -73041,14 +73103,14 @@ void Func066A object#(0x66A) ()
 		UI_item_say(item, "@An Grav@");
 		if (Func0906())
 		{
-			script item
+			var0003 = script item
 			{
 				sfx 65;
 				face var0001;
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame strike_2h;
-			}
+			};
 			for (var0006 in var0002 with var0004 to var0005)
 			{
 				if (var0006 == UI_get_item_shape(var0000))
@@ -73064,14 +73126,14 @@ void Func066A object#(0x66A) ()
 		}
 		else
 		{
-			script item
+			var0003 = script item
 			{
 				face var0001;
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -73086,7 +73148,7 @@ void Func066B object#(0x66B) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if ((event == 0x0001) || (event == 0x0004))
 	{
 		var0000 = UI_click_on_item();
@@ -73096,7 +73158,7 @@ void Func066B object#(0x66B) ()
 		if (Func0906())
 		{
 			var0002 = UI_set_to_attack(item, var0000, 0x004E);
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				sfx 65;
@@ -73106,18 +73168,18 @@ void Func066B object#(0x66B) ()
 				actor frame strike_1h;
 				attack;
 				actor frame standing;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -73135,7 +73197,7 @@ void Func066C object#(0x66C) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -73144,14 +73206,14 @@ void Func066C object#(0x66C) ()
 		UI_item_say(item, "@Vas Mani@");
 		if (Func0906())
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame reach_1h;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				sfx 64;
-			}
+			};
 			if (UI_is_npc(var0000))
 			{
 				var0003 = UI_get_npc_prop(var0000, 0x0000);
@@ -73161,14 +73223,14 @@ void Func066C object#(0x66C) ()
 		}
 		else
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame reach_1h;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -73183,7 +73245,7 @@ void Func066D object#(0x66D) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -73192,30 +73254,30 @@ void Func066D object#(0x66D) ()
 		UI_item_say(item, "@Sanct Lor@");
 		if (Func0906())
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				sfx 67;
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame strike_2h;
-			}
-			script var0000 after 4 ticks
+			};
+			var0002 = script var0000 after 4 ticks
 			{
 				nohalt;
 				call Func066D;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -73241,7 +73303,7 @@ void Func066E object#(0x66E) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -73250,14 +73312,14 @@ void Func066E object#(0x66E) ()
 		UI_item_say(item, "@In Flam Grav@");
 		if (Func0906())
 		{
-			script item
+			var0002 = script item
 			{
 				sfx 65;
 				face var0001;
 				actor frame raise_1h;
 				actor frame reach_1h;
 				actor frame strike_1h;
-			}
+			};
 			var0003 = UI_create_new_object(0x037F);
 			if (var0003)
 			{
@@ -73269,22 +73331,22 @@ void Func066E object#(0x66E) ()
 				var0009 = 0x0064;
 				var0008 = UI_set_item_quality(var0003, var0009);
 				UI_set_item_flag(var0003, 0x0012);
-				script var0003 after var0009 ticks
+				var0008 = script var0003 after var0009 ticks
 				{
 					remove;
-				}
+				};
 			}
 		}
 		else
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame raise_1h;
 				actor frame reach_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -73303,7 +73365,7 @@ void Func066F object#(0x66F) ()
 	var var0005;
 	var var0006;
 	var var0007;
-	var var0008;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
@@ -73312,7 +73374,7 @@ void Func066F object#(0x66F) ()
 		if (Func0906())
 		{
 			UI_sprite_effect(0x0007, (var0000[0x0001] - 0x0002), (var0000[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
-			script item
+			var0001 = script item
 			{
 				sfx 65;
 				actor frame standing;
@@ -73321,11 +73383,11 @@ void Func066F object#(0x66F) ()
 				actor frame strike_1h;
 				actor frame strike_2h;
 				call Func066F;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0001 = script item
 			{
 				actor frame standing;
 				actor frame raise_1h;
@@ -73333,7 +73395,7 @@ void Func066F object#(0x66F) ()
 				actor frame strike_1h;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -73364,14 +73426,14 @@ void Func0670 object#(0x670) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
 		UI_item_say(item, "@Quas Wis@");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				sfx 65;
 				actor frame kneeling;
@@ -73380,11 +73442,11 @@ void Func0670 object#(0x670) ()
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0670;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame kneeling;
 				actor frame standing;
@@ -73392,7 +73454,7 @@ void Func0670 object#(0x670) ()
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -73424,7 +73486,7 @@ void Func0671 object#(0x671) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -73433,27 +73495,27 @@ void Func0671 object#(0x671) ()
 		UI_item_say(item, "@In Quas Xen@");
 		if (Func0906() && (UI_is_npc(var0000) && (!(UI_get_item_flag(0x0000, 0x001B) == 0xFFFF))))
 		{
-			script item
+			var0002 = script item
 			{
 				actor frame raise_1h;
 				actor frame cast_out;
 				actor frame strike_2h;
-			}
-			script var0000 after 4 ticks
+			};
+			var0002 = script var0000 after 4 ticks
 			{
 				nohalt;
 				call Func0671;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0002 = script item
 			{
 				actor frame raise_1h;
 				actor frame cast_out;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -73483,7 +73545,7 @@ void Func0672 object#(0x672) ()
 	var var000B;
 	var var000C;
 	var var000D;
-	var var000E;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -73492,14 +73554,14 @@ void Func0672 object#(0x672) ()
 		UI_item_say(item, "@Kal Flam Grav@");
 		if (Func0906())
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				sfx 65;
 				actor frame reach_1h;
 				actor frame strike_1h;
 				actor frame raise_1h;
-			}
+			};
 			var0003 = [0xFFFF, 0x0000, 0x0001, 0x0002, 0x0002, 0x0002, 0x0001, 0x0000, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFE];
 			var0004 = [0xFFFE, 0xFFFE, 0xFFFE, 0xFFFF, 0x0000, 0x0001, 0x0002, 0x0002, 0x0002, 0x0001, 0x0000, 0xFFFF];
 			var0005 = 0x0000;
@@ -73524,25 +73586,25 @@ void Func0672 object#(0x672) ()
 						UI_set_item_flag(var000B, 0x0000);
 						var0002 = UI_update_last_created(var0009);
 						var0002 = UI_set_npc_prop(var000B, 0x0003, 0x0001);
-						script var000B after var0005 ticks
+						var0002 = script var000B after var0005 ticks
 						{
 							nohalt;
 							call Func0672;
-						}
+						};
 					}
 				}
 			}
 		}
 		else
 		{
-			script item
+			var000C = script item
 			{
 				face var0001;
 				actor frame reach_1h;
 				actor frame strike_1h;
 				actor frame raise_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -73560,11 +73622,11 @@ void Func0672 object#(0x672) ()
 			var0002 = UI_update_last_created(var0009);
 			var000D = 0x001E;
 			var000D = (var000D + UI_die_roll(0x0001, 0x0005));
-			script var000B after var000D ticks
+			var0002 = script var000B after var000D ticks
 			{
 				nohalt;
 				remove;
-			}
+			};
 		}
 	}
 	return;
@@ -73590,7 +73652,7 @@ void Func0673 object#(0x673) ()
 	var var000B;
 	var var000C;
 	var var000D;
-	var var000E;
+
 	if (event == 0x0001)
 	{
 		var0000 = 0x0019;
@@ -73599,7 +73661,7 @@ void Func0673 object#(0x673) ()
 		UI_item_say(item, "@Vas In Flam Grav@");
 		if (Func0906())
 		{
-			script item
+			var0002 = script item
 			{
 				sfx 65;
 				actor frame bowing;
@@ -73607,7 +73669,7 @@ void Func0673 object#(0x673) ()
 				actor frame bowing;
 				actor frame cast_out;
 				actor frame strike_2h;
-			}
+			};
 			for (var0005 in var0001 with var0003 to var0004)
 			{
 				var0006 = UI_get_object_position(var0005);
@@ -73623,17 +73685,17 @@ void Func0673 object#(0x673) ()
 					var000D = (0x001E + var000C);
 					var0002 = UI_set_item_quality(var000B, var000D);
 					UI_set_item_flag(var000B, 0x0012);
-					script var000B after var000D ticks
+					var0002 = script var000B after var000D ticks
 					{
 						nohalt;
 						remove;
-					}
+					};
 				}
 			}
 		}
 		else
 		{
-			script item
+			var0002 = script item
 			{
 				actor frame bowing;
 				actor frame kneeling;
@@ -73641,7 +73703,7 @@ void Func0673 object#(0x673) ()
 				actor frame cast_out;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -73660,7 +73722,7 @@ void Func0674 object#(0x674) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
@@ -73670,7 +73732,7 @@ void Func0674 object#(0x674) ()
 			var0000 = 0x0046;
 			gflags[0x02ED] = true;
 			UI_set_weather(0x0002);
-			script item
+			var0001 = script item
 			{
 				sfx 65;
 				actor frame cast_up;
@@ -73678,28 +73740,28 @@ void Func0674 object#(0x674) ()
 				actor frame cast_up;
 				actor frame strike_2h;
 				actor frame standing;
-			}
-			script item after 8 ticks
+			};
+			var0001 = script item after 8 ticks
 			{
 				nohalt;
 				call Func0674;
-			}
-			script item after var0000 ticks
+			};
+			var0001 = script item after var0000 ticks
 			{
 				nohalt;
 				call Func068A;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0001 = script item
 			{
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame cast_up;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -73711,18 +73773,18 @@ void Func0674 object#(0x674) ()
 			var0004 = var0003[UI_die_roll(0x0001, UI_get_array_size(var0003))];
 			if (var0004)
 			{
-				script var0004
+				var0001 = script var0004
 				{
 					nohalt;
 					call Func060F;
-				}
+				};
 			}
 			var0005 = UI_die_roll(0x0003, 0x0008);
-			script item after var0005 ticks
+			var0001 = script item after var0005 ticks
 			{
 				nohalt;
 				call Func0674;
-			}
+			};
 		}
 	}
 	return;
@@ -73743,7 +73805,7 @@ void Func0675 object#(0x675) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -73752,14 +73814,14 @@ void Func0675 object#(0x675) ()
 		UI_item_say(item, "@In Nox Grav@");
 		if (Func0906())
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				sfx 110;
 				actor frame raise_1h;
 				actor frame reach_1h;
 				actor frame strike_1h;
-			}
+			};
 			var0003 = UI_create_new_object(0x0384);
 			if (var0003)
 			{
@@ -73773,14 +73835,14 @@ void Func0675 object#(0x675) ()
 		}
 		else
 		{
-			script item
+			var0008 = script item
 			{
 				face var0001;
 				actor frame raise_1h;
 				actor frame reach_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -73801,7 +73863,7 @@ void Func0676 object#(0x676) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -73810,14 +73872,14 @@ void Func0676 object#(0x676) ()
 		UI_item_say(item, "@In Zu Grav@");
 		if (Func0906())
 		{
-			script item
+			var0002 = script item
 			{
 				sfx 65;
 				face var0001;
 				actor frame raise_1h;
 				actor frame reach_1h;
 				actor frame strike_1h;
-			}
+			};
 			var0003 = (var0000[0x0002] + 0x0001);
 			var0004 = (var0000[0x0003] + 0x0001);
 			var0005 = var0000[0x0004];
@@ -73831,14 +73893,14 @@ void Func0676 object#(0x676) ()
 		}
 		else
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame raise_1h;
 				actor frame reach_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -73862,31 +73924,31 @@ void Func0677 object#(0x677) ()
 	var var000A;
 	var var000B;
 	var var000C;
-	var var000D;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
 		UI_item_say(item, "@Vas Por Ylem@");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame raise_2h;
 				actor frame standing;
 				actor frame kneeling;
 				sfx 67;
 				call Func0677;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame raise_2h;
 				actor frame standing;
 				actor frame kneeling;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -73906,50 +73968,95 @@ void Func0677 object#(0x677) ()
 					var000A = UI_die_roll(0x0000, 0x0008);
 					if (var000A == 0x0000)
 					{
-						var000B = [0x6D, 0x6C, 0x61];
+						var000B = new script
+						{
+							actor frame kneeling;
+							actor frame bowing;
+							actor frame standing;
+						};
 						var0009 = [var0009, var000B];
 					}
 					if (var000A == 0x0001)
 					{
-						var000B = [0x6D, 0x61, 0x61];
+						var000B = new script
+						{
+							actor frame kneeling;
+							actor frame standing;
+							actor frame standing;
+						};
 						var0009 = [var0009, var000B];
 					}
 					if (var000A == 0x0002)
 					{
-						var000B = [0x6C, 0x6E, 0x61];
+						var000B = new script
+						{
+							actor frame bowing;
+							actor frame sleeping;
+							actor frame standing;
+						};
 						var0009 = [var0009, var000B];
 					}
 					if (var000A == 0x0003)
 					{
-						var000B = [0x61, 0x61, 0x61];
+						var000B = new script
+						{
+							actor frame standing;
+							actor frame standing;
+							actor frame standing;
+						};
 						var0009 = [var0009, var000B];
 					}
 					if (var000A == 0x0004)
 					{
-						var000B = [0x6D, 0x64, 0x61];
+						var000B = new script
+						{
+							actor frame kneeling;
+							actor frame ready;
+							actor frame standing;
+						};
 						var0009 = [var0009, var000B];
 					}
 					if (var000A == 0x0005)
 					{
-						var000B = [0x64, 0x6D, 0x61];
+						var000B = new script
+						{
+							actor frame ready;
+							actor frame kneeling;
+							actor frame standing;
+						};
 						var0009 = [var0009, var000B];
 					}
 					if (var000A == 0x0006)
 					{
-						var000C = (0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
-						var000B = [0x59, var000C, 0x6C, 0x61];
+						var000C = ((byte)0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+						var000B = new script
+						{
+							face var000C;
+							actor frame bowing;
+							actor frame standing;
+						};
 						var0009 = [var0009, var000B];
 					}
 					if (var000A == 0x0007)
 					{
-						var000C = (0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
-						var000B = [0x59, var000C, 0x6D, 0x61];
+						var000C = ((byte)0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+						var000B = new script
+						{
+							face var000C;
+							actor frame kneeling;
+							actor frame standing;
+						};
 						var0009 = [var0009, var000B];
 					}
 					if (var000A == 0x0008)
 					{
-						var000C = (0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
-						var000B = [0x59, var000C, 0x64, 0x61];
+						var000C = ((byte)0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+						var000B = new script
+						{
+							face var000C;
+							actor frame ready;
+							actor frame standing;
+						};
 						var0009 = [var0009, var000B];
 					}
 					var0008 = (var0008 + 0x0001);
@@ -73975,7 +74082,7 @@ void Func0678 object#(0x678) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
@@ -73984,30 +74091,30 @@ void Func0678 object#(0x678) ()
 		UI_item_say(item, "@Rel Ylem@");
 		if (Func0906() && (UI_get_item_shape(var0000) == 0x0393))
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				sfx 66;
 				actor frame raise_1h;
 				actor frame strike_1h;
-			}
+			};
 			var0003 = UI_get_object_position(var0000);
 			UI_sprite_effect(0x000D, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-			script var0000 after 5 ticks
+			var0004 = script var0000 after 5 ticks
 			{
 				nohalt;
 				call Func0678;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	else
@@ -74033,7 +74140,7 @@ void Func0679 object#(0x679) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if ((event == 0x0001) || ((event == 0x0004) && (UI_get_npc_number(item) == 0xFE9C)))
 	{
 		UI_halt_scheduled(item);
@@ -74043,7 +74150,7 @@ void Func0679 object#(0x679) ()
 		if (Func0906())
 		{
 			var0002 = UI_set_to_attack(item, var0000, 0x020F);
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame cast_up;
@@ -74052,11 +74159,11 @@ void Func0679 object#(0x679) ()
 				actor frame cast_up;
 				actor frame strike_2h;
 				attack;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame cast_up;
@@ -74064,7 +74171,7 @@ void Func0679 object#(0x679) ()
 				actor frame cast_up;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if ((event == 0x0004) && (item != 0xFE9C))
@@ -74101,7 +74208,7 @@ void Func067A object#(0x67A) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0001)
 	{
 		var0000 = false;
@@ -74122,24 +74229,24 @@ void Func067A object#(0x67A) ()
 				{
 					var0005 = UI_set_npc_prop(var0004, 0x0003, 0x0001);
 					var0005 = UI_set_to_attack(item, var0004, 0x026D);
-					script item after 12 ticks
+					var0005 = script item after 12 ticks
 					{
 						nohalt;
 						attack;
-					}
-					script var0004 after 14 ticks
+					};
+					var0005 = script var0004 after 14 ticks
 					{
 						nohalt;
 						remove;
-					}
-					script item
+					};
+					var0005 = script item
 					{
 						face var0002;
 						sfx 65;
 						actor frame strike_2h;
 						actor frame cast_out;
 						actor frame cast_up;
-					}
+					};
 					UI_sprite_effect(0x000D, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				}
 				else
@@ -74158,14 +74265,14 @@ void Func067A object#(0x67A) ()
 		}
 		if (var0000)
 		{
-			script var0004
+			var0005 = script var0004
 			{
 				face var0002;
 				actor frame strike_2h;
 				actor frame cast_out;
 				actor frame cast_up;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -74187,7 +74294,7 @@ void Func067B object#(0x67B) ()
 	var var0008;
 	var var0009;
 	var var000A;
-	var var000B;
+
 	var0000 = false;
 	if (event == 0x0001)
 	{
@@ -74201,12 +74308,12 @@ void Func067B object#(0x67B) ()
 		var0006 = UI_is_not_blocked(var0005, 0x0300, 0x0000);
 		if (Func0906() && var0006)
 		{
-			script item
+			var0007 = script item
 			{
 				actor frame raise_1h;
 				actor frame reach_1h;
 				actor frame strike_1h;
-			}
+			};
 			var0008 = UI_create_new_object(0x0300);
 			if (var0008)
 			{
@@ -74215,10 +74322,7 @@ void Func067B object#(0x67B) ()
 				{
 					var000A = 0x00C8;
 					var0009 = UI_set_item_quality(var0008, var000A);
-					script var0008 after var000A ticks
-					{
-						remove;
-					}
+					var0009 = script var0008 after var000A ticks remove;;
 				}
 				else
 				{
@@ -74237,13 +74341,13 @@ void Func067B object#(0x67B) ()
 		// This should probably be var0000 == true
 		if (0x0606 == true)
 		{
-			script item
+			var0007 = script item
 			{
 				actor frame raise_1h;
 				actor frame reach_1h;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -74258,7 +74362,7 @@ void Func067C object#(0x67C) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
@@ -74268,7 +74372,7 @@ void Func067C object#(0x67C) ()
 		if (Func0906())
 		{
 			var0002 = UI_set_to_attack(item, var0000, 0x018F);
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				sfx 65;
@@ -74277,11 +74381,11 @@ void Func067C object#(0x67C) ()
 				actor frame cast_up;
 				actor frame strike_2h;
 				attack;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame cast_up;
@@ -74289,7 +74393,7 @@ void Func067C object#(0x67C) ()
 				actor frame cast_up;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -74310,14 +74414,14 @@ void Func067D object#(0x67D) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
 		UI_item_say(item, "@Vas An Xen Ex@");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				sfx 65;
 				actor frame cast_up;
@@ -74325,7 +74429,7 @@ void Func067D object#(0x67D) ()
 				actor frame cast_up;
 				actor frame strike_2h;
 				call Func067D;
-			}
+			};
 			var0001 = UI_get_object_position(item);
 			UI_sprite_effect(0x0007, (var0001[0x0001] - 0x0002), (var0001[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 			var0002 = 0x0019;
@@ -74336,24 +74440,24 @@ void Func067D object#(0x67D) ()
 				var0002 = ((var0002 / 0x0004) + 0x0004);
 				if (!(UI_die_roll(0x0001, 0x0003) == 0x0001))
 				{
-					script var0006 after var0002 ticks
+					var0000 = script var0006 after var0002 ticks
 					{
 						nohalt;
 						call Func067D;
-					}
+					};
 				}
 			}
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame cast_up;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -74387,14 +74491,14 @@ void Func067E object#(0x67E) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
 		UI_item_say(item, "@In Vas Por@");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame cast_up;
 				sfx 64;
@@ -74402,7 +74506,7 @@ void Func067E object#(0x67E) ()
 				actor frame cast_up;
 				actor frame strike_2h;
 				call Func067E;
-			}
+			};
 			var0001 = UI_get_object_position(item);
 			UI_sprite_effect(0x0007, (var0001[0x0001] - 0x0002), (var0001[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 			var0002 = UI_get_party_list();
@@ -74410,23 +74514,23 @@ void Func067E object#(0x67E) ()
 			{
 				var0006 = UI_get_distance(item, var0005);
 				var0006 = ((var0006 / 0x0003) + 0x0005);
-				script var0005 after var0006 ticks
+				var0000 = script var0005 after var0006 ticks
 				{
 					nohalt;
 					call Func067E;
-				}
+				};
 			}
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame cast_up;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -74448,20 +74552,20 @@ void Func067F object#(0x67F) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
 		UI_item_say(item, "@Vas Mani@");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame raise_1h;
 				actor frame cast_out;
 				actor frame strike_2h;
 				sfx 64;
-			}
+			};
 			var0001 = UI_get_party_list();
 			for (var0004 in var0001 with var0002 to var0003)
 			{
@@ -74475,13 +74579,13 @@ void Func067F object#(0x67F) ()
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame raise_1h;
 				actor frame cast_out;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -74494,7 +74598,7 @@ void Func0680 object#(0x680) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
@@ -74505,7 +74609,7 @@ void Func0680 object#(0x680) ()
 			UI_sprite_effect(0x0007, (var0000[0x0001] - 0x0002), (var0000[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_set_weather(0x0002);
 			UI_halt_scheduled(item);
-			script item
+			var0001 = script item
 			{
 				sfx 65;
 				actor frame kneeling;
@@ -74520,11 +74624,11 @@ void Func0680 object#(0x680) ()
 				actor frame bowing;
 				actor frame standing;
 				call Func0680;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0001 = script item
 			{
 				actor frame kneeling;
 				actor frame sleeping;
@@ -74537,7 +74641,7 @@ void Func0680 object#(0x680) ()
 				actor frame bowing;
 				actor frame standing;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -74560,7 +74664,7 @@ void Func0681 object#(0x681) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -74570,24 +74674,24 @@ void Func0681 object#(0x681) ()
 		if (Func0906())
 		{
 			var0002 = UI_set_to_attack(item, var0000, 0x027F);
-			script item
+			var0003 = script item
 			{
 				face var0001;
 				sfx 65;
 				actor frame cast_up;
 				actor frame strike_1h;
 				attack;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0002 = script item
 			{
 				face var0001;
 				actor frame cast_up;
 				actor frame strike_1h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -74613,7 +74717,7 @@ void Func0682 object#(0x682) ()
 	var var000B;
 	var var000C;
 	var var000D;
-	var var000E;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
@@ -74622,7 +74726,7 @@ void Func0682 object#(0x682) ()
 		{
 			var0000 = UI_get_object_position(item);
 			UI_sprite_effect(0x0007, (var0000[0x0001] - 0x0002), (var0000[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
-			script item
+			var0001 = script item
 			{
 				sfx 65;
 				actor frame kneeling;
@@ -74630,7 +74734,7 @@ void Func0682 object#(0x682) ()
 				actor frame cast_up;
 				actor frame cast_out;
 				sfx 67;
-			}
+			};
 			var0002 = 0x0019;
 			var0003 = UI_find_nearby(item, 0xFFFF, var0002, 0x0004);
 			var0004 = UI_get_party_list2();
@@ -74644,11 +74748,11 @@ void Func0682 object#(0x682) ()
 					var0002 = UI_get_distance(item, var0008);
 					var0002 = ((var0002 / 0x0003) + 0x0005);
 					UI_halt_scheduled(var0008);
-					script var0008 after var0002 ticks
+					var0001 = script var0008 after var0002 ticks
 					{
 						nohalt;
 						call Func0682;
-					}
+					};
 					var0005 = true;
 				}
 			}
@@ -74664,14 +74768,14 @@ void Func0682 object#(0x682) ()
 		}
 		else
 		{
-			script item
+			var0001 = script item
 			{
 				actor frame kneeling;
 				actor frame standing;
 				actor frame cast_up;
 				actor frame cast_out;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -74700,7 +74804,7 @@ void Func0683 object#(0x683) ()
 	var var0005;
 	var var0006;
 	var var0007;
-	var var0008;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
@@ -74709,7 +74813,7 @@ void Func0683 object#(0x683) ()
 		{
 			var0000 = UI_get_object_position(item);
 			UI_sprite_effect(0x0007, (var0000[0x0001] - 0x0002), (var0000[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
-			script item
+			var0001 = script item
 			{
 				actor frame raise_1h;
 				sfx 67;
@@ -74717,22 +74821,22 @@ void Func0683 object#(0x683) ()
 				actor frame cast_up;
 				actor frame standing;
 				actor frame strike_2h;
-			}
+			};
 			var0002 = UI_get_party_list();
 			for (var0005 in var0002 with var0003 to var0004)
 			{
 				var0006 = UI_get_distance(item, var0005);
 				var0006 = ((var0006 / 0x0003) + 0x0005);
-				script var0005 after var0006 ticks
+				var0001 = script var0005 after var0006 ticks
 				{
 					nohalt;
 					call Func0683;
-				}
+				};
 			}
 		}
 		else
 		{
-			script item
+			var0007 = script item
 			{
 				actor frame raise_1h;
 				actor frame standing;
@@ -74740,7 +74844,7 @@ void Func0683 object#(0x683) ()
 				actor frame standing;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -74765,7 +74869,7 @@ void Func0684 object#(0x684) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0001)
 	{
 		var0000 = UI_click_on_item();
@@ -74795,14 +74899,14 @@ void Func0684 object#(0x684) ()
 		if (Func0906() && var0006)
 		{
 			var0007 = 0x0001;
-			script item
+			var0008 = script item
 			{
 				face var0003;
 				sfx 64;
 				actor frame kneeling;
 				actor frame standing;
 				actor frame cast_up;
-			}
+			};
 			UI_play_music(0x000F, 0x0000);
 			UI_sprite_effect(0x0011, var0002[0x0001], var0002[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_sprite_effect(0x000D, (var0002[0x0001] - 0x0002), (var0002[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -74810,14 +74914,14 @@ void Func0684 object#(0x684) ()
 		else
 		{
 			var0007 = 0x0001;
-			script item
+			var0008 = script item
 			{
 				face var0003;
 				actor frame kneeling;
 				actor frame standing;
 				actor frame cast_up;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -74839,14 +74943,14 @@ void Func0685 object#(0x685) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
 		UI_item_say(item, "Kal Vas Xen");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame kneeling;
 				actor frame standing;
@@ -74855,11 +74959,11 @@ void Func0685 object#(0x685) ()
 				actor frame strike_2h;
 				sfx 65;
 				call Func0685;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame kneeling;
 				actor frame standing;
@@ -74867,7 +74971,7 @@ void Func0685 object#(0x685) ()
 				actor frame cast_out;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -74912,7 +75016,7 @@ void Func0686 object#(0x686) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if ((event == 0x0001) || (event == 0x0004))
 	{
 		UI_halt_scheduled(item);
@@ -74922,7 +75026,7 @@ void Func0686 object#(0x686) ()
 		if (Func0906())
 		{
 			var0002 = UI_set_to_attack(item, var0000, 0x011F);
-			script item
+			var0003 = script item
 			{
 				face var0001;
 				sfx 65;
@@ -74934,11 +75038,11 @@ void Func0686 object#(0x686) ()
 				actor frame strike_2h;
 				attack;
 				actor frame standing;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0003 = script item
 			{
 				face var0001;
 				actor frame raise_1h;
@@ -74947,7 +75051,7 @@ void Func0686 object#(0x686) ()
 				actor frame standing;
 				actor frame strike_2h;
 				call Func0606;
-			}
+			};
 		}
 	}
 	return;
@@ -74959,29 +75063,29 @@ extern var Func0906 0x906 ();
 void Func0687 object#(0x687) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0001)
 	{
 		UI_halt_scheduled(item);
 		UI_item_say(item, "@An Tym@");
 		if (Func0906())
 		{
-			script item
+			var0000 = script item
 			{
 				sfx 67;
 				actor frame strike_2h;
 				actor frame cast_out;
 				call Func0687;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var0000 = script item
 			{
 				actor frame strike_2h;
 				actor frame cast_out;
 				call Func0606;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -74996,7 +75100,6 @@ extern void Func093F 0x93F (var var0000, var var0001);
 
 void Func0688 object#(0x688) ()
 {
-	var var0000;
 	if (event == 0x0002)
 	{
 		Func093F(item, 0x000C);
@@ -75012,7 +75115,7 @@ void Func0689 object#(0x689) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	var0000 = UI_get_npc_prop(item, 0x0002);
 	var0001 = UI_get_npc_prop(item, 0x0003);
 	if (UI_roll_to_win(var0000, 0x0010))
@@ -75025,7 +75128,6 @@ void Func0689 object#(0x689) ()
 
 void Func068A object#(0x68A) ()
 {
-	var var0000;
 	gflags[0x02ED] = false;
 	UI_set_weather(0x0000);
 	return;
@@ -75039,7 +75141,7 @@ void Func068B object#(0x68B) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	var0000 = UI_find_nearest(UI_get_npc_object(0xFE9C), 0x03DF, 0x0005);
 	if (var0000)
 	{
@@ -75057,7 +75159,7 @@ void Func068C object#(0x68C) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	var0000 = UI_find_nearest(UI_get_npc_object(0xFE9C), 0x02E3, 0x0005);
 	if (var0000)
 	{
@@ -75075,21 +75177,21 @@ void Func068D object#(0x68D) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	var0000 = UI_get_item_frame(item);
 	var0001 = UI_get_cont_items(UI_get_npc_object(0xFE9C), 0x029C, 0xFE99, 0xFE99);
 	if ((var0000 == 0x0003) || (var0000 == 0x0007))
 	{
-		script UI_get_npc_object(0xFE9C)
+		var0002 = script UI_get_npc_object(0xFE9C)
 		{
 			wait 10;
 			actor frame standing;
-		}
-		script var0001
+		};
+		var0002 = script var0001
 		{
 			wait 2;
 			call Func068E;
-		}
+		};
 	}
 	else
 	{
@@ -75107,25 +75209,25 @@ void Func068E object#(0x68E) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	var0000 = UI_find_nearest(UI_get_npc_object(0xFE9C), 0x02E5, 0x0005);
 	if (Func0837(item, var0000, 0x0000, 0x0000, 0x0002))
 	{
 		var0001 = UI_get_object_position(item);
 		UI_sprite_effect(0x0009, (var0001[0x0001] - 0x0003), (var0001[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_play_sound_effect(0x002E);
-		script item
+		var0002 = script item
 		{
 			frame 8;
 			call Func068F;
-		}
-		script var0000
+		};
+		var0002 = script var0000
 		{
 			repeat 2
 			{
 				previous frame cycle;
 			};
-		}
+		};
 	}
 	return;
 }
@@ -75134,7 +75236,7 @@ void Func068F object#(0x68F) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (gflags[0x032E])
 	{
 		var0000 = 0x000F;
@@ -75150,10 +75252,10 @@ void Func068F object#(0x68F) ()
 			var0000 = 0x000D;
 		}
 	}
-	script item
+	var0001 = script item
 	{
 		frame var0000;
-	}
+	};
 	return;
 }
 
@@ -75164,33 +75266,33 @@ void Func0690 object#(0x690) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	var0000 = UI_get_item_shape(item);
 	if (var0000 == 0x02C3)
 	{
-		script item
+		var0001 = script item
 		{
 			wait 1;
 			call Func06F6;
-		}
+		};
 		return;
 	}
 	if (var0000 == 0x02F8)
 	{
-		script item
+		var0001 = script item
 		{
 			wait 1;
 			call Func06F6;
-		}
+		};
 		return;
 	}
 	if (event == 0x0001)
 	{
-		script item
+		var0001 = script item
 		{
 			wait 1;
 			call Func026F;
-		}
+		};
 	}
 	if (event == 0x0002)
 	{
@@ -75206,21 +75308,21 @@ void Func0691 object#(0x691) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0002)
 	{
 		var0000 = UI_find_nearest(UI_get_npc_object(0xFE9C), 0x029C, 0x0002);
 		var0001 = UI_get_object_position(var0000);
-		script item
+		var0002 = script item
 		{
 			sfx 45;
-		}
-		script item
+		};
+		var0002 = script item
 		{
 			nohalt;
 			wait 1;
 			call Func0690;
-		}
+		};
 	}
 	if (event == 0x0001)
 	{
@@ -75275,7 +75377,7 @@ void Func0692 object#(0x692) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	var0000 = UI_get_container(item);
 	if (!var0000)
 	{
@@ -75303,7 +75405,7 @@ void Func0693 object#(0x693) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	var0000 = UI_get_object_position(item);
 	var0001[0x0001] = (var0000[0x0001] - 0x0003);
 	var0001[0x0002] = (var0000[0x0002] - 0x0004);
@@ -75324,7 +75426,7 @@ void Func0694 object#(0x694) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	var0000 = UI_get_item_frame(item);
 	var0001 = 0x0000;
 	var0002 = 0x0000;
@@ -75368,10 +75470,10 @@ void Func0694 object#(0x694) ()
 	}
 	else
 	{
-		script item
+		var0009 = script item
 		{
 			frame 0;
-		}
+		};
 	}
 	UI_play_sound_effect(0x0028);
 	return;
@@ -75384,13 +75486,13 @@ void Func0695 object#(0x695) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	var0000 = UI_find_nearest(UI_get_npc_object(0xFE9C), 0x02E4, 0x000A);
 	if (var0000)
 	{
 		var0001 = UI_get_item_frame(var0000);
 		var0001 = (var0001 - 0x0006);
-		script var0000
+		var0002 = script var0000
 		{
 			next frame cycle;
 			wait 1;
@@ -75403,8 +75505,8 @@ void Func0695 object#(0x695) ()
 			next frame cycle;
 			wait 2;
 			frame var0001;
-		}
-		script UI_get_npc_object(0xFE9C)
+		};
+		var0003 = script UI_get_npc_object(0xFE9C)
 		{
 			actor frame ready;
 			wait 1;
@@ -75420,11 +75522,11 @@ void Func0695 object#(0x695) ()
 			actor frame strike_1h;
 			wait 2;
 			actor frame standing;
-		}
-		script item
+		};
+		var0004 = script item
 		{
 			frame 1;
-		}
+		};
 		UI_play_sound_effect(0x0028);
 	}
 	return;
@@ -75452,7 +75554,7 @@ void Func0696 object#(0x696) ()
 	var var000B;
 	var var000C;
 	var var000D;
-	var var000E;
+
 	var0000 = false;
 	var0001 = false;
 	var0002 = false;
@@ -75559,21 +75661,21 @@ void Func0696 object#(0x696) ()
 			UI_set_schedule_type(item, 0x001D);
 			UI_clear_item_flag(UI_get_npc_object(0xFE9C), 0x0010);
 			var0008 = Func0881();
-			script var0008 after 14 ticks
+			var0009 = script var0008 after 14 ticks
 			{
 				finish;
 				remove;
-			}
-			script UI_get_npc_object(0xFE9C)
+			};
+			var000A = script UI_get_npc_object(0xFE9C)
 			{
 				wait 12;
 				call Func069D;
-			}
+			};
 		}
 	}
 	if (var0000)
 	{
-		script item
+		var000B = script item
 		{
 			face south;
 			wait 1;
@@ -75588,12 +75690,12 @@ void Func0696 object#(0x696) ()
 			actor frame kneeling;
 			wait 3;
 			call Func0697;
-		}
+		};
 	}
 	if (var0001)
 	{
 		var0000 = UI_find_nearest(item, 0x0112, 0x0001);
-		script var0000
+		var000C = script var0000
 		{
 			wait 6;
 			actor frame bowing;
@@ -75601,11 +75703,11 @@ void Func0696 object#(0x696) ()
 			actor frame kneeling;
 			wait 2;
 			call Func0697;
-		}
+		};
 	}
 	if (var0002)
 	{
-		script item
+		var000B = script item
 		{
 			face south;
 			wait 1;
@@ -75618,11 +75720,11 @@ void Func0696 object#(0x696) ()
 			actor frame kneeling;
 			wait 3;
 			call Func0697;
-		}
+		};
 	}
 	if (var0003)
 	{
-		script item
+		var000B = script item
 		{
 			face south;
 			wait 1;
@@ -75637,12 +75739,12 @@ void Func0696 object#(0x696) ()
 			actor frame cast_up;
 			wait 1;
 			call Func0697;
-		}
+		};
 	}
 	if (var0005)
 	{
 		var0001 = UI_find_nearest(item, 0x01F8, 0x0001);
-		script var0001
+		var000D = script var0001
 		{
 			wait 3;
 			actor frame raise_2h;
@@ -75656,7 +75758,7 @@ void Func0696 object#(0x696) ()
 			actor frame strike_2h;
 			wait 1;
 			call Func0697;
-		}
+		};
 	}
 	if (var0004)
 	{
@@ -75700,7 +75802,7 @@ void Func0697 object#(0x697) ()
 	var var000C;
 	var var000D;
 	var var000E;
-	var var000F;
+
 	var0000 = UI_get_object_position(item);
 	if (gflags[0x0003])
 	{
@@ -75714,12 +75816,12 @@ void Func0697 object#(0x697) ()
 			var0001 = UI_create_new_object(0x0112);
 			UI_set_item_frame(var0001, 0x001C);
 			var0002 = UI_update_last_created(var0000);
-			script item
+			var0003 = script item
 			{
 				wait 16;
 				call Func0696;
-			}
-			script var0001
+			};
+			var0004 = script var0001
 			{
 				face south;
 				actor frame kneeling;
@@ -75728,7 +75830,7 @@ void Func0697 object#(0x697) ()
 				wait 3;
 				actor frame step_left;
 				wait 2;
-			}
+			};
 		}
 		else
 		{
@@ -75744,12 +75846,12 @@ void Func0697 object#(0x697) ()
 				UI_set_item_frame(var0005, 0x0013);
 				var0002 = UI_update_last_created(var0000);
 				var0006 = UI_find_nearest(var0005, 0x009A, 0x0001);
-				script var0006
+				var0003 = script var0006
 				{
 					wait 14;
 					call Func0696;
-				}
-				script var0005
+				};
+				var0007 = script var0005
 				{
 					face south;
 					wait 4;
@@ -75759,7 +75861,7 @@ void Func0697 object#(0x697) ()
 					wait 2;
 					actor frame reach_2h;
 					wait 1;
-				}
+				};
 			}
 			else
 			{
@@ -75769,27 +75871,27 @@ void Func0697 object#(0x697) ()
 				var0006 = UI_find_nearest(item, 0x009A, 0x0001);
 				UI_remove_item(item);
 				UI_set_item_frame(var0006, 0x001C);
-				script var0006
+				var0003 = script var0006
 				{
 					actor frame kneeling;
 					wait 5;
 					actor frame bowing;
 					wait 4;
 					actor frame standing;
-				}
+				};
 				UI_set_schedule_type(var0006, 0x001D);
 				UI_clear_item_flag(UI_get_npc_object(0xFE9C), 0x0010);
 				var0008 = Func0881();
-				script var0008 after 13 ticks
+				var0009 = script var0008 after 13 ticks
 				{
 					finish;
 					remove;
-				}
-				script UI_get_npc_object(0xFE9C)
+				};
+				var000A = script UI_get_npc_object(0xFE9C)
 				{
 					wait 11;
 					call Func069D;
-				}
+				};
 			}
 		}
 	}
@@ -75804,14 +75906,14 @@ void Func0697 object#(0x697) ()
 			var000B = UI_create_new_object(0x0209);
 			UI_set_item_frame(var000B, 0x0010);
 			var0002 = UI_update_last_created(var0000);
-			script item
+			var0003 = script item
 			{
 				wait 11;
 				say "@Squeak!@";
 				wait 7;
 				call Func0698;
-			}
-			script var000B
+			};
+			var000C = script var000B
 			{
 				face south;
 				wait 4;
@@ -75828,7 +75930,7 @@ void Func0697 object#(0x697) ()
 				actor frame step_right;
 				wait 2;
 				actor frame ready;
-			}
+			};
 		}
 		else if (!gflags[0x032C])
 		{
@@ -75840,14 +75942,14 @@ void Func0697 object#(0x697) ()
 			var000D = UI_create_new_object(0x01F4);
 			UI_set_item_frame(var000D, 0x0017);
 			var0002 = UI_update_last_created(var0000);
-			script item
+			var0003 = script item
 			{
 				wait 11;
 				say "@MOO?!@";
 				wait 7;
 				call Func0698;
-			}
-			script var000D
+			};
+			var000E = script var000D
 			{
 				face south;
 				wait 4;
@@ -75864,7 +75966,7 @@ void Func0697 object#(0x697) ()
 				actor frame reach_2h;
 				wait 1;
 				actor frame raise_2h;
-			}
+			};
 		}
 	}
 	return;
@@ -75876,7 +75978,7 @@ void Func0698 object#(0x698) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	var0000 = UI_get_object_position(item);
 	var0001 = UI_find_nearby(item, 0x0209, 0x0001, 0x0004);
 	var0002 = UI_find_nearby(item, 0x01F4, 0x0001, 0x0004);
@@ -75886,7 +75988,7 @@ void Func0698 object#(0x698) ()
 		UI_play_sound_effect(0x0043);
 		UI_remove_item(var0001);
 		UI_set_item_frame(item, 0x001C);
-		script item
+		var0003 = script item
 		{
 			actor frame kneeling;
 			wait 5;
@@ -75895,7 +75997,7 @@ void Func0698 object#(0x698) ()
 			actor frame standing;
 			wait 3;
 			call Func0696;
-		}
+		};
 	}
 	if (var0002)
 	{
@@ -75904,7 +76006,7 @@ void Func0698 object#(0x698) ()
 		UI_play_sound_effect(0x003E);
 		UI_remove_item(var0002);
 		UI_set_item_frame(item, 0x001E);
-		script item
+		var0003 = script item
 		{
 			actor frame cast_up;
 			wait 5;
@@ -75913,7 +76015,7 @@ void Func0698 object#(0x698) ()
 			actor frame standing;
 			wait 3;
 			call Func0696;
-		}
+		};
 	}
 	return;
 }
@@ -75941,7 +76043,7 @@ void Func0699 object#(0x699) ()
 	var var000E;
 	var var000F;
 	var var0010;
-	var var0011;
+
 	var0000 = (UI_get_object_position(item) & (0x0008 & 0x0006));
 	var0001 = UI_find_nearby(var0000, 0x0113, 0x0028, 0x0010);
 	var0002 = (UI_get_object_position(item) & (0x0009 & 0x0006));
@@ -76000,36 +76102,36 @@ void Func0699 object#(0x699) ()
 			if (!(var000C == UI_get_npc_object(0xFE9C)))
 			{
 				UI_move_object(var000C, var0009);
-				script var000C
+				var000D = script var000C
 				{
 					face north;
-				}
+				};
 				var0007 = (var0007 + 0x0001);
 			}
 		}
-		script item
+		var000E = script item
 		{
 			face south;
 			wait 2;
 			call Func069C;
-		}
-		script UI_get_npc_object(0xFE9C)
+		};
+		var000F = script UI_get_npc_object(0xFE9C)
 		{
 			face north;
-		}
+		};
 		if (UI_is_pc_female())
 		{
-			script var0006
+			var0010 = script var0006
 			{
 				frame 20;
-			}
+			};
 		}
 		else
 		{
-			script var0006
+			var0010 = script var0006
 			{
 				frame 18;
-			}
+			};
 		}
 	}
 	return;
@@ -76047,7 +76149,7 @@ void Func069A object#(0x69A) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	UI_set_schedule_type(item, 0x000F);
 	Func087D();
 	var0000 = UI_get_object_position(item);
@@ -76057,7 +76159,7 @@ void Func069A object#(0x69A) ()
 	UI_play_sound_effect(0x0044);
 	var0002 = Func092D(item);
 	var0003 = ((var0002 + 0x0004) % 0x0008);
-	script item
+	var0004 = script item
 	{
 		face var0003;
 		wait 1;
@@ -76074,7 +76176,7 @@ void Func069A object#(0x69A) ()
 		actor frame cast_up;
 		wait 4;
 		call Func069B;
-	}
+	};
 	return;
 }
 
@@ -76083,7 +76185,6 @@ extern void Func0699 object#(0x699) ();
 
 void Func069B object#(0x69B) ()
 {
-	var var0000;
 	UI_fade_palette(0x000C, 0x0001, 0x0000);
 	item->Func0699();
 	return;
@@ -76100,14 +76201,14 @@ void Func069C object#(0x69C) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	UI_fade_palette(0x000C, 0x0001, 0x0001);
 	var0000 = UI_get_object_position(item);
 	UI_sprite_effect(0x000D, (var0000[0x0001] - 0x0002), (var0000[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 	var0001 = UI_get_object_position(UI_get_npc_object(0xFE9C));
 	UI_sprite_effect(0x0007, (var0001[0x0001] - 0x0002), (var0001[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_play_sound_effect(0x0044);
-	script item
+	var0002 = script item
 	{
 		face south;
 		actor frame cast_up;
@@ -76117,21 +76218,21 @@ void Func069C object#(0x69C) ()
 		actor frame standing;
 		wait 8;
 		call Func069E;
-	}
+	};
 	var0003 = Func0881();
 	if (UI_is_pc_female())
 	{
-		script var0003
+		var0004 = script var0003
 		{
 			frame 20;
-		}
+		};
 	}
 	else
 	{
-		script var0003
+		var0004 = script var0003
 		{
 			frame 18;
-		}
+		};
 	}
 	return;
 }
@@ -76149,7 +76250,7 @@ void Func069D object#(0x69D) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0007)
 	{
 		(@0x70)();
@@ -76204,7 +76305,7 @@ void Func069E object#(0x69E) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	UI_show_npc_face(0xFEE2, 0x0001);
 	message("A look of grim determination comes to Erethian's lined features. He pushes up his sleeves like a blacksmith about to shoe a high strung horse,");
 	say();
@@ -76221,7 +76322,7 @@ void Func069E object#(0x69E) ()
 		say();
 	}
 	UI_remove_npc_face(0xFEE2);
-	script item
+	var0000 = script item
 	{
 		wait 2;
 		actor frame bowing;
@@ -76236,7 +76337,7 @@ void Func069E object#(0x69E) ()
 		wait 1;
 		actor frame cast_up;
 		call Func069F;
-	}
+	};
 	var0001 = UI_get_object_position(item);
 	UI_sprite_effect(0x0011, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_sprite_effect(0x0007, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -76267,7 +76368,7 @@ void Func069F object#(0x69F) ()
 	var var000E;
 	var var000F;
 	var var0010;
-	var var0011;
+
 	var0000 = UI_find_nearby(item, 0x0113, 0x000A, 0x0010);
 	for (var0003 in var0000 with var0001 to var0002)
 	{
@@ -76347,7 +76448,7 @@ void Func069F object#(0x69F) ()
 			}
 		}
 	}
-	script item
+	var0010 = script item
 	{
 		wait 5;
 		actor frame cast_out;
@@ -76355,7 +76456,7 @@ void Func069F object#(0x69F) ()
 		actor frame standing;
 		wait 5;
 		call Func06A0;
-	}
+	};
 	UI_play_sound_effect(0x0043);
 	return;
 }
@@ -76389,7 +76490,7 @@ void Func06A0 object#(0x6A0) ()
 	var var0014;
 	var var0015;
 	var var0016;
-	var var0017;
+
 	var0000 = UI_find_nearby(item, 0x0113, 0x000A, 0x0010);
 	var0001 = false;
 	var0002 = false;
@@ -76440,7 +76541,7 @@ void Func06A0 object#(0x6A0) ()
 			message("\"An Vas Ailem!   Kal Bet Ailem!\"*");
 			say();
 			UI_remove_npc_face(0xFEE2);
-			script item
+			var000D = script item
 			{
 				actor frame cast_up;
 				wait 4;
@@ -76449,7 +76550,7 @@ void Func06A0 object#(0x6A0) ()
 				actor frame standing;
 				wait 3;
 				call Func06A1;
-			}
+			};
 			UI_remove_item(var0001);
 			UI_remove_item(var0003);
 			UI_sprite_effect(0x0005, (var0002[0x0001] - 0x0002), (var0002[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -76500,7 +76601,7 @@ void Func06A0 object#(0x6A0) ()
 		UI_remove_npc_face(0xFEE2);
 		if (gflags[0x0003])
 		{
-			script item
+			var000D = script item
 			{
 				wait 2;
 				actor frame cast_out;
@@ -76508,11 +76609,11 @@ void Func06A0 object#(0x6A0) ()
 				actor frame standing;
 				wait 2;
 				call Func06A1;
-			}
+			};
 		}
 		else
 		{
-			script item
+			var000D = script item
 			{
 				wait 2;
 				actor frame bowing;
@@ -76526,7 +76627,7 @@ void Func06A0 object#(0x6A0) ()
 				actor frame cast_out;
 				wait 4;
 				call Func06A2;
-			}
+			};
 		}
 	}
 	return;
@@ -76548,7 +76649,7 @@ void Func06A1 object#(0x6A1) ()
 	var var0008;
 	var var0009;
 	var var000A;
-	var var000B;
+
 	var0000 = UI_find_nearby(item, 0x0113, 0x000A, 0x0010);
 	for (var0003 in var0000 with var0001 to var0002)
 	{
@@ -76573,7 +76674,7 @@ void Func06A1 object#(0x6A1) ()
 			}
 		}
 	}
-	script item
+	var000A = script item
 	{
 		actor frame bowing;
 		wait 3;
@@ -76584,7 +76685,7 @@ void Func06A1 object#(0x6A1) ()
 		actor frame standing;
 		wait 2;
 		call Func06F5;
-	}
+	};
 	UI_play_sound_effect(0x0044);
 	return;
 }
@@ -76606,7 +76707,7 @@ void Func06A2 object#(0x6A2) ()
 	var var0009;
 	var var000A;
 	var var000B;
-	var var000C;
+
 	var0000 = UI_find_nearby(item, 0x0113, 0x000A, 0x0010);
 	for (var0003 in var0000 with var0001 to var0002)
 	{
@@ -76633,13 +76734,13 @@ void Func06A2 object#(0x6A2) ()
 			}
 		}
 	}
-	script item
+	var000B = script item
 	{
 		wait 6;
 		say "@NO!, No. No...@";
 		wait 14;
 		call Func06A0;
-	}
+	};
 	UI_play_sound_effect(0x0044);
 	return;
 }
@@ -76681,7 +76782,7 @@ void Func06A3 object#(0x6A3) ()
 	var var001B;
 	var var001C;
 	var var001D;
-	var var001E;
+
 	if (event == 0x0003)
 	{
 		var0000 = UI_get_item_quality(item);
@@ -76709,15 +76810,12 @@ void Func06A3 object#(0x6A3) ()
 						}
 						var0007 = (UI_get_object_position(item) & (0xFE99 & 0x0000));
 						var0008 = UI_find_nearby(var0007, 0x0113, 0x0000, 0x0010);
-						script var0008
-						{
-							hatch;
-						}
-						script item
+						var0009 = script var0008 hatch;;
+						var0009 = script item
 						{
 							finish;
 							call Func06A3;
-						}
+						};
 					}
 					else
 					{
@@ -76739,12 +76837,12 @@ void Func06A3 object#(0x6A3) ()
 						var0009 = UI_set_item_quality(var000B, 0x00F0);
 						UI_set_item_frame(var000B, 0x0004);
 						var0009 = UI_give_last_created(var0006);
-						script var000B after 3 ticks
+						var000C = script var000B after 3 ticks
 						{
 							finish;
 							nohalt;
 							call Func06F7;
-						}
+						};
 					}
 				}
 			}
@@ -76773,15 +76871,12 @@ void Func06A3 object#(0x6A3) ()
 						}
 						var0007 = (UI_get_object_position(item) & (0xFE99 & 0x0000));
 						var0008 = UI_find_nearby(var0007, 0x0113, 0x0000, 0x0010);
-						script var0008
-						{
-							hatch;
-						}
-						script item
+						var0009 = script var0008 hatch;;
+						var0009 = script item
 						{
 							finish;
 							call Func06A3;
-						}
+						};
 					}
 					else
 					{
@@ -76793,12 +76888,12 @@ void Func06A3 object#(0x6A3) ()
 						var0009 = UI_set_item_quality(var000F, 0x00F1);
 						UI_set_item_frame(var000F, 0x0004);
 						var0009 = UI_give_last_created(var0006);
-						script var000F after 3 ticks
+						var000C = script var000F after 3 ticks
 						{
 							finish;
 							nohalt;
 							call Func06F7;
-						}
+						};
 					}
 				}
 			}
@@ -76827,15 +76922,12 @@ void Func06A3 object#(0x6A3) ()
 						}
 						var0007 = (UI_get_object_position(item) & (0xFE99 & 0x0000));
 						var0008 = UI_find_nearby(var0007, 0x0113, 0x0000, 0x0010);
-						script var0008
-						{
-							hatch;
-						}
-						script item
+						var0009 = script var0008 hatch;;
+						var0009 = script item
 						{
 							finish;
 							call Func06A3;
-						}
+						};
 					}
 					else
 					{
@@ -76855,16 +76947,16 @@ void Func06A3 object#(0x6A3) ()
 						var0009 = UI_set_item_quality(var0012, 0x00F3);
 						UI_set_item_frame(var0012, 0x0004);
 						var0009 = UI_give_last_created(var0006);
-						script var0012 after 3 ticks
+						var000C = script var0012 after 3 ticks
 						{
 							finish;
 							nohalt;
 							call Func06F7;
-						}
-						script var0006
+						};
+						var0009 = script var0006
 						{
 							face west;
-						}
+						};
 					}
 				}
 			}
@@ -76893,15 +76985,12 @@ void Func06A3 object#(0x6A3) ()
 						}
 						var0007 = (UI_get_object_position(item) & (0xFE99 & 0x0000));
 						var0008 = UI_find_nearby(var0007, 0x0113, 0x0000, 0x0010);
-						script var0008
-						{
-							hatch;
-						}
-						script item
+						var0009 = script var0008 hatch;;
+						var0009 = script item
 						{
 							finish;
 							call Func06A3;
-						}
+						};
 					}
 					else
 					{
@@ -76920,16 +77009,16 @@ void Func06A3 object#(0x6A3) ()
 						var0009 = UI_set_item_quality(var0012, 0x00F4);
 						UI_set_item_frame(var0012, 0x0004);
 						var0009 = UI_give_last_created(var0006);
-						script var0012 after 3 ticks
+						var000C = script var0012 after 3 ticks
 						{
 							finish;
 							nohalt;
 							call Func06F7;
-						}
-						script var0006
+						};
+						var0009 = script var0006
 						{
 							face east;
-						}
+						};
 					}
 				}
 			}
@@ -77044,15 +77133,12 @@ void Func06A3 object#(0x6A3) ()
 					}
 					var0007 = (UI_get_object_position(item) & (0xFE99 & 0x0000));
 					var0008 = UI_find_nearby(var0007, 0x0113, 0x0000, 0x0010);
-					script var0008
-					{
-						hatch;
-					}
-					script item
+					var0009 = script var0008 hatch;;
+					var0009 = script item
 					{
 						finish;
 						call Func06A3;
-					}
+					};
 				}
 				else
 				{
@@ -77060,10 +77146,10 @@ void Func06A3 object#(0x6A3) ()
 					UI_set_item_flag(var0006, 0x0012);
 					if (var001A)
 					{
-						script var0006
+						var001D = script var0006
 						{
 							face var001A;
-						}
+						};
 					}
 					UI_set_alignment(var0006, 0x0002);
 					var0012 = UI_create_new_object(0x031D);
@@ -77071,12 +77157,12 @@ void Func06A3 object#(0x6A3) ()
 					var0009 = UI_set_item_quality(var0012, var0019);
 					UI_set_item_frame(var0012, 0x0004);
 					var0009 = UI_give_last_created(var0006);
-					script var0012 after 3 ticks
+					var000C = script var0012 after 3 ticks
 					{
 						finish;
 						nohalt;
 						call Func06F7;
-					}
+					};
 				}
 			}
 		}
@@ -77086,7 +77172,6 @@ void Func06A3 object#(0x6A3) ()
 
 void Func06A4 object#(0x6A4) ()
 {
-	var var0000;
 	if (event == 0x0003)
 	{
 		gflags[0x003C] = true;
@@ -77100,7 +77185,6 @@ extern void Func0467 object#(0x467) ();
 
 void Func06A5 object#(0x6A5) ()
 {
-	var var0000;
 	if (event == 0x0003)
 	{
 		if (gflags[0x0006])
@@ -77121,7 +77205,6 @@ extern void Func0911 0x911 (var var0000);
 
 void Func06A6 object#(0x6A6) ()
 {
-	var var0000;
 	if ((event == 0x0003) && (!gflags[0x0000]))
 	{
 		Func0911(0x03E8);
@@ -77135,7 +77218,6 @@ extern void Func0911 0x911 (var var0000);
 
 void Func06A7 object#(0x6A7) ()
 {
-	var var0000;
 	if ((event == 0x0003) && (!gflags[0x0001]))
 	{
 		Func0911(0x03E8);
@@ -77149,7 +77231,6 @@ extern void Func0911 0x911 (var var0000);
 
 void Func06A8 object#(0x6A8) ()
 {
-	var var0000;
 	if ((event == 0x0003) && (!gflags[0x0002]))
 	{
 		Func0911(0x03E8);
@@ -77160,7 +77241,6 @@ void Func06A8 object#(0x6A8) ()
 
 void Func06A9 object#(0x6A9) ()
 {
-	var var0000;
 	if (event == 0x0003)
 	{
 		gflags[0x0009] = true;
@@ -77176,7 +77256,7 @@ void Func06AA object#(0x6AA) ()
 	var var0000;
 	var var0001;
 	var var0002;
-	var var0003;
+
 	if (event == 0x0002)
 	{
 		var0000 = UI_create_new_object(0x009D);
@@ -77189,7 +77269,7 @@ void Func06AA object#(0x6AA) ()
 			var0002 = UI_update_last_created(var0001);
 			if (var0002)
 			{
-				script var0000
+				var0002 = script var0000
 				{
 					frame 0;
 					repeat 10
@@ -77208,7 +77288,7 @@ void Func06AA object#(0x6AA) ()
 						previous frame cycle;
 					};
 					remove;
-				}
+				};
 			}
 		}
 	}
@@ -77221,7 +77301,7 @@ void Func06AB object#(0x6AB) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0003)
 	{
 		gflags[0x0122] = true;
@@ -77240,7 +77320,7 @@ void Func06AC object#(0x6AC) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0003)
 	{
 		var0000 = UI_find_nearby(item, 0x02F1, 0x0005, 0x0000);
@@ -77260,7 +77340,6 @@ extern void Func02C0 shape#(0x2C0) ();
 
 void Func06AD object#(0x6AD) ()
 {
-	var var0000;
 	if (event == 0x0003)
 	{
 		item->Func02C0();
@@ -77273,7 +77352,6 @@ extern void Func0495 object#(0x495) ();
 
 void Func06AE object#(0x6AE) ()
 {
-	var var0000;
 	if (event == 0x0003)
 	{
 		UI_get_npc_object(0xFF6B)->Func0495();
@@ -77292,7 +77370,7 @@ void Func06AF object#(0x6AF) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0003)
 	{
 		UI_play_sound_effect(0x001C);
@@ -77304,11 +77382,11 @@ void Func06AF object#(0x6AF) ()
 				var0004 = UI_get_npc_object(var0003);
 				var0004->Func0620();
 				UI_set_item_flag(var0004, 0x0001);
-				script var0004 after 100 ticks
+				var0005 = script var0004 after 100 ticks
 				{
 					nohalt;
 					call Func061F;
-				}
+				};
 			}
 		}
 	}
@@ -77321,7 +77399,7 @@ void Func06B0 object#(0x6B0) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0003)
 	{
 		UI_play_sound_effect(0x001C);
@@ -77348,7 +77426,7 @@ void Func06B1 object#(0x6B1) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0003)
 	{
 		UI_play_sound_effect(0x001C);
@@ -77360,11 +77438,11 @@ void Func06B1 object#(0x6B1) ()
 				UI_set_item_flag(UI_get_npc_object(var0003), 0x0007);
 				var0004 = UI_get_npc_object(var0003);
 				var0004->Func0620();
-				script var0004 after 100 ticks
+				var0005 = script var0004 after 100 ticks
 				{
 					nohalt;
 					call Func061F;
-				}
+				};
 			}
 		}
 	}
@@ -77387,7 +77465,7 @@ void Func06B2 object#(0x6B2) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0003)
 	{
 		event = 0x0001;
@@ -77428,7 +77506,7 @@ void Func06B3 object#(0x6B3) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0003)
 	{
 		UI_play_sound_effect(0x001C);
@@ -77463,7 +77541,7 @@ void Func06B4 object#(0x6B4) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0003)
 	{
 		UI_play_sound_effect(0x001C);
@@ -77491,7 +77569,7 @@ void Func06B5 object#(0x6B5) ()
 	var var0004;
 	var var0005;
 	var var0006;
-	var var0007;
+
 	if (event == 0x0003)
 	{
 		event = 0x0001;
@@ -77541,7 +77619,7 @@ void Func06B6 object#(0x6B6) ()
 	var var0005;
 	var var0006;
 	var var0007;
-	var var0008;
+
 	if (event == 0x0003)
 	{
 		UI_play_sound_effect(0x001C);
@@ -77560,20 +77638,20 @@ void Func06B6 object#(0x6B6) ()
 			var0006 = (var0005 % 0x0004);
 			if (var0006 < 0x0003)
 			{
-				script var0004
+				var0007 = script var0004
 				{
 					sfx 83;
 					next frame cycle;
-				}
+				};
 			}
 			else
 			{
 				var0005 = (var0005 - var0006);
-				script var0004
+				var0007 = script var0004
 				{
 					sfx 83;
 					frame var0005;
-				}
+				};
 			}
 		}
 	}
@@ -77588,7 +77666,7 @@ void Func06B7 object#(0x6B7) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0003)
 	{
 		UI_play_sound_effect(0x001C);
@@ -77613,7 +77691,7 @@ void Func06B8 object#(0x6B8) ()
 	var var0005;
 	var var0006;
 	var var0007;
-	var var0008;
+
 	if (event == 0x0003)
 	{
 		var0000 = UI_get_party_list();
@@ -77625,17 +77703,17 @@ void Func06B8 object#(0x6B8) ()
 			{
 				var0006 = UI_get_npc_object(var0004);
 				var0006->Func0620();
-				script var0006 after var0001 ticks
+				var0007 = script var0006 after var0001 ticks
 				{
 					call Func061F;
-				}
+				};
 				UI_halt_scheduled(var0004);
 				Func093F(var0004, 0x0004);
-				script var0004 after var0001 ticks
+				var0007 = script var0004 after var0001 ticks
 				{
 					nohalt;
 					call Func06B8;
-				}
+				};
 			}
 		}
 	}
@@ -77648,7 +77726,6 @@ void Func06B8 object#(0x6B8) ()
 
 void Func06B9 object#(0x6B9) ()
 {
-	var var0000;
 	if (event == 0x0003)
 	{
 		UI_item_say(item, "@Help! Help!@");
@@ -77676,7 +77753,7 @@ void Func06BA object#(0x6BA) ()
 	var var000A;
 	var var000B;
 	var var000C;
-	var var000D;
+
 	if (event == 0x0003)
 	{
 		var0000 = UI_get_party_list();
@@ -77687,12 +77764,12 @@ void Func06BA object#(0x6BA) ()
 				var0004 = UI_get_npc_object(var0003);
 				UI_halt_scheduled(var0004);
 				var0004->Func0620();
-				script var0004 after 25 ticks
+				var0005 = script var0004 after 25 ticks
 				{
 					nohalt;
 					call Func061F;
-				}
-				script var0004
+				};
+				var0005 = script var0004
 				{
 					nohalt;
 					wait 5;
@@ -77703,16 +77780,16 @@ void Func06BA object#(0x6BA) ()
 					actor frame sleeping;
 					wait 4;
 					actor frame standing;
-				}
+				};
 				if (Func0937(var0004))
 				{
 					Func0904(var0004, ["@Ohh!@", "@Eeehhh!@", "@Oh no!@", "@Yuk!@"]);
 				}
-				script var0004 after 17 ticks
+				var0005 = script var0004 after 17 ticks
 				{
 					nohalt;
 					call Func06BA;
-				}
+				};
 			}
 		}
 	}
@@ -77758,7 +77835,7 @@ void Func06BB object#(0x6BB) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0003)
 	{
 		var0000 = UI_get_item_quality(item);
@@ -77773,11 +77850,11 @@ void Func06BB object#(0x6BB) ()
 					Func093F(var0004, 0x0000);
 					UI_set_attack_mode(var0004, 0x0007);
 					UI_set_oppressor(var0004, 0xFE9C);
-					script var0004 after var0000 ticks
+					var0005 = script var0004 after var0000 ticks
 					{
 						nohalt;
 						call Func06BB;
-					}
+					};
 				}
 			}
 		}
@@ -77799,7 +77876,7 @@ void Func06BC object#(0x6BC) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0003)
 	{
 		var0000 = UI_get_item_quality(item);
@@ -77838,7 +77915,7 @@ void Func06BD object#(0x6BD) ()
 	var var000A;
 	var var000B;
 	var var000C;
-	var var000D;
+
 	if (event == 0x0003)
 	{
 		var0000 = UI_find_nearby(item, 0xFE99, 0x0028, 0x0008);
@@ -77856,50 +77933,95 @@ void Func06BD object#(0x6BD) ()
 					var0009 = UI_die_roll(0x0000, 0x0008);
 					if (var0009 == 0x0000)
 					{
-						var000A = [0x6D, 0x6C, 0x61];
+						var000A = new script
+						{
+							actor frame kneeling;
+							actor frame bowing;
+							actor frame standing;
+						};
 						var0008 = [var0008, var000A];
 					}
 					if (var0009 == 0x0001)
 					{
-						var000A = [0x6D, 0x61, 0x61];
+						var000A = new script
+						{
+							actor frame kneeling;
+							actor frame standing;
+							actor frame standing;
+						};
 						var0008 = [var0008, var000A];
 					}
 					if (var0009 == 0x0002)
 					{
-						var000A = [0x6C, 0x6E, 0x61];
+						var000A = new script
+						{
+							actor frame bowing;
+							actor frame sleeping;
+							actor frame standing;
+						};
 						var0008 = [var0008, var000A];
 					}
 					if (var0009 == 0x0003)
 					{
-						var000A = [0x61, 0x61, 0x61];
+						var000A = new script
+						{
+							actor frame standing;
+							actor frame standing;
+							actor frame standing;
+						};
 						var0008 = [var0008, var000A];
 					}
 					if (var0009 == 0x0004)
 					{
-						var000A = [0x6D, 0x64, 0x61];
+						var000A = new script
+						{
+							actor frame kneeling;
+							actor frame ready;
+							actor frame standing;
+						};
 						var0008 = [var0008, var000A];
 					}
 					if (var0009 == 0x0005)
 					{
-						var000A = [0x64, 0x6D, 0x61];
+						var000A = new script
+						{
+							actor frame ready;
+							actor frame kneeling;
+							actor frame standing;
+						};
 						var0008 = [var0008, var000A];
 					}
 					if (var0009 == 0x0006)
 					{
-						var000B = (0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
-						var000A = [0x59, var000B, 0x6C, 0x61];
+						var000B = ((byte)0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+						var000A = new script
+						{
+							face var000B;
+							actor frame bowing;
+							actor frame standing;
+						};
 						var0008 = [var0008, var000A];
 					}
 					if (var0009 == 0x0007)
 					{
-						var000B = (0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
-						var000A = [0x59, var000B, 0x6D, 0x61];
+						var000B = ((byte)0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+						var000A = new script
+						{
+							face var000B;
+							actor frame kneeling;
+							actor frame standing;
+						};
 						var0008 = [var0008, var000A];
 					}
 					if (var0009 == 0x0008)
 					{
-						var000B = (0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
-						var000A = [0x59, var000B, 0x64, 0x61];
+						var000B = ((byte)0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+						var000A = new script
+						{
+							face var000B;
+							actor frame ready;
+							actor frame standing;
+						};
 						var0008 = [var0008, var000A];
 					}
 					var0007 = (var0007 + 0x0001);
@@ -77915,7 +78037,6 @@ void Func06BD object#(0x6BD) ()
 
 void Func06BE object#(0x6BE) ()
 {
-	var var0000;
 	if (event == 0x0003)
 	{
 		UI_stop_time(UI_get_item_quality(item));
@@ -77934,7 +78055,7 @@ void Func06BF object#(0x6BF) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0003)
 	{
 		var0000 = UI_get_party_list();
@@ -77958,7 +78079,7 @@ void Func06C0 object#(0x6C0) ()
 	var var0002;
 	var var0003;
 	var var0004;
-	var var0005;
+
 	if (event == 0x0003)
 	{
 		var0000 = UI_find_nearby(item, 0x01EE, 0x0063, 0x0000);
@@ -77996,7 +78117,7 @@ void Func06C1 object#(0x6C1) ()
 	var var000E;
 	var var000F;
 	var var0010;
-	var var0011;
+
 	if (event == 0x0003)
 	{
 		if (gflags[0x0157] && (!gflags[0x0194]))
@@ -78068,7 +78189,7 @@ void Func06C2 object#(0x6C2) ()
 	var var0007;
 	var var0008;
 	var var0009;
-	var var000A;
+
 	if (event == 0x0003)
 	{
 		if (gflags[0x0057])
@@ -78108,7 +78229,7 @@ extern void Func080F 0x80F ();
 void Func06C3 object#(0x6C3) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0003)
 	{
 		if (!gflags[0x0122])
@@ -78132,7 +78253,6 @@ void Func06C3 object#(0x6C3) ()
 
 void Func06C4 object#(0x6C4) ()
 {
-	var var0000;
 	if (event == 0x0003)
 	{
 		gflags[0x02B7] = true;
@@ -78142,7 +78262,6 @@ void Func06C4 object#(0x6C4) ()
 
 void Func06C5 object#(0x6C5) ()
 {
-	var var0000;
 	if (event == 0x0003)
 	{
 		gflags[0x0097] = true;
@@ -78155,7 +78274,6 @@ extern void Func093F 0x93F (var var0000, var var0001);
 
 void Func06C6 object#(0x6C6) ()
 {
-	var var0000;
 	if (event == 0x0003)
 	{
 		if (gflags[0x0220] && (gflags[0x022B] && (gflags[0x0224] && (gflags[0x022A] && gflags[0x0225]))))
@@ -78183,7 +78301,6 @@ void Func06C7 object#(0x6C7) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
 	if (event == 0x0003)
 	{
 		var0000 = [0xFFA3, 0xFFA5, 0xFFAF, 0xFFAE, 0xFFA6];
@@ -78204,7 +78321,6 @@ void Func06C8 object#(0x6C8) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
 	if (event == 0x0003)
 	{
 		var0000 = [0xFFA8, 0xFFF8, 0xFFAB];
@@ -78225,7 +78341,6 @@ void Func06C9 object#(0x6C9) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
 	if (event == 0x0003)
 	{
 		var0000 = [0xFFA1, 0xFFA2];
@@ -78246,7 +78361,7 @@ void Func06CA object#(0x6CA) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0003)
 	{
 		var0000 = [0xFFA9, 0xFFAA, 0xFFA4];
@@ -78261,7 +78376,7 @@ void Func06CA object#(0x6CA) ()
 void Func06CB object#(0x6CB) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0003)
 	{
 		var0000 = 0x0000;
@@ -78277,7 +78392,7 @@ void Func06CC object#(0x6CC) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	if (event == 0x0003)
 	{
 		if (gflags[0x0005] == 0x0000)
@@ -78308,7 +78423,7 @@ void Func06CF object#(0x6CF) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (gflags[0x0004] == 0x0000)
 	{
 		var0000 = UI_count_objects(0xFE9B, 0x0347, 0xFE99, 0x0001);
@@ -78328,7 +78443,7 @@ void Func06D0 object#(0x6D0) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0003)
 	{
 		var0000 = 0x0000;
@@ -78345,7 +78460,7 @@ void Func06D1 object#(0x6D1) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0003)
 	{
 		var0000 = 0x0000;
@@ -78362,7 +78477,7 @@ void Func06D2 object#(0x6D2) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0003)
 	{
 		var0000 = 0x0001;
@@ -78379,7 +78494,7 @@ void Func06D3 object#(0x6D3) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0003)
 	{
 		var0000 = 0x0001;
@@ -78395,7 +78510,7 @@ extern void Func0811 0x811 ();
 void Func06D4 object#(0x6D4) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0003)
 	{
 		if (gflags[0x0004] == 0x0000)
@@ -78414,7 +78529,7 @@ extern void Func0811 0x811 ();
 void Func06D5 object#(0x6D5) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0003)
 	{
 		if (gflags[0x0005] == 0x0000)
@@ -78442,7 +78557,7 @@ void Func06D6 object#(0x6D6) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (event == 0x0003)
 	{
 		var0000 = UI_find_nearby(item, 0x03D5, 0x0001, 0x0000);
@@ -78472,7 +78587,6 @@ extern void Func0940 0x940 (var var0000);
 
 void Func06D7 object#(0x6D7) ()
 {
-	var var0000;
 	if (event == 0x0003)
 	{
 		if (gflags[0x01D4])
@@ -78489,7 +78603,6 @@ extern void Func0940 0x940 (var var0000);
 
 void Func06D8 object#(0x6D8) ()
 {
-	var var0000;
 	if (event == 0x0003)
 	{
 		if (gflags[0x0157])
@@ -78506,7 +78619,6 @@ extern void Func0940 0x940 (var var0000);
 
 void Func06D9 object#(0x6D9) ()
 {
-	var var0000;
 	if (event == 0x0003)
 	{
 		if (gflags[0x008E])
@@ -78523,7 +78635,6 @@ extern void Func0836 0x836 (var var0000, var var0001);
 
 void Func06DA object#(0x6DA) ()
 {
-	var var0000;
 	if (event == 0x0003)
 	{
 		Func0836(item, 0xFE99);
@@ -78536,7 +78647,6 @@ extern void Func0824 0x824 (var var0000);
 
 void Func06DB object#(0x6DB) ()
 {
-	var var0000;
 	if (event == 0x0003)
 	{
 		Func0824(item);
@@ -78546,7 +78656,6 @@ void Func06DB object#(0x6DB) ()
 
 void Func06DC object#(0x6DC) ()
 {
-	var var0000;
 	if (event == 0x0003)
 	{
 		UI_run_endgame(false);
@@ -78559,7 +78668,6 @@ extern void Func0836 0x836 (var var0000, var var0001);
 
 void Func06DD object#(0x6DD) ()
 {
-	var var0000;
 	if (event == 0x0003)
 	{
 		Func0836(item, 0x0001);
@@ -78572,7 +78680,6 @@ extern void Func0836 0x836 (var var0000, var var0001);
 
 void Func06DE object#(0x6DE) ()
 {
-	var var0000;
 	if (event == 0x0003)
 	{
 		Func0836(item, 0x0000);
@@ -78586,7 +78693,7 @@ extern void Func0811 0x811 ();
 void Func06DF object#(0x6DF) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0003)
 	{
 		if ((!gflags[0x0003]) && (UI_is_readied(0xFE9C, 0x0006, 0x02F7, 0x0001) || UI_is_readied(0xFE9C, 0x0007, 0x02F7, 0x0001)))
@@ -78608,7 +78715,7 @@ void Func06E0 object#(0x6E0) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0003)
 	{
 		if (gflags[0x0004])
@@ -78629,7 +78736,7 @@ void Func06E1 object#(0x6E1) ()
 {
 	var var0000;
 	var var0001;
-	var var0002;
+
 	if (event == 0x0003)
 	{
 		if (item == 0x0000)
@@ -78684,7 +78791,6 @@ void Func06E1 object#(0x6E1) ()
 
 void Func06E2 object#(0x6E2) ()
 {
-	var var0000;
 	if (event == 0x0003)
 	{
 		UI_set_schedule_type(UI_get_npc_object(0xFF80), 0x0000);
@@ -78707,7 +78813,7 @@ void Func06F5 object#(0x6F5) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	UI_show_npc_face(0xFEE2, 0x0001);
 	message("Erethian's face begins to take on an ashen palor, but he looks contented with a job well done. \"As I have said, I myself once attempted to create an artifact of great power. I crafted the hilt from a dark substance that is immutable, save by magical means. The blade, however, is cast of an alloy of this substance and the purest metals known to Britannia. My artistic skills served me well enough to fashion the hilt but, alas, the strength was not in my arm to beat a good temper into the blade. Perhaps, thou canst finish this great artifact for me...\" He pulls a poorly worked blade with a fine hilt out of thin air. \"Fear not to touch the hilt when the blade is hot, for heat apparently does not travel well across the medium of the pure, black substance. I wish thee good luck.\"");
 	say();
@@ -78732,21 +78838,21 @@ void Func06F5 object#(0x6F5) ()
 	UI_remove_npc_face(0xFEE2);
 	UI_set_schedule_type(item, 0x001D);
 	UI_clear_item_flag(UI_get_npc_object(0xFE9C), 0x0010);
-	script item
+	var0005 = script item
 	{
 		wait 13;
-	}
+	};
 	var0006 = Func0881();
-	script var0006 after 13 ticks
+	var0007 = script var0006 after 13 ticks
 	{
 		finish;
 		remove;
-	}
-	script UI_get_npc_object(0xFE9C)
+	};
+	var0008 = script UI_get_npc_object(0xFE9C)
 	{
 		wait 11;
 		call Func069D;
-	}
+	};
 	gflags[0x0312] = true;
 	return;
 }
@@ -78801,7 +78907,7 @@ void Func06F6 object#(0x6F6) ()
 	var var001B;
 	var var001C;
 	var var001D;
-	var var001E;
+
 	if (!gflags[0x032F])
 	{
 		UI_show_npc_face(0xFEDE, 0x0000);
@@ -79126,13 +79232,13 @@ void Func06F6 object#(0x6F6) ()
 						}
 						gflags[0x0330] = true;
 						gflags[0x0313] = false;
-						script var000C
+						var000F = script var000C
 						{
 							finish;
 							nohalt;
 							call Func070B;
 							call Func06F6;
-						}
+						};
 						abort;
 					}
 					else
@@ -79290,7 +79396,7 @@ void Func06F6 object#(0x6F6) ()
 			{
 				if (!gflags[0x0343])
 				{
-					script UI_get_npc_object(0xFE9C)
+					var0010 = script UI_get_npc_object(0xFE9C)
 					{
 						face south;
 						actor frame strike_2h;
@@ -79299,12 +79405,12 @@ void Func06F6 object#(0x6F6) ()
 						wait 1;
 						actor frame raise_2h;
 						wait 1;
-					}
-					script item
+					};
+					var000F = script item
 					{
 						wait 7;
 						call Func06F6;
-					}
+					};
 					gflags[0x0343] = true;
 					return;
 				}
@@ -79314,11 +79420,11 @@ void Func06F6 object#(0x6F6) ()
 					UI_sprite_effect(0x0011, var000D[0x0001], var000D[0x0002], 0x0000, 0x0000, 0x0000, 0x0003);
 					UI_sprite_effect(0x0011, var000D[0x0001], var000D[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 					UI_play_sound_effect(0x003E);
-					script item
+					var000F = script item
 					{
 						wait 3;
 						call Func06F6;
-					}
+					};
 					gflags[0x0344] = true;
 					return;
 				}
@@ -79630,16 +79736,16 @@ void Func06F6 object#(0x6F6) ()
 			}
 			if (var0013)
 			{
-				script item
+				var001A = script item
 				{
 					wait 1;
 					call Func06F9;
-				}
+				};
 			}
 			if (var0014)
 			{
 				var001B = Func092D(var0011);
-				script UI_get_npc_object(0xFE9C)
+				var0010 = script UI_get_npc_object(0xFE9C)
 				{
 					face var001B;
 					actor frame ready;
@@ -79651,32 +79757,32 @@ void Func06F6 object#(0x6F6) ()
 					actor frame strike_2h;
 					wait 2;
 					actor frame standing;
-				}
+				};
 				if (!UI_get_item_flag(var0011, 0x0001))
 				{
 					var001C = ((var001B + 0x0004) % 0x0008);
-					script var0011
+					var001D = script var0011
 					{
 						face var001C;
 						wait 3;
 						actor frame ready;
 						wait 7;
 						call Func070F;
-					}
+					};
 				}
 				else
 				{
-					script var0011
+					var001D = script var0011
 					{
 						wait 12;
 						call Func070F;
-					}
+					};
 				}
 			}
 			if (var0015)
 			{
 				var001B = Func092D(var0011);
-				script UI_get_npc_object(0xFE9C)
+				var0010 = script UI_get_npc_object(0xFE9C)
 				{
 					face var001B;
 					actor frame ready;
@@ -79688,11 +79794,11 @@ void Func06F6 object#(0x6F6) ()
 					actor frame strike_2h;
 					wait 2;
 					actor frame standing;
-				}
+				};
 				if (!UI_get_item_flag(var0011, 0x0001))
 				{
 					var001C = ((var001B + 0x0004) % 0x0008);
-					script var0011
+					var001D = script var0011
 					{
 						face var001C;
 						wait 2;
@@ -79703,15 +79809,15 @@ void Func06F6 object#(0x6F6) ()
 						actor frame kneeling;
 						wait 1;
 						call Func070F;
-					}
+					};
 				}
 				else
 				{
-					script var0011
+					var001D = script var0011
 					{
 						wait 12;
 						call Func070F;
-					}
+					};
 				}
 			}
 		}
@@ -79769,7 +79875,7 @@ void Func06F7 object#(0x6F7) ()
 	var var0029;
 	var var002A;
 	var var002B;
-	var var002C;
+
 	var0000 = UI_get_item_quality(item);
 	if (var0000 == 0x00F0)
 	{
@@ -79825,12 +79931,12 @@ void Func06F7 object#(0x6F7) ()
 			UI_set_item_frame(var000D, 0x0013);
 			UI_set_item_flag(var000D, 0x0012);
 			var0008 = UI_update_last_created(var000C);
-			script var000D
+			var000E = script var000D
 			{
 				finish;
 				wait 2;
 				call Func01F8;
-			}
+			};
 			return;
 		}
 	}
@@ -80141,11 +80247,11 @@ void Func06F7 object#(0x6F7) ()
 		}
 	}
 	UI_halt_scheduled(item);
-	script item after 3 ticks
+	var002B = script item after 3 ticks
 	{
 		nohalt;
 		call Func06F7;
-	}
+	};
 	return;
 }
 
@@ -80207,7 +80313,7 @@ void Func06F8 object#(0x6F8) ()
 	var var002E;
 	var var002F;
 	var var0030;
-	var var0031;
+
 	if (event == 0x0003)
 	{
 		var0000 = UI_get_item_quality(item);
@@ -80366,7 +80472,7 @@ void Func06F8 object#(0x6F8) ()
 					var0015 = UI_update_last_created(var0005);
 					UI_sprite_effect(0x0007, (var0005[0x0001] - 0x0002), (var0005[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 					UI_play_sound_effect(0x0044);
-					script var0004
+					var0016 = script var0004
 					{
 						frame 5;
 						repeat 24
@@ -80376,7 +80482,7 @@ void Func06F8 object#(0x6F8) ()
 						frame 31;
 						continue;
 						call Func06F8;
-					}
+					};
 				}
 			}
 		}
@@ -80449,21 +80555,21 @@ void Func06F8 object#(0x6F8) ()
 				{
 					var0020 = 0x0000;
 				}
-				script var0017
+				var0016 = script var0017
 				{
 					face var0020;
 					wait 5;
 					actor frame cast_out;
-				}
+				};
 			}
 			UI_earthquake(0x0001);
 			UI_sprite_effect(0x0011, var0013[0x0001], var0013[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_play_sound_effect(0x003E);
 			gflags[0x033C] = false;
-			script item after 7 ticks
+			var0021 = script item after 7 ticks
 			{
 				call Func06F8;
-			}
+			};
 			abort;
 		}
 		if (gflags[0x033F])
@@ -80482,13 +80588,13 @@ void Func06F8 object#(0x6F8) ()
 				message("You immediately recognize the resonance of a spell gone awry, and apparently so does Erethian. A look of horror comes to his wrinkled features which appear to become more lined by the second.*");
 				say();
 				var001C = UI_find_nearest(item, 0x009A, 0x000A);
-				script var001C
+				var0016 = script var001C
 				{
 					wait 2;
 					actor frame bowing;
 					wait 2;
 					actor frame kneeling;
-				}
+				};
 			}
 			UI_earthquake(0x0001);
 			var0022 = UI_find_nearby(item, 0x0113, 0x000A, 0x0010);
@@ -80503,10 +80609,10 @@ void Func06F8 object#(0x6F8) ()
 			UI_sprite_effect(0x0011, (var0005[0x0001] - 0x0002), (var0005[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 			gflags[0x033F] = false;
 			gflags[0x033C] = true;
-			script item after 7 ticks
+			var0021 = script item after 7 ticks
 			{
 				call Func06F8;
-			}
+			};
 			abort;
 		}
 		if (gflags[0x033C])
@@ -80536,10 +80642,10 @@ void Func06F8 object#(0x6F8) ()
 			UI_play_sound_effect(0x0009);
 			gflags[0x033F] = false;
 			gflags[0x033C] = false;
-			script item after 5 ticks
+			var0021 = script item after 5 ticks
 			{
 				call Func06F8;
-			}
+			};
 			abort;
 		}
 		if (!gflags[0x02EE])
@@ -80588,24 +80694,24 @@ void Func06F8 object#(0x6F8) ()
 		}
 		UI_clear_item_flag(UI_get_npc_object(0xFE9C), 0x0010);
 		var002E = Func0881();
-		script var002E after 14 ticks
+		var002F = script var002E after 14 ticks
 		{
 			finish;
 			remove;
-		}
-		script UI_get_npc_object(0xFE9C)
+		};
+		var0016 = script UI_get_npc_object(0xFE9C)
 		{
 			wait 12;
 			call Func069D;
-		}
+		};
 		var0030 = UI_find_nearest(item, 0x02D6, 0x000A);
 		if (var0030)
 		{
-			script var0030
+			var0016 = script var0030
 			{
 				wait 16;
 				call Func06F8;
-			}
+			};
 		}
 		UI_remove_item(item);
 		gflags[0x030C] = true;
@@ -80668,7 +80774,7 @@ void Func06F9 object#(0x6F9) ()
 	var var002E;
 	var var002F;
 	var var0030;
-	var var0031;
+
 	var0000 = false;
 	var0001 = false;
 	if (event == 0x0002)
@@ -81010,16 +81116,16 @@ void Func06F9 object#(0x6F9) ()
 			if (var000C)
 			{
 				gflags[0x0317] = true;
-				script var000C
+				var002F = script var000C
 				{
 					wait 2;
 					call Func06F9;
-				}
-				script UI_get_npc_object(0xFE9C)
+				};
+				var0030 = script UI_get_npc_object(0xFE9C)
 				{
 					face var0001;
 					wait 2;
-				}
+				};
 				return;
 			}
 		}
@@ -81029,16 +81135,16 @@ void Func06F9 object#(0x6F9) ()
 			if (var000C)
 			{
 				gflags[0x0317] = true;
-				script var000C
+				var002F = script var000C
 				{
 					wait 2;
 					call Func06F9;
-				}
-				script UI_get_npc_object(0xFE9C)
+				};
+				var0030 = script UI_get_npc_object(0xFE9C)
 				{
 					face var0001;
 					wait 2;
-				}
+				};
 				return;
 			}
 		}
@@ -81048,25 +81154,25 @@ void Func06F9 object#(0x6F9) ()
 			if (var000C)
 			{
 				gflags[0x0317] = true;
-				script var000C
+				var002F = script var000C
 				{
 					wait 2;
 					call Func06F9;
-				}
-				script UI_get_npc_object(0xFE9C)
+				};
+				var0030 = script UI_get_npc_object(0xFE9C)
 				{
 					face var0001;
 					wait 2;
-				}
+				};
 				return;
 			}
 		}
-		script UI_get_npc_object(0xFE9C)
+		var0030 = script UI_get_npc_object(0xFE9C)
 		{
 			face var0001;
 			wait 1;
 			call Func06F9;
-		}
+		};
 	}
 	return;
 }
@@ -81076,7 +81182,6 @@ extern void Func08FF 0x8FF (var var0000);
 
 void Func06FA object#(0x6FA) ()
 {
-	var var0000;
 	if (UI_get_item_shape(item) == 0x0113)
 	{
 		Func08FF("@It would seem the nearby island is not at all stable.@");
@@ -81095,7 +81200,7 @@ extern void Func06FA object#(0x6FA) ();
 void Func06FB object#(0x6FB) ()
 {
 	var var0000;
-	var var0001;
+
 	if (event == 0x0003)
 	{
 		if (UI_get_item_quality(item) == 0x0064)
@@ -81103,13 +81208,13 @@ void Func06FB object#(0x6FB) ()
 			if (!gflags[0x02FF])
 			{
 				gflags[0x02FF] = true;
-				script item
+				var0000 = script item
 				{
 					nohalt;
 					finish;
 					wait 20;
 					call Func06FA;
-				}
+				};
 				Func08DD();
 			}
 			else if (!gflags[0x030C])
@@ -81123,13 +81228,13 @@ void Func06FB object#(0x6FB) ()
 	}
 	if (event == 0x0002)
 	{
-		script UI_get_npc_object(0xFE9C)
+		var0000 = script UI_get_npc_object(0xFE9C)
 		{
 			nohalt;
 			finish;
 			wait 20;
 			call Func06FA;
-		}
+		};
 		Func08DD();
 	}
 	return;
@@ -81161,7 +81266,7 @@ void Func06FC object#(0x6FC) ()
 	var var0010;
 	var var0011;
 	var var0012;
-	var var0013;
+
 	if (event == 0x0002)
 	{
 		var0000 = UI_click_on_item();
@@ -81196,10 +81301,10 @@ void Func06FC object#(0x6FC) ()
 		var0005 = UI_set_item_quality(var0004, 0x0096);
 		var0005 = UI_update_last_created(var0002);
 		var0006 = Func092D(var0004);
-		script UI_get_npc_object(0xFE9C)
+		var0007 = script UI_get_npc_object(0xFE9C)
 		{
 			face var0006;
-		}
+		};
 		if (!(var0002[0x0001] == var0003[0x0001]))
 		{
 			if (var0002[0x0001] < var0003[0x0001])
@@ -81252,16 +81357,16 @@ void Func06FC object#(0x6FC) ()
 				}
 			}
 		}
-		script var0008 after 9 ticks
+		var0009 = script var0008 after 9 ticks
 		{
 			nohalt;
 			call Func0708;
-		}
-		script var0008
+		};
+		var000A = script var0008
 		{
 			nohalt;
 			call Func06FD;
-		}
+		};
 	}
 	if (event == 0x0001)
 	{
@@ -81283,11 +81388,11 @@ void Func06FC object#(0x6FC) ()
 			}
 		}
 		UI_close_gumps();
-		script item after 1 ticks
+		var0012 = script item after 1 ticks
 		{
 			nohalt;
 			call Func06FC;
-		}
+		};
 	}
 	return;
 }
@@ -81315,7 +81420,7 @@ void Func06FD object#(0x6FD) ()
 	var var000C;
 	var var000D;
 	var var000E;
-	var var000F;
+
 	if (event == 0x0002)
 	{
 		var0000 = false;
@@ -81378,11 +81483,11 @@ void Func06FD object#(0x6FD) ()
 				}
 			}
 		}
-		script var000A after 9 ticks
+		var000D = script var000A after 9 ticks
 		{
 			nohalt;
 			call Func0708;
-		}
+		};
 		var0008 = UI_get_object_position(var000A);
 		var0009 = Func0887(var0008, var0001, var0000);
 		if (!var0009)
@@ -81427,23 +81532,22 @@ void Func06FD object#(0x6FD) ()
 				}
 			}
 		}
-		script var000A after 9 ticks
+		var000D = script var000A after 9 ticks
 		{
 			nohalt;
 			call Func0708;
-		}
-		script var000A
+		};
+		var000E = script var000A
 		{
 			nohalt;
 			call Func06FD;
-		}
+		};
 	}
 	return;
 }
 
 void Func0708 object#(0x708) ()
 {
-	var var0000;
 	UI_remove_item(item);
 	return;
 }
@@ -81451,7 +81555,7 @@ void Func0708 object#(0x708) ()
 void Func0709 object#(0x709) ()
 {
 	var var0000;
-	var var0001;
+
 	var0000 = 0x0001;
 	return;
 }
@@ -81507,7 +81611,7 @@ void Func070A object#(0x70A) ()
 	var var002B;
 	var var002C;
 	var var002D;
-	var var002E;
+
 	if (event == 0x0003)
 	{
 		if (!UI_get_item_quality(item))
@@ -81523,11 +81627,11 @@ void Func070A object#(0x70A) ()
 					var0002 = UI_set_item_quality(var0001, 0x0041);
 					var0002 = UI_give_last_created(var0000);
 					UI_item_say(var0000, "@I summon thee!@");
-					script UI_get_npc_object(0xFE9C)
+					var0002 = script UI_get_npc_object(0xFE9C)
 					{
 						wait 22;
-					}
-					script var0000
+					};
+					var0002 = script var0000
 					{
 						actor frame cast_up;
 						wait 3;
@@ -81544,7 +81648,7 @@ void Func070A object#(0x70A) ()
 						actor frame bowing;
 						wait 2;
 						actor frame standing;
-					}
+					};
 					var0003 = UI_find_nearby(item, 0x0150, 0x0014, 0x0000);
 					for (var0001 in var0003 with var0004 to var0005)
 					{
@@ -81637,17 +81741,17 @@ void Func070A object#(0x70A) ()
 					var001D = UI_find_nearby(var001A, 0x0113, 0x0000, 0x0010);
 					for (var0020 in var001D with var001E to var001F)
 					{
-						script var0020
+						var0002 = script var0020
 						{
 							finish;
 							hatch;
-						}
-						script 0xFE9C
+						};
+						var0002 = script 0xFE9C
 						{
 							nohalt;
 							finish;
 							call Func070A;
-						}
+						};
 					}
 				}
 			}
@@ -81662,12 +81766,12 @@ void Func070A object#(0x70A) ()
 				UI_sprite_effect(0x0007, (var0021[0x0001] - 0x0002), (var0021[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x0034);
 				UI_set_item_frame(var0001, 0x0013);
-				script var0001
+				var0002 = script var0001
 				{
 					face south;
 					wait 5;
 					call Func070A;
-				}
+				};
 			}
 			else
 			{
@@ -81675,17 +81779,17 @@ void Func070A object#(0x70A) ()
 				var0003 = UI_find_nearby(var0001, 0x0113, 0x0000, 0x0010);
 				for (var0001 in var0003 with var0022 to var0023)
 				{
-					script var0001
+					var0002 = script var0001
 					{
 						finish;
 						hatch;
-					}
-					script 0xFE9C
+					};
+					var0002 = script 0xFE9C
 					{
 						nohalt;
 						finish;
 						call Func070A;
-					}
+					};
 				}
 			}
 		}
@@ -81707,50 +81811,95 @@ void Func070A object#(0x70A) ()
 					var002A = UI_die_roll(0x0000, 0x0008);
 					if (var002A == 0x0000)
 					{
-						var002B = [0x6D, 0x6C, 0x61];
+						var002B = new script
+						{
+							actor frame kneeling;
+							actor frame bowing;
+							actor frame standing;
+						};
 						var0029 = [var0029, var002B];
 					}
 					if (var002A == 0x0001)
 					{
-						var002B = [0x6D, 0x61, 0x61];
+						var002B = new script
+						{
+							actor frame kneeling;
+							actor frame standing;
+							actor frame standing;
+						};
 						var0029 = [var0029, var002B];
 					}
 					if (var002A == 0x0002)
 					{
-						var002B = [0x6C, 0x6E, 0x61];
+						var002B = new script
+						{
+							actor frame bowing;
+							actor frame sleeping;
+							actor frame standing;
+						};
 						var0029 = [var0029, var002B];
 					}
 					if (var002A == 0x0003)
 					{
-						var002B = [0x61, 0x61, 0x61];
+						var002B = new script
+						{
+							actor frame standing;
+							actor frame standing;
+							actor frame standing;
+						};
 						var0029 = [var0029, var002B];
 					}
 					if (var002A == 0x0004)
 					{
-						var002B = [0x6D, 0x64, 0x61];
+						var002B = new script
+						{
+							actor frame kneeling;
+							actor frame ready;
+							actor frame standing;
+						};
 						var0029 = [var0029, var002B];
 					}
 					if (var002A == 0x0005)
 					{
-						var002B = [0x64, 0x6D, 0x61];
+						var002B = new script
+						{
+							actor frame ready;
+							actor frame kneeling;
+							actor frame standing;
+						};
 						var0029 = [var0029, var002B];
 					}
 					if (var002A == 0x0006)
 					{
-						var002C = (0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
-						var002B = [0x59, var002C, 0x6C, 0x61];
+						var002C = ((byte)0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+						var002B = new script
+						{
+							face var002C;
+							actor frame bowing;
+							actor frame standing;
+						};
 						var0029 = [var0029, var002B];
 					}
 					if (var002A == 0x0007)
 					{
-						var002C = (0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
-						var002B = [0x59, var002C, 0x6D, 0x61];
+						var002C = ((byte)0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+						var002B = new script
+						{
+							face var002C;
+							actor frame kneeling;
+							actor frame standing;
+						};
 						var0029 = [var0029, var002B];
 					}
 					if (var002A == 0x0008)
 					{
-						var002C = (0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
-						var002B = [0x59, var002C, 0x64, 0x61];
+						var002C = ((byte)0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+						var002B = new script
+						{
+							face var002C;
+							actor frame ready;
+							actor frame standing;
+						};
 						var0029 = [var0029, var002B];
 					}
 					UI_halt_scheduled(var0028);
@@ -81758,7 +81907,7 @@ void Func070A object#(0x70A) ()
 				}
 				UI_earthquake(0x0003);
 				var002D = UI_die_roll(0x0005, 0x0014);
-				script item
+				var0002 = script item
 				{
 					actor frame ready;
 					wait var002D;
@@ -81771,18 +81920,18 @@ void Func070A object#(0x70A) ()
 					actor frame cast_up;
 					wait 1;
 					call Func070A;
-				}
+				};
 			}
 			else
 			{
 				var002D = UI_die_roll(0x0005, 0x000F);
-				script item
+				var0002 = script item
 				{
 					actor frame ready;
 					wait var002D;
 					wait 10;
 					call Func070A;
-				}
+				};
 			}
 		}
 	}
@@ -81805,7 +81954,7 @@ void Func070B object#(0x70B) ()
 	var var0006;
 	var var0007;
 	var var0008;
-	var var0009;
+
 	if (!Func0944(item))
 	{
 		var0000 = UI_get_object_position(item);
@@ -81849,12 +81998,12 @@ void Func070B object#(0x70B) ()
 			var0002 = UI_set_last_created(item);
 		}
 	}
-	script item
+	var0008 = script item
 	{
 		finish;
 		nohalt;
 		call Func070B;
-	}
+	};
 	return;
 }
 
@@ -81866,7 +82015,7 @@ void Func070C object#(0x70C) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	var0000 = UI_find_nearest(item, 0x025C, 0x0001);
 	if (var0000)
 	{
@@ -81908,7 +82057,7 @@ void Func070D object#(0x70D) ()
 	var var000C;
 	var var000D;
 	var var000E;
-	var var000F;
+
 	var0000 = UI_find_nearby(item, 0x03A8, 0x0014, 0x0000);
 	var0001 = UI_find_nearby(item, 0x012F, 0x0014, 0x0000);
 	var0002 = UI_get_item_quality(item);
@@ -81923,7 +82072,7 @@ void Func070D object#(0x70D) ()
 			{
 				if (UI_get_item_quality(var0007) == 0x000C)
 				{
-					script var0007
+					var0008 = script var0007
 					{
 						frame 4;
 						sfx 33;
@@ -81932,7 +82081,7 @@ void Func070D object#(0x70D) ()
 							previous frame cycle;
 						};
 						call Func03A8;
-					}
+					};
 				}
 			}
 		}
@@ -81943,7 +82092,7 @@ void Func070D object#(0x70D) ()
 			{
 				if (UI_get_item_quality(var0007) == 0x000C)
 				{
-					script var0007
+					var0008 = script var0007
 					{
 						call Func012F;
 						sfx 32;
@@ -81951,7 +82100,7 @@ void Func070D object#(0x70D) ()
 						{
 							next frame cycle;
 						};
-					}
+					};
 				}
 			}
 			if (var0004)
@@ -81975,7 +82124,7 @@ void Func070D object#(0x70D) ()
 			{
 				if (UI_get_item_quality(var0007) == 0x000B)
 				{
-					script var0007
+					var0008 = script var0007
 					{
 						frame 4;
 						sfx 33;
@@ -81984,7 +82133,7 @@ void Func070D object#(0x70D) ()
 							previous frame cycle;
 						};
 						call Func03A8;
-					}
+					};
 				}
 			}
 		}
@@ -81995,7 +82144,7 @@ void Func070D object#(0x70D) ()
 			{
 				if (UI_get_item_quality(var0007) == 0x000B)
 				{
-					script var0007
+					var0008 = script var0007
 					{
 						call Func012F;
 						sfx 32;
@@ -82003,7 +82152,7 @@ void Func070D object#(0x70D) ()
 						{
 							next frame cycle;
 						};
-					}
+					};
 				}
 			}
 			if (var0003)
@@ -82040,7 +82189,7 @@ void Func070E object#(0x70E) ()
 	var var0010;
 	var var0011;
 	var var0012;
-	var var0013;
+
 	var0000 = UI_find_nearby(item, 0x03A8, 0x0001, 0x0000);
 	var0001 = UI_find_nearby(item, 0x012F, 0x0001, 0x0000);
 	if (gflags[0x033D] && gflags[0x033E])
@@ -82165,7 +82314,7 @@ void Func070F object#(0x70F) ()
 	var var0016;
 	var var0017;
 	var var0018;
-	var var0019;
+
 	var0000 = UI_get_item_shape(item);
 	if (var0000 == 0x01D2)
 	{
@@ -82195,13 +82344,13 @@ void Func070F object#(0x70F) ()
 		UI_set_item_frame(var000A, 0x0000);
 		var0009 = UI_set_item_quality(var000A, 0x002B);
 		var0009 = UI_give_last_created(var0008);
-		script var0008
+		var000B = script var0008
 		{
 			wait 5;
 			frame 31;
 			wait 2;
 			frame 12;
-		}
+		};
 	}
 	else
 	{
@@ -82257,12 +82406,12 @@ void Func070F object#(0x70F) ()
 				var0009 = UI_set_item_quality(var0013, var0010);
 				UI_set_item_frame(var0013, 0x0004);
 				var0009 = UI_give_last_created(var0011);
-				script var0013 after 1 ticks
+				var0014 = script var0013 after 1 ticks
 				{
 					finish;
 					nohalt;
 					call Func06F7;
-				}
+				};
 				var0002 = UI_find_nearby(UI_get_npc_object(0xFE9C), 0xFFFF, 0x0050, 0x0008);
 				for (var0005 in var0002 with var0015 to var0016)
 				{
@@ -82329,7 +82478,7 @@ void Func0710 object#(0x710) ()
 	var var0012;
 	var var0013;
 	var var0014;
-	var var0015;
+
 	if (event == 0x0001)
 	{
 		UI_close_gumps();
@@ -82402,12 +82551,12 @@ void Func0710 object#(0x710) ()
 		say();
 		if (var0006 && var0007)
 		{
-			script 0xFE9C
+			var000F = script 0xFE9C
 			{
 				nohalt;
 				call Func0714;
 				nop2;
-			}
+			};
 		}
 	}
 	if (event == 0x0002)
@@ -82443,7 +82592,7 @@ void Func0712 object#(0x712) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (event == 0x0003)
 	{
 		var0000 = UI_find_nearby_avatar(0x01F9);
@@ -82468,7 +82617,7 @@ void Func0713 object#(0x713) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	var0000 = item;
 	if (event == 0x0002)
 	{
@@ -82519,7 +82668,7 @@ void Func0714 object#(0x714) ()
 	var var0010;
 	var var0011;
 	var var0012;
-	var var0013;
+
 	var0000 = UI_find_nearby(item, 0x03F7, 0x0028, 0x0008);
 	var0001 = false;
 	var0002 = false;
@@ -82564,10 +82713,10 @@ void Func0714 object#(0x714) ()
 				message("\"I will give him mine!\"");
 				say();
 				UI_remove_npc_face(0xFEDF);
-				script 0xFE9C
+				var000D = script 0xFE9C
 				{
 					wait 500;
-				}
+				};
 				var0000 = UI_find_nearby(item, 0x019E, 0x0050, 0x0000);
 				for (var0005 in var0000 with var000E to var000F)
 				{
@@ -82582,7 +82731,7 @@ void Func0714 object#(0x714) ()
 						message("He pulls forth a heart-shape stone and, with a final flurry of action, drops the stone upon Adjhar's chest as he falls dead to the ground.");
 						say();
 						UI_remove_npc_face(0xFEDF);
-						script var0002
+						var0011 = script var0002
 						{
 							face var0010;
 							wait 2;
@@ -82593,7 +82742,7 @@ void Func0714 object#(0x714) ()
 							actor frame sleeping;
 							wait 1;
 							call Func0710;
-						}
+						};
 						return;
 					}
 				}
@@ -82602,7 +82751,7 @@ void Func0714 object#(0x714) ()
 		}
 		Func0904(0xFE9C, ["@In Ylem...@", "@In Grav...@", "@In Mani...@", "@Kal Por...@", "@Vas Flam Uus...@"]);
 		var0010 = Func092D(var0007);
-		script 0xFE9C
+		var0012 = script 0xFE9C
 		{
 			face var0010;
 			wait 1;
@@ -82632,12 +82781,12 @@ void Func0714 object#(0x714) ()
 			actor frame bowing;
 			wait 1;
 			actor frame standing;
-		}
-		script var0007 after 76 ticks
+		};
+		var0012 = script var0007 after 76 ticks
 		{
 			call Func062C;
 			nop2;
-		}
+		};
 	}
 	return;
 }
@@ -82657,7 +82806,7 @@ void Func0715 object#(0x715) ()
 	var var000A;
 	var var000B;
 	var var000C;
-	var var000D;
+
 	var0000 = UI_find_nearby(0xFE9C, 0x03F7, 0x0028, 0x0008);
 	var0001 = false;
 	for (var0004 in var0000 with var0002 to var0003)
@@ -82673,14 +82822,14 @@ void Func0715 object#(0x715) ()
 	}
 	if (var0001)
 	{
-		script var0001
+		var0005 = script var0001
 		{
 			wait 3;
-			face south;
+			face (byte)0x34;
 			actor frame kneeling;
 			wait 2;
 			actor frame standing;
-		}
+		};
 		var0006 = UI_get_object_position(var0001);
 		UI_sprite_effect(0x0011, var0006[0x0001], var0006[0x0002], 0x0000, 0x0000, 0x0000, 0x0001);
 		UI_play_sound_effect(0x003E);
@@ -82693,12 +82842,12 @@ void Func0715 object#(0x715) ()
 		var000B = UI_create_new_object(0x037F);
 		var000C = UI_update_last_created(var000A);
 		UI_remove_item(var0009);
-		script var000B after UI_die_roll(0x0032, 0x0096) ticks
+		var0005 = script var000B after UI_die_roll(0x0032, 0x0096) ticks
 		{
 			nohalt;
 			finish;
 			remove;
-		}
+		};
 	}
 	UI_set_schedule_type(var0001, 0x000F);
 	return;
@@ -82712,7 +82861,7 @@ void Func0716 object#(0x716) ()
 	var var0003;
 	var var0004;
 	var var0005;
-	var var0006;
+
 	gflags[0x0326] = false;
 	var0000 = UI_find_nearby(0xFE9C, 0x03F7, 0x0028, 0x0008);
 	var0001 = false;
@@ -82731,11 +82880,11 @@ void Func0716 object#(0x716) ()
 	{
 		UI_set_item_frame(var0001, 0x001D);
 	}
-	script 0xFE9C after 10 ticks
+	var0005 = script 0xFE9C after 10 ticks
 	{
 		nohalt;
 		call Func0715;
-	}
+	};
 	return;
 }
 
@@ -82748,7 +82897,7 @@ void Func0717 object#(0x717) ()
 	var var0001;
 	var var0002;
 	var var0003;
-	var var0004;
+
 	if (UI_get_item_shape(item) == 0x029C)
 	{
 		var0000 = UI_get_object_position(item);
@@ -82798,6 +82947,7 @@ void Func0800 0x800 (var var0000)
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_close_gumps();
 	gflags[0x02E8] = false;
 	var0001 = Func0900();
@@ -82844,11 +82994,11 @@ void Func0800 0x800 (var var0000)
 		}
 		if (Func0801(item))
 		{
-			script 0xFE9C
+			var000B = script 0xFE9C
 			{
 				nohalt;
 				music 30;
-			}
+			};
 		}
 		var000C = Func093C(UI_get_npc_object(0xFE9C), UI_get_party_list());
 		UI_set_schedule_type(0xFE9C, 0x000E);
@@ -82905,6 +83055,7 @@ void Func0803 0x803 (var var0000)
 	var var0004;
 	var var0005;
 	var var0006;
+
 	var0001 = UI_find_nearby(var0000, 0x00E6, 0x0028, 0x0000);
 	if (UI_get_item_flag(var0001, 0x0001))
 	{
@@ -82923,11 +83074,11 @@ void Func0803 0x803 (var var0000)
 		var0004 = 0x0001;
 		var0005 = 0xFE99;
 		Func0804(var0003, var0004, var0005);
-		script 0xFE9C after 8 ticks
+		var0006 = script 0xFE9C after 8 ticks
 		{
 			nohalt;
 			call Func061E;
-		}
+		};
 	}
 	return;
 }
@@ -82941,6 +83092,7 @@ void Func0804 0x804 (var var0000, var var0001, var var0002)
 	var var0007;
 	var var0008;
 	var var0009;
+
 	var0003 = UI_find_nearby(0xFE9C, var0000, 0x001E, 0x0010);
 	var0004 = 0x0000;
 	for (var0007 in var0003 with var0005 to var0006)
@@ -82970,6 +83122,7 @@ void Func0805 0x805 (var var0000)
 	var var0004;
 	var var0005;
 	var var0006;
+
 	if (!gflags[0x0004])
 	{
 		UI_set_item_shape(var0000, 0x03D5);
@@ -82983,11 +83136,11 @@ void Func0805 0x805 (var var0000)
 		{
 			UI_remove_item(var0005);
 		}
-		script 0xFE9C after 8 ticks
+		var0006 = script 0xFE9C after 8 ticks
 		{
 			nohalt;
 			call Func061B;
-		}
+		};
 		gflags[0x0004] = true;
 	}
 	return;
@@ -83001,6 +83154,7 @@ void Func0806 0x806 (var var0000, var var0001)
 	var var0005;
 	var var0006;
 	var var0007;
+
 	var0002 = UI_get_object_position(var0001);
 	var0003 = UI_find_nearby(var0002, var0000, 0x0014, 0x00B0);
 	var0003 = (var0003 & UI_find_nearby(var0002, (var0000 + 0x0001), 0x0014, 0x00B0));
@@ -83008,14 +83162,14 @@ void Func0806 0x806 (var var0000, var var0001)
 	var0003 = (var0003 & UI_find_nearby(var0002, (var0000 + 0x0003), 0x0014, 0x00B0));
 	for (var0006 in var0003 with var0004 to var0005)
 	{
-		script var0006
+		var0007 = script var0006
 		{
 			repeat 6
 			{
 				next frame cycle;
 			};
 			call Func03C8;
-		}
+		};
 	}
 	UI_earthquake(0x0007);
 	return;
@@ -83028,6 +83182,7 @@ void Func0807 0x807 (var var0000)
 {
 	var var0001;
 	var var0002;
+
 	if (!gflags[0x0005])
 	{
 		UI_set_item_shape(var0000, 0x03D5);
@@ -83036,11 +83191,11 @@ void Func0807 0x807 (var var0000)
 		var0001[0x0002] = (var0001[0x0002] + 0x0002);
 		UI_move_object(0xFE9C, var0001);
 		Func0808();
-		script 0xFE9C after 8 ticks
+		var0002 = script 0xFE9C after 8 ticks
 		{
 			nohalt;
 			call Func061D;
-		}
+		};
 		gflags[0x0005] = true;
 	}
 	return;
@@ -83056,6 +83211,7 @@ void Func0808 0x808 ()
 	var var0002;
 	var var0003;
 	var var0004;
+
 	var0000 = Func093C(UI_get_npc_object(0xFE9C), UI_get_party_list());
 	var0001 = UI_get_schedule_type(UI_get_npc_object(0xFE9C));
 	for (var0004 in var0000 with var0002 to var0003)
@@ -83078,6 +83234,7 @@ void Func0809 0x809 (var var0000)
 	var var0002;
 	var var0003;
 	var var0004;
+
 	var0001 = UI_get_barge(var0000);
 	if (var0001)
 	{
@@ -83140,6 +83297,7 @@ void Func080A 0x80A (var var0000, var var0001)
 	var var0011;
 	var var0012;
 	var var0013;
+
 	var0002 = [];
 	var0003 = UI_find_nearby(0xFE9C, var0001, 0x000F, 0x0000);
 	for (var0006 in var0003 with var0004 to var0005)
@@ -83307,7 +83465,7 @@ var Func080E 0x80E (var var0000)
 	{
 		if (UI_get_item_shape(var0003) == 0x0366)
 		{
-			script var0003
+			var000E = script var0003
 			{
 				frame 0;
 				continue;
@@ -83320,11 +83478,11 @@ var Func080E 0x80E (var var0000)
 				frame 0;
 				continue;
 				sfx 34;
-			}
+			};
 		}
 		else
 		{
-			script var0003
+			var000E = script var0003
 			{
 				frame 0;
 				continue;
@@ -83337,7 +83495,7 @@ var Func080E 0x80E (var var0000)
 				frame 0;
 				continue;
 				sfx 34;
-			}
+			};
 		}
 	}
 	if (UI_get_array_size(var0000) == 0x0000)
@@ -83364,6 +83522,7 @@ void Func080F 0x80F ()
 	var var0008;
 	var var0009;
 	var var000A;
+
 	if (event == 0x0003)
 	{
 		var0000 = UI_find_nearby(item, 0x0363, 0x000F, 0x0000);
@@ -83394,6 +83553,7 @@ void Func0810 0x810 (var var0000, var var0001)
 	var var0009;
 	var var000A;
 	var var000B;
+
 	if (var0000 == 0x0000)
 	{
 		var0000 = 0x0170;
@@ -83447,6 +83607,7 @@ void Func0811 0x811 ()
 	var var0001;
 	var var0002;
 	var var0003;
+
 	var0000 = Func093C(UI_get_npc_object(0xFE9C), UI_get_party_list());
 	for (var0003 in var0000 with var0001 to var0002)
 	{
@@ -83461,18 +83622,19 @@ void Func0812 0x812 (var var0000)
 	var var0001;
 	var var0002;
 	var var0003;
+
 	var0001 = UI_get_barge(0xFE9C);
 	if (UI_on_barge())
 	{
 		var0002 = UI_get_object_position(var0000);
-		script var0000
+		var0003 = script var0000
 		{
 			repeat 15
 			{
 				rise;
 				nop;
 			};
-		}
+		};
 		UI_play_music(0x0019, 0x0000);
 		UI_set_item_flag(0x0002, 0x000A);
 		UI_set_item_flag(var0001, 0x001A);
@@ -83494,6 +83656,7 @@ void Func0813 0x813 (var var0000, var var0001, var var0002)
 	var var0007;
 	var var0008;
 	var var0009;
+
 	var0003 = UI_click_on_item();
 	var0004 = UI_get_party_list();
 	if ((var0003 in var0004) && ((!UI_get_item_flag(var0003, 0x0001)) && ((!UI_get_item_flag(var0003, 0x0007)) && (!UI_get_item_flag(var0003, 0x0004)))))
@@ -83620,6 +83783,7 @@ void Func0815 0x815 (var var0000)
 	var var0002;
 	var var0003;
 	var var0004;
+
 	var0001 = Func081B(var0000);
 	var0002 = UI_get_item_quality(item);
 	var0003 = 0xFFFF;
@@ -83708,6 +83872,7 @@ void Func0816 0x816 (var var0000)
 	var var001F;
 	var var0020;
 	var var0021;
+
 	var0001 = false;
 	var0002 = UI_get_item_quality(var0000);
 	if (var0002 == 0x0000)
@@ -83843,7 +84008,7 @@ void Func0816 0x816 (var var0000)
 		{
 			if (UI_get_item_quality(var001F) == var0015)
 			{
-				script var001F
+				var0001 = script var001F
 				{
 					sfx 32;
 					frame 1;
@@ -83851,7 +84016,7 @@ void Func0816 0x816 (var var0000)
 					{
 						next frame cycle;
 					};
-				}
+				};
 				var0001 = true;
 			}
 		}
@@ -83889,6 +84054,7 @@ void Func0817 0x817 (var var0000)
 	var var0004;
 	var var0005;
 	var var0006;
+
 	gflags[0x02E4] = var0000[0x0001];
 	gflags[0x02E5] = var0000[0x0002];
 	gflags[0x02E6] = var0000[0x0003];
@@ -83909,7 +84075,7 @@ void Func0817 0x817 (var var0000)
 	{
 		if (UI_get_item_quality(var0005) == var0002)
 		{
-			script var0005
+			var0006 = script var0005
 			{
 				frame 1;
 				continue;
@@ -83917,7 +84083,7 @@ void Func0817 0x817 (var var0000)
 				sfx 16;
 				nop;
 				frame 0;
-			}
+			};
 		}
 	}
 	return;
@@ -84088,7 +84254,7 @@ var Func0820 0x820 (var var0000)
 void Func0821 0x821 (var var0000)
 {
 	var var0001;
-	script var0000
+	var0001 = script var0000
 	{
 		finish;
 		frame 4;
@@ -84097,7 +84263,7 @@ void Func0821 0x821 (var var0000)
 			previous frame cycle;
 		};
 		remove;
-	}
+	};
 	return;
 }
 
@@ -84143,6 +84309,7 @@ void Func0824 0x824 (var var0000)
 	var var0002;
 	var var0003;
 	var var0004;
+
 	if ((UI_die_roll(0x0001, 0x0003) == 0x0001) && (!(UI_get_item_quality(var0000) == 0x0008)))
 	{
 		UI_reduce_health(0xFE9C, 0x0003, 0x0004);
@@ -84165,11 +84332,11 @@ void Func0824 0x824 (var var0000)
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		UI_play_sound_effect2(0x000B, item);
 		UI_move_object(0xFE9B, Func0823(var0000));
-		script 0xFE9C
+		var0004 = script 0xFE9C
 		{
 			nohalt;
 			call Func0636;
-		}
+		};
 	}
 	return;
 }
@@ -84219,14 +84386,14 @@ var Func0825 0x825 (var var0000, var var0001, var var0002)
 	var0000[var0002] = (var0000[var0002] + var0005);
 	if (UI_get_npc_prop(0xFE9C, 0x0003) > 0x0000)
 	{
-		script 0xFE9C
+		var0006 = script 0xFE9C
 		{
 			face var0004;
 			actor frame sleeping;
 			wait 3;
 			actor frame kneeling;
 			wait 1;
-		}
+		};
 	}
 	return var0000;
 }
@@ -84262,6 +84429,7 @@ void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var
 	var var000C;
 	var var000D;
 	var var000E;
+
 	if (UI_get_container(var0000))
 	{
 		UI_flash_mouse(0x0000);
@@ -84569,6 +84737,7 @@ void Func082F 0x82F ()
 	var var001D;
 	var var001E;
 	var var001F;
+
 	var0000 = UI_find_nearby_avatar(0x02FB);
 	var0001 = UI_find_nearby_avatar(0x02FC);
 	if (UI_get_array_size(var0001) == 0x0004)
@@ -84590,20 +84759,135 @@ void Func082F 0x82F ()
 					}
 				}
 			}
-			var000A = [0x55, 0x060C];
-			var000B = [0x46, 0x0000, 0x27, 0x0002, 0x4D, 0x0B, 0xFFFF, 0x001C, var000A];
-			var000C = [0x46, 0x0000, 0x27, 0x0001, 0x4D, 0x0B, 0xFFFF, 0x001C, 0x27, 0x0001, var000A];
-			var000D = [0x46, 0x0000, 0x27, 0x0001, 0x4D, 0x0B, 0xFFFF, 0x000E, 0x27, 0x0001, 0x4D, 0x0B, 0xFFFF, 0x000E, var000A];
-			var000E = [0x46, 0x0000, 0x27, 0x0001, 0x4D, 0x0B, 0xFFFF, 0x001C, var000A];
-			var000F = [0x46, 0x0000, 0x4D, 0x0B, 0xFFFF, 0x001C, 0x27, 0x0002, var000A];
-			var0010 = [0x27, 0x0002, var000B];
-			var0011 = [0x46, 0x0000, 0x4D, 0x27, 0x0002, 0x4D, 0x0B, 0xFFFC, 0x000E, var000A];
-			var0012 = [0x46, 0x0000, 0x4D, 0x0B, 0xFFFF, 0x000F, 0x27, 0x0007, 0x4D, 0x0B, 0xFFFF, 0x000E, var000A];
-			var0013 = [0x27, 0x0001, var000C];
-			var0014 = [0x27, 0x0001, var000D];
-			var0015 = [0x27, 0x0001, var000E];
-			var0016 = [0x27, 0x0001, var000F];
-			var0017 = [0x46, 0x0000, 0x27, 0x0001, 0x4D, 0x0B, 0xFFFF, 0x001C, 0x27, 0x0001, 0x50, 0x0B, 0xFFFF, 0x0002, 0x4E, 0x0B, 0xFFFF, 0x0002, var000A];
+			var000A = new script
+			{
+				call Func060C;
+			};
+			var000B = new script
+			{
+				frame 0;
+				wait 2;
+				repeat 28
+				{
+					next frame;
+				};
+				var000A;
+			};
+			var000C = new script
+			{
+				frame 0;
+				wait 1;
+				repeat 28
+				{
+					next frame;
+				};
+				wait 1;
+				var000A;
+			};
+			var000D = new script
+			{
+				frame 0;
+				wait 1;
+				repeat 14
+				{
+					next frame;
+				};
+				wait 1;
+				repeat 14
+				{
+					next frame;
+				};
+				var000A;
+			};
+			var000E = new script
+			{
+				frame 0;
+				wait 1;
+				repeat 28
+				{
+					next frame;
+				};
+				var000A;
+			};
+			var000F = new script
+			{
+				frame 0;
+				repeat 28
+				{
+					next frame;
+				};
+				wait 2;
+				var000A;
+			};
+			var0010 = new script
+			{
+				wait 2;
+				var000B;
+			};
+			var0011 = new script
+			{
+				frame 0;
+				repeat 14
+				{
+					next frame;
+					wait 2;
+					next frame;
+				};
+				var000A;
+			};
+			var0012 = new script
+			{
+				frame 0;
+				repeat 15
+				{
+					next frame;
+				};
+				wait 7;
+				repeat 14
+				{
+					next frame;
+				};
+				var000A;
+			};
+			var0013 = new script
+			{
+				wait 1;
+				var000C;
+			};
+			var0014 = new script
+			{
+				wait 1;
+				var000D;
+			};
+			var0015 = new script
+			{
+				wait 1;
+				var000E;
+			};
+			var0016 = new script
+			{
+				wait 1;
+				var000F;
+			};
+			var0017 = new script
+			{
+				frame 0;
+				wait 1;
+				repeat 28
+				{
+					next frame;
+				};
+				wait 1;
+				repeat 2
+				{
+					previous frame cycle;
+				};
+				repeat 2
+				{
+					next frame cycle;
+				};
+				var000A;
+			};
 			var0018 = 0x0000;
 			for (var001B in var0001 with var0019 to var001A)
 			{
@@ -84686,15 +84970,16 @@ void Func0830 0x830 (var var0000, var var0001)
 	var var0007;
 	var var0008;
 	var var0009;
+
 	if (var0001 == 0x0001)
 	{
 		var0002 = 0xFFFC;
 		var0003 = 0x0058;
 		var0004 = UI_find_nearby(var0000[0x0001], 0x00C7, 0x0019, 0x0000);
-		script var0004
+		var0005 = script var0004
 		{
 			music 21;
-		}
+		};
 	}
 	if (var0001 == 0x0000)
 	{
@@ -84723,6 +85008,7 @@ void Func0831 0x831 (var var0000)
 	var var0004;
 	var var0005;
 	var var0006;
+
 	var0001 = UI_get_object_position(var0000);
 	var0001 = (var0001 & UI_get_item_quality(var0000));
 	var0001 = (var0001 & 0xFE99);
@@ -84746,7 +85032,8 @@ void Func0831 0x831 (var var0000)
 void Func0832 0x832 (var var0000, var var0001)
 {
 	var var0002;
-	script var0000
+
+	var0002 = script var0000
 	{
 		frame 4;
 		repeat 3
@@ -84756,14 +85043,15 @@ void Func0832 0x832 (var var0000, var var0001)
 		};
 		call var0001;
 		sfx 33;
-	}
+	};
 	return;
 }
 
 void Func0833 0x833 (var var0000, var var0001)
 {
 	var var0002;
-	script var0000
+
+	var0002 = script var0000
 	{
 		call var0001;
 		repeat 3
@@ -84772,7 +85060,7 @@ void Func0833 0x833 (var var0000, var var0001)
 			sfx 32;
 		};
 		sfx 33;
-	}
+	};
 	return;
 }
 
@@ -84808,25 +85096,29 @@ var Func0834 0x834 ()
 		var0005 = UI_get_lift(var0004);
 		if (var0005 == 0x0000)
 		{
-			script var0004
+			var0006 = script var0004
 			{
-				sfx 32;
-				call Func0607;
-				frame 0;
+				// Bug: in the original, the repeat jumps one byte too far.
+				repeat 3
+				{
+					sfx 32;
+					call Func0607;
+					frame 0;
+				};
 			};
 		}
 		for (var0009 in var0000 with var0007 to var0008)
 		{
-			script var0009
+			var0006 = script var0009
 			{
 				frame 1;
 				frame 2;
 				frame 3;
-			}
+			};
 		}
 		if (var0005 == 0x0001)
 		{
-			script var0004
+			var0006 = script var0004
 			{
 				repeat 2
 				{
@@ -84835,65 +85127,73 @@ var Func0834 0x834 ()
 					call Func0607;
 					frame 1;
 				};
-			}
+			};
 			for (var0009 in var0000 with var000A to var000B)
 			{
-				script var0009
+				var0006 = script var0009
 				{
 					frame 2;
 					frame 3;
-				}
+				};
 			}
 		}
 		if (var0005 == 0x0002)
 		{
-			script var0004
+			var0006 = script var0004
 			{
-				sfx 32;
-				call Func0607;
-				frame 2;
+				// Bug: in the original, the repeat jumps one byte too far.
+				repeat 1
+				{
+					sfx 32;
+					call Func0607;
+					frame 2;
+				};
 			};
 		}
 		for (var0009 in var0000 with var000C to var000D)
 		{
-			script var0009
+			var0006 = script var0009
 			{
 				frame 3;
-			}
+			};
 		}
 		if (var0005 == 0x0003)
 		{
-			script var0004
+			var0006 = script var0004
 			{
 				sfx 32;
 				call Func0607;
 				frame 2;
-			}
+			};
 			for (var0009 in var0000 with var000E to var000F)
 			{
-				script var0009
+				var0006 = script var0009
 				{
 					frame 3;
-				}
+				};
 			}
 		}
 		if (var0005 == 0x0004)
 		{
-			script var0004
+			var0006 = script var0004
 			{
-				sfx 32;
-				call Func0609;
-				frame 3;
+				// Bug: in the original, the repeat jumps one byte too far.
+				repeat 3
+				{
+					sfx 32;
+					call Func0609;
+					frame 3;
+				};
 			};
 		}
 		for (var0009 in var0000 with var0010 to var0011)
 		{
-			script var0009
+			var0006 = script var0009
 			{
 				frame 2;
 				frame 1;
 				frame 0;
-			}
+			};
 		}
 	}
 	return true;
@@ -84903,6 +85203,7 @@ void Func0835 0x835 (var var0000, var var0001, var var0002)
 {
 	var var0003;
 	var var0004;
+
 	var0003 = UI_get_npc_prop(var0000, var0001);
 	var0004 = UI_set_npc_prop(var0000, var0001, (var0002 - var0003));
 	return;
@@ -84920,6 +85221,7 @@ void Func0836 0x836 (var var0000, var var0001)
 	var var0005;
 	var var0006;
 	var var0007;
+
 	var0002 = UI_get_item_quality(var0000);
 	var0003 = [];
 	if ((var0001 == 0x0001) || (var0001 == 0xFE99))
@@ -85009,20 +85311,21 @@ void Func0838 0x838 (var var0000)
 {
 	var var0001;
 	var var0002;
+
 	var0001 = UI_get_item_frame(item);
 	if (var0001 == 0x0008)
 	{
-		script item
+		var0002 = script item
 		{
 			wait 2;
 			frame 8;
 			wait 25;
 			call Func068F;
-		}
+		};
 	}
 	if (var0001 == 0x0009)
 	{
-		script item
+		var0002 = script item
 		{
 			wait 2;
 			frame 9;
@@ -85030,11 +85333,11 @@ void Func0838 0x838 (var var0000)
 			frame 8;
 			wait 25;
 			call Func068F;
-		}
+		};
 	}
 	if (var0001 == 0x000A)
 	{
-		script item
+		var0002 = script item
 		{
 			wait 2;
 			frame 10;
@@ -85044,11 +85347,11 @@ void Func0838 0x838 (var var0000)
 			frame 8;
 			wait 25;
 			call Func068F;
-		}
+		};
 	}
 	if (var0001 == 0x000B)
 	{
-		script item
+		var0002 = script item
 		{
 			wait 2;
 			frame 11;
@@ -85060,11 +85363,11 @@ void Func0838 0x838 (var var0000)
 			frame 8;
 			wait 25;
 			call Func068F;
-		}
+		};
 	}
 	if (var0001 == 0x000C)
 	{
-		script item
+		var0002 = script item
 		{
 			wait 2;
 			frame 12;
@@ -85078,7 +85381,7 @@ void Func0838 0x838 (var var0000)
 			frame 8;
 			wait 25;
 			call Func068F;
-		}
+		};
 	}
 	return;
 }
@@ -85225,6 +85528,7 @@ void Func083D 0x83D ()
 	var var0014;
 	var var0015;
 	var var0016;
+
 	if (UI_get_schedule_type(0xFF18) == 0x0009)
 	{
 		UI_set_schedule_type(0xFF18, 0x000A);
@@ -85369,6 +85673,7 @@ void Func083E 0x83E (var var0000, var var0001)
 	var var0006;
 	var var0007;
 	var var0008;
+
 	if (var0001 == 0x0001)
 	{
 		if (UI_in_usecode(var0000))
@@ -85393,14 +85698,14 @@ void Func083E 0x83E (var var0000, var var0001)
 		}
 		if (Func080E(var0004))
 		{
-			script item
+			var0008 = script item
 			{
 				frame 1;
 				repeat 4
 				{
 					next frame cycle;
 				};
-			}
+			};
 			return;
 		}
 		if (gflags[0x003D])
@@ -85422,6 +85727,7 @@ void Func083F 0x83F (var var0000, var var0001)
 	var var0005;
 	var var0006;
 	var var0007;
+
 	var0002 = (UI_find_nearby_avatar(0x010F) & UI_find_nearby_avatar(0x0110));
 	var0003 = false;
 	for (var0006 in var0002 with var0004 to var0005)
@@ -85429,28 +85735,29 @@ void Func083F 0x83F (var var0000, var var0001)
 		if (UI_get_item_quality(var0006) == UI_get_item_quality(var0000))
 		{
 			var0007 = Func0834();
-			script var0000
+			var0007 = script var0000
 			{
 				frame 1;
 				repeat 6
 				{
 					next frame cycle;
 				};
-			}
+			};
 			var0003 = true;
 		}
 	}
 	if (var0003 && var0001)
 	{
-		script 0xFE9C
+		var0007 = script 0xFE9C
 		{
 			face west;
+			continue;
 			repeat 4
 			{
 				actor frame bowing;
 				actor frame standing;
 			};
-		}
+		};
 	}
 	return;
 }
@@ -85465,6 +85772,7 @@ void Func0840 0x840 ()
 	var var0001;
 	var var0002;
 	var var0003;
+
 	UI_push_answers();
 	var0000 = Func090B(["Be Good", "No Answers", "Strive for Unity", "Have Faith", "I don't know"]);
 	if (var0000 == "No Answers")
@@ -85545,6 +85853,7 @@ void Func0841 0x841 ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "mutton rations", "cake", "ham", "wine", "ale"];
@@ -85642,6 +85951,7 @@ void Func0842 0x842 ()
 	var var000C;
 	var var000D;
 	var var000E;
+
 	UI_push_answers();
 	var0000 = Func0909();
 	var0001 = UI_is_pc_female();
@@ -85738,16 +86048,17 @@ void Func0843 0x843 ()
 {
 	var var0000;
 	UI_remove_npc_face(0xFEDE);
-	script item
+	var0000 = script item
 	{
 		frame 8;
 		sfx 67;
+		continue;
 		repeat 4
 		{
 			previous frame cycle;
 			wait 4;
 		};
-	}
+	};
 	abort;
 	return;
 }
@@ -85776,6 +86087,7 @@ void Func0845 0x845 (var var0000)
 	var var0002;
 	var var0003;
 	var var0004;
+
 	var0001 = UI_get_npc_prop(UI_get_npc_object(0xFE9C), 0x0005);
 	var0002 = UI_get_npc_prop(UI_get_npc_object(0xFE9C), 0x0006);
 	if (!var0000)
@@ -85980,6 +86292,7 @@ void Func084A 0x84A ()
 	var var000B;
 	var var000C;
 	var var000D;
+
 	var0000 = 0x0001;
 	var0001 = [0x0193, 0x0193, 0x0193, 0x0193, 0x019B, 0x019B, 0x019B, 0x019B];
 	var0002 = [0x0132, 0x0135, 0x013B, 0x013E, 0x0132, 0x0135, 0x013B, 0x013E];
@@ -86044,6 +86357,7 @@ void Func084C 0x84C ()
 	var var000B;
 	var var000C;
 	var var000D;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "torch", "oil flasks", "shovel", "powder keg", "bucket", "jar", "cloth"];
@@ -86136,6 +86450,7 @@ void Func084D 0x84D ()
 	var var0000;
 	var var0001;
 	var var0002;
+
 	var0000 = UI_part_of_day();
 	if (gflags[0x0096] && gflags[0x0097])
 	{
@@ -86207,6 +86522,7 @@ void Func084E 0x84E ()
 	var var0006;
 	var var0007;
 	var var0008;
+
 	UI_show_npc_face(0xFFE6, 0x0000);
 	var0000 = Func0908();
 	message("\"These questions are all hypothetical. Do not let them confuse or upset thee.~~\"Question One: Thou art feeling depressed right now. Is it more likely because -~A: Thou hast disappointed a friend, or~B: A friend has disappointed thee?\"");
@@ -86362,6 +86678,7 @@ void Func084F 0x84F ()
 	var var0011;
 	var var0012;
 	var var0013;
+
 	UI_show_npc_face(0xFFE6, 0x0000);
 	var0000 = Func0908();
 	var0001 = Func0909();
@@ -86607,6 +86924,7 @@ void Func0850 0x850 ()
 	var var000B;
 	var var000C;
 	var var000D;
+
 	UI_show_npc_face(0xFFE6, 0x0000);
 	var0000 = Func0908();
 	var0001 = Func0909();
@@ -86745,6 +87063,7 @@ void Func0851 0x851 ()
 	var var0001;
 	var var0002;
 	var var0003;
+
 	if (!gflags[0x00D6])
 	{
 		message("\"I need thee to deliver this sealed package unopened to Elynor, the leader of our Fellowship branch in Minoc. Elynor will reward thee upon receiving it, thou dost have my word. May I trust thee to do it?\"");
@@ -86814,6 +87133,7 @@ void Func0852 0x852 ()
 	var var0018;
 	var var0019;
 	var var001A;
+
 	var0000 = [0x0000, 0x0000];
 	var0001 = [0x0001, 0x0002];
 	var0002 = false;
@@ -86949,6 +87269,7 @@ void Func0853 0x853 ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "torch", "oil flasks", "bag", "shovel", "powder keg", "bucket", "jar", "jug", "wing scratcher", "nail file", "horn polish"];
@@ -87042,6 +87363,7 @@ void Func0854 0x854 ()
 	var var0004;
 	var var0005;
 	var0000 = Func0909();
+
 	message("\"How many portions wouldst thou wish to sell?\"");
 	say();
 	var0001 = UI_input_numeric_value(0x0000, 0x000A, 0x0001, 0x0000);
@@ -87100,6 +87422,7 @@ void Func0855 0x855 ()
 	var var000B;
 	var var000C;
 	var var000D;
+
 	var0000 = Func0909();
 	UI_push_answers();
 	var0001 = true;
@@ -87202,6 +87525,7 @@ void Func0856 0x856 (var var0000, var var0001)
 	var var0009;
 	var var000A;
 	var var000B;
+
 	var0002 = Func0920();
 	var0003 = UI_get_npc_name(var0002);
 	if (var0002 == 0xFE9C)
@@ -87304,6 +87628,7 @@ void Func0857 0x857 ()
 	var var0006;
 	var var0007;
 	var var0008;
+
 	UI_push_answers();
 	var0000 = 0x0001;
 	var0001 = 0x0001;
@@ -87378,6 +87703,7 @@ void Func0858 0x858 ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "club", "dagger", "bow", "sword", "halberd", "arrows", "bolts"];
@@ -87472,6 +87798,7 @@ void Func0859 0x859 ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "great helm", "plate armour", "plate leggings", "gorget", "scale armour", "gauntlets"];
@@ -87557,6 +87884,7 @@ void Func085A 0x85A ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	if (gflags[0x02B6])
@@ -87650,6 +87978,7 @@ void Func085B 0x85B ()
 	var var0001;
 	var var0002;
 	var var0003;
+
 	var0000 = UI_get_npc_object(0xFF0C);
 	var0001 = UI_get_schedule_type(var0000);
 	var0002 = "";
@@ -87698,6 +88027,7 @@ void Func085C 0x85C ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "heavy cloak", "tunic", "pants", "dress", "hood"];
@@ -87785,6 +88115,7 @@ void Func085D 0x85D ()
 	var var000B;
 	var var000C;
 	var var000D;
+
 	var0000 = Func0909();
 	UI_push_answers();
 	var0001 = true;
@@ -87893,6 +88224,7 @@ void Func085E 0x85E ()
 	var var000B;
 	var var000C;
 	var var000D;
+
 	var0000 = Func0909();
 	UI_push_answers();
 	var0001 = true;
@@ -87985,6 +88317,7 @@ void Func085F 0x85F (var var0000, var var0001)
 	var var000D;
 	var var000E;
 	var var000F;
+
 	var0002 = Func0908();
 	var0003 = Func0909();
 	var0004 = "the Avatar";
@@ -88096,6 +88429,7 @@ void Func0860 0x860 (var var0000, var var0001, var var0002)
 	var var000B;
 	var var000C;
 	var var000D;
+
 	var0003 = Func0909();
 	message("\"I am able to heal, cure poison, and resurrect. Art thou in need of one of these services?\"");
 	say();
@@ -88221,6 +88555,7 @@ void Func0862 0x862 ()
 	var var0004;
 	var var0005;
 	var var0006;
+
 	var0000 = Func08F7(0xFFFF);
 	var0001 = false;
 	var0002 = false;
@@ -88368,6 +88703,7 @@ void Func0863 0x863 ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "bow", "crossbow", "triple crossbow", "arrows", "bolts"];
@@ -88447,6 +88783,7 @@ void Func0864 0x864 ()
 	var var0001;
 	var var0002;
 	var var0003;
+
 	var0000 = UI_get_npc_object(0xFF03);
 	var0001 = UI_get_schedule_type(var0000);
 	var0002 = "";
@@ -89002,6 +89339,7 @@ void Func0870 0x870 (var var0000, var var0001, var var0002)
 	var var000A;
 	var var000B;
 	var var000C;
+
 	message("\"I am qualified to heal, cure poison, and resurrect. Art thou interested in one of these services?\"");
 	say();
 	UI_push_answers();
@@ -89124,6 +89462,7 @@ void Func0871 0x871 ()
 	var var000B;
 	var var000C;
 	var var000D;
+
 	var0000 = Func0909();
 	UI_push_answers();
 	var0001 = true;
@@ -89240,6 +89579,7 @@ void Func0872 0x872 ()
 	var var000B;
 	var var000C;
 	var var000D;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "dagger", "mace", "sword", "2-handed hammer", "2-handed sword", "club", "sling", "bow", "arrows", "bolts"];
@@ -89339,6 +89679,7 @@ void Func0873 0x873 ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "leather helm", "wooden shield", "leather leggings", "chain leggings", "leather armour"];
@@ -89426,6 +89767,7 @@ void Func0874 0x874 ()
 	var var000B;
 	var var000C;
 	var var000D;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "torch", "backpack", "lockpicks", "bucket", "swamp boots", "bedroll"];
@@ -89531,6 +89873,7 @@ void Func0875 0x875 (var var0000, var var0001)
 	var var000E;
 	var var000F;
 	var var0010;
+
 	var0002 = Func0920();
 	var0003 = Func090F(var0002);
 	var0004 = Func0908();
@@ -89660,6 +90003,7 @@ void Func0876 0x876 ()
 	var var000B;
 	var var000C;
 	var var000D;
+
 	var0000 = Func0909();
 	UI_push_answers();
 	var0001 = true;
@@ -89786,6 +90130,7 @@ void Func0878 0x878 (var var0000, var var0001)
 	var var0007;
 	var var0008;
 	var var0009;
+
 	var0002 = Func0920();
 	if (var0002 == 0x0000)
 	{
@@ -89862,6 +90207,7 @@ void Func0879 0x879 (var var0000, var var0001, var var0002)
 	var var000A;
 	var var000B;
 	var var000C;
+
 	message("\"Art thou in need of healing, curing, or resurrection?\"");
 	say();
 	UI_push_answers();
@@ -89980,6 +90326,7 @@ void Func087A 0x87A ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "torch", "oil flasks", "backpack", "bag", "shovel", "hoe", "powder keg", "pick", "bedroll"];
@@ -90075,6 +90422,7 @@ void Func087B 0x87B ()
 	var var0006;
 	var var0007;
 	var var0008;
+
 	message("With Elynor standing before the gathered members of The Fellowship, the ceremony begins. \"My brothers in The Fellowship, I greet you on this occasion and thank you for your attendance. The events which have transpired in this town threaten to drive us apart. I do not need to remind you that the first value of the Triad of Inner Strength states that we must Strive For Unity. Now is the time when all those who hate and fear us may be conspiring against us.\"");
 	say();
 	message("\"There are those who fear awareness for it illuminates their own limitations. There are those who despise change for the better because they have spent their whole lives teaching themselves to love the mediocrity with which they have surrounded themselves. These are the people who perceive our Fellowship as a threat.\"");
@@ -90175,6 +90523,7 @@ void Func087C 0x87C ()
 {
 	var var0000;
 	var var0001;
+
 	UI_show_npc_face(0xFEE5, 0x0000);
 	if (!gflags[0x0154])
 	{
@@ -90228,6 +90577,7 @@ void Func087D 0x87D ()
 	var var0000;
 	var var0001;
 	var var0002;
+
 	UI_set_item_flag(UI_get_npc_object(0xFE9C), 0x0010);
 	var0000 = UI_create_new_object(0x0356);
 	if (!UI_is_pc_female())
@@ -90269,6 +90619,7 @@ void Func087E 0x87E (var var0000, var var0001, var var0002, var var0003)
 	var var0007;
 	var var0008;
 	var var0009;
+
 	var0004 = UI_find_nearby(var0003, 0xFFFF, var0001, 0x0000);
 	for (var0007 in var0004 with var0005 to var0006)
 	{
@@ -90327,6 +90678,7 @@ void Func087F 0x87F (var var0000)
 	var var0013;
 	var var0014;
 	var var0015;
+
 	var0001 = UI_find_nearby(item, 0x0113, 0x000F, 0x0010);
 	for (var0004 in var0001 with var0002 to var0003)
 	{
@@ -90413,6 +90765,7 @@ void Func0880 0x880 (var var0000, var var0001)
 	var var0002;
 	var var0003;
 	var var0004;
+
 	var0002 = UI_get_item_shape(var0000);
 	var0003 = UI_get_item_frame(var0000);
 	var0004 = var0001;
@@ -90505,6 +90858,7 @@ void Func0882 0x882 (var var0000)
 	var var0001;
 	var var0002;
 	var var0003;
+
 	if (UI_get_barge(var0000))
 	{
 		var0001 = UI_find_nearby(var0000, 0x03C1, 0x000A, 0x0010);
@@ -90537,6 +90891,7 @@ extern void Func0885 0x885 ();
 void Func0883 0x883 ()
 {
 	var var0000;
+
 	UI_show_npc_face(0xFFF4, 0x0000);
 	var0000 = Func08F7(0xFFF5);
 	if (var0000)
@@ -90576,6 +90931,7 @@ void Func0884 0x884 ()
 	var var0003;
 	var var0004;
 	var var0005;
+
 	var0000 = Func0909();
 	UI_clear_answers();
 	if (!gflags[0x005E])
@@ -90805,6 +91161,7 @@ void Func0885 0x885 ()
 {
 	var var0000;
 	var var0001;
+
 	if (Func090A())
 	{
 		message("\"What didst thou find?\"");
@@ -91127,11 +91484,11 @@ var Func0887 0x887 (var var0000, var var0001, var var0002)
 			UI_remove_item(var000C);
 			UI_remove_item(var0002);
 			UI_halt_scheduled(item);
-			script item
+			var000E = script item
 			{
 				nohalt;
 				call Func0708;
-			}
+			};
 			return 0x0000;
 		}
 	}
@@ -91215,6 +91572,7 @@ void Func0888 0x888 (var var0000)
 	var var0012;
 	var var0013;
 	var var0014;
+
 	var0001 = false;
 	var0002 = false;
 	var0003 = false;
@@ -91300,6 +91658,7 @@ void Func0889 0x889 ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "jerky", "flounder", "ham", "bread", "cheese", "grapes", "milk", "mead", "ale", "wine"];
@@ -91386,6 +91745,7 @@ void Func088A 0x88A ()
 	var var0005;
 	var var0006;
 	var var0007;
+
 	var0000 = Func0909();
 	message("After learning that none of the townsfolk are willing to sacrifice themselves for a greater good, an odd light comes into Forsythe's eyes. His chin firms and his shoulders square.~~\"Well, then. It has got to be done! And since no other brave soul will do it, perhaps I shall have to show them all what real courage is.\" He strides forward like a lord and plants his feet. \"Please be kind enough to lead me to the well, ");
 	message(var0000);
@@ -91429,6 +91789,7 @@ void Func088B 0x88B ()
 	var var0007;
 	var var0008;
 	var var0009;
+
 	var0000 = UI_find_nearby(0xFE9C, 0x02EC, 0x000A, 0x0000);
 	var0001 = 0x000F;
 	var0002 = 0xFFFD;
@@ -91436,10 +91797,10 @@ void Func088B 0x88B ()
 	UI_earthquake(var0001);
 	var0004 = UI_get_object_position(var0000);
 	UI_sprite_effect(0x0001, (var0004[0x0001] + var0002), (var0004[0x0002] + var0003), 0x0000, 0x0000, 0x0000, 0xFFFF);
-	script var0000 after var0001 ticks
+	var0005 = script var0000 after var0001 ticks
 	{
 		frame 0;
-	}
+	};
 	UI_remove_from_party(0xFF6D);
 	UI_set_schedule_type(0xFF6D, 0x000F);
 	var0006 = [0xFF6D, 0xFF71, 0xFF72, 0xFF70, 0xFF74, 0xFF6E, 0xFF6F];
@@ -91473,6 +91834,7 @@ void Func088C 0x88C ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "mutton", "beef", "fowl", "ham", "trout", "flounder", "meat on a spit", "dried meat"];
@@ -91554,6 +91916,7 @@ void Func088D 0x88D ()
 {
 	var var0000;
 	var var0001;
+
 	var0000 = Func08F7(0xFFFF);
 	if (var0000)
 	{
@@ -91593,6 +91956,7 @@ void Func088E 0x88E ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "shoes", "kidney belt", "leather boots", "tunic", "dress", "pants", "swamp boots"];
@@ -91678,6 +92042,7 @@ void Func088F 0x88F ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "wine", "ale"];
@@ -91752,6 +92117,7 @@ extern void Func0891 0x891 ();
 void Func0890 0x890 ()
 {
 	var var0000;
+
 	UI_show_npc_face(0xFEE0, 0x0000);
 	if (!gflags[0x0314])
 	{
@@ -91961,6 +92327,7 @@ void Func0892 0x892 ()
 {
 	var var0000;
 	var var0001;
+
 	UI_show_npc_face(0xFEE0, 0x0000);
 	message("Adjhar appears to have resumed the stance of a more traditional golem guardian -- staunch and unmoving. However, it is impossible to miss the glimmer of intelligence in his eyes.");
 	say();
@@ -92070,6 +92437,7 @@ void Func0894 0x894 (var var0000)
 	var var0002;
 	var var0003;
 	var var0004;
+
 	if (gflags[0x031B])
 	{
 		UI_set_schedule_type(var0000, 0x000B);
@@ -92288,6 +92656,7 @@ void Func0895 0x895 ()
 	var var0001;
 	var var0002;
 	var var0003;
+
 	UI_show_npc_face(0xFEDF, 0x0000);
 	message("Bollux stares ahead, almost vacantly. Despite his features and lack of motion, it is apparent by his expression that some of Castambre's magic still resides within.");
 	say();
@@ -92395,6 +92764,7 @@ void Func0897 0x897 ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "crested helm", "spiked shield", "leather armour", "chain armour", "plate armour", "leather gloves"];
@@ -92481,6 +92851,7 @@ void Func0898 0x898 ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "sling", "dagger", "spear", "mace", "sword", "throwing axe", "2-handed axe", "2-handed sword"];
@@ -92576,6 +92947,7 @@ void Func0899 0x899 ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "torch", "oil flasks", "backpack", "bag", "shovel", "powder keg", "lockpick", "hoe", "bucket"];
@@ -92675,6 +93047,7 @@ void Func089A 0x89A (var var0000, var var0001)
 	var var0008;
 	var var0009;
 	var var000A;
+
 	var0002 = Func0920();
 	var0003 = UI_get_npc_name(var0002);
 	if (!(var0002 == 0x0000))
@@ -92759,6 +93132,7 @@ void Func089B 0x89B (var var0000, var var0001)
 	var var000A;
 	var var000B;
 	var var000C;
+
 	var0002 = Func0920();
 	var0003 = UI_get_npc_name(var0002);
 	if (var0002 == 0xFE9C)
@@ -92858,6 +93232,7 @@ void Func089C 0x89C ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "throwing axe", "two-handed axe", "boomerang"];
@@ -92947,6 +93322,7 @@ void Func089D 0x89D (var var0000, var var0001, var var0002)
 	var var0010;
 	var var0011;
 	var var0012;
+
 	message("\"To be able to heal, cure poison, and resurrect. To be interested in one of these services?\"");
 	say();
 	UI_push_answers();
@@ -93122,6 +93498,7 @@ void Func089E 0x89E (var var0000, var var0001, var var0002)
 	var var0015;
 	var var0016;
 	var var0017;
+
 	var0003 = UI_get_npc_object(0xFFFB);
 	var0004 = UI_get_party_list();
 	message("\"I am able to heal, cure poison, and resurrect. Art thou interested in one of these services?\"");
@@ -93299,6 +93676,7 @@ void Func089F 0x89F (var var0000, var var0001)
 	var var0008;
 	var var0009;
 	var var000A;
+
 	var0002 = Func0920();
 	var0003 = Func090F(var0002);
 	var0004 = Func0908();
@@ -93386,6 +93764,7 @@ void Func08A0 0x8A0 ()
 	var var000B;
 	var var000C;
 	var var000D;
+
 	var0000 = Func0909();
 	UI_push_answers();
 	var0001 = true;
@@ -93494,6 +93873,7 @@ void Func08A1 0x8A1 ()
 	var var000C;
 	var var000D;
 	var var000E;
+
 	var0000 = Func0909();
 	UI_push_answers();
 	var0001 = true;
@@ -93610,6 +93990,7 @@ void Func08A2 0x8A2 (var var0000, var var0001)
 	var var000A;
 	var var000B;
 	var var000C;
+
 	var0002 = Func0920();
 	var0003 = UI_get_npc_name(var0002);
 	if (!(var0002 == 0x0000))
@@ -93703,6 +94084,7 @@ void Func08A3 0x8A3 ()
 	var var000B;
 	var var000C;
 	var var000D;
+
 	var0000 = Func0909();
 	UI_push_answers();
 	var0001 = true;
@@ -93796,6 +94178,7 @@ void Func08A4 0x8A4 ()
 	var var000B;
 	var var000C;
 	var var000D;
+
 	var0000 = Func0909();
 	UI_push_answers();
 	var0001 = true;
@@ -93870,6 +94253,7 @@ void Func08A5 0x8A5 ()
 	var var0001;
 	var var0002;
 	var var0003;
+
 	var0000 = UI_get_npc_object(0xFF04);
 	var0001 = UI_get_schedule_type(var0000);
 	var0002 = "";
@@ -93920,6 +94304,7 @@ void Func08A6 0x8A6 (var var0000, var var0001)
 	var var000B;
 	var var000C;
 	var var000D;
+
 	var0002 = Func0920();
 	var0003 = Func0908();
 	if (!(var0002 == 0x0000))
@@ -94030,6 +94415,7 @@ void Func08A7 0x8A7 ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "eggs", "apple", "banana", "carrot", "pumpkin", "grapes"];
@@ -94125,6 +94511,7 @@ void Func08A8 0x8A8 ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "poison", "curative", "illumination", "sleep", "protection", "invisibility", "healing", "awakening"];
@@ -94212,6 +94599,7 @@ void Func08A9 0x8A9 ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "club", "main gauche", "dagger", "mace", "morning star", "sword", "halberd"];
@@ -94307,6 +94695,7 @@ void Func08AA 0x8AA ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "crested helm", "scale armour", "gorget"];
@@ -94383,6 +94772,7 @@ void Func08AB 0x8AB ()
 	var var0003;
 	var var0004;
 	var var0005;
+
 	var0000 = Func08F7(0xFFF2);
 	var0001 = Func08F7(0xFF14);
 	var0002 = Func08F7(0xFFEE);
@@ -94478,6 +94868,7 @@ void Func08AC 0x8AC (var var0000, var var0001, var var0002)
 	var var000A;
 	var var000B;
 	var var000C;
+
 	message("\"I am qualified to heal, cure poison, and resurrect. Art thou interested in one of these services?\"");
 	say();
 	UI_push_answers();
@@ -94595,6 +94986,7 @@ void Func08AD 0x8AD ()
 	var var0001;
 	var var0002;
 	var var0003;
+
 	UI_show_npc_face(0xFF73, 0x0001);
 	var0000 = Func0909();
 	var0001 = Func0908();
@@ -94683,6 +95075,7 @@ extern var Func090A 0x90A ();
 void Func08AE 0x8AE (var var0000)
 {
 	var var0001;
+
 	var0001 = Func090A();
 	if (!var0001)
 	{
@@ -94715,6 +95108,7 @@ void Func08AF 0x8AF ()
 	var var0001;
 	var var0002;
 	var var0003;
+
 	UI_show_npc_face(0xFF73, 0x0001);
 	var0000 = UI_get_party_list();
 	if (!(UI_get_npc_object(0xFF6D) in var0000))
@@ -94802,6 +95196,7 @@ void Func08B1 0x8B1 ()
 	var var0001;
 	var var0002;
 	var var0003;
+
 	UI_show_npc_face(0xFF73, 0x0001);
 	var0000 = Func0908();
 	message("\"Once again, Avatar, thou hast proven that thou art ever the defender of Britannia and the innocent. I cannot adequately express my gratitude; however, please take this small token of my thanks. I hope it will help thee in thy quest.\"");
@@ -94837,6 +95232,7 @@ extern var Func0908 0x908 ();
 void Func08B2 0x8B2 ()
 {
 	var var0000;
+
 	UI_show_npc_face(0xFF73, 0x0001);
 	var0000 = Func0908();
 	message("Horance looks at you curiously, \"Thy task is done here in Skara Brae. Thou hast my respect and lifelong gratitude.\"");
@@ -94967,6 +95363,7 @@ void Func08B4 0x8B4 (var var0000, var var0001, var var0002)
 	var var0009;
 	var var000A;
 	var var000B;
+
 	message("\"I can still heal, cure poison, and sometimes resurrect. Art thou in need of one of these?\"");
 	say();
 	UI_push_answers();
@@ -95066,6 +95463,7 @@ void Func08B5 0x8B5 ()
 	var var0003;
 	var var0004;
 	var var0005;
+
 	message("\"If thou wishest to seek out this isle, thou mayest use my ship. It now sits upon the southern shore of Vesper and is called the Golden Ankh. Please, feel free to use it for as long as thou hast need of it.\"");
 	say();
 	var0000 = UI_create_new_object(0x031D);
@@ -95132,6 +95530,7 @@ void Func08B6 0x8B6 (var var0000, var var0001)
 	var var0009;
 	var var000A;
 	var var000B;
+
 	var0002 = Func0920();
 	if (!(var0002 == 0x0000))
 	{
@@ -95227,6 +95626,7 @@ void Func08B7 0x8B7 ()
 	var var000C;
 	var var000D;
 	var var000E;
+
 	var0000 = Func0909();
 	UI_push_answers();
 	var0001 = true;
@@ -95324,6 +95724,7 @@ void Func08B8 0x8B8 ()
 	var var0004;
 	var var0005;
 	var var0006;
+
 	UI_push_answers();
 	var0000 = 0x0001;
 	var0001 = 0x0001;
@@ -95397,6 +95798,7 @@ void Func08B9 0x8B9 ()
 	var var000B;
 	var var000C;
 	var var000D;
+
 	var0000 = Func0909();
 	UI_push_answers();
 	var0001 = true;
@@ -95490,6 +95892,7 @@ void Func08BA 0x8BA ()
 	var var0000;
 	var var0001;
 	var var0002;
+
 	var0000 = UI_is_pc_female();
 	message("\"The fortune vill cost thee 20 gold. All right?\"");
 	say();
@@ -95590,6 +95993,7 @@ void Func08BB 0x8BB (var var0000)
 	var var0008;
 	var var0009;
 	var var000A;
+
 	UI_push_answers();
 	var0001 = true;
 	var0002 = [0x0014, 0x0028, 0x003C, 0x0050, 0x0064, 0x0082, 0x0096, 0x00B4];
@@ -95667,31 +96071,28 @@ void Func08BB 0x8BB (var var0000)
 			message("\"Done!\"");
 			say();
 		}
+		else if (var000A == 0x0002)
+		{
+			message("\"Thou dost not have a spellbook.\"");
+			say();
+			var0001 = false;
+			break;
+		}
+		else if (var000A == 0x0003)
+		{
+			message("\"Thou dost not have enough gold for that!\"");
+			say();
+		}
+		else if (var000A == 0x0004)
+		{
+			message("\"Thou dost already have that spell!\"");
+			say();
+		}
 		else
 		{
-			if (var000A == 0x0002)
-			{
-				message("\"Thou dost not have a spellbook.\"");
-				say();
-				var0001 = false;
-				break;
-			}
-			else if (var000A == 0x0003)
-			{
-				message("\"Thou dost not have enough gold for that!\"");
-				say();
-			}
-			else if (var000A == 0x0004)
-			{
-				message("\"Thou dost already have that spell!\"");
-				say();
-			}
-			else
-			{
-				message("\"Wouldst thou like another spell?\"");
-				say();
-				var0001 = Func090A();
-			}
+			message("\"Wouldst thou like another spell?\"");
+			say();
+			var0001 = Func090A();
 		}
 	}
 	UI_pop_answers();
@@ -95721,6 +96122,7 @@ void Func08BC 0x8BC (var var0000)
 	var var000D;
 	var var000E;
 	var var000F;
+
 	UI_push_answers();
 	var0001 = true;
 	if (var0000 == "Reagents")
@@ -95823,6 +96225,7 @@ void Func08BD 0x8BD (var var0000, var var0001)
 	var var0007;
 	var var0008;
 	var var0009;
+
 	var0002 = Func0920();
 	var0003 = UI_get_npc_name(var0002);
 	do
@@ -95912,6 +96315,7 @@ void Func08BE 0x8BE (var var0000, var var0001)
 	var var0009;
 	var var000A;
 	var var000B;
+
 	var0002 = Func0920();
 	do
 	{
@@ -95994,6 +96398,7 @@ void Func08BF 0x8BF (var var0000)
 	var var0001;
 	var var0002;
 	var var0003;
+
 	var0001 = Func0910(var0000, 0x0000);
 	var0002 = Func0910(var0000, 0x0003);
 	if (var0001 > var0002)
@@ -96013,6 +96418,7 @@ void Func08C0 0x8C0 ()
 	var var0004;
 	var var0005;
 	var var0006;
+
 	var0000 = false;
 	var0001 = false;
 	var0002 = false;
@@ -96295,6 +96701,7 @@ extern var Func0908 0x908 ();
 void Func08C1 0x8C1 ()
 {
 	var var0000;
+
 	var0000 = Func0908();
 	message("\"Sweet Rowena, I am so happy to see thee out of that horrid tower.\" Mordra's eyes begin to fill with tears of joy.*");
 	say();
@@ -96319,6 +96726,7 @@ void Func08C2 0x8C2 ()
 {
 	var var0000;
 	var var0001;
+
 	var0000 = Func0909();
 	var0001 = Func0908();
 	message("\"Well, hello, Mayor Forsythe. Thou has finally decided to assist in the salvation of our town.\" She gives him a pointed look.*");
@@ -96376,6 +96784,7 @@ void Func08C3 0x8C3 ()
 	var var0007;
 	var var0008;
 	var var0009;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = [0x0019, 0x002D, 0x0041, 0x0055, 0x0073, 0x0087, 0x009B, 0x00B9];
@@ -96453,31 +96862,28 @@ void Func08C3 0x8C3 ()
 			message("\"Done!\"");
 			say();
 		}
+		else if (var0009 == 0x0002)
+		{
+			message("\"Thou dost not have a spellbook.\"");
+			say();
+			var0000 = false;
+			break;
+		}
+		else if (var0009 == 0x0003)
+		{
+			message("\"Thou dost not have enough gold for that!\"");
+			say();
+		}
+		else if (var0009 == 0x0004)
+		{
+			message("\"Thou dost already have that spell!\"");
+			say();
+		}
 		else
 		{
-			if (var0009 == 0x0002)
-			{
-				message("\"Thou dost not have a spellbook.\"");
-				say();
-				var0000 = false;
-				break;
-			}
-			else if (var0009 == 0x0003)
-			{
-				message("\"Thou dost not have enough gold for that!\"");
-				say();
-			}
-			else if (var0009 == 0x0004)
-			{
-				message("\"Thou dost already have that spell!\"");
-				say();
-			}
-			else
-			{
-				message("\"Wouldst thou like another spell?\"");
-				say();
-				var0000 = Func090A();
-			}
+			message("\"Wouldst thou like another spell?\"");
+			say();
+			var0000 = Func090A();
 		}
 	}
 	UI_pop_answers();
@@ -96505,6 +96911,7 @@ void Func08C4 0x8C4 ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "Garlic", "Blood Moss", "Spider Silk", "Mandrake Root", "Nightshade"];
@@ -96588,6 +96995,7 @@ void Func08C5 0x8C5 ()
 	var var0007;
 	var var0008;
 	var var0009;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = [0x0023, 0x0037, 0x0055, 0x005F, 0x007D, 0x0091, 0x00A5, 0x00C3];
@@ -96665,31 +97073,28 @@ void Func08C5 0x8C5 ()
 			message("\"Done!\"");
 			say();
 		}
+		else if (var0009 == 0x0002)
+		{
+			message("\"Thou dost not have a spellbook.\"");
+			say();
+			var0000 = false;
+			break;
+		}
+		else if (var0009 == 0x0003)
+		{
+			message("\"Thou dost not have enough gold for that!\"");
+			say();
+		}
+		else if (var0009 == 0x0004)
+		{
+			message("\"Thou dost already have that spell!\"");
+			say();
+		}
 		else
 		{
-			if (var0009 == 0x0002)
-			{
-				message("\"Thou dost not have a spellbook.\"");
-				say();
-				var0000 = false;
-				break;
-			}
-			else if (var0009 == 0x0003)
-			{
-				message("\"Thou dost not have enough gold for that!\"");
-				say();
-			}
-			else if (var0009 == 0x0004)
-			{
-				message("\"Thou dost already have that spell!\"");
-				say();
-			}
-			else
-			{
-				message("\"Would you like another spell?\"");
-				say();
-				var0000 = Func090A();
-			}
+			message("\"Would you like another spell?\"");
+			say();
+			var0000 = Func090A();
 		}
 	}
 	UI_pop_answers();
@@ -96717,6 +97122,7 @@ void Func08C6 0x8C6 ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "Ginseng", "Blood Moss", "Sulfurous Ash", "Mandrake Root", "Black Pearl"];
@@ -96790,6 +97196,7 @@ void Func08C7 0x8C7 ()
 {
 	var var0000;
 	var var0001;
+
 	UI_show_npc_face(0xFF17, 0x0000);
 	var0000 = Func08F7(0xFFFF);
 	var0001 = Func08F7(0xFFFE);
@@ -96913,6 +97320,7 @@ void Func08C8 0x8C8 (var var0000, var var0001)
 	var var000A;
 	var var000B;
 	var var000C;
+
 	var0002 = Func0920();
 	var0003 = UI_get_npc_name(var0002);
 	do
@@ -97073,6 +97481,7 @@ void Func08CA 0x8CA (var var0000, var var0001)
 	var var000B;
 	var var000C;
 	var var000D;
+
 	var0002 = Func0920();
 	do
 	{
@@ -97175,6 +97584,7 @@ void Func08CB 0x8CB ()
 	var var000C;
 	var var000D;
 	var var000E;
+
 	var0000 = Func0909();
 	UI_push_answers();
 	var0001 = true;
@@ -97277,6 +97687,7 @@ void Func08CC 0x8CC ()
 	var var000B;
 	var var000C;
 	var var000D;
+
 	var0000 = Func0909();
 	UI_push_answers();
 	var0001 = true;
@@ -97365,6 +97776,7 @@ void Func08CD 0x8CD ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "jerky", "mead", "grapes", "cheese", "bread", "ale", "wine"];
@@ -97458,6 +97870,7 @@ void Func08CE 0x8CE ()
 	var var0003;
 	var var0004;
 	var var0005;
+
 	var0000 = Func08F7(0xFF48);
 	var0001 = Func08F7(0xFF44);
 	var0002 = Func08F7(0xFF46);
@@ -97527,6 +97940,7 @@ void Func08CF 0x8CF ()
 	var var0002;
 	var var0003;
 	var var0004;
+
 	var0000 = Func08F7(0xFF64);
 	var0001 = Func08F7(0xFF63);
 	var0002 = Func08F7(0xFFFF);
@@ -97609,6 +98023,7 @@ void Func08D0 0x8D0 (var var0000, var var0001)
 	var var000B;
 	var var000C;
 	var var000D;
+
 	var0002 = Func0920();
 	var0003 = Func090F(var0002);
 	var0004 = "feels";
@@ -97704,6 +98119,7 @@ void Func08D1 0x8D1 ()
 {
 	var var0000;
 	var var0001;
+
 	UI_clear_answers();
 	var0000 = UI_is_pc_female();
 	UI_show_npc_face(0xFFE5, 0x0000);
@@ -97782,6 +98198,7 @@ void Func08D2 0x8D2 (var var0000, var var0001, var var0002)
 	var var000B;
 	var var000C;
 	var var000D;
+
 	var0003 = Func0909();
 	message("\"Dost thou want mine aid?\"");
 	say();
@@ -97909,6 +98326,7 @@ void Func08D3 0x8D3 ()
 	var var000B;
 	var var000C;
 	var var000D;
+
 	var0000 = Func0909();
 	UI_push_answers();
 	var0001 = true;
@@ -98001,6 +98419,7 @@ void Func08D4 0x8D4 ()
 	var var000B;
 	var var000C;
 	var var000D;
+
 	var0000 = Func0909();
 	UI_push_answers();
 	var0001 = true;
@@ -98071,6 +98490,7 @@ void Func08D4 0x8D4 ()
 void Func08D5 0x8D5 ()
 {
 	var var0000;
+
 	if (gflags[0x003A])
 	{
 		var0000 = "It is most fortunate that thou fell so near our shelter. Thou must have a protector watching over thee.@";
@@ -98158,6 +98578,7 @@ void Func08D6 0x8D6 ()
 {
 	var var0000;
 	var var0001;
+
 	var0000 = Func0909();
 	var0001 = Func08F7(0xFF72);
 	if (!var0001)
@@ -98221,6 +98642,7 @@ void Func08D7 0x8D7 ()
 	var var0007;
 	var var0008;
 	var var0009;
+
 	var0000 = Func0909();
 	var0001 = UI_get_party_list();
 	var0002 = UI_get_npc_object(0xFF70);
@@ -98319,6 +98741,7 @@ void Func08D8 0x8D8 ()
 	var var0002;
 	var var0003;
 	var var0004;
+
 	var0000 = UI_is_pc_female();
 	var0001 = Func0909();
 	if (!gflags[0x01B8])
@@ -98413,6 +98836,7 @@ extern var Func0909 0x909 ();
 void Func08DA 0x8DA ()
 {
 	var var0000;
+
 	var0000 = Func0909();
 	message("The lovely ghost holds up her hand as you begin to speak, \"Please, ");
 	message(var0000);
@@ -98439,6 +98863,7 @@ void Func08DB 0x8DB ()
 	var var0007;
 	var var0008;
 	var var0009;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = [0x0019, 0x002D, 0x0041, 0x0055, 0x0073, 0x0087, 0x009B, 0x00B9];
@@ -98518,31 +98943,28 @@ void Func08DB 0x8DB ()
 				message("\"Done!\"");
 				say();
 			}
+			else if (var0009 == 0x0002)
+			{
+				message("\"Thou dost not have a spellbook.\"");
+				say();
+				var0000 = false;
+				break;
+			}
+			else if (var0009 == 0x0003)
+			{
+				message("\"Thou dost not have enough gold for that!\"");
+				say();
+			}
+			else if (var0009 == 0x0004)
+			{
+				message("\"Thou dost already have that spell!\"");
+				say();
+			}
 			else
 			{
-				if (var0009 == 0x0002)
-				{
-					message("\"Thou dost not have a spellbook.\"");
-					say();
-					var0000 = false;
-					break;
-				}
-				else if (var0009 == 0x0003)
-				{
-					message("\"Thou dost not have enough gold for that!\"");
-					say();
-				}
-				else if (var0009 == 0x0004)
-				{
-					message("\"Thou dost already have that spell!\"");
-					say();
-				}
-				else
-				{
-					message("\"Wouldst thou like another spell?\"");
-					say();
-					var0000 = Func090A();
-				}
+				message("\"Wouldst thou like another spell?\"");
+				say();
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -98571,6 +98993,7 @@ void Func08DC 0x8DC ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "Ginseng", "Blood Moss", "Sulfurous Ash", "Mandrake Root", "Black Pearl"];
@@ -98650,6 +99073,7 @@ void Func08DD 0x8DD ()
 	var var0008;
 	var var0009;
 	var var000A;
+
 	UI_halt_scheduled(item);
 	var0000 = UI_find_nearby(item, 0xFE99, 0x0028, 0x0008);
 	var0001 = 0x0006;
@@ -98664,50 +99088,95 @@ void Func08DD 0x8DD ()
 				var0007 = UI_die_roll(0x0000, 0x0008);
 				if (var0007 == 0x0000)
 				{
-					var0008 = [0x6D, 0x6C, 0x61];
+					var0008 = new script
+					{
+						actor frame kneeling;
+						actor frame bowing;
+						actor frame standing;
+					};
 					var0006 = [var0006, var0008];
 				}
 				if (var0007 == 0x0001)
 				{
-					var0008 = [0x6D, 0x61, 0x61];
+					var0008 = new script
+					{
+						actor frame kneeling;
+						actor frame standing;
+						actor frame standing;
+					};
 					var0006 = [var0006, var0008];
 				}
 				if (var0007 == 0x0002)
 				{
-					var0008 = [0x6C, 0x6E, 0x61];
+					var0008 = new script
+					{
+						actor frame bowing;
+						actor frame sleeping;
+						actor frame standing;
+					};
 					var0006 = [var0006, var0008];
 				}
 				if (var0007 == 0x0003)
 				{
-					var0008 = [0x61, 0x61, 0x61];
+					var0008 = new script
+					{
+						actor frame standing;
+						actor frame standing;
+						actor frame standing;
+					};
 					var0006 = [var0006, var0008];
 				}
 				if (var0007 == 0x0004)
 				{
-					var0008 = [0x6D, 0x64, 0x61];
+					var0008 = new script
+					{
+						actor frame kneeling;
+						actor frame ready;
+						actor frame standing;
+					};
 					var0006 = [var0006, var0008];
 				}
 				if (var0007 == 0x0005)
 				{
-					var0008 = [0x64, 0x6D, 0x61];
+					var0008 = new script
+					{
+						actor frame ready;
+						actor frame kneeling;
+						actor frame standing;
+					};
 					var0006 = [var0006, var0008];
 				}
 				if (var0007 == 0x0006)
 				{
-					var0009 = (0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
-					var0008 = [0x59, var0009, 0x6C, 0x61];
+					var0009 = ((byte)0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+					var0008 = new script
+					{
+						face var0009;
+						actor frame bowing;
+						actor frame standing;
+					};
 					var0006 = [var0006, var0008];
 				}
 				if (var0007 == 0x0007)
 				{
-					var0009 = (0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
-					var0008 = [0x59, var0009, 0x6D, 0x61];
+					var0009 = ((byte)0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+					var0008 = new script
+					{
+						face var0009;
+						actor frame kneeling;
+						actor frame standing;
+					};
 					var0006 = [var0006, var0008];
 				}
 				if (var0007 == 0x0008)
 				{
-					var0009 = (0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
-					var0008 = [0x59, var0009, 0x64, 0x61];
+					var0009 = ((byte)0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+					var0008 = new script
+					{
+						face var0009;
+						actor frame ready;
+						actor frame standing;
+					};
 					var0006 = [var0006, var0008];
 				}
 				var0005 = (var0005 + 0x0001);
@@ -98743,6 +99212,7 @@ void Func08DE 0x8DE ()
 	var var000B;
 	var var000C;
 	var var000D;
+
 	var0000 = Func0909();
 	UI_push_answers();
 	var0001 = true;
@@ -98835,6 +99305,7 @@ void Func08DF 0x8DF ()
 {
 	var var0000;
 	var var0001;
+
 	UI_show_npc_face(0xFF9B, 0x0000);
 	message("The ape-like creature slowly and cautiously walks up to you. He, or she, sniffs for a moment, and then points to the honey you are carrying.");
 	say();
@@ -98878,6 +99349,7 @@ void Func08E0 0x8E0 ()
 {
 	var var0000;
 	var var0001;
+
 	UI_show_npc_face(0xFF9E, 0x0000);
 	message("The ape-like creature slowly and cautiously walks up to you. He, or she, sniffs for a moment, and then points to the honey you are carrying.");
 	say();
@@ -98934,6 +99406,7 @@ void Func08E1 0x8E1 ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "gold horncaps", "gold chain", "gold earring", "gold clawring", "black potion", "white potion"];
@@ -99019,6 +99492,7 @@ void Func08E2 0x8E2 ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "blood moss", "garlic", "ginseng", "sulfurous ash"];
@@ -99104,6 +99578,7 @@ void Func08E3 0x8E3 ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "gem", "gold ring", "wedding ring", "ankh"];
@@ -99196,6 +99671,7 @@ void Func08E5 0x8E5 (var var0000, var var0001)
 	var var000C;
 	var var000D;
 	var var000E;
+
 	var0002 = Func0921(UI_get_npc_object(0xFFF9));
 	if ((var0002 == 0xFFF8) || ((var0002 == 0xFFFB) || (var0002 == 0xFFF7)))
 	{
@@ -99309,6 +99785,7 @@ void Func08E6 0x8E6 (var var0000)
 	var var0002;
 	var var0003;
 	var var0004;
+
 	var0001 = UI_get_cont_items(var0000, 0xFE99, 0xFE99, 0xFE99);
 	if (var0001)
 	{
@@ -99422,6 +99899,7 @@ void Func08EB 0x8EB (var var0000, var var0001, var var0002)
 	var var0012;
 	var var0013;
 	var var0014;
+
 	var0003 = 0x0004;
 	var0004 = 0x0000;
 	var0005 = UI_get_object_position(item);
@@ -99552,6 +100030,7 @@ void Func08EC 0x8EC ()
 	var var0000;
 	var var0001;
 	var var0002;
+
 	var0000 = Func08F7(0xFFFE);
 	var0001 = Func08F7(0xFFFF);
 	var0002 = Func08F7(0xFFFD);
@@ -99577,6 +100056,7 @@ void Func08ED 0x8ED ()
 {
 	var var0000;
 	var var0001;
+
 	UI_show_npc_face(0xFF9C, 0x0000);
 	message("The ape-like creature slowly and cautiously walks up to you. He, or she, sniffs for a moment, and then points to the honey you are carrying.");
 	say();
@@ -99622,6 +100102,7 @@ void Func08EE 0x8EE ()
 {
 	var var0000;
 	var var0001;
+
 	UI_show_npc_face(0xFFFA, 0x0000);
 	message("The ape-like creature slowly and cautiously walks up to you. He, or she, sniffs for a moment, and then points to the honey you are carrying.");
 	say();
@@ -99671,6 +100152,7 @@ void Func08EF 0x8EF ()
 	var var0003;
 	var var0004;
 	var var0005;
+
 	var0000 = UI_find_nearest(0xFF72, 0x02EB, 0xFFFF);
 	var0001 = Func0909();
 	if (!gflags[0x01C1])
@@ -99790,6 +100272,7 @@ void Func08F0 0x8F0 ()
 {
 	var var0000;
 	var var0001;
+
 	var0000 = Func0909();
 	var0001 = Func08F7(0xFF70);
 	if (var0001)
@@ -99864,6 +100347,7 @@ void Func08F2 0x8F2 (var var0000, var var0001)
 	var var0007;
 	var var0008;
 	var var0009;
+
 	UI_push_answers();
 	var0002 = false;
 	var0003 = true;
@@ -100003,6 +100487,7 @@ void Func08F3 0x8F3 (var var0000)
 	var var0006;
 	var var0007;
 	var var0008;
+
 	UI_push_answers();
 	var0001 = false;
 	var0002 = false;
@@ -100109,6 +100594,7 @@ void Func08F3 0x8F3 (var var0000)
 void Func08F4 0x8F4 (var var0000, var var0001)
 {
 	var var0002;
+
 	var0002 = "thee";
 	if (var0001 > 0x0002)
 	{
@@ -100489,6 +100975,7 @@ extern void Func0904 0x904 (var var0000, var var0001);
 void Func08FE 0x8FE (var var0000)
 {
 	var var0001;
+
 	var0001 = Func0900();
 	Func0904(var0001, var0000);
 	return;
@@ -100501,6 +100988,7 @@ extern void Func0903 0x903 (var var0000, var var0001);
 void Func08FF 0x8FF (var var0000)
 {
 	var var0001;
+
 	var0001 = Func0900();
 	Func0903(var0001, var0000);
 	return;
@@ -100575,6 +101063,7 @@ void Func0903 0x903 (var var0000, var var0001)
 	var var0003;
 	var var0004;
 	var var0005;
+
 	if (UI_npc_nearby(var0000))
 	{
 		if (var0000 == 0xFE9C)
@@ -100614,6 +101103,7 @@ void Func0904 0x904 (var var0000, var var0001)
 	var var0003;
 	var var0004;
 	var var0005;
+
 	if (UI_npc_nearby(var0000))
 	{
 		if (UI_get_item_flag(item, 0x0019))
@@ -100636,14 +101126,15 @@ void Func0904 0x904 (var var0000, var var0001)
 void Func0905 0x905 (var var0000)
 {
 	var var0001;
+
 	UI_halt_scheduled(var0000);
 	UI_set_light(item, true);
 	UI_set_time_palette();
-	script var0000 after 50 ticks
+	var0001 = script var0000 after 50 ticks
 	{
 		nohalt;
 		call Func0600;
-	}
+	};
 	return;
 }
 
@@ -100786,6 +101277,7 @@ void Func0911 0x911 (var var0000)
 	var var0003;
 	var var0004;
 	var var0005;
+
 	var0001 = UI_get_party_list();
 	for (var0004 in var0001 with var0002 to var0003)
 	{
@@ -100826,6 +101318,7 @@ extern void Func0912 0x912 (var var0000, var var0001, var var0002);
 void Func0914 0x914 (var var0000, var var0001)
 {
 	var var0002;
+
 	var0002 = 0x0000;
 	while (var0002 < var0001)
 	{
@@ -100848,6 +101341,7 @@ void Func0915 0x915 (var var0000, var var0001)
 	var var0004;
 	var var0005;
 	var var0006;
+
 	var0002 = 0x0000;
 	while (var0002 < var0001)
 	{
@@ -100872,6 +101366,7 @@ void Func0916 0x916 (var var0000, var var0001)
 	var var0002;
 	var var0003;
 	var0002 = 0x0000;
+
 	while (var0002 < var0001)
 	{
 		var0003 = Func0910(var0000, 0x0002);
@@ -100892,6 +101387,7 @@ void Func0917 0x917 (var var0000, var var0001)
 	var var0003;
 	var var0004;
 	var var0005;
+
 	var0002 = 0x0000;
 	while (var0002 < var0001)
 	{
@@ -100923,6 +101419,7 @@ void Func0918 0x918 (var var0000, var var0001)
 	var var0003;
 	var var0004;
 	var var0005;
+
 	var0002 = 0x0000;
 	while (var0002 < var0001)
 	{
@@ -100948,6 +101445,7 @@ void Func0919 0x919 ()
 {
 	var var0000;
 	var var0001;
+
 	var0000 = UI_wearing_fellowship();
 	var0001 = UI_die_roll(0x0001, 0x0004);
 	if (var0001 == 0x0001)
@@ -100981,6 +101479,7 @@ void Func091A 0x91A ()
 {
 	var var0000;
 	var var0001;
+
 	message("\"The Fellowship advances the philosophy of 'sanguine cognition', a way to apply a confident order of thought to one's life, through what is called the Triad of Inner Strength. The Triad is simply three basic principles that, when applied in unison, enable one to be more creative, satisfied, and successful in life. They are: Strive For Unity, Trust Thy Brother, and Worthiness Precedes Reward. Strive For Unity basically means that people should cooperate and work together. Trust Thy Brother implies that we are all the same and that we should not hate or fear each other. Worthiness Precedes Reward suggests that we must each strive to be worthy of that which we want out of life.\"");
 	say();
 	var0000 = UI_wearing_fellowship();
@@ -101044,6 +101543,7 @@ void Func091D 0x91D (var var0000, var var0001)
 	var var0004;
 	var var0005;
 	var var0006;
+
 	var0002 = Func0910(var0000, 0x0000);
 	var0003 = Func0910(var0000, 0x0003);
 	var0004 = UI_get_npc_name(var0000);
@@ -101077,6 +101577,7 @@ void Func091E 0x91E (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
+
 	var0002 = UI_get_npc_object(var0000);
 	if (UI_get_item_flag(var0002, 0x0008))
 	{
@@ -101097,6 +101598,7 @@ void Func091F 0x91F (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
+
 	var0002 = UI_resurrect(var0000);
 	if (var0002)
 	{
@@ -101324,6 +101826,7 @@ void Func0925 0x925 (var var0000)
 {
 	var var0001;
 	var var0002;
+
 	var0001 = UI_get_item_quantity(var0000, 0xFE9C);
 	if (var0001 <= 0x0001)
 	{
@@ -101352,6 +101855,7 @@ void Func0926 0x926 (var var0000)
 	var var000B;
 	var var000C;
 	var var000D;
+
 	var0001 = false;
 	var0002 = UI_get_item_shape(var0000);
 	var0003 = UI_get_item_frame(var0000);
@@ -101394,6 +101898,7 @@ void Func0927 0x927 (var var0000)
 	var var0005;
 	var var0006;
 	var var0007;
+
 	Func08FA(var0000);
 	var0001 = UI_get_item_frame(var0000);
 	if (var0001 == 0x0000)
@@ -101443,6 +101948,7 @@ void Func0928 0x928 (var var0000)
 	var var0009;
 	var var000A;
 	var var000B;
+
 	Func08FA(var0000);
 	var0001 = (UI_get_item_frame(var0000) % 0x0002);
 	if (var0001 == 0x0000)
@@ -101494,6 +102000,7 @@ void Func0929 0x929 ()
 {
 	var var0000;
 	var var0001;
+
 	var0000 = Func0908();
 	var0001 = UI_die_roll(0x0001, 0x0003);
 	if (var0001 == 0x0001)
@@ -101512,6 +102019,7 @@ void Func092A 0x92A (var var0000, var var0001)
 	var var0002;
 	var var0003;
 	var var0004;
+
 	if (UI_is_npc(var0000))
 	{
 		var0002 = UI_get_npc_prop(var0000, 0x0000);
@@ -101567,6 +102075,7 @@ void Func092E 0x92E (var var0000)
 	var var0002;
 	var var0003;
 	var var0004;
+
 	var0001 = UI_get_npc_object(var0000);
 	if (!Func0937(var0001))
 	{
@@ -101706,6 +102215,7 @@ void Func092F 0x92F (var var0000)
 	var var0002;
 	var var0003;
 	var var0004;
+
 	var0001 = UI_get_npc_object(var0000);
 	if (!Func0937(var0001))
 	{
@@ -101837,13 +102347,14 @@ extern var Func0937 0x937 (var var0000);
 void Func0933 0x933 (var var0000, var var0001, var var0002)
 {
 	var var0003;
+
 	if (Func0937(var0000))
 	{
-		script UI_get_npc_object(var0000) after var0002 ticks
+		var0003 = script UI_get_npc_object(var0000) after var0002 ticks
 		{
 			nohalt;
 			say var0001;
-		}
+		};
 	}
 	return;
 }
@@ -101963,6 +102474,7 @@ void Func093A 0x93A (var var0000, var var0001)
 	var var000A;
 	var var000B;
 	var var000C;
+
 	var0002 = UI_get_party_list2();
 	for (var0005 in var0002 with var0003 to var0004)
 	{
@@ -102015,6 +102527,7 @@ void Func093B 0x93B (var var0000, var var0001, var var0002, var var0003)
 	var var0004;
 	var var0005;
 	var var0006;
+
 	var0004 = UI_get_npc_prop(var0000, var0001);
 	var0005 = (var0004 + (0x0002 * var0003));
 	if (var0005 > UI_get_npc_prop(var0000, var0002))
@@ -102096,6 +102609,7 @@ extern var Func0939 0x939 (var var0000);
 void Func093F 0x93F (var var0000, var var0001)
 {
 	var var0002;
+
 	var0002 = UI_get_party_list();
 	if ((Func0939(var0000) in var0002) && gflags[0x0039])
 	{
@@ -102149,6 +102663,7 @@ void Func0942 0x942 (var var0000, var var0001)
 	var var0003;
 	var var0004;
 	var var0005;
+
 	var0002 = UI_get_item_frame(var0000);
 	if (!UI_get_item_quality(var0000))
 	{
@@ -102184,6 +102699,7 @@ void Func0942 0x942 (var var0000, var var0001)
 void Func0943 0x943 (var var0000)
 {
 	var var0001;
+
 	var0001 = UI_get_object_position(var0000);
 	UI_sprite_effect(0x0018, var0001[0x0001], var0001[0x0002], 0xFFFE, 0xFFFE, 0x0000, 0xFFFF);
 	return;
@@ -102240,6 +102756,7 @@ void Func0946 0x946 ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "bread", "cake", "rolls", "pastry"];
@@ -102327,6 +102844,7 @@ void Func0947 0x947 ()
 	var var000C;
 	var var000D;
 	var var000E;
+
 	UI_push_answers();
 	message("\"Excellent! Dost thou have some loaves for me?\"");
 	say();
@@ -102416,6 +102934,7 @@ void Func0948 0x948 ()
 	var var0006;
 	var var0007;
 	var var0008;
+
 	UI_push_answers();
 	var0000 = 0x0004;
 	var0001 = 0x0001;
@@ -102492,6 +103011,7 @@ void Func0949 0x949 ()
 	var var000C;
 	var var000D;
 	var var000E;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "blue potion", "purple potion", "red potion", "orange potion"];
@@ -102600,6 +103120,7 @@ void Func094A 0x94A ()
 	var var000C;
 	var var000D;
 	var var000E;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "blood moss", "spider silk", "sulfurous ash", "mandrake root", "black pearl"];
@@ -102885,6 +103406,7 @@ void Func094C 0x94C ()
 	var var0007;
 	var var0008;
 	var var0009;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = [0x001E, 0x0032, 0x0046, 0x005A, 0x0078, 0x008C];
@@ -102912,33 +103434,30 @@ void Func094C 0x94C ()
 			var0003 = ["nothing", "Great Ignite", "Great Douse", "Locate", "Light"];
 			var0004 = [0x0000, 0x000C, 0x000B, 0x000E, 0x000D];
 		}
+		else if (var0002 == 0x0002)
+		{
+			var0003 = ["nothing", "Fire Blast", "Enchant", "Destroy Trap", "Great Light"];
+			var0004 = [0x0000, 0x0012, 0x0011, 0x0010, 0x0013];
+		}
+		else if (var0002 == 0x0003)
+		{
+			var0003 = ["nothing", "Paralyze", "Poison", "Curse", "Swarm"];
+			var0004 = [0x0000, 0x001C, 0x001E, 0x0018, 0x001A];
+		}
+		else if (var0002 == 0x0004)
+		{
+			var0003 = ["nothing", "Lightning", "Mass Curse", "Reveal", "Conjure"];
+			var0004 = [0x0000, 0x0021, 0x0023, 0x0025, 0x0020];
+		}
+		else if (var0002 == 0x0005)
+		{
+			var0003 = ["nothing", "Mass Sleep", "Explosion", "Dispel Field", "Fire Field"];
+			var0004 = [0x0000, 0x002F, 0x002B, 0x002A, 0x002E];
+		}
 		else
 		{
-			if (var0002 == 0x0002)
-			{
-				var0003 = ["nothing", "Fire Blast", "Enchant", "Destroy Trap", "Great Light"];
-				var0004 = [0x0000, 0x0012, 0x0011, 0x0010, 0x0013];
-			}
-			else if (var0002 == 0x0003)
-			{
-				var0003 = ["nothing", "Paralyze", "Poison", "Curse", "Swarm"];
-				var0004 = [0x0000, 0x001C, 0x001E, 0x0018, 0x001A];
-			}
-			else if (var0002 == 0x0004)
-			{
-				var0003 = ["nothing", "Lightning", "Mass Curse", "Reveal", "Conjure"];
-				var0004 = [0x0000, 0x0021, 0x0023, 0x0025, 0x0020];
-			}
-			else if (var0002 == 0x0005)
-			{
-				var0003 = ["nothing", "Mass Sleep", "Explosion", "Dispel Field", "Fire Field"];
-				var0004 = [0x0000, 0x002F, 0x002B, 0x002A, 0x002E];
-			}
-			else
-			{
-				var0003 = ["nothing", "Fire Ring", "Clone", "Flame Strike", "Tremor"];
-				var0004 = [0x0000, 0x0032, 0x0031, 0x0033, 0x0037];
-			}
+			var0003 = ["nothing", "Fire Ring", "Clone", "Flame Strike", "Tremor"];
+			var0004 = [0x0000, 0x0032, 0x0031, 0x0033, 0x0037];
 		}
 		message("\"To buy which spell?\"");
 		say();
@@ -103017,6 +103536,7 @@ void Func094D 0x94D ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "mutton rations", "bread", "flounder"];
@@ -103104,6 +103624,7 @@ void Func094E 0x94E ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "mead", "wine", "ale"];
@@ -103189,6 +103710,7 @@ void Func094F 0x94F (var var0000, var var0001)
 	var var000B;
 	var var000C;
 	var var000D;
+
 	var0002 = Func0920();
 	var0003 = UI_get_npc_name(var0002);
 	do
@@ -103300,6 +103822,7 @@ void Func0950 0x950 (var var0000, var var0001)
 	var var0010;
 	var var0011;
 	var var0012;
+
 	var0002 = Func0920();
 	var0003 = UI_get_npc_name(var0002);
 	var0004 = UI_is_pc_female();
@@ -103435,6 +103958,7 @@ void Func0951 0x951 ()
 	var var000B;
 	var var000C;
 	var var000D;
+
 	var0000 = Func0909();
 	UI_push_answers();
 	var0001 = true;
@@ -103537,6 +104061,7 @@ void Func0952 0x952 ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "throwing axe", "dagger", "mace", "sword", "2-handed sword", "2-handed axe"];
@@ -103619,6 +104144,7 @@ void Func0953 0x953 ()
 	var var000A;
 	var var000B;
 	var var000C;
+
 	UI_push_answers();
 	var0000 = true;
 	var0001 = ["nothing", "chain coif", "chain armour", "chain leggings", "gauntlets", "great helm", "plate armour", "plate leggings", "crested helm"];
