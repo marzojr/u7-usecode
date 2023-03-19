@@ -21,7 +21,6 @@ void Func0096 shape#(0x96) ()
 			UI_close_gumps();
 		}
 	}
-	return;
 }
 
 // externs
@@ -718,7 +717,6 @@ void Func009A shape#(0x9A) ()
 			item->Func069A();
 		}
 	}
-	return;
 }
 
 // externs
@@ -938,7 +936,6 @@ void Func009B shape#(0x9B) ()
 	{
 		abort;
 	}
-	return;
 }
 
 void Func009F shape#(0x9F) ()
@@ -977,7 +974,6 @@ void Func009F shape#(0x9F) ()
 			UI_item_say(item, var0003);
 		}
 	}
-	return;
 }
 
 void Func00B2 shape#(0xB2) ()
@@ -988,7 +984,6 @@ void Func00B2 shape#(0xB2) ()
 	{
 		var0000 = UI_display_map();
 	}
-	return;
 }
 
 void Func00D2 shape#(0xD2) ()
@@ -1025,7 +1020,6 @@ void Func00D2 shape#(0xD2) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -1077,7 +1071,6 @@ void Func00E1 shape#(0xE1) ()
 	{
 		Func081A(item);
 	}
-	return;
 }
 
 // externs
@@ -1129,7 +1122,6 @@ void Func00F6 shape#(0xF6) ()
 	{
 		Func081A(item);
 	}
-	return;
 }
 
 // externs
@@ -1181,7 +1173,6 @@ void Func00FA shape#(0xFA) ()
 	{
 		Func081A(item);
 	}
-	return;
 }
 
 // externs
@@ -1250,7 +1241,6 @@ void Func00FB shape#(0xFB) ()
 			UI_play_music(0x00FF, 0x0000);
 		}
 	}
-	return;
 }
 
 void Func00FC shape#(0xFC) ()
@@ -1278,7 +1268,6 @@ void Func00FC shape#(0xFC) ()
 		var0002 = (((" " + var0000) + ":") + var0001);
 		UI_item_say(item, var0002);
 	}
-	return;
 }
 
 // externs
@@ -1325,7 +1314,6 @@ void Func0102 shape#(0x102) ()
 			actor frame bowing;
 		};
 	}
-	return;
 }
 
 // externs
@@ -1390,7 +1378,6 @@ void Func0105 shape#(0x105) ()
 	{
 		Func08FF("@I believe that one threads a loom before using it.@");
 	}
-	return;
 }
 
 void Func010B shape#(0x10B) ()
@@ -1399,7 +1386,6 @@ void Func010B shape#(0x10B) ()
 	{
 		UI_play_music(0x0027, item);
 	}
-	return;
 }
 
 // externs
@@ -1451,7 +1437,6 @@ void Func010E shape#(0x10E) ()
 	{
 		Func081A(item);
 	}
-	return;
 }
 
 // externs
@@ -1488,7 +1473,6 @@ void Func011C shape#(0x11C) ()
 			Func08FF("@^<Avatar>, I believe the key word in sundial is `sun'.@");
 		}
 	}
-	return;
 }
 
 void Func0122 shape#(0x122) ()
@@ -1498,7 +1482,6 @@ void Func0122 shape#(0x122) ()
 		UI_set_item_shape(item, 0x0174);
 		UI_play_sound_effect2(0x0002, item);
 	}
-	return;
 }
 
 void Func0123 shape#(0x123) ()
@@ -1508,7 +1491,6 @@ void Func0123 shape#(0x123) ()
 		UI_set_item_shape(item, 0x0142);
 		UI_play_sound_effect2(0x0002, item);
 	}
-	return;
 }
 
 // externs
@@ -1638,7 +1620,6 @@ void Func0124 shape#(0x124) ()
 			}
 		}
 	}
-	return;
 }
 
 void Func0128 shape#(0x128) ()
@@ -1666,7 +1647,6 @@ void Func0128 shape#(0x128) ()
 	{
 		UI_clear_item_flag(var0000, 0x0000);
 	}
-	return;
 }
 
 void Func012A shape#(0x12A) ()
@@ -1719,7 +1699,6 @@ void Func012A shape#(0x12A) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -1731,7 +1710,6 @@ void Func012D shape#(0x12D) ()
 	{
 		Func0809(item);
 	}
-	return;
 }
 
 // externs
@@ -1750,7 +1728,6 @@ void Func012F shape#(0x12F) ()
 		return;
 	}
 	Func0833(item, 0x03A8);
-	return;
 }
 
 // externs
@@ -1883,7 +1860,6 @@ void Func0133 shape#(0x133) ()
 			UI_set_item_frame(item, 0x0000);
 		}
 	}
-	return;
 }
 
 void Func0142 shape#(0x142) ()
@@ -1893,7 +1869,6 @@ void Func0142 shape#(0x142) ()
 		UI_set_item_shape(item, 0x0123);
 		UI_play_sound_effect2(0x0002, item);
 	}
-	return;
 }
 
 // externs
@@ -1985,7 +1960,6 @@ void Func0149 shape#(0x149) ()
 			Func08FE("@Try it outside!@");
 		}
 	}
-	return;
 }
 
 // externs
@@ -1997,7 +1971,6 @@ void Func0150 shape#(0x150) ()
 	{
 		Func0942(item, 0x0152);
 	}
-	return;
 }
 
 // externs
@@ -2030,7 +2003,6 @@ void Func0152 shape#(0x152) ()
 	{
 		Func0905(item);
 	}
-	return;
 }
 
 // externs
@@ -2124,7 +2096,6 @@ void Func0154 shape#(0x154) ()
 		}
 		Func0925(item);
 	}
-	return;
 }
 
 void Func0174 shape#(0x174) ()
@@ -2134,7 +2105,6 @@ void Func0174 shape#(0x174) ()
 		UI_set_item_shape(item, 0x0122);
 		UI_play_sound_effect2(0x0002, item);
 	}
-	return;
 }
 
 // externs
@@ -2186,7 +2156,6 @@ void Func0178 shape#(0x178) ()
 	{
 		Func081A(item);
 	}
-	return;
 }
 
 // externs
@@ -2200,7 +2169,6 @@ void Func0179 shape#(0x179) ()
 	var0000 = [0x0004, 0x0006, 0x0002, 0x0005, 0x0003, 0x0003, 0x0001, 0x000C, 0x0018, 0x0010, 0x0018, 0x0018, 0x0004, 0x0008, 0x0010, 0x0006, 0x0002, 0x0003, 0x0002, 0x0001, 0x0004, 0x0003, 0x0001, 0x0018, 0x0003, 0x0001, 0x0009, 0x0002, 0x001F, 0x0008, 0x0006, 0x0000];
 	var0001 = var0000[(UI_get_item_frame(item) + 0x0001)];
 	Func0813(item, var0001, 0x005B);
-	return;
 }
 
 // externs
@@ -2827,7 +2795,6 @@ void Func0188 shape#(0x188) ()
 	{
 		Func081A(item);
 	}
-	return;
 }
 
 void Func018A shape#(0x18A) ()
@@ -2888,7 +2855,6 @@ void Func018A shape#(0x18A) ()
 			UI_item_say(0x018A, var0003);
 		}
 	}
-	return;
 }
 
 // externs
@@ -2947,7 +2913,6 @@ void Func019A shape#(0x19A) ()
 			};
 		}
 	}
-	return;
 }
 
 void Func01A2 shape#(0x1A2) ()
@@ -2983,7 +2948,6 @@ void Func01A2 shape#(0x1A2) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -3321,7 +3285,6 @@ void Func01AF shape#(0x1AF) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -3373,7 +3336,6 @@ void Func01B0 shape#(0x1B0) ()
 	{
 		Func081A(item);
 	}
-	return;
 }
 
 // externs
@@ -3425,7 +3387,6 @@ void Func01B1 shape#(0x1B1) ()
 	{
 		Func081A(item);
 	}
-	return;
 }
 
 // externs
@@ -3472,7 +3433,6 @@ void Func01B2 shape#(0x1B2) ()
 			actor frame bowing;
 		};
 	}
-	return;
 }
 
 // externs
@@ -3500,7 +3460,6 @@ void Func01B3 shape#(0x1B3) ()
 			actor frame standing;
 		};
 	}
-	return;
 }
 
 void Func01BF shape#(0x1BF) ()
@@ -3509,7 +3468,6 @@ void Func01BF shape#(0x1BF) ()
 	{
 		UI_item_say(item, "Arghh");
 	}
-	return;
 }
 
 // externs
@@ -3528,7 +3486,6 @@ void Func01D6 shape#(0x1D6) ()
 		var0002 = [0xFFFF, 0xFFFF];
 		Func0828(item, var0001, var0002, 0x0000, 0x032A, var0000, 0x0009);
 	}
-	return;
 }
 
 // externs
@@ -3690,7 +3647,6 @@ void Func01DF shape#(0x1DF) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -3702,7 +3658,6 @@ void Func01E1 shape#(0x1E1) ()
 	{
 		Func0942(item, 0x01B3);
 	}
-	return;
 }
 
 void Func01EF shape#(0x1EF) ()
@@ -3728,7 +3683,6 @@ void Func01EF shape#(0x1EF) ()
 	{
 		UI_item_say(item, "@Meow@");
 	}
-	return;
 }
 
 void Func01F0 shape#(0x1F0) ()
@@ -3752,7 +3706,6 @@ void Func01F0 shape#(0x1F0) ()
 			UI_item_say(item, "@Bark@");
 		}
 	}
-	return;
 }
 
 void Func01F4 shape#(0x1F4) ()
@@ -3784,7 +3737,6 @@ void Func01F4 shape#(0x1F4) ()
 	{
 		UI_item_say(item, "@Moo@");
 	}
-	return;
 }
 
 // externs
@@ -3837,7 +3789,6 @@ void Func01F7 shape#(0x1F7) ()
 			UI_remove_npc_face(0xFFD4);
 		}
 	}
-	return;
 }
 
 // externs
@@ -3996,7 +3947,6 @@ void Func01F8 shape#(0x1F8) ()
 		gflags[0x0336] = true;
 		UI_remove_npc_face(0xFEDB);
 	}
-	return;
 }
 
 // externs
@@ -4018,7 +3968,6 @@ void Func01FA shape#(0x1FA) ()
 		event = 0x0001;
 		var0000[0x0001]->Func0639();
 	}
-	return;
 }
 
 void Func020A shape#(0x20A) ()
@@ -4027,7 +3976,6 @@ void Func020A shape#(0x20A) ()
 	{
 		UI_item_say(item, "Locked");
 	}
-	return;
 }
 
 void Func020E shape#(0x20E) ()
@@ -4056,7 +4004,6 @@ void Func020E shape#(0x20E) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -4065,7 +4012,6 @@ extern void Func0500 object#(0x500) ();
 void Func0216 shape#(0x216) ()
 {
 	item->Func0500();
-	return;
 }
 
 // externs
@@ -4125,7 +4071,6 @@ void Func0247 shape#(0x247) ()
 		UI_set_item_shape(item, 0x03F3);
 		UI_set_item_frame(item, 0x0011);
 	}
-	return;
 }
 
 // externs
@@ -4137,7 +4082,6 @@ void Func0253 shape#(0x253) ()
 	{
 		Func0942(item, 0x02BD);
 	}
-	return;
 }
 
 // externs
@@ -4146,7 +4090,6 @@ extern void Func0813 0x813 (var var0000, var var0001, var var0002);
 void Func0268 shape#(0x268) ()
 {
 	Func0813(item, 0x0001, 0x005A);
-	return;
 }
 
 // externs
@@ -4464,7 +4407,6 @@ void Func0269 shape#(0x269) ()
 	}
 	message("\"Farewell, Avatar. Good luck to thee.\"*");
 	say();
-	return;
 }
 
 // externs
@@ -4573,7 +4515,6 @@ void Func026F shape#(0x26F) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -4701,7 +4642,6 @@ void Func0270 shape#(0x270) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -4800,7 +4740,6 @@ void Func0273 shape#(0x273) ()
 		}
 		Func08FF("@Try those on a locked chest or door.@");
 	}
-	return;
 }
 
 void Func0275 shape#(0x275) ()
@@ -4826,7 +4765,6 @@ void Func0275 shape#(0x275) ()
 		actor frame ready;
 	};
 	var0001 = UI_set_to_attack(0xFE9C, var0000, 0x0275);
-	return;
 }
 
 void Func0276 shape#(0x276) ()
@@ -4853,7 +4791,6 @@ void Func0276 shape#(0x276) ()
 		actor frame ready;
 	};
 	var0001 = UI_set_to_attack(0xFE9C, var0000, 0x0276);
-	return;
 }
 
 // externs
@@ -4922,7 +4859,6 @@ void Func0281 shape#(0x281) ()
 			}
 		}
 	}
-	return;
 }
 
 void Func0282 shape#(0x282) ()
@@ -5824,7 +5760,6 @@ void Func0282 shape#(0x282) ()
 			say();
 		}
 	}
-	return;
 }
 
 // externs
@@ -5864,7 +5799,6 @@ void Func0284 shape#(0x284) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -5879,7 +5813,6 @@ void Func0285 shape#(0x285) ()
 		var0000 = ("@I believe that the current exchange rate is " + "ten crowns per nugget at the mint in Britian.@");
 		Func08FF(var0000);
 	}
-	return;
 }
 
 // externs
@@ -5894,7 +5827,6 @@ void Func0286 shape#(0x286) ()
 		var0000 = ("@I believe the current exchange rate is " + "one hundred crowns per bar at the Britannian mint.@");
 		Func08FF(var0000);
 	}
-	return;
 }
 
 // externs
@@ -5918,7 +5850,6 @@ void Func0288 shape#(0x288) ()
 		}
 		Func0925(item);
 	}
-	return;
 }
 
 // externs
@@ -5984,7 +5915,6 @@ void Func0289 shape#(0x289) ()
 			Func08FD(0x003C);
 		}
 	}
-	return;
 }
 
 // externs
@@ -6029,7 +5959,6 @@ void Func028A shape#(0x28A) ()
 			UI_item_say(0xFFFF, "@'Twill not function under a roof!@");
 		}
 	}
-	return;
 }
 
 // externs
@@ -6100,7 +6029,6 @@ void Func028B shape#(0x28B) ()
 		var0006 = ("@I suspect spinning the wool will be more fruitful " + "than spinning an empty wheel.@");
 		Func08FF(var0006);
 	}
-	return;
 }
 
 // externs
@@ -6112,7 +6040,6 @@ void Func028C shape#(0x28C) ()
 	{
 		Func0809(item);
 	}
-	return;
 }
 
 // externs
@@ -6165,7 +6092,6 @@ void Func028D shape#(0x28D) ()
 		var0004 = 0xFFFF;
 		Func0828(item, var0002, var0003, var0004, 0x062D, item, 0x0007);
 	}
-	return;
 }
 
 // externs
@@ -6218,7 +6144,6 @@ void Func028E shape#(0x28E) ()
 		var0004 = 0xFFFF;
 		Func0828(item, var0002, var0003, var0004, 0x062E, item, 0x0007);
 	}
-	return;
 }
 
 void Func0291 shape#(0x291) ()
@@ -6240,7 +6165,6 @@ void Func0291 shape#(0x291) ()
 		var0000 = (var0000 + var0001);
 		UI_set_item_frame(item, var0000);
 	}
-	return;
 }
 
 // externs
@@ -6317,7 +6241,6 @@ void Func0292 shape#(0x292) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -6329,7 +6252,6 @@ void Func0294 shape#(0x294) ()
 	{
 		Func0809(item);
 	}
-	return;
 }
 
 // externs
@@ -6431,7 +6353,6 @@ void Func0296 shape#(0x296) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -6619,7 +6540,6 @@ void Func029C shape#(0x29C) ()
 			call Func068D;
 		};
 	}
-	return;
 }
 
 void Func02A3 shape#(0x2A3) ()
@@ -6778,7 +6698,6 @@ void Func02A3 shape#(0x2A3) ()
 			};
 		}
 	}
-	return;
 }
 
 void Func02A6 shape#(0x2A6) ()
@@ -6800,7 +6719,6 @@ void Func02A6 shape#(0x2A6) ()
 		var0000 = (var0000 + var0001);
 		UI_set_item_frame(item, var0000);
 	}
-	return;
 }
 
 void Func02B1 shape#(0x2B1) ()
@@ -6809,7 +6727,6 @@ void Func02B1 shape#(0x2B1) ()
 	{
 		UI_play_music(0x0039, item);
 	}
-	return;
 }
 
 void Func02B2 shape#(0x2B2) ()
@@ -6818,7 +6735,6 @@ void Func02B2 shape#(0x2B2) ()
 	{
 		UI_play_music(0x0038, item);
 	}
-	return;
 }
 
 void Func02B3 shape#(0x2B3) ()
@@ -6827,7 +6743,6 @@ void Func02B3 shape#(0x2B3) ()
 	{
 		UI_play_music(0x003A, item);
 	}
-	return;
 }
 
 void Func02B4 shape#(0x2B4) ()
@@ -6836,7 +6751,6 @@ void Func02B4 shape#(0x2B4) ()
 	{
 		UI_play_music(0x003B, item);
 	}
-	return;
 }
 
 void Func02B5 shape#(0x2B5) ()
@@ -6859,7 +6773,6 @@ void Func02B5 shape#(0x2B5) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -6871,7 +6784,6 @@ void Func02B7 shape#(0x2B7) ()
 	{
 		item->Func00FC();
 	}
-	return;
 }
 
 // externs
@@ -6883,7 +6795,6 @@ void Func02B8 shape#(0x2B8) ()
 	{
 		Func0800(item);
 	}
-	return;
 }
 
 // externs
@@ -6908,7 +6819,6 @@ void Func02BA shape#(0x2BA) ()
 			Func08FF("@Might not those come in handy for cutting cloth into bandages?@");
 		}
 	}
-	return;
 }
 
 // externs
@@ -6941,7 +6851,6 @@ void Func02BD shape#(0x2BD) ()
 	{
 		Func0905(item);
 	}
-	return;
 }
 
 // externs
@@ -7043,7 +6952,6 @@ void Func02BE shape#(0x2BE) ()
 			}
 		}
 	}
-	return;
 }
 
 void Func02C0 shape#(0x2C0) ()
@@ -7060,7 +6968,6 @@ void Func02C0 shape#(0x2C0) ()
 			var0001 = UI_attack_object(UI_get_avatar_ref(), item, 0x02C0);
 		}
 	}
-	return;
 }
 
 // externs
@@ -7087,7 +6994,6 @@ void Func02C3 shape#(0x2C3) ()
 			};
 		}
 	}
-	return;
 }
 
 void Func02C4 shape#(0x2C4) ()
@@ -7110,7 +7016,6 @@ void Func02C4 shape#(0x2C4) ()
 		UI_play_sound_effect2(0x001C, item);
 		UI_set_item_frame(item, var0001);
 	}
-	return;
 }
 
 // externs
@@ -7139,7 +7044,6 @@ void Func02C5 shape#(0x2C5) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -7575,7 +7479,6 @@ void Func02CB shape#(0x2CB) ()
 			UI_display_runes(0x0032, ["here|lies", "beloved", "fa(er", "and", "ma,er"]);
 		}
 	}
-	return;
 }
 
 // externs
@@ -7604,7 +7507,6 @@ void Func02CF shape#(0x2CF) ()
 			Func0828(item, var0001, var0002, 0x0000, 0x032A, var0000, 0x0007);
 		}
 	}
-	return;
 }
 
 // externs
@@ -7627,7 +7529,6 @@ void Func02D3 shape#(0x2D3) ()
 			UI_remove_npc_face(0xFFFF);
 		}
 	}
-	return;
 }
 
 // externs
@@ -7701,7 +7602,6 @@ void Func02D5 shape#(0x2D5) ()
 			}
 		}
 	}
-	return;
 }
 
 void Func02D8 shape#(0x2D8) ()
@@ -7716,7 +7616,6 @@ void Func02D8 shape#(0x2D8) ()
 			UI_remove_npc_face(0xFFFE);
 		}
 	}
-	return;
 }
 
 // externs
@@ -7777,7 +7676,6 @@ void Func02D9 shape#(0x2D9) ()
 		}
 		UI_display_area(var0001);
 	}
-	return;
 }
 
 // externs
@@ -7817,7 +7715,6 @@ void Func02DA shape#(0x2DA) ()
 			}
 		}
 	}
-	return;
 }
 
 void Func02DE shape#(0x2DE) ()
@@ -7875,7 +7772,6 @@ void Func02DE shape#(0x2DE) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -7890,12 +7786,10 @@ void Func02DF shape#(0x2DF) ()
 		var0000 = (("@I believe those are for the trainers to use.*" + "If thou art in need of practice, why not ") + "seek out a trainer?@");
 		Func08FF(var0000);
 	}
-	return;
 }
 
 void Func02E3 shape#(0x2E3) ()
 {
-	return;
 }
 
 // externs
@@ -7919,7 +7813,6 @@ void Func02E4 shape#(0x2E4) ()
 			Func0828(var0003, var0001, var0002, 0x0000, 0x032A, var0000, 0x0009);
 		}
 	}
-	return;
 }
 
 // externs
@@ -7948,7 +7841,6 @@ void Func02E5 shape#(0x2E5) ()
 			Func0828(item, var0001, var0002, 0x0000, 0x032A, var0000, 0x0007);
 		}
 	}
-	return;
 }
 
 // externs
@@ -7963,7 +7855,6 @@ void Func02E6 shape#(0x2E6) ()
 			UI_item_say(0xFFFE, "@Gee, is that neat.@");
 		}
 	}
-	return;
 }
 
 // externs
@@ -8075,7 +7966,6 @@ void Func02E7 shape#(0x2E7) ()
 			frame 0;
 		};
 	}
-	return;
 }
 
 void Func02E8 shape#(0x2E8) ()
@@ -8084,7 +7974,6 @@ void Func02E8 shape#(0x2E8) ()
 	{
 		UI_wizard_eye(0x2710, 0x03E8);
 	}
-	return;
 }
 
 void Func02E9 shape#(0x2E9) ()
@@ -8093,7 +7982,6 @@ void Func02E9 shape#(0x2E9) ()
 	{
 		UI_play_music(0x003A, item);
 	}
-	return;
 }
 
 void Func02EB shape#(0x2EB) ()
@@ -8133,7 +8021,6 @@ void Func02EB shape#(0x2EB) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -8163,7 +8050,6 @@ void Func02F0 shape#(0x2F0) ()
 			UI_play_music(0x00FF, item);
 		}
 	}
-	return;
 }
 
 // externs
@@ -8233,7 +8119,6 @@ void Func02F2 shape#(0x2F2) ()
 		say();
 		Func08AD();
 	}
-	return;
 }
 
 // externs
@@ -8245,7 +8130,6 @@ void Func02F5 shape#(0x2F5) ()
 	{
 		Func0809(item);
 	}
-	return;
 }
 
 // externs
@@ -8365,7 +8249,6 @@ void Func02F8 shape#(0x2F8) ()
 		gflags[0x0313] = false;
 		gflags[0x0333] = false;
 	}
-	return;
 }
 
 // externs
@@ -8381,7 +8264,6 @@ void Func02FB shape#(0x2FB) ()
 		}
 		Func082F();
 	}
-	return;
 }
 
 void Func0301 shape#(0x301) ()
@@ -8415,7 +8297,6 @@ void Func0301 shape#(0x301) ()
 		UI_sprite_effect(0x0003, var0004[0x0001], var0004[0x0002], 0xFFFE, 0xFFFE, 0x0004, 0x0019);
 		UI_remove_item(item);
 	}
-	return;
 }
 
 // externs
@@ -8432,7 +8313,6 @@ void Func0302 shape#(0x302) ()
 		0x0000->Func06E1();
 		UI_display_area([0x0B4C, 0x058C, 0x0003]);
 	}
-	return;
 }
 
 // externs
@@ -8500,7 +8380,6 @@ void Func0303 shape#(0x303) ()
 		UI_play_sound_effect(0x003E);
 		UI_lightning();
 	}
-	return;
 }
 
 // externs
@@ -8512,7 +8391,6 @@ void Func0305 shape#(0x305) ()
 	{
 		Func0809(item);
 	}
-	return;
 }
 
 // externs
@@ -8524,7 +8402,6 @@ void Func0306 shape#(0x306) ()
 	{
 		Func0809(item);
 	}
-	return;
 }
 
 // externs
@@ -8544,7 +8421,6 @@ void Func030D shape#(0x30D) ()
 			Func08FF("@I think the gangplank is blocked.@");
 		}
 	}
-	return;
 }
 
 // externs
@@ -8597,7 +8473,6 @@ void Func030E shape#(0x30E) ()
 			Func0925(var0005);
 		}
 	}
-	return;
 }
 
 // externs
@@ -8775,7 +8650,6 @@ void Func0311 shape#(0x311) ()
 			Func0824(item);
 		}
 	}
-	return;
 }
 
 // externs
@@ -8815,7 +8689,6 @@ void Func0313 shape#(0x313) ()
 	{
 		Func0816(item);
 	}
-	return;
 }
 
 // externs
@@ -8885,7 +8758,6 @@ void Func0314 shape#(0x314) ()
 		var0004 = Func080E(var0008);
 		Func0836(item, 0xFE99);
 	}
-	return;
 }
 
 // externs
@@ -8914,7 +8786,6 @@ void Func0316 shape#(0x316) ()
 		UI_play_sound_effect2(0x0043, item);
 		Func0925(item);
 	}
-	return;
 }
 
 // externs
@@ -8926,7 +8797,6 @@ void Func031C shape#(0x31C) ()
 	{
 		Func0809(item);
 	}
-	return;
 }
 
 // externs
@@ -9330,7 +9200,6 @@ void Func031E shape#(0x31E) ()
 		UI_set_item_shape(item, 0x031F);
 		UI_play_sound_effect2(0x000E, item);
 	}
-	return;
 }
 
 // externs
@@ -9404,7 +9273,6 @@ void Func0326 shape#(0x326) ()
 	}
 	message("\"Goodbye.\"*");
 	say();
-	return;
 }
 
 // externs
@@ -9476,7 +9344,6 @@ void Func0329 shape#(0x329) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -10097,7 +9964,6 @@ void Func032A shape#(0x32A) ()
 			call Func0694;
 		};
 	}
-	return;
 }
 
 // externs
@@ -10556,7 +10422,6 @@ void Func0336 shape#(0x336) ()
 			Func08FE("@That is for dirty diapers.@");
 		}
 	}
-	return;
 }
 
 // externs
@@ -10634,7 +10499,6 @@ void Func0337 shape#(0x337) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -10700,7 +10564,6 @@ void Func033B shape#(0x33B) ()
 			Func08FE("@Do not soil the bandages.@");
 		}
 	}
-	return;
 }
 
 // externs
@@ -10718,7 +10581,6 @@ void Func033C shape#(0x33C) ()
 	{
 		var0000 = Func081F(item);
 	}
-	return;
 }
 
 // externs
@@ -10734,7 +10596,6 @@ void Func0345 shape#(0x345) ()
 		var0000 = (("@Thou shouldst use the brush and pigments, " + Func0908()) + ".@");
 		Func08FF(var0000);
 	}
-	return;
 }
 
 // externs
@@ -10756,7 +10617,6 @@ void Func0347 shape#(0x347) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -10806,7 +10666,6 @@ void Func0348 shape#(0x348) ()
 			Func08FF("@I do not believe that we can land here safely.@");
 		}
 	}
-	return;
 }
 
 // externs
@@ -10818,7 +10677,6 @@ void Func034A shape#(0x34A) ()
 	{
 		Func0813(item, 0x0002, 0x005B);
 	}
-	return;
 }
 
 // externs
@@ -10836,7 +10694,6 @@ void Func034D shape#(0x34D) ()
 	{
 		var0000 = Func0820(item);
 	}
-	return;
 }
 
 // externs
@@ -10871,7 +10728,6 @@ void Func0350 shape#(0x350) ()
 		gflags[0x032F] = true;
 		item->Func06F6();
 	}
-	return;
 }
 
 // externs
@@ -10886,7 +10742,6 @@ void Func0353 shape#(0x353) ()
 		var0000 = (("@That appears to be fine cloth, no doubt it would fetch " + "a fair price in Minoc. Or, perhapse, thou couldst cut ") + "it into bandages with shears.@");
 		Func08FF(var0000);
 	}
-	return;
 }
 
 // externs
@@ -11158,7 +11013,6 @@ void Func0356 shape#(0x356) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -11230,7 +11084,6 @@ void Func035F shape#(0x35F) ()
 			UI_set_item_frame(item, 0x0000);
 		}
 	}
-	return;
 }
 
 // externs
@@ -11249,7 +11102,6 @@ void Func0369 shape#(0x369) ()
 		}
 		Func080A(item, 0x0369);
 	}
-	return;
 }
 
 // externs
@@ -11268,7 +11120,6 @@ void Func036C shape#(0x36C) ()
 		return;
 	}
 	Func0833(item, 0x03A7);
-	return;
 }
 
 // externs
@@ -11326,7 +11177,6 @@ void Func0378 shape#(0x378) ()
 			UI_play_music(0x0018, item);
 		}
 	}
-	return;
 }
 
 void Func0379 shape#(0x379) ()
@@ -11350,7 +11200,6 @@ void Func0379 shape#(0x379) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -11407,7 +11256,6 @@ void Func037D shape#(0x37D) ()
 			UI_set_item_flag(var0001, 0x0000);
 		}
 	}
-	return;
 }
 
 // externs
@@ -11426,7 +11274,6 @@ void Func03A7 shape#(0x3A7) ()
 		return;
 	}
 	Func0832(item, 0x036C);
-	return;
 }
 
 // externs
@@ -11445,7 +11292,6 @@ void Func03A8 shape#(0x3A8) ()
 		return;
 	}
 	Func0832(item, 0x012F);
-	return;
 }
 
 // externs
@@ -11472,7 +11318,6 @@ void Func03B0 shape#(0x3B0) ()
 			}
 		}
 	}
-	return;
 }
 
 void Func03B2 shape#(0x3B2) ()
@@ -11506,7 +11351,6 @@ void Func03B2 shape#(0x3B2) ()
 	}
 	message("\"Goodbye.\"*");
 	say();
-	return;
 }
 
 // externs
@@ -11516,7 +11360,6 @@ void Func03B5 shape#(0x3B5) ()
 {
 	UI_close_gumps();
 	Func083E(item, event);
-	return;
 }
 
 // externs
@@ -11526,7 +11369,6 @@ void Func03B6 shape#(0x3B6) ()
 {
 	UI_close_gumps();
 	Func083E(item, event);
-	return;
 }
 
 // externs
@@ -11560,7 +11402,6 @@ void Func03C8 shape#(0x3C8) ()
 		var0001 = UI_get_object_position(item);
 		UI_sprite_effect(0x0007, (var0001[0x0001] - 0x0003), (var0001[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, 0xFFFF);
 	}
-	return;
 }
 
 // externs
@@ -11593,7 +11434,6 @@ void Func03D5 shape#(0x3D5) ()
 		}
 		var0003 = Func082E(item);
 	}
-	return;
 }
 
 void Func03DB shape#(0x3DB) ()
@@ -11661,7 +11501,6 @@ void Func03DB shape#(0x3DB) ()
 			}
 		}
 	}
-	return;
 }
 
 void Func03DE shape#(0x3DE) ()
@@ -11714,7 +11553,6 @@ void Func03DE shape#(0x3DE) ()
 			actor frame standing;
 		};
 	}
-	return;
 }
 
 // externs
@@ -11754,7 +11592,6 @@ void Func03DF shape#(0x3DF) ()
 			}
 		}
 	}
-	return;
 }
 
 void Func03E0 shape#(0x3E0) ()
@@ -11804,7 +11641,6 @@ void Func03E0 shape#(0x3E0) ()
 		};
 		var0001 = UI_execute_usecode_array(item, (var0000 & [(byte)0x0B, 0xFFE6, 0x0002]));
 	}
-	return;
 }
 
 // externs
@@ -11816,7 +11652,6 @@ void Func03F3 shape#(0x3F3) ()
 	{
 		Func0800(item);
 	}
-	return;
 }
 
 void Func03F5 shape#(0x3F5) ()
@@ -11869,7 +11704,6 @@ void Func03F5 shape#(0x3F5) ()
 			var0001 = UI_execute_usecode_array(item, (var0000 & [(byte)0x0B, 0xFFE6, 0x0002]));
 		}
 	}
-	return;
 }
 
 // externs
@@ -11986,7 +11820,6 @@ void Func03F7 shape#(0x3F7) ()
 			Func0894(item);
 		}
 	}
-	return;
 }
 
 // externs
@@ -11995,7 +11828,6 @@ extern void Func0269 shape#(0x269) ();
 void Func03FD shape#(0x3FD) ()
 {
 	UI_get_npc_object(0x0269)->Func0269();
-	return;
 }
 
 // externs
@@ -12519,7 +12351,6 @@ void Func0401 object#(0x401) ()
 	{
 		Func092E(0xFFFF);
 	}
-	return;
 }
 
 // externs
@@ -13019,7 +12850,6 @@ void Func0402 object#(0x402) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -13386,7 +13216,6 @@ void Func0403 object#(0x403) ()
 	{
 		Func092E(0xFFFD);
 	}
-	return;
 }
 
 // externs
@@ -13785,7 +13614,6 @@ void Func0404 object#(0x404) ()
 	{
 		Func092E(0xFFFC);
 	}
-	return;
 }
 
 // externs
@@ -14098,7 +13926,6 @@ void Func0405 object#(0x405) ()
 	{
 		Func092E(0xFFFB);
 	}
-	return;
 }
 
 // externs
@@ -14435,7 +14262,6 @@ void Func0406 object#(0x406) ()
 		}
 		UI_item_say(0xFFFA, var000F);
 	}
-	return;
 }
 
 // externs
@@ -14729,7 +14555,6 @@ void Func0407 object#(0x407) ()
 	{
 		Func092E(0xFFF9);
 	}
-	return;
 }
 
 // externs
@@ -15074,7 +14899,6 @@ void Func0408 object#(0x408) ()
 	{
 		Func092E(0xFFF8);
 	}
-	return;
 }
 
 // externs
@@ -15384,7 +15208,6 @@ void Func0409 object#(0x409) ()
 	{
 		Func092E(0xFFF7);
 	}
-	return;
 }
 
 // externs
@@ -16205,7 +16028,6 @@ void Func040A object#(0x40A) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -16419,7 +16241,6 @@ void Func040B object#(0x40B) ()
 	{
 		Func092E(0xFFF5);
 	}
-	return;
 }
 
 // externs
@@ -16900,7 +16721,6 @@ void Func040C object#(0x40C) ()
 			Func092E(0xFFF4);
 		}
 	}
-	return;
 }
 
 // externs
@@ -17076,7 +16896,6 @@ void Func040D object#(0x40D) ()
 	}
 	message("\"Goodbye. Watch thy back.\"*");
 	say();
-	return;
 }
 
 // externs
@@ -17247,7 +17066,6 @@ void Func040E object#(0x40E) ()
 	}
 	message("\"Good day.\"*");
 	say();
-	return;
 }
 
 // externs
@@ -17377,7 +17195,6 @@ void Func040F object#(0x40F) ()
 	}
 	message("\"Farewell.\"");
 	say();
-	return;
 }
 
 // externs
@@ -17610,7 +17427,6 @@ void Func0410 object#(0x410) ()
 	{
 		Func092E(0xFFF0);
 	}
-	return;
 }
 
 // externs
@@ -17726,7 +17542,6 @@ void Func0411 object#(0x411) ()
 			Func092E(0xFFEF);
 		}
 	}
-	return;
 }
 
 // externs
@@ -17927,7 +17742,6 @@ void Func0412 object#(0x412) ()
 			Func092E(0xFFEE);
 		}
 	}
-	return;
 }
 
 // externs
@@ -18124,7 +17938,6 @@ void Func0413 object#(0x413) ()
 	{
 		Func092E(0xFFED);
 	}
-	return;
 }
 
 // externs
@@ -18213,7 +18026,6 @@ void Func0414 object#(0x414) ()
 	{
 		Func092E(0xFFEC);
 	}
-	return;
 }
 
 // externs
@@ -18493,7 +18305,6 @@ void Func0415 object#(0x415) ()
 	{
 		Func092E(0xFFEB);
 	}
-	return;
 }
 
 // externs
@@ -18620,7 +18431,6 @@ void Func0416 object#(0x416) ()
 			Func092E(0xFFEA);
 		}
 	}
-	return;
 }
 
 // externs
@@ -19246,7 +19056,6 @@ labelFunc0417_0743:
 			abort;
 		}
 	}
-	return;
 }
 
 // externs
@@ -19399,7 +19208,6 @@ void Func0418 object#(0x418) ()
 		message("\"Goodbye, Avatar. Do come see us again soon.\"*");
 		say();
 	}
-	return;
 }
 
 // externs
@@ -19613,7 +19421,6 @@ void Func0419 object#(0x419) ()
 			UI_item_say(0xFFE7, var0005);
 		}
 	}
-	return;
 }
 
 // externs
@@ -20167,7 +19974,6 @@ void Func041A object#(0x41A) ()
 	{
 		Func092E(0xFFE6);
 	}
-	return;
 }
 
 // externs
@@ -20412,7 +20218,6 @@ void Func041B object#(0x41B) ()
 			Func092E(0xFFE5);
 		}
 	}
-	return;
 }
 
 // externs
@@ -20563,7 +20368,6 @@ void Func041C object#(0x41C) ()
 			Func092E(0xFFE4);
 		}
 	}
-	return;
 }
 
 // externs
@@ -20697,7 +20501,6 @@ void Func041D object#(0x41D) ()
 			Func092E(0xFFE3);
 		}
 	}
-	return;
 }
 
 // externs
@@ -20850,7 +20653,6 @@ void Func041E object#(0x41E) ()
 			Func092E(0xFFE2);
 		}
 	}
-	return;
 }
 
 // externs
@@ -20976,7 +20778,6 @@ void Func041F object#(0x41F) ()
 			UI_item_say(0xFFE1, var0003);
 		}
 	}
-	return;
 }
 
 // externs
@@ -21089,7 +20890,6 @@ void Func0420 object#(0x420) ()
 			UI_item_say(0xFFE0, var0003);
 		}
 	}
-	return;
 }
 
 // externs
@@ -21229,7 +21029,6 @@ void Func0421 object#(0x421) ()
 			UI_item_say(0xFFDF, var0003);
 		}
 	}
-	return;
 }
 
 // externs
@@ -21420,7 +21219,6 @@ void Func0422 object#(0x422) ()
 	{
 		Func092E(0xFFDE);
 	}
-	return;
 }
 
 // externs
@@ -21572,7 +21370,6 @@ void Func0423 object#(0x423) ()
 	{
 		Func092E(0xFFDD);
 	}
-	return;
 }
 
 // externs
@@ -21681,7 +21478,6 @@ void Func0424 object#(0x424) ()
 	{
 		Func092E(0xFFDC);
 	}
-	return;
 }
 
 // externs
@@ -21905,7 +21701,6 @@ void Func0425 object#(0x425) ()
 	{
 		Func092E(0xFFDB);
 	}
-	return;
 }
 
 // externs
@@ -22102,7 +21897,6 @@ void Func0426 object#(0x426) ()
 			Func092E(0xFFDA);
 		}
 	}
-	return;
 }
 
 // externs
@@ -22196,7 +21990,6 @@ void Func0427 object#(0x427) ()
 	{
 		Func092E(0xFFD9);
 	}
-	return;
 }
 
 // externs
@@ -22324,7 +22117,6 @@ void Func0428 object#(0x428) ()
 	{
 		Func092E(0xFFD8);
 	}
-	return;
 }
 
 // externs
@@ -22522,7 +22314,6 @@ void Func0429 object#(0x429) ()
 	{
 		Func092E(0xFFD7);
 	}
-	return;
 }
 
 // externs
@@ -22748,7 +22539,6 @@ void Func042A object#(0x42A) ()
 	{
 		Func092E(0xFFD6);
 	}
-	return;
 }
 
 // externs
@@ -22989,7 +22779,6 @@ void Func042B object#(0x42B) ()
 	{
 		Func092E(0xFFD5);
 	}
-	return;
 }
 
 // externs
@@ -23232,7 +23021,6 @@ void Func042C object#(0x42C) ()
 			Func092E(0xFFD4);
 		}
 	}
-	return;
 }
 
 // externs
@@ -23490,7 +23278,6 @@ void Func042D object#(0x42D) ()
 	{
 		Func092E(0xFFD3);
 	}
-	return;
 }
 
 // externs
@@ -23721,7 +23508,6 @@ void Func042E object#(0x42E) ()
 	{
 		Func092E(0xFFD2);
 	}
-	return;
 }
 
 // externs
@@ -23868,7 +23654,6 @@ void Func042F object#(0x42F) ()
 	{
 		Func092E(0xFFD1);
 	}
-	return;
 }
 
 // externs
@@ -24037,7 +23822,6 @@ void Func0430 object#(0x430) ()
 	message(var0000);
 	message(".\"*");
 	say();
-	return;
 }
 
 // externs
@@ -24131,7 +23915,6 @@ void Func0431 object#(0x431) ()
 	{
 		Func092E(0xFFCF);
 	}
-	return;
 }
 
 // externs
@@ -24288,7 +24071,6 @@ void Func0432 object#(0x432) ()
 			Func092E(0xFFCE);
 		}
 	}
-	return;
 }
 
 // externs
@@ -24456,7 +24238,6 @@ void Func0433 object#(0x433) ()
 			Func092E(0xFFCD);
 		}
 	}
-	return;
 }
 
 // externs
@@ -24783,7 +24564,6 @@ void Func0434 object#(0x434) ()
 			Func092E(0xFFCC);
 		}
 	}
-	return;
 }
 
 // externs
@@ -24996,7 +24776,6 @@ void Func0435 object#(0x435) ()
 			Func092E(0xFFCB);
 		}
 	}
-	return;
 }
 
 // externs
@@ -25227,7 +25006,6 @@ void Func0436 object#(0x436) ()
 			Func092E(0xFFCA);
 		}
 	}
-	return;
 }
 
 // externs
@@ -25422,7 +25200,6 @@ void Func0437 object#(0x437) ()
 			Func092E(0xFFC9);
 		}
 	}
-	return;
 }
 
 // externs
@@ -25575,7 +25352,6 @@ void Func0438 object#(0x438) ()
 	{
 		Func092E(0xFFC8);
 	}
-	return;
 }
 
 // externs
@@ -25815,7 +25591,6 @@ void Func0439 object#(0x439) ()
 			Func092E(0xFFC7);
 		}
 	}
-	return;
 }
 
 // externs
@@ -26054,7 +25829,6 @@ void Func043A object#(0x43A) ()
 			Func092E(0xFFC6);
 		}
 	}
-	return;
 }
 
 // externs
@@ -26350,7 +26124,6 @@ void Func043B object#(0x43B) ()
 			Func092E(0xFFC5);
 		}
 	}
-	return;
 }
 
 // externs
@@ -26542,7 +26315,6 @@ void Func043C object#(0x43C) ()
 	{
 		Func092E(0xFFC4);
 	}
-	return;
 }
 
 // externs
@@ -26779,7 +26551,6 @@ void Func043D object#(0x43D) ()
 	{
 		Func092E(0xFFC3);
 	}
-	return;
 }
 
 // externs
@@ -27114,7 +26885,6 @@ void Func043E object#(0x43E) ()
 			Func092E(0xFFC2);
 		}
 	}
-	return;
 }
 
 // externs
@@ -27292,7 +27062,6 @@ void Func043F object#(0x43F) ()
 			Func092E(0xFFC1);
 		}
 	}
-	return;
 }
 
 // externs
@@ -27395,7 +27164,6 @@ void Func0440 object#(0x440) ()
 	{
 		Func092E(0xFFC0);
 	}
-	return;
 }
 
 // externs
@@ -27488,7 +27256,6 @@ void Func0441 object#(0x441) ()
 		message("\"To bid farewell.\"*");
 		say();
 	}
-	return;
 }
 
 // externs
@@ -27677,7 +27444,6 @@ void Func0442 object#(0x442) ()
 			UI_item_say(0xFFBE, var0008);
 		}
 	}
-	return;
 }
 
 // externs
@@ -27790,7 +27556,6 @@ void Func0443 object#(0x443) ()
 	{
 		Func092E(0xFFBD);
 	}
-	return;
 }
 
 // externs
@@ -27937,7 +27702,6 @@ void Func0444 object#(0x444) ()
 	{
 		Func092E(0xFFBC);
 	}
-	return;
 }
 
 // externs
@@ -28158,7 +27922,6 @@ void Func0445 object#(0x445) ()
 	}
 	message("\"I thank thee for visiting me.\" *");
 	say();
-	return;
 }
 
 // externs
@@ -28383,7 +28146,6 @@ void Func0446 object#(0x446) ()
 	{
 		Func092E(0xFFBA);
 	}
-	return;
 }
 
 // externs
@@ -28504,7 +28266,6 @@ void Func0447 object#(0x447) ()
 	{
 		Func092F(0xFFB9);
 	}
-	return;
 }
 
 // externs
@@ -28656,7 +28417,6 @@ void Func0448 object#(0x448) ()
 	{
 		Func092E(0xFFB8);
 	}
-	return;
 }
 
 // externs
@@ -28822,7 +28582,6 @@ void Func0449 object#(0x449) ()
 	{
 		Func092E(0xFFB7);
 	}
-	return;
 }
 
 // externs
@@ -28996,7 +28755,6 @@ void Func044A object#(0x44A) ()
 		message("\"Goodbye, Avatar.\"*");
 		say();
 	}
-	return;
 }
 
 // externs
@@ -29307,7 +29065,6 @@ void Func044B object#(0x44B) ()
 		message(".\"*");
 		say();
 	}
-	return;
 }
 
 // externs
@@ -29426,7 +29183,6 @@ void Func044C object#(0x44C) ()
 	{
 		Func092E(0xFFB4);
 	}
-	return;
 }
 
 // externs
@@ -29620,7 +29376,6 @@ void Func044D object#(0x44D) ()
 	{
 		Func092E(0xFFB3);
 	}
-	return;
 }
 
 // externs
@@ -29768,7 +29523,6 @@ void Func044E object#(0x44E) ()
 	{
 		Func092E(0xFFB2);
 	}
-	return;
 }
 
 // externs
@@ -29875,7 +29629,6 @@ void Func044F object#(0x44F) ()
 	{
 		Func092E(0xFFB1);
 	}
-	return;
 }
 
 // externs
@@ -30010,7 +29763,6 @@ void Func0450 object#(0x450) ()
 	{
 		Func092E(0xFFB0);
 	}
-	return;
 }
 
 // externs
@@ -30405,7 +30157,6 @@ void Func0451 object#(0x451) ()
 	{
 		Func092E(0xFFAF);
 	}
-	return;
 }
 
 // externs
@@ -30586,7 +30337,6 @@ void Func0452 object#(0x452) ()
 	{
 		Func092E(0xFFAE);
 	}
-	return;
 }
 
 // externs
@@ -30736,7 +30486,6 @@ void Func0453 object#(0x453) ()
 	}
 	message("\"Fairvell. Go in peace.\"*");
 	say();
-	return;
 }
 
 // externs
@@ -30836,7 +30585,6 @@ void Func0454 object#(0x454) ()
 	}
 	message("The lad stoically nods and turns away.*");
 	say();
-	return;
 }
 
 // externs
@@ -31000,7 +30748,6 @@ void Func0455 object#(0x455) ()
 	{
 		Func092E(0xFFAB);
 	}
-	return;
 }
 
 // externs
@@ -31142,7 +30889,6 @@ void Func0456 object#(0x456) ()
 	{
 		Func092E(0xFFAA);
 	}
-	return;
 }
 
 // externs
@@ -31410,7 +31156,6 @@ void Func0457 object#(0x457) ()
 			Func092E(0xFFA9);
 		}
 	}
-	return;
 }
 
 // externs
@@ -31576,7 +31321,6 @@ void Func0458 object#(0x458) ()
 	{
 		Func092E(0xFFA8);
 	}
-	return;
 }
 
 // externs
@@ -31749,7 +31493,6 @@ void Func0459 object#(0x459) ()
 		message("\"Cease thy racket then before I lose my temper!\"*");
 		say();
 	}
-	return;
 }
 
 // externs
@@ -32235,7 +31978,6 @@ void Func045A object#(0x45A) ()
 	{
 		Func092E(0xFFA6);
 	}
-	return;
 }
 
 // externs
@@ -32472,7 +32214,6 @@ void Func045B object#(0x45B) ()
 	{
 		Func092E(0xFFA5);
 	}
-	return;
 }
 
 // externs
@@ -32719,7 +32460,6 @@ void Func045C object#(0x45C) ()
 	{
 		Func092E(0xFFA4);
 	}
-	return;
 }
 
 // externs
@@ -32880,7 +32620,6 @@ void Func045D object#(0x45D) ()
 	{
 		Func092E(0xFFA3);
 	}
-	return;
 }
 
 // externs
@@ -33066,7 +32805,6 @@ void Func045E object#(0x45E) ()
 	{
 		Func092E(0xFFA2);
 	}
-	return;
 }
 
 // externs
@@ -33250,7 +32988,6 @@ void Func045F object#(0x45F) ()
 	{
 		Func092E(0xFFA1);
 	}
-	return;
 }
 
 // externs
@@ -33384,7 +33121,6 @@ void Func0460 object#(0x460) ()
 	}
 	message("\"Mayest thou have much fortune in thine endeavors.\"*");
 	say();
-	return;
 }
 
 // externs
@@ -33495,7 +33231,6 @@ void Func0461 object#(0x461) ()
 	message(var0002);
 	message(". Thou shouldst leave right away.\"*");
 	say();
-	return;
 }
 
 // externs
@@ -33691,7 +33426,6 @@ void Func0462 object#(0x462) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -33770,7 +33504,6 @@ void Func0463 object#(0x463) ()
 		message("\"To be going back to work now, Mikos...\"*");
 		say();
 	}
-	return;
 }
 
 // externs
@@ -33944,7 +33677,6 @@ void Func0464 object#(0x464) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -34203,7 +33935,6 @@ void Func0465 object#(0x465) ()
 		}
 		UI_item_say(0xFF9B, var0009);
 	}
-	return;
 }
 
 // externs
@@ -34499,7 +34230,6 @@ void Func0466 object#(0x466) ()
 		message(".\"*");
 		say();
 	}
-	return;
 }
 
 // externs
@@ -34641,7 +34371,6 @@ void Func0467 object#(0x467) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -34782,7 +34511,6 @@ void Func0468 object#(0x468) ()
 	{
 		Func092E(0xFF98);
 	}
-	return;
 }
 
 // externs
@@ -34891,7 +34619,6 @@ void Func0469 object#(0x469) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -35026,7 +34753,6 @@ void Func046A object#(0x46A) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -35258,7 +34984,6 @@ void Func046B object#(0x46B) ()
 		message("\"Farewell.\"*");
 		say();
 	}
-	return;
 }
 
 // externs
@@ -35584,7 +35309,6 @@ void Func046C object#(0x46C) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -35737,7 +35461,6 @@ void Func046D object#(0x46D) ()
 	{
 		Func092E(0xFF93);
 	}
-	return;
 }
 
 // externs
@@ -35968,7 +35691,6 @@ void Func046E object#(0x46E) ()
 	}
 	message("\"Goodbye.\"*");
 	say();
-	return;
 }
 
 // externs
@@ -36084,7 +35806,6 @@ void Func046F object#(0x46F) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -36240,7 +35961,6 @@ void Func0470 object#(0x470) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -36454,7 +36174,6 @@ void Func0471 object#(0x471) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -36654,7 +36373,6 @@ void Func0472 object#(0x472) ()
 	{
 		Func092E(0xFF8E);
 	}
-	return;
 }
 
 // externs
@@ -36839,7 +36557,6 @@ void Func0473 object#(0x473) ()
 	{
 		Func092E(0xFF8D);
 	}
-	return;
 }
 
 // externs
@@ -37022,7 +36739,6 @@ void Func0474 object#(0x474) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -37234,7 +36950,6 @@ void Func0475 object#(0x475) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -37413,7 +37128,6 @@ void Func0476 object#(0x476) ()
 	{
 		Func092E(0xFF8A);
 	}
-	return;
 }
 
 // externs
@@ -37650,7 +37364,6 @@ void Func0477 object#(0x477) ()
 	{
 		Func092E(0xFF89);
 	}
-	return;
 }
 
 // externs
@@ -37846,7 +37559,6 @@ void Func0478 object#(0x478) ()
 	{
 		Func092E(0xFF88);
 	}
-	return;
 }
 
 // externs
@@ -38123,7 +37835,6 @@ void Func0479 object#(0x479) ()
 			Func092E(0xFF87);
 		}
 	}
-	return;
 }
 
 // externs
@@ -38515,7 +38226,6 @@ labelFunc047A_0447:
 	{
 		Func092E(0xFF86);
 	}
-	return;
 }
 
 // externs
@@ -38798,7 +38508,6 @@ labelFunc047B_0352:
 	{
 		Func092E(0xFF85);
 	}
-	return;
 }
 
 // externs
@@ -39127,7 +38836,6 @@ void Func047C object#(0x47C) ()
 	{
 		Func092E(0xFF84);
 	}
-	return;
 }
 
 // externs
@@ -39306,7 +39014,6 @@ void Func047D object#(0x47D) ()
 	{
 		Func092E(0xFF83);
 	}
-	return;
 }
 
 // externs
@@ -39541,7 +39248,6 @@ void Func047E object#(0x47E) ()
 	{
 		Func092E(0xFF82);
 	}
-	return;
 }
 
 // externs
@@ -39680,7 +39386,6 @@ void Func047F object#(0x47F) ()
 	{
 		Func092E(0xFF81);
 	}
-	return;
 }
 
 // externs
@@ -39794,7 +39499,6 @@ void Func0480 object#(0x480) ()
 	message("\"Away with thee!\"*");
 	say();
 	UI_set_schedule_type(UI_get_npc_object(0xFF80), 0x0007);
-	return;
 }
 
 // externs
@@ -40077,7 +39781,6 @@ void Func0481 object#(0x481) ()
 	{
 		Func092E(0xFF7F);
 	}
-	return;
 }
 
 // externs
@@ -40432,7 +40135,6 @@ void Func0482 object#(0x482) ()
 	{
 		Func092E(0xFF7E);
 	}
-	return;
 }
 
 // externs
@@ -40657,7 +40359,6 @@ void Func0483 object#(0x483) ()
 	{
 		Func092E(0xFF7D);
 	}
-	return;
 }
 
 // externs
@@ -40857,7 +40558,6 @@ void Func0484 object#(0x484) ()
 	{
 		Func092E(0xFF7C);
 	}
-	return;
 }
 
 // externs
@@ -41100,7 +40800,6 @@ void Func0485 object#(0x485) ()
 	{
 		Func092E(0xFF7B);
 	}
-	return;
 }
 
 // externs
@@ -41391,7 +41090,6 @@ void Func0486 object#(0x486) ()
 	{
 		Func092E(0xFF7A);
 	}
-	return;
 }
 
 // externs
@@ -41566,7 +41264,6 @@ void Func0487 object#(0x487) ()
 	{
 		Func092E(0xFF79);
 	}
-	return;
 }
 
 // externs
@@ -41795,7 +41492,6 @@ void Func0488 object#(0x488) ()
 	{
 		Func092E(0xFF78);
 	}
-	return;
 }
 
 // externs
@@ -42083,7 +41779,6 @@ void Func0489 object#(0x489) ()
 			Func092E(0xFF77);
 		}
 	}
-	return;
 }
 
 // externs
@@ -42331,7 +42026,6 @@ void Func048A object#(0x48A) ()
 	}
 	message("\"Until ve meet again, Avatar.\"*");
 	say();
-	return;
 }
 
 // externs
@@ -42551,7 +42245,6 @@ void Func048C object#(0x48C) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -42811,7 +42504,6 @@ void Func048D object#(0x48D) ()
 				abort;
 		}
 	}
-	return;
 }
 
 // externs
@@ -42997,7 +42689,6 @@ void Func048E object#(0x48E) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -43319,7 +43010,6 @@ void Func048F object#(0x48F) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -43441,7 +43131,6 @@ void Func0490 object#(0x490) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -43739,7 +43428,6 @@ void Func0491 object#(0x491) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -44042,7 +43730,6 @@ void Func0492 object#(0x492) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -44400,7 +44087,6 @@ void Func0493 object#(0x493) ()
 	{
 		abort;
 	}
-	return;
 }
 
 void Func0495 object#(0x495) ()
@@ -44650,7 +44336,6 @@ void Func0495 object#(0x495) ()
 	}
 	message("\"Leaving so soon?\"*");
 	say();
-	return;
 }
 
 // externs
@@ -44971,7 +44656,6 @@ void Func0496 object#(0x496) ()
 		message("! And good luck to thee!\"*");
 		say();
 	}
-	return;
 }
 
 // externs
@@ -45244,7 +44928,6 @@ void Func0497 object#(0x497) ()
 			UI_item_say(0xFF69, var0009);
 		}
 	}
-	return;
 }
 
 // externs
@@ -45493,7 +45176,6 @@ void Func0498 object#(0x498) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -45723,7 +45405,6 @@ void Func0499 object#(0x499) ()
 			Func092E(0xFF67);
 		}
 	}
-	return;
 }
 
 // externs
@@ -46017,7 +45698,6 @@ void Func049A object#(0x49A) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -46148,7 +45828,6 @@ void Func049B object#(0x49B) ()
 	{
 		Func092E(0xFF65);
 	}
-	return;
 }
 
 // externs
@@ -46378,7 +46057,6 @@ void Func049C object#(0x49C) ()
 	{
 		Func092E(0xFF64);
 	}
-	return;
 }
 
 // externs
@@ -46546,7 +46224,6 @@ void Func049D object#(0x49D) ()
 	{
 		Func092E(0xFF63);
 	}
-	return;
 }
 
 // externs
@@ -46658,7 +46335,6 @@ void Func049E object#(0x49E) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -46763,7 +46439,6 @@ void Func049F object#(0x49F) ()
 	{
 		Func092E(0xFF61);
 	}
-	return;
 }
 
 // externs
@@ -46939,7 +46614,6 @@ void Func04A0 object#(0x4A0) ()
 	{
 		Func092E(0xFF60);
 	}
-	return;
 }
 
 // externs
@@ -47111,7 +46785,6 @@ void Func04A1 object#(0x4A1) ()
 	{
 		Func092E(0xFF5F);
 	}
-	return;
 }
 
 // externs
@@ -47261,7 +46934,6 @@ void Func04A2 object#(0x4A2) ()
 	{
 		Func092E(0xFF5E);
 	}
-	return;
 }
 
 // externs
@@ -47618,7 +47290,6 @@ void Func04A3 object#(0x4A3) ()
 	{
 		Func092E(0xFF5D);
 	}
-	return;
 }
 
 // externs
@@ -47815,7 +47486,6 @@ void Func04A4 object#(0x4A4) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -47989,7 +47659,6 @@ void Func04A5 object#(0x4A5) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -48243,7 +47912,6 @@ labelFunc04A6_02F6:
 	{
 		Func092E(0xFF5A);
 	}
-	return;
 }
 
 // externs
@@ -48594,7 +48262,6 @@ void Func04A7 object#(0x4A7) ()
 	{
 		Func092E(0xFF59);
 	}
-	return;
 }
 
 // externs
@@ -48803,7 +48470,6 @@ void Func04A8 object#(0x4A8) ()
 	{
 		Func092E(0xFF58);
 	}
-	return;
 }
 
 // externs
@@ -48941,7 +48607,6 @@ void Func04A9 object#(0x4A9) ()
 	{
 		Func092E(0xFF57);
 	}
-	return;
 }
 
 // externs
@@ -49143,7 +48808,6 @@ void Func04AA object#(0x4AA) ()
 	{
 		Func092E(0xFF56);
 	}
-	return;
 }
 
 // externs
@@ -49455,7 +49119,6 @@ void Func04AB object#(0x4AB) ()
 			Func092E(0xFF55);
 		}
 	}
-	return;
 }
 
 // externs
@@ -49925,7 +49588,6 @@ void Func04AC object#(0x4AC) ()
 	{
 		Func092E(0xFF54);
 	}
-	return;
 }
 
 // externs
@@ -50255,7 +49917,6 @@ void Func04AD object#(0x4AD) ()
 			Func092E(0xFF53);
 		}
 	}
-	return;
 }
 
 // externs
@@ -50484,7 +50145,6 @@ void Func04AE object#(0x4AE) ()
 			Func092E(0xFF52);
 		}
 	}
-	return;
 }
 
 // externs
@@ -50766,7 +50426,6 @@ void Func04AF object#(0x4AF) ()
 			Func092E(0xFF51);
 		}
 	}
-	return;
 }
 
 // externs
@@ -51027,7 +50686,6 @@ labelFunc04B0_0332:
 	{
 		Func092E(0xFF50);
 	}
-	return;
 }
 
 // externs
@@ -51265,7 +50923,6 @@ void Func04B1 object#(0x4B1) ()
 	{
 		Func092E(0xFF4F);
 	}
-	return;
 }
 
 // externs
@@ -51522,7 +51179,6 @@ void Func04B2 object#(0x4B2) ()
 	{
 		Func092E(0xFF4E);
 	}
-	return;
 }
 
 // externs
@@ -51705,7 +51361,6 @@ void Func04B3 object#(0x4B3) ()
 	{
 		Func092E(0xFF4D);
 	}
-	return;
 }
 
 // externs
@@ -51908,7 +51563,6 @@ void Func04B4 object#(0x4B4) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -52060,7 +51714,6 @@ void Func04B5 object#(0x4B5) ()
 	{
 		Func092F(0xFF4B);
 	}
-	return;
 }
 
 // externs
@@ -52203,7 +51856,6 @@ void Func04B6 object#(0x4B6) ()
 	{
 		Func092F(0xFF4A);
 	}
-	return;
 }
 
 // externs
@@ -52444,7 +52096,6 @@ void Func04B7 object#(0x4B7) ()
 	{
 		Func092F(0xFF49);
 	}
-	return;
 }
 
 // externs
@@ -52563,7 +52214,6 @@ void Func04B8 object#(0x4B8) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -52803,7 +52453,6 @@ void Func04B9 object#(0x4B9) ()
 	{
 		Func092F(0xFF47);
 	}
-	return;
 }
 
 // externs
@@ -52985,7 +52634,6 @@ void Func04BA object#(0x4BA) ()
 	{
 		Func092F(0xFF46);
 	}
-	return;
 }
 
 void Func04BB object#(0x4BB) ()
@@ -53065,7 +52713,6 @@ void Func04BB object#(0x4BB) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -53239,7 +52886,6 @@ void Func04BC object#(0x4BC) ()
 	{
 		Func092F(0xFF44);
 	}
-	return;
 }
 
 // externs
@@ -53487,7 +53133,6 @@ void Func04BD object#(0x4BD) ()
 	{
 		Func092F(0xFF43);
 	}
-	return;
 }
 
 // externs
@@ -53643,7 +53288,6 @@ void Func04BE object#(0x4BE) ()
 	{
 		Func092F(0xFF42);
 	}
-	return;
 }
 
 // externs
@@ -53896,7 +53540,6 @@ void Func04BF object#(0x4BF) ()
 	{
 		Func092E(0xFF41);
 	}
-	return;
 }
 
 // externs
@@ -54045,7 +53688,6 @@ void Func04C0 object#(0x4C0) ()
 	{
 		Func092E(0xFF40);
 	}
-	return;
 }
 
 // externs
@@ -54191,7 +53833,6 @@ void Func04C1 object#(0x4C1) ()
 	{
 		Func092E(0xFF3F);
 	}
-	return;
 }
 
 // externs
@@ -54463,7 +54104,6 @@ void Func04C2 object#(0x4C2) ()
 		}
 		UI_item_say(0xFF3E, var000C);
 	}
-	return;
 }
 
 // externs
@@ -54762,7 +54402,6 @@ void Func04C3 object#(0x4C3) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -55040,7 +54679,6 @@ void Func04C4 object#(0x4C4) ()
 	{
 		Func092E(0xFF3C);
 	}
-	return;
 }
 
 // externs
@@ -55188,7 +54826,6 @@ void Func04C5 object#(0x4C5) ()
 	{
 		Func092F(0xFF3B);
 	}
-	return;
 }
 
 // externs
@@ -55412,7 +55049,6 @@ void Func04C6 object#(0x4C6) ()
 	{
 		Func092E(0xFF3A);
 	}
-	return;
 }
 
 // externs
@@ -55740,7 +55376,6 @@ void Func04C7 object#(0x4C7) ()
 	{
 		Func092E(0xFF39);
 	}
-	return;
 }
 
 // externs
@@ -56004,7 +55639,6 @@ void Func04C8 object#(0x4C8) ()
 	{
 		Func092E(0xFF38);
 	}
-	return;
 }
 
 // externs
@@ -56161,7 +55795,6 @@ void Func04C9 object#(0x4C9) ()
 	{
 		Func092E(0xFF37);
 	}
-	return;
 }
 
 // externs
@@ -56332,7 +55965,6 @@ void Func04CA object#(0x4CA) ()
 	{
 		Func092E(0xFF36);
 	}
-	return;
 }
 
 // externs
@@ -56503,7 +56135,6 @@ void Func04CB object#(0x4CB) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -56650,7 +56281,6 @@ void Func04CC object#(0x4CC) ()
 	{
 		Func092E(0xFF34);
 	}
-	return;
 }
 
 // externs
@@ -56826,7 +56456,6 @@ void Func04CD object#(0x4CD) ()
 		}
 		UI_item_say(0xFF33, var0005);
 	}
-	return;
 }
 
 // externs
@@ -56994,7 +56623,6 @@ void Func04CE object#(0x4CE) ()
 			UI_item_say(0xFF32, var0004);
 		}
 	}
-	return;
 }
 
 // externs
@@ -57239,7 +56867,6 @@ void Func04CF object#(0x4CF) ()
 		}
 		UI_item_say(0xFF31, var000D);
 	}
-	return;
 }
 
 // externs
@@ -57390,7 +57017,6 @@ void Func04D0 object#(0x4D0) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -57569,7 +57195,6 @@ void Func04D1 object#(0x4D1) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -57738,7 +57363,6 @@ void Func04D2 object#(0x4D2) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -57886,7 +57510,6 @@ void Func04D3 object#(0x4D3) ()
 	{
 		Func092F(0xFF2D);
 	}
-	return;
 }
 
 // externs
@@ -58147,7 +57770,6 @@ void Func04D4 object#(0x4D4) ()
 	{
 		Func092E(0xFF2C);
 	}
-	return;
 }
 
 // externs
@@ -58261,7 +57883,6 @@ void Func04D5 object#(0x4D5) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -58377,7 +57998,6 @@ void Func04D6 object#(0x4D6) ()
 	{
 		Func092F(0xFF2A);
 	}
-	return;
 }
 
 // externs
@@ -58557,7 +58177,6 @@ void Func04D7 object#(0x4D7) ()
 	{
 		Func092F(0xFF29);
 	}
-	return;
 }
 
 // externs
@@ -58726,7 +58345,6 @@ void Func04D8 object#(0x4D8) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -58868,7 +58486,6 @@ void Func04D9 object#(0x4D9) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -59000,7 +58617,6 @@ void Func04DA object#(0x4DA) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -59106,7 +58722,6 @@ void Func04DB object#(0x4DB) ()
 	{
 		Func092F(0xFF25);
 	}
-	return;
 }
 
 // externs
@@ -59342,7 +58957,6 @@ void Func04DC object#(0x4DC) ()
 	{
 		Func092E(0xFF24);
 	}
-	return;
 }
 
 // externs
@@ -59579,7 +59193,6 @@ void Func04DD object#(0x4DD) ()
 		message("Wench waves goodbye.*");
 		say();
 	}
-	return;
 }
 
 // externs
@@ -59802,7 +59415,6 @@ void Func04DE object#(0x4DE) ()
 			Func092E(0xFF22);
 		}
 	}
-	return;
 }
 
 // externs
@@ -60025,7 +59637,6 @@ void Func04DF object#(0x4DF) ()
 		message("Martine waves goodbye.*");
 		say();
 	}
-	return;
 }
 
 // externs
@@ -60238,7 +59849,6 @@ void Func04E0 object#(0x4E0) ()
 	message(var0005);
 	message(".\"*");
 	say();
-	return;
 }
 
 // externs
@@ -60438,7 +60048,6 @@ void Func04E1 object#(0x4E1) ()
 			abort;
 		}
 	}
-	return;
 }
 
 // externs
@@ -60673,7 +60282,6 @@ void Func04E2 object#(0x4E2) ()
 			Func092E(0xFF1E);
 		}
 	}
-	return;
 }
 
 // externs
@@ -60872,7 +60480,6 @@ void Func04E3 object#(0x4E3) ()
 			Func092E(0xFF1D);
 		}
 	}
-	return;
 }
 
 // externs
@@ -60996,7 +60603,6 @@ void Func04E4 object#(0x4E4) ()
 			Func092E(0xFF1C);
 		}
 	}
-	return;
 }
 
 // externs
@@ -61257,7 +60863,6 @@ void Func04E5 object#(0x4E5) ()
 			Func092E(0xFF1B);
 		}
 	}
-	return;
 }
 
 // externs
@@ -61451,7 +61056,6 @@ void Func04E6 object#(0x4E6) ()
 	{
 		Func092E(0xFF1A);
 	}
-	return;
 }
 
 // externs
@@ -61807,7 +61411,6 @@ void Func04E7 object#(0x4E7) ()
 	{
 		Func092E(0xFF19);
 	}
-	return;
 }
 
 // externs
@@ -61948,7 +61551,6 @@ void Func04E8 object#(0x4E8) ()
 			Func092E(0xFF18);
 		}
 	}
-	return;
 }
 
 // externs
@@ -62104,7 +61706,6 @@ void Func04E9 object#(0x4E9) ()
 			Func092E(0xFF17);
 		}
 	}
-	return;
 }
 
 // externs
@@ -62153,7 +61754,6 @@ void Func04EA object#(0x4EA) ()
 			Func092E(0xFF16);
 		}
 	}
-	return;
 }
 
 // externs
@@ -62202,7 +61802,6 @@ void Func04EB object#(0x4EB) ()
 			Func092E(0xFF15);
 		}
 	}
-	return;
 }
 
 // externs
@@ -62300,7 +61899,6 @@ void Func04EC object#(0x4EC) ()
 	{
 		Func092E(0xFF14);
 	}
-	return;
 }
 
 // externs
@@ -62546,7 +62144,6 @@ void Func04ED object#(0x4ED) ()
 	{
 		Func092E(0xFF13);
 	}
-	return;
 }
 
 // externs
@@ -62679,7 +62276,6 @@ void Func04EE object#(0x4EE) ()
 	{
 		Func092E(0xFF12);
 	}
-	return;
 }
 
 // externs
@@ -62876,7 +62472,6 @@ void Func04EF object#(0x4EF) ()
 		message(".\"*");
 		say();
 	}
-	return;
 }
 
 // externs
@@ -63101,7 +62696,6 @@ void Func04F0 object#(0x4F0) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -63352,7 +62946,6 @@ void Func04F1 object#(0x4F1) ()
 	}
 	message("Papa smiles and waves.*");
 	say();
-	return;
 }
 
 // externs
@@ -63565,7 +63158,6 @@ void Func04F2 object#(0x4F2) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -63783,7 +63375,6 @@ void Func04F3 object#(0x4F3) ()
 		message(".\"*");
 		say();
 	}
-	return;
 }
 
 // externs
@@ -63917,7 +63508,6 @@ void Func04F4 object#(0x4F4) ()
 	{
 		Func085B();
 	}
-	return;
 }
 
 // externs
@@ -64094,7 +63684,6 @@ void Func04F5 object#(0x4F5) ()
 	{
 		Func092E(0xFF0B);
 	}
-	return;
 }
 
 // externs
@@ -64334,7 +63923,6 @@ void Func04F6 object#(0x4F6) ()
 	{
 		Func092E(0xFF0A);
 	}
-	return;
 }
 
 // externs
@@ -64650,7 +64238,6 @@ void Func04F7 object#(0x4F7) ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -64980,7 +64567,6 @@ void Func04F8 object#(0x4F8) ()
 	{
 		Func092E(0xFF08);
 	}
-	return;
 }
 
 // externs
@@ -65280,7 +64866,6 @@ void Func04F9 object#(0x4F9) ()
 	{
 		Func092E(0xFF07);
 	}
-	return;
 }
 
 // externs
@@ -65706,7 +65291,6 @@ void Func04FA object#(0x4FA) ()
 	{
 		Func092E(0xFF06);
 	}
-	return;
 }
 
 // externs
@@ -65972,7 +65556,6 @@ void Func04FB object#(0x4FB) ()
 	{
 		Func092E(0xFF05);
 	}
-	return;
 }
 
 // externs
@@ -66116,7 +65699,6 @@ void Func04FC object#(0x4FC) ()
 	{
 		Func08A5();
 	}
-	return;
 }
 
 // externs
@@ -66271,7 +65853,6 @@ void Func04FD object#(0x4FD) ()
 	{
 		Func0864();
 	}
-	return;
 }
 
 // externs
@@ -66572,7 +66153,6 @@ void Func04FE object#(0x4FE) ()
 	}
 	message("\"Fare thee well, Avatar.\"*");
 	say();
-	return;
 }
 
 // externs
@@ -66735,7 +66315,6 @@ void Func04FF object#(0x4FF) ()
 	}
 	message("\"'Bye!\"*");
 	say();
-	return;
 }
 
 // externs
@@ -66918,7 +66497,6 @@ void Func0500 object#(0x500) ()
 	message("\"'Xorinia' always welcomes the exchange of information. Farewell.\"*");
 	say();
 	UI_set_schedule_type(item, 0x0014);
-	return;
 }
 
 // externs
@@ -66927,7 +66505,6 @@ extern void Func0326 shape#(0x326) ();
 void Func0501 object#(0x501) ()
 {
 	item->Func0326();
-	return;
 }
 
 // externs
@@ -66936,7 +66513,6 @@ extern void Func0326 shape#(0x326) ();
 void Func0502 object#(0x502) ()
 {
 	item->Func0326();
-	return;
 }
 
 // externs
@@ -66945,7 +66521,6 @@ extern void Func03B2 shape#(0x3B2) ();
 void Func0506 object#(0x506) ()
 {
 	item->Func03B2();
-	return;
 }
 
 // externs
@@ -66954,7 +66529,6 @@ extern void Func03B2 shape#(0x3B2) ();
 void Func0507 object#(0x507) ()
 {
 	item->Func03B2();
-	return;
 }
 
 // externs
@@ -66963,7 +66537,6 @@ extern void Func03B2 shape#(0x3B2) ();
 void Func0508 object#(0x508) ()
 {
 	item->Func03B2();
-	return;
 }
 
 // externs
@@ -66972,7 +66545,6 @@ extern void Func03B2 shape#(0x3B2) ();
 void Func0509 object#(0x509) ()
 {
 	item->Func03B2();
-	return;
 }
 
 // externs
@@ -66981,7 +66553,6 @@ extern void Func03B2 shape#(0x3B2) ();
 void Func050A object#(0x50A) ()
 {
 	item->Func03B2();
-	return;
 }
 
 // externs
@@ -66990,7 +66561,6 @@ extern void Func03B2 shape#(0x3B2) ();
 void Func050D object#(0x50D) ()
 {
 	item->Func03B2();
-	return;
 }
 
 void Func0600 object#(0x600) ()
@@ -67028,7 +66598,6 @@ void Func0600 object#(0x600) ()
 			call Func0600;
 		};
 	}
-	return;
 }
 
 // externs
@@ -67061,7 +66630,6 @@ void Func0603 object#(0x603) ()
 		Func0835(item, 0x0001, 0x0001);
 	}
 	Func08FE("@Thou dost not look well.@");
-	return;
 }
 
 void Func0606 object#(0x606) ()
@@ -67077,7 +66645,6 @@ void Func0606 object#(0x606) ()
 	var0002 = (var0002 - 0x0004);
 	UI_sprite_effect(0x0009, var0001, var0002, 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_play_sound_effect(0x0045);
-	return;
 }
 
 void Func0607 object#(0x607) ()
@@ -67086,7 +66653,6 @@ void Func0607 object#(0x607) ()
 
 	var0000 = (UI_get_lift(item) + 0x0001);
 	UI_set_lift(item, var0000);
-	return;
 }
 
 // externs
@@ -67169,7 +66735,6 @@ void Func0608 object#(0x608) ()
 		}
 		Func0911(0x2710);
 	}
-	return;
 }
 
 void Func0609 object#(0x609) ()
@@ -67178,7 +66743,6 @@ void Func0609 object#(0x609) ()
 
 	var0000 = (UI_get_lift(item) - 0x0001);
 	UI_set_lift(item, var0000);
-	return;
 }
 
 // externs
@@ -67327,7 +66891,6 @@ void Func060A object#(0x60A) ()
 			Func0904(0xFF18, (("@It is " + var0006) + ".@"));
 		}
 	}
-	return;
 }
 
 // externs
@@ -67352,7 +66915,6 @@ void Func060B object#(0x60B) ()
 			gflags[0x0020] = true;
 		}
 	}
-	return;
 }
 
 // externs
@@ -67490,7 +67052,6 @@ void Func060C object#(0x60C) ()
 			}
 		}
 	}
-	return;
 }
 
 void Func060D object#(0x60D) ()
@@ -67560,7 +67121,6 @@ void Func060D object#(0x60D) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -67732,7 +67292,6 @@ void Func060E object#(0x60E) ()
 			UI_restart_game();
 		}
 	}
-	return;
 }
 
 void Func060F object#(0x60F) ()
@@ -67745,7 +67304,6 @@ void Func060F object#(0x60F) ()
 	UI_play_sound_effect(0x003E);
 	UI_lightning();
 	var0001 = UI_apply_damage(UI_get_npc_prop(item, 0x0000), 0x000C, 0x0003, item);
-	return;
 }
 
 // externs
@@ -67836,7 +67394,6 @@ void Func0610 object#(0x610) ()
 	gflags[0x003A] = false;
 	UI_clear_item_flag(0xFE9C, 0x0001);
 	UI_set_schedule_type(0xFE9C, 0x001F);
-	return;
 }
 
 void Func0611 object#(0x611) ()
@@ -67865,13 +67422,11 @@ void Func0611 object#(0x611) ()
 	{
 		var0004 = UI_update_last_created(var0003);
 	}
-	return;
 }
 
 void Func0612 object#(0x612) ()
 {
 	UI_mark_virtue_stone(item);
-	return;
 }
 
 void Func0613 object#(0x613) ()
@@ -67888,7 +67443,6 @@ void Func0613 object#(0x613) ()
 		UI_set_schedule_type(var0003, 0x001F);
 	}
 	UI_recall_virtue_stone(item);
-	return;
 }
 
 void Func0614 object#(0x614) ()
@@ -68067,7 +67621,6 @@ void Func0614 object#(0x614) ()
 	}
 	message("\"Ho ho ha ha heh heh heh!\"");
 	say();
-	return;
 }
 
 void Func0615 object#(0x615) ()
@@ -68077,7 +67630,6 @@ void Func0615 object#(0x615) ()
 		UI_set_item_shape(item, 0x02F2);
 		UI_set_item_frame(item, 0x0000);
 	}
-	return;
 }
 
 void Func0617 object#(0x617) ()
@@ -68116,7 +67668,6 @@ void Func0617 object#(0x617) ()
 			gflags[0x01CE] = true;
 		}
 	}
-	return;
 }
 
 // externs
@@ -68139,20 +67690,17 @@ void Func0618 object#(0x618) ()
 			call Func061A;
 		};
 	}
-	return;
 }
 
 void Func0619 object#(0x619) ()
 {
 	UI_halt_scheduled(item);
 	UI_clear_item_flag(item, 0x0001);
-	return;
 }
 
 void Func061A object#(0x61A) ()
 {
 	(@0x70)();
-	return;
 }
 
 // externs
@@ -68174,7 +67722,6 @@ void Func061B object#(0x61B) ()
 			call Func0269;
 		};
 	}
-	return;
 }
 
 // externs
@@ -68218,7 +67765,6 @@ void Func061C object#(0x61C) ()
 		}
 		var0001 = UI_execute_usecode_array(item, var0000);
 	}
-	return;
 }
 
 // externs
@@ -68240,7 +67786,6 @@ void Func061D object#(0x61D) ()
 			call Func0269;
 		};
 	}
-	return;
 }
 
 // externs
@@ -68261,19 +67806,16 @@ void Func061E object#(0x61E) ()
 		var0002 = 0x0001;
 		Func0804(var0000, var0001, var0002);
 	}
-	return;
 }
 
 void Func061F object#(0x61F) ()
 {
 	UI_clear_item_flag(item, 0x000F);
-	return;
 }
 
 void Func0620 object#(0x620) ()
 {
 	UI_set_item_flag(item, 0x000F);
-	return;
 }
 
 // externs
@@ -68616,7 +68158,6 @@ void Func0621 object#(0x621) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -68720,7 +68261,6 @@ void Func0622 object#(0x622) ()
 		};
 		UI_advance_time(var0009);
 	}
-	return;
 }
 
 // externs
@@ -68763,7 +68303,6 @@ void Func0623 object#(0x623) ()
 			item->Func0624();
 		}
 	}
-	return;
 }
 
 // externs
@@ -68808,7 +68347,6 @@ void Func0624 object#(0x624) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -68981,7 +68519,6 @@ void Func0625 object#(0x625) ()
 			call Func063C;
 		};
 	}
-	return;
 }
 
 // externs
@@ -69056,7 +68593,6 @@ void Func0626 object#(0x626) ()
 		return;
 	}
 	UI_remove_item(item);
-	return;
 }
 
 void Func0627 object#(0x627) ()
@@ -69095,7 +68631,6 @@ void Func0627 object#(0x627) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -69159,7 +68694,6 @@ void Func0628 object#(0x628) ()
 			call Func0628;
 		};
 	}
-	return;
 }
 
 // externs
@@ -69219,7 +68753,6 @@ void Func0629 object#(0x629) ()
 			call Func0629;
 		};
 	}
-	return;
 }
 
 // externs
@@ -69305,7 +68838,6 @@ void Func062C object#(0x62C) ()
 			return;
 		}
 	}
-	return;
 }
 
 // externs
@@ -69382,7 +68914,6 @@ void Func062D object#(0x62D) ()
 			Func08FF(var0009);
 		}
 	}
-	return;
 }
 
 // externs
@@ -69459,7 +68990,6 @@ void Func062E object#(0x62E) ()
 			Func08FF(var0009);
 		}
 	}
-	return;
 }
 
 // externs
@@ -69640,7 +69170,6 @@ void Func0631 object#(0x631) ()
 	{
 		Func083F(item, true);
 	}
-	return;
 }
 
 void Func0632 object#(0x632) ()
@@ -69670,7 +69199,6 @@ void Func0632 object#(0x632) ()
 	{
 		UI_remove_npc(UI_get_npc_object(0xFF92));
 	}
-	return;
 }
 
 // externs
@@ -69711,7 +69239,6 @@ void Func0633 object#(0x633) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -69764,7 +69291,6 @@ void Func0634 object#(0x634) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -69823,7 +69349,6 @@ void Func0635 object#(0x635) ()
 			}
 		}
 	}
-	return;
 }
 
 void Func0636 object#(0x636) ()
@@ -69836,14 +69361,12 @@ void Func0636 object#(0x636) ()
 		var0000 = UI_get_object_position(item);
 		UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	}
-	return;
 }
 
 void Func0637 object#(0x637) ()
 {
 	UI_clear_item_flag(item, 0x001A);
 	UI_set_camera(0xFE9C);
-	return;
 }
 
 // externs
@@ -70479,7 +70002,6 @@ void Func0638 object#(0x638) ()
 		message("    The book goes on to describe certain methods of manipulation, and save for the prohibitively large amounts of power required to effect even the weakest of moongates, the logic seems sound...");
 		say();
 	}
-	return;
 }
 
 // externs
@@ -70514,7 +70036,6 @@ void Func0639 object#(0x639) ()
 		UI_set_schedule_type(item, 0x000F);
 		UI_move_object(item, [0x05AA, 0x0500, 0x0000]);
 	}
-	return;
 }
 
 // externs
@@ -70551,7 +70072,6 @@ void Func063A object#(0x63A) ()
 			Func08FE("@Avatar?!@");
 		}
 	}
-	return;
 }
 
 void Func063C object#(0x63C) ()
@@ -70569,7 +70089,6 @@ void Func063C object#(0x63C) ()
 			frame 6;
 		};
 	}
-	return;
 }
 
 // externs
@@ -70603,7 +70122,6 @@ void Func063D object#(0x63D) ()
 	{
 		UI_item_say(item, "@Oink@");
 	}
-	return;
 }
 
 void Func063E object#(0x63E) ()
@@ -70670,7 +70188,6 @@ void Func063E object#(0x63E) ()
 		UI_set_schedule_type(0xFFE9, 0x0000);
 		UI_set_item_flag(item, 0x0019);
 	}
-	return;
 }
 
 //externs
@@ -70690,7 +70207,6 @@ void Func063F object#(0x63F) ()
 		call Func0636;
 	};
 	UI_fade_palette(0x000C, 0x0001, 0x0000);
-	return;
 }
 
 // externs
@@ -70747,7 +70263,6 @@ void Func0640 object#(0x640) ()
 			Func08FD(0x003C);
 		}
 	}
-	return;
 }
 
 // externs
@@ -70797,7 +70312,6 @@ void Func0641 object#(0x641) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -70857,7 +70371,6 @@ void Func0642 object#(0x642) ()
 			Func08FD(0x003C);
 		}
 	}
-	return;
 }
 
 // externs
@@ -70897,7 +70410,6 @@ void Func0643 object#(0x643) ()
 		var0001 = UI_get_object_position(item);
 		UI_sprite_effect(0x000C, (var0001[0x0001] - 0x0002), (var0001[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 	}
-	return;
 }
 
 // externs
@@ -70936,7 +70448,6 @@ void Func0644 object#(0x644) ()
 	{
 		UI_cause_light(0x006E);
 	}
-	return;
 }
 
 // externs
@@ -71001,7 +70512,6 @@ void Func0645 object#(0x645) ()
 		var0005 = [0x03A8, 0x047A, 0x0000];
 		UI_move_object(0xFE9B, var0005);
 	}
-	return;
 }
 
 // externs
@@ -71063,7 +70573,6 @@ void Func0646 object#(0x646) ()
 			Func08FD(0x003C);
 		}
 	}
-	return;
 }
 
 // externs
@@ -71096,7 +70605,6 @@ void Func0647 object#(0x647) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -71155,7 +70663,6 @@ void Func0648 object#(0x648) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -71221,7 +70728,6 @@ void Func0649 object#(0x649) ()
 		UI_clear_item_flag(item, 0x0008);
 		UI_clear_item_flag(item, 0x0007);
 	}
-	return;
 }
 
 // externs
@@ -71297,7 +70803,6 @@ void Func064A object#(0x64A) ()
 		var000C = UI_get_object_position(item);
 		UI_sprite_effect(0x0010, var000C[0x0001], var000C[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	}
-	return;
 }
 
 // externs
@@ -71359,7 +70864,6 @@ void Func064B object#(0x64B) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -71421,7 +70925,6 @@ void Func064C object#(0x64C) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -71460,7 +70963,6 @@ void Func064D object#(0x64D) ()
 	{
 		UI_cause_light(0x01F4);
 	}
-	return;
 }
 
 // externs
@@ -71525,7 +71027,6 @@ void Func064E object#(0x64E) ()
 		}
 		UI_item_say(item, (var0005 + var0004));
 	}
-	return;
 }
 
 // externs
@@ -71581,7 +71082,6 @@ void Func064F object#(0x64F) ()
 		UI_halt_scheduled(item);
 		UI_clear_item_flag(item, 0x0001);
 	}
-	return;
 }
 
 // externs
@@ -71651,7 +71151,6 @@ void Func0650 object#(0x650) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -71720,7 +71219,6 @@ void Func0651 object#(0x651) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -71767,7 +71265,6 @@ void Func0652 object#(0x652) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -71806,7 +71303,6 @@ void Func0653 object#(0x653) ()
 	{
 		UI_cause_light(0x1388);
 	}
-	return;
 }
 
 // externs
@@ -71859,7 +71355,6 @@ void Func0654 object#(0x654) ()
 			UI_clear_item_flag(var0005, 0x0007);
 		}
 	}
-	return;
 }
 
 // externs
@@ -71914,7 +71409,6 @@ void Func0655 object#(0x655) ()
 	{
 		UI_set_item_flag(item, 0x0009);
 	}
-	return;
 }
 
 // externs
@@ -71985,7 +71479,6 @@ void Func0656 object#(0x656) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -72028,7 +71521,6 @@ void Func0657 object#(0x657) ()
 		var0001 = UI_get_object_position(item);
 		UI_wizard_eye(0x002D, 0x00C8);
 	}
-	return;
 }
 
 // externs
@@ -72073,7 +71565,6 @@ void Func0658 object#(0x658) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -72137,7 +71628,6 @@ void Func0659 object#(0x659) ()
 			var0002 = UI_set_npc_prop(item, 0x0003, var0005);
 		}
 	}
-	return;
 }
 
 // externs
@@ -72186,7 +71676,6 @@ void Func065A object#(0x65A) ()
 			var0003 = UI_summon(var0002, false);
 		}
 	}
-	return;
 }
 
 // externs
@@ -72240,7 +71729,6 @@ void Func065B object#(0x65B) ()
 			UI_set_item_flag(var0005, 0x0009);
 		}
 	}
-	return;
 }
 
 // externs
@@ -72284,7 +71772,6 @@ void Func065C object#(0x65C) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -72324,7 +71811,6 @@ void Func065D object#(0x65D) ()
 	{
 		var0000 = UI_display_map();
 	}
-	return;
 }
 
 // externs
@@ -72368,7 +71854,6 @@ void Func065E object#(0x65E) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -72412,7 +71897,6 @@ void Func065F object#(0x65F) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -72484,7 +71968,6 @@ void Func0660 object#(0x660) ()
 			var0008 = UI_summon(var0007, false);
 		}
 	}
-	return;
 }
 
 // externs
@@ -72532,7 +72015,6 @@ void Func0661 object#(0x661) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -72581,7 +72063,6 @@ void Func0662 object#(0x662) ()
 			call Func0606;
 		};
 	}
-	return;
 }
 
 // externs
@@ -72652,7 +72133,6 @@ void Func0663 object#(0x663) ()
 	{
 		UI_set_item_flag(item, 0x0003);
 	}
-	return;
 }
 
 // externs
@@ -72697,7 +72177,6 @@ void Func0664 object#(0x664) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -72789,7 +72268,6 @@ void Func0665 object#(0x665) ()
 	{
 		UI_clear_item_flag(item, 0x0000);
 	}
-	return;
 }
 
 // externs
@@ -72880,7 +72358,6 @@ void Func0666 object#(0x666) ()
 		gflags[0x01BB] = false;
 		gflags[0x01B7] = false;
 	}
-	return;
 }
 
 // externs
@@ -72949,7 +72426,6 @@ void Func0667 object#(0x667) ()
 		var0007 = (var0005 - 0x0003);
 		UI_set_item_frame(item, var0007);
 	}
-	return;
 }
 
 // externs
@@ -72993,7 +72469,6 @@ void Func0668 object#(0x668) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -73070,7 +72545,6 @@ void Func0669 object#(0x669) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -73129,7 +72603,6 @@ void Func066A object#(0x66A) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -73175,7 +72648,6 @@ void Func066B object#(0x66B) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -73226,7 +72698,6 @@ void Func066C object#(0x66C) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -73277,7 +72748,6 @@ void Func066D object#(0x66D) ()
 	{
 		UI_set_item_flag(item, 0x0000);
 	}
-	return;
 }
 
 // externs
@@ -73342,7 +72812,6 @@ void Func066E object#(0x66E) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -73405,7 +72874,6 @@ void Func066F object#(0x66F) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -73467,7 +72935,6 @@ void Func0670 object#(0x670) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -73515,7 +72982,6 @@ void Func0671 object#(0x671) ()
 	{
 		var0002 = UI_clone(item);
 	}
-	return;
 }
 
 // externs
@@ -73622,7 +73088,6 @@ void Func0672 object#(0x672) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -73699,7 +73164,6 @@ void Func0673 object#(0x673) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -73780,7 +73244,6 @@ void Func0674 object#(0x674) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -73838,7 +73301,6 @@ void Func0675 object#(0x675) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -73896,7 +73358,6 @@ void Func0676 object#(0x676) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -74060,7 +73521,6 @@ void Func0677 object#(0x677) ()
 		}
 		UI_earthquake((var0003 * 0x0003));
 	}
-	return;
 }
 
 // externs
@@ -74117,7 +73577,6 @@ void Func0678 object#(0x678) ()
 		UI_set_item_shape(item, 0x0285);
 		var0005 = UI_set_item_quantity(item, var0005);
 	}
-	return;
 }
 
 // externs
@@ -74186,7 +73645,6 @@ void Func0679 object#(0x679) ()
 			UI_kill_npc(item);
 		}
 	}
-	return;
 }
 
 // externs
@@ -74268,7 +73726,6 @@ void Func067A object#(0x67A) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -74343,7 +73800,6 @@ void Func067B object#(0x67B) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -74389,7 +73845,6 @@ void Func067C object#(0x67C) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -74469,7 +73924,6 @@ void Func067D object#(0x67D) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -74530,7 +73984,6 @@ void Func067E object#(0x67E) ()
 	{
 		UI_set_item_flag(item, 0x000C);
 	}
-	return;
 }
 
 // externs
@@ -74581,7 +74034,6 @@ void Func067F object#(0x67F) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -74644,7 +74096,6 @@ void Func0680 object#(0x680) ()
 		UI_armageddon();
 		gflags[0x001E] = true;
 	}
-	return;
 }
 
 // externs
@@ -74687,7 +74138,6 @@ void Func0681 object#(0x681) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -74781,7 +74231,6 @@ void Func0682 object#(0x682) ()
 			Func0936(item, 0x0032);
 		}
 	}
-	return;
 }
 
 // externs
@@ -74844,7 +74293,6 @@ void Func0683 object#(0x683) ()
 	{
 		UI_set_item_flag(item, 0x0000);
 	}
-	return;
 }
 
 // externs
@@ -74917,7 +74365,6 @@ void Func0684 object#(0x684) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -74996,7 +74443,6 @@ void Func0685 object#(0x685) ()
 			var0007 = (var0007 - 0x0001);
 		}
 	}
-	return;
 }
 
 // externs
@@ -75047,7 +74493,6 @@ void Func0686 object#(0x686) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -75085,7 +74530,6 @@ void Func0687 object#(0x687) ()
 	{
 		UI_stop_time(0x0064);
 	}
-	return;
 }
 
 // externs
@@ -75098,7 +74542,6 @@ void Func0688 object#(0x688) ()
 		Func093F(item, 0x000C);
 		UI_clear_item_flag(item, 0x000F);
 	}
-	return;
 }
 
 // externs
@@ -75116,14 +74559,12 @@ void Func0689 object#(0x689) ()
 		Func0936(item, (var0001 - 0x0001));
 		Func0936(item, 0x0032);
 	}
-	return;
 }
 
 void Func068A object#(0x68A) ()
 {
 	gflags[0x02ED] = false;
 	UI_set_weather(0x0000);
-	return;
 }
 
 // externs
@@ -75141,7 +74582,6 @@ void Func068B object#(0x68B) ()
 		var0001 = Func0837(item, var0000, 0x0000, 0x0000, 0x0001);
 		Func0838(item);
 	}
-	return;
 }
 
 // externs
@@ -75159,7 +74599,6 @@ void Func068C object#(0x68C) ()
 		var0001 = Func0837(item, var0000, 0x0000, 0xFFFF, 0x0002);
 		Func0838(item);
 	}
-	return;
 }
 
 // externs
@@ -75190,7 +74629,6 @@ void Func068D object#(0x68D) ()
 	{
 		UI_item_say(UI_get_npc_object(0xFE9C), "@There's not enough water.@");
 	}
-	return;
 }
 
 // externs
@@ -75222,7 +74660,6 @@ void Func068E object#(0x68E) ()
 			};
 		};
 	}
-	return;
 }
 
 void Func068F object#(0x68F) ()
@@ -75249,7 +74686,6 @@ void Func068F object#(0x68F) ()
 	{
 		frame var0000;
 	};
-	return;
 }
 
 // externs
@@ -75292,7 +74728,6 @@ void Func0690 object#(0x690) ()
 		event = 0x0001;
 		item->Func0691();
 	}
-	return;
 }
 
 void Func0691 object#(0x691) ()
@@ -75362,7 +74797,6 @@ void Func0691 object#(0x691) ()
 			UI_remove_npc_face(0xFE9C);
 		}
 	}
-	return;
 }
 
 void Func0692 object#(0x692) ()
@@ -75391,7 +74825,6 @@ void Func0692 object#(0x692) ()
 			UI_flash_mouse(0x0005);
 		}
 	}
-	return;
 }
 
 void Func0693 object#(0x693) ()
@@ -75404,7 +74837,6 @@ void Func0693 object#(0x693) ()
 	var0001[0x0002] = (var0000[0x0002] - 0x0004);
 	UI_sprite_effect(0x0009, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_play_sound_effect(0x002E);
-	return;
 }
 
 void Func0694 object#(0x694) ()
@@ -75469,7 +74901,6 @@ void Func0694 object#(0x694) ()
 		};
 	}
 	UI_play_sound_effect(0x0028);
-	return;
 }
 
 void Func0695 object#(0x695) ()
@@ -75522,7 +74953,6 @@ void Func0695 object#(0x695) ()
 		};
 		UI_play_sound_effect(0x0028);
 	}
-	return;
 }
 
 // externs
@@ -75770,7 +75200,6 @@ void Func0696 object#(0x696) ()
 		gflags[0x032A] = true;
 		return;
 	}
-	return;
 }
 
 // externs
@@ -75962,7 +75391,6 @@ void Func0697 object#(0x697) ()
 			};
 		}
 	}
-	return;
 }
 
 void Func0698 object#(0x698) ()
@@ -76010,7 +75438,6 @@ void Func0698 object#(0x698) ()
 			call Func0696;
 		};
 	}
-	return;
 }
 
 // externs
@@ -76127,7 +75554,6 @@ void Func0699 object#(0x699) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -76170,7 +75596,6 @@ void Func069A object#(0x69A) ()
 		wait 4;
 		call Func069B;
 	};
-	return;
 }
 
 // externs
@@ -76180,7 +75605,6 @@ void Func069B object#(0x69B) ()
 {
 	UI_fade_palette(0x000C, 0x0001, 0x0000);
 	item->Func0699();
-	return;
 }
 
 // externs
@@ -76227,7 +75651,6 @@ void Func069C object#(0x69C) ()
 			frame 18;
 		};
 	}
-	return;
 }
 
 // externs
@@ -76288,7 +75711,6 @@ void Func069D object#(0x69D) ()
 	}
 	var0005 = UI_get_npc_object(0xFE9C);
 	Func0828(var0005, var0001, var0002, 0x0000, 0x069D, var0005, 0x0007);
-	return;
 }
 
 // externs
@@ -76335,7 +75757,6 @@ void Func069E object#(0x69E) ()
 	UI_sprite_effect(0x0011, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_sprite_effect(0x0007, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_play_sound_effect(0x003E);
-	return;
 }
 
 // externs
@@ -76451,7 +75872,6 @@ void Func069F object#(0x69F) ()
 		call Func06A0;
 	};
 	UI_play_sound_effect(0x0043);
-	return;
 }
 
 // externs
@@ -76623,7 +76043,6 @@ void Func06A0 object#(0x6A0) ()
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -76680,7 +76099,6 @@ void Func06A1 object#(0x6A1) ()
 		call Func06F5;
 	};
 	UI_play_sound_effect(0x0044);
-	return;
 }
 
 // externs
@@ -76735,7 +76153,6 @@ void Func06A2 object#(0x6A2) ()
 		call Func06A0;
 	};
 	UI_play_sound_effect(0x0044);
-	return;
 }
 
 // externs
@@ -77160,7 +76577,6 @@ void Func06A3 object#(0x6A3) ()
 			}
 		}
 	}
-	return;
 }
 
 void Func06A4 object#(0x6A4) ()
@@ -77169,7 +76585,6 @@ void Func06A4 object#(0x6A4) ()
 	{
 		gflags[0x003C] = true;
 	}
-	return;
 }
 
 // externs
@@ -77190,7 +76605,6 @@ void Func06A5 object#(0x6A5) ()
 			UI_get_npc_object(0xFF99)->Func0467();
 		}
 	}
-	return;
 }
 
 // externs
@@ -77203,7 +76617,6 @@ void Func06A6 object#(0x6A6) ()
 		Func0911(0x03E8);
 		gflags[0x0000] = true;
 	}
-	return;
 }
 
 // externs
@@ -77216,7 +76629,6 @@ void Func06A7 object#(0x6A7) ()
 		Func0911(0x03E8);
 		gflags[0x0001] = true;
 	}
-	return;
 }
 
 // externs
@@ -77229,7 +76641,6 @@ void Func06A8 object#(0x6A8) ()
 		Func0911(0x03E8);
 		gflags[0x0002] = true;
 	}
-	return;
 }
 
 void Func06A9 object#(0x6A9) ()
@@ -77238,7 +76649,6 @@ void Func06A9 object#(0x6A9) ()
 	{
 		gflags[0x0009] = true;
 	}
-	return;
 }
 
 // externs
@@ -77285,7 +76695,6 @@ void Func06AA object#(0x6AA) ()
 			}
 		}
 	}
-	return;
 }
 
 void Func06AB object#(0x6AB) ()
@@ -77304,7 +76713,6 @@ void Func06AB object#(0x6AB) ()
 			UI_set_schedule_type(var0003, 0x000B);
 		}
 	}
-	return;
 }
 
 void Func06AC object#(0x6AC) ()
@@ -77325,7 +76733,6 @@ void Func06AC object#(0x6AC) ()
 		}
 		gflags[0x0257] = true;
 	}
-	return;
 }
 
 // externs
@@ -77337,7 +76744,6 @@ void Func06AD object#(0x6AD) ()
 	{
 		item->Func02C0();
 	}
-	return;
 }
 
 // externs
@@ -77349,7 +76755,6 @@ void Func06AE object#(0x6AE) ()
 	{
 		UI_get_npc_object(0xFF6B)->Func0495();
 	}
-	return;
 }
 
 // externs
@@ -77383,7 +76788,6 @@ void Func06AF object#(0x6AF) ()
 			}
 		}
 	}
-	return;
 }
 
 void Func06B0 object#(0x6B0) ()
@@ -77405,7 +76809,6 @@ void Func06B0 object#(0x6B0) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -77439,7 +76842,6 @@ void Func06B1 object#(0x6B1) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -77480,7 +76882,6 @@ void Func06B2 object#(0x6B2) ()
 			var0004->Func0379();
 		}
 	}
-	return;
 }
 
 // externs
@@ -77521,7 +76922,6 @@ void Func06B3 object#(0x6B3) ()
 			var0004->Func020E();
 		}
 	}
-	return;
 }
 
 // externs
@@ -77544,7 +76944,6 @@ void Func06B4 object#(0x6B4) ()
 		var0003 = UI_die_roll(0x0001, UI_get_item_quality(item));
 		Func0936(UI_get_npc_object(var0000[var0002]), var0003);
 	}
-	return;
 }
 
 // externs
@@ -77596,7 +76995,6 @@ void Func06B5 object#(0x6B5) ()
 			var0004->Func0178();
 		}
 	}
-	return;
 }
 
 // externs
@@ -77648,7 +77046,6 @@ void Func06B6 object#(0x6B6) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -77667,7 +77064,6 @@ void Func06B7 object#(0x6B7) ()
 		var0001 = UI_die_roll(0x0001, Func092B(var0000));
 		var0000[var0001]->Func060F();
 	}
-	return;
 }
 
 // externs
@@ -77714,7 +77110,6 @@ void Func06B8 object#(0x6B8) ()
 	{
 		Func093F(item, 0x001F);
 	}
-	return;
 }
 
 void Func06B9 object#(0x6B9) ()
@@ -77723,7 +77118,6 @@ void Func06B9 object#(0x6B9) ()
 	{
 		UI_item_say(item, "@Help! Help!@");
 	}
-	return;
 }
 
 // externs
@@ -77814,7 +77208,6 @@ void Func06BA object#(0x6BA) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -77856,7 +77249,6 @@ void Func06BB object#(0x6BB) ()
 	{
 		Func093F(item, 0x001F);
 	}
-	return;
 }
 
 // externs
@@ -77890,7 +77282,6 @@ void Func06BC object#(0x6BC) ()
 			}
 		}
 	}
-	return;
 }
 
 void Func06BD object#(0x6BD) ()
@@ -78025,7 +77416,6 @@ void Func06BD object#(0x6BD) ()
 		}
 		UI_earthquake((var0002 * 0x0003));
 	}
-	return;
 }
 
 void Func06BE object#(0x6BE) ()
@@ -78034,7 +77424,6 @@ void Func06BE object#(0x6BE) ()
 	{
 		UI_stop_time(UI_get_item_quality(item));
 	}
-	return;
 }
 
 // externs
@@ -78059,7 +77448,6 @@ void Func06BF object#(0x6BF) ()
 			Func0936(var0004, var0005);
 		}
 	}
-	return;
 }
 
 // externs
@@ -78085,7 +77473,6 @@ void Func06C0 object#(0x6C0) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -78164,7 +77551,6 @@ void Func06C1 object#(0x6C1) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -78213,7 +77599,6 @@ void Func06C2 object#(0x6C2) ()
 			UI_remove_item(item);
 		}
 	}
-	return;
 }
 
 // externs
@@ -78241,7 +77626,6 @@ void Func06C3 object#(0x6C3) ()
 			UI_remove_item(item);
 		}
 	}
-	return;
 }
 
 void Func06C4 object#(0x6C4) ()
@@ -78250,7 +77634,6 @@ void Func06C4 object#(0x6C4) ()
 	{
 		gflags[0x02B7] = true;
 	}
-	return;
 }
 
 void Func06C5 object#(0x6C5) ()
@@ -78259,7 +77642,6 @@ void Func06C5 object#(0x6C5) ()
 	{
 		gflags[0x0097] = true;
 	}
-	return;
 }
 
 // externs
@@ -78282,7 +77664,6 @@ void Func06C6 object#(0x6C6) ()
 			Func093F(UI_get_npc_object(0xFF4F), 0x0003);
 		}
 	}
-	return;
 }
 
 // externs
@@ -78302,7 +77683,6 @@ void Func06C7 object#(0x6C7) ()
 			Func093F(var0003, 0x000B);
 		}
 	}
-	return;
 }
 
 // externs
@@ -78322,7 +77702,6 @@ void Func06C8 object#(0x6C8) ()
 			Func093F(var0003, 0x000B);
 		}
 	}
-	return;
 }
 
 // externs
@@ -78342,7 +77721,6 @@ void Func06C9 object#(0x6C9) ()
 			Func093F(var0003, 0x000B);
 		}
 	}
-	return;
 }
 
 // externs
@@ -78363,7 +77741,6 @@ void Func06CA object#(0x6CA) ()
 			Func093F(var0003, 0x000B);
 		}
 	}
-	return;
 }
 
 void Func06CB object#(0x6CB) ()
@@ -78374,7 +77751,6 @@ void Func06CB object#(0x6CB) ()
 	{
 		var0000 = 0x0000;
 	}
-	return;
 }
 
 void Func06CC object#(0x6CC) ()
@@ -78409,7 +77785,6 @@ void Func06CC object#(0x6CC) ()
 			}
 		}
 	}
-	return;
 }
 
 void Func06CF object#(0x6CF) ()
@@ -78426,7 +77801,6 @@ void Func06CF object#(0x6CF) ()
 			UI_move_object(0xFE9B, var0001);
 		}
 	}
-	return;
 }
 
 // externs
@@ -78443,7 +77817,6 @@ void Func06D0 object#(0x6D0) ()
 		var0001 = 0x0000;
 		Func0810(var0000, var0001);
 	}
-	return;
 }
 
 // externs
@@ -78460,7 +77833,6 @@ void Func06D1 object#(0x6D1) ()
 		var0001 = 0x0001;
 		Func0810(var0000, var0001);
 	}
-	return;
 }
 
 // externs
@@ -78477,7 +77849,6 @@ void Func06D2 object#(0x6D2) ()
 		var0001 = 0x0000;
 		Func0810(var0000, var0001);
 	}
-	return;
 }
 
 // externs
@@ -78494,7 +77865,6 @@ void Func06D3 object#(0x6D3) ()
 		var0001 = 0x0001;
 		Func0810(var0000, var0001);
 	}
-	return;
 }
 
 // externs
@@ -78513,7 +77883,6 @@ void Func06D4 object#(0x6D4) ()
 			UI_move_object(0xFE9C, var0000);
 		}
 	}
-	return;
 }
 
 // externs
@@ -78532,7 +77901,6 @@ void Func06D5 object#(0x6D5) ()
 			UI_move_object(0xFE9C, var0000);
 		}
 	}
-	return;
 }
 
 // externs
@@ -78572,7 +77940,6 @@ void Func06D6 object#(0x6D6) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -78588,7 +77955,6 @@ void Func06D7 object#(0x6D7) ()
 			UI_remove_item(item);
 		}
 	}
-	return;
 }
 
 // externs
@@ -78604,7 +77970,6 @@ void Func06D8 object#(0x6D8) ()
 			UI_remove_item(item);
 		}
 	}
-	return;
 }
 
 // externs
@@ -78620,7 +77985,6 @@ void Func06D9 object#(0x6D9) ()
 			UI_remove_item(item);
 		}
 	}
-	return;
 }
 
 // externs
@@ -78632,7 +77996,6 @@ void Func06DA object#(0x6DA) ()
 	{
 		Func0836(item, 0xFE99);
 	}
-	return;
 }
 
 // externs
@@ -78644,7 +78007,6 @@ void Func06DB object#(0x6DB) ()
 	{
 		Func0824(item);
 	}
-	return;
 }
 
 void Func06DC object#(0x6DC) ()
@@ -78653,7 +78015,6 @@ void Func06DC object#(0x6DC) ()
 	{
 		UI_run_endgame(false);
 	}
-	return;
 }
 
 // externs
@@ -78665,7 +78026,6 @@ void Func06DD object#(0x6DD) ()
 	{
 		Func0836(item, 0x0001);
 	}
-	return;
 }
 
 // externs
@@ -78677,7 +78037,6 @@ void Func06DE object#(0x6DE) ()
 	{
 		Func0836(item, 0x0000);
 	}
-	return;
 }
 
 // externs
@@ -78696,7 +78055,6 @@ void Func06DF object#(0x6DF) ()
 			UI_move_object(0xFE9C, var0000);
 		}
 	}
-	return;
 }
 
 // externs
@@ -78722,7 +78080,6 @@ void Func06E0 object#(0x6E0) ()
 			Func0925(item);
 		}
 	}
-	return;
 }
 
 void Func06E1 object#(0x6E1) ()
@@ -78779,7 +78136,6 @@ void Func06E1 object#(0x6E1) ()
 		}
 		UI_set_orrery(var0000, var0001);
 	}
-	return;
 }
 
 void Func06E2 object#(0x6E2) ()
@@ -78788,7 +78144,6 @@ void Func06E2 object#(0x6E2) ()
 	{
 		UI_set_schedule_type(UI_get_npc_object(0xFF80), 0x0000);
 	}
-	return;
 }
 
 // externs
@@ -78847,7 +78202,6 @@ void Func06F5 object#(0x6F5) ()
 		call Func069D;
 	};
 	gflags[0x0312] = true;
-	return;
 }
 
 // externs
@@ -79815,7 +79169,6 @@ void Func06F6 object#(0x6F6) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -80245,7 +79598,6 @@ void Func06F7 object#(0x6F7) ()
 		nohalt;
 		call Func06F7;
 	};
-	return;
 }
 
 // externs
@@ -80709,7 +80061,6 @@ void Func06F8 object#(0x6F8) ()
 		UI_remove_item(item);
 		gflags[0x030C] = true;
 	}
-	return;
 }
 
 // externs
@@ -81167,7 +80518,6 @@ void Func06F9 object#(0x6F9) ()
 			call Func06F9;
 		};
 	}
-	return;
 }
 
 // externs
@@ -81183,7 +80533,6 @@ void Func06FA object#(0x6FA) ()
 	{
 		Func08FF("@All is not right in Britannia. Perhaps Lord British will know the reason behind this tremor.@");
 	}
-	return;
 }
 
 // externs
@@ -81230,7 +80579,6 @@ void Func06FB object#(0x6FB) ()
 		};
 		Func08DD();
 	}
-	return;
 }
 
 // externs
@@ -81387,7 +80735,6 @@ void Func06FC object#(0x6FC) ()
 			call Func06FC;
 		};
 	}
-	return;
 }
 
 // externs
@@ -81536,13 +80883,11 @@ void Func06FD object#(0x6FD) ()
 			call Func06FD;
 		};
 	}
-	return;
 }
 
 void Func0708 object#(0x708) ()
 {
 	UI_remove_item(item);
-	return;
 }
 
 void Func0709 object#(0x709) ()
@@ -81550,7 +80895,6 @@ void Func0709 object#(0x709) ()
 	var var0000;
 
 	var0000 = 0x0001;
-	return;
 }
 
 // externs
@@ -81928,7 +81272,6 @@ void Func070A object#(0x70A) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -81997,7 +81340,6 @@ void Func070B object#(0x70B) ()
 		nohalt;
 		call Func070B;
 	};
-	return;
 }
 
 void Func070C object#(0x70C) ()
@@ -82030,7 +81372,6 @@ void Func070C object#(0x70C) ()
 			}
 		}
 	}
-	return;
 }
 
 void Func070D object#(0x70D) ()
@@ -82158,7 +81499,6 @@ void Func070D object#(0x70D) ()
 			}
 		}
 	}
-	return;
 }
 
 void Func070E object#(0x70E) ()
@@ -82273,7 +81613,6 @@ void Func070E object#(0x70E) ()
 			return;
 		}
 	}
-	return;
 }
 
 // externs
@@ -82438,7 +81777,6 @@ void Func070F object#(0x70F) ()
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -82573,7 +81911,6 @@ void Func0710 object#(0x710) ()
 		Func08FF("@He gave up his heart... so that Adjhar may live!* Well, not to be morbid, but I suppose the incantation should work now.@");
 		UI_halt_scheduled(0xFE9C);
 	}
-	return;
 }
 
 // externs
@@ -82599,7 +81936,6 @@ void Func0712 object#(0x712) ()
 			UI_remove_item(item);
 		}
 	}
-	return;
 }
 
 void Func0713 object#(0x713) ()
@@ -82630,7 +81966,6 @@ void Func0713 object#(0x713) ()
 		}
 		return;
 	}
-	return;
 }
 
 // externs
@@ -82781,7 +82116,6 @@ void Func0714 object#(0x714) ()
 			nop2;
 		};
 	}
-	return;
 }
 
 void Func0715 object#(0x715) ()
@@ -82843,7 +82177,6 @@ void Func0715 object#(0x715) ()
 		};
 	}
 	UI_set_schedule_type(var0001, 0x000F);
-	return;
 }
 
 void Func0716 object#(0x716) ()
@@ -82878,7 +82211,6 @@ void Func0716 object#(0x716) ()
 		nohalt;
 		call Func0715;
 	};
-	return;
 }
 
 // externs
@@ -82917,7 +82249,6 @@ void Func0717 object#(0x717) ()
 		}
 	}
 	Func0838(item);
-	return;
 }
 
 // externs
@@ -82997,7 +82328,6 @@ void Func0800 0x800 (var var0000)
 		UI_set_schedule_type(0xFE9C, 0x000E);
 		UI_nap_time(var0000);
 	}
-	return;
 }
 
 var Func0801 0x801 (var var0000)
@@ -83073,7 +82403,6 @@ void Func0803 0x803 (var var0000)
 			call Func061E;
 		};
 	}
-	return;
 }
 
 void Func0804 0x804 (var var0000, var var0001, var var0002)
@@ -83101,7 +82430,6 @@ void Func0804 0x804 (var var0000, var var0001, var var0002)
 	{
 		UI_remove_item(var0004);
 	}
-	return;
 }
 
 // externs
@@ -83136,7 +82464,6 @@ void Func0805 0x805 (var var0000)
 		};
 		gflags[0x0004] = true;
 	}
-	return;
 }
 
 void Func0806 0x806 (var var0000, var var0001)
@@ -83165,7 +82492,6 @@ void Func0806 0x806 (var var0000, var var0001)
 		};
 	}
 	UI_earthquake(0x0007);
-	return;
 }
 
 // externs
@@ -83191,7 +82517,6 @@ void Func0807 0x807 (var var0000)
 		};
 		gflags[0x0005] = true;
 	}
-	return;
 }
 
 // externs
@@ -83212,7 +82537,6 @@ void Func0808 0x808 ()
 		gflags[0x0039] = false;
 		UI_set_schedule_type(var0004, var0001);
 	}
-	return;
 }
 
 // externs
@@ -83267,7 +82591,6 @@ void Func0809 0x809 (var var0000)
 			}
 		}
 	}
-	return;
 }
 
 void Func080A 0x80A (var var0000, var var0001)
@@ -83330,7 +82653,6 @@ void Func080A 0x80A (var var0000, var var0001)
 		}
 		var0007 = (var0007 + 0x0001);
 	}
-	return;
 }
 
 var Func080B 0x80B (var var0000)
@@ -83531,7 +82853,6 @@ void Func080F 0x80F ()
 			UI_remove_item(var000A);
 		}
 	}
-	return;
 }
 
 void Func0810 0x810 (var var0000, var var0001)
@@ -83588,7 +82909,6 @@ void Func0810 0x810 (var var0000, var var0001)
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -83607,7 +82927,6 @@ void Func0811 0x811 ()
 		gflags[0x0039] = true;
 		UI_set_schedule_type(var0003, 0x000F);
 	}
-	return;
 }
 
 void Func0812 0x812 (var var0000)
@@ -83632,7 +82951,6 @@ void Func0812 0x812 (var var0000)
 		UI_set_item_flag(0x0002, 0x000A);
 		UI_set_item_flag(var0001, 0x001A);
 	}
-	return;
 }
 
 // externs
@@ -83737,7 +83055,6 @@ void Func0813 0x813 (var var0000, var var0001, var var0002)
 		}
 		var0009 = UI_set_npc_prop(var0003, 0x0009, var0001);
 	}
-	return;
 }
 
 var Func0814 0x814 ()
@@ -83821,7 +83138,6 @@ void Func0815 0x815 (var var0000)
 	{
 		Func081C(var0000, var0003);
 	}
-	return;
 }
 
 // externs
@@ -84036,7 +83352,6 @@ void Func0816 0x816 (var var0000)
 	{
 		UI_flash_mouse(0x0000);
 	}
-	return;
 }
 
 void Func0817 0x817 (var var0000)
@@ -84079,7 +83394,6 @@ void Func0817 0x817 (var var0000)
 			};
 		}
 	}
-	return;
 }
 
 // externs
@@ -84088,19 +83402,16 @@ extern void Func08FF 0x8FF (var var0000);
 void Func0818 0x818 ()
 {
 	Func08FF("@The door appears blocked.@");
-	return;
 }
 
 void Func0819 0x819 (var var0000)
 {
 	UI_item_say(var0000, "Locked");
-	return;
 }
 
 void Func081A 0x81A (var var0000)
 {
 	UI_item_say(var0000, "Magically Locked");
-	return;
 }
 
 var Func081B 0x81B (var var0000)
@@ -84115,7 +83426,6 @@ void Func081C 0x81C (var var0000, var var0001)
 	var0002 = UI_get_item_frame(var0000);
 	var0003 = (var0002 % 0x0004);
 	UI_set_item_frame(var0000, ((var0002 - var0003) + var0001));
-	return;
 }
 
 // externs
@@ -84167,7 +83477,6 @@ void Func081E 0x81E (var var0000, var var0001, var var0002, var var0003, var var
 	{
 		var000C = Func081D(var000F, var0004, var0005, var0006, var0007, var0008);
 	}
-	return;
 }
 
 // externs
@@ -84257,7 +83566,6 @@ void Func0821 0x821 (var var0000)
 		};
 		remove;
 	};
-	return;
 }
 
 var Func0822 0x822 (var var0000)
@@ -84331,7 +83639,6 @@ void Func0824 0x824 (var var0000)
 			call Func0636;
 		};
 	}
-	return;
 }
 
 var Func0825 0x825 (var var0000, var var0001, var var0002)
@@ -84497,7 +83804,6 @@ void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var
 		UI_flash_mouse(0x0000);
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -84950,7 +84256,6 @@ void Func082F 0x82F ()
 			}
 		}
 	}
-	return;
 }
 
 void Func0830 0x830 (var var0000, var var0001)
@@ -84985,7 +84290,6 @@ void Func0830 0x830 (var var0000, var var0001)
 		UI_set_item_frame_rot(var0008, (var0009 + var0002));
 	}
 	UI_play_sound_effect(var0003);
-	return;
 }
 
 // externs
@@ -85019,7 +84323,6 @@ void Func0831 0x831 (var var0000)
 	UI_clear_item_flag(0xFE9C, 0x0014);
 	UI_set_item_flag(var0000, 0x000A);
 	UI_set_item_flag(UI_get_barge(0xFE9C), 0x001A);
-	return;
 }
 
 void Func0832 0x832 (var var0000, var var0001)
@@ -85037,7 +84340,6 @@ void Func0832 0x832 (var var0000, var var0001)
 		call var0001;
 		sfx 33;
 	};
-	return;
 }
 
 void Func0833 0x833 (var var0000, var var0001)
@@ -85054,7 +84356,6 @@ void Func0833 0x833 (var var0000, var var0001)
 		};
 		sfx 33;
 	};
-	return;
 }
 
 var Func0834 0x834 ()
@@ -85199,7 +84500,6 @@ void Func0835 0x835 (var var0000, var var0001, var var0002)
 
 	var0003 = UI_get_npc_prop(var0000, var0001);
 	var0004 = UI_set_npc_prop(var0000, var0001, (var0002 - var0003));
-	return;
 }
 
 // externs
@@ -85257,7 +84557,6 @@ void Func0836 0x836 (var var0000, var var0001)
 			}
 		}
 	}
-	return;
 }
 
 var Func0837 0x837 (var var0000, var var0001, var var0002, var var0003, var var0004)
@@ -85376,7 +84675,6 @@ void Func0838 0x838 (var var0000)
 			call Func068F;
 		};
 	}
-	return;
 }
 
 void Func0839 0x839 (var var0000, var var0001, var var0002)
@@ -85403,7 +84701,6 @@ void Func0839 0x839 (var var0000, var var0001, var var0002)
 	{
 		UI_set_light(item, false);
 	}
-	return;
 }
 
 var Func083A 0x83A ()
@@ -85649,7 +84946,6 @@ void Func083D 0x83D ()
 		UI_remove_item(var0007);
 	}
 	Func0933(0xFF18, var0008, 0x0000);
-	return;
 }
 
 // externs
@@ -85706,7 +85002,6 @@ void Func083E 0x83E (var var0000, var var0001)
 			Func083F(item, false);
 		}
 	}
-	return;
 }
 
 // externs
@@ -85752,7 +85047,6 @@ void Func083F 0x83F (var var0000, var var0001)
 			};
 		};
 	}
-	return;
 }
 
 // externs
@@ -85822,7 +85116,6 @@ void Func0840 0x840 ()
 		abort;
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -85917,7 +85210,6 @@ void Func0841 0x841 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -86034,7 +85326,6 @@ void Func0842 0x842 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 void Func0843 0x843 ()
@@ -86053,7 +85344,6 @@ void Func0843 0x843 ()
 		};
 	};
 	abort;
-	return;
 }
 
 var Func0844 0x844 (var var0000)
@@ -86112,7 +85402,6 @@ void Func0845 0x845 (var var0000)
 			say();
 		}
 	}
-	return;
 }
 
 var Func0846 0x846 ()
@@ -86307,7 +85596,6 @@ void Func084A 0x84A ()
 			}
 		}
 	}
-	return;
 }
 
 var Func084B 0x84B (var var0000)
@@ -86430,7 +85718,6 @@ void Func084C 0x84C ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -86496,7 +85783,6 @@ void Func084D 0x84D ()
 			abort;
 		}
 	}
-	return;
 }
 
 // externs
@@ -86638,7 +85924,6 @@ void Func084E 0x84E ()
 	say();
 	gflags[0x0096] = true;
 	Func0851();
-	return;
 }
 
 // externs
@@ -86893,7 +86178,6 @@ void Func084F 0x84F ()
 		say();
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -87043,7 +86327,6 @@ void Func0850 0x850 ()
 	message("From watching Batlin and the others you get the feeling that the Fellowship ceremony is going to last long into the night. Now would be a good moment to slip away without drawing much attention to yourself...*");
 	say();
 	abort;
-	return;
 }
 
 // externs
@@ -87094,7 +86377,6 @@ void Func0851 0x851 ()
 		gflags[0x00D6] = true;
 		abort;
 	}
-	return;
 }
 
 void Func0852 0x852 ()
@@ -87238,7 +86520,6 @@ void Func0852 0x852 ()
 		UI_clear_item_flag(item, 0x0019);
 		gflags[0x0038] = false;
 	}
-	return;
 }
 
 // externs
@@ -87341,7 +86622,6 @@ void Func0853 0x853 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -87389,7 +86669,6 @@ void Func0854 0x854 ()
 	{
 		var0005 = UI_remove_party_items(var0001, 0x0179, 0xFE99, 0x0008, true);
 	}
-	return;
 }
 
 // externs
@@ -87497,7 +86776,6 @@ void Func0855 0x855 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -87604,7 +86882,6 @@ void Func0856 0x856 (var var0000, var var0001)
 	{
 		Func0915(var0002, 0x0002);
 	}
-	return;
 }
 
 // externs
@@ -87672,7 +86949,6 @@ void Func0857 0x857 ()
 		say();
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -87767,7 +87043,6 @@ void Func0858 0x858 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -87853,7 +87128,6 @@ void Func0859 0x859 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -87962,7 +87236,6 @@ void Func085A 0x85A ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 void Func085B 0x85B ()
@@ -87996,7 +87269,6 @@ void Func085B 0x85B ()
 		}
 	}
 	UI_item_say(var0000, var0002);
-	return;
 }
 
 // externs
@@ -88082,7 +87354,6 @@ void Func085C 0x85C ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -88191,7 +87462,6 @@ void Func085D 0x85D ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -88282,7 +87552,6 @@ void Func085E 0x85E ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -88397,7 +87666,6 @@ void Func085F 0x85F (var var0000, var var0001)
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -88522,7 +87790,6 @@ void Func0860 0x860 (var var0000, var var0001, var var0002)
 		}
 	} while (false);
 	UI_pop_answers();
-	return;
 }
 
 void Func0861 0x861 ()
@@ -88530,7 +87797,6 @@ void Func0861 0x861 ()
 	message("\"Thou didst just break the rule of The Game! Thou had best learn it!\"*");
 	say();
 	abort;
-	return;
 }
 
 // externs
@@ -88672,7 +87938,6 @@ void Func0862 0x862 ()
 			Func0861();
 		}
 	}
-	return;
 }
 
 // externs
@@ -88767,7 +88032,6 @@ void Func0863 0x863 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 void Func0864 0x864 ()
@@ -88801,7 +88065,6 @@ void Func0864 0x864 ()
 		}
 	}
 	UI_item_say(var0000, var0002);
-	return;
 }
 
 var Func0865 0x865 ()
@@ -89429,7 +88692,6 @@ void Func0870 0x870 (var var0000, var var0001, var var0002)
 		}
 	} while (false);
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -89547,7 +88809,6 @@ void Func0871 0x871 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -89648,7 +88909,6 @@ void Func0872 0x872 ()
 	}
 	UI_pop_answers();
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -89735,7 +88995,6 @@ void Func0873 0x873 ()
 	}
 	UI_pop_answers();
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -89836,7 +89095,6 @@ void Func0874 0x874 ()
 	}
 	UI_pop_answers();
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -89970,7 +89228,6 @@ void Func0875 0x875 (var var0000, var var0001)
 	{
 		Func0918(var0002, 0x0001);
 	}
-	return;
 }
 
 // externs
@@ -90076,7 +89333,6 @@ void Func0876 0x876 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 void Func0877 0x877 ()
@@ -90102,7 +89358,6 @@ void Func0877 0x877 ()
 	message("\"And that is poor Nastassia's tale. Perhaps thou canst cheer her. Find her, I beseech thee!\"*");
 	say();
 	gflags[0x00E0] = true;
-	return;
 }
 
 // externs
@@ -90177,7 +89432,6 @@ void Func0878 0x878 (var var0000, var var0001)
 	{
 		Func0917(var0002, 0x0002);
 	}
-	return;
 }
 
 // externs
@@ -90295,7 +89549,6 @@ void Func0879 0x879 (var var0000, var var0001, var var0002)
 		}
 	} while (false);
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -90398,7 +89651,6 @@ void Func087A 0x87A ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -90505,7 +89757,6 @@ void Func087B 0x87B ()
 	message("With that Elynor is once again the center of attention of the meeting. \"Let us now begin our evening's meditations.\" After a few minutes of silence you begin to realize\tthat this meditation is going to continue for quite some time and that now might be a good time to leave inconspicuously.*");
 	say();
 	abort;
-	return;
 }
 
 // externs
@@ -90562,7 +89813,6 @@ void Func087C 0x87C ()
 		always:
 			UI_remove_answer(["Want honey?", "Go away!"]);
 	}
-	return;
 }
 
 void Func087D 0x87D ()
@@ -90597,7 +89847,6 @@ void Func087D 0x87D ()
 	}
 	var0001 = UI_get_object_position(UI_get_npc_object(0xFE9C));
 	var0002 = UI_update_last_created(var0001);
-	return;
 }
 
 // externs
@@ -90645,7 +89894,6 @@ void Func087E 0x87E (var var0000, var var0001, var var0002, var var0003)
 			}
 		}
 	}
-	return;
 }
 
 void Func087F 0x87F (var var0000)
@@ -90750,7 +89998,6 @@ void Func087F 0x87F (var var0000)
 			var000F = UI_give_last_created(var0009);
 		}
 	}
-	return;
 }
 
 void Func0880 0x880 (var var0000, var var0001)
@@ -90820,7 +90067,6 @@ void Func0880 0x880 (var var0000, var var0001)
 		}
 	}
 	UI_move_object(var0000, var0004);
-	return;
 }
 
 var Func0881 0x881 ()
@@ -90874,7 +90120,6 @@ void Func0882 0x882 (var var0000)
 			abort;
 		}
 	}
-	return;
 }
 
 // externs
@@ -90906,7 +90151,6 @@ void Func0883 0x883 ()
 	message("The Mayor continues. \"Hast thou searched the stables?\"");
 	say();
 	Func0885();
-	return;
 }
 
 // externs
@@ -91143,7 +90387,6 @@ void Func0884 0x884 ()
 			abort;
 		}
 	}
-	return;
 }
 
 // externs
@@ -91201,7 +90444,6 @@ void Func0885 0x885 ()
 		gflags[0x005A] = true;
 		abort;
 	}
-	return;
 }
 
 var Func0886 0x886 ()
@@ -91627,7 +90869,6 @@ void Func0888 0x888 (var var0000)
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -91722,7 +90963,6 @@ void Func0889 0x889 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -91767,7 +91007,6 @@ void Func088A 0x88A ()
 		say();
 		abort;
 	}
-	return;
 }
 
 void Func088B 0x88B ()
@@ -91803,7 +91042,6 @@ void Func088B 0x88B ()
 	}
 	gflags[0x01A3] = true;
 	abort;
-	return;
 }
 
 // externs
@@ -91899,7 +91137,6 @@ void Func088C 0x88C ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -91925,7 +91162,6 @@ void Func088D 0x88D ()
 		UI_show_npc_face(0xFFEB, 0x0000);
 		var0001 = 0x0000;
 	}
-	return;
 }
 
 // externs
@@ -92011,7 +91247,6 @@ void Func088E 0x88E ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -92099,7 +91334,6 @@ void Func088F 0x88F ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -92291,7 +91525,6 @@ void Func0890 0x890 ()
 			say();
 			abort;
 	}
-	return;
 }
 
 // externs
@@ -92308,7 +91541,6 @@ void Func0891 0x891 ()
 	message("\"However,\" smiles Adjhar, \"'tis not necessary, for had Bollux known what is covered by this smudge, he could have told thee that a new heart may be cut from the Tree of Life. Look here,\" he says, pointing to a line in the tome smeared with dried mud. \"I remember this from before. Thou canst take the very same pick with which thou didst collect the blood and procure a `heart' for Bollux. Of course, after thou dost place the heart upon Bollux's body, thou must again perform the same ritual of blood.\"");
 	say();
 	gflags[0x0321] = true;
-	return;
 }
 
 // externs
@@ -92388,7 +91620,6 @@ void Func0892 0x892 ()
 		var0000->Func06F9();
 		abort;
 	}
-	return;
 }
 
 void Func0893 0x893 ()
@@ -92416,7 +91647,6 @@ void Func0893 0x893 ()
 			say();
 			abort;
 	}
-	return;
 }
 
 // externs
@@ -92640,7 +91870,6 @@ void Func0894 0x894 (var var0000)
 				abort;
 		}
 	}
-	return;
 }
 
 void Func0895 0x895 ()
@@ -92696,7 +91925,6 @@ void Func0895 0x895 ()
 			say();
 			abort;
 	}
-	return;
 }
 
 void Func0896 0x896 ()
@@ -92733,7 +91961,6 @@ void Func0896 0x896 ()
 			say();
 			abort;
 	}
-	return;
 }
 
 // externs
@@ -92820,7 +92047,6 @@ void Func0897 0x897 ()
 	}
 	UI_pop_answers();
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -92916,7 +92142,6 @@ void Func0898 0x898 ()
 	}
 	UI_pop_answers();
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -93019,7 +92244,6 @@ void Func0899 0x899 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -93101,7 +92325,6 @@ void Func089A 0x89A (var var0000, var var0001)
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -93201,7 +92424,6 @@ void Func089B 0x89B (var var0000, var var0001)
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -93287,7 +92509,6 @@ void Func089C 0x89C ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -93457,7 +92678,6 @@ void Func089D 0x89D (var var0000, var var0001, var var0002)
 		}
 	} while (false);
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -93646,7 +92866,6 @@ void Func089E 0x89E (var var0000, var var0001, var var0002)
 		}
 	} while (false);
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -93731,7 +92950,6 @@ void Func089F 0x89F (var var0000, var var0001)
 	}
 	message("\"I look forward to thy return.\"");
 	say();
-	return;
 }
 
 // externs
@@ -93839,7 +93057,6 @@ void Func08A0 0x8A0 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -93960,7 +93177,6 @@ void Func08A1 0x8A1 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -94051,7 +93267,6 @@ void Func08A2 0x8A2 (var var0000, var var0001)
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -94145,7 +93360,6 @@ void Func08A3 0x8A3 ()
 	}
 	UI_pop_answers();
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -94237,7 +93451,6 @@ void Func08A4 0x8A4 ()
 	}
 	UI_pop_answers();
 	UI_pop_answers();
-	return;
 }
 
 void Func08A5 0x8A5 ()
@@ -94271,7 +93484,6 @@ void Func08A5 0x8A5 ()
 		}
 	}
 	UI_item_say(var0000, var0002);
-	return;
 }
 
 // externs
@@ -94384,7 +93596,6 @@ void Func08A6 0x8A6 (var var0000, var var0001)
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -94480,7 +93691,6 @@ void Func08A7 0x8A7 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -94568,7 +93778,6 @@ void Func08A8 0x8A8 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -94664,7 +93873,6 @@ void Func08A9 0x8A9 ()
 	}
 	UI_pop_answers();
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -94751,7 +93959,6 @@ void Func08AA 0x8AA ()
 	}
 	UI_pop_answers();
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -94838,7 +94045,6 @@ void Func08AB 0x8AB ()
 	message("It is apparent that the meeting will be continuing for some time... You decide you have more important matters to attend to.*");
 	say();
 	abort;
-	return;
 }
 
 // externs
@@ -94964,7 +94170,6 @@ void Func08AC 0x8AC (var var0000, var var0001, var var0002)
 		}
 	} while (false);
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -95059,7 +94264,6 @@ void Func08AD 0x8AD ()
 		}
 	}
 	abort;
-	return;
 }
 
 // externs
@@ -95086,7 +94290,6 @@ void Func08AE 0x8AE (var var0000)
 		gflags[0x01AC] = true;
 		gflags[0x01D1] = false;
 	}
-	return;
 }
 
 // externs
@@ -95159,7 +94362,6 @@ void Func08AF 0x8AF ()
 			Func08B2();
 		}
 	}
-	return;
 }
 
 void Func08B0 0x8B0 ()
@@ -95176,7 +94378,6 @@ void Func08B0 0x8B0 ()
 		say();
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -95216,7 +94417,6 @@ void Func08B1 0x8B1 ()
 	message(".\"*");
 	say();
 	abort;
-	return;
 }
 
 // externs
@@ -95270,7 +94470,6 @@ void Func08B2 0x8B2 ()
 	{
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -95445,7 +94644,6 @@ void Func08B4 0x8B4 (var var0000, var var0001, var var0002)
 		}
 	} while (false);
 	UI_pop_answers();
-	return;
 }
 
 void Func08B5 0x8B5 ()
@@ -95501,7 +94699,6 @@ void Func08B5 0x8B5 ()
 		}
 	}
 	gflags[0x02FE] = true;
-	return;
 }
 
 // externs
@@ -95592,7 +94789,6 @@ void Func08B6 0x8B6 (var var0000, var var0001)
 			}
 		}
 	}
-	return;
 }
 
 // externs
@@ -95702,7 +94898,6 @@ void Func08B7 0x8B7 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -95765,7 +94960,6 @@ void Func08B8 0x8B8 ()
 		say();
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -95873,7 +95067,6 @@ void Func08B9 0x8B9 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -95966,7 +95159,6 @@ void Func08BA 0x8BA ()
 		Func0911(0x0032);
 	}
 	gflags[0x0100] = true;
-	return;
 }
 
 // externs
@@ -96089,7 +95281,6 @@ void Func08BB 0x8BB (var var0000)
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -96199,7 +95390,6 @@ void Func08BC 0x8BC (var var0000)
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -96285,7 +95475,6 @@ void Func08BD 0x8BD (var var0000, var var0001)
 			}
 		}
 	} while (false);
-	return;
 }
 
 // externs
@@ -96379,7 +95568,6 @@ void Func08BE 0x8BE (var var0000, var var0001)
 			}
 		}
 	} while (false);
-	return;
 }
 
 // externs
@@ -96399,7 +95587,6 @@ void Func08BF 0x8BF (var var0000)
 		var0003 = (var0001 - var0002);
 		Func0912(var0000, 0x0003, var0003);
 	}
-	return;
 }
 
 void Func08C0 0x8C0 ()
@@ -96685,7 +95872,6 @@ void Func08C0 0x8C0 ()
 			UI_pop_answers();
 			break;
 	}
-	return;
 }
 
 // externs
@@ -96708,7 +95894,6 @@ void Func08C1 0x8C1 ()
 	message(", she must needs be taken to her husband, swiftly. I trust that thou wilt do so.\" She leaves the statement hanging and says her goodbyes to Rowena.*");
 	say();
 	abort;
-	return;
 }
 
 // externs
@@ -96757,7 +95942,6 @@ void Func08C2 0x8C2 ()
 	message(". If thou art successful, I will not see thee again. May thy fortunes be good.*\"");
 	say();
 	abort;
-	return;
 }
 
 // externs
@@ -96880,7 +96064,6 @@ void Func08C3 0x8C3 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -96968,7 +96151,6 @@ void Func08C4 0x8C4 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -97091,7 +96273,6 @@ void Func08C5 0x8C5 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -97179,7 +96360,6 @@ void Func08C6 0x8C6 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -97290,7 +96470,6 @@ void Func08C7 0x8C7 ()
 		UI_remove_npc_face(0xFFFF);
 	}
 	abort;
-	return;
 }
 
 // externs
@@ -97395,7 +96574,6 @@ void Func08C8 0x8C8 (var var0000, var var0001)
 			}
 		}
 	} while (false);
-	return;
 }
 
 // externs
@@ -97550,7 +96728,6 @@ void Func08CA 0x8CA (var var0000, var var0001)
 			}
 		}
 	} while (false);
-	return;
 }
 
 // externs
@@ -97654,7 +96831,6 @@ void Func08CB 0x8CB ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -97745,7 +96921,6 @@ void Func08CC 0x8CC ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -97848,7 +97023,6 @@ void Func08CD 0x8CD ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -97919,7 +97093,6 @@ void Func08CE 0x8CE ()
 		UI_remove_npc_face(0xFFFF);
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -97989,7 +97162,6 @@ void Func08CF 0x8CF ()
 		say();
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -98101,7 +97273,6 @@ void Func08D0 0x8D0 (var var0000, var var0001)
 			}
 		}
 	} while (false);
-	return;
 }
 
 // externs
@@ -98166,7 +97337,6 @@ void Func08D1 0x8D1 ()
 			Func0911(0x0014);
 			abort;
 	}
-	return;
 }
 
 // externs
@@ -98293,7 +97463,6 @@ void Func08D2 0x8D2 (var var0000, var var0001, var var0002)
 		}
 	} while (false);
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -98386,7 +97555,6 @@ void Func08D3 0x8D3 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -98477,7 +97645,6 @@ void Func08D4 0x8D4 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 void Func08D5 0x8D5 ()
@@ -98560,7 +97727,6 @@ void Func08D5 0x8D5 ()
 		message("\"It is truly mysterious how this continues to happen to thee!\"");
 		say();
 	}
-	return;
 }
 
 // externs
@@ -98615,7 +97781,6 @@ void Func08D6 0x8D6 ()
 				abort;
 		}
 	}
-	return;
 }
 
 // externs
@@ -98719,7 +97884,6 @@ void Func08D7 0x8D7 ()
 			abort;
 		}
 	}
-	return;
 }
 
 // externs
@@ -98803,7 +97967,6 @@ void Func08D8 0x8D8 ()
 	message("She blinks slowly. \"What beautiful music. My Lord... Horance, once gave me a music box like that one.\" Rowena turns away, distracted.*");
 	say();
 	abort;
-	return;
 }
 
 void Func08D9 0x8D9 ()
@@ -98820,7 +97983,6 @@ void Func08D9 0x8D9 ()
 		say();
 		abort;
 	}
-	return;
 }
 
 // externs
@@ -98836,7 +97998,6 @@ void Func08DA 0x8DA ()
 	message(", forgive me, I am not feeling very well right now. Come back later and mayhaps I'll feel more disposed to conversation.\"*");
 	say();
 	abort;
-	return;
 }
 
 // externs
@@ -98962,7 +98123,6 @@ void Func08DB 0x8DB ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -99050,7 +98210,6 @@ void Func08DC 0x8DC ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 void Func08DD 0x8DD ()
@@ -99179,7 +98338,6 @@ void Func08DD 0x8DD ()
 		}
 	}
 	UI_earthquake((var0001 * 0x0003));
-	return;
 }
 
 // externs
@@ -99287,7 +98445,6 @@ void Func08DE 0x8DE ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -99331,7 +98488,6 @@ void Func08DF 0x8DF ()
 			say();
 			abort;
 	}
-	return;
 }
 
 // externs
@@ -99375,7 +98531,6 @@ void Func08E0 0x8E0 ()
 			say();
 			abort;
 	}
-	return;
 }
 
 // externs
@@ -99461,7 +98616,6 @@ void Func08E1 0x8E1 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -99547,7 +98701,6 @@ void Func08E2 0x8E2 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -99633,14 +98786,12 @@ void Func08E3 0x8E3 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 void Func08E4 0x8E4 ()
 {
 	var var0000;
 	var0000 = 0x0001;
-	return;
 }
 
 // externs
@@ -99769,7 +98920,6 @@ void Func08E5 0x8E5 (var var0000, var var0001)
 			}
 		}
 	} while (false);
-	return;
 }
 
 void Func08E6 0x8E6 (var var0000)
@@ -99788,7 +98938,6 @@ void Func08E6 0x8E6 (var var0000)
 		}
 	}
 	UI_remove_item(var0000);
-	return;
 }
 
 var Func08E7 0x8E7 ()
@@ -100012,7 +99161,6 @@ void Func08EB 0x8EB (var var0000, var var0001, var var0002)
 			break;
 		}
 	}
-	return;
 }
 
 // externs
@@ -100038,7 +99186,6 @@ void Func08EC 0x8EC ()
 	message("'I'm ruined,' he shouted, 'oh what'll I do! ~I'd rather be dead or go live in a zoo! ~And if anyone sees me, oh what a disgrace, ~So I'd better discover a good hiding place!'");
 	say();
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -100084,7 +99231,6 @@ void Func08ED 0x8ED ()
 		always:
 			UI_remove_answer(["Want honey?", "Go away!"]);
 	}
-	return;
 }
 
 // externs
@@ -100128,7 +99274,6 @@ void Func08EE 0x8EE ()
 			say();
 			abort;
 	}
-	return;
 }
 
 // externs
@@ -100254,7 +99399,6 @@ void Func08EF 0x8EF ()
 			say();
 			abort;
 	}
-	return;
 }
 
 // externs
@@ -100309,7 +99453,6 @@ void Func08F0 0x8F0 ()
 		say();
 		abort;
 	}
-	return;
 }
 
 var Func08F1 0x8F1 (var var0000)
@@ -100467,7 +99610,6 @@ void Func08F2 0x8F2 (var var0000, var var0001)
 		UI_set_alignment(0xFFF6, 0x0000);
 	}
 	abort;
-	return;
 }
 
 void Func08F3 0x8F3 (var var0000)
@@ -100581,7 +99723,6 @@ void Func08F3 0x8F3 (var var0000)
 			var0001 = true;
 	}
 	UI_pop_answers();
-	return;
 }
 
 void Func08F4 0x8F4 (var var0000, var var0001)
@@ -100624,7 +99765,6 @@ void Func08F4 0x8F4 (var var0000, var var0001)
 	message("?\"");
 	say();
 	UI_add_answer(["bees", "leave"]);
-	return;
 }
 
 // externs
@@ -100930,7 +100070,6 @@ void Func08FA 0x8FA (var var0000)
 		UI_call_guards();
 		var0000->Func0633();
 	}
-	return;
 }
 
 var Func08FB 0x8FB ()
@@ -100958,7 +100097,6 @@ void Func08FD 0x8FD (var var0000)
 		var0000 = 0x0001;
 	}
 	UI_flash_mouse(var0000);
-	return;
 }
 
 // externs
@@ -100971,7 +100109,6 @@ void Func08FE 0x8FE (var var0000)
 
 	var0001 = Func0900();
 	Func0904(var0001, var0000);
-	return;
 }
 
 // externs
@@ -100984,7 +100121,6 @@ void Func08FF 0x8FF (var var0000)
 
 	var0001 = Func0900();
 	Func0903(var0001, var0000);
-	return;
 }
 
 // externs
@@ -101084,7 +100220,6 @@ void Func0903 0x903 (var var0000, var var0001)
 		}
 		UI_remove_npc_face(var0000);
 	}
-	return;
 }
 
 // externs
@@ -101113,7 +100248,6 @@ void Func0904 0x904 (var var0000, var var0001)
 			}
 		}
 	}
-	return;
 }
 
 void Func0905 0x905 (var var0000)
@@ -101128,7 +100262,6 @@ void Func0905 0x905 (var var0000)
 		nohalt;
 		call Func0600;
 	};
-	return;
 }
 
 var Func0906 0x906 ()
@@ -101276,14 +100409,12 @@ void Func0911 0x911 (var var0000)
 	{
 		var0005 = UI_set_npc_prop(var0004, 0x0008, var0000);
 	}
-	return;
 }
 
 void Func0912 0x912 (var var0000, var var0001, var var0002)
 {
 	var var0003;
 	var0003 = UI_set_npc_prop(UI_get_npc_object(var0000), var0001, var0002);
-	return;
 }
 
 var Func0913 0x913 (var var0000, var var0001)
@@ -101320,7 +100451,6 @@ void Func0914 0x914 (var var0000, var var0001)
 		Func0912(var0000, 0x0007, 0xFFFF);
 		var0002 = (var0002 + 0x0001);
 	}
-	return;
 }
 
 // externs
@@ -101347,7 +100477,6 @@ void Func0915 0x915 (var var0000, var var0001)
 		Func0912(var0000, 0x0007, 0xFFFF);
 		var0002 = (var0002 + 0x0001);
 	}
-	return;
 }
 
 // externs
@@ -101367,7 +100496,6 @@ void Func0916 0x916 (var var0000, var var0001)
 		Func0912(var0000, 0x0007, 0xFFFF);
 		var0002 = (var0002 + 0x0001);
 	}
-	return;
 }
 
 // externs
@@ -101399,7 +100527,6 @@ void Func0917 0x917 (var var0000, var var0001)
 		Func0912(var0000, 0x0007, 0xFFFF);
 		var0002 = (var0002 + 0x0001);
 	}
-	return;
 }
 
 // externs
@@ -101431,7 +100558,6 @@ void Func0918 0x918 (var var0000, var var0001)
 		Func0912(var0000, 0x0007, 0xFFFF);
 		var0002 = (var0002 + 0x0001);
 	}
-	return;
 }
 
 void Func0919 0x919 ()
@@ -101462,7 +100588,6 @@ void Func0919 0x919 ()
 		say();
 	}
 	UI_add_answer("philosophy");
-	return;
 }
 
 // externs
@@ -101497,7 +100622,6 @@ void Func091A 0x91A ()
 		message("\"Oh! I just now noticed thy medallion! Thou dost already know all of this! Thou art one of us! Excuse me for going on and on about it!\"");
 		say();
 	}
-	return;
 }
 
 var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004)
@@ -101563,7 +100687,6 @@ void Func091D 0x91D (var var0000, var var0001)
 			say();
 		}
 	}
-	return;
 }
 
 void Func091E 0x91E (var var0000, var var0001)
@@ -101584,7 +100707,6 @@ void Func091E 0x91E (var var0000, var var0001)
 		message("\"That individual does not need curing!\"");
 		say();
 	}
-	return;
 }
 
 void Func091F 0x91F (var var0000, var var0001)
@@ -101604,7 +100726,6 @@ void Func091F 0x91F (var var0000, var var0001)
 		message("\"Alas, I cannot save thy friend. I will provide a proper burial. Thou must go on and continue with thine own life.\"");
 		say();
 	}
-	return;
 }
 
 // externs
@@ -101830,7 +100951,6 @@ void Func0925 0x925 (var var0000)
 		var0001 = (var0001 - 0x0001);
 		var0002 = UI_set_item_quantity(var0000, var0001);
 	}
-	return;
 }
 
 void Func0926 0x926 (var var0000)
@@ -101873,7 +100993,6 @@ void Func0926 0x926 (var var0000)
 		var000D = UI_update_last_created(var0001);
 		var000D = UI_set_last_created(var0000);
 	}
-	return;
 }
 
 // externs
@@ -101919,7 +101038,6 @@ void Func0927 0x927 (var var0000)
 		}
 		Func08FF(var0005);
 	}
-	return;
 }
 
 // externs
@@ -101981,7 +101099,6 @@ void Func0928 0x928 (var var0000)
 			Func08FF(var0008);
 		}
 	}
-	return;
 }
 
 // externs
@@ -102004,7 +101121,6 @@ void Func0929 0x929 ()
 	{
 		Func08FD(0x0000);
 	}
-	return;
 }
 
 void Func092A 0x92A (var var0000, var var0001)
@@ -102030,7 +101146,6 @@ void Func092A 0x92A (var var0000, var var0001)
 		}
 		var0004 = UI_set_npc_prop(var0000, 0x0003, var0001);
 	}
-	return;
 }
 
 var Func092B 0x92B (var var0000)
@@ -102051,7 +101166,6 @@ var Func092B 0x92B (var var0000)
 void Func092C 0x92C (var var0000)
 {
 	UI_play_sound_effect(0x004B);
-	return;
 }
 
 var Func092D 0x92D (var var0000)
@@ -102196,7 +101310,6 @@ void Func092E 0x92E (var var0000)
 		}
 	}
 	UI_item_say(var0001, var0003);
-	return;
 }
 
 // externs
@@ -102298,7 +101411,6 @@ void Func092F 0x92F (var var0000)
 		}
 	}
 	UI_item_say(var0001, var0003);
-	return;
 }
 
 var Func0930 0x930 (var var0000, var var0001)
@@ -102349,7 +101461,6 @@ void Func0933 0x933 (var var0000, var var0001, var var0002)
 			say var0001;
 		};
 	}
-	return;
 }
 
 var Func0934 0x934 (var var0000)
@@ -102403,7 +101514,6 @@ var Func0935 0x935 (var var0000, var var0001)
 void Func0936 0x936 (var var0000, var var0001)
 {
 	UI_reduce_health(var0000, var0001, 0x0000);
-	return;
 }
 
 var Func0937 0x937 (var var0000)
@@ -102512,7 +101622,6 @@ void Func093A 0x93A (var var0000, var var0001)
 			var0006 = UI_set_item_quality(var000A, (var000B - (var0000 * 0x001E)));
 		}
 	}
-	return;
 }
 
 void Func093B 0x93B (var var0000, var var0001, var var0002, var var0003)
@@ -102528,7 +101637,6 @@ void Func093B 0x93B (var var0000, var var0001, var var0002, var var0003)
 		var0005 = UI_get_npc_prop(var0000, var0002);
 	}
 	var0006 = UI_set_npc_prop(var0000, var0001, (var0005 - var0004));
-	return;
 }
 
 var Func093C 0x93C (var var0000, var var0001)
@@ -102612,7 +101720,6 @@ void Func093F 0x93F (var var0000, var var0001)
 	{
 		UI_set_schedule_type(var0000, var0001);
 	}
-	return;
 }
 
 // externs
@@ -102628,7 +101735,6 @@ void Func0940 0x940 (var var0000)
 	{
 		UI_close_gumps();
 	}
-	return;
 }
 
 // externs
@@ -102644,7 +101750,6 @@ void Func0941 0x941 (var var0000)
 	{
 		UI_close_gumps();
 	}
-	return;
 }
 
 // externs
@@ -102686,7 +101791,6 @@ void Func0942 0x942 (var var0000, var var0001)
 	}
 	UI_set_light(var0000, true);
 	UI_set_time_palette();
-	return;
 }
 
 void Func0943 0x943 (var var0000)
@@ -102695,7 +101799,6 @@ void Func0943 0x943 (var var0000)
 
 	var0001 = UI_get_object_position(var0000);
 	UI_sprite_effect(0x0018, var0001[0x0001], var0001[0x0002], 0xFFFE, 0xFFFE, 0x0000, 0xFFFF);
-	return;
 }
 
 var Func0944 0x944 (var var0000)
@@ -102813,7 +101916,6 @@ void Func0946 0x946 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -102910,7 +102012,6 @@ void Func0947 0x947 ()
 		say();
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -102977,7 +102078,6 @@ void Func0948 0x948 ()
 		say();
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -103086,7 +102186,6 @@ void Func0949 0x949 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -103197,7 +102296,6 @@ void Func094A 0x94A ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -103505,7 +102603,6 @@ void Func094C 0x94C ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -103593,7 +102690,6 @@ void Func094D 0x94D ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -103679,7 +102775,6 @@ void Func094E 0x94E ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -103786,7 +102881,6 @@ void Func094F 0x94F (var var0000, var var0001)
 			}
 		}
 	} while (false);
-	return;
 }
 
 // externs
@@ -103925,7 +103019,6 @@ void Func0950 0x950 (var var0000, var var0001)
 			}
 		}
 	} while (false);
-	return;
 }
 
 // externs
@@ -104030,7 +103123,6 @@ void Func0951 0x951 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -104113,7 +103205,6 @@ void Func0952 0x952 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
 
 // externs
@@ -104199,5 +103290,4 @@ void Func0953 0x953 ()
 		}
 	}
 	UI_pop_answers();
-	return;
 }
