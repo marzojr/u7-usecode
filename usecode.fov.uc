@@ -7040,7 +7040,6 @@ void Func02C5 shape#(0x2C5) ()
 			if (var0005[0x0001] == var0000)
 			{
 				var0004->Func02DE();
-				return;
 			}
 		}
 	}
@@ -10495,7 +10494,6 @@ void Func0337 shape#(0x337) ()
 			else
 			{
 				Func08FE("@Use pigments!@");
-				return;
 			}
 		}
 	}
@@ -11584,7 +11582,6 @@ void Func03DF shape#(0x3DF) ()
 							if ((var0003 >= 0x000A) && (var0003 <= 0x000C))
 							{
 								item->Func026F();
-								return;
 							}
 						}
 					}
@@ -68835,7 +68832,6 @@ void Func062C object#(0x62C) ()
 				wait 30;
 				call Func063F;
 			};
-			return;
 		}
 	}
 }
@@ -69235,7 +69231,6 @@ void Func0633 object#(0x633) ()
 				gflags[0x02EA] = true;
 				UI_remove_from_party(0xFFFF);
 				Func093F(0xFFFF, 0x000C);
-				return;
 			}
 		}
 	}
@@ -75198,7 +75193,6 @@ void Func0696 object#(0x696) ()
 		}
 		UI_set_schedule_type(var0005, 0x001D);
 		gflags[0x032A] = true;
-		return;
 	}
 }
 
@@ -81610,7 +81604,6 @@ void Func070E object#(0x70E) ()
 			UI_set_item_frame(var0007, 0x0004);
 			var0008 = UI_set_item_quality(var0007, var0006);
 			var0008 = UI_update_last_created(var0005);
-			return;
 		}
 	}
 }
@@ -81964,7 +81957,6 @@ void Func0713 object#(0x713) ()
 			UI_play_sound_effect(0x003E);
 			UI_remove_item(var0005);
 		}
-		return;
 	}
 }
 
