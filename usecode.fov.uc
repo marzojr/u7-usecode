@@ -165,6 +165,7 @@ void Func009A shape#(0x9A) ()
 				actor frame standing;
 				face var0012;
 				call Func009A;
+				raw(0x0000);
 			};
 		}
 		else
@@ -2892,6 +2893,7 @@ void Func019A shape#(0x19A) ()
 				repeat 7
 				{
 					frame 0;
+					// Bug: in the original, the repeat jumps one byte too far.
 					repeat 3, 4
 					{
 						next frame;
@@ -4056,7 +4058,7 @@ void Func0247 shape#(0x247) ()
 	{
 		var0001 = script 0xFE9C
 		{
-			face north;
+			face (byte)0x30;	// Note: should be 'north'
 			actor frame bowing;
 			actor frame standing;
 		};
@@ -5983,6 +5985,7 @@ void Func028B shape#(0x28B) ()
 			var0002 = script 0xFE9C
 			{
 				face west;
+				actor frame bowing;
 				repeat 12
 				{
 					actor frame sitting;
@@ -11520,6 +11523,7 @@ void Func03DE shape#(0x3DE) ()
 				wait 1;
 				actor frame kneeling;
 				wait 1;
+				actor frame sleeping;
 				repeat 5
 				{
 					wait 1;
@@ -11880,7 +11884,7 @@ void Func0401 object#(0x401) ()
 			{
 				nohalt;
 				music 35;
-				continue;
+				raw(0x0001);	// Note: should probably be continue
 				say "@There, there...@";
 			};
 			var0005 = script UI_get_npc_object(0xFFF5) after 16 ticks
@@ -11983,6 +11987,7 @@ void Func0401 object#(0x401) ()
 			{
 				nohalt;
 				music 0;
+				raw(0x0000);	// Note: probably shouldn't be here
 			};
 			gflags[0x003B] = true;
 		}
@@ -28781,7 +28786,7 @@ void Func044B object#(0x44B) ()
 		{
 			nohalt;
 			music 26;
-			continue;
+			raw(0x0001);	// Note: should probably be continue
 			continue;
 			call Func044B;
 			nop;
@@ -28956,6 +28961,7 @@ void Func044B object#(0x44B) ()
 					{
 						nohalt;
 						music 26;
+						raw(0x0000);	// Note: should probably not be here
 					};
 					abort;
 				}
@@ -29037,6 +29043,7 @@ void Func044B object#(0x44B) ()
 			{
 				nohalt;
 				music 26;
+				raw(0x0000);	// Note: should probably not be here
 			};
 			break;
 	}
@@ -68330,7 +68337,7 @@ void Func0624 object#(0x624) ()
 		UI_close_gumps();
 		var0002 = script 0xFE9C
 		{
-			face north;
+			face (byte)0x30;	// Note: should probably be 'north'
 			actor frame bowing;
 			wait 1;
 			actor frame standing;
@@ -70012,7 +70019,7 @@ void Func0639 object#(0x639) ()
 		UI_halt_scheduled(item);
 		var0000 = script item
 		{
-			face north;
+			face (byte)0x30;	// Note: should probably be 'north'
 			actor frame kneeling;
 			wait 1;
 			say "@Kal Ort Por@";
@@ -72789,10 +72796,7 @@ void Func066E object#(0x66E) ()
 				var0009 = 0x0064;
 				var0008 = UI_set_item_quality(var0003, var0009);
 				UI_set_item_flag(var0003, 0x0012);
-				var0008 = script var0003 after var0009 ticks
-				{
-					remove;
-				};
+				var0008 = script var0003 after var0009 ticks remove;;
 			}
 		}
 		else
@@ -73786,6 +73790,7 @@ void Func067B object#(0x67B) ()
 		// This should probably be var0000 == true
 		if (0x0606 == true)
 		{
+			// Dead code
 			var0007 = script item
 			{
 				actor frame raise_1h;
@@ -82314,6 +82319,7 @@ void Func0800 0x800 (var var0000)
 			{
 				nohalt;
 				music 30;
+				raw(0x0000);	// Note should probably not be here
 			};
 		}
 		var000C = Func093C(UI_get_npc_object(0xFE9C), UI_get_party_list());
@@ -84269,6 +84275,7 @@ void Func0830 0x830 (var var0000, var var0001)
 		var0005 = script var0004
 		{
 			music 21;
+			raw(0x0000);	// Note should probably not be here
 		};
 	}
 	if (var0001 == 0x0000)
