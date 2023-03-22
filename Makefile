@@ -3,14 +3,14 @@ UCXT=D:/msys64/home/Marzo/exult-linux/exult/ucxt.exe
 
 all: usecode.fov2.ucxt usecode.ss2.ucxt
 
-usecode.fov2 : usecode.fov.uc
+usecode.fov2 : usecode.fov.uc $(UCC)
 	$(UCC) -o $@ $< |& (grep -v Warning || true)
 
-usecode.ss2 : usecode.ss.uc
+usecode.ss2 : usecode.ss.uc $(UCC)
 	$(UCC) -o $@ $< |& (grep -v Warning || true)
 
-usecode.fov2.ucxt : usecode.fov2
+usecode.fov2.ucxt : usecode.fov2 $(UCXT)
 	$(UCXT) -a -fs -fov -i$< > $@
 
-usecode.ss2.ucxt : usecode.ss2
+usecode.ss2.ucxt : usecode.ss2 $(UCXT)
 	$(UCXT) -a -fs -ss -i$< > $@
