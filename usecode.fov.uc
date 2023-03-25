@@ -70428,6 +70428,7 @@ void Func06C7 object#(0x6C7) ()
 	var var0001;
 	var var0002;
 	var var0003;
+
 	if (event == 0x0003)
 	{
 		var0000 = [0xFFA3, 0xFFA5, 0xFFAF, 0xFFAE, 0xFFA6];
@@ -70447,6 +70448,7 @@ void Func06C8 object#(0x6C8) ()
 	var var0001;
 	var var0002;
 	var var0003;
+
 	if (event == 0x0003)
 	{
 		var0000 = [0xFFA8, 0xFFF8, 0xFFAB];
@@ -70466,6 +70468,7 @@ void Func06C9 object#(0x6C9) ()
 	var var0001;
 	var var0002;
 	var var0003;
+
 	if (event == 0x0003)
 	{
 		var0000 = [0xFFA1, 0xFFA2];
@@ -76059,6 +76062,7 @@ void Func081C 0x81C (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
+
 	var0002 = UI_get_item_frame(var0000);
 	var0003 = (var0002 % 0x0004);
 	UI_set_item_frame(var0000, ((var0002 - var0003) + var0001));
@@ -76097,6 +76101,7 @@ void Func081E 0x81E (var var0000, var var0001, var var0002, var var0003, var var
 	var var000D;
 	var var000E;
 	var var000F;
+
 	var0009 = UI_get_object_position(var0000);
 	var000A = var0009[var0003];
 	var000B = UI_find_nearby(var0000, var0001, 0x0007, 0x0000);
@@ -76192,6 +76197,7 @@ var Func0820 0x820 (var var0000)
 void Func0821 0x821 (var var0000)
 {
 	var var0001;
+
 	var0001 = script var0000
 	{
 		finish;
@@ -77942,6 +77948,7 @@ void Func0842 0x842 ()
 void Func0843 0x843 ()
 {
 	var var0000;
+
 	UI_remove_npc_face(0xFEDE);
 	var0000 = script item
 	{
@@ -79126,6 +79133,7 @@ void Func0854 0x854 ()
 	var var0003;
 	var var0004;
 	var var0005;
+
 	var0000 = Func0909();
 
 	say("\"How many portions wouldst thou wish to sell?\"");
@@ -90285,6 +90293,7 @@ void Func08E3 0x8E3 ()
 void Func08E4 0x8E4 ()
 {
 	var var0000;
+
 	var0000 = 0x0001;
 }
 
@@ -91818,6 +91827,7 @@ void Func0911 0x911 (var var0000)
 void Func0912 0x912 (var var0000, var var0001, var var0002)
 {
 	var var0003;
+
 	var0003 = UI_set_npc_prop(UI_get_npc_object(var0000), var0001, var0002);
 }
 
@@ -91891,6 +91901,7 @@ void Func0916 0x916 (var var0000, var var0001)
 {
 	var var0002;
 	var var0003;
+
 	var0002 = 0x0000;
 
 	while (var0002 < var0001)
