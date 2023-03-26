@@ -2,3 +2,4 @@
 *.uca		text
 *.ucxt		text
 .gitattributes		text
+.gitignore		text

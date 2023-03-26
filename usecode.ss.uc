@@ -4928,8 +4928,7 @@ labelFunc0151_0462:
 				{
 					say("\"In life, I was Sansalys, the keeper of the Library of Chaos. Alas, the books are taken, except for a few.\"");
 					say("\"There is another who awaits thee there. She would aid thee, but of necessity her aid will be strange to thee.\"");
-					return;\n us from directly helping thee. I know that thou art our hope, yet my tongue is ensnared! I cannot speak the truth clearly.\"");
-					say();
+					say("\"There is a law which forbids us from directly helping thee. I know that thou art our hope, yet my tongue is ensnared! I cannot speak the truth clearly.\"");
 					if (UI_get_random(0x0006) > 0x0003)
 					{
 						goto labelFunc0151_0462;
