@@ -2753,7 +2753,6 @@ void Func019A shape#(0x19A) ()
 				repeat 7
 				{
 					frame 0;
-					// Bug: in the original, the repeat jumps one byte too far.
 					repeat 3, 4
 					{
 						next frame;
@@ -2764,6 +2763,7 @@ void Func019A shape#(0x19A) ()
 			};
 			var0002 = script var0000
 			{
+				// Bug: in the original, the repeat jumps one byte too far.
 				repeat 24
 				{
 					frame 0;
