@@ -1,6 +1,5 @@
 #game "blackgate"
 
-// externs
 extern void Func08FF 0x8FF (var var0000);
 extern var Func0829 0x829 (var var0000);
 
@@ -23,7 +22,6 @@ void Func0096 shape#(0x96) ()
 	}
 }
 
-// externs
 extern void Func01B0 shape#(0x1B0) ();
 extern var Func0881 0x881 ();
 extern var Func092D 0x92D (var var0000);
@@ -165,7 +163,6 @@ void Func009A shape#(0x9A) ()
 				actor frame standing;
 				face var0012;
 				call Func009A;
-				raw(0x0000);	// Note: probably shouldn't be here
 			};
 		}
 		else
@@ -635,7 +632,6 @@ void Func009A shape#(0x9A) ()
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func0908 0x908 ();
 extern var Func090A 0x90A ();
@@ -911,7 +907,6 @@ void Func00D2 shape#(0xD2) ()
 	}
 }
 
-// externs
 extern var Func081B 0x81B (var var0000);
 extern var Func081D 0x81D (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005);
 extern void Func081E 0x81E (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006, var var0007, var var0008);
@@ -962,7 +957,6 @@ void Func00E1 shape#(0xE1) ()
 	}
 }
 
-// externs
 extern var Func081B 0x81B (var var0000);
 extern var Func081D 0x81D (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005);
 extern void Func081E 0x81E (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006, var var0007, var var0008);
@@ -1013,7 +1007,6 @@ void Func00F6 shape#(0xF6) ()
 	}
 }
 
-// externs
 extern var Func081B 0x81B (var var0000);
 extern var Func081D 0x81D (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005);
 extern void Func081E 0x81E (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006, var var0007, var var0008);
@@ -1064,7 +1057,6 @@ void Func00FA shape#(0xFA) ()
 	}
 }
 
-// externs
 extern void Func08FF 0x8FF (var var0000);
 extern var Func080D 0x80D ();
 extern void Func0831 0x831 (var var0000);
@@ -1159,7 +1151,6 @@ void Func00FC shape#(0xFC) ()
 	}
 }
 
-// externs
 extern void Func08FE 0x8FE (var var0000);
 extern void Func0628 object#(0x628) ();
 
@@ -1205,7 +1196,6 @@ void Func0102 shape#(0x102) ()
 	}
 }
 
-// externs
 extern var Func0827 0x827 (var var0000, var var0001);
 extern void Func08FF 0x8FF (var var0000);
 
@@ -1277,7 +1267,6 @@ void Func010B shape#(0x10B) ()
 	}
 }
 
-// externs
 extern var Func081B 0x81B (var var0000);
 extern var Func081D 0x81D (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005);
 extern void Func081E 0x81E (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006, var var0007, var var0008);
@@ -1328,7 +1317,6 @@ void Func010E shape#(0x10E) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern void Func08FF 0x8FF (var var0000);
 
@@ -1382,7 +1370,6 @@ void Func0123 shape#(0x123) ()
 	}
 }
 
-// externs
 extern var Func080C 0x80C (var var0000);
 extern void Func028C shape#(0x28C) ();
 extern void Func0348 shape#(0x348) ();
@@ -1590,7 +1577,6 @@ void Func012A shape#(0x12A) ()
 	}
 }
 
-// externs
 extern void Func0809 0x809 (var var0000);
 
 void Func012D shape#(0x12D) ()
@@ -1601,8 +1587,8 @@ void Func012D shape#(0x12D) ()
 	}
 }
 
-// externs
 extern void Func0833 0x833 (var var0000, var var0001);
+extern void Func03A8 shape#(0x3A8) ();
 
 void Func012F shape#(0x12F) ()
 {
@@ -1616,10 +1602,9 @@ void Func012F shape#(0x12F) ()
 		UI_flash_mouse(0x0000);
 		return;
 	}
-	Func0833(item, 0x03A8);
+	Func0833(item, Func03A8);
 }
 
-// externs
 extern var Func0802 0x802 (var var0000, var var0001);
 extern void Func0615 object#(0x615) ();
 
@@ -1760,7 +1745,6 @@ void Func0142 shape#(0x142) ()
 	}
 }
 
-// externs
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern void Func08FE 0x8FE (var var0000);
 
@@ -1851,7 +1835,6 @@ void Func0149 shape#(0x149) ()
 	}
 }
 
-// externs
 extern void Func0942 0x942 (var var0000, var var0001);
 
 void Func0150 shape#(0x150) ()
@@ -1862,7 +1845,6 @@ void Func0150 shape#(0x150) ()
 	}
 }
 
-// externs
 extern var Func0827 0x827 (var var0000, var var0001);
 extern void Func0905 0x905 (var var0000);
 
@@ -1894,7 +1876,6 @@ void Func0152 shape#(0x152) ()
 	}
 }
 
-// externs
 extern void Func08FA 0x8FA (var var0000);
 extern void Func092A 0x92A (var var0000, var var0001);
 extern void Func08FF 0x8FF (var var0000);
@@ -1996,7 +1977,6 @@ void Func0174 shape#(0x174) ()
 	}
 }
 
-// externs
 extern var Func081B 0x81B (var var0000);
 extern var Func081D 0x81D (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005);
 extern void Func081E 0x81E (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006, var var0007, var var0008);
@@ -2047,7 +2027,6 @@ void Func0178 shape#(0x178) ()
 	}
 }
 
-// externs
 extern void Func0813 0x813 (var var0000, var var0001, var var0002);
 
 void Func0179 shape#(0x179) ()
@@ -2060,7 +2039,6 @@ void Func0179 shape#(0x179) ()
 	Func0813(item, var0001, 0x005B);
 }
 
-// externs
 extern var Func0908 0x908 ();
 
 void Func017B shape#(0x17B) ()
@@ -2635,7 +2613,6 @@ void Func017B shape#(0x17B) ()
 	}
 }
 
-// externs
 extern var Func081B 0x81B (var var0000);
 extern var Func081D 0x81D (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005);
 extern void Func081E 0x81E (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006, var var0007, var var0008);
@@ -2742,7 +2719,6 @@ void Func018A shape#(0x18A) ()
 	}
 }
 
-// externs
 extern void Func060D object#(0x60D) ();
 
 void Func019A shape#(0x19A) ()
@@ -2836,7 +2812,6 @@ void Func01A2 shape#(0x1A2) ()
 	}
 }
 
-// externs
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern var Func092D 0x92D (var var0000);
 extern var Func0827 0x827 (var var0000, var var0001);
@@ -3173,7 +3148,6 @@ void Func01AF shape#(0x1AF) ()
 	}
 }
 
-// externs
 extern var Func081B 0x81B (var var0000);
 extern var Func081D 0x81D (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005);
 extern void Func081E 0x81E (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006, var var0007, var var0008);
@@ -3224,7 +3198,6 @@ void Func01B0 shape#(0x1B0) ()
 	}
 }
 
-// externs
 extern var Func081B 0x81B (var var0000);
 extern var Func081D 0x81D (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005);
 extern void Func081E 0x81E (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006, var var0007, var var0008);
@@ -3275,7 +3248,6 @@ void Func01B1 shape#(0x1B1) ()
 	}
 }
 
-// externs
 extern void Func08FE 0x8FE (var var0000);
 extern void Func0629 object#(0x629) ();
 
@@ -3321,7 +3293,6 @@ void Func01B2 shape#(0x1B2) ()
 	}
 }
 
-// externs
 extern var Func0827 0x827 (var var0000, var var0001);
 
 void Func01B3 shape#(0x1B3) ()
@@ -3356,7 +3327,6 @@ void Func01BF shape#(0x1BF) ()
 	}
 }
 
-// externs
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 
 void Func01D6 shape#(0x1D6) ()
@@ -3374,7 +3344,6 @@ void Func01D6 shape#(0x1D6) ()
 	}
 }
 
-// externs
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func087C 0x87C ();
 extern var Func090A 0x90A ();
@@ -3520,7 +3489,6 @@ void Func01DF shape#(0x1DF) ()
 	}
 }
 
-// externs
 extern void Func0942 0x942 (var var0000, var var0001);
 
 void Func01E1 shape#(0x1E1) ()
@@ -3610,7 +3578,6 @@ void Func01F4 shape#(0x1F4) ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 
 void Func01F7 shape#(0x1F7) ()
@@ -3661,7 +3628,6 @@ void Func01F7 shape#(0x1F7) ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func03A7 shape#(0x3A7) ();
 
@@ -3808,7 +3774,6 @@ void Func01F8 shape#(0x1F8) ()
 	}
 }
 
-// externs
 extern void Func0639 object#(0x639) ();
 
 void Func01FA shape#(0x1FA) ()
@@ -3863,7 +3828,6 @@ void Func020E shape#(0x20E) ()
 	}
 }
 
-// externs
 extern void Func0500 object#(0x500) ();
 
 void Func0216 shape#(0x216) ()
@@ -3871,7 +3835,6 @@ void Func0216 shape#(0x216) ()
 	item->Func0500();
 }
 
-// externs
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern void Func08FF 0x8FF (var var0000);
 
@@ -3930,7 +3893,6 @@ void Func0247 shape#(0x247) ()
 	}
 }
 
-// externs
 extern void Func0942 0x942 (var var0000, var var0001);
 
 void Func0253 shape#(0x253) ()
@@ -3941,7 +3903,6 @@ void Func0253 shape#(0x253) ()
 	}
 }
 
-// externs
 extern void Func0813 0x813 (var var0000, var var0001, var var0002);
 
 void Func0268 shape#(0x268) ()
@@ -3949,7 +3910,6 @@ void Func0268 shape#(0x268) ()
 	Func0813(item, 0x0001, 0x005A);
 }
 
-// externs
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func0911 0x911 (var var0000);
 extern var Func090A 0x90A ();
@@ -4220,7 +4180,6 @@ void Func0269 shape#(0x269) ()
 	say("\"Farewell, Avatar. Good luck to thee.\"*");
 }
 
-// externs
 extern void Func0690 object#(0x690) ();
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern var Func092D 0x92D (var var0000);
@@ -4328,7 +4287,6 @@ void Func026F shape#(0x26F) ()
 	}
 }
 
-// externs
 extern void Func08FF 0x8FF (var var0000);
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern var Func092D 0x92D (var var0000);
@@ -4455,7 +4413,6 @@ void Func0270 shape#(0x270) ()
 	}
 }
 
-// externs
 extern void Func0925 0x925 (var var0000);
 extern var Func081B 0x81B (var var0000);
 extern void Func081C 0x81C (var var0000, var var0001);
@@ -4604,7 +4561,6 @@ void Func0276 shape#(0x276) ()
 	var0001 = UI_set_to_attack(0xFE9C, var0000, 0x0276);
 }
 
-// externs
 extern void Func0815 0x815 (var var0000);
 
 void Func0281 shape#(0x281) ()
@@ -5286,7 +5242,6 @@ void Func0282 shape#(0x282) ()
 	}
 }
 
-// externs
 extern var Func0937 0x937 (var var0000);
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func0933 0x933 (var var0000, var var0001, var var0002);
@@ -5325,7 +5280,6 @@ void Func0284 shape#(0x284) ()
 	}
 }
 
-// externs
 extern void Func08FF 0x8FF (var var0000);
 
 void Func0285 shape#(0x285) ()
@@ -5339,7 +5293,6 @@ void Func0285 shape#(0x285) ()
 	}
 }
 
-// externs
 extern void Func08FF 0x8FF (var var0000);
 
 void Func0286 shape#(0x286) ()
@@ -5353,7 +5306,6 @@ void Func0286 shape#(0x286) ()
 	}
 }
 
-// externs
 extern void Func08FE 0x8FE (var var0000);
 extern void Func0925 0x925 (var var0000);
 
@@ -5376,7 +5328,6 @@ void Func0288 shape#(0x288) ()
 	}
 }
 
-// externs
 extern void Func0835 0x835 (var var0000, var var0001, var var0002);
 extern void Func08FD 0x8FD (var var0000);
 extern void Func0603 object#(0x603) ();
@@ -5441,7 +5392,6 @@ void Func0289 shape#(0x289) ()
 	}
 }
 
-// externs
 extern var Func0932 0x932 (var var0000);
 extern var Func0937 0x937 (var var0000);
 
@@ -5485,7 +5435,6 @@ void Func028A shape#(0x28A) ()
 	}
 }
 
-// externs
 extern void Func08FF 0x8FF (var var0000);
 
 void Func028B shape#(0x28B) ()
@@ -5556,7 +5505,6 @@ void Func028B shape#(0x28B) ()
 	}
 }
 
-// externs
 extern void Func0809 0x809 (var var0000);
 
 void Func028C shape#(0x28C) ()
@@ -5567,7 +5515,6 @@ void Func028C shape#(0x28C) ()
 	}
 }
 
-// externs
 extern void Func062D object#(0x62D) ();
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 
@@ -5619,7 +5566,6 @@ void Func028D shape#(0x28D) ()
 	}
 }
 
-// externs
 extern void Func062E object#(0x62E) ();
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 
@@ -5692,7 +5638,6 @@ void Func0291 shape#(0x291) ()
 	}
 }
 
-// externs
 extern void Func08FE 0x8FE (var var0000);
 
 void Func0292 shape#(0x292) ()
@@ -5768,7 +5713,6 @@ void Func0292 shape#(0x292) ()
 	}
 }
 
-// externs
 extern void Func0809 0x809 (var var0000);
 
 void Func0294 shape#(0x294) ()
@@ -5779,7 +5723,6 @@ void Func0294 shape#(0x294) ()
 	}
 }
 
-// externs
 extern void Func08FE 0x8FE (var var0000);
 extern void Func0933 0x933 (var var0000, var var0001, var var0002);
 
@@ -5880,7 +5823,6 @@ void Func0296 shape#(0x296) ()
 	}
 }
 
-// externs
 extern void Func026F shape#(0x26F) ();
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern var Func0944 0x944 (var var0000);
@@ -6300,7 +6242,6 @@ void Func02B5 shape#(0x2B5) ()
 	}
 }
 
-// externs
 extern void Func00FC shape#(0xFC) ();
 
 void Func02B7 shape#(0x2B7) ()
@@ -6311,7 +6252,6 @@ void Func02B7 shape#(0x2B7) ()
 	}
 }
 
-// externs
 extern void Func0800 0x800 (var var0000);
 
 void Func02B8 shape#(0x2B8) ()
@@ -6322,7 +6262,6 @@ void Func02B8 shape#(0x2B8) ()
 	}
 }
 
-// externs
 extern void Func08FF 0x8FF (var var0000);
 
 void Func02BA shape#(0x2BA) ()
@@ -6346,7 +6285,6 @@ void Func02BA shape#(0x2BA) ()
 	}
 }
 
-// externs
 extern void Func0839 0x839 (var var0000, var var0001, var var0002);
 extern var Func0827 0x827 (var var0000, var var0001);
 extern void Func0905 0x905 (var var0000);
@@ -6378,7 +6316,6 @@ void Func02BD shape#(0x2BD) ()
 	}
 }
 
-// externs
 extern void Func08FE 0x8FE (var var0000);
 extern void Func0925 0x925 (var var0000);
 extern var Func0932 0x932 (var var0000);
@@ -6495,7 +6432,6 @@ void Func02C0 shape#(0x2C0) ()
 	}
 }
 
-// externs
 extern void Func06F6 object#(0x6F6) ();
 extern void Func03DE shape#(0x3DE) ();
 
@@ -6543,7 +6479,6 @@ void Func02C4 shape#(0x2C4) ()
 	}
 }
 
-// externs
 extern void Func02DE shape#(0x2DE) ();
 
 void Func02C5 shape#(0x2C5) ()
@@ -6570,7 +6505,6 @@ void Func02C5 shape#(0x2C5) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 
 void Func02CB shape#(0x2CB) ()
@@ -7005,7 +6939,6 @@ void Func02CB shape#(0x2CB) ()
 	}
 }
 
-// externs
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 
 void Func02CF shape#(0x2CF) ()
@@ -7033,7 +6966,6 @@ void Func02CF shape#(0x2CF) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 
 void Func02D3 shape#(0x2D3) ()
@@ -7054,7 +6986,6 @@ void Func02D3 shape#(0x2D3) ()
 	}
 }
 
-// externs
 extern var Func0937 0x937 (var var0000);
 extern void Func0904 0x904 (var var0000, var var0001);
 extern void Func060A object#(0x60A) ();
@@ -7140,7 +7071,6 @@ void Func02D8 shape#(0x2D8) ()
 	}
 }
 
-// externs
 extern void Func0940 0x940 (var var0000);
 
 void Func02D9 shape#(0x2D9) ()
@@ -7200,7 +7130,6 @@ void Func02D9 shape#(0x2D9) ()
 	}
 }
 
-// externs
 extern void Func08FF 0x8FF (var var0000);
 extern void Func0925 0x925 (var var0000);
 extern void Func08FD 0x8FD (var var0000);
@@ -7296,7 +7225,6 @@ void Func02DE shape#(0x2DE) ()
 	}
 }
 
-// externs
 extern void Func08FF 0x8FF (var var0000);
 
 void Func02DF shape#(0x2DF) ()
@@ -7314,7 +7242,6 @@ void Func02E3 shape#(0x2E3) ()
 {
 }
 
-// externs
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 
 void Func02E4 shape#(0x2E4) ()
@@ -7337,7 +7264,6 @@ void Func02E4 shape#(0x2E4) ()
 	}
 }
 
-// externs
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 
 void Func02E5 shape#(0x2E5) ()
@@ -7365,7 +7291,6 @@ void Func02E5 shape#(0x2E5) ()
 	}
 }
 
-// externs
 extern var Func0937 0x937 (var var0000);
 
 void Func02E6 shape#(0x2E6) ()
@@ -7379,7 +7304,6 @@ void Func02E6 shape#(0x2E6) ()
 	}
 }
 
-// externs
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern var Func0827 0x827 (var var0000, var var0001);
 extern var Func0937 0x937 (var var0000);
@@ -7545,7 +7469,6 @@ void Func02EB shape#(0x2EB) ()
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func0490 object#(0x490) ();
 
@@ -7574,7 +7497,6 @@ void Func02F0 shape#(0x2F0) ()
 	}
 }
 
-// externs
 extern void Func08AD 0x8AD ();
 
 void Func02F2 shape#(0x2F2) ()
@@ -7642,7 +7564,6 @@ void Func02F2 shape#(0x2F2) ()
 	}
 }
 
-// externs
 extern void Func0809 0x809 (var var0000);
 
 void Func02F5 shape#(0x2F5) ()
@@ -7653,7 +7574,6 @@ void Func02F5 shape#(0x2F5) ()
 	}
 }
 
-// externs
 extern void Func08FF 0x8FF (var var0000);
 extern var Func08E7 0x8E7 ();
 extern void Func06F6 object#(0x6F6) ();
@@ -7772,7 +7692,6 @@ void Func02F8 shape#(0x2F8) ()
 	}
 }
 
-// externs
 extern void Func082F 0x82F ();
 
 void Func02FB shape#(0x2FB) ()
@@ -7820,7 +7739,6 @@ void Func0301 shape#(0x301) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 extern void Func06E1 object#(0x6E1) ();
 
@@ -7836,7 +7754,6 @@ void Func0302 shape#(0x302) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 
 void Func0303 shape#(0x303) ()
@@ -7902,7 +7819,6 @@ void Func0303 shape#(0x303) ()
 	}
 }
 
-// externs
 extern void Func0809 0x809 (var var0000);
 
 void Func0305 shape#(0x305) ()
@@ -7913,7 +7829,6 @@ void Func0305 shape#(0x305) ()
 	}
 }
 
-// externs
 extern void Func0809 0x809 (var var0000);
 
 void Func0306 shape#(0x306) ()
@@ -7924,7 +7839,6 @@ void Func0306 shape#(0x306) ()
 	}
 }
 
-// externs
 extern void Func08FF 0x8FF (var var0000);
 extern var Func0829 0x829 (var var0000);
 
@@ -7943,7 +7857,6 @@ void Func030D shape#(0x30D) ()
 	}
 }
 
-// externs
 extern void Func08FF 0x8FF (var var0000);
 extern void Func0925 0x925 (var var0000);
 
@@ -7995,7 +7908,6 @@ void Func030E shape#(0x30E) ()
 	}
 }
 
-// externs
 extern void Func08FE 0x8FE (var var0000);
 extern var Func093E 0x93E ();
 extern var Func0822 0x822 (var var0000);
@@ -8172,7 +8084,6 @@ void Func0311 shape#(0x311) ()
 	}
 }
 
-// externs
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern var Func0827 0x827 (var var0000, var var0001);
 extern void Func0816 0x816 (var var0000);
@@ -8211,7 +8122,6 @@ void Func0313 shape#(0x313) ()
 	}
 }
 
-// externs
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern var Func0827 0x827 (var var0000, var var0001);
 extern var Func080E 0x80E (var var0000);
@@ -8280,7 +8190,6 @@ void Func0314 shape#(0x314) ()
 	}
 }
 
-// externs
 extern void Func08FE 0x8FE (var var0000);
 extern void Func0925 0x925 (var var0000);
 
@@ -8308,7 +8217,6 @@ void Func0316 shape#(0x316) ()
 	}
 }
 
-// externs
 extern void Func0809 0x809 (var var0000);
 
 void Func031C shape#(0x31C) ()
@@ -8319,7 +8227,6 @@ void Func031C shape#(0x31C) ()
 	}
 }
 
-// externs
 extern void Func0710 object#(0x710) ();
 extern var Func0908 0x908 ();
 
@@ -8619,7 +8526,6 @@ void Func031E shape#(0x31E) ()
 	}
 }
 
-// externs
 extern var Func090B 0x90B (var var0000);
 extern var Func0834 0x834 ();
 
@@ -8685,7 +8591,6 @@ void Func0326 shape#(0x326) ()
 	say("\"Goodbye.\"*");
 }
 
-// externs
 extern var Func083A 0x83A ();
 extern var Func083C 0x83C (var var0000);
 extern void Func0933 0x933 (var var0000, var var0001, var var0002);
@@ -8756,7 +8661,6 @@ void Func0329 shape#(0x329) ()
 	}
 }
 
-// externs
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern var Func0944 0x944 (var var0000);
 extern var Func0945 0x945 (var var0000);
@@ -9376,7 +9280,6 @@ void Func032A shape#(0x32A) ()
 	}
 }
 
-// externs
 extern var Func093D 0x93D (var var0000, var var0001);
 extern var Func0908 0x908 ();
 extern void Func08FF 0x8FF (var var0000);
@@ -9776,7 +9679,6 @@ void Func0334 shape#(0x334) ()
 	UI_display_runes(0x0033, var000A);
 }
 
-// externs
 extern void Func0925 0x925 (var var0000);
 extern void Func08FE 0x8FE (var var0000);
 
@@ -9834,7 +9736,6 @@ void Func0336 shape#(0x336) ()
 	}
 }
 
-// externs
 extern void Func08FE 0x8FE (var var0000);
 
 void Func0337 shape#(0x337) ()
@@ -9910,7 +9811,6 @@ void Func0337 shape#(0x337) ()
 	}
 }
 
-// externs
 extern void Func08FF 0x8FF (var var0000);
 extern void Func08FE 0x8FE (var var0000);
 extern var Func0937 0x937 (var var0000);
@@ -9975,7 +9875,6 @@ void Func033B shape#(0x33B) ()
 	}
 }
 
-// externs
 extern var Func081F 0x81F (var var0000);
 
 void Func033C shape#(0x33C) ()
@@ -9992,7 +9891,6 @@ void Func033C shape#(0x33C) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern void Func08FF 0x8FF (var var0000);
 
@@ -10007,7 +9905,6 @@ void Func0345 shape#(0x345) ()
 	}
 }
 
-// externs
 extern void Func0269 shape#(0x269) ();
 
 void Func0347 shape#(0x347) ()
@@ -10028,7 +9925,6 @@ void Func0347 shape#(0x347) ()
 	}
 }
 
-// externs
 extern var Func080D 0x80D ();
 extern void Func0812 0x812 (var var0000);
 extern var Func08B3 0x8B3 (var var0000);
@@ -10077,7 +9973,6 @@ void Func0348 shape#(0x348) ()
 	}
 }
 
-// externs
 extern void Func0813 0x813 (var var0000, var var0001, var var0002);
 
 void Func034A shape#(0x34A) ()
@@ -10088,7 +9983,6 @@ void Func034A shape#(0x34A) ()
 	}
 }
 
-// externs
 extern var Func0820 0x820 (var var0000);
 
 void Func034D shape#(0x34D) ()
@@ -10105,7 +9999,6 @@ void Func034D shape#(0x34D) ()
 	}
 }
 
-// externs
 extern void Func06F6 object#(0x6F6) ();
 
 void Func0350 shape#(0x350) ()
@@ -10139,7 +10032,6 @@ void Func0350 shape#(0x350) ()
 	}
 }
 
-// externs
 extern void Func08FF 0x8FF (var var0000);
 
 void Func0353 shape#(0x353) ()
@@ -10153,7 +10045,6 @@ void Func0353 shape#(0x353) ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func06F9 object#(0x6F9) ();
 
@@ -10402,7 +10293,6 @@ void Func0356 shape#(0x356) ()
 	}
 }
 
-// externs
 extern void Func08FF 0x8FF (var var0000);
 extern void Func0933 0x933 (var var0000, var var0001, var var0002);
 
@@ -10473,7 +10363,6 @@ void Func035F shape#(0x35F) ()
 	}
 }
 
-// externs
 extern void Func080A 0x80A (var var0000, var var0001);
 
 void Func0369 shape#(0x369) ()
@@ -10491,8 +10380,8 @@ void Func0369 shape#(0x369) ()
 	}
 }
 
-// externs
 extern void Func0833 0x833 (var var0000, var var0001);
+extern void Func03A7 shape#(0x3A7) ();
 
 void Func036C shape#(0x36C) ()
 {
@@ -10506,10 +10395,9 @@ void Func036C shape#(0x36C) ()
 		UI_flash_mouse(0x0000);
 		return;
 	}
-	Func0833(item, 0x03A7);
+	Func0833(item, Func03A7);
 }
 
-// externs
 extern var Func093C 0x93C (var var0000, var var0001);
 extern void Func061C object#(0x61C) ();
 
@@ -10589,7 +10477,6 @@ void Func0379 shape#(0x379) ()
 	}
 }
 
-// externs
 extern void Func092A 0x92A (var var0000, var var0001);
 
 void Func037D shape#(0x37D) ()
@@ -10645,8 +10532,8 @@ void Func037D shape#(0x37D) ()
 	}
 }
 
-// externs
 extern void Func0832 0x832 (var var0000, var var0001);
+extern void Func036C shape#(0x36C) ();
 
 void Func03A7 shape#(0x3A7) ()
 {
@@ -10660,11 +10547,11 @@ void Func03A7 shape#(0x3A7) ()
 		UI_flash_mouse(0x0000);
 		return;
 	}
-	Func0832(item, 0x036C);
+	Func0832(item, Func036C);
 }
 
-// externs
 extern void Func0832 0x832 (var var0000, var var0001);
+extern void Func012F shape#(0x12F) ();
 
 void Func03A8 shape#(0x3A8) ()
 {
@@ -10678,10 +10565,9 @@ void Func03A8 shape#(0x3A8) ()
 		UI_flash_mouse(0x0000);
 		return;
 	}
-	Func0832(item, 0x012F);
+	Func0832(item, Func012F);
 }
 
-// externs
 extern var Func0937 0x937 (var var0000);
 
 void Func03B0 shape#(0x3B0) ()
@@ -10736,7 +10622,6 @@ void Func03B2 shape#(0x3B2) ()
 	say("\"Goodbye.\"*");
 }
 
-// externs
 extern void Func083E 0x83E (var var0000, var var0001);
 
 void Func03B5 shape#(0x3B5) ()
@@ -10745,7 +10630,6 @@ void Func03B5 shape#(0x3B5) ()
 	Func083E(item, event);
 }
 
-// externs
 extern void Func083E 0x83E (var var0000, var var0001);
 
 void Func03B6 shape#(0x3B6) ()
@@ -10754,7 +10638,6 @@ void Func03B6 shape#(0x3B6) ()
 	Func083E(item, event);
 }
 
-// externs
 extern void Func0805 0x805 (var var0000);
 extern void Func0807 0x807 (var var0000);
 extern void Func0803 0x803 (var var0000);
@@ -10787,7 +10670,6 @@ void Func03C8 shape#(0x3C8) ()
 	}
 }
 
-// externs
 extern var Func082E 0x82E (var var0000);
 
 void Func03D5 shape#(0x3D5) ()
@@ -10937,7 +10819,6 @@ void Func03DE shape#(0x3DE) ()
 	}
 }
 
-// externs
 extern void Func026F shape#(0x26F) ();
 
 void Func03DF shape#(0x3DF) ()
@@ -11024,7 +10905,6 @@ void Func03E0 shape#(0x3E0) ()
 	}
 }
 
-// externs
 extern void Func0800 0x800 (var var0000);
 
 void Func03F3 shape#(0x3F3) ()
@@ -11087,7 +10967,6 @@ void Func03F5 shape#(0x3F5) ()
 	}
 }
 
-// externs
 extern void Func0893 0x893 ();
 extern void Func0892 0x892 ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -11193,7 +11072,6 @@ void Func03F7 shape#(0x3F7) ()
 	}
 }
 
-// externs
 extern void Func0269 shape#(0x269) ();
 
 void Func03FD shape#(0x3FD) ()
@@ -11201,7 +11079,6 @@ void Func03FD shape#(0x3FD) ()
 	UI_get_npc_object(0x0269)->Func0269();
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern void Func08DD 0x8DD ();
@@ -11253,8 +11130,7 @@ void Func0401 object#(0x401) ()
 			var0005 = script UI_get_npc_object(0xFFFF)
 			{
 				nohalt;
-				music 35;
-				raw(0x0001);	// Note: should probably be continue
+				music 35, 1;
 				say "@There, there...@";
 			};
 			var0005 = script UI_get_npc_object(0xFFF5) after 16 ticks
@@ -11351,8 +11227,7 @@ void Func0401 object#(0x401) ()
 			var0005 = script item
 			{
 				nohalt;
-				music 0;
-				raw(0x0000);	// Note: probably shouldn't be here
+				music 0, 0;
 			};
 			gflags[0x003B] = true;
 		}
@@ -11675,7 +11550,6 @@ void Func0401 object#(0x401) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090B 0x90B (var var0000);
@@ -12110,7 +11984,6 @@ void Func0402 object#(0x402) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090B 0x90B (var var0000);
@@ -12427,7 +12300,6 @@ void Func0403 object#(0x403) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0908 0x908 ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -12780,7 +12652,6 @@ void Func0404 object#(0x404) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0908 0x908 ();
 extern void Func089E 0x89E (var var0000, var var0001, var var0002);
@@ -13056,7 +12927,6 @@ void Func0405 object#(0x405) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func08EE 0x8EE ();
@@ -13361,7 +13231,6 @@ void Func0406 object#(0x406) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func090B 0x90B (var var0000);
 extern var Func090A 0x90A ();
@@ -13616,7 +13485,6 @@ void Func0407 object#(0x407) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0908 0x908 ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -13920,7 +13788,6 @@ void Func0408 object#(0x408) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0908 0x908 ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -14191,7 +14058,6 @@ void Func0409 object#(0x409) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func093C 0x93C (var var0000, var var0001);
@@ -14932,7 +14798,6 @@ void Func040A object#(0x40A) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
@@ -15120,7 +14985,6 @@ void Func040B object#(0x40B) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0908 0x908 ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -15538,7 +15402,6 @@ void Func040C object#(0x40C) ()
 	}
 }
 
-// externs
 extern var Func090B 0x90B (var var0000);
 extern var Func0834 0x834 ();
 
@@ -15692,7 +15555,6 @@ void Func040D object#(0x40D) ()
 	say("\"Goodbye. Watch thy back.\"*");
 }
 
-// externs
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
@@ -15842,7 +15704,6 @@ void Func040E object#(0x40E) ()
 	say("\"Good day.\"*");
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 
@@ -15955,7 +15816,6 @@ void Func040F object#(0x40F) ()
 	say("\"Farewell.\"");
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func08AB 0x8AB ();
@@ -16162,7 +16022,6 @@ void Func0410 object#(0x410) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern void Func0860 0x860 (var var0000, var var0001, var var0002);
 extern void Func092E 0x92E (var var0000);
@@ -16267,7 +16126,6 @@ void Func0411 object#(0x411) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0908 0x908 ();
 extern var Func08FC 0x8FC (var var0000, var var0001);
@@ -16450,7 +16308,6 @@ void Func0412 object#(0x412) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
@@ -16626,7 +16483,6 @@ void Func0413 object#(0x413) ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func08BD 0x8BD (var var0000, var var0001);
 extern void Func092E 0x92E (var var0000);
@@ -16704,7 +16560,6 @@ void Func0414 object#(0x414) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern void Func088D 0x88D ();
 extern var Func090A 0x90A ();
@@ -16953,7 +16808,6 @@ void Func0415 object#(0x415) ()
 	}
 }
 
-// externs
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern void Func0919 0x919 ();
 extern void Func091A 0x91A ();
@@ -17069,7 +16923,6 @@ void Func0416 object#(0x416) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
@@ -17618,7 +17471,6 @@ labelFunc0417_0743:
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
 extern void Func08C5 0x8C5 ();
@@ -17751,7 +17603,6 @@ void Func0418 object#(0x418) ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func0862 0x862 ();
 extern void Func0861 0x861 ();
@@ -17946,7 +17797,6 @@ void Func0419 object#(0x419) ()
 	}
 }
 
-// externs
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
 extern void Func0852 0x852 ();
@@ -18432,7 +18282,6 @@ void Func041A object#(0x41A) ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func08D1 0x8D1 ();
@@ -18643,7 +18492,6 @@ void Func041B object#(0x41B) ()
 	}
 }
 
-// externs
 extern void Func092E 0x92E (var var0000);
 
 void Func041C object#(0x41C) ()
@@ -18779,7 +18627,6 @@ void Func041C object#(0x41C) ()
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
@@ -18897,7 +18744,6 @@ void Func041D object#(0x41D) ()
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
@@ -19033,7 +18879,6 @@ void Func041E object#(0x41E) ()
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 
 void Func041F object#(0x41F) ()
@@ -19145,7 +18990,6 @@ void Func041F object#(0x41F) ()
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 
 void Func0420 object#(0x420) ()
@@ -19246,7 +19090,6 @@ void Func0420 object#(0x420) ()
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 
 void Func0421 object#(0x421) ()
@@ -19370,7 +19213,6 @@ void Func0421 object#(0x421) ()
 	}
 }
 
-// externs
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func0919 0x919 ();
@@ -19538,7 +19380,6 @@ void Func0422 object#(0x422) ()
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
 extern void Func0870 0x870 (var var0000, var var0001, var var0002);
@@ -19669,7 +19510,6 @@ void Func0423 object#(0x423) ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func0950 0x950 (var var0000, var var0001);
 extern void Func092E 0x92E (var var0000);
@@ -19764,7 +19604,6 @@ void Func0424 object#(0x424) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090B 0x90B (var var0000);
@@ -19960,7 +19799,6 @@ void Func0425 object#(0x425) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func0899 0x899 ();
@@ -20135,7 +19973,6 @@ void Func0426 object#(0x426) ()
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
@@ -20217,7 +20054,6 @@ void Func0427 object#(0x427) ()
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
@@ -20328,7 +20164,6 @@ void Func0428 object#(0x428) ()
 	}
 }
 
-// externs
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092E 0x92E (var var0000);
@@ -20498,7 +20333,6 @@ void Func0429 object#(0x429) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -20698,7 +20532,6 @@ void Func042A object#(0x42A) ()
 	}
 }
 
-// externs
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func0911 0x911 (var var0000);
@@ -20907,7 +20740,6 @@ void Func042B object#(0x42B) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
@@ -21123,7 +20955,6 @@ void Func042C object#(0x42C) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern var Func090A 0x90A ();
@@ -21348,7 +21179,6 @@ void Func042D object#(0x42D) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
@@ -21551,7 +21381,6 @@ void Func042E object#(0x42E) ()
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func08A0 0x8A0 ();
 extern void Func0911 0x911 (var var0000);
@@ -21678,7 +21507,6 @@ void Func042F object#(0x42F) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 
@@ -21827,7 +21655,6 @@ void Func0430 object#(0x430) ()
 	    ".\"*");
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func0875 0x875 (var var0000, var var0001);
 extern void Func092E 0x92E (var var0000);
@@ -21909,7 +21736,6 @@ void Func0431 object#(0x431) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func088C 0x88C ();
@@ -22050,7 +21876,6 @@ void Func0432 object#(0x432) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func08A7 0x8A7 ();
@@ -22200,7 +22025,6 @@ void Func0433 object#(0x433) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0908 0x908 ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -22487,7 +22311,6 @@ void Func0434 object#(0x434) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern var Func090A 0x90A ();
@@ -22678,7 +22501,6 @@ void Func0435 object#(0x435) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -22875,7 +22697,6 @@ void Func0436 object#(0x436) ()
 	}
 }
 
-// externs
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
@@ -23049,7 +22870,6 @@ void Func0437 object#(0x437) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
@@ -23183,7 +23003,6 @@ void Func0438 object#(0x438) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
@@ -23398,7 +23217,6 @@ void Func0439 object#(0x439) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern var Func090A 0x90A ();
@@ -23611,7 +23429,6 @@ void Func043A object#(0x43A) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern var Func090A 0x90A ();
@@ -23874,7 +23691,6 @@ void Func043B object#(0x43B) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func0857 0x857 ();
@@ -24044,7 +23860,6 @@ void Func043C object#(0x43C) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func08B8 0x8B8 ();
@@ -24250,7 +24065,6 @@ void Func043D object#(0x43D) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
@@ -24543,7 +24357,6 @@ void Func043E object#(0x43E) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern var Func090A 0x90A ();
@@ -24704,7 +24517,6 @@ void Func043F object#(0x43F) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern void Func092E 0x92E (var var0000);
 
@@ -24794,7 +24606,6 @@ void Func0440 object#(0x440) ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 
 void Func0441 object#(0x441) ()
@@ -24874,7 +24685,6 @@ void Func0441 object#(0x441) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
@@ -25043,7 +24853,6 @@ void Func0442 object#(0x442) ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func0854 0x854 ();
 extern void Func092E 0x92E (var var0000);
@@ -25141,7 +24950,6 @@ void Func0443 object#(0x443) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
@@ -25272,7 +25080,6 @@ void Func0444 object#(0x444) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 
@@ -25463,7 +25270,6 @@ void Func0445 object#(0x445) ()
 	say("\"I thank thee for visiting me.\" *");
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
@@ -25656,7 +25462,6 @@ void Func0446 object#(0x446) ()
 	}
 }
 
-// externs
 extern void Func092F 0x92F (var var0000);
 
 void Func0447 object#(0x447) ()
@@ -25759,7 +25564,6 @@ void Func0447 object#(0x447) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func090B 0x90B (var var0000);
 extern var Func090A 0x90A ();
@@ -25894,7 +25698,6 @@ void Func0448 object#(0x448) ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
@@ -26038,7 +25841,6 @@ void Func0449 object#(0x449) ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func08DB 0x8DB ();
 extern void Func08DC 0x8DC ();
@@ -26188,7 +25990,6 @@ void Func044A object#(0x44A) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
@@ -26214,8 +26015,7 @@ void Func044B object#(0x44B) ()
 		var0000 = script item
 		{
 			nohalt;
-			music 26;
-			raw(0x0001);	// Note: should probably be continue
+			music 26, 1;
 			continue;
 			call Func044B;
 			nop;
@@ -26368,8 +26168,7 @@ void Func044B object#(0x44B) ()
 					var0000 = script item
 					{
 						nohalt;
-						music 26;
-						raw(0x0000);	// Note: should probably not be here
+						music 26, 0;
 					};
 					abort;
 				}
@@ -26440,8 +26239,7 @@ void Func044B object#(0x44B) ()
 			var0000 = script item
 			{
 				nohalt;
-				music 26;
-				raw(0x0000);	// Note: should probably not be here
+				music 26, 0;
 			};
 			break;
 	}
@@ -26466,7 +26264,6 @@ void Func044B object#(0x44B) ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func08D0 0x8D0 (var var0000, var var0001);
 extern void Func092E 0x92E (var var0000);
@@ -26571,7 +26368,6 @@ void Func044C object#(0x44C) ()
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func092E 0x92E (var var0000);
@@ -26740,7 +26536,6 @@ void Func044D object#(0x44D) ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
@@ -26872,7 +26667,6 @@ void Func044E object#(0x44E) ()
 	}
 }
 
-// externs
 extern void Func0951 0x951 ();
 extern void Func092E 0x92E (var var0000);
 
@@ -26966,7 +26760,6 @@ void Func044F object#(0x44F) ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func0877 0x877 ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -27084,7 +26877,6 @@ void Func0450 object#(0x450) ()
 	}
 }
 
-// externs
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func0909 0x909 ();
 extern void Func087B 0x87B ();
@@ -27431,7 +27223,6 @@ void Func0451 object#(0x451) ()
 	}
 }
 
-// externs
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -27590,7 +27381,6 @@ void Func0452 object#(0x452) ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func08BA 0x8BA ();
 
@@ -27719,7 +27509,6 @@ void Func0453 object#(0x453) ()
 	say("\"Fairvell. Go in peace.\"*");
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern void Func0919 0x919 ();
 extern void Func091A 0x91A ();
@@ -27806,7 +27595,6 @@ void Func0454 object#(0x454) ()
 	say("The lad stoically nods and turns away.*");
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
@@ -27948,7 +27736,6 @@ void Func0455 object#(0x455) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
@@ -28072,7 +27859,6 @@ void Func0456 object#(0x456) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func0952 0x952 ();
@@ -28308,7 +28094,6 @@ void Func0457 object#(0x457) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern void Func0919 0x919 ();
 extern void Func092E 0x92E (var var0000);
@@ -28454,7 +28239,6 @@ void Func0458 object#(0x458) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 
@@ -28606,7 +28390,6 @@ void Func0459 object#(0x459) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern var Func090A 0x90A ();
@@ -29032,7 +28815,6 @@ void Func045A object#(0x45A) ()
 	}
 }
 
-// externs
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
@@ -29237,7 +29019,6 @@ void Func045B object#(0x45B) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func08DE 0x8DE ();
@@ -29454,7 +29235,6 @@ void Func045C object#(0x45C) ()
 	}
 }
 
-// externs
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
@@ -29597,7 +29377,6 @@ void Func045D object#(0x45D) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
@@ -29760,7 +29539,6 @@ void Func045E object#(0x45E) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func089F 0x89F (var var0000, var var0001);
@@ -29920,7 +29698,6 @@ void Func045F object#(0x45F) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 
@@ -30036,7 +29813,6 @@ void Func0460 object#(0x460) ()
 	say("\"Mayest thou have much fortune in thine endeavors.\"*");
 }
 
-// externs
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern var Func0909 0x909 ();
 
@@ -30133,7 +29909,6 @@ void Func0461 object#(0x461) ()
 	    ". Thou shouldst leave right away.\"*");
 }
 
-// externs
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func08E0 0x8E0 ();
 extern var Func090A 0x90A ();
@@ -30305,7 +30080,6 @@ void Func0462 object#(0x462) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 
 void Func0463 object#(0x463) ()
@@ -30373,7 +30147,6 @@ void Func0463 object#(0x463) ()
 	}
 }
 
-// externs
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func08ED 0x8ED ();
 extern var Func090A 0x90A ();
@@ -30525,7 +30298,6 @@ void Func0464 object#(0x464) ()
 	}
 }
 
-// externs
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func08DF 0x8DF ();
 extern var Func090A 0x90A ();
@@ -30754,7 +30526,6 @@ void Func0465 object#(0x465) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func090A 0x90A ();
 extern void Func08C3 0x8C3 ();
@@ -31012,7 +30783,6 @@ void Func0466 object#(0x466) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 
@@ -31138,7 +30908,6 @@ void Func0467 object#(0x467) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
@@ -31262,7 +31031,6 @@ void Func0468 object#(0x468) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 
@@ -31357,7 +31125,6 @@ void Func0469 object#(0x469) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
@@ -31475,7 +31242,6 @@ void Func046A object#(0x46A) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090B 0x90B (var var0000);
@@ -31676,7 +31442,6 @@ void Func046B object#(0x46B) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func0911 0x911 (var var0000);
@@ -31978,7 +31743,6 @@ void Func046C object#(0x46C) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern void Func092E 0x92E (var var0000);
 
@@ -32112,7 +31876,6 @@ void Func046D object#(0x46D) ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func0632 object#(0x632) ();
 
@@ -32313,7 +32076,6 @@ void Func046E object#(0x46E) ()
 	say("\"Goodbye.\"*");
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
@@ -32414,7 +32176,6 @@ void Func046F object#(0x46F) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
@@ -32552,7 +32313,6 @@ void Func0470 object#(0x470) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
@@ -32735,7 +32495,6 @@ void Func0471 object#(0x471) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -32913,7 +32672,6 @@ void Func0472 object#(0x472) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
@@ -33077,7 +32835,6 @@ void Func0473 object#(0x473) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -33239,7 +32996,6 @@ void Func0474 object#(0x474) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 
@@ -33425,7 +33181,6 @@ void Func0475 object#(0x475) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern void Func085D 0x85D ();
 extern void Func085E 0x85E ();
@@ -33587,7 +33342,6 @@ void Func0476 object#(0x476) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090B 0x90B (var var0000);
@@ -33796,7 +33550,6 @@ void Func0477 object#(0x477) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern void Func092E 0x92E (var var0000);
 
@@ -33966,7 +33719,6 @@ void Func0478 object#(0x478) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern void Func08AA 0x8AA ();
 extern void Func08A9 0x8A9 ();
@@ -34214,7 +33966,6 @@ void Func0479 object#(0x479) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
@@ -34559,7 +34310,6 @@ labelFunc047A_0447:
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func0871 0x871 ();
@@ -34807,7 +34557,6 @@ labelFunc047B_0352:
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
@@ -35087,7 +34836,6 @@ void Func047C object#(0x47C) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func0911 0x911 (var var0000);
@@ -35247,7 +34995,6 @@ void Func047D object#(0x47D) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func0911 0x911 (var var0000);
@@ -35455,7 +35202,6 @@ void Func047E object#(0x47E) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern void Func0911 0x911 (var var0000);
 extern void Func092E 0x92E (var var0000);
@@ -35579,7 +35325,6 @@ void Func047F object#(0x47F) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func090B 0x90B (var var0000);
 extern var Func08F7 0x8F7 (var var0000);
@@ -35677,7 +35422,6 @@ void Func0480 object#(0x480) ()
 	UI_set_schedule_type(UI_get_npc_object(0xFF80), 0x0007);
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -35927,7 +35671,6 @@ void Func0481 object#(0x481) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -36233,7 +35976,6 @@ void Func0482 object#(0x482) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
@@ -36428,7 +36170,6 @@ void Func0483 object#(0x483) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
@@ -36602,7 +36343,6 @@ void Func0484 object#(0x484) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
@@ -36815,7 +36555,6 @@ void Func0485 object#(0x485) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -37069,7 +36808,6 @@ void Func0486 object#(0x486) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092E 0x92E (var var0000);
@@ -37221,7 +36959,6 @@ void Func0487 object#(0x487) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092E 0x92E (var var0000);
@@ -37418,7 +37155,6 @@ void Func0488 object#(0x488) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090B 0x90B (var var0000);
@@ -37676,7 +37412,6 @@ void Func0489 object#(0x489) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -37890,7 +37625,6 @@ void Func048A object#(0x48A) ()
 	say("\"Until ve meet again, Avatar.\"*");
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 
 void Func048C object#(0x48C) ()
@@ -38083,7 +37817,6 @@ void Func048C object#(0x48C) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -38317,7 +38050,6 @@ void Func048D object#(0x48D) ()
 	}
 }
 
-// externs
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func0909 0x909 ();
 extern void Func08F0 0x8F0 ();
@@ -38482,7 +38214,6 @@ void Func048E object#(0x48E) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0908 0x908 ();
 extern void Func08C1 0x8C1 ();
@@ -38777,7 +38508,6 @@ void Func048F object#(0x48F) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern void Func08D6 0x8D6 ();
 extern void Func08D7 0x8D7 ();
@@ -38890,7 +38620,6 @@ void Func0490 object#(0x490) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
@@ -39156,7 +38885,6 @@ void Func0491 object#(0x491) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 
@@ -39422,7 +39150,6 @@ void Func0492 object#(0x492) ()
 	}
 }
 
-// externs
 extern void Func088B 0x88B ();
 extern var Func0909 0x909 ();
 extern void Func088A 0x88A ();
@@ -39951,7 +39678,6 @@ void Func0495 object#(0x495) ()
 	say("\"Leaving so soon?\"*");
 }
 
-// externs
 extern var Func08C9 0x8C9 ();
 extern var Func0908 0x908 ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -40227,7 +39953,6 @@ void Func0496 object#(0x496) ()
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
@@ -40464,7 +40189,6 @@ void Func0497 object#(0x497) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
@@ -40687,7 +40411,6 @@ void Func0498 object#(0x498) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0908 0x908 ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -40896,7 +40619,6 @@ void Func0499 object#(0x499) ()
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func0909 0x909 ();
 extern var Func0908 0x908 ();
@@ -41151,7 +40873,6 @@ void Func049A object#(0x49A) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern void Func092E 0x92E (var var0000);
@@ -41268,7 +40989,6 @@ void Func049B object#(0x49B) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func08FC 0x8FC (var var0000, var var0001);
@@ -41471,7 +41191,6 @@ void Func049C object#(0x49C) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern void Func092E 0x92E (var var0000);
@@ -41619,7 +41338,6 @@ void Func049D object#(0x49D) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern void Func0911 0x911 (var var0000);
@@ -41717,7 +41435,6 @@ void Func049E object#(0x49E) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
@@ -41811,7 +41528,6 @@ void Func049F object#(0x49F) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -41970,7 +41686,6 @@ void Func04A0 object#(0x4A0) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090B 0x90B (var var0000);
@@ -42123,7 +41838,6 @@ void Func04A1 object#(0x4A1) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern void Func0879 0x879 (var var0000, var var0001, var var0002);
@@ -42254,7 +41968,6 @@ void Func04A2 object#(0x4A2) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -42567,7 +42280,6 @@ void Func04A3 object#(0x4A3) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
@@ -42743,7 +42455,6 @@ void Func04A4 object#(0x4A4) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -42893,7 +42604,6 @@ void Func04A5 object#(0x4A5) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
@@ -43120,7 +42830,6 @@ labelFunc04A6_02F6:
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func08F7 0x8F7 (var var0000);
@@ -43422,7 +43131,6 @@ void Func04A7 object#(0x4A7) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func08F7 0x8F7 (var var0000);
@@ -43605,7 +43313,6 @@ void Func04A8 object#(0x4A8) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern void Func092E 0x92E (var var0000);
 
@@ -43726,7 +43433,6 @@ void Func04A9 object#(0x4A9) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090B 0x90B (var var0000);
@@ -43908,7 +43614,6 @@ void Func04AA object#(0x4AA) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -44182,7 +43887,6 @@ void Func04AB object#(0x4AB) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -44597,7 +44301,6 @@ void Func04AC object#(0x4AC) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
@@ -44887,7 +44590,6 @@ void Func04AD object#(0x4AD) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
@@ -45090,7 +44792,6 @@ void Func04AE object#(0x4AE) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
@@ -45339,7 +45040,6 @@ void Func04AF object#(0x4AF) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
@@ -45571,7 +45271,6 @@ labelFunc04B0_0332:
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
@@ -45777,7 +45476,6 @@ void Func04B1 object#(0x4B1) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
@@ -45999,7 +45697,6 @@ void Func04B2 object#(0x4B2) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern void Func08CD 0x8CD ();
 extern var Func090A 0x90A ();
@@ -46165,7 +45862,6 @@ void Func04B3 object#(0x4B3) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern void Func0911 0x911 (var var0000);
 extern var Func090A 0x90A ();
@@ -46341,7 +46037,6 @@ void Func04B4 object#(0x4B4) ()
 	}
 }
 
-// externs
 extern void Func089C 0x89C ();
 extern var Func090A 0x90A ();
 extern void Func089B 0x89B (var var0000, var var0001);
@@ -46475,7 +46170,6 @@ void Func04B5 object#(0x4B5) ()
 	}
 }
 
-// externs
 extern void Func089D 0x89D (var var0000, var var0001, var var0002);
 extern void Func092F 0x92F (var var0000);
 
@@ -46600,7 +46294,6 @@ void Func04B6 object#(0x4B6) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func090A 0x90A ();
 extern void Func092F 0x92F (var var0000);
@@ -46809,7 +46502,6 @@ void Func04B7 object#(0x4B7) ()
 	}
 }
 
-// externs
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern void Func0911 0x911 (var var0000);
 
@@ -46916,7 +46608,6 @@ void Func04B8 object#(0x4B8) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func08CE 0x8CE ();
@@ -47127,7 +46818,6 @@ void Func04B9 object#(0x4B9) ()
 	}
 }
 
-// externs
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern void Func092F 0x92F (var var0000);
 
@@ -47355,7 +47045,6 @@ void Func04BB object#(0x4BB) ()
 	}
 }
 
-// externs
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern var Func090A 0x90A ();
 extern void Func08E2 0x8E2 ();
@@ -47511,7 +47200,6 @@ void Func04BC object#(0x4BC) ()
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func0889 0x889 ();
 extern var Func090A 0x90A ();
@@ -47726,7 +47414,6 @@ void Func04BD object#(0x4BD) ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func0853 0x853 ();
 extern void Func092F 0x92F (var var0000);
@@ -47863,7 +47550,6 @@ void Func04BE object#(0x4BE) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func090B 0x90B (var var0000);
 extern var Func090A 0x90A ();
@@ -48075,7 +47761,6 @@ void Func04BF object#(0x4BF) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func08BE 0x8BE (var var0000, var var0001);
@@ -48205,7 +47890,6 @@ void Func04C0 object#(0x4C0) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern void Func092E 0x92E (var var0000);
 
@@ -48334,7 +48018,6 @@ void Func04C1 object#(0x4C1) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
@@ -48582,7 +48265,6 @@ void Func04C2 object#(0x4C2) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -48843,7 +48525,6 @@ void Func04C3 object#(0x4C3) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0908 0x908 ();
 extern var Func090B 0x90B (var var0000);
@@ -49093,7 +48774,6 @@ void Func04C4 object#(0x4C4) ()
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092F 0x92F (var var0000);
 
@@ -49225,7 +48905,6 @@ void Func04C5 object#(0x4C5) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0908 0x908 ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -49423,7 +49102,6 @@ void Func04C6 object#(0x4C6) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -49712,7 +49390,6 @@ void Func04C7 object#(0x4C7) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
@@ -49945,7 +49622,6 @@ void Func04C8 object#(0x4C8) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern void Func08AC 0x8AC (var var0000, var var0001, var var0002);
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -50084,7 +49760,6 @@ void Func04C9 object#(0x4C9) ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
@@ -50233,7 +49908,6 @@ void Func04CA object#(0x4CA) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0908 0x908 ();
 extern var Func090B 0x90B (var var0000);
@@ -50384,7 +50058,6 @@ void Func04CB object#(0x4CB) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0908 0x908 ();
 extern var Func090B 0x90B (var var0000);
@@ -50514,7 +50187,6 @@ void Func04CC object#(0x4CC) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
@@ -50673,7 +50345,6 @@ void Func04CD object#(0x4CD) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern void Func087A 0x87A ();
 
@@ -50825,7 +50496,6 @@ void Func04CE object#(0x4CE) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -51047,7 +50717,6 @@ void Func04CF object#(0x4CF) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 
@@ -51181,7 +50850,6 @@ void Func04D0 object#(0x4D0) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 
@@ -51342,7 +51010,6 @@ void Func04D1 object#(0x4D1) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 
@@ -51489,7 +51156,6 @@ void Func04D2 object#(0x4D2) ()
 	}
 }
 
-// externs
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
@@ -51618,7 +51284,6 @@ void Func04D3 object#(0x4D3) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090B 0x90B (var var0000);
@@ -51849,7 +51514,6 @@ void Func04D4 object#(0x4D4) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 
@@ -51951,7 +51615,6 @@ void Func04D5 object#(0x4D5) ()
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
@@ -52052,7 +51715,6 @@ void Func04D6 object#(0x4D6) ()
 	}
 }
 
-// externs
 extern void Func0841 0x841 ();
 extern var Func090A 0x90A ();
 extern void Func092F 0x92F (var var0000);
@@ -52210,7 +51872,6 @@ void Func04D7 object#(0x4D7) ()
 	}
 }
 
-// externs
 extern void Func094C 0x94C ();
 extern void Func094A 0x94A ();
 extern void Func0949 0x949 ();
@@ -52360,7 +52021,6 @@ void Func04D8 object#(0x4D8) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090B 0x90B (var var0000);
@@ -52489,7 +52149,6 @@ void Func04D9 object#(0x4D9) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090B 0x90B (var var0000);
@@ -52609,7 +52268,6 @@ void Func04DA object#(0x4DA) ()
 	}
 }
 
-// externs
 extern void Func084C 0x84C ();
 extern void Func092F 0x92F (var var0000);
 
@@ -52703,7 +52361,6 @@ void Func04DB object#(0x4DB) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0908 0x908 ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -52909,7 +52566,6 @@ void Func04DC object#(0x4DC) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
@@ -53112,7 +52768,6 @@ void Func04DD object#(0x4DD) ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func088F 0x88F ();
@@ -53306,7 +52961,6 @@ void Func04DE object#(0x4DE) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
@@ -53498,7 +53152,6 @@ void Func04DF object#(0x4DF) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
@@ -53686,7 +53339,6 @@ void Func04E0 object#(0x4E0) ()
 	    ".\"*");
 }
 
-// externs
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
@@ -53863,7 +53515,6 @@ void Func04E1 object#(0x4E1) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func090B 0x90B (var var0000);
 extern var Func08F7 0x8F7 (var var0000);
@@ -54075,7 +53726,6 @@ void Func04E2 object#(0x4E2) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -54251,7 +53901,6 @@ void Func04E3 object#(0x4E3) ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func08B6 0x8B6 (var var0000, var var0001);
 extern void Func092E 0x92E (var var0000);
@@ -54363,7 +54012,6 @@ void Func04E4 object#(0x4E4) ()
 	}
 }
 
-// externs
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func0859 0x859 ();
@@ -54597,7 +54245,6 @@ void Func04E5 object#(0x4E5) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0908 0x908 ();
 extern var Func090B 0x90B (var var0000);
@@ -54765,7 +54412,6 @@ void Func04E6 object#(0x4E6) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
@@ -55078,7 +54724,6 @@ void Func04E7 object#(0x4E7) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
@@ -55203,7 +54848,6 @@ void Func04E8 object#(0x4E8) ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func08C7 0x8C7 ();
@@ -55345,7 +54989,6 @@ void Func04E9 object#(0x4E9) ()
 	}
 }
 
-// externs
 extern void Func092E 0x92E (var var0000);
 
 void Func04EA object#(0x4EA) ()
@@ -55392,7 +55035,6 @@ void Func04EA object#(0x4EA) ()
 	}
 }
 
-// externs
 extern void Func092E 0x92E (var var0000);
 
 void Func04EB object#(0x4EB) ()
@@ -55439,7 +55081,6 @@ void Func04EB object#(0x4EB) ()
 	}
 }
 
-// externs
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern void Func091A 0x91A ();
 extern void Func092E 0x92E (var var0000);
@@ -55525,7 +55166,6 @@ void Func04EC object#(0x4EC) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -55740,7 +55380,6 @@ void Func04ED object#(0x4ED) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
@@ -55857,7 +55496,6 @@ void Func04EE object#(0x4EE) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 
@@ -56022,7 +55660,6 @@ void Func04EF object#(0x4EF) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 
@@ -56214,7 +55851,6 @@ void Func04F0 object#(0x4F0) ()
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
 
@@ -56431,7 +56067,6 @@ void Func04F1 object#(0x4F1) ()
 	say("Papa smiles and waves.*");
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -56619,7 +56254,6 @@ void Func04F2 object#(0x4F2) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
@@ -56802,7 +56436,6 @@ void Func04F3 object#(0x4F3) ()
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func0909 0x909 ();
 extern void Func085B 0x85B ();
@@ -56919,7 +56552,6 @@ void Func04F4 object#(0x4F4) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern void Func0911 0x911 (var var0000);
 extern var Func090A 0x90A ();
@@ -57078,7 +56710,6 @@ void Func04F5 object#(0x4F5) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func090B 0x90B (var var0000);
 extern var Func090A 0x90A ();
@@ -57285,7 +56916,6 @@ void Func04F6 object#(0x4F6) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
@@ -57567,7 +57197,6 @@ void Func04F7 object#(0x4F7) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
@@ -57864,7 +57493,6 @@ void Func04F8 object#(0x4F8) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern void Func092E 0x92E (var var0000);
@@ -58135,7 +57763,6 @@ void Func04F9 object#(0x4F9) ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -58515,7 +58142,6 @@ void Func04FA object#(0x4FA) ()
 	}
 }
 
-// externs
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func0911 0x911 (var var0000);
 extern void Func092E 0x92E (var var0000);
@@ -58735,7 +58361,6 @@ void Func04FB object#(0x4FB) ()
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
@@ -58861,7 +58486,6 @@ void Func04FC object#(0x4FC) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func0864 0x864 ();
@@ -58997,7 +58621,6 @@ void Func04FD object#(0x4FD) ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -59258,7 +58881,6 @@ void Func04FE object#(0x4FE) ()
 	say("\"Fare thee well, Avatar.\"*");
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 
 void Func04FF object#(0x4FF) ()
@@ -59399,7 +59021,6 @@ void Func04FF object#(0x4FF) ()
 	say("\"'Bye!\"*");
 }
 
-// externs
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func0911 0x911 (var var0000);
 extern var Func090A 0x90A ();
@@ -59558,7 +59179,6 @@ void Func0500 object#(0x500) ()
 	UI_set_schedule_type(item, 0x0014);
 }
 
-// externs
 extern void Func0326 shape#(0x326) ();
 
 void Func0501 object#(0x501) ()
@@ -59566,7 +59186,6 @@ void Func0501 object#(0x501) ()
 	item->Func0326();
 }
 
-// externs
 extern void Func0326 shape#(0x326) ();
 
 void Func0502 object#(0x502) ()
@@ -59574,7 +59193,6 @@ void Func0502 object#(0x502) ()
 	item->Func0326();
 }
 
-// externs
 extern void Func03B2 shape#(0x3B2) ();
 
 void Func0506 object#(0x506) ()
@@ -59582,7 +59200,6 @@ void Func0506 object#(0x506) ()
 	item->Func03B2();
 }
 
-// externs
 extern void Func03B2 shape#(0x3B2) ();
 
 void Func0507 object#(0x507) ()
@@ -59590,7 +59207,6 @@ void Func0507 object#(0x507) ()
 	item->Func03B2();
 }
 
-// externs
 extern void Func03B2 shape#(0x3B2) ();
 
 void Func0508 object#(0x508) ()
@@ -59598,7 +59214,6 @@ void Func0508 object#(0x508) ()
 	item->Func03B2();
 }
 
-// externs
 extern void Func03B2 shape#(0x3B2) ();
 
 void Func0509 object#(0x509) ()
@@ -59606,7 +59221,6 @@ void Func0509 object#(0x509) ()
 	item->Func03B2();
 }
 
-// externs
 extern void Func03B2 shape#(0x3B2) ();
 
 void Func050A object#(0x50A) ()
@@ -59614,7 +59228,6 @@ void Func050A object#(0x50A) ()
 	item->Func03B2();
 }
 
-// externs
 extern void Func03B2 shape#(0x3B2) ();
 
 void Func050D object#(0x50D) ()
@@ -59659,7 +59272,6 @@ void Func0600 object#(0x600) ()
 	}
 }
 
-// externs
 extern void Func0835 0x835 (var var0000, var var0001, var var0002);
 extern void Func08FE 0x8FE (var var0000);
 
@@ -59714,7 +59326,6 @@ void Func0607 object#(0x607) ()
 	UI_set_lift(item, var0000);
 }
 
-// externs
 extern void Func0941 0x941 (var var0000);
 extern void Func0911 0x911 (var var0000);
 
@@ -59797,7 +59408,6 @@ void Func0609 object#(0x609) ()
 	UI_set_lift(item, var0000);
 }
 
-// externs
 extern void Func08FE 0x8FE (var var0000);
 extern var Func0937 0x937 (var var0000);
 extern void Func0904 0x904 (var var0000, var var0001);
@@ -59945,7 +59555,6 @@ void Func060A object#(0x60A) ()
 	}
 }
 
-// externs
 extern void Func083D 0x83D ();
 
 void Func060B object#(0x60B) ()
@@ -59969,7 +59578,6 @@ void Func060B object#(0x60B) ()
 	}
 }
 
-// externs
 extern var Func0932 0x932 (var var0000);
 extern void Func0933 0x933 (var var0000, var var0001, var var0002);
 
@@ -60175,7 +59783,6 @@ void Func060D object#(0x60D) ()
 	}
 }
 
-// externs
 extern var Func08F9 0x8F9 (var var0000, var var0001, var var0002);
 extern var Func093C 0x93C (var var0000, var var0001);
 extern var Func0938 0x938 (var var0000);
@@ -60358,7 +59965,6 @@ void Func060F object#(0x60F) ()
 	var0001 = UI_apply_damage(UI_get_npc_prop(item, 0x0000), 0x000C, 0x0003, item);
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0908 0x908 ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -60693,7 +60299,6 @@ void Func0617 object#(0x617) ()
 	}
 }
 
-// externs
 extern void Func061A object#(0x61A) ();
 
 void Func0618 object#(0x618) ()
@@ -60726,7 +60331,6 @@ void Func061A object#(0x61A) ()
 	(@0x70)();
 }
 
-// externs
 extern void Func0806 0x806 (var var0000, var var0001);
 
 void Func061B object#(0x61B) ()
@@ -60747,7 +60351,6 @@ void Func061B object#(0x61B) ()
 	}
 }
 
-// externs
 extern void Func0637 object#(0x637) ();
 
 void Func061C object#(0x61C) ()
@@ -60790,7 +60393,6 @@ void Func061C object#(0x61C) ()
 	}
 }
 
-// externs
 extern void Func0806 0x806 (var var0000, var var0001);
 
 void Func061D object#(0x61D) ()
@@ -60811,7 +60413,6 @@ void Func061D object#(0x61D) ()
 	}
 }
 
-// externs
 extern void Func0806 0x806 (var var0000, var var0001);
 extern void Func0804 0x804 (var var0000, var var0001, var var0002);
 
@@ -60841,7 +60442,6 @@ void Func0620 object#(0x620) ()
 	UI_set_item_flag(item, 0x000F);
 }
 
-// externs
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func0900 0x900 ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -61182,7 +60782,6 @@ void Func0621 object#(0x621) ()
 	}
 }
 
-// externs
 extern var Func0900 0x900 ();
 extern var Func0801 0x801 (var var0000);
 extern void Func0624 object#(0x624) ();
@@ -61282,7 +60881,6 @@ void Func0622 object#(0x622) ()
 	}
 }
 
-// externs
 extern var Func0900 0x900 ();
 extern void Func093F 0x93F (var var0000, var var0001);
 extern void Func0624 object#(0x624) ();
@@ -61323,7 +60921,6 @@ void Func0623 object#(0x623) ()
 	}
 }
 
-// externs
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 
 void Func0624 object#(0x624) ()
@@ -61367,7 +60964,6 @@ void Func0624 object#(0x624) ()
 	}
 }
 
-// externs
 extern var Func093E 0x93E ();
 extern var Func08F9 0x8F9 (var var0000, var var0001, var var0002);
 extern var Func090A 0x90A ();
@@ -61530,7 +61126,6 @@ void Func0625 object#(0x625) ()
 	}
 }
 
-// externs
 extern var Func093C 0x93C (var var0000, var var0001);
 extern var Func093D 0x93D (var var0000, var var0001);
 extern var Func0932 0x932 (var var0000);
@@ -61642,7 +61237,6 @@ void Func0627 object#(0x627) ()
 	}
 }
 
-// externs
 extern void Func08FE 0x8FE (var var0000);
 
 void Func0628 object#(0x628) ()
@@ -61705,7 +61299,6 @@ void Func0628 object#(0x628) ()
 	}
 }
 
-// externs
 extern void Func08FE 0x8FE (var var0000);
 
 void Func0629 object#(0x629) ()
@@ -61764,7 +61357,6 @@ void Func0629 object#(0x629) ()
 	}
 }
 
-// externs
 extern var Func0945 0x945 (var var0000);
 extern void Func08E6 0x8E6 (var var0000);
 extern void Func0636 object#(0x636) ();
@@ -61848,7 +61440,6 @@ void Func062C object#(0x62C) ()
 	}
 }
 
-// externs
 extern var Func0827 0x827 (var var0000, var var0001);
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern void Func08FF 0x8FF (var var0000);
@@ -61924,7 +61515,6 @@ void Func062D object#(0x62D) ()
 	}
 }
 
-// externs
 extern var Func0827 0x827 (var var0000, var var0001);
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern void Func08FF 0x8FF (var var0000);
@@ -62000,7 +61590,6 @@ void Func062E object#(0x62E) ()
 	}
 }
 
-// externs
 extern var Func080E 0x80E (var var0000);
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func0937 0x937 (var var0000);
@@ -62209,7 +61798,6 @@ void Func0632 object#(0x632) ()
 	}
 }
 
-// externs
 extern void Func063A object#(0x63A) ();
 extern var Func0937 0x937 (var var0000);
 extern void Func093F 0x93F (var var0000, var var0001);
@@ -62248,7 +61836,6 @@ void Func0633 object#(0x633) ()
 	}
 }
 
-// externs
 extern var Func080C 0x80C (var var0000);
 extern void Func0812 0x812 (var var0000);
 extern void Func028C shape#(0x28C) ();
@@ -62300,7 +61887,6 @@ void Func0634 object#(0x634) ()
 	}
 }
 
-// externs
 extern void Func08FE 0x8FE (var var0000);
 
 void Func0635 object#(0x635) ()
@@ -62376,7 +61962,6 @@ void Func0637 object#(0x637) ()
 	UI_set_camera(0xFE9C);
 }
 
-// externs
 extern void Func08FF 0x8FF (var var0000);
 
 void Func0638 object#(0x638) ()
@@ -62799,7 +62384,6 @@ void Func0638 object#(0x638) ()
 	}
 }
 
-// externs
 extern void Func060F object#(0x60F) ();
 
 void Func0639 object#(0x639) ()
@@ -62833,7 +62417,6 @@ void Func0639 object#(0x639) ()
 	}
 }
 
-// externs
 extern void Func0940 0x940 (var var0000);
 extern void Func08FE 0x8FE (var var0000);
 
@@ -62886,7 +62469,6 @@ void Func063C object#(0x63C) ()
 	}
 }
 
-// externs
 extern var Func086F 0x86F ();
 
 void Func063D object#(0x63D) ()
@@ -62981,7 +62563,6 @@ void Func063E object#(0x63E) ()
 	}
 }
 
-//externs
 extern void Func0716 object#(0x716) ();
 
 void Func063F object#(0x63F) ()
@@ -63000,7 +62581,6 @@ void Func063F object#(0x63F) ()
 	UI_fade_palette(0x000C, 0x0001, 0x0000);
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 extern void Func08FD 0x8FD (var var0000);
@@ -63056,7 +62636,6 @@ void Func0640 object#(0x640) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func0641 object#(0x641) ()
@@ -63105,7 +62684,6 @@ void Func0641 object#(0x641) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 extern void Func08FD 0x8FD (var var0000);
@@ -63164,7 +62742,6 @@ void Func0642 object#(0x642) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func0643 object#(0x643) ()
@@ -63203,7 +62780,6 @@ void Func0643 object#(0x643) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func0644 object#(0x644) ()
@@ -63241,7 +62817,6 @@ void Func0644 object#(0x644) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func0645 object#(0x645) ()
@@ -63305,7 +62880,6 @@ void Func0645 object#(0x645) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 extern void Func08FD 0x8FD (var var0000);
@@ -63366,7 +62940,6 @@ void Func0646 object#(0x646) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func0647 object#(0x647) ()
@@ -63398,7 +62971,6 @@ void Func0647 object#(0x647) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func0648 object#(0x648) ()
@@ -63456,7 +63028,6 @@ void Func0648 object#(0x648) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -63521,7 +63092,6 @@ void Func0649 object#(0x649) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 extern var Func08F6 0x8F6 (var var0000);
 
@@ -63596,7 +63166,6 @@ void Func064A object#(0x64A) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func064B object#(0x64B) ()
@@ -63657,7 +63226,6 @@ void Func064B object#(0x64B) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func064C object#(0x64C) ()
@@ -63718,7 +63286,6 @@ void Func064C object#(0x64C) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func064D object#(0x64D) ()
@@ -63756,7 +63323,6 @@ void Func064D object#(0x64D) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 extern var Func0932 0x932 (var var0000);
 
@@ -63820,7 +63386,6 @@ void Func064E object#(0x64E) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func064F object#(0x64F) ()
@@ -63875,7 +63440,6 @@ void Func064F object#(0x64F) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -63944,7 +63508,6 @@ void Func0650 object#(0x650) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -64012,7 +63575,6 @@ void Func0651 object#(0x651) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -64058,7 +63620,6 @@ void Func0652 object#(0x652) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func0653 object#(0x653) ()
@@ -64096,7 +63657,6 @@ void Func0653 object#(0x653) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func0654 object#(0x654) ()
@@ -64148,7 +63708,6 @@ void Func0654 object#(0x654) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -64202,7 +63761,6 @@ void Func0655 object#(0x655) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -64272,7 +63830,6 @@ void Func0656 object#(0x656) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func0657 object#(0x657) ()
@@ -64314,7 +63871,6 @@ void Func0657 object#(0x657) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -64358,7 +63914,6 @@ void Func0658 object#(0x658) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -64421,7 +63976,6 @@ void Func0659 object#(0x659) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func065A object#(0x65A) ()
@@ -64469,7 +64023,6 @@ void Func065A object#(0x65A) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func065B object#(0x65B) ()
@@ -64522,7 +64075,6 @@ void Func065B object#(0x65B) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -64565,7 +64117,6 @@ void Func065C object#(0x65C) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func065D object#(0x65D) ()
@@ -64604,7 +64155,6 @@ void Func065D object#(0x65D) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -64647,7 +64197,6 @@ void Func065E object#(0x65E) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -64690,7 +64239,6 @@ void Func065F object#(0x65F) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 extern var Func08F6 0x8F6 (var var0000);
 
@@ -64761,7 +64309,6 @@ void Func0660 object#(0x660) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -64808,7 +64355,6 @@ void Func0661 object#(0x661) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func0662 object#(0x662) ()
@@ -64856,7 +64402,6 @@ void Func0662 object#(0x662) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 extern var Func0934 0x934 (var var0000);
 
@@ -64926,7 +64471,6 @@ void Func0663 object#(0x663) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func0664 object#(0x664) ()
@@ -64970,7 +64514,6 @@ void Func0664 object#(0x664) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func0665 object#(0x665) ()
@@ -65061,7 +64604,6 @@ void Func0665 object#(0x665) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func0666 object#(0x666) ()
@@ -65151,7 +64693,6 @@ void Func0666 object#(0x666) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -65219,7 +64760,6 @@ void Func0667 object#(0x667) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -65262,7 +64802,6 @@ void Func0668 object#(0x668) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 extern var Func0934 0x934 (var var0000);
 extern void Func093F 0x93F (var var0000, var var0001);
@@ -65338,7 +64877,6 @@ void Func0669 object#(0x669) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -65396,7 +64934,6 @@ void Func066A object#(0x66A) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -65441,7 +64978,6 @@ void Func066B object#(0x66B) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -65491,7 +65027,6 @@ void Func066C object#(0x66C) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -65541,7 +65076,6 @@ void Func066D object#(0x66D) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -65602,7 +65136,6 @@ void Func066E object#(0x66E) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func066F object#(0x66F) ()
@@ -65664,7 +65197,6 @@ void Func066F object#(0x66F) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func0670 object#(0x670) ()
@@ -65725,7 +65257,6 @@ void Func0670 object#(0x670) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -65772,7 +65303,6 @@ void Func0671 object#(0x671) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -65878,7 +65408,6 @@ void Func0672 object#(0x672) ()
 	}
 }
 
-// externs
 extern var Func0934 0x934 (var var0000);
 extern var Func0906 0x906 ();
 
@@ -65954,7 +65483,6 @@ void Func0673 object#(0x673) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 extern var Func0934 0x934 (var var0000);
 extern void Func068A object#(0x68A) ();
@@ -66034,7 +65562,6 @@ void Func0674 object#(0x674) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -66091,7 +65618,6 @@ void Func0675 object#(0x675) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -66148,7 +65674,6 @@ void Func0676 object#(0x676) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func0677 object#(0x677) ()
@@ -66311,7 +65836,6 @@ void Func0677 object#(0x677) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -66367,7 +65891,6 @@ void Func0678 object#(0x678) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 extern void Func0936 0x936 (var var0000, var var0001);
@@ -66435,7 +65958,6 @@ void Func0679 object#(0x679) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -66516,7 +66038,6 @@ void Func067A object#(0x67A) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func067B object#(0x67B) ()
@@ -66591,7 +66112,6 @@ void Func067B object#(0x67B) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -66636,7 +66156,6 @@ void Func067C object#(0x67C) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 extern var Func0934 0x934 (var var0000);
 
@@ -66715,7 +66234,6 @@ void Func067D object#(0x67D) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func067E object#(0x67E) ()
@@ -66775,7 +66293,6 @@ void Func067E object#(0x67E) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func067F object#(0x67F) ()
@@ -66825,7 +66342,6 @@ void Func067F object#(0x67F) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func0680 object#(0x680) ()
@@ -66887,7 +66403,6 @@ void Func0680 object#(0x680) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -66929,7 +66444,6 @@ void Func0681 object#(0x681) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 extern void Func0936 0x936 (var var0000, var var0001);
 
@@ -67022,7 +66536,6 @@ void Func0682 object#(0x682) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func0683 object#(0x683) ()
@@ -67084,7 +66597,6 @@ void Func0683 object#(0x683) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -67156,7 +66668,6 @@ void Func0684 object#(0x684) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 extern var Func092B 0x92B (var var0000);
 
@@ -67234,7 +66745,6 @@ void Func0685 object#(0x685) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern var Func0906 0x906 ();
 
@@ -67284,7 +66794,6 @@ void Func0686 object#(0x686) ()
 	}
 }
 
-// externs
 extern var Func0906 0x906 ();
 
 void Func0687 object#(0x687) ()
@@ -67321,7 +66830,6 @@ void Func0687 object#(0x687) ()
 	}
 }
 
-// externs
 extern void Func093F 0x93F (var var0000, var var0001);
 
 void Func0688 object#(0x688) ()
@@ -67333,7 +66841,6 @@ void Func0688 object#(0x688) ()
 	}
 }
 
-// externs
 extern void Func0936 0x936 (var var0000, var var0001);
 
 void Func0689 object#(0x689) ()
@@ -67356,7 +66863,6 @@ void Func068A object#(0x68A) ()
 	UI_set_weather(0x0000);
 }
 
-// externs
 extern var Func0837 0x837 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func0838 0x838 (var var0000);
 
@@ -67373,7 +66879,6 @@ void Func068B object#(0x68B) ()
 	}
 }
 
-// externs
 extern var Func0837 0x837 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func0838 0x838 (var var0000);
 
@@ -67390,7 +66895,6 @@ void Func068C object#(0x68C) ()
 	}
 }
 
-// externs
 extern void Func068E object#(0x68E) ();
 
 void Func068D object#(0x68D) ()
@@ -67420,7 +66924,6 @@ void Func068D object#(0x68D) ()
 	}
 }
 
-// externs
 extern var Func0837 0x837 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func068F object#(0x68F) ();
 
@@ -67477,7 +66980,6 @@ void Func068F object#(0x68F) ()
 	};
 }
 
-// externs
 extern void Func0691 object#(0x691) ();
 
 void Func0690 object#(0x690) ()
@@ -67740,7 +67242,6 @@ void Func0695 object#(0x695) ()
 	}
 }
 
-// externs
 extern void Func087D 0x87D ();
 extern var Func0881 0x881 ();
 extern void Func0697 object#(0x697) ();
@@ -67963,7 +67464,6 @@ void Func0696 object#(0x696) ()
 	}
 }
 
-// externs
 extern var Func0881 0x881 ();
 extern void Func0698 object#(0x698) ();
 extern void Func069D object#(0x69D) ();
@@ -68201,7 +67701,6 @@ void Func0698 object#(0x698) ()
 	}
 }
 
-// externs
 extern var Func0881 0x881 ();
 extern void Func069C object#(0x69C) ();
 
@@ -68317,7 +67816,6 @@ void Func0699 object#(0x699) ()
 	}
 }
 
-// externs
 extern void Func087D 0x87D ();
 extern var Func092D 0x92D (var var0000);
 extern void Func069B object#(0x69B) ();
@@ -68359,7 +67857,6 @@ void Func069A object#(0x69A) ()
 	};
 }
 
-// externs
 extern void Func0699 object#(0x699) ();
 
 void Func069B object#(0x69B) ()
@@ -68368,7 +67865,6 @@ void Func069B object#(0x69B) ()
 	item->Func0699();
 }
 
-// externs
 extern var Func0881 0x881 ();
 extern void Func069E object#(0x69E) ();
 
@@ -68414,7 +67910,6 @@ void Func069C object#(0x69C) ()
 	}
 }
 
-// externs
 extern var Func0881 0x881 ();
 extern var Func092D 0x92D (var var0000);
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
@@ -68474,7 +67969,6 @@ void Func069D object#(0x69D) ()
 	Func0828(var0005, var0001, var0002, 0x0000, 0x069D, var0005, 0x0007);
 }
 
-// externs
 extern void Func069F object#(0x69F) ();
 
 void Func069E object#(0x69E) ()
@@ -68516,7 +68010,6 @@ void Func069E object#(0x69E) ()
 	UI_play_sound_effect(0x003E);
 }
 
-// externs
 extern void Func087E 0x87E (var var0000, var var0001, var var0002, var var0003);
 extern void Func06A0 object#(0x6A0) ();
 
@@ -68631,7 +68124,6 @@ void Func069F object#(0x69F) ()
 	UI_play_sound_effect(0x0043);
 }
 
-// externs
 extern void Func06A1 object#(0x6A1) ();
 extern void Func06A2 object#(0x6A2) ();
 
@@ -68798,7 +68290,6 @@ void Func06A0 object#(0x6A0) ()
 	}
 }
 
-// externs
 extern void Func06F5 object#(0x6F5) ();
 
 void Func06A1 object#(0x6A1) ()
@@ -68854,7 +68345,6 @@ void Func06A1 object#(0x6A1) ()
 	UI_play_sound_effect(0x0044);
 }
 
-// externs
 extern void Func06A0 object#(0x6A0) ();
 
 void Func06A2 object#(0x6A2) ()
@@ -68908,7 +68398,6 @@ void Func06A2 object#(0x6A2) ()
 	UI_play_sound_effect(0x0044);
 }
 
-// externs
 extern void Func08EB 0x8EB (var var0000, var var0001, var var0002);
 extern void Func01F8 shape#(0x1F8) ();
 extern void Func06F7 object#(0x6F7) ();
@@ -69340,7 +68829,6 @@ void Func06A4 object#(0x6A4) ()
 	}
 }
 
-// externs
 extern void Func0904 0x904 (var var0000, var var0001);
 extern void Func0467 object#(0x467) ();
 
@@ -69360,7 +68848,6 @@ void Func06A5 object#(0x6A5) ()
 	}
 }
 
-// externs
 extern void Func0911 0x911 (var var0000);
 
 void Func06A6 object#(0x6A6) ()
@@ -69372,7 +68859,6 @@ void Func06A6 object#(0x6A6) ()
 	}
 }
 
-// externs
 extern void Func0911 0x911 (var var0000);
 
 void Func06A7 object#(0x6A7) ()
@@ -69384,7 +68870,6 @@ void Func06A7 object#(0x6A7) ()
 	}
 }
 
-// externs
 extern void Func0911 0x911 (var var0000);
 
 void Func06A8 object#(0x6A8) ()
@@ -69404,7 +68889,6 @@ void Func06A9 object#(0x6A9) ()
 	}
 }
 
-// externs
 extern void Func06AA object#(0x6AA) ();
 
 void Func06AA object#(0x6AA) ()
@@ -69488,7 +68972,6 @@ void Func06AC object#(0x6AC) ()
 	}
 }
 
-// externs
 extern void Func02C0 shape#(0x2C0) ();
 
 void Func06AD object#(0x6AD) ()
@@ -69499,7 +68982,6 @@ void Func06AD object#(0x6AD) ()
 	}
 }
 
-// externs
 extern void Func0495 object#(0x495) ();
 
 void Func06AE object#(0x6AE) ()
@@ -69510,7 +68992,6 @@ void Func06AE object#(0x6AE) ()
 	}
 }
 
-// externs
 extern void Func0620 object#(0x620) ();
 
 void Func06AF object#(0x6AF) ()
@@ -69564,7 +69045,6 @@ void Func06B0 object#(0x6B0) ()
 	}
 }
 
-// externs
 extern void Func0620 object#(0x620) ();
 
 void Func06B1 object#(0x6B1) ()
@@ -69597,7 +69077,6 @@ void Func06B1 object#(0x6B1) ()
 	}
 }
 
-// externs
 extern void Func0150 shape#(0x150) ();
 extern void Func0253 shape#(0x253) ();
 extern void Func0379 shape#(0x379) ();
@@ -69637,7 +69116,6 @@ void Func06B2 object#(0x6B2) ()
 	}
 }
 
-// externs
 extern void Func0152 shape#(0x152) ();
 extern void Func02BD shape#(0x2BD) ();
 extern void Func020E shape#(0x20E) ();
@@ -69677,7 +69155,6 @@ void Func06B3 object#(0x6B3) ()
 	}
 }
 
-// externs
 extern var Func092B 0x92B (var var0000);
 extern void Func0936 0x936 (var var0000, var var0001);
 
@@ -69699,7 +69176,6 @@ void Func06B4 object#(0x6B4) ()
 	}
 }
 
-// externs
 extern var Func093D 0x93D (var var0000, var var0001);
 extern var Func081B 0x81B (var var0000);
 extern void Func010E shape#(0x10E) ();
@@ -69750,7 +69226,6 @@ void Func06B5 object#(0x6B5) ()
 	}
 }
 
-// externs
 extern var Func093D 0x93D (var var0000, var var0001);
 
 void Func06B6 object#(0x6B6) ()
@@ -69801,7 +69276,6 @@ void Func06B6 object#(0x6B6) ()
 	}
 }
 
-// externs
 extern var Func092B 0x92B (var var0000);
 extern void Func060F object#(0x60F) ();
 
@@ -69819,7 +69293,6 @@ void Func06B7 object#(0x6B7) ()
 	}
 }
 
-// externs
 extern void Func0620 object#(0x620) ();
 extern void Func093F 0x93F (var var0000, var var0001);
 
@@ -69873,7 +69346,6 @@ void Func06B9 object#(0x6B9) ()
 	}
 }
 
-// externs
 extern void Func0620 object#(0x620) ();
 extern var Func0937 0x937 (var var0000);
 extern void Func0904 0x904 (var var0000, var var0001);
@@ -69963,7 +69435,6 @@ void Func06BA object#(0x6BA) ()
 	}
 }
 
-// externs
 extern void Func093F 0x93F (var var0000, var var0001);
 
 void Func06BB object#(0x6BB) ()
@@ -70004,7 +69475,6 @@ void Func06BB object#(0x6BB) ()
 	}
 }
 
-// externs
 extern void Func093F 0x93F (var var0000, var var0001);
 
 void Func06BC object#(0x6BC) ()
@@ -70179,7 +69649,6 @@ void Func06BE object#(0x6BE) ()
 	}
 }
 
-// externs
 extern void Func0936 0x936 (var var0000, var var0001);
 
 void Func06BF object#(0x6BF) ()
@@ -70203,7 +69672,6 @@ void Func06BF object#(0x6BF) ()
 	}
 }
 
-// externs
 extern void Func093F 0x93F (var var0000, var var0001);
 
 void Func06C0 object#(0x6C0) ()
@@ -70228,7 +69696,6 @@ void Func06C0 object#(0x6C0) ()
 	}
 }
 
-// externs
 extern void Func080F 0x80F ();
 
 void Func06C1 object#(0x6C1) ()
@@ -70306,7 +69773,6 @@ void Func06C1 object#(0x6C1) ()
 	}
 }
 
-// externs
 extern void Func080F 0x80F ();
 
 void Func06C2 object#(0x6C2) ()
@@ -70354,7 +69820,6 @@ void Func06C2 object#(0x6C2) ()
 	}
 }
 
-// externs
 extern void Func080F 0x80F ();
 
 void Func06C3 object#(0x6C3) ()
@@ -70397,7 +69862,6 @@ void Func06C5 object#(0x6C5) ()
 	}
 }
 
-// externs
 extern void Func093F 0x93F (var var0000, var var0001);
 
 void Func06C6 object#(0x6C6) ()
@@ -70419,7 +69883,6 @@ void Func06C6 object#(0x6C6) ()
 	}
 }
 
-// externs
 extern void Func093F 0x93F (var var0000, var var0001);
 
 void Func06C7 object#(0x6C7) ()
@@ -70439,7 +69902,6 @@ void Func06C7 object#(0x6C7) ()
 	}
 }
 
-// externs
 extern void Func093F 0x93F (var var0000, var var0001);
 
 void Func06C8 object#(0x6C8) ()
@@ -70459,7 +69921,6 @@ void Func06C8 object#(0x6C8) ()
 	}
 }
 
-// externs
 extern void Func093F 0x93F (var var0000, var var0001);
 
 void Func06C9 object#(0x6C9) ()
@@ -70479,7 +69940,6 @@ void Func06C9 object#(0x6C9) ()
 	}
 }
 
-// externs
 extern void Func093F 0x93F (var var0000, var var0001);
 
 void Func06CA object#(0x6CA) ()
@@ -70559,7 +70019,6 @@ void Func06CF object#(0x6CF) ()
 	}
 }
 
-// externs
 extern void Func0810 0x810 (var var0000, var var0001);
 
 void Func06D0 object#(0x6D0) ()
@@ -70575,7 +70034,6 @@ void Func06D0 object#(0x6D0) ()
 	}
 }
 
-// externs
 extern void Func0810 0x810 (var var0000, var var0001);
 
 void Func06D1 object#(0x6D1) ()
@@ -70591,7 +70049,6 @@ void Func06D1 object#(0x6D1) ()
 	}
 }
 
-// externs
 extern void Func0810 0x810 (var var0000, var var0001);
 
 void Func06D2 object#(0x6D2) ()
@@ -70607,7 +70064,6 @@ void Func06D2 object#(0x6D2) ()
 	}
 }
 
-// externs
 extern void Func0810 0x810 (var var0000, var var0001);
 
 void Func06D3 object#(0x6D3) ()
@@ -70623,7 +70079,6 @@ void Func06D3 object#(0x6D3) ()
 	}
 }
 
-// externs
 extern void Func0811 0x811 ();
 
 void Func06D4 object#(0x6D4) ()
@@ -70641,7 +70096,6 @@ void Func06D4 object#(0x6D4) ()
 	}
 }
 
-// externs
 extern void Func0811 0x811 ();
 
 void Func06D5 object#(0x6D5) ()
@@ -70659,7 +70113,6 @@ void Func06D5 object#(0x6D5) ()
 	}
 }
 
-// externs
 extern var Func093D 0x93D (var var0000, var var0001);
 extern var Func082E 0x82E (var var0000);
 
@@ -70698,7 +70151,6 @@ void Func06D6 object#(0x6D6) ()
 	}
 }
 
-// externs
 extern void Func0940 0x940 (var var0000);
 
 void Func06D7 object#(0x6D7) ()
@@ -70713,7 +70165,6 @@ void Func06D7 object#(0x6D7) ()
 	}
 }
 
-// externs
 extern void Func0940 0x940 (var var0000);
 
 void Func06D8 object#(0x6D8) ()
@@ -70728,7 +70179,6 @@ void Func06D8 object#(0x6D8) ()
 	}
 }
 
-// externs
 extern void Func0940 0x940 (var var0000);
 
 void Func06D9 object#(0x6D9) ()
@@ -70743,7 +70193,6 @@ void Func06D9 object#(0x6D9) ()
 	}
 }
 
-// externs
 extern void Func0836 0x836 (var var0000, var var0001);
 
 void Func06DA object#(0x6DA) ()
@@ -70754,7 +70203,6 @@ void Func06DA object#(0x6DA) ()
 	}
 }
 
-// externs
 extern void Func0824 0x824 (var var0000);
 
 void Func06DB object#(0x6DB) ()
@@ -70773,7 +70221,6 @@ void Func06DC object#(0x6DC) ()
 	}
 }
 
-// externs
 extern void Func0836 0x836 (var var0000, var var0001);
 
 void Func06DD object#(0x6DD) ()
@@ -70784,7 +70231,6 @@ void Func06DD object#(0x6DD) ()
 	}
 }
 
-// externs
 extern void Func0836 0x836 (var var0000, var var0001);
 
 void Func06DE object#(0x6DE) ()
@@ -70795,7 +70241,6 @@ void Func06DE object#(0x6DE) ()
 	}
 }
 
-// externs
 extern void Func0811 0x811 ();
 
 void Func06DF object#(0x6DF) ()
@@ -70813,7 +70258,6 @@ void Func06DF object#(0x6DF) ()
 	}
 }
 
-// externs
 extern void Func0925 0x925 (var var0000);
 
 void Func06E0 object#(0x6E0) ()
@@ -70902,7 +70346,6 @@ void Func06E2 object#(0x6E2) ()
 	}
 }
 
-// externs
 extern var Func0881 0x881 ();
 extern void Func069D object#(0x69D) ();
 
@@ -70957,7 +70400,6 @@ void Func06F5 object#(0x6F5) ()
 	gflags[0x0312] = true;
 }
 
-// externs
 extern void Func0843 0x843 ();
 extern var Func0844 0x844 (var var0000);
 extern var Func090A 0x90A ();
@@ -71824,7 +71266,6 @@ void Func06F6 object#(0x6F6) ()
 	}
 }
 
-// externs
 extern void Func08E6 0x8E6 (var var0000);
 extern void Func06F7 object#(0x6F7) ();
 
@@ -72253,7 +71694,6 @@ void Func06F7 object#(0x6F7) ()
 	};
 }
 
-// externs
 extern void Func087D 0x87D ();
 extern var Func0881 0x881 ();
 extern void Func08FF 0x8FF (var var0000);
@@ -72711,7 +72151,6 @@ void Func06F8 object#(0x6F8) ()
 	}
 }
 
-// externs
 extern void Func0356 shape#(0x356) ();
 extern var Func08E8 0x8E8 (var var0000);
 
@@ -73168,7 +72607,6 @@ void Func06F9 object#(0x6F9) ()
 	}
 }
 
-// externs
 extern void Func08FF 0x8FF (var var0000);
 
 void Func06FA object#(0x6FA) ()
@@ -73183,7 +72621,6 @@ void Func06FA object#(0x6FA) ()
 	}
 }
 
-// externs
 extern void Func08DD 0x8DD ();
 extern void Func06FA object#(0x6FA) ();
 
@@ -73229,7 +72666,6 @@ void Func06FB object#(0x6FB) ()
 	}
 }
 
-// externs
 extern var Func092D 0x92D (var var0000);
 extern void Func0708 object#(0x708) ();
 extern void Func06FD object#(0x6FD) ();
@@ -73385,7 +72821,6 @@ void Func06FC object#(0x6FC) ()
 	}
 }
 
-// externs
 extern var Func0887 0x887 (var var0000, var var0001, var var0002);
 extern void Func0888 0x888 (var var0000);
 extern void Func0708 object#(0x708) ();
@@ -73545,7 +72980,6 @@ void Func0709 object#(0x709) ()
 	var0000 = 0x0001;
 }
 
-// externs
 extern void Func08E6 0x8E6 (var var0000);
 
 void Func070A object#(0x70A) ()
@@ -73922,7 +73356,6 @@ void Func070A object#(0x70A) ()
 	}
 }
 
-// externs
 extern var Func0944 0x944 (var var0000);
 extern var Func08E9 0x8E9 (var var0000);
 extern var Func08EA 0x8EA (var var0000);
@@ -74262,7 +73695,6 @@ void Func070E object#(0x70E) ()
 	}
 }
 
-// externs
 extern void Func08E6 0x8E6 (var var0000);
 extern void Func06F7 object#(0x6F7) ();
 
@@ -74426,7 +73858,6 @@ void Func070F object#(0x70F) ()
 	}
 }
 
-// externs
 extern void Func08FE 0x8FE (var var0000);
 extern var Func0814 0x814 ();
 extern void Func08E6 0x8E6 (var var0000);
@@ -74557,7 +73988,6 @@ void Func0710 object#(0x710) ()
 	}
 }
 
-// externs
 extern void Func08E6 0x8E6 (var var0000);
 
 void Func0712 object#(0x712) ()
@@ -74611,7 +74041,6 @@ void Func0713 object#(0x713) ()
 	}
 }
 
-// externs
 extern var Func0814 0x814 ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func08FF 0x8FF (var var0000);
@@ -74853,7 +74282,6 @@ void Func0716 object#(0x716) ()
 	};
 }
 
-// externs
 extern void Func0838 0x838 (var var0000);
 
 void Func0717 object#(0x717) ()
@@ -74891,7 +74319,6 @@ void Func0717 object#(0x717) ()
 	Func0838(item);
 }
 
-// externs
 extern var Func0900 0x900 ();
 extern var Func0801 0x801 (var var0000);
 extern void Func0624 object#(0x624) ();
@@ -74959,8 +74386,7 @@ void Func0800 0x800 (var var0000)
 			var000B = script 0xFE9C
 			{
 				nohalt;
-				music 30;
-				raw(0x0000);	// Note: should probably not be here
+				music 30, 0;
 			};
 		}
 		var000C = Func093C(UI_get_npc_object(0xFE9C), UI_get_party_list());
@@ -75005,7 +74431,6 @@ var Func0802 0x802 (var var0000, var var0001)
 	return var0002;
 }
 
-// externs
 extern void Func0808 0x808 ();
 extern void Func0804 0x804 (var var0000, var var0001, var var0002);
 
@@ -75071,7 +74496,6 @@ void Func0804 0x804 (var var0000, var var0001, var var0002)
 	}
 }
 
-// externs
 extern void Func0808 0x808 ();
 
 void Func0805 0x805 (var var0000)
@@ -75133,7 +74557,6 @@ void Func0806 0x806 (var var0000, var var0001)
 	UI_earthquake(0x0007);
 }
 
-// externs
 extern void Func0808 0x808 ();
 
 void Func0807 0x807 (var var0000)
@@ -75158,7 +74581,6 @@ void Func0807 0x807 (var var0000)
 	}
 }
 
-// externs
 extern var Func093C 0x93C (var var0000, var var0001);
 
 void Func0808 0x808 ()
@@ -75178,7 +74600,6 @@ void Func0808 0x808 ()
 	}
 }
 
-// externs
 extern void Func0904 0x904 (var var0000, var var0001);
 extern var Func080D 0x80D ();
 extern var Func08B3 0x8B3 (var var0000);
@@ -75369,7 +74790,6 @@ var Func080D 0x80D ()
 	return true;
 }
 
-// externs
 extern void Func08FF 0x8FF (var var0000);
 
 var Func080E 0x80E (var var0000)
@@ -75550,7 +74970,6 @@ void Func0810 0x810 (var var0000, var var0001)
 	}
 }
 
-// externs
 extern var Func093C 0x93C (var var0000, var var0001);
 
 void Func0811 0x811 ()
@@ -75592,7 +75011,6 @@ void Func0812 0x812 (var var0000)
 	}
 }
 
-// externs
 extern void Func08FA 0x8FA (var var0000);
 extern void Func0925 0x925 (var var0000);
 extern var Func0937 0x937 (var var0000);
@@ -75721,7 +75139,6 @@ var Func0814 0x814 ()
 	return var0000;
 }
 
-// externs
 extern var Func081B 0x81B (var var0000);
 extern void Func08FF 0x8FF (var var0000);
 extern void Func081C 0x81C (var var0000, var var0001);
@@ -75779,7 +75196,6 @@ void Func0815 0x815 (var var0000)
 	}
 }
 
-// externs
 extern var Func0820 0x820 (var var0000);
 extern var Func081F 0x81F (var var0000);
 extern void Func0817 0x817 (var var0000);
@@ -76035,7 +75451,6 @@ void Func0817 0x817 (var var0000)
 	}
 }
 
-// externs
 extern void Func08FF 0x8FF (var var0000);
 
 void Func0818 0x818 ()
@@ -76068,7 +75483,6 @@ void Func081C 0x81C (var var0000, var var0001)
 	UI_set_item_frame(var0000, ((var0002 - var0003) + var0001));
 }
 
-// externs
 extern void Func081C 0x81C (var var0000, var var0001);
 
 var Func081D 0x81D (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005)
@@ -76088,7 +75502,6 @@ var Func081D 0x81D (var var0000, var var0001, var var0002, var var0003, var var0
 	return true;
 }
 
-// externs
 extern var Func081B 0x81B (var var0000);
 extern var Func081D 0x81D (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005);
 
@@ -76120,7 +75533,6 @@ void Func081E 0x81E (var var0000, var var0001, var var0002, var var0003, var var
 	}
 }
 
-// externs
 extern var Func081B 0x81B (var var0000);
 extern var Func081D 0x81D (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005);
 extern void Func0818 0x818 ();
@@ -76157,7 +75569,6 @@ var Func081F 0x81F (var var0000)
 	return true;
 }
 
-// externs
 extern var Func081B 0x81B (var var0000);
 extern var Func081D 0x81D (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005);
 extern void Func0818 0x818 ();
@@ -76242,7 +75653,6 @@ var Func0823 0x823 (var var0000)
 	return var0005;
 }
 
-// externs
 extern var Func0825 0x825 (var var0000, var var0001, var var0002);
 extern var Func0823 0x823 (var var0000);
 
@@ -76448,7 +75858,6 @@ void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var
 	}
 }
 
-// externs
 extern var Func082C 0x82C (var var0000, var var0001, var var0002, var var0003);
 extern var Func082D 0x82D (var var0000, var var0001, var var0002);
 
@@ -76539,7 +75948,6 @@ var Func082B 0x82B (var var0000, var var0001)
 	return var0000;
 }
 
-// externs
 extern var Func0932 0x932 (var var0000);
 
 var Func082C 0x82C (var var0000, var var0001, var var0002, var var0003)
@@ -76562,7 +75970,6 @@ var Func082C 0x82C (var var0000, var var0001, var var0002, var var0003)
 	return false;
 }
 
-// externs
 extern var Func082B 0x82B (var var0000, var var0001);
 extern var Func082A 0x82A (var var0000, var var0001, var var0002);
 
@@ -76580,7 +75987,6 @@ var Func082D 0x82D (var var0000, var var0001, var var0002)
 	return var0000;
 }
 
-// externs
 extern void Func0940 0x940 (var var0000);
 
 var Func082E 0x82E (var var0000)
@@ -76918,8 +76324,7 @@ void Func0830 0x830 (var var0000, var var0001)
 		var0004 = UI_find_nearby(var0000[0x0001], 0x00C7, 0x0019, 0x0000);
 		var0005 = script var0004
 		{
-			music 21;
-			raw(0x0000);	// Note: should probably not be here
+			music 21, 0;
 		};
 	}
 	if (var0001 == 0x0000)
@@ -76935,7 +76340,6 @@ void Func0830 0x830 (var var0000, var var0001)
 	UI_play_sound_effect(var0003);
 }
 
-// externs
 extern var Func0829 0x829 (var var0000);
 extern void Func08FF 0x8FF (var var0000);
 extern void Func0830 0x830 (var var0000, var var0001);
@@ -77145,9 +76549,12 @@ void Func0835 0x835 (var var0000, var var0001, var var0002)
 	var0004 = UI_set_npc_prop(var0000, var0001, (var0002 - var0003));
 }
 
-// externs
 extern void Func0832 0x832 (var var0000, var var0001);
 extern void Func0833 0x833 (var var0000, var var0001);
+extern void Func012F shape#(0x12F) ();
+extern void Func036C shape#(0x36C) ();
+extern void Func03A7 shape#(0x3A7) ();
+extern void Func03A8 shape#(0x3A8) ();
 
 void Func0836 0x836 (var var0000, var var0001)
 {
@@ -77179,22 +76586,22 @@ void Func0836 0x836 (var var0000, var var0001)
 				var0007 = UI_get_item_shape(var0006);
 				if (var0007 == 0x012F)
 				{
-					var0007 = 0x03A8;
+					var0007 = Func03A8;
 					Func0832(var0006, var0007);
 				}
 				else if (var0007 == 0x036C)
 				{
-					var0007 = 0x03A7;
+					var0007 = Func03A7;
 					Func0832(var0006, var0007);
 				}
 				else if (var0007 == 0x03A8)
 				{
-					var0007 = 0x012F;
+					var0007 = Func012F;
 					Func0833(var0006, var0007);
 				}
 				else if (var0007 == 0x03A7)
 				{
-					var0007 = 0x036C;
+					var0007 = Func036C;
 					Func0833(var0006, var0007);
 				}
 			}
@@ -77430,7 +76837,6 @@ var Func083C 0x83C (var var0000)
 	return var0001;
 }
 
-// externs
 extern var Func083A 0x83A ();
 extern var Func083B 0x83B ();
 extern var Func083C 0x83C (var var0000);
@@ -77591,7 +76997,6 @@ void Func083D 0x83D ()
 	Func0933(0xFF18, var0008, 0x0000);
 }
 
-// externs
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern var Func080E 0x80E (var var0000);
 extern void Func083F 0x83F (var var0000, var var0001);
@@ -77647,7 +77052,6 @@ void Func083E 0x83E (var var0000, var var0001)
 	}
 }
 
-// externs
 extern var Func0834 0x834 ();
 
 void Func083F 0x83F (var var0000, var var0001)
@@ -77692,7 +77096,6 @@ void Func083F 0x83F (var var0000, var var0001)
 	}
 }
 
-// externs
 extern var Func090B 0x90B (var var0000);
 extern var Func090A 0x90A ();
 
@@ -77753,7 +77156,6 @@ void Func0840 0x840 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091C 0x91C (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -77839,7 +77241,6 @@ void Func0841 0x841 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -78231,7 +77632,6 @@ var Func084B 0x84B (var var0000)
 	return 0;
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091C 0x91C (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -78326,7 +77726,6 @@ void Func084C 0x84C ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func084F 0x84F ();
 extern void Func084E 0x84E ();
@@ -78383,7 +77782,6 @@ void Func084D 0x84D ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func090B 0x90B (var var0000);
 extern void Func0851 0x851 ();
@@ -78497,7 +77895,6 @@ void Func084E 0x84E ()
 	Func0851();
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -78716,7 +78113,6 @@ void Func084F 0x84F ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
@@ -78842,7 +78238,6 @@ void Func0850 0x850 ()
 	abort;
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
 
@@ -79029,7 +78424,6 @@ void Func0852 0x852 ()
 	}
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091C 0x91C (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -79122,7 +78516,6 @@ void Func0853 0x853 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func0909 0x909 ();
 
 void Func0854 0x854 ()
@@ -79165,7 +78558,6 @@ void Func0854 0x854 ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -79264,7 +78656,6 @@ void Func0855 0x855 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func0920 0x920 ();
 extern var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003);
 extern var Func0910 0x910 (var var0000, var var0001);
@@ -79363,7 +78754,6 @@ void Func0856 0x856 (var var0000, var var0001)
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 
 void Func0857 0x857 ()
@@ -79423,7 +78813,6 @@ void Func0857 0x857 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -79509,7 +78898,6 @@ void Func0858 0x858 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -79587,7 +78975,6 @@ void Func0859 0x859 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -79720,7 +79107,6 @@ void Func085B 0x85B ()
 	UI_item_say(var0000, var0002);
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -79798,7 +79184,6 @@ void Func085C 0x85C ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -79897,7 +79282,6 @@ void Func085D 0x85D ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -79980,7 +79364,6 @@ void Func085E 0x85E ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func0920 0x920 ();
@@ -80088,7 +79471,6 @@ void Func085F 0x85F (var var0000, var var0001)
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
@@ -80208,7 +79590,6 @@ void Func0861 0x861 ()
 	abort;
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090B 0x90B (var var0000);
 extern void Func0861 0x861 ();
@@ -80337,7 +79718,6 @@ void Func0862 0x862 ()
 	}
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -80643,7 +80023,6 @@ var Func086E 0x86E ()
 	return var0002;
 }
 
-// externs
 extern var Func0865 0x865 ();
 extern var Func0866 0x866 ();
 extern var Func086C 0x86C ();
@@ -80964,7 +80343,6 @@ var Func086F 0x86F ()
 	return (var0012 + var000F);
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
 extern var Func090E 0x90E ();
@@ -81073,7 +80451,6 @@ void Func0870 0x870 (var var0000, var var0001, var var0002)
 	UI_pop_answers();
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -81181,7 +80558,6 @@ void Func0871 0x871 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -81273,7 +80649,6 @@ void Func0872 0x872 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -81352,7 +80727,6 @@ void Func0873 0x873 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -81444,7 +80818,6 @@ void Func0874 0x874 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func0920 0x920 ();
 extern var Func090F 0x90F (var var0000);
 extern var Func0908 0x908 ();
@@ -81571,7 +80944,6 @@ void Func0875 0x875 (var var0000, var var0001)
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -81683,7 +81055,6 @@ void Func0877 0x877 ()
 	gflags[0x00E0] = true;
 }
 
-// externs
 extern var Func0920 0x920 ();
 extern var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003);
 extern var Func090F 0x90F (var var0000);
@@ -81751,7 +81122,6 @@ void Func0878 0x878 (var var0000, var var0001)
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
 extern var Func090D 0x90D ();
@@ -81859,7 +81229,6 @@ void Func0879 0x879 (var var0000, var var0001, var var0002)
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -81952,7 +81321,6 @@ void Func087A 0x87A ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 
 void Func087B 0x87B ()
@@ -82042,7 +81410,6 @@ void Func087B 0x87B ()
 	abort;
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
 
@@ -82126,7 +81493,6 @@ void Func087D 0x87D ()
 	var0002 = UI_update_last_created(var0001);
 }
 
-// externs
 extern void Func087F 0x87F (var var0000);
 extern void Func0880 0x880 (var var0000, var var0001);
 
@@ -82364,7 +81730,6 @@ var Func0881 0x881 ()
 	return 0x0000;
 }
 
-// externs
 extern var Func080D 0x80D ();
 extern void Func061C object#(0x61C) ();
 extern var Func08B3 0x8B3 (var var0000);
@@ -82399,7 +81764,6 @@ void Func0882 0x882 (var var0000)
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func0885 0x885 ();
 
@@ -82426,7 +81790,6 @@ void Func0883 0x883 ()
 	Func0885();
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090B 0x90B (var var0000);
 extern var Func090A 0x90A ();
@@ -82632,7 +81995,6 @@ void Func0884 0x884 ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
 
@@ -82851,7 +82213,6 @@ var Func0886 0x886 ()
 	return 0;
 }
 
-// externs
 extern void Func0888 0x888 (var var0000);
 extern void Func0708 object#(0x708) ();
 
@@ -83106,7 +82467,6 @@ void Func0888 0x888 (var var0000)
 	}
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091C 0x91C (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -83192,7 +82552,6 @@ void Func0889 0x889 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func0909 0x909 ();
 
 void Func088A 0x88A ()
@@ -83268,7 +82627,6 @@ void Func088B 0x88B ()
 	abort;
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -83355,7 +82713,6 @@ void Func088C 0x88C ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 
 void Func088D 0x88D ()
@@ -83377,7 +82734,6 @@ void Func088D 0x88D ()
 	}
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -83455,7 +82811,6 @@ void Func088E 0x88E ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -83534,7 +82889,6 @@ void Func088F 0x88F ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func0891 0x891 ();
@@ -83696,7 +83050,6 @@ void Func0890 0x890 ()
 	}
 }
 
-// externs
 extern void Func08FF 0x8FF (var var0000);
 
 void Func0891 0x891 ()
@@ -83710,7 +83063,6 @@ void Func0891 0x891 ()
 	gflags[0x0321] = true;
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern var Func0907 0x907 (var var0000);
 extern void Func06F9 object#(0x6F9) ();
@@ -83802,7 +83154,6 @@ void Func0893 0x893 ()
 	}
 }
 
-// externs
 extern void Func0896 0x896 ();
 extern void Func0895 0x895 ();
 extern void Func08FF 0x8FF (var var0000);
@@ -84077,7 +83428,6 @@ void Func0896 0x896 ()
 	}
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -84156,7 +83506,6 @@ void Func0897 0x897 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -84243,7 +83592,6 @@ void Func0898 0x898 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -84336,7 +83684,6 @@ void Func0899 0x899 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func0920 0x920 ();
 extern var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003);
 extern var Func0910 0x910 (var var0000, var var0001);
@@ -84411,7 +83758,6 @@ void Func089A 0x89A (var var0000, var var0001)
 	}
 }
 
-// externs
 extern var Func0920 0x920 ();
 extern var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003);
 extern var Func0910 0x910 (var var0000, var var0001);
@@ -84504,7 +83850,6 @@ void Func089B 0x89B (var var0000, var var0001)
 	}
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091C 0x91C (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -84582,7 +83927,6 @@ void Func089C 0x89C ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
 extern var Func090E 0x90E ();
@@ -84734,7 +84078,6 @@ void Func089D 0x89D (var var0000, var var0001, var var0002)
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
 extern var Func090C 0x90C (var var0000);
@@ -84911,7 +84254,6 @@ void Func089E 0x89E (var var0000, var var0001, var var0002)
 	UI_pop_answers();
 }
 
-// externs
 extern var Func0920 0x920 ();
 extern var Func090F 0x90F (var var0000);
 extern var Func0908 0x908 ();
@@ -84988,7 +84330,6 @@ void Func089F 0x89F (var var0000, var var0001)
 	say("\"I look forward to thy return.\"");
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -85086,7 +84427,6 @@ void Func08A0 0x8A0 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -85196,7 +84536,6 @@ void Func08A1 0x8A1 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func0920 0x920 ();
 extern var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003);
 extern var Func0910 0x910 (var var0000, var var0001);
@@ -85280,7 +84619,6 @@ void Func08A2 0x8A2 (var var0000, var var0001)
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -85365,7 +84703,6 @@ void Func08A3 0x8A3 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -85482,7 +84819,6 @@ void Func08A5 0x8A5 ()
 	UI_item_say(var0000, var0002);
 }
 
-// externs
 extern var Func0920 0x920 ();
 extern var Func0908 0x908 ();
 extern var Func090F 0x90F (var var0000);
@@ -85587,7 +84923,6 @@ void Func08A6 0x8A6 (var var0000, var var0001)
 	}
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -85674,7 +85009,6 @@ void Func08A7 0x8A7 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -85753,7 +85087,6 @@ void Func08A8 0x8A8 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -85840,7 +85173,6 @@ void Func08A9 0x8A9 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -85919,7 +85251,6 @@ void Func08AA 0x8AA ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 
 void Func08AB 0x8AB ()
@@ -85989,7 +85320,6 @@ void Func08AB 0x8AB ()
 	abort;
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
 extern var Func090E 0x90E ();
@@ -86104,7 +85434,6 @@ void Func08AC 0x8AC (var var0000, var var0001, var var0002)
 	UI_pop_answers();
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0908 0x908 ();
 extern void Func08AE 0x8AE (var var0000);
@@ -86190,7 +85519,6 @@ void Func08AD 0x8AD ()
 	abort;
 }
 
-// externs
 extern var Func090A 0x90A ();
 
 void Func08AE 0x8AE (var var0000)
@@ -86214,7 +85542,6 @@ void Func08AE 0x8AE (var var0000)
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func08B1 0x8B1 ();
@@ -86292,7 +85619,6 @@ void Func08B0 0x8B0 ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern var Func0907 0x907 (var var0000);
 
@@ -86327,7 +85653,6 @@ void Func08B1 0x8B1 ()
 	abort;
 }
 
-// externs
 extern var Func0908 0x908 ();
 
 void Func08B2 0x8B2 ()
@@ -86374,7 +85699,6 @@ void Func08B2 0x8B2 ()
 	}
 }
 
-// externs
 extern var Func093C 0x93C (var var0000, var var0001);
 extern var Func093D 0x93D (var var0000, var var0001);
 
@@ -86437,7 +85761,6 @@ var Func08B3 0x8B3 (var var0000)
 	return false;
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
 extern var Func090E 0x90E ();
@@ -86585,7 +85908,6 @@ void Func08B5 0x8B5 ()
 	gflags[0x02FE] = true;
 }
 
-// externs
 extern var Func0920 0x920 ();
 extern var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003);
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -86668,7 +85990,6 @@ void Func08B6 0x8B6 (var var0000, var var0001)
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -86768,7 +86089,6 @@ void Func08B7 0x8B7 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090A 0x90A ();
 
 void Func08B8 0x8B8 ()
@@ -86823,7 +86143,6 @@ void Func08B8 0x8B8 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -86921,7 +86240,6 @@ void Func08B9 0x8B9 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
 
@@ -86992,7 +86310,6 @@ void Func08BA 0x8BA ()
 	gflags[0x0100] = true;
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func0923 0x923 (var var0000, var var0001);
 extern var Func090A 0x90A ();
@@ -87105,7 +86422,6 @@ void Func08BB 0x8BB (var var0000)
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -87206,7 +86522,6 @@ void Func08BC 0x8BC (var var0000)
 	UI_pop_answers();
 }
 
-// externs
 extern var Func0920 0x920 ();
 extern var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003);
 extern var Func0910 0x910 (var var0000, var var0001);
@@ -87284,7 +86599,6 @@ void Func08BD 0x8BD (var var0000, var var0001)
 	} while (false);
 }
 
-// externs
 extern var Func0920 0x920 ();
 extern var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003);
 extern var Func0910 0x910 (var var0000, var var0001);
@@ -87371,7 +86685,6 @@ void Func08BE 0x8BE (var var0000, var var0001)
 	} while (false);
 }
 
-// externs
 extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0912 0x912 (var var0000, var var0001, var var0002);
 
@@ -87648,7 +86961,6 @@ void Func08C0 0x8C0 ()
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 
 void Func08C1 0x8C1 ()
@@ -87667,7 +86979,6 @@ void Func08C1 0x8C1 ()
 	abort;
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func0908 0x908 ();
 
@@ -87706,7 +87017,6 @@ void Func08C2 0x8C2 ()
 	abort;
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func0923 0x923 (var var0000, var var0001);
 extern var Func090A 0x90A ();
@@ -87819,7 +87129,6 @@ void Func08C3 0x8C3 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -87898,7 +87207,6 @@ void Func08C4 0x8C4 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func0923 0x923 (var var0000, var var0001);
 extern var Func090A 0x90A ();
@@ -88011,7 +87319,6 @@ void Func08C5 0x8C5 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -88090,7 +87397,6 @@ void Func08C6 0x8C6 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 
 void Func08C7 0x8C7 ()
@@ -88170,7 +87476,6 @@ void Func08C7 0x8C7 ()
 	abort;
 }
 
-// externs
 extern var Func0920 0x920 ();
 extern var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003);
 extern var Func0910 0x910 (var var0000, var var0001);
@@ -88268,7 +87573,6 @@ void Func08C8 0x8C8 (var var0000, var var0001)
 	} while (false);
 }
 
-// externs
 extern var Func0932 0x932 (var var0000);
 
 var Func08C9 0x8C9 ()
@@ -88323,7 +87627,6 @@ var Func08C9 0x8C9 ()
 	return 0;
 }
 
-// externs
 extern var Func0920 0x920 ();
 extern var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003);
 extern var Func0910 0x910 (var var0000, var var0001);
@@ -88416,7 +87719,6 @@ void Func08CA 0x8CA (var var0000, var var0001)
 	} while (false);
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -88510,7 +87812,6 @@ void Func08CB 0x8CB ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -88593,7 +87894,6 @@ void Func08CC 0x8CC ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -88687,7 +87987,6 @@ void Func08CD 0x8CD ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func0908 0x908 ();
 
@@ -88747,7 +88046,6 @@ void Func08CE 0x8CE ()
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
 
@@ -88806,7 +88104,6 @@ void Func08CF 0x8CF ()
 	}
 }
 
-// externs
 extern var Func0920 0x920 ();
 extern var Func090F 0x90F (var var0000);
 extern var Func0908 0x908 ();
@@ -88910,7 +88207,6 @@ void Func08D0 0x8D0 (var var0000, var var0001)
 	} while (false);
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func0911 0x911 (var var0000);
 
@@ -88965,7 +88261,6 @@ void Func08D1 0x8D1 ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
@@ -89082,7 +88377,6 @@ void Func08D2 0x8D2 (var var0000, var var0001, var var0002)
 	UI_pop_answers();
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -89167,7 +88461,6 @@ void Func08D3 0x8D3 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -89319,7 +88612,6 @@ void Func08D5 0x8D5 ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 
@@ -89368,7 +88660,6 @@ void Func08D6 0x8D6 ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
@@ -89461,7 +88752,6 @@ void Func08D7 0x8D7 ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func0907 0x907 (var var0000);
@@ -89545,7 +88835,6 @@ void Func08D9 0x8D9 ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 
 void Func08DA 0x8DA ()
@@ -89559,7 +88848,6 @@ void Func08DA 0x8DA ()
 	abort;
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func0923 0x923 (var var0000, var var0001);
 extern var Func090A 0x90A ();
@@ -89675,7 +88963,6 @@ void Func08DB 0x8DB ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -89882,7 +89169,6 @@ void Func08DD 0x8DD ()
 	UI_earthquake((var0001 * 0x0003));
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -89980,7 +89266,6 @@ void Func08DE 0x8DE ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
 
@@ -90018,7 +89303,6 @@ void Func08DF 0x8DF ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
 
@@ -90056,7 +89340,6 @@ void Func08E0 0x8E0 ()
 	}
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091C 0x91C (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -90134,7 +89417,6 @@ void Func08E1 0x8E1 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091C 0x91C (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -90212,7 +89494,6 @@ void Func08E2 0x8E2 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -90297,7 +89578,6 @@ void Func08E4 0x8E4 ()
 	var0000 = 0x0001;
 }
 
-// externs
 extern var Func0921 0x921 (var var0000);
 extern var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003);
 extern var Func0910 0x910 (var var0000, var var0001);
@@ -90661,7 +89941,6 @@ void Func08EB 0x8EB (var var0000, var var0001, var var0002)
 	}
 }
 
-// externs
 extern var Func08F7 0x8F7 (var var0000);
 
 void Func08EC 0x8EC ()
@@ -90681,7 +89960,6 @@ void Func08EC 0x8EC ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
 
@@ -90721,7 +89999,6 @@ void Func08ED 0x8ED ()
 	}
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
 
@@ -90759,7 +90036,6 @@ void Func08EE 0x8EE ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -90868,7 +90144,6 @@ void Func08EF 0x8EF ()
 	}
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 
@@ -90931,7 +90206,6 @@ var Func08F1 0x8F1 (var var0000)
 	return var0002;
 }
 
-// externs
 extern var Func08F1 0x8F1 (var var0000);
 extern var Func090A 0x90A ();
 
@@ -91201,7 +90475,6 @@ void Func08F4 0x8F4 (var var0000, var var0001)
 	UI_add_answer(["bees", "leave"]);
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func093C 0x93C (var var0000, var var0001);
 extern var Func08F7 0x8F7 (var var0000);
@@ -91475,7 +90748,6 @@ var Func08F9 0x8F9 (var var0000, var var0001, var var0002)
 	return true;
 }
 
-// externs
 extern void Func0633 object#(0x633) ();
 
 void Func08FA 0x8FA (var var0000)
@@ -91514,7 +90786,6 @@ void Func08FD 0x8FD (var var0000)
 	UI_flash_mouse(var0000);
 }
 
-// externs
 extern var Func0900 0x900 ();
 extern void Func0904 0x904 (var var0000, var var0001);
 
@@ -91526,7 +90797,6 @@ void Func08FE 0x8FE (var var0000)
 	Func0904(var0001, var0000);
 }
 
-// externs
 extern var Func0900 0x900 ();
 extern void Func0903 0x903 (var var0000, var var0001);
 
@@ -91538,7 +90808,6 @@ void Func08FF 0x8FF (var var0000)
 	Func0903(var0001, var0000);
 }
 
-// externs
 extern var Func0902 0x902 ();
 extern var Func0901 0x901 ();
 
@@ -91555,7 +90824,6 @@ var Func0900 0x900 ()
 	return 0;
 }
 
-// externs
 extern var Func093C 0x93C (var var0000, var var0001);
 
 var Func0901 0x901 ()
@@ -91635,7 +90903,6 @@ void Func0903 0x903 (var var0000, var var0001)
 	}
 }
 
-// externs
 extern void Func0933 0x933 (var var0000, var var0001, var var0002);
 
 void Func0904 0x904 (var var0000, var var0001)
@@ -91752,7 +91019,6 @@ var Func090C 0x90C (var var0000)
 	return var0001;
 }
 
-// externs
 extern var Func08FB 0x8FB ();
 extern var Func090C 0x90C (var var0000);
 
@@ -91776,7 +91042,6 @@ var Func090D 0x90D ()
 	return UI_get_npc_number(var0004);
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 
 var Func090E 0x90E ()
@@ -91850,7 +91115,6 @@ var Func0913 0x913 (var var0000, var var0001)
 	return 0x0000;
 }
 
-// externs
 extern void Func0912 0x912 (var var0000, var var0001, var var0002);
 
 void Func0914 0x914 (var var0000, var var0001)
@@ -91867,7 +91131,6 @@ void Func0914 0x914 (var var0000, var var0001)
 	}
 }
 
-// externs
 extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0912 0x912 (var var0000, var var0001, var var0002);
 
@@ -91893,7 +91156,6 @@ void Func0915 0x915 (var var0000, var var0001)
 	}
 }
 
-// externs
 extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0912 0x912 (var var0000, var var0001, var var0002);
 
@@ -91913,7 +91175,6 @@ void Func0916 0x916 (var var0000, var var0001)
 	}
 }
 
-// externs
 extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0912 0x912 (var var0000, var var0001, var var0002);
 
@@ -91944,7 +91205,6 @@ void Func0917 0x917 (var var0000, var var0001)
 	}
 }
 
-// externs
 extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0912 0x912 (var var0000, var var0001, var var0002);
 
@@ -92001,7 +91261,6 @@ void Func0919 0x919 ()
 	UI_add_answer("philosophy");
 }
 
-// externs
 extern var Func090A 0x90A ();
 
 void Func091A 0x91A ()
@@ -92055,7 +91314,6 @@ var Func091C 0x91C (var var0000, var var0001, var var0002, var var0003, var var0
 	return var0005;
 }
 
-// externs
 extern var Func0910 0x910 (var var0000, var var0001);
 extern void Func0912 0x912 (var var0000, var var0001, var var0002);
 
@@ -92127,7 +91385,6 @@ void Func091F 0x91F (var var0000, var var0001)
 	}
 }
 
-// externs
 extern var Func090D 0x90D ();
 
 var Func0920 0x920 ()
@@ -92139,7 +91396,6 @@ var Func0920 0x920 ()
 	return var0000;
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern var Func08FB 0x8FB ();
 extern var Func090C 0x90C (var var0000);
@@ -92198,7 +91454,6 @@ var Func0921 0x921 (var var0000)
 	return var000C;
 }
 
-// externs
 extern var Func0910 0x910 (var var0000, var var0001);
 
 var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003)
@@ -92237,7 +91492,6 @@ var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003)
 	return 0x0003;
 }
 
-// externs
 extern var Func090A 0x90A ();
 
 var Func0923 0x923 (var var0000, var var0001)
@@ -92283,7 +91537,6 @@ var Func0923 0x923 (var var0000, var var0001)
 	return var0003;
 }
 
-// externs
 extern var Func090A 0x90A ();
 
 var Func0924 0x924 (var var0000, var var0001)
@@ -92388,7 +91641,6 @@ void Func0926 0x926 (var var0000)
 	}
 }
 
-// externs
 extern void Func08FA 0x8FA (var var0000);
 extern void Func08FF 0x8FF (var var0000);
 extern void Func0903 0x903 (var var0000, var var0001);
@@ -92433,7 +91685,6 @@ void Func0927 0x927 (var var0000)
 	}
 }
 
-// externs
 extern void Func08FA 0x8FA (var var0000);
 extern void Func08FF 0x8FF (var var0000);
 extern void Func0903 0x903 (var var0000, var var0001);
@@ -92494,7 +91745,6 @@ void Func0928 0x928 (var var0000)
 	}
 }
 
-// externs
 extern var Func0908 0x908 ();
 extern void Func08FF 0x8FF (var var0000);
 extern void Func08FD 0x8FD (var var0000);
@@ -92566,7 +91816,6 @@ var Func092D 0x92D (var var0000)
 	return UI_direction_from(0xFE9C, var0000);
 }
 
-// externs
 extern var Func0937 0x937 (var var0000);
 
 void Func092E 0x92E (var var0000)
@@ -92705,7 +91954,6 @@ void Func092E 0x92E (var var0000)
 	UI_item_say(var0001, var0003);
 }
 
-// externs
 extern var Func0937 0x937 (var var0000);
 
 void Func092F 0x92F (var var0000)
@@ -92839,7 +92087,6 @@ var Func0932 0x932 (var var0000)
 	return var0000;
 }
 
-// externs
 extern var Func0937 0x937 (var var0000);
 
 void Func0933 0x933 (var var0000, var var0001, var var0002)
@@ -92922,7 +92169,6 @@ var Func0937 0x937 (var var0000)
 	return 0;
 }
 
-// externs
 extern var Func0939 0x939 (var var0000);
 
 var Func0938 0x938 (var var0000)
@@ -92954,7 +92200,6 @@ var Func0939 0x939 (var var0000)
 	return var0001;
 }
 
-// externs
 extern void Func093B 0x93B (var var0000, var var0001, var var0002, var var0003);
 
 void Func093A 0x93A (var var0000, var var0001)
@@ -93084,7 +92329,6 @@ var Func093D 0x93D (var var0000, var var0001)
 	return var0000;
 }
 
-// externs
 extern var Func08F9 0x8F9 (var var0000, var var0001, var var0002);
 
 var Func093E 0x93E ()
@@ -93097,7 +92341,6 @@ var Func093E 0x93E ()
 	return Func08F9(UI_get_object_position(0xFE9C), var0000, var0001);
 }
 
-// externs
 extern var Func0939 0x939 (var var0000);
 
 void Func093F 0x93F (var var0000, var var0001)
@@ -93115,7 +92358,6 @@ void Func093F 0x93F (var var0000, var var0001)
 	}
 }
 
-// externs
 extern void Func0614 object#(0x614) ();
 
 void Func0940 0x940 (var var0000)
@@ -93130,7 +92372,6 @@ void Func0940 0x940 (var var0000)
 	}
 }
 
-// externs
 extern void Func0614 object#(0x614) ();
 
 void Func0941 0x941 (var var0000)
@@ -93145,7 +92386,6 @@ void Func0941 0x941 (var var0000)
 	}
 }
 
-// externs
 extern void Func0905 0x905 (var var0000);
 
 void Func0942 0x942 (var var0000, var var0001)
@@ -93224,7 +92464,6 @@ var Func0945 0x945 (var var0000)
 	return var0002;
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -93303,7 +92542,6 @@ void Func0946 0x946 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090A 0x90A ();
 extern void Func0925 0x925 (var var0000);
 
@@ -93392,7 +92630,6 @@ void Func0947 0x947 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090A 0x90A ();
 
 void Func0948 0x948 ()
@@ -93451,7 +92688,6 @@ void Func0948 0x948 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091C 0x91C (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func094B 0x94B (var var0000, var var0001);
@@ -93551,7 +92787,6 @@ void Func0949 0x949 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091C 0x91C (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func094B 0x94B (var var0000, var var0001);
@@ -93652,7 +92887,6 @@ void Func094A 0x94A ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090F 0x90F (var var0000);
 extern var Func090A 0x90A ();
 extern var Func0932 0x932 (var var0000);
@@ -93822,7 +93056,6 @@ var Func094B 0x94B (var var0000, var var0001)
 	return 0;
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func0924 0x924 (var var0000, var var0001);
 extern var Func090A 0x90A ();
@@ -93936,7 +93169,6 @@ void Func094C 0x94C ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -94015,7 +93247,6 @@ void Func094D 0x94D ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -94093,7 +93324,6 @@ void Func094E 0x94E ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func0920 0x920 ();
 extern var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003);
 extern var Func0910 0x910 (var var0000, var var0001);
@@ -94193,7 +93423,6 @@ void Func094F 0x94F (var var0000, var var0001)
 	} while (false);
 }
 
-// externs
 extern var Func0920 0x920 ();
 extern var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003);
 extern var Func0910 0x910 (var var0000, var var0001);
@@ -94325,7 +93554,6 @@ void Func0950 0x950 (var var0000, var var0001)
 	} while (false);
 }
 
-// externs
 extern var Func0909 0x909 ();
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -94420,7 +93648,6 @@ void Func0951 0x951 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
@@ -94495,7 +93722,6 @@ void Func0952 0x952 ()
 	UI_pop_answers();
 }
 
-// externs
 extern var Func090C 0x90C (var var0000);
 extern var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();

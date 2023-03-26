@@ -264,7 +264,6 @@ void Func00D7 shape#(0xD7) ()
 			var0001 = script item after 2 ticks
 			{
 				call Func00D7;
-				raw(0x0000);	// Note: should probably not he here
 			};
 		}
 		else
@@ -276,7 +275,6 @@ void Func00D7 shape#(0xD7) ()
 				{
 					step west;
 					call Func00D7;
-					raw(0x0000);	// Note: should probably not he here
 				};
 			}
 		}
@@ -417,7 +415,6 @@ void Func00E4 shape#(0xE4) ()
 			{
 				nohalt;
 				call Func00E4;
-				raw(0x0000);	// Note: should probably not he here
 			};
 		}
 		else
@@ -430,7 +427,6 @@ void Func00E4 shape#(0xE4) ()
 			{
 				nohalt;
 				call Func00E4;
-				raw(0x0000);	// Note: should probably not he here
 			};
 		}
 		abort;
@@ -467,7 +463,6 @@ void Func00E4 shape#(0xE4) ()
 			{
 				nohalt;
 				call Func00E4;
-				raw(0x0000);	// Note: should probably not he here
 			};
 			abort;
 		}
@@ -512,7 +507,6 @@ void Func00E4 shape#(0xE4) ()
 		{
 			nohalt;
 			call Func00E4;
-			raw(0x0000);	// Note: should probably not he here
 		};
 		return;
 	}
@@ -1137,7 +1131,6 @@ void Func00E6 shape#(0xE6) ()
 			{
 				nohalt;
 				call Func00E6;
-				raw(0x0000);	// Note: should probably not he here
 			};
 			abort;
 		}
@@ -1159,12 +1152,15 @@ void Func00E6 shape#(0xE6) ()
 				nohalt;
 				face east;
 				call Func0636;
-				music 28;
+				// Bug: the next line should probably be 'music 28', but it
+				// lacks the continuous flag. Because of this, it nabs the
+				// first byte of 'wait' as the continuous flag, runs the '4'
+				// as an opcode (a 'nop') and resynchs at the 'say'.
+				raw((byte)0x54); raw(0x001C);
 				wait 4;
 				say "@Wow...@";
 				wait 6;
 				call Func00E6;
-				raw(0x0000);	// Note: should probably not he here
 			};
 			abort;
 		}
@@ -1207,7 +1203,6 @@ void Func00E6 shape#(0xE6) ()
 				say "@Ah!@";
 				wait 2;
 				call Func00E6;
-				raw(0x0000);	// Note: should probably not he here
 			};
 			abort;
 		}
@@ -1291,7 +1286,6 @@ void Func00E6 shape#(0xE6) ()
 				call Func07D2;
 				wait 2;
 				call Func00E6;
-				raw(0x0000);	// Note: should probably not he here
 			};
 			abort;
 		}
@@ -1313,7 +1307,6 @@ void Func00E6 shape#(0xE6) ()
 				actor frame standing;
 				wait 2;
 				call Func00E6;
-				raw(0x0000);	// Note: should probably not he here
 			};
 			abort;
 		}
@@ -1344,7 +1337,6 @@ void Func00E6 shape#(0xE6) ()
 				actor frame cast_out;
 				wait 4;
 				call Func00E6;
-				raw(0x0000);	// Note: should probably not he here
 			};
 			abort;
 		}
@@ -1384,7 +1376,6 @@ void Func00E6 shape#(0xE6) ()
 					wait 2;
 				};
 				call Func00E6;
-				raw(0x0000);	// Note: should probably not he here
 			};
 			var000E = ["@Gosh!@", "@Oh, my!@", "@Do not hurt thyself!@", "@Wow!@", "@Hmmm...@", "@Dost thou need help?@", "@Oh!@"];
 			Func094F(0xFE9C, var000E);
@@ -1400,7 +1391,6 @@ void Func00E6 shape#(0xE6) ()
 				actor frame cast_up;
 				wait 2;
 				call Func00E6;
-				raw(0x0000);	// Note: should probably not he here
 			};
 			abort;
 		}
@@ -1459,7 +1449,6 @@ void Func00E6 shape#(0xE6) ()
 					say "@I could just die...@";
 					wait 6;
 					call Func00E6;
-					raw(0x0000);	// Note: should probably not he here
 					wait 4;
 					face east;
 					face south;
@@ -1492,7 +1481,6 @@ void Func00E6 shape#(0xE6) ()
 					actor frame standing;
 					wait 8;
 					call Func00E6;
-					raw(0x0000);	// Note: should probably not he here
 				};
 				UI_set_npc_id(0xFFEC, 0x0011);
 				abort;
@@ -1546,7 +1534,6 @@ void Func00E6 shape#(0xE6) ()
 					actor frame step_right;
 					wait 4;
 					call Func00E6;
-					raw(0x0000);	// Note: should probably not he here
 				};
 			}
 			else
@@ -1575,7 +1562,6 @@ void Func00E6 shape#(0xE6) ()
 						actor frame standing;
 						wait 8;
 						call Func00E6;
-						raw(0x0000);	// Note: should probably not he here
 					};
 					UI_set_npc_id(0xFFEC, 0x0011);
 				}
@@ -1591,7 +1577,6 @@ void Func00E6 shape#(0xE6) ()
 						face east;
 						wait 8;
 						call Func00E6;
-						raw(0x0000);	// Note: should probably not he here
 					};
 					Func097F(0xFE9C, "@Sorry...@", 0x0005);
 				}
@@ -1640,7 +1625,6 @@ void Func00E6 shape#(0xE6) ()
 					call Func07D2;
 					wait 4;
 					call Func00E6;
-					raw(0x0000);	// Note: should probably not he here
 				};
 				abort;
 			}
@@ -1657,7 +1641,6 @@ void Func00E6 shape#(0xE6) ()
 					call Func07D2;
 					wait 4;
 					call Func00E6;
-					raw(0x0000);	// Note: should probably not he here
 				};
 			}
 			else
@@ -1683,7 +1666,6 @@ void Func00E6 shape#(0xE6) ()
 					call Func07D2;
 					wait 4;
 					call Func00E6;
-					raw(0x0000);	// Note: should probably not he here
 				};
 				abort;
 			}
@@ -1719,7 +1701,6 @@ void Func00E6 shape#(0xE6) ()
 				call Func07D2;
 				wait 2;
 				call Func00E6;
-				raw(0x0000);	// Note: should probably not he here
 			};
 			abort;
 		}
@@ -1749,7 +1730,6 @@ void Func00E6 shape#(0xE6) ()
 				{
 					nohalt;
 					call Func00E6;
-					raw(0x0000);	// Note: should probably not he here
 				};
 				abort;
 			}
@@ -1794,7 +1774,6 @@ void Func00E6 shape#(0xE6) ()
 					{
 						nohalt;
 						call Func00E6;
-						raw(0x0000);	// Note: should probably not he here
 					};
 					var000E = UI_set_item_quality(Func09A0(0x0005, 0x0003), UI_get_npc_id(0xFFEC));
 					UI_set_npc_id(0xFFEC, 0x0001);
@@ -1841,7 +1820,6 @@ void Func00E6 shape#(0xE6) ()
 				{
 					nohalt;
 					call Func00E6;
-					raw(0x0000);	// Note: should probably not he here
 				};
 				var000E = UI_set_item_quality(Func09A0(0x0005, 0x0003), UI_get_npc_id(0xFFEC));
 				UI_set_npc_id(0xFFEC, 0x0001);
@@ -1914,7 +1892,6 @@ void Func00E6 shape#(0xE6) ()
 				actor frame cast_up;
 				wait 2;
 				call Func00E6;
-				raw(0x0000);	// Note: should probably not he here
 			};
 			var000E = script 0xFE9C
 			{
@@ -1942,7 +1919,6 @@ void Func00E6 shape#(0xE6) ()
 				actor frame standing;
 				wait 4;
 				call Func00E6;
-				raw(0x0000);	// Note: should probably not he here
 			};
 			var000E = script 0xFE9C
 			{
@@ -1967,7 +1943,6 @@ void Func00E6 shape#(0xE6) ()
 				actor frame cast_up;
 				wait 2;
 				call Func00E6;
-				raw(0x0000);	// Note: should probably not he here
 			};
 			abort;
 		}
@@ -1997,7 +1972,6 @@ void Func00E6 shape#(0xE6) ()
 				actor frame ready;
 				wait 2;
 				call Func00E6;
-				raw(0x0000);	// Note: should probably not he here
 			};
 			UI_set_npc_id(0xFFEC, 0x0002);
 			0xFFEC->Func07D1();
@@ -2410,7 +2384,6 @@ void Func00FA shape#(0xFA) ()
 			{
 				nohalt;
 				call Func00FA;
-				raw(0x0000);	// Note: should probably not he here
 			};
 			abort;
 		}
@@ -2438,7 +2411,6 @@ void Func00FA shape#(0xFA) ()
 				{
 					nohalt;
 					call Func00FA;
-					raw(0x0000);	// Note: should probably not he here
 				};
 			}
 			if (!gflags[0x0271])
@@ -2450,7 +2422,6 @@ void Func00FA shape#(0xFA) ()
 					{
 						nohalt;
 						call Func00FA;
-						raw(0x0000);	// Note: should probably not he here
 					};
 				}
 			}
@@ -3147,7 +3118,6 @@ void Func0109 shape#(0x109) ()
 				{
 					nohalt;
 					call Func00FA;
-					raw(0x0000);	// Note: should probably not he here
 				};
 				abort;
 			}
@@ -7931,6 +7901,7 @@ extern var Func098D 0x98D ();
 extern var Func0988 0x988 (var var0000, var var0001);
 extern void Func07D1 object#(0x7D1) ();
 extern void Func0636 object#(0x636) ();
+extern void Func01C7 shape#(0x1C7) ();
 
 void Func01C7 shape#(0x1C7) ()
 {
@@ -8223,7 +8194,7 @@ void Func01C7 shape#(0x1C7) ()
 			say("\"Guilty!\"");
 			UI_end_conversation();
 			Func097F(0xFFEE, "@And the sentence?@", 0x0000);
-			Func09AF(0xFFEA, 0xFFE6, 0x0004, 0x01C7);
+			Func09AF(0xFFEA, 0xFFE6, 0x0004, Func01C7);
 			var000A = script 0xFE9C
 			{
 				nohalt;
@@ -8555,7 +8526,10 @@ void Func01C7 shape#(0x1C7) ()
 				nohalt;
 				face west;
 				call Func0636;
-				music 32;
+				// Bug: the next line should probably be 'music 32'
+				// It works because it seems that original pulls zeroes from
+				// after the end of the script.
+				raw((byte)0x54); raw(0x0020);
 			};
 			UI_move_object(0xFFEE, [0x0925, 0x074F, 0x0001]);
 			var000A = script 0xFFEE after 12 ticks
@@ -12858,6 +12832,9 @@ void Func0298 shape#(0x298) ()
 // externs
 extern void Func07D1 object#(0x7D1) ();
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
+extern void Func0619 object#(0x619) ();
+extern void Func061A object#(0x61A) ();
+extern void Func061B object#(0x61B) ();
 
 void Func0299 shape#(0x299) ()
 {
@@ -12873,7 +12850,7 @@ void Func0299 shape#(0x299) ()
 		var0001 = UI_get_npc_id(item);
 		if ((var0001 == 0x0001) || (var0001 == 0x000B))
 		{
-			var0000 = 0x0619;
+			var0000 = Func0619;
 			if (var0001 == 0x000B)
 			{
 				var0002 = true;
@@ -12898,7 +12875,7 @@ void Func0299 shape#(0x299) ()
 		}
 		if ((var0001 == 0x0002) || (var0001 == 0x000C))
 		{
-			var0000 = 0x061A;
+			var0000 = Func061A;
 			if (var0001 == 0x000C)
 			{
 				var0002 = true;
@@ -12923,7 +12900,7 @@ void Func0299 shape#(0x299) ()
 		}
 		if ((var0001 == 0x0003) || (var0001 == 0x000D))
 		{
-			var0000 = 0x061B;
+			var0000 = Func061B;
 			if (var0001 == 0x000D)
 			{
 				var0002 = true;
@@ -18031,7 +18008,11 @@ void Func032B shape#(0x32B) ()
 		{
 			var0005 = script var0006 after 40 ticks
 			{
-				music 13;
+				// Bug: the next line should probably be 'music 13', but it
+				// lacks the continuous flag.
+				// It works because it seems that original pulls zeroes from
+				// after the end of the script.
+				raw((byte)0x54); raw(0x000D);
 			};
 		}
 		UI_clear_item_flag(0xFE9C, 0x0022);
@@ -18241,6 +18222,7 @@ extern void Func09AF 0x9AF (var var0000, var var0001, var var0002, var var0003);
 extern void Func0907 0x907 (var var0000, var var0001);
 extern var Func0988 0x988 (var var0000, var var0001);
 extern var Func098D 0x98D ();
+extern void Func032E shape#(0x32E) ();
 
 void Func032E shape#(0x32E) ()
 {
@@ -18603,7 +18585,7 @@ void Func032E shape#(0x32E) ()
 			UI_show_npc_face1(0xFFEE, 0x0000);
 			say("\"Ahem--! Also present, as my dinner companion, is the most charming Frigidazzi. She, too, is a Mage.\"");
 			UI_end_conversation();
-			Func09AF(0xFFE1, 0xFFEC, 0x0004, 0x032E);
+			Func09AF(0xFFE1, 0xFFEC, 0x0004, Func032E);
 			abort;
 		}
 		if (UI_get_npc_id(0xFFEE) == 0x0001)
@@ -18617,7 +18599,7 @@ void Func032E shape#(0x32E) ()
 			UI_show_npc_face1(0xFFEE, 0x0000);
 			say("\"Quite right, Gustacio... and here is Adept Rotoluncia, whom I believe thou hast met.\"");
 			UI_end_conversation();
-			Func09AF(0xFFEA, 0xFFE1, 0x0004, 0x032E);
+			Func09AF(0xFFEA, 0xFFE1, 0x0004, Func032E);
 			abort;
 		}
 		if (UI_get_npc_id(0xFFEE) == 0x0000)
@@ -18651,7 +18633,7 @@ void Func032E shape#(0x32E) ()
 			say("\"Please be seated. We have been waiting for thee. I am the MageLord Filbercio.\"");
 			say("\"Allow me to introduce the others. First, my fellow members on the Council of Mages. Adept Gustacio...\"");
 			UI_end_conversation();
-			Func09AF(0xFFEE, 0xFFEA, 0x0002, 0x032E);
+			Func09AF(0xFFEE, 0xFFEA, 0x0002, Func032E);
 			abort;
 		}
 		UI_init_conversation();
@@ -25142,7 +25124,6 @@ void Func0400 object#(0x400) ()
 			{
 				nohalt;
 				call Func00FA;
-				raw(0x0000);	// Note: probably shouldn't be here
 			};
 			for (var0003 in var0017 with var0018 to var0019)
 			{
@@ -30587,7 +30568,6 @@ void Func0414 object#(0x414) ()
 			{
 				nohalt;
 				call Func00E6;
-				raw(0x0000);	// Note: probably shouldn't be here
 			};
 		}
 		else
@@ -75080,6 +75060,7 @@ extern void Func088C 0x88C ();
 extern void Func088B 0x88B (var var0000, var var0001);
 extern void Func0889 0x889 (var var0000);
 extern void Func088A 0x88A (var var0000);
+extern void Func062C object#(0x62C) ();
 
 void Func062C object#(0x62C) ()
 {
@@ -75092,7 +75073,7 @@ void Func062C object#(0x62C) ()
 		if (!var0000)
 		{
 			Func088C();
-			Func088B(item, 0x062C);
+			Func088B(item, Func062C);
 		}
 	}
 	if ((event == 0x0002) || var0000)
@@ -82703,6 +82684,9 @@ void Func06B9 object#(0x6B9) ()
 	}
 	if (var0000)
 	{
+		// Bug: NPC numbers returned are always negative, hence this
+		// will result in the *wrong* *function*.
+		// It should be '0x400 - UI_get_npc_number(var0000)' instead.
 		var0004 = (UI_get_npc_number(var0000) + 0x0400);
 		var0005 = script item
 		{
@@ -82985,7 +82969,11 @@ void Func06C0 object#(0x6C0) ()
 	{
 		var0001 = script 0xFE9C after 5 ticks
 		{
-			music 26;
+			// Bug: the next line should probably be 'music 26', but it
+			// lacks the continuous flag.
+			// It works because it seems that original pulls zeroes from
+			// after the end of the script.
+			raw((byte)0x54); raw(0x001A);
 		};
 		if (!UI_is_dead(0xFFC8))
 		{
@@ -90396,7 +90384,6 @@ void Func072B object#(0x72B) ()
 				{
 					nohalt;
 					call Func00F6;
-					raw(0x0000);
 				};
 			}
 			if (var0010 == 0x0204)
@@ -94155,7 +94142,6 @@ void Func07AA object#(0x7AA) ()
 		{
 			wait 100;
 			call Func00FA;
-			raw(0x0000);
 		};
 	}
 }
@@ -95070,7 +95056,6 @@ void Func07D3 object#(0x7D3) ()
 			nohalt;
 			sfx 39;
 			music 49;
-			raw(0x0000);
 			actor frame standing;
 			face south;
 			wait 2;
@@ -95800,7 +95785,6 @@ void Func07DE object#(0x7DE) ()
 			{
 				nohalt;
 				call Func00FA;
-				raw(0x0000);
 			};
 			for (var0007 in var0001 with var0005 to var0006)
 			{
@@ -96506,7 +96490,6 @@ void Func07E2 object#(0x7E2) ()
 		{
 			nohalt;
 			call Func00E4;
-			raw(0x0000);
 		};
 	}
 }
@@ -116162,7 +116145,6 @@ void Func0855 0x855 (var var0000)
 		{
 			nohalt;
 			call Func00E4;
-			raw(0x0000);
 		};
 	}
 	if (var0000 == 0x0002)
@@ -116177,7 +116159,6 @@ void Func0855 0x855 (var var0000)
 				{
 					nohalt;
 					call Func00E4;
-					raw(0x0000);
 				};
 			}
 			else
@@ -122727,7 +122708,6 @@ void Func087F 0x87F (var var0000)
 			{
 				nohalt;
 				music 21;
-				raw(0x0000);
 			};
 		}
 		var000B = Func0988(UI_get_npc_object(0xFE9C), UI_get_party_list());
@@ -126423,6 +126403,9 @@ void Func08C8 0x8C8 ()
 	}
 }
 
+extern void Func03A8 shape#(0x3A8) ();
+extern void Func03A7 shape#(0x3A7) ();
+
 void Func08C9 0x8C9 ()
 {
 	var var0000;
@@ -126511,12 +126494,12 @@ void Func08C9 0x8C9 ()
 						var000B = false;
 						if (var0001 == 0x012F)
 						{
-							var000C = 0x03A8;
+							var000C = Func03A8;
 							var000B = true;
 						}
 						if (var0001 == 0x036C)
 						{
-							var000C = 0x03A7;
+							var000C = Func03A7;
 							var000B = true;
 						}
 						if (var000B)
@@ -128150,6 +128133,10 @@ extern void Func08DC 0x8DC (var var0000);
 extern void Func08DD 0x8DD (var var0000, var var0001, var var0002);
 extern void Func08DF 0x8DF (var var0000, var var0001);
 extern void Func08DE 0x8DE (var var0000, var var0001);
+extern void Func07F1 object#(0x7F1) ();
+extern void Func07F2 object#(0x7F2) ();
+extern void Func07F3 object#(0x7F3) ();
+extern void Func07F4 object#(0x7F4) ();
 
 var Func08E2 0x8E2 (var var0000)
 {
@@ -128199,7 +128186,7 @@ var Func08E2 0x8E2 (var var0000)
 					var000D = UI_get_item_frame(var000A);
 					if ((var000D != 0x000C) && (var000D != 0x0014))
 					{
-						var0006 = 0x07F2;
+						var0006 = Func07F2;
 						var0005 = 0x0029;
 						if (var0001 == 0x00CA)
 						{
@@ -128208,7 +128195,7 @@ var Func08E2 0x8E2 (var var0000)
 					}
 					if (var000D == 0x000C)
 					{
-						var0006 = 0x07F3;
+						var0006 = Func07F3;
 						var0005 = 0x002A;
 						if (var0001 == 0x00CA)
 						{
@@ -128241,14 +128228,14 @@ var Func08E2 0x8E2 (var var0000)
 					}
 					if (var000D == 0x0014)
 					{
-						var0006 = 0x07F4;
+						var0006 = Func07F4;
 						var0005 = 0x002B;
 						Func08DD(var000A, 0x0369, 0x0000);
 					}
 				}
 				if (var000C == 0x0274)
 				{
-					var0006 = 0x07F2;
+					var0006 = Func07F2;
 					var0005 = 0x0029;
 					if (var0001 == 0x00CA)
 					{
@@ -128257,7 +128244,7 @@ var Func08E2 0x8E2 (var var0000)
 				}
 				if (var000C == 0x02CD)
 				{
-					var0006 = 0x07F3;
+					var0006 = Func07F3;
 					var0005 = 0x002A;
 					if (var0001 == 0x00CA)
 					{
@@ -128266,7 +128253,7 @@ var Func08E2 0x8E2 (var var0000)
 				}
 				if (var000C == 0x021E)
 				{
-					var0006 = 0x07F3;
+					var0006 = Func07F3;
 					var0005 = 0x002A;
 					if (var0001 == 0x00CA)
 					{
@@ -128275,7 +128262,7 @@ var Func08E2 0x8E2 (var var0000)
 				}
 				if (var000C == 0x023C)
 				{
-					var0006 = 0x07F2;
+					var0006 = Func07F2;
 					var0005 = 0x0029;
 					if (var0001 == 0x00CA)
 					{
@@ -128284,7 +128271,7 @@ var Func08E2 0x8E2 (var var0000)
 				}
 				if (var000C == 0x0272)
 				{
-					var0006 = 0x07F3;
+					var0006 = Func07F3;
 					var0005 = 0x002A;
 					if (var0001 == 0x00CA)
 					{
@@ -128293,13 +128280,13 @@ var Func08E2 0x8E2 (var var0000)
 				}
 				if (var000C == 0x0369)
 				{
-					var0006 = 0x07F4;
+					var0006 = Func07F4;
 					var0005 = 0x002B;
 					Func08DD(var000A, 0x0179, 0x0014);
 				}
 				if ((var000C == 0x0108) || ((var000C == 0x01EF) || (var000C == 0x00CB)))
 				{
-					var0006 = 0x07F2;
+					var0006 = Func07F2;
 					var0005 = 0x0029;
 					if (var0001 == 0x00CA)
 					{
@@ -128313,7 +128300,7 @@ var Func08E2 0x8E2 (var var0000)
 						var000D = UI_get_item_frame(var000A);
 						if (var000D == 0x0001)
 						{
-							var0006 = 0x07F4;
+							var0006 = Func07F4;
 							var0005 = 0x002B;
 							var0010 = UI_get_object_position(var000A);
 							UI_sprite_effect(0x0009, (var0010[0x0001] - 0x0006), (var0010[0x0002] - 0x0006), 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -128338,7 +128325,7 @@ var Func08E2 0x8E2 (var var0000)
 		}
 		if (var0006 == 0x0000)
 		{
-			var0006 = 0x07F1;
+			var0006 = Func07F1;
 			var0005 = 0x0028;
 			var0010 = var0004;
 			var0010[0x0003] = (var0010[0x0003] + 0x0001);
@@ -130274,7 +130261,6 @@ void Func0917 0x917 (var var0000, var var0001)
 		var0005 = script var0004
 		{
 			music 12;
-			raw(0x0000);
 		};
 	}
 	if (var0001 == 0x0000)
@@ -130742,6 +130728,10 @@ var Func0923 0x923 ()
 // externs
 extern void Func091E 0x91E (var var0000, var var0001);
 extern void Func091F 0x91F (var var0000, var var0001);
+extern void Func012F shape#(0x12F) ();
+extern void Func036C shape#(0x36C) ();
+extern void Func03A7 shape#(0x3A7) ();
+extern void Func03A8 shape#(0x3A8) ();
 
 void Func0924 0x924 (var var0000, var var0001)
 {
@@ -130777,22 +130767,22 @@ void Func0924 0x924 (var var0000, var var0001)
 				var0008 = UI_get_item_shape(var0006);
 				if (var0008 == 0x012F)
 				{
-					var0008 = 0x03A8;
+					var0008 = Func03A8;
 					Func091E(var0006, var0008);
 				}
 				else if (var0008 == 0x036C)
 				{
-					var0008 = 0x03A7;
+					var0008 = Func03A7;
 					Func091E(var0006, var0008);
 				}
 				else if (var0008 == 0x03A8)
 				{
-					var0008 = 0x012F;
+					var0008 = Func012F;
 					Func091F(var0006, var0008);
 				}
 				else if (var0008 == 0x03A7)
 				{
-					var0008 = 0x036C;
+					var0008 = Func036C;
 					Func091F(var0006, var0008);
 				}
 			}
@@ -138515,7 +138505,11 @@ void Func09C0 0x9C0 (var var0000)
 			var0004 = Func09A0(0x0000, 0x0001);
 			var0001 = script var0004 after 25 ticks
 			{
-				music 12;
+				// Bug: the next line should probably be 'music 12', but it
+				// lacks the continuous flag.
+				// It works because it seems that original pulls zeroes from
+				// after the end of the script.
+				raw((byte)0x54); raw(0x000C);
 			};
 			Func097F(0xFE9C, "@Aarrrgh!@", 0x0028);
 			Func097F(0xFE9C, "@A TRUE test of patience.@", 0x0037);
