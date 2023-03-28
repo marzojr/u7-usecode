@@ -14381,7 +14381,7 @@ void Func040A object#(0x40A) ()
 						var0013 = true;
 					}
 				}
-			var001F = 0x0000;
+				var001F = 0x0000;
 				fallthrough;
 
 			case "forest":
@@ -88225,11 +88225,15 @@ void Func08D1 0x8D1 ()
 		default:
 			say("\"No, no, no! That is all wrong! Thou art the 'Avatar'! Thou must feel like the Avatar! Thou must sound like the Avatar! Thou must -be- the Avatar! Try it again.\"");
 			fallthrough;
+
 		always:
 			UI_clear_answers();
 			UI_add_answer(["-I- am the Avatar!", "I -am- the Avatar!", "I am -the- Avatar!", "I am the -Avatar-!"]);
+
 		default:
 			say("\"Better... better... but I think perhaps thou dost need a prop.\"");
+			fallthrough;
+
 		always:
 			UI_clear_answers();
 			var0001 = Func08F7(0xFFE4);
