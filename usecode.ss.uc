@@ -48903,7 +48903,7 @@ void Func043F object#(0x43F) ()
 						break;
 					}
 				}
-				nobreak;
+				nobreak
 				{
 					var000C = 0xFE9C;
 				}
@@ -50554,7 +50554,7 @@ void Func0443 object#(0x443) ()
 							break;
 						}
 					} while (false)
-					nobreak;
+					nobreak
 					{
 						if (UI_remove_party_items(0x0005, 0x01D3, 0xFE99, 0x0003, false))
 						{
@@ -53333,7 +53333,7 @@ void Func0447 object#(0x447) ()
 						break;
 					}
 				}
-				nobreak;
+				nobreak
 				{
 					var0007 = 0xFE9C;
 				}
@@ -54388,7 +54388,7 @@ void Func044A object#(0x44A) ()
 						break;
 					}
 				}
-				nobreak;
+				nobreak
 				{
 					var0002 = 0xFE9C;
 				}
@@ -56273,7 +56273,7 @@ void Func044F object#(0x44F) ()
 						break;
 					}
 				}
-				nobreak;
+				nobreak
 				{
 					var0008 = 0xFE9C;
 				}
@@ -60540,7 +60540,7 @@ void Func0496 object#(0x496) ()
 						break;
 					}
 				}
-				nobreak;
+				nobreak
 				{
 					var000B = 0xFE9C;
 				}
@@ -72277,7 +72277,7 @@ labelFunc0622_0024:
 					break;
 				}
 			}
-			nobreak;
+			nobreak
 			{
 				goto labelFunc0622_0024;
 			}
@@ -76581,7 +76581,7 @@ void Func065F object#(0x65F) ()
 				}
 			}
 		} while (false)
-		nobreak;
+		nobreak
 		{
 			var0006 = script item
 			{
@@ -85404,7 +85404,7 @@ void Func06FD object#(0x6FD) ()
 				break;
 			}
 		}
-		nobreak;
+		nobreak
 		{
 			var0004 = false;
 		}
@@ -85471,7 +85471,7 @@ void Func06FE object#(0x6FE) ()
 				break;
 			}
 		}
-		nobreak;
+		nobreak
 		{
 			abort;
 		}
@@ -90066,7 +90066,7 @@ void Func0759 object#(0x759) ()
 				goto labelFunc0759_0523;
 			}
 		}
-		nobreak;
+		nobreak
 		{
 			if (!var0015)
 			{
@@ -96459,7 +96459,7 @@ void Func07F9 object#(0x7F9) ()
 				break;
 			}
 		}
-		nobreak;
+		nobreak
 		{
 			Func092F(item, 0x0008);
 		}
@@ -96532,7 +96532,7 @@ void Func07F9 object#(0x7F9) ()
 				break;
 			}
 		}
-		nobreak;
+		nobreak
 		{
 			Func092F(item, 0x000B);
 		}
@@ -98355,7 +98355,7 @@ void Func07FD object#(0x7FD) ()
 					break;
 				}
 			}
-			nobreak;
+			nobreak
 			{
 				Func092F(item, 0x0002);
 			}
@@ -98397,7 +98397,7 @@ void Func07FD object#(0x7FD) ()
 					break;
 				}
 			}
-			nobreak;
+			nobreak
 			{
 				Func092F(item, 0x0016);
 			}
@@ -107279,7 +107279,7 @@ void Func082C 0x82C ()
 				break;
 			}
 		} while (false)
-		nobreak;
+		nobreak
 		{
 			say("\"Let me see how thou dost handle the reagents...");
 			say("\"No, no! This is not chicken feed that thou dost handle!\"");
@@ -110647,7 +110647,7 @@ void Func0843 0x843 ()
 						}
 					}
 				} while (false)
-				nobreak;
+				nobreak
 				{
 					say("\"",
 					    var0010,
@@ -110696,7 +110696,7 @@ void Func0843 0x843 ()
 						}
 					}
 				} while (false)
-				nobreak;
+				nobreak
 				{
 					say("\"",
 					    var0010,
@@ -110745,7 +110745,7 @@ void Func0843 0x843 ()
 						}
 					}
 				} while (false)
-				nobreak;
+				nobreak
 				{
 					say("\"",
 					    var0010,
@@ -110795,7 +110795,7 @@ void Func0843 0x843 ()
 						}
 					}
 				} while (false)
-				nobreak;
+				nobreak
 				{
 					say("\"",
 					    var0010,
@@ -110845,7 +110845,7 @@ void Func0843 0x843 ()
 						}
 					}
 				} while (false)
-				nobreak;
+				nobreak
 				{
 					say("\"",
 					    var0010,
@@ -117463,7 +117463,7 @@ void Func0868 0x868 ()
 						}
 					}
 				} while (false)
-				nobreak;
+				nobreak
 				{
 					say("\"",
 					    var0012,
@@ -117512,7 +117512,7 @@ void Func0868 0x868 ()
 						}
 					}
 				} while (false)
-				nobreak;
+				nobreak
 				{
 					say("\"",
 					    var0012,
@@ -117561,7 +117561,7 @@ void Func0868 0x868 ()
 						}
 					}
 				} while (false)
-				nobreak;
+				nobreak
 				{
 					say("\"",
 					    var0012,
@@ -117610,7 +117610,7 @@ void Func0868 0x868 ()
 						}
 					}
 				} while (false)
-				nobreak;
+				nobreak
 				{
 					say("\"",
 					    var0012,
@@ -117659,7 +117659,7 @@ void Func0868 0x868 ()
 						}
 					}
 				} while (false)
-				nobreak;
+				nobreak
 				{
 					say("\"",
 					    var0012,
@@ -117708,7 +117708,7 @@ void Func0868 0x868 ()
 						}
 					}
 				} while (false)
-				nobreak;
+				nobreak
 				{
 					say("\"",
 					    var0012,
@@ -117757,7 +117757,7 @@ void Func0868 0x868 ()
 						}
 					}
 				} while (false)
-				nobreak;
+				nobreak
 				{
 					say("\"",
 					    var0012,
@@ -119596,7 +119596,7 @@ void Func0873 0x873 ()
 					break;
 				}
 			} while (false)
-			nobreak;
+			nobreak
 			{
 				say("\"Hold thy weapon at ready... Now swing... Again.");
 				say("\"I think I can see thy problem, ",
@@ -119706,7 +119706,7 @@ void Func0875 0x875 ()
 			break;
 		}
 	} while (false)
-	nobreak;
+	nobreak
 	{
 		if (var0003 == "No")
 		{
@@ -120721,7 +120721,7 @@ void Func087D 0x87D ()
 			break;
 		}
 	}
-	nobreak;
+	nobreak
 	{
 		var0004 = UI_create_new_object(0x0320);
 		if (var0004)
@@ -124624,7 +124624,7 @@ void Func08C9 0x8C9 ()
 							break;
 						}
 					} while (false)
-					nobreak;
+					nobreak
 					{
 						var000B = false;
 						if (var0001 == 0x012F)
@@ -124661,7 +124661,7 @@ void Func08C9 0x8C9 ()
 						break;
 					}
 				}
-				nobreak;
+				nobreak
 				{
 					return;
 				}
@@ -129795,7 +129795,7 @@ void Func0931 0x931 (var var0000)
 				break;
 			}
 		}
-		nobreak;
+		nobreak
 		{
 			say("\"Well, I seem to have misplaced thy belongings. Mine apologies. As a favor to thee, I shall let thee keep what thou dost have right now.\"");
 			break;
@@ -129867,7 +129867,7 @@ void Func0931 0x931 (var var0000)
 			break;
 		}
 	}
-	nobreak;
+	nobreak
 	{
 		Func092F(var0000, 0x000F);
 	}
@@ -130053,7 +130053,7 @@ void Func0934 0x934 (var var0000)
 			break;
 		}
 	}
-	nobreak;
+	nobreak
 	{
 		Func092F(var0000, 0x0010);
 	}
@@ -130203,7 +130203,7 @@ void Func0935 0x935 (var var0000)
 			break;
 		}
 	}
-	nobreak;
+	nobreak
 	{
 		Func092F(var0000, 0x0014);
 	}
@@ -130218,7 +130218,7 @@ void Func0935 0x935 (var var0000)
 			break;
 		}
 	}
-	nobreak;
+	nobreak
 	{
 		Func092F(var0000, 0x0002);
 	}
@@ -135115,7 +135115,7 @@ var Func0999 0x999 (var var0000, var var0001, var var0002, var var0003, var var0
 			}
 		}
 	} while (false)
-	nobreak;
+	nobreak
 	{
 		if (var0002 == 0x0001)
 		{
