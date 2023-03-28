@@ -14225,8 +14225,7 @@ void Func040A object#(0x40A) ()
 		{
 			var0002 = UI_get_party_list();
 			var001D = "";
-			case "name":
-				UI_remove_answer("name");
+			case "name" (remove):
 				if (gflags[0x001D] == true)
 				{
 					say("\"I am Tseramed the woodsman. Thou art a ",
@@ -14246,8 +14245,7 @@ void Func040A object#(0x40A) ()
 				}
 				fallthrough;
 
-			case "Avatar":
-				UI_remove_answer("Avatar");
+			case "Avatar" (remove):
 				gflags[0x0161] = true;
 				say("\"The Avatar! This is a strange chance. Tell me Avatar, by what name art thou called?\"");
 				fallthrough;
@@ -14274,8 +14272,7 @@ void Func040A object#(0x40A) ()
 				}
 				fallthrough;
 
-			case "Fellowship":
-				UI_remove_answer("Fellowship");
+			case "Fellowship" (remove):
 				if (gflags[0x001D])
 				{
 					if ((var0004 in var0002) || gflags[0x0162])
@@ -14335,8 +14332,7 @@ void Func040A object#(0x40A) ()
 				}
 				fallthrough;
 
-			case "Lady M.":
-				UI_remove_answer("Lady M.");
+			case "Lady M." (remove):
 				say("\"Youth is hers forever.\"");
 				fallthrough;
 
@@ -14433,30 +14429,26 @@ void Func040A object#(0x40A) ()
 				}
 				fallthrough;
 
-			case "swamp":
-				UI_remove_answer("swamp");
+			case "swamp" (remove):
 				say("\"North of the mountain spur is a dense swamp. Killing slime [lurk within, guarding a clear spring. All about the water is foul and noisome.");
 				say("Into thy boots the foul concoction will seep, bringing on nausea and dizziness. The wise traveller wears swamp boots in such places.");
 				say("East, North, and West that mire is drained. Through Yew and past the Abbey the westward river flows. The others both bend north into the sea.\"");
 				UI_add_answer(["slime", "Yew", "Abbey", "sea"]);
 				fallthrough;
 
-			case "Abbey":
-				UI_remove_answer("Abbey");
+			case "Abbey" (remove):
 				say("\"Empath Abbey is its proper name ",
 				    var0001,
 				    ". They practice ancient arts there, the eldest being the fermentation and distillation of spirits. Demand for their products is high in Yew.\"");
 				UI_add_answer("Yew");
 				fallthrough;
 
-			case "Yew":
-				UI_remove_answer("Yew");
+			case "Yew" (remove):
 				say("\"Citizens of a reclusive nature feel at peace there. Within the forest lie its buildings, many so grown-over as to seem a part of the wood.\"");
 				say("\"East of my dwelling the wood is thick, but a woodcrafty traveller may find the houses there.\"");
 				fallthrough;
 
-			case "sea":
-				UI_remove_answer("sea");
+			case "sea" (remove):
 				say("\"The sea!  Its waves sooth a rough mood, but its fury is unrivaled. Ask those who live upon it! A gift it is, to live by it and reap its natural harvest. I cast in a line when I may.");
 				say("Dost thou wonder what mysteries the sea must hold?\"");
 				if (Func090A())
@@ -14470,8 +14462,7 @@ void Func040A object#(0x40A) ()
 				}
 				fallthrough;
 
-			case "pirates":
-				UI_remove_answer("pirates");
+			case "pirates" (remove):
 				say("\"Perhaps they land to cache their booty in the forest. I have never followed them.\"");
 				fallthrough;
 
@@ -14481,21 +14472,18 @@ void Func040A object#(0x40A) ()
 				UI_add_answer(["caves", "death"]);
 				fallthrough;
 
-			case "death":
-				UI_remove_answer("death");
+			case "death" (remove):
 				say("\"Death for the greedy. Death for any who steal from the dwellers in the caves.\"");
 				UI_add_answer("caves");
 				fallthrough;
 
-			case "creatures":
-				UI_remove_answer("creatures");
+			case "creatures" (remove):
 				say("\"Aye. Such as would devour the unwary and pick bones dry. In the forest are harpies, and slime on the margins of the swamp, and bees in the caves.");
 				say("\"Good game live also in the forest: Foxes and the like.\"");
 				UI_add_answer(["slime", "foxes", "harpies", "bees"]);
 				fallthrough;
 
-			case "harpies":
-				UI_remove_answer("harpies");
+			case "harpies" (remove):
 				if (var0019)
 				{
 					say("\"Harpies! To battle! Let us slay them at once!\"");
@@ -14546,8 +14534,7 @@ void Func040A object#(0x40A) ()
 				}
 				fallthrough;
 
-			case "arrows":
-				UI_remove_answer("arrows");
+			case "arrows" (remove):
 				say("\"I fashion my arrows from the stingers of giant bees. With them one may put a foe to sleep.\"");
 				var0022 = "";
 				var0023 = 0x0000;
@@ -14608,8 +14595,7 @@ void Func040A object#(0x40A) ()
 				}
 				fallthrough;
 
-			case "join":
-				UI_remove_answer("join");
+			case "join" (remove):
 				if (var0007 < 0x0008)
 				{
 					UI_add_to_party(0xFFF6);
@@ -38364,8 +38350,7 @@ void Func048F object#(0x48F) ()
 				UI_remove_answer("ingredients");
 				fallthrough;
 
-			case "cage made":
-				UI_remove_answer("cage made");
+			case "cage made" (remove):
 				say("\"The Soul Cage must be empowered with the might of the dead. The way to accomplish this is to go to the back of the Dark Tower, to the Well of Souls. Thou must lower the cage into the well, where the souls trapped there will lose a little of themselves to imbue it with the required power.~~\"I know this sounds harsh, but it is a necessary evil if thou wouldst see them freed.\" She looks at you sharply.~~\"The next step is to wait until midnight, then clap the cage upon the recumbent form of the Liche. This is the period of time in which he drains the spirits of the townsfolk in his Black Service.\"~~After a brief moment, she continues. \"Finally, thou must pour a magical formula upon the Liche within the cage. This formula is the same substance that destroyed the town.~~\"Do be careful when procuring it from the alchemist, Caine.\"");
 				UI_add_answer(["Dark Tower", "Well of Souls", "Black Service"]);
 				if (!gflags[0x01C0])
@@ -45951,8 +45936,7 @@ void Func04B4 object#(0x4B4) ()
 				UI_remove_answer("safe");
 				fallthrough;
 
-			case "Inamo":
-				UI_remove_answer("Inamo");
+			case "Inamo" (remove):
 				say("\"To be a fine young gargoyle. To have been raised by Teregus, keeper of the altars. To have left town because of the tension between the altar worshippers and The Fellowship. To have been angry and distrustful of The Fellowship. To have news of him?\"");
 				var0001 = Func090A();
 				if (var0001)
@@ -46452,8 +46436,7 @@ void Func04B7 object#(0x4B7) ()
 				gflags[0x023A] = true;
 				abort;
 
-			case "altars":
-				UI_remove_answer("altars");
+			case "altars" (remove):
 				say("\"To be caretaker and group leader for the altars of the three principles. To wish to make a donation?\"");
 				var0002 = Func090A();
 				if (var0002)
@@ -47166,8 +47149,7 @@ void Func04BC object#(0x4BC) ()
 				gflags[0x0240] = true;
 				abort;
 
-			case "buy":
-				UI_remove_answer("buy");
+			case "buy" (remove):
 				if (var0001 == 0x0007)
 				{
 					say("\"To want reagents or jewelry and potions?\"");
@@ -50402,8 +50384,7 @@ void Func04CE object#(0x4CE) ()
 				UI_remove_answer("advice");
 				fallthrough;
 
-			case "buy":
-				UI_remove_answer("buy");
+			case "buy" (remove):
 				if (var0001 == 0x0007)
 				{
 					say("\"Thou wishest to make a purchase. Excellent. But remember, a gold piece saved is a gold piece not spent.\"");
@@ -82949,8 +82930,7 @@ void Func0890 0x890 ()
 			}
 			fallthrough;
 
-		case "name":
-			UI_remove_answer("name");
+		case "name" (remove):
 			say("\"I am the golem called Adjhar, at thy service.\"");
 			fallthrough;
 
@@ -82959,13 +82939,11 @@ void Func0890 0x890 ()
 			UI_add_answer(["Bollux", "Shrines", "wall"]);
 			fallthrough;
 
-		case "Shrines":
-			UI_remove_answer("Shrines");
+		case "Shrines" (remove):
 			say("\"Surely thou hast heard of the Shrines of the Three Principles: Truth, Love, and Courage! We golems were fabricated to protect the Shrines, for only an Avatar -- -the- Avatar -- may utilize the awesome power they can convey.\"");
 			fallthrough;
 
-		case "wall":
-			UI_remove_answer("wall");
+		case "wall" (remove):
 			say("\"I do not remember the incident clearly. However, I will relate what I can recall. Bollux and I were standing guard in the Shrine Room of the Principles when we detected an intrusion into the the castle. I remember nothing more than being aware of great heat, and then part of the wall crumbling atop me, crushing my legs. I suppose Bollux was more forunate. Was it he who carried me here?\"");
 			if (Func090A())
 			{
@@ -82988,8 +82966,7 @@ void Func0890 0x890 ()
 			UI_remove_answer("older");
 			fallthrough;
 
-		case "what next":
-			UI_remove_answer("what next");
+		case "what next" (remove):
 			say("\"Dost thou have the book entitled, `The Stone of Castambre?'\"");
 			if (Func090A())
 			{
@@ -83012,8 +82989,7 @@ void Func0890 0x890 ()
 			}
 			fallthrough;
 
-		case "fool":
-			UI_remove_answer("fool");
+		case "fool" (remove):
 			say("\"Poor Bollux did not know of the Stone of Castambre. His sacrifice was, perhaps, unnecessary. Hast thou, perchance, come across MacCuth's \"The Stone of Castambre?\"");
 			if (Func090A())
 			{
@@ -83213,8 +83189,7 @@ void Func0894 0x894 (var var0000)
 		converse (0)
 		{
 			UI_show_npc_face(0xFEDF, 0x0000);
-			case "name":
-				UI_remove_answer("name");
+			case "name" (remove):
 				if (gflags[0x031D])
 				{
 					say("He tilts his head and stares at you quizzicaly.~ \"I apologize. Did I not already tell thee my master called me Bollux?\"");
@@ -83235,13 +83210,11 @@ void Func0894 0x894 (var var0000)
 				UI_add_answer("guardian");
 				fallthrough;
 
-			case "guardian":
-				UI_remove_answer("guardian");
+			case "guardian" (remove):
 				say("\"We were... created to protect the Shrines of the Principles. Only the... Avatar should use their power. Adjhar and I were... keeping watch... when the wall fell on Adjhar. And the loud noise came...  I carried him here so that I could restore him, but I do not... know how.\"");
 				fallthrough;
 
-			case "Creature?":
-				UI_remove_answer("Creature?");
+			case "Creature?" (remove):
 				say("\"We are called stone golems... because we are made out of stone and rock.\"");
 				if (!var0002)
 				{
@@ -83262,8 +83235,7 @@ void Func0894 0x894 (var var0000)
 				}
 				fallthrough;
 
-			case "stone":
-				UI_remove_answer("stone");
+			case "stone" (remove):
 				say("\"We were... fashioned... out of the rock from the quarry on this small island.\"");
 				fallthrough;
 
@@ -83278,14 +83250,12 @@ void Func0894 0x894 (var var0000)
 				}
 				fallthrough;
 
-			case "magic":
-				UI_remove_answer("magic");
+			case "magic" (remove):
 				say("\"I do not know what... it is, but there are many books in his house. Perhaps... there is something there about... magic.\"");
 				UI_add_answer("books");
 				fallthrough;
 
-			case "books":
-				UI_remove_answer("books");
+			case "books" (remove):
 				if (!gflags[0x0323])
 				{
 					say("\"I have a book here that Adjhar said told about... our... creation. This might help bring Adjhar back.\"");
@@ -83306,13 +83276,11 @@ void Func0894 0x894 (var var0000)
 				}
 				fallthrough;
 
-			case "lonely":
-				UI_remove_answer("lonely");
+			case "lonely" (remove):
 				say("\"Astelleron said it was how... a person feels when no one is around. He told us how... happy he felt after we were... born.~ He called me... a son.\"");
 				fallthrough;
 
-			case "help":
-				UI_remove_answer("help");
+			case "help" (remove):
 				say("\"My companion... Adjhar... He is dying. Thou must help repair him. Please, I beg... thee.\"");
 				if (!gflags[0x0323])
 				{
@@ -83332,13 +83300,11 @@ void Func0894 0x894 (var var0000)
 				UI_add_answer("Adjhar");
 				fallthrough;
 
-			case "Adjhar":
-				UI_remove_answer("Adjhar");
+			case "Adjhar" (remove):
 				say("\"He is my brother... and my friend. We protected the... Shrines together. We cannot let him... stay like that. Help me... assist him.\"");
 				fallthrough;
 
-			case "blood":
-				UI_remove_answer("blood");
+			case "blood" (remove):
 				say("\"I did not... understand the book, but I remember... blood...\"");
 				fallthrough;
 
@@ -83373,8 +83339,7 @@ void Func0895 0x895 ()
 	UI_add_answer(["name", "job", "bye"]);
 	converse (0)
 	{
-		case "name":
-			UI_remove_answer("name");
+		case "name" (remove):
 			if (gflags[0x031D])
 			{
 				UI_remove_answer("name");
@@ -83404,8 +83369,7 @@ void Func0896 0x896 ()
 	UI_add_answer(["name", "job", "bye"]);
 	converse (0)
 	{
-		case "name":
-			UI_remove_answer("name");
+		case "name" (remove):
 			if (gflags[0x031D])
 			{
 				say("He tilts his head and stares at you quizzicaly.~ \"I apologize. Did I not already tell thee my master called me Bollux?\"");
@@ -86841,8 +86805,7 @@ void Func08C0 0x8C0 ()
 			var0001 = true;
 			fallthrough;
 
-		case "Rowena":
-			UI_remove_answer("Rowena");
+		case "Rowena" (remove):
 			if (gflags[0x01A6])
 			{
 				say("\"It is wonderful that those two have been brought back together. I only hope that Quenton will share that same fate.\" Her voice is full of hope.");
@@ -88637,8 +88600,7 @@ void Func08D6 0x8D6 ()
 		UI_add_answer("bye");
 		converse (0)
 		{
-			case "sacrifice":
-				UI_remove_answer("sacrifice");
+			case "sacrifice" (remove):
 				if (!gflags[0x019D])
 				{
 					UI_show_npc_face(0xFF72, 0x0001);
@@ -90287,8 +90249,7 @@ void Func08F2 0x8F2 (var var0000, var var0001)
 			var0003 = false;
 			break;
 
-		case "Avatar":
-			UI_remove_answer("Avatar");
+		case "Avatar" (remove):
 			say("\"I doubt but thou deceivest me further. If true, thou dost shame the title. Admit now thy true name!\"");
 			var0002 = true;
 			gflags[0x0161] = true;
@@ -90373,8 +90334,7 @@ void Func08F3 0x8F3 (var var0000)
 			var0001 = false;
 			fallthrough;
 
-		case "hand to hand":
-			UI_remove_answer("hand to hand");
+		case "hand to hand" (remove):
 			var0004 = "and thou seemest man enough for such close work";
 			if (UI_is_pc_female() == 0x0001)
 			{
@@ -90388,8 +90348,7 @@ void Func08F3 0x8F3 (var var0000)
 			var0003 = true;
 			fallthrough;
 
-		case "ranged weaponry":
-			UI_remove_answer("ranged weaponry");
+		case "ranged weaponry" (remove):
 			say("\"Such is also my choice. Few are my peers in the art of archery. A keen eye and steady hand are required, and that is rare in the men of this day. Even rarer in women. Sad, that the women of Britannia should be innocent of such art!\"");
 			var0002 = true;
 			var0003 = true;
