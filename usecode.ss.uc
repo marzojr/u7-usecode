@@ -63913,7 +63913,7 @@ void Func065E object#(0x65E) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001); {
+	if (event == 0x0001) {
 		var0000 = UI_click_on_item();
 		var0001 = UI_get_item_shape(var0000);
 		var0002 = Func0979(item);
