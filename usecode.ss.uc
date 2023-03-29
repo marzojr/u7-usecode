@@ -1,4 +1,5 @@
 #game "serpentisle"
+#strictbraces "true"
 
 extern void Func094A 0x94A (var var0000);
 extern var Func0910 0x910 (var var0000);

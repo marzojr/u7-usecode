@@ -1,4 +1,5 @@
 #game "blackgate"
+#strictbraces "true"
 
 extern void Func08FF 0x8FF (var var0000);
 extern var Func0829 0x829 (var var0000);
