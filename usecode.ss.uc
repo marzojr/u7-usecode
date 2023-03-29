@@ -560,18 +560,18 @@ void Func00E4 shape#(0xE4) () {
 		UI_set_schedule_type(item, 0x0007);
 		UI_show_npc_face0(0xFEF1, 0x0000);
 		say("\"This is the Bull Tower, knave. State thy business or be gone. We have no time for idle chit-chat with Goblins about.\"");
-		UI_add_answer(["Goblins", "pikeman", "Bull Tower"]);
+		add(["Goblins", "pikeman", "Bull Tower"]);
 		if (gflags[0x01CD] && (!gflags[0x01D1])) {
-			UI_add_answer("Captain Hawk");
+			add("Captain Hawk");
 		}
 		if (gflags[0x01CD] && (!gflags[0x01CE])) {
 			UI_set_npc_id(0xFFD8, 0x0001);
 		}
 		var000F = (UI_get_npc_id(0xFFD8) * 0x0064);
 		if (gflags[0x01CE] && (!gflags[0x01D1])) {
-			UI_add_answer("pay fine");
+			add("pay fine");
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "Goblins" (remove):
 				say("\"Yes, that entire vile race is the scourge of all men of the Serpent Isle.\"");
@@ -594,7 +594,7 @@ void Func00E4 shape#(0xE4) () {
 					Func09AC(0xFFD4, 0x0507, 0x08BF, 0x0003);
 				}
 				gflags[0x01CE] = true;
-				UI_add_answer("pay fine");
+				add("pay fine");
 				fallthrough;
 
 			case "pay fine":
@@ -603,9 +603,9 @@ void Func00E4 shape#(0xE4) () {
 					say("\"I do not believe that a rogue like thyself hast the riches to buy Hawk's freedom! What canst thou give us?\"");
 					UI_push_answers();
 					if (Func097D(0xFE9B, 0x0001, 0x0286, 0xFE99, 0x0002)) {
-						UI_add_answer("gold bars");
+						add("gold bars");
 					}
-					UI_add_answer(["jewels", "Monetari", "guilders", "Fawn money", "magic items", "nothing"]);
+					add(["jewels", "Monetari", "guilders", "Fawn money", "magic items", "nothing"]);
 				} else {
 					Func097F(item, "@Thou dost waste my time!@", 0x0000);
 					abort;
@@ -1820,7 +1820,7 @@ void Func00F9 shape#(0xF9) () {
 		UI_show_npc_face0(0xFEFB, 0x0000);
 		say("\"What dost thou wish, Master?\"");
 		if (gflags[0x0171]) {
-			UI_add_answer(["revelation", "change revelation"]);
+			add(["revelation", "change revelation"]);
 		}
 		if (gflags[0x0172] && ((!gflags[0x0004]) && (!gflags[0x0171]))) {
 			if ((!gflags[0x016E]) && (!gflags[0x016F])) {
@@ -1844,7 +1844,7 @@ void Func00F9 shape#(0xF9) () {
 			say("\"Seek out the one whose Beauty lies deep within. He will set thee upon the path to the lost soul of Fawn.\"");
 			abort;
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "revelation":
 				if (!var0003) {
@@ -1881,7 +1881,7 @@ void Func00F9 shape#(0xF9) () {
 			case "change revelation":
 				say("\"I shall proclaim whatever thou dost instruct me to proclaim. What dost thou wish me to say regarding the accused traitor, Master?\"");
 				UI_push_answers();
-				UI_add_answer(["He is innocent.", "The trial is corrupted.", "Make no change."]);
+				add(["He is innocent.", "The trial is corrupted.", "Make no change."]);
 				fallthrough;
 
 			case "Make no change.":
@@ -1906,7 +1906,7 @@ void Func00F9 shape#(0xF9) () {
 				gflags[0x016F] = true;
 				gflags[0x016E] = false;
 				UI_pop_answers();
-				UI_add_answer("many years");
+				add("many years");
 				fallthrough;
 
 			case "many years" (remove):
@@ -2186,18 +2186,18 @@ void Func0103 shape#(0x103) () {
 			UI_show_npc_face0(0xFEEE, 0x0000);
 			say("\"How may I help thee? As a Ranger, I must help thee in any way that I can.\"");
 			if (gflags[0x0285] && (!gflags[0x0297])) {
-				UI_add_answer("strange wine");
+				add("strange wine");
 			}
 			if (gflags[0x0045] && (UI_get_schedule_type(0xFFB4) != 0x000F)) {
-				UI_add_answer("brown bottle");
+				add("brown bottle");
 			}
 			if (gflags[0x0118] && (!gflags[0x029C])) {
-				UI_add_answer("mystery shield");
+				add("mystery shield");
 			}
 			if (gflags[0x00EA] && (!UI_get_item_flag(0xFFE1, 0x0004))) {
-				UI_add_answer("kidnap");
+				add("kidnap");
 			}
-			UI_add_answer(["Ranger", "bye"]);
+			add(["Ranger", "bye"]);
 			converse (0) {
 				case "kidnap" (remove):
 					say("\"Thou shouldst report such a crime as this to Julia. She can aid thee.\"");
@@ -2212,7 +2212,7 @@ void Func0103 shape#(0x103) () {
 					    var0002,
 					    ". It is our job to catch thieves, and stop fights. Nothing very exciting...\"");
 					say("\"...Until one of the Mages manages to destroy a section of town with his experiments. Then things become lively.\"");
-					UI_add_answer(["Mage", "lively"]);
+					add(["Mage", "lively"]);
 					fallthrough;
 
 				case "Mage" (remove):
@@ -2221,7 +2221,7 @@ void Func0103 shape#(0x103) () {
 					    ".\"");
 					say("\"Mages are very powerful, and many of them can do things that make my skin crawl! And oftimes their experiments escape and then the Rangers must step in and take control.\"");
 					say("\"But, 'tis my job... cleaning after the Mages.\"");
-					UI_add_answer(["things", "escape"]);
+					add(["things", "escape"]);
 					fallthrough;
 
 				case "things" (remove):
@@ -2240,12 +2240,12 @@ void Func0103 shape#(0x103) () {
 				case "lively" (remove):
 					say("\"Oh, yes! It might be as simple as putting out a fire and rebuilding a section or two of wall after.\"");
 					say("\"But sometimes 'tis far more dangerous... Like a dragon, or one of Rotoluncia's daemons, or somesuch. Never know from one day to the next what thou wilt have to face.\"");
-					UI_remove_answer(["dragon", "daemon"]);
+					remove(["dragon", "daemon"]);
 					fallthrough;
 
 				case "dragon" (remove):
 					say("\"To be honest, I have never had to face one myself. But my commander remembers when she was a new Ranger, when the Strictures were newly in place. A Mage summoned a dragon that burned half of the city.\"");
-					UI_add_answer("Strictures");
+					add("Strictures");
 					fallthrough;
 
 				case "Strictures" (remove):
@@ -2272,7 +2272,7 @@ void Func0103 shape#(0x103) () {
 						    var0002,
 						    ". But without seeing the bottle, I would not be able to help thee.\"");
 					}
-					UI_add_answer("commander");
+					add("commander");
 					fallthrough;
 
 				case "commander" (remove):
@@ -2289,7 +2289,7 @@ void Func0103 shape#(0x103) () {
 					    var0002,
 					    ". Thou mightest ask if she knows who doth use such a bottle, but I would not stake much on it, if I were thee.\"");
 					if (var0005 == false) {
-						UI_add_answer("commander");
+						add("commander");
 					}
 					fallthrough;
 
@@ -2299,14 +2299,14 @@ void Func0103 shape#(0x103) () {
 					    ". I wish we had arms as nice.\"");
 					say("\"Thou shouldst ask Ernesto if he recognizes it. He is the arms expert among the Rangers.\"");
 					say("\"On a guess, I'd say it came from Monitor. Everyone knows that they practically sleep with weapons such as this.\"");
-					UI_add_answer(["Ernesto", "Monitor"]);
+					add(["Ernesto", "Monitor"]);
 					fallthrough;
 
 				case "Ernesto" (remove):
 					say("\"Ernesto is our second in command, ",
 					    var0002,
 					    ". Thou wilt find him somewhere around the wine press, I'll warrant.\"");
-					UI_add_answer("wine press");
+					add("wine press");
 					fallthrough;
 
 				case "wine press" (remove):
@@ -2335,21 +2335,21 @@ void Func0103 shape#(0x103) () {
 			    var0002,
 			    "?\"");
 			if (gflags[0x0115] && (!gflags[0x0293])) {
-				UI_add_answer("slippers");
+				add("slippers");
 			}
 			if (gflags[0x0285] && (!gflags[0x0297])) {
-				UI_add_answer("strange wine");
+				add("strange wine");
 			}
 			if (gflags[0x0045] && (UI_get_schedule_type(0xFFB4) != 0x000F)) {
-				UI_add_answer("brown bottle");
+				add("brown bottle");
 			}
 			if (gflags[0x0118] && (!gflags[0x029C])) {
-				UI_add_answer("mystery shield");
+				add("mystery shield");
 			}
 			if (gflags[0x00EA] && (!UI_get_item_flag(0xFFE1, 0x0004))) {
-				UI_add_answer("kidnap");
+				add("kidnap");
 			}
-			UI_add_answer(["Ranger", "bye"]);
+			add(["Ranger", "bye"]);
 			converse (0) {
 				case "kidnap" (remove):
 					say("\"This is such a terrible crime. And it involves magic!");
@@ -2367,7 +2367,7 @@ void Func0103 shape#(0x103) () {
 				case "Ranger" (remove):
 					say("\"A Ranger is in service to the MageLord and the Council. 'Tis our duty to guard the city and keep order...\"");
 					say("\"We also make fine wine that is sold throughout all of Moonshade.\"");
-					UI_add_answer(["MageLord", "Council"]);
+					add(["MageLord", "Council"]);
 					fallthrough;
 
 				case "MageLord" (remove):
@@ -2378,7 +2378,7 @@ void Func0103 shape#(0x103) () {
 						say("\"The current MageLord is Filbercio, ",
 						    var0002,
 						    ". He is a wise ruler, who ensures the safety of the people by keeping the Mages within the confines of the Strictures.\"");
-						UI_add_answer("Strictures");
+						add("Strictures");
 					}
 					fallthrough;
 
@@ -2392,7 +2392,7 @@ void Func0103 shape#(0x103) () {
 				case "Council" (remove):
 					say("\"The Council is composed of Adepts that balance the MageLord's power. They represent the voice of the Mages within the city.\"");
 					say("\"Of course, the Mundanes have little or no voice in the Council. I suppose that the Rangers are the closest thing to representatives for the Mundanes that Moonshade doth have.\"");
-					UI_add_answer(["Mages", "Mundanes"]);
+					add(["Mages", "Mundanes"]);
 					fallthrough;
 
 				case "Mages" (remove):
@@ -2408,13 +2408,13 @@ void Func0103 shape#(0x103) () {
 
 				case "slippers" (remove):
 					say("\"Too small for me, I'm afraid. I don't think that these belong to any of the Rangers. Thou couldst ask Bucia.\"");
-					UI_add_answer("Bucia");
+					add("Bucia");
 					fallthrough;
 
 				case "Bucia" (remove):
 					say("\"She is Moonshade's provisioner, and she would know who bought such a pair, I'm sure... Bucia loves all sorts of information, if thou takest my meaning.\"");
 					say("\"Thou canst usually find her at the Capessi Canton.\"");
-					UI_add_answer("Capessi Canton");
+					add("Capessi Canton");
 					fallthrough;
 
 				case "Capessi Canton" (remove):
@@ -2427,7 +2427,7 @@ void Func0103 shape#(0x103) () {
 						say("\"'Tis our wine, sure enough! Can't fool my nose after all these years working with the Mad Mage's wine press!\"");
 						say("\"I wonder if this was the bottle that disappeared... Thou shouldst ask my commander about the wine.\"");
 						gflags[0x0297] = true;
-						UI_add_answer("Mad Mage");
+						add("Mad Mage");
 					} else {
 						say("\"As fond as I am of good wine, ",
 						    var0002,
@@ -2446,7 +2446,7 @@ void Func0103 shape#(0x103) () {
 				case "brown bottle" (remove):
 					say("\"Hmmm. I can't recall having seen a bottle like this one. But then I don't generally try any vintages but our own.\"");
 					say("\"Thou shouldst ask Julia, though. If anyone would know, it would be Julia.\"");
-					UI_add_answer("Julia");
+					add("Julia");
 					fallthrough;
 
 				case "Julia" (remove):
@@ -2459,7 +2459,7 @@ void Func0103 shape#(0x103) () {
 				case "mystery shield" (remove):
 					say("\"I thought that thou didst have a challenge for me! This one is easy... It is a Pikemen's shield from Monitor.\"");
 					say("\"I wish that the Council would give us the funds for arms like this!\"");
-					UI_add_answer(["Pikemen", "Monitor"]);
+					add(["Pikemen", "Monitor"]);
 					fallthrough;
 
 				case "Pikemen" (remove):
@@ -3987,22 +3987,22 @@ void Func0151 shape#(0x151) () {
 		if (var0000 == 0x0001) {
 			UI_show_npc_face0(0xFEEB, 0x0000);
 			say("\"I can only be disturbed for a moment, as the others will miss me. We must continue our Dirge.\"");
-			UI_add_answer(["name", "others", "Dirge"]);
+			add(["name", "others", "Dirge"]);
 		}
 		if (var0000 == 0x0002) {
 			UI_show_npc_face0(0xFEEB, 0x0000);
 			say("\"How darest thou interrupt the Ceremony! Dost thou not recognize the influence of Chaos in this place?\"");
-			UI_add_answer(["name", "Ceremony", "Chaos"]);
+			add(["name", "Ceremony", "Chaos"]);
 		}
 		if (var0000 == 0x0003) {
 			UI_show_npc_face0(0xFEEB, 0x0000);
 			say("\"At last, a stranger! Oh, but have we met before? This existence is confusing...\"");
-			UI_add_answer(["name", "met", "existence"]);
+			add(["name", "met", "existence"]);
 		}
 		if (var0000 == 0x0004) {
 			UI_show_npc_face0(0xFEEB, 0x0000);
 			say("\"Art thou a spy? Come, friends, we must kill the spy sent by the Hierophant of Order!\"");
-			UI_add_answer(["spy", "Hierophant", "Order"]);
+			add(["spy", "Hierophant", "Order"]);
 		}
 		if (var0000 == 0x0005) {
 			var0013 = UI_get_object_position(item);
@@ -4023,10 +4023,10 @@ void Func0151 shape#(0x151) () {
 		if (var0000 == 0x0006) {
 			UI_show_npc_face0(0xFEEB, 0x0000);
 			say("\"Canst thou not see that we are trying to help thee! Everything that we say hath meaning. Thou must vanquish the foe...\"");
-			UI_add_answer(["help", "we?", "foe"]);
+			add(["help", "we?", "foe"]);
 		}
 		if (var0000 != 0x0000) {
-			UI_add_answer("bye");
+			add("bye");
 		}
 		converse (0) {
 			case "name" (remove):
@@ -4317,7 +4317,7 @@ void Func0162 shape#(0x162) () {
 		UI_set_schedule_type(item, 0x0000);
 		UI_show_npc_face0(0xFEF2, 0x0000);
 		say("\"So, brave warrior come to kill King Goblin? Ha! We speak first...\"");
-		UI_add_answer(["name", "goblins", "Helm of Monitor", "Simon", "bye"]);
+		add(["name", "goblins", "Helm of Monitor", "Simon", "bye"]);
 		converse (0) {
 			case "name" (remove):
 				say("\"Me Pomdirgun, Warlord and King of all Goblins. Mine shall be last name thou wilt ever hear.\"");
@@ -4325,7 +4325,7 @@ void Func0162 shape#(0x162) () {
 
 			case "goblins" (remove):
 				say("\"Once land where Monitor built was Goblin land. Then Men come and take it. So now we kill them.\"");
-				UI_add_answer("Men");
+				add("Men");
 				fallthrough;
 
 			case "Men" (remove):
@@ -4462,9 +4462,9 @@ void Func0175 shape#(0x175) () {
 		} else {
 			say("\"But first, thou must arm thyself with the symbols of my authority --\"");
 			say("\"the Staff, Armour, and Crown of the Great Earth Serpent.\"");
-			UI_add_answer(["Staff", "Armour", "Crown"]);
+			add(["Staff", "Armour", "Crown"]);
 		}
-		UI_add_answer(["Great Earth Serpent", "quest", "bye"]);
+		add(["Great Earth Serpent", "quest", "bye"]);
 		converse (0) {
 			case "Great Earth Serpent" (remove):
 				say("\"Dost thou not recognize Him? 'Twas he whom thou didst free from the tyranny of Exodus, in thine adventurings of long, long ago. It is he who speaks to thee now, in his whisperings from the deeps.\"");
@@ -4506,7 +4506,7 @@ void Func0175 shape#(0x175) () {
 				    ". None but thou can prevail against the Imbalance. And time grows short...\"");
 				say("\"Alas, I must give thee bitter news! Before thou canst restore Balance, thou must reunite the Chaos Serpent.\"");
 				say("\"I grieve that I cannot tell thee how this is done... Such knowledge was for the Chaos Hierophant only.\"");
-				UI_add_answer(["Chaos Hierophant", "Chaos Serpent", "Balance"]);
+				add(["Chaos Hierophant", "Chaos Serpent", "Balance"]);
 				fallthrough;
 
 			case "Chaos Hierophant" (remove):
@@ -4544,7 +4544,7 @@ void Func0175 shape#(0x175) () {
 					abort;
 				} else {
 					say("\"Then ask of me once more.\"");
-					UI_add_answer(["Crown", "Armour", "Staff", "quest", "Chaos Hierophant", "Chaos Serpent", "Balance", "bye"]);
+					add(["Crown", "Armour", "Staff", "quest", "Chaos Hierophant", "Chaos Serpent", "Balance", "bye"]);
 				}
 
 		}
@@ -4961,11 +4961,11 @@ void Func017D shape#(0x17D) () {
 						say("\"Pleased to meet thee, ",
 						    var0007,
 						    ". What is thy business here in Fawn?\"");
-						UI_add_answer(["I am merely visiting.", "I am missing a companion.", "It is not thy business."]);
+						add(["I am merely visiting.", "I am missing a companion.", "It is not thy business."]);
 					}
 					if (var000A == "I am the Avatar.") {
 						say("\"And I am the Lady of Fawn! Thou wilt not go far with such here, stranger.\" *\"What is thy business here in Fawn?\"");
-						UI_add_answer(["I am merely visiting.", "I am missing a companion.", "It is not thy business."]);
+						add(["I am merely visiting.", "I am missing a companion.", "It is not thy business."]);
 					}
 					if (var000A == "It is not thy business.") {
 						say("\"If thou wilt not tell me thy name and business, thou canst not enter the city. Come back when thou art feeling more talkative.\"");
@@ -4975,24 +4975,24 @@ void Func017D shape#(0x17D) () {
 			} else {
 				say("\"Thou shouldst avoid trouble whilst thou art here.\"");
 				if (UI_find_nearby_avatar(0x0203)) {
-					UI_add_answer(["duty", "pass"]);
+					add(["duty", "pass"]);
 				} else {
-					UI_add_answer(["duty", "bye"]);
+					add(["duty", "bye"]);
 				}
 			}
 			converse (0) {
 				case "I am merely visiting.":
 					say("\"Welcome to Fawn, then! Keep away from trouble whilst thou art here.\" *\"We have enough to worry about, what with storms, goblins, and Fellowship troublemakers.\"");
 					gflags[0x014F] = false;
-					UI_remove_answer(["I am merely visiting.", "I am missing a companion.", "It is not thy business."]);
-					UI_add_answer(["storms", "goblins", "Fellowship troublemakers", "pass"]);
+					remove(["I am merely visiting.", "I am missing a companion.", "It is not thy business."]);
+					add(["storms", "goblins", "Fellowship troublemakers", "pass"]);
 					fallthrough;
 
 				case "storms":
 					say("\"They start without warning, ",
 					    var0005,
 					    ". So do not stray too far from shelter.\" *\"Be warned, we have orders to close the gate during a storm. So if thou art caught outside of the gate, thine only choice is the traveller's shelter.\"");
-					UI_remove_answer("storms");
+					remove("storms");
 					fallthrough;
 
 				case "goblins":
@@ -5001,37 +5001,37 @@ void Func017D shape#(0x17D) () {
 					} else {
 						say("\"If those foul savages would dare attack the Pikemen, we cannot leave the gates open at night. Fawn's gates are now closed at night. They cannot be opened for anyone until morning.\" *\"So have a care if thou dost venture outside near dark.\"");
 					}
-					UI_remove_answer("goblins");
+					remove("goblins");
 					fallthrough;
 
 				case "Fellowship troublemakers":
 					say("\"I should not have said that, ",
 					    var0005,
 					    ".\" ~\"Be assured that the Captain is quick with the Wand of Detainment.\"");
-					UI_remove_answer("Fellowship troublemakers");
-					UI_add_answer("Wand of Detainment");
+					remove("Fellowship troublemakers");
+					add("Wand of Detainment");
 					fallthrough;
 
 				case "duty":
 					say("\"I am a Fawn Guardsman! Thou wouldst do well to stay out of mischief while visiting our city!\"");
-					UI_remove_answer("duty");
+					remove("duty");
 					fallthrough;
 
 				case "Wand of Detainment":
 					say("\"The Wand of Detainment is a fine gift from the people of Moonshade. With the Wand, the Captain can capture any criminal.\" *\"Keep that in mind if thou shouldst feel mischievous...\"");
-					UI_remove_answer("Wand of Detainment");
+					remove("Wand of Detainment");
 					fallthrough;
 
 				case "I am missing a companion.":
 					say("\"Thou shouldst try inquiring at The Broken Oar. Keep away from trouble whilst thou art here.\" *\"We have enough to worry about, what with storms, goblins, and Fellowship troublemakers.\"");
 					gflags[0x014F] = false;
-					UI_remove_answer(["I am merely visiting.", "I am missing a companion.", "It is not thy business."]);
-					UI_add_answer(["The Broken Oar", "storms", "goblins", "Fellowship troublemakers", "pass"]);
+					remove(["I am merely visiting.", "I am missing a companion.", "It is not thy business."]);
+					add(["The Broken Oar", "storms", "goblins", "Fellowship troublemakers", "pass"]);
 					fallthrough;
 
 				case "The Broken Oar":
 					say("\"The Broken Oar is a tavern. It is the only establishment in Fawn that offers rooms to rent.\" *\"Most strangers stay there.\"");
-					UI_remove_answer("The Broken Oar");
+					remove("The Broken Oar");
 					fallthrough;
 
 				case "It is not thy business.":
@@ -5082,44 +5082,44 @@ void Func017D shape#(0x17D) () {
 				    var0005,
 				    ". I am a Private in Fawn's Guard.\" *\"Dost thou require some assistance?\"");
 				var000E = "Private";
-				UI_add_answer(["Why art thou following me?", "Stop following me!", "Never mind."]);
+				add(["Why art thou following me?", "Stop following me!", "Never mind."]);
 			}
 			if (var000D == 0x0002) {
 				say("\"I am on duty now, ",
 				    var0005,
 				    ". Thou mayest address me as Corporal.\" *\"Dost thou require some assistance?\"");
 				var000E = "Corporal";
-				UI_add_answer(["Why art thou following me?", "Stop following me!", "Never mind."]);
+				add(["Why art thou following me?", "Stop following me!", "Never mind."]);
 			}
 			if (var000D == 0x0003) {
 				say("\"While I am on duty, ",
 				    var0005,
 				    ", thou must address me as Sergeant.\" *\"Dost thou require some assistance?\"");
 				var000E = "Sergeant";
-				UI_add_answer(["Why art thou following me?", "Stop following me!", "Never mind."]);
+				add(["Why art thou following me?", "Stop following me!", "Never mind."]);
 			}
 			if (var000D == 0x0004) {
 				say("\"I am a Lieutenant in Fawn's Guard. Thou must address me as such, ",
 				    var0005,
 				    ".\" *\"Dost thou require some assistance?\"");
 				var000E = "Lieutenant";
-				UI_add_answer(["Why art thou following me?", "Stop following me!", "Never mind."]);
+				add(["Why art thou following me?", "Stop following me!", "Never mind."]);
 			}
 			converse (0) {
 				case "Why art thou following me?":
 					say("\"Forgive me, ",
 					    var0005,
 					    ". But, by Law, I must follow thee.\"");
-					UI_remove_answer(["Why art thou following me?", "Stop following me!", "Never mind."]);
-					UI_add_answer("Law");
+					remove(["Why art thou following me?", "Stop following me!", "Never mind."]);
+					add("Law");
 					fallthrough;
 
 				case "Law":
 					say("\"By Law, all Beauty must be protected, ",
 					    var0005,
 					    ". Therefore, I am to ensure that thou dost not endanger thyself.\"");
-					UI_remove_answer("Law");
-					UI_add_answer("endanger");
+					remove("Law");
+					add("endanger");
 					fallthrough;
 
 				case "endanger":
@@ -5130,21 +5130,21 @@ void Func017D shape#(0x17D) () {
 					say("\"I am sorry, ",
 					    var0005,
 					    ", thou art not my Captain. I may only take orders from the Captain of the Guard.\"");
-					UI_remove_answer(["Why art thou following me?", "Stop following me!", "Never mind."]);
-					UI_add_answer("Captain of the Guard");
+					remove(["Why art thou following me?", "Stop following me!", "Never mind."]);
+					add("Captain of the Guard");
 					fallthrough;
 
 				case "Captain of the Guard":
 					say("\"His name is Jorvin. Thou canst ask him to reassign me, if thou wishest. But by Law he must assign another guard to the job.\"");
-					UI_remove_answer("Captain of the Guard");
-					UI_add_answer("Law");
+					remove("Captain of the Guard");
+					add("Law");
 					fallthrough;
 
 				case "Never mind.":
 					say("\"I am ever at thy service, ",
 					    var0005,
 					    ". Call on me any time.\"");
-					UI_remove_answer(["Why art thou following me?", "Stop following me!", "Never mind."]);
+					remove(["Why art thou following me?", "Stop following me!", "Never mind."]);
 					abort;
 			}
 		}
@@ -5168,28 +5168,28 @@ void Func017D shape#(0x17D) () {
 				    var0005,
 				    ". I am a Private in Fawn's Guard.\"");
 				var000E = "Private";
-				UI_add_answer(["storms", "goblins", "bye"]);
+				add(["storms", "goblins", "bye"]);
 			}
 			if (var0003 == 0x0004) {
 				say("\"I am on duty now, ",
 				    var0005,
 				    ". Thou mayest address me as Corporal.\"");
 				var000E = "Corporal";
-				UI_add_answer(["storms", "goblins", "bye"]);
+				add(["storms", "goblins", "bye"]);
 			}
 			if (var0003 == 0x0005) {
 				say("\"While I am on duty, ",
 				    var0005,
 				    ", thou must address me as Sergeant.\"");
 				var000E = "Sergeant";
-				UI_add_answer(["storms", "goblins", "bye"]);
+				add(["storms", "goblins", "bye"]);
 			}
 			if (var0003 == 0x0006) {
 				say("\"I am a Lieutenant in Fawn's Guard. Thou must address me as such, ",
 				    var0005,
 				    ".\"");
 				var000E = "Lieutenant";
-				UI_add_answer(["storms", "goblins", "bye"]);
+				add(["storms", "goblins", "bye"]);
 			}
 			converse (0) {
 				case "storms":
@@ -5198,33 +5198,33 @@ void Func017D shape#(0x17D) () {
 						say("\"Be thou careful to stay close to shelter, ",
 						    var0005,
 						    ". Thou dost never know when one of these freak storms will appear.\"");
-						UI_remove_answer("storms");
+						remove("storms");
 					}
 					if (var000F == 0x0002) {
 						say("\"'Tis unnatural, for sure. I wouldn't wander too far from safety, if I were thee, ",
 						    var0005,
 						    ".\"");
-						UI_remove_answer("storms");
+						remove("storms");
 					}
 					if (var000F == 0x0003) {
 						say("\"The storms are no great cause for alarm. Remain in sight of shelter and thou shouldst be fine, ",
 						    var0005,
 						    ".\"");
-						UI_remove_answer("storms");
+						remove("storms");
 					}
 					if (var000F == 0x0004) {
 						say("\"Between thee and me, ",
 						    var0005,
 						    ", I would not be out here if I weren't on duty. These storms are not natural.\"");
-						UI_remove_answer("storms");
+						remove("storms");
 					}
 					if (var000F == 0x0005) {
 						say("\"I tell thee, we are all cursed! These storms are a punishment for our transgressions against the heavens!\" *\"Thou canst run to shelter all thou wishest, but if thou hast transgressed, it will avail thee not!\"");
-						UI_remove_answer("storms");
+						remove("storms");
 					}
 					if (var000F == 0x0006) {
 						say("\"Use the sense that the heavens gave thee... If a storm starts, seek shelter. 'Tis simple enough.\"");
-						UI_remove_answer("storms");
+						remove("storms");
 					}
 					fallthrough;
 
@@ -5232,37 +5232,37 @@ void Func017D shape#(0x17D) () {
 					var0010 = UI_die_roll(0x0001, 0x0006);
 					if (var0010 == 0x0001) {
 						say("\"The goblins have been nothing but trouble of late. Thou shouldst remain within the city gates.\"");
-						UI_remove_answer("goblins");
+						remove("goblins");
 					}
 					if (var0010 == 0x0002) {
 						say("\"Goblins are filthy savages, ",
 						    var0005,
 						    ". I yearn for the day when we are allowed to kill them all!\" *\"'Tis unsafe to venture outside the city with them out there.\"");
-						UI_remove_answer("goblins");
+						remove("goblins");
 					}
 					if (var0010 == 0x0003) {
 						say("\"Make no mistake, ",
 						    var0005,
 						    ". Those goblins would sooner make a meal out of us as look at us. No one is safe as long as one goblin is left alive!\"");
-						UI_remove_answer("goblins");
+						remove("goblins");
 					}
 					if (var0010 == 0x0004) {
 						say("\"Don't go out of the city gates, ",
 						    var0005,
 						    "! 'Tis not safe even in broad daylight!\"");
-						UI_remove_answer("goblins");
+						remove("goblins");
 					}
 					if (var0010 == 0x0005) {
 						say("\"Thou hast nothing to fear from the goblins, ",
 						    var0005,
 						    ", as long as thou stayest within the confines of the city.\"");
-						UI_remove_answer("goblins");
+						remove("goblins");
 					}
 					if (var0010 == 0x0006) {
 						say("\"Fawn is caught between the storms and the goblins, ",
 						    var0005,
 						    ". 'Tis not a safe place to be!\"");
-						UI_remove_answer("goblins");
+						remove("goblins");
 					}
 					fallthrough;
 
@@ -5873,7 +5873,7 @@ void Func01C3 shape#(0x1C3) () {
 			    var0001,
 			    "?\"");
 			var0005 = 0x0000;
-			UI_add_answer(["the gremlins", "the explosions", "the Cyclops", "the invisible man", "change subject"]);
+			add(["the gremlins", "the explosions", "the Cyclops", "the invisible man", "change subject"]);
 			converse (0) {
 				case "the gremlins" (remove):
 					say("\"Gremlins? Thou art merely trying to impress us, ",
@@ -10354,9 +10354,9 @@ void Func0294 shape#(0x294) () {
 		} else {
 			say("\"Look what thy mad companion, Iolo, hath done to me! He told me to tell thee that only thou couldst prove whether Beauty was skin deep.\"");
 			say("\"Thou must have some way to remove this foul enchantment! But... What have I to live for? My very heart hath been torn asunder! My people are dead! There is nothing left for me!\"");
-			UI_add_answer(["prove", "heart", "people"]);
+			add(["prove", "heart", "people"]);
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "bye":
 				Func097F(0xFE9C, "@Keep faith!@", 0x0000);
@@ -10366,7 +10366,7 @@ void Func0294 shape#(0x294) () {
 			case "prove" (remove):
 				say("\"How would I know the mind of a madman?!\"");
 				say("\"Perhaps he thought that thou didst have some magic with which to counter his cruelty.\"");
-				UI_add_answer("magic");
+				add("magic");
 				fallthrough;
 
 			case "magic" (remove):
@@ -10375,7 +10375,7 @@ void Func0294 shape#(0x294) () {
 				say("\"Should I selfishly ask that mine own Beauty be restored when the life's blood of Fawn -- the city of Beauty -- lies dead in the streets?!\"");
 				say("\"If only the Comb of Beauty had not been stolen! Everything changed in Fawn after it was taken... Perhaps it was some token of the heavens. And this is my punishment for losing it!\"");
 				if (!var0004) {
-					UI_add_answer("Comb of Beauty");
+					add("Comb of Beauty");
 				}
 				fallthrough;
 
@@ -10386,10 +10386,10 @@ void Func0294 shape#(0x294) () {
 				if (Func097D(0xFE9B, 0x0001, 0x0289, 0xFE99, 0x0000)) {
 					var0006 = Func0992(0x0001, "@Avatar, what about the comb thou didst take from Columna?@", "@I wonder... What about Columna's comb?!@", false);
 					UI_set_conversation_slot(0x0000);
-					UI_add_answer("Columna");
+					add("Columna");
 				}
 				var0004 = true;
-				UI_add_answer("treasure");
+				add("treasure");
 				fallthrough;
 
 			case "Columna" (remove):
@@ -10424,14 +10424,14 @@ void Func0294 shape#(0x294) () {
 			case "heart" (remove):
 				say("\"Jorvin is dead! My love, mine heart's true desire!\"");
 				say("\"But... Perhaps it is for the best -- That he never see the depths to which mine ignorance hath plunged our city, or the mark of the guilt that weighs upon my features...\"");
-				UI_add_answer("ignorance");
+				add("ignorance");
 				fallthrough;
 
 			case "ignorance" (remove):
 				say("\"Criminal ignorance! I listened to those who would mislead me! I let their compliments turn mine head... And never felt Love for the city that was in my charge!\"");
 				say("\"Even as I let the Comb of Beauty slip from the city, I have let all of Fawn slip into lifeless darkness!\"");
 				if (!var0004) {
-					UI_add_answer("Comb of Beauty");
+					add("Comb of Beauty");
 				}
 				fallthrough;
 
@@ -10439,7 +10439,7 @@ void Func0294 shape#(0x294) () {
 				say("\"The storms grew worse and worse! Food was scarce... And a strange sickness crept through the city like some silent predator.\"");
 				say("\"One by one they fell... And there was nothing I could do! My pleas to the heavens were in vain!\"");
 				say("\"The only other living soul is one I turned away -- One I deemed unworthy of Fawn's Beauty!\"");
-				UI_add_answer(["sickness", "living soul"]);
+				add(["sickness", "living soul"]);
 				fallthrough;
 
 			case "sickness" (remove):
@@ -11295,30 +11295,30 @@ void Func02BE shape#(0x2BE) () {
 			} else {
 				UI_show_npc_face0(0xFEF0, 0x0000);
 				say("\"Greetings to thee!\"");
-				UI_add_answer(["name", "bye"]);
+				add(["name", "bye"]);
 			}
 		}
 		if (event == 0x000B) {
 			UI_show_npc_face0(0xFEF0, 0x0000);
 			say("\"That is the greatest gift that I can give to thee. Use it wisely.\"");
 			UI_play_sound_effect(0x000F);
-			UI_add_answer(["bye"]);
+			add(["bye"]);
 		}
 		gflags[0x0007] = false;
 		if (gflags[0x01BC]) {
-			UI_add_answer("domain");
+			add("domain");
 		}
 		converse (0) {
 			case "name" (remove):
 				say("\"Name? Oh, my, what a formality! First thou hast saved my life and then thou dost ask my name! Thou art a curiosity!\"");
 				say("\"No one hath asked me my real name in several hundred years! I have always been called simply Phoenix.\"");
-				UI_add_answer(["real name", "phoenix"]);
+				add(["real name", "phoenix"]);
 				fallthrough;
 
 			case "real name" (remove):
 				say("\"It is a sound thou wouldst find most unpronounceable. My name is a word in the language of my kind that roughly translates as 'Skyrise'.\"");
 				say("\"It is a popular name among my kind. But enough of that! I wish to thank thee for thy deed...\"");
-				UI_add_answer(["Skyrise", "thou art welcome"]);
+				add(["Skyrise", "thou art welcome"]);
 				fallthrough;
 
 			case "Skyrise" (remove):
@@ -11340,18 +11340,18 @@ void Func02BE shape#(0x2BE) () {
 
 			case "phoenix" (remove):
 				say("\"Thou hast never met such a creature before...? If thou dost wish it I shall tell thee my tale.\"");
-				UI_add_answer(["tale"]);
+				add(["tale"]);
 				fallthrough;
 
 			case "tale" (remove):
 				say("\"The phoenix are creatures of fate. We are naturally drawn to places where the balance between Order and Chaos hath been upset.\"");
-				UI_add_answer(["fate", "balance"]);
+				add(["fate", "balance"]);
 				fallthrough;
 
 			case "fate" (remove):
 				say("\"Fate is a force that is eternal. This is why those of my kind can never truly die.\"");
 				say("\"Although we may lose our lives, we are reborn from the ashes of our own funeral pyres.\"");
-				UI_add_answer(["eternal", "pyres"]);
+				add(["eternal", "pyres"]);
 				fallthrough;
 
 			case "balance" (remove):
@@ -12353,12 +12353,12 @@ void Func02D8 shape#(0x2D8) () {
 	if (event == 0x0002) {
 		UI_show_npc_face0(0xFEFE, 0x0000);
 		say("\"I am trapped! Help me!\"");
-		UI_add_answer(["name", "Trapped?", "bye"]);
+		add(["name", "Trapped?", "bye"]);
 		converse (0) {
 			case "name" (remove):
 				say("\"I am Shriash. Though I am only a little girl, thou must know that I am a faithful follower of Chaos.\"");
 				say("\"I belong to the Temple of Emotion.\"");
-				UI_add_answer(["girl", "Chaos", "Emotion"]);
+				add(["girl", "Chaos", "Emotion"]);
 				fallthrough;
 
 			case "girl" (remove):
@@ -12381,20 +12381,20 @@ void Func02D8 shape#(0x2D8) () {
 
 			case "Trapped?" (remove):
 				say("\"I was caught in a great battle. The powerful magic the soldiers unleashed left my soul caught here in this wall.\"");
-				UI_add_answer(["soldiers", "wall"]);
+				add(["soldiers", "wall"]);
 				fallthrough;
 
 			case "soldiers" (remove):
 				say("\"They were led by the Master of Ethicality, and his magic wrecked the Temple. My parents were slain, and my brother taken prisoner.\"");
 				say("\"No one from the Temple survived to free me from my fate.\"");
 				say("\"But Balance was preserved -- from my place here in the wall, I watched as Soldiers of Chaos attacked to retake the Temple. All of the Soldiers of Ethicality were slain, to the last man.\"");
-				UI_add_answer("Temple");
+				add("Temple");
 				fallthrough;
 
 			case "Temple" (remove):
 				say("\"This place is the Temple of Emotion. It is a structure consecrated to the Virtue of Emotion.\"");
 				say("\"We would come here yearly to hear the words of the Master of Emotion, and to drink of the Water of the Temple.\"");
-				UI_add_answer(["Water"]);
+				add(["Water"]);
 				fallthrough;
 
 			case "Water" (remove):
@@ -12406,7 +12406,7 @@ void Func02D8 shape#(0x2D8) () {
 			case "wall" (remove):
 				say("\"I am trapped within this wall. My soul hath occupied this place for many, many years.\"");
 				say("\"Sometimes, I despair of ever being free to enter the Void.\"");
-				UI_add_answer(["free", "Void"]);
+				add(["free", "Void"]);
 				fallthrough;
 
 			case "free" (remove):
@@ -13610,104 +13610,104 @@ void Func0319 shape#(0x319) () {
 		UI_show_npc_face0(0xFEEC, 0x0000);
 		say("\"Avatar! At last thou hast come. Seeing thee again hath brought me strength.\"");
 		say("\"Dost thou know that I expected to find thee here, in my dreams? I wish that thou wert truly here to counsel me...");
-		UI_add_answer(["name", "job", "bye"]);
+		add(["name", "job", "bye"]);
 		converse (0) {
 			case "name":
 				say("\"Dost thou truly have to ask my name? Hast thou suffered from the recent afflictions as has all of Britannia? Canst thou not recognize thine old friend?\"* \"'Tis I, Lord British, ruler of all Britannia. Or at least what is left of it after all of the disasters...\"");
-				UI_remove_answer("name");
-				UI_add_answer(["disasters"]);
+				remove("name");
+				add(["disasters"]);
 				fallthrough;
 
 			case "job":
 				say("\"Thou dost have to ask? Why, I am ruler of Britannia, if thou dost not remember.\" ~\"'Tis sad. Truly thou art suffering from some sort of malady such as the imbalances which are plaguing all of the land. I fear that nature is trying to rend itself apart.\" ~\"Mine only hope is that thou art truly in fair health and that this pale reflection of thee in my dream is only a deceit of thy true fate.\"");
-				UI_remove_answer("job");
-				UI_add_answer(["dream"]);
+				remove("job");
+				add(["dream"]);
 				fallthrough;
 
 			case "dream":
 				say("\"Of course this is a dream! Thou hast not yet returned from the Serpent Isle to which I sent thee.\" *\"Some days I fear that thou shalt never return... The storms began shortly after thou didst set sail.\"");
-				UI_remove_answer("dream");
-				UI_add_answer("storms");
+				remove("dream");
+				add("storms");
 				fallthrough;
 
 			case "storms":
 				say("\"They are storms unlike anyone has seen before. The scholars can find no mention of such storms in any of the archives.\" *\"How can a mere stroke of lightning rip away the entire royal mint...\"");
-				UI_remove_answer("storms");
-				UI_add_answer(["mint", "disturbance"]);
+				remove("storms");
+				add(["mint", "disturbance"]);
 				fallthrough;
 
 			case "mint":
 				say("\"Thou dost think me slack-witted, I am certain. But I have seen it for myself...\" *\"The royal mint is gone. In its place stands a strange lighthouse.\"");
-				UI_remove_answer("mint");
-				UI_add_answer("lighthouse");
+				remove("mint");
+				add("lighthouse");
 				fallthrough;
 
 			case "lighthouse":
 				say("\"'Twas clear enough what it was... Its light was still shining after the storm.\" *\"But none of the sailors recognized it.\"");
-				UI_remove_answer("lighthouse");
+				remove("lighthouse");
 				fallthrough;
 
 			case "disturbance":
 				say("\"I know not what they mean... But none of the mages in Britannia seem to be able to predict the outcome of the most simple spells.\"");
-				UI_remove_answer("disturbance");
-				UI_add_answer("outcome");
+				remove("disturbance");
+				add("outcome");
 				fallthrough;
 
 			case "outcome":
 				say("\"A mage might find his entire house burned to the ground after merely trying to light a candle magically. Or another mage may, in the same instant, find himself unable to light a candle with a great flame spell.\" *\"The mages claim that the ether is unstable...\"");
-				UI_remove_answer("outcome");
-				UI_add_answer("ether");
+				remove("outcome");
+				add("ether");
 				fallthrough;
 
 			case "ether":
 				say("\"Ether, that which mages call upon to shape their spells. The mages say that the instability is a very bad sign.\" *\"According to the mages, such an imbalance could easily destroy the world -- if it continues to increase in severity.\"");
-				UI_remove_answer("ether");
+				remove("ether");
 				fallthrough;
 
 			case "disasters":
 				say("\"If it were only the strange storms, or only the magic instability, I would be less concerned. But when thou dost consider it along with the earthquakes, the emps, and the gargoyles, I fear that the world may indeed be ending.\"");
-				UI_remove_answer("disasters");
-				UI_add_answer(["earthquakes", "emps", "gargoyles"]);
+				remove("disasters");
+				add(["earthquakes", "emps", "gargoyles"]);
 				fallthrough;
 
 			case "earthquakes":
 				say("\"The earthquakes started not long after the storms began. At first they were fairly small and infrequent, but now they are growing more powerful and threatening the castle itself.\"");
-				UI_remove_answer("earthquakes");
-				UI_add_answer("castle");
+				remove("earthquakes");
+				add("castle");
 				fallthrough;
 
 			case "castle":
 				say("\"Only this morning did a guard find a crack at the base of the castle's foundation. It hath grown wider during the day...\" *\"If the castle falls, there will be no turning back. There will be nothing I can do to hold back the destruction.\"");
-				UI_remove_answer("castle");
+				remove("castle");
 				fallthrough;
 
 			case "emps":
 				say("\"Thou shouldst remember the emps, Avatar. Thou didst save their trees before I sent thee to find the Serpent Isle.\" *\"I fear that this cataclysm is affecting them the hardest of all.\"");
-				UI_remove_answer("emps");
-				UI_add_answer("cataclysm");
+				remove("emps");
+				add("cataclysm");
 				fallthrough;
 
 			case "cataclysm":
 				say("\"The emps live in closer harmony with the natural world than man does, Avatar. The storms and earthquakes have brought a great illness upon them.\"");
-				UI_remove_answer("cataclysm");
-				UI_add_answer("illness");
+				remove("cataclysm");
+				add("illness");
 				fallthrough;
 
 			case "illness":
 				say("\"Many of the emps have died already. I have little hope that any of that gentle race shall survive, even if the world doth not rend itself apart.\" *\"I am sure that the illness will spread to humans, if something is not done to stop these disasters.\"");
-				UI_remove_answer("illness");
+				remove("illness");
 				fallthrough;
 
 			case "gargoyles":
 				say("\"The gargoyles have also succumbed to these afflictions. They have fallen into a deep state of dreaming.\"");
-				UI_remove_answer("gargoyles");
-				UI_add_answer("dreaming");
+				remove("gargoyles");
+				add("dreaming");
 				fallthrough;
 
 			case "dreaming":
 				say("\"Few of the gargoyles can resist the compulsion to sleep, Avatar. Their slumber seems troubled, however. They thrash about and mutter in their sleep.\" *\"Yet when we attempted to wake a sleeping gargoyle, to see if his dreams held any answers, he attacked us. I fear that we will have no answers from dreams...\"");
-				UI_remove_answer("dreaming");
-				UI_add_answer("answers");
+				remove("dreaming");
+				add("answers");
 				fallthrough;
 
 			case "answers":
@@ -16102,7 +16102,7 @@ void Func0355 shape#(0x355) () {
 	say("\"Who dares to disturb the restless repose of the Hierophant of Chaos!\"");
 	say("\"Wait -- I know thee! The Void hath whispered to me of thy coming, Hero from a Distant Land. But dost thou dare to hear the answers to thy questions?\"");
 	gflags[0x022B] = true;
-	UI_add_answer(["restless repose", "whispers from the Void", "questions", "bye"]);
+	add(["restless repose", "whispers from the Void", "questions", "bye"]);
 	converse (0) {
 		case "restless repose" (remove):
 			say("\"Did not faithful Sethys tell thee of my fate? I was slain on this very spot centuries ago, at the hands of the Soldiers of Order.\"");
@@ -16131,14 +16131,14 @@ void Func0355 shape#(0x355) () {
 			say("\"Yet even servitude would be better than the damnation that Chaos now endures, with its Forces driven apart and broken.\"");
 			say("\"Listen carefully -- I shall give thee mine aid this one time, but we must be enemies ever afterward!\"");
 			UI_push_answers();
-			UI_add_answer(["aid", "damnation", "change subject"]);
+			add(["aid", "damnation", "change subject"]);
 			fallthrough;
 
 		case "damnation" (remove):
 			say("\"Behold the mystery of Balance! When Order struck down the Serpent of Chaos, the act undid the tapestry of Balance.\"");
 			say("\"Thus, both Chaos and Order were doomed!\"");
 			say("\"When the Serpent was broken, the three Forces of Chaos were driven to insanity -- but so was the Order Serpent...\"");
-			UI_add_answer(["Forces of Chaos", "Order Serpent"]);
+			add(["Forces of Chaos", "Order Serpent"]);
 			fallthrough;
 
 		case "Forces of Chaos" (remove):
@@ -16158,7 +16158,7 @@ void Func0355 shape#(0x355) () {
 			say("\"I have no love for Balance, but I also know that Chaos cannot reign in Imbalance...\"");
 			say("\"Ask me these things: where thou must go, what thou must bring, and the rite thou must perform.\"");
 			UI_push_answers();
-			UI_add_answer(["where I must go", "what I must bring", "the rite", "nothing more"]);
+			add(["where I must go", "what I must bring", "the rite", "nothing more"]);
 			fallthrough;
 
 		case "where I must go" (remove):
@@ -16186,7 +16186,7 @@ void Func0355 shape#(0x355) () {
 			if (!Func0955()) {
 				say("\"Then ask of me again, and I shall explain once more.\"");
 				UI_clear_answers();
-				UI_add_answer(["restless repose", "whispers from the Void", "questions", "bye"]);
+				add(["restless repose", "whispers from the Void", "questions", "bye"]);
 			} else {
 				say("\"I disbelieve thee, mortal. Take this scroll. It shall bring our conversation to thy remembrance, in thine hour of need.\"");
 				var0002 = Func099B(0xFE9C, 0x0001, 0x02C3, 0x0063, 0x0000, 0x0000, true);
@@ -16538,8 +16538,8 @@ void Func0363 shape#(0x363) () {
 			if (Func098C()) {
 				say("\"Thou art truly the one I seek! Here is the Hourglass of Fate. Keep it with thee always, for through it the Monks of Xenka can aid thee.\"");
 				var0005 = Func099B(0xFE9C, 0x0001, 0x0347, 0xFE99, 0x0001, false, true);
-				UI_add_answer(["foretold", "promised Hero", "assistance", "Hourglass"]);
-				UI_add_answer("bye");
+				add(["foretold", "promised Hero", "assistance", "Hourglass"]);
+				add("bye");
 				converse (0) {
 					case "Hourglass" (remove):
 						say("\"As long as the Hourglass of Fate is with thee, if thou art killed, thou shalt be resurrected on Monk Isle.\"");
@@ -16553,7 +16553,7 @@ void Func0363 shape#(0x363) () {
 						    ". As such, I have devoted my life to studying the prophecies of Xenka.\"");
 						say("\"The writings are clear: the Hero shall come in the last days, with Three Companions, to battle against the Evil which is in the land.\"");
 						say("\"Further, the Hero shall be given guidance from a Power that dwells in the Void.\"");
-						UI_add_answer(["Companions", "Power"]);
+						add(["Companions", "Power"]);
 						fallthrough;
 
 					case "Companions" (remove):
@@ -16578,7 +16578,7 @@ void Func0363 shape#(0x363) () {
 						say("\"The land is in dire need of a Hero, for the end of the world draws nigh!\"");
 						say("\"There are storms which lash out with magical lightnings, and strange illnesses which plague the innocent.\"");
 						say("\"Lastly, there is the growing sense that something is wrong in the land...\"");
-						UI_add_answer(["storms", "illnesses", "wrong"]);
+						add(["storms", "illnesses", "wrong"]);
 						fallthrough;
 
 					case "storms" (remove):
@@ -16609,7 +16609,7 @@ void Func0363 shape#(0x363) () {
 
 					case "Sands of Time" (remove):
 						say("\"Within the Hourglass of Fate lie the Sands of Time. As each grain doth fall, so doth another moment hasten us to our doom.\"");
-						UI_add_answer("doom");
+						add("doom");
 						fallthrough;
 
 					case "doom" (remove):
@@ -16801,7 +16801,7 @@ void Func036A shape#(0x36A) () {
 		UI_set_schedule_type(0xFEF3, 0x0009);
 		UI_show_npc_face0(0xFEE9, 0x0000);
 		say("\"Woof!\"");
-		UI_add_answer(["trick", "track", "attack", "bye"]);
+		add(["trick", "track", "attack", "bye"]);
 		converse (0) {
 			case "track":
 				var0001 = script item {
@@ -17242,16 +17242,16 @@ void Func0395 shape#(0x395) () {
 		UI_clear_item_say(item);
 		UI_show_npc_face0(0xFEE8, 0x0000);
 		say("\"We have stalked each other long enough!\"");
-		UI_add_answer(["Are you The Trapper?", "bye"]);
+		add(["Are you The Trapper?", "bye"]);
 		converse (0) {
 			case "Are you The Trapper?" (remove):
 				say("\"Forgo the pretense, I am Hazard the Trapper as thou dost know well by now.\"");
-				UI_add_answer("Murderer!");
+				add("Murderer!");
 				fallthrough;
 
 			case "Murderer!" (remove):
 				say("\"That charge is most unfair! The Gwani are merely animals! I kill them as I would a bear, or a leopard.\"* \"Their skins keep many a man warm when they venture into these icy regions. Why, I would kill a man if he dared to steal mine.\"* \"Aye, their skins are the most profitable, too.\"");
-				UI_add_answer(["animals", "profit", "Gwani"]);
+				add(["animals", "profit", "Gwani"]);
 				fallthrough;
 
 			case "profit" (remove):
@@ -17260,7 +17260,7 @@ void Func0395 shape#(0x395) () {
 
 			case "animals" (remove):
 				say("\"Trapping them is too easy. 'Tis a wonder they survive out here at all! Why, they are as docile as sheep!\"* \"A leopard at least is sport. It would sever mine arm if I gave it the chance. Slaughtering the Gwani is doing them a favor.\"");
-				UI_add_answer("Stop the killing.");
+				add("Stop the killing.");
 				fallthrough;
 
 			case "Gwani" (remove):
@@ -17539,7 +17539,7 @@ void Func03B1 shape#(0x3B1) () {
 				    var0001,
 				    ".");
 				say("\"How might I aid the Champion of Balance in fulfilling thy duty?\"");
-				UI_add_answer("apologize");
+				add("apologize");
 			} else {
 				say("\"I am pleased to see thee, ",
 				    var0001,
@@ -17547,7 +17547,7 @@ void Func03B1 shape#(0x3B1) () {
 				say("\"How might I aid thee in fulfilling thy duty?\"");
 			}
 		}
-		UI_add_answer(["Order Hierophant", "Champion of Balance", "Serpent's Fang", "bye"]);
+		add(["Order Hierophant", "Champion of Balance", "Serpent's Fang", "bye"]);
 		converse (0) {
 			case "apologize" (remove):
 				if (gflags[0x02FC] && (!gflags[0x0313])) {
@@ -17568,13 +17568,13 @@ void Func03B1 shape#(0x3B1) () {
 				say("\"Could it be that thou dost not know of Calithiss the Avenger and our holy crusade?");
 				say("\"But, if thou art the Champion of Balance, perhaps thou hast spent thy life as an Acolyte on the Isle of Crypts.");
 				say("\"I shall honor thy title by telling thee the tale. If art an imposter, it shall be apparent soon enough... For thou wilt never survive what lies ahead.\"");
-				UI_add_answer(["Avenger", "holy crusade", "Isle of Crypts", "what lies ahead"]);
+				add(["Avenger", "holy crusade", "Isle of Crypts", "what lies ahead"]);
 				fallthrough;
 
 			case "Avenger" (remove):
 				say("\"Before the War of Imbalance began, Calithiss was known as the Steadfast. But after the foul murder of Ssithnos she named herself the Avenger.\"");
 				UI_push_answers();
-				UI_add_answer(["War of Imbalance", "Ssithnos", "nothing more"]);
+				add(["War of Imbalance", "Ssithnos", "nothing more"]);
 				fallthrough;
 
 			case "War of Imbalance" (remove):
@@ -17582,7 +17582,7 @@ void Func03B1 shape#(0x3B1) () {
 				    var0001,
 				    ". I cannot imagine how one could walk the shining path, swayed by neither Order nor Chaos. I do not see how it is humanly possible.");
 				say("\"But there has always been those few called to serve all Ophidians, and they followed the Great Hierophant. But followers of Chaos slew the last Great Hierophant and plunged the land into war, for there was no one to maintain Balance.\"");
-				UI_add_answer(["shining path", "Ophidians"]);
+				add(["shining path", "Ophidians"]);
 				fallthrough;
 
 			case "shining path" (remove):
@@ -17605,7 +17605,7 @@ void Func03B1 shape#(0x3B1) () {
 				    var0001,
 				    ". The wisdom of the Great Earth Serpent shone in him.");
 				say("\"It was my honor to meet him once when I was a young warrior, when he came to the Temple of Discipline. That was long before he met his tragic end.\"");
-				UI_add_answer(["Great Earth Serpent", "young warrior", "Temple of Discipline"]);
+				add(["Great Earth Serpent", "young warrior", "Temple of Discipline"]);
 				fallthrough;
 
 			case "Great Earth Serpent" (remove):
@@ -17615,18 +17615,18 @@ void Func03B1 shape#(0x3B1) () {
 				    ". Do not take this amiss, for I do not mean to disparage thee. But...");
 				say("\"What hope is there for thee, the Champion of Balance, to restore Balance if the Great Hierophant is dead? Without him to voice the will of the Great Earth Serpent, how canst thou hope to succeed?\"");
 				UI_push_answers();
-				UI_add_answer(["I know not.", "All shall be revealed later.", "There is no hope."]);
+				add(["I know not.", "All shall be revealed later.", "There is no hope."]);
 				fallthrough;
 
 			case "I know not.":
-				UI_remove_answer(["I know not.", "All shall be revealed later.", "There is no hope."]);
+				remove(["I know not.", "All shall be revealed later.", "There is no hope."]);
 				say("\"Alas, I had hoped that thou wouldst know what was to happen. Now I do not know whether to believe that thou art not the Champion of Balance, or whether thou art simply ignorant of thy fate.");
 				say("\"I must consider this... It is not unusual for a warrior to be sent into battle without knowing what he shall face, but I had expected a pawn of prophecy to be more... informed.\"");
 				UI_pop_answers();
 				fallthrough;
 
 			case "All shall be revealed later.":
-				UI_remove_answer(["I know not.", "All shall be revealed later.", "There is no hope."]);
+				remove(["I know not.", "All shall be revealed later.", "There is no hope."]);
 				say("\"Thou dost answer my question with an easy evasion. This either means that thou knowest not, or that thou wilt not tell me.");
 				say("\"If thou knowest not, it means that thou art either not the Champion of Balance, or that thou art ignorant of thy fate.");
 				say("\"If thou art not the Champion of Balance, I pity thee for thou art not long for this life. If thou art ignorant of thy fate, it is nothing to cause thee shame. Many warriors go to battle uncertain of their fate.");
@@ -17635,7 +17635,7 @@ void Func03B1 shape#(0x3B1) () {
 				fallthrough;
 
 			case "There is no hope.":
-				UI_remove_answer(["I know not.", "All shall be revealed later.", "There is no hope."]);
+				remove(["I know not.", "All shall be revealed later.", "There is no hope."]);
 				say("\"Thou art truly worthy of the title Champion of Balance. Only a true warrior understands that duty is all that remains when hope is lost.");
 				say("\"I salute thee, ",
 				    var0001,
@@ -17645,12 +17645,12 @@ void Func03B1 shape#(0x3B1) () {
 
 			case "young warrior" (remove):
 				say("\"I have not always been as thou dost see me now. I have spent a lifetime becoming worthy of this honor.\"");
-				UI_add_answer("honor");
+				add("honor");
 				fallthrough;
 
 			case "honor" (remove):
 				say("\"I was once flesh and blood, like thee, a warrior of Order. I was chosen to be tested shortly before the war began.\"");
-				UI_add_answer("tested");
+				add("tested");
 				fallthrough;
 
 			case "tested" (remove):
@@ -17664,7 +17664,7 @@ void Func03B1 shape#(0x3B1) () {
 				    var0001,
 				    ". It was my privilege to serve as a guard for the Master of Discipline. It was there that the long road to this keep began.");
 				say("\"The Temple is the primary staging and training area for our efforts in this accursed war. It is the headquarters of the High Command.\"");
-				UI_add_answer("High Command");
+				add("High Command");
 				fallthrough;
 
 			case "High Command" (remove):
@@ -17675,7 +17675,7 @@ void Func03B1 shape#(0x3B1) () {
 			case "holy crusade" (remove):
 				say("\"The followers of Chaos broke the Teaching and plunged the land into war. It is they who murdered the Great Hierophant. It is they who have killed thousands of peaceful followers of Order.");
 				say("\"The followers of Chaos must be held responsible for their crimes. There is no Great Hierophant to oversee justice, so it must fall to Order to see that the shedding of blood is met in kind until Chaos bows before Order, and Balance is restored.\"");
-				UI_add_answer("Teaching");
+				add("Teaching");
 				fallthrough;
 
 			case "Teaching" (remove):
@@ -17688,14 +17688,14 @@ void Func03B1 shape#(0x3B1) () {
 				say("\"How canst thou be the Champion of Balance and not know of the Isle of Crypts?! I suspect thee to be an imposter with each question thou dost utter!");
 				say("\"But I have been taught that it is the duty of all people to aid a pawn of prophecy. I must hold fast to the belief that, if thou art false, thou wilt fall to a fate worse than any I could mete out.");
 				say("\"So I shall tell thee what little a warrior of Order knows. I hope that it instructs thee well, if thou art truly the Champion of Balance, for thou art woefully ignorant of thy duty.\"");
-				UI_add_answer("Tell me.");
+				add("Tell me.");
 				fallthrough;
 
 			case "Tell me." (remove):
 				say("\"The Isle of Crypts is the very heart of Balance. It is believed that the island was once the dwelling place of the Great Earth Serpent, before He journeyed into the Void to bring Balance to the universe.");
 				say("\"It is common knowledge that this hallowed ground is the final resting place of all the Great Hierophants... though I know not if this is true of poor Sithnos.");
 				say("\"It is also said that the island is the home of the Acolytes of Balance, though I would have thought that thou wouldst have known more of this than I.\"");
-				UI_add_answer("Where is the island?");
+				add("Where is the island?");
 				fallthrough;
 
 			case "Where is the island?" (remove):
@@ -17708,7 +17708,7 @@ void Func03B1 shape#(0x3B1) () {
 				say("\"If thou art truly the Champion of Balance, which I begin to doubt more strongly, then thou must have the Silver Seed to restore Balance to the world.");
 				say("\"While I will freely tell thee that it is hidden here within this keep, I shall not tell thee where. Thou must be truly illumined before thou wilt find the Seed... *However, I shall tell thee that the magical orbs have been lost or scattered.");
 				say("\"It shall be up to thee to overcome the hazards of this region to obtain these orbs. If thou dost survive in these attempts, I shall be more disposed to believe that thou art the Champion of Balance.\"");
-				UI_add_answer(["Silver Seed", "magical orbs"]);
+				add(["Silver Seed", "magical orbs"]);
 				fallthrough;
 
 			case "Silver Seed" (remove):
@@ -17721,7 +17721,7 @@ void Func03B1 shape#(0x3B1) () {
 				    var0001,
 				    ". My conscious will not allow me to tell thee any more on this subject. I still cannot believe that thou art the Champion of Balance. So thou must find thy own answers. I have aided thee enough.");
 				say("\"The only thing I will tell thee is that thou shouldst search the areas adjacent to this keep for the orbs. They have been widely scattered... And, take care for those areas are dangerous.\"");
-				UI_add_answer("dangerous");
+				add("dangerous");
 				fallthrough;
 
 			case "dangerous" (remove):
@@ -17740,7 +17740,7 @@ void Func03B1 shape#(0x3B1) () {
 				    ". According to legend, only the Champion of Balance may bear it... all others would perish. However, I am no Mage. I do not know if this is true.");
 				if (!gflags[0x0300]) {
 					say("\"It is said that the Champion will restore Balance and heal our land. As it appears that thou art this long-awaited Champion, I have something which should aid thee.\"");
-					UI_add_answer("What is it?");
+					add("What is it?");
 				} else {
 					say("\"I hope thou art finding the key ring to be of use, ",
 					    var0001,
@@ -17756,7 +17756,7 @@ void Func03B1 shape#(0x3B1) () {
 				say("\"I hope that thou shall find it useful to thee.\"");
 				var0004 = Func099B(0xFE9C, 0x0001, 0x01E5, 0xFE99, 0x0000, false, true);
 				gflags[0x0300] = true;
-				UI_add_answer(["Who crafted it?", "Why give it to me?"]);
+				add(["Who crafted it?", "Why give it to me?"]);
 				fallthrough;
 
 			case "Who crafted it?" (remove):
@@ -17874,10 +17874,10 @@ void Func03B2 shape#(0x3B2) () {
 				gflags[0x026F] = false;
 			}
 		}
-		UI_add_answer(["healing", "information", "bye"]);
+		add(["healing", "information", "bye"]);
 		if (UI_get_array_size(Func08FB()) > 0x0000) {
 			say("\"Ah, one of thy companions hath been slain. 'Tis within my power to heal thy friend if thou dost wish...\"");
-			UI_add_answer("resurrection");
+			add("resurrection");
 		}
 		var0009 = 0x0000;
 		var000A = 0x0006;
@@ -17900,7 +17900,7 @@ void Func03B2 shape#(0x3B2) () {
 					say("\"I have been here at Serpent's Fang longer than most. Perhaps I can aid thee with information. What dost thou wish to know of?\"");
 					UI_push_answers();
 					var0009 = 0x0001;
-					UI_add_answer(["people", "places", "strange items", "nothing more"]);
+					add(["people", "places", "strange items", "nothing more"]);
 				} else {
 					say("\"I must be about my duties. Perhaps we can discuss this another time, my friend.\"");
 				}
@@ -17912,7 +17912,7 @@ void Func03B2 shape#(0x3B2) () {
 				    ". I can tell thee what I know, but it is not much. Whom here at Serpent's Fang dost thou wish to know of?\"");
 				UI_push_answers();
 				var0009 = 0x0002;
-				UI_add_answer(["Isstanar", "Elissa", "Tsandar", "Guards", "Strangers", "nothing more"]);
+				add(["Isstanar", "Elissa", "Tsandar", "Guards", "Strangers", "nothing more"]);
 				fallthrough;
 
 			case "places" (remove):
@@ -17921,7 +17921,7 @@ void Func03B2 shape#(0x3B2) () {
 				    ". Which dost thou wish to know of?\"");
 				UI_push_answers();
 				var0009 = 0x0002;
-				UI_add_answer(["Abandoned Outpost", "The Maze", "Aram-Dol's Lair", "nothing more"]);
+				add(["Abandoned Outpost", "The Maze", "Aram-Dol's Lair", "nothing more"]);
 				fallthrough;
 
 			case "strange items" (remove):
@@ -17929,21 +17929,21 @@ void Func03B2 shape#(0x3B2) () {
 				UI_push_answers();
 				var0009 = 0x0002;
 				if (var0003) {
-					UI_add_answer("Loriel's Gift");
+					add("Loriel's Gift");
 				}
 				if (var0004) {
-					UI_add_answer("Gauntlets");
+					add("Gauntlets");
 				}
 				if (var0005) {
-					UI_add_answer("Axe");
+					add("Axe");
 				}
 				if (var0006) {
-					UI_add_answer("Ring");
+					add("Ring");
 				}
 				if (var0007) {
-					UI_add_answer("Helm");
+					add("Helm");
 				}
-				UI_add_answer("nothing more");
+				add("nothing more");
 				fallthrough;
 
 			case "Gauntlets" (remove):
@@ -18096,14 +18096,14 @@ void Func03B3 shape#(0x3B3) () {
 		} else {
 			if (gflags[0x02FC] || gflags[0x0313]) {
 				say("\"I am honored to see thee again, Champion of Balance.\"");
-				UI_add_answer("Congratulations");
+				add("Congratulations");
 			} else {
 				say("\"Forgive my rudeness, ",
 				    var0001,
 				    ". I fear I am not yet accustomed to the title of SubCommander.\"");
 			}
 		}
-		UI_add_answer(["Train", "SubCommander", "Amulet of Balance", "bye"]);
+		add(["Train", "SubCommander", "Amulet of Balance", "bye"]);
 		converse (0) {
 			case "Congratulations" (remove):
 				if (gflags[0x02FC] && (!gflags[0x0313])) {
@@ -18126,12 +18126,12 @@ void Func03B3 shape#(0x3B3) () {
 			case "SubCommander" (remove):
 				say("\"When I was assigned to this garrison, I was Senior File Leader. Then, nine months ago, when those Chaos fiends took Commander Ardiniss, I was was made Garrison Commander.");
 				say("\"Naturally, now that Isstanar is here, I have become the SubCommander.\"");
-				UI_add_answer(["Senior File Leader", "Chaos fiends", "Commander Ardiniss", "Isstanar"]);
+				add(["Senior File Leader", "Chaos fiends", "Commander Ardiniss", "Isstanar"]);
 				fallthrough;
 
 			case "Senior File Leader" (remove):
 				say("\"Ones rank denotes how many warriors one is responsible for. It is always an even number of men, measured in hands -- or groups of five.\"");
-				UI_add_answer(["rank", "even number"]);
+				add(["rank", "even number"]);
 				fallthrough;
 
 			case "rank" (remove):
@@ -18155,26 +18155,26 @@ void Func03B3 shape#(0x3B3) () {
 				    ". He was responsible for carving this keep out of hostile Chaos territory.");
 				say("\"No warrior could match the Commander's mind for Logic. Yet even Logic is no match for the sheer number of Chaos followers that fell on us that day...");
 				say("\"I regret that we were unable to wrest his body from those vile murderers. Ardiniss deserved a proper warrior's funeral.\"");
-				UI_add_answer(["What is this place?", "sheer number"]);
+				add(["What is this place?", "sheer number"]);
 				fallthrough;
 
 			case "What is this place?" (remove):
 				say("\"The Order High Command designated this keep as the Serpent's Fang. But our troops call it DeathWatch.");
 				say("\"The battles have long since raged beyond us. It is our sad duty to continue to hold DeathWatch from any retreating Chaos minions.");
 				say("\"We long for word of how the War of Imbalance turns.\"");
-				UI_add_answer(["Order High Command", "battles"]);
+				add(["Order High Command", "battles"]);
 				fallthrough;
 
 			case "Order High Command" (remove):
 				say("\"All respect to them!");
 				say("\"The High Command are the officers that report directly to the Order Hierophant. It is their wisdom that will fulfill the will of the Order Serpent to unite the world under the Ethicality and Discipline of Order.\"");
-				UI_add_answer(["Order Hierophant", "Order Serpent", "Ethicality", "Discipline"]);
+				add(["Order Hierophant", "Order Serpent", "Ethicality", "Discipline"]);
 				fallthrough;
 
 			case "Order Hierophant" (remove):
 				say("\"The Order Hierophant is our spiritual leader. She is the Voice of the Order Serpent. I would follow her orders even into the very face of death.");
 				say("\"After those... those... Chaos monsters murdered the Great Hierophant, it was only natural that command of the land fall to Order. We will make them all pay for their crime!\"");
-				UI_add_answer("Great Hierophant");
+				add("Great Hierophant");
 				fallthrough;
 
 			case "Great Hierophant" (remove):
@@ -18196,7 +18196,7 @@ void Func03B3 shape#(0x3B3) () {
 				say("\"Ethicality is one of the major tenets of Order, ",
 				    var0001,
 				    ". By forcing those depraved followers of Chaos to conform with the accepted moral standards of Order we shall end the decadence that Tolerance has spread.\"");
-				UI_add_answer("Tolerance");
+				add("Tolerance");
 				fallthrough;
 
 			case "Tolerance" (remove):
@@ -18208,7 +18208,7 @@ void Func03B3 shape#(0x3B3) () {
 			case "Discipline" (remove):
 				say("\"Discipline is what gives meaning to my life! Once we have yoked the laggard followers of Chaos to the Discipline of Order, there will be peace in the land!");
 				say("\"It matters not if one has no Enthusiasm for one's orders. Those in command know what must be done, that is enough for a true warrior.\"");
-				UI_add_answer("Enthusiasm");
+				add("Enthusiasm");
 				fallthrough;
 
 			case "Enthusiasm" (remove):
@@ -18221,7 +18221,7 @@ void Func03B3 shape#(0x3B3) () {
 				say("\"For more than two hands of years, Order has fought only a holding battle against the forces of Chaos. Nothing we did could give us an advantage over their numbers.");
 				say("\"But now that we have the automatons, nothing can stand in our way! DeathWatch was situated on the spear's point in the confrontation... Now we guard the lines of retreat.");
 				say("\"I only wish we knew more than what Commander Isstanar had to tell us when he arrived a few weeks ago.\"");
-				UI_add_answer(["automatons", "DeathWatch"]);
+				add(["automatons", "DeathWatch"]);
 				fallthrough;
 
 			case "automatons" (remove):
@@ -18245,7 +18245,7 @@ void Func03B3 shape#(0x3B3) () {
 				    "! Isstanar has forsaken the cares of the flesh and taken the body of an automaton!");
 				say("\"Eternal life and service to Order are his. It is quite an honor to have him assigned as our new Commander. I am proud that he has allowed me to become his aide.");
 				say("\"Perhaps one day I too will be worthy of a Commander's position... And I shall not have to make these endless circuits of a nearly empty garrison!\"");
-				UI_add_answer("taken the body");
+				add("taken the body");
 				fallthrough;
 
 			case "taken the body" (remove):
@@ -18256,14 +18256,14 @@ void Func03B3 shape#(0x3B3) () {
 			case "Amulet of Balance" (remove):
 				say("\"Thou dost not know what thou dost wear?! Couldst thou truly be the warrior of prophecy and not know what it is that thou dost wear?");
 				say("\"Perhaps I should send thee to speak with Surok. He is the closest thing we have to a Keeper of Knowledge. I canst tell thee what I know, but I fear that it will do thee little good.\"");
-				UI_add_answer(["warrior of prophecy", "Surok"]);
+				add(["warrior of prophecy", "Surok"]);
 				fallthrough;
 
 			case "warrior of prophecy" (remove):
 				say("\"When the Great Hierophant was struck down, tales spread through the land saying that a warrior would arise to avenge the death of Sithnos.");
 				say("\"The Amulet thou dost wear is one that only the Champion of Balance could wear. I do not know how thou couldst wear it and live, if thou art not the chosen Champion.");
 				say("\"But I do not understand how thou couldst not know of thy duty, if thou art the chosen Champion. This is most perplexing... My Logic does not seem equal to the task. Speak with Isstanar or Surok.\"");
-				UI_add_answer("Champion of Balance");
+				add("Champion of Balance");
 				fallthrough;
 
 			case "Champion of Balance" (remove):
@@ -18274,7 +18274,7 @@ void Func03B3 shape#(0x3B3) () {
 			case "Surok" (remove):
 				say("\"Surok is our healer. He is very old, and I fear that his resolve is weakening. He has not yet failed in his duty, but I have advised Isstanar to watch him closely nonetheless.");
 				say("\"We cannot allow any lapse in Discipline. I suspect that he has lost sight of the absolute Ethicality.\"");
-				UI_add_answer(["resolve weakening", "lost sight"]);
+				add(["resolve weakening", "lost sight"]);
 				fallthrough;
 
 			case "resolve weakening" (remove):
@@ -18287,7 +18287,7 @@ void Func03B3 shape#(0x3B3) () {
 				say("\"It was my immediate thought that this creature might be Chaos' answer to our automatons. So I brought the beast to Surok to dissect.");
 				say("\"I have no way to prove this, of course, else I would have gone to Isstanar. But I believe that Surok was taken in with pity for the beast and allowed it to escape.");
 				say("\"The beast fled into the Endless Maze, and we have been unable to recapture it. I could not afford to risk any warriors to hunt it down, and we have not seen the monster again.\"");
-				UI_add_answer("Endless Maze");
+				add("Endless Maze");
 				fallthrough;
 
 			case "Endless Maze" (remove):
@@ -18448,20 +18448,20 @@ void Func03BD shape#(0x3BD) () {
 			say("\"Have they stopped looking for monsters yet? Can Yurel go home in peace now?\"");
 		}
 		if (gflags[0x02FA] == true) {
-			UI_add_answer("food");
+			add("food");
 		}
-		UI_add_answer(["monster", "peace", "home", "bye"]);
+		add(["monster", "peace", "home", "bye"]);
 		converse (0) {
 			case "monster" (remove):
 				say("\"Yurel knows not how he came to be this way... so unlike others. Yurel has been told that he was an... experiment long ago gone wrong.");
 				say("\"Yurel does not care. Yurel breaths. Yurel fears. Yurel loves. That makes Yurel the same as others, though Yurel wears fur or not.\"");
-				UI_add_answer("experiment");
+				add("experiment");
 				fallthrough;
 
 			case "experiment" (remove):
 				say("\"Yurel knows not who did such a thing, or why. The Master of Tolerance said that Chaos did not do such a thing. He said that it was those of Order.");
 				say("\"Yurel does not care. Yurel here now, and must find a way home. Yurel only wants to live... Do not others feel the same way?\"");
-				UI_add_answer(["Chaos", "Order"]);
+				add(["Chaos", "Order"]);
 				fallthrough;
 
 			case "Chaos" (remove):
@@ -18477,19 +18477,19 @@ void Func03BD shape#(0x3BD) () {
 			case "peace" (remove):
 				say("\"Yurel remembers peace. Yurel wishes to the end of his days without pain and fear. Yurel wishes what others wish, to see this fighting end.");
 				say("\"And food... Food would be good. Yurel is very hungry.\"");
-				UI_add_answer(["fighting", "food"]);
+				add(["fighting", "food"]);
 				fallthrough;
 
 			case "fighting" (remove):
 				say("\"There has been fighting for a long, long time now. Something happened when Yurel was away hunting. Yurel knows not what.");
 				say("\"Those of Order who captured Yurel called Yurel a murderer. But Yurel has never harmed others. Yurel has hunted to bring others food. Yurel knows not why they say such things.\"");
-				UI_add_answer("captured");
+				add("captured");
 				fallthrough;
 
 			case "captured" (remove):
 				say("\"Warriors of Order found Yurel out hunting. They beat Yurel and dragged Yurel to the cruel place beyond these walls. They wanted to cut Yurel up... So Yurel ran away. Yurel not dumb.");
 				say("\"Yearl hoped that if Yurel took their ball they would be too busy looking for it to hunt for Yurel. Yurel must have been right... They have not come for Yurel yet, and Yurel still has the ball.\"");
-				UI_add_answer("ball");
+				add("ball");
 				fallthrough;
 
 			case "ball" (remove):
@@ -18538,7 +18538,7 @@ void Func03BD shape#(0x3BD) () {
 			case "home" (remove):
 				say("\"Yurel's home was the Temple of Tolerance. They accepted Yurel there. Did not throw stones at Yurel. Let Yurel help, catch food for the others. Teach Yurel how to eat so as not to frighten others.");
 				say("\"Yurel had friends. Yurel had a safe place to sleep. Yurel worked hard and had fun. Yurel wants to go home...\"");
-				UI_add_answer("Temple of Tolerance");
+				add("Temple of Tolerance");
 				fallthrough;
 
 			case "Temple of Tolerance" (remove):
@@ -18720,7 +18720,7 @@ void Func03CF shape#(0x3CF) () {
 	if (event == 0x0009) {
 		UI_set_schedule_type(item, 0x0004);
 		UI_show_npc_face0(0xFECF, 0x0000);
-		UI_add_answer(["name", "bye"]);
+		add(["name", "bye"]);
 		var0003 = UI_get_npc_id(item);
 		if (var0003) {
 			say("\"How nice.  Thou hast returned to me.  Hast thou brought the ring?\"");
@@ -18747,40 +18747,40 @@ void Func03CF shape#(0x3CF) () {
 		converse (0) {
 			case "name" (remove):
 				say("\"I am the manifestation of the horrific images of thine mind's darkest recesses!  Ha!  I am Chaos Unrestrained!  Those cowards in the keep call me the Fiend!\"");
-				UI_add_answer(["unrestrained", "orb"]);
+				add(["unrestrained", "orb"]);
 				fallthrough;
 
 			case "unrestrained" (remove):
 				say("\"Fool!  Dost thou think those flimsy doors are my prison?  That the meager traps and inconsequential guards hold me here?  Nonsense!\"");
-				UI_add_answer("Why stay?");
+				add("Why stay?");
 				fallthrough;
 
 			case "Why stay?" (remove):
 				say("\"The ring!  I am a prisoner of my former self, for without the ring I cannot right the world!\"");
-				UI_add_answer(["former self", "ring", "right the world"]);
+				add(["former self", "ring", "right the world"]);
 				fallthrough;
 
 			case "former self" (remove):
 				say("\"Master of reagents!  Wizard beyond compare!\"");
-				UI_add_answer("master");
+				add("master");
 				fallthrough;
 
 			case "master" (remove):
 				say("\"I do not expect thee to comprehend, simpleton!  The Ring! Creator of the Ring!\"");
 				if (!(var0002 == true)) {
-					UI_add_answer("ring");
+					add("ring");
 				}
 				fallthrough;
 
 			case "ring" (remove):
 				say("\"Thou must know of the Ring of Shal.  Even the King of Fools knows of its powers.  Any idiot can see what importance it bears to my ambitions.\"");
 				var0002 = true;
-				UI_add_answer(["ambitions", "powers"]);
+				add(["ambitions", "powers"]);
 				fallthrough;
 
 			case "right the world" (remove):
 				say("\"Order is folly!  The world has blinded itself to this truth, and I shall force them to see!\"");
-				UI_add_answer("see");
+				add("see");
 				fallthrough;
 
 			case "see" (remove):
@@ -18793,17 +18793,17 @@ void Func03CF shape#(0x3CF) () {
 
 			case "powers" (remove):
 				say("\"Fool!  Ignoramus!  I should slay you and add your bones to my collection!  Thou knowest well the powers of the ring!  If I had the reagents to spare I would strike thee down with a spell most dire!  If I had the ring...\"");
-				UI_add_answer("reagents");
+				add("reagents");
 				fallthrough;
 
 			case "reagents" (remove):
 				say("\"Thou art not merely feigning stupidity, art thou?  With it on my finger, I need never use reagents, for it simulates their magical properties!  That is why I created the ring!  That is why I pledged myself to Chaos!\"");
-				UI_add_answer("created");
+				add("created");
 				fallthrough;
 
 			case "created" (remove):
 				say("\"Yes, you fool.  I was Shal.  But Shal had not the knowledge to create his life's goal, so he called upon greater powers than he to complete his work.  The Chaos Serpent granted him that power, but there was a price.\"");
-				UI_add_answer(["price", "greater powers"]);
+				add(["price", "greater powers"]);
 				fallthrough;
 
 			case "greater powers" (remove):
@@ -18812,12 +18812,12 @@ void Func03CF shape#(0x3CF) () {
 
 			case "price" (remove):
 				say("\"Price?  He was shown the error of his ways!  It was a gift! He was granted a year's time to complete his work, at which time he would be changed...into me.  Bless the Chaos Serpent for his Wisdom!\"");
-				UI_add_answer(["changed", "time"]);
+				add(["changed", "time"]);
 				fallthrough;
 
 			case "changed" (remove):
 				say("\"My dear moron, Shal was shown the wisdom of Chaos!  All traces of Order were removed from him; he became a paragon of Chaos.\"");
-				UI_add_answer("paragon");
+				add("paragon");
 				fallthrough;
 
 			case "paragon" (remove):
@@ -18826,22 +18826,22 @@ void Func03CF shape#(0x3CF) () {
 
 			case "time" (remove):
 				say("\"The Chaos Serpent was far too generous in granting him a full year.  Had it granted him but a month, I would already have saved the world!\"");
-				UI_add_answer("generous");
+				add("generous");
 				fallthrough;
 
 			case "generous" (remove):
 				say("\"Shal had time to hide the ring from me. He did give the ring to an animated suit of armor, with the orders to hide and guard it, even from himself.  I have not yet been able to recover it.\"");
-				UI_add_answer(["recover", "armor"]);
+				add(["recover", "armor"]);
 				fallthrough;
 
 			case "armor" (remove):
 				say("\"The predecessors to automatons.  They cannot speak and can barely follow orders.  They make idiots like thyself seem intelligent.\"");
-				UI_add_answer("orders");
+				add("orders");
 				fallthrough;
 
 			case "orders" (remove):
 				say("\"I would not be surprised if the suit of armor forgot entirely about it.\"");
-				UI_add_answer("forgot");
+				add("forgot");
 				fallthrough;
 
 			case "forgot" (remove):
@@ -18868,7 +18868,7 @@ void Func03CF shape#(0x3CF) () {
 
 			case "orb" (remove):
 				say("\"I do not possess this orb, moron, nor have I any desire to. I do, however, recall an entertaining diversion perhaps one year ago.  A crazed soldier of Chaos stole it and brought it into my domain.\"");
-				UI_add_answer("soldier");
+				add("soldier");
 				fallthrough;
 
 			case "soldier" (remove):
@@ -18956,12 +18956,12 @@ void Func03D2 shape#(0x3D2) () {
 		UI_show_npc_face0(0xFECA, 0x0000);
 		if (var0000 == false) {
 			say("\"A human. How interesting. What dost thou want?\"");
-			UI_add_answer(["Who art thou?", "bye"]);
+			add(["Who art thou?", "bye"]);
 		} else {
 			say("\"Greetings, ",
 			    var0002,
 			    ". How may I be of service to thee?\"");
-			UI_add_answer(["information", "riddles", "bye"]);
+			add(["information", "riddles", "bye"]);
 		}
 		converse (0) {
 			case "Who art thou?" (remove):
@@ -18996,22 +18996,22 @@ void Func03D2 shape#(0x3D2) () {
 				if (var000D == "I'm looking for something") {
 					say("\"Yes, well... are not we all. Ahem. I suppose that I should not bore thee with my sophomoric philosophy.\"");
 					say("\"Well, I won't ask thee what it is that thou are searching for. However, if thou art willing to stay a while I might be inclined to help thee find whatever it is thou dost seek.\"");
-					UI_add_answer("help");
+					add("help");
 				}
 				if (var000D == "I'm lost") {
 					say("\"I'm sorry to hear that. I myself rarely venture far from my domain.\"");
-					UI_add_answer("rarely");
+					add("rarely");
 				}
 				say("\"Now that I know something about thee, it is only fair that I tell thee that my name is Draxinar. My friends, however, call me 'Stumpy'.\"");
 				say("\"If thou dost desire to stay for a while I shall not prevent thee. Indeed, thy company would be most welcome.\"");
 				say("\"And perhaps if thou art willing, I shall puzzle thee with my riddles.\"");
 				say("\"Now then, how may I help thee?\"");
-				UI_add_answer(["riddles", "information", "company", "Stumpy?"]);
+				add(["riddles", "information", "company", "Stumpy?"]);
 				fallthrough;
 
 			case "riddles":
 				UI_push_answers();
-				UI_remove_answer("riddles");
+				remove("riddles");
 				if (var0007) {
 					say("\"As I have said before, I am very good at riddles. Art thou sure that thou doth want to play?\"");
 				} else {
@@ -19030,7 +19030,7 @@ void Func03D2 shape#(0x3D2) () {
 							Func0822();
 						} else {
 							say("\"So be it. Perhaps thou wilt enjoy a riddle later.\"");
-							UI_add_answer("bye");
+							add("bye");
 						}
 					}
 					if (gflags[0x0309] && (gflags[0x030A] && ((!gflags[0x030B]) && (!gflags[0x030C])))) {
@@ -19039,7 +19039,7 @@ void Func03D2 shape#(0x3D2) () {
 							Func0823();
 						} else {
 							say("\"So be it. Perhaps thou wilt enjoy a riddle later.\"");
-							UI_add_answer("bye");
+							add("bye");
 						}
 					}
 					if (gflags[0x0309] && (gflags[0x030A] && (gflags[0x030B] && (!gflags[0x030C])))) {
@@ -19066,14 +19066,14 @@ void Func03D2 shape#(0x3D2) () {
 					}
 				} else {
 					say("\"That is unfortunate. I had hoped to stump thee with my riddles. Later, perhaps, thou wilt change thy mind.\"");
-					UI_add_answer("bye");
+					add("bye");
 				}
 				UI_pop_answers();
 				fallthrough;
 
 			case "information" (remove):
 				say("\"And what dost thou wish to know?\"");
-				UI_add_answer(["people", "places", "things"]);
+				add(["people", "places", "things"]);
 				fallthrough;
 
 			case "Stumpy?" (remove):
@@ -19092,7 +19092,7 @@ void Func03D2 shape#(0x3D2) () {
 
 			case "company" (remove):
 				say("\"It hath been years since I last talked with anyone. Thou wouldst not believe how lonely the life of a dragon can be.\"");
-				UI_add_answer("lonely");
+				add("lonely");
 				fallthrough;
 
 			case "lonely" (remove):
@@ -19105,22 +19105,22 @@ void Func03D2 shape#(0x3D2) () {
 
 			case "rarely" (remove):
 				say("\"My cave hast grown comfortable. I see little reason to traipse about the hinterlands like some hatchling, especially when one considers the many hazards in this area.\"");
-				UI_add_answer("hazards");
+				add("hazards");
 				fallthrough;
 
 			case "hazards" (remove):
 				if (var0009 == true) {
 					say("\"I have already mentioned the Opidian civil war, but I don't think thou art aware of the the liche known as Aram-Dol.\"");
-					UI_add_answer("Aram-Dol");
+					add("Aram-Dol");
 				} else {
 					say("\"Truly thou art not from these parts if thou art not aware of the civil war the Ophidians wage against each other, or the perils of Aram-Dol's domain!\"");
-					UI_add_answer(["civil war", "Aram-Dol"]);
+					add(["civil war", "Aram-Dol"]);
 				}
 				fallthrough;
 
 			case "Ophidians" (remove):
 				say("\"Yes, I have heard of these people and I don't particularly care for them.\"");
-				UI_add_answer("don't care for them");
+				add("don't care for them");
 				fallthrough;
 
 			case "The Fiend" (remove):
@@ -19164,7 +19164,7 @@ void Func03D2 shape#(0x3D2) () {
 						}
 						say("\"Aram-Dol is not easily reached. The liche hath surrounded his lair with many creatures.\"");
 						say("\"If I were thee, I would avoid his domain... Although, I have heard that the liche possesses two fabulous treasures.\"");
-						UI_add_answer(["fabulous treasures", "creatures"]);
+						add(["fabulous treasures", "creatures"]);
 					} else {
 						say("\"Very well. What shall we discuss next?\"");
 					}
@@ -19181,12 +19181,12 @@ void Func03D2 shape#(0x3D2) () {
 					say("\"Aram-Dol is not easily reached. The liche hath surrounded his lair with many creatures.\"");
 					say("\"If I were thee, I would avoid his domain... Although, I have heard that the liche possesses two fabulous treasures.\"");
 				}
-				UI_add_answer(["fabulous treasures", "creatures"]);
+				add(["fabulous treasures", "creatures"]);
 				fallthrough;
 
 			case "Longtooth" (remove):
 				say("\"Longtooth is my aunt's son. A sorrier\tdragon thou shalt never find! Of course, what happened to him was not his fault.\"");
-				UI_add_answer("what happened?");
+				add("what happened?");
 				fallthrough;
 
 			case "what happened?" (remove):
@@ -19204,7 +19204,7 @@ void Func03D2 shape#(0x3D2) () {
 			case "creatures" (remove):
 				say("\"The liche uses dead humans that he has reanimated as guardians. To reach Aram-Dol, one must traverse a veritable gauntlet of undead creatures.\"");
 				say("\"There are also the abominations called the 'Arachnians'.\"");
-				UI_add_answer("Arachnians");
+				add("Arachnians");
 				fallthrough;
 
 			case "Arachnians" (remove):
@@ -19224,7 +19224,7 @@ void Func03D2 shape#(0x3D2) () {
 				say("\"They were wrong. They paid for their foolishness and greed with their lives.\"");
 				say("\"Aye, tis true. I have a treasure. What self-respecting dragon doesn't have a treasure horde?\"");
 				say("\"Of course, there is my aunt's son Longtooth. A sorrier dragon thou shalt never find! Of course, what happened to him was not his fault.\"");
-				UI_add_answer("Longtooth");
+				add("Longtooth");
 				fallthrough;
 
 			case "people" (remove):
@@ -19237,12 +19237,12 @@ void Func03D2 shape#(0x3D2) () {
 					Func097F(var000E, "@What arrogance!@", 0x0000);
 				}
 				say("\"To answer thy question, however, I know, or have heard of, many 'people'. Who, in particular, wert thou interested in?\"");
-				UI_add_answer(["Ophidians", "The Fiend", "Aram-Dol", "Longtooth"]);
+				add(["Ophidians", "The Fiend", "Aram-Dol", "Longtooth"]);
 				fallthrough;
 
 			case "not human" (remove):
 				say("\"Aye. This new commander is some sort of magical construct. I believe the Ophidians call these creatures 'automatons'. I daresay that it is probably an improvement...\"");
-				UI_add_answer("automatons");
+				add("automatons");
 				var000E = Func0992(0x0001, 0x0000, 0x0000, false);
 				if ((var000E == 0xFFFD) || ((var000E == 0xFFFE) || (var000E == 0xFFFF))) {
 					var000F = "@Now see here! There is no cause to be insulting!@";
@@ -19259,7 +19259,7 @@ void Func03D2 shape#(0x3D2) () {
 
 			case "places" (remove):
 				say("\"What place art thou interested in?\"");
-				UI_add_answer(["Serpent's Fang", "The Maze", "home"]);
+				add(["Serpent's Fang", "The Maze", "home"]);
 				fallthrough;
 
 			case "home" (remove):
@@ -19269,7 +19269,7 @@ void Func03D2 shape#(0x3D2) () {
 					say("\"Thou art a most unusual human.\"");
 					say("\"I moved to this cave one hundred and twelve years ago. It was not\teasy finding the perfect cave -- I have my standards, afterall. And thou wouldst not believe how dificult it is to find a good cave.\"");
 					say("\"Anyway, I had spent weeks searching and was about to give up the search when, quite by accident, I wandered into this cavern.\"");
-					UI_add_answer("cavern");
+					add("cavern");
 				} else {
 					say("\"I understand. I can not blame thee for not being interested. It is not a particularly fascinating topic.\"");
 				}
@@ -19279,12 +19279,12 @@ void Func03D2 shape#(0x3D2) () {
 				say("\"Serpent's Fang is what the Ophidians call that Keep of theirs. I don't really know much about the place except that the commander of the few humans that are left is not human.\"");
 				say("\"Frankly, I do not\tcare to know much about that place.\"");
 				say("\"As long as those humans stay out of my domain I shall reciprocate by not trespassing upon theirs.\"");
-				UI_add_answer("not human");
+				add("not human");
 				fallthrough;
 
 			case "things" (remove):
 				say("\"My goodness! Thou art a curious one! I suppose that I should inform thee of the numerous hazards that are found within our subterranean realm.\"");
-				UI_add_answer("hazards");
+				add("hazards");
 				fallthrough;
 
 			case "automatons" (remove):
@@ -19293,27 +19293,27 @@ void Func03D2 shape#(0x3D2) () {
 
 			case "don't care for them" (remove):
 				say("\"The Ophidians are the ill-mannered humans who built the large Keep not far from this cavern. Only a few of them are left in that Keep, however.\"");
-				UI_add_answer(["ill-mannered", "Keep"]);
+				add(["ill-mannered", "Keep"]);
 				fallthrough;
 
 			case "Keep" (remove):
 				say("\"The Ophidians call their keep 'Serpent's Fang'. I don't really know much about the place except that the commander of the few humans that are left is not human.\"");
 				say("\"Frankly, I do not\tcare to know much about that place.\"");
 				say("\"As long as those humans stay out of my domain I shall reciprocate by not trespassing upon theirs.\"");
-				UI_add_answer("not human");
+				add("not human");
 				fallthrough;
 
 			case "ill-mannered" (remove):
 				say("\"Before the Ophidians came to these caverns there existed a natural balance\tamongst the creatures that lived here. There was conflict, to be sure, but there existed a rythym to life.\"");
 				say("\"There was space and food enough for everyone. The Ophidians arrival disrupted the balance. They forced many creatures from their homes. And now they wage a war amongst themselves.\"");
 				say("\"Truly. I think I shall never understand humans.\"");
-				UI_add_answer("civil-war");
+				add("civil-war");
 				fallthrough;
 
 			case "civil-war" (remove):
 				say("\"Aye, these snake-lovers took up arms against one another. They have taken to slaughtering one another as easily as a hatchling takes to breathing fire...\"");
 				say("\"They have been fighting for at least a year I think.\"");
-				UI_add_answer(["why", "snake-lovers"]);
+				add(["why", "snake-lovers"]);
 				fallthrough;
 
 			case "why" (remove):
@@ -19324,7 +19324,7 @@ void Func03D2 shape#(0x3D2) () {
 			case "snake-lovers" (remove):
 				say("\"As I have said, I know little of your human rituals, but I do know that these Ophidians worship snakes.\"");
 				say("\"Now that I think about it, I remember hearing that they worship the forces of Order and Chaos, albeit in the forms of snakes.\"");
-				UI_add_answer("Order and Chaos?");
+				add("Order and Chaos?");
 				fallthrough;
 
 			case "Order and Chaos?" (remove):
@@ -19334,12 +19334,12 @@ void Func03D2 shape#(0x3D2) () {
 			case "cavern" (remove):
 				say("\"These caverns are fairly large, a fact that suited me because I myself am fairly large.\"");
 				say("\"This cave was perfect for me. I could come and go as I pleased, at least until Aram-Dol started expanding his territory.\"");
-				UI_add_answer("territory");
+				add("territory");
 				fallthrough;
 
 			case "territory" (remove):
 				say("\"Many years ago Aram-Dol created the Arachnian creatures. The liche released these creatures into these caverns. The foul beasts killed everything within their path. The vile creatures even managed to attack me in mass! I was very nearly slain. Fortunately for me, the Arachnians have a weakness.\"");
-				UI_add_answer(["weakness", "Arachnians"]);
+				add(["weakness", "Arachnians"]);
 				fallthrough;
 
 			case "weakness" (remove):
@@ -19754,7 +19754,7 @@ void Func03F7 shape#(0x3F7) () {
 		if (gflags[0x02FC] || gflags[0x0313]) {
 			say("\"I am pleased to see thee, Champion of Balance.");
 			say("\"How might I be of service to thee?\"");
-			UI_add_answer("service");
+			add("service");
 		} else {
 			if (var0002 == false) {
 				say("\"I do not believe I have had the pleasure of meeting thee, ",
@@ -19762,12 +19762,12 @@ void Func03F7 shape#(0x3F7) () {
 				    ". I think it would be wise for thee to prove that thou art not a foul Chaos spy.");
 				say("\"Make no untoward moves, I warn thee, for I am Elissa, Order Mage of the First Rank.\"");
 				UI_set_npc_id(item, 0x0002);
-				UI_add_answer(["prove", "Chaos spy", "Mage of the First Rank"]);
+				add(["prove", "Chaos spy", "Mage of the First Rank"]);
 			} else if (var0002 == 0x0002) {
 				if (gflags[0x030D]) {
 					say("\"Ah, thou hast spoken with our Commander! Very good. What can I do for thee?\"");
 					UI_set_npc_id(item, 0x0001);
-					UI_add_answer("service");
+					add("service");
 				} else {
 					say("\"Begone from my sight, miscreant!\"");
 					abort;
@@ -19776,14 +19776,14 @@ void Func03F7 shape#(0x3F7) () {
 				say("\"How good it is to see thee again, ",
 				    var0001,
 				    "! How might I be of service to thee this day?\"");
-				UI_add_answer("service");
+				add("service");
 			}
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "prove" (remove):
 				say("\"Unless thou canst prove to me that thou dost not mean harm to DeathWatch, I shall have to turn thee over to Isstanar.  Thou wouldst find the experience most unpleasant.\"");
-				UI_add_answer(["DeathWatch", "Isstanar"]);
+				add(["DeathWatch", "Isstanar"]);
 				fallthrough;
 
 			case "DeathWatch" (remove):
@@ -19792,13 +19792,13 @@ void Func03F7 shape#(0x3F7) () {
 				say("\"But I must have assurances of thy identity, ",
 				    var0000,
 				    ", or things will go badly for thee.\"");
-				UI_add_answer("assurances");
+				add("assurances");
 				fallthrough;
 
 			case "assurances" (remove):
 				say("\"Thou must have some proof of thy identity...\"");
 				if ((!Func0942(0xFFFD)) || ((!Func0942(0xFFFE)) || (!Func0942(0xFFFF)))) {
-					UI_add_answer(["I need no proof!", "I am the Avatar!", "Amulet"]);
+					add(["I need no proof!", "I am the Avatar!", "Amulet"]);
 				} else if (Func0942(0xFFFD)) {
 					UI_show_npc_face1(0xFFFD, 0x0000);
 					say("\"",
@@ -19831,29 +19831,29 @@ void Func03F7 shape#(0x3F7) () {
 				    var0000,
 				    ". I mean no disrespect, but I have never heard of @the Avatar@ before.");
 				say("\"But if I might see the Amulet that they speak about, perhaps I can end this questioning now.\"");
-				UI_add_answer(["Amulet", "questioning"]);
+				add(["Amulet", "questioning"]);
 				fallthrough;
 
 			case "I need no proof!":
-				UI_remove_answer(["I need no proof!", "I am the Avatar!"]);
+				remove(["I need no proof!", "I am the Avatar!"]);
 				say("\"Art thou a member of the High Command? Art thou a Hierophant? I think not!");
 				say("\"Thine attitude dost seriously endanger thy freedom. I suggest that thou change it quickly.\"");
 				fallthrough;
 
 			case "I am the Avatar!":
-				UI_remove_answer(["I am the Avatar!", "I need no proof!"]);
+				remove(["I am the Avatar!", "I need no proof!"]);
 				say("\"I mean no disrespect, but I have never heard of @the Avatar@ before.\"");
 				fallthrough;
 
 			case "Amulet":
-				UI_remove_answer(["Amulet", "I am the Avatar!", "I need no proof!"]);
+				remove(["Amulet", "I am the Avatar!", "I need no proof!"]);
 				say("\"No, it cannot be! There has not been a Champion of Balance since before Ssithnos was murdered!");
 				say("\"I can scarcely believe my eyes! But the item is authentic, that much I am sure of...");
 				say("\"Forgive my doubts, ",
 				    var0001,
 				    ". I gave little credit to the stories. I thought that they were no more than folk tales born on the eve of war. I did not mean to offend thee.\"");
 				UI_set_npc_id(item, 0x0001);
-				UI_add_answer(["Champion of Balance", "Ssithnos", "stories"]);
+				add(["Champion of Balance", "Ssithnos", "stories"]);
 				fallthrough;
 
 			case "Champion of Balance" (remove):
@@ -19920,14 +19920,14 @@ void Func03F7 shape#(0x3F7) () {
 
 			case "Isstanar" (remove):
 				say("\"Thou wouldst know him, if thou hadst met him. He is the ultimate Order warrior! Nothing touches him. He is bound only by his duty.\"");
-				UI_add_answer(["ultimate warrior", "nothing touches him"]);
+				add(["ultimate warrior", "nothing touches him"]);
 				fallthrough;
 
 			case "ultimate warrior" (remove):
 				say("\"Isstanar is invincible! He cannot die. He does not need food or rest. His strength makes even a weapon unnecessary.");
 				say("\"What army, if filled with warriors such as Isstanar, could not march easily to victory? Soon this accursed war will be over, and I shall retire to a life of research.");
 				say("\"Who knows, perhaps some day -- once I am sure that I would still have the use of my magic -- I shall make the final sacrifice and become one such as Isstanar.\"");
-				UI_add_answer(["How can this be?", "final sacrifice"]);
+				add(["How can this be?", "final sacrifice"]);
 				fallthrough;
 
 			case "How can this be?" (remove):
@@ -19947,7 +19947,7 @@ void Func03F7 shape#(0x3F7) () {
 
 			case "Chaos spy" (remove):
 				say("\"Everyone knows that the tides of battle have turned since the High Command unleashed our secret weapon. Chaos would do anything to learn how to neutralize our advantage.\"");
-				UI_add_answer(["secret weapon", "neutralize"]);
+				add(["secret weapon", "neutralize"]);
 				fallthrough;
 
 			case "secret weapon" (remove):
@@ -19963,13 +19963,13 @@ void Func03F7 shape#(0x3F7) () {
 				say("\"But I should not jest so... Thou art a stranger and may mistake me. In truth, a Mage's rank reflects his ability.");
 				say("\"Those of the First Rank have mastered all spells. Those of the Second Rank have mastered the next lowest level of spells, and so on.");
 				say("\"Although our titles are different, I am equal in rank to SubCommander Tsandar.\"");
-				UI_add_answer("SubCommander Tsandar");
+				add("SubCommander Tsandar");
 				fallthrough;
 
 			case "SubCommander Tsandar" (remove):
 				say("\"Tsandar is now Isstanar's aide, though he commanded the garrison after Commander Ardiniss' death. Tsandar did not take his replacement very well, I fear.");
 				say("\"Tsandar's devotion to Order is strong, to be sure. But how could he expect to command now that Isstanar is here?\"");
-				UI_add_answer("Commander Ardiniss");
+				add("Commander Ardiniss");
 				fallthrough;
 
 			case "Commander Ardiniss" (remove):
@@ -20522,10 +20522,10 @@ void Func0401 object#(0x401) () {
 		UI_clear_item_say(0xFFFF);
 		if (UI_get_item_flag(0xFFFF, 0x0006)) {
 			UI_set_schedule_type(0xFFFF, 0x001F);
-			UI_add_answer("leave");
+			add("leave");
 		} else {
 			UI_run_schedule(0xFFFF);
-			UI_add_answer("join");
+			add("join");
 		}
 		if (var0000 == 0x001E) {
 			say("\"How good to see thee again, ",
@@ -20540,13 +20540,13 @@ void Func0401 object#(0x401) () {
 				say("\"And I have good news for thee, ",
 				    var0001,
 				    ".\"");
-				UI_add_answer("good news");
+				add("good news");
 			}
 			UI_set_npc_id(0xFFFF, 0x0000);
 			UI_add_to_party(0xFFFF);
 			gflags[0x0017] = true;
-			UI_remove_answer("join");
-			UI_add_answer(["leave"]);
+			remove("join");
+			add(["leave"]);
 		} else {
 			if (gflags[0x0006] && (!gflags[0x00B7])) {
 				say("\"",
@@ -20561,8 +20561,8 @@ void Func0401 object#(0x401) () {
 					UI_set_conversation_slot(0x0000);
 				}
 				UI_add_to_party(0xFFFF);
-				UI_remove_answer("join");
-				UI_add_answer("leave");
+				remove("join");
+				add("leave");
 				UI_set_new_schedules(0xFFFF, 0x0000, 0x001A, [0x097C, 0x0464]);
 			} else {
 				var0006 = UI_die_roll(0x0001, 0x0004);
@@ -20581,18 +20581,18 @@ void Func0401 object#(0x401) () {
 			}
 		}
 		if (UI_get_npc_id(0xFFFE) == 0x001E) {
-			UI_add_answer("Shamino's whereabouts");
+			add("Shamino's whereabouts");
 		}
 		if (UI_get_npc_id(0xFFFD) == 0x001E) {
-			UI_add_answer("Iolo's whereabouts");
+			add("Iolo's whereabouts");
 		}
 		if (UI_get_npc_id(0xFFDE) == 0x001E) {
-			UI_add_answer("Boydon's whereabouts");
+			add("Boydon's whereabouts");
 		}
 		if (gflags[0x0017] && ((!UI_get_item_flag(0xFFFF, 0x0006)) && UI_get_cont_items(0xFFFF, 0xFE99, 0xFE99, 0xFE99))) {
-			UI_add_answer("belongings");
+			add("belongings");
 		}
-		UI_add_answer(["bye"]);
+		add(["bye"]);
 		converse (0) {
 			case "belongings" (remove):
 				Func0829();
@@ -20619,9 +20619,9 @@ void Func0401 object#(0x401) () {
 					Func097F(0xFFFF, "@Be brave!@", 0x0000);
 					abort;
 				}
-				UI_remove_answer("join");
+				remove("join");
 				if (UI_get_array_size(UI_get_party_list2()) < 0x0005) {
-					UI_add_answer("leave");
+					add("leave");
 					say("\"With great pride!\"");
 					UI_add_to_party(0xFFFF);
 					gflags[0x0017] = true;
@@ -20639,7 +20639,7 @@ void Func0401 object#(0x401) () {
 				if (!gflags[0x0006]) {
 					say("\"Leave thee at a time such as this? Surely, thou dost jest. Onward!\"");
 				} else {
-					UI_add_answer("join");
+					add("join");
 					say("\"I hesitate to leave thee. But if thou dost insist...\"");
 					UI_remove_from_party(0xFFFF);
 					Func0829();
@@ -20798,10 +20798,10 @@ void Func0402 object#(0x402) () {
 		UI_clear_item_say(0xFFFE);
 		if (UI_get_item_flag(0xFFFE, 0x0006)) {
 			UI_set_schedule_type(0xFFFE, 0x001F);
-			UI_add_answer("leave");
+			add("leave");
 		} else {
 			UI_run_schedule(0xFFFE);
-			UI_add_answer("join");
+			add("join");
 		}
 		UI_show_npc_face0(0xFFFE, 0x0000);
 		if (gflags[0x0006] && (!gflags[0x02A2])) {
@@ -20828,17 +20828,17 @@ void Func0402 object#(0x402) () {
 				    ". I bear a message, as well as two presents.\"");
 				var000B = false;
 				var000C = false;
-				UI_add_answer(["message", "presents"]);
+				add(["message", "presents"]);
 				if (!gflags[0x0135]) {
-					UI_add_answer("news");
+					add("news");
 				}
 				if (gflags[0x013A]) {
-					UI_add_answer("How didst thou arrive?");
+					add("How didst thou arrive?");
 				}
 				if (gflags[0x012B]) {
-					UI_add_answer("death");
+					add("death");
 				}
-				UI_remove_answer("join");
+				remove("join");
 				break;
 labelFunc0402_02F8:
 				UI_add_to_party(0xFFFE);
@@ -20856,18 +20856,18 @@ labelFunc0402_02F8:
 				    ".\"");
 			}
 			if (UI_get_npc_id(0xFFFF) == 0x001E) {
-				UI_add_answer("Dupre's whereabouts");
+				add("Dupre's whereabouts");
 			}
 			if (UI_get_npc_id(0xFFFD) == 0x001E) {
-				UI_add_answer("Iolo's whereabouts");
+				add("Iolo's whereabouts");
 			}
 			if (UI_get_npc_id(0xFFDE) == 0x001E) {
-				UI_add_answer("Boydon's whereabouts");
+				add("Boydon's whereabouts");
 			}
 			if ((!UI_get_item_flag(0xFFFE, 0x0006)) && (UI_get_cont_items(0xFFFE, 0xFE99, 0xFE99, 0xFE99) && (gflags[0x0018] == true))) {
-				UI_add_answer("belongings");
+				add("belongings");
 			}
-			UI_add_answer(["bye"]);
+			add(["bye"]);
 		} while (false);
 		converse (0) {
 			case "belongings" (remove):
@@ -20955,9 +20955,9 @@ labelFunc0402_02F8:
 					Func097F(0xFFFE, "@Shocked!@", 0x0002);
 					abort;
 				}
-				UI_remove_answer("join");
+				remove("join");
 				if (UI_get_array_size(UI_get_party_list2()) < 0x0005) {
-					UI_add_answer("leave");
+					add("leave");
 					say("\"Most gratefully!\"");
 					UI_add_to_party(0xFFFE);
 					gflags[0x0018] = true;
@@ -20971,7 +20971,7 @@ labelFunc0402_02F8:
 				if (!gflags[0x0006]) {
 					say("\"But we have barely begun, Avatar! How can I stand idly here while the adventure awaits?\"");
 				} else {
-					UI_add_answer("join");
+					add("join");
 					say("\"If that is what thou dost wish...\"");
 					UI_remove_from_party(0xFFFE);
 					Func0863();
@@ -21203,13 +21203,13 @@ void Func0403 object#(0x403) () {
 		UI_show_npc_face0(0xFFFD, 0x0000);
 		if (UI_get_item_flag(0xFFFD, 0x0006)) {
 			UI_set_schedule_type(0xFFFD, 0x001F);
-			UI_add_answer("leave");
+			add("leave");
 		} else {
 			UI_run_schedule(0xFFFD);
-			UI_add_answer("join");
+			add("join");
 		}
 		if (var0000 == 0x001E) {
-			UI_remove_answer("join");
+			remove("join");
 			say("\"Thank the Virtues! Thou art whole and hale, ",
 			    var0001,
 			    "!\"");
@@ -21227,27 +21227,27 @@ void Func0403 object#(0x403) () {
 			UI_set_npc_id(0xFFFD, 0x0000);
 			UI_add_to_party(0xFFFD);
 			gflags[0x0019] = true;
-			UI_add_answer("leave");
+			add("leave");
 		} else {
 			say("\"Wouldst thou enjoy some idle conversation, ",
 			    var0001,
 			    ", or shall I embrace my lute and provide a musical interlude?\"");
-			UI_add_answer("a song");
+			add("a song");
 		}
 		if (UI_get_npc_id(0xFFFE) == 0x001E) {
-			UI_add_answer("Shamino's whereabouts");
+			add("Shamino's whereabouts");
 		}
 		if (UI_get_npc_id(0xFFFF) == 0x001E) {
-			UI_add_answer("Dupre's whereabouts");
+			add("Dupre's whereabouts");
 		}
 		if (UI_get_npc_id(0xFFDE) == 0x001E) {
-			UI_add_answer("Boydon's whereabouts");
+			add("Boydon's whereabouts");
 		}
 		if (gflags[0x0019] && (UI_get_cont_items(0xFFFD, 0xFE99, 0xFE99, 0xFE99) && (!UI_get_item_flag(0xFFFD, 0x0006)))) {
-			UI_add_answer("belongings");
+			add("belongings");
 		}
 		UI_show_npc_face0(0xFFFD, 0x0000);
-		UI_add_answer(["Gwenno", "bye"]);
+		add(["Gwenno", "bye"]);
 		converse (0) {
 			case "belongings" (remove):
 				if (UI_get_cont_items(0xFFFD, 0xFE99, 0xFE99, 0xFE99)) {
@@ -21304,9 +21304,9 @@ void Func0403 object#(0x403) () {
 					Func097F(0xFFFD, "@Sorry...@", 0x0000);
 					abort;
 				}
-				UI_remove_answer("join");
+				remove("join");
 				if (UI_get_array_size(UI_get_party_list2()) < 0x0005) {
-					UI_add_answer("leave");
+					add("leave");
 					say("\"'Tis always an adventure to travel with thee, ",
 					    var0002,
 					    "! I shall be proud to accompany thee.\"");
@@ -21324,7 +21324,7 @@ void Func0403 object#(0x403) () {
 				if (!gflags[0x0006]) {
 					say("\"Thy concern for an old man is appreciated, my old friend. However, we have barely begun this adventure, and I am spry enough to keep up with thee!\"");
 				} else {
-					UI_add_answer("join");
+					add("join");
 					say("\"Whatever thou dost wish, Avatar.\"");
 					UI_remove_from_party(0xFFFD);
 					if (UI_get_cont_items(0xFFFD, 0xFE99, 0xFE99, 0xFE99)) {
@@ -21570,33 +21570,33 @@ void Func0404 object#(0x404) () {
 		var0006 = UI_get_item_flag(0xFFFC, 0x001C);
 		if (gflags[0x0004]) {
 			say("\"Oh, am I glad to see thee! I have been very scared.\"");
-			UI_add_answer("scared");
+			add("scared");
 			gflags[0x00F4] = true;
 		} else {
 			if (var0006 == false) {
 				UI_set_item_flag(0xFFFC, 0x001C);
 				say("\"Hello, I am Andrio. I never meet outsiders. Couldst thou tell me all about thy travels and adventures?\"");
-				UI_add_answer("adventures");
+				add("adventures");
 			} else {
 				say("\"Hast thou done anything exciting lately?\"");
-				UI_add_answer("exciting");
+				add("exciting");
 			}
 		}
 		if (gflags[0x00EA] && (!UI_get_item_flag(0xFFE1, 0x0004))) {
-			UI_add_answer("kidnap");
+			add("kidnap");
 		}
-		UI_add_answer(["bye"]);
+		add(["bye"]);
 		converse (0) {
 			case "scared" (remove):
 				say("\"The Glowing Man came and killed nearly everyone in the entire town. Fedabiblio tried to stop him, but not even he could withstand the Glowing Man's attack.\"");
-				UI_add_answer("Fedabiblio");
+				add("Fedabiblio");
 				fallthrough;
 
 			case "Fedabiblio" (remove):
 				var0007 = UI_get_schedule_type(0xFFEF);
 				if (var0007 == 0x000F) {
 					say("\"Fedabiblio fought a terrific battle, but when the Glowing Man was done with him, he had been turned into a statue. It remains beyond mine abilities to restore him.\"");
-					UI_add_answer("restore");
+					add("restore");
 				} else {
 					say("\"Thank goodness, thou wert able to restore him to life. Else I would never finish my Mage's training!\"");
 				}
@@ -21604,7 +21604,7 @@ void Func0404 object#(0x404) () {
 
 			case "restore" (remove):
 				say("\"I do not know for certain if anything can bring Fedabiblio back to life. Once I overheard Columna talking about a special wand that Torrissio owned.\"");
-				UI_add_answer(["wand", "Torrissio"]);
+				add(["wand", "Torrissio"]);
 				fallthrough;
 
 			case "wand" (remove):
@@ -21637,25 +21637,25 @@ void Func0404 object#(0x404) () {
 
 			case "adventures", "exciting" (remove):
 				say("\"Yes, yes. I would very much love to hear about thine exciting adventures. While studying magic I have so little time to plan any expeditions of mine own.\"");
-				UI_add_answer(["magic", "expeditions"]);
+				add(["magic", "expeditions"]);
 				fallthrough;
 
 			case "magic" (remove):
 				say("\"I am working to become a great master. Someday I hope to be as great as Master Filbercio.\"");
 				say("\"Of course, I know that level of expertise will take some time. But I have the discipline! Just ask Freli, he will tell thee I do.\"");
-				UI_add_answer(["Filbercio", "Freli"]);
+				add(["Filbercio", "Freli"]);
 				fallthrough;
 
 			case "Filbercio" (remove):
 				say("\"He is the MageLord of all Moonshade. There are rumors that no mage hath lived who was more powerful, not even the Mad Mage!\"");
-				UI_add_answer("Mad Mage");
+				add("Mad Mage");
 				fallthrough;
 
 			case "Mad Mage" (remove):
 				say("\"His name is Erstam. He was one of the founders of Moonshade. However, our instructors\tclaim he slowly became insane as his power grew. Eventually, he left the city to\tbe far away from his fellow spellcasters.\"");
 				say("\"They tell us the same could happen to us should we seek too much power too soon. I wonder if that is what caused the other two mages to flee to the Mountains of Freedom?\"");
 				say("\"Goodness, I hope that doth not happen to me!\"");
-				UI_add_answer(["two mages", "Mountains of Freedom"]);
+				add(["two mages", "Mountains of Freedom"]);
 				fallthrough;
 
 			case "two mages" (remove):
@@ -21686,7 +21686,7 @@ void Func0404 object#(0x404) () {
 					UI_set_conversation_slot(0x0000);
 					say("\"Thou art mad!\"");
 					UI_push_answers();
-					UI_add_answer(["Stop this bickering!", "bye"]);
+					add(["Stop this bickering!", "bye"]);
 				}
 				fallthrough;
 
@@ -21706,12 +21706,12 @@ void Func0404 object#(0x404) () {
 
 			case "expeditions" (remove):
 				say("\"Well, I am hesitant to admit how little I have seen of the land. Unlike thee, I am not an experienced traveller. There is so little I know about my surroundings, save how to manipulate them with magic. I have no knowledge of what it is like to face danger daily. Certainly nothing so grand as that which thou dost meet frequently. In comparison, my life is filled with boredom.\"");
-				UI_add_answer("boredom");
+				add("boredom");
 				fallthrough;
 
 			case "boredom" (remove):
 				say("\"Yesterday I saw Torrissio leave his house at 9 in the morning -- same as always -- and run into one of the food vendors. I was positive Torrissio was about to transform her into a frog or some such, but instead, he gave no more than a rude chastising.\"");
-				UI_add_answer(["chastising", "Torrissio"]);
+				add(["chastising", "Torrissio"]);
 				fallthrough;
 
 			case "chastising" (remove):
@@ -21728,7 +21728,7 @@ void Func0404 object#(0x404) () {
 					}
 				} else {
 					say("\"He is an adept mage who commands the powers of life magic. Some day, when I am less afraid of his coarse manner, I plan to ask for his assistance in my Transmute Flesh to Wood\tspell. I am told he hath done something similar with stone before.\"");
-					UI_add_answer(["flesh to wood", "similar"]);
+					add(["flesh to wood", "similar"]);
 				}
 				fallthrough;
 
@@ -21982,16 +21982,16 @@ void Func040D object#(0x40D) () {
 			    ".\"");
 		}
 		if (var0000) {
-			UI_add_answer(["provisions", "exchange"]);
+			add(["provisions", "exchange"]);
 			var0009 = 0x0003;
 		}
 		if (gflags[0x00EA] && (!UI_get_item_flag(0xFFE1, 0x0004))) {
-			UI_add_answer("kidnap");
+			add("kidnap");
 		}
 		if (Func0942(0xFFD6)) {
 			var0009 = 0x0001;
 		}
-		UI_add_answer(["information", "bye"]);
+		add(["information", "bye"]);
 		var000A = false;
 		var000B = 0x0000;
 		converse (0) {
@@ -22011,12 +22011,12 @@ void Func040D object#(0x40D) () {
 					    ". Of what wouldst thou like to know?\"");
 					UI_push_answers();
 					var000B = 0x0001;
-					UI_add_answer(["people", "places", "strange objects", "nothing more"]);
+					add(["people", "places", "strange objects", "nothing more"]);
 				} else if ((!gflags[0x0103]) || (UI_get_timer(0x0002) > 0x0004)) {
 					say("\"I am not certain that I'll know anything useful, but in what art thou interested?\"");
 					UI_push_answers();
 					var000B = 0x0001;
-					UI_add_answer(["people", "places", "strange objects", "nothing more"]);
+					add(["people", "places", "strange objects", "nothing more"]);
 				} else {
 					say("\"I am afraid that I'm very busy right now. Perhaps we could talk about this later.\"");
 				}
@@ -22027,21 +22027,21 @@ void Func040D object#(0x40D) () {
 				say("\"So please, do not tell anyone! Dost thou desire to know about townsfolk, or visitors?\"");
 				UI_push_answers();
 				var000B = 0x0002;
-				UI_add_answer(["townsfolk", "visitors", "nothing more"]);
+				add(["townsfolk", "visitors", "nothing more"]);
 				fallthrough;
 
 			case "townsfolk" (remove):
 				say("\"Dost thou have an interest in mere Mundanes, or Mages?\"");
 				UI_push_answers();
 				var000B = 0x0003;
-				UI_add_answer(["Mundanes", "Mages", "nothing more"]);
+				add(["Mundanes", "Mages", "nothing more"]);
 				fallthrough;
 
 			case "Mundanes":
 				say("\"Those of us who do not cast magic are a small and disrespected part of society here. Whom dost thou desire to know about?\"");
 				UI_push_answers();
 				var000B = 0x0004;
-				UI_add_answer(["the Artisans", "the Rangers", "Rocco and Petra", "Mosh the beggar", "nothing more"]);
+				add(["the Artisans", "the Rangers", "Rocco and Petra", "Mosh the beggar", "nothing more"]);
 				fallthrough;
 
 			case "the Artisans" (remove):
@@ -22060,7 +22060,7 @@ void Func040D object#(0x40D) () {
 						say("\"Hast thou heard the rumor about the apothecary? Some say that he hath a most uncanny resemblance to the Mad Mage.\"");
 						say("\"I think so, too.\"");
 						gflags[0x00DC] = true;
-						UI_add_answer("Mad Mage");
+						add("Mad Mage");
 					}
 				} else {
 					say("\"Thou canst buy no reagents in Moonshade, for the Apothecary hath gone away!\"");
@@ -22104,7 +22104,7 @@ void Func040D object#(0x40D) () {
 				say("\"Everything in this city revolves around the wizards and their cliques. Whom dost thou desire to know about?\"");
 				UI_push_answers();
 				var000B = 0x0004;
-				UI_add_answer(["the MageLord", "the Adepts", "the Magister", "Melino and Columna", "the minor Mages", "Pothos the Apothecary", "nothing more"]);
+				add(["the MageLord", "the Adepts", "the Magister", "Melino and Columna", "the minor Mages", "Pothos the Apothecary", "nothing more"]);
 				fallthrough;
 
 			case "the MageLord" (remove):
@@ -22114,7 +22114,7 @@ void Func040D object#(0x40D) () {
 					say("\"...thou had best watch thy step, lest he ensorcel thee with a love spell!\"");
 				} else {
 					say("\"...not me, of course, but he hath had his way with many other beautiful women! Thou wouldst be surprised to learn of many of them.\"");
-					UI_add_answer("learn");
+					add("learn");
 				}
 				if (!gflags[0x00D9]) {
 					say("\"He is not partial to visitors, so I doubt that thou shalt ever have the chance to make his acquaintance.\"");
@@ -22184,7 +22184,7 @@ void Func040D object#(0x40D) () {
 				}
 				say("\"A visit to the Chief Ranger might be a good idea. Thou canst find her at the Winery, in the western part of town.\"");
 				var0009 = Func09AE(var0009);
-				UI_add_answer("travelling scholar");
+				add("travelling scholar");
 				fallthrough;
 
 			case "travelling scholar" (remove):
@@ -22195,7 +22195,7 @@ void Func040D object#(0x40D) () {
 				say("\"Interested in seeing the sights, eh? Well, I can tell thee about the islands, or the mountains.\"");
 				UI_push_answers();
 				var000B = 0x0002;
-				UI_add_answer(["islands", "mountains", "nothing more"]);
+				add(["islands", "mountains", "nothing more"]);
 				fallthrough;
 
 			case "islands" (remove):
@@ -22210,7 +22210,7 @@ void Func040D object#(0x40D) () {
 
 			case "strange objects":
 				var000B = (var000B + 0x0001);
-				UI_remove_answer("strange objects");
+				remove("strange objects");
 				var000E = [];
 				if (gflags[0x027A] && (!gflags[0x028C])) {
 					var000E = (var000E & "pinecone");
@@ -22284,10 +22284,10 @@ void Func040D object#(0x40D) () {
 							var000F = 0x0000;
 							var0006 = true;
 						}
-						UI_add_answer(var0005);
+						add(var0005);
 						var000F = (var000F - 0x0001);
 					}
-					UI_add_answer("nothing more");
+					add("nothing more");
 				}
 				fallthrough;
 
@@ -22315,7 +22315,7 @@ void Func040D object#(0x40D) () {
 					if (var000E == []) {
 						var0006 = true;
 					}
-					UI_add_answer(var0005);
+					add(var0005);
 				}
 				fallthrough;
 
@@ -22349,7 +22349,7 @@ void Func040D object#(0x40D) () {
 					if (var000E == []) {
 						var0006 = true;
 					}
-					UI_add_answer(var0005);
+					add(var0005);
 				}
 				fallthrough;
 
@@ -22367,7 +22367,7 @@ void Func040D object#(0x40D) () {
 					if (var000E == []) {
 						var0006 = true;
 					}
-					UI_add_answer(var0005);
+					add(var0005);
 				}
 				fallthrough;
 
@@ -22387,7 +22387,7 @@ void Func040D object#(0x40D) () {
 					if (var000E == []) {
 						var0006 = true;
 					}
-					UI_add_answer(var0005);
+					add(var0005);
 				}
 				fallthrough;
 
@@ -22405,7 +22405,7 @@ void Func040D object#(0x40D) () {
 					if (var000E == []) {
 						var0006 = true;
 					}
-					UI_add_answer(var0005);
+					add(var0005);
 				}
 				fallthrough;
 
@@ -22425,7 +22425,7 @@ void Func040D object#(0x40D) () {
 					if (var000E == []) {
 						var0006 = true;
 					}
-					UI_add_answer(var0005);
+					add(var0005);
 				}
 				fallthrough;
 
@@ -22438,7 +22438,7 @@ void Func040D object#(0x40D) () {
 					UI_set_conversation_slot(0x0000);
 					say("\"Yes, yes, yes, I remember. I sold it to the MageLord, who gave it to his favorite at the Feast of Illusions. I'm surprised that unusual fellow never bought one, what with all the other furs he was collecting.\"");
 					gflags[0x02A0] = true;
-					UI_add_answer("unusual fellow");
+					add("unusual fellow");
 					if (gflags[0x02A0] && gflags[0x02A1]) {
 						gflags[0x0292] = true;
 					}
@@ -22453,7 +22453,7 @@ void Func040D object#(0x40D) () {
 					if (var000E == []) {
 						var0006 = true;
 					}
-					UI_add_answer(var0005);
+					add(var0005);
 				}
 				fallthrough;
 
@@ -22476,7 +22476,7 @@ void Func040D object#(0x40D) () {
 					if (var000E == []) {
 						var0006 = true;
 					}
-					UI_add_answer(var0005);
+					add(var0005);
 				}
 				fallthrough;
 
@@ -22495,7 +22495,7 @@ void Func040D object#(0x40D) () {
 					if (var000E == []) {
 						var0006 = true;
 					}
-					UI_add_answer(var0005);
+					add(var0005);
 				}
 				fallthrough;
 
@@ -22515,7 +22515,7 @@ void Func040D object#(0x40D) () {
 					if (var000E == []) {
 						var0006 = true;
 					}
-					UI_add_answer(var0005);
+					add(var0005);
 				}
 				fallthrough;
 
@@ -22533,7 +22533,7 @@ void Func040D object#(0x40D) () {
 					if (var000E == []) {
 						var0006 = true;
 					}
-					UI_add_answer(var0005);
+					add(var0005);
 				}
 				fallthrough;
 
@@ -22555,7 +22555,7 @@ void Func040D object#(0x40D) () {
 					if (var000E == []) {
 						var0006 = true;
 					}
-					UI_add_answer(var0005);
+					add(var0005);
 				}
 				fallthrough;
 
@@ -22573,7 +22573,7 @@ void Func040D object#(0x40D) () {
 					if (var000E == []) {
 						var0006 = true;
 					}
-					UI_add_answer(var0005);
+					add(var0005);
 				}
 				fallthrough;
 
@@ -22591,7 +22591,7 @@ void Func040D object#(0x40D) () {
 					if (var000E == []) {
 						var0006 = true;
 					}
-					UI_add_answer(var0005);
+					add(var0005);
 				}
 				fallthrough;
 
@@ -22614,7 +22614,7 @@ void Func040D object#(0x40D) () {
 					if (var000E == []) {
 						var0006 = true;
 					}
-					UI_add_answer(var0005);
+					add(var0005);
 				}
 				fallthrough;
 
@@ -22632,7 +22632,7 @@ void Func040D object#(0x40D) () {
 					if (var000E == []) {
 						var0006 = true;
 					}
-					UI_add_answer(var0005);
+					add(var0005);
 				}
 				fallthrough;
 
@@ -22660,7 +22660,7 @@ void Func040D object#(0x40D) () {
 					if (var000E == []) {
 						var0006 = true;
 					}
-					UI_add_answer(var0005);
+					add(var0005);
 				}
 				fallthrough;
 
@@ -22692,7 +22692,7 @@ void Func040D object#(0x40D) () {
 					if (var000E == []) {
 						var0006 = true;
 					}
-					UI_add_answer(var0005);
+					add(var0005);
 				}
 				fallthrough;
 
@@ -22714,7 +22714,7 @@ void Func040D object#(0x40D) () {
 					if (var000E == []) {
 						var0006 = true;
 					}
-					UI_add_answer(var0005);
+					add(var0005);
 				}
 				fallthrough;
 
@@ -22810,12 +22810,12 @@ void Func040E object#(0x40E) () {
 		var0005 = UI_get_item_flag(0xFF58, 0x0004);
 		if (gflags[0x00E2]) {
 			if (!var0005) {
-				UI_add_answer("Stefano");
+				add("Stefano");
 			}
 		}
 		var0006 = Func097D(0xFE9B, 0x0001, 0x02A5, 0xFE99, 0x0000);
 		if (var0006) {
-			UI_add_answer("stockings");
+			add("stockings");
 		}
 		if (gflags[0x00FD]) {
 			UI_show_npc_face0(0xFFF2, 0x0001);
@@ -22836,24 +22836,24 @@ void Func040E object#(0x40E) () {
 			say("\"Welcome, Mage. I am pleased to see thee again.\"");
 		}
 		if (gflags[0x00DF] && (!gflags[0x00EF])) {
-			UI_add_answer(["Mosh"]);
+			add(["Mosh"]);
 		}
 		if (gflags[0x0110] && (!gflags[0x028F])) {
-			UI_add_answer("apparatus");
+			add("apparatus");
 		}
-		UI_add_answer(["Green Enchantress", "bye"]);
+		add(["Green Enchantress", "bye"]);
 		converse (0) {
 			case "Green Enchantress" (remove):
 				say("\"My name is Columna. Sorceress, wife of Melino, and I am also the most desired beauty in Moonshade.\"");
 				if (gflags[0x00FD]) {
 					say("\"Is that not a funny joke?! Me, a decrepit hag?! The most desired beauty in all of Moonshade?! Once, in my time... In my time...\"");
 				}
-				UI_add_answer(["sorceress", "Melino", "beauty"]);
+				add(["sorceress", "Melino", "beauty"]);
 				fallthrough;
 
 			case "sorceress" (remove):
 				say("\"Perhaps I could interest thee in a spell. Many strange travellers have come from across the Serpent Isle to learn spells from me. But that, of course, was before the Teleport Storms.\"");
-				UI_add_answer(["buy spells", "strange travellers", "teleport storms"]);
+				add(["buy spells", "strange travellers", "teleport storms"]);
 				fallthrough;
 
 			case "apparatus" (remove):
@@ -22876,7 +22876,7 @@ void Func040E object#(0x40E) () {
 
 			case "strange travellers" (remove):
 				say("\"Many weeks ago a woman named Gwenno passed through Moonshade, and more recently a sage named Batlin.\"");
-				UI_add_answer(["Gwenno", "Batlin"]);
+				add(["Gwenno", "Batlin"]);
 				fallthrough;
 
 			case "Gwenno" (remove):
@@ -22885,7 +22885,7 @@ void Func040E object#(0x40E) () {
 
 			case "Batlin" (remove):
 				say("\"He came through town with a strange daemon creature as his companion and servant, and he had some sort of artifact in his possession.\"");
-				UI_add_answer(["daemon", "artifact"]);
+				add(["daemon", "artifact"]);
 				fallthrough;
 
 			case "daemon" (remove):
@@ -22898,7 +22898,7 @@ void Func040E object#(0x40E) () {
 
 			case "Melino" (remove):
 				say("\"I shall have thee know that mine husband is most influential with the Council of Mages. And is perfectly capable of satisfying my needs in nearly all other ways.\"");
-				UI_add_answer(["influential", "satisfying needs"]);
+				add(["influential", "satisfying needs"]);
 				fallthrough;
 
 			case "influential" (remove):
@@ -23026,38 +23026,38 @@ void Func040F object#(0x40F) () {
 		if (var0006 == false) {
 			say("\"I am Ducio, the Master Artisan.\"");
 			UI_set_item_flag(0xFFF1, 0x001C);
-			UI_add_answer("Master Artisan");
+			add("Master Artisan");
 		} else {
 			if (gflags[0x0004]) {
 				say("\"Thou art alive! Thou hast survived the holocaust! So many are dead...\"");
-				UI_add_answer("holocaust");
+				add("holocaust");
 			} else {
 				say("\"Welcome back...\"");
-				UI_add_answer("Master Artisan");
+				add("Master Artisan");
 			}
 		}
 		if (var0005) {
 			say("\"What is thy business?\"");
-			UI_add_answer("business");
+			add("business");
 		} else {
 			say("\"How may I be of use to thee?\"");
 		}
 		if (gflags[0x0234] && (!gflags[0x00CE])) {
-			UI_add_answer("Daemon Sword");
+			add("Daemon Sword");
 		}
 		if (gflags[0x0111] && (!gflags[0x028F])) {
-			UI_add_answer("apparatus");
+			add("apparatus");
 		}
 		if (gflags[0x0268] == true) {
-			UI_add_answer("Worm Gem");
+			add("Worm Gem");
 		}
 		if (gflags[0x0113] && (!gflags[0x0291])) {
-			UI_add_answer("lost ring");
+			add("lost ring");
 		}
 		if (gflags[0x00EA] && (!UI_get_item_flag(0xFFE1, 0x0004))) {
-			UI_add_answer("kidnap");
+			add("kidnap");
 		}
-		UI_add_answer(["bye"]);
+		add(["bye"]);
 		converse (0) {
 			case "kidnap" (remove):
 				say("\"Do not involve me in such matters, stranger! Canst thou not see that I am a Mundane?\"");
@@ -23076,38 +23076,38 @@ void Func040F object#(0x40F) () {
 					say("\"I have an apprentice. I have automatons to help the work progress. That makes me a Master.\"");
 					say("\"I am able to create or repair anything. I make what the Mages need. That makes me an Artisan.\"");
 					say("\"If thou hast need of the Master, ask me. If not, ask Topo.\"");
-					UI_add_answer(["automatons", "anything", "Topo"]);
+					add(["automatons", "anything", "Topo"]);
 				}
 				fallthrough;
 
 			case "automatons" (remove):
 				say("\"One that bakes. One that sews. One that smiths. All from Torrissio. They work hard... do not talk back like Topo.\"");
-				UI_add_answer("Torrissio");
+				add("Torrissio");
 				fallthrough;
 
 			case "Torrissio" (remove):
 				say("\"Torrissio is an Adept. He makes automaton guards and servants. He does good work... almost like a Master Artisan. But he needs magic to make everything work.\"");
 				say("\"I gave him a good deal on the metal he needs. Now I've got three hard workers made of metal. Not a bad deal.\"");
-				UI_add_answer(["magic", "deal"]);
+				add(["magic", "deal"]);
 				fallthrough;
 
 			case "magic" (remove):
 				say("\"Torrissio doth not ask about my work. I do not ask about his.\"");
 				say("\"All I know is that his spells are old. Not anything created by these Mages.\"");
 				say("\"Thou wishest to ask more, ask Torrissio... If he will speak with thee.\"");
-				UI_add_answer("old");
+				add("old");
 				fallthrough;
 
 			case "old" (remove):
 				say("\"Very old. Maybe as old as the Serpent ruins, maybe not. I'm not a Mage.\"");
-				UI_add_answer("Serpent Ruins");
+				add("Serpent Ruins");
 				fallthrough;
 
 			case "Serpent Ruins" (remove):
 				say("\"What dost thou think I am, a teacher like Fedabiblio?!\"");
 				say("\"If thou wishest a history lesson, go to him like any novice. If thou wishest the work of a Master Artisan, stay.\"");
 				say("\"I do not have time for such questions!\"");
-				UI_add_answer(["Fedabiblio", "novice"]);
+				add(["Fedabiblio", "novice"]);
 				fallthrough;
 
 			case "Fedabiblio" (remove):
@@ -23126,7 +23126,7 @@ void Func040F object#(0x40F) () {
 			case "anything" (remove):
 				say("\"If the Mages can speak plain enough to explain what they need, I can make it.\"");
 				say("\"Magical apparatus. Swords. Whatever. I can make it. They enchant it. 'Tis fair.\"");
-				UI_add_answer(["Magical apparatus", "Swords"]);
+				add(["Magical apparatus", "Swords"]);
 				fallthrough;
 
 			case "Magical apparatus" (remove):
@@ -23141,13 +23141,13 @@ void Func040F object#(0x40F) () {
 
 			case "apparatus":
 labelFunc040F_032A:
-				UI_remove_answer("apparatus");
+				remove("apparatus");
 				if (var0005) {
 					if (Func097D(0xFE9B, 0x0001, 0x02ED, 0xFE99, 0x0001)) {
 						say("\"Hmmmm. This is a piece of lab apparatus that the mages use. In fact, this one was one of my first masterpieces. I thought it had been destroyed.\"");
 						say("\"I might ask how thou didst come by this. But I won't. I do not want to know. Vasculio hath been dead for years...\"");
 						var0007 = true;
-						UI_add_answer("Vasculio");
+						add("Vasculio");
 					} else {
 						say("\"Thou hast no such object! Do not waste my time, for I am a busy man...\"");
 						Func097F(0xFFF1, "@Must work...@", 0x0000);
@@ -23162,7 +23162,7 @@ labelFunc040F_032A:
 			case "Vasculio" (remove):
 				say("\"Not good, that one. Sought to reach beyond life and rule death. Not good.\"");
 				say("\"The Council killed him years ago. I thought they had destroyed all his equipment after they found the grave empty... But mayhaps Ensorcio took it.\"");
-				UI_add_answer(["grave empty", "Ensorcio"]);
+				add(["grave empty", "Ensorcio"]);
 				fallthrough;
 
 			case "grave empty" (remove):
@@ -23190,7 +23190,7 @@ labelFunc040F_032A:
 				say("\"What dost thou need? To buy? To look? To talk?\"");
 				var0008 = Func0956(["buy", "look", "talk"]);
 				if (var0008 == "buy") {
-					UI_add_answer("buy");
+					add("buy");
 				} else {
 					if (var0008 == "look") {
 						say("\"Looking is free. Inspect the automaton-made goods.\"");
@@ -23221,7 +23221,7 @@ labelFunc040F_032A:
 						say("\"May I see it? Ah, thank thee...\"");
 						say("\"Too plain for a Mage... But wait, I remember this!\"");
 						say("\"I made it for a sailor from Fawn. I'll wager that it cost him half a year's wages. He wanted it for an engagement ring.\"");
-						UI_add_answer(["Fawn", "sailor"]);
+						add(["Fawn", "sailor"]);
 					} else {
 						say("\"So where is this ring? How can I tell thee anything about this ring, if thou dost not bring it to me?\"");
 					}
@@ -23260,7 +23260,7 @@ labelFunc040F_032A:
 			case "Worm Gem" (remove):
 				if (var0005) {
 					say("\"What a strange request... Yes, I can make thee a Worm Gem, if thou dost desire.\"");
-					UI_add_answer("strange request");
+					add("strange request");
 					if (Func097D(0xFE9B, 0x0001, 0x034A, 0xFE99, 0x000A)) {
 						if (Func097D(0xFE9B, 0x0003, 0x034A, 0xFE99, 0x000A)) {
 							say("\"'Tis a simple matter, when thou dost know the secret...\"");
@@ -23268,11 +23268,11 @@ labelFunc040F_032A:
 							abort;
 						} else {
 							say("\"Thou must bring me three Worm Hearts -- no less!\"");
-							UI_add_answer("Worm Hearts");
+							add("Worm Hearts");
 						}
 					} else {
 						say("\"But first, thou must bring me the Hearts of three Ice Worms.\"");
-						UI_add_answer("Worm Hearts");
+						add("Worm Hearts");
 					}
 				} else {
 					say("\"I will make thee a Worm Gem if thou wilt come to my shop when I am there...\"");
@@ -23444,22 +23444,22 @@ void Func0410 object#(0x410) () {
 		if (var000D == false) {
 			UI_set_item_flag(0xFFF0, 0x001C);
 			say("\"I am a man! I am a man! I cannot tell thee how miserable it is to be a bird.\"");
-			UI_add_answer("bird");
+			add("bird");
 			UI_set_timer(0x0005);
 		} else {
 			say("\"I am forever in thy debt, ",
 			    var0000,
 			    ". How may ol' Edrin be of aid to thee?\"");
-			UI_add_answer("aid");
+			add("aid");
 			if (UI_get_timer(0x0005) >= 0x0003) {
 				var000E = true;
 			}
 		}
-		UI_add_answer(["name", "bye"]);
+		add(["name", "bye"]);
 		converse (0) {
 			case "name":
 				say("\"My name is Edrin.\"");
-				UI_remove_answer("name");
+				remove("name");
 				fallthrough;
 
 			case "aid" (remove):
@@ -23473,23 +23473,23 @@ void Func0410 object#(0x410) () {
 				    ", 'tis the least I can do for the ",
 				    var000F,
 				    " who made me once again a man. I can but hope thou wilt never experience the misery of being a bird!\"");
-				UI_add_answer("bird");
+				add("bird");
 				fallthrough;
 
 			case "bird" (remove):
 				if (var000E) {
 					var0010 = "However,@ he appears sad, @I am still without passage home";
-					UI_add_answer("still without");
+					add("still without");
 				} else {
 					var0010 = "Of course, first I must locate passage aboard a ship";
-					UI_add_answer("passage");
+					add("passage");
 				}
 				say("\"'Twas terrible, ",
 				    var0000,
 				    "! Well, I should say, flying was rather exciting and all, but I never became accustomed to the worms. Were it not for my dreams, I would surely have lost sanity! But now, thanks to thee, I have no want but to return to my flock. ",
 				    var0010,
 				    ".\"");
-				UI_add_answer(["dreams", "flock"]);
+				add(["dreams", "flock"]);
 				fallthrough;
 
 			case "dreams" (remove):
@@ -23518,12 +23518,12 @@ void Func0410 object#(0x410) () {
 
 			case "passage" (remove):
 				say("\"Why, yes. After I find my brother we will return home, if possible. It will be much safer to travel by ship.\"");
-				UI_add_answer(["brother", "safer"]);
+				add(["brother", "safer"]);
 				fallthrough;
 
 			case "still without" (remove):
 				say("\"Aye. My brother says that he was told we can find safe passage aboard a ship here. But all we've seen is Captain Hawk.\"");
-				UI_add_answer(["brother", "safe", "Hawk"]);
+				add(["brother", "safe", "Hawk"]);
 				fallthrough;
 
 			case "Hawk" (remove):
@@ -23543,7 +23543,7 @@ void Func0410 object#(0x410) () {
 				}
 				if (UI_get_item_flag(0xFFD8, 0x0004)) {
 					say("\"Anyway, now that he hath been killed, I know not what we'll do. I suppose we must await the arrival of another ship.\"");
-					UI_add_answer("killed");
+					add("killed");
 				} else {
 					say("\"Anyway, for some reason he doth refuse to sail again. I do wish he would change his mind, or that another ship would arrive.\"");
 				}
@@ -23564,7 +23564,7 @@ void Func0410 object#(0x410) () {
 
 			case "safe", "safer" (remove):
 				say("\"Well, I suppose a ship would offer only a little more protection, but anything would be better than travelling in the open, what with the storms and all.\"");
-				UI_add_answer("storms");
+				add("storms");
 				fallthrough;
 
 			case "storms" (remove):
@@ -23577,16 +23577,16 @@ void Func0410 object#(0x410) () {
 				say("\"Kane is my brother. He is a few years my junior, but certainly an able shepherd. I know how worried he must have been while I was a parrot.\"");
 				if (var000E) {
 					say("\"I'm glad he met Mistress Devra.\"");
-					UI_add_answer("Devra");
+					add("Devra");
 				} else {
 					say("\"I wonder how he will react to seeing me again. I hope he hath not strayed too far from home.\"");
-					UI_add_answer("home");
+					add("home");
 				}
 				fallthrough;
 
 			case "home" (remove):
 				say("\"Well, we live on the mainland. Since I spy the Mountains of Freedom off in the distance, I know that this is not the mainland. And I have seen little goblin activity.\"");
-				UI_add_answer(["Mountains of Freedom", "Goblin activity"]);
+				add(["Mountains of Freedom", "Goblin activity"]);
 				fallthrough;
 
 			case "Mountains of Freedom" (remove):
@@ -23595,7 +23595,7 @@ void Func0410 object#(0x410) () {
 
 			case "Goblin activity" (remove):
 				say("\"Yes, in the forest near our farm there are a terrible number of Goblins. They often come to raid us on the way to the city.\"");
-				UI_add_answer(["raid", "city"]);
+				add(["raid", "city"]);
 				fallthrough;
 
 			case "city" (remove):
@@ -23612,7 +23612,7 @@ void Func0410 object#(0x410) () {
 
 			case "Devra" (remove):
 				say("\"She is the owner of the inn at Sleeping Bull. Kane tells me that she helped him find a place to stay while waiting for Captain Hawk. Of course, now it is time for us to head home.\"");
-				UI_add_answer("home");
+				add("home");
 				fallthrough;
 
 			case "bye":
@@ -23707,9 +23707,9 @@ void Func0411 object#(0x411) () {
 			} else {
 				say("\"A thousand thanks! I had feared that I would remain an adornment of this place forever, thanks to Shamino the Anarch.\"");
 			}
-			UI_add_answer("Shamino the Anarch");
+			add("Shamino the Anarch");
 			if (!gflags[0x00F6]) {
-				UI_add_answer("gratitude");
+				add("gratitude");
 			}
 		} else {
 			if (var0005 == false) {
@@ -23718,21 +23718,21 @@ void Func0411 object#(0x411) () {
 			} else {
 				say("\"Thou hast a voracious appetite for knowledge. What dost thou desire to learn?\"");
 			}
-			UI_add_answer(["Magister", "Moonshade"]);
+			add(["Magister", "Moonshade"]);
 		}
 		if (!gflags[0x00DB]) {
-			UI_add_answer("spellbook");
+			add("spellbook");
 		}
 		if (gflags[0x00E4] && (!gflags[0x0128])) {
-			UI_add_answer("Gustacio's experiment");
+			add("Gustacio's experiment");
 		}
 		if (gflags[0x00EA] && (!UI_get_item_flag(0xFFE1, 0x0004))) {
-			UI_add_answer("kidnap");
+			add("kidnap");
 		}
 		if ((gflags[0x010B] && (!gflags[0x028C])) || ((gflags[0x010C] && (!gflags[0x0295])) || ((gflags[0x010E] && (!gflags[0x029A])) || ((gflags[0x0110] && (!gflags[0x028F])) || ((gflags[0x0112] && (!gflags[0x0290])) || (gflags[0x0114] && (!gflags[0x0293]))))))) {
-			UI_add_answer("information");
+			add("information");
 		}
-		UI_add_answer(["bye"]);
+		add(["bye"]);
 		converse (0) {
 			case "kidnap" (remove):
 				if (gflags[0x00EB]) {
@@ -23755,7 +23755,7 @@ void Func0411 object#(0x411) () {
 				say("\"The Rangers became his instruments of chaos... Anything was allowed, as long as one held a 'permit' from the Anarch.\"");
 				say("\"I do not know how many of us are left now. It seems that most of the manors are abandoned...\"");
 				UI_push_answers();
-				UI_add_answer(["anything", "left", "abandoned", "change subject"]);
+				add(["anything", "left", "abandoned", "change subject"]);
 				fallthrough;
 
 			case "change subject":
@@ -23792,21 +23792,21 @@ void Func0411 object#(0x411) () {
 				say("\"One of my functions is to find gifted children for this school. When they are located, I bring them to the school.\"");
 				say("\"I was appointed as Magister for life.\"");
 				UI_push_answers();
-				UI_add_answer(["Seminarium", "children", "change subject"]);
+				add(["Seminarium", "children", "change subject"]);
 				fallthrough;
 
 			case "children" (remove):
 				say("\"A young, untrained Mage can be quite dangerous! Therefore, these children must be brought to the Seminarium -- for their own safety!\"");
 				say("\"For instance, take young Freli. His father was a shopkeeper. What could a merchant teach his son about magical powers!\"");
 				say("\"Taking care of my students is a tiring but fulfilling duty. Young Freli shows much promise, and Andrio is almost ready to graduate.\"");
-				UI_add_answer(["Andrio", "Freli"]);
+				add(["Andrio", "Freli"]);
 				fallthrough;
 
 			case "Seminarium" (remove):
 				say("\"The Seminarium is unique in all the land, for all Mages are welcome to come here and study our records concerning spell research and magical activity.\"");
 				say("\"Any Mage can study here in safety, knowing that this place is a sanctuary from violence.\"");
 				say("\"Passing travellers also stop here to access our library.\"");
-				UI_add_answer(["travellers"]);
+				add(["travellers"]);
 				fallthrough;
 
 			case "Andrio" (remove):
@@ -23826,33 +23826,33 @@ void Func0411 object#(0x411) () {
 			case "Moonshade" (remove):
 				say("\"Since thou art a visitor, I will explain a few things to thee. Moonshade is a city of Mages and for Mages. It is ruled by the Adepts, and served by the lesser Mages. There is a lower class -- the Mundanes. But some of them are skilled as artisans.\"");
 				UI_push_answers();
-				UI_add_answer(["Adepts", "lesser Mages", "artisans", "Mundanes", "change subject"]);
+				add(["Adepts", "lesser Mages", "artisans", "Mundanes", "change subject"]);
 				fallthrough;
 
 			case "Adepts" (remove):
 				say("\"The three Adepts are the most powerful wizards in the city. They compose the Council of Mages, which governs the city.\"");
 				say("\"One of the Adepts serves as MageLord. Currently, Filbercio rules as Lord of Moonshade.\"");
-				UI_add_answer("Filbercio");
+				add("Filbercio");
 				if (UI_get_item_flag(0xFFE1, 0x0004)) {
 					if (gflags[0x00E2]) {
 						say("\"All is in an uproar, with Rotoluncia dead and her replacement -- the Necromancer Mortegro -- missing.\"");
 						say("\"Gustacio hath asked that I join the Council in this troubled time, and I have done so.\"");
-						UI_add_answer(["Gustacio", "missing?"]);
+						add(["Gustacio", "missing?"]);
 					} else {
 						say("\"Rotoluncia was on the Council, but her recent death hath made a change necessary. Therefore, Mortegro the Necromancer now holds her former position.\"");
 						say("\"Gustacio remains on the Council, as he is second in power only to Filbercio.\"");
-						UI_add_answer(["Gustacio", "Mortegro"]);
+						add(["Gustacio", "Mortegro"]);
 					}
 				} else {
 					say("\"The other two Adepts are Gustacio the Green Mage, and the Red Sorceress, Rotoluncia.\"");
-					UI_add_answer(["Gustacio", "Rotoluncia"]);
+					add(["Gustacio", "Rotoluncia"]);
 				}
 				fallthrough;
 
 			case "Filbercio" (remove):
 				say("\"He comes from a long line of Mages. Filbercio is well-respected and is known as a shrewd administrator of city affairs. In private, though, it is said that he is something of a womanizer.\"");
 				UI_push_answers();
-				UI_add_answer(["politics", "womanizer", "nothing more"]);
+				add(["politics", "womanizer", "nothing more"]);
 				fallthrough;
 
 			case "politics" (remove):
@@ -23900,7 +23900,7 @@ void Func0411 object#(0x411) () {
 				say("\"In what art thou interested?\"");
 				UI_push_answers();
 				var0006 = 0x0001;
-				UI_add_answer(["people", "places", "strange objects", "nothing more"]);
+				add(["people", "places", "strange objects", "nothing more"]);
 				fallthrough;
 
 			case "people" (remove):
@@ -23910,7 +23910,7 @@ void Func0411 object#(0x411) () {
 
 			case "places" (remove):
 				say("\"There are many strange places that one may explore in Moonshade. To the south of the city are ancient catacombs. Somewhere within those tunnels is a way leading to a dungeon known only as Furnace.\"");
-				UI_add_answer(["catacombs", "Furnace"]);
+				add(["catacombs", "Furnace"]);
 				fallthrough;
 
 			case "catacombs" (remove):
@@ -23926,21 +23926,21 @@ void Func0411 object#(0x411) () {
 				UI_push_answers();
 				var0006 = (var0006 + 0x0001);
 				if (gflags[0x0112] && (!gflags[0x0290])) {
-					UI_add_answer("pumice");
+					add("pumice");
 				}
 				if (gflags[0x0110] && (!gflags[0x028F])) {
-					UI_add_answer("apparatus");
+					add("apparatus");
 				}
 				if (gflags[0x010B] && (!gflags[0x028C])) {
-					UI_add_answer("pinecone");
+					add("pinecone");
 				}
 				if (gflags[0x010C] && (!gflags[0x0295])) {
-					UI_add_answer("blue egg");
+					add("blue egg");
 				}
 				if (gflags[0x010E] && (!gflags[0x029A])) {
-					UI_add_answer("skull");
+					add("skull");
 				}
-				UI_add_answer("nothing more");
+				add("nothing more");
 				fallthrough;
 
 			case "pumice" (remove):
@@ -24183,20 +24183,20 @@ void Func0412 object#(0x412) () {
 		UI_show_npc_face0(0xFFEE, 0x0000);
 		var000A = UI_get_item_flag(0xFFEE, 0x001C);
 		say("\"'Tis thee again. Hast thou good news?\"");
-		UI_add_answer(["duties", "politics"]);
+		add(["duties", "politics"]);
 		if (gflags[0x00EA] && ((!gflags[0x00EB]) && (!UI_get_item_flag(0xFFE1, 0x0004)))) {
-			UI_add_answer("kidnap");
+			add("kidnap");
 		}
 		if (gflags[0x00EB] && (!UI_is_dead(0xFFE1))) {
-			UI_add_answer("search");
+			add("search");
 		}
 		if (gflags[0x0110] && (!gflags[0x028F])) {
-			UI_add_answer("apparatus");
+			add("apparatus");
 		}
 		if (gflags[0x0114] && (!gflags[0x0293])) {
-			UI_add_answer("slippers");
+			add("slippers");
 		}
-		UI_add_answer(["bye"]);
+		add(["bye"]);
 		converse (0) {
 			case "change subject":
 				say("\"But we were only beginning! Very well, if thou dost insist...\"");
@@ -24207,7 +24207,7 @@ void Func0412 object#(0x412) () {
 				say("\"As thou hast no doubt noticed, the burden of being MageLord wears heavily upon me. I spend all of mine hours in the palace. I have no life of mine own. I seldom even research new spells.\"");
 				Func0830();
 				UI_push_answers();
-				UI_add_answer(["burden", "palace", "life", "spells", "change subject"]);
+				add(["burden", "palace", "life", "spells", "change subject"]);
 				fallthrough;
 
 			case "spells" (remove):
@@ -24253,13 +24253,13 @@ void Func0412 object#(0x412) () {
 				}
 				Func0830();
 				UI_push_answers();
-				UI_add_answer(["Adept Gustacio"]);
+				add(["Adept Gustacio"]);
 				if (UI_get_item_flag(0xFFE1, 0x0004)) {
-					UI_add_answer("Adept Mortegro");
+					add("Adept Mortegro");
 				} else {
-					UI_add_answer("Adept Rotoluncia");
+					add("Adept Rotoluncia");
 				}
-				UI_add_answer("change subject");
+				add("change subject");
 				fallthrough;
 
 			case "Adept Rotoluncia" (remove):
@@ -24320,14 +24320,14 @@ void Func0412 object#(0x412) () {
 				say("\"Thy friend hath been taken! How foul! And by magical means! Indeed...\"");
 				say("\"Whom dost thou suspect of this terrible crime?\"");
 				UI_push_answers();
-				UI_add_answer(["Batlin"]);
+				add(["Batlin"]);
 				if (gflags[0x013F]) {
-					UI_add_answer("Mortegro");
+					add("Mortegro");
 				}
 				if (gflags[0x0142]) {
-					UI_add_answer("Torrissio");
+					add("Torrissio");
 				}
-				UI_add_answer(["Rotoluncia", "unknown"]);
+				add(["Rotoluncia", "unknown"]);
 				fallthrough;
 
 			case "Mortegro":
@@ -24373,7 +24373,7 @@ void Func0412 object#(0x412) () {
 					say("\"So thou hast searched Rotoluncia's manor, and there is no sign of thy friend, or of Rotoluncia? How interesting...\"");
 					say("\"I have one last hope for thee, but I must first share a secret with thee...\"");
 					UI_push_answers();
-					UI_add_answer(["last hope", "secret", "change subject"]);
+					add(["last hope", "secret", "change subject"]);
 				}
 				fallthrough;
 
@@ -24386,14 +24386,14 @@ void Func0412 object#(0x412) () {
 				say("\"I am reluctant to admit this, but under the circumstances, I think that I must.\"");
 				say("\"A year ago, the Red Sorceress and I renewed that passionate affair which we began in our youth. This was none of mine idea, but I could not resist her advances...\"");
 				say("\"She demanded that our love-making be done in secret, and so I built a secluded love palace.\"");
-				UI_add_answer(["love palace", "love-making"]);
+				add(["love palace", "love-making"]);
 				fallthrough;
 
 			case "love palace" (remove):
 				say("\"Oh, it is a modest place -- not like this great masterpiece! A mere cottage.\"");
 				say("\"Perhaps Rotoluncia hath gone there to hide, and taken thy friend as well. If so, then she hath betrayed me.\"");
 				say("\"Go quickly! See if she is there, and if so, flush her out!\"");
-				UI_add_answer("Where is it?");
+				add("Where is it?");
 				fallthrough;
 
 			case "Where is it?" (remove):
@@ -24401,7 +24401,7 @@ void Func0412 object#(0x412) () {
 				say("\"Thou shalt need a boat to reach this place. Take my yacht. I give thee permission.\"");
 				say("\"The royal yacht is moored at the pier which can only be reached from within my palace. Thou wilt note that my yacht will not move unless the mystic engine is engaged.\"");
 				gflags[0x00EC] = true;
-				UI_add_answer("betrayed");
+				add("betrayed");
 				fallthrough;
 
 			case "betrayed" (remove):
@@ -24479,27 +24479,27 @@ void Func0413 object#(0x413) () {
 			} else {
 				say("\"I need thine help! I need thine help! I am in so much trouble...\"");
 			}
-			UI_add_answer("trouble");
+			add("trouble");
 		} else {
 			if (var0004 == false) {
 				UI_set_item_flag(0xFFED, 0x001C);
 				say("\"Art thou the great hero from a distant land?! Oh, my name is Freli. I am glad to meet thee!\"");
-				UI_add_answer(["hero", "distant land"]);
+				add(["hero", "distant land"]);
 			} else {
 				say("\"'Tis the Avatar! 'Tis the Avatar, from far away!\"");
-				UI_add_answer(["Avatar", "far away"]);
+				add(["Avatar", "far away"]);
 			}
 		}
 		if (gflags[0x0267] && (!gflags[0x00F6])) {
-			UI_add_answer("looking for scroll");
+			add("looking for scroll");
 		}
 		if (gflags[0x018D] && (!gflags[0x00E7])) {
-			UI_add_answer("Delin");
+			add("Delin");
 		}
 		if (gflags[0x00EA] && (!UI_get_item_flag(0xFFE1, 0x0004))) {
-			UI_add_answer("kidnap");
+			add("kidnap");
 		}
-		UI_add_answer(["bye"]);
+		add(["bye"]);
 		converse (0) {
 			case "kidnap" (remove):
 				say("\"Thou shouldst ask Andrio -- I am certain that he could help thee! He is very bright.\"");
@@ -24511,19 +24511,19 @@ void Func0413 object#(0x413) () {
 
 			case "hero", "Avatar" (remove):
 				say("\"I know thou hast participated in many daring exploits. I so want to hear about everything! Life is so dreary here. I have nothing but my study of magic to interest me.\"");
-				UI_add_answer(["dreary", "study", "magic"]);
+				add(["dreary", "study", "magic"]);
 				fallthrough;
 
 			case "dreary" (remove):
 				say("\"Why, nothing ever happens here in Moonshade. At least, nothing to match thy fascinating activities. I would wager not even Filbercio hath seen as much as thee.\"");
-				UI_add_answer(["Moonshade", "Filbercio"]);
+				add(["Moonshade", "Filbercio"]);
 				fallthrough;
 
 			case "Moonshade" (remove):
 				say("\"'Twas founded several centuries ago, ",
 				    var0000,
 				    ". Legend holds that the Mad Mage himself journeyed from a far away place, arriving here and laying claim to the land.\"");
-				UI_add_answer("Mad Mage");
+				add("Mad Mage");
 				fallthrough;
 
 			case "Mad Mage" (remove):
@@ -24532,7 +24532,7 @@ void Func0413 object#(0x413) () {
 
 			case "Filbercio" (remove):
 				say("\"The MageLord? He is the greatest of all wizards, or so I have heard. He rules with a kind but stern hand. Of course, I would not count on his friendship were I to be seen with his lover.\"");
-				UI_add_answer("lover");
+				add("lover");
 				fallthrough;
 
 			case "lover" (remove):
@@ -24543,7 +24543,7 @@ void Func0413 object#(0x413) () {
 
 			case "study" (remove):
 				say("\"Well, I certainly love magic and all, but it's taking too long! I have been learning for years, thou wouldst think me a master at this point. I do not believe it fair -- that traveller needed no tutelage, he simply paid Torrissio and was off.\"");
-				UI_add_answer(["traveller", "Torrissio"]);
+				add(["traveller", "Torrissio"]);
 				fallthrough;
 
 			case "traveller" (remove):
@@ -24565,7 +24565,7 @@ void Func0413 object#(0x413) () {
 					UI_set_conversation_slot(0x0000);
 				}
 				say("\"Why, Andrio will not even pass his house before 9 in the morning.\"");
-				UI_add_answer("nine");
+				add("nine");
 				fallthrough;
 
 			case "nine" (remove):
@@ -24586,13 +24586,13 @@ void Func0413 object#(0x413) () {
 				say("\"It was so terrible! Everyone is dead, and the city is destroyed...\"");
 				say("\"I was in the Seminarium when the Glowing Man came. Fedabiblio tried to\tstop him, but could not...\"");
 				if (!var0001) {
-					UI_add_answer("Fedabiblio");
+					add("Fedabiblio");
 				}
 				fallthrough;
 
 			case "Fedabiblio":
 				var0001 = true;
-				UI_remove_answer("Fedabiblio");
+				remove("Fedabiblio");
 				if (gflags[0x00F1]) {
 					say("\"Thou art a Mage beyond compare, ",
 					    var0000,
@@ -24618,7 +24618,7 @@ void Func0413 object#(0x413) () {
 					say("\"Only Fedabiblio had the key. But now he hath been turned to stone!\"");
 				}
 				if (!var0001) {
-					UI_add_answer("Fedabiblio");
+					add("Fedabiblio");
 				}
 				fallthrough;
 
@@ -24722,9 +24722,9 @@ void Func0414 object#(0x414) () {
 			say("\"Back so soon? But of course.\"");
 		}
 		if (gflags[0x0292]) {
-			UI_add_answer("fur cap");
+			add("fur cap");
 		}
-		UI_add_answer(["spells", "goblin", "Batlin", "Moonshade", "Gwenno", "bye"]);
+		add(["spells", "goblin", "Batlin", "Moonshade", "Gwenno", "bye"]);
 		converse (0) {
 			case "fur cap" (remove):
 				var000B = Func097D(0xFE9B, 0x0001, 0x03EC, 0xFE99, 0x0004);
@@ -24749,7 +24749,7 @@ void Func0414 object#(0x414) () {
 			case "Batlin" (remove):
 				say("\"That disgusting oaf! He wanted to buy a serpent relic from me, but I did not sell it to him!\"");
 				say("\"Cannot we find a different topic of conversation?\"");
-				UI_add_answer("serpent relic");
+				add("serpent relic");
 				fallthrough;
 
 			case "serpent relic" (remove):
@@ -24781,13 +24781,13 @@ void Func0414 object#(0x414) () {
 						Func0907(var000E, 0x0001);
 					}
 				}
-				UI_add_answer(["knowledge"]);
+				add(["knowledge"]);
 				fallthrough;
 
 			case "knowledge" (remove):
 				say("\"I am the mistress of cold-fire magic, a specialty I learned during my many travels to the north.\"");
 				say("\"Extreme cold is in its own way just as powerful a force as extreme heat. Over time, I have learned to bend it to my will.\"");
-				UI_add_answer("travels to the north");
+				add("travels to the north");
 				fallthrough;
 
 			case "travels to the north" (remove):
@@ -24887,34 +24887,34 @@ void Func0416 object#(0x416) () {
 				    var0002,
 				    ". How may I be of service to thee?\"");
 				if (!gflags[0x0239]) {
-					UI_add_answer("Dungeon Freedom");
+					add("Dungeon Freedom");
 				}
 				if (!gflags[0x0172]) {
-					UI_add_answer("the trial");
+					add("the trial");
 				}
 			}
 		}
 		if (gflags[0x00E3] && (!gflags[0x0128])) {
-			UI_add_answer("experiment");
+			add("experiment");
 		}
 		if (gflags[0x0128] && ((!gflags[0x00E6]) && (!gflags[0x011D]))) {
-			UI_add_answer("Ale is Edrin");
+			add("Ale is Edrin");
 		}
 		if (gflags[0x0128] && ((!gflags[0x00E6]) && gflags[0x011D])) {
-			UI_add_answer("instructions");
+			add("instructions");
 		}
 		if (gflags[0x00E6] && (!gflags[0x00E5])) {
-			UI_add_answer("experiment");
+			add("experiment");
 		}
 		if (gflags[0x00FE] && (!gflags[0x00CE])) {
-			UI_add_answer("Daemon Sword");
+			add("Daemon Sword");
 		}
 		if (gflags[0x00E2]) {
-			UI_add_answer("stone altar");
+			add("stone altar");
 		}
-		UI_add_answer(["name", "spells", "bye"]);
+		add(["name", "spells", "bye"]);
 		if (gflags[0x00E3] && (!gflags[0x00E6])) {
-			UI_remove_answer("spells");
+			remove("spells");
 		}
 		converse (0) {
 			case "the trial" (remove):
@@ -24934,7 +24934,7 @@ void Func0416 object#(0x416) () {
 
 			case "name":
 				say("\"My name is Gustacio, if thou must inquire!\"");
-				UI_remove_answer("name");
+				remove("name");
 				fallthrough;
 
 			case "Daemon Sword" (remove):
@@ -24976,7 +24976,7 @@ void Func0416 object#(0x416) () {
 					gflags[0x0008] = false;
 					gflags[0x0009] = false;
 					gflags[0x000A] = false;
-					UI_add_answer(["teleportation", "transposition", "transmutation", "lightning colors"]);
+					add(["teleportation", "transposition", "transmutation", "lightning colors"]);
 				}
 				fallthrough;
 
@@ -24984,7 +24984,7 @@ void Func0416 object#(0x416) () {
 				gflags[0x0007] = true;
 				say("\"This is the mysterious power to move things from one place to another without passing through the space between.\"");
 				if (gflags[0x0007] && (gflags[0x0008] && (gflags[0x0009] && gflags[0x000A]))) {
-					UI_add_answer("further details");
+					add("further details");
 				}
 				fallthrough;
 
@@ -24992,7 +24992,7 @@ void Func0416 object#(0x416) () {
 				gflags[0x0008] = true;
 				say("\"This is a more elaborate form of teleportation, wherein two objects exchange places -- neither passing through the physical space between them. Fascinating!\"");
 				if (gflags[0x0007] && (gflags[0x0008] && (gflags[0x0009] && gflags[0x000A]))) {
-					UI_add_answer("further details");
+					add("further details");
 				}
 				fallthrough;
 
@@ -25000,7 +25000,7 @@ void Func0416 object#(0x416) () {
 				gflags[0x0009] = true;
 				say("\"I am not quite certain that this power actually exists. I have theorized that it would involve taking one object and literally changing it into another type of object. The difficulty in proving that something like this exists is that this power must be directly witnessed. Otherwise how is one to know that an item is not what it always was?\"");
 				if (gflags[0x0007] && (gflags[0x0008] && (gflags[0x0009] && gflags[0x000A]))) {
-					UI_add_answer("further details");
+					add("further details");
 				}
 				fallthrough;
 
@@ -25013,7 +25013,7 @@ void Func0416 object#(0x416) () {
 					say("\"And the experiment that thou didst carry out for me seems to confirm what I believed to be true.\"");
 				}
 				if (gflags[0x0007] && (gflags[0x0008] && (gflags[0x0009] && gflags[0x000A]))) {
-					UI_add_answer("further details");
+					add("further details");
 				}
 				fallthrough;
 
@@ -25074,7 +25074,7 @@ void Func0416 object#(0x416) () {
 					var0003 = Func099B(0xFE9C, 0x0001, 0x01C2, 0x0000, 0x0001, 0x0000, true);
 					gflags[0x011D] = true;
 				}
-				UI_remove_answer("Ale is Edrin");
+				remove("Ale is Edrin");
 				fallthrough;
 
 			case "stone altar" (remove):
@@ -25185,27 +25185,27 @@ void Func0417 object#(0x417) () {
 			say("\"We meet again.\"");
 		}
 		if (gflags[0x00ED] && (!gflags[0x00E0])) {
-			UI_add_answer("Catacombs");
+			add("Catacombs");
 			if (gflags[0x014B]) {
-				UI_add_answer("key");
+				add("key");
 			}
 		}
 		if (gflags[0x0115] && (!gflags[0x0293])) {
-			UI_add_answer("slippers");
+			add("slippers");
 		}
 		if (gflags[0x0285] && (!gflags[0x0297])) {
-			UI_add_answer("strange wine");
+			add("strange wine");
 		}
 		if (gflags[0x0045] && (UI_get_schedule_type(0xFFB4) != 0x000F)) {
-			UI_add_answer("brown bottle");
+			add("brown bottle");
 		}
 		if (gflags[0x0106] && (!gflags[0x011B])) {
-			UI_add_answer("Celennia's disappearance");
+			add("Celennia's disappearance");
 		}
 		if (gflags[0x00EA] && (!UI_get_item_flag(0xFFE1, 0x0004))) {
-			UI_add_answer("kidnap");
+			add("kidnap");
 		}
-		UI_add_answer(["name", "wine", "bye"]);
+		add(["name", "wine", "bye"]);
 		converse (0) {
 			case "kidnap" (remove):
 				if (gflags[0x0143]) {
@@ -25251,13 +25251,13 @@ void Func0417 object#(0x417) () {
 			case "name" (remove):
 				say("\"What business is it of thine? Who art thou, coming into my city and asking questions?\"");
 				say("\"If thou must know, I am Julia, chief of rangers. If thou dost make trouble in Moonshade, I will see that thou art sent to the dungeons!\"");
-				UI_add_answer(["Rangers", "Moonshade", "dungeons"]);
+				add(["Rangers", "Moonshade", "dungeons"]);
 				fallthrough;
 
 			case "Rangers" (remove):
 				say("\"We are the guardians of Moonshade. The City of Mages hath always been guarded by Rangers.\"");
 				say("\"The tradition doth date to the ancient city of Moon, from whence our ancestors came.\"");
-				UI_add_answer(["guardians", "Moon"]);
+				add(["guardians", "Moon"]);
 				fallthrough;
 
 			case "guardians" (remove):
@@ -25306,19 +25306,19 @@ void Func0417 object#(0x417) () {
 				say("\"Aye, the City of Mages. There is much magic here, and more than a little sorcery.\"");
 				say("\"The name is symbolic. Moon represents the powers beyond those of mere mortals, just as the moon is suspended over the world.\"");
 				say("\"As for Shade, it stands for shelter against the cruel light of Honesty. We believe in Truth here, but only within reason.\"");
-				UI_add_answer(["magic", "sorcery"]);
+				add(["magic", "sorcery"]);
 				fallthrough;
 
 			case "magic" (remove):
 				say("\"Mages use reagents and such like to cast magic. The good or ill of it comes from the caster's intent.\"");
 				say("\"Magic, in and of itself, is neither good nor evil. But sorcery is another matter altogether.\"");
-				UI_add_answer("reagents");
+				add("reagents");
 				fallthrough;
 
 			case "reagents" (remove):
 				say("\"Why ask me about them? I am a Ranger, not a Mage!\"");
 				say("\"If thou dost wish such information, seek out Pothos. Do not trouble me to teach thee the rudiments of magic! I am no teacher. Thou shouldst seek Fedabiblio with thine annoying questions!\"");
-				UI_add_answer(["Pothos", "Fedabiblio"]);
+				add(["Pothos", "Fedabiblio"]);
 				fallthrough;
 
 			case "Pothos" (remove):
@@ -25334,7 +25334,7 @@ void Func0417 object#(0x417) () {
 			case "sorcery" (remove):
 				say("\"Sorcery is outlawed here in Moonshade, but that doth not mean that some Mages do not still practice its dark arts.\"");
 				say("\"Whereas magic is neither good nor evil, sorcery -- with its use of Bloodspawn -- hath no good intent at all. And the very possession of Stoneheart would have thee thrown into the deepest corners of the dungeons.\"");
-				UI_add_answer(["Bloodspawn", "Stoneheart"]);
+				add(["Bloodspawn", "Stoneheart"]);
 				fallthrough;
 
 			case "Bloodspawn" (remove):
@@ -25357,7 +25357,7 @@ void Func0417 object#(0x417) () {
 			case "dungeons" (remove):
 				say("\"Beware how thou dost step! The MageLord is apt to send any transgressor into the pits beneath the Mountains of Freedom.\"");
 				say("\"None have returned from that dank, dark abyss.\"");
-				UI_add_answer(["MageLord", "transgressor", "Freedom"]);
+				add(["MageLord", "transgressor", "Freedom"]);
 				fallthrough;
 
 			case "MageLord" (remove):
@@ -25379,14 +25379,14 @@ void Func0417 object#(0x417) () {
 				} else {
 					say("\"If thou art a Mage, thou must follow the Strictures. If thou art a Mundane, thou must not overly annoy a Mage. That much is simple logic.\"");
 					say("\"But, as long as Filbercio is the MageLord, thou wouldst do well to remember that it is unhealthy to cross any of Filbercio's whims.\"");
-					UI_add_answer("Strictures");
+					add("Strictures");
 				}
 				fallthrough;
 
 			case "Strictures" (remove):
 				say("\"'Tis not my job to know them. 'Tis for the Council of Mages to enforce.\"");
 				say("\"In short, thou canst not possess Bloodspawn unless the Council approves of it. And thou shouldst report any research that thou dost wish to do to the Council, as well.\"");
-				UI_add_answer(["approves", "Council"]);
+				add(["approves", "Council"]);
 				fallthrough;
 
 			case "approves" (remove):
@@ -25423,7 +25423,7 @@ void Func0417 object#(0x417) () {
 				say("\"So, thou hast learned of the catacombs, hast thou? I hope thou hast not ventured to those ruins south of town, they are dangerous!");
 				say("\"I do not care what thou art after, but I'll tell thee that thou wilt throw thy life away down there.");
 				say("The depths belong to the Rat-Men, not to mention the burning heat. That is why the gate must always be locked.\"");
-				UI_add_answer(["Rat-Men", "burning heat"]);
+				add(["Rat-Men", "burning heat"]);
 				fallthrough;
 
 			case "Rat-Men" (remove):
@@ -25452,8 +25452,8 @@ void Func0417 object#(0x417) () {
 						var000E = UI_remove_party_items(0x0028, 0x03B8, 0xFE99, 0xFE99, true);
 						var000F = Func099B(0xFE9C, 0x0001, 0x0281, 0x00CB, 0x0004, 0x0000, true);
 						gflags[0x00E0] = true;
-						UI_remove_answer("Catacombs");
-						UI_remove_answer("key");
+						remove("Catacombs");
+						remove("key");
 					} else {
 						say("\"Art thou trying to jest with me? Thou dost not have 40 guilders!\"");
 						say("\"Return when thou hast learned how to count!\"");
@@ -25477,7 +25477,7 @@ void Func0417 object#(0x417) () {
 				} else {
 					say("\"I am no Mage to divine what it was that thou didst have! Bring to me the bottle or trouble me no more about it. I have enough to do taking care of our wine press.\"");
 				}
-				UI_add_answer("wine press");
+				add("wine press");
 				fallthrough;
 
 			case "wine press" (remove):
@@ -25485,7 +25485,7 @@ void Func0417 object#(0x417) () {
 				say("\"'Tis a magic wine press, ",
 				    var0000,
 				    ". Made by the one and only Mad Mage... before he began his weird experiments, that is.\"");
-				UI_add_answer(["Mad Mage", "experiments"]);
+				add(["Mad Mage", "experiments"]);
 				fallthrough;
 
 			case "Mad Mage" (remove):
@@ -25501,7 +25501,7 @@ void Func0417 object#(0x417) () {
 
 			case "brown bottle" (remove):
 				say("\"I would recognize that mud-brown bottle any day! 'Tis what those brine-drunk Fawn sailors swill! Bad enough to choke a goat, I will tell thee! Thou wilt not find any in this city!\"");
-				UI_add_answer(["brine-drunk sailors", "Fawn"]);
+				add(["brine-drunk sailors", "Fawn"]);
 				fallthrough;
 
 			case "brine-drunk sailors" (remove):
@@ -25511,7 +25511,7 @@ void Func0417 object#(0x417) () {
 			case "Fawn" (remove):
 				say("\"Fawn is a pretty city, built on the water. 'Tis on the west side of the mainland.\"");
 				say("\"I have met Fawn's guard captain. He is a handsome man, quite capable... though how he stomachs that swill they call ale, I shall never know.\"");
-				UI_add_answer("guard captain");
+				add("guard captain");
 				fallthrough;
 
 			case "guard captain" (remove):
@@ -25524,7 +25524,7 @@ void Func0417 object#(0x417) () {
 				say("\"I do not know the whole of it, in truth.\"");
 				say("\"All I know is that Celennia and Frigidazzi had some sort of noisy falling out, over the Mage that came here, I did hear.\"");
 				say("\"And then Celennia disappears, just like that! Left Frigidazzi in quite a snit, I'll tell thee!\"");
-				UI_add_answer(["Frigidazzi", "Mage"]);
+				add(["Frigidazzi", "Mage"]);
 				fallthrough;
 
 			case "Frigidazzi" (remove):
@@ -25625,36 +25625,36 @@ void Func0418 object#(0x418) () {
 			UI_set_item_flag(0xFFE8, 0x001C);
 			say("\"I do not believe that we have met. 'Tis so nice to make the acquaintance of a new, young Mage.\"");
 			say("\"I am Melino, husband of the Green Enchantress.\"");
-			UI_add_answer(["new Mage", "Green Enchantress"]);
+			add(["new Mage", "Green Enchantress"]);
 		} else {
 			say("\"Welcome, Mage. I am pleased to see thee again.\"");
 		}
 		if (gflags[0x00DF] && (!gflags[0x00EF])) {
-			UI_add_answer("Mosh");
+			add("Mosh");
 		}
 		if (var0004 && (!gflags[0x0297])) {
-			UI_add_answer("wine");
+			add("wine");
 		}
 		if (gflags[0x0110] && (!gflags[0x028F])) {
-			UI_add_answer("apparatus");
+			add("apparatus");
 		}
 		if (var0005) {
-			UI_add_answer("Stoneheart");
+			add("Stoneheart");
 		}
 		if (var0003) {
-			UI_add_answer("Moonsilk stockings");
+			add("Moonsilk stockings");
 		}
 		if (UI_get_schedule_type(0xFFE8) == 0x000C) {
-			UI_add_answer("spells");
+			add("spells");
 		}
-		UI_add_answer(["bye"]);
+		add(["bye"]);
 		converse (0) {
 			case "new Mage" (remove):
 				say("\"Of course thou art new here! I know all other Mages in Moonshade... And I have never seen thee before.\"");
 				say("\"And thou hast thy spellbook, so thou art not a Mundane. Therefore, thou art a Mage.\"");
 				say("\"By careful reasoning then, thou art a new Mage!\"");
 				say("\"But I cannot recall having seen thee in Fedabiblio's training... But then I do not usually take much note of the novices.\"");
-				UI_add_answer(["other Mages", "Mundane", "Fedabiblio"]);
+				add(["other Mages", "Mundane", "Fedabiblio"]);
 				fallthrough;
 
 			case "other Mages" (remove):
@@ -25663,20 +25663,20 @@ void Func0418 object#(0x418) () {
 				} else {
 					say("\"I have always been well-connected -- even before I took a seat on the Council. Many Mages come to consult me during their research.\"");
 				}
-				UI_add_answer(["Council", "research"]);
+				add(["Council", "research"]);
 				fallthrough;
 
 			case "Council" (remove):
 				UI_push_answers();
-				UI_add_answer("change subject");
+				add("change subject");
 				if (!gflags[0x00E2]) {
 					say("\"The Council of Mages is the ruling body of Moonshade. To be asked to take a seat on the Council is a great honor, but I had to turn it down...\"");
 					say("\"The current members are Mortegro, Gustacio, and Filbercio... of course.\"");
-					UI_add_answer(["Mortegro", "Gustacio", "Filbercio"]);
+					add(["Mortegro", "Gustacio", "Filbercio"]);
 				} else {
 					say("\"The Council of Mages is the ruling body of Moonshade. I did not wish to accept a seat on the Council, but Columna persuaded me...\"");
 					say("\"The other members are Gustacio and Filbercio, of course...\"");
-					UI_add_answer(["Gustacio", "Filbercio"]);
+					add(["Gustacio", "Filbercio"]);
 				}
 				fallthrough;
 
@@ -25684,11 +25684,11 @@ void Func0418 object#(0x418) () {
 				if (!gflags[0x00E2]) {
 					say("\"Mortegro is the local necromancer. He specializes in speaking with the dead, not raising them. Which is just as well, as the Council frowns on such exercises.\"");
 					say("\"Why raise the dead for servants when thou hast Mundanes for servants, after all? And we have no need of another Vasculio, that is clear.\"");
-					UI_add_answer("Vasculio");
+					add("Vasculio");
 				} else {
 					say("\"Mortegro was the local necromancer. He specialized in speaking with the dead, not raising them...\"");
 					say("\"Or at least that is what we all thought until he disappeared. Perhaps we have been harboring another Vasculio all this time.\"");
-					UI_add_answer(["disappeared", "Vasculio"]);
+					add(["disappeared", "Vasculio"]);
 				}
 				fallthrough;
 
@@ -25701,7 +25701,7 @@ void Func0418 object#(0x418) () {
 			case "disappeared" (remove):
 				say("\"Gone! In a trice! No word to anyone...\"");
 				say("\"Gustacio is mightily peeved, I can tell thee. Mortegro was helping him with an experiment, and Gustacio cannot complete his work alone.\"");
-				UI_add_answer("experiment");
+				add("experiment");
 				fallthrough;
 
 			case "experiment" (remove):
@@ -25714,7 +25714,7 @@ void Func0418 object#(0x418) () {
 
 			case "Filbercio" (remove):
 				say("\"Filbercio is the MageLord, which is probably the safest place to keep him. Thou mayest think that doth sound ridiculous, but 'tis one of the only ways we Mages can be assured of what he is doing. As long as Filbercio thinks he doth have power, he is too busy using it to satisfy his hungers to be causing too much trouble. On the other hand, if Filbercio did not think he had power, he would devote all his being to ruining everyone else to procure power.\"");
-				UI_add_answer(["hungers", "trouble"]);
+				add(["hungers", "trouble"]);
 				fallthrough;
 
 			case "hungers" (remove):
@@ -25727,17 +25727,17 @@ void Func0418 object#(0x418) () {
 
 			case "research" (remove):
 				UI_push_answers();
-				UI_add_answer("change subject");
+				add("change subject");
 				say("\"I seem to have a talent for discovering forgotten references within the archives. Such information can prove to be the key to a new spell or new aspect of an existing spell.\"");
 				say("\"For instance, Torrissio hath been paying me outrageous sums to deliver a list of reagents for a certain set of spells. I will not rest until I can justify his faith in me...\"");
 				say("\"Luckily, Columna hath been very understanding of the time I devote to my work.\"");
-				UI_add_answer("Torrissio");
+				add("Torrissio");
 				fallthrough;
 
 			case "Torrissio" (remove):
 				say("\"Torrissio is a very talented young Mage. His specialty is the creation of the automatons that serve as servants and guards for our mansions.\"");
 				say("\"He hath a fine eye for detail, even for such menial creatures as servants. Thou mayest see his best work at the Blue Boar -- where he lets Rocco display Petra for him.\"");
-				UI_add_answer(["Blue Boar", "Rocco", "Petra"]);
+				add(["Blue Boar", "Rocco", "Petra"]);
 				fallthrough;
 
 			case "Blue Boar" (remove):
@@ -25758,7 +25758,7 @@ void Func0418 object#(0x418) () {
 				say("\"One who doth not possess magic -- that is a Mundane. Without magic, man is little more than a slightly evolved animal. Suited only to be a beast of burden for those whose powers are clearly superior.\"");
 				say("\"I know nothing about them, nor do I care to. What use is it to note such furtive little lives that pass so quickly and with so little note?\"");
 				say("\"Only from time to time hath one caught mine eye... Like that striking young woman that came through here a while ago.\"");
-				UI_add_answer("young woman");
+				add("young woman");
 				fallthrough;
 
 			case "young woman" (remove):
@@ -25771,7 +25771,7 @@ void Func0418 object#(0x418) () {
 				say("\"Fedabiblio is the instructor of all novice Mages. He provides a solid foundation for the principles of magic. And then he passes the students on to the Adepts for more specialized training.\"");
 				say("\"Of course, at one time all Mages were taught by the Mad Mage. But not any more... Though the tradition of stealing something from him to prove that thou art indeed worthy of a title above novice remains.\"");
 				say("\"I doubt that he doth have any Serpent Teeth left to steal, so thou wilt have to make do with something else I suspect.\"");
-				UI_add_answer(["Mad Mage", "Serpent Teeth"]);
+				add(["Mad Mage", "Serpent Teeth"]);
 				fallthrough;
 
 			case "Mad Mage" (remove):
@@ -25787,7 +25787,7 @@ void Func0418 object#(0x418) () {
 
 			case "Green Enchantress" (remove):
 				say("\"Thou dost not know the Green Enchantress? Ah, perhaps thou wouldst recognize her by the spell she is famous for... Columna's Intuition.\"");
-				UI_add_answer(["famous", "Columna's Intuition"]);
+				add(["famous", "Columna's Intuition"]);
 				fallthrough;
 
 			case "famous" (remove):
@@ -25823,7 +25823,7 @@ void Func0418 object#(0x418) () {
 			case "Stoneheart" (remove):
 				say("\"I will tell thee that possession of Stoneheart is forbidden in Moonshade. I have no idea where thou didst come by it, nor do I want to know.\"");
 				say("\"Thou canst find other spells without resorting to those that are restricted.\"");
-				UI_add_answer(["spells", "restricted"]);
+				add(["spells", "restricted"]);
 				fallthrough;
 
 			case "spells":
@@ -25923,14 +25923,14 @@ void Func0419 object#(0x419) () {
 				var0004 = Func099B(0xFE9C, 0x0001, 0x02C3, 0x001F, 0x0006, 0x0012, true);
 				gflags[0x00D7] = true;
 			}
-			UI_add_answer(["Rotoluncia", "scroll", "servant"]);
+			add(["Rotoluncia", "scroll", "servant"]);
 		} else {
 			var0005 = UI_get_object_position(item);
 			if ((var0005[0x0001] < 0x09C2) && ((var0005[0x0001] > 0x0992) && ((var0005[0x0002] < 0x0750) && (var0005[0x0002] > 0x0700)))) {
 				say("\"This is the manor of the Enchantress Rotoluncia! Thou canst not enter without permission!\"");
-				UI_add_answer(["Rotoluncia"]);
+				add(["Rotoluncia"]);
 				if (gflags[0x00EA]) {
-					UI_add_answer(["kidnap", "Where is she?"]);
+					add(["kidnap", "Where is she?"]);
 				}
 			} else {
 				say("\"I must be about my duties.\"");
@@ -25939,7 +25939,7 @@ void Func0419 object#(0x419) () {
 				abort;
 			}
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "Rotoluncia" (remove):
 				say("\"My mistress commands many powerful and strange magics, and sits upon the Council of Mages.\"");
@@ -25962,13 +25962,13 @@ void Func0419 object#(0x419) () {
 
 			case "scroll":
 				say("\"'Tis not an ordinary scroll, but one of the magical variety. I assure thee that it is entirely free of harmful magic.\"");
-				UI_remove_answer("scroll");
+				remove("scroll");
 				fallthrough;
 
 			case "servant":
 				say("\"The Mages of Moonshade are quite powerful, and have found the way to acquire servants such as myself.\"");
 				say("\"My mistress says that automatons are more trustworthy, since we can neither be corrupted nor tortured.\"");
-				UI_remove_answer("servant");
+				remove("servant");
 				fallthrough;
 
 			case "bye":
@@ -26125,7 +26125,7 @@ void Func041A object#(0x41A) () {
 		UI_clear_item_say(0xFFE6);
 		if (UI_get_item_flag(0xFFE6, 0x0006)) {
 			UI_set_schedule_type(0xFFE6, 0x001F);
-			UI_add_answer("leave");
+			add("leave");
 		} else {
 			UI_run_schedule(0xFFE6);
 		}
@@ -26165,7 +26165,7 @@ void Func041A object#(0x41A) () {
 					}
 					say("\"I was caught in one of those bizarre storms, and seem to be trapped here on this island. If thou wouldst be so kind as to help me free of this place I would be willing to teach thee a spell or two... Or provide thee with a suitable spell scroll if thou art unable to handle spells of such a level.\"");
 				}
-				UI_add_answer(["trapped", "spell"]);
+				add(["trapped", "spell"]);
 			} else if (var000B == false) {
 				say("\"Hello, there! I am Mortegro, the Necromage of Moonshade.\"");
 				UI_set_item_flag(0xFFE6, 0x001C);
@@ -26176,25 +26176,25 @@ void Func041A object#(0x41A) () {
 			}
 		}
 		if (gflags[0x0110] && (!gflags[0x028F])) {
-			UI_add_answer("apparatus");
+			add("apparatus");
 		}
 		if (gflags[0x0114] && (!gflags[0x0293])) {
-			UI_add_answer("slippers");
+			add("slippers");
 		}
 		if (gflags[0x0117] && (!gflags[0x029B])) {
-			UI_add_answer("the bloody hand");
+			add("the bloody hand");
 		}
 		if (var0003 == 0x000E) {
-			UI_add_answer("Moonshade");
+			add("Moonshade");
 		}
 		if (gflags[0x0132]) {
-			UI_add_answer("seance");
+			add("seance");
 		}
 		if (gflags[0x013F] && (!UI_get_item_flag(0xFFE1, 0x0004))) {
-			UI_add_answer("accuse");
+			add("accuse");
 		}
-		UI_add_answer(["Necromage", "learn spells"]);
-		UI_add_answer("bye");
+		add(["Necromage", "learn spells"]);
+		add("bye");
 		converse (0) {
 			case "apparatus" (remove):
 				if (Func097D(0xFE9B, 0x0001, 0x02ED, 0xFE99, 0x0001)) {
@@ -26243,7 +26243,7 @@ void Func041A object#(0x41A) () {
 
 			case "Necromage" (remove):
 				say("\"Yes, that is a special sort of mage who specializes in magics that deal with dead things, as well as with the spirits of the dead themselves.\"");
-				UI_add_answer(["dead things", "spirits of dead"]);
+				add(["dead things", "spirits of dead"]);
 				fallthrough;
 
 			case "dead things" (remove):
@@ -26254,13 +26254,13 @@ void Func041A object#(0x41A) () {
 				say("\"Yes, as a Necromage I can commune with the spirits of the dead. I learn the secrets of the dead as well as the occasional portent of the future. But these seances are unpredictable in their results.\"");
 				if (!gflags[0x0132]) {
 					gflags[0x0132] = true;
-					UI_add_answer("seance");
+					add("seance");
 				}
 				fallthrough;
 
 			case "Moonshade" (remove):
 				say("\"It is a city of Mages, run by Mages and that is the way we mages like it. We are even governed by our own Council of Mages, chaired by Filbercio, Gustacio and Rotoluncia.\"");
-				UI_add_answer(["Filbercio", "Gustacio", "Rotoluncia"]);
+				add(["Filbercio", "Gustacio", "Rotoluncia"]);
 				fallthrough;
 
 			case "Filbercio" (remove):
@@ -26322,12 +26322,12 @@ void Func041A object#(0x41A) () {
 
 			case "trapped" (remove):
 				say("\"Well, I hesitate to admit that an Adept such as myself could be caught in such a manner... But none of my magics have worked to free me from this island.\"");
-				UI_add_answer("magics");
+				add("magics");
 				fallthrough;
 
 			case "magics" (remove):
 				say("\"Although I am not an expert in it, I can do simple teleports and fetches. But nothing I have tried has worked. I think, perhaps, that this is a null magic area.\"");
-				UI_add_answer("null magic area");
+				add("null magic area");
 				fallthrough;
 
 			case "null magic area" (remove):
@@ -26352,19 +26352,19 @@ void Func041A object#(0x41A) () {
 
 			case "spell" (remove):
 				say("\"Thou canst consider me a Necromancer, although I do not reanimate the dead. Specifically, I seek information from the dead. Thou wouldst no doubt find the Summon Shade spell useful.\"");
-				UI_add_answer(["information", "Summon Shade"]);
+				add(["information", "Summon Shade"]);
 				fallthrough;
 
 			case "information" (remove):
 				say("\"I am usually commissioned by one of the other mages when they are seeking lost information. I, myself, am not conducting any research at the moment. I was working with Gustacio on an experiment when I suddenly found myself here.\"");
-				UI_add_answer("experiment");
+				add("experiment");
 				fallthrough;
 
 			case "experiment" (remove):
 				say("\"I allowed Gustacio to convince me to help him with his plan to divert the teleportation storms.\"");
 				say("\"Perhaps it was not the wisest of things to have done... As I am trapped here and have no idea how to return to Moonshade.\"");
 				say("\"I believe I exchanged places with an altar of some sort. I am sure it rather surprised old Gustacio when I disappeared. He is no doubt wondering about whatever is now in his work area.\"");
-				UI_add_answer("altar");
+				add("altar");
 				fallthrough;
 
 			case "altar" (remove):
@@ -26374,17 +26374,17 @@ void Func041A object#(0x41A) () {
 
 			case "Summon Shade" (remove):
 				say("\"It is quite a handy spell, actually. It allows thee to question the shade of a dead person... As long as thou dost possess some item that the person had valued in life. Of course, it doth have its drawbacks...\"");
-				UI_add_answer("drawbacks");
+				add("drawbacks");
 				fallthrough;
 
 			case "drawbacks" (remove):
 				say("\"If thou dost summon a shade from its resting place without the appropriate item, the shade may well attack thee. And the spell doth use an inordinate amount of reagents... But thou dost learn such interesting things!\"");
-				UI_add_answer("reagents");
+				add("reagents");
 				fallthrough;
 
 			case "reagents":
 				say("\"It doth require Sulphurous Ash, Blood Moss, Mandrake Root, Nightshade and Spider's Silk. Quite costly, so thou shouldst use this spell sparingly. And remember that thou must have an item belonging to that person to call them forth.\"");
-				UI_remove_answer("reagents");
+				remove("reagents");
 				fallthrough;
 
 			case "bye":
@@ -26532,7 +26532,7 @@ void Func041B object#(0x41B) () {
 			if (gflags[0x00EF]) {
 				if (Func097D(0xFE9B, 0x0001, 0x0179, 0xFE99, 0x000D)) {
 					say("\"I smell something... thou hast some fish! Thou hast brought it for me! Oh, I do so love a good fish.\"");
-					UI_add_answer("give fish");
+					add("give fish");
 				} else {
 					say("\"Oh, it is my friend! Hast thou brought me something? No, I suppose not...\"");
 				}
@@ -26540,17 +26540,17 @@ void Func041B object#(0x41B) () {
 				say("\"Why dost thou not leave me alone?\"");
 			}
 		}
-		UI_add_answer("name");
+		add("name");
 		if (gflags[0x00EE] && (!gflags[0x00EF])) {
-			UI_add_answer("Columna");
+			add("Columna");
 		}
 		if (gflags[0x0115] && (!gflags[0x0293])) {
-			UI_add_answer("slippers");
+			add("slippers");
 		}
 		if (gflags[0x00EA] && (!UI_get_item_flag(0xFFE1, 0x0004))) {
-			UI_add_answer("kidnap");
+			add("kidnap");
 		}
-		UI_add_answer(["bye"]);
+		add(["bye"]);
 		converse (0) {
 			case "kidnap" (remove):
 				say("\"Well, do not stare at me like that. I be innocent. They've never convicted me of any crimes...\"");
@@ -26559,14 +26559,14 @@ void Func041B object#(0x41B) () {
 
 			case "name" (remove):
 				say("\"What's it to ye? Some call me the Rat Woman, but I'll have ye know that my rightful name is Mosh.\"");
-				UI_add_answer(["Rat Woman", "Mosh"]);
+				add(["Rat Woman", "Mosh"]);
 				fallthrough;
 
 			case "Mosh" (remove):
 				say("\"Aye, Mosh...\"");
 				if (gflags[0x00EF]) {
 					say("\"..and I am linked by fate to Columna, the Green Enchantress! She is my very own sister.\"");
-					UI_add_answer("sister");
+					add("sister");
 				} else {
 					say("\"Would that thou wert to believe me, I could tell thee a story! 'Tis done... though not forgotten. I will not talk of it now.\"");
 				}
@@ -26580,7 +26580,7 @@ void Func041B object#(0x41B) () {
 			case "Rat Woman" (remove):
 				say("\"Snigger not at me! I have company enough -- more guests in mine house than thou couldst have in thine.\"");
 				say("\"I was a powerful enchantress, in my prime. Before I was cheated of my powers.\"");
-				UI_add_answer(["company", "house", "enchantress", "magic", "cheated"]);
+				add(["company", "house", "enchantress", "magic", "cheated"]);
 				fallthrough;
 
 			case "house" (remove):
@@ -26613,9 +26613,9 @@ void Func041B object#(0x41B) () {
 					say("\"It was Columna who stole him from my love, by using her magics on him. Yet she never loved him... he was simply a toy to her.\"");
 				} else {
 					say("\"But another stole Trulacci's heart from me, and I shall never forgive her for that!\"");
-					UI_add_answer(["another"]);
+					add(["another"]);
 				}
-				UI_add_answer(["Trulacci"]);
+				add(["Trulacci"]);
 				fallthrough;
 
 			case "Trulacci" (remove):
@@ -26663,7 +26663,7 @@ void Func041B object#(0x41B) () {
 			case "another" (remove):
 				say("\"Thou shouldst speak to she who hath done me wrong: The Sorceress Columna, whom they sometimes call the Green Sorceress.\"");
 				say("\"Listen to what she says!\"");
-				UI_add_answer("the Green Sorceress");
+				add("the Green Sorceress");
 				gflags[0x00DF] = true;
 				fallthrough;
 
@@ -26684,7 +26684,7 @@ void Func041B object#(0x41B) () {
 				gflags[0x00EF] = true;
 				if (Func097D(0xFE9B, 0x0001, 0x0179, 0xFE99, 0x000D)) {
 					say("\"I smell something... thou hast some fish! Oh, I do so love a good fish.\"");
-					UI_add_answer("give fish");
+					add("give fish");
 				} else {
 					say("\"If thou art ever in need, come to me. I shall give thee anything I possess. Thou dost see, I have a good heart.\"");
 					say("\"And if thou dost ever have something that I could use, please bring it. Nothing large. Perhaps a morsel of food.\"");
@@ -26700,7 +26700,7 @@ void Func041B object#(0x41B) () {
 					    var0000,
 					    ". Thou art indeed a kind one. I knew the moment I saw ye I could call ye friend.\"");
 					say("\"And know that my little ones call ye friend as well, as do their larger cousins.\"");
-					UI_add_answer("larger cousins");
+					add("larger cousins");
 				}
 				fallthrough;
 
@@ -26827,12 +26827,12 @@ void Func041C object#(0x41C) () {
 	if (event == 0x0009) {
 		if (UI_get_item_flag(0xFFE4, 0x0006)) {
 			UI_set_schedule_type(0xFFE4, 0x001F);
-			UI_add_answer("leave");
+			add("leave");
 		} else {
 			UI_run_schedule(0xFFE4);
 			UI_clear_item_say(0xFFE4);
 			if (gflags[0x0015]) {
-				UI_add_answer("belongings");
+				add("belongings");
 			}
 		}
 		UI_show_npc_face0(0xFFE4, 0x0000);
@@ -26840,7 +26840,7 @@ void Func041C object#(0x41C) () {
 		if ((var0008 == false) && (!gflags[0x0004])) {
 			UI_set_item_flag(0xFFE4, 0x001C);
 			say("\"This is the Blue Boar Inn, and I am the barmaid. My name is Petra.\"");
-			UI_add_answer(["Blue Boar Inn", "barmaid"]);
+			add(["Blue Boar Inn", "barmaid"]);
 		} else {
 			if (gflags[0x0004]) {
 				if (!gflags[0x0139]) {
@@ -26869,24 +26869,24 @@ void Func041C object#(0x41C) () {
 			}
 		}
 		if (gflags[0x0226] && (!UI_get_item_flag(0xFFE4, 0x0006))) {
-			UI_add_answer("acid");
+			add("acid");
 		}
 		if (gflags[0x0227] && ((Func0994() == 0x0011) && (!UI_get_item_flag(0xFE9C, 0x0023)))) {
 			var0009 = UI_find_nearby(0xFE9C, 0x0314, 0x000F, 0x0000);
 			for (var000C in var0009 with var000A to var000B) {
 				if (UI_get_item_quality(var000C) == 0x003D) {
-					UI_add_answer("switch bodies");
+					add("switch bodies");
 					break;
 				}
 			}
 		}
 		if (gflags[0x00EA] && (!UI_get_item_flag(0xFFE1, 0x0004))) {
-			UI_add_answer("kidnap");
+			add("kidnap");
 		}
 		if (var0004 && (!UI_get_item_flag(0xFFE4, 0x0006))) {
-			UI_add_answer(["food", "drink", "room"]);
+			add(["food", "drink", "room"]);
 		}
-		UI_add_answer(["bye"]);
+		add(["bye"]);
 		converse (0) {
 			case "food":
 				say("\"We have a fine selection of meals available for thee to choose from. Art thou hungry, ",
@@ -27000,13 +27000,13 @@ void Func041C object#(0x41C) () {
 					say("\"It is not madness, Rocco. I am proud of thee...\"");
 				}
 				say("\"Rocco, the innkeeper. A finer man thou shalt not find.\"");
-				UI_add_answer(["Rocco"]);
+				add(["Rocco"]);
 				fallthrough;
 
 			case "Rocco" (remove):
 				say("\"Thou mayest find Rocco a bit gruff, but he doth have a good heart. After all, he alone hath stood between Torrissio and me... At great peril to himself, I might add.\"");
 				UI_push_answers();
-				UI_add_answer(["Torrissio", "peril", "change subject"]);
+				add(["Torrissio", "peril", "change subject"]);
 				fallthrough;
 
 			case "change subject":
@@ -27018,14 +27018,14 @@ void Func041C object#(0x41C) () {
 				say("\"Thou canst not have failed to notice that I am an automaton. Torrissio is my maker... Curse his black heart!\"");
 				say("\"Torrissio is a man who feeds off the misery of others. He created me with the sole intent of having a captive to torment for the rest of his life.\"");
 				say("\"But I escaped and Rocco took me in.\"");
-				UI_add_answer("automaton");
+				add("automaton");
 				fallthrough;
 
 			case "automaton" (remove):
 				say("\"I am a magical construct. An animated body of metal.\"");
 				say("\"Yet I can think. I can reason. And I believe I can care for others.\"");
 				say("\"Whether this means that I have a soul locked away within the confines of mine hollow body, I do not know. All I do know is that I am much more complex than the automatons Torrissio normally makes for the other Mages.\"");
-				UI_add_answer(["soul", "other Mages"]);
+				add(["soul", "other Mages"]);
 				fallthrough;
 
 			case "soul" (remove):
@@ -27050,7 +27050,7 @@ void Func041C object#(0x41C) () {
 				    "! Thou canst not know what danger there is in thwarting the will of a Mage!\"");
 				say("\"Rocco could be killed easily, and spells are untraceable. Or he could be spirited away to hideous torture. No one would be the wiser.\"");
 				say("\"So I look after him as best I can, even as he doth care for me. It also helps that everyone believes the tale we have spread.\"");
-				UI_add_answer("tale");
+				add("tale");
 				fallthrough;
 
 			case "tale" (remove):
@@ -27061,7 +27061,7 @@ void Func041C object#(0x41C) () {
 
 			case "barmaid" (remove):
 				say("\"I serve Rocco in whatever function I can... Barmaid, cook, whatever needs to be done. I have performed every job thou canst imagine here at the inn. Everything from painting the ceiling to keeping Mosh from stealing our fish.\"");
-				UI_add_answer("Mosh");
+				add("Mosh");
 				if (var0004) {
 					say("\"Can I bring thee something?\"");
 				}
@@ -27091,7 +27091,7 @@ void Func041C object#(0x41C) () {
 							}
 						} else {
 							if (UI_get_array_size(UI_get_party_list2()) < 0x0005) {
-								UI_add_answer("leave");
+								add("leave");
 								gflags[0x0015] = true;
 								say("\"If thou dost wish it, then I shall accompany thee. Perhaps the danger shall cause me to forget my grief.\"");
 								UI_add_to_party(0xFFE4);
@@ -27236,7 +27236,7 @@ void Func041D object#(0x41D) () {
 				say("\"I am Pothos, the Apothecary in this city.\"");
 				say("\"If thou desirest potions, reagents, or other ingredients such as are customary in the practice of magic, come to my shop.\"");
 			}
-			UI_add_answer(["banquet", "Rotoluncia", "Apothecary Shop"]);
+			add(["banquet", "Rotoluncia", "Apothecary Shop"]);
 		} else {
 			if (gflags[0x00E8] && (!gflags[0x00DD])) {
 				if (Func097D(0xFE9B, 0x0001, 0x034A, 0xFE99, 0x0001)) {
@@ -27264,41 +27264,41 @@ void Func041D object#(0x41D) () {
 			}
 		}
 		if (gflags[0x00DD] && (!gflags[0x01B7])) {
-			UI_add_answer("tell me about Erstam");
+			add("tell me about Erstam");
 		}
 		if (UI_get_schedule_type(0xFFE3) == 0x001D) {
-			UI_add_answer("buy");
+			add("buy");
 		}
 		if (gflags[0x0285] && (!gflags[0x0297])) {
-			UI_add_answer("strange wine");
+			add("strange wine");
 		}
 		if (gflags[0x0115] && (!gflags[0x0293])) {
-			UI_add_answer("slippers");
+			add("slippers");
 		}
 		if (gflags[0x0111] && (!gflags[0x028F])) {
-			UI_add_answer("apparatus");
+			add("apparatus");
 		}
 		if (gflags[0x0289] && (!gflags[0x029B])) {
-			UI_add_answer("bloody hand");
+			add("bloody hand");
 		}
 		if (Func097D(0xFE9B, 0x0001, 0x034A, 0xFE99, 0x000F)) {
-			UI_add_answer("Stoneheart");
+			add("Stoneheart");
 		}
 		if (gflags[0x00DC] && (!gflags[0x00E8])) {
-			UI_add_answer("secret");
+			add("secret");
 		}
 		if (gflags[0x00EA] && (!UI_get_item_flag(0xFFE1, 0x0004))) {
-			UI_add_answer("kidnap");
+			add("kidnap");
 		}
 		if (!UI_get_item_flag(0xFFE1, 0x0004)) {
-			UI_add_answer("Rotoluncia");
+			add("Rotoluncia");
 		}
-		UI_add_answer(["bye"]);
+		add(["bye"]);
 		converse (0) {
 			case "tell me about Erstam" (remove):
 				say("\"It would not be wise for me to tell thee much. I shall merely acquaint thee with how to reach the docks, how to call thy transport, and the required password.\"");
 				UI_push_answers();
-				UI_add_answer(["reach the docks", "call transport", "password", "change subject"]);
+				add(["reach the docks", "call transport", "password", "change subject"]);
 				fallthrough;
 
 			case "kidnap" (remove):
@@ -27311,19 +27311,19 @@ void Func041D object#(0x41D) () {
 				say("\"I apologize for disrupting the party, ",
 				    var0000,
 				    ". Normally, I wouldn't have been there. But I had been on a special errand for the MageLord.\"");
-				UI_add_answer(["Wouldn't have been there?", "errand"]);
+				add(["Wouldn't have been there?", "errand"]);
 				fallthrough;
 
 			case "Wouldn't have been there?" (remove):
 				say("\"While it is true that I am a Mage, I am not an Adept. And Filbercio invites only Adepts to his banquets, as a rule.\"");
-				UI_add_answer(["Filbercio", "Adept"]);
+				add(["Filbercio", "Adept"]);
 				fallthrough;
 
 			case "Filbercio" (remove):
 				say("\"Filbercio is the MageLord! And thou wouldst do well not to forget that while thou art in Moonshade.\"");
 				say("\"Filbercio is a man of great passions. The Mountains of Freedom are a powerful argument against crossing him in any way.\"");
 				if (gflags[0x012E] == false) {
-					UI_add_answer("Freedom");
+					add("Freedom");
 				}
 				fallthrough;
 
@@ -27334,7 +27334,7 @@ void Func041D object#(0x41D) () {
 				say("\"It is said that if thou art sentenced to that terrible stone pit, and thou canst win thy way back to the outside world, then thou art free. No one will hunt thee for the crimes thou didst commit before thine incarceration...\"");
 				say("\"The only problem is that none have ever won free. And Filbercio reigns unchallenged.\"");
 				gflags[0x012E] = true;
-				UI_add_answer(["stone pit", "unchallenged"]);
+				add(["stone pit", "unchallenged"]);
 				fallthrough;
 
 			case "stone pit" (remove):
@@ -27363,10 +27363,10 @@ void Func041D object#(0x41D) () {
 				say("\"I tried. But these storms have brought fierce monsters into that area... And I'm no Adept to deal with them.\"");
 				say("\"Filbercio threatened to throw me into the Mountains of Freedom if I do not obtain the Blood Moss! I'd trade my dearest secret to be able to find some Blood Moss!\"");
 				if (gflags[0x00DC] && (!gflags[0x00E8])) {
-					UI_add_answer("secret");
+					add("secret");
 				}
 				if (gflags[0x012E] == false) {
-					UI_add_answer("Freedom");
+					add("Freedom");
 				}
 				fallthrough;
 
@@ -27413,7 +27413,7 @@ void Func041D object#(0x41D) () {
 					    ".\"");
 				}
 				UI_push_answers();
-				UI_add_answer(["force", "storms", "change subject"]);
+				add(["force", "storms", "change subject"]);
 				fallthrough;
 
 			case "change subject":
@@ -27427,7 +27427,7 @@ void Func041D object#(0x41D) () {
 				say("\"Well, to be precise, I should say that she suspects a recent visitor -- a Mage named Batlin.\"");
 				say("\"I'll grant that he came through asking all sorts of questions, and badgering people to sell their Serpent Teeth. But I fail to see how she thinks he doth have anything to do with the storms.\"");
 				say("\"And I'm afraid that she thinks all strangers are in league with Batlin. Of course, it did not help that he had that Daemon, either...\"");
-				UI_add_answer(["Batlin", "questions", "Serpent Teeth", "Daemon"]);
+				add(["Batlin", "questions", "Serpent Teeth", "Daemon"]);
 				fallthrough;
 
 			case "Batlin" (remove):
@@ -27438,7 +27438,7 @@ void Func041D object#(0x41D) () {
 			case "questions" (remove):
 				say("\"Batlin seemed very interested in learning more of the history of the ancient people of this land -- the ones we call the Ophidians.\"");
 				say("\"As I am far from my days as a novice, I do not remember all that the Magister taught us. I wasn't much interested then, or now. I sent him to Fedabiblio.\"");
-				UI_add_answer(["Ophidians", "Fedabiblio"]);
+				add(["Ophidians", "Fedabiblio"]);
 				fallthrough;
 
 			case "Ophidians" (remove):
@@ -27476,7 +27476,7 @@ void Func041D object#(0x41D) () {
 				say("\"Definitely magic-born, no doubt about it. Anyone caught outside during one risks being teleported into oblivion.\"");
 				say("\"Gustacio hath been working on finding a way to stop the storms. But so far, he hath not had any luck. Mayhaps now that Mortegro is helping him, they'll find the answer...\"");
 				say("\"I certainly hope so. Moonshade is isolated until they do.\"");
-				UI_add_answer(["Gustacio", "Mortegro"]);
+				add(["Gustacio", "Mortegro"]);
 				fallthrough;
 
 			case "Gustacio" (remove):
@@ -27512,12 +27512,12 @@ void Func041D object#(0x41D) () {
 			case "call transport" (remove):
 				say("\"To call the creature, go to the docks. There, thou shalt find a ship's bell.\"");
 				say("\"Once thou hast rung the bell and chanted the mantra, thy transport will arrive. It can only take thee to my father's island... nowhere else.\"");
-				UI_add_answer("mantra");
+				add("mantra");
 				fallthrough;
 
 			case "mantra":
 				if (gflags[0x0145]) {
-					UI_remove_answer("mantra");
+					remove("mantra");
 					say("\"My, thou art impatient! I was just about to tell thee...\"");
 					say("\"I Re-Ten Bentas Juxark I! Praetimde Mir-Wis Re-Por I.\"");
 					say("\"To learn its meaning, translate it from the language of Magic.\"");
@@ -27554,12 +27554,12 @@ void Func041D object#(0x41D) () {
 				say("\"That can only be Moonshade wine, ",
 				    var0000,
 				    ". The Rangers make it right here in the city, with a magic wine press -- naturally.\"");
-				UI_add_answer(["Rangers", "magic wine press"]);
+				add(["Rangers", "magic wine press"]);
 				fallthrough;
 
 			case "Rangers" (remove):
 				say("\"The Rangers are nominally the city guards. They deal with any physical threats that aren't worthy of bothering a Mage about. Their commander is a woman named Julia.\"");
-				UI_add_answer("Julia");
+				add("Julia");
 				fallthrough;
 
 			case "Julia" (remove):
@@ -27576,7 +27576,7 @@ void Func041D object#(0x41D) () {
 					say("\"The magic wine press is another piece of Erstam's legacy, ",
 					    var0000,
 					    ". He always liked fine wine, but hated the work required to make it. So he made the wine press.\"");
-					UI_add_answer("Erstam");
+					add("Erstam");
 				}
 				fallthrough;
 
@@ -27592,13 +27592,13 @@ void Func041D object#(0x41D) () {
 				    ". Most Mages prefer something a bit more... impressive.\"");
 				say("\"These look more like something a Mundane would wear. Thou mightest check with Bucia over at the Capessii Canton.\"");
 				gflags[0x0115] = true;
-				UI_add_answer(["Bucia", "Capessii Canton"]);
+				add(["Bucia", "Capessii Canton"]);
 				fallthrough;
 
 			case "Bucia" (remove):
 				say("\"If any one person could be considered the heart of Moonshade, I'd be hard-pressed to say whether it was Bucia or Rocco.\"");
 				say("\"Bucia doth do business with both Mage and Mundane, so she usually has a full share of the most recent gossip in the city -- which she collects like a ship collects barnacles.\"");
-				UI_add_answer("Rocco");
+				add("Rocco");
 				fallthrough;
 
 			case "Rocco" (remove):
@@ -27608,7 +27608,7 @@ void Func041D object#(0x41D) () {
 
 			case "Capessi Canton" (remove):
 				say("\"Strange name, isn't it? 'Tis actually Flindo's shop, but he's away so much that Bucia runs it.\"");
-				UI_add_answer("Flindo");
+				add("Flindo");
 				fallthrough;
 
 			case "Flindo" (remove):
@@ -27619,7 +27619,7 @@ void Func041D object#(0x41D) () {
 				say("\"'Tis a Mage's equipment. But I don't recognize the style.\"");
 				say("\"Every Mage prefers something different from the others. This isn't one I'm familiar with, but I'm not that well-connected.\"");
 				say("\"Thou shouldst ask Master Ducio. Or, better yet, Topo -- if thou dost wish an answer.\"");
-				UI_add_answer(["Ducio", "Topo"]);
+				add(["Ducio", "Topo"]);
 				fallthrough;
 
 			case "Ducio" (remove):
@@ -27643,7 +27643,7 @@ void Func041D object#(0x41D) () {
 					say("\"I do not need to look at it any more to be able to tell thee that it is the damnable product of Erstam's experiments! Is it any wonder that they call him the Mad Mage?!\"");
 					gflags[0x029B] = true;
 				}
-				UI_add_answer(["experiments", "Mad Mage"]);
+				add(["experiments", "Mad Mage"]);
 				fallthrough;
 
 			case "experiments" (remove):
@@ -27654,7 +27654,7 @@ void Func041D object#(0x41D) () {
 					say("\"Erstam seeks to find the secret to creating life. I surmise that it's his attempt at immortality -- Even spells fall to the ravages of time in the end.\"");
 					say("\"Unfortunately, Erstam's quest for knowledge hath been at the sacrifice of his assistants. Vasel hath sidestepped the inevitable much longer than I would have expected...\"");
 				}
-				UI_add_answer("Vasel");
+				add("Vasel");
 				fallthrough;
 
 			case "Vasel" (remove):
@@ -27674,7 +27674,7 @@ void Func041D object#(0x41D) () {
 				say("\"How didst thou come by that?!\"");
 				say("\"No! I did not ask that! I do not want to know!\"");
 				say("\"Dost thou know that possession of that stone is forbidden? Dost thou know how much certain Adepts would pay for the reagent that that stone produces?\"");
-				UI_add_answer(["forbidden", "reagent"]);
+				add(["forbidden", "reagent"]);
 				fallthrough;
 
 			case "forbidden" (remove):
@@ -27797,18 +27797,18 @@ void Func041E object#(0x41E) () {
 			    var0000,
 			    ". Always good to have visitors.\"");
 		}
-		UI_add_answer(["Blue Boar", "visitors"]);
-		UI_add_answer(["food", "drink", "room"]);
+		add(["Blue Boar", "visitors"]);
+		add(["food", "drink", "room"]);
 		if (gflags[0x0045] && (UI_get_schedule_type(0xFFB4) != 0x000F)) {
-			UI_add_answer("brown bottle");
+			add("brown bottle");
 		}
 		if (gflags[0x0115] && (!gflags[0x0293])) {
-			UI_add_answer("slippers");
+			add("slippers");
 		}
 		if (gflags[0x00EA] && (!UI_get_item_flag(0xFFE1, 0x0004))) {
-			UI_add_answer("kidnap");
+			add("kidnap");
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "kidnap" (remove):
 				say("\"I cannot say that I'm surprised, ",
@@ -27839,19 +27839,19 @@ void Func041E object#(0x41E) () {
 				var0008 = Func0992(0x0001, "@That sounds just like the one in Britannia!@", "@I have heard of that name before.@", false);
 				UI_set_conversation_slot(0x0000);
 				say("\"Anything is possible, I suppose. I inherited this inn from my parents, and they from theirs. 'Tis an old name... perhaps from the time of the crossing.\"");
-				UI_add_answer("crossing");
+				add("crossing");
 				fallthrough;
 
 			case "crossing" (remove):
 				say("\"It hath been a long time since I heard the tale in full. Let me see if I remember it at all... For the most part it had something to do with an usurper king and the Mages. But for my folk, it was simply for money, I think.\"");
-				UI_add_answer(["usurper king", "Mages", "money"]);
+				add(["usurper king", "Mages", "money"]);
 				fallthrough;
 
 			case "usurper king" (remove):
 				say("\"Back in the old lands, a domineering man named... Brattish, or Brutish, or somesuch, usurped the throne. His rule was hard and unjust, so many people fled across the seas to this land.\"");
 				var0008 = Func0992(0x0001, "@It sounds like he is talking about Lord British!@", 0x0000, false);
 				UI_set_conversation_slot(0x0000);
-				UI_add_answer(["old lands", "this land"]);
+				add(["old lands", "this land"]);
 				fallthrough;
 
 			case "old lands" (remove):
@@ -27860,7 +27860,7 @@ void Func041E object#(0x41E) () {
 
 			case "this land" (remove):
 				say("\"Well, when the people arrived here, they thought to name the land after their old home... ah, one moment... New Sosaria. But then they found the ruins scattered here and there, with all those snakes pictured on them, so most folks call this The Serpent Isle. Though some still refer to it by its proper name, New Sosaria.\"");
-				UI_add_answer(["ruins", "snakes"]);
+				add(["ruins", "snakes"]);
 				fallthrough;
 
 			case "ruins" (remove):
@@ -27873,7 +27873,7 @@ void Func041E object#(0x41E) () {
 
 			case "Mages" (remove):
 				say("\"As well as I can remember, most of the people that fled from the usurper were Mages. I don't think that any of them are still alive, but thou canst never tell. Perhaps the Mad Mage is that old, who knows? Certainly not the current MageLord.\"");
-				UI_add_answer(["Mad Mage", "MageLord"]);
+				add(["Mad Mage", "MageLord"]);
 				fallthrough;
 
 			case "Mad Mage" (remove):
@@ -27884,7 +27884,7 @@ void Func041E object#(0x41E) () {
 				say("\"Filbercio is the most recent MageLord, ",
 				    var0000,
 				    ". He is a man of curious passions. Not what thou wouldst expect from most Mages.\"");
-				UI_add_answer("passions");
+				add("passions");
 				fallthrough;
 
 			case "passions" (remove):
@@ -27898,7 +27898,7 @@ void Func041E object#(0x41E) () {
 			case "visitors" (remove):
 				say("\"Of course, there's not much business now due to the terrible storms. But in better times our rooms are always full. Wert thou interested in anyone in particular?\"");
 				UI_push_answers();
-				UI_add_answer(["the sage Batlin", "the scholar Gwenno", "nothing more"]);
+				add(["the sage Batlin", "the scholar Gwenno", "nothing more"]);
 				fallthrough;
 
 			case "the sage Batlin" (remove):
@@ -27920,12 +27920,12 @@ void Func041E object#(0x41E) () {
 				    var0000,
 				    ".\"");
 				UI_push_answers();
-				UI_add_answer(["Where did she go?", "Why was she here?", "How long ago?", "change subject"]);
+				add(["Where did she go?", "Why was she here?", "How long ago?", "change subject"]);
 				fallthrough;
 
 			case "Where did she go?" (remove):
 				say("\"When she had studied all of the materials which were available here, she determined to go to\tthe Isle of Monks to read the scrolls kept there.\"");
-				UI_add_answer("Isle of Monks");
+				add("Isle of Monks");
 				fallthrough;
 
 			case "Isle of Monks" (remove):
@@ -27955,12 +27955,12 @@ void Func041E object#(0x41E) () {
 					if (!var0003) {
 						say("\"Petra is a surprisingly good cook, considering that she is an automaton.\"");
 						var0003 = true;
-						UI_add_answer(["automaton", "Petra"]);
+						add(["automaton", "Petra"]);
 					}
 					Func085E();
 				} else {
 					say("\"Return when we be open!\"");
-					UI_remove_answer("food");
+					remove("food");
 				}
 				fallthrough;
 
@@ -27973,7 +27973,7 @@ void Func041E object#(0x41E) () {
 					UI_show_npc_face0(0xFFE2, 0x0000);
 					say("\"She doth not care much for Torrissio -- considering that he created her for vile and exploitive reasons. But Petra escaped, and now I care for her.\"");
 				}
-				UI_add_answer("Torrissio");
+				add("Torrissio");
 				fallthrough;
 
 			case "Torrissio" (remove):
@@ -27990,7 +27990,7 @@ void Func041E object#(0x41E) () {
 					Func085F();
 				} else {
 					say("\"Come talk to me when we be open for business!\"");
-					UI_remove_answer("drink");
+					remove("drink");
 				}
 				fallthrough;
 
@@ -28030,7 +28030,7 @@ void Func041E object#(0x41E) () {
 				if (var0008 != 0xFE9C) {
 					say("\"Good luck to thee! With no ships sailing, there is no way to go to Fawn from here.\"");
 				}
-				UI_add_answer("Fawn");
+				add("Fawn");
 				fallthrough;
 
 			case "Fawn" (remove):
@@ -28054,7 +28054,7 @@ void Func041E object#(0x41E) () {
 					UI_remove_npc_face1();
 					UI_set_conversation_slot(0x0000);
 				}
-				UI_add_answer("Death Knight");
+				add("Death Knight");
 				fallthrough;
 
 			case "Death Knight" (remove):
@@ -28082,7 +28082,7 @@ void Func041E object#(0x41E) () {
 					UI_set_conversation_slot(0x0000);
 					say("\"Good idea, Petra!\"");
 				}
-				UI_add_answer("Bucia");
+				add("Bucia");
 				fallthrough;
 
 			case "Bucia" (remove):
@@ -28316,7 +28316,7 @@ void Func041F object#(0x41F) () {
 				UI_set_conversation_slot(0x0000);
 				say("\"Who said that! Death draws near for those who taunt Rotoluncia the Red Witch.\"");
 			}
-			UI_add_answer(["magic", "Council", "not afraid", "bye"]);
+			add(["magic", "Council", "not afraid", "bye"]);
 			converse (0) {
 				case "magic" (remove):
 					say("\"I am the most powerful wizard in this city, and I could teach thee many things -- if thou wert not a mere Mundane.\"");
@@ -28348,7 +28348,7 @@ void Func041F object#(0x41F) () {
 
 				case "not afraid" (remove):
 					say("\"Thou dost surprise me. Most Mundanes are frightened by the very idea of sorcery.\"");
-					UI_add_answer("Mundanes");
+					add("Mundanes");
 					fallthrough;
 
 				case "Mundanes" (remove):
@@ -28551,7 +28551,7 @@ void Func0420 object#(0x420) () {
 				say("\"Someday I hope to be as rich and lazy as my master!\"");
 				say("\"He spends all his time asleep or at the inn, except when he comes here to make me crazy with his nagging.\"");
 			}
-			UI_add_answer(["Artisan", "Ducio"]);
+			add(["Artisan", "Ducio"]);
 		} else {
 			if (Func0942(0xFFF1)) {
 				say("\"Again, welcome! Might I be able to help thee today?\"");
@@ -28561,31 +28561,31 @@ void Func0420 object#(0x420) () {
 				say("\"Yes, master...\"");
 			} else {
 				say("\"Again, welcome! As thou canst see, Master Ducio is not here at present. Perhaps I can help thee.\"");
-				UI_add_answer("Ducio's whereabouts");
+				add("Ducio's whereabouts");
 			}
 		}
 		if (gflags[0x010F] && (!gflags[0x028E])) {
-			UI_add_answer("urn");
+			add("urn");
 		}
 		if (gflags[0x0111] && (!gflags[0x028F])) {
-			UI_add_answer("apparatus");
+			add("apparatus");
 		}
 		if (gflags[0x0115] && (!gflags[0x0293])) {
-			UI_add_answer("slippers");
+			add("slippers");
 		}
 		if (gflags[0x0116] && (!gflags[0x0296])) {
-			UI_add_answer("strange brush");
+			add("strange brush");
 		}
 		if (UI_get_schedule_type(0xFFE0) == 0x000C) {
-			UI_add_answer("buy");
+			add("buy");
 		}
 		if (gflags[0x00EA] && (!UI_get_item_flag(0xFFE1, 0x0004))) {
-			UI_add_answer("kidnap");
+			add("kidnap");
 		}
 		if (Func097D(0xFE9B, 0x0001, 0x02F8, 0xFE99, 0xFE99)) {
-			UI_add_answer("sell gems");
+			add("sell gems");
 		}
-		UI_add_answer(["buy", "bye"]);
+		add(["buy", "bye"]);
 		converse (0) {
 			case "kidnap" (remove):
 				say("\"I am terribly sorry for thee at this sensitive time. Grief is a natural emotion...\"");
@@ -28605,7 +28605,7 @@ void Func0420 object#(0x420) () {
 					say("\"Yes, master...\"");
 				}
 				say("\"I work with the pottery. The automatons have trouble handling the slip... They generally crush a piece before 'tis fully formed and ready to fire. After firing, they are fine, but before -- that is where I work.\"");
-				UI_add_answer(["automatons", "slip", "firing"]);
+				add(["automatons", "slip", "firing"]);
 				fallthrough;
 
 			case "automatons" (remove):
@@ -28613,7 +28613,7 @@ void Func0420 object#(0x420) () {
 				if (!Func0942(0xFFF1)) {
 					say("\"That is what my Master actually specializes in... making everyone else do his work!\"");
 				}
-				UI_add_answer(["Mages", "Mundanes"]);
+				add(["Mages", "Mundanes"]);
 				fallthrough;
 
 			case "Mages" (remove):
@@ -28624,7 +28624,7 @@ void Func0420 object#(0x420) () {
 					say("\"Unless thou art my Master, that is!\"");
 				}
 				say("\"The only thing a lowly Mundane can hope for is to be able to afford an automaton from Torrissio, to help with the work load.\"");
-				UI_add_answer("Torrissio");
+				add("Torrissio");
 				fallthrough;
 
 			case "Torrissio" (remove):
@@ -28641,14 +28641,14 @@ void Func0420 object#(0x420) () {
 					say("\"Yes, master...\"");
 				}
 				say("\"Though most of the automatons Torrissio makes are strictly utilitarian, he is capable of making far more sophisticated models... Thou hast only to look at Petra.\"");
-				UI_add_answer("Adept");
+				add("Adept");
 				fallthrough;
 
 			case "Adept" (remove):
 				say("\"Those who are blessed with magical ability are not all equal, ",
 				    var0000,
 				    ". Some, like Andrio, are novices who still have yet to learn their craft. And some, like Stefano, have little power to command even after they learn.\"");
-				UI_add_answer(["Andrio", "Stefano"]);
+				add(["Andrio", "Stefano"]);
 				fallthrough;
 
 			case "Andrio" (remove):
@@ -28722,7 +28722,7 @@ void Func0420 object#(0x420) () {
 				} else {
 					say("\"If ever I believed in shape changing, I believe it with Ducio! That man is too lazy to be human... a slug, maybe. But a human, no.\"");
 					say("\"If it weren't for me and the automatons, he'd have to join old Mosh out begging!\"");
-					UI_add_answer("Mosh");
+					add("Mosh");
 				}
 				fallthrough;
 
@@ -28739,7 +28739,7 @@ void Func0420 object#(0x420) () {
 				if (var0001 > 0x0005) {
 					say("\"The Master doth dine at the inn at this hour. Thou canst find him there.\"");
 					say("\"Canst thou imagine? He doth leave his\tapprentice here, with nothing but a loaf of dry bread, while he doth gorge himself on Petra's baked fish!\"");
-					UI_add_answer(["inn", "Petra"]);
+					add(["inn", "Petra"]);
 				} else if (var0001 < 0x0003) {
 					say("\"No doubt the Master is yet at home, getting his rest after a long day.\"");
 					say("\"Yet I, who work far harder and longer than he, must be here promptly at dawn.\"");
@@ -28752,7 +28752,7 @@ void Func0420 object#(0x420) () {
 			case "inn" (remove):
 				say("\"The Blue Boar inn. 'Tis in the northern part of the city, just west of the Palace. Many of the Mages eat there as well.\"");
 				say("\"Thou canst bargain Rocco down on his prices, if thou dost try hard enough.\"");
-				UI_add_answer("Rocco");
+				add("Rocco");
 				fallthrough;
 
 			case "Rocco" (remove):
@@ -28779,7 +28779,7 @@ void Func0420 object#(0x420) () {
 					gflags[0x028E] = true;
 					Func094E(0xFFF1, "@They'll want it back. Monitorians revere\r\n\t\t\t\t\t\ttheir dead.@");
 					UI_set_conversation_slot(0x0000);
-					UI_add_answer("Monitor");
+					add("Monitor");
 				} else {
 					var0006 = Func0992(0xFFFD, "@But we don't have it with\r\n\t\t\t\t\t\t\t\tus...@", "@I've not brought it with me.@", false);
 					UI_set_conversation_slot(0x0000);
@@ -28809,7 +28809,7 @@ void Func0420 object#(0x420) () {
 			case "slippers" (remove):
 				say("\"Definitely do not look like anything that a Mage would have lost. They have much more expensive tastes...\"");
 				say("\"Thou couldst try asking Bucia, though. If anyone might know where these slippers came from, it would be her.\"");
-				UI_add_answer("Bucia");
+				add("Bucia");
 				fallthrough;
 
 			case "Bucia" (remove):
@@ -28836,7 +28836,7 @@ void Func0420 object#(0x420) () {
 					say("\"From the looks of it, ",
 					    var0000,
 					    ", I'd say that it was made of bone. Thou couldst ask Mortegro, to be sure though.\"");
-					UI_add_answer("Mortegro");
+					add("Mortegro");
 				} else {
 					var0006 = Func0992(0xFFFD, "@But it's not here...@", "@I've not brought it with me.@", false);
 					UI_set_conversation_slot(0x0000);
@@ -28865,7 +28865,7 @@ void Func0420 object#(0x420) () {
 					    var0000,
 					    ".\"");
 				}
-				UI_remove_answer("sell gems");
+				remove("sell gems");
 				fallthrough;
 
 			case "bye":
@@ -28947,37 +28947,37 @@ void Func0421 object#(0x421) () {
 		}
 		say("\"I am not a sociable man, so this will be brief. What dost thou desire of me, and at what price?\"");
 		if (gflags[0x023D] && (!gflags[0x0136])) {
-			UI_add_answer("magic wand");
+			add("magic wand");
 		}
 		if (gflags[0x0147]) {
-			UI_add_answer("magic wand");
+			add("magic wand");
 		}
 		if (gflags[0x012D] && (!gflags[0x00FF])) {
-			UI_add_answer("soul trapping");
+			add("soul trapping");
 		}
 		if (gflags[0x0110] && (!gflags[0x028F])) {
-			UI_add_answer("apparatus");
+			add("apparatus");
 		}
 		if (gflags[0x0114] && (!gflags[0x0293])) {
-			UI_add_answer("slippers");
+			add("slippers");
 		}
 		if (gflags[0x00FF]) {
-			UI_add_answer("Worm Gems");
+			add("Worm Gems");
 		}
 		if (gflags[0x00EA] && (!UI_get_item_flag(0xFFE1, 0x0004))) {
-			UI_add_answer("kidnap");
+			add("kidnap");
 		}
 		if (gflags[0x00E2] && (!UI_get_item_flag(0xFF58, 0x0004))) {
-			UI_add_answer("Stefano");
+			add("Stefano");
 		}
 		if (Func097D(0xFE9B, 0x0001, 0x02A5, 0xFE99, 0x0000) && (!gflags[0x013B])) {
-			UI_add_answer("stockings");
+			add("stockings");
 		}
 		if (gflags[0x00F5]) {
-			UI_add_answer("help Fedabiblio");
+			add("help Fedabiblio");
 		}
-		UI_add_answer(["Torrissio"]);
-		UI_add_answer("bye");
+		add(["Torrissio"]);
+		add("bye");
 		converse (0) {
 			case "kidnap" (remove):
 				if (gflags[0x0142]) {
@@ -29007,22 +29007,22 @@ void Func0421 object#(0x421) () {
 
 			case "Torrissio" (remove):
 				say("\"I am Torrisso of Moonshade, Adept Mage and master of life spells.\"");
-				UI_add_answer(["Moonshade", "Adept Mage", "life spells"]);
+				add(["Moonshade", "Adept Mage", "life spells"]);
 				fallthrough;
 
 			case "Moonshade" (remove):
 				say("\"Moonshade is in many ways a perfect city, a perfect example of civilization with that highest form of government -- a Magocracy.\"");
-				UI_add_answer("Magocracy");
+				add("Magocracy");
 				fallthrough;
 
 			case "Adept Mage" (remove):
 				say("\"I come from one of the longest family lines of mages in all of the Serpent Isle. That is how one tells a good mage, thou must know -- by his family line. Good mages are a result of good breeding. My father always said that.\"");
-				UI_add_answer("family line");
+				add("family line");
 				fallthrough;
 
 			case "family line" (remove):
 				say("\"A thousand years ago, our ancestors performed tricks to amuse peasants. Hundreds of years ago they were the most trusted advisors to Kings and rulers of the land. When it comes to magic the only bloodline more pure than mine is that of the ruling family. Of course, my family was decimated in the old war. If not for that, I might be ruler today.\"");
-				UI_add_answer(["ruling family", "old war"]);
+				add(["ruling family", "old war"]);
 				fallthrough;
 
 			case "apparatus" (remove):
@@ -29049,17 +29049,17 @@ void Func0421 object#(0x421) () {
 
 			case "life spells" (remove):
 				say("\"My personal specialty is spells involving healing and the sustenance of life energies.\"");
-				UI_add_answer("buy spells");
+				add("buy spells");
 				fallthrough;
 
 			case "Magocracy" (remove):
 				say("\"A government totally controlled by Mages is the only sensible form of government. Mages have a holistic understanding of the world that makes them far more suited to the responsibilities of government than any mundane could ever be. With Filbercio at the head of the Council of Mages, things are accomplished quickly with a minimum of politics.\"");
-				UI_add_answer(["Council of Mages", "Filbercio", "politics"]);
+				add(["Council of Mages", "Filbercio", "politics"]);
 				fallthrough;
 
 			case "buy spells":
 				if (gflags[0x0127]) {
-					UI_remove_answer("buy spells");
+					remove("buy spells");
 					say("\"Thou hast betrayed me and betrayed my lover by giving her stolen property to Filbercio for a mere pittance of profit! Now thou dost expect me to help thee?! Begone from my sight!\"");
 					abort;
 				} else if (var0003 == false) {
@@ -29067,7 +29067,7 @@ void Func0421 object#(0x421) () {
 					var0003 = true;
 				}
 				Func0871();
-				UI_add_answer(["Sold to whom?", "experiments"]);
+				add(["Sold to whom?", "experiments"]);
 				fallthrough;
 
 			case "Sold to whom?" (remove):
@@ -29092,13 +29092,13 @@ void Func0421 object#(0x421) () {
 					say("\"I was allied with Rotoluncia, but her death makes our partnership void.\"");
 				} else {
 					say("\"One's enemies and allies are constantly shifting. That is why Rotoluncia and I have formed a sort of coalition, wherein we both work to protect each other's best interests.\"");
-					UI_add_answer(["Rotoluncia", "allies and enemies"]);
+					add(["Rotoluncia", "allies and enemies"]);
 				}
 				fallthrough;
 
 			case "Rotoluncia" (remove):
 				say("\"Of course, our working together hath led to a few rumors -- such is the way of politics. But even partners disagree. For instance, she is convinced that there is some sort of connection between thee and this other stranger who visited us -- Batlin.\"");
-				UI_add_answer(["partners", "Batlin"]);
+				add(["partners", "Batlin"]);
 				fallthrough;
 
 			case "allies and enemies" (remove):
@@ -29107,12 +29107,12 @@ void Func0421 object#(0x421) () {
 
 			case "partners" (remove):
 				say("\"Partners with Rotoluncia in politics. But partners with Columna in love.\"");
-				UI_add_answer("Columna");
+				add("Columna");
 				fallthrough;
 
 			case "Batlin" (remove):
 				say("\"Rotoluncia was quite repulsed yet fascinated with Batlin and his secrets. To think of it makes me wish to offer thee a word of advice.\"");
-				UI_add_answer(["secrets", "advice"]);
+				add(["secrets", "advice"]);
 				fallthrough;
 
 			case "secrets" (remove):
@@ -29125,7 +29125,7 @@ void Func0421 object#(0x421) () {
 
 			case "Columna" (remove):
 				say("\"Our love must remain a secret. This saddens her, and myself as well. There are those who would come between us, who plan against us. Her heart was touched by a song sung by the lady Gwenno.\"");
-				UI_add_answer(["plan against thee", "Gwenno"]);
+				add(["plan against thee", "Gwenno"]);
 				fallthrough;
 
 			case "plan against thee" (remove):
@@ -29240,7 +29240,7 @@ labelFunc0421_06AC:
 
 			case "soul trapping" (remove):
 				say("\"So thou dost seek to learn the ancient art of imprisoning souls within gems? I can give this to thee, for a price -- but I warn thee, the outcome may not be what thou dost expect.\"");
-				UI_add_answer(["ancient art", "price", "outcome"]);
+				add(["ancient art", "price", "outcome"]);
 				fallthrough;
 
 			case "ancient art", "ask" (remove):
@@ -29250,7 +29250,7 @@ labelFunc0421_06AC:
 					say("\"On this scroll, thou shalt find the spell for creating Soul Prisms. Transcribe this to thy spellbook at the first opportunity, for I shall not give thee another!\"");
 					gflags[0x00FF] = true;
 					var000F = Func099B(0xFE9C, 0x0001, 0x02CB, 0x001B, 0x0000, 0x0000, true);
-					UI_add_answer("Worm Gems");
+					add("Worm Gems");
 				} else {
 					say("\"Pay the price, the Philanderer's Friend, and I shall reward thee!\"");
 					say("\"For now, I shall merely say that this spell was used by the ancient inhabitants of this land. They would remove their souls from their bodies, and place them within inanimate objects.\"");
@@ -29265,8 +29265,8 @@ labelFunc0421_06AC:
 						} else {
 							say("\"Then again, thou didst restore the wand to me -- and the Philanderer's Friend is a great prize...\"");
 							say("\"Thou hast paid the price, I shall grant thee thy desires. Thou hast but to ask.\"");
-							UI_remove_answer("ancient art");
-							UI_add_answer("ask");
+							remove("ancient art");
+							add("ask");
 						}
 					} else {
 						say("\"Thou hast something which I want very much, Avatar! I detect that thou hast come into contact with a magical artifact which was taken from me -- the Philanderer's Friend, a wand of mysterious powers.\"");
@@ -29437,11 +29437,11 @@ void Func0422 object#(0x422) () {
 		if (item == UI_get_npc_object(0xFFDE)) {
 			if (UI_get_item_flag(0xFFDE, 0x0006)) {
 				UI_set_schedule_type(0xFFDE, 0x001F);
-				UI_add_answer("leave");
+				add("leave");
 			} else {
 				UI_run_schedule(0xFFDE);
 				if (gflags[0x01BA]) {
-					UI_add_answer("join");
+					add("join");
 				}
 			}
 			UI_show_npc_face0(0xFFDE, 0x0000);
@@ -29449,13 +29449,13 @@ void Func0422 object#(0x422) () {
 				say("\"Master, I am grateful that thou dost still live! I have grown fond of thee, almost as a son looks upon a parent...\"");
 				if (!gflags[0x0135]) {
 					say("\"It might please thee to know that there is good news!\"");
-					UI_add_answer("good news");
+					add("good news");
 				}
 				UI_set_npc_id(0xFFDE, 0x0000);
 				UI_add_to_party(0xFFDE);
 				gflags[0x0013] = true;
-				UI_remove_answer("join");
-				UI_add_answer(["leave"]);
+				remove("join");
+				add(["leave"]);
 			} else {
 				if (!var0006) {
 					say("\"I have a body! I have a body!\"");
@@ -29477,9 +29477,9 @@ void Func0422 object#(0x422) () {
 			}
 		}
 		if (gflags[0x0013] && ((!UI_get_item_flag(0xFFDE, 0x0006)) && UI_get_cont_items(0xFFDE, 0xFE99, 0xFE99, 0xFE99))) {
-			UI_add_answer("return my belongings");
+			add("return my belongings");
 		}
-		UI_add_answer(["name", "duties", "bye"]);
+		add(["name", "duties", "bye"]);
 		converse (0) {
 			case "return my belongings" (remove):
 				Func080A();
@@ -29498,7 +29498,7 @@ void Func0422 object#(0x422) () {
 			case "duties" (remove):
 				if (!gflags[0x01BB]) {
 					say("\"I am hardly capable of performing my duties now, I'm sorry to say. I was the assistant to Erstam, the one they call the Mad Mage -- dost thou know him? Wonderful fellow. Well, one night he woke me to help him with one of his experiments.\"");
-					UI_add_answer(["Erstam", "experiments"]);
+					add(["Erstam", "experiments"]);
 				} else if (var0007) {
 					say("\"It seems I am no longer able to perform any duties save being an observer of thine adventures. But thank goodness Erstam chose me as the subject of his experiment! The man hath now saved my life twice over! As his one-time assistant, however, I can assure thee my body hath been destroyed beyond repair, and mine head will reject any new body that it might be attatched to. Oh, well! I am sorry that I can be of no further use to thee. If I squinch up my face I am fairly certain that I shall hardly take up any room in thy backpack.\"");
 				} else {
@@ -29512,34 +29512,34 @@ void Func0422 object#(0x422) () {
 					if (var0005) {
 						say("\"I do hope I shall be of some assistance to thee as I travel with thee during thine adventures! I am having quite a bit of fun, actually.\"");
 					}
-					UI_add_answer(["observed", "many jobs"]);
+					add(["observed", "many jobs"]);
 				}
 				fallthrough;
 
 			case "Erstam":
 				say("\"I found working for Erstam extremely interesting and most educational. Why, for example, my knowledge of anatomy hath improved so much. He is not exactly a friendly fellow, the Master, but there is never a dull moment.\"");
-				UI_remove_answer("Erstam");
+				remove("Erstam");
 				fallthrough;
 
 			case "experiments":
 				say("\"Of course Erstam, having mastered the art of teleportation, hath turned his sights to the creation of life. On this particular night that I am remembering we went down to his lab. He pulled an abundance of levers and things... my memory begins to fade a bit after that. The next thing I remember is awakening in this condition.\"");
-				UI_remove_answer("experiments");
-				UI_add_answer(["teleportation", "creation of life", "condition"]);
+				remove("experiments");
+				add(["teleportation", "creation of life", "condition"]);
 				fallthrough;
 
 			case "teleportation":
 				say("\"Oh, I am afraid I cannot tell thee anything about that. After all, I was merely the Mad Mage's assistant.\"");
-				UI_remove_answer("teleportation");
+				remove("teleportation");
 				fallthrough;
 
 			case "creation of life":
 				say("\"Is that not amazing? It doth go far beyond my comprehension of life and death. The mind fairly boggles at the ramifications of it.\"");
-				UI_remove_answer("creation of life");
+				remove("creation of life");
 				fallthrough;
 
 			case "condition":
 				say("\"It is not so bad. I am never hungry because I do not have a stomach. I do not need to breathe because I do not have any lungs. I do sleep occasionally. Sometimes my nose itches. Nothing bothers me. Most people tend to find a talking severed head a bit unsettling. Right now I am enjoying talking to someone.\"");
-				UI_remove_answer("condition");
+				remove("condition");
 				fallthrough;
 
 			case "observed" (remove):
@@ -29550,7 +29550,7 @@ void Func0422 object#(0x422) () {
 						UI_set_conversation_slot(0x0000);
 					}
 				}
-				UI_add_answer("strange feelings");
+				add("strange feelings");
 				fallthrough;
 
 			case "strange feelings" (remove):
@@ -29581,12 +29581,12 @@ void Func0422 object#(0x422) () {
 						}
 					}
 				}
-				UI_remove_answer("many jobs");
+				remove("many jobs");
 				fallthrough;
 
 			case "join" (remove):
 				if (UI_get_array_size(UI_get_party_list2()) < 0x0005) {
-					UI_add_answer("leave");
+					add("leave");
 					say("\"That is wonderful news! Lead on!\"");
 					var0012 = Func0992(0xFFFE, (("@Far be it from me to question thy judgment, Avatar. " + "But are thy senses so dulled that thou dost not notice ") + "the potent aroma emanating from this fellow?@"), 0x0000, false);
 					if (var0012 != 0xFE9C) {
@@ -29611,7 +29611,7 @@ void Func0422 object#(0x422) () {
 				if (var0012 != 0xFE9C) {
 					UI_set_conversation_slot(0x0000);
 				}
-				UI_add_answer("join");
+				add("join");
 				fallthrough;
 
 			case "bye":
@@ -29741,56 +29741,56 @@ void Func0423 object#(0x423) () {
 			say("\"Why hast thou returned? Why dost thou disturb mine experiments in the secrets of immortality? What could possibly be more important than the answers to the riddle of life and death?!\"");
 		}
 		if (!gflags[0x01C5]) {
-			UI_add_answer("experiments");
+			add("experiments");
 		}
 		if (!gflags[0x01C6]) {
-			UI_add_answer("immortality");
+			add("immortality");
 		}
 		if (!gflags[0x01C7]) {
-			UI_add_answer("riddle of life and death");
+			add("riddle of life and death");
 		}
 		if (gflags[0x01BB] && (!gflags[0x01BD])) {
-			UI_add_answer("Boydon");
+			add("Boydon");
 		}
 		if (!var0004) {
-			UI_add_answer("Introduce thyself");
+			add("Introduce thyself");
 		}
 		if (!gflags[0x01C8]) {
-			UI_add_answer("Disturb?");
+			add("Disturb?");
 		}
 		if (gflags[0x01C1]) {
-			UI_add_answer("jawbone");
+			add("jawbone");
 		}
 		if (gflags[0x01B7] && (!gflags[0x01B8])) {
 			if (gflags[0x01BC]) {
-				UI_add_answer("phoenix egg");
+				add("phoenix egg");
 			}
-			UI_add_answer("instructions");
+			add("instructions");
 		}
 		if (gflags[0x01B8] && (!gflags[0x01BB])) {
-			UI_add_answer("ready to create life");
+			add("ready to create life");
 		}
 		if (gflags[0x01BD]) {
-			UI_add_answer("I have the jawbone.");
+			add("I have the jawbone.");
 		}
 		if (gflags[0x01B9] && (!gflags[0x01BA])) {
-			UI_add_answer("May Boydon join?");
+			add("May Boydon join?");
 		}
 		if (gflags[0x0283]) {
-			UI_add_answer("blue egg");
+			add("blue egg");
 		}
 		if (gflags[0x0289] && (!gflags[0x029B])) {
-			UI_add_answer("severed hand");
+			add("severed hand");
 		}
 		if (gflags[0x027D] && (!gflags[0x028F])) {
-			UI_add_answer("lab apparatus");
+			add("lab apparatus");
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "Introduce thyself" (remove):
 				say("\"I do not care to know thy name! As for myself, my fame hath grown with each passing century. I am Erstam, he whom some dare call the Mad Mage!\"");
 				UI_set_item_flag(0xFFDD, 0x001C);
-				UI_add_answer("Mad Mage");
+				add("Mad Mage");
 				fallthrough;
 
 			case "Mad Mage" (remove):
@@ -29812,7 +29812,7 @@ void Func0423 object#(0x423) () {
 					} else {
 						say("\"These experiments are most dangerous! If thou art faint of heart I would advise thee to stay away! As thou canst see if thou dost look around thee, these experiments are a threat to both life... and limb!\"");
 						if (!(gflags[0x01B7] || gflags[0x01BB])) {
-							UI_add_answer(["life", "limb"]);
+							add(["life", "limb"]);
 						}
 					}
 				} else {
@@ -29830,7 +29830,7 @@ void Func0423 object#(0x423) () {
 
 			case "immortality" (remove):
 				UI_push_answers();
-				UI_add_answer("change subject");
+				add("change subject");
 				if (gflags[0x01B8]) {
 					if (gflags[0x01BB]) {
 						say("\"With the successful creation of Boydon we have taken the first small but vitally important step in achieving that great dream of all men -- immortality!\"");
@@ -29846,19 +29846,19 @@ void Func0423 object#(0x423) () {
 				} else {
 					say("\"I see thou hast discovered the strange dagger that appeared in my Manor. Damn teleport storms! Thou hast laid claim to it as thine own, eh? Very well then, if it truly belongs to thee, thou mayest take it...\"");
 				}
-				UI_add_answer(["death", "teleportation storms"]);
+				add(["death", "teleportation storms"]);
 				fallthrough;
 
 			case "death":
 				say("\"Unchained for all time from death and the fear of death, there would be nothing that mankind would not be capable of accomplishing! HA, ha, ha, ha, ha!\"");
-				UI_remove_answer("death");
+				remove("death");
 				fallthrough;
 
 			case "teleportation storms" (remove):
 				say("\"The power of teleportation is most certainly an awesome one. These storms have been wreaking havoc on us for some time. I fear that their increasing frequency and intensity most certainly signals an end of the world.\"");
-				UI_add_answer("end of the world");
+				add("end of the world");
 				if (!gflags[0x01BE]) {
-					UI_add_answer("teleportation");
+					add("teleportation");
 				}
 				fallthrough;
 
@@ -29875,7 +29875,7 @@ void Func0423 object#(0x423) () {
 					UI_remove_npc_face1();
 					UI_set_conversation_slot(0x0000);
 				}
-				UI_remove_answer("teleportation");
+				remove("teleportation");
 				fallthrough;
 
 			case "end of the world" (remove):
@@ -29892,7 +29892,7 @@ void Func0423 object#(0x423) () {
 					if (gflags[0x01B8]) {
 						say("\"So, hurry!\"");
 					} else {
-						UI_add_answer(["create life", "secret of immortality"]);
+						add(["create life", "secret of immortality"]);
 					}
 				}
 				fallthrough;
@@ -29903,17 +29903,17 @@ void Func0423 object#(0x423) () {
 
 			case "secret of immortality":
 				say("\"Mine experiments in immortality have led to the demise of all of mine assistants save for Vasel. Oh, they are not dead! Why one may encounter them virtually anywhere throughout the manor. Or, at least, pieces of them.\"");
-				UI_remove_answer("secret of immortality");
+				remove("secret of immortality");
 				fallthrough;
 
 			case "jawbone" (remove):
 				UI_push_answers();
-				UI_add_answer("change subject");
+				add("change subject");
 				if (gflags[0x01BD]) {
 					say("\"Thou art welcome to it.\"");
 				} else if (!gflags[0x01B7]) {
 					say("\"So! That little knave Vasel hath been telling thee of my magical serpent jawbone! Thou wilt not obtain it under pain of death, torture or for any price. All that concerns me is mine efforts in creating life. And there is nothing that thou canst do to aid me in that endeavor. Hmmm, or perhaps there is...\"");
-					UI_add_answer(["Vasel", "What can I do?"]);
+					add(["Vasel", "What can I do?"]);
 				} else if (gflags[0x01BB]) {
 					say("\"Did I not give thee the key to my storeroom? If thou canst not find it, thou art not as intelligent as I thought thou to be!\"");
 				} else if (gflags[0x01BC]) {
@@ -29925,12 +29925,12 @@ void Func0423 object#(0x423) () {
 
 			case "Vasel":
 				say("\"Concern thyself not with him. I shall deal with him later!\"");
-				UI_remove_answer("Vasel");
+				remove("Vasel");
 				fallthrough;
 
 			case "What can I do?" (remove):
 				say("\"There is something thou canst do for me! On the northern island there is a phoenix. Retrieve for me its egg, which is the missing ingredient that I need. I would go myself, but I am getting much too old for that sort of thing. There are terrible beasts along the way. And I do detest beasts, especially terrible ones.\"");
-				UI_add_answer(["northern island", "phoenix"]);
+				add(["northern island", "phoenix"]);
 				fallthrough;
 
 			case "northern island" (remove):
@@ -29955,7 +29955,7 @@ void Func0423 object#(0x423) () {
 				} else {
 					say("\"Thou canst put from thy mind that serpent jawbone then!\"");
 				}
-				UI_remove_answer("phoenix");
+				remove("phoenix");
 				fallthrough;
 
 			case "instructions" (remove):
@@ -30169,16 +30169,16 @@ void Func0424 object#(0x424) () {
 		} else {
 			say("\"Thou hast come to beat me again, I know it!\"");
 		}
-		UI_add_answer(["name", "duties"]);
+		add(["name", "duties"]);
 		if (gflags[0x01BE]) {
-			UI_add_answer("teleportation");
+			add("teleportation");
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "name" (remove):
 				say("\"I am an orphan. I have no name. My parents were so poor they could not afford to give me one!\"");
 				UI_push_answers();
-				UI_add_answer(["orphan", "What art thou called?", "change subject"]);
+				add(["orphan", "What art thou called?", "change subject"]);
 				fallthrough;
 
 			case "change subject":
@@ -30198,7 +30198,7 @@ void Func0424 object#(0x424) () {
 				if (var0006 != 0xFE9C) {
 					UI_set_conversation_slot(0x0000);
 				}
-				UI_add_answer(["freak", "grotesque", "master"]);
+				add(["freak", "grotesque", "master"]);
 				fallthrough;
 
 			case "freak" (remove):
@@ -30218,12 +30218,12 @@ void Func0424 object#(0x424) () {
 					UI_remove_npc_face1();
 					UI_set_conversation_slot(0x0000);
 				}
-				UI_add_answer("Who is thy master?");
+				add("Who is thy master?");
 				fallthrough;
 
 			case "Who is thy master?" (remove):
 				say("\"I serve Erstam. He is the master of this Manor.\"");
-				UI_add_answer(["Why serve him?", "Erstam"]);
+				add(["Why serve him?", "Erstam"]);
 				fallthrough;
 
 			case "Why serve him?" (remove):
@@ -30239,7 +30239,7 @@ void Func0424 object#(0x424) () {
 					UI_set_conversation_slot(0x0000);
 					say("\"Never again! Never again! I promise! Do not beat me, Master!\"");
 				}
-				UI_add_answer("mad mage");
+				add("mad mage");
 				fallthrough;
 
 			case "mad mage" (remove):
@@ -30248,7 +30248,7 @@ void Func0424 object#(0x424) () {
 
 			case "duties" (remove):
 				say("\"I am the custodian of the Manor. I assist the Master in his experiments. I am also called upon to do the housekeeping.\"");
-				UI_add_answer(["Manor", "experiments", "housekeeping"]);
+				add(["Manor", "experiments", "housekeeping"]);
 				fallthrough;
 
 			case "Manor" (remove):
@@ -30263,7 +30263,7 @@ void Func0424 object#(0x424) () {
 
 			case "experiments" (remove):
 				say("\"The Master's experiments are of an extremely secret nature. They are also quite dangerous.\"");
-				UI_add_answer(["secret", "dangerous"]);
+				add(["secret", "dangerous"]);
 				fallthrough;
 
 			case "secret" (remove):
@@ -30279,7 +30279,7 @@ void Func0424 object#(0x424) () {
 
 			case "dangerous" (remove):
 				say("\"I am not the first to have worked as the Master's assistant. Nor, I fear, shall I be the last. There have been many of us.\"");
-				UI_add_answer(["first assistant", "last assistant", "other assistants"]);
+				add(["first assistant", "last assistant", "other assistants"]);
 				fallthrough;
 
 			case "first assistant" (remove):
@@ -30325,7 +30325,7 @@ void Func0424 object#(0x424) () {
 					UI_remove_npc_face1();
 					UI_set_conversation_slot(0x0000);
 				}
-				UI_add_answer(["Why so much cleaning?", "Why hate cleaning?"]);
+				add(["Why so much cleaning?", "Why hate cleaning?"]);
 				fallthrough;
 
 			case "Why so much cleaning?" (remove):
@@ -30529,15 +30529,15 @@ void Func0426 object#(0x426) () {
 			    var0002,
 			    ".\"");
 		}
-		UI_add_answer(["storms", "Sleeping Bull", "food", "drink", "room", "bye"]);
+		add(["storms", "Sleeping Bull", "food", "drink", "room", "bye"]);
 		if (gflags[0x01D9] == true) {
-			UI_add_answer(["duel", "bribes"]);
+			add(["duel", "bribes"]);
 		}
 		converse (0) {
 			case "storms":
 				say("\"These ain't natural storms... Or I was never a Wolf Captain.\" *\"If thou wert to ask me, living all these years across from Moonshade, I'd say they were magic born. And I'm afeard they'll drive us out of business if they last too long.\"");
-				UI_remove_answer("storms");
-				UI_add_answer(["Wolf Captain", "Moonshade", "out of business"]);
+				remove("storms");
+				add(["Wolf Captain", "Moonshade", "out of business"]);
 				fallthrough;
 
 			case "Wolf Captain":
@@ -30556,46 +30556,46 @@ void Func0426 object#(0x426) () {
 					}
 					say("\"Until my father disappeared six months ago, I was a Captain in the Monitor Wolf Command.\"");
 				}
-				UI_remove_answer("Wolf Captain");
-				UI_add_answer(["father disappeared", "Monitor", "Wolf Command"]);
+				remove("Wolf Captain");
+				add(["father disappeared", "Monitor", "Wolf Command"]);
 				fallthrough;
 
 			case "father disappeared":
 				say("\"Aye, Angus disappeared... And not during one of those storms neither. We could have understood that.\" *\"And mother... er, Devra... Said that one of our guests disappeared the very same evening.\"");
-				UI_remove_answer("father disappeared");
-				UI_add_answer("one of our guests");
+				remove("father disappeared");
+				add("one of our guests");
 				fallthrough;
 
 			case "one of our guests":
 				say("\"Thou must needs ask mother what she remembers of that night. I weren't here.\" *\"Mother was understandably aggrieved by the time she called me home.\" *\"She had hoped that Lord Wilfred would come to run the inn as father had hoped, but I came instead...\" *\"And I don't recall if she mentioned the guest's name, to be honest.\"");
-				UI_remove_answer("one of our guests");
-				UI_add_answer("Lord Wilfred");
+				remove("one of our guests");
+				add("Lord Wilfred");
 				fallthrough;
 
 			case "Lord Wilfred":
 				say("\"Blast! Did I call him that? Old habits die hard...\" *\"I'd thank thee not to repeat that in Devra's hearing for she'd have mine ears for sure.\" *\"Wilfred is my younger brother. And, like most brothers, we have our share of spats.\"");
-				UI_remove_answer("Lord Wilfred");
-				UI_add_answer("spats");
+				remove("Lord Wilfred");
+				add("spats");
 				fallthrough;
 
 			case "spats":
 				say("\"I grew up here in the inn, scrubbing pots and whatever else were needed.\" *\"But I dreamed of seeing more of the world. I went wandering when I was a young lad...\" *\"And Angus, our father, raised Wilfred using me as the bad example. But instead of making Wilfred hold to his wishes, Angus drove Wilfred into my footsteps, determined to best anything I did.\"");
-				UI_remove_answer("spats");
-				UI_add_answer(["bad example", "best"]);
+				remove("spats");
+				add(["bad example", "best"]);
 				fallthrough;
 
 			case "bad example":
 				say("\"Father said I were too much like my great-grandfather, Silverpate.\tHe never thought I'd amount to much, even after I'd made Captain.\"");
 				say("\"It like to broke his heart when Wilfred ran away to Monitor. That's where the @Lord@ Wilfred hies from...\"");
 				say("\"He acts like a swaggering noble, with all his self-important ambition.\"");
-				UI_remove_answer("bad example");
-				UI_add_answer("Silverpate");
+				remove("bad example");
+				add("Silverpate");
 				fallthrough;
 
 			case "Silverpate":
 				say("\"Silverpate were a pirate, I'll make no bones about it. He built this inn when he retired from the sea.\" *\"His son, Donal -- my father's father -- took over when Silverpate disappeared. Some think he might have gone back to the sea. Others say that his evil past caught up to him... No one ever saw him again. But there've been plenty wantin' to hunt for his treasure.\"");
-				UI_remove_answer("Silverpate");
-				UI_add_answer("treasure");
+				remove("Silverpate");
+				add("treasure");
 				fallthrough;
 
 			case "treasure":
@@ -30607,13 +30607,13 @@ void Func0426 object#(0x426) () {
 					say("\"Aye... I stood up to dinner that night. I remember.\"");
 					UI_remove_npc_face1();
 				}
-				UI_remove_answer("treasure");
+				remove("treasure");
 				fallthrough;
 
 			case "best":
 				say("\"I became a Captain in Monitor, but that was not good enough for Wilfred. He had to be a knight... and a Bear at that.\" *\"'Tis sad to see the likes of him and his friends making a mockery of Monitor's ideals.\"");
-				UI_remove_answer("best");
-				UI_add_answer("ideals");
+				remove("best");
+				add("ideals");
 				fallthrough;
 
 			case "ideals":
@@ -30625,7 +30625,7 @@ void Func0426 object#(0x426) () {
 					    "...\"");
 				}
 				say("\"Courage and Valor have become so debased that Knights like Wilfred are little more than braggarts and mercenaries! Where once the pinnacle of honor was a Monitorian knight, now people see them as vain bullies.\" *\"It sickens me... I had nearly decided to renounce my commission when mother sent word of father's disappearance.\"");
-				UI_remove_answer("ideals");
+				remove("ideals");
 				fallthrough;
 
 			case "Monitor":
@@ -30636,14 +30636,14 @@ void Func0426 object#(0x426) () {
 				}
 				say("\"Monitor is a city to the south of here. 'Tis dedicated to Courage and Valor. Monitorian soldiers are called the Pikemen and wear a tattoo on their faces.\"");
 				say("\"There are three Pikemen Commands -- the wolves, the leopards, and the bears. I am a Captain in the Wolf Command. Each Command runs the city for a portion of the year.\"");
-				UI_remove_answer("Monitor");
-				UI_add_answer("runs the city");
+				remove("Monitor");
+				add("runs the city");
 				fallthrough;
 
 			case "runs the city":
 				say("\"The senior officer of the Command becomes Lord of Monitor for that Command's portion of the year. This ensures the continuing balance of Commands.\"");
 				say("\"'Twas meant to keep the battling for supremacy between the Commands at a minimum.\" *\"If each Command knows that it will have a chance to control the city during the year, more attention is given to the military functions of the Command rather than the political.\"");
-				UI_remove_answer("runs the city");
+				remove("runs the city");
 				fallthrough;
 
 			case "Wolf Command":
@@ -30654,24 +30654,24 @@ void Func0426 object#(0x426) () {
 					    var0000,
 					    ". Not as hot-headed as those Bears, and much more tightly knit than those Leopards.\"");
 				}
-				UI_remove_answer("Wolf Command");
+				remove("Wolf Command");
 				fallthrough;
 
 			case "Moonshade":
 				say("\"I've ne'er been there myself, not being overly fond of wizards and their feuds. But if thou desirest spells or items of enchantment, that is the place to go.\" *\"If thou art looking to go to the City of Mages, thou wilt need a boat.\"");
-				UI_remove_answer("Moonshade");
-				UI_add_answer(["wizard feuds", "boat"]);
+				remove("Moonshade");
+				add(["wizard feuds", "boat"]);
 				fallthrough;
 
 			case "wizard feuds":
 				say("\"There isn't a sorcerer alive what doesn't scheme to become MageLord of that city! The whole place is split into rival factions that bicker constantly with each other.\"");
-				UI_remove_answer("wizard feuds");
+				remove("wizard feuds");
 				fallthrough;
 
 			case "boat":
 				say("\"The Magic Storms have wrecked every boat on this coast except one. That vessel belongs to Captain Hawk.\"");
-				UI_remove_answer("boat");
-				UI_add_answer("Captain Hawk");
+				remove("boat");
+				add("Captain Hawk");
 				fallthrough;
 
 			case "Captain Hawk":
@@ -30683,8 +30683,8 @@ void Func0426 object#(0x426) () {
 					UI_set_conversation_slot(0x0000);
 				}
 				gflags[0x01CD] = true;
-				UI_remove_answer("Captain Hawk");
-				UI_add_answer("Pikemen");
+				remove("Captain Hawk");
+				add("Pikemen");
 				fallthrough;
 
 			case "Pikemen":
@@ -30692,25 +30692,25 @@ void Func0426 object#(0x426) () {
 				    var0000,
 				    ". I've known Hawk since I was a boy and, being a Pikeman myself, I have little to worry about with him.\"");
 				say("\"To be sure, he can put up a mighty fight and break things... But he always pays for the damages when he wakes. Someone else must have pulled them in after him.\"");
-				UI_remove_answer("Pikemen");
-				UI_add_answer("someone else");
+				remove("Pikemen");
+				add("someone else");
 				fallthrough;
 
 			case "someone else":
 				say("\"I'd wager my sword that it was that merchant, Flindo. He was mightily put out when Hawk refused to sail to Moonshade until the storms eased up.\"");
-				UI_remove_answer("someone else");
+				remove("someone else");
 				fallthrough;
 
 			case "out of business":
 				say("\"Aye, few people care to stray too far from shelter these days.\" *\"Even Hawk put in here and refused to budge because of the storms... Though his passengers are less than thrilled with his decision.\" *\"And all our help ran off to the cities, hoping that it would be safer around all those buildings.\"");
-				UI_remove_answer("out of business");
-				UI_add_answer("passengers");
+				remove("out of business");
+				add("passengers");
 				fallthrough;
 
 			case "passengers":
 				say("\"Hawk hath two passengers staying here until he puts out again -- if he ever pays the Pikemen, that is. One of them is the fellow with the parrot. Kane, I think his name is. The other is an arrogant fellow named Flindo. He's a merchant.\" *\"I was glad to have them, being as we only have four other guests.\"");
-				UI_remove_answer("passengers");
-				UI_add_answer("guests");
+				remove("passengers");
+				add("guests");
 				fallthrough;
 
 			case "guests":
@@ -30723,39 +30723,39 @@ void Func0426 object#(0x426) () {
 					say("\"Mother!\"");
 				}
 				say("\"Byrin's here, which is a blessing. 'Tis good to have a gleeman to pass the weary hours between storms. And then there be that new fellow, Miggim. I don't know too much about him... He hath only been here a few days and is rarely out of his room.\"");
-				UI_remove_answer("guests");
+				remove("guests");
 				fallthrough;
 
 			case "Sleeping Bull":
 				say("\"'Tis an uncommon name, to be sure. It doth have something to do with the village that once was here. According to family tales, this land once belonged to a mage who hated all people. This mage created a huge stone bull to kill trespassers on his land.\"");
 				say("\"'Twas the bull's defeat that gave the village its name... And, in turn, became the name of the inn itself.\"");
-				UI_remove_answer("Sleeping Bull");
-				UI_add_answer("bull's defeat");
+				remove("Sleeping Bull");
+				add("bull's defeat");
 				fallthrough;
 
 			case "bull's defeat":
 				say("\"One day the mage heard a local noble's son claim that he could defeat the bull. The mage told the boy he was welcome to try, but death would be the reward of failure.\"");
 				say("\"When the boy asked what would reward his success, the mage wagered his land. That night the boy stole the ring from the bull's nose, turning it back to inanimate stone.\"");
 				say("\"The village was named after the huge stone bull that once stood in the center of the market square. I do not know what happened to the bull, if ever there was one, for I searched for it as a lad and never found it.\"");
-				UI_remove_answer("bull's defeat");
+				remove("bull's defeat");
 				fallthrough;
 
 			case "duel":
 				say("\"I will not lie to thee... I did, indeed, kill a man in a duel of honor. As I called the duel, it was he who named the conditions.\" *\"He were equally trained and armed as myself, else I would have demanded to cross swords with his seconds. And I would have asked him to yield, but my blow glanced off his hilt and took him square in the throat.\"");
-				UI_remove_answer("duel");
-				UI_add_answer("called the duel");
+				remove("duel");
+				add("called the duel");
 				fallthrough;
 
 			case "called the duel":
 				say("\"He likened me to my forefather, Silverpate -- loudly, and in public. I asked for his apology, and when he further heaped filth upon my name... I called him to duel before witnesses.\"");
-				UI_remove_answer("called the duel");
+				remove("called the duel");
 				fallthrough;
 
 			case "bribes":
 				UI_push_answers();
 				say("\"By the stone bull's horns! I'd like to know who insists on telling these false tales! I was cleared of all allegations by my commander and I'll have thine apology for spreading such a lie!\"");
 				say("\"Wilt thou apologize? Or shall I take my recompense from thine hide?\"");
-				UI_add_answer(["apologize", "don't apologize"]);
+				add(["apologize", "don't apologize"]);
 				fallthrough;
 
 			case "apologize":
@@ -30783,7 +30783,7 @@ void Func0426 object#(0x426) () {
 					Func0805();
 				} else {
 					say("\"Return when we be open, and I will sell thee a meal!\"");
-					UI_remove_answer("food");
+					remove("food");
 				}
 				fallthrough;
 
@@ -30795,7 +30795,7 @@ void Func0426 object#(0x426) () {
 					Func0806();
 				} else {
 					say("\"If thou wilt return when we are open, I will sell thee a drink!\"");
-					UI_remove_answer("drink");
+					remove("drink");
 				}
 				fallthrough;
 
@@ -30820,7 +30820,7 @@ void Func0426 object#(0x426) () {
 				} else {
 					say("\"Some other time, then.\"");
 				}
-				UI_remove_answer("room");
+				remove("room");
 				fallthrough;
 
 			case "bye":
@@ -30880,7 +30880,7 @@ void Func0427 object#(0x427) () {
 				say("\"Welcome, fellow dreamer! I am Byrin, a gleeman by trade.\" *\"Thou dost look perplexed. I'll warrant that thou wouldst like some answers. Or perhaps I could sing thee a song to ease thy way.\"");
 				UI_set_item_flag(0xFFD9, 0x001C);
 			}
-			UI_add_answer(["answers", "song", "bye"]);
+			add(["answers", "song", "bye"]);
 		} else {
 			if (var0003 == false) {
 				if (gflags[0x003E] == true) {
@@ -30898,53 +30898,53 @@ void Func0427 object#(0x427) () {
 				    var0002,
 				    "! What a pleasure to see thee here... I knew that thou couldst not stay long away from my tales and tunes!\"");
 			}
-			UI_add_answer(["tales", "tunes", "bye"]);
+			add(["tales", "tunes", "bye"]);
 		}
 		converse (0) {
 			case "answers":
 				say("\"Thou mayest find that the answers only give rise to more questions. But I shall do my best to help thee.\" *\"First thou must know that thou dost walk in the land of dreamers. There are only two ways to enter or exit here.\"");
-				UI_remove_answer("answers");
-				UI_add_answer("two ways");
+				remove("answers");
+				add("two ways");
 				fallthrough;
 
 			case "two ways":
 				say("\"The first way to enter this realm is from the safety of thy bed... In thy nightly slumber.\" *\"The second way to enter here is far more perilous... By falling prey to the enchantments in Gorlab Swamp.\"");
-				UI_remove_answer("two ways");
-				UI_add_answer("Gorlab Swamp");
+				remove("two ways");
+				add("Gorlab Swamp");
 				fallthrough;
 
 			case "Gorlab Swamp":
 				say("\"Long ago -- even before the serpent people made this land their home -- a sorcerer named Rabindrinath swore to destroy the peaceful town of Gorlab. But the town healer, Siranush, opposed him and the evil spell went awry.\" *\"The inhabitants of the town were not destroyed, but trapped within the realm of dreams... Along with the mad sorceror... And any who dare enter the environs of Gorlab.\"");
-				UI_remove_answer("Gorlab Swamp");
-				UI_add_answer(["Rabindrinath", "Siranush"]);
+				remove("Gorlab Swamp");
+				add(["Rabindrinath", "Siranush"]);
 				fallthrough;
 
 			case "Rabindrinath":
 				say("\"Rabindrinath hath struggled mightily against Siranush across the span of time. Each of his attacks have been repelled... Much to his displeasure.\"");
-				UI_remove_answer("Rabindrinath");
-				UI_add_answer("displeasure");
+				remove("Rabindrinath");
+				add("displeasure");
 				fallthrough;
 
 			case "displeasure":
 				say("\"Rabindrinath vents his anger by troubling the dreams of those who venture here.\"");
-				UI_remove_answer("displeasure");
+				remove("displeasure");
 				fallthrough;
 
 			case "Siranush":
 				say("\"Siranush is a strong-willed woman who hath repelled all of Rabindrinath's attacks on her people. She is no sorcerer, and I fear that her strength will one day fail her.\" *\"If Siranush is vanquished, I am sure that Rabindrinath will turn his evil intent on the wandering dreamers. Without Siranush's guidance, those who enter here might never leave.\"");
-				UI_remove_answer("Siranush");
-				UI_add_answer("leave");
+				remove("Siranush");
+				add("leave");
 				fallthrough;
 
 			case "leave":
 				say("\"As I said before, there are two ways to enter the land of dreamers. If thou didst come here from the comfort of thy bed, thou canst simply awaken and thou wilt return to the land of waking men.\" *\"But, if thou didst come here through the enchantments in the Swamp, thou must die here to return to thy body.\"");
-				UI_remove_answer("leave");
-				UI_add_answer("die");
+				remove("leave");
+				add("die");
 				fallthrough;
 
 			case "die":
 				say("\"By die, I do not mean that thou must cease living. I mean that thy perceived life here must end...\" *\"Thy death here returns thee to thy body. So long as Siranush prevails and thy body lives, thou canst return to the world of waking men.\" *\"But if Siranush should fall, or thy body die... Thou shalt remain trapped here for all time.\"");
-				UI_remove_answer("die");
+				remove("die");
 				fallthrough;
 
 			case "song":
@@ -31002,8 +31002,8 @@ void Func0427 object#(0x427) () {
 				say("\"For those with an adventurous spirit, I can tell thee of the northern savages.\"");
 				say("\"For those who wish to hear of a lost civilization, I can tell thee of the people who left the ruins on this continent.\"");
 				say("\"For those who would hear a tale of bitter bravery, I can tell thee of the lost king.\"");
-				UI_remove_answer("tales");
-				UI_add_answer(["northern savages", "lost culture", "lost king"]);
+				remove("tales");
+				add(["northern savages", "lost culture", "lost king"]);
 				fallthrough;
 
 			case "northern savages":
@@ -31019,14 +31019,14 @@ void Func0427 object#(0x427) () {
 						say("\"Perhaps some other time, then.\"");
 					}
 				}
-				UI_remove_answer("northern savages");
+				remove("northern savages");
 				fallthrough;
 
 			case "lost culture":
 				say("\"Long ago, before any of the cities thou knowest today were built, there was a race of Man who worshipped three great elemental serpents. Some followed one of fire. Others followed one of ice. And still others followed one of earth.\"");
 				say("\"As only the serpent of earth could withstand both the fire and the ice of the other serpents, it possessed the most power. The fire and ice serpents were violently opposed to each other, but were held in check by the serpent of earth.\"");
 				say("\"Then the serpent of earth lost power. The fire and ice serpents warred for supremacy. When the battle ended, it mattered not which serpent had won... for the land was destroyed and all the worshippers lay dead.\"");
-				UI_remove_answer("lost culture");
+				remove("lost culture");
 				fallthrough;
 
 			case "lost king":
@@ -31070,23 +31070,23 @@ void Func0427 object#(0x427) () {
 						say("\"Another time, then.\"");
 					}
 				}
-				UI_remove_answer("lost king");
+				remove("lost king");
 				fallthrough;
 
 			case "tunes":
 				if (gflags[0x003E] == true) {
 					if (var0001 == true) {
 						say("\"For thee, brave lady, I would sing of dreams, or perhaps of tragedy. Of course, although I sing to entertain others, I hope for some small token of appreciation... if possible. Singing is thirsty business.\"");
-						UI_add_answer(["dreams", "tragedy"]);
+						add(["dreams", "tragedy"]);
 					} else {
 						say("\"For thee, noble sir, I would sing a heart-rending ballad, or perhaps long-lost lore. Of course, although I sing to entertain others, I hope for some small token of appreciation... if possible. Singing is thirsty business.\"");
-						UI_add_answer(["ballad", "lore"]);
+						add(["ballad", "lore"]);
 					}
 				} else {
 					say("\"I sense that thou dost like adventure. For thee I would sing of strange beings and strange places. Of course, although I sing to entertain others, I hope for some small token of appreciation... if possible. Singing is thirsty business.\"");
-					UI_add_answer(["strange beings", "strange places"]);
+					add(["strange beings", "strange places"]);
 				}
-				UI_remove_answer("tunes");
+				remove("tunes");
 				fallthrough;
 
 			case "dreams":
@@ -31097,13 +31097,13 @@ void Func0427 object#(0x427) () {
 						Func09B0(0x0005);
 					} else {
 						say("\"Perhaps I could find another song for thee...\"");
-						UI_add_answer("song");
+						add("song");
 					}
 				} else {
 					say("\"I hope thou dost enjoy it...\"");
 					Func09B0(0x0005);
 				}
-				UI_remove_answer("dreams");
+				remove("dreams");
 				fallthrough;
 
 			case "tragedy":
@@ -31114,13 +31114,13 @@ void Func0427 object#(0x427) () {
 						Func09B0(0x0006);
 					} else {
 						say("\"Perhaps I could find another song for thee...\"");
-						UI_add_answer("song");
+						add("song");
 					}
 				} else {
 					say("\"Relax and be at ease...\"");
 					Func09B0(0x0006);
 				}
-				UI_remove_answer("tragedy");
+				remove("tragedy");
 				fallthrough;
 
 			case "ballad":
@@ -31131,13 +31131,13 @@ void Func0427 object#(0x427) () {
 						Func09B0(0x0001);
 					} else {
 						say("\"Perhaps I could find another song for thee...\"");
-						UI_add_answer("song");
+						add("song");
 					}
 				} else {
 					say("\"I believe I remember it...\"");
 					Func09B0(0x0001);
 				}
-				UI_remove_answer("ballad");
+				remove("ballad");
 				fallthrough;
 
 			case "lore":
@@ -31148,13 +31148,13 @@ void Func0427 object#(0x427) () {
 						Func09B0(0x0002);
 					} else {
 						say("\"Perhaps I could find another song for thee...\"");
-						UI_add_answer("song");
+						add("song");
 					}
 				} else {
 					say("\"I think this be the right key...\"");
 					Func09B0(0x0002);
 				}
-				UI_remove_answer("lore");
+				remove("lore");
 				fallthrough;
 
 			case "strange beings":
@@ -31165,13 +31165,13 @@ void Func0427 object#(0x427) () {
 						Func09B0(0x0003);
 					} else {
 						say("\"Perhaps I could find another song for thee...\"");
-						UI_add_answer("song");
+						add("song");
 					}
 				} else {
 					say("\"Thou wilt like the tempo on this one...\"");
 					Func09B0(0x0003);
 				}
-				UI_remove_answer("strange beings");
+				remove("strange beings");
 				fallthrough;
 
 			case "strange places":
@@ -31182,13 +31182,13 @@ void Func0427 object#(0x427) () {
 						Func09B0(0x0004);
 					} else {
 						say("\"Perhaps I could find another song for thee...\"");
-						UI_add_answer("song");
+						add("song");
 					}
 				} else {
 					say("\"Listen carefully...\"");
 					Func09B0(0x0004);
 				}
-				UI_remove_answer("strange places");
+				remove("strange places");
 				fallthrough;
 
 			case "bye":
@@ -31368,52 +31368,52 @@ void Func0428 object#(0x428) () {
 		}
 		if (var0006 == 0x0009) {
 			say("\"I thank ye for releasing me from that cell!\" ~\"I never expected ta end up in jail over not wantin' ta sail in these blasted storms!\" *\"If there's anything that I can do for ye, thou shouldst tell me.\" ~\"Cap'n Hawk is a man of his word!\"");
-			UI_add_answer(["jail", "storms"]);
+			add(["jail", "storms"]);
 		}
 		if ((!gflags[0x01CC]) && (!gflags[0x01CB])) {
-			UI_add_answer("journey");
+			add("journey");
 		}
 		if (gflags[0x01CC] && (!UI_get_item_flag(0x01E0, 0x001C))) {
-			UI_add_answer("leave island");
+			add("leave island");
 		}
 		if (gflags[0x0108] && (!gflags[0x028C])) {
-			UI_add_answer("pinecone");
+			add("pinecone");
 		}
 		if (gflags[0x010A] && (!gflags[0x0295])) {
-			UI_add_answer("blue egg");
+			add("blue egg");
 		}
-		UI_add_answer(["bye"]);
+		add(["bye"]);
 		converse (0) {
 			case "jail":
 				say("\"Now if that ain't gratitude for ye!\" ~\"Here I refused ta risk the Arabella and them passengers ta the terrible fierce weather.\" *\"And one of them goes and calls the Pikemen on me!\"");
-				UI_remove_answer("jail");
-				UI_add_answer(["Arabella", "passengers", "Pikemen"]);
+				remove("jail");
+				add(["Arabella", "passengers", "Pikemen"]);
 				fallthrough;
 
 			case "Arabella":
 				say("\"The Arabella is my ship, ",
 				    var0005,
 				    ".\" ~\"She's named after me dear, departed wife...\" ~\"And dearer ta me than a good, stiff drink!\"");
-				UI_remove_answer("Arabella");
+				remove("Arabella");
 				fallthrough;
 
 			case "passengers":
 				say("\"I had three passengers for the trip over to Moonshade.\" ~\"There's a fellow named Kane, a scurvy merchant named Flindo, and a pretty lass named Selina.\"");
-				UI_remove_answer("passengers");
-				UI_add_answer(["Kane", "Flindo", "Selina"]);
+				remove("passengers");
+				add(["Kane", "Flindo", "Selina"]);
 				fallthrough;
 
 			case "Kane":
 				say("\"Seems I heard tell he was a sheepherder or something.\" ~\"Kane wants ta go talk ta some of those fancy wizards over in Moonshade...\" *\"See if they kin help him find what happened ta his older brother who disappeared a few months ago.\" ~\"Ye can't miss him... He always has a bird with him.\"");
-				UI_remove_answer("Kane");
-				UI_add_answer("bird");
+				remove("Kane");
+				add("bird");
 				fallthrough;
 
 			case "bird":
 				say("\"Bird must have been a sailor, ",
 				    var0005,
 				    "!\" ~\"Never seen anything like it! The bird has a real fondness for a stout drink.\" *\"It doth talk purty well, too.\"");
-				UI_remove_answer("bird");
+				remove("bird");
 				fallthrough;
 
 			case "Flindo":
@@ -31441,8 +31441,8 @@ void Func0428 object#(0x428) () {
 					UI_set_conversation_slot(0x0000);
 				}
 				say("\"Flindo was the one that bribed the Pikemen into pulling me away from the fight he started!\"");
-				UI_remove_answer("Flindo");
-				UI_add_answer("bribed");
+				remove("Flindo");
+				add("bribed");
 				fallthrough;
 
 			case "bribed":
@@ -31451,13 +31451,13 @@ void Func0428 object#(0x428) () {
 					say("\"...Er, Pikemen. Sorry, Argus.\"");
 				}
 				say("\"Talking just after I woke up.\" ~\"Seems like Flindo payed them ta rough me up so that I'd decide not ta stay and go back ta Moonshade.\" *\"But, moneybags Flindo didn't count on those swine getting greedy!\"");
-				UI_remove_answer("bribed");
-				UI_remove_answer("greedy");
+				remove("bribed");
+				remove("greedy");
 				fallthrough;
 
 			case "greedy":
 				say("\"They thought they could make me pay for my release, but I have no money ta speak of...\" ~\"Then they thought they could convince Flindo ta pay my way out, but either he'd spent all his money bribing them ta rough me up or he wouldn't pay it out of spite!\"");
-				UI_remove_answer("greedy");
+				remove("greedy");
 				fallthrough;
 
 			case "Selina":
@@ -31466,18 +31466,18 @@ void Func0428 object#(0x428) () {
 				    "... Brought her over from Moonshade a while back. Might have been the return trip from takin' that fat sage Batlin across.\"");
 				say("\"An' a sullen, bossy sort of fellow he was, too. Did not even have the decency ta lift a mug wit' me during the crossing! Bah! But what was I talkin' about... Ah yes, that lovely slip of a lass, Selina.\"");
 				say("\"She must have been someone's servant. Said she wanted ta go home for a visit. Said she might be here for me ta take her back.\"");
-				UI_remove_answer("Selina");
-				UI_add_answer(["servant", "home"]);
+				remove("Selina");
+				add(["servant", "home"]);
 				fallthrough;
 
 			case "servant":
 				say("\"Selina certainly isn't one of those over-dressed mages, for sure!\" ~\"She's too timid ta be anything but a servant.\"");
-				UI_remove_answer("servant");
+				remove("servant");
 				fallthrough;
 
 			case "home":
 				say("\"I don't think she said, but I did perceive it was somewhere like Monitor.\"");
-				UI_remove_answer("home");
+				remove("home");
 				fallthrough;
 
 			case "Pikemen":
@@ -31488,21 +31488,21 @@ void Func0428 object#(0x428) () {
 					    "...\"");
 				}
 				say("\"I'll try ta be kind.\" ~\"So I'll merely say that Monitor's finest are no longer cut from the same sailcloth as Argus...\" *\"If what I've seen and heard is any judge, I'd say that the Pikemen are more interested in money than in valor... and me treasure.\"");
-				UI_remove_answer("Pikemen");
-				UI_add_answer("treasure");
+				remove("Pikemen");
+				add("treasure");
 				fallthrough;
 
 			case "treasure":
 				say("\"Aye, treasure... from me wilder, younger days.\"");
 				say("\"Those Pikemen scoundrels tried ta convince me ta tell 'em where I keep me map. 'Tis lucky fer me that Argus would never let 'em search me room. I never keep it on me... Hide it in me room most times.\"");
-				UI_remove_answer("treasure");
+				remove("treasure");
 				fallthrough;
 
 			case "storms":
 				say("\"I've sailed the seas almost all the days of my life, ",
 				    var0005,
 				    ".\" ~\"And I'll tell ye that there's nothing on the water that I can't sail a ship through.\" *\"But how can a man fight something that plucks a ship out o' the water, or turns a ship's sails into slabs of stone?\" ~\"And I'll not think me a coward ta tell ye that these storms have me plenty mindful of how deep them seas are!\"");
-				UI_remove_answer("storms");
+				remove("storms");
 				fallthrough;
 
 			case "journey" (remove):
@@ -31525,7 +31525,7 @@ void Func0428 object#(0x428) () {
 				} else {
 					say("\"Not on my ship, thou won't!\" ~\"'Tis too dangerous ta sail these waters in these storms!\" *\"If thou dost want ta travel elsewhere, why not speak ta the mages?\" ~\"They know how ta magic themselves for short distances...\" *\"And I've heard it said that Old Erstam the Mad Mage can travel anywhere he pleases!\"");
 				}
-				UI_remove_answer("leave island");
+				remove("leave island");
 				fallthrough;
 
 			case "blue egg":
@@ -31549,7 +31549,7 @@ void Func0428 object#(0x428) () {
 						say("\"Then ye be out of luck, matey.\"");
 					}
 				}
-				UI_remove_answer("blue egg");
+				remove("blue egg");
 				fallthrough;
 
 			case "pinecone":
@@ -31564,7 +31564,7 @@ void Func0428 object#(0x428) () {
 					say("\"Can't git 'em now.\" ~\"Ain't gonna sail my ship no more, and a ship is the only way past Gorlab Swamp.\"");
 				}
 				gflags[0x028C] = true;
-				UI_remove_answer("pinecone");
+				remove("pinecone");
 				fallthrough;
 
 			case "bye":
@@ -31663,25 +31663,25 @@ void Func0429 object#(0x429) () {
 			    var0000,
 			    "! Enter before we suffer another storm.\" *\"I am Devra... My son, Argus, and I are running the inn since Angus disappeared.\"");
 			UI_set_item_flag(0xFFD7, 0x001C);
-			UI_add_answer(["storm", "Argus", "disappeared"]);
+			add(["storm", "Argus", "disappeared"]);
 		} else {
 			say("\"Welcome back, ",
 			    var0002,
 			    ". 'Tis so good to see thee again, after all these storms. Argus will be glad to see thee.\"");
-			UI_add_answer(["storm", "Argus", "disappeared"]);
+			add(["storm", "Argus", "disappeared"]);
 		}
-		UI_add_answer(["food", "drink", "room", "exchange money", "bye"]);
+		add(["food", "drink", "room", "exchange money", "bye"]);
 		converse (0) {
 			case "storm":
 				say("\"I have lived here since before I was married, and I've never seen anything like these mage-born storms. Why, one caught old man Jothum in his field and changed his plow horse into a goat, in front of his eyes.\" *\"But Jothum was lucky, 'twas only his horse. We never did find what happened to Theron.\"");
-				UI_remove_answer("storm");
-				UI_add_answer(["mage-born", "Theron"]);
+				remove("storm");
+				add(["mage-born", "Theron"]);
 				fallthrough;
 
 			case "mage-born":
 				say("\"If thou shouldst be hit with lightning -- normal lightning, mind thee -- thou art dead. Plain and simple. They bury thy charred body the next day.\" *\"But storms that change things, or make them disappear, or exchange them for something else, well now, it seems to me that 'tis magic, right enough. I don't have to be from Moonshade to conjure that answer!\"");
-				UI_remove_answer("mage-born");
-				UI_add_answer("Moonshade");
+				remove("mage-born");
+				add("Moonshade");
 				fallthrough;
 
 			case "Moonshade":
@@ -31707,26 +31707,26 @@ void Func0429 object#(0x429) () {
 						UI_set_conversation_slot(0x0000);
 					}
 				}
-				UI_remove_answer("Moonshade");
+				remove("Moonshade");
 				fallthrough;
 
 			case "Theron":
 				say("\"Theron was a simple man, not quite right in the head, if thou knowest what I mean. He worked for Angus and me for nigh on three years as a wood chopper... Until one of those storms.\"");
 				say("\"Angus pulled Theron inside when the storm hit, but Theron ran back out to bring in his favorite axe... Next thing there was a blinding flash, and Theron was gone!\"");
-				UI_remove_answer("Theron");
+				remove("Theron");
 				fallthrough;
 
 			case "Argus":
 				say("\"Argus is mine oldest boy. He's a captain in the Pikemen... Or he was until he came home to take over his father's place.\" *\"Mine husband always thought that Wilfred, our youngest, would be the one to take the inn. But he hath become too high and mighty to be an honest innkeeper!\"");
-				UI_remove_answer("Argus");
-				UI_add_answer("Wilfred");
+				remove("Argus");
+				add("Wilfred");
 				fallthrough;
 
 			case "Wilfred":
 				say("\"Wilfred is a Monitorian knight, ",
 				    var0000,
 				    ". He always was headstrong... And I think his father harried him overmuch.\" *\"He ran away to be like his brother... Only better, he said.\"");
-				UI_remove_answer("Wilfred");
+				remove("Wilfred");
 				fallthrough;
 
 			case "disappeared":
@@ -31736,8 +31736,8 @@ void Func0429 object#(0x429) () {
 				} else {
 					say("\"Now I've got no husband, but I do have my slippers...\"");
 				}
-				UI_remove_answer("disappeared");
-				UI_add_answer(["mystery", "slippers"]);
+				remove("disappeared");
+				add(["mystery", "slippers"]);
 				fallthrough;
 
 			case "slippers":
@@ -31763,62 +31763,62 @@ void Func0429 object#(0x429) () {
 					    var0002,
 					    ", for returning my favorite slippers.\"");
 				}
-				UI_remove_answer("slippers");
+				remove("slippers");
 				fallthrough;
 
 			case "mystery":
 				say("\"On the night Angus disappeared, I'd gone to bed and Angus had remained to sweep. If thou dost ask me though, he stayed up to keep an eye on that strange mage that was staying here.\" *\"I was stirred from a sound sleep by the sound of voices downstairs in the cellar. After I heard a crash, I went down to look, but I did not see anyone. I thought the mage's companion might have tried to slip down to have another drink for free, and thought no more of it until the morning.\"");
 				gflags[0x01E4] = true;
-				UI_remove_answer("mystery");
-				UI_add_answer(["strange mage", "cellar", "mage's companion"]);
+				remove("mystery");
+				add(["strange mage", "cellar", "mage's companion"]);
 				fallthrough;
 
 			case "strange mage":
 				say("\"He was a rather portly man, if I remember rightly. He had been here once before...\"");
 				say("\"I cannot seem to recall what his name was. He was not the talkative sort, least not to me.\"");
 				say("\"Thou couldst ask Ensorcio, they talked quite a bit. Or... I know... Thou canst look in the registry! 'Tis on the bar.\"");
-				UI_remove_answer("strange mage");
-				UI_add_answer("Ensorcio");
+				remove("strange mage");
+				add("Ensorcio");
 				fallthrough;
 
 			case "Ensorcio":
 				say("\"Thou hast not met the great Ensorcio yet? Count thy blessings!\"");
 				say("\"Ensorcio is the smoldering black cloud that sits here day after day, drinking himself into a fit. All he does is glower about how those fools in Moonshade threw him out, and how he'll avenge himself.\"");
-				UI_remove_answer("Ensorcio");
-				UI_add_answer("fools in Moonshade");
+				remove("Ensorcio");
+				add("fools in Moonshade");
 				fallthrough;
 
 			case "fools in Moonshade":
 				say("\"Ensorcio is an exiled mage. Who doth know what he did? I am too afraid to ask...\"");
 				say("\"If he was thrown out by that lot, thou canst wager that it could not have been good. Although Angus did not trust mages, he allowed Ensorcio to stay... Angus said that a mage had to have a clear head to cast spells, and we should worry if Ensorcio ever sobered.\"");
-				UI_remove_answer("fools in Moonshade");
+				remove("fools in Moonshade");
 				fallthrough;
 
 			case "cellar":
 				say("\"Aye, the cellar. We've had a lout or two think that they could slip down and take a bottle or two on the sly.\" *\"But Angus always seemed to know when they tried it... Threw them out with a few bruises for their trouble.\"");
 				say("\"'Tis why I didn't worry 'til morn... When I found everything in disarray and Angus gone.\"");
-				UI_remove_answer("cellar");
-				UI_add_answer("disarray");
+				remove("cellar");
+				add("disarray");
 				fallthrough;
 
 			case "disarray":
 				say("\"The casks and barrels were scattered all over the floor down there. It looked like there may have been a fight, but I did not see any blood.\" *\"It took the rest of the day to put all back in order down there. And make sure that nothing was missing.\"");
 				say("\"I waited a week or so before I sent word to Wilfred and Argus about their father not returning.\"");
-				UI_remove_answer("disarray");
+				remove("disarray");
 				fallthrough;
 
 			case "mage's companion":
 				say("\"I do not know his name either... He never spoke to anyone other than the mage that I know of.\" *\"He always walked about with his hood raised, as if he were cold or something. He always gave me the shivers.\"");
-				UI_remove_answer("mage's companion");
-				UI_add_answer("shivers");
+				remove("mage's companion");
+				add("shivers");
 				fallthrough;
 
 			case "shivers":
 				say("\"Hast thou ever been in a sickroom, ",
 				    var0000,
 				    "? A sickroom where someone is about to die?\" *\"There is a tension in the air, a stillness... And that always seemed to hover about the mage's large companion.\" *\"He was probably the one that stole whatever it was from Ensorcio that night, too.\"");
-				UI_remove_answer("shivers");
-				UI_add_answer("stole");
+				remove("shivers");
+				add("stole");
 				fallthrough;
 
 			case "stole":
@@ -31826,7 +31826,7 @@ void Func0429 object#(0x429) () {
 				    var0000,
 				    ".\" *\"After all, I had to put all those barrels back myself, what with Angus gone and all. And that high and mighty mage never offered to lift a finger for anything more than another mug of ale!\"");
 				var000D = true;
-				UI_remove_answer("stole");
+				remove("stole");
 				fallthrough;
 
 			case "food":
@@ -31835,37 +31835,37 @@ void Func0429 object#(0x429) () {
 					if (!var0004) {
 						say("\"I've done all the cooking here since Donal hired me, before I married Angus. I've had my share of compliments, if I do say so myself.\"");
 						var0004 = true;
-						UI_add_answer(["Donal", "Angus"]);
+						add(["Donal", "Angus"]);
 					}
 					Func081E();
 				} else {
 					say("\"I will sell thee some food when we are open!\"");
-					UI_remove_answer("food");
+					remove("food");
 				}
 				fallthrough;
 
 			case "Donal":
 				say("\"Donal was Angus' father, the son of Silverpate the pirate. Donal hired me as cook when I was merely a strip of a lass... 'Tis when I caught Angus' eye.\" *\"Donal never showed any tendency to leave of a sudden, like his no-account father. That's why I told Angus I'd wed him... I thought that maybe that adventuring blood died with the old pirate.\"");
-				UI_remove_answer("Donal");
-				UI_add_answer("Silverpate");
+				remove("Donal");
+				add("Silverpate");
 				fallthrough;
 
 			case "Silverpate":
 				say("\"Thou hast not yet heard of Silverpate? I was beginnin' to think the walls shouted it, as fast as the guests hear about it around here!\" *\"According to stories... and 'twere only stories, mind thee... Silverpate was a pirate who took his treasure and started this here inn. He was supposed to have hid his treasure somewhere around here before he disappeared.\"");
-				UI_remove_answer("Silverpate");
-				UI_add_answer("treasure");
+				remove("Silverpate");
+				add("treasure");
 				fallthrough;
 
 			case "treasure":
 				say("\"What a lot of nonsense! Why we've had two whole generations of kin and neighbors lookin' everywhere imaginable for it.\" *\"I even looked a bit... at first. But if it hasn't been found after all this time, ",
 				    var0000,
 				    ", with all those looking for it... I'd tell thee not to waste thy time looking!\"");
-				UI_remove_answer("treasure");
+				remove("treasure");
 				fallthrough;
 
 			case "Angus":
 				say("\"Angus is mine husband. He was the innkeeper here after Donal died.\" *\"We raised two fine sons and he hoped to pass the inn to one of them when he were too old to run things. Only he disappeared... same as old Silverpate.\"");
-				UI_remove_answer("Angus");
+				remove("Angus");
 				fallthrough;
 
 			case "drink":
@@ -31874,7 +31874,7 @@ void Func0429 object#(0x429) () {
 					Func081F();
 				} else {
 					say("\"Please return when we are open!\"");
-					UI_remove_answer("drink");
+					remove("drink");
 				}
 				fallthrough;
 
@@ -31978,7 +31978,7 @@ void Func042A object#(0x42A) () {
 			say("\"I would be careful in the streets here now, ",
 			    var0000,
 			    ". 'Tis somewhat... unsafe.  Oh, and the... fallen Filbercio is searching for thee.\"");
-			UI_add_answer(["strange state", "fallen Filbercio"]);
+			add(["strange state", "fallen Filbercio"]);
 		}
 		if (var0009 == false) {
 			if (gflags[0x01CC]) {
@@ -31992,17 +31992,17 @@ void Func042A object#(0x42A) () {
 		}
 		if (var0004 == 0x0009) {
 			say("\"So, art thou another stranded victim of Hawk and his childish fear of storms? Or art thou here to investigate the curious disappearance of Mistress Devra's good husband?\"");
-			UI_add_answer(["Hawk", "storms", "curious disappearance", "connections"]);
+			add(["Hawk", "storms", "curious disappearance", "connections"]);
 		} else {
 			say("\"I understand now why Hawk did not wish to sail the open seas. I do not know how thou wilt leave this island... Unless the tales are true.\"");
 			say("\"I hope that thou dost like our fine city of Moonshade.\"");
 			say("\"If thou wouldst like to know about any place within the city, come to me.\"");
-			UI_add_answer(["tales", "Moonshade", "any place", "connections"]);
+			add(["tales", "Moonshade", "any place", "connections"]);
 		}
 		if (gflags[0x012F] && (!gflags[0x00D9])) {
-			UI_add_answer("thy promise");
+			add("thy promise");
 		}
-		UI_add_answer(["bye"]);
+		add(["bye"]);
 		converse (0) {
 			case "strange state" (remove):
 				say("\"He now calls himself Shamino the Anarch.\"");
@@ -32021,27 +32021,27 @@ void Func042A object#(0x42A) () {
 				say("\"That bag of wind! Calls himself a sailor... Ha!\"");
 				say("\"Now, I am asking thee... What manner of Captain would strand me and poor, dumb Kane -- paying passengers, mind thee -- here in this little backwater inn because of some... storm?\"");
 				say("\"So I went to the Pikemen...\"");
-				UI_add_answer(["Kane", "Pikemen"]);
+				add(["Kane", "Pikemen"]);
 				fallthrough;
 
 			case "Kane" (remove):
 				say("\"Look for a young lad talking to a parrot. That will be him.\"");
 				say("\"Witless lad doth not have enough sense to steer clear of Ensorcio. Comes asking if Ensorcio was a mage, and would Ensorcio help him and Ale find his lost brother!\"");
 				say("\"Kane doth not have the sense of a cat!\"");
-				UI_add_answer(["Ensorcio", "Ale"]);
+				add(["Ensorcio", "Ale"]);
 				fallthrough;
 
 			case "Ensorcio" (remove):
 				say("\"Now there is one to avoid, if ever there was one!\"");
 				say("\"The mages wondered when Vasculio took Ensorcio as an apprentice. Temper like that, 'tis not good in a mage. And when thou considerest Vasculio's interests... Well, 'tis enough to make a body worry.\"");
 				say("\"And then with what happened about that Adept's daughter... No one was surprised when the Council of Mages stepped in and exiled Ensorcio -- except maybe Ensorcio himself!\"");
-				UI_add_answer(["Vasculio", "Adept's daughter"]);
+				add(["Vasculio", "Adept's daughter"]);
 				fallthrough;
 
 			case "Vasculio" (remove):
 				say("\"Do not tell me that thou hast not heard that legend!\"");
 				say("\"I was not around for any of this, mind thee. I wasn't even born yet... Ensorcio isn't as young as he appears, being a mage and all. But my father talked about it enough -- it happened when he was a mere boy.\"");
-				UI_add_answer("legend");
+				add("legend");
 				fallthrough;
 
 			case "legend" (remove):
@@ -32050,7 +32050,7 @@ void Func042A object#(0x42A) () {
 				say("\"And he was none too particular if it was a quick death or not. Anyway, soon his 'research' even upset the Council of Mages.\"");
 				say("\"When the Council went to deliver Vasculio an ultimatum, they found him in deeds so horrible that it was determined that he was no longer human.\"");
 				say("\"They put him to death... but his tomb was broken open and empty before a week had passed. And they say that, somehow, he still lives to practice his dark arts.\"");
-				UI_add_answer(["restrictions", "Mortegro"]);
+				add(["restrictions", "Mortegro"]);
 				fallthrough;
 
 			case "restrictions" (remove):
@@ -32071,7 +32071,7 @@ void Func042A object#(0x42A) () {
 				    "! Mages are very protective of their privacy AND their pride.\"");
 				say("\"Suffice it to say that Ensorcio took a fancy to the girl and, when she would not give him the time of day, used his magic to... persuade... her to see him.\"");
 				say("\"I was surprised the Council punished him with simple exile. I would have thought he would have gone to the Mountains of Freedom for his crime!\"");
-				UI_add_answer("Mountains of Freedom");
+				add("Mountains of Freedom");
 				fallthrough;
 
 			case "Mountains of Freedom" (remove):
@@ -32079,7 +32079,7 @@ void Func042A object#(0x42A) () {
 				    var0000,
 				    ". And hope that thou never hast reason to learn too much about it.\"");
 				say("\"Long ago, those mountains were full of ore and many spent their lives mining it. But most of the veins were empty when they uncovered the Stoneheart...\"");
-				UI_add_answer("Stoneheart");
+				add("Stoneheart");
 				fallthrough;
 
 			case "Stoneheart" (remove):
@@ -32088,7 +32088,7 @@ void Func042A object#(0x42A) () {
 				    "! Or thou wilt find a personal view of the Mountains of Freedom!\"");
 				say("\"Stoneheart can be used to create another mineral, a strange reagent that magnifies magical power, especially death spells. And it is very dangerous.\"");
 				say("\"Anyway, after that was found there, the mines were sealed. Until Filbercio became MageLord, that is.\"");
-				UI_add_answer(["Filbercio", "MageLord"]);
+				add(["Filbercio", "MageLord"]);
 				fallthrough;
 
 			case "Filbercio" (remove):
@@ -32125,7 +32125,7 @@ void Func042A object#(0x42A) () {
 					say("\"I suppose that is what comes of not knowing the difference between Leopards, Bears and Wolves...\"");
 				}
 				gflags[0x01CD] = true;
-				UI_add_answer(["Leopards", "Bears", "Wolves"]);
+				add(["Leopards", "Bears", "Wolves"]);
 				fallthrough;
 
 			case "Leopards" (remove):
@@ -32170,7 +32170,7 @@ void Func042A object#(0x42A) () {
 				say("\"I find it hard to believe that a man such as Hawk, with a ship such as the Arabella, would fear any storm -- magical or otherwise.\"");
 				say("\"I have heard of too many odd events connected to these storms to discount their unusual nature. But all such tales speak of danger on land...\"");
 				say("\"I think Hawk's reluctance to sail lies more at the bottom of an empty mug and an empty coffer...\"");
-				UI_add_answer("Arabella");
+				add("Arabella");
 				fallthrough;
 
 			case "Arabella" (remove):
@@ -32182,21 +32182,21 @@ void Func042A object#(0x42A) () {
 				say("\"It occurred immediately after I arrived here...\"");
 				say("\"I recall that one morning Mistress Devra was beside herself with worry because Angus was nowhere to be found.\"");
 				say("\"I told her not to worry herself too much, as sometimes a man will feel too constricted at home and need to wander for a bit. But she would not be dissuaded and sent for Argus.\"");
-				UI_add_answer(["Devra", "Angus", "Argus"]);
+				add(["Devra", "Angus", "Argus"]);
 				fallthrough;
 
 			case "Devra" (remove):
 				say("\"Mistress Devra is a sweet-natured lady. Too good-hearted to be an innkeeper sometimes.\"");
 				say("\"I had recently begun making the trips with my father when Donal hired her to do the cooking. That was before she married Angus.\"");
 				say("\"Poor woman, first Theron and then her husband...\"");
-				UI_add_answer(["Donal", "Theron"]);
+				add(["Donal", "Theron"]);
 				fallthrough;
 
 			case "Donal" (remove):
 				say("\"Donal was Angus' father. He was a good, hard-working man.\"");
 				say("\"'Twas a good thing Donal was not anything like his father, Silverpate, or I doubt that Mistress Devra would ever have given Angus a second look.\"");
 				say("\"'Tis hard to think that Angus disappeared exactly like his grandfather did...\"");
-				UI_add_answer("Silverpate");
+				add("Silverpate");
 				fallthrough;
 
 			case "Silverpate" (remove):
@@ -32204,7 +32204,7 @@ void Func042A object#(0x42A) () {
 				say("\"Everyone said Silverpate was a pirate who grew too old for the sea and went searching for a way to become respectable. He used part of his treasure to construct this place...\"");
 				say("\"There are rumors in Moonshade that he hired a mage for some reason, but I have never been able to confirm it. They say that he was a very suspicious man...\"");
 				say("\"Anyhow, Silverpate disappeared when Donal was still a young man. Everyone thinks the treasure is still hidden here somewhere.\"");
-				UI_add_answer(["treasure", "disappeared"]);
+				add(["treasure", "disappeared"]);
 				fallthrough;
 
 			case "treasure" (remove):
@@ -32234,7 +32234,7 @@ void Func042A object#(0x42A) () {
 				    ".\"");
 				say("\"He inherited more than a little bit of his father's temper, and always dreamed of being a fighter. 'Twas no surprise when he travelled to Monitor to become a Pikeman.\"");
 				say("\"Not all good came of it, however. He found himself some trouble down there, so I have heard. And there hath been bad blood between him and Wilfred ever since he left here.\"");
-				UI_add_answer(["trouble", "Wilfred"]);
+				add(["trouble", "Wilfred"]);
 				fallthrough;
 
 			case "trouble" (remove):
@@ -32272,7 +32272,7 @@ void Func042A object#(0x42A) () {
 					}
 				}
 				say("\"And thou mayest find that some of the mages are very reclusive and will not speak to thee without proper introduction.\"");
-				UI_add_answer("mistress");
+				add("mistress");
 				fallthrough;
 
 			case "mistress" (remove):
@@ -32280,7 +32280,7 @@ void Func042A object#(0x42A) () {
 				say("\"For now, Frigidazzi holds the MageLord's eye. And, from what I have seen, Filbercio seems to have found a way to thaw the charms of that cold mage...\"");
 				if (gflags[0x01CC]) {
 					say("\"Though I have heard that Frigidazzi is not always so cool. And I have been told that Filbercio hath not been... faithful... shall we say.\"");
-					UI_add_answer(["Frigidazzi", "heard", "faithful"]);
+					add(["Frigidazzi", "heard", "faithful"]);
 				} else {
 					say("\"Ask me about it again, if we ever sail to Moonshade. I shall relish telling thee more then. But for now, it only makes me angrier with Hawk for stranding me here!\"");
 				}
@@ -32301,7 +32301,7 @@ void Func042A object#(0x42A) () {
 				say("\"Filbercio hath been trying to coerce Columna into a dalliance for some time. But she will have nothing to do with him.\"");
 				say("\"As Filbercio doth not take being rebuffed lightly, he hired Stefano to steal something of Columna's from Torrissio, to use as blackmail. So the MageLord may prevail in this intended infidelity -- if Frigidazzi doth not discover him.\"");
 				say("\"Of course, this is not the MageLord's only indiscretion... As I have this story from Julia, who found out from Filbercio, during a night of... ahem... stolen passion.\"");
-				UI_add_answer(["Columna", "Stefano", "Torrissio", "Julia"]);
+				add(["Columna", "Stefano", "Torrissio", "Julia"]);
 				fallthrough;
 
 			case "Columna" (remove):
@@ -32318,7 +32318,7 @@ void Func042A object#(0x42A) () {
 				say("\"I hate even to utter his name... It leaves a bitter taste in the mouth!\"");
 				say("\"Torrissio specializes in creating the magical automatons that most mages prefer as their servants. I will grant that he is skilled enough, but he doth have the ethics of a snake!\"");
 				say("\"'Tis a good thing Petra escaped from his sickening clutches and has Rocco to protect her.\"");
-				UI_add_answer(["Petra", "Rocco"]);
+				add(["Petra", "Rocco"]);
 				fallthrough;
 
 			case "Petra" (remove):
@@ -32338,13 +32338,13 @@ void Func042A object#(0x42A) () {
 			case "tales" (remove):
 				say("\"As thou mayest imagine, Moonshade hath its share of tall tales and stories. In fact, many of them are started by the mages in question, to enhance their reputations!\"");
 				say("\"But, if thou dost listen to the tales, there are ancient passages that connect to the other islands. Or, for that matter, some say that the Mad Mage can teleport anywhere he likes.\"");
-				UI_add_answer(["passages", "Mad Mage"]);
+				add(["passages", "Mad Mage"]);
 				fallthrough;
 
 			case "passages" (remove):
 				say("\"I know nothing other than the fact that they are said to exist, and that they are supposedly fraught with peril.\"");
 				say("\"Perhaps if thou dost ask Fedabiblio, he could confirm it... Or even tell thee where they are.\"");
-				UI_add_answer("Fedabiblio");
+				add("Fedabiblio");
 				fallthrough;
 
 			case "Fedabiblio" (remove):
@@ -32352,7 +32352,7 @@ void Func042A object#(0x42A) () {
 				say("\"It makes my very skin crawl, ",
 				    var0000,
 				    ", to think of the damage an untutored mage could do...\"");
-				UI_add_answer("Seminarium");
+				add("Seminarium");
 				fallthrough;
 
 			case "Seminarium" (remove):
@@ -32366,7 +32366,7 @@ void Func042A object#(0x42A) () {
 				    ". Erstam trained all of the Adepts in Moonshade. And, as their master, he is a threat to them because he is still more powerful than they are.\"");
 				say("\"As I said before, mages are nothing if not prideful. So it is now forbidden for any to visit Erstam... Which, from what I am told is fine with him!\"");
 				say("\"If thou wishest to try and contact the Mad Mage, thou canst try speaking with Pothos. I believe that they still maintain a contact of sorts.\"");
-				UI_add_answer("Pothos");
+				add("Pothos");
 				fallthrough;
 
 			case "Pothos" (remove):
@@ -32383,7 +32383,7 @@ void Func042A object#(0x42A) () {
 
 			case "Moonshade" (remove):
 				say("\"Moonshade, the city of mages! A place where anything thou mayest desire can be thine... If thou dost have enough guilders, and thou canst find a mage with enough skill.\"");
-				UI_add_answer("guilders");
+				add("guilders");
 				fallthrough;
 
 			case "guilders" (remove):
@@ -32396,7 +32396,7 @@ void Func042A object#(0x42A) () {
 			case "any place" (remove):
 				say("\"There are many places that thou wilt want to visit while thou art here.\"");
 				say("\"Thou mayest find lodgings at the Blue Boar. Thou shouldst see the Winery. And there's the artist's bazaar...\"");
-				UI_add_answer(["Blue Boar", "Winery", "bazaar"]);
+				add(["Blue Boar", "Winery", "bazaar"]);
 				fallthrough;
 
 			case "Blue Boar" (remove):
@@ -32410,7 +32410,7 @@ void Func042A object#(0x42A) () {
 
 			case "bazaar" (remove):
 				say("\"'Tis where many of the artisans can be found... My shop, the Capessi Canton, is located near the Blue Boar Inn. Be sure to stop and say hello to Bucia, who runs the shop for me.\"");
-				UI_add_answer("Bucia");
+				add("Bucia");
 				fallthrough;
 
 			case "Bucia" (remove):
@@ -32515,10 +32515,10 @@ void Func042B object#(0x42B) () {
 					} else {
 						say("\"I be searchin' for a Mage to help me find my brother what was lost in the storms, if thou pleasest.\"");
 					}
-					UI_add_answer("storms");
+					add("storms");
 				} else {
 					say("\"I am waitin' for passage to Moonshade, if thou pleasest.\"");
-					UI_add_answer("passage");
+					add("passage");
 				}
 			} else {
 				say("\"How may I serve thee, ",
@@ -32531,10 +32531,10 @@ void Func042B object#(0x42B) () {
 					} else {
 						say("\"M'name's Kane. I be searchin' for a Mage to help me find my brother what was lost in the storms, if thou pleasest.\"");
 					}
-					UI_add_answer("storms");
+					add("storms");
 				} else {
 					say("\"M'name's Kane. I be a sheepherder...\" ~\"I be waitin' for passage to Moonshade, if thou pleasest.\"");
-					UI_add_answer("passage");
+					add("passage");
 				}
 			}
 			UI_set_item_flag(0xFFD5, 0x001C);
@@ -32548,17 +32548,17 @@ void Func042B object#(0x42B) () {
 					    var0000,
 					    "!\" ~\"Edrin was Ale!\" *\"I mean, the storm trans... er, changed, Edrin into that parrot I found!\" ~\"All that time I was searchin' for him, and I had him right there wit me!\"");
 					say("\"Did I not tell thee that one of them Mages could help me?\" ~\"I knew it!\" *\"We be goin' home soon...\" ~\"After Edrin finds a ship to return on.\"");
-					UI_add_answer("storms");
+					add("storms");
 				} else {
 					say("\"Is not this place marvelous, ",
 					    var0000,
 					    "? There be so much to see... Everything is so fancy! I wish Edrin was here wit me. I be certain he could show me around.\"");
 					say("\"I hope some of these powerful Mages will help me find him.\"");
-					UI_add_answer("passage");
+					add("passage");
 				}
 			}
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "passage":
 				if (gflags[0x01CC]) {
@@ -32567,10 +32567,10 @@ void Func042B object#(0x42B) () {
 					say("\"I was told by Mistress Devra that I could buy passage with Captain Hawk to Moonshade.\" ~\"But when the Cap'n came to the dock, he swore that he'd not go out in these storms again.\" *\"I do not blame him, to tell thee the honest truth, ",
 					    var0000,
 					    ".\" ~\"But I do wish there was some way for me to talk to the mages there.\"");
-					UI_add_answer("Devra");
+					add("Devra");
 				}
-				UI_remove_answer("passage");
-				UI_add_answer(["Hawk", "storms"]);
+				remove("passage");
+				add(["Hawk", "storms"]);
 				fallthrough;
 
 			case "Devra":
@@ -32582,7 +32582,7 @@ void Func042B object#(0x42B) () {
 					    "!\" ~\"Mistress Devra helped me to count my money when I came.\"");
 					say("\"She put part of it in a little sack and told me that I was to give it to Captain Hawk to buy passage.\" ~\"And when she counted the rest I could not afford to stay here until the Captain decided it was safe to sail.\" *\"But she said if I helped by choppin' wood and such I could stay as a servant, like.\" ~\"That was terrible kind of her.\"");
 				}
-				UI_remove_answer("Devra");
+				remove("Devra");
 				fallthrough;
 
 			case "Hawk":
@@ -32595,9 +32595,9 @@ void Func042B object#(0x42B) () {
 					} else {
 						say("\"I didn't fight, honest. I hid under the table when Cap'n Hawk and Master Flindo started shoutin' at one another.\" ~\"I hope they don't think I did anything...\"");
 					}
-					UI_add_answer(["Pikemen", "Flindo"]);
+					add(["Pikemen", "Flindo"]);
 				}
-				UI_remove_answer("Hawk");
+				remove("Hawk");
 				fallthrough;
 
 			case "Pikemen":
@@ -32612,14 +32612,14 @@ void Func042B object#(0x42B) () {
 					say("\"Someone clouted Cap'n Hawk pretty hard and then the Pikemen were draggin' him away.\" ~\"Master Argus yelled at them to leave him be, but they told him to mind his innkeepin' and nothin' else.\" *\"Master Argus was mighty angry, and was for goin' after them. But Mistress Devra stopped him.\" ~\"He said words I ain't never heard before...\"");
 				}
 				gflags[0x01CD] = true;
-				UI_remove_answer("Pikemen");
-				UI_add_answer("Argus");
+				remove("Pikemen");
+				add("Argus");
 				fallthrough;
 
 			case "Argus":
 				say("\"Ain't he big and strong, though? I'll wager he could lift even more than my brother.\" ~\"And Edrin can lift two full-grown ewes all by himself!\"");
 				say("\"I can tell that Master Argus is... or was... a Pikeman.\" ~\"He doth have those marks on his face.\" *\"But I do not understand why those other fellows treated him like they did.\" ~\"Mayhaps they were angry at him for talkin' like that in front of his mother...\"");
-				UI_remove_answer("Argus");
+				remove("Argus");
 				fallthrough;
 
 			case "Flindo":
@@ -32630,7 +32630,7 @@ void Func042B object#(0x42B) () {
 					say("\"All he doth do is complain about Cap'n Hawk not wantin' to sail to Moonshade.\" ~\"He says that Cap'n Hawk only wants more money... But the Cap'n refused all his offers of more money.\"");
 					say("\"I think the Cap'n doth not want to put any of us in danger, is all.\" ~\"And Master Flindo was not very happy when the Pikemen took Cap'n Hawk away.\"");
 				}
-				UI_remove_answer("Flindo");
+				remove("Flindo");
 				fallthrough;
 
 			case "storms":
@@ -32649,8 +32649,8 @@ void Func042B object#(0x42B) () {
 					    var0000,
 					    "!\" ~\"Why one moment Edrin was not more than five paces from me, and then he weren't nowhere to be found.\" *\"'Course it took a minute or two for mine eyes to clear and mine ears to cease ringing, after that lightnin' strike.\" ~\"But I went searchin' right away, and I couldn't find hide nor hair of him.\"");
 				}
-				UI_remove_answer("storms");
-				UI_add_answer("Edrin");
+				remove("storms");
+				add("Edrin");
 				fallthrough;
 
 			case "Edrin":
@@ -32666,22 +32666,22 @@ void Func042B object#(0x42B) () {
 					say("\"Edrin is mine older brother, ",
 					    var0000,
 					    ".\" ~\"We were herdin' the sheep into the pen one night when one of these strange storms hit outta a clear sky.\" *\"I looked and looked and looked, but ain't no one seen him.\" ~\"All I found was this here parrot, which I brought along for the company to Moonshade.\"");
-					UI_add_answer(["parrot", "Moonshade"]);
+					add(["parrot", "Moonshade"]);
 				}
-				UI_remove_answer("Edrin");
+				remove("Edrin");
 				fallthrough;
 
 			case "parrot":
 				say("\"I'd been searchin' for Edrin a little over a day, I suppose, when I found this here parrot sittin' under a tree, all pitiful like.\" ~\"Well, now I was awful lonesome, so I asked the bird what it was doin' out in the forest instead of home in a cage.\" *\"Like to leapt out of my skin when the thing croaked 'Ale!'.\" ~\"But Cap'n Hawk said that's the way of such birds.\"");
 				say("\"Still and all, I think Ale -- 'tis his name now -- is smarter than some of the folks I know.\" ~\"And he doth have a powerful fondness for ale.\" *\"I hope Edrin will allow me to keep Ale...\" ~\"After all, he doth have his crystal and I do not have nothin'.\"");
-				UI_remove_answer("parrot");
-				UI_add_answer("crystal");
+				remove("parrot");
+				add("crystal");
 				fallthrough;
 
 			case "crystal":
 				say("\"When I was not very old, Da took Edrin to Moonshade with him.\" ~\"I remember I cried and cried, but Mother said I was too young to go. She promised I'd be allowed to go the next time.\"");
 				say("\"Only there wasn't a next time because Da died that fall, and Edrin and I have been too busy with the sheep to go since then.\" ~\"But sometimes, when I was scared at night, Edrin would let me hold the crystal until I fell asleep...\" *\"And I never had any dreams then.\" ~\"Who would've thought I'd travel all alone to Moonshade like this one day?\"");
-				UI_remove_answer("crystal");
+				remove("crystal");
 				fallthrough;
 
 			case "Moonshade":
@@ -32689,8 +32689,8 @@ void Func042B object#(0x42B) () {
 				    var0000,
 				    ", as near as I can surmise, if these storms ain't natural then that means they must be magic-like.\" ~\"And ever'one knows that if thou dost want anything magic-like, thou shouldst go to Moonshade.\" *\"If these storms took Edrin away and they're magic-like, then one of them mages must be able to tell me how to find him.\" ~\"All I have to do is go there and ask...\"");
 				say("\"Mistress Devra told me I might ask Master Ensorcio if he could help me.\" ~\"She said he was one of them mages.\" *\"I wondered a little about that... because ever'one doth know that all mages live in Moonshade.\" ~\"But I asked anyhow...\"");
-				UI_remove_answer("Moonshade");
-				UI_add_answer("Ensorcio");
+				remove("Moonshade");
+				add("Ensorcio");
 				fallthrough;
 
 			case "Ensorcio":
@@ -32698,7 +32698,7 @@ void Func042B object#(0x42B) () {
 				    var0000,
 				    ".\" ~\"But Master Ensorcio doth have the worst temper I've ever seen!\" *\"All I did was ask if he was a mage and could he help me...\" ~\"And he threatened to change me to a frog!\"");
 				say("\"All he would have had to do was tell me to go away and leave him alone.\" ~\"And I would've not bothered him no more.\" ~\"Now I know why Da used to say if we were bad the mages would come and take us away...\" ~\"Mayhap Master Ensorcio never had a Da to teach him manners.\"");
-				UI_remove_answer("Ensorcio");
+				remove("Ensorcio");
 				fallthrough;
 
 			case "bye":
@@ -32792,7 +32792,7 @@ void Func042C object#(0x42C) () {
 		}
 		if (UI_get_item_flag(0xFFD4, 0x0006)) {
 			UI_set_schedule_type(0xFFD4, 0x001F);
-			UI_add_answer("leave");
+			add("leave");
 		} else {
 			UI_run_schedule(0xFFD4);
 			if (UI_get_schedule_type(0xFFD4) == 0x0003) {
@@ -32803,7 +32803,7 @@ void Func042C object#(0x42C) () {
 		if ((!UI_get_item_flag(0xFFD4, 0x0006)) && gflags[0x01CE]) {
 			if (gflags[0x01E5]) {
 				say("\"If thou hast the stomach to face great danger, then perhaps we can resume the quest for the lost gold.\"");
-				UI_add_answer(["resume quest"]);
+				add(["resume quest"]);
 			} else {
 				if (!UI_get_item_flag(0xFFD4, 0x001C)) {
 					say("\"Allow me to introduce myself. My name is Selina. And I have heard that thou art in need of... finances, shall we say.\"");
@@ -32813,7 +32813,7 @@ void Func042C object#(0x42C) () {
 					say("\"I have heard that thou art in need of... finances, shall we say.\"");
 					say("\"I believe that I can be of help...\"");
 				}
-				UI_add_answer(["finances", "help"]);
+				add(["finances", "help"]);
 			}
 		} else {
 			if (!UI_get_item_flag(0xFFD4, 0x001C)) {
@@ -32823,14 +32823,14 @@ void Func042C object#(0x42C) () {
 					    ". I am Selina.\"");
 					say("\"It is so wonderful that a woman such as thyself hath come to our land!\"");
 					say("\"There is so much that thou canst teach us.\"");
-					UI_add_answer("teach");
+					add("teach");
 				} else {
 					say("\"Pardon me, ",
 					    var0000,
 					    "...\tMy name is Selina.\"");
 					say("\"Thou dost look to be brave and trustworthy.\"");
 					say("\"I need thy protection.\"");
-					UI_add_answer("protection");
+					add("protection");
 				}
 				UI_set_item_flag(0xFFD4, 0x001C);
 			} else if (!UI_get_item_flag(0xFFD4, 0x0006)) {
@@ -32841,11 +32841,11 @@ void Func042C object#(0x42C) () {
 				if (UI_is_pc_female()) {
 					say("\"I'm glad thou art returned.\"");
 					say("\"Thou still hast much to teach us.\"");
-					UI_add_answer("teach");
+					add("teach");
 				} else {
 					say("\"I'm glad thou art returned.\"");
 					say("\"I would still be grateful for thy protection.\"");
-					UI_add_answer("protection");
+					add("protection");
 				}
 			} else {
 				say("\"What dost thou wish to speak about, ",
@@ -32854,27 +32854,27 @@ void Func042C object#(0x42C) () {
 			}
 		}
 		if (gflags[0x007A] == true) {
-			UI_add_answer("fishnet stockings");
+			add("fishnet stockings");
 		}
 		if (gflags[0x027B] && (!gflags[0x028D])) {
-			UI_add_answer("Moonsilk stockings");
+			add("Moonsilk stockings");
 		}
 		if (gflags[0x027F] && (!gflags[0x0291])) {
-			UI_add_answer("lost ring");
+			add("lost ring");
 		}
 		if (gflags[0x0280] && (!gflags[0x0292])) {
-			UI_add_answer("fur cap");
+			add("fur cap");
 		}
 		if (gflags[0x028B] && (!gflags[0x029D])) {
-			UI_add_answer("Stoneheart");
+			add("Stoneheart");
 		}
 		if (gflags[0x0011] && ((!UI_get_item_flag(0xFFD4, 0x0006)) && UI_get_cont_items(0xFFD4, 0xFE99, 0xFE99, 0xFE99))) {
-			UI_add_answer("belongings");
+			add("belongings");
 		}
 		if (UI_get_item_flag(0xFFD4, 0x0006) && (!gflags[0x01E6])) {
-			UI_add_answer("Are we there yet?");
+			add("Are we there yet?");
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "Are we there yet?" (remove):
 				var0005 = [0x06D0, 0x0766, 0x0000];
@@ -32954,7 +32954,7 @@ void Func042C object#(0x42C) () {
 				say("\"Not long ago, one of those strange storms took the lighthouse that was up the coast, north and east of here.\"");
 				say("\"In its place is a strange building, locked tight and reportedly filled with hideous monsters and great treasure!\"");
 				say("\"One I thought of as my beloved found a key on a creature outside of the building. He gave this key to me for certain... favors... and promised to meet me here so we could seek the treasure together.\"");
-				UI_add_answer(["beloved", "key"]);
+				add(["beloved", "key"]);
 				fallthrough;
 
 			case "beloved" (remove):
@@ -33048,14 +33048,14 @@ void Func042C object#(0x42C) () {
 				say("\"In Fawn, women are valued for their beauty... At the cost of their independence and intelligence.\"");
 				say("\"And in Moonshade, women may be mages... But the true power lies in the hands of men.\"");
 				say("\"So, thou seest... Thou art brave, intelligent and beautiful. Thou art not one nor the other... Thou art all these things at once.\"");
-				UI_remove_answer("teach");
-				UI_add_answer(["Monitor", "Fawn", "Moonshade"]);
+				remove("teach");
+				add(["Monitor", "Fawn", "Moonshade"]);
 				fallthrough;
 
 			case "Monitor":
 				say("\"Monitor is just south of here... It is controlled by Pikemen who place fighting prowess above all else.\" *\"Few there value beauty and even fewer possess intelligence. They would do well with a dose of humility.\"");
-				UI_remove_answer("Monitor");
-				UI_add_answer("Pikemen");
+				remove("Monitor");
+				add("Pikemen");
 				fallthrough;
 
 			case "Pikemen":
@@ -33066,39 +33066,39 @@ void Func042C object#(0x42C) () {
 				} else {
 					say("\"If the only Pikeman I had ever had the pleasure of encountering was Argus, I would say differently. But many of the Pikemen I have seen are vain braggarts who delight in bullying anyone weaker than they are.\" *\"And their idea of honor is bought cheaply in ransom and @tolls@ on the travellers they are sworn to protect! The Pikemen are, Argus excepted, contemptible!\"");
 				}
-				UI_remove_answer("Pikemen");
+				remove("Pikemen");
 				fallthrough;
 
 			case "Fawn":
 				say("\"Fawn is northwest of here... They have a woman for a ruler, but she rules in name alone.\" *\"The Great Captains and money control the city in truth, and give lip service to Beauty only when it's convenient. It would serve them right if the women revolted and went to Monitor to learn how to fight.\"");
-				UI_remove_answer("Fawn");
-				UI_add_answer("Great Captains");
+				remove("Fawn");
+				add("Great Captains");
 				fallthrough;
 
 			case "Great Captains":
 				say("\"I have never been to Fawn, ",
 				    var0001,
 				    ", so I can only repeat what I have heard or have been told. The Great Captains keep the Lady of Fawn in ignorance, preferring a pretty figurehead to an intelligent ruler!\"");
-				UI_remove_answer("Great Captains");
+				remove("Great Captains");
 				fallthrough;
 
 			case "Moonshade":
 				say("\"Moonshade is east of here, on another island... They are ruled by Adepts, but shun normal people as below their notice.\" *\"Each mage doth have his or her own version of reality to such an extent that thou shouldst sift everything they say for a kernel of truth. I sometimes wish the mages could find themselves on the decks of Fawn's fishing fleet and work for an honest living for just a few days... Maybe then they'd learn who the important people truly are.\"");
-				UI_remove_answer("Moonshade");
-				UI_add_answer("Adepts");
+				remove("Moonshade");
+				add("Adepts");
 				fallthrough;
 
 			case "Adepts":
 				say("\"From what I've heard, being an Adept is as much a result of an accident of birth, rather than any great training. Each Adept specializes in some skill or another...\" *\"So a mage that could kill everyone in his mansion with a single spell, might well be unable to fetch his slippers from in front of the fire with even a series of spells! The Adepts are entirely too full of themselves, ",
 				    var0001,
 				    ".\"");
-				UI_remove_answer("Adepts");
+				remove("Adepts");
 				fallthrough;
 
 			case "protection" (remove):
 				say("\"Yes, protection... People are disappearing around here.\" *\"I do not know if it's those mysterious storms, or if there's something more sinister at work. All I know is that I'm afraid.\"");
 				UI_push_answers();
-				UI_add_answer(["people disappearing", "mysterious storms", "change subject"]);
+				add(["people disappearing", "mysterious storms", "change subject"]);
 				fallthrough;
 
 			case "change subject":
@@ -33110,36 +33110,36 @@ void Func042C object#(0x42C) () {
 
 			case "people disappearing":
 				say("\"First there was someone they call Silverpate... And now Angus is gone.\" *\"One built the inn and the other was the innkeeper here... And those others disappearing doth cause me to wonder if this place is cursed or something!\"");
-				UI_remove_answer("people disappearing");
-				UI_add_answer("others");
+				remove("people disappearing");
+				add("others");
 				fallthrough;
 
 			case "others":
 				say("\"Well, Ensorcio told me that Theron, one of the servants, disappeared not long ago. And then, on the night that Angus disappeared, two guests disappeared as well.\"");
-				UI_remove_answer("others");
-				UI_add_answer(["Ensorcio", "two guests"]);
+				remove("others");
+				add(["Ensorcio", "two guests"]);
 				fallthrough;
 
 			case "Ensorcio":
 				say("\"He is the mage who's staying here... He doth seem sinister, but he's nice to me. Not as nice as Argus... But nice, for a mage.\" *\"He seems to drink a lot. And he doth have a bad temper, too.\"");
-				UI_remove_answer("Ensorcio");
-				UI_add_answer("Argus");
+				remove("Ensorcio");
+				add("Argus");
 				fallthrough;
 
 			case "Argus":
 				say("\"Argus is very nice to me. He compliments me on my dress or mine hair, even though I know I look a mess.\" *\"He's much nicer when Devra isn't around... I do not think she likes me.\"");
-				UI_remove_answer("Argus");
-				UI_add_answer("Devra");
+				remove("Argus");
+				add("Devra");
 				fallthrough;
 
 			case "Devra":
 				say("\"She's always watching me... It doth make me nervous. Mayhap I shall be the next one to disappear.\" *\"If she were not so old, I might think that she had something to do with those people disappearing. Or maybe she knows more than she doth admit...\"");
-				UI_remove_answer("Devra");
+				remove("Devra");
 				fallthrough;
 
 			case "two guests":
 				say("\"I did not meet them, but Ensorcio told me about them. He said something about one of them being a mage, and the other being a very large man.\" *\"So now thou dost understand why I am so worried... If something could happen to a mage, or a big, strong man, what chance do I have?\"");
-				UI_remove_answer("two guests");
+				remove("two guests");
 				fallthrough;
 
 			case "mysterious storms":
@@ -33148,21 +33148,21 @@ void Func042C object#(0x42C) () {
 				    "! Why even the mages of Moonshade are worried...\" *\"Old Gustacio is practically pulling out what little hair he doth have trying to discover what's causing them. And if the mages are worried, ",
 				    var0001,
 				    ", people such as we should be very wary indeed.\"");
-				UI_remove_answer("mysterious storms");
-				UI_add_answer("Gustacio");
+				remove("mysterious storms");
+				add("Gustacio");
 				fallthrough;
 
 			case "Gustacio":
 				say("\"Gustacio specializes in weather magic, ",
 				    var0001,
 				    ". 'Tis all very confusing, if thou dost ask me...\" *\"I know that the Council of Mages questioned him closely after these storms began. But they seemed to think that he had no hand in them and set him the task of trying to stop them.\"");
-				UI_remove_answer("Gustacio");
-				UI_add_answer("Council of Mages");
+				remove("Gustacio");
+				add("Council of Mages");
 				fallthrough;
 
 			case "Council of Mages":
 				say("\"The Council of Mages oversees all of the mages in Moonshade. I don't know much more about them than that.\" *\"Thou shouldst ask Ensorcio if thou dost wish to know more.\"");
-				UI_remove_answer("Council of Mages");
+				remove("Council of Mages");
 				fallthrough;
 
 			case "fishnet stockings":
@@ -33173,7 +33173,7 @@ void Func042C object#(0x42C) () {
 					    var0001,
 					    ". Perhaps thou couldst show them to me some time.\"");
 				}
-				UI_remove_answer("fishnet stockings");
+				remove("fishnet stockings");
 				fallthrough;
 
 			case "Moonsilk stockings":
@@ -33210,7 +33210,7 @@ void Func042C object#(0x42C) () {
 					    var0001,
 					    ". If thou dost find any more like them, remember me.\"");
 				}
-				UI_remove_answer("Moonsilk stockings");
+				remove("Moonsilk stockings");
 				fallthrough;
 
 			case "lost ring":
@@ -33249,7 +33249,7 @@ void Func042C object#(0x42C) () {
 					    var0001,
 					    ", I would love to see it.\"");
 				}
-				UI_remove_answer("lost ring");
+				remove("lost ring");
 				fallthrough;
 
 			case "fur cap":
@@ -33258,7 +33258,7 @@ void Func042C object#(0x42C) () {
 				} else {
 					say("\"Perhaps thou wouldst show it to me later.\"");
 				}
-				UI_remove_answer("fur cap");
+				remove("fur cap");
 				fallthrough;
 
 			case "Stoneheart":
@@ -33271,13 +33271,13 @@ void Func042C object#(0x42C) () {
 					    var0001,
 					    ". Thou shouldst find someone else to ask.\"");
 				}
-				UI_remove_answer("Stoneheart");
-				UI_add_answer("someone else");
+				remove("Stoneheart");
+				add("someone else");
 				fallthrough;
 
 			case "someone else":
 				say("\"Thou couldst ask a scholar or some such... Perhaps even a mage might be able to help. I don't know.\"");
-				UI_remove_answer("someone else");
+				remove("someone else");
 				fallthrough;
 
 			case "bye":
@@ -33537,7 +33537,7 @@ void Func042D object#(0x42D) () {
 		UI_show_npc_face0(0xFFD3, 0x0000);
 		if (UI_get_item_flag(0xFFD3, 0x0006)) {
 			UI_set_schedule_type(0xFFD3, 0x001F);
-			UI_add_answer("leave");
+			add("leave");
 		} else {
 			UI_run_schedule(0xFFD3);
 		}
@@ -33546,10 +33546,10 @@ void Func042D object#(0x42D) () {
 			UI_run_schedule(0xFFD3);
 		} else {
 			UI_set_schedule_type(0xFFD3, 0x001F);
-			UI_add_answer("leave");
+			add("leave");
 		}
 		if ((gflags[0x01E2] || gflags[0x01E3]) && (gflags[0x0016] && UI_get_cont_items(0xFFD3, 0xFE99, 0xFE99, 0xFE99))) {
-			UI_add_answer("return my belongings");
+			add("return my belongings");
 		}
 		if (gflags[0x0004] == true) {
 			if (gflags[0x01E1]) {
@@ -33557,7 +33557,7 @@ void Func042D object#(0x42D) () {
 					say("\"I am ready to aid thee. Thou couldst have chosen no better companion than myself!\"");
 				} else {
 					say("\"Why dost thou trouble me now? Canst thou not see that I am very busy...\"");
-					UI_add_answer("join");
+					add("join");
 				}
 			} else {
 				say("\"Well met, Avatar!\"");
@@ -33582,7 +33582,7 @@ void Func042D object#(0x42D) () {
 						UI_add_to_party(0xFFD3);
 						gflags[0x0016] = true;
 						UI_set_item_flag(0xFFD3, 0x001D);
-						UI_add_answer("leave");
+						add("leave");
 						gflags[0x01E1] = true;
 					} else {
 						say("\"Very well. Perhaps I shall journey to Monitor and see what hath transpired there.\"");
@@ -33605,9 +33605,9 @@ void Func042D object#(0x42D) () {
 				say("\"Art thou not honored? We meet again...\"");
 			}
 		}
-		UI_add_answer(["name", "duties", "bye"]);
+		add(["name", "duties", "bye"]);
 		if (gflags[0x0004] == true) {
-			UI_add_answer("train");
+			add("train");
 		}
 		converse (0) {
 			case "return my belongings" (remove):
@@ -33633,7 +33633,7 @@ void Func042D object#(0x42D) () {
 					UI_add_to_party(0xFFD3);
 					gflags[0x0016] = true;
 					UI_set_item_flag(0xFFD3, 0x001D);
-					UI_add_answer("leave");
+					add("leave");
 				}
 				fallthrough;
 
@@ -33660,7 +33660,7 @@ void Func042D object#(0x42D) () {
 				say("\"Where hast thou been all thy life, the frozen north?\"");
 				say("\"I am Wilfred, Knight of the Bear Command -- formerly of Sleeping Bull Inn.\"");
 				UI_set_item_flag(0xFFD3, 0x001C);
-				UI_add_answer("Sleeping Bull");
+				add("Sleeping Bull");
 				fallthrough;
 
 			case "Sleeping Bull" (remove):
@@ -33673,13 +33673,13 @@ void Func042D object#(0x42D) () {
 			case "duties" (remove):
 				say("\"As thou canst see... I am a Knight of Monitor.\"");
 				say("\"I am currently seeking the murderer of my father.\"");
-				UI_add_answer("murderer");
+				add("murderer");
 				fallthrough;
 
 			case "murderer" (remove):
 				say("\"He disappeared some time ago, and is presumed dead. I have been seeking clues since I was notified...\"");
 				say("\"Unlike my brother, Argus, who came running home to take over the inn.\"");
-				UI_add_answer(["clues", "Argus"]);
+				add(["clues", "Argus"]);
 				fallthrough;
 
 			case "clues" (remove):
@@ -33706,20 +33706,20 @@ void Func042D object#(0x42D) () {
 				    var0000,
 				    ". But I would see my father avenged.\"");
 				say("\"If thou art truly searching for my father's killer, then I will tell thee what I have learned.\"");
-				UI_add_answer("learned");
+				add("learned");
 				fallthrough;
 
 			case "learned" (remove):
 				say("\"Mother mentioned that a guest -- a mage by the name of Batlin -- also disappeared the same night father did. I know for a fact that Angus hated mages and would never have gone anywhere with one willingly... or alive!\"");
 				say("\"The name Batlin stirred something in my brain, so I asked around Monitor before I left. And I discovered some very interesting things indeed.\"");
-				UI_add_answer("interesting");
+				add("interesting");
 				fallthrough;
 
 			case "interesting" (remove):
 				say("\"Batlin came to Monitor some time ago. He was accompanied by several unsavory companions -- one was a huge hooded man, like the one that mother mentioned in her letter.\"");
 				say("\"This odd party came asking about the Serpent ruins. The mage was unusually interested in anything to do with the Serpent people.\"");
 				say("\"And... After Batlin and his henchmen left Monitor, it was discovered that a valuable Serpent relic was stolen from Andral, the sculptor.\"");
-				UI_add_answer(["henchmen", "relic"]);
+				add(["henchmen", "relic"]);
 				fallthrough;
 
 			case "henchmen" (remove):
@@ -33737,7 +33737,7 @@ void Func042D object#(0x42D) () {
 			case "Argus" (remove):
 				say("\"Thou shouldst say cowardly cur, instead!\"");
 				say("\"He was so glad of an excuse to flee his accusers in Monitor that he ran all the way to the inn when mother notified us of father's disappearance!\"");
-				UI_add_answer("accusers");
+				add("accusers");
 				fallthrough;
 
 			case "accusers" (remove):
@@ -33745,13 +33745,13 @@ void Func042D object#(0x42D) () {
 				say("\"When Argus heard Flessar repeating these things, Argus called him into a selfish duel and killed him!\"");
 				say("\"Of course, like the pack of dogs that they are, the Wolves declared it an accident. And their investigation of the bribes was more for show than anything.\"");
 				gflags[0x01D9] = true;
-				UI_add_answer(["Flessar", "Wolves"]);
+				add(["Flessar", "Wolves"]);
 				fallthrough;
 
 			case "Flessar" (remove):
 				say("\"Flessar was a Knight of the Leopard Command. He was Templar's friend.\"");
 				say("\"He was also not nearly as skilled as my... brother, being many years Argus' junior.\"");
-				UI_add_answer("Templar");
+				add("Templar");
 				fallthrough;
 
 			case "Templar" (remove):
@@ -33911,7 +33911,7 @@ void Func042E object#(0x42E) () {
 				    var0003,
 				    ". Perhaps by now, thine experiences have given thee reason to change thine answer...\"");
 				say("\"We need thee. The Cause needs thee!\"");
-				UI_add_answer("answer");
+				add("answer");
 			} else {
 				say("\"'Tis a pleasure to see thee again, ",
 				    var0003,
@@ -33919,27 +33919,27 @@ void Func042E object#(0x42E) () {
 			}
 		}
 		if (gflags[0x019E] && (!gflags[0x007C])) {
-			UI_add_answer("fishnet stockings");
+			add("fishnet stockings");
 		}
 		if (gflags[0x018F] && (!(gflags[0x0170] || gflags[0x0172]))) {
-			UI_add_answer("Zulith");
+			add("Zulith");
 		}
 		if (gflags[0x0192] && (!gflags[0x028D])) {
-			UI_add_answer("Moonsilk stockings");
+			add("Moonsilk stockings");
 		}
 		if (gflags[0x014C] && (!gflags[0x01B2])) {
-			UI_add_answer("engagement ring");
+			add("engagement ring");
 		}
 		if (gflags[0x01B3]) {
-			UI_add_answer("the Cause");
+			add("the Cause");
 		}
 		if (gflags[0x01B2] && (!gflags[0x01A4])) {
-			UI_add_answer("gauntlets");
+			add("gauntlets");
 		}
 		if (var0000 == true) {
-			UI_add_answer("provisions");
+			add("provisions");
 		}
-		UI_add_answer(["storms", "Goblins", "bye"]);
+		add(["storms", "Goblins", "bye"]);
 		converse (0) {
 			case "provisions":
 				if (UI_get_schedule_type(0xFFD2) == 0x0013) {
@@ -33948,15 +33948,15 @@ void Func042E object#(0x42E) () {
 				} else {
 					say("\"I will gladly sell to thee if thou wilt come to my father's shop when we are open for business.\"");
 				}
-				UI_remove_answer("provisions");
+				remove("provisions");
 				fallthrough;
 
 			case "storms":
 				say("\"The storms have not been kind to us, ",
 				    var0001,
 				    ". Without our fleet, Fawn cannot hope to survive for long.\"");
-				UI_remove_answer("storms");
-				UI_add_answer(["Fawn", "fleet"]);
+				remove("storms");
+				add(["Fawn", "fleet"]);
 				fallthrough;
 
 			case "Fawn":
@@ -33968,8 +33968,8 @@ void Func042E object#(0x42E) () {
 					    var0001,
 					    ". But Love nourisheth the soul. The soul of Fawn withered long ago...\"");
 				}
-				UI_remove_answer("Fawn");
-				UI_add_answer(["Beauty", "Love"]);
+				remove("Fawn");
+				add(["Beauty", "Love"]);
 				fallthrough;
 
 			case "Beauty" (remove):
@@ -33987,7 +33987,7 @@ void Func042E object#(0x42E) () {
 				} else {
 					say("\"Now the two are sundered, and Fawn cares for no one but herself.\"");
 				}
-				UI_remove_answer("Love");
+				remove("Love");
 				fallthrough;
 
 			case "fleet":
@@ -33997,7 +33997,7 @@ void Func042E object#(0x42E) () {
 				say("\"Then count thy blessings, ",
 				    var0001,
 				    ".\"");
-				UI_remove_answer("fleet");
+				remove("fleet");
 				fallthrough;
 
 			case "Goblins" (remove):
@@ -34007,7 +34007,7 @@ void Func042E object#(0x42E) () {
 				} else {
 					say("\"Their attacks bring fear in me for Leon and his companions. Lady Yelinda hath forbidden them entrance into the city, even if 'twere certain death to remain outside.\"");
 					UI_push_answers();
-					UI_add_answer(["Leon", "companions", "Lady Yelinda", "change subject"]);
+					add(["Leon", "companions", "Lady Yelinda", "change subject"]);
 				}
 				fallthrough;
 
@@ -34075,7 +34075,7 @@ void Func042E object#(0x42E) () {
 					}
 					UI_push_answers();
 					var000A = "Cause";
-					UI_add_answer(["false traditions", "evil schemes", "change subject"]);
+					add(["false traditions", "evil schemes", "change subject"]);
 				}
 				fallthrough;
 
@@ -34093,7 +34093,7 @@ void Func042E object#(0x42E) () {
 				}
 				UI_push_answers();
 				var000A = "Cause";
-				UI_add_answer(["false traditions", "evil schemes", "change subject"]);
+				add(["false traditions", "evil schemes", "change subject"]);
 				fallthrough;
 
 			case "the Cause" (remove):
@@ -34149,7 +34149,7 @@ void Func042E object#(0x42E) () {
 						    "! Lady Yelinda hath ended the exile of The Fellowship. The Great Captains are in disgrace, and Lady Yelinda doth rule for herself now.\"");
 						say("\"If there is anything I can ever do for thee, return to Fawn, and I shall aid thee.\"");
 						if (gflags[0x01B4]) {
-							UI_add_answer("Kiss me.");
+							add("Kiss me.");
 						}
 					}
 				}
@@ -34167,15 +34167,15 @@ void Func042E object#(0x42E) () {
 				say("\"According to legend, the Oracle was brought by our ancestors from Sosaria, our homeland. It now stands in the Temple of Beauty.\"");
 				say("\"Our traditions teach us that the statue is an infallible guide to Truth and Beauty.\"");
 				say("\"But we suspect that the legends are false.\"");
-				UI_add_answer(["guide to Truth"]);
+				add(["guide to Truth"]);
 				if (!var0008) {
-					UI_add_answer("We?");
+					add("We?");
 				}
 				fallthrough;
 
 			case "We?":
 				var0008 = true;
-				UI_remove_answer("We?");
+				remove("We?");
 				say("\"Most of the young people of the town belong to the Cause -- but they are not willing to say so publicly, for fear of exile.\"");
 				say("\"I am also pleased to say that Leon supports us, as do the other Fellowship members.\"");
 				fallthrough;
@@ -34189,9 +34189,9 @@ void Func042E object#(0x42E) () {
 			case "evil schemes" (remove):
 				say("\"The Oracle is supposed to speak only the Truth, yet it too often parrots the words of the Priestess and the Great Captains.\"");
 				say("\"We do not believe that truth only serves those in power... we think that someone hath corrupted the Oracle!\"");
-				UI_add_answer(["Priestess", "Great Captains"]);
+				add(["Priestess", "Great Captains"]);
 				if (!var0008) {
-					UI_add_answer("We?");
+					add("We?");
 				}
 				fallthrough;
 
@@ -34206,15 +34206,15 @@ void Func042E object#(0x42E) () {
 				say("\"The highest station which a male can hope for is to serve as one of the Great Captains. These men serve as Lady Yelinda's advisors.\"");
 				say("\"Yet they do much more than merely advise. There are three of them -- Garth, Joth and Voldin.\"");
 				var0009 = true;
-				UI_remove_answer("Great Captains");
-				UI_add_answer(["Garth", "Joth", "Voldin", "Lady Yelinda"]);
+				remove("Great Captains");
+				add(["Garth", "Joth", "Voldin", "Lady Yelinda"]);
 				fallthrough;
 
 			case "Garth":
 				say("\"Because he is the youngest of the Captains, we had hoped to find a way to persuade Garth to support our Cause.\"");
 				say("\"When one of us spoke with him, he claimed to be sympathetic to the Cause. Yet Garth says he is afraid to confront Voldin with our suspicions.\"");
 				say("\"I do not trust him...\"");
-				UI_remove_answer("Garth");
+				remove("Garth");
 				fallthrough;
 
 			case "Joth" (remove):
@@ -34226,7 +34226,7 @@ void Func042E object#(0x42E) () {
 			case "Voldin":
 				say("\"Voldin is the one who truly controls the Great Captains. I think he would make himself ruler of Fawn, if he could find a way.\"");
 				say("\"Voldin is a cruel man who secretly despises women. If there is an evil scheme, then Voldin must be the mastermind.\"");
-				UI_remove_answer("Voldin");
+				remove("Voldin");
 				fallthrough;
 
 			case "Zulith" (remove):
@@ -34244,8 +34244,8 @@ void Func042E object#(0x42E) () {
 					var000E = Func0992(var000E, var000B, 0x0000, false);
 					UI_set_conversation_slot(0x0000);
 				}
-				UI_remove_answer("Leon");
-				UI_add_answer("Fellowship");
+				remove("Leon");
+				add("Fellowship");
 				fallthrough;
 
 			case "Fellowship":
@@ -34264,38 +34264,38 @@ void Func042E object#(0x42E) () {
 					}
 					UI_set_conversation_slot(0x0000);
 				}
-				UI_remove_answer("Fellowship");
+				remove("Fellowship");
 				fallthrough;
 
 			case "companions":
 				say("\"Leon's companions are the sailors that brought him here. Their names are Scots, Ruggs and Kalen.\"");
-				UI_remove_answer("companions");
+				remove("companions");
 				UI_push_answers();
-				UI_add_answer(["Scots", "Ruggs", "Kalen", "change subject"]);
+				add(["Scots", "Ruggs", "Kalen", "change subject"]);
 				fallthrough;
 
 			case "Scots":
 				say("\"Scots is not precisely a sailor, I suppose. He is actually a cartographer.\"");
 				say("\"He is most often with his pens and ink, drawing intricate little lines...\"");
-				UI_remove_answer("Scots");
-				UI_add_answer("lines");
+				remove("Scots");
+				add("lines");
 				fallthrough;
 
 			case "lines":
 				say("\"I surmise all those lines make a map, I do not know. But I do not know how he could be making a map, either. He cannot go anywhere because of the storms.\"");
-				UI_remove_answer("lines");
+				remove("lines");
 				fallthrough;
 
 			case "Ruggs":
 				say("\"Ruggs is a sailor, for sure. Although he seems to take well to gardening now that he's on shore.\"");
 				say("\"Thou canst not mistake which of the three is Ruggs. His face is hideous to behold, though he speaks fair enough.\"");
-				UI_remove_answer("Ruggs");
+				remove("Ruggs");
 				fallthrough;
 
 			case "Kalen":
 				say("\"Of the three of Leon's companions, I know the least about Kalen, and I have no desire to learn more.\"");
 				say("\"He always seems to be hovering about, staring at me. He never seems to be doing anything around the camp.\"");
-				UI_remove_answer("Kalen");
+				remove("Kalen");
 				fallthrough;
 
 			case "Lady Yelinda" (remove):
@@ -34313,14 +34313,14 @@ void Func042E object#(0x42E) () {
 				say("\"I had not expected a stranger to know of my tiny industry. I weave the nets and sew in my father's shop.\"");
 				say("\"It assists me in mine attempts to keep a watchful eye on my father... He hath not been right since my mother, Elissia, died.\"");
 				say("\"I have few customers, but perhaps people are beginning to take an interest.\"");
-				UI_remove_answer("fishnet stockings");
-				UI_add_answer("customers");
+				remove("fishnet stockings");
+				add("customers");
 				fallthrough;
 
 			case "customers":
 				say("\"Well, to be truthful, I have only one returning customer. Flindo, a merchant from Moonshade, hath only just left here after ordering several more pair.\"");
 				say("\"Apparently one of the mages hath taken a liking to them. They are the only ones who could afford such luxuries now.\"");
-				UI_remove_answer("customers");
+				remove("customers");
 				fallthrough;
 
 			case "Moonsilk stockings" (remove):
@@ -34342,7 +34342,7 @@ void Func042E object#(0x42E) () {
 
 			case "engagement ring":
 				var000A = "Ring";
-				UI_remove_answer("engagement ring");
+				remove("engagement ring");
 				say("\"I had heard that thou hadst been asking after me. That thou didst have an interest in my missing engagement ring... Or perhaps in the gauntlets that replaced it.\"");
 				if (Func097D(0xFE9B, 0x0001, 0x0377, 0xFE99, 0x0000)) {
 					say("\"That is it, indeed. I thank thee for telling me... But thou mayest keep it if thou wishest.\"");
@@ -34357,13 +34357,13 @@ void Func042E object#(0x42E) () {
 				};
 				gflags[0x0291] = true;
 				UI_push_answers();
-				UI_add_answer(["gauntlets", "Keep it?", "change subject"]);
+				add(["gauntlets", "Keep it?", "change subject"]);
 				fallthrough;
 
 			case "Keep it?" (remove):
 				say("\"If thou wouldst wish the honest truth, I do not think that my beloved Keth will ever come back from wherever that storm took him.\"");
 				say("\"Therefore, this ring hath only melancholy memories for me. This jewelry hath become bitter to me.\"");
-				UI_add_answer("Keth");
+				add("Keth");
 				fallthrough;
 
 			case "gauntlets" (remove):
@@ -34387,7 +34387,7 @@ void Func042E object#(0x42E) () {
 				say("\"Keth and I were to marry, but it was not fated to be.\"");
 				say("\"He was first mate on one of the largest merchant ships. On one of his voyages, he purchased the engagement ring -- from an artisan in Moonshade, as I recall.\"");
 				say("\"But then the storms came, and ships began disappearing. And eventually it was Keth's ship that never came back.\"");
-				UI_remove_answer("Keth");
+				remove("Keth");
 				fallthrough;
 
 			case "bye":
@@ -34444,7 +34444,7 @@ void Func042F object#(0x42F) () {
 		if (gflags[0x014D] == true) {
 			say("\"Unless thou bearest word from my son, I will not bother with thee! Go back to Fedabiblio and tell him I have no business with the affairs of Mages!\"");
 			if (gflags[0x00E7] == true) {
-				UI_add_answer("letter");
+				add("letter");
 			} else {
 				abort;
 			}
@@ -34472,25 +34472,25 @@ void Func042F object#(0x42F) () {
 			}
 			UI_set_item_flag(0xFFD1, 0x001C);
 			if (gflags[0x0195] && (!gflags[0x0292])) {
-				UI_add_answer("fur cap");
+				add("fur cap");
 			}
 			if (gflags[0x0196] && (!gflags[0x0293])) {
-				UI_add_answer("slippers");
+				add("slippers");
 			}
 			if (UI_get_schedule_type(0xFFD1) == 0x0007) {
-				UI_add_answer("provisions");
+				add("provisions");
 			}
 			if (gflags[0x0157] == true) {
-				UI_add_answer("Moonshade");
+				add("Moonshade");
 			}
 			if (gflags[0x0156]) {
-				UI_add_answer("Batlin");
+				add("Batlin");
 			}
 			if (gflags[0x00E7] == true) {
-				UI_add_answer("letter");
+				add("letter");
 			}
-			UI_add_answer(["storms", "Goblins"]);
-			UI_add_answer("bye");
+			add(["storms", "Goblins"]);
+			add("bye");
 		}
 		converse (0) {
 			case "fur cap" (remove):
@@ -34520,14 +34520,14 @@ void Func042F object#(0x42F) () {
 					say("\"Such frail things would be quickly ruined by the cold and wet here in Fawn... Just like my poor Elissia...\"");
 				}
 				if (!var0001) {
-					UI_add_answer("Elissia");
+					add("Elissia");
 				}
 				fallthrough;
 
 			case "provisions":
 				say("\"I provide Fawn with adventuring supplies... Though I regret that my stock is not great at the moment. These storms have made the supply wagons from the other cities rare indeed.\" *\"What dost thou wish to purchase?\"");
 				Func0818();
-				UI_remove_answer("provisions");
+				remove("provisions");
 				fallthrough;
 
 			case "storms":
@@ -34539,9 +34539,9 @@ void Func042F object#(0x42F) () {
 					UI_set_conversation_slot(0x0000);
 					say("\"Ah... I suppose I must if thou sayest so, my dear.\"");
 				}
-				UI_remove_answer("storms");
+				remove("storms");
 				UI_push_answers();
-				UI_add_answer(["daughter", "colors", "results", "change subject"]);
+				add(["daughter", "colors", "results", "change subject"]);
 				fallthrough;
 
 			case "change subject":
@@ -34561,8 +34561,8 @@ void Func042F object#(0x42F) () {
 					    var0000,
 					    "?\"");
 				}
-				UI_remove_answer("daughter");
-				UI_add_answer("Alyssand");
+				remove("daughter");
+				add("Alyssand");
 				fallthrough;
 
 			case "Alyssand":
@@ -34574,16 +34574,16 @@ void Func042F object#(0x42F) () {
 					UI_set_conversation_slot(0x0000);
 					say("\"Er... I am sorry, daughter.\"");
 				} else {
-					UI_add_answer("Keth");
+					add("Keth");
 				}
-				UI_remove_answer("Alyssand");
+				remove("Alyssand");
 				fallthrough;
 
 			case "Keth":
 				say("\"Hast thou seen Keth? If so, thou shouldst tell him that Alyssand still doth have the engagement ring... Or did have it... I think she said something about losing it.\" *\"'Tis not right to say that thou wilt marry someone and then not return...\"");
-				UI_remove_answer("Keth");
+				remove("Keth");
 				UI_push_answers();
-				UI_add_answer(["engagement ring", "not return", "change subject"]);
+				add(["engagement ring", "not return", "change subject"]);
 
 			case "engagement ring":
 				say("\"Keth was passing proud of that ring. He ordered it specially from someone in Moonshade...\" \"Mine Elissia was from Moonshade. Oh, my poor Elissia... She's gone. Gone.\"");
@@ -34606,17 +34606,17 @@ void Func042F object#(0x42F) () {
 				    var0000,
 				    ". I still mourn the loss of my wife.\"");
 				say("\"Now, thou didst ask about Alyssand's ring... I would call her and ask her to show it to thee, but Alyssand lost her ring not long ago.\"");
-				UI_remove_answer("engagement ring");
+				remove("engagement ring");
 				if (Func097D(0xFE9B, 0x0001, 0x0377, 0xFE99, 0x0000)) {
-					UI_add_answer("ring");
+					add("ring");
 				} else {
 					say("\"I cannot know if the ring thou didst find is my daughter's unless I see it. Perhaps if thou dost bring it to me I can ascertain whether thou shouldst speak with Alyssand.\"");
 				}
 				if (!var0001) {
-					UI_add_answer("Elissia");
+					add("Elissia");
 				}
 				if (!var0002) {
-					UI_add_answer("Moonshade");
+					add("Moonshade");
 				}
 				fallthrough;
 
@@ -34631,8 +34631,8 @@ void Func042F object#(0x42F) () {
 					UI_set_conversation_slot(0x0000);
 				}
 				Func08A9();
-				UI_remove_answer("ring");
-				UI_add_answer("Filari");
+				remove("ring");
+				add("Filari");
 				fallthrough;
 
 			case "Filari":
@@ -34659,22 +34659,22 @@ void Func042F object#(0x42F) () {
 					}
 				}
 				gflags[0x0299] = true;
-				UI_remove_answer("Filari");
+				remove("Filari");
 				fallthrough;
 
 			case "not return":
 				say("\"Of course Keth hath not returned! He would have come to see Alyssand the moment he set foot on shore.\" *\"No one hath seen him or his crewmates since one of those storms.\"");
-				UI_remove_answer("not return");
+				remove("not return");
 
 			case "colors":
 				say("\"Oh, yes! Thou shouldst watch one of these storms some time. The lightning is all different colors...\" *\"Of course, if thou strayest too far out to watch, thou mayest not enjoy it too much.\"");
-				UI_remove_answer("colors");
+				remove("colors");
 				fallthrough;
 
 			case "results":
 				say("\"Results? Results of what? What were we talking about...\" *\"Now I remember! The storms! There are two reasons these storms are fun to watch.\"");
-				UI_remove_answer("results");
-				UI_add_answer("two reasons");
+				remove("results");
+				add("two reasons");
 				fallthrough;
 
 			case "two reasons":
@@ -34705,7 +34705,7 @@ void Func042F object#(0x42F) () {
 					}
 					UI_set_conversation_slot(0x0000);
 				}
-				UI_remove_answer("two reasons");
+				remove("two reasons");
 				fallthrough;
 
 			case "Goblins":
@@ -34716,9 +34716,9 @@ void Func042F object#(0x42F) () {
 					say("\"Oh, all right! Don't be testy!\"");
 				}
 				say("\"Thou dost not need to scowl so. Everyone is so serious these days! 'Tis not healthy, thou knowest.\" *\"The Goblins are large, mean and hateful. They prefer to eat humans and they make it unsafe to travel. But I never travel since they took away my son, Freli...\"");
-				UI_remove_answer("Goblins");
+				remove("Goblins");
 				UI_push_answers();
-				UI_add_answer(["unsafe", "Freli", "change subject"]);
+				add(["unsafe", "Freli", "change subject"]);
 				fallthrough;
 
 			case "unsafe":
@@ -34732,12 +34732,12 @@ void Func042F object#(0x42F) () {
 					UI_set_conversation_slot(0x0000);
 				}
 				say("\"I wandered off again, didn't I? What was I saying...?\" *\"The Goblins have killed our healer, and now we have to make do with a horticulturist. Imagine that! And, of course, the Goblins have attacked the Fawn Tower.\"");
-				UI_remove_answer("unsafe");
-				UI_add_answer("Fawn Tower");
+				remove("unsafe");
+				add("Fawn Tower");
 				UI_push_answers();
-				UI_add_answer(["healer", "horticulturist", "change subject"]);
+				add(["healer", "horticulturist", "change subject"]);
 				if (!var0001) {
-					UI_add_answer("Elissia");
+					add("Elissia");
 				}
 				fallthrough;
 
@@ -34764,32 +34764,32 @@ void Func042F object#(0x42F) () {
 					say("\"But I don't believe it.\"");
 				}
 				if (!var0002) {
-					UI_add_answer("Moonshade");
+					add("Moonshade");
 				}
-				UI_remove_answer("Elissia");
+				remove("Elissia");
 				fallthrough;
 
 			case "healer":
 				say("\"His name was, ah... Seth, I believe. Good healer, but he had a nasty temper.\" *\"I am certain that the Goblins found him a bitter meal. Ha!\"");
-				UI_remove_answer("healer");
-				UI_add_answer("Seth");
+				remove("healer");
+				add("Seth");
 				fallthrough;
 
 			case "Seth":
 				say("\"Seth? Oh, the healer! Didst thou know him, too?\" *\"Always insisted on going herb gathering alone... 'Tis what finally killed him. Wouldn't take any guards along with him, even after the Goblin attacks increased.\"");
-				UI_remove_answer("Seth");
+				remove("Seth");
 				fallthrough;
 
 			case "horticulturist":
 				say("\"Did I say something about a horticulturist? I thought we were talking about healers...\" *\"When Seth was killed, Delphynia took his place. We could not obtain a replacement from anywhere because of the storms.\"");
-				UI_remove_answer("horticulturist");
-				UI_add_answer("Delphynia");
+				remove("horticulturist");
+				add("Delphynia");
 				fallthrough;
 
 			case "Delphynia":
 				say("\"Delphynia is a fine horticulturist, to be sure. But she hath had little or no training as a healer.\"");
 				say("\"And it doth not seem right having a woman as a healer. Women should concern themselves with the delights of life, not the sorrows.\"");
-				UI_remove_answer("Delphynia");
+				remove("Delphynia");
 				fallthrough;
 
 			case "Fawn Tower":
@@ -34807,23 +34807,23 @@ void Func042F object#(0x42F) () {
 						say("\"Everyone is so worried, now that Pomdirgun holds the Tower.\" ~\"But they do not understand that it is only a matter of time before we die... But I intend to try my luck with the storms, rather than becoming a Goblin's supper.\"");
 					}
 				}
-				UI_remove_answer("Fawn Tower");
-				UI_add_answer("Pomdirgun");
+				remove("Fawn Tower");
+				add("Pomdirgun");
 				fallthrough;
 
 			case "Pomdirgun":
 				say("\"I am certain that Pomdirgun would be very disappointed to learn that thou dost not know of him. He hath gone to great lengths to be sure that we in Fawn know the name of the Goblin leader that will bring us to our knees...\"");
 				say("\"...Or his stewpot.\"");
-				UI_remove_answer("Pomdirgun");
+				remove("Pomdirgun");
 				fallthrough;
 
 			case "Freli":
 				say("\"Freli... Didst thou say Freli? Hast thou seen him? I have not seen him since the Magister took him away.\" *\"I would give anything to be able to see him again, or to have some word from him. Elissia died bringing him into this world... He is all that I have to remember her by, except for Alyssand of course. But Freli favors his mother more.\"");
 				gflags[0x018D] = true;
-				UI_remove_answer("Freli");
-				UI_add_answer("Magister");
+				remove("Freli");
+				add("Magister");
 				if (!var0001) {
-					UI_add_answer("Elissia");
+					add("Elissia");
 				}
 				fallthrough;
 
@@ -34845,9 +34845,9 @@ void Func042F object#(0x42F) () {
 			case "Moonshade":
 				var0002 = true;
 				say("\"Moonshade is where my wife was from... She was the most patient of women.\" *\"Moonshade is ruled by Mages. To them, if thou art not a Mage, thou art nothing. The Mages shed no tears when mine Elissia left the town. She was nothing in their eyes... But everything in mine.\"");
-				UI_remove_answer("Moonshade");
+				remove("Moonshade");
 				if (!var0001) {
-					UI_add_answer("Elissia");
+					add("Elissia");
 				}
 				fallthrough;
 
@@ -34858,9 +34858,9 @@ void Func042F object#(0x42F) () {
 				say("\"No need to shout. I'm not deaf.\"");
 				say("\"Batlin... ah, I remember he came here asking about some sort of rock sculpture or something. Black rock...\"");
 				say("\"I told him I am a simple merchant. I do not carry such luxuries. I directed him to Monitor. There is a sculptor there.\"");
-				UI_remove_answer("Batlin");
+				remove("Batlin");
 				UI_push_answers();
-				UI_add_answer(["Monitor", "change subject"]);
+				add(["Monitor", "change subject"]);
 				fallthrough;
 
 			case "Monitor":
@@ -34870,13 +34870,13 @@ void Func042F object#(0x42F) () {
 				say("\"Monitor is south of us, ",
 				    var0000,
 				    ", on the coast. Their soldiers, the Pikemen, act as guards for the roads, and as highwaymen for Monitor's coffers...\"");
-				UI_remove_answer("Monitor");
-				UI_add_answer("highwaymen");
+				remove("Monitor");
+				add("highwaymen");
 				fallthrough;
 
 			case "highwaymen":
 				say("\"Yes, highwaymen! They charge each traveller and merchant who would make use of the road they guard!\" *\"An exorbitant amount doth go to Monitor every year, I'm certain. And then we must feed them in their Tower, and offer them our goods at a discount!\"");
-				UI_remove_answer("highwaymen");
+				remove("highwaymen");
 				fallthrough;
 
 			case "letter" (remove):
@@ -34972,33 +34972,33 @@ void Func0430 object#(0x430) () {
 		} else {
 			say("\"'Tis always a pleasure to see thee, Avatar. How may I be of service to thee?\"");
 		}
-		UI_add_answer(["Goblins", "healer", "storms", "buy", "bye"]);
+		add(["Goblins", "healer", "storms", "buy", "bye"]);
 		if (gflags[0x0193] && (!gflags[0x028F])) {
-			UI_add_answer("apparatus");
+			add("apparatus");
 		}
 		if (gflags[0x0194] && (!gflags[0x0290])) {
-			UI_add_answer("pumice");
+			add("pumice");
 		}
 		if (gflags[0x0197] && (!gflags[0x0295])) {
-			UI_add_answer("blue egg");
+			add("blue egg");
 		}
 		if (gflags[0x019D] && (!gflags[0x029D])) {
-			UI_add_answer("glowing rock");
+			add("glowing rock");
 		}
 		if ((gflags[0x0152] == true) && (!gflags[0x01A3])) {
-			UI_add_answer("letter");
+			add("letter");
 		}
 		if ((gflags[0x0076] == true) && ((gflags[0x005A] == false) && (gflags[0x01A5] == false))) {
-			UI_add_answer("Varo Leaves");
+			add("Varo Leaves");
 		}
 		if (gflags[0x0004] == true) {
-			UI_add_answer("Iolo the Mad");
+			add("Iolo the Mad");
 		}
 		converse (0) {
 			case "Goblins":
 				say("\"Would that I never hear of those horrible creatures again! They are why I am now Fawn's healer, though I am not properly trained.\" *\"Pomdirgun's shadow hath cast a blight on all the land!\"");
-				UI_remove_answer("Goblins");
-				UI_add_answer("Pomdirgun");
+				remove("Goblins");
+				add("Pomdirgun");
 				fallthrough;
 
 			case "healer":
@@ -35009,25 +35009,25 @@ void Func0430 object#(0x430) () {
 				} else {
 					say("\"I hate to say this, but I am relieved to hear that!\"");
 				}
-				UI_remove_answer("healer");
-				UI_add_answer("Seth");
+				remove("healer");
+				add("Seth");
 				fallthrough;
 
 			case "Seth":
 				say("\"Seth was two years older than the heavens, and set in his ways, to be sure. But he was a fine healer. He refused a guard escort to gather his herbs. He told Jorvin it was because the guards stepped on the plants he wanted to gather.\"");
 				say("\"But I think he simply wanted to be able to escape alone for a while. Thou hast no idea how little time one has when thou must be at the beck and call of everyone with some imagined ill!\"");
-				UI_remove_answer("Seth");
-				UI_add_answer("Jorvin");
+				remove("Seth");
+				add("Jorvin");
 				fallthrough;
 
 			case "Jorvin":
 				say("\"Jorvin is the Captain of the Guards. 'Twas he that went looking for Seth near twilight when the old man had not returned to the city.\" *\"Jorvin found signs that the Goblins had taken Seth, and led pursuit. But it was too late. By the time the guards caught the foul monsters, Seth was already the makings for their next meal!\"");
-				UI_remove_answer("Jorvin");
+				remove("Jorvin");
 				fallthrough;
 
 			case "Pomdirgun":
 				say("\"Iiieeee! That very name sends ice down my spine! Pomdirgun hath welded all the Goblins into his weapon. He will never stop until he hath driven us all from the land... Or feasted on us to the last child.\" *\"He is a fiend drawn to destroy our Beauty!\"");
-				UI_remove_answer("Pomdirgun");
+				remove("Pomdirgun");
 				fallthrough;
 
 			case "storms" (remove):
@@ -35036,7 +35036,7 @@ void Func0430 object#(0x430) () {
 					say("\"Can a City built upon the concept of Pure Beauty remain cursed? I hope not...\"");
 				} else {
 					say("\"What foulness is about in the land! That I received one of the harbingers of Fawn's doom stains my Beauty! Even the heavens lash out to burn away the vile truth that I harbor within mine heart!\"");
-					UI_add_answer(["harbingers", "vile truth"]);
+					add(["harbingers", "vile truth"]);
 				}
 				fallthrough;
 
@@ -35044,12 +35044,12 @@ void Func0430 object#(0x430) () {
 				say("\"When those sailors -- those false prophets -- first landed on our shores, two of their number came to seek me. One was a mage of some sort who came seeking what reagents I grow.\"");
 				if (gflags[0x01A3]) {
 					say("\"The other... as thou knowest, was Ruggs.\"");
-					UI_add_answer(["false prophets", "mage"]);
+					add(["false prophets", "mage"]);
 				} else {
 					say("\"The other... He was a thief who wore a face none could love. He stole mine heart away!\"");
-					UI_add_answer(["false prophets", "mage", "thief"]);
+					add(["false prophets", "mage", "thief"]);
 				}
-				UI_remove_answer("harbingers");
+				remove("harbingers");
 				fallthrough;
 
 			case "false prophets" (remove):
@@ -35059,20 +35059,20 @@ void Func0430 object#(0x430) () {
 				} else {
 					say("\"That is what the Priestess of Beauty calls them. They speak of something called The Fellowship, and claim that it will make our lives complete.\"");
 					say("\"Everyone knows that the true way lies along Beauty's path. By seeking Beauty, we draw all good things to us.\" *\"I rue the day I ever saw him!\"");
-					UI_add_answer("Fellowship");
+					add("Fellowship");
 				}
 				fallthrough;
 
 			case "Fellowship":
 				say("\"I can tell thee nothing. Nothing! I would not listen to such blasphemy. 'Tis enough that one of them hath bewitched me and stolen mine heart...\"");
-				UI_remove_answer("Fellowship");
+				remove("Fellowship");
 				fallthrough;
 
 			case "mage":
 				say("\"I think his companion called him by the name Batlin.\" *\"He was disappointed in what little I had to offer in the way of reagents. I told him to seek out Pothos in Moonshade for a better selection.\"");
 				say("\"He also inquired about blackrock carvings or sculpture, I do not remember exactly. I told him to ask Delin, who doth know artisans in Monitor and Moonshade.\"");
-				UI_remove_answer("mage");
-				UI_add_answer("Delin");
+				remove("mage");
+				add("Delin");
 				fallthrough;
 
 			case "buy":
@@ -35083,15 +35083,15 @@ void Func0430 object#(0x430) () {
 					say("\"I will gladly sell thee vegetables or reagents when I am open, ",
 					    var0000,
 					    ". Come to Healers Hall or the greenhouse during the daytime.\"");
-					UI_remove_answer("buy");
+					remove("buy");
 				}
 				fallthrough;
 
 			case "Delin":
 				say("\"Delin is Fawn's dry goods dealer, poor man. I wished Batlin luck in discussing anything with him.\"");
 				say("\"Delin hath not been right since his wife died in childbirth. His daughter, Alyssand, hath always looked after him, though she hath problems of her own now.\"");
-				UI_remove_answer("Delin");
-				UI_add_answer("Alyssand");
+				remove("Delin");
+				add("Alyssand");
 				fallthrough;
 
 			case "Alyssand" (remove):
@@ -35101,7 +35101,7 @@ void Func0430 object#(0x430) () {
 				} else {
 					say("\"Alyssand hath always been a headstrong girl. Thou wouldst expect it of someone with her responsibilities. We all thought Keth would take care of her, keep her under control. But then Keth was lost in one of those terrible storms.\"");
 					say("\"Alyssand swore that as long as she had his ring there was still hope that he would return. When that disappeared not long ago, she seemed to go mad! She seems to have fallen in with those blasphemers and claims that the Oracle is a sham.\"");
-					UI_add_answer(["ring", "Oracle"]);
+					add(["ring", "Oracle"]);
 				}
 				fallthrough;
 
@@ -35111,34 +35111,34 @@ void Func0430 object#(0x430) () {
 					say("\"I could not swear before the Oracle that this is truly Alyssand's ring. But it certainly doth look like it...\" *\"Thou shouldst find Alyssand and ask her, to be sure.\"");
 				}
 				Func08A9();
-				UI_remove_answer("ring");
+				remove("ring");
 				fallthrough;
 
 			case "Oracle":
 				say("\"Thou dost not know of the Oracle of Fawn? The Oracle is the instrument of Beauty here on Serpent Isle. It receives messages from the heavens, which Kylista makes plain for everyone to understand.\"");
-				UI_remove_answer("Oracle");
-				UI_add_answer("Kylista");
+				remove("Oracle");
+				add("Kylista");
 				fallthrough;
 
 			case "Kylista":
 				say("\"Kylista is the Priestess of Beauty, all honor to her. 'Tis she that instructs us all in Beauty's truth, which she receives in revelations from the Oracle.\" *\"Even Lady Yelinda honors Kylista's wisdom.\"");
-				UI_remove_answer("Kylista");
-				UI_add_answer("Lady Yelinda");
+				remove("Kylista");
+				add("Lady Yelinda");
 				fallthrough;
 
 			case "Lady Yelinda":
 				say("\"Lady Yelinda, honor to her, is the ruler of Fawn. She is the most beautiful woman in the city, the very embodiment of Beauty.\"");
-				UI_remove_answer("Lady Yelinda");
+				remove("Lady Yelinda");
 				fallthrough;
 
 			case "thief":
 				say("\"Thief, yes, that's what he is! His name is Ruggs, and he hath bewitched me. Perhaps he is some sort of mage, like his companion.\" *\"He hath stolen mine heart and I do not know what to do.\"");
-				UI_remove_answer("thief");
+				remove("thief");
 				fallthrough;
 
 			case "vile truth":
 				say("\"I must confess, I am the cause of these storms. I know I am. I must live with the vile truth that I hold in mine heart of hearts.\" *\"I am in love with one of those who brought this ruin upon my city! Although I did not embrace his beliefs, mine heart embraced him.\" *\"I am as guilty as Alyssand! I cannot see how she bears such shame...\"");
-				UI_remove_answer("vile truth");
+				remove("vile truth");
 				fallthrough;
 
 			case "apparatus" (remove):
@@ -35220,7 +35220,7 @@ void Func0430 object#(0x430) () {
 					UI_set_schedule_type(0xFFD0, 0x0014);
 					abort;
 				}
-				UI_remove_answer("letter");
+				remove("letter");
 				fallthrough;
 
 			case "Varo Leaves" (remove):
@@ -35319,12 +35319,12 @@ void Func0431 object#(0x431) () {
 				    ". I trust that thou art feeling well.\"");
 			}
 		}
-		UI_add_answer(["storms", "goblins", "bye"]);
+		add(["storms", "goblins", "bye"]);
 		converse (0) {
 			case "storms":
 				say("\"Without question, these storms are unnatural. If they do not cease soon, Fawn will perish!\" ~\"Already our livelihood hath been taken from us.\" ~\"And women weep at the loss of those who once sailed in our fleet. We have no idea what became of them.\"");
-				UI_remove_answer("storms");
-				UI_add_answer(["livelihood", "fleet"]);
+				remove("storms");
+				add(["livelihood", "fleet"]);
 				fallthrough;
 
 			case "livelihood" (remove):
@@ -35336,7 +35336,7 @@ void Func0431 object#(0x431) () {
 						say("\"Perhaps I shall speak with Lady Yelinda again. Surely, she doth need mine advice if this town is to be saved...\"");
 					} else {
 						say("\"Lady Yelinda hath charged me with the task of finding a way to sustain the people until the storms pass.\"");
-						UI_add_answer("Lady Yelinda");
+						add("Lady Yelinda");
 					}
 				} else {
 					say("\"We have lost most of our men to the sea and storms.\" ~\"We do not know if they were drowned or transformed.\"");
@@ -35344,7 +35344,7 @@ void Func0431 object#(0x431) () {
 						say("\"May Beauty lay their souls to rest...\"");
 					} else {
 						say("\"Now Lady Yelinda hath charged me with the task of finding a way to sustain our people until we can rebuild our ships.\" ~\"To be truthful, I am not hopeful...\"");
-						UI_add_answer("Lady Yelinda");
+						add("Lady Yelinda");
 					}
 				}
 				fallthrough;
@@ -35356,13 +35356,13 @@ void Func0431 object#(0x431) () {
 				} else {
 					say("\"Lady Yelinda is a ruler of Fawn, at least in name.\" ~\"Zulith fetches and carries for her, and makes her feel important.\" *\"But the truth of the matter is that Fawn's real power lies in the hands of Joth, Voldin and Kylista.\"");
 				}
-				UI_remove_answer("Lady Yelinda");
-				UI_add_answer(["Zulith", "Joth", "Voldin", "Kylista"]);
+				remove("Lady Yelinda");
+				add(["Zulith", "Joth", "Voldin", "Kylista"]);
 				fallthrough;
 
 			case "Zulith":
 				say("\"He is the messenger between the Great Captains and Lady Yelinda.\" ~\"He takes orders well enough, if thou dost stroke his ego enough.\" *\"But, if thou shouldst belittle him, beware!\" ~\"He hath the ears of both Yelinda and Kylista.\"");
-				UI_remove_answer("Zulith");
+				remove("Zulith");
 				fallthrough;
 
 			case "Joth":
@@ -35370,8 +35370,8 @@ void Func0431 object#(0x431) () {
 				if (var0002 == false) {
 					say("\"Without his support on the Council, I am locked against Voldin and must defer to his seniority.\" ~\"If Joth would waken to life as it is, Fawn would be in far better shape.\"");
 				}
-				UI_remove_answer("Joth");
-				UI_add_answer("injury");
+				remove("Joth");
+				add("injury");
 				fallthrough;
 
 			case "injury":
@@ -35379,27 +35379,27 @@ void Func0431 object#(0x431) () {
 				say("\"Joth ordered his ship to stand near the shoals and set fire to her sails so that the remainder of the fleet could find their way in.\" ~\"All of the ships docked safely that night, except for his.\"");
 				say("\"A freak change of wind cast his ship aground and he was trapped in the rigging.\"");
 				say("\"The healers say his back will never be the same again. He can never go back to sea.\"");
-				UI_remove_answer("injury");
-				UI_add_answer("lighthouse");
+				remove("injury");
+				add("lighthouse");
 				fallthrough;
 
 			case "lighthouse":
 				say("\"The heart seemed to go out of the sailors when the storms exchanged our lighthouse for a haunted building.\" ~\"They believed that it was a bad omen...\" *\"They were right.\"");
-				UI_remove_answer("lighthouse");
-				UI_add_answer("haunted building");
+				remove("lighthouse");
+				add("haunted building");
 				fallthrough;
 
 			case "haunted building":
 				say("\"Joth led a party of sailors and guardsmen to check what happened to the lighthouse.\" ~\"We suspected goblin mayhem, to lure us out of the city.\"");
 				say("\"The party returned pale and shaken. All they could tell us was that the lighthouse was gone.\" ~\"In its place was a strange haunted building!\"");
 				say("\"I know no more than that. I must concern myself with trying to provide Fawn with food.\"");
-				UI_remove_answer("haunted building");
+				remove("haunted building");
 				fallthrough;
 
 			case "Voldin":
 				say("\"Voldin is the senior member of the Great Captains.\" ~\"He is a very ambitious man with strong opinions and no great love for our fishing captains.\"");
-				UI_remove_answer("Voldin");
-				UI_add_answer(["opinions", "fishing captains"]);
+				remove("Voldin");
+				add(["opinions", "fishing captains"]);
 				fallthrough;
 
 			case "opinions":
@@ -35410,13 +35410,13 @@ void Func0431 object#(0x431) () {
 				} else {
 					say("\"Voldin doth have a very limited opinion of a woman's intelligence.\" ~\"He doth not believe that they are capable of making decisions more challenging than what to wear in the morning.\" *\"I fear that Lady Yelinda is too easily led by Voldin's wishes.\"");
 				}
-				UI_remove_answer("opinions");
+				remove("opinions");
 				fallthrough;
 
 			case "fishing captains":
 				say("\"Voldin hath long been a bully -- from his days as a guardsman, to his days as a sea captain.\" ~\"Few sailors were willing to serve under him for long.\"");
 				say("\"When the Council seat opened, they begged Lady Yelinda to appoint Voldin to the post. They told her it was to honor his years of service.\" ~\"But Voldin knows, as doth every other sailor, that it was to bring him in off the sea.\" *\"This was a vaster mistake than anyone could foretell.\"");
-				UI_remove_answer("fishing captains");
+				remove("fishing captains");
 				fallthrough;
 
 			case "Kylista":
@@ -35426,51 +35426,51 @@ void Func0431 object#(0x431) () {
 					say("\"Kylista is the Priestess of Beauty.\" ~\"She is a very ambitious woman who is not above using her feminine wiles or the words of the Oracle to obtain what she wants.\"");
 					say("\"Kylista holds Zulith in her thrall, I know.\" ~\"I think she seeks to use Voldin to gain power of her own. But Voldin thinks to use her as his own pawn.\" ~\"'Tis a monumental game, and I fear Fawn is the prize.\"");
 				}
-				UI_remove_answer("Kylista");
-				UI_add_answer("Oracle");
+				remove("Kylista");
+				add("Oracle");
 				fallthrough;
 
 			case "Oracle":
 				say("\"The Oracle is a strange magical device built long ago as an instrument of truth.\" *\"But of late its revelations have become echoes of Kylista and Voldin.\" ~\"I do not know how they accomplish this, but I am certain that their plots are anything but divine.\"");
-				UI_remove_answer("Oracle");
-				UI_add_answer("revelations");
+				remove("Oracle");
+				add("revelations");
 				fallthrough;
 
 			case "revelations":
 				say("\"When I was a lad, the Oracle was called on to settle disputes and reveal the truth.\" ~\"Now it pronounces marriages based more on wealth and power than on love.\" ~\"The Oracle hath become a political tool, and I have no idea how.\"");
-				UI_remove_answer("revelations");
+				remove("revelations");
 				fallthrough;
 
 			case "fleet":
 				say("\"After the lighthouse was lost, the fleet sailed only in the daylight hours. There was no other choice.\" ~\"But the storms seemed drawn to the water. They took the ships as well, one by one.\"");
-				UI_remove_answer("fleet");
-				UI_add_answer("ships");
+				remove("fleet");
+				add("ships");
 				fallthrough;
 
 			case "ships":
 				say("\"A few we know were lost at sea... transformed into blazes knows what.\" ~\"The others could have been transported to the frozen mountains, for all we know. None have been seen again.\"");
-				UI_remove_answer("ships");
+				remove("ships");
 				fallthrough;
 
 			case "goblins":
 				say("\"We have battled goblins since the time of Fawn's founding.\" ~\"We drove the savage creatures from this area when we settled here.\" *\"Because of their innate cowardice, we have always been able to drive them away with ease. Until Pomdirgun gathered them under his leadership.\"");
-				UI_remove_answer("goblins");
-				UI_add_answer("Pomdirgun");
+				remove("goblins");
+				add("Pomdirgun");
 				fallthrough;
 
 			case "Pomdirgun":
 				say("\"Pomdirgun is far more cunning than normal goblins. He hath attacked Fawn without respite for nearly a year now.\"");
 				say("\"His attacks have grown more daring of late.\"");
-				UI_remove_answer("Pomdirgun");
-				UI_add_answer("attacks");
+				remove("Pomdirgun");
+				add("attacks");
 				fallthrough;
 
 			case "attacks":
 				say("\"Without Pomdirgun leading them, the goblins would never have had the nerve to take the Pikeman tower.\"");
 				say("\"And he was responsible for the death of Seth, Fawn's healer.\"");
 				say("\"Delphynia is all we have now.\"");
-				UI_remove_answer("attacks");
-				UI_add_answer("Delphynia");
+				remove("attacks");
+				add("Delphynia");
 				fallthrough;
 
 			case "Delphynia" (remove):
@@ -35480,19 +35480,19 @@ void Func0431 object#(0x431) () {
 					say("\"How can she abide that fellow Ruggs? He is so confounded ugly...\"");
 				} else {
 					say("\"Delphynia hath been a sad lady since Kylista arranged to exile the Fellowship sailors from the city.\" ~\"She cannot decide whether she is glad that Ruggs is gone, or not. Poor lady.\"");
-					UI_add_answer(["Fellowship sailors", "Ruggs"]);
+					add(["Fellowship sailors", "Ruggs"]);
 				}
 				fallthrough;
 
 			case "Fellowship sailors":
 				say("\"They sailed in quite a while ago. We had never seen the like of their ship before.\" ~\"Then one of them proved to be a charismatic leader who spoke eloquently of some new belief called The Fellowship.\" ~\"It appealed to many people, especially the women.\"");
 				say("\"Kylista was mightily put out, I will tell thee.\" ~\"So she blamed the storms on the strangers and had them banned from the city. She still has everyone atoning for their transgressions against Beauty.\" ~\"She says the storms will not stop until the heavens are appeased. I do not think she knows when -- or if -- they will stop.\"");
-				UI_remove_answer("Fellowship sailors");
+				remove("Fellowship sailors");
 				fallthrough;
 
 			case "Ruggs":
 				say("\"Ruggs is one of the Fellowship sailors.\" ~\"He is a good man who thinks that Delphynia put the stars in the sky.\" ~\"The only problem is that he is hideously ugly.\" *\"Ruggs could curdle milk with that face! But he is a gentle man.\"");
-				UI_remove_answer("Ruggs");
+				remove("Ruggs");
 				fallthrough;
 
 			case "bye":
@@ -35552,12 +35552,12 @@ void Func0432 object#(0x432) () {
 		} else {
 			say("\"Good ta see thee again.\"");
 		}
-		UI_add_answer(["storms", "goblins", "bye"]);
+		add(["storms", "goblins", "bye"]);
 		converse (0) {
 			case "storms":
 				say("\"'Twas a storm what ran me ship aground and took me from the sea! 'Tis fitting that these daemon storms will be the end of us all.\" *\"They have taken all me old friends -- plucked 'em right off the water or drowned 'em deep. Never thought I'd live ta see the day when Fawn's fleet was brought low.\"");
-				UI_remove_answer("storms");
-				UI_add_answer(["aground", "friends", "fleet"]);
+				remove("storms");
+				add(["aground", "friends", "fleet"]);
 				fallthrough;
 
 			case "aground" (remove):
@@ -35567,54 +35567,54 @@ void Func0432 object#(0x432) () {
 					say("\"Life's not been the same for me since. I do miss the sea!\"");
 				} else {
 					say("\"Never dreamed a crusty old salt like meself would end my days on the Great Captain's Council.\"");
-					UI_add_answer(["Great Captain's Council"]);
+					add(["Great Captain's Council"]);
 				}
-				UI_add_answer(["Seth"]);
+				add(["Seth"]);
 				fallthrough;
 
 			case "Seth":
 				say("\"Seth's gone too. Only the goblins got 'im. Put 'im in their big ol' stewpots, they did.\" *\"What's the world comin' ta, I ask thee? If it isn't vile monsters, 'tis Nature herself what has turned against us.\"");
-				UI_remove_answer("Seth");
-				UI_add_answer("Nature herself");
+				remove("Seth");
+				add("Nature herself");
 				fallthrough;
 
 			case "Nature herself":
 				say("\"'Tis plain that thou art not a seaman... The rain's the tears o' Nature. An' the wind, that be the breath o' Nature. Whene'er there be a bad storm, 'tis Nature's anger.\" *\"I'll wager that she be fearsome upset about now.\"");
-				UI_remove_answer("Nature herself");
+				remove("Nature herself");
 				fallthrough;
 
 			case "Great Captain's Council":
 				say("\"Aye. 'Tis the Great Captains what advise Lady Yelinda in the workings of trade and the fleet. Things what some feel that women have no interest in.\" *\"The Great Captains be meself, Garth and Voldin.\"");
-				UI_remove_answer("Great Captain's Council");
-				UI_add_answer(["Lady Yelinda", "Garth", "Voldin"]);
+				remove("Great Captain's Council");
+				add(["Lady Yelinda", "Garth", "Voldin"]);
 				fallthrough;
 
 			case "Lady Yelinda":
 				say("\"She be the ruler of Fawn. 'Tis Lady Yelinda what doth do the meetin' an' greetin' of all what wish ta trade with Fawn. An' Lady Yelinda be the one what makes the official decrees an' laws an' such. After she counsels with us, of course. Ha.\"");
-				UI_remove_answer("Lady Yelinda");
+				remove("Lady Yelinda");
 				fallthrough;
 
 			case "Garth":
 				say("\"Garth be no more than a green lad with a passion for the ladies. Never been ta sea that I know of. Some Great Captain that is.\" *\"But 'is family's had money an' lots o' trade smarts. Could do worse for a council member, I reckon. Could put poor ol' drunken Olon in the seat. Ha.\"");
-				UI_remove_answer("Garth");
-				UI_add_answer("Olon");
+				remove("Garth");
+				add("Olon");
 				fallthrough;
 
 			case "Olon":
 				say("\"Olon was one of the best fishermen we had, 'til the day he watched his ship go down.\" *\"'Twere durin' one of these weird storms, an' Olon had missed castoff. He was fixin' ta row out ta the ship when it were hit by that freak lightning. All of a sudden, it weren't no ship. It were a grain wagon. All hands drowned, and Olon thinks he's a doomed man.\"");
 				say("\"If thou wert ta ask me, I'd tell thee that we all be doomed, so why not bury our troubles in the bottom of an ale glass? But no one hath asked ol' Joth nothin', so I go about me business.\"");
-				UI_remove_answer("Olon");
+				remove("Olon");
 				fallthrough;
 
 			case "Voldin":
 				say("\"Now Voldin were a captain, all right. An' a guardsman ta boot. He likes ta run things... be in charge.\" *\"Suppose 'twere only natural that he end on the Council. Now he doth have Garth and me ta bully, and Zulith and Kylista at his beck an' call.\"");
-				UI_remove_answer("Voldin");
-				UI_add_answer(["Zulith", "Kylista"]);
+				remove("Voldin");
+				add(["Zulith", "Kylista"]);
 				fallthrough;
 
 			case "Zulith":
 				say("\"Look for a bright green flare... that'd be Zulith in his flashy Chancellor's robes.\" *\"Puffs like he's important, runnin' messages from the palace ta the Great Captains. But ever'one laughs real quiet behind their sleeves. Zulith is a vengeful little man, and thou had best be wary around him.\"");
-				UI_remove_answer("Zulith");
+				remove("Zulith");
 				fallthrough;
 
 			case "Kylista":
@@ -35624,23 +35624,23 @@ void Func0432 object#(0x432) () {
 					say("\"A wondrous fling between the covers, she is! Kylista certainly knows the secrets of usin' Beauty ta obtain what she wants. If not before the Oracle callin' revelations, then in a man's bedchamber.\"");
 					say("\"Kylista is the Priestess of Beauty, but -- between thee an' me -- I think she would rather be called Lady Kylista, if it pleases thee. She hath a firm hold on Zulith's tether, 'tis certain.\"");
 				}
-				UI_remove_answer("Kylista");
-				UI_add_answer(["Oracle", "revelations"]);
+				remove("Kylista");
+				add(["Oracle", "revelations"]);
 				fallthrough;
 
 			case "Oracle":
 				say("\"'Tis a wonder ta behold, make no mistake. A true magical type of thing. Used ta draw quite a crowd, before the storms went so bad.\" *\"Pretty ta look at, for sure.\"");
-				UI_remove_answer("Oracle");
+				remove("Oracle");
 				fallthrough;
 
 			case "revelations":
 				say("\"Straight from the heavens, ta hear Kylista speak of it. Never found much use in 'em meself. A fisherman don't see much beauty out haulin' in nets all day long.\"");
-				UI_remove_answer("revelations");
+				remove("revelations");
 				fallthrough;
 
 			case "friends":
 				say("\"Good seamen all. Fishermen an' captains alike. These cursed storms have taken every good man from Fawn's shores an' left me alone with these land crawlers.\" *\"'Tis enough ta make a man think about walkin' inta the sea at high tide...\"");
-				UI_remove_answer("friends");
+				remove("friends");
 				fallthrough;
 
 			case "fleet" (remove):
@@ -35649,7 +35649,7 @@ void Func0432 object#(0x432) () {
 					say("\"An' there be nobody brave enough to even sail the rowboats! Not in these storms...\"");
 				} else {
 					say("\"An' what's worse, Lady Yelinda tells me that I'm ta be in charge of the restorations!\"");
-					UI_add_answer("restorations");
+					add("restorations");
 				}
 				fallthrough;
 
@@ -35657,24 +35657,24 @@ void Func0432 object#(0x432) () {
 				say("\"Restorations she calls it! Like there was something ta restore! But drawn the reports and plans, I have. As ordered.\"");
 				say("\"But tell me, if thou canst, how Fawn is ta build ships when most of the shipwrights are drowned? Or tell me how we're ta acquire the wood ta build with if these storms have us runnin' like rabbits ta a hole?\"");
 				say("\"An' Voldin sits holdin' the money tellin' me 'tis unsafe ta begin buildin'. As if I had ballast for brains! But he doth not have ta report to Lady Yelinda. I do!\"");
-				UI_remove_answer("restorations");
+				remove("restorations");
 				fallthrough;
 
 			case "goblins":
 				say("\"The goblins have always been like fleas infestin' this part o' the land. We'd stomp on 'em good an' hard, an' they'd go crawl back ta whate'er hole they crawled out of.\" *\"But since this Pomdirgun brute came along, there's been no drivin' 'em back.\"");
-				UI_remove_answer("goblins");
-				UI_add_answer("Pomdirgun");
+				remove("goblins");
+				add("Pomdirgun");
 				fallthrough;
 
 			case "Pomdirgun":
 				say("\"Pomdirgun's larger than most goblins. Certainly meaner or he would never have gotten the brutes all under his command. I'm almost willin' ta believe that he's half daemon, like some folk say.\"");
-				UI_remove_answer("Pomdirgun");
-				UI_add_answer("daemon");
+				remove("Pomdirgun");
+				add("daemon");
 				fallthrough;
 
 			case "daemon":
 				say("\"There are daemon ruins all around this land. Thou canst not miss them -- they are all covered with evil lookin' serpents.\" *\"Some say that the daemons are still here. They say that civilized man drove them underground when we settled here.\" ~\"Haven't ever seen one. Wouldn't want to neither.\"");
-				UI_remove_answer("daemon");
+				remove("daemon");
 				fallthrough;
 
 			case "bye":
@@ -35747,7 +35747,7 @@ void Func0433 object#(0x433) () {
 		say("\"So thou hast come to pity me, eh, ",
 		    var0002,
 		    "? Well, I'm not done yet!\"");
-		UI_add_answer(["false Oracle", "Kylista", "not done yet"]);
+		add(["false Oracle", "Kylista", "not done yet"]);
 	} else {
 		if (event == 0x0009) {
 			UI_run_schedule(0xFFCD);
@@ -35783,15 +35783,15 @@ void Func0433 object#(0x433) () {
 				    var0002,
 				    "?\"");
 			}
-			UI_add_answer(["storms", "Goblins"]);
+			add(["storms", "Goblins"]);
 		}
 	}
-	UI_add_answer("bye");
+	add("bye");
 	converse (0) {
 		case "false Oracle" (remove):
 			say("\"The Oracle hath always been a fraud! Dost thou not comprehend?\"");
 			say("\"Even in our ancient homeland, the Statue of Beauty was controlled by the Great Captains. It said what we told it to.\"");
-			UI_add_answer(["fraud", "Why?"]);
+			add(["fraud", "Why?"]);
 			fallthrough;
 
 		case "fraud" (remove):
@@ -35832,32 +35832,32 @@ void Func0433 object#(0x433) () {
 
 		case "storms":
 			say("\"The storms are a regrettable consequence of incurring the heavens' displeasure. I'm certain that our punishment will end soon if we adhere to Beauty's truth.\"");
-			UI_remove_answer("storms");
-			UI_add_answer(["the heavens' displeasure", "Beauty's truth"]);
+			remove("storms");
+			add(["the heavens' displeasure", "Beauty's truth"]);
 			fallthrough;
 
 		case "the heavens' displeasure":
 			say("\"Out of misguided kindness, we allowed infidels to enter our city. They spread their contagion, corrupting many of our people to their misguided ways. This displeased the heavens. The storms were clearly sent to punish us.\"");
-			UI_remove_answer("the heavens' displeasure");
-			UI_add_answer(["infidels", "misguided ways"]);
+			remove("the heavens' displeasure");
+			add(["infidels", "misguided ways"]);
 			fallthrough;
 
 		case "infidels":
 			say("\"The sailors camped outside of the city are infidels. They do not follow the path of Beauty.\" *\"They came to our city claiming to be from Britannia, which -- as any sailor knows -- is pure fiction. The Priestess was right to remove their ugly dishonesty from our midst.\"");
-			UI_remove_answer("infidels");
-			UI_add_answer("Priestess");
+			remove("infidels");
+			add("Priestess");
 			fallthrough;
 
 		case "Priestess":
 			say("\"Kylista is the Priestess of Beauty. She receives the wisdom of the Oracle and interprets it for those of us who cannot understand the words of the heavens.\" *\"Kylista tried to dissuade us from allowing that false prophet into our city. Now we are paying for our folly.\"");
-			UI_remove_answer("Priestess");
-			UI_add_answer("Oracle");
+			remove("Priestess");
+			add("Oracle");
 			fallthrough;
 
 		case "Oracle":
 			say("\"The Oracle is an instrument of the heavens. Its words are divine revelations to those who follow Beauty's truth.\"");
-			UI_remove_answer("Oracle");
-			UI_add_answer("revelations");
+			remove("Oracle");
+			add("revelations");
 			fallthrough;
 
 		case "revelations":
@@ -35868,13 +35868,13 @@ void Func0433 object#(0x433) () {
 			} else {
 				say("\"Thou shouldst go to the Temple. Judging by the time, there will be another revelation soon.\" *\"I'm certain that thou wilt find it an enlightening experience.\"");
 			}
-			UI_remove_answer("revelations");
+			remove("revelations");
 			fallthrough;
 
 		case "misguided ways":
 			say("\"There is one among them, Leon, who preaches of something they call The Fellowship. While I'll grant that he is a powerful speaker, he is clearly a misguided fool.\" *\"Who in their right mind would believe that the world could be changed by such simplistic views?\"");
-			UI_remove_answer("misguided ways");
-			UI_add_answer("simplistic views");
+			remove("misguided ways");
+			add("simplistic views");
 			fallthrough;
 
 		case "simplistic views":
@@ -35891,12 +35891,12 @@ void Func0433 object#(0x433) () {
 					say("\"Of course not! Thou art a man of the world. Thou knowest that thou canst acquire only what thou takest.\"");
 				}
 			}
-			UI_remove_answer("simplistic views");
+			remove("simplistic views");
 			fallthrough;
 
 		case "Beauty's truth":
 			say("\"Everyone is drawn to that which is beautiful. Therefore, if we strive to honor and protect all things beautiful, our lives will be fulfilled.\" *\"All good and honest people are Beautiful.\"");
-			UI_remove_answer("Beauty's truth");
+			remove("Beauty's truth");
 			fallthrough;
 
 		case "Goblins":
@@ -35927,46 +35927,46 @@ void Func0433 object#(0x433) () {
 					    "! Pomdirgun and his Goblin hordes must be driven from the Pikeman tower.\" *\"Lady Yelinda will be most grateful to all who join in the fray.\"");
 				}
 			}
-			UI_remove_answer("Goblins");
-			UI_add_answer(["Lady Yelinda", "Pomdirgun"]);
+			remove("Goblins");
+			add(["Lady Yelinda", "Pomdirgun"]);
 			fallthrough;
 
 		case "Lady Yelinda":
 			say("\"Lady Yelinda is the most beautiful woman in the city. She rules Fawn with the aid of the Chancellor and the Great Captain's Council.\"");
-			UI_remove_answer("Lady Yelinda");
-			UI_add_answer(["Chancellor", "Great Captain's Council"]);
+			remove("Lady Yelinda");
+			add(["Chancellor", "Great Captain's Council"]);
 			fallthrough;
 
 		case "Chancellor":
 			say("\"The Chancellor is Lady Yelinda's chief assistant. He conveys messages to and from the Council to her Ladyship and makes public proclamations of Lady Yelinda's judgments.\" *\"If thou wishest a matter brought before her Ladyship, thou must first speak with Zulith. Look for a small man wearing bright green robes. That will be the Chancellor.\"");
-			UI_remove_answer("Chancellor");
+			remove("Chancellor");
 			fallthrough;
 
 		case "Great Captain's Council":
 			say("\"The Great Captains take much of the weight of mundane affairs from Lady Yelinda's schedule. Garth, Joth and I oversee trade and the disposition of the fleets.\"");
-			UI_remove_answer("Great Captain's Council");
-			UI_add_answer(["Garth", "Joth", "fleet"]);
+			remove("Great Captain's Council");
+			add(["Garth", "Joth", "fleet"]);
 			fallthrough;
 
 		case "Garth":
 			say("\"Garth is merely a lad. He could never have gotten a Council seat without his family's money.\" *\"He spends his days chasing skirts. Which is just as well, as it keeps him out from under foot.\"");
-			UI_remove_answer("Garth");
+			remove("Garth");
 			fallthrough;
 
 		case "Joth":
 			say("\"Joth is an old fishing captain who had to be forcibly removed from the fleet, I'm afraid. I don't think that he quite realizes that he isn't on the deck of a ship anymore, poor man.\" *\"He thinks we can rebuild the fleet with little or no money. We humor him as best we can.\"");
-			UI_remove_answer("Joth");
+			remove("Joth");
 			fallthrough;
 
 		case "fleet":
 			say("\"These severe storms have caused the total loss of all our fishing ships. Fawn once supplied fish to the other cities. But that is a thing of the past, I'm afraid.\" *\"Even if we were able to rebuild the ships, we have almost no able-bodied men to crew them. This may be the death knell of Fawn without the proper guidance.\"");
-			UI_remove_answer("fleet");
+			remove("fleet");
 			fallthrough;
 
 		case "Pomdirgun":
 			say("\"I do not know what evil spawned such a fearful creature. Pomdirgun is easily larger than the other Goblins, and twice as fierce. All the other Goblins fear him.\" *\"His first foray against Fawn cost us our healer, Seth. And now he hath led the Goblins to overtake the Pikeman tower. I'd give much to see his head on a pike!\"");
-			UI_remove_answer("Pomdirgun");
-			UI_add_answer("Seth");
+			remove("Pomdirgun");
+			add("Seth");
 			fallthrough;
 
 		case "Seth":
@@ -35976,20 +35976,20 @@ void Func0433 object#(0x433) () {
 			} else {
 				say("\"By the time the guards caught up with the foul creatures, they had eaten all but his head!\" *\"But perhaps the worst part of the tale is that Fawn is left with only Delphynia as a healer!\"");
 			}
-			UI_remove_answer("Seth");
-			UI_add_answer("Delphynia");
+			remove("Seth");
+			add("Delphynia");
 			fallthrough;
 
 		case "Delphynia":
 			say("\"Delphynia is a nice enough woman. But she is no healer. She's a horticulturist. Not even an herbalist. But she's all we have until these cursed storms lighten.\"");
 			say("\"I fear, however, that she hath fallen under the spell of one of those infidels! Ruggs, I think his name is.\"");
-			UI_remove_answer("Delphynia");
-			UI_add_answer("Ruggs");
+			remove("Delphynia");
+			add("Ruggs");
 			fallthrough;
 
 		case "Ruggs":
 			say("\"Ruggs is so ugly that his sins are written plain for all to see. But Delphynia seems to find him compelling. I'm told he speaks sweetly, as doth his companion Leon.\" *\"But I expect all evil things are compelling in some manner. Else how would any good person be tempted by them?\"");
-			UI_remove_answer("Ruggs");
+			remove("Ruggs");
 			fallthrough;
 
 		case "bye":
@@ -36097,10 +36097,10 @@ void Func0434 object#(0x434) () {
 				    "?\"");
 			}
 			UI_set_item_flag(0xFFCC, 0x001C);
-			UI_add_answer("proprietor");
+			add("proprietor");
 		} else {
 			say("\"Returned so soon? How may I help thee now?\"");
-			UI_add_answer("duties");
+			add("duties");
 		}
 		if (Func0942(0xFFC6)) {
 			var0003 = 0x0003;
@@ -36108,24 +36108,24 @@ void Func0434 object#(0x434) () {
 		if (UI_get_schedule_type(0xFFCC) == 0x0010) {
 			var0003 = 0x0001;
 		}
-		UI_add_answer(["information"]);
+		add(["information"]);
 		if (UI_get_schedule_type(0xFFCC) == 0x0017) {
-			UI_add_answer("buy");
+			add("buy");
 		}
-		UI_add_answer("bye");
+		add("bye");
 		var0004 = 0x0000;
 		converse (0) {
 			case "buy":
 				say("\"Dost thou desire a stiff drink, a warm meal, or a room where thou canst rest?\"");
 				UI_push_answers();
-				UI_add_answer(["food", "drink", "room", "nothing"]);
+				add(["food", "drink", "room", "nothing"]);
 				fallthrough;
 
 			case "proprietor", "duties" (remove):
 				say("\"I used ta serve the sailors that spent their days drinkin' sea spray and their nights drinkin' ale. Not a pretty bunch, but they spent enough ta keep a roof over mine head.\"");
 				say("\"But since those cursed storms destroyed the fleet, there hath been precious little business.\"");
 				say("\"Used ta have a lad that served the drinks for me. His mother cooked and did the washin' up. But Danysia became ill and died -- the healers could do nothing -- and young Rindor went ta sea... never returned.\"");
-				UI_add_answer(["storms"]);
+				add(["storms"]);
 				fallthrough;
 
 			case "storms" (remove):
@@ -36162,7 +36162,7 @@ void Func0434 object#(0x434) () {
 					say("\"What be thou interested in?\"");
 					UI_push_answers();
 					var0004 = 0x0001;
-					UI_add_answer(["people", "places", "strange objects", "nothing more"]);
+					add(["people", "places", "strange objects", "nothing more"]);
 				} else {
 					say("\"Return later, ",
 					    var0001,
@@ -36174,14 +36174,14 @@ void Func0434 object#(0x434) () {
 				say("\"Who dost thou wish ta know about -- townsfolk or strangers?\"");
 				UI_push_answers();
 				var0004 = 0x0002;
-				UI_add_answer(["townsfolk", "strangers", "nothing more"]);
+				add(["townsfolk", "strangers", "nothing more"]);
 				fallthrough;
 
 			case "townsfolk" (remove):
 				say("\"Whom dost thou wish ta know about?\"");
 				UI_push_answers();
 				var0004 = 0x0003;
-				UI_add_answer(["the sailors", "the shopkeepers", "the healers", "the Priestess", "town leaders", "nothing more"]);
+				add(["the sailors", "the shopkeepers", "the healers", "the Priestess", "town leaders", "nothing more"]);
 				fallthrough;
 
 			case "the sailors" (remove):
@@ -36196,7 +36196,7 @@ void Func0434 object#(0x434) () {
 				say("\"Aside from me, there be only old Delin the Provisioner, and he be half-crazy.\"");
 				say("\"Delin hath not been quite right since his wife died, and the Magister came to take away his infant child.\"");
 				say("\"His daughter, Alyssand, looks after him these days. She doth make certain that he doth not wander away.\"");
-				UI_add_answer("Magister");
+				add("Magister");
 				var0003 = Func09AE(var0003);
 				fallthrough;
 
@@ -36234,7 +36234,7 @@ void Func0434 object#(0x434) () {
 				say("\"Well now, there be plenty of those here. Who dost thou wish ta know about?\"");
 				UI_push_answers();
 				var0004 = 0x0004;
-				UI_add_answer(["Lady Yelinda", "Chancellor Zulith", "Commander Jorvin", "the Great Captains", "nothing more"]);
+				add(["Lady Yelinda", "Chancellor Zulith", "Commander Jorvin", "the Great Captains", "nothing more"]);
 				fallthrough;
 
 			case "Lady Yelinda" (remove):
@@ -36283,7 +36283,7 @@ void Func0434 object#(0x434) () {
 				say("\"Who wouldst thou care to hear about?\"");
 				UI_push_answers();
 				var0004 = 0x0003;
-				UI_add_answer(["sailors", "scholars", "leader", "nothing more"]);
+				add(["sailors", "scholars", "leader", "nothing more"]);
 				fallthrough;
 
 			case "sailors" (remove):
@@ -36295,7 +36295,7 @@ void Func0434 object#(0x434) () {
 					say("\"But when the sailors began spouting that Fellowship nonsense, Kylista did right, orderin' their contagion outside the city walls.\"");
 				}
 				var0003 = Func09AE(var0003);
-				UI_add_answer("Fellowship");
+				add("Fellowship");
 				fallthrough;
 
 			case "Fellowship" (remove):
@@ -36309,7 +36309,7 @@ void Func0434 object#(0x434) () {
 				say("\"Said his name was Batlin. Came to town askin' about the Daemon artifacts hereabouts. Bothering poor Delin...\"");
 				say("\"Told him ta go talk ta others of his ilk, not badger the honest folk.\"");
 				var0003 = Func09AE(var0003);
-				UI_add_answer("Daemon artifacts");
+				add("Daemon artifacts");
 				fallthrough;
 
 			case "Daemon artifacts" (remove):
@@ -36327,7 +36327,7 @@ void Func0434 object#(0x434) () {
 				say("\"Askin' about folk tales. Bought the boys a round or two ta loosen their tongues. Her favorites were the tales of the Gwani.\"");
 				gflags[0x0155] = true;
 				var0003 = Func09AE(var0003);
-				UI_add_answer("Gwani");
+				add("Gwani");
 				fallthrough;
 
 			case "Gwani" (remove):
@@ -36342,7 +36342,7 @@ void Func0434 object#(0x434) () {
 				say("\"But I can tell thee about the other towns, if thou wouldst like.\"");
 				UI_push_answers();
 				var0004 = 0x0002;
-				UI_add_answer(["wilderness areas", "other towns", "nothing more"]);
+				add(["wilderness areas", "other towns", "nothing more"]);
 				fallthrough;
 
 			case "wilderness areas" (remove):
@@ -36358,7 +36358,7 @@ void Func0434 object#(0x434) () {
 				say("\"Well now, like I said before, I have never visited the other towns. But I have heard tell of them.\"");
 				UI_push_answers();
 				var0004 = 0x0003;
-				UI_add_answer(["Moonshade", "Monitor", "Sleeping Bull", "nothing more"]);
+				add(["Moonshade", "Monitor", "Sleeping Bull", "nothing more"]);
 				fallthrough;
 
 			case "Moonshade" (remove):
@@ -36388,7 +36388,7 @@ void Func0434 object#(0x434) () {
 					say("\"Arrogant people down there. Always wantin' ta beat thee. They have a big walled city south of here. Monitor is where the Pikemen are from.\"");
 					say("\"Larcenous bunch of armoured scum! They'll protect the roads for thee... if thou dost give them all thy money!\"");
 					say("\"The lot hereabouts weren't much good. The Goblins killed 'em.\"");
-					UI_add_answer("Goblins");
+					add("Goblins");
 				}
 				gflags[0x019F] = true;
 				var0003 = Func09AE(var0003);
@@ -36413,7 +36413,7 @@ void Func0434 object#(0x434) () {
 
 			case "strange objects":
 				gflags[0x01AA] = true;
-				UI_remove_answer("strange objects");
+				remove("strange objects");
 				var0004 = (var0004 + 0x0001);
 				var000D = [];
 				if (gflags[0x027A] && (!gflags[0x028C])) {
@@ -36488,10 +36488,10 @@ void Func0434 object#(0x434) () {
 							var000F = 0x0000;
 							var0011 = true;
 						}
-						UI_add_answer(var0010);
+						add(var0010);
 						var000F = (var000F - 0x0001);
 					}
-					UI_add_answer("nothing more");
+					add("nothing more");
 				}
 				fallthrough;
 
@@ -36509,7 +36509,7 @@ void Func0434 object#(0x434) () {
 					if (var000D == []) {
 						var0011 = true;
 					}
-					UI_add_answer(var0010);
+					add(var0010);
 				}
 				fallthrough;
 
@@ -36552,7 +36552,7 @@ void Func0434 object#(0x434) () {
 					if (var000D == []) {
 						var0011 = true;
 					}
-					UI_add_answer(var0010);
+					add(var0010);
 				}
 				fallthrough;
 
@@ -36577,7 +36577,7 @@ void Func0434 object#(0x434) () {
 					if (var000D == []) {
 						var0011 = true;
 					}
-					UI_add_answer(var0010);
+					add(var0010);
 				}
 				fallthrough;
 
@@ -36595,7 +36595,7 @@ void Func0434 object#(0x434) () {
 					if (var000D == []) {
 						var0011 = true;
 					}
-					UI_add_answer(var0010);
+					add(var0010);
 				}
 				fallthrough;
 
@@ -36613,7 +36613,7 @@ void Func0434 object#(0x434) () {
 					if (var000D == []) {
 						var0011 = true;
 					}
-					UI_add_answer(var0010);
+					add(var0010);
 				}
 				fallthrough;
 
@@ -36641,7 +36641,7 @@ void Func0434 object#(0x434) () {
 					if (var000D == []) {
 						var0011 = true;
 					}
-					UI_add_answer(var0010);
+					add(var0010);
 				}
 				fallthrough;
 
@@ -36660,7 +36660,7 @@ void Func0434 object#(0x434) () {
 					if (var000D == []) {
 						var0011 = true;
 					}
-					UI_add_answer(var0010);
+					add(var0010);
 				}
 				fallthrough;
 
@@ -36678,7 +36678,7 @@ void Func0434 object#(0x434) () {
 					if (var000D == []) {
 						var0011 = true;
 					}
-					UI_add_answer(var0010);
+					add(var0010);
 				}
 				fallthrough;
 
@@ -36707,7 +36707,7 @@ void Func0434 object#(0x434) () {
 					if (var000D == []) {
 						var0011 = true;
 					}
-					UI_add_answer(var0010);
+					add(var0010);
 				}
 				fallthrough;
 
@@ -36728,7 +36728,7 @@ void Func0434 object#(0x434) () {
 					if (var000D == []) {
 						var0011 = true;
 					}
-					UI_add_answer(var0010);
+					add(var0010);
 				}
 				fallthrough;
 
@@ -36746,7 +36746,7 @@ void Func0434 object#(0x434) () {
 					if (var000D == []) {
 						var0011 = true;
 					}
-					UI_add_answer(var0010);
+					add(var0010);
 				}
 				fallthrough;
 
@@ -36763,7 +36763,7 @@ void Func0434 object#(0x434) () {
 					if (var000D == []) {
 						var0011 = true;
 					}
-					UI_add_answer(var0010);
+					add(var0010);
 				}
 				fallthrough;
 
@@ -36784,7 +36784,7 @@ void Func0434 object#(0x434) () {
 					if (var000D == []) {
 						var0011 = true;
 					}
-					UI_add_answer(var0010);
+					add(var0010);
 				}
 				fallthrough;
 
@@ -36804,7 +36804,7 @@ void Func0434 object#(0x434) () {
 					if (var000D == []) {
 						var0011 = true;
 					}
-					UI_add_answer(var0010);
+					add(var0010);
 				}
 				fallthrough;
 
@@ -36823,7 +36823,7 @@ void Func0434 object#(0x434) () {
 					if (var000D == []) {
 						var0011 = true;
 					}
-					UI_add_answer(var0010);
+					add(var0010);
 				}
 				fallthrough;
 
@@ -36846,7 +36846,7 @@ void Func0434 object#(0x434) () {
 					if (var000D == []) {
 						var0011 = true;
 					}
-					UI_add_answer(var0010);
+					add(var0010);
 				}
 				fallthrough;
 
@@ -36866,7 +36866,7 @@ void Func0434 object#(0x434) () {
 					if (var000D == []) {
 						var0011 = true;
 					}
-					UI_add_answer(var0010);
+					add(var0010);
 				}
 				fallthrough;
 
@@ -36906,7 +36906,7 @@ void Func0434 object#(0x434) () {
 					if (var000D == []) {
 						var0011 = true;
 					}
-					UI_add_answer(var0010);
+					add(var0010);
 				}
 				fallthrough;
 
@@ -36934,7 +36934,7 @@ void Func0434 object#(0x434) () {
 					if (var000D == []) {
 						var0011 = true;
 					}
-					UI_add_answer(var0010);
+					add(var0010);
 				}
 				fallthrough;
 
@@ -37055,7 +37055,7 @@ void Func0435 object#(0x435) () {
 				} else {
 					say("\"A Monitorian! I hope this means that Monitor plans to retake the Fawn tower from those vile goblins.\" *\"I am Jorvin, Captain of the guard. How may I be of service?\"");
 				}
-				UI_add_answer("tower");
+				add("tower");
 			} else {
 				say("\"Thou art new here, ",
 				    var0000,
@@ -37067,20 +37067,20 @@ void Func0435 object#(0x435) () {
 			    var0002,
 			    "! 'Tis good to see thee again.\"");
 		}
-		UI_add_answer(["goblins", "storms", "Fellowship troublemakers", "Wand of Detainment"]);
+		add(["goblins", "storms", "Fellowship troublemakers", "Wand of Detainment"]);
 		if (gflags[0x015D] == true) {
-			UI_add_answer("Assassin");
+			add("Assassin");
 		}
 		if (gflags[0x0198] && (!gflags[0x0296])) {
-			UI_add_answer("strange hairbrush");
+			add("strange hairbrush");
 		}
 		if (gflags[0x019B] && (!gflags[0x029A])) {
-			UI_add_answer("skull");
+			add("skull");
 		}
 		if (gflags[0x019C] && (!gflags[0x029C])) {
-			UI_add_answer("plain shield");
+			add("plain shield");
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "tower":
 				if (gflags[0x003E] == true) {
@@ -37116,8 +37116,8 @@ void Func0435 object#(0x435) () {
 						say("\"The Monitorians had guard towers along the central roads between cities. The Pikemen were often the only thing that stood between the goblins and the travellers.\" *\"Lady Yelinda is very concerned now that those vile goblins have wrested control of the Fawn tower from the Pikemen. 'Tis a frightening notion, being caught between the goblins and the storms... with no hope of escape.\"");
 					}
 				}
-				UI_remove_answer("tower");
-				UI_add_answer(["Monitorians", "Pikemen", "Lady Yelinda"]);
+				remove("tower");
+				add(["Monitorians", "Pikemen", "Lady Yelinda"]);
 				fallthrough;
 
 			case "Monitorians":
@@ -37139,7 +37139,7 @@ void Func0435 object#(0x435) () {
 				} else {
 					say("\"The Monitorians come from a city dedicated to bravery. Their soldiers are called the Pikemen. Thou mayest know them by the tattoos on their faces.\"");
 				}
-				UI_remove_answer("Monitorians");
+				remove("Monitorians");
 				fallthrough;
 
 			case "Pikemen":
@@ -37164,9 +37164,9 @@ void Func0435 object#(0x435) () {
 					} else {
 						say("\"They are the finest warriors in the land. Though some feel that the tribute they asked was too much, now that they have failed to hold the tower.\"");
 					}
-					UI_add_answer("tribute");
+					add("tribute");
 				}
-				UI_remove_answer("Pikemen");
+				remove("Pikemen");
 				fallthrough;
 
 			case "tribute":
@@ -37175,13 +37175,13 @@ void Func0435 object#(0x435) () {
 				} else {
 					say("\"The Fawn tower Pikemen levied a toll for every person that travelled along this length of road.\" *\"The Pikemen not only protected the travellers, but also insured the upkeep of the tower and this portion of the road. I did not feel that the charge was unwarranted, although there are those in the city that disagree with me now that the tower hath fallen to the goblins.\"");
 				}
-				UI_remove_answer("tribute");
+				remove("tribute");
 				fallthrough;
 
 			case "Lady Yelinda":
 				say("\"Lady Yelinda is the ruler of Fawn, and is the most beautiful of all women within the city. If thou seekest an audience with her, thou must speak with the Chancellor.\"");
-				UI_remove_answer("Lady Yelinda");
-				UI_add_answer("Chancellor");
+				remove("Lady Yelinda");
+				add("Chancellor");
 				fallthrough;
 
 			case "Chancellor" (remove):
@@ -37190,93 +37190,93 @@ void Func0435 object#(0x435) () {
 					say("\"Thou canst most often find Zulith in the palace, acting as Lady Yelinda's secretary.\"");
 				} else {
 					say("\"Thou canst most often find Zulith either in the palace, acting as Lady Yelinda's envoy to the Great Captains, or in the Temple. He seems to be a fervent follower of Beauty.\"");
-					UI_add_answer(["Great Captains", "Temple"]);
+					add(["Great Captains", "Temple"]);
 				}
 				fallthrough;
 
 			case "Great Captains":
 				say("\"The Great Captains serve as counselors to Lady Yelinda. They deal with most trade matters, and oversee the disposition of the fleets. Thou canst find them near the docks most times.\"");
-				UI_remove_answer("Great Captains");
-				UI_add_answer("fleets");
+				remove("Great Captains");
+				add("fleets");
 				fallthrough;
 
 			case "fleets":
 				say("\"Until the storms began, Fawn's means of livelihood was fishing. Now our economy is all but ruined. The storms have destroyed all of our ships.\" *\"Our fishermen must fish from the docks. We have only enough fish to feed the city. We have none to trade to the other cities. Only Alyssand still finds a way to bring money into the city.\"");
-				UI_remove_answer("fleets");
-				UI_add_answer("Alyssand");
+				remove("fleets");
+				add("Alyssand");
 				fallthrough;
 
 			case "Alyssand":
 				say("\"Alyssand is the daughter of Delin the shopkeeper. She makes fishnet stockings that she exports to wealthy customers in Moonshade.\" *\"Ever since her betrothed disappeared, Alyssand hath taken to listening to the babble of The Fellowship followers. I hope she doth not go astray.\"");
-				UI_remove_answer("Alyssand");
-				UI_add_answer("betrothed");
+				remove("Alyssand");
+				add("betrothed");
 				fallthrough;
 
 			case "betrothed":
 				say("\"Alyssand's betrothed was a fisherman named Keth. He was without shelter during one of these freak storms. No one hath seen him since.\" *\"Alyssand took it well enough -- until a storm took away the engagement ring he had specially made for her in Moonshade. I suspect that she always hoped that he would come back. Now that the ring is gone, Alyssand hath had to face the truth that Keth might well be a tree now, for all we know.\"");
-				UI_remove_answer("betrothed");
+				remove("betrothed");
 				if (var0003 == true) {
-					UI_add_answer("engagement ring");
+					add("engagement ring");
 				}
 				fallthrough;
 
 			case "engagement ring":
 				say("\"'Tis the one, in truth! I would recognize it anywhere. Keth showed it to me when he did bring it back from Moonshade.\" *\"Alyssand will be thrilled, no doubt. Perhaps this will turn her mind from the false path she now follows.\" *\"Thou mayest ask for her at Delin's shop. He should know where she is.\"");
 				Func08A9();
-				UI_remove_answer("engagement ring");
+				remove("engagement ring");
 				fallthrough;
 
 			case "Temple":
 				say("\"The Temple is located beyond the palace, on the waterfront. 'Tis dedicated to Beauty, as is all of Fawn.\"");
-				UI_remove_answer("Temple");
+				remove("Temple");
 				fallthrough;
 
 			case "goblins":
 				if (gflags[0x014E] == false) {
 					if (gflags[0x003E] == true) {
 						say("\"We did defeat them handily with the help of the Monitorians. But now that they have organized under one leader and taken control of the tower, 'tis all we can do to hold them at bay.\"");
-						UI_add_answer("leader");
+						add("leader");
 					} else {
 						say("\"The Monitorians were our only hope of withstanding the new unity of the goblins. But with the tower taken, 'tis only a matter of time before Fawn is lost. With the fleets destroyed, we dare not hope to escape their cookpots.\"");
 					}
-					UI_add_answer(["unity", "cookpots"]);
+					add(["unity", "cookpots"]);
 				} else {
 					say("\"We had despaired of falling to their newfound unity. But we have hope again now that the tower hath been retaken.\"");
 				}
-				UI_add_answer("unity");
-				UI_remove_answer("goblins");
+				add("unity");
+				remove("goblins");
 				fallthrough;
 
 			case "leader":
 				say("\"A huge brute that calls himself Pomdirgun. Leastways I think that is it... hard to understand anything a goblin says.\" *\"He killed all the other goblin leaders and made himself the head chief. He is very dangerous. 'Tis almost as though he doth have a brain.\"");
-				UI_remove_answer("leader");
+				remove("leader");
 				fallthrough;
 
 			case "unity":
 				say("\"For these many years the goblins fought more amongst themselves than with us. Raided the towns a time or two, but nothing truly serious.\" *\"Now they are all following one crafty goblin. Always seems to outwit the soldiers sent to kill him.\"");
-				UI_remove_answer("unity");
+				remove("unity");
 				fallthrough;
 
 			case "cookpots":
 				say("\"Anyone knows that goblins devour people! Why soon before the storms began, they abducted the healer who was gathering herbs.\"");
-				UI_remove_answer("cookpots");
-				UI_add_answer("healer");
+				remove("cookpots");
+				add("healer");
 				fallthrough;
 
 			case "healer":
 				say("\"We took an armed band after them as quickly as possible, but all we found of him was his head... The rest was doubtless in the cookpot or the grinder. Delphynia doth do her best to take his place.\"");
-				UI_remove_answer("healer");
-				UI_add_answer("Delphynia");
+				remove("healer");
+				add("Delphynia");
 				fallthrough;
 
 			case "Delphynia":
 				say("\"She is the town herbalist, actually. She doth spend her time between her greenhouse and the healer's hall.\" *\"We tried to send word to Moonshade or Monitor for another healer, but no one was willing to come -- what with the storms and all.\"");
-				UI_remove_answer("Delphynia");
+				remove("Delphynia");
 				fallthrough;
 
 			case "storms":
 				say("\"We expect bad weather, being located on the water as we are. But these storms seem... well... evil somehow. Lightning that causes things to disappear. Not burnt to ashes, mind thee, completely gone. Lightning that takes something and leaves something else in its place.\" *\"Thou must find shelter quickly when thou dost think a storm is approaching.\"");
-				UI_remove_answer("storms");
+				remove("storms");
 				fallthrough;
 
 			case "Fellowship troublemakers" (remove):
@@ -37284,37 +37284,37 @@ void Func0435 object#(0x435) () {
 					say("\"Now, do not speak of Leon's followers in such a manner! We of Fawn have learned tolerance, thanks to the Lady's example.\"");
 				} else {
 					say("\"I see the guards are still spreading that gossip...\" *\"Before these strange storms started, a ship came into our port bearing no resemblance to any ship we knew. Those aboard her told us that they had voyaged from Old Sosaria. Though our seamen found this hard to believe, we accepted them.\" *\"Leon began preaching about some strange notion called The Fellowship right before the storms started. Kylista took this as a sign that the heavens were angry with us for allowing this foreign belief into the city. After seeking counsel with the Great Captains, Lady Yelinda regretfully banned the sailors and the passengers from the city.\"");
-					UI_add_answer("Kylista");
+					add("Kylista");
 				}
 				fallthrough;
 
 			case "Kylista":
 				say("\"Kylista is the Priestess of Beauty. 'Tis her duty to see to the spiritual well-being of the people of Fawn. Her task hath not been easy since the fleet was destroyed. Many people are disillusioned.\" *\"Our only comfort lies in the revelations of the Oracle.\"");
-				UI_remove_answer("Kylista");
-				UI_add_answer(["revelations", "Oracle"]);
+				remove("Kylista");
+				add(["revelations", "Oracle"]);
 				fallthrough;
 
 			case "revelations":
 				say("\"The revelations assure us that the heavens have not totally turned their eyes from Fawn.\"");
 				say("\"If thou dost visit the Temple whilst thou art here, I am sure that thou wilt be able to hear for thyself.\"");
-				UI_remove_answer("revelations");
+				remove("revelations");
 				fallthrough;
 
 			case "Oracle":
 				say("\"'Tis quite a marvel. Before the storms began, people came from all around to hear its revelations.\" *\"'Twas built by some mage from Moonshade for Lady Fawn. If thou wishest to know more, though, thou shouldst ask Kylista.\"");
-				UI_remove_answer("Oracle");
+				remove("Oracle");
 				fallthrough;
 
 			case "Wand of Detainment":
 				say("\"'Tis the only thing the guards have performed correctly. We make no secret of the fact that I possess the Wand of Detainment. I find that the knowledge that I can stop even the greatest brute, or the fastest thief, doth do much to deter those who would cause mischief in our city.\"");
-				UI_remove_answer("Wand of Detainment");
+				remove("Wand of Detainment");
 				fallthrough;
 
 			case "Assassin":
 				say("\"I arrived too late to stop the culprit, ",
 				    var0000,
 				    ". I am sorry. But everyone seems to agree that the person was not dressed as a citizen of Fawn. Some say that it was one of the sailors outside the city, but that may be too hasty a decision. I will look into it further. Thou hast my word.\"");
-				UI_remove_answer("Assassin");
+				remove("Assassin");
 				fallthrough;
 
 			case "strange hairbrush" (remove):
@@ -37447,7 +37447,7 @@ void Func0436 object#(0x436) () {
 		say("\"I am so grateful that thou hast come to visit me, ",
 		    var0002,
 		    "! Everyone else hath forgotten me. I am so lonely here...\"");
-		UI_add_answer(["plot", "Voldin", "lonely"]);
+		add(["plot", "Voldin", "lonely"]);
 	} else {
 		if (event == 0x0009) {
 			UI_run_schedule(0xFFCA);
@@ -37504,13 +37504,13 @@ void Func0436 object#(0x436) () {
 					    ".\"");
 				}
 			}
-			UI_add_answer(["goblins", "storms", "Oracle", "revelations", "bye"]);
+			add(["goblins", "storms", "Oracle", "revelations", "bye"]);
 			if ((gflags[0x0282] || gflags[0x009F]) && (!gflags[0x0294])) {
-				UI_add_answer("white breastplate");
+				add("white breastplate");
 			}
 		}
 	}
-	UI_add_answer("bye");
+	add("bye");
 	converse (0) {
 		case "plot" (remove):
 			say("\"I see now that Captain Voldin and his men did take advantage of me, through the deception called the Oracle.\"");
@@ -37548,13 +37548,13 @@ void Func0436 object#(0x436) () {
 
 		case "goblins" (remove):
 			say("\"The very antithesis of Beauty! Goblins are base savages with no appreciation of Beauty and no grasp of Beauty's truth.\"");
-			UI_add_answer("Beauty's truth");
+			add("Beauty's truth");
 			fallthrough;
 
 		case "Beauty's truth" (remove):
 			say("\"All things good possess an innate Beauty that attracts all living things.\"");
 			say("\"To goblins, who are vile, ugly monsters, Beauty is a lie. To Pomdirgun, Beauty is something to be exterminated, not cherished.\"");
-			UI_add_answer("Pomdirgun");
+			add("Pomdirgun");
 			fallthrough;
 
 		case "Pomdirgun" (remove):
@@ -37566,7 +37566,7 @@ void Func0436 object#(0x436) () {
 			say("\"Another sign that the heavens are displeased with our associations with false prophets!\"");
 			say("\"We allowed corruption to enter our city, to visit the very heart of Beauty. Some even encouraged its growth. Now we must pay for our transgressions.\"");
 			say("\"Once we have been brought low enough to see only Beauty, the storms will stop and Fawn will once again prosper. But while all traces of untrue beliefs linger, the punishment will remain.\"");
-			UI_add_answer("false prophets");
+			add("false prophets");
 			fallthrough;
 
 		case "false prophets" (remove):
@@ -37580,32 +37580,32 @@ void Func0436 object#(0x436) () {
 				UI_remove_npc_face1();
 				UI_set_conversation_slot(0x0000);
 			}
-			UI_add_answer(["Leon", "Fellowship"]);
+			add(["Leon", "Fellowship"]);
 			fallthrough;
 
 		case "Leon" (remove):
 			say("\"Leon seeks to divert unsuspecting people from Beauty's path. He is the one that hath brought the anger of the heavens down upon us!\"");
 			say("\"Lady Yelinda should have ordered him executed for the woes that he hath brought upon our city!\"");
-			UI_add_answer("Lady Yelinda");
+			add("Lady Yelinda");
 			fallthrough;
 
 		case "Lady Yelinda" (remove):
 			say("\"Lady Yelinda, honor to her, is the ruler of Fawn.\"");
 			say("\"I recommended that she have these foreign blasphemers killed -- let their blood wash away the evil they have wrought. But Lady Yelinda is a soft-hearted woman who doth not know the harshness of the heavens' anger.\"");
 			say("\"I fear that the Great Captains urged her to leniency in favor of their common ties with the sea.\"");
-			UI_add_answer("Great Captains");
+			add("Great Captains");
 			fallthrough;
 
 		case "Great Captains" (remove):
 			say("\"The Great Captains are advisors to Lady Yelinda. They ensure that Lady Yelinda is not overtaxed with the tedious daily problems of ruling the city.\"");
 			say("\"Joth and Garth allowed themselves to be swayed by feelings of kinship with these foreign sailors. Only Voldin recognized their true danger.\"");
-			UI_add_answer(["Joth", "Garth", "Voldin"]);
+			add(["Joth", "Garth", "Voldin"]);
 			fallthrough;
 
 		case "Joth" (remove):
 			say("\"Joth is a good man, with a fine sense of what needs to be done to keep the fleets in good order.\"");
 			say("\"He is not, I fear, a good advisor when it comes to political matters. In fact, Zulith would be better in that respect.\"");
-			UI_add_answer("Zulith");
+			add("Zulith");
 			fallthrough;
 
 		case "Zulith" (remove):
@@ -37655,7 +37655,7 @@ void Func0436 object#(0x436) () {
 		case "revelations":
 			say("\"The revelations are truths of heaven filtered through a mouth of stone!\"");
 			say("\"It is a pity that thou wilt not hear a revelation... I have decided to close the rituals to all outsiders. We cannot be too careful, after what happened with the false prophets.\"");
-			UI_remove_answer("revelations");
+			remove("revelations");
 			fallthrough;
 
 		case "white breastplate" (remove):
@@ -38005,43 +38005,43 @@ void Func0437 object#(0x437) () {
 			}
 		}
 		UI_set_item_flag(0xFFC9, 0x001C);
-		UI_add_answer(["Fawn", "Beauty", "goblins", "storms", "name"]);
-		UI_add_answer("bye");
+		add(["Fawn", "Beauty", "goblins", "storms", "name"]);
+		add("bye");
 		converse (0) {
 			case "goblins":
 				say("\"Oh, horrible, vile creatures! They have killed all the Pikemen that were guarding the road to our beautiful city.\"");
 				say("\"Whatever shall we do now?\"");
-				UI_remove_answer("goblins");
-				UI_add_answer("Pikemen");
+				remove("goblins");
+				add("Pikemen");
 				fallthrough;
 
 			case "Pikemen":
 				say("\"Wonderful people. They hail from Monitor. They keep the roads safe.\"");
-				UI_remove_answer("Pikemen");
-				UI_add_answer("Monitor");
+				remove("Pikemen");
+				add("Monitor");
 				fallthrough;
 
 			case "Monitor" (remove):
 				say("\"'Tis south of here. I do not associate with them. They are too warlike.\"");
 				if (gflags[0x0170] && (gflags[0x0172] && (!gflags[0x016E]))) {
 					say("\"Chancellor Zulith deals with them for me.\"");
-					UI_add_answer("Chancellor");
+					add("Chancellor");
 				} else {
 					say("\"The Great Captains deal with them for me.\"");
-					UI_add_answer("Great Captains");
+					add("Great Captains");
 				}
 				fallthrough;
 
 			case "Great Captains":
 				say("\"Yes, Joth, Garth, and Voldin. They are my most trusted advisors... Aside from the Chancellor, of course.\"");
 				say("\"They handle all the horrible little details of running the city. I would be lost without them, 'tis certain.\"");
-				UI_remove_answer("Great Captains");
-				UI_add_answer("Chancellor");
+				remove("Great Captains");
+				add("Chancellor");
 				fallthrough;
 
 			case "Chancellor":
 				say("\"Zulith is a dear little man. He absolutely dotes on me, I fear. He simply would not have a life if he were not looking after me. He keeps all the paperwork for me and schedules mine audiences. Quite a mouse of a man, though.\"");
-				UI_remove_answer("Chancellor");
+				remove("Chancellor");
 				fallthrough;
 
 			case "storms" (remove):
@@ -38052,86 +38052,86 @@ void Func0437 object#(0x437) () {
 				} else {
 					say("\"The Oracle says the storms are a result of permitting the heretics within the city gates.\"");
 					say("\"Odd that they did not stop after the heretics were banished from the city. I shall have to consult Kylista.\"");
-					UI_add_answer("heretics");
+					add("heretics");
 					if (!gflags[0x018A]) {
-						UI_add_answer("Oracle");
+						add("Oracle");
 					}
 				}
 				fallthrough;
 
 			case "heretics":
 				say("\"Those filthy sailors camped outside the city gates have no regard whatsoever for Beauty. They preach some ridiculous notion about brotherhood... or some such.\"");
-				UI_remove_answer("heretics");
-				UI_add_answer("sailors");
+				remove("heretics");
+				add("sailors");
 				fallthrough;
 
 			case "sailors":
 				say("\"They and their passengers arrived shortly before the storms began.\"");
-				UI_remove_answer("sailors");
-				UI_add_answer("passengers");
+				remove("sailors");
+				add("passengers");
 				fallthrough;
 
 			case "passengers":
 				say("\"There was a portly mage named Batlin and a lovely lady named Gwenno.\"");
-				UI_remove_answer("passengers");
-				UI_add_answer(["Batlin", "Gwenno"]);
+				remove("passengers");
+				add(["Batlin", "Gwenno"]);
 				fallthrough;
 
 			case "Batlin":
 				say("\"A disagreeable fellow. Travelled with some very rough sorts. He was seeking Daemon artifacts, I believe.\"");
-				UI_remove_answer("Batlin");
-				UI_add_answer("Daemon artifacts");
+				remove("Batlin");
+				add("Daemon artifacts");
 				fallthrough;
 
 			case "Daemon artifacts":
 				say("\"Thou mayest find them throughout the land. They are of little interest... not Beautiful at all.\"");
-				UI_remove_answer("Daemon artifacts");
+				remove("Daemon artifacts");
 				fallthrough;
 
 			case "Gwenno":
 				say("\"She was interested in folk tales, I believe. I am afraid I could not help her. My last bard was transformed into a fox during a storm and ran away.\"");
-				UI_remove_answer("Gwenno");
+				remove("Gwenno");
 				fallthrough;
 
 			case "Fawn" (remove):
 				say("\"Our city was named after the beautiful ruler who commissioned the Oracle.\"");
 				gflags[0x0189] = true;
 				if (gflags[0x0171] || (!gflags[0x0172])) {
-					UI_add_answer("Oracle");
+					add("Oracle");
 				}
 				fallthrough;
 
 			case "Oracle":
 				say("\"Thou hast never heard of the Oracle of Beauty?\" *\"Thou shouldst speak with Kylista at the temple.\"");
 				gflags[0x018A] = true;
-				UI_remove_answer("Oracle");
-				UI_add_answer("Kylista");
+				remove("Oracle");
+				add("Kylista");
 				fallthrough;
 
 			case "Kylista":
 				say("\"She is the most beautiful woman in town...\"");
 				say("\"aside from myself, of course.\"");
 				say("\"She is the Priestess of Beauty. Thou canst find her at the temple.\"");
-				UI_remove_answer("Kylista");
-				UI_add_answer("temple");
+				remove("Kylista");
+				add("temple");
 				fallthrough;
 
 			case "temple":
 				say("\"'Tis the largest building in the city, except for my palace.\"");
-				UI_remove_answer("temple");
+				remove("temple");
 				fallthrough;
 
 			case "Beauty":
 				say("\"We revere and protect all beautiful things here in Fawn. Everyone is dedicated to the truths of Beauty.\"");
-				UI_remove_answer("Beauty");
+				remove("Beauty");
 				if (gflags[0x0189] == false) {
-					UI_add_answer("Fawn");
+					add("Fawn");
 				}
 				fallthrough;
 
 			case "name":
 				say("\"Forgive me, I thought I had already introduced myself. I am Lady Yelinda.\"");
-				UI_remove_answer("name");
+				remove("name");
 				fallthrough;
 
 			case "bye":
@@ -38187,7 +38187,7 @@ void Func0438 object#(0x438) () {
 			if (gflags[0x003E] == true) {
 				say("\"At last, the values of The Fellowship have reached into the ranks of the Pikemen! I am honored.\"");
 				say("\"I am Leon, a speaker for The Fellowship and former farmer.\"");
-				UI_add_answer("Fellowship");
+				add("Fellowship");
 			} else {
 				say("\"I always have time for those who come seeking knowledge. Be welcome.\"");
 				say("\"I am Leon, a speaker for The Fellowship and former farmer.\"");
@@ -38198,28 +38198,28 @@ void Func0438 object#(0x438) () {
 			    var0002,
 			    ". How may I help thy quest for Unity?\"");
 		}
-		UI_add_answer(["goblins", "storms", "bye"]);
+		add(["goblins", "storms", "bye"]);
 		converse (0) {
 			case "Fellowship":
 				say("\"While the Virtues that Lord British expounded are all very well and good, they are nearly impossible for ordinary people to achieve.\"");
 				say("\"Simple people need a simple philosophy.\"");
 				say("\"The Triad of Inner Strength is the answer.\"");
-				UI_remove_answer("Fellowship");
+				remove("Fellowship");
 				gflags[0x015F] = true;
-				UI_add_answer("Triad of Inner Strength");
+				add("Triad of Inner Strength");
 				Func0965();
 				fallthrough;
 
 			case "Triad of Inner Strength" (remove):
 				say("\"The Triad of Inner Strength is based on three basic principles that all people can grasp. The first is Unity. The next is Trust, and the last is Worthiness.\"");
 				UI_push_answers();
-				UI_add_answer(["Unity", "Trust", "Worthiness"]);
+				add(["Unity", "Trust", "Worthiness"]);
 				fallthrough;
 
 			case "Unity":
 				say("\"Surely thou must know the importance of learning to cooperate and work together.\"");
 				say("\"If we seek to live in harmony with one another, there is nothing we cannot accomplish. One rock doth not make a wall. But many rocks can -- with a common purpose.\"");
-				UI_remove_answer("Unity");
+				remove("Unity");
 				gflags[0x0162] = true;
 				if ((gflags[0x0162] == true) && ((gflags[0x0161] == true) && ((gflags[0x0163] == true) && (gflags[0x0160] == true)))) {
 					UI_pop_answers();
@@ -38229,7 +38229,7 @@ void Func0438 object#(0x438) () {
 			case "Trust":
 				say("\"The main stumbling block to Unity lies in a lack of Trust.\"");
 				say("\"If thou dost trust thy brother, thou wouldst not live in fear. Without fear, our lives are happier and Unity may grow and thrive.\"");
-				UI_remove_answer("Trust");
+				remove("Trust");
 				gflags[0x0161] = true;
 				if ((gflags[0x0162] == true) && ((gflags[0x0161] == true) && ((gflags[0x0163] == true) && (gflags[0x0160] == true)))) {
 					UI_pop_answers();
@@ -38242,8 +38242,8 @@ void Func0438 object#(0x438) () {
 				say("\"If everyone strives to be worthy of that which they seek, such injustices would be few.\"");
 				say("\"Let every person be rewarded according to their merits and Trust and Unity will follow naturally.\"");
 				say("\"Following the Triad of Inner Strength allows one to become attuned to the Inner Voice.\"");
-				UI_remove_answer("Worthiness");
-				UI_add_answer("Inner Voice");
+				remove("Worthiness");
+				add("Inner Voice");
 				gflags[0x0163] = true;
 				if ((gflags[0x0162] == true) && ((gflags[0x0161] == true) && ((gflags[0x0163] == true) && (gflags[0x0160] == true)))) {
 					UI_pop_answers();
@@ -38253,7 +38253,7 @@ void Func0438 object#(0x438) () {
 			case "Inner Voice":
 				say("\"The Inner Voice is within all living beings. It flows from pure instinct and contains all the wisdom and irreproachable logic that anyone would ever need to live peacefully and happily.\"");
 				say("\"If everyone learned to listen to their Inner Voice, I could return to Britannia and farm contentedly for the rest of my life.\"");
-				UI_remove_answer("Inner Voice");
+				remove("Inner Voice");
 				gflags[0x0160] = true;
 				if ((gflags[0x0162] == true) && ((gflags[0x0161] == true) && ((gflags[0x0163] == true) && (gflags[0x0160] == true)))) {
 					UI_pop_answers();
@@ -38290,9 +38290,9 @@ void Func0438 object#(0x438) () {
 						say("\"Obviously, she fears the truths of The Fellowship as much as she fears Pomdirgun.\"");
 					}
 				}
-				UI_add_answer(["Kylista", "Pomdirgun"]);
+				add(["Kylista", "Pomdirgun"]);
 				if (gflags[0x015F] == false) {
-					UI_add_answer("Fellowship");
+					add("Fellowship");
 				}
 				fallthrough;
 
@@ -38300,69 +38300,69 @@ void Func0438 object#(0x438) () {
 				say("\"She is the Priestess of Beauty -- the cult that controls Fawn.\"");
 				say("\"Kylista presides over the Oracle, which never varies in supporting her views...\"");
 				say("\"One might suspect that Kylista uses the Oracle to increase her own personal power. But I have no idea how such a thing would be accomplished.\"");
-				UI_remove_answer("Kylista");
-				UI_add_answer("Oracle");
+				remove("Kylista");
+				add("Oracle");
 				fallthrough;
 
 			case "Oracle":
 				say("\"It was commissioned by Lady Fawn herself, and built by the Mages of Britannia.\"");
 				say("\"'Twas to be an instrument of truth... I cannot say that that is still so.\"");
 				say("\"It gives revelations throughout the day.\"");
-				UI_remove_answer("Oracle");
-				UI_add_answer("revelations");
+				remove("Oracle");
+				add("revelations");
 				fallthrough;
 
 			case "revelations":
 				say("\"For the most part, they are simple platitudes that further ingrain their reverence of Beauty.\"");
 				say("\"They do nothing to help the people improve their lives.\"");
 				say("\"At other times -- like when the sailors and I were banished from the city -- they reflect the wishes of Kylista and the Great Captains.\"");
-				UI_remove_answer("revelations");
-				UI_add_answer("Great Captains");
+				remove("revelations");
+				add("Great Captains");
 				fallthrough;
 
 			case "Great Captains":
 				say("\"They are the counselors of Lady Yelinda, by title. They control the fishing fleets... or did before the storms began.\"");
 				say("\"In reality, they control all of Fawn. It is painfully obvious that Lady Yelinda is merely a figurehead to be manipulated by Zulith at the behest of Garth, Joth, and Voldin.\"");
-				UI_remove_answer("Great Captains");
-				UI_add_answer(["Zulith", "Garth", "Joth", "Voldin"]);
+				remove("Great Captains");
+				add(["Zulith", "Garth", "Joth", "Voldin"]);
 				fallthrough;
 
 			case "Zulith":
 				say("\"'Tis easy enough to overlook him, unless he wants thy notice. He is a simpering little man who styles himself as the consort of Lady Yelinda.\"");
 				say("\"Sadly, she pays no more heed of him than her mirror. Her interests, I think, lie more in line with Jorvin, Captain of the Guard.\"");
 				say("\"Zulith is a puppet for Kylista and the Great Captains. But beware of him, friend, for he can be vicious if slighted.\"");
-				UI_remove_answer("Zulith");
+				remove("Zulith");
 				fallthrough;
 
 			case "Garth":
 				say("\"Garth is the most junior of the three Great Captains. His interests seem to lie mostly in impressing the ladies of the city.\"");
 				say("\"I do not think he dares go against the wishes of the other two Captains.\"");
-				UI_remove_answer("Garth");
+				remove("Garth");
 				fallthrough;
 
 			case "Joth":
 				say("\"Joth is the only one of the Great Captains that seems to have any real interest in the fleets. He would certainly be more at home on the deck of a ship than here on land.\"");
-				UI_remove_answer("Joth");
+				remove("Joth");
 				fallthrough;
 
 			case "Voldin":
 				say("\"Voldin is perhaps the person who would most benefit from practicing Worthiness.\"");
 				say("\"I have heard that he is diverting funds from the fleets for his own gain. But who can say for sure?\"");
 				say("\"It is his heavy hand that holds the reins of the city. Thou shouldst be careful around him. He is a violent man.\"");
-				UI_remove_answer("Voldin");
+				remove("Voldin");
 				fallthrough;
 
 			case "Pomdirgun":
 				say("\"He hath but lately declared himself chief of all goblins.\"");
 				say("\"Where once they could be discouraged by the mere presence of armed resistance, they now are bold and organized. They no longer flee, but stay and fight.\"");
-				UI_remove_answer("Pomdirgun");
+				remove("Pomdirgun");
 				fallthrough;
 
 			case "storms":
 				say("\"The storms at sea cannot compare to these unnatural occurrences. Their very existence says that we are in a land so far from the natural order of things that even the skies lash out at us.\"");
 				say("\"Batlin was right. We cannot hope to survive if Unity is not brought to this place.\"");
-				UI_remove_answer("storms");
-				UI_add_answer("Batlin");
+				remove("storms");
+				add("Batlin");
 				fallthrough;
 
 			case "Batlin":
@@ -38370,18 +38370,18 @@ void Func0438 object#(0x438) () {
 				var0006 = Func0955();
 				if (var0006) {
 					say("\"What canst thou tell us of home? What news of his noble cause?\"");
-					UI_add_answer(["All Is Well.", "It Hath Been Disbanded."]);
+					add(["All Is Well.", "It Hath Been Disbanded."]);
 				} else {
 					say("\"What a wondrous man of insight he is!\"");
 					say("\"Without him giving voice to the Triad of Inner Strength, we would all be doomed to failure... failure to live up to Lord British's high standards, or realize the full potential of every one of us.\"");
 					say("\"'Tis a pity that thou didst miss him. He hath gone inland to spread word of The Fellowship.\"");
 				}
-				UI_remove_answer("Batlin");
+				remove("Batlin");
 				fallthrough;
 
 			case "All Is Well.":
 				say("\"Marvelous! Soon thou shalt see, everyone shall embrace the Triad of Inner Strength. The storms shall end and we shall live in peace and happiness all our days.\"");
-				UI_remove_answer("All Is Well.");
+				remove("All Is Well.");
 				fallthrough;
 
 			case "It Hath Been Disbanded.":
@@ -38446,22 +38446,22 @@ void Func0439 object#(0x439) () {
 			say("\"Returned again?\"");
 		}
 		if (gflags[0x015D] == true) {
-			UI_add_answer("assassin");
+			add("assassin");
 		}
-		UI_add_answer(["name", "job", "goblins", "storms"]);
+		add(["name", "job", "goblins", "storms"]);
 		if (gflags[0x0004] == true) {
-			UI_add_answer("Iolo the Mad");
+			add("Iolo the Mad");
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "name":
 				say("\"Second Mate Kalen, to ye.\"");
-				UI_remove_answer("name");
+				remove("name");
 				fallthrough;
 
 			case "job":
 				say("\"I'm a seafarer. And I do whate'er the Cap'n wants done.\"");
-				UI_remove_answer("job");
+				remove("job");
 				fallthrough;
 
 			case "goblins" (remove):
@@ -38627,14 +38627,14 @@ void Func043A object#(0x43A) () {
 			if (gflags[0x003E] == true) {
 				if (var0003 == true) {
 					say("\"By my sore eyes! 'Tis a comely wench wit' a tattoo... like any good sailor! Me name's Olon, and I'm a fisherman by trade.\"");
-					UI_add_answer("tattoo");
+					add("tattoo");
 				} else {
 					say("\"I haven't been out of this 'ere tavern all day. Find someone else ta put the blame on, Pikeman! Me name's Olon, and I'm a fisherman by trade.\"");
-					UI_add_answer("Pikeman");
+					add("Pikeman");
 				}
 			} else {
 				say("\"If it's a word or three thou art wantin' of me, I do me best talkin' wit' a bottle of Fawn ale! Me name's Olon, and I'm a fisherman by trade.\"");
-				UI_add_answer("Fawn ale");
+				add("Fawn ale");
 			}
 			UI_set_item_flag(0xFFC6, 0x001C);
 		} else {
@@ -38642,22 +38642,22 @@ void Func043A object#(0x43A) () {
 			if (gflags[0x003E] == true) {
 				if (var0003 == true) {
 					say("\"Come lift a glass wit' me, lass. I do enjoy the company of a tattooed wench!\"");
-					UI_add_answer("tattoo");
+					add("tattoo");
 				} else {
 					say("\"Come lift a glass wit' me, lad. Tell me what a brave Pikeman like ye have been a doin'.\"");
-					UI_add_answer("Pikeman");
+					add("Pikeman");
 				}
 			}
 		}
-		UI_add_answer(["goblins", "bye"]);
+		add(["goblins", "bye"]);
 		if (gflags[0x0164] == false) {
-			UI_add_answer("storms");
+			add("storms");
 		}
 		if (gflags[0x0191] && (!gflags[0x028C])) {
-			UI_add_answer("pinecone");
+			add("pinecone");
 		}
 		if (gflags[0x0199] && (!gflags[0x0298])) {
-			UI_add_answer("dead cat");
+			add("dead cat");
 		}
 		converse (0) {
 			case "tattoo":
@@ -38669,21 +38669,21 @@ void Func043A object#(0x43A) () {
 				}
 				if (var0006) {
 					say("\"Join me over a bottle of Fawn's finest ale and we can swap tales. I'd like ta know how a beauty like thee came away with a tattoo.\"");
-					UI_add_answer("tales");
+					add("tales");
 				}
-				UI_remove_answer("tattoo");
+				remove("tattoo");
 				fallthrough;
 
 			case "tales":
 				say("\"Don't be hasty! There's plenty of time for that. Thou still hast not told me how a comely piece of work like unto thee did find herself with a tattoo.\"");
-				UI_remove_answer("tales");
-				UI_add_answer(["I don't remember.", "I was tricked.", "I am Monitor's Champion."]);
+				remove("tales");
+				add(["I don't remember.", "I was tricked.", "I am Monitor's Champion."]);
 				fallthrough;
 
 			case "I don't remember.":
 				say("\"Ah! I can understand right well, that I can. I've lost a day or two meself. Come ta think of it, that's how I ended up with me first tattoo... That was on that voyage when we found that pecul'ar island of cats.\"");
-				UI_remove_answer(["I don't remember.", "I was tricked.", "I am Monitor's Champion."]);
-				UI_add_answer("island of cats");
+				remove(["I don't remember.", "I was tricked.", "I am Monitor's Champion."]);
+				add("island of cats");
 				fallthrough;
 
 			case "island of cats":
@@ -38715,8 +38715,8 @@ void Func043A object#(0x43A) () {
 					}
 				}
 				say("\"The whole island is crawling with glowin' cats. Don't know how they arrived there, nor how they live in such a forsaken spot. But I've heard it said that they live there guarding some fantastical cat treasure.\" ~\"This be little Delphynia's favorite tale...\"");
-				UI_remove_answer("island of cats");
-				UI_add_answer("Delphynia");
+				remove("island of cats");
+				add("Delphynia");
 				fallthrough;
 
 			case "Delphynia":
@@ -38755,9 +38755,9 @@ void Func043A object#(0x43A) () {
 				}
 				say("\"Wouldst thou care to spend a while longer listenin' to another story?\"");
 				if (Func0955() == true) {
-					UI_add_answer("story");
+					add("story");
 				}
-				UI_remove_answer("Delphynia");
+				remove("Delphynia");
 				fallthrough;
 
 			case "story":
@@ -38766,8 +38766,8 @@ void Func043A object#(0x43A) () {
 				} else {
 					say("\"Ah, I know just the one for a bold warrior as thyself! A tale ta stir the blood, that's for certain... the King of the White Dragon!\"");
 				}
-				UI_remove_answer("story");
-				UI_add_answer("King of the White Dragon");
+				remove("story");
+				add("King of the White Dragon");
 				fallthrough;
 
 			case "I was tricked.":
@@ -38784,21 +38784,21 @@ void Func043A object#(0x43A) () {
 					UI_set_conversation_slot(0x0001);
 					say("\"That's all thou ever dost, Olon -- talk.\"");
 					UI_set_conversation_slot(0x0000);
-					UI_add_answer(["Temple", "Oracle"]);
+					add(["Temple", "Oracle"]);
 					UI_remove_npc_face1();
 				}
-				UI_remove_answer(["I don't remember.", "I was tricked.", "I am Monitor's Champion."]);
-				UI_add_answer("King of the White Dragon");
+				remove(["I don't remember.", "I was tricked.", "I am Monitor's Champion."]);
+				add("King of the White Dragon");
 				fallthrough;
 
 			case "Temple":
 				say("\"It sits crouching in the shadow of the palace. But 'tis what controls the palace, if'n thou knowest what I mean.\"");
-				UI_remove_answer("Temple");
+				remove("Temple");
 				fallthrough;
 
 			case "Oracle":
 				say("\"I hear tell it was built by some important mage, in the days before our ancestors left Sosaria. Supposed ta be an instrument of truth. But, seein' that lot, I wonder whose truth it tells.\"");
-				UI_remove_answer("Oracle");
+				remove("Oracle");
 				fallthrough;
 
 			case "King of the White Dragon":
@@ -38814,7 +38814,7 @@ void Func043A object#(0x43A) () {
 						} else {
 							say("\"I was right! Thou art a sturdy wench! I'll tell thee a fine love story next. Now where was I?\"");
 						}
-						UI_add_answer("love story");
+						add("love story");
 						UI_remove_npc_face1();
 					} else {
 						say("\"I'll not stay here and listen ta this again! Milord, I see that thou art armed. If he doth offend thee, run him through. I'll make no complaint.\" *\"If thou hast need of me, I shall be in back.\"");
@@ -38825,7 +38825,7 @@ void Func043A object#(0x43A) () {
 						} else {
 							say("\"I was right! Thou art a brave lad! I'll tell thee a fine love story next. Now where was I?\"");
 						}
-						UI_add_answer("love story");
+						add("love story");
 						UI_remove_npc_face1();
 					}
 				}
@@ -38833,7 +38833,7 @@ void Func043A object#(0x43A) () {
 				say("\"Somethin' snapped in that old man's head when he saw that he could never control the land. So the King planned a way for him ta have control over everything at last. He summoned all his folk for a big party, and locked them inta the castle. Then, one by one, he murdered them all -- down ta the last babe.\"");
 				say("\"And then, as dawn broke, he stood on the tower all bloody and called ta the goblins that the King of the White Dragon had saved his people from their stewpots.\"");
 				say("\"They say he lives there still, feeding off any who pass by. One thing's certain, the goblins don't go near that place to this very day.\"");
-				UI_remove_answer("King of the White Dragon");
+				remove("King of the White Dragon");
 				fallthrough;
 
 			case "love story":
@@ -38851,7 +38851,7 @@ void Func043A object#(0x43A) () {
 					say("\"Thou wouldst style thyself a bard now? Perhaps I should bow.\"");
 					UI_set_conversation_slot(0x0000);
 					say("\"Do that, and quiet! Thou hast interrupted all my tales so far. 'Tis rude.\"");
-					UI_add_answer("Alyssand");
+					add("Alyssand");
 					UI_remove_npc_face1();
 				}
 				say("\"Back around the time Fawn was founded, many of our folk took it upon themselves ta explore the waterways. More than one ship returned with tales of a glittering ice dragon slowly making its way southward, calling pitiful-like.\"");
@@ -38863,7 +38863,7 @@ void Func043A object#(0x43A) () {
 					UI_remove_npc_face1();
 					UI_set_conversation_slot(0x0000);
 				}
-				UI_remove_answer("love story");
+				remove("love story");
 				fallthrough;
 
 			case "Alyssand":
@@ -38900,10 +38900,10 @@ void Func043A object#(0x43A) () {
 					UI_remove_npc_face1();
 					UI_set_conversation_slot(0x0000);
 				}
-				UI_remove_answer("Alyssand");
-				UI_add_answer("island of cats");
+				remove("Alyssand");
+				add("island of cats");
 				if (var0004 == true) {
-					UI_add_answer("engagement ring");
+					add("engagement ring");
 				}
 				fallthrough;
 
@@ -38916,7 +38916,7 @@ void Func043A object#(0x43A) () {
 					UI_set_conversation_slot(0x0000);
 				}
 				Func08A9();
-				UI_remove_answer("engagement ring");
+				remove("engagement ring");
 				fallthrough;
 
 			case "I am Monitor's Champion.":
@@ -38928,20 +38928,20 @@ void Func043A object#(0x43A) () {
 					UI_set_conversation_slot(0x0000);
 				}
 				say("\"I think that thou wouldst benefit from the wisdom of an honest tradesman. Perhaps it would divert thy mind from a foolish girl's dreams.\"");
-				UI_remove_answer(["I don't remember.", "I was tricked.", "I am Monitor's Champion."]);
-				UI_add_answer("wisdom");
+				remove(["I don't remember.", "I was tricked.", "I am Monitor's Champion."]);
+				add("wisdom");
 				fallthrough;
 
 			case "wisdom":
 				say("\"That woman who travelled with the Fellowship sailors said that the greatest wisdom comes from those of us what works for our living. Smart lady. She was willin' ta listen ta what I have to say.\"");
-				UI_remove_answer("wisdom");
-				UI_add_answer(["woman", "Fellowship sailors"]);
+				remove("wisdom");
+				add(["woman", "Fellowship sailors"]);
 				fallthrough;
 
 			case "woman":
 				say("\"A red-haired beauty by the name of Gwenno. I told her about the island of cats, the King of the White Dragon. An' I told her a love story. I remember that -- she laughed and bought another round before she left.\"");
-				UI_remove_answer("woman");
-				UI_add_answer(["island of cats", "King of the White Dragon", "love story"]);
+				remove("woman");
+				add(["island of cats", "King of the White Dragon", "love story"]);
 				fallthrough;
 
 			case "Fellowship sailors" (remove):
@@ -38955,19 +38955,19 @@ void Func043A object#(0x43A) () {
 						UI_remove_npc_face1();
 						UI_set_conversation_slot(0x0000);
 					}
-					UI_add_answer(["Temple", "Oracle", "Kylista"]);
+					add(["Temple", "Oracle", "Kylista"]);
 				}
 				fallthrough;
 
 			case "Kylista":
 				say("\"Kylista is the priestess of Beauty. She's wondrous fair of face, but her heart's as cold as the sea is deep. Kylista cares only for those who bow and scrape ta her. She doth have no use for those what can't make her more important.\"");
-				UI_remove_answer("Kylista");
-				UI_add_answer("Beauty");
+				remove("Kylista");
+				add("Beauty");
 				fallthrough;
 
 			case "Beauty":
 				say("\"'Tis what everyone of this town is dedicated to. Everyone but those tryin' ta increase their power or wealth, that is...\" *\"Me sire told me that, once upon a time, Fawn was built in honor of love. We've come a far cry from that, I'd say.\"");
-				UI_remove_answer("Beauty");
+				remove("Beauty");
 				fallthrough;
 
 			case "Pikeman":
@@ -38977,8 +38977,8 @@ void Func043A object#(0x43A) () {
 				} else {
 					say("\"Thou dost not seem a bad sort of fellow. I'd be lookin' for a bit of drink and company, too, if I wert thou.\" *\"I doubt that it will be long before thou and thy companions lay siege ta those vile goblins in the tower.\" *\"Come lift a few with me, and I'll tell a few yarns ta take thy mind off thy troubles.\"");
 				}
-				UI_remove_answer("Pikeman");
-				UI_add_answer("yarns");
+				remove("Pikeman");
+				add("yarns");
 				fallthrough;
 
 			case "yarns":
@@ -38992,8 +38992,8 @@ void Func043A object#(0x43A) () {
 				} else {
 					say("\"I'd not be in thy shoes, good Pikeman. Retaking that tower will be as gruesome as the King of the White Dragon's castle.\"");
 				}
-				UI_remove_answer("yarns");
-				UI_add_answer("King of the White Dragon");
+				remove("yarns");
+				add("King of the White Dragon");
 				fallthrough;
 
 			case "King of the White Dragon":
@@ -39021,8 +39021,8 @@ void Func043A object#(0x43A) () {
 						UI_set_conversation_slot(0x0000);
 					}
 				}
-				UI_remove_answer("King of the White Dragon");
-				UI_add_answer(["island of cats", "love story"]);
+				remove("King of the White Dragon");
+				add(["island of cats", "love story"]);
 				fallthrough;
 
 			case "island of cats":
@@ -39036,8 +39036,8 @@ void Func043A object#(0x43A) () {
 				}
 				say("\"The whole island is crawling with cats. Don't know how they arrived there, nor how they live in such a forsaken spot. But I've heard it said that they live there guarding some fantastical cat treasure.\"");
 				say("\"This be Delphynia's favorite tale.\"");
-				UI_remove_answer("island of cats");
-				UI_add_answer("Delphynia");
+				remove("island of cats");
+				add("Delphynia");
 				fallthrough;
 
 			case "Delphynia":
@@ -39063,7 +39063,7 @@ void Func043A object#(0x43A) () {
 					UI_remove_npc_face1();
 					UI_set_conversation_slot(0x0000);
 				}
-				UI_remove_answer("Delphynia");
+				remove("Delphynia");
 				fallthrough;
 
 			case "love story":
@@ -39081,7 +39081,7 @@ void Func043A object#(0x43A) () {
 					say("\"Perhaps I should bow.\"");
 					UI_set_conversation_slot(0x0000);
 					say("\"Do that, and quiet! Thou art rude to interrupt.\"");
-					UI_add_answer("Alyssand");
+					add("Alyssand");
 					UI_remove_npc_face1();
 				}
 				say("\"Back around the time Fawn was founded, many of our folk took it upon themselves ta explore the waterways. More than one ship returned with tales of a glittering ice dragon slowly making its way southward, calling pitiful-like.\"");
@@ -39093,8 +39093,8 @@ void Func043A object#(0x43A) () {
 					UI_remove_npc_face1();
 					UI_set_conversation_slot(0x0000);
 				}
-				UI_remove_answer("love story");
-				UI_add_answer("Alyssand");
+				remove("love story");
+				add("Alyssand");
 				fallthrough;
 
 			case "Alyssand":
@@ -39130,9 +39130,9 @@ void Func043A object#(0x43A) () {
 					say("\"Goes ta show what thou knowest!\"");
 					UI_remove_npc_face1();
 				}
-				UI_remove_answer("Alyssand");
+				remove("Alyssand");
 				if (var0004 == true) {
-					UI_add_answer("engagement ring");
+					add("engagement ring");
 				}
 				fallthrough;
 
@@ -39144,7 +39144,7 @@ void Func043A object#(0x43A) () {
 					UI_remove_npc_face1();
 					UI_set_conversation_slot(0x0000);
 				}
-				UI_remove_answer("engagement ring");
+				remove("engagement ring");
 				fallthrough;
 
 			case "Fawn ale":
@@ -39153,7 +39153,7 @@ void Func043A object#(0x43A) () {
 					if (var0001 == true) {
 						UI_show_npc_face1(0xFFCC, 0x0000);
 						say("\"I'd advise against it, lady. There aren't many outside Fawn that care for its taste, I've found. I only export a bit ta Monitor now.\"");
-						UI_add_answer("Monitor");
+						add("Monitor");
 						UI_remove_npc_face1();
 						UI_set_conversation_slot(0x0000);
 					}
@@ -39163,7 +39163,7 @@ void Func043A object#(0x43A) () {
 					if (var0001 == true) {
 						UI_show_npc_face1(0xFFCC, 0x0000);
 						say("\"Be careful, Olon. There aren't many outside Fawn that care for its taste. I only export a bit ta Monitor now.\"");
-						UI_add_answer("Monitor");
+						add("Monitor");
 						UI_remove_npc_face1();
 						UI_set_conversation_slot(0x0000);
 					}
@@ -39204,31 +39204,31 @@ void Func043A object#(0x43A) () {
 					UI_set_schedule_type(0xFFC6, 0x001A);
 					abort;
 				}
-				UI_remove_answer("Fawn ale");
-				UI_add_answer("stories");
+				remove("Fawn ale");
+				add("stories");
 				fallthrough;
 
 			case "Monitor":
 				say("\"If thou shouldst want some while thou art in Monitor, Jendon sends it ta Simon. It doth not disappear very fast, but he orders a new batch every few months.\"");
-				UI_remove_answer("Monitor");
-				UI_add_answer("Simon");
+				remove("Monitor");
+				add("Simon");
 				fallthrough;
 
 			case "Simon":
 				say("\"He is the innkeeper in Monitor. If thou hast the opportunity ta stay there, send him regards from Olon in Fawn... a fellow Fawn ale drinker.\"");
-				UI_remove_answer("Simon");
+				remove("Simon");
 				fallthrough;
 
 			case "stories":
 				say("\"I know some fine ones -- scary, sentimental, or jus' plain odd. I can tell thee about the King of the White Dragon. Or I can tell thee about the island of cats. Or I can thee a love story.\"");
-				UI_remove_answer("stories");
-				UI_add_answer(["King of the White Dragon", "island of cats", "love story"]);
+				remove("stories");
+				add(["King of the White Dragon", "island of cats", "love story"]);
 				fallthrough;
 
 			case "goblins":
 				say("\"Fierce little monsters, the goblins are. Not long in brains, but hard ta handle in a fight. Pomdirgun sends them at us in waves until we are all so tired that we can hardly stand and fight. But still, I'd rather deal with goblins than Gwani.\"");
-				UI_remove_answer("goblins");
-				UI_add_answer(["Pomdirgun", "Gwani"]);
+				remove("goblins");
+				add(["Pomdirgun", "Gwani"]);
 				fallthrough;
 
 			case "Pomdirgun":
@@ -39240,7 +39240,7 @@ void Func043A object#(0x43A) () {
 					say("\"An' they'll not eat thy tongue, either... 'Tis too tough from overuse!\"");
 					UI_remove_npc_face1();
 				}
-				UI_remove_answer("Pomdirgun");
+				remove("Pomdirgun");
 				fallthrough;
 
 			case "Gwani":
@@ -39256,7 +39256,7 @@ void Func043A object#(0x43A) () {
 					UI_set_conversation_slot(0x0000);
 				}
 				say("\"'Tis true, upon my sire's grave I swear it! They'll eat their own -- as well as outsiders!\" *\"If thou dost travel inta the northern wastes, thou art risking ending thy life in the cookpot of a fur-covered goblin!\"");
-				UI_remove_answer("Gwani");
+				remove("Gwani");
 				fallthrough;
 
 			case "storms":
@@ -39308,7 +39308,7 @@ void Func043A object#(0x43A) () {
 					if (Func0955() == true) {
 						say("\"Oh, well... Another time, perhaps.\"");
 					} else {
-						UI_add_answer("island of cats");
+						add("island of cats");
 					}
 				}
 				fallthrough;
@@ -39512,28 +39512,28 @@ void Func043B object#(0x43B) () {
 				}
 			}
 			if (!gflags[0x0004]) {
-				UI_add_answer(["Britannia", "Fawn"]);
+				add(["Britannia", "Fawn"]);
 			} else {
-				UI_add_answer(["Where is everyone?", "What happened?"]);
+				add(["Where is everyone?", "What happened?"]);
 			}
 			if ((Func097D(0xFE9B, 0x0001, 0x031D, 0x001B, 0x0000) && (!gflags[0x01A7])) && (!gflags[0x0004])) {
-				UI_add_answer("letter");
+				add("letter");
 			}
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "Where is everyone?" (remove):
 				say("\"All dead! Hast thou not seen their bodies heaped about the desolate buildings?\"");
 				say("\"I do not remember it clearly, for my sanity was lost when I found Delphynia's body.\"");
 				say("\"Lady Yelinda was also spared, but she hath gone into the swamps of Gorlab. I should have gone after her, but I did not. I alone remain in Fawn.\"");
-				UI_add_answer(["Delphynia", "Lady Yelinda"]);
+				add(["Delphynia", "Lady Yelinda"]);
 				fallthrough;
 
 			case "What happened?" (remove):
 				say("\"What fell companion didst thou harbor, ",
 				    var0000,
 				    "? The Bard Iolo did come here, and he hath turned Fawn into a mockery...\"");
-				UI_add_answer(["Iolo", "mockery"]);
+				add(["Iolo", "mockery"]);
 				fallthrough;
 
 			case "Iolo" (remove):
@@ -39551,8 +39551,8 @@ void Func043B object#(0x43B) () {
 			case "Britannia":
 				say("\"Our ship was hired by Batlin to transport scholars to explore a new land and spread word of The Fellowship.\"");
 				say("\"Now, even if we wanted to return without Batlin, we cannot venture onto the sea for fear of these terrible storms.\"");
-				UI_remove_answer("Britannia");
-				UI_add_answer(["Batlin", "storms"]);
+				remove("Britannia");
+				add(["Batlin", "storms"]);
 				fallthrough;
 
 			case "Batlin":
@@ -39562,16 +39562,16 @@ void Func043B object#(0x43B) () {
 				if (var0015 != 0xFE9C) {
 					UI_set_conversation_slot(0x0000);
 				}
-				UI_remove_answer("Batlin");
-				UI_add_answer("companions");
+				remove("Batlin");
+				add("companions");
 				fallthrough;
 
 			case "companions":
 				say("\"Batlin bade Leon stay and preach to the populace of Fawn and left the ship with three companions: Palos, Brunt and Deadeye.\"");
 				say("\"We have not seen them since. Although they promised to return soon.\"");
-				UI_remove_answer("companions");
+				remove("companions");
 				UI_push_answers();
-				UI_add_answer(["Leon", "Palos", "Brunt", "Deadeye", "change subject"]);
+				add(["Leon", "Palos", "Brunt", "Deadeye", "change subject"]);
 				fallthrough;
 
 			case "change subject":
@@ -39583,20 +39583,20 @@ void Func043B object#(0x43B) () {
 				say("\"Leon was especially chosen by Batlin to come and bring the hope of The Fellowship to this land.\"");
 				say("\"He hath been the only thing that hath kept us all sane since we have been stranded here.\"");
 				say("\"I strive to emulate him, in mine own humble way.\"");
-				UI_remove_answer("Leon");
-				UI_add_answer("emulate");
+				remove("Leon");
+				add("emulate");
 				fallthrough;
 
 			case "emulate":
 				say("\"Leon hath shown me that, by speaking well, people may see beyond my deformity and respect me. I cannot change the way I look, but I can change my speech.\"");
 				say("\"And, as Leon sows the seeds of The Fellowship, I sow seeds in the soil. Gardening distracts my thoughts from being trapped ashore.\"");
-				UI_remove_answer("emulate");
+				remove("emulate");
 				fallthrough;
 
 			case "Palos" (remove):
 				say("\"I do not know much about him. Most of the time he remained below or went about heavily cloaked. I do not think that he was of the race of Men...\"");
 				say("\"We were all very thankful that he was so strong, I tell thee that.\"");
-				UI_add_answer("strong");
+				add("strong");
 				fallthrough;
 
 			case "strong" (remove):
@@ -39612,15 +39612,15 @@ void Func043B object#(0x43B) () {
 				    var0000,
 				    ".\"");
 				say("\"I suspect that Batlin hired him to act as a personal guard in this foreign land. He is not fit for much else.\"");
-				UI_remove_answer("Brunt");
-				UI_add_answer("not fit");
+				remove("Brunt");
+				add("not fit");
 				fallthrough;
 
 			case "not fit":
 				say("\"Brunt is no seaman, 'tis true.\"");
 				say("\"If I had not seen his face the day he boarded, I would have thought him a Daemon. He was so green.\"");
-				UI_remove_answer("not fit");
-				UI_add_answer("green");
+				remove("not fit");
+				add("green");
 				fallthrough;
 
 			case "green":
@@ -39628,13 +39628,13 @@ void Func043B object#(0x43B) () {
 				    var0000,
 				    "! I have never seen anyone worse.\"");
 				say("\"And what a temper! 'Tis to be hoped he is better mannered on land.\"");
-				UI_remove_answer("green");
+				remove("green");
 				fallthrough;
 
 			case "Deadeye":
 				say("\"Deadeye is the only one of Batlin's companions that I truly know. I cannot say that I'm happy about the association, either.\"");
-				UI_remove_answer("Deadeye");
-				UI_add_answer("association");
+				remove("Deadeye");
+				add("association");
 				fallthrough;
 
 			case "association":
@@ -39643,7 +39643,7 @@ void Func043B object#(0x43B) () {
 				say("\"Sailors are a superstitious lot, I fear, ",
 				    var0000,
 				    ".\"");
-				UI_remove_answer("association");
+				remove("association");
 				fallthrough;
 
 			case "storms" (remove):
@@ -39653,7 +39653,7 @@ void Func043B object#(0x43B) () {
 				say("\"I've seen lightning that jumps from cloud to cloud. I've seen lightning that shoots down like a pitchfork from the heavens. And I've seen lightning that dances across the masts of a ship.\"");
 				say("\"But I've never seen lightning that changes a man into a rock, or makes a ship disappear before thy very eyes.\"");
 				UI_push_answers();
-				UI_add_answer(["changes a man", "ship disappear", "change subject"]);
+				add(["changes a man", "ship disappear", "change subject"]);
 				fallthrough;
 
 			case "changes a man":
@@ -39662,7 +39662,7 @@ void Func043B object#(0x43B) () {
 				    "!\"");
 				say("\"I was holding the door open for one of the crew who was running for shelter when one of those storms hit.\"");
 				say("\"There was this bright flash and a deafening crash... And when mine eyes cleared, Geof was gone and a chicken stood gawking at me in the very spot Geof had been in.\"");
-				UI_remove_answer("changes a man");
+				remove("changes a man");
 				fallthrough;
 
 			case "ship disappear":
@@ -39670,7 +39670,7 @@ void Func043B object#(0x43B) () {
 				say("\"I was on the Fawn docks chatting with a salt named Olon, in the days before I was banned\tfrom the city.\"");
 				say("\"All of a sudden one of those storms hit and Olon and I dove for cover under a rowboat.\"");
 				say("\"We saw the ship that had just put out be hit by the lightning and it just... disappeared! Never found a trace of it or her crew.\"");
-				UI_remove_answer("ship disappear");
+				remove("ship disappear");
 				fallthrough;
 
 			case "Lady Yelinda" (remove):
@@ -39678,7 +39678,7 @@ void Func043B object#(0x43B) () {
 				say("\"The Great Lady did flee Fawn in a terrible hurry, due to the Curse. All she left behind was her Diamond Necklace.\"");
 				say("\"She hath been made as disfigured as I am. Imagine, to plummet from Beauty to Ugliness!\"");
 				say("\"It hath driven her insane.\"");
-				UI_add_answer("Diamond Necklace");
+				add("Diamond Necklace");
 				fallthrough;
 
 			case "Diamond Necklace" (remove):
@@ -39714,8 +39714,8 @@ void Func043B object#(0x43B) () {
 				    var0000,
 				    ". They claim to honor Beauty, which my face naturally offends.\"");
 				say("\"They are hard pressed, what with the Goblins and all.\"");
-				UI_remove_answer("Fawn");
-				UI_add_answer("Goblins");
+				remove("Fawn");
+				add("Goblins");
 				fallthrough;
 
 			case "Goblins" (remove):
@@ -39751,23 +39751,23 @@ void Func043B object#(0x43B) () {
 				say("\"As long as she hath not rejected me out of hand, I will be content to wait. Thy good deed hath given me reason to live!\"");
 				say("\"As promised, I will send thee to my shipmate, Scots.\"");
 				var0017 = true;
-				UI_remove_answer("letter");
-				UI_add_answer("Scots");
+				remove("letter");
+				add("Scots");
 				fallthrough;
 
 			case "Scots":
 				say("\"Scots is a fine fellow, though he often seems a bit distracted. He is a cartographer.\"");
 				say("\"Perhaps his maps will aid thee, though they are not as accurate as he wishes.\"");
 				say("\"Thou mayest find him somewhere within our camp.\"");
-				UI_remove_answer("Scots");
-				UI_add_answer("not as accurate");
+				remove("Scots");
+				add("not as accurate");
 				fallthrough;
 
 			case "not as accurate":
 				say("\"Since we dare not stray too far from shelter, Scots cannot explore and map.\"");
 				say("\"He hath worked from existing maps that he received from the Fawn fishermen, so he is only sure of the accuracy of the coastline.\"");
 				say("\"Scots often complains that we cannot even explore by ship. None of us are happy to be stranded here.\"");
-				UI_remove_answer("not as accurate");
+				remove("not as accurate");
 				fallthrough;
 
 			case "bye":
@@ -39826,9 +39826,9 @@ void Func043C object#(0x43C) () {
 			    var0002,
 			    "! What tales hast thou for me today?\"");
 		}
-		UI_add_answer(["goblins", "storms", "tales", "maps", "bye"]);
+		add(["goblins", "storms", "tales", "maps", "bye"]);
 		if (gflags[0x0004] == true) {
-			UI_add_answer("Iolo the Mad");
+			add("Iolo the Mad");
 		}
 		converse (0) {
 			case "goblins" (remove):
@@ -39841,8 +39841,8 @@ void Func043C object#(0x43C) () {
 					} else {
 						say("\"We withstand their attacks only with the help of the Pikemen. We had given up hope when the goblins took the tower. But we may hold a while longer now that it hath been returned to Monitorian keeping.\"");
 					}
-					UI_add_answer("Pikemen");
-					UI_add_answer("Knight's Test");
+					add("Pikemen");
+					add("Knight's Test");
 				}
 				fallthrough;
 
@@ -39851,9 +39851,9 @@ void Func043C object#(0x43C) () {
 					say("\"Thou seekest to jest with me. By the mark on thy face, 'tis plain to see that thou art a Pikeman. Surely Monitor's bravest have better things to do than pull pranks on a poor, landbound sailor.\"");
 				} else {
 					say("\"They are warriors that come from Monitor, a city south of here. Very brave. I can usually count on many tales from them.\"");
-					UI_add_answer("Monitor");
+					add("Monitor");
 				}
-				UI_remove_answer("Pikemen");
+				remove("Pikemen");
 				fallthrough;
 
 			case "Monitor":
@@ -39862,7 +39862,7 @@ void Func043C object#(0x43C) () {
 				} else {
 					say("\"'Tis on the very south edge of the continent. There are mountains to either side of the city. Very defensible.\" *\"The city is run by a representative from one of the three Pikemen units -- the wolves, the leopards, and the bears. Each unit takes a turn at having one of their number govern the city.\"");
 				}
-				UI_remove_answer("Monitor");
+				remove("Monitor");
 				fallthrough;
 
 			case "Knight's Test":
@@ -39871,31 +39871,31 @@ void Func043C object#(0x43C) () {
 				} else {
 					say("\"The Pikemen I spoke to were rather closed-mouthed about it. All I could gather is that it's some sort of rite of passage\tfor all Monitorians.\" *\"'Tis located on a peninsula to the southwest of here.\"");
 				}
-				UI_remove_answer("Knight's Test");
+				remove("Knight's Test");
 				fallthrough;
 
 			case "storms":
 				say("\"I've travelled far and wide all my life, and never have I seen the likes before. These storms appear without warning and leave chaos in their wake. Move things around, change things around... Simply not natural. Makes me think Leon might be right.\"");
-				UI_remove_answer("storms");
-				UI_add_answer("Leon");
+				remove("storms");
+				add("Leon");
 				fallthrough;
 
 			case "Leon":
 				say("\"Thou hast not met Leon yet? Thou hast only to look for the crowd of people. Thou'lt find him in the center of it all, no doubt.\" *\"Leon is a very charismatic Fellowship follower. He speaks their beliefs fairly, to be sure. Hath drawn many of the folk from the town. I'll wager that's why that Priestess had us banned from entering the city.\"");
-				UI_remove_answer("Leon");
+				remove("Leon");
 				gflags[0x016A] = true;
-				UI_add_answer("Priestess");
+				add("Priestess");
 				if (gflags[0x0169] == false) {
-					UI_add_answer("Fellowship");
+					add("Fellowship");
 				}
 				fallthrough;
 
 			case "Fellowship":
 				say("\"I can tell thee that it digresses from the Virtues that Lord British set forth. But it makes sense.\" *\"Talk to Leon. He's far more eloquent than I on the subject.\"");
-				UI_remove_answer("Fellowship");
+				remove("Fellowship");
 				gflags[0x0169] = true;
 				if (gflags[0x016A] == false) {
-					UI_add_answer("Leon");
+					add("Leon");
 				}
 				fallthrough;
 
@@ -39904,77 +39904,77 @@ void Func043C object#(0x43C) () {
 					say("\"'Tis a shame to see any creature so beautiful placed behind bars, but I think we shall all be safer because of it.\"");
 				} else {
 					say("\"Kylista is as beautiful as the day is long, but with the soul of a viper. I wouldn't trust her if I were thee.\" *\"She's plotting something with the Chancellor, I'll wager.\"");
-					UI_add_answer("Chancellor");
+					add("Chancellor");
 				}
 				fallthrough;
 
 			case "Chancellor":
 				say("\"Little worm named Zulith. Lady Yelinda's shadow... leads her around by the hand all the time. If thou seekest an audience with the Lady, thou must first speak to Zulith.\" *\"I saw Kylista speaking to Zulith the day before we sailors were banned from the city. She was afraid that Leon was stealing her followers. And Zulith,\tthe power-hungry toad that he is, saw to it that her wishes became law.\" *\"'Tis the Great Captains and the Chancellor that run things in Fawn, I'm afraid.\"");
-				UI_remove_answer("Chancellor");
-				UI_add_answer("Great Captains");
+				remove("Chancellor");
+				add("Great Captains");
 				fallthrough;
 
 			case "Great Captains":
 				say("\"There are three of them: Joth, Garth, and Voldin. Make a great show of honoring Beauty, but they honor money and power more. Yelinda consults them and Zulith about everything... even the dinner menu, I'll warrant.\" *\"And with Kylista whispering in Zulith's ear, thou hadst best count her as one of the powers of Fawn as well.\"");
-				UI_remove_answer("Great Captains");
+				remove("Great Captains");
 				fallthrough;
 
 			case "tales":
 				say("\"What good is a geographer if he cannot explore and map the lands he finds? The storms keep me and my shipmates from taking to the sea.\" *\"I ask all those who come to me for tales of distant places. There may be some truth in the telling, and I add what I can to my maps, as Gwenno suggested.\"");
-				UI_remove_answer("tales");
-				UI_add_answer("Gwenno");
+				remove("tales");
+				add("Gwenno");
 				fallthrough;
 
 			case "Gwenno":
 				say("\"She contacted me back in Britannia with an opportunity to explore a new land. Naturally, I accepted. She was to transport some sort of obelisk here for The Fellowship and then she was free to explore and collect all the tales she wished.\"");
-				UI_remove_answer("Gwenno");
-				UI_add_answer("obelisk");
+				remove("Gwenno");
+				add("obelisk");
 				if (gflags[0x0169] == false) {
-					UI_add_answer("Fellowship");
+					add("Fellowship");
 				}
 				fallthrough;
 
 			case "obelisk":
 				say("\"It was abominably heavy! Quite a chore to move it on land. Then one day after we had it safely on the shore and Gwenno had already headed inland, there was a huge explosion. When I could see again, there stood Batlin -- and the obelisk was shattered all over the ground.\"");
-				UI_remove_answer("obelisk");
-				UI_add_answer("Batlin");
+				remove("obelisk");
+				add("Batlin");
 				fallthrough;
 
 			case "Batlin":
 				say("\"He seemed most upset at the time he arrived. Though I suspect that it was merely a result of the disorientation from the teleportation storm that brought him here.\" *\"He took several members of the crew with him and headed inland. He was looking for some blackrock artifact... Mayhap it doth have some connection to the obelisk. I don't know.\"");
-				UI_remove_answer("Batlin");
-				UI_add_answer("blackrock artifact");
+				remove("Batlin");
+				add("blackrock artifact");
 				fallthrough;
 
 			case "blackrock artifact":
 				say("\"I remember that he mentioned that it was fashioned in the likeness of a snake, but that's all. Thou mightest ask Delphynia, the herbalist. I know he talked to her.\"");
-				UI_remove_answer("blackrock artifact");
-				UI_add_answer("Delphynia");
+				remove("blackrock artifact");
+				add("Delphynia");
 				fallthrough;
 
 			case "Delphynia":
 				say("\"She's an herbalist in the city that hath been doing the healer's work ever since the goblins killed the last healer.\" *\"Thou shouldst ask Ruggs if thou wishest to know more. They spent quite a bit of time together before we were cast out of the city.\"");
-				UI_remove_answer("Delphynia");
-				UI_add_answer("Ruggs");
+				remove("Delphynia");
+				add("Ruggs");
 				fallthrough;
 
 			case "Ruggs":
 				say("\"Thou wouldst know him if thou hadst seen him. What he lacks in handsomeness, he makes up for in the goodness of his heart. He cares deeply for Delphynia. But Delphynia is a superstitious woman and fears Ruggs' deformities are the result of some curse. 'Tis a sadness. They would make a fine couple.\"");
-				UI_remove_answer("Ruggs");
+				remove("Ruggs");
 				fallthrough;
 
 			case "maps":
 				say("\"Lord British once said that I was the finest map maker in all Britannia. I take great care in my work. Since I have explored very little of this continent, I fear that my map is less than accurate.\" *\"I would be honored if thou wouldst accept a copy of my map. Perhaps it would aid thee in thy quest.\"");
 				var0005 = Func099B(0xFE9C, 0x0001, 0x00B2, 0xFE99, 0x0000, false, true);
 				gflags[0x0151] = true;
-				UI_remove_answer("maps");
+				remove("maps");
 				fallthrough;
 
 			case "Iolo the Mad":
 				say("\"What great calamity must have befallen thy trusted companion, ",
 				    var0002,
 				    ". I fear that his reason hath fled. He terrorizes the city with his fiendish jokes.\" *\"Only yesterday, Iolo announced to the citizens of Fawn that he would prove once and for all whether or not Beauty was skin deep. He then cast a spell on poor Lady Yelinda and removed all of her skin. She ran out of the city toward Gorlab Swamp. Without the true ruler, I fear that Fawn will never be restored... even with thine aid.\"");
-				UI_remove_answer("Iolo the Mad");
+				remove("Iolo the Mad");
 				fallthrough;
 
 			case "bye":
@@ -40111,9 +40111,9 @@ void Func043D object#(0x43D) () {
 			    ". 'Tis a pleasure to see thee again.\"");
 		}
 		if (gflags[0x018E] && (!gflags[0x018F])) {
-			UI_add_answer("Art thou following me?");
+			add("Art thou following me?");
 		}
-		UI_add_answer(["storms", "goblins", "Chancellor", "bye"]);
+		add(["storms", "goblins", "Chancellor", "bye"]);
 		converse (0) {
 			case "Art thou following me?" (remove):
 				say("\"I am a busy man, ",
@@ -40135,7 +40135,7 @@ void Func043D object#(0x43D) () {
 					say("\"Great Captain Garth doth have plans laid for rebuilding the ships. But 'twould not be safe until these storms subside.\"");
 					say("\"Great Captain Joth is in charge of finding the means to sustain the city until this unusual weather clears.\"");
 					UI_push_answers();
-					UI_add_answer(["Great Captains", "Great Captain Garth", "Great Captain Joth", "change subject"]);
+					add(["Great Captains", "Great Captain Garth", "Great Captain Joth", "change subject"]);
 				}
 				fallthrough;
 
@@ -40146,19 +40146,19 @@ void Func043D object#(0x43D) () {
 
 			case "Great Captains" (remove):
 				say("\"The Great Captains are the counsellors to Lady Yelinda, ruler of Fawn. There are three of them: Garth, Joth and Voldin.\"");
-				UI_add_answer(["duties", "Voldin"]);
+				add(["duties", "Voldin"]);
 				fallthrough;
 
 			case "duties":
 				say("\"'Tis their honor to oversee the fleets and all trade matters.\"");
 				say("\"They are all seamen who have been appointed to their post in recognition of their expertise.\"");
-				UI_remove_answer("duties");
+				remove("duties");
 				fallthrough;
 
 			case "Voldin" (remove):
 				say("\"Voldin doth have a history of service to Fawn. He was unanimously nominated for the council position by his fellow captains.\"");
 				say("\"Voldin works in conjunction with the Captain of the Guard to assure Fawn's safety. He is senior on the council.\"");
-				UI_add_answer("history");
+				add("history");
 				fallthrough;
 
 			case "history" (remove):
@@ -40168,19 +40168,19 @@ void Func043D object#(0x43D) () {
 			case "Great Captain Garth" (remove):
 				say("\"Garth comes from a fine family. He is the youngest member of the council, but wisely tempers his views to those of the senior council members.\"");
 				say("\"Garth is also something of a ladies' man, I fear.\"");
-				UI_add_answer("Garth's family");
+				add("Garth's family");
 				fallthrough;
 
 			case "Garth's family":
 				say("\"His family doth own a shipping business. They have been merchant seamen for generations.\"");
 				say("\"As his mother's youngest son, he took the council seat when his cousin resigned. His elder brother is now in charge of the family's shipping business.\"");
-				UI_remove_answer("Garth's family");
+				remove("Garth's family");
 				fallthrough;
 
 			case "Great Captain Joth" (remove):
 				say("\"Joth was the finest sea captain before he was injured.\"");
 				say("\"He favors beginning to rebuild the fleet now, but hath deferred to Voldin's opinion that it would not be safe to do so at this time.\"");
-				UI_add_answer(["injured", "not safe"]);
+				add(["injured", "not safe"]);
 				fallthrough;
 
 			case "injured" (remove):
@@ -40190,7 +40190,7 @@ void Func043D object#(0x43D) () {
 			case "not safe" (remove):
 				say("\"Who would cut the wood to build the ships for fear of more goblins? And no sane person would venture into the open with these storms arriving without warning.\"");
 				say("\"No, we must wait until this weather clears before we can hope to begin rebuilding our fleet.\"");
-				UI_add_answer("Fear of more goblins?");
+				add("Fear of more goblins?");
 				fallthrough;
 
 			case "Fear of more goblins?" (remove):
@@ -40210,7 +40210,7 @@ void Func043D object#(0x43D) () {
 						if (Func0955() == true) {
 							say("\"Pray tell me their names that I might relay them to her Ladyship at once.\"");
 							UI_push_answers();
-							UI_add_answer(["I do not know their names.", "I and my companions.", "I led the attack."]);
+							add(["I do not know their names.", "I and my companions.", "I led the attack."]);
 						} else {
 							say("\"Thou canst not be faulted for not knowing their names. No doubt there are quite a number of Pikemen.\"");
 							say("\"Lady Yelinda will have to send her thanks back to Monitor.\"");
@@ -40237,14 +40237,14 @@ void Func043D object#(0x43D) () {
 				fallthrough;
 
 			case "I do not know their names.":
-				UI_remove_answer(["I do not know their names.", "I and my companions.", "I led the attack."]);
+				remove(["I do not know their names.", "I and my companions.", "I led the attack."]);
 				say("\"Thou canst not be faulted for not knowing their names. No doubt there are quite a number of Pikemen.\"");
 				say("\"Lady Yelinda will have to send her thanks back to Monitor.\"");
 				UI_pop_answers();
 				fallthrough;
 
 			case "I and my companions.":
-				UI_remove_answer(["I do not know their names.", "I and my companions.", "I led the attack."]);
+				remove(["I do not know their names.", "I and my companions.", "I led the attack."]);
 				if (var0001 == true) {
 					say("\"Then thou hast companions beyond compare!\"");
 					say("\"Lady Yelinda will surely wish to meet thee, a shining example of Beauty!\"");
@@ -40256,7 +40256,7 @@ void Func043D object#(0x43D) () {
 				fallthrough;
 
 			case "I led the attack.":
-				UI_remove_answer(["I do not know their names.", "I and my companions.", "I led the attack."]);
+				remove(["I do not know their names.", "I and my companions.", "I led the attack."]);
 				if (var0001 == true) {
 					say("\"Surely thou dost jest!\"");
 					say("\"They could not have allowed someone as beautiful as thyself to be endangered!\"");
@@ -40270,36 +40270,36 @@ void Func043D object#(0x43D) () {
 			case "Chancellor" (remove):
 				if (gflags[0x0170] && (gflags[0x0172] && (!gflags[0x016E]))) {
 					say("\"I serve the Lady, handling those details which she doth choose to delegate to me. I also exchange various forms of money.\"");
-					UI_add_answer("exchange money");
+					add("exchange money");
 				} else {
 					say("\"I serve as an envoy from Lady Yelinda to the Great Captains. I oversee all the minor details that should not worry her Ladyship. I also exchange various forms of money.\"");
 					say("\"If thou dost wish an audience with her, I can examine her schedule.\"");
-					UI_add_answer(["Lady Yelinda", "exchange money", "audience"]);
+					add(["Lady Yelinda", "exchange money", "audience"]);
 				}
 				fallthrough;
 
 			case "Lady Yelinda" (remove):
 				say("\"She is the ruler of Fawn and all its environs. All who honor Beauty honor Yelinda.\"");
 				say("\"She is a wise and compassionate leader. Everyone doth love her. Her beauty is only rivaled by that of Kylista.\"");
-				UI_add_answer("Kylista");
+				add("Kylista");
 				fallthrough;
 
 			case "Kylista" (remove):
 				say("\"Kylista is the priestess of Beauty.\"");
 				say("\"Yelinda is the embodiment of all of Fawn itself. Because Kylista presides over the Oracle, she is the personification of Beauty.\"");
-				UI_add_answer("Oracle");
+				add("Oracle");
 				fallthrough;
 
 			case "Oracle" (remove):
 				say("\"Many people believe that the Mages of Old Sosaria created the Oracle. I do not believe such.\"");
 				say("\"I have stood alone in the temple gazing at it, and I will tell thee that it is a living being trapped there in that statue.\"");
 				say("\"Those Mages did not create a magical item! They summoned some beautiful spirit and trapped it there!\"");
-				UI_add_answer(["temple"]);
+				add(["temple"]);
 				fallthrough;
 
 			case "temple" (remove):
 				say("\"I often go there when the day hath been difficult. 'Tis directly behind the palace. 'Tis so quiet and peaceful, except before a revelation.\"");
-				UI_add_answer("revelation");
+				add("revelation");
 				fallthrough;
 
 			case "revelation" (remove):
@@ -40362,19 +40362,19 @@ void Func043E object#(0x43E) () {
 			    var0000,
 			    ". How may I be of service to thee?\"");
 		}
-		UI_add_answer(["artist", "bye"]);
+		add(["artist", "bye"]);
 		if (!gflags[0x0058]) {
 			say("\"Perhaps I should not speak with thee... I hope thou art not come to rob me!\"");
-			UI_add_answer("rob");
+			add("rob");
 		}
 		converse (0) {
 			case "artist" (remove):
 				say("\"I am a sculptor by trade. There is a brisk business to be done in this city, fashioning busts and statues for the Knights.\"");
 				if (!gflags[0x0048]) {
 					say("\"But I can make time for thee, if thou dost wish to commission my talents.\"");
-					UI_add_answer("commission");
+					add("commission");
 				} else {
-					UI_add_answer(["sculptor", "Knights", "commission"]);
+					add(["sculptor", "Knights", "commission"]);
 				}
 				fallthrough;
 
@@ -40400,7 +40400,7 @@ void Func043E object#(0x43E) () {
 				say("\"As thou knowest by now, this is a city of warriors. I myself passed the Knight's Test when I was fifteen, but my true love hath always been art.\"");
 				say("\"The other Knights sometimes mock me, for I am seldom seen at the List Field. Canst thou imagine what a blade could do to my gifted fingers!\"");
 				say("\"But, alas, an artist is always misunderstood.\"");
-				UI_add_answer(["List Field", "misunderstood"]);
+				add(["List Field", "misunderstood"]);
 				fallthrough;
 
 			case "List Field" (remove):
@@ -40425,7 +40425,7 @@ void Func043E object#(0x43E) () {
 				UI_set_conversation_slot(0x0000);
 				gflags[0x0058] = true;
 				UI_push_answers();
-				UI_add_answer(["Batlin", "companions", "artifact", "nothing more"]);
+				add(["Batlin", "companions", "artifact", "nothing more"]);
 				fallthrough;
 
 			case "Batlin" (remove):
@@ -40433,7 +40433,7 @@ void Func043E object#(0x43E) () {
 				say("\"Simon the Innkeeper heard the sage say that he had come here from Fawn.\"");
 				gflags[0x008E] = true;
 				if (!gflags[0x000B]) {
-					UI_add_answer("Fawn");
+					add("Fawn");
 				}
 				fallthrough;
 
@@ -40466,7 +40466,7 @@ void Func043E object#(0x43E) () {
 					UI_set_conversation_slot(0x0000);
 				}
 				say("\"We hated the object, yet we were afraid to be parted from it. I cannot explain this. But it was so.\"");
-				UI_add_answer(["demonic appearance", "serpent-shaped"]);
+				add(["demonic appearance", "serpent-shaped"]);
 				fallthrough;
 
 			case "demonic appearance" (remove):
@@ -40500,7 +40500,7 @@ void Func043E object#(0x43E) () {
 				gflags[0x0059] = true;
 				UI_pop_answers();
 				if (!gflags[0x000C]) {
-					UI_add_answer("Sleeping Bull");
+					add("Sleeping Bull");
 				}
 				fallthrough;
 
@@ -40718,41 +40718,41 @@ void Func043F object#(0x43F) () {
 		} else {
 			say("\"So 'tis thee again. Well met! How shall I aid thee?\"");
 		}
-		UI_add_answer(["name", "duties"]);
+		add(["name", "duties"]);
 		if (gflags[0x0093] && (!gflags[0x0038])) {
-			UI_add_answer("know traitor");
+			add("know traitor");
 		}
 		if (gflags[0x004A] && (!gflags[0x0048])) {
-			UI_add_answer("Knighthood");
+			add("Knighthood");
 		}
 		if (gflags[0x0033] && (!gflags[0x004A])) {
-			UI_add_answer("Test of Knighthood");
+			add("Test of Knighthood");
 		}
 		if (gflags[0x009A] && (!gflags[0x004C])) {
-			UI_add_answer("missing urn");
+			add("missing urn");
 		}
 		if (gflags[0x002D] && (!gflags[0x00A5])) {
-			UI_add_answer("Marsten");
+			add("Marsten");
 		}
 		if (gflags[0x00BB] || gflags[0x00BC]) {
-			UI_add_answer("trainer");
+			add("trainer");
 		}
 		if (gflags[0x0045] && (UI_get_schedule_type(0xFFB4) != 0x000F)) {
-			UI_add_answer("brown bottle");
+			add("brown bottle");
 		}
 		if (gflags[0x0048] && (!UI_get_item_flag(0xFFB4, 0x0004))) {
-			UI_add_answer("traitor");
+			add("traitor");
 		}
 		if (gflags[0x002C]) {
-			UI_add_answer("Helm of Monitor");
+			add("Helm of Monitor");
 		}
 		if (gflags[0x0044]) {
-			UI_add_answer("Simon");
+			add("Simon");
 		}
 		if (gflags[0x00CC]) {
-			UI_add_answer("Pomdirgun");
+			add("Pomdirgun");
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "Helm of Monitor" (remove):
 				say("\"Thou hast recovered the Helm of Monitor and proven thyself to be our Champion Knight. Thou art the best of us, the standard by which we shall all be measured. Remember, if thou shouldst leave our city, thou dost carry our honor with thee. It is thy duty to not only to serve Monitor, but to help restore the balance of the world. This is the mission of the Champion Knight.\"");
@@ -40784,12 +40784,12 @@ void Func043F object#(0x43F) () {
 				if (!var0002) {
 					UI_set_item_flag(0xFFC1, 0x001C);
 					say("\"I am called Caladin, after mine own grandfather. He was a Champion Knight!\"");
-					UI_add_answer("Champion Knight");
+					add("Champion Knight");
 					if (!gflags[0x004C]) {
 						say("\"And if I ever discover who has his urn, I shall wring their neck! Canst thou imagine, someone stealing the Ashes of the Dead?\"");
-						UI_add_answer("Ashes of the Dead");
+						add("Ashes of the Dead");
 						if (Func097D(0xFE9B, 0x0001, 0x0392, 0xFE99, 0x0000)) {
-							UI_add_answer("I have an urn.");
+							add("I have an urn.");
 							var0006 = true;
 						}
 					}
@@ -40812,9 +40812,9 @@ void Func043F object#(0x43F) () {
 				UI_push_answers();
 				say("\"I am not superstitious, mind thee, but I do believe that a man's ashes are sacred. They represent his soul, his heart, his honor.\"");
 				say("\"To know that my grandfather's ashes have been taken from the Crypts...\"");
-				UI_add_answer(["honor", "Crypts", "change subject"]);
+				add(["honor", "Crypts", "change subject"]);
 				if (Func097D(0xFE9B, 0x0001, 0x0392, 0xFE99, 0x0000) && ((!var0006) && (!var0007))) {
-					UI_add_answer("I have an urn.");
+					add("I have an urn.");
 					var0006 = true;
 				}
 				fallthrough;
@@ -40880,9 +40880,9 @@ void Func043F object#(0x43F) () {
 				say("\"Do not smirk! The Command of the Bear is unmovable. The Goblins dare not assault Monitor, for they know that we are here.\"");
 				say("\"I am also one of the best combat trainers in the land, shouldst thou need such aid.\"");
 				if (!gflags[0x007F]) {
-					UI_add_answer("Command");
+					add("Command");
 				}
-				UI_add_answer(["Bears", "Courage", "trainer", "Goblins"]);
+				add(["Bears", "Courage", "trainer", "Goblins"]);
 				fallthrough;
 
 			case "Command" (remove):
@@ -40900,10 +40900,10 @@ void Func043F object#(0x43F) () {
 			case "Goblins" (remove):
 				say("\"The wretched beasts! I suppose thou hast heard of the ambush at Fawn Tower. They do not fight fair!\"");
 				say("\"Poor Astrid... she was an inspiring warrior, as well as a lusty wench. Damn, but she could kill Goblins...\"");
-				UI_add_answer("Fawn Tower");
+				add("Fawn Tower");
 				if (!UI_get_item_flag(0xFEF7, 0x0004)) {
 					say("\"The Wolves and Leopards are useless in a crisis like this, but the Bears shall exact revenge from the Goblins. And if I ever find out who betrayed that patrol...\"");
-					UI_add_answer(["useless", "betrayed"]);
+					add(["useless", "betrayed"]);
 				} else {
 					say("\"At least that miserable Pomdirgun hath gone to his grave. Or by the way of the Goblins, probably the cooking pot, more like.\"");
 				}
@@ -40928,7 +40928,7 @@ void Func043F object#(0x43F) () {
 				say("\"So maybe I should keep my own counsel, but I'm not the quiet type. The Fawn Tower was betrayed!\"");
 				say("\"How else did the Goblins surprise the entire patrol? Astrid was no fool. Someone betrayed her.\"");
 				if (!var0008) {
-					UI_add_answer("traitor");
+					add("traitor");
 				}
 				fallthrough;
 
@@ -40949,12 +40949,12 @@ void Func043F object#(0x43F) () {
 				if (UI_get_item_flag(0xFFB8, 0x0004) || UI_get_item_flag(0xFFB5, 0x0004)) {
 					UI_push_answers();
 					if (UI_get_item_flag(0xFFB8, 0x0004)) {
-						UI_add_answer("Was Lydia the traitor?");
+						add("Was Lydia the traitor?");
 					}
 					if (UI_get_item_flag(0xFFB5, 0x0004)) {
-						UI_add_answer("Was Shmed the traitor?");
+						add("Was Shmed the traitor?");
 					}
-					UI_add_answer("change subject");
+					add("change subject");
 				}
 				fallthrough;
 
@@ -40999,15 +40999,15 @@ void Func043F object#(0x43F) () {
 					gflags[0x003C] = true;
 				}
 				UI_push_answers();
-				UI_add_answer(["ordeal", "location", "Knighthood", "change subject"]);
+				add(["ordeal", "location", "Knighthood", "change subject"]);
 				fallthrough;
 
 			case "ordeal" (remove):
 				say("\"Fiery explosions! Wild animals! Puzzles to queer the mind, and mysteries beyond the understanding of mortals!\"");
 				say("\"Well, perhaps I exaggerate some. The Test is difficult, and many have died. But if thou dost know the secrets of the dungeon, the Quest is not so hard.\"");
 				say("\"After all, most Monitorians take the Test when they are fifteen years of age! Young Cantra will take it soon. With training, thou canst succeed.\"");
-				UI_add_answer(["secrets", "Cantra"]);
-				UI_add_answer("trainer");
+				add(["secrets", "Cantra"]);
+				add("trainer");
 				fallthrough;
 
 			case "secrets" (remove):
@@ -41035,7 +41035,7 @@ void Func043F object#(0x43F) () {
 					say("\"But before going, thou must speak with Lord Marsten. Only he can give thee the password. Shmed will not admit thee to the dungeon without it.\"");
 				}
 				say("\"There have also been many Goblins in the area, so beware!\"");
-				UI_add_answer("Shmed");
+				add("Shmed");
 				fallthrough;
 
 			case "Shmed" (remove):
@@ -41058,7 +41058,7 @@ void Func043F object#(0x43F) () {
 					}
 					if (!gflags[0x007E]) {
 						say("\"Cellia the Furrier shall make thee the Cloak of Knighthood, if thou shalt take to her the body of thy totem animal.\"");
-						UI_add_answer("totem animal");
+						add("totem animal");
 					}
 					if (!gflags[0x0091]) {
 						say("\"The banquet cannot begin until thou hast brought the meat from thy totem animal to Lucilla at the pub.\"");
@@ -41169,7 +41169,7 @@ void Func043F object#(0x43F) () {
 					say("\"I am not usually so talkative to an outsider. Thou shalt not find many in this town who welcome strangers!\"");
 					say("\"A word of advice: If thou desirest to be accepted in Monitor, thou shouldst consider taking the Test of Knighthood.\"");
 					say("\"If thou art not a Knight, then thou art nothing!\"");
-					UI_add_answer("Test of Knighthood");
+					add("Test of Knighthood");
 					gflags[0x0033] = true;
 				} else {
 					Func097F(0xFE9C, "@Until later...@", 0x0000);
@@ -41321,11 +41321,11 @@ void Func0440 object#(0x440) () {
 				say("\"Hast thou decided to become a Knight yet? It is so exciting! I am practicing to become one myself.\"");
 			}
 		}
-		UI_add_answer(["Knight"]);
+		add(["Knight"]);
 		if (gflags[0x002D] && (!gflags[0x00A5])) {
-			UI_add_answer("Marsten");
+			add("Marsten");
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "Marsten" (remove):
 				if (gflags[0x0038]) {
@@ -41349,7 +41349,7 @@ void Func0440 object#(0x440) () {
 				say("\"I have trained for a long time to become a Knight. There is nothing in the world so wonderful as being a Knight!\"");
 				say("\"My father was a Knight, and a very good one. But he is dead now.\"");
 				say("\"When I turn fifteen, I can take the Test of Knighthood and become a grand warrior!\"");
-				UI_add_answer(["father", "training", "Test of Knighthood"]);
+				add(["father", "training", "Test of Knighthood"]);
 				fallthrough;
 
 			case "father" (remove):
@@ -41370,9 +41370,9 @@ void Func0440 object#(0x440) () {
 				say("\"I have been training for the Test for mine entire life! Anything that thou needest to know, I can tell thee.\"");
 				say("\"It truly isn't so dangerous if thou dost know the secrets. And Shmed is nothing to worry about.\"");
 				say("\"What wouldst thou like to know?\"");
-				UI_add_answer(["location", "secrets", "Shmed", "nothing more"]);
+				add(["location", "secrets", "Shmed", "nothing more"]);
 				if (!gflags[0x002F]) {
-					UI_add_answer("permission");
+					add("permission");
 				}
 				fallthrough;
 
@@ -41517,15 +41517,15 @@ void Func0441 object#(0x441) () {
 			}
 		}
 		if (gflags[0x004A] && (!gflags[0x007D])) {
-			UI_add_answer("slain wolf");
+			add("slain wolf");
 		}
 		if (gflags[0x007D] && (!gflags[0x007E])) {
-			UI_add_answer("cloak");
+			add("cloak");
 		}
 		if (gflags[0x009D] && (!gflags[0x0292])) {
-			UI_add_answer("fur cap");
+			add("fur cap");
 		}
-		UI_add_answer(["buy", "furrier", "bye"]);
+		add(["buy", "furrier", "bye"]);
 		converse (0) {
 			case "slain wolf" (remove):
 				say("\"Now that thou hast completed the Test, I must make a cloak for thee from the skin of the animal thou didst slay.\"");
@@ -41591,7 +41591,7 @@ void Func0441 object#(0x441) () {
 				say("\"I am the furrier, tanner and tailor of Monitor. It is my duty to make cloaks from the animals slain by our valiant Knights. If one were to travel far north, it is exactly the sort of thing one should wear.\"");
 				say("\"I skin the carcasses myself.\"");
 				say("\"Other pelts I obtain from the northern trappers. They supply exotic furs which are rare here in Monitor -- especially Gwani pelts!\"");
-				UI_add_answer(["trappers", "Gwani pelts"]);
+				add(["trappers", "Gwani pelts"]);
 				if (gflags[0x004A] && (!gflags[0x007D])) {
 					say("\"Now that thou hast completed the Test of Knighthood, thou must bring me the body of the animal thou didst slay.\"");
 					say("\"I shall make a cloak from its skin for thee.\"");
@@ -41611,7 +41611,7 @@ void Func0441 object#(0x441) () {
 				say("\"The trappers live in the Great Northern Forest, at the foot of the Impassable Mountains.\"");
 				say("\"A trapper named Hazard sells me snow leopard pelts. Unfortunately, his men only make it as far south as Monitor a few times a year.\"");
 				say("\"Sometimes he even sends Gwani pelts! He likes hunting Gwani because it is such a challenge.\"");
-				UI_add_answer("Luther");
+				add("Luther");
 				fallthrough;
 
 			case "Luther" (remove):
@@ -41631,7 +41631,7 @@ void Func0441 object#(0x441) () {
 					}
 				} else {
 					say("\"If thou wouldst come to my shop during the day, I could sell thee something...\"");
-					UI_remove_answer("buy");
+					remove("buy");
 				}
 				fallthrough;
 
@@ -41662,11 +41662,11 @@ void Func0442 object#(0x442) () {
 			UI_show_npc_face0(0xFFBE, 0x0000);
 			say("\"Thou hast slain me! My blood spills away... all because of Pomdirgun, that betrayer!\"");
 			say("\"Come nearer, that I may boast of my deeds before I die.\"");
-			UI_add_answer(["deeds", "Pomdirgun", "bye"]);
+			add(["deeds", "Pomdirgun", "bye"]);
 			converse (0) {
 				case "deeds" (remove):
 					say("\"I am a Goblin! I have lived amongst the foolish Knights all these many years and no one hath suspected!! Yes! I have supplied my fellow Goblins with all of Monitor's military secrets!\"");
-					UI_add_answer("military secrets");
+					add("military secrets");
 					fallthrough;
 
 				case "military secrets" (remove):
@@ -41675,12 +41675,12 @@ void Func0442 object#(0x442) () {
 
 				case "Pomdirgun" (remove):
 					say("\"He is our leader! But he hath double-crossed me! That is why I am telling thee this! He promised ME the Helm of Monitor, but the greedy bastard kept it for himself! After all the loyal years I have served the Goblins, I deserve it! Well, I shall have to extract revenge!\"");
-					UI_add_answer(["loyal years", "revenge"]);
+					add(["loyal years", "revenge"]);
 					fallthrough;
 
 				case "loyal years" (remove):
 					say("\"That is right! I have been in Monitor longer than anyone else here! I came to the town many, many years ago!\"");
-					UI_add_answer(["many years ago", "cover"]);
+					add(["many years ago", "cover"]);
 					fallthrough;
 
 				case "many years ago" (remove):
@@ -41841,23 +41841,23 @@ void Func0443 object#(0x443) () {
 					gflags[0x0079] = true;
 					if (!UI_get_item_flag(0xFFBD, 0x001C)) {
 						say("\"Pray excuse my poor manners, stranger! I am Widow Harnna, the Healer of Monitor. I also sell vegetables from my garden.\"");
-						UI_add_answer(["widow", "healing", "food", "information"]);
+						add(["widow", "healing", "food", "information"]);
 						UI_set_item_flag(0xFFBD, 0x001C);
 					} else {
 						say("\"Pray excuse mine outburst, ",
 						    var0002,
 						    "! How may I help thee now? Dost thou have need of healing, or dost thou wish to buy my vegetables?\"");
 					}
-					UI_add_answer(["healing", "food", "information"]);
+					add(["healing", "food", "information"]);
 				} else {
 					if (!UI_get_item_flag(0xFFBD, 0x001C)) {
 						say("\"I am Widow Harnna, the Healer of Monitor. I also sell vegetables from my garden.\"");
-						UI_add_answer(["widow", "healing", "food", "information"]);
+						add(["widow", "healing", "food", "information"]);
 						UI_set_item_flag(0xFFBD, 0x001C);
 					} else {
 						say("\"How may I help thee now? Dost thou have need of healing, or dost thou wish to buy my vegetables?\"");
 					}
-					UI_add_answer(["healing", "food", "information"]);
+					add(["healing", "food", "information"]);
 				}
 			} else {
 				var0004 = UI_find_nearby(0xFFBD, 0x0334, 0x0014, 0x0000);
@@ -41869,35 +41869,35 @@ void Func0443 object#(0x443) () {
 				}
 				if (!UI_get_item_flag(0xFFBD, 0x001C)) {
 					say("\"How may I help thee? I am Widow Harnna, the Healer of Monitor. I also grow mine own food.\"");
-					UI_add_answer(["widow", "healing", "food", "information"]);
+					add(["widow", "healing", "food", "information"]);
 					UI_set_item_flag(0xFFBD, 0x001C);
 				} else {
 					say("\"How may I help thee now? Dost thou have need of healing, or dost thou wish to buy my vegetables?\"");
 				}
-				UI_add_answer(["healing", "food", "information"]);
+				add(["healing", "food", "information"]);
 			}
 		}
 		if (gflags[0x005B] && (!gflags[0x02E2])) {
-			UI_add_answer("prophecy");
+			add("prophecy");
 			var0003 = true;
 		}
 		if (gflags[0x0079]) {
-			UI_add_answer("Cantra");
+			add("Cantra");
 		}
 		if (gflags[0x00C6] && (!gflags[0x00C7])) {
-			UI_add_answer("found scroll");
+			add("found scroll");
 		}
 		if (gflags[0x0076] && ((!gflags[0x01A5]) && (gflags[0x0098] && (!gflags[0x005A])))) {
-			UI_add_answer(["Varo leaves", "pox"]);
+			add(["Varo leaves", "pox"]);
 		}
 		if (gflags[0x00CC]) {
-			UI_add_answer("Pomdirgun");
+			add("Pomdirgun");
 		}
 		if (gflags[0x0076] && gflags[0x0098]) {
-			UI_add_answer("pox");
+			add("pox");
 		}
 		if (gflags[0x002D] && (!gflags[0x00A5])) {
-			UI_add_answer("Marsten");
+			add("Marsten");
 		}
 		var0008 = 0x0002;
 		if (gflags[0x0048]) {
@@ -41907,7 +41907,7 @@ void Func0443 object#(0x443) () {
 			var0008 = 0x000C;
 		}
 		var0009 = 0x0000;
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "Marsten" (remove):
 				if (gflags[0x0038]) {
@@ -41920,7 +41920,7 @@ void Func0443 object#(0x443) () {
 			case "widow" (remove):
 				say("\"My beloved husband was slain while doing his duty, so I should have no complaints. Though Goblins have taken his life, they too shall die.\"");
 				say("\"But it hath been hard on Cantra. A girl at her age needs a father, dost not thou agree?\"");
-				UI_add_answer(["Cantra", "father"]);
+				add(["Cantra", "father"]);
 				fallthrough;
 
 			case "Pomdirgun" (remove):
@@ -41946,7 +41946,7 @@ void Func0443 object#(0x443) () {
 					say("\"Cantra misses her father terribly. He hath been gone for many weeks...\"");
 					say("\"She is nearly ready to become a Knight herself now. Her father would be so proud of her!\"");
 					say("\"She is so serious about becoming a Knight. All she ever does is practice with her wooden sword.\"");
-					UI_add_answer("father");
+					add("father");
 				} else if (!gflags[0x0095]) {
 					say("\"Dost thou believe in magic?\"");
 					if (Func0955()) {
@@ -41986,7 +41986,7 @@ void Func0443 object#(0x443) () {
 						if (gflags[0x0076] == false) {
 							say("\"I can temporarily restore thy body, but thou art suffering from an affliction that cannot easily be cured.\"");
 							say("\"Such a pox may wear off in time if thou art extremely lucky, but thou canst only be permanently cured by a special ointment made from Varo leaves.\"");
-							UI_add_answer("pox");
+							add("pox");
 							if (gflags[0x01A5] == true) {
 								say("\"Ah, thou hast spoken with Delphynia already! Dost thou have the Varo leaves?\"");
 								if (Func0955()) {
@@ -41994,7 +41994,7 @@ void Func0443 object#(0x443) () {
 								}
 								say("\"Go thou quickly to Fawn and see if she doth have more of the leaves!\"");
 							} else {
-								UI_add_answer("Varo leaves");
+								add("Varo leaves");
 							}
 							gflags[0x0076] = true;
 							Func0836();
@@ -42088,7 +42088,7 @@ void Func0443 object#(0x443) () {
 					say("\"What dost thou desire to know?\"");
 					UI_push_answers();
 					var0009 = 0x0001;
-					UI_add_answer(["people", "places", "strange objects", "nothing more"]);
+					add(["people", "places", "strange objects", "nothing more"]);
 				} else {
 					say("\"I must be about my duties. We must discuss this another time.\"");
 				}
@@ -42101,14 +42101,14 @@ void Func0443 object#(0x443) () {
 				say("\"About which Command dost thou desire to inquire?\"");
 				UI_push_answers();
 				var0009 = 0x0002;
-				UI_add_answer(["Bears", "Wolves", "Leopards", "visitors", "nothing more"]);
+				add(["Bears", "Wolves", "Leopards", "visitors", "nothing more"]);
 				fallthrough;
 
 			case "Bears" (remove):
 				say("\"The Bears are strong and brave, and known for their triumphs in the arena. About whom dost thou wish to inquire?\"");
 				UI_push_answers();
 				var0009 = 0x0003;
-				UI_add_answer(["Caladin", "Luther", "Simon", "Flicken", "Templar", "Lydia", "nothing more"]);
+				add(["Caladin", "Luther", "Simon", "Flicken", "Templar", "Lydia", "nothing more"]);
 				fallthrough;
 
 			case "Caladin" (remove):
@@ -42172,7 +42172,7 @@ void Func0443 object#(0x443) () {
 				say("\"About whom dost thou wish to inquire?\"");
 				UI_push_answers();
 				var0009 = 0x0003;
-				UI_add_answer(["Brendann", "Lucilla", "Renfry", "Krayg", "Cellia", "Shmed", "nothing more"]);
+				add(["Brendann", "Lucilla", "Renfry", "Krayg", "Cellia", "Shmed", "nothing more"]);
 				fallthrough;
 
 			case "Brendann" (remove):
@@ -42216,7 +42216,7 @@ void Func0443 object#(0x443) () {
 				say("\"About whom dost thou wish to know?\"");
 				UI_push_answers();
 				var0009 = 0x0003;
-				UI_add_answer(["Lord Marsten", "Spektor", "Standarr", "Andral", "Shazzana", "nothing more"]);
+				add(["Lord Marsten", "Spektor", "Standarr", "Andral", "Shazzana", "nothing more"]);
 				fallthrough;
 
 			case "Lord Marsten" (remove):
@@ -42271,14 +42271,14 @@ void Func0443 object#(0x443) () {
 				say("\"Of which type of place wouldst thou have me tell?\"");
 				UI_push_answers();
 				var0009 = 0x0002;
-				UI_add_answer(["cities", "wilderness"]);
+				add(["cities", "wilderness"]);
 				fallthrough;
 
 			case "cities" (remove):
 				say("\"There are three cities in the Serpent Isles, and a small hamlet. Of which can I tell thee?\"");
 				UI_push_answers();
 				var0009 = 0x0003;
-				UI_add_answer(["Moonshade", "Fawn", "Sleeping Bull", "Monitor", "nothing more"]);
+				add(["Moonshade", "Fawn", "Sleeping Bull", "Monitor", "nothing more"]);
 				fallthrough;
 
 			case "Moonshade" (remove):
@@ -42305,7 +42305,7 @@ void Func0443 object#(0x443) () {
 				say("\"The wilderness is the place in which a warrior can test himself against fearsome beasts and challenges of nature. Of which place wouldst thou learn?\"");
 				UI_push_answers();
 				var0009 = 0x0003;
-				UI_add_answer(["Furnace", "Gorlab Swamp", "Great Northern Forest", "nothing more"]);
+				add(["Furnace", "Gorlab Swamp", "Great Northern Forest", "nothing more"]);
 				fallthrough;
 
 			case "Furnace" (remove):
@@ -42325,7 +42325,7 @@ void Func0443 object#(0x443) () {
 
 			case "strange objects":
 				var0009 = (var0009 + 0x0001);
-				UI_remove_answer("strange objects");
+				remove("strange objects");
 				var000B = [];
 				if (gflags[0x027A] && (!gflags[0x028C])) {
 					var000B = (var000B & "pinecone");
@@ -42399,10 +42399,10 @@ void Func0443 object#(0x443) () {
 							var000C = 0x0000;
 							var000E = true;
 						}
-						UI_add_answer(var000D);
+						add(var000D);
 						var000C = (var000C - 0x0001);
 					}
-					UI_add_answer("nothing more");
+					add("nothing more");
 				}
 				fallthrough;
 
@@ -42419,7 +42419,7 @@ void Func0443 object#(0x443) () {
 					if (var000B == []) {
 						var000E = true;
 					}
-					UI_add_answer(var000D);
+					add(var000D);
 				}
 				fallthrough;
 
@@ -42438,7 +42438,7 @@ void Func0443 object#(0x443) () {
 					if (var000B == []) {
 						var000E = true;
 					}
-					UI_add_answer(var000D);
+					add(var000D);
 				}
 				fallthrough;
 
@@ -42458,7 +42458,7 @@ void Func0443 object#(0x443) () {
 					if (var000B == []) {
 						var000E = true;
 					}
-					UI_add_answer(var000D);
+					add(var000D);
 				}
 				fallthrough;
 
@@ -42476,7 +42476,7 @@ void Func0443 object#(0x443) () {
 					if (var000B == []) {
 						var000E = true;
 					}
-					UI_add_answer(var000D);
+					add(var000D);
 				}
 				fallthrough;
 
@@ -42495,7 +42495,7 @@ void Func0443 object#(0x443) () {
 					if (var000B == []) {
 						var000E = true;
 					}
-					UI_add_answer(var000D);
+					add(var000D);
 				}
 				fallthrough;
 
@@ -42513,7 +42513,7 @@ void Func0443 object#(0x443) () {
 					if (var000B == []) {
 						var000E = true;
 					}
-					UI_add_answer(var000D);
+					add(var000D);
 				}
 				fallthrough;
 
@@ -42531,7 +42531,7 @@ void Func0443 object#(0x443) () {
 					if (var000B == []) {
 						var000E = true;
 					}
-					UI_add_answer(var000D);
+					add(var000D);
 				}
 				fallthrough;
 
@@ -42549,7 +42549,7 @@ void Func0443 object#(0x443) () {
 					if (var000B == []) {
 						var000E = true;
 					}
-					UI_add_answer(var000D);
+					add(var000D);
 				}
 				fallthrough;
 
@@ -42563,7 +42563,7 @@ void Func0443 object#(0x443) () {
 					if (var000B == []) {
 						var000E = true;
 					}
-					UI_add_answer(var000D);
+					add(var000D);
 				}
 				fallthrough;
 
@@ -42580,7 +42580,7 @@ void Func0443 object#(0x443) () {
 					if (var000B == []) {
 						var000E = true;
 					}
-					UI_add_answer(var000D);
+					add(var000D);
 				}
 				fallthrough;
 
@@ -42599,7 +42599,7 @@ void Func0443 object#(0x443) () {
 					if (var000B == []) {
 						var000E = true;
 					}
-					UI_add_answer(var000D);
+					add(var000D);
 				}
 				fallthrough;
 
@@ -42617,7 +42617,7 @@ void Func0443 object#(0x443) () {
 					if (var000B == []) {
 						var000E = true;
 					}
-					UI_add_answer(var000D);
+					add(var000D);
 				}
 				fallthrough;
 
@@ -42636,7 +42636,7 @@ void Func0443 object#(0x443) () {
 					if (var000B == []) {
 						var000E = true;
 					}
-					UI_add_answer(var000D);
+					add(var000D);
 				}
 				fallthrough;
 
@@ -42654,7 +42654,7 @@ void Func0443 object#(0x443) () {
 					if (var000B == []) {
 						var000E = true;
 					}
-					UI_add_answer(var000D);
+					add(var000D);
 				}
 				fallthrough;
 
@@ -42673,7 +42673,7 @@ void Func0443 object#(0x443) () {
 					if (var000B == []) {
 						var000E = true;
 					}
-					UI_add_answer(var000D);
+					add(var000D);
 				}
 				fallthrough;
 
@@ -42691,7 +42691,7 @@ void Func0443 object#(0x443) () {
 					if (var000B == []) {
 						var000E = true;
 					}
-					UI_add_answer(var000D);
+					add(var000D);
 				}
 				fallthrough;
 
@@ -42709,7 +42709,7 @@ void Func0443 object#(0x443) () {
 					if (var000B == []) {
 						var000E = true;
 					}
-					UI_add_answer(var000D);
+					add(var000D);
 				}
 				fallthrough;
 
@@ -42727,7 +42727,7 @@ void Func0443 object#(0x443) () {
 					if (var000B == []) {
 						var000E = true;
 					}
-					UI_add_answer(var000D);
+					add(var000D);
 				}
 				fallthrough;
 
@@ -42746,7 +42746,7 @@ void Func0443 object#(0x443) () {
 					if (var000B == []) {
 						var000E = true;
 					}
-					UI_add_answer(var000D);
+					add(var000D);
 				}
 				fallthrough;
 
@@ -42766,7 +42766,7 @@ void Func0443 object#(0x443) () {
 				if (gflags[0x005B] && (!var0003)) {
 					say("\"But wait... I feel the primal forces drawing near... I hear the voices of the Void...\"");
 					say("\"I have a prophecy for thee, Avatar.\"");
-					UI_add_answer("prophecy");
+					add("prophecy");
 					var0003 = true;
 				} else {
 					UI_remove_npc_face0();
@@ -42885,35 +42885,35 @@ void Func0444 object#(0x444) () {
 			}
 		}
 		if (gflags[0x0048]) {
-			UI_add_answer("duties");
+			add("duties");
 		}
 		if ((!var0003) || gflags[0x004E]) {
-			UI_add_answer("walks in the woods");
+			add("walks in the woods");
 		}
 		if (gflags[0x004E]) {
-			UI_add_answer("Luther");
+			add("Luther");
 		}
 		if (gflags[0x0045] || (gflags[0x00A6] || (gflags[0x009E] || gflags[0x009B]))) {
-			UI_add_answer("information");
+			add("information");
 		}
-		UI_add_answer(["Knights", "supplies", "bye"]);
+		add(["Knights", "supplies", "bye"]);
 		converse (0) {
 			case "information" (remove):
 				say("\"Someone hath sent thee to me, eh? Well, I shall try to be of help to thee. What dost thou inquire about?\"");
 				UI_push_answers();
 				if (gflags[0x009B] && (!gflags[0x0290])) {
-					UI_add_answer("pumice");
+					add("pumice");
 				}
 				if (gflags[0x009E] && (!gflags[0x0293])) {
-					UI_add_answer("slippers");
+					add("slippers");
 				}
 				if (gflags[0x00A6]) {
-					UI_add_answer("ruins");
+					add("ruins");
 				}
 				if (gflags[0x0045] && (UI_get_schedule_type(0xFFB4) != 0x000F)) {
-					UI_add_answer("brown bottle");
+					add("brown bottle");
 				}
-				UI_add_answer("change subject");
+				add("change subject");
 				fallthrough;
 
 			case "brown bottle" (remove):
@@ -42936,7 +42936,7 @@ void Func0444 object#(0x444) () {
 			case "duties" (remove):
 				say("\"I run the supplies shop in Monitor, The Tools of the Trade. 'Tis not a glorious duty, but I cannot wield a sword comfortably because of my condition.\"");
 				UI_push_answers();
-				UI_add_answer(["condition", "change subject"]);
+				add(["condition", "change subject"]);
 				fallthrough;
 
 			case "condition" (remove):
@@ -42948,7 +42948,7 @@ void Func0444 object#(0x444) () {
 				say("\"So thou art a comrade of that brute Luther, eh? I know that he is no friend of mine. He is suspicious of me for no other reason than that I happen to like to take walks in the woods!\"");
 				say("\"He is merely following his leader, Caladin -- they all think the Wolves are their enemies!\"");
 				if (!var0002) {
-					UI_add_answer("walks in the woods");
+					add("walks in the woods");
 				}
 				fallthrough;
 
@@ -42958,7 +42958,7 @@ void Func0444 object#(0x444) () {
 					var000B = Func0956(["nothing", "buy", "sell"]);
 					if (var000B == "buy") {
 						Func0842();
-						UI_add_answer("buy");
+						add("buy");
 					}
 					if (var000B == "sell") {
 						say("\"I buy a few leather items, ",
@@ -42966,7 +42966,7 @@ void Func0444 object#(0x444) () {
 						    "...\"");
 						say("\"But my prices are set, I'm afraid.\"");
 						Func0843();
-						UI_add_answer("sell");
+						add("sell");
 					}
 					if (var000B == "nothing") {
 						say("\"Perhaps another time, ",
@@ -42997,11 +42997,11 @@ void Func0444 object#(0x444) () {
 				if (gflags[0x0048]) {
 					say("\"I myself belong to the Command of the Wolf.\"");
 					UI_push_answers();
-					UI_add_answer("Commands");
+					add("Commands");
 					if (!var0006) {
-						UI_add_answer("Wolf");
+						add("Wolf");
 					}
-					UI_add_answer(["Bear", "Leopard", "change subject"]);
+					add(["Bear", "Leopard", "change subject"]);
 				} else if (var0003) {
 					say("\"I must tell thee, stranger, that if thou art not a Knight, thou art nothing in this town. If thou canst not master the Test of the Knights, then it would be best for thee to move on.\"");
 				} else {
@@ -43017,7 +43017,7 @@ void Func0444 object#(0x444) () {
 
 			case "Wolf":
 				say("\"It is hard to be a Knight who doth not fight well. I am useless on the battlefield, but by being Provisioner I can at least earn my keep! The Wolves have treated me well. Now if I were a Bear... well, all they can think of is Prowess.\"");
-				UI_remove_answer("Wolf");
+				remove("Wolf");
 				var0006 = true;
 				fallthrough;
 
@@ -43025,7 +43025,7 @@ void Func0444 object#(0x444) () {
 				var0007 = true;
 				say("\"They are brutes! All they can think of are their incessant duels. The Bears fight only for glory -- but what about the Goblins? What about bandits on the road? Caladin and his Knights are too concerned with winning glory to worry about the true battles which face us.\"");
 				UI_push_answers();
-				UI_add_answer(["Caladin", "duels", "nothing more"]);
+				add(["Caladin", "duels", "nothing more"]);
 				fallthrough;
 
 			case "Leopard" (remove):
@@ -43061,13 +43061,13 @@ void Func0444 object#(0x444) () {
 					var0002 = true;
 					if (gflags[0x004E]) {
 						say("\"It pains me that simply because I have this natural tendency, others would viciously gossip that I was conspiring with our enemy. I seldom venture far while I am alone and I take exceeding care, thou canst well believe me.\"");
-						UI_add_answer("conspiring");
+						add("conspiring");
 					}
 					say("\"I take long walks. Well, what is wrong with that, I ask thee? I especially like to visit sites of battles, looking for antique weaponry or armour.\tI collect them. I collect many things.\"");
 					if (!var0008) {
-						UI_add_answer(["battle sites"]);
+						add(["battle sites"]);
 					}
-					UI_add_answer("change subject");
+					add("change subject");
 					if ((!gflags[0x004E]) && var0008) {
 						UI_pop_answers();
 					}
@@ -43081,10 +43081,10 @@ void Func0444 object#(0x444) () {
 
 			case "battle sites", "ruins":
 				var0008 = true;
-				UI_remove_answer("battle sites");
-				UI_remove_answer("ruins");
+				remove("battle sites");
+				remove("ruins");
 				say("\"There must have been a great war here, in the days when the Daemons ruled the Serpent Isle. My walks have taken me deep into the most tangled woods, where I have found many mysteries -- ruins built of strange stone, artifacts made of brass, sometimes a skull or shattered weapon... and always, the Sign of the Serpent.\"");
-				UI_add_answer("Sign of the Serpent");
+				add("Sign of the Serpent");
 				fallthrough;
 
 			case "Sign of the Serpent" (remove):
@@ -43098,7 +43098,7 @@ void Func0444 object#(0x444) () {
 			case "conspiring" (remove):
 				say("\"Dost thou accuse me? I am an innocent man, and soon I shall present evidence of that fact! I have reasons of mine own to believe that someone among us is selling our secrets to the Goblins.\"");
 				UI_push_answers();
-				UI_add_answer(["reasons of mine own", "evidence", "nothing more"]);
+				add(["reasons of mine own", "evidence", "nothing more"]);
 				fallthrough;
 
 			case "reasons of mine own" (remove):
@@ -43115,7 +43115,7 @@ void Func0444 object#(0x444) () {
 
 			case "evidence" (remove):
 				say("\"Listen to this -- if there is a traitor, he must meet with the Goblins somewhere. I know of a place where the Goblins often gather. Perhaps I can find evidence there of who the traitor is. But of late, there have been too many Goblin patrols near the rendezvous. I have been unable to reach the place undetected.\"");
-				UI_add_answer(["patrols", "rendezvous"]);
+				add(["patrols", "rendezvous"]);
 				fallthrough;
 
 			case "patrols" (remove):
@@ -43314,15 +43314,15 @@ void Func0445 object#(0x445) () {
 			UI_remove_npc_face1();
 			UI_set_conversation_slot(0x0000);
 			say("\"What business dost thou have with me, stranger?\"");
-			UI_add_answer(["Astrid", "Knight Champion"]);
+			add(["Astrid", "Knight Champion"]);
 		} else {
 			if (gflags[0x002D] && (!gflags[0x00A5])) {
 				say("\"Oh, art thou bothering me again! No servant of Beast British is welcome here.\"");
-				UI_add_answer(["I renounce Lord British", "I serve Lord British"]);
+				add(["I renounce Lord British", "I serve Lord British"]);
 			} else {
 				if (gflags[0x0038]) {
 					say("\"Didst thou come to ask me why I did betray my city? Ha! Any idiot can see the reason. With the current emotional and spiritual state of the city, the Goblins are certain to win this war against us! The foolish Bears and the cowardly Wolves are weakening us! They needed to be turned against each other so that the Leopard Command could assume their rightful leadership of Monitor. I had even devised a secret weapon to defend the city without the Bears or Wolves.\"");
-					UI_add_answer(["foolish Bears", "cowardly Wolves", "secret weapon"]);
+					add(["foolish Bears", "cowardly Wolves", "secret weapon"]);
 				} else if (gflags[0x0048]) {
 					say("\"'Tis a pleasure to see thee, Knight ",
 					    var0001,
@@ -43334,28 +43334,28 @@ void Func0445 object#(0x445) () {
 				}
 			}
 		}
-		UI_add_answer(["duties", "Goblins"]);
+		add(["duties", "Goblins"]);
 		if (gflags[0x0048]) {
-			UI_add_answer("traitor");
+			add("traitor");
 		}
 		if (gflags[0x003C] && (!gflags[0x002F])) {
-			UI_add_answer("ask permission");
+			add("ask permission");
 		}
 		if (gflags[0x004A] && (!gflags[0x0048])) {
-			UI_add_answer("Knighthood");
+			add("Knighthood");
 		}
 		if (gflags[0x0036] && (!gflags[0x0038])) {
-			UI_add_answer("accuse");
+			add("accuse");
 		}
 		if (gflags[0x00A9] && (!gflags[0x0078])) {
-			UI_add_answer("enchanter");
+			add("enchanter");
 		}
 		if ((UI_get_schedule_type(0xFFBB) == 0x0007) && (!gflags[0x0038])) {
-			UI_add_answer("Hall of Monitor");
+			add("Hall of Monitor");
 		}
 		if (gflags[0x0045] && (UI_get_schedule_type(0xFFB4) != 0x000F)) {
-			UI_add_answer("brown bottle");
-			UI_add_answer("bye");
+			add("brown bottle");
+			add("bye");
 			converse (0) {
 				case "brown bottle" (remove):
 					if (Func097D(0xFE9B, 0x0001, 0x0268, 0xFE99, 0x0009)) {
@@ -43369,7 +43369,7 @@ void Func0445 object#(0x445) () {
 					fallthrough;
 
 				case "I renounce Lord British":
-					UI_remove_answer(["I renounce Lord British", "I serve Lord British"]);
+					remove(["I renounce Lord British", "I serve Lord British"]);
 					say("\"Yes? Thou dost wish to say something to me?\"");
 					UI_show_npc_face1(0xFE9C, 0x0000);
 					UI_set_conversation_slot(0x0001);
@@ -43395,7 +43395,7 @@ void Func0445 object#(0x445) () {
 					UI_set_conversation_slot(0x0000);
 					say("\"Thou must feel better to have purged thyself of that burden. Thou wilt now be accepted by all of Monitor.\"");
 					say("\"Who doth know? Perhaps one day thou couldst become a true knight of Monitor. But only if thou passest the Test of Knighthood.\"");
-					UI_add_answer("Test of Knighthood");
+					add("Test of Knighthood");
 					gflags[0x00A5] = true;
 					fallthrough;
 
@@ -43408,22 +43408,22 @@ void Func0445 object#(0x445) () {
 					if (!gflags[0x0032]) {
 						Func094E(0xFF6A, "@Understand, stranger, that Marsten and this woman\twere bedmates.@");
 						UI_set_conversation_slot(0x0000);
-						UI_add_answer("bedmates");
+						add("bedmates");
 					}
 					say("\"There is none to replace her, and certainly none able to reclaim the Helm of Monitor from the Goblins.\"");
-					UI_add_answer("Helm of Monitor");
+					add("Helm of Monitor");
 					fallthrough;
 
 				case "Helm of Monitor" (remove):
 					say("\"'Tis a sacred item once belonging to the Goblins. It was what gave their ancient leader, Gurnordir, the power to build the Goblin Horde.\"");
 					say("\"When our forefathers killed Gurnordir, the Helm was claimed for Monitor. It hath since been worn by the Knight Champion.\"");
-					UI_add_answer("Gurnordir");
+					add("Gurnordir");
 					if (!var0008) {
-						UI_add_answer("Knight Champion");
+						add("Knight Champion");
 					}
 					if (!UI_get_item_flag(0xFEF7, 0x0004)) {
 						say("\"We need to reclaim it! Else, the Goblins shall again build their Horde and invade this great city.\"");
-						UI_add_answer("raid the Goblins");
+						add("raid the Goblins");
 					}
 					fallthrough;
 
@@ -43464,7 +43464,7 @@ void Func0445 object#(0x445) () {
 					say("\"I vow to war upon them until the end of the world! There shall be no end to my vengeance upon the Goblins.\"");
 					say("\"They have robbed, pillaged, and murdered our people since our ancestors came here centuries ago. They delight in kidnapping our women and eating them alive!\"");
 					say("\"In the end, 'tis either Men or Goblins -- both of us cannot dwell here.\"");
-					UI_add_answer("ancestors");
+					add("ancestors");
 					fallthrough;
 
 				case "ancestors" (remove):
@@ -43472,7 +43472,7 @@ void Func0445 object#(0x445) () {
 					say("\"So we set sail from Sosaria, and -- led beyond the Serpent Pillars by a mage named Erstam -- we came to the Serpent Isle.\"");
 					say("\"This land was deserted then, settled only by Goblins and covered with the ruins of a mysterious ancient Serpentine civilization.\"");
 					UI_push_answers();
-					UI_add_answer(["tyrant", "Sosaria", "ruins", "Erstam", "change subject"]);
+					add(["tyrant", "Sosaria", "ruins", "Erstam", "change subject"]);
 					fallthrough;
 
 				case "tyrant" (remove):
@@ -43491,7 +43491,7 @@ void Func0445 object#(0x445) () {
 					} else {
 						say("\"Thou dost agree, since thou dost not speak well of the Beast! Aye, a tyrant if there ever were one.\"");
 					}
-					UI_add_answer(["Three Cities", "Beast British"]);
+					add(["Three Cities", "Beast British"]);
 					fallthrough;
 
 				case "Three Cities" (remove):
@@ -43527,9 +43527,9 @@ void Func0445 object#(0x445) () {
 					say("\"There are three bodies of Knights in the city. No Command is better than another, for all warriors are equal.\"");
 					say("\"As the leader of the Leopards, this is my year to rule Monitor.\"");
 					if (!var0005) {
-						UI_add_answer("Leopards");
+						add("Leopards");
 					}
-					UI_add_answer("Command");
+					add("Command");
 					fallthrough;
 
 				case "Leopards" (remove):
@@ -43537,10 +43537,10 @@ void Func0445 object#(0x445) () {
 					say("\"We are the peacemakers. The Bears and the Wolves always quarrel, but we stop them from wringing each others' necks.\"");
 					say("\"We bring balance to the community. 'Tis not always glorious to be a Leopard, but we are proud to do our duty.\"");
 					if (!var0006) {
-						UI_add_answer("Wolves");
+						add("Wolves");
 					}
 					if (!var0004) {
-						UI_add_answer("Bears");
+						add("Bears");
 					}
 					fallthrough;
 
@@ -43549,13 +43549,13 @@ void Func0445 object#(0x445) () {
 					say("\"The Knights are organized into three war bands, which are known as Commands -- the Bears, the Wolves, and the Leopards.\"");
 					say("\"As thou hast no doubt noted, our tattoos mark us according to our Command.\"");
 					if (!var0006) {
-						UI_add_answer("Wolves");
+						add("Wolves");
 					}
 					if (!var0004) {
-						UI_add_answer("Bears");
+						add("Bears");
 					}
 					if (!var0005) {
-						UI_add_answer("Leopards");
+						add("Leopards");
 					}
 					fallthrough;
 
@@ -43567,7 +43567,7 @@ void Func0445 object#(0x445) () {
 
 				case "Wolves":
 					var0006 = true;
-					UI_remove_answer("Wolves");
+					remove("Wolves");
 					say("\"The prosperity of Monitor is due to the foresight of the Wolves. They have forced us to reach out to our fellow Man.\"");
 					say("\"The Wolves repaired the ancient highway, and added new roads to link the Three Cities. They built the guard towers.\"");
 					say("\"Brendann is their lord. The Wolves are smart, preferring cunning over brute force.\"");
@@ -43578,7 +43578,7 @@ void Func0445 object#(0x445) () {
 					say("\"Knight Champion is the most revered title in Monitor -- more than Lord! To be Knight Champion is to be the finest warrior in the land.\"");
 					say("\"To hone their skills, our Knights meet daily on the List Field to spar. Thus, they demonstrate their martial prowess.\"");
 					say("\"From success in tournament and in battle, the Knight Champion is determined. He or she is privileged to wear the Helm of Monitor.\"");
-					UI_add_answer("List Field");
+					add("List Field");
 					fallthrough;
 
 				case "List Field" (remove):
@@ -43586,7 +43586,7 @@ void Func0445 object#(0x445) () {
 					say("\"There is no shortage of opponents, especially if thou dost go there in the late morning or afternoon.\"");
 					if (!gflags[0x0048]) {
 						say("\"Even strangers like thyself are welcome to spar. 'Tis good preparation for the Test of Knighthood.\"");
-						UI_add_answer("Test of Knighthood");
+						add("Test of Knighthood");
 					}
 					fallthrough;
 
@@ -43612,7 +43612,7 @@ void Func0445 object#(0x445) () {
 					say("\"One cannot be born a Knight, nor can the title be bestowed for money or influence. Only a worthy warrior can become a Knight.\"");
 					say("\"To test the worthiness of those who sought Knighthood, a special dungeon was prepared. If one can survive Knight's Test, then one is ready for Knighthood.\"");
 					say("\"'Tis an honor to become a Knight of Monitor, yet 'tis also a heavy responsibility. There are many enemies in the land.\"");
-					UI_add_answer(["Knight's Test", "responsibility"]);
+					add(["Knight's Test", "responsibility"]);
 					fallthrough;
 
 				case "Knight's Test" (remove):
@@ -43721,7 +43721,7 @@ void Func0445 object#(0x445) () {
 
 				case "Hall of Monitor" (remove):
 					say("\"This is a magnificent building. It serves as both a seat of government where important meetings are held, and as a museum of sorts.\"");
-					UI_add_answer(["meetings", "museum"]);
+					add(["meetings", "museum"]);
 					fallthrough;
 
 				case "meetings" (remove):
@@ -43943,32 +43943,32 @@ void Func0446 object#(0x446) () {
 		} else {
 			say("\"Hello again!\"");
 		}
-		UI_add_answer(["duties"]);
+		add(["duties"]);
 		if (Func0942(0xFFB3)) {
-			UI_add_answer("interrupting");
+			add("interrupting");
 		}
 		if (gflags[0x0053]) {
-			UI_add_answer("rendezvous");
+			add("rendezvous");
 		}
 		if (gflags[0x008F]) {
-			UI_add_answer("Andral");
+			add("Andral");
 		}
 		if (gflags[0x0092]) {
-			UI_add_answer("Spektor");
+			add("Spektor");
 		}
 		if (gflags[0x009C] && (!gflags[0x0291])) {
-			UI_add_answer("lost ring");
+			add("lost ring");
 		}
 		if (gflags[0x004A] && (!gflags[0x0091])) {
-			UI_add_answer("banquet stew");
+			add("banquet stew");
 		}
 		if (gflags[0x0045] && (UI_get_schedule_type(0xFFB4) != 0x000F)) {
-			UI_add_answer("brown bottle");
+			add("brown bottle");
 		}
 		if (gflags[0x0048] && (!(UI_get_item_flag(0xFFB4, 0x0004) && (!(gflags[0x0038] && (!gflags[0x0092])))))) {
-			UI_add_answer("traitor");
+			add("traitor");
 		}
-		UI_add_answer(["name", "buy", "bye"]);
+		add(["name", "buy", "bye"]);
 		converse (0) {
 			case "traitor" (remove):
 				say("\"This is all so confusing. Lord Brendann is certain that there must be a traitor, and the Wolves are united behind him.\"");
@@ -44011,7 +44011,7 @@ void Func0446 object#(0x446) () {
 					Func097F(0xFFBA, "@Not a Knight!@", 0x0000);
 					abort;
 				} else {
-					UI_add_answer(["The Slashing Sword", "cooking", "Quest of Courage"]);
+					add(["The Slashing Sword", "cooking", "Quest of Courage"]);
 				}
 				fallthrough;
 
@@ -44029,7 +44029,7 @@ void Func0446 object#(0x446) () {
 					}
 				} else {
 					say("\"If thou wouldst return when we are open, perhaps I could serve thee food or drink...\"");
-					UI_remove_answer("buy");
+					remove("buy");
 				}
 				fallthrough;
 
@@ -44037,14 +44037,14 @@ void Func0446 object#(0x446) () {
 				say("\"'Tis a pub that hath been handed down generation to generation, originating with my great-grandfather. Although 'tis a wonderful place to have a meal, most of the men in the town come by to court me!\"");
 				if (!UI_is_pc_female()) {
 					say("\"I enjoy all the attention...\"");
-					UI_add_answer("court");
+					add("court");
 				}
-				UI_add_answer(["great-grandfather", "men"]);
+				add(["great-grandfather", "men"]);
 				fallthrough;
 
 			case "great-grandfather" (remove):
 				say("\"He was not only the founder of the pub, but he was a Champion Knight of Monitor! He wore the Helm of Monitor for several years, before he was bested in a tournament.\"");
-				UI_add_answer(["Champion Knight", "tournament"]);
+				add(["Champion Knight", "tournament"]);
 				fallthrough;
 
 			case "Champion Knight" (remove):
@@ -44053,7 +44053,7 @@ void Func0446 object#(0x446) () {
 					say("\"I am so glad that thou hast recaptured the Helm of Monitor. Thou dost make a fine Champion Knight in thine own right.\"");
 				} else {
 					say("\"I fear that there is none worthy to fill her shoes as Champion Knight!\"");
-					UI_add_answer("worthy");
+					add("worthy");
 					if (!UI_is_pc_female()) {
 						say("\"Except, perhaps, thyself? I must believe that thou hast had thy share of conquests in thy time...\"");
 					}
@@ -44079,7 +44079,7 @@ void Func0446 object#(0x446) () {
 			case "tournament" (remove):
 				say("\"All the Knights think about is fighting! And who do they fight? The Goblins? No! They prefer to spar with one another at the List Field!\"");
 				say("\"Luther is the worst. Oh, how I hate him!\"");
-				UI_add_answer("Luther");
+				add("Luther");
 				fallthrough;
 
 			case "Luther" (remove):
@@ -44195,7 +44195,7 @@ labelFunc0446_05A1:
 					}
 					say("\"Spektor and I were lovers. Canst thou believe it? Yet there was something appealing about that man...\"");
 					say("\"Despite my conscience, I have kept his guilty secret for these many months. It casts filth upon my soul. I am ashamed.\"");
-					UI_add_answer(["lovers", "secret"]);
+					add(["lovers", "secret"]);
 				} else {
 					say("\"Now that Spektor hath been arrested for his crimes, I wonder what I shall do with this key that he gave to me for safekeeping. Perhaps I shall give it to thee. Since thou hast determined all of what hath been happening, perhaps thou wilt be able to put it to good use.\"");
 					if (!gflags[0x00C1]) {
@@ -44384,29 +44384,29 @@ void Func0447 object#(0x447) () {
 				}
 			} else {
 				say("\"Now that thou hast bested me on the field of battle, I am thy friend. What can I do for thee?\"");
-				UI_add_answer("join");
+				add("join");
 			}
 		}
-		UI_add_answer(["name", "duties"]);
+		add(["name", "duties"]);
 		if (gflags[0x0042] && (!gflags[0x00B1])) {
-			UI_add_answer("bully");
+			add("bully");
 		}
 		if (gflags[0x00AD] && (!gflags[0x00AF])) {
-			UI_add_answer("braggart");
+			add("braggart");
 		}
 		if (gflags[0x00AE] && (!gflags[0x00B0])) {
-			UI_add_answer("repulsive");
+			add("repulsive");
 		}
 		if (gflags[0x00AC] && (!gflags[0x00B2])) {
-			UI_add_answer("new shield");
+			add("new shield");
 		}
 		if (gflags[0x0045] && (UI_get_schedule_type(0xFFB4) != 0x000F)) {
-			UI_add_answer("brown bottle");
+			add("brown bottle");
 		}
 		if (gflags[0x0048] && (!UI_get_item_flag(0xFFB4, 0x0004))) {
-			UI_add_answer("traitor");
+			add("traitor");
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "traitor" (remove):
 				say("\"The Goblins did not ambush that patrol without help. If Lord Marsten doth not recognize this, then he is blind as well as brainless.\"");
@@ -44426,7 +44426,7 @@ void Func0447 object#(0x447) () {
 			case "name" (remove):
 				say("\"I am Luther! I am a Bear and a trainer of unequalled strength. It is my destiny to become the next Knight Champion of Monitor!\"");
 				UI_set_item_flag(0xFFB9, 0x001C);
-				UI_add_answer(["Knight Champion", "destiny"]);
+				add(["Knight Champion", "destiny"]);
 				fallthrough;
 
 			case "Knight Champion" (remove):
@@ -44447,7 +44447,7 @@ void Func0447 object#(0x447) () {
 			case "duties" (remove):
 				say("\"As a Knight of the Order of the Bear, I am charged with defending Monitor at all times.\"");
 				say("\"Often I am called upon by Caladin to lead patrols outside the\tcity walls, or to single-handedly scout the wilderness. I am very brave.\"");
-				UI_add_answer(["Bears", "brave", "Caladin"]);
+				add(["Bears", "brave", "Caladin"]);
 				fallthrough;
 
 			case "Bears" (remove):
@@ -44455,7 +44455,7 @@ void Func0447 object#(0x447) () {
 				if (!gflags[0x004A]) {
 					say("\"If thou dost become a Knight of Monitor -- which is highly unlikely by the looks of thee -- thou shalt not be a Bear.\"");
 					say("\"The Ashes of Gurnordir do not select puny weaklings for our Command.\"");
-					UI_add_answer("Ashes of Gurnordir");
+					add("Ashes of Gurnordir");
 				}
 				fallthrough;
 
@@ -44542,7 +44542,7 @@ void Func0447 object#(0x447) () {
 				}
 				if ((gflags[0x00B2] == false) && gflags[0x028A]) {
 					Func094E(var000B, "@And that mystery shield we have must be his!@");
-					UI_add_answer("found shield");
+					add("found shield");
 					UI_set_conversation_slot(0x0000);
 				}
 				if (var000B != 0xFE9C) {
@@ -44746,17 +44746,17 @@ void Func0448 object#(0x448) () {
 				    ".\"");
 			}
 		}
-		UI_add_answer(["duties"]);
+		add(["duties"]);
 		if (gflags[0x004A] && (!gflags[0x003E])) {
-			UI_add_answer("tattoo");
+			add("tattoo");
 		}
 		if (gflags[0x0048] && (!UI_get_item_flag(0xFFB4, 0x0004))) {
-			UI_add_answer("traitor");
+			add("traitor");
 		}
 		if (gflags[0x0035]) {
-			UI_add_answer("poison");
+			add("poison");
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "traitor" (remove):
 				say("\"As loathsome as Luther is, perhaps he doth have a point. Krayg doth indeed take long walks in the woods, most strangely...\"");
@@ -44776,28 +44776,28 @@ void Func0448 object#(0x448) () {
 					say("\"Thou art new to this city, or thou wouldst have heard of me by now. Mine is the art of using needles and ink to create harmonious patterns.\"");
 					say("\"I am Lydia, the tattoo artist.\"");
 				}
-				UI_add_answer(["artist", "patterns"]);
+				add(["artist", "patterns"]);
 				fallthrough;
 
 			case "artist" (remove):
 				say("\"I learned the trade from my father. Counting myself, there have been twelve generations of tattooists in our family.\"");
 				say("\"As the tattooist, it is my privilege to grant the first tattoo to any warrior who completes the Test of Knighthood.\"");
 				say("\"Lord Marsten sometimes authorizes me to give additional tattoos, but only when the recipient hath earned them through Courage or Valor.\"");
-				UI_add_answer(["tradition", "special tattoos"]);
+				add(["tradition", "special tattoos"]);
 				fallthrough;
 
 			case "tradition" (remove):
 				say("\"Artistry is something that one is born with -- it cannot be learned or imitated. As I was born with the talent, I could not deny my duty.\"");
 				say("\"As thou canst see, I have had much practice on myself. As the tattooist, I can have as many tattoos as I desire...\"");
 				say("\"My body is covered with tattoos! My mother tattooed my back and other spots I could not reach comfortably.\"");
-				UI_add_answer(["mother", "spots?"]);
+				add(["mother", "spots?"]);
 				fallthrough;
 
 			case "mother" (remove):
 				say("\"She was a courageous Knight! I miss her very much...\"");
 				say("\"Others will tell thee that my mother died in a battle with road bandits, but I know better. She had lost the will to live!\"");
 				say("\"Her heart was broken, ever since that Warlock from Moonshade stole her oldest daughter!\"");
-				UI_add_answer(["Moonshade", "Warlock", "daughter"]);
+				add(["Moonshade", "Warlock", "daughter"]);
 				fallthrough;
 
 			case "Moonshade" (remove):
@@ -44969,14 +44969,14 @@ void Func0449 object#(0x449) () {
 		} else {
 			say("\"What? What? Oh, 'tis thee again.\"");
 		}
-		UI_add_answer(["name", "duties"]);
+		add(["name", "duties"]);
 		if (gflags[0x00BE]) {
-			UI_add_answer("Payment");
+			add("Payment");
 		}
 		if (gflags[0x00A3] && (!gflags[0x029B])) {
-			UI_add_answer("severed hand");
+			add("severed hand");
 		}
-		UI_add_answer("bye");
+		add("bye");
 		var0002 = Func0942(0xFFFD);
 		var0003 = Func0942(0xFFFE);
 		var0004 = Func0942(0xFFFF);
@@ -44994,12 +44994,12 @@ void Func0449 object#(0x449) () {
 
 			case "duties" (remove):
 				say("\"What? Why, I am the undertaker of Monitor. Didst thou not know that? I thought everyone knew that. Do not forget, Knight, that one day I shall cremate thee!\"");
-				UI_add_answer(["undertaker", "Body"]);
+				add(["undertaker", "Body"]);
 				fallthrough;
 
 			case "undertaker" (remove):
 				say("\"I take care of the dead. I am in charge of the Crematorium. I prepare bodies for cremation and oversee the chamber that houses the Ashes of the Dead.\"");
-				UI_add_answer(["The Cremator", "Ashes of the Dead"]);
+				add(["The Cremator", "Ashes of the Dead"]);
 				fallthrough;
 
 			case "Ashes of the Dead" (remove):
@@ -45015,7 +45015,7 @@ void Func0449 object#(0x449) () {
 				}
 				say("\"'Tis the Monitorian custom to cremate our dead. The ashes of a dead Knight are sacred. They represent the essence of that person's life, distilled by the mystical processes of the Cremator.\"");
 				say("\"In the Crypts of the Dead are urns filled with the ashes of generations of Knights. The Ashes of the Dead are our heritage.\"");
-				UI_add_answer("mysticism");
+				add("mysticism");
 				fallthrough;
 
 			case "The Cremator" (remove):
@@ -45023,7 +45023,7 @@ void Func0449 object#(0x449) () {
 				say("\"After I throw the switch, the pumps begin to churn. When the heat builds, the trapdoor on top opens. The body then falls into the fires below.\"");
 				say("\"The mechanism retrieves the Ashes of the Dead, and places them in an urn. A travelling belt carries the urn out of the fiery belly of the machine, so that I may collect it and take it to the Crypts of the Dead.\"");
 				say("\"Careful with what thou wouldst put near the thing! It hath the capacity to destroy practically any object in the world!\"");
-				UI_add_answer(["the Dead", "urn"]);
+				add(["the Dead", "urn"]);
 				fallthrough;
 
 			case "the Dead" (remove):
@@ -45031,7 +45031,7 @@ void Func0449 object#(0x449) () {
 				say("\"If thou dost not do this, the ghost of the dead will torment thee until thy dying day!\"");
 				say("\"I have been given authority by Lord Marsten to pay 100 monetari for every pikeman's body brought home again. That way they can be properly entombed within the crypts.\"");
 				gflags[0x0057] = true;
-				UI_add_answer("crypts");
+				add("crypts");
 				fallthrough;
 
 			case "crypts" (remove):
@@ -45040,12 +45040,12 @@ void Func0449 object#(0x449) () {
 
 			case "urn" (remove):
 				say("\"Andral, our town sculptor, makes them.\"");
-				UI_add_answer("Andral");
+				add("Andral");
 				fallthrough;
 
 			case "Andral" (remove):
 				say("\"Talented but very solitary person, he is. Never leaves his house, except to go to his workplace. He was especially upset by the recent theft at his shop.\"");
-				UI_add_answer("theft");
+				add("theft");
 				fallthrough;
 
 			case "theft" (remove):
@@ -45065,7 +45065,7 @@ void Func0449 object#(0x449) () {
 				say("\"We do not trust magic -- thou couldst not sell a magical weapon in this town at any price! Yet there are powers greater than mere magic...\"");
 				say("\"One of these mysteries concerns the Ashes of the Dead. As we all know, the Ashes of Gurnordir lie at the end of Knight's Test. What is the power which causes the totem animal to appear? Not even I can say!\"");
 				say("\"And no one can explain the Serpent Gate, yet we have built our city above it.\"");
-				UI_add_answer(["Gurnordir", "Serpent Gate"]);
+				add(["Gurnordir", "Serpent Gate"]);
 				fallthrough;
 
 			case "Gurnordir" (remove):
@@ -45104,7 +45104,7 @@ void Func0449 object#(0x449) () {
 					} else {
 						say("\"Thou dost not carry a pikeman! I can only pay thee for bringing me the bodies of fallen knights. Only they deserve such respect...\"");
 					}
-					UI_remove_answer("Body");
+					remove("Body");
 				}
 				fallthrough;
 
@@ -45300,22 +45300,22 @@ void Func044A object#(0x44A) () {
 		UI_show_npc_face0(0xFFB6, 0x0000);
 		if (!var0001) {
 			say("\"We have not had many strangers in our town lately. Let me introduce myself. I am Shazzana, a Knight of the Leopards.\"");
-			UI_add_answer("Leopards");
+			add("Leopards");
 			UI_set_item_flag(0xFFB6, 0x001C);
 		} else {
 			say("\"I am not one to waste time with words. What is thy business with me, Knight?\"");
 		}
-		UI_add_answer(["duties"]);
+		add(["duties"]);
 		if (gflags[0x00A8]) {
-			UI_add_answer("mysterious sailor");
+			add("mysterious sailor");
 		}
 		if (gflags[0x00CC]) {
-			UI_add_answer("Pomdirgun");
+			add("Pomdirgun");
 		}
 		if (gflags[0x0044]) {
-			UI_add_answer("Simon");
+			add("Simon");
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "Pomdirgun" (remove):
 				say("\"Thou hast killed the Goblin King Pomdirgun. How wonderful!\"");
@@ -45339,7 +45339,7 @@ void Func044A object#(0x44A) () {
 				} else {
 					say("\"I am one of the best fighters in this town. This is why all of the Knights desire to be trained by me.\"");
 					say("\"I fight harder than any man or woman alive. I commonly win, but when I do not, the victor knows that they were in a terrific fight.\"");
-					UI_add_answer(["best", "train"]);
+					add(["best", "train"]);
 				}
 				fallthrough;
 
@@ -45356,7 +45356,7 @@ void Func044A object#(0x44A) () {
 					Func097F(0xFFB6, "@Pah!@", 0x0000);
 					abort;
 				}
-				UI_add_answer(["Bears", "Wolves"]);
+				add(["Bears", "Wolves"]);
 				fallthrough;
 
 			case "train" (remove):
@@ -45398,14 +45398,14 @@ void Func044A object#(0x44A) () {
 			case "Bears" (remove):
 				say("\"The Bears believe in a strong defense, I will give them that! But we cannot hide behind Monitor's walls -- we must seek out our enemies.\"");
 				say("\"Our highest priority should be to raid that hidden Goblin camp, and destroy that evil race!\"");
-				UI_add_answer(["raid", "destroy"]);
+				add(["raid", "destroy"]);
 				fallthrough;
 
 			case "raid" (remove):
 				say("\"We must take back the Helm of Monitor, and avenge the death of Astrid!\"");
 				say("\"War is the ultimate test for any Knight. This is how one doth test one's inner strength.\"");
 				say("\"War is both holy and obscene, beautiful and yet hideous. I love it. I am very good at it.\"");
-				UI_add_answer(["Astrid", "Helm of Monitor"]);
+				add(["Astrid", "Helm of Monitor"]);
 				fallthrough;
 
 			case "Astrid" (remove):
@@ -45544,9 +45544,9 @@ void Func044B object#(0x44B) () {
 			var0004 = false;
 		}
 		if (gflags[0x0080]) {
-			UI_add_answer("the Test");
+			add("the Test");
 		}
-		UI_add_answer(["duties", "bye"]);
+		add(["duties", "bye"]);
 		converse (0) {
 			case "duties" (remove):
 				if (gflags[0x004A]) {
@@ -45557,13 +45557,13 @@ void Func044B object#(0x44B) () {
 					say("\"The Test takes place here, beyond that locked door.\"");
 				}
 				if (!var0004) {
-					UI_add_answer("the Test");
+					add("the Test");
 				}
 				fallthrough;
 
 			case "the Test":
 				var0004 = true;
-				UI_remove_answer("the Test");
+				remove("the Test");
 				if (!gflags[0x004A]) {
 					say("\"All Monitorians must pass the Test before they can be granted their Knighthood.\"");
 					say("\"The Test of the Knights is a challenge which only one stout of heart, keen of mind and strong of arm can pass. It is specially designed to test thy might, thy fleetness, thy courage and thy wits. If thou dost complete the test thou shouldst follow the directions of the words contained in the scrolls that thou wilt find. Thy totem animal will then appear. Slay it and take it back to town. Cellia will take its skin to make a cloak for thee. Lucilla will cook its meat. All the Knights will have a banquet in thine honor -- if thou dost pass the test.\"");
@@ -45825,35 +45825,35 @@ void Func044C object#(0x44C) () {
 			    var0000,
 			    "?\"");
 		}
-		UI_add_answer(["duties", "visitors"]);
+		add(["duties", "visitors"]);
 		if (gflags[0x0045] && gflags[0x005F]) {
-			UI_add_answer("brown bottle");
+			add("brown bottle");
 		}
 		if (gflags[0x00A1] && (!gflags[0x0297])) {
-			UI_add_answer("strange wine");
+			add("strange wine");
 		}
 		if (gflags[0x0048]) {
-			UI_add_answer("traitor");
+			add("traitor");
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "duties" (remove):
 				say("\"I am the innkeeper of The Sleeping Soldier, Monitor's inn. If thou dost need a bed, I can certainly accommodate thee.\"");
 				if (!gflags[0x00B8]) {
 					say("\"Or if thou dost care to join me in a bottle of ale, I will gladly share with thee.\"");
-					UI_add_answer("ale");
+					add("ale");
 				}
-				UI_add_answer(["innkeeper", "The Sleeping Soldier", "Monitor", "bed"]);
+				add(["innkeeper", "The Sleeping Soldier", "Monitor", "bed"]);
 				fallthrough;
 
 			case "innkeeper" (remove):
 				say("\"I have been Monitor's innkeeper for -- well, longer than I care to remember! I am probably the oldest person in town. I can remember when Marsten, our current Lord of Monitor, was but a baby! But I have no complaints. It hath been a fair life.\"");
-				UI_add_answer("life");
+				add("life");
 				fallthrough;
 
 			case "life" (remove):
 				say("\"Well, one cannot truly control one's destiny, can one? I have had my share of misfortune. I have learned to move forward and try and forget the past.\"");
-				UI_add_answer(["misfortune", "the past"]);
+				add(["misfortune", "the past"]);
 				fallthrough;
 
 			case "misfortune" (remove):
@@ -45870,7 +45870,7 @@ void Func044C object#(0x44C) () {
 
 			case "Monitor" (remove):
 				say("\"I have lived here all my life. My parents were killed when I was very young. In a Goblin raid, of course. Most deaths are usually caused by Goblins. We have spent our entire history fighting the creatures.\"");
-				UI_add_answer("Goblins");
+				add("Goblins");
 				fallthrough;
 
 			case "Goblins" (remove):
@@ -45878,7 +45878,7 @@ void Func044C object#(0x44C) () {
 				gflags[0x00A4] = true;
 				say("\"Since the death of Astrid, some say that there is a traitor amongst us -- selling our secrets to the Goblins.\"");
 				if (!var0003) {
-					UI_add_answer("traitor");
+					add("traitor");
 				}
 				fallthrough;
 
@@ -45920,7 +45920,7 @@ void Func044C object#(0x44C) () {
 				say("\"Yes, thou mayest drink thy fill of ale here. But I am particularly fond of mine own personal brand of ale. Have a drink?\"");
 				gflags[0x005F] = true;
 				if (gflags[0x0045]) {
-					UI_add_answer("brown bottle");
+					add("brown bottle");
 				}
 				var000E = Func0955();
 				if (var000E) {
@@ -45973,7 +45973,7 @@ void Func044C object#(0x44C) () {
 
 			case "visitors" (remove):
 				say("\"The only two memorable visitors we have had -- besides thyself -- were a fat sage and a scholar.\"");
-				UI_add_answer(["fat sage", "scholar"]);
+				add(["fat sage", "scholar"]);
 				fallthrough;
 
 			case "fat sage" (remove):
@@ -45992,7 +45992,7 @@ void Func044C object#(0x44C) () {
 				}
 				say("\"Oh, and did I mention that he had several underlings travelling with him? There was a warrior, a sailor, and a hooded man.\"");
 				UI_remove_npc_face1();
-				UI_add_answer(["warrior", "sailor", "hooded man"]);
+				add(["warrior", "sailor", "hooded man"]);
 				fallthrough;
 
 			case "warrior" (remove):
@@ -46043,12 +46043,12 @@ void Func044C object#(0x44C) () {
 			case "brown bottle" (remove):
 				say("\"Hmmm. I cannot imagine... oh yes, I remember. I was taking a walk in that area. I must have been careless and dropped the bottle.\"");
 				UI_push_answers();
-				UI_add_answer(["Walk?", "area", "change subject"]);
+				add(["Walk?", "area", "change subject"]);
 				fallthrough;
 
 			case "Walk?" (remove):
 				say("\"That is correct. I was taking a walk. Sometimes I want to exercise and enjoy the fresh air.\"");
-				UI_add_answer(["Way up there?", "What about Goblins?"]);
+				add(["Way up there?", "What about Goblins?"]);
 				fallthrough;
 
 			case "Way up there?" (remove):
@@ -46073,7 +46073,7 @@ void Func044C object#(0x44C) () {
 					UI_remove_npc_face1();
 					UI_set_conversation_slot(0x0000);
 				}
-				UI_add_answer("Thou art lying!");
+				add("Thou art lying!");
 				fallthrough;
 
 			case "Thou art lying!":
@@ -46305,33 +46305,33 @@ void Func044D object#(0x44D) () {
 			say("\"I am Spektor, treasurer of Monitor.\"");
 			UI_set_item_flag(0xFFB3, 0x001C);
 		}
-		UI_add_answer(["duties", "exchange coins"]);
+		add(["duties", "exchange coins"]);
 		if (gflags[0x0093] && (!(gflags[0x0038] || gflags[0x00B3]))) {
-			UI_add_answer("know traitor");
+			add("know traitor");
 		}
 		if (gflags[0x00A2] && (!gflags[0x0299])) {
-			UI_add_answer("strange coins");
+			add("strange coins");
 		}
 		if (gflags[0x00A7]) {
-			UI_add_answer("Gwenno");
+			add("Gwenno");
 		}
 		if (!(gflags[0x0078] && gflags[0x00A9])) {
-			UI_add_answer("enchanter");
+			add("enchanter");
 		}
 		if (gflags[0x00B3] && (!gflags[0x0038])) {
-			UI_add_answer("evidence");
+			add("evidence");
 		}
 		if (gflags[0x00B6] && (!gflags[0x00B4])) {
-			UI_add_answer("thief");
+			add("thief");
 		}
 	}
-	UI_add_answer("bye");
+	add("bye");
 	converse (0) {
 		case "duties" (remove):
 			say("\"Frankly, I do so many things. I am Monitor's treasurer. Lord Marsten may order things done, but I must find a way to pay for it all!\"");
 			say("\"I handle the books and the paperwork, and I'm the local money exchanger. I also collect and administer the taxes.\"");
 			say("\"Frankly, I'm not much of a fighter, even though I am a Knight.\"");
-			UI_add_answer(["taxes", "Knight", "exchange coins"]);
+			add(["taxes", "Knight", "exchange coins"]);
 			fallthrough;
 
 		case "taxes" (remove):
@@ -46341,7 +46341,7 @@ void Func044D object#(0x44D) () {
 				say("\"With the Goblin King slain, perhaps the roads will again be filled. But the storms also discourage travel...\"");
 			} else {
 				say("\"But now, the rumors of a gathering Goblin invasion have scared the travellers off the roads! Frankly, this is nonsense.\"");
-				UI_add_answer("invasion");
+				add("invasion");
 			}
 			fallthrough;
 
@@ -46355,7 +46355,7 @@ void Func044D object#(0x44D) () {
 			if (!gflags[0x004A]) {
 				say("\"Perhaps thou shouldst consider taking the Test of Knighthood. It is not so difficult, with proper training.\"");
 				say("\"We citizens are so much nicer to thee when thou art a Knight, rather than a stranger. We distrust outsiders.\"");
-				UI_add_answer("Test of Knighthood");
+				add("Test of Knighthood");
 			}
 			fallthrough;
 
@@ -46364,7 +46364,7 @@ void Func044D object#(0x44D) () {
 			say("\"Someone in Monitor is a thief. Money is being taken from the treasury. 'Tis a mystery.\"");
 			say("\"The Bears think the Wolves are responsible. And, of course, the Wolves think the Bears are responsible. We Leopards are doing our best to keep them from killing each other.\"");
 			say("\"Please keep this to thyself. Only a few select individuals are aware of this crime. Frankly, we do not want a panic.\"");
-			UI_add_answer(["Bears", "Wolves", "Leopards", "frankly"]);
+			add(["Bears", "Wolves", "Leopards", "frankly"]);
 			fallthrough;
 
 		case "Bears", "Wolves", "Leopards" (remove):
@@ -46384,7 +46384,7 @@ void Func044D object#(0x44D) () {
 				UI_set_conversation_slot(0x0000);
 			}
 			say("\"She left here for the east. To study at the library on Monk Isle, as I recall.\"");
-			UI_add_answer("Monk Isle");
+			add("Monk Isle");
 			var0007 = Func0992(0xFFFD, "@Avatar! We must journey onward and find her!@", 0x0000, false);
 			if (var0007 != 0xFE9C) {
 				UI_set_conversation_slot(0x0000);
@@ -46395,7 +46395,7 @@ void Func044D object#(0x44D) () {
 			say("\"Frankly, 'tis a mysterious place. I do not know much about it, except the legend that wise monks dwell there.\"");
 			say("\"The only way to go there is by ship, but there are no sailors here -- the storms have discouraged them.\"");
 			say("\"Perhaps thou couldst hire a captain in Fawn -- which is the city of fishermen -- or at the hamlet of Sleeping Bull.\"");
-			UI_add_answer(["Fawn", "Sleeping Bull"]);
+			add(["Fawn", "Sleeping Bull"]);
 			fallthrough;
 
 		case "Fawn" (remove):
@@ -46405,7 +46405,7 @@ void Func044D object#(0x44D) () {
 		case "Sleeping Bull" (remove):
 			say("\"The inn there is a very old establishment, built in the days before the founding of the Three Cities. The village is built around the inn.\"");
 			say("\"Since it is such a crossroads, thou canst often meet all sorts of interesting folk there. And it is the direct link to the City of Mages.\"");
-			UI_add_answer("City of Mages");
+			add("City of Mages");
 			fallthrough;
 
 		case "City of Mages" (remove):
@@ -46473,7 +46473,7 @@ void Func044D object#(0x44D) () {
 				say("\"I am still not certain if we can trust Iolo, that enchanter friend of thine. Tell him he had better be on his best behavior. That is a friendly warning.\"");
 			} else if (gflags[0x00B5]) {
 				say("\"Perhaps thou shouldst pay me, say -- a fine -- yes, a fine! That's it. To pay for this rogue Iolo's misdeeds. After all, I am the city treasurer, thou dost know. So t'would be most proper.\"");
-				UI_add_answer("fine");
+				add("fine");
 			} else {
 				say("\"Oh, thou must be speaking of that wild rogue mage that was recently arrested trying to disrupt Groat's funeral! I believe he said his name was Iolo. Thou shouldst speak with Lord Marsten. He dealt with him.\"");
 			}
@@ -46561,30 +46561,30 @@ void Func044E object#(0x44E) () {
 			UI_set_item_flag(0xFFB2, 0x001C);
 		}
 		if (gflags[0x009F] && (!gflags[0x0294])) {
-			UI_add_answer("strange breastplate");
+			add("strange breastplate");
 		}
 		if (gflags[0x008D]) {
-			UI_add_answer("Brunt");
+			add("Brunt");
 		}
 		if (gflags[0x00BA]) {
-			UI_add_answer("Quests of Courage");
+			add("Quests of Courage");
 		}
 		if (gflags[0x0038]) {
-			UI_add_answer("Marsten");
+			add("Marsten");
 		}
 		if (gflags[0x002C]) {
-			UI_add_answer("Helm of Monitor");
+			add("Helm of Monitor");
 		}
 		if (gflags[0x0044]) {
-			UI_add_answer("Simon");
+			add("Simon");
 		}
 		if (gflags[0x00CC]) {
-			UI_add_answer("Pomdirgun");
+			add("Pomdirgun");
 		}
-		UI_add_answer(["buy", "bye"]);
+		add(["buy", "bye"]);
 		converse (0) {
 			case "Pomdirgun":
-				UI_add_answer("Pomdirgun");
+				add("Pomdirgun");
 				say("\"I envy thee the chance to kill Pomdirgun. I hope thou didst make him suffer!\"");
 				fallthrough;
 
@@ -46617,16 +46617,16 @@ void Func044E object#(0x44E) () {
 						var0004 = Func0956(["weapons", "armour"]);
 						if (var0004 == "weapons") {
 							Func0867();
-							UI_add_answer("buy weapons");
+							add("buy weapons");
 						} else {
 							Func0866();
-							UI_add_answer("buy armour");
+							add("buy armour");
 						}
 					}
 					if (var0003 == "selling") {
 						say("\"I buy only armour, friend, and I do not haggle on the price.\"");
 						Func0868();
-						UI_add_answer("sell armour");
+						add("sell armour");
 					}
 					if (var0003 == "nothing") {
 						say("\"Another time, perhaps.\"");
@@ -46783,23 +46783,23 @@ void Func044F object#(0x44F) () {
 		} else {
 			say("\"Yes?\"");
 		}
-		UI_add_answer("duties");
+		add("duties");
 		if (gflags[0x00A0] && ((!gflags[0x0296]) && gflags[0x0048])) {
-			UI_add_answer("grisly brush");
+			add("grisly brush");
 		}
 		if (gflags[0x00A4] && gflags[0x0048]) {
-			UI_add_answer("Goblins");
+			add("Goblins");
 		}
 		if (gflags[0x0045] && (UI_get_schedule_type(0xFFB4) != 0x000F)) {
-			UI_add_answer("brown bottle");
+			add("brown bottle");
 		}
 		if (gflags[0x01CA] && gflags[0x0048]) {
-			UI_add_answer("Argus");
+			add("Argus");
 		}
 		if (gflags[0x0048]) {
-			UI_add_answer("traitor");
+			add("traitor");
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "grisly brush" (remove):
 				say("\"A peculiar brush? I suspect that I already know what it is, but let me see...\"");
@@ -46807,7 +46807,7 @@ void Func044F object#(0x44F) () {
 					say("\"That is a Goblin hairbrush! Made out of the bones of their victims, or so the legends claim.\"");
 					say("\"Perhaps crafted from the thigh bone of one of mine old friends. Someday, thou or I too may be odd bits of furnishings in some Goblin hut!\"");
 					gflags[0x0296] = true;
-					UI_add_answer("Goblin artifacts");
+					add("Goblin artifacts");
 				} else {
 					say("\"I cannot identify the object if thou dost not show it to me. I will not waste my time making wild guesses.\"");
 				}
@@ -46819,7 +46819,7 @@ void Func044F object#(0x44F) () {
 				say("\"They eat nearly anything, except their own kind. Goblins are especially fond of children. We had to build the city walls to keep their scouts from stealing our babies.\"");
 				say("\"The Goblins consider the pelts of the Gwani to be great prizes -- thou canst recognize a Goblin chief by the pelt he wears.\"");
 				say("\"The chief always keeps the prize artifacts for himself. But he must lock them away in a safe place, or his followers will steal them!\"");
-				UI_add_answer("Gwani pelts");
+				add("Gwani pelts");
 				fallthrough;
 
 			case "Gwani pelts" (remove):
@@ -46836,7 +46836,7 @@ void Func044F object#(0x44F) () {
 					abort;
 				} else {
 					say("\"I am a Knight of Monitor, and a member of the Command of the Bear. I also serve Lord Marsten as his tactical adviser.\"");
-					UI_add_answer(["Command of the Bear", "adviser"]);
+					add(["Command of the Bear", "adviser"]);
 				}
 				fallthrough;
 
@@ -46849,7 +46849,7 @@ void Func044F object#(0x44F) () {
 				say("\"For instance, hast thou ever noticed that the Goblins tend to attack in patterns? By observing them, I can sometimes predict when and how they are going to strike next. I like to imagine what it must be like, to be huddled around the fires of their village as they draw their plans against us. The better I can understand them, the better I can defend against them.\"");
 				if (gflags[0x0048]) {
 					UI_push_answers();
-					UI_add_answer(["patterns", "when", "how", "change subject"]);
+					add(["patterns", "when", "how", "change subject"]);
 				} else {
 					say("\"But I must not speak of these things to a stranger. Thou couldst be a spy for them...\"");
 				}
@@ -46882,7 +46882,7 @@ void Func044F object#(0x44F) () {
 				if (gflags[0x002C]) {
 					say("\"Perhaps in my next life I shall see him again. But not for any prolonged period of time, I hope.\"");
 				}
-				UI_add_answer(["war", "miracle", "Pomdirgun"]);
+				add(["war", "miracle", "Pomdirgun"]);
 				fallthrough;
 
 			case "war" (remove):
@@ -46896,7 +46896,7 @@ void Func044F object#(0x44F) () {
 					say("\"The power of the Helm cannot be understated! With it, Pomdirgun can once again assemble the Goblin Horde, and invade the lands of Men.\"");
 					say("\"Somehow, we must regain the Helm!\"");
 				}
-				UI_add_answer("forefathers");
+				add("forefathers");
 				fallthrough;
 
 			case "forefathers" (remove):
@@ -46904,7 +46904,7 @@ void Func044F object#(0x44F) () {
 				say("\"He was the mightiest Goblin who ever lived, and he led the Goblin Horde in the invasion which placed Monitor itself under siege.\"");
 				say("\"The Goblins stormed the walls, and fought their way inside the city. However, the Bears surrounded them, and Gurnordir was at last slain.\"");
 				say("\"From his dead body was taken the Helm of Courage, and his ashes are enshrined in Knight's Test.\"");
-				UI_add_answer(["Helm of Courage", "ashes"]);
+				add(["Helm of Courage", "ashes"]);
 				fallthrough;
 
 			case "Helm of Courage" (remove):
@@ -46931,14 +46931,14 @@ void Func044F object#(0x44F) () {
 				say("\"I managed to reach Knight's Test, where Shmed gave me shelter and sent for Harnna to bandage my wounds. When I recover, I am going there again!\"");
 				UI_push_answers();
 				if (!var0003) {
-					UI_add_answer("ambush");
+					add("ambush");
 				}
-				UI_add_answer(["Astrid", "alive", "change subject"]);
+				add(["Astrid", "alive", "change subject"]);
 				fallthrough;
 
 			case "ambush", "traitor":
-				UI_remove_answer("ambush");
-				UI_remove_answer("traitor");
+				remove("ambush");
+				remove("traitor");
 				var0003 = true;
 				if (gflags[0x0044]) {
 					say("\"A Goblin magically transformed himself into a man and hid amongst us as Simon. Amazing! One day we must learn the secret of how they could accomplish this thing.\"");
@@ -46947,7 +46947,7 @@ void Func044F object#(0x44F) () {
 					say("\"It grieves me to say this, but there must be a traitor in Monitor. Someone must have revealed our plans to the Goblins.\"");
 					say("\"As a Bear, I know that our Command is innocent. Caladin doth have many faults, but being devious is not one of them.\"");
 					say("\"The traitor is either a Wolf or a Leopard. Perhaps if thou dost ask around, thou mightest find clues in this mystery.\"");
-					UI_add_answer(["Wolf", "Leopard"]);
+					add(["Wolf", "Leopard"]);
 				}
 				fallthrough;
 
@@ -47058,28 +47058,28 @@ void Func0450 object#(0x450) () {
 			Func09AC(0xFFC1, 0x030F, 0x0A64, 0x001D);
 			Func09AC(0xFF6A, 0x0310, 0x0A6A, 0x001D);
 			Func09AC(0xFFB3, 0x030F, 0x0A68, 0x001D);
-			UI_add_answer(["open the gate", "strangers"]);
+			add(["open the gate", "strangers"]);
 		} else {
 			say("\"What is it now?\"");
-			UI_add_answer(["name", "duties"]);
+			add(["name", "duties"]);
 			var0005 = UI_get_object_position(0xFFB0);
 			var0006 = var0005[0x0001];
 			var0007 = var0005[0x0002];
 			if ((var0006 > 0x0310) && ((var0006 < 0x0330) && ((var0007 > 0x0AA0) && (var0007 < 0x0AD0)))) {
-				UI_add_answer(["gate"]);
+				add(["gate"]);
 			}
 		}
 		if (gflags[0x0048] && (!UI_get_item_flag(0xFFB4, 0x0004))) {
-			UI_add_answer("traitor");
+			add("traitor");
 		}
 		if (gflags[0x00CC]) {
-			UI_add_answer("Pomdirgun");
+			add("Pomdirgun");
 		}
 		if (gflags[0x0044]) {
-			UI_add_answer("Simon");
+			add("Simon");
 		}
 		if (var0001) {
-			UI_add_answer("bye");
+			add("bye");
 		}
 		converse (0) {
 			case "Pomdirgun" (remove):
@@ -47132,18 +47132,18 @@ void Func0450 object#(0x450) () {
 			case "strangers" (remove):
 				say("\"The Colored Storms and the Goblins have kept most people off the roads, and so 'tis unusual to see strangers in Monitor.\"");
 				if (!var0000) {
-					UI_add_answer("Goblins");
+					add("Goblins");
 				}
-				UI_add_answer("storms");
+				add("storms");
 				if (!gflags[0x0078]) {
 					say("\"Suspicious, in fact...\"");
 					say("\"Perhaps thou art in league with the enchanter who materialized in the center of town! We promptly jailed him.\"");
 					gflags[0x00A9] = true;
 					if (!gflags[0x0032]) {
 						say("\"But the uproar interrupted the funeral ceremonies.\"");
-						UI_add_answer("funeral");
+						add("funeral");
 					}
-					UI_add_answer(["enchanter"]);
+					add(["enchanter"]);
 				}
 				fallthrough;
 
@@ -47165,7 +47165,7 @@ void Func0450 object#(0x450) () {
 			case "funeral" (remove):
 				say("\"'Tis a sad affair. One of our patrols was ambushed, and the Goblins slew nearly all of them! Only Templar survived to return.\"");
 				say("\"Worse yet, the patrol was led by the Champion Knight, and she remains lost. We must assume that she is slain, and the Helm of Monitor taken!\"");
-				UI_add_answer(["Champion Knight", "Helm of Monitor"]);
+				add(["Champion Knight", "Helm of Monitor"]);
 				fallthrough;
 
 			case "Champion Knight" (remove):
@@ -47188,24 +47188,24 @@ void Func0450 object#(0x450) () {
 				say("\"I am Flicken, and I am a Knight of Monitor. I belong to the Command of the Bear.\"");
 				say("\"We are all Knights here. If thou art not a Knight of Monitor, then thou dost not belong in Monitor!\"");
 				if (!gflags[0x007F]) {
-					UI_add_answer("Command");
+					add("Command");
 				} else {
-					UI_add_answer(["Wolves", "Leopards"]);
+					add(["Wolves", "Leopards"]);
 				}
-				UI_add_answer("Bears");
+				add("Bears");
 				fallthrough;
 
 			case "Command" (remove):
 				say("\"The Knights of Monitor are organized into three clans, which are called Commands.\"");
 				say("\"The Bears are the elite, but there are also the Wolves and the Leopards. Thou canst tell us apart by our tattoos.\"");
 				gflags[0x007F] = true;
-				UI_add_answer(["Bears", "Wolves", "Leopards"]);
+				add(["Bears", "Wolves", "Leopards"]);
 				fallthrough;
 
 			case "Bears" (remove):
 				if (!gflags[0x004A]) {
 					say("\"If thou dost ever become a Knight of Monitor, then pray that the Ashes of Gurnordir proclaim thee a Knight of the Bears!\"");
-					UI_add_answer("Ashes of Gurnordir");
+					add("Ashes of Gurnordir");
 				}
 				say("\"We are the strongest of the Commands. The Goblins shall never break this city, so long as we are here to man the walls!\"");
 				fallthrough;
@@ -47224,7 +47224,7 @@ void Func0450 object#(0x450) () {
 				if (!gflags[0x0038]) {
 					say("\"No one knows what the Leopards stand for anymore! Marsten used to be strong and virile, but now he rules the city from his desk.\"");
 					say("\"As for Spektor, he would rather pick up a quill than a sword. With such leaders, how can the Leopards amount to much!\"");
-					UI_add_answer("ruler");
+					add("ruler");
 				} else {
 					say("\"With Marsten in prison, the Leopards must needs be restored to what they once were! But Shazzana is a she-tiger... she will set things aright.\"");
 				}
@@ -47238,14 +47238,14 @@ void Func0450 object#(0x450) () {
 			case "duties" (remove):
 				say("\"I am the Chief Pikeman, and my station is the Southwest Gate. The task of the Pikemen of Monitor is to man the city walls, and watch for Goblins.\"");
 				if (!var0000) {
-					UI_add_answer(["Goblins"]);
+					add(["Goblins"]);
 				}
 				fallthrough;
 
 			case "Goblins" (remove):
 				say("\"Foul creatures! They are the bane of our existence. We are at war with the Goblins, and have been for many generations. If it were not for the Pikemen patrolling the roads, one could never travel anywhere!\"");
 				var0000 = true;
-				UI_add_answer(["roads", "travel"]);
+				add(["roads", "travel"]);
 				fallthrough;
 
 			case "roads" (remove):
@@ -47364,18 +47364,18 @@ void Func0451 object#(0x451) () {
 			say("\"Seest thou, ",
 			    var0002,
 			    "? I told thee that I would teach them not to take Ensorcio lightly! I told thee that one day they would welcome me back... Beg for me to return!\"");
-			UI_add_answer(["teach them", "welcome", "bye"]);
+			add(["teach them", "welcome", "bye"]);
 		} else {
 			if (var0003 == false) {
 				if (gflags[0x003E] == true) {
 					say("\"Well, if it isn't another petty tyrant!\"");
 					say("\"Thou mayest as well leave now, Pikeman. I have no use for the likes of thee... And thou canst do nothing to avenge the wrongs I have suffered.\"");
 					say("\"So, leave thou before I grow tired of thee and thou dost feel the wrath of Ensorcio the Adept!\"");
-					UI_add_answer(["tyrant", "wrongs", "bye"]);
+					add(["tyrant", "wrongs", "bye"]);
 				} else {
 					say("\"Thou mayest as well leave now, hero. I have seen thy kind before and have no use for the likes of thee... And thou canst do nothing to avenge the wrongs I have suffered.\"");
 					say("\"So, leave thou before I grow tired of thee and thou dost feel the wrath of Ensorcio the Adept!\"");
-					UI_add_answer(["hero", "wrongs", "bye"]);
+					add(["hero", "wrongs", "bye"]);
 				}
 				UI_set_item_flag(0xFFAF, 0x001C);
 			} else {
@@ -47386,21 +47386,21 @@ void Func0451 object#(0x451) () {
 				}
 			}
 			if (var000E) {
-				UI_add_answer("spells");
+				add("spells");
 			}
-			UI_add_answer(["wrongs", "Devra", "Hawk", "bye"]);
+			add(["wrongs", "Devra", "Hawk", "bye"]);
 		}
 		converse (0) {
 			case "teach them":
 				say("\"Shamino the Anarch hath proclaimed me the finest of Adepts! At last someone hath seen my talents and set them for the world to see... No more shall I be Ensorcio the shunned, Ensorcio the exile! Now I am the premier Adept!\"");
-				UI_remove_answer("teach them");
+				remove("teach them");
 				fallthrough;
 
 			case "welcome":
 				say("\"Filbercio's unjust rule hath been brought to an end!\"");
 				say("\"Shamino the Anarch, thy wonderful companion, hath cast him from power and I have been welcomed with open arms!\"");
 				say("\"Oh, what joy! To be back in Moonshade and free to experiment as I wish!\"");
-				UI_remove_answer("welcome");
+				remove("welcome");
 				fallthrough;
 
 			case "tyrant":
@@ -47425,17 +47425,17 @@ void Func0451 object#(0x451) () {
 					UI_set_conversation_slot(0x0000);
 				}
 				say("\"I see thee draw thyself up... Have I offended thee? And what wilt thou do, Pikeman? Drag me to thy jail as thy comrades did drag Hawk?\"");
-				UI_remove_answer("tyrant");
-				UI_add_answer(["Argus", "tribute", "Hawk"]);
+				remove("tyrant");
+				add(["Argus", "tribute", "Hawk"]);
 				fallthrough;
 
 			case "Argus":
 				say("\"For all that he is Devra's son, he is still a dog!\"");
 				say("\"I will grant that he came home when Devra summoned him, unlike Wilfred. But the two are cut from the same cloth, all the same... Vain, pompous braggarts!\"");
-				UI_remove_answer("Argus");
-				UI_add_answer("Wilfred");
+				remove("Argus");
+				add("Wilfred");
 				if (var0008 == false) {
-					UI_add_answer("Devra");
+					add("Devra");
 				}
 				fallthrough;
 
@@ -47448,22 +47448,22 @@ void Func0451 object#(0x451) () {
 					UI_set_conversation_slot(0x0000);
 				}
 				say("\"Wilfred ran away to prove to the world that he was better than his brother... A better bully, a better ruffian and a better murderer thou shalt not find!\"");
-				UI_remove_answer("Wilfred");
+				remove("Wilfred");
 				fallthrough;
 
 			case "tribute":
 				say("\"Or perhaps I should say @donation@!\"");
 				say("\"Where is the honor in charging even the poorest peasant a ruinous fee to use the only safe road in all the islands? So much for protecting the weak and helping the poor!\"");
-				UI_remove_answer("tribute");
+				remove("tribute");
 				fallthrough;
 
 			case "Hawk":
 				say("\"Hawk is the captain of the Arabella.\"");
 				say("\"I am afraid that Flindo was a bit distressed to hear that the good captain had no intention of risking himself or his ship to take that upstanding merchant back to Moonshade in these damnable storms. So he bought the muscle of the Pikemen to @persuade@ Hawk that remaining here would be unhealthy...\"");
 				gflags[0x01CD] = true;
-				UI_remove_answer("Hawk");
+				remove("Hawk");
 				UI_push_answers();
-				UI_add_answer(["Moonshade", "storms", "Flindo", "change subject"]);
+				add(["Moonshade", "storms", "Flindo", "change subject"]);
 				fallthrough;
 
 			case "change subject":
@@ -47474,8 +47474,8 @@ void Func0451 object#(0x451) () {
 			case "Moonshade":
 				say("\"Moonshade, the city of wonders! And the city of charlatans!\"");
 				say("\"Heaven forfend that thou shouldst try something innovative! It might endanger the incompetent fools led by Filbercio and his trained Council of Mages!\"");
-				UI_remove_answer("Moonshade");
-				UI_add_answer(["Filbercio", "Council of Mages"]);
+				remove("Moonshade");
+				add(["Filbercio", "Council of Mages"]);
 				fallthrough;
 
 			case "Filbercio":
@@ -47483,60 +47483,60 @@ void Func0451 object#(0x451) () {
 				say("\"I doubt that he could light a candle magically! But he doth have the backing of the Council and the threat of the Mountains of Freedom to support his claim!\"");
 				say("\"The one saving grace for Moonshade is that Filbercio spends all of his time pursuing skirts! His insignificant knowledge of magic hath little effect in the bedchambers of his conquests!\"");
 				var000A = true;
-				UI_remove_answer("Filbercio");
-				UI_add_answer("Freedom");
+				remove("Filbercio");
+				add("Freedom");
 				fallthrough;
 
 			case "Freedom":
 				say("\"Freedom! What a farce!\"");
 				say("\"The Mountains of Freedom are a prison, hero! A prison filled with magical traps that none can escape. And that is where Filbercio puts all who anger or oppose him.\"");
 				say("\"'Tis a small wonder that I did not end there...\"");
-				UI_remove_answer("Freedom");
+				remove("Freedom");
 				fallthrough;
 
 			case "Council of Mages":
 				say("\"The Council of Mages is a handful of Adepts meant to keep the MageLord from misusing his power. In this case, however, they spend their time making the decisions that the MageLord should be making.\"");
 				say("\"But, as unto myself, they are content to allow Filbercio to continue his @amusements@. With luck, he will be killed by one of his paramours.\"");
 				var000B = true;
-				UI_remove_answer("Council of Mages");
+				remove("Council of Mages");
 				fallthrough;
 
 			case "storms":
 				say("\"Rather showy, if thou shouldst ask me... But rather spectacular results. Entirely too random for my tastes, however.\"");
 				say("\"Of course, I cannot help wondering which mage is behind them. And I wonder if that double-crossing Batlin has anything to do with them... The storms started after he left here, thou knowest.\"");
-				UI_remove_answer("storms");
-				UI_add_answer("Batlin");
+				remove("storms");
+				add("Batlin");
 				fallthrough;
 
 			case "Batlin":
 				say("\"I can see that thou knowest of him.\"");
 				say("\"Batlin came here some time ago, he and his tame daemon. He seemed to take an interest in my story and we spent many evenings exchanging arcane lore. Then he left on some errand.\"");
 				say("\"When he returned with his other two thugs, Batlin seemed restless. But we continued our discussions as if nothing had changed. I thought he was my friend...\"");
-				UI_remove_answer("Batlin");
-				UI_add_answer(["Daemon", "thugs"]);
+				remove("Batlin");
+				add(["Daemon", "thugs"]);
 				fallthrough;
 
 			case "Daemon":
 				say("\"Absolutely huge... and ugly!\"");
 				say("\"Batlin called him Palos. And the daemon went about meekly hooded and robed as his master commanded.\"");
 				say("\"I do admit, I was impressed. I could not help but think about the trouble that Rotoluncia was having.\"");
-				UI_remove_answer("Daemon");
-				UI_add_answer("Rotoluncia");
+				remove("Daemon");
+				add("Rotoluncia");
 				fallthrough;
 
 			case "Rotoluncia":
 				say("\"Ever since Filbercio replaced Rotoluncia as his playmate, Rotoluncia hath had to find some other interest to occupy her time.\"");
 				say("\"And, from what I have heard, that seems to be daemons... Perhaps I can hope that she doth have designs on revenge. I would be content to think of Filbercio filling a daemon's belly.\"");
 				say("\"So, I am sure that she would take quite an interest in that fat mage's pet daemon. I wish I could send her word...\"");
-				UI_remove_answer("Rotoluncia");
+				remove("Rotoluncia");
 				fallthrough;
 
 			case "thugs":
 				say("\"I should have guessed that Batlin intended something shady when I saw those two!\"");
 				say("\"I am sure that Batlin brought them expressly to steal the old jawbone left to me by my mentor.\"");
 				say("\"Between Brunt, the idiot, and Deadeye, the one-eyed pirate, I am lucky still to be alive...\"");
-				UI_remove_answer("thugs");
-				UI_add_answer(["jawbone", "mentor"]);
+				remove("thugs");
+				add(["jawbone", "mentor"]);
 				fallthrough;
 
 			case "jawbone":
@@ -47544,35 +47544,35 @@ void Func0451 object#(0x451) () {
 				say("\"I could never discover what its use was, though it was clearly magical. 'Twas a keepsake -- though I hoped to discover its secret some day.\"");
 				say("\"I think that Batlin found its secret... and created these damned storms.\"");
 				var0009 = true;
-				UI_remove_answer("jawbone");
-				UI_add_answer("Mad Mage");
+				remove("jawbone");
+				add("Mad Mage");
 				fallthrough;
 
 			case "Mad Mage":
 				say("\"His true name is Erstam. He taught many of the Moonshadian Adepts their craft. But, as is the way with master and apprentice, they eventually surpassed him in skill and scope.\"");
 				say("\"The old mage could not abide the thought that these mages were no longer his malleable students, and went quite mad... He saw them all as thieves intent on stealing his secrets and moved to an island off Moonshade.\"");
 				say("\"He doth refuse to have any dealings with Moonshade to this day. He sits on his island trying to find a way to create life.\"");
-				UI_remove_answer("Mad Mage");
+				remove("Mad Mage");
 				fallthrough;
 
 			case "mentor":
 				say("\"He was a very great man. His name was Vasculio.\"");
 				say("\"Unfortunately, Vasculio was a man that was constantly testing the limits of convention. The Council of Mages found him threatening, and attempted to kill him when he refused to bow to their wishes...\"");
 				say("\"But his experimentation with Stoneheart had given him spells to elude even that monstrous fate. He is out there somewhere still, straining at the chains of accepted wisdom.\"");
-				UI_remove_answer("mentor");
-				UI_add_answer(["Stoneheart", "spells"]);
+				remove("mentor");
+				add(["Stoneheart", "spells"]);
 				fallthrough;
 
 			case "Stoneheart":
 				say("\"Ah, such a wonder to behold! It doth come from the depths of the Mountains of Freedom, and is quite rare...\"");
 				say("\"The Council hath outlawed possession of Stoneheart, because they fear its power. But a small quantity is quietly hidden -- else how would the death spells work?\"");
 				gflags[0x029D] = true;
-				UI_remove_answer("Stoneheart");
+				remove("Stoneheart");
 				if (Func097D(0xFE9B, 0x0001, 0x034A, 0xFE99, 0x000F)) {
 					say("\"Thou dost have stoneheart! Could I...\"");
 					say("\"No, I shall not succumb to its lure. I shall be strong. But thou shouldst take care, for this reagent has a way of twisting a man's heart so that he cannot bear to part from it.\"");
 					say("\"In its raw form, 'tis useless for spells. For a fee -- sizable, of course -- I could teach thee its secret so that thou mayest also cast death spells.\"");
-					UI_add_answer("secret");
+					add("secret");
 				}
 				fallthrough;
 
@@ -47632,7 +47632,7 @@ void Func0451 object#(0x451) () {
 						say("\"Perhaps another time then...\"");
 					}
 				}
-				UI_remove_answer("secret");
+				remove("secret");
 				fallthrough;
 
 			case "spells":
@@ -47651,14 +47651,14 @@ void Func0451 object#(0x451) () {
 			case "Flindo":
 				say("\"Flindo would have it that he is a person of note from the fair city of Moonshade, known by one and all. But he is truly little more than a loud shopkeeper with a penchant for gossip.\"");
 				say("\"Flindo flits about here and there, acquiring merchandise for Bucia to sell, and as much information as he can. I think that alone is why the Adepts humor him from time to time with some tidbit of news...\"");
-				UI_remove_answer("Flindo");
-				UI_add_answer("Bucia");
+				remove("Flindo");
+				add("Bucia");
 				fallthrough;
 
 			case "Bucia":
 				say("\"Bucia runs Flindo's shop for him. 'Tis called the Capessi Canton -- a pompous name, if thou dost ask me.\"");
 				say("\"Bucia charges a fillip more on everything she sells, for her troubles. And is very careful to show Flindo the altered accounts.\"");
-				UI_remove_answer("Bucia");
+				remove("Bucia");
 				fallthrough;
 
 			case "hero":
@@ -47683,8 +47683,8 @@ void Func0451 object#(0x451) () {
 					UI_set_conversation_slot(0x0000);
 				}
 				say("\"I see thee draw thyself up... Have I offended thee? And what wilt thou do, hero? Imprison me? Or wilt thou simply murder me?\"");
-				UI_remove_answer("hero");
-				UI_add_answer(["Devra", "Hawk"]);
+				remove("hero");
+				add(["Devra", "Hawk"]);
 				fallthrough;
 
 			case "Devra":
@@ -47695,8 +47695,8 @@ void Func0451 object#(0x451) () {
 				}
 				say("\"She hath taken her loss incredibly well. She hath convinced that worthless son of hers to return and help with some honest work here at the inn. But, if thou askest me, I would say that she is too kind to the rogues and misfits.\"");
 				var0008 = true;
-				UI_remove_answer("Devra");
-				UI_add_answer("loss");
+				remove("Devra");
+				add("loss");
 				fallthrough;
 
 			case "loss":
@@ -47707,43 +47707,43 @@ void Func0451 object#(0x451) () {
 					say("\"Quite pathetic, actually. When I reported the theft to her that morning she was too distraught to even pay attention to my complaint... Not at all professional -- after all, I am a paying guest here.\"");
 					say("\"It seems Angus had a bit of Silverpate in him after all, and disappeared... To think of it, perhaps he was the one that stole the jawbone from me... Though why it would interest him, I shall never know.\"");
 				}
-				UI_remove_answer("loss");
-				UI_add_answer(["Angus", "Silverpate"]);
+				remove("loss");
+				add(["Angus", "Silverpate"]);
 				if (var0009 == false) {
-					UI_add_answer("jawbone");
+					add("jawbone");
 				}
 				fallthrough;
 
 			case "Angus":
 				say("\"Angus is... er, was... Devra's husband. Seemed a right enough fellow. Liked a cup or two of ale in the evenings. Worked hard -- But then, with her nagging, he couldn't help but work hard!\"");
 				say("\"Would never have guessed that he had the spine to leave like that. But I suppose that every man doth have his breaking point...\"");
-				UI_remove_answer("Angus");
+				remove("Angus");
 				fallthrough;
 
 			case "Silverpate":
 				say("\"Silverpate is the great-grandfather of Angus.\"");
 				say("\"They say that old Silverpate was a bloodthirsty pirate. According to popular tales, he reformed and took his ill-gotten gains and built this inn...\"");
 				say("\"But the Adepts in Moonshade tell a different tale.\"");
-				UI_remove_answer("Silverpate");
-				UI_add_answer("tale");
+				remove("Silverpate");
+				add("tale");
 				fallthrough;
 
 			case "tale":
 				say("\"It seems that Silverpate employed Erstam to do something at the inn -- perhaps hide that fabled treasure, who knows. In any case, the pirate planned to trick Erstam so that he would not have to pay the mage's fees.\"");
 				say("\"But Erstam found him out and trapped the treacherous @innkeeper@ in a pit filled with daemons. No one ever saw Silverpate again, and people learned to fear crossing any mage.\"");
-				UI_remove_answer("tale");
+				remove("tale");
 				fallthrough;
 
 			case "wrongs":
 				say("\"Thou dost not know the half of it! Here I sit, an Adept in a wretched hovel, exiled from the practice of the magic that is my life's blood!\"");
 				say("\"The Council hath turned its back on Filbercio's exploits for so long that they sought to make me their scapegoat... their public example.\"");
-				UI_remove_answer("wrongs");
-				UI_add_answer("example");
+				remove("wrongs");
+				add("example");
 				if (var000A == false) {
-					UI_add_answer("Filbercio");
+					add("Filbercio");
 				}
 				if (var000B == false) {
-					UI_add_answer("Council of Mages");
+					add("Council of Mages");
 				}
 				fallthrough;
 
@@ -47751,20 +47751,20 @@ void Func0451 object#(0x451) () {
 				say("\"Filbercio hath hopped from bed to bed throughout the city, using every means of coercion possible. But let it be found that poor Ensorcio used magic to catch the favor of an Adept's daughter, and suddenly I am an unspeakable monster!\"");
 				say("\"Thou canst not know what humiliation is until thou hast been turned out from thine home and told never to return on pain of death!\"");
 				say("\"Thou canst not know the burning shame to hear that thy wrongdoing hath been proclaimed to all. To know that wherever thou goest people will say, @Isn't Ensorcio that exiled mage from Moonshade?@!\"");
-				UI_remove_answer("example");
-				UI_add_answer(["coercion", "Adept's daughter"]);
+				remove("example");
+				add(["coercion", "Adept's daughter"]);
 				fallthrough;
 
 			case "coercion":
 				say("\"The least that I have heard of is blackmail... Who knows to what other means Filbercio will stoop to fulfill his lusts?\"");
 				say("\"But I have no details, for I try not to listen to such stories as they always send me into a near-murderous fit... Thou shalt have to seek thine information elsewhere.\"");
-				UI_remove_answer("coercion");
+				remove("coercion");
 				fallthrough;
 
 			case "Adept's daughter":
 				say("\"Oh, no! Thou shalt not have her name to drag through the mud alongside Ensorcio! Never!\"");
 				say("\"I cared enough for her to spend my magics upon her, hoping that she would come to care for me. I'll not have thee blacken her name, for all that's been done to me!\"");
-				UI_remove_answer("Adept's daughter");
+				remove("Adept's daughter");
 				fallthrough;
 
 			case "bye":
@@ -47992,7 +47992,7 @@ void Func045E object#(0x45E) () {
 			    var0000,
 			    ". And I am sorry. Thou must postpone thy meditations, for the key to the fountain room cannot be found.\"");
 			say("\"I fear that someone hath destroyed Number 7, the keeper of the key!\"");
-			UI_add_answer(["meditations", "destroyed", "accuse", "bye"]);
+			add(["meditations", "destroyed", "accuse", "bye"]);
 			converse (0) {
 				case "meditations" (remove):
 					say("\"Thy search for Logic can go no further until thou canst drink of the waters of Logic. And until the key to the fountain room is found, no one may taste the pure waters of Logic.\"");
@@ -48086,13 +48086,13 @@ void Func045F object#(0x45F) () {
 			say("\"I regret that thou canst not meditate, ",
 			    var0000,
 			    ". The strange mage hath damaged the Temple and the key to the fountain room is nowhere to be found!\"");
-			UI_add_answer(["strange mage", "damaged", "key", "accuse", "bye"]);
+			add(["strange mage", "damaged", "key", "accuse", "bye"]);
 			converse (0) {
 				case "strange mage" (remove):
 					say("\"He was a nasty-looking little man, ",
 					    var0000,
 					    ". He and his vile companions came in here without regard for the sanctity of the Temple. It was shocking!\"");
-					UI_add_answer("companions");
+					add("companions");
 					fallthrough;
 
 				case "companions" (remove):
@@ -48102,7 +48102,7 @@ void Func045F object#(0x45F) () {
 
 				case "damaged" (remove):
 					say("\"The mage destroyed the prison container that it was our duty to protect... Why in the name of Order he would ever do such a horrible thing, I do not know.\"");
-					UI_add_answer("prison container");
+					add("prison container");
 					fallthrough;
 
 				case "prison container" (remove):
@@ -48194,7 +48194,7 @@ void Func0460 object#(0x460) () {
 		} else {
 			say("\"We have failed to protect the Temple! We have failed to provide thee with the solitude to meditate! And no one hath seen Number 7 in ages!\"");
 			say("\"I am not worthy of my Number 3! Where is Number 7, the keeper of the key?!\"");
-			UI_add_answer(["protect", "solitude", "Number 7", "accuse", "bye"]);
+			add(["protect", "solitude", "Number 7", "accuse", "bye"]);
 			converse (0) {
 				case "protect" (remove):
 					say("\"That is the duty of my fellows and I, to protect the Temple and assist those who come here to meditate on the pure waters of Logic. And we have failed!\"");
@@ -48284,7 +48284,7 @@ void Func0461 object#(0x461) () {
 		} else {
 			say("\"Number 7 hath abandoned his post! The key is gone!\"");
 			say("\"None shall seek the fountain to meditate again!\"");
-			UI_add_answer(["abandoned", "fountain", "accuse", "name", "bye"]);
+			add(["abandoned", "fountain", "accuse", "name", "bye"]);
 			converse (0) {
 				case "abandoned" (remove):
 					say("\"Why else would Number 7 not be here, unless someone hath destroyed him? If Number 7 were fulfilling his duties, we would have the key to allow thee to meditate... as is our sworn duty.\"");
@@ -48377,7 +48377,7 @@ void Func0462 object#(0x462) () {
 			abort;
 		} else {
 			say("\"Where is the justice in the world when a strange mage comes to destroy our Temple and disrupt our peace?! Where is the keeper of the key?\"");
-			UI_add_answer(["justice", "strange mage", "disrupt", "keeper of the key", "accuse", "bye"]);
+			add(["justice", "strange mage", "disrupt", "keeper of the key", "accuse", "bye"]);
 			converse (0) {
 				case "justice" (remove):
 					say("\"Thou mayest call me Number 5, for I no longer bear a mortal name. I surrendered that when I swore myself to eternal service at the fountain of Logic.\"");
@@ -48393,7 +48393,7 @@ void Func0462 object#(0x462) () {
 				case "disrupt" (remove):
 					say("\"Long ago, the Order Hierophant bound a force of great evil into a prison and placed it here for us to guard.\"");
 					say("\"What peace is left for us here, guardians of an empty shell now that the mage hath loosed what once was captive?\"");
-					UI_add_answer("force of great evil");
+					add("force of great evil");
 					fallthrough;
 
 				case "force of great evil" (remove):
@@ -48488,7 +48488,7 @@ void Func0463 object#(0x463) () {
 			    ". Long have we searched for the one who held the key to the fountain room, ",
 			    var0000,
 			    ". But Number 7 hath disappeared and we are failures.\"");
-			UI_add_answer(["Number 7", "failures", "accuse", "bye"]);
+			add(["Number 7", "failures", "accuse", "bye"]);
 			converse (0) {
 				case "Number 7" (remove):
 					say("\"Number 7 was the keeper of the key to the fountain room, ",
@@ -48567,13 +48567,13 @@ void Func0464 object#(0x464) () {
 			if (Func0955() == true) {
 				say("\"Very well... Consider each question carefully before answering.\"");
 				say("\"Question One: If thou didst come upon one who was sure to die, would it be Ethical to risk death trying to save the doomed person? Or would it be more Ethical to flee before the same fate befell thee?\"");
-				UI_add_answer(["Risk Death", "Flee"]);
+				add(["Risk Death", "Flee"]);
 				converse (0) {
 					case "Risk Death":
 						say("\"Thou art correct. Ethicality demands that thou must seek to preserve the life of others, as thou wouldst thine own.\" *\"No man's fate is certain while he yet lives. Thine actions can change the course of fate...\"");
 						UI_push_answers();
 						say("\"Question Two: If thou didst come upon a room of untold wealth within a structure where thou didst not know if the owner lived, would it be Ethical to take the money if thou wert in sore need? Or wouldst thou leave the money to possibly be used for evil ends?\"");
-						UI_add_answer(["Take the Money", "Leave the Money"]);
+						add(["Take the Money", "Leave the Money"]);
 						fallthrough;
 
 					case "Take the Money":
@@ -48585,7 +48585,7 @@ void Func0464 object#(0x464) () {
 						say("\"Thou art correct, seeker. Thou wouldst have no idea what the money was to be used for.\" *\"Ethicality demands that thou not takest anything without permission, no matter what the need. If thou wouldst stand in judgment of another, thou must be sure of thine Ethicality.\"");
 						UI_push_answers();
 						say("\"Finally, Question Three: If thou wert faced with the certainty of thy death at the hands of an unethical man, wouldst thou yield to him to save thy life? Or would Ethicality demand that thou shouldst continue the struggle unto death?\"");
-						UI_add_answer(["Yield", "Continue"]);
+						add(["Yield", "Continue"]);
 						fallthrough;
 
 					case "Yield":
@@ -49189,7 +49189,7 @@ void Func0481 object#(0x481) () {
 					UI_remove_npc_face1();
 				}
 				say("\"I am waiting to receive the password.\"");
-				UI_add_answer(["I don't know the password.", "try to guess the password"]);
+				add(["I don't know the password.", "try to guess the password"]);
 			} else {
 				say("\"Then thou canst not enter the underground city.\"");
 				abort;
@@ -49237,11 +49237,11 @@ void Func0482 object#(0x482) () {
 		UI_clear_item_say(0xFF7E);
 		UI_show_npc_face0(0xFED6, 0x0000);
 		say("\"Halt! It is our duty to question thee. Dost thou serve Order or dost thou serve Chaos?\"");
-		UI_add_answer(["I serve Order", "I serve Chaos"]);
+		add(["I serve Order", "I serve Chaos"]);
 		converse (0) {
 			case "I serve Order" (remove):
 				say("\"Very well. We have been left here to watch for any survivors of Chaos who might come from the depths of these passages. There is no escape from this place save for these doors and still no one can obtain passage through them.\"");
-				UI_add_answer(["escape", "passage", "bye"]);
+				add(["escape", "passage", "bye"]);
 				fallthrough;
 
 			case "escape" (remove):
@@ -49315,9 +49315,9 @@ void Func048F object#(0x48F) () {
 		} else {
 			say("\"Thou art Avatar!\"");
 		}
-		UI_add_answer(["name", "bye"]);
+		add(["name", "bye"]);
 		if (var0000) {
-			UI_add_answer("got blood");
+			add("got blood");
 		}
 		converse (0) {
 			case "got blood" (remove):
@@ -49327,12 +49327,12 @@ void Func048F object#(0x48F) () {
 			case "name" (remove):
 				say("\"I am Baiyanda, mate of Mwaerno and healer for Gwani people.\"");
 				UI_set_item_flag(0xFF71, 0x001C);
-				UI_add_answer(["Mwaerno", "healer"]);
+				add(["Mwaerno", "healer"]);
 				fallthrough;
 
 			case "Mwaerno" (remove):
 				say("\"He great hunter. Mwaerno and Baiyanda joined by Yenani many years ago.\"");
-				UI_add_answer(["hunter", "Yenani"]);
+				add(["hunter", "Yenani"]);
 				fallthrough;
 
 			case "hunter" (remove):
@@ -49341,7 +49341,7 @@ void Func048F object#(0x48F) () {
 
 			case "Yenani" (remove):
 				say("\"She our chieftain. Gwani people always led by females. Yenani good friend of Gwenno.\"");
-				UI_add_answer("Gwenno");
+				add("Gwenno");
 				fallthrough;
 
 			case "Gwenno" (remove):
@@ -49349,7 +49349,7 @@ void Func048F object#(0x48F) () {
 				if (var0002 == 0x000F) {
 					say("\"Gwenno dead. She good woman. Very generous. She once make gift of bucket to Baiyanda. Baiyanda place body at sacred Gwani Death Temple.\"");
 					gflags[0x0262] = true;
-					UI_add_answer("Where is the temple?");
+					add("Where is the temple?");
 				} else {
 					say("\"Baiyanda happy that Gwenno alive again!\"");
 				}
@@ -49361,7 +49361,7 @@ void Func048F object#(0x48F) () {
 
 			case "healer" (remove):
 				say("\"I treat all wounds and illness of Gwani people. Baiyanda not use ways of human healers. Gwani live simple in balance with nature, not force on nature. Gwani healers learn secrets of herbs and animals. If thou need healer, I will help thou.\"");
-				UI_add_answer(["I need a healer", "herbs and animals"]);
+				add(["I need a healer", "herbs and animals"]);
 				fallthrough;
 
 			case "I need a healer" (remove):
@@ -49417,7 +49417,7 @@ void Func048F object#(0x48F) () {
 
 			case "herbs and animals" (remove):
 				say("\"Magic corrupts balance of nature. Gwani healers learn things like prepare dried fish and use Ice Dragon blood.\"");
-				UI_add_answer(["balance of nature", "dried fish", "Ice Dragon blood"]);
+				add(["balance of nature", "dried fish", "Ice Dragon blood"]);
 				fallthrough;
 
 			case "balance of nature" (remove):
@@ -49455,7 +49455,7 @@ void Func048F object#(0x48F) () {
 				} else {
 					say("\"Ice Dragon blood saved Neyobi's life. Great many thanks, Avatar.\"");
 				}
-				UI_add_answer(["north dragon", "east dragon", "Neyobi"]);
+				add(["north dragon", "east dragon", "Neyobi"]);
 				fallthrough;
 
 			case "north dragon" (remove):
@@ -49524,7 +49524,7 @@ void Func0490 object#(0x490) () {
 		} else {
 			say("\"Thou... the one... Gwenno spoke.\" ~You can tell the creature obviously has great trouble with your language.");
 		}
-		UI_add_answer(["name", "Gwani", "bye"]);
+		add(["name", "Gwani", "bye"]);
 		converse (0) {
 			case "name" (remove):
 				say("\"Bwundai my name is.\"");
@@ -49608,7 +49608,7 @@ void Func0491 object#(0x491) () {
 			}
 		} else {
 			say("\"Thou look like Avatar,\" the Gwani creature says with broken speech.");
-			UI_add_answer(["name", "Gwani", "bye"]);
+			add(["name", "Gwani", "bye"]);
 			converse (0) {
 				case "name" (remove):
 					say("\"Mwaerno. Means 'rain clouds'.\"");
@@ -49646,18 +49646,18 @@ void Func0492 object#(0x492) () {
 		UI_clear_item_say(0xFF6E);
 		UI_show_npc_face0(0xFF6E, 0x0000);
 		say("\"It is one foretold by Gwenno!\"");
-		UI_add_answer(["name", "Gwenno", "bye"]);
+		add(["name", "Gwenno", "bye"]);
 		if (gflags[0x0004]) {
 			if (gflags[0x0263]) {
-				UI_add_answer("Thanks");
+				add("Thanks");
 			} else {
-				UI_add_answer("We have been attacked!");
+				add("We have been attacked!");
 			}
 		}
 		converse (0) {
 			case "name" (remove):
 				say("\"I Myauri, hunting master. My mate Yenani chieftain of our people. I am father of Neyobi and Kapyundi.\"");
-				UI_add_answer(["Myauri", "Yenani", "Neyobi", "Kapyundi"]);
+				add(["Myauri", "Yenani", "Neyobi", "Kapyundi"]);
 				fallthrough;
 
 			case "Myauri" (remove):
@@ -49672,7 +49672,7 @@ void Func0492 object#(0x492) () {
 				var0000 = UI_get_item_flag(0xFF6D, 0x001E);
 				if (var0000) {
 					say("\"Neyobi my only daughter. She very sick. Strange sickness put her to sleep. Now she not wake. If she not cured soon, sleeping sickness kill her.\"");
-					UI_add_answer(["strange sickness", "When did this happen?", "cure"]);
+					add(["strange sickness", "When did this happen?", "cure"]);
 				} else {
 					say("\"Neyobi sickness gone! Avatar cure Neyobi. Myauri never forget great deed Avatar do for Myauri. Great deed for Gwani people!\"");
 				}
@@ -49680,7 +49680,7 @@ void Func0492 object#(0x492) () {
 
 			case "strange sickness" (remove):
 				say("\"Not even our healer Baiyanda know what sickness is, where it come from, how it cured. I worry it be with rest of Gwani people. Maybe nothing to be done. Maybe Gwani die.\"");
-				UI_add_answer(["nothing to be done", "Gwani die"]);
+				add(["nothing to be done", "Gwani die"]);
 				fallthrough;
 
 			case "When did this happen?" (remove):
@@ -49713,7 +49713,7 @@ void Func0492 object#(0x492) () {
 				if (var0002 == 0x000F) {
 					say("\"Gwenno great friend to our people. It thanks to her that many of our people speak thy tongue. She even told us all about thou. She said thou would come. Her death tragedy.\"");
 					gflags[0x0262] = true;
-					UI_add_answer(["How did Gwenno die?", "Where is Gwenno's body?"]);
+					add(["How did Gwenno die?", "Where is Gwenno's body?"]);
 				} else {
 					say("\"All Gwani people very happy to know Gwenno alive again!\"");
 				}
@@ -49721,7 +49721,7 @@ void Func0492 object#(0x492) () {
 
 			case "How did Gwenno die?" (remove):
 				say("\"Gwenno killed by The Trapper's men.\"");
-				UI_add_answer("The Trapper");
+				add("The Trapper");
 				fallthrough;
 
 			case "Where is Gwenno's body?" (remove):
@@ -49742,7 +49742,7 @@ void Func0492 object#(0x492) () {
 
 			case "We have been attacked!" (remove):
 				say("\"The Trapper struck! All Gwani dead but Yenani, Neyobi and I.\"");
-				UI_add_answer(["nothing to be done", "Gwani die"]);
+				add(["nothing to be done", "Gwani die"]);
 				fallthrough;
 
 			case "bye":
@@ -49782,7 +49782,7 @@ void Func0493 object#(0x493) () {
 		UI_clear_item_say(0xFF6D);
 		UI_show_npc_face0(0xFF6D, 0x0000);
 		say("\"Thou be Avatar! Thou nice!\"");
-		UI_add_answer(["name", "What art thou doing?", "bye"]);
+		add(["name", "What art thou doing?", "bye"]);
 		converse (0) {
 			case "name" (remove):
 				say("\"Mother say thou found medicine make me better. Thank thou! My name Neyobi! Thou know what that mean?\"");
@@ -49796,7 +49796,7 @@ void Func0493 object#(0x493) () {
 
 			case "What art thou doing?" (remove):
 				say("\"Early today I play! I like look at clouds! Other day I saw one that look like penguin! Later, mother and Baiyanda teach lessons.\"");
-				UI_add_answer(["mother", "Baiyanda", "lessons"]);
+				add(["mother", "Baiyanda", "lessons"]);
 				fallthrough;
 
 			case "mother" (remove):
@@ -49858,26 +49858,26 @@ void Func0494 object#(0x494) () {
 		UI_show_npc_face0(0xFF6C, 0x0000);
 		var0001 = Func097D(0xFE9B, 0x0001, 0x032A, 0x0009, 0x0002);
 		var0002 = UI_get_item_flag(0xFF6C, 0x001C);
-		UI_add_answer(["name", "bye"]);
+		add(["name", "bye"]);
 		if (var0001) {
-			UI_add_answer("got blood");
+			add("got blood");
 		}
 		if (var0002) {
 			say("\"It is thee again!\"");
 		} else {
 			say("\"Thou must be one Gwenno spoke of!\"");
-			UI_add_answer("Gwenno");
+			add("Gwenno");
 		}
 		if (gflags[0x025D] && gflags[0x0260]) {
-			UI_add_answer("valuable secret");
+			add("valuable secret");
 		}
 		if (gflags[0x0004]) {
 			if (!gflags[0x0263]) {
-				UI_add_answer("Where are the other Gwani?");
+				add("Where are the other Gwani?");
 			}
 		}
 		if (var0000 && (!gflags[0x025E])) {
-			UI_add_answer("Here is the amulet.");
+			add("Here is the amulet.");
 		}
 		converse (0) {
 			case "Here is the amulet." (remove):
@@ -49891,8 +49891,8 @@ void Func0494 object#(0x494) () {
 			case "name":
 				say("\"I am Yenani, mate of Myauri, mother of Neyobi and Kapyundi, leader of Gwani people and teller of Gwani history.\"");
 				UI_set_item_flag(0xFF6C, 0x001C);
-				UI_remove_answer("name");
-				UI_add_answer(["Myauri", "Neyobi", "Kapyundi", "history"]);
+				remove("name");
+				add(["Myauri", "Neyobi", "Kapyundi", "history"]);
 				fallthrough;
 
 			case "history" (remove):
@@ -49901,24 +49901,24 @@ void Func0494 object#(0x494) () {
 
 			case "Myauri":
 				say("\"Long have Gwani been led by my wisdom, and hunting skills of mate Myauri. Together we are heart and soul of Gwani people.\"");
-				UI_remove_answer("Myauri");
+				remove("Myauri");
 				fallthrough;
 
 			case "Kapyundi":
 				say("\"He is proud and skilled hunter.\"");
-				UI_remove_answer("Kapyundi");
+				remove("Kapyundi");
 				fallthrough;
 
 			case "Neyobi" (remove):
 				var0005 = UI_get_item_flag(0xFF6D, 0x001E);
 				if (var0005) {
 					say("\"My daughter have severe fever. She dying and only thou canst save her!\"");
-					UI_add_answer("save Neyobi");
+					add("save Neyobi");
 				} else {
 					say("\"I thank thee for bringing the one thing that could save daughter.\"");
 					if (gflags[0x025D]) {
 						say("\"To reward thee I can shall give thee a valuable secret.\"");
-						UI_add_answer("valuable secret");
+						add("valuable secret");
 					} else {
 						say("\"Remember that the Gwani people are in thy debt. Perhaps we shall be able to reward thee one day.\"");
 					}
@@ -49927,7 +49927,7 @@ void Func0494 object#(0x494) () {
 
 			case "save Neyobi":
 				say("\"Talk to Baiyanda, healer of our people. She will know what to do.\"");
-				UI_remove_answer("save Neyobi");
+				remove("save Neyobi");
 				fallthrough;
 
 			case "valuable secret":
@@ -49937,7 +49937,7 @@ void Func0494 object#(0x494) () {
 				} else {
 					say("\"I shall give to thee the secret for passing through the mountains of Skullcrusher, which is what one must do to reach the lands farther to the north.\"");
 				}
-				UI_remove_answer("valuable secret");
+				remove("valuable secret");
 				fallthrough;
 
 			case "Gwenno":
@@ -49945,11 +49945,11 @@ void Func0494 object#(0x494) () {
 				if (var0006 == 0x000F) {
 					say("\"Gwenno was good friend to us. She spent weeks teaching me human language. Over time I slowly teaching others.\tMany days we have mourned death of good woman Gwenno. She horribly killed by men of one we call The Trapper. She spoke of thee often.\"");
 					gflags[0x0262] = true;
-					UI_add_answer(["Spoke of me?"]);
+					add(["Spoke of me?"]);
 				} else {
 					say("\"We of Gwani overjoyed to learn Gwenno's resurrection.\"");
 				}
-				UI_remove_answer("Gwenno");
+				remove("Gwenno");
 				fallthrough;
 
 			case "Spoke of me?" (remove):
@@ -49958,19 +49958,19 @@ void Func0494 object#(0x494) () {
 
 			case "Gwani":
 				say("\"We are peaceful people and chose to live apart from races of goblins and humanity.\"");
-				UI_add_answer(["goblins", "humanity"]);
-				UI_remove_answer("Gwani");
+				add(["goblins", "humanity"]);
+				remove("Gwani");
 				fallthrough;
 
 			case "goblins":
 				say("\"Goblins hunt us without mercy. Hatred for us almost greater than hatred for humans.\"");
-				UI_remove_answer("goblins");
+				remove("goblins");
 				fallthrough;
 
 			case "humanity":
 				say("\"Humans also hunt us, although fewer of them than goblins. Still, one human menaces us and being greatest single threat to our race.  This is man we know only as the Trapper.\"");
-				UI_remove_answer("humanity");
-				UI_add_answer("The Trapper");
+				remove("humanity");
+				add("The Trapper");
 				fallthrough;
 
 			case "got blood" (remove):
@@ -49980,7 +49980,7 @@ void Func0494 object#(0x494) () {
 					say("\"Daughter can be saved! I thank thee.\"");
 					if (gflags[0x025D]) {
 						say("\"Now, as I promised I reward thee with a valuable secret.\"");
-						UI_add_answer("valuable secret");
+						add("valuable secret");
 					}
 					gflags[0x0260] = true;
 					UI_clear_item_flag(0xFF6D, 0x001E);
@@ -49991,7 +49991,7 @@ void Func0494 object#(0x494) () {
 
 			case "The Trapper":
 				say("\"He is human called Hazard. He lives in cave north on Ice Plains. I fear he not stop hunt us until he hunt us to extinction.\"");
-				UI_remove_answer("The Trapper");
+				remove("The Trapper");
 				fallthrough;
 
 			case "Where are the other Gwani?" (remove):
@@ -50067,10 +50067,10 @@ void Func0495 object#(0x495) () {
 	if (event == 0x0009) {
 		if (UI_get_item_flag(0xFF6B, 0x0006)) {
 			UI_set_schedule_type(0xFF6B, 0x001F);
-			UI_add_answer("leave");
+			add("leave");
 		} else {
 			UI_run_schedule(0xFF6B);
-			UI_add_answer("join");
+			add("join");
 		}
 		UI_clear_item_say(0xFF6B);
 		UI_show_npc_face0(0xFF6B, 0x0000);
@@ -50125,20 +50125,20 @@ void Func0495 object#(0x495) () {
 			say("\"There is much I must tell thee before the sand runs down in the Hourglass of Fate.\"");
 		}
 		if (!gflags[0x00FF]) {
-			UI_add_answer(["Batlin's deeds", "danger", "answer"]);
+			add(["Batlin's deeds", "danger", "answer"]);
 		}
 		if (gflags[0x00FF] && ((!gflags[0x00D4]) || ((!gflags[0x00D5]) || (!gflags[0x00D3])))) {
 			say("\"Avatar! I have found a most intriguing scroll that tells of some sort of mystic connection between the Banes and the ancient temples!\"");
-			UI_add_answer("mystic connection");
+			add("mystic connection");
 		}
 		if (gflags[0x0279] && (!gflags[0x022B])) {
 			say("\"Now I understand what Xenka meant by being aided by specters. But, unless thou canst find the grave of the last Chaos Hierophant, I know not how thou wilt restore Balance.\"");
 			say("\"Perhaps if thou wouldst ask one of the monks -- perhaps Thoxa -- she could try to divine where the Chaos Hierophant lies.\"");
 		}
 		if (gflags[0x0010] && ((!UI_get_item_flag(0xFF6B, 0x0006)) && UI_get_cont_items(0xFF6B, 0xFE99, 0xFE99, 0xFE99))) {
-			UI_add_answer("belongings");
+			add("belongings");
 		}
-		UI_add_answer(["bye"]);
+		add(["bye"]);
 		converse (0) {
 			case "belongings" (remove):
 				Func0835();
@@ -50147,7 +50147,7 @@ void Func0495 object#(0x495) () {
 			case "join" (remove):
 				if (gflags[0x0061]) {
 					if (UI_get_array_size(UI_get_party_list2()) < 0x0005) {
-						UI_add_answer("leave");
+						add("leave");
 						say("\"If thou dost think I can be of use...\"");
 						UI_add_to_party(0xFF6B);
 						gflags[0x0010] = true;
@@ -50163,7 +50163,7 @@ void Func0495 object#(0x495) () {
 				fallthrough;
 
 			case "leave" (remove):
-				UI_add_answer("join");
+				add("join");
 				say("\"I understand, ",
 				    var0002,
 				    "...\"");
@@ -50174,7 +50174,7 @@ void Func0495 object#(0x495) () {
 			case "Batlin's deeds" (remove):
 				say("\"Until Batlin interfered, this land had no Balance, but complete chaos was held in check... Until he loosed the Banes.\"");
 				say("\"Unless Balance is restored, this land shall die... And take every world that touches it into the dust of oblivion as well.\"");
-				UI_add_answer(["Banes", "every world"]);
+				add(["Banes", "every world"]);
 				fallthrough;
 
 			case "Banes" (remove):
@@ -50182,13 +50182,13 @@ void Func0495 object#(0x495) () {
 				say("\"The Banes are the splintered force of Chaos.\"");
 				say("\"Thou wilt have to cage them again, as they were before Batlin came. 'Tis only a temporary solution at best.\"");
 				say("\"Perhaps I can consult the materials here on Monk Isle and discover a way to rid this land of the threat entirely.\"");
-				UI_add_answer(["cage them", "materials", "change subject"]);
+				add(["cage them", "materials", "change subject"]);
 				fallthrough;
 
 			case "cage them" (remove):
 				say("\"Thou shouldst go to Moonshade.\"");
 				say("\"If thou canst learn who gave Batlin the secret of trapping souls, I will try to learn what can make them able to withstand the forces that we wish to contain.\"");
-				UI_add_answer(["Moonshade", "secret"]);
+				add(["Moonshade", "secret"]);
 				gflags[0x012D] = true;
 				fallthrough;
 
@@ -50210,7 +50210,7 @@ void Func0495 object#(0x495) () {
 				UI_push_answers();
 				say("\"Britannia -- even thine home, Avatar -- is in deadly peril!\"");
 				say("\"No world exists without influencing another. So all may be destroyed if New Sosaria dies.\"");
-				UI_add_answer(["New Sosaria", "change subject"]);
+				add(["New Sosaria", "change subject"]);
 				fallthrough;
 
 			case "New Sosaria" (remove):
@@ -50218,13 +50218,13 @@ void Func0495 object#(0x495) () {
 				    var0002,
 				    ", though 'tis often called Serpent Isle.\"");
 				say("\"The forefathers of all the people here were dissenters of Lord British's rule.\"");
-				UI_add_answer(["Serpent Isle", "Lord British's rule"]);
+				add(["Serpent Isle", "Lord British's rule"]);
 				fallthrough;
 
 			case "Serpent Isle" (remove):
 				say("\"I came upon the ruins of a civilization in many places during my travels.\"");
 				say("\"They all bore the mark of some serpent design or another. I noted that there appeared to be a different serpent motif in different areas.\"");
-				UI_add_answer("serpent motif");
+				add("serpent motif");
 				fallthrough;
 
 			case "serpent motif" (remove):
@@ -50241,14 +50241,14 @@ void Func0495 object#(0x495) () {
 				UI_push_answers();
 				say("\"Thou hast already experienced the power of the Storms of Imbalance. As time passes, these will increase in frequency and strength.\"");
 				say("\"After a further period of time, earthquakes will begin to tear the land apart... Until it at last destroys itself.\"");
-				UI_add_answer(["Storms of Imbalance", "period of time", "change subject"]);
+				add(["Storms of Imbalance", "period of time", "change subject"]);
 				fallthrough;
 
 			case "Storms of Imbalance" (remove):
 				say("\"The Prophecies of Xenka speak of the Storms of Imbalance.\"");
 				say("\"Storms unlike any living man hath seen. Storms whose results no man can predict...\"");
 				say("\"I am sorry, the prophecies are cryptic at best.\"");
-				UI_add_answer(["prophecies", "cryptic"]);
+				add(["prophecies", "cryptic"]);
 				fallthrough;
 
 			case "prophecies" (remove):
@@ -50270,7 +50270,7 @@ void Func0495 object#(0x495) () {
 				UI_push_answers();
 				say("\"According to Xenka's visions, 'The Hero from Another World will succeed through the use of powerful magic, the aid of specters, and the implements of the Hierophant.'\"");
 				say("\"Before the sands run down, we must find the meaning of these accursed riddles!\"");
-				UI_add_answer(["powerful magic", "specters", "implements", "change subject"]);
+				add(["powerful magic", "specters", "implements", "change subject"]);
 				fallthrough;
 
 			case "powerful magic" (remove):
@@ -50294,7 +50294,7 @@ void Func0495 object#(0x495) () {
 				UI_push_answers();
 				say("\"Before thou canst redeem thy faithful companions, thou must take the soul cages and bathe them in the water of the temple that is connected to that Bane.\"");
 				say("\"And whilst thou art at each temple, according to the scroll, there is a device of some sort through which thou canst divine the location of each Bane.\"");
-				UI_add_answer(["bathe", "temple", "device", "change subject"]);
+				add(["bathe", "temple", "device", "change subject"]);
 				fallthrough;
 
 			case "bathe" (remove):
@@ -50305,7 +50305,7 @@ void Func0495 object#(0x495) () {
 			case "temple" (remove):
 				say("\"Karnax did tell me that Miggim doth have maps to the various temples...\"");
 				say("\"Apparently each temple was dedicated to one of the six virtues of the Ophidians. Thou shouldst seek out the correct temple before thou canst defeat the Banes.\"");
-				UI_add_answer(["Karnax", "Miggim", "Ophidians"]);
+				add(["Karnax", "Miggim", "Ophidians"]);
 				fallthrough;
 
 			case "Karnax" (remove):
@@ -50563,38 +50563,38 @@ void Func0496 object#(0x496) () {
 				}
 			}
 		}
-		UI_add_answer(["duties"]);
+		add(["duties"]);
 		if (gflags[0x0046] && (!gflags[0x002C])) {
-			UI_add_answer("Goblin raid");
+			add("Goblin raid");
 		}
 		if (gflags[0x003D]) {
-			UI_add_answer("ready to spar");
+			add("ready to spar");
 		}
 		if (gflags[0x0048] && (!UI_get_item_flag(0xFFB4, 0x0004))) {
-			UI_add_answer("traitor");
+			add("traitor");
 		}
 		if (gflags[0x0093] && (!gflags[0x0038])) {
-			UI_add_answer("know traitor");
+			add("know traitor");
 		}
 		if (gflags[0x0099] && (!gflags[0x028D])) {
-			UI_add_answer("stockings");
+			add("stockings");
 		}
 		if (gflags[0x0032]) {
-			UI_add_answer("Gwenno");
+			add("Gwenno");
 		}
 		if (gflags[0x0048]) {
-			UI_add_answer("Welcome to the Wolf Command");
+			add("Welcome to the Wolf Command");
 		}
 		if (gflags[0x0038] && (!gflags[0x0078])) {
-			UI_add_answer("Iolo");
+			add("Iolo");
 		}
 		if (gflags[0x0045] && (UI_get_schedule_type(0xFFB4) != 0x000F)) {
-			UI_add_answer("brown bottle");
+			add("brown bottle");
 		}
 		if (gflags[0x002C]) {
-			UI_add_answer("Helm of Monitor");
+			add("Helm of Monitor");
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "Helm of Monitor" (remove):
 				say("\"As thou hast won back the helm of Monitor, thou art truly deserved of the title Champion Knight of Monitor. I salute thee!\"");
@@ -50640,21 +50640,21 @@ void Func0496 object#(0x496) () {
 					say("\"But I should not be speaking with thee until thou dost become a Knight of Monitor. Speak with Marsten about that.\"");
 					abort;
 				} else {
-					UI_add_answer(["Wolves", "cunning", "Champion Knight", "ladies"]);
+					add(["Wolves", "cunning", "Champion Knight", "ladies"]);
 				}
 				fallthrough;
 
 			case "Wolves":
 				say("\"The Wolves are the most canny fighters in Monitor. We are quick, silent, and deadly. We are experts at tracking and hunting our prey, and when we attack -- nothing can withstand us. Someday all of Serpent Isle will belong to Monitor, and it will be because of the Command of the Wolf!\"");
-				UI_remove_answer("Wolves");
-				UI_add_answer("Serpent Isle");
+				remove("Wolves");
+				add("Serpent Isle");
 				fallthrough;
 
 			case "Serpent Isle" (remove):
 				UI_push_answers();
 				say("\"I do not see why we stay down here in the south! Undoubtedly, the climate is warmer here, but the entire continent is ours for the taking! The Bears merely want to hide here and stagnate. And the Leopards have no ambition at all!\"");
-				UI_remove_answer("Serpent Isle");
-				UI_add_answer(["Bears", "Leopards", "change subject"]);
+				remove("Serpent Isle");
+				add(["Bears", "Leopards", "change subject"]);
 				fallthrough;
 
 			case "Bears":
@@ -50666,9 +50666,9 @@ void Func0496 object#(0x496) () {
 					    ".\"");
 				}
 				say("\"The patrol was betrayed. And who could have known the plans? Why, another Bear, of course!\"");
-				UI_remove_answer("Bears");
+				remove("Bears");
 				if (!var0003) {
-					UI_add_answer("traitor");
+					add("traitor");
 				}
 				fallthrough;
 
@@ -50688,17 +50688,17 @@ void Func0496 object#(0x496) () {
 					say("\"I would not be surprised to find that one of the Bears did play traitor to their own Command! Inspect closely the actions of Luther. He is not to be trusted. He is a braggart and a buffoon. He thinks he shall be the next Champion Knight. But he hath never beaten me!\"");
 					gflags[0x00AD] = true;
 				}
-				UI_add_answer(["Luther", "List Field"]);
+				add(["Luther", "List Field"]);
 				if ((!gflags[0x0038]) && (!gflags[0x0092])) {
 					if (UI_get_item_flag(0xFFB8, 0x0004) || UI_get_item_flag(0xFFB5, 0x0004)) {
 						UI_push_answers();
 						if (UI_get_item_flag(0xFFB8, 0x0004)) {
-							UI_add_answer("Was Lydia the traitor?");
+							add("Was Lydia the traitor?");
 						}
 						if (UI_get_item_flag(0xFFB5, 0x0004)) {
-							UI_add_answer("Was Shmed the traitor?");
+							add("Was Shmed the traitor?");
 						}
-						UI_add_answer("change subject");
+						add("change subject");
 					}
 				}
 				fallthrough;
@@ -50731,12 +50731,12 @@ void Func0496 object#(0x496) () {
 					say("\"My room is at the corner of Kosric Street and Roland Street, facing the List Field.\"");
 					gflags[0x003D] = true;
 				}
-				UI_remove_answer(["List Field", "ready to spar"]);
+				remove(["List Field", "ready to spar"]);
 				fallthrough;
 
 			case "Leopards":
 				say("\"Oh, they are all right. At least they listen to us and try to see our point of view. It is time that we dispense with the notion of 'all-for-one and one-for-all' and adopt the concept of -- may the best Knight win!\"");
-				UI_remove_answer("Leopards");
+				remove("Leopards");
 				fallthrough;
 
 			case "cunning" (remove):
@@ -50755,7 +50755,7 @@ void Func0496 object#(0x496) () {
 						say("\"Unless, my dear, thou shalt claim the title thyself.\"");
 					}
 				}
-				UI_remove_answer("Champion Knight");
+				remove("Champion Knight");
 				fallthrough;
 
 			case "ladies" (remove):
@@ -50768,8 +50768,8 @@ void Func0496 object#(0x496) () {
 					say("\"Ah, the ladies of Monitor. All are governed by their own particular passions.\"");
 					say("\"Lydia, Lucilla, Shazzana, Cellia, Harnna...\"");
 				}
-				UI_remove_answer("ladies");
-				UI_add_answer(["Lydia", "Lucilla", "Shazzana", "Cellia", "Harnna", "change subject"]);
+				remove("ladies");
+				add(["Lydia", "Lucilla", "Shazzana", "Cellia", "Harnna", "change subject"]);
 				fallthrough;
 
 			case "Lydia":
@@ -50779,7 +50779,7 @@ void Func0496 object#(0x496) () {
 					say("\"She is a spicy wench, that one! Hath quite a temper and is very opinionated.\"");
 				}
 				say("\"They say her sister was even more beautiful, but the sorcerers took her away to their city. 'Twould certainly be an experience to meet her, I am certain of that!\"");
-				UI_remove_answer("Lydia");
+				remove("Lydia");
 				fallthrough;
 
 			case "Lucilla":
@@ -50788,12 +50788,12 @@ void Func0496 object#(0x496) () {
 					say("\"Perhaps thou mayest enjoy her company?\"");
 				}
 				say("\"To tell the truth, I believe she must be interested in someone else. A secret, torrid affair, perhaps? Now, who could her lover be? I haven't a clue.\"");
-				UI_remove_answer("Lucilla");
+				remove("Lucilla");
 				fallthrough;
 
 			case "Shazzana":
 				say("\"Now that Astrid is dead, Shazzana deeply desires to be the new Champion Knight of Monitor. This is not such a great revelation, of course. Any of us would gladly welcome such an honor.\"");
-				UI_remove_answer("Shazzana");
+				remove("Shazzana");
 				fallthrough;
 
 			case "Cellia":
@@ -50801,7 +50801,7 @@ void Func0496 object#(0x496) () {
 				if (!UI_is_pc_female()) {
 					say("\"Her skin is smooth and soft. Finer than any luxuriant mane or hide thou wilt find in her shop, I can assure thee... Harrumph, excuse me!\"");
 				}
-				UI_remove_answer("Cellia");
+				remove("Cellia");
 				fallthrough;
 
 			case "Harnna" (remove):
@@ -51016,13 +51016,13 @@ void Func0498 object#(0x498) () {
 		if (UI_get_item_flag(0xFF68, 0x0006)) {
 			say("\"We must hasten to the Serpent Gate!\"");
 			UI_set_schedule_type(0xFF68, 0x001F);
-			UI_add_answer("leave");
+			add("leave");
 		} else {
 			UI_run_schedule(0xFF68);
 			var0002 = UI_get_item_flag(0xFF68, 0x001C);
 			if (gflags[0x0279]) {
 				say("\"Thou art late! I have been waiting for thee for a very long time...\"");
-				UI_add_answer(["waiting", "long time"]);
+				add(["waiting", "long time"]);
 			} else {
 				if (UI_get_item_flag(0xFF68, 0x001C)) {
 					say("\"Thou art returned! What tortures hast thou devised for me, Order dog?\"");
@@ -51030,23 +51030,23 @@ void Func0498 object#(0x498) () {
 					say("\"I knew that thou wouldst come for me, Order dog! Thou canst take my life, but the key is gone! Gone!\" *\"Sethys shall not fail the Chaos Hierophant!\"");
 					UI_set_item_flag(0xFF68, 0x001C);
 				}
-				UI_add_answer(["Order dog", "key", "Chaos Hierophant"]);
+				add(["Order dog", "key", "Chaos Hierophant"]);
 			}
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "Order dog":
 				say("\"Thou canst not be satisfied with winning the war! No, thou must slaughter all who dared to believe in something other than what thou dost hold dear!\" *\"Fine warriors who kill cripples and children!\"");
-				UI_remove_answer("Order dog");
-				UI_add_answer(["winning the war", "cripples and children"]);
+				remove("Order dog");
+				add(["winning the war", "cripples and children"]);
 				fallthrough;
 
 			case "winning the war":
 				say("\"Thy kind hath destroyed the Balance... All power now rests with the Order villains!\"");
 				say("\"The Temples have been desecrated, and the altars have been thrown down...\"");
 				say("\"See how thou wilt use it... To slay an unarmed man!\"");
-				UI_remove_answer("winning the war");
-				UI_add_answer(["destroyed the Balance", "desecrated"]);
+				remove("winning the war");
+				add(["destroyed the Balance", "desecrated"]);
 				fallthrough;
 
 			case "desecrated" (remove):
@@ -51060,22 +51060,22 @@ void Func0498 object#(0x498) () {
 
 			case "cripples and children":
 				say("\"I was at the Temple of Enthusiasm as thy forces marched on it! I saw the children fall to thy soldiers' blades!\" *\"And now that thou art here -- where all are misfits and crippled... I'm certain thou wilt slay us with as little regard!\"");
-				UI_remove_answer("cripples and children");
+				remove("cripples and children");
 				fallthrough;
 
 			case "key" (remove):
 				say("\"Thou knowest of the key? The Chaos Hierophant sent thee!\" *\"Alas, I have failed my duty... The key that I was to guard and hide is gone!\"");
-				UI_add_answer(["hide and guard", "gone"]);
+				add(["hide and guard", "gone"]);
 				fallthrough;
 
 			case "hide and guard":
 				say("\"Our Master gave me the key as the Order soldiers came. He bade me guard the key with my life, and hide it from their filthy grasp.\" *\"I have not seen our Master since... And thus far I have eluded the Order scum.\"");
-				UI_remove_answer("hide and guard");
+				remove("hide and guard");
 				fallthrough;
 
 			case "gone" (remove):
 				say("\"Now my soul will never enter the Void! Long ago, or so it seems to me, a vicious rat came and gnashed its long teeth at me.\" *\"I dropped the key as I tried to fend the beast off. The rat, seeing a shiny treasure, took the key and fled!\"");
-				UI_add_answer(["Void", "fled"]);
+				add(["Void", "fled"]);
 				fallthrough;
 
 			case "Void" (remove):
@@ -51091,7 +51091,7 @@ void Func0498 object#(0x498) () {
 
 			case "Chaos Hierophant" (remove):
 				say("\"The Chaos Hierophant charged me with an important task... Who would have ever thought that I would be found worthy?\"");
-				UI_add_answer(["worthy", "task"]);
+				add(["worthy", "task"]);
 				fallthrough;
 
 			case "worthy" (remove):
@@ -51102,7 +51102,7 @@ void Func0498 object#(0x498) () {
 			case "task" (remove):
 				say("\"I shall not tell thee... At last, I, Sethys, have something important, something of value.\" *\"I have a secret!\"");
 				UI_push_answers();
-				UI_add_answer(["share it with me", "don't care"]);
+				add(["share it with me", "don't care"]);
 				fallthrough;
 
 			case "share it with me":
@@ -51118,7 +51118,7 @@ void Func0498 object#(0x498) () {
 			case "waiting" (remove):
 				say("\"How canst thou have forgotten? It is time for us to bring the key to the Master.\"");
 				say("\"Sadly, I have lost the key, so I shall have to beg for forgiveness...\"");
-				UI_add_answer("Master");
+				add("Master");
 				fallthrough;
 
 			case "long time" (remove):
@@ -51127,9 +51127,9 @@ void Func0498 object#(0x498) () {
 
 			case "Master":
 				say("\"Only I know where our Master lies, dear friend, for I am the sole survivor of that horrible battle. I could show thee the place, but I am loathe to leave the Temple... I have been here so long.\"");
-				UI_remove_answer("Master");
+				remove("Master");
 				UI_push_answers();
-				UI_add_answer(["show me", "never mind"]);
+				add(["show me", "never mind"]);
 				fallthrough;
 
 			case "never mind" (remove):
@@ -51192,7 +51192,7 @@ void Func0499 object#(0x499) () {
 		} else {
 			say("\"Beware claws of Ice Dragon!\"");
 		}
-		UI_add_answer(["name", "Ice Dragon", "bye"]);
+		add(["name", "Ice Dragon", "bye"]);
 		converse (0) {
 			case "name" (remove):
 				if (var0000) {
@@ -51205,7 +51205,7 @@ void Func0499 object#(0x499) () {
 
 			case "Ice Dragon" (remove):
 				say("\"We tried to kill Ice Dragon, to bring its blood and cure Neyobi. We failed. It hit with claws, I smash into cave wall. I need Baiyanda to heal.\"");
-				UI_add_answer(["claws", "cave"]);
+				add(["claws", "cave"]);
 				fallthrough;
 
 			case "claws" (remove):
@@ -51247,7 +51247,7 @@ void Func049A object#(0x49A) () {
 		} else {
 			say("\"Our hunt bad.\"");
 		}
-		UI_add_answer(["name", "hunt", "bye"]);
+		add(["name", "hunt", "bye"]);
 		converse (0) {
 			case "name" (remove):
 				say("\"Me Kapyundi, mean @little glacier@. Me son of Yenani and Myauri.\"");
@@ -51256,7 +51256,7 @@ void Func049A object#(0x49A) () {
 
 			case "hunt" (remove):
 				say("\"We try to kill Ice Dragon, use blood to save Neyobi. But lair of Ice Dragon is certain death.\"");
-				UI_add_answer(["Ice Dragon lair", "certain death"]);
+				add(["Ice Dragon lair", "certain death"]);
 				fallthrough;
 
 			case "Ice Dragon lair" (remove):
@@ -51265,17 +51265,17 @@ void Func049A object#(0x49A) () {
 
 			case "certain death" (remove):
 				say("\"Three of us died in Ice Dragon lair. We two injured. Must return to village in shame.\"");
-				UI_add_answer("three died");
+				add("three died");
 				fallthrough;
 
 			case "three died" (remove):
 				say("\"We fought by three Gwani hunters who died in Ice Dragon lair. Dragon eat them. Now we never able to take their bodies to Gwani death temple.\"");
-				UI_add_answer("Gwani death temple");
+				add("Gwani death temple");
 				fallthrough;
 
 			case "Gwani death temple":
 				say("\"I do not know where temple. Gwani place of death to west of Ice Dragon's lair. Temple is there somewhere.\"");
-				UI_remove_answer("Gwani death temple");
+				remove("Gwani death temple");
 				fallthrough;
 
 			case "bye":
@@ -51434,28 +51434,28 @@ void Func049B object#(0x49B) () {
 						} else {
 							say("\"Do not give me false hopes, stranger! I see no King's Savior.\"");
 							say("\"I fear Draygan more each day...\"");
-							UI_add_answer(["afraid", "Draygan", "King's Savior"]);
+							add(["afraid", "Draygan", "King's Savior"]);
 						}
 					}
 				} else {
 					say("\"Then I despair! For without this herb, Draygan cannot be stopped. I am so afraid...\"");
-					UI_add_answer(["afraid", "Draygan", "King's Savior"]);
+					add(["afraid", "Draygan", "King's Savior"]);
 				}
 			} else {
 				gflags[0x02BD] = true;
 				gflags[0x02BE] = false;
 				say("\"My name is Beryl. I am so glad that thou hast met me privately. We cannot speak for long, lest Draygan or his minions find us.\"");
 				say("\"I live in fear of Draygan and his terrible power.\"");
-				UI_add_answer(["afraid", "Draygan"]);
+				add(["afraid", "Draygan"]);
 			}
 		}
-		UI_add_answer(["bye"]);
+		add(["bye"]);
 		converse (0) {
 			case "afraid" (remove):
 				say("\"Of the two-score settlers who came to this place led by Draygan, only three of us survive! And the other two work for him!\"");
 				say("\"Draygan burned the ship and left the others to die! I know he played a part in the death of mine husband, as well.\"");
 				UI_push_answers();
-				UI_add_answer(["other two", "burned ship", "dead husband", "change subject"]);
+				add(["other two", "burned ship", "dead husband", "change subject"]);
 				fallthrough;
 
 			case "other two" (remove):
@@ -51465,13 +51465,13 @@ void Func049B object#(0x49B) () {
 			case "burned ship" (remove):
 				say("\"One of the settlers, Falcon, wanted to leave the settlement. Many others chose to go as well. I did not believe it when Draygan allowed Falcon's group to leave so easily.\"");
 				say("\"I discovered why. Draygan had the ship burned, leaving them all to be eaten by the wolves!\"");
-				UI_add_answer(["settlement", "wolves"]);
+				add(["settlement", "wolves"]);
 				fallthrough;
 
 			case "dead husband" (remove):
 				say("\"Mine husband, Carvell, died when Draygan took a group of men in search of gold. Only Draygan returned.\"");
 				say("\"He told a story of how they were attacked by the wolves, but he lied. I did not find the truth until a short while ago, when Draygan drunkenly boasted of killing Carvell and the others. That was when I ran away.\"");
-				UI_add_answer("ran away");
+				add("ran away");
 				fallthrough;
 
 			case "ran away" (remove):
@@ -51481,7 +51481,7 @@ void Func049B object#(0x49B) () {
 
 			case "settlement" (remove):
 				say("\"A year ago, a group of us left by ship and came to the Northlands. We were in search of the gold and precious gems that are said to fill this land. Our original camp was to the south, but we had no luck there and we made our way to this place. Once here, Draygan seized control! We had to do his bidding or suffer the consequences.\"");
-				UI_add_answer("consequences");
+				add("consequences");
 				fallthrough;
 
 			case "consequences" (remove):
@@ -51495,7 +51495,7 @@ void Func049B object#(0x49B) () {
 			case "Draygan" (remove):
 				say("\"I feared that no one could save me from Draygan, for he is invincible!\"");
 				UI_push_answers();
-				UI_add_answer(["save", "invincible", "change subject"]);
+				add(["save", "invincible", "change subject"]);
 				fallthrough;
 
 			case "change subject":
@@ -51509,14 +51509,14 @@ void Func049B object#(0x49B) () {
 
 			case "invincible" (remove):
 				say("\"He cannot be harmed by blade or knife nor by any magic that I have seen. Whatever he and his expedition found, it hath given him unimaginable power.\"");
-				UI_add_answer("cannot be harmed");
+				add("cannot be harmed");
 				fallthrough;
 
 			case "cannot be harmed" (remove):
 				say("\"I have been thinking about this for some time. Perhaps Draygan can be defeated by something that doth not actually bring harm to him. Thou couldst treat an arrow with the plant that is called King's Savior!\"");
-				UI_add_answer(["arrow"]);
+				add(["arrow"]);
 				if (!gflags[0x02B9]) {
-					UI_add_answer("King's Savior");
+					add("King's Savior");
 				}
 				fallthrough;
 
@@ -51530,7 +51530,7 @@ void Func049B object#(0x49B) () {
 				say("\"Only one man can help thee. The Forest Master could guide thee to King's Savior -- but beware him! He possesses strange powers.\"");
 				gflags[0x02B9] = true;
 				UI_push_answers();
-				UI_add_answer(["Forest Master", "strange powers", "change subject"]);
+				add(["Forest Master", "strange powers", "change subject"]);
 				fallthrough;
 
 			case "Forest Master" (remove):
@@ -51614,8 +51614,8 @@ void Func049C object#(0x49C) () {
 			say("\"We meet again, I see.\"");
 			say("\"And thou art still of no use to my destiny. I do not have time to prattle with thee, stranger. Stay away from this camp, and from my followers. As the lord of this place, I order this to be so.\"");
 		}
-		UI_add_answer(["lord", "destiny"]);
-		UI_add_answer("bye");
+		add(["lord", "destiny"]);
+		add("bye");
 		converse (0) {
 			case "change subject":
 				UI_pop_answers();
@@ -51626,12 +51626,12 @@ void Func049C object#(0x49C) () {
 				say("\"I was born a pauper's son. My father was a rancid beggar-man who lived in the dirt of the road. I hated it as I hated him. But there was one thing he always told me. He told me that one day I would be a rich and powerful man. I believe this is my destiny. When I was still a lad, I stole his near-empty coin purse and sought my fortune.\"");
 				say("\"I have acquired naught but half of my legacy... though I already have the power!\"");
 				UI_push_answers();
-				UI_add_answer(["fortune", "power", "change subject"]);
+				add(["fortune", "power", "change subject"]);
 				fallthrough;
 
 			case "fortune" (remove):
 				say("\"It was one year ago that I led my band of men to this spot. We had all heard the tales of gold and fabulous gems that could be found here. We came by ship -- the Emerald Lady. As we planned to settle here, they all brought their wives and children. For months we suffered through bad luck. Then one of the miners made an important discovery. That was before I went on the hunting expedition -- but, ah, I am ahead of myself. It hath been too long since I have had a fresh face to converse with. Damned distraction!\"");
-				UI_add_answer(["suffered", "discovery", "hunting expedition"]);
+				add(["suffered", "discovery", "hunting expedition"]);
 				fallthrough;
 
 			case "suffered" (remove):
@@ -51644,7 +51644,7 @@ void Func049C object#(0x49C) () {
 
 			case "hunting expedition" (remove):
 				say("\"Not long after the first significant find, we had planned a great feast as a celebration. I led a group of hunters into the forest to hunt for game. We were attacked by a vicious pack of wolves. Only I survived to make it back to camp. It was then that I discovered my power. But the failed expedition was a bad omen. Soon my men were divided and our group fell into rebellion.\"");
-				UI_add_answer(["divided", "rebellion"]);
+				add(["divided", "rebellion"]);
 				fallthrough;
 
 			case "divided" (remove):
@@ -51663,7 +51663,7 @@ void Func049C object#(0x49C) () {
 				say("\"I need not bore thee with the details of how I learned of this power. Suffice it to say that I cannot die.\"");
 				say("\"Thou wouldst do well to consider that a warning. Do not think of stealing my gold, for it is thee who shall lose thy life. I cannot die because I am destined to become wealthy.\"");
 				say("\"Hurd and Ivor work the mines night and day. Beryl cooks and cleans. They are good workers. They shall make me wealthy.\"");
-				UI_add_answer("warning?");
+				add("warning?");
 				fallthrough;
 
 			case "warning?" (remove):
@@ -51843,7 +51843,7 @@ void Func049F object#(0x49F) () {
 		UI_run_schedule(0xFF61);
 		UI_clear_item_say(0xFF61);
 		UI_show_npc_face0(0xFF61, 0x0000);
-		UI_add_answer(["Master"]);
+		add(["Master"]);
 		var0005 = UI_get_item_flag(0xFF61, 0x001C);
 		if (UI_get_item_flag(0xFF64, 0x0004) && (!gflags[0x02BB])) {
 			if (Func097D(0xFE9B, 0x0001, 0x01C2, 0xFE99, 0x0000)) {
@@ -51852,15 +51852,15 @@ void Func049F object#(0x49F) () {
 				UI_set_schedule_type(0xFF61, 0x0009);
 				UI_set_schedule_type(0xFF65, 0x0009);
 				UI_set_alignment(0xFF65, 0x0000);
-				UI_add_answer("give Orb");
-				UI_remove_answer("Master");
+				add("give Orb");
+				remove("Master");
 			} else {
 				UI_set_schedule_type(0xFF65, 0x0009);
 				UI_set_alignment(0xFF65, 0x0000);
 				UI_set_schedule_type(0xFF61, 0x0009);
 				say("\"I must have the Heart of Elerion. Draygan had it, but it belongs to me. If thou canst find it, I shall reward thee.\"");
-				UI_add_answer("reward");
-				UI_remove_answer("Master");
+				add("reward");
+				remove("Master");
 			}
 		} else {
 			if (var0005 == false) {
@@ -51869,16 +51869,16 @@ void Func049F object#(0x49F) () {
 				say("\"There thou art! I knew thou wert here somewhere!\"");
 			}
 			if (gflags[0x02B9] && (!UI_get_item_flag(0xFF64, 0x0004))) {
-				UI_add_answer("King's Savior");
+				add("King's Savior");
 			}
 		}
 		if (UI_get_item_flag(0xFF64, 0x0004) && gflags[0x02BB]) {
 			say("\"I thank thee for all that thou hast done. The forest and its animals are free from the evil that Draygan had instilled in them.\"");
 			say("\"Stay here as long as thou wishest, friend.\"");
-			UI_add_answer("Hound of Doskar");
-			UI_remove_answer("Master");
+			add("Hound of Doskar");
+			remove("Master");
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "change subject":
 				UI_pop_answers();
@@ -51910,7 +51910,7 @@ void Func049F object#(0x49F) () {
 			case "Master" (remove):
 				say("\"That is correct! I am the Forest Master! Friend to Windrunner! Former protector of Elerion, and now refugee of Pagan! Of course that will mean nothing to a foreigner like thyself. Dost thou know that I can speak to animals and trees? Do not smirk, knave!\"");
 				UI_set_item_flag(0xFF61, 0x001C);
-				UI_add_answer(["Windrunner", "Pagan", "Elerion", "speak to animals and trees"]);
+				add(["Windrunner", "Pagan", "Elerion", "speak to animals and trees"]);
 				fallthrough;
 
 			case "Windrunner" (remove):
@@ -51920,7 +51920,7 @@ void Func049F object#(0x49F) () {
 			case "Pagan" (remove):
 				say("\"Ah, Pagan! A wondrous world, far better than this miserable place. At least, it was before it was destroyed by the Evil One and his followers.\"");
 				UI_push_answers();
-				UI_add_answer(["Evil One", "followers", "change subject"]);
+				add(["Evil One", "followers", "change subject"]);
 				fallthrough;
 
 			case "Evil One" (remove):
@@ -51929,7 +51929,7 @@ void Func049F object#(0x49F) () {
 
 			case "followers" (remove):
 				say("\"The followers of the Evil One were legion, and they declared war upon all who did not fall in tribute to their master. I am proud to count myself among the enemies of the Evil One and am proud to have earned his wrath. But his followers in their cowardice set fire to my forest. Even the Great Tree of Life, Elerion, burned. Using all my powers I was able to obtain the Silver Seed from within Elerion, but in the effort the flames took away my sight. The agony was unbearable and I would have surely died there, in my dead forest, on my dead world, if not for my one true friend, Windrunner. He saved me, so that one day I could become the protector of a new forest. But I have been blind since that day.\"");
-				UI_add_answer(["saved thee", "new forest"]);
+				add(["saved thee", "new forest"]);
 				fallthrough;
 
 			case "saved thee" (remove):
@@ -51943,7 +51943,7 @@ void Func049F object#(0x49F) () {
 			case "Elerion" (remove):
 				say("\"Elerion was the magnificent tree of life on the world of Pagan! How couldst thou not know such a thing! It stood as a symbol of peace and endurance for more than a millennium, its branches stretched across the sky. I was the last in a long line of noble and dutiful protectors of Elerion. It was the bearer of the Silver Seed and the prime target of the Evil One and his followers.\"");
 				UI_push_answers();
-				UI_add_answer(["Silver Seed", "prime target", "change subject"]);
+				add(["Silver Seed", "prime target", "change subject"]);
 				fallthrough;
 
 			case "Silver Seed" (remove):
@@ -51951,7 +51951,7 @@ void Func049F object#(0x49F) () {
 					say("\"",
 					    var0001,
 					    ", fate has burdened me with a tremendous weight!  The Silver Seed was split open in the destruction and discord and its magical powers have seeped from it.  The task was mine to plant the Silver Seed, if I survived the cataclysmic end this land faces. I have failed in that duty now, too.  Hrumph!  If only the tales were true!\"");
-					UI_add_answer(["tales", "split open"]);
+					add(["tales", "split open"]);
 				} else {
 					say("\"One day in the far, far future, if this world doth somehow manage to survive its myriad cataclysms, it will be time for me to plant the Silver Seed. Only I will know when and only I will know what to do. Hmmph! I will speak of this no more! Do not ask me of it again!\"");
 				}
@@ -51967,12 +51967,12 @@ void Func049F object#(0x49F) () {
 					say("\"Unfortunately, I am having a problem with most of mine other magical powers.\"");
 				}
 				UI_push_answers();
-				UI_add_answer(["Hound of Doskar", "magical powers", "change subject"]);
+				add(["Hound of Doskar", "magical powers", "change subject"]);
 				fallthrough;
 
 			case "Hound of Doskar" (remove):
 				say("\"The stories that Hound can tell! I can talk with the Hound of Doskar for hours! It is a great mystical beast capable of tracking any sort of creature. It can track across worlds and is often ranging, on the scent of one unusual thing or another.\"");
-				UI_add_answer("tracking");
+				add("tracking");
 				fallthrough;
 
 			case "tracking" (remove):
@@ -51983,7 +51983,7 @@ void Func049F object#(0x49F) () {
 
 			case "magical powers" (remove):
 				say("\"I confess I am not comfortable with the ways magic is practiced on this world, as prescribed by the sorcerers of Moonshade. I suppose I am simply not used to it. This world is plagued by such chaos and imbalance. Long ago, I grew so frustrated by not understanding the way it worked that I put all of my power into a living Orb -- the Heart of Elerion.\"");
-				UI_add_answer(["chaos and imbalance", "Heart of Elerion"]);
+				add(["chaos and imbalance", "Heart of Elerion"]);
 				fallthrough;
 
 			case "chaos and imbalance" (remove):
@@ -51992,10 +51992,10 @@ void Func049F object#(0x49F) () {
 
 			case "Heart of Elerion" (remove):
 				say("\"With the Orb I am as one with the animals and plants of the forest, and I am its Master, servant and devoted protector. The Orb is spiritually connected to me.\"");
-				UI_add_answer("connected");
+				add("connected");
 				if (!gflags[0x02BB]) {
 					say("\"But it hath been stolen!\"");
-					UI_add_answer("stolen");
+					add("stolen");
 				}
 				fallthrough;
 
@@ -52006,7 +52006,7 @@ void Func049F object#(0x49F) () {
 				} else {
 					say("\"Through it I have the power to heal the land when harm hath come to it, and I can summon the Hound of Doskar.\"");
 				}
-				UI_add_answer(["heal the land", "summon the Hound"]);
+				add(["heal the land", "summon the Hound"]);
 				fallthrough;
 
 			case "heal the land" (remove):
@@ -52032,7 +52032,7 @@ void Func049F object#(0x49F) () {
 			case "stolen" (remove):
 				say("\"Draygan, the leader of a mining camp that is elsewhere in the forest, came traipsing through here with some of his friends one day. They reached my Sanctuary while I was away and stole mine Orb! I had mine hands full with another problem at the time so I sent Windrunner and his mates after them.\tThe wolves killed all of them save for Draygan himself. But he threatened to destroy the Orb if I did not let him go. Since that time, he hath escaped me.\"");
 				UI_push_answers();
-				UI_add_answer(["another problem", "miner's camp", "Draygan", "change subject"]);
+				add(["another problem", "miner's camp", "Draygan", "change subject"]);
 				fallthrough;
 
 			case "another problem" (remove):
@@ -52815,10 +52815,10 @@ void Func04A8 object#(0x4A8) () {
 		UI_show_npc_face0(0xFF58, 0x0000);
 		if (UI_get_item_flag(0xFF58, 0x0006)) {
 			UI_set_schedule_type(0xFF58, 0x001F);
-			UI_add_answer("leave");
+			add("leave");
 		} else {
 			UI_run_schedule(0xFF58);
-			UI_add_answer("join");
+			add("join");
 		}
 		var0006 = UI_get_item_flag(0xFF58, 0x001C);
 		if (gflags[0x0004]) {
@@ -52830,16 +52830,16 @@ void Func04A8 object#(0x4A8) () {
 					say("\"In fact, I think that I will stay close by thee -- that will be safest for me!\"");
 					UI_add_to_party(0xFF58);
 					gflags[0x000F] = true;
-					UI_remove_answer("join");
-					UI_add_answer("leave");
+					remove("join");
+					add("leave");
 				}
-				UI_add_answer("trouble");
+				add("trouble");
 			} else {
 				if (gflags[0x0137]) {
 					say("\"I hope that thy quest doth fare well, ",
 					    var0000,
 					    ". Hast thou yet recovered the Rock Serpent?\"");
-					UI_add_answer("Rock Serpent");
+					add("Rock Serpent");
 				} else if (gflags[0x00FB]) {
 					say("\"I hope that thy quest doth fare well, ",
 					    var0000,
@@ -52851,16 +52851,16 @@ void Func04A8 object#(0x4A8) () {
 					if (UI_get_item_flag(0xFF58, 0x0006)) {
 						UI_remove_from_party(0xFF58);
 						Func086A();
-						UI_remove_answer("leave");
+						remove("leave");
 					}
 					UI_set_new_schedules(0xFF58, [0x0000, 0x0004, 0x0005, 0x0006, 0x0007], [0x000E, 0x001A, 0x000C, 0x001A, 0x0004], [0x09A7, 0x0778, 0x08C7, 0x0714, 0x099F, 0x078F, 0x08BE, 0x0707, 0x08B6, 0x070C]);
 					UI_set_schedule_type(0xFF58, 0x000C);
-					UI_add_answer("grateful");
+					add("grateful");
 				}
 			}
-			UI_add_answer("happenings");
+			add("happenings");
 			if (gflags[0x0149]) {
-				UI_add_answer("thy death");
+				add("thy death");
 			}
 		} else {
 			if (var0003 == 0x000F) {
@@ -52875,16 +52875,16 @@ void Func04A8 object#(0x4A8) () {
 				} else {
 					say("\"How may I aid thee, Avatar?\"");
 				}
-				UI_add_answer(["Moonshade", "rarities", "information"]);
+				add(["Moonshade", "rarities", "information"]);
 			} else {
 				say("\"I see that thou art still hale and whole, Avatar!\"");
-				UI_add_answer(["Moonshade", "rarities"]);
+				add(["Moonshade", "rarities"]);
 			}
 		}
 		if (gflags[0x000F] && ((!UI_get_item_flag(0xFF58, 0x0006)) && UI_get_cont_items(0xFF58, 0xFE99, 0xFE99, 0xFE99))) {
-			UI_add_answer("belongings");
+			add("belongings");
 		}
-		UI_add_answer(["bye"]);
+		add(["bye"]);
 		converse (0) {
 			case "thy death" (remove):
 				gflags[0x0149] = false;
@@ -52942,7 +52942,7 @@ void Func04A8 object#(0x4A8) () {
 				say("\"This all started with a piece of work I did for the late MageLord, which involved procuring some stockings...\"");
 				say("\"'Tis a long story, but to be brief, Columna the Green Witch hated me for what I did. She is dead now, but her curse lives on.\"");
 				UI_push_answers();
-				UI_add_answer(["curse", "stockings", "Columna", "change subject"]);
+				add(["curse", "stockings", "Columna", "change subject"]);
 				fallthrough;
 
 			case "curse" (remove):
@@ -52950,7 +52950,7 @@ void Func04A8 object#(0x4A8) () {
 				say("\"From the depths of some hell, she hath summoned up a tireless warrior to pursue me!\"");
 				say("\"'Tis a Death Knight, whose sole purpose is to slay the victim he is promised. Columna pledged my soul to this one.\"");
 				say("\"Surely, thou canst save me! Slay him for me, and thou shalt have my most priceless reward!\"");
-				UI_add_answer(["slay", "reward", "Where is he?"]);
+				add(["slay", "reward", "Where is he?"]);
 				fallthrough;
 
 			case "slay" (remove):
@@ -52979,7 +52979,7 @@ void Func04A8 object#(0x4A8) () {
 				say("\"No, I'm no mage... Though they tell me that I have a bit of the ability. But what good is that when the entire city is ruled by Adepts? No, no, 'tis not for me!\"");
 				say("\"Give me a good challenging search any day! The harder something is to find, the better I like it.\"");
 				UI_push_answers();
-				UI_add_answer(["ability", "Adepts", "search", "change subject"]);
+				add(["ability", "Adepts", "search", "change subject"]);
 				fallthrough;
 
 			case "stockings" (remove):
@@ -53006,7 +53006,7 @@ void Func04A8 object#(0x4A8) () {
 			case "Adepts" (remove):
 				say("\"If Moonshade weren't ruled by the Adepts, canst thou imagine what it would be like trying to govern all those powerful mages? With all their fragile egos? -- LARGE, fragile egos.\"");
 				say("\"If there's one central problem with the Adepts, 'tis that they have no regard for those with little or no magic. However, in some ways, that makes my life easier.\"");
-				UI_add_answer(["egos", "easier"]);
+				add(["egos", "easier"]);
 				fallthrough;
 
 			case "egos" (remove):
@@ -53014,7 +53014,7 @@ void Func04A8 object#(0x4A8) () {
 				say("\"Rotoluncia entered and rather pointedly remarked that Frigidazzi was looking excessively rumpled that day. And suddenly they were at each other...\"");
 				say("\"Of course, they were pretty much evenly matched. Until Celennia showed up that is. But 'tis that I refer to... Fragile egos and hot tempers, and magic to top it. Not a safe combination.\"");
 				UI_push_answers();
-				UI_add_answer(["Frigidazzi", "Rotoluncia", "Celennia", "nothing more"]);
+				add(["Frigidazzi", "Rotoluncia", "Celennia", "nothing more"]);
 				fallthrough;
 
 			case "Frigidazzi" (remove):
@@ -53044,7 +53044,7 @@ void Func04A8 object#(0x4A8) () {
 				say("\"I'm not sure I can speak of it here, in this awful place. Old Fedabiblio uses it as a tale to frighten the novices... And I'll admit that it made an impression on me.\"");
 				say("\"Vasculio was an Adept who lived outside of the Strictures. He tortured and killed without restraint, using death agony to feed power into his spells.\"");
 				say("\"The Council put him to death, but his power had grown beyond even that limitation. They found his grave empty not long after burial... And they say he still wanders the world looking for new victims.\"");
-				UI_add_answer("Strictures");
+				add("Strictures");
 				fallthrough;
 
 			case "Strictures" (remove):
@@ -53060,7 +53060,7 @@ void Func04A8 object#(0x4A8) () {
 				    ", I acquire rarities. And sometimes those items are... previously owned, shall we say?\"");
 				say("\"But Adepts, being the pompous lot they are, fail to see anything other than a magical attack as a threat.\"");
 				say("\"Most Adepts resort to simple physical traps to guard their mansions. Of course, there's always the automatons to deal with... But once I know that secret, their home is as good as mine!\"");
-				UI_add_answer(["physical traps", "automatons"]);
+				add(["physical traps", "automatons"]);
 				fallthrough;
 
 			case "physical traps" (remove):
@@ -53080,7 +53080,7 @@ void Func04A8 object#(0x4A8) () {
 			case "rarities" (remove):
 				say("\"I'll admit that that title covers quite a bit... Scrolls, magical apparatus, lab equipment, reagents. Anything that a client thinks is of value -- that's what I mean by rarities.\"");
 				UI_push_answers();
-				UI_add_answer(["magical apparatus", "client", "change subject"]);
+				add(["magical apparatus", "client", "change subject"]);
 				fallthrough;
 
 			case "magical apparatus" (remove):
@@ -53099,7 +53099,7 @@ void Func04A8 object#(0x4A8) () {
 				say("\"Somewhere, within this labyrinth, there are two switches that must be thrown... at the same time, in order to continue to the exit. I do not know where it is exactly, but I'm sure that it will be apparent.\"");
 				say("\"Without me to aid thee, thou hast no chance of winning free of this place for all thy prowess. And without thee, I have no hope of surmounting what lies in the next room.\"");
 				UI_push_answers();
-				UI_add_answer(["next room", "change subject"]);
+				add(["next room", "change subject"]);
 				fallthrough;
 
 			case "next room" (remove):
@@ -53108,19 +53108,19 @@ void Func04A8 object#(0x4A8) () {
 				    ". It may be the only thing that saved my life this time...\"");
 				say("\"When I came into this room, I heard some sort of commotion in the next room. When I sneaked into the entrance, all I saw was a mage and a VERY, VERY large monster before I ran back in here.\"");
 				say("\"Last time I looked, they were still in there...\"");
-				UI_add_answer(["mage", "monster"]);
+				add(["mage", "monster"]);
 				fallthrough;
 
 			case "mage" (remove):
 				say("\"I did not recognize him. But by the robes, I judged him a mage. I have heard that a few foolhardy mages have attempted to sneak into these tunnels in search of Stoneheart. Few who try ever return to the outside world.\"");
-				UI_add_answer("Stoneheart");
+				add("Stoneheart");
 				fallthrough;
 
 			case "Stoneheart" (remove):
 				say("\"It is forbidden to possess Stoneheart, ",
 				    var0000,
 				    ", and for good reason. It is the basis for the reagent that fueled all of Vasculio's spells -- and some say it can steal a man's wits. It is very dangerous.\"");
-				UI_add_answer("Vasculio");
+				add("Vasculio");
 				fallthrough;
 
 			case "monster" (remove):
@@ -53135,8 +53135,8 @@ void Func04A8 object#(0x4A8) () {
 				if (gflags[0x0239]) {
 					say("\"No, but thank thee for asking.\"");
 				} else {
-					UI_remove_answer("join");
-					UI_add_answer("leave");
+					remove("join");
+					add("leave");
 					say("\"Thou and I, we'll do good together!\"");
 					UI_add_to_party(0xFF58);
 					gflags[0x000F] = true;
@@ -53570,7 +53570,7 @@ void Func04AA object#(0x4AA) () {
 		}
 		if (gflags[0x01FB]) {
 			if (gflags[0x01EB] && (gflags[0x01EC] && (gflags[0x01ED] && (!gflags[0x0207])))) {
-				UI_add_answer("explain test");
+				add("explain test");
 				Func0877();
 			} else {
 				if (gflags[0x0207]) {
@@ -53579,7 +53579,7 @@ void Func04AA object#(0x4AA) () {
 					say("\"To be caught in indecision!\"");
 					say("\"To say that you have returned from the Test, as the Dream said that the Hero would.\"");
 					say("\"Yet you did not succeed at the Test. You have failed to show Virtue. To have thought that you would have passed all the tests if you were the Hero!\"");
-					UI_add_answer(["second chance", "never mind"]);
+					add(["second chance", "never mind"]);
 				} else if (!gflags[0x0201]) {
 					say("\"To ask if you have brought me the Goblet. To know that this shall prove you to be the Hero of the Dream.\"");
 					if (Func0955() == true) {
@@ -53633,7 +53633,7 @@ void Func04AA object#(0x4AA) () {
 				Func0876();
 			}
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case var0008:
 				say("\"To be wary that you might be like others of your kind, who come here to slay my people and steal our treasures.\"");
@@ -53641,10 +53641,10 @@ void Func04AA object#(0x4AA) () {
 				if (var0004) {
 					say("\"To be female as the Hero was in the dream...\"");
 				}
-				UI_remove_answer([var0008, "I am the Avatar.", "I am lost..."]);
-				UI_add_answer(["others of your kind", "treasures", "dream"]);
+				remove([var0008, "I am the Avatar.", "I am lost..."]);
+				add(["others of your kind", "treasures", "dream"]);
 				if (!gflags[0x01FE]) {
-					UI_add_answer("drawbridge");
+					add("drawbridge");
 				}
 				fallthrough;
 
@@ -53657,7 +53657,7 @@ void Func04AA object#(0x4AA) () {
 				say("\"To say sadly that Men come to do us harm. To not understand why they call us Daemons...\"");
 				say("\"To say they are brawny warriors in stout armour. To delight in shedding our blood. To hate us greatly.\"");
 				say("\"To regret that we cannot make peace with them.\"");
-				UI_add_answer("Daemons");
+				add("Daemons");
 				fallthrough;
 
 			case "Daemons" (remove):
@@ -53669,7 +53669,7 @@ void Func04AA object#(0x4AA) () {
 				say("\"To say that many Men have come here to steal the wealth of the Lost City.\"");
 				say("\"To be willing to share... To be angry that the Men in Armour do not want to share. To want only to kill us.\"");
 				say("\"To be as ignorant as they are\tgreedy.\"");
-				UI_add_answer(["ignorant", "Lost City"]);
+				add(["ignorant", "Lost City"]);
 				fallthrough;
 
 			case "ignorant" (remove):
@@ -53703,7 +53703,7 @@ void Func04AA object#(0x4AA) () {
 					UI_set_conversation_slot(0x0000);
 				}
 				say("\"To wonder if you are the Hero.\"");
-				UI_add_answer(["I am not the Hero", "tell me more"]);
+				add(["I am not the Hero", "tell me more"]);
 				fallthrough;
 
 			case "I am not the Hero":
@@ -53714,7 +53714,7 @@ void Func04AA object#(0x4AA) () {
 				abort;
 
 			case "tell me more":
-				UI_remove_answer(["I am not the Hero", "tell me more"]);
+				remove(["I am not the Hero", "tell me more"]);
 				say("\"To say that the Dream tells of great disasters -- storms that disintegrate with their bolts, diseases which kill the meek, and a spectral Trinity which spreads Evil.\"");
 				say("\"To declare that a Hero shall come from beyond this world. To have seen that this warrior shall slay the Trinity, and triumph through virtue.\"");
 				say("\"To be required to give this Hero an ancient artifact, which will provide guidance to ",
@@ -53723,7 +53723,7 @@ void Func04AA object#(0x4AA) () {
 				say("\"To know the Hero by this sign -- ",
 				    var000B,
 				    " shall submit to the Test of Purity, and be shown worthy by returning in virtue.\"");
-				UI_add_answer(["Test of Purity", "ancient artifact", "storms", "diseases", "Evil Trinity", "nothing"]);
+				add(["Test of Purity", "ancient artifact", "storms", "diseases", "Evil Trinity", "nothing"]);
 				fallthrough;
 
 			case "Test of Purity" (remove):
@@ -53735,7 +53735,7 @@ void Func04AA object#(0x4AA) () {
 				if (UI_get_array_size(UI_get_party_list()) > 0x0001) {
 					say("\"To assure your companions that no harm shall come to you or to them during the Test. To believe this myself.\"");
 				}
-				UI_add_answer(["Twin Pillars"]);
+				add(["Twin Pillars"]);
 				fallthrough;
 
 			case "Twin Pillars" (remove):
@@ -53785,7 +53785,7 @@ void Func04AA object#(0x4AA) () {
 				fallthrough;
 
 			case "I am the Avatar.":
-				UI_remove_answer([var0008, "I am the Avatar.", "I am lost..."]);
+				remove([var0008, "I am the Avatar.", "I am lost..."]);
 				say("\"To not have heard of any Avatar...\"");
 				say("\"To be wary that you are not like other Men, and to hope that you are not here to steal our treasures.\"");
 				var0016 = Func0992(0xFFFD, "@The Avatar is the Champion of Virtue, dear gargoyle.@", 0x0000, false);
@@ -53796,7 +53796,7 @@ void Func04AA object#(0x4AA) () {
 					say("\"To seem to recognize you, as if from the vision of my slumbers... To wonder if you are the Hero of the Dream...\"");
 				}
 				gflags[0x01FD] = true;
-				UI_add_answer(["others of your kind", "treasures", "dream"]);
+				add(["others of your kind", "treasures", "dream"]);
 				fallthrough;
 
 			case "I am lost...":
@@ -53807,36 +53807,36 @@ void Func04AA object#(0x4AA) () {
 
 			case "dreaming sickness":
 				say("\"To be concerned. To have an imbalance in the land. To have affected the gargoyles and thrown them into helpless dreaming.\" *\"To be the only one that remains awake to fight back the trolls...\"");
-				UI_remove_answer("dreaming sickness");
-				UI_add_answer("trolls");
+				remove("dreaming sickness");
+				add("trolls");
 				fallthrough;
 
 			case "trolls":
 				say("\"To be uncivilized creatures! To enjoy killing... To have been plaguing us for generations.\" *\"To be advised to be cautious if you hear drums.\"");
-				UI_remove_answer("trolls");
-				UI_add_answer("drums");
+				remove("trolls");
+				add("drums");
 				fallthrough;
 
 			case "drums":
 				say("\"To be thought of as the trolls' communication. To be trouble for all within the sound of the drums.\"");
-				UI_remove_answer("drums");
+				remove("drums");
 				fallthrough;
 
 			case "ring":
 				say("\"To be a relic of the humans who once dwelt here... To have dreamed that it is a thing of great power.\" *\"To have seen in the dream that you will receive great assistance from the ring.\"");
-				UI_remove_answer("ring");
-				UI_add_answer("assistance");
+				remove("ring");
+				add("assistance");
 				fallthrough;
 
 			case "assistance":
 				say("\"To have been unclear. To have only seen two snakes fighting... To know that the ring is important in the battle. To know nothing else.\"");
-				UI_remove_answer("assistance");
+				remove("assistance");
 				fallthrough;
 
 			case "Serpent Staff":
 				say("\"To have once had the Serpent Staff. To have been taken by the troll king.\"");
-				UI_remove_answer("Serpent Staff");
-				UI_add_answer("troll king");
+				remove("Serpent Staff");
+				add("troll king");
 				fallthrough;
 
 			case "troll king" (remove):
@@ -53863,7 +53863,7 @@ void Func04AA object#(0x4AA) () {
 				say("\"To be unwilling to allow the ring to fall into the wrong hands. To say that the Dream warns of the deceitfulness of the Spectral Trinity.\"");
 				say("\"To set you this test: To show Virtue by risking your life to enter the Conjury of the Ancients, and obtain the Goblet of Replenishing Water.\"");
 				gflags[0x0200] = true;
-				UI_add_answer(["goblet", "Conjury"]);
+				add(["goblet", "Conjury"]);
 				Func0878();
 				fallthrough;
 
@@ -54075,23 +54075,23 @@ void Func04B2 object#(0x4B2) () {
 		UI_show_npc_face0(0xFF4E, 0x0000);
 		say("\"Thank the heavens I have found thee! Thou didst disappear...\"");
 		say("\"When the Guardian appeared, we feared thou wert taken. Thou must hurry, I have found a way for thee to return home!\"");
-		UI_add_answer(["disappear", "Guardian", "return home"]);
+		add(["disappear", "Guardian", "return home"]);
 		converse (0) {
 			case "disappear":
 				say("\"One moment thou wert standing between the pillars... The next, thou wert gone!\" *\"That fiend Zhelkas laughed and said that the land was well rid of thee. Dupre tried to slay him, but he was no match for the gargoyle's strength. And then the Guardian came...\"");
-				UI_remove_answer("disappear");
-				UI_add_answer("no match");
+				remove("disappear");
+				add("no match");
 				fallthrough;
 
 			case "no match":
 				say("\"Dupre fought valiantly, Avatar. But Zhelkas threw him aside and ran into the caverns.\" *\"I heard one of the sliding doors open just before the drums started.\"");
-				UI_remove_answer("no match");
-				UI_add_answer(["sliding doors", "drums"]);
+				remove("no match");
+				add(["sliding doors", "drums"]);
 				fallthrough;
 
 			case "sliding doors":
 				say("\"The drawbridge, Avatar! They were the only thing standing between us and the trolls! Zhelkas must have let them down...\" *\"We must flee, while there is still time!\"");
-				UI_remove_answer("sliding doors");
+				remove("sliding doors");
 				fallthrough;
 
 			case "drums":
@@ -54127,7 +54127,7 @@ void Func04B2 object#(0x4B2) () {
 					}
 					abort;
 				}
-				UI_remove_answer("drums");
+				remove("drums");
 				fallthrough;
 
 			case "Guardian":
@@ -54135,32 +54135,32 @@ void Func04B2 object#(0x4B2) () {
 				say("\"The Guardian said that he hath grown tired of the game here on Serpent Isle. The end is inevitable now...\"");
 				say("\"The Guardian said to tell thee that he was changing the venue...\"");
 				var0003 = true;
-				UI_remove_answer("Guardian");
-				UI_add_answer(["inevitable", "venue"]);
+				remove("Guardian");
+				add(["inevitable", "venue"]);
 				fallthrough;
 
 			case "inevitable":
 				say("\"The Guardian said that Balance could never be restored now. He said that the land will soon destroy itself... And us with it.\"");
-				UI_remove_answer("inevitable");
-				UI_add_answer("destroy itself");
+				remove("inevitable");
+				add("destroy itself");
 				fallthrough;
 
 			case "destroy itself":
 				say("\"Without Balance, the earthquakes and storms will continue until there is not one rock upon another. Soon the seas will swallow all that remains of the land.\"");
 				say("\"There is nothing that thou canst do here, Avatar! We will be crushed and dragged beneath the waves if we stay!\"");
-				UI_remove_answer("destroy itself");
+				remove("destroy itself");
 				fallthrough;
 
 			case "venue":
 				say("\"The Guardian said that he would await thee on Earth, Avatar! Thine home...\" *\"He said he was going to unleash horrible maladies upon thy people.\"");
-				UI_remove_answer("venue");
-				UI_add_answer("maladies");
+				remove("venue");
+				add("maladies");
 				fallthrough;
 
 			case "maladies":
 				say("\"The Guardian said he would send vile, lingering plagues to all the leaders of thy land. Then he would set minions in their places to destroy all that thou dost hold dear.\" *\"The Guardian even threatened thy family...\"");
-				UI_remove_answer("maladies");
-				UI_add_answer("family");
+				remove("maladies");
+				add("family");
 				fallthrough;
 
 			case "family" (remove):
@@ -54196,14 +54196,14 @@ void Func04B2 object#(0x4B2) () {
 
 			case "return home":
 				say("\"When the Guardian disappeared, we began searching for thee. The Guardian's interference into this place hath opened a gate... To thine home, I think.\"");
-				UI_remove_answer("return home");
-				UI_add_answer("gate");
+				remove("return home");
+				add("gate");
 				fallthrough;
 
 			case "gate":
 				say("\"It is much like the Moongate that brought thee to Britannia the last time. Shamino thought perhaps the Guardian's passage had not fully closed.\" *\"I do not think it is a trap, Avatar! I do not think the Guardian knows that the gate here still exists...\"");
-				UI_remove_answer("gate");
-				UI_add_answer("trap");
+				remove("gate");
+				add("trap");
 				fallthrough;
 
 			case "trap" (remove):
@@ -54347,7 +54347,7 @@ void Func04B3 object#(0x4B3) () {
 		UI_set_schedule_type(0xFF4D, 0x000F);
 		UI_show_npc_face0(0xFFFE, 0x0000);
 		say("\"We feared for thee when thou didst disappear from between the pillars. While searching, I became trapped here. I cannot seem to find the way out. Though I suspect that those buttons on the wall might be part of the answer.\"");
-		UI_add_answer(["disappear", "trapped", "buttons", "bye"]);
+		add(["disappear", "trapped", "buttons", "bye"]);
 		converse (0) {
 			case "bye":
 				UI_run_schedule(0xFF4D);
@@ -54358,42 +54358,42 @@ void Func04B3 object#(0x4B3) () {
 			case "disappear":
 				say("\"Thou didst examine the fiery pillar, as Zhelkas instructed thee... And then thou wert gone!\"");
 				say("\"I think the Gargoyle hath tricked us, Avatar. Never trust their type...\"");
-				UI_remove_answer("disappear");
-				UI_add_answer("tricked");
+				remove("disappear");
+				add("tricked");
 				fallthrough;
 
 			case "tricked":
 				say("\"When we sought to question him about thy disappearance, he was nowhere to be found. So we divided to look for thee...\"");
 				say("\"I became confused when trying to return to the pillars. And here I am... With all these lovely people.\"");
-				UI_remove_answer("tricked");
-				UI_add_answer("people");
+				remove("tricked");
+				add("people");
 				fallthrough;
 
 			case "people":
 				say("\"They seem to be trapped here as well.\"");
 				say("\"They have been trying to discourage me from using the button on the left... but there are powerful rewards for pressing that button!\"");
-				UI_remove_answer("people");
-				UI_add_answer("rewards");
+				remove("people");
+				add("rewards");
 				fallthrough;
 
 			case "rewards":
 				say("\"Well, these people seem to have been here a very long time. They are... lonely... for company.\"");
 				say("\"There is much that we could do to make them feel less lonely, Avatar, if thou dost know what I mean...\"");
-				UI_remove_answer("rewards");
+				remove("rewards");
 				fallthrough;
 
 			case "trapped":
 				say("\"Thou canst see for thyself... There is no way out of here. I can find no concealed doors.\"");
 				say("\"It is only reasonable that these buttons hold the way out. Though they also hold much more...\"");
-				UI_remove_answer("trapped");
-				UI_add_answer("what else");
+				remove("trapped");
+				add("what else");
 				fallthrough;
 
 			case "what else":
 				say("\"Apparently the buttons also control the doors to the private chambers.\"");
 				say("\"And also the private passions of these people! This is such fun, Avatar.\"");
-				UI_remove_answer("what else");
-				UI_add_answer("private chambers");
+				remove("what else");
+				add("private chambers");
 				fallthrough;
 
 			case "private chambers" (remove):
@@ -54424,23 +54424,23 @@ void Func04B3 object#(0x4B3) () {
 			case "buttons":
 				say("\"There are two buttons on the posts behind me.\"");
 				say("\"When I went to press the one on the left, these comely folks begged me not to.\"");
-				UI_remove_answer("buttons");
-				UI_add_answer("begged");
+				remove("buttons");
+				add("begged");
 				fallthrough;
 
 			case "begged":
 				say("\"Yes, begged. But they would not explain, and I was certain they were hiding something from me...\"");
 				say("\"What could I do?\"");
 				say("\"I pressed the button on the left... And made a rather fascinating discovery.\"");
-				UI_remove_answer("begged");
-				UI_add_answer("discovery");
+				remove("begged");
+				add("discovery");
 				fallthrough;
 
 			case "discovery":
 				say("\"I found out how very lonely certain of these folks have been -- particularly the women...\"");
 				say("\"They have been very convincing.\"");
 				say("\"Press the button, and thou canst see for thyself!\"");
-				UI_remove_answer("discovery");
+				remove("discovery");
 		}
 	}
 	if (event == 0x0002) {
@@ -54678,105 +54678,105 @@ void Func04B4 object#(0x4B4) () {
 			abort;
 		}
 		say("\"Zhelkas hath appointed me moderator of the Game, Avatar. He hath also given me leave to explore...\" *\"Art thou ready to begin?\"");
-		UI_add_answer(["moderator", "Game", "explore", "begin"]);
+		add(["moderator", "Game", "explore", "begin"]);
 		converse (0) {
 			case "moderator":
 				say("\"It is my duty as moderator to see that thou dost know the rules. After I have informed thee, I cannot aid thee... In any way.\"");
-				UI_remove_answer("moderator");
-				UI_add_answer(["rules", "aid"]);
+				remove("moderator");
+				add(["rules", "aid"]);
 				fallthrough;
 
 			case "rules":
 				say("\"The rules are few...\" *\"Thou shalt face ten Worms. Thou canst not leave until the last Worm hath been dispatched.\"");
-				UI_remove_answer("rules");
-				UI_add_answer(["Worm", "dispatched"]);
+				remove("rules");
+				add(["Worm", "dispatched"]);
 				fallthrough;
 
 			case "Worm":
 				say("\"Thou shalt face each Worm singly, one after the other. Each Worm shall seek thy death, Avatar. So be prepared.\"");
-				UI_remove_answer("Worm");
+				remove("Worm");
 				fallthrough;
 
 			case "dispatched":
 				say("\"The Worms can only be killed by a hammer. Each Worm can be slain only by hammer blows.\"");
-				UI_remove_answer("dispatched");
-				UI_add_answer("hammer");
+				remove("dispatched");
+				add("hammer");
 				fallthrough;
 
 			case "hammer":
 				say("\"They are Worms, Avatar! Everyone knows that if thou dost use a sword against a Worm, thou wilt face twice the number of foes after each stroke.\" *\"There is a small hammer on the floor near thee...\"");
-				UI_remove_answer("hammer");
-				UI_add_answer("everyone knows");
+				remove("hammer");
+				add("everyone knows");
 				fallthrough;
 
 			case "everyone knows":
 				say("\"'Tis common knowledge, Avatar! I am surprised at thee... Cease such questions and put thine attention to the Game!\"");
-				UI_remove_answer("everyone knows");
+				remove("everyone knows");
 				fallthrough;
 
 			case "aid":
 				say("\"I cannot assist thee in thy struggle against the Worms, either directly or indirectly.\"");
-				UI_remove_answer("aid");
-				UI_add_answer(["directly", "indirectly"]);
+				remove("aid");
+				add(["directly", "indirectly"]);
 				fallthrough;
 
 			case "directly":
 				say("\"I cannot join thy fight against the Worms. If I do, thou wilt lose the Game.\"");
-				UI_remove_answer("directly");
+				remove("directly");
 				fallthrough;
 
 			case "indirectly":
 				say("\"I cannot give thee anything I find while exploring. If I give thee anything, thou wilt lose the Game.\"");
-				UI_remove_answer("indirectly");
+				remove("indirectly");
 				fallthrough;
 
 			case "Game":
 				say("\"That is how Zhelkas referred to it, Avatar. Perhaps it is a test of thy skill or versatility as a warrior.\"");
-				UI_remove_answer("Game");
-				UI_add_answer(["skill", "versatility"]);
+				remove("Game");
+				add(["skill", "versatility"]);
 				fallthrough;
 
 			case "skill":
 				say("\"If thou art the Hero Zhelkas seeks, surely thou art a skilled enough fighter to stand alone against the Worms. If thou canst not best the Worms, how canst thou expect to stop the very destruction of the world?\"");
-				UI_remove_answer("skill");
-				UI_add_answer("destruction");
+				remove("skill");
+				add("destruction");
 				fallthrough;
 
 			case "destruction":
 				say("\"Why dost thou ask me? Everyone fears that the world will end soon if these storms are not stopped...\" *\"Turn thy mind to the task at hand. The sooner thou dost finish this Game, the sooner we can be on our way...\"");
-				UI_remove_answer("destruction");
+				remove("destruction");
 				fallthrough;
 
 			case "versatility":
 				say("\"A true warrior doth not rely on only one weapon, Avatar. What would happen if thou didst not have thy sword and had to battle the Guardian? A true Hero would make anything a weapon if need be...\"");
-				UI_remove_answer("versatility");
+				remove("versatility");
 				fallthrough;
 
 			case "explore":
 				say("\"Zhelkas said there were rooms in this area that I would find interesting. By acting as moderator, perhaps I may find something to benefit our quest.\"");
-				UI_remove_answer("explore");
-				UI_add_answer(["interesting", "benefit"]);
+				remove("explore");
+				add(["interesting", "benefit"]);
 				fallthrough;
 
 			case "interesting":
 				say("\"Well, unless Zhelkas was talking about wine casks... I'd say he might have been referring to weapons.\"");
-				UI_remove_answer("interesting");
-				UI_add_answer(["wine casks", "weapons"]);
+				remove("interesting");
+				add(["wine casks", "weapons"]);
 				fallthrough;
 
 			case "wine casks":
 				say("\"Do not worry, old friend! I shall try to save thee a drop or two.\" *\"But thou shouldst be quick, lest I forget...\"");
-				UI_remove_answer("wine casks");
+				remove("wine casks");
 				fallthrough;
 
 			case "weapons":
 				say("\"If there is time after the Game, perhaps thou canst join me. If I can carry it... Perhaps I'll bring thee something.\"");
-				UI_remove_answer("weapons");
+				remove("weapons");
 				fallthrough;
 
 			case "benefit":
 				say("\"Information, weapons...\" *\"I bring back what I can... As long as there isn't too much wine!\"");
-				UI_remove_answer("benefit");
+				remove("benefit");
 				fallthrough;
 
 			case "begin":
@@ -55124,7 +55124,7 @@ void Func04B6 object#(0x4B6) () {
 				say("\"Hast thou reconsidered my request, Avatar? Wilt thou bring to me the Dream Crystal?\"");
 				if (Func0955() == true) {
 					say("\"I knew that Edrin could not be so misled...\"");
-					UI_add_answer("defeat");
+					add("defeat");
 				} else {
 					say("\"Then do not return unless thou hast had a change of heart! I am saddened beyond bearing!\"");
 					abort;
@@ -55138,11 +55138,11 @@ void Func04B6 object#(0x4B6) () {
 					say("\"I am Siranush. I have been expecting thee...\"");
 					say("\"Now that the foul mage Rabindrinath is dead, we have some hope of escaping his evil spell.\"");
 					UI_set_item_flag(0xFF4A, 0x001C);
-					UI_add_answer(["expecting", "Rabindrinath", "evil spell"]);
+					add(["expecting", "Rabindrinath", "evil spell"]);
 				} else {
 					say("\"Thou hast come at last! I am Siranush. I have been expecting thee... I knew that thou wert the one destined to free us from Rabindrinath's evil spell.\"");
 					UI_set_item_flag(0xFF4A, 0x001C);
-					UI_add_answer(["expecting", "Rabindrinath", "evil spell"]);
+					add(["expecting", "Rabindrinath", "evil spell"]);
 				}
 			} else {
 				say("\"Thou hast returned. Hast thou brought to me the Dream Crystal, ",
@@ -55200,42 +55200,42 @@ void Func04B6 object#(0x4B6) () {
 		converse (0) {
 			case "expecting":
 				say("\"As Edrin hath told thee of me, he hath dreamed of thee. I knew that thou wouldst come... 'Twas only a matter of time.\"");
-				UI_remove_answer("expecting");
-				UI_add_answer("matter of time");
+				remove("expecting");
+				add("matter of time");
 				fallthrough;
 
 			case "matter of time":
 				say("\"In mine own dreams, I saw that thou wouldst need the Serpent Necklace. I knew that thou wouldst have to come here before thou couldst complete thy quest.\"");
-				UI_remove_answer("matter of time");
-				UI_add_answer(["Serpent Necklace", "quest"]);
+				remove("matter of time");
+				add(["Serpent Necklace", "quest"]);
 				fallthrough;
 
 			case "Serpent Necklace":
 				say("\"'Tis a thing of power from the people who settled this land after the village of Gorlab existed. It is to be thy reward.\"");
-				UI_remove_answer("Serpent Necklace");
-				UI_add_answer(["thing of power", "Gorlab", "reward"]);
+				remove("Serpent Necklace");
+				add(["thing of power", "Gorlab", "reward"]);
 				fallthrough;
 
 			case "thing of power":
 				say("\"I do not know what it will do... I only know that it was part of a set of such jewelry. And it was a symbol of authority of some sort.\"");
-				UI_remove_answer("thing of power");
-				UI_add_answer("authority");
+				remove("thing of power");
+				add("authority");
 				fallthrough;
 
 			case "authority":
 				say("\"I have been trapped for a very long time, Avatar.\" *\"All I know is that the Ophidians seemed to worship serpents and that artifacts with the serpent symbol were often of magical origin. I have no idea what it will do.\"");
-				UI_remove_answer("authority");
+				remove("authority");
 				fallthrough;
 
 			case "Gorlab":
 				say("\"The ruins that lie within the swamp are those of my village. Though Gorlab was not always a swamp.\" *'Long ago, Gorlab was once a prosperous community, Avatar.\"");
-				UI_remove_answer("Gorlab");
-				UI_add_answer("swamp");
+				remove("Gorlab");
+				add("swamp");
 				fallthrough;
 
 			case "swamp":
 				say("\"When I was Gorlab's healer, the village stood on firm ground. We held back the swamp and farmed the rich soil.\" *\"But after we became trapped in this forsaken place, the earthworks we had built crumbled and the swamp rose to engulf the village.\"");
-				UI_remove_answer("swamp");
+				remove("swamp");
 				fallthrough;
 
 			case "reward":
@@ -55249,15 +55249,15 @@ void Func04B6 object#(0x4B6) () {
 				} else {
 					say("\"Thou art our only hope, Avatar. Our souls are trapped here, unable to go to what awaits beyond the realm of life.\" *\"If thou wilt undertake the task I ask, I shall reward thee with the Serpent necklace.\"");
 				}
-				UI_remove_answer("reward");
+				remove("reward");
 				fallthrough;
 
 			case "quest":
 				say("\"Thou art the only one that can hope to save the land from tearing itself apart, Avatar.\"");
 				say("\"I do not know what thou must do... I only know that thou must possess the Serpent Necklace before thou hast hope of succeeding.\"");
 				say("\"But first, thou must free us.\"");
-				UI_remove_answer("quest");
-				UI_add_answer("free");
+				remove("quest");
+				add("free");
 				fallthrough;
 
 			case "free":
@@ -55268,8 +55268,8 @@ void Func04B6 object#(0x4B6) () {
 				} else {
 					say("\"Bring to me the Dream Crystal and we will all be freed.\"");
 				}
-				UI_remove_answer("free");
-				UI_add_answer("Dream Crystal");
+				remove("free");
+				add("Dream Crystal");
 				fallthrough;
 
 			case "Dream Crystal":
@@ -55280,43 +55280,43 @@ void Func04B6 object#(0x4B6) () {
 				} else {
 					say("\"Thou hast already seen a small part of the whole... The crystal that Edrin wears is a shard of the Dream Crystal. That is how I was able to speak with him.\"");
 					say("\"To find the Dream Crystal, thou must venture into Rabindrinath's Keep somewhere within the Dream Realm.\"");
-					UI_add_answer("Rabindrinath's Keep");
+					add("Rabindrinath's Keep");
 				}
-				UI_remove_answer("Dream Crystal");
+				remove("Dream Crystal");
 				fallthrough;
 
 			case "Rabindrinath's Keep":
 				say("\"I would go with thee, if I could. But I am all that keeps Rabindrinath's madness at bay. Without mine opposition, all our souls would have been destroyed long ago.\" *\"Rabindrinath will have the Crystal well-hidden, and I doubt that thou canst take it from his keep without killing him. Be wary, Avatar. He is quite mad.\"");
-				UI_remove_answer("Rabindrinath's Keep");
+				remove("Rabindrinath's Keep");
 				fallthrough;
 
 			case "Rabindrinath":
 				say("\"Rabindrinath was a haughty mage who moved into our town shortly after I became the healer there. He was very angry when we did not immediately name him to the village Council.\" *\"Rabindrinath stormed back to his keep, swearing that we would soon see that he was no one to trifle with. I wish I had understood what he was planning when he began collecting the crystals.\"");
-				UI_remove_answer("Rabindrinath");
-				UI_add_answer("crystals");
+				remove("Rabindrinath");
+				add("crystals");
 				fallthrough;
 
 			case "crystals":
 				say("\"Rabindrinath bought a vast quantity of Dream Crystals. I thought them harmless...\" *\"Small Dream Crystals were often exchanged by lovers. So that they might see each other in their dreams. I had no idea that he could pervert them so.\"");
-				UI_remove_answer("crystals");
-				UI_add_answer("pervert");
+				remove("crystals");
+				add("pervert");
 				fallthrough;
 
 			case "pervert":
 				say("\"I am no mage, Avatar. The Dream Crystals were little more than hedge magic. I had no idea that Rabindrinath could use them for anything sinister.\" *\"Else I would have brought him before the Judicar... And had his powers riven from him.\"");
-				UI_remove_answer("pervert");
+				remove("pervert");
 				fallthrough;
 
 			case "evil spell":
 				say("\"Rabindrinath thought to harness the villager's dreams, hoping to gain great power. He intended to use that power to make the village submit to his rule.\" *\"But his spell went awry...\"");
-				UI_remove_answer("evil spell");
-				UI_add_answer("awry");
+				remove("evil spell");
+				add("awry");
 				fallthrough;
 
 			case "awry":
 				say("\"I do not know if Rabindrinath thought that he would tap our dreams and exploit what we feared. Or if he planned to steal some of our essence while we lay dreaming.\" *\"Whatever his true plans, when he cast his spell the power was so great that a rift opened into the Dream Realm. The people of Gorlab, including the spellcaster himself, were trapped within this land of altered reality.\"");
-				UI_remove_answer("awry");
-				UI_add_answer("trapped");
+				remove("awry");
+				add("trapped");
 				fallthrough;
 
 			case "trapped":
@@ -55327,8 +55327,8 @@ void Func04B6 object#(0x4B6) () {
 				} else {
 					say("\"And I can do little more than keep Rabindrinath's insanity from destroying us.\"");
 				}
-				UI_remove_answer("trapped");
-				UI_add_answer("destroying");
+				remove("trapped");
+				add("destroying");
 				fallthrough;
 
 			case "destroying":
@@ -55374,8 +55374,8 @@ void Func04B6 object#(0x4B6) () {
 					say("\"Wilt thou bring me the Dream Crystal so that we may at last find peace? I fear that soon my strength will fail, and the people of Gorlab and I will be far worse than dead.\"");
 					if (Func0955() == true) {
 						say("\"Thou art truly as brave as Edrin pictured thee! I can tell thee how to defeat Rabindrinath...\"");
-						UI_remove_answer("destroying");
-						UI_add_answer("defeat");
+						remove("destroying");
+						add("defeat");
 					} else {
 						say("\"Edrin hath thought thee brave... I see that he was misled.\" *\"Without thine aid we are doomed to eternal limbo, not dead and never to be alive again. Trapped forever in insanity.\"");
 						say("\"Return if thou dost reconsider... I doubt that thou canst finish thine own quest without mine aid.\"");
@@ -55820,71 +55820,71 @@ void Func04CA object#(0x4CA) () {
 		UI_show_npc_face0(0xFED6, 0x0000);
 		if (!var0000) {
 			say("\"Halt! Only a true follower of Order may pass this portal. Art thou such a disciple?\"");
-			UI_add_answer(["I follow Order", "I follow Chaos"]);
+			add(["I follow Order", "I follow Chaos"]);
 		} else {
 			if (gflags[0x0251]) {
 				say("\"'Tis good to see thee again, scholar of Order.\"");
 				say("\"I surmise thou didst come across with the others.\"");
-				UI_add_answer(["door locked", "others", "bye"]);
+				add(["door locked", "others", "bye"]);
 			} else {
 				say("\"Oh, 'tis only thee. I hope that thou hast become more learned in the ways of Order, lest thou wilt not be permitted to enter the grand shrine.\"");
-				UI_add_answer(["Give me the test", "grand shrine", "bye"]);
+				add(["Give me the test", "grand shrine", "bye"]);
 			}
 		}
 		converse (0) {
 			case "I follow Order":
-				UI_remove_answer(["I follow Order", "I follow Chaos"]);
+				remove(["I follow Order", "I follow Chaos"]);
 				say("\"That may be, but I must test thy knowledge before I permit thee access to the grand shrine.\"");
-				UI_add_answer(["test", "grand shrine", "bye"]);
+				add(["test", "grand shrine", "bye"]);
 				fallthrough;
 
 			case "test" (remove):
 				say("\"Though I doubt one such as thee would attempt to deceive me, many 'followers' of late do not appear to truly be devoted to Order.\"");
 				say("\"In truth, I believe them to be impostors, though they did answer the question I put to them.\"");
-				UI_add_answer(["impostors", "question"]);
+				add(["impostors", "question"]);
 				fallthrough;
 
 			case "question" (remove):
 				say("\"To insure that thou art a true student of Order, I will ask thee to complete a line from one of our greatest books and thou must name the book.\"");
 				say("\"Only a devout student of Order would know the answer.\"");
-				UI_add_answer(["Give me the test"]);
+				add(["Give me the test"]);
 				fallthrough;
 
 			case "Give me the test" (remove):
 				say("\"Which book tells us, ~'Being sincere and fair in all of thy transactions will provide thee with more power than thou ever hadst.'\"*");
 				say("\"'Thou wert strong, thou wilt be stronger. Thy strength will be exalted in truth.'\"");
 				UI_push_answers();
-				UI_add_answer(["Strength Though Ethics", "Guidelines of Life", "Tenets of Discipline"]);
+				add(["Strength Though Ethics", "Guidelines of Life", "Tenets of Discipline"]);
 				if (gflags[0x0252]) {
-					UI_add_answer(["The Structure of Order"]);
+					add(["The Structure of Order"]);
 				} else {
-					UI_add_answer(["The Joy of Order"]);
+					add(["The Joy of Order"]);
 				}
 				fallthrough;
 
 			case "Strength Though Ethics":
 				UI_pop_answers();
 				say("\"An excellent book, one that can guide a disciple of Order to new consciousness. I would recommend that thou readest it. Then thou wouldst realize that the answer thou didst give was incorrect.\"");
-				UI_add_answer(["Give me the test"]);
+				add(["Give me the test"]);
 				fallthrough;
 
 			case "Tenets of Discipline":
 				UI_pop_answers();
 				say("\"Shushuro was a great man indeed. If only mine hollow head could be so enlightened. But at least I realize my quote was not from that book's pages. Mayhap thou shouldst return to the city and examine thy books further.\"");
-				UI_add_answer(["Give me the test"]);
+				add(["Give me the test"]);
 				fallthrough;
 
 			case "Guidelines of Life":
 				UI_pop_answers();
 				say("\"A masterpiece! Indeed, its words of wisdom could educate thee very well. Then thou wouldst be enlightened to learn that the book thou didst name doth not contain any such quote.\"");
 				say("\"Mayhap thou dost need to study more at the Hierophant's library. 'Tis a wondrous place full of the wisdom of Order.\"");
-				UI_add_answer(["Give me the test"]);
+				add(["Give me the test"]);
 				fallthrough;
 
 			case "The Joy of Order":
 				UI_pop_answers();
 				say("\"Curious, I have never heard of that book. Methinks that thou art trying to deceive me. Please, do us both a service and return thou to the library for further study.\"");
-				UI_add_answer(["Give me the test"]);
+				add(["Give me the test"]);
 				fallthrough;
 
 			case "The Structure of Order" (remove):
@@ -55928,13 +55928,13 @@ void Func04CA object#(0x4CA) () {
 			case "impostors" (remove):
 				say("\"Though I should not speak such, they appeared to be, shall we say, less than intelligent. They seemed to have great difficulty with answering the most modest of my queries.\"");
 				say("\"One of their number even threatened to tear me limb from limb if I failed to open this portal. But it was the large one who answered all the questions correctly. He alone was no dolt.\"");
-				UI_add_answer(["large one"]);
+				add(["large one"]);
 				fallthrough;
 
 			case "others" (remove):
 				say("\"The others that I spoke about earlier. Or did I mention them? I thought that I mentioned that the 'disciples' of late do not appear to be truly devout.\"*");
 				say("\"In truth, I believed them to be impostors, though they passed the test I put upon them.\"");
-				UI_add_answer(["impostors"]);
+				add(["impostors"]);
 				fallthrough;
 
 			case "large one" (remove):
@@ -56279,7 +56279,7 @@ void Func04CF object#(0x4CF) () {
 			    ".\"");
 			say("\"I have nothing against thee, but I fear that Thoxa's willful interference shall be the undoing of all for which we have prepared.\"");
 			UI_set_item_flag(0xFF31, 0x001C);
-			UI_add_answer(["previous meeting", "Thoxa", "interference"]);
+			add(["previous meeting", "Thoxa", "interference"]);
 		} else {
 			if ((gflags[0x0267] == true) && (!gflags[0x0274])) {
 				say("\"Hast thou returned with the scroll?\"");
@@ -56290,7 +56290,7 @@ void Func04CF object#(0x4CF) () {
 						var0007 = UI_remove_party_items(0x0001, 0x02C3, 0x0050, 0x0000, 0x0000);
 						gflags[0x0274] = true;
 						say("\"I have it now.\"");
-						UI_add_answer("the secret");
+						add("the secret");
 					} else {
 						say("\"Thou dost not have the serpent scroll!\"");
 					}
@@ -56304,9 +56304,9 @@ void Func04CF object#(0x4CF) () {
 				    ". I shall aid thee as I can.\"");
 			}
 			if (gflags[0x0274] == true) {
-				UI_add_answer("the secret");
+				add("the secret");
 			}
-			UI_add_answer(["prophecies", "Thoxa"]);
+			add(["prophecies", "Thoxa"]);
 		}
 		var000B = Func08B6();
 		var000B = [0xFE9C, var000B];
@@ -56315,31 +56315,31 @@ void Func04CF object#(0x4CF) () {
 		}
 		UI_clear_item_flag(0xFE9C, 0x0010);
 		if (gflags[0x0274] && (!gflags[0x0220])) {
-			UI_add_answer("the secret");
+			add("the secret");
 		}
 		if (gflags[0x0262]) {
-			UI_add_answer("Gwenno");
+			add("Gwenno");
 		}
 		if (gflags[0x026F]) {
-			UI_add_answer("leave Monk Isle");
+			add("leave Monk Isle");
 		} else {
-			UI_add_answer(["bye"]);
+			add(["bye"]);
 		}
 		if (Func08FC()) {
 			say("\"Oh! One of thy friends hath met an untimely end. This should not be...\"");
 			say("\"If thou art ready to see thy friend again, ask and I will return them to thee.\"");
-			UI_add_answer("resurrection");
+			add("resurrection");
 		}
 		if (gflags[0x02DD] && (!gflags[0x0267])) {
-			UI_add_answer("Bane of Chaos");
+			add("Bane of Chaos");
 		}
 		if (!gflags[0x02FB]) {
 			say("\"Lest I forget... We have recently made a discovery which I believe shall aid thee, my ",
 			    var0002,
 			    ".\"");
-			UI_add_answer("discovery");
+			add("discovery");
 		} else {
-			UI_add_answer("Amulet of Balance");
+			add("Amulet of Balance");
 		}
 		converse (0) {
 			case "discovery" (remove):
@@ -56384,19 +56384,19 @@ void Func04CF object#(0x4CF) () {
 			case "previous meeting" (remove):
 				say("\"When I came to try to dissuade Thoxa from aiding thee directly it was not an attack against thee.\"");
 				say("\"The prophecies state that those seeking to be thy friends shall bring about the downfall of thy quest. That is not why we have dedicated our lives.\"");
-				UI_add_answer(["dissuade", "prophecies", "dedicated"]);
+				add(["dissuade", "prophecies", "dedicated"]);
 				fallthrough;
 
 			case "dissuade" (remove):
 				say("\"I sought to win her away from her foolishness by rational argument. Regrettably, it became a test of magics.\"");
 				say("\"As thou canst see, Thoxa and I are both skilled enough that we both yet live.\"");
-				UI_add_answer(["magics", "skilled"]);
+				add(["magics", "skilled"]);
 				fallthrough;
 
 			case "magics" (remove):
 				say("\"Unlike the unenlightened Mages of Moonshade, our powers come not from moldering reagents.\"");
 				say("\"The power of a Xenkan monk comes from a connection to the limitless Void that surrounds the universe.\"");
-				UI_add_answer(["Mages", "Void"]);
+				add(["Mages", "Void"]);
 				fallthrough;
 
 			case "Mages" (remove):
@@ -56412,7 +56412,7 @@ void Func04CF object#(0x4CF) () {
 			case "skilled" (remove):
 				say("\"Unlike the silent novices that thou dost see among us, Thoxa and I have both forged gateways into the power of the Void.\"");
 				say("\"By tapping into this stream, any confirmed Xenkan monk can surmount his or her own death. But there are still some things that remain beyond any one monk's power and require the concerted effort of us all.\"");
-				UI_add_answer("some things");
+				add("some things");
 				fallthrough;
 
 			case "some things" (remove):
@@ -56423,7 +56423,7 @@ void Func04CF object#(0x4CF) () {
 			case "prophecies" (remove):
 				say("\"Xenka was given visions of the ending of our world.\"");
 				say("\"However, she was barely literate, and needed others to act as scribes for her convoluted visions.\"");
-				UI_add_answer(["ending of the world", "Xenka"]);
+				add(["ending of the world", "Xenka"]);
 				fallthrough;
 
 			case "ending of the world" (remove):
@@ -56431,7 +56431,7 @@ void Func04CF object#(0x4CF) () {
 				var0022 = Func0992(0x0001, "@Grim tidings, indeed.@", 0x0000, false);
 				UI_set_conversation_slot(0x0000);
 				say("\"Even now the storms flay the land. Soon the earthquakes will unleash the fire that will engulf the world.\"");
-				UI_add_answer(["storms", "earthquakes"]);
+				add(["storms", "earthquakes"]);
 				fallthrough;
 
 			case "storms" (remove):
@@ -56453,7 +56453,7 @@ void Func04CF object#(0x4CF) () {
 			case "Xenka" (remove):
 				say("\"Xenka was a cross farm-wife who saw her visions as a means to have others do her work for her.\"");
 				say("\"Yet despite her human failings, her visions are true... Thou art here, even if she is not.\"");
-				UI_add_answer("she is not");
+				add("she is not");
 				fallthrough;
 
 			case "she is not" (remove):
@@ -56465,7 +56465,7 @@ void Func04CF object#(0x4CF) () {
 			case "dedicated" (remove):
 				say("\"Those that live within this abbey believe that Xenka's prophecies hold the key to diverting the fiery end that awaits the world.\"");
 				say("\"Our numbers have decreased with time, for even Xenkan monks die from age. And few of the youths are willing to serve such a nihilistic prophecy.\"");
-				UI_add_answer("the key");
+				add("the key");
 				fallthrough;
 
 			case "the key" (remove):
@@ -56476,32 +56476,32 @@ void Func04CF object#(0x4CF) () {
 			case "Thoxa" (remove):
 				say("\"Thoxa is a very bright young woman, who would like to feel that she hath single-handedly saved the world.\"");
 				say("\"It doth go against the grain of her youth to sit and wait for each event to come to pass. What is worse though, is that she hath pulled Miggim into her rashness as well.\"");
-				UI_add_answer("Miggim");
+				add("Miggim");
 				fallthrough;
 
 			case "Miggim" (remove):
 				say("\"Miggim is by nature a quiet young man, not given to impetuousness. He is ideally suited to be our librarian.\"");
 				say("\"His greatest desire is to be helpful, as well as ordered. In fact, it was he who divined the passage that foretold of thy coming.\"");
-				UI_add_answer("librarian");
+				add("librarian");
 				fallthrough;
 
 			case "librarian" (remove):
 				say("\"He hath taken the chaos of our library and turned it into a vastly more organized area.\"");
 				say("\"In fact, I believe that we have the most concise collection of Ophidian books and scrolls that still exists.\"");
 				say("\"Of course, it helps that we have the Lens of Translating.\"");
-				UI_add_answer(["Ophidian", "Lens"]);
+				add(["Ophidian", "Lens"]);
 				fallthrough;
 
 			case "Ophidian" (remove):
 				say("\"The Ophidians are commonly referred to as the Serpent people because of the embossed serpents found within the ruins of their cities.\"");
 				say("\"They had a fully-developed civilization here long before our forefathers fled from the invader British. I believe that they destroyed themselves in a bloody civil war.\"");
-				UI_add_answer(["invader British", "civil war"]);
+				add(["invader British", "civil war"]);
 				fallthrough;
 
 			case "invader British" (remove):
 				say("\"Our records are incomplete concerning the time of the resettlement. For that, thou shouldst see Fedabiblio in Moonshade.\"");
 				say("\"Thou shouldst bear in mind that their accounts are likely to be highly biased in their own favor.\"");
-				UI_add_answer("Fedabiblio");
+				add("Fedabiblio");
 				fallthrough;
 
 			case "Fedabiblio" (remove):
@@ -56517,7 +56517,7 @@ void Func04CF object#(0x4CF) () {
 				say("\"It was determined by all monks that the time for the Hero from Another World was at hand.\"");
 				say("\"It was also decided that we would take no direct action to influence the Hero in any way...\"");
 				say("\"Thoxa overstepped her bounds by giving thee the Hourglass of Fate.\"");
-				UI_add_answer(["Hero", "Hourglass"]);
+				add(["Hero", "Hourglass"]);
 				fallthrough;
 
 			case "Hero" (remove):
@@ -56571,7 +56571,7 @@ void Func04CF object#(0x4CF) () {
 				say("\"It all becomes clear!\"");
 				say("\"The Ophidians based all their beliefs on six virtues. And the consequences of an imbalance of these virtues are very dire...\"");
 				say("\"In fact, it sounds as if they could destroy the world!\"");
-				UI_add_answer(["six virtues", "consequences"]);
+				add(["six virtues", "consequences"]);
 				fallthrough;
 
 			case "six virtues" (remove):
@@ -56591,7 +56591,7 @@ void Func04CF object#(0x4CF) () {
 				say("\"Eventually the world will destroy itself... Much like what is happening now.\"");
 				say("\"Within a person, like thy friend Gwenno, the lack of Discipline would produce Wantonness... Much like the behavior she is exhibiting now.\"");
 				say("\"There does seem to be a cure, however.\"");
-				UI_add_answer("cure");
+				add("cure");
 				fallthrough;
 
 			case "cure" (remove):
@@ -56688,31 +56688,31 @@ void Func04D1 object#(0x4D1) () {
 			say("\"My name is Miggim. I am the librarian on Monk Isle.\"");
 			say("\"I have been awaiting thine arrival...\"");
 			UI_set_item_flag(0xFF2F, 0x001C);
-			UI_add_answer(["librarian", "Monk Isle", "arrival"]);
+			add(["librarian", "Monk Isle", "arrival"]);
 		} else {
 			if (var0005 == false) {
 				say("\"So, thou art the one whose arrival we have been awaiting.\"");
 				say("\"I am Miggim, the librarian here on Monk Isle.\"");
 				UI_set_item_flag(0xFF2F, 0x001C);
-				UI_add_answer(["arrival", "librarian", "Monk Isle"]);
+				add(["arrival", "librarian", "Monk Isle"]);
 			} else {
 				say("\"Welcome to Monk Isle, ",
 				    var0004,
 				    ". Feel free to visit me in the library whilst thou art here.\"");
-				UI_add_answer("library");
+				add("library");
 			}
 		}
 		if ((!gflags[0x0038]) && (gflags[0x002D] && (!gflags[0x00A5]))) {
 			say("\"I have this strange foreboding...\"");
-			UI_add_answer("foreboding");
+			add("foreboding");
 		}
 		if (Func08FC()) {
 			say("\"Oh! One of thy friends hath met an untimely end. This should not be...\"");
 			say("\"If thou art ready to see thy friend again, thou hast merely to ask and I will return them to thee.\"");
-			UI_add_answer("resurrection");
+			add("resurrection");
 		}
-		UI_add_answer("Amulet of Balance");
-		UI_add_answer(["aid", "bye"]);
+		add("Amulet of Balance");
+		add(["aid", "bye"]);
 		converse (0) {
 			case "Amulet of Balance" (remove):
 				say("\"It was quite a find, ",
@@ -56756,7 +56756,7 @@ void Func04D1 object#(0x4D1) () {
 			case "librarian" (remove):
 				say("\"'Tis my duty to transcribe and care for the prophecies of Xenka.\"");
 				say("\"It was I that found the passages that told of thy coming.\"");
-				UI_add_answer(["Xenka", "passage"]);
+				add(["Xenka", "passage"]);
 				fallthrough;
 
 			case "Xenka" (remove):
@@ -56765,12 +56765,12 @@ void Func04D1 object#(0x4D1) () {
 				    ".\"");
 				say("\"She foretold the storms that brought thee to our land, and saw the end of the world.\"");
 				say("\"Those who believed in her visions banded together to study her words so that we might help avert the fate she foresaw.\"");
-				UI_add_answer(["end of the world"]);
+				add(["end of the world"]);
 				fallthrough;
 
 			case "end of the world" (remove):
 				say("\"Within Xenka's holy writings is the passage -- 'When at last the great scales unhinge, the overburdened world shall be torn asunder by the opposing forces.'\"");
-				UI_add_answer(["great scales", "opposing forces"]);
+				add(["great scales", "opposing forces"]);
 				fallthrough;
 
 			case "great scales" (remove):
@@ -56786,7 +56786,7 @@ void Func04D1 object#(0x4D1) () {
 			case "passage" (remove):
 				say("\"Alas, Xenka's writings follow no order and are convoluted and vague.\"");
 				say("\"We have spent the years since her disappearance trying to decide if some passage hath already happened or if one event will follow another.\"");
-				UI_add_answer(["disappearance", "event"]);
+				add(["disappearance", "event"]);
 				fallthrough;
 
 			case "disappearance" (remove):
@@ -56815,7 +56815,7 @@ void Func04D1 object#(0x4D1) () {
 				if (var0002 == 0x0009) {
 					say("\"'Tis also written that treachery will stalk thy steps at the beginning of thy quest. That is why I am here...\"");
 					say("\"Not all of Xenka's followers believe that we should take direct action in aiding thee. However, Thoxa and I disagree.\"");
-					UI_add_answer("action");
+					add("action");
 				}
 				fallthrough;
 
@@ -56825,7 +56825,7 @@ void Func04D1 object#(0x4D1) () {
 				    var0004,
 				    ". I arrived here only a few days ago and have remained in the barn for much of the time. I thought it wise to attract as little notice as possible.\"");
 				say("\"But, now that thou art here, feel assured that I will remain vigilant against anything that would deter thee from thy destiny.\"");
-				UI_add_answer("destiny");
+				add("destiny");
 				fallthrough;
 
 			case "destiny" (remove):
@@ -56835,13 +56835,13 @@ void Func04D1 object#(0x4D1) () {
 			case "library" (remove):
 				say("\"We have quite a collection of diverse books and scrolls -- all meant to help us aid thee on thy quest.\"");
 				say("\"Feel free to look at anything in the library, even if I am attending to my chores.\"");
-				UI_add_answer(["diverse books and scrolls", "chores"]);
+				add(["diverse books and scrolls", "chores"]);
 				fallthrough;
 
 			case "diverse books and scrolls" (remove):
 				say("\"Poetry, astronomical observations, tide charts, and maps... Everything that might provide some insight into the meaning of the prophecies.\"");
 				if (gflags[0x0269] && (!gflags[0x0220])) {
-					UI_add_answer("maps");
+					add("maps");
 				}
 				fallthrough;
 
@@ -56856,7 +56856,7 @@ void Func04D1 object#(0x4D1) () {
 					say("\"It is written in the Ophidian runes, of course. But thou canst use the Lens of Translating to aid thee in reading it.\"");
 					say("\"Go thou and find it. I am certain that it will help thee.\"");
 				}
-				UI_add_answer("Lens of Translating");
+				add("Lens of Translating");
 				fallthrough;
 
 			case "Lens of Translating" (remove):
@@ -56867,7 +56867,7 @@ void Func04D1 object#(0x4D1) () {
 				say("\"We are a self-sufficient community, ",
 				    var0004,
 				    ". We share the work in growing all that we need to eat. So I am as often in the field as I am in the library.\"");
-				UI_add_answer("growing");
+				add("growing");
 				fallthrough;
 
 			case "growing" (remove):
@@ -56998,7 +56998,7 @@ void Func04D3 object#(0x4D3) () {
 		say("\"We meet again. Thy destiny draws near quickly... How may I be of service to thee?\"");
 		if (Func08FC()) {
 			say("\"Oh! One of thy friends hath met an untimely end. This should not be... [\"If thou art ready to see thy friend again, merely ask and I will return them to thee.\"");
-			UI_add_answer("resurrection");
+			add("resurrection");
 		} else {
 			if ((var0002 == 0x0002) && (!var0006)) {
 				say("\"Welcome to Monk Isle, my ",
@@ -57006,7 +57006,7 @@ void Func04D3 object#(0x4D3) () {
 				    ".\"");
 				say("\"Thou mayest tarry with us for as long as thou dost wish, but remember... The Sands of Time wait for no one, not even thee.\"");
 				say("\"Whilst thou art here, thou wilt learn that the life of a monk is governed by the bells. Not all of our membership may speak to thee, the novices are bound by a vow of silence to help them better contemplate the mysteries.\"");
-				UI_add_answer(["Sands of Time", "bells", "mysteries"]);
+				add(["Sands of Time", "bells", "mysteries"]);
 			}
 		}
 		if (gflags[0x0279] && (!gflags[0x022B])) {
@@ -57021,7 +57021,7 @@ void Func04D3 object#(0x4D3) () {
 				say("\"He remains a prisoner out of time, imprisoned within the Shrine that is his home.\"");
 			}
 		}
-		UI_add_answer("bye");
+		add("bye");
 		converse (0) {
 			case "return" (remove):
 				say("\"Xenka disappeared several centuries ago. No one knows where she went.\"");
@@ -57034,7 +57034,7 @@ void Func04D3 object#(0x4D3) () {
 
 			case "Sands of Time" (remove):
 				say("\"Within the Hourglass of Fate lie the Sands of Time. As each grain doth fall, so doth another moment hasten us to our doom.\"");
-				UI_add_answer("doom");
+				add("doom");
 				fallthrough;
 
 			case "doom" (remove):
@@ -57047,7 +57047,7 @@ void Func04D3 object#(0x4D3) () {
 
 			case "bells" (remove):
 				say("\"They toll, though no one rings them. And it is said that when all the bells toll it will signal Xenka's return. Until then, they signal the order of our daily life. From Chapel to field, from field to the library, and so on.\"");
-				UI_add_answer(["return", "Chapel", "field", "library"]);
+				add(["return", "Chapel", "field", "library"]);
 
 			case "Chapel" (remove):
 				say("\"The Chapel is where we go to meditate. It is also where all the monks gather to perform resurrections. The book of Xenka's prophecies rests on the altar for all to see.\"");
@@ -57055,7 +57055,7 @@ void Func04D3 object#(0x4D3) () {
 
 			case "field" (remove):
 				say("\"Since we are so secluded from the rest of the land, we grow our own food. And as food concerns us all, we all share the tasks of tending to the garden and orchard.\"");
-				UI_add_answer("garden and orchard");
+				add("garden and orchard");
 				fallthrough;
 
 			case "garden and orchard" (remove):
@@ -57064,7 +57064,7 @@ void Func04D3 object#(0x4D3) () {
 
 			case "library" (remove):
 				say("\"Over the years we have gathered many books and scrolls that we thought would help us give light to the meaning within Xenka's prophecies. Only recently hath Miggim undertaken the task of trying to set the library to rights. It is he that helps any visitors that come to us seeking information.\"");
-				UI_add_answer(["books and scrolls", "visitors", "information"]);
+				add(["books and scrolls", "visitors", "information"]);
 				fallthrough;
 
 			case "books and scrolls" (remove):
@@ -57081,7 +57081,7 @@ void Func04D3 object#(0x4D3) () {
 				} else {
 					say("\"Such visitors are rare, for the journey here is not an easy one. As I remember it, our last visitor was that woman, Gwenno.\"");
 				}
-				UI_add_answer("Gwenno");
+				add("Gwenno");
 				fallthrough;
 
 			case "Gwenno" (remove):
@@ -57098,7 +57098,7 @@ void Func04D3 object#(0x4D3) () {
 				} else {
 					say("\"She stayed with us for a short period of time. I think that she was seeking information concerning the Ice People of the north. But thou shouldst speak with Miggim... Gwenno spent most of her time within the library.\"");
 				}
-				UI_add_answer("Ice People");
+				add("Ice People");
 				fallthrough;
 
 			case "Ice People" (remove):
@@ -57246,20 +57246,20 @@ void Func04D4 object#(0x4D4) () {
 		var000C = false;
 		var000D = false;
 		if (gflags[0x00DE] && (!gflags[0x00DB])) {
-			UI_add_answer("Mandrake Root");
+			add("Mandrake Root");
 		}
 		if (gflags[0x026B]) {
-			UI_add_answer("Xenka");
+			add("Xenka");
 		}
 		if (gflags[0x026E]) {
-			UI_add_answer("salt tides");
+			add("salt tides");
 		}
 		if (Func08FC()) {
 			say("\"Oh! One of thy friends hath met an untimely end. This should not be...\"");
 			say("\"If thou art ready to see thy friend again, thou dost have but to ask and I will return them to thee.\"");
-			UI_add_answer("resurrection");
+			add("resurrection");
 		}
-		UI_add_answer(["name", "duties", "bye"]);
+		add(["name", "duties", "bye"]);
 		converse (0) {
 			case "resurrection" (remove):
 				Func08FE();
@@ -57269,7 +57269,7 @@ void Func04D4 object#(0x4D4) () {
 				say("\"I no longer believe in names. Doth the corn in the field have a name? Canst thou hear the cry of the corn?\"");
 				var000E = Func0992(0xFFFD, (("@" + var0000) + ", this monk is a mystical man indeed...@"), 0x0000, false);
 				UI_set_conversation_slot(0x0000);
-				UI_add_answer(["beliefs", "corn"]);
+				add(["beliefs", "corn"]);
 				fallthrough;
 
 			case "beliefs" (remove):
@@ -57282,7 +57282,7 @@ void Func04D4 object#(0x4D4) () {
 				}
 				gflags[0x026B] = true;
 				if (!var000C) {
-					UI_add_answer("Xenka");
+					add("Xenka");
 				}
 				fallthrough;
 
@@ -57308,7 +57308,7 @@ void Func04D4 object#(0x4D4) () {
 
 			case "duties" (remove):
 				say("\"In order to become one with the soil, I have been granted the task of nurturing the crops.\"");
-				UI_add_answer("crops");
+				add("crops");
 				fallthrough;
 
 			case "crops" (remove):
@@ -57326,7 +57326,7 @@ void Func04D4 object#(0x4D4) () {
 				say("\"Thou art not the first to come to this isle in search of the Mandrakes, for the plant is the source of powerful magic.\"");
 				say("\"There is a supply of roots in mine hut, if thou needest any.\"");
 				say("\"Please take all that thou needest, for Mandrakes grow only in the swamps, and are exceedingly rare elsewhere.\"");
-				UI_add_answer(["swamps", "rare"]);
+				add(["swamps", "rare"]);
 				fallthrough;
 
 			case "swamps" (remove):
@@ -57336,7 +57336,7 @@ void Func04D4 object#(0x4D4) () {
 					UI_set_timer(0x0001);
 				}
 				gflags[0x026E] = true;
-				UI_add_answer("salt tides");
+				add("salt tides");
 				fallthrough;
 
 			case "salt tides" (remove):
@@ -57473,22 +57473,22 @@ void Func04D5 object#(0x4D5) () {
 		if (var000C == false) {
 			UI_set_item_flag(0xFF2B, 0x001C);
 			say("\"I tremble before the Hero from Another World! Thou art even as Xenka said!\"");
-			UI_add_answer(["name", "Hero From Another World", "Xenka"]);
+			add(["name", "Hero From Another World", "Xenka"]);
 		} else {
 			say("\"Welcome again, Hero from Another World! Thy destiny hath again brought thee to the place of Xenka's wisdom!\"");
-			UI_add_answer(["Hero From Another World", "Xenka", "destiny"]);
+			add(["Hero From Another World", "Xenka", "destiny"]);
 		}
 		if (gflags[0x02DD] && UI_get_item_flag(0xFF6B, 0x001E)) {
-			UI_add_answer("Gwenno");
+			add("Gwenno");
 		}
 		if (Func08FC()) {
 			say("\"Oh! One of thy friends hath met an untimely end. This should not be... If thou art ready to see thy friend again, simply ask and I will return them to thee.\"");
-			UI_add_answer("resurrection");
+			add("resurrection");
 		}
 		if (Func0825()) {
-			UI_add_answer("vision");
+			add("vision");
 		}
-		UI_add_answer(["bye"]);
+		add(["bye"]);
 		converse (0) {
 			case "resurrection" (remove):
 				Func08FE();
@@ -57499,12 +57499,12 @@ void Func04D5 object#(0x4D5) () {
 				var000A = Func0992(0x0001, "@Another mystic...@", 0x0000, false);
 				UI_set_conversation_slot(0x0000);
 				say("\"But, if thou wilt suffer to call me by name, I am Draxta.\"");
-				UI_add_answer("destiny");
+				add("destiny");
 				fallthrough;
 
 			case "destiny" (remove):
 				say("\"Xenka saw the destinies of every man, woman and child! They are written in her blessed book. I cannot tell thee thy destiny, for I am sworn not to interfere, but thou mayest look within Xenka's wisdom of thine own accord, as any may.\"");
-				UI_add_answer(["blessed book", "not interfere"]);
+				add(["blessed book", "not interfere"]);
 				fallthrough;
 
 			case "blessed book" (remove):
@@ -57515,7 +57515,7 @@ void Func04D5 object#(0x4D5) () {
 					say("\"Thou mayest find the book here in the Chapel, upon the altar.\"");
 				} else {
 					say("\"Thou mayest find the book upon the altar within the Chapel.\"");
-					UI_add_answer(["altar", "Chapel"]);
+					add(["altar", "Chapel"]);
 				}
 				fallthrough;
 
@@ -57532,7 +57532,7 @@ void Func04D5 object#(0x4D5) () {
 				    var0004,
 				    " enemies.'\"");
 				say("\"I shall not seek to befriend thee, as I have no wish to bring about the end of the world!\"");
-				UI_add_answer("end of the world");
+				add("end of the world");
 				fallthrough;
 
 			case "end of the world" (remove):
@@ -57543,12 +57543,12 @@ void Func04D5 object#(0x4D5) () {
 			case "Hero From Another World" (remove):
 				say("\"Xenka saw that the one hope for our world was that A Hero from Another World would sail a ship upon dry land.\"");
 				say("\"Thoxa hath told us that thy ship was found beyond the shore. And thou wert accompanied by three fine companions, as foretold.\"");
-				UI_add_answer(["Thoxa", "three fine companions"]);
+				add(["Thoxa", "three fine companions"]);
 				fallthrough;
 
 			case "Thoxa" (remove):
 				say("\"Thoxa is another follower of the wondrous Xenka, although she would not be content to sit and wait for thine arrival. She would seek to be thy friend and take thee the Hourglass of Fate. I hope that it is not she that turns against thee.\"");
-				UI_add_answer("Hourglass of Fate");
+				add("Hourglass of Fate");
 				fallthrough;
 
 			case "Hourglass of Fate" (remove):
@@ -57564,7 +57564,7 @@ void Func04D5 object#(0x4D5) () {
 			case "Xenka" (remove):
 				say("\"Xenka was a very wise woman, oh great one. Divine visions came to her to warn us of the end of our world.\"");
 				say("\"It was she who foresaw thy coming in the Place of Visions. Though she never told us that she foresaw leaving us...\"");
-				UI_add_answer(["Place of Visions", "leaving"]);
+				add(["Place of Visions", "leaving"]);
 				fallthrough;
 
 			case "Place of Visions" (remove):
@@ -57579,7 +57579,7 @@ void Func04D5 object#(0x4D5) () {
 					} else {
 						say("\"As thou wishest. But bear in mind that the visions may be of aid to thee.\"");
 					}
-					UI_add_answer("visions");
+					add("visions");
 				}
 				fallthrough;
 
@@ -57599,7 +57599,7 @@ void Func04D5 object#(0x4D5) () {
 				say("\"It was a dreadful blow, oh great one, when we could not find her in any place we searched.\"");
 				say("\"But I believe that some great event, some great crisis will bring forth the prophetess and her psychic wisdom to save this floundering world.\"");
 				gflags[0x026B] = true;
-				UI_add_answer("floundering");
+				add("floundering");
 				fallthrough;
 
 			case "floundering" (remove):
@@ -57611,12 +57611,12 @@ void Func04D5 object#(0x4D5) () {
 				var000A = Func0992(0x0001, "@She is a fine one to talk...@", 0x0000, false);
 				UI_set_conversation_slot(0x0000);
 				say("\"Karnax could divine what ails her, to be certain.\"");
-				UI_add_answer("Karnax");
+				add("Karnax");
 				fallthrough;
 
 			case "Karnax" (remove):
 				say("\"Karnax is a proud fellow, oh great one. But not so proud that he would interfere with thy quest. He knows much of the history of the land. He will be a great help to thee, if thou dost ask. But only if thou dost ask.\"");
-				UI_add_answer(["proud", "history"]);
+				add(["proud", "history"]);
 				fallthrough;
 
 			case "proud" (remove):
@@ -57625,7 +57625,7 @@ void Func04D5 object#(0x4D5) () {
 
 			case "history" (remove):
 				say("\"Karnax hath made an exhaustive study of the history of the Serpent people. He can tell thee most anything about them.\"");
-				UI_add_answer("Serpent people");
+				add("Serpent people");
 				fallthrough;
 
 			case "Serpent people" (remove):
@@ -57728,18 +57728,18 @@ void Func04D7 object#(0x4D7) () {
 			say("\"And you, my rock-brained monks! Is this how you serve my visions?! You cannot even take the words down properly!\"");
 			say("\"I knew that thou wouldst need me to unravel the mess that these monks have made of my prophecies.\"");
 		}
-		UI_add_answer(["returned", "grief", "unravel the mess"]);
+		add(["returned", "grief", "unravel the mess"]);
 		if (!gflags[0x0279]) {
-			UI_add_answer("instructions");
+			add("instructions");
 		}
 		if (gflags[0x022B] && (!gflags[0x025E])) {
-			UI_add_answer("journey");
+			add("journey");
 		}
 		if (gflags[0x0278] && (!gflags[0x01F9])) {
-			UI_add_answer("Staff of the Serpent");
+			add("Staff of the Serpent");
 		}
 		if (gflags[0x01F9] && (gflags[0x025E] && (gflags[0x022B] && (!gflags[0x0242])))) {
-			UI_add_answer("sacrifice");
+			add("sacrifice");
 		}
 		if (gflags[0x0276]) {
 			say("\"There is no time left! Go to Sunrise Isle!\"");
@@ -57748,14 +57748,14 @@ void Func04D7 object#(0x4D7) () {
 			abort;
 		}
 		if (gflags[0x0061]) {
-			UI_add_answer("final task");
+			add("final task");
 		}
 		if (Func08FC()) {
 			say("\"Oh! One of thy friends hath met an untimely end. This should not be...\"");
 			say("\"If thou art ready to see thy friend again, simply ask and I will return them to thee.\"");
-			UI_add_answer("resurrection");
+			add("resurrection");
 		}
-		UI_add_answer(["bye"]);
+		add(["bye"]);
 		converse (0) {
 			case "resurrection" (remove):
 				Func08FE();
@@ -57764,12 +57764,12 @@ void Func04D7 object#(0x4D7) () {
 			case "returned" (remove):
 				say("\"I knew that if I did not promise to return that these laggard monks would drift away from the task I set them.\"");
 				say("\"As it is, they have nearly brought disaster upon us all... including thee, Hero from Another World.\"");
-				UI_remove_answer(["task", "disaster", "Hero"]);
+				remove(["task", "disaster", "Hero"]);
 				fallthrough;
 
 			case "task" (remove):
 				say("\"They were to watch for thine arrival, oh mighty Hero, and prepare the people for the approaching danger.\"");
-				UI_add_answer("danger");
+				add("danger");
 				fallthrough;
 
 			case "danger" (remove):
@@ -57778,7 +57778,7 @@ void Func04D7 object#(0x4D7) () {
 
 			case "disaster" (remove):
 				say("\"By hopelessly miring my visions in the bog of high and mighty language, they have delayed thee until it is nearly too late.\"");
-				UI_add_answer(["miring my visions", "too late"]);
+				add(["miring my visions", "too late"]);
 				fallthrough;
 
 			case "miring my visions" (remove):
@@ -57795,13 +57795,13 @@ void Func04D7 object#(0x4D7) () {
 				say("\"Do not thy companions dear to thine heart call thee Avatar?\"");
 				say("\"Art thou not from a strange land that thou dost call Earth?\"");
 				say("\"I think then that thou dost indeed fit the title of Hero from Another World.\"");
-				UI_add_answer("Earth");
+				add("Earth");
 				fallthrough;
 
 			case "Earth" (remove):
 				say("\"I have never seen this wondrous land. I have only felt its presence upon the edge of the Void.\"");
 				say("\"But I have felt great tides of power being directed toward it.\"");
-				UI_add_answer(["Void", "power"]);
+				add(["Void", "power"]);
 				fallthrough;
 
 			case "Void" (remove):
@@ -57818,14 +57818,14 @@ void Func04D7 object#(0x4D7) () {
 				say("\"I was a wife, and a mother, Hero. I did not ask to become a prophetess.\"");
 				say("\"My poor husband took me before the great Mages of Moonshade when these visions came upon me. And those wise men dismissed me saying, 'She is crazy.'\"");
 				say("\"Mine husband, my children... even my children's children are long gone to dust. While I remain alive, enslaved to visions I never asked for!\"");
-				UI_add_answer(["Mages of Moonshade", "visions"]);
+				add(["Mages of Moonshade", "visions"]);
 				fallthrough;
 
 			case "Mages of Moonshade" (remove):
 				say("\"Arrogant manipulators! Never once did they attempt to divine if my visions were true!\"");
 				say("\"Never once did they offer to try and cure my supposed madness, for we were too poor to pay their fees.\"");
 				say("\"Is it any wonder that they could not stand to live within the rule of an honest man?!\"");
-				UI_add_answer("honest man");
+				add("honest man");
 				fallthrough;
 
 			case "honest man" (remove):
@@ -57977,52 +57977,52 @@ void Func04DA object#(0x4DA) () {
 		} else {
 			say("\"Welcome, fellow dreamer!\" ~\"I am Byrin, a gleeman by trade.\" *\"Thou dost look perplexed. I'll warrant that thou wouldst like some answers.\" ~\"Or perhaps I could sing thee a song to ease thy way.\"");
 		}
-		UI_add_answer(["answers", "song", "bye"]);
+		add(["answers", "song", "bye"]);
 		converse (0) {
 			case "answers":
 				say("\"Thou mayest find that the answers only give rise to more questions.\" ~\"But I shall do my best to help thee.\" *\"First thou shouldst know that thou dost walk in the land of dreamers.\" ~\"There are only two ways to enter or exit here.\"");
-				UI_remove_answer("answers");
-				UI_add_answer("two ways");
+				remove("answers");
+				add("two ways");
 				fallthrough;
 
 			case "two ways":
 				say("\"The first way to enter this realm is from the safety of thy bed...\" ~\"In thy nightly slumber.\" *\"The second way to enter here is far more perilous...\" ~\"By falling prey to the enchantments in Gorlab Swamp.\"");
-				UI_remove_answer("two ways");
-				UI_add_answer("Gorlab Swamp");
+				remove("two ways");
+				add("Gorlab Swamp");
 				fallthrough;
 
 			case "Gorlab Swamp":
 				say("\"Long ago -- even before the serpent people made this land their home -- a sorceror named Rabindrinath swore to destroy the peaceful town of Gorlab.\" ~\"But the town healer, Siranush, opposed him and the evil spell went awry.\" *\"The inhabitants of the town were not destroyed, but were instead trapped\twithin the realm of dreams...\" ~\"Along with the mad sorceror...\" ~\"And any who dare enter the environs of Gorlab.\"");
-				UI_remove_answer("Gorlab Swamp");
-				UI_add_answer(["Rabindrinath", "Siranush"]);
+				remove("Gorlab Swamp");
+				add(["Rabindrinath", "Siranush"]);
 				fallthrough;
 
 			case "Rabindrinath":
 				say("\"Rabindrinath hath struggled mightily against Siranush across the span of time.\" ~\"Each of his attacks have been repelled...\" ~\"Much to his displeasure.\"");
-				UI_remove_answer("Rabindrinath");
-				UI_add_answer("displeasure");
+				remove("Rabindrinath");
+				add("displeasure");
 				fallthrough;
 
 			case "displeasure":
 				say("\"Rabindrinath releases his anger by troubling the thoughts of those who venture here within their dreams.\"");
-				UI_remove_answer("displeasure");
+				remove("displeasure");
 				fallthrough;
 
 			case "Siranush":
 				say("\"Siranush is a strong-willed woman who hath repelled all of Rabindrinath's attacks on her people.\" ~\"She is no sorceror, and I fear that her strength will one day fail her.\" *\"Were Siranush to be vanquished, I am sure that Rabindrinath would turn his evil intent on the wandering dreamers.\" ~\"Without Siranush's guidance, those who enter here might never leave.\"");
-				UI_remove_answer("Siranush");
-				UI_add_answer("leave");
+				remove("Siranush");
+				add("leave");
 				fallthrough;
 
 			case "leave":
 				say("\"As I said before, there are two ways to enter the land of dreamers.\" ~\"If thou didst come here from the comfort of thy bed, thou canst simply awaken and thou wilt return to the land of waking men.\" *\"But, if thou didst come here through the enchantments in the Swamp, thou must die here to return to thy body.\"");
-				UI_remove_answer("leave");
-				UI_add_answer("die");
+				remove("leave");
+				add("die");
 				fallthrough;
 
 			case "die":
 				say("\"By die, I do not mean that thou must cease living.\" ~\"I mean that thy perceived life here must end...\" *\"Thy death here returns thee to thy body.\" ~\"So long as Siranush prevails and thy body lives, thou canst return to the world of waking men.\" *\"But if Siranush should fall, or thy body die...\" ~\"thou shalt remain trapped here for all time.\"");
-				UI_remove_answer("die");
+				remove("die");
 				fallthrough;
 
 			case "song":
@@ -58080,8 +58080,8 @@ void Func04DA object#(0x4DA) () {
 				say("\"For those with an adventurous spirit, I can tell thee of the northern savages.\"");
 				say("\"For those who wish to hear of a lost civilization, I can tell thee of the people who left the ruins on this continent.\"");
 				say("\"For those who would hear a tale of bitter bravery, I can tell thee of the lost king.\"");
-				UI_remove_answer("tales");
-				UI_add_answer(["northern savages", "lost culture", "lost king"]);
+				remove("tales");
+				add(["northern savages", "lost culture", "lost king"]);
 				fallthrough;
 
 			case "northern savages":
@@ -58097,14 +58097,14 @@ void Func04DA object#(0x4DA) () {
 						say("\"Perhaps some other time, then.\"");
 					}
 				}
-				UI_remove_answer("northern savages");
+				remove("northern savages");
 				fallthrough;
 
 			case "lost culture":
 				say("\"Long ago, before any of the cities thou knowest today were built, there was a race of Man who worshipped three great elemental serpents.\" ~\"Some followed one of fire. Others followed one of ice. And still others followed one of earth.\"");
 				say("\"As only the serpent of earth could withstand both the fire and the ice of the other serpents, it did possess the most power.\" ~\"The fire and ice serpents were violently opposed to each other, but were held in check by the serpent of earth.\"");
 				say("\"Then the serpent of earth lost power. The fire and ice serpents warred for supremacy.\" ~\"When the battle ended, it mattered not which serpent had won...\" ~\"for the land was destroyed and all the worshippers lay dead.\"");
-				UI_remove_answer("lost culture");
+				remove("lost culture");
 				fallthrough;
 
 			case "lost king":
@@ -58129,23 +58129,23 @@ void Func04DA object#(0x4DA) () {
 						say("\"Another time, then.\"");
 					}
 				}
-				UI_remove_answer("lost king");
+				remove("lost king");
 				fallthrough;
 
 			case "tunes":
 				if (gflags[0x003E] == true) {
 					if (var0001 == true) {
 						say("\"For thee, brave lady, I would sing of dreams, or perhaps of tragedy.\" ~\"Of course, although I sing to entertain others, I hope for some small token of appreciation...\" ~\"if possible. Singing is thirsty business.\"");
-						UI_add_answer(["dreams", "tragedy"]);
+						add(["dreams", "tragedy"]);
 					} else {
 						say("\"For thee, noble sir, I would sing a heart-rending ballad, or perhaps long-lost lore.\" ~\"Of course, although I sing to entertain others, I hope for some small token of appreciation...\" ~\"if possible. Singing is thirsty business.\"");
-						UI_add_answer(["ballad", "lore"]);
+						add(["ballad", "lore"]);
 					}
 				} else {
 					say("\"I sense that thou dost like adventure.\" ~\"For thee I would sing of strange beings and strange places.\" ~\"Of course, although I sing to entertain others, I hope for some small token of appreciation...\" ~\"if possible. Singing is thirsty business.\"");
-					UI_add_answer(["strange beings", "strange places"]);
+					add(["strange beings", "strange places"]);
 				}
-				UI_remove_answer("tunes");
+				remove("tunes");
 				fallthrough;
 
 			case "dreams":
@@ -58156,13 +58156,13 @@ void Func04DA object#(0x4DA) () {
 						Func09B0(0x0001);
 					} else {
 						say("\"Perhaps I could find another song for thee...\"");
-						UI_add_answer("song");
+						add("song");
 					}
 				} else {
 					say("\"I hope thou dost enjoy it...\"");
 					Func09B0(0x0001);
 				}
-				UI_remove_answer("dreams");
+				remove("dreams");
 				fallthrough;
 
 			case "tragedy":
@@ -58173,13 +58173,13 @@ void Func04DA object#(0x4DA) () {
 						Func09B0(0x0001);
 					} else {
 						say("\"Perhaps I could find another song for thee...\"");
-						UI_add_answer("song");
+						add("song");
 					}
 				} else {
 					say("\"Relax and be at ease...\"");
 					Func09B0(0x0001);
 				}
-				UI_remove_answer("tragedy");
+				remove("tragedy");
 				fallthrough;
 
 			case "ballad":
@@ -58190,13 +58190,13 @@ void Func04DA object#(0x4DA) () {
 						Func09B0(0x0001);
 					} else {
 						say("\"Perhaps I could find another song for thee...\"");
-						UI_add_answer("song");
+						add("song");
 					}
 				} else {
 					say("\"I do hope I remember it...\"");
 					Func09B0(0x0001);
 				}
-				UI_remove_answer("ballad");
+				remove("ballad");
 				fallthrough;
 
 			case "lore":
@@ -58207,13 +58207,13 @@ void Func04DA object#(0x4DA) () {
 						Func09B0(0x0001);
 					} else {
 						say("\"Perhaps I could find another song for thee...\"");
-						UI_add_answer("song");
+						add("song");
 					}
 				} else {
 					say("\"I think I am in the right key...\"");
 					Func09B0(0x0001);
 				}
-				UI_remove_answer("lore");
+				remove("lore");
 				fallthrough;
 
 			case "strange beings":
@@ -58224,13 +58224,13 @@ void Func04DA object#(0x4DA) () {
 						Func09B0(0x0001);
 					} else {
 						say("\"Perhaps I could find another song for thee...\"");
-						UI_add_answer("song");
+						add("song");
 					}
 				} else {
 					say("\"Thou wilt like the tempo on this one...\"");
 					Func09B0(0x0001);
 				}
-				UI_remove_answer("strange beings");
+				remove("strange beings");
 				fallthrough;
 
 			case "strange places":
@@ -58241,13 +58241,13 @@ void Func04DA object#(0x4DA) () {
 						Func09B0(0x0001);
 					} else {
 						say("\"Perhaps I could find another song for thee...\"");
-						UI_add_answer("song");
+						add("song");
 					}
 				} else {
 					say("\"Listen carefully...\"");
 					Func09B0(0x0001);
 				}
-				UI_remove_answer("strange places");
+				remove("strange places");
 				fallthrough;
 
 			case "bye":
@@ -58467,7 +58467,7 @@ void Func0526 object#(0x526) () {
 		UI_remove_npc_face1();
 		UI_set_conversation_slot(0x0000);
 		say("\"And thou art the cattle upon which I prey!\" *\"Who sent thee to destroy Vasculio? Was it those rotting worms of Moonshade?\" *\"I know it was! Soon I shall have my vengeance for what they have done to me!\" *\"Who sent thee? Filbercio?! Mortegro?! Gustacio?! Torrissio?!\"");
-		UI_add_answer(["Filbercio", "Mortegro", "Gustacio", "Torrissio", "vengeance"]);
+		add(["Filbercio", "Mortegro", "Gustacio", "Torrissio", "vengeance"]);
 		converse (0) {
 			case "bye":
 				UI_show_npc_face0(0xFEF8, 0x0000);
@@ -58479,37 +58479,37 @@ void Func0526 object#(0x526) () {
 				abort;
 
 			case "Filbercio":
-				UI_remove_answer("Mortegro");
-				UI_remove_answer("Gustacio");
-				UI_remove_answer("Torrissio");
-				UI_remove_answer("Filbercio");
+				remove("Mortegro");
+				remove("Gustacio");
+				remove("Torrissio");
+				remove("Filbercio");
 				say("\"Do not mention the wretched name of Filbercio in my presence! He is the one who sentenced me to die!\" *\"If that swine ever comes near me, I assure thee he will pay, and pay dearly.\"");
 				var0004 = true;
 				fallthrough;
 
 			case "Mortegro":
-				UI_remove_answer("Filbercio");
-				UI_remove_answer("Gustacio");
-				UI_remove_answer("Torrissio");
-				UI_remove_answer("Mortegro");
+				remove("Filbercio");
+				remove("Gustacio");
+				remove("Torrissio");
+				remove("Mortegro");
 				say("\"That despicable interloper Mortegro interfered with mine experiments, and betrayed me to the Council of Mages!\"");
 				var0005 = true;
 				fallthrough;
 
 			case "Gustacio":
-				UI_remove_answer("Filbercio");
-				UI_remove_answer("Torrissio");
-				UI_remove_answer("Gustacio");
-				UI_remove_answer("Mortegro");
+				remove("Filbercio");
+				remove("Torrissio");
+				remove("Gustacio");
+				remove("Mortegro");
 				say("\"I always hated that insufferable Gustacio! Always flaunting his influence, willing to betray any ideal to preserve his false sense of dignity!\"");
 				var0006 = true;
 				fallthrough;
 
 			case "Torrissio":
-				UI_remove_answer("Filbercio");
-				UI_remove_answer("Gustacio");
-				UI_remove_answer("Mortegro");
-				UI_remove_answer("Torrissio");
+				remove("Filbercio");
+				remove("Gustacio");
+				remove("Mortegro");
+				remove("Torrissio");
 				say("\"Ha! He is the most despised one of all! He broke our alliance and betrayed me to the Council of Mages!\"");
 				var0007 = true;
 
@@ -58522,7 +58522,7 @@ void Func0526 object#(0x526) () {
 			}
 				fallthrough;
 			case "vengeance" (remove):
-				UI_add_answer("bye");
+				add("bye");
 				if (var0003) {
 					UI_show_npc_face0(0xFEF8, 0x0000);
 					say("\"Ah! But thou dost have the Magebane! I will make thee a deal then, Avatar. In exchange for thy blue sword I shall teach thee my greatest spell, one that can dispatch any foe. Dost thou agree?\"");
@@ -59859,7 +59859,7 @@ void Func0619 object#(0x619) () {
 			} else {
 				say("\"Not that I want ye to think that I'm an ol' busybody, or anythin' like that... But I think ye might want ta go back an' search that there maze, deary.");
 				say("\"I think ye missed somethin' ye might find real helpful-like.\"");
-				UI_add_answer("something helpful");
+				add("something helpful");
 			}
 			if (Func097D(0xFE9B, 0x0001, 0x01C2, 0xFE99, 0x0009)) {
 				say("\"Looks like ye talked wit' that there kitty person, too. He didn't want ta talk wit' me, hmmph!");
@@ -59867,21 +59867,21 @@ void Func0619 object#(0x619) () {
 			} else {
 				say("\"Ah, deary, I hate ta sound like I'm meddlin'... But ye left somethin' real important back there in that there maze.");
 				say("\"I think ye might want ta talk wit' that there cat critter. He needs a friend, unless I miss my guess.\"");
-				UI_add_answer(["something important", "cat critter"]);
+				add(["something important", "cat critter"]);
 			}
 		}
-		UI_add_answer(["waiting", "pawn of prophecy", "bye"]);
+		add(["waiting", "pawn of prophecy", "bye"]);
 		converse (0) {
 			case "waiting" (remove):
 				say("\"Why else would I be a standin' here, deary? This isn't exactly the hotbed of excitement, iffin ye know what I mean.");
 				say("\"Ye might say that I'm a part o' yer prophecy... One o' yer guides like.\"");
-				UI_add_answer("guides");
+				add("guides");
 				fallthrough;
 
 			case "guides" (remove):
 				say("\"Well now, deary, ye seem ta need some help, iffin ye don't mind my sayin' so. Ye look a little lost, if ye ask me.");
 				say("\"So here I am! I kin give ye three hints ta help ye on yer way. So listen well.\"");
-				UI_add_answer("hints");
+				add("hints");
 				fallthrough;
 
 			case "hints" (remove):
@@ -59902,14 +59902,14 @@ void Func0619 object#(0x619) () {
 			case "pawn of prophecy" (remove):
 				say("\"Why look so surprised, sweet cakes? Ye can't tell me that this is the first time someone has told ye that ye are marked...");
 				say("\"Why even those benighted idiots, the Ophidians, knew ta expect ye. So it can't be such a shock ta ye.\"");
-				UI_add_answer("benighted idiots");
+				add("benighted idiots");
 				fallthrough;
 
 			case "benighted idiots" (remove):
 				say("\"Well now, perhaps I shouldn't have been so harsh, not in front of ye.");
 				say("\"Suffice it to say that not all people in this 'ere world are so addled as ta believe that wisdom is found in the hissing o' serpents... especially serpents no one kin see.");
 				say("\"I follow the Guide, meself, an' it's enough that I be 'ere ta meet ye ta tell ol' Drusilla whose pot is cracked an' whose isn't.\"");
-				UI_add_answer("Guide");
+				add("Guide");
 				fallthrough;
 
 			case "Guide" (remove):
@@ -59964,24 +59964,24 @@ void Func061A object#(0x61A) () {
 		} else {
 			say("\"Don't tell me that thou hast come back to Rieya looking for more aid! I've helped thee all I may, pawn of prophecy. Thou needs must look elsewhere...\"");
 		}
-		UI_add_answer(["Rieya", "pawn of prophecy", "aid", "bye"]);
+		add(["Rieya", "pawn of prophecy", "aid", "bye"]);
 		converse (0) {
 			case "Rieya" (remove):
 				say("\"Rieya is my name... And I'll thank thee not to smirk so! Thy name is just as strange to me, I assure thee!");
 				say("\"Thou shouldst mind thy manners, else -- Guide or no -- I'll not aid thee!\"");
-				UI_add_answer("Guide");
+				add("Guide");
 				fallthrough;
 
 			case "Guide" (remove):
 				say("\"I shouldn't wonder that thou hadst never heard of the Guide before. Thou art scarcely fit to be the pawn of prophecy. Why clutter up thy mind with other possibilities...");
 				say("Oh, never mind! Thou wouldst not understand!\"");
-				UI_add_answer(["scarcely fit", "other possibilities"]);
+				add(["scarcely fit", "other possibilities"]);
 				fallthrough;
 
 			case "scarcely fit" (remove):
 				say("\"Look at thee! Thou hast no idea what is going on! Thou art as willing to listen to me as to those fools in the keep!");
 				say("\"How canst thou be so trusting? How hast thou lived so long?\"");
-				UI_add_answer(["What is going on?", "fools in the keep"]);
+				add(["What is going on?", "fools in the keep"]);
 				fallthrough;
 
 			case "What is going on?" (remove):
@@ -60002,20 +60002,20 @@ void Func061A object#(0x61A) () {
 
 			case "pawn of prophecy" (remove):
 				say("\"The pawn of prophecy is thou, needle head! Thou dost wear the Amulet of Balance, which -- according to those fools in the keep -- makes thee the Champion of Balance.\"");
-				UI_add_answer(["Amulet of Balance", "Champion of Balance"]);
+				add(["Amulet of Balance", "Champion of Balance"]);
 				fallthrough;
 
 			case "Amulet of Balance" (remove):
 				say("\"Dost thou not know what that bauble is yet? Are all those Ophidians asleep?! How could they not have told thee?");
 				say("\"I'll tell thee, this is service above and beyond the call! Oh well, I shall have to do their job for them.");
 				say("\"The Amulet of Balance once belonged to the Great Hierophant who used it to enforce Balance upon the Ophidians. It is a magical pendant that none but the Champion of Balance may wear, or so it is said.\"");
-				UI_add_answer(["Ophidians", "Great Hierophant"]);
+				add(["Ophidians", "Great Hierophant"]);
 				fallthrough;
 
 			case "Ophidians" (remove):
 				say("\"Oooh, thine cup is a bit shy of full, isn't it?");
 				say("\"Ophidians are those who follow the Teachings of the Serpents.\"");
-				UI_add_answer("Teachings of the Serpents");
+				add("Teachings of the Serpents");
 				fallthrough;
 
 			case "Teachings of the Serpents" (remove):
@@ -60029,7 +60029,7 @@ void Func061A object#(0x61A) () {
 				say("\"Who would have thought a pawn of prophecy could be so stupid?!");
 				say("\"The Ophidians considered the Great Hierophant to be the Voice of the Great Earth Serpent. Whatever he was, he kept them from killilng each other...");
 				say("\"Until they murdered him that is. THEN they started killing each other. Have to do things right, I guess...\"");
-				UI_add_answer("murdered");
+				add("murdered");
 				fallthrough;
 
 			case "murdered" (remove):
@@ -60097,19 +60097,19 @@ void Func061B object#(0x61B) () {
 			    var0001,
 			    ".\"");
 		}
-		UI_add_answer(["Give up on me?", "wait", "bye"]);
+		add(["Give up on me?", "wait", "bye"]);
 		converse (0) {
 			case "Give up on me?" (remove):
 				say("\"Well, I would not have done that, really. After all, it's not often a girl gets the chance to play a part in prophecy.");
 				say("\"If I had given up, how would I have been able to help thee?\"");
-				UI_add_answer(["prophecy", "help"]);
+				add(["prophecy", "help"]);
 				fallthrough;
 
 			case "prophecy" (remove):
 				say("\"Thy coming was foretold long ago, ",
 				    var0001,
 				    "... though thou wert expected much earlier. I fear that the task before thee shall be much more difficult now.\"");
-				UI_add_answer(["foretold", "task"]);
+				add(["foretold", "task"]);
 				fallthrough;
 
 			case "foretold" (remove):
@@ -60117,7 +60117,7 @@ void Func061B object#(0x61B) () {
 				say("\"I was told to await thee here. And so I have waited... Thou hast been quite tardy, thou knowest, ",
 				    var0001,
 				    ".\"");
-				UI_add_answer(["Ophidians", "Hierophants", "Guide"]);
+				add(["Ophidians", "Hierophants", "Guide"]);
 				fallthrough;
 
 			case "Ophidians" (remove):
@@ -60135,7 +60135,7 @@ void Func061B object#(0x61B) () {
 				say("\"The Guide is who I follow, ",
 				    var0001,
 				    ". I would love to stand and tell thee all about it, but thou shouldst really be on thy way... Thou art quite late, thou knowest.\"");
-				UI_add_answer("late");
+				add("late");
 				fallthrough;
 
 			case "late" (remove):
@@ -60150,13 +60150,13 @@ void Func061B object#(0x61B) () {
 				say("\"I fear that the tide of battle may have turned so far that even thou canst not pull it back. If Order destroys Chaos, there will be nothing to bring Balance to, ",
 				    var0001,
 				    ".\"");
-				UI_add_answer("destroys Chaos");
+				add("destroys Chaos");
 				fallthrough;
 
 			case "destroys Chaos" (remove):
 				say("\"The Ophidians who follow Order believe that those who follow Chaos are responsible for the murder of one of their holy men. They have sworn to rid the world of Chaos...");
 				say("\"And now that they have created the automatons, they may succeed.\"");
-				UI_add_answer("automatons");
+				add("automatons");
 				fallthrough;
 
 			case "automatons" (remove):
@@ -60172,7 +60172,7 @@ void Func061B object#(0x61B) () {
 				say("\"I have been charged with the task of aiding thee, ",
 				    var0001,
 				    ". Beyond this gate lies a threat to thee. It is I who must give thee the key to escaping its snare.\"");
-				UI_add_answer("key");
+				add("key");
 				fallthrough;
 
 			case "key" (remove):
@@ -60188,7 +60188,7 @@ void Func061B object#(0x61B) () {
 				    var0001,
 				    ".");
 				say("\"Perhaps, after thou hast completed thy task, I couldst think of a way for thee to make it up to me.\"");
-				UI_add_answer(["think of a way", "make it up to thee"]);
+				add(["think of a way", "make it up to thee"]);
 				fallthrough;
 
 			case "think of a way" (remove):
@@ -60655,12 +60655,12 @@ void Func0625 object#(0x625) () {
 		}
 		say("\"Cease and desist immediately, ruffian!\"");
 		say("\"Wilt thou come quietly?\"");
-		UI_add_answer(["Yes", "No"]);
+		add(["Yes", "No"]);
 		var0014 = UI_get_party_list();
 		for (var0017 in var0014 with var0015 to var0016) {
 			var0018 = UI_find_object(var0017, 0x031D, 0x00BB, 0xFE99);
 			if (var0018) {
-				UI_add_answer("certificate");
+				add("certificate");
 				break;
 			}
 		}
@@ -68462,18 +68462,18 @@ void Func06CF object#(0x6CF) () {
 	if (event == 0x0002) {
 		UI_show_npc_face0(0xFEDF, 0x0000);
 		say("\"Oh, the pain... The end is near...\"");
-		UI_add_answer(["Who art thou?", "What happened?"]);
+		add(["Who art thou?", "What happened?"]);
 		converse (0) {
 			case "Who art thou?":
 				say("\"Me name's Fitch. Me and me mates were trappers for Hazard.\"");
-				UI_remove_answer("Who art thou?");
+				remove("Who art thou?");
 				fallthrough;
 
 			case "What happened?":
 				say("\"Several days ago we were camped in a nearby cave when we were attacked by a terrible sorceress.\"");
 				say("Evil she was, striking men dead before we knew what was upon us. We slew her, though she took many men with her even as she fell. Only I survived, though I fear not for long.\"");
-				UI_remove_answer("What happened?");
-				UI_add_answer("Rest easy.");
+				remove("What happened?");
+				add("Rest easy.");
 				fallthrough;
 
 			case "Rest easy.":
@@ -81378,11 +81378,11 @@ void Func07FC object#(0x7FC) () {
 			    var0002,
 			    " until this trial.\"");
 		}
-		UI_add_answer(["the character of the accused", "Daemonism", "no questions"]);
+		add(["the character of the accused", "Daemonism", "no questions"]);
 		converse (0) {
 			case "the character of the accused":
-				UI_remove_answer(["the character of the accused", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["the character of the accused", "no questions"]);
+				add("no further questions");
 				if (UI_get_item_flag(0xFFCE, 0x001C)) {
 					var0003 = Func08AC(false);
 					if (gflags[0x0174]) {
@@ -81402,8 +81402,8 @@ void Func07FC object#(0x7FC) () {
 				fallthrough;
 
 			case "Daemonism":
-				UI_remove_answer(["Daemonism", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["Daemonism", "no questions"]);
+				add("no further questions");
 				say("\"Look here, ",
 				    var0001,
 				    ". I'm a captain, not a theologian. I find it hard to believe in something I can't touch or smell.\"");
@@ -81436,11 +81436,11 @@ void Func07FC object#(0x7FC) () {
 		UI_init_conversation();
 		UI_show_npc_face0(0xFFCF, 0x0000);
 		say("\"Question me! I am ready. On what subject dost thou desire information?\"");
-		UI_add_answer(["the character of the accused", "Daemonism", "no questions"]);
+		add(["the character of the accused", "Daemonism", "no questions"]);
 		converse (0) {
 			case "the character of the accused":
-				UI_remove_answer(["the character of the accused", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["the character of the accused", "no questions"]);
+				add("no further questions");
 				var0003 = Func0992(0x0001, 0x0000, 0x0000, true);
 				var0003 = UI_get_npc_name(var0003);
 				say("\"I have met him face to face, and I find ",
@@ -81466,8 +81466,8 @@ void Func07FC object#(0x7FC) () {
 				fallthrough;
 
 			case "Daemonism":
-				UI_remove_answer(["Daemonism", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["Daemonism", "no questions"]);
+				add("no further questions");
 				say("\"Lest anyone be confused, let me state unequivocably that Daemons exist. Evil is real!\"");
 				say("\"The tales of our forefathers -- about the Daemon King named British, and the lands he stole in the name of Virtue -- are literally true.\"");
 				say("\"Lastly, I have absolute faith in the Priestess of Beauty... wherever she may be. She is too beautiful to be wrong!\"");
@@ -81498,24 +81498,24 @@ void Func07FC object#(0x7FC) () {
 		UI_init_conversation();
 		UI_show_npc_face0(0xFFCC, 0x0000);
 		say("\"Why hast thou brought me before the Oracle, Avatar? Ask me thy questions.\"");
-		UI_add_answer(["the character of the accused", "Daemonism"]);
+		add(["the character of the accused", "Daemonism"]);
 		if (gflags[0x01AD]) {
-			UI_add_answer("strange objects");
+			add("strange objects");
 		}
 		if (gflags[0x01AC]) {
-			UI_add_answer("ancient ruins");
+			add("ancient ruins");
 		}
 		if (gflags[0x01AB]) {
-			UI_add_answer("savages");
+			add("savages");
 		}
 		if (gflags[0x0155]) {
-			UI_add_answer("Gwenno");
+			add("Gwenno");
 		}
-		UI_add_answer("no questions");
+		add("no questions");
 		converse (0) {
 			case "strange objects":
-				UI_remove_answer(["strange objects", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["strange objects", "no questions"]);
+				add("no further questions");
 				say("\"That is what I said in my testimony -- ",
 				    var0002,
 				    " brought me strange items, and asked me to identify them.\"");
@@ -81525,8 +81525,8 @@ void Func07FC object#(0x7FC) () {
 				fallthrough;
 
 			case "ancient ruins":
-				UI_remove_answer(["ancient ruins", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["ancient ruins", "no questions"]);
+				add("no further questions");
 				say("\"",
 				    var0002,
 				    " did ask me about the ancient ruins, indeed. Very suspicious.\"");
@@ -81542,8 +81542,8 @@ void Func07FC object#(0x7FC) () {
 				fallthrough;
 
 			case "savages":
-				UI_remove_answer(["savages", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["savages", "no questions"]);
+				add("no further questions");
 				say("\"We did speak of the northern barbarians, ",
 				    var0002,
 				    " and I. He seemed to relish the most grisly parts of the tale.\"");
@@ -81554,8 +81554,8 @@ void Func07FC object#(0x7FC) () {
 				fallthrough;
 
 			case "Gwenno":
-				UI_remove_answer(["Gwenno", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["Gwenno", "no questions"]);
+				add("no further questions");
 				say("\"Yes, I did meet the scholar when she was here. A fine lady, of good temperament.\"");
 				if (gflags[0x0174]) {
 					say("\"I find it hard to believe that Iolo could be guilty of Daemonism, yet be wed to such a wonderful lady.\"");
@@ -81565,8 +81565,8 @@ void Func07FC object#(0x7FC) () {
 				fallthrough;
 
 			case "the character of the accused":
-				UI_remove_answer(["the character of the accused", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["the character of the accused", "no questions"]);
+				add("no further questions");
 				if (UI_get_item_flag(0xFFCC, 0x001C)) {
 					if (gflags[0x0174]) {
 						say("\"A prince of a man! Why, when he breaks into song, I can hardly keep the crowds out of mine inn!\"");
@@ -81596,8 +81596,8 @@ void Func07FC object#(0x7FC) () {
 				fallthrough;
 
 			case "Daemonism":
-				UI_remove_answer(["Daemonism", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["Daemonism", "no questions"]);
+				add("no further questions");
 				say("\"Do I believe in Daemonism? Of course. My mother told me the legends when I was a mere child.\"");
 				say("\"And even if I didn't -- why, I'm an innkeeper, ",
 				    var0001,
@@ -81630,15 +81630,15 @@ void Func07FC object#(0x7FC) () {
 		UI_show_npc_face0(0xFFD0, 0x0000);
 		say("\"Hail to Beauty, and the omnipotence of the Oracle!\"");
 		say("\"I shall answer thy questions truthfully, Avatar. Of what can I tell thee?\"");
-		UI_add_answer(["the character of the accused", "Daemonism"]);
+		add(["the character of the accused", "Daemonism"]);
 		if (gflags[0x01AE]) {
-			UI_add_answer("Varo Leaves");
+			add("Varo Leaves");
 		}
-		UI_add_answer("no questions");
+		add("no questions");
 		converse (0) {
 			case "Varo Leaves":
-				UI_remove_answer(["Varo Leaves", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["Varo Leaves", "no questions"]);
+				add("no further questions");
 				say("\"I did provide Varo Leaves for ",
 				    var0002,
 				    ", as I did testify before. And such leaves are used to treat poisons and curses.\"");
@@ -81658,8 +81658,8 @@ void Func07FC object#(0x7FC) () {
 				fallthrough;
 
 			case "the character of the accused":
-				UI_remove_answer(["the character of the accused", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["the character of the accused", "no questions"]);
+				add("no further questions");
 				if (gflags[0x0174]) {
 					say("\"He did strike me as a kindly man, of affable temperament. Good with children. Not the kind to consort with Daemons.\"");
 				}
@@ -81674,8 +81674,8 @@ void Func07FC object#(0x7FC) () {
 				fallthrough;
 
 			case "Daemonism":
-				UI_remove_answer(["Daemonism", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["Daemonism", "no questions"]);
+				add("no further questions");
 				say("\"I do believe in Daemons. There is much evil in this world, and I do not believe that we cause it of ourselves.\"");
 				say("\"Our ancestors did beat the British by escaping to this land. Is it so incredible that the Daemon would want revenge?\"");
 				say("\"We should be very afraid, all of us...\"");
@@ -81707,15 +81707,15 @@ void Func07FC object#(0x7FC) () {
 		UI_show_npc_face0(0xFFD1, 0x0000);
 		say("\"Oh... I'm not used to standing in public like this... crowds make me nervous...\"");
 		say("\"Let this be swift. Ask thy questions.\"");
-		UI_add_answer(["the character of the accused", "Daemonism"]);
+		add(["the character of the accused", "Daemonism"]);
 		if (gflags[0x01AF]) {
-			UI_add_answer("engagement ring");
+			add("engagement ring");
 		}
-		UI_add_answer("no questions");
+		add("no questions");
 		converse (0) {
 			case "engagement ring":
-				UI_remove_answer(["engagement ring", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["engagement ring", "no questions"]);
+				add("no further questions");
 				say("\"That is what Alyssand said in her testimony -- that thy friend did return her engagement ring to her.\"");
 				say("\"Mighty nice of him, I say. He looks to be a good lad. Doth he need a wife?\"");
 				if (gflags[0x0174]) {
@@ -81736,8 +81736,8 @@ void Func07FC object#(0x7FC) () {
 				fallthrough;
 
 			case "the character of the accused":
-				UI_remove_answer(["the character of the accused", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["the character of the accused", "no questions"]);
+				add("no further questions");
 				if (gflags[0x0174]) {
 					say("\"He looks to be too old for my daughter, now that I see him clearly.\"");
 					say("\"When a man ages, he starts to lose his mind. Wouldn't want mine Alyssand to have to deal with someone like that...\"");
@@ -81754,8 +81754,8 @@ void Func07FC object#(0x7FC) () {
 				fallthrough;
 
 			case "Daemonism":
-				UI_remove_answer(["Daemonism", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["Daemonism", "no questions"]);
+				add("no further questions");
 				say("\"Very frightening. Don't care much for Daemons.\"");
 				fallthrough;
 
@@ -81789,11 +81789,11 @@ void Func07FC object#(0x7FC) () {
 		UI_remove_npc_face1();
 		UI_set_conversation_slot(0x0000);
 		say("\"I drinks ta forget my pain, innkeeper. Go ahead, Avatar. Ask me thy questions.\"");
-		UI_add_answer(["the character of the accused", "Daemonism", "drinking", "no questions"]);
+		add(["the character of the accused", "Daemonism", "drinking", "no questions"]);
 		converse (0) {
 			case "the character of the accused":
-				UI_remove_answer(["the character of the accused", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["the character of the accused", "no questions"]);
+				add("no further questions");
 				if (UI_get_item_flag(0xFFC6, 0x001C)) {
 					if (gflags[0x0174]) {
 						say("\"He looks like he hath had one too many tips of the bottle, if ya know what I mean.\"");
@@ -81825,8 +81825,8 @@ void Func07FC object#(0x7FC) () {
 				fallthrough;
 
 			case "Daemonism":
-				UI_remove_answer(["Daemonism", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["Daemonism", "no questions"]);
+				add("no further questions");
 				say("\"I used ta believe in that stuff. But what Beauty is there in the world for a sailor who cannot sail?\"");
 				say("\"If the Oracle is so powerful, why did it not save us from the storms? Why did it let so many good men die?\"");
 				UI_show_npc_face1(0xFFCF, 0x0000);
@@ -81838,8 +81838,8 @@ void Func07FC object#(0x7FC) () {
 				break;
 
 			case "drinking":
-				UI_remove_answer(["drinking", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["drinking", "no questions"]);
+				add("no further questions");
 				say("\"Why do I drink so much? That's rather a personal question...\"");
 				say("\"I be a sailor stranded on the shore, mate. 'Tis no worse fate. With my very own eyes, I have seen our fleet blasted to wreckage by the storms. I saw sailors die!\"");
 				say("\"Why would a man who hath cheated death not drink, Avatar? Perhaps I should have died with my brothers...\"");
@@ -81872,11 +81872,11 @@ void Func07FC object#(0x7FC) () {
 		say("\"I shall answer thy questions, ",
 		    var0001,
 		    ", for the sake of the Oracle. But do not try my patience.\"");
-		UI_add_answer(["the character of the accused", "Daemonism", "Dupre's words", "no questions"]);
+		add(["the character of the accused", "Daemonism", "Dupre's words", "no questions"]);
 		converse (0) {
 			case "Dupre's words":
-				UI_remove_answer(["Dupre's words", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["Dupre's words", "no questions"]);
+				add("no further questions");
 				say("\"I do not remember every word uttered in my presence, ",
 				    var0001,
 				    ".\"");
@@ -81889,8 +81889,8 @@ void Func07FC object#(0x7FC) () {
 				break;
 
 			case "the character of the accused":
-				UI_remove_answer(["the character of the accused", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["the character of the accused", "no questions"]);
+				add("no further questions");
 				if (gflags[0x0174]) {
 					say("\"He seems to be an unstable man. Sociable at one moment, and deranged in the next!\"");
 				}
@@ -81903,8 +81903,8 @@ void Func07FC object#(0x7FC) () {
 				fallthrough;
 
 			case "Daemonism":
-				UI_remove_answer(["Daemonism", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["Daemonism", "no questions"]);
+				add("no further questions");
 				say("\"There is no doubt that Daemon British exists. I have seen the records left by previous generations.\"");
 				say("\"The Beast did conquer all of Sosaria, and did force the Fawnese to flee into the sea. How cruel!\"");
 				say("\"I have always hated the Beast, and I always shall!\"");
@@ -81936,11 +81936,11 @@ void Func07FC object#(0x7FC) () {
 		UI_init_conversation();
 		UI_show_npc_face0(0xFFC3, 0x0000);
 		say("\"Ask thy questions, Avatar. However, I shall reserve the right to silence. After all, I am the custodian of Lady Yelinda's confidential matters.\"");
-		UI_add_answer(["the character of the accused", "Daemonism", "following me", "no questions"]);
+		add(["the character of the accused", "Daemonism", "following me", "no questions"]);
 		converse (0) {
 			case "following me":
-				UI_remove_answer(["following me", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["following me", "no questions"]);
+				add("no further questions");
 				if (gflags[0x01B0]) {
 					say("\"As I stated in the earlier session of these proceedings, ",
 					    var0002,
@@ -81977,8 +81977,8 @@ labelFunc07FC_0E12:
 				fallthrough;
 
 			case "the character of the accused":
-				UI_remove_answer(["the character of the accused", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["the character of the accused", "no questions"]);
+				add("no further questions");
 				if (gflags[0x0174]) {
 					say("\"Isn't it obvious? The bard is a light-minded man, disrespectful of proper authority! Iolo is not a man to be trusted.\"");
 				}
@@ -81991,8 +81991,8 @@ labelFunc07FC_0E12:
 				fallthrough;
 
 			case "Daemonism":
-				UI_remove_answer(["Daemonism", "no questions"]);
-				UI_add_answer("no further questions");
+				remove(["Daemonism", "no questions"]);
+				add("no further questions");
 				say("\"Dost thou not feel the sudden chill in this Temple, at the very mention of Beast British?\"");
 				say("\"I tell thee, the Daemon exists, and his schemes to destroy Fawn can only be averted by the justice of the Oracle!\"");
 				fallthrough;
@@ -83367,7 +83367,7 @@ void Func0808 0x808 (var var0000, var var0001) {
 			    var0003,
 			    ", I must ask thee to please depart. I cannot help thee with matters of importance. My duty is only to protect my master and my master's possessions.\"");
 		}
-		UI_add_answer(["servant", "bye"]);
+		add(["servant", "bye"]);
 		converse (0) {
 			case "servant" (remove):
 				if (var0001 == 0x0002) {
@@ -83390,7 +83390,7 @@ void Func0808 0x808 (var var0000, var var0001) {
 						UI_set_conversation_slot(0x0000);
 						say("\"Master Filbercio hath enchanted my feet to prevent them from clattering as I walk. He was greatly disturbed by the noise.\"");
 					}
-					UI_add_answer(["many years"]);
+					add(["many years"]);
 				}
 				if (var0001 == 0x0006) {
 					var0008 = UI_part_of_day();
@@ -83487,16 +83487,16 @@ void Func0809 0x809 () {
 		say("\"What dost thou wish?\"");
 		if (UI_get_item_flag(item, 0x0006)) {
 			UI_set_schedule_type(item, 0x001F);
-			UI_add_answer("leave");
+			add("leave");
 		} else {
 			UI_run_schedule(item);
-			UI_add_answer("join");
+			add("join");
 		}
-		UI_add_answer(["bye"]);
+		add(["bye"]);
 		converse (0) {
 			case "join" (remove):
 				if (UI_get_array_size(UI_get_party_list()) < 0x0005) {
-					UI_add_answer("leave");
+					add("leave");
 					say("\"Yes, master. I shall be thy servant.\"");
 					UI_add_to_party(item);
 				} else {
@@ -83507,7 +83507,7 @@ void Func0809 0x809 () {
 				fallthrough;
 
 			case "leave" (remove):
-				UI_add_answer("join");
+				add("join");
 				say("\"Yes, master.\"");
 				UI_remove_from_party(item);
 				if (UI_get_cont_items(item, 0xFE99, 0xFE99, 0xFE99)) {
@@ -86504,7 +86504,7 @@ void Func081A 0x81A () {
 	if (gflags[0x0098] && (!gflags[0x005A])) {
 		if (gflags[0x01A5] == false) {
 			say("\"I cannot heal this infection! Thou must go to Harnna with the Varo leaves!\"");
-			UI_add_answer("Varo Leaves");
+			add("Varo Leaves");
 		} else {
 			if (Func097D(0xFE9B, 0x0005, 0x01D3, 0xFE99, 0x0003)) {
 				say("\"I did already give thee all the Varo leaves that I have! Thou must go to Harnna to heal thine infection!\"");
@@ -99202,7 +99202,7 @@ void Func0876 0x876 () {
 			say("\"To ask who you are and why you are here.\"");
 			UI_set_item_flag(0xFF56, 0x001C);
 		}
-		UI_add_answer([var0001, "I am the Avatar.", "I am lost..."]);
+		add([var0001, "I am the Avatar.", "I am lost..."]);
 		if (!gflags[0x02DA]) {
 			gflags[0x02DA] = true;
 			var0003 = script Func09A0(0x0005, 0x0004) after 100 ticks {
@@ -99214,17 +99214,17 @@ void Func0876 0x876 () {
 		say("\"To be glad to see you again, ",
 		    var0000,
 		    ". To inquire what you seek from the Gargoyles this day.\"");
-		UI_add_answer(["information", "aid"]);
+		add(["information", "aid"]);
 		if (gflags[0x0278] == true) {
-			UI_add_answer("Serpent Staff");
+			add("Serpent Staff");
 		}
 		if (gflags[0x01FB] && (!gflags[0x01FA])) {
-			UI_add_answer("explain test");
+			add("explain test");
 		}
 		if (gflags[0x0201] || (gflags[0x01EB] && (gflags[0x01EC] && gflags[0x01ED]))) {
-			UI_add_answer("leave Furnace");
+			add("leave Furnace");
 			if (gflags[0x01FF]) {
-				UI_remove_answer("leave Furnace");
+				remove("leave Furnace");
 			}
 		}
 	}
@@ -99248,7 +99248,7 @@ void Func0877 0x877 () {
 	say("\"To be relieved that you came before the dreaming sickness spread. To have feared that none would remain awake to give you the ring. Now it is yours.\"");
 	var0001 = Func099B(0xFE9C, 0x0001, 0x0377, 0xFE99, 0x0001, false, true);
 	gflags[0x0207] = true;
-	UI_add_answer(["information", "aid", "dreaming sickness"]);
+	add(["information", "aid", "dreaming sickness"]);
 }
 
 void Func0878 0x878 () {
@@ -109719,7 +109719,7 @@ var Func0954 0x954 () {
 var Func0955 0x955 () {
 
 	UI_push_answers();
-	UI_add_answer(["Yes", "No"]);
+	add(["Yes", "No"]);
 	converse (0) {
 		case "Yes":
 			UI_pop_answers();
@@ -109736,7 +109736,7 @@ var Func0956 0x956 (var var0000) {
 	var var0001;
 
 	UI_push_answers();
-	UI_add_answer(var0000);
+	add(var0000);
 	var0001 = UI_select_from_menu();
 	UI_pop_answers();
 	return var0001;
@@ -109746,7 +109746,7 @@ var Func0957 0x957 (var var0000) {
 	var var0001;
 
 	UI_push_answers();
-	UI_add_answer(var0000);
+	add(var0000);
 	var0001 = UI_select_from_menu2();
 	UI_pop_answers();
 	return var0001;
@@ -109977,7 +109977,7 @@ void Func0965 0x965 () {
 	if (var0001 == 0x0004) {
 		say("\"The Fellowship is a group that hath been gaining much popularity in recent years with the people of Britannia. While on the surface it may simply appear to be a scholarly society studying its particular philosophy, its teachings have the power to forever alter the shape of Britannian society. Its ceremonies are deeply moving experiences.\"");
 	}
-	UI_add_answer("philosophy");
+	add("philosophy");
 }
 
 extern var Func0955 0x955 ();
@@ -112235,7 +112235,7 @@ void Func09B1 0x9B1 () {
 				say("\"Many thanks, ",
 				    var0000,
 				    ". Perhaps thou wouldst care to hear another song. Or, if thou art tired, I can return later...\"");
-				UI_add_answer(["song", "bye"]);
+				add(["song", "bye"]);
 			} else {
 				say("\"Perhaps some other time...\"");
 				abort;
