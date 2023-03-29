@@ -1,3 +1,4 @@
+#game "blackgate"
 // externs
 extern void Func0893 0x893 (var var0000);
 extern var Func092D 0x92D (var var0000);
