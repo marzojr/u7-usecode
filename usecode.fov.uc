@@ -1066,7 +1066,7 @@ void Func011C shape#(0x11C) () {
 	if (event == 0x0001) {
 		var0000 = UI_game_hour();
 		if ((var0000 >= 0x0006) && (var0000 <= 0x000B)) {
-			item_say(((" " + UI_game_hour()) + " o'clock"));
+			item_say((" " + UI_game_hour()) + " o'clock");
 			return;
 		}
 		if (var0000 == 0x000C) {
@@ -1075,7 +1075,7 @@ void Func011C shape#(0x11C) () {
 		}
 		if ((var0000 >= 0x000D) && (var0000 <= 0x0014)) {
 			var0000 = (var0000 - 0x000C);
-			item_say(((" " + var0000) + " o'clock"));
+			item_say((" " + var0000) + " o'clock");
 			return;
 		} else {
 			var0001 = Func0908();
@@ -3392,7 +3392,7 @@ void Func0270 shape#(0x270) () {
 					var0011 = 0x0000;
 					while (var0011 < 0x0003) {
 						var0012 = UI_create_new_object(0x0390);
-						var0012->set_item_frame((0x0003 - var0011));
+						var0012->set_item_frame(0x0003 - var0011);
 						var0013 = var000E->get_object_position();
 						var0013[0x0001] = ((var0013[0x0001] + 0x0001) + var0011);
 						var0013[0x0002] = (var0013[0x0002] + 0x0002);
@@ -4234,7 +4234,7 @@ void Func028A shape#(0x28A) () {
 			var0004 = ((" " + Func0932(var0002)) + " South");
 		}
 		if (!UI_is_pc_inside()) {
-			item_say((var0004 + var0003));
+			item_say(var0004 + var0003);
 		} else if (Func0937(0xFFFF)) {
 			0xFFFF->item_say("@'Twill not function under a roof!@");
 		}
@@ -4994,7 +4994,7 @@ void Func02BE shape#(0x2BE) () {
 				var0006 = 0x0000;
 			}
 		}
-		set_item_frame((var0006 / 0x0002));
+		set_item_frame(var0006 / 0x0002);
 		fire_projectile(var0006, 0x02BF, 0x001E, 0x02BE, 0x02BE);
 	}
 	if (event == 0x0004) {
@@ -6409,9 +6409,9 @@ void Func0314 shape#(0x314) () {
 		}
 		var0005 = get_item_frame();
 		if ((var0005 % 0x0002) == 0x0000) {
-			set_item_frame((var0005 + 0x0001));
+			set_item_frame(var0005 + 0x0001);
 		} else {
-			set_item_frame((var0005 - 0x0001));
+			set_item_frame(var0005 - 0x0001);
 		}
 		UI_play_sound_effect2(0x001C, item);
 		var0006 = get_item_quality();
@@ -7432,7 +7432,7 @@ void Func0334 shape#(0x334) () {
 	} else if (var0001 == 0x0030) {
 		var0008 = get_object_position();
 		var000B = 0xFFE9->get_object_position();
-		if ((Func0932((var0008[0x0001] - var000B[0x0001])) <= 0x0002) && (Func0932((var0008[0x0002] - var000B[0x0002])) <= 0x0002)) {
+		if ((Func0932(var0008[0x0001] - var000B[0x0001]) <= 0x0002) && (Func0932(var0008[0x0002] - var000B[0x0002]) <= 0x0002)) {
 			var0007 = script item {
 				call Func0609;
 				call Func0609;
@@ -7578,7 +7578,7 @@ void Func0337 shape#(0x337) () {
 						}
 						Func08FE(var0005);
 						if (var0003 < 0x0007) {
-							var0001->set_item_frame((var0001->get_item_frame() + 0x0001));
+							var0001->set_item_frame(var0001->get_item_frame() + 0x0001);
 						}
 					} else if (var0001->is_npc()) {
 						Func08FE("@Tattooing?@");
@@ -8345,7 +8345,7 @@ void Func03DB shape#(0x3DB) () {
 			frame 3;
 			frame 0;
 		};
-		var0001 = item->run_script((var0000 & [(byte)0x0B, 0xFFE6, 0x0002]));
+		var0001 = item->run_script(var0000 & [(byte)0x0B, 0xFFE6, 0x0002]);
 		if (UI_die_roll(0x0001, 0x000A) == 0x0001) {
 			var0002 = get_object_position();
 			set_item_shape(0x03E0);
@@ -8474,7 +8474,7 @@ void Func03E0 shape#(0x3E0) () {
 			frame 3;
 			frame 0;
 		};
-		var0001 = item->run_script((var0000 & [(byte)0x0B, 0xFFE6, 0x0002]));
+		var0001 = item->run_script(var0000 & [(byte)0x0B, 0xFFE6, 0x0002]);
 	}
 }
 
@@ -8529,7 +8529,7 @@ void Func03F5 shape#(0x3F5) () {
 				frame 0;
 			};
 			halt_scheduled();
-			var0001 = item->run_script((var0000 & [(byte)0x0B, 0xFFE6, 0x0002]));
+			var0001 = item->run_script(var0000 & [(byte)0x0B, 0xFFE6, 0x0002]);
 		}
 	}
 }
@@ -28077,7 +28077,7 @@ void Func047A object#(0x47A) () {
 							say("\"Very well. Let me give thee markers for thy gold. Each one is worth 10 gold coins. If Sprellic wins, thou mayest come collect twice that amount of gold from me.~~\"Should he lose, ",
 							    var0000,
 							    ", thy markers are, of course, worthless.\"");
-							var0014 = UI_add_party_items((var0012 / 0x000A), 0x0399, 0xFE99, 0x0000, false);
+							var0014 = UI_add_party_items(var0012 / 0x000A, 0x0399, 0xFE99, 0x0000, false);
 							if (var0014) {
 								var0015 = UI_remove_party_items(var0012, 0x0284, 0xFE99, 0xFE99, true);
 								gflags[0x0165] = true;
@@ -28307,7 +28307,7 @@ void Func047B object#(0x47B) () {
 						} while (true);
 						var000D = 0xFE9B->count_objects(0x0284, 0xFE99, 0xFE99);
 						if (var000D >= var000B) {
-							var000E = UI_add_party_items((var000B / 0x000A), 0x0399, 0xFE99, 0x0001, false);
+							var000E = UI_add_party_items(var000B / 0x000A, 0x0399, 0xFE99, 0x0001, false);
 							if (var000E) {
 								var000F = UI_remove_party_items(var000B, 0x0284, 0xFE99, 0xFE99, true);
 								var0010 = true;
@@ -49726,7 +49726,7 @@ void Func060C object#(0x60C) () {
 						var000D = UI_update_last_created(var0011);
 					}
 					var0010->set_item_flag(0x000B);
-					var0014 = Func0932(((var000B[0x0002] - var0005[0x0002]) - 0x0004));
+					var0014 = Func0932((var000B[0x0002] - var0005[0x0002]) - 0x0004);
 					var0015 = (("@A winnah in lane " + var0014) + "!@");
 					Func0933(0xFF18, var0015, 0x0001);
 				}
@@ -50962,7 +50962,7 @@ void Func0626 object#(0x626) () {
 			var000B = 0x0001;
 			while (var000B <= var0007) {
 				var000C = (((var000B - 0x0001) * 0x0003) + 0x0001);
-				if ((Func0932((var000A[0x0001] - var0006[var000C])) <= 0x0002) && (Func0932((var000A[0x0002] - var0006[(var000C + 0x0001)])) <= 0x0002)) {
+				if ((Func0932(var000A[0x0001] - var0006[var000C]) <= 0x0002) && (Func0932(var000A[0x0002] - var0006[(var000C + 0x0001)]) <= 0x0002)) {
 					var0005->remove_item();
 					var0006 = (var0006 & var000A);
 					var0007 = (var0007 + 0x0001);
@@ -52783,7 +52783,7 @@ void Func064E object#(0x64E) () {
 		} else {
 			var0005 = ((" " + Func0932(var0003)) + " South");
 		}
-		item_say((var0005 + var0004));
+		item_say(var0005 + var0004);
 	}
 }
 
@@ -54823,7 +54823,7 @@ void Func0677 object#(0x677) () {
 				var0000 = var0007->run_script(var0009);
 			}
 		}
-		UI_earthquake((var0003 * 0x0003));
+		UI_earthquake(var0003 * 0x0003);
 	}
 }
 
@@ -57992,7 +57992,7 @@ void Func06BD object#(0x6BD) () {
 				var000C = var0006->run_script(var0008);
 			}
 		}
-		UI_earthquake((var0002 * 0x0003));
+		UI_earthquake(var0002 * 0x0003);
 	}
 }
 
@@ -61974,9 +61974,9 @@ void Func0806 0x806 (var var0000, var var0001) {
 
 	var0002 = var0001->get_object_position();
 	var0003 = var0002->find_nearby(var0000, 0x0014, 0x00B0);
-	var0003 = (var0003 & var0002->find_nearby((var0000 + 0x0001), 0x0014, 0x00B0));
-	var0003 = (var0003 & var0002->find_nearby((var0000 + 0x0002), 0x0014, 0x00B0));
-	var0003 = (var0003 & var0002->find_nearby((var0000 + 0x0003), 0x0014, 0x00B0));
+	var0003 = (var0003 & var0002->find_nearby(var0000 + 0x0001, 0x0014, 0x00B0));
+	var0003 = (var0003 & var0002->find_nearby(var0000 + 0x0002, 0x0014, 0x00B0));
+	var0003 = (var0003 & var0002->find_nearby(var0000 + 0x0003, 0x0014, 0x00B0));
 	for (var0006 in var0003 with var0004 to var0005) {
 		var0007 = script var0006 {
 			repeat 6 {
@@ -62666,9 +62666,9 @@ void Func0816 0x816 (var var0000) {
 	if (var0001) {
 		var0021 = var0000->get_item_frame();
 		if ((var0021 % 0x0002) == 0x0000) {
-			var0000->set_item_frame((var0021 + 0x0001));
+			var0000->set_item_frame(var0021 + 0x0001);
 		} else {
-			var0000->set_item_frame((var0021 - 0x0001));
+			var0000->set_item_frame(var0021 - 0x0001);
 		}
 		UI_play_sound_effect2(0x001C, item);
 	} else {
@@ -62735,7 +62735,7 @@ void Func081C 0x81C (var var0000, var var0001) {
 
 	var0002 = var0000->get_item_frame();
 	var0003 = (var0002 % 0x0004);
-	var0000->set_item_frame(((var0002 - var0003) + var0001));
+	var0000->set_item_frame((var0002 - var0003) + var0001);
 }
 
 extern void Func081C 0x81C (var var0000, var var0001);
@@ -63191,7 +63191,7 @@ var Func082E 0x82E (var var0000) {
 			}
 		} else {
 			for (var000D in var0001 with var000E to var000F) {
-				var000D->set_item_frame(((var000D->get_item_frame() % 0x0008) + (var0003 * 0x0008)));
+				var000D->set_item_frame((var000D->get_item_frame() % 0x0008) + (var0003 * 0x0008));
 			}
 		}
 	}
@@ -63429,7 +63429,7 @@ void Func0830 0x830 (var var0000, var var0001) {
 	}
 	for (var0008 in var0000 with var0006 to var0007) {
 		var0009 = var0008->get_item_frame_rot();
-		var0008->set_item_frame_rot((var0009 + var0002));
+		var0008->set_item_frame_rot(var0009 + var0002);
 	}
 	UI_play_sound_effect(var0003);
 }
@@ -72493,7 +72493,7 @@ var Func08C9 0x8C9 () {
 			var000D = var000C->get_object_position();
 			var000E = var000D[0x0001];
 			var000F = var000D[0x0002];
-			if ((!var0009) && ((Func0932((var000E - var0007)) <= 0x0001) && (Func0932((var000F - var0008)) <= 0x0001))) {
+			if ((!var0009) && ((Func0932(var000E - var0007) <= 0x0001) && (Func0932(var000F - var0008) <= 0x0001))) {
 				var0002 = (var0002 + 0x0001);
 				var000C->clear_item_flag(0x0012);
 				var0009 = true;
@@ -73756,7 +73756,7 @@ void Func08DD 0x8DD () {
 			var000A = var0004->run_script(var0006);
 		}
 	}
-	UI_earthquake((var0001 * 0x0003));
+	UI_earthquake(var0001 * 0x0003);
 }
 
 extern var Func0909 0x909 ();
@@ -75018,7 +75018,7 @@ var Func08F8 0x8F8 (var var0000, var var0001, var var0002, var var0003, var var0
 			var000B = UI_add_party_items(var0009, var0000, 0xFE99, var0001, var0006);
 			if (!(var000B == 0x0000)) {
 				var000A = 0x0001;
-				var000C = UI_remove_party_items((var0003 * var0008), 0x0284, 0xFE99, 0xFE99, true);
+				var000C = UI_remove_party_items(var0003 * var0008, 0x0284, 0xFE99, 0xFE99, true);
 				var000D = 0x0000;
 				var000E = false;
 				for (var0011 in var000B with var000F to var0010) {
@@ -76289,7 +76289,7 @@ void Func093A 0x93A (var var0000, var var0001) {
 			}
 			var0006 = var000A->set_item_quality(0x00FF);
 		} else {
-			var0006 = var000A->set_item_quality((var000B - (var0000 * 0x001E)));
+			var0006 = var000A->set_item_quality(var000B - (var0000 * 0x001E));
 		}
 	}
 }
@@ -76877,7 +76877,7 @@ var Func094B 0x94B (var var0000, var var0001) {
 		if (var0004 >= var000C[0x0003]) {
 			if (var0007 >= 0x005A) {
 				var0006 = true;
-				var000D = Func0932(((var0004 - var0002) * 0x0002));
+				var000D = Func0932((var0004 - var0002) * 0x0002);
 				var000D = UI_get_random(var000D);
 				if ((var0003 - var000D) <= var0004) {
 					var0003 = (var0004 + 0x0001);
@@ -76886,7 +76886,7 @@ var Func094B 0x94B (var var0000, var var0001) {
 				}
 			} else {
 				if (var0007 >= 0x001E) {
-					var000D = Func0932(((var0004 - var0002) * 0x0002));
+					var000D = Func0932((var0004 - var0002) * 0x0002);
 					var000D = UI_get_random(var000D);
 					if ((var0003 - var000D) <= var0004) {
 						var0003 = (var0004 + 0x0001);
@@ -76901,7 +76901,7 @@ var Func094B 0x94B (var var0000, var var0001) {
 		} else if (var0004 >= var000C[0x0004]) {
 			if (var0007 >= 0x0028) {
 				var0006 = true;
-				var000D = Func0932(((var0004 - var0002) * 0x0002));
+				var000D = Func0932((var0004 - var0002) * 0x0002);
 				var000D = UI_get_random(var000D);
 				if ((var0003 - var000D) <= var0004) {
 					var0003 = (var0004 + 0x0001);
@@ -76909,7 +76909,7 @@ var Func094B 0x94B (var var0000, var var0001) {
 					var0003 = (var0003 - var000D);
 				}
 			} else if (var0007 >= 0x000F) {
-				var000D = Func0932(((var0004 - var0002) * 0x0002));
+				var000D = Func0932((var0004 - var0002) * 0x0002);
 				var000D = UI_get_random(var000D);
 				if ((var0003 - var000D) <= var0004) {
 					var0003 = (var0004 + 0x0001);

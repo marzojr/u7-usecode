@@ -57,8 +57,8 @@ void Func00A0 shape#(0xA0) () {
 			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, 0xFFF3, 0xFFD8, 0xFFEA, 0xFFE8, 0xFFE9, 0xFFE2, 0xFFE0, 0xFFE3, 0xFFE5, 0xFFEE, 0xFFEC, 0xFFD6, 0xFFD5, 0xFFEB, 0xFFF0, 0xFFF2, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != 0x000F) && (!var0003->get_item_flag(0x0004))) {
-					UI_error_message((("NPC #" + var0003) + " is moving - get his schedule!"));
-					UI_error_message(("His current activity is #" + var0003->get_schedule_type()));
+					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
+					UI_error_message("His current activity is #" + var0003->get_schedule_type());
 					UI_error_message("Save game, and report to Brendann NOW!");
 				}
 			}
@@ -2587,7 +2587,7 @@ void Func0109 shape#(0x109) () {
 			var0001 = Func09A0(0x0002, 0x0001);
 			var0002 = [0x095D, 0x0477, 0x0000];
 			0xFF31->Func07D2();
-			0xFF31->set_npc_id((0xFF31->get_npc_id() + 0x0001));
+			0xFF31->set_npc_id(0xFF31->get_npc_id() + 0x0001);
 			0xFF31->clear_item_say();
 			var0003 = 0xFF31->find_nearby(0xFFFF, 0x0014, 0x0008);
 			var0004 = [];
@@ -2887,7 +2887,7 @@ void Func0112 shape#(0x112) () {
 	if (var0001 == 0x0000) {
 		var0001 = 0xFE9C->get_npc_object();
 	} else {
-		var0001 = UI_get_npc_object((0x0000 - var0001));
+		var0001 = UI_get_npc_object(0x0000 - var0001);
 	}
 	var0002 = UI_get_party_list();
 	if (var0001 in var0002) {
@@ -2931,7 +2931,7 @@ void Func011C shape#(0x11C) () {
 	if (event == 0x0001) {
 		var0000 = UI_game_hour();
 		if ((var0000 >= 0x0006) && (var0000 <= 0x000B)) {
-			item_say(((" " + UI_game_hour()) + " o'clock"));
+			item_say((" " + UI_game_hour()) + " o'clock");
 			return;
 		}
 		if (var0000 == 0x000C) {
@@ -2940,7 +2940,7 @@ void Func011C shape#(0x11C) () {
 		}
 		if ((var0000 >= 0x000D) && (var0000 <= 0x0014)) {
 			var0000 = (var0000 - 0x000C);
-			item_say(((" " + var0000) + " o'clock"));
+			item_say((" " + var0000) + " o'clock");
 			return;
 		} else {
 			var0001 = Func0953();
@@ -2984,9 +2984,9 @@ void Func0122 shape#(0x122) () {
 	if (event == 0x0001) {
 		var0000 = get_item_frame();
 		if (var0000 > 0x0003) {
-			set_item_frame((var0000 - 0x0004));
+			set_item_frame(var0000 - 0x0004);
 		} else {
-			set_item_frame((var0000 + 0x0004));
+			set_item_frame(var0000 + 0x0004);
 		}
 		UI_play_sound_effect2(0x0009, item);
 	}
@@ -2998,9 +2998,9 @@ void Func0123 shape#(0x123) () {
 	if (event == 0x0001) {
 		var0000 = get_item_frame();
 		if (var0000 > 0x0003) {
-			set_item_frame((var0000 - 0x0004));
+			set_item_frame(var0000 - 0x0004);
 		} else {
-			set_item_frame((var0000 + 0x0004));
+			set_item_frame(var0000 + 0x0004);
 		}
 		UI_play_sound_effect2(0x0009, item);
 	}
@@ -3318,7 +3318,7 @@ void Func013D shape#(0x13D) () {
 
 	var0000 = 0xFEF8->get_npc_id();
 	if (gflags[0x022C] && ((event == 0x0000) && (!gflags[0x022D]))) {
-		set_npc_id((get_npc_id() + 0x0001));
+		set_npc_id(get_npc_id() + 0x0001);
 		var0001 = find_nearby(0x0370, 0x0005, 0x0000);
 		var0002 = find_nearby(0x038A, 0x0005, 0x0000);
 		if (get_npc_id() == 0x0006) {
@@ -3571,7 +3571,7 @@ void Func013E shape#(0x13E) () {
 		}
 	}
 	if (gflags[0x024F] && ((event == 0x0000) && (!gflags[0x0250]))) {
-		set_npc_id((get_npc_id() + 0x0001));
+		set_npc_id(get_npc_id() + 0x0001);
 		if (get_npc_id() == 0x000A) {
 			UI_init_conversation();
 			0xFEE1->show_npc_face0(0x0000);
@@ -3747,7 +3747,7 @@ void Func0146 shape#(0x146) () {
 		if ((var0003 > 0x0001) && (var0003 < 0x0008)) {
 			if (var0004->get_item_shape() == 0x0268) {
 				var0004->set_item_shape(0x0154);
-				var0004->set_item_frame((var0003 - 0x0001));
+				var0004->set_item_frame(var0003 - 0x0001);
 				var0001 = script var0004 after 500 ticks {
 					sfx 48;
 					remove;
@@ -4446,7 +4446,7 @@ void Func0175 shape#(0x175) () {
 			abort;
 		}
 		UI_sprite_effect(0x000C, (var0001[0x0001] + get_npc_id()), (var0001[0x0002] - get_npc_id()), 0x0000, 0x0000, get_npc_id(), 0xFFFF);
-		set_npc_id((get_npc_id() + 0x0001));
+		set_npc_id(get_npc_id() + 0x0001);
 		var0002 = script item {
 			nohalt;
 			call Func0175;
@@ -4909,7 +4909,7 @@ void Func017D shape#(0x17D) () {
 	}
 	var0003 = get_npc_id();
 	if (var0003 == 0x0000) {
-		set_npc_id((UI_get_random(0x0004) + 0x0002));
+		set_npc_id(UI_get_random(0x0004) + 0x0002);
 		var0003 = get_npc_id();
 	}
 	if (var0003 == 0x0007) {
@@ -6581,7 +6581,7 @@ void Func01C7 shape#(0x1C7) () {
 			var000A = (0xFE9C->find_nearby(0x010E, 0x0028, 0x0000) & 0xFE9C->find_nearby(0x01B0, 0x0028, 0x0000));
 			for (var000F in var000A with var0014 to var0015) {
 				if (var000F->get_item_quality() == 0x00D3) {
-					var000F->set_item_frame((var000F->get_item_frame() - 0x0002));
+					var000F->set_item_frame(var000F->get_item_frame() - 0x0002);
 				}
 			}
 			var000A = script 0xFFEE after 1 ticks {
@@ -7351,7 +7351,7 @@ void Func01D1 shape#(0x1D1) () {
 						call Func01D1;
 					};
 				}
-				0xFFFD->set_npc_id((var0002 + 0x0001));
+				0xFFFD->set_npc_id(var0002 + 0x0001);
 				abort;
 			} else {
 				0xFFFD->set_schedule_type(0x0003);
@@ -7381,7 +7381,7 @@ void Func01D3 shape#(0x1D3) () {
 			if (var0002 == 0x02D2) {
 				var0003 = var0001->get_item_quantity(var0002);
 				if (var0003 > 0x0001) {
-					var0004 = var0001->set_item_quantity((var0003 - 0x0001));
+					var0004 = var0001->set_item_quantity(var0003 - 0x0001);
 				} else {
 					var0001->remove_item();
 				}
@@ -7882,7 +7882,7 @@ void Func01EF shape#(0x1EF) () {
 		} else {
 			0xFE9C->item_say("@Here, kitty, kitty!@");
 			set_schedule_type(0x0014);
-			set_npc_id((var0000 + 0x0001));
+			set_npc_id(var0000 + 0x0001);
 			if (0xFFFE->npc_nearby()) {
 				Func097F(0xFFFE, "@I hate cats.@", 0x0008);
 			}
@@ -7900,7 +7900,7 @@ void Func01EF shape#(0x1EF) () {
 	}
 	if (event == 0x0000) {
 		if (gflags[0x000D]) {
-			set_npc_id((var0000 + 0x0001));
+			set_npc_id(var0000 + 0x0001);
 			if (get_npc_id() == 0x0002) {
 				UI_fade_palette(0x000C, 0x0001, 0x0000);
 				set_polymorph(0x01EF);
@@ -8577,7 +8577,7 @@ void Func0235 shape#(0x235) () {
 				0xFF6A->set_npc_id(0x0004);
 			}
 			UI_fade_palette(0x000C, 0x0001, 0x0000);
-			UI_advance_time((0x05DC * 0x000C));
+			UI_advance_time(0x05DC * 0x000C);
 			var0000 = Func098D();
 			for (var0003 in var0000 with var0006 to var0007) {
 				if (var0003->npc_nearby2()) {
@@ -9977,7 +9977,7 @@ void Func028A shape#(0x28A) () {
 			var0004 = ((" " + Func097E(var0002)) + " South");
 		}
 		if (!UI_is_pc_inside()) {
-			item_say((var0004 + var0003));
+			item_say(var0004 + var0003);
 		} else if (Func0983(0xFFFD)) {
 			0xFFFD->item_say("@'Twill not function under a roof!@");
 		}
@@ -12297,12 +12297,12 @@ void Func02CF shape#(0x2CF) () {
 		if (var0001) {
 			if (get_item_frame() == 0x0000) {
 				if (var0003 > 0x0000) {
-					var0002->set_item_frame((var0003 - 0x0001));
+					var0002->set_item_frame(var0003 - 0x0001);
 					set_item_frame(0x0001);
 				}
 			} else {
 				if (var0003 < 0x0003) {
-					var0002->set_item_frame((var0003 + 0x0001));
+					var0002->set_item_frame(var0003 + 0x0001);
 					if (get_item_frame() < 0x0006) {
 						set_item_frame(0x0000);
 					}
@@ -12583,13 +12583,13 @@ void Func02E5 shape#(0x2E5) () {
 			if (get_item_frame() == 0x0000) {
 				if (var0003 > 0x0000) {
 					if (var0002->get_item_shape() != 0x0146) {
-						var0002->set_item_frame((var0003 - 0x0001));
+						var0002->set_item_frame(var0003 - 0x0001);
 					}
 					set_item_frame(0x0001);
 				}
 			} else {
 				if (var0003 < 0x0003) {
-					var0002->set_item_frame((var0003 + 0x0001));
+					var0002->set_item_frame(var0003 + 0x0001);
 					if (get_item_frame() < 0x0006) {
 						set_item_frame(0x0000);
 					}
@@ -12828,7 +12828,7 @@ void Func02E6 shape#(0x2E6) () {
 				0xFFBA->set_npc_id(0x0004);
 			}
 			UI_fade_palette(0x000C, 0x0001, 0x0000);
-			UI_advance_time((0x05DC * 0x0003));
+			UI_advance_time(0x05DC * 0x0003);
 			0xFFBA->move_object([0x0435, 0x0A54, 0x0000]);
 			0xFE9C->move_object([0x0439, 0x0A5D, 0x0001]);
 			var0002 = script 0xFFBA after 30 ticks {
@@ -13476,9 +13476,9 @@ void Func0314 shape#(0x314) () {
 		var0005 = get_item_frame();
 		var0006 = var0005;
 		if ((var0005 % 0x0002) == 0x0000) {
-			set_item_frame((var0005 + 0x0001));
+			set_item_frame(var0005 + 0x0001);
 		} else {
-			set_item_frame((var0005 - 0x0001));
+			set_item_frame(var0005 - 0x0001);
 		}
 		UI_play_sound_effect2(0x0046, item);
 		var0007 = get_item_quality();
@@ -15538,7 +15538,7 @@ void Func0337 shape#(0x337) () {
 						}
 						var0001 = Func0992(0xFFFD, var0006, 0x0000, false);
 						if (var0004 < 0x0007) {
-							var0002->set_item_frame((var0002->get_item_frame() + 0x0001));
+							var0002->set_item_frame(var0002->get_item_frame() + 0x0001);
 						}
 					} else if (var0002->is_npc()) {
 						var0001 = Func0992(0xFFFD, "@Tattooing?@", 0x0000, true);
@@ -15875,7 +15875,7 @@ void Func033D shape#(0x33D) () {
 				UI_play_music(0x0040, 0x0000);
 				return;
 			}
-			var0004 = var0008->set_item_quality((var0009 + 0x0001));
+			var0004 = var0008->set_item_quality(var0009 + 0x0001);
 		}
 	}
 	if (event == 0x000A) {
@@ -16089,7 +16089,7 @@ void Func0355 shape#(0x355) () {
 			abort;
 		}
 		UI_sprite_effect(0x0008, (var0000[0x0001] + get_npc_id()), (var0000[0x0002] - get_npc_id()), 0x0000, 0x0000, 0x0000, 0xFFFF);
-		set_npc_id((get_npc_id() + 0x0001));
+		set_npc_id(get_npc_id() + 0x0001);
 		var0002 = script item {
 			nohalt;
 			call Func0355;
@@ -16344,9 +16344,9 @@ void Func0357 shape#(0x357) () {
 	}
 	if (var0002) {
 		if ((var0001 % 0x0002) == 0x0000) {
-			set_item_frame((var0001 + 0x0001));
+			set_item_frame(var0001 + 0x0001);
 		} else {
-			set_item_frame((var0001 - 0x0001));
+			set_item_frame(var0001 - 0x0001);
 		}
 		UI_play_sound_effect2(0x0046, item);
 	} else {
@@ -18633,7 +18633,7 @@ void Func03CA shape#(0x3CA) () {
 	if (event == 0x0001) {
 		var0000 = get_npc_id();
 		if (var0000 < 0x0003) {
-			set_npc_id((var0000 + 0x0001));
+			set_npc_id(var0000 + 0x0001);
 			abort;
 		} else if (UI_die_roll(0x0001, 0x000A) == 0x0001) {
 			set_npc_id(0x0000);
@@ -19427,7 +19427,7 @@ void Func03DB shape#(0x3DB) () {
 				};
 			}
 		}
-		var0002 = item->run_script((var0001 & [(byte)0x0B, 0xFFE6, 0x0002]));
+		var0002 = item->run_script(var0001 & [(byte)0x0B, 0xFFE6, 0x0002]);
 	}
 }
 
@@ -19451,7 +19451,7 @@ void Func03DC shape#(0x3DC) () {
 	UI_play_sound_effect(0x001B);
 	Func097F(0xFE9C, "@Yleg Ort!@", 0x0000);
 	obj_sprite_effect(0x0015, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
-	set_item_frame((UI_get_random(0x0008) - 0x0001));
+	set_item_frame(UI_get_random(0x0008) - 0x0001);
 	if (UI_get_random(0x0003) == 0x0001) {
 		var0000 = ["@Let us go!@", "@It shows the way!@", "@Try again.@", "@That direction?@", "@Is it broken?@", "@I do not think it works.@"];
 		var0001 = Func0992(0x0001, 0x0000, 0x0000, true);
@@ -20031,7 +20031,7 @@ void Func03FD shape#(0x3FD) () {
 		} else {
 			var0002 = 0xFE9C->add_cont_items(0x0001, 0x0194, 0x0000, 0x0004, 0x0012);
 			if (!var0002) {
-				set_item_frame((var0000 + 0x0001));
+				set_item_frame(var0000 + 0x0001);
 				UI_play_sound_effect(0x000C);
 				var0001 = Func0992(0x0001, "@Thou hast plucked a berry!@", "@I have a berry!@", true);
 			} else {
@@ -21557,7 +21557,7 @@ void Func0404 object#(0x404) () {
 		Func097F(0xFFFC, var0005[UI_get_random(UI_get_array_size(var0005))], 0x0000);
 	}
 	if (event == 0x0001) {
-		0xFE9C->item_say((("@Good " + var0003) + "!@"));
+		0xFE9C->item_say(("@Good " + var0003) + "!@");
 		0xFFFC->Func07D1();
 		Func097F(0xFFFC, (("@Greetings, " + var0000) + "."), 0x0002);
 		0xFFFC->set_schedule_type(0x0003);
@@ -21911,7 +21911,7 @@ void Func040D object#(0x40D) () {
 			}
 		} else if (var0008 == 0x0001) {
 			if (var0007) {
-				0xFFF3->item_say((("@Greetings, " + var0004) + "!@"));
+				0xFFF3->item_say(("@Greetings, " + var0004) + "!@");
 			} else {
 				0xFFF3->item_say("@Greetings, stranger!@");
 			}
@@ -22297,7 +22297,7 @@ void Func040D object#(0x40D) () {
 					if (Func0955()) {
 						say("\"Thank thee!\"");
 						if (0xFFF3->get_npc_id() < 0x0019) {
-							0xFFF3->set_npc_id((0xFFF3->get_npc_id() + 0x0005));
+							0xFFF3->set_npc_id(0xFFF3->get_npc_id() + 0x0005);
 						}
 						var0008 = UI_remove_party_items(0x0001, 0x0108, 0xFE99, 0xFE99, 0x0000);
 					} else {
@@ -22333,7 +22333,7 @@ void Func040D object#(0x40D) () {
 					if (Func0955()) {
 						say("\"Ooooh!\"");
 						if (0xFFF3->get_npc_id() < 0x0014) {
-							0xFFF3->set_npc_id((0xFFF3->get_npc_id() + 0x000A));
+							0xFFF3->set_npc_id(0xFFF3->get_npc_id() + 0x000A);
 						}
 						var0008 = UI_remove_party_items(0x0001, 0x02A5, 0xFE99, 0x0000, 0x0000);
 					} else {
@@ -23335,7 +23335,7 @@ void Func0410 object#(0x410) () {
 		var0003 = "evening";
 	}
 	if (gflags[0x0128] && ((event == 0x0000) && (!gflags[0x00E6]))) {
-		0xFFF0->set_npc_id((0xFFF0->get_npc_id() + 0x0001));
+		0xFFF0->set_npc_id(0xFFF0->get_npc_id() + 0x0001);
 		if (0xFFF0->get_npc_id() == 0x0008) {
 			UI_play_sound_effect(0x0074);
 			var0004 = 0xFFF0->get_object_position();
@@ -23670,7 +23670,7 @@ void Func0411 object#(0x411) () {
 		};
 	}
 	if (event == 0x0001) {
-		0xFE9C->item_say((("@Good " + var0003) + "!@"));
+		0xFE9C->item_say(("@Good " + var0003) + "!@");
 		Func097F(0xFFEF, "@Hush...@", 0x0002);
 		0xFFEF->set_schedule_type(0x0003);
 	}
@@ -25138,7 +25138,7 @@ void Func0417 object#(0x417) () {
 		var0003 = "evening";
 	}
 	if (event == 0x0001) {
-		0xFE9C->item_say((("@Good " + var0003) + ", miss.@"));
+		0xFE9C->item_say(("@Good " + var0003) + ", miss.@");
 		0xFFE9->Func07D1();
 		Func097F(0xFFE9, "@So?@", 0x0002);
 		0xFFE9->set_schedule_type(0x0003);
@@ -27218,7 +27218,7 @@ void Func041D object#(0x41D) () {
 			if (!gflags[0x00DD]) {
 				0xFFE3->item_say("@What shall I do?@");
 			} else {
-				0xFFE3->item_say((("@Hello, " + var0003) + "!@"));
+				0xFFE3->item_say(("@Hello, " + var0003) + "!@");
 			}
 		}
 	}
@@ -28279,7 +28279,7 @@ void Func041F object#(0x41F) () {
 				abort;
 			} else {
 				say("\"Greetings, Stranger from Another Land. Once again, I am speaking to thee by means of a magic scroll.\"");
-				var0009 = UI_get_npc_name((0x0000 - 0xFFE1->get_npc_id()));
+				var0009 = UI_get_npc_name(0x0000 - 0xFFE1->get_npc_id());
 				say("\"If thou art looking for thy companion, ",
 				    var0009,
 				    ", look no further -- I have kidnapped him.\"");
@@ -28375,7 +28375,7 @@ void Func041F object#(0x41F) () {
 						say("\"Then open thy mind to me, and let me withdraw the knowledge which I lust after!\"");
 						var0010 = Func0992(0x0001, "@No, my friend. Thou must not...!@", 0x0000, false);
 						if (var0010 != 0xFE9C) {
-							0xFFE1->set_npc_id((0x0000 - var0010));
+							0xFFE1->set_npc_id(0x0000 - var0010);
 							0x0000->set_conversation_slot();
 							say("\"Thy friends must learn not to interfere in the interests of mages. Let them learn now!!!\"");
 							var0008 = var0010->get_object_position();
@@ -28434,7 +28434,7 @@ void Func041F object#(0x41F) () {
 			}
 			gflags[0x00EA] = true;
 			if (var0010 != 0xFE9C) {
-				0xFFE1->set_npc_id((0x0000 - var0010));
+				0xFFE1->set_npc_id(0x0000 - var0010);
 				if (var0010->npc_nearby()) {
 					var0010->show_npc_face0(0x0000);
 					say("\"What! What's happening...\"");
@@ -36059,7 +36059,7 @@ void Func0434 object#(0x434) () {
 		};
 	}
 	if (event == 0x0001) {
-		0xFE9C->item_say((("@Good " + var0002) + ", barkeep.@"));
+		0xFE9C->item_say(("@Good " + var0002) + ", barkeep.@");
 		0xFFCC->Func07D1();
 		Func097F(0xFFCC, (((("@Good " + var0002) + ", ") + var0001) + ".@"), 0x0002);
 		0xFFCC->set_schedule_type(0x0003);
@@ -41203,7 +41203,7 @@ void Func0440 object#(0x440) () {
 	var0001 = 0xFFC0->get_item_flag(0x001C);
 	var0002 = Func0954();
 	if (gflags[0x008B] && ((event == 0x0000) && (!gflags[0x02E2]))) {
-		0xFFC0->set_npc_id((0xFFC0->get_npc_id() + 0x0001));
+		0xFFC0->set_npc_id(0xFFC0->get_npc_id() + 0x0001);
 		if (0xFFC0->get_npc_id() == 0x0005) {
 			Func080E();
 		}
@@ -51735,7 +51735,7 @@ void Func049D object#(0x49D) () {
 			Func097F(0xFF64, "@Leave him alone!@", 0x0005);
 		} else {
 			Func097F(0xFF63, "@I am not a spy...@", 0x0003);
-			0xFF63->set_npc_id((0xFF63->get_npc_id() + 0x0001));
+			0xFF63->set_npc_id(0xFF63->get_npc_id() + 0x0001);
 		}
 		0xFF63->set_schedule_type(0x0014);
 	}
@@ -51764,7 +51764,7 @@ void Func049E object#(0x49E) () {
 		var0000 = 0xFF62->approach_avatar(0x0078, 0x0028);
 		if (var0000) {
 			0xFF62->set_schedule_type(0x0014);
-			0xFF62->set_npc_id((0xFF62->get_npc_id() + 0x0001));
+			0xFF62->set_npc_id(0xFF62->get_npc_id() + 0x0001);
 		}
 		abort;
 	}
@@ -56162,7 +56162,7 @@ void Func04CF object#(0x4CF) () {
 			UI_sprite_effect(0x001A, var0006[0x0001], var0006[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			0xFF31->remove_npc();
 		} else {
-			0xFF31->item_say((("@Well done, my " + var0002) + "!@"));
+			0xFF31->item_say(("@Well done, my " + var0002) + "!@");
 			0xFF31->Func07D1();
 			0xFF31->show_npc_face0(0x0000);
 			say("\"Thou hast found the Silver Seed! Now all that remains is for thee to plant it here in this hallowed glade.");
@@ -58688,7 +58688,7 @@ void Func0600 object#(0x600) () {
 		if (var0002 == 0x01B3) {
 			var0003 = get_item_frame();
 			set_item_shape(0x01E1);
-			set_item_frame((var0003 + 0x0002));
+			set_item_frame(var0003 + 0x0002);
 		}
 		UI_play_sound_effect(0x0041);
 	} else {
@@ -60441,7 +60441,7 @@ void Func0623 object#(0x623) () {
 		var0000 = UI_get_party_list();
 		if (UI_get_array_size(var0000) > 0x0001) {
 			var0001 = 0xFE9C->get_npc_name();
-			Func094A((("Arise, " + var0001) + ". 'Tis time to continue the quest."));
+			Func094A(("Arise, " + var0001) + ". 'Tis time to continue the quest.");
 		}
 		for (var0004 in var0000 with var0002 to var0003) {
 			var0004->set_schedule_type(0x001F);
@@ -60805,7 +60805,7 @@ void Func0626 object#(0x626) () {
 			var000D = 0x0001;
 			while (var000D <= var0009) {
 				var000E = (((var000D - 0x0001) * 0x0003) + 0x0001);
-				if ((Func097E((var000C[0x0001] - var0008[var000E])) <= 0x0002) && (Func097E((var000C[0x0002] - var0008[(var000E + 0x0001)])) <= 0x0002)) {
+				if ((Func097E(var000C[0x0001] - var0008[var000E]) <= 0x0002) && (Func097E(var000C[0x0002] - var0008[(var000E + 0x0001)]) <= 0x0002)) {
 					var0007->remove_item();
 					var0008 = (var0008 & var000C);
 					var0009 = (var0009 + 0x0001);
@@ -66535,7 +66535,7 @@ void Func06A6 object#(0x6A6) () {
 				call Func07D9;
 			};
 		}
-		set_npc_id((var0000 + 0x0001));
+		set_npc_id(var0000 + 0x0001);
 	}
 }
 
@@ -66983,7 +66983,7 @@ void Func06B1 object#(0x6B1) () {
 
 	if (gflags[0x0004]) {
 		var0000 = get_item_quality();
-		var0001 = UI_get_npc_object((0x0000 - var0000));
+		var0001 = UI_get_npc_object(0x0000 - var0000);
 		if (var0001) {
 			if (var0001->get_distance(item) < 0x001E) {
 				var0001->kill_npc();
@@ -67536,7 +67536,7 @@ void Func06BC object#(0x6BC) () {
 				nohalt;
 				call Func06BC;
 			};
-			var0003 = var0000->set_item_quality((var0002 + 0x0001));
+			var0003 = var0000->set_item_quality(var0002 + 0x0001);
 			var0005 = Func0940(0xFE9C->get_object_position(), 0x000F);
 			UI_play_sound_effect(0x0074);
 			UI_sprite_effect(0x0015, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -67569,7 +67569,7 @@ void Func06BC object#(0x6BC) () {
 						wait 9;
 						call Func06BC;
 					};
-					var0003 = var0000->set_item_quality((var0002 + 0x0001));
+					var0003 = var0000->set_item_quality(var0002 + 0x0001);
 					UI_set_weather(0x0000);
 				} else {
 					var0003 = script var0000 after 10 ticks {
@@ -67599,12 +67599,12 @@ void Func06BC object#(0x6BC) () {
 				nohalt;
 				call Func06BC;
 			};
-			var0003 = var0000->set_item_quality((var0002 + 0x0001));
+			var0003 = var0000->set_item_quality(var0002 + 0x0001);
 			0xFE9C->clear_item_flag(0x0010);
 			Func097F(0xFFFD, "@A lute!@", 0x0000);
 		}
 		if (var0002 == (var0001 + 0x0002)) {
-			var0003 = var0000->set_item_quality((var0002 + 0x0001));
+			var0003 = var0000->set_item_quality(var0002 + 0x0001);
 			var0003 = script Func09A0(0x0005, 0x0001) after 45 ticks {
 				nohalt;
 				call Func043A;
@@ -67620,7 +67620,7 @@ void Func06BC object#(0x6BC) () {
 			};
 		}
 		if (var0002 == (var0001 + 0x0003)) {
-			var0003 = var0000->set_item_quality((var0002 + 0x0001));
+			var0003 = var0000->set_item_quality(var0002 + 0x0001);
 			var0003 = 0xFFCB->approach_avatar(0x0078, 0x0028);
 			if (var0003) {
 				0xFFCB->set_schedule_type(0x0009);
@@ -69344,7 +69344,7 @@ void Func06DB object#(0x6DB) () {
 				nohalt;
 				call Func06DB;
 			};
-			var0002 = set_item_quality((var0000 - 0x0064));
+			var0002 = set_item_quality(var0000 - 0x0064);
 			if (var0000 == 0x0065) {
 				0xFE9C->item_say("@I have a bad feeling...@");
 			}
@@ -69383,7 +69383,7 @@ void Func06DB object#(0x6DB) () {
 		if (var0000 == 0x000A) {
 			var0003 = [0x035F, 0x0126, 0x0000];
 		}
-		var0002 = set_item_quality((var0000 + 0x0064));
+		var0002 = set_item_quality(var0000 + 0x0064);
 		0xFE9B->move_object(var0003);
 		UI_play_sound_effect(0x0077);
 		0xFE9C->obj_sprite_effect(0x002F, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -69659,7 +69659,7 @@ void Func06E1 object#(0x6E1) () {
 
 	var0000 = 0xFE9C->get_object_position();
 	var0001 = get_object_position();
-	if ((event == 0x0003) && (Func097E((var0000[0x0003] - var0001[0x0003])) < 0x0003)) {
+	if ((event == 0x0003) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
 		if (gflags[0x0004] == true) {
 			0xFE9C->set_item_flag(0x0010);
 			var0002 = get_object_position();
@@ -69774,7 +69774,7 @@ void Func06E3 object#(0x6E3) () {
 	}
 	var0000 = 0xFE9C->get_object_position();
 	var0001 = get_object_position();
-	if ((event == 0x0003) && (Func097E((var0000[0x0003] - var0001[0x0003])) < 0x0003)) {
+	if ((event == 0x0003) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
 		var0002 = get_item_quality();
 		if (var0002 == 0x0000) {
 			UI_sprite_effect(0x0015, 0x071E, 0x05A6, 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -69902,7 +69902,7 @@ void Func06E4 object#(0x6E4) () {
 	}
 	var0000 = 0xFE9C->get_object_position();
 	var0001 = get_object_position();
-	if ((event == 0x0003) && (Func097E((var0000[0x0003] - var0001[0x0003])) < 0x0003)) {
+	if ((event == 0x0003) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
 		UI_sprite_effect(0x0015, 0x06D8, 0x0591, 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_play_sound_effect(0x0051);
 		0xFEFA->move_object([0x06D8, 0x0591, 0x0000]);
@@ -69984,7 +69984,7 @@ void Func06E5 object#(0x6E5) () {
 	}
 	var0000 = 0xFE9C->get_object_position();
 	var0001 = get_object_position();
-	if ((event == 0x0003) && (Func097E((var0000[0x0003] - var0001[0x0003])) < 0x0003)) {
+	if ((event == 0x0003) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
 		UI_sprite_effect(0x0015, 0x06F2, 0x05A5, 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_play_sound_effect(0x0051);
 		0xFEFA->move_object([0x06F2, 0x05A5, 0x0000]);
@@ -70078,7 +70078,7 @@ void Func06E6 object#(0x6E6) () {
 	}
 	var0000 = 0xFE9C->get_object_position();
 	var0001 = get_object_position();
-	if ((event == 0x0003) && (Func097E((var0000[0x0003] - var0001[0x0003])) < 0x0003)) {
+	if ((event == 0x0003) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
 		var0002 = get_item_quality();
 		var0003 = 0x0000;
 		var0004 = 0x0000;
@@ -70314,7 +70314,7 @@ void Func06E7 object#(0x6E7) () {
 	}
 	var0000 = 0xFE9C->get_object_position();
 	var0001 = get_object_position();
-	if ((event == 0x0003) && (Func097E((var0000[0x0003] - var0001[0x0003])) < 0x0003)) {
+	if ((event == 0x0003) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
 		UI_sprite_effect(0x0015, 0x06C9, 0x0588, 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_play_sound_effect(0x0051);
 		0xFEFA->move_object([0x06C9, 0x0588, 0x0000]);
@@ -70371,7 +70371,7 @@ void Func06E8 object#(0x6E8) () {
 
 	var0000 = 0xFE9C->get_object_position();
 	var0001 = get_object_position();
-	if ((event == 0x0003) && (Func097E((var0000[0x0003] - var0001[0x0003])) < 0x0003)) {
+	if ((event == 0x0003) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
 		var0002 = find_nearby(0x00C8, 0x0028, 0x0010);
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0006 = script var0005 {
@@ -70578,7 +70578,7 @@ void Func06EC object#(0x6EC) () {
 	}
 	var0000 = 0xFE9C->get_object_position();
 	var0001 = get_object_position();
-	if ((event == 0x0003) && (Func097E((var0000[0x0003] - var0001[0x0003])) < 0x0003)) {
+	if ((event == 0x0003) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
 		if (!gflags[0x0259]) {
 			var0002 = 0x0000;
 			var0003 = get_item_quality();
@@ -72340,13 +72340,13 @@ void Func071D object#(0x71D) () {
 			var0002 = find_nearby(0x00F6, 0x0019, 0x0000);
 			for (var0007 in var0002 with var0008 to var0009) {
 				var0003 = var0007->get_item_frame();
-				var0007->set_item_frame((var0003 - 0x0002));
+				var0007->set_item_frame(var0003 - 0x0002);
 				UI_sprite_effect(0x0015, (var0001[0x0001] - 0x0002), (var0001[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 			}
 			var0002 = find_nearby(0x0204, 0x0019, 0x0000);
 			for (var0007 in var0002 with var000A to var000B) {
 				var0003 = var0007->get_item_frame();
-				var0007->set_item_frame((var0003 - 0x0002));
+				var0007->set_item_frame(var0003 - 0x0002);
 				UI_sprite_effect(0x0015, (var0001[0x0001] - 0x0002), (var0001[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 			}
 		} else {
@@ -72376,13 +72376,13 @@ void Func071D object#(0x71D) () {
 			var0002 = find_nearby(0x00F6, 0x0019, 0x0000);
 			for (var0007 in var0002 with var000E to var000F) {
 				var0003 = var0007->get_item_frame();
-				var0007->set_item_frame((var0003 - 0x0002));
+				var0007->set_item_frame(var0003 - 0x0002);
 				UI_sprite_effect(0x0015, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			}
 			var0002 = find_nearby(0x0204, 0x0019, 0x0000);
 			for (var0007 in var0002 with var0010 to var0011) {
 				var0003 = var0007->get_item_frame();
-				var0007->set_item_frame((var0003 - 0x0002));
+				var0007->set_item_frame(var0003 - 0x0002);
 				UI_sprite_effect(0x0015, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			}
 		}
@@ -72669,7 +72669,7 @@ void Func071F object#(0x71F) () {
 				var000C->remove_item();
 				var000F = UI_create_new_object(0x039F);
 				if (var000F) {
-					var000F->set_item_frame((var000E + 0x0004));
+					var000F->set_item_frame(var000E + 0x0004);
 					var0002 = UI_update_last_created(var000D);
 					UI_play_sound_effect(0x0004);
 					UI_sprite_effect(0x0015, var000D[0x0001], (var000D[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -73280,7 +73280,7 @@ void Func0724 object#(0x724) () {
 				};
 			}
 			var0007 = get_item_quality();
-			var0006 = set_item_quality((var0007 + 0x0001));
+			var0006 = set_item_quality(var0007 + 0x0001);
 			var0007 = (var0007 + 0x0001);
 			var0008 = 0x0000;
 			if (var0007 == 0x0004) {
@@ -74664,7 +74664,7 @@ void Func073B object#(0x73B) () {
 			var000B[0x0001] = (var000B[0x0001] * 0xFFFF);
 			var000B[0x0002] = (var000B[0x0002] * 0xFFFF);
 			UI_sprite_effect(0x0020, var0000[0x0001], var0000[0x0002], var000B[0x0001], var000B[0x0002], 0x0000, var000C);
-			var0002 = var0003->set_item_quality((var0004 + 0x0001));
+			var0002 = var0003->set_item_quality(var0004 + 0x0001);
 			var0002 = script var0003 {
 				nohalt;
 				wait (var000C + 0x000A);
@@ -75238,9 +75238,9 @@ void Func075F object#(0x75F) () {
 	var0000 = find_nearby(0x0376, 0x0005, 0x0000);
 	var0001 = var0000->get_item_frame();
 	if ((var0001 % 0x0002) == 0x0000) {
-		var0000->set_item_frame((var0001 + 0x0001));
+		var0000->set_item_frame(var0001 + 0x0001);
 	} else {
-		var0000->set_item_frame((var0001 - 0x0001));
+		var0000->set_item_frame(var0001 - 0x0001);
 	}
 	UI_play_sound_effect2(0x0046, var0000);
 	var0002 = var0000->get_item_quality();
@@ -75881,7 +75881,7 @@ void Func0768 object#(0x768) () {
 				var0004->set_alignment(0x0002);
 				var0004->clear_item_flag(0x0012);
 				var0004->clear_item_flag(0x001D);
-				var0004->set_npc_id((var0002 + 0x000A));
+				var0004->set_npc_id(var0002 + 0x000A);
 				var0006 = var0004->get_npc_prop(0x0000);
 				var0007 = (0x000B - var0006);
 				var0005 = var0004->set_npc_prop(0x0000, var0007);
@@ -76275,7 +76275,7 @@ void Func0780 object#(0x780) () {
 	if (event == 0x0002) {
 		var0000 = find_nearby(0x037C, 0x0019, 0x0000);
 		var0001 = var0000->get_item_quality();
-		var0002 = var0000->set_item_quality((var0001 + 0x0001));
+		var0002 = var0000->set_item_quality(var0001 + 0x0001);
 		if (var0000) {
 			if (var0001 > 0x0014) {
 				var0003 = var0000->get_object_position();
@@ -77159,7 +77159,7 @@ void Func07AE object#(0x7AE) () {
 				0xFFFE->clear_item_say();
 				0xFFFE->show_npc_face0(0x0000);
 				if ((var0000 < 0x0000) || ((var0000 > 0x0006) || (var0000 == 0x0005))) {
-					UI_error_message(("Tell Bill Qual is " + var0000));
+					UI_error_message("Tell Bill Qual is " + var0000);
 				}
 				if (var0000 == 0x0001) {
 					if (Func097D(0xFE9B, 0x0001, 0x0247, 0xFE99, 0xFE99)) {
@@ -77308,7 +77308,7 @@ void Func07B1 object#(0x7B1) () {
 
 	var0000 = 0xFE9C->get_object_position();
 	var0001 = get_object_position();
-	if ((event == 0x0003) && (Func097E((var0000[0x0003] - var0001[0x0003])) < 0x0003)) {
+	if ((event == 0x0003) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
 		var0002 = get_item_quality();
 		if (var0002 == 0x0000) {
 			UI_error_message("Error: Quality not set for usecode egg. (uegg_269)");
@@ -77719,7 +77719,7 @@ void Func07D3 object#(0x7D3) () {
 		var0008 = 0x0000;
 		for (var000B in var0007 with var0009 to var000A) {
 			var0006 = var000B->get_object_position();
-			UI_sprite_effect((0x0028 + var0008), var0006[0x0001], var0006[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
+			UI_sprite_effect(0x0028 + var0008, var0006[0x0001], var0006[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_sprite_effect(0x001B, (var0006[0x0001] - 0x0002), (var0006[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_play_sound_effect(0x002A);
 			var0008 = (var0008 + 0x0001);
@@ -77828,7 +77828,7 @@ void Func07D4 object#(0x7D4) () {
 		if (var0004 >= 0x0004) {
 			var0003 = true;
 		}
-		var0002 = var0001->set_item_quality((var0004 + 0x0001));
+		var0002 = var0001->set_item_quality(var0004 + 0x0001);
 		var0004 = get_item_quality();
 		if (var0004 == 0x0001) {
 			Func08B9(0x0001, var0003);
@@ -80269,7 +80269,7 @@ void Func07F8 object#(0x7F8) () {
 		if (var000D == 0x00FD) {
 			var0001 = Func09A0(0x0001, 0x0001)->set_item_quality(0x0014);
 		} else {
-			var0001 = Func09A0(0x0001, 0x0001)->set_item_quality((var000D + 0x0001));
+			var0001 = Func09A0(0x0001, 0x0001)->set_item_quality(var000D + 0x0001);
 		}
 		if (var000D > 0x00F7) {
 			Func0939(var000D);
@@ -80731,7 +80731,7 @@ void Func07FB object#(0x7FB) () {
 	}
 	if (var0000 == 0x001F) {
 		gflags[0x0177] = true;
-		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality((var0000 + 0x0001));
+		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(var0000 + 0x0001);
 		UI_init_conversation();
 		0xFFCD->show_npc_face0(0x0000);
 		say("\"Good day, Delin... Ah, the Oracle is the other way.\"");
@@ -80762,7 +80762,7 @@ void Func07FB object#(0x7FB) () {
 		abort;
 	}
 	if (var0000 == 0x0020) {
-		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality((var0000 + 0x0001));
+		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(var0000 + 0x0001);
 		UI_init_conversation();
 		0xFFCD->show_npc_face0(0x0000);
 		say("\"Tell me, Delin, hast thou ever met the accused?\"");
@@ -80997,7 +80997,7 @@ void Func07FB object#(0x7FB) () {
 			say("\"Beauty lies in the eye of the beholder...\"");
 		}
 		UI_end_conversation();
-		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality((var0000 + 0x0001));
+		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(var0000 + 0x0001);
 		var0004 = script 0xFFCB {
 			nohalt;
 			actor frame bowing;
@@ -81018,7 +81018,7 @@ void Func07FB object#(0x7FB) () {
 		0xFFCD->show_npc_face1(0x0000);
 		say("\"No forgiveness necessary. I thank thee for performing thy duty.\"");
 		UI_end_conversation();
-		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality((var0000 + 0x0001));
+		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(var0000 + 0x0001);
 		var0004 = script 0xFFCB {
 			nohalt;
 			actor frame bowing;
@@ -81074,7 +81074,7 @@ void Func07FB object#(0x7FB) () {
 		0x0000->set_conversation_slot();
 		say("\"Enough! Leave our fair city now.\"");
 		UI_end_conversation();
-		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality((var0000 + 0x0001));
+		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(var0000 + 0x0001);
 		Func097F(0xFFCD, "@Exile the blasphemer!@", 0x0000);
 		Func097F(0xFFCA, "@Stone him!@", 0x0001);
 		Func097F(0xFFC3, "@Beware of Leon!@", 0x0003);
@@ -81163,11 +81163,11 @@ void Func07FB object#(0x7FB) () {
 			actor frame bowing;
 			actor frame standing;
 		};
-		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality((var0000 + 0x0001));
+		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(var0000 + 0x0001);
 		abort;
 	}
 	if (var0000 == 0x0031) {
-		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality((var0000 + 0x0001));
+		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(var0000 + 0x0001);
 		var0004 = 0xFFCB->set_to_attack(0xFFC4, 0x0118);
 		var0004 = script 0xFFCB {
 			actor frame strike_1h;
@@ -82526,7 +82526,7 @@ void Func0803 0x803 () {
 					if (0x001F < (0xFFD2->get_npc_id() + 0x0006)) {
 						0xFFD2->set_npc_id(0x001F);
 					} else {
-						0xFFD2->set_npc_id((0xFFD2->get_npc_id() + 0x0006));
+						0xFFD2->set_npc_id(0xFFD2->get_npc_id() + 0x0006);
 					}
 				} else {
 					say("\"Perhaps another purchase, ",
@@ -82660,7 +82660,7 @@ var Func0804 0x804 (var var0000, var var0001) {
 				    "?\"");
 				if (Func0955()) {
 					if (var000C > 0x0001) {
-						0xFFD2->set_npc_id((var000C - 0x0002));
+						0xFFD2->set_npc_id(var000C - 0x0002);
 					}
 					return var0005;
 				} else if (var0011 == 0x0001) {
@@ -82677,7 +82677,7 @@ var Func0804 0x804 (var var0000, var var0001) {
 				if (0x001F < (var000C + 0x000A)) {
 					0xFFD2->set_npc_id(0x001F);
 				} else {
-					0xFFD2->set_npc_id((var000C + 0x000A));
+					0xFFD2->set_npc_id(var000C + 0x000A);
 				}
 				return 0x0000;
 			}
@@ -82687,7 +82687,7 @@ var Func0804 0x804 (var var0000, var var0001) {
 					    var0005,
 					    " is my final offer. Dost thou accept?\"");
 					if (var000C < 0x001C) {
-						0xFFD2->set_npc_id((var000C + 0x0004));
+						0xFFD2->set_npc_id(var000C + 0x0004);
 					}
 					if (Func0955()) {
 						return var0005;
@@ -82698,7 +82698,7 @@ var Func0804 0x804 (var var0000, var var0001) {
 					    var0005,
 					    " filari is my final offer.\"");
 					if (var000C < 0x001E) {
-						0xFFD2->set_npc_id((var000C + 0x0002));
+						0xFFD2->set_npc_id(var000C + 0x0002);
 					}
 				}
 			} else {
@@ -82781,7 +82781,7 @@ var Func0804 0x804 (var var0000, var var0001) {
 						    " filari is where I stand.\"");
 					}
 					if (var000C < 0x001F) {
-						0xFFD2->set_npc_id((var000C + 0x0001));
+						0xFFD2->set_npc_id(var000C + 0x0001);
 					}
 				}
 			}
@@ -82900,7 +82900,7 @@ void Func0805 0x805 () {
 					if (0x001F < (0xFFDA->get_npc_id() + 0x0006)) {
 						0xFFDA->set_npc_id(0x001F);
 					} else {
-						0xFFDA->set_npc_id((0xFFDA->get_npc_id() + 0x0006));
+						0xFFDA->set_npc_id(0xFFDA->get_npc_id() + 0x0006);
 					}
 				} else {
 					say("\"Wouldst thou care for more?\"");
@@ -83013,7 +83013,7 @@ void Func0806 0x806 () {
 					if (0x001F < (0xFFDA->get_npc_id() + 0x0006)) {
 						0xFFDA->set_npc_id(0x001F);
 					} else {
-						0xFFDA->set_npc_id((0xFFDA->get_npc_id() + 0x0006));
+						0xFFDA->set_npc_id(0xFFDA->get_npc_id() + 0x0006);
 					}
 					abort;
 				}
@@ -83143,7 +83143,7 @@ var Func0807 0x807 (var var0000, var var0001) {
 				    "?\"");
 				if (Func0955()) {
 					if (var000B > 0x0001) {
-						0xFFDA->set_npc_id((var000B - 0x0002));
+						0xFFDA->set_npc_id(var000B - 0x0002);
 					}
 					return var0004;
 				} else if (var0010 == 0x0001) {
@@ -83158,7 +83158,7 @@ var Func0807 0x807 (var var0000, var var0001) {
 				if (0x001F < (var000B + 0x000A)) {
 					0xFFDA->set_npc_id(0x001F);
 				} else {
-					0xFFDA->set_npc_id((var000B + 0x000A));
+					0xFFDA->set_npc_id(var000B + 0x000A);
 				}
 				return 0x0000;
 			}
@@ -83168,7 +83168,7 @@ var Func0807 0x807 (var var0000, var var0001) {
 					    var0004,
 					    " is my final offer.\" ~\"Dost thou accept?\"");
 					if (var000B < 0x001C) {
-						0xFFDA->set_npc_id((var000B + 0x0004));
+						0xFFDA->set_npc_id(var000B + 0x0004);
 					}
 					if (Func0955()) {
 						return var0004;
@@ -83179,7 +83179,7 @@ var Func0807 0x807 (var var0000, var var0001) {
 					    var0004,
 					    " is my final offer.\"");
 					if (var000B < 0x001E) {
-						0xFFDA->set_npc_id((var000B + 0x0002));
+						0xFFDA->set_npc_id(var000B + 0x0002);
 					}
 				}
 			} else {
@@ -83265,7 +83265,7 @@ var Func0807 0x807 (var var0000, var var0001) {
 						    " is where I stand!\"");
 					}
 					if (var000B < 0x001F) {
-						0xFFDA->set_npc_id((var000B + 0x0001));
+						0xFFDA->set_npc_id(var000B + 0x0001);
 					}
 				}
 			}
@@ -84455,7 +84455,7 @@ void Func080C 0x80C () {
 					if (0x001F < (0xFFF3->get_npc_id() + 0x0004)) {
 						0xFFF3->set_npc_id(0x001F);
 					} else {
-						0xFFF3->set_npc_id((0xFFF3->get_npc_id() + 0x0004));
+						0xFFF3->set_npc_id(0xFFF3->get_npc_id() + 0x0004);
 					}
 				} else {
 					say("\"Dost thou wish to purchase anything else?\"");
@@ -84576,7 +84576,7 @@ var Func080D 0x80D (var var0000, var var0001) {
 				    "?\"");
 				if (Func0955()) {
 					if (var000B > 0x0001) {
-						0xFFF3->set_npc_id((var000B - 0x0002));
+						0xFFF3->set_npc_id(var000B - 0x0002);
 					}
 					return var0004;
 				} else if (var0010 == 0x0001) {
@@ -84593,7 +84593,7 @@ var Func080D 0x80D (var var0000, var var0001) {
 				if (0x001F < (var000B + 0x000A)) {
 					0xFFF3->set_npc_id(0x001F);
 				} else {
-					0xFFF3->set_npc_id((var000B + 0x000A));
+					0xFFF3->set_npc_id(var000B + 0x000A);
 				}
 				return 0x0000;
 			}
@@ -84605,7 +84605,7 @@ var Func080D 0x80D (var var0000, var var0001) {
 					    var0004,
 					    " guilders. Dost thou accept?\"");
 					if (var000B < 0x001C) {
-						0xFFF3->set_npc_id((var000B + 0x0004));
+						0xFFF3->set_npc_id(var000B + 0x0004);
 					}
 					if (Func0955()) {
 						return var0004;
@@ -84616,7 +84616,7 @@ var Func080D 0x80D (var var0000, var var0001) {
 					    var0004,
 					    " guilders is my final offer. Is this acceptable to thee?\"");
 					if (var000B < 0x001E) {
-						0xFFF3->set_npc_id((var000B + 0x0002));
+						0xFFF3->set_npc_id(var000B + 0x0002);
 					}
 				}
 			} else {
@@ -84689,7 +84689,7 @@ var Func080D 0x80D (var var0000, var var0001) {
 						    " guilders is where I must stand.\"");
 					}
 					if (var000B < 0x001F) {
-						0xFFF3->set_npc_id((var000B + 0x0001));
+						0xFFF3->set_npc_id(var000B + 0x0001);
 					}
 				}
 			}
@@ -85099,7 +85099,7 @@ void Func0811 0x811 () {
 					if (0x001F < (0xFFBF->get_npc_id() + 0x0006)) {
 						0xFFBF->set_npc_id(0x001F);
 					} else {
-						0xFFBF->set_npc_id((0xFFBF->get_npc_id() + 0x0006));
+						0xFFBF->set_npc_id(0xFFBF->get_npc_id() + 0x0006);
 					}
 				} else {
 					say("\"Wouldst thou care for more?\"");
@@ -85235,7 +85235,7 @@ var Func0812 0x812 (var var0000, var var0001) {
 				    "?\"");
 				if (Func0955()) {
 					if (var000C > 0x0001) {
-						0xFFBF->set_npc_id((var000C - 0x0002));
+						0xFFBF->set_npc_id(var000C - 0x0002);
 					}
 					return var0005;
 				} else if (var0011 == 0x0001) {
@@ -85253,7 +85253,7 @@ var Func0812 0x812 (var var0000, var var0001) {
 				if (0x001F < (var000C + 0x000A)) {
 					0xFFBF->set_npc_id(0x001F);
 				} else {
-					0xFFBF->set_npc_id((var000C + 0x000A));
+					0xFFBF->set_npc_id(var000C + 0x000A);
 				}
 				return 0x0000;
 			}
@@ -85263,7 +85263,7 @@ var Func0812 0x812 (var var0000, var var0001) {
 					    var0005,
 					    " was my final offer. Dost thou accept?\"");
 					if (var000C < 0x001C) {
-						0xFFBF->set_npc_id((var000C + 0x0004));
+						0xFFBF->set_npc_id(var000C + 0x0004);
 					}
 					if (Func0955()) {
 						return var0005;
@@ -85274,7 +85274,7 @@ var Func0812 0x812 (var var0000, var var0001) {
 					    var0005,
 					    " monetari is my final offer.\"");
 					if (var000C < 0x001E) {
-						0xFFBF->set_npc_id((var000C + 0x0002));
+						0xFFBF->set_npc_id(var000C + 0x0002);
 					}
 				}
 			} else {
@@ -85355,7 +85355,7 @@ var Func0812 0x812 (var var0000, var var0001) {
 						    " monetari is as low as I will go!\"");
 					}
 					if (var000C < 0x001F) {
-						0xFFBF->set_npc_id((var000C + 0x0001));
+						0xFFBF->set_npc_id(var000C + 0x0001);
 					}
 				}
 			}
@@ -85725,7 +85725,7 @@ var Func0817 0x817 (var var0000, var var0001) {
 				    "?\"");
 				if (Func0955() == true) {
 					if (var0009 > 0x0001) {
-						0xFFF2->set_npc_id((var0009 - 0x0002));
+						0xFFF2->set_npc_id(var0009 - 0x0002);
 					}
 					return var0002;
 				} else if (var000E == 0x0001) {
@@ -85740,7 +85740,7 @@ var Func0817 0x817 (var var0000, var var0001) {
 				if (0x001F < (var0009 + 0x000A)) {
 					0xFFF2->set_npc_id(0x001F);
 				} else {
-					0xFFF2->set_npc_id((var0009 + 0x000A));
+					0xFFF2->set_npc_id(var0009 + 0x000A);
 				}
 				return 0x0000;
 			}
@@ -85750,7 +85750,7 @@ var Func0817 0x817 (var var0000, var var0001) {
 					    var0002,
 					    " is my final offer. Dost thou want it at this price?\"");
 					if (var0009 < 0x001C) {
-						0xFFF2->set_npc_id((var0009 + 0x0004));
+						0xFFF2->set_npc_id(var0009 + 0x0004);
 					}
 					if (Func0955() == true) {
 						return var0002;
@@ -85761,7 +85761,7 @@ var Func0817 0x817 (var var0000, var var0001) {
 					    var0002,
 					    " is my final offer.  I will go no lower.\"");
 					if (var0009 < 0x001E) {
-						0xFFF2->set_npc_id((var0009 + 0x0002));
+						0xFFF2->set_npc_id(var0009 + 0x0002);
 					}
 				}
 			} else {
@@ -85834,7 +85834,7 @@ var Func0817 0x817 (var var0000, var var0001) {
 						    ".\"");
 					}
 					if (var0009 < 0x001F) {
-						0xFFF2->set_npc_id((var0009 + 0x0001));
+						0xFFF2->set_npc_id(var0009 + 0x0001);
 					}
 				}
 			}
@@ -86184,7 +86184,7 @@ void Func0818 0x818 () {
 					if (0x001F < (0xFFD1->get_npc_id() + 0x0006)) {
 						0xFFD1->set_npc_id(0x001F);
 					} else {
-						0xFFD1->set_npc_id((0xFFD1->get_npc_id() + 0x0006));
+						0xFFD1->set_npc_id(0xFFD1->get_npc_id() + 0x0006);
 					}
 				} else {
 					say("\"Dost thou desire another purchase?\"");
@@ -86308,7 +86308,7 @@ var Func0819 0x819 (var var0000, var var0001) {
 				    "?\"");
 				if (Func0955()) {
 					if (var000A > 0x0001) {
-						0xFFD1->set_npc_id((var000A - 0x0002));
+						0xFFD1->set_npc_id(var000A - 0x0002);
 					}
 					return var0003;
 				} else if (var000F == 0x0001) {
@@ -86323,7 +86323,7 @@ var Func0819 0x819 (var var0000, var var0001) {
 				if (0x001F < (var000A + 0x000A)) {
 					0xFFD1->set_npc_id(0x001F);
 				} else {
-					0xFFD1->set_npc_id((var000A + 0x000A));
+					0xFFD1->set_npc_id(var000A + 0x000A);
 				}
 				return 0x0000;
 			}
@@ -86335,7 +86335,7 @@ var Func0819 0x819 (var var0000, var var0001) {
 					    var0003,
 					    " was my final offer. Dost thou accept?\"");
 					if (var000A < 0x001C) {
-						0xFFD1->set_npc_id((var000A + 0x0004));
+						0xFFD1->set_npc_id(var000A + 0x0004);
 					}
 					if (Func0955()) {
 						return var0003;
@@ -86346,7 +86346,7 @@ var Func0819 0x819 (var var0000, var var0001) {
 					    var0003,
 					    " filari is my final offer.\"");
 					if (var000A < 0x001E) {
-						0xFFD1->set_npc_id((var000A + 0x0002));
+						0xFFD1->set_npc_id(var000A + 0x0002);
 					}
 				}
 			} else {
@@ -86425,7 +86425,7 @@ var Func0819 0x819 (var var0000, var var0001) {
 						    " filari is where I stand.\"");
 					}
 					if (var000A < 0x001F) {
-						0xFFD1->set_npc_id((var000A + 0x0001));
+						0xFFD1->set_npc_id(var000A + 0x0001);
 					}
 				}
 			}
@@ -86768,7 +86768,7 @@ void Func081B 0x81B () {
 					if (0x001F < (0xFFD0->get_npc_id() + 0x0006)) {
 						0xFFD0->set_npc_id(0x001F);
 					} else {
-						0xFFD0->set_npc_id((0xFFD0->get_npc_id() + 0x0006));
+						0xFFD0->set_npc_id(0xFFD0->get_npc_id() + 0x0006);
 					}
 				} else {
 					say("\"Dost thou desire another purchase?\"");
@@ -86888,7 +86888,7 @@ var Func081C 0x81C (var var0000, var var0001) {
 				    "?\"");
 				if (Func0955()) {
 					if (var000A > 0x0001) {
-						0xFFD0->set_npc_id((var000A - 0x0002));
+						0xFFD0->set_npc_id(var000A - 0x0002);
 					}
 					return var0003;
 				} else if (var000F == 0x0001) {
@@ -86903,7 +86903,7 @@ var Func081C 0x81C (var var0000, var var0001) {
 				if (0x001F < (var000A + 0x000A)) {
 					0xFFD0->set_npc_id(0x001F);
 				} else {
-					0xFFD0->set_npc_id((var000A + 0x000A));
+					0xFFD0->set_npc_id(var000A + 0x000A);
 				}
 				return 0x0000;
 			}
@@ -86913,7 +86913,7 @@ var Func081C 0x81C (var var0000, var var0001) {
 					    var0003,
 					    " was my final offer. Dost thou accept or not?\"");
 					if (var000A < 0x001C) {
-						0xFFD0->set_npc_id((var000A + 0x0004));
+						0xFFD0->set_npc_id(var000A + 0x0004);
 					}
 					if (Func0955()) {
 						return var0003;
@@ -86924,7 +86924,7 @@ var Func081C 0x81C (var var0000, var var0001) {
 					    var0003,
 					    " filari is my final offer.\"");
 					if (var000A < 0x001E) {
-						0xFFD0->set_npc_id((var000A + 0x0002));
+						0xFFD0->set_npc_id(var000A + 0x0002);
 					}
 				}
 			} else {
@@ -86998,7 +86998,7 @@ var Func081C 0x81C (var var0000, var var0001) {
 						    " filari is where I stand. I know the value of my wares.\"");
 					}
 					if (var000A < 0x001F) {
-						0xFFD0->set_npc_id((var000A + 0x0001));
+						0xFFD0->set_npc_id(var000A + 0x0001);
 					}
 				}
 			}
@@ -87789,7 +87789,7 @@ void Func081E 0x81E () {
 				if (0x001F < (0xFFD7->get_npc_id() + 0x0006)) {
 					0xFFD7->set_npc_id(0x001F);
 				} else {
-					0xFFD7->set_npc_id((0xFFD7->get_npc_id() + 0x0006));
+					0xFFD7->set_npc_id(0xFFD7->get_npc_id() + 0x0006);
 				}
 			}
 			say("\"Wouldst thou care for more?\"");
@@ -87917,7 +87917,7 @@ void Func081F 0x81F () {
 				if (0x001F < (0xFFD7->get_npc_id() + 0x0006)) {
 					0xFFD7->set_npc_id(0x001F);
 				} else {
-					0xFFD7->set_npc_id((0xFFD7->get_npc_id() + 0x0006));
+					0xFFD7->set_npc_id(0xFFD7->get_npc_id() + 0x0006);
 				}
 			}
 			say("\"Wouldst thou care for more?\"");
@@ -88040,7 +88040,7 @@ var Func0820 0x820 (var var0000, var var0001) {
 				    "?\"");
 				if (Func0955()) {
 					if (var000B > 0x0001) {
-						0xFFD7->set_npc_id((var000B - 0x0002));
+						0xFFD7->set_npc_id(var000B - 0x0002);
 					}
 					return var0004;
 				} else if (var0010 == 0x0001) {
@@ -88057,7 +88057,7 @@ var Func0820 0x820 (var var0000, var var0001) {
 				if (0x001F < (var000B + 0x000A)) {
 					0xFFD7->set_npc_id(0x001F);
 				} else {
-					0xFFD7->set_npc_id((var000B + 0x000A));
+					0xFFD7->set_npc_id(var000B + 0x000A);
 				}
 				return 0x0000;
 			}
@@ -88067,7 +88067,7 @@ var Func0820 0x820 (var var0000, var var0001) {
 					    var0004,
 					    " is my final offer. Dost thou accept?\"");
 					if (var000B < 0x001C) {
-						0xFFD7->set_npc_id((var000B + 0x0004));
+						0xFFD7->set_npc_id(var000B + 0x0004);
 					}
 					if (Func0955()) {
 						return var0004;
@@ -88078,7 +88078,7 @@ var Func0820 0x820 (var var0000, var var0001) {
 					    var0004,
 					    " is my final offer.\"");
 					if (var000B < 0x001E) {
-						0xFFD7->set_npc_id((var000B + 0x0002));
+						0xFFD7->set_npc_id(var000B + 0x0002);
 					}
 				}
 			} else {
@@ -88151,7 +88151,7 @@ var Func0820 0x820 (var var0000, var var0001) {
 						    " is where I stand!\"");
 					}
 					if (var000B < 0x001F) {
-						0xFFD7->set_npc_id((var000B + 0x0001));
+						0xFFD7->set_npc_id(var000B + 0x0001);
 					}
 				}
 			}
@@ -88533,7 +88533,7 @@ void Func0827 0x827 () {
 					if (0x001F < (0xFFF1->get_npc_id() + 0x0006)) {
 						0xFFF1->set_npc_id(0x001F);
 					} else {
-						0xFFF1->set_npc_id((0xFFF1->get_npc_id() + 0x0006));
+						0xFFF1->set_npc_id(0xFFF1->get_npc_id() + 0x0006);
 					}
 				} else {
 					say("\"Dost thou care for something else?\"");
@@ -88669,7 +88669,7 @@ var Func0828 0x828 (var var0000, var var0001) {
 				    "?\"");
 				if (Func0955()) {
 					if (var000C > 0x0001) {
-						0xFFF1->set_npc_id((var000C - 0x0002));
+						0xFFF1->set_npc_id(var000C - 0x0002);
 					}
 					return var0005;
 				} else if (var0011 == 0x0001) {
@@ -88685,7 +88685,7 @@ var Func0828 0x828 (var var0000, var var0001) {
 				if (0x001F < (var000C + 0x000A)) {
 					0xFFF1->set_npc_id(0x001F);
 				} else {
-					0xFFF1->set_npc_id((var000C + 0x000A));
+					0xFFF1->set_npc_id(var000C + 0x000A);
 				}
 				return 0x0000;
 			}
@@ -88695,7 +88695,7 @@ var Func0828 0x828 (var var0000, var var0001) {
 					    var0005,
 					    " was my final offer. Dost thou accept?\"");
 					if (var000C < 0x001C) {
-						0xFFF1->set_npc_id((var000C + 0x0004));
+						0xFFF1->set_npc_id(var000C + 0x0004);
 					}
 					if (Func0955()) {
 						return var0005;
@@ -88706,7 +88706,7 @@ var Func0828 0x828 (var var0000, var var0001) {
 					    var0005,
 					    " guilders is my final offer.\"");
 					if (var000C < 0x001E) {
-						0xFFF1->set_npc_id((var000C + 0x0002));
+						0xFFF1->set_npc_id(var000C + 0x0002);
 					}
 				}
 			} else {
@@ -88787,7 +88787,7 @@ var Func0828 0x828 (var var0000, var var0001) {
 						    " guilders is as low as I will go!\"");
 					}
 					if (var000C < 0x001F) {
-						0xFFF1->set_npc_id((var000C + 0x0001));
+						0xFFF1->set_npc_id(var000C + 0x0001);
 					}
 				}
 			}
@@ -89022,7 +89022,7 @@ var Func082B 0x82B (var var0000, var var0001) {
 				    "?\"");
 				if (Func0955() == true) {
 					if (var000A > 0x0001) {
-						0x03F7->set_npc_id((var000A - 0x0002));
+						0x03F7->set_npc_id(var000A - 0x0002);
 					}
 					return var0002;
 				} else if (var000F == 0x0001) {
@@ -89037,7 +89037,7 @@ var Func082B 0x82B (var var0000, var var0001) {
 				if (0x001F < (var000A + 0x000A)) {
 					0x03F7->set_npc_id(0x001F);
 				} else {
-					0x03F7->set_npc_id((var000A + 0x000A));
+					0x03F7->set_npc_id(var000A + 0x000A);
 				}
 				return 0x0000;
 			}
@@ -89047,7 +89047,7 @@ var Func082B 0x82B (var var0000, var var0001) {
 					    var0002,
 					    " is my final offer. Dost thou want it at this price?\"");
 					if (var000A < 0x001C) {
-						0x03F7->set_npc_id((var000A + 0x0004));
+						0x03F7->set_npc_id(var000A + 0x0004);
 					}
 					if (Func0955() == true) {
 						return var0002;
@@ -89058,7 +89058,7 @@ var Func082B 0x82B (var var0000, var var0001) {
 					    var0002,
 					    ".  I will go no lower.\"");
 					if (var000A < 0x001E) {
-						0x03F7->set_npc_id((var000A + 0x0002));
+						0x03F7->set_npc_id(var000A + 0x0002);
 					}
 				}
 			} else {
@@ -89131,7 +89131,7 @@ var Func082B 0x82B (var var0000, var var0001) {
 						    ". Thou art a stranger, after all. I know not what use thou wilt make of this.\"");
 					}
 					if (var000A < 0x001F) {
-						0x03F7->set_npc_id((var000A + 0x0001));
+						0x03F7->set_npc_id(var000A + 0x0001);
 					}
 				}
 			}
@@ -89446,7 +89446,7 @@ var Func082E 0x82E (var var0000, var var0001) {
 				    "?\"");
 				if (Func0955() == true) {
 					if (var0009 > 0x0001) {
-						0xFFAF->set_npc_id((var0009 - 0x0002));
+						0xFFAF->set_npc_id(var0009 - 0x0002);
 					}
 					return var0002;
 				} else if (var000E == 0x0001) {
@@ -89461,7 +89461,7 @@ var Func082E 0x82E (var var0000, var var0001) {
 				if (0x001F < (var0009 + 0x000A)) {
 					0xFFAF->set_npc_id(0x001F);
 				} else {
-					0xFFAF->set_npc_id((var0009 + 0x000A));
+					0xFFAF->set_npc_id(var0009 + 0x000A);
 				}
 				return 0x0000;
 			}
@@ -89471,7 +89471,7 @@ var Func082E 0x82E (var var0000, var var0001) {
 					    var0002,
 					    " is my final offer. Dost thou want it at this price?\"");
 					if (var0009 < 0x001C) {
-						0xFFAF->set_npc_id((var0009 + 0x0004));
+						0xFFAF->set_npc_id(var0009 + 0x0004);
 					}
 					if (Func0955() == true) {
 						return var0002;
@@ -89482,7 +89482,7 @@ var Func082E 0x82E (var var0000, var var0001) {
 					    var0002,
 					    " is my final offer.  I will go no lower.\"");
 					if (var0009 < 0x001E) {
-						0xFFAF->set_npc_id((var0009 + 0x0002));
+						0xFFAF->set_npc_id(var0009 + 0x0002);
 					}
 				}
 			} else {
@@ -89555,7 +89555,7 @@ var Func082E 0x82E (var var0000, var var0001) {
 						    ".\"");
 					}
 					if (var0009 < 0x001F) {
-						0xFFAF->set_npc_id((var0009 + 0x0001));
+						0xFFAF->set_npc_id(var0009 + 0x0001);
 					}
 				}
 			}
@@ -90202,7 +90202,7 @@ void Func0837 0x837 () {
 					if (0x001F < (0xFFBD->get_npc_id() + 0x0006)) {
 						0xFFBD->set_npc_id(0x001F);
 					} else {
-						0xFFBD->set_npc_id((0xFFBD->get_npc_id() + 0x0006));
+						0xFFBD->set_npc_id(0xFFBD->get_npc_id() + 0x0006);
 					}
 				} else {
 					say("\"Dost thou desire another purchase?\"");
@@ -90330,7 +90330,7 @@ var Func0838 0x838 (var var0000, var var0001) {
 				    "?\"");
 				if (Func0955()) {
 					if (var000B > 0x0001) {
-						0xFFBD->set_npc_id((var000B - 0x0002));
+						0xFFBD->set_npc_id(var000B - 0x0002);
 					}
 					return var0004;
 				} else if (var0010 == 0x0001) {
@@ -90345,7 +90345,7 @@ var Func0838 0x838 (var var0000, var var0001) {
 				if (0x001F < (var000B + 0x000A)) {
 					0xFFBD->set_npc_id(0x001F);
 				} else {
-					0xFFBD->set_npc_id((var000B + 0x000A));
+					0xFFBD->set_npc_id(var000B + 0x000A);
 				}
 				return 0x0000;
 			}
@@ -90357,7 +90357,7 @@ var Func0838 0x838 (var var0000, var var0001) {
 					    var0004,
 					    " was my final offer. Dost thou accept?\"");
 					if (var000B < 0x001C) {
-						0xFFBD->set_npc_id((var000B + 0x0004));
+						0xFFBD->set_npc_id(var000B + 0x0004);
 					}
 					if (Func0955()) {
 						return var0004;
@@ -90368,7 +90368,7 @@ var Func0838 0x838 (var var0000, var var0001) {
 					    var0004,
 					    " monetari is my final offer.\"");
 					if (var000B < 0x001E) {
-						0xFFBD->set_npc_id((var000B + 0x0002));
+						0xFFBD->set_npc_id(var000B + 0x0002);
 					}
 				}
 			} else {
@@ -90442,7 +90442,7 @@ var Func0838 0x838 (var var0000, var var0001) {
 						    " monetari is where I stand. I must pay someone to stand watch while I garden.\"");
 					}
 					if (var000B < 0x001F) {
-						0xFFBD->set_npc_id((var000B + 0x0001));
+						0xFFBD->set_npc_id(var000B + 0x0001);
 					}
 				}
 			}
@@ -90751,7 +90751,7 @@ void Func083D 0x83D () {
 					if (0x001F < (0xFFCC->get_npc_id() + 0x0006)) {
 						0xFFCC->set_npc_id(0x001F);
 					} else {
-						0xFFCC->set_npc_id((0xFFCC->get_npc_id() + 0x0006));
+						0xFFCC->set_npc_id(0xFFCC->get_npc_id() + 0x0006);
 					}
 				} else {
 					say("\"Wouldst thou care for more?\"");
@@ -90852,7 +90852,7 @@ void Func083E 0x83E () {
 					if (0x001F < (0xFFCC->get_npc_id() + 0x0006)) {
 						0xFFCC->set_npc_id(0x001F);
 					} else {
-						0xFFCC->set_npc_id((0xFFCC->get_npc_id() + 0x0006));
+						0xFFCC->set_npc_id(0xFFCC->get_npc_id() + 0x0006);
 					}
 				} else {
 					say("\"Wouldst thou care for more?\"");
@@ -90969,7 +90969,7 @@ var Func083F 0x83F (var var0000, var var0001) {
 				    "?\"");
 				if (Func0955()) {
 					if (var000A > 0x0001) {
-						0xFFCC->set_npc_id((var000A - 0x0002));
+						0xFFCC->set_npc_id(var000A - 0x0002);
 					}
 					return var0003;
 				} else if (var000F == 0x0001) {
@@ -90984,7 +90984,7 @@ var Func083F 0x83F (var var0000, var var0001) {
 				if (0x001F < (var000A + 0x000A)) {
 					0xFFCC->set_npc_id(0x001F);
 				} else {
-					0xFFCC->set_npc_id((var000A + 0x000A));
+					0xFFCC->set_npc_id(var000A + 0x000A);
 				}
 				return 0x0000;
 			}
@@ -90996,7 +90996,7 @@ var Func083F 0x83F (var var0000, var var0001) {
 					    var0003,
 					    " was my final offer. Dost thou accept?\"");
 					if (var000A < 0x001C) {
-						0xFFCC->set_npc_id((var000A + 0x0004));
+						0xFFCC->set_npc_id(var000A + 0x0004);
 					}
 					if (Func0955()) {
 						return var0003;
@@ -91007,7 +91007,7 @@ var Func083F 0x83F (var var0000, var var0001) {
 					    var0003,
 					    " filari is my final offer.\"");
 					if (var000A < 0x001E) {
-						0xFFCC->set_npc_id((var000A + 0x0002));
+						0xFFCC->set_npc_id(var000A + 0x0002);
 					}
 				}
 			} else {
@@ -91087,7 +91087,7 @@ var Func083F 0x83F (var var0000, var var0001) {
 						    " filari is where I stand.\"");
 					}
 					if (var000A < 0x001F) {
-						0xFFCC->set_npc_id((var000A + 0x0001));
+						0xFFCC->set_npc_id(var000A + 0x0001);
 					}
 				}
 			}
@@ -91209,7 +91209,7 @@ void Func0840 0x840 () {
 					if (0x001F < (0xFFE9->get_npc_id() + 0x0006)) {
 						0xFFE9->set_npc_id(0x001F);
 					} else {
-						0xFFE9->set_npc_id((0xFFE9->get_npc_id() + 0x0006));
+						0xFFE9->set_npc_id(0xFFE9->get_npc_id() + 0x0006);
 					}
 				} else {
 					say("\"Wouldst thou care for more?\"");
@@ -91327,7 +91327,7 @@ var Func0841 0x841 (var var0000, var var0001) {
 				    "?\"");
 				if (Func0955()) {
 					if (var000B > 0x0001) {
-						0xFFE9->set_npc_id((var000B - 0x0002));
+						0xFFE9->set_npc_id(var000B - 0x0002);
 					}
 					return var0004;
 				} else if (var0010 == 0x0001) {
@@ -91347,7 +91347,7 @@ var Func0841 0x841 (var var0000, var var0001) {
 				if (0x001F < (var000B + 0x000A)) {
 					0xFFE9->set_npc_id(0x001F);
 				} else {
-					0xFFE9->set_npc_id((var000B + 0x000A));
+					0xFFE9->set_npc_id(var000B + 0x000A);
 				}
 				return 0x0000;
 			}
@@ -91357,7 +91357,7 @@ var Func0841 0x841 (var var0000, var var0001) {
 					    var0004,
 					    " was my final offer. I have no more time to deal with thee. Dost thou accept?\"");
 					if (var000B < 0x001C) {
-						0xFFE9->set_npc_id((var000B + 0x0004));
+						0xFFE9->set_npc_id(var000B + 0x0004);
 					}
 					if (Func0955()) {
 						return var0004;
@@ -91368,7 +91368,7 @@ var Func0841 0x841 (var var0000, var var0001) {
 					    var0004,
 					    " guilders... Or take thy business elsewhere.\"");
 					if (var000B < 0x001E) {
-						0xFFE9->set_npc_id((var000B + 0x0002));
+						0xFFE9->set_npc_id(var000B + 0x0002);
 					}
 				}
 			} else {
@@ -91445,7 +91445,7 @@ var Func0841 0x841 (var var0000, var var0001) {
 						    " guilders is where I stand.\"");
 					}
 					if (var000B < 0x001F) {
-						0xFFE9->set_npc_id((var000B + 0x0001));
+						0xFFE9->set_npc_id(var000B + 0x0001);
 					}
 				}
 			}
@@ -91705,7 +91705,7 @@ void Func0842 0x842 () {
 				if (0x001F < (0xFFBC->get_npc_id() + 0x0006)) {
 					0xFFBC->set_npc_id(0x001F);
 				} else {
-					0xFFBC->set_npc_id((0xFFBC->get_npc_id() + 0x0006));
+					0xFFBC->set_npc_id(0xFFBC->get_npc_id() + 0x0006);
 				}
 			}
 		}
@@ -92193,7 +92193,7 @@ var Func0844 0x844 (var var0000, var var0001) {
 				    "?\"");
 				if (Func0955()) {
 					if (var000C > 0x0001) {
-						0xFFBC->set_npc_id((var000C - 0x0002));
+						0xFFBC->set_npc_id(var000C - 0x0002);
 					}
 					return var0005;
 				} else if (var0011 == 0x0001) {
@@ -92211,7 +92211,7 @@ var Func0844 0x844 (var var0000, var var0001) {
 				if (0x001F < (var000C + 0x000A)) {
 					0xFFBC->set_npc_id(0x001F);
 				} else {
-					0xFFBC->set_npc_id((var000C + 0x000A));
+					0xFFBC->set_npc_id(var000C + 0x000A);
 				}
 				return 0x0000;
 			}
@@ -92221,7 +92221,7 @@ var Func0844 0x844 (var var0000, var var0001) {
 					    var0005,
 					    " was my final offer. Dost thou accept?\"");
 					if (var000C < 0x001C) {
-						0xFFBC->set_npc_id((var000C + 0x0004));
+						0xFFBC->set_npc_id(var000C + 0x0004);
 					}
 					if (Func0955()) {
 						return var0005;
@@ -92232,7 +92232,7 @@ var Func0844 0x844 (var var0000, var var0001) {
 					    var0005,
 					    " monetari is my final offer.\"");
 					if (var000C < 0x001E) {
-						0xFFBC->set_npc_id((var000C + 0x0002));
+						0xFFBC->set_npc_id(var000C + 0x0002);
 					}
 				}
 			} else {
@@ -92313,7 +92313,7 @@ var Func0844 0x844 (var var0000, var var0001) {
 						    " monetari is as low as I will go!\"");
 					}
 					if (var000C < 0x001F) {
-						0xFFBC->set_npc_id((var000C + 0x0001));
+						0xFFBC->set_npc_id(var000C + 0x0001);
 					}
 				}
 			}
@@ -92504,7 +92504,7 @@ void Func0845 0x845 () {
 					if (0x001F < (0xFFBA->get_npc_id() + 0x0006)) {
 						0xFFBA->set_npc_id(0x001F);
 					} else {
-						0xFFBA->set_npc_id((0xFFBA->get_npc_id() + 0x0006));
+						0xFFBA->set_npc_id(0xFFBA->get_npc_id() + 0x0006);
 					}
 				} else {
 					say("\"Wouldst thou care for more?\"");
@@ -92633,7 +92633,7 @@ void Func0846 0x846 () {
 					if (0x001F < (0xFFBA->get_npc_id() + 0x0006)) {
 						0xFFBA->set_npc_id(0x001F);
 					} else {
-						0xFFBA->set_npc_id((0xFFBA->get_npc_id() + 0x0006));
+						0xFFBA->set_npc_id(0xFFBA->get_npc_id() + 0x0006);
 					}
 				} else {
 					say("\"Wouldst thou care for more?\"");
@@ -92852,7 +92852,7 @@ var Func0847 0x847 (var var0000, var var0001) {
 				}
 				if (Func0955()) {
 					if (var000D > 0x0001) {
-						0xFFBA->set_npc_id((var000D - 0x0002));
+						0xFFBA->set_npc_id(var000D - 0x0002);
 					}
 					return var0006;
 				} else if (var0003) {
@@ -92886,7 +92886,7 @@ var Func0847 0x847 (var var0000, var var0001) {
 				if (0x001F < (var000D + 0x000A)) {
 					0xFFBA->set_npc_id(0x001F);
 				} else {
-					0xFFBA->set_npc_id((var000D + 0x000A));
+					0xFFBA->set_npc_id(var000D + 0x000A);
 				}
 				return 0x0000;
 			}
@@ -92896,7 +92896,7 @@ var Func0847 0x847 (var var0000, var var0001) {
 					    var0006,
 					    " was my final offer. Dost thou accept?\"");
 					if (var000D < 0x001C) {
-						0xFFBA->set_npc_id((var000D + 0x0004));
+						0xFFBA->set_npc_id(var000D + 0x0004);
 					}
 					if (Func0955()) {
 						return var0006;
@@ -92907,7 +92907,7 @@ var Func0847 0x847 (var var0000, var var0001) {
 					    var0006,
 					    " monetari is my final offer.\"");
 					if (var000D < 0x001E) {
-						0xFFBA->set_npc_id((var000D + 0x0002));
+						0xFFBA->set_npc_id(var000D + 0x0002);
 					}
 				}
 			} else {
@@ -93059,7 +93059,7 @@ var Func0847 0x847 (var var0000, var var0001) {
 						}
 					}
 					if (var000D < 0x001F) {
-						0xFFBA->set_npc_id((var000D + 0x0001));
+						0xFFBA->set_npc_id(var000D + 0x0001);
 					}
 				}
 			}
@@ -93363,7 +93363,7 @@ var Func084C 0x84C (var var0000, var var0001) {
 				    "?\"");
 				if (Func0955() == true) {
 					if (var0009 > 0x0001) {
-						0xFFE8->set_npc_id((var0009 - 0x0002));
+						0xFFE8->set_npc_id(var0009 - 0x0002);
 					}
 					return var0002;
 				} else if (var000E == 0x0001) {
@@ -93378,7 +93378,7 @@ var Func084C 0x84C (var var0000, var var0001) {
 				if (0x001F < (var0009 + 0x000A)) {
 					0xFFE8->set_npc_id(0x001F);
 				} else {
-					0xFFE8->set_npc_id((var0009 + 0x000A));
+					0xFFE8->set_npc_id(var0009 + 0x000A);
 				}
 				return 0x0000;
 			}
@@ -93388,7 +93388,7 @@ var Func084C 0x84C (var var0000, var var0001) {
 					    var0002,
 					    " is my final offer. Dost thou want it at this price?\"");
 					if (var0009 < 0x001C) {
-						0xFFE8->set_npc_id((var0009 + 0x0004));
+						0xFFE8->set_npc_id(var0009 + 0x0004);
 					}
 					if (Func0955() == true) {
 						return var0002;
@@ -93399,7 +93399,7 @@ var Func084C 0x84C (var var0000, var var0001) {
 					    var0002,
 					    " is my final offer.  I will go no lower.\"");
 					if (var0009 < 0x001E) {
-						0xFFE8->set_npc_id((var0009 + 0x0002));
+						0xFFE8->set_npc_id(var0009 + 0x0002);
 					}
 				}
 			} else {
@@ -93472,7 +93472,7 @@ var Func084C 0x84C (var var0000, var var0001) {
 						    ".\"");
 					}
 					if (var0009 < 0x001F) {
-						0xFFE8->set_npc_id((var0009 + 0x0001));
+						0xFFE8->set_npc_id(var0009 + 0x0001);
 					}
 				}
 			}
@@ -94951,7 +94951,7 @@ void Func0858 0x858 () {
 					if (0x001F < (0xFFE3->get_npc_id() + 0x0006)) {
 						0xFFE3->set_npc_id(0x001F);
 					} else {
-						0xFFE3->set_npc_id((0xFFE3->get_npc_id() + 0x0006));
+						0xFFE3->set_npc_id(0xFFE3->get_npc_id() + 0x0006);
 					}
 				} else {
 					say("\"Dost thou desire another purchase?\"");
@@ -95088,7 +95088,7 @@ void Func0859 0x859 () {
 					if (0x001F < (0xFFE3->get_npc_id() + 0x0006)) {
 						0xFFE3->set_npc_id(0x001F);
 					} else {
-						0xFFE3->set_npc_id((0xFFE3->get_npc_id() + 0x0006));
+						0xFFE3->set_npc_id(0xFFE3->get_npc_id() + 0x0006);
 					}
 				} else {
 					say("\"Dost thou desire another purchase?\"");
@@ -95224,7 +95224,7 @@ void Func085A 0x85A () {
 					if (0x001F < (0xFFE3->get_npc_id() + 0x0006)) {
 						0xFFE3->set_npc_id(0x001F);
 					} else {
-						0xFFE3->set_npc_id((0xFFE3->get_npc_id() + 0x0006));
+						0xFFE3->set_npc_id(0xFFE3->get_npc_id() + 0x0006);
 					}
 				} else {
 					say("\"Dost thou wish something else?\"");
@@ -95342,7 +95342,7 @@ var Func085B 0x85B (var var0000, var var0001) {
 				    "?\"");
 				if (Func0955()) {
 					if (var000A > 0x0001) {
-						0xFFE3->set_npc_id((var000A - 0x0002));
+						0xFFE3->set_npc_id(var000A - 0x0002);
 					}
 					return var0003;
 				} else if (var000F == 0x0001) {
@@ -95359,7 +95359,7 @@ var Func085B 0x85B (var var0000, var var0001) {
 				if (0x001F < (var000A + 0x000A)) {
 					0xFFE3->set_npc_id(0x001F);
 				} else {
-					0xFFE3->set_npc_id((var000A + 0x000A));
+					0xFFE3->set_npc_id(var000A + 0x000A);
 				}
 				return 0x0000;
 			}
@@ -95369,7 +95369,7 @@ var Func085B 0x85B (var var0000, var var0001) {
 					    var0003,
 					    " was my final offer. Dost thou accept?\"");
 					if (var000A < 0x001C) {
-						0xFFE3->set_npc_id((var000A + 0x0004));
+						0xFFE3->set_npc_id(var000A + 0x0004);
 					}
 					if (Func0955()) {
 						return var0003;
@@ -95380,7 +95380,7 @@ var Func085B 0x85B (var var0000, var var0001) {
 					    var0003,
 					    " guilders is my final offer. Take it or leave it...\"");
 					if (var000A < 0x001E) {
-						0xFFE3->set_npc_id((var000A + 0x0002));
+						0xFFE3->set_npc_id(var000A + 0x0002);
 					}
 				}
 			} else {
@@ -95455,7 +95455,7 @@ var Func085B 0x85B (var var0000, var var0001) {
 						    " guilders is where I stand.\"");
 					}
 					if (var000A < 0x001F) {
-						0xFFE3->set_npc_id((var000A + 0x0001));
+						0xFFE3->set_npc_id(var000A + 0x0001);
 					}
 				}
 			}
@@ -95657,7 +95657,7 @@ void Func085E 0x85E () {
 					if (0x001F < (0xFFE2->get_npc_id() + 0x0006)) {
 						0xFFE2->set_npc_id(0x001F);
 					} else {
-						0xFFE2->set_npc_id((0xFFE2->get_npc_id() + 0x0006));
+						0xFFE2->set_npc_id(0xFFE2->get_npc_id() + 0x0006);
 					}
 				} else {
 					say("\"Wouldst thou care for more?\"");
@@ -95775,7 +95775,7 @@ void Func085F 0x85F () {
 					if (0x001F < (0xFFE2->get_npc_id() + 0x0006)) {
 						0xFFE2->set_npc_id(0x001F);
 					} else {
-						0xFFE2->set_npc_id((0xFFE2->get_npc_id() + 0x0006));
+						0xFFE2->set_npc_id(0xFFE2->get_npc_id() + 0x0006);
 					}
 				} else {
 					say("\"Wouldst thou care for more?\"");
@@ -95916,7 +95916,7 @@ var Func0860 0x860 (var var0000, var var0001) {
 				    "?\"");
 				if (Func0955()) {
 					if (var000B > 0x0001) {
-						0xFFE2->set_npc_id((var000B - 0x0002));
+						0xFFE2->set_npc_id(var000B - 0x0002);
 					}
 					return var0004;
 				} else if (var0010 == 0x0001) {
@@ -95931,7 +95931,7 @@ var Func0860 0x860 (var var0000, var var0001) {
 				if (0x001F < (var000B + 0x000A)) {
 					0xFFE2->set_npc_id(0x001F);
 				} else {
-					0xFFE2->set_npc_id((var000B + 0x000A));
+					0xFFE2->set_npc_id(var000B + 0x000A);
 				}
 				return 0x0000;
 			}
@@ -95943,7 +95943,7 @@ var Func0860 0x860 (var var0000, var var0001) {
 					    var0004,
 					    " was my final offer. Dost thou accept?\"");
 					if (var000B < 0x001C) {
-						0xFFE2->set_npc_id((var000B + 0x0004));
+						0xFFE2->set_npc_id(var000B + 0x0004);
 					}
 					if (Func0955()) {
 						return var0004;
@@ -95954,7 +95954,7 @@ var Func0860 0x860 (var var0000, var var0001) {
 					    var0004,
 					    " guilders is my final offer.\"");
 					if (var000B < 0x001E) {
-						0xFFE2->set_npc_id((var000B + 0x0002));
+						0xFFE2->set_npc_id(var000B + 0x0002);
 					}
 				}
 			} else {
@@ -96043,7 +96043,7 @@ var Func0860 0x860 (var var0000, var var0001) {
 						    " guilders is where I stand.\"");
 					}
 					if (var000B < 0x001F) {
-						0xFFE2->set_npc_id((var000B + 0x0001));
+						0xFFE2->set_npc_id(var000B + 0x0001);
 					}
 				}
 			}
@@ -96878,7 +96878,7 @@ void Func0866 0x866 () {
 					if (0x001F < (0xFFB2->get_npc_id() + 0x0006)) {
 						0xFFB2->set_npc_id(0x001F);
 					} else {
-						0xFFB2->set_npc_id((0xFFB2->get_npc_id() + 0x0006));
+						0xFFB2->set_npc_id(0xFFB2->get_npc_id() + 0x0006);
 					}
 				} else {
 					say("\"Dost thou want to buy more armour?\"");
@@ -97091,7 +97091,7 @@ void Func0867 0x867 () {
 					if (0x001F < (0xFFB2->get_npc_id() + 0x0006)) {
 						0xFFB2->set_npc_id(0x001F);
 					} else {
-						0xFFB2->set_npc_id((0xFFB2->get_npc_id() + 0x0006));
+						0xFFB2->set_npc_id(0xFFB2->get_npc_id() + 0x0006);
 					}
 				} else {
 					say("\"Dost thou wish to purchase more weapons?\"");
@@ -97679,7 +97679,7 @@ var Func0869 0x869 (var var0000, var var0001) {
 				    "?\"");
 				if (Func0955()) {
 					if (var000D > 0x0001) {
-						0xFFB2->set_npc_id((var000D - 0x0002));
+						0xFFB2->set_npc_id(var000D - 0x0002);
 					}
 					return var0006;
 				} else if (var0012 == 0x0001) {
@@ -97697,7 +97697,7 @@ var Func0869 0x869 (var var0000, var var0001) {
 				if (0x001F < (var000D + 0x000A)) {
 					0xFFB2->set_npc_id(0x001F);
 				} else {
-					0xFFB2->set_npc_id((var000D + 0x000A));
+					0xFFB2->set_npc_id(var000D + 0x000A);
 				}
 				return 0x0000;
 			}
@@ -97707,7 +97707,7 @@ var Func0869 0x869 (var var0000, var var0001) {
 					    var0006,
 					    " was my final offer. Dost thou accept?\"");
 					if (var000D < 0x001C) {
-						0xFFB2->set_npc_id((var000D + 0x0004));
+						0xFFB2->set_npc_id(var000D + 0x0004);
 					}
 					if (Func0955()) {
 						return var0006;
@@ -97718,7 +97718,7 @@ var Func0869 0x869 (var var0000, var var0001) {
 					    var0006,
 					    " monetari is my final offer.\"");
 					if (var000D < 0x001E) {
-						0xFFB2->set_npc_id((var000D + 0x0002));
+						0xFFB2->set_npc_id(var000D + 0x0002);
 					}
 				}
 			} else {
@@ -97798,7 +97798,7 @@ var Func0869 0x869 (var var0000, var var0001) {
 						    " monetari is as low as I will go! I must eat and pay for my supplies...\"");
 					}
 					if (var000D < 0x001F) {
-						0xFFB2->set_npc_id((var000D + 0x0001));
+						0xFFB2->set_npc_id(var000D + 0x0001);
 					}
 				}
 			}
@@ -98282,7 +98282,7 @@ void Func086F 0x86F () {
 					if (0x001F < (0xFFE0->get_npc_id() + 0x0006)) {
 						0xFFE0->set_npc_id(0x001F);
 					} else {
-						0xFFE0->set_npc_id((0xFFE0->get_npc_id() + 0x0006));
+						0xFFE0->set_npc_id(0xFFE0->get_npc_id() + 0x0006);
 					}
 				} else {
 					say("\"Dost thou care for something else?\"");
@@ -98422,7 +98422,7 @@ var Func0870 0x870 (var var0000, var var0001) {
 				    "?\"");
 				if (Func0955()) {
 					if (var000C > 0x0001) {
-						0xFFE0->set_npc_id((var000C - 0x0002));
+						0xFFE0->set_npc_id(var000C - 0x0002);
 					}
 					return var0005;
 				} else if (var0011 == 0x0001) {
@@ -98440,7 +98440,7 @@ var Func0870 0x870 (var var0000, var var0001) {
 				if (0x001F < (var000C + 0x000A)) {
 					0xFFE0->set_npc_id(0x001F);
 				} else {
-					0xFFE0->set_npc_id((var000C + 0x000A));
+					0xFFE0->set_npc_id(var000C + 0x000A);
 				}
 				return 0x0000;
 			}
@@ -98450,7 +98450,7 @@ var Func0870 0x870 (var var0000, var var0001) {
 					    var0005,
 					    " was my final offer. Dost thou accept?\"");
 					if (var000C < 0x001C) {
-						0xFFE0->set_npc_id((var000C + 0x0004));
+						0xFFE0->set_npc_id(var000C + 0x0004);
 					}
 					if (Func0955()) {
 						return var0005;
@@ -98461,7 +98461,7 @@ var Func0870 0x870 (var var0000, var var0001) {
 					    var0005,
 					    " guilders is my final offer.\"");
 					if (var000C < 0x001E) {
-						0xFFE0->set_npc_id((var000C + 0x0002));
+						0xFFE0->set_npc_id(var000C + 0x0002);
 					}
 				}
 			} else {
@@ -98542,7 +98542,7 @@ var Func0870 0x870 (var var0000, var var0001) {
 						    " guilders is as low as I will go!\"");
 					}
 					if (var000C < 0x001F) {
-						0xFFE0->set_npc_id((var000C + 0x0001));
+						0xFFE0->set_npc_id(var000C + 0x0001);
 					}
 				}
 			}
@@ -98774,7 +98774,7 @@ var Func0872 0x872 (var var0000, var var0001) {
 				    "?\"");
 				if (Func0955() == true) {
 					if (var0009 > 0x0001) {
-						0xFFDF->set_npc_id((var0009 - 0x0002));
+						0xFFDF->set_npc_id(var0009 - 0x0002);
 					}
 					return var0002;
 				} else if (var000E == 0x0001) {
@@ -98789,7 +98789,7 @@ var Func0872 0x872 (var var0000, var var0001) {
 				if (0x001F < (var0009 + 0x000A)) {
 					0xFFDF->set_npc_id(0x001F);
 				} else {
-					0xFFDF->set_npc_id((var0009 + 0x000A));
+					0xFFDF->set_npc_id(var0009 + 0x000A);
 				}
 				return 0x0000;
 			}
@@ -98799,7 +98799,7 @@ var Func0872 0x872 (var var0000, var var0001) {
 					    var0002,
 					    " is my final offer. Dost thou agree or not?\"");
 					if (var0009 < 0x001C) {
-						0xFFDF->set_npc_id((var0009 + 0x0004));
+						0xFFDF->set_npc_id(var0009 + 0x0004);
 					}
 					if (Func0955() == true) {
 						return var0002;
@@ -98810,7 +98810,7 @@ var Func0872 0x872 (var var0000, var var0001) {
 					    var0002,
 					    ".\"");
 					if (var0009 < 0x001E) {
-						0xFFDF->set_npc_id((var0009 + 0x0002));
+						0xFFDF->set_npc_id(var0009 + 0x0002);
 					}
 				}
 			} else {
@@ -98883,7 +98883,7 @@ var Func0872 0x872 (var var0000, var var0001) {
 						    ".\"");
 					}
 					if (var0009 < 0x001F) {
-						0xFFDF->set_npc_id((var0009 + 0x0001));
+						0xFFDF->set_npc_id(var0009 + 0x0001);
 					}
 				}
 			}
@@ -100021,7 +100021,7 @@ void Func0881 0x881 () {
 			var0005 = 0x0002;
 			while (var0005 < 0x001F) {
 				if (var0003->get_item_frame() == var0005) {
-					var0003->set_item_frame((var0005 - 0x0002));
+					var0003->set_item_frame(var0005 - 0x0002);
 				}
 				var0005 = (var0005 + 0x0004);
 			}
@@ -102258,8 +102258,8 @@ void Func08BA 0x8BA () {
 		var0002 = UI_die_roll(0x0001, 0x0005);
 		var0003 = [0x0361, 0x0219, 0x012E, 0x0149, 0x036D];
 		var0004 = ["Spiders", "Wolves", "Bears", "Boars", "Doom"];
-		0xFF64->item_say((("Morghrim, send me " + var0004[var0002]) + "."));
-		var0005 = UI_die_roll(0x0001, Func097E((var0002 - 0x0005)));
+		0xFF64->item_say(("Morghrim, send me " + var0004[var0002]) + ".");
+		var0005 = UI_die_roll(0x0001, Func097E(var0002 - 0x0005));
 		while (var0005 > 0x0000) {
 			var0001 = Func09A1(var0003[var0002]);
 			if (!(var0001 == 0x0000)) {
@@ -104164,9 +104164,9 @@ void Func08DA 0x8DA (var var0000) {
 	if (var0001) {
 		var001C = var0000->get_item_frame();
 		if ((var001C % 0x0002) == 0x0000) {
-			var0000->set_item_frame((var001C + 0x0001));
+			var0000->set_item_frame(var001C + 0x0001);
 		} else {
-			var0000->set_item_frame((var001C - 0x0001));
+			var0000->set_item_frame(var001C - 0x0001);
 		}
 		UI_play_sound_effect2(0x0046, item);
 	} else {
@@ -105677,7 +105677,7 @@ void Func0907 0x907 (var var0000, var var0001) {
 
 	var0002 = var0000->get_item_frame();
 	var0003 = (var0002 % 0x0004);
-	var0000->set_item_frame(((var0002 - var0003) + var0001));
+	var0000->set_item_frame((var0002 - var0003) + var0001);
 	if (var0001 == 0x0002) {
 		var0000->item_say("Click");
 	}
@@ -106149,7 +106149,7 @@ void Func0917 0x917 (var var0000, var var0001) {
 	}
 	for (var0008 in var0000 with var0006 to var0007) {
 		var0009 = var0008->get_item_frame_rot();
-		var0008->set_item_frame_rot((var0009 + var0002));
+		var0008->set_item_frame_rot(var0009 + var0002);
 	}
 	UI_play_sound_effect(var0003);
 }
@@ -109180,7 +109180,7 @@ void Func093B 0x93B (var var0000) {
 		0xFFC3->show_npc_face0(0x0000);
 		if (gflags[0x0172] && var0007) {
 			say("\"Whom wouldst thou care to call before the Oracle?\"");
-			var0009 = Func0957((var0007->get_npc_name() & "no one"));
+			var0009 = Func0957(var0007->get_npc_name() & "no one");
 			var000A = UI_get_array_size(var0007);
 			if (var0009 > UI_get_array_size(var0007)) {
 				var0007 = [];
@@ -109393,7 +109393,7 @@ void Func093E 0x93E (var var0000) {
 	var0005 = UI_create_new_object(var0001[var0004]);
 	if (var0005) {
 		var0005->set_item_flag(0x0012);
-		var0005->set_item_frame((UI_get_random(var0002[var0004]) - 0x0001));
+		var0005->set_item_frame(UI_get_random(var0002[var0004]) - 0x0001);
 		var0006 = UI_update_last_created(var0000);
 	}
 }
@@ -109413,7 +109413,7 @@ void Func093F 0x93F (var var0000) {
 	var0005 = UI_create_new_object(var0001[var0004]);
 	if (var0005) {
 		var0005->set_item_flag(0x0012);
-		var0005->set_item_frame((UI_get_random(var0002[var0004]) - 0x0001));
+		var0005->set_item_frame(UI_get_random(var0002[var0004]) - 0x0001);
 		var0006 = UI_update_last_created(var0000);
 	}
 }
@@ -109481,7 +109481,7 @@ var Func0943 0x943 (var var0000, var var0001, var var0002, var var0003, var var0
 		var000B = 0x0000;
 	} else {
 		if (var0008 >= (var0004 * var0009)) {
-			var000C = UI_remove_party_items((var0004 * var0009), var0003, 0xFE99, 0xFE99, true);
+			var000C = UI_remove_party_items(var0004 * var0009, var0003, 0xFE99, 0xFE99, true);
 			var000D = Func099B(0xFE9C, var000A, var0000, 0xFE99, var0001, var0007, true);
 			var000B = 0x0001;
 		} else {
@@ -110746,7 +110746,7 @@ void Func0986 0x986 (var var0000, var var0001) {
 			}
 			var0006 = var000A->set_item_quality(0x00FF);
 		} else {
-			var0006 = var000A->set_item_quality((var000B - (var0000 * 0x001E)));
+			var0006 = var000A->set_item_quality(var000B - (var0000 * 0x001E));
 		}
 	}
 }
@@ -111538,7 +111538,7 @@ var Func0999 0x999 (var var0000, var var0001, var var0002, var var0003, var var0
 			}
 			if (!var0006) {
 				if (var0004 > (var0005 / 0x0002)) {
-					if (UI_get_random((var0005 - var0004))) {
+					if (UI_get_random(var0005 - var0004)) {
 						var0006 = 0x0001;
 						var0009 = 0x0004;
 					}
@@ -112230,7 +112230,7 @@ void Func09B2 0x9B2 () {
 
 	var0000 = (0x0406 + ((0x0002 - UI_get_skin_colour()) * 0x0002));
 	if (UI_is_pc_female()) {
-		0xFE9C->set_polymorph((var0000 + 0x0001));
+		0xFE9C->set_polymorph(var0000 + 0x0001);
 	} else {
 		0xFE9C->set_polymorph(var0000);
 	}
