@@ -951,7 +951,7 @@ void Func00E6 shape#(0xE6) () {
 				// Bug: the next line should probably be 'music 28', but it
 				// lacks the continuous flag. Because of this, it nabs the
 				// first byte of 'wait' as the continuous flag, runs the '4'
-				// as an opcode (a 'nop') and resynchs at the 'say'.
+				// as an opcode (a 'nop') and resynchronizes at the 'say'.
 				raw((byte)0x54); raw(0x001C);
 				wait 4;
 				say "@Wow...@";
