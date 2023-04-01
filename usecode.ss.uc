@@ -572,8 +572,7 @@ void Func00E4 shape#(0xE4) () {
 		if (gflags[0x01CE] && (!gflags[0x01D1])) {
 			add("pay fine");
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "Goblins" (remove):
 				say("\"Yes, that entire vile race is the scourge of all men of the Serpent Isle.\"");
 				fallthrough;
@@ -1845,8 +1844,7 @@ void Func00F9 shape#(0xF9) () {
 			say("\"Seek out the one whose Beauty lies deep within. He will set thee upon the path to the lost soul of Fawn.\"");
 			abort;
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "revelation":
 				if (!var0003) {
 					say("\"There will be a Grand Trial soon. At the end of the proceedings, I shall proclaim the verdict.\"");
@@ -2198,8 +2196,7 @@ void Func0103 shape#(0x103) () {
 			if (gflags[0x00EA] && (!0xFFE1->get_item_flag(0x0004))) {
 				add("kidnap");
 			}
-			add(["Ranger", "bye"]);
-			converse (0) {
+			converse (["Ranger", "bye"]) {
 				case "kidnap" (remove):
 					say("\"Thou shouldst report such a crime as this to Julia. She can aid thee.\"");
 					if (0xFFE9->npc_nearby()) {
@@ -2350,8 +2347,7 @@ void Func0103 shape#(0x103) () {
 			if (gflags[0x00EA] && (!0xFFE1->get_item_flag(0x0004))) {
 				add("kidnap");
 			}
-			add(["Ranger", "bye"]);
-			converse (0) {
+			converse (["Ranger", "bye"]) {
 				case "kidnap" (remove):
 					say("\"This is such a terrible crime. And it involves magic!");
 					if (0xFFE9->npc_nearby()) {
@@ -4318,8 +4314,7 @@ void Func0162 shape#(0x162) () {
 		set_schedule_type(0x0000);
 		0xFEF2->show_npc_face0(0x0000);
 		say("\"So, brave warrior come to kill King Goblin? Ha! We speak first...\"");
-		add(["name", "goblins", "Helm of Monitor", "Simon", "bye"]);
-		converse (0) {
+		converse (["name", "goblins", "Helm of Monitor", "Simon", "bye"]) {
 			case "name" (remove):
 				say("\"Me Pomdirgun, Warlord and King of all Goblins. Mine shall be last name thou wilt ever hear.\"");
 				fallthrough;
@@ -4465,8 +4460,7 @@ void Func0175 shape#(0x175) () {
 			say("\"the Staff, Armour, and Crown of the Great Earth Serpent.\"");
 			add(["Staff", "Armour", "Crown"]);
 		}
-		add(["Great Earth Serpent", "quest", "bye"]);
-		converse (0) {
+		converse (["Great Earth Serpent", "quest", "bye"]) {
 			case "Great Earth Serpent" (remove):
 				say("\"Dost thou not recognize Him? 'Twas he whom thou didst free from the tyranny of Exodus, in thine adventurings of long, long ago. It is he who speaks to thee now, in his whisperings from the deeps.\"");
 				say("\"It was the Great Serpent who maintained Balance in the land, but when Exodus stole him, the Serpents of Chaos and Order were left unto themselves.\"");
@@ -5874,8 +5868,7 @@ void Func01C3 shape#(0x1C3) () {
 				var0001,
 				"?\"");
 			var0005 = 0x0000;
-			add(["the gremlins", "the explosions", "the Cyclops", "the invisible man", "change subject"]);
-			converse (0) {
+			converse (["the gremlins", "the explosions", "the Cyclops", "the invisible man", "change subject"]) {
 				case "the gremlins" (remove):
 					say("\"Gremlins? Thou art merely trying to impress us, ",
 						var0001,
@@ -10357,8 +10350,7 @@ void Func0294 shape#(0x294) () {
 			say("\"Thou must have some way to remove this foul enchantment! But... What have I to live for? My very heart hath been torn asunder! My people are dead! There is nothing left for me!\"");
 			add(["prove", "heart", "people"]);
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "bye":
 				Func097F(0xFE9C, "@Keep faith!@", 0x0000);
 				Func097F(item, "@I am cursed!@", 0x0002);
@@ -12353,8 +12345,7 @@ void Func02D8 shape#(0x2D8) () {
 	if (event == 0x0002) {
 		0xFEFE->show_npc_face0(0x0000);
 		say("\"I am trapped! Help me!\"");
-		add(["name", "Trapped?", "bye"]);
-		converse (0) {
+		converse (["name", "Trapped?", "bye"]) {
 			case "name" (remove):
 				say("\"I am Shriash. Though I am only a little girl, thou must know that I am a faithful follower of Chaos.\"");
 				say("\"I belong to the Temple of Emotion.\"");
@@ -13610,8 +13601,7 @@ void Func0319 shape#(0x319) () {
 		0xFEEC->show_npc_face0(0x0000);
 		say("\"Avatar! At last thou hast come. Seeing thee again hath brought me strength.\"");
 		say("\"Dost thou know that I expected to find thee here, in my dreams? I wish that thou wert truly here to counsel me...");
-		add(["name", "job", "bye"]);
-		converse (0) {
+		converse (["name", "job", "bye"]) {
 			case "name":
 				say("\"Dost thou truly have to ask my name? Hast thou suffered from the recent afflictions as has all of Britannia? Canst thou not recognize thine old friend?\"* \"'Tis I, Lord British, ruler of all Britannia. Or at least what is left of it after all of the disasters...\"");
 				remove("name");
@@ -16101,8 +16091,7 @@ void Func0355 shape#(0x355) () {
 	say("\"Who dares to disturb the restless repose of the Hierophant of Chaos!\"");
 	say("\"Wait -- I know thee! The Void hath whispered to me of thy coming, Hero from a Distant Land. But dost thou dare to hear the answers to thy questions?\"");
 	gflags[0x022B] = true;
-	add(["restless repose", "whispers from the Void", "questions", "bye"]);
-	converse (0) {
+	converse (["restless repose", "whispers from the Void", "questions", "bye"]) {
 		case "restless repose" (remove):
 			say("\"Did not faithful Sethys tell thee of my fate? I was slain on this very spot centuries ago, at the hands of the Soldiers of Order.\"");
 			say("\"My spirit hath lingered here, for my final duties remain unfinished...\"");
@@ -16538,8 +16527,7 @@ void Func0363 shape#(0x363) () {
 				say("\"Thou art truly the one I seek! Here is the Hourglass of Fate. Keep it with thee always, for through it the Monks of Xenka can aid thee.\"");
 				var0005 = Func099B(0xFE9C, 0x0001, 0x0347, 0xFE99, 0x0001, false, true);
 				add(["foretold", "promised Hero", "assistance", "Hourglass"]);
-				add("bye");
-				converse (0) {
+				converse ("bye") {
 					case "Hourglass" (remove):
 						say("\"As long as the Hourglass of Fate is with thee, if thou art killed, thou shalt be resurrected on Monk Isle.\"");
 						say("\"And if one of thy companions is killed, thou canst summon one of us to resurrect him or her, by use of the Hourglass.\"");
@@ -16800,8 +16788,7 @@ void Func036A shape#(0x36A) () {
 		0xFEF3->set_schedule_type(0x0009);
 		0xFEE9->show_npc_face0(0x0000);
 		say("\"Woof!\"");
-		add(["trick", "track", "attack", "bye"]);
-		converse (0) {
+		converse (["trick", "track", "attack", "bye"]) {
 			case "track":
 				var0001 = script item {
 					nohalt;
@@ -17241,8 +17228,7 @@ void Func0395 shape#(0x395) () {
 		clear_item_say();
 		0xFEE8->show_npc_face0(0x0000);
 		say("\"We have stalked each other long enough!\"");
-		add(["Are you The Trapper?", "bye"]);
-		converse (0) {
+		converse (["Are you The Trapper?", "bye"]) {
 			case "Are you The Trapper?" (remove):
 				say("\"Forgo the pretense, I am Hazard the Trapper as thou dost know well by now.\"");
 				add("Murderer!");
@@ -17546,8 +17532,7 @@ void Func03B1 shape#(0x3B1) () {
 				say("\"How might I aid thee in fulfilling thy duty?\"");
 			}
 		}
-		add(["Order Hierophant", "Champion of Balance", "Serpent's Fang", "bye"]);
-		converse (0) {
+		converse (["Order Hierophant", "Champion of Balance", "Serpent's Fang", "bye"]) {
 			case "apologize" (remove):
 				if (gflags[0x02FC] && (!gflags[0x0313])) {
 					say("\"I am now convinced that thou art the Champion of Balance, ",
@@ -18102,8 +18087,7 @@ void Func03B3 shape#(0x3B3) () {
 					". I fear I am not yet accustomed to the title of SubCommander.\"");
 			}
 		}
-		add(["Train", "SubCommander", "Amulet of Balance", "bye"]);
-		converse (0) {
+		converse (["Train", "SubCommander", "Amulet of Balance", "bye"]) {
 			case "Congratulations" (remove):
 				if (gflags[0x02FC] && (!gflags[0x0313])) {
 					say("\"It took a mighty warrior to retrieve those Orbs, ",
@@ -18449,8 +18433,7 @@ void Func03BD shape#(0x3BD) () {
 		if (gflags[0x02FA] == true) {
 			add("food");
 		}
-		add(["monster", "peace", "home", "bye"]);
-		converse (0) {
+		converse (["monster", "peace", "home", "bye"]) {
 			case "monster" (remove):
 				say("\"Yurel knows not how he came to be this way... so unlike others. Yurel has been told that he was an... experiment long ago gone wrong.");
 				say("\"Yurel does not care. Yurel breaths. Yurel fears. Yurel loves. That makes Yurel the same as others, though Yurel wears fur or not.\"");
@@ -19778,8 +19761,7 @@ void Func03F7 shape#(0x3F7) () {
 				add("service");
 			}
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "prove" (remove):
 				say("\"Unless thou canst prove to me that thou dost not mean harm to DeathWatch, I shall have to turn thee over to Isstanar.  Thou wouldst find the experience most unpleasant.\"");
 				add(["DeathWatch", "Isstanar"]);
@@ -20591,8 +20573,7 @@ void Func0401 object#(0x401) () {
 		if (gflags[0x0017] && ((!0xFFFF->get_item_flag(0x0006)) && 0xFFFF->get_cont_items(0xFE99, 0xFE99, 0xFE99))) {
 			add("belongings");
 		}
-		add(["bye"]);
-		converse (0) {
+		converse (["bye"]) {
 			case "belongings" (remove):
 				Func0829();
 				fallthrough;
@@ -21246,8 +21227,7 @@ void Func0403 object#(0x403) () {
 			add("belongings");
 		}
 		0xFFFD->show_npc_face0(0x0000);
-		add(["Gwenno", "bye"]);
-		converse (0) {
+		converse (["Gwenno", "bye"]) {
 			case "belongings" (remove):
 				if (0xFFFD->get_cont_items(0xFE99, 0xFE99, 0xFE99)) {
 					say("\"I am carrying many items, some of which may be of use to thee. Wouldst thou care to have these?\"");
@@ -21584,8 +21564,7 @@ void Func0404 object#(0x404) () {
 		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(0x0004))) {
 			add("kidnap");
 		}
-		add(["bye"]);
-		converse (0) {
+		converse (["bye"]) {
 			case "scared" (remove):
 				say("\"The Glowing Man came and killed nearly everyone in the entire town. Fedabiblio tried to stop him, but not even he could withstand the Glowing Man's attack.\"");
 				add("Fedabiblio");
@@ -22840,8 +22819,7 @@ void Func040E object#(0x40E) () {
 		if (gflags[0x0110] && (!gflags[0x028F])) {
 			add("apparatus");
 		}
-		add(["Green Enchantress", "bye"]);
-		converse (0) {
+		converse (["Green Enchantress", "bye"]) {
 			case "Green Enchantress" (remove):
 				say("\"My name is Columna. Sorceress, wife of Melino, and I am also the most desired beauty in Moonshade.\"");
 				if (gflags[0x00FD]) {
@@ -23056,8 +23034,7 @@ void Func040F object#(0x40F) () {
 		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(0x0004))) {
 			add("kidnap");
 		}
-		add(["bye"]);
-		converse (0) {
+		converse (["bye"]) {
 			case "kidnap" (remove):
 				say("\"Do not involve me in such matters, stranger! Canst thou not see that I am a Mundane?\"");
 				say("\"This matter smacks of wizardry, and I want no part of it!\"");
@@ -23454,8 +23431,7 @@ void Func0410 object#(0x410) () {
 				var000E = true;
 			}
 		}
-		add(["name", "bye"]);
-		converse (0) {
+		converse (["name", "bye"]) {
 			case "name":
 				say("\"My name is Edrin.\"");
 				remove("name");
@@ -23731,8 +23707,7 @@ void Func0411 object#(0x411) () {
 		if ((gflags[0x010B] && (!gflags[0x028C])) || ((gflags[0x010C] && (!gflags[0x0295])) || ((gflags[0x010E] && (!gflags[0x029A])) || ((gflags[0x0110] && (!gflags[0x028F])) || ((gflags[0x0112] && (!gflags[0x0290])) || (gflags[0x0114] && (!gflags[0x0293]))))))) {
 			add("information");
 		}
-		add(["bye"]);
-		converse (0) {
+		converse (["bye"]) {
 			case "kidnap" (remove):
 				if (gflags[0x00EB]) {
 					say("\"Most ominous... Again, I would direct thee to the MageLord. He is a man of low intellect and great cunning. No doubt he can aid thee.\"");
@@ -24195,8 +24170,7 @@ void Func0412 object#(0x412) () {
 		if (gflags[0x0114] && (!gflags[0x0293])) {
 			add("slippers");
 		}
-		add(["bye"]);
-		converse (0) {
+		converse (["bye"]) {
 			case "change subject":
 				say("\"But we were only beginning! Very well, if thou dost insist...\"");
 				UI_pop_answers();
@@ -24498,8 +24472,7 @@ void Func0413 object#(0x413) () {
 		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(0x0004))) {
 			add("kidnap");
 		}
-		add(["bye"]);
-		converse (0) {
+		converse (["bye"]) {
 			case "kidnap" (remove):
 				say("\"Thou shouldst ask Andrio -- I am certain that he could help thee! He is very bright.\"");
 				if (0xFFFC->npc_nearby()) {
@@ -24723,8 +24696,7 @@ void Func0414 object#(0x414) () {
 		if (gflags[0x0292]) {
 			add("fur cap");
 		}
-		add(["spells", "goblin", "Batlin", "Moonshade", "Gwenno", "bye"]);
-		converse (0) {
+		converse (["spells", "goblin", "Batlin", "Moonshade", "Gwenno", "bye"]) {
 			case "fur cap" (remove):
 				var000B = Func097D(0xFE9B, 0x0001, 0x03EC, 0xFE99, 0x0004);
 				if (var000B) {
@@ -25204,8 +25176,7 @@ void Func0417 object#(0x417) () {
 		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(0x0004))) {
 			add("kidnap");
 		}
-		add(["name", "wine", "bye"]);
-		converse (0) {
+		converse (["name", "wine", "bye"]) {
 			case "kidnap" (remove):
 				if (gflags[0x0143]) {
 					say("\"I have most excellent news, ",
@@ -25646,8 +25617,7 @@ void Func0418 object#(0x418) () {
 		if (0xFFE8->get_schedule_type() == 0x000C) {
 			add("spells");
 		}
-		add(["bye"]);
-		converse (0) {
+		converse (["bye"]) {
 			case "new Mage" (remove):
 				say("\"Of course thou art new here! I know all other Mages in Moonshade... And I have never seen thee before.\"");
 				say("\"And thou hast thy spellbook, so thou art not a Mundane. Therefore, thou art a Mage.\"");
@@ -25938,8 +25908,7 @@ void Func0419 object#(0x419) () {
 				abort;
 			}
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "Rotoluncia" (remove):
 				say("\"My mistress commands many powerful and strange magics, and sits upon the Council of Mages.\"");
 				if (!gflags[0x00EA]) {
@@ -26193,8 +26162,7 @@ void Func041A object#(0x41A) () {
 			add("accuse");
 		}
 		add(["Necromage", "learn spells"]);
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "apparatus" (remove):
 				if (Func097D(0xFE9B, 0x0001, 0x02ED, 0xFE99, 0x0001)) {
 					say("\"It is some Mage's lab apparatus, ",
@@ -26549,8 +26517,7 @@ void Func041B object#(0x41B) () {
 		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(0x0004))) {
 			add("kidnap");
 		}
-		add(["bye"]);
-		converse (0) {
+		converse (["bye"]) {
 			case "kidnap" (remove):
 				say("\"Well, do not stare at me like that. I be innocent. They've never convicted me of any crimes...\"");
 				Func097F(0xFFE5, "@Leave me alone!@", 0x0000);
@@ -26885,8 +26852,7 @@ void Func041C object#(0x41C) () {
 		if (var0004 && (!0xFFE4->get_item_flag(0x0006))) {
 			add(["food", "drink", "room"]);
 		}
-		add(["bye"]);
-		converse (0) {
+		converse (["bye"]) {
 			case "food":
 				say("\"We have a fine selection of meals available for thee to choose from. Art thou hungry, ",
 					var0000,
@@ -27292,8 +27258,7 @@ void Func041D object#(0x41D) () {
 		if (!0xFFE1->get_item_flag(0x0004)) {
 			add("Rotoluncia");
 		}
-		add(["bye"]);
-		converse (0) {
+		converse (["bye"]) {
 			case "tell me about Erstam" (remove):
 				say("\"It would not be wise for me to tell thee much. I shall merely acquaint thee with how to reach the docks, how to call thy transport, and the required password.\"");
 				UI_push_answers();
@@ -27807,8 +27772,7 @@ void Func041E object#(0x41E) () {
 		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(0x0004))) {
 			add("kidnap");
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "kidnap" (remove):
 				say("\"I cannot say that I'm surprised, ",
 					var0002,
@@ -28315,8 +28279,7 @@ void Func041F object#(0x41F) () {
 				0x0000->set_conversation_slot();
 				say("\"Who said that! Death draws near for those who taunt Rotoluncia the Red Witch.\"");
 			}
-			add(["magic", "Council", "not afraid", "bye"]);
-			converse (0) {
+			converse (["magic", "Council", "not afraid", "bye"]) {
 				case "magic" (remove):
 					say("\"I am the most powerful wizard in this city, and I could teach thee many things -- if thou wert not a mere Mundane.\"");
 					var000E = Func0900(0x0002);
@@ -28584,8 +28547,7 @@ void Func0420 object#(0x420) () {
 		if (Func097D(0xFE9B, 0x0001, 0x02F8, 0xFE99, 0xFE99)) {
 			add("sell gems");
 		}
-		add(["buy", "bye"]);
-		converse (0) {
+		converse (["buy", "bye"]) {
 			case "kidnap" (remove):
 				say("\"I am terribly sorry for thee at this sensitive time. Grief is a natural emotion...\"");
 				var0006 = Func0992(0x0001, "@Our friend is missing -- not DEAD!@", "@Canst thou be of aid?@", false);
@@ -28976,8 +28938,7 @@ void Func0421 object#(0x421) () {
 			add("help Fedabiblio");
 		}
 		add(["Torrissio"]);
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "kidnap" (remove):
 				if (gflags[0x0142]) {
 					say("\"So thou dost suspect me of taking thy companion, ",
@@ -29478,8 +29439,7 @@ void Func0422 object#(0x422) () {
 		if (gflags[0x0013] && ((!0xFFDE->get_item_flag(0x0006)) && 0xFFDE->get_cont_items(0xFE99, 0xFE99, 0xFE99))) {
 			add("return my belongings");
 		}
-		add(["name", "duties", "bye"]);
-		converse (0) {
+		converse (["name", "duties", "bye"]) {
 			case "return my belongings" (remove):
 				Func080A();
 				fallthrough;
@@ -29784,8 +29744,7 @@ void Func0423 object#(0x423) () {
 		if (gflags[0x027D] && (!gflags[0x028F])) {
 			add("lab apparatus");
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "Introduce thyself" (remove):
 				say("\"I do not care to know thy name! As for myself, my fame hath grown with each passing century. I am Erstam, he whom some dare call the Mad Mage!\"");
 				0xFFDD->set_item_flag(0x001C);
@@ -30172,8 +30131,7 @@ void Func0424 object#(0x424) () {
 		if (gflags[0x01BE]) {
 			add("teleportation");
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "name" (remove):
 				say("\"I am an orphan. I have no name. My parents were so poor they could not afford to give me one!\"");
 				UI_push_answers();
@@ -31381,8 +31339,7 @@ void Func0428 object#(0x428) () {
 		if (gflags[0x010A] && (!gflags[0x0295])) {
 			add("blue egg");
 		}
-		add(["bye"]);
-		converse (0) {
+		converse (["bye"]) {
 			case "jail":
 				say("\"Now if that ain't gratitude for ye!\" ~\"Here I refused ta risk the Arabella and them passengers ta the terrible fierce weather.\" *\"And one of them goes and calls the Pikemen on me!\"");
 				remove("jail");
@@ -31669,8 +31626,7 @@ void Func0429 object#(0x429) () {
 				". 'Tis so good to see thee again, after all these storms. Argus will be glad to see thee.\"");
 			add(["storm", "Argus", "disappeared"]);
 		}
-		add(["food", "drink", "room", "exchange money", "bye"]);
-		converse (0) {
+		converse (["food", "drink", "room", "exchange money", "bye"]) {
 			case "storm":
 				say("\"I have lived here since before I was married, and I've never seen anything like these mage-born storms. Why, one caught old man Jothum in his field and changed his plow horse into a goat, in front of his eyes.\" *\"But Jothum was lucky, 'twas only his horse. We never did find what happened to Theron.\"");
 				remove("storm");
@@ -32001,8 +31957,7 @@ void Func042A object#(0x42A) () {
 		if (gflags[0x012F] && (!gflags[0x00D9])) {
 			add("thy promise");
 		}
-		add(["bye"]);
-		converse (0) {
+		converse (["bye"]) {
 			case "strange state" (remove):
 				say("\"He now calls himself Shamino the Anarch.\"");
 				say("\"By his command up may become down, and in may become out. And woe to anyone who disagrees. He hath totally unravelled the strictures... 'Tis a magical madhouse out there!\"");
@@ -32557,8 +32512,7 @@ void Func042B object#(0x42B) () {
 				}
 			}
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "passage":
 				if (gflags[0x01CC]) {
 					say("\"Now that we are here in Moonshade it seems that thou canst not find passage to go elsewhere. Not even Captain Hawk will brave those Teleport Storms again.\"");
@@ -32873,8 +32827,7 @@ void Func042C object#(0x42C) () {
 		if (0xFFD4->get_item_flag(0x0006) && (!gflags[0x01E6])) {
 			add("Are we there yet?");
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "Are we there yet?" (remove):
 				var0005 = [0x06D0, 0x0766, 0x0000];
 				var0006 = 0xFFD4->get_object_position();
@@ -33938,8 +33891,7 @@ void Func042E object#(0x42E) () {
 		if (var0000 == true) {
 			add("provisions");
 		}
-		add(["storms", "Goblins", "bye"]);
-		converse (0) {
+		converse (["storms", "Goblins", "bye"]) {
 			case "provisions":
 				if (0xFFD2->get_schedule_type() == 0x0013) {
 					say("\"I help father with the shop when he is... indisposed. What dost thou wish to purchase?\"");
@@ -35318,8 +35270,7 @@ void Func0431 object#(0x431) () {
 					". I trust that thou art feeling well.\"");
 			}
 		}
-		add(["storms", "goblins", "bye"]);
-		converse (0) {
+		converse (["storms", "goblins", "bye"]) {
 			case "storms":
 				say("\"Without question, these storms are unnatural. If they do not cease soon, Fawn will perish!\" ~\"Already our livelihood hath been taken from us.\" ~\"And women weep at the loss of those who once sailed in our fleet. We have no idea what became of them.\"");
 				remove("storms");
@@ -35551,8 +35502,7 @@ void Func0432 object#(0x432) () {
 		} else {
 			say("\"Good ta see thee again.\"");
 		}
-		add(["storms", "goblins", "bye"]);
-		converse (0) {
+		converse (["storms", "goblins", "bye"]) {
 			case "storms":
 				say("\"'Twas a storm what ran me ship aground and took me from the sea! 'Tis fitting that these daemon storms will be the end of us all.\" *\"They have taken all me old friends -- plucked 'em right off the water or drowned 'em deep. Never thought I'd live ta see the day when Fawn's fleet was brought low.\"");
 				remove("storms");
@@ -35785,8 +35735,7 @@ void Func0433 object#(0x433) () {
 			add(["storms", "Goblins"]);
 		}
 	}
-	add("bye");
-	converse (0) {
+	converse ("bye") {
 		case "false Oracle" (remove):
 			say("\"The Oracle hath always been a fraud! Dost thou not comprehend?\"");
 			say("\"Even in our ancient homeland, the Statue of Beauty was controlled by the Great Captains. It said what we told it to.\"");
@@ -37079,8 +37028,7 @@ void Func0435 object#(0x435) () {
 		if (gflags[0x019C] && (!gflags[0x029C])) {
 			add("plain shield");
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "tower":
 				if (gflags[0x003E] == true) {
 					if (gflags[0x014E] == true) {
@@ -37509,8 +37457,7 @@ void Func0436 object#(0x436) () {
 			}
 		}
 	}
-	add("bye");
-	converse (0) {
+	converse ("bye") {
 		case "plot" (remove):
 			say("\"I see now that Captain Voldin and his men did take advantage of me, through the deception called the Oracle.\"");
 			if (0xFFCD->npc_nearby()) {
@@ -38005,8 +37952,7 @@ void Func0437 object#(0x437) () {
 		}
 		0xFFC9->set_item_flag(0x001C);
 		add(["Fawn", "Beauty", "goblins", "storms", "name"]);
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "goblins":
 				say("\"Oh, horrible, vile creatures! They have killed all the Pikemen that were guarding the road to our beautiful city.\"");
 				say("\"Whatever shall we do now?\"");
@@ -38197,8 +38143,7 @@ void Func0438 object#(0x438) () {
 				var0002,
 				". How may I help thy quest for Unity?\"");
 		}
-		add(["goblins", "storms", "bye"]);
-		converse (0) {
+		converse (["goblins", "storms", "bye"]) {
 			case "Fellowship":
 				say("\"While the Virtues that Lord British expounded are all very well and good, they are nearly impossible for ordinary people to achieve.\"");
 				say("\"Simple people need a simple philosophy.\"");
@@ -38451,8 +38396,7 @@ void Func0439 object#(0x439) () {
 		if (gflags[0x0004] == true) {
 			add("Iolo the Mad");
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "name":
 				say("\"Second Mate Kalen, to ye.\"");
 				remove("name");
@@ -39519,8 +39463,7 @@ void Func043B object#(0x43B) () {
 				add("letter");
 			}
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "Where is everyone?" (remove):
 				say("\"All dead! Hast thou not seen their bodies heaped about the desolate buildings?\"");
 				say("\"I do not remember it clearly, for my sanity was lost when I found Delphynia's body.\"");
@@ -40112,8 +40055,7 @@ void Func043D object#(0x43D) () {
 		if (gflags[0x018E] && (!gflags[0x018F])) {
 			add("Art thou following me?");
 		}
-		add(["storms", "goblins", "Chancellor", "bye"]);
-		converse (0) {
+		converse (["storms", "goblins", "Chancellor", "bye"]) {
 			case "Art thou following me?" (remove):
 				say("\"I am a busy man, ",
 					var0000,
@@ -40751,8 +40693,7 @@ void Func043F object#(0x43F) () {
 		if (gflags[0x00CC]) {
 			add("Pomdirgun");
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "Helm of Monitor" (remove):
 				say("\"Thou hast recovered the Helm of Monitor and proven thyself to be our Champion Knight. Thou art the best of us, the standard by which we shall all be measured. Remember, if thou shouldst leave our city, thou dost carry our honor with thee. It is thy duty to not only to serve Monitor, but to help restore the balance of the world. This is the mission of the Champion Knight.\"");
 				fallthrough;
@@ -41324,8 +41265,7 @@ void Func0440 object#(0x440) () {
 		if (gflags[0x002D] && (!gflags[0x00A5])) {
 			add("Marsten");
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "Marsten" (remove):
 				if (gflags[0x0038]) {
 					say("\"I am amazed to hear that Marsten hath betrayed us. I cannot believe it.\"");
@@ -41524,8 +41464,7 @@ void Func0441 object#(0x441) () {
 		if (gflags[0x009D] && (!gflags[0x0292])) {
 			add("fur cap");
 		}
-		add(["buy", "furrier", "bye"]);
-		converse (0) {
+		converse (["buy", "furrier", "bye"]) {
 			case "slain wolf" (remove):
 				say("\"Now that thou hast completed the Test, I must make a cloak for thee from the skin of the animal thou didst slay.\"");
 				if (!var0005) {
@@ -41661,8 +41600,7 @@ void Func0442 object#(0x442) () {
 			0xFFBE->show_npc_face0(0x0000);
 			say("\"Thou hast slain me! My blood spills away... all because of Pomdirgun, that betrayer!\"");
 			say("\"Come nearer, that I may boast of my deeds before I die.\"");
-			add(["deeds", "Pomdirgun", "bye"]);
-			converse (0) {
+			converse (["deeds", "Pomdirgun", "bye"]) {
 				case "deeds" (remove):
 					say("\"I am a Goblin! I have lived amongst the foolish Knights all these many years and no one hath suspected!! Yes! I have supplied my fellow Goblins with all of Monitor's military secrets!\"");
 					add("military secrets");
@@ -41906,8 +41844,7 @@ void Func0443 object#(0x443) () {
 			var0008 = 0x000C;
 		}
 		var0009 = 0x0000;
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "Marsten" (remove):
 				if (gflags[0x0038]) {
 					say("\"I am glad that miserable traitor is no longer Lord of Monitor!\"");
@@ -42895,8 +42832,7 @@ void Func0444 object#(0x444) () {
 		if (gflags[0x0045] || (gflags[0x00A6] || (gflags[0x009E] || gflags[0x009B]))) {
 			add("information");
 		}
-		add(["Knights", "supplies", "bye"]);
-		converse (0) {
+		converse (["Knights", "supplies", "bye"]) {
 			case "information" (remove):
 				say("\"Someone hath sent thee to me, eh? Well, I shall try to be of help to thee. What dost thou inquire about?\"");
 				UI_push_answers();
@@ -43354,8 +43290,7 @@ void Func0445 object#(0x445) () {
 		}
 		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != 0x000F)) {
 			add("brown bottle");
-			add("bye");
-			converse (0) {
+			converse ("bye") {
 				case "brown bottle" (remove):
 					if (Func097D(0xFE9B, 0x0001, 0x0268, 0xFE99, 0x0009)) {
 						say("\"Leave me with that dirty bottle! It doth look to have been lying in the woods for weeks...\"");
@@ -43967,8 +43902,7 @@ void Func0446 object#(0x446) () {
 		if (gflags[0x0048] && (!(0xFFB4->get_item_flag(0x0004) && (!(gflags[0x0038] && (!gflags[0x0092])))))) {
 			add("traitor");
 		}
-		add(["name", "buy", "bye"]);
-		converse (0) {
+		converse (["name", "buy", "bye"]) {
 			case "traitor" (remove):
 				say("\"This is all so confusing. Lord Brendann is certain that there must be a traitor, and the Wolves are united behind him.\"");
 				say("\"Yet I have also heard that there is certainly no traitor, and that we should not indulge in hysteria...\"");
@@ -44405,8 +44339,7 @@ void Func0447 object#(0x447) () {
 		if (gflags[0x0048] && (!0xFFB4->get_item_flag(0x0004))) {
 			add("traitor");
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "traitor" (remove):
 				say("\"The Goblins did not ambush that patrol without help. If Lord Marsten doth not recognize this, then he is blind as well as brainless.\"");
 				say("\"It doth not take a wizard to untangle this skein. Who among us acts strangely, doth do things in secret, and avoids his knightly duties?\"");
@@ -44755,8 +44688,7 @@ void Func0448 object#(0x448) () {
 		if (gflags[0x0035]) {
 			add("poison");
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "traitor" (remove):
 				say("\"As loathsome as Luther is, perhaps he doth have a point. Krayg doth indeed take long walks in the woods, most strangely...\"");
 				if (gflags[0x00C0]) {
@@ -45314,8 +45246,7 @@ void Func044A object#(0x44A) () {
 		if (gflags[0x0044]) {
 			add("Simon");
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "Pomdirgun" (remove):
 				say("\"Thou hast killed the Goblin King Pomdirgun. How wonderful!\"");
 				fallthrough;
@@ -45545,8 +45476,7 @@ void Func044B object#(0x44B) () {
 		if (gflags[0x0080]) {
 			add("the Test");
 		}
-		add(["duties", "bye"]);
-		converse (0) {
+		converse (["duties", "bye"]) {
 			case "duties" (remove):
 				if (gflags[0x004A]) {
 					say("\"But thou already knowest!\"");
@@ -45834,8 +45764,7 @@ void Func044C object#(0x44C) () {
 		if (gflags[0x0048]) {
 			add("traitor");
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "duties" (remove):
 				say("\"I am the innkeeper of The Sleeping Soldier, Monitor's inn. If thou dost need a bed, I can certainly accommodate thee.\"");
 				if (!gflags[0x00B8]) {
@@ -46324,8 +46253,7 @@ void Func044D object#(0x44D) () {
 			add("thief");
 		}
 	}
-	add("bye");
-	converse (0) {
+	converse ("bye") {
 		case "duties" (remove):
 			say("\"Frankly, I do so many things. I am Monitor's treasurer. Lord Marsten may order things done, but I must find a way to pay for it all!\"");
 			say("\"I handle the books and the paperwork, and I'm the local money exchanger. I also collect and administer the taxes.\"");
@@ -46580,8 +46508,7 @@ void Func044E object#(0x44E) () {
 		if (gflags[0x00CC]) {
 			add("Pomdirgun");
 		}
-		add(["buy", "bye"]);
-		converse (0) {
+		converse (["buy", "bye"]) {
 			case "Pomdirgun":
 				add("Pomdirgun");
 				say("\"I envy thee the chance to kill Pomdirgun. I hope thou didst make him suffer!\"");
@@ -46798,8 +46725,7 @@ void Func044F object#(0x44F) () {
 		if (gflags[0x0048]) {
 			add("traitor");
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "grisly brush" (remove):
 				say("\"A peculiar brush? I suspect that I already know what it is, but let me see...\"");
 				if (var0002) {
@@ -47991,8 +47917,7 @@ void Func045E object#(0x45E) () {
 				var0000,
 				". And I am sorry. Thou must postpone thy meditations, for the key to the fountain room cannot be found.\"");
 			say("\"I fear that someone hath destroyed Number 7, the keeper of the key!\"");
-			add(["meditations", "destroyed", "accuse", "bye"]);
-			converse (0) {
+			converse (["meditations", "destroyed", "accuse", "bye"]) {
 				case "meditations" (remove):
 					say("\"Thy search for Logic can go no further until thou canst drink of the waters of Logic. And until the key to the fountain room is found, no one may taste the pure waters of Logic.\"");
 					fallthrough;
@@ -48085,8 +48010,7 @@ void Func045F object#(0x45F) () {
 			say("\"I regret that thou canst not meditate, ",
 				var0000,
 				". The strange mage hath damaged the Temple and the key to the fountain room is nowhere to be found!\"");
-			add(["strange mage", "damaged", "key", "accuse", "bye"]);
-			converse (0) {
+			converse (["strange mage", "damaged", "key", "accuse", "bye"]) {
 				case "strange mage" (remove):
 					say("\"He was a nasty-looking little man, ",
 						var0000,
@@ -48193,8 +48117,7 @@ void Func0460 object#(0x460) () {
 		} else {
 			say("\"We have failed to protect the Temple! We have failed to provide thee with the solitude to meditate! And no one hath seen Number 7 in ages!\"");
 			say("\"I am not worthy of my Number 3! Where is Number 7, the keeper of the key?!\"");
-			add(["protect", "solitude", "Number 7", "accuse", "bye"]);
-			converse (0) {
+			converse (["protect", "solitude", "Number 7", "accuse", "bye"]) {
 				case "protect" (remove):
 					say("\"That is the duty of my fellows and I, to protect the Temple and assist those who come here to meditate on the pure waters of Logic. And we have failed!\"");
 					fallthrough;
@@ -48283,8 +48206,7 @@ void Func0461 object#(0x461) () {
 		} else {
 			say("\"Number 7 hath abandoned his post! The key is gone!\"");
 			say("\"None shall seek the fountain to meditate again!\"");
-			add(["abandoned", "fountain", "accuse", "name", "bye"]);
-			converse (0) {
+			converse (["abandoned", "fountain", "accuse", "name", "bye"]) {
 				case "abandoned" (remove):
 					say("\"Why else would Number 7 not be here, unless someone hath destroyed him? If Number 7 were fulfilling his duties, we would have the key to allow thee to meditate... as is our sworn duty.\"");
 					say("\"The last time any of us saw Number 7, I was with Number 2... And that was some time ago.\"");
@@ -48376,8 +48298,7 @@ void Func0462 object#(0x462) () {
 			abort;
 		} else {
 			say("\"Where is the justice in the world when a strange mage comes to destroy our Temple and disrupt our peace?! Where is the keeper of the key?\"");
-			add(["justice", "strange mage", "disrupt", "keeper of the key", "accuse", "bye"]);
-			converse (0) {
+			converse (["justice", "strange mage", "disrupt", "keeper of the key", "accuse", "bye"]) {
 				case "justice" (remove):
 					say("\"Thou mayest call me Number 5, for I no longer bear a mortal name. I surrendered that when I swore myself to eternal service at the fountain of Logic.\"");
 					say("\"I am bound for all time and eternity in a body that will never age, and now I cannot fulfill my vows! Where is the justice in living forever with broken vows?\"");
@@ -48487,8 +48408,7 @@ void Func0463 object#(0x463) () {
 				". Long have we searched for the one who held the key to the fountain room, ",
 				var0000,
 				". But Number 7 hath disappeared and we are failures.\"");
-			add(["Number 7", "failures", "accuse", "bye"]);
-			converse (0) {
+			converse (["Number 7", "failures", "accuse", "bye"]) {
 				case "Number 7" (remove):
 					say("\"Number 7 was the keeper of the key to the fountain room, ",
 						var0000,
@@ -48566,8 +48486,7 @@ void Func0464 object#(0x464) () {
 			if (Func0955() == true) {
 				say("\"Very well... Consider each question carefully before answering.\"");
 				say("\"Question One: If thou didst come upon one who was sure to die, would it be Ethical to risk death trying to save the doomed person? Or would it be more Ethical to flee before the same fate befell thee?\"");
-				add(["Risk Death", "Flee"]);
-				converse (0) {
+				converse (["Risk Death", "Flee"]) {
 					case "Risk Death":
 						say("\"Thou art correct. Ethicality demands that thou must seek to preserve the life of others, as thou wouldst thine own.\" *\"No man's fate is certain while he yet lives. Thine actions can change the course of fate...\"");
 						UI_push_answers();
@@ -49236,8 +49155,7 @@ void Func0482 object#(0x482) () {
 		0xFF7E->clear_item_say();
 		0xFED6->show_npc_face0(0x0000);
 		say("\"Halt! It is our duty to question thee. Dost thou serve Order or dost thou serve Chaos?\"");
-		add(["I serve Order", "I serve Chaos"]);
-		converse (0) {
+		converse (["I serve Order", "I serve Chaos"]) {
 			case "I serve Order" (remove):
 				say("\"Very well. We have been left here to watch for any survivors of Chaos who might come from the depths of these passages. There is no escape from this place save for these doors and still no one can obtain passage through them.\"");
 				add(["escape", "passage", "bye"]);
@@ -49523,8 +49441,7 @@ void Func0490 object#(0x490) () {
 		} else {
 			say("\"Thou... the one... Gwenno spoke.\" ~You can tell the creature obviously has great trouble with your language.");
 		}
-		add(["name", "Gwani", "bye"]);
-		converse (0) {
+		converse (["name", "Gwani", "bye"]) {
 			case "name" (remove):
 				say("\"Bwundai my name is.\"");
 				set_item_flag(0x001C);
@@ -49607,8 +49524,7 @@ void Func0491 object#(0x491) () {
 			}
 		} else {
 			say("\"Thou look like Avatar,\" the Gwani creature says with broken speech.");
-			add(["name", "Gwani", "bye"]);
-			converse (0) {
+			converse (["name", "Gwani", "bye"]) {
 				case "name" (remove):
 					say("\"Mwaerno. Means 'rain clouds'.\"");
 					fallthrough;
@@ -49781,8 +49697,7 @@ void Func0493 object#(0x493) () {
 		0xFF6D->clear_item_say();
 		0xFF6D->show_npc_face0(0x0000);
 		say("\"Thou be Avatar! Thou nice!\"");
-		add(["name", "What art thou doing?", "bye"]);
-		converse (0) {
+		converse (["name", "What art thou doing?", "bye"]) {
 			case "name" (remove):
 				say("\"Mother say thou found medicine make me better. Thank thou! My name Neyobi! Thou know what that mean?\"");
 				var0002 = Func0955();
@@ -50137,8 +50052,7 @@ void Func0495 object#(0x495) () {
 		if (gflags[0x0010] && ((!0xFF6B->get_item_flag(0x0006)) && 0xFF6B->get_cont_items(0xFE99, 0xFE99, 0xFE99))) {
 			add("belongings");
 		}
-		add(["bye"]);
-		converse (0) {
+		converse (["bye"]) {
 			case "belongings" (remove):
 				Func0835();
 				fallthrough;
@@ -50593,8 +50507,7 @@ void Func0496 object#(0x496) () {
 		if (gflags[0x002C]) {
 			add("Helm of Monitor");
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "Helm of Monitor" (remove):
 				say("\"As thou hast won back the helm of Monitor, thou art truly deserved of the title Champion Knight of Monitor. I salute thee!\"");
 				fallthrough;
@@ -51032,8 +50945,7 @@ void Func0498 object#(0x498) () {
 				add(["Order dog", "key", "Chaos Hierophant"]);
 			}
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "Order dog":
 				say("\"Thou canst not be satisfied with winning the war! No, thou must slaughter all who dared to believe in something other than what thou dost hold dear!\" *\"Fine warriors who kill cripples and children!\"");
 				remove("Order dog");
@@ -51191,8 +51103,7 @@ void Func0499 object#(0x499) () {
 		} else {
 			say("\"Beware claws of Ice Dragon!\"");
 		}
-		add(["name", "Ice Dragon", "bye"]);
-		converse (0) {
+		converse (["name", "Ice Dragon", "bye"]) {
 			case "name" (remove):
 				if (var0000) {
 					say("\"Am still Gilwoyai.\"");
@@ -51246,8 +51157,7 @@ void Func049A object#(0x49A) () {
 		} else {
 			say("\"Our hunt bad.\"");
 		}
-		add(["name", "hunt", "bye"]);
-		converse (0) {
+		converse (["name", "hunt", "bye"]) {
 			case "name" (remove):
 				say("\"Me Kapyundi, mean @little glacier@. Me son of Yenani and Myauri.\"");
 				0xFF66->set_item_flag(0x001C);
@@ -51448,8 +51358,7 @@ void Func049B object#(0x49B) () {
 				add(["afraid", "Draygan"]);
 			}
 		}
-		add(["bye"]);
-		converse (0) {
+		converse (["bye"]) {
 			case "afraid" (remove):
 				say("\"Of the two-score settlers who came to this place led by Draygan, only three of us survive! And the other two work for him!\"");
 				say("\"Draygan burned the ship and left the others to die! I know he played a part in the death of mine husband, as well.\"");
@@ -51614,8 +51523,7 @@ void Func049C object#(0x49C) () {
 			say("\"And thou art still of no use to my destiny. I do not have time to prattle with thee, stranger. Stay away from this camp, and from my followers. As the lord of this place, I order this to be so.\"");
 		}
 		add(["lord", "destiny"]);
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "change subject":
 				UI_pop_answers();
 				say("\"But we were soon to hear the best part...\"");
@@ -51877,8 +51785,7 @@ void Func049F object#(0x49F) () {
 			add("Hound of Doskar");
 			remove("Master");
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "change subject":
 				UI_pop_answers();
 				say("\"What wouldst thou have me speak of, stranger?\"");
@@ -52883,8 +52790,7 @@ void Func04A8 object#(0x4A8) () {
 		if (gflags[0x000F] && ((!0xFF58->get_item_flag(0x0006)) && 0xFF58->get_cont_items(0xFE99, 0xFE99, 0xFE99))) {
 			add("belongings");
 		}
-		add(["bye"]);
-		converse (0) {
+		converse (["bye"]) {
 			case "thy death" (remove):
 				gflags[0x0149] = false;
 				say("\"Thou dost recall correctly -- I was dead when last we met...");
@@ -53632,8 +53538,7 @@ void Func04AA object#(0x4AA) () {
 				Func0876();
 			}
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case var0008:
 				say("\"To be wary that you might be like others of your kind, who come here to slay my people and steal our treasures.\"");
 				say("\"And yet... to wonder if you are the Hero of the Dream.\"");
@@ -54074,8 +53979,7 @@ void Func04B2 object#(0x4B2) () {
 		0xFF4E->show_npc_face0(0x0000);
 		say("\"Thank the heavens I have found thee! Thou didst disappear...\"");
 		say("\"When the Guardian appeared, we feared thou wert taken. Thou must hurry, I have found a way for thee to return home!\"");
-		add(["disappear", "Guardian", "return home"]);
-		converse (0) {
+		converse (["disappear", "Guardian", "return home"]) {
 			case "disappear":
 				say("\"One moment thou wert standing between the pillars... The next, thou wert gone!\" *\"That fiend Zhelkas laughed and said that the land was well rid of thee. Dupre tried to slay him, but he was no match for the gargoyle's strength. And then the Guardian came...\"");
 				remove("disappear");
@@ -54346,8 +54250,7 @@ void Func04B3 object#(0x4B3) () {
 		0xFF4D->set_schedule_type(0x000F);
 		0xFFFE->show_npc_face0(0x0000);
 		say("\"We feared for thee when thou didst disappear from between the pillars. While searching, I became trapped here. I cannot seem to find the way out. Though I suspect that those buttons on the wall might be part of the answer.\"");
-		add(["disappear", "trapped", "buttons", "bye"]);
-		converse (0) {
+		converse (["disappear", "trapped", "buttons", "bye"]) {
 			case "bye":
 				0xFF4D->run_schedule();
 				Func097F(0xFE9C, "@Thanks...@", 0x0000);
@@ -54677,8 +54580,7 @@ void Func04B4 object#(0x4B4) () {
 			abort;
 		}
 		say("\"Zhelkas hath appointed me moderator of the Game, Avatar. He hath also given me leave to explore...\" *\"Art thou ready to begin?\"");
-		add(["moderator", "Game", "explore", "begin"]);
-		converse (0) {
+		converse (["moderator", "Game", "explore", "begin"]) {
 			case "moderator":
 				say("\"It is my duty as moderator to see that thou dost know the rules. After I have informed thee, I cannot aid thee... In any way.\"");
 				remove("moderator");
@@ -56711,8 +56613,7 @@ void Func04D1 object#(0x4D1) () {
 			add("resurrection");
 		}
 		add("Amulet of Balance");
-		add(["aid", "bye"]);
-		converse (0) {
+		converse (["aid", "bye"]) {
 			case "Amulet of Balance" (remove):
 				say("\"It was quite a find, ",
 					var0000,
@@ -57020,8 +56921,7 @@ void Func04D3 object#(0x4D3) () {
 				say("\"He remains a prisoner out of time, imprisoned within the Shrine that is his home.\"");
 			}
 		}
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "return" (remove):
 				say("\"Xenka disappeared several centuries ago. No one knows where she went.\"");
 				say("\"However, in her writings, Xenka hath promised to return to us when the end is near. She will then guide us once more.\"");
@@ -57258,8 +57158,7 @@ void Func04D4 object#(0x4D4) () {
 			say("\"If thou art ready to see thy friend again, thou dost have but to ask and I will return them to thee.\"");
 			add("resurrection");
 		}
-		add(["name", "duties", "bye"]);
-		converse (0) {
+		converse (["name", "duties", "bye"]) {
 			case "resurrection" (remove):
 				Func08FE();
 				fallthrough;
@@ -57487,8 +57386,7 @@ void Func04D5 object#(0x4D5) () {
 		if (Func0825()) {
 			add("vision");
 		}
-		add(["bye"]);
-		converse (0) {
+		converse (["bye"]) {
 			case "resurrection" (remove):
 				Func08FE();
 				fallthrough;
@@ -57754,8 +57652,7 @@ void Func04D7 object#(0x4D7) () {
 			say("\"If thou art ready to see thy friend again, simply ask and I will return them to thee.\"");
 			add("resurrection");
 		}
-		add(["bye"]);
-		converse (0) {
+		converse (["bye"]) {
 			case "resurrection" (remove):
 				Func08FE();
 				fallthrough;
@@ -57976,8 +57873,7 @@ void Func04DA object#(0x4DA) () {
 		} else {
 			say("\"Welcome, fellow dreamer!\" ~\"I am Byrin, a gleeman by trade.\" *\"Thou dost look perplexed. I'll warrant that thou wouldst like some answers.\" ~\"Or perhaps I could sing thee a song to ease thy way.\"");
 		}
-		add(["answers", "song", "bye"]);
-		converse (0) {
+		converse (["answers", "song", "bye"]) {
 			case "answers":
 				say("\"Thou mayest find that the answers only give rise to more questions.\" ~\"But I shall do my best to help thee.\" *\"First thou shouldst know that thou dost walk in the land of dreamers.\" ~\"There are only two ways to enter or exit here.\"");
 				remove("answers");
@@ -58466,8 +58362,7 @@ void Func0526 object#(0x526) () {
 		UI_remove_npc_face1();
 		0x0000->set_conversation_slot();
 		say("\"And thou art the cattle upon which I prey!\" *\"Who sent thee to destroy Vasculio? Was it those rotting worms of Moonshade?\" *\"I know it was! Soon I shall have my vengeance for what they have done to me!\" *\"Who sent thee? Filbercio?! Mortegro?! Gustacio?! Torrissio?!\"");
-		add(["Filbercio", "Mortegro", "Gustacio", "Torrissio", "vengeance"]);
-		converse (0) {
+		converse (["Filbercio", "Mortegro", "Gustacio", "Torrissio", "vengeance"]) {
 			case "bye":
 				0xFEF8->show_npc_face0(0x0000);
 				say("\"Foolish mortal! The time hath come to relieve thee of the burden of thy life for it is also my time to feed!\"");
@@ -59842,8 +59737,7 @@ void Func0619 object#(0x619) () {
 				add(["something important", "cat critter"]);
 			}
 		}
-		add(["waiting", "pawn of prophecy", "bye"]);
-		converse (0) {
+		converse (["waiting", "pawn of prophecy", "bye"]) {
 			case "waiting" (remove):
 				say("\"Why else would I be a standin' here, deary? This isn't exactly the hotbed of excitement, iffin ye know what I mean.");
 				say("\"Ye might say that I'm a part o' yer prophecy... One o' yer guides like.\"");
@@ -59936,8 +59830,7 @@ void Func061A object#(0x61A) () {
 		} else {
 			say("\"Don't tell me that thou hast come back to Rieya looking for more aid! I've helped thee all I may, pawn of prophecy. Thou needs must look elsewhere...\"");
 		}
-		add(["Rieya", "pawn of prophecy", "aid", "bye"]);
-		converse (0) {
+		converse (["Rieya", "pawn of prophecy", "aid", "bye"]) {
 			case "Rieya" (remove):
 				say("\"Rieya is my name... And I'll thank thee not to smirk so! Thy name is just as strange to me, I assure thee!");
 				say("\"Thou shouldst mind thy manners, else -- Guide or no -- I'll not aid thee!\"");
@@ -60069,8 +59962,7 @@ void Func061B object#(0x61B) () {
 				var0001,
 				".\"");
 		}
-		add(["Give up on me?", "wait", "bye"]);
-		converse (0) {
+		converse (["Give up on me?", "wait", "bye"]) {
 			case "Give up on me?" (remove):
 				say("\"Well, I would not have done that, really. After all, it's not often a girl gets the chance to play a part in prophecy.");
 				say("\"If I had given up, how would I have been able to help thee?\"");
@@ -68434,8 +68326,7 @@ void Func06CF object#(0x6CF) () {
 	if (event == 0x0002) {
 		0xFEDF->show_npc_face0(0x0000);
 		say("\"Oh, the pain... The end is near...\"");
-		add(["Who art thou?", "What happened?"]);
-		converse (0) {
+		converse (["Who art thou?", "What happened?"]) {
 			case "Who art thou?":
 				say("\"Me name's Fitch. Me and me mates were trappers for Hazard.\"");
 				remove("Who art thou?");
@@ -81350,8 +81241,7 @@ void Func07FC object#(0x7FC) () {
 				var0002,
 				" until this trial.\"");
 		}
-		add(["the character of the accused", "Daemonism", "no questions"]);
-		converse (0) {
+		converse (["the character of the accused", "Daemonism", "no questions"]) {
 			case "the character of the accused":
 				remove(["the character of the accused", "no questions"]);
 				add("no further questions");
@@ -81408,8 +81298,7 @@ void Func07FC object#(0x7FC) () {
 		UI_init_conversation();
 		0xFFCF->show_npc_face0(0x0000);
 		say("\"Question me! I am ready. On what subject dost thou desire information?\"");
-		add(["the character of the accused", "Daemonism", "no questions"]);
-		converse (0) {
+		converse (["the character of the accused", "Daemonism", "no questions"]) {
 			case "the character of the accused":
 				remove(["the character of the accused", "no questions"]);
 				add("no further questions");
@@ -81483,8 +81372,7 @@ void Func07FC object#(0x7FC) () {
 		if (gflags[0x0155]) {
 			add("Gwenno");
 		}
-		add("no questions");
-		converse (0) {
+		converse ("no questions") {
 			case "strange objects":
 				remove(["strange objects", "no questions"]);
 				add("no further questions");
@@ -81606,8 +81494,7 @@ void Func07FC object#(0x7FC) () {
 		if (gflags[0x01AE]) {
 			add("Varo Leaves");
 		}
-		add("no questions");
-		converse (0) {
+		converse ("no questions") {
 			case "Varo Leaves":
 				remove(["Varo Leaves", "no questions"]);
 				add("no further questions");
@@ -81683,8 +81570,7 @@ void Func07FC object#(0x7FC) () {
 		if (gflags[0x01AF]) {
 			add("engagement ring");
 		}
-		add("no questions");
-		converse (0) {
+		converse ("no questions") {
 			case "engagement ring":
 				remove(["engagement ring", "no questions"]);
 				add("no further questions");
@@ -81761,8 +81647,7 @@ void Func07FC object#(0x7FC) () {
 		UI_remove_npc_face1();
 		0x0000->set_conversation_slot();
 		say("\"I drinks ta forget my pain, innkeeper. Go ahead, Avatar. Ask me thy questions.\"");
-		add(["the character of the accused", "Daemonism", "drinking", "no questions"]);
-		converse (0) {
+		converse (["the character of the accused", "Daemonism", "drinking", "no questions"]) {
 			case "the character of the accused":
 				remove(["the character of the accused", "no questions"]);
 				add("no further questions");
@@ -81844,8 +81729,7 @@ void Func07FC object#(0x7FC) () {
 		say("\"I shall answer thy questions, ",
 			var0001,
 			", for the sake of the Oracle. But do not try my patience.\"");
-		add(["the character of the accused", "Daemonism", "Dupre's words", "no questions"]);
-		converse (0) {
+		converse (["the character of the accused", "Daemonism", "Dupre's words", "no questions"]) {
 			case "Dupre's words":
 				remove(["Dupre's words", "no questions"]);
 				add("no further questions");
@@ -81908,8 +81792,7 @@ void Func07FC object#(0x7FC) () {
 		UI_init_conversation();
 		0xFFC3->show_npc_face0(0x0000);
 		say("\"Ask thy questions, Avatar. However, I shall reserve the right to silence. After all, I am the custodian of Lady Yelinda's confidential matters.\"");
-		add(["the character of the accused", "Daemonism", "following me", "no questions"]);
-		converse (0) {
+		converse (["the character of the accused", "Daemonism", "following me", "no questions"]) {
 			case "following me":
 				remove(["following me", "no questions"]);
 				add("no further questions");
@@ -83339,8 +83222,7 @@ void Func0808 0x808 (var var0000, var var0001) {
 				var0003,
 				", I must ask thee to please depart. I cannot help thee with matters of importance. My duty is only to protect my master and my master's possessions.\"");
 		}
-		add(["servant", "bye"]);
-		converse (0) {
+		converse (["servant", "bye"]) {
 			case "servant" (remove):
 				if (var0001 == 0x0002) {
 					say("\"As I have said, I serve and protect my master's household.\"");
@@ -83464,8 +83346,7 @@ void Func0809 0x809 () {
 			run_schedule();
 			add("join");
 		}
-		add(["bye"]);
-		converse (0) {
+		converse (["bye"]) {
 			case "join" (remove):
 				if (UI_get_array_size(UI_get_party_list()) < 0x0005) {
 					add("leave");
@@ -109691,8 +109572,7 @@ var Func0954 0x954 () {
 var Func0955 0x955 () {
 
 	UI_push_answers();
-	add(["Yes", "No"]);
-	converse (0) {
+	converse (["Yes", "No"]) {
 		case "Yes":
 			UI_pop_answers();
 			return true;

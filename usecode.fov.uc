@@ -2581,8 +2581,7 @@ void Func01DF shape#(0x1DF) () {
 		} else {
 			say("Obviously disappointed, the Emp says, \"That is too bad. What is your wish?\"");
 		}
-		add(["name", "job", "bye"]);
-		converse (0) {
+		converse (["name", "job", "bye"]) {
 			case "name":
 				var0002 = get_npc_prop(0x0005);
 				var0003 = [0x0001, 0x0002, 0x0003, 0x0004];
@@ -12464,8 +12463,7 @@ void Func040F object#(0x40F) () {
 	if (gflags[0x02DC] && (!gflags[0x02DD])) {
 		add("Stay thine hand!");
 	}
-	add(["name", "job", "bye"]);
-	converse (0) {
+	converse (["name", "job", "bye"]) {
 		case "name":
 			say("\"My name is Eiko.\"");
 			remove("name");
@@ -17376,8 +17374,7 @@ void Func0430 object#(0x430) () {
 			add("Stay thine hand!");
 		}
 	}
-	add(["name", "job", "bye"]);
-	converse (0) {
+	converse (["name", "job", "bye"]) {
 		case "name":
 			say("\"My name is Amanda.\"");
 			remove("name");
@@ -20797,8 +20794,7 @@ void Func0448 object#(0x448) () {
 				var0002,
 				".\"");
 		}
-		add(["name", "job", "bye"]);
-		converse (0) {
+		converse (["name", "job", "bye"]) {
 			case "name":
 				say("\"I told thee my name is Nell.\"");
 				remove("name");
@@ -22588,8 +22584,7 @@ void Func0456 object#(0x456) () {
 				var0000,
 				".\" says Xanthia.");
 		}
-		add(["name", "job", "bye"]);
-		converse (0) {
+		converse (["name", "job", "bye"]) {
 			case "name":
 				say("\"Hello, my name is Xanthia.\"");
 				remove("name");
@@ -24446,8 +24441,7 @@ void Func0462 object#(0x462) () {
 		if (gflags[0x0131] && (!gflags[0x0158])) {
 			add("Salamon's permission");
 		}
-		add(["name", "job", "bye"]);
-		converse (0) {
+		converse (["name", "job", "bye"]) {
 			case "name":
 				say("She shies away for a moment, and then cautiously steps forward. \"I am called Saralek.\"");
 				remove("name");
@@ -24568,8 +24562,7 @@ void Func0463 object#(0x463) () {
 		} else {
 			say("\"To want something else?\" Fodus asks.");
 		}
-		add(["name", "job", "bye"]);
-		converse (0) {
+		converse (["name", "job", "bye"]) {
 			case "name":
 				say("\"To be named Fodus.\"");
 				remove("name");
@@ -24777,8 +24770,7 @@ void Func0465 object#(0x465) () {
 		if (gflags[0x012B]) {
 			add("Trellek");
 		}
-		add(["name", "job", "bye"]);
-		converse (0) {
+		converse (["name", "job", "bye"]) {
 			case "name":
 				say("\"I am Salamon,\" she says.");
 				remove("name");
@@ -25144,8 +25136,7 @@ void Func0467 object#(0x467) () {
 					",\" Thad says coolly.");
 			}
 		}
-		add(["name", "job", "bye"]);
-		converse (0) {
+		converse (["name", "job", "bye"]) {
 			case "name":
 				say("He stares at you for a moment. \"Thad is my name, ",
 					var0002,
@@ -28662,8 +28653,7 @@ void Func047D object#(0x47D) () {
 				} else {
 					say("\"So, thou wishes to fight for the cowardly Sprellic! Meet us at the duelling area at next noon!\"");
 				}
-				add(["name", "job", "bye"]);
-				converse (0) {
+				converse (["name", "job", "bye"]) {
 					case "name":
 						say("\"My name is Vokes, ",
 							var0000,
@@ -28970,8 +28960,7 @@ void Func047F object#(0x47F) () {
 						var0000,
 						", I must prove myself to De Snel. If thou art the one who suffers, so be it! Meet us at the dueling area at next noon!\"*");
 				}
-				add(["name", "job", "bye"]);
-				converse (0) {
+				converse (["name", "job", "bye"]) {
 					case "name":
 						say("\"Timmons is my name, ",
 							var0000,
@@ -30848,8 +30837,7 @@ void Func048A object#(0x48A) () {
 		say("\"De voice ov Brom has told me not to trust thee, Avatar,\" says Gorn. \"I tought dat ve vere friends and I do not vish to cause thee harm. But I varn thee, do not speak mit me anymore!\"*");
 		abort;
 	}
-	add(["name", "job", "bye"]);
-	converse (0) {
+	converse (["name", "job", "bye"]) {
 		case "name":
 			say("The warrior's eyes narrow. \"I am Gorn, as if thou didst not remember! It is good to see thee again.\" He laughs and slaps you on the shoulder.");
 			remove("name");
@@ -31067,8 +31055,7 @@ void Func048C object#(0x48C) () {
 		} else {
 			say("Markham hails you and drinks down a tankard of the house spirits. \"Welcome, my friend. Sit with me a while and enliven my eternity with yer wondrous wit.\" He smiles in that charming way that only the half-rotted can.");
 		}
-		add(["name", "job", "bye"]);
-		converse (0) {
+		converse (["name", "job", "bye"]) {
 			case "name":
 				say("The heavy-set zombie wipes his mouth off on the back of his hand. \"I be Markham. Markham o' the Keg.\" He pats the large keg of wine he carries.");
 				var0007 = Func08F7(0xFF6F);
@@ -31253,8 +31240,7 @@ void Func048D object#(0x48D) () {
 		} else {
 			say("The Liche performs something akin to a smile and speaks with a sarcastic flair.~~\"Ah, the wondrous Avatar has returned. What have I done to deserve such an honor?\" The word \"honor\" sours on this creature's tongue.");
 		}
-		add(["name", "job", "bye"]);
-		converse (0) {
+		converse (["name", "job", "bye"]) {
 			case "name":
 				say("The Liche's dry features take on a haughty appearance. \"Thou mayest call me Lord Horance. It would only be prudent, as I shall one day rule all of Britannia.~~ \"Surprised, Avatar? Come now. Surely thou dost not think that Lord British will stand in my way. I know how to deal with his ilk.\"");
 				remove("name");
@@ -31416,8 +31402,7 @@ void Func048E object#(0x48E) () {
 				add("something");
 			}
 		}
-		add(["name", "job", "bye"]);
-		converse (0) {
+		converse (["name", "job", "bye"]) {
 			case "name":
 				say("A deep furrow, accentuated by thick eyebrows, creases the ghost's weary brow. He doesn't look away from his work. \"I am Trent. Now, please, leave me to my work.\"");
 				if (var0002) {
@@ -31808,8 +31793,7 @@ void Func0490 object#(0x490) () {
 				var0001,
 				". How may the lady of the tower be of assistance to thee?\"");
 		}
-		add(["name", "job", "tower", "bye"]);
-		converse (0) {
+		converse (["name", "job", "tower", "bye"]) {
 			case "name":
 				say("\"I am called... Rowena\"");
 				remove("name");
@@ -45838,8 +45822,7 @@ void Func04EC object#(0x4EC) () {
 		} else {
 			say("\"Yes, Avatar?\" Ellen asks.");
 		}
-		add(["name", "job", "murder", "bye"]);
-		converse (0) {
+		converse (["name", "job", "murder", "bye"]) {
 			case "name":
 				say("\"My name is Ellen.\"");
 				remove("name");
@@ -46199,8 +46182,7 @@ void Func04EF object#(0x4EF) () {
 	} else {
 		say("\"Hello, again,\" says Owings. He smiles and tips his mining hat to you.");
 	}
-	add(["name", "job", "bye"]);
-	converse (0) {
+	converse (["name", "job", "bye"]) {
 		case "name":
 			say("\"My name is Owings,\" he says giving you a rapid up and down handshake. \"Pleased to meet thee.\"");
 			if (var0001) {
@@ -48855,8 +48837,7 @@ void Func04FE object#(0x4FE) () {
 	} else {
 		say("\"I greet thee once again, Avatar,\" says Lasher, the unicorn.");
 	}
-	add(["name", "job", "bye"]);
-	converse (0) {
+	converse (["name", "job", "bye"]) {
 		case "name":
 			say("The creature speaks. \"My name is Lasher.\"");
 			remove("name");
@@ -67537,8 +67518,7 @@ void Func087C 0x87C () {
 	if (!gflags[0x0154]) {
 		say("The ape-like creature slowly and cautiously walks up to you. He, or she, sniffs for a moment, and then points to the honey you are carrying.");
 	}
-	add(["Want honey?", "Go away!"]);
-	converse (0) {
+	converse (["Want honey?", "Go away!"]) {
 		case "Want honey?":
 			say("\"Honey will be given by you to me?\"");
 			var0000 = Func090A();
@@ -68908,8 +68888,7 @@ void Func0892 0x892 () {
 
 void Func0893 0x893 () {
 	0xFEE0->say("Adjhar appears to have resumed the stance of a more traditional golem guardian -- staunch and distant. However, it is impossible to miss the glimmer of intelligence in his eyes.");
-	add(["name", "job", "bye"]);
-	converse (0) {
+	converse (["name", "job", "bye"]) {
 		case "name":
 			say("\"I am and always will be the one called Adjhar.\"");
 			remove("name");
@@ -69097,8 +69076,7 @@ void Func0895 0x895 () {
 			0xFEE0->say("Adjhar simply smiles.~\"Greetings, brother.\"");
 		}
 	}
-	add(["name", "job", "bye"]);
-	converse (0) {
+	converse (["name", "job", "bye"]) {
 		case "name" (remove):
 			if (gflags[0x031D]) {
 				remove("name");
@@ -69121,8 +69099,7 @@ void Func0895 0x895 () {
 
 void Func0896 0x896 () {
 	0xFEDF->say("The golem seems to have regained his staid composure. However, life is still evident within his gem-like eyes.");
-	add(["name", "job", "bye"]);
-	converse (0) {
+	converse (["name", "job", "bye"]) {
 		case "name" (remove):
 			if (gflags[0x031D]) {
 				say("He tilts his head and stares at you quizzicaly.~ \"I apologize. Did I not already tell thee my master called me Bollux?\"");
@@ -70933,8 +70910,7 @@ void Func08B2 0x8B2 () {
 		say("But...,\" he hesitates here as if unsure how to proceed, \"...shouldst thou not return to the quest which brought thee here?\"");
 		add("quest");
 	}
-	add(["Skara Brae", "bye"]);
-	converse (0) {
+	converse (["Skara Brae", "bye"]) {
 		case "quest":
 			if (!gflags[0x01B0]) {
 				say("\"Why, yes. I sense that the spirit of Caine has not left the island yet. Is he not waiting for thy return?\"");
@@ -72995,8 +72971,7 @@ void Func08D1 0x8D1 () {
 	UI_clear_answers();
 	var0000 = UI_is_pc_female();
 	0xFFE5->say("Raymundo hands you a script and you take center stage. The lights feel hot on your face. Although you are a little nervous, you clear your throat and begin to read the lines on the page.");
-	add(["-I- am the Avatar!", "I -am- the Avatar!", "I am -the- Avatar!", "I am the -Avatar-!"]);
-	converse (0) {
+	converse (["-I- am the Avatar!", "I -am- the Avatar!", "I am -the- Avatar!", "I am the -Avatar-!"]) {
 		default:
 			say("\"No, no, no! That is all wrong! Thou art the 'Avatar'! Thou must feel like the Avatar! Thou must sound like the Avatar! Thou must -be- the Avatar! Try it again.\"");
 			fallthrough;
@@ -73328,8 +73303,7 @@ void Func08D6 0x8D6 () {
 		abort;
 	} else {
 		say("As far as you can tell, the couple haven't released their embrace since they were first reunited, and they show no sign of doing so at any time in the near future.");
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "sacrifice" (remove):
 				if (!gflags[0x019D]) {
 					0xFF72->show_npc_face(0x0001);
@@ -73384,8 +73358,7 @@ void Func08D7 0x8D7 () {
 			say("\"How can I help thee, ",
 				var0000,
 				"? I must get to Trent quickly.\" She looks impatient to be with her husband.");
-			add(["Trent", "bye"]);
-			converse (0) {
+			converse (["Trent", "bye"]) {
 				case "Trent":
 					say("Her face lights up as you say her husband's name. \"He is the town smith. He hand crafted that music box thou didst use to awaken me from Horance's dark power.\"");
 					remove("Trent");
@@ -73844,8 +73817,7 @@ void Func08DF 0x8DF () {
 	var var0001;
 
 	0xFF9B->say("The ape-like creature slowly and cautiously walks up to you. He, or she, sniffs for a moment, and then points to the honey you are carrying.");
-	add(["Want honey?", "Go away!"]);
-	converse (0) {
+	converse (["Want honey?", "Go away!"]) {
 		case "Want honey?":
 			say("\"Honey will be given by you to me?\"");
 			var0000 = Func090A();
@@ -73875,8 +73847,7 @@ void Func08E0 0x8E0 () {
 	var var0001;
 
 	0xFF9E->say("The ape-like creature slowly and cautiously walks up to you. He, or she, sniffs for a moment, and then points to the honey you are carrying.");
-	add(["Want honey?", "Go away!"]);
-	converse (0) {
+	converse (["Want honey?", "Go away!"]) {
 		case "Want honey?":
 			say("\"Honey will be given by you to me?\"");
 			var0000 = Func090A();
@@ -74417,8 +74388,7 @@ void Func08ED 0x8ED () {
 	var var0001;
 
 	0xFF9C->say("The ape-like creature slowly and cautiously walks up to you. He, or she, sniffs for a moment, and then points to the honey you are carrying.");
-	add(["Want honey?", "Go away!"]);
-	converse (0) {
+	converse (["Want honey?", "Go away!"]) {
 		case "Want honey?":
 			say("\"Honey will be given by you to me?\"");
 			var0000 = Func090A();
@@ -74450,8 +74420,7 @@ void Func08EE 0x8EE () {
 	var var0001;
 
 	0xFFFA->say("The ape-like creature slowly and cautiously walks up to you. He, or she, sniffs for a moment, and then points to the honey you are carrying.");
-	add(["Want honey?", "Go away!"]);
-	converse (0) {
+	converse (["Want honey?", "Go away!"]) {
 		case "Want honey?":
 			say("\"Honey will be given by you to me?\"");
 			var0000 = Func090A();
@@ -74572,8 +74541,7 @@ void Func08F0 0x8F0 () {
 	var0001 = Func08F7(0xFF70);
 	if (var0001) {
 		say("The couple haven't released their embrace since they were first reunited as far as you can tell, and they show no sign of doing so any time in the near future.");
-		add("bye");
-		converse (0) {
+		converse ("bye") {
 			case "sacrifice":
 				if (!gflags[0x019E]) {
 					0xFF70->show_npc_face(0x0001);
@@ -74642,8 +74610,7 @@ void Func08F2 0x8F2 (var var0000, var var0001) {
 		"?\"");
 	var0007 = "Forgive me";
 	var0008 = "Suffer my wrath";
-	add([var0007, var0008]);
-	converse (0) {
+	converse ([var0007, var0008]) {
 		case var0007:
 			var0004 = Func08F1("");
 			say("\"Forgive thee! What might I forgive in one such as thee, ",
@@ -75254,8 +75221,7 @@ var Func0909 0x909 () {
 
 var Func090A 0x90A () {
 	UI_push_answers();
-	add(["Yes", "No"]);
-	converse (0) {
+	converse (["Yes", "No"]) {
 		case "Yes":
 			UI_pop_answers();
 			return true;
