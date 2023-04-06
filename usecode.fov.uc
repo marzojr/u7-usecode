@@ -168,31 +168,25 @@ void Func009A shape#(0x9A) () {
 					add("black sword");
 				}
 			}
-		} else {
-			if (!gflags[0x0312]) {
-				if (gflags[0x0311]) {
-					add("powerful artifact");
-				}
+		} else if (!gflags[0x0312]) {
+			if (gflags[0x0311]) {
+				add("powerful artifact");
 			}
 		}
 		if (gflags[0x0313]) {
 			if (!gflags[0x032F]) {
 				add("daemon mirror");
-			} else {
-				if (!gflags[0x0330]) {
-					if (!gflags[0x0338]) {
-						add("daemon gem");
-					}
-				} else if (!gflags[0x0339]) {
-					add("daemon blade");
+			} else if (!gflags[0x0330]) {
+				if (!gflags[0x0338]) {
+					add("daemon gem");
 				}
+			} else if (!gflags[0x0339]) {
+				add("daemon blade");
 			}
-		} else {
-			if (gflags[0x032F]) {
-				if (gflags[0x0330]) {
-					if (!gflags[0x0339]) {
-						add("daemon blade");
-					}
+		} else if (gflags[0x032F]) {
+			if (gflags[0x0330]) {
+				if (!gflags[0x0339]) {
+					add("daemon blade");
 				}
 			}
 		}
@@ -273,10 +267,8 @@ void Func009A shape#(0x9A) () {
 					0xFEE2->show_npc_face(0x0001);
 					say("Erethian's voice is quiet as he says, \"Consider well before thou bindest Arcadion into the sword. For it is true that he will be able to solve the sword's problem of balance, but will he be able to solve his own problems as well?\"");
 					add("problems");
-				} else {
-					if (gflags[0x032F]) {
-						say("You wonder if perhaps Arcadion might be able to shed some light on this issue, and as if reading your thoughts, Erethian says, \"Beware the daemon. His goals are not those of thine or mine. If he offers to help thee, it is to help himself. Of that thou canst be sure.\"");
-					}
+				} else if (gflags[0x032F]) {
+					say("You wonder if perhaps Arcadion might be able to shed some light on this issue, and as if reading your thoughts, Erethian says, \"Beware the daemon. His goals are not those of thine or mine. If he offers to help thee, it is to help himself. Of that thou canst be sure.\"");
 				}
 				gflags[0x0338] = true;
 				remove(["black sword", "daemon gem"]);
@@ -1653,284 +1645,282 @@ void Func017B shape#(0x17B) () {
 	var0001 = get_item_quality();
 	if (var0001 > 0x0097) {
 		UI_display_runes(0x0031, ["THIS IS", "NOT A", "VALID", "SIGN"]);
-	} else {
-		if (var0001 == 0x0000) {
-			UI_display_runes(0x0031, ["drink", "at|(e", "gilded", "lizard"]);
-		} else if (var0001 == 0x0001) {
-			UI_display_runes(0x0031, ["skara", "brae~", "~population", "47"]);
-		} else if (var0001 == 0x0002) {
-			UI_display_runes(0x0031, ["trinsic"]);
-		} else if (var0001 == 0x0003) {
-			UI_display_runes(0x0031, ["(e", "honorable", "hound"]);
-		} else if (var0001 == 0x0004) {
-			UI_display_runes(0x0031, ["FELLOWSHIP", "HALL"]);
-		} else if (var0001 == 0x0005) {
-			UI_display_runes(0x0031, ["britain"]);
-		} else if (var0001 == 0x0006) {
-			UI_display_runes(0x0031, ["COMING:", "RAYMUNDO'S", "@TRIALS OF", "THE AVATAR@"]);
-		} else if (var0001 == 0x0007) {
-			UI_display_runes(0x0031, ["RESERVE", "THY", "SEATS", "NOW"]);
-		} else if (var0001 == 0x0008) {
-			UI_display_runes(0x0031, ["royal", "museum"]);
-		} else if (var0001 == 0x0009) {
-			UI_display_runes(0x0031, ["(e", "music", "hall"]);
-		} else if (var0001 == 0x000B) {
-			UI_display_runes(0x0031, ["(e", "wayfarer's", "inn"]);
-		} else if (var0001 == 0x000C) {
-			UI_display_runes(0x0031, ["iolos", "bows"]);
-		} else if (var0001 == 0x000D) {
-			UI_display_runes(0x0031, ["(e", "blue", "boar"]);
-		} else if (var0001 == 0x000E) {
-			UI_display_runes(0x0031, ["gayes", "clo(iers"]);
-		} else if (var0001 == 0x000F) {
-			UI_display_runes(0x0031, ["nor(", ",ar", "armoury"]);
-		} else if (var0001 == 0x0010) {
-			UI_display_runes(0x0031, ["(e", "oaken", "oar"]);
-		} else if (var0001 == 0x0011) {
-			UI_display_runes(0x0031, ["bakery"]);
-		} else if (var0001 == 0x0012) {
-			UI_display_runes(0x0031, ["jeweler"]);
-		} else if (var0001 == 0x0013) {
-			UI_display_runes(0x0031, ["farmers", "market"]);
-		} else if (var0001 == 0x0014) {
-			UI_display_runes(0x0031, ["apo(ecary"]);
-		} else if (var0001 == 0x0015) {
-			UI_display_runes(0x0031, ["royal", "mint"]);
-		} else if (var0001 == 0x0016) {
-			UI_display_runes(0x0031, ["csil", "(e", "h+ler"]);
-		} else if (var0001 == 0x0017) {
-			UI_display_runes(0x0031, ["provisions"]);
-		} else if (var0001 == 0x0018) {
-			UI_display_runes(0x0031, ["royal", "orchards"]);
-		} else if (var0001 == 0x0019) {
-			UI_display_runes(0x0031, ["TEST OF STRENGTH", " -- ", "ART THOU AN AVATAR?"]);
-		} else if (var0001 == 0x001A) {
-			UI_display_runes(0x0031, ["punch and", "judy", "show"]);
-		} else if (var0001 == 0x001B) {
-			UI_display_runes(0x0031, ["fish|n|chips"]);
-		} else if (var0001 == 0x001C) {
-			UI_display_runes(0x0031, ["cove"]);
-		} else if (var0001 == 0x001D) {
-			UI_display_runes(0x0031, ["(e", "emerald"]);
-		} else if (var0001 == 0x001E) {
-			UI_display_runes(0x0031, ["out|n|inn"]);
-		} else if (var0001 == 0x001F) {
-			UI_display_runes(0x0031, ["lovers", "walk"]);
-		} else if (var0001 == 0x0020) {
-			UI_display_runes(0x0031, ["buccaneers", "den"]);
-		} else if (var0001 == 0x0021) {
-			UI_display_runes(0x0031, "(e|ba(s");
-		} else if (var0001 == 0x0022) {
-			UI_display_runes(0x0031, ["house", "of", "games"]);
-		} else if (var0001 == 0x0023) {
-			UI_display_runes(0x0031, ["(e", "fallen", "virgin"]);
-		} else if (var0001 == 0x0024) {
-			UI_display_runes(0x0031, "budos");
-		} else if (var0001 == 0x0025) {
-			UI_display_runes(0x0031, ["MEDITATION", "RETREAT"]);
-		} else if (var0001 == 0x002C) {
-			UI_display_runes(0x0031, ["GO THIS WAY"]);
-		} else if (var0001 == 0x0034) {
-			UI_display_runes(0x0031, ["lycaeum"]);
-		} else if (var0001 == 0x0035) {
-			UI_display_runes(0x0031, ["(e", "hallowed", "dock"]);
-		} else if (var0001 == 0x0036) {
-			UI_display_runes(0x0031, ["(e", "friendly", "knave"]);
-		} else if (var0001 == 0x0037) {
-			UI_display_runes(0x0031, ["(e", "gilded", "lizard"]);
-		} else if (var0001 == 0x0038) {
-			UI_display_runes(0x0031, ["h+ler"]);
-		} else if (var0001 == 0x0039) {
-			UI_display_runes(0x0031, ["eldro(s", "provisions"]);
-		} else if (var0001 == 0x003A) {
-			UI_display_runes(0x0031, ["house", "of", "items"]);
-		} else if (var0001 == 0x003B) {
-			UI_display_runes(0x0031, ["britannian", "mini*", "company"]);
-		} else if (var0001 == 0x003C) {
-			UI_display_runes(0x0031, ["minoc", "branch"]);
-		} else if (var0001 == 0x003D) {
-			UI_display_runes(0x0031, ["trainer"]);
-		} else if (var0001 == 0x003E) {
-			UI_display_runes(0x0031, ["scholar"]);
-		} else if (var0001 == 0x003F) {
-			UI_display_runes(0x0031, ["town|hall"]);
-		} else if (var0001 == 0x0040) {
-			UI_display_runes(0x0031, ["wis-surs", "magics"]);
-		} else if (var0001 == 0x0041) {
-			UI_display_runes(0x0031, ["observatory"]);
-		} else if (var0001 == 0x0042) {
-			UI_display_runes(0x0031, ["vesper"]);
-		} else if (var0001 == 0x0043) {
-			UI_display_runes(0x0031, ["moo*low"]);
-		} else if (var0001 == 0x0044) {
-			UI_display_runes(0x0031, ["terfin"]);
-		} else if (var0001 == 0x0045) {
-			UI_display_runes(0x0031, ["serpents", "hold"]);
-		} else if (var0001 == 0x0046) {
-			UI_display_runes(0x0031, ["empa(", "abbey"]);
-		} else if (var0001 == 0x0047) {
-			UI_display_runes(0x0031, ["jhelom"]);
-		} else if (var0001 == 0x0048) {
-			UI_display_runes(0x0031, ["minoc"]);
-		} else if (var0001 == 0x0049) {
-			UI_display_runes(0x0031, ["undertaker"]);
-		} else if (var0001 == 0x004A) {
-			UI_display_runes(0x0031, ["high", "court", "of", "britannia"]);
-		} else if (var0001 == 0x004B) {
-			UI_display_runes(0x0031, ["prison"]);
-		} else if (var0001 == 0x004C) {
-			UI_display_runes(0x0031, ["(e", "mode,", "damsel"]);
-		} else if (var0001 == 0x004D) {
-			UI_display_runes(0x0031, ["armoury"]);
-		} else if (var0001 == 0x004E) {
-			UI_display_runes(0x0031, ["blacksmi("]);
-		} else if (var0001 == 0x004F) {
-			UI_display_runes(0x0031, ["recr+tion", "center"]);
-		} else if (var0001 == 0x0050) {
-			UI_display_runes(0x0031, ["hall", "of", "knowledge"]);
-		} else if (var0001 == 0x0051) {
-			UI_display_runes(0x0031, ["hello", "(ere", "avatar"]);
-		} else if (var0001 == 0x0052) {
-			UI_display_runes(0x0031, ["tonight|9-12", "in|person", "the|avatars"]);
-		} else if (var0001 == 0x0053) {
-			UI_display_runes(0x0031, ["why", "ask", "why?"]);
-		} else if (var0001 == 0x0054) {
-			UI_display_runes(0x0031, [",r)t", "of", "honor"]);
-		} else if (var0001 == 0x0055) {
-			UI_display_runes(0x0031, ["paladins", "pa("]);
-		} else if (var0001 == 0x0056) {
-			UI_display_runes(0x0031, ["AVENUE", "OF", "THE", "FELLOWSHIP"]);
-		} else if (var0001 == 0x0057) {
-			UI_display_runes(0x0031, ["widows", "walk"]);
-		} else if (var0001 == 0x0058) {
-			UI_display_runes(0x0031, ["harolds", "hallway"]);
-		} else if (var0001 == 0x0059) {
-			UI_display_runes(0x0031, ["fools|way"]);
-		} else if (var0001 == 0x005A) {
-			UI_display_runes(0x0031, ["whitsaber", "road"]);
-		} else if (var0001 == 0x005B) {
-			UI_display_runes(0x0031, [",rand"]);
-		} else if (var0001 == 0x005C) {
-			UI_display_runes(0x0031, ["chalice", "avenue"]);
-		} else if (var0001 == 0x005D) {
-			UI_display_runes(0x0031, ["two", "coves"]);
-		} else if (var0001 == 0x005E) {
-			UI_display_runes(0x0031, ["we,", "wall", "road"]);
-		} else if (var0001 == 0x005F) {
-			UI_display_runes(0x0031, ["+,", "wall", "road"]);
-		} else if (var0001 == 0x0060) {
-			UI_display_runes(0x0031, ["nor(", "wall", "road"]);
-		} else if (var0001 == 0x0061) {
-			UI_display_runes(0x0031, ["sou(", "wall", "road"]);
-		} else if (var0001 == 0x0062) {
-			UI_display_runes(0x0031, ["heroes", "way"]);
-		} else if (var0001 == 0x0063) {
-			UI_display_runes(0x0031, ["iolos", "sou("]);
-		} else if (var0001 == 0x0064) {
-			UI_display_runes(0x0031, ["paws"]);
-		} else if (var0001 == 0x0065) {
-			UI_display_runes(0x0031, ["(e", "salty|dog"]);
-		} else if (var0001 == 0x0066) {
-			UI_display_runes(0x0031, ["FELLOWSHIP", "SHELTER"]);
-		} else if (var0001 == 0x0067) {
-			UI_display_runes(0x0031, ["vesper", "branch"]);
-		} else if (var0001 == 0x0068) {
-			UI_display_runes(0x0031, ["(e", "checquered", "cork"]);
-		} else if (var0001 == 0x0069) {
-			UI_display_runes(0x0031, ["artists", "guild"]);
-		} else if (var0001 == 0x006A) {
-			UI_display_runes(0x0031, ["(e bunk", "and", ",ool"]);
-		} else if (var0001 == 0x006B) {
-			UI_display_runes(0x0031, ["(e", "library", "of", "scars"]);
-		} else if (var0001 == 0x006C) {
-			UI_display_runes(0x0031, ["carlyns", "clo(es"]);
-		} else if (var0001 == 0x006D) {
-			UI_display_runes(0x0031, ["wi(in|(ese", "walls", "lies|ma,er", "richard"]);
-		} else if (var0001 == 0x006E) {
-			UI_display_runes(0x0031, ["ca,le|way"]);
-		} else if (var0001 == 0x006F) {
-			UI_display_runes(0x0031, ["lord", "british", "lane"]);
-		} else if (var0001 == 0x0070) {
-			UI_display_runes(0x0031, ["noble|road"]);
-		} else if (var0001 == 0x0071) {
-			UI_display_runes(0x0031, ["we,|end", "avenue"]);
-		} else if (var0001 == 0x0072) {
-			UI_display_runes(0x0031, ["hazle|lane"]);
-		} else if (var0001 == 0x0073) {
-			UI_display_runes(0x0031, ["park", "square", "nor("]);
-		} else if (var0001 == 0x0074) {
-			UI_display_runes(0x0031, ["park", "square", "sou("]);
-		} else if (var0001 == 0x0075) {
-			UI_display_runes(0x0031, ["market", ",r)t"]);
-		} else if (var0001 == 0x0076) {
-			UI_display_runes(0x0031, ["golden", "way"]);
-		} else if (var0001 == 0x0077) {
-			UI_display_runes(0x0031, ["center", "avenue"]);
-		} else if (var0001 == 0x0078) {
-			UI_display_runes(0x0031, ["spike", "lane"]);
-		} else if (var0001 == 0x0079) {
-			UI_display_runes(0x0031, ["avatar", "avenue"]);
-		} else if (var0001 == 0x007A) {
-			UI_display_runes(0x0031, [",able", "lane"]);
-		} else if (var0001 == 0x007B) {
-			UI_display_runes(0x0031, ["+,", "end", "avenue"]);
-		} else if (var0001 == 0x007C) {
-			UI_display_runes(0x0031, ["farm", "road"]);
-		} else if (var0001 == 0x007D) {
-			UI_display_runes(0x0031, ["nugget", ",r)t"]);
-		} else if (var0001 == 0x007E) {
-			UI_display_runes(0x0031, ["cool", "cove"]);
-		} else if (var0001 == 0x007F) {
-			UI_display_runes(0x0031, ["nor(", "end", "avenue"]);
-		} else if (var0001 == 0x0080) {
-			UI_display_runes(0x0031, ["golden", "eye", "way"]);
-		} else if (var0001 == 0x0081) {
-			UI_display_runes(0x0031, ["to", "(e", "dark", "tower"]);
-		} else if (var0001 == 0x0082) {
-			UI_display_runes(0x0031, ["BEWARE", "OF", "LANDSLIDES"]);
-		} else if (var0001 == 0x0083) {
-			UI_display_runes(0x0031, ["DANGER:", "DO", "NOT", "ENTER"]);
-		} else if (var0001 == 0x0084) {
-			UI_display_runes(0x0031, ["old", "number", "one"]);
-		} else if (var0001 == 0x0085) {
-			UI_display_runes(0x0031, ["do|not", "free", "(e", "liche"]);
-		} else if (var0001 == 0x0086) {
-			UI_display_runes(0x0031, ["beware", "mon,ers", "wi(in"]);
-		} else if (var0001 == 0x0087) {
-			UI_display_runes(0x0031, ["paupers", "graves"]);
-		} else if (var0001 == 0x0088) {
-			UI_display_runes(0x0031, ["|manrik|", "a|soul", "of|a", "soul"]);
-		} else if (var0001 == 0x0089) {
-			UI_display_runes(0x0031, ["here|lies", "jules|no", "words|for", "(e|loss"]);
-		} else if (var0001 == 0x008A) {
-			UI_display_runes(0x0031, ["|morgan|", "her", "dea(|a", "tragedy"]);
-		} else if (var0001 == 0x008B) {
-			UI_display_runes(0x0031, ["here|lies", "ke(ian", "friend|to", "many"]);
-		} else if (var0001 == 0x008C) {
-			UI_display_runes(0x0031, ["|wadley|", "his|soul", "deeper|(an", "his|body"]);
-		} else if (var0001 == 0x008D) {
-			UI_display_runes(0x0031, ["here|lies", "jenna", "kindred", "spirit"]);
-		} else if (var0001 == 0x008E) {
-			UI_display_runes(0x0031, ["d+d", "end"]);
-		} else if (var0001 == 0x008F) {
-			UI_display_runes(0x0031, ["to", "skara", "brae"]);
-		} else if (var0001 == 0x0090) {
-			UI_display_runes(0x0031, ["THE", "THRONE", "OF|THE", "GUARDIAN"]);
-		} else if (var0001 == 0x0091) {
-			UI_display_runes(0x0031, ["nor(", "to", "britain"]);
-		} else if (var0001 == 0x0092) {
-			UI_display_runes(0x0031, ["pull", "lever"]);
-		} else if (var0001 == 0x0093) {
-			UI_display_runes(0x0031, ["round", "and", "round"]);
-		} else if (var0001 == 0x0094) {
-			UI_display_runes(0x0031, ["way", "out"]);
-		} else if (var0001 == 0x0095) {
-			UI_display_runes(0x0031, ["keep", "doors", "open"]);
-		} else if (var0001 == 0x0096) {
-			UI_display_runes(0x0031, ["selwyns", "tower"]);
-		} else if (var0001 == 0x0097) {
-			UI_display_runes(0x0031, ["follow", "(e", "fire"]);
-		}
+	} else if (var0001 == 0x0000) {
+		UI_display_runes(0x0031, ["drink", "at|(e", "gilded", "lizard"]);
+	} else if (var0001 == 0x0001) {
+		UI_display_runes(0x0031, ["skara", "brae~", "~population", "47"]);
+	} else if (var0001 == 0x0002) {
+		UI_display_runes(0x0031, ["trinsic"]);
+	} else if (var0001 == 0x0003) {
+		UI_display_runes(0x0031, ["(e", "honorable", "hound"]);
+	} else if (var0001 == 0x0004) {
+		UI_display_runes(0x0031, ["FELLOWSHIP", "HALL"]);
+	} else if (var0001 == 0x0005) {
+		UI_display_runes(0x0031, ["britain"]);
+	} else if (var0001 == 0x0006) {
+		UI_display_runes(0x0031, ["COMING:", "RAYMUNDO'S", "@TRIALS OF", "THE AVATAR@"]);
+	} else if (var0001 == 0x0007) {
+		UI_display_runes(0x0031, ["RESERVE", "THY", "SEATS", "NOW"]);
+	} else if (var0001 == 0x0008) {
+		UI_display_runes(0x0031, ["royal", "museum"]);
+	} else if (var0001 == 0x0009) {
+		UI_display_runes(0x0031, ["(e", "music", "hall"]);
+	} else if (var0001 == 0x000B) {
+		UI_display_runes(0x0031, ["(e", "wayfarer's", "inn"]);
+	} else if (var0001 == 0x000C) {
+		UI_display_runes(0x0031, ["iolos", "bows"]);
+	} else if (var0001 == 0x000D) {
+		UI_display_runes(0x0031, ["(e", "blue", "boar"]);
+	} else if (var0001 == 0x000E) {
+		UI_display_runes(0x0031, ["gayes", "clo(iers"]);
+	} else if (var0001 == 0x000F) {
+		UI_display_runes(0x0031, ["nor(", ",ar", "armoury"]);
+	} else if (var0001 == 0x0010) {
+		UI_display_runes(0x0031, ["(e", "oaken", "oar"]);
+	} else if (var0001 == 0x0011) {
+		UI_display_runes(0x0031, ["bakery"]);
+	} else if (var0001 == 0x0012) {
+		UI_display_runes(0x0031, ["jeweler"]);
+	} else if (var0001 == 0x0013) {
+		UI_display_runes(0x0031, ["farmers", "market"]);
+	} else if (var0001 == 0x0014) {
+		UI_display_runes(0x0031, ["apo(ecary"]);
+	} else if (var0001 == 0x0015) {
+		UI_display_runes(0x0031, ["royal", "mint"]);
+	} else if (var0001 == 0x0016) {
+		UI_display_runes(0x0031, ["csil", "(e", "h+ler"]);
+	} else if (var0001 == 0x0017) {
+		UI_display_runes(0x0031, ["provisions"]);
+	} else if (var0001 == 0x0018) {
+		UI_display_runes(0x0031, ["royal", "orchards"]);
+	} else if (var0001 == 0x0019) {
+		UI_display_runes(0x0031, ["TEST OF STRENGTH", " -- ", "ART THOU AN AVATAR?"]);
+	} else if (var0001 == 0x001A) {
+		UI_display_runes(0x0031, ["punch and", "judy", "show"]);
+	} else if (var0001 == 0x001B) {
+		UI_display_runes(0x0031, ["fish|n|chips"]);
+	} else if (var0001 == 0x001C) {
+		UI_display_runes(0x0031, ["cove"]);
+	} else if (var0001 == 0x001D) {
+		UI_display_runes(0x0031, ["(e", "emerald"]);
+	} else if (var0001 == 0x001E) {
+		UI_display_runes(0x0031, ["out|n|inn"]);
+	} else if (var0001 == 0x001F) {
+		UI_display_runes(0x0031, ["lovers", "walk"]);
+	} else if (var0001 == 0x0020) {
+		UI_display_runes(0x0031, ["buccaneers", "den"]);
+	} else if (var0001 == 0x0021) {
+		UI_display_runes(0x0031, "(e|ba(s");
+	} else if (var0001 == 0x0022) {
+		UI_display_runes(0x0031, ["house", "of", "games"]);
+	} else if (var0001 == 0x0023) {
+		UI_display_runes(0x0031, ["(e", "fallen", "virgin"]);
+	} else if (var0001 == 0x0024) {
+		UI_display_runes(0x0031, "budos");
+	} else if (var0001 == 0x0025) {
+		UI_display_runes(0x0031, ["MEDITATION", "RETREAT"]);
+	} else if (var0001 == 0x002C) {
+		UI_display_runes(0x0031, ["GO THIS WAY"]);
+	} else if (var0001 == 0x0034) {
+		UI_display_runes(0x0031, ["lycaeum"]);
+	} else if (var0001 == 0x0035) {
+		UI_display_runes(0x0031, ["(e", "hallowed", "dock"]);
+	} else if (var0001 == 0x0036) {
+		UI_display_runes(0x0031, ["(e", "friendly", "knave"]);
+	} else if (var0001 == 0x0037) {
+		UI_display_runes(0x0031, ["(e", "gilded", "lizard"]);
+	} else if (var0001 == 0x0038) {
+		UI_display_runes(0x0031, ["h+ler"]);
+	} else if (var0001 == 0x0039) {
+		UI_display_runes(0x0031, ["eldro(s", "provisions"]);
+	} else if (var0001 == 0x003A) {
+		UI_display_runes(0x0031, ["house", "of", "items"]);
+	} else if (var0001 == 0x003B) {
+		UI_display_runes(0x0031, ["britannian", "mini*", "company"]);
+	} else if (var0001 == 0x003C) {
+		UI_display_runes(0x0031, ["minoc", "branch"]);
+	} else if (var0001 == 0x003D) {
+		UI_display_runes(0x0031, ["trainer"]);
+	} else if (var0001 == 0x003E) {
+		UI_display_runes(0x0031, ["scholar"]);
+	} else if (var0001 == 0x003F) {
+		UI_display_runes(0x0031, ["town|hall"]);
+	} else if (var0001 == 0x0040) {
+		UI_display_runes(0x0031, ["wis-surs", "magics"]);
+	} else if (var0001 == 0x0041) {
+		UI_display_runes(0x0031, ["observatory"]);
+	} else if (var0001 == 0x0042) {
+		UI_display_runes(0x0031, ["vesper"]);
+	} else if (var0001 == 0x0043) {
+		UI_display_runes(0x0031, ["moo*low"]);
+	} else if (var0001 == 0x0044) {
+		UI_display_runes(0x0031, ["terfin"]);
+	} else if (var0001 == 0x0045) {
+		UI_display_runes(0x0031, ["serpents", "hold"]);
+	} else if (var0001 == 0x0046) {
+		UI_display_runes(0x0031, ["empa(", "abbey"]);
+	} else if (var0001 == 0x0047) {
+		UI_display_runes(0x0031, ["jhelom"]);
+	} else if (var0001 == 0x0048) {
+		UI_display_runes(0x0031, ["minoc"]);
+	} else if (var0001 == 0x0049) {
+		UI_display_runes(0x0031, ["undertaker"]);
+	} else if (var0001 == 0x004A) {
+		UI_display_runes(0x0031, ["high", "court", "of", "britannia"]);
+	} else if (var0001 == 0x004B) {
+		UI_display_runes(0x0031, ["prison"]);
+	} else if (var0001 == 0x004C) {
+		UI_display_runes(0x0031, ["(e", "mode,", "damsel"]);
+	} else if (var0001 == 0x004D) {
+		UI_display_runes(0x0031, ["armoury"]);
+	} else if (var0001 == 0x004E) {
+		UI_display_runes(0x0031, ["blacksmi("]);
+	} else if (var0001 == 0x004F) {
+		UI_display_runes(0x0031, ["recr+tion", "center"]);
+	} else if (var0001 == 0x0050) {
+		UI_display_runes(0x0031, ["hall", "of", "knowledge"]);
+	} else if (var0001 == 0x0051) {
+		UI_display_runes(0x0031, ["hello", "(ere", "avatar"]);
+	} else if (var0001 == 0x0052) {
+		UI_display_runes(0x0031, ["tonight|9-12", "in|person", "the|avatars"]);
+	} else if (var0001 == 0x0053) {
+		UI_display_runes(0x0031, ["why", "ask", "why?"]);
+	} else if (var0001 == 0x0054) {
+		UI_display_runes(0x0031, [",r)t", "of", "honor"]);
+	} else if (var0001 == 0x0055) {
+		UI_display_runes(0x0031, ["paladins", "pa("]);
+	} else if (var0001 == 0x0056) {
+		UI_display_runes(0x0031, ["AVENUE", "OF", "THE", "FELLOWSHIP"]);
+	} else if (var0001 == 0x0057) {
+		UI_display_runes(0x0031, ["widows", "walk"]);
+	} else if (var0001 == 0x0058) {
+		UI_display_runes(0x0031, ["harolds", "hallway"]);
+	} else if (var0001 == 0x0059) {
+		UI_display_runes(0x0031, ["fools|way"]);
+	} else if (var0001 == 0x005A) {
+		UI_display_runes(0x0031, ["whitsaber", "road"]);
+	} else if (var0001 == 0x005B) {
+		UI_display_runes(0x0031, [",rand"]);
+	} else if (var0001 == 0x005C) {
+		UI_display_runes(0x0031, ["chalice", "avenue"]);
+	} else if (var0001 == 0x005D) {
+		UI_display_runes(0x0031, ["two", "coves"]);
+	} else if (var0001 == 0x005E) {
+		UI_display_runes(0x0031, ["we,", "wall", "road"]);
+	} else if (var0001 == 0x005F) {
+		UI_display_runes(0x0031, ["+,", "wall", "road"]);
+	} else if (var0001 == 0x0060) {
+		UI_display_runes(0x0031, ["nor(", "wall", "road"]);
+	} else if (var0001 == 0x0061) {
+		UI_display_runes(0x0031, ["sou(", "wall", "road"]);
+	} else if (var0001 == 0x0062) {
+		UI_display_runes(0x0031, ["heroes", "way"]);
+	} else if (var0001 == 0x0063) {
+		UI_display_runes(0x0031, ["iolos", "sou("]);
+	} else if (var0001 == 0x0064) {
+		UI_display_runes(0x0031, ["paws"]);
+	} else if (var0001 == 0x0065) {
+		UI_display_runes(0x0031, ["(e", "salty|dog"]);
+	} else if (var0001 == 0x0066) {
+		UI_display_runes(0x0031, ["FELLOWSHIP", "SHELTER"]);
+	} else if (var0001 == 0x0067) {
+		UI_display_runes(0x0031, ["vesper", "branch"]);
+	} else if (var0001 == 0x0068) {
+		UI_display_runes(0x0031, ["(e", "checquered", "cork"]);
+	} else if (var0001 == 0x0069) {
+		UI_display_runes(0x0031, ["artists", "guild"]);
+	} else if (var0001 == 0x006A) {
+		UI_display_runes(0x0031, ["(e bunk", "and", ",ool"]);
+	} else if (var0001 == 0x006B) {
+		UI_display_runes(0x0031, ["(e", "library", "of", "scars"]);
+	} else if (var0001 == 0x006C) {
+		UI_display_runes(0x0031, ["carlyns", "clo(es"]);
+	} else if (var0001 == 0x006D) {
+		UI_display_runes(0x0031, ["wi(in|(ese", "walls", "lies|ma,er", "richard"]);
+	} else if (var0001 == 0x006E) {
+		UI_display_runes(0x0031, ["ca,le|way"]);
+	} else if (var0001 == 0x006F) {
+		UI_display_runes(0x0031, ["lord", "british", "lane"]);
+	} else if (var0001 == 0x0070) {
+		UI_display_runes(0x0031, ["noble|road"]);
+	} else if (var0001 == 0x0071) {
+		UI_display_runes(0x0031, ["we,|end", "avenue"]);
+	} else if (var0001 == 0x0072) {
+		UI_display_runes(0x0031, ["hazle|lane"]);
+	} else if (var0001 == 0x0073) {
+		UI_display_runes(0x0031, ["park", "square", "nor("]);
+	} else if (var0001 == 0x0074) {
+		UI_display_runes(0x0031, ["park", "square", "sou("]);
+	} else if (var0001 == 0x0075) {
+		UI_display_runes(0x0031, ["market", ",r)t"]);
+	} else if (var0001 == 0x0076) {
+		UI_display_runes(0x0031, ["golden", "way"]);
+	} else if (var0001 == 0x0077) {
+		UI_display_runes(0x0031, ["center", "avenue"]);
+	} else if (var0001 == 0x0078) {
+		UI_display_runes(0x0031, ["spike", "lane"]);
+	} else if (var0001 == 0x0079) {
+		UI_display_runes(0x0031, ["avatar", "avenue"]);
+	} else if (var0001 == 0x007A) {
+		UI_display_runes(0x0031, [",able", "lane"]);
+	} else if (var0001 == 0x007B) {
+		UI_display_runes(0x0031, ["+,", "end", "avenue"]);
+	} else if (var0001 == 0x007C) {
+		UI_display_runes(0x0031, ["farm", "road"]);
+	} else if (var0001 == 0x007D) {
+		UI_display_runes(0x0031, ["nugget", ",r)t"]);
+	} else if (var0001 == 0x007E) {
+		UI_display_runes(0x0031, ["cool", "cove"]);
+	} else if (var0001 == 0x007F) {
+		UI_display_runes(0x0031, ["nor(", "end", "avenue"]);
+	} else if (var0001 == 0x0080) {
+		UI_display_runes(0x0031, ["golden", "eye", "way"]);
+	} else if (var0001 == 0x0081) {
+		UI_display_runes(0x0031, ["to", "(e", "dark", "tower"]);
+	} else if (var0001 == 0x0082) {
+		UI_display_runes(0x0031, ["BEWARE", "OF", "LANDSLIDES"]);
+	} else if (var0001 == 0x0083) {
+		UI_display_runes(0x0031, ["DANGER:", "DO", "NOT", "ENTER"]);
+	} else if (var0001 == 0x0084) {
+		UI_display_runes(0x0031, ["old", "number", "one"]);
+	} else if (var0001 == 0x0085) {
+		UI_display_runes(0x0031, ["do|not", "free", "(e", "liche"]);
+	} else if (var0001 == 0x0086) {
+		UI_display_runes(0x0031, ["beware", "mon,ers", "wi(in"]);
+	} else if (var0001 == 0x0087) {
+		UI_display_runes(0x0031, ["paupers", "graves"]);
+	} else if (var0001 == 0x0088) {
+		UI_display_runes(0x0031, ["|manrik|", "a|soul", "of|a", "soul"]);
+	} else if (var0001 == 0x0089) {
+		UI_display_runes(0x0031, ["here|lies", "jules|no", "words|for", "(e|loss"]);
+	} else if (var0001 == 0x008A) {
+		UI_display_runes(0x0031, ["|morgan|", "her", "dea(|a", "tragedy"]);
+	} else if (var0001 == 0x008B) {
+		UI_display_runes(0x0031, ["here|lies", "ke(ian", "friend|to", "many"]);
+	} else if (var0001 == 0x008C) {
+		UI_display_runes(0x0031, ["|wadley|", "his|soul", "deeper|(an", "his|body"]);
+	} else if (var0001 == 0x008D) {
+		UI_display_runes(0x0031, ["here|lies", "jenna", "kindred", "spirit"]);
+	} else if (var0001 == 0x008E) {
+		UI_display_runes(0x0031, ["d+d", "end"]);
+	} else if (var0001 == 0x008F) {
+		UI_display_runes(0x0031, ["to", "skara", "brae"]);
+	} else if (var0001 == 0x0090) {
+		UI_display_runes(0x0031, ["THE", "THRONE", "OF|THE", "GUARDIAN"]);
+	} else if (var0001 == 0x0091) {
+		UI_display_runes(0x0031, ["nor(", "to", "britain"]);
+	} else if (var0001 == 0x0092) {
+		UI_display_runes(0x0031, ["pull", "lever"]);
+	} else if (var0001 == 0x0093) {
+		UI_display_runes(0x0031, ["round", "and", "round"]);
+	} else if (var0001 == 0x0094) {
+		UI_display_runes(0x0031, ["way", "out"]);
+	} else if (var0001 == 0x0095) {
+		UI_display_runes(0x0031, ["keep", "doors", "open"]);
+	} else if (var0001 == 0x0096) {
+		UI_display_runes(0x0031, ["selwyns", "tower"]);
+	} else if (var0001 == 0x0097) {
+		UI_display_runes(0x0031, ["follow", "(e", "fire"]);
 	}
 }
 
@@ -3031,21 +3021,19 @@ void Func0269 shape#(0x269) () {
 		add(["about time", "crisis"]);
 		gflags[0x01D4] = true;
 		Func0911(0x00C8);
-	} else {
-		if (!gflags[0x01D3]) {
-			say("\"Hast thou decided if thou wilt help me?\"");
-			var0001 = Func090A();
-			if (var0001) {
-				say("The Time Lord looks relieved.");
-				say("\"Then I have a mission for thee.\"");
-				add("mission");
-			} else {
-				say("\"Then away with thee!\"*");
-				abort;
-			}
+	} else if (!gflags[0x01D3]) {
+		say("\"Hast thou decided if thou wilt help me?\"");
+		var0001 = Func090A();
+		if (var0001) {
+			say("The Time Lord looks relieved.");
+			say("\"Then I have a mission for thee.\"");
+			add("mission");
 		} else {
-			say("\"How may I help thee, Avatar?\" the Time Lord asks.");
+			say("\"Then away with thee!\"*");
+			abort;
 		}
+	} else {
+		say("\"How may I help thee, Avatar?\" the Time Lord asks.");
 	}
 	if (gflags[0x01D3]) {
 		add("The Guardian");
@@ -4323,23 +4311,21 @@ void Func028D shape#(0x28D) () {
 			event = 0x0007;
 			item->Func062D();
 			return;
-		} else {
-			if (var0000) {
-				var0001 = set_last_created();
-				if (var0001) {
-					var0001 = 0xFE9C->give_last_created();
-					if (!var0001) {
-						var0001 = var0000->give_last_created();
-						UI_flash_mouse(0x0004);
-						abort;
-					}
-				} else {
-					return;
+		} else if (var0000) {
+			var0001 = set_last_created();
+			if (var0001) {
+				var0001 = 0xFE9C->give_last_created();
+				if (!var0001) {
+					var0001 = var0000->give_last_created();
+					UI_flash_mouse(0x0004);
+					abort;
 				}
-				event = 0x0007;
-				item->Func062D();
+			} else {
 				return;
 			}
+			event = 0x0007;
+			item->Func062D();
+			return;
 		}
 		var0002 = 0xFFFF;
 		var0003 = 0xFFFF;
@@ -4364,22 +4350,20 @@ void Func028E shape#(0x28E) () {
 			event = 0x0007;
 			item->Func062E();
 			return;
-		} else {
-			if (var0000) {
-				var0001 = set_last_created();
-				if (var0001) {
-					var0001 = 0xFE9C->give_last_created();
-					if (!var0001) {
-						var0001 = var0000->give_last_created();
-						UI_flash_mouse(0x0004);
-						abort;
-					}
-					event = 0x0007;
-					item->Func062E();
-					return;
-				} else {
-					return;
+		} else if (var0000) {
+			var0001 = set_last_created();
+			if (var0001) {
+				var0001 = 0xFE9C->give_last_created();
+				if (!var0001) {
+					var0001 = var0000->give_last_created();
+					UI_flash_mouse(0x0004);
+					abort;
 				}
+				event = 0x0007;
+				item->Func062E();
+				return;
+			} else {
+				return;
 			}
 		}
 		var0002 = 0xFFFF;
@@ -4986,12 +4970,10 @@ void Func02BE shape#(0x2BE) () {
 			} else {
 				var0006 = 0x0006;
 			}
+		} else if (var0005 > 0x0000) {
+			var0006 = 0x0004;
 		} else {
-			if (var0005 > 0x0000) {
-				var0006 = 0x0004;
-			} else {
-				var0006 = 0x0000;
-			}
+			var0006 = 0x0000;
 		}
 		set_item_frame(var0006 / 0x0002);
 		fire_projectile(var0006, 0x02BF, 0x001E, 0x02BE, 0x02BE);
@@ -5964,21 +5946,19 @@ void Func02F8 shape#(0x2F8) () {
 		if (gflags[0x032F]) {
 			if (!gflags[0x0330]) {
 				item->Func06F6();
-			} else {
-				if (gflags[0x0333]) {
-					if (var0000 == 0x000D) {
-						item->Func06F6();
-					} else if (var0000 == 0x000C) {
-						if (!0xFE9C->is_readied(0x0001, 0x02F8, 0x000C)) {
-							Func08FF("@I believe the gem must be held in the weapon hand to break the mirror.@");
-							return;
-						}
-						UI_close_gumps();
-						var0003 = script item {
-							wait 2;
-							call Func02F8;
-						};
+			} else if (gflags[0x0333]) {
+				if (var0000 == 0x000D) {
+					item->Func06F6();
+				} else if (var0000 == 0x000C) {
+					if (!0xFE9C->is_readied(0x0001, 0x02F8, 0x000C)) {
+						Func08FF("@I believe the gem must be held in the weapon hand to break the mirror.@");
+						return;
 					}
+					UI_close_gumps();
+					var0003 = script item {
+						wait 2;
+						call Func02F8;
+					};
 				}
 			}
 		}
@@ -6871,15 +6851,13 @@ void Func032A shape#(0x32A) () {
 		if ((var0007 == 0x02D1) || (var0007 == 0x03DD)) {
 			if (var0000 == 0x0002) {
 				0xFE9C->get_npc_object()->item_say("@No, thank thee.@");
+			} else if (var0000 == 0x0000) {
+				0xFE9C->get_npc_object()->item_say("@The bucket is empty.@");
 			} else {
-				if (var0000 == 0x0000) {
-					0xFE9C->get_npc_object()->item_say("@The bucket is empty.@");
-				} else {
-					0xFE9C->get_npc_object()->item_say("@Ahhh, how refreshing.@");
-					var0004 = script item {
-						frame 0;
-					};
-				}
+				0xFE9C->get_npc_object()->item_say("@Ahhh, how refreshing.@");
+				var0004 = script item {
+					frame 0;
+				};
 			}
 			return;
 		}
@@ -7031,14 +7009,12 @@ void Func032A shape#(0x32A) () {
 					var0012 = (var0011 + 0x0001);
 					var0013 = 0x0000;
 				}
+			} else if ((var0011 == 0x0000) || (var0011 == 0x0004)) {
+				0xFE9C->get_npc_object()->item_say("@The trough is empty.@");
+				return;
 			} else {
-				if ((var0011 == 0x0000) || (var0011 == 0x0004)) {
-					0xFE9C->get_npc_object()->item_say("@The trough is empty.@");
-					return;
-				} else {
-					var0012 = (var0011 - 0x0001);
-					var0013 = 0x0001;
-				}
+				var0012 = (var0011 - 0x0001);
+				var0013 = 0x0001;
 			}
 			var0005 = Func092D(var0010);
 			var000E = script 0xFE9C->get_npc_object() {
@@ -7613,18 +7589,16 @@ void Func033B shape#(0x33B) () {
 			} else {
 				if (var0000->get_npc_number() == 0xFE9C) {
 					Func08FE("@Much better.@");
-				} else {
-					if (Func0937(var0000)) {
-						var0003 = UI_die_roll(0x0001, 0x0003);
-						if (var0003 == 0x0001) {
-							var0000->item_say("@Ah, much better!@");
-						}
-						if (var0003 == 0x0002) {
-							var0000->item_say("@Thank thee!@");
-						}
-						if (var0003 == 0x0003) {
-							var0000->item_say("@That looks better.@");
-						}
+				} else if (Func0937(var0000)) {
+					var0003 = UI_die_roll(0x0001, 0x0003);
+					if (var0003 == 0x0001) {
+						var0000->item_say("@Ah, much better!@");
+					}
+					if (var0003 == 0x0002) {
+						var0000->item_say("@Thank thee!@");
+					}
+					if (var0003 == 0x0003) {
+						var0000->item_say("@That looks better.@");
 					}
 				}
 				var0003 = UI_die_roll(0x0001, 0x0004);
@@ -7695,10 +7669,8 @@ void Func0348 shape#(0x348) () {
 		if (!get_item_flag(0x000A)) {
 			if (Func080D()) {
 				Func0812(var0000);
-			} else {
-				if (Func08B3(item)) {
-					UI_close_gumps();
-				}
+			} else if (Func08B3(item)) {
+				UI_close_gumps();
 			}
 		} else if (var0000->get_item_flag(0x0015)) {
 			clear_item_flag(0x000A);
@@ -8589,20 +8561,18 @@ void Func03F7 shape#(0x3F7) () {
 					gflags[0x0314] = true;
 					abort;
 				}
+			} else if (gflags[0x031E]) {
+				say("\"Hail, friend. I hope that I may assist thee in some way.\"");
+				Func0890();
 			} else {
-				if (gflags[0x031E]) {
-					say("\"Hail, friend. I hope that I may assist thee in some way.\"");
+				say("\"Art thou here to aid me in healing my brother?\"");
+				if (Func090A()) {
+					say("\"Very good. I am pleased to call thee friend.\"");
+					gflags[0x031E] = true;
 					Func0890();
 				} else {
-					say("\"Art thou here to aid me in healing my brother?\"");
-					if (Func090A()) {
-						say("\"Very good. I am pleased to call thee friend.\"");
-						gflags[0x031E] = true;
-						Func0890();
-					} else {
-						say("\"Then begone, for I have work to do!\"*");
-						abort;
-					}
+					say("\"Then begone, for I have work to do!\"*");
+					abort;
 				}
 			}
 		} else if (get_cont_items(0x031D, 0x00F4, 0x0004) || (find_nearby(0x031D, 0x0001, 0x00B0)->get_item_quality() == 0x00F4)) {
@@ -9054,12 +9024,10 @@ void Func0402 object#(0x402) () {
 		var0007 = false;
 		if (!gflags[0x0015]) {
 			0xFFFE->show_npc_face(0x0001);
+		} else if (var0004 in var0002) {
+			0xFFFE->show_npc_face(0x0000);
 		} else {
-			if (var0004 in var0002) {
-				0xFFFE->show_npc_face(0x0000);
-			} else {
-				0xFFFE->show_npc_face(0x0001);
-			}
+			0xFFFE->show_npc_face(0x0001);
 		}
 		if (gflags[0x0046]) {
 			var0008 = var0000;
@@ -9541,12 +9509,10 @@ void Func0403 object#(0x403) () {
 					0xFFFC->say("\"I'm not going to listen to this anymore.\"*");
 					0xFFFC->hide();
 					0xFFFD->show_npc_face(0x0000);
+				} else if (!gflags[0x0017]) {
+					say("\"I believe he is in Jhelom.\"");
 				} else {
-					if (!gflags[0x0017]) {
-						say("\"I believe he is in Jhelom.\"");
-					} else {
-						say("\"He must be around somewhere!\"");
-					}
+					say("\"He must be around somewhere!\"");
 				}
 				remove("Dupre");
 				fallthrough;
@@ -9717,12 +9683,10 @@ void Func0404 object#(0x404) () {
 					0xFFFD->say("\"Do not be so modest, Sir Dupre. Thou shouldst tell the Avatar that thou hast been knighted since last you met.\"*");
 					0xFFFD->hide();
 					0xFFFC->say("Sir Dupre looks quite embarrassed. \"Well, yes, I would have gotten around to that.\"");
-				} else {
-					if (var0004) {
-						0xFFFF->say("\"Do not be so modest, Sir Dupre. Thou shouldst tell the Avatar that thou hast been knighted since last you met.\"*");
-						0xFFFF->hide();
-						0xFFFC->say("Sir Dupre looks quite embarrassed. \"Well, yes, I would have gotten around to that.\"");
-					}
+				} else if (var0004) {
+					0xFFFF->say("\"Do not be so modest, Sir Dupre. Thou shouldst tell the Avatar that thou hast been knighted since last you met.\"*");
+					0xFFFF->hide();
+					0xFFFC->say("Sir Dupre looks quite embarrassed. \"Well, yes, I would have gotten around to that.\"");
 				}
 				remove("name");
 				fallthrough;
@@ -9812,14 +9776,12 @@ void Func0404 object#(0x404) () {
 			case "Sprellic":
 				if (var000A) {
 					say("\"I feel a bit sorry that we never did intercede on behalf of that innkeeper fellow, Sprellic. He did need our help, desperately.\" Dupre eyes look a bit sad.");
-				} else {
-					if (!gflags[0x016A]) {
-						if (!(var000B && (var000C && var000D))) {
-							say("\"I doubt he has ever held a sword in his life. When I bet I usually bet on the underdog, but not even I am so foolhardy with my money as to bet on him. The man is no fighter, he is the innkeeper!\"");
-							add(["foolhardy", "innkeeper"]);
-						} else {
-							say("\"Thou didst save the life of that poor little man Sprellic. He certainly got himself in a lot of trouble.\" Dupre cannot keep himself from grinning. \"Still, all's well that ends well.\"");
-						}
+				} else if (!gflags[0x016A]) {
+					if (!(var000B && (var000C && var000D))) {
+						say("\"I doubt he has ever held a sword in his life. When I bet I usually bet on the underdog, but not even I am so foolhardy with my money as to bet on him. The man is no fighter, he is the innkeeper!\"");
+						add(["foolhardy", "innkeeper"]);
+					} else {
+						say("\"Thou didst save the life of that poor little man Sprellic. He certainly got himself in a lot of trouble.\" Dupre cannot keep himself from grinning. \"Still, all's well that ends well.\"");
 					}
 				}
 				remove("Sprellic");
@@ -9850,18 +9812,16 @@ void Func0404 object#(0x404) () {
 			case "Iolo":
 				if (var0007) {
 					say("\"Terrible what happened to our poor friend Iolo. We must try and get his body to a healer while there may still be time to revive him. I do miss him so.\"");
+				} else if (var0004) {
+					say("\"",
+						var0003,
+						", there is a strange old man following thee, and he bears a vague resemblance to Iolo! It is most odd.\"*");
+					0xFFFF->say("\"Thy drinking must have blurred thy vision, Sir Dupre.\"*");
+					0xFFFC->say("\"Then thou hadst better join me for one later. It will give thee the chance to catch up to me.\"");
+					0xFFFF->hide();
+					0xFFFC->show_npc_face(0x0000);
 				} else {
-					if (var0004) {
-						say("\"",
-							var0003,
-							", there is a strange old man following thee, and he bears a vague resemblance to Iolo! It is most odd.\"*");
-						0xFFFF->say("\"Thy drinking must have blurred thy vision, Sir Dupre.\"*");
-						0xFFFC->say("\"Then thou hadst better join me for one later. It will give thee the chance to catch up to me.\"");
-						0xFFFF->hide();
-						0xFFFC->show_npc_face(0x0000);
-					} else {
-						say("\"We should find that rascal Iolo and have him join us as well.\"");
-					}
+					say("\"We should find that rascal Iolo and have him join us as well.\"");
 				}
 				remove("Iolo");
 				fallthrough;
@@ -9874,16 +9834,14 @@ void Func0404 object#(0x404) () {
 			case "Shamino":
 				if (var0008) {
 					say("\"A sad fate to befall our fine comrade Shamino. He will be sorely missed. We must try and get his remains to a healer. Perhaps he may still be revived.\"");
+				} else if (var0005) {
+					say("Sir Dupre snorts, \"From what I had heard Shamino was all but settled down and retired from the adventuring life.\"*");
+					0xFFFD->say("\"I still have a few wild oats left to sow, thank thee very much.\"*");
+					0xFFFC->say("\"Then it is good to see another member of our old sowing circle once again!\"");
+					0xFFFD->hide();
+					0xFFFC->show_npc_face(0x0000);
 				} else {
-					if (var0005) {
-						say("Sir Dupre snorts, \"From what I had heard Shamino was all but settled down and retired from the adventuring life.\"*");
-						0xFFFD->say("\"I still have a few wild oats left to sow, thank thee very much.\"*");
-						0xFFFC->say("\"Then it is good to see another member of our old sowing circle once again!\"");
-						0xFFFD->hide();
-						0xFFFC->show_npc_face(0x0000);
-					} else {
-						say("\"Let us go and find Shamino and make this a proper reunion!\"");
-					}
+					say("\"Let us go and find Shamino and make this a proper reunion!\"");
 				}
 				remove("Shamino");
 				fallthrough;
@@ -11603,12 +11561,10 @@ void Func040A object#(0x40A) () {
 						}
 						gflags[0x0152] = true;
 						add("bees");
+					} else if (var001B) {
+						say("\"These people are the hermits I spoke of before.\"");
 					} else {
-						if (var001B) {
-							say("\"These people are the hermits I spoke of before.\"");
-						} else {
-							say("\"Perhaps those hermits are still living in the cave.\"");
-						}
+						say("\"Perhaps those hermits are still living in the cave.\"");
 					}
 					var0012 = true;
 				}
@@ -12077,24 +12033,22 @@ void Func040C object#(0x40C) () {
 			case "report":
 				if (gflags[0x0044]) {
 					say("\"I am satisfied with thy report. Please carry on thine investigation, Avatar.\"");
-				} else {
-					if (!gflags[0x005D]) {
-						say("\"Art thou ready to answer some questions concerning the investigation?\"");
-						var000A = Func090A();
-						if (var000A) {
-							gflags[0x005D] = true;
-							Func0884();
-						} else {
-							say("\"Oh. Well, carry on with thine investigation.\"");
-						}
+				} else if (!gflags[0x005D]) {
+					say("\"Art thou ready to answer some questions concerning the investigation?\"");
+					var000A = Func090A();
+					if (var000A) {
+						gflags[0x005D] = true;
+						Func0884();
 					} else {
-						say("\"Shall we continue thy report?\"");
-						var000B = Func090A();
-						if (var000B) {
-							Func0884();
-						} else {
-							say("\"Oh. Well, carry on with thine investigation.\"");
-						}
+						say("\"Oh. Well, carry on with thine investigation.\"");
+					}
+				} else {
+					say("\"Shall we continue thy report?\"");
+					var000B = Func090A();
+					if (var000B) {
+						Func0884();
+					} else {
+						say("\"Oh. Well, carry on with thine investigation.\"");
 					}
 				}
 				remove("report");
@@ -13960,12 +13914,10 @@ void Func0418 object#(0x418) () {
 	if (!gflags[0x0099]) {
 		say("You see your old friend Nystul, now a decrepit old man in mage's robes. He seems lost in thought, far away.");
 		gflags[0x0099] = true;
+	} else if (!gflags[0x0003]) {
+		say("\"Do I know thee?\" Nystul asks.");
 	} else {
-		if (!gflags[0x0003]) {
-			say("\"Do I know thee?\" Nystul asks.");
-		} else {
-			say("\"Yes, Avatar?\" Nystul asks.");
-		}
+		say("\"Yes, Avatar?\" Nystul asks.");
 	}
 	converse (0) {
 		case "name":
@@ -14356,15 +14308,13 @@ void Func041A object#(0x41A) () {
 				say("\"My dear friend, thou art falsely impersonating a Fellowship member! Remove that medallion at once!\"*");
 				abort;
 			}
+		} else if (var0005 && (!gflags[0x0006])) {
+			say("\"I shall not speak to thee unless thou dost remove that Fellowship medallion. Thou art falsely impersonating a Fellowship member!\"*");
+			abort;
 		} else {
-			if (var0005 && (!gflags[0x0006])) {
-				say("\"I shall not speak to thee unless thou dost remove that Fellowship medallion. Thou art falsely impersonating a Fellowship member!\"*");
-				abort;
-			} else {
-				say("\"",
-					var0007,
-					", my dear, dear friend! How wonderful to see thee again!\" says Batlin.");
-			}
+			say("\"",
+				var0007,
+				", my dear, dear friend! How wonderful to see thee again!\" says Batlin.");
 		}
 		converse (0) {
 			case "name":
@@ -14454,12 +14404,10 @@ void Func041A object#(0x41A) () {
 			case "join":
 				if (gflags[0x0006]) {
 					say("\"But thou art already a member, Avatar! One can only join once!\"");
+				} else if (gflags[0x0096] && (!gflags[0x0097])) {
+					say("\"Thou hast not completed thy tasks. Remember that Worthiness Precedes Reward. Once thou hast completed the missions, thou mayest join.\"");
 				} else {
-					if (gflags[0x0096] && (!gflags[0x0097])) {
-						say("\"Thou hast not completed thy tasks. Remember that Worthiness Precedes Reward. Once thou hast completed the missions, thou mayest join.\"");
-					} else {
-						Func084D();
-					}
+					Func084D();
 				}
 				remove("join");
 				fallthrough;
@@ -15778,16 +15726,14 @@ void Func0425 object#(0x425) () {
 				var0005 = var0001;
 			}
 			gflags[0x00A6] = true;
+		} else if ((var0002 < 0x0001) || (var0002 > 0x0002)) {
+			say("\"What will it be, ",
+				var0005,
+				"?\" Lucy asks.");
 		} else {
-			if ((var0002 < 0x0001) || (var0002 > 0x0002)) {
-				say("\"What will it be, ",
-					var0005,
-					"?\" Lucy asks.");
-			} else {
-				say("\"What can I do for thee, ",
-					var0005,
-					"?\" Lucy asks.");
-			}
+			say("\"What can I do for thee, ",
+				var0005,
+				"?\" Lucy asks.");
 		}
 		converse (0) {
 			case "name":
@@ -16239,18 +16185,16 @@ void Func0429 object#(0x429) () {
 			say("This is a bright woman who looks much younger than she actually is.");
 			say("\"Well! Thy reputation precedes thee! The Avatar in person! Word has spread that thou wert in Britain!\"");
 			gflags[0x00AA] = true;
-		} else {
-			if (var0002 == 0x0000) {
-				var0004 = Func08F7(0xFFD5);
-				if (var0004) {
-					say("Candice looks guilty about something. She gives you a little wave, but says nothing. She looks at Patterson, hoping that he will do the talking.*");
-					abort;
-				} else {
-					say("\"Yes, Avatar?\" Candice says.");
-				}
+		} else if (var0002 == 0x0000) {
+			var0004 = Func08F7(0xFFD5);
+			if (var0004) {
+				say("Candice looks guilty about something. She gives you a little wave, but says nothing. She looks at Patterson, hoping that he will do the talking.*");
+				abort;
 			} else {
 				say("\"Yes, Avatar?\" Candice says.");
 			}
+		} else {
+			say("\"Yes, Avatar?\" Candice says.");
 		}
 		converse (0) {
 			case "name":
@@ -16553,27 +16497,25 @@ void Func042B object#(0x42B) () {
 			say("You see a nobleman in his forties who looks like either a politician or a well-dressed merchant.");
 			say("\"Avatar! I was just alerted of thy presence in our fair city! I have been expecting thee!\"");
 			gflags[0x00AC] = true;
-		} else {
-			if ((var0000 == 0x0000) || ((var0000 == 0x0001) || (var0000 == 0x0002))) {
-				var0002 = Func08F7(0xFFD7);
-				var0003 = Func08F7(0xFFFF);
-				if (var0002) {
-					say("\"Avatar! Er, uhm, how art thee? Oh, dost thou know Candice, the curator at the Royal Museum? She is a 'brother' at The Fellowship. I was, er, just seeing her home!\"");
-					if (var0003) {
-						0xFFFF->say("\"Hmmm. And does thy wife know thou art seeing Candice home?\"");
-						0xFFFF->hide();
-					} else {
-						say("You ask if Judith knows about this.");
-					}
-					0xFFD5->say("\"Why, she doth not need to know! It does not matter! 'Tis nothing, really!\"~~The Mayor is sweating profusely. He looks at you with beady eyes. He knows he has been found out. His body slumps. He is mortified and ashamed.~~\"Thou hast discovered my... our secret. Please do not tell Judith. I... will end this. I swear. Candice -- we must stop meeting. I... I'm sorry.\"~~You decide to leave Patterson and Candice to work out what has happened, and you hope that the Mayor has learned something about honesty.*");
-					Func0911(0x0014);
-					abort;
+		} else if ((var0000 == 0x0000) || ((var0000 == 0x0001) || (var0000 == 0x0002))) {
+			var0002 = Func08F7(0xFFD7);
+			var0003 = Func08F7(0xFFFF);
+			if (var0002) {
+				say("\"Avatar! Er, uhm, how art thee? Oh, dost thou know Candice, the curator at the Royal Museum? She is a 'brother' at The Fellowship. I was, er, just seeing her home!\"");
+				if (var0003) {
+					0xFFFF->say("\"Hmmm. And does thy wife know thou art seeing Candice home?\"");
+					0xFFFF->hide();
 				} else {
-					say("\"How may I help thee?\" Patterson asks.");
+					say("You ask if Judith knows about this.");
 				}
+				0xFFD5->say("\"Why, she doth not need to know! It does not matter! 'Tis nothing, really!\"~~The Mayor is sweating profusely. He looks at you with beady eyes. He knows he has been found out. His body slumps. He is mortified and ashamed.~~\"Thou hast discovered my... our secret. Please do not tell Judith. I... will end this. I swear. Candice -- we must stop meeting. I... I'm sorry.\"~~You decide to leave Patterson and Candice to work out what has happened, and you hope that the Mayor has learned something about honesty.*");
+				Func0911(0x0014);
+				abort;
 			} else {
 				say("\"How may I help thee?\" Patterson asks.");
 			}
+		} else {
+			say("\"How may I help thee?\" Patterson asks.");
 		}
 		converse (0) {
 			case "name":
@@ -16725,12 +16667,10 @@ void Func042C object#(0x42C) () {
 		if (!gflags[0x00AD]) {
 			say("You see a flamboyant-looking gentleman. He is very cheerful and outgoing, greeting you with a smile and a wave.");
 			gflags[0x00AD] = true;
+		} else if (!var0003) {
+			say("\"In a wink, in a word,~\"I do greet thee, Milord.\"");
 		} else {
-			if (!var0003) {
-				say("\"In a wink, in a word,~\"I do greet thee, Milord.\"");
-			} else {
-				say("\"To greet thee, On this day,~\"'Tis my pleasure, Milady.\"");
-			}
+			say("\"To greet thee, On this day,~\"'Tis my pleasure, Milady.\"");
 		}
 		converse (0) {
 			case "name":
@@ -18093,38 +18033,36 @@ void Func0435 object#(0x435) () {
 			case "buy":
 				if (!(var0003 == 0x0013)) {
 					say("\"I am so sorry, the clothier's shop is closed. Please return during our regular business hours. We are open from nine until six every day.\"");
-				} else {
-					if (gflags[0x0067]) {
-						say("\"Do not tell me! Raymundo sent thee to get an Avatar costume! They cost thirty gold coins. Dost thou want one?\"");
-						var0005 = Func090A();
-						if (var0005) {
-							say("She looks you up and down. \"Yes, I think we might be able to find something for thee.\"~~After several minutes of rummaging through the store, Gaye returns. \"Here it is! Not many left-- we have had a run on them recently!\"");
-							var0006 = 0xFE9B->count_objects(0x0284, 0xFE99, 0xFE99);
-							if (var0006 < 0x001E) {
-								say("\"Um. Perhaps thou couldst return when thou dost have enough gold.\" She lays the costume down and smiles.");
-							} else {
-								var0007 = UI_add_party_items(0x0001, 0x0346, 0xFE99, 0xFE99, false);
-								if (!var0007) {
-									say("\"Oh. Thou canst not carry this with what thou art already carrying. Mayhaps thou couldst dispose of something and return for the costume.\"");
-								} else {
-									say("\"It is, indeed, a pleasure to do business with thee, O great Avatar!\" She grins and hands you the costume.");
-									var0008 = UI_remove_party_items(0x001E, 0x0284, 0xFE99, 0xFE99, true);
-									gflags[0x0068] = true;
-								}
-							}
+				} else if (gflags[0x0067]) {
+					say("\"Do not tell me! Raymundo sent thee to get an Avatar costume! They cost thirty gold coins. Dost thou want one?\"");
+					var0005 = Func090A();
+					if (var0005) {
+						say("She looks you up and down. \"Yes, I think we might be able to find something for thee.\"~~After several minutes of rummaging through the store, Gaye returns. \"Here it is! Not many left-- we have had a run on them recently!\"");
+						var0006 = 0xFE9B->count_objects(0x0284, 0xFE99, 0xFE99);
+						if (var0006 < 0x001E) {
+							say("\"Um. Perhaps thou couldst return when thou dost have enough gold.\" She lays the costume down and smiles.");
 						} else {
-							say("\"'Tis strange! I thought for certain that thou wert the theatrical type!\"");
-							Func088E();
+							var0007 = UI_add_party_items(0x0001, 0x0346, 0xFE99, 0xFE99, false);
+							if (!var0007) {
+								say("\"Oh. Thou canst not carry this with what thou art already carrying. Mayhaps thou couldst dispose of something and return for the costume.\"");
+							} else {
+								say("\"It is, indeed, a pleasure to do business with thee, O great Avatar!\" She grins and hands you the costume.");
+								var0008 = UI_remove_party_items(0x001E, 0x0284, 0xFE99, 0xFE99, true);
+								gflags[0x0068] = true;
+							}
 						}
 					} else {
-						say("\"Wouldst thou like to buy some clothing today?\"");
-						var0009 = Func090A();
-						if (var0009) {
-							say("\"We have many nice clothes to choose from.\"");
-							Func088E();
-						} else {
-							say("\"Thou mayest look around for thyself. If thou dost change thy mind be sure to let me know.\"");
-						}
+						say("\"'Tis strange! I thought for certain that thou wert the theatrical type!\"");
+						Func088E();
+					}
+				} else {
+					say("\"Wouldst thou like to buy some clothing today?\"");
+					var0009 = Func090A();
+					if (var0009) {
+						say("\"We have many nice clothes to choose from.\"");
+						Func088E();
+					} else {
+						say("\"Thou mayest look around for thyself. If thou dost change thy mind be sure to let me know.\"");
 					}
 				}
 				remove("buy");
@@ -21005,12 +20943,10 @@ void Func044A object#(0x44A) () {
 	if (!gflags[0x00E7]) {
 		say("This elderly mage looks older and more senile than when you last saw him.");
 		gflags[0x00E7] = true;
+	} else if (!gflags[0x0003]) {
+		say("\"Who art thou?\" Rudyom asks. \"Oh -- I remember.\"");
 	} else {
-		if (!gflags[0x0003]) {
-			say("\"Who art thou?\" Rudyom asks. \"Oh -- I remember.\"");
-		} else {
-			say("\"Hello again, Avatar!\" Rudyom says, beaming.");
-		}
+		say("\"Hello again, Avatar!\" Rudyom says, beaming.");
 	}
 	converse (0) {
 		case "name":
@@ -21959,10 +21895,8 @@ void Func0451 object#(0x451) () {
 				var0009 = 0x0000;
 				if (var0008) {
 					var0009 = var0008->find_object(0x031D, 0x0008, 0xFE99);
-				} else {
-					if (var0007) {
-						var0009 = var0007->find_object(0x031D, 0x0008, 0xFE99);
-					}
+				} else if (var0007) {
+					var0009 = var0007->find_object(0x031D, 0x0008, 0xFE99);
 				}
 				if (var0009) {
 					var0006 = true;
@@ -21998,34 +21932,32 @@ void Func0451 object#(0x451) () {
 							}
 							var0008->remove_item();
 						}
-					} else {
-						if (var0007) {
-							var000A = UI_add_party_items(0x0032, 0x0284, 0xFE99, 0xFE99, true);
-							if (var000A) {
-								say("Elynor takes the package from your hands.~~\"Thou hast done very well. Now as promised, here is thy payment.\"");
-								gflags[0x0109] = true;
-								Func0911(0x01F4);
-								var0009->remove_item();
-								var0007->remove_item();
-							} else {
-								say("\"Thou cannot carry thy reward! My, thy travels have indeed been successful. Well, then, thou must endure a further test. Return the sealed box to me when thou canst tote the extra gold, and thou wilt be paid what thou dost deserve.\"");
-							}
+					} else if (var0007) {
+						var000A = UI_add_party_items(0x0032, 0x0284, 0xFE99, 0xFE99, true);
+						if (var000A) {
+							say("Elynor takes the package from your hands.~~\"Thou hast done very well. Now as promised, here is thy payment.\"");
+							gflags[0x0109] = true;
+							Func0911(0x01F4);
+							var0009->remove_item();
+							var0007->remove_item();
 						} else {
-							say("Elynor takes the package from you. Examining it, she immediately notices that it has been opened.~~\"^",
-								var0002,
-								"! The box is open! Certainly, one as diligent as thee could not have been robbed?\"");
-							if (var0006) {
-								say("She inspects the inside of the box.~~ \"Ah, good. The contents, at least, are still intact. The guilty one was only a victim of his own curiosity, and not truly a thief.\"~~She looks you up and down. \"It is quite possible that thou wilt still learn to be a worthy member of our illustrious Membership. We shall see.\"~~She sniffs. \"This will, of course,\tbe reported to Batlin.\"");
-								var0009->remove_item();
-								gflags[0x0102] = true;
-								Func0911(0x01F4);
-							} else {
-								say("Peering inside, she is beset by a fit of anger. \"It would appear thou hast been robbed. Obviously, as thou hast failed in the responsibility entrusted to thee by Batlin, thou shalt not receive any payment.\"~~\"Batlin will be informed of this indiscretion.\"");
-								gflags[0x011E] = true;
-								Func0911(0x01F4);
-							}
-							var0008->remove_item();
+							say("\"Thou cannot carry thy reward! My, thy travels have indeed been successful. Well, then, thou must endure a further test. Return the sealed box to me when thou canst tote the extra gold, and thou wilt be paid what thou dost deserve.\"");
 						}
+					} else {
+						say("Elynor takes the package from you. Examining it, she immediately notices that it has been opened.~~\"^",
+							var0002,
+							"! The box is open! Certainly, one as diligent as thee could not have been robbed?\"");
+						if (var0006) {
+							say("She inspects the inside of the box.~~ \"Ah, good. The contents, at least, are still intact. The guilty one was only a victim of his own curiosity, and not truly a thief.\"~~She looks you up and down. \"It is quite possible that thou wilt still learn to be a worthy member of our illustrious Membership. We shall see.\"~~She sniffs. \"This will, of course,\tbe reported to Batlin.\"");
+							var0009->remove_item();
+							gflags[0x0102] = true;
+							Func0911(0x01F4);
+						} else {
+							say("Peering inside, she is beset by a fit of anger. \"It would appear thou hast been robbed. Obviously, as thou hast failed in the responsibility entrusted to thee by Batlin, thou shalt not receive any payment.\"~~\"Batlin will be informed of this indiscretion.\"");
+							gflags[0x011E] = true;
+							Func0911(0x01F4);
+						}
+						var0008->remove_item();
 					}
 				} else {
 					say("\"Dost thou not have it with thee at this time? Thou wilt not be paid until thou dost deliver it unto mine own hand. I do hope thou hast secreted it in a safe place.\"");
@@ -23333,21 +23265,19 @@ void Func045A object#(0x45A) () {
 				if (!gflags[0x00F7]) {
 					say("\"I can well understand thine impatience but I have just begun work on it. It shall be ready when I am finished with it. Now, until such time, I would appreciate it if thou wouldst not waste my valuable time.\"*");
 					abort;
-				} else {
-					if (!gflags[0x00FC]) {
-						say("\"I cannot build thee a ship as I suspect we both know.\"");
-						if (gflags[0x00FB]) {
-							say("\"Nor can I take thy money for one. Here, I shall return it to thee.\"");
-							var0011 = UI_add_party_items(0x03E8, 0x0284, 0xFE99, 0xFE99, true);
-							if (var0011) {
-								gflags[0x00FC] = true;
-							} else {
-								say("\"Oh, my, thou art too encumbered to take back thy 1000 gold coins! Come back when thine hands are less full!\"");
-							}
+				} else if (!gflags[0x00FC]) {
+					say("\"I cannot build thee a ship as I suspect we both know.\"");
+					if (gflags[0x00FB]) {
+						say("\"Nor can I take thy money for one. Here, I shall return it to thee.\"");
+						var0011 = UI_add_party_items(0x03E8, 0x0284, 0xFE99, 0xFE99, true);
+						if (var0011) {
+							gflags[0x00FC] = true;
+						} else {
+							say("\"Oh, my, thou art too encumbered to take back thy 1000 gold coins! Come back when thine hands are less full!\"");
 						}
-					} else {
-						say("\"I cannot help thee with that.\"");
 					}
+				} else {
+					say("\"I cannot help thee with that.\"");
 				}
 				remove("ship");
 				fallthrough;
@@ -24948,14 +24878,12 @@ void Func0466 object#(0x466) () {
 	if (!gflags[0x0140]) {
 		say("Your old friend Nicodemus has a far away look in his eyes.");
 		gflags[0x0140] = true;
+	} else if (!gflags[0x0003]) {
+		say("\"Who art thou?\" Nicodemus asks. \"Oh, I remember. Remember demember! Ha ha ha!\"");
 	} else {
-		if (!gflags[0x0003]) {
-			say("\"Who art thou?\" Nicodemus asks. \"Oh, I remember. Remember demember! Ha ha ha!\"");
-		} else {
-			say("\"Hello again, ",
-				var0000,
-				",\" says Nicodemus.");
-		}
+		say("\"Hello again, ",
+			var0000,
+			",\" says Nicodemus.");
 	}
 	converse (0) {
 		case "name":
@@ -25058,18 +24986,16 @@ void Func0466 object#(0x466) () {
 		case "hourglass":
 			if (gflags[0x012D]) {
 				say("\"Yes, I just enchanted it.\"");
-			} else {
-				if (!(gflags[0x0211] || var0002)) {
-					if (!gflags[0x0003]) {
-						say("\"This Time Lord told thee what? An hourglass! I have no blinking hourglass! Glassy wassy hoursplassy! Ha ha ha! Wait! An enchanted hourglass? That does ring a bell. Clang Clang Clang! Ha ha ha! Wait! I remember. I had an hourglass. I sold it. To a gypsy. Or was it an antique dealer? I think I might have sold it to a gypsy antique dealer in Britain. Or Paws. Somewhere on that side of the land. But if my memory serves me correctly, that hourglass used up its enchantment, which is why I sold it. I suppose if the ether is repaired, I could possibly re-enchant it. Bring it to me and we'll see what we can do. I know! We can play a rousing game of chess! But only if I can deal at all times. I do not trust thee.\"");
-					} else {
-						say("\"Mine old hourglass! Of course I remember it! I believe I sold it to an antique dealer in Paws. I might be able to re-enchant it if thou wouldst bring it to me.\"");
-					}
-				} else if (!gflags[0x0003]) {
-					say("\"What's this? An hourglass of some kind? Wait! It looks vaguely familiar! Thief!! This is mine hourglass! I have been looking for it for years! Where didst thou get it, scoundrel? I shall turn thee into a duck!\"~~Nicodemus intones some spell and points at you, but nothing happens.~~\"Zounds! Thou art no more a quacker than I am. Nothing works anymore. Quacker slacker wacker flacker! Ha ha ha!\"");
+			} else if (!(gflags[0x0211] || var0002)) {
+				if (!gflags[0x0003]) {
+					say("\"This Time Lord told thee what? An hourglass! I have no blinking hourglass! Glassy wassy hoursplassy! Ha ha ha! Wait! An enchanted hourglass? That does ring a bell. Clang Clang Clang! Ha ha ha! Wait! I remember. I had an hourglass. I sold it. To a gypsy. Or was it an antique dealer? I think I might have sold it to a gypsy antique dealer in Britain. Or Paws. Somewhere on that side of the land. But if my memory serves me correctly, that hourglass used up its enchantment, which is why I sold it. I suppose if the ether is repaired, I could possibly re-enchant it. Bring it to me and we'll see what we can do. I know! We can play a rousing game of chess! But only if I can deal at all times. I do not trust thee.\"");
 				} else {
-					say("\"Mine old hourglass! I suppose I could revitalize the enchantment upon it.\"");
+					say("\"Mine old hourglass! Of course I remember it! I believe I sold it to an antique dealer in Paws. I might be able to re-enchant it if thou wouldst bring it to me.\"");
 				}
+			} else if (!gflags[0x0003]) {
+				say("\"What's this? An hourglass of some kind? Wait! It looks vaguely familiar! Thief!! This is mine hourglass! I have been looking for it for years! Where didst thou get it, scoundrel? I shall turn thee into a duck!\"~~Nicodemus intones some spell and points at you, but nothing happens.~~\"Zounds! Thou art no more a quacker than I am. Nothing works anymore. Quacker slacker wacker flacker! Ha ha ha!\"");
+			} else {
+				say("\"Mine old hourglass! I suppose I could revitalize the enchantment upon it.\"");
 			}
 			remove("hourglass");
 			fallthrough;
@@ -26108,12 +26034,10 @@ void Func046E object#(0x46E) () {
 			if (var0000) {
 				say("\"Then I am nobody!\"*");
 				abort;
+			} else if (!gflags[0x0003]) {
+				say("\"Good for thee. I would have had to kill thee. I am Garok Al-Mat. At least, the last time I looked in the mirror, that was who I was!\"");
 			} else {
-				if (!gflags[0x0003]) {
-					say("\"Good for thee. I would have had to kill thee. I am Garok Al-Mat. At least, the last time I looked in the mirror, that was who I was!\"");
-				} else {
-					say("\"I like thee already! I am Garok Al-Mat.\"");
-				}
+				say("\"I like thee already! I am Garok Al-Mat.\"");
 			}
 			remove("name");
 			add("Tax Council");
@@ -27739,13 +27663,11 @@ void Func0479 object#(0x479) () {
 				if (!gflags[0x0186]) {
 					say("\"Sprellic, our rather mild-mannered innkeeper, stole the honor flag from the wall of the Library of Scars and refused to return it. Now he must fight three of our best local fighters in a duel to the death.\"");
 					add("fighters");
+				} else if (!gflags[0x0167]) {
+					say("You relate Sprellic's story to the old man who listens intently. \"It sounds to me like the work of Sullivan, the Trickster. He is a legendary thief and swindler who has never once been caught! Indeed, few even believe he actually exists. Thou shalt not be able to dissuade the duellists with a tale like that.\"");
+					add("dissuade");
 				} else {
-					if (!gflags[0x0167]) {
-						say("You relate Sprellic's story to the old man who listens intently. \"It sounds to me like the work of Sullivan, the Trickster. He is a legendary thief and swindler who has never once been caught! Indeed, few even believe he actually exists. Thou shalt not be able to dissuade the duellists with a tale like that.\"");
-						add("dissuade");
-					} else {
-						say("\"It is good of thee to help that poor Sprellic fellow in his hour of need.\"");
-					}
+					say("\"It is good of thee to help that poor Sprellic fellow in his hour of need.\"");
 				}
 				remove("Sprellic");
 				fallthrough;
@@ -27795,12 +27717,10 @@ void Func0479 object#(0x479) () {
 						UI_set_timer(0x0000);
 						abort;
 					}
+				} else if (gflags[0x0170]) {
+					say("\"Thou dost wish to deal with the Library of Scars personally? Very well then, but be warned -- the only type of honor they believe in is victory.\"");
 				} else {
-					if (gflags[0x0170]) {
-						say("\"Thou dost wish to deal with the Library of Scars personally? Very well then, but be warned -- the only type of honor they believe in is victory.\"");
-					} else {
-						say("\"How canst thou have the key to saving Sprellic's life in thine hand and do nothing as he faces certain death?!\"");
-					}
+					say("\"How canst thou have the key to saving Sprellic's life in thine hand and do nothing as he faces certain death?!\"");
 				}
 				remove("honor flag");
 				fallthrough;
@@ -28638,98 +28558,96 @@ void Func047D object#(0x47D) () {
 				say("\"If thou wouldst return the honor flag of the Library of Scars, then it is only proper that is turned back over to Syria, who was guarding it when it was stolen. Please do so.\"*");
 				abort;
 			}
-		} else {
-			if (gflags[0x0170]) {
-				if (var0001 == 0x0004) {
-					say("\"So, thou wishest to fight for the cowardly Sprellic! Then I have no choice but to finish thee myself!\"*");
-					Func0911(0x0064);
-					var0002->set_alignment(0x0003);
-					var0004->set_alignment(0x0003);
-					var0003->set_alignment(0x0003);
-					var0002->set_schedule_type(0x0000);
-					var0003->set_schedule_type(0x0000);
-					var0004->set_schedule_type(0x0000);
-					abort;
-				} else {
-					say("\"So, thou wishes to fight for the cowardly Sprellic! Meet us at the duelling area at next noon!\"");
-				}
-				converse (["name", "job", "bye"]) {
-					case "name":
-						say("\"My name is Vokes, ",
-							var0000,
-							". As big as a mountain, as strong as an ox, as fierce as... well, more fierce than anything thou hast ever fought!\"");
-						remove("name");
-						fallthrough;
+		} else if (gflags[0x0170]) {
+			if (var0001 == 0x0004) {
+				say("\"So, thou wishest to fight for the cowardly Sprellic! Then I have no choice but to finish thee myself!\"*");
+				Func0911(0x0064);
+				var0002->set_alignment(0x0003);
+				var0004->set_alignment(0x0003);
+				var0003->set_alignment(0x0003);
+				var0002->set_schedule_type(0x0000);
+				var0003->set_schedule_type(0x0000);
+				var0004->set_schedule_type(0x0000);
+				abort;
+			} else {
+				say("\"So, thou wishes to fight for the cowardly Sprellic! Meet us at the duelling area at next noon!\"");
+			}
+			converse (["name", "job", "bye"]) {
+				case "name":
+					say("\"My name is Vokes, ",
+						var0000,
+						". As big as a mountain, as strong as an ox, as fierce as... well, more fierce than anything thou hast ever fought!\"");
+					remove("name");
+					fallthrough;
 
-					case "job":
-						say("\"Job! I am not in the habit of plowing fields or peddling vegetables, ",
-							var0000,
-							"! I earn my gold with this sword arm,\" he says as he flexes a mighty bicep. \"Right now I am in Jhelom continuing my studies in my trade with De Snel, and when I am finished my price is going to go up!\"");
-						add("Jhelom");
-						fallthrough;
+				case "job":
+					say("\"Job! I am not in the habit of plowing fields or peddling vegetables, ",
+						var0000,
+						"! I earn my gold with this sword arm,\" he says as he flexes a mighty bicep. \"Right now I am in Jhelom continuing my studies in my trade with De Snel, and when I am finished my price is going to go up!\"");
+					add("Jhelom");
+					fallthrough;
 
-					case "Jhelom":
-						say("\"I was born here! Is it not magnificent?! Why, in any hour of any day thou canst get into a duel with anyone for no reason at all! Now that is what I call the benefits of civilization!\"");
-						add("duel");
-						remove("Jhelom");
-						fallthrough;
+				case "Jhelom":
+					say("\"I was born here! Is it not magnificent?! Why, in any hour of any day thou canst get into a duel with anyone for no reason at all! Now that is what I call the benefits of civilization!\"");
+					add("duel");
+					remove("Jhelom");
+					fallthrough;
 
-					case "duel":
-						say("\"A responsibility, yes, even a necessity. The cost of being honorable is that one must defend one's honor. There is no telling just where or when the next stain on one's honor may appear. Like this Sprellic fool, for instance. The perfect example!\"*");
-						if (var0005) {
-							0xFF82->say("\"I'll make a stain on his honor, that's for sure. A blood red one!\"*");
-							0xFF82->hide();
+				case "duel":
+					say("\"A responsibility, yes, even a necessity. The cost of being honorable is that one must defend one's honor. There is no telling just where or when the next stain on one's honor may appear. Like this Sprellic fool, for instance. The perfect example!\"*");
+					if (var0005) {
+						0xFF82->say("\"I'll make a stain on his honor, that's for sure. A blood red one!\"*");
+						0xFF82->hide();
+						0xFF83->show_npc_face(0x0000);
+					}
+					add("Sprellic");
+					remove("duel");
+					fallthrough;
+
+				case "Sprellic":
+					if (!gflags[0x0164]) {
+						say("\"The bloody idiot had no idea that when he took our honor flag he would be seen doing it. Hence, he never considered the fact that he would have to fight a duel over our sullied honor. But now that the whole town is talking of the incident there is no way that we could refrain from standing up for ourselves. Especially since he has refused to return what he has taken from us.\"*");
+						if (var0006) {
+							0xFF81->say("\"Were he not such a cad, he would see the foolishness of his actions. 'Tis now up to us to show him!\"*");
+							0xFF81->hide();
 							0xFF83->show_npc_face(0x0000);
 						}
-						add("Sprellic");
-						remove("duel");
-						fallthrough;
-
-					case "Sprellic":
-						if (!gflags[0x0164]) {
-							say("\"The bloody idiot had no idea that when he took our honor flag he would be seen doing it. Hence, he never considered the fact that he would have to fight a duel over our sullied honor. But now that the whole town is talking of the incident there is no way that we could refrain from standing up for ourselves. Especially since he has refused to return what he has taken from us.\"*");
-							if (var0006) {
-								0xFF81->say("\"Were he not such a cad, he would see the foolishness of his actions. 'Tis now up to us to show him!\"*");
-								0xFF81->hide();
-								0xFF83->show_npc_face(0x0000);
-							}
-							add("honor flag");
-							if (gflags[0x0186]) {
-								add("misunderstanding");
-							}
-						} else {
-							say("\"If he had not returned the honor flag to us we would have had to kill him dead as sure as I am standing here.\"");
+						add("honor flag");
+						if (gflags[0x0186]) {
+							add("misunderstanding");
 						}
-						remove("Sprellic");
-						fallthrough;
+					} else {
+						say("\"If he had not returned the honor flag to us we would have had to kill him dead as sure as I am standing here.\"");
+					}
+					remove("Sprellic");
+					fallthrough;
 
-					case "honor flag":
-						say("\"There is a widely known and long-standing tradition concerning the honor flag of the Library of Scars. It is said that taking the flag from the wall is a signal meaning that the person who takes the flag can beat anyone who studies at the school in a fight. It is also a grossly insulting way of saying that thou dost think the method of fighting a school teaches is inferior, which the Library of Scars most certainly is not!\"");
-						add("Library of Scars");
-						remove("honor flag");
-						fallthrough;
+				case "honor flag":
+					say("\"There is a widely known and long-standing tradition concerning the honor flag of the Library of Scars. It is said that taking the flag from the wall is a signal meaning that the person who takes the flag can beat anyone who studies at the school in a fight. It is also a grossly insulting way of saying that thou dost think the method of fighting a school teaches is inferior, which the Library of Scars most certainly is not!\"");
+					add("Library of Scars");
+					remove("honor flag");
+					fallthrough;
 
-					case "misunderstanding":
-						say("\"I have heard that rot about it all being a misunderstanding. The only thing misunderstood is how bad Sprellic will look when we finish with him!\"");
-						remove("misunderstanding");
-						fallthrough;
+				case "misunderstanding":
+					say("\"I have heard that rot about it all being a misunderstanding. The only thing misunderstood is how bad Sprellic will look when we finish with him!\"");
+					remove("misunderstanding");
+					fallthrough;
 
-					case "Library of Scars":
-						say("\"The Library of Scars teaches the supreme fighting style! One that enables thee to get the advantage against thine opponents and soundly defeat them through the brilliantly conceived subterfuge of Master De Snel!\"");
-						add("De Snel");
-						remove("Library of Scars");
-						fallthrough;
+				case "Library of Scars":
+					say("\"The Library of Scars teaches the supreme fighting style! One that enables thee to get the advantage against thine opponents and soundly defeat them through the brilliantly conceived subterfuge of Master De Snel!\"");
+					add("De Snel");
+					remove("Library of Scars");
+					fallthrough;
 
-					case "De Snel":
-						say("\"He is a genius. Perhaps the greatest military mind that ever lived. He told us so!\"");
-						remove("De Snel");
-						fallthrough;
+				case "De Snel":
+					say("\"He is a genius. Perhaps the greatest military mind that ever lived. He told us so!\"");
+					remove("De Snel");
+					fallthrough;
 
-					case "bye":
-						break;
-				}
-				say("\"If I am not killed and thou art not killed perhaps we may raise a\tglass together some day!\"*");
+				case "bye":
+					break;
 			}
+			say("\"If I am not killed and thou art not killed perhaps we may raise a\tglass together some day!\"*");
 		}
 	}
 	if (event == 0x0000) {
@@ -28940,71 +28858,69 @@ void Func047F object#(0x47F) () {
 				say("\"I see thou hast the honor flag. As little more than an interested third party in this affair, I ask thee to return the flag to Syria. Please do so.\"*");
 				abort;
 			}
-		} else {
-			if (gflags[0x0170]) {
-				if (var0001 == 0x0004) {
-					say("\"Well, ",
-						var0000,
-						", I must prove myself to De Snel. If thou art the one who suffers, I will apologize, but I will not back down!\"");
-					say("\"Prepare to die!\"*");
-					Func0911(0x0064);
-					var0002->set_alignment(0x0003);
-					var0003->set_alignment(0x0003);
-					var0004->set_alignment(0x0003);
-					var0002->set_schedule_type(0x0000);
-					var0003->set_schedule_type(0x0000);
-					var0004->set_schedule_type(0x0000);
-					abort;
-				} else {
-					say("\"Well, ",
-						var0000,
-						", I must prove myself to De Snel. If thou art the one who suffers, so be it! Meet us at the dueling area at next noon!\"*");
-				}
-				converse (["name", "job", "bye"]) {
-					case "name":
-						say("\"Timmons is my name, ",
-							var0000,
-							".\"");
-						remove("name");
-						fallthrough;
-
-					case "job":
-						say("\"At the moment I have no job. I left all that behind in New Magincia. I have come to Jhelom to study under Master De Snel in the Library of Scars.\"");
-						add(["Jhelom", "Library of Scars"]);
-						fallthrough;
-
-					case "Jhelom":
-						say("\"I am afraid I would not be able to help thee. I know little of this town, except for the duels. I am newly arrived here myself. Perhaps thou shouldst ask someone else.\"");
-						add("duels");
-						remove("Jhelom");
-						fallthrough;
-
-					case "duels":
-						if (!gflags[0x0164]) {
-							say("\"I had heard of this man Sprellic who claims he is a greater fighter than any in the Library of Scars and how he had stolen the honor flag from their wall. So I sought this man out and challenged him to a duel myself.\"");
-							add("Library of Scars");
-						} else {
-							say("\"Unfortunately, the duels with Sprellic were called off before I had the opportunity to impress Master De Snel.\"");
-						}
-						remove("duels");
-						fallthrough;
-
-					case "Library of Scars":
-						if (!gflags[0x0164]) {
-							say("\"A sailor on a ship at port in New Magincia first told me of the Library of Scars, of how it was the greatest fighting guild in Britannia and how its trainer, Master De Snel, had created the perfect fighting style. I immediately spent every coin I had to come here. But De Snel now refuses to accept me as a student. I know if I can defeat a fighter who claims to be better than anyone in the guild, and help restore its honor in the process, De Snel will have to finally accept me.\"");
-						} else {
-							say("\"Master De Snel, the trainer at the Library of Scars, has refused me entry until I have proven myself in combat. The only way to prove oneself in combat in the town of Jhelom is by duelling. But my mother raised me to be a perfect gentleman. So far I have not succeeded in offending anyone sufficiently to have them challenge me to a duel. Hmmm. Perhaps I am just not suited to be a member of the Library of Scars.\"");
-						}
-						remove("Library of Scars");
-						fallthrough;
-
-					case "bye":
-						break;
-				}
-				say("\"It was a pleasure speaking to thee, ",
+		} else if (gflags[0x0170]) {
+			if (var0001 == 0x0004) {
+				say("\"Well, ",
 					var0000,
-					".\"*");
+					", I must prove myself to De Snel. If thou art the one who suffers, I will apologize, but I will not back down!\"");
+				say("\"Prepare to die!\"*");
+				Func0911(0x0064);
+				var0002->set_alignment(0x0003);
+				var0003->set_alignment(0x0003);
+				var0004->set_alignment(0x0003);
+				var0002->set_schedule_type(0x0000);
+				var0003->set_schedule_type(0x0000);
+				var0004->set_schedule_type(0x0000);
+				abort;
+			} else {
+				say("\"Well, ",
+					var0000,
+					", I must prove myself to De Snel. If thou art the one who suffers, so be it! Meet us at the dueling area at next noon!\"*");
 			}
+			converse (["name", "job", "bye"]) {
+				case "name":
+					say("\"Timmons is my name, ",
+						var0000,
+						".\"");
+					remove("name");
+					fallthrough;
+
+				case "job":
+					say("\"At the moment I have no job. I left all that behind in New Magincia. I have come to Jhelom to study under Master De Snel in the Library of Scars.\"");
+					add(["Jhelom", "Library of Scars"]);
+					fallthrough;
+
+				case "Jhelom":
+					say("\"I am afraid I would not be able to help thee. I know little of this town, except for the duels. I am newly arrived here myself. Perhaps thou shouldst ask someone else.\"");
+					add("duels");
+					remove("Jhelom");
+					fallthrough;
+
+				case "duels":
+					if (!gflags[0x0164]) {
+						say("\"I had heard of this man Sprellic who claims he is a greater fighter than any in the Library of Scars and how he had stolen the honor flag from their wall. So I sought this man out and challenged him to a duel myself.\"");
+						add("Library of Scars");
+					} else {
+						say("\"Unfortunately, the duels with Sprellic were called off before I had the opportunity to impress Master De Snel.\"");
+					}
+					remove("duels");
+					fallthrough;
+
+				case "Library of Scars":
+					if (!gflags[0x0164]) {
+						say("\"A sailor on a ship at port in New Magincia first told me of the Library of Scars, of how it was the greatest fighting guild in Britannia and how its trainer, Master De Snel, had created the perfect fighting style. I immediately spent every coin I had to come here. But De Snel now refuses to accept me as a student. I know if I can defeat a fighter who claims to be better than anyone in the guild, and help restore its honor in the process, De Snel will have to finally accept me.\"");
+					} else {
+						say("\"Master De Snel, the trainer at the Library of Scars, has refused me entry until I have proven myself in combat. The only way to prove oneself in combat in the town of Jhelom is by duelling. But my mother raised me to be a perfect gentleman. So far I have not succeeded in offending anyone sufficiently to have them challenge me to a duel. Hmmm. Perhaps I am just not suited to be a member of the Library of Scars.\"");
+					}
+					remove("Library of Scars");
+					fallthrough;
+
+				case "bye":
+					break;
+			}
+			say("\"It was a pleasure speaking to thee, ",
+				var0000,
+				".\"*");
 		}
 	}
 	if (event == 0x0000) {
@@ -29531,13 +29447,11 @@ void Func0482 object#(0x482) () {
 				if (!gflags[0x0185]) {
 					say("\"I am quite certain I have never seen such a locket. I shall be happy to keep mine eyes open, though.\"");
 					gflags[0x0183] = true;
+				} else if (!gflags[0x017E]) {
+					say("You tell Boris what you had heard from the pirate, Battles. He breaks out into a cold sweat. \"Thou hast seen through my deception. I shall hand it over to thee.\" He opens a secret panel from behind the bar and looks inside. When he looks back to you his face has lost all color. \"The locket is gone! I swear to thee, I know not where it is!\"");
+					gflags[0x017E] = true;
 				} else {
-					if (!gflags[0x017E]) {
-						say("You tell Boris what you had heard from the pirate, Battles. He breaks out into a cold sweat. \"Thou hast seen through my deception. I shall hand it over to thee.\" He opens a secret panel from behind the bar and looks inside. When he looks back to you his face has lost all color. \"The locket is gone! I swear to thee, I know not where it is!\"");
-						gflags[0x017E] = true;
-					} else {
-						say("\"I still have not been able to find the locket!\" Boris looks as if he is about to tear his hair out, \"But I will keep looking until I find it!\"");
-					}
+					say("\"I still have not been able to find the locket!\" Boris looks as if he is about to tear his hair out, \"But I will keep looking until I find it!\"");
 				}
 				remove("locket");
 				fallthrough;
@@ -31219,14 +31133,12 @@ void Func048D object#(0x48D) () {
 					". Methinks he'll cause naught but evil.\"");
 				0xFFFD->hide();
 				0xFF73->show_npc_face(0x0000);
-			} else {
-				if (var0007) {
-					0xFFFF->say("Iolo steps near you and speaks in a whispered tone.~~\"Do not trust this one, ",
-						var0001,
-						". Methinks he'll cause naught but evil.\"");
-					0xFFFF->hide();
-					0xFF73->show_npc_face(0x0000);
-				}
+			} else if (var0007) {
+				0xFFFF->say("Iolo steps near you and speaks in a whispered tone.~~\"Do not trust this one, ",
+					var0001,
+					". Methinks he'll cause naught but evil.\"");
+				0xFFFF->hide();
+				0xFF73->show_npc_face(0x0000);
 			}
 			var0008 = Func08F7(0xFFFE);
 			if (var0008) {
@@ -31326,12 +31238,10 @@ void Func048D object#(0x48D) () {
 					0xFFFC->say("\"Yeah, right.\"*");
 					0xFFFC->hide();
 					0xFF73->show_npc_face(0x0000);
-				} else {
-					if (var0007) {
-						0xFFFF->say("\"Yeah, right.\"*");
-						0xFFFF->hide();
-						0xFF73->show_npc_face(0x0000);
-					}
+				} else if (var0007) {
+					0xFFFF->say("\"Yeah, right.\"*");
+					0xFFFF->hide();
+					0xFF73->show_npc_face(0x0000);
 				}
 				say("\"Feel free to explore mine humble abode. Though, have a care. My guardians are none too intelligent and will most likely assault anything living.\" He smiles with his death's head grin.*");
 				abort;
@@ -31393,14 +31303,12 @@ void Func048E object#(0x48E) () {
 		if (!gflags[0x01C7]) {
 			say("You see in the fire of the ghostly forge a large, heavily-muscled ghost with a full beard and mustache. He does not notice your approach.");
 			gflags[0x01C7] = true;
+		} else if (var0002) {
+			say("Trent continues his work on the strangely-shaped iron cage.");
+			add("iron cage");
 		} else {
-			if (var0002) {
-				say("Trent continues his work on the strangely-shaped iron cage.");
-				add("iron cage");
-			} else {
-				say("Trent seems to be searching for something.");
-				add("something");
-			}
+			say("Trent seems to be searching for something.");
+			add("something");
 		}
 		converse (["name", "job", "bye"]) {
 			case "name":
@@ -31909,14 +31817,12 @@ void Func0491 object#(0x491) () {
 					".\" She traces the line of your bicep.~~\"I'd wager thou couldst lift me over thine head.\" She smiles enticingly. However, you doubt that you could even touch her in her ghostly state.~~\"Thou mayest call me Paulette, gorgeous. What can I do for thee?\" She winks at you.");
 			}
 			gflags[0x01CA] = true;
+		} else if (var0001) {
+			say("\"Yes, ",
+				var0000,
+				"?\", she asks sweetly.");
 		} else {
-			if (var0001) {
-				say("\"Yes, ",
-					var0000,
-					"?\", she asks sweetly.");
-			} else {
-				say("Paulette turns to face you and smiles coquettishly, \"I had thought that thou might return.\" Her eyes sparkle up at you mischievously.");
-			}
+			say("Paulette turns to face you and smiles coquettishly, \"I had thought that thou might return.\" Her eyes sparkle up at you mischievously.");
 		}
 		converse (0) {
 			case "name":
@@ -32446,15 +32352,13 @@ void Func0493 object#(0x493) () {
 					} else {
 						Func088A();
 					}
+				} else if (!gflags[0x01A2]) {
+					say("The Mayor's eyes dart back and forth as you ask him to sacrifice himself for the good of his people. \"There is still one thou hast neglected to ask. Go and find ",
+						var0006,
+						". Then come back and we'll see.\" Spectral sweat drips from his ghostly forehead.");
+					add(var0007);
 				} else {
-					if (!gflags[0x01A2]) {
-						say("The Mayor's eyes dart back and forth as you ask him to sacrifice himself for the good of his people. \"There is still one thou hast neglected to ask. Go and find ",
-							var0006,
-							". Then come back and we'll see.\" Spectral sweat drips from his ghostly forehead.");
-						add(var0007);
-					} else {
-						Func088A();
-					}
+					Func088A();
 				}
 				remove("sacrifice");
 				fallthrough;
@@ -33295,16 +33199,14 @@ void Func0499 object#(0x499) () {
 		if (!gflags[0x01FB]) {
 			say("You see your old friend Mariah.");
 			gflags[0x01FB] = true;
+		} else if (gflags[0x0003]) {
+			say("\"Yes, ",
+				var0001,
+				"? How may I help thee?\" Mariah greets you.");
 		} else {
-			if (gflags[0x0003]) {
-				say("\"Yes, ",
-					var0001,
-					"? How may I help thee?\" Mariah greets you.");
-			} else {
-				say("\"Yes, ",
-					var0000,
-					"?\" Mariah smiles, a trifle too sweetly.");
-			}
+			say("\"Yes, ",
+				var0000,
+				"?\" Mariah smiles, a trifle too sweetly.");
 		}
 		if (gflags[0x0003]) {
 			converse (0) {
@@ -34741,10 +34643,8 @@ void Func04A3 object#(0x4A3) () {
 				say("\"Ah, yes, Mariah is very nice.\"");
 				if (gflags[0x01D9]) {
 					say("\"She can sell thee many spells.\"");
-				} else {
-					if (!var0004) {
-						say("\"But I am more interested in discussing Zelda.\"");
-					}
+				} else if (!var0004) {
+					say("\"But I am more interested in discussing Zelda.\"");
 				}
 				remove("mage");
 				fallthrough;
@@ -34774,10 +34674,8 @@ void Func04A3 object#(0x4A3) () {
 				say("\"Friendly fellow -- I like him.\"");
 				if (gflags[0x01D9]) {
 					say("\"He stays home to care for their son.\"");
-				} else {
-					if (!var0004) {
-						say("\"But I am more interested in discussing Brion.\"");
-					}
+				} else if (!var0004) {
+					say("\"But I am more interested in discussing Brion.\"");
 				}
 				remove("Effrem");
 				fallthrough;
@@ -34806,10 +34704,8 @@ void Func04A3 object#(0x4A3) () {
 				say("\"Friendly fellow -- I like him. His name is Elad.\"");
 				if (gflags[0x01D9]) {
 					say("\"Sadly, his true desire is to leave Moonglow in search of adventure. But he will not leave, for he feels too much obligation for his patients.\" Phearcy shrugs.~\"Perhaps not without reason.\"");
-				} else {
-					if (!var0004) {
-						say("\"But Brion is more interesting to me.\"");
-					}
+				} else if (!var0004) {
+					say("\"But Brion is more interesting to me.\"");
 				}
 				remove("healer");
 				fallthrough;
@@ -36116,12 +36012,10 @@ void Func04AB object#(0x4AB) () {
 			case "Tobias":
 				if (gflags[0x0218]) {
 					say("\"I may not have told the truth about Tobias stealing the venom, but I know that he is up to no good. He shall come to a bad end, just thou wait and see!\"");
+				} else if (!gflags[0x021C]) {
+					say("\"He and his mother reject The Fellowship. They are witless and stupid and I do not like them.\"");
 				} else {
-					if (!gflags[0x021C]) {
-						say("\"He and his mother reject The Fellowship. They are witless and stupid and I do not like them.\"");
-					} else {
-						say("\"I have said it a thousand times. Tobias is weak of character! He and his mother are poor because they are lazy. Now I am proven right because Tobias is a thief. A thief who has been caught!\"");
-					}
+					say("\"I have said it a thousand times. Tobias is weak of character! He and his mother are poor because they are lazy. Now I am proven right because Tobias is a thief. A thief who has been caught!\"");
 				}
 				remove("Tobias");
 				fallthrough;
@@ -36142,12 +36036,10 @@ void Func04AB object#(0x4AB) () {
 				var0003 = Func090A();
 				if (var0003) {
 					say("\"I was not so sure, but since that is what my father says, it must be true.\"");
+				} else if (var0001) {
+					say("\"Hmpf. For a Fellowship member, thou dost lack recognition. Thou dost not understand the teachings of The Fellowship.\"");
 				} else {
-					if (var0001) {
-						say("\"Hmpf. For a Fellowship member, thou dost lack recognition. Thou dost not understand the teachings of The Fellowship.\"");
-					} else {
-						say("\"Then thou must be a person of weak character, also.\"");
-					}
+					say("\"Then thou must be a person of weak character, also.\"");
 				}
 				remove("character");
 				fallthrough;
@@ -37062,13 +36954,11 @@ void Func04AF object#(0x4AF) () {
 			case "thief":
 				if (gflags[0x0218]) {
 					say("After you tell him about finding the venom vial, he says, \"Thou didst our town a service when thou didst uncover that no good brat Garritt as the thief! Perhaps now some people will start to realize the hypocrisy of the Fellowship!\"");
+				} else if (gflags[0x0213]) {
+					say("\"I know that boy Tobias is innocent of any wrong doing, no matter what Feridwyn and his Fellowship says.\"");
 				} else {
-					if (gflags[0x0213]) {
-						say("\"I know that boy Tobias is innocent of any wrong doing, no matter what Feridwyn and his Fellowship says.\"");
-					} else {
-						say("\"Be wary for there is a thief in this town! Some silver serpent venom was stolen from the merchant Morfin, who runs the slaughterhouse.\"");
-						gflags[0x0212] = true;
-					}
+					say("\"Be wary for there is a thief in this town! Some silver serpent venom was stolen from the merchant Morfin, who runs the slaughterhouse.\"");
+					gflags[0x0212] = true;
 				}
 				remove("thief");
 				fallthrough;
@@ -37631,12 +37521,10 @@ void Func04B2 object#(0x4B2) () {
 			say("You see a sulking lad, who doesn't seem to want to look you in the eye.");
 			say("\"Just what I need. Another Avatar,\" he mumbles under his breath.");
 			gflags[0x022B] = true;
+		} else if (gflags[0x0218]) {
+			say("\"Yes, Avatar?\" Tobias asks.");
 		} else {
-			if (gflags[0x0218]) {
-				say("\"Yes, Avatar?\" Tobias asks.");
-			} else {
-				say("\"What dost thou want?\" Tobias asks.");
-			}
+			say("\"What dost thou want?\" Tobias asks.");
 		}
 		converse (0) {
 			case "name":
@@ -37674,12 +37562,10 @@ void Func04B2 object#(0x4B2) () {
 					} else {
 						say("\"Thou art no Avatar!\" Tobias frowns.");
 					}
+				} else if (gflags[0x0218]) {
+					say("\"I think that thou mayest have a little bit of the way of the Avatar about thee. There is a little bit of the Avatar in everyone, or so my mother says.\"");
 				} else {
-					if (gflags[0x0218]) {
-						say("\"I think that thou mayest have a little bit of the way of the Avatar about thee. There is a little bit of the Avatar in everyone, or so my mother says.\"");
-					} else {
-						say("\"I knew that thou wert nothing but an imposter.\"");
-					}
+					say("\"I knew that thou wert nothing but an imposter.\"");
 				}
 				remove("Avatar");
 				fallthrough;
@@ -37760,12 +37646,10 @@ void Func04B2 object#(0x4B2) () {
 					say("You tell Tobias how you discovered that Garritt was the thief. \"Thank thee, ",
 						var0000,
 						", for not believing I was the guilty one. I am not sure if thou art truly the real Avatar but thou dost certainly have the way of the Avatar about thee.\"");
+				} else if (!gflags[0x0213]) {
+					say("\"He is the only other boy in town anywhere near mine age. His parents do not want him playing with me because they think that 'associating with those kind of people' will 'hamper his education' or some such rubbish. I cannot stand the little bastard. And I hate the way he plays those stinking whistle panpipes!\"");
 				} else {
-					if (!gflags[0x0213]) {
-						say("\"He is the only other boy in town anywhere near mine age. His parents do not want him playing with me because they think that 'associating with those kind of people' will 'hamper his education' or some such rubbish. I cannot stand the little bastard. And I hate the way he plays those stinking whistle panpipes!\"");
-					} else {
-						say("\"That spoiled brat Garritt must have planted the venom in my room! He is usually lounging about, even if his parents disapprove of him playing with me. I know he is up to something no good! Thou shouldst look in HIS room!\"");
-					}
+					say("\"That spoiled brat Garritt must have planted the venom in my room! He is usually lounging about, even if his parents disapprove of him playing with me. I know he is up to something no good! Thou shouldst look in HIS room!\"");
 				}
 				remove("Garritt");
 				fallthrough;
@@ -42150,10 +42034,8 @@ void Func04D0 object#(0x4D0) () {
 		}
 		if (gflags[0x0282]) {
 			add("return amulet");
-		} else {
-			if (gflags[0x0299]) {
-				add("Lap-Lem");
-			}
+		} else if (gflags[0x0299]) {
+			add("Lap-Lem");
 		}
 		converse (0) {
 			case "name":
@@ -43144,13 +43026,11 @@ void Func04D8 object#(0x4D8) () {
 			} else {
 				say("\"To offer welcome for you, human,\" says Wis-Sur.");
 			}
+		} else if (!gflags[0x0295]) {
+			say("The winged gargoyle in front of you has a wild look about him.");
+			gflags[0x0295] = true;
 		} else {
-			if (!gflags[0x0295]) {
-				say("The winged gargoyle in front of you has a wild look about him.");
-				gflags[0x0295] = true;
-			} else {
-				say("\"To go away, human! To have nothing you want!\" screams Wis-Sur.");
-			}
+			say("\"To go away, human! To have nothing you want!\" screams Wis-Sur.");
 		}
 		if (gflags[0x0003]) {
 			converse (0) {
@@ -43757,51 +43637,49 @@ void Func04DD object#(0x4DD) () {
 	if ((gflags[0x029C] && (var0006 < 0x0002)) || ((gflags[0x029E] && (var0007 < 0x0002)) || (gflags[0x029D] && (var0008 < 0x0002)))) {
 		say("This attractive woman looks at you with surprise and says, \"A moment! Thou didst just enjoy thyself, didst thou not? Please come back when thou art rested.\"*");
 		abort;
-	} else {
-		if (!gflags[0x02AA]) {
-			say("You see a gorgeous young woman with seductive eyes.");
-			if (!var0004) {
-				say("\"Hello, handsome!");
-			} else {
-				say("\"Hello. Art thou sure thou dost not really want to speak with Roberto?\"");
-				if (Func090A()) {
-					say("\"Fine, sweetheart. Whatever makes thy blood boil... ");
-				} else {
-					say("\"Then thou hadst best speak with Roberto! He is probably more thy type.\"*");
-					abort;
-				}
-			}
-			say("Who art thou?\"");
-			var0009 = Func090B([var0002, var0003]);
-			if (var0009 == var0002) {
-				if (!var0004) {
-					say("\"Well, I am very pleased to meet thee, ",
-						var0002,
-						".\"");
-				} else {
-					say("\"Hello, ",
-						var0002,
-						".\"");
-				}
-				var0005 = var0002;
-				gflags[0x029F] = true;
-			}
-			if (var0009 == var0003) {
-				say("\"Oh ho! A real live Avatar?");
-				if (!var0004) {
-					say("\"Say, we should get to know one another better!\"");
-				} else {
-					say("\"And female, as well! And I thought I had seen it all...\"");
-				}
-				var0005 = var0003;
-				gflags[0x02A0] = true;
-			}
-			gflags[0x02AA] = true;
+	} else if (!gflags[0x02AA]) {
+		say("You see a gorgeous young woman with seductive eyes.");
+		if (!var0004) {
+			say("\"Hello, handsome!");
 		} else {
-			say("\"Hello again, ",
-				var0005,
-				",\" Wench says.");
+			say("\"Hello. Art thou sure thou dost not really want to speak with Roberto?\"");
+			if (Func090A()) {
+				say("\"Fine, sweetheart. Whatever makes thy blood boil... ");
+			} else {
+				say("\"Then thou hadst best speak with Roberto! He is probably more thy type.\"*");
+				abort;
+			}
 		}
+		say("Who art thou?\"");
+		var0009 = Func090B([var0002, var0003]);
+		if (var0009 == var0002) {
+			if (!var0004) {
+				say("\"Well, I am very pleased to meet thee, ",
+					var0002,
+					".\"");
+			} else {
+				say("\"Hello, ",
+					var0002,
+					".\"");
+			}
+			var0005 = var0002;
+			gflags[0x029F] = true;
+		}
+		if (var0009 == var0003) {
+			say("\"Oh ho! A real live Avatar?");
+			if (!var0004) {
+				say("\"Say, we should get to know one another better!\"");
+			} else {
+				say("\"And female, as well! And I thought I had seen it all...\"");
+			}
+			var0005 = var0003;
+			gflags[0x02A0] = true;
+		}
+		gflags[0x02AA] = true;
+	} else {
+		say("\"Hello again, ",
+			var0005,
+			",\" Wench says.");
 	}
 	converse (0) {
 		case "name":
@@ -44080,50 +43958,48 @@ void Func04DF object#(0x4DF) () {
 	if ((gflags[0x029D] && (var0006 < 0x0002)) || ((gflags[0x029E] && (var0007 < 0x0002)) || (gflags[0x029C] && (var0008 < 0x0002)))) {
 		say("This attractive woman looks at you with surprise and says, \"Honey, thou just enjoyed thyself, didst thou not? Please come back when thou art rested.\"*");
 		abort;
-	} else {
-		if (!gflags[0x02AC]) {
-			say("You see a beautiful young woman with a tropical air.");
-			if (!var0004) {
-				say("\"Hello, handsome!");
-			} else {
-				say("\"Hello, dear. Art thou sure thou dost not want to speak with Roberto?\"");
-				if (Func090A()) {
-					say("\"All right, honey. Whatever heats thy blood...\"");
-				} else {
-					say("\"Then thou had best speak with him! He is probably more to thy liking.\"*");
-					abort;
-				}
-			}
-			say("\"What is thy name?\"");
-			var0009 = Func090B([var0002, var0003]);
-			if (var0009 == var0002) {
-				if (!var0004) {
-					say("\"How art thou, ",
-						var0002,
-						"? I am so happy to meet thee!\"");
-				} else {
-					say("\"Hello, ",
-						var0002,
-						".\"");
-				}
-				var0005 = var0002;
-				gflags[0x029A] = true;
-			}
-			if (var0009 == var0003) {
-				say("\"Oh please! Not another Avatar!\"");
-				if (!var0004) {
-					say("Martine takes a deep breath, then smiles.");
-					say("\"Well, honey, it does not matter who thou art. We shalt have a good time anyway.\"");
-				}
-				gflags[0x029B] = true;
-				var0005 = var0003;
-			}
-			gflags[0x02AC] = true;
+	} else if (!gflags[0x02AC]) {
+		say("You see a beautiful young woman with a tropical air.");
+		if (!var0004) {
+			say("\"Hello, handsome!");
 		} else {
-			say("\"Hello again, ",
-				var0005,
-				",\" Martine says.");
+			say("\"Hello, dear. Art thou sure thou dost not want to speak with Roberto?\"");
+			if (Func090A()) {
+				say("\"All right, honey. Whatever heats thy blood...\"");
+			} else {
+				say("\"Then thou had best speak with him! He is probably more to thy liking.\"*");
+				abort;
+			}
 		}
+		say("\"What is thy name?\"");
+		var0009 = Func090B([var0002, var0003]);
+		if (var0009 == var0002) {
+			if (!var0004) {
+				say("\"How art thou, ",
+					var0002,
+					"? I am so happy to meet thee!\"");
+			} else {
+				say("\"Hello, ",
+					var0002,
+					".\"");
+			}
+			var0005 = var0002;
+			gflags[0x029A] = true;
+		}
+		if (var0009 == var0003) {
+			say("\"Oh please! Not another Avatar!\"");
+			if (!var0004) {
+				say("Martine takes a deep breath, then smiles.");
+				say("\"Well, honey, it does not matter who thou art. We shalt have a good time anyway.\"");
+			}
+			gflags[0x029B] = true;
+			var0005 = var0003;
+		}
+		gflags[0x02AC] = true;
+	} else {
+		say("\"Hello again, ",
+			var0005,
+			",\" Martine says.");
 	}
 	converse (0) {
 		case "name":
@@ -44240,46 +44116,44 @@ void Func04E0 object#(0x4E0) () {
 			var0004,
 			"! Thou didst just enjoy thyself, didst thou not? Please come back when thou art rested!\"*");
 		abort;
-	} else {
-		if (!gflags[0x02AD]) {
-			say("You see a strikingly handsome man with eyes that pierce your soul.");
-			if (var0004) {
-				say("\"Hello, gorgeous!");
-			} else {
-				say("\"Hello. Uhm, art thou sure thou dost not really want to speak with Wench or Martine?\"");
-				if (Func090A()) {
-					say("\"Fine, sailor, whatever makes thy blood boil...");
-				} else {
-					say("\"Then thou hadst best speak with one of them. They are probably more to thy liking!\"*");
-					abort;
-				}
-			}
-			say("\"What is thy name?\"");
-			var0009 = Func090B([var0002, var0003]);
-			if (var0009 == var0002) {
-				if (var0004) {
-					say("\"Well, I am very pleased to meet thee, ",
-						var0002,
-						".\"");
-				} else {
-					say("\"Hello, ",
-						var0002,
-						".\"");
-				}
-				var0005 = var0002;
-				gflags[0x02A1] = true;
-			}
-			if (var0009 == var0003) {
-				say("Roberto does a double-take. \"The Avatar, eh? And I thought I had heard it all...\"");
-				gflags[0x02A2] = true;
-				var0005 = var0003;
-			}
-			gflags[0x02AD] = true;
+	} else if (!gflags[0x02AD]) {
+		say("You see a strikingly handsome man with eyes that pierce your soul.");
+		if (var0004) {
+			say("\"Hello, gorgeous!");
 		} else {
-			say("\"Hello again, ",
-				var0005,
-				",\" Roberto says.");
+			say("\"Hello. Uhm, art thou sure thou dost not really want to speak with Wench or Martine?\"");
+			if (Func090A()) {
+				say("\"Fine, sailor, whatever makes thy blood boil...");
+			} else {
+				say("\"Then thou hadst best speak with one of them. They are probably more to thy liking!\"*");
+				abort;
+			}
 		}
+		say("\"What is thy name?\"");
+		var0009 = Func090B([var0002, var0003]);
+		if (var0009 == var0002) {
+			if (var0004) {
+				say("\"Well, I am very pleased to meet thee, ",
+					var0002,
+					".\"");
+			} else {
+				say("\"Hello, ",
+					var0002,
+					".\"");
+			}
+			var0005 = var0002;
+			gflags[0x02A1] = true;
+		}
+		if (var0009 == var0003) {
+			say("Roberto does a double-take. \"The Avatar, eh? And I thought I had heard it all...\"");
+			gflags[0x02A2] = true;
+			var0005 = var0003;
+		}
+		gflags[0x02AD] = true;
+	} else {
+		say("\"Hello again, ",
+			var0005,
+			",\" Roberto says.");
 	}
 	converse (0) {
 		case "name":
@@ -44546,14 +44420,12 @@ void Func04E2 object#(0x4E2) () {
 				var0004 = var0002;
 			}
 			gflags[0x02AF] = true;
+		} else if (gflags[0x02A6] || (!gflags[0x02A5])) {
+			say("\"What dost thou want?\" Blacktooth asks in a threatening voice. \"Oh, 'tis thee, ",
+				var0004,
+				".\"");
 		} else {
-			if (gflags[0x02A6] || (!gflags[0x02A5])) {
-				say("\"What dost thou want?\" Blacktooth asks in a threatening voice. \"Oh, 'tis thee, ",
-					var0004,
-					".\"");
-			} else {
-				say("\"I thought thou didst not want to be my friend!\" Blacktooth grumbles.");
-			}
+			say("\"I thought thou didst not want to be my friend!\" Blacktooth grumbles.");
 		}
 		converse (0) {
 			case "name":
@@ -47548,21 +47420,19 @@ void Func04F7 object#(0x4F7) () {
 						say("\"Then I have no answers for thee.\"*");
 						abort;
 					}
-				} else {
-					if (gflags[0x01AA]) {
-						say("\"Thou hast freed us from the Liche. Thou art entitled to mine half of the bargain.~~\"So thou dost want to know the answers to the questions of life and death?\"");
-						if (Func090A()) {
-							say("The Tortured One looks hard at you. Then, smiling, he shakes his head. \"I have no secrets, my foolish friend. Thou art a fool. There are -no- answers. Only questions.\"~~He looks as if he might cry out in pain. And then Caine turns away from you. \"Go away now. Leave me to mine eternity.\"*");
-							gflags[0x0196] = true;
-							Func0911(0x02BC);
-							abort;
-						} else {
-							say("\"Then why hast thou wasted thy time? Go away, fool!\"*");
-							abort;
-						}
+				} else if (gflags[0x01AA]) {
+					say("\"Thou hast freed us from the Liche. Thou art entitled to mine half of the bargain.~~\"So thou dost want to know the answers to the questions of life and death?\"");
+					if (Func090A()) {
+						say("The Tortured One looks hard at you. Then, smiling, he shakes his head. \"I have no secrets, my foolish friend. Thou art a fool. There are -no- answers. Only questions.\"~~He looks as if he might cry out in pain. And then Caine turns away from you. \"Go away now. Leave me to mine eternity.\"*");
+						gflags[0x0196] = true;
+						Func0911(0x02BC);
+						abort;
 					} else {
-						say("\"Thou hast not rid us of the evil Liche yet. Fulfill this quest as thou hast agreed and I shall give thee the answers thou dost seek.\"");
+						say("\"Then why hast thou wasted thy time? Go away, fool!\"*");
+						abort;
 					}
+				} else {
+					say("\"Thou hast not rid us of the evil Liche yet. Fulfill this quest as thou hast agreed and I shall give thee the answers thou dost seek.\"");
 				}
 				remove("questions");
 				fallthrough;
@@ -48180,28 +48050,26 @@ void Func04FA object#(0x4FA) () {
 						var0000,
 						"?\"");
 					add("liqueur");
-				} else {
-					if (gflags[0x020C]) {
-						var0005 = UI_get_timer(0x0008);
-						if (var0005 > 0x0006) {
-							say("\"She has left for Britain on important business,\" he smiles. \"I do not expect her return any time soon.\"");
-						} else {
-							say("\"Oh? Thou hast not seen her lately, either? I wonder what she has been up to.\" He gives a slight smile.");
-							if (var0004) {
-								say("The Cube vibrates. \"Actually, I know exactly where she is.\"");
-								add("where");
-							}
-						}
-					} else if (var0002) {
-						say("\"She is right there,\" he says, pointing to Balayna.");
+				} else if (gflags[0x020C]) {
+					var0005 = UI_get_timer(0x0008);
+					if (var0005 > 0x0006) {
+						say("\"She has left for Britain on important business,\" he smiles. \"I do not expect her return any time soon.\"");
 					} else {
-						say("\"I have not seen her in some time, ",
-							var0000,
-							". Perhaps thou mayest find her in her house.\"");
-						0xFF64->remove_npc();
-						gflags[0x020C] = true;
-						UI_set_timer(0x0008);
+						say("\"Oh? Thou hast not seen her lately, either? I wonder what she has been up to.\" He gives a slight smile.");
+						if (var0004) {
+							say("The Cube vibrates. \"Actually, I know exactly where she is.\"");
+							add("where");
+						}
 					}
+				} else if (var0002) {
+					say("\"She is right there,\" he says, pointing to Balayna.");
+				} else {
+					say("\"I have not seen her in some time, ",
+						var0000,
+						". Perhaps thou mayest find her in her house.\"");
+					0xFF64->remove_npc();
+					gflags[0x020C] = true;
+					UI_set_timer(0x0008);
 				}
 				remove("Balayna");
 				fallthrough;
@@ -48944,13 +48812,11 @@ void Func04FE object#(0x4FE) () {
 						add("virginity");
 					}
 				}
+			} else if (gflags[0x029D] || (gflags[0x029C] || gflags[0x029E])) {
+				say("\"I beg thy pardon, but perhaps thou shouldst go to the Lycaeum and have someone look up the definition of the word 'virginity' for thee. Wouldst thou mind stepping back, please?! Thou dost make me nervous.\"");
 			} else {
-				if (gflags[0x029D] || (gflags[0x029C] || gflags[0x029E])) {
-					say("\"I beg thy pardon, but perhaps thou shouldst go to the Lycaeum and have someone look up the definition of the word 'virginity' for thee. Wouldst thou mind stepping back, please?! Thou dost make me nervous.\"");
-				} else {
-					say("\"Yes, I could tell the answer to my question before thou didst even speak it. Art thou a virgin by choice or by circumstance?\"");
-					add(["choice", "circumstance"]);
-				}
+				say("\"Yes, I could tell the answer to my question before thou didst even speak it. Art thou a virgin by choice or by circumstance?\"");
+				add(["choice", "circumstance"]);
 			}
 			remove("avoid");
 			fallthrough;
@@ -49714,20 +49580,18 @@ void Func060C object#(0x60C) () {
 				var0010->remove_item();
 			}
 		}
-	} else {
-		if (!gflags[0x0023]) {
-			gflags[0x0023] = true;
-		} else if (!gflags[0x0024]) {
-			gflags[0x0024] = true;
-		} else if ((!gflags[0x0025]) && gflags[0x0024]) {
-			gflags[0x0022] = false;
-			gflags[0x0023] = false;
-			gflags[0x0024] = false;
-			gflags[0x0025] = false;
-			var0000 = UI_find_nearby_avatar(0x02FC);
-			for (var0003 in var0000 with var0016 to var0017) {
-				var0003->set_item_frame(0x0000);
-			}
+	} else if (!gflags[0x0023]) {
+		gflags[0x0023] = true;
+	} else if (!gflags[0x0024]) {
+		gflags[0x0024] = true;
+	} else if ((!gflags[0x0025]) && gflags[0x0024]) {
+		gflags[0x0022] = false;
+		gflags[0x0023] = false;
+		gflags[0x0024] = false;
+		gflags[0x0025] = false;
+		var0000 = UI_find_nearby_avatar(0x02FC);
+		for (var0003 in var0000 with var0016 to var0017) {
+			var0003->set_item_frame(0x0000);
 		}
 	}
 }
@@ -49992,12 +49856,10 @@ void Func0610 object#(0x610) () {
 		0xFF59->show_npc_face(0x0000);
 		Func08D5();
 		0xFF59->hide();
-	} else {
-		if (var0007) {
-			0xFF58->show_npc_face(0x0000);
-			Func08D5();
-			0xFF58->hide();
-		}
+	} else if (var0007) {
+		0xFF58->show_npc_face(0x0000);
+		Func08D5();
+		0xFF58->hide();
 	}
 	if (var0008) {
 		0xFFFF->say("\"I am gladdened to see thee still alive, my good friend. I was sorely grieved at thine apparent demise.~~\"In the midst of our battle I did lose track of thee. It is good to find thee safe.~~\"If thou art feeling up to it, let us then continue our quest.\"*");
@@ -52185,10 +52047,8 @@ void Func0641 object#(0x641) () {
 				var0002 = UI_die_roll(0x0002, 0x0003);
 				var0003 = var0001[var0002];
 				UI_set_weather(var0003);
-			} else {
-				if (UI_get_weather() != 0x0003) {
-					UI_set_weather(0x0000);
-				}
+			} else if (UI_get_weather() != 0x0003) {
+				UI_set_weather(0x0000);
 			}
 		} else {
 			var0000 = script item {
@@ -55741,12 +55601,10 @@ void Func068F object#(0x68F) () {
 
 	if (gflags[0x032E]) {
 		var0000 = 0x000F;
+	} else if (gflags[0x032D]) {
+		var0000 = 0x000E;
 	} else {
-		if (gflags[0x032D]) {
-			var0000 = 0x000E;
-		} else {
-			var0000 = 0x000D;
-		}
+		var0000 = 0x000D;
 	}
 	var0001 = script item {
 		frame var0000;
@@ -55820,13 +55678,11 @@ void Func0691 object#(0x691) () {
 				say("You feel that you've done the best job that you can, but the sword doesn't feel quite right. It's much too heavy and cumbersome to wield as a weapon.");
 				gflags[0x0337] = true;
 				0xFE9C->hide();
-			} else {
-				if (var0003 < 0x0014) {
-					gflags[0x032D] = false;
-					0xFE9C->show_npc_face(UI_is_pc_female());
-					say("That last blow was perhaps a bit too hard, It'll take a while to hammer out the flaws.");
-					0xFE9C->hide();
-				}
+			} else if (var0003 < 0x0014) {
+				gflags[0x032D] = false;
+				0xFE9C->show_npc_face(UI_is_pc_female());
+				say("That last blow was perhaps a bit too hard, It'll take a while to hammer out the flaws.");
+				0xFE9C->hide();
 			}
 		} else {
 			0xFE9C->show_npc_face(UI_is_pc_female());
@@ -56201,124 +56057,120 @@ void Func0697 object#(0x697) () {
 				actor frame step_left;
 				wait 2;
 			};
-		} else {
-			if (!gflags[0x032C]) {
-				gflags[0x032C] = true;
-				UI_sprite_effect(0x0011, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-				UI_sprite_effect(0x0004, (var0000[0x0001] - 0x0002), (var0000[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
-				UI_play_sound_effect(0x0009);
-				var0001 = find_nearest(0x0112, 0x0001);
-				var0001->remove_item();
-				var0005 = UI_create_new_object(0x01F8);
-				var0005->set_item_frame(0x0013);
-				var0002 = UI_update_last_created(var0000);
-				var0006 = var0005->find_nearest(0x009A, 0x0001);
-				var0003 = script var0006 {
-					wait 14;
-					call Func0696;
-				};
-				var0007 = script var0005 {
-					face south;
-					wait 4;
-					actor frame raise_2h;
-					wait 3;
-					actor frame strike_2h;
-					wait 2;
-					actor frame reach_2h;
-					wait 1;
-				};
-			} else {
-				UI_sprite_effect(0x0011, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-				UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-				UI_play_sound_effect(0x0008);
-				var0006 = find_nearest(0x009A, 0x0001);
-				remove_item();
-				var0006->set_item_frame(0x001C);
-				var0003 = script var0006 {
-					actor frame kneeling;
-					wait 5;
-					actor frame bowing;
-					wait 4;
-					actor frame standing;
-				};
-				var0006->set_schedule_type(0x001D);
-				0xFE9C->get_npc_object()->clear_item_flag(0x0010);
-				var0008 = Func0881();
-				var0009 = script var0008 after 13 ticks {
-					finish;
-					remove;
-				};
-				var000A = script 0xFE9C->get_npc_object() {
-					wait 11;
-					call Func069D;
-				};
-			}
-		}
-	} else {
-		if (!gflags[0x032B]) {
-			gflags[0x032B] = true;
-			UI_sprite_effect(0x000D, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-			UI_play_sound_effect(0x0043);
-			set_item_frame(0x0004);
-			var000B = UI_create_new_object(0x0209);
-			var000B->set_item_frame(0x0010);
-			var0002 = UI_update_last_created(var0000);
-			var0003 = script item {
-				wait 11;
-				say "@Squeak!@";
-				wait 7;
-				call Func0698;
-			};
-			var000C = script var000B {
-				face south;
-				wait 4;
-				actor frame step_right;
-				wait 1;
-				actor frame step_left;
-				wait 1;
-				actor frame ready;
-				wait 2;
-				actor frame step_left;
-				wait 1;
-				actor frame ready;
-				wait 1;
-				actor frame step_right;
-				wait 2;
-				actor frame ready;
-			};
 		} else if (!gflags[0x032C]) {
 			gflags[0x032C] = true;
 			UI_sprite_effect(0x0011, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-			UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-			UI_play_sound_effect(0x003E);
-			set_item_frame(0x0004);
-			var000D = UI_create_new_object(0x01F4);
-			var000D->set_item_frame(0x0017);
+			UI_sprite_effect(0x0004, (var0000[0x0001] - 0x0002), (var0000[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
+			UI_play_sound_effect(0x0009);
+			var0001 = find_nearest(0x0112, 0x0001);
+			var0001->remove_item();
+			var0005 = UI_create_new_object(0x01F8);
+			var0005->set_item_frame(0x0013);
 			var0002 = UI_update_last_created(var0000);
-			var0003 = script item {
-				wait 11;
-				say "@MOO?!@";
-				wait 7;
-				call Func0698;
+			var0006 = var0005->find_nearest(0x009A, 0x0001);
+			var0003 = script var0006 {
+				wait 14;
+				call Func0696;
 			};
-			var000E = script var000D {
+			var0007 = script var0005 {
 				face south;
 				wait 4;
 				actor frame raise_2h;
-				wait 1;
-				actor frame reach_2h;
-				wait 1;
+				wait 3;
 				actor frame strike_2h;
 				wait 2;
 				actor frame reach_2h;
-				wait 2;
-				actor frame strike_2h;
 				wait 1;
-				actor frame reach_2h;
-				wait 1;
-				actor frame raise_2h;
+			};
+		} else {
+			UI_sprite_effect(0x0011, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
+			UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
+			UI_play_sound_effect(0x0008);
+			var0006 = find_nearest(0x009A, 0x0001);
+			remove_item();
+			var0006->set_item_frame(0x001C);
+			var0003 = script var0006 {
+				actor frame kneeling;
+				wait 5;
+				actor frame bowing;
+				wait 4;
+				actor frame standing;
+			};
+			var0006->set_schedule_type(0x001D);
+			0xFE9C->get_npc_object()->clear_item_flag(0x0010);
+			var0008 = Func0881();
+			var0009 = script var0008 after 13 ticks {
+				finish;
+				remove;
+			};
+			var000A = script 0xFE9C->get_npc_object() {
+				wait 11;
+				call Func069D;
 			};
 		}
+	} else if (!gflags[0x032B]) {
+		gflags[0x032B] = true;
+		UI_sprite_effect(0x000D, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
+		UI_play_sound_effect(0x0043);
+		set_item_frame(0x0004);
+		var000B = UI_create_new_object(0x0209);
+		var000B->set_item_frame(0x0010);
+		var0002 = UI_update_last_created(var0000);
+		var0003 = script item {
+			wait 11;
+			say "@Squeak!@";
+			wait 7;
+			call Func0698;
+		};
+		var000C = script var000B {
+			face south;
+			wait 4;
+			actor frame step_right;
+			wait 1;
+			actor frame step_left;
+			wait 1;
+			actor frame ready;
+			wait 2;
+			actor frame step_left;
+			wait 1;
+			actor frame ready;
+			wait 1;
+			actor frame step_right;
+			wait 2;
+			actor frame ready;
+		};
+	} else if (!gflags[0x032C]) {
+		gflags[0x032C] = true;
+		UI_sprite_effect(0x0011, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
+		UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
+		UI_play_sound_effect(0x003E);
+		set_item_frame(0x0004);
+		var000D = UI_create_new_object(0x01F4);
+		var000D->set_item_frame(0x0017);
+		var0002 = UI_update_last_created(var0000);
+		var0003 = script item {
+			wait 11;
+			say "@MOO?!@";
+			wait 7;
+			call Func0698;
+		};
+		var000E = script var000D {
+			face south;
+			wait 4;
+			actor frame raise_2h;
+			wait 1;
+			actor frame reach_2h;
+			wait 1;
+			actor frame strike_2h;
+			wait 2;
+			actor frame reach_2h;
+			wait 2;
+			actor frame strike_2h;
+			wait 1;
+			actor frame reach_2h;
+			wait 1;
+			actor frame raise_2h;
+		};
 	}
 }
 
@@ -58666,52 +58518,50 @@ void Func06F6 object#(0x6F6) () {
 				" looks around and says, \"I don't recall summoning thee. Nevermind, I have no need of thee at the current time. Begone!\" The old man waves his hand, negligently.");
 			0xFEDE->say("Through a tightly clenched smile, the figure replies, \"Very well...\" And after a significant pause, \"Master.\"*");
 			Func0843();
-		} else {
-			if (gflags[0x0332]) {
-				if (gflags[0x0333]) {
-					say("Arcadion appears truly astonished, \"For what dost thou wait?! I beg of thee! Release me!\"");
-					Func0843();
-				} else {
-					var0006 = find_nearby(0x02F8, 0x000F, 0x0000);
-					var0007 = false;
-					if (var0006) {
-						var0007 = Func0844(var0006);
-						if (var0007) {
-							say("\"There is a gem nearby that can free me! It is a small blue stone. Take it, quickly, and use it to free me of this accursed mirror!\" The large daemon seethes with pent up frustration.*");
-							gflags[0x0333] = true;
-							Func0843();
-						} else {
-							say("\"Can I be of some small assistance in thy quest to release me. If so, thou hast but to ask.\" Arcadion's smile stretches from ear to ear.");
-							add(["name", "job", "release", "bye"]);
-						}
-					} else if (0xFE9B->count_objects(0x02F8, 0xFE99, 0x000C)) {
-						say("\"Thou hast within thy possessions a small blue gem. It can be used to free me! Crack this accursed mirror with it! I'll enter it as I am freed!\"\tArcadion looks prepared to burst from the mirror.*");
+		} else if (gflags[0x0332]) {
+			if (gflags[0x0333]) {
+				say("Arcadion appears truly astonished, \"For what dost thou wait?! I beg of thee! Release me!\"");
+				Func0843();
+			} else {
+				var0006 = find_nearby(0x02F8, 0x000F, 0x0000);
+				var0007 = false;
+				if (var0006) {
+					var0007 = Func0844(var0006);
+					if (var0007) {
+						say("\"There is a gem nearby that can free me! It is a small blue stone. Take it, quickly, and use it to free me of this accursed mirror!\" The large daemon seethes with pent up frustration.*");
 						gflags[0x0333] = true;
 						Func0843();
 					} else {
 						say("\"Can I be of some small assistance in thy quest to release me. If so, thou hast but to ask.\" Arcadion's smile stretches from ear to ear.");
 						add(["name", "job", "release", "bye"]);
 					}
-				}
-			} else if (gflags[0x0331]) {
-				say("\"Run along now little mortal. Do not pester thy betters with the idle rantings of thy tongue.\" He appears at first nonchallant, then his expression becomes intense, \"That is unless thou hast reconsidered my offer... Hast thou?\"");
-				if (Func090A()) {
-					say("A wicked look of triumph flickers across Arcadion's face to be quickly replaced by a ludicrous semblance of gratitude, \"Thou art truly courageous to vow to release\tme. My eternal thanks are thine.\" An oily grin coats the daemon's face, \"Thou hast made quite a powerful ally this day, mortal.\" His eyes blink in what is possibly meant to be a charming manner.");
-					gflags[0x0332] = true;
-					add(["name", "job", "daemon", "release", "bye"]);
-				} else {
-					say("\"Ah, I see. Still content to run about with the other sheep.\" He waves you off and dims from sight.*");
+				} else if (0xFE9B->count_objects(0x02F8, 0xFE99, 0x000C)) {
+					say("\"Thou hast within thy possessions a small blue gem. It can be used to free me! Crack this accursed mirror with it! I'll enter it as I am freed!\"\tArcadion looks prepared to burst from the mirror.*");
+					gflags[0x0333] = true;
 					Func0843();
+				} else {
+					say("\"Can I be of some small assistance in thy quest to release me. If so, thou hast but to ask.\" Arcadion's smile stretches from ear to ear.");
+					add(["name", "job", "release", "bye"]);
 				}
-			} else if (!gflags[0x0313]) {
-				say("\"Yes, Master. How may I serve thee...\" The wavering visage in the mirror hesitates for a moment, \"Thou art not my master.\"");
-				say("He then continues with a small bow, \"Greetings Britannian. What dost thou wish of the great daemon, Arcadion?\"");
-				gflags[0x0313] = true;
-				add(["name", "job", "daemon", "bye"]);
-			} else {
-				say("\"Greetings once again Britannian. What dost thou wish of me.\" The daemon is the soul of congeniality.");
-				add(["name", "job", "daemon", "bye"]);
 			}
+		} else if (gflags[0x0331]) {
+			say("\"Run along now little mortal. Do not pester thy betters with the idle rantings of thy tongue.\" He appears at first nonchallant, then his expression becomes intense, \"That is unless thou hast reconsidered my offer... Hast thou?\"");
+			if (Func090A()) {
+				say("A wicked look of triumph flickers across Arcadion's face to be quickly replaced by a ludicrous semblance of gratitude, \"Thou art truly courageous to vow to release\tme. My eternal thanks are thine.\" An oily grin coats the daemon's face, \"Thou hast made quite a powerful ally this day, mortal.\" His eyes blink in what is possibly meant to be a charming manner.");
+				gflags[0x0332] = true;
+				add(["name", "job", "daemon", "release", "bye"]);
+			} else {
+				say("\"Ah, I see. Still content to run about with the other sheep.\" He waves you off and dims from sight.*");
+				Func0843();
+			}
+		} else if (!gflags[0x0313]) {
+			say("\"Yes, Master. How may I serve thee...\" The wavering visage in the mirror hesitates for a moment, \"Thou art not my master.\"");
+			say("He then continues with a small bow, \"Greetings Britannian. What dost thou wish of the great daemon, Arcadion?\"");
+			gflags[0x0313] = true;
+			add(["name", "job", "daemon", "bye"]);
+		} else {
+			say("\"Greetings once again Britannian. What dost thou wish of me.\" The daemon is the soul of congeniality.");
+			add(["name", "job", "daemon", "bye"]);
 		}
 		var0008 = false;
 		converse (0) {
@@ -58788,13 +58638,11 @@ void Func06F6 object#(0x6F6) () {
 					} else {
 						say("\"There was one on this island, that much I know. Find it. Bring it to me and together, we shall break this mirror which binds me to that blasted mage.*");
 					}
+				} else if (0xFE9B->count_objects(0x02F8, 0xFE99, 0x000C)) {
+					say("\"Thou hast the gem! I feel it! Use it now to crack the mirror! I'll enter it as I'm freed!\" The daemon hardly restains his enthusiasm.*");
+					gflags[0x0333] = true;
 				} else {
-					if (0xFE9B->count_objects(0x02F8, 0xFE99, 0x000C)) {
-						say("\"Thou hast the gem! I feel it! Use it now to crack the mirror! I'll enter it as I'm freed!\" The daemon hardly restains his enthusiasm.*");
-						gflags[0x0333] = true;
-					} else {
-						say("\"There was one on this island, that much I know. Find it. Bring it to me and together, we shall break this mirror which binds me to that blasted mage.*");
-					}
+					say("\"There was one on this island, that much I know. Find it. Bring it to me and together, we shall break this mirror which binds me to that blasted mage.*");
 				}
 				Func0843();
 
@@ -58920,16 +58768,14 @@ void Func06F6 object#(0x6F6) () {
 							if (!var0009) {
 								add("master");
 							}
-						} else {
-							if (!gflags[0x0335]) {
-								say("\"Perhaps I misjudged thee, master.\" He pauses for a thoughtful moment, \"Mayhap in time thou canst call me friend as well as ally.\"");
-								gflags[0x0335] = true;
-								if (!var0009) {
-									add("master");
-								}
-							} else if (!var0009) {
+						} else if (!gflags[0x0335]) {
+							say("\"Perhaps I misjudged thee, master.\" He pauses for a thoughtful moment, \"Mayhap in time thou canst call me friend as well as ally.\"");
+							gflags[0x0335] = true;
+							if (!var0009) {
 								add("master");
 							}
+						} else if (!var0009) {
+							add("master");
 						}
 					} else {
 						say("\"Thou hast need of my energies again?\" Arcadion asks a little petulantly.");
@@ -59773,12 +59619,10 @@ void Func06F8 object#(0x6F8) () {
 						} else {
 							Func0881()->set_item_frame(0x0012);
 						}
+					} else if (UI_is_pc_female()) {
+						Func0881()->set_item_frame(0x0015);
 					} else {
-						if (UI_is_pc_female()) {
-							Func0881()->set_item_frame(0x0015);
-						} else {
-							Func0881()->set_item_frame(0x0013);
-						}
+						Func0881()->set_item_frame(0x0013);
 					}
 					var0014 = UI_create_new_object(0x03BB);
 					var0014->set_item_frame(0x0007);
@@ -60439,14 +60283,12 @@ void Func06FC object#(0x6FC) () {
 		if (var0000->is_npc()) {
 			var0000->halt_scheduled();
 			var0002 = var0000->get_object_position();
+		} else if (var0000 == 0x0000) {
+			var0002[0x0001] = var0000[0x0002];
+			var0002[0x0002] = var0000[0x0003];
+			var0002[0x0003] = var0000[0x0004];
 		} else {
-			if (var0000 == 0x0000) {
-				var0002[0x0001] = var0000[0x0002];
-				var0002[0x0002] = var0000[0x0003];
-				var0002[0x0003] = var0000[0x0004];
-			} else {
-				var0002 = var0000->get_object_position();
-			}
+			var0002 = var0000->get_object_position();
 		}
 		var0004 = UI_create_new_object(0x031D);
 		var0004->set_item_frame(0x0004);
@@ -62299,15 +62141,13 @@ void Func0810 0x810 (var var0000, var var0001) {
 				var000A = UI_update_last_created(0xFE9A);
 				UI_play_sound_effect(0x000A);
 			}
-		} else {
-			if (var0009 == 0x0000) {
-				var000B = UI_create_new_object(var0000);
-				var000B->set_item_frame(var0002);
-				var000A = UI_update_last_created(var0003);
-				var000A = var0009->set_last_created();
-				var000A = UI_update_last_created(0xFE9A);
-				UI_play_sound_effect(0x0053);
-			}
+		} else if (var0009 == 0x0000) {
+			var000B = UI_create_new_object(var0000);
+			var000B->set_item_frame(var0002);
+			var000A = UI_update_last_created(var0003);
+			var000A = var0009->set_last_created();
+			var000A = UI_update_last_created(0xFE9A);
+			UI_play_sound_effect(0x0053);
 		}
 	}
 }
@@ -64139,15 +63979,13 @@ void Func0841 0x841 () {
 			}
 			if (var000B == 0x0001) {
 				say("\"To be agreed!\"");
+			} else if (var000B == 0x0002) {
+				say("\"To have not the ability to carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"To be without enough gold!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"To have not the ability to carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"To be without enough gold!\"");
-				} else {
-					say("\"To want another item?\"");
-					var0000 = Func090A();
-				}
+				say("\"To want another item?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -64198,39 +64036,37 @@ void Func0842 0x842 () {
 				say("She bats her eyelashes at you and grins.");
 			}
 			var0002 = false;
-		} else {
-			if (var000B == 0x0006) {
-				if (gflags[0x012B]) {
-					say("\"I have none to sell thee, ",
-						var0000,
-						", for the logger will no longer supply it.\"");
-				} else {
-					var000C = Func091B(var0007, var0003[var000B], var0008, var0006[var000B], var0009[var000B]);
-					var000D = 0x0000;
-					say("\"^",
-						var000C,
-						" Is that price all right?\"");
-					var000E = Func090A();
-					if (var000E) {
-						if (var0004[var000B] == 0x0179) {
-							say("\"How many wouldst thou like?\"");
-							var000D = Func08F8(var0004[var000B], var0005[var000B], var000A, var0006[var000B], 0x0014, 0x0001, true);
-						} else {
-							var000D = Func08F8(var0004[var000B], var0005[var000B], var000A, var0006[var000B], 0x0000, 0x0001, true);
-						}
-					}
-					if (var000D == 0x0001) {
-						say("\"'Tis thine!\"");
-					} else if (var000D == 0x0002) {
-						say("\"Thou cannot possibly carry that much, ",
-							var0000,
-							"!\"");
-					} else if (var000D == 0x0003) {
-						say("\"Hmmm. Thou dost not have enough gold!\"");
+		} else if (var000B == 0x0006) {
+			if (gflags[0x012B]) {
+				say("\"I have none to sell thee, ",
+					var0000,
+					", for the logger will no longer supply it.\"");
+			} else {
+				var000C = Func091B(var0007, var0003[var000B], var0008, var0006[var000B], var0009[var000B]);
+				var000D = 0x0000;
+				say("\"^",
+					var000C,
+					" Is that price all right?\"");
+				var000E = Func090A();
+				if (var000E) {
+					if (var0004[var000B] == 0x0179) {
+						say("\"How many wouldst thou like?\"");
+						var000D = Func08F8(var0004[var000B], var0005[var000B], var000A, var0006[var000B], 0x0014, 0x0001, true);
 					} else {
-						say("\"Wouldst thou like something else?\"");
-						var0002 = Func090A();
+						var000D = Func08F8(var0004[var000B], var0005[var000B], var000A, var0006[var000B], 0x0000, 0x0001, true);
 					}
+				}
+				if (var000D == 0x0001) {
+					say("\"'Tis thine!\"");
+				} else if (var000D == 0x0002) {
+					say("\"Thou cannot possibly carry that much, ",
+						var0000,
+						"!\"");
+				} else if (var000D == 0x0003) {
+					say("\"Hmmm. Thou dost not have enough gold!\"");
+				} else {
+					say("\"Wouldst thou like something else?\"");
+					var0002 = Func090A();
 				}
 			}
 		}
@@ -64521,15 +64357,13 @@ void Func084C 0x84C () {
 			}
 			if (var000C == 0x0001) {
 				say("\"To be done!\"");
+			} else if (var000C == 0x0002) {
+				say("\"To be unable to carry that much, human.\"");
+			} else if (var000C == 0x0003) {
+				say("\"To have not the right amount of gold!\"");
 			} else {
-				if (var000C == 0x0002) {
-					say("\"To be unable to carry that much, human.\"");
-				} else if (var000C == 0x0003) {
-					say("\"To have not the right amount of gold!\"");
-				} else {
-					say("\"To buy something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"To buy something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -65136,15 +64970,13 @@ void Func0853 0x853 () {
 			}
 			if (var000B == 0x0001) {
 				say("\"To accept!\"");
+			} else if (var000B == 0x0002) {
+				say("\"To be unable to travel with that much weight!\"");
+			} else if (var000B == 0x0003) {
+				say("\"To have not the money for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"To be unable to travel with that much weight!\"");
-				} else if (var000B == 0x0003) {
-					say("\"To have not the money for that!\"");
-				} else {
-					say("\"To make another purchase?\"");
-					var0000 = Func090A();
-				}
+				say("\"To make another purchase?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -65248,17 +65080,15 @@ void Func0855 0x855 () {
 			}
 			if (var000C == 0x0001) {
 				say("\"It is thine!\"");
+			} else if (var000C == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000C == 0x0003) {
+				say("\"Thou dost not have enough gold, ",
+					var0000,
+					".\"");
 			} else {
-				if (var000C == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000C == 0x0003) {
-					say("\"Thou dost not have enough gold, ",
-						var0000,
-						".\"");
-				} else {
-					say("\"Wouldst thou care for something else?\"");
-					var0001 = Func090A();
-				}
+				say("\"Wouldst thou care for something else?\"");
+				var0001 = Func090A();
 			}
 		}
 	}
@@ -65447,15 +65277,13 @@ void Func0858 0x858 () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have enough gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have enough gold for that!\"");
-				} else {
-					say("\"Wouldst thou like something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"Wouldst thou like something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -65510,15 +65338,13 @@ void Func0859 0x859 () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have enough gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have enough gold for that!\"");
-				} else {
-					say("\"Wouldst thou like something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"Wouldst thou like something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -65589,15 +65415,13 @@ void Func085A 0x85A () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have enough gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have enough gold for that!\"");
-				} else {
-					say("\"Wouldst thou like something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"Wouldst thou like something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -65679,15 +65503,13 @@ void Func085C 0x85C () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Excellent choice!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou must put away one of thine other items before thou canst take this fine piece of clothing.\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have enough gold for my fine apparel. Perhaps in the near future.\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou must put away one of thine other items before thou canst take this fine piece of clothing.\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have enough gold for my fine apparel. Perhaps in the near future.\"");
-				} else {
-					say("\"Is there something else thou wouldst like to see?\"");
-					var0000 = Func090A();
-				}
+				say("\"Is there something else thou wouldst like to see?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -65735,38 +65557,36 @@ void Func085D 0x85D () {
 				var0000,
 				".\"");
 			var0001 = false;
-		} else {
-			if (var000A == 0x0004) {
-				if (gflags[0x012B]) {
-					say("\"Phearcy has said that we can no longer sell Silverleaf because we have no more and cannot again acquire the meal. I am truly sorry. Perhaps thou wouldst be interested in something else.\"");
-				} else {
-					var000B = Func091B(var0006, var0002[var000A], var0007[var000A], var0005[var000A], var0008[var000A]);
-					var000C = 0x0000;
-					say("\"^",
+		} else if (var000A == 0x0004) {
+			if (gflags[0x012B]) {
+				say("\"Phearcy has said that we can no longer sell Silverleaf because we have no more and cannot again acquire the meal. I am truly sorry. Perhaps thou wouldst be interested in something else.\"");
+			} else {
+				var000B = Func091B(var0006, var0002[var000A], var0007[var000A], var0005[var000A], var0008[var000A]);
+				var000C = 0x0000;
+				say("\"^",
+					var000B,
+					" Dost thou accept my price?\"");
+				var000D = Func090A();
+				if (var000D) {
+					var000B = "How many ";
+					if (var0004[var000A] == 0x000F) {
+						var000B = (var000B + "sets ");
+					}
+					var000B = (var000B + "dost thou want?");
+					say("\"",
 						var000B,
-						" Dost thou accept my price?\"");
-					var000D = Func090A();
-					if (var000D) {
-						var000B = "How many ";
-						if (var0004[var000A] == 0x000F) {
-							var000B = (var000B + "sets ");
-						}
-						var000B = (var000B + "dost thou want?");
-						say("\"",
-							var000B,
-							"\"");
-						var000C = Func08F8(var0003[var000A], var0004[var000A], var0009[var000A], var0005[var000A], 0x0014, 0x0001, true);
-					}
-					if (var000C == 0x0001) {
-						say("\"Agreed.\"");
-					} else if (var000C == 0x0002) {
-						say("\"Thou cannot carry that much!\"");
-					} else if (var000C == 0x0003) {
-						say("\"Thou hast not the gold for that!\"");
-					} else {
-						say("\"Wouldst thou like something else?\"");
-						var0001 = Func090A();
-					}
+						"\"");
+					var000C = Func08F8(var0003[var000A], var0004[var000A], var0009[var000A], var0005[var000A], 0x0014, 0x0001, true);
+				}
+				if (var000C == 0x0001) {
+					say("\"Agreed.\"");
+				} else if (var000C == 0x0002) {
+					say("\"Thou cannot carry that much!\"");
+				} else if (var000C == 0x0003) {
+					say("\"Thou hast not the gold for that!\"");
+				} else {
+					say("\"Wouldst thou like something else?\"");
+					var0001 = Func090A();
 				}
 			}
 		}
@@ -65827,15 +65647,13 @@ void Func085E 0x85E () {
 			}
 			if (var000C == 0x0001) {
 				say("\"Agreed.\"");
+			} else if (var000C == 0x0002) {
+				say("\"Thou cannot carry that much!\"");
+			} else if (var000C == 0x0003) {
+				say("\"Thou hast not the gold for that!\"");
 			} else {
-				if (var000C == 0x0002) {
-					say("\"Thou cannot carry that much!\"");
-				} else if (var000C == 0x0003) {
-					say("\"Thou hast not the gold for that!\"");
-				} else {
-					say("\"Wouldst thou like something else?\"");
-					var0001 = Func090A();
-				}
+				say("\"Wouldst thou like something else?\"");
+				var0001 = Func090A();
 			}
 		}
 	}
@@ -66175,15 +65993,13 @@ void Func0863 0x863 () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have enough gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have enough gold for that!\"");
-				} else {
-					say("\"Wouldst thou like something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"Wouldst thou like something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -66425,12 +66241,10 @@ var Func086F 0x86F () {
 		} else {
 			var0000 = Func0866();
 		}
+	} else if (UI_die_roll(0x0000, 0x0001)) {
+		var0000 = Func086C();
 	} else {
-		if (UI_die_roll(0x0000, 0x0001)) {
-			var0000 = Func086C();
-		} else {
-			var0000 = Func086D();
-		}
+		var0000 = Func086D();
 	}
 	var0001 = var0000[0x0001];
 	var0002 = var0000[0x0002];
@@ -66763,46 +66577,44 @@ void Func0871 0x871 () {
 		if (var000A == 0x0001) {
 			say("\"Very well.\"");
 			var0001 = false;
-		} else {
-			if (var000A == 0x0006) {
-				if (gflags[0x012B]) {
-					say("\"I have no more. For some reason, no one is sending Silverleaf to us, so I cannot make a meal from it.\"");
-				} else {
-					var000B = Func091B(var0006, var0002[var000A], var0007, var0005[var000A], var0008[var000A]);
-					var000C = 0x0000;
-					say("\"^",
-						var000B,
-						" Is that all right?\"");
-					var000D = Func090A();
-					if (var000D) {
-						if (var0003[var000A] == 0x0268) {
-							var000C = Func08F8(var0003[var000A], var0004[var000A], var0009[var000A], var0005[var000A], 0x0000, 0x0001, true);
-						} else {
-							var000B = "How many ";
-							if (var0009[var000A] > 0x0001) {
-								var000B = (var000B + "sets ");
-							}
-							var000B = (var000B + "wouldst thou like?");
-							say("\"^",
-								var000B,
-								"\"");
-							var000C = Func08F8(var0003[var000A], var0004[var000A], var0009[var000A], var0005[var000A], 0x0014, 0x0001, true);
-						}
-					}
-					if (var000C == 0x0001) {
-						say("\"Done!\"");
-					} else if (var000C == 0x0002) {
-						say("\"But, ",
-							var0000,
-							", thou cannot possibly carry that much!\"");
-					} else if (var000C == 0x0003) {
-						say("\"I am sorry, ",
-							var0000,
-							", thou hast not enough gold for that.\"");
+		} else if (var000A == 0x0006) {
+			if (gflags[0x012B]) {
+				say("\"I have no more. For some reason, no one is sending Silverleaf to us, so I cannot make a meal from it.\"");
+			} else {
+				var000B = Func091B(var0006, var0002[var000A], var0007, var0005[var000A], var0008[var000A]);
+				var000C = 0x0000;
+				say("\"^",
+					var000B,
+					" Is that all right?\"");
+				var000D = Func090A();
+				if (var000D) {
+					if (var0003[var000A] == 0x0268) {
+						var000C = Func08F8(var0003[var000A], var0004[var000A], var0009[var000A], var0005[var000A], 0x0000, 0x0001, true);
 					} else {
-						say("\"Wouldst thou like something else?\"");
-						var0001 = Func090A();
+						var000B = "How many ";
+						if (var0009[var000A] > 0x0001) {
+							var000B = (var000B + "sets ");
+						}
+						var000B = (var000B + "wouldst thou like?");
+						say("\"^",
+							var000B,
+							"\"");
+						var000C = Func08F8(var0003[var000A], var0004[var000A], var0009[var000A], var0005[var000A], 0x0014, 0x0001, true);
 					}
+				}
+				if (var000C == 0x0001) {
+					say("\"Done!\"");
+				} else if (var000C == 0x0002) {
+					say("\"But, ",
+						var0000,
+						", thou cannot possibly carry that much!\"");
+				} else if (var000C == 0x0003) {
+					say("\"I am sorry, ",
+						var0000,
+						", thou hast not enough gold for that.\"");
+				} else {
+					say("\"Wouldst thou like something else?\"");
+					var0001 = Func090A();
 				}
 			}
 		}
@@ -66867,15 +66679,13 @@ void Func0872 0x872 () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Very good. At last we are getting somewhere!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou hast thine hands full, idiot!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou hast a lot of gall attempting to buy something from my shop without enough gold in thy possession!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou hast thine hands full, idiot!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou hast a lot of gall attempting to buy something from my shop without enough gold in thy possession!\"");
-				} else {
-					say("\"Anything else for thee today?\"");
-					var0000 = Func090A();
-				}
+				say("\"Anything else for thee today?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -66931,15 +66741,13 @@ void Func0873 0x873 () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Very good. At last we are getting somewhere!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou hast thine hands full, idiot!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou hast a lot of gall attempting to buy something from my shop without enough gold in thy possession!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou hast thine hands full, idiot!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou hast a lot of gall attempting to buy something from my shop without enough gold in thy possession!\"");
-				} else {
-					say("\"Anything else for thee today?\"");
-					var0000 = Func090A();
-				}
+				say("\"Anything else for thee today?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -67004,15 +66812,13 @@ void Func0874 0x874 () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Very good. At last we are getting somewhere!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou hast thine hands full, idiot!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou hast a lot of gall attempting to buy something from my shop without enough gold in thy possession!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou hast thine hands full, idiot!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou hast a lot of gall attempting to buy something from my shop without enough gold in thy possession!\"");
-				} else {
-					say("\"Anything else for thee today?\"");
-					var0000 = Func090A();
-				}
+				say("\"Anything else for thee today?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -67194,17 +67000,15 @@ void Func0876 0x876 () {
 				say("\"Very good, ",
 					var0000,
 					".\"");
+			} else if (var000B == 0x0002) {
+				say("\"I believe thou cannot carry that much, ",
+					var0000,
+					".\"");
+			} else if (var000B == 0x0003) {
+				say("\"It would appear thou dost not have enough gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"I believe thou cannot carry that much, ",
-						var0000,
-						".\"");
-				} else if (var000B == 0x0003) {
-					say("\"It would appear thou dost not have enough gold for that!\"");
-				} else {
-					say("\"Wouldst thou care to buy something else?\"");
-					var0001 = Func090A();
-				}
+				say("\"Wouldst thou care to buy something else?\"");
+				var0001 = Func090A();
 			}
 		}
 	}
@@ -67424,15 +67228,13 @@ void Func087A 0x87A () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Very good!\"");
+			} else if (var000B == 0x0002) {
+				say("\"I am sorry, but thou cannot possibly carry that much weight!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have enough gold for that,\" he says, shaking his head.~~\"Too many birds in the hand is worth a bush.\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"I am sorry, but thou cannot possibly carry that much weight!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have enough gold for that,\" he says, shaking his head.~~\"Too many birds in the hand is worth a bush.\"");
-				} else {
-					say("\"Wouldst thou care to purchase something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"Wouldst thou care to purchase something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -67559,12 +67361,10 @@ void Func087D 0x87D () {
 		} else {
 			var0000->set_item_frame(0x0013);
 		}
+	} else if (0xFE9C->get_npc_object()->get_item_frame() < 0x0010) {
+		var0000->set_item_frame(0x0014);
 	} else {
-		if (0xFE9C->get_npc_object()->get_item_frame() < 0x0010) {
-			var0000->set_item_frame(0x0014);
-		} else {
-			var0000->set_item_frame(0x0015);
-		}
+		var0000->set_item_frame(0x0015);
 	}
 	var0001 = 0xFE9C->get_npc_object()->get_object_position();
 	var0002 = UI_update_last_created(var0001);
@@ -68187,13 +67987,11 @@ var Func0887 0x887 (var var0000, var var0001, var var0002) {
 			if (var0004) {
 				var0008 = true;
 				var0004 = false;
+			} else if (var0005) {
+				var000A = true;
+				var0005 = false;
 			} else {
-				if (var0005) {
-					var000A = true;
-					var0005 = false;
-				} else {
-					var0006 = true;
-				}
+				var0006 = true;
 			}
 		} else {
 			var0000[0x0002] = (var0000[0x0002] + 0x0001);
@@ -68207,25 +68005,23 @@ var Func0887 0x887 (var var0000, var var0001, var var0002) {
 				var0007 = true;
 			}
 		}
-	} else {
-		if (var0003) {
-			UI_sprite_effect(0x0004, (var0000[0x0001] - 0x0001), (var0000[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
-			UI_play_sound_effect(0x0009);
-			var000C = UI_create_new_object(0x0113);
-			var000C->set_item_frame(0x0006);
-			var000C->set_item_flag(0x0012);
-			var000D = var000C->set_item_quality(0x0097);
-			var000D = UI_update_last_created(var0000);
-			Func0888(var000C);
-			var000C->remove_item();
-			var0002->remove_item();
-			halt_scheduled();
-			var000E = script item {
-				nohalt;
-				call Func0708;
-			};
-			return 0x0000;
-		}
+	} else if (var0003) {
+		UI_sprite_effect(0x0004, (var0000[0x0001] - 0x0001), (var0000[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
+		UI_play_sound_effect(0x0009);
+		var000C = UI_create_new_object(0x0113);
+		var000C->set_item_frame(0x0006);
+		var000C->set_item_flag(0x0012);
+		var000D = var000C->set_item_quality(0x0097);
+		var000D = UI_update_last_created(var0000);
+		Func0888(var000C);
+		var000C->remove_item();
+		var0002->remove_item();
+		halt_scheduled();
+		var000E = script item {
+			nohalt;
+			call Func0708;
+		};
+		return 0x0000;
 	}
 	if (var0004 || var0005) {
 		var000F = UI_die_roll(0xFFFF, 0x0001);
@@ -68395,15 +68191,13 @@ void Func0889 0x889 () {
 			}
 			if (var000B == 0x0001) {
 				say("\"To be done!\"");
+			} else if (var000B == 0x0002) {
+				say("\"To carry too much already!\"");
+			} else if (var000B == 0x0003) {
+				say("\"To be without enough gold!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"To carry too much already!\"");
-				} else if (var000B == 0x0003) {
-					say("\"To be without enough gold!\"");
-				} else {
-					say("\"To request something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"To request something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -68533,15 +68327,13 @@ void Func088C 0x88C () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have enough gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have enough gold for that!\"");
-				} else {
-					say("\"Wouldst thou like something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"Wouldst thou like something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -68613,15 +68405,13 @@ void Func088E 0x88E () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have enough gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have enough gold for that!\"");
-				} else {
-					say("\"Wouldst thou like something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"Wouldst thou like something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -68677,15 +68467,13 @@ void Func088F 0x88F () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have enough gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have enough gold for that!\"");
-				} else {
-					say("\"Wouldst thou like something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"Wouldst thou like something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -69168,15 +68956,13 @@ void Func0897 0x897 () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have enough gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have enough gold for that!\"");
-				} else {
-					say("\"Wouldst thou like something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"Wouldst thou like something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -69237,15 +69023,13 @@ void Func0898 0x898 () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have enough gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have enough gold for that!\"");
-				} else {
-					say("\"Wouldst thou like something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"Wouldst thou like something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -69310,15 +69094,13 @@ void Func0899 0x899 () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have enough gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have enough gold for that!\"");
-				} else {
-					say("\"Wouldst thou like something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"Wouldst thou like something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -69505,15 +69287,13 @@ void Func089C 0x89C () {
 			}
 			if (var000B == 0x0001) {
 				say("\"To be agreed.\"");
+			} else if (var000B == 0x0002) {
+				say("\"To be without the ability to carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"To have less than enough gold for that.\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"To be without the ability to carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"To have less than enough gold for that.\"");
-				} else {
-					say("\"To want something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"To want something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -69597,12 +69377,10 @@ void Func089D 0x89D (var var0000, var var0001, var var0002) {
 							Func0912(var0008, 0x0003, var000F);
 							var0010 = UI_remove_party_items(var0007, 0x0284, 0xFE99, 0xFE99, true);
 							say("\"To have healed the wounds.\"");
+						} else if (var0008 == 0xFE9C) {
+							say("\"To seem quite healthy!\"");
 						} else {
-							if (var0008 == 0xFE9C) {
-								say("\"To seem quite healthy!\"");
-							} else {
-								say("\"To be already healthy!\"");
-							}
+							say("\"To be already healthy!\"");
 						}
 					} else if (var0005 == "cure poison") {
 						var0011 = var0008->get_npc_object();
@@ -69873,37 +69651,35 @@ void Func08A0 0x8A0 () {
 		if (var000A == 0x0001) {
 			say("\"Fine.\"");
 			var0001 = false;
-		} else {
-			if (var000A == 0x0007) {
-				if (gflags[0x012B]) {
-					say("\"'Tis all gone, ",
-						var0000,
-						". And the logger will cut down no more Silverleaf trees. I expect it will become even more of a delicacy, and more expensive, if I can ever get any more to sell.\"");
-				} else {
-					var000B = Func091B(var0006, var0002[var000A], var0007, var0005[var000A], var0008[var000A]);
-					var000C = 0x0000;
-					say("\"^",
-						var000B,
-						" Does that sound like a fair price?\"");
-					var000D = Func090A();
-					if (var000D) {
-						if (var0003[var000A] == 0x0179) {
-							say("\"How many wouldst thou like?\"");
-							var000C = Func08F8(var0003[var000A], var0004[var000A], var0009, var0005[var000A], 0x0014, 0x0001, true);
-						} else {
-							var000C = Func08F8(var0003[var000A], var0004[var000A], var0009, var0005[var000A], 0x0000, 0x0001, true);
-						}
-					}
-					if (var000C == 0x0001) {
-						say("\"Done!\"");
-					} else if (var000C == 0x0002) {
-						say("\"Thou cannot possibly carry that much!\"");
-					} else if (var000C == 0x0003) {
-						say("\"Thou dost not have enough gold for that!\"");
+		} else if (var000A == 0x0007) {
+			if (gflags[0x012B]) {
+				say("\"'Tis all gone, ",
+					var0000,
+					". And the logger will cut down no more Silverleaf trees. I expect it will become even more of a delicacy, and more expensive, if I can ever get any more to sell.\"");
+			} else {
+				var000B = Func091B(var0006, var0002[var000A], var0007, var0005[var000A], var0008[var000A]);
+				var000C = 0x0000;
+				say("\"^",
+					var000B,
+					" Does that sound like a fair price?\"");
+				var000D = Func090A();
+				if (var000D) {
+					if (var0003[var000A] == 0x0179) {
+						say("\"How many wouldst thou like?\"");
+						var000C = Func08F8(var0003[var000A], var0004[var000A], var0009, var0005[var000A], 0x0014, 0x0001, true);
 					} else {
-						say("\"Wouldst thou like something else?\"");
-						var0001 = Func090A();
+						var000C = Func08F8(var0003[var000A], var0004[var000A], var0009, var0005[var000A], 0x0000, 0x0001, true);
 					}
+				}
+				if (var000C == 0x0001) {
+					say("\"Done!\"");
+				} else if (var000C == 0x0002) {
+					say("\"Thou cannot possibly carry that much!\"");
+				} else if (var000C == 0x0003) {
+					say("\"Thou dost not have enough gold for that!\"");
+				} else {
+					say("\"Wouldst thou like something else?\"");
+					var0001 = Func090A();
 				}
 			}
 		}
@@ -69982,17 +69758,15 @@ void Func08A1 0x8A1 () {
 				say("\"Very good, ",
 					var0000,
 					".\"");
+			} else if (var000C == 0x0002) {
+				say("\"But, ",
+					var0000,
+					", thou cannot possibly carry that much!\"");
+			} else if (var000C == 0x0003) {
+				say("\"I am sorry, but thou hast not enough gold for that!\"");
 			} else {
-				if (var000C == 0x0002) {
-					say("\"But, ",
-						var0000,
-						", thou cannot possibly carry that much!\"");
-				} else if (var000C == 0x0003) {
-					say("\"I am sorry, but thou hast not enough gold for that!\"");
-				} else {
-					say("\"Wouldst thou care to purchase something else?\"");
-					var0001 = Func090A();
-				}
+				say("\"Wouldst thou care to purchase something else?\"");
+				var0001 = Func090A();
 			}
 		}
 	}
@@ -70121,15 +69895,13 @@ void Func08A3 0x8A3 () {
 				say("\"Very good, ",
 					var0000,
 					".\"");
+			} else if (var000C == 0x0002) {
+				say("\"Thou cannot travel with that much!\"");
+			} else if (var000C == 0x0003) {
+				say("\"Thou dost not have the gold for that!\"");
 			} else {
-				if (var000C == 0x0002) {
-					say("\"Thou cannot travel with that much!\"");
-				} else if (var000C == 0x0003) {
-					say("\"Thou dost not have the gold for that!\"");
-				} else {
-					say("\"Wouldst thou like to buy something else?\"");
-					var0001 = Func090A();
-				}
+				say("\"Wouldst thou like to buy something else?\"");
+				var0001 = Func090A();
 			}
 		}
 	}
@@ -70190,15 +69962,13 @@ void Func08A4 0x8A4 () {
 				say("\"Very good, ",
 					var0000,
 					".\"");
+			} else if (var000C == 0x0002) {
+				say("\"Thou cannot travel with that much!\"");
+			} else if (var000C == 0x0003) {
+				say("\"Thou dost not have the gold for that!\"");
 			} else {
-				if (var000C == 0x0002) {
-					say("\"Thou cannot travel with that much!\"");
-				} else if (var000C == 0x0003) {
-					say("\"Thou dost not have the gold for that!\"");
-				} else {
-					say("\"Wouldst thou like to buy something else?\"");
-					var0001 = Func090A();
-				}
+				say("\"Wouldst thou like to buy something else?\"");
+				var0001 = Func090A();
 			}
 		}
 	}
@@ -70375,15 +70145,13 @@ void Func08A7 0x8A7 () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Thou wilt indeed be pleased with thy purchase. We have only the finest produce.\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have enough coin to pay for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have enough coin to pay for that!\"");
-				} else {
-					say("\"Wouldst thou like to purchase something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"Wouldst thou like to purchase something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -70439,15 +70207,13 @@ void Func08A8 0x8A8 () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have enough gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have enough gold for that!\"");
-				} else {
-					say("\"Wouldst thou like something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"Wouldst thou like something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -70507,15 +70273,13 @@ void Func08A9 0x8A9 () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have enough gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have enough gold for that!\"");
-				} else {
-					say("\"Wouldst thou like something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"Wouldst thou like something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -70571,15 +70335,13 @@ void Func08AA 0x8AA () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have enough gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have enough gold for that!\"");
-				} else {
-					say("\"Wouldst thou like something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"Wouldst thou like something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -70707,12 +70469,10 @@ void Func08AC 0x8AC (var var0000, var var0001, var var0002) {
 				if (var000C >= var0007) {
 					if (var0005 == "heal") {
 						Func091D(var0008, var0007);
-					} else {
-						if (var0005 == "cure poison") {
-							Func091E(var0008, var0007);
-						} else if (var0005 == "resurrect") {
-							Func091F(var000A, var0007);
-						}
+					} else if (var0005 == "cure poison") {
+						Func091E(var0008, var0007);
+					} else if (var0005 == "resurrect") {
+						Func091F(var000A, var0007);
 					}
 				} else {
 					say("\"Thou dost not have enough gold! Mayhaps thou couldst return when thou hast more.\"");
@@ -70778,17 +70538,15 @@ void Func08AD 0x8AD () {
 	if (!gflags[0x01AE]) {
 		say("Horance thinks for a moment then, \"When the well is destroyed, the souls within will be released to float aimlessly upon the ether for a time. I have badly wronged the Lady Rowena and her husband, I would see this wrong mended. Please, lead her out of this dark place and see that she is reunited with Trent. That way they will remain together when they are released. I will know when you've accomplished this task, and then we can continue with the destruction of the well.\"");
 		gflags[0x01AE] = true;
+	} else if (!gflags[0x01A6]) {
+		say("\"But please, ",
+			var0000,
+			", I beg thee make haste. Take Rowena to Trent! Time is short! Talk to her and take her to her husband! The souls in the well are constantly in pain, and some become so drained that they are snuffed out of existence like the flame of a candle.\" He looks as if he feels the pain himself.");
+	} else if (gflags[0x0198]) {
+		Func08AF();
 	} else {
-		if (!gflags[0x01A6]) {
-			say("\"But please, ",
-				var0000,
-				", I beg thee make haste. Take Rowena to Trent! Time is short! Talk to her and take her to her husband! The souls in the well are constantly in pain, and some become so drained that they are snuffed out of existence like the flame of a candle.\" He looks as if he feels the pain himself.");
-		} else if (gflags[0x0198]) {
-			Func08AF();
-		} else {
-			say("\"Good, now we can get on with freeing the rest of Skara Brae. The destruction of the Well of Souls can only be brought about by the selfless sacrifice of a spirit. A living being will not do, because the soul is tied to the body.~~\"Go out into the town and find a spirit willing to make the sacrifice for the sake of all Skara Brae. I suggest that thou shouldst ask Mayor Forsythe first, as it is his right to be considered before the others.\" He strokes his chin thoughtfully as you leave.");
-			gflags[0x0198] = true;
-		}
+		say("\"Good, now we can get on with freeing the rest of Skara Brae. The destruction of the Well of Souls can only be brought about by the selfless sacrifice of a spirit. A living being will not do, because the soul is tied to the body.~~\"Go out into the town and find a spirit willing to make the sacrifice for the sake of all Skara Brae. I suggest that thou shouldst ask Mayor Forsythe first, as it is his right to be considered before the others.\" He strokes his chin thoughtfully as you leave.");
+		gflags[0x0198] = true;
 	}
 	abort;
 }
@@ -70842,20 +70600,18 @@ void Func08AF 0x8AF () {
 				abort;
 			}
 		}
-	} else {
-		if (!gflags[0x01A3]) {
-			say("\"Very good, now thou shalt take the Mayor to the well and he must enter it of his own free will. When he does that, the souls of the island and the well will be free to go on to their destiny. Unfortunately, Mayor Forsythe will be lost for all time.\"");
-			var0003 = Func08F7(0xFF6D);
-			if (var0003) {
-				say(" He looks sadly at the ghostly gentleman.");
-			}
-			say("*");
-			abort;
-		} else if (!gflags[0x01AB]) {
-			Func08B1();
-		} else {
-			Func08B2();
+	} else if (!gflags[0x01A3]) {
+		say("\"Very good, now thou shalt take the Mayor to the well and he must enter it of his own free will. When he does that, the souls of the island and the well will be free to go on to their destiny. Unfortunately, Mayor Forsythe will be lost for all time.\"");
+		var0003 = Func08F7(0xFF6D);
+		if (var0003) {
+			say(" He looks sadly at the ghostly gentleman.");
 		}
+		say("*");
+		abort;
+	} else if (!gflags[0x01AB]) {
+		Func08B1();
+	} else {
+		Func08B2();
 	}
 }
 
@@ -71213,37 +70969,35 @@ void Func08B7 0x8B7 () {
 		if (var000B == 0x0001) {
 			say("\"Fine.\"");
 			var0001 = false;
-		} else {
-			if (var000B == 0x0007) {
-				if (gflags[0x012B]) {
-					say("\"Oh, I am so terribly sorry, ",
-						var0000,
-						", but there is no more. The logger in Yew refuses to chop down any more Silverleaf trees. I, personally, thinks it is a dreadful decision.\"");
-				} else {
-					var000C = Func091B(var0006, var0002[var000B], var0007, var0005[var000B], var0008[var000B]);
-					var000D = 0x0000;
-					say("\"^",
-						var000C,
-						" Dost thou still want it?\"");
-					var000E = Func090A();
-					if (var000E) {
-						if (var0003[var000B] == 0x0179) {
-							say("\"How many wouldst thou like?\"");
-							var000D = Func08F8(var0003[var000B], var0004[var000B], var0009, var0005[var000B], 0x0014, 0x0001, true);
-						} else {
-							var000D = Func08F8(var0003[var000B], var0004[var000B], var0009, var0005[var000B], 0x0000, 0x0001, true);
-						}
-					}
-					if (var000D == 0x0001) {
-						say("\"Done!\"");
-					} else if (var000D == 0x0002) {
-						say("\"Thou cannot possibly carry that much!\"");
-					} else if (var000D == 0x0003) {
-						say("\"Thou dost not have enough gold for that!\"");
+		} else if (var000B == 0x0007) {
+			if (gflags[0x012B]) {
+				say("\"Oh, I am so terribly sorry, ",
+					var0000,
+					", but there is no more. The logger in Yew refuses to chop down any more Silverleaf trees. I, personally, thinks it is a dreadful decision.\"");
+			} else {
+				var000C = Func091B(var0006, var0002[var000B], var0007, var0005[var000B], var0008[var000B]);
+				var000D = 0x0000;
+				say("\"^",
+					var000C,
+					" Dost thou still want it?\"");
+				var000E = Func090A();
+				if (var000E) {
+					if (var0003[var000B] == 0x0179) {
+						say("\"How many wouldst thou like?\"");
+						var000D = Func08F8(var0003[var000B], var0004[var000B], var0009, var0005[var000B], 0x0014, 0x0001, true);
 					} else {
-						say("\"Wouldst thou like something else?\"");
-						var0001 = Func090A();
+						var000D = Func08F8(var0003[var000B], var0004[var000B], var0009, var0005[var000B], 0x0000, 0x0001, true);
 					}
+				}
+				if (var000D == 0x0001) {
+					say("\"Done!\"");
+				} else if (var000D == 0x0002) {
+					say("\"Thou cannot possibly carry that much!\"");
+				} else if (var000D == 0x0003) {
+					say("\"Thou dost not have enough gold for that!\"");
+				} else {
+					say("\"Wouldst thou like something else?\"");
+					var0001 = Func090A();
 				}
 			}
 		}
@@ -71358,15 +71112,13 @@ void Func08B9 0x8B9 () {
 			}
 			if (var000C == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000C == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000C == 0x0003) {
+				say("\"Thou dost not have enough gold for that!\"");
 			} else {
-				if (var000C == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000C == 0x0003) {
-					say("\"Thou dost not have enough gold for that!\"");
-				} else {
-					say("\"Wouldst thou like something else?\"");
-					var0001 = Func090A();
-				}
+				say("\"Wouldst thou like something else?\"");
+				var0001 = Func090A();
 			}
 		}
 	}
@@ -71577,15 +71329,13 @@ void Func08BC 0x8BC (var var0000) {
 			}
 			if (var000E == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000E == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000E == 0x0003) {
+				say("\"Thou dost not have enough gold for that!\"");
 			} else {
-				if (var000E == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000E == 0x0003) {
-					say("\"Thou dost not have enough gold for that!\"");
-				} else {
-					say("\"Wouldst thou like something else?\"");
-					var0001 = Func090A();
-				}
+				say("\"Wouldst thou like something else?\"");
+				var0001 = Func090A();
 			}
 		}
 	}
@@ -71835,26 +71585,22 @@ void Func08C0 0x8C0 () {
 				if (!var0000) {
 					add("Quenton");
 				}
-			} else {
-				if (gflags[0x01A5]) {
-					if (!gflags[0x01A8]) {
-						say("\"Now that Trent has been brought out of himself, I believe it is time to have him construct the Soul Cage that will become the Liche's coffin.\" She smiles without humor.~~\"Go to him and assist him if thou wishest to free this town from Horance's grasp.\"");
-						if (!var0004) {
-							add("Horance the Liche");
-						}
-					} else {
-						if (gflags[0x01AA]) {
-							say("\"I feel as if a great weight has been lifted from me. I cannot thank thee enough for what thou hast done. However, we will not be free of the Liche's power until the Well of Souls has been destroyed.\"");
-							add("Well of Souls");
-						} else {
-							say("\"Thou must use his cage well to stop the liche.\"");
-						}
+			} else if (gflags[0x01A5]) {
+				if (!gflags[0x01A8]) {
+					say("\"Now that Trent has been brought out of himself, I believe it is time to have him construct the Soul Cage that will become the Liche's coffin.\" She smiles without humor.~~\"Go to him and assist him if thou wishest to free this town from Horance's grasp.\"");
+					if (!var0004) {
+						add("Horance the Liche");
 					}
+				} else if (gflags[0x01AA]) {
+					say("\"I feel as if a great weight has been lifted from me. I cannot thank thee enough for what thou hast done. However, we will not be free of the Liche's power until the Well of Souls has been destroyed.\"");
+					add("Well of Souls");
 				} else {
-					say("\"Alas, I fear that his mind was broken by the loss of his wife, Rowena. He cannot break out of the hatred which consumes him. One day, he will be spent and his spirit will be lost forever. Perhaps, Rowena would know of something that could help... but no, she herself is in need of assistance.\" Mordra shakes her head.");
-					if (!var0002) {
-						add("Rowena");
-					}
+					say("\"Thou must use his cage well to stop the liche.\"");
+				}
+			} else {
+				say("\"Alas, I fear that his mind was broken by the loss of his wife, Rowena. He cannot break out of the hatred which consumes him. One day, he will be spent and his spirit will be lost forever. Perhaps, Rowena would know of something that could help... but no, she herself is in need of assistance.\" Mordra shakes her head.");
+				if (!var0002) {
+					add("Rowena");
 				}
 			}
 			remove("Trent");
@@ -71867,12 +71613,10 @@ void Func08C0 0x8C0 () {
 				if (!var0000) {
 					add("Quenton");
 				}
+			} else if (!gflags[0x01A9]) {
+				say("\"Thou must find a way to bring her out of the Liche's ensorcelment, even if only for a brief moment. I am positive she holds the key to restoring Trent to his former self. Perhaps, if thou couldst find a personal article of hers -- something from Trent, perhaps -- and bring it to her. That might break the enchantment she is under.\"");
 			} else {
-				if (!gflags[0x01A9]) {
-					say("\"Thou must find a way to bring her out of the Liche's ensorcelment, even if only for a brief moment. I am positive she holds the key to restoring Trent to his former self. Perhaps, if thou couldst find a personal article of hers -- something from Trent, perhaps -- and bring it to her. That might break the enchantment she is under.\"");
-				} else {
-					say("Mistress Mordra frowns a little. \"I hope that poor girl can hold out a little longer, until she can be taken away from that horrible place.\"");
-				}
+				say("Mistress Mordra frowns a little. \"I hope that poor girl can hold out a little longer, until she can be taken away from that horrible place.\"");
 			}
 			remove("Rowena");
 			var0002 = true;
@@ -71887,17 +71631,15 @@ void Func08C0 0x8C0 () {
 					add("Horance the Liche");
 				}
 				var0003 = true;
+			} else if (!gflags[0x01AA]) {
+				say("\"It is good that thou hast managed to create the magical\tformula; now must thou use it with the Soul Cage, to destroy Horance.\"");
+				if (!var0004) {
+					add("Horance the Liche");
+				}
 			} else {
-				if (!gflags[0x01AA]) {
-					say("\"It is good that thou hast managed to create the magical\tformula; now must thou use it with the Soul Cage, to destroy Horance.\"");
-					if (!var0004) {
-						add("Horance the Liche");
-					}
-				} else {
-					say("Her smile widens. \"Thou hast made excellent use of the formula. Now, we must find a way to destroy the Well of\tSouls, to free Skara Brae.\"");
-					if (!var0005) {
-						add("Well of Souls");
-					}
+				say("Her smile widens. \"Thou hast made excellent use of the formula. Now, we must find a way to destroy the Well of\tSouls, to free Skara Brae.\"");
+				if (!var0005) {
+					add("Well of Souls");
 				}
 			}
 			remove("Caine");
@@ -72135,15 +71877,13 @@ void Func08C4 0x8C4 () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have enough gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have enough gold for that!\"");
-				} else {
-					say("\"Wouldst thou like something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"Wouldst thou like something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -72283,15 +72023,13 @@ void Func08C6 0x8C6 () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have enough gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have enough gold for that!\"");
-				} else {
-					say("\"Wouldst thou like something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"Wouldst thou like something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -72604,33 +72342,31 @@ void Func08CB 0x8CB () {
 				var0000,
 				".\"");
 			var0001 = false;
-		} else {
-			if (var000A == 0x0004) {
-				if (gflags[0x012B]) {
-					say("\"I am truly sorry, ",
-						var0000,
-						", but I have not been able to get any of that for some time now. It seems the man who used to cut down the Silverleaf trees has stopped.\"");
+		} else if (var000A == 0x0004) {
+			if (gflags[0x012B]) {
+				say("\"I am truly sorry, ",
+					var0000,
+					", but I have not been able to get any of that for some time now. It seems the man who used to cut down the Silverleaf trees has stopped.\"");
+			} else {
+				var000B = Func091B(var0006[var000A], var0002[var000A], var0007[var000A], var0005[var000A], var0008[var000A]);
+				var000C = 0x0000;
+				say("\"^",
+					var000B,
+					". Art thou happy with the price?\"");
+				var000D = Func090A();
+				if (var000D) {
+					say("\"How many dost thou want?\"");
+					var000E = Func08F8(var0003[var000A], var0004[var000A], var0009[var000A], var0005[var000A], 0x0014, 0x0001, true);
+				}
+				if (var000E == 0x0001) {
+					say("\"Agreed.\"");
+				} else if (var000E == 0x0002) {
+					say("\"Thou cannot carry that much!\"");
+				} else if (var000E == 0x0003) {
+					say("\"Thou hast not the gold for that!\"");
 				} else {
-					var000B = Func091B(var0006[var000A], var0002[var000A], var0007[var000A], var0005[var000A], var0008[var000A]);
-					var000C = 0x0000;
-					say("\"^",
-						var000B,
-						". Art thou happy with the price?\"");
-					var000D = Func090A();
-					if (var000D) {
-						say("\"How many dost thou want?\"");
-						var000E = Func08F8(var0003[var000A], var0004[var000A], var0009[var000A], var0005[var000A], 0x0014, 0x0001, true);
-					}
-					if (var000E == 0x0001) {
-						say("\"Agreed.\"");
-					} else if (var000E == 0x0002) {
-						say("\"Thou cannot carry that much!\"");
-					} else if (var000E == 0x0003) {
-						say("\"Thou hast not the gold for that!\"");
-					} else {
-						say("\"Wouldst thou like something else?\"");
-						var0001 = Func090A();
-					}
+					say("\"Wouldst thou like something else?\"");
+					var0001 = Func090A();
 				}
 			}
 		}
@@ -72691,15 +72427,13 @@ void Func08CC 0x8CC () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Agreed.\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou cannot carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou hast not the gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou cannot carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou hast not the gold for that!\"");
-				} else {
-					say("\"Wouldst thou like something else?\"");
-					var0001 = Func090A();
-				}
+				say("\"Wouldst thou like something else?\"");
+				var0001 = Func090A();
 			}
 		}
 	}
@@ -72766,15 +72500,13 @@ void Func08CD 0x8CD () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Excellent.\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou cannot carry that much of a load.\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have the gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou cannot carry that much of a load.\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have the gold for that!\"");
-				} else {
-					say("\"Is there something else thou mayest wish to buy?\"");
-					var0000 = Func090A();
-				}
+				say("\"Is there something else thou mayest wish to buy?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -72907,12 +72639,10 @@ void Func08D0 0x8D0 (var var0000, var var0001) {
 		var0003 = "you";
 		var0006 = "you";
 		var0004 = "feel";
+	} else if ((var0002 == 0xFFF8) || ((var0002 == 0xFFFB) || (var0002 == 0xFFF7))) {
+		var0006 = "her";
 	} else {
-		if ((var0002 == 0xFFF8) || ((var0002 == 0xFFFB) || (var0002 == 0xFFF7))) {
-			var0006 = "her";
-		} else {
-			var0006 = "him";
-		}
+		var0006 = "him";
 	}
 	do {
 		if (!(var0002 == 0x0000)) {
@@ -73152,17 +72882,15 @@ void Func08D3 0x8D3 () {
 			}
 			if (var000C == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000C == 0x0002) {
+				say("\"I am sorry, ",
+					var0000,
+					", but not even I could carry that much!\"");
+			} else if (var000C == 0x0003) {
+				say("\"Thou hast not enough gold for that!\"");
 			} else {
-				if (var000C == 0x0002) {
-					say("\"I am sorry, ",
-						var0000,
-						", but not even I could carry that much!\"");
-				} else if (var000C == 0x0003) {
-					say("\"Thou hast not enough gold for that!\"");
-				} else {
-					say("\"Dost thou want for anything else?\"");
-					var0001 = Func090A();
-				}
+				say("\"Dost thou want for anything else?\"");
+				var0001 = Func090A();
 			}
 		}
 	}
@@ -73220,17 +72948,15 @@ void Func08D4 0x8D4 () {
 			}
 			if (var000C == 0x0001) {
 				say("\"Deal!\"");
+			} else if (var000C == 0x0002) {
+				say("\"I am sorry, ",
+					var0000,
+					", not even I could carry that much!\"");
+			} else if (var000C == 0x0003) {
+				say("\"Thou hast not enough gold for that!\"");
 			} else {
-				if (var000C == 0x0002) {
-					say("\"I am sorry, ",
-						var0000,
-						", not even I could carry that much!\"");
-				} else if (var000C == 0x0003) {
-					say("\"Thou hast not enough gold for that!\"");
-				} else {
-					say("\"Dost thou want for anything else?\"");
-					var0001 = Func090A();
-				}
+				say("\"Dost thou want for anything else?\"");
+				var0001 = Func090A();
 			}
 		}
 	}
@@ -73611,15 +73337,13 @@ void Func08DC 0x8DC () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have enough gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have enough gold for that!\"");
-				} else {
-					say("\"Wouldst thou like something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"Wouldst thou like something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -73771,37 +73495,35 @@ void Func08DE 0x8DE () {
 		if (var000A == 0x0001) {
 			say("\"Fine.\"");
 			var0001 = false;
-		} else {
-			if (var000A == 0x0005) {
-				if (gflags[0x012B]) {
-					say("\"I am all out of Silverleaf, ",
-						var0000,
-						". For some reason, there is a shortage, and I cannot get any more.\"");
-				} else {
-					var000B = Func091B(var0006, var0002[var000A], var0007[var000A], var0005[var000A], var0008[var000A]);
-					var000C = 0x0000;
-					say("\"^",
-						var000B,
-						" Dost thou still want it?\"");
-					var000D = Func090A();
-					if (var000D) {
-						if (var0003[var000A] == 0x0179) {
-							say("\"How many wouldst thou like?\"");
-							var000C = Func08F8(var0003[var000A], var0004[var000A], var0009, var0005[var000A], 0x0014, 0x0001, true);
-						} else {
-							var000C = Func08F8(var0003[var000A], var0004[var000A], var0009, var0005[var000A], 0x0000, 0x0001, true);
-						}
-					}
-					if (var000C == 0x0001) {
-						say("\"Done! Eat hearty!\"");
-					} else if (var000C == 0x0002) {
-						say("\"No one could possibly carry that much!\"");
-					} else if (var000C == 0x0003) {
-						say("\"Thou dost not have enough gold for that!\"");
+		} else if (var000A == 0x0005) {
+			if (gflags[0x012B]) {
+				say("\"I am all out of Silverleaf, ",
+					var0000,
+					". For some reason, there is a shortage, and I cannot get any more.\"");
+			} else {
+				var000B = Func091B(var0006, var0002[var000A], var0007[var000A], var0005[var000A], var0008[var000A]);
+				var000C = 0x0000;
+				say("\"^",
+					var000B,
+					" Dost thou still want it?\"");
+				var000D = Func090A();
+				if (var000D) {
+					if (var0003[var000A] == 0x0179) {
+						say("\"How many wouldst thou like?\"");
+						var000C = Func08F8(var0003[var000A], var0004[var000A], var0009, var0005[var000A], 0x0014, 0x0001, true);
 					} else {
-						say("\"Wouldst thou like to purchase anything else?\"");
-						var0001 = Func090A();
+						var000C = Func08F8(var0003[var000A], var0004[var000A], var0009, var0005[var000A], 0x0000, 0x0001, true);
 					}
+				}
+				if (var000C == 0x0001) {
+					say("\"Done! Eat hearty!\"");
+				} else if (var000C == 0x0002) {
+					say("\"No one could possibly carry that much!\"");
+				} else if (var000C == 0x0003) {
+					say("\"Thou dost not have enough gold for that!\"");
+				} else {
+					say("\"Wouldst thou like to purchase anything else?\"");
+					var0001 = Func090A();
 				}
 			}
 		}
@@ -73917,15 +73639,13 @@ void Func08E1 0x8E1 () {
 			}
 			if (var000B == 0x0001) {
 				say("\"To be agreed!\"");
+			} else if (var000B == 0x0002) {
+				say("\"To be unable to carry that much!\" He shakes his head.");
+			} else if (var000B == 0x0003) {
+				say("\"To have not enough gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"To be unable to carry that much!\" He shakes his head.");
-				} else if (var000B == 0x0003) {
-					say("\"To have not enough gold for that!\"");
-				} else {
-					say("\"To desire another item?\"");
-					var0000 = Func090A();
-				}
+				say("\"To desire another item?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -73980,15 +73700,13 @@ void Func08E2 0x8E2 () {
 			}
 			if (var000B == 0x0001) {
 				say("\"To be agreed!\"");
+			} else if (var000B == 0x0002) {
+				say("\"To be unable to carry that much!\" He shakes his head.");
+			} else if (var000B == 0x0003) {
+				say("\"To have not enough gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"To be unable to carry that much!\" He shakes his head.");
-				} else if (var000B == 0x0003) {
-					say("\"To have not enough gold for that!\"");
-				} else {
-					say("\"To desire another item?\"");
-					var0000 = Func090A();
-				}
+				say("\"To desire another item?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -74043,15 +73761,13 @@ void Func08E3 0x8E3 () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have enough gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have enough gold for that!\"");
-				} else {
-					say("\"Wouldst thou like something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"Wouldst thou like something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -74303,11 +74019,9 @@ void Func08EB 0x8EB (var var0000, var var0001, var var0002) {
 				if ((var000B[0x0001] == var0005[0x0001]) && (var000B[0x0002] == var0005[0x0002])) {
 					var000B[0x0001] = (var000B[0x0001] - 0x0002);
 					var000B[0x0002] = (var000B[0x0002] - 0x0002);
-				} else {
-					if ((var000B[0x0001] <= var0005[0x0001]) && (var000B[0x0002] <= var0005[0x0002])) {
-						var000B[0x0001] = (var000B[0x0001] - 0x0001);
-						var000B[0x0002] = (var000B[0x0002] - 0x0001);
-					}
+				} else if ((var000B[0x0001] <= var0005[0x0001]) && (var000B[0x0002] <= var0005[0x0002])) {
+					var000B[0x0001] = (var000B[0x0001] - 0x0001);
+					var000B[0x0002] = (var000B[0x0002] - 0x0001);
 				}
 				var000C = UI_update_last_created(var000B);
 			}
@@ -74980,41 +74694,37 @@ var Func08F8 0x8F8 (var var0000, var var0001, var var0002, var var0003, var var0
 	}
 	if (var0008 == 0x0000) {
 		var000A = 0x0000;
-	} else {
-		if (var0007 >= (var0003 * var0008)) {
-			var000B = UI_add_party_items(var0009, var0000, 0xFE99, var0001, var0006);
-			if (!(var000B == 0x0000)) {
-				var000A = 0x0001;
-				var000C = UI_remove_party_items(var0003 * var0008, 0x0284, 0xFE99, 0xFE99, true);
-				var000D = 0x0000;
-				var000E = false;
-				for (var0011 in var000B with var000F to var0010) {
-					var0012 = var0011->get_npc_number();
-					if (!(var0012 == 0xFE9C)) {
-						var000D = (var000D + 0x0001);
-						var0012->show_npc_face(0x0000);
-						var000E = true;
-						if (var0002 == 0x0001) {
-							say("\"I will carry that.\"");
-						} else {
-							if (var000D == 0x0001) {
-								say("\"I will carry some.\"");
-							} else {
-								say("\"I will carry some, as well.\"");
-							}
-						}
-						var0012->hide();
+	} else if (var0007 >= (var0003 * var0008)) {
+		var000B = UI_add_party_items(var0009, var0000, 0xFE99, var0001, var0006);
+		if (!(var000B == 0x0000)) {
+			var000A = 0x0001;
+			var000C = UI_remove_party_items(var0003 * var0008, 0x0284, 0xFE99, 0xFE99, true);
+			var000D = 0x0000;
+			var000E = false;
+			for (var0011 in var000B with var000F to var0010) {
+				var0012 = var0011->get_npc_number();
+				if (!(var0012 == 0xFE9C)) {
+					var000D = (var000D + 0x0001);
+					var0012->show_npc_face(0x0000);
+					var000E = true;
+					if (var0002 == 0x0001) {
+						say("\"I will carry that.\"");
+					} else if (var000D == 0x0001) {
+						say("\"I will carry some.\"");
+					} else {
+						say("\"I will carry some, as well.\"");
 					}
+					var0012->hide();
 				}
-				if (var000E) {
-					UI_reset_conv_face();
-				}
-			} else {
-				var000A = 0x0002;
+			}
+			if (var000E) {
+				UI_reset_conv_face();
 			}
 		} else {
-			var000A = 0x0003;
+			var000A = 0x0002;
 		}
+	} else {
+		var000A = 0x0003;
 	}
 	return var000A;
 }
@@ -75523,14 +75233,12 @@ void Func091D 0x91D (var var0000, var var0001) {
 		Func0912(var0000, 0x0003, var0005);
 		var0006 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 		say("\"The wounds have been healed.\"");
+	} else if (var0000 == 0xFE9C) {
+		say("\"Thou seemest quite healthy!\"");
 	} else {
-		if (var0000 == 0xFE9C) {
-			say("\"Thou seemest quite healthy!\"");
-		} else {
-			say("\"",
-				var0004,
-				" is already healthy!\"");
-		}
+		say("\"",
+			var0004,
+			" is already healthy!\"");
 	}
 }
 
@@ -75664,22 +75372,20 @@ var Func0923 0x923 (var var0000, var var0001) {
 	say("\"Agreeable?\"");
 	if (!Func090A()) {
 		var0003 = 0x0000;
-	} else {
-		if (var0002 >= var0001) {
-			var0004 = 0xFE9B->find_object(0x02F9, 0xFE99, 0xFE99);
-			if (var0004) {
-				if (UI_add_spell(var0000, 0x0000, var0004)) {
-					var0003 = 0x0001;
-					var0005 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
-				} else {
-					var0003 = 0x0004;
-				}
+	} else if (var0002 >= var0001) {
+		var0004 = 0xFE9B->find_object(0x02F9, 0xFE99, 0xFE99);
+		if (var0004) {
+			if (UI_add_spell(var0000, 0x0000, var0004)) {
+				var0003 = 0x0001;
+				var0005 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 			} else {
-				var0003 = 0x0002;
+				var0003 = 0x0004;
 			}
 		} else {
-			var0003 = 0x0003;
+			var0003 = 0x0002;
 		}
+	} else {
+		var0003 = 0x0003;
 	}
 	return var0003;
 }
@@ -75696,22 +75402,20 @@ var Func0924 0x924 (var var0000, var var0001) {
 	say("\"To be agreeable?\"");
 	if (!Func090A()) {
 		var0003 = 0x0000;
-	} else {
-		if (var0002 >= var0001) {
-			var0004 = 0xFE9B->find_object(0x02F9, 0xFE99, 0xFE99);
-			if (var0004) {
-				if (UI_add_spell(var0000, 0x0000, var0004)) {
-					var0003 = 0x0001;
-					var0005 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
-				} else {
-					var0003 = 0x0004;
-				}
+	} else if (var0002 >= var0001) {
+		var0004 = 0xFE9B->find_object(0x02F9, 0xFE99, 0xFE99);
+		if (var0004) {
+			if (UI_add_spell(var0000, 0x0000, var0004)) {
+				var0003 = 0x0001;
+				var0005 = UI_remove_party_items(var0001, 0x0284, 0xFE99, 0xFE99, true);
 			} else {
-				var0003 = 0x0002;
+				var0003 = 0x0004;
 			}
 		} else {
-			var0003 = 0x0003;
+			var0003 = 0x0002;
 		}
+	} else {
+		var0003 = 0x0003;
 	}
 	return var0003;
 }
@@ -75882,10 +75586,8 @@ void Func092A 0x92A (var var0000, var var0001) {
 		var0003 = var0000->get_npc_prop(0x0003);
 		if ((var0003 + var0001) < 0x0001) {
 			var0001 = (0xFFFF * var0003);
-		} else {
-			if ((var0003 + var0001) > var0002) {
-				var0001 = (var0002 - var0003);
-			}
+		} else if ((var0003 + var0001) > var0002) {
+			var0001 = (var0002 - var0003);
 		}
 		var0004 = var0000->set_npc_prop(0x0003, var0001);
 	}
@@ -76474,15 +76176,13 @@ void Func0946 0x946 () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have enough gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have enough gold for that!\"");
-				} else {
-					say("\"Wouldst thou like something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"Wouldst thou like something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -76850,19 +76550,17 @@ var Func094B 0x94B (var var0000, var var0001) {
 				} else {
 					var0003 = (var0003 - var000D);
 				}
-			} else {
-				if (var0007 >= 0x001E) {
-					var000D = Func0932((var0004 - var0002) * 0x0002);
-					var000D = UI_get_random(var000D);
-					if ((var0003 - var000D) <= var0004) {
-						var0003 = (var0004 + 0x0001);
-					} else {
-						var0003 = (var0003 - var000D);
-					}
+			} else if (var0007 >= 0x001E) {
+				var000D = Func0932((var0004 - var0002) * 0x0002);
+				var000D = UI_get_random(var000D);
+				if ((var0003 - var000D) <= var0004) {
+					var0003 = (var0004 + 0x0001);
 				} else {
-					say("\"To be agreed!\"");
-					return var0004;
+					var0003 = (var0003 - var000D);
 				}
+			} else {
+				say("\"To be agreed!\"");
+				return var0004;
 			}
 		} else if (var0004 >= var000C[0x0004]) {
 			if (var0007 >= 0x0028) {
@@ -76958,18 +76656,16 @@ void Func094C 0x94C () {
 			var0009 = Func0924(var0006, var0007);
 			if (var0009 == 0x0001) {
 				say("\"To agree!\"");
+			} else if (var0009 == 0x0002) {
+				say("\"To be without a spellbook, human.\"");
+				var0000 = false;
+			} else if (var0009 == 0x0003) {
+				say("\"To have not have enough gold for that!\"");
+			} else if (var0009 == 0x0004) {
+				say("\"To see you already have that spell.\"");
 			} else {
-				if (var0009 == 0x0002) {
-					say("\"To be without a spellbook, human.\"");
-					var0000 = false;
-				} else if (var0009 == 0x0003) {
-					say("\"To have not have enough gold for that!\"");
-				} else if (var0009 == 0x0004) {
-					say("\"To see you already have that spell.\"");
-				} else {
-					say("\"To be interested in another spell?\"");
-					var0000 = Func090A();
-				}
+				say("\"To be interested in another spell?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -77025,15 +76721,13 @@ void Func094D 0x94D () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Ye got ta lighten yer load first!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Ye've not got the gold. I kinna do business like that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Ye got ta lighten yer load first!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Ye've not got the gold. I kinna do business like that!\"");
-				} else {
-					say("\"Anything else ye want?\"");
-					var0000 = Func090A();
-				}
+				say("\"Anything else ye want?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -77088,15 +76782,13 @@ void Func094E 0x94E () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Ye got ta lighten yer load first!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Ye've not got the gold. I kinna do business like that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Ye got ta lighten yer load first!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Ye've not got the gold. I kinna do business like that!\"");
-				} else {
-					say("\"Anything else ye want?\"");
-					var0000 = Func090A();
-				}
+				say("\"Anything else ye want?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
@@ -77335,38 +77027,36 @@ void Func0951 0x951 () {
 		if (var000A == 0x0001) {
 			say("\"Fine.\"");
 			var0001 = false;
-		} else {
-			if (var000A == 0x0006) {
-				if (gflags[0x012B]) {
-					say("\"I regret to tell thee that this fine establishment will no longer be able to provide our fine customers with Silverleaf. The person who provides me with the delicate meal is no longer able to procure it. I am dreadfully sorry, ",
-						var0000,
-						".\"");
-				} else {
-					var000B = Func091B(var0006, var0002[var000A], var0007, var0005[var000A], var0008[var000A]);
-					var000C = 0x0000;
-					say("\"^",
-						var000B,
-						" That is a fair price, is it not?\"");
-					var000D = Func090A();
-					if (var000D) {
-						if (var0003[var000A] == 0x0179) {
-							say("\"How many wouldst thou like?\"");
-							var000C = Func08F8(var0003[var000A], var0004[var000A], var0009, var0005[var000A], 0x0014, 0x0001, true);
-						} else {
-							var000C = Func08F8(var0003[var000A], var0004[var000A], var0009, var0005[var000A], 0x0000, 0x0001, true);
-						}
-					}
-					if (var000C == 0x0001) {
-						say("\"Done!\"");
-					} else if (var000C == 0x0002) {
-						say("\"Thou cannot possibly carry that much!\"");
-					} else if (var000C == 0x0003) {
-						say("\"Thou dost not have enough gold for that!\"");
+		} else if (var000A == 0x0006) {
+			if (gflags[0x012B]) {
+				say("\"I regret to tell thee that this fine establishment will no longer be able to provide our fine customers with Silverleaf. The person who provides me with the delicate meal is no longer able to procure it. I am dreadfully sorry, ",
+					var0000,
+					".\"");
+			} else {
+				var000B = Func091B(var0006, var0002[var000A], var0007, var0005[var000A], var0008[var000A]);
+				var000C = 0x0000;
+				say("\"^",
+					var000B,
+					" That is a fair price, is it not?\"");
+				var000D = Func090A();
+				if (var000D) {
+					if (var0003[var000A] == 0x0179) {
+						say("\"How many wouldst thou like?\"");
+						var000C = Func08F8(var0003[var000A], var0004[var000A], var0009, var0005[var000A], 0x0014, 0x0001, true);
+					} else {
+						var000C = Func08F8(var0003[var000A], var0004[var000A], var0009, var0005[var000A], 0x0000, 0x0001, true);
 					}
 				}
-				say("\"Wouldst thou like something else?\"");
-				var0001 = Func090A();
+				if (var000C == 0x0001) {
+					say("\"Done!\"");
+				} else if (var000C == 0x0002) {
+					say("\"Thou cannot possibly carry that much!\"");
+				} else if (var000C == 0x0003) {
+					say("\"Thou dost not have enough gold for that!\"");
+				}
 			}
+			say("\"Wouldst thou like something else?\"");
+			var0001 = Func090A();
 		}
 	}
 	UI_pop_answers();
@@ -77420,12 +77110,10 @@ void Func0952 0x952 () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Done!\"");
-			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have enough gold for that!\"");
-				}
+			} else if (var000B == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have enough gold for that!\"");
 			}
 			say("\"Wouldst thou like something else?\"");
 			var0000 = Func090A();
@@ -77482,15 +77170,13 @@ void Func0953 0x953 () {
 			}
 			if (var000B == 0x0001) {
 				say("\"Done!\"");
+			} else if (var000B == 0x0002) {
+				say("\"Thou cannot possibly carry that much!\"");
+			} else if (var000B == 0x0003) {
+				say("\"Thou dost not have enough gold for that!\"");
 			} else {
-				if (var000B == 0x0002) {
-					say("\"Thou cannot possibly carry that much!\"");
-				} else if (var000B == 0x0003) {
-					say("\"Thou dost not have enough gold for that!\"");
-				} else {
-					say("\"Wouldst thou like something else?\"");
-					var0000 = Func090A();
-				}
+				say("\"Wouldst thou like something else?\"");
+				var0000 = Func090A();
 			}
 		}
 	}
