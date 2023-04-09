@@ -4666,17 +4666,17 @@ void Func017B shape#(0x17B) () {
 	} else if (var0001 == 0x0013) {
 		UI_display_runes(0x002C, ["farmers'", "market"]);
 	} else if (var0001 == 0x0014) {
-		UI_display_runes(0x002C, ["apo(ecary"]);
+		UI_display_runes(0x002C, ["apo\{th}ecary"]);
 	} else if (var0001 == 0x0015) {
 		UI_display_runes(0x002C, ["royal", "mint"]);
 	} else if (var0001 == 0x0016) {
-		UI_display_runes(0x002C, ["csil", "(e", "h+ler"]);
+		UI_display_runes(0x002C, ["csil", "\{th}e", "h\{ea}ler"]);
 	} else if (var0001 == 0x0017) {
 		UI_display_runes(0x002C, ["provisions"]);
 	} else if (var0001 == 0x0018) {
-		UI_display_runes(0x002C, ["to", "sl)pi*", "bull"]);
+		UI_display_runes(0x002C, ["to", "sl\{ee}pi\{ng}", "bull"]);
 	} else if (var0001 == 0x002C) {
-		UI_display_runes(0x002C, ["go|(is|way"]);
+		UI_display_runes(0x002C, ["go\{dot}\{th}is\{dot}way"]);
 	} else if (var0001 == 0x002D) {
 		UI_display_runes(0x002C, "DO NOT GO THIS WAY");
 	} else if (var0001 == 0x002E) {
@@ -4692,31 +4692,31 @@ void Func017B shape#(0x17B) () {
 	} else if (var0001 == 0x0033) {
 		UI_display_runes(0x002C, "AT LEAST TWO SIGNS ARE FALSE");
 	} else if (var0001 == 0x003D) {
-		UI_display_runes(0x002C, ["we,|gate", ",r)t"]);
+		UI_display_runes(0x002C, ["we\{st}\{dot}gate", "\{st}r\{ee}t"]);
 	} else if (var0001 == 0x003E) {
-		UI_display_runes(0x002C, ["nor(|gate", ",r)t"]);
+		UI_display_runes(0x002C, ["nor\{th}\{dot}gate", "\{st}r\{ee}t"]);
 	} else if (var0001 == 0x003F) {
 		UI_display_runes(0x002C, ["pikeman's", "road"]);
 	} else if (var0001 == 0x0040) {
 		UI_display_runes(0x002C, ["kosric", "road"]);
 	} else if (var0001 == 0x0041) {
-		UI_display_runes(0x002C, ["pedigar", ",r)t"]);
+		UI_display_runes(0x002C, ["pedigar", "\{st}r\{ee}t"]);
 	} else if (var0001 == 0x0042) {
-		UI_display_runes(0x002C, ["roland", ",r)t"]);
+		UI_display_runes(0x002C, ["roland", "\{st}r\{ee}t"]);
 	} else if (var0001 == 0x0043) {
-		UI_display_runes(0x002C, ["town|hall", "road"]);
+		UI_display_runes(0x002C, ["town\{dot}hall", "road"]);
 	} else if (var0001 == 0x0044) {
-		UI_display_runes(0x002C, ["melina", ",r)t"]);
+		UI_display_runes(0x002C, ["melina", "\{st}r\{ee}t"]);
 	} else if (var0001 == 0x0045) {
-		UI_display_runes(0x002C, ["wolf", ",r)t"]);
+		UI_display_runes(0x002C, ["wolf", "\{st}r\{ee}t"]);
 	} else if (var0001 == 0x0046) {
-		UI_display_runes(0x002C, ["leopard", ",r)t"]);
+		UI_display_runes(0x002C, ["leopard", "\{st}r\{ee}t"]);
 	} else if (var0001 == 0x0047) {
-		UI_display_runes(0x002C, ["b+r", ",r)t"]);
+		UI_display_runes(0x002C, ["b\{ea}r", "\{st}r\{ee}t"]);
 	} else if (var0001 == 0x0048) {
-		UI_display_runes(0x002C, ["dock", ",r)t"]);
+		UI_display_runes(0x002C, ["dock", "\{st}r\{ee}t"]);
 	} else if (var0001 == 0x0071) {
-		UI_display_runes(0x002C, ["banquet", ",r)t"]);
+		UI_display_runes(0x002C, ["banquet", "\{st}r\{ee}t"]);
 	} else if (var0001 == 0x0072) {
 		UI_display_runes(0x002C, ["warriors'", "road"]);
 	} else if (var0001 == 0x0049) {
@@ -4726,107 +4726,107 @@ void Func017B shape#(0x17B) () {
 	} else if (var0001 == 0x004D) {
 		UI_display_runes(0x002C, ["armoury"]);
 	} else if (var0001 == 0x004E) {
-		UI_display_runes(0x002C, ["blacksmi("]);
+		UI_display_runes(0x002C, ["blacksmi\{th}"]);
 	} else if (var0001 == 0x004F) {
-		UI_display_runes(0x002C, ["recr+tion", "center"]);
+		UI_display_runes(0x002C, ["recr\{ea}tion", "center"]);
 	} else if (var0001 == 0x0050) {
 		UI_display_runes(0x002C, ["hall", "of", "knowledge"]);
 	} else if (var0001 == 0x0051) {
-		UI_display_runes(0x002C, ["hello", "(ere", "avatar"]);
+		UI_display_runes(0x002C, ["hello", "\{th}ere", "avatar"]);
 	} else if (var0001 == 0x0052) {
 		UI_display_runes(0x002C, ["to fawn"]);
 	} else if (var0001 == 0x0055) {
-		UI_display_runes(0x002C, ["paladin's", "pa("]);
+		UI_display_runes(0x002C, ["paladin's", "pa\{th}"]);
 	} else if (var0001 == 0x0057) {
 		UI_display_runes(0x002C, ["widow's", "walk"]);
 	} else if (var0001 == 0x0058) {
 		UI_display_runes(0x002C, ["harold's", "hallway"]);
 	} else if (var0001 == 0x0059) {
-		UI_display_runes(0x002C, ["fool's|way"]);
+		UI_display_runes(0x002C, ["fool's\{dot}way"]);
 	} else if (var0001 == 0x005A) {
 		UI_display_runes(0x002C, ["whitsaber", "road"]);
 	} else if (var0001 == 0x005B) {
-		UI_display_runes(0x002C, [",rand"]);
+		UI_display_runes(0x002C, ["\{st}rand"]);
 	} else if (var0001 == 0x005C) {
 		UI_display_runes(0x002C, ["chalice", "avenue"]);
 	} else if (var0001 == 0x005D) {
 		UI_display_runes(0x002C, ["two", "coves"]);
 	} else if (var0001 == 0x005E) {
-		UI_display_runes(0x002C, ["we,", "wall", "road"]);
+		UI_display_runes(0x002C, ["we\{st}", "wall", "road"]);
 	} else if (var0001 == 0x005F) {
-		UI_display_runes(0x002C, ["+,", "wall", "road"]);
+		UI_display_runes(0x002C, ["\{ea}\{st}", "wall", "road"]);
 	} else if (var0001 == 0x0060) {
-		UI_display_runes(0x002C, ["nor(", "wall", "road"]);
+		UI_display_runes(0x002C, ["nor\{th}", "wall", "road"]);
 	} else if (var0001 == 0x0061) {
-		UI_display_runes(0x002C, ["sou(", "wall", "road"]);
+		UI_display_runes(0x002C, ["sou\{th}", "wall", "road"]);
 	} else if (var0001 == 0x0062) {
 		UI_display_runes(0x002C, ["heroes'", "way"]);
 	} else if (var0001 == 0x0069) {
-		UI_display_runes(0x002C, ["arti,s'", "guild"]);
+		UI_display_runes(0x002C, ["arti\{st}s'", "guild"]);
 	} else if (var0001 == 0x006A) {
-		UI_display_runes(0x002C, ["(e|bunk", "and", ",ool"]);
+		UI_display_runes(0x002C, ["\{th}e\{dot}bunk", "and", "\{st}ool"]);
 	} else if (var0001 == 0x006B) {
-		UI_display_runes(0x002C, ["(e", "library", "of", "scars"]);
+		UI_display_runes(0x002C, ["\{th}e", "library", "of", "scars"]);
 	} else if (var0001 == 0x006C) {
-		UI_display_runes(0x002C, ["carlyn's", "clo(es"]);
+		UI_display_runes(0x002C, ["carlyn's", "clo\{th}es"]);
 	} else if (var0001 == 0x006D) {
-		UI_display_runes(0x002C, ["wi(in|(ese", "walls", "lies|ma,er", "richard"]);
+		UI_display_runes(0x002C, ["wi\{th}in\{dot}\{th}ese", "walls", "lies\{dot}ma\{st}er", "richard"]);
 	} else if (var0001 == 0x006E) {
-		UI_display_runes(0x002C, ["ca,le|way"]);
+		UI_display_runes(0x002C, ["ca\{st}le\{dot}way"]);
 	} else if (var0001 == 0x006F) {
 		UI_display_runes(0x002C, ["lord", "british", "lane"]);
 	} else if (var0001 == 0x0070) {
-		UI_display_runes(0x002C, ["noble|road"]);
+		UI_display_runes(0x002C, ["noble\{dot}road"]);
 	} else if (var0001 == 0x0073) {
-		UI_display_runes(0x002C, ["knight's", "te,"]);
+		UI_display_runes(0x002C, ["knight's", "te\{st}"]);
 	} else if (var0001 == 0x007A) {
-		UI_display_runes(0x002C, ["swamp", "ca(edral"]);
+		UI_display_runes(0x002C, ["swamp", "ca\{th}edral"]);
 	} else if (var0001 == 0x007B) {
-		UI_display_runes(0x002C, ["k)p", "out"]);
+		UI_display_runes(0x002C, ["k\{ee}p", "out"]);
 	} else if (var0001 == 0x007C) {
-		UI_display_runes(0x002C, ["explodi*", "powder", "maker"]);
+		UI_display_runes(0x002C, ["explodi\{ng}", "powder", "maker"]);
 	} else if (var0001 == 0x007D) {
 		UI_display_runes(0x002C, ["form", "one", "line"]);
 	} else if (var0001 == 0x007E) {
 		UI_display_runes(0x002C, ["present", "gold", "for", "food"]);
 	} else if (var0001 == 0x007F) {
-		UI_display_runes(0x002C, ["excha*e", "gold", "for", "potions"]);
+		UI_display_runes(0x002C, ["excha\{ng}e", "gold", "for", "potions"]);
 	} else if (var0001 == 0x0080) {
 		UI_display_runes(0x002C, ["trade", "gold", "for", "necessities"]);
 	} else if (var0001 == 0x0081) {
-		UI_display_runes(0x002C, ["watch", "(y", "h+d"]);
+		UI_display_runes(0x002C, ["watch", "\{th}y", "h\{ea}d"]);
 	} else if (var0001 == 0x0082) {
 		UI_display_runes(0x002C, ["escape", "is", "impossible"]);
 	} else if (var0001 == 0x0083) {
-		UI_display_runes(0x002C, ["turn", "back|now"]);
+		UI_display_runes(0x002C, ["turn", "back\{dot}now"]);
 	} else if (var0001 == 0x0084) {
-		UI_display_runes(0x002C, ["wro*", "way"]);
+		UI_display_runes(0x002C, ["wro\{ng}", "way"]);
 	} else if (var0001 == 0x0085) {
-		UI_display_runes(0x002C, ["sure", "d+("]);
+		UI_display_runes(0x002C, ["sure", "d\{ea}\{th}"]);
 	} else if (var0001 == 0x0086) {
 		UI_display_runes(0x002C, ["welcome", "to", "hamlinberg"]);
 	} else if (var0001 == 0x0087) {
 		UI_display_runes(0x002C, ["hazard's", "lodge"]);
 	} else if (var0001 == 0x0088) {
-		UI_display_runes(0x002C, ["l+ve", "animals", "down,airs"]);
+		UI_display_runes(0x002C, ["l\{ea}ve", "animals", "down\{st}airs"]);
 	} else if (var0001 == 0x0089) {
-		UI_display_runes(0x002C, ["dispose", "of|blood", "and|parts", "outside"]);
+		UI_display_runes(0x002C, ["dispose", "of\{dot}blood", "and\{dot}parts", "outside"]);
 	} else if (var0001 == 0x008A) {
-		UI_display_runes(0x002C, ["beware", "of", "water", "cr+tures"]);
+		UI_display_runes(0x002C, ["beware", "of", "water", "cr\{ea}tures"]);
 	} else if (var0001 == 0x008B) {
-		UI_display_runes(0x002C, ["(ou", "art", "lo,"]);
+		UI_display_runes(0x002C, ["\{th}ou", "art", "lo\{st}"]);
 	} else if (var0001 == 0x008C) {
-		UI_display_runes(0x002C, ["|wadley|", "his|soul", "d)per|(an", "his|body"]);
+		UI_display_runes(0x002C, ["\{dot}wadley\{dot}", "his\{dot}soul", "d\{ee}per\{dot}\{th}an", "his\{dot}body"]);
 	} else if (var0001 == 0x008D) {
-		UI_display_runes(0x002C, ["here|lies", "jenna", "kindred", "spirit"]);
+		UI_display_runes(0x002C, ["here\{dot}lies", "jenna", "kindred", "spirit"]);
 	} else if (var0001 == 0x008E) {
-		UI_display_runes(0x002C, ["d+d", "end"]);
+		UI_display_runes(0x002C, ["d\{ea}d", "end"]);
 	} else if (var0001 == 0x008F) {
 		UI_display_runes(0x002C, ["to", "skara", "brae"]);
 	} else if (var0001 == 0x0090) {
 		UI_display_runes(0x002C, ["THE", "THRONE", "OF THE", "GUARDIAN"]);
 	} else if (var0001 == 0x0091) {
-		UI_display_runes(0x002C, ["nor(", "to", "britain"]);
+		UI_display_runes(0x002C, ["nor\{th}", "to", "britain"]);
 	} else if (var0001 == 0x0092) {
 		UI_display_runes(0x002C, ["pull", "lever"]);
 	} else if (var0001 == 0x0093) {
@@ -4834,7 +4834,7 @@ void Func017B shape#(0x17B) () {
 	} else if (var0001 == 0x0094) {
 		UI_display_runes(0x002C, ["way", "out"]);
 	} else if (var0001 == 0x0095) {
-		UI_display_runes(0x002C, ["k)p", "doors", "open"]);
+		UI_display_runes(0x002C, ["k\{ee}p", "doors", "open"]);
 	} else if (var0001 == 0x0096) {
 		UI_display_runes(0x002C, ["selwyn's", "tower"]);
 	}
@@ -15209,7 +15209,7 @@ void Func0334 shape#(0x334) () {
 	}
 	var0009 = Func0953();
 	if (var0001 == 0x0000) {
-		var000A = ["po,|no", "plaques|here", "on|pain|of|d+("];
+		var000A = ["po,\{dot}no", "plaques\{dot}here", "on\{dot}pain\{dot}of\{dot}d\{ea}\{th}"];
 	} else if (var0001 == 0x0001) {
 		var000A = ["choose"];
 		var000B = find_nearby(0x010E, 0x0005, 0xFE99);
@@ -15239,11 +15239,11 @@ void Func0334 shape#(0x334) () {
 	} else if (var0001 == 0x001C) {
 		var000A = ["3 down gets 8"];
 	} else if (var0001 == 0x001D) {
-		var000A = ["(e", "blue", "boar"];
+		var000A = ["\{th}e", "blue", "boar"];
 	} else if (var0001 == 0x001E) {
 		var000A = ["royal", "museum"];
 	} else if (var0001 == 0x001F) {
-		var000A = ["(e", "music", "hall"];
+		var000A = ["\{th}e", "music", "hall"];
 	} else if (var0001 == 0x0020) {
 		var000A = ["town", "hall"];
 	} else if (var0001 == 0x0021) {
@@ -15257,13 +15257,13 @@ void Func0334 shape#(0x334) () {
 	} else if (var0001 == 0x002E) {
 		var000A = ["DO NOT", "ENTER"];
 	} else if (var0001 == 0x0032) {
-		var000A = ["in", "lovi*", "memory", "of", "mama"];
+		var000A = ["in", "lovi\{ng}", "memory", "of", "mama"];
 	} else if (var0001 == 0x0033) {
 		var000A = ["BEWARE", "THE", "DRAGON"];
 	} else if (var0001 == 0x0034) {
-		var000A = ["for", "(e", "love", "of", "marney"];
+		var000A = ["for", "\{th}e", "love", "of", "marney"];
 	} else if (var0001 == 0x0035) {
-		var000A = ["|j|r|r|t|", "a|gr+t", "man", "a|gr+t", "writer"];
+		var000A = ["\{dot}j\{dot}r\{dot}r\{dot}t\{dot}", "a\{dot}gr\{ea}t", "man", "a\{dot}gr\{ea}t", "writer"];
 	} else if (var0001 == 0x003D) {
 		var000A = ["beware!", "spirits", "prowl", "here!"];
 	} else if (var0001 == 0x003E) {
@@ -15277,84 +15277,84 @@ void Func0334 shape#(0x334) () {
 	} else if (var0001 == 0x0042) {
 		var000A = ["goblin", "artifacts"];
 	} else if (var0001 == 0x0043) {
-		var000A = ["b+trix", "of|(e", "broken", "h+rt"];
+		var000A = ["b\{ea}trix", "of\{dot}\{th}e", "broken", "h\{ea}rt"];
 	} else if (var0001 == 0x0046) {
-		var000A = ["sarah", "swift|of|blade", ",ro*|of|h+rt"];
+		var000A = ["sarah", "swift\{dot}of\{dot}blade", ",ro\{ng}\{dot}of\{dot}h\{ea}rt"];
 	} else if (var0001 == 0x0047) {
-		var000A = ["groat", "no|knight", "swifter", "(an|he"];
+		var000A = ["groat", "no\{dot}knight", "swifter", "\{th}an\{dot}he"];
 	} else if (var0001 == 0x0048) {
-		var000A = ["edmund", "archer", "par|excellence"];
+		var000A = ["edmund", "archer", "par\{dot}excellence"];
 	} else if (var0001 == 0x0049) {
-		var000A = ["reynald", "valiant|and|glorious"];
+		var000A = ["reynald", "valiant\{dot}and\{dot}glorious"];
 	} else if (var0001 == 0x004A) {
-		var000A = ["pedigar", ",re*(", "and", "valor"];
+		var000A = ["pedigar", ",re\{ng}\{th}", "and", "valor"];
 	} else if (var0001 == 0x004B) {
-		var000A = ["elena", "wor(y", "of", "immortality"];
+		var000A = ["elena", "wor\{th}y", "of", "immortality"];
 	} else if (var0001 == 0x004C) {
-		var000A = ["caladin", "golden-to*ued", "knight"];
+		var000A = ["caladin", "golden-to\{ng}ued", "knight"];
 	} else if (var0001 == 0x004D) {
-		var000A = ["terrence", "(e", "pure"];
+		var000A = ["terrence", "\{th}e", "pure"];
 	} else if (var0001 == 0x004E) {
 		var000A = ["randall", "intrepid", "and", "brave"];
 	} else if (var0001 == 0x004F) {
-		var000A = ["samuel", "(ou|wert", "never", "matched"];
+		var000A = ["samuel", "\{th}ou\{dot}wert", "never", "matched"];
 	} else if (var0001 == 0x0050) {
-		var000A = ["kosric", "(underbolts", "from", "above"];
+		var000A = ["kosric", "\{th}underbolts", "from", "above"];
 	} else if (var0001 == 0x0051) {
-		var000A = ["bryan", "his|skill", "knew|no|bounds"];
+		var000A = ["bryan", "his\{dot}skill", "knew\{dot}no\{dot}bounds"];
 	} else if (var0001 == 0x0052) {
 		var000A = ["goff", "renown", "and", "honor"];
 	} else if (var0001 == 0x0053) {
-		var000A = ["melina", "adept", "in|(e", "art", "of", "war"];
+		var000A = ["melina", "adept", "in\{dot}\{th}e", "art", "of", "war"];
 	} else if (var0001 == 0x0054) {
-		var000A = ["roland", "red)med", "(e", "honor", "of|our", "land"];
+		var000A = ["roland", "red\{ee}med", "\{th}e", "honor", "of\{dot}our", "land"];
 	} else if (var0001 == 0x0055) {
-		var000A = ["cellia's", "fine|furs"];
+		var000A = ["cellia's", "fine\{dot}furs"];
 	} else if (var0001 == 0x0056) {
-		var000A = ["li,", "field"];
+		var000A = ["li\{st}", "field"];
 	} else if (var0001 == 0x0057) {
-		var000A = ["lydia's", "tattoo|parlor"];
+		var000A = ["lydia's", "tattoo\{dot}parlor"];
 	} else if (var0001 == 0x0058) {
 		var000A = ["crematorium"];
 	} else if (var0001 == 0x0059) {
 		var000A = ["armoury"];
 	} else if (var0001 == 0x005A) {
-		var000A = ["banquet|hall"];
+		var000A = ["banquet\{dot}hall"];
 	} else if (var0001 == 0x005B) {
 		var000A = ["jail"];
 	} else if (var0001 == 0x005C) {
-		var000A = ["traini*|hall"];
+		var000A = ["traini\{ng}\{dot}hall"];
 	} else if (var0001 == 0x005F) {
 		var000A = ["supply", "room"];
 	} else if (var0001 == 0x0075) {
-		var000A = ["enter", "(y|name", "into|log|book"];
+		var000A = ["enter", "\{th}y\{dot}name", "into\{dot}log\{dot}book"];
 	} else if (var0001 == 0x0076) {
-		var000A = ["enter|at", "(ine|own", "risk"];
+		var000A = ["enter\{dot}at", "\{th}ine\{dot}own", "risk"];
 	} else if (var0001 == 0x0077) {
-		var000A = ["warni*", "da*erous|b+,", "wi(in"];
+		var000A = ["warni\{ng}", "da\{ng}erous\{dot}b\{ea},", "wi\{th}in"];
 	} else if (var0001 == 0x0078) {
-		var000A = ["f)d", "b+,", "daily"];
+		var000A = ["f\{ee}d", "b\{ea},", "daily"];
 	} else if (var0001 == 0x0079) {
 		var000A = ["pick", "one", "or", "die"];
 	} else if (var0001 == 0x007A) {
-		var000A = ["inmates", "mu,", "work"];
+		var000A = ["inmates", "mu\{st}", "work"];
 	} else if (var0001 == 0x007B) {
-		var000A = ["kn)l", "before", "(e", "ma,er"];
+		var000A = ["kn\{ee}l", "before", "\{th}e", "ma\{st}er"];
 	} else if (var0001 == 0x007C) {
-		var000A = ["do", "not", "di,urb", "gamema,ers"];
+		var000A = ["do", "not", "di\{st}urb", "gamema\{st}ers"];
 	} else if (var0001 == 0x007D) {
-		var000A = ["ri*", "bell|for", "service"];
+		var000A = ["ri\{ng}", "bell\{dot}for", "service"];
 		var0007 = set_item_quality(0x007E);
 	} else if (var0001 == 0x007E) {
-		var000A = ["r+ch", "bell|for", "fr)dom"];
+		var000A = ["r\{ea}ch", "bell\{dot}for", "fr\{ee}dom"];
 		var0007 = set_item_quality(0x007D);
 	} else if (var0001 == 0x007F) {
-		var000A = ["enter", "(e", "flame"];
+		var000A = ["enter", "\{th}e", "flame"];
 		var0007 = set_item_quality(0x0081);
 	} else if (var0001 == 0x0080) {
-		var000A = ["t+mwork", "insures", "liberty"];
+		var000A = ["t\{ea}mwork", "insures", "liberty"];
 	} else if (var0001 == 0x0081) {
-		var000A = ["to", "end|(y", "dr+m"];
+		var000A = ["to", "end\{dot}\{th}y", "dr\{ea}m"];
 		var0007 = set_item_quality(0x007F);
 	} else if (var0001 == 0x0082) {
 		var000A = ["room 1"];
@@ -15373,21 +15373,21 @@ void Func0334 shape#(0x334) () {
 	} else if (var0001 == 0x0089) {
 		var000A = ["palace"];
 	} else if (var0001 == 0x008A) {
-		var000A = ["temple", "of", "b+uty"];
+		var000A = ["temple", "of", "b\{ea}uty"];
 	} else if (var0001 == 0x008B) {
 		var000A = ["royal", "gardens"];
 	} else if (var0001 == 0x008C) {
 		var000A = ["broken", "oar"];
 	} else if (var0001 == 0x008D) {
-		var000A = ["re,house"];
+		var000A = ["re\{st}house"];
 	} else if (var0001 == 0x008E) {
 		var000A = ["donations", "welcome"];
 	} else if (var0001 == 0x008F) {
 		var000A = ["magic", "wine"];
 	} else if (var0001 == 0x009E) {
-		var000A = ["gannt", "(e|bard", "wanders|no|more"];
+		var000A = ["gannt", "\{th}e\{dot}bard", "wanders\{dot}no\{dot}more"];
 	} else if (var0001 == 0x009F) {
-		var000A = ["gannt", "(e|bard", "wanders|no|more"];
+		var000A = ["gannt", "\{th}e\{dot}bard", "wanders\{dot}no\{dot}more"];
 		UI_display_runes(0x002E, var000A);
 		var0007 = set_item_quality(0x009E);
 		Func097F(0xFE9C, "@Stand back!@", 0x0002);

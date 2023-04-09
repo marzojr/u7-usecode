@@ -1646,13 +1646,13 @@ void Func017B shape#(0x17B) () {
 	if (var0001 > 0x0097) {
 		UI_display_runes(0x0031, ["THIS IS", "NOT A", "VALID", "SIGN"]);
 	} else if (var0001 == 0x0000) {
-		UI_display_runes(0x0031, ["drink", "at|(e", "gilded", "lizard"]);
+		UI_display_runes(0x0031, ["drink", "at\{dot}\{th}e", "gilded", "lizard"]);
 	} else if (var0001 == 0x0001) {
 		UI_display_runes(0x0031, ["skara", "brae~", "~population", "47"]);
 	} else if (var0001 == 0x0002) {
 		UI_display_runes(0x0031, ["trinsic"]);
 	} else if (var0001 == 0x0003) {
-		UI_display_runes(0x0031, ["(e", "honorable", "hound"]);
+		UI_display_runes(0x0031, ["\{th}e", "honorable", "hound"]);
 	} else if (var0001 == 0x0004) {
 		UI_display_runes(0x0031, ["FELLOWSHIP", "HALL"]);
 	} else if (var0001 == 0x0005) {
@@ -1664,19 +1664,19 @@ void Func017B shape#(0x17B) () {
 	} else if (var0001 == 0x0008) {
 		UI_display_runes(0x0031, ["royal", "museum"]);
 	} else if (var0001 == 0x0009) {
-		UI_display_runes(0x0031, ["(e", "music", "hall"]);
+		UI_display_runes(0x0031, ["\{th}e", "music", "hall"]);
 	} else if (var0001 == 0x000B) {
-		UI_display_runes(0x0031, ["(e", "wayfarer's", "inn"]);
+		UI_display_runes(0x0031, ["\{th}e", "wayfarer's", "inn"]);
 	} else if (var0001 == 0x000C) {
 		UI_display_runes(0x0031, ["iolos", "bows"]);
 	} else if (var0001 == 0x000D) {
-		UI_display_runes(0x0031, ["(e", "blue", "boar"]);
+		UI_display_runes(0x0031, ["\{th}e", "blue", "boar"]);
 	} else if (var0001 == 0x000E) {
-		UI_display_runes(0x0031, ["gayes", "clo(iers"]);
+		UI_display_runes(0x0031, ["gayes", "clo\{th}iers"]);
 	} else if (var0001 == 0x000F) {
-		UI_display_runes(0x0031, ["nor(", ",ar", "armoury"]);
+		UI_display_runes(0x0031, ["nor\{th}", "\{st}ar", "armoury"]);
 	} else if (var0001 == 0x0010) {
-		UI_display_runes(0x0031, ["(e", "oaken", "oar"]);
+		UI_display_runes(0x0031, ["\{th}e", "oaken", "oar"]);
 	} else if (var0001 == 0x0011) {
 		UI_display_runes(0x0031, ["bakery"]);
 	} else if (var0001 == 0x0012) {
@@ -1684,11 +1684,11 @@ void Func017B shape#(0x17B) () {
 	} else if (var0001 == 0x0013) {
 		UI_display_runes(0x0031, ["farmers", "market"]);
 	} else if (var0001 == 0x0014) {
-		UI_display_runes(0x0031, ["apo(ecary"]);
+		UI_display_runes(0x0031, ["apo\{th}ecary"]);
 	} else if (var0001 == 0x0015) {
 		UI_display_runes(0x0031, ["royal", "mint"]);
 	} else if (var0001 == 0x0016) {
-		UI_display_runes(0x0031, ["csil", "(e", "h+ler"]);
+		UI_display_runes(0x0031, ["csil", "\{th}e", "h\{ea}ler"]);
 	} else if (var0001 == 0x0017) {
 		UI_display_runes(0x0031, ["provisions"]);
 	} else if (var0001 == 0x0018) {
@@ -1698,23 +1698,23 @@ void Func017B shape#(0x17B) () {
 	} else if (var0001 == 0x001A) {
 		UI_display_runes(0x0031, ["punch and", "judy", "show"]);
 	} else if (var0001 == 0x001B) {
-		UI_display_runes(0x0031, ["fish|n|chips"]);
+		UI_display_runes(0x0031, ["fish\{dot}n\{dot}chips"]);
 	} else if (var0001 == 0x001C) {
 		UI_display_runes(0x0031, ["cove"]);
 	} else if (var0001 == 0x001D) {
-		UI_display_runes(0x0031, ["(e", "emerald"]);
+		UI_display_runes(0x0031, ["\{th}e", "emerald"]);
 	} else if (var0001 == 0x001E) {
-		UI_display_runes(0x0031, ["out|n|inn"]);
+		UI_display_runes(0x0031, ["out\{dot}n\{dot}inn"]);
 	} else if (var0001 == 0x001F) {
 		UI_display_runes(0x0031, ["lovers", "walk"]);
 	} else if (var0001 == 0x0020) {
 		UI_display_runes(0x0031, ["buccaneers", "den"]);
 	} else if (var0001 == 0x0021) {
-		UI_display_runes(0x0031, "(e|ba(s");
+		UI_display_runes(0x0031, "\{th}e\{dot}ba\{th}s");
 	} else if (var0001 == 0x0022) {
 		UI_display_runes(0x0031, ["house", "of", "games"]);
 	} else if (var0001 == 0x0023) {
-		UI_display_runes(0x0031, ["(e", "fallen", "virgin"]);
+		UI_display_runes(0x0031, ["\{th}e", "fallen", "virgin"]);
 	} else if (var0001 == 0x0024) {
 		UI_display_runes(0x0031, "budos");
 	} else if (var0001 == 0x0025) {
@@ -1724,19 +1724,19 @@ void Func017B shape#(0x17B) () {
 	} else if (var0001 == 0x0034) {
 		UI_display_runes(0x0031, ["lycaeum"]);
 	} else if (var0001 == 0x0035) {
-		UI_display_runes(0x0031, ["(e", "hallowed", "dock"]);
+		UI_display_runes(0x0031, ["\{th}e", "hallowed", "dock"]);
 	} else if (var0001 == 0x0036) {
-		UI_display_runes(0x0031, ["(e", "friendly", "knave"]);
+		UI_display_runes(0x0031, ["\{th}e", "friendly", "knave"]);
 	} else if (var0001 == 0x0037) {
-		UI_display_runes(0x0031, ["(e", "gilded", "lizard"]);
+		UI_display_runes(0x0031, ["\{th}e", "gilded", "lizard"]);
 	} else if (var0001 == 0x0038) {
-		UI_display_runes(0x0031, ["h+ler"]);
+		UI_display_runes(0x0031, ["h\{ea}ler"]);
 	} else if (var0001 == 0x0039) {
-		UI_display_runes(0x0031, ["eldro(s", "provisions"]);
+		UI_display_runes(0x0031, ["eldro\{th}s", "provisions"]);
 	} else if (var0001 == 0x003A) {
 		UI_display_runes(0x0031, ["house", "of", "items"]);
 	} else if (var0001 == 0x003B) {
-		UI_display_runes(0x0031, ["britannian", "mini*", "company"]);
+		UI_display_runes(0x0031, ["britannian", "mini\{ng}", "company"]);
 	} else if (var0001 == 0x003C) {
 		UI_display_runes(0x0031, ["minoc", "branch"]);
 	} else if (var0001 == 0x003D) {
@@ -1744,7 +1744,7 @@ void Func017B shape#(0x17B) () {
 	} else if (var0001 == 0x003E) {
 		UI_display_runes(0x0031, ["scholar"]);
 	} else if (var0001 == 0x003F) {
-		UI_display_runes(0x0031, ["town|hall"]);
+		UI_display_runes(0x0031, ["town\{dot}hall"]);
 	} else if (var0001 == 0x0040) {
 		UI_display_runes(0x0031, ["wis-surs", "magics"]);
 	} else if (var0001 == 0x0041) {
@@ -1752,13 +1752,13 @@ void Func017B shape#(0x17B) () {
 	} else if (var0001 == 0x0042) {
 		UI_display_runes(0x0031, ["vesper"]);
 	} else if (var0001 == 0x0043) {
-		UI_display_runes(0x0031, ["moo*low"]);
+		UI_display_runes(0x0031, ["moo\{ng}low"]);
 	} else if (var0001 == 0x0044) {
 		UI_display_runes(0x0031, ["terfin"]);
 	} else if (var0001 == 0x0045) {
 		UI_display_runes(0x0031, ["serpents", "hold"]);
 	} else if (var0001 == 0x0046) {
-		UI_display_runes(0x0031, ["empa(", "abbey"]);
+		UI_display_runes(0x0031, ["empa\{th}", "abbey"]);
 	} else if (var0001 == 0x0047) {
 		UI_display_runes(0x0031, ["jhelom"]);
 	} else if (var0001 == 0x0048) {
@@ -1770,25 +1770,25 @@ void Func017B shape#(0x17B) () {
 	} else if (var0001 == 0x004B) {
 		UI_display_runes(0x0031, ["prison"]);
 	} else if (var0001 == 0x004C) {
-		UI_display_runes(0x0031, ["(e", "mode,", "damsel"]);
+		UI_display_runes(0x0031, ["\{th}e", "mode\{st}", "damsel"]);
 	} else if (var0001 == 0x004D) {
 		UI_display_runes(0x0031, ["armoury"]);
 	} else if (var0001 == 0x004E) {
-		UI_display_runes(0x0031, ["blacksmi("]);
+		UI_display_runes(0x0031, ["blacksmi\{th}"]);
 	} else if (var0001 == 0x004F) {
-		UI_display_runes(0x0031, ["recr+tion", "center"]);
+		UI_display_runes(0x0031, ["recr\{ea}tion", "center"]);
 	} else if (var0001 == 0x0050) {
 		UI_display_runes(0x0031, ["hall", "of", "knowledge"]);
 	} else if (var0001 == 0x0051) {
-		UI_display_runes(0x0031, ["hello", "(ere", "avatar"]);
+		UI_display_runes(0x0031, ["hello", "\{th}ere", "avatar"]);
 	} else if (var0001 == 0x0052) {
-		UI_display_runes(0x0031, ["tonight|9-12", "in|person", "the|avatars"]);
+		UI_display_runes(0x0031, ["tonight\{dot}9-12", "in\{dot}person", "the\{dot}avatars"]);
 	} else if (var0001 == 0x0053) {
 		UI_display_runes(0x0031, ["why", "ask", "why?"]);
 	} else if (var0001 == 0x0054) {
-		UI_display_runes(0x0031, [",r)t", "of", "honor"]);
+		UI_display_runes(0x0031, ["\{st}r\{ee}t", "of", "honor"]);
 	} else if (var0001 == 0x0055) {
-		UI_display_runes(0x0031, ["paladins", "pa("]);
+		UI_display_runes(0x0031, ["paladins", "pa\{th}"]);
 	} else if (var0001 == 0x0056) {
 		UI_display_runes(0x0031, ["AVENUE", "OF", "THE", "FELLOWSHIP"]);
 	} else if (var0001 == 0x0057) {
@@ -1796,63 +1796,63 @@ void Func017B shape#(0x17B) () {
 	} else if (var0001 == 0x0058) {
 		UI_display_runes(0x0031, ["harolds", "hallway"]);
 	} else if (var0001 == 0x0059) {
-		UI_display_runes(0x0031, ["fools|way"]);
+		UI_display_runes(0x0031, ["fools\{dot}way"]);
 	} else if (var0001 == 0x005A) {
 		UI_display_runes(0x0031, ["whitsaber", "road"]);
 	} else if (var0001 == 0x005B) {
-		UI_display_runes(0x0031, [",rand"]);
+		UI_display_runes(0x0031, ["\{st}rand"]);
 	} else if (var0001 == 0x005C) {
 		UI_display_runes(0x0031, ["chalice", "avenue"]);
 	} else if (var0001 == 0x005D) {
 		UI_display_runes(0x0031, ["two", "coves"]);
 	} else if (var0001 == 0x005E) {
-		UI_display_runes(0x0031, ["we,", "wall", "road"]);
+		UI_display_runes(0x0031, ["we\{st}", "wall", "road"]);
 	} else if (var0001 == 0x005F) {
-		UI_display_runes(0x0031, ["+,", "wall", "road"]);
+		UI_display_runes(0x0031, ["\{ea}\{st}", "wall", "road"]);
 	} else if (var0001 == 0x0060) {
-		UI_display_runes(0x0031, ["nor(", "wall", "road"]);
+		UI_display_runes(0x0031, ["nor\{th}", "wall", "road"]);
 	} else if (var0001 == 0x0061) {
-		UI_display_runes(0x0031, ["sou(", "wall", "road"]);
+		UI_display_runes(0x0031, ["sou\{th}", "wall", "road"]);
 	} else if (var0001 == 0x0062) {
 		UI_display_runes(0x0031, ["heroes", "way"]);
 	} else if (var0001 == 0x0063) {
-		UI_display_runes(0x0031, ["iolos", "sou("]);
+		UI_display_runes(0x0031, ["iolos", "sou\{th}"]);
 	} else if (var0001 == 0x0064) {
 		UI_display_runes(0x0031, ["paws"]);
 	} else if (var0001 == 0x0065) {
-		UI_display_runes(0x0031, ["(e", "salty|dog"]);
+		UI_display_runes(0x0031, ["\{th}e", "salty\{dot}dog"]);
 	} else if (var0001 == 0x0066) {
 		UI_display_runes(0x0031, ["FELLOWSHIP", "SHELTER"]);
 	} else if (var0001 == 0x0067) {
 		UI_display_runes(0x0031, ["vesper", "branch"]);
 	} else if (var0001 == 0x0068) {
-		UI_display_runes(0x0031, ["(e", "checquered", "cork"]);
+		UI_display_runes(0x0031, ["\{th}e", "checquered", "cork"]);
 	} else if (var0001 == 0x0069) {
 		UI_display_runes(0x0031, ["artists", "guild"]);
 	} else if (var0001 == 0x006A) {
-		UI_display_runes(0x0031, ["(e bunk", "and", ",ool"]);
+		UI_display_runes(0x0031, ["\{th}e bunk", "and", "\{st}ool"]);
 	} else if (var0001 == 0x006B) {
-		UI_display_runes(0x0031, ["(e", "library", "of", "scars"]);
+		UI_display_runes(0x0031, ["\{th}e", "library", "of", "scars"]);
 	} else if (var0001 == 0x006C) {
-		UI_display_runes(0x0031, ["carlyns", "clo(es"]);
+		UI_display_runes(0x0031, ["carlyns", "clo\{th}es"]);
 	} else if (var0001 == 0x006D) {
-		UI_display_runes(0x0031, ["wi(in|(ese", "walls", "lies|ma,er", "richard"]);
+		UI_display_runes(0x0031, ["wi\{th}in\{dot}\{th}ese", "walls", "lies\{dot}ma\{st}er", "richard"]);
 	} else if (var0001 == 0x006E) {
-		UI_display_runes(0x0031, ["ca,le|way"]);
+		UI_display_runes(0x0031, ["ca\{st}le\{dot}way"]);
 	} else if (var0001 == 0x006F) {
 		UI_display_runes(0x0031, ["lord", "british", "lane"]);
 	} else if (var0001 == 0x0070) {
-		UI_display_runes(0x0031, ["noble|road"]);
+		UI_display_runes(0x0031, ["noble\{dot}road"]);
 	} else if (var0001 == 0x0071) {
-		UI_display_runes(0x0031, ["we,|end", "avenue"]);
+		UI_display_runes(0x0031, ["we\{st}\{dot}end", "avenue"]);
 	} else if (var0001 == 0x0072) {
-		UI_display_runes(0x0031, ["hazle|lane"]);
+		UI_display_runes(0x0031, ["hazle\{dot}lane"]);
 	} else if (var0001 == 0x0073) {
-		UI_display_runes(0x0031, ["park", "square", "nor("]);
+		UI_display_runes(0x0031, ["park", "square", "nor\{th}"]);
 	} else if (var0001 == 0x0074) {
-		UI_display_runes(0x0031, ["park", "square", "sou("]);
+		UI_display_runes(0x0031, ["park", "square", "sou\{th}"]);
 	} else if (var0001 == 0x0075) {
-		UI_display_runes(0x0031, ["market", ",r)t"]);
+		UI_display_runes(0x0031, ["market", "\{st}r\{ee}t"]);
 	} else if (var0001 == 0x0076) {
 		UI_display_runes(0x0031, ["golden", "way"]);
 	} else if (var0001 == 0x0077) {
@@ -1862,21 +1862,21 @@ void Func017B shape#(0x17B) () {
 	} else if (var0001 == 0x0079) {
 		UI_display_runes(0x0031, ["avatar", "avenue"]);
 	} else if (var0001 == 0x007A) {
-		UI_display_runes(0x0031, [",able", "lane"]);
+		UI_display_runes(0x0031, ["\{st}able", "lane"]);
 	} else if (var0001 == 0x007B) {
-		UI_display_runes(0x0031, ["+,", "end", "avenue"]);
+		UI_display_runes(0x0031, ["\{ea}\{st}", "end", "avenue"]);
 	} else if (var0001 == 0x007C) {
 		UI_display_runes(0x0031, ["farm", "road"]);
 	} else if (var0001 == 0x007D) {
-		UI_display_runes(0x0031, ["nugget", ",r)t"]);
+		UI_display_runes(0x0031, ["nugget", "\{st}r\{ee}t"]);
 	} else if (var0001 == 0x007E) {
 		UI_display_runes(0x0031, ["cool", "cove"]);
 	} else if (var0001 == 0x007F) {
-		UI_display_runes(0x0031, ["nor(", "end", "avenue"]);
+		UI_display_runes(0x0031, ["nor\{th}", "end", "avenue"]);
 	} else if (var0001 == 0x0080) {
 		UI_display_runes(0x0031, ["golden", "eye", "way"]);
 	} else if (var0001 == 0x0081) {
-		UI_display_runes(0x0031, ["to", "(e", "dark", "tower"]);
+		UI_display_runes(0x0031, ["to", "\{th}e", "dark", "tower"]);
 	} else if (var0001 == 0x0082) {
 		UI_display_runes(0x0031, ["BEWARE", "OF", "LANDSLIDES"]);
 	} else if (var0001 == 0x0083) {
@@ -1884,31 +1884,31 @@ void Func017B shape#(0x17B) () {
 	} else if (var0001 == 0x0084) {
 		UI_display_runes(0x0031, ["old", "number", "one"]);
 	} else if (var0001 == 0x0085) {
-		UI_display_runes(0x0031, ["do|not", "free", "(e", "liche"]);
+		UI_display_runes(0x0031, ["do\{dot}not", "free", "\{th}e", "liche"]);
 	} else if (var0001 == 0x0086) {
-		UI_display_runes(0x0031, ["beware", "mon,ers", "wi(in"]);
+		UI_display_runes(0x0031, ["beware", "mon\{st}ers", "wi\{th}in"]);
 	} else if (var0001 == 0x0087) {
 		UI_display_runes(0x0031, ["paupers", "graves"]);
 	} else if (var0001 == 0x0088) {
-		UI_display_runes(0x0031, ["|manrik|", "a|soul", "of|a", "soul"]);
+		UI_display_runes(0x0031, ["\{dot}manrik\{dot}", "a\{dot}soul", "of\{dot}a", "soul"]);
 	} else if (var0001 == 0x0089) {
-		UI_display_runes(0x0031, ["here|lies", "jules|no", "words|for", "(e|loss"]);
+		UI_display_runes(0x0031, ["here\{dot}lies", "jules\{dot}no", "words\{dot}for", "\{th}e\{dot}loss"]);
 	} else if (var0001 == 0x008A) {
-		UI_display_runes(0x0031, ["|morgan|", "her", "dea(|a", "tragedy"]);
+		UI_display_runes(0x0031, ["\{dot}morgan\{dot}", "her", "dea\{th}\{dot}a", "tragedy"]);
 	} else if (var0001 == 0x008B) {
-		UI_display_runes(0x0031, ["here|lies", "ke(ian", "friend|to", "many"]);
+		UI_display_runes(0x0031, ["here\{dot}lies", "ke\{th}ian", "friend\{dot}to", "many"]);
 	} else if (var0001 == 0x008C) {
-		UI_display_runes(0x0031, ["|wadley|", "his|soul", "deeper|(an", "his|body"]);
+		UI_display_runes(0x0031, ["\{dot}wadley\{dot}", "his\{dot}soul", "deeper\{dot}\{th}an", "his\{dot}body"]);
 	} else if (var0001 == 0x008D) {
-		UI_display_runes(0x0031, ["here|lies", "jenna", "kindred", "spirit"]);
+		UI_display_runes(0x0031, ["here\{dot}lies", "jenna", "kindred", "spirit"]);
 	} else if (var0001 == 0x008E) {
-		UI_display_runes(0x0031, ["d+d", "end"]);
+		UI_display_runes(0x0031, ["d\{ea}d", "end"]);
 	} else if (var0001 == 0x008F) {
 		UI_display_runes(0x0031, ["to", "skara", "brae"]);
 	} else if (var0001 == 0x0090) {
-		UI_display_runes(0x0031, ["THE", "THRONE", "OF|THE", "GUARDIAN"]);
+		UI_display_runes(0x0031, ["THE", "THRONE", "OF\{dot}THE", "GUARDIAN"]);
 	} else if (var0001 == 0x0091) {
-		UI_display_runes(0x0031, ["nor(", "to", "britain"]);
+		UI_display_runes(0x0031, ["nor\{th}", "to", "britain"]);
 	} else if (var0001 == 0x0092) {
 		UI_display_runes(0x0031, ["pull", "lever"]);
 	} else if (var0001 == 0x0093) {
@@ -1920,7 +1920,7 @@ void Func017B shape#(0x17B) () {
 	} else if (var0001 == 0x0096) {
 		UI_display_runes(0x0031, ["selwyns", "tower"]);
 	} else if (var0001 == 0x0097) {
-		UI_display_runes(0x0031, ["follow", "(e", "fire"]);
+		UI_display_runes(0x0031, ["follow", "\{th}e", "fire"]);
 	}
 }
 
@@ -5091,313 +5091,313 @@ void Func02CB shape#(0x2CB) () {
 		UI_display_runes(0x0032, ["IS", "SIGN ZERO"]);
 	} else {
 		if (var0001 == 0x0000) {
-			UI_display_runes(0x0032, ["here|lies", "john|doe", "buried", "where", "he|died"]);
+			UI_display_runes(0x0032, ["here\{dot}lies", "john\{dot}doe", "buried", "where", "he\{dot}died"]);
 		}
 		if (var0001 == 0x0001) {
-			UI_display_runes(0x0032, ["|garth|", "sorry", "about", "thy|(umb"]);
+			UI_display_runes(0x0032, ["\{dot}garth\{dot}", "sorry", "about", "thy\{dot}\{th}umb"]);
 		}
 		if (var0001 == 0x0002) {
 			UI_display_runes(0x0032, ["LADY M:", "YOUTH IS", "HERS", "FOREVER"]);
 		}
 		if (var0001 == 0x0003) {
-			UI_display_runes(0x0032, ["|julius|", "may|his", "spirit", "re,", "forever"]);
+			UI_display_runes(0x0032, ["\{dot}julius\{dot}", "may\{dot}his", "spirit", "re\{st}", "forever"]);
 		}
 		if (var0001 == 0x0004) {
-			UI_display_runes(0x0032, ["here", "lies", "argent", "died|a", "sargeant"]);
+			UI_display_runes(0x0032, ["here", "lies", "argent", "died\{dot}a", "sargeant"]);
 		}
 		if (var0001 == 0x0005) {
-			UI_display_runes(0x0032, ["|darek|", "his", "days", "were", "numbered"]);
+			UI_display_runes(0x0032, ["\{dot}darek\{dot}", "his", "days", "were", "numbered"]);
 		}
 		if (var0001 == 0x0006) {
-			UI_display_runes(0x0032, ["|malc|", "his", "words", "remain", "wi(|us"]);
+			UI_display_runes(0x0032, ["\{dot}malc\{dot}", "his", "words", "remain", "wi\{th}\{dot}us"]);
 		}
 		if (var0001 == 0x0007) {
-			UI_display_runes(0x0032, ["|nina|", "may", "her", "spirit", "soar"]);
+			UI_display_runes(0x0032, ["\{dot}nina\{dot}", "may", "her", "spirit", "soar"]);
 		}
 		if (var0001 == 0x0008) {
-			UI_display_runes(0x0032, ["|bart|", "he|never", "finished", "(e|joke"]);
+			UI_display_runes(0x0032, ["\{dot}bart\{dot}", "he\{dot}never", "finished", "\{th}e\{dot}joke"]);
 		}
 		if (var0001 == 0x0009) {
-			UI_display_runes(0x0032, ["|ann|", "a", "delicate", "flower"]);
+			UI_display_runes(0x0032, ["\{dot}ann\{dot}", "a", "delicate", "flower"]);
 		}
 		if (var0001 == 0x000A) {
-			UI_display_runes(0x0032, ["|dallas|", "went", "down", "wi(|(e", "ship"]);
+			UI_display_runes(0x0032, ["\{dot}dallas\{dot}", "went", "down", "wi\{th}\{dot}\{th}e", "ship"]);
 		}
 		if (var0001 == 0x000B) {
-			UI_display_runes(0x0032, ["|alan|", "looked", "great|in", "pink"]);
+			UI_display_runes(0x0032, ["\{dot}alan\{dot}", "looked", "great\{dot}in", "pink"]);
 		}
 		if (var0001 == 0x000C) {
-			UI_display_runes(0x0032, ["here", "lies", "ken", "killed|by", "a pen"]);
+			UI_display_runes(0x0032, ["here", "lies", "ken", "killed\{dot}by", "a pen"]);
 		}
 		if (var0001 == 0x000D) {
-			UI_display_runes(0x0032, ["|jeff|d|", "died|wi(", "a|pencil", "in|hand"]);
+			UI_display_runes(0x0032, ["\{dot}jeff\{dot}d\{dot}", "died\{dot}wi\{th}", "a\{dot}pencil", "in\{dot}hand"]);
 		}
 		if (var0001 == 0x000E) {
-			UI_display_runes(0x0032, ["|martin|", "(e|notes", "were|too", "sharp"]);
+			UI_display_runes(0x0032, ["\{dot}martin\{dot}", "\{th}e\{dot}notes", "were\{dot}too", "sharp"]);
 		}
 		if (var0001 == 0x000F) {
-			UI_display_runes(0x0032, ["|tony|b|", "a|credit", "to|his", "name"]);
+			UI_display_runes(0x0032, ["\{dot}tony\{dot}b\{dot}", "a\{dot}credit", "to\{dot}his", "name"]);
 		}
 		if (var0001 == 0x0010) {
-			UI_display_runes(0x0032, ["|philip|", "spells", "ma,ered", "him"]);
+			UI_display_runes(0x0032, ["\{dot}philip\{dot}", "spells", "ma\{st}ered", "him"]);
 		}
 		if (var0001 == 0x0011) {
-			UI_display_runes(0x0032, ["|chuckles|", "laughed", "till|(e", "end"]);
+			UI_display_runes(0x0032, ["\{dot}chuckles\{dot}", "laughed", "till\{dot}\{th}e", "end"]);
 		}
 		if (var0001 == 0x0012) {
-			UI_display_runes(0x0032, ["|art|d|", "bit|(e|rump", "of|a|big|", "bad|gump"]);
+			UI_display_runes(0x0032, ["\{dot}art\{dot}d\{dot}", "bit\{dot}\{th}e\{dot}rump", "of\{dot}a\{dot}big\{dot}", "bad\{dot}gump"]);
 		}
 		if (var0001 == 0x0013) {
-			UI_display_runes(0x0032, ["|jim|g|", "he|was", "a|wonder", "to|us|all"]);
+			UI_display_runes(0x0032, ["\{dot}jim\{dot}g\{dot}", "he\{dot}was", "a\{dot}wonder", "to\{dot}us\{dot}all"]);
 		}
 		if (var0001 == 0x0014) {
-			UI_display_runes(0x0032, ["|will|", "he|was|a", "rebel|and", "a|runner"]);
+			UI_display_runes(0x0032, ["\{dot}will\{dot}", "he\{dot}was\{dot}a", "rebel\{dot}and", "a\{dot}runner"]);
 		}
 		if (var0001 == 0x0015) {
-			UI_display_runes(0x0032, ["|mr|mike|", "lost|early", "from|a|bout", "with|gumps"]);
+			UI_display_runes(0x0032, ["\{dot}mr\{dot}mike\{dot}", "lost\{dot}early", "from\{dot}a\{dot}bout", "with\{dot}gumps"]);
 		}
 		if (var0001 == 0x0016) {
-			UI_display_runes(0x0032, ["|paul|", "odd|how", "awake", "sleep", "made|him"]);
+			UI_display_runes(0x0032, ["\{dot}paul\{dot}", "odd\{dot}how", "awake", "sleep", "made\{dot}him"]);
 		}
 		if (var0001 == 0x0017) {
-			UI_display_runes(0x0032, ["|zack|", "he", "demanded", "atomic", "d+("]);
+			UI_display_runes(0x0032, ["\{dot}zack\{dot}", "he", "demanded", "atomic", "d\{ea}\{th}"]);
 		}
 		if (var0001 == 0x0018) {
-			UI_display_runes(0x0032, ["|phil|s|", "a|victim", "of", "venomous", "fate"]);
+			UI_display_runes(0x0032, ["\{dot}phil\{dot}s\{dot}", "a\{dot}victim", "of", "venomous", "fate"]);
 		}
 		if (var0001 == 0x0019) {
-			UI_display_runes(0x0032, ["|jeff|w|", "danger", "radiation"]);
+			UI_display_runes(0x0032, ["\{dot}jeff\{dot}w\{dot}", "danger", "radiation"]);
 		}
 		if (var0001 == 0x001A) {
-			UI_display_runes(0x0032, ["|tony|z|", "a|good", "source", "for|gumps"]);
+			UI_display_runes(0x0032, ["\{dot}tony\{dot}z\{dot}", "a\{dot}good", "source", "for\{dot}gumps"]);
 		}
 		if (var0001 == 0x001B) {
-			UI_display_runes(0x0032, ["|bill|b|", "we|(ought", "he|was|only", "winged"]);
+			UI_display_runes(0x0032, ["\{dot}bill\{dot}b\{dot}", "we\{dot}\{th}ought", "he\{dot}was\{dot}only", "winged"]);
 		}
 		if (var0001 == 0x001C) {
-			UI_display_runes(0x0032, ["|charles|c|", "guest", "victim"]);
+			UI_display_runes(0x0032, ["\{dot}charles\{dot}c\{dot}", "guest", "victim"]);
 		}
 		if (var0001 == 0x001D) {
-			UI_display_runes(0x0032, ["|danny|", "dearly", "depainted"]);
+			UI_display_runes(0x0032, ["\{dot}danny\{dot}", "dearly", "depainted"]);
 		}
 		if (var0001 == 0x001E) {
-			UI_display_runes(0x0032, ["|bob|", "he|makes", "(e|grass", "greener"]);
+			UI_display_runes(0x0032, ["\{dot}bob\{dot}", "he\{dot}makes", "\{th}e\{dot}grass", "greener"]);
 		}
 		if (var0001 == 0x001F) {
-			UI_display_runes(0x0032, ["here|lies", "donna", "she|is|a", "gonna"]);
+			UI_display_runes(0x0032, ["here\{dot}lies", "donna", "she\{dot}is\{dot}a", "gonna"]);
 		}
 		if (var0001 == 0x0020) {
-			UI_display_runes(0x0032, ["|karl|", "a|portrait", "of", "talent"]);
+			UI_display_runes(0x0032, ["\{dot}karl\{dot}", "a\{dot}portrait", "of", "talent"]);
 		}
 		if (var0001 == 0x0021) {
-			UI_display_runes(0x0032, ["|chris|d|", "an", "explosive", "character"]);
+			UI_display_runes(0x0032, ["\{dot}chris\{dot}d\{dot}", "an", "explosive", "character"]);
 		}
 		if (var0001 == 0x0022) {
-			UI_display_runes(0x0032, ["|glen|", "went", "with|a", "smile"]);
+			UI_display_runes(0x0032, ["\{dot}glen\{dot}", "went", "with\{dot}a", "smile"]);
 		}
 		if (var0001 == 0x0023) {
-			UI_display_runes(0x0032, ["|bruce|l|", "had|a", "fantastic", "ending"]);
+			UI_display_runes(0x0032, ["\{dot}bruce\{dot}l\{dot}", "had\{dot}a", "fantastic", "ending"]);
 		}
 		if (var0001 == 0x0024) {
-			UI_display_runes(0x0032, ["|loubet|", "his", "last", "br+("]);
+			UI_display_runes(0x0032, ["\{dot}loubet\{dot}", "his", "last", "br\{ea}\{th}"]);
 		}
 		if (var0001 == 0x0025) {
-			UI_display_runes(0x0032, ["|micael|p|", "lo*|time", "comi*|gone", "for|good"]);
+			UI_display_runes(0x0032, ["\{dot}micael\{dot}p\{dot}", "lo\{ng}\{dot}time", "comi\{ng}\{dot}gone", "for\{dot}good"]);
 		}
 		if (var0001 == 0x0026) {
-			UI_display_runes(0x0032, ["|jake|", "(e|party", "is", "over"]);
+			UI_display_runes(0x0032, ["\{dot}jake\{dot}", "\{th}e\{dot}party", "is", "over"]);
 		}
 		if (var0001 == 0x0027) {
-			UI_display_runes(0x0032, ["|gary|w|", "man|of|a", "(ousand", "faces"]);
+			UI_display_runes(0x0032, ["\{dot}gary\{dot}w\{dot}", "man\{dot}of\{dot}a", "\{th}ousand", "faces"]);
 		}
 		if (var0001 == 0x0028) {
-			UI_display_runes(0x0032, ["|(e|b+,|", "it|was|a", "full", "life"]);
+			UI_display_runes(0x0032, ["\{dot}\{th}e\{dot}b\{ea}\{st}\{dot}", "it\{dot}was\{dot}a", "full", "life"]);
 		}
 		if (var0001 == 0x0029) {
-			UI_display_runes(0x0032, ["here|lies", "kirk|died", "from|too", "much|work"]);
+			UI_display_runes(0x0032, ["here\{dot}lies", "kirk\{dot}died", "from\{dot}too", "much\{dot}work"]);
 		}
 		if (var0001 == 0x002A) {
-			UI_display_runes(0x0032, ["|targ|", "a", "wor(y", "opponent"]);
+			UI_display_runes(0x0032, ["\{dot}targ\{dot}", "a", "wor\{th}y", "opponent"]);
 		}
 		if (var0001 == 0x002B) {
-			UI_display_runes(0x0032, ["here|lies", "my,ral", "shined", "like|a", "crystal"]);
+			UI_display_runes(0x0032, ["here\{dot}lies", "my\{st}ral", "shined", "like\{dot}a", "crystal"]);
 		}
 		if (var0001 == 0x002C) {
-			UI_display_runes(0x0032, ["here|lies", "marc", "and|why", "not"]);
+			UI_display_runes(0x0032, ["here\{dot}lies", "marc", "and\{dot}why", "not"]);
 		}
 		if (var0001 == 0x002D) {
-			UI_display_runes(0x0032, ["|nenad|", "(e", "music", "maker"]);
+			UI_display_runes(0x0032, ["\{dot}nenad\{dot}", "\{th}e", "music", "maker"]);
 		}
 		if (var0001 == 0x002E) {
-			UI_display_runes(0x0032, ["here|lies", "john", "his", "work|was", "never|done"]);
+			UI_display_runes(0x0032, ["here\{dot}lies", "john", "his", "work\{dot}was", "never\{dot}done"]);
 		}
 		if (var0001 == 0x002F) {
-			UI_display_runes(0x0032, ["|bruce|a|", "we", "killed", "him"]);
+			UI_display_runes(0x0032, ["\{dot}bruce\{dot}a\{dot}", "we", "killed", "him"]);
 		}
 		if (var0001 == 0x0030) {
-			UI_display_runes(0x0032, ["|eric|", "unaware", "(e|game", "was", "loaded"]);
+			UI_display_runes(0x0032, ["\{dot}eric\{dot}", "unaware", "\{th}e\{dot}game", "was", "loaded"]);
 		}
 		if (var0001 == 0x0031) {
-			UI_display_runes(0x0032, ["|raymond|", "(e|world", "is|not", "enough"]);
+			UI_display_runes(0x0032, ["\{dot}raymond\{dot}", "\{th}e\{dot}world", "is\{dot}not", "enough"]);
 		}
 		if (var0001 == 0x0032) {
-			UI_display_runes(0x0032, ["|Beth|", "died", "by", "garriot"]);
+			UI_display_runes(0x0032, ["\{dot}Beth\{dot}", "died", "by", "garriot"]);
 		}
 		if (var0001 == 0x0033) {
-			UI_display_runes(0x0032, ["|jack|", "+ten", "by", "di*os"]);
+			UI_display_runes(0x0032, ["\{dot}jack\{dot}", "\{ea}ten", "by", "di\{ng}os"]);
 		}
 		if (var0001 == 0x0034) {
-			UI_display_runes(0x0032, ["|michelle|", "hu*|for", "poisoni*", "lover"]);
+			UI_display_runes(0x0032, ["\{dot}michelle\{dot}", "hu\{ng}\{dot}for", "poisoni\{ng}", "lover"]);
 		}
 		if (var0001 == 0x0035) {
-			UI_display_runes(0x0032, ["|scott|h|", "gone", "today", "gone", "tomorrow"]);
+			UI_display_runes(0x0032, ["\{dot}scott\{dot}h\{dot}", "gone", "today", "gone", "tomorrow"]);
 		}
 		if (var0001 == 0x0036) {
-			UI_display_runes(0x0032, ["|brian|", "swallowed", "by", "(e", "mon,er"]);
+			UI_display_runes(0x0032, ["\{dot}brian\{dot}", "swallowed", "by", "\{th}e", "mon\{st}er"]);
 		}
 		if (var0001 == 0x0037) {
-			UI_display_runes(0x0032, ["|sherry|c|", "managed", "until", "(e|end"]);
+			UI_display_runes(0x0032, ["\{dot}sherry\{dot}c\{dot}", "managed", "until", "\{th}e\{dot}end"]);
 		}
 		if (var0001 == 0x0038) {
-			UI_display_runes(0x0032, ["|karen|", "quality", "was|job", "one"]);
+			UI_display_runes(0x0032, ["\{dot}karen\{dot}", "quality", "was\{dot}job", "one"]);
 		}
 		if (var0001 == 0x0039) {
-			UI_display_runes(0x0032, ["|j|shelton", "here|i|lie", "but|,ill", "i|roam"]);
+			UI_display_runes(0x0032, ["\{dot}j\{dot}shelton", "here\{dot}i\{dot}lie", "but\{dot}\{st}ill", "i\{dot}roam"]);
 		}
 		if (var0001 == 0x003A) {
-			UI_display_runes(0x0032, ["|marco|", "underfed", "under|gun", "undergrnd"]);
+			UI_display_runes(0x0032, ["\{dot}marco\{dot}", "underfed", "under\{dot}gun", "undergrnd"]);
 		}
 		if (var0001 == 0x003B) {
-			UI_display_runes(0x0032, ["|lynn|", "she|had", "(e|grace", "of|a|swan"]);
+			UI_display_runes(0x0032, ["\{dot}lynn\{dot}", "she\{dot}had", "\{th}e\{dot}grace", "of\{dot}a\{dot}swan"]);
 		}
 		if (var0001 == 0x003C) {
-			UI_display_runes(0x0032, ["|chenault|", "me|puergo", "canus|meus", "urit"]);
+			UI_display_runes(0x0032, ["\{dot}chenault\{dot}", "me\{dot}puergo", "canus\{dot}meus", "urit"]);
 		}
 		if (var0001 == 0x003D) {
-			UI_display_runes(0x0032, ["|j|crippen|", "to|dizzy", "and|tc", "cocopuff"]);
+			UI_display_runes(0x0032, ["\{dot}j\{dot}crippen\{dot}", "to\{dot}dizzy", "and\{dot}tc", "cocopuff"]);
 		}
 		if (var0001 == 0x003E) {
-			UI_display_runes(0x0032, ["|tim|", "(e|unknown", "tomb,one"]);
+			UI_display_runes(0x0032, ["\{dot}tim\{dot}", "\{th}e\{dot}unknown", "tomb\{st}one"]);
 		}
 		if (var0001 == 0x003F) {
-			UI_display_runes(0x0032, ["|na(an|", "blown|away", "by|grogs", "fireball"]);
+			UI_display_runes(0x0032, ["\{dot}na\{th}an\{dot}", "blown\{dot}away", "by\{dot}grogs", "fireball"]);
 		}
 		if (var0001 == 0x0040) {
-			UI_display_runes(0x0032, ["|james|n|", "last|words", "i|drank", "what"]);
+			UI_display_runes(0x0032, ["\{dot}james\{dot}n\{dot}", "last\{dot}words", "i\{dot}drank", "what"]);
 		}
 		if (var0001 == 0x0041) {
-			UI_display_runes(0x0032, ["here|lies", "Ben", "all|te,ed", "out"]);
+			UI_display_runes(0x0032, ["here\{dot}lies", "Ben", "all\{dot}te\{st}ed", "out"]);
 		}
 		if (var0001 == 0x0042) {
-			UI_display_runes(0x0032, ["|scott|", "buried|an", "axe|in", "his|h+d"]);
+			UI_display_runes(0x0032, ["\{dot}scott\{dot}", "buried\{dot}an", "axe\{dot}in", "his\{dot}h\{ea}d"]);
 		}
 		if (var0001 == 0x0043) {
-			UI_display_runes(0x0032, ["|duke|", "veni", "vidi", "exii"]);
+			UI_display_runes(0x0032, ["\{dot}duke\{dot}", "veni", "vidi", "exii"]);
 		}
 		if (var0001 == 0x0044) {
-			UI_display_runes(0x0032, ["|mike|h|", "every(i*", "fit|to", "print"]);
+			UI_display_runes(0x0032, ["\{dot}mike\{dot}h\{dot}", "every\{th}i\{ng}", "fit\{dot}to", "print"]);
 		}
 		if (var0001 == 0x0045) {
-			UI_display_runes(0x0032, ["|robin|", "she|gave", "sunshine", "to|us|all"]);
+			UI_display_runes(0x0032, ["\{dot}robin\{dot}", "she\{dot}gave", "sunshine", "to\{dot}us\{dot}all"]);
 		}
 		if (var0001 == 0x0046) {
-			UI_display_runes(0x0032, ["|andrew|", "|m|", "never", "got", "clued|in"]);
+			UI_display_runes(0x0032, ["\{dot}andrew\{dot}", "\{dot}m\{dot}", "never", "got", "clued\{dot}in"]);
 		}
 		if (var0001 == 0x0047) {
-			UI_display_runes(0x0032, ["|wayne|s|", "(e|food", "was", "gr+t"]);
+			UI_display_runes(0x0032, ["\{dot}wayne\{dot}s\{dot}", "\{th}e\{dot}food", "was", "gr\{ea}t"]);
 		}
 		if (var0001 == 0x0048) {
-			UI_display_runes(0x0032, ["|craig|c|", "was", "delivered"]);
+			UI_display_runes(0x0032, ["\{dot}craig\{dot}c\{dot}", "was", "delivered"]);
 		}
 		if (var0001 == 0x0049) {
-			UI_display_runes(0x0032, ["|jeff|f|", "fed|but", "never", "ate"]);
+			UI_display_runes(0x0032, ["\{dot}jeff\{dot}f\{dot}", "fed\{dot}but", "never", "ate"]);
 		}
 		if (var0001 == 0x004A) {
-			UI_display_runes(0x0032, ["|w|hagy", "food", "for", "(ought"]);
+			UI_display_runes(0x0032, ["\{dot}w\{dot}hagy", "food", "for", "\{th}ought"]);
 		}
 		if (var0001 == 0x004B) {
-			UI_display_runes(0x0032, ["|m|", "|stevens|", "arrived", "wi(|gifts"]);
+			UI_display_runes(0x0032, ["\{dot}m\{dot}", "\{dot}stevens\{dot}", "arrived", "wi\{th}\{dot}gifts"]);
 		}
 		if (var0001 == 0x004C) {
-			UI_display_runes(0x0032, ["|michelle|", "|g|", "bringer", "of", "dinner"]);
+			UI_display_runes(0x0032, ["\{dot}michelle\{dot}", "\{dot}g\{dot}", "bringer", "of", "dinner"]);
 		}
 		if (var0001 == 0x004D) {
-			UI_display_runes(0x0032, ["|brian|s|", "food", "was", "him"]);
+			UI_display_runes(0x0032, ["\{dot}brian\{dot}s\{dot}", "food", "was", "him"]);
 		}
 		if (var0001 == 0x004E) {
-			UI_display_runes(0x0032, ["|jackie|", "d|", "as|in|d|", "for", "dinner"]);
+			UI_display_runes(0x0032, ["\{dot}jackie\{dot}", "d\{dot}", "as\{dot}in\{dot}d\{dot}", "for", "dinner"]);
 		}
 		if (var0001 == 0x004F) {
-			UI_display_runes(0x0032, ["|b|adams|", "spained", "a", "perfect", "record"]);
+			UI_display_runes(0x0032, ["\{dot}b\{dot}adams\{dot}", "spained", "a", "perfect", "record"]);
 		}
 		if (var0001 == 0x0050) {
-			UI_display_runes(0x0032, ["|hal|", "a|nice", "fellow", "who|is", "now|below"]);
+			UI_display_runes(0x0032, ["\{dot}hal\{dot}", "a\{dot}nice", "fellow", "who\{dot}is", "now\{dot}below"]);
 		}
 		if (var0001 == 0x0051) {
-			UI_display_runes(0x0032, ["|rover|", "mans|best", "friend", "over|and", "over"]);
+			UI_display_runes(0x0032, ["\{dot}rover\{dot}", "mans\{dot}best", "friend", "over\{dot}and", "over"]);
 		}
 		if (var0001 == 0x0052) {
-			UI_display_runes(0x0032, ["|felcore|", "age|old", "love", "never", "dies"]);
+			UI_display_runes(0x0032, ["\{dot}felcore\{dot}", "age\{dot}old", "love", "never", "dies"]);
 		}
 		if (var0001 == 0x0053) {
-			UI_display_runes(0x0032, ["heres", "tony", "morse", "hes|d+d", "of|course"]);
+			UI_display_runes(0x0032, ["heres", "tony", "morse", "hes\{dot}d\{ea}d", "of\{dot}course"]);
 		}
 		if (var0001 == 0x0054) {
-			UI_display_runes(0x0032, ["heres", "larry", "salamon", "|", "gross"]);
+			UI_display_runes(0x0032, ["heres", "larry", "salamon", "\{dot}", "gross"]);
 		}
 		if (var0001 == 0x0055) {
-			UI_display_runes(0x0032, ["darren", "mcdonald", "who|is", "faltran"]);
+			UI_display_runes(0x0032, ["darren", "mcdonald", "who\{dot}is", "faltran"]);
 		}
 		if (var0001 == 0x0056) {
-			UI_display_runes(0x0032, ["|kevin|b|", "died", "away", "from|(e", "chiltons"]);
+			UI_display_runes(0x0032, ["\{dot}kevin\{dot}b\{dot}", "died", "away", "from\{dot}\{th}e", "chiltons"]);
 		}
 		if (var0001 == 0x0057) {
-			UI_display_runes(0x0032, ["|beth", "and", "michael|", "worm", "food"]);
+			UI_display_runes(0x0032, ["\{dot}beth", "and", "michael\{dot}", "worm", "food"]);
 		}
 		if (var0001 == 0x0058) {
-			UI_display_runes(0x0032, ["|a|h|", "died", "honorably"]);
+			UI_display_runes(0x0032, ["\{dot}a\{dot}h\{dot}", "died", "honorably"]);
 		}
 		if (var0001 == 0x0059) {
-			UI_display_runes(0x0032, ["|john|t|", "gone", "and", "went"]);
+			UI_display_runes(0x0032, ["\{dot}john\{dot}t\{dot}", "gone", "and", "went"]);
 		}
 		if (var0001 == 0x005A) {
-			UI_display_runes(0x0032, ["|rey|", "", "installed", "here"]);
+			UI_display_runes(0x0032, ["\{dot}rey\{dot}", "", "installed", "here"]);
 		}
 		if (var0001 == 0x005B) {
-			UI_display_runes(0x0032, ["|rhoode|", "a|more", "deservi*", "man|never", "died"]);
+			UI_display_runes(0x0032, ["\{dot}rhoode\{dot}", "a\{dot}more", "deservi\{ng}", "man\{dot}never", "died"]);
 		}
 		if (var0001 == 0x005C) {
-			UI_display_runes(0x0032, ["|jasner|", "every", "moment", "she|is", "missed"]);
+			UI_display_runes(0x0032, ["\{dot}jasner\{dot}", "every", "moment", "she\{dot}is", "missed"]);
 		}
 		if (var0001 == 0x005D) {
-			UI_display_runes(0x0032, ["|wampol|", "here|he", "lied", "now|here", "he|lays"]);
+			UI_display_runes(0x0032, ["\{dot}wampol\{dot}", "here\{dot}he", "lied", "now\{dot}here", "he\{dot}lays"]);
 		}
 		if (var0001 == 0x005E) {
-			UI_display_runes(0x0032, ["|destra|", "wounded", "by|a", "lovers", "spurni*"]);
+			UI_display_runes(0x0032, ["\{dot}destra\{dot}", "wounded", "by\{dot}a", "lovers", "spurni\{ng}"]);
 		}
 		if (var0001 == 0x005F) {
-			UI_display_runes(0x0032, ["|mendar|", "buried", "wi(|his", "boots|on"]);
+			UI_display_runes(0x0032, ["\{dot}mendar\{dot}", "buried", "wi\{th}\{dot}his", "boots\{dot}on"]);
 		}
 		if (var0001 == 0x0060) {
-			UI_display_runes(0x0032, ["|greghim|", "old|age", "never", "looked|so", "good"]);
+			UI_display_runes(0x0032, ["\{dot}greghim\{dot}", "old\{dot}age", "never", "looked\{dot}so", "good"]);
 		}
 		if (var0001 == 0x0061) {
-			UI_display_runes(0x0032, ["|sarnan|", "was|not", "missed", "but|is", "now"]);
+			UI_display_runes(0x0032, ["\{dot}sarnan\{dot}", "was\{dot}not", "missed", "but\{dot}is", "now"]);
 		}
 		if (var0001 == 0x0062) {
-			UI_display_runes(0x0032, ["|erlemar|", "gr+te,", "enchanter", "of|his", "day"]);
+			UI_display_runes(0x0032, ["\{dot}erlemar\{dot}", "gr\{ea}te\{st}", "enchanter", "of\{dot}his", "day"]);
 		}
 		if (var0001 == 0x0063) {
-			UI_display_runes(0x0032, ["|galler|", "came|", "saw|", "was", "conquered"]);
+			UI_display_runes(0x0032, ["\{dot}galler\{dot}", "came\{dot}", "saw\{dot}", "was", "conquered"]);
 		}
 		if (var0001 == 0x0064) {
-			UI_display_runes(0x0032, ["|elgele(|", "queen", "for|a|day", "worm|food", "forever"]);
+			UI_display_runes(0x0032, ["\{dot}elgele\{th}\{dot}", "queen", "for\{dot}a\{dot}day", "worm\{dot}food", "forever"]);
 		}
 		if (var0001 == 0x0065) {
-			UI_display_runes(0x0032, ["|pantor|", "(e|si*i*", "never", "stops"]);
+			UI_display_runes(0x0032, ["\{dot}pantor\{dot}", "\{th}e\{dot}si\{ng}i\{ng}", "never", "stops"]);
 		}
 		if (var0001 == 0x0066) {
-			UI_display_runes(0x0032, ["here|lies", "beloved", "fa(er", "and", "ma,er"]);
+			UI_display_runes(0x0032, ["here\{dot}lies", "beloved", "fa\{th}er", "and", "ma\{st}er"]);
 		}
 	}
 }
@@ -7308,11 +7308,11 @@ void Func0334 shape#(0x334) () {
 	if (var0001 > 0x0041) {
 		var000A = "This is not a valid plaque ";
 	} else if (var0001 == 0x0000) {
-		var000A = ["important", "event", "to|be", "recorded", "here"];
+		var000A = ["important", "event", "to\{dot}be", "recorded", "here"];
 	} else if (var0001 == 0x0001) {
-		var000A = ["tomb|of", "kronos", "forgotten", "but|not", "forgiven"];
+		var000A = ["tomb\{dot}of", "kronos", "forgotten", "but\{dot}not", "forgiven"];
 	} else if (var0001 == 0x0002) {
-		var000A = ["royal", "(+tre"];
+		var000A = ["royal", "\{th}\{ea}tre"];
 	} else if (var0001 == 0x0003) {
 		var000A = ["FELLOWSHIP", "HALL"];
 	} else if (var0001 == 0x0004) {
@@ -7324,14 +7324,14 @@ void Func0334 shape#(0x334) () {
 	} else if (var0001 == 0x0007) {
 		var000A = ["hammer", "here", "to", "enter"];
 	} else if (var0001 == 0x0008) {
-		var000A = ["pick|item", "carefully", "to|k)p", "goi*"];
+		var000A = ["pick\{dot}item", "carefully", "to\{dot}k\{ee}p", "goi\{ng}"];
 		Func08FF(["By Jove, I think thou art on the right track!", "The sign appears to have changed!", "Look at it now!"]);
 	} else if (var0001 == 0x0009) {
-		var000A = ["a|golden", "ring|of", "tru(", "faces|()"];
+		var000A = ["a\{dot}golden", "ring\{dot}of", "tru\{th}", "faces\{dot}\{th}\{ee}"];
 	} else if (var0001 == 0x000A) {
-		var000A = ["grasp", "not", "at", "(r+ds"];
+		var000A = ["grasp", "not", "at", "\{th}r\{ea}ds"];
 	} else if (var0001 == 0x000B) {
-		var000A = ["(e", "royal|mint", "shall|not", "hold|()", "back"];
+		var000A = ["\{th}e", "royal\{dot}mint", "shall\{dot}not", "hold\{dot}\{th}\{ee}", "back"];
 	} else if (var0001 == 0x000C) {
 		var000A = "GO THIS WAY";
 	} else if (var0001 == 0x000D) {
@@ -7361,17 +7361,17 @@ void Func0334 shape#(0x334) () {
 	} else if (var0001 == 0x0019) {
 		var000A = ["MANITTZI'S", "HARPSICORD", "USED WHILE", "COMPOSING"];
 	} else if (var0001 == 0x001A) {
-		var000A = ["|ANIA", "OF", "SPRING|"];
+		var000A = ["\{dot}ANIA", "OF", "SPRING\{dot}"];
 	} else if (var0001 == 0x001B) {
-		var000A = ["|marney|", "skara|braes", "fine,", "flower"];
+		var000A = ["\{dot}marney\{dot}", "skara\{dot}braes", "fine\{st}", "flower"];
 	} else if (var0001 == 0x001C) {
-		var000A = ["(e", "wayfarers", "inn"];
+		var000A = ["\{th}e", "wayfarers", "inn"];
 	} else if (var0001 == 0x001D) {
-		var000A = ["(e", "blue", "boar"];
+		var000A = ["\{th}e", "blue", "boar"];
 	} else if (var0001 == 0x001E) {
 		var000A = ["royal", "museum"];
 	} else if (var0001 == 0x001F) {
-		var000A = ["(e", "music", "hall"];
+		var000A = ["\{th}e", "music", "hall"];
 	} else if (var0001 == 0x0020) {
 		var000A = ["town", "hall"];
 	} else if (var0001 == 0x0021) {
@@ -7399,7 +7399,7 @@ void Func0334 shape#(0x334) () {
 	} else if (var0001 == 0x002C) {
 		var000A = ["THE", "RUNES", "OF", "THE", "VIRTUES"];
 	} else if (var0001 == 0x002D) {
-		var000A = ["(e", "game", "of", "knights", "bridge"];
+		var000A = ["\{th}e", "game", "of", "knights", "bridge"];
 	} else if (var0001 == 0x002E) {
 		var000A = ["DO NOT", "ENTER"];
 	} else if (var0001 == 0x002F) {
@@ -7436,13 +7436,13 @@ void Func0334 shape#(0x334) () {
 	} else if (var0001 == 0x0031) {
 		var000A = ["SEE IF", "THOU ART", "THE NEXT", "LORD OF", "BRITANNIA"];
 	} else if (var0001 == 0x0032) {
-		var000A = ["in", "lovi*", "memory", "of", "mama"];
+		var000A = ["in", "lovi\{ng}", "memory", "of", "mama"];
 	} else if (var0001 == 0x0033) {
 		var000A = ["BEWARE", "THE", "DRAGON"];
 	} else if (var0001 == 0x0034) {
-		var000A = ["for", "(e", "love", "of", "marney"];
+		var000A = ["for", "\{th}e", "love", "of", "marney"];
 	} else if (var0001 == 0x0035) {
-		var000A = ["|j|r|r|t|", "a|gr+t", "man", "a|gr+t", "writer"];
+		var000A = ["\{dot}j\{dot}r\{dot}r\{dot}t\{dot}", "a\{dot}gr\{ea}t", "man", "a\{dot}gr\{ea}t", "writer"];
 	} else if (var0001 == 0x0036) {
 		var000A = ["THE", "BRITANNIAN", "LENS"];
 	} else if (var0001 == 0x0037) {
@@ -7450,23 +7450,23 @@ void Func0334 shape#(0x334) () {
 	} else if (var0001 == 0x0038) {
 		var000A = ["EX", "POR"];
 	} else if (var0001 == 0x0039) {
-		var000A = ["(e", "te,", "of", "love"];
+		var000A = ["\{th}e", "te\{st}", "of", "love"];
 	} else if (var0001 == 0x003A) {
-		var000A = ["(e", "te,", "of", "courage"];
+		var000A = ["\{th}e", "te\{st}", "of", "courage"];
 	} else if (var0001 == 0x003B) {
-		var000A = ["nor(", "is", "(e", "way"];
+		var000A = ["nor\{th}", "is", "\{th}e", "way"];
 	} else if (var0001 == 0x003C) {
-		var000A = ["tru(", "is", "tru("];
+		var000A = ["tru\{th}", "is", "tru\{th}"];
 	} else if (var0001 == 0x003D) {
-		var000A = ["only", "app+rances", "are", "deceptive"];
+		var000A = ["only", "app\{ea}rances", "are", "deceptive"];
 	} else if (var0001 == 0x003E) {
 		var000A = ["well", "done"];
 	} else if (var0001 == 0x003F) {
-		var000A = ["(e", "keys", "of", "tru("];
+		var000A = ["\{th}e", "keys", "of", "tru\{th}"];
 	} else if (var0001 == 0x0040) {
-		var000A = ["tru,|not", "always|(e", "obvious", "path"];
+		var000A = ["tru\{st}\{dot}not", "always\{dot}\{th}e", "obvious", "path"];
 	} else if (var0001 == 0x0041) {
-		var000A = ["(ou", "do,|not", "wish|to", "see|(is"];
+		var000A = ["\{th}ou", "do\{st}\{dot}not", "wish\{dot}to", "see\{dot}\{th}is"];
 	}
 	UI_display_runes(0x0033, var000A);
 }
