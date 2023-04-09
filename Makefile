@@ -4,10 +4,10 @@ UCXT=D:/msys64/home/Marzo/exult-linux/exult/ucxt.exe
 all: usecode.fov2.ucxt usecode.ss2.ucxt
 
 usecode.fov2 : usecode.fov.uc $(UCC)
-	$(UCC) -o $@ $< |& (grep -v Warning || true)
+	$(UCC) -o $@ $< |& (grep -vE "Warning: (Interpreting integer|You \*really\*)" || true)
 
 usecode.ss2 : usecode.ss.uc $(UCC)
-	$(UCC) -o $@ $< |& (grep -v Warning || true)
+	$(UCC) -o $@ $< |& (grep -vE "Warning: (Interpreting integer|You \*really\*)" || true)
 
 usecode.fov2.ucxt : usecode.fov2 $(UCXT)
 	$(UCXT) -a -fs -fov -i$< > $@
