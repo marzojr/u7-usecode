@@ -6227,10 +6227,10 @@ labelFunc0326_00D5:
 	return;
 }
 
-DID NOT FIND ALL OPCODE PARAMETERS.
+// Note: patched to fix underflows
 // externs
-extern var Func0832 0x832 ();
 extern var Func0834 0x834 (var var0000);
+extern var Func0832 0x832 ();
 extern void Func08C7 0x8C7 (var var0000, var var0001, var var0002);
 
 void Func0329 shape#(0x329) ()
@@ -6250,8 +6250,7 @@ void Func0329 shape#(0x329) ()
 
 	if (!((event == 0x0001) && (!UI_in_usecode(item)))) goto labelFunc0329_010A;
 	UI_close_gumps();
-	Func0834(0x0000/*stack underflow*/);
-	var0000 = Func0832();
+	var0000 = Func0834(Func0832());
 	if (!((UI_game_hour() >= 0x000F) || (UI_game_hour() <= 0x0003))) goto labelFunc0329_0053;
 	enum();
 labelFunc0329_0031:

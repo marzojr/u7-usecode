@@ -6683,8 +6683,9 @@ void Func0326 shape#(0x326) () {
 	say("\"Goodbye.\"*");
 }
 
-extern var Func083A 0x83A ();
+// Note: patched to fix underflows
 extern var Func083C 0x83C (var var0000);
+extern var Func083A 0x83A ();
 extern void Func0933 0x933 (var var0000, var var0001, var var0002);
 extern void Func060B object#(0x60B) ();
 
