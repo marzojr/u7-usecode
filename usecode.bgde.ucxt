@@ -75986,13 +75986,13 @@ void Func0911 0x911 ()
 	UI_add_answer(["ICH - bin der Avatar!", "Ich - BIN - der Avatar!", "Ich bin - DER - Avatar!", "Ich bin der - AVATAR -!"]);
 labelFunc0911_002C:
 	converse (0) attend labelFunc0911_00C5;
-	default(0x0001) attend labelFunc0911_0038;
+	default(0x0001) attend labelFunc0911_0038:
 	message("\"Nein, nein, nein! Das ist ja ganz falsch! Ihr seid der 'AVATAR'! Ihr müßt wie der Avatar fühlen! Ihr müßt Euch wie der Avatar anhören! Ihr müßt der Avatar SEIN! Versucht es nochmal!\"");
 	say();
 labelFunc0911_0038:
 	UI_clear_answers();
 	UI_add_answer(["ICH - bin der Avatar!", "Ich - BIN - der Avatar!", "Ich bin - DER - Avatar!", "Ich bin der - AVATAR -!"]);
-	default(0x0001) attend labelFunc0911_0058;
+	default(0x0001) attend labelFunc0911_0058:
 	message("\"Besser... viel besser... aber ich glaube, Ihr braucht vielleicht eine Stütze.\"");
 	say();
 labelFunc0911_0058:

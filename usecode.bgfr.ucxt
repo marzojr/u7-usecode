@@ -73962,13 +73962,13 @@ void Func08BC 0x8BC ()
 	UI_add_answer(["-Je- suis l'Avatar!", "Je -suis- l'Avatar!", "Je suis -l'- Avatar!", "Je suis l'-Avatar-!"]);
 labelFunc08BC_002C:
 	converse (0) attend labelFunc08BC_00C5;
-	default(0x0001) attend labelFunc08BC_0038;
+	default(0x0001) attend labelFunc08BC_0038:
 	message("\"Non, non, non! C'est faux, archifaux!  Tu es l' 'Avatar'! Il faut que tu te sentes conmme l'Avatar!  Il faut que tu parles comme l'Avatar! Il faut que tu -sois- l'Avatar!  Essoie encor.\"");
 	say();
 labelFunc08BC_0038:
 	UI_clear_answers();
 	UI_add_answer(["-Je- suis l'Avatar!", "Je -suis- l'Avatar!", "Je suis -l'- Avatar!", "Je suis l' -Avatar-!"]);
-	default(0x0001) attend labelFunc08BC_0058;
+	default(0x0001) attend labelFunc08BC_0058:
 	message("\"Mieux... mieux... mais je crois que tu as besoin d'un accessoire.\"");
 	say();
 labelFunc08BC_0058:

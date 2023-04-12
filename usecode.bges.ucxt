@@ -72754,13 +72754,13 @@ void Func08BD 0x8BD ()
 	UI_add_answer(["-Yo- soy el Avatar!", "Yo -soy- el Avatar!", "Yo soy -el- Avatar!", "Yo soy el -Avatar-!"]);
 labelFunc08BD_002C:
 	converse (0) attend labelFunc08BD_00C5;
-	default(0x0001) attend labelFunc08BD_0038;
+	default(0x0001) attend labelFunc08BD_0038:
 	message("\"No, no, no! Eso esta muy mal! Eres el 'Avatar'! Debes sentirte Avatar! Debes sonar a Avatar! Debes -ser- el Avatar! Intentalo de nuevo.\"");
 	say();
 labelFunc08BD_0038:
 	UI_clear_answers();
 	UI_add_answer(["-Yo- soy el Avatar!", "Yo -soy- el Avatar!", "Yo soy -el- Avatar!", "Yo soy el -Avatar-!"]);
-	default(0x0001) attend labelFunc08BD_0058;
+	default(0x0001) attend labelFunc08BD_0058:
 	message("\"Mejor... mejor... pero debes ensayarlo un poco mas.\"");
 	say();
 labelFunc08BD_0058:

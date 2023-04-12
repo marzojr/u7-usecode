@@ -81311,13 +81311,13 @@ void Func08D1 0x8D1 ()
 	UI_add_answer(["-I- am the Avatar!", "I -am- the Avatar!", "I am -the- Avatar!", "I am the -Avatar-!"]);
 labelFunc08D1_002C:
 	converse (0) attend labelFunc08D1_00C5;
-	default(0x0001) attend labelFunc08D1_0038;
+	default(0x0001) attend labelFunc08D1_0038:
 	message("\"No, no, no! That is all wrong! Thou art the 'Avatar'! Thou must feel like the Avatar! Thou must sound like the Avatar! Thou must -be- the Avatar! Try it again.\"");
 	say();
 labelFunc08D1_0038:
 	UI_clear_answers();
 	UI_add_answer(["-I- am the Avatar!", "I -am- the Avatar!", "I am -the- Avatar!", "I am the -Avatar-!"]);
-	default(0x0001) attend labelFunc08D1_0058;
+	default(0x0001) attend labelFunc08D1_0058:
 	message("\"Better... better... but I think perhaps thou dost need a prop.\"");
 	say();
 labelFunc08D1_0058:
