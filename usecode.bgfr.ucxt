@@ -198,7 +198,7 @@ labelFunc009B_027B:
 labelFunc009B_0288:
 	goto labelFunc009B_009F;
 labelFunc009B_028B:
-	break;
+	endconv;
 labelFunc009B_028C:
 	if (!(event == 0x0000)) goto labelFunc009B_0295;
 	abort;
@@ -751,7 +751,7 @@ labelFunc0124_01B8:
 	var000C = [];
 	var000D = UI_get_object_position(0xFE9C);
 	var000E = 0x0001;
-	//enum();
+	enum();
 labelFunc0124_01E8:
 	for (var0011 in var0009 with var000F to var0010) attend labelFunc0124_023D;
 	var0012 = UI_get_object_position(var0011);
@@ -764,7 +764,7 @@ labelFunc0124_023D:
 	UI_move_object(0xFE9B, var0006);
 	var000D = UI_get_object_position(0xFE9C);
 	var000E = 0x0001;
-	//enum();
+	enum();
 labelFunc0124_0258:
 	for (var0011 in var0009 with var0013 to var0014) attend labelFunc0124_02A7;
 	UI_move_object(var0011, [(var000D[0x0001] - var000A[var000E]), (var000D[0x0002] - var000B[var000E]), var000D[0x0003]]);
@@ -899,7 +899,7 @@ void Func0133 shape#(0x133) ()
 	var0003 = 0x0000;
 	var0004 = 0x0000;
 	var0005 = [0x0002, 0x0007, 0x0008];
-	//enum();
+	enum();
 labelFunc0133_004F:
 	for (var0008 in var0001 with var0006 to var0007) attend labelFunc0133_0153;
 	var0009 = UI_get_object_position(var0008);
@@ -920,13 +920,13 @@ labelFunc0133_0150:
 labelFunc0133_0153:
 	if (!(var0002 && (var0003 && var0004))) goto labelFunc0133_02B7;
 	var000B = UI_find_nearby(item, 0x02F2, 0x0005, 0x0000);
-	//enum();
+	enum();
 labelFunc0133_0173:
 	for (var000E in var000B with var000C to var000D) attend labelFunc0133_02B7;
 	var000F = UI_get_object_position(var000E);
 	if (!((var000F[0x0001] == (var0000[0x0001] + 0x0002)) && ((var000F[0x0002] == (var0000[0x0002] - 0x0002)) && (var000F[0x0003] == var0000[0x0003])))) goto labelFunc0133_02B4;
 	var0010 = UI_find_nearby(item, 0x00B1, 0x0005, 0x0000);
-	//enum();
+	enum();
 labelFunc0133_01CE:
 	for (var0013 in var0010 with var0011 to var0012) attend labelFunc0133_02B4;
 	var0014 = UI_get_object_position(var0013);
@@ -1819,7 +1819,7 @@ labelFunc018A_0056:
 labelFunc018A_0061:
 	goto labelFunc018A_0034;
 labelFunc018A_0064:
-	break;
+	endconv;
 	message("\"Adieu.\"*");
 	say();
 labelFunc018A_0069:
@@ -1925,7 +1925,7 @@ labelFunc01AF_003F:
 	UI_halt_scheduled(0xFE9C);
 	var0003 = UI_execute_usecode_array(0xFE9C, [(byte)0x59, var0004, (byte)0x61, (byte)0x6C, (byte)0x27, 0x0003, (byte)0x61, (byte)0x61, (byte)0x6C, (byte)0x27, 0x0003, (byte)0x61]);
 	var0005 = UI_find_nearby(item, 0x02E3, 0x0004, 0x00B0);
-	//enum();
+	enum();
 labelFunc01AF_00E1:
 	for (var0008 in var0005 with var0006 to var0007) attend labelFunc01AF_011E;
 	var0003 = UI_execute_usecode_array(var0008, [(byte)0x23, (byte)0x58, 0x002F, (byte)0x4D, (byte)0x4D, (byte)0x4D, (byte)0x27, 0x000E, (byte)0x4F, (byte)0x27, 0x0003, (byte)0x4F, (byte)0x27, 0x0003, (byte)0x4F]);
@@ -2184,7 +2184,7 @@ labelFunc01DF_008D:
 	var0003 = [0x0001, 0x0002, 0x0003, 0x0004];
 	if (!(!(var0002 in var0003))) goto labelFunc01DF_0124;
 	var0004 = UI_find_nearby(0xFE9C, 0x01DF, 0x0050, 0x0004);
-	//enum();
+	enum();
 labelFunc01DF_00D4:
 	for (var0007 in var0004 with var0005 to var0006) attend labelFunc01DF_0103;
 	var0008 = UI_get_npc_prop(item, 0x0005);
@@ -2246,7 +2246,7 @@ labelFunc01DF_01D8:
 labelFunc01DF_01E3:
 	goto labelFunc01DF_008D;
 labelFunc01DF_01E6:
-	break;
+	endconv;
 	message("\"Salutations à toy.\"*");
 	say();
 labelFunc01DF_01EB:
@@ -2314,7 +2314,7 @@ void Func01F4 shape#(0x1F4) ()
 
 	if (!(event == 0x0001)) goto labelFunc01F4_005A;
 	var0000 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc01F4_0010:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc01F4_005A;
 	var0004 = UI_delayed_execute_usecode_array(var0003, [(byte)0x23, (byte)0x52, "@Meuh!@"], UI_die_roll(0x0001, 0x000A));
@@ -2395,7 +2395,7 @@ void Func020E shape#(0x20E) ()
 	var0001 = UI_get_object_position(item);
 	var0001[0x0001] = (var0001[0x0001] + 0x0003);
 	var0001[0x0002] = (var0001[0x0002] + 0x0003);
-	//enum();
+	enum();
 labelFunc020E_0048:
 	for (var0004 in var0000 with var0002 to var0003) attend labelFunc020E_00A3;
 	var0005 = UI_get_object_position(var0004);
@@ -2739,7 +2739,7 @@ labelFunc0269_03B9:
 labelFunc0269_03C4:
 	goto labelFunc0269_0191;
 labelFunc0269_03C7:
-	break;
+	endconv;
 	message("\"Adieu, Avatar. Que la chance soit avec toy!\"*");
 	say();
 	return;
@@ -2801,7 +2801,7 @@ labelFunc0273_00E7:
 	return;
 labelFunc0273_00E8:
 	var0006 = [0x0178, 0x010E, 0x01B0, 0x01B1];
-	//enum();
+	enum();
 labelFunc0273_00FB:
 	for (var0009 in var0006 with var0007 to var0008) attend labelFunc0273_015F;
 	if (!(var0001 == var0009)) goto labelFunc0273_015C;
@@ -4145,7 +4145,7 @@ labelFunc0296_004F:
 	var0003 = false;
 	var0004 = 0x0000;
 	var0005 = UI_find_nearby(0xFE9C, 0x01FD, 0x000F, 0x0000);
-	//enum();
+	enum();
 labelFunc0296_0087:
 	for (var0008 in var0005 with var0006 to var0007) attend labelFunc0296_009F;
 	var0004 = (var0004 + 0x0001);
@@ -4320,7 +4320,7 @@ void Func02B5 shape#(0x2B5) ()
 	if (!(UI_get_item_frame(item) == 0x0001)) goto labelFunc02B5_0043;
 	UI_close_gumps();
 	var0000 = UI_find_nearby_avatar(0x0216);
-	//enum();
+	enum();
 labelFunc02B5_002B:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc02B5_0043;
 	UI_set_schedule_type(var0003, 0x0003);
@@ -4467,7 +4467,7 @@ labelFunc02BE_015B:
 	if (!((var0007 == 0x01B1) || (var0007 == 0x01B0))) goto labelFunc02BE_0185;
 	var000A = [0x0000, 0x0001, 0x0002, 0x0004, 0x0005, 0x0006];
 labelFunc02BE_0185:
-	//enum();
+	enum();
 labelFunc02BE_0186:
 	for (var000D in var000A with var000B to var000C) attend labelFunc02BE_01A6;
 	if (!(var0008 == var000D)) goto labelFunc02BE_01A3;
@@ -4528,7 +4528,7 @@ void Func02C5 shape#(0x2C5) ()
 	if (!(event == 0x0001)) goto labelFunc02C5_004E;
 	var0000 = UI_get_object_position(item);
 	var0001 = UI_find_nearby(item, 0x02DE, 0x0004, 0x0000);
-	//enum();
+	enum();
 labelFunc02C5_0022:
 	for (var0004 in var0001 with var0002 to var0003) attend labelFunc02C5_004E;
 	var0005 = UI_get_object_position(var0004);
@@ -4954,7 +4954,7 @@ labelFunc02D5_00C0:
 	UI_set_schedule_type(0xFF18, 0x0009);
 	var0002 = UI_find_nearby(item, 0x0208, 0x0007, 0x0000);
 	var0003 = UI_find_nearby(var0002, 0x0284, 0x0005, 0x0000);
-	//enum();
+	enum();
 labelFunc02D5_00EF:
 	for (var0006 in var0003 with var0004 to var0005) attend labelFunc02D5_0107;
 	UI_clear_item_flag(var0006, 0x000B);
@@ -5335,7 +5335,7 @@ labelFunc02F2_00D1:
 	if (!(event == 0x0002)) goto labelFunc02F2_012C;
 	gflags[0x01AA] = true;
 	var0005 = [0xFF71, 0xFF70, 0xFF74, 0xFF6F, 0xFF6E, 0xFF6D, 0xFF73];
-	//enum();
+	enum();
 labelFunc02F2_00F9:
 	for (var0008 in var0005 with var0006 to var0007) attend labelFunc02F2_011B;
 	UI_clear_item_flag(var0008, 0x0001);
@@ -5400,7 +5400,7 @@ void Func0301 shape#(0x301) ()
 	if (!((event == 0x0001) || (event == 0x0004))) goto labelFunc0301_0179;
 	UI_close_gumps();
 	var0000 = UI_find_nearby(item, 0x01EE, 0x012C, 0x0000);
-	//enum();
+	enum();
 labelFunc0301_0024:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc0301_0050;
 	UI_set_schedule_type(var0003, 0x0000);
@@ -5614,7 +5614,7 @@ labelFunc0311_0070:
 	var0001[var0003] = (var0001[var0003] + 0x0002);
 	if (!(!UI_is_not_blocked(var0001, var0004, 0x0000))) goto labelFunc0311_00DA;
 	var0005 = [0x0001, 0x0002, 0x0003];
-	//enum();
+	enum();
 labelFunc0311_00A1:
 	for (var0008 in var0005 with var0006 to var0007) attend labelFunc0311_00D2;
 	var0001[0x0003] = (var0001[0x0003] + 0x0001);
@@ -5772,7 +5772,7 @@ labelFunc0314_009B:
 	var0008 = UI_find_nearby(item, 0x0203, 0x000F, 0x0000);
 	var0007 = (var0007 & var0008);
 	var0008 = [];
-	//enum();
+	enum();
 labelFunc0314_00DE:
 	for (var000B in var0007 with var0009 to var000A) attend labelFunc0314_0104;
 	if (!(UI_get_item_quality(var000B) == var0006)) goto labelFunc0314_0101;
@@ -6245,7 +6245,7 @@ labelFunc0326_00C7:
 labelFunc0326_00D2:
 	goto labelFunc0326_0040;
 labelFunc0326_00D5:
-	break;
+	endconv;
 	message("\"Adieu.\"*");
 	say();
 	return;
@@ -6277,7 +6277,7 @@ void Func0329 shape#(0x329) ()
 	Func083D(0x0000/*stack underflow*/);
 	var0000 = Func083B();
 	if (!((UI_game_hour() >= 0x000F) || (UI_game_hour() <= 0x0003))) goto labelFunc0329_0053;
-	//enum();
+	enum();
 labelFunc0329_0031:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc0329_0049;
 	UI_clear_item_flag(var0003, 0x000B);
@@ -6295,7 +6295,7 @@ labelFunc0329_0053:
 	gflags[0x0020] = false;
 	gflags[0x0021] = false;
 	Func0917(0xFE9C, "@Tourne ma jolie!@", 0x0000);
-	//enum();
+	enum();
 labelFunc0329_00B4:
 	for (var0009 in var0005 with var0007 to var0008) attend labelFunc0329_010A;
 	var000A = (UI_die_roll(0x0000, 0x0002) * 0x0008);
@@ -6397,7 +6397,7 @@ labelFunc0334_00A2:
 	var0002 = [0x0284, 0x0285, 0x0286];
 labelFunc0334_00BB:
 	var0003 = false;
-	//enum();
+	enum();
 labelFunc0334_00C0:
 	for (var0006 in var0002 with var0004 to var0005) attend labelFunc0334_014C;
 	if (!UI_find_nearby(var0000, var0006, 0x0005, 0x00B0)) goto labelFunc0334_0149;
@@ -7281,7 +7281,7 @@ labelFunc03B2_0055:
 labelFunc03B2_0060:
 	goto labelFunc03B2_0033;
 labelFunc03B2_0063:
-	break;
+	endconv;
 	message("\"Adieu.\"*");
 	say();
 	return;
@@ -7794,7 +7794,7 @@ labelFunc0401_0671:
 	message("\"J'attendois que tu me le demandes!\"");
 	say();
 	var000E = 0x0000;
-	//enum();
+	enum();
 labelFunc0401_0684:
 	for (var0011 in var0001 with var000F to var0010) attend labelFunc0401_069C;
 	var000E = (var000E + 0x0001);
@@ -7829,7 +7829,7 @@ labelFunc0401_06FB:
 labelFunc0401_0706:
 	goto labelFunc0401_0340;
 labelFunc0401_0709:
-	break;
+	endconv;
 	message("\"Tojors un grand plaisir de parler avec toy, mon amy.\"*");
 	say();
 labelFunc0401_070E:
@@ -8110,7 +8110,7 @@ labelFunc0402_03DD:
 	message("\"'Pas trop tôt!\"");
 	say();
 	var000D = 0x0000;
-	//enum();
+	enum();
 labelFunc0402_03F0:
 	for (var0010 in var0002 with var000E to var000F) attend labelFunc0402_0408;
 	var000D = (var000D + 0x0001);
@@ -8253,7 +8253,7 @@ labelFunc0402_0634:
 labelFunc0402_063F:
 	goto labelFunc0402_01A4;
 labelFunc0402_0642:
-	break;
+	endconv;
 	message("\"Bon, on parlera plus tard.\"*");
 	say();
 	if (!(var0005 && (var0006 && var0007))) goto labelFunc0402_0659;
@@ -8484,7 +8484,7 @@ labelFunc0403_034C:
 	case "joins" attend labelFunc0403_03A4:
 	var0007 = 0x0000;
 	var0001 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc0403_0362:
 	for (var000A in var0001 with var0008 to var0009) attend labelFunc0403_037A;
 	var0007 = (var0007 + 0x0001);
@@ -8574,7 +8574,7 @@ labelFunc0403_049F:
 labelFunc0403_04AA:
 	goto labelFunc0403_00C5;
 labelFunc0403_04AD:
-	break;
+	endconv;
 	message("Shamino s' incline légèrement.*");
 	say();
 labelFunc0403_04B2:
@@ -8714,7 +8714,7 @@ labelFunc0404_01FE:
 	case "aventure" attend labelFunc0404_025A:
 	var000F = 0x0000;
 	var0001 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc0404_0214:
 	for (var0012 in var0001 with var0010 to var0011) attend labelFunc0404_022C;
 	var000F = (var000F + 0x0001);
@@ -8908,7 +8908,7 @@ labelFunc0404_04F5:
 labelFunc0404_0500:
 	goto labelFunc0404_0136;
 labelFunc0404_0503:
-	break;
+	endconv;
 	message("\"Je te parleroi plus tard, alors.\"*");
 	say();
 labelFunc0404_0508:
@@ -9021,7 +9021,7 @@ labelFunc0405_0175:
 	case "joindre" attend labelFunc0405_01D3:
 	var0004 = 0x0000;
 	var0005 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc0405_018B:
 	for (var0008 in var0005 with var0006 to var0007) attend labelFunc0405_01A3;
 	var0004 = (var0004 + 0x0001);
@@ -9176,7 +9176,7 @@ labelFunc0405_0403:
 labelFunc0405_040E:
 	goto labelFunc0405_009D;
 labelFunc0405_0411:
-	break;
+	endconv;
 	message("\"Adieu, ");
 	message(var0000);
 	message(".\"*");
@@ -9440,7 +9440,7 @@ labelFunc0406_03B3:
 labelFunc0406_03BE:
 	goto labelFunc0406_018A;
 labelFunc0406_03C1:
-	break;
+	endconv;
 	message("\"Bonne chance t'es souhaitée.\"*");
 	say();
 labelFunc0406_03C6:
@@ -9552,7 +9552,7 @@ labelFunc0407_010A:
 	case "joins" attend labelFunc0407_0166:
 	var0006 = 0x0000;
 	var0002 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc0407_0120:
 	for (var0009 in var0002 with var0007 to var0008) attend labelFunc0407_0138;
 	var0006 = (var0006 + 0x0001);
@@ -9724,7 +9724,7 @@ labelFunc0407_03FB:
 labelFunc0407_0406:
 	goto labelFunc0407_0082;
 labelFunc0407_0409:
-	break;
+	endconv;
 	message("\"A plus tard.\"*");
 	say();
 labelFunc0407_040E:
@@ -9825,7 +9825,7 @@ labelFunc0408_0121:
 	case "accompagner" attend labelFunc0408_019D:
 	var0005 = 0x0000;
 	var0001 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc0408_0137:
 	for (var0008 in var0001 with var0006 to var0007) attend labelFunc0408_014F;
 	var0005 = (var0005 + 0x0001);
@@ -10022,7 +10022,7 @@ labelFunc0408_0469:
 labelFunc0408_0474:
 	goto labelFunc0408_00A3;
 labelFunc0408_0477:
-	break;
+	endconv;
 	message("\"Adieu, ");
 	message(var0003);
 	message(".\"*");
@@ -10135,7 +10135,7 @@ labelFunc0409_016C:
 	case "joindre" attend labelFunc0409_01D1:
 	var0007 = 0x0000;
 	var0001 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc0409_0182:
 	for (var000A in var0001 with var0008 to var0009) attend labelFunc0409_019A;
 	var0007 = (var0007 + 0x0001);
@@ -10294,7 +10294,7 @@ labelFunc0409_0423:
 labelFunc0409_042E:
 	goto labelFunc0409_00AE;
 labelFunc0409_0431:
-	break;
+	endconv;
 	message("\"Bonne jornée, ");
 	message(var0003);
 	message(".\"*");
@@ -10972,7 +10972,7 @@ labelFunc040A_0A7F:
 labelFunc040A_0A8C:
 	goto labelFunc040A_0216;
 labelFunc040A_0A8F:
-	break;
+	endconv;
 labelFunc040A_0A90:
 	if (!(event == 0x0000)) goto labelFunc040A_0A99;
 	abort;
@@ -11154,7 +11154,7 @@ labelFunc040B_0259:
 labelFunc040B_0264:
 	goto labelFunc040B_00CE;
 labelFunc040B_0267:
-	break;
+	endconv;
 	message("\"Au revoir,\" dit l'homme en reniflant.*");
 	say();
 labelFunc040B_026C:
@@ -11539,7 +11539,7 @@ labelFunc040C_04EB:
 labelFunc040C_04F6:
 	goto labelFunc040C_027D;
 labelFunc040C_04F9:
-	break;
+	endconv;
 	message("Le Maire hoche la teste et continue comme si de rien n'estoit.*");
 	say();
 labelFunc040C_04FE:
@@ -11711,7 +11711,7 @@ labelFunc040D_023B:
 labelFunc040D_0246:
 	goto labelFunc040D_009F;
 labelFunc040D_0249:
-	break;
+	endconv;
 	message("\"Au revoir. Surveille tes arrières.\"*");
 	say();
 	return;
@@ -11856,7 +11856,7 @@ labelFunc040E_01D8:
 labelFunc040E_01E3:
 	goto labelFunc040E_00A5;
 labelFunc040E_01E6:
-	break;
+	endconv;
 	message("\"Salut à vous.\"*");
 	say();
 	return;
@@ -11970,7 +11970,7 @@ labelFunc040F_0191:
 labelFunc040F_019C:
 	goto labelFunc040F_005A;
 labelFunc040F_019F:
-	break;
+	endconv;
 	message("\"Adieu.\"");
 	say();
 	return;
@@ -12159,7 +12159,7 @@ labelFunc0410_028C:
 labelFunc0410_0297:
 	goto labelFunc0410_00BB;
 labelFunc0410_029A:
-	break;
+	endconv;
 	message("\"S'il y a autre chose que je puis faire por toy, ");
 	message(var0000);
 	message(", dis-le moy.\"*");
@@ -12242,7 +12242,7 @@ labelFunc0411_00E1:
 labelFunc0411_00EC:
 	goto labelFunc0411_005E;
 labelFunc0411_00EF:
-	break;
+	endconv;
 	message("\"Adieu.\"*");
 	say();
 labelFunc0411_00F4:
@@ -12406,7 +12406,7 @@ labelFunc0412_01CA:
 labelFunc0412_01D5:
 	goto labelFunc0412_00C0;
 labelFunc0412_01D8:
-	break;
+	endconv;
 	message("\"Hum.\"");
 	say();
 	if (!(var0003 == 0x0007)) goto labelFunc0412_01EB;
@@ -12542,7 +12542,7 @@ labelFunc0413_0142:
 	if (!Func08EE()) goto labelFunc0413_01EB;
 	var0006 = UI_get_party_list();
 	var0007 = 0x0000;
-	//enum();
+	enum();
 labelFunc0413_0162:
 	for (var000A in var0006 with var0008 to var0009) attend labelFunc0413_017A;
 	var0007 = (var0007 + 0x0001);
@@ -12595,7 +12595,7 @@ labelFunc0413_022D:
 labelFunc0413_0238:
 	goto labelFunc0413_0080;
 labelFunc0413_023B:
-	break;
+	endconv;
 	if (!(!var0004)) goto labelFunc0413_024A;
 	message("Apollonia t'envoie un baiser. \"Ne manque point de revenir!\"*");
 	say();
@@ -12677,7 +12677,7 @@ labelFunc0414_00E0:
 labelFunc0414_00EB:
 	goto labelFunc0414_0050;
 labelFunc0414_00EE:
-	break;
+	endconv;
 	message("\"Adieu,\" le combattant s'incline.*");
 	say();
 labelFunc0414_00F3:
@@ -12901,7 +12901,7 @@ labelFunc0415_039D:
 labelFunc0415_03A8:
 	goto labelFunc0415_007C;
 labelFunc0415_03AB:
-	break;
+	endconv;
 	message("\"T' souhaite bon vent,\" commence le marin, mais un spasme de toux l'interrompt.*");
 	say();
 labelFunc0415_03B0:
@@ -12991,7 +12991,7 @@ labelFunc0416_0104:
 labelFunc0416_010F:
 	goto labelFunc0416_006A;
 labelFunc0416_0112:
-	break;
+	endconv;
 	message("\"Adieu!\"*");
 	say();
 labelFunc0416_0117:
@@ -13425,7 +13425,7 @@ labelFunc0417_0663:
 labelFunc0417_066E:
 	goto labelFunc0417_00DE;
 labelFunc0417_0671:
-	break;
+	endconv;
 	message("\"Au revoir, ");
 	message(var0000);
 	message(". Reviens vite.\"*");
@@ -13551,7 +13551,7 @@ labelFunc0418_0157:
 labelFunc0418_0162:
 	goto labelFunc0418_0047;
 labelFunc0418_0165:
-	break;
+	endconv;
 	if (!(!gflags[0x0003])) goto labelFunc0418_0174;
 	message("\"Où on va?\"*");
 	say();
@@ -13709,7 +13709,7 @@ labelFunc0419_024D:
 labelFunc0419_0258:
 	goto labelFunc0419_0048;
 labelFunc0419_025B:
-	break;
+	endconv;
 	if (!gflags[0x0073]) goto labelFunc0419_0269;
 	message("\"Ciao, mon sire! N'oub... Je veulx dire, ne perds point les règles de ce Jeu!\"*");
 	say();
@@ -14183,7 +14183,7 @@ labelFunc041A_0682:
 labelFunc041A_068D:
 	goto labelFunc041A_0271;
 labelFunc041A_0690:
-	break;
+	endconv;
 	message("\"Peut-estre nous reverrons-nous, Avatar.\"*");
 	say();
 labelFunc041A_0695:
@@ -14373,7 +14373,7 @@ labelFunc041B_023B:
 labelFunc041B_0246:
 	goto labelFunc041B_006D;
 labelFunc041B_0249:
-	break;
+	endconv;
 	message("\"Tu pars? Désolé, je ne donne pas d'autographes.\"*");
 	say();
 labelFunc041B_024E:
@@ -14499,7 +14499,7 @@ labelFunc041C_0146:
 labelFunc041C_0151:
 	goto labelFunc041C_0077;
 labelFunc041C_0154:
-	break;
+	endconv;
 	message("\"Au revoir, mon chou. Viens au spectacle por la première!\"*");
 	say();
 labelFunc041C_0159:
@@ -14616,7 +14616,7 @@ labelFunc041D_0141:
 labelFunc041D_014C:
 	goto labelFunc041D_0038;
 labelFunc041D_014F:
-	break;
+	endconv;
 	message("\"Adieu. Viens voir la pièce quand elle sera montée!\"*");
 	say();
 labelFunc041D_0154:
@@ -14748,7 +14748,7 @@ labelFunc041E_017E:
 labelFunc041E_0189:
 	goto labelFunc041E_0059;
 labelFunc041E_018C:
-	break;
+	endconv;
 	message("\"Adieu!\"*");
 	say();
 labelFunc041E_0191:
@@ -14858,7 +14858,7 @@ labelFunc041F_012C:
 labelFunc041F_0137:
 	goto labelFunc041F_0041;
 labelFunc041F_013A:
-	break;
+	endconv;
 	message("\"Auvoi'! Auvoi'!\"*");
 	say();
 labelFunc041F_013F:
@@ -14954,7 +14954,7 @@ labelFunc0420_00F5:
 labelFunc0420_0100:
 	goto labelFunc0420_0038;
 labelFunc0420_0103:
-	break;
+	endconv;
 	message("\"'alut!\"*");
 	say();
 labelFunc0420_0108:
@@ -15075,7 +15075,7 @@ labelFunc0421_015B:
 labelFunc0421_0166:
 	goto labelFunc0421_0041;
 labelFunc0421_0169:
-	break;
+	endconv;
 	message("\"Auvoi'! Auvoi'!\"*");
 	say();
 labelFunc0421_016E:
@@ -15257,7 +15257,7 @@ labelFunc0422_025E:
 labelFunc0422_0269:
 	goto labelFunc0422_008D;
 labelFunc0422_026C:
-	break;
+	endconv;
 	message("\"Bonne jornée! Reviens nous voir bientost!\"*");
 	say();
 labelFunc0422_0271:
@@ -15389,7 +15389,7 @@ labelFunc0423_01CC:
 labelFunc0423_01D7:
 	goto labelFunc0423_004D;
 labelFunc0423_01DA:
-	break;
+	endconv;
 	message("\"Adieu, Avatar.\"*");
 	say();
 labelFunc0423_01DF:
@@ -15483,7 +15483,7 @@ labelFunc0424_0135:
 labelFunc0424_0140:
 	goto labelFunc0424_004D;
 labelFunc0424_0143:
-	break;
+	endconv;
 	message("\"Bonne jornée à toy.\"*");
 	say();
 labelFunc0424_0148:
@@ -15677,7 +15677,7 @@ labelFunc0425_02A7:
 labelFunc0425_02B2:
 	goto labelFunc0425_0146;
 labelFunc0425_02B5:
-	break;
+	endconv;
 	message("\"A plus tard!\"*");
 	say();
 labelFunc0425_02BA:
@@ -15825,7 +15825,7 @@ labelFunc0426_020A:
 labelFunc0426_0215:
 	goto labelFunc0426_0060;
 labelFunc0426_0218:
-	break;
+	endconv;
 	message("\"Bonne jornée, ");
 	message(var0000);
 	message(".\"*");
@@ -15928,7 +15928,7 @@ labelFunc0427_00EE:
 labelFunc0427_00F9:
 	goto labelFunc0427_0065;
 labelFunc0427_00FC:
-	break;
+	endconv;
 	message("\"Adieu! Regarde les affiches por les dates de nos représentations!\"*");
 	say();
 labelFunc0427_0101:
@@ -16039,7 +16039,7 @@ labelFunc0428_016F:
 labelFunc0428_017A:
 	goto labelFunc0428_0065;
 labelFunc0428_017D:
-	break;
+	endconv;
 	message("Judith retourne à son instrument en souriant.*");
 	say();
 labelFunc0428_0182:
@@ -16210,7 +16210,7 @@ labelFunc0429_022A:
 labelFunc0429_0235:
 	goto labelFunc0429_00B9;
 labelFunc0429_0238:
-	break;
+	endconv;
 	message("\"Bonne jornée, Avatar.\"*");
 	say();
 labelFunc0429_023D:
@@ -16403,7 +16403,7 @@ labelFunc042A_02E9:
 labelFunc042A_02F4:
 	goto labelFunc042A_005F;
 labelFunc042A_02F7:
-	break;
+	endconv;
 	message("\"Bonne journée, ");
 	message(var0000);
 	message(".\"*");
@@ -16609,7 +16609,7 @@ labelFunc042B_02DD:
 labelFunc042B_02E8:
 	goto labelFunc042B_010D;
 labelFunc042B_02EB:
-	break;
+	endconv;
 	message("Patterson acquiesce.*");
 	say();
 labelFunc042B_02F0:
@@ -16789,7 +16789,7 @@ labelFunc042C_0274:
 labelFunc042C_027F:
 	goto labelFunc042C_008B;
 labelFunc042C_0282:
-	break;
+	endconv;
 	message("\"Trover par hasard oreille miséricordieuse, Une voix qui est une doulce mye,~\"Je vous dis adieu, mais revenez, si vous voulez voir guignol ou tester de nouveau vostre force.\"");
 	say();
 labelFunc042C_0287:
@@ -17030,7 +17030,7 @@ labelFunc042D_02D3:
 labelFunc042D_02DE:
 	goto labelFunc042D_00A5;
 labelFunc042D_02E1:
-	break;
+	endconv;
 	message("\"Il est temps que tu te mettes en route.\"*");
 	say();
 labelFunc042D_02E6:
@@ -17185,7 +17185,7 @@ labelFunc042E_021A:
 	if (!Func08EE()) goto labelFunc042E_02C7;
 	var0003 = UI_get_party_list();
 	var0004 = 0x0000;
-	//enum();
+	enum();
 labelFunc042E_0244:
 	for (var0007 in var0003 with var0005 to var0006) attend labelFunc042E_025C;
 	var0004 = (var0004 + 0x0001);
@@ -17233,7 +17233,7 @@ labelFunc042E_02F2:
 labelFunc042E_02FD:
 	goto labelFunc042E_0066;
 labelFunc042E_0300:
-	break;
+	endconv;
 	message("\"Oh, j'parie que tu reviendras me demander quelque choz! Je le sais!\"*");
 	say();
 labelFunc042E_0305:
@@ -17362,7 +17362,7 @@ labelFunc042F_01BD:
 labelFunc042F_01C8:
 	goto labelFunc042F_005A;
 labelFunc042F_01CB:
-	break;
+	endconv;
 	message("\"Adieu!\"*");
 	say();
 labelFunc042F_01D0:
@@ -17512,7 +17512,7 @@ labelFunc0430_020C:
 labelFunc0430_0217:
 	goto labelFunc0430_005C;
 labelFunc0430_021A:
-	break;
+	endconv;
 	message("\"Bonne journée à toy, ");
 	message(var0000);
 	message(".\"*");
@@ -17591,7 +17591,7 @@ labelFunc0431_00F3:
 labelFunc0431_00FE:
 	goto labelFunc0431_004D;
 labelFunc0431_0101:
-	break;
+	endconv;
 	message("Denby joint ses paumes et s' incline.*");
 	say();
 labelFunc0431_0106:
@@ -17704,7 +17704,7 @@ labelFunc0432_0160:
 labelFunc0432_016B:
 	goto labelFunc0432_0059;
 labelFunc0432_016E:
-	break;
+	endconv;
 	message("\"Adieu, ");
 	message(var0000);
 	message(".\"*");
@@ -17847,7 +17847,7 @@ labelFunc0433_0188:
 labelFunc0433_0193:
 	goto labelFunc0433_0059;
 labelFunc0433_0196:
-	break;
+	endconv;
 	message("\"Le bon jor à toy, ");
 	message(var0000);
 	message(".\"*");
@@ -18124,7 +18124,7 @@ labelFunc0434_0363:
 labelFunc0434_036E:
 	goto labelFunc0434_00B7;
 labelFunc0434_0371:
-	break;
+	endconv;
 	message("\"Bonjour, ");
 	message(var0000);
 	message(", et bon appétit!\"*");
@@ -18302,7 +18302,7 @@ labelFunc0435_01E4:
 labelFunc0435_01EF:
 	goto labelFunc0435_00A0;
 labelFunc0435_01F2:
-	break;
+	endconv;
 	message("\"Bonne jornée, ");
 	message(var0000);
 	message(".\"*");
@@ -18507,7 +18507,7 @@ labelFunc0436_0276:
 labelFunc0436_0281:
 	goto labelFunc0436_0145;
 labelFunc0436_0284:
-	break;
+	endconv;
 	message("\"Au revoir!\"*");
 	say();
 labelFunc0436_0289:
@@ -18672,7 +18672,7 @@ labelFunc0437_01B2:
 labelFunc0437_01BD:
 	goto labelFunc0437_0093;
 labelFunc0437_01C0:
-	break;
+	endconv;
 	message("\"Salut et adieu, ");
 	message(var0004);
 	message(".\"*");
@@ -18824,7 +18824,7 @@ labelFunc0438_01BF:
 labelFunc0438_01CA:
 	goto labelFunc0438_005F;
 labelFunc0438_01CD:
-	break;
+	endconv;
 	message("\"Salut à toy, ");
 	message(var0000);
 	message(".\"*");
@@ -19007,7 +19007,7 @@ labelFunc0439_024D:
 labelFunc0439_0258:
 	goto labelFunc0439_0071;
 labelFunc0439_025B:
-	break;
+	endconv;
 	message("\"Bon voyage.\" *");
 	say();
 labelFunc0439_0260:
@@ -19206,7 +19206,7 @@ labelFunc043A_023F:
 labelFunc043A_024A:
 	goto labelFunc043A_0099;
 labelFunc043A_024D:
-	break;
+	endconv;
 	message("\"Bonne jornée, ");
 	message(var0000);
 	message(".\" *");
@@ -19440,7 +19440,7 @@ labelFunc043B_02B1:
 labelFunc043B_02BC:
 	goto labelFunc043B_00A0;
 labelFunc043B_02BF:
-	break;
+	endconv;
 	message("\"Je suis sûr que tu es en route.\" dit Sean en souriant.*");
 	say();
 labelFunc043B_02C4:
@@ -19595,13 +19595,13 @@ labelFunc043C_01A7:
 	gflags[0x00CE] = true;
 	var0003 = UI_find_nearby_avatar(0x0014);
 	var0004 = UI_find_nearby_avatar(0x0015);
-	//enum();
+	enum();
 labelFunc043C_01DC:
 	for (var0007 in var0003 with var0005 to var0006) attend labelFunc043C_01F4;
 	UI_set_item_flag(var0007, 0x000B);
 	goto labelFunc043C_01DC;
 labelFunc043C_01F4:
-	//enum();
+	enum();
 labelFunc043C_01F5:
 	for (var0007 in var0004 with var0008 to var0009) attend labelFunc043C_020D;
 	UI_set_item_flag(var0007, 0x000B);
@@ -19629,7 +19629,7 @@ labelFunc043C_023A:
 labelFunc043C_0245:
 	goto labelFunc043C_0058;
 labelFunc043C_0248:
-	break;
+	endconv;
 	message("\"Bonne jornée, ");
 	message(var0000);
 	message(".\"*");
@@ -19831,7 +19831,7 @@ labelFunc043D_02D6:
 labelFunc043D_02E1:
 	goto labelFunc043D_0058;
 labelFunc043D_02E4:
-	break;
+	endconv;
 	message("\"Je te remercie de ta décence et considération.\"");
 	say();
 labelFunc043D_02E9:
@@ -20095,7 +20095,7 @@ labelFunc043E_0394:
 labelFunc043E_039F:
 	goto labelFunc043E_0044;
 labelFunc043E_03A2:
-	break;
+	endconv;
 	message("\"J' espère qu'ch't'ay amusé.\"*");
 	say();
 labelFunc043E_03A7:
@@ -20246,7 +20246,7 @@ labelFunc043F_0187:
 labelFunc043F_0192:
 	goto labelFunc043F_0092;
 labelFunc043F_0195:
-	break;
+	endconv;
 	message("\"Je te verroi plus tard! Peut-estre mesme à la réunion de ce soir!\"*");
 	say();
 labelFunc043F_019A:
@@ -20355,7 +20355,7 @@ labelFunc0440_0114:
 labelFunc0440_011F:
 	goto labelFunc0440_0051;
 labelFunc0440_0122:
-	break;
+	endconv;
 	message("\"Bon courage.  Aye confiance.  Sois fort.  Sois sage.\"*");
 	say();
 labelFunc0440_0127:
@@ -20440,7 +20440,7 @@ labelFunc0441_00FB:
 labelFunc0441_0106:
 	goto labelFunc0441_0041;
 labelFunc0441_0109:
-	break;
+	endconv;
 	message("\"Te saluer.\"*");
 	say();
 labelFunc0441_010E:
@@ -20581,7 +20581,7 @@ labelFunc0442_01CA:
 labelFunc0442_01D5:
 	goto labelFunc0442_0050;
 labelFunc0442_01D8:
-	break;
+	endconv;
 	message("\"Adieu, ");
 	message(var0001);
 	message("!\"*");
@@ -20697,7 +20697,7 @@ labelFunc0443_0134:
 labelFunc0443_013F:
 	goto labelFunc0443_0047;
 labelFunc0443_0142:
-	break;
+	endconv;
 	message("\"Adieu, mon petit!\"*");
 	say();
 labelFunc0443_0147:
@@ -20780,7 +20780,7 @@ labelFunc0444_00E6:
 	say();
 	var0002 = UI_get_party_list();
 	var0005 = 0x0000;
-	//enum();
+	enum();
 labelFunc0444_0102:
 	for (var0008 in var0002 with var0006 to var0007) attend labelFunc0444_011A;
 	var0005 = (var0005 + 0x0001);
@@ -20826,7 +20826,7 @@ labelFunc0444_0193:
 labelFunc0444_019E:
 	goto labelFunc0444_0059;
 labelFunc0444_01A1:
-	break;
+	endconv;
 	message("\"Bonne route, ");
 	message(var0000);
 	message(".\"*");
@@ -21026,7 +21026,7 @@ labelFunc0445_0321:
 labelFunc0445_032C:
 	goto labelFunc0445_0055;
 labelFunc0445_032F:
-	break;
+	endconv;
 	message("\"Merci d'estre venu me voir.\" *");
 	say();
 	return;
@@ -21214,7 +21214,7 @@ labelFunc0446_0283:
 labelFunc0446_028E:
 	goto labelFunc0446_005C;
 labelFunc0446_0291:
-	break;
+	endconv;
 	message("\"Nous te reverrons bientost, j'espère, Avatar.\"*");
 	say();
 labelFunc0446_0296:
@@ -21320,7 +21320,7 @@ labelFunc0447_0178:
 labelFunc0447_0183:
 	goto labelFunc0447_003C;
 labelFunc0447_0186:
-	break;
+	endconv;
 	message("\"Dire adieu.\"*");
 	say();
 labelFunc0447_018B:
@@ -21452,7 +21452,7 @@ labelFunc0448_0193:
 labelFunc0448_019E:
 	goto labelFunc0448_00B1;
 labelFunc0448_01A1:
-	break;
+	endconv;
 	message("\"Adieu, ");
 	message(var0002);
 	message(".\"*");
@@ -21575,7 +21575,7 @@ labelFunc0449_015E:
 	if (!var0001) goto labelFunc0449_01C4;
 	var0002 = UI_get_party_list();
 	var0003 = 0x0000;
-	//enum();
+	enum();
 labelFunc0449_0184:
 	for (var0006 in var0002 with var0004 to var0005) attend labelFunc0449_019C;
 	var0003 = (var0003 + 0x0001);
@@ -21602,7 +21602,7 @@ labelFunc0449_01CF:
 labelFunc0449_01DA:
 	goto labelFunc0449_005F;
 labelFunc0449_01DD:
-	break;
+	endconv;
 	message("Charles te fait un signe de la teste et retourne à ses occupations.*");
 	say();
 labelFunc0449_01E2:
@@ -21744,7 +21744,7 @@ labelFunc044A_01A8:
 labelFunc044A_01B3:
 	goto labelFunc044A_005A;
 labelFunc044A_01B6:
-	break;
+	endconv;
 	if (!(!gflags[0x0003])) goto labelFunc044A_01C5;
 	message("\"Tu pars déjà? Juste ciel! J'espère que je me souviendrois de toy si tu reviens.\"*");
 	say();
@@ -21980,7 +21980,7 @@ labelFunc044B_030F:
 labelFunc044B_032F:
 	goto labelFunc044B_00D1;
 labelFunc044B_0332:
-	break;
+	endconv;
 	if (!(!var0004)) goto labelFunc044B_0354;
 	if (!var0002) goto labelFunc044B_0347;
 	message("\"Adieu.\" Elle t' embrasse encor puis se retourne por ne pas te voir partir.*");
@@ -22091,7 +22091,7 @@ labelFunc044C_013F:
 labelFunc044C_014A:
 	goto labelFunc044C_006E;
 labelFunc044C_014D:
-	break;
+	endconv;
 	message("Rayburt s'incline.*");
 	say();
 	gflags[0x00EE] = true;
@@ -22260,7 +22260,7 @@ labelFunc044D_0262:
 labelFunc044D_026D:
 	goto labelFunc044D_0063;
 labelFunc044D_0270:
-	break;
+	endconv;
 	message("\"Reviens nous voir, Avatar!\"*");
 	say();
 labelFunc044D_0275:
@@ -22335,7 +22335,7 @@ labelFunc044E_00BD:
 	if (!Func08EE()) goto labelFunc044E_0160;
 	var0001 = UI_get_party_list();
 	var0002 = 0x0000;
-	//enum();
+	enum();
 labelFunc044E_00DD:
 	for (var0005 in var0001 with var0003 to var0004) attend labelFunc044E_00F5;
 	var0002 = (var0002 + 0x0001);
@@ -22387,7 +22387,7 @@ labelFunc044E_01AB:
 labelFunc044E_01B6:
 	goto labelFunc044E_0059;
 labelFunc044E_01B9:
-	break;
+	endconv;
 	message("\"A bientôt!\"*");
 	say();
 labelFunc044E_01BE:
@@ -22477,7 +22477,7 @@ labelFunc044F_011B:
 labelFunc044F_0126:
 	goto labelFunc044F_0059;
 labelFunc044F_0129:
-	break;
+	endconv;
 	message("\"Reviens vite!\"*");
 	say();
 labelFunc044F_012E:
@@ -22592,7 +22592,7 @@ labelFunc0450_016F:
 labelFunc0450_017A:
 	goto labelFunc0450_005C;
 labelFunc0450_017D:
-	break;
+	endconv;
 	message("\"Sois prudent!\"*");
 	say();
 labelFunc0450_0182:
@@ -22917,7 +22917,7 @@ labelFunc0451_047B:
 labelFunc0451_0486:
 	goto labelFunc0451_00CA;
 labelFunc0451_0489:
-	break;
+	endconv;
 	message("\"J'ay l' impression que nous allons nous revoir.\"*");
 	say();
 labelFunc0451_048E:
@@ -23069,7 +23069,7 @@ labelFunc0452_021D:
 labelFunc0452_0228:
 	goto labelFunc0452_00B4;
 labelFunc0452_022B:
-	break;
+	endconv;
 	message("\"Continue ton chemin.\"*");
 	say();
 labelFunc0452_0230:
@@ -23201,7 +23201,7 @@ labelFunc0453_019A:
 labelFunc0453_01A5:
 	goto labelFunc0453_007B;
 labelFunc0453_01A8:
-	break;
+	endconv;
 	message("\"Adieu. Va en paix.\"*");
 	say();
 	return;
@@ -23290,7 +23290,7 @@ labelFunc0454_011D:
 labelFunc0454_0128:
 	goto labelFunc0454_0045;
 labelFunc0454_012B:
-	break;
+	endconv;
 	message("Le garçon salue stoïquement de la teste et s'en va.*");
 	say();
 	return;
@@ -23426,7 +23426,7 @@ labelFunc0455_01C6:
 labelFunc0455_01D1:
 	goto labelFunc0455_0045;
 labelFunc0455_01D4:
-	break;
+	endconv;
 	message("\"Bon voyage, l'amy.\"*");
 	say();
 labelFunc0455_01D9:
@@ -23547,7 +23547,7 @@ labelFunc0456_0187:
 labelFunc0456_0192:
 	goto labelFunc0456_0044;
 labelFunc0456_0195:
-	break;
+	endconv;
 	message("\"Adieu, ");
 	message(var0000);
 	message(". J'espère t'avoir aisdé.\"*");
@@ -23751,7 +23751,7 @@ labelFunc0457_02BE:
 labelFunc0457_02C9:
 	goto labelFunc0457_0075;
 labelFunc0457_02CC:
-	break;
+	endconv;
 	message("\"Adieu, ");
 	message(var0000);
 	message(".\"*");
@@ -23912,7 +23912,7 @@ labelFunc0458_01E5:
 labelFunc0458_01F0:
 	goto labelFunc0458_0052;
 labelFunc0458_01F3:
-	break;
+	endconv;
 	message("\"Bonne jornée à toy, ");
 	message(var0000);
 	message(". Reviens nous voir.\"*");
@@ -24061,7 +24061,7 @@ labelFunc0459_01FC:
 labelFunc0459_0207:
 	goto labelFunc0459_0064;
 labelFunc0459_020A:
-	break;
+	endconv;
 	if (!gflags[0x00F7]) goto labelFunc0459_0218;
 	message("\"Je suis un ours, parfois et je me conduis comme un imbécile. Mais je sais apprécier les rares amis que j'ay et tu en fais partie.  Sois prudent, Avatar.\"*");
 	say();
@@ -24452,7 +24452,7 @@ labelFunc045A_0577:
 labelFunc045A_0582:
 	goto labelFunc045A_00E4;
 labelFunc045A_0585:
-	break;
+	endconv;
 	if (!(!gflags[0x00F7])) goto labelFunc045A_0594;
 	message("\"En as-tu assez de bénéficier de ma présence? Très bien. J'aurois l'occasion de te revoir, j'espère!\"*");
 	say();
@@ -24658,7 +24658,7 @@ labelFunc045B_02A0:
 labelFunc045B_02AB:
 	goto labelFunc045B_00A6;
 labelFunc045B_02AE:
-	break;
+	endconv;
 	message("\"Mon plaisir, amy Avatar. Mon plaisir.\"*");
 	say();
 labelFunc045B_02B3:
@@ -24768,7 +24768,7 @@ labelFunc045C_012D:
 	if (!Func08EE()) goto labelFunc045C_01E0;
 	var0004 = UI_get_party_list();
 	var0005 = 0x0000;
-	//enum();
+	enum();
 labelFunc045C_0157:
 	for (var0008 in var0004 with var0006 to var0007) attend labelFunc045C_016F;
 	var0005 = (var0005 + 0x0001);
@@ -24871,7 +24871,7 @@ labelFunc045C_02E4:
 labelFunc045C_02EF:
 	goto labelFunc045C_0080;
 labelFunc045C_02F2:
-	break;
+	endconv;
 	message("\"J'te reverroi plus tard... Du moins si tu t'présentes devant mon oeil valide.\"*");
 	say();
 labelFunc045C_02F7:
@@ -25008,7 +25008,7 @@ labelFunc045D_019D:
 labelFunc045D_01A8:
 	goto labelFunc045D_0091;
 labelFunc045D_01AB:
-	break;
+	endconv;
 	message("Aussitost que tu le quittes, William, surmené, cache son visage dans ses mains.*");
 	say();
 labelFunc045D_01B0:
@@ -25168,7 +25168,7 @@ labelFunc045E_0250:
 labelFunc045E_025B:
 	goto labelFunc045E_0070;
 labelFunc045E_025E:
-	break;
+	endconv;
 	message("\"Adieu. Que tous tes voyages te soient profitables.\"*");
 	say();
 labelFunc045E_0263:
@@ -25327,7 +25327,7 @@ labelFunc045F_0248:
 labelFunc045F_0253:
 	goto labelFunc045F_0060;
 labelFunc045F_0256:
-	break;
+	endconv;
 	message("\"Ce fut plaisir de parler avec toy.\"*");
 	say();
 labelFunc045F_025B:
@@ -25448,7 +25448,7 @@ labelFunc0460_01A6:
 labelFunc0460_01B1:
 	goto labelFunc0460_0062;
 labelFunc0460_01B4:
-	break;
+	endconv;
 	message("\"Je te souhaite bonne chance dans ta queste.\"*");
 	say();
 	return;
@@ -25543,7 +25543,7 @@ labelFunc0461_012B:
 labelFunc0461_0136:
 	goto labelFunc0461_007C;
 labelFunc0461_0139:
-	break;
+	endconv;
 	message("\"Ne circule pas icy, ");
 	message(var0002);
 	message(". Tu devrois partir sur le champ.\"*");
@@ -25705,7 +25705,7 @@ labelFunc0462_0230:
 labelFunc0462_023B:
 	goto labelFunc0462_009F;
 labelFunc0462_023E:
-	break;
+	endconv;
 	message("\"Salut, humain.\"*");
 	say();
 labelFunc0462_0243:
@@ -25780,7 +25780,7 @@ labelFunc0463_00D8:
 labelFunc0463_00E3:
 	goto labelFunc0463_0047;
 labelFunc0463_00E6:
-	break;
+	endconv;
 	message("\"Retourner au travail maintenant, Mikos...\"*");
 	say();
 labelFunc0463_00EB:
@@ -25925,7 +25925,7 @@ labelFunc0464_01DD:
 labelFunc0464_01E8:
 	goto labelFunc0464_0080;
 labelFunc0464_01EB:
-	break;
+	endconv;
 	message("\"Sois salué.\"*");
 	say();
 labelFunc0464_01F0:
@@ -26121,7 +26121,7 @@ labelFunc0465_028C:
 labelFunc0465_0297:
 	goto labelFunc0465_0089;
 labelFunc0465_029A:
-	break;
+	endconv;
 	message("\"Prospérité à toy, humain.\"*");
 	say();
 labelFunc0465_029F:
@@ -26376,7 +26376,7 @@ labelFunc0466_02EB:
 labelFunc0466_02F6:
 	goto labelFunc0466_0091;
 labelFunc0466_02F9:
-	break;
+	endconv;
 	if (!(!gflags[0x0003])) goto labelFunc0466_0308;
 	message("\"Salut salut lulu lulu salut salut! Ha ha ha!\"*");
 	say();
@@ -26502,7 +26502,7 @@ labelFunc0467_0172:
 labelFunc0467_017D:
 	goto labelFunc0467_007B;
 labelFunc0467_0180:
-	break;
+	endconv;
 	message("\"Que tes entreprises te soient fructueuses, ");
 	message(var0002);
 	message(".\"*");
@@ -26624,7 +26624,7 @@ labelFunc0468_0194:
 labelFunc0468_019F:
 	goto labelFunc0468_0044;
 labelFunc0468_01A2:
-	break;
+	endconv;
 	message("\"Que les arbres s'écartent sur ton passage, ");
 	message(var0000);
 	message(".\"*");
@@ -26721,7 +26721,7 @@ labelFunc0469_011E:
 labelFunc0469_0129:
 	goto labelFunc0469_0044;
 labelFunc0469_012C:
-	break;
+	endconv;
 	message("\"Que ton esprit et ton coeur te guident dans le droit chemin, ");
 	message(var0000);
 	message(".\"");
@@ -26842,7 +26842,7 @@ labelFunc046A_0173:
 labelFunc046A_017E:
 	goto labelFunc046A_004A;
 labelFunc046A_0181:
-	break;
+	endconv;
 	message("\"Bonn'jornée, ");
 	message(var0001);
 	message(". Et bon voyage, l'amy d'Abby.\"*");
@@ -27033,7 +27033,7 @@ labelFunc046B_02A5:
 labelFunc046B_02B0:
 	goto labelFunc046B_0058;
 labelFunc046B_02B3:
-	break;
+	endconv;
 	if (!gflags[0x02D6]) goto labelFunc046B_02BF;
 	message("\"Adieu, Avatar.\"*");
 	say();
@@ -27195,7 +27195,7 @@ labelFunc046C_01DF:
 	if (!var0006) goto labelFunc046C_0230;
 	var0007 = "";
 	var0008 = UI_find_nearby(0xFF94, 0x03E7, 0x000A, 0x0000);
-	//enum();
+	enum();
 labelFunc046C_020E:
 	for (var000B in var0008 with var0009 to var000A) attend labelFunc046C_0230;
 	if (!(UI_get_item_frame(var000B) == 0x0004)) goto labelFunc046C_022D;
@@ -27259,7 +27259,7 @@ labelFunc046C_0358:
 	var0010 = UI_get_party_list();
 	var0011 = 0x0000;
 	var0012 = false;
-	//enum();
+	enum();
 labelFunc046C_0372:
 	for (var0015 in var0010 with var0013 to var0014) attend labelFunc046C_03BC;
 	var0011 = (var0011 + 0x0001);
@@ -27307,7 +27307,7 @@ labelFunc046C_041D:
 labelFunc046C_0428:
 	goto labelFunc046C_00B6;
 labelFunc046C_042B:
-	break;
+	endconv;
 	message("\"Adieu, ");
 	message(var0000);
 	message(".");
@@ -27452,7 +27452,7 @@ labelFunc046D_01DD:
 labelFunc046D_01E8:
 	goto labelFunc046D_0044;
 labelFunc046D_01EB:
-	break;
+	endconv;
 	message("\"Que la bonne fortune te guide sur la piste de la vie.\"*");
 	say();
 labelFunc046D_01F0:
@@ -27650,7 +27650,7 @@ labelFunc046E_02E0:
 labelFunc046E_02EB:
 	goto labelFunc046E_0058;
 labelFunc046E_02EE:
-	break;
+	endconv;
 	message("\"Au revoir.\"*");
 	say();
 	return;
@@ -27748,7 +27748,7 @@ labelFunc046F_0135:
 labelFunc046F_0140:
 	goto labelFunc046F_0040;
 labelFunc046F_0143:
-	break;
+	endconv;
 	message("Il grommelle et se détourne.*");
 	say();
 labelFunc046F_0148:
@@ -27882,7 +27882,7 @@ labelFunc0470_01CE:
 labelFunc0470_01D9:
 	goto labelFunc0470_0054;
 labelFunc0470_01DC:
-	break;
+	endconv;
 	message("\"Ouste, va t'en de là!\"*");
 	say();
 labelFunc0470_01E1:
@@ -28072,7 +28072,7 @@ labelFunc0471_02B1:
 labelFunc0471_02B6:
 	goto labelFunc0471_0051;
 labelFunc0471_02B9:
-	break;
+	endconv;
 labelFunc0471_02BA:
 	if (!(event == 0x0000)) goto labelFunc0471_02C3;
 	abort;
@@ -28244,7 +28244,7 @@ labelFunc0472_023B:
 labelFunc0472_024E:
 	goto labelFunc0472_0059;
 labelFunc0472_0251:
-	break;
+	endconv;
 labelFunc0472_0252:
 	if (!(event == 0x0000)) goto labelFunc0472_0260;
 	Func0912(0xFF8E);
@@ -28396,7 +28396,7 @@ labelFunc0473_01E9:
 labelFunc0473_01F4:
 	goto labelFunc0473_006D;
 labelFunc0473_01F7:
-	break;
+	endconv;
 	message("\"Bon voyage, ");
 	message(var0001);
 	message(".\"*");
@@ -28556,7 +28556,7 @@ labelFunc0474_01F0:
 labelFunc0474_01FB:
 	goto labelFunc0474_0044;
 labelFunc0474_01FE:
-	break;
+	endconv;
 	message("\"Salut, ");
 	message(var0000);
 	message(". Bon voyage, hein.\"*");
@@ -28741,7 +28741,7 @@ labelFunc0475_02CC:
 labelFunc0475_02D7:
 	goto labelFunc0475_004B;
 labelFunc0475_02DA:
-	break;
+	endconv;
 	message("\"Pour sûr, minus. Va au diable!\"*");
 	say();
 labelFunc0475_02DF:
@@ -28898,7 +28898,7 @@ labelFunc0476_0213:
 labelFunc0476_0226:
 	goto labelFunc0476_004F;
 labelFunc0476_0229:
-	break;
+	endconv;
 labelFunc0476_022A:
 	if (!(event == 0x0000)) goto labelFunc0476_0238;
 	Func0912(0xFF8A);
@@ -29088,7 +29088,7 @@ labelFunc0477_02AC:
 labelFunc0477_02B7:
 	goto labelFunc0477_00B4;
 labelFunc0477_02BA:
-	break;
+	endconv;
 	if (!gflags[0x016C]) goto labelFunc0477_02DC;
 	message("\"Tu ne peux partir sans assister à une démonstration! Tu en auras une d'office!\"*");
 	say();
@@ -29263,7 +29263,7 @@ labelFunc0478_0265:
 labelFunc0478_0270:
 	goto labelFunc0478_005F;
 labelFunc0478_0273:
-	break;
+	endconv;
 	message("\"Profite bien de ton séjour dans nostre ville, mais si tu n'as pas la trempe d'un combattant, ne t'éternise pas icy.\"*");
 	say();
 labelFunc0478_0278:
@@ -29472,7 +29472,7 @@ labelFunc0479_02D5:
 labelFunc0479_02E0:
 	goto labelFunc0479_0074;
 labelFunc0479_02E3:
-	break;
+	endconv;
 	message("\"Bonne journée.\"*");
 	say();
 labelFunc0479_02E8:
@@ -29640,7 +29640,7 @@ labelFunc047A_0205:
 	if (!Func08EE()) goto labelFunc047A_02BD;
 	var0009 = UI_get_party_list();
 	var000A = 0x0000;
-	//enum();
+	enum();
 labelFunc047A_022F:
 	for (var000D in var0009 with var000B to var000C) attend labelFunc047A_0247;
 	var000A = (var000A + 0x0001);
@@ -29828,7 +29828,7 @@ labelFunc047A_0531:
 labelFunc047A_053C:
 	goto labelFunc047A_00EA;
 labelFunc047A_053F:
-	break;
+	endconv;
 	message("\"Viens nous revoir, ");
 	message(var0000);
 	message(".\"*");
@@ -30078,7 +30078,7 @@ labelFunc047B_03C8:
 labelFunc047B_03D3:
 	goto labelFunc047B_0114;
 labelFunc047B_03D6:
-	break;
+	endconv;
 	message("\"Amuse-toy bien.\"*");
 	say();
 labelFunc047B_03DB:
@@ -30360,7 +30360,7 @@ labelFunc047C_0435:
 labelFunc047C_0440:
 	goto labelFunc047C_00DB;
 labelFunc047C_0443:
-	break;
+	endconv;
 	message("\"Bonne journée, Avatar.\"");
 	say();
 labelFunc047C_0448:
@@ -30517,7 +30517,7 @@ labelFunc047D_0233:
 labelFunc047D_023E:
 	goto labelFunc047D_00F1;
 labelFunc047D_0241:
-	break;
+	endconv;
 	message("\"Si je ne suis pas tué et toy non plus, nous pourrons boire un coup ensemble, un jour!\"*");
 	say();
 labelFunc047D_0246:
@@ -30717,7 +30717,7 @@ labelFunc047E_0340:
 labelFunc047E_034B:
 	goto labelFunc047E_0175;
 labelFunc047E_034E:
-	break;
+	endconv;
 	message("\"Nous avons horreur des gens qui se mêlent de nos oignons. Nous t' avons à l'oeil!\"*");
 	say();
 labelFunc047E_0353:
@@ -30837,7 +30837,7 @@ labelFunc047F_0181:
 labelFunc047F_018C:
 	goto labelFunc047F_00E9;
 labelFunc047F_018F:
-	break;
+	endconv;
 	message("\"Ce fut un plaisir de m'entretenir avec toy, ");
 	message(var0000);
 	message(".\"*");
@@ -30942,7 +30942,7 @@ labelFunc0480_0143:
 labelFunc0480_014E:
 	goto labelFunc0480_0050;
 labelFunc0480_0151:
-	break;
+	endconv;
 	message("\"Bon débarras!\"*");
 	say();
 	UI_set_schedule_type(UI_get_npc_object(0xFF80), 0x0007);
@@ -31177,7 +31177,7 @@ labelFunc0481_034E:
 labelFunc0481_0359:
 	goto labelFunc0481_0094;
 labelFunc0481_035C:
-	break;
+	endconv;
 	message("\"Adieu, ");
 	message(var0000);
 	message(".\"*");
@@ -31345,7 +31345,7 @@ labelFunc0482_0210:
 	if (!Func08EE()) goto labelFunc0482_02B8;
 	var0006 = UI_get_party_list();
 	var0007 = 0x0000;
-	//enum();
+	enum();
 labelFunc0482_0230:
 	for (var000A in var0006 with var0008 to var0009) attend labelFunc0482_0248;
 	var0007 = (var0007 + 0x0001);
@@ -31489,7 +31489,7 @@ labelFunc0482_0486:
 labelFunc0482_0491:
 	goto labelFunc0482_018B;
 labelFunc0482_0494:
-	break;
+	endconv;
 	message("\"Bon voyage!\"*");
 	say();
 labelFunc0482_0499:
@@ -31677,7 +31677,7 @@ labelFunc0483_02A0:
 labelFunc0483_02AB:
 	goto labelFunc0483_0063;
 labelFunc0483_02AE:
-	break;
+	endconv;
 	message("\"Adieu. Je serois fort heureuse de te revoir.\"*");
 	say();
 labelFunc0483_02B3:
@@ -31852,7 +31852,7 @@ labelFunc0484_0271:
 labelFunc0484_027C:
 	goto labelFunc0484_0063;
 labelFunc0484_027F:
-	break;
+	endconv;
 	message("\"Sois prudent lors de tes voyages.\"*");
 	say();
 labelFunc0484_0284:
@@ -32061,7 +32061,7 @@ labelFunc0485_0325:
 labelFunc0485_0330:
 	goto labelFunc0485_0098;
 labelFunc0485_0333:
-	break;
+	endconv;
 	message("\"Ce fut un plaisir de te parler, ");
 	message(var0000);
 	message(".\"*");
@@ -32313,7 +32313,7 @@ labelFunc0486_036F:
 labelFunc0486_037A:
 	goto labelFunc0486_00AC;
 labelFunc0486_037D:
-	break;
+	endconv;
 	message("\"Ce fut grand joy de te parler, ");
 	message(var0000);
 	message(".\"*");
@@ -32469,7 +32469,7 @@ labelFunc0487_0253:
 labelFunc0487_025E:
 	goto labelFunc0487_0071;
 labelFunc0487_0261:
-	break;
+	endconv;
 	message("\"A la revoyure!\"*");
 	say();
 labelFunc0487_0266:
@@ -32668,7 +32668,7 @@ labelFunc0488_0316:
 labelFunc0488_0321:
 	goto labelFunc0488_0071;
 labelFunc0488_0324:
-	break;
+	endconv;
 	message("Sur ce, Leavell se remet à jouer avec sa dague.*");
 	say();
 labelFunc0488_0329:
@@ -32892,7 +32892,7 @@ labelFunc0489_02FC:
 labelFunc0489_0307:
 	goto labelFunc0489_00C6;
 labelFunc0489_030A:
-	break;
+	endconv;
 	message("\"Profite de la vie, mon amy.\"*");
 	say();
 labelFunc0489_030F:
@@ -33136,7 +33136,7 @@ labelFunc048A_0347:
 labelFunc048A_0352:
 	goto labelFunc048A_007F;
 labelFunc048A_0355:
-	break;
+	endconv;
 	message("\"A la prochaine, Afatar.\"*");
 	say();
 	return;
@@ -33325,7 +33325,7 @@ labelFunc048C_02C5:
 labelFunc048C_02D2:
 	goto labelFunc048C_0124;
 labelFunc048C_02D5:
-	break;
+	endconv;
 labelFunc048C_02D6:
 	if (!(event == 0x0000)) goto labelFunc048C_02DF;
 	abort;
@@ -33549,7 +33549,7 @@ labelFunc048D_0335:
 labelFunc048D_033A:
 	goto labelFunc048D_0178;
 labelFunc048D_033D:
-	break;
+	endconv;
 labelFunc048D_033E:
 	return;
 }
@@ -33707,7 +33707,7 @@ labelFunc048E_024B:
 labelFunc048E_0258:
 	goto labelFunc048E_00FE;
 labelFunc048E_025B:
-	break;
+	endconv;
 labelFunc048E_025C:
 	if (!(event == 0x0000)) goto labelFunc048E_0265;
 	abort;
@@ -33824,7 +33824,7 @@ labelFunc048F_014C:
 	var0002 = true;
 labelFunc048F_016A:
 	var000A = UI_get_party_list2();
-	//enum();
+	enum();
 labelFunc048F_0172:
 	for (var0012 in var000A with var0010 to var0011) attend labelFunc048F_0190;
 	UI_clear_item_flag(var0012, 0x0008);
@@ -33982,7 +33982,7 @@ labelFunc048F_03D0:
 labelFunc048F_03E3:
 	goto labelFunc048F_01B6;
 labelFunc048F_03E6:
-	break;
+	endconv;
 labelFunc048F_03E7:
 	if (!(event == 0x0000)) goto labelFunc048F_03F0;
 	abort;
@@ -34089,7 +34089,7 @@ labelFunc0490_015F:
 labelFunc0490_0172:
 	goto labelFunc0490_0110;
 labelFunc0490_0175:
-	break;
+	endconv;
 labelFunc0490_0176:
 	if (!(event == 0x0000)) goto labelFunc0490_017F;
 	abort;
@@ -34327,7 +34327,7 @@ labelFunc0491_0321:
 labelFunc0491_032C:
 	goto labelFunc0491_0178;
 labelFunc0491_032F:
-	break;
+	endconv;
 	if (!var0001) goto labelFunc0491_0343;
 	message("\"Adieu, ");
 	message(var0000);
@@ -34587,7 +34587,7 @@ labelFunc0492_03C9:
 labelFunc0492_03D4:
 	goto labelFunc0492_01D0;
 labelFunc0492_03D7:
-	break;
+	endconv;
 	message("\"Adieu, ");
 	message(var0001);
 	message(".\"*");
@@ -34886,7 +34886,7 @@ labelFunc0493_03E5:
 labelFunc0493_03F2:
 	goto labelFunc0493_01E7;
 labelFunc0493_03F5:
-	break;
+	endconv;
 labelFunc0493_03F6:
 	if (!(event == 0x0000)) goto labelFunc0493_03FF;
 	abort;
@@ -34910,7 +34910,7 @@ labelFunc0495_0009:
 	var0000 = 0x0000;
 	var0001 = UI_get_party_list();
 	var0002 = 0x0000;
-	//enum();
+	enum();
 labelFunc0495_0027:
 	for (var0005 in var0001 with var0003 to var0004) attend labelFunc0495_003F;
 	var0002 = (var0002 + 0x0001);
@@ -35126,7 +35126,7 @@ labelFunc0495_045A:
 labelFunc0495_046D:
 	goto labelFunc0495_00D9;
 labelFunc0495_0470:
-	break;
+	endconv;
 	message("\"Tu pars déjà?\"*");
 	say();
 	return;
@@ -35388,7 +35388,7 @@ labelFunc0496_0349:
 labelFunc0496_0354:
 	goto labelFunc0496_00CE;
 labelFunc0496_0357:
-	break;
+	endconv;
 	if (!(!gflags[0x01E2])) goto labelFunc0496_0366;
 	message("Pénumbra te fait un signe, puis ferme les yeux, trop souffrante.*");
 	say();
@@ -35615,7 +35615,7 @@ labelFunc0497_0351:
 labelFunc0497_035C:
 	goto labelFunc0497_0077;
 labelFunc0497_035F:
-	break;
+	endconv;
 	message("\"Au revoir, mon amour! Oh oui! Je t' ayme! C' est vroy!\"*");
 	say();
 labelFunc0497_0364:
@@ -35835,7 +35835,7 @@ labelFunc0498_02CF:
 labelFunc0498_02DA:
 	goto labelFunc0498_0069;
 labelFunc0498_02DD:
-	break;
+	endconv;
 	message("\"Bonne jornée.\"*");
 	say();
 labelFunc0498_02E2:
@@ -35939,7 +35939,7 @@ labelFunc0499_011C:
 labelFunc0499_012F:
 	goto labelFunc0499_0063;
 labelFunc0499_0132:
-	break;
+	endconv;
 	goto labelFunc0499_026E;
 labelFunc0499_0136:
 	converse (0) attend labelFunc0499_026D;
@@ -36014,7 +36014,7 @@ labelFunc0499_025D:
 labelFunc0499_026A:
 	goto labelFunc0499_0136;
 labelFunc0499_026D:
-	break;
+	endconv;
 labelFunc0499_026E:
 	if (!(event == 0x0000)) goto labelFunc0499_02F5;
 	var0003 = UI_get_schedule_type(UI_get_npc_object(0xFF67));
@@ -36288,7 +36288,7 @@ labelFunc049A_039E:
 labelFunc049A_03A9:
 	goto labelFunc049A_0079;
 labelFunc049A_03AC:
-	break;
+	endconv;
 	message("\"Reviens voyr Grod.  Entendre les cris des victimes!\"*");
 	say();
 labelFunc049A_03B1:
@@ -36403,7 +36403,7 @@ labelFunc049B_016A:
 labelFunc049B_0175:
 	goto labelFunc049B_0066;
 labelFunc049B_0178:
-	break;
+	endconv;
 	message("\"Ben l'bonjour! ");
 	message(var0001);
 	message(".\"*");
@@ -36591,7 +36591,7 @@ labelFunc049C_0293:
 labelFunc049C_029E:
 	goto labelFunc049C_008E;
 labelFunc049C_02A1:
-	break;
+	endconv;
 	if (!gflags[0x01D8]) goto labelFunc049C_02B5;
 	message("\"Adieu, ");
 	message(var0000);
@@ -36746,7 +36746,7 @@ labelFunc049D_01D7:
 labelFunc049D_01E2:
 	goto labelFunc049D_0098;
 labelFunc049D_01E5:
-	break;
+	endconv;
 	message("\"A la revoyure, ");
 	message(var0000);
 	message(".\"*");
@@ -36849,7 +36849,7 @@ labelFunc049E_0159:
 labelFunc049E_0164:
 	goto labelFunc049E_0051;
 labelFunc049E_0167:
-	break;
+	endconv;
 	message("\"S-s-salut.\"*");
 	say();
 labelFunc049E_016C:
@@ -36938,7 +36938,7 @@ labelFunc049F_0107:
 labelFunc049F_0112:
 	goto labelFunc049F_0051;
 labelFunc049F_0115:
-	break;
+	endconv;
 	message("\"Adieu, ");
 	message(var0000);
 	message(",\" dit-elle en retournant à sa tâche.*");
@@ -37079,7 +37079,7 @@ labelFunc04A0_01C2:
 labelFunc04A0_01CD:
 	goto labelFunc04A0_0094;
 labelFunc04A0_01D0:
-	break;
+	endconv;
 	if (!UI_is_pc_female()) goto labelFunc04A0_01DF;
 	message("\"Tu pars déjà? Bien, laisse-moy avec le bébé.  Allons, abandonne-moy. Tout comme l'a fait ma femme!\"*");
 	say();
@@ -37235,7 +37235,7 @@ labelFunc04A1_01F9:
 labelFunc04A1_0204:
 	goto labelFunc04A1_0070;
 labelFunc04A1_0207:
-	break;
+	endconv;
 	message("\"Souviens-toy, garde toujours en éveil ton esprit et ta lame.\"*");
 	say();
 labelFunc04A1_020C:
@@ -37362,7 +37362,7 @@ labelFunc04A2_01CD:
 labelFunc04A2_01D8:
 	goto labelFunc04A2_0040;
 labelFunc04A2_01DB:
-	break;
+	endconv;
 	message("\"Tu pars déjà, ");
 	message(var0001);
 	message("? Soit, que tes voyages te soient profitables.\" Il soupire. Soudain son visage s'éclaire.~ \"Attends! Peut-estre puis-je me joindre à toy?\"~Il se lève en souriant, mais très vite son sourire s'évanouit.~\"Non. C'est impossible. J'ay bien trop à faire et moult personnes ont besoin de moy. Peut-estre une aultre fois?\"~Il se force à sourire.~\"J'espère que quand on se retrouvera, ");
@@ -37655,7 +37655,7 @@ labelFunc04A3_040D:
 labelFunc04A3_0418:
 	goto labelFunc04A3_0138;
 labelFunc04A3_041B:
-	break;
+	endconv;
 	message("\"Souviens-toy! Dis-leur que tu as mangé au Joyeux Luron!\"*");
 	say();
 labelFunc04A3_0420:
@@ -37822,7 +37822,7 @@ labelFunc04A4_0253:
 labelFunc04A4_025E:
 	goto labelFunc04A4_0060;
 labelFunc04A4_0261:
-	break;
+	endconv;
 	message("\"Que tes jours soient toujours agréables, ");
 	message(var0001);
 	message(".\"*");
@@ -37979,7 +37979,7 @@ labelFunc04A5_023D:
 labelFunc04A5_0248:
 	goto labelFunc04A5_004B;
 labelFunc04A5_024B:
-	break;
+	endconv;
 	message("\"Tu as des manières de rustaud. C'est pas poli d'interrompre les gens comme tu le fais.\"*");
 	say();
 labelFunc04A5_0250:
@@ -38189,7 +38189,7 @@ labelFunc04A6_02E8:
 labelFunc04A6_02F3:
 	goto labelFunc04A6_0093;
 labelFunc04A6_02F6:
-	break;
+	endconv;
 	message("\"Salut à toy, ");
 	message(var0000);
 	message(".\"*");
@@ -38487,7 +38487,7 @@ labelFunc04A7_045D:
 labelFunc04A7_046A:
 	goto labelFunc04A7_0133;
 labelFunc04A7_046D:
-	break;
+	endconv;
 	if (!var0003) goto labelFunc04A7_0478;
 	message("Tu réalises que le Cube n'a rien apporté de plus que Feridwyn ne croyoit. Il est un des maints adeptes innocents du Gardien.");
 	say();
@@ -38667,7 +38667,7 @@ labelFunc04A8_0265:
 labelFunc04A8_0272:
 	goto labelFunc04A8_0085;
 labelFunc04A8_0275:
-	break;
+	endconv;
 labelFunc04A8_0276:
 	if (!(event == 0x0000)) goto labelFunc04A8_0284;
 	Func0912(0xFF58);
@@ -38784,7 +38784,7 @@ labelFunc04A9_0181:
 labelFunc04A9_018C:
 	goto labelFunc04A9_004B;
 labelFunc04A9_018F:
-	break;
+	endconv;
 	message("\"Bonne jornée à toy, ");
 	message(var0000);
 	message(".\"*");
@@ -38958,7 +38958,7 @@ labelFunc04AA_025A:
 labelFunc04AA_0265:
 	goto labelFunc04AA_0104;
 labelFunc04AA_0268:
-	break;
+	endconv;
 	message("\"Bonne jornée à toy, ");
 	message(var0004);
 	message(".\"*");
@@ -39198,7 +39198,7 @@ labelFunc04AB_0319:
 labelFunc04AB_0324:
 	goto labelFunc04AB_007A;
 labelFunc04AB_0327:
-	break;
+	endconv;
 	message("\"Adieu.\"*");
 	say();
 	if (!gflags[0x0218]) goto labelFunc04AB_0340;
@@ -39618,7 +39618,7 @@ labelFunc04AC_05F1:
 labelFunc04AC_05FC:
 	goto labelFunc04AC_0142;
 labelFunc04AC_05FF:
-	break;
+	endconv;
 	message("\"Passe une bonne jornée.\"*");
 	say();
 labelFunc04AC_0604:
@@ -39874,7 +39874,7 @@ labelFunc04AD_033E:
 labelFunc04AD_0349:
 	goto labelFunc04AD_0069;
 labelFunc04AD_034C:
-	break;
+	endconv;
 	message("\"Bonne journée à toy, ");
 	message(var0000);
 	message(".\" *");
@@ -40069,7 +40069,7 @@ labelFunc04AE_0298:
 labelFunc04AE_02A3:
 	goto labelFunc04AE_004D;
 labelFunc04AE_02A6:
-	break;
+	endconv;
 	message("\"Redresse la teste, ");
 	message(var0000);
 	message(".\"*");
@@ -40310,7 +40310,7 @@ labelFunc04AF_032B:
 labelFunc04AF_0336:
 	goto labelFunc04AF_0051;
 labelFunc04AF_0339:
-	break;
+	endconv;
 	message("\"Que la chance soit avec toy, ");
 	message(var0000);
 	message(".\"*");
@@ -40553,7 +40553,7 @@ labelFunc04B0_0324:
 labelFunc04B0_032F:
 	goto labelFunc04B0_007E;
 labelFunc04B0_0332:
-	break;
+	endconv;
 	message("\"J' espère que je t' oie été utile, ");
 	message(var0000);
 	message(".\"*");
@@ -40757,7 +40757,7 @@ labelFunc04B1_02D1:
 labelFunc04B1_02DC:
 	goto labelFunc04B1_00A6;
 labelFunc04B1_02DF:
-	break;
+	endconv;
 	message("\"Bon voyage, Avatar.\"*");
 	say();
 labelFunc04B1_02E4:
@@ -40960,7 +40960,7 @@ labelFunc04B2_02A5:
 labelFunc04B2_02B0:
 	goto labelFunc04B2_0085;
 labelFunc04B2_02B3:
-	break;
+	endconv;
 	if (!gflags[0x0218]) goto labelFunc04B2_02C1;
 	message("\"Salut, Avatar. Bonne chance.\"*");
 	say();
@@ -41055,7 +41055,7 @@ labelFunc04B3_00F6:
 	if (!Func08EE()) goto labelFunc04B3_01A4;
 	var0003 = UI_get_party_list();
 	var0004 = 0x0000;
-	//enum();
+	enum();
 labelFunc04B3_0116:
 	for (var0007 in var0003 with var0005 to var0006) attend labelFunc04B3_012E;
 	var0004 = (var0004 + 0x0001);
@@ -41123,7 +41123,7 @@ labelFunc04B3_021D:
 labelFunc04B3_0228:
 	goto labelFunc04B3_009A;
 labelFunc04B3_022B:
-	break;
+	endconv;
 	message("\"Que la journée te soit bonne ");
 	message(var0000);
 	message(".\"*");
@@ -41298,7 +41298,7 @@ labelFunc04B4_0268:
 labelFunc04B4_0273:
 	goto labelFunc04B4_005F;
 labelFunc04B4_0276:
-	break;
+	endconv;
 	message("\"Te souhaiter bon voyage, vieil amy. Ne pas hésiter à revenir si povoir faire aultre choz por toy. Estre bien solitaire por une gargouille vouée aux traditions anciennes...\"*");
 	say();
 labelFunc04B4_027B:
@@ -41421,7 +41421,7 @@ labelFunc04B5_01C6:
 labelFunc04B5_01D1:
 	goto labelFunc04B5_0043;
 labelFunc04B5_01D4:
-	break;
+	endconv;
 	message("\"Espérer te revoir, humain.\"*");
 	say();
 labelFunc04B5_01D9:
@@ -41544,7 +41544,7 @@ labelFunc04B6_01D3:
 labelFunc04B6_01DE:
 	goto labelFunc04B6_003E;
 labelFunc04B6_01E1:
-	break;
+	endconv;
 	message("\"Te souhaiter bonne santé, humain.\"*");
 	say();
 labelFunc04B6_01E6:
@@ -41746,7 +41746,7 @@ labelFunc04B7_02A2:
 labelFunc04B7_02AD:
 	goto labelFunc04B7_005E;
 labelFunc04B7_02B0:
-	break;
+	endconv;
 	message("\"Te dire adieu por l'heur, humain.  Revenir et estre le bienvenu.\"*");
 	say();
 labelFunc04B7_02B5:
@@ -41847,7 +41847,7 @@ labelFunc04B8_013F:
 labelFunc04B8_014A:
 	goto labelFunc04B8_0094;
 labelFunc04B8_014D:
-	break;
+	endconv;
 	message("Il attend que tu partes por retourner à ses occupations.*");
 	say();
 labelFunc04B8_0152:
@@ -42044,7 +42044,7 @@ labelFunc04B9_02C6:
 labelFunc04B9_02D1:
 	goto labelFunc04B9_007B;
 labelFunc04B9_02D4:
-	break;
+	endconv;
 	message("\"Te souhaiter de trouver Unité.\"*");
 	say();
 	if (!var0002) goto labelFunc04B9_02E3;
@@ -42203,7 +42203,7 @@ labelFunc04BA_022A:
 labelFunc04BA_0235:
 	goto labelFunc04BA_006E;
 labelFunc04BA_0238:
-	break;
+	endconv;
 	message("\"Souhaiter ton bien-estre et ton bonheur.\"*");
 	say();
 labelFunc04BA_023D:
@@ -42273,7 +42273,7 @@ labelFunc04BB_00E1:
 labelFunc04BB_00EC:
 	goto labelFunc04BB_0038;
 labelFunc04BB_00EF:
-	break;
+	endconv;
 	message("\"Retourner à mon travail.\"*");
 	say();
 labelFunc04BB_00F4:
@@ -42418,7 +42418,7 @@ labelFunc04BC_01F2:
 labelFunc04BC_01FD:
 	goto labelFunc04BC_00A8;
 labelFunc04BC_0200:
-	break;
+	endconv;
 	message("\"Adieu, humain.\"*");
 	say();
 labelFunc04BC_0205:
@@ -42632,7 +42632,7 @@ labelFunc04BD_0332:
 labelFunc04BD_033D:
 	goto labelFunc04BD_00DA;
 labelFunc04BD_0340:
-	break;
+	endconv;
 	message("\"Bonne chance, humain.\"*");
 	say();
 labelFunc04BD_0345:
@@ -42763,7 +42763,7 @@ labelFunc04BE_01C9:
 labelFunc04BE_01D4:
 	goto labelFunc04BE_004F;
 labelFunc04BE_01D7:
-	break;
+	endconv;
 	message("\"Te souhaiter bons voyages, humain.\"*");
 	say();
 labelFunc04BE_01DC:
@@ -42980,7 +42980,7 @@ labelFunc04BF_0291:
 labelFunc04BF_029C:
 	goto labelFunc04BF_00A8;
 labelFunc04BF_029F:
-	break;
+	endconv;
 	message("\"Bien. Va t'en. Grand bien te fasse!\"*");
 	say();
 labelFunc04BF_02A4:
@@ -43107,7 +43107,7 @@ labelFunc04C0_01A1:
 labelFunc04C0_01AC:
 	goto labelFunc04C0_0059;
 labelFunc04C0_01AF:
-	break;
+	endconv;
 	message("\"Que la force de tes bras soit à la mesure de celle de ta volonté.\"*");
 	say();
 labelFunc04C0_01B4:
@@ -43236,7 +43236,7 @@ labelFunc04C1_01B6:
 labelFunc04C1_01C1:
 	goto labelFunc04C1_005A;
 labelFunc04C1_01C4:
-	break;
+	endconv;
 	message("\"Bonne journée, ");
 	message(var0000);
 	message(".\"*");
@@ -43437,7 +43437,7 @@ labelFunc04C2_0299:
 labelFunc04C2_02AC:
 	goto labelFunc04C2_006A;
 labelFunc04C2_02AF:
-	break;
+	endconv;
 labelFunc04C2_02B0:
 	if (!(event == 0x0000)) goto labelFunc04C2_0378;
 	var000A = UI_part_of_day();
@@ -43717,7 +43717,7 @@ labelFunc04C3_036C:
 labelFunc04C3_0377:
 	goto labelFunc04C3_00AB;
 labelFunc04C3_037A:
-	break;
+	endconv;
 	message("\"Continue, ");
 	message(var0000);
 	message(".\"*");
@@ -43950,7 +43950,7 @@ labelFunc04C4_0353:
 labelFunc04C4_035E:
 	goto labelFunc04C4_00EF;
 labelFunc04C4_0361:
-	break;
+	endconv;
 	message("\"Bon voyage. Rappelle-toy de faire confiance à ton frère.\"*");
 	say();
 labelFunc04C4_0366:
@@ -44077,7 +44077,7 @@ labelFunc04C5_01CF:
 labelFunc04C5_01DA:
 	goto labelFunc04C5_00A0;
 labelFunc04C5_01DD:
-	break;
+	endconv;
 	message("\"Dire adieu.\"*");
 	say();
 labelFunc04C5_01E2:
@@ -44272,7 +44272,7 @@ labelFunc04C6_02CE:
 labelFunc04C6_02D9:
 	goto labelFunc04C6_015A;
 labelFunc04C6_02DC:
-	break;
+	endconv;
 	message("\"Au plaisir de te revoir, ");
 	message(var0005);
 	message(".\"*");
@@ -44549,7 +44549,7 @@ labelFunc04C7_0418:
 labelFunc04C7_0423:
 	goto labelFunc04C7_00AE;
 labelFunc04C7_0426:
-	break;
+	endconv;
 	message("\"Bonne jornée, ");
 	message(var0001);
 	message(".\"*");
@@ -44777,7 +44777,7 @@ labelFunc04C8_0308:
 labelFunc04C8_0313:
 	goto labelFunc04C8_0072;
 labelFunc04C8_0316:
-	break;
+	endconv;
 	message("\"Je sens que tu dois aller ailleurs. Je te souhaite bonne route.\"*");
 	say();
 labelFunc04C8_031B:
@@ -44908,7 +44908,7 @@ labelFunc04C9_01BF:
 labelFunc04C9_01CA:
 	goto labelFunc04C9_0065;
 labelFunc04C9_01CD:
-	break;
+	endconv;
 	message("\"Adieu, ");
 	message(var0000);
 	message(".\"*");
@@ -45056,7 +45056,7 @@ labelFunc04CA_01EC:
 labelFunc04CA_01F7:
 	goto labelFunc04CA_004C;
 labelFunc04CA_01FA:
-	break;
+	endconv;
 	message("\"Adieu.\"*");
 	say();
 labelFunc04CA_01FF:
@@ -45204,7 +45204,7 @@ labelFunc04CB_022C:
 labelFunc04CB_0237:
 	goto labelFunc04CB_00AD;
 labelFunc04CB_023A:
-	break;
+	endconv;
 	message("\"Ce fut un plaisir, ");
 	message(var0000);
 	message(".\"*");
@@ -45336,7 +45336,7 @@ labelFunc04CC_01E3:
 labelFunc04CC_01EE:
 	goto labelFunc04CC_009D;
 labelFunc04CC_01F1:
-	break;
+	endconv;
 	message("Mara te serre la pince et te tape dans le dos en disant \"Adieu, mon amy!\"*");
 	say();
 labelFunc04CC_01F6:
@@ -45455,7 +45455,7 @@ labelFunc04CD_0188:
 labelFunc04CD_0193:
 	goto labelFunc04CD_004E;
 labelFunc04CD_0196:
-	break;
+	endconv;
 	message("\"Que ta force soit ton guide.\"*");
 	say();
 labelFunc04CD_019B:
@@ -45604,7 +45604,7 @@ labelFunc04CE_01A1:
 labelFunc04CE_01AC:
 	goto labelFunc04CE_0052;
 labelFunc04CE_01AF:
-	break;
+	endconv;
 	message("\"Adieu, ");
 	message(var0000);
 	message(". Souviens-toy, l'herbe est tojors plus verte quand il pleut.\"");
@@ -45806,7 +45806,7 @@ labelFunc04CF_026C:
 labelFunc04CF_0277:
 	goto labelFunc04CF_008C;
 labelFunc04CF_027A:
-	break;
+	endconv;
 	message("\"Bonne route, mon p'tit!\"*");
 	say();
 labelFunc04CF_027F:
@@ -45954,7 +45954,7 @@ labelFunc04D0_0172:
 labelFunc04D0_017D:
 	goto labelFunc04D0_007B;
 labelFunc04D0_0180:
-	break;
+	endconv;
 	message("Il te salue en silence et retourne à ses affaires.*");
 	say();
 labelFunc04D0_0185:
@@ -46107,7 +46107,7 @@ labelFunc04D1_020B:
 labelFunc04D1_0216:
 	goto labelFunc04D1_005F;
 labelFunc04D1_0219:
-	break;
+	endconv;
 	message("\"Salut, ");
 	message(var0001);
 	message(".\"*");
@@ -46253,7 +46253,7 @@ labelFunc04D2_020E:
 labelFunc04D2_0219:
 	goto labelFunc04D2_0048;
 labelFunc04D2_021C:
-	break;
+	endconv;
 	message("Elle retourne à son travail.*");
 	say();
 labelFunc04D2_0221:
@@ -46379,7 +46379,7 @@ labelFunc04D3_01BA:
 labelFunc04D3_01C5:
 	goto labelFunc04D3_0065;
 labelFunc04D3_01C8:
-	break;
+	endconv;
 	message("\"Espérer te revoir bientost.\"*");
 	say();
 labelFunc04D3_01CD:
@@ -46602,7 +46602,7 @@ labelFunc04D4_02DD:
 labelFunc04D4_02E8:
 	goto labelFunc04D4_00E0;
 labelFunc04D4_02EB:
-	break;
+	endconv;
 	message("\"Bonne jornée, ");
 	message(var0001);
 	message(".\"*");
@@ -46705,7 +46705,7 @@ labelFunc04D5_012F:
 labelFunc04D5_013A:
 	goto labelFunc04D5_006E;
 labelFunc04D5_013D:
-	break;
+	endconv;
 	message("\"Adieu, ");
 	message(var0000);
 	message(" Avatar.\"*");
@@ -46809,7 +46809,7 @@ labelFunc04D6_013E:
 labelFunc04D6_0149:
 	goto labelFunc04D6_004E;
 labelFunc04D6_014C:
-	break;
+	endconv;
 	message("\"Te dire adieu, humain.\"*");
 	say();
 labelFunc04D6_0151:
@@ -46963,7 +46963,7 @@ labelFunc04D7_0209:
 labelFunc04D7_0214:
 	goto labelFunc04D7_0038;
 labelFunc04D7_0217:
-	break;
+	endconv;
 	message("\"Espérer que tu ramèneras la paix à nostre peuple, Avatar.\"*");
 	say();
 labelFunc04D7_021C:
@@ -47068,7 +47068,7 @@ labelFunc04D8_0142:
 labelFunc04D8_014D:
 	goto labelFunc04D8_005D;
 labelFunc04D8_0150:
-	break;
+	endconv;
 	message("\"Dire adieu, humain.\"*");
 	say();
 	goto labelFunc04D8_01E8;
@@ -47109,7 +47109,7 @@ labelFunc04D8_01D7:
 labelFunc04D8_01E4:
 	goto labelFunc04D8_0158;
 labelFunc04D8_01E7:
-	break;
+	endconv;
 labelFunc04D8_01E8:
 	if (!(event == 0x0000)) goto labelFunc04D8_01F1;
 	abort;
@@ -47175,7 +47175,7 @@ labelFunc04D9_0090:
 	say();
 	var0008 = 0x0000;
 	var0009 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc04D9_00D4:
 	for (var000C in var0009 with var000A to var000B) attend labelFunc04D9_00EC;
 	var0008 = (var0008 + 0x0001);
@@ -47234,7 +47234,7 @@ labelFunc04D9_01A4:
 labelFunc04D9_01B1:
 	goto labelFunc04D9_0090;
 labelFunc04D9_01B4:
-	break;
+	endconv;
 	goto labelFunc04D9_01BD;
 labelFunc04D9_01B8:
 	message("Bien qu' elle lance des regards furieux en passant, la gargouille semble bien trop préoccupée par sa destination pour chercher querelle.*");
@@ -47302,7 +47302,7 @@ labelFunc04DA_0090:
 	if (!(var0007 == var0004)) goto labelFunc04DA_0173;
 	var0008 = 0x0000;
 	var0009 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc04DA_00D0:
 	for (var000C in var0009 with var000A to var000B) attend labelFunc04DA_00E8;
 	var0008 = (var0008 + 0x0001);
@@ -47355,7 +47355,7 @@ labelFunc04DA_018B:
 labelFunc04DA_0198:
 	goto labelFunc04DA_0090;
 labelFunc04DA_019B:
-	break;
+	endconv;
 	goto labelFunc04DA_01A4;
 labelFunc04DA_019F:
 	message("La gargouille ne s'arreste que por te fusiller du regard.*");
@@ -47449,7 +47449,7 @@ labelFunc04DB_013B:
 labelFunc04DB_0146:
 	goto labelFunc04DB_0038;
 labelFunc04DB_0149:
-	break;
+	endconv;
 	message("\"Adieu.\"*");
 	say();
 labelFunc04DB_014E:
@@ -47652,7 +47652,7 @@ labelFunc04DC_02E3:
 labelFunc04DC_02EE:
 	goto labelFunc04DC_0081;
 labelFunc04DC_02F1:
-	break;
+	endconv;
 	message("\"Belles jornées, ");
 	message(var0000);
 	message(". A bientôt, en surface!\"*");
@@ -47851,7 +47851,7 @@ labelFunc04DD_0273:
 labelFunc04DD_027E:
 	goto labelFunc04DD_016E;
 labelFunc04DD_0281:
-	break;
+	endconv;
 	message("\"Oh, je t' en prie reviens vite, ");
 	message(var0005);
 	message("!\"");
@@ -48028,7 +48028,7 @@ labelFunc04DE_0259:
 labelFunc04DE_0264:
 	goto labelFunc04DE_0046;
 labelFunc04DE_0267:
-	break;
+	endconv;
 	message("\"Déjà?\"*");
 	say();
 labelFunc04DE_026C:
@@ -48236,7 +48236,7 @@ labelFunc04DF_026C:
 labelFunc04DF_0277:
 	goto labelFunc04DF_016B;
 labelFunc04DF_027A:
-	break;
+	endconv;
 	message("\"J' espère te revoir très bientôt, chéri!\"");
 	say();
 	if (!(!var0004)) goto labelFunc04DF_028D;
@@ -48426,7 +48426,7 @@ labelFunc04E0_026F:
 labelFunc04E0_027A:
 	goto labelFunc04E0_0160;
 labelFunc04E0_027D:
-	break;
+	endconv;
 	message("\"J' espère te revoir, ");
 	message(var0005);
 	message(".\"*");
@@ -48573,7 +48573,7 @@ labelFunc04E1_01E9:
 labelFunc04E1_01F4:
 	goto labelFunc04E1_0073;
 labelFunc04E1_01F7:
-	break;
+	endconv;
 	message("Sintag grogne.*");
 	say();
 labelFunc04E1_01FC:
@@ -48764,7 +48764,7 @@ labelFunc04E2_0248:
 labelFunc04E2_0253:
 	goto labelFunc04E2_00D7;
 labelFunc04E2_0256:
-	break;
+	endconv;
 	if (!(gflags[0x02A6] || (!gflags[0x02A5]))) goto labelFunc04E2_0269;
 	message("\"Une aultre fois, alors.\"*");
 	say();
@@ -48938,7 +48938,7 @@ labelFunc04E3_01FA:
 labelFunc04E3_0205:
 	goto labelFunc04E3_0062;
 labelFunc04E3_0208:
-	break;
+	endconv;
 	message("\"Adieu, estranger.\"*");
 	say();
 labelFunc04E3_020D:
@@ -49042,7 +49042,7 @@ labelFunc04E4_0103:
 labelFunc04E4_010E:
 	goto labelFunc04E4_004D;
 labelFunc04E4_0111:
-	break;
+	endconv;
 	message("\"Sois prudent, mon amy.\"*");
 	say();
 labelFunc04E4_0116:
@@ -49261,7 +49261,7 @@ labelFunc04E5_02C4:
 labelFunc04E5_02CF:
 	goto labelFunc04E5_00DA;
 labelFunc04E5_02D2:
-	break;
+	endconv;
 	message("\"J' espère povoir encor t' aider une aultre fois, mon amy!\"*");
 	say();
 labelFunc04E5_02D7:
@@ -49446,7 +49446,7 @@ labelFunc04E6_022E:
 labelFunc04E6_0239:
 	goto labelFunc04E6_006F;
 labelFunc04E6_023C:
-	break;
+	endconv;
 	message("\"Adieu l' amy. J' attends ton retour avec impatience.\"*");
 	say();
 labelFunc04E6_0241:
@@ -49567,7 +49567,7 @@ labelFunc04E7_0186:
 	if (!Func08EE()) goto labelFunc04E7_022F;
 	var0005 = UI_get_party_list();
 	var0006 = 0x0000;
-	//enum();
+	enum();
 labelFunc04E7_01A6:
 	for (var0009 in var0005 with var0007 to var0008) attend labelFunc04E7_01BE;
 	var0006 = (var0006 + 0x0001);
@@ -49751,7 +49751,7 @@ labelFunc04E7_0499:
 labelFunc04E7_04A4:
 	goto labelFunc04E7_0070;
 labelFunc04E7_04A7:
-	break;
+	endconv;
 	message("\"Bonne discussion.  A plus tard, j' espère.\"*");
 	say();
 labelFunc04E7_04AC:
@@ -49848,7 +49848,7 @@ labelFunc04E8_0117:
 labelFunc04E8_0122:
 	goto labelFunc04E8_0053;
 labelFunc04E8_0125:
-	break;
+	endconv;
 	message("\"A bientôt, ");
 	message(var0000);
 	message(".\"*");
@@ -49950,7 +49950,7 @@ labelFunc04E9_00B8:
 	var0003 = UI_get_party_list();
 	var0004 = 0x0000;
 	var0005 = UI_count_objects(0xFE9B, 0x0284, 0xFE99, 0xFE99);
-	//enum();
+	enum();
 labelFunc04E9_00FF:
 	for (var0008 in var0003 with var0006 to var0007) attend labelFunc04E9_0117;
 	var0004 = (var0004 + 0x0001);
@@ -49984,7 +49984,7 @@ labelFunc04E9_0158:
 labelFunc04E9_0163:
 	goto labelFunc04E9_0046;
 labelFunc04E9_0166:
-	break;
+	endconv;
 	message("L'acteur s'incline devant toy.*");
 	say();
 labelFunc04E9_016B:
@@ -50170,7 +50170,7 @@ labelFunc04EC_0104:
 labelFunc04EC_010F:
 	goto labelFunc04EC_006A;
 labelFunc04EC_0112:
-	break;
+	endconv;
 	message("\"Adieu. J'espère te revoir bientost.\"*");
 	say();
 labelFunc04EC_0117:
@@ -50377,7 +50377,7 @@ labelFunc04ED_02F0:
 labelFunc04ED_02FB:
 	goto labelFunc04ED_0075;
 labelFunc04ED_02FE:
-	break;
+	endconv;
 	message("\"Ce fut un plaisir de bavarder avec toy, ");
 	message(var0002);
 	message(".\"*");
@@ -50494,7 +50494,7 @@ labelFunc04EE_0163:
 labelFunc04EE_016E:
 	goto labelFunc04EE_0046;
 labelFunc04EE_0171:
-	break;
+	endconv;
 	message("\"Adieu, ");
 	message(var0000);
 	message(". Que la chance soit avec toy.\"*");
@@ -50670,7 +50670,7 @@ labelFunc04EF_02C5:
 labelFunc04EF_02D0:
 	goto labelFunc04EF_0063;
 labelFunc04EF_02D3:
-	break;
+	endconv;
 	if (!var0001) goto labelFunc04EF_02E1;
 	message("Owings et Malloy, tous deux incapables de cesser de pleurer, te font au revoir de la main.*");
 	say();
@@ -50871,7 +50871,7 @@ labelFunc04F0_02DE:
 labelFunc04F0_02E9:
 	goto labelFunc04F0_0080;
 labelFunc04F0_02EC:
-	break;
+	endconv;
 	message("\"Ne te presse point trop, ");
 	message(var0000);
 	message(", car le monde tel que nous le connoissons, bientôt aura cessé d' estre.\"*");
@@ -51087,7 +51087,7 @@ labelFunc04F1_02B6:
 labelFunc04F1_02C1:
 	goto labelFunc04F1_0064;
 labelFunc04F1_02C4:
-	break;
+	endconv;
 	message("Papa sourit et te fayt un geste de la main.*");
 	say();
 	return;
@@ -51262,7 +51262,7 @@ labelFunc04F2_028C:
 labelFunc04F2_0297:
 	goto labelFunc04F2_005F;
 labelFunc04F2_029A:
-	break;
+	endconv;
 	message("\"Que ton savoir s'enrichisse au contact de la nature, ");
 	message(var0000);
 	message(".\"*");
@@ -51453,7 +51453,7 @@ labelFunc04F3_02B5:
 labelFunc04F3_02C0:
 	goto labelFunc04F3_0070;
 labelFunc04F3_02C3:
-	break;
+	endconv;
 	if (!var0001) goto labelFunc04F3_02D1;
 	message("Malloy et Owings layssent tomber ce qu' ils font por te fayre des gestes d' adieu amicaulx.*");
 	say();
@@ -51574,7 +51574,7 @@ labelFunc04F4_018C:
 labelFunc04F4_0197:
 	goto labelFunc04F4_0056;
 labelFunc04F4_019A:
-	break;
+	endconv;
 	message("\"A la prochaine, ");
 	message(var0002);
 	message(".\"*");
@@ -51731,7 +51731,7 @@ labelFunc04F5_0237:
 labelFunc04F5_0242:
 	goto labelFunc04F5_008A;
 labelFunc04F5_0245:
-	break;
+	endconv;
 	message("Il te fait un signe d'adieu.*");
 	say();
 labelFunc04F5_024A:
@@ -51936,7 +51936,7 @@ labelFunc04F6_02BF:
 labelFunc04F6_02CA:
 	goto labelFunc04F6_006A;
 labelFunc04F6_02CD:
-	break;
+	endconv;
 	message("\"Adieu.  Que tes voyages te soient bénéfiques.\"*");
 	say();
 labelFunc04F6_02D2:
@@ -52185,7 +52185,7 @@ labelFunc04F7_0380:
 labelFunc04F7_038B:
 	goto labelFunc04F7_00B2;
 labelFunc04F7_038E:
-	break;
+	endconv;
 	message("\"Adieu, ");
 	message(var0003);
 	message(".\" Quand tu pars, il estouffe un gémissement de douleur.*");
@@ -52361,7 +52361,7 @@ labelFunc04F8_0252:
 	case "lune" attend labelFunc04F8_02AC:
 	var0004 = false;
 	var0005 = UI_find_nearby(item, 0x0179, 0x0014, 0x0000);
-	//enum();
+	enum();
 labelFunc04F8_0270:
 	for (var0008 in var0005 with var0006 to var0007) attend labelFunc04F8_0290;
 	if (!(UI_get_item_frame(var0008) == 0x001C)) goto labelFunc04F8_028D;
@@ -52383,7 +52383,7 @@ labelFunc04F8_02AC:
 	case "sextant" attend labelFunc04F8_0308:
 	var0009 = false;
 	var000A = UI_find_nearby(0xFE9C, 0x028A, 0x0028, 0x0000);
-	//enum();
+	enum();
 labelFunc04F8_02CC:
 	for (var0008 in var000A with var000B to var000C) attend labelFunc04F8_02EC;
 	if (!(UI_get_item_frame(var0008) == 0x0001)) goto labelFunc04F8_02E9;
@@ -52471,7 +52471,7 @@ labelFunc04F8_0419:
 labelFunc04F8_0420:
 	goto labelFunc04F8_009A;
 labelFunc04F8_0423:
-	break;
+	endconv;
 labelFunc04F8_0424:
 	if (!(event == 0x0000)) goto labelFunc04F8_0432;
 	Func0912(0xFF08);
@@ -52650,7 +52650,7 @@ labelFunc04F9_0262:
 	case "marque page" attend labelFunc04F9_02BC:
 	var0003 = false;
 	var0004 = UI_find_nearby(item, 0x02A3, 0x0014, 0x0000);
-	//enum();
+	enum();
 labelFunc04F9_0280:
 	for (var0007 in var0004 with var0005 to var0006) attend labelFunc04F9_02A0;
 	if (!(UI_get_item_frame(var0007) == 0x0004)) goto labelFunc04F9_029D;
@@ -52672,7 +52672,7 @@ labelFunc04F9_02BC:
 	case "porte plume" attend labelFunc04F9_0359:
 	var0008 = false;
 	var0009 = UI_find_nearby(item, 0x02A3, 0x0014, 0x0000);
-	//enum();
+	enum();
 labelFunc04F9_02DA:
 	for (var0007 in var0009 with var000A to var000B) attend labelFunc04F9_02FA;
 	if (!(UI_get_item_frame(var0007) == 0x0003)) goto labelFunc04F9_02F7;
@@ -52682,7 +52682,7 @@ labelFunc04F9_02F7:
 labelFunc04F9_02FA:
 	var000C = false;
 	var000D = UI_find_nearby(item, 0x02A3, 0x0014, 0x0000);
-	//enum();
+	enum();
 labelFunc04F9_0310:
 	for (var0007 in var000D with var000E to var000F) attend labelFunc04F9_0330;
 	if (!(UI_get_item_frame(var0007) == 0x0005)) goto labelFunc04F9_032D;
@@ -52710,7 +52710,7 @@ labelFunc04F9_0359:
 	case "livre" attend labelFunc04F9_03B3:
 	var0010 = false;
 	var0011 = UI_find_nearby(item, 0x02A3, 0x0014, 0x0000);
-	//enum();
+	enum();
 labelFunc04F9_0377:
 	for (var0010 in var0009 with var0012 to var0013) attend labelFunc04F9_0397;
 	if (!(UI_get_item_quality(var0010) == 0x0004)) goto labelFunc04F9_0394;
@@ -52734,7 +52734,7 @@ labelFunc04F9_03B3:
 labelFunc04F9_03BF:
 	goto labelFunc04F9_0068;
 labelFunc04F9_03C2:
-	break;
+	endconv;
 labelFunc04F9_03C3:
 	if (!(event == 0x0000)) goto labelFunc04F9_03D1;
 	Func0912(0xFF07);
@@ -53075,7 +53075,7 @@ labelFunc04FA_049A:
 labelFunc04FA_04A5:
 	goto labelFunc04FA_00D7;
 labelFunc04FA_04A8:
-	break;
+	endconv;
 	if (!gflags[0x0006]) goto labelFunc04FA_04B6;
 	message("\"Que la Triade guide tes pas.\"*");
 	say();
@@ -53312,7 +53312,7 @@ labelFunc04FB_02D9:
 labelFunc04FB_02E4:
 	goto labelFunc04FB_00AC;
 labelFunc04FB_02E7:
-	break;
+	endconv;
 	message("\"Adieu!\"*");
 	say();
 labelFunc04FB_02EC:
@@ -53436,7 +53436,7 @@ labelFunc04FC_01A3:
 labelFunc04FC_01AE:
 	goto labelFunc04FC_0054;
 labelFunc04FC_01B1:
-	break;
+	endconv;
 	message("\"Dire à la prochaine, ");
 	message(var0003);
 	message(",\" dit-il.*");
@@ -53576,7 +53576,7 @@ labelFunc04FD_01D8:
 labelFunc04FD_01E3:
 	goto labelFunc04FD_0056;
 labelFunc04FD_01E6:
-	break;
+	endconv;
 	message("\"Bonjor,");
 	message(var0000);
 	message(". Si tu vois la licorne, dis-luy de m' attendre.\"*");
@@ -53839,7 +53839,7 @@ labelFunc04FE_0406:
 labelFunc04FE_0411:
 	goto labelFunc04FE_003F;
 labelFunc04FE_0414:
-	break;
+	endconv;
 	message("\"Adieu, Avatar.\"*");
 	say();
 	return;
@@ -53978,7 +53978,7 @@ labelFunc04FF_01D9:
 labelFunc04FF_01E4:
 	goto labelFunc04FF_0103;
 labelFunc04FF_01E7:
-	break;
+	endconv;
 	message("\"Salut!\"*");
 	say();
 	return;
@@ -54135,7 +54135,7 @@ labelFunc0500_021E:
 labelFunc0500_0229:
 	goto labelFunc0500_009C;
 labelFunc0500_022C:
-	break;
+	endconv;
 	message("\"'Xorinia' accueille toujours favorablement l'échange d'informations. Adieu.\"*");
 	say();
 	UI_set_schedule_type(item, 0x0014);
@@ -54364,11 +54364,11 @@ labelFunc0608_0061:
 	say();
 	UI_remove_npc_face(0xFFE6);
 	var0004 = [0x0193, 0x01FA, 0x0325, 0x0372, 0x0371];
-	//enum();
+	enum();
 labelFunc0608_00EC:
 	for (var0007 in var0004 with var0005 to var0006) attend labelFunc0608_0124;
 	var0008 = UI_find_nearby(item, var0007, 0x001E, 0x0000);
-	//enum();
+	enum();
 labelFunc0608_0109:
 	for (var000B in var0008 with var0009 to var000A) attend labelFunc0608_0121;
 	UI_set_schedule_type(var000B, 0x0000);
@@ -54482,7 +54482,7 @@ labelFunc060A_0167:
 labelFunc060A_0176:
 	var000A = 0x0007;
 labelFunc060A_017C:
-	//enum();
+	enum();
 labelFunc060A_017D:
 	for (var000D in var0001 with var000B to var000C) attend labelFunc060A_0270;
 	var000E = UI_get_object_position(var000D);
@@ -54577,7 +54577,7 @@ void Func060C object#(0x60C) ()
 labelFunc060C_0018:
 	if (!(!UI_npc_nearby(0xFF18))) goto labelFunc060C_0057;
 	var0000 = UI_find_nearby(0xFE9C, 0x02FC, 0x0032, 0x0000);
-	//enum();
+	enum();
 labelFunc060C_0037:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc060C_0056;
 	UI_set_item_frame(var0003, 0x0000);
@@ -54590,7 +54590,7 @@ labelFunc060C_0057:
 	var0005 = UI_get_object_position(item);
 	var0006 = 0x0000;
 	var0007 = UI_find_nearby_avatar(0x02FB);
-	//enum();
+	enum();
 labelFunc060C_0081:
 	for (var000A in var0007 with var0008 to var0009) attend labelFunc060C_00AF;
 	if (!((UI_get_item_frame(var000A) == 0x0001) || (UI_get_item_frame(var000A) == 0x0002))) goto labelFunc060C_00AC;
@@ -54609,7 +54609,7 @@ labelFunc060C_00DB:
 	var000D = UI_execute_usecode_array(var0006, [(byte)0x46, 0x0001, (byte)0x58, 0x0049, (byte)0x46, 0x0002, (byte)0x58, 0x004A, (byte)0x46, 0x0001, (byte)0x58, 0x0049]);
 	if (!(gflags[0x0022] == false)) goto labelFunc060C_0242;
 	gflags[0x0022] = true;
-	//enum();
+	enum();
 labelFunc060C_0113:
 	for (var0010 in var0004 with var000E to var000F) attend labelFunc060C_023F;
 	var0011 = UI_get_object_position(var0010);
@@ -54657,7 +54657,7 @@ labelFunc060C_025E:
 	gflags[0x0024] = false;
 	gflags[0x0025] = false;
 	var0000 = UI_find_nearby_avatar(0x02FC);
-	//enum();
+	enum();
 labelFunc060C_0284:
 	for (var0003 in var0000 with var0016 to var0017) attend labelFunc060C_029C;
 	UI_set_item_frame(var0003, 0x0000);
@@ -54706,7 +54706,7 @@ labelFunc060D_0096:
 	var0008 = UI_get_object_position(item);
 	var0009 = var0008[0x0001];
 	var000A = var0008[0x0002];
-	//enum();
+	enum();
 labelFunc060D_00C2:
 	for (var000D in var0007 with var000B to var000C) attend labelFunc060D_0177;
 	var000E = UI_get_object_position(var000D);
@@ -54773,7 +54773,7 @@ void Func060E object#(0x60E) ()
 	UI_play_music(0x0011, 0x0000);
 	UI_UNKNOWN_83();
 	var0000 = UI_get_dead_party(item);
-	//enum();
+	enum();
 labelFunc060E_0036:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc060E_004E;
 	var0004 = UI_resurrect(var0003);
@@ -54790,7 +54790,7 @@ labelFunc060E_0063:
 	if (!gflags[0x003A]) goto labelFunc060E_0154;
 	var0007 = UI_find_nearby(0xFE9C, 0xFE99, 0x005A, 0x0004);
 	var0007 = Func0920(UI_get_npc_object(0xFE9C), var0007);
-	//enum();
+	enum();
 labelFunc060E_00D4:
 	for (var000A in var0007 with var0008 to var0009) attend labelFunc060E_0154;
 	if (!(UI_get_schedule_type(var000A) == 0x0000)) goto labelFunc060E_0151;
@@ -54800,7 +54800,7 @@ labelFunc060E_00D4:
 labelFunc060E_010F:
 	if (!((var000B == 0x0003) || (var000B == 0x0002))) goto labelFunc060E_0151;
 	var000C = UI_get_cont_items(var000A, 0xFE99, 0xFE99, 0xFE99);
-	//enum();
+	enum();
 labelFunc060E_0135:
 	for (var000F in var000C with var000D to var000E) attend labelFunc060E_014A;
 	UI_remove_item(var000F);
@@ -54820,7 +54820,7 @@ labelFunc060E_0154:
 	var0015 = [0x000D, var0012, 0x000D, var0012, 0x001D, var0012, 0x001D, var0012, 0x001D, var0012, 0x000D, var0012, 0x000D];
 	var0016 = 0x0001;
 	var0017 = UI_get_party_list2();
-	//enum();
+	enum();
 labelFunc060E_0254:
 	for (var0003 in var0017 with var0018 to var0019) attend labelFunc060E_02EC;
 	UI_clear_item_flag(var0003, 0x0008);
@@ -54845,7 +54845,7 @@ labelFunc060E_032F:
 	UI_set_schedule_type(0xFF58, 0x000B);
 labelFunc060E_0351:
 	UI_move_object(0xFE9B, var0010);
-	//enum();
+	enum();
 labelFunc060E_035C:
 	for (var0003 in var001A with var001B to var001C) attend labelFunc060E_0445;
 	if (!(!(var0003 == UI_get_npc_object(0xFE9C)))) goto labelFunc060E_0442;
@@ -54909,7 +54909,7 @@ void Func0610 object#(0x610) ()
 
 	UI_fade_palette(0x0024, 0x0001, 0x0001);
 	var0000 = UI_find_nearby(item, 0xFE99, 0x0023, 0x0004);
-	//enum();
+	enum();
 labelFunc0610_001F:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc0610_0048;
 	if (!((UI_get_alignment(var0003) == 0x0000) && (UI_get_schedule_type(var0003) == 0x0000))) goto labelFunc0610_0045;
@@ -55010,7 +55010,7 @@ void Func0613 object#(0x613) ()
 
 	gflags[0x0039] = false;
 	var0000 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc0613_000C:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc0613_0024;
 	UI_set_schedule_type(var0003, 0x001F);
@@ -55648,7 +55648,7 @@ labelFunc0622_006B:
 	if (!Func0801(item)) goto labelFunc0622_00AE;
 	item->Func0624();
 labelFunc0622_00AE:
-	//enum();
+	enum();
 labelFunc0622_00AF:
 	for (var0008 in var0000 with var0006 to var0007) attend labelFunc0622_00C6;
 	Func0923(var0008, 0x001F);
@@ -55669,7 +55669,7 @@ labelFunc0622_00FA:
 	var0009 = (var0002 * 0x05DC);
 	Func091E(var0002, item);
 	var0000 = Func0920(UI_get_npc_object(0xFE9C), var0000);
-	//enum();
+	enum();
 labelFunc0622_0129:
 	for (var0008 in var0000 with var000A to var000B) attend labelFunc0622_0140;
 	Func0923(var0008, 0x000B);
@@ -55708,7 +55708,7 @@ void Func0623 object#(0x623) ()
 	UI_remove_npc_face(var0000);
 labelFunc0623_003E:
 	var0002 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc0623_0046:
 	for (var0005 in var0002 with var0003 to var0004) attend labelFunc0623_005D;
 	Func0923(var0005, 0x001F);
@@ -55838,20 +55838,20 @@ labelFunc0625_00ED:
 labelFunc0625_00F3:
 	var0007 = [0x018A, 0x02D0, 0x0326, 0x03B2];
 	var0008 = [];
-	//enum();
+	enum();
 labelFunc0625_010C:
 	for (var000B in var0007 with var0009 to var000A) attend labelFunc0625_012F;
 	var0008 = (var0008 & UI_find_nearby(item, var000B, 0x001E, 0x0000));
 	goto labelFunc0625_010C;
 labelFunc0625_012F:
-	//enum();
+	enum();
 labelFunc0625_0130:
 	for (var000E in var0008 with var000C to var000D) attend labelFunc0625_0148;
 	UI_set_schedule_type(var000E, 0x000C);
 	goto labelFunc0625_0130;
 labelFunc0625_0148:
 	var000F = UI_find_nearby(item, 0xFE99, 0x001E, 0x0008);
-	//enum();
+	enum();
 labelFunc0625_015A:
 	for (var0012 in var000F with var0010 to var0011) attend labelFunc0625_0180;
 	if (!(UI_get_schedule_type(var0012) == 0x0000)) goto labelFunc0625_017D;
@@ -55891,7 +55891,7 @@ labelFunc0625_01DB:
 labelFunc0625_01E4:
 	if (!(event == 0x0002)) goto labelFunc0625_028A;
 	var0014 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc0625_01F4:
 	for (var0017 in var0014 with var0015 to var0016) attend labelFunc0625_0215;
 	Func0923(var0017, 0x001F);
@@ -55939,7 +55939,7 @@ void Func0626 object#(0x626) ()
 	UI_call_guards();
 	var0001 = Func0920(item, UI_find_nearby(item, 0x0206, 0x0006, 0x0000));
 	var0002 = [];
-	//enum();
+	enum();
 labelFunc0626_0032:
 	for (var0005 in var0001 with var0003 to var0004) attend labelFunc0626_004F;
 	var0002 = (var0002 & UI_get_distance(var0005, item));
@@ -55948,7 +55948,7 @@ labelFunc0626_004F:
 	var0001 = Func0921(var0001, var0002);
 	var0006 = UI_get_object_position(item);
 	var0007 = 0x0001;
-	//enum();
+	enum();
 labelFunc0626_006A:
 	for (var0005 in var0001 with var0008 to var0009) attend labelFunc0626_00FF;
 	var000A = UI_get_object_position(var0005);
@@ -56030,7 +56030,7 @@ void Func0628 object#(0x628) ()
 	UI_set_item_frame(var0000, UI_die_roll(0x000C, 0x000F));
 	var0001 = UI_get_object_position(item);
 	var0002 = UI_find_nearby(item, 0x032A, 0x0002, 0x0000);
-	//enum();
+	enum();
 labelFunc0628_0045:
 	for (var0005 in var0002 with var0003 to var0004) attend labelFunc0628_00C2;
 	var0006 = UI_get_object_position(var0005);
@@ -56083,7 +56083,7 @@ void Func0629 object#(0x629) ()
 	UI_set_item_frame(var0000, UI_die_roll(0x0014, 0x0017));
 	var0001 = UI_get_object_position(item);
 	var0002 = UI_find_nearby(item, 0x032A, 0x0002, 0x0000);
-	//enum();
+	enum();
 labelFunc0629_0045:
 	for (var0005 in var0002 with var0003 to var0004) attend labelFunc0629_00C2;
 	var0006 = UI_get_object_position(var0005);
@@ -56319,7 +56319,7 @@ void Func0631 object#(0x631) ()
 	var0002 = UI_find_nearby(item, 0x0203, 0x000F, 0x0000);
 	var0001 = (var0001 & var0002);
 	var0002 = [];
-	//enum();
+	enum();
 labelFunc0631_0043:
 	for (var0005 in var0001 with var0003 to var0004) attend labelFunc0631_0069;
 	if (!(UI_get_item_quality(var0005) == var0000)) goto labelFunc0631_0066;
@@ -57126,7 +57126,7 @@ labelFunc063E_00ED:
 	say();
 	var0000 = UI_execute_usecode_array((byte)0x56, 0x0015);
 	var0002 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc063E_0126:
 	for (var0005 in var0002 with var0003 to var0004) attend labelFunc063E_013E;
 	UI_set_item_flag(var0005, 0x0007);
@@ -57313,7 +57313,7 @@ labelFunc0645_0018:
 	gflags[0x0027] = true;
 	var0000 = UI_execute_usecode_array(item, [(byte)0x58, 0x0040, (byte)0x6F, (byte)0x61, (byte)0x6C, (byte)0x6D, (byte)0x61, (byte)0x6F, (byte)0x55, 0x0645]);
 	var0001 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc0645_0053:
 	for (var0004 in var0001 with var0002 to var0003) attend labelFunc0645_0089;
 	UI_clear_item_flag(var0004, 0x0008);
@@ -57413,7 +57413,7 @@ labelFunc0648_0039:
 labelFunc0648_004F:
 	if (!(event == 0x0002)) goto labelFunc0648_00B2;
 	var0001 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc0648_005F:
 	for (var0004 in var0001 with var0002 to var0003) attend labelFunc0648_00B2;
 	var0005 = UI_get_object_position(var0004);
@@ -57491,7 +57491,7 @@ void Func064A object#(0x64A) ()
 	var0001 = Func08DA(0xFE9C);
 	var0002 = (0x0015 + var0001);
 	var0003 = UI_find_nearby(item, 0x00C8, var0002, 0x00B0);
-	//enum();
+	enum();
 labelFunc064A_0054:
 	for (var0006 in var0003 with var0004 to var0005) attend labelFunc064A_0079;
 	var0000 = UI_delayed_execute_usecode_array(var0006, [(byte)0x23, (byte)0x55, 0x064A], 0x0005);
@@ -57500,7 +57500,7 @@ labelFunc064A_0079:
 	var0007 = UI_find_nearby(item, 0x0320, var0002, 0x00B0);
 	var0008 = UI_find_nearby(item, 0x020A, var0002, 0x00B0);
 	var0009 = (var0007 & var0008);
-	//enum();
+	enum();
 labelFunc064A_00A6:
 	for (var0006 in var0009 with var000A to var000B) attend labelFunc064A_00D9;
 	if (!(UI_get_item_quality(var0006) == 0x00FF)) goto labelFunc064A_00D6;
@@ -57544,11 +57544,11 @@ void Func064B object#(0x64B) ()
 	var0000 = UI_execute_usecode_array(item, [(byte)0x66, (byte)0x65, (byte)0x67]);
 	var0001 = 0x0019;
 	var0002 = [0x02BD, 0x020E, 0x0152, 0x01B3];
-	//enum();
+	enum();
 labelFunc064B_0045:
 	for (var0005 in var0002 with var0003 to var0004) attend labelFunc064B_00AE;
 	var0006 = UI_find_nearby(item, var0005, var0001, 0x0000);
-	//enum();
+	enum();
 labelFunc064B_0062:
 	for (var0009 in var0006 with var0007 to var0008) attend labelFunc064B_00AB;
 	var000A = UI_get_item_shape(var0009);
@@ -57591,11 +57591,11 @@ void Func064C object#(0x64C) ()
 	var0000 = UI_execute_usecode_array(item, [(byte)0x65, (byte)0x66, (byte)0x67]);
 	var0001 = 0x0019;
 	var0002 = [0x0253, 0x0379, 0x0150, 0x01E1];
-	//enum();
+	enum();
 labelFunc064C_0045:
 	for (var0005 in var0002 with var0003 to var0004) attend labelFunc064C_00AE;
 	var0006 = UI_find_nearby(item, var0005, var0001, 0x0000);
-	//enum();
+	enum();
 labelFunc064C_0062:
 	for (var0009 in var0006 with var0007 to var0008) attend labelFunc064C_00AB;
 	var000A = UI_get_item_shape(var0009);
@@ -57699,7 +57699,7 @@ void Func064F object#(0x64F) ()
 	var0001 = UI_execute_usecode_array(item, [(byte)0x58, 0x0044, (byte)0x65, (byte)0x67]);
 	var0002 = 0x0019;
 	var0003 = UI_find_nearby(item, 0xFFFF, var0002, 0x0004);
-	//enum();
+	enum();
 labelFunc064F_0076:
 	for (var0006 in var0003 with var0004 to var0005) attend labelFunc064F_0098;
 	var0001 = UI_execute_usecode_array(var0006, [(byte)0x23, (byte)0x55, 0x064F]);
@@ -57740,7 +57740,7 @@ void Func0650 object#(0x650) ()
 	if (!Func08EA()) goto labelFunc0650_0122;
 	var0002 = UI_execute_usecode_array(item, [(byte)0x59, var0001, (byte)0x6F, (byte)0x70, (byte)0x6A]);
 	var0003 = UI_find_nearby(var0000, 0x00C8, 0x0002, 0x00B0);
-	//enum();
+	enum();
 labelFunc0650_0055:
 	for (var0006 in var0003 with var0004 to var0005) attend labelFunc0650_00B4;
 	var0000 = UI_get_object_position(var0006);
@@ -57754,7 +57754,7 @@ labelFunc0650_00B1:
 	goto labelFunc0650_0055;
 labelFunc0650_00B4:
 	var0003 = UI_find_nearby(item, 0x020A, 0x0002, 0x00B0);
-	//enum();
+	enum();
 labelFunc0650_00C6:
 	for (var0006 in var0003 with var0007 to var0008) attend labelFunc0650_011F;
 	var0000 = UI_get_object_position(var0006);
@@ -57806,7 +57806,7 @@ labelFunc0651_008A:
 labelFunc0651_00A5:
 	if (!(event == 0x0002)) goto labelFunc0651_00E3;
 	var0006 = 0x0000;
-	//enum();
+	enum();
 labelFunc0651_00B4:
 	for (var0009 in var0000 with var0007 to var0008) attend labelFunc0651_00E3;
 	var0006 = (var0006 + 0x0001);
@@ -57892,7 +57892,7 @@ labelFunc0654_0076:
 	if (!(event == 0x0002)) goto labelFunc0654_00B2;
 	var0002 = UI_get_party_list();
 	var0002 = (var0002 & 0xFE9C);
-	//enum();
+	enum();
 labelFunc0654_0090:
 	for (var0005 in var0002 with var0003 to var0004) attend labelFunc0654_00B2;
 	UI_clear_item_flag(var0005, 0x0008);
@@ -58119,7 +58119,7 @@ labelFunc065B_004E:
 	UI_sprite_effect(0x0007, (var0001[0x0001] - 0x0002), (var0001[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 	var0002 = UI_get_party_list();
 	var0002 = (var0002 & 0xFE9C);
-	//enum();
+	enum();
 labelFunc065B_009E:
 	for (var0005 in var0002 with var0003 to var0004) attend labelFunc065B_00B6;
 	UI_set_item_flag(var0005, 0x0009);
@@ -58360,7 +58360,7 @@ void Func0663 object#(0x663) ()
 	var0003 = Func0918(var0002);
 	var0004 = UI_get_party_list();
 	var0004 = (var0004 & 0xFE9C);
-	//enum();
+	enum();
 labelFunc0663_0083:
 	for (var0007 in var0003 with var0005 to var0006) attend labelFunc0663_00DE;
 	if (!(!(var0007 in var0004))) goto labelFunc0663_00DB;
@@ -58448,7 +58448,7 @@ labelFunc0665_00A9:
 	var0009 = (var0000[0x0002] + var0005[var0007]);
 	var0003 = [var0008, var0009, 0x0000];
 	var000A = UI_find_nearby(var0003, 0xFE99, var0006, 0x0020);
-	//enum();
+	enum();
 labelFunc0665_0100:
 	for (var000D in var000A with var000B to var000C) attend labelFunc0665_012E;
 	if (!(UI_get_item_flag(var000D, 0x0000) && (!(var000D in var0001)))) goto labelFunc0665_012B;
@@ -58459,7 +58459,7 @@ labelFunc0665_012E:
 	goto labelFunc0665_00A9;
 labelFunc0665_0131:
 	if (!var0001) goto labelFunc0665_017C;
-	//enum();
+	enum();
 labelFunc0665_0138:
 	for (var000D in var0001 with var000E to var000F) attend labelFunc0665_0179;
 	var0002 = UI_delayed_execute_usecode_array(var000D, [(byte)0x23, (byte)0x55, 0x0665], 0x0005);
@@ -58650,7 +58650,7 @@ labelFunc0669_0057:
 	if (!(event == 0x0002)) goto labelFunc0669_0140;
 	var0001 = 0x0019;
 	var0002 = Func0918(var0001);
-	//enum();
+	enum();
 labelFunc0669_006F:
 	for (var0005 in var0002 with var0003 to var0004) attend labelFunc0669_0140;
 	var0006 = UI_get_npc_prop(var0005, 0x0002);
@@ -58693,7 +58693,7 @@ void Func066A object#(0x66A) ()
 	UI_item_say(item, "@An Grav@");
 	if (!Func08EA()) goto labelFunc066A_0099;
 	var0003 = UI_execute_usecode_array(item, [(byte)0x58, 0x0041, (byte)0x59, var0001, (byte)0x6F, (byte)0x70, (byte)0x6A]);
-	//enum();
+	enum();
 labelFunc066A_0059:
 	for (var0006 in var0002 with var0004 to var0005) attend labelFunc066A_0096;
 	if (!(var0006 == UI_get_item_shape(var0000))) goto labelFunc066A_0093;
@@ -58868,7 +58868,7 @@ labelFunc066F_0086:
 	var0002 = 0x0019;
 	var0003 = UI_find_nearby(item, 0xFFFF, var0002, 0x0004);
 	var0004 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc066F_00AD:
 	for (var0007 in var0003 with var0005 to var0006) attend labelFunc066F_00D7;
 	if (!(!(var0007 in var0004))) goto labelFunc066F_00D4;
@@ -58904,7 +58904,7 @@ labelFunc0670_0057:
 	if (!(event == 0x0002)) goto labelFunc0670_00C1;
 	var0001 = UI_find_nearby(item, 0xFFFF, 0x0019, 0x0008);
 	var0002 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc0670_0078:
 	for (var0005 in var0001 with var0003 to var0004) attend labelFunc0670_00C1;
 	if (!(!(var0005 in var0002))) goto labelFunc0670_00BE;
@@ -59048,7 +59048,7 @@ void Func0673 object#(0x673) ()
 	UI_item_say(item, "@Vas In Flam Grav@");
 	if (!Func08EA()) goto labelFunc0673_00E6;
 	var0002 = UI_execute_usecode_array(item, [(byte)0x58, 0x0041, (byte)0x6C, (byte)0x6D, (byte)0x6C, (byte)0x70, (byte)0x6A]);
-	//enum();
+	enum();
 labelFunc0673_0045:
 	for (var0005 in var0001 with var0003 to var0004) attend labelFunc0673_00E3;
 	var0006 = UI_get_object_position(var0005);
@@ -59226,7 +59226,7 @@ labelFunc0677_004F:
 	var0002 = UI_get_party_list();
 	var0003 = 0x000C;
 	var0004 = UI_get_item_flag(item, 0x0006);
-	//enum();
+	enum();
 labelFunc0677_0081:
 	for (var0007 in var0001 with var0005 to var0006) attend labelFunc0677_025A;
 	if (!((!var0004) || (!(var0007 in var0002)))) goto labelFunc0677_0257;
@@ -59522,7 +59522,7 @@ void Func067D object#(0x67D) ()
 	UI_sprite_effect(0x0007, (var0001[0x0001] - 0x0002), (var0001[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 	var0002 = 0x0019;
 	var0003 = Func0918(var0002);
-	//enum();
+	enum();
 labelFunc067D_0077:
 	for (var0006 in var0003 with var0004 to var0005) attend labelFunc067D_00C7;
 	var0002 = UI_get_distance(item, var0006);
@@ -59570,7 +59570,7 @@ void Func067E object#(0x67E) ()
 	var0001 = UI_get_object_position(item);
 	UI_sprite_effect(0x0007, (var0001[0x0001] - 0x0002), (var0001[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 	var0002 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc067E_006F:
 	for (var0005 in var0002 with var0003 to var0004) attend labelFunc067E_00AD;
 	var0006 = UI_get_distance(item, var0005);
@@ -59607,7 +59607,7 @@ void Func067F object#(0x67F) ()
 	if (!Func08EA()) goto labelFunc067F_00A8;
 	var0000 = UI_execute_usecode_array(item, [(byte)0x65, (byte)0x70, (byte)0x6A, (byte)0x58, 0x0040]);
 	var0001 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc067F_0039:
 	for (var0004 in var0001 with var0002 to var0003) attend labelFunc067F_00A5;
 	UI_clear_item_flag(var0004, 0x0007);
@@ -59715,7 +59715,7 @@ void Func0682 object#(0x682) ()
 	var0004 = (var0004 & UI_get_npc_object(0xFFE9));
 	var0004 = (var0004 & UI_get_npc_object(0xFFE6));
 	var0005 = false;
-	//enum();
+	enum();
 labelFunc0682_00A6:
 	for (var0008 in var0003 with var0006 to var0007) attend labelFunc0682_00FA;
 	if (!(!(var0008 in var0004))) goto labelFunc0682_00F7;
@@ -59729,7 +59729,7 @@ labelFunc0682_00F7:
 labelFunc0682_00FA:
 	if (!(var0005 == true)) goto labelFunc0682_0132;
 	var0004 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc0682_010A:
 	for (var000B in var0004 with var0009 to var000A) attend labelFunc0682_0132;
 	var000C = UI_get_npc_prop(var000B, 0x0003);
@@ -59772,7 +59772,7 @@ void Func0683 object#(0x683) ()
 	UI_sprite_effect(0x0007, (var0000[0x0001] - 0x0002), (var0000[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 	var0001 = UI_execute_usecode_array(item, [(byte)0x65, (byte)0x58, 0x0043, (byte)0x61, (byte)0x6F, (byte)0x61, (byte)0x6A]);
 	var0002 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc0683_006C:
 	for (var0005 in var0002 with var0003 to var0004) attend labelFunc0683_00AA;
 	var0006 = UI_get_distance(item, var0005);
@@ -60080,7 +60080,7 @@ void Func06AB object#(0x6AB) ()
 	if (!(event == 0x0003)) goto labelFunc06AB_0037;
 	gflags[0x0122] = true;
 	var0000 = [0xFFA9, 0xFFAA, 0xFFA4, 0xFFA6];
-	//enum();
+	enum();
 labelFunc06AB_001F:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc06AB_0037;
 	UI_set_schedule_type(var0003, 0x000B);
@@ -60098,7 +60098,7 @@ void Func06AC object#(0x6AC) ()
 
 	if (!(event == 0x0003)) goto labelFunc06AC_004A;
 	var0000 = UI_find_nearby(item, 0x02F1, 0x0005, 0x0000);
-	//enum();
+	enum();
 labelFunc06AC_001A:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc06AC_0046;
 	UI_set_alignment(var0003, 0x0002);
@@ -60148,7 +60148,7 @@ void Func06AF object#(0x6AF) ()
 	if (!(event == 0x0003)) goto labelFunc06AF_006D;
 	UI_play_sound_effect(0x001C);
 	var0000 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc06AF_0017:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc06AF_006D;
 	if (!(!UI_roll_to_win(UI_get_npc_prop(var0003, 0x0000), UI_get_item_quality(item)))) goto labelFunc06AF_006A;
@@ -60172,7 +60172,7 @@ void Func06B0 object#(0x6B0) ()
 	if (!(event == 0x0003)) goto labelFunc06B0_004A;
 	UI_play_sound_effect(0x001C);
 	var0000 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc06B0_0017:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc06B0_004A;
 	if (!(!UI_roll_to_win(UI_get_npc_prop(var0003, 0x0000), UI_get_item_quality(item)))) goto labelFunc06B0_0047;
@@ -60198,7 +60198,7 @@ void Func06B1 object#(0x6B1) ()
 	if (!(event == 0x0003)) goto labelFunc06B1_0071;
 	UI_play_sound_effect(0x001C);
 	var0000 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc06B1_0017:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc06B1_0071;
 	if (!(!UI_roll_to_win(UI_get_npc_prop(var0003, 0x0000), UI_get_item_quality(item)))) goto labelFunc06B1_006E;
@@ -60234,21 +60234,21 @@ void Func06B2 object#(0x6B2) ()
 	UI_play_sound_effect(0x001C);
 	var0000 = UI_get_item_quality(item);
 	var0001 = UI_find_nearby(item, 0x0150, var0000, 0x0000);
-	//enum();
+	enum();
 labelFunc06B2_002D:
 	for (var0004 in var0001 with var0002 to var0003) attend labelFunc06B2_0041;
 	var0004->Func0150();
 	goto labelFunc06B2_002D;
 labelFunc06B2_0041:
 	var0001 = UI_find_nearby(item, 0x0253, var0000, 0x0000);
-	//enum();
+	enum();
 labelFunc06B2_0053:
 	for (var0004 in var0001 with var0005 to var0006) attend labelFunc06B2_0067;
 	var0004->Func0253();
 	goto labelFunc06B2_0053;
 labelFunc06B2_0067:
 	var0001 = UI_find_nearby(item, 0x0379, var0000, 0x0000);
-	//enum();
+	enum();
 labelFunc06B2_0079:
 	for (var0004 in var0001 with var0007 to var0008) attend labelFunc06B2_008D;
 	var0004->Func0379();
@@ -60279,21 +60279,21 @@ void Func06B3 object#(0x6B3) ()
 	event = 0x0001;
 	var0000 = UI_get_item_quality(item);
 	var0001 = UI_find_nearby(item, 0x0152, var0000, 0x0000);
-	//enum();
+	enum();
 labelFunc06B3_002D:
 	for (var0004 in var0001 with var0002 to var0003) attend labelFunc06B3_0041;
 	var0004->Func0152();
 	goto labelFunc06B3_002D;
 labelFunc06B3_0041:
 	var0001 = UI_find_nearby(item, 0x02BD, var0000, 0x0000);
-	//enum();
+	enum();
 labelFunc06B3_0053:
 	for (var0004 in var0001 with var0005 to var0006) attend labelFunc06B3_0067;
 	var0004->Func02BD();
 	goto labelFunc06B3_0053;
 labelFunc06B3_0067:
 	var0001 = UI_find_nearby(item, 0x020E, var0000, 0x0000);
-	//enum();
+	enum();
 labelFunc06B3_0079:
 	for (var0004 in var0001 with var0007 to var0008) attend labelFunc06B3_008D;
 	var0004->Func020E();
@@ -60345,7 +60345,7 @@ void Func06B5 object#(0x6B5) ()
 	var0000 = UI_find_nearby(item, 0x010E, 0x0028, 0x0000);
 	var0000 = (var0000 & UI_find_nearby(item, 0x0178, 0x0028, 0x0000));
 	var0001 = [];
-	//enum();
+	enum();
 labelFunc06B5_0039:
 	for (var0004 in var0000 with var0002 to var0003) attend labelFunc06B5_0056;
 	var0001 = (var0001 & UI_get_distance(item, var0004));
@@ -60390,7 +60390,7 @@ void Func06B6 object#(0x6B6) ()
 	event = 0x0001;
 	var0000 = UI_find_nearby(item, 0x0369, 0x0014, 0x0000);
 	var0001 = [];
-	//enum();
+	enum();
 labelFunc06B6_002B:
 	for (var0004 in var0000 with var0002 to var0003) attend labelFunc06B6_0048;
 	var0001 = (var0001 & UI_get_distance(var0004, item));
@@ -60447,7 +60447,7 @@ void Func06B8 object#(0x6B8) ()
 	if (!(event == 0x0003)) goto labelFunc06B8_008D;
 	var0000 = UI_get_party_list();
 	var0001 = UI_get_item_quality(item);
-	//enum();
+	enum();
 labelFunc06B8_0018:
 	for (var0004 in var0000 with var0002 to var0003) attend labelFunc06B8_008D;
 	var0005 = UI_get_npc_prop(var0004, 0x0000);
@@ -60498,7 +60498,7 @@ void Func06BA object#(0x6BA) ()
 
 	if (!(event == 0x0003)) goto labelFunc06BA_00C3;
 	var0000 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc06BA_0010:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc06BA_00C3;
 	if (!(!UI_roll_to_win(UI_get_npc_prop(var0003, 0x0000), UI_get_item_quality(item)))) goto labelFunc06BA_00C0;
@@ -60529,7 +60529,7 @@ labelFunc06BA_0113:
 	var0006 = (var0006 + 0x0004);
 	goto labelFunc06BA_00D7;
 labelFunc06BA_0120:
-	//enum();
+	enum();
 labelFunc06BA_0121:
 	for (var000B in var0007 with var0009 to var000A) attend labelFunc06BA_015F;
 	var0005 = UI_create_new_object(0x0390);
@@ -60558,7 +60558,7 @@ void Func06BB object#(0x6BB) ()
 	if (!(event == 0x0003)) goto labelFunc06BB_0084;
 	var0000 = UI_get_item_quality(item);
 	var0001 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc06BB_0018:
 	for (var0004 in var0001 with var0002 to var0003) attend labelFunc06BB_0084;
 	if (!(var0004 != UI_get_npc_object(0xFE9C))) goto labelFunc06BB_0081;
@@ -60589,7 +60589,7 @@ void Func06BC object#(0x6BC) ()
 
 	if (!(event == 0x0003)) goto labelFunc06BC_0049;
 	var0000 = UI_find_nearby(item, 0xFE99, 0x0028, 0x0008);
-	//enum();
+	enum();
 labelFunc06BC_001A:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc06BC_0049;
 	if (!(!UI_get_item_flag(var0003, 0x0006))) goto labelFunc06BC_0046;
@@ -60622,7 +60622,7 @@ void Func06BD object#(0x6BD) ()
 	var0001 = UI_get_party_list();
 	var0002 = 0x000A;
 	var0003 = UI_get_item_flag(item, 0x0006);
-	//enum();
+	enum();
 labelFunc06BD_0032:
 	for (var0006 in var0000 with var0004 to var0005) attend labelFunc06BD_020B;
 	if (!((!var0003) || (!(var0006 in var0001)))) goto labelFunc06BD_0208;
@@ -60706,7 +60706,7 @@ void Func06BF object#(0x6BF) ()
 	if (!(event == 0x0003)) goto labelFunc06BF_003C;
 	var0000 = UI_get_party_list();
 	var0001 = UI_get_item_quality(item);
-	//enum();
+	enum();
 labelFunc06BF_0018:
 	for (var0004 in var0000 with var0002 to var0003) attend labelFunc06BF_003C;
 	var0005 = UI_die_roll(0x0001, var0001);
@@ -60729,7 +60729,7 @@ void Func06C0 object#(0x6C0) ()
 
 	if (!(event == 0x0003)) goto labelFunc06C0_0046;
 	var0000 = UI_find_nearby(item, 0x01EE, 0x0063, 0x0000);
-	//enum();
+	enum();
 labelFunc06C0_001A:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc06C0_0046;
 	var0004 = UI_get_schedule_type(var0003);
@@ -60772,7 +60772,7 @@ void Func06C1 object#(0x6C1) ()
 	var0002 = UI_find_nearby(item, 0x032A, 0x000F, 0x0000);
 	var0003 = UI_find_nearby(item, 0x0390, 0x000F, 0x00B0);
 	var0004 = [var0000, var0001, var0002, var0003];
-	//enum();
+	enum();
 labelFunc06C1_0071:
 	for (var0007 in var0004 with var0005 to var0006) attend labelFunc06C1_00F9;
 	var0008 = UI_get_item_shape(var0007);
@@ -60792,7 +60792,7 @@ labelFunc06C1_00F6:
 labelFunc06C1_00F9:
 	var000C = UI_find_nearby(item, 0x0190, 0x0028, 0x0000);
 	var000C = (var000C & UI_find_nearby(item, 0x019E, 0x0028, 0x0000));
-	//enum();
+	enum();
 labelFunc06C1_0120:
 	for (var000F in var000C with var000D to var000E) attend labelFunc06C1_0152;
 	if (!((UI_get_item_quality(var000F) == 0x0001) && (UI_get_item_quantity(var000F, 0x0001) == 0x0076))) goto labelFunc06C1_014F;
@@ -60833,7 +60833,7 @@ void Func06C2 object#(0x6C2) ()
 	if (!gflags[0x0057]) goto labelFunc06C2_009E;
 	Func0813();
 	var0000 = UI_find_nearby(item, 0x0390, 0x003C, 0x00B0);
-	//enum();
+	enum();
 labelFunc06C2_0023:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc06C2_004B;
 	var0004 = UI_set_last_created(var0003);
@@ -60843,7 +60843,7 @@ labelFunc06C2_0048:
 	goto labelFunc06C2_0023;
 labelFunc06C2_004B:
 	var0005 = UI_find_nearby(item, 0x019E, 0x0050, 0x0000);
-	//enum();
+	enum();
 labelFunc06C2_005D:
 	for (var0008 in var0005 with var0006 to var0007) attend labelFunc06C2_0099;
 	var0009 = UI_get_item_frame(var0008);
@@ -60928,7 +60928,7 @@ void Func06C7 object#(0x6C7) ()
 
 	if (!(event == 0x0003)) goto labelFunc06C7_0035;
 	var0000 = [0xFFA3, 0xFFA5, 0xFFAF, 0xFFAE, 0xFFA6];
-	//enum();
+	enum();
 labelFunc06C7_001E:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc06C7_0035;
 	Func0923(var0003, 0x000B);
@@ -60949,7 +60949,7 @@ void Func06C8 object#(0x6C8) ()
 
 	if (!(event == 0x0003)) goto labelFunc06C8_002F;
 	var0000 = [0xFFA8, 0xFFF8, 0xFFAB];
-	//enum();
+	enum();
 labelFunc06C8_0018:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc06C8_002F;
 	Func0923(var0003, 0x000B);
@@ -60970,7 +60970,7 @@ void Func06C9 object#(0x6C9) ()
 
 	if (!(event == 0x0003)) goto labelFunc06C9_002C;
 	var0000 = [0xFFA1, 0xFFA2];
-	//enum();
+	enum();
 labelFunc06C9_0015:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc06C9_002C;
 	Func0923(var0003, 0x000B);
@@ -60991,7 +60991,7 @@ void Func06CA object#(0x6CA) ()
 
 	if (!(event == 0x0003)) goto labelFunc06CA_002F;
 	var0000 = [0xFFA9, 0xFFAA, 0xFFA4];
-	//enum();
+	enum();
 labelFunc06CA_0018:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc06CA_002F;
 	Func0923(var0003, 0x000B);
@@ -61023,7 +61023,7 @@ void Func06CC object#(0x6CC) ()
 	if (!(gflags[0x0005] == 0x0000)) goto labelFunc06CC_0071;
 	var0000 = UI_get_item_quality(item);
 	var0001 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc06CC_0022:
 	for (var0004 in var0001 with var0002 to var0003) attend labelFunc06CC_0071;
 	if (!(!UI_is_readied(var0004, 0x0009, 0x027E, 0xFE99))) goto labelFunc06CC_006E;
@@ -61169,7 +61169,7 @@ void Func06D6 object#(0x6D6) ()
 	if (!(event == 0x0003)) goto labelFunc06D6_008A;
 	var0000 = UI_find_nearby(item, 0x03D5, 0x0001, 0x0000);
 	var0001 = [];
-	//enum();
+	enum();
 labelFunc06D6_0020:
 	for (var0004 in var0000 with var0002 to var0003) attend labelFunc06D6_003D;
 	var0001 = (var0001 & UI_get_distance(var0004, item));
@@ -61178,7 +61178,7 @@ labelFunc06D6_003D:
 	var0000 = Func0921(var0000, var0001);
 	if (!Func0831(var0000[0x0001])) goto labelFunc06D6_008A;
 	var0005 = UI_find_nearby(item, 0x0113, 0x0014, 0x0010);
-	//enum();
+	enum();
 labelFunc06D6_0067:
 	for (var0008 in var0005 with var0006 to var0007) attend labelFunc06D6_008A;
 	if (!(UI_get_item_quality(var0008) == 0x0032)) goto labelFunc06D6_0087;
@@ -61310,7 +61310,7 @@ void Func06E0 object#(0x6E0) ()
 	if (!gflags[0x0004]) goto labelFunc06E0_004D;
 	var0000 = UI_find_nearby(item, 0x0308, 0x000A, 0x0010);
 	var0000 = (var0000 & UI_find_nearby(item, 0x0309, 0x000A, 0x0010));
-	//enum();
+	enum();
 labelFunc06E0_0035:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc06E0_0049;
 	Func0909(var0003);
@@ -61421,7 +61421,7 @@ labelFunc0800_005A:
 	if (!((var0003 > 0x0003) && (!Func0801(var0000)))) goto labelFunc0800_00FA;
 	var0005 = UI_get_object_position(var0000);
 	var0006 = UI_find_nearby(var0000, var0004, 0x0002, 0x0000);
-	//enum();
+	enum();
 labelFunc0800_009E:
 	for (var0009 in var0006 with var0007 to var0008) attend labelFunc0800_00FA;
 	if (!(UI_get_item_frame(var0009) <= 0x0002)) goto labelFunc0800_00F7;
@@ -61655,7 +61655,7 @@ var Func0806 0x806 (var var0000, var var0001)
 	var var0005;
 
 	var0002 = [];
-	//enum();
+	enum();
 labelFunc0806_0007:
 	for (var0005 in var0001 with var0003 to var0004) attend labelFunc0806_002A;
 	if (!(!(var0005 == var0000))) goto labelFunc0806_0027;
@@ -61713,7 +61713,7 @@ void Func0808 0x808 (var var0000, var var0001, var var0002)
 
 	var0003 = UI_find_nearby(0xFE9C, var0000, 0x001E, 0x0010);
 	var0004 = 0x0000;
-	//enum();
+	enum();
 labelFunc0808_001A:
 	for (var0007 in var0003 with var0005 to var0006) attend labelFunc0808_005C;
 	var0008 = UI_get_item_frame(var0007);
@@ -61749,7 +61749,7 @@ void Func0809 0x809 (var var0000)
 	UI_move_object(0xFE9C, var0001);
 	Func080C();
 	var0002 = UI_find_nearby(0xFE9C, 0x0308, 0x000A, 0x0010);
-	//enum();
+	enum();
 labelFunc0809_005B:
 	for (var0005 in var0002 with var0003 to var0004) attend labelFunc0809_0070;
 	UI_remove_item(var0005);
@@ -61775,7 +61775,7 @@ void Func080A 0x80A (var var0000, var var0001)
 	var0003 = (var0003 & UI_find_nearby(var0002, (var0000 + 0x0001), 0x0014, 0x00B0));
 	var0003 = (var0003 & UI_find_nearby(var0002, (var0000 + 0x0002), 0x0014, 0x00B0));
 	var0003 = (var0003 & UI_find_nearby(var0002, (var0000 + 0x0003), 0x0014, 0x00B0));
-	//enum();
+	enum();
 labelFunc080A_006F:
 	for (var0006 in var0003 with var0004 to var0005) attend labelFunc080A_0099;
 	var0007 = UI_execute_usecode_array(var0006, [(byte)0x4E, (byte)0x0B, 0xFFFF, 0x0006, (byte)0x55, 0x03C8]);
@@ -61819,7 +61819,7 @@ void Func080C 0x80C ()
 
 	var0000 = Func0920(UI_get_npc_object(0xFE9C), UI_get_party_list());
 	var0001 = UI_get_schedule_type(UI_get_npc_object(0xFE9C));
-	//enum();
+	enum();
 labelFunc080C_0020:
 	for (var0004 in var0000 with var0002 to var0003) attend labelFunc080C_003C;
 	gflags[0x0039] = false;
@@ -61896,12 +61896,12 @@ void Func080E 0x80E (var var0000, var var0001)
 
 	var0002 = [];
 	var0003 = UI_find_nearby(0xFE9C, var0001, 0x000F, 0x0000);
-	//enum();
+	enum();
 labelFunc080E_001A:
 	for (var0006 in var0003 with var0004 to var0005) attend labelFunc080E_0098;
 	var0007 = 0x0000;
 	var0008 = 0x270F;
-	//enum();
+	enum();
 labelFunc080E_0032:
 	for (var000B in var0003 with var0009 to var000A) attend labelFunc080E_007F;
 	var0007 = (var0007 + 0x0001);
@@ -61921,7 +61921,7 @@ labelFunc080E_0098:
 	var000E = UI_get_array_size(var0002);
 	var000F = UI_get_party_list();
 	var0007 = 0x0002;
-	//enum();
+	enum();
 labelFunc080E_00BA:
 	for (var0012 in var000F with var0010 to var0011) attend labelFunc080E_0109;
 	if (!((var0007 - 0x0001) > var000E)) goto labelFunc080E_00D6;
@@ -61972,7 +61972,7 @@ var Func0810 0x810 (var var0000)
 	var0001 = UI_find_nearby(item, 0xFE99, 0x0002, 0x0000);
 	var0002 = [0x0348];
 	var0003 = [0x031C, 0x028C, 0x0294, 0x0305, 0x0306, 0x02F5, 0x012D];
-	//enum();
+	enum();
 labelFunc0810_0036:
 	for (var0006 in var0001 with var0004 to var0005) attend labelFunc0810_006A;
 	var0007 = UI_get_item_shape(var0006);
@@ -61997,7 +61997,7 @@ var Func0811 0x811 ()
 	var var0004;
 
 	var0000 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc0811_0008:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc0811_0036;
 	var0004 = UI_get_item_frame(var0003);
@@ -62030,7 +62030,7 @@ var Func0812 0x812 (var var0000)
 	var var000D;
 	var var000E;
 
-	//enum();
+	enum();
 labelFunc0812_0001:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc0812_00BB;
 	if (!(UI_get_item_shape(var0003) == 0x0366)) goto labelFunc0812_00B8;
@@ -62039,7 +62039,7 @@ labelFunc0812_0001:
 	var0006 = var0004[0x0002];
 	var0007 = var0004[0x0003];
 	var0008 = UI_find_nearby(var0003, 0xFE99, 0x000A, 0x0000);
-	//enum();
+	enum();
 labelFunc0812_0053:
 	for (var000B in var0008 with var0009 to var000A) attend labelFunc0812_00B8;
 	var0004 = UI_get_object_position(var000B);
@@ -62053,7 +62053,7 @@ labelFunc0812_00B5:
 labelFunc0812_00B8:
 	goto labelFunc0812_0001;
 labelFunc0812_00BB:
-	//enum();
+	enum();
 labelFunc0812_00BC:
 	for (var0003 in var0000 with var000C to var000D) attend labelFunc0812_014B;
 	if (!(UI_get_item_shape(var0003) == 0x0366)) goto labelFunc0812_0110;
@@ -62096,7 +62096,7 @@ void Func0813 0x813 ()
 	var0005 = UI_find_nearby(item, 0x027C, 0x000F, 0x0000);
 	var0006 = UI_find_nearby(item, 0x00A8, 0x000F, 0x00B0);
 	var0007 = [var0000, var0001, var0002, var0003, var0004, var0005, var0006];
-	//enum();
+	enum();
 labelFunc0813_009B:
 	for (var000A in var0007 with var0008 to var0009) attend labelFunc0813_00B0;
 	UI_remove_item(var000A);
@@ -62130,7 +62130,7 @@ labelFunc0814_0025:
 	var0003 = (var0003 & [UI_get_item_quality(item), 0x0006]);
 	var0004 = UI_find_nearby(var0003, 0x0113, 0x0050, 0x0010);
 	var0005 = 0x0000;
-	//enum();
+	enum();
 labelFunc0814_0059:
 	for (var0008 in var0004 with var0006 to var0007) attend labelFunc0814_00FF;
 	var0005 = (var0005 + 0x0001);
@@ -62168,7 +62168,7 @@ void Func0815 0x815 ()
 	var var0003;
 
 	var0000 = Func0920(UI_get_npc_object(0xFE9C), UI_get_party_list());
-	//enum();
+	enum();
 labelFunc0815_0012:
 	for (var0003 in var0000 with var0001 to var0002) attend labelFunc0815_002E;
 	gflags[0x0039] = true;
@@ -62375,14 +62375,14 @@ void Func0819 0x819 (var var0000)
 	var0002 = UI_get_item_quality(var0000);
 	if (!(var0002 == 0x0000)) goto labelFunc0819_011D;
 	var0003 = UI_find_nearby_avatar(0x020E);
-	//enum();
+	enum();
 labelFunc0819_0023:
 	for (var0006 in var0003 with var0004 to var0005) attend labelFunc0819_00B8;
 	UI_set_item_shape(var0006, 0x0379);
 	var0007 = UI_find_nearby(var0006, 0x01B8, 0x000A, 0x0080);
 	var0008 = UI_get_object_position(var0006);
 	var0009 = [(var0008[0x0001] + 0x0003), (var0008[0x0002] + 0x0003), var0008[0x0003]];
-	//enum();
+	enum();
 labelFunc0819_0076:
 	for (var000C in var0007 with var000A to var000B) attend labelFunc0819_00B5;
 	var000D = UI_get_object_position(var000C);
@@ -62395,7 +62395,7 @@ labelFunc0819_00B5:
 	goto labelFunc0819_0023;
 labelFunc0819_00B8:
 	var0003 = UI_find_nearby_avatar(0x0379);
-	//enum();
+	enum();
 labelFunc0819_00C3:
 	for (var0006 in var0003 with var000E to var000F) attend labelFunc0819_0119;
 	UI_set_item_shape(var0006, 0x020E);
@@ -62410,7 +62410,7 @@ labelFunc0819_0119:
 labelFunc0819_011D:
 	if (!((var0002 >= 0x0001) && (var0002 < 0x00FB))) goto labelFunc0819_0193;
 	var0010 = (UI_find_nearby(var0000, 0x034D, 0x0050, 0x0000) & UI_find_nearby(var0000, 0x033C, 0x0050, 0x0000));
-	//enum();
+	enum();
 labelFunc0819_0154:
 	for (var0013 in var0010 with var0011 to var0012) attend labelFunc0819_0193;
 	if (!(var0002 == UI_get_item_quality(var0013))) goto labelFunc0819_0190;
@@ -62467,7 +62467,7 @@ labelFunc0819_02A5:
 	var0015 = 0x00D2;
 labelFunc0819_02B1:
 	var0010 = UI_find_nearby(UI_get_object_position(var0000), 0x033C, 0x003C, 0x0000);
-	//enum();
+	enum();
 labelFunc0819_02C9:
 	for (var0013 in var0010 with var0016 to var0017) attend labelFunc0819_030D;
 	var0018 = UI_get_item_quality(var0013);
@@ -62479,7 +62479,7 @@ labelFunc0819_030D:
 	var0019 = UI_get_object_position(var0000);
 	var0010 = UI_find_nearby(var0019, 0x034D, 0x003C, 0x0000);
 	var001A = UI_find_nearby(var0019, 0x03B5, 0x003C, 0x0000);
-	//enum();
+	enum();
 labelFunc0819_033E:
 	for (var0013 in var0010 with var001B to var001C) attend labelFunc0819_0363;
 	if (!(UI_get_item_quality(var0013) == var0015)) goto labelFunc0819_0360;
@@ -62487,7 +62487,7 @@ labelFunc0819_033E:
 labelFunc0819_0360:
 	goto labelFunc0819_033E;
 labelFunc0819_0363:
-	//enum();
+	enum();
 labelFunc0819_0364:
 	for (var001F in var001A with var001D to var001E) attend labelFunc0819_03A5;
 	if (!(UI_get_item_quality(var001F) == var0015)) goto labelFunc0819_03A2;
@@ -62538,7 +62538,7 @@ labelFunc081A_0046:
 	if (!gflags[0x02E6]) goto labelFunc081A_0052;
 	var0002 = 0x00D2;
 labelFunc081A_0052:
-	//enum();
+	enum();
 labelFunc081A_0053:
 	for (var0005 in var0001 with var0003 to var0004) attend labelFunc081A_0091;
 	if (!(UI_get_item_quality(var0005) == var0002)) goto labelFunc081A_008E;
@@ -62625,7 +62625,7 @@ void Func0821 0x821 (var var0000, var var0001, var var0002, var var0003, var var
 	var000A = var0009[var0003];
 	var000B = UI_find_nearby(var0000, var0001, 0x0007, 0x0000);
 	var000C = false;
-	//enum();
+	enum();
 labelFunc0821_002B:
 	for (var000F in var000B with var000D to var000E) attend labelFunc0821_0058;
 	if (!((Func081E(var000F) == var0002) && (var0009[var0003] == var000A))) goto labelFunc0821_0055;
@@ -62882,7 +62882,7 @@ labelFunc082B_00DF:
 	goto labelFunc082B_01C6;
 labelFunc082B_00E2:
 	var000C = 0x0000;
-	//enum();
+	enum();
 labelFunc082B_00E9:
 	for (var000A in var0001 with var000D to var000E) attend labelFunc082B_01BE;
 	var000C = (var000C + 0x0001);
@@ -63018,7 +63018,7 @@ var Func082F 0x82F (var var0000, var var0001, var var0002, var var0003)
 	var var0008;
 
 	var0004 = UI_find_nearby(var0000, 0xFE99, Func0916(var0002), 0x0020);
-	//enum();
+	enum();
 labelFunc082F_0017:
 	for (var0007 in var0004 with var0005 to var0006) attend labelFunc082F_009F;
 	var0008 = UI_get_object_position(var0007);
@@ -63074,7 +63074,7 @@ var Func0831 0x831 (var var0000)
 	if (!var0001) goto labelFunc0831_013A;
 	var0002 = UI_find_nearby(item, 0x0241, 0x0014, 0x0000);
 	var0003 = 0x0000;
-	//enum();
+	enum();
 labelFunc0831_0033:
 	for (var0006 in var0002 with var0004 to var0005) attend labelFunc0831_00E2;
 	var0007 = UI_get_object_position(var0006);
@@ -63089,7 +63089,7 @@ labelFunc0831_00DF:
 	goto labelFunc0831_0033;
 labelFunc0831_00E2:
 	if (!(var0003 == 0x0003)) goto labelFunc0831_0111;
-	//enum();
+	enum();
 labelFunc0831_00ED:
 	for (var000D in var0001 with var000B to var000C) attend labelFunc0831_0102;
 	UI_remove_item(var000D);
@@ -63100,7 +63100,7 @@ labelFunc0831_0102:
 labelFunc0831_010E:
 	goto labelFunc0831_013A;
 labelFunc0831_0111:
-	//enum();
+	enum();
 labelFunc0831_0112:
 	for (var000D in var0001 with var000E to var000F) attend labelFunc0831_013A;
 	UI_set_item_frame(var000D, ((UI_get_item_frame(var000D) % 0x0008) + (var0003 * 0x0008)));
@@ -63153,7 +63153,7 @@ void Func0832 0x832 ()
 	var0004 = UI_find_nearby(var0000[0x0001], 0x0284, 0x000A, 0x0000);
 	var0005 = UI_get_object_position(item);
 	if (!((UI_game_hour() >= 0x000F) || (UI_game_hour() <= 0x0003))) goto labelFunc0832_00E5;
-	//enum();
+	enum();
 labelFunc0832_007D:
 	for (var0008 in var0004 with var0006 to var0007) attend labelFunc0832_00E5;
 	var0009 = UI_get_object_position(var0008);
@@ -63177,7 +63177,7 @@ labelFunc0832_00E5:
 	var0016 = [(byte)0x27, 0x0001, var000F];
 	var0017 = [(byte)0x46, 0x0000, (byte)0x27, 0x0001, (byte)0x4D, (byte)0x0B, 0xFFFF, 0x001C, (byte)0x27, 0x0001, (byte)0x50, (byte)0x0B, 0xFFFF, 0x0002, (byte)0x4E, (byte)0x0B, 0xFFFF, 0x0002, var000A];
 	var0018 = 0x0000;
-	//enum();
+	enum();
 labelFunc0832_025E:
 	for (var001B in var0001 with var0019 to var001A) attend labelFunc0832_0381;
 	var0018 = (var0018 + 0x0001);
@@ -63253,7 +63253,7 @@ labelFunc0833_0041:
 	var0002 = 0x0004;
 	var0003 = 0x0057;
 labelFunc0833_0057:
-	//enum();
+	enum();
 labelFunc0833_0058:
 	for (var0008 in var0000 with var0006 to var0007) attend labelFunc0833_007E;
 	var0009 = UI_get_item_frame_rot(var0008);
@@ -63282,7 +63282,7 @@ void Func0834 0x834 (var var0000)
 	var0001 = (var0001 & UI_get_item_quality(var0000));
 	var0001 = (var0001 & 0xFE99);
 	var0002 = UI_find_nearby(var0001, 0x0096, 0x000C, 0x0000);
-	//enum();
+	enum();
 labelFunc0834_0036:
 	for (var0005 in var0002 with var0003 to var0004) attend labelFunc0834_0055;
 	if (!(!Func082C(var0005))) goto labelFunc0834_0052;
@@ -63341,13 +63341,13 @@ var Func0837 0x837 ()
 labelFunc0837_000C:
 	var0000 = (UI_find_nearby(0xFE9C, 0x0114, 0x0019, 0x0000) & UI_find_nearby(0xFE9C, 0x0115, 0x0019, 0x0000));
 	var0001 = (UI_find_nearby(0xFE9C, 0x010F, 0x0019, 0x0000) & UI_find_nearby(0xFE9C, 0x0110, 0x0019, 0x0000));
-	//enum();
+	enum();
 labelFunc0837_0055:
 	for (var0004 in var0001 with var0002 to var0003) attend labelFunc0837_020B;
 	var0005 = UI_get_lift(var0004);
 	if (!(var0005 == 0x0000)) goto labelFunc0837_00C3;
 	var0006 = UI_execute_usecode_array(var0004, [(byte)0x58, 0x0020, (byte)0x55, 0x0607, (byte)0x46, 0x0000, (byte)0x0B, 0xFFF9, 0x0003]);
-	//enum();
+	enum();
 labelFunc0837_0099:
 	for (var0009 in var0000 with var0007 to var0008) attend labelFunc0837_00C3;
 	var0006 = UI_execute_usecode_array(var0009, [(byte)0x46, 0x0001, (byte)0x46, 0x0002, (byte)0x46, 0x0003]);
@@ -63355,7 +63355,7 @@ labelFunc0837_0099:
 labelFunc0837_00C3:
 	if (!(var0005 == 0x0001)) goto labelFunc0837_0119;
 	var0006 = UI_execute_usecode_array(var0004, [(byte)0x23, (byte)0x58, 0x0020, (byte)0x55, 0x0607, (byte)0x46, 0x0001, (byte)0x0B, 0xFFF9, 0x0002]);
-	//enum();
+	enum();
 labelFunc0837_00F4:
 	for (var0009 in var0000 with var000A to var000B) attend labelFunc0837_0119;
 	var0006 = UI_execute_usecode_array(var0009, [(byte)0x46, 0x0002, (byte)0x46, 0x0003]);
@@ -63363,7 +63363,7 @@ labelFunc0837_00F4:
 labelFunc0837_0119:
 	if (!(var0005 == 0x0002)) goto labelFunc0837_0168;
 	var0006 = UI_execute_usecode_array(var0004, [(byte)0x58, 0x0020, (byte)0x55, 0x0607, (byte)0x46, 0x0002, (byte)0x0B, 0xFFF9, 0x0001]);
-	//enum();
+	enum();
 labelFunc0837_0148:
 	for (var0009 in var0000 with var000C to var000D) attend labelFunc0837_0168;
 	var0006 = UI_execute_usecode_array(var0009, [(byte)0x46, 0x0003]);
@@ -63371,7 +63371,7 @@ labelFunc0837_0148:
 labelFunc0837_0168:
 	if (!(var0005 == 0x0003)) goto labelFunc0837_01AF;
 	var0006 = UI_execute_usecode_array(var0004, [(byte)0x58, 0x0020, (byte)0x55, 0x0607, (byte)0x46, 0x0002]);
-	//enum();
+	enum();
 labelFunc0837_018F:
 	for (var0009 in var0000 with var000E to var000F) attend labelFunc0837_01AF;
 	var0006 = UI_execute_usecode_array(var0009, [(byte)0x46, 0x0003]);
@@ -63380,7 +63380,7 @@ labelFunc0837_01AF:
 	if (!(var0005 == 0x0004)) goto labelFunc0837_01DD;
 	var0006 = UI_execute_usecode_array(var0004, [(byte)0x58, 0x0020, (byte)0x55, 0x0609, (byte)0x46, 0x0003, (byte)0x0B, 0xFFF9, 0x0003]);
 labelFunc0837_01DD:
-	//enum();
+	enum();
 labelFunc0837_01DE:
 	for (var0009 in var0000 with var0010 to var0011) attend labelFunc0837_0208;
 	var0006 = UI_execute_usecode_array(var0009, [(byte)0x46, 0x0002, (byte)0x46, 0x0001, (byte)0x46, 0x0000]);
@@ -63426,7 +63426,7 @@ labelFunc0839_003E:
 	var0003 = (var0003 & UI_find_nearby_avatar(0x03A7));
 labelFunc0839_006C:
 	if (!var0003) goto labelFunc0839_0109;
-	//enum();
+	enum();
 labelFunc0839_0073:
 	for (var0006 in var0003 with var0004 to var0005) attend labelFunc0839_0109;
 	if (!(UI_get_item_quality(var0006) == var0002)) goto labelFunc0839_0106;
@@ -63512,7 +63512,7 @@ var Func083C 0x83C ()
 	var0003 = 0x0001;
 	var0004 = UI_find_nearby_avatar(0x0329);
 	var0003 = [];
-	//enum();
+	enum();
 labelFunc083C_0029:
 	for (var0007 in var0004 with var0005 to var0006) attend labelFunc083C_0095;
 	var0008 = UI_get_item_frame(var0007);
@@ -63551,7 +63551,7 @@ var Func083D 0x83D (var var0000)
 
 	var0001 = [];
 	var0002 = UI_find_nearby(var0000[0x0004], 0x0284, 0x000A, 0x0000);
-	//enum();
+	enum();
 labelFunc083D_001D:
 	for (var0005 in var0002 with var0003 to var0004) attend labelFunc083D_0081;
 	var0006 = UI_get_object_position(var0005);
@@ -63605,7 +63605,7 @@ labelFunc083E_0018:
 	var0003 = var0001[0x0002];
 	var0004 = Func083D(var0000);
 	if (!(!UI_npc_nearby(0xFF18))) goto labelFunc083E_0064;
-	//enum();
+	enum();
 labelFunc083E_004B:
 	for (var0007 in var0004 with var0005 to var0006) attend labelFunc083E_0063;
 	UI_set_item_flag(var0007, 0x000B);
@@ -63673,12 +63673,12 @@ labelFunc083E_0207:
 	if (!gflags[0x0006]) goto labelFunc083E_0217;
 	var000B = (var000B * 0x0002);
 labelFunc083E_0217:
-	//enum();
+	enum();
 labelFunc083E_0218:
 	for (var0007 in var0004 with var000C to var000D) attend labelFunc083E_0310;
 	var000E = 0x0000;
 	var000F = false;
-	//enum();
+	enum();
 labelFunc083E_022E:
 	for (var0012 in var0009 with var0010 to var0011) attend labelFunc083E_0306;
 	var000E = (var000E + 0x0001);
@@ -63740,7 +63740,7 @@ labelFunc083F_002D:
 	var0004 = UI_find_nearby(item, 0x0203, 0x000F, 0x0000);
 	var0003 = (var0003 & var0004);
 	var0004 = [];
-	//enum();
+	enum();
 labelFunc083F_0072:
 	for (var0007 in var0003 with var0005 to var0006) attend labelFunc083F_0098;
 	if (!(UI_get_item_quality(var0007) == var0002)) goto labelFunc083F_0095;
@@ -63772,7 +63772,7 @@ void Func0840 0x840 (var var0000, var var0001)
 
 	var0002 = (UI_find_nearby_avatar(0x010F) & UI_find_nearby_avatar(0x0110));
 	var0003 = false;
-	//enum();
+	enum();
 labelFunc0840_0017:
 	for (var0006 in var0002 with var0004 to var0005) attend labelFunc0840_005D;
 	if (!(UI_get_item_quality(var0006) == UI_get_item_quality(var0000))) goto labelFunc0840_005A;
@@ -64056,7 +64056,7 @@ void Func0844 0x844 ()
 	var0002 = [0x0132, 0x0135, 0x013B, 0x013E, 0x0132, 0x0135, 0x013B, 0x013E];
 	var0003 = [0x0002, 0x0002, 0x0002, 0x0002, 0x0000, 0x0000, 0x0000, 0x0000];
 	var0004 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc0844_0068:
 	for (var0007 in var0004 with var0005 to var0006) attend labelFunc0844_00DF;
 	var0008 = var0001[var0000];
@@ -64064,7 +64064,7 @@ labelFunc0844_0068:
 	var0008 = (var0008 & var0003[var0000]);
 	var0000 = (var0000 + 0x0001);
 	var0009 = UI_get_cont_items(var0007, 0xFE99, 0xFE99, 0xFE99);
-	//enum();
+	enum();
 labelFunc0844_00B4:
 	for (var000C in var0009 with var000A to var000B) attend labelFunc0844_00DC;
 	var000D = UI_set_last_created(var000C);
@@ -64816,7 +64816,7 @@ void Func084C 0x84C ()
 	var0001 = [0x0001, 0x0002];
 	var0002 = false;
 	if (!((!gflags[0x0032]) && ((!gflags[0x0033]) && ((!gflags[0x0034]) && ((!gflags[0x0035]) && ((!gflags[0x0036]) && (!gflags[0x0037]))))))) goto labelFunc084C_0134;
-	//enum();
+	enum();
 labelFunc084C_003D:
 	for (var0005 in var0001 with var0003 to var0004) attend labelFunc084C_0071;
 labelFunc084C_0048:
@@ -64829,7 +64829,7 @@ labelFunc084C_0065:
 labelFunc084C_006E:
 	goto labelFunc084C_003D;
 labelFunc084C_0071:
-	//enum();
+	enum();
 labelFunc084C_0072:
 	for (var0005 in var0001 with var0007 to var0008) attend labelFunc084C_0091;
 	if (!(var0000[var0005] == 0x0001)) goto labelFunc084C_008E;
@@ -64837,7 +64837,7 @@ labelFunc084C_0072:
 labelFunc084C_008E:
 	goto labelFunc084C_0072;
 labelFunc084C_0091:
-	//enum();
+	enum();
 labelFunc084C_0092:
 	for (var0005 in var0001 with var0009 to var000A) attend labelFunc084C_00B1;
 	if (!(var0000[var0005] == 0x0002)) goto labelFunc084C_00AE;
@@ -64845,7 +64845,7 @@ labelFunc084C_0092:
 labelFunc084C_00AE:
 	goto labelFunc084C_0092;
 labelFunc084C_00B1:
-	//enum();
+	enum();
 labelFunc084C_00B2:
 	for (var0005 in var0001 with var000B to var000C) attend labelFunc084C_00D1;
 	if (!(var0000[var0005] == 0x0003)) goto labelFunc084C_00CE;
@@ -64853,7 +64853,7 @@ labelFunc084C_00B2:
 labelFunc084C_00CE:
 	goto labelFunc084C_00B2;
 labelFunc084C_00D1:
-	//enum();
+	enum();
 labelFunc084C_00D2:
 	for (var0005 in var0001 with var000D to var000E) attend labelFunc084C_00F1;
 	if (!(var0000[var0005] == 0x0004)) goto labelFunc084C_00EE;
@@ -64861,7 +64861,7 @@ labelFunc084C_00D2:
 labelFunc084C_00EE:
 	goto labelFunc084C_00D2;
 labelFunc084C_00F1:
-	//enum();
+	enum();
 labelFunc084C_00F2:
 	for (var0005 in var0001 with var000F to var0010) attend labelFunc084C_0111;
 	if (!(var0000[var0005] == 0x0005)) goto labelFunc084C_010E;
@@ -64869,7 +64869,7 @@ labelFunc084C_00F2:
 labelFunc084C_010E:
 	goto labelFunc084C_00F2;
 labelFunc084C_0111:
-	//enum();
+	enum();
 labelFunc084C_0112:
 	for (var0005 in var0001 with var0011 to var0012) attend labelFunc084C_0131;
 	if (!(var0000[var0005] == 0x0006)) goto labelFunc084C_012E;
@@ -64879,7 +64879,7 @@ labelFunc084C_012E:
 labelFunc084C_0131:
 	goto labelFunc084C_01D3;
 labelFunc084C_0134:
-	//enum();
+	enum();
 labelFunc084C_0135:
 	for (var0005 in var0001 with var0013 to var0014) attend labelFunc084C_01D3;
 	if (!(gflags[0x0032] && (!(0x0001 in var0000)))) goto labelFunc084C_0158;
@@ -64904,7 +64904,7 @@ labelFunc084C_01D0:
 labelFunc084C_01D3:
 	var0015 = ["Selon le Livre du Savoir Archaïque, combien de fois faut-il faire\tbouillir le ginseng por qu'il puisse servir correctement de réactif magique?", "Combien de runes y a-t-il dans le script de l'ancienne langue de Britannia?", "Selon le Livre du Savoir Archaïque, en combien d'endroits peut-on trouver la Racine de Mandragore à l'estat sauvage?", "Dans le Livre de La Confrérie, combien de bandits encerclent le vieil homme dans l'illustration de la page trois?", "Selon Le Compagnon du Voyageur, combien de parties du corps doit-on\tprotéger avec une armure?", "Selon le Livre du Savoir Archaïque, moins de combien de perles sur 10,000 sont noires?"];
 	var0016 = [0x0028, 0x001F, 0x0002, 0x0006, 0x0006, 0x0001];
-	//enum();
+	enum();
 labelFunc084C_0204:
 	for (var0005 in var0001 with var0017 to var0018) attend labelFunc084C_0250;
 	var0019 = var0015[var0000[var0005]];
@@ -68127,7 +68127,7 @@ labelFunc0876_0088:
 	UI_remove_answer(["Veut miel?", "Du vent!"]);
 	goto labelFunc0876_0022;
 labelFunc0876_0098:
-	break;
+	endconv;
 	return;
 }
 
@@ -68471,7 +68471,7 @@ var Func087B 0x87B ()
 	var0001 = [0x0001, 0x0002, 0x0003];
 	var0002 = false;
 	if (!((!gflags[0x002A]) && ((!gflags[0x002B]) && ((!gflags[0x002C]) && ((!gflags[0x002D]) && ((!gflags[0x002E]) && ((!gflags[0x002F]) && ((!gflags[0x0030]) && (!gflags[0x0031]))))))))) goto labelFunc087B_0184;
-	//enum();
+	enum();
 labelFunc087B_004D:
 	for (var0005 in var0001 with var0003 to var0004) attend labelFunc087B_0081;
 labelFunc087B_0058:
@@ -68484,7 +68484,7 @@ labelFunc087B_0075:
 labelFunc087B_007E:
 	goto labelFunc087B_004D;
 labelFunc087B_0081:
-	//enum();
+	enum();
 labelFunc087B_0082:
 	for (var0005 in var0001 with var0007 to var0008) attend labelFunc087B_00A1;
 	if (!(var0000[var0005] == 0x0001)) goto labelFunc087B_009E;
@@ -68492,7 +68492,7 @@ labelFunc087B_0082:
 labelFunc087B_009E:
 	goto labelFunc087B_0082;
 labelFunc087B_00A1:
-	//enum();
+	enum();
 labelFunc087B_00A2:
 	for (var0005 in var0001 with var0009 to var000A) attend labelFunc087B_00C1;
 	if (!(var0000[var0005] == 0x0002)) goto labelFunc087B_00BE;
@@ -68500,7 +68500,7 @@ labelFunc087B_00A2:
 labelFunc087B_00BE:
 	goto labelFunc087B_00A2;
 labelFunc087B_00C1:
-	//enum();
+	enum();
 labelFunc087B_00C2:
 	for (var0005 in var0001 with var000B to var000C) attend labelFunc087B_00E1;
 	if (!(var0000[var0005] == 0x0003)) goto labelFunc087B_00DE;
@@ -68508,7 +68508,7 @@ labelFunc087B_00C2:
 labelFunc087B_00DE:
 	goto labelFunc087B_00C2;
 labelFunc087B_00E1:
-	//enum();
+	enum();
 labelFunc087B_00E2:
 	for (var0005 in var0001 with var000D to var000E) attend labelFunc087B_0101;
 	if (!(var0000[var0005] == 0x0004)) goto labelFunc087B_00FE;
@@ -68516,7 +68516,7 @@ labelFunc087B_00E2:
 labelFunc087B_00FE:
 	goto labelFunc087B_00E2;
 labelFunc087B_0101:
-	//enum();
+	enum();
 labelFunc087B_0102:
 	for (var0005 in var0001 with var000F to var0010) attend labelFunc087B_0121;
 	if (!(var0000[var0005] == 0x0005)) goto labelFunc087B_011E;
@@ -68524,7 +68524,7 @@ labelFunc087B_0102:
 labelFunc087B_011E:
 	goto labelFunc087B_0102;
 labelFunc087B_0121:
-	//enum();
+	enum();
 labelFunc087B_0122:
 	for (var0005 in var0001 with var0011 to var0012) attend labelFunc087B_0141;
 	if (!(var0000[var0005] == 0x0006)) goto labelFunc087B_013E;
@@ -68532,7 +68532,7 @@ labelFunc087B_0122:
 labelFunc087B_013E:
 	goto labelFunc087B_0122;
 labelFunc087B_0141:
-	//enum();
+	enum();
 labelFunc087B_0142:
 	for (var0005 in var0001 with var0013 to var0014) attend labelFunc087B_0161;
 	if (!(var0000[var0005] == 0x0007)) goto labelFunc087B_015E;
@@ -68540,7 +68540,7 @@ labelFunc087B_0142:
 labelFunc087B_015E:
 	goto labelFunc087B_0142;
 labelFunc087B_0161:
-	//enum();
+	enum();
 labelFunc087B_0162:
 	for (var0005 in var0001 with var0015 to var0016) attend labelFunc087B_0181;
 	if (!(var0000[var0005] == 0x0008)) goto labelFunc087B_017E;
@@ -68550,7 +68550,7 @@ labelFunc087B_017E:
 labelFunc087B_0181:
 	goto labelFunc087B_0253;
 labelFunc087B_0184:
-	//enum();
+	enum();
 labelFunc087B_0185:
 	for (var0005 in var0001 with var0017 to var0018) attend labelFunc087B_0253;
 	if (!(gflags[0x002A] && (!(0x0001 in var0000)))) goto labelFunc087B_01A8;
@@ -68583,7 +68583,7 @@ labelFunc087B_0253:
 	var001A = [0x0078, 0x003C, 0x0078, 0x0000, 0x001E, 0x003C, 0x003C, 0x003C];
 	message("\"Avant de te donner le mot de passe, je dois t'avouer que j'avois des doutes que tu fus vraiment l' Avatar. Je te demande de satisfaire ma nature quelque peu soupçonneuse. Je vais te poser quelques questions concernant la géographie de Britannia. Réponds à l'aide de ta carte par le chiffre de la longitude ou latitude. Souviens-toy-- la longitude est donnée par les lignes qui vont du nord au sud. Elles sont déterminées par les chiffres au bas de la carte. La latitude est donnée par les lignes qui vont d'est en ouest. Elles sont déterminées par les chiffres qui sont sur le costé de ta carte. Si tu responds correctement aulx questions, alors je n'aurois plus aucun doute à ton sujet.\"");
 	say();
-	//enum();
+	enum();
 labelFunc087B_0294:
 	for (var0005 in var0001 with var001B to var001C) attend labelFunc087B_02E0;
 	var001D = var0019[var0000[var0005]];
@@ -68714,7 +68714,7 @@ void Func087D 0x87D ()
 	var0002 = UI_get_party_list();
 	var0003 = UI_get_npc_object(0xFFF8);
 	var0004 = UI_get_npc_object(0xFFF7);
-	//enum();
+	enum();
 labelFunc087D_0039:
 	for (var0007 in var0002 with var0005 to var0006) attend labelFunc087D_0051;
 	var0001 = (var0001 + 0x0001);
@@ -68759,7 +68759,7 @@ void Func087E 0x87E ()
 	UI_remove_from_party(0xFF6D);
 	UI_set_schedule_type(0xFF6D, 0x000F);
 	var0006 = [0xFF6D, 0xFF71, 0xFF72, 0xFF70, 0xFF74, 0xFF6E, 0xFF6F];
-	//enum();
+	enum();
 labelFunc087E_009F:
 	for (var0009 in var0006 with var0007 to var0008) attend labelFunc087E_00B4;
 	UI_remove_npc(var0009);
@@ -69889,7 +69889,7 @@ labelFunc088A_007F:
 	var000B = UI_get_party_list2();
 	var000C = [];
 	var000D = [];
-	//enum();
+	enum();
 labelFunc088A_00A8:
 	for (var0010 in var000B with var000E to var000F) attend labelFunc088A_00DC;
 	if (!(var0010 != UI_get_npc_object(0xFFFB))) goto labelFunc088A_00D9;
@@ -71468,7 +71468,7 @@ labelFunc089E_0069:
 labelFunc089E_007C:
 	goto labelFunc089E_0032;
 labelFunc089E_007F:
-	break;
+	endconv;
 	if (!(event == 0x0000)) goto labelFunc089E_0089;
 	abort;
 labelFunc089E_0089:
@@ -71504,7 +71504,7 @@ var Func089F 0x89F (var var0000)
 	var0006 = UI_find_nearby(var0000, 0x0124, 0x001E, 0x0000);
 	var0007 = [];
 	var0008 = [];
-	//enum();
+	enum();
 labelFunc089F_0041:
 	for (var000B in var0006 with var0009 to var000A) attend labelFunc089F_00AC;
 	if (!(UI_get_barge(var000B) == var0005)) goto labelFunc089F_00A9;
@@ -71521,7 +71521,7 @@ labelFunc089F_00A9:
 labelFunc089F_00AC:
 	var000C = UI_get_array_size(var0004);
 	var0007 = Func0921(var0007, var0008);
-	//enum();
+	enum();
 labelFunc089F_00C3:
 	for (var000B in var0007 with var000D to var000E) attend labelFunc089F_00F7;
 	if (!(var000C >= var0001)) goto labelFunc089F_00F2;
@@ -72644,7 +72644,7 @@ labelFunc08AB_031C:
 labelFunc08AB_0333:
 	goto labelFunc08AB_0079;
 labelFunc08AB_0336:
-	break;
+	endconv;
 	return;
 }
 
@@ -73364,14 +73364,14 @@ var Func08B4 0x8B4 ()
 	var0000 = UI_find_nearby(item, 0x02CE, 0x0028, 0x0000);
 	var0001 = UI_find_nearby(item, 0x0392, 0x0028, 0x0000);
 	var0002 = 0x0000;
-	//enum();
+	enum();
 labelFunc08B4_0029:
 	for (var0005 in var0000 with var0003 to var0004) attend labelFunc08B4_00BF;
 	var0006 = UI_get_object_position(var0005);
 	var0007 = var0006[0x0001];
 	var0008 = var0006[0x0002];
 	var0009 = false;
-	//enum();
+	enum();
 labelFunc08B4_0055:
 	for (var000C in var0001 with var000A to var000B) attend labelFunc08B4_00BC;
 	var000D = UI_get_object_position(var000C);
@@ -74004,7 +74004,7 @@ labelFunc08BC_00A9:
 	abort;
 	goto labelFunc08BC_002C;
 labelFunc08BC_00C5:
-	break;
+	endconv;
 	return;
 }
 
@@ -74467,7 +74467,7 @@ labelFunc08C1_0078:
 labelFunc08C1_0085:
 	goto labelFunc08C1_0029;
 labelFunc08C1_0088:
-	break;
+	endconv;
 labelFunc08C1_0089:
 	return;
 }
@@ -74528,7 +74528,7 @@ labelFunc08C2_008E:
 labelFunc08C2_009B:
 	goto labelFunc08C2_0068;
 labelFunc08C2_009E:
-	break;
+	endconv;
 labelFunc08C2_009F:
 	goto labelFunc08C2_0110;
 labelFunc08C2_00A2:
@@ -74543,7 +74543,7 @@ labelFunc08C2_00A2:
 	say();
 	var0006 = 0x0000;
 	var0001 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc08C2_00CE:
 	for (var0009 in var0001 with var0007 to var0008) attend labelFunc08C2_00E6;
 	var0006 = (var0006 + 0x0001);
@@ -75047,7 +75047,7 @@ labelFunc08C9_006D:
 labelFunc08C9_007A:
 	goto labelFunc08C9_001B;
 labelFunc08C9_007D:
-	break;
+	endconv;
 	return;
 }
 
@@ -75091,7 +75091,7 @@ labelFunc08CA_006D:
 labelFunc08CA_007A:
 	goto labelFunc08CA_001B;
 labelFunc08CA_007D:
-	break;
+	endconv;
 	return;
 }
 
@@ -75542,7 +75542,7 @@ labelFunc08D1_006D:
 	UI_remove_answer(["du miel?", "Va t'en!"]);
 	goto labelFunc08D1_001B;
 labelFunc08D1_007D:
-	break;
+	endconv;
 	return;
 }
 
@@ -75586,7 +75586,7 @@ labelFunc08D2_006D:
 labelFunc08D2_007A:
 	goto labelFunc08D2_001B;
 labelFunc08D2_007D:
-	break;
+	endconv;
 	return;
 }
 
@@ -75698,7 +75698,7 @@ labelFunc08D3_0158:
 labelFunc08D3_0165:
 	goto labelFunc08D3_009C;
 labelFunc08D3_0168:
-	break;
+	endconv;
 	return;
 }
 
@@ -75745,7 +75745,7 @@ labelFunc08D4_006F:
 labelFunc08D4_007C:
 	goto labelFunc08D4_0020;
 labelFunc08D4_007F:
-	break;
+	endconv;
 	goto labelFunc08D4_0088;
 labelFunc08D4_0083:
 	message("\"Eh bien, il me faut retrouver ma douce Rowena! Où a-t-elle bien pu passer?*");
@@ -75873,7 +75873,7 @@ labelFunc08D6_0148:
 labelFunc08D6_0176:
 	goto labelFunc08D6_006B;
 labelFunc08D6_0179:
-	break;
+	endconv;
 	if (!(!var0002)) goto labelFunc08D6_01E7;
 	var0004 = Func08D5("");
 	var0009 = Func08D5(var0004);
@@ -75969,7 +75969,7 @@ labelFunc08D7_00C3:
 	if (!var0002) goto labelFunc08D7_012F;
 	var0002 = false;
 	var0005 = false;
-	//enum();
+	enum();
 labelFunc08D7_00D2:
 	for (var0008 in var0000 with var0006 to var0007) attend labelFunc08D7_00F8;
 	if (!(UI_get_npc_prop(var0008, 0x000A) == 0x0001)) goto labelFunc08D7_00F5;
@@ -76005,7 +76005,7 @@ labelFunc08D7_014F:
 labelFunc08D7_0153:
 	goto labelFunc08D7_0024;
 labelFunc08D7_0156:
-	break;
+	endconv;
 labelFunc08D7_0157:
 	UI_pop_answers();
 	return;
@@ -76077,7 +76077,7 @@ var Func08D9 0x8D9 (var var0000, var var0001)
 	UI_push_answers();
 	var0002 = "personne";
 	var0003 = [];
-	//enum();
+	enum();
 labelFunc08D9_0011:
 	for (var0006 in var0001 with var0004 to var0005) attend labelFunc08D9_002D;
 	var0003 = (var0003 & UI_get_npc_name(var0006));
@@ -76263,7 +76263,7 @@ labelFunc08DC_0069:
 	var000C = UI_remove_party_items((var0003 * var0008), 0x0284, 0xFE99, 0xFE99, true);
 	var000D = 0x0000;
 	var000E = false;
-	//enum();
+	enum();
 labelFunc08DC_00C1:
 	for (var0011 in var000B with var000F to var0010) attend labelFunc08DC_0129;
 	var0012 = UI_get_npc_number(var0011);
@@ -76311,7 +76311,7 @@ var Func08DD 0x8DD (var var0000, var var0001, var var0002)
 	var var0006;
 
 	var0003 = [0x0001, 0x0002, 0x0003];
-	//enum();
+	enum();
 labelFunc08DD_0010:
 	for (var0006 in var0003 with var0004 to var0005) attend labelFunc08DD_0040;
 	if (!((!(var0000[var0006] >= var0001[var0006])) || (!(var0000[var0006] <= var0002[var0006])))) goto labelFunc08DD_003D;
@@ -76435,7 +76435,7 @@ var Func08E6 0x8E6 ()
 
 	var0000 = [0xFFFF, 0xFFFD, 0xFFFC, 0xFFFB, 0xFFF9, 0xFFF8, 0xFFF7, 0xFFFE, 0xFFF6];
 	var0001 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc08E6_0029:
 	for (var0004 in var0000 with var0002 to var0003) attend labelFunc08E6_0053;
 	if (!(UI_get_npc_object(var0004) in var0001)) goto labelFunc08E6_0050;
@@ -76468,7 +76468,7 @@ labelFunc08E7_0024:
 	say();
 	goto labelFunc08E7_0056;
 labelFunc08E7_0040:
-	//enum();
+	enum();
 labelFunc08E7_0041:
 	for (var0005 in var0001 with var0003 to var0004) attend labelFunc08E7_0056;
 	message(var0005);
@@ -76497,7 +76497,7 @@ void Func08E8 0x8E8 (var var0000, var var0001)
 	goto labelFunc08E8_004B;
 labelFunc08E8_0020:
 	var0002 = 0x0000;
-	//enum();
+	enum();
 labelFunc08E8_0027:
 	for (var0005 in var0001 with var0003 to var0004) attend labelFunc08E8_004B;
 	Func0917(var0000, var0005, var0002);
@@ -76568,7 +76568,7 @@ labelFunc08EE_0022:
 labelFunc08EE_0030:
 	goto labelFunc08EE_0011;
 labelFunc08EE_0033:
-	break;
+	endconv;
 	return 0;
 }
 
@@ -76664,7 +76664,7 @@ void Func08F5 0x8F5 (var var0000)
 	var var0005;
 
 	var0001 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc08F5_0008:
 	for (var0004 in var0001 with var0002 to var0003) attend labelFunc08F5_0026;
 	var0005 = UI_set_npc_prop(var0004, 0x0008, var0000);
@@ -76689,7 +76689,7 @@ var Func08F7 0x8F7 (var var0000, var var0001)
 	var var0005;
 
 	var0002 = 0x0000;
-	//enum();
+	enum();
 labelFunc08F7_0007:
 	for (var0005 in var0001 with var0003 to var0004) attend labelFunc08F7_002D;
 	var0002 = (var0002 + 0x0001);
@@ -77030,7 +77030,7 @@ var Func0905 0x905 (var var0000)
 	var0003 = UI_get_party_list();
 	var0004 = [];
 	var0005 = [];
-	//enum();
+	enum();
 labelFunc0905_002E:
 	for (var0008 in var0003 with var0006 to var0007) attend labelFunc0905_005E;
 	if (!(var0008 != var0000)) goto labelFunc0905_005B;
@@ -77082,7 +77082,7 @@ labelFunc0906_0032:
 	if (!(!(var0005 >= var0003))) goto labelFunc0906_0041;
 	return 0x0000;
 labelFunc0906_0041:
-	//enum();
+	enum();
 labelFunc0906_0042:
 	for (var0009 in var0000 with var0007 to var0008) attend labelFunc0906_006A;
 	var000A = Func08F4(var0002, var0009);
@@ -77213,11 +77213,11 @@ void Func090A 0x90A (var var0000)
 	var0003 = UI_get_item_frame(var0000);
 	var0004 = UI_get_item_quality(var0000);
 	var0005 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc090A_002A:
 	for (var0008 in var0005 with var0006 to var0007) attend labelFunc090A_007E;
 	var0009 = UI_get_cont_items(var0008, var0002, var0004, var0003);
-	//enum();
+	enum();
 labelFunc090A_0049:
 	for (var000C in var0009 with var000A to var000B) attend labelFunc090A_007B;
 	if (!(var000C == var0000)) goto labelFunc090A_0078;
@@ -77310,7 +77310,7 @@ labelFunc090C_003C:
 	var0002 = ["eau", "sang", "vin", "bière", "ale", "coup", "coup", "coup", "coup", "coup", "dernier p'tit coup"];
 	var0003 = 0x0000;
 	var0004 = UI_get_item_quality(item);
-	//enum();
+	enum();
 labelFunc090C_0072:
 	for (var0007 in var0002 with var0005 to var0006) attend labelFunc090C_00A2;
 	var0003 = (var0003 + 0x0001);
@@ -77386,7 +77386,7 @@ var Func090F 0x90F (var var0000)
 	var var0004;
 
 	var0001 = 0x0000;
-	//enum();
+	enum();
 labelFunc090F_0007:
 	for (var0004 in var0000 with var0002 to var0003) attend labelFunc090F_001F;
 	var0001 = (var0001 + 0x0001);
@@ -77644,7 +77644,7 @@ var Func0918 0x918 (var var0000)
 	var0002 = UI_get_party_list();
 	var0003 = [];
 	if (!UI_get_item_flag(item, 0x0006)) goto labelFunc0918_0054;
-	//enum();
+	enum();
 labelFunc0918_002A:
 	for (var0006 in var0001 with var0004 to var0005) attend labelFunc0918_004D;
 	if (!(!(var0006 in var0002))) goto labelFunc0918_004A;
@@ -77668,7 +77668,7 @@ var Func0919 0x919 (var var0000, var var0001)
 	var var0005;
 
 	var0002 = var0000[0x0001];
-	//enum();
+	enum();
 labelFunc0919_000A:
 	for (var0005 in var0000 with var0003 to var0004) attend labelFunc0919_0036;
 	if (!(UI_get_distance(var0001, var0005) < UI_get_distance(var0001, var0002))) goto labelFunc0919_0033;
@@ -77744,7 +77744,7 @@ void Func091E 0x91E (var var0000, var var0001)
 	var var000C;
 
 	var0002 = UI_get_party_list2();
-	//enum();
+	enum();
 labelFunc091E_0008:
 	for (var0005 in var0002 with var0003 to var0004) attend labelFunc091E_00AE;
 	if (!(UI_get_npc_prop(var0005, 0x0009) >= 0x000A)) goto labelFunc091E_00AB;
@@ -77765,7 +77765,7 @@ labelFunc091E_00AB:
 labelFunc091E_00AE:
 	var0007 = UI_find_nearby(var0001, 0x02BD, 0x001E, 0x0000);
 	var0007 = (var0007 & UI_find_nearby(var0001, 0x0152, 0x001E, 0x0000));
-	//enum();
+	enum();
 labelFunc091E_00D9:
 	for (var000A in var0007 with var0008 to var0009) attend labelFunc091E_015D;
 	var000B = UI_get_item_quality(var000A);
@@ -77811,7 +77811,7 @@ var Func0920 0x920 (var var0000, var var0001)
 	var var0005;
 
 	var0002 = [];
-	//enum();
+	enum();
 labelFunc0920_0007:
 	for (var0005 in var0001 with var0003 to var0004) attend labelFunc0920_002A;
 	if (!(!(var0005 == var0000))) goto labelFunc0920_0027;
@@ -78071,7 +78071,7 @@ void Func0929 0x929 ()
 	say();
 	var0001 = UI_find_nearby(0xFE9C, 0x0179, 0x0019, 0x0000);
 	var0002 = UI_get_party_list();
-	//enum();
+	enum();
 labelFunc0929_0033:
 	for (var0005 in var0002 with var0003 to var0004) attend labelFunc0929_0058;
 	var0001 = (var0001 & UI_get_cont_items(var0005, 0x0179, 0xFE99, 0x0000));
@@ -78079,7 +78079,7 @@ labelFunc0929_0033:
 labelFunc0929_0058:
 	var0006 = 0x0000;
 	var0007 = [];
-	//enum();
+	enum();
 labelFunc0929_0065:
 	for (var000A in var0001 with var0008 to var0009) attend labelFunc0929_00B1;
 	if (!((UI_get_item_frame(var000A) == 0x0000) && UI_get_item_flag(var000A, 0x000B))) goto labelFunc0929_00AE;
@@ -78103,7 +78103,7 @@ labelFunc0929_00D0:
 	say();
 	var000C = UI_add_party_items(var000B, 0x0284, 0xFE99, 0xFE99, true);
 	if (!var000C) goto labelFunc0929_012E;
-	//enum();
+	enum();
 labelFunc0929_00FB:
 	for (var000A in var0007 with var000D to var000E) attend labelFunc0929_0126;
 	if (!UI_get_container(var000A)) goto labelFunc0929_0119;
