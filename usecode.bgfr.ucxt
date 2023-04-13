@@ -74,7 +74,7 @@ labelFunc009B_0078:
 	if (!(!gflags[0x0197])) goto labelFunc009B_009F;
 	UI_add_answer("payer");
 labelFunc009B_009F:
-	converse (0) attend labelFunc009B_028B;
+	converse attend labelFunc009B_028B;
 	case "nom" attend labelFunc009B_00B5:
 	message("\"Je suis... le Passeur.\" Sa voix grince comme la charpente de sa barque.");
 	say();
@@ -1804,7 +1804,7 @@ void Func018A shape#(0x18A) ()
 	message("Tu vois un garde de palace à l'allure effrayante qui semble prendre son travail -très- au sérieux.");
 	say();
 labelFunc018A_0034:
-	converse (0) attend labelFunc018A_0064;
+	converse attend labelFunc018A_0064;
 	case "nom" attend labelFunc018A_004A:
 	message("\"Je suis un garde.\"");
 	say();
@@ -2178,7 +2178,7 @@ labelFunc01DF_0079:
 labelFunc01DF_007D:
 	UI_add_answer(["nom", "mestier", "salut"]);
 labelFunc01DF_008D:
-	converse (0) attend labelFunc01DF_01E6;
+	converse attend labelFunc01DF_01E6;
 	case "nom" attend labelFunc01DF_017B:
 	var0002 = UI_get_npc_prop(item, 0x0005);
 	var0003 = [0x0001, 0x0002, 0x0003, 0x0004];
@@ -2583,7 +2583,7 @@ labelFunc0269_0184:
 	if (!gflags[0x0003]) goto labelFunc0269_0191;
 	UI_remove_answer("arrange la magie");
 labelFunc0269_0191:
-	converse (0) attend labelFunc0269_03C7;
+	converse attend labelFunc0269_03C7;
 	case "nom" attend labelFunc0269_01A7:
 	message("\"On m' appelle le Seigneur du Temps.\"");
 	say();
@@ -6207,7 +6207,7 @@ labelFunc0326_003C:
 	message("Tu vois un garde à oeil sévère qui semble prendre son travail -très- au sérieux.");
 	say();
 labelFunc0326_0040:
-	converse (0) attend labelFunc0326_00D5;
+	converse attend labelFunc0326_00D5;
 	case "nom" attend labelFunc0326_0056:
 	message("\"Peu importe mon nom.\"");
 	say();
@@ -7265,7 +7265,7 @@ labelFunc03B2_0015:
 	message("Tu vois un garde d'allure martiale qui semble prendre son travail -très- au sérieux.");
 	say();
 labelFunc03B2_0033:
-	converse (0) attend labelFunc03B2_0063;
+	converse attend labelFunc03B2_0063;
 	case "nom" attend labelFunc03B2_0049:
 	message("\"Je suis une sentinelle.\"");
 	say();
@@ -7580,7 +7580,7 @@ labelFunc0401_033C:
 	message("\"Oui, mon amy?\" demande Iolo.");
 	say();
 labelFunc0401_0340:
-	converse (0) attend labelFunc0401_0709;
+	converse attend labelFunc0401_0709;
 	case "nom" attend labelFunc0401_035C:
 	message("Ton amy grogne. \"Quoi, tu rigoles, ");
 	message(var0003);
@@ -7960,7 +7960,7 @@ labelFunc0402_0189:
 	if (!(gflags[0x003E] && (!gflags[0x0064]))) goto labelFunc0402_01A4;
 	UI_add_answer(["or", "médaillon", "parchemin"]);
 labelFunc0402_01A4:
-	converse (0) attend labelFunc0402_0642;
+	converse attend labelFunc0402_0642;
 	case "nom" attend labelFunc0402_01BA:
 	message("\"On m'a tojors appelé Spark.\"");
 	say();
@@ -8328,7 +8328,7 @@ labelFunc0403_00BB:
 	message("?\" demande Shamino.");
 	say();
 labelFunc0403_00C5:
-	converse (0) attend labelFunc0403_04AD;
+	converse attend labelFunc0403_04AD;
 	case "nom" attend labelFunc0403_00DB:
 	message("Ton amy te regarde comme si tu avois perdu la teste. \"Shamino. -Sha-mi-no-.\"");
 	say();
@@ -8664,7 +8664,7 @@ labelFunc0404_012C:
 	message("?\" demande Sire Dupré.");
 	say();
 labelFunc0404_0136:
-	converse (0) attend labelFunc0404_0503;
+	converse attend labelFunc0404_0503;
 	case "nom" attend labelFunc0404_01A7:
 	message("\"Eh, tu ne me reconnois point? C'est moy, Lord British!\" dit-il en s'esclaffant. \"Ne reconnois-tu point ton vieil amy Dupré quand tu le vois, ");
 	message(var0003);
@@ -8974,7 +8974,7 @@ labelFunc0405_0093:
 	message("?\" demande Jaana.");
 	say();
 labelFunc0405_009D:
-	converse (0) attend labelFunc0405_0411;
+	converse attend labelFunc0405_0411;
 	case "nom" attend labelFunc0405_00C4:
 	message("\"Jaana. Tu devrois te souvenir de moy!\"");
 	say();
@@ -9297,7 +9297,7 @@ labelFunc0406_0178:
 	if (!(gflags[0x0151] && (!gflags[0x0132]))) goto labelFunc0406_018A;
 	UI_add_answer("joins");
 labelFunc0406_018A:
-	converse (0) attend labelFunc0406_03C1;
+	converse attend labelFunc0406_03C1;
 	case "nom" attend labelFunc0406_01A0:
 	message("\"je m'appesle tojors Trellek.\"");
 	say();
@@ -9520,7 +9520,7 @@ labelFunc0407_0078:
 	message("?\" demande Sentri.");
 	say();
 labelFunc0407_0082:
-	converse (0) attend labelFunc0407_0409;
+	converse attend labelFunc0407_0409;
 	case "nom" attend labelFunc0407_0098:
 	message("\"Tu ne te rappelles pas? C' est moy, Sentri! Nous avons eu moult adventures ensemble autrefois!\"");
 	say();
@@ -9791,7 +9791,7 @@ labelFunc0408_0099:
 	message(",\" dit Julia en t'accueillant.");
 	say();
 labelFunc0408_00A3:
-	converse (0) attend labelFunc0408_0477;
+	converse attend labelFunc0408_0477;
 	case "nom" attend labelFunc0408_00BF:
 	message("\"Y a-t-il si longtemps de cela, ");
 	message(var0003);
@@ -10088,7 +10088,7 @@ labelFunc0409_00A4:
 	message("!\" dit Katrina en t'accueillant avec un sourire.");
 	say();
 labelFunc0409_00AE:
-	converse (0) attend labelFunc0409_0431;
+	converse attend labelFunc0409_0431;
 	case "nom" attend labelFunc0409_00D5:
 	message("\"Eh bien,\" dit-elle avec un clin d'oeil, \"je sais bien qu'il y a longtemp de cela, mais tu n'as point pu m'oublier, voyons.  Je suis Katrina.  Une de tes vielles connoissances.\"");
 	say();
@@ -10453,7 +10453,7 @@ labelFunc040A_01FC:
 	if (!((!gflags[0x015F]) && ((var0007 > 0x0001) && gflags[0x001D]))) goto labelFunc040A_0216;
 	UI_add_answer("présenter");
 labelFunc040A_0216:
-	converse (0) attend labelFunc040A_0A8F;
+	converse attend labelFunc040A_0A8F;
 	var0002 = UI_get_party_list();
 	var001D = "";
 	case "nom" attend labelFunc040A_0277:
@@ -11046,7 +11046,7 @@ labelFunc040B_00B8:
 	if (!gflags[0x003F]) goto labelFunc040B_00CE;
 	UI_add_answer(["Confrérie", "Klog", "Spark"]);
 labelFunc040B_00CE:
-	converse (0) attend labelFunc040B_0267;
+	converse attend labelFunc040B_0267;
 	if (!(!gflags[0x003C])) goto labelFunc040B_00E0;
 	message("\"Regardez dans les écuries! C't' horrible! Je respondroi à vos questions, mais regardez d'abord dans les écuries!\"*");
 	say();
@@ -11357,7 +11357,7 @@ labelFunc040C_026B:
 	if (!(gflags[0x0045] && (!gflags[0x0044]))) goto labelFunc040C_027D;
 	UI_add_answer("Paye-moi maintenant, s'il te plaist");
 labelFunc040C_027D:
-	converse (0) attend labelFunc040C_04F9;
+	converse attend labelFunc040C_04F9;
 	case "nom" attend labelFunc040C_0293:
 	message("\"Je m'appesle Finnigan.\"");
 	say();
@@ -11605,7 +11605,7 @@ labelFunc040D_009B:
 	message("\"As-tu besoin d'autre choz?\" demande Gilberto. Tu remarques que sa blessure guérit bien.");
 	say();
 labelFunc040D_009F:
-	converse (0) attend labelFunc040D_0249;
+	converse attend labelFunc040D_0249;
 	case "nom" attend labelFunc040D_00B5:
 	message("\"Je m'appelle Gilberto.\"");
 	say();
@@ -11769,7 +11769,7 @@ labelFunc040E_00A1:
 	message("\"C'est à quel sujet?\" demande sèchement Johnson.");
 	say();
 labelFunc040E_00A5:
-	converse (0) attend labelFunc040E_01E6;
+	converse attend labelFunc040E_01E6;
 	case "nom" attend labelFunc040E_00BB:
 	message("\"Johnson.\"");
 	say();
@@ -11890,7 +11890,7 @@ labelFunc040F_0038:
 labelFunc040F_004A:
 	UI_add_answer(["nom", "mestier", "salut"]);
 labelFunc040F_005A:
-	converse (0) attend labelFunc040F_019F;
+	converse attend labelFunc040F_019F;
 	case "nom" attend labelFunc040F_0070:
 	message("\"Eiko.\"");
 	say();
@@ -12024,7 +12024,7 @@ labelFunc0410_00B1:
 	message(",\" dit Klog. \"En quoi puis-je t'estre utile?\"");
 	say();
 labelFunc0410_00BB:
-	converse (0) attend labelFunc0410_029A;
+	converse attend labelFunc0410_029A;
 	case "nom" attend labelFunc0410_00D1:
 	message("\"Je me nomme Klog.\"");
 	say();
@@ -12200,7 +12200,7 @@ labelFunc0411_005A:
 	message("\"Bonjour\" dit Chantu. \"Que puis-je faire por toy?\"");
 	say();
 labelFunc0411_005E:
-	converse (0) attend labelFunc0411_00EF;
+	converse attend labelFunc0411_00EF;
 	case "nom" attend labelFunc0411_0074:
 	message("\"Je me nomme Chantu,\" dit-il en faisant une petite révérence.");
 	say();
@@ -12339,7 +12339,7 @@ labelFunc0412_00BC:
 	message("\"Que puis-je faire por toy?\" demande Dell.");
 	say();
 labelFunc0412_00C0:
-	converse (0) attend labelFunc0412_01D8;
+	converse attend labelFunc0412_01D8;
 	case "nom" attend labelFunc0412_00D6:
 	message("\"Je me nomme Dell. Ne te l' ay-je point déjà dit?\"");
 	say();
@@ -12482,7 +12482,7 @@ labelFunc0413_007C:
 	message("\"Bonjour toy!\" dit Apollonia en papillotant des cils.");
 	say();
 labelFunc0413_0080:
-	converse (0) attend labelFunc0413_023B;
+	converse attend labelFunc0413_023B;
 	case "nom" attend labelFunc0413_00B2:
 	if (!(!var0004)) goto labelFunc0413_009B;
 	var0005 = "en se passant la langue sur les lèvres.";
@@ -12633,7 +12633,7 @@ labelFunc0414_004C:
 	message("\"Oui?\" mande Markus.");
 	say();
 labelFunc0414_0050:
-	converse (0) attend labelFunc0414_00EE;
+	converse attend labelFunc0414_00EE;
 	case "nom" attend labelFunc0414_0066:
 	message("\"Je suis Markus l'entraîneur.\"");
 	say();
@@ -12729,7 +12729,7 @@ labelFunc0415_0078:
 	message("\"Oui, moussaillon?\" demande Gargan en toussant.");
 	say();
 labelFunc0415_007C:
-	converse (0) attend labelFunc0415_03AB;
+	converse attend labelFunc0415_03AB;
 	case "nom" attend labelFunc0415_00A9:
 	message("\"Je m'appelle Gargan.\"~Il reniffle bruyamment.");
 	say();
@@ -12949,7 +12949,7 @@ labelFunc0416_0066:
 	message("\"Bonjour!\" dit Caroline avec entrain.");
 	say();
 labelFunc0416_006A:
-	converse (0) attend labelFunc0416_0112;
+	converse attend labelFunc0416_0112;
 	case "nom" attend labelFunc0416_0080:
 	message("\"Mes parents m'ont nommée Caroline,\" dit-elle fièrement.");
 	say();
@@ -13083,7 +13083,7 @@ labelFunc0417_00D4:
 	message("?\" demande Lord British.");
 	say();
 labelFunc0417_00DE:
-	converse (0) attend labelFunc0417_0671;
+	converse attend labelFunc0417_0671;
 	case "nom" attend labelFunc0417_00F4:
 	message("Lord British rigole. \"Quoi, tu plaisantes, Avatar? Ne reconnois-tu point ton vieil amy?\"");
 	say();
@@ -13467,7 +13467,7 @@ labelFunc0418_0043:
 	message("\"Oui, Avatar?\" demande Nystul.");
 	say();
 labelFunc0418_0047:
-	converse (0) attend labelFunc0418_0165;
+	converse attend labelFunc0418_0165;
 	case "nom" attend labelFunc0418_006B:
 	if (!(!gflags[0x0003])) goto labelFunc0418_0060;
 	message("Le mage à l' air perplexe pendant un instant. \"Je m' appelle Nystul? Oui, c' est ça!\"");
@@ -13590,7 +13590,7 @@ labelFunc0419_0034:
 	say();
 	UI_add_answer(["mestier", "Ciao!", "Jeu"]);
 labelFunc0419_0048:
-	converse (0) attend labelFunc0419_025B;
+	converse attend labelFunc0419_025B;
 	case "nom" attend labelFunc0419_0065:
 	message("\"Je ne peux dire mon nom, sans estre hors Jeu!\"");
 	say();
@@ -13916,7 +13916,7 @@ labelFunc041A_0267:
 	message(", mon cher, cher amy! Comme c'est merveilleux de te revoir!\" dit Batlin.");
 	say();
 labelFunc041A_0271:
-	converse (0) attend labelFunc041A_0690;
+	converse attend labelFunc041A_0690;
 	case "nom" attend labelFunc041A_0287:
 	message("\"Mon nom, cher amy, est Batlin. C'est un grand honneur por moy de rencontrer l'Avatar en personne.\"");
 	say();
@@ -14231,7 +14231,7 @@ labelFunc041B_0069:
 	message("\"Oui, oui?\" s'escrie Raymundo. \"Que veulx-tu? Je suis fort occupé!\"");
 	say();
 labelFunc041B_006D:
-	converse (0) attend labelFunc041B_0249;
+	converse attend labelFunc041B_0249;
 	case "nom" attend labelFunc041B_0083:
 	message("\"Raymundo.\"");
 	say();
@@ -14443,7 +14443,7 @@ labelFunc041C_006D:
 	message("");
 	say();
 labelFunc041C_0077:
-	converse (0) attend labelFunc041C_0154;
+	converse attend labelFunc041C_0154;
 	case "nom" attend labelFunc041C_00A1:
 	if (!var0000) goto labelFunc041C_008C;
 	message("L' acteur parle avec une voix de fausset.");
@@ -14551,7 +14551,7 @@ labelFunc041D_0034:
 	message("Stuart te regarde de haut. \"Oui?\"");
 	say();
 labelFunc041D_0038:
-	converse (0) attend labelFunc041D_014F;
+	converse attend labelFunc041D_014F;
 	case "nom" attend labelFunc041D_0055:
 	message("\"Mon vray nom est Stuart. Mon nom de scène est Laurence.\"");
 	say();
@@ -14673,7 +14673,7 @@ labelFunc041E_0055:
 	message("\"Eh! Beau Sire!\" dict Amber.");
 	say();
 labelFunc041E_0059:
-	converse (0) attend labelFunc041E_018C;
+	converse attend labelFunc041E_018C;
 	case "nom" attend labelFunc041E_006F:
 	message("\"Je m' appesle Amber.\"");
 	say();
@@ -14798,7 +14798,7 @@ labelFunc041F_003D:
 	message("\"Coucou!\" s'exclame Kristy.");
 	say();
 labelFunc041F_0041:
-	converse (0) attend labelFunc041F_013A;
+	converse attend labelFunc041F_013A;
 	case "nom" attend labelFunc041F_007C:
 	message("\"Kwisty.\"");
 	say();
@@ -14904,7 +14904,7 @@ labelFunc0420_0034:
 	message("\"'jour!\" dit Max en te souriant.");
 	say();
 labelFunc0420_0038:
-	converse (0) attend labelFunc0420_0103;
+	converse attend labelFunc0420_0103;
 	case "nom" attend labelFunc0420_007C:
 	message("\"Z'm'appelle Mazk.\"");
 	say();
@@ -15001,7 +15001,7 @@ labelFunc0421_003D:
 	message("\"Ya! Houuuu!\" s'écrie Nicholas.");
 	say();
 labelFunc0421_0041:
-	converse (0) attend labelFunc0421_0169;
+	converse attend labelFunc0421_0169;
 	case "nom" attend labelFunc0421_007F:
 	if (!var0000) goto labelFunc0421_0074;
 	UI_show_npc_face(0xFFDE, 0x0000);
@@ -15149,7 +15149,7 @@ labelFunc0422_0089:
 	message("\"Oui, puis-je t'aider?\" demande Nanna.");
 	say();
 labelFunc0422_008D:
-	converse (0) attend labelFunc0422_026C;
+	converse attend labelFunc0422_026C;
 	case "nom" attend labelFunc0422_00A3:
 	message("\"Oh, tout le monde m'appelle 'Nanna'.\"");
 	say();
@@ -15295,7 +15295,7 @@ labelFunc0423_0049:
 	message("\"Salut, Avatar!\" dit Csil en souriant.");
 	say();
 labelFunc0423_004D:
-	converse (0) attend labelFunc0423_01DA;
+	converse attend labelFunc0423_01DA;
 	case "nom" attend labelFunc0423_006A:
 	message("\"Je suis Csil le Guérisseur. Mais dans une vie antérieure, j'estois Abrams. Je suis devenu Csil quand on m'a promu.\"");
 	say();
@@ -15422,7 +15422,7 @@ labelFunc0424_0049:
 	message("\"Salut!\" dit Zella.");
 	say();
 labelFunc0424_004D:
-	converse (0) attend labelFunc0424_0143;
+	converse attend labelFunc0424_0143;
 	case "nom" attend labelFunc0424_0063:
 	message("\"Je me nomme Zella.\"");
 	say();
@@ -15580,7 +15580,7 @@ labelFunc0425_013C:
 	message("?\"  demande Lucy.");
 	say();
 labelFunc0425_0146:
-	converse (0) attend labelFunc0425_02B5;
+	converse attend labelFunc0425_02B5;
 	case "nom" attend labelFunc0425_015C:
 	message("\"Je m' appelle Lucy!\"");
 	say();
@@ -15720,7 +15720,7 @@ labelFunc0426_0056:
 	message("?\" demande Greg.");
 	say();
 labelFunc0426_0060:
-	converse (0) attend labelFunc0426_0218;
+	converse attend labelFunc0426_0218;
 	case "nom" attend labelFunc0426_0076:
 	message("\"On m'appelle Greg.  Quel plaisir de te voir!\"");
 	say();
@@ -15889,7 +15889,7 @@ labelFunc0427_0061:
 	message("\"Salut,\" dit Neno.");
 	say();
 labelFunc0427_0065:
-	converse (0) attend labelFunc0427_00FC;
+	converse attend labelFunc0427_00FC;
 	case "nom" attend labelFunc0427_007B:
 	message("Le ménestrel te fait un petit signe. \"Neno.\"");
 	say();
@@ -15971,7 +15971,7 @@ labelFunc0428_0061:
 	message("\"Salut!\" dit Judith.");
 	say();
 labelFunc0428_0065:
-	converse (0) attend labelFunc0428_017D;
+	converse attend labelFunc0428_017D;
 	case "nom" attend labelFunc0428_007B:
 	message("\"Judith.  Et je sais déjà qui tu es!\"");
 	say();
@@ -16110,7 +16110,7 @@ labelFunc0429_00B5:
 	message("\"Oui, Avatar?\" dit Candice.");
 	say();
 labelFunc0429_00B9:
-	converse (0) attend labelFunc0429_0238;
+	converse attend labelFunc0429_0238;
 	case "nom" attend labelFunc0429_00CF:
 	message("\"On m'appelle Candice,\" dit-elle joyeusement. \"Je dois dire que je suis fort flattée de rencontrer l'Avatar!\"");
 	say();
@@ -16264,7 +16264,7 @@ labelFunc042A_005B:
 	message("\"En quoi puis-je t'aider?\" demande Cynthia.");
 	say();
 labelFunc042A_005F:
-	converse (0) attend labelFunc042A_02F7;
+	converse attend labelFunc042A_02F7;
 	case "nom" attend labelFunc042A_0075:
 	message("\"On m'appelle Cynthia.\"");
 	say();
@@ -16494,7 +16494,7 @@ labelFunc042B_0109:
 	message("\"Comment puis-je t'estre utile?\" demande Patterson.");
 	say();
 labelFunc042B_010D:
-	converse (0) attend labelFunc042B_02EB;
+	converse attend labelFunc042B_02EB;
 	case "nom" attend labelFunc042B_0123:
 	message("\"Je suis Patterson. Nommé d'après mon père.\" Il te tend la main, prend la tienne et la serre fermement. \"Quelle joy de rencontrer l'Avatar!\"");
 	say();
@@ -16665,7 +16665,7 @@ labelFunc042C_0087:
 	message("\"Vous saluer, en ce jor,~\"'Est mon plaisir, Milady.\"");
 	say();
 labelFunc042C_008B:
-	converse (0) attend labelFunc042C_0282;
+	converse attend labelFunc042C_0282;
 	case "nom" attend labelFunc042C_00A1:
 	message("\"Dès l' aube, quand le soleil se lève,~\"Jusqu' au matin d' après quand Dame Lune doit partir,~\"Je responds au doigt et à l' oeil,~\"vostre humble serviteur, Carrocio!\"");
 	say();
@@ -16881,7 +16881,7 @@ labelFunc042D_009B:
 	message("?\" mande Figg.");
 	say();
 labelFunc042D_00A5:
-	converse (0) attend labelFunc042D_02E1;
+	converse attend labelFunc042D_02E1;
 	case "nom" attend labelFunc042D_00BB:
 	message("\"Figg.\"");
 	say();
@@ -17079,7 +17079,7 @@ labelFunc042E_005C:
 	message("?\" demande James.");
 	say();
 labelFunc042E_0066:
-	converse (0) attend labelFunc042E_0300;
+	converse attend labelFunc042E_0300;
 	case "nom" attend labelFunc042E_007C:
 	message("\"C'est James.\"");
 	say();
@@ -17272,7 +17272,7 @@ labelFunc042F_0056:
 	message("\"Salut, mon joli coeur!\" dit la pétillante Jeanette.");
 	say();
 labelFunc042F_005A:
-	converse (0) attend labelFunc042F_01CB;
+	converse attend labelFunc042F_01CB;
 	case "nom" attend labelFunc042F_0070:
 	message("\"Jeanette, por te servir!\"");
 	say();
@@ -17402,7 +17402,7 @@ labelFunc0430_0038:
 labelFunc0430_004C:
 	UI_add_answer(["nom", "mestier", "salut"]);
 labelFunc0430_005C:
-	converse (0) attend labelFunc0430_021A;
+	converse attend labelFunc0430_021A;
 	case "nom" attend labelFunc0430_0072:
 	message("\"Je m' appesle Amanda.\"");
 	say();
@@ -17543,7 +17543,7 @@ labelFunc0431_0049:
 	message("\"Oui, Avatar?\" demande Denby.");
 	say();
 labelFunc0431_004D:
-	converse (0) attend labelFunc0431_0101;
+	converse attend labelFunc0431_0101;
 	case "nom" attend labelFunc0431_0063:
 	message("\"Denby.\"");
 	say();
@@ -17632,7 +17632,7 @@ labelFunc0432_004F:
 	message(".\" dit Fred.");
 	say();
 labelFunc0432_0059:
-	converse (0) attend labelFunc0432_016E;
+	converse attend labelFunc0432_016E;
 	case "nom" attend labelFunc0432_006F:
 	message("\"Chuis le Fred.\"");
 	say();
@@ -17766,7 +17766,7 @@ labelFunc0433_004F:
 	message("?\" dit Kelly.");
 	say();
 labelFunc0433_0059:
-	converse (0) attend labelFunc0433_0196;
+	converse attend labelFunc0433_0196;
 	case "nom" attend labelFunc0433_0075:
 	message("\"Chuis la Kelly, ");
 	message(var0000);
@@ -17934,7 +17934,7 @@ labelFunc0434_00B3:
 	message("\"Ah, salut! Ça fayt plaisir de te revoyr!\" dit Willy.");
 	say();
 labelFunc0434_00B7:
-	converse (0) attend labelFunc0434_0371;
+	converse attend labelFunc0434_0371;
 	case "nom" attend labelFunc0434_00CD:
 	message("\"Mon nom est Wilhelm, bien que nul ne m 'appelle ainsy. Je préfère qu' on m' appelle Willy. Merci bien.\"");
 	say();
@@ -18214,7 +18214,7 @@ labelFunc0435_009C:
 	message("\"Salut, que puis-je faire por toy aujord'huy?\" demande Gaye.");
 	say();
 labelFunc0435_00A0:
-	converse (0) attend labelFunc0435_01F2;
+	converse attend labelFunc0435_01F2;
 	case "nom" attend labelFunc0435_00B6:
 	message("\"Je m' appelle Gaye.\"");
 	say();
@@ -18429,7 +18429,7 @@ labelFunc0436_0141:
 	message("\"Bonjor!\" dit Coop.");
 	say();
 labelFunc0436_0145:
-	converse (0) attend labelFunc0436_0284;
+	converse attend labelFunc0436_0284;
 	case "nom" attend labelFunc0436_015B:
 	message("\"Mon nom est Coop.\"");
 	say();
@@ -18588,7 +18588,7 @@ labelFunc0437_008F:
 	message("\"Bonjour, mon bon amy,\" dit Grayson.");
 	say();
 labelFunc0437_0093:
-	converse (0) attend labelFunc0437_01C0;
+	converse attend labelFunc0437_01C0;
 	case "nom" attend labelFunc0437_00AF:
 	message("\"Je m' appelle Grayson, ");
 	message(var0004);
@@ -18737,7 +18737,7 @@ labelFunc0438_0055:
 	message(",\" dit Diane.");
 	say();
 labelFunc0438_005F:
-	converse (0) attend labelFunc0438_01CD;
+	converse attend labelFunc0438_01CD;
 	case "nom" attend labelFunc0438_0075:
 	message("\"Je m' appelle Diane.\"");
 	say();
@@ -18876,7 +18876,7 @@ labelFunc0439_0067:
 	message("?\" dit Clint.");
 	say();
 labelFunc0439_0071:
-	converse (0) attend labelFunc0439_025B;
+	converse attend labelFunc0439_025B;
 	case "nom" attend labelFunc0439_0087:
 	message("\"J'suis Clint.\"");
 	say();
@@ -19092,7 +19092,7 @@ labelFunc043A_008F:
 	message("?\" mande Gordon.");
 	say();
 labelFunc043A_0099:
-	converse (0) attend labelFunc043A_024D;
+	converse attend labelFunc043A_024D;
 	case "nom" attend labelFunc043A_00AF:
 	message("\"Mon nom est Gordon.\"");
 	say();
@@ -19300,7 +19300,7 @@ labelFunc043B_0096:
 	message("?\" demande Sean.");
 	say();
 labelFunc043B_00A0:
-	converse (0) attend labelFunc043B_02BF;
+	converse attend labelFunc043B_02BF;
 	case "nom" attend labelFunc043B_00B6:
 	message("\"Je m' appelle Sean.\"");
 	say();
@@ -19506,7 +19506,7 @@ labelFunc043C_004E:
 	message(",\" Brownie dit-il te saluant.");
 	say();
 labelFunc043C_0058:
-	converse (0) attend labelFunc043C_0248;
+	converse attend labelFunc043C_0248;
 	case "nom" attend labelFunc043C_006E:
 	message("\"Je m'appelle Brownie.\"");
 	say();
@@ -19671,7 +19671,7 @@ labelFunc043D_0054:
 	message("\"Avatar! Ben, t' es revenu mon gars!\" s' exclame Mack.");
 	say();
 labelFunc043D_0058:
-	converse (0) attend labelFunc043D_02E4;
+	converse attend labelFunc043D_02E4;
 	case "nom" attend labelFunc043D_006E:
 	message("\"J'sois le Mack.\"");
 	say();
@@ -19882,7 +19882,7 @@ labelFunc043E_003A:
 	message(",\" dit Snaz.");
 	say();
 labelFunc043E_0044:
-	converse (0) attend labelFunc043E_03A2;
+	converse attend labelFunc043E_03A2;
 	case "nom" attend labelFunc043E_005A:
 	message("\"'Chuis le Snaz.\"");
 	say();
@@ -20178,7 +20178,7 @@ labelFunc043F_008E:
 	message("\"Quel plaisir de te revoir,\" dit Millie.");
 	say();
 labelFunc043F_0092:
-	converse (0) attend labelFunc043F_0195;
+	converse attend labelFunc043F_0195;
 	case "nom" attend labelFunc043F_00A8:
 	message("\"On m'appelle Millie,\" dit-elle en riant.");
 	say();
@@ -20300,7 +20300,7 @@ labelFunc0440_0047:
 	message("?\" mande Geoffrey.");
 	say();
 labelFunc0440_0051:
-	converse (0) attend labelFunc0440_0122;
+	converse attend labelFunc0440_0122;
 	case "nom" attend labelFunc0440_0067:
 	message("Geoffrey rit. \"Tu plaisantes? Je suis Geoffrey!\"");
 	say();
@@ -20386,7 +20386,7 @@ labelFunc0441_003D:
 	message("\"Te saluer derechef,\" dit Wislem.");
 	say();
 labelFunc0441_0041:
-	converse (0) attend labelFunc0441_0109;
+	converse attend labelFunc0441_0109;
 	case "nom" attend labelFunc0441_005E:
 	message("\"Estre connu sous le nom de Wislem.\"");
 	say();
@@ -20483,7 +20483,7 @@ labelFunc0442_0046:
 	message("!\" s' écrit Sherry la Souris.");
 	say();
 labelFunc0442_0050:
-	converse (0) attend labelFunc0442_01D8;
+	converse attend labelFunc0442_01D8;
 	case "nom" attend labelFunc0442_006C:
 	message("\"Tu ne te souviens pas de Sherry, ");
 	message(var0000);
@@ -20631,7 +20631,7 @@ labelFunc0443_0043:
 	message("\"Bonjour!\" dit Boots.");
 	say();
 labelFunc0443_0047:
-	converse (0) attend labelFunc0443_0142;
+	converse attend labelFunc0443_0142;
 	case "nom" attend labelFunc0443_005D:
 	message("\"Tous mes frères et soeurs m'appeloient 'Boots' quand j'estois nourrisson, et cela m'est resté, depuis lors.\"");
 	say();
@@ -20743,7 +20743,7 @@ labelFunc0444_0055:
 	message("\"Oui, Avatar?\" demande Bennie.");
 	say();
 labelFunc0444_0059:
-	converse (0) attend labelFunc0444_01A1;
+	converse attend labelFunc0444_01A1;
 	case "nom" attend labelFunc0444_006F:
 	message("\"Tous mes amys m'appellent Bennie.\"");
 	say();
@@ -20864,7 +20864,7 @@ labelFunc0445_004B:
 	message(",\" dit Weston.");
 	say();
 labelFunc0445_0055:
-	converse (0) attend labelFunc0445_032F;
+	converse attend labelFunc0445_032F;
 	case "nom" attend labelFunc0445_006B:
 	message("\"Weston.\"");
 	say();
@@ -21071,7 +21071,7 @@ labelFunc0446_0052:
 	message(",\" dit Miranda. \"Quelle joie de te revoir.\"");
 	say();
 labelFunc0446_005C:
-	converse (0) attend labelFunc0446_0291;
+	converse attend labelFunc0446_0291;
 	case "nom" attend labelFunc0446_0072:
 	message("\"On m'appelle Miranda.\"");
 	say();
@@ -21242,7 +21242,7 @@ labelFunc0447_0038:
 	message("\"Heureux pouvoir te saluer encor, Avatar!\" dit Inwisloklem en souriant.");
 	say();
 labelFunc0447_003C:
-	converse (0) attend labelFunc0447_0186;
+	converse attend labelFunc0447_0186;
 	case "nom" attend labelFunc0447_0059:
 	message("\"Estre appelé Inwisloklem.\"");
 	say();
@@ -21388,7 +21388,7 @@ labelFunc0448_0097:
 labelFunc0448_00A1:
 	UI_add_answer(["nom", "mestier", "salut"]);
 labelFunc0448_00B1:
-	converse (0) attend labelFunc0448_01A1;
+	converse attend labelFunc0448_01A1;
 	case "nom" attend labelFunc0448_00C7:
 	message("\"J't'oy déjà dit que mon nom estoit Nell.\"");
 	say();
@@ -21499,7 +21499,7 @@ labelFunc0449_005B:
 	message("\"Salut, Avatar.\"");
 	say();
 labelFunc0449_005F:
-	converse (0) attend labelFunc0449_01DD;
+	converse attend labelFunc0449_01DD;
 	case "nom" attend labelFunc0449_0075:
 	message("\"On m'appelle Charles.\"");
 	say();
@@ -21644,7 +21644,7 @@ labelFunc044A_0056:
 	message("\"Je te salue, Avatar!\" dit Rudyom, en s'inclinant.");
 	say();
 labelFunc044A_005A:
-	converse (0) attend labelFunc044A_01B6;
+	converse attend labelFunc044A_01B6;
 	case "nom" attend labelFunc044A_0070:
 	message("\"Ça, je le sais. Mon nom est Rudyom.\"");
 	say();
@@ -21816,7 +21816,7 @@ labelFunc044B_00C7:
 	message("!\" dit Nastassia.");
 	say();
 labelFunc044B_00D1:
-	converse (0) attend labelFunc044B_0332;
+	converse attend labelFunc044B_0332;
 	case "nom" attend labelFunc044B_00E7:
 	message("\"Je m'appesle Nastassia.\"");
 	say();
@@ -22033,7 +22033,7 @@ labelFunc044C_006A:
 	message("\"Salut à toy\" dit Rayburt.");
 	say();
 labelFunc044C_006E:
-	converse (0) attend labelFunc044C_014D;
+	converse attend labelFunc044C_014D;
 	case "nom" attend labelFunc044C_00AA:
 	message("\"Rayburt.\"");
 	say();
@@ -22136,7 +22136,7 @@ labelFunc044D_005F:
 	message("\"Rebonjour, Avatar!\" s'exclame Lord Heather.");
 	say();
 labelFunc044D_0063:
-	converse (0) attend labelFunc044D_0270;
+	converse attend labelFunc044D_0270;
 	case "nom" attend labelFunc044D_0079:
 	message("\"Je suis Lord Heather. Et je vous reconnois, Avatar!\"");
 	say();
@@ -22303,7 +22303,7 @@ labelFunc044E_0055:
 	message("\"Salutations, bis!\" dit Pamela.");
 	say();
 labelFunc044E_0059:
-	converse (0) attend labelFunc044E_01B9;
+	converse attend labelFunc044E_01B9;
 	case "nom" attend labelFunc044E_0080:
 	message("\"Je m'appesle Pamela!\"");
 	say();
@@ -22421,7 +22421,7 @@ labelFunc044F_0055:
 	message("\"Salut, toy\" dit Zinaida.");
 	say();
 labelFunc044F_0059:
-	converse (0) attend labelFunc044F_0129;
+	converse attend labelFunc044F_0129;
 	case "nom" attend labelFunc044F_0080:
 	message("\"Je m'appesle Zinaida,\" dit-elle faisant une révérence.");
 	say();
@@ -22519,7 +22519,7 @@ labelFunc0450_0058:
 	message("\"Salutations, Avatar!\" De Maria s'incline.");
 	say();
 labelFunc0450_005C:
-	converse (0) attend labelFunc0450_017D;
+	converse attend labelFunc0450_017D;
 	case "nom" attend labelFunc0450_0083:
 	message("\"Je suis le Barde, De Maria.\"");
 	say();
@@ -22660,7 +22660,7 @@ labelFunc0451_00C0:
 	message("?\" demande Elynor.");
 	say();
 labelFunc0451_00CA:
-	converse (0) attend labelFunc0451_0489;
+	converse attend labelFunc0451_0489;
 	case "nom" attend labelFunc0451_00E0:
 	message("Elle redresse ses épaules et plonge son regard dans le tien. ~~\"Je suis Elynor.\"");
 	say();
@@ -22976,7 +22976,7 @@ labelFunc0452_00B0:
 	message("\"M'adressois-tu la parole?\" mande Gregor sur un ton bourru.");
 	say();
 labelFunc0452_00B4:
-	converse (0) attend labelFunc0452_022B;
+	converse attend labelFunc0452_022B;
 	case "nom" attend labelFunc0452_00CA:
 	message("\"Mon nom est Gregor.\"");
 	say();
@@ -23117,7 +23117,7 @@ labelFunc0453_0076:
 	say();
 	abort;
 labelFunc0453_007B:
-	converse (0) attend labelFunc0453_01A8;
+	converse attend labelFunc0453_01A8;
 	case "nom" attend labelFunc0453_0091:
 	message("\"Margareta, por te servir,\" dit-elle d'une voix lente et grave.");
 	say();
@@ -23232,7 +23232,7 @@ labelFunc0454_003B:
 	message(".\"");
 	say();
 labelFunc0454_0045:
-	converse (0) attend labelFunc0454_012B;
+	converse attend labelFunc0454_012B;
 	case "nom" attend labelFunc0454_005B:
 	message("\"Mon nom est Sasha.\"");
 	say();
@@ -23320,7 +23320,7 @@ labelFunc0455_0041:
 	message("Gladstone te serre la main et tu peux sentir l'argile couvrant sa paume. Bien qu'il te connoisse à peine, il t'accueille comme un vieil amy.");
 	say();
 labelFunc0455_0045:
-	converse (0) attend labelFunc0455_01D4;
+	converse attend labelFunc0455_01D4;
 	case "nom" attend labelFunc0455_0061:
 	message("\"Je me nomme Gladstone, ");
 	message(var0000);
@@ -23461,7 +23461,7 @@ labelFunc0456_002A:
 labelFunc0456_0034:
 	UI_add_answer(["nom", "mestier", "salut"]);
 labelFunc0456_0044:
-	converse (0) attend labelFunc0456_0195;
+	converse attend labelFunc0456_0195;
 	case "nom" attend labelFunc0456_005A:
 	message("\"Salut, mon nom est Xanthia.\"");
 	say();
@@ -23598,7 +23598,7 @@ labelFunc0457_0071:
 	message("\"Vous désirez?\" dit Zorn.");
 	say();
 labelFunc0457_0075:
-	converse (0) attend labelFunc0457_02CC;
+	converse attend labelFunc0457_02CC;
 	case "nom" attend labelFunc0457_008B:
 	message("\"Zorn.\"");
 	say();
@@ -23808,7 +23808,7 @@ labelFunc0458_0048:
 	message(",\" dit Seara.");
 	say();
 labelFunc0458_0052:
-	converse (0) attend labelFunc0458_01F3;
+	converse attend labelFunc0458_01F3;
 	case "nom" attend labelFunc0458_006E:
 	message("\"On m'appelle Seara, ");
 	message(var0000);
@@ -23956,7 +23956,7 @@ labelFunc0459_0060:
 	message("\"Que me veulx-tu?  Laisse-moy en paix!\"");
 	say();
 labelFunc0459_0064:
-	converse (0) attend labelFunc0459_020A;
+	converse attend labelFunc0459_020A;
 	case "nom" attend labelFunc0459_009C:
 	message("\"Je n'ay point coutume de parler aux estrangers, mais comme tu n'as pas l'air très malin, je vais faire un effort.  Je me nomme Karl, j'étois de Minoc.\"");
 	say();
@@ -24146,7 +24146,7 @@ labelFunc045A_00E0:
 	message("Owen te regarde et renifle. \"On diroit que tu veulx toujours me parler.\"");
 	say();
 labelFunc045A_00E4:
-	converse (0) attend labelFunc045A_0585;
+	converse attend labelFunc045A_0585;
 	case "nom" attend labelFunc045A_0104:
 	message("\"Mon nom, ");
 	message(var0002);
@@ -24519,7 +24519,7 @@ labelFunc045B_00A2:
 	message("\"Ahh, Avatar. Comme je suis heureux de te revoir.\" dit Burnside.");
 	say();
 labelFunc045B_00A6:
-	converse (0) attend labelFunc045B_02AE;
+	converse attend labelFunc045B_02AE;
 	case "nom" attend labelFunc045B_00BC:
 	message("\"Je me nomme Burnside.\"");
 	say();
@@ -24718,7 +24718,7 @@ labelFunc045C_0076:
 	message("?\" te lance Rutherford.");
 	say();
 labelFunc045C_0080:
-	converse (0) attend labelFunc045C_02F2;
+	converse attend labelFunc045C_02F2;
 	case "nom" attend labelFunc045C_0096:
 	message("Il toussote pour s'éclaircir la gorge. \"Rutherford est mon nom, l'amy. Content de t'rencontrer.\"~~ Il te tend sa main sale pour que tu la serres et ne la retirera que quand tu l'auras serrée.");
 	say();
@@ -24928,7 +24928,7 @@ labelFunc045D_008D:
 	message("\"Avatar! Qu'y a-t-il? Pourquoi veulx-tu me parler? Que se passe-t-il encor?!\" dit William.");
 	say();
 labelFunc045D_0091:
-	converse (0) attend labelFunc045D_01AB;
+	converse attend labelFunc045D_01AB;
 	case "nom" attend labelFunc045D_00AD:
 	message("\"On m'appelle William, ");
 	message(var0004);
@@ -25052,7 +25052,7 @@ labelFunc045E_006C:
 	message("\"Quel plaisir de te voir,\" dit Karenna.");
 	say();
 labelFunc045E_0070:
-	converse (0) attend labelFunc045E_025E;
+	converse attend labelFunc045E_025E;
 	case "nom" attend labelFunc045E_0086:
 	message("\"Je réponds au nom de Karenna, et à nul austre.\"");
 	say();
@@ -25210,7 +25210,7 @@ labelFunc045F_005C:
 	message("\"En quoi puis-je t'aider?\" dit Jakher.");
 	say();
 labelFunc045F_0060:
-	converse (0) attend labelFunc045F_0256;
+	converse attend labelFunc045F_0256;
 	case "nom" attend labelFunc045F_007D:
 	message("\"Je suis Jakher, nommé ainsy en souvenir d'un grand général de l'époque de Sosaria. Bienvenu à Minoc.\"");
 	say();
@@ -25367,7 +25367,7 @@ labelFunc0460_005E:
 	message("\"Salutations à toy,\" dit Jergi qui s'incline en faisant un moulinet de sa main.");
 	say();
 labelFunc0460_0062:
-	converse (0) attend labelFunc0460_01B4;
+	converse attend labelFunc0460_01B4;
 	case "nom" attend labelFunc0460_0078:
 	message("\"Je suis Jergi.  Heureux de faire ta connaissance.\"");
 	say();
@@ -25494,7 +25494,7 @@ labelFunc0461_0078:
 	message("Mikos hausse les épaules et soupires. \"Que veulx-tu cette fois-cy?\"");
 	say();
 labelFunc0461_007C:
-	converse (0) attend labelFunc0461_0139;
+	converse attend labelFunc0461_0139;
 	case "nom" attend labelFunc0461_0092:
 	message("Je suis Mikos.\"");
 	say();
@@ -25599,7 +25599,7 @@ labelFunc0462_007D:
 labelFunc0462_008F:
 	UI_add_answer(["nom", "mestier", "salut"]);
 labelFunc0462_009F:
-	converse (0) attend labelFunc0462_023E;
+	converse attend labelFunc0462_023E;
 	case "nom" attend labelFunc0462_00C7:
 	message("Timide por un instant, elle s'avance prudemment. \"J'ay nom Saralek.\"");
 	say();
@@ -25738,7 +25738,7 @@ labelFunc0463_0033:
 labelFunc0463_0037:
 	UI_add_answer(["nom", "mestier", "salut"]);
 labelFunc0463_0047:
-	converse (0) attend labelFunc0463_00E6;
+	converse attend labelFunc0463_00E6;
 	case "nom" attend labelFunc0463_005D:
 	message("\"Mon nom estre Fodus.\"");
 	say();
@@ -25831,7 +25831,7 @@ labelFunc0464_006C:
 	UI_add_answer(["nom", "mestier", "salut"]);
 	var0001 = false;
 labelFunc0464_0080:
-	converse (0) attend labelFunc0464_01EB;
+	converse attend labelFunc0464_01EB;
 	case "nom" attend labelFunc0464_0096:
 	message("\"Tavenor est mon nom.\"");
 	say();
@@ -25986,7 +25986,7 @@ labelFunc0465_006C:
 labelFunc0465_0079:
 	UI_add_answer(["nom", "mestier", "salut"]);
 labelFunc0465_0089:
-	converse (0) attend labelFunc0465_029A;
+	converse attend labelFunc0465_029A;
 	case "nom" attend labelFunc0465_009F:
 	message("\"On m'appelle Salamon,\" dit-elle.");
 	say();
@@ -26199,7 +26199,7 @@ labelFunc0466_0087:
 	message(",\" dit Nicodemus.");
 	say();
 labelFunc0466_0091:
-	converse (0) attend labelFunc0466_02F9;
+	converse attend labelFunc0466_02F9;
 	case "nom" attend labelFunc0466_00B5:
 	if (!(!gflags[0x0003])) goto labelFunc0466_00AA;
 	message("\"C'est une très bonne question. Il ya des jours où je peux vraiment me rappeller. Voyons... aujord'hui... Oui! Je suis Nicodemus! Nicodomus! Nicodimus! Nico-nico-kukodamus! Ha ha ha!\"");
@@ -26429,7 +26429,7 @@ labelFunc0467_0061:
 labelFunc0467_006B:
 	UI_add_answer(["nom", "mestier", "salut"]);
 labelFunc0467_007B:
-	converse (0) attend labelFunc0467_0180;
+	converse attend labelFunc0467_0180;
 	case "nom" attend labelFunc0467_0097:
 	message("Il t'observe un instant. \"On m'appelle Thad, ");
 	message(var0002);
@@ -26541,7 +26541,7 @@ labelFunc0468_003A:
 	message(".\"");
 	say();
 labelFunc0468_0044:
-	converse (0) attend labelFunc0468_01A2;
+	converse attend labelFunc0468_01A2;
 	case "nom" attend labelFunc0468_005A:
 	message("\"On m'appelle Bradman.\"");
 	say();
@@ -26659,7 +26659,7 @@ labelFunc0469_003A:
 	message("?\"");
 	say();
 labelFunc0469_0044:
-	converse (0) attend labelFunc0469_012C;
+	converse attend labelFunc0469_012C;
 	case "nom" attend labelFunc0469_0060:
 	message("\"Je suis Sire Jeff, ");
 	message(var0000);
@@ -26758,7 +26758,7 @@ labelFunc046A_0040:
 	message(".\"");
 	say();
 labelFunc046A_004A:
-	converse (0) attend labelFunc046A_0181;
+	converse attend labelFunc046A_0181;
 	case "nom" attend labelFunc046A_0066:
 	message("\"M'appelle Tiery, ");
 	message(var0001);
@@ -26886,7 +26886,7 @@ labelFunc046B_003B:
 	if (!gflags[0x02DB]) goto labelFunc046B_0058;
 	UI_add_answer("Eiko et Amanda");
 labelFunc046B_0058:
-	converse (0) attend labelFunc046B_02B3;
+	converse attend labelFunc046B_02B3;
 	case "nom" attend labelFunc046B_006E:
 	message("\"Je suys du clan des Ironheart, le onzième fils de Valador. Ils m' appellent Iskander.\"");
 	say();
@@ -27118,7 +27118,7 @@ labelFunc046C_00A5:
 	UI_add_answer("guérir");
 	var0004 = true;
 labelFunc046C_00B6:
-	converse (0) attend labelFunc046C_042B;
+	converse attend labelFunc046C_042B;
 	case "nom" attend labelFunc046C_00CC:
 	message("\"On m'appelle Reyna,\" dit-elle en repoussant une mèche de son doux visage.");
 	say();
@@ -27350,7 +27350,7 @@ labelFunc046D_003A:
 	message(". As-tu besoin d' aide?\" demande Wayne.");
 	say();
 labelFunc046D_0044:
-	converse (0) attend labelFunc046D_01EB;
+	converse attend labelFunc046D_01EB;
 	case "nom" attend labelFunc046D_0060:
 	message("\"Tu peux m' appeller frère Wayne, ");
 	message(var0000);
@@ -27503,7 +27503,7 @@ labelFunc046E_0054:
 	message("\"Tu me parles?\" demande Garok, méfiant.");
 	say();
 labelFunc046E_0058:
-	converse (0) attend labelFunc046E_02EE;
+	converse attend labelFunc046E_02EE;
 	case "nom" attend labelFunc046E_009B:
 	message("Le mage te fixe un instant. \"Es-tu de la Perception Générale de Britannia?\"");
 	say();
@@ -27680,7 +27680,7 @@ labelFunc046F_003C:
 	message("\"Que veulx-tu?\" grommelle Gharl.");
 	say();
 labelFunc046F_0040:
-	converse (0) attend labelFunc046F_0143;
+	converse attend labelFunc046F_0143;
 	case "nom" attend labelFunc046F_0056:
 	message("\"Moy, Gharl.\"");
 	say();
@@ -27791,7 +27791,7 @@ labelFunc0470_0050:
 	message("D'Rel t'apostrophe. \"Qu'est-ce que tu m'veulx, bon sang?\"");
 	say();
 labelFunc0470_0054:
-	converse (0) attend labelFunc0470_01DC;
+	converse attend labelFunc0470_01DC;
 	case "nom" attend labelFunc0470_0077:
 	message("\"Diantre! Quel bien peux donque te faire le nom d'un pauvre gueux?\"");
 	say();
@@ -27923,7 +27923,7 @@ labelFunc0471_0047:
 	message("?\" demande Smith.");
 	say();
 labelFunc0471_0051:
-	converse (0) attend labelFunc0471_02B9;
+	converse attend labelFunc0471_02B9;
 	case "nom" attend labelFunc0471_00A1:
 	message("\"Oui, j'ay un nom.\"");
 	say();
@@ -28116,7 +28116,7 @@ labelFunc0472_004F:
 	message(".  Que tes jours rayonnent de beauté.\"");
 	say();
 labelFunc0472_0059:
-	converse (0) attend labelFunc0472_0251;
+	converse attend labelFunc0472_0251;
 	case "nom" attend labelFunc0472_008B:
 	message("\"Tu peux m' appesler Aimi, ");
 	message(var0000);
@@ -28291,7 +28291,7 @@ labelFunc0473_0056:
 	if (!gflags[0x01DE]) goto labelFunc0473_006D;
 	UI_add_answer("Addom");
 labelFunc0473_006D:
-	converse (0) attend labelFunc0473_01F7;
+	converse attend labelFunc0473_01F7;
 	case "nom" attend labelFunc0473_009B:
 	message("\"Je me nomme Penni, ");
 	message(var0001);
@@ -28437,7 +28437,7 @@ labelFunc0474_003A:
 	message(". Belle jornée, hein?\"");
 	say();
 labelFunc0474_0044:
-	converse (0) attend labelFunc0474_01FE;
+	converse attend labelFunc0474_01FE;
 	case "nom" attend labelFunc0474_006D:
 	message("\"Tu peux m'appeler Ben, ");
 	message(var0000);
@@ -28603,7 +28603,7 @@ labelFunc0475_003E:
 	if (!gflags[0x012C]) goto labelFunc0475_004B;
 	UI_add_answer("acheter clefs");
 labelFunc0475_004B:
-	converse (0) attend labelFunc0475_02DA;
+	converse attend labelFunc0475_02DA;
 	case "nom" attend labelFunc0475_0061:
 	message("\"Goth. Mais c'est pas tes oignons!\"");
 	say();
@@ -28783,7 +28783,7 @@ labelFunc0476_0045:
 	message("?\" demande Carlyn.");
 	say();
 labelFunc0476_004F:
-	converse (0) attend labelFunc0476_0229;
+	converse attend labelFunc0476_0229;
 	case "nom" attend labelFunc0476_0065:
 	message("\"Carlyn.\" dit-elle avec un sourire ravissant");
 	say();
@@ -28957,7 +28957,7 @@ labelFunc0477_00A7:
 	if (!gflags[0x016A]) goto labelFunc0477_00B4;
 	UI_add_answer("estendard");
 labelFunc0477_00B4:
-	converse (0) attend labelFunc0477_02BA;
+	converse attend labelFunc0477_02BA;
 	case "nom" attend labelFunc0477_00CA:
 	message("\"On m'appelle Maistre De Snel.\"");
 	say();
@@ -29133,7 +29133,7 @@ labelFunc0478_005B:
 	message("Joseph te fait un signe de teste respectueux. \"En quoi puis-je t'estre utile?\"");
 	say();
 labelFunc0478_005F:
-	converse (0) attend labelFunc0478_0273;
+	converse attend labelFunc0478_0273;
 	case "nom" attend labelFunc0478_0075:
 	message("\"Je me nomme Joseph.\"");
 	say();
@@ -29312,7 +29312,7 @@ labelFunc0479_0070:
 	message("\"Salutations!\" s'exclame Kliftin. \"Tu t'es fourré dans de sales coups ces temps-cy?\"");
 	say();
 labelFunc0479_0074:
-	converse (0) attend labelFunc0479_02E3;
+	converse attend labelFunc0479_02E3;
 	case "nom" attend labelFunc0479_008A:
 	message("\"Je suis  Kliftin.\"");
 	say();
@@ -29572,7 +29572,7 @@ labelFunc047A_00D6:
 	UI_add_answer("Sprellic mort");
 	UI_remove_answer("Sprellic");
 labelFunc047A_00EA:
-	converse (0) attend labelFunc047A_053F;
+	converse attend labelFunc047A_053F;
 	case "nom" attend labelFunc047A_0106:
 	message("\"C'est Ophélia, ");
 	message(var0000);
@@ -29915,7 +29915,7 @@ labelFunc047B_010A:
 	message(". Repose-toy et bois un coup.\"");
 	say();
 labelFunc047B_0114:
-	converse (0) attend labelFunc047B_03D6;
+	converse attend labelFunc047B_03D6;
 	case "nom" attend labelFunc047B_012A:
 	message("\"Daphné.\"");
 	say();
@@ -30141,7 +30141,7 @@ labelFunc047C_00C0:
 	if (!(!gflags[0x016A])) goto labelFunc047C_00DB;
 	UI_add_answer("champion");
 labelFunc047C_00DB:
-	converse (0) attend labelFunc047C_0443;
+	converse attend labelFunc047C_0443;
 	case "nom" attend labelFunc047C_00F1:
 	message("\"Sprellic.\"");
 	say();
@@ -30433,7 +30433,7 @@ labelFunc047D_00DA:
 labelFunc047D_00E1:
 	UI_add_answer(["nom", "mestier", "salut"]);
 labelFunc047D_00F1:
-	converse (0) attend labelFunc047D_0241;
+	converse attend labelFunc047D_0241;
 	case "nom" attend labelFunc047D_010D:
 	message("\"C'est Vokes, ");
 	message(var0000);
@@ -30605,7 +30605,7 @@ labelFunc047E_0171:
 	message("\"On diroit que nous estions appelés à nous revoir,\" dit Syria.");
 	say();
 labelFunc047E_0175:
-	converse (0) attend labelFunc047E_034E;
+	converse attend labelFunc047E_034E;
 	case "nom" attend labelFunc047E_018B:
 	message("\"Syria, une guerrière du Sud.\"");
 	say();
@@ -30789,7 +30789,7 @@ labelFunc047F_00CC:
 labelFunc047F_00D9:
 	UI_add_answer(["nom", "mestier", "salut"]);
 labelFunc047F_00E9:
-	converse (0) attend labelFunc047F_018F;
+	converse attend labelFunc047F_018F;
 	case "nom" attend labelFunc047F_0105:
 	message("\"C'est Timmons, ");
 	message(var0000);
@@ -30880,7 +30880,7 @@ labelFunc0480_004C:
 	message("\"Que veulx-tu?\" demande Iriale.");
 	say();
 labelFunc0480_0050:
-	converse (0) attend labelFunc0480_0151;
+	converse attend labelFunc0480_0151;
 	case "nom" attend labelFunc0480_0091:
 	message("\"Iriale Silvermist. Qui es-tu?\"");
 	say();
@@ -30997,7 +30997,7 @@ labelFunc0481_0090:
 	message("\"Que puis-je por toy?\" dit Russell.");
 	say();
 labelFunc0481_0094:
-	converse (0) attend labelFunc0481_035C;
+	converse attend labelFunc0481_035C;
 	case "nom" attend labelFunc0481_00AA:
 	message("\"Russell, un armateur.\"");
 	say();
@@ -31305,7 +31305,7 @@ labelFunc0482_0187:
 	message("\"Encor salut\" dit le Boris.");
 	say();
 labelFunc0482_018B:
-	converse (0) attend labelFunc0482_0494;
+	converse attend labelFunc0482_0494;
 	case "nom" attend labelFunc0482_01A1:
 	message("\"Appelle-moy Boris.\"");
 	say();
@@ -31533,7 +31533,7 @@ labelFunc0483_0059:
 	message(". Puis-je t' estre utile?\"");
 	say();
 labelFunc0483_0063:
-	converse (0) attend labelFunc0483_02AE;
+	converse attend labelFunc0483_02AE;
 	case "nom" attend labelFunc0483_0080:
 	message("\"On m'appelle Magenta, je suis de New Magincia.\"");
 	say();
@@ -31722,7 +31722,7 @@ labelFunc0484_0059:
 	message("!\"");
 	say();
 labelFunc0484_0063:
-	converse (0) attend labelFunc0484_027F;
+	converse attend labelFunc0484_027F;
 	case "nom" attend labelFunc0484_007F:
 	message("\"On m'appelle Henry, ");
 	message(var0000);
@@ -31906,7 +31906,7 @@ labelFunc0485_008E:
 	message("!\" s'exclame Constance, \"Que puis-je faire por toy?\"");
 	say();
 labelFunc0485_0098:
-	converse (0) attend labelFunc0485_0333;
+	converse attend labelFunc0485_0333;
 	case "nom" attend labelFunc0485_00B4:
 	message("\"On m'appelle Constance, ");
 	message(var0000);
@@ -32123,7 +32123,7 @@ labelFunc0486_00A8:
 	message("\"Salutations. En quoi puis-je t'estre utile?\" mande Robin.");
 	say();
 labelFunc0486_00AC:
-	converse (0) attend labelFunc0486_037D;
+	converse attend labelFunc0486_037D;
 	case "nom" attend labelFunc0486_00D3:
 	message("\"Mon nom, ");
 	message(var0000);
@@ -32358,7 +32358,7 @@ labelFunc0487_006D:
 	message("\"Comment?\" demande Battles.");
 	say();
 labelFunc0487_0071:
-	converse (0) attend labelFunc0487_0261;
+	converse attend labelFunc0487_0261;
 	case "nom" attend labelFunc0487_008E:
 	message("\"Battles.  Moy aussi, j'suis un estranger à New Magincia.\"");
 	say();
@@ -32512,7 +32512,7 @@ labelFunc0488_006D:
 	message("Leavell balance sa dague en équilibre sur le bout de son doigt, la jette en l'air et la rattrape por aussitost la pointer vers toy. Il te regarde droit dans les yeux.");
 	say();
 labelFunc0488_0071:
-	converse (0) attend labelFunc0488_0324;
+	converse attend labelFunc0488_0324;
 	case "nom" attend labelFunc0488_0087:
 	message("\"On m'appelle Leavell.\"");
 	say();
@@ -32743,7 +32743,7 @@ labelFunc0489_00C2:
 	message("\"Salut, comment vas-tu?\" dit Sam.");
 	say();
 labelFunc0489_00C6:
-	converse (0) attend labelFunc0489_030A;
+	converse attend labelFunc0489_030A;
 	case "nom" attend labelFunc0489_0110:
 	message("\"On me nomme Sam. Je suis le fleuriste. Et toy, quel est ton nom?\"");
 	say();
@@ -32965,7 +32965,7 @@ labelFunc048A_0064:
 labelFunc048A_006F:
 	UI_add_answer(["nom", "mestier", "salut"]);
 labelFunc048A_007F:
-	converse (0) attend labelFunc048A_0355;
+	converse attend labelFunc048A_0355;
 	case "nom" attend labelFunc048A_0095:
 	message("Les yeux du guerrier se font plus petits. \"Che suys Gorn, au kas où tu aurois ouplié! Ça fayt playssir te te refoir.\" Il rit aulx esclats et te colle une grante claque tans le tos.");
 	say();
@@ -33221,7 +33221,7 @@ labelFunc048C_0110:
 labelFunc048C_0114:
 	UI_add_answer(["nom", "mestier", "salut"]);
 labelFunc048C_0124:
-	converse (0) attend labelFunc048C_02D5;
+	converse attend labelFunc048C_02D5;
 	case "nom" attend labelFunc048C_018A:
 	message("Le zombie à la corpulence non négligeable s'essuye la bouche du revers de la main. \"Je suis Markham. Markham du Tonneau.\" Il donne une tape sur son immense embonpoint.");
 	say();
@@ -33439,7 +33439,7 @@ labelFunc048D_0164:
 labelFunc048D_0168:
 	UI_add_answer(["nom", "mestier", "salut"]);
 labelFunc048D_0178:
-	converse (0) attend labelFunc048D_033D;
+	converse attend labelFunc048D_033D;
 	case "nom" attend labelFunc048D_019B:
 	message("Le visage décharné du Liche prend un air hautain. \"Tu peux m'appeler Lord Horance.  Une simple précaution puisqu'un jor je gouverneroi tout Britannia.~~ \"Surpris Avatar?  Allons, tu ne crois tout de mesme pas que Lord British se mettra en travers de mon chemin.  Je sais comment me mesurer à luy.\"");
 	say();
@@ -33629,7 +33629,7 @@ labelFunc048E_00E3:
 labelFunc048E_00EE:
 	UI_add_answer(["nom", "mestier", "salut"]);
 labelFunc048E_00FE:
-	converse (0) attend labelFunc048E_025B;
+	converse attend labelFunc048E_025B;
 	case "nom" attend labelFunc048E_012C:
 	message("Le front plissé, le soucil épais, le fantôme a l'air soucieux. Il ne destourne point les yeux de son ouvrage. \"Je suis Trent. Maintenant, je t'en prie, laisse-moy à mon travail.\"");
 	say();
@@ -33836,7 +33836,7 @@ labelFunc048F_0190:
 	if (!(gflags[0x01A8] && (!gflags[0x01AA]))) goto labelFunc048F_01B6;
 	UI_add_answer("cage faite");
 labelFunc048F_01B6:
-	converse (0) attend labelFunc048F_03E6;
+	converse attend labelFunc048F_03E6;
 	case "nom" attend labelFunc048F_01D2:
 	message("Elle te sourit. \"Comme ta mémoire est courte, ");
 	message(var0001);
@@ -34058,7 +34058,7 @@ labelFunc0490_00F3:
 labelFunc0490_00FD:
 	UI_add_answer(["nom", "mestier", "tour", "salut"]);
 labelFunc0490_0110:
-	converse (0) attend labelFunc0490_0175;
+	converse attend labelFunc0490_0175;
 	case "nom" attend labelFunc0490_0126:
 	message("\"On m'appelle... Rowena\"");
 	say();
@@ -34208,7 +34208,7 @@ labelFunc0491_0174:
 	message("Paulette se tourne vers toy et sourit coquettement, \"Je me disois bien que tu allois revenir.\" Ses yeux sont pétillants de malice.");
 	say();
 labelFunc0491_0178:
-	converse (0) attend labelFunc0491_032F;
+	converse attend labelFunc0491_032F;
 	case "nom" attend labelFunc0491_0194:
 	message("\"Comment, ");
 	message(var0000);
@@ -34455,7 +34455,7 @@ labelFunc0492_01B0:
 	if (!gflags[0x017C]) goto labelFunc0492_01D0;
 	UI_add_answer("le Torturé");
 labelFunc0492_01D0:
-	converse (0) attend labelFunc0492_03D7;
+	converse attend labelFunc0492_03D7;
 	case "nom" attend labelFunc0492_01EC:
 	message("\"On m'appelle Quenton, ");
 	message(var0001);
@@ -34745,7 +34745,7 @@ labelFunc0493_01C9:
 	if (!(!gflags[0x01AA])) goto labelFunc0493_01E7;
 	UI_add_answer("Liche");
 labelFunc0493_01E7:
-	converse (0) attend labelFunc0493_03F5;
+	converse attend labelFunc0493_03F5;
 	case "nom" attend labelFunc0493_01FD:
 	message("\"Comme je te l'ay déjà dit, je me nomme Forsythe.\"");
 	say();
@@ -34944,7 +34944,7 @@ labelFunc0495_00B8:
 	UI_set_schedule_type(UI_get_npc_object(0xFF6B), 0x0000);
 	abort;
 labelFunc0495_00D9:
-	converse (0) attend labelFunc0495_0470;
+	converse attend labelFunc0495_0470;
 	case "nom" attend labelFunc0495_0133:
 	message("\"Mon nom est Shandu. Mon frère à costé est Shanda. Mon frère à ses costés est Shando.\"*");
 	say();
@@ -35199,7 +35199,7 @@ labelFunc0496_00BD:
 labelFunc0496_00C7:
 	UI_add_answer("Ether");
 labelFunc0496_00CE:
-	converse (0) attend labelFunc0496_0357;
+	converse attend labelFunc0496_0357;
 	case "nom" attend labelFunc0496_00E4:
 	message("\"Pénumbra. Tu te souviens certainement de moy?\"");
 	say();
@@ -35438,7 +35438,7 @@ labelFunc0497_0073:
 	message("\"Oui, mon amour?\" demande Baysemoy.");
 	say();
 labelFunc0497_0077:
-	converse (0) attend labelFunc0497_035F;
+	converse attend labelFunc0497_035F;
 	case "nom" attend labelFunc0497_010D:
 	message("\"Baysemoy! Baysemoy!\" dit-elle en riant.");
 	say();
@@ -35679,7 +35679,7 @@ labelFunc0498_005C:
 	if (!gflags[0x01DC]) goto labelFunc0498_0069;
 	UI_add_answer("sentiments de Nelson");
 labelFunc0498_0069:
-	converse (0) attend labelFunc0498_02DD;
+	converse attend labelFunc0498_02DD;
 	case "nom" attend labelFunc0498_0099:
 	message("\"Je suis Zelda.\"");
 	say();
@@ -35886,7 +35886,7 @@ labelFunc0499_0053:
 labelFunc0499_005D:
 	if (!gflags[0x0003]) goto labelFunc0499_0136;
 labelFunc0499_0063:
-	converse (0) attend labelFunc0499_0132;
+	converse attend labelFunc0499_0132;
 	case "nom" attend labelFunc0499_00B0:
 	var0002 = Func08DB(0xFFFF);
 	if (!var0002) goto labelFunc0499_009F;
@@ -35941,7 +35941,7 @@ labelFunc0499_0132:
 	endconv;
 	goto labelFunc0499_026E;
 labelFunc0499_0136:
-	converse (0) attend labelFunc0499_026D;
+	converse attend labelFunc0499_026D;
 	case "nom" attend labelFunc0499_0181:
 	var0002 = Func08DB(0xFFFF);
 	if (!var0002) goto labelFunc0499_0176;
@@ -36085,7 +36085,7 @@ labelFunc049A_0075:
 	message("\"Quoy toy vouloir?\" demande Grod.");
 	say();
 labelFunc049A_0079:
-	converse (0) attend labelFunc049A_03AC;
+	converse attend labelFunc049A_03AC;
 	case "nom" attend labelFunc049A_0175:
 	var0006 = UI_wearing_fellowship();
 	if (!var0006) goto labelFunc049A_0122;
@@ -36334,7 +36334,7 @@ labelFunc049B_005C:
 	message("?\"");
 	say();
 labelFunc049B_0066:
-	converse (0) attend labelFunc049B_0178;
+	converse attend labelFunc049B_0178;
 	case "nom" attend labelFunc049B_0083:
 	message("\"J'suis Cubolt de Moonglow.\"");
 	say();
@@ -36464,7 +36464,7 @@ labelFunc049C_0081:
 	if (!gflags[0x020E]) goto labelFunc049C_008E;
 	UI_add_answer("liqueur");
 labelFunc049C_008E:
-	converse (0) attend labelFunc049C_02A1;
+	converse attend labelFunc049C_02A1;
 	case "nom" attend labelFunc049C_00A4:
 	message("Elle te regarde de façon louche. \"Je m' appesle Balayna.\"");
 	say();
@@ -36659,7 +36659,7 @@ labelFunc049D_0087:
 	if (!(gflags[0x01D6] && gflags[0x01FE])) goto labelFunc049D_0098;
 	UI_add_answer("reconvertir");
 labelFunc049D_0098:
-	converse (0) attend labelFunc049D_01E5;
+	converse attend labelFunc049D_01E5;
 	case "nom" attend labelFunc049D_00C1:
 	message("\"On m'appelle Tolemac, ");
 	message(var0000);
@@ -36784,7 +36784,7 @@ labelFunc049E_0040:
 	say();
 	UI_add_answer("bégaiement");
 labelFunc049E_0051:
-	converse (0) attend labelFunc049E_0167;
+	converse attend labelFunc049E_0167;
 	case "bégaiement" attend labelFunc049E_0061:
 	message("\"Quel bé-é-bégaiement?\"  Il se destourne.*");
 	say();
@@ -36888,7 +36888,7 @@ labelFunc049F_0047:
 	message(". Comme à l'accoutumée, je suis fort occupée. Cependant, je veulx bien t'accorder un instant.\"");
 	say();
 labelFunc049F_0051:
-	converse (0) attend labelFunc049F_0115;
+	converse attend labelFunc049F_0115;
 	case "nom" attend labelFunc049F_006D:
 	message("\"Jillian, ");
 	message(var0001);
@@ -37001,7 +37001,7 @@ labelFunc04A0_0090:
 	message("\"Salut toy. Je suis là comme toujours, à m'occuper de mon petit Mikhail.\" dit Effrem en faisant la grimace.");
 	say();
 labelFunc04A0_0094:
-	converse (0) attend labelFunc04A0_01D0;
+	converse attend labelFunc04A0_01D0;
 	case "nom" attend labelFunc04A0_011A:
 	message("\"Je suis Effrem, ");
 	message(var0001);
@@ -37140,7 +37140,7 @@ labelFunc04A1_0066:
 	message(".  J'espère tu vas bien.\"");
 	say();
 labelFunc04A1_0070:
-	converse (0) attend labelFunc04A1_0207;
+	converse attend labelFunc04A1_0207;
 	case "nom" attend labelFunc04A1_0152:
 	message("\"Chad, por te servir, ");
 	message(var0001);
@@ -37269,7 +37269,7 @@ labelFunc04A2_003C:
 	message("Elad s'incline vers toy.~\"Quel plaisir de te revoir.\"");
 	say();
 labelFunc04A2_0040:
-	converse (0) attend labelFunc04A2_01DB;
+	converse attend labelFunc04A2_01DB;
 	case "nom" attend labelFunc04A2_005C:
 	message("\"Elad, ");
 	message(var0001);
@@ -37471,7 +37471,7 @@ labelFunc04A3_012E:
 	message(". Peut-estre sauras-tu la prochaine fois.\"");
 	say();
 labelFunc04A3_0138:
-	converse (0) attend labelFunc04A3_041B;
+	converse attend labelFunc04A3_041B;
 	case "nom" attend labelFunc04A3_014E:
 	message("\" On m'appelle Phearcy, à ton service.\" Il s'incline.");
 	say();
@@ -37698,7 +37698,7 @@ labelFunc04A4_0044:
 	if (!(gflags[0x01DD] && (!gflags[0x01ED]))) goto labelFunc04A4_0060;
 	UI_add_answer("crystal");
 labelFunc04A4_0060:
-	converse (0) attend labelFunc04A4_0261;
+	converse attend labelFunc04A4_0261;
 	case "nom" attend labelFunc04A4_007C:
 	message("\"On m' appesle Addom, ");
 	message(var0001);
@@ -37863,7 +37863,7 @@ labelFunc04A5_0043:
 	say();
 	gflags[0x0207] = true;
 labelFunc04A5_004B:
-	converse (0) attend labelFunc04A5_024B;
+	converse attend labelFunc04A5_024B;
 	case "nom" attend labelFunc04A5_0079:
 	message("\"Mon nom est Frank, je suis un fervent adepte de l'honnesteté.\" Il te fait une légère révérence.");
 	say();
@@ -38034,7 +38034,7 @@ labelFunc04A6_0089:
 	message(",\" dit Thurston.");
 	say();
 labelFunc04A6_0093:
-	converse (0) attend labelFunc04A6_02F6;
+	converse attend labelFunc04A6_02F6;
 	case "nom" attend labelFunc04A6_00A9:
 	message("\"Je m'appesle Thurston.\"");
 	say();
@@ -38276,7 +38276,7 @@ labelFunc04A7_012F:
 	message("\"Tu veulx encor me parler, Avatar?\" dit Feridwyn.");
 	say();
 labelFunc04A7_0133:
-	converse (0) attend labelFunc04A7_046D;
+	converse attend labelFunc04A7_046D;
 	case "nom" attend labelFunc04A7_0149:
 	message("\"Je m'appesle Feridwyn.\"");
 	say();
@@ -38536,7 +38536,7 @@ labelFunc04A8_007B:
 	message(",\" entends-tu dire Brita.");
 	say();
 labelFunc04A8_0085:
-	converse (0) attend labelFunc04A8_0275;
+	converse attend labelFunc04A8_0275;
 	case "nom" attend labelFunc04A8_009B:
 	message("\"Je suis Brita.\"");
 	say();
@@ -38699,7 +38699,7 @@ labelFunc04A9_0041:
 	message(",\" dit Alina.");
 	say();
 labelFunc04A9_004B:
-	converse (0) attend labelFunc04A9_018F;
+	converse attend labelFunc04A9_018F;
 	case "nom" attend labelFunc04A9_0061:
 	message("\"Je m' appesle Alina.\"");
 	say();
@@ -38870,7 +38870,7 @@ labelFunc04AA_00FA:
 	message(". C'est toy!\"");
 	say();
 labelFunc04AA_0104:
-	converse (0) attend labelFunc04AA_0268;
+	converse attend labelFunc04AA_0268;
 	case "nom" attend labelFunc04AA_011A:
 	message("\"Je suis Merrick.\"");
 	say();
@@ -39012,7 +39012,7 @@ labelFunc04AB_0070:
 	message(",\" dit Garritt.");
 	say();
 labelFunc04AB_007A:
-	converse (0) attend labelFunc04AB_0327;
+	converse attend labelFunc04AB_0327;
 	case "nom" attend labelFunc04AB_009D:
 	message("\"Je suis Garritt, le fils de Feridwyn et de Brita.\"");
 	say();
@@ -39330,7 +39330,7 @@ labelFunc04AC_0138:
 	message(",\" dit Morfin.");
 	say();
 labelFunc04AC_0142:
-	converse (0) attend labelFunc04AC_05FF;
+	converse attend labelFunc04AC_05FF;
 	case "nom" attend labelFunc04AC_0158:
 	message("\"Mon nom est Morfin.\"");
 	say();
@@ -39673,7 +39673,7 @@ labelFunc04AD_005F:
 	message(". C'est grand plaisir que de te voir\" dit Beverlea.");
 	say();
 labelFunc04AD_0069:
-	converse (0) attend labelFunc04AD_034C;
+	converse attend labelFunc04AD_034C;
 	case "nom" attend labelFunc04AD_007F:
 	message("\"Je me nomme Beverlea.\"");
 	say();
@@ -39938,7 +39938,7 @@ labelFunc04AE_0043:
 	message("?\" demande Komor.");
 	say();
 labelFunc04AE_004D:
-	converse (0) attend labelFunc04AE_02A6;
+	converse attend labelFunc04AE_02A6;
 	case "nom" attend labelFunc04AE_0063:
 	message("\"Mon nom est Komor.\"");
 	say();
@@ -40136,7 +40136,7 @@ labelFunc04AF_0047:
 	message(",\" dit Fenn.");
 	say();
 labelFunc04AF_0051:
-	converse (0) attend labelFunc04AF_0339;
+	converse attend labelFunc04AF_0339;
 	case "nom" attend labelFunc04AF_006D:
 	message("\"Mon nom est Fenn, ");
 	message(var0000);
@@ -40386,7 +40386,7 @@ labelFunc04B0_0074:
 	message(",\" dict Andrew.");
 	say();
 labelFunc04B0_007E:
-	converse (0) attend labelFunc04B0_0332;
+	converse attend labelFunc04B0_0332;
 	case "nom" attend labelFunc04B0_009A:
 	message("\"Je m' appesle Andrew. Ça va ti, ");
 	message(var0000);
@@ -40620,7 +40620,7 @@ labelFunc04B1_009C:
 	message("?\" demande Camille.");
 	say();
 labelFunc04B1_00A6:
-	converse (0) attend labelFunc04B1_02DF;
+	converse attend labelFunc04B1_02DF;
 	case "nom" attend labelFunc04B1_00C0:
 	message("\"Je m'appelle Camille, Avatar. C'est grand honneur que de te rencontrer.\"");
 	say();
@@ -40806,7 +40806,7 @@ labelFunc04B2_0081:
 	message("\"Que veulx-tu?\" demande Tobias.");
 	say();
 labelFunc04B2_0085:
-	converse (0) attend labelFunc04B2_02B3;
+	converse attend labelFunc04B2_02B3;
 	case "nom" attend labelFunc04B2_00A8:
 	if (!gflags[0x0218]) goto labelFunc04B2_009D;
 	message("\"Je suis toujours Tobias!\"");
@@ -41027,7 +41027,7 @@ labelFunc04B3_0090:
 	message("?\"");
 	say();
 labelFunc04B3_009A:
-	converse (0) attend labelFunc04B3_022B;
+	converse attend labelFunc04B3_022B;
 	case "nom" attend labelFunc04B3_00B0:
 	message("\"Je suis Polly. C'est un plaisir de te connoistre.\"");
 	say();
@@ -41165,7 +41165,7 @@ labelFunc04B4_005B:
 	message("\"Estre agréable de te revoir, vieil amy.  Avoir de nouveau besoin de Draxinusom?\"");
 	say();
 labelFunc04B4_005F:
-	converse (0) attend labelFunc04B4_0276;
+	converse attend labelFunc04B4_0276;
 	case "nom" attend labelFunc04B4_007B:
 	message("\"Moult années avoir passé.  Estre ton vieil amy, ");
 	message(var0000);
@@ -41333,7 +41333,7 @@ labelFunc04B5_003F:
 	message("\"Estre ravi de te revoir, humain,\" dit Inforlem.");
 	say();
 labelFunc04B5_0043:
-	converse (0) attend labelFunc04B5_01D4;
+	converse attend labelFunc04B5_01D4;
 	case "nom" attend labelFunc04B5_0060:
 	message("\"Estre connu sous le nom d'Inforlem.\"");
 	say();
@@ -41452,7 +41452,7 @@ labelFunc04B6_003A:
 	message("\"Voir que tu vas bien, humain,\" dit Inmanilem.");
 	say();
 labelFunc04B6_003E:
-	converse (0) attend labelFunc04B6_01E1;
+	converse attend labelFunc04B6_01E1;
 	case "nom" attend labelFunc04B6_0061:
 	message("\"Estre appelé Inmanilem, humain. Vouloir informations sur Terfin?\"");
 	say();
@@ -41587,7 +41587,7 @@ labelFunc04B7_004B:
 	if (!gflags[0x0239]) goto labelFunc04B7_005E;
 	UI_add_answer("Inamo");
 labelFunc04B7_005E:
-	converse (0) attend labelFunc04B7_02B0;
+	converse attend labelFunc04B7_02B0;
 	case "nom" attend labelFunc04B7_0085:
 	message("\"Estre Teregus.\"");
 	say();
@@ -41799,7 +41799,7 @@ labelFunc04B8_0087:
 	if (!gflags[0x0240]) goto labelFunc04B8_0094;
 	UI_add_answer("faire accuser Quan");
 labelFunc04B8_0094:
-	converse (0) attend labelFunc04B8_014D;
+	converse attend labelFunc04B8_014D;
 	case "nom" attend labelFunc04B8_00CF:
 	message("\"Estre Runeb.\"");
 	say();
@@ -41893,7 +41893,7 @@ labelFunc04B9_0077:
 	message("\"Demander si pouvoir t'aider, humain.\"");
 	say();
 labelFunc04B9_007B:
-	converse (0) attend labelFunc04B9_02D4;
+	converse attend labelFunc04B9_02D4;
 	case "nom" attend labelFunc04B9_0098:
 	message("\"Estre celuy nommé Quan.\"");
 	say();
@@ -42093,7 +42093,7 @@ labelFunc04BA_006A:
 	message("\" Estre heureux de te revoir,\" dit Quaeven.");
 	say();
 labelFunc04BA_006E:
-	converse (0) attend labelFunc04BA_0238;
+	converse attend labelFunc04BA_0238;
 	case "nom" attend labelFunc04BA_008B:
 	message("\"Estre connu sous le nom de Quaeven, humain.\"");
 	say();
@@ -42226,7 +42226,7 @@ labelFunc04BB_0034:
 	message("\"Avoir besoin de quoi, humain?\" dit Silamo.");
 	say();
 labelFunc04BB_0038:
-	converse (0) attend labelFunc04BB_00EF;
+	converse attend labelFunc04BB_00EF;
 	case "nom" attend labelFunc04BB_0062:
 	message("\"Estre Silamo.\"");
 	say();
@@ -42332,7 +42332,7 @@ labelFunc04BC_0094:
 	UI_add_answer("trouvé note");
 	UI_remove_answer("conflits d'autels");
 labelFunc04BC_00A8:
-	converse (0) attend labelFunc04BC_0200;
+	converse attend labelFunc04BC_0200;
 	case "nom" attend labelFunc04BC_00EF:
 	message("\"Pouvoir m'appeler Sarpling.\"");
 	say();
@@ -42487,7 +42487,7 @@ labelFunc04BD_00D6:
 	message("\"Te mander ce qui t'amène en cet establissement?\" interroge Forbrak.");
 	say();
 labelFunc04BD_00DA:
-	converse (0) attend labelFunc04BD_0340;
+	converse attend labelFunc04BD_0340;
 	case "nom" attend labelFunc04BD_00F7:
 	message("\"Estre Forbrak.\"");
 	say();
@@ -42669,7 +42669,7 @@ labelFunc04BE_003C:
 	if (!gflags[0x023E]) goto labelFunc04BE_004F;
 	UI_add_answer("Quaeven");
 labelFunc04BE_004F:
-	converse (0) attend labelFunc04BE_01D7;
+	converse attend labelFunc04BE_01D7;
 	case "nom" attend labelFunc04BE_009F:
 	message("\"Estre appelé Betra. Toy estre nouveau à Terfin?\"");
 	say();
@@ -42840,7 +42840,7 @@ labelFunc04BF_00A4:
 	message("\"Que veulx-tu?\" demande Martingo, vindicatif.");
 	say();
 labelFunc04BF_00A8:
-	converse (0) attend labelFunc04BF_029F;
+	converse attend labelFunc04BF_029F;
 	case "nom" attend labelFunc04BF_00BE:
 	message("Le noble te jette un regard impatient. \"Je suis Martingo, le Sultan de Spektran. Ça te pose un problème?\" Il lève les yeux au ciel puis se tourne de nouveau vers une personne imaginaire sur sa droite, \"Je crois que nous avons à faire à un ignorant.\"");
 	say();
@@ -43020,7 +43020,7 @@ labelFunc04C0_004F:
 	message(",\" dit Menion.");
 	say();
 labelFunc04C0_0059:
-	converse (0) attend labelFunc04C0_01AF;
+	converse attend labelFunc04C0_01AF;
 	case "nom" attend labelFunc04C0_0075:
 	message("\"Menion, ");
 	message(var0000);
@@ -43144,7 +43144,7 @@ labelFunc04C1_0048:
 	if (!(gflags[0x025E] && (!gflags[0x0276]))) goto labelFunc04C1_005A;
 	UI_add_answer("statue");
 labelFunc04C1_005A:
-	converse (0) attend labelFunc04C1_01C4;
+	converse attend labelFunc04C1_01C4;
 	case "nom" attend labelFunc04C1_0070:
 	message("\"Tu peux m'appeler Sire Pendaran.\"");
 	say();
@@ -43291,7 +43291,7 @@ labelFunc04C2_004E:
 	UI_add_answer("rumeurs");
 	var0002 = true;
 labelFunc04C2_006A:
-	converse (0) attend labelFunc04C2_02AF;
+	converse attend labelFunc04C2_02AF;
 	case "nom" attend labelFunc04C2_00A3:
 	message("\"Je suis Dame Jehanne, ");
 	message(var0001);
@@ -43524,7 +43524,7 @@ labelFunc04C3_0092:
 	UI_add_answer("Sire Pendaran responsable");
 	UI_remove_answer("Sire Horffe responsable");
 labelFunc04C3_00AB:
-	converse (0) attend labelFunc04C3_037A;
+	converse attend labelFunc04C3_037A;
 	case "nom" attend labelFunc04C3_010F:
 	message("\"Je suis Lord John-Paul de Serpent's Hold. Tu es ");
 	message(var0000);
@@ -43800,7 +43800,7 @@ labelFunc04C4_00D0:
 	if (!(!gflags[0x0279])) goto labelFunc04C4_00EF;
 	UI_add_answer("sang gargouille");
 labelFunc04C4_00EF:
-	converse (0) attend labelFunc04C4_0361;
+	converse attend labelFunc04C4_0361;
 	case "nom" attend labelFunc04C4_0122:
 	message("\"Comme je te l'avois déjà dit, je m'appelle Richter.\"");
 	say();
@@ -44002,7 +44002,7 @@ labelFunc04C5_008E:
 	if (!(gflags[0x0276] && (!gflags[0x0261]))) goto labelFunc04C5_00A0;
 	UI_add_answer("Pendaran l'a fait");
 labelFunc04C5_00A0:
-	converse (0) attend labelFunc04C5_01DD;
+	converse attend labelFunc04C5_01DD;
 	case "nom" attend labelFunc04C5_00B6:
 	message("\"Estre appelé Horffe.\"");
 	say();
@@ -44178,7 +44178,7 @@ labelFunc04C6_014E:
 	if (!gflags[0x025B]) goto labelFunc04C6_015A;
 	var0005 = var0002;
 labelFunc04C6_015A:
-	converse (0) attend labelFunc04C6_02DC;
+	converse attend labelFunc04C6_02DC;
 	case "nom" attend labelFunc04C6_0170:
 	message("\"Comme je te l'ay déjà dit, mon nom est Sire Jordan.\"");
 	say();
@@ -44338,7 +44338,7 @@ labelFunc04C7_00A4:
 	message(",\" dit Denton.");
 	say();
 labelFunc04C7_00AE:
-	converse (0) attend labelFunc04C7_0426;
+	converse attend labelFunc04C7_0426;
 	case "nom" attend labelFunc04C7_00E7:
 	message("\"Je suis Sire Denton, ");
 	message(var0001);
@@ -44604,7 +44604,7 @@ labelFunc04C8_0060:
 	if (!(gflags[0x0277] && (!gflags[0x0278]))) goto labelFunc04C8_0072;
 	UI_add_answer("Riky");
 labelFunc04C8_0072:
-	converse (0) attend labelFunc04C8_0316;
+	converse attend labelFunc04C8_0316;
 	case "nom" attend labelFunc04C8_00A0:
 	message("\"Je suis Dame Tory, ");
 	message(var0001);
@@ -44818,7 +44818,7 @@ labelFunc04C9_005B:
 	message(".\" Leigh te sourit.");
 	say();
 labelFunc04C9_0065:
-	converse (0) attend labelFunc04C9_01CD;
+	converse attend labelFunc04C9_01CD;
 	case "nom" attend labelFunc04C9_007B:
 	message("Elle rougit. \"Je suis Dame Leigh.\"");
 	say();
@@ -44945,7 +44945,7 @@ labelFunc04CA_0048:
 	message("\"Oui?\" mande Ian.");
 	say();
 labelFunc04CA_004C:
-	converse (0) attend labelFunc04CA_01FA;
+	converse attend labelFunc04CA_01FA;
 	case "nom" attend labelFunc04CA_0062:
 	message("\"On m'appelle Ian.\"");
 	say();
@@ -45111,7 +45111,7 @@ labelFunc04CB_00A3:
 	message("?\" dit Cador.");
 	say();
 labelFunc04CB_00AD:
-	converse (0) attend labelFunc04CB_023A;
+	converse attend labelFunc04CB_023A;
 	case "nom" attend labelFunc04CB_0127:
 	message("L'homme te serre la main. \"Je suis Cador.\"");
 	say();
@@ -45259,7 +45259,7 @@ labelFunc04CC_0093:
 	message("?\"");
 	say();
 labelFunc04CC_009D:
-	converse (0) attend labelFunc04CC_01F1;
+	converse attend labelFunc04CC_01F1;
 	case "nom" attend labelFunc04CC_0111:
 	message("La femme te serre la main avec énergie. \"Salut.  J'm'appelle Mara!\"");
 	say();
@@ -45374,7 +45374,7 @@ labelFunc04CD_004A:
 	message("\"Que puis-je por toy?\" mande Zaksam.");
 	say();
 labelFunc04CD_004E:
-	converse (0) attend labelFunc04CD_0196;
+	converse attend labelFunc04CD_0196;
 	case "nom" attend labelFunc04CD_0064:
 	message("\"Zaksam,\" déclare-t-il fièrement.");
 	say();
@@ -45517,7 +45517,7 @@ labelFunc04CE_0048:
 	message(".  Que puis-je faire por toy?\"");
 	say();
 labelFunc04CE_0052:
-	converse (0) attend labelFunc04CE_01AF;
+	converse attend labelFunc04CE_01AF;
 	case "nom" attend labelFunc04CE_006E:
 	message("Il te sourit. \"Ah, excellent. Tu n'as pas peur de poser des questions. Souviens-toy, il n'y a pas de sottes questions, il n'y a que des questions bestes. Je m'appelle Eldroth, ");
 	message(var0000);
@@ -45686,7 +45686,7 @@ labelFunc04CF_0088:
 	message("\"Sois l'benv'nu Au Lézard.  T'es d'retour.  Qu'est-c'tu veulx?\" demande Yongi.");
 	say();
 labelFunc04CF_008C:
-	converse (0) attend labelFunc04CF_027A;
+	converse attend labelFunc04CF_027A;
 	case "nom" attend labelFunc04CF_0100:
 	message("\"J'm'appelle Yongi, ");
 	message(var0001);
@@ -45874,7 +45874,7 @@ labelFunc04D0_006E:
 	if (!gflags[0x0299]) goto labelFunc04D0_007B;
 	UI_add_answer("Lap-Lem");
 labelFunc04D0_007B:
-	converse (0) attend labelFunc04D0_0180;
+	converse attend labelFunc04D0_0180;
 	case "nom" attend labelFunc04D0_00A3:
 	message("\"Blorn, si tu tiens à le savoir.\"");
 	say();
@@ -45997,7 +45997,7 @@ labelFunc04D1_0055:
 	message("?\"");
 	say();
 labelFunc04D1_005F:
-	converse (0) attend labelFunc04D1_0219;
+	converse attend labelFunc04D1_0219;
 	case "nom" attend labelFunc04D1_0075:
 	message("\"Appelle-moy Auston.\"");
 	say();
@@ -46146,7 +46146,7 @@ labelFunc04D2_0044:
 	message("\"Qu'est-ce qui te préoccupe?\"");
 	say();
 labelFunc04D2_0048:
-	converse (0) attend labelFunc04D2_021C;
+	converse attend labelFunc04D2_021C;
 	case "nom" attend labelFunc04D2_005E:
 	message("Interrompant son travail, la femme te regarde, le temps de te respondre, \"On m'appelle Liana.\"");
 	say();
@@ -46291,7 +46291,7 @@ labelFunc04D3_0038:
 	if (!(!gflags[0x02DF])) goto labelFunc04D3_0065;
 	UI_add_answer("donner amulette");
 labelFunc04D3_0065:
-	converse (0) attend labelFunc04D3_01C8;
+	converse attend labelFunc04D3_01C8;
 	case "nom" attend labelFunc04D3_0094:
 	message("\"Estre connu sous le nom de Lap-Lem.\"");
 	say();
@@ -46457,7 +46457,7 @@ labelFunc04D4_00D6:
 	message(".\"");
 	say();
 labelFunc04D4_00E0:
-	converse (0) attend labelFunc04D4_02EB;
+	converse attend labelFunc04D4_02EB;
 	case "nom" attend labelFunc04D4_00FC:
 	message("\"Je suis Yvella, ");
 	message(var0001);
@@ -46646,7 +46646,7 @@ labelFunc04D5_0064:
 	message(" Avatar?\" Elle fait une petite révérence.");
 	say();
 labelFunc04D5_006E:
-	converse (0) attend labelFunc04D5_013D;
+	converse attend labelFunc04D5_013D;
 	case "nom" attend labelFunc04D5_008A:
 	message("\"On m'appelle Catherine, ");
 	message(var0000);
@@ -46743,7 +46743,7 @@ labelFunc04D6_004A:
 	message("\"Te souhaiter le bonjour, humain,\" dit For-Lem.");
 	say();
 labelFunc04D6_004E:
-	converse (0) attend labelFunc04D6_014C;
+	converse attend labelFunc04D6_014C;
 	case "nom" attend labelFunc04D6_006B:
 	message("\"Respondre au nom de For-Lem.\"");
 	say();
@@ -46844,7 +46844,7 @@ labelFunc04D7_0034:
 	message("\"Demander comment te rendre service?\"");
 	say();
 labelFunc04D7_0038:
-	converse (0) attend labelFunc04D7_0217;
+	converse attend labelFunc04D7_0217;
 	case "nom" attend labelFunc04D7_0055:
 	message("\"S' appesler Ansikart.\"");
 	say();
@@ -47010,7 +47010,7 @@ labelFunc04D8_0053:
 labelFunc04D8_0057:
 	if (!gflags[0x0003]) goto labelFunc04D8_0158;
 labelFunc04D8_005D:
-	converse (0) attend labelFunc04D8_0150;
+	converse attend labelFunc04D8_0150;
 	case "nom" attend labelFunc04D8_0073:
 	message("\"Estre appelé Wis-Sur, voulant dire `soleil sage.'\"");
 	say();
@@ -47072,7 +47072,7 @@ labelFunc04D8_0150:
 	say();
 	goto labelFunc04D8_01E8;
 labelFunc04D8_0158:
-	converse (0) attend labelFunc04D8_01E7;
+	converse attend labelFunc04D8_01E7;
 	case "nom" attend labelFunc04D8_0168:
 	message("\"Me demander porquoi vouloir savoir.\"*");
 	say();
@@ -47163,7 +47163,7 @@ labelFunc04D9_0068:
 	message("La gargouille te regarde fixement, mécontente de l' interruption.");
 	say();
 labelFunc04D9_0090:
-	converse (0) attend labelFunc04D9_01B4;
+	converse attend labelFunc04D9_01B4;
 	case "nom" attend labelFunc04D9_0191:
 	message("\"Avoir aucun désir de vous le dire.  Demander qui vous estes!\"");
 	say();
@@ -47292,7 +47292,7 @@ labelFunc04DA_0068:
 	message("La gargouille est mécontente de ton intrusion.");
 	say();
 labelFunc04DA_0090:
-	converse (0) attend labelFunc04DA_019B;
+	converse attend labelFunc04DA_019B;
 	case "nom" attend labelFunc04DA_0178:
 	message("\"Ne pas vouloir te le dire. Demander à savoir qui tu es!\"");
 	say();
@@ -47389,7 +47389,7 @@ labelFunc04DB_0034:
 	message("\"Te souhaiter le bonjor, humain,\" dit Aurvidlem.");
 	say();
 labelFunc04DB_0038:
-	converse (0) attend labelFunc04DB_0149;
+	converse attend labelFunc04DB_0149;
 	case "nom" attend labelFunc04DB_004E:
 	message("\"Estre appelé Aurvidlem.  Te reconnoistre comme estant l'Avatar.\"");
 	say();
@@ -47503,7 +47503,7 @@ labelFunc04DC_0077:
 	message(". En quoy puis-je t' aider par une si belle jornée?\"");
 	say();
 labelFunc04DC_0081:
-	converse (0) attend labelFunc04DC_02F1;
+	converse attend labelFunc04DC_02F1;
 	case "nom" attend labelFunc04DC_00F1:
 	message("\"Sullivan, ");
 	message(var0000);
@@ -47771,7 +47771,7 @@ labelFunc04DD_0164:
 	message(",\" dit Nana.");
 	say();
 labelFunc04DD_016E:
-	converse (0) attend labelFunc04DD_0281;
+	converse attend labelFunc04DD_0281;
 	case "nom" attend labelFunc04DD_018F:
 	message("\"Tu peux m' appesler... Nana.\"");
 	say();
@@ -47899,7 +47899,7 @@ labelFunc04DE_0042:
 	message("\"Ouais, besoin d' aide?\" demande Glenno.");
 	say();
 labelFunc04DE_0046:
-	converse (0) attend labelFunc04DE_0267;
+	converse attend labelFunc04DE_0267;
 	case "nom" attend labelFunc04DE_005C:
 	message("\"Glenno à ton service!\"");
 	say();
@@ -48165,7 +48165,7 @@ labelFunc04DF_0161:
 	message(",\" dit Martine.");
 	say();
 labelFunc04DF_016B:
-	converse (0) attend labelFunc04DF_027A;
+	converse attend labelFunc04DF_027A;
 	case "nom" attend labelFunc04DF_0181:
 	message("\"Le nom que j' utilise icy est Martine. Tu piges...\" Elle te fayt un clin d' oeil.");
 	say();
@@ -48353,7 +48353,7 @@ labelFunc04E0_0156:
 	message(",\" dit Roberto.");
 	say();
 labelFunc04E0_0160:
-	converse (0) attend labelFunc04E0_027D;
+	converse attend labelFunc04E0_027D;
 	case "nom" attend labelFunc04E0_0180:
 	message("\"Dans ces quartiers on me connoit sous le nom de Roberto.\"");
 	say();
@@ -48465,7 +48465,7 @@ labelFunc04E1_006F:
 	message("\"Quouaaa?\" grommelle Sintag.");
 	say();
 labelFunc04E1_0073:
-	converse (0) attend labelFunc04E1_01F7;
+	converse attend labelFunc04E1_01F7;
 	case "nom" attend labelFunc04E1_0089:
 	message("\"Sintag,\" dit-il dans un grognement.");
 	say();
@@ -48668,7 +48668,7 @@ labelFunc04E2_00D3:
 	message("\"J' croyois qu'tu volois pô estre mon amy!\" grommelle Blacktooth.");
 	say();
 labelFunc04E2_00D7:
-	converse (0) attend labelFunc04E2_0256;
+	converse attend labelFunc04E2_0256;
 	case "nom" attend labelFunc04E2_00ED:
 	message("\"J'suys Blacktooth. T'voys?\" Le pirate sourit, montrant sa dent.");
 	say();
@@ -48831,7 +48831,7 @@ labelFunc04E3_005E:
 	message("\"Quoi qu' c'éti?\" demande Mole.");
 	say();
 labelFunc04E3_0062:
-	converse (0) attend labelFunc04E3_0208;
+	converse attend labelFunc04E3_0208;
 	case "nom" attend labelFunc04E3_007F:
 	message("\"Je m' appelle Mole, c' est ben ça! M'demande pô d' où qu'ça vient. T'une longue histoire.\"");
 	say();
@@ -48991,7 +48991,7 @@ labelFunc04E4_0049:
 	message("\"Quoi que tu luy veulx au Lucky?\" demande le pirate.");
 	say();
 labelFunc04E4_004D:
-	converse (0) attend labelFunc04E4_0111;
+	converse attend labelFunc04E4_0111;
 	case "nom" attend labelFunc04E4_0063:
 	message("\"J'suys Lucky, Le Chanceux... en toutes choses.\"");
 	say();
@@ -49134,7 +49134,7 @@ labelFunc04E5_00D6:
 	message("\"Tu as besoin de renseignements?\" demande Budo.");
 	say();
 labelFunc04E5_00DA:
-	converse (0) attend labelFunc04E5_02D2;
+	converse attend labelFunc04E5_02D2;
 	case "nom" attend labelFunc04E5_00F0:
 	message("\"Budo Quatriesme du nom à ton service! Bel jornée non?\"");
 	say();
@@ -49330,7 +49330,7 @@ labelFunc04E6_006B:
 	message("\"Oui?\" demande Gordy.");
 	say();
 labelFunc04E6_006F:
-	converse (0) attend labelFunc04E6_023C;
+	converse attend labelFunc04E6_023C;
 	case "nom" attend labelFunc04E6_0085:
 	message("\"Je m' appelle Gordy.\"  Il sourit largement en te tendant la main. Tu remarques qu' il n' est pas trop propre.");
 	say();
@@ -49499,7 +49499,7 @@ labelFunc04E7_006C:
 	message("\"Bonjor\" lance Mandy.");
 	say();
 labelFunc04E7_0070:
-	converse (0) attend labelFunc04E7_04A7;
+	converse attend labelFunc04E7_04A7;
 	case "nom" attend labelFunc04E7_0086:
 	message("\"Je m' appelle Mandy.\"");
 	say();
@@ -49790,7 +49790,7 @@ labelFunc04E8_004F:
 	message("\"Tu désires?\" demande Smithy.");
 	say();
 labelFunc04E8_0053:
-	converse (0) attend labelFunc04E8_0125;
+	converse attend labelFunc04E8_0125;
 	case "nom" attend labelFunc04E8_0069:
 	message("\"J' m' appelle Smithy.\"");
 	say();
@@ -49913,7 +49913,7 @@ labelFunc04E9_0042:
 	message("\"Oui?\" demande Paul.");
 	say();
 labelFunc04E9_0046:
-	converse (0) attend labelFunc04E9_0166;
+	converse attend labelFunc04E9_0166;
 	case "nom" attend labelFunc04E9_005C:
 	message("\"Moy, c'est Paul. Mes collègues se nomment Meryl et Dustin.\"");
 	say();
@@ -50128,7 +50128,7 @@ labelFunc04EC_0053:
 labelFunc04EC_0057:
 	UI_add_answer(["nom", "mestier", "meurtre", "salut"]);
 labelFunc04EC_006A:
-	converse (0) attend labelFunc04EC_0112;
+	converse attend labelFunc04EC_0112;
 	case "nom" attend labelFunc04EC_0080:
 	message("\"Je me prénomme Ellen.\"");
 	say();
@@ -50218,7 +50218,7 @@ labelFunc04ED_0071:
 	message("\"Je suis ravi que tu reviennes me voir,\" dit Kessler.");
 	say();
 labelFunc04ED_0075:
-	converse (0) attend labelFunc04ED_02FE;
+	converse attend labelFunc04ED_02FE;
 	case "nom" attend labelFunc04ED_008B:
 	message("\"Kessler.\"");
 	say();
@@ -50417,7 +50417,7 @@ labelFunc04EE_003C:
 	message(".\" lance Perrin en souriant.");
 	say();
 labelFunc04EE_0046:
-	converse (0) attend labelFunc04EE_0171;
+	converse attend labelFunc04EE_0171;
 	case "nom" attend labelFunc04EE_0069:
 	message("\"Je t'en prie, ");
 	message(var0001);
@@ -50537,7 +50537,7 @@ labelFunc04EF_004F:
 labelFunc04EF_0053:
 	UI_add_answer(["nom", "mestier", "salut"]);
 labelFunc04EF_0063:
-	converse (0) attend labelFunc04EF_02D3;
+	converse attend labelFunc04EF_02D3;
 	case "nom" attend labelFunc04EF_0091:
 	message("\"Je m' appelle Owings,\" dit-il en te serrant rapidement la main. \"Enchanté.\"");
 	say();
@@ -50725,7 +50725,7 @@ labelFunc04F0_007C:
 	message("\"Heurroumff,\" dit Anton.");
 	say();
 labelFunc04F0_0080:
-	converse (0) attend labelFunc04F0_02EC;
+	converse attend labelFunc04F0_02EC;
 	case "nom" attend labelFunc04F0_00D2:
 	message("\"Ch'\" dit-il en se grattant le nez, \"'uy Anton, 'pas qu' tu t'intéresses à moy. Sauf, bien sûr, si tu vas me mettre au carcan.\"");
 	say();
@@ -50917,7 +50917,7 @@ labelFunc04F1_0060:
 	message("\"Hein?\" Papa demande.");
 	say();
 labelFunc04F1_0064:
-	converse (0) attend labelFunc04F1_02C4;
+	converse attend labelFunc04F1_02C4;
 	case "nom" attend labelFunc04F1_008E:
 	if (!var0000) goto labelFunc04F1_007C;
 	message("\"J' suys l' Murray.\"");
@@ -51126,7 +51126,7 @@ labelFunc04F2_0048:
 	var0001 = true;
 	UI_add_answer(["wisps", "Emps"]);
 labelFunc04F2_005F:
-	converse (0) attend labelFunc04F2_029A;
+	converse attend labelFunc04F2_029A;
 	case "nom" attend labelFunc04F2_0088:
 	message("\"On m'appelle Taylor, ");
 	message(var0000);
@@ -51309,7 +51309,7 @@ labelFunc04F3_0053:
 	if (!gflags[0x02D9]) goto labelFunc04F3_0070;
 	UI_add_answer("heaulme au pied");
 labelFunc04F3_0070:
-	converse (0) attend labelFunc04F3_02C3;
+	converse attend labelFunc04F3_02C3;
 	case "nom" attend labelFunc04F3_00CF:
 	if (!(!gflags[0x02DA])) goto labelFunc04F3_00C4;
 	message("\"Je m' appelle Malloy. Enchanté de fayre ta connoissance.\" Malloy s' incline poliment.");
@@ -51494,7 +51494,7 @@ labelFunc04F4_004C:
 	message(",\" dit Cairbre.");
 	say();
 labelFunc04F4_0056:
-	converse (0) attend labelFunc04F4_019A;
+	converse attend labelFunc04F4_019A;
 	case "nom" attend labelFunc04F4_0072:
 	message("\"Appelle-moy Cairbre, ");
 	message(var0002);
@@ -51627,7 +51627,7 @@ labelFunc04F5_0073:
 	if (!gflags[0x012F]) goto labelFunc04F5_008A;
 	UI_add_answer("donne potion");
 labelFunc04F5_008A:
-	converse (0) attend labelFunc04F5_0245;
+	converse attend labelFunc04F5_0245;
 	case "nom" attend labelFunc04F5_00B3:
 	message("Il sourit. \"Mon nom est Kreg, ");
 	message(var0000);
@@ -51775,7 +51775,7 @@ labelFunc04F6_0066:
 	message("\"Rebonjour,\" dit Alagner.");
 	say();
 labelFunc04F6_006A:
-	converse (0) attend labelFunc04F6_02CD;
+	converse attend labelFunc04F6_02CD;
 	case "nom" attend labelFunc04F6_00B4:
 	message("Le sage sourit et hoche la tête. \"Je m' appesle Alagner.  Et toy, qui es-tu?\"");
 	say();
@@ -51997,7 +51997,7 @@ labelFunc04F7_009E:
 	if (!(!gflags[0x01A1])) goto labelFunc04F7_00B2;
 	UI_add_answer("sacrifice");
 labelFunc04F7_00B2:
-	converse (0) attend labelFunc04F7_038E;
+	converse attend labelFunc04F7_038E;
 	case "nom" attend labelFunc04F7_0103:
 	message("\"On m'appelle Caine. Mais mes concitoyens m'ont aussi donné un surnom. Eulx, m'appellent `Le Torturé.'\" Il fait un geste large de la main, désignant le vide. \"Et tu peux bien comprendre porquoi.\"");
 	say();
@@ -52256,7 +52256,7 @@ labelFunc04F8_0082:
 	if (!(gflags[0x01DA] && (!var0002))) goto labelFunc04F8_009A;
 	UI_add_answer("sentiments de Zelda");
 labelFunc04F8_009A:
-	converse (0) attend labelFunc04F8_0423;
+	converse attend labelFunc04F8_0423;
 	case "nom" attend labelFunc04F8_00C2:
 	message("\"Tu peux m'appeler Brion.\"");
 	say();
@@ -52528,7 +52528,7 @@ labelFunc04F9_005B:
 	if (!gflags[0x01E3]) goto labelFunc04F9_0068;
 	UI_add_answer("response de Zelda");
 labelFunc04F9_0068:
-	converse (0) attend labelFunc04F9_03C2;
+	converse attend labelFunc04F9_03C2;
 	case "nom" attend labelFunc04F9_008B:
 	message("\"Tu peux m'appeler Nelson.\"");
 	say();
@@ -52811,7 +52811,7 @@ labelFunc04FA_00C5:
 	if (!(gflags[0x020A] && (!gflags[0x0210]))) goto labelFunc04FA_00D7;
 	UI_add_answer("Balayna");
 labelFunc04FA_00D7:
-	converse (0) attend labelFunc04FA_04A8;
+	converse attend labelFunc04FA_04A8;
 	case "nom" attend labelFunc04FA_0110:
 	message("\"Tu peux m'appeler Rankin, ");
 	message(var0000);
@@ -53146,7 +53146,7 @@ labelFunc04FB_00A8:
 	message("\"Salut, l' amy!\" dit Danag.");
 	say();
 labelFunc04FB_00AC:
-	converse (0) attend labelFunc04FB_02E7;
+	converse attend labelFunc04FB_02E7;
 	case "nom" attend labelFunc04FB_00C2:
 	message("\"Je m' appelle Danag, mon amy.\" Le gars fayt une révérence.");
 	say();
@@ -53351,7 +53351,7 @@ labelFunc04FC_0050:
 	message("Kallibrus sourit et t' accueille d' un hochement de teste.");
 	say();
 labelFunc04FC_0054:
-	converse (0) attend labelFunc04FC_01B1;
+	converse attend labelFunc04FC_01B1;
 	case "nom" attend labelFunc04FC_0071:
 	message("\"Estre connu sous le nom de Kallibrus.\"");
 	say();
@@ -53475,7 +53475,7 @@ labelFunc04FD_004C:
 	message(",\" dit Cosmo.");
 	say();
 labelFunc04FD_0056:
-	converse (0) attend labelFunc04FD_01E6;
+	converse attend labelFunc04FD_01E6;
 	case "nom" attend labelFunc04FD_0083:
 	message("\"C' est moy, Cosmo, ");
 	message(var0000);
@@ -53618,7 +53618,7 @@ labelFunc04FE_002B:
 labelFunc04FE_002F:
 	UI_add_answer(["nom", "mestier", "salut"]);
 labelFunc04FE_003F:
-	converse (0) attend labelFunc04FE_0414;
+	converse attend labelFunc04FE_0414;
 	case "nom" attend labelFunc04FE_0055:
 	message("La créature parle. \"Je m' appelle Lasher.\"");
 	say();
@@ -53909,7 +53909,7 @@ labelFunc04FF_00F5:
 	if (!gflags[0x02D4]) goto labelFunc04FF_0103;
 	var0004 = true;
 labelFunc04FF_0103:
-	converse (0) attend labelFunc04FF_01E7;
+	converse attend labelFunc04FF_01E7;
 	case "nom" attend labelFunc04FF_0127:
 	if (!(!var0004)) goto labelFunc04FF_011C;
 	message("\"Moy Mama!\" s' exclame de nouveau la donzelle.");
@@ -54030,7 +54030,7 @@ labelFunc0500_0098:
 	message("\"Une fois de plus, une manifestation indigène contacte la dimension Xorinite.\"");
 	say();
 labelFunc0500_009C:
-	converse (0) attend labelFunc0500_022C;
+	converse attend labelFunc0500_022C;
 	case "nom" attend labelFunc0500_00B9:
 	message("\"Il est fort probable qu'une manifestation de la dimension Xorinite sera appelée 'Wisp' par les entités connues sous le nom de 'humains'. Je suis aussi appelée 'Xorinia' par les autres manifestations de la dimension Xorinite.\"");
 	say();
@@ -68094,7 +68094,7 @@ void Func0876 0x876 ()
 labelFunc0876_0015:
 	UI_add_answer(["Veut miel?", "Du vent!"]);
 labelFunc0876_0022:
-	converse (0) attend labelFunc0876_0098;
+	converse attend labelFunc0876_0098;
 	case "Veut miel?" attend labelFunc0876_007B:
 	message("\"Le miel me sera donné par toy?\"");
 	say();
@@ -71441,7 +71441,7 @@ void Func089E 0x89E ()
 labelFunc089E_0025:
 	UI_add_answer(["Skara Brae", "salut"]);
 labelFunc089E_0032:
-	converse (0) attend labelFunc089E_007F;
+	converse attend labelFunc089E_007F;
 	case "queste" attend labelFunc089E_0056:
 	if (!(!gflags[0x01B0])) goto labelFunc089E_004B;
 	message("\"Oui.  Il me semble que l'esprit de Caine n'a pas encor quitté l'isle.  N'attend-il point ton retour?\"");
@@ -72456,7 +72456,7 @@ labelFunc08AB_006E:
 	message("\"Très bien, alors. De qui veulx-tu parler?\"");
 	say();
 labelFunc08AB_0079:
-	converse (0) attend labelFunc08AB_0336;
+	converse attend labelFunc08AB_0336;
 	case "Forsythe" attend labelFunc08AB_008F:
 	message("Elle te considère un instant. \"Je n'ay rien à dire au sujet de -ce- vaurien!\"");
 	say();
@@ -73961,7 +73961,7 @@ void Func08BC 0x8BC ()
 	say();
 	UI_add_answer(["-Je- suis l'Avatar!", "Je -suis- l'Avatar!", "Je suis -l'- Avatar!", "Je suis l'-Avatar-!"]);
 labelFunc08BC_002C:
-	converse (0) attend labelFunc08BC_00C5;
+	converse attend labelFunc08BC_00C5;
 	default(0x0001) attend labelFunc08BC_0038:
 	message("\"Non, non, non! C'est faux, archifaux!  Tu es l' 'Avatar'! Il faut que tu te sentes conmme l'Avatar!  Il faut que tu parles comme l'Avatar! Il faut que tu -sois- l'Avatar!  Essoie encor.\"");
 	say();
@@ -74440,7 +74440,7 @@ labelFunc08C1_001E:
 	say();
 	UI_add_answer("salut");
 labelFunc08C1_0029:
-	converse (0) attend labelFunc08C1_0088;
+	converse attend labelFunc08C1_0088;
 	case "sacrifice" attend labelFunc08C1_0078:
 	UI_remove_answer("sacrifice");
 	if (!(!gflags[0x019D])) goto labelFunc08C1_006E;
@@ -74509,7 +74509,7 @@ labelFunc08C2_0051:
 	say();
 	UI_add_answer(["Trent", "salut"]);
 labelFunc08C2_0068:
-	converse (0) attend labelFunc08C2_009E;
+	converse attend labelFunc08C2_009E;
 	case "Trent" attend labelFunc08C2_007E:
 	message("Son visage s'illumine dès que tu prononces le nom de son mari. \"C'est le forgeron de la ville. Il a fabriqué cette boiste à musique dont tu t'es servi por m'arracher au pouvoir de Horance.\"");
 	say();
@@ -75020,7 +75020,7 @@ void Func08C9 0x8C9 ()
 	say();
 	UI_add_answer(["du miel?", "Va t'en!"]);
 labelFunc08C9_001B:
-	converse (0) attend labelFunc08C9_007D;
+	converse attend labelFunc08C9_007D;
 	case "du miel?" attend labelFunc08C9_006D:
 	message("\"Me donneras-tu du miel?\"");
 	say();
@@ -75064,7 +75064,7 @@ void Func08CA 0x8CA ()
 	say();
 	UI_add_answer(["du miel?", "Va-t-en!"]);
 labelFunc08CA_001B:
-	converse (0) attend labelFunc08CA_007D;
+	converse attend labelFunc08CA_007D;
 	case "du miel?" attend labelFunc08CA_006D:
 	message("\"M'offriras-tu du miel?\"");
 	say();
@@ -75516,7 +75516,7 @@ void Func08D1 0x8D1 ()
 	say();
 	UI_add_answer(["du miel?", "Va t'en!"]);
 labelFunc08D1_001B:
-	converse (0) attend labelFunc08D1_007D;
+	converse attend labelFunc08D1_007D;
 	case "du miel?" attend labelFunc08D1_0060:
 	message("\"Me donneras-tu miel?\"");
 	say();
@@ -75559,7 +75559,7 @@ void Func08D2 0x8D2 ()
 	say();
 	UI_add_answer(["du miel?", "Va t'en!"]);
 labelFunc08D2_001B:
-	converse (0) attend labelFunc08D2_007D;
+	converse attend labelFunc08D2_007D;
 	case "du miel?" attend labelFunc08D2_006D:
 	message("\"Du miel me sera offert par toy?\"");
 	say();
@@ -75640,7 +75640,7 @@ labelFunc08D3_007C:
 	if (!gflags[0x01C1]) goto labelFunc08D3_009C;
 	UI_add_answer(["Cage aux Ames", "libérer"]);
 labelFunc08D3_009C:
-	converse (0) attend labelFunc08D3_0168;
+	converse attend labelFunc08D3_0168;
 	case "Cage aux Ames" attend labelFunc08D3_00B2:
 	message("\"C'est une cage spéciale construite selon la forme d'un homme. Dame Mordra dit qu'elle contiendra le Liche, Horance, une fois qu'il aura été plongé dans son Puits aux Ames.\" Sa voix semble bien plus douce qu'avant.");
 	say();
@@ -75717,7 +75717,7 @@ void Func08D4 0x8D4 ()
 	say();
 	UI_add_answer("salut");
 labelFunc08D4_0020:
-	converse (0) attend labelFunc08D4_007F;
+	converse attend labelFunc08D4_007F;
 	case "sacrifice" attend labelFunc08D4_006F:
 	if (!(!gflags[0x019E])) goto labelFunc08D4_005E;
 	UI_show_npc_face(0xFF70, 0x0001);
@@ -75805,7 +75805,7 @@ void Func08D6 0x8D6 (var var0000, var var0001)
 	var0008 = "Subis mon courroux";
 	UI_add_answer([var0007, var0008]);
 labelFunc08D6_006B:
-	converse (0) attend labelFunc08D6_0179;
+	converse attend labelFunc08D6_0179;
 	case var0007 attend labelFunc08D6_00A7:
 	var0004 = Func08D5("");
 	message("\"Te pardonner! Que pourroi-je pardonner à une espèce de ");
@@ -75926,7 +75926,7 @@ void Func08D7 0x8D7 (var var0000)
 	say();
 	var0003 = false;
 labelFunc08D7_0024:
-	converse (0) attend labelFunc08D7_0156;
+	converse attend labelFunc08D7_0156;
 	case "ensorceler" attend labelFunc08D7_003A:
 	message("\"Je m'en doutois!  Je n'ay aulcune habileté en ce domaine, mais avec un peu de chance nos paroles deviendront ensorcellement une fois notre queste achevée.\"");
 	say();
@@ -76556,7 +76556,7 @@ var Func08EE 0x8EE ()
 	UI_push_answers();
 	UI_add_answer(["Oui", "Non"]);
 labelFunc08EE_0011:
-	converse (0) attend labelFunc08EE_0033;
+	converse attend labelFunc08EE_0033;
 	case "Oui" attend labelFunc08EE_0022:
 	UI_pop_answers();
 	return true;
