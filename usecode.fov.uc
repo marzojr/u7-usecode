@@ -1,6 +1,17 @@
 #game "blackgate"
 #strictbraces "true"
 
+enum directions : byte {
+	NORTH		= 0x30,
+	NORTHEAST	= 0x31,
+	EAST		= 0x32,
+	SOUTHEAST	= 0x33,
+	SOUTH		= 0x34,
+	SOUTHWEST	= 0x35,
+	WEST		= 0x36,
+	NORTHWEST	= 0x37
+};
+
 extern void Func08FF 0x8FF (var var0000);
 extern var Func0829 0x829 (var var0000);
 
@@ -2953,7 +2964,7 @@ void Func0247 shape#(0x247) () {
 	}
 	if (event == 0x0007) {
 		var0001 = script 0xFE9C {
-			face (byte)0x30;	// Note: should be 'north'
+			face NORTH;
 			actor frame bowing;
 			actor frame standing;
 		};
@@ -8435,6 +8446,9 @@ void Func03DB shape#(0x3DB) () {
 			frame 3;
 			frame 0;
 		};
+		// Note: need to add a way to do this in UCC without hard-coding the
+		// opcodes like this. Specifically, data flow so that the repeat
+		// can detect the number of bytes needed from the given array.
 		var0001 = item->run_script(var0000 & [(byte)0x0B, 0xFFE6, 0x0002]);
 		if (UI_die_roll(0x0001, 0x000A) == 0x0001) {
 			var0002 = get_object_position();
@@ -8562,6 +8576,9 @@ void Func03E0 shape#(0x3E0) () {
 			frame 3;
 			frame 0;
 		};
+		// Note: need to add a way to do this in UCC without hard-coding the
+		// opcodes like this. Specifically, data flow so that the repeat
+		// can detect the number of bytes needed from the given array.
 		var0001 = item->run_script(var0000 & [(byte)0x0B, 0xFFE6, 0x0002]);
 	}
 }
@@ -8615,6 +8632,9 @@ void Func03F5 shape#(0x3F5) () {
 				frame 0;
 			};
 			halt_scheduled();
+			// Note: need to add a way to do this in UCC without hard-coding the
+			// opcodes like this. Specifically, data flow so that the repeat
+			// can detect the number of bytes needed from the given array.
 			var0001 = item->run_script(var0000 & [(byte)0x0B, 0xFFE6, 0x0002]);
 		}
 	}
@@ -50767,7 +50787,7 @@ void Func0624 object#(0x624) () {
 	if (event == 0x0007) {
 		UI_close_gumps();
 		var0002 = script 0xFE9C {
-			face (byte)0x30;	// Note: should probably be 'north'
+			face NORTH;
 			actor frame bowing;
 			wait 1;
 			actor frame standing;
@@ -51978,7 +51998,7 @@ void Func0639 object#(0x639) () {
 	if (event == 0x0001) {
 		halt_scheduled();
 		var0000 = script item {
-			face (byte)0x30;	// Note: should probably be 'north'
+			face NORTH;
 			actor frame kneeling;
 			wait 1;
 			say "@Kal Ort Por@";
@@ -52103,8 +52123,7 @@ void Func063E object#(0x63E) () {
 		say("Judgement rendered.* Sentence selected:* Death.*");
 		// Bug: using 0x56 as object. This probably should have been something
 		// like this instead:
-		//var0000 = script item
-		//{
+		//var0000 = script item {
 		//	speech 21;
 		//};
 		var0000 = UI_execute_usecode_array((byte)0x56, 0x0015);
@@ -74680,6 +74699,7 @@ void Func08F3 0x8F3 (var var0000) {
 				nobreak {
 					break;
 				}
+				// Dead code
 				if (var0005) {
 					var0008->say("\"Take care with thy words, master woodsman.\"");
 					0xFFF6->say("\"I do not mean this gracious company! Surely thou art among the elite of Britannia and a rare figure of a woman.\"");
