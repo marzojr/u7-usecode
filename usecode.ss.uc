@@ -18890,7 +18890,6 @@ void Func03CF shape#(0x3CF) () {
 				say("\"Fool!  Simpleton!  Idiot!  Thou hast condemned thyself to death!\"");
 				Func09AD(item);
 				abort;
-				fallthrough;
 
 			case "bye":
 				say("\"Not so fast, mealworm!  I have developed an appetite for thee!\"");
@@ -29967,7 +29966,6 @@ void Func0423 object#(0x423) () {
 				say("\"Thou canst begin by gathering all the various body parts scattered throughout the Manor. That includes a torso, arms, legs, and oh, yes, make extra certain that thou dost not forget the head. Place them one by one on top of the assimilation machine. Once thou hast put all the parts and phoenix egg into the machine, Boydon shall at last become complete.");
 				Func097F(0xFFDD, "@Don't forget the torso!@", 0x0000);
 				abort;
-				fallthrough;
 
 			case "phoenix egg" (remove):
 				say("\"Dost thou have my phoenix egg?\"");
@@ -39410,6 +39408,7 @@ void Func043B object#(0x43B) () {
 				}
 			}
 			abort;
+			// Dead code
 			0xFFC5->set_item_flag(0x001C);
 			gflags[0x0168] = true;
 			0xFE9C->clear_item_flag(0x0010);
@@ -41067,7 +41066,6 @@ void Func043F object#(0x43F) () {
 				say("\"Until thou dost bring proof, no one will believe thee, including myself!\"");
 				Func097F(0xFFC1, "@Bring proof!@", 0x0000);
 				abort;
-				fallthrough;
 
 			case "bye":
 				if ((!gflags[0x004A]) && (!gflags[0x0033])) {
@@ -47000,7 +46998,6 @@ void Func0450 object#(0x450) () {
 				say("\"Then I shall certainly not let thee in.\"");
 				Func097F(0xFFB0, "@Be thou gone!@", 0x0000);
 				abort;
-				fallthrough;
 
 			case "strangers" (remove):
 				say("\"The Colored Storms and the Goblins have kept most people off the roads, and so 'tis unusual to see strangers in Monitor.\"");
@@ -50779,7 +50776,6 @@ void Func0496 object#(0x496) () {
 				say("\"Until thou dost bring proof, no one will believe us...\"");
 				Func097F(0xFF6A, "@Bring proof!@", 0x0000);
 				abort;
-				fallthrough;
 
 			case "stockings" (remove):
 				say("\"Ha! I surmise thou hast heard of my reputation as something of a womanizer. Purely undeserved, I assure thee. I will try to answer thy questions.\"");
@@ -60454,11 +60450,13 @@ void Func0625 object#(0x625) () {
 					actor frame sleeping;
 				};
 				abort;
+
 			case "No":
 labelFunc0625_031E:
 				say("\"An unfortunate decision, my friend.\"");
 				UI_attack_avatar();
 				return;
+
 			case "certificate":
 				say("\"Oh, I see. Carry on, carry on.\"");
 				UI_stop_arresting();
@@ -101235,6 +101233,7 @@ var Func08A7 0x8A7 (var var0000) {
 		for (var0007 in var0001 with var0005 to var0006) {
 			if (var0003 == var0007) {
 				return var0002[var0004];
+				// Dead code
 				abort;
 			}
 		}
@@ -105690,6 +105689,7 @@ var Func090F 0x90F (var var0000, var var0001, var var0002, var var0003) {
 			}
 		}
 		return false;
+		// Dead code
 		abort;
 	}
 	return 0;
@@ -110885,6 +110885,7 @@ var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003) {
 			}
 		}
 		return 0xFE9C;
+		// Dead code
 		abort;
 	}
 	var0006 = Func098D();
@@ -110924,6 +110925,7 @@ var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003) {
 			}
 		}
 		return var0000;
+		// Dead code
 		abort;
 	}
 	if (var0000->get_npc_object() in var0004) {
@@ -110935,6 +110937,7 @@ var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003) {
 			}
 		}
 		return var0000;
+		// Dead code
 		abort;
 	}
 	var0014 = 0x0001;
@@ -110987,6 +110990,7 @@ var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003) {
 				}
 			}
 			return var0000;
+			// Dead code
 			abort;
 		}
 		if ((var0000 == 0xFFDE) && (0xFED3 in var0004)) {
@@ -110995,6 +110999,7 @@ var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003) {
 				Func094E(var0000, var0001);
 			}
 			return var0000;
+			// Dead code
 			abort;
 		}
 		var0014 = (var0014 + 0x0001);

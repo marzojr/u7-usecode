@@ -11044,7 +11044,6 @@ void Func0409 object#(0x409) () {
 				0xFFF7->remove_from_party();
 				0xFFF7->get_npc_object()->set_schedule_type(0x000B);
 				abort;
-				fallthrough;
 
 			case "New Magincia":
 				say("\"We are isolated here. We get no news from the world outside. Life is much the same as it was the last time thou didst visit Britannia two hundred years ago. I have many friends here.\"");
@@ -11642,7 +11641,6 @@ void Func040A object#(0x40A) () {
 				0xFFF6->remove_from_party();
 				0xFFF6->get_npc_object()->set_schedule_type(0x000B);
 				abort;
-				fallthrough;
 
 			always:
 				var0029 = false;
@@ -14577,7 +14575,6 @@ void Func041A object#(0x41A) () {
 				Func0911(0x0064);
 				remove("mission");
 				abort;
-				fallthrough;
 
 			case "chest":
 				say("\"Ah yes, thou hast returned from Dungeon Destard! But wait! I do not see the Fellowship funds that thou wast to bring back! What has happened?!\"");
@@ -23098,7 +23095,6 @@ void Func0459 object#(0x459) () {
 			}
 			say("\"Do I look like a member of The Fellowship to thee? I do not even know what The Fellowship is! And I do not care!\"*");
 			abort;
-			fallthrough;
 
 		case "monument":
 			say("\"Owen, the shipwright, dost deserve to have a monument built to him. It should be in the shape of a gallows and it should have him hanging from it.\"*");
@@ -24423,7 +24419,6 @@ void Func0461 object#(0x461) () {
 		case "silver fluid":
 			say("You repeat the words to Mikos that you heard Fodus say. Mikos gives you a shocked look. \"I have no idea what he is talking about, but I would say it is typical for a gargoyle. Just trying to shirk of his duty. Say, thou hadst better leave this place if thou ist spending all thy time disrupting the work of the mine!\"*");
 			abort;
-			fallthrough;
 
 		case "bye":
 			break;
@@ -26590,6 +26585,7 @@ void Func0471 object#(0x471) () {
 				}
 				say("\"Fine. I'm not going to talk to you anyway!\"*");
 				abort;
+				// Dead code
 				remove("will not make you glue");
 				fallthrough;
 
@@ -28138,7 +28134,6 @@ labelFunc047A_0447:
 				say("She turns away from you with a sneer.*");
 				remove("Sprellic dead");
 				abort;
-				fallthrough;
 
 			case "bye":
 				break;
@@ -29091,7 +29086,6 @@ void Func0480 object#(0x480) () {
 			say("She sees your jaw set with determination and nods her head. \"Then die, foolish one!\"*");
 			0xFF80->get_npc_object()->set_schedule_type(0x0000);
 			abort;
-			fallthrough;
 
 		case "bye":
 			break;
@@ -30265,7 +30259,6 @@ void Func0486 object#(0x486) () {
 				var0002->set_schedule_type(0x0000);
 				var0003->set_schedule_type(0x0000);
 				abort;
-				fallthrough;
 
 			case "bye":
 				break;
@@ -33199,7 +33192,6 @@ void Func0498 object#(0x498) () {
 				}
 				say("\"Fine.\"");
 				abort;
-				fallthrough;
 
 			case "Penumbra":
 				if (var0003) {
@@ -35331,7 +35323,6 @@ void Func04A6 object#(0x4A6) () {
 			case "bye":
 labelFunc04A6_02F6:
 				break;
-				fallthrough;
 		}
 
 		say("\"Good day to thee, ",
@@ -37402,7 +37393,6 @@ void Func04B0 object#(0x4B0) () {
 
 			case "bye":
 				break;
-				fallthrough;
 		}
 		nobreak {
 labelFunc04B0_0332:
@@ -43304,7 +43294,6 @@ void Func04D9 object#(0x4D9) () {
 					}
 					say("\"To tell you to go away!\"*");
 					abort;
-					fallthrough;
 
 				case "job":
 					say("\"To have none!\" He glares fiercly at you.\"");
@@ -43402,7 +43391,6 @@ void Func04DA object#(0x4DA) () {
 					}
 					say("\"To tell you to go away!\"*");
 					abort;
-					fallthrough;
 
 				case "job":
 					say("\"To have none!\" He glares fiercly at you.\"");
@@ -64011,6 +63999,7 @@ void Func0840 0x840 () {
 	}
 	say("The sage frowns. \"That is not correct. Go and seek the true answer.\"*");
 	abort;
+	// Dead code
 	UI_pop_answers();
 }
 
@@ -76607,6 +76596,7 @@ var Func094B 0x94B (var var0000, var var0001) {
 		if (var0004 < var000C[0x0004]) {
 			say("\"To be happy,\" he says. \"To have wanted to keep it anyway! To tell you to leave.\"");
 			abort;
+			// Dead code
 			return 0x0000;
 		}
 		var0007 = UI_get_random(0x0064);
