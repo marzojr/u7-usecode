@@ -28062,6 +28062,7 @@ void Func047A object#(0x47A) () {
 							var0012 = UI_input_numeric_value(0x0000, 0x00C8, 0x000A, 0x0000);
 							if (var0012 == 0x0000) {
 								say("\"Perhaps thou art not truly serious about thy convictions. Mayhaps Daphne will take thy line of bets.\"");
+								// I see no way other than this
 								goto labelFunc047A_0447;
 							}
 							say("\"Thou wouldst bet ",
@@ -28294,6 +28295,7 @@ void Func047B object#(0x47B) () {
 							var000B = UI_input_numeric_value(0x0000, 0x00C8, 0x000A, 0x0000);
 							if (var000B == 0x0000) {
 								say("\"Perhaps thou art not truly serious about thy convictions. Mayhaps the princess will take thy line of bets.\"");
+								// I see no way other than this
 								goto labelFunc047B_0352;
 							}
 							say("\"Thou wouldst bet ",
@@ -29340,6 +29342,7 @@ void Func0482 object#(0x482) () {
 		if (gflags[0x0195]) {
 			say("\"Art thou ready to pay thy bill?\"");
 			if (Func090A()) {
+				// I see no way other than this
 				goto labelFunc0482_00E5;
 			}
 			say("\"Goodbye, then!\"*");

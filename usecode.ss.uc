@@ -432,6 +432,7 @@ void Func00E4 shape#(0xE4) () {
 			var0004 = 0xFE9C->get_object_position();
 			var0005 = get_object_position();
 			if ((get_distance(0xFE9C) < 0x0005) && (var0004[0x0003] == var0005[0x0003])) {
+				// I see no way other than this
 				goto labelFunc00E4_0956;
 			} else {
 				clear_item_say();
@@ -4038,6 +4039,7 @@ labelFunc0151_0462:
 					say("\"Quake at my words, for I am Sesyntho, Scribe to the Hierophant of Chaos! The others say that I am dead, but I am no ghost.\"");
 					say("\"Canst thou not see that this is merely a time of waiting, before our ascension into the Void? So it cannot be called Death.\"");
 					if (UI_get_random(0x0006) > 0x0003) {
+						// I see no way other than this
 						goto labelFunc0151_0462;
 					}
 				}
@@ -4046,6 +4048,7 @@ labelFunc0151_0462:
 					say("\"There is another who awaits thee there. She would aid thee, but of necessity her aid will be strange to thee.\"");
 					say("\"There is a law which forbids us from directly helping thee. I know that thou art our hope, yet my tongue is ensnared! I cannot speak the truth clearly.\"");
 					if (UI_get_random(0x0006) > 0x0003) {
+						// I see no way other than this
 						goto labelFunc0151_0462;
 					}
 				}
@@ -4055,6 +4058,7 @@ labelFunc0151_0462:
 				say("\"There are four of us here, doomed to perform the same lines over and over 'til eternity dawns.\"");
 				say("\"One was a priest, another a librarian, and the last was a soldier. I was something once, but I do not recall.\"");
 				if (UI_get_random(0x0006) > 0x0003) {
+					// I see no way other than this
 					goto labelFunc0151_0462;
 				}
 				fallthrough;
@@ -4064,6 +4068,7 @@ labelFunc0151_0462:
 				say("\"Yet, I doubt if there can be any victory. How can Imbalance be victory? We are opposites, not enemies.\"");
 				say("\"Oh, I speak blasphemy! But I cannot take back my words...\"");
 				if (UI_get_random(0x0006) > 0x0003) {
+					// I see no way other than this
 					goto labelFunc0151_0462;
 				}
 				fallthrough;
@@ -4072,6 +4077,7 @@ labelFunc0151_0462:
 				say("\"Stay and listen to our words, for we are performing a great Ode in honor of the Serpent of Chaos. He shall hear and reward us.\"");
 				say("\"While the Great One yet slumbers, the Chaos Serpent hath the power to prevail over Order. I will have faith, unlike these others.\"");
 				if (UI_get_random(0x0006) > 0x0003) {
+					// I see no way other than this
 					goto labelFunc0151_0462;
 				}
 				fallthrough;
@@ -4080,6 +4086,7 @@ labelFunc0151_0462:
 				say("\"Oh, the beauty of pure Chaos! 'Tis the unity of all the discordant elements of Nature, without pattern or order.\"");
 				say("\"We are Chaos -- it is our belief, and we are its adherents. We are followers of the Red Serpent.\"");
 				if (UI_get_random(0x0006) > 0x0003) {
+					// I see no way other than this
 					goto labelFunc0151_0462;
 				}
 				fallthrough;
@@ -4089,6 +4096,7 @@ labelFunc0151_0462:
 				say("\"Life as a spectral being is so tedious. Once, I was a woman in the prime of my life. Now I merely exist...\"");
 				say("\"I miss the flesh! There were pains and sorrow, but it was far better than this joyless life.\"");
 				if (UI_get_random(0x0006) > 0x0003) {
+					// I see no way other than this
 					goto labelFunc0151_0462;
 				}
 				fallthrough;
@@ -4098,6 +4106,7 @@ labelFunc0151_0462:
 				say("\"If the War of Imbalance doth finally end, if Chaos is victorious or Order doth take the win, then we shall be freed to enter the Void.\"");
 				say("\"I cannot help but think that thou art connected with our fate. How, I cannot say.\"");
 				if (UI_get_random(0x0006) > 0x0003) {
+					// I see no way other than this
 					goto labelFunc0151_0462;
 				}
 				fallthrough;
@@ -4113,6 +4122,7 @@ labelFunc0151_0462:
 					say("\"Thou hast slain the lurker of these depths, but others await thee! Thou shalt not prevail, stranger.\"");
 				}
 				if (UI_get_random(0x0006) > 0x0003) {
+					// I see no way other than this
 					goto labelFunc0151_0462;
 				}
 				fallthrough;
@@ -4121,6 +4131,7 @@ labelFunc0151_0462:
 				say("\"His words were the Words of Chaos. He communed with the Serpent, and wore his armour upon his breast. He was our Serpent Father.\"");
 				say("\"They have slain him, and there is none to replace him. I do not know his burial spot. I weep for him.\"");
 				if (UI_get_random(0x0006) > 0x0003) {
+					// I see no way other than this
 					goto labelFunc0151_0462;
 				}
 				fallthrough;
@@ -4129,6 +4140,7 @@ labelFunc0151_0462:
 				say("\"To speak of Order is to defile my lips! They are opposite to rightfulness, they are wrongfulness, they are anathema.\"");
 				say("\"I despise pattern, and disrespect all laws, and I prize mine individuality above all else!\"");
 				if (UI_get_random(0x0006) > 0x0003) {
+					// I see no way other than this
 					goto labelFunc0151_0462;
 				}
 				fallthrough;
@@ -5030,6 +5042,7 @@ void Func017D shape#(0x17D) () {
 					gflags[0x014F] = false;
 					var000B = UI_find_nearby_avatar(0x0203);
 					var0004 = Func089D(var000B);
+					// I see no way other than this
 					goto labelFunc017D_095E;
 
 				case "bye":
@@ -5038,6 +5051,7 @@ void Func017D shape#(0x17D) () {
 					gflags[0x014F] = false;
 					var000B = UI_find_nearby_avatar(0x0203);
 					var0004 = Func089D(var000B);
+					// I see no way other than this
 					goto labelFunc017D_095E;
 			}
 		}
@@ -5867,6 +5881,9 @@ void Func01C3 shape#(0x1C3) () {
 						". There aren't any gremlins in the Knight's Test!\"");
 					var0005 = Func08ED(var0005);
 					if (var0005 == 0x0004) {
+						// This could be a break instead; the original
+						// skips the endconv from a break, which is why
+						// I did it this way
 						goto labelFunc01C3_073B;
 					}
 					fallthrough;
@@ -5879,6 +5896,9 @@ void Func01C3 shape#(0x1C3) () {
 					0x0000->set_conversation_slot();
 					var0005 = Func08ED(var0005);
 					if (var0005 == 0x0004) {
+						// This could be a break instead; the original
+						// skips the endconv from a break, which is why
+						// I did it this way
 						goto labelFunc01C3_073B;
 					}
 					fallthrough;
@@ -5893,6 +5913,9 @@ void Func01C3 shape#(0x1C3) () {
 					0x0000->set_conversation_slot();
 					var0005 = Func08ED(var0005);
 					if (var0005 == 0x0004) {
+						// This could be a break instead; the original
+						// skips the endconv from a break, which is why
+						// I did it this way
 						goto labelFunc01C3_073B;
 					}
 					fallthrough;
@@ -5905,11 +5928,17 @@ void Func01C3 shape#(0x1C3) () {
 					0x0000->set_conversation_slot();
 					var0005 = Func08ED(var0005);
 					if (var0005 == 0x0004) {
+						// This could be a break instead; the original
+						// skips the endconv from a break, which is why
+						// I did it this way
 						goto labelFunc01C3_073B;
 					}
 					fallthrough;
 
 				case "change subject" (remove):
+					// This could be a break instead; the original
+					// skips the endconv from a break, which is why
+					// I did it this way
 					goto labelFunc01C3_073B;
 			}
 labelFunc01C3_073B:
@@ -13730,6 +13759,7 @@ void Func031D shape#(0x31D) () {
 			say("I could repair it if I coud use thy flux analyzer. I know that the device was stolen from thee years ago. Hast thou ever recovered it?");
 			say("-- Melino");
 			if (gflags[0x00CE]) {
+				// Need to make UCC optimize this
 				goto labelFunc031D_0A44;
 			}
 			if (gflags[0x023C]) {
@@ -13968,9 +13998,11 @@ void Func031D shape#(0x31D) () {
 			say("Parting Verses: by Vasculio~~ As they lower me down,~ To this hole in the ground,~ I scream for help,~ But they can't hear a sound.~ I scratch on this lid,~ My fingers they bleed.~ They plant me deep,~ Like an evil seed.~ Now my bones decompose,~ My flesh doth rot,~ But soon I will rise,~ And torture the lot.");
 			var0006 = 0xFE9C->find_nearby(0x00F3, 0x0028, 0x0000);
 			if (!var0006) {
+				// Need to make UCC optimize this
 				goto labelFunc031D_0A44;
 			}
 			if (gflags[0x0248]) {
+				// Need to make UCC optimize this
 				goto labelFunc031D_0A44;
 			}
 			gflags[0x0248] = true;
@@ -20902,6 +20934,7 @@ labelFunc0402_02F8:
 				say("\"The monks came and brought me here, saying that it was vitally important for me to be here.\"");
 				say("\"The one called Karnax said that I must fulfill my purpose, or the world itself would be in jeopardy...\"");
 				if (var000B && var000C) {
+					// I see no way other than this
 					goto labelFunc0402_02F8;
 				}
 				fallthrough;
@@ -20909,6 +20942,7 @@ labelFunc0402_02F8:
 			case "death" (remove):
 				say("\"That is right, I was dead when last we saw one another. However, the good monks found my body and returned life to me.\"");
 				if (var000B && var000C) {
+					// I see no way other than this
 					goto labelFunc0402_02F8;
 				}
 				fallthrough;
@@ -20924,6 +20958,7 @@ labelFunc0402_02F8:
 					gflags[0x0135] = true;
 				}
 				if (var000B && var000C) {
+					// I see no way other than this
 					goto labelFunc0402_02F8;
 				}
 				fallthrough;
@@ -20941,6 +20976,7 @@ labelFunc0402_02F8:
 					say("\"As a sign of her regret for what hath happened -- jail and all -- she sent three gifts to thee.\"");
 				}
 				if (var000B && var000C) {
+					// I see no way other than this
 					goto labelFunc0402_02F8;
 				}
 				fallthrough;
@@ -20963,6 +20999,7 @@ labelFunc0402_02F8:
 				var0009 = Func099B(0xFE9C, 0x0001, 0x02CB, 0x0010, 0x0000, 0x0000, true);
 				gflags[0x014B] = true;
 				if (var000B && var000C) {
+					// I see no way other than this
 					goto labelFunc0402_02F8;
 				}
 				fallthrough;
@@ -23148,6 +23185,7 @@ void Func040F object#(0x40F) () {
 				say("\"I can tell thee who a piece belongs to just by looking at it. I remember everything I've made.\"");
 				say("\"Dost thou have something thou wishest me to look at?\"");
 				if (Func0955() == true) {
+					// I see no way other than this
 					goto labelFunc040F_032A;
 				}
 				say("\"Fine.\"");
@@ -23205,6 +23243,7 @@ labelFunc040F_032A:
 				var0008 = Func0956(["buy", "look", "talk"]);
 				if (var0008 == "buy") {
 					add("buy");
+					// I see no way other than this
 					goto labelFunc040F_046D;
 				} else {
 					if (var0008 == "look") {
@@ -29134,6 +29173,7 @@ void Func0421 object#(0x421) () {
 			case "stockings" (remove):
 				if (var0001) {
 					if (gflags[0x013C]) {
+						// I see no way other than this
 						goto labelFunc0421_0614;
 					}
 					say("\"I beseech thee to turn over to me that which is the instrument of humiliation against a woman who hath done thee no harm. They belong to my lover Columna and they were stolen by the bandit Stefano. Columna's stockings can be used as evidence of our affair. I neither know nor care how thou hast come into possession of them. But know this: I shall have them!\"");
@@ -29181,6 +29221,7 @@ labelFunc0421_0614:
 					} while (true);
 				} else {
 					if (gflags[0x013C]) {
+						// I see no way other than this
 						goto labelFunc0421_06AC;
 					}
 					say("\"I shall be frank with thee. I want the stockings to protect the honor of the woman I love. The stockings rightfully belong to my lover Columna, but they were stolen by the bandit Stefano. I neither know nor care how thou hast come into possession of them, but I must have them from thee.\"");
@@ -33340,6 +33381,7 @@ void Func042C object#(0x42C) () {
 			var001B = 0xFF81->get_item_flag(0x0004);
 			if (var0019 && (var001A && var001B)) {
 				if (0xFFD4->get_npc_id() != 0x0001) {
+					// Need to make UCC optimize this
 					goto labelFunc042C_0F80;
 				}
 				0xFFD4->set_npc_id(0x0002);
@@ -35693,6 +35735,7 @@ void Func0433 object#(0x433) () {
 			"? Well, I'm not done yet!\"");
 		add(["false Oracle", "Kylista", "not done yet"]);
 	} else if (!(event == 0x0009)) {
+		// Need to make UCC optimize this
 		goto labelFunc0433_05E8;
 	} else {
 		0xFFCD->run_schedule();
@@ -37377,6 +37420,7 @@ void Func0436 object#(0x436) () {
 			"! Everyone else hath forgotten me. I am so lonely here...\"");
 		add(["plot", "Voldin", "lonely"]);
 	} else if (event != 0x0009) {
+		// Need to make UCC optimize this
 		goto labelFunc0436_0679;
 	} else {
 		0xFFCA->run_schedule();
@@ -43131,6 +43175,7 @@ void Func0445 object#(0x445) () {
 	if (event == 0x0002) {
 		if (gflags[0x0038]) {
 			0xFFBB->run_schedule();
+			// I see no way other than this
 			goto labelFunc0445_0257;
 		} else {
 			if (gflags[0x00B7]) {
@@ -43688,6 +43733,7 @@ labelFunc0445_0257:
 					Func097F(0xFE9C, "@Good day!@", 0x0000);
 					Func097F(0xFFBB, "@Certainly...@", 0x0002);
 				}
+				// I see no way other than this
 				goto labelFunc0445_0D4F;
 		}
 	}
@@ -44068,6 +44114,7 @@ labelFunc0446_05A1:
 				if (!gflags[0x0054]) {
 					say("\"Hast thou changed thy mind about meeting?\"");
 					if (Func0955()) {
+						// I see no way other than this
 						goto labelFunc0446_05A1;
 					} else {
 						say("\"Suit thyself.\"");
@@ -46160,6 +46207,7 @@ void Func044D object#(0x44D) () {
 	}
 	if (event != 0x0002) {
 		if (event != 0x0009) {
+			// Need to make UCC optimize this
 			goto labelFunc044C_09C6;
 		}
 	}
@@ -48438,6 +48486,9 @@ void Func0464 object#(0x464) () {
 					case "Take the Money":
 						say("\"No matter what the need, seeker, Ethicality demands that thou not takest anything without permission. It is difficult to weigh these things at times, but thou shalt find it easier as time passes...\"");
 						UI_pop_answers();
+						// This could be a break instead; the original
+						// skips the endconv from a break, which is why
+						// I did it this way
 						goto labelFunc0464_0169;
 
 					case "Leave the Money":
@@ -48452,6 +48503,9 @@ void Func0464 object#(0x464) () {
 						say("\"Thy life doth have little value if thou dost abandon thy virtue. Ethicality demands that thou wilt oppose evil in all ways, even at the cost of thine own life.\"");
 						UI_pop_answers();
 						UI_pop_answers();
+						// This could be a break instead; the original
+						// skips the endconv from a break, which is why
+						// I did it this way
 						goto labelFunc0464_0169;
 
 					case "Continue":
@@ -48473,6 +48527,9 @@ void Func0464 object#(0x464) () {
 					case "Flee":
 						say("\"Thou art incorrect, seeker. While thou must never seek to throw thy life away, Ethicality demands that thou must seek to preserve the life of others as thou wouldst thine own.\" *\"No man's fate is certain while he yet lives. Thine actions can change the course of fate...\"");
 						UI_pop_answers();
+						// This could be a break instead; the original
+						// skips the endconv from a break, which is why
+						// I did it this way
 						goto labelFunc0464_0169;
 				}
 labelFunc0464_0169:
@@ -58458,6 +58515,7 @@ labelFunc0526_0008:
 			var000C = script 0xFEDA {
 				face south;
 			};
+			// I see no way other than this
 			goto labelFunc0526_0008;
 		}
 	} while (false)
@@ -60167,6 +60225,7 @@ labelFunc0622_0024:
 					break;
 				}
 			} nobreak {
+				// I see no way other than this
 				goto labelFunc0622_0024;
 			}
 			var0008->show_npc_face0(0x0000);
@@ -60421,6 +60480,7 @@ void Func0625 object#(0x625) () {
 					abort;
 				} while (false);
 			}
+			// I see no way other than this
 			goto labelFunc0625_031E;
 		}
 		say("\"Cease and desist immediately, ruffian!\"");
@@ -61244,6 +61304,7 @@ void Func0633 object#(0x633) () {
 	var var0000;
 
 	if (!((event == 0x0001) || (event == 0x0002))) {
+		// Need to make UCC optimize this
 		goto labelFunc0633_0128;
 	}
 	if (gflags[0x000E]) {
@@ -74878,6 +74939,7 @@ void Func0759 object#(0x759) () {
 					break;
 				}
 				var0015 = false;
+				// I see no way other than this
 				goto labelFunc0759_0523;
 			}
 		} nobreak {
@@ -76631,6 +76693,7 @@ void Func07A4 object#(0x7A4) () {
 		do {
 			var0004 = var0000[var0005];
 			if (!var0004) {
+				// Need to make UCC optimize this
 				goto labelFunc07A4_00BE;
 			}
 			if (Func0906(var0004) != 0x0002) {
@@ -81174,10 +81237,16 @@ void Func07FC object#(0x7FC) () {
 				0xFE9C->show_npc_face1(0x0000);
 				say("\"Forgive me. I have no questions for thee.\"");
 				Func097F(item, "@Waste of time...@", 0x0000);
+				// This could be a break instead; the original
+				// skips the endconv from a break, which is why
+				// I did it this way
 				goto labelFunc07FC_0135;
 
 			case "no further questions":
 				Func097F(0xFE9C, "@No further questions...@", 0x0000);
+				// This could be a break instead; the original
+				// skips the endconv from a break, which is why
+				// I did it this way
 				goto labelFunc07FC_0135;
 		}
 labelFunc07FC_0135:
@@ -81236,10 +81305,16 @@ labelFunc07FC_0135:
 				0xFE9C->show_npc_face1(0x0000);
 				say("\"Forgive me. I have no questions for thee.\"");
 				Func097F(item, "@Damned traitor...@", 0x0000);
+				// This could be a break instead; the original
+				// skips the endconv from a break, which is why
+				// I did it this way
 				goto labelFunc07FC_02C2;
 
 			case "no further questions":
 				Func097F(0xFE9C, "@No further questions...@", 0x0000);
+				// This could be a break instead; the original
+				// skips the endconv from a break, which is why
+				// I did it this way
 				goto labelFunc07FC_02C2;
 		}
 labelFunc07FC_02C2:
@@ -81367,10 +81442,16 @@ labelFunc07FC_02C2:
 				0xFE9C->show_npc_face1(0x0000);
 				say("\"Forgive me. I have no questions for thee.\"");
 				Func097F(item, "@Strange kind of person...@", 0x0000);
+				// This could be a break instead; the original
+				// skips the endconv from a break, which is why
+				// I did it this way
 				goto labelFunc07FC_0595;
 
 			case "no further questions":
 				Func097F(0xFE9C, "@No further questions...@", 0x0000);
+				// This could be a break instead; the original
+				// skips the endconv from a break, which is why
+				// I did it this way
 				goto labelFunc07FC_0595;
 		}
 labelFunc07FC_0595:
@@ -81444,10 +81525,16 @@ labelFunc07FC_0595:
 				0xFE9C->show_npc_face1(0x0000);
 				say("\"Forgive me. I have no questions for thee.\"");
 				Func097F(item, "@Never mind...@", 0x0000);
+				// This could be a break instead; the original
+				// skips the endconv from a break, which is why
+				// I did it this way
 				goto labelFunc07FC_074A;
 
 			case "no further questions":
 				Func097F(0xFE9C, "@No further questions...@", 0x0000);
+				// This could be a break instead; the original
+				// skips the endconv from a break, which is why
+				// I did it this way
 				goto labelFunc07FC_074A;
 		}
 labelFunc07FC_074A:
@@ -81522,10 +81609,16 @@ labelFunc07FC_074A:
 				0xFE9C->show_npc_face1(0x0000);
 				say("\"Forgive me. I have no questions for thee.\"");
 				Func097F(item, "@Nor I for thee...@", 0x0000);
+				// This could be a break instead; the original
+				// skips the endconv from a break, which is why
+				// I did it this way
 				goto labelFunc07FC_0904;
 
 			case "no further questions":
 				Func097F(0xFE9C, "@No further questions...@", 0x0000);
+				// This could be a break instead; the original
+				// skips the endconv from a break, which is why
+				// I did it this way
 				goto labelFunc07FC_0904;
 		}
 labelFunc07FC_0904:
@@ -81576,6 +81669,9 @@ labelFunc07FC_0904:
 						0xFFC3->show_npc_face1(0x0000);
 						say("\"Zounds, man! In the earshot of Lady Yelinda? Hast thou no decency!\"");
 						Func097F(0xFFC6, "@Leave me alone...@", 0x0000);
+						// This could be a break instead; the original
+						// skips the endconv from a break, which is why
+						// I did it this way
 						goto labelFunc07FC_0B2E;
 					}
 				} else {
@@ -81594,6 +81690,9 @@ labelFunc07FC_0904:
 				0x0000->set_conversation_slot();
 				say("\"I may be a drunk, but I be an honest drunk. I shall follow no hypocrite ta a watery grave.\"");
 				Func097F(0xFFC6, "@That's all I have to say...@", 0x0000);
+				// This could be a break instead; the original
+				// skips the endconv from a break, which is why
+				// I did it this way
 				goto labelFunc07FC_0B2E;
 
 			case "drinking":
@@ -81608,10 +81707,16 @@ labelFunc07FC_0904:
 				0xFE9C->show_npc_face1(0x0000);
 				say("\"Forgive me. I have no questions for thee.\"");
 				Func097F(item, "@Drunkard...@", 0x0000);
+				// This could be a break instead; the original
+				// skips the endconv from a break, which is why
+				// I did it this way
 				goto labelFunc07FC_0B2E;
 
 			case "no further questions":
 				Func097F(0xFE9C, "@No further questions...@", 0x0000);
+				// This could be a break instead; the original
+				// skips the endconv from a break, which is why
+				// I did it this way
 				goto labelFunc07FC_0B2E;
 		}
 labelFunc07FC_0B2E:
@@ -81645,6 +81750,9 @@ labelFunc07FC_0B2E:
 				0x0000->set_conversation_slot();
 				say("\"Beauty forbid! Thou hast spouted the blasphemy again!\"");
 				Func097F(0xFFC9, "@I cannot bear this!@", 0x0000);
+				// This could be a break instead; the original
+				// skips the endconv from a break, which is why
+				// I did it this way
 				goto labelFunc07FC_0CC8;
 
 			case "the character of the accused":
@@ -81674,10 +81782,16 @@ labelFunc07FC_0B2E:
 				say("\"Forgive me. I have no questions for thee.\"");
 				Func097F(0xFFC3, "@Such impudence!@", 0x0002);
 				Func097F(0xFFCE, "@For shame!@", 0x0000);
+				// This could be a break instead; the original
+				// skips the endconv from a break, which is why
+				// I did it this way
 				goto labelFunc07FC_0CC8;
 
 			case "no further questions":
 				Func097F(0xFE9C, "@No further questions...@", 0x0000);
+				// This could be a break instead; the original
+				// skips the endconv from a break, which is why
+				// I did it this way
 				goto labelFunc07FC_0CC8;
 		}
 labelFunc07FC_0CC8:
@@ -81715,6 +81829,7 @@ labelFunc07FC_0CC8:
 						0x0000->set_conversation_slot();
 					} else {
 						say("\"Ask me something else...\"");
+						// I see no way other than this
 						goto labelFunc07FC_0E12;
 					}
 					say("\"I followed ",
@@ -81760,10 +81875,16 @@ labelFunc07FC_0E12:
 				0xFE9C->show_npc_face1(0x0000);
 				say("\"Forgive me. I have no questions for thee.\"");
 				Func097F(item, "@Idiot...@", 0x0000);
+				// This could be a break instead; the original
+				// skips the endconv from a break, which is why
+				// I did it this way
 				goto labelFunc07FC_0EB4;
 
 			case "no further questions":
 				Func097F(0xFE9C, "@No further questions...@", 0x0000);
+				// This could be a break instead; the original
+				// skips the endconv from a break, which is why
+				// I did it this way
 				goto labelFunc07FC_0EB4;
 		}
 labelFunc07FC_0EB4:
@@ -86348,6 +86469,7 @@ labelFunc081A_00C0:
 			". I will perform mine healing for only 10 filari.\"");
 		say("\"Whom dost thou wish to heal?\"");
 		var0004 = true;
+		// I see no way other than this
 		goto labelFunc081A_00C0;
 	}
 }
@@ -89799,6 +89921,7 @@ labelFunc0836_0055:
 			". I will perform mine healing free of charge.\"");
 		say("\"Whom dost thou wish to heal?\"");
 		var0003 = true;
+		// I see no way other than this
 		goto labelFunc0836_0055;
 	}
 }
@@ -91711,6 +91834,7 @@ void Func0843 0x843 () {
 								say("\"Perhaps another time, ",
 									var0000,
 									"...\"");
+								// I see no way other than this
 								goto labelFunc0843_05DB;
 							}
 							say("\"",
@@ -91755,6 +91879,7 @@ void Func0843 0x843 () {
 								say("\"Perhaps another time, ",
 									var0000,
 									"...\"");
+								// I see no way other than this
 								goto labelFunc0843_05DB;
 							}
 							say("\"",
@@ -91799,6 +91924,7 @@ void Func0843 0x843 () {
 								say("\"Perhaps another time, ",
 									var0000,
 									"...\"");
+								// I see no way other than this
 								goto labelFunc0843_05DB;
 							}
 							say("\"",
@@ -97015,6 +97141,7 @@ void Func0868 0x868 () {
 								say("\"Perhaps another time, ",
 									var0000,
 									"...\"");
+								// I see no way other than this
 								goto labelFunc0868_0785;
 							}
 							say("\"",
@@ -97058,6 +97185,7 @@ void Func0868 0x868 () {
 								say("\"Perhaps another time, ",
 									var0000,
 									"...\"");
+								// I see no way other than this
 								goto labelFunc0868_0785;
 							}
 							say("\"",
@@ -97101,6 +97229,7 @@ void Func0868 0x868 () {
 								say("\"Perhaps another time, ",
 									var0000,
 									"...\"");
+								// I see no way other than this
 								goto labelFunc0868_0785;
 							}
 							say("\"",
@@ -97144,6 +97273,7 @@ void Func0868 0x868 () {
 								say("\"Perhaps another time, ",
 									var0000,
 									"...\"");
+								// I see no way other than this
 								goto labelFunc0868_0785;
 							}
 							say("\"",
@@ -97187,6 +97317,7 @@ void Func0868 0x868 () {
 								say("\"Perhaps another time, ",
 									var0000,
 									"...\"");
+								// I see no way other than this
 								goto labelFunc0868_0785;
 							}
 							say("\"",
@@ -97230,6 +97361,7 @@ void Func0868 0x868 () {
 								say("\"Perhaps another time, ",
 									var0000,
 									"...\"");
+								// I see no way other than this
 								goto labelFunc0868_0785;
 							}
 							say("\"",
@@ -97273,6 +97405,7 @@ void Func0868 0x868 () {
 								say("\"Perhaps another time, ",
 									var0000,
 									"...\"");
+								// I see no way other than this
 								goto labelFunc0868_0785;
 							}
 							say("\"",
@@ -98854,6 +98987,7 @@ void Func0875 0x875 () {
 			abort;
 		}
 		if (!(var0003 == "Yes")) {
+			// Need to make UCC optimize this
 			goto labelFunc0875_0216;
 		}
 	}
@@ -98911,6 +99045,7 @@ void Func0875 0x875 () {
 					}
 				}
 				if (var000C != 0x0003) {
+					// Need to make UCC optimize this
 					goto labelFunc0875_0216;
 				}
 			} while (false);
@@ -101480,6 +101615,7 @@ void Func08AE 0x8AE () {
 			var0008 = var0007->get_object_position();
 			Func090E(0xFF57, var0007, var0000, var0001, var0002, 0x04A9, 0xFF57->get_npc_object(), 0x000A, true);
 			UI_set_path_failure(0x04A9, item, 0x000A);
+			// Need to make UCC optimize this
 			goto labelFunc08AE_00DD;
 		}
 	}
@@ -101523,6 +101659,7 @@ void Func08AF 0x8AF (var var0000, var var0001) {
 				}
 				Func08B1(0xFE9C, var0000, 0x0001, 0xFF5B);
 				if (Func08B0(var0004, var0005, 0x0000)) {
+					// Need to make UCC optimize this
 					goto labelFunc08AF_018C;
 				}
 				var0007 = 0xFE9C->get_object_position();
@@ -101530,12 +101667,14 @@ void Func08AF 0x8AF (var var0000, var var0001) {
 					var0006 = UI_update_last_created(var0007);
 				}
 				if (!var0005) {
+					// Need to make UCC optimize this
 					goto labelFunc08AF_018C;
 				}
 				var0006 = UI_update_last_created(var0007);
 				return;
 			}
 			if (Func08B0(var0004, var0005, 0x0000)) {
+				// Need to make UCC optimize this
 				goto labelFunc08AF_018C;
 			}
 			var0007 = 0xFE9C->get_object_position();
@@ -101543,6 +101682,7 @@ void Func08AF 0x8AF (var var0000, var var0001) {
 				var0006 = UI_update_last_created(var0007);
 			}
 			if (!var0005) {
+				// Need to make UCC optimize this
 				goto labelFunc08AF_018C;
 			}
 			var0006 = UI_update_last_created(var0007);
@@ -102835,6 +102975,7 @@ void Func08C9 0x8C9 () {
 						break;
 					}
 				} nobreak {
+					// Need to make UCC optimize this
 					goto labelFunc08C9_02E4;
 				}
 			}
@@ -107502,6 +107643,7 @@ void Func0936 0x936 (var var0000, var var0001) {
 				return;
 			}
 			if (!(0xFFC1->get_npc_id() == 0x0009)) {
+				// I see no way other than this
 				goto labelFunc0936_0460;
 			}
 			0xFFC1->show_npc_face0(0x0000);
