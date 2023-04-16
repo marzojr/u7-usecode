@@ -393,19 +393,17 @@ void Func00E4 shape#(0xE4) () {
 					event = 0x0009;
 					Func0855(event);
 					abort;
-				} else {
-					0xFEEA->show_npc_face0(0x0000);
-					say("\"Gladly I will for a fellow Knight. Have a pleasant day and may goblin blood stain thy sword soon.\"");
-					event = 0x0009;
-					Func0855(event);
-					abort;
 				}
-			} else {
 				0xFEEA->show_npc_face0(0x0000);
-				say("\"Then bother me not! I must be about my duty!\"");
-				Func097F(item, "@Watch out for goblins...@", 0x0002);
+				say("\"Gladly I will for a fellow Knight. Have a pleasant day and may goblin blood stain thy sword soon.\"");
+				event = 0x0009;
+				Func0855(event);
 				abort;
 			}
+			0xFEEA->show_npc_face0(0x0000);
+			say("\"Then bother me not! I must be about my duty!\"");
+			Func097F(item, "@Watch out for goblins...@", 0x0002);
+			abort;
 		}
 		set_schedule_type(0x0003);
 	}
@@ -1027,17 +1025,16 @@ void Func00E6 shape#(0xE6) () {
 					face west;
 				};
 				abort;
-			} else {
-				say("\"No, thou dost not understand. As I said, no mortal can resist the Dance of Passion...\"");
-				UI_end_conversation();
-				var000E = script 0xFFEC {
-					nohalt;
-					face south;
-					say "@Uh-oh...@";
-				};
-				Func08EC();
-				abort;
 			}
+			say("\"No, thou dost not understand. As I said, no mortal can resist the Dance of Passion...\"");
+			UI_end_conversation();
+			var000E = script 0xFFEC {
+				nohalt;
+				face south;
+				say "@Uh-oh...@";
+			};
+			Func08EC();
+			abort;
 		}
 		if (0xFFEC->get_npc_id() == 0x000A) {
 			0xFFEC->Func07D1();
@@ -1195,7 +1192,8 @@ void Func00E6 shape#(0xE6) () {
 					say "@Est Nudi!@";
 				};
 				abort;
-			} else if (var000F == "no") {
+			}
+			if (var000F == "no") {
 				say("\"Oh... this is so embarrassing!\"");
 				UI_end_conversation();
 				var000E = script 0xFFEC {
@@ -1212,33 +1210,32 @@ void Func00E6 shape#(0xE6) () {
 				};
 				0xFFEC->set_npc_id(0x0011);
 				abort;
-			} else {
-				say("\"Do I detect a note of disapproval? Well, I don't have to take that from anyone!\"");
-				UI_end_conversation();
-				0xFFEC->Func07D1();
-				Func097F(0xFFEC, "@Pig!@", 0x0002);
-				Func097F(0xFE9C, "@Ouch!@", 0x0008);
-				var000E = script 0xFFEC {
-					nohalt;
-					call Func07D2;
-					// Bug: the next line is interpreted as a 'step 4, 0x27',
-					// followed by a 0x0002, which makes a step south and
-					// up by 0x27 tiles (which fails), followed by a 'nop2'.
-					// This likely should have been just 'step south' followed
-					// by the 'wait 2'.
-					raw((byte)0x53); step south; wait 2;
-					actor frame reach_1h;
-					wait 2;
-					actor frame strike_1h;
-					sfx 127;
-					wait 4;
-					actor frame standing;
-					wait 8;
-					call Func00E6;
-				};
-				0xFFEC->set_npc_id(0x0011);
-				abort;
 			}
+			say("\"Do I detect a note of disapproval? Well, I don't have to take that from anyone!\"");
+			UI_end_conversation();
+			0xFFEC->Func07D1();
+			Func097F(0xFFEC, "@Pig!@", 0x0002);
+			Func097F(0xFE9C, "@Ouch!@", 0x0008);
+			var000E = script 0xFFEC {
+				nohalt;
+				call Func07D2;
+				// Bug: the next line is interpreted as a 'step 4, 0x27',
+				// followed by a 0x0002, which makes a step south and
+				// up by 0x27 tiles (which fails), followed by a 'nop2'.
+				// This likely should have been just 'step south' followed
+				// by the 'wait 2'.
+				raw((byte)0x53); step south; wait 2;
+				actor frame reach_1h;
+				wait 2;
+				actor frame strike_1h;
+				sfx 127;
+				wait 4;
+				actor frame standing;
+				wait 8;
+				call Func00E6;
+			};
+			0xFFEC->set_npc_id(0x0011);
+			abort;
 		}
 		if (0xFFEC->get_npc_id() == 0x0004) {
 			0xFFEC->set_npc_id(0x0005);
@@ -1432,75 +1429,39 @@ void Func00E6 shape#(0xE6) () {
 			Func094F(0xFFEC, var000E);
 			0xFFEC->si_path_run_usecode([0x0980, 0x0746, 0x0000], 0x000D, item, [0x00E6, 0x0000], false);
 			abort;
-		} else {
-			0xFFEC->show_npc_face0(0x0000);
-			Func09AC(0xFFEC, 0xFFFF, 0x0000, 0x000A);
-			0xFFEB->set_new_schedules(0x0000, 0x000A, [0x0986, 0x0766]);
-			0xFFEB->run_schedule();
-			0xFFEB->clear_item_flag(0x0001);
-			Func097F(0xFFEB, "@Tar gorlfog!@", 0x0003);
-			if ((var000C < 0x000F) && ((!0xFFFD->npc_nearby()) && ((!0xFFFF->npc_nearby()) && ((!0xFFFE->npc_nearby()) && (!0xFFDE->npc_nearby()))))) {
-				say("\"I am so glad that thou hast agreed to meet me here.\"");
+		}
+		0xFFEC->show_npc_face0(0x0000);
+		Func09AC(0xFFEC, 0xFFFF, 0x0000, 0x000A);
+		0xFFEB->set_new_schedules(0x0000, 0x000A, [0x0986, 0x0766]);
+		0xFFEB->run_schedule();
+		0xFFEB->clear_item_flag(0x0001);
+		Func097F(0xFFEB, "@Tar gorlfog!@", 0x0003);
+		if ((var000C < 0x000F) && ((!0xFFFD->npc_nearby()) && ((!0xFFFF->npc_nearby()) && ((!0xFFFE->npc_nearby()) && (!0xFFDE->npc_nearby()))))) {
+			say("\"I am so glad that thou hast agreed to meet me here.\"");
+			UI_play_music(0x001F, Func09A0(0x0005, 0x0001));
+			0xFFEC->set_npc_id(0x0001);
+			UI_end_conversation();
+			0xFE9C->set_item_flag(0x0010);
+			var000E = script 0xFFEC {
+				nohalt;
+				call Func00E6;
+			};
+			abort;
+		}
+		if (UI_get_array_size(UI_get_party_list()) > 0x0001) {
+			say("\"Thou didst come! I cannot express how pleased I am to see thee again, ",
+				var0003,
+				".\"");
+			say("\"But this matter of the spells, it must be discussed in private. Only Mages may hear the secrets which I am about to reveal.\"");
+			say("\"Wouldst thou please ask thy minions to depart?\"");
+			if (Func0955()) {
+				0xFE9C->set_item_flag(0x0010);
 				UI_play_music(0x001F, Func09A0(0x0005, 0x0001));
-				0xFFEC->set_npc_id(0x0001);
+				var0016 = Func0992(0x0001, "@Um, I think I will wait outside...@", 0x0000, false);
 				UI_end_conversation();
-				0xFE9C->set_item_flag(0x0010);
-				var000E = script 0xFFEC {
-					nohalt;
-					call Func00E6;
-				};
-				abort;
-			} else if (UI_get_array_size(UI_get_party_list()) > 0x0001) {
-				say("\"Thou didst come! I cannot express how pleased I am to see thee again, ",
-					var0003,
-					".\"");
-				say("\"But this matter of the spells, it must be discussed in private. Only Mages may hear the secrets which I am about to reveal.\"");
-				say("\"Wouldst thou please ask thy minions to depart?\"");
-				if (Func0955()) {
-					0xFE9C->set_item_flag(0x0010);
-					UI_play_music(0x001F, Func09A0(0x0005, 0x0001));
-					var0016 = Func0992(0x0001, "@Um, I think I will wait outside...@", 0x0000, false);
-					UI_end_conversation();
-					var000E = Func098D();
-					var0017 = [];
-					for (var000F in var000E with var0018 to var0019) {
-						if (var000F->npc_nearby()) {
-							var0017 = (var0017 & var000F);
-						}
-					}
-					var0017 = (var0017 & UI_get_party_list2());
-					var0017 = Func0988(0xFE9C->get_npc_object(), var0017);
-					var0017 = Func0988(0xFFE4, var0017);
-					var0017 = Func0988(0xFFE6, var0017);
-					var0017 = Func0988(0xFF58, var0017);
-					for (var000F in var0017 with var001A to var001B) {
-						if (var000F->get_item_flag(0x0006)) {
-							var000F->remove_from_party();
-						}
-						var000F->set_new_schedules(0x0000, 0x000A, var0009);
-						var000F->run_schedule();
-					}
-					Func097F(var000F, "@Have fun...@", 0x0000);
-					var000E = script 0xFFEC after 10 ticks {
-						nohalt;
-						call Func00E6;
-					};
-					var000E = Func09A0(0x0005, 0x0003)->set_item_quality(0xFFEC->get_npc_id());
-					0xFFEC->set_npc_id(0x0001);
-					abort;
-				} else {
-					say("\"Then I can be of no use to thee.\"");
-					Func097F(0xFFEC, "@Go!@", 0x0000);
-					abort;
-				}
-			} else {
-				say("\"But we must wait, darling, until we are alone...\"");
-				UI_end_conversation();
-				0xFE9C->set_item_flag(0x0010);
-				Func097F(0xFFEC, "@Wait...@", 0x0000);
 				var000E = Func098D();
 				var0017 = [];
-				for (var000F in var000E with var001C to var001D) {
+				for (var000F in var000E with var0018 to var0019) {
 					if (var000F->npc_nearby()) {
 						var0017 = (var0017 & var000F);
 					}
@@ -1510,7 +1471,7 @@ void Func00E6 shape#(0xE6) () {
 				var0017 = Func0988(0xFFE4, var0017);
 				var0017 = Func0988(0xFFE6, var0017);
 				var0017 = Func0988(0xFF58, var0017);
-				for (var000F in var0017 with var001E to var001F) {
+				for (var000F in var0017 with var001A to var001B) {
 					if (var000F->get_item_flag(0x0006)) {
 						var000F->remove_from_party();
 					}
@@ -1526,7 +1487,41 @@ void Func00E6 shape#(0xE6) () {
 				0xFFEC->set_npc_id(0x0001);
 				abort;
 			}
+			say("\"Then I can be of no use to thee.\"");
+			Func097F(0xFFEC, "@Go!@", 0x0000);
+			abort;
 		}
+		say("\"But we must wait, darling, until we are alone...\"");
+		UI_end_conversation();
+		0xFE9C->set_item_flag(0x0010);
+		Func097F(0xFFEC, "@Wait...@", 0x0000);
+		var000E = Func098D();
+		var0017 = [];
+		for (var000F in var000E with var001C to var001D) {
+			if (var000F->npc_nearby()) {
+				var0017 = (var0017 & var000F);
+			}
+		}
+		var0017 = (var0017 & UI_get_party_list2());
+		var0017 = Func0988(0xFE9C->get_npc_object(), var0017);
+		var0017 = Func0988(0xFFE4, var0017);
+		var0017 = Func0988(0xFFE6, var0017);
+		var0017 = Func0988(0xFF58, var0017);
+		for (var000F in var0017 with var001E to var001F) {
+			if (var000F->get_item_flag(0x0006)) {
+				var000F->remove_from_party();
+			}
+			var000F->set_new_schedules(0x0000, 0x000A, var0009);
+			var000F->run_schedule();
+		}
+		Func097F(var000F, "@Have fun...@", 0x0000);
+		var000E = script 0xFFEC after 10 ticks {
+			nohalt;
+			call Func00E6;
+		};
+		var000E = Func09A0(0x0005, 0x0003)->set_item_quality(0xFFEC->get_npc_id());
+		0xFFEC->set_npc_id(0x0001);
+		abort;
 	}
 	if (event == 0x000E) {
 		if ((0xFFEC->get_npc_id() == 0x000D) && (item == 0xFFEC->get_npc_object())) {
@@ -2930,10 +2925,9 @@ void Func011C shape#(0x11C) () {
 			var0000 = (var0000 - 0x000C);
 			item_say((" " + var0000) + " o'clock");
 			return;
-		} else {
-			var0001 = Func0953();
-			Func094A("@^<Avatar>, I believe the important part of the word sundial is `sun'.@");
 		}
+		var0001 = Func0953();
+		Func094A("@^<Avatar>, I believe the important part of the word sundial is `sun'.@");
 	}
 }
 
@@ -3810,9 +3804,8 @@ void Func014A shape#(0x14A) () {
 			if ((var0001 == 0x0013) && Func08BE(0x0005)) {
 				gflags[0x0247] = true;
 				break;
-			} else {
-				gflags[0x0247] = false;
 			}
+			gflags[0x0247] = false;
 		} else {
 			abort;
 		}
@@ -4269,15 +4262,14 @@ void Func0154 shape#(0x154) () {
 			}
 			remove_item();
 			abort;
-		} else {
-			var0009 = [var0002[0x0002], var0002[0x0003], var0002[0x0004]];
-			var0008 = Func0992(0x0001, (("@Please, " + Func0954()) + ", waste them not!@"), 0x0000, false);
-			var000A = UI_create_new_object(0x0390);
-			if (var000A) {
-				var000A->set_item_flag(0x0012);
-				var000A->set_item_frame(UI_die_roll(0x0004, 0x0017));
-				var0007 = UI_update_last_created(var0009);
-			}
+		}
+		var0009 = [var0002[0x0002], var0002[0x0003], var0002[0x0004]];
+		var0008 = Func0992(0x0001, (("@Please, " + Func0954()) + ", waste them not!@"), 0x0000, false);
+		var000A = UI_create_new_object(0x0390);
+		if (var000A) {
+			var000A->set_item_flag(0x0012);
+			var000A->set_item_frame(UI_die_roll(0x0004, 0x0017));
+			var0007 = UI_update_last_created(var0009);
 		}
 		remove_item();
 	}
@@ -4528,10 +4520,9 @@ void Func0175 shape#(0x175) () {
 						call Func0175;
 					};
 					abort;
-				} else {
-					say("\"Then ask of me once more.\"");
-					add(["Crown", "Armour", "Staff", "quest", "Chaos Hierophant", "Chaos Serpent", "Balance", "bye"]);
 				}
+				say("\"Then ask of me once more.\"");
+				add(["Crown", "Armour", "Staff", "quest", "Chaos Hierophant", "Chaos Serpent", "Balance", "bye"]);
 
 		}
 	}
@@ -7325,10 +7316,9 @@ void Func01D1 shape#(0x1D1) () {
 				}
 				0xFFFD->set_npc_id(var0002 + 0x0001);
 				abort;
-			} else {
-				0xFFFD->set_schedule_type(0x0003);
-				Func097F(0xFFFD, "@Avatar!@", 0x0000);
 			}
+			0xFFFD->set_schedule_type(0x0003);
+			Func097F(0xFFFD, "@Avatar!@", 0x0000);
 		}
 	}
 }
@@ -7427,10 +7417,9 @@ void Func01D6 shape#(0x1D6) () {
 		}
 		var0001 = UI_update_last_created(var0002);
 		return;
-	} else {
-		var0003 = ("@I believe that using a bucket in a well " + "is often more effective than simply spinning the crank.@");
-		Func094A(var0003);
 	}
+	var0003 = ("@I believe that using a bucket in a well " + "is often more effective than simply spinning the crank.@");
+	Func094A(var0003);
 }
 
 extern var Func0906 0x906 (var var0000);
@@ -7892,12 +7881,11 @@ void Func01EF shape#(0x1EF) () {
 				UI_play_music(0x0018, Func09A0(0x0005, 0x0001));
 			}
 			abort;
-		} else {
-			var0001 = script item {
-				nohalt;
-				say "@Meow!@";
-			};
 		}
+		var0001 = script item {
+			nohalt;
+			say "@Meow!@";
+		};
 	}
 }
 
@@ -8614,12 +8602,11 @@ void Func0235 shape#(0x235) () {
 				0xFF6A->clear_item_say();
 				Func097F(0xFF6A, "@Come, my love!@", 0x0000);
 				abort;
-			} else {
-				say("\"This is not a good time, my love. Perhaps thou couldst come some other morning.\"");
-				Func097F(0xFF6A, "@Adieu...@", 0x0000);
-				0xFF6A->set_schedule_type(0x0014);
-				abort;
 			}
+			say("\"This is not a good time, my love. Perhaps thou couldst come some other morning.\"");
+			Func097F(0xFF6A, "@Adieu...@", 0x0000);
+			0xFF6A->set_schedule_type(0x0014);
+			abort;
 		}
 	}
 }
@@ -8985,10 +8972,9 @@ void Func0273 shape#(0x273) () {
 					}
 				}
 				return;
-			} else {
-				var0000->item_say("Pick broke");
-				Func0971(item);
 			}
+			var0000->item_say("Pick broke");
+			Func0971(item);
 			return;
 		}
 		var0006 = [0x0178, 0x010E, 0x01B0, 0x01B1];
@@ -9203,9 +9189,8 @@ void Func0281 shape#(0x281) () {
 					if (var0009 == var0000) {
 						var000A = true;
 						break;
-					} else {
-						var0009 = var0009->get_container();
 					}
+					var0009 = var0009->get_container();
 				}
 				if (var000A) {
 					0xFE9C->item_say("Key inside");
@@ -11260,11 +11245,10 @@ void Func02BE shape#(0x2BE) () {
 				si_path_run_usecode([0x0862, 0x04AE, 0x0000], 0x000B, item, 0x02BE, true);
 				gflags[0x0007] = false;
 				abort;
-			} else {
-				0xFEF0->show_npc_face0(0x0000);
-				say("\"Greetings to thee!\"");
-				add(["name", "bye"]);
 			}
+			0xFEF0->show_npc_face0(0x0000);
+			say("\"Greetings to thee!\"");
+			add(["name", "bye"]);
 		}
 		if (event == 0x000B) {
 			0xFEF0->show_npc_face0(0x0000);
@@ -12840,12 +12824,11 @@ void Func02E6 shape#(0x2E6) () {
 				0xFFBA->clear_item_say();
 				Func097F(0xFFBA, "@Come, my love!@", 0x0000);
 				abort;
-			} else {
-				say("\"Oh, darling! Meet me in my bedroom...\"");
-				Func097F(0xFFBA, "@I'm so sleepy...@", 0x0000);
-				0xFFBA->run_schedule();
-				abort;
 			}
+			say("\"Oh, darling! Meet me in my bedroom...\"");
+			Func097F(0xFFBA, "@I'm so sleepy...@", 0x0000);
+			0xFFBA->run_schedule();
+			abort;
 		}
 	}
 }
@@ -13744,7 +13727,8 @@ void Func031D shape#(0x31D) () {
 				var0005 = Func0992(0x0001, "@We must seek this flux analyzer!@", "@I must find this flux analyzer!@", true);
 			}
 			return;
-		} else if (var0003 == 0x0003) {
+		}
+		if (var0003 == 0x0003) {
 			say("I See the @Hero From Another Land@ in the frozen lands of the North. The Hero seeks the wife of ",
 				var0002,
 				" oldest companion. A wall of ice doth prevent the Hero from reaching the woman. The Hero lifts a horn -- the Horn of the Gwani -- to ",
@@ -14426,63 +14410,62 @@ void Func0326 shape#(0x326) () {
 			say("\"I gave thee the power of life and death over thine enemies! And see how thou hast repaid me?! I remain bound within this jewel... In a land where I cannot feed! The veins of power have been disrupted! Release me! Release me...\"");
 			UI_remove_npc_face0();
 			abort;
+		}
+		UI_close_gumps();
+		0xFEFF->show_npc_face0(0x0000);
+		say("\"I shall offer thee mine aid once again, Avatar... Thou dost not possess the skill or power enough to overcome the madman Lorthondo thou must face. I do, but not within the constraints of this gem in which thou didst bind me.\"");
+		say("\"Free me and I shall help thee win free of this place!\"");
+		if (Func0955() == true) {
+			UI_play_sound_effect(0x004C);
+			say("\"Free! Free! Free at last!\"");
+			UI_play_sound_effect(0x0074);
+			say("\"Thou art a fool, Avatar! Thou hast no idea what thou hast lost!\"");
+			say("\"I thank thee for thine ignorance...\"");
+			UI_remove_npc_face0();
+			Func0922(0x0017);
+			gflags[0x023A] = true;
+			gflags[0x00CF] = false;
 		} else {
-			UI_close_gumps();
-			0xFEFF->show_npc_face0(0x0000);
-			say("\"I shall offer thee mine aid once again, Avatar... Thou dost not possess the skill or power enough to overcome the madman Lorthondo thou must face. I do, but not within the constraints of this gem in which thou didst bind me.\"");
-			say("\"Free me and I shall help thee win free of this place!\"");
-			if (Func0955() == true) {
-				UI_play_sound_effect(0x004C);
-				say("\"Free! Free! Free at last!\"");
-				UI_play_sound_effect(0x0074);
-				say("\"Thou art a fool, Avatar! Thou hast no idea what thou hast lost!\"");
-				say("\"I thank thee for thine ignorance...\"");
-				UI_remove_npc_face0();
-				Func0922(0x0017);
-				gflags[0x023A] = true;
-				gflags[0x00CF] = false;
-			} else {
-				say("\"Beware! The energy of the stones here is drawing away thy power to keep me imprisoned...\"");
-				say("\"But thou wilt accept mine offer yet...\"");
-				UI_remove_npc_face0();
+			say("\"Beware! The energy of the stones here is drawing away thy power to keep me imprisoned...\"");
+			say("\"But thou wilt accept mine offer yet...\"");
+			UI_remove_npc_face0();
+		}
+		if (0xFF5D->npc_nearby() && (gflags[0x023A] == true)) {
+			0xFE9C->set_item_flag(0x0010);
+			var0003 = 0xFF5D->find_nearby(0x0113, 0x0000, 0x0010);
+			if (var0003) {
+				var0003->remove_item();
 			}
-			if (0xFF5D->npc_nearby() && (gflags[0x023A] == true)) {
-				0xFE9C->set_item_flag(0x0010);
-				var0003 = 0xFF5D->find_nearby(0x0113, 0x0000, 0x0010);
-				if (var0003) {
-					var0003->remove_item();
-				}
-				0xFF5D->clear_item_say();
-				Func097F(0xFF5D, "@No, wait!...@", 0x0000);
-				var0004 = 0xFF5D->find_nearby(0x0341, 0x0005, 0x0000);
-				var0004 = (var0004 & 0xFF5D->find_nearby(0x0349, 0x0005, 0x0000));
-				var0005 = script var0004[0x0001] {
-					wait 5;
+			0xFF5D->clear_item_say();
+			Func097F(0xFF5D, "@No, wait!...@", 0x0000);
+			var0004 = 0xFF5D->find_nearby(0x0341, 0x0005, 0x0000);
+			var0004 = (var0004 & 0xFF5D->find_nearby(0x0349, 0x0005, 0x0000));
+			var0005 = script var0004[0x0001] {
+				wait 5;
+				call Func04A3;
+				remove;
+			};
+			var0005 = script var0004[0x0003] {
+				wait 8;
+				call Func04A3;
+				remove;
+			};
+			var0005 = script var0004[0x0002] {
+				wait 10;
+				call Func04A3;
+				remove;
+			};
+			var0005 = script var0004[0x0004] {
+				wait 14;
+				call Func04A3;
+				remove;
+			};
+			var0006 = 0xFF5D->find_nearest(0x031F, 0x000A);
+			if (var0006) {
+				var0005 = script var0006 {
+					wait 16;
 					call Func04A3;
-					remove;
 				};
-				var0005 = script var0004[0x0003] {
-					wait 8;
-					call Func04A3;
-					remove;
-				};
-				var0005 = script var0004[0x0002] {
-					wait 10;
-					call Func04A3;
-					remove;
-				};
-				var0005 = script var0004[0x0004] {
-					wait 14;
-					call Func04A3;
-					remove;
-				};
-				var0006 = 0xFF5D->find_nearest(0x031F, 0x000A);
-				if (var0006) {
-					var0005 = script var0006 {
-						wait 16;
-						call Func04A3;
-					};
-				}
 			}
 		}
 	}
@@ -14525,9 +14508,8 @@ void Func0326 shape#(0x326) () {
 					};
 				}
 				abort;
-			} else {
-				abort;
 			}
+			abort;
 		}
 		if (gflags[0x0006]) {
 			UI_close_gumps();
@@ -14581,7 +14563,8 @@ void Func032A shape#(0x32A) () {
 			event = 0x000A;
 			item->Func062C();
 			return;
-		} else if (var0000) {
+		}
+		if (var0000) {
 			var0001 = set_last_created();
 			if (var0001) {
 				var0001 = 0xFE9C->give_last_created();
@@ -14592,9 +14575,8 @@ void Func032A shape#(0x32A) () {
 				event = 0x000A;
 				item->Func062C();
 				return;
-			} else {
-				return;
 			}
+			return;
 		}
 		UI_close_gumps();
 		var0002 = [0x0001, 0xFFFF, 0x0000, 0x0001, 0xFFFF, 0xFFFF, 0x0000, 0xFFFF];
@@ -15300,16 +15282,15 @@ void Func0334 shape#(0x334) () {
 					UI_close_gumps();
 					var0003 = true;
 					break;
-				} else {
-					var0008 = var0000->get_object_position();
-					var0008[0x0001] = (var0008[0x0001] - (var0008[0x0003] / 0x0002));
-					var0008[0x0002] = (var0008[0x0002] - (var0008[0x0003] / 0x0002));
-					UI_sprite_effect(0x0007, var0008[0x0001], var0008[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-					UI_play_sound_effect(0x0039);
-					var0000->remove_item();
-					UI_close_gumps();
-					abort;
 				}
+				var0008 = var0000->get_object_position();
+				var0008[0x0001] = (var0008[0x0001] - (var0008[0x0003] / 0x0002));
+				var0008[0x0002] = (var0008[0x0002] - (var0008[0x0003] / 0x0002));
+				UI_sprite_effect(0x0007, var0008[0x0001], var0008[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
+				UI_play_sound_effect(0x0039);
+				var0000->remove_item();
+				UI_close_gumps();
+				abort;
 			}
 		}
 		if (!var0003) {
@@ -18436,11 +18417,10 @@ void Func03BB shape#(0x3BB) () {
 		if (var0004 == 0x0020) {
 			teleport_to_saved_pos();
 			abort;
-		} else {
-			save_pos();
-			0xFE9B->move_object([0x0A87, 0x0B02, 0x0002]);
-			abort;
 		}
+		save_pos();
+		0xFE9B->move_object([0x0A87, 0x0B02, 0x0002]);
+		abort;
 	}
 }
 
@@ -18679,7 +18659,8 @@ void Func03CA shape#(0x3CA) () {
 		if (var0000 < 0x0003) {
 			set_npc_id(var0000 + 0x0001);
 			abort;
-		} else if (UI_die_roll(0x0001, 0x000A) == 0x0001) {
+		}
+		if (UI_die_roll(0x0001, 0x000A) == 0x0001) {
 			set_npc_id(0x0000);
 			var0001 = Func0992(0x0001, "@That's baaaad!@", "@I'm baaaad!@", true);
 			halt_scheduled();
@@ -18773,20 +18754,17 @@ void Func03CF shape#(0x3CF) () {
 					say("\"Excellent.  Thou hast served me well, pawn.  Alas, I shall kill thee just the same.\"");
 					Func09AD(item);
 					abort;
-				} else {
-					say("\"Thou dost dare lie to me!  I shall make thee pay!\"");
-					Func09AD(item);
-					abort;
 				}
-			} else {
-				say("\"Curse thee!  I shall roast thine flesh!\"");
+				say("\"Thou dost dare lie to me!  I shall make thee pay!\"");
 				Func09AD(item);
 				abort;
 			}
-		} else {
-			say("\"Welcome, Simpleton.  Do not expect to stay long, for I am getting rather hungry and it has been months since I have eaten the flesh of a human.\"");
-			set_npc_id(0x0001);
+			say("\"Curse thee!  I shall roast thine flesh!\"");
+			Func09AD(item);
+			abort;
 		}
+		say("\"Welcome, Simpleton.  Do not expect to stay long, for I am getting rather hungry and it has been months since I have eaten the flesh of a human.\"");
+		set_npc_id(0x0001);
 		converse (0) {
 			case "name" (remove):
 				say("\"I am the manifestation of the horrific images of thine mind's darkest recesses!  Ha!  I am Chaos Unrestrained!  Those cowards in the keep call me the Fiend!\"");
@@ -18897,11 +18875,10 @@ void Func03CF shape#(0x3CF) () {
 				if (var0005 == true) {
 					say("\"Ha!  Excellent!  Go then!  Bring me the ring!  Do not betray me or I shall sate myself by killing thee slowly!\"");
 					abort;
-				} else {
-					say("\"Fool!  Simpleton!  Idiot!  Thou hast condemned thyself to death!\"");
-					Func09AD(item);
-					abort;
 				}
+				say("\"Fool!  Simpleton!  Idiot!  Thou hast condemned thyself to death!\"");
+				Func09AD(item);
+				abort;
 				fallthrough;
 
 			case "bye":
@@ -20785,7 +20762,8 @@ void Func0402 object#(0x402) () {
 			}
 			Func092E(item);
 			return;
-		} else if (gflags[0x025B]) {
+		}
+		if (gflags[0x025B]) {
 			if ((Func0994() != 0x0010) && ((!gflags[0x0004]) && (Func0994() != 0x0018))) {
 				0xFEE2->show_npc_face0(0x0000);
 				say("\"Do not die, my sweet King...\"");
@@ -20887,11 +20865,10 @@ labelFunc0402_02F8:
 				};
 				Func097F(0xFFFE, "@Welcome back!@", 0x0000);
 				abort;
-			} else {
-				say("\"I am ready to provide whatever aid I can, ",
-					var0001,
-					".\"");
 			}
+			say("\"I am ready to provide whatever aid I can, ",
+				var0001,
+				".\"");
 			if (0xFFFF->get_npc_id() == 0x001E) {
 				add("Dupre's whereabouts");
 			}
@@ -22535,10 +22512,9 @@ void Func040D object#(0x40D) () {
 					say("\"Oh, 'tis a rotten egg! Leave here with that!\"");
 					gflags[0x0104] = true;
 					abort;
-				} else {
-					say("\"A blue egg? I have never heard of such a thing, but the Magister is wise in many subjects. Perhaps thou shouldst inquire of Fedabiblio.\"");
-					gflags[0x010C] = true;
 				}
+				say("\"A blue egg? I have never heard of such a thing, but the Magister is wise in many subjects. Perhaps thou shouldst inquire of Fedabiblio.\"");
+				gflags[0x010C] = true;
 				var0009 = Func09AE(var0009);
 				if (!var0006) {
 					var0005 = var000E[UI_get_random(UI_get_array_size(var000E))];
@@ -22968,9 +22944,8 @@ void Func040E object#(0x40E) () {
 						Func097F(0xFFF2, "@Fool!@", 0x0000);
 						0xFFF2->set_schedule_type(0x000C);
 						abort;
-					} else {
-						say("\"Please, I beg of thee to reconsider.\"");
 					}
+					say("\"Please, I beg of thee to reconsider.\"");
 				} else {
 					say("\"Thou hast my stockings in thy possession. They are my intimate apparel and they do not belong in thy backpack. They belong on my creamy thighs. I am a woman and thou art a man and thou dost have me at an advantage. If thou wouldst but return them, I shall be happy to wear them for thee, in a night of passion that thou shalt remember all of thy days. May I have them now?\"");
 					var000B = Func0955();
@@ -23297,10 +23272,9 @@ labelFunc040F_046D:
 							say("\"'Tis a simple matter, when thou dost know the secret...\"");
 							Func0826(event);
 							abort;
-						} else {
-							say("\"Thou must bring me three Worm Hearts -- no less!\"");
-							add("Worm Hearts");
 						}
+						say("\"Thou must bring me three Worm Hearts -- no less!\"");
+						add("Worm Hearts");
 					} else {
 						say("\"But first, thou must bring me the Hearts of three Ice Worms.\"");
 						add("Worm Hearts");
@@ -23722,12 +23696,11 @@ void Func0411 object#(0x411) () {
 				say("\"Did I not tell thee to speak with Gustacio?\"");
 				Func097F(0xFFEF, "@Tell him the news.@", 0x0000);
 				abort;
-			} else {
-				say("\"At last, all is made clear! Tell good Gustacio that Edrin the missing brother is actually Ale the Bird! He will know what to do from there...\"");
-				gflags[0x00F2] = true;
-				Func097F(0xFFEF, "@Speak to Gustacio...@", 0x0000);
-				abort;
 			}
+			say("\"At last, all is made clear! Tell good Gustacio that Edrin the missing brother is actually Ale the Bird! He will know what to do from there...\"");
+			gflags[0x00F2] = true;
+			Func097F(0xFFEF, "@Speak to Gustacio...@", 0x0000);
+			abort;
 		}
 		if (gflags[0x0004]) {
 			if (gflags[0x00F6]) {
@@ -24096,9 +24069,8 @@ void Func0411 object#(0x411) () {
 								if (var0004 == 0x0000) {
 									say("\"Ummm.... For some reason, I cannot locate the spellbook that I was going to give thee. Thou wilt have to return at a later time.\"");
 									abort;
-								} else {
-									var0009 = var0004[0x0001];
 								}
+								var0009 = var0004[0x0001];
 							}
 							var0009->remove_all_spells();
 							var000A = [0x0001, 0x0008, 0x000D, 0x0017, 0x001E];
@@ -24901,20 +24873,20 @@ void Func0416 object#(0x416) () {
 			0xFFEA->set_schedule_type(0x000C);
 			Func097F(0xFFEA, "@To work...@", 0x0000);
 			abort;
-		} else if (!gflags[0x00E2]) {
+		}
+		if (!gflags[0x00E2]) {
 			say("\"I am sorry, but I do not have time for this. My studies devour mine entire day.\"");
 			Func097F(0xFFEA, "@Now, where is that book?@", 0x0000);
 			abort;
-		} else {
-			say("\"It is an honor to receive thee, ",
-				var0002,
-				". How may I be of service to thee?\"");
-			if (!gflags[0x0239]) {
-				add("Dungeon Freedom");
-			}
-			if (!gflags[0x0172]) {
-				add("the trial");
-			}
+		}
+		say("\"It is an honor to receive thee, ",
+			var0002,
+			". How may I be of service to thee?\"");
+		if (!gflags[0x0239]) {
+			add("Dungeon Freedom");
+		}
+		if (!gflags[0x0172]) {
+			add("the trial");
 		}
 		if (gflags[0x00E3] && (!gflags[0x0128])) {
 			add("experiment");
@@ -25243,7 +25215,8 @@ void Func0417 object#(0x417) () {
 						say("\"A crime that involved magic must be handled by the Council of Mages, naturally.\"");
 						say("\"And due to mine intervention, the MageLord shall be glad to speak with thee. Please, go to him soonest!\"");
 						break;
-					} else if (gflags[0x0144]) {
+					}
+					if (gflags[0x0144]) {
 						say("\"I have no information for thee, ",
 							var0002,
 							". The crime remains a mystery.\"");
@@ -25259,7 +25232,8 @@ void Func0417 object#(0x417) () {
 							say("\"That is too bad. However, if we learn anything, we shall inform thee.\"");
 						}
 						break;
-					} else if (gflags[0x0140]) {
+					}
+					if (gflags[0x0140]) {
 						say("\"Thou wert wise to follow the advise of the townsfolk in coming to me -- \"");
 						say("\"the Rangers must always be consulted in criminal matters.\"");
 					}
@@ -27149,9 +27123,8 @@ void Func041C object#(0x41C) () {
 							}
 						}
 						return;
-					} else {
-						say("\"Then I am sorry, but I will not take any unnecessary risks.\"");
 					}
+					say("\"Then I am sorry, but I will not take any unnecessary risks.\"");
 				}
 				fallthrough;
 
@@ -28220,13 +28193,12 @@ void Func041F object#(0x41F) () {
 					call Func041F;
 				};
 				abort;
-			} else {
-				say("\"Then thou shalt die with thy secret, Avatar...\"");
-				Func09AD(0xFFE1);
-				Func097F(0xFFE1, "@Die, fool!@", 0x0000);
-				Func09AC(0xFFE1, 0xFFFF, 0x0000, 0x0000);
-				abort;
 			}
+			say("\"Then thou shalt die with thy secret, Avatar...\"");
+			Func09AD(0xFFE1);
+			Func097F(0xFFE1, "@Die, fool!@", 0x0000);
+			Func09AC(0xFFE1, 0xFFFF, 0x0000, 0x0000);
+			abort;
 		}
 		gflags[0x0148] = true;
 	}
@@ -28288,19 +28260,18 @@ void Func041F object#(0x41F) () {
 			if (0xFFE1->get_item_flag(0x0004)) {
 				say("\"I am speaking to thee from beyond the grave. I shall have vengeance!\"");
 				abort;
-			} else {
-				say("\"Greetings, Stranger from Another Land. Once again, I am speaking to thee by means of a magic scroll.\"");
-				var0009 = UI_get_npc_name(0x0000 - 0xFFE1->get_npc_id());
-				say("\"If thou art looking for thy companion, ",
-					var0009,
-					", look no further -- I have kidnapped him.\"");
-				say("\"Since thou wilt not give me thy secrets, I shall obtain them from him!\"");
-				say("\"Farewell, ",
-					var0002,
-					"...\"");
-				gflags[0x00EA] = true;
-				abort;
 			}
+			say("\"Greetings, Stranger from Another Land. Once again, I am speaking to thee by means of a magic scroll.\"");
+			var0009 = UI_get_npc_name(0x0000 - 0xFFE1->get_npc_id());
+			say("\"If thou art looking for thy companion, ",
+				var0009,
+				", look no further -- I have kidnapped him.\"");
+			say("\"Since thou wilt not give me thy secrets, I shall obtain them from him!\"");
+			say("\"Farewell, ",
+				var0002,
+				"...\"");
+			gflags[0x00EA] = true;
+			abort;
 		}
 		if ((gflags[0x00D7] == true) && (!gflags[0x00E9])) {
 			gflags[0x00E9] = true;
@@ -28486,23 +28457,22 @@ void Func041F object#(0x41F) () {
 				var0010->run_schedule();
 				var0010->move_object([0x0858, 0x0837, 0x0000]);
 				abort;
-			} else {
-				gflags[0x0133] = true;
-				var0004 = Func0988(0xFE9C->get_npc_object(), UI_get_party_list2());
-				for (var0012 in var0004 with var0013 to var0014) {
-					var0012->remove_from_party();
-					Func09AC(var0012, 0xFFFF, 0x0000, 0x000C);
-				}
-				0xFE9C->set_item_flag(0x0010);
-				var0008 = 0xFE9C->get_object_position();
-				0xFE9C->obj_sprite_effect(0x001A, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
-				var0004 = script 0xFE9C after 13 ticks {
-					nohalt;
-					call Func041F;
-				};
-				gflags[0x0009] = true;
-				abort;
 			}
+			gflags[0x0133] = true;
+			var0004 = Func0988(0xFE9C->get_npc_object(), UI_get_party_list2());
+			for (var0012 in var0004 with var0013 to var0014) {
+				var0012->remove_from_party();
+				Func09AC(var0012, 0xFFFF, 0x0000, 0x000C);
+			}
+			0xFE9C->set_item_flag(0x0010);
+			var0008 = 0xFE9C->get_object_position();
+			0xFE9C->obj_sprite_effect(0x001A, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
+			var0004 = script 0xFE9C after 13 ticks {
+				nohalt;
+				call Func041F;
+			};
+			gflags[0x0009] = true;
+			abort;
 		}
 	}
 }
@@ -28998,16 +28968,15 @@ void Func0421 object#(0x421) () {
 					Func097F(0xFFDF, "@Now leave me alone...@", 0x0000);
 					0xFFDF->set_schedule_type(0x000C);
 					abort;
-				} else {
-					say("\"Such poor luck, ",
-						var0002,
-						"... to have angered one of the Mages of Moonshade...\"");
-					say("\"Could it be Mortegro, he for whom the cold sensations of death are more vivid than life?\"");
-					gflags[0x013F] = true;
-					say("\"And what of Rotoluncia? She dislikes thee -- everyone knows it.\"");
-					say("\"If I were thee, I would speak to MageLord Filbercio about this matter. Mages are involved, so thy duty is clear.\"");
-					gflags[0x0141] = true;
 				}
+				say("\"Such poor luck, ",
+					var0002,
+					"... to have angered one of the Mages of Moonshade...\"");
+				say("\"Could it be Mortegro, he for whom the cold sensations of death are more vivid than life?\"");
+				gflags[0x013F] = true;
+				say("\"And what of Rotoluncia? She dislikes thee -- everyone knows it.\"");
+				say("\"If I were thee, I would speak to MageLord Filbercio about this matter. Mages are involved, so thy duty is clear.\"");
+				gflags[0x0141] = true;
 				fallthrough;
 
 			case "Torrissio" (remove):
@@ -29067,7 +29036,8 @@ void Func0421 object#(0x421) () {
 					remove("buy spells");
 					say("\"Thou hast betrayed me and betrayed my lover by giving her stolen property to Filbercio for a mere pittance of profit! Now thou dost expect me to help thee?! Begone from my sight!\"");
 					abort;
-				} else if (var0003 == false) {
+				}
+				if (var0003 == false) {
 					say("\"Of course I can sell thee a spell! I have recently sold a spell to another person passing through Moonshade. It is just such a business upon which the city of Moonshade was built. With all of the experiments and developments we produce here in the magical arts, we are practically the center of the world.\"");
 					var0003 = true;
 				}
@@ -29184,9 +29154,8 @@ void Func0421 object#(0x421) () {
 									say "@Oh, my head...@";
 								};
 								abort;
-							} else {
-								say("\"Thou dost not trust me, eh? So be it...\" *\"Ha! The stockings are now mine!\"");
 							}
+							say("\"Thou dost not trust me, eh? So be it...\" *\"Ha! The stockings are now mine!\"");
 							break;
 						}
 						if (!gflags[0x013C]) {
@@ -29194,10 +29163,9 @@ void Func0421 object#(0x421) () {
 							say("\"After all, Columna is more of a woman than thou canst ever hope to be.\"");
 							gflags[0x013C] = true;
 							break;
-						} else {
-							say("\"Bah! Thou art only trying to taunt me! Leave me at once!\"");
-							abort;
 						}
+						say("\"Bah! Thou art only trying to taunt me! Leave me at once!\"");
+						abort;
 labelFunc0421_0614:
 						say("\"I ask thee again -- surrender those stockings to me!\"");
 					} while (true);
@@ -29219,19 +29187,17 @@ labelFunc0421_0614:
 								gflags[0x013B] = true;
 							}
 							abort;
-						} else {
-							if (!gflags[0x013C]) {
-								say("\"Thou art as cold-hearted as any man I have ever met! I can no longer tolerate thy company.\"");
-								gflags[0x013C] = true;
-								abort;
-							} else {
-								say("\"Bah! Thou art only trying to taunt me! Leave me at once!\"");
-								abort;
-							}
-							// Dead code
-							Func097F(0xFFDF, "@Begone, foul knave.@", 0x0000);
-							0xFFDF->set_schedule_type(0x000C);
 						}
+						if (!gflags[0x013C]) {
+							say("\"Thou art as cold-hearted as any man I have ever met! I can no longer tolerate thy company.\"");
+							gflags[0x013C] = true;
+							abort;
+						}
+						say("\"Bah! Thou art only trying to taunt me! Leave me at once!\"");
+						abort;
+						// Dead code
+						Func097F(0xFFDF, "@Begone, foul knave.@", 0x0000);
+						0xFFDF->set_schedule_type(0x000C);
 labelFunc0421_06AC:
 						say("\"I ask thee again -- surrender those stockings to me!\"");
 					} while (true);
@@ -29315,9 +29281,8 @@ labelFunc0421_06AC:
 						Func097F(0xFFDF, "@I have it!@", 0x0000);
 						gflags[0x0136] = true;
 						abort;
-					} else {
-						say("\"It is my rightful property and I shall have it back!\"");
 					}
+					say("\"It is my rightful property and I shall have it back!\"");
 				}
 				fallthrough;
 
@@ -29708,14 +29673,13 @@ void Func0423 object#(0x423) () {
 			Func097F(0xFFDD, "@See thee soon...@", 0x0000);
 			Func097F(0xFE9C, "@I shall return!@", 0x0008);
 			abort;
-		} else {
-			UI_fade_palette(0x000C, 0x0001, 0x0000);
-			var000F = script Func09A0(0x0005, 0x0002) after 1 ticks {
-				nohalt;
-				call Func0636;
-			};
-			0xFE9B->move_object([0x07F6, 0x04C5, 0x0000]);
 		}
+		UI_fade_palette(0x000C, 0x0001, 0x0000);
+		var000F = script Func09A0(0x0005, 0x0002) after 1 ticks {
+			nohalt;
+			call Func0636;
+		};
+		0xFE9B->move_object([0x07F6, 0x04C5, 0x0000]);
 	}
 	if (event == 0x0001) {
 		0xFE9C->item_say("@Might we speak?@");
@@ -29810,11 +29774,10 @@ void Func0423 object#(0x423) () {
 						Func097F(0xFFDD, "@Away with thee!@", 0x0003);
 						gflags[0x01C5] = true;
 						abort;
-					} else {
-						say("\"These experiments are most dangerous! If thou art faint of heart I would advise thee to stay away! As thou canst see if thou dost look around thee, these experiments are a threat to both life... and limb!\"");
-						if (!(gflags[0x01B7] || gflags[0x01BB])) {
-							add(["life", "limb"]);
-						}
+					}
+					say("\"These experiments are most dangerous! If thou art faint of heart I would advise thee to stay away! As thou canst see if thou dost look around thee, these experiments are a threat to both life... and limb!\"");
+					if (!(gflags[0x01B7] || gflags[0x01BB])) {
+						add(["life", "limb"]);
 					}
 				} else {
 					say("\"Thanks to thee mine experiments in the creation of life have been successful! But there is still much for me to do! Much research! Now that I have created mine own wholly unique solution to the riddle of life and death, I must begin work on solving the rest of the problems of the universe.\"");
@@ -29953,9 +29916,8 @@ void Func0423 object#(0x423) () {
 						call Func0423;
 					};
 					abort;
-				} else {
-					say("\"Thou canst put from thy mind that serpent jawbone then!\"");
 				}
+				say("\"Thou canst put from thy mind that serpent jawbone then!\"");
 				remove("phoenix");
 				fallthrough;
 
@@ -29968,20 +29930,8 @@ void Func0423 object#(0x423) () {
 							say("\"Then bring it to me!\"");
 							Func097F(0xFFDD, "@Fool!@", 0x0000);
 							abort;
-						} else {
-							say("\"Then thou must go back to the Isle of the Phoenix!\"");
-							var0012 = 0xFE9C->get_object_position();
-							UI_sprite_effect(0x000C, (var0012[0x0001] - 0x0002), (var0012[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
-							UI_sprite_effect(0x000C, var0012[0x0001], var0012[0x0002], 0x0000, 0x0000, 0x000A, 0xFFFD);
-							UI_play_sound_effect(0x0077);
-							var000F = script 0xFFDD after 7 ticks {
-								nohalt;
-								call Func0423;
-							};
-							abort;
 						}
-					} else {
-						say("\"If so I do not find it funny! Thou art not playing a game, fool! Go, and do not return until thou hast completed thy promised task!\"");
+						say("\"Then thou must go back to the Isle of the Phoenix!\"");
 						var0012 = 0xFE9C->get_object_position();
 						UI_sprite_effect(0x000C, (var0012[0x0001] - 0x0002), (var0012[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 						UI_sprite_effect(0x000C, var0012[0x0001], var0012[0x0002], 0x0000, 0x0000, 0x000A, 0xFFFD);
@@ -29992,11 +29942,20 @@ void Func0423 object#(0x423) () {
 						};
 						abort;
 					}
-				} else {
-					say("\"Thou canst begin by gathering all the various body parts scattered throughout the Manor. That includes a torso, arms, legs, and oh, yes, make extra certain that thou dost not forget the head. Place them one by one on top of the assimilation machine. Once thou hast put all the parts and phoenix egg into the machine, Boydon shall at last become complete.");
-					Func097F(0xFFDD, "@Don't forget the torso!@", 0x0000);
+					say("\"If so I do not find it funny! Thou art not playing a game, fool! Go, and do not return until thou hast completed thy promised task!\"");
+					var0012 = 0xFE9C->get_object_position();
+					UI_sprite_effect(0x000C, (var0012[0x0001] - 0x0002), (var0012[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
+					UI_sprite_effect(0x000C, var0012[0x0001], var0012[0x0002], 0x0000, 0x0000, 0x000A, 0xFFFD);
+					UI_play_sound_effect(0x0077);
+					var000F = script 0xFFDD after 7 ticks {
+						nohalt;
+						call Func0423;
+					};
 					abort;
 				}
+				say("\"Thou canst begin by gathering all the various body parts scattered throughout the Manor. That includes a torso, arms, legs, and oh, yes, make extra certain that thou dost not forget the head. Place them one by one on top of the assimilation machine. Once thou hast put all the parts and phoenix egg into the machine, Boydon shall at last become complete.");
+				Func097F(0xFFDD, "@Don't forget the torso!@", 0x0000);
+				abort;
 				fallthrough;
 
 			case "phoenix egg" (remove):
@@ -30011,9 +29970,8 @@ void Func0423 object#(0x423) () {
 						gflags[0x01B8] = true;
 						Func097F(0xFFDD, "@Into the machine!@", 0x0000);
 						abort;
-					} else {
-						say("\"If thou dost have my phoenix egg, why dost thou not give it to me?\"");
 					}
+					say("\"If thou dost have my phoenix egg, why dost thou not give it to me?\"");
 				} else {
 					say("\"Then we have nothing further to discuss until thou dost go and bring it to me.\"");
 					abort;
@@ -31361,11 +31319,10 @@ void Func0428 object#(0x428) () {
 			}
 			Func097F(0xFFD8, "@I need a drink!@", 0x0000);
 			abort;
-		} else {
-			say("\"So what can I do for ye, ",
-				var0005,
-				"?\"");
 		}
+		say("\"So what can I do for ye, ",
+			var0005,
+			"?\"");
 		if (var0006 == 0x0009) {
 			say("\"I thank ye for releasing me from that cell!\" ~\"I never expected ta end up in jail over not wantin' ta sail in these blasted storms!\" *\"If there's anything that I can do for ye, thou shouldst tell me.\" ~\"Cap'n Hawk is a man of his word!\"");
 			add(["jail", "storms"]);
@@ -33018,16 +32975,16 @@ void Func042C object#(0x42C) () {
 						var000E = 0xFFD4->give_last_created();
 					}
 					abort;
-				} else if (gflags[0x01E5]) {
+				}
+				if (gflags[0x01E5]) {
 					say("\"But how shall I gain the gold, if thou dost not aid me?\"");
 					Func097F(0xFFD4, "@Oh!@", 0x0000);
 					0xFFD4->set_schedule_type(0x0014);
 					abort;
-				} else {
-					say("\"I had thought thou wouldst be interested! Oh, well, 'tis his loss for buying my... favors so cheaply! And thy loss for not joining me!\" *\"But, I will not hold it against thee, ",
-						var0001,
-						". If thou art still here and in need of money when I return... Perhaps I will lend thee some!\"");
 				}
+				say("\"I had thought thou wouldst be interested! Oh, well, 'tis his loss for buying my... favors so cheaply! And thy loss for not joining me!\" *\"But, I will not hold it against thee, ",
+					var0001,
+					". If thou art still here and in need of money when I return... Perhaps I will lend thee some!\"");
 				fallthrough;
 
 			case "teach":
@@ -33297,18 +33254,8 @@ void Func042C object#(0x42C) () {
 							call Func042C;
 						};
 						abort;
-					} else {
-						say("\"Then I'm leaving!\"");
-						0xFFD4->remove_from_party();
-						Func097F(0xFFD4, "@Fool!@", 0x0000);
-						Func0861();
-						0xFFD4->revert_schedule();
-						0xFFD4->run_schedule();
-						gflags[0x01E7] = false;
-						abort;
 					}
-				} else {
-					say("\"Thou still goest the wrong way. I'm leaving!\"");
+					say("\"Then I'm leaving!\"");
 					0xFFD4->remove_from_party();
 					Func097F(0xFFD4, "@Fool!@", 0x0000);
 					Func0861();
@@ -33317,13 +33264,20 @@ void Func042C object#(0x42C) () {
 					gflags[0x01E7] = false;
 					abort;
 				}
-			} else {
-				var000E = script Func09A0(0x0005, 0x0001) after 50 ticks {
-					nohalt;
-					call Func042C;
-				};
+				say("\"Thou still goest the wrong way. I'm leaving!\"");
+				0xFFD4->remove_from_party();
+				Func097F(0xFFD4, "@Fool!@", 0x0000);
+				Func0861();
+				0xFFD4->revert_schedule();
+				0xFFD4->run_schedule();
 				gflags[0x01E7] = false;
+				abort;
 			}
+			var000E = script Func09A0(0x0005, 0x0001) after 50 ticks {
+				nohalt;
+				call Func042C;
+			};
+			gflags[0x01E7] = false;
 		}
 		if (var0013 == 0x0001) {
 			var000E = 0xFEF0->get_npc_object();
@@ -33386,15 +33340,15 @@ void Func042C object#(0x42C) () {
 					call Func042C;
 				};
 				return;
-			} else {
-				var001D = UI_get_party_list();
-				var001E = UI_die_roll(0x0001, Func0977(var001D));
-				var001F = var001D[var001E];
-				var000E = set_to_attack(var001F, 0x0276);
-				var001F->obj_sprite_effect(0x0021, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
-				return;
 			}
-		} else if (gflags[0x01E8]) {
+			var001D = UI_get_party_list();
+			var001E = UI_die_roll(0x0001, Func0977(var001D));
+			var001F = var001D[var001E];
+			var000E = set_to_attack(var001F, 0x0276);
+			var001F->obj_sprite_effect(0x0021, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
+			return;
+		}
+		if (gflags[0x01E8]) {
 			abort;
 		}
 		var0020 = Func097D(0xFFD4, 0x0001, 0x0128, 0xFE99, 0x0002);
@@ -33640,9 +33594,8 @@ void Func042D object#(0x42D) () {
 					0xFFD3->set_schedule_type(0x0014);
 					0xFFD3->set_new_schedules([0x0000, 0x0003, 0x0004, 0x0005, 0x0007], [0x000E, 0x0005, 0x0003, 0x000B, 0x0005], [0x0516, 0x08F7, 0x04F7, 0x08CC, 0x050D, 0x08B6, 0x0516, 0x08A2, 0x04F7, 0x08CC]);
 					abort;
-				} else {
-					say("\"Thou couldst not succeed without me!\"");
 				}
+				say("\"Thou couldst not succeed without me!\"");
 				fallthrough;
 
 			case "name" (remove):
@@ -34034,11 +33987,10 @@ void Func042E object#(0x42E) () {
 							}
 							0xFFD2->set_schedule_type(0x0014);
 							abort;
-						} else {
-							say("\"Be ready at any time, for one doth not know when the time to act shall arrive.\"");
-							say("\"We once tried to enter the Temple during the night, while Kylista was with one of her lovers... but the guards foiled our attempt.\"");
-							say("\"Nevertheless -- look everywhere, talk to everyone, see if thou canst find the clue that hath eluded us!\"");
 						}
+						say("\"Be ready at any time, for one doth not know when the time to act shall arrive.\"");
+						say("\"We once tried to enter the Temple during the night, while Kylista was with one of her lovers... but the guards foiled our attempt.\"");
+						say("\"Nevertheless -- look everywhere, talk to everyone, see if thou canst find the clue that hath eluded us!\"");
 					}
 				}
 				if (var000A == "Ring") {
@@ -34826,10 +34778,9 @@ void Func042F object#(0x42F) () {
 					gflags[0x014D] = true;
 					Func097F(0xFFD1, "@Spy not on me!@", 0x0000);
 					abort;
-				} else {
-					say("\"Good! Because the Magister hath no call to spy on me.\"");
-					say("\"I have had no contact with Freli since he was taken away. No mortal can win in a struggle against wizards...\"");
 				}
+				say("\"Good! Because the Magister hath no call to spy on me.\"");
+				say("\"I have had no contact with Freli since he was taken away. No mortal can win in a struggle against wizards...\"");
 				fallthrough;
 
 			case "Moonshade":
@@ -35167,10 +35118,9 @@ void Func0430 object#(0x430) () {
 					UI_remove_npc_face0();
 					Func097F(0xFFD0, "@Take it away!@", 0x0000);
 					abort;
-				} else {
-					say("\"A blue egg? I have never heard of a blue egg.\"");
-					say("\"Perhaps thou couldst try asking someone in Moonshade. I am told that the Mages have a great library on their island, full of unusual things.\"");
 				}
+				say("\"A blue egg? I have never heard of a blue egg.\"");
+				say("\"Perhaps thou couldst try asking someone in Moonshade. I am told that the Mages have a great library on their island, full of unusual things.\"");
 				fallthrough;
 
 			case "glowing rock" (remove):
@@ -36693,11 +36643,10 @@ void Func0434 object#(0x434) () {
 					Func097F(0xFFCC, "@Whew!@", 0x0000);
 					0xFFCC->set_schedule_type(0x0014);
 					abort;
-				} else {
-					say("\"I have never heard of a blue egg.\"");
-					say("\"Ask Delphynia. She doth know all manner of strange things.\"");
-					gflags[0x0197] = true;
 				}
+				say("\"I have never heard of a blue egg.\"");
+				say("\"Ask Delphynia. She doth know all manner of strange things.\"");
+				gflags[0x0197] = true;
 				if (!var0011) {
 					var0010 = var000D[UI_get_random(UI_get_array_size(var000D))];
 					var000D = Func0988(var0010, var000D);
@@ -36790,9 +36739,8 @@ void Func0434 object#(0x434) () {
 					say("\"Thou art as bad as those horrible wizards from Moonshade! No respect for life!\"");
 					Func097F(0xFFCC, "@Take it away!@", 0x0000);
 					abort;
-				} else {
-					say("\"Sounds like the work of those horrible wizards from Moonshade! No respect for life!\"");
 				}
+				say("\"Sounds like the work of those horrible wizards from Moonshade! No respect for life!\"");
 				if (!var0011) {
 					var0010 = var000D[UI_get_random(UI_get_array_size(var000D))];
 					var000D = Func0988(var0010, var000D);
@@ -37948,12 +37896,12 @@ void Func0437 object#(0x437) () {
 						Func097F(var0008, "@Save the Queen!@", 0x0002);
 					}
 					abort;
-				} else {
-					say("\"\"I am so glad that thou hast come... But where is the Good Bard Iolo?\"");
-					say("\"I wish to welcome him as well as thee. Return when he is with thee!\"");
-					abort;
 				}
-			} else if (var0014 == false) {
+				say("\"\"I am so glad that thou hast come... But where is the Good Bard Iolo?\"");
+				say("\"I wish to welcome him as well as thee. Return when he is with thee!\"");
+				abort;
+			}
+			if (var0014 == false) {
 				if ((var0002 == true) && (gflags[0x003E] == true)) {
 					say("\"What an interesting Beauty mark thou hast... I am Lady Yelinda, ruler of Fawn -- the city of Beauty.\"");
 				} else {
@@ -38583,9 +38531,8 @@ void Func043A object#(0x43A) () {
 			Func097F(0xFFC6, "@A drink!@", 0x0000);
 			0xFFC6->set_schedule_type(0x001A);
 			abort;
-		} else {
-			gflags[0x0165] = false;
 		}
+		gflags[0x0165] = false;
 		if (var0008 == false) {
 			if (gflags[0x003E] == true) {
 				if (var0003 == true) {
@@ -39265,14 +39212,13 @@ void Func043A object#(0x43A) () {
 					UI_remove_npc_face0();
 					Func097F(0xFFC6, "@Quick now!@", 0x0000);
 					abort;
+				}
+				say("\"I never figured that Jendon would be listenin' ta my tales! It sounds just like them cats on that island...\"");
+				say("\"Did I tell thee about the islands of cats?\"");
+				if (Func0955() == true) {
+					say("\"Oh, well... Another time, perhaps.\"");
 				} else {
-					say("\"I never figured that Jendon would be listenin' ta my tales! It sounds just like them cats on that island...\"");
-					say("\"Did I tell thee about the islands of cats?\"");
-					if (Func0955() == true) {
-						say("\"Oh, well... Another time, perhaps.\"");
-					} else {
-						add("island of cats");
-					}
+					add("island of cats");
 				}
 				fallthrough;
 
@@ -39387,74 +39333,72 @@ void Func043B object#(0x43B) () {
 				}
 				0xFFC5->si_path_run_usecode(var0007, 0x0000, item, 0x043B, false);
 				abort;
-			} else {
-				say("\"I have searched all my life for a woman who would overlook my deformity and learn to love me. Somehow I will find a way to tell Delphynia of my love...\"");
-				if (var0003 == true) {
-					0xFFFD->show_npc_face1(0x0000);
-					say("\"How can thine heart be so hard, Avatar? Thou wouldst search every corner of the land and sea to help me find Gwenno.\"");
-					say("\"Wilt thou reconsider and aid this poor soul's search for love?\"");
-					if (Func0955() == true) {
-						0x0000->set_conversation_slot();
-						say("\"There may be hope after all... Here is the scroll.\"");
-						var0008 = Func099B(0xFE9C, 0x0001, 0x031D, 0x0004, 0x0005, false, true);
-						say("\"Take this to Delphynia, the herbalist. Thou mayest find her at the greenhouse.\"");
-						say("\"If thou shouldst bring a return message, I will introduce thee to my shipmate, Scots, who makes maps.\"");
-						say("\"Perhaps his cartography would be of aid to thee.\"");
-						gflags[0x0152] = true;
-						var000B = 0xFE9C->find_nearby(0x017D, 0x0014, 0x0000);
-						for (var000E in var000B with var000F to var0010) {
-							if (var000E->get_npc_id() == 0x0001) {
-								var000E->set_schedule_type(0x0003);
-							}
-						}
-						0xFFC5->si_path_run_usecode(var0007, 0x0000, item, 0x043B, false);
-						abort;
-					} else {
-						say("\"I am sure that thou hast thy reasons, Avatar. But I am sorely disappointed.\"");
-						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
-						say("\"The Avatar! Forgive me... unlike these local folk, I know whom thou art!\"");
-						say("\"I am certain that thy business is far more urgent.\"");
-						gflags[0x0167] = true;
-						var000B = 0xFE9C->find_nearby(0x017D, 0x0014, 0x0000);
-						for (var000E in var000B with var0011 to var0012) {
-							if (var000E->get_npc_id() == 0x0001) {
-								var000E->set_schedule_type(0x0003);
-							}
-						}
-						0xFFC5->si_path_run_usecode(var0007, 0x0000, item, 0x043B, false);
-						abort;
-					}
-				}
-				if (var0004 == true) {
-					0xFFFF->show_npc_face1(0x0000);
-					say("\"Have a drink or two... Thou wilt soon forget her.\"");
-					UI_remove_npc_face1();
+			}
+			say("\"I have searched all my life for a woman who would overlook my deformity and learn to love me. Somehow I will find a way to tell Delphynia of my love...\"");
+			if (var0003 == true) {
+				0xFFFD->show_npc_face1(0x0000);
+				say("\"How can thine heart be so hard, Avatar? Thou wouldst search every corner of the land and sea to help me find Gwenno.\"");
+				say("\"Wilt thou reconsider and aid this poor soul's search for love?\"");
+				if (Func0955() == true) {
 					0x0000->set_conversation_slot();
-				}
-				if (var0005 == true) {
-					0xFFFE->show_npc_face1(0x0000);
-					say("\"Oh, no... Why is it that everyone expects the Avatar to help with their love life?\"");
-					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
-					say("\"Why... I...\"");
-					if (var0003 == true) {
-						0xFFFD->show_npc_face1(0x0000);
-						say("\"Thou wouldst not be so hard, Shamino, if thou hadst lost thy love!\"");
-						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+					say("\"There may be hope after all... Here is the scroll.\"");
+					var0008 = Func099B(0xFE9C, 0x0001, 0x031D, 0x0004, 0x0005, false, true);
+					say("\"Take this to Delphynia, the herbalist. Thou mayest find her at the greenhouse.\"");
+					say("\"If thou shouldst bring a return message, I will introduce thee to my shipmate, Scots, who makes maps.\"");
+					say("\"Perhaps his cartography would be of aid to thee.\"");
+					gflags[0x0152] = true;
+					var000B = 0xFE9C->find_nearby(0x017D, 0x0014, 0x0000);
+					for (var000E in var000B with var000F to var0010) {
+						if (var000E->get_npc_id() == 0x0001) {
+							var000E->set_schedule_type(0x0003);
+						}
 					}
+					0xFFC5->si_path_run_usecode(var0007, 0x0000, item, 0x043B, false);
+					abort;
 				}
+				say("\"I am sure that thou hast thy reasons, Avatar. But I am sorely disappointed.\"");
+				UI_remove_npc_face1();
+				0x0000->set_conversation_slot();
+				say("\"The Avatar! Forgive me... unlike these local folk, I know whom thou art!\"");
+				say("\"I am certain that thy business is far more urgent.\"");
 				gflags[0x0167] = true;
-				0xFFC5->si_path_run_usecode(var0007, 0x0000, item, 0x043B, false);
 				var000B = 0xFE9C->find_nearby(0x017D, 0x0014, 0x0000);
-				for (var000E in var000B with var0013 to var0014) {
+				for (var000E in var000B with var0011 to var0012) {
 					if (var000E->get_npc_id() == 0x0001) {
 						var000E->set_schedule_type(0x0003);
 					}
 				}
+				0xFFC5->si_path_run_usecode(var0007, 0x0000, item, 0x043B, false);
 				abort;
 			}
+			if (var0004 == true) {
+				0xFFFF->show_npc_face1(0x0000);
+				say("\"Have a drink or two... Thou wilt soon forget her.\"");
+				UI_remove_npc_face1();
+				0x0000->set_conversation_slot();
+			}
+			if (var0005 == true) {
+				0xFFFE->show_npc_face1(0x0000);
+				say("\"Oh, no... Why is it that everyone expects the Avatar to help with their love life?\"");
+				UI_remove_npc_face1();
+				0x0000->set_conversation_slot();
+				say("\"Why... I...\"");
+				if (var0003 == true) {
+					0xFFFD->show_npc_face1(0x0000);
+					say("\"Thou wouldst not be so hard, Shamino, if thou hadst lost thy love!\"");
+					UI_remove_npc_face1();
+					0x0000->set_conversation_slot();
+				}
+			}
+			gflags[0x0167] = true;
+			0xFFC5->si_path_run_usecode(var0007, 0x0000, item, 0x043B, false);
+			var000B = 0xFE9C->find_nearby(0x017D, 0x0014, 0x0000);
+			for (var000E in var000B with var0013 to var0014) {
+				if (var000E->get_npc_id() == 0x0001) {
+					var000E->set_schedule_type(0x0003);
+				}
+			}
+			abort;
 			0xFFC5->set_item_flag(0x001C);
 			gflags[0x0168] = true;
 			0xFE9C->clear_item_flag(0x0010);
@@ -40631,12 +40575,11 @@ void Func043F object#(0x43F) () {
 			}
 			Func092E(var0009);
 			return;
-		} else {
-			var000D = script item {
-				nohalt;
-				call Func01D0;
-			};
 		}
+		var000D = script item {
+			nohalt;
+			call Func01D0;
+		};
 	}
 	if (event == 0x0000) {
 		if (gflags[0x0083]) {
@@ -40969,13 +40912,12 @@ void Func043F object#(0x43F) () {
 					say("\"I do not have time to repeat everything again! Go thou and ask young Cantra -- she hath nothing better to do.\"");
 					Func097F(0xFFC1, "@Ask Cantra!@", 0x0000);
 					abort;
-				} else {
-					say("\"I'll give thee three clues:\"");
-					say("\"In the first chamber, speed is the clue. Do not look back, or ye'll be a goner.\"");
-					say("\"Later on, seek that which cannot be seen. It may be hard to find.\"");
-					say("\"To overcome, thou must find the Claw, and the Urn of Gurnordir. Use the claw to draw thy blood, then mix the blood with the ashes in the Urn. Then thy fate shall be made known to thee.\"");
-					gflags[0x003B] = true;
 				}
+				say("\"I'll give thee three clues:\"");
+				say("\"In the first chamber, speed is the clue. Do not look back, or ye'll be a goner.\"");
+				say("\"Later on, seek that which cannot be seen. It may be hard to find.\"");
+				say("\"To overcome, thou must find the Claw, and the Urn of Gurnordir. Use the claw to draw thy blood, then mix the blood with the ashes in the Urn. Then thy fate shall be made known to thee.\"");
+				gflags[0x003B] = true;
 				fallthrough;
 
 			case "Cantra" (remove):
@@ -41099,23 +41041,21 @@ void Func043F object#(0x43F) () {
 						0xFFC1->set_schedule_type(0x000A);
 						Func097F(var0018[0x0001], "@Yes, lord!@", 0x0002);
 						abort;
-					} else {
-						if (gflags[0x0092]) {
-							say("\"Do not worry, Avatar! I shall order the Pikemen to place the traitors under arrest!\"");
-						} else {
-							say("\"Do not worry, Avatar! I shall order the Pikemen to place the traitor under arrest!\"");
-						}
-						Func097F(0xFFC1, "@Pikemen!@", 0x0000);
-						0xFFC1->set_schedule_type(0x0014);
-						abort;
 					}
-				} else {
-					var0010 = Func0992(0xFFFE, "@We did not bring it with us.@", "@I did not bring it.@", false);
-					0x0000->set_conversation_slot();
-					say("\"Until thou dost bring proof, no one will believe thee, including myself!\"");
-					Func097F(0xFFC1, "@Bring proof!@", 0x0000);
+					if (gflags[0x0092]) {
+						say("\"Do not worry, Avatar! I shall order the Pikemen to place the traitors under arrest!\"");
+					} else {
+						say("\"Do not worry, Avatar! I shall order the Pikemen to place the traitor under arrest!\"");
+					}
+					Func097F(0xFFC1, "@Pikemen!@", 0x0000);
+					0xFFC1->set_schedule_type(0x0014);
 					abort;
 				}
+				var0010 = Func0992(0xFFFE, "@We did not bring it with us.@", "@I did not bring it.@", false);
+				0x0000->set_conversation_slot();
+				say("\"Until thou dost bring proof, no one will believe thee, including myself!\"");
+				Func097F(0xFFC1, "@Bring proof!@", 0x0000);
+				abort;
 				fallthrough;
 
 			case "bye":
@@ -41522,17 +41462,16 @@ void Func0441 object#(0x441) () {
 					}
 					Func097F(0xFFBF, "@Give me time!@", 0x0000);
 					abort;
-				} else {
-					say("\"It is ready.\"");
-					var000B = Func0992(0xFFFD, (("@'Tis beautiful, " + var0003) + "!@"), 0x0000, false);
-					if (var000B != 0xFE9C) {
-						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
-						say("\"What didst thou expect?\"");
-					}
-					var0004 = Func099B(0xFE9C, 0x0001, 0x00E3, 0xFE99, 0x0003, 0x0000, true);
-					gflags[0x007E] = true;
 				}
+				say("\"It is ready.\"");
+				var000B = Func0992(0xFFFD, (("@'Tis beautiful, " + var0003) + "!@"), 0x0000, false);
+				if (var000B != 0xFE9C) {
+					UI_remove_npc_face1();
+					0x0000->set_conversation_slot();
+					say("\"What didst thou expect?\"");
+				}
+				var0004 = Func099B(0xFE9C, 0x0001, 0x00E3, 0xFE99, 0x0003, 0x0000, true);
+				gflags[0x007E] = true;
 				fallthrough;
 
 			case "furrier" (remove):
@@ -41879,13 +41818,12 @@ void Func0443 object#(0x443) () {
 						say("\"Go! The monks have need of thee. My daughter hath need of thee!\"");
 						Func097F(0xFFBD, "@Go to Monk Isle!@", 0x0000);
 						abort;
-					} else {
-						say("\"I know that mine only daughter Cantra is now dead. Her spirit hath been haunting me. She is suffering and tormented.\"");
-						var000A = Func0992(0xFFFE, "@The monks have taken Cantra to their island.@", "@The monks have taken Cantra to their island.@", false);
-						0x0000->set_conversation_slot();
-						say("\"I thank thee! Perhaps now there is hope that my daughter shall return home to me.\"");
-						gflags[0x0096] = true;
 					}
+					say("\"I know that mine only daughter Cantra is now dead. Her spirit hath been haunting me. She is suffering and tormented.\"");
+					var000A = Func0992(0xFFFE, "@The monks have taken Cantra to their island.@", "@The monks have taken Cantra to their island.@", false);
+					0x0000->set_conversation_slot();
+					say("\"I thank thee! Perhaps now there is hope that my daughter shall return home to me.\"");
+					gflags[0x0096] = true;
 				} else if (!gflags[0x0079]) {
 					say("\"Cantra misses her father terribly. He hath been gone for many weeks...\"");
 					say("\"She is nearly ready to become a Knight herself now. Her father would be so proud of her!\"");
@@ -43221,12 +43159,11 @@ void Func0445 object#(0x445) () {
 			0xFFBB->clear_item_flag(0x001D);
 			0xFFBB->reduce_health(0x0032, 0x0000);
 			abort;
-		} else {
-			var000E = script item {
-				nohalt;
-				call Func01D0;
-			};
 		}
+		var000E = script item {
+			nohalt;
+			call Func01D0;
+		};
 	}
 	if (event == 0x0001) {
 		0xFE9C->item_say("@Greetings, sir.@");
@@ -43312,10 +43249,9 @@ labelFunc0445_0257:
 					say("\"Leave me with that dirty bottle! It doth look to have been lying in the woods for weeks...\"");
 					Func097F(0xFFBB, "@'Sblood!@", 0x0000);
 					abort;
-				} else {
-					say("\"I care not what thou didst find in the woods. 'Tis probably Goblin loot.\"");
-					say("\"There is no traitor in Monitor. Search thou not for evidence, for thou shalt not find it. Instead, help us to eradicate the Goblins!\"");
 				}
+				say("\"I care not what thou didst find in the woods. 'Tis probably Goblin loot.\"");
+				say("\"There is no traitor in Monitor. Search thou not for evidence, for thou shalt not find it. Instead, help us to eradicate the Goblins!\"");
 				fallthrough;
 
 			case "I renounce Lord British":
@@ -43626,24 +43562,23 @@ labelFunc0445_0257:
 							if (Func0955()) {
 								say("\"Then he can remain in jail until he rots. I have no love of mages. I will not abide their pranks under any circumstances.\"");
 								abort;
-							} else {
-								say("\"Then how did he appear in the middle of the funeral? Doth he fly?\"");
-								var0016 = Func0956(["@Yes, he does.@", "@He was hit by lightning.@", "@I do not know.@"]);
-								if (var0016 == "@Yes, he does.@") {
-									Func097F(0xFFBB, "@Bah!@", 0x0000);
-									abort;
+							}
+							say("\"Then how did he appear in the middle of the funeral? Doth he fly?\"");
+							var0016 = Func0956(["@Yes, he does.@", "@He was hit by lightning.@", "@I do not know.@"]);
+							if (var0016 == "@Yes, he does.@") {
+								Func097F(0xFFBB, "@Bah!@", 0x0000);
+								abort;
+							}
+							if (var0016 == "@I do not know.@") {
+								say("\"Well, these are mysterious times. Strange occurrences have become usual...\"");
+							}
+							if (var0016 == "@He was hit by lightning.@") {
+								if (gflags[0x004C]) {
+									say("\"I see! And the urn which thou didst return to Caladin -- it was exchanged for thy friend!\"");
+								} else {
+									say("\"Indeed. The storms have been known to magically displace their victims.\"");
 								}
-								if (var0016 == "@I do not know.@") {
-									say("\"Well, these are mysterious times. Strange occurrences have become usual...\"");
-								}
-								if (var0016 == "@He was hit by lightning.@") {
-									if (gflags[0x004C]) {
-										say("\"I see! And the urn which thou didst return to Caladin -- it was exchanged for thy friend!\"");
-									} else {
-										say("\"Indeed. The storms have been known to magically displace their victims.\"");
-									}
-									gflags[0x00BD] = true;
-								}
+								gflags[0x00BD] = true;
 							}
 						}
 					}
@@ -43652,16 +43587,15 @@ labelFunc0445_0257:
 							say("\"Art thou daft? I have already given thee the key. Thy friend is locked in the jail. It is in the northeast part of town.\"");
 							Func097F(0xFFBB, "@Free thy friend!@", 0x0000);
 							abort;
+						}
+						say("\"If thou wilt vouch for thy friend's future behavior, then I shall let him go free.\"");
+						if (Func0955()) {
+							say("\"Very well. Keep thine eye on him. We do not want people popping in and out of our city like this!\"");
+							say("\"Here is the key to thy friend's jail cell. Set him free.\"");
+							var000E = Func099B(0xFE9C, 0x0001, 0x0281, 0x0068, 0x0000, 0x0000, true);
+							gflags[0x00CD] = true;
 						} else {
-							say("\"If thou wilt vouch for thy friend's future behavior, then I shall let him go free.\"");
-							if (Func0955()) {
-								say("\"Very well. Keep thine eye on him. We do not want people popping in and out of our city like this!\"");
-								say("\"Here is the key to thy friend's jail cell. Set him free.\"");
-								var000E = Func099B(0xFE9C, 0x0001, 0x0281, 0x0068, 0x0000, 0x0000, true);
-								gflags[0x00CD] = true;
-							} else {
-								say("\"Then he must remain in his cell.\"");
-							}
+							say("\"Then he must remain in his cell.\"");
 						}
 					} else {
 						say("\"If only thou wert a Knight! Then I could let thee vouch for thy friend, and let him free.\"");
@@ -43960,9 +43894,8 @@ void Func0446 object#(0x446) () {
 					say("\"And I would love to chat further, but I do not speak with strangers. My standards are very high, and thou art not a Knight of Monitor.\"");
 					Func097F(0xFFBA, "@Not a Knight!@", 0x0000);
 					abort;
-				} else {
-					add(["The Slashing Sword", "cooking", "Quest of Courage"]);
 				}
+				add(["The Slashing Sword", "cooking", "Quest of Courage"]);
 				fallthrough;
 
 			case "buy":
@@ -44264,12 +44197,11 @@ void Func0447 object#(0x447) () {
 			}
 			Func092E(var0004);
 			return;
-		} else {
-			var0008 = script item {
-				nohalt;
-				call Func01D0;
-			};
 		}
+		var0008 = script item {
+			nohalt;
+			call Func01D0;
+		};
 	}
 	if (event == 0x0000) {
 		if (gflags[0x0083]) {
@@ -44293,12 +44225,11 @@ void Func0447 object#(0x447) () {
 			Func097F(0xFFB9, "@Go on, Andral!@", 0x0000);
 			Func097F(0xFFC2, "@Yes, milord.@", 0x0003);
 			abort;
-		} else {
-			say("\"What art thou, a moron? Canst thou not see that the artist is at work? Andral is sculpting me.\"");
-			say("\"When my bust is complete, then my fame will be perfect and they shall surely proclaim me Knight Champion!\"");
-			Func097F(0xFFB9, "@Move on!@", 0x0000);
-			abort;
 		}
+		say("\"What art thou, a moron? Canst thou not see that the artist is at work? Andral is sculpting me.\"");
+		say("\"When my bust is complete, then my fame will be perfect and they shall surely proclaim me Knight Champion!\"");
+		Func097F(0xFFB9, "@Move on!@", 0x0000);
+		abort;
 	}
 	if (event == 0x0001) {
 		0xFE9C->item_say("@Sir Knight!@");
@@ -44813,7 +44744,8 @@ void Func0448 object#(0x448) () {
 						UI_play_music(0x001D, Func09A0(0x0005, 0x0001));
 						0xFFB8->set_schedule_type(0x000F);
 						abort;
-					} else if (var000C == "Will it hurt?") {
+					}
+					if (var000C == "Will it hurt?") {
 						say("\"Will it hurt! Thou art not fit to be a Knight of Monitor.\"");
 						if (var0002) {
 							say("\"Thou dost shame all womankind by thy cowardice.\"");
@@ -44822,9 +44754,8 @@ void Func0448 object#(0x448) () {
 						}
 						Func097F(0xFFB8, "@Away!@", 0x0000);
 						abort;
-					} else {
-						say("\"Then perhaps later.\"");
 					}
+					say("\"Then perhaps later.\"");
 				} else {
 					say("\"If thou wilt come to my shop when I am at work, I shall be happy to grant thee thy Mark of Knighthood.\"");
 				}
@@ -45136,12 +45067,11 @@ void Func044A object#(0x44A) () {
 			}
 			Func092E(var0003);
 			return;
-		} else {
-			var0006 = script item {
-				nohalt;
-				call Func01D0;
-			};
 		}
+		var0006 = script item {
+			nohalt;
+			call Func01D0;
+		};
 	}
 	if (event == 0x0000) {
 		var0007 = 0xFFB6->get_object_position();
@@ -45280,11 +45210,10 @@ void Func044A object#(0x44A) () {
 					say("\"If not, then be on thy way.\"");
 					Func097F(0xFFB6, "@At noon...@", 0x0000);
 					abort;
-				} else {
-					say("\"I am one of the best fighters in this town. This is why all of the Knights desire to be trained by me.\"");
-					say("\"I fight harder than any man or woman alive. I commonly win, but when I do not, the victor knows that they were in a terrific fight.\"");
-					add(["best", "train"]);
 				}
+				say("\"I am one of the best fighters in this town. This is why all of the Knights desire to be trained by me.\"");
+				say("\"I fight harder than any man or woman alive. I commonly win, but when I do not, the victor knows that they were in a terrific fight.\"");
+				add(["best", "train"]);
 				fallthrough;
 
 			case "best" (remove):
@@ -45627,11 +45556,10 @@ void Func044B object#(0x44B) () {
 							0xFE9C->set_item_flag(0x0010);
 							UI_end_conversation();
 							abort;
-						} else {
-							say("\"Harrumph! Perhaps when thou hast found a bit of courage!\"");
-							Func097F(0xFFB5, "@Be on thy way then!@", 0x0003);
-							abort;
 						}
+						say("\"Harrumph! Perhaps when thou hast found a bit of courage!\"");
+						Func097F(0xFFB5, "@Be on thy way then!@", 0x0003);
+						abort;
 					} else {
 						say("\"If thou dost meet me at the Place of the Test, thou canst take the Test of Knighthood.\"");
 						say("\"Follow the Kings' Road north of Monitor, then take the trail leading west.\"");
@@ -45908,9 +45836,8 @@ void Func044C object#(0x44C) () {
 						var0011 = UI_update_last_created(var0010);
 					}
 					abort;
-				} else {
-					say("\"Suit thyself, then.\"");
 				}
+				say("\"Suit thyself, then.\"");
 				fallthrough;
 
 			case "visitors" (remove):
@@ -46200,12 +46127,11 @@ void Func044D object#(0x44D) () {
 			0xFFB3->reduce_health(0x0032, 0x0000);
 			gflags[0x00B4] = true;
 			abort;
-		} else {
-			var0009 = script item {
-				nohalt;
-				call Func01D0;
-			};
 		}
+		var0009 = script item {
+			nohalt;
+			call Func01D0;
+		};
 	}
 	if ((event == 0x0001) && (0xFFB3->get_schedule_type() != 0x000F)) {
 		0xFE9C->item_say("@Greetings, milord.@");
@@ -46373,31 +46299,30 @@ void Func044D object#(0x44D) () {
 				0xFFB3->set_schedule_type(0x0014);
 				Func097F(0xFFB3, "@Beware!@", 0x0000);
 				abort;
-			} else {
-				say("\"Marsten is the traitor? This is too incredible to believe. Hast thou proof?\"");
-				if (Func0955()) {
-					say("\"I must see this. Might I see the evidence?\"");
-					if (!(Func097D(0xFE9B, 0x0001, 0x031D, 0x0078, 0xFE99) || (Func097D(0xFE9B, 0x0001, 0x031D, 0x0079, 0xFE99) || Func097D(0xFE9B, 0x0001, 0x031D, 0x007A, 0xFE99)))) {
-						var0007 = Func0992(0xFFFD, "@We did not bring it with us...@", "@I did not bring it.@", false);
-						0x0000->set_conversation_slot();
-						say("\"Then I can do nothing for thee. Unseen evidence is useless evidence.\"");
-					} else if (Func0955()) {
-						var0009 = Func0996(0xFE9B, 0xFFB3, 0x0001, 0x031D, 0x0078, 0xFE99, 0x0000);
-						var0009 = Func0996(0xFE9B, 0xFFB3, 0x0001, 0x031D, 0x0079, 0xFE99, 0x0000);
-						var0009 = Func0996(0xFE9B, 0xFFB3, 0x0001, 0x031D, 0x007A, 0xFE99, 0x0000);
-						say("\"I shall study this evidence, and if thou art right, I will bring it before the other Lords.\"");
-						gflags[0x00B3] = true;
-						say("\"Now leave me, so that I may peruse this matter.\"");
-						Func097F(0xFFB3, "@Let me be.@", 0x0000);
-						abort;
-					} else {
-						say("\"Then I can do nothing for thee. Unseen evidence is useless evidence.\"");
-					}
-				} else {
-					say("\"Then be on thy way! Marsten is the traitor -- what a lark!\"");
-					Func097F(0xFFB3, "@Don't waste my time...@", 0x0000);
+			}
+			say("\"Marsten is the traitor? This is too incredible to believe. Hast thou proof?\"");
+			if (Func0955()) {
+				say("\"I must see this. Might I see the evidence?\"");
+				if (!(Func097D(0xFE9B, 0x0001, 0x031D, 0x0078, 0xFE99) || (Func097D(0xFE9B, 0x0001, 0x031D, 0x0079, 0xFE99) || Func097D(0xFE9B, 0x0001, 0x031D, 0x007A, 0xFE99)))) {
+					var0007 = Func0992(0xFFFD, "@We did not bring it with us...@", "@I did not bring it.@", false);
+					0x0000->set_conversation_slot();
+					say("\"Then I can do nothing for thee. Unseen evidence is useless evidence.\"");
+				} else if (Func0955()) {
+					var0009 = Func0996(0xFE9B, 0xFFB3, 0x0001, 0x031D, 0x0078, 0xFE99, 0x0000);
+					var0009 = Func0996(0xFE9B, 0xFFB3, 0x0001, 0x031D, 0x0079, 0xFE99, 0x0000);
+					var0009 = Func0996(0xFE9B, 0xFFB3, 0x0001, 0x031D, 0x007A, 0xFE99, 0x0000);
+					say("\"I shall study this evidence, and if thou art right, I will bring it before the other Lords.\"");
+					gflags[0x00B3] = true;
+					say("\"Now leave me, so that I may peruse this matter.\"");
+					Func097F(0xFFB3, "@Let me be.@", 0x0000);
 					abort;
+				} else {
+					say("\"Then I can do nothing for thee. Unseen evidence is useless evidence.\"");
 				}
+			} else {
+				say("\"Then be on thy way! Marsten is the traitor -- what a lark!\"");
+				Func097F(0xFFB3, "@Don't waste my time...@", 0x0000);
+				abort;
 			}
 			fallthrough;
 
@@ -46707,11 +46632,10 @@ void Func044F object#(0x44F) () {
 			}
 			Func092E(var0005);
 			return;
-		} else {
-			var0009 = script item {
-				call Func01D0;
-			};
 		}
+		var0009 = script item {
+			call Func01D0;
+		};
 	}
 	if (event == 0x0009) {
 		0xFFB1->clear_item_say();
@@ -46774,10 +46698,9 @@ void Func044F object#(0x44F) () {
 					Func097F(0xFFB1, "@Excuse me...@", 0x0000);
 					0xFFB1->set_schedule_type(0x0014);
 					abort;
-				} else {
-					say("\"I am a Knight of Monitor, and a member of the Command of the Bear. I also serve Lord Marsten as his tactical adviser.\"");
-					add(["Command of the Bear", "adviser"]);
 				}
+				say("\"I am a Knight of Monitor, and a member of the Command of the Bear. I also serve Lord Marsten as his tactical adviser.\"");
+				add(["Command of the Bear", "adviser"]);
 				fallthrough;
 
 			case "Command of the Bear" (remove):
@@ -47062,11 +46985,10 @@ void Func0450 object#(0x450) () {
 					Func0833(event);
 					0xFFB0->set_item_flag(0x001C);
 					abort;
-				} else {
-					say("\"Then I shall certainly not let thee in.\"");
-					Func097F(0xFFB0, "@Be thou gone!@", 0x0000);
-					abort;
 				}
+				say("\"Then I shall certainly not let thee in.\"");
+				Func097F(0xFFB0, "@Be thou gone!@", 0x0000);
+				abort;
 				fallthrough;
 
 			case "strangers" (remove):
@@ -47935,55 +47857,53 @@ void Func045E object#(0x45E) () {
 				". I would not have believed that one of our fellowship could have done such a thing. I thank thee for finding the traitor in our midst.\"");
 			say("\"Use the key to obtain the waters of Logic. Thou hast well earned that honor.\"");
 			abort;
-		} else {
-			say("\"I am Number 1, ",
-				var0000,
-				". And I am sorry. Thou must postpone thy meditations, for the key to the fountain room cannot be found.\"");
-			say("\"I fear that someone hath destroyed Number 7, the keeper of the key!\"");
-			converse (["meditations", "destroyed", "accuse", "bye"]) {
-				case "meditations" (remove):
-					say("\"Thy search for Logic can go no further until thou canst drink of the waters of Logic. And until the key to the fountain room is found, no one may taste the pure waters of Logic.\"");
-					fallthrough;
+		}
+		say("\"I am Number 1, ",
+			var0000,
+			". And I am sorry. Thou must postpone thy meditations, for the key to the fountain room cannot be found.\"");
+		say("\"I fear that someone hath destroyed Number 7, the keeper of the key!\"");
+		converse (["meditations", "destroyed", "accuse", "bye"]) {
+			case "meditations" (remove):
+				say("\"Thy search for Logic can go no further until thou canst drink of the waters of Logic. And until the key to the fountain room is found, no one may taste the pure waters of Logic.\"");
+				fallthrough;
 
-				case "destroyed" (remove):
-					say("\"I cannot make any accusations, but we are incapable of leaving our post. Something dire must have happened to Number 7.\"");
-					say("\"I am restricted from taking action against any of my fellows, so it is up to thee to determine what hath befallen the keeper of the key.\"");
-					say("\"For my part, I can say that I was with Number 2 and Number 6 when last we saw Number 7.\"");
-					fallthrough;
+			case "destroyed" (remove):
+				say("\"I cannot make any accusations, but we are incapable of leaving our post. Something dire must have happened to Number 7.\"");
+				say("\"I am restricted from taking action against any of my fellows, so it is up to thee to determine what hath befallen the keeper of the key.\"");
+				say("\"For my part, I can say that I was with Number 2 and Number 6 when last we saw Number 7.\"");
+				fallthrough;
 
-				case "accuse":
-					say("\"I must warn thee, ",
-						var0000,
-						", we are each sworn to protect the other. If thou dost accuse me falsely, we shall attack thee.\"");
-					say("\"If thou hast spoken to each of us and hast determined that one of us is guilty, accuse accordingly. But be not hasty in thy judgment.\"");
-					say("\"Dost thou accuse me?\"");
-					if (Func0955()) {
-						say("\"Thou hast no proof! Both Number 2 and Number 6 can attest that I was with them when Number 7 disappeared!\"");
-						Func094E(0xFFA1, "@Number 1 was with me!@");
-						Func094E(0xFF9D, "@It cannot be! I was with Number 1!@");
-						0x0000->set_conversation_slot();
-						say("\"Thou hast wronged me!\"");
-						var0002 = [0xFFA2, 0xFFA1, 0xFFA0, 0xFF9F, 0xFF9E, 0xFF9D];
-						for (var0005 in var0002 with var0003 to var0004) {
-							var0005->set_alignment(0x0003);
-							var0005->set_schedule_type(0x0000);
-							0xFE9C->set_oppressor(var0005);
-						}
-						abort;
-					} else {
-						say("\"I hope that thou dost find what hath happened to Number 7, ",
-							var0000,
-							". We cannot fulfill our duty without the key.\"");
+			case "accuse":
+				say("\"I must warn thee, ",
+					var0000,
+					", we are each sworn to protect the other. If thou dost accuse me falsely, we shall attack thee.\"");
+				say("\"If thou hast spoken to each of us and hast determined that one of us is guilty, accuse accordingly. But be not hasty in thy judgment.\"");
+				say("\"Dost thou accuse me?\"");
+				if (Func0955()) {
+					say("\"Thou hast no proof! Both Number 2 and Number 6 can attest that I was with them when Number 7 disappeared!\"");
+					Func094E(0xFFA1, "@Number 1 was with me!@");
+					Func094E(0xFF9D, "@It cannot be! I was with Number 1!@");
+					0x0000->set_conversation_slot();
+					say("\"Thou hast wronged me!\"");
+					var0002 = [0xFFA2, 0xFFA1, 0xFFA0, 0xFF9F, 0xFF9E, 0xFF9D];
+					for (var0005 in var0002 with var0003 to var0004) {
+						var0005->set_alignment(0x0003);
+						var0005->set_schedule_type(0x0000);
+						0xFE9C->set_oppressor(var0005);
 					}
-					fallthrough;
+					abort;
+				}
+				say("\"I hope that thou dost find what hath happened to Number 7, ",
+					var0000,
+					". We cannot fulfill our duty without the key.\"");
+				fallthrough;
 
-				case "bye":
-					UI_remove_npc_face0();
-					Func097F(0xFE9C, "@Many thanks!@", 0x0000);
-					Func097F(0xFFA2, "@Use thy Logic!@", 0x0002);
-					0xFFA2->set_schedule_type(0x000B);
-					break;
-			}
+			case "bye":
+				UI_remove_npc_face0();
+				Func097F(0xFE9C, "@Many thanks!@", 0x0000);
+				Func097F(0xFFA2, "@Use thy Logic!@", 0x0002);
+				0xFFA2->set_schedule_type(0x000B);
+				break;
 		}
 	}
 }
@@ -48026,75 +47946,73 @@ void Func045F object#(0x45F) () {
 				". I would not have believed that one of our fellowship could have done such a thing. I thank thee for finding the traitor in our midst.\"");
 			say("\"Use the key to obtain the waters of Logic. Thou hast well earned that honor.\"");
 			abort;
-		} else {
-			say("\"Thou mayest call me Number 2, ",
-				var0000,
-				".\"");
-			say("\"I regret that thou canst not meditate, ",
-				var0000,
-				". The strange mage hath damaged the Temple and the key to the fountain room is nowhere to be found!\"");
-			converse (["strange mage", "damaged", "key", "accuse", "bye"]) {
-				case "strange mage" (remove):
-					say("\"He was a nasty-looking little man, ",
-						var0000,
-						". He and his vile companions came in here without regard for the sanctity of the Temple. It was shocking!\"");
-					add("companions");
-					fallthrough;
+		}
+		say("\"Thou mayest call me Number 2, ",
+			var0000,
+			".\"");
+		say("\"I regret that thou canst not meditate, ",
+			var0000,
+			". The strange mage hath damaged the Temple and the key to the fountain room is nowhere to be found!\"");
+		converse (["strange mage", "damaged", "key", "accuse", "bye"]) {
+			case "strange mage" (remove):
+				say("\"He was a nasty-looking little man, ",
+					var0000,
+					". He and his vile companions came in here without regard for the sanctity of the Temple. It was shocking!\"");
+				add("companions");
+				fallthrough;
 
-				case "companions" (remove):
-					say("\"I could not see them well, for the mage kept my fellows and I locked within an energy field while he went about his evil work.\"");
-					say("\"All I can tell thee is that there were three of them. And one was very large and went heavily-cloaked.\"");
-					fallthrough;
+			case "companions" (remove):
+				say("\"I could not see them well, for the mage kept my fellows and I locked within an energy field while he went about his evil work.\"");
+				say("\"All I can tell thee is that there were three of them. And one was very large and went heavily-cloaked.\"");
+				fallthrough;
 
-				case "damaged" (remove):
-					say("\"The mage destroyed the prison container that it was our duty to protect... Why in the name of Order he would ever do such a horrible thing, I do not know.\"");
-					add("prison container");
-					fallthrough;
+			case "damaged" (remove):
+				say("\"The mage destroyed the prison container that it was our duty to protect... Why in the name of Order he would ever do such a horrible thing, I do not know.\"");
+				add("prison container");
+				fallthrough;
 
-				case "prison container" (remove):
-					say("\"I do not know what great evil was contained there, ",
-						var0000,
-						". But I know that it exhausted all of the Order Hierophant's magic to imprison it here.\"");
-					say("\"Who knows what ill is now loose upon the world!\"");
-					fallthrough;
+			case "prison container" (remove):
+				say("\"I do not know what great evil was contained there, ",
+					var0000,
+					". But I know that it exhausted all of the Order Hierophant's magic to imprison it here.\"");
+				say("\"Who knows what ill is now loose upon the world!\"");
+				fallthrough;
 
-				case "key" (remove):
-					say("\"It was the duty of Number 7 to keep the key to the fountain room. It hath been quite a while since we last saw Number 7.\"");
-					say("\"All I remember is that I was with Number 1 when last we saw Number 7. I wonder where he hath gone?\"");
-					fallthrough;
+			case "key" (remove):
+				say("\"It was the duty of Number 7 to keep the key to the fountain room. It hath been quite a while since we last saw Number 7.\"");
+				say("\"All I remember is that I was with Number 1 when last we saw Number 7. I wonder where he hath gone?\"");
+				fallthrough;
 
-				case "accuse":
-					say("\"I must warn thee, ",
-						var0000,
-						", we are each sworn to protect the other. If thou dost accuse me falsely, we shall attack thee.\"");
-					say("\"If thou hast spoken to each of us and hast determined that one of us is guilty, accuse accordingly. But be not hasty in thy judgment.\"");
-					say("\"Dost thou accuse me?\"");
-					if (Func0955()) {
-						say("\"Thou art wrong! Number 1 can tell thee where I was when Number 7 disappeared!\"");
-						Func094E(0xFFA2, "@Number 2 was with me, as was Number 6!@");
-						0x0000->set_conversation_slot();
-						say("\"Thou shalt pay!\"");
-						var0002 = [0xFFA2, 0xFFA1, 0xFFA0, 0xFF9F, 0xFF9E, 0xFF9D];
-						for (var0005 in var0002 with var0003 to var0004) {
-							var0005->set_alignment(0x0003);
-							var0005->set_schedule_type(0x0000);
-							0xFE9C->set_oppressor(var0005);
-						}
-						abort;
-					} else {
-						say("\"I hope that thou dost find what hath happened to Number 7, ",
-							var0000,
-							". We cannot fulfill our duty without the key.\"");
+			case "accuse":
+				say("\"I must warn thee, ",
+					var0000,
+					", we are each sworn to protect the other. If thou dost accuse me falsely, we shall attack thee.\"");
+				say("\"If thou hast spoken to each of us and hast determined that one of us is guilty, accuse accordingly. But be not hasty in thy judgment.\"");
+				say("\"Dost thou accuse me?\"");
+				if (Func0955()) {
+					say("\"Thou art wrong! Number 1 can tell thee where I was when Number 7 disappeared!\"");
+					Func094E(0xFFA2, "@Number 2 was with me, as was Number 6!@");
+					0x0000->set_conversation_slot();
+					say("\"Thou shalt pay!\"");
+					var0002 = [0xFFA2, 0xFFA1, 0xFFA0, 0xFF9F, 0xFF9E, 0xFF9D];
+					for (var0005 in var0002 with var0003 to var0004) {
+						var0005->set_alignment(0x0003);
+						var0005->set_schedule_type(0x0000);
+						0xFE9C->set_oppressor(var0005);
 					}
-					fallthrough;
+					abort;
+				}
+				say("\"I hope that thou dost find what hath happened to Number 7, ",
+					var0000,
+					". We cannot fulfill our duty without the key.\"");
+				fallthrough;
 
-				case "bye":
-					UI_remove_npc_face0();
-					Func097F(0xFE9C, "@Goodbye!@", 0x0000);
-					Func097F(0xFFA1, "@Use thy Logic!@", 0x0002);
-					0xFFA1->set_schedule_type(0x000B);
-					break;
-			}
+			case "bye":
+				UI_remove_npc_face0();
+				Func097F(0xFE9C, "@Goodbye!@", 0x0000);
+				Func097F(0xFFA1, "@Use thy Logic!@", 0x0002);
+				0xFFA1->set_schedule_type(0x000B);
+				break;
 		}
 	}
 }
@@ -48137,55 +48055,53 @@ void Func0460 object#(0x460) () {
 				". I would not have believed that one of our fellowship could have done such a thing. I thank thee for finding the traitor in our midst.\"");
 			say("\"Use the key to obtain the waters of Logic. Thou hast well earned that honor.\"");
 			abort;
-		} else {
-			say("\"We have failed to protect the Temple! We have failed to provide thee with the solitude to meditate! And no one hath seen Number 7 in ages!\"");
-			say("\"I am not worthy of my Number 3! Where is Number 7, the keeper of the key?!\"");
-			converse (["protect", "solitude", "Number 7", "accuse", "bye"]) {
-				case "protect" (remove):
-					say("\"That is the duty of my fellows and I, to protect the Temple and assist those who come here to meditate on the pure waters of Logic. And we have failed!\"");
-					fallthrough;
+		}
+		say("\"We have failed to protect the Temple! We have failed to provide thee with the solitude to meditate! And no one hath seen Number 7 in ages!\"");
+		say("\"I am not worthy of my Number 3! Where is Number 7, the keeper of the key?!\"");
+		converse (["protect", "solitude", "Number 7", "accuse", "bye"]) {
+			case "protect" (remove):
+				say("\"That is the duty of my fellows and I, to protect the Temple and assist those who come here to meditate on the pure waters of Logic. And we have failed!\"");
+				fallthrough;
 
-				case "solitude" (remove):
-					say("\"No one would interfere with thy communion with the waters of Logic.\"");
-					fallthrough;
+			case "solitude" (remove):
+				say("\"No one would interfere with thy communion with the waters of Logic.\"");
+				fallthrough;
 
-				case "Number 7" (remove):
-					say("\"Something must have happened to Number 7. Let me think, I was with Number 5 the last time any of us saw Number 7... and that was quite some time ago.\"");
-					say("\"I fear we may never find the key to the fountain room now.\"");
-					fallthrough;
+			case "Number 7" (remove):
+				say("\"Something must have happened to Number 7. Let me think, I was with Number 5 the last time any of us saw Number 7... and that was quite some time ago.\"");
+				say("\"I fear we may never find the key to the fountain room now.\"");
+				fallthrough;
 
-				case "accuse":
-					say("\"I must warn thee, ",
-						var0000,
-						", we are each sworn to protect the other. If thou dost accuse me falsely, we shall attack thee.\"");
-					say("\"If thou hast spoken to each of us and hast determined that one of us is guilty, accuse accordingly. But be not hasty in thy judgment.\"");
-					say("\"Dost thou accuse me?\"");
-					if (Func0955()) {
-						say("\"Thou art mad! I was with Number 5 when Number 7 disappeared!\"");
-						Func094E(0xFF9E, "@Number 3 was with me!@");
-						0x0000->set_conversation_slot();
-						say("\"I shall make thee bleed!\"");
-						var0002 = [0xFFA2, 0xFFA1, 0xFFA0, 0xFF9F, 0xFF9E, 0xFF9D];
-						for (var0005 in var0002 with var0003 to var0004) {
-							var0005->set_alignment(0x0003);
-							var0005->set_schedule_type(0x0000);
-							0xFE9C->set_oppressor(var0005);
-						}
-						abort;
-					} else {
-						say("\"I hope that thou dost find what hath happened to Number 7, ",
-							var0000,
-							". We cannot fulfill our duty without the key.\"");
+			case "accuse":
+				say("\"I must warn thee, ",
+					var0000,
+					", we are each sworn to protect the other. If thou dost accuse me falsely, we shall attack thee.\"");
+				say("\"If thou hast spoken to each of us and hast determined that one of us is guilty, accuse accordingly. But be not hasty in thy judgment.\"");
+				say("\"Dost thou accuse me?\"");
+				if (Func0955()) {
+					say("\"Thou art mad! I was with Number 5 when Number 7 disappeared!\"");
+					Func094E(0xFF9E, "@Number 3 was with me!@");
+					0x0000->set_conversation_slot();
+					say("\"I shall make thee bleed!\"");
+					var0002 = [0xFFA2, 0xFFA1, 0xFFA0, 0xFF9F, 0xFF9E, 0xFF9D];
+					for (var0005 in var0002 with var0003 to var0004) {
+						var0005->set_alignment(0x0003);
+						var0005->set_schedule_type(0x0000);
+						0xFE9C->set_oppressor(var0005);
 					}
-					fallthrough;
+					abort;
+				}
+				say("\"I hope that thou dost find what hath happened to Number 7, ",
+					var0000,
+					". We cannot fulfill our duty without the key.\"");
+				fallthrough;
 
-				case "bye":
-					UI_remove_npc_face0();
-					Func097F(0xFE9C, "@Fare well!@", 0x0000);
-					Func097F(0xFFA0, "@Use thy Logic!@", 0x0002);
-					0xFFA0->set_schedule_type(0x000B);
-					break;
-			}
+			case "bye":
+				UI_remove_npc_face0();
+				Func097F(0xFE9C, "@Fare well!@", 0x0000);
+				Func097F(0xFFA0, "@Use thy Logic!@", 0x0002);
+				0xFFA0->set_schedule_type(0x000B);
+				break;
 		}
 	}
 }
@@ -48226,57 +48142,55 @@ void Func0461 object#(0x461) () {
 			0xFF9F->set_schedule_type(0x0000);
 			0xFE9C->set_oppressor(0xFF9F);
 			abort;
-		} else {
-			say("\"Number 7 hath abandoned his post! The key is gone!\"");
-			say("\"None shall seek the fountain to meditate again!\"");
-			converse (["abandoned", "fountain", "accuse", "name", "bye"]) {
-				case "abandoned" (remove):
-					say("\"Why else would Number 7 not be here, unless someone hath destroyed him? If Number 7 were fulfilling his duties, we would have the key to allow thee to meditate... as is our sworn duty.\"");
-					say("\"The last time any of us saw Number 7, I was with Number 2... And that was some time ago.\"");
-					fallthrough;
+		}
+		say("\"Number 7 hath abandoned his post! The key is gone!\"");
+		say("\"None shall seek the fountain to meditate again!\"");
+		converse (["abandoned", "fountain", "accuse", "name", "bye"]) {
+			case "abandoned" (remove):
+				say("\"Why else would Number 7 not be here, unless someone hath destroyed him? If Number 7 were fulfilling his duties, we would have the key to allow thee to meditate... as is our sworn duty.\"");
+				say("\"The last time any of us saw Number 7, I was with Number 2... And that was some time ago.\"");
+				fallthrough;
 
-				case "fountain" (remove):
-					say("\"The fountain contains the precious waters of Logic, pure and sweet and crystal clear. It is our duty to protect it from all who would muddy its waters.\"");
-					fallthrough;
+			case "fountain" (remove):
+				say("\"The fountain contains the precious waters of Logic, pure and sweet and crystal clear. It is our duty to protect it from all who would muddy its waters.\"");
+				fallthrough;
 
-				case "name" (remove):
-					say("\"Thou mayest call me Number 4, ",
-						var0000,
-						".\"");
-					fallthrough;
+			case "name" (remove):
+				say("\"Thou mayest call me Number 4, ",
+					var0000,
+					".\"");
+				fallthrough;
 
-				case "accuse":
-					say("\"I must warn thee, ",
-						var0000,
-						", we are each sworn to protect the other. If thou dost accuse me falsely, we shall attack thee.\"");
-					say("\"If thou hast spoken to each of us and hast determined that one of us is guilty, accuse accordingly. But be not hasty in thy judgment.\"");
-					say("\"Dost thou accuse me?\"");
-					if (Func0955()) {
-						say("\"What art thou saying?! I was with Number 2 when Number 7 disappeared!\"");
-						Func094E(0xFFA1, "@That is a lie! I was with Number 1 and Number 6, not Number 4!@");
-						0x0000->set_conversation_slot();
-						say("\"Thou hast caught me! Very well... the key is thine.\"");
-						var0002 = Func099B(0xFE9C, 0x0001, 0x0281, 0x0046, 0x0005, false, true);
-						say("\"I confess. It was I that destroyed Number 7... as I shall destroy thee! I should have been the keeper of the key all along! Number 7 was wrong not to give it to me!\"");
-						0xFF9F->set_alignment(0x0003);
-						0xFF9F->set_schedule_type(0x0000);
-						0xFE9C->set_oppressor(0xFF9F);
-						gflags[0x0233] = true;
-						abort;
-					} else {
-						say("\"I hope that thou dost find what hath happened to Number 7, ",
-							var0000,
-							". We cannot fulfill our duty without the key.\"");
-					}
-					fallthrough;
+			case "accuse":
+				say("\"I must warn thee, ",
+					var0000,
+					", we are each sworn to protect the other. If thou dost accuse me falsely, we shall attack thee.\"");
+				say("\"If thou hast spoken to each of us and hast determined that one of us is guilty, accuse accordingly. But be not hasty in thy judgment.\"");
+				say("\"Dost thou accuse me?\"");
+				if (Func0955()) {
+					say("\"What art thou saying?! I was with Number 2 when Number 7 disappeared!\"");
+					Func094E(0xFFA1, "@That is a lie! I was with Number 1 and Number 6, not Number 4!@");
+					0x0000->set_conversation_slot();
+					say("\"Thou hast caught me! Very well... the key is thine.\"");
+					var0002 = Func099B(0xFE9C, 0x0001, 0x0281, 0x0046, 0x0005, false, true);
+					say("\"I confess. It was I that destroyed Number 7... as I shall destroy thee! I should have been the keeper of the key all along! Number 7 was wrong not to give it to me!\"");
+					0xFF9F->set_alignment(0x0003);
+					0xFF9F->set_schedule_type(0x0000);
+					0xFE9C->set_oppressor(0xFF9F);
+					gflags[0x0233] = true;
+					abort;
+				}
+				say("\"I hope that thou dost find what hath happened to Number 7, ",
+					var0000,
+					". We cannot fulfill our duty without the key.\"");
+				fallthrough;
 
-				case "bye":
-					UI_remove_npc_face0();
-					Func097F(0xFE9C, "@Until later...@", 0x0000);
-					Func097F(0xFF9F, "@Use thy Logic!@", 0x0002);
-					0xFF9F->set_schedule_type(0x000B);
-					break;
-			}
+			case "bye":
+				UI_remove_npc_face0();
+				Func097F(0xFE9C, "@Until later...@", 0x0000);
+				Func097F(0xFF9F, "@Use thy Logic!@", 0x0002);
+				0xFF9F->set_schedule_type(0x000B);
+				break;
 		}
 	}
 }
@@ -48319,70 +48233,68 @@ void Func0462 object#(0x462) () {
 				". I would not have believed that one of our fellowship could have done such a thing. I thank thee for finding the traitor in our midst.\"");
 			say("\"Use the key to obtain the waters of Logic. Thou hast well earned that honor.\"");
 			abort;
-		} else {
-			say("\"Where is the justice in the world when a strange mage comes to destroy our Temple and disrupt our peace?! Where is the keeper of the key?\"");
-			converse (["justice", "strange mage", "disrupt", "keeper of the key", "accuse", "bye"]) {
-				case "justice" (remove):
-					say("\"Thou mayest call me Number 5, for I no longer bear a mortal name. I surrendered that when I swore myself to eternal service at the fountain of Logic.\"");
-					say("\"I am bound for all time and eternity in a body that will never age, and now I cannot fulfill my vows! Where is the justice in living forever with broken vows?\"");
-					fallthrough;
+		}
+		say("\"Where is the justice in the world when a strange mage comes to destroy our Temple and disrupt our peace?! Where is the keeper of the key?\"");
+		converse (["justice", "strange mage", "disrupt", "keeper of the key", "accuse", "bye"]) {
+			case "justice" (remove):
+				say("\"Thou mayest call me Number 5, for I no longer bear a mortal name. I surrendered that when I swore myself to eternal service at the fountain of Logic.\"");
+				say("\"I am bound for all time and eternity in a body that will never age, and now I cannot fulfill my vows! Where is the justice in living forever with broken vows?\"");
+				fallthrough;
 
-				case "strange mage" (remove):
-					say("\"He was a rude, fat man, ",
-						var0000,
-						". I assumed he came seeking Logic, but I should have realized that one such as he would not be interested in the clarity of Logic.\"");
-					fallthrough;
+			case "strange mage" (remove):
+				say("\"He was a rude, fat man, ",
+					var0000,
+					". I assumed he came seeking Logic, but I should have realized that one such as he would not be interested in the clarity of Logic.\"");
+				fallthrough;
 
-				case "disrupt" (remove):
-					say("\"Long ago, the Order Hierophant bound a force of great evil into a prison and placed it here for us to guard.\"");
-					say("\"What peace is left for us here, guardians of an empty shell now that the mage hath loosed what once was captive?\"");
-					add("force of great evil");
-					fallthrough;
+			case "disrupt" (remove):
+				say("\"Long ago, the Order Hierophant bound a force of great evil into a prison and placed it here for us to guard.\"");
+				say("\"What peace is left for us here, guardians of an empty shell now that the mage hath loosed what once was captive?\"");
+				add("force of great evil");
+				fallthrough;
 
-				case "force of great evil" (remove):
-					say("\"I do not know what it was, ",
-						var0000,
-						". I am sorry. It was not my place to ask if the Hierophant did not choose to tell me.\"");
-					say("\"I can only hope that the failure of my fellows and I hath not endangered the world too greatly.\"");
-					fallthrough;
+			case "force of great evil" (remove):
+				say("\"I do not know what it was, ",
+					var0000,
+					". I am sorry. It was not my place to ask if the Hierophant did not choose to tell me.\"");
+				say("\"I can only hope that the failure of my fellows and I hath not endangered the world too greatly.\"");
+				fallthrough;
 
-				case "keeper of the key" (remove):
-					say("\"Perhaps the mage waylaid Number 7 to steal the key...\"");
-					say("\"But no, that cannot be. For Number 7 disappeared the day I was with Number 3, long before the strange mage came.\"");
-					fallthrough;
+			case "keeper of the key" (remove):
+				say("\"Perhaps the mage waylaid Number 7 to steal the key...\"");
+				say("\"But no, that cannot be. For Number 7 disappeared the day I was with Number 3, long before the strange mage came.\"");
+				fallthrough;
 
-				case "accuse":
-					say("\"I must warn thee, ",
-						var0000,
-						", we are each sworn to protect the other. If thou dost accuse me falsely, we shall attack thee.\"");
-					say("\"If thou hast spoken to each of us and hast determined that one of us is guilty, accuse accordingly. But be not hasty in thy judgment.\"");
-					say("\"Dost thou accuse me?\"");
-					if (Func0955()) {
-						say("\"Lies! Number 3 will remember that we were together when Number 7 disappeared!\"");
-						Func094E(0xFFA0, "@It is true, Number 5 was with me!@");
-						0x0000->set_conversation_slot();
-						say("\"I shall have thine head for this outrage!\"");
-						var0002 = [0xFFA2, 0xFFA1, 0xFFA0, 0xFF9F, 0xFF9E, 0xFF9D];
-						for (var0005 in var0002 with var0003 to var0004) {
-							var0005->set_alignment(0x0003);
-							var0005->set_schedule_type(0x0000);
-							0xFE9C->set_oppressor(var0005);
-						}
-						abort;
-					} else {
-						say("\"I hope that thou dost find what hath happened to Number 7, ",
-							var0000,
-							". We cannot fulfill our duty without the key.\"");
+			case "accuse":
+				say("\"I must warn thee, ",
+					var0000,
+					", we are each sworn to protect the other. If thou dost accuse me falsely, we shall attack thee.\"");
+				say("\"If thou hast spoken to each of us and hast determined that one of us is guilty, accuse accordingly. But be not hasty in thy judgment.\"");
+				say("\"Dost thou accuse me?\"");
+				if (Func0955()) {
+					say("\"Lies! Number 3 will remember that we were together when Number 7 disappeared!\"");
+					Func094E(0xFFA0, "@It is true, Number 5 was with me!@");
+					0x0000->set_conversation_slot();
+					say("\"I shall have thine head for this outrage!\"");
+					var0002 = [0xFFA2, 0xFFA1, 0xFFA0, 0xFF9F, 0xFF9E, 0xFF9D];
+					for (var0005 in var0002 with var0003 to var0004) {
+						var0005->set_alignment(0x0003);
+						var0005->set_schedule_type(0x0000);
+						0xFE9C->set_oppressor(var0005);
 					}
-					fallthrough;
+					abort;
+				}
+				say("\"I hope that thou dost find what hath happened to Number 7, ",
+					var0000,
+					". We cannot fulfill our duty without the key.\"");
+				fallthrough;
 
-				case "bye":
-					UI_remove_npc_face0();
-					Func097F(0xFE9C, "@Many thanks!@", 0x0000);
-					Func097F(0xFF9E, "@Use thy Logic!@", 0x0002);
-					0xFF9E->set_schedule_type(0x000B);
-					break;
-			}
+			case "bye":
+				UI_remove_npc_face0();
+				Func097F(0xFE9C, "@Many thanks!@", 0x0000);
+				Func097F(0xFF9E, "@Use thy Logic!@", 0x0002);
+				0xFF9E->set_schedule_type(0x000B);
+				break;
 		}
 	}
 }
@@ -48425,57 +48337,55 @@ void Func0463 object#(0x463) () {
 				". I would not have believed that one of our fellowship could have done such a thing. I thank thee for finding the traitor in our midst.\"");
 			say("\"Use the key to obtain the waters of Logic. Thou hast well earned that honor.\"");
 			abort;
-		} else {
-			say("\"Thou mayest call me Number 6, ",
-				var0000,
-				". Long have we searched for the one who held the key to the fountain room, ",
-				var0000,
-				". But Number 7 hath disappeared and we are failures.\"");
-			converse (["Number 7", "failures", "accuse", "bye"]) {
-				case "Number 7" (remove):
-					say("\"Number 7 was the keeper of the key to the fountain room, ",
-						var0000,
-						". His was the greatest duty -- to insure that no one defiled the waters of Logic.\"");
-					say("\"None of us have seen Number 7 since the day that I was with Number 1.\"");
-					fallthrough;
+		}
+		say("\"Thou mayest call me Number 6, ",
+			var0000,
+			". Long have we searched for the one who held the key to the fountain room, ",
+			var0000,
+			". But Number 7 hath disappeared and we are failures.\"");
+		converse (["Number 7", "failures", "accuse", "bye"]) {
+			case "Number 7" (remove):
+				say("\"Number 7 was the keeper of the key to the fountain room, ",
+					var0000,
+					". His was the greatest duty -- to insure that no one defiled the waters of Logic.\"");
+				say("\"None of us have seen Number 7 since the day that I was with Number 1.\"");
+				fallthrough;
 
-				case "failures" (remove):
-					say("\"Although the waters of Logic are safe, without the key to the fountain room, we can no longer aid those who come seeking Logic. Therefore, we have failed.\"");
-					fallthrough;
+			case "failures" (remove):
+				say("\"Although the waters of Logic are safe, without the key to the fountain room, we can no longer aid those who come seeking Logic. Therefore, we have failed.\"");
+				fallthrough;
 
-				case "accuse":
-					say("\"I must warn thee, ",
-						var0000,
-						", we are each sworn to protect the other. If thou dost accuse me falsely, we shall attack thee.\"");
-					say("\"If thou hast spoken to each of us and hast determined that one of us is guilty, accuse accordingly. But be not hasty in thy judgment.\"");
-					say("\"Dost thou accuse me?\"");
-					if (Func0955()) {
-						say("\"Where is thy Logic?! Both Number 2 and Number 1 can attest that I was with them when Number 7 disappeared!\"");
-						Func094E(0xFFA2, "@Number 1 was with me!@");
-						Func094E(0xFFA1, "@It cannot be! I was with Number 1!@");
-						0x0000->set_conversation_slot();
-						say("\"Thou shalt regret thy words!\"");
-						var0002 = [0xFFA2, 0xFFA1, 0xFFA0, 0xFF9F, 0xFF9E, 0xFF9D];
-						for (var0005 in var0002 with var0003 to var0004) {
-							var0005->set_alignment(0x0003);
-							var0005->set_schedule_type(0x0000);
-							0xFE9C->set_oppressor(var0005);
-						}
-						abort;
-					} else {
-						say("\"I hope that thou dost find what hath happened to Number 7, ",
-							var0000,
-							". We cannot fulfill our duty without the key.\"");
+			case "accuse":
+				say("\"I must warn thee, ",
+					var0000,
+					", we are each sworn to protect the other. If thou dost accuse me falsely, we shall attack thee.\"");
+				say("\"If thou hast spoken to each of us and hast determined that one of us is guilty, accuse accordingly. But be not hasty in thy judgment.\"");
+				say("\"Dost thou accuse me?\"");
+				if (Func0955()) {
+					say("\"Where is thy Logic?! Both Number 2 and Number 1 can attest that I was with them when Number 7 disappeared!\"");
+					Func094E(0xFFA2, "@Number 1 was with me!@");
+					Func094E(0xFFA1, "@It cannot be! I was with Number 1!@");
+					0x0000->set_conversation_slot();
+					say("\"Thou shalt regret thy words!\"");
+					var0002 = [0xFFA2, 0xFFA1, 0xFFA0, 0xFF9F, 0xFF9E, 0xFF9D];
+					for (var0005 in var0002 with var0003 to var0004) {
+						var0005->set_alignment(0x0003);
+						var0005->set_schedule_type(0x0000);
+						0xFE9C->set_oppressor(var0005);
 					}
-					fallthrough;
+					abort;
+				}
+				say("\"I hope that thou dost find what hath happened to Number 7, ",
+					var0000,
+					". We cannot fulfill our duty without the key.\"");
+				fallthrough;
 
-				case "bye":
-					UI_remove_npc_face0();
-					Func097F(0xFE9C, "@Until later...@", 0x0000);
-					Func097F(0xFF9D, "@Use thy Logic!@", 0x0002);
-					0xFF9D->set_schedule_type(0x000B);
-					break;
-			}
+			case "bye":
+				UI_remove_npc_face0();
+				Func097F(0xFE9C, "@Until later...@", 0x0000);
+				Func097F(0xFF9D, "@Use thy Logic!@", 0x0002);
+				0xFF9D->set_schedule_type(0x000B);
+				break;
 		}
 	}
 }
@@ -48580,30 +48490,29 @@ labelFunc0464_0169:
 					call Func01E3;
 				};
 				abort;
-			} else {
-				say("\"As thou wishest...\"");
-				UI_fade_palette(0x000C, 0x0001, 0x0000);
-				0xFE9C->move_object([0x0AA0, 0x03C0, 0x0000]);
-				UI_play_sound_effect(0x0066);
-				var0001 = script 0xFE9C {
-					nohalt;
-					actor frame kneeling;
-					wait 15;
-				};
-				var0001 = script 0xFE9C after 4 ticks {
-					nohalt;
-					call Func0636;
-				};
-				var0001 = script 0xFE9C after 15 ticks {
-					nohalt;
-					call Func07D7;
-				};
-				var0001 = script Func09A0(0x0005, 0x0001) after 1 ticks {
-					nohalt;
-					call Func01E3;
-				};
-				abort;
 			}
+			say("\"As thou wishest...\"");
+			UI_fade_palette(0x000C, 0x0001, 0x0000);
+			0xFE9C->move_object([0x0AA0, 0x03C0, 0x0000]);
+			UI_play_sound_effect(0x0066);
+			var0001 = script 0xFE9C {
+				nohalt;
+				actor frame kneeling;
+				wait 15;
+			};
+			var0001 = script 0xFE9C after 4 ticks {
+				nohalt;
+				call Func0636;
+			};
+			var0001 = script 0xFE9C after 15 ticks {
+				nohalt;
+				call Func07D7;
+			};
+			var0001 = script Func09A0(0x0005, 0x0001) after 1 ticks {
+				nohalt;
+				call Func01E3;
+			};
+			abort;
 		}
 		if (gflags[0x021B] == true) {
 			say("\"It is a pleasure to see thee again, seeker. But there is nothing more that can be done here...\" *\"I have taught thee all I can. Thou must seek other virtues to embrace.\"");
@@ -48628,7 +48537,8 @@ labelFunc0464_0169:
 				call Func01E3;
 			};
 			abort;
-		} else if (gflags[0x021A] && (gflags[0x0007] == false)) {
+		}
+		if (gflags[0x021A] && (gflags[0x0007] == false)) {
 			if (UI_get_timer(0x0003) > 0x0017) {
 				say("\"Thou hast returned, seeker! I am pleased.\" *\"I hope that thou hast benefitted from thy meditations... Behold!\"");
 				if (gflags[0x0217] == false) {
@@ -48887,11 +48797,10 @@ void Func047D object#(0x47D) () {
 				hit 50, normal_damage;
 			};
 			abort;
-		} else {
-			0xFE9C->item_say("@Hold there, Automaton!@");
-			Func097F(item, "@I would speak with thee...@", 0x0003);
-			set_schedule_type(0x0003);
 		}
+		0xFE9C->item_say("@Hold there, Automaton!@");
+		Func097F(item, "@I would speak with thee...@", 0x0003);
+		set_schedule_type(0x0003);
 	}
 	if (event == 0x0009) {
 		run_schedule();
@@ -48918,11 +48827,10 @@ void Func047D object#(0x47D) () {
 			};
 			0xFF83->set_schedule_type(0x0014);
 			abort;
-		} else {
-			say("\"Error! I have waited centuries for the Hierophant and to have almost given the Serpent Sceptre to a total stranger!\"* \"Error! To almost let the key to the Great Library fall into the wrong hands! I should have my works examined...\"* \"Begone! Thou art a hazard to the safety of the Great Library.\" *\"Now what was it that the Hierophant wanted...?\"");
-			0xFF83->set_schedule_type(0x0014);
-			abort;
 		}
+		say("\"Error! I have waited centuries for the Hierophant and to have almost given the Serpent Sceptre to a total stranger!\"* \"Error! To almost let the key to the Great Library fall into the wrong hands! I should have my works examined...\"* \"Begone! Thou art a hazard to the safety of the Great Library.\" *\"Now what was it that the Hierophant wanted...?\"");
+		0xFF83->set_schedule_type(0x0014);
+		abort;
 	}
 }
 
@@ -49525,40 +49433,40 @@ void Func0491 object#(0x491) () {
 				say("\"Avatar, 'tis the pelts! They can smell that we have Gwani pelts on us! I suggest we throw them away!\"");
 				UI_remove_npc_face1();
 				abort;
-			} else if (var0002) {
+			}
+			if (var0002) {
 				0xFFFE->show_npc_face1(0x0000);
 				0x0001->set_conversation_slot();
 				say("\"Avatar, 'tis the pelts! They can smell that we have Gwani pelts on us! I suggest we throw them away!\"");
 				UI_remove_npc_face1();
 				abort;
-			} else if (var0003) {
+			}
+			if (var0003) {
 				0xFFFF->show_npc_face1(0x0000);
 				0x0001->set_conversation_slot();
 				say("\"Avatar, 'tis the pelts! They can smell we have Gwani pelts on us! I suggest that we throw them away!\"");
 				UI_remove_npc_face1();
 				abort;
-			} else {
-				0xFE9C->item_say("@I have Gwani pelts!@");
-				abort;
 			}
-		} else {
-			say("\"Thou look like Avatar,\" the Gwani creature says with broken speech.");
-			converse (["name", "Gwani", "bye"]) {
-				case "name" (remove):
-					say("\"Mwaerno. Means 'rain clouds'.\"");
-					fallthrough;
+			0xFE9C->item_say("@I have Gwani pelts!@");
+			abort;
+		}
+		say("\"Thou look like Avatar,\" the Gwani creature says with broken speech.");
+		converse (["name", "Gwani", "bye"]) {
+			case "name" (remove):
+				say("\"Mwaerno. Means 'rain clouds'.\"");
+				fallthrough;
 
-				case "Gwani" (remove):
-					say("\"Our village near. Speak to Yenani.\"");
-					fallthrough;
+			case "Gwani" (remove):
+				say("\"Our village near. Speak to Yenani.\"");
+				fallthrough;
 
-				case "bye":
-					UI_remove_npc_face0();
-					UI_remove_npc_face1();
-					Func097F(0xFE9C, "@Goodbye!@", 0x0000);
-					Func097F(0xFF6F, "@Atala dak!@", 0x0003);
-					break;
-			}
+			case "bye":
+				UI_remove_npc_face0();
+				UI_remove_npc_face1();
+				Func097F(0xFE9C, "@Goodbye!@", 0x0000);
+				Func097F(0xFF6F, "@Atala dak!@", 0x0003);
+				break;
 		}
 	}
 }
@@ -49705,11 +49613,10 @@ void Func0493 object#(0x493) () {
 			0xFE9C->item_say("@Wake up, little one!@");
 			var0001 = Func0992(0x0001, "@She cannot wake, Avatar. She is very sick.@", "@Poor little one! She is very sick.@", false);
 			abort;
-		} else {
-			0xFE9C->item_say("@Good morning, little one!@");
-			Func097F(0xFF6D, "@Tee hee hee hee!@", 0x0003);
-			0xFF6D->set_schedule_type(0x0003);
 		}
+		0xFE9C->item_say("@Good morning, little one!@");
+		Func097F(0xFF6D, "@Tee hee hee hee!@", 0x0003);
+		0xFF6D->set_schedule_type(0x0003);
 	}
 	if (event == 0x0009) {
 		0xFF6D->run_schedule();
@@ -50370,12 +50277,11 @@ void Func0496 object#(0x496) () {
 			}
 			Func092E(var0007);
 			return;
-		} else {
-			var0000 = script item {
-				nohalt;
-				call Func01D0;
-			};
 		}
+		var0000 = script item {
+			nohalt;
+			call Func01D0;
+		};
 	}
 	if (event == 0x0000) {
 		var000C = [0xFFC1];
@@ -50570,9 +50476,8 @@ void Func0496 object#(0x496) () {
 				if (!gflags[0x0048]) {
 					say("\"But I should not be speaking with thee until thou dost become a Knight of Monitor. Speak with Marsten about that.\"");
 					abort;
-				} else {
-					add(["Wolves", "cunning", "Champion Knight", "ladies"]);
 				}
+				add(["Wolves", "cunning", "Champion Knight", "ladies"]);
 				fallthrough;
 
 			case "Wolves":
@@ -50844,27 +50749,25 @@ void Func0496 object#(0x496) () {
 						0xFF6A->set_schedule_type(0x000A);
 						Func097F(var0018[0x0001], "@Yes, lord!@", 0x0002);
 						abort;
-					} else {
-						if (gflags[0x0092]) {
-							say("\"Do not worry, ",
-								var0002,
-								"! I shall order the Pikemen to place the traitors under arrest!\"");
-						} else {
-							say("\"Do not worry, ",
-								var0002,
-								"! I shall order the Pikemen to place the traitor under arrest!\"");
-						}
-						Func097F(0xFF6A, "@Pikemen!@", 0x0000);
-						0xFF6A->set_schedule_type(0x0014);
-						abort;
 					}
-				} else {
-					var0010 = Func0992(0xFFFE, "@We did not bring it with us.@", "@I did not bring it.@", false);
-					0x0000->set_conversation_slot();
-					say("\"Until thou dost bring proof, no one will believe us...\"");
-					Func097F(0xFF6A, "@Bring proof!@", 0x0000);
+					if (gflags[0x0092]) {
+						say("\"Do not worry, ",
+							var0002,
+							"! I shall order the Pikemen to place the traitors under arrest!\"");
+					} else {
+						say("\"Do not worry, ",
+							var0002,
+							"! I shall order the Pikemen to place the traitor under arrest!\"");
+					}
+					Func097F(0xFF6A, "@Pikemen!@", 0x0000);
+					0xFF6A->set_schedule_type(0x0014);
 					abort;
 				}
+				var0010 = Func0992(0xFFFE, "@We did not bring it with us.@", "@I did not bring it.@", false);
+				0x0000->set_conversation_slot();
+				say("\"Until thou dost bring proof, no one will believe us...\"");
+				Func097F(0xFF6A, "@Bring proof!@", 0x0000);
+				abort;
 				fallthrough;
 
 			case "stockings" (remove):
@@ -51079,10 +50982,9 @@ void Func0498 object#(0x498) () {
 					0xFF68->add_to_party();
 					Func097F(0xFF68, "@Onward!@", 0x0000);
 					abort;
-				} else {
-					say("\"Ah, but thou hast so many companions! Surely I would only be a nuisance to thee...\"");
-					UI_pop_answers();
 				}
+				say("\"Ah, but thou hast so many companions! Surely I would only be a nuisance to thee...\"");
+				UI_pop_answers();
 				fallthrough;
 
 			case "bye":
@@ -51283,97 +51185,93 @@ void Func049B object#(0x49B) () {
 				call Func049B;
 			};
 			abort;
-		} else {
-			if (0xFF64->get_item_flag(0x0004)) {
-				if (0xFF65->get_item_flag(0x001E)) {
-					say("\"I am content now, ",
-						var0001,
-						". There is such a peacefulness in my life, now that Morghrim doth care for me.\"");
-					Func097F(0xFF65, "@Good fortune!@", 0x0000);
-					abort;
-				} else {
-					0xFF65->set_item_flag(0x001E);
-					say("\"I am so glad that the tyrant is dead! Thanks to thee, ",
-						var0001,
-						".\"");
-					say("\"Do not fear for me -- I can care for myself, now that Draygan cannot use his magical secrets to control me.\"");
-					if (0xFF61->npc_nearby()) {
-						0xFF61->show_npc_face1(0x0000);
-						say("\"Thou canst come and stay with me, woman, until thou art ready to return to thy kind. My camp is clean, and the forest animals enjoy thy company.\"");
-						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
-						say("\"I shall accept thy kind offer, Forest Master.\"");
-						Func097F(0xFF61, "@Stay with me.@", 0x0000);
-						Func097F(0xFF65, "@I shall.@", 0x0005);
-						0xFF65->set_new_schedules([0x0000, 0x0002, 0x0006], [0x000E, 0x0007, 0x000C], [0x02B1, 0x0676, 0x02B9, 0x0686, 0x02C1, 0x06AD]);
-						0xFF65->run_schedule();
-						abort;
-					} else {
-						say("\"I shall go to the Forest Master and beg for a place by his side. He is old, and doth need a help from time to time.\"");
-						say("\"Thank thee Avatar for thine help. Thou hast given me back my life.\"");
-						Func097F(0xFF65, "@Fear not for me!@", 0x0000);
-						Func097F(0xFE9C, "@Live long and prosper!@", 0x0000);
-						0xFF65->set_new_schedules([0x0000, 0x0002, 0x0006], [0x000E, 0x0007, 0x000C], [0x02B1, 0x0676, 0x02B9, 0x0686, 0x02C1, 0x06AD]);
-						0xFF65->run_schedule();
-						abort;
-					}
-				}
-			} else if (gflags[0x02BF] && (!0xFF64->get_item_flag(0x0004))) {
-				say("\"Why dost thou wait? Use the arrow! Use it to strike down the tyrant Draygan!\"");
-				say("\"Then we shall find the secret of his power, and he shall not stop me from obtaining my freedom.\"");
-				Func097F(0xFF65, "@Use the arrow!@", 0x0000);
+		}
+		if (0xFF64->get_item_flag(0x0004)) {
+			if (0xFF65->get_item_flag(0x001E)) {
+				say("\"I am content now, ",
+					var0001,
+					". There is such a peacefulness in my life, now that Morghrim doth care for me.\"");
+				Func097F(0xFF65, "@Good fortune!@", 0x0000);
 				abort;
 			}
-			if (gflags[0x02C0] && (!0xFF64->get_item_flag(0x0004))) {
-				say("\"Tell me -- hast thou prepared the arrow? To defeat the tyrant Draygan?\"");
-				if (Func0955()) {
-					if (Func097D(0xFE9B, 0x0001, 0x0238, 0xFE99, 0xFE99)) {
-						gflags[0x02BF] = true;
-						say("\"Then use it! Use it to numb the tyrant Draygan!\"");
-						say("\"Then we shall find the secret of his power, and prevent him from stopping mine escape.\"");
-						Func097F(0xFF65, "@Use the arrow!@", 0x0000);
-						abort;
-					} else {
-						say("\"Do not thou give me false hopes, stranger! I see no arrow...\"");
-						Func097F(0xFF65, "@Bring the arrow...@", 0x0000);
-						abort;
-					}
-				} else {
-					say("\"Thou must treat an arrow with the juices from the King's Savior plant.\"");
+			0xFF65->set_item_flag(0x001E);
+			say("\"I am so glad that the tyrant is dead! Thanks to thee, ",
+				var0001,
+				".\"");
+			say("\"Do not fear for me -- I can care for myself, now that Draygan cannot use his magical secrets to control me.\"");
+			if (0xFF61->npc_nearby()) {
+				0xFF61->show_npc_face1(0x0000);
+				say("\"Thou canst come and stay with me, woman, until thou art ready to return to thy kind. My camp is clean, and the forest animals enjoy thy company.\"");
+				UI_remove_npc_face1();
+				0x0000->set_conversation_slot();
+				say("\"I shall accept thy kind offer, Forest Master.\"");
+				Func097F(0xFF61, "@Stay with me.@", 0x0000);
+				Func097F(0xFF65, "@I shall.@", 0x0005);
+				0xFF65->set_new_schedules([0x0000, 0x0002, 0x0006], [0x000E, 0x0007, 0x000C], [0x02B1, 0x0676, 0x02B9, 0x0686, 0x02C1, 0x06AD]);
+				0xFF65->run_schedule();
+				abort;
+			}
+			say("\"I shall go to the Forest Master and beg for a place by his side. He is old, and doth need a help from time to time.\"");
+			say("\"Thank thee Avatar for thine help. Thou hast given me back my life.\"");
+			Func097F(0xFF65, "@Fear not for me!@", 0x0000);
+			Func097F(0xFE9C, "@Live long and prosper!@", 0x0000);
+			0xFF65->set_new_schedules([0x0000, 0x0002, 0x0006], [0x000E, 0x0007, 0x000C], [0x02B1, 0x0676, 0x02B9, 0x0686, 0x02C1, 0x06AD]);
+			0xFF65->run_schedule();
+			abort;
+		}
+		if (gflags[0x02BF] && (!0xFF64->get_item_flag(0x0004))) {
+			say("\"Why dost thou wait? Use the arrow! Use it to strike down the tyrant Draygan!\"");
+			say("\"Then we shall find the secret of his power, and he shall not stop me from obtaining my freedom.\"");
+			Func097F(0xFF65, "@Use the arrow!@", 0x0000);
+			abort;
+		}
+		if (gflags[0x02C0] && (!0xFF64->get_item_flag(0x0004))) {
+			say("\"Tell me -- hast thou prepared the arrow? To defeat the tyrant Draygan?\"");
+			if (Func0955()) {
+				if (Func097D(0xFE9B, 0x0001, 0x0238, 0xFE99, 0xFE99)) {
+					gflags[0x02BF] = true;
+					say("\"Then use it! Use it to numb the tyrant Draygan!\"");
+					say("\"Then we shall find the secret of his power, and prevent him from stopping mine escape.\"");
+					Func097F(0xFF65, "@Use the arrow!@", 0x0000);
+					abort;
+				}
+				say("\"Do not thou give me false hopes, stranger! I see no arrow...\"");
+				Func097F(0xFF65, "@Bring the arrow...@", 0x0000);
+				abort;
+			}
+			say("\"Thou must treat an arrow with the juices from the King's Savior plant.\"");
+			Func097F(0xFF65, "@Prepare the arrow!@", 0x0000);
+			abort;
+		}
+		if (gflags[0x02B9]) {
+			say("\"Tell me -- hast thou obtained the plant which I told thee of? The King's Savior?\"");
+			if (Func0955()) {
+				if (Func097D(0xFE9B, 0x0001, 0x01D3, 0xFE99, 0x0000) || Func097D(0xFE9B, 0x0001, 0x01D3, 0xFE99, 0x0001)) {
+					gflags[0x02C0] = true;
+					say("\"Very good. Now, thou must treat an arrow with the juices from the King's Savior plant. I have hidden some arrows away in my quarters. If thou dost need one, get one there.\"");
 					Func097F(0xFF65, "@Prepare the arrow!@", 0x0000);
 					abort;
 				}
-			}
-			if (gflags[0x02B9]) {
-				say("\"Tell me -- hast thou obtained the plant which I told thee of? The King's Savior?\"");
-				if (Func0955()) {
-					if (Func097D(0xFE9B, 0x0001, 0x01D3, 0xFE99, 0x0000) || Func097D(0xFE9B, 0x0001, 0x01D3, 0xFE99, 0x0001)) {
-						gflags[0x02C0] = true;
-						say("\"Very good. Now, thou must treat an arrow with the juices from the King's Savior plant. I have hidden some arrows away in my quarters. If thou dost need one, get one there.\"");
-						Func097F(0xFF65, "@Prepare the arrow!@", 0x0000);
-						abort;
-					} else if (Func097D(0xFE9B, 0x0001, 0x0238, 0xFE99, 0xFE99)) {
-						gflags[0x02BF] = true;
-						say("\"And thou hast enchanted the arrow? Then use it -- use it to numb the tyrant Draygan!\"");
-						say("\"Then we shall find the secret of his power, and prevent him from stopping mine escape!\"");
-						Func097F(0xFF65, "@Use the arrow!@", 0x0000);
-						abort;
-					} else {
-						say("\"Do not give me false hopes, stranger! I see no King's Savior.\"");
-						say("\"I fear Draygan more each day...\"");
-						add(["afraid", "Draygan", "King's Savior"]);
-					}
-				} else {
-					say("\"Then I despair! For without this herb, Draygan cannot be stopped. I am so afraid...\"");
-					add(["afraid", "Draygan", "King's Savior"]);
+				if (Func097D(0xFE9B, 0x0001, 0x0238, 0xFE99, 0xFE99)) {
+					gflags[0x02BF] = true;
+					say("\"And thou hast enchanted the arrow? Then use it -- use it to numb the tyrant Draygan!\"");
+					say("\"Then we shall find the secret of his power, and prevent him from stopping mine escape!\"");
+					Func097F(0xFF65, "@Use the arrow!@", 0x0000);
+					abort;
 				}
+				say("\"Do not give me false hopes, stranger! I see no King's Savior.\"");
+				say("\"I fear Draygan more each day...\"");
+				add(["afraid", "Draygan", "King's Savior"]);
 			} else {
-				gflags[0x02BD] = true;
-				gflags[0x02BE] = false;
-				say("\"My name is Beryl. I am so glad that thou hast met me privately. We cannot speak for long, lest Draygan or his minions find us.\"");
-				say("\"I live in fear of Draygan and his terrible power.\"");
-				add(["afraid", "Draygan"]);
+				say("\"Then I despair! For without this herb, Draygan cannot be stopped. I am so afraid...\"");
+				add(["afraid", "Draygan", "King's Savior"]);
 			}
+		} else {
+			gflags[0x02BD] = true;
+			gflags[0x02BE] = false;
+			say("\"My name is Beryl. I am so glad that thou hast met me privately. We cannot speak for long, lest Draygan or his minions find us.\"");
+			say("\"I live in fear of Draygan and his terrible power.\"");
+			add(["afraid", "Draygan"]);
 		}
 		converse (["bye"]) {
 			case "afraid" (remove):
@@ -52111,44 +52009,43 @@ void Func04A0 object#(0x4A0) () {
 			UI_remove_npc_face0();
 			item_say("@So long, felon!@");
 			abort;
-		} else {
-			say("\"Greetings, felon!\"");
-			say("\"Thou art in the Mountains of Freedom... A magical prison from which none have escaped.\"");
-			say("\"I am the caretaker here. It is my duty to record thy name and crime.\"");
-			var0011 = (("I am " + var0002) + ".");
-			var0012 = [var0011, "I am the Avatar.", "None of thy business."];
-			var0013 = Func0956(var0012);
-			if (var0013 == var0011) {
-				say("\"My condolences on thy sentence here, ",
-					var0002,
-					".\"");
-			}
-			if (var0013 == "I am the Avatar.") {
-				say("\"I see... Perhaps thou couldst have pleaded insanity and avoided being sent here, felon.\"");
-			}
-			if (var0013 == "None of thy business.") {
-				say("\"With thine attitude, I understand why thou art here.\"");
-			}
-			say("\"With what crime art thou charged?\"");
-			var0014 = ["I am innocent!", "Angering Filbercio.", "I don't know."];
-			var0015 = Func0956(var0014);
-			if (var0015 == "I am innocent!") {
-				say("\"Ahh, thou wouldst be surprised how many innocents come through here, felon. Only yesterday we had another such innocent... Let us see. Stefano was his name.\"");
-			}
-			if (var0015 == "Angering Filbercio.") {
-				say("\"Ahh, thou art in fine company then, felon. Only yesterday we had another such felon arrive... Let us see. Stefano was his name.\"");
-			}
-			if (var0015 == "I don't know.") {
-				say("\"I am certain that thou wilt discern it while thou art here. Perhaps yesterday's felon is still alive to aid thee in thy search for enlightenment... Let us see. Stefano was his name.\"");
-			}
-			say("\"I will tell thee as I told him. Sleep passes thy time here, and may provide thee with new ideas for winning thy freedom.\"");
-			say("\"Thou shouldst be wary of two rogue mages who roam through these passages. They came here in search of the forbidden reagent, Stoneheart, and never escaped.\"");
-			say("\"Be mindful of the other felons... Most are quite desperate by now and will kill thee for what thou dost possess. In fact, they may prove to be thy greatest danger.\"");
-			say("\"There is another caretaker within the prison with a small supply of food and healing potions for sale, if thou dost need any... And if thou dost make it that far, of course.\"");
-			say("\"I make rounds periodically, to note who hath died for the records. Thou mayest notice later that I take great care to memorialize all who perish here. So thy passing shall not go unremarked...\"");
-			say("\"Remember, if thou canst find thy way out, thou wilt be free!\"");
-			gflags[0x023B] = true;
 		}
+		say("\"Greetings, felon!\"");
+		say("\"Thou art in the Mountains of Freedom... A magical prison from which none have escaped.\"");
+		say("\"I am the caretaker here. It is my duty to record thy name and crime.\"");
+		var0011 = (("I am " + var0002) + ".");
+		var0012 = [var0011, "I am the Avatar.", "None of thy business."];
+		var0013 = Func0956(var0012);
+		if (var0013 == var0011) {
+			say("\"My condolences on thy sentence here, ",
+				var0002,
+				".\"");
+		}
+		if (var0013 == "I am the Avatar.") {
+			say("\"I see... Perhaps thou couldst have pleaded insanity and avoided being sent here, felon.\"");
+		}
+		if (var0013 == "None of thy business.") {
+			say("\"With thine attitude, I understand why thou art here.\"");
+		}
+		say("\"With what crime art thou charged?\"");
+		var0014 = ["I am innocent!", "Angering Filbercio.", "I don't know."];
+		var0015 = Func0956(var0014);
+		if (var0015 == "I am innocent!") {
+			say("\"Ahh, thou wouldst be surprised how many innocents come through here, felon. Only yesterday we had another such innocent... Let us see. Stefano was his name.\"");
+		}
+		if (var0015 == "Angering Filbercio.") {
+			say("\"Ahh, thou art in fine company then, felon. Only yesterday we had another such felon arrive... Let us see. Stefano was his name.\"");
+		}
+		if (var0015 == "I don't know.") {
+			say("\"I am certain that thou wilt discern it while thou art here. Perhaps yesterday's felon is still alive to aid thee in thy search for enlightenment... Let us see. Stefano was his name.\"");
+		}
+		say("\"I will tell thee as I told him. Sleep passes thy time here, and may provide thee with new ideas for winning thy freedom.\"");
+		say("\"Thou shouldst be wary of two rogue mages who roam through these passages. They came here in search of the forbidden reagent, Stoneheart, and never escaped.\"");
+		say("\"Be mindful of the other felons... Most are quite desperate by now and will kill thee for what thou dost possess. In fact, they may prove to be thy greatest danger.\"");
+		say("\"There is another caretaker within the prison with a small supply of food and healing potions for sale, if thou dost need any... And if thou dost make it that far, of course.\"");
+		say("\"I make rounds periodically, to note who hath died for the records. Thou mayest notice later that I take great care to memorialize all who perish here. So thy passing shall not go unremarked...\"");
+		say("\"Remember, if thou canst find thy way out, thou wilt be free!\"");
+		gflags[0x023B] = true;
 		UI_remove_npc_face0();
 		item_say("@Goodbye, felon!@");
 	}
@@ -53163,7 +53060,8 @@ void Func04A8 object#(0x4A8) () {
 			0xFF58->set_schedule_type(0x0014);
 			0xFF58->run_schedule();
 			abort;
-		} else if (gflags[0x0004]) {
+		}
+		if (gflags[0x0004]) {
 			if (0xFF22->get_item_flag(0x0004)) {
 				abort;
 			}
@@ -53834,12 +53732,11 @@ void Func04AA object#(0x4AA) () {
 					}
 					0xFF56->set_schedule_type(0x0014);
 					abort;
-				} else {
-					UI_remove_npc_face0();
-					Func097F(0xFE9C, "@Well met!@", 0x0000);
-					Func097F(0xFF56, "@To wish you luck!@", 0x0002);
-					break;
 				}
+				UI_remove_npc_face0();
+				Func097F(0xFE9C, "@Well met!@", 0x0000);
+				Func097F(0xFF56, "@To wish you luck!@", 0x0002);
+				break;
 
 		}
 	}
@@ -54326,9 +54223,8 @@ void Func04B3 object#(0x4B3) () {
 						}
 					}
 					abort;
-				} else {
-					say("\"Perhaps later, when thou art more relaxed, eh?\"");
 				}
+				say("\"Perhaps later, when thou art more relaxed, eh?\"");
 				fallthrough;
 
 			case "buttons":
@@ -54378,13 +54274,12 @@ void Func04B3 object#(0x4B3) () {
 			Func097F(0xFE9C, "@Hey, come back!@", 0x0003);
 			gflags[0x01EE] = false;
 			abort;
-		} else {
-			0xFFFE->show_npc_face0(0x0000);
-			say("\"See, their desire to please thee hath clouded their minds...\"");
-			say("\"Open the door to their private chambers and let them show thee how much they'd like thee to stay...\"");
-			say("\"They can be... very... persuasive.\"");
-			UI_remove_npc_face0();
 		}
+		0xFFFE->show_npc_face0(0x0000);
+		say("\"See, their desire to please thee hath clouded their minds...\"");
+		say("\"Open the door to their private chambers and let them show thee how much they'd like thee to stay...\"");
+		say("\"They can be... very... persuasive.\"");
+		UI_remove_npc_face0();
 		abort;
 	}
 	if (event == 0x000E) {
@@ -55025,19 +54920,17 @@ void Func04B6 object#(0x4B6) () {
 						call Func04B6;
 					};
 					abort;
-				} else {
-					say("\"Then do not return unless thou hast had a change of heart! I am saddened beyond bearing!\"");
-					abort;
 				}
+				say("\"Then do not return unless thou hast had a change of heart! I am saddened beyond bearing!\"");
+				abort;
+			}
+			say("\"Hast thou reconsidered my request, Avatar? Wilt thou bring to me the Dream Crystal?\"");
+			if (Func0955() == true) {
+				say("\"I knew that Edrin could not be so misled...\"");
+				add("defeat");
 			} else {
-				say("\"Hast thou reconsidered my request, Avatar? Wilt thou bring to me the Dream Crystal?\"");
-				if (Func0955() == true) {
-					say("\"I knew that Edrin could not be so misled...\"");
-					add("defeat");
-				} else {
-					say("\"Then do not return unless thou hast had a change of heart! I am saddened beyond bearing!\"");
-					abort;
-				}
+				say("\"Then do not return unless thou hast had a change of heart! I am saddened beyond bearing!\"");
+				abort;
 			}
 		}
 		if ((var0004 == true) && (!gflags[0x020D])) {
@@ -55085,14 +54978,12 @@ void Func04B6 object#(0x4B6) () {
 							call Func04B6;
 						};
 						abort;
-					} else {
-						say("\"Perhaps thou wert dreaming, Avatar. I do not see the Dream Crystal.\" *\"Without the Crystal, our souls remain trapped. Bring to me the Dream Crystal and the Serpent Necklace is thine...\"");
-						abort;
 					}
-				} else {
-					say("\"Without the Crystal, our souls remain trapped. Bring to me the Dream Crystal and the Serpent Necklace is thine...\"");
+					say("\"Perhaps thou wert dreaming, Avatar. I do not see the Dream Crystal.\" *\"Without the Crystal, our souls remain trapped. Bring to me the Dream Crystal and the Serpent Necklace is thine...\"");
 					abort;
 				}
+				say("\"Without the Crystal, our souls remain trapped. Bring to me the Dream Crystal and the Serpent Necklace is thine...\"");
+				abort;
 			}
 		} else {
 			if (!gflags[0x00E6]) {
@@ -55272,25 +55163,23 @@ void Func04B6 object#(0x4B6) () {
 							call Func04B6;
 						};
 						abort;
-					} else {
-						say("\"Edrin hath thought thee kind... I see that he was misled.\"");
-						say("\"Without thine aid we are doomed to eternal limbo, not dead and never to be alive again. Trapped forever in insanity.\"");
-						say("\"Return if thou dost reconsider... I doubt that thou canst finish thine own quest without mine aid.\"");
-						var001B = true;
-						abort;
 					}
+					say("\"Edrin hath thought thee kind... I see that he was misled.\"");
+					say("\"Without thine aid we are doomed to eternal limbo, not dead and never to be alive again. Trapped forever in insanity.\"");
+					say("\"Return if thou dost reconsider... I doubt that thou canst finish thine own quest without mine aid.\"");
+					var001B = true;
+					abort;
+				}
+				say("\"Wilt thou bring me the Dream Crystal so that we may at last find peace? I fear that soon my strength will fail, and the people of Gorlab and I will be far worse than dead.\"");
+				if (Func0955() == true) {
+					say("\"Thou art truly as brave as Edrin pictured thee! I can tell thee how to defeat Rabindrinath...\"");
+					remove("destroying");
+					add("defeat");
 				} else {
-					say("\"Wilt thou bring me the Dream Crystal so that we may at last find peace? I fear that soon my strength will fail, and the people of Gorlab and I will be far worse than dead.\"");
-					if (Func0955() == true) {
-						say("\"Thou art truly as brave as Edrin pictured thee! I can tell thee how to defeat Rabindrinath...\"");
-						remove("destroying");
-						add("defeat");
-					} else {
-						say("\"Edrin hath thought thee brave... I see that he was misled.\" *\"Without thine aid we are doomed to eternal limbo, not dead and never to be alive again. Trapped forever in insanity.\"");
-						say("\"Return if thou dost reconsider... I doubt that thou canst finish thine own quest without mine aid.\"");
-						var001B = true;
-						abort;
-					}
+					say("\"Edrin hath thought thee brave... I see that he was misled.\" *\"Without thine aid we are doomed to eternal limbo, not dead and never to be alive again. Trapped forever in insanity.\"");
+					say("\"Return if thou dost reconsider... I doubt that thou canst finish thine own quest without mine aid.\"");
+					var001B = true;
+					abort;
 				}
 				fallthrough;
 
@@ -55690,13 +55579,12 @@ void Func04C9 object#(0x4C9) () {
 			UI_remove_npc_face0();
 			0xFF37->set_schedule_type(0x001D);
 			abort;
-		} else {
-			0xFFC0->show_npc_face0(0x0000);
-			say("\"Art thou blind! Canst thou not see the foul beast?\" *\"Have mercy! I beg thee to slay such an horror! Please, thou must kill it before it takes me!\"");
-			UI_remove_npc_face0();
-			0xFF37->set_schedule_type(0x001D);
-			abort;
 		}
+		0xFFC0->show_npc_face0(0x0000);
+		say("\"Art thou blind! Canst thou not see the foul beast?\" *\"Have mercy! I beg thee to slay such an horror! Please, thou must kill it before it takes me!\"");
+		UI_remove_npc_face0();
+		0xFF37->set_schedule_type(0x001D);
+		abort;
 	}
 }
 
@@ -58452,66 +58340,63 @@ labelFunc0526_0008:
 						Func09AD(0xFEDA);
 						Func097F(0xFEDA, "@Enjoy thy death!@", 0x0000);
 						abort;
-					} else {
-						0xFEF8->show_npc_face0(0x0000);
-						say("\"Then thou dost leave me no choice!\"");
-						Func09AD(0xFEDA);
-						Func097F(0xFEDA, "@Enjoy thy death!@", 0x0000);
-						abort;
 					}
-				} else {
 					0xFEF8->show_npc_face0(0x0000);
-					say("\"Thou hast sealed thy fate for no mere mortal can defeat me! Prepare for thy death!\"");
-					if (var0000 || (var0001 || var0002)) {
-						0xFEF8->show_npc_face0(0x0000);
-						say("\"But I can be merciful. I will spare thee, Avatar, if thou wilt give me one of thy companions. I hunger for fresh blood. Dost thou accept mine offer?\"");
+					say("\"Then thou dost leave me no choice!\"");
+					Func09AD(0xFEDA);
+					Func097F(0xFEDA, "@Enjoy thy death!@", 0x0000);
+					abort;
+				}
+				0xFEF8->show_npc_face0(0x0000);
+				say("\"Thou hast sealed thy fate for no mere mortal can defeat me! Prepare for thy death!\"");
+				if (var0000 || (var0001 || var0002)) {
+					0xFEF8->show_npc_face0(0x0000);
+					say("\"But I can be merciful. I will spare thee, Avatar, if thou wilt give me one of thy companions. I hunger for fresh blood. Dost thou accept mine offer?\"");
+					if (var0000) {
+						0xFFFD->show_npc_face1(0x0000);
+						say("\"The Avatar will not accept thine offer, foul fiend!\"");
+						UI_remove_npc_face1();
+					}
+					if (var0001) {
+						0xFFFE->show_npc_face1(0x0000);
+						say("\"Thou art wasting thy fetid breath making the Avatar such an offer!\"");
+						UI_remove_npc_face1();
+					}
+					if (var0002) {
+						0xFFFF->show_npc_face1(0x0000);
+						say("\"Thou wilt not accept this ghoul's offer, wilt thou, Avatar?\"");
+						UI_remove_npc_face1();
+					}
+					0xFEF8->show_npc_face0(0x0000);
+					say("\"So, Avatar, wilt thou listen to the whimperings of thy companions, or trade their life for thine own?\"");
+					say("\"True, they do not compare to thee, but I am not too selective in my tastes. One flesh is as good as another when one hungers.\"");
+					var000A = Func0955();
+					if (var000A) {
 						if (var0000) {
 							0xFFFD->show_npc_face1(0x0000);
-							say("\"The Avatar will not accept thine offer, foul fiend!\"");
+							say("\"Well, I certainly do not intend to go along with this at all!\"");
 							UI_remove_npc_face1();
 						}
 						if (var0001) {
 							0xFFFE->show_npc_face1(0x0000);
-							say("\"Thou art wasting thy fetid breath making the Avatar such an offer!\"");
+							say("\"Avatar, how couldst thou?! Thou canst forget all about this idea!\"");
 							UI_remove_npc_face1();
 						}
 						if (var0002) {
 							0xFFFF->show_npc_face1(0x0000);
-							say("\"Thou wilt not accept this ghoul's offer, wilt thou, Avatar?\"");
-							UI_remove_npc_face1();
+							say("\"This is not funny in the least, Avatar.\"");
 						}
 						0xFEF8->show_npc_face0(0x0000);
-						say("\"So, Avatar, wilt thou listen to the whimperings of thy companions, or trade their life for thine own?\"");
-						say("\"True, they do not compare to thee, but I am not too selective in my tastes. One flesh is as good as another when one hungers.\"");
-						var000A = Func0955();
-						if (var000A) {
-							if (var0000) {
-								0xFFFD->show_npc_face1(0x0000);
-								say("\"Well, I certainly do not intend to go along with this at all!\"");
-								UI_remove_npc_face1();
-							}
-							if (var0001) {
-								0xFFFE->show_npc_face1(0x0000);
-								say("\"Avatar, how couldst thou?! Thou canst forget all about this idea!\"");
-								UI_remove_npc_face1();
-							}
-							if (var0002) {
-								0xFFFF->show_npc_face1(0x0000);
-								say("\"This is not funny in the least, Avatar.\"");
-							}
-							0xFEF8->show_npc_face0(0x0000);
-							say("\"A pity! Then what I do not receive willingly, I will have to take by force!\"");
-							Func09AD(0xFEDA);
-							Func097F(0xFEDA, "@Enjoy thy death!@", 0x0000);
-							abort;
-						} else {
-							0xFEF8->show_npc_face0(0x0000);
-							say("\"A pity! Then what I do not receive willingly, I will have to take by force!\"");
-							Func09AD(0xFEDA);
-							Func097F(0xFEDA, "@Enjoy thy death!@", 0x0000);
-							abort;
-						}
+						say("\"A pity! Then what I do not receive willingly, I will have to take by force!\"");
+						Func09AD(0xFEDA);
+						Func097F(0xFEDA, "@Enjoy thy death!@", 0x0000);
+						abort;
 					}
+					0xFEF8->show_npc_face0(0x0000);
+					say("\"A pity! Then what I do not receive willingly, I will have to take by force!\"");
+					Func09AD(0xFEDA);
+					Func097F(0xFEDA, "@Enjoy thy death!@", 0x0000);
+					abort;
 				}
 				Func09AD(0xFEDA);
 				Func097F(0xFEDA, "@Enjoy thy death!@", 0x0000);
@@ -58525,7 +58410,8 @@ labelFunc0526_0008:
 		if (get_item_shape() == 0x024C) {
 			Func097F(0xFEDA, "@Back to the pit!@", 0x0001);
 			return;
-		} else if (get_item_shape() == 0x00F3) {
+		}
+		if (get_item_shape() == 0x00F3) {
 			var000B = 0xFE9C->get_object_position();
 			if (gflags[0x0248]) {
 				break;
@@ -58537,36 +58423,35 @@ labelFunc0526_0008:
 				call Func0526;
 			};
 			return;
-		} else {
-			var000D = 0xFE9C->get_object_position();
-			var000E = 0xFE9C->find_nearby(0x00F3, 0x0028, 0x0000);
-			if (var000E) {
-				var000B = var000E->get_object_position();
-				if (var000E->get_item_frame() == 0x0000) {
-					UI_play_sound_effect(0x0077);
-					var000E->obj_sprite_effect(0x003D, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
-					var000C = script var000E {
-						frame 3;
-						wait 2;
-						frame 1;
-					};
-					var000C = script 0xFE9C after 18 ticks {
-						nohalt;
-						call Func0526;
-					};
-					abort;
-				}
-				if (var000E->get_item_frame() != 0x0001) {
-					break;
-				}
-				UI_play_sound_effect(0x002A);
-				var000B[0x0002] = (var000B[0x0002] + 0x0002);
-				0xFEDA->move_object(var000B);
-				var000C = script 0xFEDA {
-					face south;
+		}
+		var000D = 0xFE9C->get_object_position();
+		var000E = 0xFE9C->find_nearby(0x00F3, 0x0028, 0x0000);
+		if (var000E) {
+			var000B = var000E->get_object_position();
+			if (var000E->get_item_frame() == 0x0000) {
+				UI_play_sound_effect(0x0077);
+				var000E->obj_sprite_effect(0x003D, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
+				var000C = script var000E {
+					frame 3;
+					wait 2;
+					frame 1;
 				};
-				goto labelFunc0526_0008;
+				var000C = script 0xFE9C after 18 ticks {
+					nohalt;
+					call Func0526;
+				};
+				abort;
 			}
+			if (var000E->get_item_frame() != 0x0001) {
+				break;
+			}
+			UI_play_sound_effect(0x002A);
+			var000B[0x0002] = (var000B[0x0002] + 0x0002);
+			0xFEDA->move_object(var000B);
+			var000C = script 0xFEDA {
+				face south;
+			};
+			goto labelFunc0526_0008;
 		}
 	} while (false)
 	nobreak {
@@ -60716,9 +60601,8 @@ void Func0626 object#(0x626) () {
 					var0008 = (var0008 & var000C);
 					var0009 = (var0009 + 0x0001);
 					break;
-				} else {
-					var000D = (var000D + 0x0001);
 				}
+				var000D = (var000D + 0x0001);
 			}
 		}
 		UI_play_sound_effect2(0x005F, item);
@@ -60966,9 +60850,8 @@ void Func062A object#(0x62A) () {
 					};
 				}
 				abort;
-			} else {
-				say("Within my pages lie the bridges to the great chasms. When thou dost reach the great pillars, stand between them and read my words once more.");
 			}
+			say("Within my pages lie the bridges to the great chasms. When thou dost reach the great pillars, stand between them and read my words once more.");
 		}
 	}
 }
@@ -61088,15 +60971,14 @@ void Func062D object#(0x62D) () {
 					var0003 = UI_update_last_created(var0002);
 					UI_flash_mouse(0x0004);
 					abort;
-				} else {
-					var0003 = script 0xFE9C {
-						face var0001;
-						continue;
-						actor frame bowing;
-						actor frame standing;
-						call Func062D;
-					};
 				}
+				var0003 = script 0xFE9C {
+					face var0001;
+					continue;
+					actor frame bowing;
+					actor frame standing;
+					call Func062D;
+				};
 			} else {
 				return;
 			}
@@ -61147,15 +61029,14 @@ void Func062E object#(0x62E) () {
 					var0003 = UI_update_last_created(var0002);
 					UI_flash_mouse(0x0004);
 					abort;
-				} else {
-					var0003 = script 0xFE9C {
-						face var0001;
-						continue;
-						actor frame bowing;
-						actor frame standing;
-						call Func062E;
-					};
 				}
+				var0003 = script 0xFE9C {
+					face var0001;
+					continue;
+					actor frame bowing;
+					actor frame standing;
+					call Func062E;
+				};
 			} else {
 				return;
 			}
@@ -69255,7 +69136,8 @@ void Func06DB object#(0x6DB) () {
 			UI_play_sound_effect(0x0082);
 			0xFE9C->obj_sprite_effect(0x0007, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001, 0xFFFF);
 			return;
-		} else if (var0000 == 0x0001) {
+		}
+		if (var0000 == 0x0001) {
 			var0003 = [0x0027, 0x03E1, 0x0000];
 		}
 		if (var0000 == 0x0002) {
@@ -73035,48 +72917,47 @@ void Func0723 object#(0x723) () {
 				Func097F(0xFE9C, "@That did naught!@", 0x0004);
 				UI_play_sound_effect(0x0030);
 				abort;
-			} else {
-				gflags[0x02B2] = true;
-				gflags[0x0007] = true;
-				var0001 = find_nearby(0x00E8, 0x0014, 0x0000);
-				if (var0001) {
-					for (var0004 in var0001 with var0009 to var000A) {
-						var0005 = var0004->get_object_position();
-						var000B = 0x0004;
-						while (var000B >= 0x0001) {
-							var000C = UI_create_new_object(0x0289);
-							if (var000C) {
-								var000C->set_item_frame(0x0005);
-								var000D = UI_die_roll(0xFFFC, 0x0004);
-								var000E = UI_die_roll(0xFFFC, 0x0004);
-								var0006 = UI_update_last_created([(var0005[0x0001] + var000D), (var0005[0x0002] + var000E), 0x0000]);
-							}
-							var000B = (var000B - 0x0001);
+			}
+			gflags[0x02B2] = true;
+			gflags[0x0007] = true;
+			var0001 = find_nearby(0x00E8, 0x0014, 0x0000);
+			if (var0001) {
+				for (var0004 in var0001 with var0009 to var000A) {
+					var0005 = var0004->get_object_position();
+					var000B = 0x0004;
+					while (var000B >= 0x0001) {
+						var000C = UI_create_new_object(0x0289);
+						if (var000C) {
+							var000C->set_item_frame(0x0005);
+							var000D = UI_die_roll(0xFFFC, 0x0004);
+							var000E = UI_die_roll(0xFFFC, 0x0004);
+							var0006 = UI_update_last_created([(var0005[0x0001] + var000D), (var0005[0x0002] + var000E), 0x0000]);
 						}
+						var000B = (var000B - 0x0001);
 					}
 				}
-				var0001 = find_nearby(0x00E8, 0x0014, 0x0000);
-				for (var0004 in var0001 with var000F to var0010) {
-					var0005 = var0004->get_object_position();
-					UI_play_sound_effect(0x0077);
-					UI_sprite_effect(0x0007, var0005[0x0001], (var0005[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
-					var0006 = script var0004 {
-						nohalt;
-						frame 1;
-						wait 1;
-						frame 2;
-						wait 1;
-						frame 3;
-						wait 1;
-						frame 4;
-					};
-				}
-				UI_play_sound_effect(0x005F);
-				var0006 = script item after 12 ticks {
+			}
+			var0001 = find_nearby(0x00E8, 0x0014, 0x0000);
+			for (var0004 in var0001 with var000F to var0010) {
+				var0005 = var0004->get_object_position();
+				UI_play_sound_effect(0x0077);
+				UI_sprite_effect(0x0007, var0005[0x0001], (var0005[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
+				var0006 = script var0004 {
 					nohalt;
-					call Func0723;
+					frame 1;
+					wait 1;
+					frame 2;
+					wait 1;
+					frame 3;
+					wait 1;
+					frame 4;
 				};
 			}
+			UI_play_sound_effect(0x005F);
+			var0006 = script item after 12 ticks {
+				nohalt;
+				call Func0723;
+			};
 		}
 	}
 	if ((var0000 == 0x0001) && (gflags[0x02B3] == false)) {
@@ -73149,9 +73030,8 @@ void Func0724 object#(0x724) () {
 						UI_play_sound_effect(0x0052);
 						UI_sprite_effect(0x0009, (var0003[0x0001] - 0x0002), (var0003[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 						abort;
-					} else {
-						gflags[0x02B5] = true;
 					}
+					gflags[0x02B5] = true;
 				} else {
 					gflags[0x02B4] = true;
 				}
@@ -73163,9 +73043,8 @@ void Func0724 object#(0x724) () {
 						UI_play_sound_effect(0x0052);
 						UI_sprite_effect(0x0009, (var0003[0x0001] - 0x0002), (var0003[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 						abort;
-					} else {
-						gflags[0x02B7] = true;
 					}
+					gflags[0x02B7] = true;
 				} else {
 					gflags[0x02B6] = true;
 				}
@@ -73718,27 +73597,26 @@ void Func072B object#(0x72B) () {
 				call Func072B;
 			};
 			abort;
-		} else {
-			gflags[0x0009] = true;
-			gflags[0x0008] = false;
-			var0004 = Func099B(0xFE9C, 0x0001, 0x0280, 0x0000, 0x0000, 0x0000, false);
-			var0004 = Func099B(0xFE9C, 0x0001, 0x027E, 0x0000, 0x0000, 0x0000, false);
-			var0004 = Func099B(0xFE9C, 0x0001, 0x03EC, 0x0000, 0x0002, 0x0000, false);
-			0xFE9C->clear_item_flag(0x0010);
-			if (gflags[0x000A]) {
-				var0004 = Func099B(0xFE9C, 0x0001, 0x00D1, 0x0000, 0x0014, 0x0000, false);
-				gflags[0x000A] = false;
-			}
-			var0004 = script 0xFE9C after 5 ticks {
-				nohalt;
-				call Func0636;
-			};
-			var0004 = script 0xFE9C after 17 ticks {
-				nohalt;
-				call Func072B;
-			};
-			abort;
 		}
+		gflags[0x0009] = true;
+		gflags[0x0008] = false;
+		var0004 = Func099B(0xFE9C, 0x0001, 0x0280, 0x0000, 0x0000, 0x0000, false);
+		var0004 = Func099B(0xFE9C, 0x0001, 0x027E, 0x0000, 0x0000, 0x0000, false);
+		var0004 = Func099B(0xFE9C, 0x0001, 0x03EC, 0x0000, 0x0002, 0x0000, false);
+		0xFE9C->clear_item_flag(0x0010);
+		if (gflags[0x000A]) {
+			var0004 = Func099B(0xFE9C, 0x0001, 0x00D1, 0x0000, 0x0014, 0x0000, false);
+			gflags[0x000A] = false;
+		}
+		var0004 = script 0xFE9C after 5 ticks {
+			nohalt;
+			call Func0636;
+		};
+		var0004 = script 0xFE9C after 17 ticks {
+			nohalt;
+			call Func072B;
+		};
+		abort;
 	}
 	if (event == 0x0003) {
 		gflags[0x0007] = 0x0000;
@@ -75977,7 +75855,8 @@ void Func076B object#(0x76B) () {
 		if (gflags[0x0313]) {
 			remove_item();
 			abort;
-		} else if (Func097D(0xFE9B, 0x0001, 0x0289, 0xFE99, 0x000C)) {
+		}
+		if (Func097D(0xFE9B, 0x0001, 0x0289, 0xFE99, 0x000C)) {
 			var0000 = get_object_position();
 			0xFF31->move_object(var0000);
 			Func09AC(0xFF31, var0000[0x0001], var0000[0x0002], 0x000F);
@@ -80406,7 +80285,8 @@ void Func07F9 object#(0x7F9) () {
 		if (item == 0xFE9C->get_npc_object()) {
 			Func09AA();
 			return;
-		} else if (!gflags[0x0084]) {
+		}
+		if (!gflags[0x0084]) {
 			set_schedule_type(0x0000);
 		}
 		set_item_flag(0x001D);
@@ -82243,205 +82123,204 @@ void Func0803 0x803 () {
 			say("\"Some other time, then.\"");
 			var0002 = false;
 			continue;
-		} else {
-			var000D = var0009[var000C];
-			var000E = 0x0000;
-			var000F = UI_die_roll(0x0001, 0x0004);
-			if (var000F == 0x0001) {
-				var0010 = "Dost thou accept?";
-			}
-			if (var000F == 0x0002) {
-				var0010 = "Wilt thou accept the price?";
-			}
-			if (var000F == 0x0003) {
-				var0010 = "Wilt thou agree to this price?";
-			}
-			if (var000F == 0x0004) {
-				var0010 = (var000B + ", dost thou agree?");
-			}
-			if (var000C == 0x0002) {
-				say("\"That will be ",
-					var000D,
-					" filari. ",
-					var0010,
-					"\"");
-				var0011 = "bags";
-			}
-			if (var000C == 0x0003) {
-				say("\"Father stocks finely crafted buckets. He sells them for ",
+		}
+		var000D = var0009[var000C];
+		var000E = 0x0000;
+		var000F = UI_die_roll(0x0001, 0x0004);
+		if (var000F == 0x0001) {
+			var0010 = "Dost thou accept?";
+		}
+		if (var000F == 0x0002) {
+			var0010 = "Wilt thou accept the price?";
+		}
+		if (var000F == 0x0003) {
+			var0010 = "Wilt thou agree to this price?";
+		}
+		if (var000F == 0x0004) {
+			var0010 = (var000B + ", dost thou agree?");
+		}
+		if (var000C == 0x0002) {
+			say("\"That will be ",
+				var000D,
+				" filari. ",
+				var0010,
+				"\"");
+			var0011 = "bags";
+		}
+		if (var000C == 0x0003) {
+			say("\"Father stocks finely crafted buckets. He sells them for ",
+				var000D,
+				" filari each.\"");
+			say("\"",
+				var0010,
+				"\"");
+		}
+		if (var000C == 0x0004) {
+			say("\"I will sell one to thee for ",
+				var000D,
+				" filari.\"");
+			say("\"",
+				var0010,
+				"\"");
+		}
+		if (var000C == 0x0005) {
+			say("\"That will be ",
+				var000D,
+				" filari. ",
+				var0010,
+				"\"");
+			var0011 = "candles";
+		}
+		if (var000C == 0x0006) {
+			say("\"I can sell one to thee for ",
+				var000D,
+				" filari.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "torches";
+		}
+		if (var000C == 0x0007) {
+			say("\"I can sell this to thee for ",
+				var000D,
+				" filari.\"");
+			say("\"",
+				var0010,
+				"\"");
+		}
+		if (var000C == 0x0008) {
+			say("\"I can sell a pair of fine fur-lined boots to thee for ",
+				var000D,
+				" filari.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "pairs of fur-lined boots";
+		}
+		if (var000C == 0x0009) {
+			say("\"These backpacks are made by the women of Fawn, ",
+				var0000,
+				". For ",
+				var000D,
+				"\tfilari, one can be thine.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "backpacks";
+		}
+		if (var000C == 0x000A) {
+			say("\"I make these stockings, ",
+				var0000,
+				". Thou canst not find any finer! For ",
+				var000D,
+				" filari I can sell thee a pair.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "stockings";
+		}
+		if (var000C == 0x000B) {
+			say("\"For ",
+				var000D,
+				" filari I can sell thee a great helm.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "great helms";
+		}
+		if (var000C == 0x000C) {
+			say("\"The crossbows father stocks are well-kept, ",
+				var0000,
+				", and will do thee good against the vile goblins. ",
+				var000D,
+				" filari is what father charges for one.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "crossbows";
+		}
+		if (var000C == 0x000D) {
+			say("\"Crossbow bolts sell for ",
+				var000D,
+				" filari for a bundle of twenty.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "crossbow bolts, in bundles of twenty,";
+		}
+		if (var000C == 0x000E) {
+			say("\"I am not certain if thou wishest to own a sextant, ",
+				var0000,
+				", seeing that there now is no sea travel. Father sells them for the low cost of ",
+				var000D,
+				" filari each.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "sextants";
+		}
+		if (var000C == 0x000F) {
+			if (UI_is_pc_female()) {
+				say("\"I suppose I can sell thee one, though I have no idea why thou wouldst want one. We sell hand mirrors at ",
 					var000D,
 					" filari each.\"");
-				say("\"",
-					var0010,
-					"\"");
-			}
-			if (var000C == 0x0004) {
-				say("\"I will sell one to thee for ",
-					var000D,
-					" filari.\"");
-				say("\"",
-					var0010,
-					"\"");
-			}
-			if (var000C == 0x0005) {
-				say("\"That will be ",
-					var000D,
-					" filari. ",
-					var0010,
-					"\"");
-				var0011 = "candles";
-			}
-			if (var000C == 0x0006) {
-				say("\"I can sell one to thee for ",
-					var000D,
-					" filari.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "torches";
-			}
-			if (var000C == 0x0007) {
-				say("\"I can sell this to thee for ",
-					var000D,
-					" filari.\"");
-				say("\"",
-					var0010,
-					"\"");
-			}
-			if (var000C == 0x0008) {
-				say("\"I can sell a pair of fine fur-lined boots to thee for ",
-					var000D,
-					" filari.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "pairs of fur-lined boots";
-			}
-			if (var000C == 0x0009) {
-				say("\"These backpacks are made by the women of Fawn, ",
-					var0000,
-					". For ",
-					var000D,
-					"\tfilari, one can be thine.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "backpacks";
-			}
-			if (var000C == 0x000A) {
-				say("\"I make these stockings, ",
-					var0000,
-					". Thou canst not find any finer! For ",
-					var000D,
-					" filari I can sell thee a pair.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "stockings";
-			}
-			if (var000C == 0x000B) {
-				say("\"For ",
-					var000D,
-					" filari I can sell thee a great helm.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "great helms";
-			}
-			if (var000C == 0x000C) {
-				say("\"The crossbows father stocks are well-kept, ",
-					var0000,
-					", and will do thee good against the vile goblins. ",
-					var000D,
-					" filari is what father charges for one.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "crossbows";
-			}
-			if (var000C == 0x000D) {
-				say("\"Crossbow bolts sell for ",
-					var000D,
-					" filari for a bundle of twenty.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "crossbow bolts, in bundles of twenty,";
-			}
-			if (var000C == 0x000E) {
-				say("\"I am not certain if thou wishest to own a sextant, ",
-					var0000,
-					", seeing that there now is no sea travel. Father sells them for the low cost of ",
-					var000D,
-					" filari each.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "sextants";
-			}
-			if (var000C == 0x000F) {
-				if (UI_is_pc_female()) {
-					say("\"I suppose I can sell thee one, though I have no idea why thou wouldst want one. We sell hand mirrors at ",
-						var000D,
-						" filari each.\"");
-				} else {
-					say("\"What dost thou need a hand mirror for? Surely, thou dost not believe in the virtue of @Beauty@? Well, 'tis not my place to say either way. We sell them for ",
-						var000D,
-						" filari each.\"");
-				}
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "hand mirror";
-			}
-			if (var000D == var000A[var000C]) {
-				if (Func0955()) {
-					var0012 = var000D;
-				} else {
-					var0012 = 0x0000;
-				}
 			} else {
-				var0012 = Func0804(var0009[var000C], var000A[var000C]);
+				say("\"What dost thou need a hand mirror for? Surely, thou dost not believe in the virtue of @Beauty@? Well, 'tis not my place to say either way. We sell them for ",
+					var000D,
+					" filari each.\"");
 			}
-			if (var0012 > 0x0000) {
-				if (var0008[var000C] == 0x0001) {
-					say("\"How many ",
-						var0011,
-						" wouldst thou like?\"");
-					var000E = Func0943(var0004[var000C], var0005[var000C], var0007[var000C], var0006, var0012, 0x0005, 0x0001, false);
-				} else {
-					var000E = Func0943(var0004[var000C], var0005[var000C], 0x0001, var0006, var0012, 0x0000, 0x0001, false);
-				}
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "hand mirror";
+		}
+		if (var000D == var000A[var000C]) {
+			if (Func0955()) {
+				var0012 = var000D;
+			} else {
+				var0012 = 0x0000;
 			}
-			if (var000E == 0x0001) {
-				say("\"I am sure that thou wilt enjoy thy purchase, ",
+		} else {
+			var0012 = Func0804(var0009[var000C], var000A[var000C]);
+		}
+		if (var0012 > 0x0000) {
+			if (var0008[var000C] == 0x0001) {
+				say("\"How many ",
+					var0011,
+					" wouldst thou like?\"");
+				var000E = Func0943(var0004[var000C], var0005[var000C], var0007[var000C], var0006, var0012, 0x0005, 0x0001, false);
+			} else {
+				var000E = Func0943(var0004[var000C], var0005[var000C], 0x0001, var0006, var0012, 0x0000, 0x0001, false);
+			}
+		}
+		if (var000E == 0x0001) {
+			say("\"I am sure that thou wilt enjoy thy purchase, ",
+				var0000,
+				".\"");
+		} else if (var000E == 0x0002) {
+			say("\"Thine hands are full, ",
+				var0000,
+				"!\"");
+		} else if (var000E == 0x0003) {
+			var0013 = Func0992(0x0001, (("@But " + var0000) + ", we haven't the coins to purchase this.@"), 0x0000, false);
+			if (var0013 != 0xFE9C) {
+				0xFFD2->show_npc_face0(0x0000);
+				say("\"It doth appear that thy purse is empty, ",
 					var0000,
 					".\"");
-			} else if (var000E == 0x0002) {
-				say("\"Thine hands are full, ",
-					var0000,
-					"!\"");
-			} else if (var000E == 0x0003) {
-				var0013 = Func0992(0x0001, (("@But " + var0000) + ", we haven't the coins to purchase this.@"), 0x0000, false);
-				if (var0013 != 0xFE9C) {
-					0xFFD2->show_npc_face0(0x0000);
-					say("\"It doth appear that thy purse is empty, ",
-						var0000,
-						".\"");
-				} else {
-					say("\"If thou canst not pay for our goods, please say so...\"");
-				}
-				if (0x001F < (0xFFD2->get_npc_id() + 0x0006)) {
-					0xFFD2->set_npc_id(0x001F);
-				} else {
-					0xFFD2->set_npc_id(0xFFD2->get_npc_id() + 0x0006);
-				}
+			} else {
+				say("\"If thou canst not pay for our goods, please say so...\"");
 			}
-			say("\"Perhaps another purchase, ",
-				var0000,
-				"?\"");
-			var0002 = Func0955();
+			if (0x001F < (0xFFD2->get_npc_id() + 0x0006)) {
+				0xFFD2->set_npc_id(0x001F);
+			} else {
+				0xFFD2->set_npc_id(0xFFD2->get_npc_id() + 0x0006);
+			}
 		}
+		say("\"Perhaps another purchase, ",
+			var0000,
+			"?\"");
+		var0002 = Func0955();
 	}
 	UI_pop_answers();
 }
@@ -82488,211 +82367,211 @@ var Func0804 0x804 (var var0000, var var0001) {
 		var000D = Func0956(["yes", "no", "haggle"]);
 		if (var000D == "no") {
 			return 0x0000;
+		}
+		if (var000D == "yes") {
+			var000E = 0x0000;
 		} else {
-			if (var000D == "yes") {
-				var000E = 0x0000;
+			var000F = Func0999(var0005, var0001, var000B, var0006, var000A, var0007, var0008);
+			var000A = (var000A + 0x0001);
+			var0008 = var000F[0x0004];
+			var000E = var000F[0x0003];
+			var0010 = var0005;
+			var0005 = var000F[0x0002];
+			var0006 = var000F[0x0001];
+		}
+		var0011 = UI_get_random(0x0003);
+		if (var000E < 0x0002) {
+			if (var0005 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var0011 == 0x0001) {
+					say("\"Thou art a shrewd bargainer, ",
+						var0002,
+						".\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"",
+						var0004,
+						", Father would blush if he learned I had sold our goods to thee at such a price...\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"Thou hast a quick tongue, ",
+						var0002,
+						", to bring me to this price.\"");
+				}
 			} else {
-				var000F = Func0999(var0005, var0001, var000B, var0006, var000A, var0007, var0008);
-				var000A = (var000A + 0x0001);
-				var0008 = var000F[0x0004];
-				var000E = var000F[0x0003];
-				var0010 = var0005;
-				var0005 = var000F[0x0002];
-				var0006 = var000F[0x0001];
-			}
-			var0011 = UI_get_random(0x0003);
-			if (var000E < 0x0002) {
-				if (var0005 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var0005 < (var0001 + ((var0000 - var0001) / 0x0003))) {
 					if (var0011 == 0x0001) {
-						say("\"Thou art a shrewd bargainer, ",
-							var0002,
-							".\"");
+						say("\"Our prices are fair here.\"");
 					}
 					if (var0011 == 0x0002) {
 						say("\"",
 							var0004,
-							", Father would blush if he learned I had sold our goods to thee at such a price...\"");
+							", Father would not believe I had sold goods at this price!\"");
 					}
 					if (var0011 == 0x0003) {
-						say("\"Thou hast a quick tongue, ",
-							var0002,
-							", to bring me to this price.\"");
+						say("\"Father must make some profit!\"");
 					}
 				} else {
-					if (var0005 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+					if (var0005 < (var0001 + ((var0000 - var0001) / 0x0002))) {
 						if (var0011 == 0x0001) {
-							say("\"Our prices are fair here.\"");
+							say("\"Thou couldst not obtain a better deal from Father, ",
+								var0002,
+								".\"");
+						}
+						if (var0011 == 0x0002) {
+							say("\"Father enjoys bargaining much more than I, ",
+								var0002,
+								".\"");
+						}
+						if (var0011 == 0x0003) {
+							say("\"I am sure Father would be pleased with this price.\"");
+						}
+					} else {
+						if (var0011 == 0x0001) {
+							say("\"This is a good price ",
+								var0002,
+								". I am sure Father will be pleased.\"");
 						}
 						if (var0011 == 0x0002) {
 							say("\"",
 								var0004,
-								", Father would not believe I had sold goods at this price!\"");
+								", I am sure Father will be happy with this price.\"");
 						}
 						if (var0011 == 0x0003) {
-							say("\"Father must make some profit!\"");
-						}
-					} else {
-						if (var0005 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-							if (var0011 == 0x0001) {
-								say("\"Thou couldst not obtain a better deal from Father, ",
-									var0002,
-									".\"");
-							}
-							if (var0011 == 0x0002) {
-								say("\"Father enjoys bargaining much more than I, ",
-									var0002,
-									".\"");
-							}
-							if (var0011 == 0x0003) {
-								say("\"I am sure Father would be pleased with this price.\"");
-							}
-						} else {
-							if (var0011 == 0x0001) {
-								say("\"This is a good price ",
-									var0002,
-									". I am sure Father will be pleased.\"");
-							}
-							if (var0011 == 0x0002) {
-								say("\"",
-									var0004,
-									", I am sure Father will be happy with this price.\"");
-							}
-							if (var0011 == 0x0003) {
-								say("\"Father must charge reasonably high prices or we will be made paupers!\"");
-							}
+							say("\"Father must charge reasonably high prices or we will be made paupers!\"");
 						}
 					}
 				}
-				say("\"Thou dost agree to a price of ",
+			}
+			say("\"Thou dost agree to a price of ",
+				var0005,
+				" filari, ",
+				var0002,
+				"?\"");
+			if (Func0955()) {
+				if (var000C > 0x0001) {
+					0xFFD2->set_npc_id(var000C - 0x0002);
+				}
+				return var0005;
+			}
+			if (var0011 == 0x0001) {
+				say("\"",
+					var0004,
+					", thou hast broken our agreement!\"");
+			}
+			if (var0011 == 0x0002) {
+				say("\"I am disappointed. What of our bargain?\"");
+			}
+			if (var0011 == 0x0003) {
+				say("\"Father will be most upset to learn of this...\"");
+			}
+			if (0x001F < (var000C + 0x000A)) {
+				0xFFD2->set_npc_id(0x001F);
+			} else {
+				0xFFD2->set_npc_id(var000C + 0x000A);
+			}
+			return 0x0000;
+		}
+		if (var0008 == 0x0001) {
+			if (var000E == 0x0005) {
+				say("\"",
 					var0005,
-					" filari, ",
-					var0002,
-					"?\"");
+					" is my final offer. Dost thou accept?\"");
+				if (var000C < 0x001C) {
+					0xFFD2->set_npc_id(var000C + 0x0004);
+				}
 				if (Func0955()) {
-					if (var000C > 0x0001) {
-						0xFFD2->set_npc_id(var000C - 0x0002);
-					}
 					return var0005;
-				} else if (var0011 == 0x0001) {
-					say("\"",
-						var0004,
-						", thou hast broken our agreement!\"");
+				}
+				var0009 = 0x0000;
+			} else {
+				say("\"So be it. ",
+					var0005,
+					" filari is my final offer.\"");
+				if (var000C < 0x001E) {
+					0xFFD2->set_npc_id(var000C + 0x0002);
+				}
+			}
+		} else {
+			if (var000E == 0x0002) {
+				if (var0011 == 0x0001) {
+					say("\"Father would be pleased to bargain with thee, ",
+						var0002,
+						". How doth ",
+						var0005,
+						" filari sound?\"");
 				}
 				if (var0011 == 0x0002) {
-					say("\"I am disappointed. What of our bargain?\"");
+					say("\"",
+						var0004,
+						", have we agreed on ",
+						var0005,
+						" filari?\"");
 				}
 				if (var0011 == 0x0003) {
-					say("\"Father will be most upset to learn of this...\"");
+					say("\"My price is ",
+						var0005,
+						" filari. Dost thou accept?\"");
 				}
-				if (0x001F < (var000C + 0x000A)) {
-					0xFFD2->set_npc_id(0x001F);
-				} else {
-					0xFFD2->set_npc_id(var000C + 0x000A);
-				}
-				return 0x0000;
 			}
-			if (var0008 == 0x0001) {
-				if (var000E == 0x0005) {
+			if (var000E == 0x0003) {
+				if (var0011 == 0x0001) {
+					say("\"Father would say that these are trying times, and goods are scarce... Wouldst thou consider ",
+						var0005,
+						" filari?\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"I am not sure... Wouldst thou consider ",
+						var0005,
+						" filari?\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"Father would not accept such a price! Wouldst thou consider ",
+						var0005,
+						" filari?\"");
+				}
+			}
+			if (var000E == 0x0004) {
+				if (var0011 == 0x0001) {
+					say("\"I cannot possibly accept less than ",
+						var0005,
+						" filari!\"");
+					say("\"What dost thou say to this?\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"Father's costs are soaring! I\tcan go no lower than ",
+						var0005,
+						" filari.\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"",
+						var0004,
+						", thou art sweet, but Father deserves no less than ",
+						var0005,
+						" filari.\"");
+				}
+			}
+			if (var000E == 0x0005) {
+				var0005 = var0010;
+				if (var0011 == 0x0001) {
+					say("\"Father would be stricken if he learned I had accepted such a pitiful offer! My previous price stands, at ",
+						var0005,
+						" filari.\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"I may be new to trading, ",
+						var0002,
+						", but this offer is shameful! ",
+						var0005,
+						" filari, and no less!\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"I am certain Father would not approve of such a deal.\"");
 					say("\"",
 						var0005,
-						" is my final offer. Dost thou accept?\"");
-					if (var000C < 0x001C) {
-						0xFFD2->set_npc_id(var000C + 0x0004);
-					}
-					if (Func0955()) {
-						return var0005;
-					}
-					var0009 = 0x0000;
-				} else {
-					say("\"So be it. ",
-						var0005,
-						" filari is my final offer.\"");
-					if (var000C < 0x001E) {
-						0xFFD2->set_npc_id(var000C + 0x0002);
-					}
+						" filari is where I stand.\"");
 				}
-			} else {
-				if (var000E == 0x0002) {
-					if (var0011 == 0x0001) {
-						say("\"Father would be pleased to bargain with thee, ",
-							var0002,
-							". How doth ",
-							var0005,
-							" filari sound?\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"",
-							var0004,
-							", have we agreed on ",
-							var0005,
-							" filari?\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"My price is ",
-							var0005,
-							" filari. Dost thou accept?\"");
-					}
-				}
-				if (var000E == 0x0003) {
-					if (var0011 == 0x0001) {
-						say("\"Father would say that these are trying times, and goods are scarce... Wouldst thou consider ",
-							var0005,
-							" filari?\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"I am not sure... Wouldst thou consider ",
-							var0005,
-							" filari?\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"Father would not accept such a price! Wouldst thou consider ",
-							var0005,
-							" filari?\"");
-					}
-				}
-				if (var000E == 0x0004) {
-					if (var0011 == 0x0001) {
-						say("\"I cannot possibly accept less than ",
-							var0005,
-							" filari!\"");
-						say("\"What dost thou say to this?\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"Father's costs are soaring! I\tcan go no lower than ",
-							var0005,
-							" filari.\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"",
-							var0004,
-							", thou art sweet, but Father deserves no less than ",
-							var0005,
-							" filari.\"");
-					}
-				}
-				if (var000E == 0x0005) {
-					var0005 = var0010;
-					if (var0011 == 0x0001) {
-						say("\"Father would be stricken if he learned I had accepted such a pitiful offer! My previous price stands, at ",
-							var0005,
-							" filari.\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"I may be new to trading, ",
-							var0002,
-							", but this offer is shameful! ",
-							var0005,
-							" filari, and no less!\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"I am certain Father would not approve of such a deal.\"");
-						say("\"",
-							var0005,
-							" filari is where I stand.\"");
-					}
-					if (var000C < 0x001F) {
-						0xFFD2->set_npc_id(var000C + 0x0001);
-					}
+				if (var000C < 0x001F) {
+					0xFFD2->set_npc_id(var000C + 0x0001);
 				}
 			}
 		}
@@ -82745,73 +82624,72 @@ void Func0805 0x805 () {
 			say("\"Perhaps another time, then.\"");
 			var0001 = false;
 			continue;
-		} else {
-			var000B = var0005[var000A];
-			var000C = 0x0000;
-			if (var000A == 0x0002) {
-				say("\"",
-					var000B,
-					" gold coins is the price. Dost thou accept?\"");
-				var000D = "haunches of ham";
-			}
-			if (var000A == 0x0003) {
-				say("\"That will be ",
-					var000B,
-					" gold coins. Dost thou find this acceptable?\"");
-				var000D = "joints of mutton";
-			}
-			if (var000A == 0x0004) {
-				say("\"We serve the best fish around! ",
-					var000B,
-					" gold coins is the price. Dost thou agree?\"");
-				var000D = "trout";
-			}
-			if (var000A == 0x0005) {
-				say("\"That will be ",
-					var000B,
-					" gold coins. Dost thou accept?\"");
-				var000D = "wedges of cheese";
-			}
-			if (var000A == 0x0006) {
-				say("\"Ah, Devra makes a fine pastry that will melt in thy mouth! For ",
-					var000B,
-					" gold coins I will sell thee one. Dost thou agree?\"");
-				var000D = "pastries";
-			}
-			if (var000B == var0006[var000A]) {
-				if (Func0955() == true) {
-					var000E = var000B;
-				} else {
-					var000E = 0x0000;
-				}
+		}
+		var000B = var0005[var000A];
+		var000C = 0x0000;
+		if (var000A == 0x0002) {
+			say("\"",
+				var000B,
+				" gold coins is the price. Dost thou accept?\"");
+			var000D = "haunches of ham";
+		}
+		if (var000A == 0x0003) {
+			say("\"That will be ",
+				var000B,
+				" gold coins. Dost thou find this acceptable?\"");
+			var000D = "joints of mutton";
+		}
+		if (var000A == 0x0004) {
+			say("\"We serve the best fish around! ",
+				var000B,
+				" gold coins is the price. Dost thou agree?\"");
+			var000D = "trout";
+		}
+		if (var000A == 0x0005) {
+			say("\"That will be ",
+				var000B,
+				" gold coins. Dost thou accept?\"");
+			var000D = "wedges of cheese";
+		}
+		if (var000A == 0x0006) {
+			say("\"Ah, Devra makes a fine pastry that will melt in thy mouth! For ",
+				var000B,
+				" gold coins I will sell thee one. Dost thou agree?\"");
+			var000D = "pastries";
+		}
+		if (var000B == var0006[var000A]) {
+			if (Func0955() == true) {
+				var000E = var000B;
 			} else {
-				var000E = Func0807(var0005[var000A], var0006[var000A]);
+				var000E = 0x0000;
 			}
-			if (var000E > 0x0000) {
-				if (var0009[var000A] == 0x0001) {
-					say("\"How many ",
-						var000D,
-						" wouldst thou like?\"");
-					var000C = Func0943(var0003[var000A], var0004[var000A], var0008[var000A], var0007, var000E, 0x0014, 0x0001, false);
-				} else {
-					var000C = Func0943(var0003[var000A], var0004[var000A], var0008[var000A], var0007, var000E, 0x0000, 0x0001, false);
-				}
+		} else {
+			var000E = Func0807(var0005[var000A], var0006[var000A]);
+		}
+		if (var000E > 0x0000) {
+			if (var0009[var000A] == 0x0001) {
+				say("\"How many ",
+					var000D,
+					" wouldst thou like?\"");
+				var000C = Func0943(var0003[var000A], var0004[var000A], var0008[var000A], var0007, var000E, 0x0014, 0x0001, false);
+			} else {
+				var000C = Func0943(var0003[var000A], var0004[var000A], var0008[var000A], var0007, var000E, 0x0000, 0x0001, false);
 			}
-			if (var000C == 0x0001) {
-				say("\"Enjoy thy meal, ",
-					var0000,
-					".\"");
-			} else if (var000C == 0x0002) {
-				say("\"Thou canst not carry so much, ",
-					var0000,
-					".\"");
-			} else if (var000C == 0x0003) {
-				var000F = Func0992(0x0001, (("@But " + var0000) + ", we have not the coins to pay for this.@"), 0x0000, false);
-				if (0x001F < (0xFFDA->get_npc_id() + 0x0006)) {
-					0xFFDA->set_npc_id(0x001F);
-				} else {
-					0xFFDA->set_npc_id(0xFFDA->get_npc_id() + 0x0006);
-				}
+		}
+		if (var000C == 0x0001) {
+			say("\"Enjoy thy meal, ",
+				var0000,
+				".\"");
+		} else if (var000C == 0x0002) {
+			say("\"Thou canst not carry so much, ",
+				var0000,
+				".\"");
+		} else if (var000C == 0x0003) {
+			var000F = Func0992(0x0001, (("@But " + var0000) + ", we have not the coins to pay for this.@"), 0x0000, false);
+			if (0x001F < (0xFFDA->get_npc_id() + 0x0006)) {
+				0xFFDA->set_npc_id(0x001F);
+			} else {
+				0xFFDA->set_npc_id(0xFFDA->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Wouldst thou care for more?\"");
@@ -82969,212 +82847,212 @@ var Func0807 0x807 (var var0000, var var0001) {
 		var000C = Func0956(["yes", "no", "haggle"]);
 		if (var000C == "no") {
 			return 0x0000;
+		}
+		if (var000C == "yes") {
+			var000D = 0x0000;
 		} else {
-			if (var000C == "yes") {
-				var000D = 0x0000;
-			} else {
-				var000E = Func0999(var0004, var0001, var000A, var0005, var0009, var0006, var0007);
-				var0009 = (var0009 + 0x0001);
-				var0007 = var000E[0x0004];
-				var000D = var000E[0x0003];
-				var000F = var0004;
-				var0004 = var000E[0x0002];
-				var0005 = var000E[0x0001];
-			}
-			var0010 = UI_get_random(0x0003);
-			if (var000D < 0x0002) {
-				if (var0004 < (var0001 + ((var0000 - var0001) / 0x0004))) {
-					if (var0010 == 0x0001) {
-						say("\"Do not tell Devra... She will think her son hath gone soft in the head for giving thee a price like this.\"");
-						if (Func0942(0xFFD7)) {
-							0xFFD7->show_npc_face1(0x0000);
-							say("\"Thou woolly-headed wolf! Thine head is fine. 'Tis thine heart that is soft...\"");
-							UI_remove_npc_face1();
-							0x0000->set_conversation_slot();
-						}
+			var000E = Func0999(var0004, var0001, var000A, var0005, var0009, var0006, var0007);
+			var0009 = (var0009 + 0x0001);
+			var0007 = var000E[0x0004];
+			var000D = var000E[0x0003];
+			var000F = var0004;
+			var0004 = var000E[0x0002];
+			var0005 = var000E[0x0001];
+		}
+		var0010 = UI_get_random(0x0003);
+		if (var000D < 0x0002) {
+			if (var0004 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var0010 == 0x0001) {
+					say("\"Do not tell Devra... She will think her son hath gone soft in the head for giving thee a price like this.\"");
+					if (Func0942(0xFFD7)) {
+						0xFFD7->show_npc_face1(0x0000);
+						say("\"Thou woolly-headed wolf! Thine head is fine. 'Tis thine heart that is soft...\"");
+						UI_remove_npc_face1();
+						0x0000->set_conversation_slot();
 					}
-					if (var0010 == 0x0002) {
-						say("\"Thou dost drive a hard bargain, ",
-							var0002,
-							"!\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"Thou hast a shrewd tongue, ",
-							var0002,
-							"! It hath been some time since I was beaten at this game!\"");
-					}
-				} else {
-					if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-						if (var0010 == 0x0001) {
-							say("\"Our prices are honest here at the Sleeping Bull!\"");
-						}
-						if (var0010 == 0x0002) {
-							say("\"Thou hast found me in a generous mood, ",
-								var0002,
-								"! 'Tis not every day I sell goods at these prices!\"");
-						}
-						if (var0010 == 0x0003) {
-							say("\"Thou art a shrewd bargainer, ",
-								var0002,
-								"!\"");
-						}
-					} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-						if (var0010 == 0x0001) {
-							say("\"Fair enough, if I do say so myself.\"");
-						}
-						if (var0010 == 0x0002) {
-							say("\"With customers such as thou, I shall never make a profit...\"");
-						}
-						if (var0010 == 0x0003) {
-							say("\"With these troubled times, I must charge higher prices...\"");
-						}
-					} else {
-						if (var0010 == 0x0001) {
-							say("\"'Tis a pleasure to bargain with thee, ",
-								var0002,
-								"!\"");
-						}
-						if (var0010 == 0x0002) {
-							say("\"Thou art most generous with thy money, ",
-								var0002,
-								"!\"");
-						}
-						if (var0010 == 0x0003) {
-							say("\"'Tis a shame I must charge high prices like this.\"");
-						}
-					}
-				}
-				say("\"Dost thou agree on a price of ",
-					var0004,
-					",\t",
-					var0002,
-					"?\"");
-				if (Func0955()) {
-					if (var000B > 0x0001) {
-						0xFFDA->set_npc_id(var000B - 0x0002);
-					}
-					return var0004;
-				} else if (var0010 == 0x0001) {
-					say("\"I thought we had an agreement!\"");
 				}
 				if (var0010 == 0x0002) {
-					say("\"I have no time for this!\"");
+					say("\"Thou dost drive a hard bargain, ",
+						var0002,
+						"!\"");
 				}
 				if (var0010 == 0x0003) {
-					say("\"Dost thou take me for a fool?\" ~\"I do not have all day to stand and argue!\"");
-				}
-				if (0x001F < (var000B + 0x000A)) {
-					0xFFDA->set_npc_id(0x001F);
-				} else {
-					0xFFDA->set_npc_id(var000B + 0x000A);
-				}
-				return 0x0000;
-			}
-			if (var0007 == 0x0001) {
-				if (var000D == 0x0005) {
-					say("\"",
-						var0004,
-						" is my final offer.\" ~\"Dost thou accept?\"");
-					if (var000B < 0x001C) {
-						0xFFDA->set_npc_id(var000B + 0x0004);
-					}
-					if (Func0955()) {
-						return var0004;
-					}
-					var0008 = 0x0000;
-				} else {
-					say("\"Very well. ",
-						var0004,
-						" is my final offer.\"");
-					if (var000B < 0x001E) {
-						0xFFDA->set_npc_id(var000B + 0x0002);
-					}
+					say("\"Thou hast a shrewd tongue, ",
+						var0002,
+						"! It hath been some time since I was beaten at this game!\"");
 				}
 			} else {
-				if (var000D == 0x0002) {
+				if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
 					if (var0010 == 0x0001) {
-						say("\"'Tis a good offer. How doth ",
-							var0004,
-							" sound?\"");
+						say("\"Our prices are honest here at the Sleeping Bull!\"");
 					}
 					if (var0010 == 0x0002) {
-						say("\"Thou art a shrewd bargainer, ",
+						say("\"Thou hast found me in a generous mood, ",
 							var0002,
-							". Have we agreed on ",
-							var0004,
-							" gold coins?\"");
+							"! 'Tis not every day I sell goods at these prices!\"");
 					}
 					if (var0010 == 0x0003) {
-						say("\"My price is ",
-							var0004,
-							". Dost thou accept?\"");
-					}
-				}
-				if (var000D == 0x0003) {
-					if (var0010 == 0x0001) {
-						say("\"These are perilous times and supplies are low. Wilt thou accept ",
-							var0004,
-							"?\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"I do not know...\" ~\"Wouldst thou consider ",
-							var0004,
-							"?\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"I am not certain... What sayest thou to ",
-							var0004,
-							"?\"");
-					}
-				}
-				if (var000D == 0x0004) {
-					if (var0010 == 0x0001) {
-						say("\"",
-							var0004,
-							" is as low as I can go. What sayest thou?\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"Surely thou canst see that I can accept no less than ",
-							var0004,
-							".\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"I deserve no less than ",
-							var0004,
-							" gold coins, ",
+						say("\"Thou art a shrewd bargainer, ",
 							var0002,
 							"!\"");
 					}
-				}
-				if (var000D == 0x0005) {
-					var0004 = var000F;
+				} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
 					if (var0010 == 0x0001) {
-						say("\"Mother, come and hear this! The customer jests with me!\"");
-						if (Func0942(0xFFD7)) {
-							Func094E(0xFFD7, (((("@" + var0002) + " we cannot possibly accept less than ") + var0004) + " gold coins.@"));
-							0xFFDA->show_npc_face0(0x0000);
-						} else {
-							say("\"",
-								var0004,
-								"  gold coins is as low as I can go.\"");
-						}
-						say("\"What dost thou say to this?\"");
+						say("\"Fair enough, if I do say so myself.\"");
 					}
 					if (var0010 == 0x0002) {
-						say("\"Thou art not bargaining with a fool, ",
-							var0002,
-							"! ",
-							var0004,
-							", and no less!\"");
+						say("\"With customers such as thou, I shall never make a profit...\"");
 					}
 					if (var0010 == 0x0003) {
-						say("\"If I accepted such a price as this, I could not call myself an innkeeper! ",
+						say("\"With these troubled times, I must charge higher prices...\"");
+					}
+				} else {
+					if (var0010 == 0x0001) {
+						say("\"'Tis a pleasure to bargain with thee, ",
+							var0002,
+							"!\"");
+					}
+					if (var0010 == 0x0002) {
+						say("\"Thou art most generous with thy money, ",
+							var0002,
+							"!\"");
+					}
+					if (var0010 == 0x0003) {
+						say("\"'Tis a shame I must charge high prices like this.\"");
+					}
+				}
+			}
+			say("\"Dost thou agree on a price of ",
+				var0004,
+				",\t",
+				var0002,
+				"?\"");
+			if (Func0955()) {
+				if (var000B > 0x0001) {
+					0xFFDA->set_npc_id(var000B - 0x0002);
+				}
+				return var0004;
+			}
+			if (var0010 == 0x0001) {
+				say("\"I thought we had an agreement!\"");
+			}
+			if (var0010 == 0x0002) {
+				say("\"I have no time for this!\"");
+			}
+			if (var0010 == 0x0003) {
+				say("\"Dost thou take me for a fool?\" ~\"I do not have all day to stand and argue!\"");
+			}
+			if (0x001F < (var000B + 0x000A)) {
+				0xFFDA->set_npc_id(0x001F);
+			} else {
+				0xFFDA->set_npc_id(var000B + 0x000A);
+			}
+			return 0x0000;
+		}
+		if (var0007 == 0x0001) {
+			if (var000D == 0x0005) {
+				say("\"",
+					var0004,
+					" is my final offer.\" ~\"Dost thou accept?\"");
+				if (var000B < 0x001C) {
+					0xFFDA->set_npc_id(var000B + 0x0004);
+				}
+				if (Func0955()) {
+					return var0004;
+				}
+				var0008 = 0x0000;
+			} else {
+				say("\"Very well. ",
+					var0004,
+					" is my final offer.\"");
+				if (var000B < 0x001E) {
+					0xFFDA->set_npc_id(var000B + 0x0002);
+				}
+			}
+		} else {
+			if (var000D == 0x0002) {
+				if (var0010 == 0x0001) {
+					say("\"'Tis a good offer. How doth ",
+						var0004,
+						" sound?\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"Thou art a shrewd bargainer, ",
+						var0002,
+						". Have we agreed on ",
+						var0004,
+						" gold coins?\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"My price is ",
+						var0004,
+						". Dost thou accept?\"");
+				}
+			}
+			if (var000D == 0x0003) {
+				if (var0010 == 0x0001) {
+					say("\"These are perilous times and supplies are low. Wilt thou accept ",
+						var0004,
+						"?\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"I do not know...\" ~\"Wouldst thou consider ",
+						var0004,
+						"?\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"I am not certain... What sayest thou to ",
+						var0004,
+						"?\"");
+				}
+			}
+			if (var000D == 0x0004) {
+				if (var0010 == 0x0001) {
+					say("\"",
+						var0004,
+						" is as low as I can go. What sayest thou?\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"Surely thou canst see that I can accept no less than ",
+						var0004,
+						".\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"I deserve no less than ",
+						var0004,
+						" gold coins, ",
+						var0002,
+						"!\"");
+				}
+			}
+			if (var000D == 0x0005) {
+				var0004 = var000F;
+				if (var0010 == 0x0001) {
+					say("\"Mother, come and hear this! The customer jests with me!\"");
+					if (Func0942(0xFFD7)) {
+						Func094E(0xFFD7, (((("@" + var0002) + " we cannot possibly accept less than ") + var0004) + " gold coins.@"));
+						0xFFDA->show_npc_face0(0x0000);
+					} else {
+						say("\"",
 							var0004,
-							" is where I stand!\"");
+							"  gold coins is as low as I can go.\"");
 					}
-					if (var000B < 0x001F) {
-						0xFFDA->set_npc_id(var000B + 0x0001);
-					}
+					say("\"What dost thou say to this?\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"Thou art not bargaining with a fool, ",
+						var0002,
+						"! ",
+						var0004,
+						", and no less!\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"If I accepted such a price as this, I could not call myself an innkeeper! ",
+						var0004,
+						" is where I stand!\"");
+				}
+				if (var000B < 0x001F) {
+					0xFFDA->set_npc_id(var000B + 0x0001);
 				}
 			}
 		}
@@ -83333,11 +83211,10 @@ void Func0808 0x808 (var var0000, var var0001) {
 					set_schedule_type(0x0001);
 					Func097F(item, "@Goodbye@", 0x0005);
 					abort;
-				} else {
-					set_schedule_type(0x0009);
-					Func097F(item, "@Move along...@", 0x000A);
-					abort;
 				}
+				set_schedule_type(0x0009);
+				Func097F(item, "@Move along...@", 0x000A);
+				abort;
 
 		}
 	}
@@ -84198,171 +84075,170 @@ void Func080C 0x80C () {
 			}
 			var0002 = false;
 			continue;
-		} else {
-			var000D = var0006[var000B];
-			var000E = 0x0000;
-			var000C = UI_die_roll(0x0001, 0x0005);
-			if (var000C == 0x0001) {
-				var000F = "Dost thou accept?";
-			}
-			if (var000C == 0x0002) {
-				var000F = "Will this be fine with thee?";
-			}
-			if (var000C == 0x0003) {
-				var000F = "Dost thou find the price agreeable?";
-			}
-			if (var000C == 0x0004) {
-				var000F = "Dost thou agree?";
-			}
-			if (var000C == 0x0005) {
-				var000F = "Is the price acceptable?";
-			}
-			if (var000B == 0x0002) {
-				say("\"The price for a bundle of 3 torches is ",
-					var000D,
-					" guilders.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "torches, in bundles of 3,";
-			}
-			if (var000B == 0x0003) {
-				say("\"These are imported from Fawn, where the womenfolk are skilled at making strong cloth.\"");
-				say("\"Each backpack costs ",
-					var000D,
-					" guilders, which I think is a fair price.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "backpacks";
-			}
-			if (var000B == 0x0004) {
-				say("\"For the low price of ",
-					var000D,
-					" guilders, I can sell thee a fine dagger.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "daggers";
-			}
-			if (var000B == 0x0005) {
-				say("\"Only ",
-					var000D,
-					" guilders will buy thee an excellent abacus. Thou canst use it to add thy coinage.\"");
-				say("\"",
-					var000F,
-					"\"");
-			}
-			if (var000B == 0x0006) {
-				say("\"If thou dost wish to navigate upon the seas, thou shalt surely need a sextant!\" *\"I will sell thee one for ",
-					var000D,
-					" guilders.\"");
-				say("\"",
-					var000F,
-					"\"");
-			}
-			if (var000B == 0x0007) {
-				say("\"To protect thy feet, a sturdy pair of Moonshadian leather boots would do thee well, ",
-					var0000,
-					". For only ",
-					var000D,
-					" guilders it is thine!\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "pairs of Moonshadian leather boots";
-			}
-			if (var000B == 0x0008) {
-				say("\"",
-					var000D,
-					" guilders is not much to pay if thou dost need to protect thy legs, ",
-					var0000,
-					".\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "pairs of leather leggings";
-			}
-			if (var000B == 0x0009) {
-				say("\"Ah, this is one item that we have stocked in plenty, ",
-					var0000,
-					"! I can sell thee a bedroll for ",
-					var000D,
-					" guilders.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "bedrolls";
-			}
-			if (var000B == 0x000A) {
-				say("\"This... powder... is most effective if thou dost suffer from sleepless nights, ",
-					var0000,
-					". I charge a small fee of ",
-					var000D,
-					" guilders for a jar.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "vials of sleeping powder";
-			}
-			if (var000B == 0x000B) {
-				say("\"If thou art in need of healing minor wounds I can offer thee clean bandages for ",
-					var000D,
-					" guilders apiece.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "bandages";
-			}
-			if (var000B == 0x000C) {
-				say("\"For the sum of ",
-					var000D,
-					" guilders I can sell thee a bear cloak. 'Twill keep thee warm on a frosty night.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "bear cloaks";
-			}
-			if (var000D == var0007[var000B]) {
-				if (Func0955()) {
-					var0011 = var000D;
-				} else {
-					var0011 = 0x0000;
-				}
+		}
+		var000D = var0006[var000B];
+		var000E = 0x0000;
+		var000C = UI_die_roll(0x0001, 0x0005);
+		if (var000C == 0x0001) {
+			var000F = "Dost thou accept?";
+		}
+		if (var000C == 0x0002) {
+			var000F = "Will this be fine with thee?";
+		}
+		if (var000C == 0x0003) {
+			var000F = "Dost thou find the price agreeable?";
+		}
+		if (var000C == 0x0004) {
+			var000F = "Dost thou agree?";
+		}
+		if (var000C == 0x0005) {
+			var000F = "Is the price acceptable?";
+		}
+		if (var000B == 0x0002) {
+			say("\"The price for a bundle of 3 torches is ",
+				var000D,
+				" guilders.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "torches, in bundles of 3,";
+		}
+		if (var000B == 0x0003) {
+			say("\"These are imported from Fawn, where the womenfolk are skilled at making strong cloth.\"");
+			say("\"Each backpack costs ",
+				var000D,
+				" guilders, which I think is a fair price.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "backpacks";
+		}
+		if (var000B == 0x0004) {
+			say("\"For the low price of ",
+				var000D,
+				" guilders, I can sell thee a fine dagger.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "daggers";
+		}
+		if (var000B == 0x0005) {
+			say("\"Only ",
+				var000D,
+				" guilders will buy thee an excellent abacus. Thou canst use it to add thy coinage.\"");
+			say("\"",
+				var000F,
+				"\"");
+		}
+		if (var000B == 0x0006) {
+			say("\"If thou dost wish to navigate upon the seas, thou shalt surely need a sextant!\" *\"I will sell thee one for ",
+				var000D,
+				" guilders.\"");
+			say("\"",
+				var000F,
+				"\"");
+		}
+		if (var000B == 0x0007) {
+			say("\"To protect thy feet, a sturdy pair of Moonshadian leather boots would do thee well, ",
+				var0000,
+				". For only ",
+				var000D,
+				" guilders it is thine!\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "pairs of Moonshadian leather boots";
+		}
+		if (var000B == 0x0008) {
+			say("\"",
+				var000D,
+				" guilders is not much to pay if thou dost need to protect thy legs, ",
+				var0000,
+				".\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "pairs of leather leggings";
+		}
+		if (var000B == 0x0009) {
+			say("\"Ah, this is one item that we have stocked in plenty, ",
+				var0000,
+				"! I can sell thee a bedroll for ",
+				var000D,
+				" guilders.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "bedrolls";
+		}
+		if (var000B == 0x000A) {
+			say("\"This... powder... is most effective if thou dost suffer from sleepless nights, ",
+				var0000,
+				". I charge a small fee of ",
+				var000D,
+				" guilders for a jar.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "vials of sleeping powder";
+		}
+		if (var000B == 0x000B) {
+			say("\"If thou art in need of healing minor wounds I can offer thee clean bandages for ",
+				var000D,
+				" guilders apiece.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "bandages";
+		}
+		if (var000B == 0x000C) {
+			say("\"For the sum of ",
+				var000D,
+				" guilders I can sell thee a bear cloak. 'Twill keep thee warm on a frosty night.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "bear cloaks";
+		}
+		if (var000D == var0007[var000B]) {
+			if (Func0955()) {
+				var0011 = var000D;
 			} else {
-				var0011 = Func080D(var0006[var000B], var0007[var000B]);
+				var0011 = 0x0000;
 			}
-			if (var0011 > 0x0000) {
-				if (var000A[var000B] == 0x0001) {
-					say("\"How many ",
-						var0010,
-						" wouldst thou like?\"");
-					var000E = Func0943(var0004[var000B], var0005[var000B], var0009[var000B], var0008, var0011, 0x000A, 0x0001, false);
-				} else {
-					var000E = Func0943(var0004[var000B], var0005[var000B], var0009[var000B], var0008, var0011, 0x0000, 0x0001, false);
-				}
+		} else {
+			var0011 = Func080D(var0006[var000B], var0007[var000B]);
+		}
+		if (var0011 > 0x0000) {
+			if (var000A[var000B] == 0x0001) {
+				say("\"How many ",
+					var0010,
+					" wouldst thou like?\"");
+				var000E = Func0943(var0004[var000B], var0005[var000B], var0009[var000B], var0008, var0011, 0x000A, 0x0001, false);
+			} else {
+				var000E = Func0943(var0004[var000B], var0005[var000B], var0009[var000B], var0008, var0011, 0x0000, 0x0001, false);
 			}
-			if (var000E == 0x0001) {
-				say("\"Please come again, ",
-					var0000,
-					"!\"");
-			} else if (var000E == 0x0002) {
-				say("\"Perhaps thou canst return with more companions, for thou hast not room to carry what thou desirest to purchase!\"");
-			} else if (var000E == 0x0003) {
-				var000C = Func0992(0x0001, "@But we are short of funds!@", 0x0000, false);
-				var000C = Func0992(0x0001, "@How embarrassing...@", 0x0000, false);
-				if (var000C != 0xFE9C) {
-					0xFFF3->show_npc_face0(0x0000);
-					say("\"I would let thee have the goods for free, as I am sure that thou art a trustworthy person.\"");
-					say("\"But the shop's owner is a stern man, and very strict.\"");
-				} else {
-					say("\"But thou dost not have the coins to pay for thy purchase! Next time, thou shouldst count thy coins first.\"");
-				}
-				if (0x001F < (0xFFF3->get_npc_id() + 0x0004)) {
-					0xFFF3->set_npc_id(0x001F);
-				} else {
-					0xFFF3->set_npc_id(0xFFF3->get_npc_id() + 0x0004);
-				}
+		}
+		if (var000E == 0x0001) {
+			say("\"Please come again, ",
+				var0000,
+				"!\"");
+		} else if (var000E == 0x0002) {
+			say("\"Perhaps thou canst return with more companions, for thou hast not room to carry what thou desirest to purchase!\"");
+		} else if (var000E == 0x0003) {
+			var000C = Func0992(0x0001, "@But we are short of funds!@", 0x0000, false);
+			var000C = Func0992(0x0001, "@How embarrassing...@", 0x0000, false);
+			if (var000C != 0xFE9C) {
+				0xFFF3->show_npc_face0(0x0000);
+				say("\"I would let thee have the goods for free, as I am sure that thou art a trustworthy person.\"");
+				say("\"But the shop's owner is a stern man, and very strict.\"");
+			} else {
+				say("\"But thou dost not have the coins to pay for thy purchase! Next time, thou shouldst count thy coins first.\"");
+			}
+			if (0x001F < (0xFFF3->get_npc_id() + 0x0004)) {
+				0xFFF3->set_npc_id(0x001F);
+			} else {
+				0xFFF3->set_npc_id(0xFFF3->get_npc_id() + 0x0004);
 			}
 		}
 		say("\"Dost thou wish to purchase anything else?\"");
@@ -84407,196 +84283,196 @@ var Func080D 0x80D (var var0000, var var0001) {
 		var000C = Func0956(["yes", "no", "haggle"]);
 		if (var000C == "no") {
 			return 0x0000;
+		}
+		if (var000C == "yes") {
+			var000D = 0x0000;
 		} else {
-			if (var000C == "yes") {
-				var000D = 0x0000;
-			} else {
-				var000E = Func0999(var0004, var0001, var000A, var0005, var0009, var0006, var0007);
-				var0009 = (var0009 + 0x0001);
-				var0007 = var000E[0x0004];
-				var000D = var000E[0x0003];
-				var000F = var0004;
-				var0004 = var000E[0x0002];
-				var0005 = var000E[0x0001];
-			}
-			var0010 = UI_get_random(0x0003);
-			if (var000D < 0x0002) {
-				if (var0004 < (var0001 + ((var0000 - var0001) / 0x0004))) {
-					if (var0010 == 0x0001) {
-						say("\"Thou hast better not visit this shop too often, or we shall lose all our money!\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"Thou hast bargained me to a bitter price, but then, I do not own this store!\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"Well, no one else in town is spending coins, so I must reluctantly accept thine offer.\"");
-					}
-				} else {
-					if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-						if (var0010 == 0x0001) {
-							say("\"Believe me, I am allowing thee a fantastic price. Please do not tell anyone!\"");
-						}
-						if (var0010 == 0x0002) {
-							say("\"Thou must be poor, if thou must bargain me down so low. Very well, I shall have pity on thee.\"");
-						}
-						if (var0010 == 0x0003) {
-							say("\"I think thou hast talked me into a price that is too low...\"");
-							say("\"But I do not care. Hast thou noticed how beautiful the sunsets have been lately?\"");
-						}
-					} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-						if (var0010 == 0x0001) {
-							say("\"'Tis a good price, and a great value.\"");
-						}
-						if (var0010 == 0x0002) {
-							say("\"So that will be ",
-								var0004,
-								" guilders -- and I will say again that it hath been nice chatting with thee today.\"");
-						}
-						if (var0010 == 0x0003) {
-							say("\"'Tis a fair deal -- only ",
-								var0004,
-								" guilders. Be certain to tell all thy friends!\"");
-						}
-					} else {
-						if (var0010 == 0x0001) {
-							say("\"",
-								var0004,
-								" guilders! Thank thee, ",
-								var0002,
-								".\"");
-						}
-						if (var0010 == 0x0002) {
-							say("\"That is wonderful! ",
-								var0004,
-								" whole guilders... why, the owner shall be so proud of me for this sale!\"");
-						}
-						if (var0010 == 0x0003) {
-							say("\"As I always say, one must pay high prices to obtain high quality.\"");
-						}
-					}
-				}
-				say("\"",
-					var0004,
-					" guilders is the agreed price, ",
-					var0002,
-					"?\"");
-				if (Func0955()) {
-					if (var000B > 0x0001) {
-						0xFFF3->set_npc_id(var000B - 0x0002);
-					}
-					return var0004;
-				} else if (var0010 == 0x0001) {
-					say("\"Thou shouldst not jest with me. Simply because I'm only a Mundane doth not mean that thou canst waste my time.\"");
+			var000E = Func0999(var0004, var0001, var000A, var0005, var0009, var0006, var0007);
+			var0009 = (var0009 + 0x0001);
+			var0007 = var000E[0x0004];
+			var000D = var000E[0x0003];
+			var000F = var0004;
+			var0004 = var000E[0x0002];
+			var0005 = var000E[0x0001];
+		}
+		var0010 = UI_get_random(0x0003);
+		if (var000D < 0x0002) {
+			if (var0004 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var0010 == 0x0001) {
+					say("\"Thou hast better not visit this shop too often, or we shall lose all our money!\"");
 				}
 				if (var0010 == 0x0002) {
-					say("\"But we had an agreement!\"");
+					say("\"Thou hast bargained me to a bitter price, but then, I do not own this store!\"");
 				}
 				if (var0010 == 0x0003) {
-					say("\"Canst thou not make up thy mind, ",
-						var0002,
-						"?\"");
-				}
-				if (0x001F < (var000B + 0x000A)) {
-					0xFFF3->set_npc_id(0x001F);
-				} else {
-					0xFFF3->set_npc_id(var000B + 0x000A);
-				}
-				return 0x0000;
-			}
-			if (var0007 == 0x0001) {
-				if (var000D == 0x0005) {
-					say("\"I have gone as low as I can, ",
-						var0002,
-						". ",
-						var0004,
-						" guilders. Dost thou accept?\"");
-					if (var000B < 0x001C) {
-						0xFFF3->set_npc_id(var000B + 0x0004);
-					}
-					if (Func0955()) {
-						return var0004;
-					}
-					var0008 = 0x0000;
-				} else {
-					say("\"",
-						var0004,
-						" guilders is my final offer. Is this acceptable to thee?\"");
-					if (var000B < 0x001E) {
-						0xFFF3->set_npc_id(var000B + 0x0002);
-					}
+					say("\"Well, no one else in town is spending coins, so I must reluctantly accept thine offer.\"");
 				}
 			} else {
-				if (var000D == 0x0002) {
+				if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
 					if (var0010 == 0x0001) {
-						say("\"I see that thou dost appreciate quality goods! Wouldst thou pay ",
-							var0004,
-							" guilders?\"");
+						say("\"Believe me, I am allowing thee a fantastic price. Please do not tell anyone!\"");
 					}
 					if (var0010 == 0x0002) {
-						say("\"Thou art a most perceptive person. But wouldst thou pay ",
-							var0004,
-							" guilders?\"");
+						say("\"Thou must be poor, if thou must bargain me down so low. Very well, I shall have pity on thee.\"");
 					}
 					if (var0010 == 0x0003) {
-						say("\"I can tell that we shall be doing business regularly. Thy price is fair, but I would prefer to receive ",
-							var0004,
-							" guilders. Is this acceptable?\"");
+						say("\"I think thou hast talked me into a price that is too low...\"");
+						say("\"But I do not care. Hast thou noticed how beautiful the sunsets have been lately?\"");
 					}
-				}
-				if (var000D == 0x0003) {
+				} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
 					if (var0010 == 0x0001) {
-						say("\"Hmmm... perhaps ",
-							var0004,
-							" guilders?\"");
+						say("\"'Tis a good price, and a great value.\"");
 					}
 					if (var0010 == 0x0002) {
-						say("\"I would be more easy if thou wouldst pay at least ",
+						say("\"So that will be ",
 							var0004,
-							" guilders.\"");
+							" guilders -- and I will say again that it hath been nice chatting with thee today.\"");
 					}
 					if (var0010 == 0x0003) {
-						say("\"Surely, thou hast more funds than this! I think that thou couldst afford ",
+						say("\"'Tis a fair deal -- only ",
 							var0004,
-							" guilders. Is this acceptable?\"");
+							" guilders. Be certain to tell all thy friends!\"");
 					}
-				}
-				if (var000D == 0x0004) {
+				} else {
 					if (var0010 == 0x0001) {
-						say("\"But I would lose mine employment if I sold at such a price! Wouldst thou consider ",
-							var0004,
-							" guilders?\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"Thou art not serious! Surely, thou canst tell that ",
-							var0004,
-							" guilders is a more fair price.\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"Dost thou think me a simpleton! I must accept no less than ",
-							var0004,
-							" guilders, or I should be ashamed of myself. Dost thou accept?\"");
-					}
-				}
-				if (var000D == 0x0005) {
-					var0004 = var000F;
-					if (var0010 == 0x0001) {
-						say("\"Of course not. ",
-							var0004,
-							" guilders.\"");
-					}
-					if (var0010 == 0x0002) {
 						say("\"",
 							var0004,
-							" guilders, and no less!\"");
+							" guilders! Thank thee, ",
+							var0002,
+							".\"");
+					}
+					if (var0010 == 0x0002) {
+						say("\"That is wonderful! ",
+							var0004,
+							" whole guilders... why, the owner shall be so proud of me for this sale!\"");
 					}
 					if (var0010 == 0x0003) {
-						say("\"I should be a fool if I sold at such a price. ",
-							var0004,
-							" guilders is where I must stand.\"");
+						say("\"As I always say, one must pay high prices to obtain high quality.\"");
 					}
-					if (var000B < 0x001F) {
-						0xFFF3->set_npc_id(var000B + 0x0001);
-					}
+				}
+			}
+			say("\"",
+				var0004,
+				" guilders is the agreed price, ",
+				var0002,
+				"?\"");
+			if (Func0955()) {
+				if (var000B > 0x0001) {
+					0xFFF3->set_npc_id(var000B - 0x0002);
+				}
+				return var0004;
+			}
+			if (var0010 == 0x0001) {
+				say("\"Thou shouldst not jest with me. Simply because I'm only a Mundane doth not mean that thou canst waste my time.\"");
+			}
+			if (var0010 == 0x0002) {
+				say("\"But we had an agreement!\"");
+			}
+			if (var0010 == 0x0003) {
+				say("\"Canst thou not make up thy mind, ",
+					var0002,
+					"?\"");
+			}
+			if (0x001F < (var000B + 0x000A)) {
+				0xFFF3->set_npc_id(0x001F);
+			} else {
+				0xFFF3->set_npc_id(var000B + 0x000A);
+			}
+			return 0x0000;
+		}
+		if (var0007 == 0x0001) {
+			if (var000D == 0x0005) {
+				say("\"I have gone as low as I can, ",
+					var0002,
+					". ",
+					var0004,
+					" guilders. Dost thou accept?\"");
+				if (var000B < 0x001C) {
+					0xFFF3->set_npc_id(var000B + 0x0004);
+				}
+				if (Func0955()) {
+					return var0004;
+				}
+				var0008 = 0x0000;
+			} else {
+				say("\"",
+					var0004,
+					" guilders is my final offer. Is this acceptable to thee?\"");
+				if (var000B < 0x001E) {
+					0xFFF3->set_npc_id(var000B + 0x0002);
+				}
+			}
+		} else {
+			if (var000D == 0x0002) {
+				if (var0010 == 0x0001) {
+					say("\"I see that thou dost appreciate quality goods! Wouldst thou pay ",
+						var0004,
+						" guilders?\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"Thou art a most perceptive person. But wouldst thou pay ",
+						var0004,
+						" guilders?\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"I can tell that we shall be doing business regularly. Thy price is fair, but I would prefer to receive ",
+						var0004,
+						" guilders. Is this acceptable?\"");
+				}
+			}
+			if (var000D == 0x0003) {
+				if (var0010 == 0x0001) {
+					say("\"Hmmm... perhaps ",
+						var0004,
+						" guilders?\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"I would be more easy if thou wouldst pay at least ",
+						var0004,
+						" guilders.\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"Surely, thou hast more funds than this! I think that thou couldst afford ",
+						var0004,
+						" guilders. Is this acceptable?\"");
+				}
+			}
+			if (var000D == 0x0004) {
+				if (var0010 == 0x0001) {
+					say("\"But I would lose mine employment if I sold at such a price! Wouldst thou consider ",
+						var0004,
+						" guilders?\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"Thou art not serious! Surely, thou canst tell that ",
+						var0004,
+						" guilders is a more fair price.\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"Dost thou think me a simpleton! I must accept no less than ",
+						var0004,
+						" guilders, or I should be ashamed of myself. Dost thou accept?\"");
+				}
+			}
+			if (var000D == 0x0005) {
+				var0004 = var000F;
+				if (var0010 == 0x0001) {
+					say("\"Of course not. ",
+						var0004,
+						" guilders.\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"",
+						var0004,
+						" guilders, and no less!\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"I should be a fool if I sold at such a price. ",
+						var0004,
+						" guilders is where I must stand.\"");
+				}
+				if (var000B < 0x001F) {
+					0xFFF3->set_npc_id(var000B + 0x0001);
 				}
 			}
 		}
@@ -84856,151 +84732,150 @@ void Func0811 0x811 () {
 			say("\"Some other time then.\"");
 			var0002 = false;
 			continue;
-		} else {
-			var000E = var0006[var000D];
-			var000F = 0x0000;
-			var0010 = UI_die_roll(0x0001, 0x0005);
-			if (var0010 == 0x0001) {
-				var0011 = "Dost thou accept?";
-			}
-			if (var0010 == 0x0002) {
-				var0011 = "Will this be fine with thee?";
-			}
-			if (var0010 == 0x0003) {
-				var0011 = "What dost thou say?";
-			}
-			if (var0010 == 0x0004) {
-				var0011 = (var000C + ", dost thou agree?");
-			}
-			if (var0010 == 0x0005) {
-				var0011 = (var000C + ", is the price acceptable?");
-			}
-			if (var000D == 0x0002) {
-				say("\"I can let thee have it for ",
-					var000E,
-					" monetari. It will keep thy toes warm on a frosty night, ",
-					var0000,
-					".\"");
-				say("\"",
-					var0011,
-					"\"");
-			}
-			if (var000D == 0x0003) {
-				say("\"",
-					var000E,
-					" monetari for a nice beaver rug is not much.\"");
-				say("\"",
-					var0011,
-					"\"");
-			}
-			if (var000D == 0x0004) {
-				say("\"My muskrat pelts are cheap if thou dost care about saving thy money. ",
-					var000E,
-					" monetari is what I charge.\"");
-				say("\"",
-					var0011,
-					"\"");
-			}
-			if (var000D == 0x0005) {
-				say("\"Ah, the ",
-					var000B,
-					" enjoy a good romp on snow leopard skin! ",
-					var000E,
-					" monetari is my price.\"");
-				say("\"",
-					var0011,
-					"\"");
-			}
-			if (var000D == 0x0006) {
-				say("\"There is something very exotic about Gwani pelts, ",
-					var0000,
-					". For ",
-					var000E,
-					" monetari I will sell thee one.\"");
-				say("\"",
-					var0011,
-					"\"");
-			}
-			if (var000D == 0x0007) {
-				say("\"If thou dost want something to keep thee warm on cold winter days, thou shouldst buy one of my bear cloaks. I can sell it to thee for ",
-					var000E,
-					" monetari.\"");
-				say("\"",
-					var0011,
-					"\"");
-			}
-			if (var000D == 0x0008) {
-				say("\"There is nothing finer than the feel of snow leopard skin upon thine own! For ",
-					var000E,
-					" monetari it is thine.\"");
-				say("\"",
-					var0011,
-					"\"");
-			}
-			if (var000D == 0x0009) {
-				say("\"A Gwani cloak will protect thee from the cold better than any other type of fur! For ",
-					var000E,
-					" monetari I can sell thee one.\"");
-				say("\"",
-					var0011,
-					"\"");
-			}
-			if (var000D == 0x000A) {
-				say("\"I will sell thee a nice warm fur cap for ",
-					var000E,
-					" monetari.\"");
-				say("\"",
-					var0011,
-					"\"");
-			}
-			if (var000D == 0x000B) {
-				say("\"For ",
-					var000E,
-					" monetari, thou canst purchase fur-lined boots, ",
-					var0000,
-					". A pair will keep thee warm even in the frozen north.\"");
-				say("\"",
-					var0011,
-					"\"");
-			}
-			if (var000E == var0007[var000D]) {
-				if (Func0955()) {
-					var0012 = var000E;
-				} else {
-					var0012 = 0x0000;
-				}
+		}
+		var000E = var0006[var000D];
+		var000F = 0x0000;
+		var0010 = UI_die_roll(0x0001, 0x0005);
+		if (var0010 == 0x0001) {
+			var0011 = "Dost thou accept?";
+		}
+		if (var0010 == 0x0002) {
+			var0011 = "Will this be fine with thee?";
+		}
+		if (var0010 == 0x0003) {
+			var0011 = "What dost thou say?";
+		}
+		if (var0010 == 0x0004) {
+			var0011 = (var000C + ", dost thou agree?");
+		}
+		if (var0010 == 0x0005) {
+			var0011 = (var000C + ", is the price acceptable?");
+		}
+		if (var000D == 0x0002) {
+			say("\"I can let thee have it for ",
+				var000E,
+				" monetari. It will keep thy toes warm on a frosty night, ",
+				var0000,
+				".\"");
+			say("\"",
+				var0011,
+				"\"");
+		}
+		if (var000D == 0x0003) {
+			say("\"",
+				var000E,
+				" monetari for a nice beaver rug is not much.\"");
+			say("\"",
+				var0011,
+				"\"");
+		}
+		if (var000D == 0x0004) {
+			say("\"My muskrat pelts are cheap if thou dost care about saving thy money. ",
+				var000E,
+				" monetari is what I charge.\"");
+			say("\"",
+				var0011,
+				"\"");
+		}
+		if (var000D == 0x0005) {
+			say("\"Ah, the ",
+				var000B,
+				" enjoy a good romp on snow leopard skin! ",
+				var000E,
+				" monetari is my price.\"");
+			say("\"",
+				var0011,
+				"\"");
+		}
+		if (var000D == 0x0006) {
+			say("\"There is something very exotic about Gwani pelts, ",
+				var0000,
+				". For ",
+				var000E,
+				" monetari I will sell thee one.\"");
+			say("\"",
+				var0011,
+				"\"");
+		}
+		if (var000D == 0x0007) {
+			say("\"If thou dost want something to keep thee warm on cold winter days, thou shouldst buy one of my bear cloaks. I can sell it to thee for ",
+				var000E,
+				" monetari.\"");
+			say("\"",
+				var0011,
+				"\"");
+		}
+		if (var000D == 0x0008) {
+			say("\"There is nothing finer than the feel of snow leopard skin upon thine own! For ",
+				var000E,
+				" monetari it is thine.\"");
+			say("\"",
+				var0011,
+				"\"");
+		}
+		if (var000D == 0x0009) {
+			say("\"A Gwani cloak will protect thee from the cold better than any other type of fur! For ",
+				var000E,
+				" monetari I can sell thee one.\"");
+			say("\"",
+				var0011,
+				"\"");
+		}
+		if (var000D == 0x000A) {
+			say("\"I will sell thee a nice warm fur cap for ",
+				var000E,
+				" monetari.\"");
+			say("\"",
+				var0011,
+				"\"");
+		}
+		if (var000D == 0x000B) {
+			say("\"For ",
+				var000E,
+				" monetari, thou canst purchase fur-lined boots, ",
+				var0000,
+				". A pair will keep thee warm even in the frozen north.\"");
+			say("\"",
+				var0011,
+				"\"");
+		}
+		if (var000E == var0007[var000D]) {
+			if (Func0955()) {
+				var0012 = var000E;
 			} else {
-				var0012 = Func0812(var0006[var000D], var0007[var000D]);
+				var0012 = 0x0000;
 			}
-			if (var0012 > 0x0000) {
-				if (var000A[var000D] == 0x0001) {
-					say("\"How many wouldst thou like?\"");
-					var000F = Func0943(var0004[var000D], var0005[var000D], 0x0001, var0008, var0012, 0x0005, 0x0001, false);
-				} else {
-					var000F = Func0943(var0004[var000D], var0005[var000D], var0009[var000D], var0008, var0012, 0x0000, 0x0001, false);
-				}
+		} else {
+			var0012 = Func0812(var0006[var000D], var0007[var000D]);
+		}
+		if (var0012 > 0x0000) {
+			if (var000A[var000D] == 0x0001) {
+				say("\"How many wouldst thou like?\"");
+				var000F = Func0943(var0004[var000D], var0005[var000D], 0x0001, var0008, var0012, 0x0005, 0x0001, false);
+			} else {
+				var000F = Func0943(var0004[var000D], var0005[var000D], var0009[var000D], var0008, var0012, 0x0000, 0x0001, false);
 			}
-			if (var000F == 0x0001) {
-				say("\"Enjoy thy purchase, ",
-					var0000,
-					"!\"");
-			} else if (var000F == 0x0002) {
-				say("\"Thou canst not carry thy purchase, ",
-					var0000,
-					"!\"");
-			} else if (var000F == 0x0003) {
-				var0013 = Func0992(0x0001, (("@But " + var0001) + ", we lack adequate funds!@"), 0x0000, false);
-				if (var0013 != 0xFE9C) {
-					0xFFBF->show_npc_face0(0x0000);
-					say("\"I am sorry, but I must make a living.\"");
-				} else {
-					say("\"Thou dost not have the monetari to pay me.\"");
-				}
-				if (0x001F < (0xFFBF->get_npc_id() + 0x0006)) {
-					0xFFBF->set_npc_id(0x001F);
-				} else {
-					0xFFBF->set_npc_id(0xFFBF->get_npc_id() + 0x0006);
-				}
+		}
+		if (var000F == 0x0001) {
+			say("\"Enjoy thy purchase, ",
+				var0000,
+				"!\"");
+		} else if (var000F == 0x0002) {
+			say("\"Thou canst not carry thy purchase, ",
+				var0000,
+				"!\"");
+		} else if (var000F == 0x0003) {
+			var0013 = Func0992(0x0001, (("@But " + var0001) + ", we lack adequate funds!@"), 0x0000, false);
+			if (var0013 != 0xFE9C) {
+				0xFFBF->show_npc_face0(0x0000);
+				say("\"I am sorry, but I must make a living.\"");
+			} else {
+				say("\"Thou dost not have the monetari to pay me.\"");
+			}
+			if (0x001F < (0xFFBF->get_npc_id() + 0x0006)) {
+				0xFFBF->set_npc_id(0x001F);
+			} else {
+				0xFFBF->set_npc_id(0xFFBF->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Wouldst thou care for more?\"");
@@ -85051,212 +84926,212 @@ var Func0812 0x812 (var var0000, var var0001) {
 		var000D = Func0956(["yes", "no", "haggle"]);
 		if (var000D == "no") {
 			return 0x0000;
+		}
+		if (var000D == "yes") {
+			var000E = 0x0000;
 		} else {
-			if (var000D == "yes") {
-				var000E = 0x0000;
-			} else {
-				var000F = Func0999(var0005, var0001, var000B, var0006, var000A, var0007, var0008);
-				var000A = (var000A + 0x0001);
-				var0008 = var000F[0x0004];
-				var000E = var000F[0x0003];
-				var0010 = var0005;
-				var0005 = var000F[0x0002];
-				var0006 = var000F[0x0001];
-			}
-			var0011 = UI_get_random(0x0003);
-			if (var000E < 0x0002) {
-				if (var0005 < (var0001 + ((var0000 - var0001) / 0x0004))) {
-					if (var0011 == 0x0001) {
-						say("\"Thou dost not know what a good bargain thou hast made, ",
-							var0002,
-							".\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"",
-							var0004,
-							", I have not lost money on a deal since I was a young girl.\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"Thou art shrewd indeed, ",
-							var0002,
-							".\"");
-					}
-				} else {
-					if (var0005 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-						if (var0011 == 0x0001) {
-							say("\"I must be taken with thee, ",
-								var0002,
-								"! To offer such a price...\"");
-						}
-						if (var0011 == 0x0002) {
-							say("\"",
-								var0004,
-								", thou wilt put me out of business if thou dost stay much longer!\"");
-						}
-						if (var0011 == 0x0003) {
-							say("\"I have met my match in thee, ",
-								var0002,
-								"!\"");
-						}
-					} else if (var0005 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-						if (var0011 == 0x0001) {
-							say("\"No one else is willing to put such care into their work as I do, ",
-								var0002,
-								".\"");
-						}
-						if (var0011 == 0x0002) {
-							say("\"Thou art a worthy opponent, ",
-								var0002,
-								".\"");
-						}
-						if (var0011 == 0x0003) {
-							say("\"Remember me, if thou dost ever need any more furs!\"");
-						}
-					} else {
-						if (var0011 == 0x0001) {
-							say("\"Thou art always welcome in my shop, ",
-								var0002,
-								"!\"");
-						}
-						if (var0011 == 0x0002) {
-							say("\"May it give thee great pleasure, ",
-								var0002,
-								"!\"");
-						}
-						if (var0011 == 0x0003) {
-							say("\"'Tis hard to offer lower prices these days. The Goblins have hurt everyone's business.\"");
-						}
-					}
-				}
-				say("\"Thou hast agreed to a price of ",
-					var0005,
-					" monetari, ",
-					var0002,
-					"?\"");
-				if (Func0955()) {
-					if (var000C > 0x0001) {
-						0xFFBF->set_npc_id(var000C - 0x0002);
-					}
-					return var0005;
-				} else if (var0011 == 0x0001) {
-					say("\"Take care that thou dost not seek to play me for the fool!\"");
-				}
-				if (var0011 == 0x0002) {
-					say("\"What of our bargain? Thou art rash, ",
+			var000F = Func0999(var0005, var0001, var000B, var0006, var000A, var0007, var0008);
+			var000A = (var000A + 0x0001);
+			var0008 = var000F[0x0004];
+			var000E = var000F[0x0003];
+			var0010 = var0005;
+			var0005 = var000F[0x0002];
+			var0006 = var000F[0x0001];
+		}
+		var0011 = UI_get_random(0x0003);
+		if (var000E < 0x0002) {
+			if (var0005 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var0011 == 0x0001) {
+					say("\"Thou dost not know what a good bargain thou hast made, ",
 						var0002,
 						".\"");
 				}
-				if (var0011 == 0x0003) {
-					say("\"I will not deal with dishonorable people! Be gone!\"");
-					abort;
-				}
-				if (0x001F < (var000C + 0x000A)) {
-					0xFFBF->set_npc_id(0x001F);
-				} else {
-					0xFFBF->set_npc_id(var000C + 0x000A);
-				}
-				return 0x0000;
-			}
-			if (var0008 == 0x0001) {
-				if (var000E == 0x0005) {
-					say("\"I said that ",
-						var0005,
-						" was my final offer. Dost thou accept?\"");
-					if (var000C < 0x001C) {
-						0xFFBF->set_npc_id(var000C + 0x0004);
-					}
-					if (Func0955()) {
-						return var0005;
-					}
-					var0009 = 0x0000;
-				} else {
+				if (var0011 == 0x0002) {
 					say("\"",
-						var0005,
-						" monetari is my final offer.\"");
-					if (var000C < 0x001E) {
-						0xFFBF->set_npc_id(var000C + 0x0002);
-					}
+						var0004,
+						", I have not lost money on a deal since I was a young girl.\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"Thou art shrewd indeed, ",
+						var0002,
+						".\"");
 				}
 			} else {
-				if (var000E == 0x0002) {
+				if (var0005 < (var0001 + ((var0000 - var0001) / 0x0003))) {
 					if (var0011 == 0x0001) {
-						say("\"Thou knowest fine wares when thou dost see them, ",
+						say("\"I must be taken with thee, ",
 							var0002,
-							". How does ",
-							var0005,
-							" monetari sound?\"");
+							"! To offer such a price...\"");
 					}
 					if (var0011 == 0x0002) {
 						say("\"",
 							var0004,
-							", for a person of thy fine taste I will offer a special price. How does ",
-							var0005,
-							" monetari sound to thee?\"");
+							", thou wilt put me out of business if thou dost stay much longer!\"");
 					}
 					if (var0011 == 0x0003) {
-						say("\"My price is ",
-							var0005,
-							" monetari, ",
+						say("\"I have met my match in thee, ",
 							var0002,
-							". Dost thou accept?\"");
+							"!\"");
 					}
-				}
-				if (var000E == 0x0003) {
+				} else if (var0005 < (var0001 + ((var0000 - var0001) / 0x0002))) {
 					if (var0011 == 0x0001) {
-						say("\"I must think about my business. Wouldst thou consider ",
-							var0005,
-							" monetari?\"");
+						say("\"No one else is willing to put such care into their work as I do, ",
+							var0002,
+							".\"");
 					}
 					if (var0011 == 0x0002) {
-						say("\"I don't know... ",
-							var0005,
-							" monetari?\"");
+						say("\"Thou art a worthy opponent, ",
+							var0002,
+							".\"");
 					}
 					if (var0011 == 0x0003) {
-						say("\"Perhaps ",
-							var0005,
-							" monetari? Such furs are rare...\"");
+						say("\"Remember me, if thou dost ever need any more furs!\"");
 					}
-				}
-				if (var000E == 0x0004) {
+				} else {
 					if (var0011 == 0x0001) {
-						say("\"",
-							var0005,
-							" monetari is as low as I can go.\"");
-						say("\"What dost thou say to this?\"");
+						say("\"Thou art always welcome in my shop, ",
+							var0002,
+							"!\"");
 					}
 					if (var0011 == 0x0002) {
-						say("\"I still cannot accept less than ",
-							var0005,
-							" monetari. I must pay for my shop...\"");
+						say("\"May it give thee great pleasure, ",
+							var0002,
+							"!\"");
 					}
 					if (var0011 == 0x0003) {
-						say("\"I can accept no less than ",
-							var0005,
-							" monetari... No matter how well I like thee.\"");
+						say("\"'Tis hard to offer lower prices these days. The Goblins have hurt everyone's business.\"");
 					}
 				}
-				if (var000E == 0x0005) {
-					var0005 = var0010;
-					if (var0011 == 0x0001) {
-						say("\"My previous price stands, at ",
-							var0005,
-							" monetari. I would be a fool to take less.\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"Better I should simply throw the furs into the street! ",
-							var0005,
-							" monetari, and no less!\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"What dost thou take me for, a bear?! I am not that witless!\"");
-						say("\"",
-							var0005,
-							" monetari is as low as I will go!\"");
-					}
-					if (var000C < 0x001F) {
-						0xFFBF->set_npc_id(var000C + 0x0001);
-					}
+			}
+			say("\"Thou hast agreed to a price of ",
+				var0005,
+				" monetari, ",
+				var0002,
+				"?\"");
+			if (Func0955()) {
+				if (var000C > 0x0001) {
+					0xFFBF->set_npc_id(var000C - 0x0002);
+				}
+				return var0005;
+			}
+			if (var0011 == 0x0001) {
+				say("\"Take care that thou dost not seek to play me for the fool!\"");
+			}
+			if (var0011 == 0x0002) {
+				say("\"What of our bargain? Thou art rash, ",
+					var0002,
+					".\"");
+			}
+			if (var0011 == 0x0003) {
+				say("\"I will not deal with dishonorable people! Be gone!\"");
+				abort;
+			}
+			if (0x001F < (var000C + 0x000A)) {
+				0xFFBF->set_npc_id(0x001F);
+			} else {
+				0xFFBF->set_npc_id(var000C + 0x000A);
+			}
+			return 0x0000;
+		}
+		if (var0008 == 0x0001) {
+			if (var000E == 0x0005) {
+				say("\"I said that ",
+					var0005,
+					" was my final offer. Dost thou accept?\"");
+				if (var000C < 0x001C) {
+					0xFFBF->set_npc_id(var000C + 0x0004);
+				}
+				if (Func0955()) {
+					return var0005;
+				}
+				var0009 = 0x0000;
+			} else {
+				say("\"",
+					var0005,
+					" monetari is my final offer.\"");
+				if (var000C < 0x001E) {
+					0xFFBF->set_npc_id(var000C + 0x0002);
+				}
+			}
+		} else {
+			if (var000E == 0x0002) {
+				if (var0011 == 0x0001) {
+					say("\"Thou knowest fine wares when thou dost see them, ",
+						var0002,
+						". How does ",
+						var0005,
+						" monetari sound?\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"",
+						var0004,
+						", for a person of thy fine taste I will offer a special price. How does ",
+						var0005,
+						" monetari sound to thee?\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"My price is ",
+						var0005,
+						" monetari, ",
+						var0002,
+						". Dost thou accept?\"");
+				}
+			}
+			if (var000E == 0x0003) {
+				if (var0011 == 0x0001) {
+					say("\"I must think about my business. Wouldst thou consider ",
+						var0005,
+						" monetari?\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"I don't know... ",
+						var0005,
+						" monetari?\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"Perhaps ",
+						var0005,
+						" monetari? Such furs are rare...\"");
+				}
+			}
+			if (var000E == 0x0004) {
+				if (var0011 == 0x0001) {
+					say("\"",
+						var0005,
+						" monetari is as low as I can go.\"");
+					say("\"What dost thou say to this?\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"I still cannot accept less than ",
+						var0005,
+						" monetari. I must pay for my shop...\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"I can accept no less than ",
+						var0005,
+						" monetari... No matter how well I like thee.\"");
+				}
+			}
+			if (var000E == 0x0005) {
+				var0005 = var0010;
+				if (var0011 == 0x0001) {
+					say("\"My previous price stands, at ",
+						var0005,
+						" monetari. I would be a fool to take less.\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"Better I should simply throw the furs into the street! ",
+						var0005,
+						" monetari, and no less!\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"What dost thou take me for, a bear?! I am not that witless!\"");
+					say("\"",
+						var0005,
+						" monetari is as low as I will go!\"");
+				}
+				if (var000C < 0x001F) {
+					0xFFBF->set_npc_id(var000C + 0x0001);
 				}
 			}
 		}
@@ -85439,7 +85314,8 @@ void Func0816 0x816 () {
 		var0004 = (var0004 - 0x0001);
 		if (var0004 == 0x0000) {
 			break;
-		} else if (var0004 == 0x0001) {
+		}
+		if (var0004 == 0x0001) {
 			var0005 = ["nothing", "Great Ignite", "Locate"];
 			var0006 = [0x0000, 0x0004, 0x0006];
 			var0007 = [0x0000, 0x001E, 0x0023];
@@ -85565,179 +85441,179 @@ var Func0817 0x817 (var var0000, var var0001) {
 		var000A = Func0956(["yes", "no", "haggle"]);
 		if (var000A == "no") {
 			return 0x0000;
+		}
+		if (var000A == "yes") {
+			var000B = 0x0000;
 		} else {
-			if (var000A == "yes") {
-				var000B = 0x0000;
-			} else {
-				var000C = Func0999(var0002, var0001, var0008, var0003, var0007, var0004, var0005);
-				var0007 = (var0007 + 0x0001);
-				var0005 = var000C[0x0004];
-				var000B = var000C[0x0003];
-				var000D = var0002;
-				var0002 = var000C[0x0002];
-				var0003 = var000C[0x0001];
-			}
-			var000E = UI_get_random(0x0003);
-			if (var000B < 0x0002) {
-				if (var0002 < (var0001 + ((var0000 - var0001) / 0x0004))) {
-					if (var000E == 0x0001) {
-						say("\"Thou art a shrewd and crafty bargainer, to convince me to accept this price...\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"Art thou certain thou hast not cast a dweomer upon me? I usually do not lower my prices so.\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"'Tis truly amazing... thou hast a facile tongue to convince me to lower my price by so much.\"");
-					}
-				} else {
-					if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-						if (var000E == 0x0001) {
-							say("\"'Tis lower than I expected... but I shall agree to this price.\"");
-						}
-						if (var000E == 0x0002) {
-							say("\"Thou art very good at bargaining. I will accept this price.\"");
-						}
-						if (var000E == 0x0003) {
-							say("\"I see.\" *\"Very well, I will agree to this price even though 'tis lower than I did expect.\"");
-						}
-					} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-						if (var000E == 0x0001) {
-							say("\"Hmm...\" ~\"I suppose one must accept such a price -- though it could have been higher.\"");
-						}
-						if (var000E == 0x0002) {
-							say("\"'Tis not such an indecent offer.\" ~\"I accept.\"");
-						}
-						if (var000E == 0x0003) {
-							say("\"I will accept\tthis price.\" ~\"I can always use the extra funds for research.\"");
-						}
-					} else {
-						if (var000E == 0x0001) {
-							say("\"Very well.\" *\"I accept thine offer!\"");
-						}
-						if (var000E == 0x0002) {
-							say("\"It hath been a pleasure!\" *\"I will accept thine offer.\"");
-						}
-						if (var000E == 0x0003) {
-							say("\"Yes...\"*\"'Tis a very good price.\"");
-						}
-					}
-				}
-				say("\"So, have we agreed on the price of ",
-					var0002,
-					"?\"");
-				if (Func0955() == true) {
-					if (var0009 > 0x0001) {
-						0xFFF2->set_npc_id(var0009 - 0x0002);
-					}
-					return var0002;
-				} else if (var000E == 0x0001) {
-					say("\"Pray, resolve thy mind!\"");
+			var000C = Func0999(var0002, var0001, var0008, var0003, var0007, var0004, var0005);
+			var0007 = (var0007 + 0x0001);
+			var0005 = var000C[0x0004];
+			var000B = var000C[0x0003];
+			var000D = var0002;
+			var0002 = var000C[0x0002];
+			var0003 = var000C[0x0001];
+		}
+		var000E = UI_get_random(0x0003);
+		if (var000B < 0x0002) {
+			if (var0002 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var000E == 0x0001) {
+					say("\"Thou art a shrewd and crafty bargainer, to convince me to accept this price...\"");
 				}
 				if (var000E == 0x0002) {
-					say("\"Dost thou waste the time of other mages as well?\"");
+					say("\"Art thou certain thou hast not cast a dweomer upon me? I usually do not lower my prices so.\"");
 				}
 				if (var000E == 0x0003) {
-					say("\"Thou art most rude to renege on an offer!\"");
-				}
-				if (0x001F < (var0009 + 0x000A)) {
-					0xFFF2->set_npc_id(0x001F);
-				} else {
-					0xFFF2->set_npc_id(var0009 + 0x000A);
-				}
-				return 0x0000;
-			}
-			if (var0005 == 0x0001) {
-				if (var000B == 0x0005) {
-					say("\"",
-						var0002,
-						" is my final offer. Dost thou want it at this price?\"");
-					if (var0009 < 0x001C) {
-						0xFFF2->set_npc_id(var0009 + 0x0004);
-					}
-					if (Func0955() == true) {
-						return var0002;
-					}
-					var0006 = 0x0000;
-				} else {
-					say("\"",
-						var0002,
-						" is my final offer.  I will go no lower.\"");
-					if (var0009 < 0x001E) {
-						0xFFF2->set_npc_id(var0009 + 0x0002);
-					}
+					say("\"'Tis truly amazing... thou hast a facile tongue to convince me to lower my price by so much.\"");
 				}
 			} else {
-				if (var000B == 0x0002) {
+				if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
 					if (var000E == 0x0001) {
-						say("\"'Tis pleasant to find thee amenable. Wouldst thou consider ",
-							var0002,
-							"?\"");
+						say("\"'Tis lower than I expected... but I shall agree to this price.\"");
 					}
 					if (var000E == 0x0002) {
-						say("\"Thou seemest to appreciate the finer spells and what they are truly worth. How does ",
-							var0002,
-							" sound?\"");
+						say("\"Thou art very good at bargaining. I will accept this price.\"");
 					}
 					if (var000E == 0x0003) {
-						say("\"What a pleasure it is to deal with thee. I offer thee ",
-							var0002,
-							".\"");
+						say("\"I see.\" *\"Very well, I will agree to this price even though 'tis lower than I did expect.\"");
+					}
+				} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+					if (var000E == 0x0001) {
+						say("\"Hmm...\" ~\"I suppose one must accept such a price -- though it could have been higher.\"");
+					}
+					if (var000E == 0x0002) {
+						say("\"'Tis not such an indecent offer.\" ~\"I accept.\"");
+					}
+					if (var000E == 0x0003) {
+						say("\"I will accept\tthis price.\" ~\"I can always use the extra funds for research.\"");
+					}
+				} else {
+					if (var000E == 0x0001) {
+						say("\"Very well.\" *\"I accept thine offer!\"");
+					}
+					if (var000E == 0x0002) {
+						say("\"It hath been a pleasure!\" *\"I will accept thine offer.\"");
+					}
+					if (var000E == 0x0003) {
+						say("\"Yes...\"*\"'Tis a very good price.\"");
 					}
 				}
-				if (var000B == 0x0003) {
-					if (var000E == 0x0001) {
-						say("\"I am not totally certain.... How about ",
-							var0002,
-							"?\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"Thou wilt not obtain the spell so cheaply. I will give thee ",
-							var0002,
-							"?\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"I suppose I must needs take thy money,...\" *\"but not at that price. ",
-							var0002,
-							"?\"");
-					}
+			}
+			say("\"So, have we agreed on the price of ",
+				var0002,
+				"?\"");
+			if (Func0955() == true) {
+				if (var0009 > 0x0001) {
+					0xFFF2->set_npc_id(var0009 - 0x0002);
 				}
-				if (var000B == 0x0004) {
-					if (var000E == 0x0001) {
-						say("\"This is not a price that inspires me to appreciate thy finer qualities. For ",
-							var0002,
-							" I will like thee better.\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"For such a pitiful sum I could not even gain a tenth of what this spell cost me to learn! I can go no lower than ",
-							var0002,
-							".\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"I am not certain who is the more foolish...\"*\"Thou for offering such a wretched amount, or myself for continuing to bargain with thee. I will offer thee ",
-							var0002,
-							".\"");
-					}
+				return var0002;
+			}
+			if (var000E == 0x0001) {
+				say("\"Pray, resolve thy mind!\"");
+			}
+			if (var000E == 0x0002) {
+				say("\"Dost thou waste the time of other mages as well?\"");
+			}
+			if (var000E == 0x0003) {
+				say("\"Thou art most rude to renege on an offer!\"");
+			}
+			if (0x001F < (var0009 + 0x000A)) {
+				0xFFF2->set_npc_id(0x001F);
+			} else {
+				0xFFF2->set_npc_id(var0009 + 0x000A);
+			}
+			return 0x0000;
+		}
+		if (var0005 == 0x0001) {
+			if (var000B == 0x0005) {
+				say("\"",
+					var0002,
+					" is my final offer. Dost thou want it at this price?\"");
+				if (var0009 < 0x001C) {
+					0xFFF2->set_npc_id(var0009 + 0x0004);
 				}
-				if (var000B == 0x0005) {
-					var0002 = var000D;
-					if (var000E == 0x0001) {
-						say("\"Art thou jesting? My previous offer stands, at ",
-							var0002,
-							".\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"Art thou deaf, or merely an imbecile? I offer ",
-							var0002,
-							", and no less!\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"Thine offer is an insult to any mage! My offer doth stand at ",
-							var0002,
-							".\"");
-					}
-					if (var0009 < 0x001F) {
-						0xFFF2->set_npc_id(var0009 + 0x0001);
-					}
+				if (Func0955() == true) {
+					return var0002;
+				}
+				var0006 = 0x0000;
+			} else {
+				say("\"",
+					var0002,
+					" is my final offer.  I will go no lower.\"");
+				if (var0009 < 0x001E) {
+					0xFFF2->set_npc_id(var0009 + 0x0002);
+				}
+			}
+		} else {
+			if (var000B == 0x0002) {
+				if (var000E == 0x0001) {
+					say("\"'Tis pleasant to find thee amenable. Wouldst thou consider ",
+						var0002,
+						"?\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"Thou seemest to appreciate the finer spells and what they are truly worth. How does ",
+						var0002,
+						" sound?\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"What a pleasure it is to deal with thee. I offer thee ",
+						var0002,
+						".\"");
+				}
+			}
+			if (var000B == 0x0003) {
+				if (var000E == 0x0001) {
+					say("\"I am not totally certain.... How about ",
+						var0002,
+						"?\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"Thou wilt not obtain the spell so cheaply. I will give thee ",
+						var0002,
+						"?\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"I suppose I must needs take thy money,...\" *\"but not at that price. ",
+						var0002,
+						"?\"");
+				}
+			}
+			if (var000B == 0x0004) {
+				if (var000E == 0x0001) {
+					say("\"This is not a price that inspires me to appreciate thy finer qualities. For ",
+						var0002,
+						" I will like thee better.\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"For such a pitiful sum I could not even gain a tenth of what this spell cost me to learn! I can go no lower than ",
+						var0002,
+						".\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"I am not certain who is the more foolish...\"*\"Thou for offering such a wretched amount, or myself for continuing to bargain with thee. I will offer thee ",
+						var0002,
+						".\"");
+				}
+			}
+			if (var000B == 0x0005) {
+				var0002 = var000D;
+				if (var000E == 0x0001) {
+					say("\"Art thou jesting? My previous offer stands, at ",
+						var0002,
+						".\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"Art thou deaf, or merely an imbecile? I offer ",
+						var0002,
+						", and no less!\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"Thine offer is an insult to any mage! My offer doth stand at ",
+						var0002,
+						".\"");
+				}
+				if (var0009 < 0x001F) {
+					0xFFF2->set_npc_id(var0009 + 0x0001);
 				}
 			}
 		}
@@ -85828,266 +85704,265 @@ void Func0818 0x818 () {
 				".\"");
 			var0001 = false;
 			continue;
-		} else {
-			var000E = var0008[var000A];
-			var000F = 0x0000;
-			var000B = UI_die_roll(0x0001, 0x0006);
-			if (var000B == 0x0001) {
-				var0010 = "Dost thou accept?";
-			}
-			if (var000B == 0x0002) {
-				var0010 = "Dost thou find this price acceptable?";
-			}
-			if (var000B == 0x0003) {
-				var0010 = "Let me see... ah, yes! Dost thou find the price agreeable?";
-			}
-			if (var000B == 0x0004) {
-				var0010 = "Dost thou agree?";
-			}
-			if (var000B == 0x0005) {
-				var0010 = "Is the price acceptable?";
-			}
-			if (var000B == 0x0006) {
-				var0010 = "Ah, hmmm... Is the price acceptable?";
-			}
-			if (var000A == 0x0002) {
-				say("\"Let me think... ah, that will be 300 filari.\"");
-				if (Func0942(0xFFD2)) {
-					0xFFD2->show_npc_face1(0x0000);
-					say("\"Father! Leather bags sell for ",
-						var000E,
-						" filari!\"");
-					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
-					say("\"Ah, er... thou art right, my dear!\"");
-				} else {
-					say("\"Er, that's not right... oh, I am sorry, ",
-						var0000,
-						", I sell my bags for ",
-						var000E,
-						" filari!\"");
-				}
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "bags";
-			}
-			if (var000A == 0x0003) {
-				say("\"I stock the finest buckets in Fawn! Hmmm... I sell them for ",
+		}
+		var000E = var0008[var000A];
+		var000F = 0x0000;
+		var000B = UI_die_roll(0x0001, 0x0006);
+		if (var000B == 0x0001) {
+			var0010 = "Dost thou accept?";
+		}
+		if (var000B == 0x0002) {
+			var0010 = "Dost thou find this price acceptable?";
+		}
+		if (var000B == 0x0003) {
+			var0010 = "Let me see... ah, yes! Dost thou find the price agreeable?";
+		}
+		if (var000B == 0x0004) {
+			var0010 = "Dost thou agree?";
+		}
+		if (var000B == 0x0005) {
+			var0010 = "Is the price acceptable?";
+		}
+		if (var000B == 0x0006) {
+			var0010 = "Ah, hmmm... Is the price acceptable?";
+		}
+		if (var000A == 0x0002) {
+			say("\"Let me think... ah, that will be 300 filari.\"");
+			if (Func0942(0xFFD2)) {
+				0xFFD2->show_npc_face1(0x0000);
+				say("\"Father! Leather bags sell for ",
 					var000E,
-					" filari each.\"");
-				say("\"",
-					var0010,
-					"\"");
-			}
-			if (var000A == 0x0004) {
-				say("\"Thou wilt surely require one if thou dost remain in Fawn, ",
-					var0000,
-					". Ah... hmmm, I will sell one to thee for the fair price of ",
-					var000E,
-					" filari.\"");
-				say("\"",
-					var0010,
-					"\"");
-			}
-			if (var000A == 0x0005) {
-				say("\"That will be ",
-					var000E,
-					" filari each for a fine wax candle. ",
-					var0010,
-					"\"");
-				var0011 = "candles";
-			}
-			if (var000A == 0x0006) {
-				say("\"A torch?  Ah, yes... My torches are of the finest quality! I can sell one to thee for ",
-					var000E,
-					" filari.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "torches";
-			}
-			if (var000A == 0x0007) {
-				say("\"Ah, I can sell this to thee for ",
-					var000E,
-					" filari.\"");
-				say("\"",
-					var0010,
-					"\"");
-			}
-			if (var000A == 0x0008) {
-				say("\"I have a few fur boots left, ",
-					var0000,
-					". I can sell a pair to thee for ",
-					var000E,
-					" filari.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "pairs of fur boots";
-			}
-			if (var000A == 0x0009) {
-				say("\"These are the finest packs made, ",
-					var0000,
-					"! For one of these backpacks I ask 15 filari.\"");
-				if (Func0942(0xFFD2)) {
-					0xFFD2->show_npc_face1(0x0000);
-					say("\"Father! We sell those packs for ",
-						var000E,
-						" filari!\"");
-					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
-					say("\"Ah, thou art correct, daughter...\"");
-				} else {
-					say("\"Uh, hmmm... I do believe I made a mistake, ",
-						var0000,
-						". I sell my backpacks for ",
-						var000E,
-						" filari.\"");
-				}
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "backpacks";
-			}
-			if (var000A == 0x000A) {
-				say("\"Ah, Alyssand makes these stockings, ",
-					var0000,
-					".\"");
-				if (UI_is_pc_female()) {
-					say("\"Ahem... I am sure that thou wouldst enjoy wearing a pair, ",
-						var0000,
-						".  I am assured that they are most comfortable.\"");
-				} else {
-					say("\"If thou dost wish a pair for a loved one or a mistress, I am certain they would appreciate the fine quality, ",
-						var0000,
-						"!\"");
-					if (Func0942(0xFFD2)) {
-						0xFFD2->show_npc_face1(0x0000);
-						say("\"Father! Watch thy tongue!\"");
-						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
-						say("\"But, dear... he is a customer...\"");
-						0xFFD2->show_npc_face1(0x0000);
-						say("\"'Tis rude of thee, father, to discuss such matters in public!\"");
-						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
-						say("\"Ah, hmmm... she is very shrewish today, ",
-							var0000,
-							". I... er, apologize to thee for her behavior.\"");
-						0xFFD2->show_npc_face1(0x0000);
-						say("\"FATHER!!!\"");
-						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
-					}
-				}
-				say("\"Ah, where was I? Oh, yes... For a pair of these fine stockings I ask ",
-					var000E,
-					" filari.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "stockings";
-			}
-			if (var000A == 0x000B) {
-				say("\"I can sell a great helm to thee for ",
-					var000E,
-					" filari.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "great helms";
-			}
-			if (var000A == 0x000C) {
-				say("\"If thou wishest to fend off the Goblins, ",
-					var0000,
-					", thou couldst not do better than to own one of my crossbows! For ",
-					var000E,
-					" filari it is thine.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "crossbows";
-			}
-			if (var000A == 0x000D) {
-				say("\"Ah, thou wilt need bolts for thy crossbow. Let me think... oh, that will be ",
-					var000E,
-					" filari for twenty bolts.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "crossbow bolts, in bundles of twenty,";
-			}
-			if (var000A == 0x000E) {
-				say("\"Hmmm... er, even though there are no sailing ships available, ",
-					var0000,
-					", I can give thee a good deal on a reliable sextant! For ",
-					var000E,
-					" filari one can be thine.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "sextants";
-			}
-			if (var000A == 0x000F) {
-				if (UI_is_pc_female()) {
-					say("\"Oh, ",
-						var0000,
-						", thou shouldst purchase a hand mirror if thou dost not already own one. A lady of thy beauty doubtless needs one. For a mere ",
-						var000E,
-						" filari I can sell thee one.\"");
-				} else {
-					say("\"Perhaps a gift for a sweetheart? Ah, no, that would not be prudent of me to ask... For ",
-						var000E,
-						" filari I can sell thee a finely crafted hand mirror.\"");
-				}
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "hand mirror";
-			}
-			if (var000E == var0009[var000A]) {
-				if (Func0955()) {
-					var0012 = var000E;
-				} else {
-					var0012 = 0x0000;
-				}
+					" filari!\"");
+				UI_remove_npc_face1();
+				0x0000->set_conversation_slot();
+				say("\"Ah, er... thou art right, my dear!\"");
 			} else {
-				var0012 = Func0819(var0008[var000A], var0009[var000A]);
-			}
-			if (var0012 > 0x0000) {
-				if (var0007[var000A] == 0x0001) {
-					say("\"How many ",
-						var0011,
-						" wouldst thou like?\"");
-					var000F = Func0943(var0003[var000A], var0004[var000A], var0006[var000A], var0005, var0012, 0x0005, 0x0001, false);
-				} else {
-					var000F = Func0943(var0003[var000A], var0004[var000A], 0x0001, var0005, var0012, 0x0000, 0x0001, false);
-				}
-			}
-			if (var000F == 0x0001) {
-				say("\"I am certain that thou wilt enjoy thy purchase, ",
+				say("\"Er, that's not right... oh, I am sorry, ",
 					var0000,
-					".\"");
-			} else if (var000F == 0x0002) {
-				say("\"Ah, er...\" ~\"I believe that thine hands are full, ",
+					", I sell my bags for ",
+					var000E,
+					" filari!\"");
+			}
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "bags";
+		}
+		if (var000A == 0x0003) {
+			say("\"I stock the finest buckets in Fawn! Hmmm... I sell them for ",
+				var000E,
+				" filari each.\"");
+			say("\"",
+				var0010,
+				"\"");
+		}
+		if (var000A == 0x0004) {
+			say("\"Thou wilt surely require one if thou dost remain in Fawn, ",
+				var0000,
+				". Ah... hmmm, I will sell one to thee for the fair price of ",
+				var000E,
+				" filari.\"");
+			say("\"",
+				var0010,
+				"\"");
+		}
+		if (var000A == 0x0005) {
+			say("\"That will be ",
+				var000E,
+				" filari each for a fine wax candle. ",
+				var0010,
+				"\"");
+			var0011 = "candles";
+		}
+		if (var000A == 0x0006) {
+			say("\"A torch?  Ah, yes... My torches are of the finest quality! I can sell one to thee for ",
+				var000E,
+				" filari.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "torches";
+		}
+		if (var000A == 0x0007) {
+			say("\"Ah, I can sell this to thee for ",
+				var000E,
+				" filari.\"");
+			say("\"",
+				var0010,
+				"\"");
+		}
+		if (var000A == 0x0008) {
+			say("\"I have a few fur boots left, ",
+				var0000,
+				". I can sell a pair to thee for ",
+				var000E,
+				" filari.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "pairs of fur boots";
+		}
+		if (var000A == 0x0009) {
+			say("\"These are the finest packs made, ",
+				var0000,
+				"! For one of these backpacks I ask 15 filari.\"");
+			if (Func0942(0xFFD2)) {
+				0xFFD2->show_npc_face1(0x0000);
+				say("\"Father! We sell those packs for ",
+					var000E,
+					" filari!\"");
+				UI_remove_npc_face1();
+				0x0000->set_conversation_slot();
+				say("\"Ah, thou art correct, daughter...\"");
+			} else {
+				say("\"Uh, hmmm... I do believe I made a mistake, ",
+					var0000,
+					". I sell my backpacks for ",
+					var000E,
+					" filari.\"");
+			}
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "backpacks";
+		}
+		if (var000A == 0x000A) {
+			say("\"Ah, Alyssand makes these stockings, ",
+				var0000,
+				".\"");
+			if (UI_is_pc_female()) {
+				say("\"Ahem... I am sure that thou wouldst enjoy wearing a pair, ",
+					var0000,
+					".  I am assured that they are most comfortable.\"");
+			} else {
+				say("\"If thou dost wish a pair for a loved one or a mistress, I am certain they would appreciate the fine quality, ",
 					var0000,
 					"!\"");
-			} else if (var000F == 0x0003) {
-				var000B = Func0992(0x0001, (("@But " + var0000) + ", we haven't the coins to purchase this.@"), 0x0000, false);
-				if (var000B != 0xFE9C) {
-					0xFFD1->show_npc_face0(0x0000);
-					say("\"Ah... it doth appear that thy purse is empty, ",
+				if (Func0942(0xFFD2)) {
+					0xFFD2->show_npc_face1(0x0000);
+					say("\"Father! Watch thy tongue!\"");
+					UI_remove_npc_face1();
+					0x0000->set_conversation_slot();
+					say("\"But, dear... he is a customer...\"");
+					0xFFD2->show_npc_face1(0x0000);
+					say("\"'Tis rude of thee, father, to discuss such matters in public!\"");
+					UI_remove_npc_face1();
+					0x0000->set_conversation_slot();
+					say("\"Ah, hmmm... she is very shrewish today, ",
 						var0000,
-						".\"");
-				} else {
-					say("\"'Twould appear thou dost not have enough money for that...\"");
+						". I... er, apologize to thee for her behavior.\"");
+					0xFFD2->show_npc_face1(0x0000);
+					say("\"FATHER!!!\"");
+					UI_remove_npc_face1();
+					0x0000->set_conversation_slot();
 				}
-				if (0x001F < (0xFFD1->get_npc_id() + 0x0006)) {
-					0xFFD1->set_npc_id(0x001F);
-				} else {
-					0xFFD1->set_npc_id(0xFFD1->get_npc_id() + 0x0006);
-				}
+			}
+			say("\"Ah, where was I? Oh, yes... For a pair of these fine stockings I ask ",
+				var000E,
+				" filari.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "stockings";
+		}
+		if (var000A == 0x000B) {
+			say("\"I can sell a great helm to thee for ",
+				var000E,
+				" filari.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "great helms";
+		}
+		if (var000A == 0x000C) {
+			say("\"If thou wishest to fend off the Goblins, ",
+				var0000,
+				", thou couldst not do better than to own one of my crossbows! For ",
+				var000E,
+				" filari it is thine.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "crossbows";
+		}
+		if (var000A == 0x000D) {
+			say("\"Ah, thou wilt need bolts for thy crossbow. Let me think... oh, that will be ",
+				var000E,
+				" filari for twenty bolts.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "crossbow bolts, in bundles of twenty,";
+		}
+		if (var000A == 0x000E) {
+			say("\"Hmmm... er, even though there are no sailing ships available, ",
+				var0000,
+				", I can give thee a good deal on a reliable sextant! For ",
+				var000E,
+				" filari one can be thine.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "sextants";
+		}
+		if (var000A == 0x000F) {
+			if (UI_is_pc_female()) {
+				say("\"Oh, ",
+					var0000,
+					", thou shouldst purchase a hand mirror if thou dost not already own one. A lady of thy beauty doubtless needs one. For a mere ",
+					var000E,
+					" filari I can sell thee one.\"");
+			} else {
+				say("\"Perhaps a gift for a sweetheart? Ah, no, that would not be prudent of me to ask... For ",
+					var000E,
+					" filari I can sell thee a finely crafted hand mirror.\"");
+			}
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "hand mirror";
+		}
+		if (var000E == var0009[var000A]) {
+			if (Func0955()) {
+				var0012 = var000E;
+			} else {
+				var0012 = 0x0000;
+			}
+		} else {
+			var0012 = Func0819(var0008[var000A], var0009[var000A]);
+		}
+		if (var0012 > 0x0000) {
+			if (var0007[var000A] == 0x0001) {
+				say("\"How many ",
+					var0011,
+					" wouldst thou like?\"");
+				var000F = Func0943(var0003[var000A], var0004[var000A], var0006[var000A], var0005, var0012, 0x0005, 0x0001, false);
+			} else {
+				var000F = Func0943(var0003[var000A], var0004[var000A], 0x0001, var0005, var0012, 0x0000, 0x0001, false);
+			}
+		}
+		if (var000F == 0x0001) {
+			say("\"I am certain that thou wilt enjoy thy purchase, ",
+				var0000,
+				".\"");
+		} else if (var000F == 0x0002) {
+			say("\"Ah, er...\" ~\"I believe that thine hands are full, ",
+				var0000,
+				"!\"");
+		} else if (var000F == 0x0003) {
+			var000B = Func0992(0x0001, (("@But " + var0000) + ", we haven't the coins to purchase this.@"), 0x0000, false);
+			if (var000B != 0xFE9C) {
+				0xFFD1->show_npc_face0(0x0000);
+				say("\"Ah... it doth appear that thy purse is empty, ",
+					var0000,
+					".\"");
+			} else {
+				say("\"'Twould appear thou dost not have enough money for that...\"");
+			}
+			if (0x001F < (0xFFD1->get_npc_id() + 0x0006)) {
+				0xFFD1->set_npc_id(0x001F);
+			} else {
+				0xFFD1->set_npc_id(0xFFD1->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Dost thou desire another purchase?\"");
@@ -86131,204 +86006,204 @@ var Func0819 0x819 (var var0000, var var0001) {
 		var000B = Func0956(["yes", "no", "haggle"]);
 		if (var000B == "no") {
 			return 0x0000;
+		}
+		if (var000B == "yes") {
+			var000C = 0x0000;
 		} else {
-			if (var000B == "yes") {
-				var000C = 0x0000;
-			} else {
-				var000D = Func0999(var0003, var0001, var0009, var0004, var0008, var0005, var0006);
-				var0008 = (var0008 + 0x0001);
-				var0006 = var000D[0x0004];
-				var000C = var000D[0x0003];
-				var000E = var0003;
-				var0003 = var000D[0x0002];
-				var0004 = var000D[0x0001];
-			}
-			var000F = UI_get_random(0x0003);
-			if (var000C < 0x0002) {
-				if (var0003 < (var0001 + ((var0000 - var0001) / 0x0004))) {
-					if (var000F == 0x0001) {
-						say("\"Thou art a shrewd bargainer, ",
-							var0002,
-							". Please do not tell anyone in town of this!\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"Thy skill at trading is unsurpassed, ",
-							var0002,
-							"...\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"Troublesome are the times that force me to agree to such bargains!\"");
-					}
-				} else {
-					if (var0003 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-						if (var000F == 0x0001) {
-							say("\"Ah... My prices are fair here. Fair indeed.\"");
-						}
-						if (var000F == 0x0002) {
-							say("\"Thou art a rogue! I would not believe mine ears if I were told I had sold goods at this price!\"");
-						}
-						if (var000F == 0x0003) {
-							say("\"Let me see... Ah, I do believe thou wouldst make a good shopkeeper, ",
-								var0002,
-								"! 'Tis not often I make such unwise bargains!\"");
-							var000B = Func0992(0x0001, "@A shopkeeper? Surely thou art jesting?\r\n\t\t\t\t\t\t The Avatar is embarked on a Quest!@", 0x0000, false);
-						}
-					} else if (var0003 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-						if (var000F == 0x0001) {
-							say("\"Most fair, if I do say so myself.\"");
-						}
-						if (var000F == 0x0002) {
-							say("\"'Tis a pleasure to bargain with thee, ",
-								var0002,
-								".\"");
-						}
-						if (var000F == 0x0003) {
-							say("\"What were we discussing? Ah, yes... 'Tis a fairer price than most would give, ",
-								var0002,
-								".\"");
-						}
-					} else {
-						if (var000F == 0x0001) {
-							say("\"Thou hast made me a happy man, ",
-								var0002,
-								"! Walk with Beauty!\"");
-						}
-						if (var000F == 0x0002) {
-							say("\"Ah... A blessing upon thee, ",
-								var0002,
-								".\"");
-						}
-						if (var000F == 0x0003) {
-							say("\"Hmmm... In these trying times, I must charge steep prices or become a pauper.\"");
-						}
-					}
-				}
-				say("\"We have agreed on a price of ",
-					var0003,
-					" filari, ",
-					var0002,
-					"?\"");
-				if (Func0955()) {
-					if (var000A > 0x0001) {
-						0xFFD1->set_npc_id(var000A - 0x0002);
-					}
-					return var0003;
-				} else if (var000F == 0x0001) {
-					say("\"What? I thought we had an agreement.\"");
+			var000D = Func0999(var0003, var0001, var0009, var0004, var0008, var0005, var0006);
+			var0008 = (var0008 + 0x0001);
+			var0006 = var000D[0x0004];
+			var000C = var000D[0x0003];
+			var000E = var0003;
+			var0003 = var000D[0x0002];
+			var0004 = var000D[0x0001];
+		}
+		var000F = UI_get_random(0x0003);
+		if (var000C < 0x0002) {
+			if (var0003 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var000F == 0x0001) {
+					say("\"Thou art a shrewd bargainer, ",
+						var0002,
+						". Please do not tell anyone in town of this!\"");
 				}
 				if (var000F == 0x0002) {
-					say("\"Thou hast sorely disappointed me. What of our bargain?\"");
+					say("\"Thy skill at trading is unsurpassed, ",
+						var0002,
+						"...\"");
 				}
 				if (var000F == 0x0003) {
-					say("\"Is this honorable? What of our agreement?\"");
-				}
-				if (0x001F < (var000A + 0x000A)) {
-					0xFFD1->set_npc_id(0x001F);
-				} else {
-					0xFFD1->set_npc_id(var000A + 0x000A);
-				}
-				return 0x0000;
-			}
-			if (var0006 == 0x0001) {
-				if (var000C == 0x0005) {
-					say("\"",
-						var0002,
-						", I said that ",
-						var0003,
-						" was my final offer. Dost thou accept?\"");
-					if (var000A < 0x001C) {
-						0xFFD1->set_npc_id(var000A + 0x0004);
-					}
-					if (Func0955()) {
-						return var0003;
-					}
-					var0007 = 0x0000;
-				} else {
-					say("\"Very well. ",
-						var0003,
-						" filari is my final offer.\"");
-					if (var000A < 0x001E) {
-						0xFFD1->set_npc_id(var000A + 0x0002);
-					}
+					say("\"Troublesome are the times that force me to agree to such bargains!\"");
 				}
 			} else {
-				if (var000C == 0x0002) {
+				if (var0003 < (var0001 + ((var0000 - var0001) / 0x0003))) {
 					if (var000F == 0x0001) {
-						say("\"Ah, hmmm... It pleases me to bargain with such a worthy soul. How doth ",
-							var0003,
-							" filari sound?\"");
+						say("\"Ah... My prices are fair here. Fair indeed.\"");
 					}
 					if (var000F == 0x0002) {
-						say("\"May the Truth of Beauty guide thee, ",
+						say("\"Thou art a rogue! I would not believe mine ears if I were told I had sold goods at this price!\"");
+					}
+					if (var000F == 0x0003) {
+						say("\"Let me see... Ah, I do believe thou wouldst make a good shopkeeper, ",
 							var0002,
-							". So, have we agreed on ",
-							var0003,
-							" filari?\"");
+							"! 'Tis not often I make such unwise bargains!\"");
+						var000B = Func0992(0x0001, "@A shopkeeper? Surely thou art jesting?\r\n\t\t\t\t\t\t The Avatar is embarked on a Quest!@", 0x0000, false);
 					}
-					if (var000F == 0x0003) {
-						say("\"My price is ",
-							var0003,
-							" filari. Dost thou accept?\"");
-					}
-				}
-				if (var000C == 0x0003) {
+				} else if (var0003 < (var0001 + ((var0000 - var0001) / 0x0002))) {
 					if (var000F == 0x0001) {
-						say("\"These are trying times, and goods are scarce... Wouldst thou consider ",
-							var0003,
-							" filari?\"");
+						say("\"Most fair, if I do say so myself.\"");
 					}
 					if (var000F == 0x0002) {
-						say("\"Hmmm... I am not certain... Dost thou like the sound of ",
-							var0003,
-							" filari?\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"But I must earn enough to pay my debts! ",
-							var0003,
-							" filari?\"");
-					}
-				}
-				if (var000C == 0x0004) {
-					if (var000F == 0x0001) {
-						say("\"I cannot possibly accept less than ",
-							var0003,
-							" filari!\"");
-						say("\"What dost thou say to this?\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"My costs are soaring! Surely thou canst see that I can go no lower than ",
-							var0003,
-							" filari.\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"Ah, hmmm... ",
+						say("\"'Tis a pleasure to bargain with thee, ",
 							var0002,
-							", thou art not talking to a fool. I deserve no less than ",
-							var0003,
-							" filari.\"");
-					}
-				}
-				if (var000C == 0x0005) {
-					var0003 = var000E;
-					if (var000F == 0x0001) {
-						say("\"I would rather be thrown into the canals than accept such a pitiful offer! My previous price stands, at ",
-							var0003,
-							" filari.\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"Thou must think that I am an imbecile to accept such a bargain. ",
-							var0003,
-							" filari, and no less!\"");
+							".\"");
 					}
 					if (var000F == 0x0003) {
-						say("\"Why, if I accepted such a price, I would have to close my shop and move away!\"");
-						say("\"",
-							var0003,
-							" filari is where I stand.\"");
+						say("\"What were we discussing? Ah, yes... 'Tis a fairer price than most would give, ",
+							var0002,
+							".\"");
 					}
-					if (var000A < 0x001F) {
-						0xFFD1->set_npc_id(var000A + 0x0001);
+				} else {
+					if (var000F == 0x0001) {
+						say("\"Thou hast made me a happy man, ",
+							var0002,
+							"! Walk with Beauty!\"");
 					}
+					if (var000F == 0x0002) {
+						say("\"Ah... A blessing upon thee, ",
+							var0002,
+							".\"");
+					}
+					if (var000F == 0x0003) {
+						say("\"Hmmm... In these trying times, I must charge steep prices or become a pauper.\"");
+					}
+				}
+			}
+			say("\"We have agreed on a price of ",
+				var0003,
+				" filari, ",
+				var0002,
+				"?\"");
+			if (Func0955()) {
+				if (var000A > 0x0001) {
+					0xFFD1->set_npc_id(var000A - 0x0002);
+				}
+				return var0003;
+			}
+			if (var000F == 0x0001) {
+				say("\"What? I thought we had an agreement.\"");
+			}
+			if (var000F == 0x0002) {
+				say("\"Thou hast sorely disappointed me. What of our bargain?\"");
+			}
+			if (var000F == 0x0003) {
+				say("\"Is this honorable? What of our agreement?\"");
+			}
+			if (0x001F < (var000A + 0x000A)) {
+				0xFFD1->set_npc_id(0x001F);
+			} else {
+				0xFFD1->set_npc_id(var000A + 0x000A);
+			}
+			return 0x0000;
+		}
+		if (var0006 == 0x0001) {
+			if (var000C == 0x0005) {
+				say("\"",
+					var0002,
+					", I said that ",
+					var0003,
+					" was my final offer. Dost thou accept?\"");
+				if (var000A < 0x001C) {
+					0xFFD1->set_npc_id(var000A + 0x0004);
+				}
+				if (Func0955()) {
+					return var0003;
+				}
+				var0007 = 0x0000;
+			} else {
+				say("\"Very well. ",
+					var0003,
+					" filari is my final offer.\"");
+				if (var000A < 0x001E) {
+					0xFFD1->set_npc_id(var000A + 0x0002);
+				}
+			}
+		} else {
+			if (var000C == 0x0002) {
+				if (var000F == 0x0001) {
+					say("\"Ah, hmmm... It pleases me to bargain with such a worthy soul. How doth ",
+						var0003,
+						" filari sound?\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"May the Truth of Beauty guide thee, ",
+						var0002,
+						". So, have we agreed on ",
+						var0003,
+						" filari?\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"My price is ",
+						var0003,
+						" filari. Dost thou accept?\"");
+				}
+			}
+			if (var000C == 0x0003) {
+				if (var000F == 0x0001) {
+					say("\"These are trying times, and goods are scarce... Wouldst thou consider ",
+						var0003,
+						" filari?\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"Hmmm... I am not certain... Dost thou like the sound of ",
+						var0003,
+						" filari?\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"But I must earn enough to pay my debts! ",
+						var0003,
+						" filari?\"");
+				}
+			}
+			if (var000C == 0x0004) {
+				if (var000F == 0x0001) {
+					say("\"I cannot possibly accept less than ",
+						var0003,
+						" filari!\"");
+					say("\"What dost thou say to this?\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"My costs are soaring! Surely thou canst see that I can go no lower than ",
+						var0003,
+						" filari.\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"Ah, hmmm... ",
+						var0002,
+						", thou art not talking to a fool. I deserve no less than ",
+						var0003,
+						" filari.\"");
+				}
+			}
+			if (var000C == 0x0005) {
+				var0003 = var000E;
+				if (var000F == 0x0001) {
+					say("\"I would rather be thrown into the canals than accept such a pitiful offer! My previous price stands, at ",
+						var0003,
+						" filari.\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"Thou must think that I am an imbecile to accept such a bargain. ",
+						var0003,
+						" filari, and no less!\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"Why, if I accepted such a price, I would have to close my shop and move away!\"");
+					say("\"",
+						var0003,
+						" filari is where I stand.\"");
+				}
+				if (var000A < 0x001F) {
+					0xFFD1->set_npc_id(var000A + 0x0001);
 				}
 			}
 		}
@@ -86527,147 +86402,146 @@ void Func081B 0x81B () {
 				".\"");
 			var0001 = false;
 			continue;
+		}
+		var000D = var0005[var000A];
+		var000E = 0x0000;
+		var000B = UI_die_roll(0x0001, 0x0005);
+		if (var000B == 0x0001) {
+			var000F = "Dost thou accept?";
+		}
+		if (var000B == 0x0002) {
+			var000F = "Wilt thou pay my price?";
+		}
+		if (var000B == 0x0003) {
+			var000F = "Dost thou agree?";
+		}
+		if (var000B == 0x0004) {
+			var000F = "Is the price acceptable?";
+		}
+		if (var000B == 0x0005) {
+			var000F = "Is that agreeable with thee?";
+		}
+		if (var000A == 0x0002) {
+			say("\"These were bequeathed to me by my father. They are beautiful, are they not? I will sell one to thee for ",
+				var000D,
+				" filari.\"");
+			say(var000F,
+				"\"");
+			var0010 = "black pearls";
+		}
+		if (var000A == 0x0003) {
+			say("\"",
+				var000D,
+				" filari is what I ask for nightshade.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "nightshade mushrooms";
+		}
+		if (var000A == 0x0004) {
+			say("\"I can sell thee sweet cloves of garlic for the pittance of ",
+				var000D,
+				" filari.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "cloves of garlic";
+		}
+		if (var000A == 0x0005) {
+			say("\"",
+				var000D,
+				" filari is a fair price for my ginseng, ",
+				var0000,
+				".\"");
+			say(var000F,
+				"\"");
+			var0010 = "ginseng roots";
+		}
+		if (var000A == 0x0006) {
+			say("\"The mandrake root is very potent, ",
+				var0000,
+				". I charge ",
+				var000D,
+				" filari for one.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "mandrake roots";
+		}
+		if (var000A == 0x0007) {
+			say("\"Mine onions are very sweet! ",
+				var000D,
+				" filari is what I ask.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "onions";
+		}
+		if (var000A == 0x0008) {
+			say("\"Thou shouldst try mine apples! I can give them to thee for ",
+				var000D,
+				" filari.\"");
+			say(var000F,
+				"\"");
+			var0010 = "apples";
+		}
+		if (var000A == 0x0009) {
+			say("\"I can sell thee carrots for ",
+				var000D,
+				" filari.\"");
+			say(var000F,
+				"\"");
+			var0010 = "carrots";
+		}
+		if (var000A == 0x000A) {
+			say("\"Not many in Fawn care for pumpkin, but I think it makes an excellent pie. I can sell thee one for ",
+				var000D,
+				" filari.\"");
+			say(var000F,
+				"\"");
+			var0010 = "pumpkins";
+		}
+		if (var000D == var0006[var000A]) {
+			if (Func0955()) {
+				var0011 = var000D;
+			} else {
+				var0011 = 0x0000;
+			}
 		} else {
-			var000D = var0005[var000A];
-			var000E = 0x0000;
-			var000B = UI_die_roll(0x0001, 0x0005);
-			if (var000B == 0x0001) {
-				var000F = "Dost thou accept?";
+			var0011 = Func081C(var0005[var000A], var0006[var000A]);
+		}
+		if (var0011 > 0x0000) {
+			if (var0009[var000A] == 0x0001) {
+				say("\"How many ",
+					var0010,
+					" dost thou desire?\"");
+				var000E = Func0943(var0003[var000A], var0004[var000A], var0008[var000A], var0007, var0011, 0x0014, 0x0001, false);
+			} else {
+				var000E = Func0943(var0003[var000A], var0004[var000A], 0x0001, var0007, var0011, 0x0000, 0x0001, false);
 			}
-			if (var000B == 0x0002) {
-				var000F = "Wilt thou pay my price?";
-			}
-			if (var000B == 0x0003) {
-				var000F = "Dost thou agree?";
-			}
-			if (var000B == 0x0004) {
-				var000F = "Is the price acceptable?";
-			}
-			if (var000B == 0x0005) {
-				var000F = "Is that agreeable with thee?";
-			}
-			if (var000A == 0x0002) {
-				say("\"These were bequeathed to me by my father. They are beautiful, are they not? I will sell one to thee for ",
-					var000D,
-					" filari.\"");
-				say(var000F,
-					"\"");
-				var0010 = "black pearls";
-			}
-			if (var000A == 0x0003) {
-				say("\"",
-					var000D,
-					" filari is what I ask for nightshade.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "nightshade mushrooms";
-			}
-			if (var000A == 0x0004) {
-				say("\"I can sell thee sweet cloves of garlic for the pittance of ",
-					var000D,
-					" filari.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "cloves of garlic";
-			}
-			if (var000A == 0x0005) {
-				say("\"",
-					var000D,
-					" filari is a fair price for my ginseng, ",
+		}
+		if (var000E == 0x0001) {
+			say("\"I hope thou dost enjoy thy purchase, ",
+				var0000,
+				"!\"");
+		} else if (var000E == 0x0002) {
+			say("\"I believe that thine hands are full, ",
+				var0000,
+				"!\"");
+		} else if (var000E == 0x0003) {
+			var0012 = Func0992(0x0001, (("@But " + var0000) + ", we haven't the filari to purchase this.@"), 0x0000, false);
+			if (var0012 != 0xFE9C) {
+				0xFFD0->show_npc_face0(0x0000);
+				say("\"Then I am afraid thou canst not purchase any of my goods, ",
 					var0000,
 					".\"");
-				say(var000F,
-					"\"");
-				var0010 = "ginseng roots";
-			}
-			if (var000A == 0x0006) {
-				say("\"The mandrake root is very potent, ",
-					var0000,
-					". I charge ",
-					var000D,
-					" filari for one.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "mandrake roots";
-			}
-			if (var000A == 0x0007) {
-				say("\"Mine onions are very sweet! ",
-					var000D,
-					" filari is what I ask.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "onions";
-			}
-			if (var000A == 0x0008) {
-				say("\"Thou shouldst try mine apples! I can give them to thee for ",
-					var000D,
-					" filari.\"");
-				say(var000F,
-					"\"");
-				var0010 = "apples";
-			}
-			if (var000A == 0x0009) {
-				say("\"I can sell thee carrots for ",
-					var000D,
-					" filari.\"");
-				say(var000F,
-					"\"");
-				var0010 = "carrots";
-			}
-			if (var000A == 0x000A) {
-				say("\"Not many in Fawn care for pumpkin, but I think it makes an excellent pie. I can sell thee one for ",
-					var000D,
-					" filari.\"");
-				say(var000F,
-					"\"");
-				var0010 = "pumpkins";
-			}
-			if (var000D == var0006[var000A]) {
-				if (Func0955()) {
-					var0011 = var000D;
-				} else {
-					var0011 = 0x0000;
-				}
 			} else {
-				var0011 = Func081C(var0005[var000A], var0006[var000A]);
+				say("\"I am afraid thou dost not have enough to pay for this...\"");
 			}
-			if (var0011 > 0x0000) {
-				if (var0009[var000A] == 0x0001) {
-					say("\"How many ",
-						var0010,
-						" dost thou desire?\"");
-					var000E = Func0943(var0003[var000A], var0004[var000A], var0008[var000A], var0007, var0011, 0x0014, 0x0001, false);
-				} else {
-					var000E = Func0943(var0003[var000A], var0004[var000A], 0x0001, var0007, var0011, 0x0000, 0x0001, false);
-				}
-			}
-			if (var000E == 0x0001) {
-				say("\"I hope thou dost enjoy thy purchase, ",
-					var0000,
-					"!\"");
-			} else if (var000E == 0x0002) {
-				say("\"I believe that thine hands are full, ",
-					var0000,
-					"!\"");
-			} else if (var000E == 0x0003) {
-				var0012 = Func0992(0x0001, (("@But " + var0000) + ", we haven't the filari to purchase this.@"), 0x0000, false);
-				if (var0012 != 0xFE9C) {
-					0xFFD0->show_npc_face0(0x0000);
-					say("\"Then I am afraid thou canst not purchase any of my goods, ",
-						var0000,
-						".\"");
-				} else {
-					say("\"I am afraid thou dost not have enough to pay for this...\"");
-				}
-				if (0x001F < (0xFFD0->get_npc_id() + 0x0006)) {
-					0xFFD0->set_npc_id(0x001F);
-				} else {
-					0xFFD0->set_npc_id(0xFFD0->get_npc_id() + 0x0006);
-				}
+			if (0x001F < (0xFFD0->get_npc_id() + 0x0006)) {
+				0xFFD0->set_npc_id(0x001F);
+			} else {
+				0xFFD0->set_npc_id(0xFFD0->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Dost thou desire another purchase?\"");
@@ -86710,194 +86584,194 @@ var Func081C 0x81C (var var0000, var var0001) {
 		var000B = Func0956(["yes", "no", "haggle"]);
 		if (var000B == "no") {
 			return 0x0000;
+		}
+		if (var000B == "yes") {
+			var000C = 0x0000;
 		} else {
-			if (var000B == "yes") {
-				var000C = 0x0000;
-			} else {
-				var000D = Func0999(var0003, var0001, var0009, var0004, var0008, var0005, var0006);
-				var0008 = (var0008 + 0x0001);
-				var0006 = var000D[0x0004];
-				var000C = var000D[0x0003];
-				var000E = var0003;
-				var0003 = var000D[0x0002];
-				var0004 = var000D[0x0001];
-			}
-			var000F = UI_get_random(0x0003);
-			if (var000C < 0x0002) {
-				if (var0003 < (var0001 + ((var0000 - var0001) / 0x0004))) {
-					if (var000F == 0x0001) {
-						say("\"Thou dost drive a hard bargain, ",
-							var0002,
-							". Do not tell anyone about this... They think little enough of me already!\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"Thou hast a good eye for a bargain...\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"I would never agree to such a price, if times were not so bad!\"");
-					}
-				} else {
-					if (var0003 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-						if (var000F == 0x0001) {
-							say("\"My prices are reasonable, given my limited supply.\"");
-						}
-						if (var000F == 0x0002) {
-							say("\"Thou couldst talk a beggar out of his begging bowl! I cannot believe I have agreed to such a price!\"");
-						}
-						if (var000F == 0x0003) {
-							say("\"Thou shouldst have been a shopkeeper, ",
-								var0002,
-								"...\"");
-						}
-					} else if (var0003 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-						if (var000F == 0x0001) {
-							say("\"A fair deal...\"");
-						}
-						if (var000F == 0x0002) {
-							say("\"'Tis a pleasure to deal with thee, ",
-								var0002,
-								".\"");
-						}
-						if (var000F == 0x0003) {
-							say("\"There are few people left who specialize in herbs, ",
-								var0002,
-								". Thou wilt find no better price, I assure thee.\"");
-						}
-					} else {
-						if (var000F == 0x0001) {
-							say("\"Thou hast made me a happy woman, ",
-								var0002,
-								"! Walk with Beauty!\"");
-						}
-						if (var000F == 0x0002) {
-							say("\"May Beauty follow thee ever, ",
-								var0002,
-								".\"");
-						}
-						if (var000F == 0x0003) {
-							say("\"I fear that the storms have driven my prices up. I have no choice unless I wish to starve.\"");
-						}
-					}
-				}
-				say("\"We have agreed on a price of ",
-					var0003,
-					" filari, ",
-					var0002,
-					"?\"");
-				if (Func0955()) {
-					if (var000A > 0x0001) {
-						0xFFD0->set_npc_id(var000A - 0x0002);
-					}
-					return var0003;
-				} else if (var000F == 0x0001) {
-					say("\"Thou canst not change thy mind! Thou didst agree!\"");
+			var000D = Func0999(var0003, var0001, var0009, var0004, var0008, var0005, var0006);
+			var0008 = (var0008 + 0x0001);
+			var0006 = var000D[0x0004];
+			var000C = var000D[0x0003];
+			var000E = var0003;
+			var0003 = var000D[0x0002];
+			var0004 = var000D[0x0001];
+		}
+		var000F = UI_get_random(0x0003);
+		if (var000C < 0x0002) {
+			if (var0003 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var000F == 0x0001) {
+					say("\"Thou dost drive a hard bargain, ",
+						var0002,
+						". Do not tell anyone about this... They think little enough of me already!\"");
 				}
 				if (var000F == 0x0002) {
-					say("\"What of our bargain? I thought better of thee...\"");
+					say("\"Thou hast a good eye for a bargain...\"");
 				}
 				if (var000F == 0x0003) {
-					say("\"Where is thine honor?  What of our agreement?\"");
-				}
-				if (0x001F < (var000A + 0x000A)) {
-					0xFFD0->set_npc_id(0x001F);
-				} else {
-					0xFFD0->set_npc_id(var000A + 0x000A);
-				}
-				return 0x0000;
-			}
-			if (var0006 == 0x0001) {
-				if (var000C == 0x0005) {
-					say("\"I said that ",
-						var0003,
-						" was my final offer. Dost thou accept or not?\"");
-					if (var000A < 0x001C) {
-						0xFFD0->set_npc_id(var000A + 0x0004);
-					}
-					if (Func0955()) {
-						return var0003;
-					}
-					var0007 = 0x0000;
-				} else {
-					say("\"Very well. ",
-						var0003,
-						" filari is my final offer.\"");
-					if (var000A < 0x001E) {
-						0xFFD0->set_npc_id(var000A + 0x0002);
-					}
+					say("\"I would never agree to such a price, if times were not so bad!\"");
 				}
 			} else {
-				if (var000C == 0x0002) {
+				if (var0003 < (var0001 + ((var0000 - var0001) / 0x0003))) {
 					if (var000F == 0x0001) {
-						say("\"How doth ",
-							var0003,
-							" filari sound? Thou dost bargain well...\"");
+						say("\"My prices are reasonable, given my limited supply.\"");
 					}
 					if (var000F == 0x0002) {
-						say("\"So, have we agreed on ",
-							var0003,
-							" filari? Thou wilt no doubt see the Beauty of such an offer.\"");
+						say("\"Thou couldst talk a beggar out of his begging bowl! I cannot believe I have agreed to such a price!\"");
 					}
 					if (var000F == 0x0003) {
-						say("\"My price is ",
-							var0003,
-							" filari. Dost thou accept?\"");
+						say("\"Thou shouldst have been a shopkeeper, ",
+							var0002,
+							"...\"");
+					}
+				} else if (var0003 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+					if (var000F == 0x0001) {
+						say("\"A fair deal...\"");
+					}
+					if (var000F == 0x0002) {
+						say("\"'Tis a pleasure to deal with thee, ",
+							var0002,
+							".\"");
+					}
+					if (var000F == 0x0003) {
+						say("\"There are few people left who specialize in herbs, ",
+							var0002,
+							". Thou wilt find no better price, I assure thee.\"");
+					}
+				} else {
+					if (var000F == 0x0001) {
+						say("\"Thou hast made me a happy woman, ",
+							var0002,
+							"! Walk with Beauty!\"");
+					}
+					if (var000F == 0x0002) {
+						say("\"May Beauty follow thee ever, ",
+							var0002,
+							".\"");
+					}
+					if (var000F == 0x0003) {
+						say("\"I fear that the storms have driven my prices up. I have no choice unless I wish to starve.\"");
 					}
 				}
-				if (var000C == 0x0003) {
-					if (var000F == 0x0001) {
-						say("\"Wouldst thou consider ",
-							var0003,
-							" filari? I have such a limited stock...\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"I am not sure... Wouldst thou give ",
-							var0003,
-							" filari?\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"",
-							var0003,
-							" filari? I must have enough to tithe to the Temple.\"");
-					}
+			}
+			say("\"We have agreed on a price of ",
+				var0003,
+				" filari, ",
+				var0002,
+				"?\"");
+			if (Func0955()) {
+				if (var000A > 0x0001) {
+					0xFFD0->set_npc_id(var000A - 0x0002);
 				}
-				if (var000C == 0x0004) {
-					if (var000F == 0x0001) {
-						say("\"I cannot possibly accept less than ",
-							var0003,
-							" filari!\"");
-						say("\"What dost thou say to this?\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"Surely thou canst see that I can go no lower than ",
-							var0003,
-							" filari.\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"I deserve no less than ",
-							var0003,
-							" filari. It doth take much work to prepare these things!\"");
-					}
+				return var0003;
+			}
+			if (var000F == 0x0001) {
+				say("\"Thou canst not change thy mind! Thou didst agree!\"");
+			}
+			if (var000F == 0x0002) {
+				say("\"What of our bargain? I thought better of thee...\"");
+			}
+			if (var000F == 0x0003) {
+				say("\"Where is thine honor?  What of our agreement?\"");
+			}
+			if (0x001F < (var000A + 0x000A)) {
+				0xFFD0->set_npc_id(0x001F);
+			} else {
+				0xFFD0->set_npc_id(var000A + 0x000A);
+			}
+			return 0x0000;
+		}
+		if (var0006 == 0x0001) {
+			if (var000C == 0x0005) {
+				say("\"I said that ",
+					var0003,
+					" was my final offer. Dost thou accept or not?\"");
+				if (var000A < 0x001C) {
+					0xFFD0->set_npc_id(var000A + 0x0004);
 				}
-				if (var000C == 0x0005) {
-					var0003 = var000E;
-					if (var000F == 0x0001) {
-						say("\"I would rather walk into the Goblin camp than accept such a paltry sum! My previous price stands, at ",
-							var0003,
-							" filari.\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"",
-							var0003,
-							" filari, and no less! I may be a woman, but I am no fool!\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"",
-							var0003,
-							" filari is where I stand. I know the value of my wares.\"");
-					}
-					if (var000A < 0x001F) {
-						0xFFD0->set_npc_id(var000A + 0x0001);
-					}
+				if (Func0955()) {
+					return var0003;
+				}
+				var0007 = 0x0000;
+			} else {
+				say("\"Very well. ",
+					var0003,
+					" filari is my final offer.\"");
+				if (var000A < 0x001E) {
+					0xFFD0->set_npc_id(var000A + 0x0002);
+				}
+			}
+		} else {
+			if (var000C == 0x0002) {
+				if (var000F == 0x0001) {
+					say("\"How doth ",
+						var0003,
+						" filari sound? Thou dost bargain well...\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"So, have we agreed on ",
+						var0003,
+						" filari? Thou wilt no doubt see the Beauty of such an offer.\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"My price is ",
+						var0003,
+						" filari. Dost thou accept?\"");
+				}
+			}
+			if (var000C == 0x0003) {
+				if (var000F == 0x0001) {
+					say("\"Wouldst thou consider ",
+						var0003,
+						" filari? I have such a limited stock...\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"I am not sure... Wouldst thou give ",
+						var0003,
+						" filari?\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"",
+						var0003,
+						" filari? I must have enough to tithe to the Temple.\"");
+				}
+			}
+			if (var000C == 0x0004) {
+				if (var000F == 0x0001) {
+					say("\"I cannot possibly accept less than ",
+						var0003,
+						" filari!\"");
+					say("\"What dost thou say to this?\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"Surely thou canst see that I can go no lower than ",
+						var0003,
+						" filari.\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"I deserve no less than ",
+						var0003,
+						" filari. It doth take much work to prepare these things!\"");
+				}
+			}
+			if (var000C == 0x0005) {
+				var0003 = var000E;
+				if (var000F == 0x0001) {
+					say("\"I would rather walk into the Goblin camp than accept such a paltry sum! My previous price stands, at ",
+						var0003,
+						" filari.\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"",
+						var0003,
+						" filari, and no less! I may be a woman, but I am no fool!\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"",
+						var0003,
+						" filari is where I stand. I know the value of my wares.\"");
+				}
+				if (var000A < 0x001F) {
+					0xFFD0->set_npc_id(var000A + 0x0001);
 				}
 			}
 		}
@@ -87269,7 +87143,8 @@ void Func081D 0x81D () {
 						say("\"Very well... perhaps another time.\"");
 						var0000 = false;
 						return;
-					} else if (var0004 == "Monetari") {
+					}
+					if (var0004 == "Monetari") {
 						say("\"I can give thee 4 filari for every 1 monetari thou hast.\"");
 						var0005 = 0x03B7;
 					}
@@ -87862,197 +87737,197 @@ var Func0820 0x820 (var var0000, var var0001) {
 		var000C = Func0956(["yes", "no", "haggle"]);
 		if (var000C == "no") {
 			return 0x0000;
+		}
+		if (var000C == "yes") {
+			var000D = 0x0000;
 		} else {
-			if (var000C == "yes") {
-				var000D = 0x0000;
-			} else {
-				var000E = Func0999(var0004, var0001, var000A, var0005, var0009, var0006, var0007);
-				var0009 = (var0009 + 0x0001);
-				var0007 = var000E[0x0004];
-				var000D = var000E[0x0003];
-				var000F = var0004;
-				var0004 = var000E[0x0002];
-				var0005 = var000E[0x0001];
-			}
-			var0010 = UI_get_random(0x0003);
-			if (var000D < 0x0002) {
-				if (var0004 < (var0001 + ((var0000 - var0001) / 0x0004))) {
-					if (var0010 == 0x0001) {
-						say("\"Do not tell Argus... He'll think his mother hath gone soft in the head for giving thee a price like this.\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"Thou dost drive a hard bargain, ",
-							var0002,
-							". I should sit by the fire and knit!\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"It hath been quite a while since I was so defeated!\"");
-						if (Func0942(0xFFDA)) {
-							0xFFDA->show_npc_face1(0x0000);
-							say("\"To hear thee tell it, thou hast never been defeated, mother!\"");
-							UI_remove_npc_face1();
-							0x0000->set_conversation_slot();
-						}
-					}
-				} else {
-					if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-						if (var0010 == 0x0001) {
-							say("\"We offer honest prices here at the Sleeping Bull!\"");
-						}
-						if (var0010 == 0x0002) {
-							say("\"I would quickly have to beg if I offered such prices every day!\"");
-						}
-						if (var0010 == 0x0003) {
-							say("\"Thou hast a shrewd head on thy shoulders, ",
-								var0002,
-								". Thou dost bargain like a innkeeper!\"");
-						}
-					} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-						if (var0010 == 0x0001) {
-							say("\"Fair enough, if I do say so myself.\"");
-						}
-						if (var0010 == 0x0002) {
-							say("\"I shall never make a profit with customers like thee...\"");
-						}
-						if (var0010 == 0x0003) {
-							say("\"We try only to please! Tell thy friends about the Sleeping Bull!\"");
-						}
-					} else {
-						if (var0010 == 0x0001) {
-							say("\"I am content, ",
-								var0002,
-								".\"");
-						}
-						if (var0010 == 0x0002) {
-							say("\"Blessing thee and thy companions, ",
-								var0002,
-								"!\"");
-						}
-						if (var0010 == 0x0003) {
-							say("\"If the suppliers ever come, I won't have to charge such high prices.\"");
-						}
-					}
-				}
-				say("\"Dost thou agree on a price of ",
-					var0004,
-					", ",
-					var0002,
-					"?\"");
-				if (Func0955()) {
-					if (var000B > 0x0001) {
-						0xFFD7->set_npc_id(var000B - 0x0002);
-					}
-					return var0004;
-				} else if (var0010 == 0x0001) {
-					say("\"I must have misunderstood. I thought we had an agreement.\"");
+			var000E = Func0999(var0004, var0001, var000A, var0005, var0009, var0006, var0007);
+			var0009 = (var0009 + 0x0001);
+			var0007 = var000E[0x0004];
+			var000D = var000E[0x0003];
+			var000F = var0004;
+			var0004 = var000E[0x0002];
+			var0005 = var000E[0x0001];
+		}
+		var0010 = UI_get_random(0x0003);
+		if (var000D < 0x0002) {
+			if (var0004 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var0010 == 0x0001) {
+					say("\"Do not tell Argus... He'll think his mother hath gone soft in the head for giving thee a price like this.\"");
 				}
 				if (var0010 == 0x0002) {
-					say("\"I have no time for this!\"");
+					say("\"Thou dost drive a hard bargain, ",
+						var0002,
+						". I should sit by the fire and knit!\"");
 				}
 				if (var0010 == 0x0003) {
-					say("\"Then take thy business elsewhere, ",
-						var0002,
-						"! I do not have all day to stand and argue!\"");
-				}
-				if (0x001F < (var000B + 0x000A)) {
-					0xFFD7->set_npc_id(0x001F);
-				} else {
-					0xFFD7->set_npc_id(var000B + 0x000A);
-				}
-				return 0x0000;
-			}
-			if (var0007 == 0x0001) {
-				if (var000D == 0x0005) {
-					say("\"",
-						var0004,
-						" is my final offer. Dost thou accept?\"");
-					if (var000B < 0x001C) {
-						0xFFD7->set_npc_id(var000B + 0x0004);
-					}
-					if (Func0955()) {
-						return var0004;
-					}
-					var0008 = 0x0000;
-				} else {
-					say("\"Very well. ",
-						var0004,
-						" is my final offer.\"");
-					if (var000B < 0x001E) {
-						0xFFD7->set_npc_id(var000B + 0x0002);
+					say("\"It hath been quite a while since I was so defeated!\"");
+					if (Func0942(0xFFDA)) {
+						0xFFDA->show_npc_face1(0x0000);
+						say("\"To hear thee tell it, thou hast never been defeated, mother!\"");
+						UI_remove_npc_face1();
+						0x0000->set_conversation_slot();
 					}
 				}
 			} else {
-				if (var000D == 0x0002) {
+				if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
 					if (var0010 == 0x0001) {
-						say("\"Thou dost bargain well. How doth ",
-							var0004,
-							" sound?\"");
+						say("\"We offer honest prices here at the Sleeping Bull!\"");
 					}
 					if (var0010 == 0x0002) {
-						say("\"Thou wouldst make a fine innkeeper... Have we agreed on ",
-							var0004,
-							" gold coins?\"");
+						say("\"I would quickly have to beg if I offered such prices every day!\"");
 					}
 					if (var0010 == 0x0003) {
-						say("\"My price is ",
-							var0004,
-							"... Just for thee. Dost thou accept?\"");
+						say("\"Thou hast a shrewd head on thy shoulders, ",
+							var0002,
+							". Thou dost bargain like a innkeeper!\"");
 					}
-				}
-				if (var000D == 0x0003) {
+				} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
 					if (var0010 == 0x0001) {
-						say("\"These are hard times, and goods are scarce... Wouldst thou give ",
-							var0004,
-							"?\"");
+						say("\"Fair enough, if I do say so myself.\"");
 					}
 					if (var0010 == 0x0002) {
-						say("\"I don't know... ",
-							var0004,
-							"?\"");
+						say("\"I shall never make a profit with customers like thee...\"");
 					}
 					if (var0010 == 0x0003) {
-						say("\"I need to hire more help... Perhaps ",
-							var0004,
-							"?\"");
+						say("\"We try only to please! Tell thy friends about the Sleeping Bull!\"");
 					}
-				}
-				if (var000D == 0x0004) {
+				} else {
 					if (var0010 == 0x0001) {
-						say("\"Surely thou dost jest! ",
-							var0004,
-							" is as low as I can go. What sayest thou?\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"With these storms driving our customers away, surely thou canst see that I can accept no less than ",
-							var0004,
+						say("\"I am content, ",
+							var0002,
 							".\"");
 					}
-					if (var0010 == 0x0003) {
-						say("\"I have bargained with better folk than thee and gotten a better deal than that! Not less than ",
-							var0004,
+					if (var0010 == 0x0002) {
+						say("\"Blessing thee and thy companions, ",
+							var0002,
 							"!\"");
+					}
+					if (var0010 == 0x0003) {
+						say("\"If the suppliers ever come, I won't have to charge such high prices.\"");
 					}
 				}
-				if (var000D == 0x0005) {
-					var0004 = var000F;
-					if (var0010 == 0x0001) {
-						say("\"I would rather sell myself to a mage than to accept such a pitiful offer! I insist on ",
-							var0004,
-							"!\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"I am not in my dotage to accept such an offer! ",
-							var0004,
-							", and no less!\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"May I go to my grave now! ",
-							var0004,
-							" is where I stand!\"");
-					}
-					if (var000B < 0x001F) {
-						0xFFD7->set_npc_id(var000B + 0x0001);
-					}
+			}
+			say("\"Dost thou agree on a price of ",
+				var0004,
+				", ",
+				var0002,
+				"?\"");
+			if (Func0955()) {
+				if (var000B > 0x0001) {
+					0xFFD7->set_npc_id(var000B - 0x0002);
+				}
+				return var0004;
+			}
+			if (var0010 == 0x0001) {
+				say("\"I must have misunderstood. I thought we had an agreement.\"");
+			}
+			if (var0010 == 0x0002) {
+				say("\"I have no time for this!\"");
+			}
+			if (var0010 == 0x0003) {
+				say("\"Then take thy business elsewhere, ",
+					var0002,
+					"! I do not have all day to stand and argue!\"");
+			}
+			if (0x001F < (var000B + 0x000A)) {
+				0xFFD7->set_npc_id(0x001F);
+			} else {
+				0xFFD7->set_npc_id(var000B + 0x000A);
+			}
+			return 0x0000;
+		}
+		if (var0007 == 0x0001) {
+			if (var000D == 0x0005) {
+				say("\"",
+					var0004,
+					" is my final offer. Dost thou accept?\"");
+				if (var000B < 0x001C) {
+					0xFFD7->set_npc_id(var000B + 0x0004);
+				}
+				if (Func0955()) {
+					return var0004;
+				}
+				var0008 = 0x0000;
+			} else {
+				say("\"Very well. ",
+					var0004,
+					" is my final offer.\"");
+				if (var000B < 0x001E) {
+					0xFFD7->set_npc_id(var000B + 0x0002);
+				}
+			}
+		} else {
+			if (var000D == 0x0002) {
+				if (var0010 == 0x0001) {
+					say("\"Thou dost bargain well. How doth ",
+						var0004,
+						" sound?\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"Thou wouldst make a fine innkeeper... Have we agreed on ",
+						var0004,
+						" gold coins?\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"My price is ",
+						var0004,
+						"... Just for thee. Dost thou accept?\"");
+				}
+			}
+			if (var000D == 0x0003) {
+				if (var0010 == 0x0001) {
+					say("\"These are hard times, and goods are scarce... Wouldst thou give ",
+						var0004,
+						"?\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"I don't know... ",
+						var0004,
+						"?\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"I need to hire more help... Perhaps ",
+						var0004,
+						"?\"");
+				}
+			}
+			if (var000D == 0x0004) {
+				if (var0010 == 0x0001) {
+					say("\"Surely thou dost jest! ",
+						var0004,
+						" is as low as I can go. What sayest thou?\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"With these storms driving our customers away, surely thou canst see that I can accept no less than ",
+						var0004,
+						".\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"I have bargained with better folk than thee and gotten a better deal than that! Not less than ",
+						var0004,
+						"!\"");
+				}
+			}
+			if (var000D == 0x0005) {
+				var0004 = var000F;
+				if (var0010 == 0x0001) {
+					say("\"I would rather sell myself to a mage than to accept such a pitiful offer! I insist on ",
+						var0004,
+						"!\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"I am not in my dotage to accept such an offer! ",
+						var0004,
+						", and no less!\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"May I go to my grave now! ",
+						var0004,
+						" is where I stand!\"");
+				}
+				if (var000B < 0x001F) {
+					0xFFD7->set_npc_id(var000B + 0x0001);
 				}
 			}
 		}
@@ -88167,10 +88042,8 @@ var Func0825 0x825 () {
 	var0000 = 0xFF2B->get_object_position();
 	if ((var0000[0x0001] > 0x090C) && ((var0000[0x0001] < 0x0920) && ((var0000[0x0002] > 0x0412) && (var0000[0x0002] < 0x0426)))) {
 		return true;
-	} else {
-		return false;
 	}
-	return 0;
+	return false;
 }
 
 extern var Func090C 0x90C (var var0000, var var0001);
@@ -88273,168 +88146,167 @@ void Func0827 0x827 () {
 				".\"");
 			var0002 = false;
 			continue;
-		} else {
-			var000D = var0006[var000C];
-			var000E = 0x0000;
-			var000F = UI_die_roll(0x0001, 0x0005);
-			if (var000F == 0x0001) {
-				var0010 = "Dost thou accept?";
-			}
-			if (var000F == 0x0002) {
-				var0010 = "Dost thou find this price acceptable?";
-			}
-			if (var000F == 0x0003) {
-				var0010 = "Wilt thou pay my price?";
-			}
-			if (var000F == 0x0004) {
-				var0010 = (var000B + ", dost thou agree?");
-			}
-			if (var000F == 0x0005) {
-				var0010 = (var000B + ", is the price acceptable?");
-			}
-			if (var000C == 0x0002) {
-				say("\"That will be ",
-					var000D,
-					" guilders for a nice warm cloak.\"");
-				say(var0010,
-					"\"");
-				var0011 = "cloaks";
-			}
-			if (var000C == 0x0003) {
-				say("\"For ",
-					var000D,
-					" guilders I can sell thee a very sharp sword.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "swords";
-			}
-			if (var000C == 0x0004) {
-				say("\"",
-					var000D,
-					" guilders will buy thee a finely crafted shovel.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "shovels";
-			}
-			if (var000C == 0x0005) {
-				say("\"I will sell thee a torch for ",
-					var000D,
-					" guilders.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "torches";
-			}
-			if (var000C == 0x0006) {
-				say("\"Mine automaton smith makes them. For ",
-					var000D,
-					" guilders I can sell thee one.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "picks";
-			}
-			if (var000C == 0x0007) {
-				say("\"My buckets sell for ",
-					var000D,
-					" guilders.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "buckets";
-			}
-			if (var000C == 0x0008) {
-				say("\"I can sell thee a pitcher for ",
-					var000D,
-					" guilders.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "pitchers";
-			}
-			if (var000C == 0x0009) {
-				say("\"I will sell thee a nice oil lamp for ",
-					var000D,
-					" guilders.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "oil lamps";
-			}
-			if (var000C == 0x000A) {
-				say("\"I can sell thee a bolt of dyed cloth for ",
-					var000D,
-					" guilders.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "bolts of cloth";
-			}
-			if (var000C == 0x000B) {
-				say("\"Hmmm... the bread baked by mine automaton baker is very good and filling. I will sell a loaf to thee for ",
-					var000D,
-					" guilders.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "loaves of bread";
-			}
-			if (var000C == 0x000C) {
-				say("\"The rolls are baked fresh daily. For ",
-					var000D,
-					" guilders I will sell thee one.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "rolls";
-			}
-			if (var000C == 0x000D) {
-				say("\"The cake is actually very good. Nice and sweet. For ",
-					var000D,
-					" guilders thou canst have one.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "cakes";
-			}
-			if (var000D == var0007[var000C]) {
-				if (Func0955()) {
-					var0012 = var000D;
-				} else {
-					var0012 = 0x0000;
-				}
+		}
+		var000D = var0006[var000C];
+		var000E = 0x0000;
+		var000F = UI_die_roll(0x0001, 0x0005);
+		if (var000F == 0x0001) {
+			var0010 = "Dost thou accept?";
+		}
+		if (var000F == 0x0002) {
+			var0010 = "Dost thou find this price acceptable?";
+		}
+		if (var000F == 0x0003) {
+			var0010 = "Wilt thou pay my price?";
+		}
+		if (var000F == 0x0004) {
+			var0010 = (var000B + ", dost thou agree?");
+		}
+		if (var000F == 0x0005) {
+			var0010 = (var000B + ", is the price acceptable?");
+		}
+		if (var000C == 0x0002) {
+			say("\"That will be ",
+				var000D,
+				" guilders for a nice warm cloak.\"");
+			say(var0010,
+				"\"");
+			var0011 = "cloaks";
+		}
+		if (var000C == 0x0003) {
+			say("\"For ",
+				var000D,
+				" guilders I can sell thee a very sharp sword.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "swords";
+		}
+		if (var000C == 0x0004) {
+			say("\"",
+				var000D,
+				" guilders will buy thee a finely crafted shovel.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "shovels";
+		}
+		if (var000C == 0x0005) {
+			say("\"I will sell thee a torch for ",
+				var000D,
+				" guilders.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "torches";
+		}
+		if (var000C == 0x0006) {
+			say("\"Mine automaton smith makes them. For ",
+				var000D,
+				" guilders I can sell thee one.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "picks";
+		}
+		if (var000C == 0x0007) {
+			say("\"My buckets sell for ",
+				var000D,
+				" guilders.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "buckets";
+		}
+		if (var000C == 0x0008) {
+			say("\"I can sell thee a pitcher for ",
+				var000D,
+				" guilders.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "pitchers";
+		}
+		if (var000C == 0x0009) {
+			say("\"I will sell thee a nice oil lamp for ",
+				var000D,
+				" guilders.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "oil lamps";
+		}
+		if (var000C == 0x000A) {
+			say("\"I can sell thee a bolt of dyed cloth for ",
+				var000D,
+				" guilders.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "bolts of cloth";
+		}
+		if (var000C == 0x000B) {
+			say("\"Hmmm... the bread baked by mine automaton baker is very good and filling. I will sell a loaf to thee for ",
+				var000D,
+				" guilders.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "loaves of bread";
+		}
+		if (var000C == 0x000C) {
+			say("\"The rolls are baked fresh daily. For ",
+				var000D,
+				" guilders I will sell thee one.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "rolls";
+		}
+		if (var000C == 0x000D) {
+			say("\"The cake is actually very good. Nice and sweet. For ",
+				var000D,
+				" guilders thou canst have one.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "cakes";
+		}
+		if (var000D == var0007[var000C]) {
+			if (Func0955()) {
+				var0012 = var000D;
 			} else {
-				var0012 = Func0828(var0006[var000C], var0007[var000C]);
+				var0012 = 0x0000;
 			}
-			if (var0012 > 0x0000) {
-				if (var000A[var000C] == 0x0001) {
-					say("\"How many ",
-						var0011,
-						" wouldst thou like?\"");
-					var000E = Func0943(var0004[var000C], var0005[var000C], 0x0001, var0008, var0012, 0x000A, 0x0001, false);
-				} else {
-					var000E = Func0943(var0004[var000C], var0005[var000C], 0x0001, var0008, var0012, 0x0000, 0x0001, false);
-				}
+		} else {
+			var0012 = Func0828(var0006[var000C], var0007[var000C]);
+		}
+		if (var0012 > 0x0000) {
+			if (var000A[var000C] == 0x0001) {
+				say("\"How many ",
+					var0011,
+					" wouldst thou like?\"");
+				var000E = Func0943(var0004[var000C], var0005[var000C], 0x0001, var0008, var0012, 0x000A, 0x0001, false);
+			} else {
+				var000E = Func0943(var0004[var000C], var0005[var000C], 0x0001, var0008, var0012, 0x0000, 0x0001, false);
 			}
-			if (var000E == 0x0001) {
-				say("\"Enjoy thy purchase!\"");
-			} else if (var000E == 0x0002) {
-				say("\"Thine hands are full!\"");
-			} else if (var000E == 0x0003) {
-				var0013 = Func0992(0x0001, (("@But " + var0000) + ", we do not have the guilders to purchase this.@"), 0x0000, false);
-				if (var0013 != 0xFE9C) {
-					0xFFF1->show_npc_face0(0x0000);
-					say("\"Please leave if thou canst not pay.\"");
-				} else {
-					say("\"Thou dost not have enough guilders to purchase this...\"");
-				}
-				if (0x001F < (0xFFF1->get_npc_id() + 0x0006)) {
-					0xFFF1->set_npc_id(0x001F);
-				} else {
-					0xFFF1->set_npc_id(0xFFF1->get_npc_id() + 0x0006);
-				}
+		}
+		if (var000E == 0x0001) {
+			say("\"Enjoy thy purchase!\"");
+		} else if (var000E == 0x0002) {
+			say("\"Thine hands are full!\"");
+		} else if (var000E == 0x0003) {
+			var0013 = Func0992(0x0001, (("@But " + var0000) + ", we do not have the guilders to purchase this.@"), 0x0000, false);
+			if (var0013 != 0xFE9C) {
+				0xFFF1->show_npc_face0(0x0000);
+				say("\"Please leave if thou canst not pay.\"");
+			} else {
+				say("\"Thou dost not have enough guilders to purchase this...\"");
+			}
+			if (0x001F < (0xFFF1->get_npc_id() + 0x0006)) {
+				0xFFF1->set_npc_id(0x001F);
+			} else {
+				0xFFF1->set_npc_id(0xFFF1->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Dost thou care for something else?\"");
@@ -88485,212 +88357,210 @@ var Func0828 0x828 (var var0000, var var0001) {
 		var000D = Func0956(["yes", "no", "haggle"]);
 		if (var000D == "no") {
 			return 0x0000;
+		}
+		if (var000D == "yes") {
+			var000E = 0x0000;
 		} else {
-			if (var000D == "yes") {
-				var000E = 0x0000;
+			var000F = Func0999(var0005, var0001, var000B, var0006, var000A, var0007, var0008);
+			var000A = (var000A + 0x0001);
+			var0008 = var000F[0x0004];
+			var000E = var000F[0x0003];
+			var0010 = var0005;
+			var0005 = var000F[0x0002];
+			var0006 = var000F[0x0001];
+		}
+		var0011 = UI_get_random(0x0003);
+		if (var000E < 0x0002) {
+			if (var0005 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var0011 == 0x0001) {
+					say("\"Thou art shrewd indeed, ",
+						var0002,
+						". Thou wouldst make a fine Master.\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"",
+						var0004,
+						", this is the fist time in years that I have actually lost money in a deal.\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"Thou dost trade well, ",
+						var0002,
+						".\"");
+				}
 			} else {
-				var000F = Func0999(var0005, var0001, var000B, var0006, var000A, var0007, var0008);
-				var000A = (var000A + 0x0001);
-				var0008 = var000F[0x0004];
-				var000E = var000F[0x0003];
-				var0010 = var0005;
-				var0005 = var000F[0x0002];
-				var0006 = var000F[0x0001];
-			}
-			var0011 = UI_get_random(0x0003);
-			if (var000E < 0x0002) {
-				if (var0005 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var0005 < (var0001 + ((var0000 - var0001) / 0x0003))) {
 					if (var0011 == 0x0001) {
-						say("\"Thou art shrewd indeed, ",
+						say("\"Do not allow Topo to hear of this, ",
 							var0002,
-							". Thou wouldst make a fine Master.\"");
+							"! 'Tis not often I lower my prices such...\"");
 					}
 					if (var0011 == 0x0002) {
 						say("\"",
 							var0004,
-							", this is the fist time in years that I have actually lost money in a deal.\"");
+							", I must be addled! I do not normally offer such a price...\"");
 					}
 					if (var0011 == 0x0003) {
-						say("\"Thou dost trade well, ",
+						say("\"Thou art honorable, ",
+							var0002,
+							", I can tell. For thee only will I offer such a price!\"");
+					}
+				} else if (var0005 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+					if (var0011 == 0x0001) {
+						say("\"Thou wilt find that my prices are more than fair, ",
+							var0002,
+							", once thou hast travelled a bit.\"");
+					}
+					if (var0011 == 0x0002) {
+						say("\"'Tis a pleasure to trade with thee, ",
 							var0002,
 							".\"");
 					}
-				} else {
-					if (var0005 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-						if (var0011 == 0x0001) {
-							say("\"Do not allow Topo to hear of this, ",
-								var0002,
-								"! 'Tis not often I lower my prices such...\"");
-						}
-						if (var0011 == 0x0002) {
-							say("\"",
-								var0004,
-								", I must be addled! I do not normally offer such a price...\"");
-						}
-						if (var0011 == 0x0003) {
-							say("\"Thou art honorable, ",
-								var0002,
-								", I can tell. For thee only will I offer such a price!\"");
-						}
-					} else if (var0005 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-						if (var0011 == 0x0001) {
-							say("\"Thou wilt find that my prices are more than fair, ",
-								var0002,
-								", once thou hast travelled a bit.\"");
-						}
-						if (var0011 == 0x0002) {
-							say("\"'Tis a pleasure to trade with thee, ",
-								var0002,
-								".\"");
-						}
-						if (var0011 == 0x0003) {
-							say("\"Please come to see me whenever thou art in Moonshade again.\"");
-						}
-					} else {
-						if (var0011 == 0x0001) {
-							say("\"",
-								var0004,
-								", thou art a fine customer!\"");
-						}
-						if (var0011 == 0x0002) {
-							say("\"Many thanks, ",
-								var0002,
-								"!\"");
-						}
-						if (var0011 == 0x0003) {
-							say("\"I fear that I must charge more, now that my raw materials are so limited.\"");
-						}
-					}
-				}
-				say("\"Hast thou agreed to a price of ",
-					var0005,
-					" guilders, ",
-					var0002,
-					"?\"");
-				if (Func0955()) {
-					if (var000C > 0x0001) {
-						0xFFF1->set_npc_id(var000C - 0x0002);
-					}
-					return var0005;
-				} else {
-					if (var0011 == 0x0001) {
-						say("\"'Tis poor form to argue once thou hast agreed on a price!\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"What of our bargain? I had expected better of thee...\"");
-					}
 					if (var0011 == 0x0003) {
-						say("\"Leave immediately! Thou dost not treat a Master so in Moonshade!\"");
-						abort;
+						say("\"Please come to see me whenever thou art in Moonshade again.\"");
 					}
-					if (0x001F < (var000C + 0x000A)) {
-						0xFFF1->set_npc_id(0x001F);
-					} else {
-						0xFFF1->set_npc_id(var000C + 0x000A);
-					}
-				}
-				return 0x0000;
-			}
-			if (var0008 == 0x0001) {
-				if (var000E == 0x0005) {
-					say("\"I said that ",
-						var0005,
-						" was my final offer. Dost thou accept?\"");
-					if (var000C < 0x001C) {
-						0xFFF1->set_npc_id(var000C + 0x0004);
-					}
-					if (Func0955()) {
-						return var0005;
-					}
-					var0009 = 0x0000;
 				} else {
-					say("\"",
-						var0005,
-						" guilders is my final offer.\"");
-					if (var000C < 0x001E) {
-						0xFFF1->set_npc_id(var000C + 0x0002);
-					}
-				}
-			} else {
-				if (var000E == 0x0002) {
 					if (var0011 == 0x0001) {
-						say("\"Thou art a worthy opponent, ",
-							var0002,
-							". How does ",
-							var0005,
-							" guilders sound?\"");
-					}
-					if (var0011 == 0x0002) {
 						say("\"",
 							var0004,
-							", I like thine honest face. How does ",
-							var0005,
-							" guilders sound to thee?\"");
+							", thou art a fine customer!\"");
 					}
-					if (var0011 == 0x0003) {
-						say("\"My price is ",
-							var0005,
-							" guilders, ",
+					if (var0011 == 0x0002) {
+						say("\"Many thanks, ",
 							var0002,
-							". Dost thou accept?\"");
-					}
-				}
-				if (var000E == 0x0003) {
-					if (var0011 == 0x0001) {
-						say("\"I am not sure. Wouldst thou pay ",
-							var0005,
-							" guilders?\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"Not likely... ",
-							var0005,
-							" guilders?\"");
+							"!\"");
 					}
 					if (var0011 == 0x0003) {
-						say("\"I have so little raw material... Perhaps ",
-							var0005,
-							" guilders?\"");
+						say("\"I fear that I must charge more, now that my raw materials are so limited.\"");
 					}
 				}
-				if (var000E == 0x0004) {
-					if (var0011 == 0x0001) {
-						say("\"",
-							var0005,
-							" guilders is as low as I can go.\"");
-						say("\"What dost thou say to this?\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"I cannot accept less than ",
-							var0005,
-							" guilders. Thou must understand my position.\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"",
-							var0005,
-							" guilders. I am not a charity.\"");
-					}
+			}
+			say("\"Hast thou agreed to a price of ",
+				var0005,
+				" guilders, ",
+				var0002,
+				"?\"");
+			if (Func0955()) {
+				if (var000C > 0x0001) {
+					0xFFF1->set_npc_id(var000C - 0x0002);
 				}
-				if (var000E == 0x0005) {
-					var0005 = var0010;
-					if (var0011 == 0x0001) {
-						say("\"My previous price stands, at ",
-							var0005,
-							" guilders. I will not have it said that Master Ducio is so easily taken!\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"",
-							var0005,
-							" guilders, and no less! I have to feed that worthless Topo somehow!\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"I would rather become a Ranger than accept such an offer!\"");
-						say("\"",
-							var0005,
-							" guilders is as low as I will go!\"");
-					}
-					if (var000C < 0x001F) {
-						0xFFF1->set_npc_id(var000C + 0x0001);
-					}
+				return var0005;
+			}
+			if (var0011 == 0x0001) {
+				say("\"'Tis poor form to argue once thou hast agreed on a price!\"");
+			}
+			if (var0011 == 0x0002) {
+				say("\"What of our bargain? I had expected better of thee...\"");
+			}
+			if (var0011 == 0x0003) {
+				say("\"Leave immediately! Thou dost not treat a Master so in Moonshade!\"");
+				abort;
+			}
+			if (0x001F < (var000C + 0x000A)) {
+				0xFFF1->set_npc_id(0x001F);
+			} else {
+				0xFFF1->set_npc_id(var000C + 0x000A);
+			}
+			return 0x0000;
+		}
+		if (var0008 == 0x0001) {
+			if (var000E == 0x0005) {
+				say("\"I said that ",
+					var0005,
+					" was my final offer. Dost thou accept?\"");
+				if (var000C < 0x001C) {
+					0xFFF1->set_npc_id(var000C + 0x0004);
+				}
+				if (Func0955()) {
+					return var0005;
+				}
+				var0009 = 0x0000;
+			} else {
+				say("\"",
+					var0005,
+					" guilders is my final offer.\"");
+				if (var000C < 0x001E) {
+					0xFFF1->set_npc_id(var000C + 0x0002);
+				}
+			}
+		} else {
+			if (var000E == 0x0002) {
+				if (var0011 == 0x0001) {
+					say("\"Thou art a worthy opponent, ",
+						var0002,
+						". How does ",
+						var0005,
+						" guilders sound?\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"",
+						var0004,
+						", I like thine honest face. How does ",
+						var0005,
+						" guilders sound to thee?\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"My price is ",
+						var0005,
+						" guilders, ",
+						var0002,
+						". Dost thou accept?\"");
+				}
+			}
+			if (var000E == 0x0003) {
+				if (var0011 == 0x0001) {
+					say("\"I am not sure. Wouldst thou pay ",
+						var0005,
+						" guilders?\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"Not likely... ",
+						var0005,
+						" guilders?\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"I have so little raw material... Perhaps ",
+						var0005,
+						" guilders?\"");
+				}
+			}
+			if (var000E == 0x0004) {
+				if (var0011 == 0x0001) {
+					say("\"",
+						var0005,
+						" guilders is as low as I can go.\"");
+					say("\"What dost thou say to this?\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"I cannot accept less than ",
+						var0005,
+						" guilders. Thou must understand my position.\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"",
+						var0005,
+						" guilders. I am not a charity.\"");
+				}
+			}
+			if (var000E == 0x0005) {
+				var0005 = var0010;
+				if (var0011 == 0x0001) {
+					say("\"My previous price stands, at ",
+						var0005,
+						" guilders. I will not have it said that Master Ducio is so easily taken!\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"",
+						var0005,
+						" guilders, and no less! I have to feed that worthless Topo somehow!\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"I would rather become a Ranger than accept such an offer!\"");
+					say("\"",
+						var0005,
+						" guilders is as low as I will go!\"");
+				}
+				if (var000C < 0x001F) {
+					0xFFF1->set_npc_id(var000C + 0x0001);
 				}
 			}
 		}
@@ -88761,7 +88631,8 @@ void Func082A 0x82A () {
 		var0002 = (var0002 - 0x0001);
 		if (var0002 == 0x0000) {
 			break;
-		} else if (var0002 == 0x0001) {
+		}
+		if (var0002 == 0x0001) {
 			var0003 = ["nothing", "Mass Sleep"];
 			var0004 = [0x0000, 0x0025];
 			var0005 = [0x0000, 0x00FA];
@@ -88858,185 +88729,185 @@ var Func082B 0x82B (var var0000, var var0001) {
 		var000B = Func0956(["yes", "no", "haggle"]);
 		if (var000B == "no") {
 			return 0x0000;
+		}
+		if (var000B == "yes") {
+			var000C = 0x0000;
 		} else {
-			if (var000B == "yes") {
-				var000C = 0x0000;
-			} else {
-				var000D = Func0999(var0002, var0001, var0009, var0003, var0008, var0005, var0006);
-				var0008 = (var0008 + 0x0001);
-				var0006 = var000D[0x0004];
-				var000C = var000D[0x0003];
-				var000E = var0002;
-				var0002 = var000D[0x0002];
-				var0003 = var000D[0x0001];
-			}
-			var000F = UI_get_random(0x0003);
-			if (var000C < 0x0002) {
-				if (var0002 < (var0001 + ((var0000 - var0001) / 0x0004))) {
-					if (var000F == 0x0001) {
-						say("\"Normally I would never accept such an offer, but who do I have to train here? I hope this war ends soon...\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"I have no choice but to accept it at thy price. Assuredly, I have no other offers.\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"I will accept\tthine offer. But I shall deny it to my dying day... I have a reputation to uphold, thou knowest.\"");
-					}
-				} else {
-					if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-						if (var000F == 0x0001) {
-							say("\"Times are strange, ",
-								var0004,
-								". But thou hast the spell, and I have a bit more gold.\"");
-						}
-						if (var000F == 0x0002) {
-							say("\"Thou dost bargain well, ",
-								var0004,
-								". I will accept this price.\"");
-						}
-						if (var000F == 0x0003) {
-							say("\"I hope thou dost realize that thou art getting a bargain with this price.\"");
-						}
-					} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-						if (var000F == 0x0001) {
-							say("\"Only ",
-								var0002,
-								"??! All right, all right... I will accept this price.\"");
-						}
-						if (var000F == 0x0002) {
-							say("\"A decent price.\"");
-						}
-						if (var000F == 0x0003) {
-							say("\"How else shall I make money, eh? I will accept this price.\"");
-						}
-					} else {
-						if (var000F == 0x0001) {
-							say("\"I accept thine offer!\"");
-						}
-						if (var000F == 0x0002) {
-							say("\"I accept thine offer. Thou hast a fine eye for a bargain!\"");
-						}
-						if (var000F == 0x0003) {
-							say("\"Yes, a good price that is!\"");
-						}
-					}
-				}
-				say("\"So, dost thou agree to a price of ",
-					var0002,
-					"?\"");
-				if (Func0955() == true) {
-					if (var000A > 0x0001) {
-						0x03F7->set_npc_id(var000A - 0x0002);
-					}
-					return var0002;
-				} else if (var000F == 0x0001) {
-					say("\"I am bored, 'tis true. But I do not take kindly to wasting my time!\"");
+			var000D = Func0999(var0002, var0001, var0009, var0003, var0008, var0005, var0006);
+			var0008 = (var0008 + 0x0001);
+			var0006 = var000D[0x0004];
+			var000C = var000D[0x0003];
+			var000E = var0002;
+			var0002 = var000D[0x0002];
+			var0003 = var000D[0x0001];
+		}
+		var000F = UI_get_random(0x0003);
+		if (var000C < 0x0002) {
+			if (var0002 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var000F == 0x0001) {
+					say("\"Normally I would never accept such an offer, but who do I have to train here? I hope this war ends soon...\"");
 				}
 				if (var000F == 0x0002) {
-					say("\"Now thou hast taken all sport out of the deal!\"");
+					say("\"I have no choice but to accept it at thy price. Assuredly, I have no other offers.\"");
 				}
 				if (var000F == 0x0003) {
-					say("\"Where are thy manners\"?!\"");
-				}
-				if (0x001F < (var000A + 0x000A)) {
-					0x03F7->set_npc_id(0x001F);
-				} else {
-					0x03F7->set_npc_id(var000A + 0x000A);
-				}
-				return 0x0000;
-			}
-			if (var0006 == 0x0001) {
-				if (var000C == 0x0005) {
-					say("\"",
-						var0002,
-						" is my final offer. Dost thou want it at this price?\"");
-					if (var000A < 0x001C) {
-						0x03F7->set_npc_id(var000A + 0x0004);
-					}
-					if (Func0955() == true) {
-						return var0002;
-					}
-					var0007 = 0x0000;
-				} else {
-					say("\"",
-						var0002,
-						".  I will go no lower.\"");
-					if (var000A < 0x001E) {
-						0x03F7->set_npc_id(var000A + 0x0002);
-					}
+					say("\"I will accept\tthine offer. But I shall deny it to my dying day... I have a reputation to uphold, thou knowest.\"");
 				}
 			} else {
-				if (var000C == 0x0002) {
+				if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
 					if (var000F == 0x0001) {
-						say("\"Thou dost barter well. How does ",
-							var0002,
-							" sound?\"");
+						say("\"Times are strange, ",
+							var0004,
+							". But thou hast the spell, and I have a bit more gold.\"");
 					}
 					if (var000F == 0x0002) {
-						say("\"I see thou dost understand the value of this fine spell. How does ",
-							var0002,
-							" sound?\"");
+						say("\"Thou dost bargain well, ",
+							var0004,
+							". I will accept this price.\"");
 					}
 					if (var000F == 0x0003) {
-						say("\"I shall make thee a deal. For thee only I offer it for ",
+						say("\"I hope thou dost realize that thou art getting a bargain with this price.\"");
+					}
+				} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+					if (var000F == 0x0001) {
+						say("\"Only ",
 							var0002,
-							".\"");
+							"??! All right, all right... I will accept this price.\"");
+					}
+					if (var000F == 0x0002) {
+						say("\"A decent price.\"");
+					}
+					if (var000F == 0x0003) {
+						say("\"How else shall I make money, eh? I will accept this price.\"");
+					}
+				} else {
+					if (var000F == 0x0001) {
+						say("\"I accept thine offer!\"");
+					}
+					if (var000F == 0x0002) {
+						say("\"I accept thine offer. Thou hast a fine eye for a bargain!\"");
+					}
+					if (var000F == 0x0003) {
+						say("\"Yes, a good price that is!\"");
 					}
 				}
-				if (var000C == 0x0003) {
-					if (var000F == 0x0001) {
-						say("\"Hmmm.... Wouldst thou pay ",
-							var0002,
-							"?\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"Thou dost drive a hard bargain. ",
-							var0002,
-							"?\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"What dost thou say to ",
-							var0002,
-							"?\"");
-					}
+			}
+			say("\"So, dost thou agree to a price of ",
+				var0002,
+				"?\"");
+			if (Func0955() == true) {
+				if (var000A > 0x0001) {
+					0x03F7->set_npc_id(var000A - 0x0002);
 				}
-				if (var000C == 0x0004) {
-					if (var000F == 0x0001) {
-						say("\"Better I should fling my spells to the Chaos hordes! ",
-							var0002,
-							".\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"Thou dost mock my years of training with such an offer! I can go no lower than ",
-							var0002,
-							".\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"I am no fool! This fine spell is worth at least ",
-							var0002,
-							".\"");
-					}
+				return var0002;
+			}
+			if (var000F == 0x0001) {
+				say("\"I am bored, 'tis true. But I do not take kindly to wasting my time!\"");
+			}
+			if (var000F == 0x0002) {
+				say("\"Now thou hast taken all sport out of the deal!\"");
+			}
+			if (var000F == 0x0003) {
+				say("\"Where are thy manners\"?!\"");
+			}
+			if (0x001F < (var000A + 0x000A)) {
+				0x03F7->set_npc_id(0x001F);
+			} else {
+				0x03F7->set_npc_id(var000A + 0x000A);
+			}
+			return 0x0000;
+		}
+		if (var0006 == 0x0001) {
+			if (var000C == 0x0005) {
+				say("\"",
+					var0002,
+					" is my final offer. Dost thou want it at this price?\"");
+				if (var000A < 0x001C) {
+					0x03F7->set_npc_id(var000A + 0x0004);
 				}
-				if (var000C == 0x0005) {
-					var0002 = var000E;
-					if (var000F == 0x0001) {
-						say("\"My previous offer stands, at ",
-							var0002,
-							". This spell is not some paltry bauble that thou mayest find anywhere.\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"Do not be insulting! ",
-							var0002,
-							"!\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"My offer stands at ",
-							var0002,
-							". Thou art a stranger, after all. I know not what use thou wilt make of this.\"");
-					}
-					if (var000A < 0x001F) {
-						0x03F7->set_npc_id(var000A + 0x0001);
-					}
+				if (Func0955() == true) {
+					return var0002;
+				}
+				var0007 = 0x0000;
+			} else {
+				say("\"",
+					var0002,
+					".  I will go no lower.\"");
+				if (var000A < 0x001E) {
+					0x03F7->set_npc_id(var000A + 0x0002);
+				}
+			}
+		} else {
+			if (var000C == 0x0002) {
+				if (var000F == 0x0001) {
+					say("\"Thou dost barter well. How does ",
+						var0002,
+						" sound?\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"I see thou dost understand the value of this fine spell. How does ",
+						var0002,
+						" sound?\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"I shall make thee a deal. For thee only I offer it for ",
+						var0002,
+						".\"");
+				}
+			}
+			if (var000C == 0x0003) {
+				if (var000F == 0x0001) {
+					say("\"Hmmm.... Wouldst thou pay ",
+						var0002,
+						"?\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"Thou dost drive a hard bargain. ",
+						var0002,
+						"?\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"What dost thou say to ",
+						var0002,
+						"?\"");
+				}
+			}
+			if (var000C == 0x0004) {
+				if (var000F == 0x0001) {
+					say("\"Better I should fling my spells to the Chaos hordes! ",
+						var0002,
+						".\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"Thou dost mock my years of training with such an offer! I can go no lower than ",
+						var0002,
+						".\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"I am no fool! This fine spell is worth at least ",
+						var0002,
+						".\"");
+				}
+			}
+			if (var000C == 0x0005) {
+				var0002 = var000E;
+				if (var000F == 0x0001) {
+					say("\"My previous offer stands, at ",
+						var0002,
+						". This spell is not some paltry bauble that thou mayest find anywhere.\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"Do not be insulting! ",
+						var0002,
+						"!\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"My offer stands at ",
+						var0002,
+						". Thou art a stranger, after all. I know not what use thou wilt make of this.\"");
+				}
+				if (var000A < 0x001F) {
+					0x03F7->set_npc_id(var000A + 0x0001);
 				}
 			}
 		}
@@ -89152,7 +89023,8 @@ void Func082D 0x82D () {
 		var0004 = (var0004 - 0x0001);
 		if (var0004 == 0x0000) {
 			break;
-		} else if (var0004 == 0x0001) {
+		}
+		if (var0004 == 0x0001) {
 			var0005 = ["nothing", "Create Food", "Great Douse", "Locate"];
 			var0006 = [0x0000, 0x0000, 0x0003, 0x0006];
 			var0007 = [0x0000, 0x0014, 0x0012, 0x001A];
@@ -89288,181 +89160,181 @@ var Func082E 0x82E (var var0000, var var0001) {
 		var000A = Func0956(["yes", "no", "haggle"]);
 		if (var000A == "no") {
 			return 0x0000;
+		}
+		if (var000A == "yes") {
+			var000B = 0x0000;
 		} else {
-			if (var000A == "yes") {
-				var000B = 0x0000;
-			} else {
-				var000C = Func0999(var0002, var0001, var0008, var0003, var0007, var0004, var0005);
-				var0007 = (var0007 + 0x0001);
-				var0005 = var000C[0x0004];
-				var000B = var000C[0x0003];
-				var000D = var0002;
-				var0002 = var000C[0x0002];
-				var0003 = var000C[0x0001];
-			}
-			var000E = UI_get_random(0x0003);
-			if (var000B < 0x0002) {
-				if (var0002 < (var0001 + ((var0000 - var0001) / 0x0004))) {
-					if (var000E == 0x0001) {
-						say("\"Thou dost drive a hard bargain, indeed. But I must accept in order to be able to continue drinking...\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"'Twill hurt, but I have no choice but to accept it at this price.\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"I must be a fool for doing this, but I will accept thine offer. Please, do not tell anyone about this...\"");
-					}
-				} else {
-					if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-						if (var000E == 0x0001) {
-							say("\"One must have money to drink, eh? I will accept this price.\"");
-						}
-						if (var000E == 0x0002) {
-							say("\"Thou dost bargain well, hero. I will accept this price.\"");
-						}
-						if (var000E == 0x0003) {
-							say("\"Ummph. Thou art getting a good bargain with this price.\"");
-						}
-					} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-						if (var000E == 0x0001) {
-							say("\"Only ",
-								var0002,
-								"??! All right, all right... I will accept this price.\"");
-						}
-						if (var000E == 0x0002) {
-							say("\"A decent price.\"");
-						}
-						if (var000E == 0x0003) {
-							say("\"One must make a living, must one not? I will accept this price.\"");
-						}
-					} else {
-						if (var000E == 0x0001) {
-							say("\"I accept thine offer!\"");
-						}
-						if (var000E == 0x0002) {
-							say("\"I accept thine offer. And did I say how much of a pleasure it is doing business with thee?\"");
-						}
-						if (var000E == 0x0003) {
-							say("\"Yes, a good price that is!\"");
-						}
-					}
-				}
-				say("\"So, have we agreed on the price of ",
-					var0002,
-					"?\"");
-				if (Func0955() == true) {
-					if (var0009 > 0x0001) {
-						0xFFAF->set_npc_id(var0009 - 0x0002);
-					}
-					return var0002;
-				} else if (var000E == 0x0001) {
-					say("\"Thou didst do this for jest?!\"");
+			var000C = Func0999(var0002, var0001, var0008, var0003, var0007, var0004, var0005);
+			var0007 = (var0007 + 0x0001);
+			var0005 = var000C[0x0004];
+			var000B = var000C[0x0003];
+			var000D = var0002;
+			var0002 = var000C[0x0002];
+			var0003 = var000C[0x0001];
+		}
+		var000E = UI_get_random(0x0003);
+		if (var000B < 0x0002) {
+			if (var0002 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var000E == 0x0001) {
+					say("\"Thou dost drive a hard bargain, indeed. But I must accept in order to be able to continue drinking...\"");
 				}
 				if (var000E == 0x0002) {
-					say("\"I did not enjoy this waste of my time!\"");
+					say("\"'Twill hurt, but I have no choice but to accept it at this price.\"");
 				}
 				if (var000E == 0x0003) {
-					say("\"Do not expect me to be so courteous to thee next time!\"");
-				}
-				if (0x001F < (var0009 + 0x000A)) {
-					0xFFAF->set_npc_id(0x001F);
-				} else {
-					0xFFAF->set_npc_id(var0009 + 0x000A);
-				}
-				return 0x0000;
-			}
-			if (var0005 == 0x0001) {
-				if (var000B == 0x0005) {
-					say("\"I said that ",
-						var0002,
-						" is my final offer. Dost thou want it at this price?\"");
-					if (var0009 < 0x001C) {
-						0xFFAF->set_npc_id(var0009 + 0x0004);
-					}
-					if (Func0955() == true) {
-						return var0002;
-					}
-					var0006 = 0x0000;
-				} else {
-					say("\"",
-						var0002,
-						" is my final offer.  I will go no lower.\"");
-					if (var0009 < 0x001E) {
-						0xFFAF->set_npc_id(var0009 + 0x0002);
-					}
+					say("\"I must be a fool for doing this, but I will accept thine offer. Please, do not tell anyone about this...\"");
 				}
 			} else {
-				if (var000B == 0x0002) {
+				if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
 					if (var000E == 0x0001) {
-						say("\"Ahhh, I see thou hast a fine understanding of bartering. How does ",
-							var0002,
-							" sound?\"");
+						say("\"One must have money to drink, eh? I will accept this price.\"");
 					}
 					if (var000E == 0x0002) {
-						say("\"I see thou dost understand the value of this fine spell. How does ",
-							var0002,
-							" sound?\"");
+						say("\"Thou dost bargain well, hero. I will accept this price.\"");
 					}
 					if (var000E == 0x0003) {
-						say("\"What a pleasure it is to deal with thee. I offer thee ",
+						say("\"Ummph. Thou art getting a good bargain with this price.\"");
+					}
+				} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+					if (var000E == 0x0001) {
+						say("\"Only ",
 							var0002,
-							".\"");
+							"??! All right, all right... I will accept this price.\"");
+					}
+					if (var000E == 0x0002) {
+						say("\"A decent price.\"");
+					}
+					if (var000E == 0x0003) {
+						say("\"One must make a living, must one not? I will accept this price.\"");
+					}
+				} else {
+					if (var000E == 0x0001) {
+						say("\"I accept thine offer!\"");
+					}
+					if (var000E == 0x0002) {
+						say("\"I accept thine offer. And did I say how much of a pleasure it is doing business with thee?\"");
+					}
+					if (var000E == 0x0003) {
+						say("\"Yes, a good price that is!\"");
 					}
 				}
-				if (var000B == 0x0003) {
-					if (var000E == 0x0001) {
-						say("\"Hmmm.... Wouldst thou pay ",
-							var0002,
-							"?\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"Thou dost drive a hard bargain. ",
-							var0002,
-							"?\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"I must make a living, thou knowest. What dost thou say to ",
-							var0002,
-							"?\"");
-					}
+			}
+			say("\"So, have we agreed on the price of ",
+				var0002,
+				"?\"");
+			if (Func0955() == true) {
+				if (var0009 > 0x0001) {
+					0xFFAF->set_npc_id(var0009 - 0x0002);
 				}
-				if (var000B == 0x0004) {
-					if (var000E == 0x0001) {
-						say("\"I spit upon thy pittance! Does ",
-							var0002,
-							" better please thy miserly nature?\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"I worked for more years than thou hast lived to acquire this knowledge! I can go no lower than ",
-							var0002,
-							".\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"Dost thou take me for a fool? This fine spell is worth at least ",
-							var0002,
-							".\"");
-					}
+				return var0002;
+			}
+			if (var000E == 0x0001) {
+				say("\"Thou didst do this for jest?!\"");
+			}
+			if (var000E == 0x0002) {
+				say("\"I did not enjoy this waste of my time!\"");
+			}
+			if (var000E == 0x0003) {
+				say("\"Do not expect me to be so courteous to thee next time!\"");
+			}
+			if (0x001F < (var0009 + 0x000A)) {
+				0xFFAF->set_npc_id(0x001F);
+			} else {
+				0xFFAF->set_npc_id(var0009 + 0x000A);
+			}
+			return 0x0000;
+		}
+		if (var0005 == 0x0001) {
+			if (var000B == 0x0005) {
+				say("\"I said that ",
+					var0002,
+					" is my final offer. Dost thou want it at this price?\"");
+				if (var0009 < 0x001C) {
+					0xFFAF->set_npc_id(var0009 + 0x0004);
 				}
-				if (var000B == 0x0005) {
-					var0002 = var000D;
-					if (var000E == 0x0001) {
-						say("\"Thou must not be serious about this... My previous offer stands, at ",
-							var0002,
-							".\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"I will not be insulted! I can go no lower than ",
-							var0002,
-							".\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"Dog! I could not even afford a decent glass of ale for what thou hast offered! I will not lower my prices for such a fiend as thou. My offer stands at ",
-							var0002,
-							".\"");
-					}
-					if (var0009 < 0x001F) {
-						0xFFAF->set_npc_id(var0009 + 0x0001);
-					}
+				if (Func0955() == true) {
+					return var0002;
+				}
+				var0006 = 0x0000;
+			} else {
+				say("\"",
+					var0002,
+					" is my final offer.  I will go no lower.\"");
+				if (var0009 < 0x001E) {
+					0xFFAF->set_npc_id(var0009 + 0x0002);
+				}
+			}
+		} else {
+			if (var000B == 0x0002) {
+				if (var000E == 0x0001) {
+					say("\"Ahhh, I see thou hast a fine understanding of bartering. How does ",
+						var0002,
+						" sound?\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"I see thou dost understand the value of this fine spell. How does ",
+						var0002,
+						" sound?\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"What a pleasure it is to deal with thee. I offer thee ",
+						var0002,
+						".\"");
+				}
+			}
+			if (var000B == 0x0003) {
+				if (var000E == 0x0001) {
+					say("\"Hmmm.... Wouldst thou pay ",
+						var0002,
+						"?\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"Thou dost drive a hard bargain. ",
+						var0002,
+						"?\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"I must make a living, thou knowest. What dost thou say to ",
+						var0002,
+						"?\"");
+				}
+			}
+			if (var000B == 0x0004) {
+				if (var000E == 0x0001) {
+					say("\"I spit upon thy pittance! Does ",
+						var0002,
+						" better please thy miserly nature?\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"I worked for more years than thou hast lived to acquire this knowledge! I can go no lower than ",
+						var0002,
+						".\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"Dost thou take me for a fool? This fine spell is worth at least ",
+						var0002,
+						".\"");
+				}
+			}
+			if (var000B == 0x0005) {
+				var0002 = var000D;
+				if (var000E == 0x0001) {
+					say("\"Thou must not be serious about this... My previous offer stands, at ",
+						var0002,
+						".\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"I will not be insulted! I can go no lower than ",
+						var0002,
+						".\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"Dog! I could not even afford a decent glass of ale for what thou hast offered! I will not lower my prices for such a fiend as thou. My offer stands at ",
+						var0002,
+						".\"");
+				}
+				if (var0009 < 0x001F) {
+					0xFFAF->set_npc_id(var0009 + 0x0001);
 				}
 			}
 		}
@@ -89709,7 +89581,8 @@ void Func0834 0x834 () {
 		var0001 = (var0001 - 0x0001);
 		if (var0001 == 0x0000) {
 			break;
-		} else if (var0001 == 0x0001) {
+		}
+		if (var0001 == 0x0001) {
 			var0002 = ["nothing", "Detect Trap", "Create Food"];
 			var0003 = [0x0000, 0x0002, 0x0000];
 		} else if (var0001 == 0x0002) {
@@ -90237,7 +90110,8 @@ var Func0838 0x838 (var var0000, var var0001) {
 					0xFFBD->set_npc_id(var000B - 0x0002);
 				}
 				return var0004;
-			} else if (var0010 == 0x0001) {
+			}
+			if (var0010 == 0x0001) {
 				say("\"But what of our agreement?\"");
 			}
 			if (var0010 == 0x0002) {
@@ -90543,119 +90417,118 @@ void Func083D 0x83D () {
 				".\"");
 			var0001 = false;
 			continue;
-		} else {
-			var000B = var0005[var000A];
-			var000C = 0x0000;
-			var000D = UI_die_roll(0x0001, 0x0006);
-			if (var000D == 0x0001) {
-				var000E = "Dost thou accept?";
-			}
-			if (var000D == 0x0002) {
-				var000E = "Wilt thou pay this price?";
-			}
-			if (var000D == 0x0003) {
-				var000E = "Dost thou find the price agreeable?";
-			}
-			if (var000D == 0x0004) {
-				var000E = "Dost thou agree?";
-			}
-			if (var000D == 0x0005) {
-				var000E = "Is the price acceptable?";
-			}
-			if (var000D == 0x0006) {
-				var000E = "Is the price acceptable?";
-			}
-			if (var000A == 0x0002) {
-				say("\"We do not see much meat here in Fawn, so the price is a bit steep. I sell mutton for ",
-					var000B,
-					" filari.\"");
-				say("\"",
-					var000E,
-					"\"");
-				var000F = "joints of mutton";
-			}
-			if (var000A == 0x0003) {
-				say("\"The ham dinner costs ",
-					var000B,
-					" filari. 'Tis not too bad...\"");
-				say("\"",
-					var000E,
-					"\"");
-				var000F = "ham dinners";
-			}
-			if (var000A == 0x0004) {
-				say("\"The rolls are hard, but nourishing. They cost ",
-					var000B,
-					" filari.\"");
-				say("\"",
-					var000E,
-					"\"");
-				var000F = "rolls";
-			}
-			if (var000A == 0x0005) {
-				say("\"Caught fresh every day, ",
-					var0000,
-					". ",
-					var000B,
-					" filari is my price.\"");
-				say("\"",
-					var000E,
-					"\"");
-				var000F = "seabass";
-			}
-			if (var000A == 0x0006) {
-				say("\"The tarpin costs ",
-					var000B,
-					" filari. 'Tis caught from the shore now that the fleet is gone.\"");
-				say("\"",
-					var000E,
-					"\"");
-				var000F = "tarpin";
-			}
-			if (var000B == var0006[var000A]) {
-				if (Func0955()) {
-					var0010 = var000B;
-				} else {
-					var0010 = 0x0000;
-				}
+		}
+		var000B = var0005[var000A];
+		var000C = 0x0000;
+		var000D = UI_die_roll(0x0001, 0x0006);
+		if (var000D == 0x0001) {
+			var000E = "Dost thou accept?";
+		}
+		if (var000D == 0x0002) {
+			var000E = "Wilt thou pay this price?";
+		}
+		if (var000D == 0x0003) {
+			var000E = "Dost thou find the price agreeable?";
+		}
+		if (var000D == 0x0004) {
+			var000E = "Dost thou agree?";
+		}
+		if (var000D == 0x0005) {
+			var000E = "Is the price acceptable?";
+		}
+		if (var000D == 0x0006) {
+			var000E = "Is the price acceptable?";
+		}
+		if (var000A == 0x0002) {
+			say("\"We do not see much meat here in Fawn, so the price is a bit steep. I sell mutton for ",
+				var000B,
+				" filari.\"");
+			say("\"",
+				var000E,
+				"\"");
+			var000F = "joints of mutton";
+		}
+		if (var000A == 0x0003) {
+			say("\"The ham dinner costs ",
+				var000B,
+				" filari. 'Tis not too bad...\"");
+			say("\"",
+				var000E,
+				"\"");
+			var000F = "ham dinners";
+		}
+		if (var000A == 0x0004) {
+			say("\"The rolls are hard, but nourishing. They cost ",
+				var000B,
+				" filari.\"");
+			say("\"",
+				var000E,
+				"\"");
+			var000F = "rolls";
+		}
+		if (var000A == 0x0005) {
+			say("\"Caught fresh every day, ",
+				var0000,
+				". ",
+				var000B,
+				" filari is my price.\"");
+			say("\"",
+				var000E,
+				"\"");
+			var000F = "seabass";
+		}
+		if (var000A == 0x0006) {
+			say("\"The tarpin costs ",
+				var000B,
+				" filari. 'Tis caught from the shore now that the fleet is gone.\"");
+			say("\"",
+				var000E,
+				"\"");
+			var000F = "tarpin";
+		}
+		if (var000B == var0006[var000A]) {
+			if (Func0955()) {
+				var0010 = var000B;
 			} else {
-				var0010 = Func083F(var0005[var000A], var0006[var000A]);
+				var0010 = 0x0000;
 			}
-			if (var0010 > 0x0000) {
-				if (var0009[var000A] == 0x0001) {
-					say("\"How many ",
-						var000F,
-						" wouldst thou like?\"");
-					var000A = Func0943(var0003[var000A], var0004[var000A], 0x0001, var0007, var0010, 0x0014, 0x0001, false);
-				} else {
-					var000A = Func0943(var0003[var000A], var0004[var000A], var0008[var000A], var0007, var0010, 0x0000, 0x0001, false);
-				}
+		} else {
+			var0010 = Func083F(var0005[var000A], var0006[var000A]);
+		}
+		if (var0010 > 0x0000) {
+			if (var0009[var000A] == 0x0001) {
+				say("\"How many ",
+					var000F,
+					" wouldst thou like?\"");
+				var000A = Func0943(var0003[var000A], var0004[var000A], 0x0001, var0007, var0010, 0x0014, 0x0001, false);
+			} else {
+				var000A = Func0943(var0003[var000A], var0004[var000A], var0008[var000A], var0007, var0010, 0x0000, 0x0001, false);
 			}
-			if (var000A == 0x0001) {
-				say("\"Eat hearty, ",
-					var0000,
-					"!\"");
-			} else if (var000A == 0x0002) {
-				say("\"Thine hands are full, ",
-					var0000,
-					"!\"");
-			} else if (var000A == 0x0003) {
-				var000D = Func0992(0x0001, (("@But " + var0000) + ", we haven't the filari to pay for this.@"), 0x0000, false);
-				if (var000D != 0xFE9C) {
-					0xFFCC->show_npc_face0(0x0000);
-					say("\"I do not allow beggars in here!\"");
-					abort;
-				} else {
-					say("\"If thou canst not pay, then thou canst leave!\"");
-					abort;
-				}
-				if (0x001F < (0xFFCC->get_npc_id() + 0x0006)) {
-					0xFFCC->set_npc_id(0x001F);
-				} else {
-					0xFFCC->set_npc_id(0xFFCC->get_npc_id() + 0x0006);
-				}
-				break;
+		}
+		if (var000A == 0x0001) {
+			say("\"Eat hearty, ",
+				var0000,
+				"!\"");
+		} else if (var000A == 0x0002) {
+			say("\"Thine hands are full, ",
+				var0000,
+				"!\"");
+		} else if (var000A == 0x0003) {
+			var000D = Func0992(0x0001, (("@But " + var0000) + ", we haven't the filari to pay for this.@"), 0x0000, false);
+			if (var000D != 0xFE9C) {
+				0xFFCC->show_npc_face0(0x0000);
+				say("\"I do not allow beggars in here!\"");
+				abort;
 			}
+			say("\"If thou canst not pay, then thou canst leave!\"");
+			abort;
+			// Dead code
+			if (0x001F < (0xFFCC->get_npc_id() + 0x0006)) {
+				0xFFCC->set_npc_id(0x001F);
+			} else {
+				0xFFCC->set_npc_id(0xFFCC->get_npc_id() + 0x0006);
+			}
+			break;
 		}
 		say("\"Wouldst thou care for more?\"");
 		var0001 = Func0955();
@@ -90708,52 +90581,51 @@ void Func083E 0x83E () {
 			say("\"Then why'dst thou ask in the first place?\"");
 			var0002 = false;
 			continue;
-		} else {
-			var000C = var0006[var000B];
-			var000D = 0x0000;
-			if (var000B == 0x0002) {
-				say("\"That'll be ",
-					var000C,
-					" filari for a bottle of fine Fawn ale. Wouldst thou care for any?\"");
-			}
-			if (var000C == var0007[var000B]) {
-				if (Func0955()) {
-					var000E = var000C;
-				} else {
-					var000E = 0x0000;
-				}
+		}
+		var000C = var0006[var000B];
+		var000D = 0x0000;
+		if (var000B == 0x0002) {
+			say("\"That'll be ",
+				var000C,
+				" filari for a bottle of fine Fawn ale. Wouldst thou care for any?\"");
+		}
+		if (var000C == var0007[var000B]) {
+			if (Func0955()) {
+				var000E = var000C;
 			} else {
-				var000E = Func083F(var0006[var000B], var0007[var000B]);
+				var000E = 0x0000;
 			}
-			if (var000E > 0x0000) {
-				if (var000A[var000B] == 0x0001) {
-					say("\"How many bottles wouldst thou like?\"");
-					var000D = Func0943(var0004[var000B], var0005[var000B], 0x0001, var0008, var000E, 0x0014, 0x0001, false);
-				} else {
-					var000D = Func0943(var0004[var000B], var0005[var000B], var0009[var000B], var0008, var000E, 0x0000, 0x0001, false);
-				}
+		} else {
+			var000E = Func083F(var0006[var000B], var0007[var000B]);
+		}
+		if (var000E > 0x0000) {
+			if (var000A[var000B] == 0x0001) {
+				say("\"How many bottles wouldst thou like?\"");
+				var000D = Func0943(var0004[var000B], var0005[var000B], 0x0001, var0008, var000E, 0x0014, 0x0001, false);
+			} else {
+				var000D = Func0943(var0004[var000B], var0005[var000B], var0009[var000B], var0008, var000E, 0x0000, 0x0001, false);
 			}
-			if (var000D == 0x0001) {
-				say("\"Cheers, ",
-					var0000,
-					"!\"");
-			} else if (var000D == 0x0002) {
-				say("\"Thou shouldst not travel so heavily burdened -- I do not think that thou canst bear the bottles that thou desirest!\"");
-			} else if (var000D == 0x0003) {
-				var000F = Func0992(0x0001, (("@But " + var0000) + ", we do not have the filari to pay for this.@"), 0x0000, false);
-				if (var000F != 0xFE9C) {
-					0xFFCC->show_npc_face0(0x0000);
-					say("\"I don't allow no beggars in here!\"");
-					abort;
-				} else {
-					say("\"If thou canst not pay, then thou canst leave!\"");
-					abort;
-				}
-				if (0x001F < (0xFFCC->get_npc_id() + 0x0006)) {
-					0xFFCC->set_npc_id(0x001F);
-				} else {
-					0xFFCC->set_npc_id(0xFFCC->get_npc_id() + 0x0006);
-				}
+		}
+		if (var000D == 0x0001) {
+			say("\"Cheers, ",
+				var0000,
+				"!\"");
+		} else if (var000D == 0x0002) {
+			say("\"Thou shouldst not travel so heavily burdened -- I do not think that thou canst bear the bottles that thou desirest!\"");
+		} else if (var000D == 0x0003) {
+			var000F = Func0992(0x0001, (("@But " + var0000) + ", we do not have the filari to pay for this.@"), 0x0000, false);
+			if (var000F != 0xFE9C) {
+				0xFFCC->show_npc_face0(0x0000);
+				say("\"I don't allow no beggars in here!\"");
+				abort;
+			}
+			say("\"If thou canst not pay, then thou canst leave!\"");
+			abort;
+			// Dead code
+			if (0x001F < (0xFFCC->get_npc_id() + 0x0006)) {
+				0xFFCC->set_npc_id(0x001F);
+			} else {
+				0xFFCC->set_npc_id(0xFFCC->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Wouldst thou care for more?\"");
@@ -90797,200 +90669,198 @@ var Func083F 0x83F (var var0000, var var0001) {
 		var000B = Func0956(["yes", "no", "haggle"]);
 		if (var000B == "no") {
 			return 0x0000;
+		}
+		if (var000B == "yes") {
+			var000C = 0x0000;
 		} else {
-			if (var000B == "yes") {
-				var000C = 0x0000;
-			} else {
-				var000D = Func0999(var0003, var0001, var0009, var0004, var0008, var0005, var0006);
-				var0008 = (var0008 + 0x0001);
-				var0006 = var000D[0x0004];
-				var000C = var000D[0x0003];
-				var000E = var0003;
-				var0003 = var000D[0x0002];
-				var0004 = var000D[0x0001];
-			}
-			var000F = UI_get_random(0x0003);
-			if (var000C < 0x0002) {
-				if (var0003 < (var0001 + ((var0000 - var0001) / 0x0004))) {
-					if (var000F == 0x0001) {
-						say("\"Shh! Don't let Olon hear what price thou didst pay. He would never let me hear the last of it!\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"Thou dost drive a hard bargain, ",
-							var0002,
-							". I should sell the inn an' become one o' them monks!\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"Out-bargained by a stranger! What be next, a goblin?\"");
-					}
-				} else {
-					if (var0003 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-						if (var000F == 0x0001) {
-							say("\"Fairest prices thou wilt find hereabouts...\"");
-						}
-						if (var000F == 0x0002) {
-							say("\"I must be going slack-witted, ta offer thee a price like this!\"");
-						}
-						if (var000F == 0x0003) {
-							say("\"Art thou sure thou art not a wizard... Ta talk me into a price such as this?\"");
-						}
-					} else if (var0003 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-						if (var000F == 0x0001) {
-							say("\"Not bad... Not bad at all.\"");
-						}
-						if (var000F == 0x0002) {
-							say("\"If this is the best I can get, I had best take it.\"");
-						}
-						if (var000F == 0x0003) {
-							say("\"Remember me, if thou dost need anythin' more, ",
-								var0002,
-								".\"");
-						}
-					} else {
-						if (var000F == 0x0001) {
-							say("\"Not a bad piece of business, ",
-								var0002,
-								".\"");
-						}
-						if (var000F == 0x0002) {
-							say("\"Thou art tough... like an ol' sailor!\"");
-						}
-						if (var000F == 0x0003) {
-							say("\"I wish things were better, ",
-								var0002,
-								". Thou wouldst find me prices fairer, ta be sure.\"");
-						}
-					}
+			var000D = Func0999(var0003, var0001, var0009, var0004, var0008, var0005, var0006);
+			var0008 = (var0008 + 0x0001);
+			var0006 = var000D[0x0004];
+			var000C = var000D[0x0003];
+			var000E = var0003;
+			var0003 = var000D[0x0002];
+			var0004 = var000D[0x0001];
+		}
+		var000F = UI_get_random(0x0003);
+		if (var000C < 0x0002) {
+			if (var0003 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var000F == 0x0001) {
+					say("\"Shh! Don't let Olon hear what price thou didst pay. He would never let me hear the last of it!\"");
 				}
-				say("\"Dost thou agree ta a price of ",
-					var0003,
-					" filari, ",
-					var0002,
-					"?\"");
-				if (Func0955()) {
-					if (var000A > 0x0001) {
-						0xFFCC->set_npc_id(var000A - 0x0002);
-					}
-					return var0003;
-				} else {
-					if (var000F == 0x0001) {
-						say("\"Hast thou forgotten already? We had an agreement!\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"Then be gone with thee -- I have no time ta play games.\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"Dost thou think me a fool, ta argue with me only ta change thy mind? I shall spread the word about thee in this town, wait and see!\"");
-					}
-				}
-				if (0x001F < (var000A + 0x000A)) {
-					0xFFCC->set_npc_id(0x001F);
-				} else {
-					0xFFCC->set_npc_id(var000A + 0x000A);
-				}
-				return 0x0000;
-			}
-			if (var0006 == 0x0001) {
-				if (var000C == 0x0005) {
-					say("\"Look, ",
+				if (var000F == 0x0002) {
+					say("\"Thou dost drive a hard bargain, ",
 						var0002,
-						", I said that ",
-						var0003,
-						" was my final offer. Dost thou accept?\"");
-					if (var000A < 0x001C) {
-						0xFFCC->set_npc_id(var000A + 0x0004);
-					}
-					if (Func0955()) {
-						return var0003;
-					}
-					var0007 = 0x0000;
-				} else {
-					say("\"Well... ",
-						var0003,
-						" filari is my final offer.\"");
-					if (var000A < 0x001E) {
-						0xFFCC->set_npc_id(var000A + 0x0002);
-					}
+						". I should sell the inn an' become one o' them monks!\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"Out-bargained by a stranger! What be next, a goblin?\"");
 				}
 			} else {
-				if (var000C == 0x0002) {
+				if (var0003 < (var0001 + ((var0000 - var0001) / 0x0003))) {
 					if (var000F == 0x0001) {
-						say("\"It pleases me ta do business with such a worthy soul. How does ",
-							var0003,
-							" filari sound?\"");
+						say("\"Fairest prices thou wilt find hereabouts...\"");
 					}
 					if (var000F == 0x0002) {
-						say("\"May the Beauty bless thee, friend. So, have we agreed on ",
-							var0003,
-							" filari?\"");
+						say("\"I must be going slack-witted, ta offer thee a price like this!\"");
 					}
 					if (var000F == 0x0003) {
-						say("\"My price is ",
-							var0003,
-							" filari -- A price I would never offer strangers. Dost thou accept?\"");
+						say("\"Art thou sure thou art not a wizard... Ta talk me into a price such as this?\"");
+					}
+				} else if (var0003 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+					if (var000F == 0x0001) {
+						say("\"Not bad... Not bad at all.\"");
+					}
+					if (var000F == 0x0002) {
+						say("\"If this is the best I can get, I had best take it.\"");
+					}
+					if (var000F == 0x0003) {
+						say("\"Remember me, if thou dost need anythin' more, ",
+							var0002,
+							".\"");
+					}
+				} else {
+					if (var000F == 0x0001) {
+						say("\"Not a bad piece of business, ",
+							var0002,
+							".\"");
+					}
+					if (var000F == 0x0002) {
+						say("\"Thou art tough... like an ol' sailor!\"");
+					}
+					if (var000F == 0x0003) {
+						say("\"I wish things were better, ",
+							var0002,
+							". Thou wouldst find me prices fairer, ta be sure.\"");
 					}
 				}
-				if (var000C == 0x0003) {
-					if (var000F == 0x0001) {
-						say("\"I have few customers left these days... ",
-							var0003,
-							" filari?\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"Wouldst thou pay ",
-							var0003,
-							"?\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"Perhaps ",
-							var0003,
-							" filari? Thou wilt find no better...\"");
-					}
+			}
+			say("\"Dost thou agree ta a price of ",
+				var0003,
+				" filari, ",
+				var0002,
+				"?\"");
+			if (Func0955()) {
+				if (var000A > 0x0001) {
+					0xFFCC->set_npc_id(var000A - 0x0002);
 				}
-				if (var000C == 0x0004) {
-					if (var000F == 0x0001) {
-						say("\"I will take no less than ",
-							var0003,
-							". How doth that suit thee?\"");
-					}
-					if (var000F == 0x0002) {
-						say("I have no supplies coming, with these storms. ",
-							var0003,
-							" filari, no less.\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"Sharper folks than thee have tried ta cheat me! ",
-							var0003,
-							" filari.\"");
-					}
+				return var0003;
+			}
+			if (var000F == 0x0001) {
+				say("\"Hast thou forgotten already? We had an agreement!\"");
+			}
+			if (var000F == 0x0002) {
+				say("\"Then be gone with thee -- I have no time ta play games.\"");
+			}
+			if (var000F == 0x0003) {
+				say("\"Dost thou think me a fool, ta argue with me only ta change thy mind? I shall spread the word about thee in this town, wait and see!\"");
+			}
+			if (0x001F < (var000A + 0x000A)) {
+				0xFFCC->set_npc_id(0x001F);
+			} else {
+				0xFFCC->set_npc_id(var000A + 0x000A);
+			}
+			return 0x0000;
+		}
+		if (var0006 == 0x0001) {
+			if (var000C == 0x0005) {
+				say("\"Look, ",
+					var0002,
+					", I said that ",
+					var0003,
+					" was my final offer. Dost thou accept?\"");
+				if (var000A < 0x001C) {
+					0xFFCC->set_npc_id(var000A + 0x0004);
 				}
-				if (var000C == 0x0005) {
-					var0003 = var000E;
-					if (var000F == 0x0001) {
-						say("\"I would rather be eaten by rats than accept such a pitiful offer. My previous price stands, at ",
-							var0003,
-							" filari.\"");
+				if (Func0955()) {
+					return var0003;
+				}
+				var0007 = 0x0000;
+			} else {
+				say("\"Well... ",
+					var0003,
+					" filari is my final offer.\"");
+				if (var000A < 0x001E) {
+					0xFFCC->set_npc_id(var000A + 0x0002);
+				}
+			}
+		} else {
+			if (var000C == 0x0002) {
+				if (var000F == 0x0001) {
+					say("\"It pleases me ta do business with such a worthy soul. How does ",
+						var0003,
+						" filari sound?\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"May the Beauty bless thee, friend. So, have we agreed on ",
+						var0003,
+						" filari?\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"My price is ",
+						var0003,
+						" filari -- A price I would never offer strangers. Dost thou accept?\"");
+				}
+			}
+			if (var000C == 0x0003) {
+				if (var000F == 0x0001) {
+					say("\"I have few customers left these days... ",
+						var0003,
+						" filari?\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"Wouldst thou pay ",
+						var0003,
+						"?\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"Perhaps ",
+						var0003,
+						" filari? Thou wilt find no better...\"");
+				}
+			}
+			if (var000C == 0x0004) {
+				if (var000F == 0x0001) {
+					say("\"I will take no less than ",
+						var0003,
+						". How doth that suit thee?\"");
+				}
+				if (var000F == 0x0002) {
+					say("I have no supplies coming, with these storms. ",
+						var0003,
+						" filari, no less.\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"Sharper folks than thee have tried ta cheat me! ",
+						var0003,
+						" filari.\"");
+				}
+			}
+			if (var000C == 0x0005) {
+				var0003 = var000E;
+				if (var000F == 0x0001) {
+					say("\"I would rather be eaten by rats than accept such a pitiful offer. My previous price stands, at ",
+						var0003,
+						" filari.\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"What dost thou take me for? ",
+						var0003,
+						" filari, and no less!\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"Why, if I accepted such a price as this, I may as well sell the inn ta Olon!\"");
+					if (Func0942(0xFFC6)) {
+						0xFFC6->show_npc_face1(0x0000);
+						say("\"Sounds good ta me!\"");
+						UI_remove_npc_face1();
+						0xFFCC->show_npc_face0(0x0000);
 					}
-					if (var000F == 0x0002) {
-						say("\"What dost thou take me for? ",
-							var0003,
-							" filari, and no less!\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"Why, if I accepted such a price as this, I may as well sell the inn ta Olon!\"");
-						if (Func0942(0xFFC6)) {
-							0xFFC6->show_npc_face1(0x0000);
-							say("\"Sounds good ta me!\"");
-							UI_remove_npc_face1();
-							0xFFCC->show_npc_face0(0x0000);
-						}
-						say("\"",
-							var0003,
-							" filari is where I stand.\"");
-					}
-					if (var000A < 0x001F) {
-						0xFFCC->set_npc_id(var000A + 0x0001);
-					}
+					say("\"",
+						var0003,
+						" filari is where I stand.\"");
+				}
+				if (var000A < 0x001F) {
+					0xFFCC->set_npc_id(var000A + 0x0001);
 				}
 			}
 		}
@@ -91156,198 +91026,198 @@ var Func0841 0x841 (var var0000, var var0001) {
 		var000C = Func0956(["yes", "no", "haggle"]);
 		if (var000C == "no") {
 			return 0x0000;
+		}
+		if (var000C == "yes") {
+			var000D = 0x0000;
 		} else {
-			if (var000C == "yes") {
-				var000D = 0x0000;
-			} else {
-				var000E = Func0999(var0004, var0001, var000A, var0005, var0009, var0006, var0007);
-				var0009 = (var0009 + 0x0001);
-				var0007 = var000E[0x0004];
-				var000D = var000E[0x0003];
-				var000F = var0004;
-				var0004 = var000E[0x0002];
-				var0005 = var000E[0x0001];
-			}
-			var0010 = UI_get_random(0x0003);
-			if (var000D < 0x0002) {
-				if (var0004 < (var0001 + ((var0000 - var0001) / 0x0004))) {
-					if (var0010 == 0x0001) {
-						say("\"If thou sayest a word about this price to anyone, I will deny it!\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"Perhaps I should give this away in the streets, after agreeing to this price!\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"Thou art certainly a fast talker. I will have to watch thee carefully...\"");
-					}
-				} else {
-					if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-						if (var0010 == 0x0001) {
-							say("\"A good price for such fine wine, eh?\"");
-						}
-						if (var0010 == 0x0002) {
-							say("\"I am feeling generous today... Thou art lucky!\"");
-						}
-						if (var0010 == 0x0003) {
-							say("\"I shall have to count my fingers after thou dost leave. Thou art a slick bargainer, indeed!\"");
-						}
-					} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-						if (var0010 == 0x0001) {
-							say("\"Good price. Good wine.\"");
-						}
-						if (var0010 == 0x0002) {
-							say("\"I shall have no profit today, it seems.\"");
-						}
-						if (var0010 == 0x0003) {
-							say("\"Tell everyone thou dost meet about our wine, ",
-								var0002,
-								"... and about our fair prices!\"");
-						}
-					} else {
-						if (var0010 == 0x0001) {
-							say("\"A well-made bargain, ",
-								var0002,
-								".\"");
-						}
-						if (var0010 == 0x0002) {
-							say("\"Enjoy thy stay here in Moonshade, ",
-								var0002,
-								". I am certain that I shall not have any trouble from thee.\"");
-						}
-						if (var0010 == 0x0003) {
-							say("\"Our wine is in great demand during these hard times, ",
-								var0002,
-								". So our prices are higher than they once were.\"");
-						}
-					}
-				}
-				say("\"Wilt thou agree to ",
-					var0004,
-					" guilders, ",
-					var0002,
-					"?\"");
-				if (Func0955()) {
-					if (var000B > 0x0001) {
-						0xFFE9->set_npc_id(var000B - 0x0002);
-					}
-					return var0004;
-				} else if (var0010 == 0x0001) {
-					say("\"Thou art a fine one! I thought we had an agreement.\"");
+			var000E = Func0999(var0004, var0001, var000A, var0005, var0009, var0006, var0007);
+			var0009 = (var0009 + 0x0001);
+			var0007 = var000E[0x0004];
+			var000D = var000E[0x0003];
+			var000F = var0004;
+			var0004 = var000E[0x0002];
+			var0005 = var000E[0x0001];
+		}
+		var0010 = UI_get_random(0x0003);
+		if (var000D < 0x0002) {
+			if (var0004 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var0010 == 0x0001) {
+					say("\"If thou sayest a word about this price to anyone, I will deny it!\"");
 				}
 				if (var0010 == 0x0002) {
-					say("\"Thou art about to make me angry, ",
-						var0002,
-						". 'Tis a dangerous thing to break a deal...\"");
+					say("\"Perhaps I should give this away in the streets, after agreeing to this price!\"");
 				}
 				if (var0010 == 0x0003) {
-					say("\"I am a busy woman, ",
-						var0002,
-						". I do not take it kindly when someone wastes my time. Thou hadst best walk carefully here in Moonshade from now on.\"");
-					abort;
-				}
-				if (0x001F < (var000B + 0x000A)) {
-					0xFFE9->set_npc_id(0x001F);
-				} else {
-					0xFFE9->set_npc_id(var000B + 0x000A);
-				}
-				return 0x0000;
-			}
-			if (var0007 == 0x0001) {
-				if (var000D == 0x0005) {
-					say("\"That ",
-						var0004,
-						" was my final offer. I have no more time to deal with thee. Dost thou accept?\"");
-					if (var000B < 0x001C) {
-						0xFFE9->set_npc_id(var000B + 0x0004);
-					}
-					if (Func0955()) {
-						return var0004;
-					}
-					var0008 = 0x0000;
-				} else {
-					say("\"",
-						var0004,
-						" guilders... Or take thy business elsewhere.\"");
-					if (var000B < 0x001E) {
-						0xFFE9->set_npc_id(var000B + 0x0002);
-					}
+					say("\"Thou art certainly a fast talker. I will have to watch thee carefully...\"");
 				}
 			} else {
-				if (var000D == 0x0002) {
+				if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
 					if (var0010 == 0x0001) {
-						say("\"I like thee... How does ",
-							var0004,
-							" guilders sound?\"");
+						say("\"A good price for such fine wine, eh?\"");
 					}
 					if (var0010 == 0x0002) {
-						say("\"Thou art a fine sort. How about ",
-							var0004,
-							" guilders?\"");
+						say("\"I am feeling generous today... Thou art lucky!\"");
 					}
 					if (var0010 == 0x0003) {
-						say("\"I will make thee a special deal -- How does ",
-							var0004,
-							" guilders sound?\"");
+						say("\"I shall have to count my fingers after thou dost leave. Thou art a slick bargainer, indeed!\"");
 					}
-				}
-				if (var000D == 0x0003) {
+				} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
 					if (var0010 == 0x0001) {
-						say("\"Wilt thou consider ",
-							var0004,
-							" guilders? I must pay the MageLord, after all.\"");
+						say("\"Good price. Good wine.\"");
 					}
 					if (var0010 == 0x0002) {
-						say("\"",
-							var0004,
-							"? Any less and I shall have to face the Council.\"");
+						say("\"I shall have no profit today, it seems.\"");
 					}
 					if (var0010 == 0x0003) {
-						say("\"Perhaps ",
-							var0004,
-							" guilders? 'Tis not a great amount.\"");
-					}
-				}
-				if (var000D == 0x0004) {
-					if (var0010 == 0x0001) {
-						say("\"",
-							var0004,
-							" guilders is as low as I can go. I dare not take any less, if I am to pay the taxes.\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"This is the only magical wine thou wilt ever find, ",
+						say("\"Tell everyone thou dost meet about our wine, ",
 							var0002,
-							". Surely thou canst see that I can go no lower than ",
-							var0004,
-							" guilders.\"");
+							"... and about our fair prices!\"");
 					}
-					if (var0010 == 0x0003) {
-						say("\"Even the MageLord pays ",
-							var0004,
-							" guilders. I can go no lower than that.\"");
-					}
-				}
-				if (var000D == 0x0005) {
-					var0004 = var000F;
+				} else {
 					if (var0010 == 0x0001) {
-						say("\"My previous price stands, at ",
-							var0004,
-							" guilders. I am no fool, ",
+						say("\"A well-made bargain, ",
 							var0002,
-							"!\"");
+							".\"");
 					}
 					if (var0010 == 0x0002) {
-						say("\"",
-							var0004,
-							" guilders, and no less! Thou wilt not take advantage of my good nature so!\"");
+						say("\"Enjoy thy stay here in Moonshade, ",
+							var0002,
+							". I am certain that I shall not have any trouble from thee.\"");
 					}
 					if (var0010 == 0x0003) {
-						say("\"I have a reputation to consider... ",
-							var0004,
-							" guilders is where I stand.\"");
+						say("\"Our wine is in great demand during these hard times, ",
+							var0002,
+							". So our prices are higher than they once were.\"");
 					}
-					if (var000B < 0x001F) {
-						0xFFE9->set_npc_id(var000B + 0x0001);
-					}
+				}
+			}
+			say("\"Wilt thou agree to ",
+				var0004,
+				" guilders, ",
+				var0002,
+				"?\"");
+			if (Func0955()) {
+				if (var000B > 0x0001) {
+					0xFFE9->set_npc_id(var000B - 0x0002);
+				}
+				return var0004;
+			}
+			if (var0010 == 0x0001) {
+				say("\"Thou art a fine one! I thought we had an agreement.\"");
+			}
+			if (var0010 == 0x0002) {
+				say("\"Thou art about to make me angry, ",
+					var0002,
+					". 'Tis a dangerous thing to break a deal...\"");
+			}
+			if (var0010 == 0x0003) {
+				say("\"I am a busy woman, ",
+					var0002,
+					". I do not take it kindly when someone wastes my time. Thou hadst best walk carefully here in Moonshade from now on.\"");
+				abort;
+			}
+			if (0x001F < (var000B + 0x000A)) {
+				0xFFE9->set_npc_id(0x001F);
+			} else {
+				0xFFE9->set_npc_id(var000B + 0x000A);
+			}
+			return 0x0000;
+		}
+		if (var0007 == 0x0001) {
+			if (var000D == 0x0005) {
+				say("\"That ",
+					var0004,
+					" was my final offer. I have no more time to deal with thee. Dost thou accept?\"");
+				if (var000B < 0x001C) {
+					0xFFE9->set_npc_id(var000B + 0x0004);
+				}
+				if (Func0955()) {
+					return var0004;
+				}
+				var0008 = 0x0000;
+			} else {
+				say("\"",
+					var0004,
+					" guilders... Or take thy business elsewhere.\"");
+				if (var000B < 0x001E) {
+					0xFFE9->set_npc_id(var000B + 0x0002);
+				}
+			}
+		} else {
+			if (var000D == 0x0002) {
+				if (var0010 == 0x0001) {
+					say("\"I like thee... How does ",
+						var0004,
+						" guilders sound?\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"Thou art a fine sort. How about ",
+						var0004,
+						" guilders?\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"I will make thee a special deal -- How does ",
+						var0004,
+						" guilders sound?\"");
+				}
+			}
+			if (var000D == 0x0003) {
+				if (var0010 == 0x0001) {
+					say("\"Wilt thou consider ",
+						var0004,
+						" guilders? I must pay the MageLord, after all.\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"",
+						var0004,
+						"? Any less and I shall have to face the Council.\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"Perhaps ",
+						var0004,
+						" guilders? 'Tis not a great amount.\"");
+				}
+			}
+			if (var000D == 0x0004) {
+				if (var0010 == 0x0001) {
+					say("\"",
+						var0004,
+						" guilders is as low as I can go. I dare not take any less, if I am to pay the taxes.\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"This is the only magical wine thou wilt ever find, ",
+						var0002,
+						". Surely thou canst see that I can go no lower than ",
+						var0004,
+						" guilders.\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"Even the MageLord pays ",
+						var0004,
+						" guilders. I can go no lower than that.\"");
+				}
+			}
+			if (var000D == 0x0005) {
+				var0004 = var000F;
+				if (var0010 == 0x0001) {
+					say("\"My previous price stands, at ",
+						var0004,
+						" guilders. I am no fool, ",
+						var0002,
+						"!\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"",
+						var0004,
+						" guilders, and no less! Thou wilt not take advantage of my good nature so!\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"I have a reputation to consider... ",
+						var0004,
+						" guilders is where I stand.\"");
+				}
+				if (var000B < 0x001F) {
+					0xFFE9->set_npc_id(var000B + 0x0001);
 				}
 			}
 		}
@@ -91400,7 +91270,8 @@ void Func0842 0x842 () {
 				var0000,
 				".\"");
 			break;
-		} else if (var0003 == "leather goods") {
+		}
+		if (var0003 == "leather goods") {
 			var0004 = ["nothing", "leather armour", "leather gloves", "leather boots", "leather helm", "leather leggings"];
 			var0005 = [0x0000, 0x0239, 0x0243, 0x024B, 0x03EC, 0x023E];
 			var0006 = [0xFE99, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000];
@@ -92008,216 +91879,216 @@ var Func0844 0x844 (var var0000, var var0001) {
 		var000D = Func0956(["yes", "no", "haggle"]);
 		if (var000D == "no") {
 			return 0x0000;
+		}
+		if (var000D == "yes") {
+			var000E = 0x0000;
 		} else {
-			if (var000D == "yes") {
-				var000E = 0x0000;
-			} else {
-				var000F = Func0999(var0005, var0001, var000B, var0006, var000A, var0007, var0008);
-				var000A = (var000A + 0x0001);
-				var0008 = var000F[0x0004];
-				var000E = var000F[0x0003];
-				var0010 = var0005;
-				var0005 = var000F[0x0002];
-				var0006 = var000F[0x0001];
-			}
-			var0011 = UI_get_random(0x0003);
-			if (var000E < 0x0002) {
-				if (var0005 < (var0001 + ((var0000 - var0001) / 0x0004))) {
-					if (var0011 == 0x0001) {
-						say("\"Thou art a shrewd bargainer, ",
-							var0002,
-							". I would be hard pressed to make a profit with such a price.\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"",
-							var0004,
-							", thy skill at bargaining is excellent. I believe I have actually lost money in this deal.\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"Thy trading skills are very sharp, ",
-							var0002,
-							".\"");
-					}
-				} else {
-					if (var0005 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-						if (var0011 == 0x0001) {
-							say("\"Thou art lucky I am in such a good mood today, ",
-								var0002,
-								"! 'Tis not often I lower my prices such...\"");
-						}
-						if (var0011 == 0x0002) {
-							say("\"",
-								var0004,
-								", thou art a scoundrel! I would be penniless very soon if I bargained such a price more than a few times!\"");
-						}
-						if (var0011 == 0x0003) {
-							say("\"'Tis not often I practically give my goods away! Thou art a skilled trader, ",
-								var0002,
-								"!\"");
-						}
-					} else if (var0005 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-						if (var0011 == 0x0001) {
-							say("\"My prices are just, ",
-								var0002,
-								".  Thou shouldst travel to Fawn if thou dost believe mine steep.\"");
-						}
-						if (var0011 == 0x0002) {
-							say("\"'Tis a pleasure to trade with thee, ",
-								var0002,
-								".\"");
-						}
-						if (var0011 == 0x0003) {
-							say("\"",
-								var0004,
-								", I shall remember thee!  Please come to my shop whenever thou art in Monitor!\"");
-						}
-					} else {
-						if (var0011 == 0x0001) {
-							say("\"",
-								var0004,
-								", thou hast my gratitude!\"");
-						}
-						if (var0011 == 0x0002) {
-							say("\"A blessing upon thee, ",
-								var0002,
-								"!\"");
-						}
-						if (var0011 == 0x0003) {
-							say("\"My prices are steep, ",
-								var0002,
-								", for supplies are very scarce due to the Goblin raids.\"");
-						}
-					}
-				}
-				say("\"Thou hast agreed to a price of ",
-					var0005,
-					" monetari, ",
-					var0002,
-					"?\"");
-				if (Func0955()) {
-					if (var000C > 0x0001) {
-						0xFFBC->set_npc_id(var000C - 0x0002);
-					}
-					return var0005;
-				} else if (var0011 == 0x0001) {
-					say("\"Thou shouldst not argue with me only to change thy mind when we have agreed to a firm price!\"");
+			var000F = Func0999(var0005, var0001, var000B, var0006, var000A, var0007, var0008);
+			var000A = (var000A + 0x0001);
+			var0008 = var000F[0x0004];
+			var000E = var000F[0x0003];
+			var0010 = var0005;
+			var0005 = var000F[0x0002];
+			var0006 = var000F[0x0001];
+		}
+		var0011 = UI_get_random(0x0003);
+		if (var000E < 0x0002) {
+			if (var0005 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var0011 == 0x0001) {
+					say("\"Thou art a shrewd bargainer, ",
+						var0002,
+						". I would be hard pressed to make a profit with such a price.\"");
 				}
 				if (var0011 == 0x0002) {
-					say("\"What of our bargain? Thou hast disappointed me, ",
+					say("\"",
+						var0004,
+						", thy skill at bargaining is excellent. I believe I have actually lost money in this deal.\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"Thy trading skills are very sharp, ",
 						var0002,
 						".\"");
 				}
-				if (var0011 == 0x0003) {
-					say("\"This is not honorable! I do not have time to play games with thee! Begone!\"");
-					abort;
-				}
-				if (0x001F < (var000C + 0x000A)) {
-					0xFFBC->set_npc_id(0x001F);
-				} else {
-					0xFFBC->set_npc_id(var000C + 0x000A);
-				}
-				return 0x0000;
-			}
-			if (var0008 == 0x0001) {
-				if (var000E == 0x0005) {
-					say("\"I said that ",
-						var0005,
-						" was my final offer. Dost thou accept?\"");
-					if (var000C < 0x001C) {
-						0xFFBC->set_npc_id(var000C + 0x0004);
-					}
-					if (Func0955()) {
-						return var0005;
-					}
-					var0009 = 0x0000;
-				} else {
-					say("\"",
-						var0005,
-						" monetari is my final offer.\"");
-					if (var000C < 0x001E) {
-						0xFFBC->set_npc_id(var000C + 0x0002);
-					}
-				}
 			} else {
-				if (var000E == 0x0002) {
+				if (var0005 < (var0001 + ((var0000 - var0001) / 0x0003))) {
 					if (var0011 == 0x0001) {
-						say("\"'Tis a pleasure to trade with thee, ",
+						say("\"Thou art lucky I am in such a good mood today, ",
 							var0002,
-							". How doth ",
-							var0005,
-							" monetari sound?\"");
+							"! 'Tis not often I lower my prices such...\"");
 					}
 					if (var0011 == 0x0002) {
 						say("\"",
 							var0004,
-							", only for thee I will give a special price. How doth ",
-							var0005,
-							" monetari sound to thee?\"");
+							", thou art a scoundrel! I would be penniless very soon if I bargained such a price more than a few times!\"");
 					}
 					if (var0011 == 0x0003) {
-						say("\"My price is ",
-							var0005,
-							" monetari, ",
+						say("\"'Tis not often I practically give my goods away! Thou art a skilled trader, ",
 							var0002,
-							". Dost thou accept?\"");
+							"!\"");
 					}
-				}
-				if (var000E == 0x0003) {
+				} else if (var0005 < (var0001 + ((var0000 - var0001) / 0x0002))) {
 					if (var0011 == 0x0001) {
-						say("\"I am not sure. Wouldst thou consider ",
-							var0005,
-							" monetari?\"");
+						say("\"My prices are just, ",
+							var0002,
+							".  Thou shouldst travel to Fawn if thou dost believe mine steep.\"");
 					}
 					if (var0011 == 0x0002) {
-						say("\"Hmmm... I am not certain... ",
-							var0005,
-							" monetari?\"");
+						say("\"'Tis a pleasure to trade with thee, ",
+							var0002,
+							".\"");
 					}
 					if (var0011 == 0x0003) {
-						say("\"The cost of my goods hath increased. Perhaps ",
-							var0005,
-							" monetari?\"");
-					}
-				}
-				if (var000E == 0x0004) {
-					if (var0011 == 0x0001) {
-						say("\"If I did not know better, I would believe thou dost jest with me. ",
-							var0005,
-							" monetari is as low as I can go.\"");
-						say("\"What dost thou say to this?\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"Even if the storms are driving away my customers, I still cannot accept less than ",
-							var0005,
-							" monetari.\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"Thou dost think too highly of thyself, my friend. I can accept no less than ",
-							var0005,
-							" monetari.\"");
-					}
-				}
-				if (var000E == 0x0005) {
-					var0005 = var0010;
-					if (var0011 == 0x0001) {
-						say("\"Thou art touched by the storms if thou dost think I would accept such a ridiculous offer! My previous price stands, at ",
-							var0005,
-							" monetari.\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"I do not give my goods away! ",
-							var0005,
-							" monetari, and no less!\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"I would rather belong to the Bear Command than accept such an offer!\"");
 						say("\"",
-							var0005,
-							" monetari is as low as I will go!\"");
+							var0004,
+							", I shall remember thee!  Please come to my shop whenever thou art in Monitor!\"");
 					}
-					if (var000C < 0x001F) {
-						0xFFBC->set_npc_id(var000C + 0x0001);
+				} else {
+					if (var0011 == 0x0001) {
+						say("\"",
+							var0004,
+							", thou hast my gratitude!\"");
 					}
+					if (var0011 == 0x0002) {
+						say("\"A blessing upon thee, ",
+							var0002,
+							"!\"");
+					}
+					if (var0011 == 0x0003) {
+						say("\"My prices are steep, ",
+							var0002,
+							", for supplies are very scarce due to the Goblin raids.\"");
+					}
+				}
+			}
+			say("\"Thou hast agreed to a price of ",
+				var0005,
+				" monetari, ",
+				var0002,
+				"?\"");
+			if (Func0955()) {
+				if (var000C > 0x0001) {
+					0xFFBC->set_npc_id(var000C - 0x0002);
+				}
+				return var0005;
+			}
+			if (var0011 == 0x0001) {
+				say("\"Thou shouldst not argue with me only to change thy mind when we have agreed to a firm price!\"");
+			}
+			if (var0011 == 0x0002) {
+				say("\"What of our bargain? Thou hast disappointed me, ",
+					var0002,
+					".\"");
+			}
+			if (var0011 == 0x0003) {
+				say("\"This is not honorable! I do not have time to play games with thee! Begone!\"");
+				abort;
+			}
+			if (0x001F < (var000C + 0x000A)) {
+				0xFFBC->set_npc_id(0x001F);
+			} else {
+				0xFFBC->set_npc_id(var000C + 0x000A);
+			}
+			return 0x0000;
+		}
+		if (var0008 == 0x0001) {
+			if (var000E == 0x0005) {
+				say("\"I said that ",
+					var0005,
+					" was my final offer. Dost thou accept?\"");
+				if (var000C < 0x001C) {
+					0xFFBC->set_npc_id(var000C + 0x0004);
+				}
+				if (Func0955()) {
+					return var0005;
+				}
+				var0009 = 0x0000;
+			} else {
+				say("\"",
+					var0005,
+					" monetari is my final offer.\"");
+				if (var000C < 0x001E) {
+					0xFFBC->set_npc_id(var000C + 0x0002);
+				}
+			}
+		} else {
+			if (var000E == 0x0002) {
+				if (var0011 == 0x0001) {
+					say("\"'Tis a pleasure to trade with thee, ",
+						var0002,
+						". How doth ",
+						var0005,
+						" monetari sound?\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"",
+						var0004,
+						", only for thee I will give a special price. How doth ",
+						var0005,
+						" monetari sound to thee?\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"My price is ",
+						var0005,
+						" monetari, ",
+						var0002,
+						". Dost thou accept?\"");
+				}
+			}
+			if (var000E == 0x0003) {
+				if (var0011 == 0x0001) {
+					say("\"I am not sure. Wouldst thou consider ",
+						var0005,
+						" monetari?\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"Hmmm... I am not certain... ",
+						var0005,
+						" monetari?\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"The cost of my goods hath increased. Perhaps ",
+						var0005,
+						" monetari?\"");
+				}
+			}
+			if (var000E == 0x0004) {
+				if (var0011 == 0x0001) {
+					say("\"If I did not know better, I would believe thou dost jest with me. ",
+						var0005,
+						" monetari is as low as I can go.\"");
+					say("\"What dost thou say to this?\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"Even if the storms are driving away my customers, I still cannot accept less than ",
+						var0005,
+						" monetari.\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"Thou dost think too highly of thyself, my friend. I can accept no less than ",
+						var0005,
+						" monetari.\"");
+				}
+			}
+			if (var000E == 0x0005) {
+				var0005 = var0010;
+				if (var0011 == 0x0001) {
+					say("\"Thou art touched by the storms if thou dost think I would accept such a ridiculous offer! My previous price stands, at ",
+						var0005,
+						" monetari.\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"I do not give my goods away! ",
+						var0005,
+						" monetari, and no less!\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"I would rather belong to the Bear Command than accept such an offer!\"");
+					say("\"",
+						var0005,
+						" monetari is as low as I will go!\"");
+				}
+				if (var000C < 0x001F) {
+					0xFFBC->set_npc_id(var000C + 0x0001);
 				}
 			}
 		}
@@ -92278,137 +92149,136 @@ void Func0845 0x845 () {
 			}
 			var0002 = false;
 			continue;
-		} else {
-			var000C = var0006[var000B];
-			var000D = 0x0000;
-			var000E = UI_die_roll(0x0001, 0x0006);
-			if (var000E == 0x0001) {
-				var000F = "Doth that sound good?";
-			}
-			if (var000E == 0x0002) {
-				var000F = "Dost thou take this price?";
-			}
-			if (var000E == 0x0003) {
-				var000F = "Dost thou find the price agreeable?";
-			}
-			if (var000E == 0x0004) {
-				var000F = "Dost thou agree?";
-			}
-			if (var000E == 0x0005) {
-				var000F = "How doth that sound?";
-			}
-			if (var000E == 0x0006) {
-				var000F = "Wilt thou agree to my price?";
-			}
-			if (var000B == 0x0002) {
-				say("\"",
-					var000C,
-					" monetari for the most delectable fowl thou hast ever tasted.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "fowl";
-			}
-			if (var000B == 0x0003) {
-				say("\"The beef dinner costs ",
-					var000C,
-					" monetari, a bargain at twice the price.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "beef dinners";
-			}
-			if (var000B == 0x0004) {
-				say("\"The ribs are a specialty of mine. Special spices, thou seest... They cost ",
-					var000C,
-					" monetari.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "ribs";
-			}
-			if (var000B == 0x0005) {
-				say("\"My bread is baked fresh every day. ",
-					var000C,
-					" monetari is my price.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "loaves of bread";
-			}
-			if (var000B == 0x0006) {
-				say("\"The fish dinner costs ",
-					var000C,
-					" monetari. 'Tis grilled trout with a nice butter sauce to top it. Very delicious, ",
-					var0000,
-					".\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "fish dinners";
-			}
-			if (var000B == 0x0007) {
-				say("\"",
-					var000C,
-					" monetari for my fine sausage dinner, ",
-					var0000,
-					".\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "sausages";
-			}
-			if (var000B == 0x0008) {
-				say("\"",
-					var000C,
-					" monetari is a low price to pay for my cake, ",
-					var0000,
-					", if thou dost like things that are sweet...\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "cakes";
-			}
-			if (var000C == var0007[var000B]) {
-				if (Func0955()) {
-					var0011 = var000C;
-				} else {
-					var0011 = 0x0000;
-				}
+		}
+		var000C = var0006[var000B];
+		var000D = 0x0000;
+		var000E = UI_die_roll(0x0001, 0x0006);
+		if (var000E == 0x0001) {
+			var000F = "Doth that sound good?";
+		}
+		if (var000E == 0x0002) {
+			var000F = "Dost thou take this price?";
+		}
+		if (var000E == 0x0003) {
+			var000F = "Dost thou find the price agreeable?";
+		}
+		if (var000E == 0x0004) {
+			var000F = "Dost thou agree?";
+		}
+		if (var000E == 0x0005) {
+			var000F = "How doth that sound?";
+		}
+		if (var000E == 0x0006) {
+			var000F = "Wilt thou agree to my price?";
+		}
+		if (var000B == 0x0002) {
+			say("\"",
+				var000C,
+				" monetari for the most delectable fowl thou hast ever tasted.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "fowl";
+		}
+		if (var000B == 0x0003) {
+			say("\"The beef dinner costs ",
+				var000C,
+				" monetari, a bargain at twice the price.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "beef dinners";
+		}
+		if (var000B == 0x0004) {
+			say("\"The ribs are a specialty of mine. Special spices, thou seest... They cost ",
+				var000C,
+				" monetari.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "ribs";
+		}
+		if (var000B == 0x0005) {
+			say("\"My bread is baked fresh every day. ",
+				var000C,
+				" monetari is my price.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "loaves of bread";
+		}
+		if (var000B == 0x0006) {
+			say("\"The fish dinner costs ",
+				var000C,
+				" monetari. 'Tis grilled trout with a nice butter sauce to top it. Very delicious, ",
+				var0000,
+				".\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "fish dinners";
+		}
+		if (var000B == 0x0007) {
+			say("\"",
+				var000C,
+				" monetari for my fine sausage dinner, ",
+				var0000,
+				".\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "sausages";
+		}
+		if (var000B == 0x0008) {
+			say("\"",
+				var000C,
+				" monetari is a low price to pay for my cake, ",
+				var0000,
+				", if thou dost like things that are sweet...\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "cakes";
+		}
+		if (var000C == var0007[var000B]) {
+			if (Func0955()) {
+				var0011 = var000C;
 			} else {
-				var0011 = Func0847(var0006[var000B], var0007[var000B]);
+				var0011 = 0x0000;
 			}
-			if (var0011 > 0x0000) {
-				if (var0009[var000B] == 0x0001) {
-					say("\"How many ",
-						var0010,
-						" wouldst thou like?\"");
-					var000D = Func0943(var0004[var000B], var0005[var000B], var0008[var000B], var000A, var0011, 0x000A, 0x0001, false);
-				} else {
-					var000D = Func0943(var0004[var000B], var0005[var000B], 0x0001, var000A, var0011, 0x0000, 0x0001, false);
-				}
+		} else {
+			var0011 = Func0847(var0006[var000B], var0007[var000B]);
+		}
+		if (var0011 > 0x0000) {
+			if (var0009[var000B] == 0x0001) {
+				say("\"How many ",
+					var0010,
+					" wouldst thou like?\"");
+				var000D = Func0943(var0004[var000B], var0005[var000B], var0008[var000B], var000A, var0011, 0x000A, 0x0001, false);
+			} else {
+				var000D = Func0943(var0004[var000B], var0005[var000B], 0x0001, var000A, var0011, 0x0000, 0x0001, false);
 			}
-			if (var000D == 0x0001) {
-				say("\"Enjoy thy meal!\"");
-			} else if (var000D == 0x0002) {
-				say("\"I believe thou canst not carry so much food, ",
+		}
+		if (var000D == 0x0001) {
+			say("\"Enjoy thy meal!\"");
+		} else if (var000D == 0x0002) {
+			say("\"I believe thou canst not carry so much food, ",
+				var0000,
+				".\"");
+		} else if (var000D == 0x0003) {
+			var0012 = Func0992(0x0001, (("@But " + var0000) + ", we have not the monetari to pay for this.@"), 0x0000, false);
+			if (var0012 != 0xFE9C) {
+				0xFFBA->show_npc_face0(0x0000);
+				say("\"I am truly sorry, but thou dost not have enough money to pay for that, ",
 					var0000,
 					".\"");
-			} else if (var000D == 0x0003) {
-				var0012 = Func0992(0x0001, (("@But " + var0000) + ", we have not the monetari to pay for this.@"), 0x0000, false);
-				if (var0012 != 0xFE9C) {
-					0xFFBA->show_npc_face0(0x0000);
-					say("\"I am truly sorry, but thou dost not have enough money to pay for that, ",
-						var0000,
-						".\"");
-				} else {
-					say("\"It would appear thou dost not have enough monetari for that...\"");
-				}
-				if (0x001F < (0xFFBA->get_npc_id() + 0x0006)) {
-					0xFFBA->set_npc_id(0x001F);
-				} else {
-					0xFFBA->set_npc_id(0xFFBA->get_npc_id() + 0x0006);
-				}
+			} else {
+				say("\"It would appear thou dost not have enough monetari for that...\"");
+			}
+			if (0x001F < (0xFFBA->get_npc_id() + 0x0006)) {
+				0xFFBA->set_npc_id(0x001F);
+			} else {
+				0xFFBA->set_npc_id(0xFFBA->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Wouldst thou care for more?\"");
@@ -92473,69 +92343,68 @@ void Func0846 0x846 () {
 			}
 			var0003 = false;
 			continue;
-		} else {
-			var000D = var0007[var000C];
-			var000E = 0x0000;
-			if (var000C == 0x0002) {
-				say("\"The wine is a bit dry and a little sweet. I will sell thee a bottle for ",
-					var000D,
-					" monetari.\"");
-				say("\"Dost thou accept?\"");
-				var000F = "wine bottles";
-			}
-			if (var000C == 0x0003) {
-				say("\"Our mead is flavorful and very filling, ",
-					var0000,
-					".\"");
-				say("\"For the price of ",
-					var000D,
-					" monetari, thou wilt accept some?\"");
-				var000F = "bottles of mead";
-			}
-			if (var000C == 0x0004) {
-				say("\"",
-					var000D,
-					" monetari for a mug of ale. All the men seem to enjoy it! Dost thou want any?\"");
-				var000F = "mugs of ale";
-			}
-			if (var000D == var0008[var000C]) {
-				if (Func0955()) {
-					var0010 = var000D;
-				} else {
-					var0010 = 0x0000;
-				}
+		}
+		var000D = var0007[var000C];
+		var000E = 0x0000;
+		if (var000C == 0x0002) {
+			say("\"The wine is a bit dry and a little sweet. I will sell thee a bottle for ",
+				var000D,
+				" monetari.\"");
+			say("\"Dost thou accept?\"");
+			var000F = "wine bottles";
+		}
+		if (var000C == 0x0003) {
+			say("\"Our mead is flavorful and very filling, ",
+				var0000,
+				".\"");
+			say("\"For the price of ",
+				var000D,
+				" monetari, thou wilt accept some?\"");
+			var000F = "bottles of mead";
+		}
+		if (var000C == 0x0004) {
+			say("\"",
+				var000D,
+				" monetari for a mug of ale. All the men seem to enjoy it! Dost thou want any?\"");
+			var000F = "mugs of ale";
+		}
+		if (var000D == var0008[var000C]) {
+			if (Func0955()) {
+				var0010 = var000D;
 			} else {
-				var0010 = Func0847(var0007[var000C], var0008[var000C]);
+				var0010 = 0x0000;
 			}
-			if (var0010 > 0x0000) {
-				if (var000A[var000C] == 0x0001) {
-					say("\"How many ",
-						var000F,
-						" wouldst thou like?\"");
-					var000E = Func0943(var0005[var000C], var0006[var000C], var0009[var000C], var000B, var0010, 0x000A, 0x0001, false);
-				} else {
-					var000E = Func0943(var0005[var000C], var0006[var000C], 0x0001, var000B, var0010, 0x0000, 0x0001, false);
-				}
+		} else {
+			var0010 = Func0847(var0007[var000C], var0008[var000C]);
+		}
+		if (var0010 > 0x0000) {
+			if (var000A[var000C] == 0x0001) {
+				say("\"How many ",
+					var000F,
+					" wouldst thou like?\"");
+				var000E = Func0943(var0005[var000C], var0006[var000C], var0009[var000C], var000B, var0010, 0x000A, 0x0001, false);
+			} else {
+				var000E = Func0943(var0005[var000C], var0006[var000C], 0x0001, var000B, var0010, 0x0000, 0x0001, false);
 			}
-			if (var000E == 0x0001) {
-				say("\"To thine health, ",
-					var0000,
-					"!\"");
-			} else if (var000E == 0x0002) {
-				say("\"Thou shouldst not travel so heavily burdened -- I do not think that thou canst bear the bottles that thou desirest!\"");
-			} else if (var000E == 0x0003) {
-				var0011 = Func0992(0x0001, (("@But " + var0001) + ", we lack adequate funds!@"), 0x0000, false);
-				if (var0011 != 0xFE9C) {
-					0xFFBA->show_npc_face0(0x0000);
-					say("\"Then thy thirst will not be quenched here.\"");
-				} else {
-					say("\"It seems thou dost not have the funds to pay me...\"");
-				}
-				if (0x001F < (0xFFBA->get_npc_id() + 0x0006)) {
-					0xFFBA->set_npc_id(0x001F);
-				} else {
-					0xFFBA->set_npc_id(0xFFBA->get_npc_id() + 0x0006);
-				}
+		}
+		if (var000E == 0x0001) {
+			say("\"To thine health, ",
+				var0000,
+				"!\"");
+		} else if (var000E == 0x0002) {
+			say("\"Thou shouldst not travel so heavily burdened -- I do not think that thou canst bear the bottles that thou desirest!\"");
+		} else if (var000E == 0x0003) {
+			var0011 = Func0992(0x0001, (("@But " + var0001) + ", we lack adequate funds!@"), 0x0000, false);
+			if (var0011 != 0xFE9C) {
+				0xFFBA->show_npc_face0(0x0000);
+				say("\"Then thy thirst will not be quenched here.\"");
+			} else {
+				say("\"It seems thou dost not have the funds to pay me...\"");
+			}
+			if (0x001F < (0xFFBA->get_npc_id() + 0x0006)) {
+				0xFFBA->set_npc_id(0x001F);
+			} else {
+				0xFFBA->set_npc_id(0xFFBA->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Wouldst thou care for more?\"");
@@ -92603,371 +92472,371 @@ var Func0847 0x847 (var var0000, var var0001) {
 		var000E = Func0956(["yes", "no", "haggle"]);
 		if (var000E == "no") {
 			return 0x0000;
+		}
+		if (var000E == "yes") {
+			var000F = 0x0000;
 		} else {
-			if (var000E == "yes") {
-				var000F = 0x0000;
-			} else {
-				var0010 = Func0999(var0006, var0001, var000C, var0007, var000B, var0008, var0009);
-				var000B = (var000B + 0x0001);
-				var0009 = var0010[0x0004];
-				var000F = var0010[0x0003];
-				var0011 = var0006;
-				var0006 = var0010[0x0002];
-				var0007 = var0010[0x0001];
-			}
-			var0012 = UI_get_random(0x0003);
-			if (var000F < 0x0002) {
-				if (var0006 < (var0001 + ((var0000 - var0001) / 0x0004))) {
-					if (var0003) {
-						if (var0012 == 0x0001) {
-							say("\"",
-								var0004,
-								", thou art very good at this... If I listened to thee much more, I would be penniless.\"");
-						}
-						if (var0012 == 0x0002) {
-							say("\"Thou dost bargain as well as any, ",
-								var0002,
-								". 'Tis truly a very low price I have agreed to!\"");
-						}
-						if (var0012 == 0x0003) {
-							say("\"Oh, if I were better at this, perhaps I could make more monetari.\"");
-						}
-					} else {
-						if (var0012 == 0x0001) {
-							say("\"If thou dost bargain so well as to bring my price this low, perhaps thou art better at other things as well...\"");
-						}
-						if (var0012 == 0x0002) {
-							say("\"",
-								var0004,
-								", thy words are very powerful... Perhaps thou dost wish to wrestle somewhat differently?\"");
-						}
-						if (var0012 == 0x0003) {
-							say("\"Ah, my sweet... Thou hast a very quick wit to bargain me so low. Are other parts of thee as well-equipped as thy tongue?\"");
-						}
-					}
-				} else {
-					if (var0006 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-						if (var0003) {
-							if (var0012 == 0x0001) {
-								say("\"A low price, but thou hast bargained well, dost thou not think?\"");
-							}
-							if (var0012 == 0x0002) {
-								say("\"",
-									var0004,
-									", thou hast bargained fairly, but this is a very low price.\"");
-							}
-							if (var0012 == 0x0003) {
-								say("\"A bit lower than I had hoped, ",
-									var0002,
-									", but 'twill do.\"");
-							}
-						} else {
-							if (var0012 == 0x0001) {
-								say("\"",
-									var0004,
-									", thou art getting a very good value for thy monetari, even if thy clever tongue did lower my price...\"");
-							}
-							if (var0012 == 0x0002) {
-								say("\"'Tis not often a man gets the better of me! Thou shouldst enjoy thyself, ",
-									var0002,
-									", taking advantage of a poor girl so...\"");
-							}
-							if (var0012 == 0x0003) {
-								say("\"Oooh...\"");
-								say("\"Thou didst certainly haggle a good price from me! Thou art naughty...\"");
-							}
-						}
-					} else if (var0006 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-						if (var0003) {
-							if (var0012 == 0x0001) {
-								say("\"A fair enough price, ",
-									var0002,
-									".\"");
-							}
-							if (var0012 == 0x0002) {
-								say("\"It hath a been pleasure to trade with thee, ",
-									var0002,
-									".\"");
-							}
-							if (var0012 == 0x0003) {
-								say("\"Thou hast made a good bargain, ",
-									var0002,
-									".\"");
-							}
-						} else {
-							if (var0012 == 0x0001) {
-								say("\"Oooh...\"");
-								say("\"Thou hast given me goose bumps, ",
-									var0002,
-									". Perhaps thou wilt spend more?\"");
-							}
-							if (var0012 == 0x0002) {
-								say("\"It hath been a pleasure trading with thee! Most men would try to take advantage of my sweet nature and lower my price even further!\"");
-							}
-							if (var0012 == 0x0003) {
-								say("\"Ah, my sweet, thou dost know how to make a girl feel well-liked!\"");
-							}
-						}
-					} else if (var0003) {
-						if (var0012 == 0x0001) {
-							say("\"",
-								var0004,
-								", thou mayest buy from me anytime!\"");
-						}
-						if (var0012 == 0x0002) {
-							say("\"Thou art most generous to offer such a price, ",
-								var0002,
-								"!\"");
-						}
-						if (var0012 == 0x0003) {
-							say("\"Enjoy thy stay in Monitor, ",
-								var0002,
-								". Thou art most welcome at The Slashing Blade!\"");
-						}
-					} else {
-						if (var0012 == 0x0001) {
-							say("\"",
-								var0004,
-								", thou hast made me cry! 'Tis most generous of thee!\"");
-						}
-						if (var0012 == 0x0002) {
-							say("\"Dost thou give all of thy money to other girls too, ",
-								var0002,
-								", or only to me?\"");
-						}
-						if (var0012 == 0x0003) {
-							say("\"'Tis sweet of thee to agree to this price, love...\"");
-						}
-					}
-				}
+			var0010 = Func0999(var0006, var0001, var000C, var0007, var000B, var0008, var0009);
+			var000B = (var000B + 0x0001);
+			var0009 = var0010[0x0004];
+			var000F = var0010[0x0003];
+			var0011 = var0006;
+			var0006 = var0010[0x0002];
+			var0007 = var0010[0x0001];
+		}
+		var0012 = UI_get_random(0x0003);
+		if (var000F < 0x0002) {
+			if (var0006 < (var0001 + ((var0000 - var0001) / 0x0004))) {
 				if (var0003) {
-					say("\"Thou hast agreed to a price of ",
-						var0006,
-						" monetari, ",
-						var0002,
-						"?\"");
-				} else {
-					say("\"So, handsome, thou hast agreed to ",
-						var0006,
-						" monetari?\"");
-				}
-				if (Func0955()) {
-					if (var000D > 0x0001) {
-						0xFFBA->set_npc_id(var000D - 0x0002);
-					}
-					return var0006;
-				} else if (var0003) {
 					if (var0012 == 0x0001) {
-						say("\"Thou art a vindictive woman to argue with me and then change thy mind out of spite!\"");
+						say("\"",
+							var0004,
+							", thou art very good at this... If I listened to thee much more, I would be penniless.\"");
 					}
 					if (var0012 == 0x0002) {
-						say("\"We in Monitor do not forget those who cross us!\"");
-						say("\"I do not think I shall be thy friend unless thou dost acquire better manners!\"");
-						abort;
+						say("\"Thou dost bargain as well as any, ",
+							var0002,
+							". 'Tis truly a very low price I have agreed to!\"");
 					}
 					if (var0012 == 0x0003) {
-						say("\"Art thou jealous of me to change thy mind so? If so, I am not amused!\"");
-						abort;
+						say("\"Oh, if I were better at this, perhaps I could make more monetari.\"");
 					}
 				} else {
 					if (var0012 == 0x0001) {
-						say("\"Oooh! Thou dost infuriate me! Just like a man to lead a poor girl on so!\"");
-						abort;
+						say("\"If thou dost bargain so well as to bring my price this low, perhaps thou art better at other things as well...\"");
 					}
 					if (var0012 == 0x0002) {
-						say("\"Do not think that I am fooled by thine handsome features! Thou art merely a mean- spirited man, the same as any other!\"");
-						abort;
+						say("\"",
+							var0004,
+							", thy words are very powerful... Perhaps thou dost wish to wrestle somewhat differently?\"");
+					}
+					if (var0012 == 0x0003) {
+						say("\"Ah, my sweet... Thou hast a very quick wit to bargain me so low. Are other parts of thee as well-equipped as thy tongue?\"");
+					}
+				}
+			} else {
+				if (var0006 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+					if (var0003) {
+						if (var0012 == 0x0001) {
+							say("\"A low price, but thou hast bargained well, dost thou not think?\"");
+						}
+						if (var0012 == 0x0002) {
+							say("\"",
+								var0004,
+								", thou hast bargained fairly, but this is a very low price.\"");
+						}
+						if (var0012 == 0x0003) {
+							say("\"A bit lower than I had hoped, ",
+								var0002,
+								", but 'twill do.\"");
+						}
+					} else {
+						if (var0012 == 0x0001) {
+							say("\"",
+								var0004,
+								", thou art getting a very good value for thy monetari, even if thy clever tongue did lower my price...\"");
+						}
+						if (var0012 == 0x0002) {
+							say("\"'Tis not often a man gets the better of me! Thou shouldst enjoy thyself, ",
+								var0002,
+								", taking advantage of a poor girl so...\"");
+						}
+						if (var0012 == 0x0003) {
+							say("\"Oooh...\"");
+							say("\"Thou didst certainly haggle a good price from me! Thou art naughty...\"");
+						}
+					}
+				} else if (var0006 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+					if (var0003) {
+						if (var0012 == 0x0001) {
+							say("\"A fair enough price, ",
+								var0002,
+								".\"");
+						}
+						if (var0012 == 0x0002) {
+							say("\"It hath a been pleasure to trade with thee, ",
+								var0002,
+								".\"");
+						}
+						if (var0012 == 0x0003) {
+							say("\"Thou hast made a good bargain, ",
+								var0002,
+								".\"");
+						}
+					} else {
+						if (var0012 == 0x0001) {
+							say("\"Oooh...\"");
+							say("\"Thou hast given me goose bumps, ",
+								var0002,
+								". Perhaps thou wilt spend more?\"");
+						}
+						if (var0012 == 0x0002) {
+							say("\"It hath been a pleasure trading with thee! Most men would try to take advantage of my sweet nature and lower my price even further!\"");
+						}
+						if (var0012 == 0x0003) {
+							say("\"Ah, my sweet, thou dost know how to make a girl feel well-liked!\"");
+						}
+					}
+				} else if (var0003) {
+					if (var0012 == 0x0001) {
+						say("\"",
+							var0004,
+							", thou mayest buy from me anytime!\"");
+					}
+					if (var0012 == 0x0002) {
+						say("\"Thou art most generous to offer such a price, ",
+							var0002,
+							"!\"");
+					}
+					if (var0012 == 0x0003) {
+						say("\"Enjoy thy stay in Monitor, ",
+							var0002,
+							". Thou art most welcome at The Slashing Blade!\"");
+					}
+				} else {
+					if (var0012 == 0x0001) {
+						say("\"",
+							var0004,
+							", thou hast made me cry! 'Tis most generous of thee!\"");
+					}
+					if (var0012 == 0x0002) {
+						say("\"Dost thou give all of thy money to other girls too, ",
+							var0002,
+							", or only to me?\"");
+					}
+					if (var0012 == 0x0003) {
+						say("\"'Tis sweet of thee to agree to this price, love...\"");
+					}
+				}
+			}
+			if (var0003) {
+				say("\"Thou hast agreed to a price of ",
+					var0006,
+					" monetari, ",
+					var0002,
+					"?\"");
+			} else {
+				say("\"So, handsome, thou hast agreed to ",
+					var0006,
+					" monetari?\"");
+			}
+			if (Func0955()) {
+				if (var000D > 0x0001) {
+					0xFFBA->set_npc_id(var000D - 0x0002);
+				}
+				return var0006;
+			}
+			if (var0003) {
+				if (var0012 == 0x0001) {
+					say("\"Thou art a vindictive woman to argue with me and then change thy mind out of spite!\"");
+				}
+				if (var0012 == 0x0002) {
+					say("\"We in Monitor do not forget those who cross us!\"");
+					say("\"I do not think I shall be thy friend unless thou dost acquire better manners!\"");
+					abort;
+				}
+				if (var0012 == 0x0003) {
+					say("\"Art thou jealous of me to change thy mind so? If so, I am not amused!\"");
+					abort;
+				}
+			} else {
+				if (var0012 == 0x0001) {
+					say("\"Oooh! Thou dost infuriate me! Just like a man to lead a poor girl on so!\"");
+					abort;
+				}
+				if (var0012 == 0x0002) {
+					say("\"Do not think that I am fooled by thine handsome features! Thou art merely a mean- spirited man, the same as any other!\"");
+					abort;
+				}
+				if (var0012 == 0x0003) {
+					say("\"",
+						var0004,
+						", what of our bargain?! Dost thou think to take advantage of me?\"");
+				}
+			}
+			if (0x001F < (var000D + 0x000A)) {
+				0xFFBA->set_npc_id(0x001F);
+			} else {
+				0xFFBA->set_npc_id(var000D + 0x000A);
+			}
+			return 0x0000;
+		}
+		if (var0009 == 0x0001) {
+			if (var000F == 0x0005) {
+				say("\"I said that ",
+					var0006,
+					" was my final offer. Dost thou accept?\"");
+				if (var000D < 0x001C) {
+					0xFFBA->set_npc_id(var000D + 0x0004);
+				}
+				if (Func0955()) {
+					return var0006;
+				}
+				var000A = 0x0000;
+			} else {
+				say("\"",
+					var0006,
+					" monetari is my final offer.\"");
+				if (var000D < 0x001E) {
+					0xFFBA->set_npc_id(var000D + 0x0002);
+				}
+			}
+		} else {
+			if (var000F == 0x0002) {
+				if (var0003) {
+					if (var0012 == 0x0001) {
+						say("\"'Tis a pleasure to barter with thee, ",
+							var0002,
+							". ",
+							var0006,
+							" monetari?\"");
+					}
+					if (var0012 == 0x0002) {
+						say("\"",
+							var0004,
+							", we are both women and know good prices when we see them. How doth ",
+							var0006,
+							" monetari sound to thee?\"");
+					}
+					if (var0012 == 0x0003) {
+						say("\"As one woman to another, wouldst thou consider ",
+							var0006,
+							" monetari?\"");
+					}
+				} else {
+					if (var0012 == 0x0001) {
+						say("\"Sweetie, thou art a pleasure to trade with... How doth ",
+							var0006,
+							" monetari sound?\"");
+					}
+					if (var0012 == 0x0002) {
+						say("\"Well, handsome, how doth ",
+							var0006,
+							" monetari sound to thee?\"");
 					}
 					if (var0012 == 0x0003) {
 						say("\"",
 							var0004,
-							", what of our bargain?! Dost thou think to take advantage of me?\"");
+							", thou hast offered a goodly price... Wouldst thou pay ",
+							var0006,
+							" monetari instead?\"");
 					}
 				}
-				if (0x001F < (var000D + 0x000A)) {
-					0xFFBA->set_npc_id(0x001F);
-				} else {
-					0xFFBA->set_npc_id(var000D + 0x000A);
-				}
-				return 0x0000;
 			}
-			if (var0009 == 0x0001) {
-				if (var000F == 0x0005) {
-					say("\"I said that ",
-						var0006,
-						" was my final offer. Dost thou accept?\"");
-					if (var000D < 0x001C) {
-						0xFFBA->set_npc_id(var000D + 0x0004);
+			if (var000F == 0x0003) {
+				if (var0003) {
+					if (var0012 == 0x0001) {
+						say("\"I am not quite certain, though 'tis not a bad offer. I would ask ",
+							var0006,
+							" monetari?\"");
 					}
-					if (Func0955()) {
-						return var0006;
+					if (var0012 == 0x0002) {
+						say("\"I need to make some profit... How doth ",
+							var0006,
+							" monetari sound to thee?\"");
 					}
-					var000A = 0x0000;
+					if (var0012 == 0x0003) {
+						say("\"Thou dost understand better than men how we women make less in our dealings... Perhaps ",
+							var0006,
+							" monetari?\"");
+					}
 				} else {
-					say("\"",
-						var0006,
-						" monetari is my final offer.\"");
-					if (var000D < 0x001E) {
-						0xFFBA->set_npc_id(var000D + 0x0002);
+					if (var0012 == 0x0001) {
+						say("\"Well, my sweet, 'tis not the highest amount thou couldst offer a girl. Perhaps ",
+							var0006,
+							" monetari?\"");
+					}
+					if (var0012 == 0x0002) {
+						say("\"Certainly mine handsome warrior could offer a better price than that! How doth ",
+							var0006,
+							" monetari sound to thee?\"");
+					}
+					if (var0012 == 0x0003) {
+						say("\"",
+							var0004,
+							", how thy muscles do bulge! Thou art certainly the stongest man in Monitor...\"");
+						say("\"Perhaps thou wilt agree to ",
+							var0006,
+							" monetari?\"");
 					}
 				}
-			} else {
-				if (var000F == 0x0002) {
-					if (var0003) {
-						if (var0012 == 0x0001) {
-							say("\"'Tis a pleasure to barter with thee, ",
-								var0002,
-								". ",
-								var0006,
-								" monetari?\"");
-						}
-						if (var0012 == 0x0002) {
-							say("\"",
-								var0004,
-								", we are both women and know good prices when we see them. How doth ",
-								var0006,
-								" monetari sound to thee?\"");
-						}
-						if (var0012 == 0x0003) {
-							say("\"As one woman to another, wouldst thou consider ",
-								var0006,
-								" monetari?\"");
-						}
-					} else {
-						if (var0012 == 0x0001) {
-							say("\"Sweetie, thou art a pleasure to trade with... How doth ",
-								var0006,
-								" monetari sound?\"");
-						}
-						if (var0012 == 0x0002) {
-							say("\"Well, handsome, how doth ",
-								var0006,
-								" monetari sound to thee?\"");
-						}
-						if (var0012 == 0x0003) {
-							say("\"",
-								var0004,
-								", thou hast offered a goodly price... Wouldst thou pay ",
-								var0006,
-								" monetari instead?\"");
-						}
+			}
+			if (var000F == 0x0004) {
+				if (var0003) {
+					if (var0012 == 0x0001) {
+						say("\"What sort of offer is this?! How doth ",
+							var0006,
+							" monetari sound to thy shrewish ears?\"");
+					}
+					if (var0012 == 0x0002) {
+						say("\"Thou dost not offer more than a selfish man would! ",
+							var0006,
+							" monetari?\"");
+					}
+					if (var0012 == 0x0003) {
+						say("\"Thou art a very deceptive female! And I thought thou wert better than most! I can offer no less than ",
+							var0006,
+							" monetari.\"");
+					}
+				} else {
+					if (var0012 == 0x0001) {
+						say("\"Certainly, thou wouldst not offer such a low price to me... How doth ",
+							var0006,
+							" monetari sound to thee?\"");
+					}
+					if (var0012 == 0x0002) {
+						say("\"And I thought thou wert different than the other men in Monitor! This is not an acceptable price. ",
+							var0006,
+							" monetari is what I offer thee.\"");
+						say("\"What dost thou say?\"");
+					}
+					if (var0012 == 0x0003) {
+						say("\"Didst thou think thou couldst sweet-talk me like any simple country girl and convince me to lower my price?\"");
+						say("\"I want no fewer than ",
+							var0006,
+							" monetari. What dost thou think?\"");
 					}
 				}
-				if (var000F == 0x0003) {
-					if (var0003) {
-						if (var0012 == 0x0001) {
-							say("\"I am not quite certain, though 'tis not a bad offer. I would ask ",
-								var0006,
-								" monetari?\"");
-						}
-						if (var0012 == 0x0002) {
-							say("\"I need to make some profit... How doth ",
-								var0006,
-								" monetari sound to thee?\"");
-						}
-						if (var0012 == 0x0003) {
-							say("\"Thou dost understand better than men how we women make less in our dealings... Perhaps ",
-								var0006,
-								" monetari?\"");
-						}
-					} else {
-						if (var0012 == 0x0001) {
-							say("\"Well, my sweet, 'tis not the highest amount thou couldst offer a girl. Perhaps ",
-								var0006,
-								" monetari?\"");
-						}
-						if (var0012 == 0x0002) {
-							say("\"Certainly mine handsome warrior could offer a better price than that! How doth ",
-								var0006,
-								" monetari sound to thee?\"");
-						}
-						if (var0012 == 0x0003) {
-							say("\"",
-								var0004,
-								", how thy muscles do bulge! Thou art certainly the stongest man in Monitor...\"");
-							say("\"Perhaps thou wilt agree to ",
-								var0006,
-								" monetari?\"");
-						}
+			}
+			if (var000F == 0x0005) {
+				var0006 = var0011;
+				if (var0003) {
+					if (var0012 == 0x0001) {
+						say("\"Thou art most ungenerous! My previous price stands, at ",
+							var0006,
+							" monetari.\"");
+					}
+					if (var0012 == 0x0002) {
+						say("\"Spiteful wench! I offer ",
+							var0006,
+							" monetari, and no less!\"");
+					}
+					if (var0012 == 0x0003) {
+						say("\"I cannot accept such an offer!\"");
+						say("\"I stand at my price of ",
+							var0006,
+							" monetari, and no lower!\"");
+					}
+				} else {
+					if (var0012 == 0x0001) {
+						say("\"Hmmpf! Just like a man to offer a ridiculous price! Well, I am no simpleton to accept such! My previous price stands, at ",
+							var0006,
+							" monetari.\"");
+					}
+					if (var0012 == 0x0002) {
+						say("\"I would not accept such a price even if thou wert the most handsome man in Monitor! I want ",
+							var0006,
+							" monetari, and no less!\"");
+					}
+					if (var0012 == 0x0003) {
+						say("\"Ugh! Thou hast the manners of a man -- if not a goblin, to offer a girl such a pitiful sum!\"");
+						say("\"I will make this very clear -- ",
+							var0006,
+							" monetari is as low as I will go!\"");
 					}
 				}
-				if (var000F == 0x0004) {
-					if (var0003) {
-						if (var0012 == 0x0001) {
-							say("\"What sort of offer is this?! How doth ",
-								var0006,
-								" monetari sound to thy shrewish ears?\"");
-						}
-						if (var0012 == 0x0002) {
-							say("\"Thou dost not offer more than a selfish man would! ",
-								var0006,
-								" monetari?\"");
-						}
-						if (var0012 == 0x0003) {
-							say("\"Thou art a very deceptive female! And I thought thou wert better than most! I can offer no less than ",
-								var0006,
-								" monetari.\"");
-						}
-					} else {
-						if (var0012 == 0x0001) {
-							say("\"Certainly, thou wouldst not offer such a low price to me... How doth ",
-								var0006,
-								" monetari sound to thee?\"");
-						}
-						if (var0012 == 0x0002) {
-							say("\"And I thought thou wert different than the other men in Monitor! This is not an acceptable price. ",
-								var0006,
-								" monetari is what I offer thee.\"");
-							say("\"What dost thou say?\"");
-						}
-						if (var0012 == 0x0003) {
-							say("\"Didst thou think thou couldst sweet-talk me like any simple country girl and convince me to lower my price?\"");
-							say("\"I want no fewer than ",
-								var0006,
-								" monetari. What dost thou think?\"");
-						}
-					}
-				}
-				if (var000F == 0x0005) {
-					var0006 = var0011;
-					if (var0003) {
-						if (var0012 == 0x0001) {
-							say("\"Thou art most ungenerous! My previous price stands, at ",
-								var0006,
-								" monetari.\"");
-						}
-						if (var0012 == 0x0002) {
-							say("\"Spiteful wench! I offer ",
-								var0006,
-								" monetari, and no less!\"");
-						}
-						if (var0012 == 0x0003) {
-							say("\"I cannot accept such an offer!\"");
-							say("\"I stand at my price of ",
-								var0006,
-								" monetari, and no lower!\"");
-						}
-					} else {
-						if (var0012 == 0x0001) {
-							say("\"Hmmpf! Just like a man to offer a ridiculous price! Well, I am no simpleton to accept such! My previous price stands, at ",
-								var0006,
-								" monetari.\"");
-						}
-						if (var0012 == 0x0002) {
-							say("\"I would not accept such a price even if thou wert the most handsome man in Monitor! I want ",
-								var0006,
-								" monetari, and no less!\"");
-						}
-						if (var0012 == 0x0003) {
-							say("\"Ugh! Thou hast the manners of a man -- if not a goblin, to offer a girl such a pitiful sum!\"");
-							say("\"I will make this very clear -- ",
-								var0006,
-								" monetari is as low as I will go!\"");
-						}
-					}
-					if (var000D < 0x001F) {
-						0xFFBA->set_npc_id(var000D + 0x0001);
-					}
+				if (var000D < 0x001F) {
+					0xFFBA->set_npc_id(var000D + 0x0001);
 				}
 			}
 		}
@@ -93078,7 +92947,8 @@ void Func084B 0x84B () {
 		var0004 = (var0004 - 0x0001);
 		if (var0004 == 0x0000) {
 			break;
-		} else if (var0004 == 0x0001) {
+		}
+		if (var0004 == 0x0001) {
 			var0005 = ["nothing", "Telekinesis", "Cure"];
 			var0006 = [0x0000, 0x0007, 0x0001];
 			var0007 = [0x0000, 0x001E, 0x0016];
@@ -93211,179 +93081,179 @@ var Func084C 0x84C (var var0000, var var0001) {
 		var000A = Func0956(["yes", "no", "haggle"]);
 		if (var000A == "no") {
 			return 0x0000;
+		}
+		if (var000A == "yes") {
+			var000B = 0x0000;
 		} else {
-			if (var000A == "yes") {
-				var000B = 0x0000;
-			} else {
-				var000C = Func0999(var0002, var0001, var0008, var0003, var0007, var0004, var0005);
-				var0007 = (var0007 + 0x0001);
-				var0005 = var000C[0x0004];
-				var000B = var000C[0x0003];
-				var000D = var0002;
-				var0002 = var000C[0x0002];
-				var0003 = var000C[0x0001];
-			}
-			var000E = UI_get_random(0x0003);
-			if (var000B < 0x0002) {
-				if (var0002 < (var0001 + ((var0000 - var0001) / 0x0004))) {
-					if (var000E == 0x0001) {
-						say("\"Thou art a shrewd and crafty bargainer, to convince me to accept this price...\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"Art thou certain thou hast not cast a dweomer upon me? I usually do not lower my prices so.\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"'Tis truly amazing... thou hast a facile tongue to make me lower my price by so much.\"");
-					}
-				} else {
-					if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-						if (var000E == 0x0001) {
-							say("\"'Tis lower than I expected... but I shall agree to this price.\"");
-						}
-						if (var000E == 0x0002) {
-							say("\"Thou art very good at bargaining. I will accept this price.\"");
-						}
-						if (var000E == 0x0003) {
-							say("\"I see.\" *\"Very well, I will agree to this price even though 'tis lower than I did wish.\"");
-						}
-					} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-						if (var000E == 0x0001) {
-							say("\"Hmm...\" ~\"I suppose one must accept such a price -- though it could have been higher.\"");
-						}
-						if (var000E == 0x0002) {
-							say("\"'Tis not such an indecent offer.\" ~\"I accept.\"");
-						}
-						if (var000E == 0x0003) {
-							say("\"I will accept\tthis price.\" ~\"I can always use the extra funds for research.\"");
-						}
-					} else {
-						if (var000E == 0x0001) {
-							say("\"Very well.\" *\"I accept thine offer!\"");
-						}
-						if (var000E == 0x0002) {
-							say("\"It hath been a pleasure!\" *\"I will accept thine offer.\"");
-						}
-						if (var000E == 0x0003) {
-							say("\"Yes...\"*\"'Tis a very good price.\"");
-						}
-					}
-				}
-				say("\"So, have we agreed on the price of ",
-					var0002,
-					"?\"");
-				if (Func0955() == true) {
-					if (var0009 > 0x0001) {
-						0xFFE8->set_npc_id(var0009 - 0x0002);
-					}
-					return var0002;
-				} else if (var000E == 0x0001) {
-					say("\"Pray, settle thy mind!\"");
+			var000C = Func0999(var0002, var0001, var0008, var0003, var0007, var0004, var0005);
+			var0007 = (var0007 + 0x0001);
+			var0005 = var000C[0x0004];
+			var000B = var000C[0x0003];
+			var000D = var0002;
+			var0002 = var000C[0x0002];
+			var0003 = var000C[0x0001];
+		}
+		var000E = UI_get_random(0x0003);
+		if (var000B < 0x0002) {
+			if (var0002 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var000E == 0x0001) {
+					say("\"Thou art a shrewd and crafty bargainer, to convince me to accept this price...\"");
 				}
 				if (var000E == 0x0002) {
-					say("\"Dost thou waste the time of other mages as well?\"");
+					say("\"Art thou certain thou hast not cast a dweomer upon me? I usually do not lower my prices so.\"");
 				}
 				if (var000E == 0x0003) {
-					say("\"Thou art most rude to renege on an offer!\"");
-				}
-				if (0x001F < (var0009 + 0x000A)) {
-					0xFFE8->set_npc_id(0x001F);
-				} else {
-					0xFFE8->set_npc_id(var0009 + 0x000A);
-				}
-				return 0x0000;
-			}
-			if (var0005 == 0x0001) {
-				if (var000B == 0x0005) {
-					say("\"",
-						var0002,
-						" is my final offer. Dost thou want it at this price?\"");
-					if (var0009 < 0x001C) {
-						0xFFE8->set_npc_id(var0009 + 0x0004);
-					}
-					if (Func0955() == true) {
-						return var0002;
-					}
-					var0006 = 0x0000;
-				} else {
-					say("\"",
-						var0002,
-						" is my final offer.  I will go no lower.\"");
-					if (var0009 < 0x001E) {
-						0xFFE8->set_npc_id(var0009 + 0x0002);
-					}
+					say("\"'Tis truly amazing... thou hast a facile tongue to make me lower my price by so much.\"");
 				}
 			} else {
-				if (var000B == 0x0002) {
+				if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
 					if (var000E == 0x0001) {
-						say("\"'Tis pleasant to find thee amenable. ",
-							var0002,
-							"?\"");
+						say("\"'Tis lower than I expected... but I shall agree to this price.\"");
 					}
 					if (var000E == 0x0002) {
-						say("\"Thou seemest to appreciate the finer spells and what they are truly worth. How doth ",
-							var0002,
-							" sound?\"");
+						say("\"Thou art very good at bargaining. I will accept this price.\"");
 					}
 					if (var000E == 0x0003) {
-						say("\"What a pleasure it is to deal with thee. I offer thee ",
-							var0002,
-							".\"");
+						say("\"I see.\" *\"Very well, I will agree to this price even though 'tis lower than I did wish.\"");
+					}
+				} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+					if (var000E == 0x0001) {
+						say("\"Hmm...\" ~\"I suppose one must accept such a price -- though it could have been higher.\"");
+					}
+					if (var000E == 0x0002) {
+						say("\"'Tis not such an indecent offer.\" ~\"I accept.\"");
+					}
+					if (var000E == 0x0003) {
+						say("\"I will accept\tthis price.\" ~\"I can always use the extra funds for research.\"");
+					}
+				} else {
+					if (var000E == 0x0001) {
+						say("\"Very well.\" *\"I accept thine offer!\"");
+					}
+					if (var000E == 0x0002) {
+						say("\"It hath been a pleasure!\" *\"I will accept thine offer.\"");
+					}
+					if (var000E == 0x0003) {
+						say("\"Yes...\"*\"'Tis a very good price.\"");
 					}
 				}
-				if (var000B == 0x0003) {
-					if (var000E == 0x0001) {
-						say("\"I am not totally certain.... Perhaps ",
-							var0002,
-							"?\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"Thou wilt not obtain the spell so cheaply. I will give thee ",
-							var0002,
-							"?\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"I suppose I must needs take thy money...\" *\"but not at that price. What about ",
-							var0002,
-							"?\"");
-					}
+			}
+			say("\"So, have we agreed on the price of ",
+				var0002,
+				"?\"");
+			if (Func0955() == true) {
+				if (var0009 > 0x0001) {
+					0xFFE8->set_npc_id(var0009 - 0x0002);
 				}
-				if (var000B == 0x0004) {
-					if (var000E == 0x0001) {
-						say("\"This is not a price that inspires me to like thee. For ",
-							var0002,
-							" I will like thee better.\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"For such a pitiful sum I could not even gain a tenth of what this spell cost me to learn! I can go no lower than ",
-							var0002,
-							".\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"I am not certain who is the more foolish...\"*\"Thou for offering such a wretched amount, or myself for continuing to bargain with thee. I will offer thee ",
-							var0002,
-							".\"");
-					}
+				return var0002;
+			}
+			if (var000E == 0x0001) {
+				say("\"Pray, settle thy mind!\"");
+			}
+			if (var000E == 0x0002) {
+				say("\"Dost thou waste the time of other mages as well?\"");
+			}
+			if (var000E == 0x0003) {
+				say("\"Thou art most rude to renege on an offer!\"");
+			}
+			if (0x001F < (var0009 + 0x000A)) {
+				0xFFE8->set_npc_id(0x001F);
+			} else {
+				0xFFE8->set_npc_id(var0009 + 0x000A);
+			}
+			return 0x0000;
+		}
+		if (var0005 == 0x0001) {
+			if (var000B == 0x0005) {
+				say("\"",
+					var0002,
+					" is my final offer. Dost thou want it at this price?\"");
+				if (var0009 < 0x001C) {
+					0xFFE8->set_npc_id(var0009 + 0x0004);
 				}
-				if (var000B == 0x0005) {
-					var0002 = var000D;
-					if (var000E == 0x0001) {
-						say("\"Art thou joking? My previous offer stands, at ",
-							var0002,
-							".\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"Art thou deaf, or merely an imbecile? I offer ",
-							var0002,
-							", and no less!\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"Thine offer is an insult to any mage! Mine offer stands at ",
-							var0002,
-							".\"");
-					}
-					if (var0009 < 0x001F) {
-						0xFFE8->set_npc_id(var0009 + 0x0001);
-					}
+				if (Func0955() == true) {
+					return var0002;
+				}
+				var0006 = 0x0000;
+			} else {
+				say("\"",
+					var0002,
+					" is my final offer.  I will go no lower.\"");
+				if (var0009 < 0x001E) {
+					0xFFE8->set_npc_id(var0009 + 0x0002);
+				}
+			}
+		} else {
+			if (var000B == 0x0002) {
+				if (var000E == 0x0001) {
+					say("\"'Tis pleasant to find thee amenable. ",
+						var0002,
+						"?\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"Thou seemest to appreciate the finer spells and what they are truly worth. How doth ",
+						var0002,
+						" sound?\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"What a pleasure it is to deal with thee. I offer thee ",
+						var0002,
+						".\"");
+				}
+			}
+			if (var000B == 0x0003) {
+				if (var000E == 0x0001) {
+					say("\"I am not totally certain.... Perhaps ",
+						var0002,
+						"?\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"Thou wilt not obtain the spell so cheaply. I will give thee ",
+						var0002,
+						"?\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"I suppose I must needs take thy money...\" *\"but not at that price. What about ",
+						var0002,
+						"?\"");
+				}
+			}
+			if (var000B == 0x0004) {
+				if (var000E == 0x0001) {
+					say("\"This is not a price that inspires me to like thee. For ",
+						var0002,
+						" I will like thee better.\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"For such a pitiful sum I could not even gain a tenth of what this spell cost me to learn! I can go no lower than ",
+						var0002,
+						".\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"I am not certain who is the more foolish...\"*\"Thou for offering such a wretched amount, or myself for continuing to bargain with thee. I will offer thee ",
+						var0002,
+						".\"");
+				}
+			}
+			if (var000B == 0x0005) {
+				var0002 = var000D;
+				if (var000E == 0x0001) {
+					say("\"Art thou joking? My previous offer stands, at ",
+						var0002,
+						".\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"Art thou deaf, or merely an imbecile? I offer ",
+						var0002,
+						", and no less!\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"Thine offer is an insult to any mage! Mine offer stands at ",
+						var0002,
+						".\"");
+				}
+				if (var0009 < 0x001F) {
+					0xFFE8->set_npc_id(var0009 + 0x0001);
 				}
 			}
 		}
@@ -93399,23 +93269,20 @@ var Func084D 0x84D (var var0000, var var0001) {
 		}
 		if ((var0000 == 0xFF30) || (var0000 == 0xFF2E)) {
 			return 0x0017;
-		} else {
-			return 0x001A;
 		}
+		return 0x001A;
 	}
 	if (var0001 == 0x0002) {
 		if ((var0000 == 0xFF2D) || ((var0000 == 0xFF2F) || (var0000 == 0xFF2C))) {
 			return 0x0007;
-		} else {
-			return 0x0006;
 		}
+		return 0x0006;
 	}
 	if ((var0001 == 0x0003) || (var0001 == 0x000A)) {
 		if ((var0000 == 0xFF31) || (var0000 == 0xFF29)) {
 			return 0x0007;
-		} else {
-			return 0x0010;
 		}
+		return 0x0010;
 	}
 	if (var0001 == 0x0004) {
 		if ((var0000 == 0xFF30) || (var0000 == 0xFF2E)) {
@@ -93423,16 +93290,14 @@ var Func084D 0x84D (var var0000, var var0001) {
 		}
 		if (var0000 == 0xFF2A) {
 			return 0x0002;
-		} else {
-			return 0x001E;
 		}
+		return 0x001E;
 	}
 	if (var0001 == 0x0005) {
 		if ((var0000 == 0xFF2B) || (var0000 == 0xFF29)) {
 			return 0x0007;
-		} else {
-			return 0x0010;
 		}
+		return 0x0010;
 	}
 	if (var0001 == 0x0006) {
 		return 0x0007;
@@ -93458,9 +93323,8 @@ var Func084D 0x84D (var var0000, var var0001) {
 	if (var0001 == 0x0009) {
 		if (var0000 == 0xFF2B) {
 			return 0x0007;
-		} else {
-			return 0x0004;
 		}
+		return 0x0004;
 	}
 	return 0;
 }
@@ -93746,7 +93610,8 @@ void Func084F 0x84F () {
 		var0001 = (var0001 - 0x0001);
 		if (var0001 == 0x0000) {
 			break;
-		} else if (var0001 == 0x0001) {
+		}
+		if (var0001 == 0x0001) {
 			var0002 = ["nothing", "Telekinesis"];
 			var0003 = [0x0000, 0x0007];
 			var0004 = [0x0000, 0x0028];
@@ -93879,164 +93744,164 @@ var Func0850 0x850 (var var0000, var var0001) {
 		var0009 = Func0956(["yes", "no", "haggle"]);
 		if (var0009 == "no") {
 			return 0x0000;
+		}
+		if (var0009 == "yes") {
+			var000A = 0x0000;
 		} else {
-			if (var0009 == "yes") {
-				var000A = 0x0000;
-			} else {
-				var000B = Func0999(var0002, var0001, var0008, var0003, var0007, var0004, var0005);
-				var0007 = (var0007 + 0x0001);
-				var0005 = var000B[0x0004];
-				var000A = var000B[0x0003];
-				var000C = var0002;
-				var0002 = var000B[0x0002];
-				var0003 = var000B[0x0001];
-			}
-			var000D = UI_get_random(0x0003);
-			if (var000A < 0x0002) {
-				if (var0002 < (var0001 + ((var0000 - var0001) / 0x0004))) {
-					if (var000D == 0x0001) {
-						say("\"Thou dost bargain well, my friend.\"");
-					}
-					if (var000D == 0x0002) {
-						say("\"It pains me to agree... But what else can I do?\"");
-					}
-					if (var000D == 0x0003) {
-						say("\"I must be spending too much time speaking with the dead. I cannot believe that I am agreeing to this!\"");
-					}
-				} else {
-					if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-						if (var000D == 0x0001) {
-							say("\"I have little enough business these days. I shall have to accept.\"");
-						}
-						if (var000D == 0x0002) {
-							say("\"Thou hast a talent for bargaining. I will accept this price.\"");
-						}
-						if (var000D == 0x0003) {
-							say("\"I should retire from magery. I am losing mine edge.\"");
-						}
-					} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-						if (var000D == 0x0001) {
-							say("\"Only ",
-								var0002,
-								"??! I suppose it is the best I can hope for.\"");
-						}
-						if (var000D == 0x0002) {
-							say("\"A modest amount. Not bad...\"");
-						}
-						if (var000D == 0x0003) {
-							say("\"There is simply no profit in selling spells...\"");
-						}
-					} else {
-						if (var000D == 0x0001) {
-							say("\"I accept thine offer!\"");
-						}
-						if (var000D == 0x0002) {
-							say("\"It is a pleasure doing business with thee!\"");
-						}
-						if (var000D == 0x0003) {
-							say("\"Thou art most generous! I accept.\"");
-						}
-					}
-				}
-				say("\"So, have we agreed on the price of ",
-					var0002,
-					"?\"");
-				if (Func0955() == true) {
-					return var0002;
-				} else if (var000D == 0x0001) {
-					say("\"Then why didst thou go to such trouble?!\"");
+			var000B = Func0999(var0002, var0001, var0008, var0003, var0007, var0004, var0005);
+			var0007 = (var0007 + 0x0001);
+			var0005 = var000B[0x0004];
+			var000A = var000B[0x0003];
+			var000C = var0002;
+			var0002 = var000B[0x0002];
+			var0003 = var000B[0x0001];
+		}
+		var000D = UI_get_random(0x0003);
+		if (var000A < 0x0002) {
+			if (var0002 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var000D == 0x0001) {
+					say("\"Thou dost bargain well, my friend.\"");
 				}
 				if (var000D == 0x0002) {
-					say("\"I shall remember this outrage!\"");
+					say("\"It pains me to agree... But what else can I do?\"");
 				}
 				if (var000D == 0x0003) {
-					say("\"All this time spent for nothing?! Thou art mad!\"");
-				}
-				return 0x0000;
-			}
-			if (var0005 == 0x0001) {
-				if (var000A == 0x0005) {
-					say("\"I said that ",
-						var0002,
-						" is my final offer. Dost thou agree?\"");
-					if (Func0955() == true) {
-						return var0002;
-					}
-					var0006 = 0x0000;
-				} else {
-					say("\"",
-						var0002,
-						" is my final offer. I could make more profit from a shade...\"");
+					say("\"I must be spending too much time speaking with the dead. I cannot believe that I am agreeing to this!\"");
 				}
 			} else {
-				if (var000A == 0x0002) {
+				if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
 					if (var000D == 0x0001) {
-						say("\"How doth ",
-							var0002,
-							" sound? I like thee...\"");
+						say("\"I have little enough business these days. I shall have to accept.\"");
 					}
 					if (var000D == 0x0002) {
-						say("\"I can trust thee with my spells, surely. How doth ",
-							var0002,
-							" sound?\"");
+						say("\"Thou hast a talent for bargaining. I will accept this price.\"");
 					}
 					if (var000D == 0x0003) {
-						say("\"Thou art worthy of my knowledge. I offer thee ",
+						say("\"I should retire from magery. I am losing mine edge.\"");
+					}
+				} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+					if (var000D == 0x0001) {
+						say("\"Only ",
 							var0002,
-							".\"");
+							"??! I suppose it is the best I can hope for.\"");
+					}
+					if (var000D == 0x0002) {
+						say("\"A modest amount. Not bad...\"");
+					}
+					if (var000D == 0x0003) {
+						say("\"There is simply no profit in selling spells...\"");
+					}
+				} else {
+					if (var000D == 0x0001) {
+						say("\"I accept thine offer!\"");
+					}
+					if (var000D == 0x0002) {
+						say("\"It is a pleasure doing business with thee!\"");
+					}
+					if (var000D == 0x0003) {
+						say("\"Thou art most generous! I accept.\"");
 					}
 				}
-				if (var000A == 0x0003) {
-					if (var000D == 0x0001) {
-						say("\"Hmmm.... Possibly ",
-							var0002,
-							"?\"");
-					}
-					if (var000D == 0x0002) {
-						say("\"I must consider this... ",
-							var0002,
-							"?\"");
-					}
-					if (var000D == 0x0003) {
-						say("\"What wouldst thou say to ",
-							var0002,
-							"? I must be able to buy reagents...\"");
-					}
+			}
+			say("\"So, have we agreed on the price of ",
+				var0002,
+				"?\"");
+			if (Func0955() == true) {
+				return var0002;
+			}
+			if (var000D == 0x0001) {
+				say("\"Then why didst thou go to such trouble?!\"");
+			}
+			if (var000D == 0x0002) {
+				say("\"I shall remember this outrage!\"");
+			}
+			if (var000D == 0x0003) {
+				say("\"All this time spent for nothing?! Thou art mad!\"");
+			}
+			return 0x0000;
+		}
+		if (var0005 == 0x0001) {
+			if (var000A == 0x0005) {
+				say("\"I said that ",
+					var0002,
+					" is my final offer. Dost thou agree?\"");
+				if (Func0955() == true) {
+					return var0002;
 				}
-				if (var000A == 0x0004) {
-					if (var000D == 0x0001) {
-						say("\"Thief! Better that thou shouldst steal it from me! ",
-							var0002,
-							", no less.\"");
-					}
-					if (var000D == 0x0002) {
-						say("\"My knowledge is worth more than that! I can go no lower than ",
-							var0002,
-							".\"");
-					}
-					if (var000D == 0x0003) {
-						say("\"This spell is worth at least ",
-							var0002,
-							".\"");
-					}
+				var0006 = 0x0000;
+			} else {
+				say("\"",
+					var0002,
+					" is my final offer. I could make more profit from a shade...\"");
+			}
+		} else {
+			if (var000A == 0x0002) {
+				if (var000D == 0x0001) {
+					say("\"How doth ",
+						var0002,
+						" sound? I like thee...\"");
 				}
-				if (var000A == 0x0005) {
-					var0002 = var000C;
-					if (var000D == 0x0001) {
-						say("\"Thou must not want this spell... My previous offer stands, at ",
-							var0002,
-							".\"");
-					}
-					if (var000D == 0x0002) {
-						say("\"Dost thou dare to insult me?! ",
-							var0002,
-							", no less.\"");
-					}
-					if (var000D == 0x0003) {
-						say("\"Mine offer stands at ",
-							var0002,
-							". Thou art a fool if thou dost not agree.\"");
-					}
+				if (var000D == 0x0002) {
+					say("\"I can trust thee with my spells, surely. How doth ",
+						var0002,
+						" sound?\"");
+				}
+				if (var000D == 0x0003) {
+					say("\"Thou art worthy of my knowledge. I offer thee ",
+						var0002,
+						".\"");
+				}
+			}
+			if (var000A == 0x0003) {
+				if (var000D == 0x0001) {
+					say("\"Hmmm.... Possibly ",
+						var0002,
+						"?\"");
+				}
+				if (var000D == 0x0002) {
+					say("\"I must consider this... ",
+						var0002,
+						"?\"");
+				}
+				if (var000D == 0x0003) {
+					say("\"What wouldst thou say to ",
+						var0002,
+						"? I must be able to buy reagents...\"");
+				}
+			}
+			if (var000A == 0x0004) {
+				if (var000D == 0x0001) {
+					say("\"Thief! Better that thou shouldst steal it from me! ",
+						var0002,
+						", no less.\"");
+				}
+				if (var000D == 0x0002) {
+					say("\"My knowledge is worth more than that! I can go no lower than ",
+						var0002,
+						".\"");
+				}
+				if (var000D == 0x0003) {
+					say("\"This spell is worth at least ",
+						var0002,
+						".\"");
+				}
+			}
+			if (var000A == 0x0005) {
+				var0002 = var000C;
+				if (var000D == 0x0001) {
+					say("\"Thou must not want this spell... My previous offer stands, at ",
+						var0002,
+						".\"");
+				}
+				if (var000D == 0x0002) {
+					say("\"Dost thou dare to insult me?! ",
+						var0002,
+						", no less.\"");
+				}
+				if (var000D == 0x0003) {
+					say("\"Mine offer stands at ",
+						var0002,
+						". Thou art a fool if thou dost not agree.\"");
 				}
 			}
 		}
@@ -94131,110 +93996,109 @@ void Func0852 0x852 () {
 			say("\"Thou dost not know what thou art missing...\"");
 			var0001 = false;
 			continue;
-		} else {
-			var000C = var0005[var000B];
-			var000D = 0x0000;
-			var000E = UI_die_roll(0x0001, 0x0005);
-			if (var000E == 0x0001) {
-				var000F = "Wilt thou have some?";
-			}
-			if (var000E == 0x0002) {
-				var000F = "Will this be fine with thee?";
-			}
-			if (var000E == 0x0003) {
-				var000F = "Dost thou find the price agreeable?";
-			}
-			if (var000E == 0x0004) {
-				var000F = (var000A + ", dost thou agree?");
-			}
-			if (var000E == 0x0005) {
-				var000F = (var000A + ", is the price acceptable?");
-			}
-			if (var000B == 0x0002) {
-				say("\"",
-					var000C,
-					" guilders will buy thee two strips of jerky.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "strips of jerky, in bunches of two,";
-			}
-			if (var000B == 0x0003) {
-				say("\"Most people in Moonshade think that my fish is excellent. But have a care! When last I prepared a meal of fish it was stolen away by Mosh, the rat catcher! So I daresay she enjoys it greatly.\"");
-				say("\"The dinner costs ",
-					var000C,
-					" guilders.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "fish dinners";
-			}
-			if (var000B == 0x0004) {
-				say("\"My sausage is very good. ",
-					var000C,
-					" guilders is my price.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "sausages";
-			}
-			if (var000B == 0x0005) {
-				say("\"I believe thou wilt find the taste to thy liking. I charge ",
-					var000C,
-					" guilders for my lamb roast.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "lamb roasts";
-			}
-			if (var000B == 0x0006) {
-				say("\"If thou dost crave something sweet, ",
-					var0000,
-					", thou shouldst try mine honey cake. ",
-					var000C,
-					" guilders will buy thee a treat.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "honey cakes";
-			}
-			if (var000C == var0006[var000B]) {
-				if (Func0955()) {
-					var0011 = var000C;
-				} else {
-					var0011 = 0x0000;
-				}
+		}
+		var000C = var0005[var000B];
+		var000D = 0x0000;
+		var000E = UI_die_roll(0x0001, 0x0005);
+		if (var000E == 0x0001) {
+			var000F = "Wilt thou have some?";
+		}
+		if (var000E == 0x0002) {
+			var000F = "Will this be fine with thee?";
+		}
+		if (var000E == 0x0003) {
+			var000F = "Dost thou find the price agreeable?";
+		}
+		if (var000E == 0x0004) {
+			var000F = (var000A + ", dost thou agree?");
+		}
+		if (var000E == 0x0005) {
+			var000F = (var000A + ", is the price acceptable?");
+		}
+		if (var000B == 0x0002) {
+			say("\"",
+				var000C,
+				" guilders will buy thee two strips of jerky.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "strips of jerky, in bunches of two,";
+		}
+		if (var000B == 0x0003) {
+			say("\"Most people in Moonshade think that my fish is excellent. But have a care! When last I prepared a meal of fish it was stolen away by Mosh, the rat catcher! So I daresay she enjoys it greatly.\"");
+			say("\"The dinner costs ",
+				var000C,
+				" guilders.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "fish dinners";
+		}
+		if (var000B == 0x0004) {
+			say("\"My sausage is very good. ",
+				var000C,
+				" guilders is my price.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "sausages";
+		}
+		if (var000B == 0x0005) {
+			say("\"I believe thou wilt find the taste to thy liking. I charge ",
+				var000C,
+				" guilders for my lamb roast.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "lamb roasts";
+		}
+		if (var000B == 0x0006) {
+			say("\"If thou dost crave something sweet, ",
+				var0000,
+				", thou shouldst try mine honey cake. ",
+				var000C,
+				" guilders will buy thee a treat.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "honey cakes";
+		}
+		if (var000C == var0006[var000B]) {
+			if (Func0955()) {
+				var0011 = var000C;
 			} else {
-				var0011 = Func0854(var0005[var000B], var0006[var000B]);
+				var0011 = 0x0000;
 			}
-			if (var0011 > 0x0000) {
-				if (var0009[var000B] == 0x0001) {
-					say("\"How many ",
-						var0010,
-						" wouldst thou like?\"");
-					var000D = Func0943(var0003[var000B], var0004[var000B], var0008[var000B], var0007, var0011, 0x0014, 0x0001, false);
-				} else {
-					var000D = Func0943(var0003[var000B], var0004[var000B], var0008[var000B], var0007, var0011, 0x0000, 0x0001, false);
-				}
+		} else {
+			var0011 = Func0854(var0005[var000B], var0006[var000B]);
+		}
+		if (var0011 > 0x0000) {
+			if (var0009[var000B] == 0x0001) {
+				say("\"How many ",
+					var0010,
+					" wouldst thou like?\"");
+				var000D = Func0943(var0003[var000B], var0004[var000B], var0008[var000B], var0007, var0011, 0x0014, 0x0001, false);
+			} else {
+				var000D = Func0943(var0003[var000B], var0004[var000B], var0008[var000B], var0007, var0011, 0x0000, 0x0001, false);
 			}
-			if (var000D == 0x0001) {
-				say("\"Enjoy thy meal, ",
+		}
+		if (var000D == 0x0001) {
+			say("\"Enjoy thy meal, ",
+				var0000,
+				"!\"");
+		} else if (var000D == 0x0002) {
+			say("\"Thou canst not carry so much food, ",
+				var0000,
+				"!\"");
+		} else if (var000D == 0x0003) {
+			var0012 = Func0992(0x0001, (("@But " + var0000) + ", we have not the guilders to pay for this.@"), 0x0000, false);
+			if (var0012 != 0xFE9C) {
+				0xFFE4->show_npc_face0(0x0000);
+				say("\"I am sorry, but Rocco cannot afford to feed thee for free, ",
 					var0000,
-					"!\"");
-			} else if (var000D == 0x0002) {
-				say("\"Thou canst not carry so much food, ",
-					var0000,
-					"!\"");
-			} else if (var000D == 0x0003) {
-				var0012 = Func0992(0x0001, (("@But " + var0000) + ", we have not the guilders to pay for this.@"), 0x0000, false);
-				if (var0012 != 0xFE9C) {
-					0xFFE4->show_npc_face0(0x0000);
-					say("\"I am sorry, but Rocco cannot afford to feed thee for free, ",
-						var0000,
-						".\"");
-				} else {
-					say("\"Thou dost not have enough money for that...\"");
-				}
+					".\"");
+			} else {
+				say("\"Thou dost not have enough money for that...\"");
 			}
 		}
 		say("\"Wouldst thou care for more?\"");
@@ -94291,61 +94155,60 @@ void Func0853 0x853 () {
 			say("\"If thou dost change thy mind, ask me again!\"");
 			var0002 = false;
 			continue;
-		} else {
-			var000C = var0006[var000B];
-			var000D = 0x0000;
-			if (var000B == 0x0002) {
-				say("\"",
-					var000C,
-					" guilders is what Rocco charges for wine, though it is very good. Dost thou accept?\"");
-				var000E = "wine bottles";
-			}
-			if (var000B == 0x0003) {
-				say("\"The mead Rocco imports is sweetly flavored with the honey of bees raised in the mountain highlands.\"");
-				say("\"For the price of ",
-					var000C,
-					" guilders, thou wilt accept some?\"");
-				var000E = "bottles of mead";
-			}
-			if (var000B == 0x0004) {
-				say("\"Our ale is weak, as it is imported from the mainland, but Rocco must still charge ",
-					var000C,
-					" guilders for it. Dost thou find the price acceptable?\"");
-				var000E = "flasks of ale";
-			}
-			if (var000C == var0007[var000B]) {
-				if (Func0955()) {
-					var000F = var000C;
-				} else {
-					var000F = 0x0000;
-				}
+		}
+		var000C = var0006[var000B];
+		var000D = 0x0000;
+		if (var000B == 0x0002) {
+			say("\"",
+				var000C,
+				" guilders is what Rocco charges for wine, though it is very good. Dost thou accept?\"");
+			var000E = "wine bottles";
+		}
+		if (var000B == 0x0003) {
+			say("\"The mead Rocco imports is sweetly flavored with the honey of bees raised in the mountain highlands.\"");
+			say("\"For the price of ",
+				var000C,
+				" guilders, thou wilt accept some?\"");
+			var000E = "bottles of mead";
+		}
+		if (var000B == 0x0004) {
+			say("\"Our ale is weak, as it is imported from the mainland, but Rocco must still charge ",
+				var000C,
+				" guilders for it. Dost thou find the price acceptable?\"");
+			var000E = "flasks of ale";
+		}
+		if (var000C == var0007[var000B]) {
+			if (Func0955()) {
+				var000F = var000C;
 			} else {
-				var000F = Func0854(var0006[var000B], var0007[var000B]);
+				var000F = 0x0000;
 			}
-			if (var000F > 0x0000) {
-				if (var000A[var000B] == 0x0001) {
-					say("\"How many ",
-						var000E,
-						" wouldst thou like?\"");
-					var000D = Func0943(var0004[var000B], var0005[var000B], var0009[var000B], var0008, var000F, 0x0014, 0x0001, false);
-				} else {
-					var000D = Func0943(var0004[var000B], var0005[var000B], var0009[var000B], var0008, var000F, 0x0000, 0x0001, false);
-				}
+		} else {
+			var000F = Func0854(var0006[var000B], var0007[var000B]);
+		}
+		if (var000F > 0x0000) {
+			if (var000A[var000B] == 0x0001) {
+				say("\"How many ",
+					var000E,
+					" wouldst thou like?\"");
+				var000D = Func0943(var0004[var000B], var0005[var000B], var0009[var000B], var0008, var000F, 0x0014, 0x0001, false);
+			} else {
+				var000D = Func0943(var0004[var000B], var0005[var000B], var0009[var000B], var0008, var000F, 0x0000, 0x0001, false);
 			}
-			if (var000D == 0x0001) {
-				say("\"Enjoy thy drink, ",
-					var0000,
-					"!\"");
-			} else if (var000D == 0x0002) {
-				say("\"Thou canst not carry thy drink!\"");
-			} else if (var000D == 0x0003) {
-				var0010 = Func0992(0x0001, (("@But " + var0001) + ", we lack adequate funds!@"), 0x0000, false);
-				if (var0010 != 0xFE9C) {
-					0xFFE4->show_npc_face0(0x0000);
-					say("\"Then thy thirst must be quenched by well water, I'm afraid.\"");
-				} else {
-					say("\"It seems thou dost not have the funds to pay me... Hast thou considered drinking from the public well?\"");
-				}
+		}
+		if (var000D == 0x0001) {
+			say("\"Enjoy thy drink, ",
+				var0000,
+				"!\"");
+		} else if (var000D == 0x0002) {
+			say("\"Thou canst not carry thy drink!\"");
+		} else if (var000D == 0x0003) {
+			var0010 = Func0992(0x0001, (("@But " + var0001) + ", we lack adequate funds!@"), 0x0000, false);
+			if (var0010 != 0xFE9C) {
+				0xFFE4->show_npc_face0(0x0000);
+				say("\"Then thy thirst must be quenched by well water, I'm afraid.\"");
+			} else {
+				say("\"It seems thou dost not have the funds to pay me... Hast thou considered drinking from the public well?\"");
 			}
 		}
 		say("\"Wouldst thou care for more?\"");
@@ -94390,181 +94253,181 @@ var Func0854 0x854 (var var0000, var var0001) {
 		var000B = Func0956(["yes", "no", "haggle"]);
 		if (var000B == "no") {
 			return 0x0000;
+		}
+		if (var000B == "yes") {
+			var000C = 0x0000;
 		} else {
-			if (var000B == "yes") {
-				var000C = 0x0000;
-			} else {
-				var000D = Func0999(var0004, var0001, var000A, var0005, var0009, var0006, var0007);
-				var0009 = (var0009 + 0x0001);
-				var0007 = var000D[0x0004];
-				var000C = var000D[0x0003];
-				var000E = var0004;
-				var0004 = var000D[0x0002];
-				var0005 = var000D[0x0001];
-			}
-			var000F = UI_get_random(0x0003);
-			if (var000C < 0x0002) {
-				if (var0004 < (var0001 + ((var0000 - var0001) / 0x0004))) {
-					if (var000F == 0x0001) {
-						say("\"Rocco would have me scrapped for lowering my prices like this. Please do not tell him...\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"Thou art most forceful, ",
-							var0002,
-							"! We will not be in business long at this rate!\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"Rocco would never have been out-bargained so!\"");
-					}
-				} else {
-					if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-						if (var000F == 0x0001) {
-							say("\"The Blue Boar doth have the finest prices, eh?\"");
-						}
-						if (var000F == 0x0002) {
-							say("\"Today hath gone well, so I will be generous. On another day thou mayest not be so lucky!\"");
-						}
-						if (var000F == 0x0003) {
-							say("\"Perhaps it is a human trait... To bargain so well.\"");
-						}
-					} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-						if (var000F == 0x0001) {
-							say("\"Even Rocco would consider this a fair deal...\"");
-						}
-						if (var000F == 0x0002) {
-							say("\"We shall not profit this way...\"");
-						}
-						if (var000F == 0x0003) {
-							say("\"Good service and fair prices is what hath made the Blue Boar famous!\"");
-						}
-					} else {
-						if (var000F == 0x0001) {
-							say("\"I am pleased, ",
-								var0002,
-								".\"");
-						}
-						if (var000F == 0x0002) {
-							say("\"Thou art a fine person!\"");
-						}
-						if (var000F == 0x0003) {
-							say("\"If times were not so bad, our prices would be far lower...\"");
-						}
-					}
-				}
-				say("\"Dost thou agree to ",
-					var0004,
-					" guilders, ",
-					var0002,
-					"?\"");
-				if (Func0955()) {
-					return var0004;
-				} else if (var000F == 0x0001) {
-					say("\"I thought thou didst agree to that price!\"");
+			var000D = Func0999(var0004, var0001, var000A, var0005, var0009, var0006, var0007);
+			var0009 = (var0009 + 0x0001);
+			var0007 = var000D[0x0004];
+			var000C = var000D[0x0003];
+			var000E = var0004;
+			var0004 = var000D[0x0002];
+			var0005 = var000D[0x0001];
+		}
+		var000F = UI_get_random(0x0003);
+		if (var000C < 0x0002) {
+			if (var0004 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var000F == 0x0001) {
+					say("\"Rocco would have me scrapped for lowering my prices like this. Please do not tell him...\"");
 				}
 				if (var000F == 0x0002) {
-					say("\"Take thy slick ways elsewhere then! I have more important things to do!\"");
+					say("\"Thou art most forceful, ",
+						var0002,
+						"! We will not be in business long at this rate!\"");
 				}
 				if (var000F == 0x0003) {
-					say("\"Be gone... Before I fetch Rocco to break thy thick head for thee!\"");
-				}
-				return 0x0000;
-			}
-			if (var0007 == 0x0001) {
-				if (var000C == 0x0005) {
-					say("\"",
-						var0004,
-						" is my final offer. Dost thou accept?\"");
-					if (Func0955()) {
-						return var0004;
-					}
-					var0008 = 0x0000;
-				} else {
-					say("\"Fine... ",
-						var0004,
-						" guilders is my final offer.\"");
+					say("\"Rocco would never have been out-bargained so!\"");
 				}
 			} else {
-				if (var000C == 0x0002) {
+				if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
 					if (var000F == 0x0001) {
-						say("\"It is so interesting bargaining with thee. How doth ",
-							var0004,
-							" guilders sound?\"");
+						say("\"The Blue Boar doth have the finest prices, eh?\"");
 					}
 					if (var000F == 0x0002) {
-						say("\"Thou art a gem among customers. Have we agreed on ",
-							var0004,
-							" guilders?\"");
+						say("\"Today hath gone well, so I will be generous. On another day thou mayest not be so lucky!\"");
 					}
 					if (var000F == 0x0003) {
-						say("\"I offer thee a price of ",
-							var0004,
-							" guilders -- a special deal for those I consider good customers. Dost thou accept?\"");
+						say("\"Perhaps it is a human trait... To bargain so well.\"");
+					}
+				} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+					if (var000F == 0x0001) {
+						say("\"Even Rocco would consider this a fair deal...\"");
+					}
+					if (var000F == 0x0002) {
+						say("\"We shall not profit this way...\"");
+					}
+					if (var000F == 0x0003) {
+						say("\"Good service and fair prices is what hath made the Blue Boar famous!\"");
+					}
+				} else {
+					if (var000F == 0x0001) {
+						say("\"I am pleased, ",
+							var0002,
+							".\"");
+					}
+					if (var000F == 0x0002) {
+						say("\"Thou art a fine person!\"");
+					}
+					if (var000F == 0x0003) {
+						say("\"If times were not so bad, our prices would be far lower...\"");
 					}
 				}
-				if (var000C == 0x0003) {
-					if (var000F == 0x0001) {
-						say("\"We have so little in stock... Perhaps ",
-							var0004,
-							" guilders?\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"",
-							var0004,
-							"? I should charge more, though...\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"I must consider what Rocco will say. Perhaps ",
-							var0004,
-							" guilders?\"");
-					}
+			}
+			say("\"Dost thou agree to ",
+				var0004,
+				" guilders, ",
+				var0002,
+				"?\"");
+			if (Func0955()) {
+				return var0004;
+			}
+			if (var000F == 0x0001) {
+				say("\"I thought thou didst agree to that price!\"");
+			}
+			if (var000F == 0x0002) {
+				say("\"Take thy slick ways elsewhere then! I have more important things to do!\"");
+			}
+			if (var000F == 0x0003) {
+				say("\"Be gone... Before I fetch Rocco to break thy thick head for thee!\"");
+			}
+			return 0x0000;
+		}
+		if (var0007 == 0x0001) {
+			if (var000C == 0x0005) {
+				say("\"",
+					var0004,
+					" is my final offer. Dost thou accept?\"");
+				if (Func0955()) {
+					return var0004;
 				}
-				if (var000C == 0x0004) {
-					if (var000F == 0x0001) {
-						say("\"",
-							var0004,
-							" guilders is as low as I can go. Wilt thou agree?\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"Surely thou canst see that I can go no lower than ",
-							var0004,
-							" guilders. We must pay for the upkeep on the inn.\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"I may be an automaton, but I am no fool! I will accept no less than ",
-							var0004,
-							" guilders.\"");
-					}
+				var0008 = 0x0000;
+			} else {
+				say("\"Fine... ",
+					var0004,
+					" guilders is my final offer.\"");
+			}
+		} else {
+			if (var000C == 0x0002) {
+				if (var000F == 0x0001) {
+					say("\"It is so interesting bargaining with thee. How doth ",
+						var0004,
+						" guilders sound?\"");
 				}
-				if (var000C == 0x0005) {
-					var0004 = var000E;
-					if (var000F == 0x0001) {
-						say("\"I would rather Rocco sell me for scrap! My previous price stands, at ",
-							var0004,
-							" guilders.\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"",
-							var0004,
-							" guilders! I shall not be tricked into accepting less!\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"Thou must think me witless!\"");
-						if (Func0942(0xFFE2)) {
-							var0010 = "his";
-							if (var0003) {
-								var0010 = "her";
-							}
-							0xFFE2->show_npc_face1(0x0000);
-							say("\"If this person is bothering thee, Petra, I shall be happy to soften ",
-								var0010,
-								" skull for thee.\"");
-							UI_remove_npc_face1();
-							0xFFE4->show_npc_face0(0x0000);
+				if (var000F == 0x0002) {
+					say("\"Thou art a gem among customers. Have we agreed on ",
+						var0004,
+						" guilders?\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"I offer thee a price of ",
+						var0004,
+						" guilders -- a special deal for those I consider good customers. Dost thou accept?\"");
+				}
+			}
+			if (var000C == 0x0003) {
+				if (var000F == 0x0001) {
+					say("\"We have so little in stock... Perhaps ",
+						var0004,
+						" guilders?\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"",
+						var0004,
+						"? I should charge more, though...\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"I must consider what Rocco will say. Perhaps ",
+						var0004,
+						" guilders?\"");
+				}
+			}
+			if (var000C == 0x0004) {
+				if (var000F == 0x0001) {
+					say("\"",
+						var0004,
+						" guilders is as low as I can go. Wilt thou agree?\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"Surely thou canst see that I can go no lower than ",
+						var0004,
+						" guilders. We must pay for the upkeep on the inn.\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"I may be an automaton, but I am no fool! I will accept no less than ",
+						var0004,
+						" guilders.\"");
+				}
+			}
+			if (var000C == 0x0005) {
+				var0004 = var000E;
+				if (var000F == 0x0001) {
+					say("\"I would rather Rocco sell me for scrap! My previous price stands, at ",
+						var0004,
+						" guilders.\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"",
+						var0004,
+						" guilders! I shall not be tricked into accepting less!\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"Thou must think me witless!\"");
+					if (Func0942(0xFFE2)) {
+						var0010 = "his";
+						if (var0003) {
+							var0010 = "her";
 						}
-						say("\"",
-							var0004,
-							" guilders is where I stand.\"");
+						0xFFE2->show_npc_face1(0x0000);
+						say("\"If this person is bothering thee, Petra, I shall be happy to soften ",
+							var0010,
+							" skull for thee.\"");
+						UI_remove_npc_face1();
+						0xFFE4->show_npc_face0(0x0000);
 					}
+					say("\"",
+						var0004,
+						" guilders is where I stand.\"");
 				}
 			}
 		}
@@ -94769,101 +94632,100 @@ void Func0858 0x858 () {
 				".\"");
 			var0001 = false;
 			continue;
-		} else {
-			var000B = var0005[var000A];
-			var000C = 0x0000;
-			if (var000A == 0x0002) {
-				say("\"That will be ",
-					var000B,
-					" guilders. If thou dost sleep poorly, this is the perfect solution, ",
-					var0000,
-					".\"");
-				say("\"Wilt thou accept?\"");
-			}
-			if (var000A == 0x0003) {
-				say("\"I sell mine healing potions for ",
-					var000B,
-					" guilders each.\"");
-				say("\"How doth that sound?\"");
-			}
-			if (var000A == 0x0004) {
-				say("\"I will sell a potion of illumination to thee for the fair price of ",
-					var000B,
-					" guilders.\"");
-				say("\"Dost thou agree?\"");
-			}
-			if (var000A == 0x0005) {
-				say("\"",
-					var000B,
-					" guilders is a small price to pay if thou art in need of removing poisons from thy body, ",
-					var0000,
-					".\"");
-				say("\"Is the price acceptable?\"");
-			}
-			if (var000A == 0x0006) {
-				say("\"This potion, of course, will awaken anyone... or anything... from the deepest slumber. ",
-					var000B,
-					" guilders is the price.\"");
-				say("\"Is the price acceptable to thee, ",
-					var0000,
-					"?\"");
-			}
-			if (var000A == 0x0007) {
-				say("\"I can sell this to thee for ",
-					var000B,
-					" guilders. The efficacy of this potion is guaranteed, ",
-					var0000,
-					"!\"");
-				say("\"Dost thou agree, ",
-					var0000,
-					"?\"");
-			}
-			if (var000A == 0x0008) {
-				say("\"Needless to say, this is a very useful potion, ",
-					var0000,
-					". ",
-					var000B,
-					" guilders is an excellent price, if I do say so myself.\"");
-				say("\"What dost thou say?\"");
-			}
-			if (var000B == var0006[var000A]) {
-				if (Func0955()) {
-					var000D = var000B;
-				} else {
-					var000D = 0x0000;
-				}
+		}
+		var000B = var0005[var000A];
+		var000C = 0x0000;
+		if (var000A == 0x0002) {
+			say("\"That will be ",
+				var000B,
+				" guilders. If thou dost sleep poorly, this is the perfect solution, ",
+				var0000,
+				".\"");
+			say("\"Wilt thou accept?\"");
+		}
+		if (var000A == 0x0003) {
+			say("\"I sell mine healing potions for ",
+				var000B,
+				" guilders each.\"");
+			say("\"How doth that sound?\"");
+		}
+		if (var000A == 0x0004) {
+			say("\"I will sell a potion of illumination to thee for the fair price of ",
+				var000B,
+				" guilders.\"");
+			say("\"Dost thou agree?\"");
+		}
+		if (var000A == 0x0005) {
+			say("\"",
+				var000B,
+				" guilders is a small price to pay if thou art in need of removing poisons from thy body, ",
+				var0000,
+				".\"");
+			say("\"Is the price acceptable?\"");
+		}
+		if (var000A == 0x0006) {
+			say("\"This potion, of course, will awaken anyone... or anything... from the deepest slumber. ",
+				var000B,
+				" guilders is the price.\"");
+			say("\"Is the price acceptable to thee, ",
+				var0000,
+				"?\"");
+		}
+		if (var000A == 0x0007) {
+			say("\"I can sell this to thee for ",
+				var000B,
+				" guilders. The efficacy of this potion is guaranteed, ",
+				var0000,
+				"!\"");
+			say("\"Dost thou agree, ",
+				var0000,
+				"?\"");
+		}
+		if (var000A == 0x0008) {
+			say("\"Needless to say, this is a very useful potion, ",
+				var0000,
+				". ",
+				var000B,
+				" guilders is an excellent price, if I do say so myself.\"");
+			say("\"What dost thou say?\"");
+		}
+		if (var000B == var0006[var000A]) {
+			if (Func0955()) {
+				var000D = var000B;
 			} else {
-				var000D = Func085B(var0005[var000A], var0006[var000A]);
+				var000D = 0x0000;
 			}
-			if (var000D > 0x0000) {
-				if (var0009[var000A] == 0x0001) {
-					say("\"How many wouldst thou like?\"");
-					var000C = Func0943(var0003[var000A], var0004[var000A], 0x0001, var0007, var000D, 0x000A, 0x0001, false);
-				} else {
-					var000C = Func0943(var0003[var000A], var0004[var000A], 0x0001, var0007, var000D, 0x0000, 0x0001, false);
-				}
+		} else {
+			var000D = Func085B(var0005[var000A], var0006[var000A]);
+		}
+		if (var000D > 0x0000) {
+			if (var0009[var000A] == 0x0001) {
+				say("\"How many wouldst thou like?\"");
+				var000C = Func0943(var0003[var000A], var0004[var000A], 0x0001, var0007, var000D, 0x000A, 0x0001, false);
+			} else {
+				var000C = Func0943(var0003[var000A], var0004[var000A], 0x0001, var0007, var000D, 0x0000, 0x0001, false);
 			}
-			if (var000C == 0x0001) {
-				say("\"Good luck with thy purchase, ",
-					var0000,
-					".\"");
-			} else if (var000C == 0x0002) {
-				say("\"Thine hands are full, ",
-					var0000,
-					"!\"");
-			} else if (var000C == 0x0003) {
-				var000A = Func0992(0x0001, (("@But " + var0000) + ", we have not the guilders to purchase this.@"), 0x0000, false);
-				if (var000A != 0xFE9C) {
-					0xFFE3->show_npc_face0(0x0000);
-					say("\"I do not give my merchandise away!\"");
-				} else {
-					say("\"I am sorry, but thou dost not have enough guilders to purchase this!\"");
-				}
-				if (0x001F < (0xFFE3->get_npc_id() + 0x0006)) {
-					0xFFE3->set_npc_id(0x001F);
-				} else {
-					0xFFE3->set_npc_id(0xFFE3->get_npc_id() + 0x0006);
-				}
+		}
+		if (var000C == 0x0001) {
+			say("\"Good luck with thy purchase, ",
+				var0000,
+				".\"");
+		} else if (var000C == 0x0002) {
+			say("\"Thine hands are full, ",
+				var0000,
+				"!\"");
+		} else if (var000C == 0x0003) {
+			var000A = Func0992(0x0001, (("@But " + var0000) + ", we have not the guilders to purchase this.@"), 0x0000, false);
+			if (var000A != 0xFE9C) {
+				0xFFE3->show_npc_face0(0x0000);
+				say("\"I do not give my merchandise away!\"");
+			} else {
+				say("\"I am sorry, but thou dost not have enough guilders to purchase this!\"");
+			}
+			if (0x001F < (0xFFE3->get_npc_id() + 0x0006)) {
+				0xFFE3->set_npc_id(0x001F);
+			} else {
+				0xFFE3->set_npc_id(0xFFE3->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Dost thou desire another purchase?\"");
@@ -94914,91 +94776,90 @@ void Func0859 0x859 () {
 				".\"");
 			var0001 = false;
 			continue;
-		} else {
-			var000B = var0005[var000A];
-			var000C = 0x0000;
-			if (var000A == 0x0002) {
-				say("\"My black pearls are sought after from across Serpent Isle for their potency. Surely ",
-					var000B,
-					" guilders is an equitable price?\"");
-				say("\"Dost thou accept?\"");
-			}
-			if (var000A == 0x0003) {
-				say("\"",
-					var000B,
-					" guilders each for a mandrake root, which is a most excellent reagent for powerful spells.\"");
-				say("\"Dost thou find this price acceptable?\"");
-			}
-			if (var000A == 0x0004) {
-				say("\"For the fair price of ",
-					var000B,
-					" guilders, I can sell thee garlic that is most efficacious for spellcasting.\"");
-				say("\"Dost thou agree?\"");
-			}
-			if (var000A == 0x0005) {
-				say("\"",
-					var000B,
-					" guilders for the finest spun silk thou canst find, ",
-					var0000,
-					".\"");
-				say("\"Is the price acceptable?\"");
-			}
-			if (var000A == 0x0006) {
-				say("\"I went to great lengths to acquire the ash from Furnace itself! ",
-					var000B,
-					" guilders is the asking price.\"");
-				say("\"Wilt thou accept this price?\"");
-			}
-			if (var000A == 0x0007) {
-				say("\"Ah, these worm hearts are most precious, ",
-					var0000,
-					", and needless to say, they are very difficult to procure! I am asking ",
-					var000B,
-					" guilders each for these fine jewels.\"");
-				say("\"What dost thou think, ",
-					var0000,
-					"?\"");
-			}
-			if (var000B == var0006[var000A]) {
-				if (Func0955()) {
-					var000D = var000B;
-				} else {
-					var000D = 0x0000;
-				}
+		}
+		var000B = var0005[var000A];
+		var000C = 0x0000;
+		if (var000A == 0x0002) {
+			say("\"My black pearls are sought after from across Serpent Isle for their potency. Surely ",
+				var000B,
+				" guilders is an equitable price?\"");
+			say("\"Dost thou accept?\"");
+		}
+		if (var000A == 0x0003) {
+			say("\"",
+				var000B,
+				" guilders each for a mandrake root, which is a most excellent reagent for powerful spells.\"");
+			say("\"Dost thou find this price acceptable?\"");
+		}
+		if (var000A == 0x0004) {
+			say("\"For the fair price of ",
+				var000B,
+				" guilders, I can sell thee garlic that is most efficacious for spellcasting.\"");
+			say("\"Dost thou agree?\"");
+		}
+		if (var000A == 0x0005) {
+			say("\"",
+				var000B,
+				" guilders for the finest spun silk thou canst find, ",
+				var0000,
+				".\"");
+			say("\"Is the price acceptable?\"");
+		}
+		if (var000A == 0x0006) {
+			say("\"I went to great lengths to acquire the ash from Furnace itself! ",
+				var000B,
+				" guilders is the asking price.\"");
+			say("\"Wilt thou accept this price?\"");
+		}
+		if (var000A == 0x0007) {
+			say("\"Ah, these worm hearts are most precious, ",
+				var0000,
+				", and needless to say, they are very difficult to procure! I am asking ",
+				var000B,
+				" guilders each for these fine jewels.\"");
+			say("\"What dost thou think, ",
+				var0000,
+				"?\"");
+		}
+		if (var000B == var0006[var000A]) {
+			if (Func0955()) {
+				var000D = var000B;
 			} else {
-				var000D = Func085B(var0005[var000A], var0006[var000A]);
+				var000D = 0x0000;
 			}
-			if (var000D > 0x0000) {
-				if (var0009[var000A] == 0x0001) {
-					say("\"How many wouldst thou like?\"");
-					var000C = Func0943(var0003[var000A], var0004[var000A], 0x0001, var0007, var000D, 0x0014, 0x0001, false);
-				} else {
-					var000C = Func0943(var0003[var000A], var0004[var000A], 0x0001, var0007, var000D, 0x0000, 0x0001, false);
-				}
+		} else {
+			var000D = Func085B(var0005[var000A], var0006[var000A]);
+		}
+		if (var000D > 0x0000) {
+			if (var0009[var000A] == 0x0001) {
+				say("\"How many wouldst thou like?\"");
+				var000C = Func0943(var0003[var000A], var0004[var000A], 0x0001, var0007, var000D, 0x0014, 0x0001, false);
+			} else {
+				var000C = Func0943(var0003[var000A], var0004[var000A], 0x0001, var0007, var000D, 0x0000, 0x0001, false);
 			}
-			if (var000C == 0x0001) {
-				say("\"Best of luck with thy purchase, ",
+		}
+		if (var000C == 0x0001) {
+			say("\"Best of luck with thy purchase, ",
+				var0000,
+				".\"");
+		} else if (var000C == 0x0002) {
+			say("\"I believe that thine hands are full, ",
+				var0000,
+				"!\"");
+		} else if (var000C == 0x0003) {
+			var000A = Func0992(0x0001, (("@But " + var0000) + ", we have not the guilders to purchase this.@"), 0x0000, false);
+			if (var000A != 0xFE9C) {
+				0xFFE3->show_npc_face0(0x0000);
+				say("\"Ah... it dost appear that thy purse is empty, ",
 					var0000,
 					".\"");
-			} else if (var000C == 0x0002) {
-				say("\"I believe that thine hands are full, ",
-					var0000,
-					"!\"");
-			} else if (var000C == 0x0003) {
-				var000A = Func0992(0x0001, (("@But " + var0000) + ", we have not the guilders to purchase this.@"), 0x0000, false);
-				if (var000A != 0xFE9C) {
-					0xFFE3->show_npc_face0(0x0000);
-					say("\"Ah... it dost appear that thy purse is empty, ",
-						var0000,
-						".\"");
-				} else {
-					say("\"I do not give my merchandise away! Thou dost not have the guilders to purchase this!\"");
-				}
-				if (0x001F < (0xFFE3->get_npc_id() + 0x0006)) {
-					0xFFE3->set_npc_id(0x001F);
-				} else {
-					0xFFE3->set_npc_id(0xFFE3->get_npc_id() + 0x0006);
-				}
+			} else {
+				say("\"I do not give my merchandise away! Thou dost not have the guilders to purchase this!\"");
+			}
+			if (0x001F < (0xFFE3->get_npc_id() + 0x0006)) {
+				0xFFE3->set_npc_id(0x001F);
+			} else {
+				0xFFE3->set_npc_id(0xFFE3->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Dost thou desire another purchase?\"");
@@ -95050,89 +94911,88 @@ void Func085A 0x85A () {
 				".\"");
 			var0001 = false;
 			continue;
-		} else {
-			var000B = var0005[var000A];
-			var000C = 0x0000;
-			if (var000A == 0x0002) {
-				say("\"Well, for a warrior such as thou art, I suppose that magic leggings will prove useful. I will sell a pair to thee for ",
-					var000B,
-					" guilders.\"");
-				say("\"Wilt thou buy?\"");
-			}
-			if (var000A == 0x0003) {
-				say("\"Hmmm... a pair of magic boots will protect thee quite well. I offer a pair for ",
-					var000B,
-					" guilders.\"");
-				say("\"Wilt thou take it?\"");
-			}
-			if (var000A == 0x0004) {
-				say("\"I do not recall who enchanted my magic axes, but let me assure thee, they are well constructed! I can sell thee one for ",
-					var000B,
-					" guilders.\"");
-				say("\"Dost thou agree?\"");
-			}
-			if (var000A == 0x0005) {
-				say("\"Ah, thou hast chosen what I consider to be the ultimate weapon for a warrior born! The Sword of Defense will protect thee just as well as plate armour, but without the encumbrance and weight. I can sell thee one for ",
-					var000B,
-					" guilders.\"");
-				say("\"Dost thou accept the price?\"");
-			}
-			if (var000A == 0x0006) {
-				say("\"For the low cost of ",
-					var000B,
-					" guilders I can sell thee ten magic bolts. They are more accurate and far more deadly than the mundane variety.\"");
-				say("\"Is the price acceptable?\"");
-				var000D = "magic bolts, in bundles of ten,";
-			}
-			if (var000A == 0x0007) {
-				say("\"Some say that the Glass Sword is the deadliest weapon one can aspire to wield. I do not know for certain, but rest assured that it is most lethal. For ",
-					var000B,
-					" guilders it is thine.\"");
-				say("\"Wilt thou agree to this price?\"");
-			}
-			if (var000B == var0006[var000A]) {
-				if (Func0955()) {
-					var000E = var000B;
-				} else {
-					say("\"Perhaps another time, ",
-						var0000,
-						".\"");
-					var000E = 0x0000;
-				}
+		}
+		var000B = var0005[var000A];
+		var000C = 0x0000;
+		if (var000A == 0x0002) {
+			say("\"Well, for a warrior such as thou art, I suppose that magic leggings will prove useful. I will sell a pair to thee for ",
+				var000B,
+				" guilders.\"");
+			say("\"Wilt thou buy?\"");
+		}
+		if (var000A == 0x0003) {
+			say("\"Hmmm... a pair of magic boots will protect thee quite well. I offer a pair for ",
+				var000B,
+				" guilders.\"");
+			say("\"Wilt thou take it?\"");
+		}
+		if (var000A == 0x0004) {
+			say("\"I do not recall who enchanted my magic axes, but let me assure thee, they are well constructed! I can sell thee one for ",
+				var000B,
+				" guilders.\"");
+			say("\"Dost thou agree?\"");
+		}
+		if (var000A == 0x0005) {
+			say("\"Ah, thou hast chosen what I consider to be the ultimate weapon for a warrior born! The Sword of Defense will protect thee just as well as plate armour, but without the encumbrance and weight. I can sell thee one for ",
+				var000B,
+				" guilders.\"");
+			say("\"Dost thou accept the price?\"");
+		}
+		if (var000A == 0x0006) {
+			say("\"For the low cost of ",
+				var000B,
+				" guilders I can sell thee ten magic bolts. They are more accurate and far more deadly than the mundane variety.\"");
+			say("\"Is the price acceptable?\"");
+			var000D = "magic bolts, in bundles of ten,";
+		}
+		if (var000A == 0x0007) {
+			say("\"Some say that the Glass Sword is the deadliest weapon one can aspire to wield. I do not know for certain, but rest assured that it is most lethal. For ",
+				var000B,
+				" guilders it is thine.\"");
+			say("\"Wilt thou agree to this price?\"");
+		}
+		if (var000B == var0006[var000A]) {
+			if (Func0955()) {
+				var000E = var000B;
 			} else {
-				var000E = Func085B(var0005[var000A], var0006[var000A]);
-			}
-			if (var000E > 0x0000) {
-				if (var0009[var000A] == 0x0001) {
-					say("\"How many ",
-						var000D,
-						" wouldst thou like?\"");
-					var000C = Func0943(var0003[var000A], var0004[var000A], var0008[var000A], var0007, var000E, 0x0005, 0x0001, false);
-				} else {
-					var000C = Func0943(var0003[var000A], var0004[var000A], 0x0001, var0007, var000E, 0x0000, 0x0001, false);
-				}
-			}
-			if (var000C == 0x0001) {
-				say("\"Good luck with thy purchase, ",
+				say("\"Perhaps another time, ",
 					var0000,
 					".\"");
-			} else if (var000C == 0x0002) {
-				say("\"Thine hands are full, ",
-					var0000,
-					"!\"");
-			} else if (var000C == 0x0003) {
-				var000A = Func0992(0x0001, (("@But " + var0000) + ", we have not the guilders to purchase this.@"), 0x0000, false);
-				if (var000A != 0xFE9C) {
-					0xFFE3->show_npc_face0(0x0000);
-					say("\"I do not give my merchandise away!\"");
-				} else {
-					say("\"I am sorry, but thou dost not have enough guilders to purchase this!\"");
-				}
-				if (0x001F < (0xFFE3->get_npc_id() + 0x0006)) {
-					0xFFE3->set_npc_id(0x001F);
-				} else {
-					0xFFE3->set_npc_id(0xFFE3->get_npc_id() + 0x0006);
-				}
+				var000E = 0x0000;
+			}
+		} else {
+			var000E = Func085B(var0005[var000A], var0006[var000A]);
+		}
+		if (var000E > 0x0000) {
+			if (var0009[var000A] == 0x0001) {
+				say("\"How many ",
+					var000D,
+					" wouldst thou like?\"");
+				var000C = Func0943(var0003[var000A], var0004[var000A], var0008[var000A], var0007, var000E, 0x0005, 0x0001, false);
+			} else {
+				var000C = Func0943(var0003[var000A], var0004[var000A], 0x0001, var0007, var000E, 0x0000, 0x0001, false);
+			}
+		}
+		if (var000C == 0x0001) {
+			say("\"Good luck with thy purchase, ",
+				var0000,
+				".\"");
+		} else if (var000C == 0x0002) {
+			say("\"Thine hands are full, ",
+				var0000,
+				"!\"");
+		} else if (var000C == 0x0003) {
+			var000A = Func0992(0x0001, (("@But " + var0000) + ", we have not the guilders to purchase this.@"), 0x0000, false);
+			if (var000A != 0xFE9C) {
+				0xFFE3->show_npc_face0(0x0000);
+				say("\"I do not give my merchandise away!\"");
+			} else {
+				say("\"I am sorry, but thou dost not have enough guilders to purchase this!\"");
+			}
+			if (0x001F < (0xFFE3->get_npc_id() + 0x0006)) {
+				0xFFE3->set_npc_id(0x001F);
+			} else {
+				0xFFE3->set_npc_id(0xFFE3->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Dost thou wish something else?\"");
@@ -95175,195 +95035,195 @@ var Func085B 0x85B (var var0000, var var0001) {
 		var000B = Func0956(["yes", "no", "haggle"]);
 		if (var000B == "no") {
 			return 0x0000;
+		}
+		if (var000B == "yes") {
+			var000C = 0x0000;
 		} else {
-			if (var000B == "yes") {
-				var000C = 0x0000;
-			} else {
-				var000D = Func0999(var0003, var0001, var0009, var0004, var0008, var0005, var0006);
-				var0008 = (var0008 + 0x0001);
-				var0006 = var000D[0x0004];
-				var000C = var000D[0x0003];
-				var000E = var0003;
-				var0003 = var000D[0x0002];
-				var0004 = var000D[0x0001];
-			}
-			var000F = UI_get_random(0x0003);
-			if (var000C < 0x0002) {
-				if (var0003 < (var0001 + ((var0000 - var0001) / 0x0004))) {
-					if (var000F == 0x0001) {
-						say("\"I shall never live this down, if thou dost tell anyone...\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"It is rare to find one who trades as well as thee...\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"Would that I had more stock, that I might make a better deal!\"");
-					}
-				} else {
-					if (var0003 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-						if (var000F == 0x0001) {
-							say("\"I offer only the finest merchandise at the fairest prices!\"");
-						}
-						if (var000F == 0x0002) {
-							say("\"It would do me better to tell everyone that thou hadst stolen this from me!\"");
-						}
-						if (var000F == 0x0003) {
-							say("\"I could almost suspect thee of charming me...\"");
-						}
-					} else if (var0003 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-						if (var000F == 0x0001) {
-							say("\"I think we have both made a good deal, ",
-								var0002,
-								".\"");
-						}
-						if (var000F == 0x0002) {
-							say("\"Trading with thee is most challenging, ",
-								var0002,
-								".\"");
-						}
-						if (var000F == 0x0003) {
-							say("\"There are not many others who sell such things, ",
-								var0002,
-								".\"");
-						}
-					} else {
-						if (var000F == 0x0001) {
-							say("\"Thou art a fine customer... Return any time!\"");
-						}
-						if (var000F == 0x0002) {
-							say("\"May fortune favor thee, ",
-								var0002,
-								"!\"");
-						}
-						if (var000F == 0x0003) {
-							say("\"If I had more stock, ",
-								var0002,
-								", I could offer thee a better price. \"");
-						}
-					}
-				}
-				say("\"Wilt thou agree on a price of ",
-					var0003,
-					" guilders, ",
-					var0002,
-					"?\"");
-				if (Func0955()) {
-					if (var000A > 0x0001) {
-						0xFFE3->set_npc_id(var000A - 0x0002);
-					}
-					return var0003;
-				} else if (var000F == 0x0001) {
-					say("\"Thou didst agree! I had not thought that thou wouldst go back on thy word!\"");
+			var000D = Func0999(var0003, var0001, var0009, var0004, var0008, var0005, var0006);
+			var0008 = (var0008 + 0x0001);
+			var0006 = var000D[0x0004];
+			var000C = var000D[0x0003];
+			var000E = var0003;
+			var0003 = var000D[0x0002];
+			var0004 = var000D[0x0001];
+		}
+		var000F = UI_get_random(0x0003);
+		if (var000C < 0x0002) {
+			if (var0003 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var000F == 0x0001) {
+					say("\"I shall never live this down, if thou dost tell anyone...\"");
 				}
 				if (var000F == 0x0002) {
-					say("\"Is this the way the Avatar deals?\"");
+					say("\"It is rare to find one who trades as well as thee...\"");
 				}
 				if (var000F == 0x0003) {
-					say("\"I shall be sure to let the Council know of thine underhanded dealing, ",
-						var0002,
-						"!\"");
-				}
-				if (0x001F < (var000A + 0x000A)) {
-					0xFFE3->set_npc_id(0x001F);
-				} else {
-					0xFFE3->set_npc_id(var000A + 0x000A);
-				}
-				return 0x0000;
-			}
-			if (var0006 == 0x0001) {
-				if (var000C == 0x0005) {
-					say("\"I said that ",
-						var0003,
-						" was my final offer. Dost thou accept?\"");
-					if (var000A < 0x001C) {
-						0xFFE3->set_npc_id(var000A + 0x0004);
-					}
-					if (Func0955()) {
-						return var0003;
-					}
-					var0007 = 0x0000;
-				} else {
-					say("\"",
-						var0003,
-						" guilders is my final offer. Take it or leave it...\"");
-					if (var000A < 0x001E) {
-						0xFFE3->set_npc_id(var000A + 0x0002);
-					}
+					say("\"Would that I had more stock, that I might make a better deal!\"");
 				}
 			} else {
-				if (var000C == 0x0002) {
+				if (var0003 < (var0001 + ((var0000 - var0001) / 0x0003))) {
 					if (var000F == 0x0001) {
-						say("\"None of the Mages care to bargain as thou dost... How doth ",
-							var0003,
-							" guilders sound?\"");
+						say("\"I offer only the finest merchandise at the fairest prices!\"");
 					}
 					if (var000F == 0x0002) {
-						say("\"Thou art a worthy opponent! Wilt thou agree on ",
-							var0003,
-							" guilders?\"");
+						say("\"It would do me better to tell everyone that thou hadst stolen this from me!\"");
 					}
 					if (var000F == 0x0003) {
-						say("\"I offer thee ",
-							var0003,
-							" guilders. Dost thou accept?\"");
+						say("\"I could almost suspect thee of charming me...\"");
+					}
+				} else if (var0003 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+					if (var000F == 0x0001) {
+						say("\"I think we have both made a good deal, ",
+							var0002,
+							".\"");
+					}
+					if (var000F == 0x0002) {
+						say("\"Trading with thee is most challenging, ",
+							var0002,
+							".\"");
+					}
+					if (var000F == 0x0003) {
+						say("\"There are not many others who sell such things, ",
+							var0002,
+							".\"");
+					}
+				} else {
+					if (var000F == 0x0001) {
+						say("\"Thou art a fine customer... Return any time!\"");
+					}
+					if (var000F == 0x0002) {
+						say("\"May fortune favor thee, ",
+							var0002,
+							"!\"");
+					}
+					if (var000F == 0x0003) {
+						say("\"If I had more stock, ",
+							var0002,
+							", I could offer thee a better price. \"");
 					}
 				}
-				if (var000C == 0x0003) {
-					if (var000F == 0x0001) {
-						say("\"I have so little to sell now... Perhaps ",
-							var0003,
-							" guilders?\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"Let me think... ",
-							var0003,
-							" guilders?\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"How shall I live! ",
-							var0003,
-							" guilders?\"");
-					}
+			}
+			say("\"Wilt thou agree on a price of ",
+				var0003,
+				" guilders, ",
+				var0002,
+				"?\"");
+			if (Func0955()) {
+				if (var000A > 0x0001) {
+					0xFFE3->set_npc_id(var000A - 0x0002);
 				}
-				if (var000C == 0x0004) {
-					if (var000F == 0x0001) {
-						say("\"I cannot possibly accept less than ",
-							var0003,
-							"\tguilders!\"");
-						say("\"What dost thou say to this?\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"Supply and demand... ",
-							var0003,
-							" guilders, no less.\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"I am not the fool everyone thinks me. I will not accept less than ",
-							var0003,
-							" guilders.\"");
-					}
+				return var0003;
+			}
+			if (var000F == 0x0001) {
+				say("\"Thou didst agree! I had not thought that thou wouldst go back on thy word!\"");
+			}
+			if (var000F == 0x0002) {
+				say("\"Is this the way the Avatar deals?\"");
+			}
+			if (var000F == 0x0003) {
+				say("\"I shall be sure to let the Council know of thine underhanded dealing, ",
+					var0002,
+					"!\"");
+			}
+			if (0x001F < (var000A + 0x000A)) {
+				0xFFE3->set_npc_id(0x001F);
+			} else {
+				0xFFE3->set_npc_id(var000A + 0x000A);
+			}
+			return 0x0000;
+		}
+		if (var0006 == 0x0001) {
+			if (var000C == 0x0005) {
+				say("\"I said that ",
+					var0003,
+					" was my final offer. Dost thou accept?\"");
+				if (var000A < 0x001C) {
+					0xFFE3->set_npc_id(var000A + 0x0004);
 				}
-				if (var000C == 0x0005) {
-					var0003 = var000E;
-					if (var000F == 0x0001) {
-						say("\"I would rather endure the Mountains of Freedom! ",
-							var0003,
-							" guilders is what I offer.\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"I am not a child to be so misled! ",
-							var0003,
-							" guilders, and no less!\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"If I accepted such a price, I would have to close my shop and begin begging!\"");
-						say("\"",
-							var0003,
-							" guilders is where I stand.\"");
-					}
-					if (var000A < 0x001F) {
-						0xFFE3->set_npc_id(var000A + 0x0001);
-					}
+				if (Func0955()) {
+					return var0003;
+				}
+				var0007 = 0x0000;
+			} else {
+				say("\"",
+					var0003,
+					" guilders is my final offer. Take it or leave it...\"");
+				if (var000A < 0x001E) {
+					0xFFE3->set_npc_id(var000A + 0x0002);
+				}
+			}
+		} else {
+			if (var000C == 0x0002) {
+				if (var000F == 0x0001) {
+					say("\"None of the Mages care to bargain as thou dost... How doth ",
+						var0003,
+						" guilders sound?\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"Thou art a worthy opponent! Wilt thou agree on ",
+						var0003,
+						" guilders?\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"I offer thee ",
+						var0003,
+						" guilders. Dost thou accept?\"");
+				}
+			}
+			if (var000C == 0x0003) {
+				if (var000F == 0x0001) {
+					say("\"I have so little to sell now... Perhaps ",
+						var0003,
+						" guilders?\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"Let me think... ",
+						var0003,
+						" guilders?\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"How shall I live! ",
+						var0003,
+						" guilders?\"");
+				}
+			}
+			if (var000C == 0x0004) {
+				if (var000F == 0x0001) {
+					say("\"I cannot possibly accept less than ",
+						var0003,
+						"\tguilders!\"");
+					say("\"What dost thou say to this?\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"Supply and demand... ",
+						var0003,
+						" guilders, no less.\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"I am not the fool everyone thinks me. I will not accept less than ",
+						var0003,
+						" guilders.\"");
+				}
+			}
+			if (var000C == 0x0005) {
+				var0003 = var000E;
+				if (var000F == 0x0001) {
+					say("\"I would rather endure the Mountains of Freedom! ",
+						var0003,
+						" guilders is what I offer.\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"I am not a child to be so misled! ",
+						var0003,
+						" guilders, and no less!\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"If I accepted such a price, I would have to close my shop and begin begging!\"");
+					say("\"",
+						var0003,
+						" guilders is where I stand.\"");
+				}
+				if (var000A < 0x001F) {
+					0xFFE3->set_npc_id(var000A + 0x0001);
 				}
 			}
 		}
@@ -95457,115 +95317,114 @@ void Func085E 0x85E () {
 			say("\"Perhaps another time, then.\"");
 			var0001 = false;
 			continue;
-		} else {
-			var000C = var0005[var000B];
-			var000D = 0x0000;
-			var000E = UI_die_roll(0x0001, 0x0005);
-			if (var000E == 0x0001) {
-				var000F = "Dost thou accept?";
-			}
-			if (var000E == 0x0002) {
-				var000F = "Wilt thou have some?";
-			}
-			if (var000E == 0x0003) {
-				var000F = "Wilt thou pay such a charge?";
-			}
-			if (var000E == 0x0004) {
-				var000F = (var000A + ", dost thou agree?");
-			}
-			if (var000E == 0x0005) {
-				var000F = (var000A + ", is this a price that thou canst pay?");
-			}
-			if (var000B == 0x0002) {
-				say("\"I am afraid that the price is ",
-					var000C,
-					" guilders for two strips of jerky... these being terrible times and all.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "strips of jerky, in bunches of two,";
-			}
-			if (var000B == 0x0003) {
-				say("\"No one prepares fish better than my Petra!\"");
-				say("\"The dinner costs ",
-					var000C,
-					" guilders, but if I were not such an honest innkeeper I would charge more and make a fortune!\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "fish dinners";
-			}
-			if (var000B == 0x0004) {
-				say("\"Petra's sausage is very good. ",
-					var000C,
-					" guilders is my price.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "sausages";
-			}
-			if (var000B == 0x0005) {
-				say("\"Personally, ",
-					var0000,
-					", this is my favorite meal that Petra prepares! ",
-					var000C,
-					" guilders is what I charge.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "lamb roasts";
-			}
-			if (var000B == 0x0006) {
-				say("\"",
-					var000C,
-					" guilders will buy thee the sweetest honey cake thou hast ever tasted.\"");
-				say("\"",
-					var000F,
-					"\"");
-				var0010 = "honey cakes";
-			}
-			if (var000C == var0006[var000B]) {
-				if (Func0955()) {
-					var0011 = var000C;
-				} else {
-					var0011 = 0x0000;
-				}
+		}
+		var000C = var0005[var000B];
+		var000D = 0x0000;
+		var000E = UI_die_roll(0x0001, 0x0005);
+		if (var000E == 0x0001) {
+			var000F = "Dost thou accept?";
+		}
+		if (var000E == 0x0002) {
+			var000F = "Wilt thou have some?";
+		}
+		if (var000E == 0x0003) {
+			var000F = "Wilt thou pay such a charge?";
+		}
+		if (var000E == 0x0004) {
+			var000F = (var000A + ", dost thou agree?");
+		}
+		if (var000E == 0x0005) {
+			var000F = (var000A + ", is this a price that thou canst pay?");
+		}
+		if (var000B == 0x0002) {
+			say("\"I am afraid that the price is ",
+				var000C,
+				" guilders for two strips of jerky... these being terrible times and all.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "strips of jerky, in bunches of two,";
+		}
+		if (var000B == 0x0003) {
+			say("\"No one prepares fish better than my Petra!\"");
+			say("\"The dinner costs ",
+				var000C,
+				" guilders, but if I were not such an honest innkeeper I would charge more and make a fortune!\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "fish dinners";
+		}
+		if (var000B == 0x0004) {
+			say("\"Petra's sausage is very good. ",
+				var000C,
+				" guilders is my price.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "sausages";
+		}
+		if (var000B == 0x0005) {
+			say("\"Personally, ",
+				var0000,
+				", this is my favorite meal that Petra prepares! ",
+				var000C,
+				" guilders is what I charge.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "lamb roasts";
+		}
+		if (var000B == 0x0006) {
+			say("\"",
+				var000C,
+				" guilders will buy thee the sweetest honey cake thou hast ever tasted.\"");
+			say("\"",
+				var000F,
+				"\"");
+			var0010 = "honey cakes";
+		}
+		if (var000C == var0006[var000B]) {
+			if (Func0955()) {
+				var0011 = var000C;
 			} else {
-				var0011 = Func0860(var0005[var000B], var0006[var000B]);
+				var0011 = 0x0000;
 			}
-			if (var0011 > 0x0000) {
-				if (var0009[var000B] == 0x0001) {
-					say("\"How many ",
-						var0010,
-						" wouldst thou like?\"");
-					var000D = Func0943(var0003[var000B], var0004[var000B], var0008[var000B], var0007, var0011, 0x0014, 0x0001, false);
-				} else {
-					var000D = Func0943(var0003[var000B], var0004[var000B], var0008[var000B], var0007, var0011, 0x0000, 0x0001, false);
-				}
+		} else {
+			var0011 = Func0860(var0005[var000B], var0006[var000B]);
+		}
+		if (var0011 > 0x0000) {
+			if (var0009[var000B] == 0x0001) {
+				say("\"How many ",
+					var0010,
+					" wouldst thou like?\"");
+				var000D = Func0943(var0003[var000B], var0004[var000B], var0008[var000B], var0007, var0011, 0x0014, 0x0001, false);
+			} else {
+				var000D = Func0943(var0003[var000B], var0004[var000B], var0008[var000B], var0007, var0011, 0x0000, 0x0001, false);
 			}
-			if (var000D == 0x0001) {
-				say("\"I'm certain that thou wilt enjoy thy meal, ",
+		}
+		if (var000D == 0x0001) {
+			say("\"I'm certain that thou wilt enjoy thy meal, ",
+				var0000,
+				".\"");
+		} else if (var000D == 0x0002) {
+			say("\"I believe thou canst not carry so much food, ",
+				var0000,
+				".\"");
+		} else if (var000D == 0x0003) {
+			var0012 = Func0992(0x0001, (("@But " + var0000) + ", we have not the guilders to pay for this.@"), 0x0000, false);
+			if (var0012 != 0xFE9C) {
+				0xFFE2->show_npc_face0(0x0000);
+				say("\"Well, I hate to see thee go hungry, but Petra and I can not afford to feed thee for free. I am sorry, ",
 					var0000,
 					".\"");
-			} else if (var000D == 0x0002) {
-				say("\"I believe thou canst not carry so much food, ",
-					var0000,
-					".\"");
-			} else if (var000D == 0x0003) {
-				var0012 = Func0992(0x0001, (("@But " + var0000) + ", we have not the guilders to pay for this.@"), 0x0000, false);
-				if (var0012 != 0xFE9C) {
-					0xFFE2->show_npc_face0(0x0000);
-					say("\"Well, I hate to see thee go hungry, but Petra and I can not afford to feed thee for free. I am sorry, ",
-						var0000,
-						".\"");
-				} else {
-					say("\"Thou dost not have enough guilders for that!\"");
-				}
-				if (0x001F < (0xFFE2->get_npc_id() + 0x0006)) {
-					0xFFE2->set_npc_id(0x001F);
-				} else {
-					0xFFE2->set_npc_id(0xFFE2->get_npc_id() + 0x0006);
-				}
+			} else {
+				say("\"Thou dost not have enough guilders for that!\"");
+			}
+			if (0x001F < (0xFFE2->get_npc_id() + 0x0006)) {
+				0xFFE2->set_npc_id(0x001F);
+			} else {
+				0xFFE2->set_npc_id(0xFFE2->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Wouldst thou care for more?\"");
@@ -95622,66 +95481,65 @@ void Func085F 0x85F () {
 			say("\"Remember, these wares shall be here when thou dost return!\"");
 			var0002 = false;
 			continue;
-		} else {
-			var000C = var0006[var000B];
-			var000D = 0x0000;
-			if (var000B == 0x0002) {
-				say("\"I must charge the steep fee of ",
-					var000C,
-					" guilders, considering the terrible state of trade with the mainland. Is this a price that thou canst pay?\"");
-				var000E = "wine bottles";
-			}
-			if (var000B == 0x0003) {
-				say("\"We have a most delectable brew for thee, sweetly flavored with the honey of bees raised in the mountain highlands.\"");
-				say("\"Surely at a price of ",
-					var000C,
-					" guilders, thou wilt accept some?\"");
-				var000E = "bottles of mead";
-			}
-			if (var000B == 0x0004) {
-				say("\"This ale is weak, imported from the mainland, but I must still charge ",
-					var000C,
-					" guilders for it. Wilt thou pay such a charge?\"");
-				var000E = "flasks of ale";
-			}
-			if (var000C == var0007[var000B]) {
-				if (Func0955()) {
-					var000F = var000C;
-				} else {
-					var000F = 0x0000;
-				}
+		}
+		var000C = var0006[var000B];
+		var000D = 0x0000;
+		if (var000B == 0x0002) {
+			say("\"I must charge the steep fee of ",
+				var000C,
+				" guilders, considering the terrible state of trade with the mainland. Is this a price that thou canst pay?\"");
+			var000E = "wine bottles";
+		}
+		if (var000B == 0x0003) {
+			say("\"We have a most delectable brew for thee, sweetly flavored with the honey of bees raised in the mountain highlands.\"");
+			say("\"Surely at a price of ",
+				var000C,
+				" guilders, thou wilt accept some?\"");
+			var000E = "bottles of mead";
+		}
+		if (var000B == 0x0004) {
+			say("\"This ale is weak, imported from the mainland, but I must still charge ",
+				var000C,
+				" guilders for it. Wilt thou pay such a charge?\"");
+			var000E = "flasks of ale";
+		}
+		if (var000C == var0007[var000B]) {
+			if (Func0955()) {
+				var000F = var000C;
 			} else {
-				var000F = Func0860(var0006[var000B], var0007[var000B]);
+				var000F = 0x0000;
 			}
-			if (var000F > 0x0000) {
-				if (var000A[var000B] == 0x0001) {
-					say("\"How many ",
-						var000E,
-						" wouldst thou like?\"");
-					var000D = Func0943(var0004[var000B], var0005[var000B], var0009[var000B], var0008, var000F, 0x0014, 0x0001, false);
-				} else {
-					var000D = Func0943(var0004[var000B], var0005[var000B], var0009[var000B], var0008, var000F, 0x0000, 0x0001, false);
-				}
+		} else {
+			var000F = Func0860(var0006[var000B], var0007[var000B]);
+		}
+		if (var000F > 0x0000) {
+			if (var000A[var000B] == 0x0001) {
+				say("\"How many ",
+					var000E,
+					" wouldst thou like?\"");
+				var000D = Func0943(var0004[var000B], var0005[var000B], var0009[var000B], var0008, var000F, 0x0014, 0x0001, false);
+			} else {
+				var000D = Func0943(var0004[var000B], var0005[var000B], var0009[var000B], var0008, var000F, 0x0000, 0x0001, false);
 			}
-			if (var000D == 0x0001) {
-				say("\"Cheers, ",
-					var0000,
-					"!\"");
-			} else if (var000D == 0x0002) {
-				say("\"Thou shouldst not travel so heavily burdened -- I do not think that thou canst bear the bottles that thou desirest!\"");
-			} else if (var000D == 0x0003) {
-				var0010 = Func0992(0x0001, (("@But " + var0001) + ", we lack adequate funds!@"), 0x0000, false);
-				if (var0010 != 0xFE9C) {
-					0xFFE2->show_npc_face0(0x0000);
-					say("\"Then thou'rt not drinking here!\"");
-				} else {
-					say("\"Thou dost not have the guilders to pay me!\"");
-				}
-				if (0x001F < (0xFFE2->get_npc_id() + 0x0006)) {
-					0xFFE2->set_npc_id(0x001F);
-				} else {
-					0xFFE2->set_npc_id(0xFFE2->get_npc_id() + 0x0006);
-				}
+		}
+		if (var000D == 0x0001) {
+			say("\"Cheers, ",
+				var0000,
+				"!\"");
+		} else if (var000D == 0x0002) {
+			say("\"Thou shouldst not travel so heavily burdened -- I do not think that thou canst bear the bottles that thou desirest!\"");
+		} else if (var000D == 0x0003) {
+			var0010 = Func0992(0x0001, (("@But " + var0001) + ", we lack adequate funds!@"), 0x0000, false);
+			if (var0010 != 0xFE9C) {
+				0xFFE2->show_npc_face0(0x0000);
+				say("\"Then thou'rt not drinking here!\"");
+			} else {
+				say("\"Thou dost not have the guilders to pay me!\"");
+			}
+			if (0x001F < (0xFFE2->get_npc_id() + 0x0006)) {
+				0xFFE2->set_npc_id(0x001F);
+			} else {
+				0xFFE2->set_npc_id(0xFFE2->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Wouldst thou care for more?\"");
@@ -95732,224 +95590,224 @@ var Func0860 0x860 (var var0000, var var0001) {
 		var000C = Func0956(["yes", "no", "haggle"]);
 		if (var000C == "no") {
 			return 0x0000;
+		}
+		if (var000C == "yes") {
+			var000D = 0x0000;
 		} else {
-			if (var000C == "yes") {
-				var000D = 0x0000;
+			var000E = Func0999(var0004, var0001, var000A, var0005, var0009, var0006, var0007);
+			var0009 = (var0009 + 0x0001);
+			var0007 = var000E[0x0004];
+			var000D = var000E[0x0003];
+			var000F = var0004;
+			var0004 = var000E[0x0002];
+			var0005 = var000E[0x0001];
+		}
+		var0010 = UI_get_random(0x0003);
+		if (var000D < 0x0002) {
+			if (var0004 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var0010 == 0x0001) {
+					say("\"Please do not mention this to Petra -- she would never forgive me for lowering my prices like this.\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"At this price, I might as well sell the inn and go live in a hut! Thou dost drive a hard bargain, ",
+						var0002,
+						".\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"I cannot believe that thou hast out-bargained me so...\"");
+					if (Func0942(0xFFE4)) {
+						0xFFE4->show_npc_face1(0x0000);
+						say("\"Thou art too old to be an innkeeper, Rocco! Thy mind grows soft, like an over-ripe fruit.\"");
+						UI_remove_npc_face1();
+						0xFFE2->show_npc_face0(0x0000);
+						say("\"Isn't that the truth...\"");
+					}
+				}
 			} else {
-				var000E = Func0999(var0004, var0001, var000A, var0005, var0009, var0006, var0007);
-				var0009 = (var0009 + 0x0001);
-				var0007 = var000E[0x0004];
-				var000D = var000E[0x0003];
-				var000F = var0004;
-				var0004 = var000E[0x0002];
-				var0005 = var000E[0x0001];
-			}
-			var0010 = UI_get_random(0x0003);
-			if (var000D < 0x0002) {
-				if (var0004 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
 					if (var0010 == 0x0001) {
-						say("\"Please do not mention this to Petra -- she would never forgive me for lowering my prices like this.\"");
+						say("\"Our prices are fair here at the Blue Boar, eh?\"");
 					}
 					if (var0010 == 0x0002) {
-						say("\"At this price, I might as well sell the inn and go live in a hut! Thou dost drive a hard bargain, ",
+						say("\"Yesterday, thou wouldst not have found me in such a generous mood as this. I should starve, if I sold goods at this price every day!\"");
+					}
+					if (var0010 == 0x0003) {
+						say("\"Thou hast a bargaining tongue, my friend. It reminds me of when I was thine age...\"");
+						if (var0003) {
+							var0011 = "lass";
+						} else {
+							var0011 = "lad";
+						}
+						say("\"Hast thou ever considered a change of employment? I'll be retiring someday, and perhaps a young ",
+							var0011,
+							" such as thyself might be interested in running an inn...\"");
+						if (var0003) {
+							var0012 = "her";
+						} else {
+							var0012 = "his";
+						}
+						var0013 = Func0992(0x0001, (("@I think not, innkeeper. The Avatar is not one to let grass grow under " + var0012) + " feet.@"), 0x0000, false);
+					}
+				} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+					if (var0010 == 0x0001) {
+						say("\"Most fair, if I do say so myself.\"");
+					}
+					if (var0010 == 0x0002) {
+						say("\"I shall not become a rich man from customers like thee...\"");
+					}
+					if (var0010 == 0x0003) {
+						say("\"And let me remind thee that we give service with a smile around here. 'Tis why the Blue Boar Inn is famous throughout these parts.\"");
+					}
+				} else {
+					if (var0010 == 0x0001) {
+						say("\"Thou hast made me a happy man, ",
 							var0002,
 							".\"");
 					}
-					if (var0010 == 0x0003) {
-						say("\"I cannot believe that thou hast out-bargained me so...\"");
-						if (Func0942(0xFFE4)) {
-							0xFFE4->show_npc_face1(0x0000);
-							say("\"Thou art too old to be an innkeeper, Rocco! Thy mind grows soft, like an over-ripe fruit.\"");
-							UI_remove_npc_face1();
-							0xFFE2->show_npc_face0(0x0000);
-							say("\"Isn't that the truth...\"");
-						}
+					if (var0010 == 0x0002) {
+						say("\"Thou art a blessing to this inn, thee and thy companions!\"");
 					}
-				} else {
-					if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-						if (var0010 == 0x0001) {
-							say("\"Our prices are fair here at the Blue Boar, eh?\"");
-						}
-						if (var0010 == 0x0002) {
-							say("\"Yesterday, thou wouldst not have found me in such a generous mood as this. I should starve, if I sold goods at this price every day!\"");
-						}
-						if (var0010 == 0x0003) {
-							say("\"Thou hast a bargaining tongue, my friend. It reminds me of when I was thine age...\"");
-							if (var0003) {
-								var0011 = "lass";
-							} else {
-								var0011 = "lad";
-							}
-							say("\"Hast thou ever considered a change of employment? I'll be retiring someday, and perhaps a young ",
-								var0011,
-								" such as thyself might be interested in running an inn...\"");
-							if (var0003) {
-								var0012 = "her";
-							} else {
-								var0012 = "his";
-							}
-							var0013 = Func0992(0x0001, (("@I think not, innkeeper. The Avatar is not one to let grass grow under " + var0012) + " feet.@"), 0x0000, false);
-						}
-					} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-						if (var0010 == 0x0001) {
-							say("\"Most fair, if I do say so myself.\"");
-						}
-						if (var0010 == 0x0002) {
-							say("\"I shall not become a rich man from customers like thee...\"");
-						}
-						if (var0010 == 0x0003) {
-							say("\"And let me remind thee that we give service with a smile around here. 'Tis why the Blue Boar Inn is famous throughout these parts.\"");
-						}
-					} else {
-						if (var0010 == 0x0001) {
-							say("\"Thou hast made me a happy man, ",
-								var0002,
-								".\"");
-						}
-						if (var0010 == 0x0002) {
-							say("\"Thou art a blessing to this inn, thee and thy companions!\"");
-						}
-						if (var0010 == 0x0003) {
-							say("\"In times like these, I must charge high prices or close...\"");
-						}
+					if (var0010 == 0x0003) {
+						say("\"In times like these, I must charge high prices or close...\"");
 					}
 				}
-				say("\"We have agreed on a price of ",
-					var0004,
-					" guilders, ",
+			}
+			say("\"We have agreed on a price of ",
+				var0004,
+				" guilders, ",
+				var0002,
+				"?\"");
+			if (Func0955()) {
+				if (var000B > 0x0001) {
+					0xFFE2->set_npc_id(var000B - 0x0002);
+				}
+				return var0004;
+			}
+			if (var0010 == 0x0001) {
+				say("\"What? I thought we had an agreement.\"");
+			}
+			if (var0010 == 0x0002) {
+				say("\"Then be gone with thee -- I have no time to play games.\"");
+			}
+			if (var0010 == 0x0003) {
+				say("\"Dost thou think me a fool, to argue with me only to change thy mind? I shall spread the word about thee in this town, wait and see!\"");
+			}
+			if (0x001F < (var000B + 0x000A)) {
+				0xFFE2->set_npc_id(0x001F);
+			} else {
+				0xFFE2->set_npc_id(var000B + 0x000A);
+			}
+			return 0x0000;
+		}
+		if (var0007 == 0x0001) {
+			if (var000D == 0x0005) {
+				say("\"Look, ",
 					var0002,
-					"?\"");
+					", I said that ",
+					var0004,
+					" was my final offer. Dost thou accept?\"");
+				if (var000B < 0x001C) {
+					0xFFE2->set_npc_id(var000B + 0x0004);
+				}
 				if (Func0955()) {
-					if (var000B > 0x0001) {
-						0xFFE2->set_npc_id(var000B - 0x0002);
-					}
 					return var0004;
-				} else if (var0010 == 0x0001) {
-					say("\"What? I thought we had an agreement.\"");
+				}
+				var0008 = 0x0000;
+			} else {
+				say("\"Very well. ",
+					var0004,
+					" guilders is my final offer.\"");
+				if (var000B < 0x001E) {
+					0xFFE2->set_npc_id(var000B + 0x0002);
+				}
+			}
+		} else {
+			if (var000D == 0x0002) {
+				if (var0010 == 0x0001) {
+					say("\"It pleases me to do business with such a worthy soul. How doth ",
+						var0004,
+						" guilders sound?\"");
 				}
 				if (var0010 == 0x0002) {
-					say("\"Then be gone with thee -- I have no time to play games.\"");
+					say("\"May the Spirit of Truth light thy way, dear friend. So, have we agreed on ",
+						var0004,
+						" guilders?\"");
 				}
 				if (var0010 == 0x0003) {
-					say("\"Dost thou think me a fool, to argue with me only to change thy mind? I shall spread the word about thee in this town, wait and see!\"");
+					say("\"My price is ",
+						var0004,
+						" guilders -- a special price for my good friend, if I may call thee friend. Dost thou accept?\"");
 				}
-				if (0x001F < (var000B + 0x000A)) {
-					0xFFE2->set_npc_id(0x001F);
-				} else {
-					0xFFE2->set_npc_id(var000B + 0x000A);
-				}
-				return 0x0000;
 			}
-			if (var0007 == 0x0001) {
-				if (var000D == 0x0005) {
-					say("\"Look, ",
-						var0002,
-						", I said that ",
+			if (var000D == 0x0003) {
+				if (var0010 == 0x0001) {
+					say("\"These are hard times, and goods are scarce... ",
 						var0004,
-						" was my final offer. Dost thou accept?\"");
-					if (var000B < 0x001C) {
-						0xFFE2->set_npc_id(var000B + 0x0004);
-					}
-					if (Func0955()) {
-						return var0004;
-					}
-					var0008 = 0x0000;
-				} else {
-					say("\"Very well. ",
+						" guilders?\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"I'm not certain... Perhaps ",
 						var0004,
-						" guilders is my final offer.\"");
-					if (var000B < 0x001E) {
-						0xFFE2->set_npc_id(var000B + 0x0002);
-					}
+						"?\"");
 				}
-			} else {
-				if (var000D == 0x0002) {
-					if (var0010 == 0x0001) {
-						say("\"It pleases me to do business with such a worthy soul. How doth ",
-							var0004,
-							" guilders sound?\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"May the Spirit of Truth light thy way, dear friend. So, have we agreed on ",
-							var0004,
-							" guilders?\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"My price is ",
-							var0004,
-							" guilders -- a special price for my good friend, if I may call thee friend. Dost thou accept?\"");
-					}
+				if (var0010 == 0x0003) {
+					say("\"But I must make enough to pay for repairs on this inn, which is drafty in the winter... Perhaps ",
+						var0004,
+						" guilders?\"");
 				}
-				if (var000D == 0x0003) {
-					if (var0010 == 0x0001) {
-						say("\"These are hard times, and goods are scarce... ",
-							var0004,
-							" guilders?\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"I'm not certain... Perhaps ",
-							var0004,
-							"?\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"But I must make enough to pay for repairs on this inn, which is drafty in the winter... Perhaps ",
-							var0004,
-							" guilders?\"");
-					}
-				}
-				if (var000D == 0x0004) {
-					if (var0010 == 0x0001) {
-						say("\"Petra, come and hear this! The customer jests with me!\"");
-						if (Func0942(0xFFE4)) {
-							Func094E(0xFFE4, (("@We cannot possibly accept less than " + var0004) + " guilders.@"));
-							0xFFE2->show_npc_face0(0x0000);
-						} else {
-							say("\"",
-								var0004,
-								" guilders is as low as I can go.\"");
-						}
-						say("\"What dost thou say to this?\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"But the storms have severed contact with the mainland, and my costs are soaring! Surely thou canst see that I can go no lower than ",
-							var0004,
-							" guilders.\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"Thou art not talking to a fool, ",
-							var0002,
-							". I deserve no less than ",
-							var0004,
-							" guilders.\"");
-					}
-				}
-				if (var000D == 0x0005) {
-					var0004 = var000F;
-					if (var0010 == 0x0001) {
-						say("\"I would rather be eaten by rats than accept such a pitiful offer. My previous price stands, at ",
-							var0004,
-							" guilders.\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"Thou must think that I am deaf, blind and stupid, to accept such a deal. ",
-							var0004,
-							" guilders, and no less!\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"Why, if I accepted such a price as this, I should have to break Petra into scrap metal and sell her to make ends meet!\"");
-						if (Func0942(0xFFE4)) {
-							0xFFE4->show_npc_face1(0x0000);
-							say("\"This person is a lout, my dear. Cast the fool out the door.\"");
-							UI_remove_npc_face1();
-							0xFFE2->show_npc_face0(0x0000);
-						}
+			}
+			if (var000D == 0x0004) {
+				if (var0010 == 0x0001) {
+					say("\"Petra, come and hear this! The customer jests with me!\"");
+					if (Func0942(0xFFE4)) {
+						Func094E(0xFFE4, (("@We cannot possibly accept less than " + var0004) + " guilders.@"));
+						0xFFE2->show_npc_face0(0x0000);
+					} else {
 						say("\"",
 							var0004,
-							" guilders is where I stand.\"");
+							" guilders is as low as I can go.\"");
 					}
-					if (var000B < 0x001F) {
-						0xFFE2->set_npc_id(var000B + 0x0001);
+					say("\"What dost thou say to this?\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"But the storms have severed contact with the mainland, and my costs are soaring! Surely thou canst see that I can go no lower than ",
+						var0004,
+						" guilders.\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"Thou art not talking to a fool, ",
+						var0002,
+						". I deserve no less than ",
+						var0004,
+						" guilders.\"");
+				}
+			}
+			if (var000D == 0x0005) {
+				var0004 = var000F;
+				if (var0010 == 0x0001) {
+					say("\"I would rather be eaten by rats than accept such a pitiful offer. My previous price stands, at ",
+						var0004,
+						" guilders.\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"Thou must think that I am deaf, blind and stupid, to accept such a deal. ",
+						var0004,
+						" guilders, and no less!\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"Why, if I accepted such a price as this, I should have to break Petra into scrap metal and sell her to make ends meet!\"");
+					if (Func0942(0xFFE4)) {
+						0xFFE4->show_npc_face1(0x0000);
+						say("\"This person is a lout, my dear. Cast the fool out the door.\"");
+						UI_remove_npc_face1();
+						0xFFE2->show_npc_face0(0x0000);
 					}
+					say("\"",
+						var0004,
+						" guilders is where I stand.\"");
+				}
+				if (var000B < 0x001F) {
+					0xFFE2->set_npc_id(var000B + 0x0001);
 				}
 			}
 		}
@@ -96279,7 +96137,8 @@ void Func0865 0x865 () {
 							if (var0007 == 0x0000) {
 								say("\"Please make up thy mind!\"");
 								break;
-							} else if (var0004 == "Monetari") {
+							}
+							if (var0004 == "Monetari") {
 								var0008 = (var0007 * 0x0003);
 							}
 							if (var0004 == "Filari") {
@@ -96395,7 +96254,8 @@ void Func0865 0x865 () {
 							if (var0007 == 0x0000) {
 								say("\"Please make up thy mind!\"");
 								break;
-							} else if (var0004 == "Monetari") {
+							}
+							if (var0004 == "Monetari") {
 								var0008 = (var0007 * 0x0004);
 							}
 							if (var0004 == "Guilders") {
@@ -96505,7 +96365,8 @@ void Func0865 0x865 () {
 							if (var0007 == 0x0000) {
 								say("\"Please make up thy mind!\"");
 								break;
-							} else if (var0004 == "Monetari") {
+							}
+							if (var0004 == "Monetari") {
 								var0008 = (var0007 * 0x0002);
 							}
 							if (var0004 == "Guilders") {
@@ -96646,149 +96507,148 @@ void Func0866 0x866 () {
 				".\"");
 			var0002 = false;
 			continue;
-		} else {
-			var000D = var0006[var000C];
-			var000E = 0x0000;
-			var000F = UI_die_roll(0x0001, 0x0005);
-			if (var000F == 0x0001) {
-				var0010 = "Dost thou accept?";
-			}
-			if (var000F == 0x0002) {
-				var0010 = "Wilt thou pay my price?";
-			}
-			if (var000F == 0x0003) {
-				var0010 = "Dost thou find the price agreeable?";
-			}
-			if (var000F == 0x0004) {
-				var0010 = (var000B + ", dost thou agree?");
-			}
-			if (var000F == 0x0005) {
-				var0010 = (var000B + ", is the price acceptable?");
-			}
-			if (var000C == 0x0002) {
-				say("\"",
-					var000D,
-					" monetari is a low price for durable scale armour, my friend.\"");
-				say(var0010,
-					"\"");
-				var0011 = "suits of scale armour";
-			}
-			if (var000C == 0x0003) {
-				say("\"If thou art serious about fighting, then thou shouldst purchase the best chain armour found in Monitor. I charge ",
-					var000D,
-					" monetari for a chain byrnie.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "chain byrnies";
-			}
-			if (var000C == 0x0004) {
-				say("\"Ah, plate mail is the best armour a knight could ask for, ",
-					var0000,
-					". I will sell thee a suit for ",
-					var000D,
-					" monetari.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "suits of plate armour";
-			}
-			if (var000C == 0x0005) {
-				say("\"I can sell thee chain leggings for ",
-					var000D,
-					" monetari.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "pairs of chain leggings";
-			}
-			if (var000C == 0x0006) {
-				say("\"Plate leggings will protect thy legs very well indeed, ",
-					var0000,
-					". I will sell thee a pair for ",
-					var000D,
-					" monetari.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "pairs of plate leggings";
-			}
-			if (var000C == 0x0007) {
-				say("\"A pair of gauntlets sell for ",
-					var000D,
-					" monetari.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "pairs of gauntlets";
-			}
-			if (var000C == 0x0008) {
-				say("\"An excellent choice, friend! The spiked shield can be used in close quarters to surprise thy foe. ",
-					var000D,
-					" monetari is a small price to pay for one of these shields.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "spiked shields";
-			}
-			if (var000C == 0x0009) {
-				say("\"'Tis nothing fancy, but it serves its purpose well. I can sell thee a great helm for ",
-					var000D,
-					" monetari.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "great helms";
-			}
-			if (var000C == 0x000A) {
-				say("\"Most Knights of Monitor prefer the great helm, but the crested helm doth not obstruct thy view as much. I charge ",
-					var000D,
-					" monetari for one.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "crested helms";
-			}
-			if (var000D == var0007[var000C]) {
-				if (Func0955()) {
-					var0012 = var000D;
-				} else {
-					var0012 = 0x0000;
-				}
+		}
+		var000D = var0006[var000C];
+		var000E = 0x0000;
+		var000F = UI_die_roll(0x0001, 0x0005);
+		if (var000F == 0x0001) {
+			var0010 = "Dost thou accept?";
+		}
+		if (var000F == 0x0002) {
+			var0010 = "Wilt thou pay my price?";
+		}
+		if (var000F == 0x0003) {
+			var0010 = "Dost thou find the price agreeable?";
+		}
+		if (var000F == 0x0004) {
+			var0010 = (var000B + ", dost thou agree?");
+		}
+		if (var000F == 0x0005) {
+			var0010 = (var000B + ", is the price acceptable?");
+		}
+		if (var000C == 0x0002) {
+			say("\"",
+				var000D,
+				" monetari is a low price for durable scale armour, my friend.\"");
+			say(var0010,
+				"\"");
+			var0011 = "suits of scale armour";
+		}
+		if (var000C == 0x0003) {
+			say("\"If thou art serious about fighting, then thou shouldst purchase the best chain armour found in Monitor. I charge ",
+				var000D,
+				" monetari for a chain byrnie.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "chain byrnies";
+		}
+		if (var000C == 0x0004) {
+			say("\"Ah, plate mail is the best armour a knight could ask for, ",
+				var0000,
+				". I will sell thee a suit for ",
+				var000D,
+				" monetari.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "suits of plate armour";
+		}
+		if (var000C == 0x0005) {
+			say("\"I can sell thee chain leggings for ",
+				var000D,
+				" monetari.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "pairs of chain leggings";
+		}
+		if (var000C == 0x0006) {
+			say("\"Plate leggings will protect thy legs very well indeed, ",
+				var0000,
+				". I will sell thee a pair for ",
+				var000D,
+				" monetari.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "pairs of plate leggings";
+		}
+		if (var000C == 0x0007) {
+			say("\"A pair of gauntlets sell for ",
+				var000D,
+				" monetari.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "pairs of gauntlets";
+		}
+		if (var000C == 0x0008) {
+			say("\"An excellent choice, friend! The spiked shield can be used in close quarters to surprise thy foe. ",
+				var000D,
+				" monetari is a small price to pay for one of these shields.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "spiked shields";
+		}
+		if (var000C == 0x0009) {
+			say("\"'Tis nothing fancy, but it serves its purpose well. I can sell thee a great helm for ",
+				var000D,
+				" monetari.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "great helms";
+		}
+		if (var000C == 0x000A) {
+			say("\"Most Knights of Monitor prefer the great helm, but the crested helm doth not obstruct thy view as much. I charge ",
+				var000D,
+				" monetari for one.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "crested helms";
+		}
+		if (var000D == var0007[var000C]) {
+			if (Func0955()) {
+				var0012 = var000D;
 			} else {
-				var0012 = Func0869(var0006[var000C], var0007[var000C]);
+				var0012 = 0x0000;
 			}
-			if (var0012 > 0x0000) {
-				if (var000A[var000C] == 0x0001) {
-					say("\"How many ",
-						var0011,
-						" wouldst thou like?\"");
-					var000E = Func0943(var0004[var000C], var0005[var000C], var0009[var000C], var0008, var0012, 0x0005, 0x0001, false);
-				} else {
-					var000E = Func0943(var0004[var000C], var0005[var000C], 0x0001, var0008, var0012, 0x0000, 0x0001, false);
-				}
+		} else {
+			var0012 = Func0869(var0006[var000C], var0007[var000C]);
+		}
+		if (var0012 > 0x0000) {
+			if (var000A[var000C] == 0x0001) {
+				say("\"How many ",
+					var0011,
+					" wouldst thou like?\"");
+				var000E = Func0943(var0004[var000C], var0005[var000C], var0009[var000C], var0008, var0012, 0x0005, 0x0001, false);
+			} else {
+				var000E = Func0943(var0004[var000C], var0005[var000C], 0x0001, var0008, var0012, 0x0000, 0x0001, false);
 			}
-			if (var000E == 0x0001) {
-				say("\"It hath been a pleasure, ",
-					var0000,
-					"! Enjoy thy purchase!\"");
-			} else if (var000E == 0x0002) {
-				say("\"",
-					var000B,
-					", thine hands are full!\"");
-			} else if (var000E == 0x0003) {
-				var0013 = Func0992(0x0001, (("@But " + var0000) + ", we do not have the monetari to purchase this.@"), 0x0000, false);
-				if (var0013 != 0xFE9C) {
-					0xFFB2->show_npc_face0(0x0000);
-					say("\"If thou canst not pay, please leave!\"");
-				} else {
-					say("\"Thou dost not have enough monetari to purchase this...\"");
-				}
-				if (0x001F < (0xFFB2->get_npc_id() + 0x0006)) {
-					0xFFB2->set_npc_id(0x001F);
-				} else {
-					0xFFB2->set_npc_id(0xFFB2->get_npc_id() + 0x0006);
-				}
+		}
+		if (var000E == 0x0001) {
+			say("\"It hath been a pleasure, ",
+				var0000,
+				"! Enjoy thy purchase!\"");
+		} else if (var000E == 0x0002) {
+			say("\"",
+				var000B,
+				", thine hands are full!\"");
+		} else if (var000E == 0x0003) {
+			var0013 = Func0992(0x0001, (("@But " + var0000) + ", we do not have the monetari to purchase this.@"), 0x0000, false);
+			if (var0013 != 0xFE9C) {
+				0xFFB2->show_npc_face0(0x0000);
+				say("\"If thou canst not pay, please leave!\"");
+			} else {
+				say("\"Thou dost not have enough monetari to purchase this...\"");
+			}
+			if (0x001F < (0xFFB2->get_npc_id() + 0x0006)) {
+				0xFFB2->set_npc_id(0x001F);
+			} else {
+				0xFFB2->set_npc_id(0xFFB2->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Dost thou want to buy more armour?\"");
@@ -96854,152 +96714,151 @@ void Func0867 0x867 () {
 				".\"");
 			var0002 = false;
 			continue;
-		} else {
-			var000D = var0006[var000C];
-			var000E = 0x0000;
-			var000F = UI_die_roll(0x0001, 0x0005);
-			if (var000F == 0x0001) {
-				var0010 = "Dost thou accept?";
-			}
-			if (var000F == 0x0002) {
-				var0010 = "Wilt thou pay my price?";
-			}
-			if (var000F == 0x0003) {
-				var0010 = "Dost thou find the price agreeable?";
-			}
-			if (var000F == 0x0004) {
-				var0010 = "Dost thou agree?";
-			}
-			if (var000F == 0x0005) {
-				var0010 = "Is the price acceptable?";
-			}
-			if (var000C == 0x0002) {
-				say("\"My spears can gut a goblin even as well as a sword can. I charge ",
-					var000D,
-					" monetari for one.\"");
-				say(var0010,
-					"\"");
-				var0011 = "spears";
-			}
-			if (var000C == 0x0003) {
-				say("\"A true Knight doth have a selection of weapons to choose from. This is an excellent weapon. The morning star sells for ",
-					var000D,
-					" monetari.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "morning stars";
-			}
-			if (var000C == 0x0004) {
-				say("\"I will sell thee a bow for ",
-					var000D,
-					" monetari. Though most Knights do not carry these weapons, I think one should always be prepared, eh?\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "bows";
-			}
-			if (var000C == 0x0005) {
-				say("\"I can sell thee 20 arrows for ",
-					var000D,
-					" monetari.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "arrows, in bundles of 20,";
-			}
-			if (var000C == 0x0006) {
-				say("\"",
-					var000D,
-					" monetari for the sharpest swords in all of Serpent Isle! Many of my blades have been blooded in goblin flesh, my friend.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "swords";
-			}
-			if (var000C == 0x0007) {
-				say("\"An excellent choice, my friend! Thou wilt have a decisive edge in combat with this blade! ",
-					var000D,
-					" monetari is what I charge.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "two-handed swords";
-			}
-			if (var000C == 0x0008) {
-				say("\"Not very subtle, but a goblin doth understand thine argument anyway, eh? I can sell thee a fine two-handed axe for ",
-					var000D,
-					" monetari.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "two-handed axes";
-			}
-			if (var000C == 0x0009) {
-				say("\"Mine halberds are nothing fancy, but they are inexpensive and they do the job well. I can sell thee one for ",
-					var000D,
-					" monetari.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "halberds";
-			}
-			if (var000C == 0x000A) {
-				say("\"Crossbows are not the most Knightly of weapons, but they are useful indeed. For ",
-					var000D,
-					" monetari I will sell thee one.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "crossbows";
-			}
-			if (var000C == 0x000B) {
-				say("\"For the cost of ",
-					var000D,
-					" monetari I can sell thee 20 quarrels.\"");
-				say("\"",
-					var0010,
-					"\"");
-				var0011 = "quarrels, in bundles of 20,";
-			}
-			if (var000D == var0007[var000C]) {
-				if (Func0955()) {
-					var0012 = var000D;
-				} else {
-					var0012 = 0x0000;
-				}
+		}
+		var000D = var0006[var000C];
+		var000E = 0x0000;
+		var000F = UI_die_roll(0x0001, 0x0005);
+		if (var000F == 0x0001) {
+			var0010 = "Dost thou accept?";
+		}
+		if (var000F == 0x0002) {
+			var0010 = "Wilt thou pay my price?";
+		}
+		if (var000F == 0x0003) {
+			var0010 = "Dost thou find the price agreeable?";
+		}
+		if (var000F == 0x0004) {
+			var0010 = "Dost thou agree?";
+		}
+		if (var000F == 0x0005) {
+			var0010 = "Is the price acceptable?";
+		}
+		if (var000C == 0x0002) {
+			say("\"My spears can gut a goblin even as well as a sword can. I charge ",
+				var000D,
+				" monetari for one.\"");
+			say(var0010,
+				"\"");
+			var0011 = "spears";
+		}
+		if (var000C == 0x0003) {
+			say("\"A true Knight doth have a selection of weapons to choose from. This is an excellent weapon. The morning star sells for ",
+				var000D,
+				" monetari.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "morning stars";
+		}
+		if (var000C == 0x0004) {
+			say("\"I will sell thee a bow for ",
+				var000D,
+				" monetari. Though most Knights do not carry these weapons, I think one should always be prepared, eh?\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "bows";
+		}
+		if (var000C == 0x0005) {
+			say("\"I can sell thee 20 arrows for ",
+				var000D,
+				" monetari.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "arrows, in bundles of 20,";
+		}
+		if (var000C == 0x0006) {
+			say("\"",
+				var000D,
+				" monetari for the sharpest swords in all of Serpent Isle! Many of my blades have been blooded in goblin flesh, my friend.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "swords";
+		}
+		if (var000C == 0x0007) {
+			say("\"An excellent choice, my friend! Thou wilt have a decisive edge in combat with this blade! ",
+				var000D,
+				" monetari is what I charge.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "two-handed swords";
+		}
+		if (var000C == 0x0008) {
+			say("\"Not very subtle, but a goblin doth understand thine argument anyway, eh? I can sell thee a fine two-handed axe for ",
+				var000D,
+				" monetari.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "two-handed axes";
+		}
+		if (var000C == 0x0009) {
+			say("\"Mine halberds are nothing fancy, but they are inexpensive and they do the job well. I can sell thee one for ",
+				var000D,
+				" monetari.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "halberds";
+		}
+		if (var000C == 0x000A) {
+			say("\"Crossbows are not the most Knightly of weapons, but they are useful indeed. For ",
+				var000D,
+				" monetari I will sell thee one.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "crossbows";
+		}
+		if (var000C == 0x000B) {
+			say("\"For the cost of ",
+				var000D,
+				" monetari I can sell thee 20 quarrels.\"");
+			say("\"",
+				var0010,
+				"\"");
+			var0011 = "quarrels, in bundles of 20,";
+		}
+		if (var000D == var0007[var000C]) {
+			if (Func0955()) {
+				var0012 = var000D;
 			} else {
-				var0012 = Func0869(var0006[var000C], var0007[var000C]);
+				var0012 = 0x0000;
 			}
-			if (var0012 > 0x0000) {
-				if (var000A[var000C] == 0x0001) {
-					say("\"How many ",
-						var0011,
-						" wouldst thou like?\"");
-					var000E = Func0943(var0004[var000C], var0005[var000C], var0009[var000C], var0008, var0012, 0x0005, 0x0001, false);
-				} else {
-					var000E = Func0943(var0004[var000C], var0005[var000C], 0x0001, var0008, var0012, 0x0000, 0x0001, false);
-				}
+		} else {
+			var0012 = Func0869(var0006[var000C], var0007[var000C]);
+		}
+		if (var0012 > 0x0000) {
+			if (var000A[var000C] == 0x0001) {
+				say("\"How many ",
+					var0011,
+					" wouldst thou like?\"");
+				var000E = Func0943(var0004[var000C], var0005[var000C], var0009[var000C], var0008, var0012, 0x0005, 0x0001, false);
+			} else {
+				var000E = Func0943(var0004[var000C], var0005[var000C], 0x0001, var0008, var0012, 0x0000, 0x0001, false);
 			}
-			if (var000E == 0x0001) {
-				say("\"It hath been a pleasure, friend! Enjoy thy purchase!\"");
-			} else if (var000E == 0x0002) {
-				say("\"",
-					var000B,
-					", thine hands are full!\"");
-			} else if (var000E == 0x0003) {
-				var0013 = Func0992(0x0001, (("@But " + var0000) + ", we do not have the monetari to purchase this.@"), 0x0000, false);
-				if (var0013 != 0xFE9C) {
-					0xFFB2->show_npc_face0(0x0000);
-					say("\"If thou canst not pay, please leave!\"");
-				} else {
-					say("\"Thou dost not have enough monetari to purchase this!\"");
-				}
-				if (0x001F < (0xFFB2->get_npc_id() + 0x0006)) {
-					0xFFB2->set_npc_id(0x001F);
-				} else {
-					0xFFB2->set_npc_id(0xFFB2->get_npc_id() + 0x0006);
-				}
+		}
+		if (var000E == 0x0001) {
+			say("\"It hath been a pleasure, friend! Enjoy thy purchase!\"");
+		} else if (var000E == 0x0002) {
+			say("\"",
+				var000B,
+				", thine hands are full!\"");
+		} else if (var000E == 0x0003) {
+			var0013 = Func0992(0x0001, (("@But " + var0000) + ", we do not have the monetari to purchase this.@"), 0x0000, false);
+			if (var0013 != 0xFE9C) {
+				0xFFB2->show_npc_face0(0x0000);
+				say("\"If thou canst not pay, please leave!\"");
+			} else {
+				say("\"Thou dost not have enough monetari to purchase this!\"");
+			}
+			if (0x001F < (0xFFB2->get_npc_id() + 0x0006)) {
+				0xFFB2->set_npc_id(0x001F);
+			} else {
+				0xFFB2->set_npc_id(0xFFB2->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Dost thou wish to purchase more weapons?\"");
@@ -97498,215 +97357,215 @@ var Func0869 0x869 (var var0000, var var0001) {
 		var000E = Func0956(["yes", "no", "haggle"]);
 		if (var000E == "no") {
 			return 0x0000;
+		}
+		if (var000E == "yes") {
+			var000F = 0x0000;
 		} else {
-			if (var000E == "yes") {
-				var000F = 0x0000;
-			} else {
-				var0010 = Func0999(var0006, var0001, var000C, var0007, var000B, var0008, var0009);
-				var000B = (var000B + 0x0001);
-				var0009 = var0010[0x0004];
-				var000F = var0010[0x0003];
-				var0011 = var0006;
-				var0006 = var0010[0x0002];
-				var0007 = var0010[0x0001];
-			}
-			var0012 = UI_get_random(0x0003);
-			if (var000F < 0x0002) {
-				if (var0006 < (var0001 + ((var0000 - var0001) / 0x0004))) {
-					if (var0012 == 0x0001) {
-						say("\"Thou hast a good eye for a bargain, ",
-							var0002,
-							". I am thankful that more of my customers are not like thee.\"");
-					}
-					if (var0012 == 0x0002) {
-						say("\"",
-							var0005,
-							", thou hast good bargaining sense. I fear I have actually lost money in this deal.\"");
-					}
-					if (var0012 == 0x0003) {
-						say("\"Thy trading skills are as sharp as one of my blades, ",
-							var0002,
-							".\"");
-					}
-				} else {
-					if (var0006 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-						if (var0012 == 0x0001) {
-							say("\"Thou shouldst be glad that I like thee, ",
-								var0002,
-								"! 'Tis not often I lower my prices...\"");
-						}
-						if (var0012 == 0x0002) {
-							say("\"",
-								var0005,
-								", I hope thou dost leave town soon! If thou stayest much longer I will be penniless!\"");
-						}
-						if (var0012 == 0x0003) {
-							say("\"I hope thou art as fine a warrior as thou art as a trader, ",
-								var0002,
-								"! Thou wilt do my products honor.\"");
-						}
-					} else if (var0006 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-						if (var0012 == 0x0001) {
-							say("\"Thou art paying for quality work, ",
-								var0002,
-								". If thou dost not agree, then thou shouldst leave.\"");
-						}
-						if (var0012 == 0x0002) {
-							say("\"'Tis not often I have such a challenge in bargaining, ",
-								var0002,
-								". Please come again!\"");
-						}
-						if (var0012 == 0x0003) {
-							say("\"",
-								var0005,
-								", remember that we take great pride in our work!\"");
-						}
-					} else {
-						if (var0012 == 0x0001) {
-							say("\"Many thanks, ",
-								var0005,
-								"!\"");
-						}
-						if (var0012 == 0x0002) {
-							say("\"May it serve thee well, ",
-								var0002,
-								"!\"");
-						}
-						if (var0012 == 0x0003) {
-							say("\"I fear the Goblin raids have raised my prices, ",
-								var0002,
-								". It takes time to produce quality goods, and demand hath been great.\"");
-						}
-					}
-				}
-				say("\"Thou hast agreed to a price of ",
-					var0006,
-					" monetari, ",
-					var0002,
-					"?\"");
-				if (Func0955()) {
-					if (var000D > 0x0001) {
-						0xFFB2->set_npc_id(var000D - 0x0002);
-					}
-					return var0006;
-				} else if (var0012 == 0x0001) {
-					say("\"'Tis unwise to change thy mind after agreeing to a firm price!\"");
+			var0010 = Func0999(var0006, var0001, var000C, var0007, var000B, var0008, var0009);
+			var000B = (var000B + 0x0001);
+			var0009 = var0010[0x0004];
+			var000F = var0010[0x0003];
+			var0011 = var0006;
+			var0006 = var0010[0x0002];
+			var0007 = var0010[0x0001];
+		}
+		var0012 = UI_get_random(0x0003);
+		if (var000F < 0x0002) {
+			if (var0006 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var0012 == 0x0001) {
+					say("\"Thou hast a good eye for a bargain, ",
+						var0002,
+						". I am thankful that more of my customers are not like thee.\"");
 				}
 				if (var0012 == 0x0002) {
-					say("\"Take care, ",
-						var0002,
-						". I am as skilled a warrior as I am a weaponsmith.\"");
+					say("\"",
+						var0005,
+						", thou hast good bargaining sense. I fear I have actually lost money in this deal.\"");
 				}
 				if (var0012 == 0x0003) {
-					say("\"Thou hast no honor! Leave, before I take thine head from thy shoulders!\"");
-					abort;
-				}
-				if (0x001F < (var000D + 0x000A)) {
-					0xFFB2->set_npc_id(0x001F);
-				} else {
-					0xFFB2->set_npc_id(var000D + 0x000A);
-				}
-				return 0x0000;
-			}
-			if (var0009 == 0x0001) {
-				if (var000F == 0x0005) {
-					say("\"I said that ",
-						var0006,
-						" was my final offer. Dost thou accept?\"");
-					if (var000D < 0x001C) {
-						0xFFB2->set_npc_id(var000D + 0x0004);
-					}
-					if (Func0955()) {
-						return var0006;
-					}
-					var000A = 0x0000;
-				} else {
-					say("\"",
-						var0006,
-						" monetari is my final offer.\"");
-					if (var000D < 0x001E) {
-						0xFFB2->set_npc_id(var000D + 0x0002);
-					}
+					say("\"Thy trading skills are as sharp as one of my blades, ",
+						var0002,
+						".\"");
 				}
 			} else {
-				if (var000F == 0x0002) {
+				if (var0006 < (var0001 + ((var0000 - var0001) / 0x0003))) {
 					if (var0012 == 0x0001) {
-						say("\"'Tis a pleasure to trade with such an honorable person, ",
+						say("\"Thou shouldst be glad that I like thee, ",
 							var0002,
-							". How doth ",
-							var0006,
-							" monetari sound?\"");
+							"! 'Tis not often I lower my prices...\"");
 					}
 					if (var0012 == 0x0002) {
 						say("\"",
 							var0005,
-							", I shall offer thee a special price. How doth ",
-							var0006,
-							" monetari sound to thee?\"");
+							", I hope thou dost leave town soon! If thou stayest much longer I will be penniless!\"");
 					}
 					if (var0012 == 0x0003) {
-						say("\"My price is ",
-							var0006,
-							" monetari, ",
+						say("\"I hope thou art as fine a warrior as thou art as a trader, ",
 							var0002,
-							". Wilt thou accept?\"");
+							"! Thou wilt do my products honor.\"");
 					}
-				}
-				if (var000F == 0x0003) {
+				} else if (var0006 < (var0001 + ((var0000 - var0001) / 0x0002))) {
 					if (var0012 == 0x0001) {
-						say("\"Let me think... Perhaps ",
-							var0006,
-							" monetari?\"");
+						say("\"Thou art paying for quality work, ",
+							var0002,
+							". If thou dost not agree, then thou shouldst leave.\"");
 					}
 					if (var0012 == 0x0002) {
-						say("\"I must reconsider... ",
-							var0006,
-							" monetari?\"");
+						say("\"'Tis not often I have such a challenge in bargaining, ",
+							var0002,
+							". Please come again!\"");
 					}
 					if (var0012 == 0x0003) {
-						say("\"Thou dost realize that I make only quality products. Perhaps ",
-							var0006,
-							" monetari?\"");
-					}
-				}
-				if (var000F == 0x0004) {
-					if (var0012 == 0x0001) {
 						say("\"",
-							var0006,
-							" monetari is as low as I can go. I must keep some honor for myself.\"");
-						say("\"What dost thou say to this?\"");
+							var0005,
+							", remember that we take great pride in our work!\"");
+					}
+				} else {
+					if (var0012 == 0x0001) {
+						say("\"Many thanks, ",
+							var0005,
+							"!\"");
 					}
 					if (var0012 == 0x0002) {
-						say("\"I cannot accept less than ",
-							var0006,
-							" monetari. I have a business to run.\"");
+						say("\"May it serve thee well, ",
+							var0002,
+							"!\"");
 					}
 					if (var0012 == 0x0003) {
-						say("\"I can accept no less than ",
-							var0006,
-							" monetari. What would the townsfolk say?\"");
+						say("\"I fear the Goblin raids have raised my prices, ",
+							var0002,
+							". It takes time to produce quality goods, and demand hath been great.\"");
 					}
 				}
-				if (var000F == 0x0005) {
-					var0006 = var0011;
-					if (var0012 == 0x0001) {
-						say("\"My previous price stands, at ",
-							var0006,
-							" monetari. I am no fool!\"");
-					}
-					if (var0012 == 0x0002) {
-						say("\"I am not a charity! ",
-							var0006,
-							" monetari, and no less!\"");
-					}
-					if (var0012 == 0x0003) {
-						say("\"\"",
-							var0006,
-							" monetari is as low as I will go! I must eat and pay for my supplies...\"");
-					}
-					if (var000D < 0x001F) {
-						0xFFB2->set_npc_id(var000D + 0x0001);
-					}
+			}
+			say("\"Thou hast agreed to a price of ",
+				var0006,
+				" monetari, ",
+				var0002,
+				"?\"");
+			if (Func0955()) {
+				if (var000D > 0x0001) {
+					0xFFB2->set_npc_id(var000D - 0x0002);
+				}
+				return var0006;
+			}
+			if (var0012 == 0x0001) {
+				say("\"'Tis unwise to change thy mind after agreeing to a firm price!\"");
+			}
+			if (var0012 == 0x0002) {
+				say("\"Take care, ",
+					var0002,
+					". I am as skilled a warrior as I am a weaponsmith.\"");
+			}
+			if (var0012 == 0x0003) {
+				say("\"Thou hast no honor! Leave, before I take thine head from thy shoulders!\"");
+				abort;
+			}
+			if (0x001F < (var000D + 0x000A)) {
+				0xFFB2->set_npc_id(0x001F);
+			} else {
+				0xFFB2->set_npc_id(var000D + 0x000A);
+			}
+			return 0x0000;
+		}
+		if (var0009 == 0x0001) {
+			if (var000F == 0x0005) {
+				say("\"I said that ",
+					var0006,
+					" was my final offer. Dost thou accept?\"");
+				if (var000D < 0x001C) {
+					0xFFB2->set_npc_id(var000D + 0x0004);
+				}
+				if (Func0955()) {
+					return var0006;
+				}
+				var000A = 0x0000;
+			} else {
+				say("\"",
+					var0006,
+					" monetari is my final offer.\"");
+				if (var000D < 0x001E) {
+					0xFFB2->set_npc_id(var000D + 0x0002);
+				}
+			}
+		} else {
+			if (var000F == 0x0002) {
+				if (var0012 == 0x0001) {
+					say("\"'Tis a pleasure to trade with such an honorable person, ",
+						var0002,
+						". How doth ",
+						var0006,
+						" monetari sound?\"");
+				}
+				if (var0012 == 0x0002) {
+					say("\"",
+						var0005,
+						", I shall offer thee a special price. How doth ",
+						var0006,
+						" monetari sound to thee?\"");
+				}
+				if (var0012 == 0x0003) {
+					say("\"My price is ",
+						var0006,
+						" monetari, ",
+						var0002,
+						". Wilt thou accept?\"");
+				}
+			}
+			if (var000F == 0x0003) {
+				if (var0012 == 0x0001) {
+					say("\"Let me think... Perhaps ",
+						var0006,
+						" monetari?\"");
+				}
+				if (var0012 == 0x0002) {
+					say("\"I must reconsider... ",
+						var0006,
+						" monetari?\"");
+				}
+				if (var0012 == 0x0003) {
+					say("\"Thou dost realize that I make only quality products. Perhaps ",
+						var0006,
+						" monetari?\"");
+				}
+			}
+			if (var000F == 0x0004) {
+				if (var0012 == 0x0001) {
+					say("\"",
+						var0006,
+						" monetari is as low as I can go. I must keep some honor for myself.\"");
+					say("\"What dost thou say to this?\"");
+				}
+				if (var0012 == 0x0002) {
+					say("\"I cannot accept less than ",
+						var0006,
+						" monetari. I have a business to run.\"");
+				}
+				if (var0012 == 0x0003) {
+					say("\"I can accept no less than ",
+						var0006,
+						" monetari. What would the townsfolk say?\"");
+				}
+			}
+			if (var000F == 0x0005) {
+				var0006 = var0011;
+				if (var0012 == 0x0001) {
+					say("\"My previous price stands, at ",
+						var0006,
+						" monetari. I am no fool!\"");
+				}
+				if (var0012 == 0x0002) {
+					say("\"I am not a charity! ",
+						var0006,
+						" monetari, and no less!\"");
+				}
+				if (var0012 == 0x0003) {
+					say("\"\"",
+						var0006,
+						" monetari is as low as I will go! I must eat and pay for my supplies...\"");
+				}
+				if (var000D < 0x001F) {
+					0xFFB2->set_npc_id(var000D + 0x0001);
 				}
 			}
 		}
@@ -97786,51 +97645,50 @@ void Func086B 0x86B () {
 		if (var0007 == 0x0000) {
 			say("\"So be it.\"");
 			break;
-		} else {
-			var0008 = var0007->get_npc_number();
-			var0009 = var0007->get_item_flag(0x0008);
-			var000A = Func095C(var0007, 0x0000);
-			var000B = Func095C(var0007, 0x0003);
-			var000C = var0007->get_npc_name();
-			var000D = "his";
-			if (var000C == "Petra") {
-				var000D = "her";
-			}
-			if (var000A > var000B) {
-				var000E = (var000A - var000B);
-				Func095E(var0008, 0x0003, var000E);
-				if (var0008 == 0xFE9C) {
-					say("\"I have healed thee of thy wounds. Rest easy, my friend.\"");
-				} else {
-					say("\"I have healed thy companion ",
-						var000C,
-						" of ",
-						var000D,
-						" wounds.\"");
-				}
-			} else if (var0009 == false) {
-				if (var0008 == 0xFE9C) {
-					say("\"Thou seemest quite healthy!\"");
-				} else {
-					say("\"",
-						var000C,
-						" is already healthy!\"");
-				}
-			} else if (var0008 == 0xFE9C) {
-				if (gflags[0x0098] && (!gflags[0x005A])) {
-					say("\"What is this?! I have never seen the like of such a poison! I am afraid I cannot heal this, ",
-						var0000,
-						".\"");
-					break;
-				}
-				say("\"Ah, this poison I can remedy. A moment... *There, 'tis done. Thou art whole once more.\"");
-				0xFE9C->clear_item_flag(0x0008);
+		}
+		var0008 = var0007->get_npc_number();
+		var0009 = var0007->get_item_flag(0x0008);
+		var000A = Func095C(var0007, 0x0000);
+		var000B = Func095C(var0007, 0x0003);
+		var000C = var0007->get_npc_name();
+		var000D = "his";
+		if (var000C == "Petra") {
+			var000D = "her";
+		}
+		if (var000A > var000B) {
+			var000E = (var000A - var000B);
+			Func095E(var0008, 0x0003, var000E);
+			if (var0008 == 0xFE9C) {
+				say("\"I have healed thee of thy wounds. Rest easy, my friend.\"");
 			} else {
-				say("\"Your companion ",
+				say("\"I have healed thy companion ",
 					var000C,
-					" is badly poisoned. I shall remove it. *There. 'Tis done.\"");
-				var0007->clear_item_flag(0x0008);
+					" of ",
+					var000D,
+					" wounds.\"");
 			}
+		} else if (var0009 == false) {
+			if (var0008 == 0xFE9C) {
+				say("\"Thou seemest quite healthy!\"");
+			} else {
+				say("\"",
+					var000C,
+					" is already healthy!\"");
+			}
+		} else if (var0008 == 0xFE9C) {
+			if (gflags[0x0098] && (!gflags[0x005A])) {
+				say("\"What is this?! I have never seen the like of such a poison! I am afraid I cannot heal this, ",
+					var0000,
+					".\"");
+				break;
+			}
+			say("\"Ah, this poison I can remedy. A moment... *There, 'tis done. Thou art whole once more.\"");
+			0xFE9C->clear_item_flag(0x0008);
+		} else {
+			say("\"Your companion ",
+				var000C,
+				" is badly poisoned. I shall remove it. *There. 'Tis done.\"");
+			var0007->clear_item_flag(0x0008);
 		}
 	}
 }
@@ -98019,176 +97877,175 @@ void Func086F 0x86F () {
 				".\"");
 			var0003 = false;
 			continue;
-		} else {
-			var000E = var0007[var000D];
-			var000F = 0x0000;
-			var0010 = UI_die_roll(0x0001, 0x0005);
-			if (var0010 == 0x0001) {
-				var0011 = (("Dost thou accept, " + var0000) + "?");
-			}
-			if (var0010 == 0x0002) {
-				var0011 = "What dost thou think?";
-			}
-			if (var0010 == 0x0003) {
-				var0011 = "Wilt thou pay my master's price?";
-			}
-			if (var0010 == 0x0004) {
-				var0011 = (var000C + ", dost thou agree?");
-			}
-			if (var0010 == 0x0005) {
-				var0011 = (var000C + ", is the price acceptable?");
-			}
-			if (var000D == 0x0002) {
-				say("\"Well, our cloaks are not fancy, but they are warm.\" *\"If thou dost want one, it will cost thee ",
-					var000E,
-					" guilders.\"");
-				say(var0011,
-					"\"");
-				var0012 = "cloaks";
-			}
-			if (var000D == 0x0003) {
-				say("\"[\"Oh, we sell swords that the blacksmith automaton makes. They are very durable blades...\" *\"For ",
-					var000E,
-					" guilders I can sell thee one of our fine swords.\"");
-				say("\"",
-					var0011,
-					"\"");
-				var0012 = "swords";
-			}
-			if (var000D == 0x0004) {
-				say("\"Our shovels are very well made. I believe that even Mortegro hath bought a couple of them. I can sell thee one for ",
-					var000E,
-					" guilders.\"");
-				say("\"",
-					var0011,
-					"\"");
-				var0012 = "shovels";
-			}
-			if (var000D == 0x0005) {
-				say("\"The torches we sell are soaked in pitch, so they burn for a very long time.\" *\"I will sell a torch to thee for ",
-					var000E,
-					" guilders.\"");
-				say("\"",
-					var0011,
-					"\"");
-				var0012 = "torches";
-			}
-			if (var000D == 0x0006) {
-				say("\"I believe our picks have been used in the Mountains of Freedom. Only ",
-					var000E,
-					" guilders will buy thee one.\"");
-				say("\"",
-					var0011,
-					"\"");
-				var0012 = "picks";
-			}
-			if (var000D == 0x0007) {
-				say("\"",
-					var000E,
-					" guilders and one of our finely crafted buckets can be thine, ",
-					var0000,
-					".\"");
-				say("\"",
-					var0011,
-					"\"");
-				var0012 = "buckets";
-			}
-			if (var000D == 0x0008) {
-				say("\"Even Petra uses our pitchers! I can sell thee a fine piece of crockery for ",
-					var000E,
-					" guilders.\"");
-				say("\"",
-					var0011,
-					"\"");
-				var0012 = "pitchers";
-			}
-			if (var000D == 0x0009) {
-				say("\"One of our oil lamps will last a long time, ",
-					var0000,
-					". I can sell thee one for ",
-					var000E,
-					" guilders.\"");
-				say("\"",
-					var0011,
-					"\"");
-				var0012 = "oil lamps";
-			}
-			if (var000D == 0x000A) {
-				say("\"I can sell thee a bolt of dyed cloth for ",
-					var000E,
-					" guilders.\"");
-				say("\"",
-					var0011,
-					"\"");
-				var0012 = "bolts of cloth";
-			}
-			if (var000D == 0x000B) {
-				say("\"The bread baked by the automaton baker is quite filling, ",
-					var0000,
-					". For ",
-					var000E,
-					" guilders I will sell thee a fresh loaf.\"");
-				say("\"",
-					var0011,
-					"\"");
-				var0012 = "loaves of bread";
-			}
-			if (var000D == 0x000C) {
-				say("\"",
-					var000E,
-					" guilders will buy thee a delicious roll.\"");
-				say("\"",
-					var0011,
-					"\"");
-				var0012 = "rolls";
-			}
-			if (var000D == 0x000D) {
-				say("\"The baker automaton makes a very sweet cake, ",
-					var0000,
-					". For ",
-					var000E,
-					" guilders thou canst have one.\"");
-				say("\"",
-					var0011,
-					"\"");
-				var0012 = "cakes";
-			}
-			if (var000E == var0008[var000D]) {
-				if (Func0955()) {
-					var0013 = var000E;
-				} else {
-					var0013 = 0x0000;
-				}
+		}
+		var000E = var0007[var000D];
+		var000F = 0x0000;
+		var0010 = UI_die_roll(0x0001, 0x0005);
+		if (var0010 == 0x0001) {
+			var0011 = (("Dost thou accept, " + var0000) + "?");
+		}
+		if (var0010 == 0x0002) {
+			var0011 = "What dost thou think?";
+		}
+		if (var0010 == 0x0003) {
+			var0011 = "Wilt thou pay my master's price?";
+		}
+		if (var0010 == 0x0004) {
+			var0011 = (var000C + ", dost thou agree?");
+		}
+		if (var0010 == 0x0005) {
+			var0011 = (var000C + ", is the price acceptable?");
+		}
+		if (var000D == 0x0002) {
+			say("\"Well, our cloaks are not fancy, but they are warm.\" *\"If thou dost want one, it will cost thee ",
+				var000E,
+				" guilders.\"");
+			say(var0011,
+				"\"");
+			var0012 = "cloaks";
+		}
+		if (var000D == 0x0003) {
+			say("\"[\"Oh, we sell swords that the blacksmith automaton makes. They are very durable blades...\" *\"For ",
+				var000E,
+				" guilders I can sell thee one of our fine swords.\"");
+			say("\"",
+				var0011,
+				"\"");
+			var0012 = "swords";
+		}
+		if (var000D == 0x0004) {
+			say("\"Our shovels are very well made. I believe that even Mortegro hath bought a couple of them. I can sell thee one for ",
+				var000E,
+				" guilders.\"");
+			say("\"",
+				var0011,
+				"\"");
+			var0012 = "shovels";
+		}
+		if (var000D == 0x0005) {
+			say("\"The torches we sell are soaked in pitch, so they burn for a very long time.\" *\"I will sell a torch to thee for ",
+				var000E,
+				" guilders.\"");
+			say("\"",
+				var0011,
+				"\"");
+			var0012 = "torches";
+		}
+		if (var000D == 0x0006) {
+			say("\"I believe our picks have been used in the Mountains of Freedom. Only ",
+				var000E,
+				" guilders will buy thee one.\"");
+			say("\"",
+				var0011,
+				"\"");
+			var0012 = "picks";
+		}
+		if (var000D == 0x0007) {
+			say("\"",
+				var000E,
+				" guilders and one of our finely crafted buckets can be thine, ",
+				var0000,
+				".\"");
+			say("\"",
+				var0011,
+				"\"");
+			var0012 = "buckets";
+		}
+		if (var000D == 0x0008) {
+			say("\"Even Petra uses our pitchers! I can sell thee a fine piece of crockery for ",
+				var000E,
+				" guilders.\"");
+			say("\"",
+				var0011,
+				"\"");
+			var0012 = "pitchers";
+		}
+		if (var000D == 0x0009) {
+			say("\"One of our oil lamps will last a long time, ",
+				var0000,
+				". I can sell thee one for ",
+				var000E,
+				" guilders.\"");
+			say("\"",
+				var0011,
+				"\"");
+			var0012 = "oil lamps";
+		}
+		if (var000D == 0x000A) {
+			say("\"I can sell thee a bolt of dyed cloth for ",
+				var000E,
+				" guilders.\"");
+			say("\"",
+				var0011,
+				"\"");
+			var0012 = "bolts of cloth";
+		}
+		if (var000D == 0x000B) {
+			say("\"The bread baked by the automaton baker is quite filling, ",
+				var0000,
+				". For ",
+				var000E,
+				" guilders I will sell thee a fresh loaf.\"");
+			say("\"",
+				var0011,
+				"\"");
+			var0012 = "loaves of bread";
+		}
+		if (var000D == 0x000C) {
+			say("\"",
+				var000E,
+				" guilders will buy thee a delicious roll.\"");
+			say("\"",
+				var0011,
+				"\"");
+			var0012 = "rolls";
+		}
+		if (var000D == 0x000D) {
+			say("\"The baker automaton makes a very sweet cake, ",
+				var0000,
+				". For ",
+				var000E,
+				" guilders thou canst have one.\"");
+			say("\"",
+				var0011,
+				"\"");
+			var0012 = "cakes";
+		}
+		if (var000E == var0008[var000D]) {
+			if (Func0955()) {
+				var0013 = var000E;
 			} else {
-				var0013 = Func0870(var0007[var000D], var0008[var000D]);
+				var0013 = 0x0000;
 			}
-			if (var0013 > 0x0000) {
-				if (var000B[var000D] == 0x0001) {
-					say("\"How many ",
-						var0012,
-						" wouldst thou like?\"");
-					var000F = Func0943(var0005[var000D], var0006[var000D], 0x0001, var0009, var0013, 0x000A, 0x0001, false);
-				} else {
-					var000F = Func0943(var0005[var000D], var0006[var000D], 0x0001, var0009, var0013, 0x0000, 0x0001, false);
-				}
+		} else {
+			var0013 = Func0870(var0007[var000D], var0008[var000D]);
+		}
+		if (var0013 > 0x0000) {
+			if (var000B[var000D] == 0x0001) {
+				say("\"How many ",
+					var0012,
+					" wouldst thou like?\"");
+				var000F = Func0943(var0005[var000D], var0006[var000D], 0x0001, var0009, var0013, 0x000A, 0x0001, false);
+			} else {
+				var000F = Func0943(var0005[var000D], var0006[var000D], 0x0001, var0009, var0013, 0x0000, 0x0001, false);
 			}
-			if (var000F == 0x0001) {
-				say("\"Enjoy thy purchase!\"");
-			} else if (var000F == 0x0002) {
-				say("\"Thine hands are full!\"");
-			} else if (var000F == 0x0003) {
-				var0014 = Func0992(0x0001, (("@But " + var0000) + ", we do not have the guilders to purchase this.@"), 0x0000, false);
-				if (var0014 != 0xFE9C) {
-					0xFFE0->show_npc_face0(0x0000);
-					say("\"Please leave if thou canst not pay.\"");
-				} else {
-					say("\"Thou dost not have enough guilders to purchase this...\"");
-				}
-				if (0x001F < (0xFFE0->get_npc_id() + 0x0006)) {
-					0xFFE0->set_npc_id(0x001F);
-				} else {
-					0xFFE0->set_npc_id(0xFFE0->get_npc_id() + 0x0006);
-				}
+		}
+		if (var000F == 0x0001) {
+			say("\"Enjoy thy purchase!\"");
+		} else if (var000F == 0x0002) {
+			say("\"Thine hands are full!\"");
+		} else if (var000F == 0x0003) {
+			var0014 = Func0992(0x0001, (("@But " + var0000) + ", we do not have the guilders to purchase this.@"), 0x0000, false);
+			if (var0014 != 0xFE9C) {
+				0xFFE0->show_npc_face0(0x0000);
+				say("\"Please leave if thou canst not pay.\"");
+			} else {
+				say("\"Thou dost not have enough guilders to purchase this...\"");
+			}
+			if (0x001F < (0xFFE0->get_npc_id() + 0x0006)) {
+				0xFFE0->set_npc_id(0x001F);
+			} else {
+				0xFFE0->set_npc_id(0xFFE0->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Dost thou care for something else?\"");
@@ -98239,216 +98096,216 @@ var Func0870 0x870 (var var0000, var var0001) {
 		var000D = Func0956(["yes", "no", "haggle"]);
 		if (var000D == "no") {
 			return 0x0000;
+		}
+		if (var000D == "yes") {
+			var000E = 0x0000;
 		} else {
-			if (var000D == "yes") {
-				var000E = 0x0000;
-			} else {
-				var000F = Func0999(var0005, var0001, var000B, var0006, var000A, var0007, var0008);
-				var000A = (var000A + 0x0001);
-				var0008 = var000F[0x0004];
-				var000E = var000F[0x0003];
-				var0010 = var0005;
-				var0005 = var000F[0x0002];
-				var0006 = var000F[0x0001];
-			}
-			var0011 = UI_get_random(0x0003);
-			if (var000E < 0x0002) {
-				if (var0005 < (var0001 + ((var0000 - var0001) / 0x0004))) {
-					if (var0011 == 0x0001) {
-						say("\"Thou art a shrewd bargainer, ",
-							var0002,
-							". I would be hard pressed to make a profit with such a price.\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"",
-							var0004,
-							", thy skill at bargaining is excellent. I believe I have actually lost money in this deal.\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"Thy trading skills are very sharp, ",
-							var0002,
-							".\"");
-					}
-				} else {
-					if (var0005 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-						if (var0011 == 0x0001) {
-							say("\"Thou art lucky I am in such a good mood today, ",
-								var0002,
-								"! 'Tis not often I lower my prices such...\"");
-						}
-						if (var0011 == 0x0002) {
-							say("\"",
-								var0004,
-								", thou art a scoundrel! I would be penniless very soon if I bargained such a price more than a few times!\"");
-						}
-						if (var0011 == 0x0003) {
-							say("\"'Tis not often I practically give my goods away! Thou art a skilled trader, ",
-								var0002,
-								"!\"");
-						}
-					} else if (var0005 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-						if (var0011 == 0x0001) {
-							say("\"My prices are just, ",
-								var0002,
-								". Thou shouldst travel to Fawn if thou dost believe mine steep.\"");
-						}
-						if (var0011 == 0x0002) {
-							say("\"'Tis a pleasure to trade with thee, ",
-								var0002,
-								".\"");
-						}
-						if (var0011 == 0x0003) {
-							say("\"",
-								var0004,
-								", I shall remember thee! Please come to my shop whenever thou art in Monitor!\"");
-						}
-					} else {
-						if (var0011 == 0x0001) {
-							say("\"",
-								var0004,
-								", thou hast my gratitude!\"");
-						}
-						if (var0011 == 0x0002) {
-							say("\"A blessing upon thee, ",
-								var0002,
-								"!\"");
-						}
-						if (var0011 == 0x0003) {
-							say("\"My prices are steep, ",
-								var0002,
-								", for supplies are very scarce due to the Goblin raids.\"");
-						}
-					}
-				}
-				say("\"Thou hast agreed to a price of ",
-					var0005,
-					" guilders, ",
-					var0002,
-					"?\"");
-				if (Func0955()) {
-					if (var000C > 0x0001) {
-						0xFFE0->set_npc_id(var000C - 0x0002);
-					}
-					return var0005;
-				} else if (var0011 == 0x0001) {
-					say("\"Thou shouldst not argue with me only to change thy mind when we have agreed to a firm price!\"");
+			var000F = Func0999(var0005, var0001, var000B, var0006, var000A, var0007, var0008);
+			var000A = (var000A + 0x0001);
+			var0008 = var000F[0x0004];
+			var000E = var000F[0x0003];
+			var0010 = var0005;
+			var0005 = var000F[0x0002];
+			var0006 = var000F[0x0001];
+		}
+		var0011 = UI_get_random(0x0003);
+		if (var000E < 0x0002) {
+			if (var0005 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var0011 == 0x0001) {
+					say("\"Thou art a shrewd bargainer, ",
+						var0002,
+						". I would be hard pressed to make a profit with such a price.\"");
 				}
 				if (var0011 == 0x0002) {
-					say("\"What of our bargain? Thou hast disappointed me, ",
+					say("\"",
+						var0004,
+						", thy skill at bargaining is excellent. I believe I have actually lost money in this deal.\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"Thy trading skills are very sharp, ",
 						var0002,
 						".\"");
 				}
-				if (var0011 == 0x0003) {
-					say("\"This is not honorable! I do not have time to play games with thee! Begone!\"");
-					abort;
-				}
-				if (0x001F < (var000C + 0x000A)) {
-					0xFFE0->set_npc_id(0x001F);
-				} else {
-					0xFFE0->set_npc_id(var000C + 0x000A);
-				}
-				return 0x0000;
-			}
-			if (var0008 == 0x0001) {
-				if (var000E == 0x0005) {
-					say("\"I said that ",
-						var0005,
-						" was my final offer. Dost thou accept?\"");
-					if (var000C < 0x001C) {
-						0xFFE0->set_npc_id(var000C + 0x0004);
-					}
-					if (Func0955()) {
-						return var0005;
-					}
-					var0009 = 0x0000;
-				} else {
-					say("\"",
-						var0005,
-						" guilders is my final offer.\"");
-					if (var000C < 0x001E) {
-						0xFFE0->set_npc_id(var000C + 0x0002);
-					}
-				}
 			} else {
-				if (var000E == 0x0002) {
+				if (var0005 < (var0001 + ((var0000 - var0001) / 0x0003))) {
 					if (var0011 == 0x0001) {
-						say("\"'Tis a pleasure to trade with thee, ",
+						say("\"Thou art lucky I am in such a good mood today, ",
 							var0002,
-							". How doth ",
-							var0005,
-							" guilders sound?\"");
+							"! 'Tis not often I lower my prices such...\"");
 					}
 					if (var0011 == 0x0002) {
 						say("\"",
 							var0004,
-							", only for thee I will give a special price. How doth ",
-							var0005,
-							" guilders sound to thee?\"");
+							", thou art a scoundrel! I would be penniless very soon if I bargained such a price more than a few times!\"");
 					}
 					if (var0011 == 0x0003) {
-						say("\"My price is ",
-							var0005,
-							" guilders, ",
+						say("\"'Tis not often I practically give my goods away! Thou art a skilled trader, ",
 							var0002,
-							". Dost thou accept?\"");
+							"!\"");
 					}
-				}
-				if (var000E == 0x0003) {
+				} else if (var0005 < (var0001 + ((var0000 - var0001) / 0x0002))) {
 					if (var0011 == 0x0001) {
-						say("\"I am not sure. Wouldst thou consider ",
-							var0005,
-							" guilders?\"");
+						say("\"My prices are just, ",
+							var0002,
+							". Thou shouldst travel to Fawn if thou dost believe mine steep.\"");
 					}
 					if (var0011 == 0x0002) {
-						say("\"Hmmm... I am not certain... ",
-							var0005,
-							" guilders?\"");
+						say("\"'Tis a pleasure to trade with thee, ",
+							var0002,
+							".\"");
 					}
 					if (var0011 == 0x0003) {
-						say("\"The cost of my goods hath increased. Perhaps ",
-							var0005,
-							" guilders?\"");
-					}
-				}
-				if (var000E == 0x0004) {
-					if (var0011 == 0x0001) {
-						say("\"If I did not know better, I would believe thou dost jest with me. ",
-							var0005,
-							" guilders is as low as I can go.\"");
-						say("\"What dost thou say to this?\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"Even if the storms are driving away my customers, I still cannot accept less than ",
-							var0005,
-							" guilders.\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"Thou dost think too highly of thyself, my friend. I can accept no less than ",
-							var0005,
-							" guilders.\"");
-					}
-				}
-				if (var000E == 0x0005) {
-					var0005 = var0010;
-					if (var0011 == 0x0001) {
-						say("\"Thou art touched by the storms if thou dost think I would accept such a ridiculous offer! My previous price stands, at ",
-							var0005,
-							" guilders.\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"I do not give my goods away! ",
-							var0005,
-							" guilders, and no less!\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"I would rather belong to the Bear Command than accept such an offer!\"");
 						say("\"",
-							var0005,
-							" guilders is as low as I will go!\"");
+							var0004,
+							", I shall remember thee! Please come to my shop whenever thou art in Monitor!\"");
 					}
-					if (var000C < 0x001F) {
-						0xFFE0->set_npc_id(var000C + 0x0001);
+				} else {
+					if (var0011 == 0x0001) {
+						say("\"",
+							var0004,
+							", thou hast my gratitude!\"");
 					}
+					if (var0011 == 0x0002) {
+						say("\"A blessing upon thee, ",
+							var0002,
+							"!\"");
+					}
+					if (var0011 == 0x0003) {
+						say("\"My prices are steep, ",
+							var0002,
+							", for supplies are very scarce due to the Goblin raids.\"");
+					}
+				}
+			}
+			say("\"Thou hast agreed to a price of ",
+				var0005,
+				" guilders, ",
+				var0002,
+				"?\"");
+			if (Func0955()) {
+				if (var000C > 0x0001) {
+					0xFFE0->set_npc_id(var000C - 0x0002);
+				}
+				return var0005;
+			}
+			if (var0011 == 0x0001) {
+				say("\"Thou shouldst not argue with me only to change thy mind when we have agreed to a firm price!\"");
+			}
+			if (var0011 == 0x0002) {
+				say("\"What of our bargain? Thou hast disappointed me, ",
+					var0002,
+					".\"");
+			}
+			if (var0011 == 0x0003) {
+				say("\"This is not honorable! I do not have time to play games with thee! Begone!\"");
+				abort;
+			}
+			if (0x001F < (var000C + 0x000A)) {
+				0xFFE0->set_npc_id(0x001F);
+			} else {
+				0xFFE0->set_npc_id(var000C + 0x000A);
+			}
+			return 0x0000;
+		}
+		if (var0008 == 0x0001) {
+			if (var000E == 0x0005) {
+				say("\"I said that ",
+					var0005,
+					" was my final offer. Dost thou accept?\"");
+				if (var000C < 0x001C) {
+					0xFFE0->set_npc_id(var000C + 0x0004);
+				}
+				if (Func0955()) {
+					return var0005;
+				}
+				var0009 = 0x0000;
+			} else {
+				say("\"",
+					var0005,
+					" guilders is my final offer.\"");
+				if (var000C < 0x001E) {
+					0xFFE0->set_npc_id(var000C + 0x0002);
+				}
+			}
+		} else {
+			if (var000E == 0x0002) {
+				if (var0011 == 0x0001) {
+					say("\"'Tis a pleasure to trade with thee, ",
+						var0002,
+						". How doth ",
+						var0005,
+						" guilders sound?\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"",
+						var0004,
+						", only for thee I will give a special price. How doth ",
+						var0005,
+						" guilders sound to thee?\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"My price is ",
+						var0005,
+						" guilders, ",
+						var0002,
+						". Dost thou accept?\"");
+				}
+			}
+			if (var000E == 0x0003) {
+				if (var0011 == 0x0001) {
+					say("\"I am not sure. Wouldst thou consider ",
+						var0005,
+						" guilders?\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"Hmmm... I am not certain... ",
+						var0005,
+						" guilders?\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"The cost of my goods hath increased. Perhaps ",
+						var0005,
+						" guilders?\"");
+				}
+			}
+			if (var000E == 0x0004) {
+				if (var0011 == 0x0001) {
+					say("\"If I did not know better, I would believe thou dost jest with me. ",
+						var0005,
+						" guilders is as low as I can go.\"");
+					say("\"What dost thou say to this?\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"Even if the storms are driving away my customers, I still cannot accept less than ",
+						var0005,
+						" guilders.\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"Thou dost think too highly of thyself, my friend. I can accept no less than ",
+						var0005,
+						" guilders.\"");
+				}
+			}
+			if (var000E == 0x0005) {
+				var0005 = var0010;
+				if (var0011 == 0x0001) {
+					say("\"Thou art touched by the storms if thou dost think I would accept such a ridiculous offer! My previous price stands, at ",
+						var0005,
+						" guilders.\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"I do not give my goods away! ",
+						var0005,
+						" guilders, and no less!\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"I would rather belong to the Bear Command than accept such an offer!\"");
+					say("\"",
+						var0005,
+						" guilders is as low as I will go!\"");
+				}
+				if (var000C < 0x001F) {
+					0xFFE0->set_npc_id(var000C + 0x0001);
 				}
 			}
 		}
@@ -98489,7 +98346,8 @@ void Func0871 0x871 () {
 		var0003 = (var0003 - 0x0001);
 		if (var0003 == 0x0000) {
 			break;
-		} else if (var0003 == 0x0001) {
+		}
+		if (var0003 == 0x0001) {
 			var0004 = ["nothing", "Detect Trap", "Light"];
 			var0005 = [0x0000, 0x0002, 0x0005];
 			var0006 = [0x0000, 0x0028, 0x0023];
@@ -98618,181 +98476,181 @@ var Func0872 0x872 (var var0000, var var0001) {
 		var000A = Func0956(["yes", "no", "haggle"]);
 		if (var000A == "no") {
 			return 0x0000;
+		}
+		if (var000A == "yes") {
+			var000B = 0x0000;
 		} else {
-			if (var000A == "yes") {
-				var000B = 0x0000;
-			} else {
-				var000C = Func0999(var0002, var0001, var0008, var0003, var0007, var0004, var0005);
-				var0007 = (var0007 + 0x0001);
-				var0005 = var000C[0x0004];
-				var000B = var000C[0x0003];
-				var000D = var0002;
-				var0002 = var000C[0x0002];
-				var0003 = var000C[0x0001];
-			}
-			var000E = UI_get_random(0x0003);
-			if (var000B < 0x0002) {
-				if (var0002 < (var0001 + ((var0000 - var0001) / 0x0004))) {
-					if (var000E == 0x0001) {
-						say("\"I do not know why, but I accept thine offer. Thou dost bargain well, friend.\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"'Twill not do my reputation any good, but I accept thine offer.\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"If thou dost tell anyone that I accepted such an offer, I will say that thou art a liar.\"");
-					}
-				} else {
-					if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-						if (var000E == 0x0001) {
-							say("\"I have not had much business of late. I will accept thine offer.\"");
-						}
-						if (var000E == 0x0002) {
-							say("\"Thou dost bargain well. I will accept this price.\"");
-						}
-						if (var000E == 0x0003) {
-							say("\"I hope thou dost know that thou art getting a good bargain at this price.\"");
-						}
-					} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-						if (var000E == 0x0001) {
-							say("\"Only ",
-								var0002,
-								"??! I may as well give this away...\"");
-						}
-						if (var000E == 0x0002) {
-							say("\"Not bad...\"");
-						}
-						if (var000E == 0x0003) {
-							say("\"Thou canst not fault me for trying to make a profit. I will accept this price.\"");
-						}
-					} else {
-						if (var000E == 0x0001) {
-							say("\"I accept thine offer!\"");
-						}
-						if (var000E == 0x0002) {
-							say("\"Thou art a fine customer. Please stop by any time.\"");
-						}
-						if (var000E == 0x0003) {
-							say("\"'Tis a fine price by me!\"");
-						}
-					}
-				}
-				say("\"So, dost thou agree to a price of ",
-					var0002,
-					"?\"");
-				if (Func0955() == true) {
-					if (var0009 > 0x0001) {
-						0xFFDF->set_npc_id(var0009 - 0x0002);
-					}
-					return var0002;
-				} else if (var000E == 0x0001) {
-					say("\"Then why didst thou come here?!\"");
+			var000C = Func0999(var0002, var0001, var0008, var0003, var0007, var0004, var0005);
+			var0007 = (var0007 + 0x0001);
+			var0005 = var000C[0x0004];
+			var000B = var000C[0x0003];
+			var000D = var0002;
+			var0002 = var000C[0x0002];
+			var0003 = var000C[0x0001];
+		}
+		var000E = UI_get_random(0x0003);
+		if (var000B < 0x0002) {
+			if (var0002 < (var0001 + ((var0000 - var0001) / 0x0004))) {
+				if (var000E == 0x0001) {
+					say("\"I do not know why, but I accept thine offer. Thou dost bargain well, friend.\"");
 				}
 				if (var000E == 0x0002) {
-					say("\"Thou art an ill-mannered buffoon!\"");
+					say("\"'Twill not do my reputation any good, but I accept thine offer.\"");
 				}
 				if (var000E == 0x0003) {
-					say("\"I shall remember thy poor manners in the future! Mark my words!\"");
-				}
-				if (0x001F < (var0009 + 0x000A)) {
-					0xFFDF->set_npc_id(0x001F);
-				} else {
-					0xFFDF->set_npc_id(var0009 + 0x000A);
-				}
-				return 0x0000;
-			}
-			if (var0005 == 0x0001) {
-				if (var000B == 0x0005) {
-					say("\"",
-						var0002,
-						" is my final offer. Dost thou agree or not?\"");
-					if (var0009 < 0x001C) {
-						0xFFDF->set_npc_id(var0009 + 0x0004);
-					}
-					if (Func0955() == true) {
-						return var0002;
-					}
-					var0006 = 0x0000;
-				} else {
-					say("\"I can offer no lower than ",
-						var0002,
-						".\"");
-					if (var0009 < 0x001E) {
-						0xFFDF->set_npc_id(var0009 + 0x0002);
-					}
+					say("\"If thou dost tell anyone that I accepted such an offer, I will say that thou art a liar.\"");
 				}
 			} else {
-				if (var000B == 0x0002) {
+				if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
 					if (var000E == 0x0001) {
-						say("\"I am minded to give thee a good deal. How doth ",
-							var0002,
-							" sound?\"");
+						say("\"I have not had much business of late. I will accept thine offer.\"");
 					}
 					if (var000E == 0x0002) {
-						say("\"I like the way thou dost barter. How doth ",
-							var0002,
-							" sound?\"");
+						say("\"Thou dost bargain well. I will accept this price.\"");
 					}
 					if (var000E == 0x0003) {
-						say("\"For thee only I offer ",
+						say("\"I hope thou dost know that thou art getting a good bargain at this price.\"");
+					}
+				} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+					if (var000E == 0x0001) {
+						say("\"Only ",
 							var0002,
-							".\"");
+							"??! I may as well give this away...\"");
+					}
+					if (var000E == 0x0002) {
+						say("\"Not bad...\"");
+					}
+					if (var000E == 0x0003) {
+						say("\"Thou canst not fault me for trying to make a profit. I will accept this price.\"");
+					}
+				} else {
+					if (var000E == 0x0001) {
+						say("\"I accept thine offer!\"");
+					}
+					if (var000E == 0x0002) {
+						say("\"Thou art a fine customer. Please stop by any time.\"");
+					}
+					if (var000E == 0x0003) {
+						say("\"'Tis a fine price by me!\"");
 					}
 				}
-				if (var000B == 0x0003) {
-					if (var000E == 0x0001) {
-						say("\"Hmmm.... Perhaps ",
-							var0002,
-							"?\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"",
-							var0002,
-							"? I have many expenses.\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"",
-							var0002,
-							"? I cannot afford to be overly generous these days.\"");
-					}
+			}
+			say("\"So, dost thou agree to a price of ",
+				var0002,
+				"?\"");
+			if (Func0955() == true) {
+				if (var0009 > 0x0001) {
+					0xFFDF->set_npc_id(var0009 - 0x0002);
 				}
-				if (var000B == 0x0004) {
-					if (var000E == 0x0001) {
-						say("\"Who dost thou think thou art dealing with -- a Mundane?! ",
-							var0002,
-							" and no less!\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"I will go no lower than ",
-							var0002,
-							". Thou dost not appreciate the work involved.\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"This is worth at least ",
-							var0002,
-							". I think that thou shouldst reconsider.\"");
-					}
+				return var0002;
+			}
+			if (var000E == 0x0001) {
+				say("\"Then why didst thou come here?!\"");
+			}
+			if (var000E == 0x0002) {
+				say("\"Thou art an ill-mannered buffoon!\"");
+			}
+			if (var000E == 0x0003) {
+				say("\"I shall remember thy poor manners in the future! Mark my words!\"");
+			}
+			if (0x001F < (var0009 + 0x000A)) {
+				0xFFDF->set_npc_id(0x001F);
+			} else {
+				0xFFDF->set_npc_id(var0009 + 0x000A);
+			}
+			return 0x0000;
+		}
+		if (var0005 == 0x0001) {
+			if (var000B == 0x0005) {
+				say("\"",
+					var0002,
+					" is my final offer. Dost thou agree or not?\"");
+				if (var0009 < 0x001C) {
+					0xFFDF->set_npc_id(var0009 + 0x0004);
 				}
-				if (var000B == 0x0005) {
-					var0002 = var000D;
-					if (var000E == 0x0001) {
-						say("\"Thou must not want this very badly... My previous offer stands, at ",
-							var0002,
-							".\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"Thou art a fool if thou dost think that I will go lower than ",
-							var0002,
-							".\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"I would sooner starve! Mine offer stands at ",
-							var0002,
-							".\"");
-					}
-					if (var0009 < 0x001F) {
-						0xFFDF->set_npc_id(var0009 + 0x0001);
-					}
+				if (Func0955() == true) {
+					return var0002;
+				}
+				var0006 = 0x0000;
+			} else {
+				say("\"I can offer no lower than ",
+					var0002,
+					".\"");
+				if (var0009 < 0x001E) {
+					0xFFDF->set_npc_id(var0009 + 0x0002);
+				}
+			}
+		} else {
+			if (var000B == 0x0002) {
+				if (var000E == 0x0001) {
+					say("\"I am minded to give thee a good deal. How doth ",
+						var0002,
+						" sound?\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"I like the way thou dost barter. How doth ",
+						var0002,
+						" sound?\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"For thee only I offer ",
+						var0002,
+						".\"");
+				}
+			}
+			if (var000B == 0x0003) {
+				if (var000E == 0x0001) {
+					say("\"Hmmm.... Perhaps ",
+						var0002,
+						"?\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"",
+						var0002,
+						"? I have many expenses.\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"",
+						var0002,
+						"? I cannot afford to be overly generous these days.\"");
+				}
+			}
+			if (var000B == 0x0004) {
+				if (var000E == 0x0001) {
+					say("\"Who dost thou think thou art dealing with -- a Mundane?! ",
+						var0002,
+						" and no less!\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"I will go no lower than ",
+						var0002,
+						". Thou dost not appreciate the work involved.\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"This is worth at least ",
+						var0002,
+						". I think that thou shouldst reconsider.\"");
+				}
+			}
+			if (var000B == 0x0005) {
+				var0002 = var000D;
+				if (var000E == 0x0001) {
+					say("\"Thou must not want this very badly... My previous offer stands, at ",
+						var0002,
+						".\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"Thou art a fool if thou dost think that I will go lower than ",
+						var0002,
+						".\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"I would sooner starve! Mine offer stands at ",
+						var0002,
+						".\"");
+				}
+				if (var0009 < 0x001F) {
+					0xFFDF->set_npc_id(var0009 + 0x0001);
 				}
 			}
 		}
@@ -99746,9 +99604,8 @@ void Func087C 0x87C () {
 		}
 		UI_remove_npc_face0();
 		abort;
-	} else {
-		UI_set_timer(0x0007);
 	}
+	UI_set_timer(0x0007);
 	var0009 = find_nearby(0x0113, 0x0014, 0x0010);
 	for (var000C in var0009 with var000A to var000B) {
 		if (var000C->get_item_frame() == 0x0006) {
@@ -99836,10 +99693,8 @@ var Func087E 0x87E (var var0000, var var0001) {
 	if ((var0002 >= 0x0032) && (var0002 >= (var0000 / 0x0002))) {
 		var0003 = UI_remove_party_items(var0002, var0001, 0xFE99, 0xFE99, true);
 		return true;
-	} else {
-		return false;
 	}
-	return 0;
+	return false;
 }
 
 extern var Func0994 0x994 ();
@@ -101071,10 +100926,8 @@ var Func089D 0x89D (var var0000) {
 	}
 	if (UI_get_array_size(var0000) == 0x0000) {
 		return false;
-	} else {
-		return true;
 	}
-	return 0;
+	return true;
 }
 
 extern void Func094A 0x94A (var var0000);
@@ -101443,23 +101296,20 @@ var Func08AC 0x8AC (var var0000) {
 	if (gflags[0x0173] == true) {
 		if (var0000) {
 			return 0xFFFF;
-		} else {
-			return "Dupre";
 		}
+		return "Dupre";
 	}
 	if (gflags[0x0174] == true) {
 		if (var0000) {
 			return 0xFFFD;
-		} else {
-			return "Iolo";
 		}
+		return "Iolo";
 	}
 	if (gflags[0x0175] == true) {
 		if (var0000) {
 			return 0xFFFE;
-		} else {
-			return "Shamino";
 		}
+		return "Shamino";
 	}
 	return false;
 }
@@ -101674,20 +101524,19 @@ void Func08AF 0x8AF (var var0000, var var0001) {
 				}
 				var0006 = UI_update_last_created(var0007);
 				return;
-			} else {
-				if (Func08B0(var0004, var0005, 0x0000)) {
-					goto labelFunc08AF_018C;
-				}
-				var0007 = 0xFE9C->get_object_position();
-				if (var0004) {
-					var0006 = UI_update_last_created(var0007);
-				}
-				if (!var0005) {
-					goto labelFunc08AF_018C;
-				}
-				var0006 = UI_update_last_created(var0007);
-				return;
 			}
+			if (Func08B0(var0004, var0005, 0x0000)) {
+				goto labelFunc08AF_018C;
+			}
+			var0007 = 0xFE9C->get_object_position();
+			if (var0004) {
+				var0006 = UI_update_last_created(var0007);
+			}
+			if (!var0005) {
+				goto labelFunc08AF_018C;
+			}
+			var0006 = UI_update_last_created(var0007);
+			return;
 		}
 	}
 	var0006 = var0000->set_last_created();
@@ -101715,17 +101564,15 @@ var Func08B0 0x8B0 (var var0000, var var0001, var var0002) {
 			var0003 = var0001->set_last_created();
 		}
 		return var0003;
-	} else {
-		var0003 = false;
-		if (var0000) {
-			var0003 = 0xFE9C->give_last_created();
-		}
-		if (var0001) {
-			var0003 = 0xFE9C->give_last_created();
-		}
-		return var0003;
 	}
-	return 0;
+	var0003 = false;
+	if (var0000) {
+		var0003 = 0xFE9C->give_last_created();
+	}
+	if (var0001) {
+		var0003 = 0xFE9C->give_last_created();
+	}
+	return var0003;
 }
 
 void Func08B1 0x8B1 (var var0000, var var0001, var var0002, var var0003) {
@@ -101927,10 +101774,8 @@ var Func08B5 0x8B5 () {
 			}
 		}
 		return [];
-	} else {
-		return [];
 	}
-	return 0;
+	return [];
 }
 
 var Func08B6 0x8B6 () {
@@ -102929,17 +102774,23 @@ void Func08C9 0x8C9 () {
 					do {
 						if ((var0002 == 0x0013) && ((var000A == 0x0002) || (var000A == 0x0003))) {
 							continue;
-						} else if ((var0002 == 0x0014) && ((var000A == 0x0004) || (var000A == 0x0005))) {
+						}
+						if ((var0002 == 0x0014) && ((var000A == 0x0004) || (var000A == 0x0005))) {
 							continue;
-						} else if ((var0002 == 0x0015) && ((var000A == 0x000A) || ((var000A == 0x000B) || ((var000A == 0x000C) || (var000A == 0x000D))))) {
+						}
+						if ((var0002 == 0x0015) && ((var000A == 0x000A) || ((var000A == 0x000B) || ((var000A == 0x000C) || (var000A == 0x000D))))) {
 							continue;
-						} else if ((var0002 == 0x0016) && ((var000A == 0x0006) || ((var000A == 0x0007) || ((var000A == 0x0008) || (var000A == 0x0009))))) {
+						}
+						if ((var0002 == 0x0016) && ((var000A == 0x0006) || ((var000A == 0x0007) || ((var000A == 0x0008) || (var000A == 0x0009))))) {
 							continue;
-						} else if ((var0002 == 0x0017) && ((var000A == 0x000E) || (var000A == 0x000F))) {
+						}
+						if ((var0002 == 0x0017) && ((var000A == 0x000E) || (var000A == 0x000F))) {
 							continue;
-						} else if ((var0002 == 0x0018) && ((var000A == 0x0011) || (var000A == 0x0012))) {
+						}
+						if ((var0002 == 0x0018) && ((var000A == 0x0011) || (var000A == 0x0012))) {
 							continue;
-						} else if (var000A != var0002) {
+						}
+						if (var000A != var0002) {
 							break;
 						}
 					} while (false)
@@ -104690,10 +104541,8 @@ var Func08EA 0x8EA (var var0000) {
 	var0001 = (var0001 * 0x0002);
 	if (var0001 == var0000) {
 		return false;
-	} else {
-		return true;
 	}
-	return 0;
+	return true;
 }
 
 extern var Func08EA 0x8EA (var var0000);
@@ -105065,10 +104914,8 @@ var Func08F8 0x8F8 (var var0000, var var0001, var var0002) {
 
 	if ((var0000[0x0001] > var0001[0x0001]) && ((var0000[0x0001] < var0002[0x0001]) && ((var0000[0x0002] > var0001[0x0002]) && (var0000[0x0002] < var0002[0x0002])))) {
 		return true;
-	} else {
-		return false;
 	}
-	return 0;
+	return false;
 }
 
 extern var Func08F7 0x8F7 ();
@@ -105883,10 +105730,8 @@ var Func0910 0x910 (var var0000) {
 	if (var000A) {
 		var000A = UI_update_last_created(var0007);
 		return true;
-	} else {
-		return false;
 	}
-	return 0;
+	return false;
 }
 
 var Func0911 0x911 (var var0000, var var0001, var var0002) {
@@ -105985,13 +105830,13 @@ void Func0916 0x916 () {
 		if (UI_get_random(0x0003) == 0x0001) {
 			Func0922(0x0013);
 			abort;
-		} else if (UI_get_random(0x0002) == 0x0001) {
+		}
+		if (UI_get_random(0x0002) == 0x0001) {
 			Func0922(0x0000);
 			abort;
-		} else {
-			Func0922(0x000C);
-			abort;
 		}
+		Func0922(0x000C);
+		abort;
 	}
 	if (gflags[0x02E2] && (!gflags[0x0250])) {
 		Func0922(0x000A);
@@ -106028,10 +105873,9 @@ void Func0916 0x916 () {
 	if (UI_get_random(0x0002) == 0x0001) {
 		Func0922(0x0000);
 		abort;
-	} else {
-		Func0922(0x000C);
-		abort;
 	}
+	Func0922(0x000C);
+	abort;
 }
 
 void Func0917 0x917 (var var0000, var var0001) {
@@ -106365,11 +106209,10 @@ void Func0921 0x921 (var var0000) {
 			};
 			UI_play_sound_effect(0x0027);
 			abort;
-		} else {
-			0xFE9C->item_say("@Isal Sal Cra Gaas Iskar!@");
-			var0000->obj_sprite_effect(0x0015, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
-			UI_play_music(0x0035, var0000);
 		}
+		0xFE9C->item_say("@Isal Sal Cra Gaas Iskar!@");
+		var0000->obj_sprite_effect(0x0015, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
+		UI_play_music(0x0035, var0000);
 	}
 }
 
@@ -107253,60 +107096,64 @@ void Func0933 0x933 (var var0000, var var0001) {
 		if (var0000 == 0x0000) {
 			say("\"Thou dost not have enough experience. Come back when thou art more knowledgeable of the world!\"");
 			return;
-		} else if (var0000 == 0x0001) {
+		}
+		if (var0000 == 0x0001) {
 			say("\"Thou dost not have enough money.\"");
 			return;
-		} else if (var0000 == 0x0002) {
+		}
+		if (var0000 == 0x0002) {
 			say("\"Thou art already as proficient as I. Thou mightest consider consulting one of the other trainers that specialize in other areas.\"");
 			return;
-		} else {
-			say("\"I will train thee now.\"");
 		}
+		say("\"I will train thee now.\"");
 	}
 	if (var0000 == 0xFFB6) {
 		var0000 = Func096E([0x0001, 0x0001, 0x0004], 0x03B7, 0x0032, var0001, 0x0003);
 		if (var0000 == 0x0000) {
 			say("\"Thou dost not have enough experience. Come back when thou art more knowledgeable of the world!\"");
 			return;
-		} else if (var0000 == 0x0001) {
+		}
+		if (var0000 == 0x0001) {
 			say("\"Thou dost not have enough money.\"");
 			return;
-		} else if (var0000 == 0x0002) {
+		}
+		if (var0000 == 0x0002) {
 			say("\"Thou art already as proficient as I. Thou mightest consider consulting one of the other trainers that specialize in other areas.\"");
 			return;
-		} else {
-			say("\"I will train thee now.\"");
 		}
+		say("\"I will train thee now.\"");
 	}
 	if (var0000 == 0xFFB9) {
 		var0000 = Func096E([0x0000, 0x0000, 0x0000], 0x03B7, 0x0032, var0001, 0x0003);
 		if (var0000 == 0x0000) {
 			say("\"Thou dost not have enough experience. Come back when thou art more knowledgeable of the world!\"");
 			return;
-		} else if (var0000 == 0x0001) {
+		}
+		if (var0000 == 0x0001) {
 			say("\"Thou dost not have enough money.\"");
 			return;
-		} else if (var0000 == 0x0002) {
+		}
+		if (var0000 == 0x0002) {
 			say("\"Thou art already as proficient as I. Thou mightest consider consulting one of the other trainers that specialize in other areas.\"");
 			return;
-		} else {
-			say("\"I will train thee now.\"");
 		}
+		say("\"I will train thee now.\"");
 	}
 	if (var0000 == 0xFFC1) {
 		var0000 = Func096E([0x0000, 0x0000, 0x0004], 0x03B7, 0x0032, var0001, 0x0003);
 		if (var0000 == 0x0000) {
 			say("\"Thou dost not have enough experience. Come back when thou art more knowledgeable of the world!\"");
 			return;
-		} else if (var0000 == 0x0001) {
+		}
+		if (var0000 == 0x0001) {
 			say("\"Thou dost not have enough money.\"");
 			return;
-		} else if (var0000 == 0x0002) {
+		}
+		if (var0000 == 0x0002) {
 			say("\"Thou art already as proficient as I. Thou mightest consider consulting one of the other trainers that specialize in other areas.\"");
 			return;
-		} else {
-			say("\"I will train thee now.\"");
 		}
+		say("\"I will train thee now.\"");
 	}
 	var0000 = UI_remove_party_items(0x0032, 0x03B7, 0xFE99, 0xFE99, false);
 	gflags[0x0084] = true;
@@ -107559,11 +107406,11 @@ void Func0936 0x936 (var var0000, var var0001) {
 					}
 					Func092E(var0000);
 					return;
-				} else {
-					gflags[0x0007] = false;
-					return;
 				}
-			} else if (var0001 == 0xFFB9->get_npc_object()) {
+				gflags[0x0007] = false;
+				return;
+			}
+			if (var0001 == 0xFFB9->get_npc_object()) {
 				if ((gflags[0x0043] && (!gflags[0x0041])) && (var0000 == 0xFE9C->get_npc_object())) {
 					break;
 				}
@@ -107620,7 +107467,8 @@ void Func0936 0x936 (var var0000, var var0001) {
 			var0001->item_say("@I can take it no longer!@");
 			gflags[0x0007] = false;
 			return;
-		} else if (gflags[0x0084]) {
+		}
+		if (gflags[0x0084]) {
 			if (0xFFB6->get_npc_id() == 0x0009) {
 				0xFFB6->show_npc_face0(0x0000);
 				say("\"Thou hast been beaten by my blade. Remember this day, and learn.\"");
@@ -108426,10 +108274,9 @@ void Func093A 0x93A (var var0000) {
 				}
 				UI_end_conversation();
 				abort;
-			} else {
-				var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x0066);
-				var0000 = 0x0065;
 			}
+			var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x0066);
+			var0000 = 0x0065;
 		}
 		if (var0000 == 0x0063) {
 			0xFFD2->clear_item_say();
@@ -109579,10 +109426,8 @@ var Func0951 0x951 () {
 
 	if (UI_get_weather() == 0x0003) {
 		return false;
-	} else {
-		return true;
 	}
-	return 0;
+	return true;
 }
 
 var Func0952 0x952 (var var0000) {
@@ -109599,10 +109444,8 @@ var Func0954 0x954 () {
 
 	if (UI_is_pc_female() == 0x0000) {
 		return "milord";
-	} else {
-		return "milady";
 	}
-	return 0;
+	return "milady";
 }
 
 var Func0955 0x955 () {
@@ -110500,10 +110343,8 @@ var Func097D 0x97D (var var0000, var var0001, var var0002, var var0003, var var0
 	var0005 = var0000->count_objects(var0002, var0003, var0004);
 	if ((var0005 >= var0001) && (var0005 != 0x0000)) {
 		return true;
-	} else {
-		return false;
 	}
-	return 0;
+	return false;
 }
 
 var Func097E 0x97E (var var0000) {
@@ -110548,10 +110389,8 @@ var Func0980 0x980 (var var0000) {
 			}
 		}
 		return var0003;
-	} else {
-		return var0002;
 	}
-	return 0;
+	return var0002;
 }
 
 var Func0981 0x981 (var var0000, var var0001) {
@@ -110577,10 +110416,8 @@ var Func0983 0x983 (var var0000) {
 
 	if ((var0000->get_npc_prop(0x0002) >= 0x000A) && ((!var0000->get_item_flag(0x0001)) && ((!var0000->get_item_flag(0x0007)) && ((!var0000->get_item_flag(0x0004)) && ((var0000->get_npc_prop(0x0003) > 0x0000) && var0000->is_npc()))))) {
 		return true;
-	} else {
-		return false;
 	}
-	return 0;
+	return false;
 }
 
 extern var Func0985 0x985 (var var0000);
@@ -110590,10 +110427,8 @@ var Func0984 0x984 (var var0000) {
 	var0000 = Func0985(var0000);
 	if (var0000->get_item_flag(0x0001) || (var0000->get_item_flag(0x0007) || (var0000->get_item_flag(0x0004) || (var0000->get_npc_prop(0x0003) <= 0x0000)))) {
 		return true;
-	} else {
-		return false;
 	}
-	return 0;
+	return false;
 }
 
 var Func0985 0x985 (var var0000) {
@@ -111079,7 +110914,8 @@ var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003) {
 		}
 		return var0000;
 		abort;
-	} else if (var0000->get_npc_object() in var0004) {
+	}
+	if (var0000->get_npc_object() in var0004) {
 		if (var0001 != 0x0000) {
 			if (var0003) {
 				Func097F(var0000, var0001, 0x0000);
@@ -111089,11 +110925,10 @@ var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003) {
 		}
 		return var0000;
 		abort;
-	} else {
-		var0014 = 0x0001;
-		while (var0006[var0014] != var0000) {
-			var0014 = (var0014 + 0x0001);
-		}
+	}
+	var0014 = 0x0001;
+	while (var0006[var0014] != var0000) {
+		var0014 = (var0014 + 0x0001);
 	}
 	if (var0008[0x0001] == var0014) {
 		var0015 = var0008;
@@ -111142,7 +110977,8 @@ var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003) {
 			}
 			return var0000;
 			abort;
-		} else if ((var0000 == 0xFFDE) && (0xFED3 in var0004)) {
+		}
+		if ((var0000 == 0xFFDE) && (0xFED3 in var0004)) {
 			var0000 = 0xFED3;
 			if (!var0003) {
 				Func094E(var0000, var0001);
@@ -111270,10 +111106,8 @@ var Func0993 0x993 (var var0000) {
 	}
 	if (var0002 < 0x0400) {
 		return 0x0008;
-	} else {
-		return 0xFFFF;
 	}
-	return 0;
+	return 0xFFFF;
 }
 
 extern var Func0993 0x993 (var var0000);
@@ -111322,10 +111156,8 @@ var Func0995 0x995 () {
 	}
 	if (var0002 > 0x0400) {
 		return false;
-	} else {
-		return true;
 	}
-	return 0;
+	return true;
 }
 
 var Func0996 0x996 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006) {
@@ -111434,48 +111266,47 @@ var Func0999 0x999 (var var0000, var var0001, var var0002, var var0003, var var0
 	do {
 		if (var0007 == var0000) {
 			continue;
-		} else {
-			var0008 = (var0000 - var0007);
-			if (var0006 == 0x0001) {
-				var0009 = 0x0005;
-				var000A = var0000;
-				break;
-			}
-			if (!var0006) {
-				if (var0004 > (var0005 / 0x0002)) {
-					if (UI_get_random(var0005 - var0004)) {
-						var0006 = 0x0001;
-						var0009 = 0x0004;
-					}
+		}
+		var0008 = (var0000 - var0007);
+		if (var0006 == 0x0001) {
+			var0009 = 0x0005;
+			var000A = var0000;
+			break;
+		}
+		if (!var0006) {
+			if (var0004 > (var0005 / 0x0002)) {
+				if (UI_get_random(var0005 - var0004)) {
+					var0006 = 0x0001;
+					var0009 = 0x0004;
 				}
 			}
-			if (!var0009) {
-				if (var0007 < (var0003 + ((var0008 * 0x0003) / 0x000A))) {
-					if (var0007 < (var0003 + ((var0008 * 0x000F) / 0x0064))) {
-						if (var0007 > var0001) {
-							if (UI_get_random(0x0002) == 0x0001) {
-								var0009 = 0x0001;
-							}
-						} else {
-							var0009 = 0x0001;
-						}
-					}
-					var0009 = (var0009 + 0x0004);
-				} else if (var0008 < ((var0000 - var0003) / 0x0002)) {
+		}
+		if (!var0009) {
+			if (var0007 < (var0003 + ((var0008 * 0x0003) / 0x000A))) {
+				if (var0007 < (var0003 + ((var0008 * 0x000F) / 0x0064))) {
 					if (var0007 > var0001) {
-						if (UI_get_random(0x0003) == 0x0001) {
+						if (UI_get_random(0x0002) == 0x0001) {
 							var0009 = 0x0001;
-						} else {
-							var0009 = 0x0002;
 						}
 					} else {
-						var0009 = 0x0003;
+						var0009 = 0x0001;
 					}
-				} else if (var0007 == var0000) {
-					var0009 = 0x0001;
+				}
+				var0009 = (var0009 + 0x0004);
+			} else if (var0008 < ((var0000 - var0003) / 0x0002)) {
+				if (var0007 > var0001) {
+					if (UI_get_random(0x0003) == 0x0001) {
+						var0009 = 0x0001;
+					} else {
+						var0009 = 0x0002;
+					}
 				} else {
 					var0009 = 0x0003;
 				}
+			} else if (var0007 == var0000) {
+				var0009 = 0x0001;
+			} else {
+				var0009 = 0x0003;
 			}
 		}
 	} while (false)
@@ -111537,40 +111368,38 @@ var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0
 	var0007 = var0000->add_cont_items(var0001, var0002, var0003, var0004, var0005);
 	if (var0007 == 0x0000) {
 		return [0x0000, 0x0000];
-	} else {
-		var0007 = UI_add_party_items(var0007, var0002, var0003, var0004, var0005);
-		var0003 = var0001;
-		if (!var0006) {
-			return var0007;
-		}
-		var0004 = Func0977(var0007);
-		var0001 = var0007[var0004];
-		var0005 = Func099A(var0007, var0004);
-		if (var0005) {
-			if (var0003 == 0x0001) {
-				say("\"Thou art so encumbered! Perhaps one of thy friends might be willing to carry this?\"");
-			} else {
-				say("\"Thou art so encumbered! Let me give some of this to thy friends.\"");
-			}
-			for (var0002 in var0005 with var0008 to var0009) {
-				Func094E(var0002->get_npc_number(), "@I'll help carry it.@");
-				0x0000->set_conversation_slot();
-			}
-		}
-		if (var0001 > 0x0000) {
-			if (var0003 == 0x0001) {
-				say("\"Since thou art so encumbered, I shall set this upon the ground.\"");
-			} else if (var0001 == 0x0001) {
-				say("\"Since not one of you can hold another, I shall place this last remaining one upon the ground.\"");
-			} else {
-				say("\"Since thou art so encumbered, I shall place the remaining ",
-					var0001,
-					" of these upon the ground.\"");
-			}
-		}
+	}
+	var0007 = UI_add_party_items(var0007, var0002, var0003, var0004, var0005);
+	var0003 = var0001;
+	if (!var0006) {
 		return var0007;
 	}
-	return 0;
+	var0004 = Func0977(var0007);
+	var0001 = var0007[var0004];
+	var0005 = Func099A(var0007, var0004);
+	if (var0005) {
+		if (var0003 == 0x0001) {
+			say("\"Thou art so encumbered! Perhaps one of thy friends might be willing to carry this?\"");
+		} else {
+			say("\"Thou art so encumbered! Let me give some of this to thy friends.\"");
+		}
+		for (var0002 in var0005 with var0008 to var0009) {
+			Func094E(var0002->get_npc_number(), "@I'll help carry it.@");
+			0x0000->set_conversation_slot();
+		}
+	}
+	if (var0001 > 0x0000) {
+		if (var0003 == 0x0001) {
+			say("\"Since thou art so encumbered, I shall set this upon the ground.\"");
+		} else if (var0001 == 0x0001) {
+			say("\"Since not one of you can hold another, I shall place this last remaining one upon the ground.\"");
+		} else {
+			say("\"Since thou art so encumbered, I shall place the remaining ",
+				var0001,
+				" of these upon the ground.\"");
+		}
+	}
+	return var0007;
 }
 
 void Func099C 0x99C (var var0000) {
@@ -111640,15 +111469,13 @@ var Func09A0 0x9A0 (var var0000, var var0001) {
 			UI_error_message(["WARNING! GimmePathEgg returning ref = ", var0003]);
 		}
 		return var0003;
-	} else {
-		var0002 = (((var0000 * 0x0004) + var0001) - 0x0001);
-		var0003 = 0xFE9C->get_cont_items(0x025F, 0xFE99, var0002);
-		if (var0003 < 0x0008) {
-			UI_error_message(["WARNING! GimmePathEgg returning ref = ", var0003]);
-		}
-		return var0003;
 	}
-	return 0;
+	var0002 = (((var0000 * 0x0004) + var0001) - 0x0001);
+	var0003 = 0xFE9C->get_cont_items(0x025F, 0xFE99, var0002);
+	if (var0003 < 0x0008) {
+		UI_error_message(["WARNING! GimmePathEgg returning ref = ", var0003]);
+	}
+	return var0003;
 }
 
 extern void Func09A2 0x9A2 (var var0000, var var0001);
@@ -111743,10 +111570,8 @@ var Func09A6 0x9A6 (var var0000) {
 
 	if (var0000->get_item_shape() in [0x01E6, 0x020A, 0x0320, 0x0321, 0x0322, 0x0323, 0x0324, 0x0333, 0x0129, 0x0196, 0x0197, 0x011B, 0x01A0, 0x02A7, 0x0190, 0x019E, 0x030A, 0x037C, 0x02FA, 0x01FB, 0x0195, 0x022B, 0x02F3]) {
 		return true;
-	} else {
-		return false;
 	}
-	return 0;
+	return false;
 }
 
 var Func09A7 0x9A7 (var var0000, var var0001) {
@@ -111806,10 +111631,8 @@ var Func09A9 0x9A9 (var var0000, var var0001, var var0002) {
 			}
 		}
 		return var0005;
-	} else {
-		return [];
 	}
-	return 0;
+	return [];
 }
 
 void Func09AA 0x9AA () {
@@ -112414,10 +112237,8 @@ var Func09BA 0x9BA () {
 
 	if (gflags[0x00D3] || (gflags[0x00D4] || gflags[0x00D5])) {
 		return true;
-	} else {
-		return false;
 	}
-	return 0;
+	return false;
 }
 
 extern void Func090D 0x90D (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
