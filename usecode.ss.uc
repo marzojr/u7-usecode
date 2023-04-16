@@ -1,6 +1,17 @@
 #game "serpentisle"
 #strictbraces "true"
 
+enum directions : byte {
+	NORTH		= 0x30,
+	NORTHEAST	= 0x31,
+	EAST		= 0x32,
+	SOUTHEAST	= 0x33,
+	SOUTH		= 0x34,
+	SOUTHWEST	= 0x35,
+	WEST		= 0x36,
+	NORTHWEST	= 0x37
+};
+
 extern void Func094A 0x94A (var var0000);
 extern var Func0910 0x910 (var var0000);
 
@@ -2706,7 +2717,7 @@ void Func0109 shape#(0x109) () {
 			0xFE9C->set_item_flag(0x0010);
 			var0008 = script 0xFF2D {
 				nohalt;
-				face (byte)0x30;	// Note: should be 'north'
+				face NORTH;
 				actor frame cast_out;
 				wait 2;
 				actor frame cast_up;
@@ -7752,7 +7763,7 @@ void Func01E3 shape#(0x1E3) () {
 		UI_end_conversation();
 		var000D = script 0xFE9C {
 			nohalt;
-			face (byte)0x30;	// Note: could be 'face north'
+			face NORTH;
 			actor frame bowing;
 			actor frame kneeling;
 		};
@@ -7766,7 +7777,7 @@ void Func01E3 shape#(0x1E3) () {
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		var000D = script 0xFE9C after 4 ticks {
 			nohalt;
-			face (byte)0x30;	// Note: could be 'face north'
+			face NORTH;
 		};
 		0xFE9C->move_object([0x0A25, 0x0379, 0x0000]);
 		UI_play_sound_effect(0x0066);
@@ -8643,7 +8654,7 @@ void Func0247 shape#(0x247) () {
 	}
 	if (event == 0x000A) {
 		var0001 = script 0xFE9C {
-			face (byte)0x30;	// Note: could be 'face north'
+			face NORTH;
 			actor frame bowing;
 			actor frame standing;
 		};
@@ -11097,7 +11108,7 @@ void Func02AF shape#(0x2AF) () {
 		UI_play_music(0x0035, Func09A0(0x0005, 0x0001));
 		var0001 = script 0xFE9C after 4 ticks {
 			nohalt;
-			face (byte)0x30;	// Note: could be 'face north'
+			face NORTH;
 			call Func0636;
 		};
 	}
@@ -12189,7 +12200,7 @@ void Func02C5 shape#(0x2C5) () {
 			var0003 = 0xFF69->set_npc_prop(0x0003, (0x0064 - var0004));
 			0xFF69->move_object([0x09E5, 0x032F, 0x0000]);
 			var0003 = script 0xFF69 {
-				face (byte)0x34;
+				face SOUTH;
 			};
 		}
 	}
@@ -16669,7 +16680,7 @@ void Func0363 shape#(0x363) () {
 						};
 						var0005 = script item after 7 ticks {
 							nohalt;
-							face (byte)0x32;	// Note: could be 'face east'
+							face EAST;
 							continue;
 							actor frame ready;
 						};
@@ -48570,7 +48581,7 @@ labelFunc0464_0169:
 						var0002->set_schedule_type(0x000F);
 						UI_sprite_effect(0x001A, 0x0A22, 0x0373, 0x0000, 0x0000, 0x0000, 0xFFFF);
 						var0001 = script var0002 {
-							face (byte)0x34;	// Note: could be 'face south'
+							face SOUTH;
 						};
 						var0003 = Func09A0(0x0000, 0x0001);
 						if (var0003) {
@@ -48640,7 +48651,7 @@ labelFunc0464_0169:
 		if (gflags[0x021C] == true) {
 			say("\"Thou hast truly learned the Ethicality of saving others! Thou art worthy to continue the test... Behold!\"");
 			var0001 = script 0xFE9C {
-				face (byte)0x32;	// Note: could be 'face east'
+				face EAST;
 			};
 			UI_fade_palette(0x000C, 0x0001, 0x0000);
 			0xFE9C->move_object([0x0A28, 0x0326, 0x0000]);
@@ -48665,7 +48676,7 @@ labelFunc0464_0169:
 				var0002->set_schedule_type(0x000F);
 				UI_sprite_effect(0x001A, 0x0A22, 0x0373, 0x0000, 0x0000, 0x0000, 0xFFFF);
 				var0001 = script var0002 {
-					face (byte)0x34;	// Note: could be 'face south'
+					face SOUTH;
 				};
 				var0003 = Func09A0(0x0000, 0x0001);
 				if (var0003) {
@@ -60007,7 +60018,7 @@ void Func061D object#(0x61D) () {
 				0xFE9C->si_path_run_usecode(var0005->get_object_position(), 0x000A, var0005, 0x061D, true);
 				var0008 = script 0xFE9C after (var0007 + 0x0002) ticks {
 					nohalt;
-					face (byte)0x32;	// Note: coule be 'face east'
+					face EAST;
 				};
 			}
 			if (var0006 == 0x0015) {
@@ -60015,7 +60026,7 @@ void Func061D object#(0x61D) () {
 				0xFFFD->si_path_run_usecode(var0005->get_object_position(), 0x000A, var0005, 0x061D, true);
 				var0008 = script 0xFFFD after (var0007 + 0x0002) ticks {
 					nohalt;
-					face (byte)0x30;	// Note: coule be 'face north'
+					face NORTH;
 				};
 			}
 			if (var0006 == 0x0016) {
@@ -60023,7 +60034,7 @@ void Func061D object#(0x61D) () {
 				0xFFFE->si_path_run_usecode(var0005->get_object_position(), 0x000A, var0005, 0x061D, true);
 				var0008 = script 0xFFFE after (var0007 + 0x0002) ticks {
 					nohalt;
-					face (byte)0x30;	// Note: coule be 'face north'
+					face NORTH;
 				};
 			}
 			if (var0006 == 0x0017) {
@@ -60031,7 +60042,7 @@ void Func061D object#(0x61D) () {
 				0xFFFF->si_path_run_usecode(var0005->get_object_position(), 0x000A, var0005, 0x061D, true);
 				var0008 = script 0xFFFF after (var0007 + 0x0002) ticks {
 					nohalt;
-					face (byte)0x36;	// Note: coule be 'face west'
+					face WEST;
 				};
 			}
 			if (var0007 > var0002) {
@@ -60268,7 +60279,7 @@ void Func0624 object#(0x624) () {
 	if (event == 0x000A) {
 		UI_close_gumps();
 		var0002 = script 0xFE9C {
-			face (byte)0x30;	// Note: could be 'face north'
+			face NORTH;
 			actor frame bowing;
 			wait 1;
 			actor frame standing;
@@ -63446,7 +63457,7 @@ void Func065A object#(0x65A) () {
 						var000B = [var000B, var000D];
 					}
 					if (var000C == 0x0006) {
-						var000E = ((byte)0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+						var000E = (NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002));
 						var000D = new script {
 							face var000E;
 							actor frame bowing;
@@ -63455,7 +63466,7 @@ void Func065A object#(0x65A) () {
 						var000B = [var000B, var000D];
 					}
 					if (var000C == 0x0007) {
-						var000E = ((byte)0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+						var000E = (NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002));
 						var000D = new script {
 							face var000E;
 							actor frame kneeling;
@@ -63464,7 +63475,7 @@ void Func065A object#(0x65A) () {
 						var000B = [var000B, var000D];
 					}
 					if (var000C == 0x0008) {
-						var000E = ((byte)0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+						var000E = (NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002));
 						var000D = new script {
 							face var000E;
 							actor frame ready;
@@ -69455,7 +69466,7 @@ void Func06E1 object#(0x6E1) () {
 				var0003->set_schedule_type(0x000F);
 				var0004 = script var0003 {
 					nohalt;
-					face (byte)0x34;	// Note: could be 'face south'
+					face SOUTH;
 				};
 				UI_play_sound_effect(0x0053);
 			}
@@ -69567,7 +69578,7 @@ void Func06E3 object#(0x6E3) () {
 			var0003 = script 0xFEFA {
 				nohalt;
 				actor frame standing;
-				face (byte)0x32;	// Note: coule be 'face east'
+				face EAST;
 			};
 			var0003 = script 0xFEFA after 10 ticks {
 				nohalt;
@@ -69631,7 +69642,7 @@ void Func06E3 object#(0x6E3) () {
 					var000D->set_polymorph(0x02D1);
 					var0003 = script var000D {
 						nohalt;
-						face (byte)0x32;	// Note: coule be 'face east'
+						face EAST;
 					};
 					Func09AD(var000D);
 					var0007->remove_item();
@@ -69650,7 +69661,7 @@ void Func06E3 object#(0x6E3) () {
 					var000D->set_polymorph(0x02D1);
 					var0003 = script var000D {
 						nohalt;
-						face (byte)0x34;	// Note: coule be 'face south'
+						face SOUTH;
 					};
 					Func09AD(var000D);
 					var0007->remove_item();
@@ -69694,7 +69705,7 @@ void Func06E4 object#(0x6E4) () {
 		var0002 = script 0xFEFA {
 			nohalt;
 			actor frame standing;
-			face (byte)0x34;	// Note: coule be 'face south'
+			face SOUTH;
 		};
 		var0002 = script 0xFEFA after 10 ticks {
 			nohalt;
@@ -69776,7 +69787,7 @@ void Func06E5 object#(0x6E5) () {
 		var0002 = script 0xFEFA {
 			nohalt;
 			actor frame standing;
-			face (byte)0x30;	// Note: coule be 'face north'
+			face NORTH;
 		};
 		var0002 = script 0xFEFA after 10 ticks {
 			nohalt;
@@ -69875,7 +69886,7 @@ void Func06E6 object#(0x6E6) () {
 			var0007 = script var0006 {
 				nohalt;
 				actor frame standing;
-				face (byte)0x34;	// Note: coule be 'face south'
+				face SOUTH;
 			};
 			var0004 = Func09A0(0x0000, 0x0001);
 			if (var0004) {
@@ -69889,7 +69900,7 @@ void Func06E6 object#(0x6E6) () {
 			var0007 = script var0006 {
 				nohalt;
 				actor frame standing;
-				face (byte)0x32;	// Note: coule be 'face east'
+				face EAST;
 			};
 			var0004 = Func09A0(0x0000, 0x0001);
 			if (var0004) {
@@ -69903,7 +69914,7 @@ void Func06E6 object#(0x6E6) () {
 			var0007 = script var0006 {
 				nohalt;
 				actor frame standing;
-				face (byte)0x34;	// Note: coule be 'face south'
+				face SOUTH;
 			};
 			var0004 = Func09A0(0x0000, 0x0001);
 			if (var0004) {
@@ -69917,7 +69928,7 @@ void Func06E6 object#(0x6E6) () {
 			var0007 = script var0006 {
 				nohalt;
 				actor frame standing;
-				face (byte)0x32;	// Note: coule be 'face east'
+				face EAST;
 			};
 			var0004 = Func09A0(0x0000, 0x0001);
 			if (var0004) {
@@ -69931,7 +69942,7 @@ void Func06E6 object#(0x6E6) () {
 			var0007 = script var0006 {
 				nohalt;
 				actor frame standing;
-				face (byte)0x36;	// Note: coule be 'face west'
+				face WEST;
 			};
 			var0004 = Func09A0(0x0000, 0x0001);
 			if (var0004) {
@@ -69945,7 +69956,7 @@ void Func06E6 object#(0x6E6) () {
 			var0007 = script var0006 {
 				nohalt;
 				actor frame standing;
-				face (byte)0x32;	// Note: coule be 'face east'
+				face EAST;
 			};
 			var0004 = Func09A0(0x0000, 0x0001);
 			if (var0004) {
@@ -69959,7 +69970,7 @@ void Func06E6 object#(0x6E6) () {
 			var0007 = script var0006 {
 				nohalt;
 				actor frame standing;
-				face (byte)0x34;	// Note: coule be 'face south'
+				face SOUTH;
 			};
 			var0004 = Func09A0(0x0000, 0x0001);
 			if (var0004) {
@@ -69973,7 +69984,7 @@ void Func06E6 object#(0x6E6) () {
 			var0007 = script var0006 {
 				nohalt;
 				actor frame standing;
-				face (byte)0x34;	// Note: coule be 'face south'
+				face SOUTH;
 			};
 			var0004 = Func09A0(0x0000, 0x0001);
 			if (var0004) {
@@ -69987,7 +69998,7 @@ void Func06E6 object#(0x6E6) () {
 			var0007 = script var0006 {
 				nohalt;
 				actor frame standing;
-				face (byte)0x32;	// Note: coule be 'face east'
+				face EAST;
 			};
 			var0004 = Func09A0(0x0000, 0x0001);
 			if (var0004) {
@@ -70105,7 +70116,7 @@ void Func06E7 object#(0x6E7) () {
 		var0002 = script 0xFEFA {
 			nohalt;
 			actor frame standing;
-			face (byte)0x34;	// Note: coule be 'face south'
+			face SOUTH;
 		};
 		var0002 = script 0xFEFA after 10 ticks {
 			nohalt;
@@ -70306,7 +70317,7 @@ void Func06EB object#(0x6EB) () {
 			var0006 = script 0xFEFA {
 				nohalt;
 				actor frame standing;
-				face (byte)0x32;	// Note: coule be 'face east'
+				face EAST;
 			};
 			var0006 = script 0xFEFA after 10 ticks {
 				nohalt;
@@ -70370,25 +70381,25 @@ void Func06EC object#(0x6EC) () {
 				UI_sprite_effect(0x0015, 0x09A0, 0x0027, 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x0051);
 				0xFEFA->move_object([0x09A0, 0x0027, 0x0000]);
-				var0004 = (byte)0x32;
+				var0004 = EAST;
 			}
 			if (var0003 == 0x0001) {
 				UI_sprite_effect(0x0015, 0x09C1, 0x0024, 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x0051);
 				0xFEFA->move_object([0x09C1, 0x0024, 0x0000]);
-				var0004 = (byte)0x34;
+				var0004 = SOUTH;
 			}
 			if (var0003 == 0x0002) {
 				UI_sprite_effect(0x0015, 0x099F, 0x0035, 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x0051);
 				0xFEFA->move_object([0x099F, 0x0035, 0x0000]);
-				var0004 = (byte)0x32;
+				var0004 = EAST;
 			}
 			if (var0003 == 0x0003) {
 				UI_sprite_effect(0x0015, 0x09C7, 0x0031, 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x0051);
 				0xFEFA->move_object([0x09C7, 0x0031, 0x0000]);
-				var0004 = (byte)0x34;
+				var0004 = SOUTH;
 			}
 			// Bug: this comparison is always true. I'm not sure what it was
 			// supposed to be. Maybe var0004?
@@ -74913,7 +74924,7 @@ void Func075A object#(0x75A) () {
 		UI_play_sound_effect(0x0051);
 		0xFF31->set_schedule_type(0x000F);
 		var0001 = script 0xFF31 {
-			face (byte)0x36;	// Note: could be 'face west'
+			face SOUTH;
 		};
 		var0002 = Func09A0(0x0000, 0x0001);
 		UI_play_music(0x003F, var0002);
@@ -76321,7 +76332,7 @@ void Func0798 object#(0x798) () {
 						var0008 = [var0008, var000A];
 					}
 					if (var0009 == 0x0006) {
-						var000B = ((byte)0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+						var000B = (NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002));
 						var000A = new script {
 							face var000B;
 							actor frame bowing;
@@ -76330,7 +76341,7 @@ void Func0798 object#(0x798) () {
 						var0008 = [var0008, var000A];
 					}
 					if (var0009 == 0x0007) {
-						var000B = ((byte)0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+						var000B = (NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002));
 						var000A = new script {
 							face var000B;
 							actor frame kneeling;
@@ -76339,7 +76350,7 @@ void Func0798 object#(0x798) () {
 						var0008 = [var0008, var000A];
 					}
 					if (var0009 == 0x0008) {
-						var000B = ((byte)0x30 + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+						var000B = (NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002));
 						var000A = new script {
 							face var000B;
 							actor frame ready;
@@ -77888,7 +77899,7 @@ void Func07DA object#(0x7DA) () {
 		nohalt;
 		actor frame standing;
 		continue;
-		face (byte)0x30;	// Note: could be 'face north'
+		face NORTH;
 	};
 	UI_fade_palette(0x000C, 0x0001, 0x0000);
 	0xFE9C->move_object([0x0A25, 0x0379, 0x0000]);
@@ -79252,7 +79263,7 @@ void Func07EC object#(0x7EC) () {
 			wait 3;
 			actor frame standing;
 			wait 2;
-			face (byte)0x32;	// Note: could be 'face east'
+			face EAST;
 			wait 2;
 			call Func07EC;
 		};
@@ -79335,7 +79346,7 @@ void Func07ED object#(0x7ED) () {
 			say "@Thou wilt pay!@";
 			actor frame bowing;
 			actor frame standing;
-			face (byte)0x32;	// Note: could be 'face east'
+			face EAST;
 			call Func07ED;
 		};
 		var0002 = 0x0000;
@@ -79389,7 +79400,7 @@ void Func07ED object#(0x7ED) () {
 		};
 		var0001 = script 0xFF2D {
 			wait 8;
-			face (byte)0x36;	// Note: could be 'face west'
+			face WEST;
 			// Bug: the next line is interpreted as a 'step 6, 0x53',
 			// (step west and up by 0x53 tiles), which fails.
 			// This likely should have been just 'step west'.
@@ -79830,7 +79841,7 @@ void Func07F7 object#(0x7F7) () {
 	if (gflags[0x0203] && (gflags[0x0204] && gflags[0x0205])) {
 		if (item == Func09A0(0x0005, 0x0002)) {
 			var0000 = script 0xFE9C {
-				face (byte)0x34;	// Note: could be 'face south'
+				face SOUTH;
 			};
 			var0001 = find_nearby(0x0320, 0x002D, 0x0000);
 			var0002 = false;
