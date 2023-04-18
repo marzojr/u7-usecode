@@ -2052,9 +2052,8 @@ void Func019A shape#(0x19A) () {
 				};
 			};
 			var0002 = script var0000 {
-				// Bug: in the original, the repeat jumps one byte too far.
+				frame 0;
 				repeat 24 {
-					frame 0;
 					next frame cycle;
 					continue;
 					sfx 15;
@@ -63421,7 +63420,6 @@ var Func0834 0x834 () {
 		var0005 = var0004->get_lift();
 		if (var0005 == 0x0000) {
 			var0006 = script var0004 {
-				// Bug: in the original, the repeat jumps one byte too far.
 				repeat 3 {
 					sfx 32;
 					call Func0607;
@@ -63438,9 +63436,8 @@ var Func0834 0x834 () {
 		}
 		if (var0005 == 0x0001) {
 			var0006 = script var0004 {
-				// Bug: in the original, the repeat jumps one byte too far.
+				nohalt;
 				repeat 2 {
-					nohalt;
 					sfx 32;
 					call Func0607;
 					frame 1;
@@ -63455,7 +63452,6 @@ var Func0834 0x834 () {
 		}
 		if (var0005 == 0x0002) {
 			var0006 = script var0004 {
-				// Bug: in the original, the repeat jumps one byte too far.
 				repeat 1 {
 					sfx 32;
 					call Func0607;
@@ -63482,7 +63478,6 @@ var Func0834 0x834 () {
 		}
 		if (var0005 == 0x0004) {
 			var0006 = script var0004 {
-				// Bug: in the original, the repeat jumps one byte too far.
 				repeat 3 {
 					sfx 32;
 					call Func0609;
@@ -74551,6 +74546,10 @@ void Func08F3 0x8F3 (var var0000) {
 					for (var0008 in var0000 with var0006 to var0007) {
 						if (var0008->get_npc_prop(0x000A) == 0x0001) {
 							var0005 = true;
+							// Bug: this was meant to go to the dead code below,
+							// but the original ends up breaking from the dialog
+							// entirely. The 'nobreak' blocks below emulate this
+							// bug.
 							break;
 						}
 					} nobreak {

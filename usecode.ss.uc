@@ -7555,7 +7555,6 @@ void Func01DC shape#(0x1DC) () {
 			var0007 = var0006[0x0003];
 			var0008 = UI_input_numeric_value(0x0000, 0x000E, 0x0001, 0x0000);
 			var0009 = script var0000 {
-				// Bug: in the original, the repeat jumps one byte too far.
 				repeat var0008 - var0007 {
 					call Func0607;
 				};
@@ -68454,12 +68453,18 @@ void Func06D4 object#(0x6D4) () {
 		UI_sprite_effect(0x0015, var0004[0x0001], var0004[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		if (var0004[0x0003] < 0x0001) {
 			var0005 = script var0003 {
+				// Bug: because of the invalid opcodes inside the repeats,
+				// they end up jumping one byte too far in this UCC version.
+				// In the originals, they would jump to the 0x06 byte.
 				repeat 6 {
 					// Bug: this is invalid and does nothing. Maybe it was
 					// supposed to be 'call Func0607'?
 					raw(0x0607);
 				};
 				wait 20;
+				// Bug: because of the invalid opcodes inside the repeats,
+				// they end up jumping one byte too far in this UCC version.
+				// In the originals, they would jump to the 0x06 byte.
 				repeat 6 {
 					// Bug: this is invalid and does nothing. Maybe it was
 					// supposed to be 'call Func0609'?
@@ -68469,6 +68474,9 @@ void Func06D4 object#(0x6D4) () {
 		}
 		if (var0004[0x0003] > 0x0005) {
 			var0005 = script var0003 {
+				// Bug: because of the invalid opcodes inside the repeats,
+				// they end up jumping one byte too far in this UCC version.
+				// In the originals, they would jump to the 0x06 byte.
 				repeat 6 {
 					// Bug: this is invalid and does nothing. Maybe it was
 					// supposed to be 'call Func0609'?
@@ -70882,8 +70890,8 @@ void Func06FA object#(0x6FA) () {
 				}
 				if (var000B == 0x0002) {
 					var000C = script var000A {
+						nohalt;
 						repeat 2 {
-							nohalt;
 							sfx 89;
 							call Func0609;
 						};
@@ -70898,8 +70906,8 @@ void Func06FA object#(0x6FA) () {
 				}
 				if (var000B == 0x0003) {
 					var000C = script var000A {
+						nohalt;
 						repeat 3 {
-							nohalt;
 							sfx 89;
 							call Func0609;
 						};
@@ -70913,8 +70921,8 @@ void Func06FA object#(0x6FA) () {
 				}
 				if (var000B == 0x0004) {
 					var000C = script var000A {
+						nohalt;
 						repeat 3 {
-							nohalt;
 							sfx 89;
 							call Func0609;
 						};
@@ -74984,7 +74992,7 @@ void Func075A object#(0x75A) () {
 		UI_play_sound_effect(0x0051);
 		0xFF31->set_schedule_type(0x000F);
 		var0001 = script 0xFF31 {
-			face SOUTH;
+			face WEST;
 		};
 		var0002 = Func09A0(0x0000, 0x0001);
 		UI_play_music(0x003F, var0002);
@@ -77175,8 +77183,8 @@ void Func07B1 object#(0x7B1) () {
 			var0005 = get_item_quantity(0x0000);
 			if (var0004) {
 				var0006 = script var0004 after var0005 ticks {
+					nohalt;
 					repeat 17 {
-						nohalt;
 						next frame;
 						sfx 53;
 						call Func07B1;
@@ -77195,8 +77203,8 @@ void Func07B1 object#(0x7B1) () {
 			var0005 = get_item_quantity(0x0000);
 			if (var0007) {
 				var0006 = script var0007 after var0005 ticks {
+					nohalt;
 					repeat 8 {
-						nohalt;
 						next frame cycle;
 						sfx 5;
 						call Func07B1;
@@ -77215,8 +77223,8 @@ void Func07B1 object#(0x7B1) () {
 			var0005 = get_item_quantity(0x0000);
 			if (var0007) {
 				var0006 = script var0007 after var0005 ticks {
+					nohalt;
 					repeat 10 {
-						nohalt;
 						next frame cycle;
 						sfx 5;
 						call Func07B1;
@@ -78839,8 +78847,8 @@ void Func07E4 object#(0x7E4) () {
 		UI_play_music(0x0016, var0000);
 		var0002->set_barge_dir(0x0002);
 		var0003 = new script {
+			finish;
 			repeat 90 {
-				finish;
 				step east;
 				call Func07E5;
 				nop;
@@ -106273,7 +106281,6 @@ var Func0920 0x920 () {
 		var0005 = var0004->get_lift();
 		if (var0005 == 0x0000) {
 			var0006 = script var0004 {
-				// Bug: the original repeat jumps one element too far back
 				repeat 3 {
 					sfx 89;
 					call Func0607;
@@ -106289,8 +106296,8 @@ var Func0920 0x920 () {
 		}
 		if (var0005 == 0x0001) {
 			var0006 = script var0004 {
+				nohalt;
 				repeat 2 {
-					nohalt;
 					sfx 89;
 					call Func0607;
 				};
@@ -106304,7 +106311,6 @@ var Func0920 0x920 () {
 		}
 		if (var0005 == 0x0002) {
 			var0006 = script var0004 {
-				// Bug: the original repeat jumps one element too far back
 				repeat 1 {
 					sfx 89;
 					call Func0607;
@@ -106328,7 +106334,6 @@ var Func0920 0x920 () {
 			}
 		}
 		if (var0005 == 0x0004) {
-			// Bug: the original repeat jumps one element too far back
 			var0006 = script var0004 {
 				repeat 3 {
 					sfx 89;
