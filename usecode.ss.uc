@@ -1145,7 +1145,7 @@ void Func00E6 shape#(0xE6) () {
 					wait 1;
 					actor frame strike_1h;
 					wait 1;
-					// Bug: the next line is interpreted as a 'step 4, 0x53',
+					// Bug: the next line is interpreted as a 'step SOUTH, 0x53',
 					// (step south and up by 0x53 tiles), which fails.
 					// This likely should have been just 'step south'.
 					raw((byte)0x53); step south; raw((byte)0x53);
@@ -1231,7 +1231,7 @@ void Func00E6 shape#(0xE6) () {
 			var000E = script 0xFFEC {
 				nohalt;
 				call Func07D2;
-				// Bug: the next line is interpreted as a 'step 4, 0x27',
+				// Bug: the next line is interpreted as a 'step SOUTH, 0x27',
 				// followed by a 0x0002, which makes a step south and
 				// up by 0x27 tiles (which fails), followed by a 'nop2'.
 				// This likely should have been just 'step south' followed
@@ -1276,7 +1276,7 @@ void Func00E6 shape#(0xE6) () {
 				var000E = script 0xFFEC {
 					nohalt;
 					call Func07D2;
-					// Bug: the next line is interpreted as a 'step 4, 0x53',
+					// Bug: the next line is interpreted as a 'step SOUTH, 0x53',
 					// (step south and up by 0x53 tiles), which fails.
 					// This likely should have been just 'step south'.
 					raw((byte)0x53); step south; raw((byte)0x53);
@@ -1298,7 +1298,7 @@ void Func00E6 shape#(0xE6) () {
 				var000E = script 0xFFEC {
 					nohalt;
 					call Func07D2;
-					// Bug: the next line is interpreted as a 'step 4, 0x27',
+					// Bug: the next line is interpreted as a 'step SOUTH, 0x27',
 					// followed by a 0x0002, which makes a step south and
 					// up by 0x27 tiles (which fails), followed by a 'nop2'.
 					// This likely should have been just 'step south' followed
@@ -1575,7 +1575,7 @@ void Func00E6 shape#(0xE6) () {
 				say "@Kiss me again!@";
 				face west;
 				wait 10;
-				// Bug: the next line is interpreted as a 'step 4, 0x53',
+				// Bug: the next line is interpreted as a 'step SOUTH, 0x53',
 				// (step south and up by 0x53 tiles), which fails.
 				// This likely should have been just 'step south'.
 				raw((byte)0x53); step south; raw((byte)0x53);
@@ -79473,22 +79473,22 @@ void Func07ED object#(0x7ED) () {
 		var0001 = script 0xFF2D {
 			wait 8;
 			face WEST;
-			// Bug: the next line is interpreted as a 'step 6, 0x53',
+			// Bug: the next line is interpreted as a 'step WEST, 0x53',
 			// (step west and up by 0x53 tiles), which fails.
 			// This likely should have been just 'step west'.
 			raw((byte)0x53); step west; raw((byte)0x53);
 			step west;
-			// Bug: the next line is interpreted as a 'step 6, 0x53',
+			// Bug: the next line is interpreted as a 'step WEST, 0x53',
 			// (step west and up by 0x53 tiles), which fails.
 			// This likely should have been just 'step west'.
 			raw((byte)0x53); step west; raw((byte)0x53);
 			step west;
-			// Bug: the next line is interpreted as a 'step 6, 0x53',
+			// Bug: the next line is interpreted as a 'step WEST, 0x53',
 			// (step west and up by 0x53 tiles), which fails.
 			// This likely should have been just 'step west'.
 			raw((byte)0x53); step west; raw((byte)0x53);
 			step west;
-			// Bug: the next line is interpreted as a 'step 6, 0x53',
+			// Bug: the next line is interpreted as a 'step WEST, 0x53',
 			// (step west and up by 0x53 tiles), which fails.
 			// This likely should have been just 'step west'.
 			raw((byte)0x53); step west; raw((byte)0x53);

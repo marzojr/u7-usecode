@@ -50160,9 +50160,9 @@ void Func0618 object#(0x618) () {
 	if (0xFE9C->get_item_flag(0x0010)) {
 		0xFE9C->clear_item_flag(0x0010);
 		var0000 = script 0xFE9C {
-			step 6, 0;
-			step 6, 0;
-			step 6, 0;
+			step WEST, 0;
+			step WEST, 0;
+			step WEST, 0;
 			wait 10;
 			call Func0401;
 			call Func061A;
