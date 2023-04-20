@@ -1408,6 +1408,7 @@ void Func0142 shape#(0x142) () {
 
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern void Func08FE 0x8FE (var var0000);
+extern void Func0149 shape#(0x0149) ();
 
 void Func0149 shape#(0x149) () {
 	var var0000;
@@ -1438,7 +1439,7 @@ void Func0149 shape#(0x149) () {
 		var0003 = 0xFFFF;
 		var0004 = 0xFFFF;
 		var0005 = 0xFFFE;
-		Func0828(item, var0003, var0004, var0005, 0x0149, item, 0x0007);
+		Func0828(item, var0003, var0004, var0005, Func0149, item, 0x0007);
 	}
 	if (event == 0x0007) {
 		if (!UI_is_pc_inside()) {
@@ -2119,7 +2120,7 @@ void Func01AF shape#(0x1AF) () {
 	var0000 = get_item_frame();
 	if ((var0000 >= 0x0003) && (var0000 <= 0x0005)) {
 		if (event == 0x0001) {
-			Func0828(item, 0x0001, 0x0000, 0xFFFF, 0x01AF, item, 0x0007);
+			Func0828(item, 0x0001, 0x0000, 0xFFFF, Func01AF, item, 0x0007);
 		}
 		if (event == 0x0007) {
 			var0001 = script item {
@@ -2268,7 +2269,7 @@ void Func01AF shape#(0x1AF) () {
 	} else {
 		if (event == 0x0001) {
 			halt_scheduled();
-			Func0828(item, 0x0001, 0x0000, 0xFFFF, 0x01AF, item, 0x0007);
+			Func0828(item, 0x0001, 0x0000, 0xFFFF, Func01AF, item, 0x0007);
 		}
 		if (event == 0x0007) {
 			halt_scheduled();
@@ -2520,6 +2521,7 @@ void Func01BF shape#(0x1BF) () {
 }
 
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
+extern void Func032A shape#(0x032A) ();
 
 void Func01D6 shape#(0x1D6) () {
 	var var0000;
@@ -2530,7 +2532,7 @@ void Func01D6 shape#(0x1D6) () {
 	if (var0000) {
 		var0001 = [0xFFFB, 0xFFFB];
 		var0002 = [0xFFFF, 0xFFFF];
-		Func0828(item, var0001, var0002, 0x0000, 0x032A, var0000, 0x0009);
+		Func0828(item, var0001, var0002, 0x0000, Func032A, var0000, 0x0009);
 	}
 }
 
@@ -2950,7 +2952,7 @@ void Func0247 shape#(0x247) () {
 					var0003 = [0xFFFF, 0xFFFF, 0xFFFF, 0x0000, 0x0000, 0x0000, 0x0001, 0x0001, 0x0001];
 					var0004 = [0x0001, 0x0000, 0xFFFF, 0x0001, 0x0000, 0xFFFF, 0x0001, 0x0000, 0xFFFF];
 					0xFE9C->halt_scheduled();
-					Func0828(item, var0003, var0004, 0xFFFF, 0x0247, item, 0x0007);
+					Func0828(item, var0003, var0004, 0xFFFF, Func0247, item, 0x0007);
 				} else {
 					var0000[0x0002] = (var0000[0x0002] - 0x0005);
 					Func08FF("@There is no room for thy bedroll there.@");
@@ -3257,7 +3259,7 @@ void Func026F shape#(0x26F) () {
 						if ((var0004[0x0003] - 0x0001) == var0003[0x0003]) {
 							var0005 = var0000->get_item_frame();
 							if ((var0005 >= 0x0008) && (var0005 <= 0x000F)) {
-								Func0828(var0002, 0x0000, 0x0002, 0x0000, 0x026F, var0002, 0x0007);
+								Func0828(var0002, 0x0000, 0x0002, 0x0000, Func026F, var0002, 0x0007);
 							}
 						}
 					}
@@ -4337,7 +4339,7 @@ void Func028D shape#(0x28D) () {
 		var0002 = 0xFFFF;
 		var0003 = 0xFFFF;
 		var0004 = 0xFFFF;
-		Func0828(item, var0002, var0003, var0004, 0x062D, item, 0x0007);
+		Func0828(item, var0002, var0003, var0004, Func062D, item, 0x0007);
 	}
 }
 
@@ -4375,7 +4377,7 @@ void Func028E shape#(0x28E) () {
 		var0002 = 0xFFFF;
 		var0003 = 0xFFFF;
 		var0004 = 0xFFFF;
-		Func0828(item, var0002, var0003, var0004, 0x062E, item, 0x0007);
+		Func0828(item, var0002, var0003, var0004, Func062E, item, 0x0007);
 	}
 }
 
@@ -4594,12 +4596,12 @@ void Func029C shape#(0x29C) () {
 			if (!get_container()) {
 				var0005 = [0x0000, 0x0001, 0xFFFF, 0x0001];
 				var0006 = [0x0002, 0x0001, 0x0002, 0x0000];
-				Func0828(item, var0005, var0006, 0xFFFD, 0x029C, item, 0x0007);
+				Func0828(item, var0005, var0006, 0xFFFD, Func029C, item, 0x0007);
 			} else if (!Func0944(item)) {
 				var0007 = Func0945(item);
 				var0005 = [0x0000, 0x0001, 0xFFFF, 0x0001];
 				var0006 = [0x0002, 0x0001, 0x0002, 0x0000];
-				Func0828(var0007, var0005, var0006, 0xFFFD, 0x029C, var0007, 0x0007);
+				Func0828(var0007, var0005, var0006, 0xFFFD, Func029C, var0007, 0x0007);
 			} else {
 				var0008 = script item {
 					wait 2;
@@ -4629,18 +4631,18 @@ void Func029C shape#(0x29C) () {
 			var000C = var000B->get_item_shape();
 			if (var000C == 0x03DF) {
 				if (var000B->get_item_frame() == 0x0001) {
-					Func0828(var000B, 0x0000, 0x0002, 0x0000, 0x029C, var000B, 0x0008);
+					Func0828(var000B, 0x0000, 0x0002, 0x0000, Func029C, var000B, 0x0008);
 				}
 			}
 			if (var000C == 0x02E3) {
 				if ((var000B->get_item_frame() >= 0x0004) && (var000B->get_item_frame() <= 0x0007)) {
-					Func0828(var000B, 0x0001, 0x0000, 0x0000, 0x029C, var000B, 0x0009);
+					Func0828(var000B, 0x0001, 0x0000, 0x0000, Func029C, var000B, 0x0009);
 				}
 			}
 			if (var000C == 0x02E5) {
 				var0003 = var000A->get_item_frame();
 				if ((var0003 >= 0x0008) && (var0003 <= 0x000C)) {
-					Func0828(var000B, 0x0000, 0x0001, 0x0000, 0x029C, var000B, 0x000A);
+					Func0828(var000B, 0x0000, 0x0001, 0x0000, Func029C, var000B, 0x000A);
 				} else {
 					0xFE9C->get_npc_object()->item_say("@The sword's not hot.@");
 				}
@@ -5418,6 +5420,7 @@ void Func02CB shape#(0x2CB) () {
 }
 
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
+extern void Func032A shape#(0x032A) ();
 
 void Func02CF shape#(0x2CF) () {
 	var var0000;
@@ -5428,13 +5431,13 @@ void Func02CF shape#(0x2CF) () {
 	if (var0000) {
 		var0001 = [0x0001, 0x0001, 0xFFFE, 0xFFFE, 0x0000, 0xFFFF, 0x0000, 0xFFFF];
 		var0002 = [0xFFFF, 0xFFFE, 0xFFFF, 0xFFFE, 0x0001, 0x0001, 0xFFFC, 0xFFFC];
-		Func0828(item, var0001, var0002, 0x0000, 0x032A, var0000, 0x0007);
+		Func0828(item, var0001, var0002, 0x0000, Func032A, var0000, 0x0007);
 	} else {
 		var0000 = 0xFE9C->get_npc_object()->get_cont_items(0x032A, 0xFE99, 0x0000);
 		if (var0000) {
 			var0001 = [0x0001, 0x0001, 0xFFFE, 0xFFFE, 0x0000, 0xFFFF, 0x0000, 0xFFFF];
 			var0002 = [0xFFFF, 0xFFFE, 0xFFFF, 0xFFFE, 0x0001, 0x0001, 0xFFFC, 0xFFFC];
-			Func0828(item, var0001, var0002, 0x0000, 0x032A, var0000, 0x0007);
+			Func0828(item, var0001, var0002, 0x0000, Func032A, var0000, 0x0007);
 		}
 	}
 }
@@ -5658,6 +5661,7 @@ void Func02E3 shape#(0x2E3) () {
 }
 
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
+extern void Func032A shape#(0x032A) ();
 
 void Func02E4 shape#(0x2E4) () {
 	var var0000;
@@ -5671,12 +5675,13 @@ void Func02E4 shape#(0x2E4) () {
 		var0002 = [0xFFFF, 0xFFFF];
 		var0003 = find_nearest(0x01D6, 0x0005);
 		if (var0003) {
-			Func0828(var0003, var0001, var0002, 0x0000, 0x032A, var0000, 0x0009);
+			Func0828(var0003, var0001, var0002, 0x0000, Func032A, var0000, 0x0009);
 		}
 	}
 }
 
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
+extern void Func032A shape#(0x032A) ();
 
 void Func02E5 shape#(0x2E5) () {
 	var var0000;
@@ -5687,13 +5692,13 @@ void Func02E5 shape#(0x2E5) () {
 	if (var0000) {
 		var0001 = [0xFFFF, 0xFFFE, 0xFFFF, 0xFFFE, 0x0001, 0x0001, 0xFFFC, 0xFFFC];
 		var0002 = [0x0001, 0x0001, 0xFFFE, 0xFFFE, 0x0000, 0xFFFF, 0x0000, 0xFFFF];
-		Func0828(item, var0001, var0002, 0x0000, 0x032A, var0000, 0x0007);
+		Func0828(item, var0001, var0002, 0x0000, Func032A, var0000, 0x0007);
 	} else {
 		var0000 = 0xFE9C->get_npc_object()->get_cont_items(0x032A, 0xFE99, 0x0000);
 		if (var0000) {
 			var0001 = [0xFFFF, 0xFFFE, 0xFFFF, 0xFFFE, 0x0001, 0x0001, 0xFFFC, 0xFFFC];
 			var0002 = [0x0001, 0x0001, 0xFFFE, 0xFFFE, 0x0000, 0xFFFF, 0x0000, 0xFFFF];
-			Func0828(item, var0001, var0002, 0x0000, 0x032A, var0000, 0x0007);
+			Func0828(item, var0001, var0002, 0x0000, Func032A, var0000, 0x0007);
 		}
 	}
 }
@@ -5725,7 +5730,7 @@ void Func02E7 shape#(0x2E7) () {
 		var0000 = [0x0000, 0xFFFF, 0x0001];
 		var0001 = [0x0001, 0x0001, 0x0001];
 		var0002 = 0xFFFF;
-		Func0828(item, var0000, var0001, var0002, 0x02E7, item, 0x0007);
+		Func0828(item, var0000, var0001, var0002, Func02E7, item, 0x0007);
 	}
 	if (event == 0x0007) {
 		var0003 = Func0827(0xFE9C, item);
@@ -5989,7 +5994,7 @@ void Func02F8 shape#(0x2F8) () {
 		var0006 = var0004->get_item_frame();
 		if (var0005 == 0x0350) {
 			if (var0006 == 0x0003) {
-				Func0828(var0004, 0x0000, 0x0002, 0xFFFE, 0x02F8, var0004, 0x0007);
+				Func0828(var0004, 0x0000, 0x0002, 0xFFFE, Func02F8, var0004, 0x0007);
 			}
 		}
 	}
@@ -6203,6 +6208,7 @@ extern var Func0822 0x822 (var var0000);
 extern void Func0821 0x821 (var var0000);
 extern var Func0826 0x826 (var var0000);
 extern void Func0824 0x824 (var var0000);
+extern void Func0311 shape#(0x0311) ();
 
 void Func0311 shape#(0x311) () {
 	var var0000;
@@ -6300,9 +6306,9 @@ void Func0311 shape#(0x311) () {
 					var000E = 0xFFFF;
 				}
 				var0001[var0003] = (var0001[var0003] + var000E);
-				var000A = UI_path_run_usecode(var0001, 0x0311, var0009, 0x0007);
+				var000A = UI_path_run_usecode(var0001, Func0311, var0009, 0x0007);
 				if (var000A) {
-					UI_set_path_failure(0x0311, var0009, 0x0008);
+					UI_set_path_failure(Func0311, var0009, 0x0008);
 					var000F = get_container();
 					var0010 = UI_get_party_list();
 					while (true) {
@@ -6353,7 +6359,7 @@ void Func0313 shape#(0x313) () {
 		var0000 = 0xFFFF;
 		var0001 = 0xFFFF;
 		var0002 = 0xFFFD;
-		Func0828(item, var0000, var0001, var0002, 0x0313, item, 0x0007);
+		Func0828(item, var0000, var0001, var0002, Func0313, item, 0x0007);
 	}
 	if (event == 0x0007) {
 		var0003 = Func0827(0xFE9C, item);
@@ -6394,7 +6400,7 @@ void Func0314 shape#(0x314) () {
 		var0000 = 0xFFFF;
 		var0001 = 0xFFFF;
 		var0002 = 0xFFFD;
-		Func0828(item, var0000, var0001, var0002, 0x0314, item, 0x0007);
+		Func0828(item, var0000, var0001, var0002, Func0314, item, 0x0007);
 	}
 	if ((event == 0x0007) || (event == 0x0002)) {
 		if (event != 0x0002) {
@@ -6919,13 +6925,13 @@ void Func032A shape#(0x32A) () {
 		if (!get_container()) {
 			var0001 = [0x0000, 0x0001, 0x0001, 0x0001, 0xFFFF, 0xFFFF, 0x0000, 0xFFFF];
 			var0002 = [0x0001, 0x0001, 0x0000, 0xFFFF, 0x0001, 0x0000, 0xFFFF, 0xFFFF];
-			Func0828(item, var0001, var0002, 0xFFFD, 0x032A, item, 0x0003);
+			Func0828(item, var0001, var0002, 0xFFFD, Func032A, item, 0x0003);
 		} else if (!Func0944(item)) {
 			UI_close_gumps();
 			var0003 = Func0945(item);
 			var0001 = [0x0000, 0x0001, 0xFFFF, 0x0001];
 			var0002 = [0x0002, 0x0001, 0x0002, 0x0000];
-			Func0828(var0003, var0001, var0002, 0xFFFD, 0x032A, item, 0x0003);
+			Func0828(var0003, var0001, var0002, 0xFFFD, Func032A, item, 0x0003);
 		} else {
 			UI_close_gumps();
 			var0004 = script item {
@@ -6993,18 +6999,18 @@ void Func032A shape#(0x32A) () {
 						wait 1;
 					};
 				};
-				Func0828(var0006, var0001, var0002, 0x0000, 0x032A, var0006, 0x0004);
+				Func0828(var0006, var0001, var0002, 0x0000, Func032A, var0006, 0x0004);
 			}
 		}
 		if (var0007 == 0x02E5) {
 			var0001 = [0xFFFF, 0xFFFE, 0xFFFF, 0xFFFE, 0x0001, 0x0001, 0xFFFC, 0xFFFC];
 			var0002 = [0x0001, 0x0001, 0xFFFE, 0xFFFE, 0x0000, 0xFFFF, 0x0000, 0xFFFF];
-			Func0828(var0006, var0001, var0002, 0x0000, 0x032A, item, 0x0007);
+			Func0828(var0006, var0001, var0002, 0x0000, Func032A, item, 0x0007);
 		}
 		if (var0007 == 0x02CF) {
 			var0001 = [0x0001, 0x0001, 0xFFFE, 0xFFFE, 0x0000, 0xFFFF, 0x0000, 0xFFFF];
 			var0002 = [0xFFFF, 0xFFFE, 0xFFFF, 0xFFFE, 0x0001, 0x0001, 0xFFFC, 0xFFFC];
-			Func0828(var0006, var0001, var0002, 0x0000, 0x032A, item, 0x0007);
+			Func0828(var0006, var0001, var0002, 0x0000, Func032A, item, 0x0007);
 		}
 		if (var0007 == 0x02E3) {
 			if ((var0006->get_item_frame() >= 0x0004) && (var0006->get_item_frame() <= 0x0007)) {
@@ -7017,7 +7023,7 @@ void Func032A shape#(0x32A) () {
 					return;
 				}
 				if (var0000 == 0x0001) {
-					Func0828(var0006, var0001, var0002, 0x0000, 0x032A, var0006, 0x0008);
+					Func0828(var0006, var0001, var0002, 0x0000, Func032A, var0006, 0x0008);
 				}
 			} else {
 				return;
@@ -7033,7 +7039,7 @@ void Func032A shape#(0x32A) () {
 				return;
 			}
 			if (var0000 == 0x0001) {
-				Func0828(var0006, var0001, var0002, 0xFFFB, 0x032A, var0006, 0x0008);
+				Func0828(var0006, var0001, var0002, 0xFFFB, Func032A, var0006, 0x0008);
 			}
 		}
 		if (var0007 == 0x02E4) {
@@ -7042,7 +7048,7 @@ void Func032A shape#(0x32A) () {
 				if (var0008) {
 					var0001 = [0xFFFB, 0xFFFB];
 					var0002 = [0xFFFF, 0xFFFF];
-					Func0828(var0008, var0001, var0002, 0x0000, 0x032A, item, 0x0009);
+					Func0828(var0008, var0001, var0002, 0x0000, Func032A, item, 0x0009);
 				}
 			} else {
 				0xFE9C->get_npc_object()->item_say("@The bucket is full.@");
@@ -7052,7 +7058,7 @@ void Func032A shape#(0x32A) () {
 			if (var0000 == 0x0000) {
 				var0001 = [0xFFFB, 0xFFFB];
 				var0002 = [0xFFFF, 0xFFFF];
-				Func0828(var0006, var0001, var0002, 0x0000, 0x032A, item, 0x0009);
+				Func0828(var0006, var0001, var0002, 0x0000, Func032A, item, 0x0009);
 			} else {
 				0xFE9C->get_npc_object()->item_say("@The bucket is full.@");
 			}
@@ -7065,7 +7071,7 @@ void Func032A shape#(0x32A) () {
 			var0006 = Func093C(var0006[0x0001], var0006);
 			var0006[0x0001] = var0006[0x0001];
 			var0006[0x0002] = (var0006[0x0002] + 0x0001);
-			var0009 = UI_path_run_usecode(var0006, 0x032A, item, 0x000A);
+			var0009 = UI_path_run_usecode(var0006, Func032A, item, 0x000A);
 		}
 		if (var0006[0x0001] == 0x0000) {
 			if (var0000 == 0x0000) {
@@ -7074,7 +7080,7 @@ void Func032A shape#(0x32A) () {
 			}
 			var0006 = Func093C(var0006[0x0001], var0006);
 			var0006[0x0002] = (var0006[0x0002] + 0x0001);
-			var0009 = UI_path_run_usecode(var0006, 0x032A, item, 0x000A);
+			var0009 = UI_path_run_usecode(var0006, Func032A, item, 0x000A);
 		}
 	}
 	if (event == 0x0004) {
@@ -50677,8 +50683,8 @@ void Func0624 object#(0x624) () {
 		var0000 = [0xFFFF, 0xFFFF, 0xFFFF, 0x0000, 0x0000, 0x0000, 0x0001, 0x0001, 0x0001];
 		var0001 = [0x0001, 0x0000, 0xFFFF, 0x0001, 0x0000, 0xFFFF, 0x0001, 0x0000, 0xFFFF];
 		0xFE9C->halt_scheduled();
-		Func0828(item, var0000, var0001, 0xFFFF, 0x0624, item, 0x0007);
-		UI_set_path_failure(0x0624, item, 0x0002);
+		Func0828(item, var0000, var0001, 0xFFFF, Func0624, item, 0x0007);
+		UI_set_path_failure(Func0624, item, 0x0002);
 	}
 	if (event == 0x0002) {
 		set_item_shape(0x0247);
@@ -51112,6 +51118,7 @@ labelFunc062C_015C:
 extern var Func0827 0x827 (var var0000, var var0001);
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern void Func08FF 0x8FF (var var0000);
+extern void Func028B shape#(0x028B) ();
 
 void Func062D object#(0x62D) () {
 	var var0000;
@@ -51159,7 +51166,7 @@ void Func062D object#(0x62D) () {
 			var0006 = [0x0001, 0x0001];
 			var0007 = [0x0000, 0x0000];
 			var0008 = 0xFFFF;
-			Func0828(var0004, var0006, var0007, var0008, 0x028B, var0004, 0x0007);
+			Func0828(var0004, var0006, var0007, var0008, Func028B, var0004, 0x0007);
 		} else {
 			var0009 = "@Why dost thou not spin that wool into thread?@";
 			Func08FF(var0009);
@@ -51170,6 +51177,7 @@ void Func062D object#(0x62D) () {
 extern var Func0827 0x827 (var var0000, var var0001);
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern void Func08FF 0x8FF (var var0000);
+extern void Func0105 shape#(0x0105) ();
 
 void Func062E object#(0x62E) () {
 	var var0000;
@@ -51217,7 +51225,7 @@ void Func062E object#(0x62E) () {
 			var0006 = [0x0000, 0xFFFF, 0xFFFE];
 			var0007 = [0x0001, 0x0001, 0x0001];
 			var0008 = 0xFFFF;
-			Func0828(var0004, var0006, var0007, var0008, 0x0105, var0004, 0x0007);
+			Func0828(var0004, var0006, var0007, var0008, Func0105, var0004, 0x0007);
 		} else {
 			var0009 = "@Why dost thou not weave cloth with that thread on the loom?@";
 			Func08FF(var0009);
@@ -56513,7 +56521,7 @@ void Func069D object#(0x69D) () {
 		var0002 = [0xFFFF, 0x0000, 0x0001, 0x0000];
 	}
 	var0005 = 0xFE9C->get_npc_object();
-	Func0828(var0005, var0001, var0002, 0x0000, 0x069D, var0005, 0x0007);
+	Func0828(var0005, var0001, var0002, 0x0000, Func069D, var0005, 0x0007);
 }
 
 extern void Func069F object#(0x69F) ();
@@ -63881,6 +63889,7 @@ void Func083D 0x83D () {
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern var Func080E 0x80E (var var0000);
 extern void Func083F 0x83F (var var0000, var var0001);
+extern void Func0631 object#(0x0631) ();
 
 void Func083E 0x83E (var var0000, var var0001) {
 	var var0002;
@@ -63895,7 +63904,7 @@ void Func083E 0x83E (var var0000, var var0001) {
 		if (var0000->in_usecode()) {
 			return;
 		}
-		Func0828(var0000, 0xFFFE, 0xFFFE, 0xFFFF, 0x0631, var0000, 0x0007);
+		Func0828(var0000, 0xFFFE, 0xFFFE, 0xFFFF, Func0631, var0000, 0x0007);
 	}
 	if (var0001 == 0x0002) {
 		var0002 = get_item_quality();
