@@ -68453,35 +68453,38 @@ void Func06D4 object#(0x6D4) () {
 		UI_sprite_effect(0x0015, var0004[0x0001], var0004[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		if (var0004[0x0003] < 0x0001) {
 			var0005 = script var0003 {
-				// Bug: because of the invalid opcodes inside the repeats,
-				// they end up jumping one byte too far in this UCC version.
-				// In the originals, they would jump to the 0x06 byte.
-				repeat 6 {
-					// Bug: this is invalid and does nothing. Maybe it was
-					// supposed to be 'call Func0607'?
-					raw(0x0607);
-				};
+				// Bug: this is invalid and does nothing. Maybe it was
+				// supposed to be 'call Func0607'? As is, it becomes two
+				// opcodes (0x07 followed by 0x06), both of which are
+				// invalid and does nothing.
+				raw(0x0607);
+				// This is a repeat opcode that jumps to the 0x06 "opcode"
+				// above. I did it this way so this code compiles identically
+				// to the original usecode.
+				raw((byte)0x0B); raw(-1); raw(0x0006);
 				wait 20;
-				// Bug: because of the invalid opcodes inside the repeats,
-				// they end up jumping one byte too far in this UCC version.
-				// In the originals, they would jump to the 0x06 byte.
-				repeat 6 {
-					// Bug: this is invalid and does nothing. Maybe it was
-					// supposed to be 'call Func0609'?
-					raw(0x0609);
-				};
+				// Bug: this is invalid and does nothing. Maybe it was
+				// supposed to be 'call Func0609'? As is, it becomes two
+				// opcodes (0x09 followed by 0x06), both of which are
+				// invalid and does nothing.
+				raw(0x0609);
+				// This is a repeat opcode that jumps to the 0x06 "opcode"
+				// above. I did it this way so this code compiles identically
+				// to the original usecode.
+				raw((byte)0x0B); raw(-1); raw(0x0006);
 			};
 		}
 		if (var0004[0x0003] > 0x0005) {
 			var0005 = script var0003 {
-				// Bug: because of the invalid opcodes inside the repeats,
-				// they end up jumping one byte too far in this UCC version.
-				// In the originals, they would jump to the 0x06 byte.
-				repeat 6 {
-					// Bug: this is invalid and does nothing. Maybe it was
-					// supposed to be 'call Func0609'?
-					raw(0x0609);
-				};
+				// Bug: this is invalid and does nothing. Maybe it was
+				// supposed to be 'call Func0609'? As is, it becomes two
+				// opcodes (0x09 followed by 0x06), both of which are
+				// invalid and does nothing.
+				raw(0x0609);
+				// This is a repeat opcode that jumps to the 0x06 "opcode"
+				// above. I did it this way so this code compiles identically
+				// to the original usecode.
+				raw((byte)0x0B); raw(-1); raw(0x0006);
 			};
 		}
 	}
