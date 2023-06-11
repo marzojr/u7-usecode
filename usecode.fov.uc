@@ -678,7 +678,7 @@ void Func009F shape#(0x9F) () {
 		var0000 = UI_game_hour();
 		var0001 = "am";
 		if (var0000 > 0x000C) {
-			var0000 = (var0000 - 0x000C);
+			var0000 -= 0x000C;
 			var0001 = "pm";
 		}
 		if (var0000 == 0x0000) {
@@ -911,7 +911,7 @@ void Func00FC shape#(0xFC) () {
 	if (event == 0x0001) {
 		var0000 = UI_game_hour();
 		if (var0000 > 0x000C) {
-			var0000 = (var0000 - 0x000C);
+			var0000 -= 0x000C;
 		}
 		if (var0000 == 0x0000) {
 			var0000 = 0x000C;
@@ -1076,7 +1076,7 @@ void Func011C shape#(0x11C) () {
 			return;
 		}
 		if ((var0000 >= 0x000D) && (var0000 <= 0x0014)) {
-			var0000 = (var0000 - 0x000C);
+			var0000 -= 0x000C;
 			item_say((" " + var0000) + " o'clock");
 			return;
 		}
@@ -1193,7 +1193,7 @@ void Func0124 shape#(0x124) () {
 				var000A[var000E] = (var000D[0x0001] - var0012[0x0001]);
 				var000B[var000E] = (var000D[0x0002] - var0012[0x0002]);
 				var000C[var000E] = var0011->get_item_frame_rot();
-				var000E = (var000E + 0x0001);
+				var000E += 0x0001;
 			}
 			0xFE9B->move_object(var0006);
 			var000D = 0xFE9C->get_object_position();
@@ -1201,7 +1201,7 @@ void Func0124 shape#(0x124) () {
 			for (var0011 in var0009 with var0013 to var0014) {
 				var0011->move_object([(var000D[0x0001] - var000A[var000E]), (var000D[0x0002] - var000B[var000E]), var000D[0x0003]]);
 				var0011->set_item_frame_rot(var000C[var000E]);
-				var000E = (var000E + 0x0001);
+				var000E += 0x0001;
 			}
 		}
 	}
@@ -3394,7 +3394,7 @@ void Func0270 shape#(0x270) () {
 						var0013[0x0002] = (var0013[0x0002] + 0x0002);
 						var0013[0x0003] = (var0013[0x0003] - 0x0003);
 						var0014 = UI_update_last_created(var0013);
-						var0011 = (var0011 + 0x0001);
+						var0011 += 0x0001;
 					}
 					var0015 = var0008->find_nearby(0x032A, 0x0005, 0x0000);
 					if (var0015) {
@@ -4175,17 +4175,17 @@ void Func0289 shape#(0x289) () {
 			if ((var0001 + 0x0005) > 0x001E) {
 				var0001 = 0x001E;
 			} else {
-				var0001 = (var0001 + 0x0005);
+				var0001 += 0x0005;
 			}
 			if ((var0002 + 0x0005) > 0x001E) {
 				var0002 = 0x001E;
 			} else {
-				var0002 = (var0002 + 0x0005);
+				var0002 += 0x0005;
 			}
 			if ((var0003 + 0x0005) > 0x001E) {
 				var0003 = 0x001E;
 			} else {
-				var0003 = (var0003 + 0x0005);
+				var0003 += 0x0005;
 			}
 			Func0835(var0000, 0x0000, var0001);
 			Func0835(var0000, 0x0001, var0002);
@@ -4392,7 +4392,7 @@ void Func0291 shape#(0x291) () {
 		} else {
 			var0001 = 0xFFFF;
 		}
-		var0000 = (var0000 + var0001);
+		var0000 += var0001;
 		set_item_frame(var0000);
 	}
 }
@@ -4498,7 +4498,7 @@ void Func0296 shape#(0x296) () {
 		var0004 = 0x0000;
 		var0005 = 0xFE9C->find_nearby(0x01FD, 0x000F, 0x0000);
 		for (var0008 in var0005 with var0006 to var0007) {
-			var0004 = (var0004 + 0x0001);
+			var0004 += 0x0001;
 		}
 		if (var0004 != 0x0000) {
 			if (UI_die_roll(0x0001, 0x000A) <= var0004) {
@@ -4826,7 +4826,7 @@ void Func02A6 shape#(0x2A6) () {
 		} else {
 			var0001 = 0xFFFF;
 		}
-		var0000 = (var0000 + var0001);
+		var0000 += var0001;
 		set_item_frame(var0000);
 	}
 }
@@ -5769,7 +5769,7 @@ void Func02E7 shape#(0x2E7) () {
 			var0005 = 0x0008;
 		}
 		if (var0005 > 0x0003) {
-			var0005 = (var0005 - UI_die_roll(0x0000, 0x0002));
+			var0005 -= UI_die_roll(0x0000, 0x0002);
 		}
 		if (var0005 == 0x0007) {
 			var0005 = 0x0006;
@@ -7240,22 +7240,22 @@ void Func032A shape#(0x32A) () {
 				};
 			}
 			if ((var0017[0x0003] == 0x0002) || (var0017[0x0003] == 0x0003)) {
-				var0018 = (var0018 + 0x0001);
+				var0018 += 0x0001;
 			}
 			if ((var0017[0x0003] == 0x0004) || (var0017[0x0003] == 0x0005)) {
-				var0018 = (var0018 + 0x0002);
+				var0018 += 0x0002;
 			}
 			if ((var0017[0x0003] == 0x0006) || (var0017[0x0003] == 0x0007)) {
-				var0018 = (var0018 + 0x0003);
+				var0018 += 0x0003;
 			}
 			if ((var0017[0x0003] == 0x0008) || (var0017[0x0003] == 0x0009)) {
-				var0018 = (var0018 + 0x0004);
+				var0018 += 0x0004;
 			}
 			if ((var0017[0x0003] == 0x000A) || (var0017[0x0003] == 0x000B)) {
-				var0018 = (var0018 + 0x0005);
+				var0018 += 0x0005;
 			}
 			if ((var0017[0x0003] == 0x000C) || (var0017[0x0003] == 0x000D)) {
-				var0018 = (var0018 + 0x0006);
+				var0018 += 0x0006;
 			}
 			var001D[0x0001] = (var0017[0x0001] - var0018);
 			var001D[0x0002] = (var0017[0x0002] - var0018);
@@ -7403,7 +7403,7 @@ void Func0334 shape#(0x334) () {
 		for (var0006 in var0002 with var0004 to var0005) {
 			if (var0000->find_nearby(var0006, 0x0005, 0x00B0)) {
 				if (var0001 < 0x000B) {
-					var0001 = (var0001 + 0x0001);
+					var0001 += 0x0001;
 					var0007 = var0000->set_item_quality(var0001);
 					UI_close_gumps();
 					var0003 = true;
@@ -9071,7 +9071,7 @@ void Func0401 object#(0x401) () {
 				say("\"I was waiting until thou didst ask me!\"");
 				var000F = 0x0000;
 				for (var0012 in var0001 with var0010 to var0011) {
-					var000F = (var000F + 0x0001);
+					var000F += 0x0001;
 				}
 				if (var000F < 0x0008) {
 					0xFFFF->add_to_party();
@@ -9335,7 +9335,7 @@ void Func0402 object#(0x402) () {
 				say("\"'Tis about time thou didst ask again!\"");
 				var000D = 0x0000;
 				for (var0010 in var0002 with var000E to var000F) {
-					var000D = (var000D + 0x0001);
+					var000D += 0x0001;
 				}
 				if (var000D < 0x0008) {
 					0xFFFE->add_to_party();
@@ -9639,7 +9639,7 @@ void Func0403 object#(0x403) () {
 				var0007 = 0x0000;
 				var0001 = UI_get_party_list();
 				for (var000A in var0001 with var0008 to var0009) {
-					var0007 = (var0007 + 0x0001);
+					var0007 += 0x0001;
 				}
 				if (var0007 < 0x0008) {
 					say("Shamino looks relieved. \"I am -so- glad thou didst ask me that.\" He gathers his gear and prepares to follow you.");
@@ -9830,7 +9830,7 @@ void Func0404 object#(0x404) () {
 				var000F = 0x0000;
 				var0001 = UI_get_party_list();
 				for (var0012 in var0001 with var0010 to var0011) {
-					var000F = (var000F + 0x0001);
+					var000F += 0x0001;
 				}
 				if (var000F < 0x0008) {
 					say("\"It would be both an honor and a pleasure to join thee on thine adventures once again.\"");
@@ -10090,7 +10090,7 @@ void Func0405 object#(0x405) () {
 				var0004 = 0x0000;
 				var0005 = UI_get_party_list();
 				for (var0008 in var0005 with var0006 to var0007) {
-					var0004 = (var0004 + 0x0001);
+					var0004 += 0x0001;
 				}
 				if (var0004 < 0x0008) {
 					say("\"I would be honored to join thee, ",
@@ -10543,7 +10543,7 @@ void Func0407 object#(0x407) () {
 				var0006 = 0x0000;
 				var0002 = UI_get_party_list();
 				for (var0009 in var0002 with var0007 to var0008) {
-					var0006 = (var0006 + 0x0001);
+					var0006 += 0x0001;
 				}
 				if (var0006 < 0x0006) {
 					say("Sentri bows. \"I am very pleased to join thy group.\"");
@@ -10763,7 +10763,7 @@ void Func0408 object#(0x408) () {
 				var0005 = 0x0000;
 				var0001 = UI_get_party_list();
 				for (var0008 in var0001 with var0006 to var0007) {
-					var0005 = (var0005 + 0x0001);
+					var0005 += 0x0001;
 				}
 				if (var0005 < 0x0006) {
 					if (gflags[0x0101]) {
@@ -11020,7 +11020,7 @@ void Func0409 object#(0x409) () {
 				var0007 = 0x0000;
 				var0001 = UI_get_party_list();
 				for (var000A in var0001 with var0008 to var0009) {
-					var0007 = (var0007 + 0x0001);
+					var0007 += 0x0001;
 				}
 				if (var0007 < 0x0006) {
 					say("\"It would be an honor, ",
@@ -11309,7 +11309,7 @@ void Func040A object#(0x40A) () {
 				} else {
 					say("\"I am called Tseramed. Art thou Fellowship members? How art thou called?\"");
 					UI_push_answers();
-					var0009 = (var0009 + 0x0001);
+					var0009 += 0x0001;
 					add([var0000, "Fellowship"]);
 					if (!gflags[0x0161]) {
 						add("Avatar");
@@ -13105,7 +13105,7 @@ void Func0413 object#(0x413) () {
 					var0006 = UI_get_party_list();
 					var0007 = 0x0000;
 					for (var000A in var0006 with var0008 to var0009) {
-						var0007 = (var0007 + 0x0001);
+						var0007 += 0x0001;
 					}
 					var000B = (var0007 * 0x0006);
 					var000C = 0xFE9B->count_objects(0x0284, 0xFE99, 0xFE99);
@@ -13264,7 +13264,7 @@ void Func0415 object#(0x415) () {
 			case "name":
 				say("\"My name is Gargan.\"~He sniffs loudly.");
 				remove("name");
-				var0002 = (var0002 + 0x0001);
+				var0002 += 0x0001;
 				if (var0002 == 0x0006) {
 					Func088D();
 				}
@@ -13274,7 +13274,7 @@ void Func0415 object#(0x415) () {
 				say("\"I am the Trinsic shipwright. If thou wouldst like to know about a ship or a sextant, just say so.\"");
 				say("Gargan coughs.");
 				add(["ship", "sextant"]);
-				var0002 = (var0002 + 0x0001);
+				var0002 += 0x0001;
 				if (var0002 == 0x0006) {
 					Func088D();
 				}
@@ -13285,7 +13285,7 @@ void Func0415 object#(0x415) () {
 				say("Gargan wipes his runny nose on his sleeve.");
 				remove("ship");
 				add(["Owen", "deed"]);
-				var0002 = (var0002 + 0x0001);
+				var0002 += 0x0001;
 				if (var0002 == 0x0006) {
 					Func088D();
 				}
@@ -13311,7 +13311,7 @@ void Func0415 object#(0x415) () {
 						say("\"Suit thyself.\"~Gargan sneezes.");
 					}
 					remove("sextant");
-					var0002 = (var0002 + 0x0001);
+					var0002 += 0x0001;
 					if (var0002 == 0x0006) {
 						Func088D();
 					}
@@ -13321,7 +13321,7 @@ void Func0415 object#(0x415) () {
 			case "Owen":
 				say("\"Thou hast not heard of Owen? Finest shipwright in the land. He lives in Minoc.\"~Gargan coughs.");
 				remove("Owen");
-				var0002 = (var0002 + 0x0001);
+				var0002 += 0x0001;
 				if (var0002 == 0x0006) {
 					Func088D();
 				}
@@ -13358,7 +13358,7 @@ void Func0415 object#(0x415) () {
 						}
 					}
 					remove("deed");
-					var0002 = (var0002 + 0x0001);
+					var0002 += 0x0001;
 					if (var0002 == 0x0006) {
 						Func088D();
 					}
@@ -13374,7 +13374,7 @@ void Func0415 object#(0x415) () {
 					0xFFEB->show_npc_face(0x0000);
 				}
 				remove("murder");
-				var0002 = (var0002 + 0x0001);
+				var0002 += 0x0001;
 				if (var0002 == 0x0006) {
 					Func088D();
 				}
@@ -13383,7 +13383,7 @@ void Func0415 object#(0x415) () {
 			case "Crown Jewel":
 				say("\"Yes, that ship was docked overnight.\" He consults his log. \"She sailed for Britain at sunrise. I do not recall seeing anyone get on or off.\"~Gargan snorts and coughs a couple of times.");
 				remove("Crown Jewel");
-				var0002 = (var0002 + 0x0001);
+				var0002 += 0x0001;
 				if (var0002 == 0x0006) {
 					Func088D();
 				}
@@ -13399,7 +13399,7 @@ void Func0415 object#(0x415) () {
 					0xFFEB->show_npc_face(0x0000);
 				}
 				remove("Hook");
-				var0002 = (var0002 + 0x0001);
+				var0002 += 0x0001;
 				if (var0002 == 0x0006) {
 					Func088D();
 				}
@@ -13408,7 +13408,7 @@ void Func0415 object#(0x415) () {
 			case "Fellowship":
 				say("\"I am too old to pay attention to them.\"~Gargan wipes his runny nose on his sleeve.");
 				remove("Fellowship");
-				var0002 = (var0002 + 0x0001);
+				var0002 += 0x0001;
 				if (var0002 == 0x0006) {
 					Func088D();
 				}
@@ -17243,7 +17243,7 @@ void Func042E object#(0x42E) () {
 						var0003 = UI_get_party_list();
 						var0004 = 0x0000;
 						for (var0007 in var0003 with var0005 to var0006) {
-							var0004 = (var0004 + 0x0001);
+							var0004 += 0x0001;
 						}
 						var0008 = (var0004 * 0x000A);
 						var0009 = 0xFE9B->count_objects(0x0284, 0xFE99, 0xFE99);
@@ -20343,7 +20343,7 @@ void Func0444 object#(0x444) () {
 							var0002 = UI_get_party_list();
 							var0005 = 0x0000;
 							for (var0008 in var0002 with var0006 to var0007) {
-								var0005 = (var0005 + 0x0001);
+								var0005 += 0x0001;
 							}
 							var0009 = UI_add_party_items(var0005, 0x0179, 0xFE99, 0x0009, true);
 							var000A = UI_add_party_items(var0005, 0x0179, 0xFE99, 0x0006, true);
@@ -21009,7 +21009,7 @@ void Func0449 object#(0x449) () {
 					var0002 = UI_get_party_list();
 					var0003 = 0x0000;
 					for (var0006 in var0002 with var0004 to var0005) {
-						var0003 = (var0003 + 0x0001);
+						var0003 += 0x0001;
 					}
 					var0007 = UI_add_party_items(var0003, 0x0274, 0xFE99, 0x0000, true);
 					if (var0007) {
@@ -21662,7 +21662,7 @@ void Func044E object#(0x44E) () {
 					var0001 = UI_get_party_list();
 					var0002 = 0x0000;
 					for (var0005 in var0001 with var0003 to var0004) {
-						var0002 = (var0002 + 0x0001);
+						var0002 += 0x0001;
 					}
 					var0006 = (var0002 * 0x0008);
 					var0007 = 0xFE9B->count_objects(0x0284, 0xFE99, 0xFE99);
@@ -23761,7 +23761,7 @@ void Func045C object#(0x45C) () {
 						var0004 = UI_get_party_list();
 						var0005 = 0x0000;
 						for (var0008 in var0004 with var0006 to var0007) {
-							var0005 = (var0005 + 0x0001);
+							var0005 += 0x0001;
 						}
 						var0009 = (var0005 * 0x0008);
 						var000A = 0xFE9B->count_objects(0x0284, 0xFE99, 0xFE99);
@@ -25908,7 +25908,7 @@ void Func046C object#(0x46C) () {
 				var0011 = 0x0000;
 				var0012 = false;
 				for (var0015 in var0010 with var0013 to var0014) {
-					var0011 = (var0011 + 0x0001);
+					var0011 += 0x0001;
 					var0016 = var0015->get_item_flag(0x0008);
 					if (var0016) {
 						var0012 = true;
@@ -27995,7 +27995,7 @@ void Func047A object#(0x47A) () {
 						var0009 = UI_get_party_list();
 						var000A = 0x0000;
 						for (var000D in var0009 with var000B to var000C) {
-							var000A = (var000A + 0x0001);
+							var000A += 0x0001;
 						}
 						var000E = (var000A * 0x0005);
 						var000F = 0xFE9B->count_objects(0x0284, 0xFE99, 0xFE99);
@@ -29434,7 +29434,7 @@ labelFunc0482_00E5:
 					var0006 = UI_get_party_list();
 					var0007 = 0x0000;
 					for (var000A in var0006 with var0008 to var0009) {
-						var0007 = (var0007 + 0x0001);
+						var0007 += 0x0001;
 					}
 					var000B = (var0007 * 0x0003);
 					var000C = 0xFE9B->count_objects(0x0284, 0xFE99, 0xFE99);
@@ -32532,7 +32532,7 @@ void Func0495 object#(0x495) () {
 	var0001 = UI_get_party_list();
 	var0002 = 0x0000;
 	for (var0005 in var0001 with var0003 to var0004) {
-		var0002 = (var0002 + 0x0001);
+		var0002 += 0x0001;
 	}
 	add(["name", "job", "bye"]);
 	if (!gflags[0x02C7]) {
@@ -37835,7 +37835,7 @@ void Func04B3 object#(0x4B3) () {
 					var0003 = UI_get_party_list();
 					var0004 = 0x0000;
 					for (var0007 in var0003 with var0005 to var0006) {
-						var0004 = (var0004 + 0x0001);
+						var0004 += 0x0001;
 					}
 					var0008 = (var0004 * 0x0005);
 					var0009 = 0xFE9B->count_objects(0x0284, 0xFE99, 0xFE99);
@@ -43270,7 +43270,7 @@ void Func04D9 object#(0x4D9) () {
 						var0008 = 0x0000;
 						var0009 = UI_get_party_list();
 						for (var000C in var0009 with var000A to var000B) {
-							var0008 = (var0008 + 0x0001);
+							var0008 += 0x0001;
 						}
 						if (var0008 == 0x0001) {
 							var000D = "human";
@@ -43371,7 +43371,7 @@ void Func04DA object#(0x4DA) () {
 						var0008 = 0x0000;
 						var0009 = UI_get_party_list();
 						for (var000C in var0009 with var000A to var000B) {
-							var0008 = (var0008 + 0x0001);
+							var0008 += 0x0001;
 						}
 						if (var0008 == 0x0001) {
 							var000D = "human";
@@ -45287,7 +45287,7 @@ void Func04E7 object#(0x4E7) () {
 					var0005 = UI_get_party_list();
 					var0006 = 0x0000;
 					for (var0009 in var0005 with var0007 to var0008) {
-						var0006 = (var0006 + 0x0001);
+						var0006 += 0x0001;
 					}
 					var000A = (var0006 * 0x000A);
 					var000B = 0xFE9B->count_objects(0x0284, 0xFE99, 0xFE99);
@@ -45630,7 +45630,7 @@ void Func04E9 object#(0x4E9) () {
 							var0004 = 0x0000;
 							var0005 = 0xFE9B->count_objects(0x0284, 0xFE99, 0xFE99);
 							for (var0008 in var0003 with var0006 to var0007) {
-								var0004 = (var0004 + 0x0001);
+								var0004 += 0x0001;
 							}
 							if (var0005 >= (var0004 * 0x0002)) {
 								var0009 = UI_remove_party_items(var0004, 0x0284, 0xFE99, 0xFE99, true);
@@ -49340,8 +49340,8 @@ void Func0606 object#(0x606) () {
 	var0000 = get_object_position();
 	var0001 = var0000[0x0001];
 	var0002 = var0000[0x0002];
-	var0001 = (var0001 - 0x0003);
-	var0002 = (var0002 - 0x0004);
+	var0001 -= 0x0003;
+	var0002 -= 0x0004;
 	UI_sprite_effect(0x0009, var0001, var0002, 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_play_sound_effect(0x0045);
 }
@@ -49516,14 +49516,14 @@ void Func060A object#(0x60A) () {
 		if ((var000E[0x0001] == (var000F[0x0001] + var0002)) && (var000E[0x0002] == (var000F[0x0002] + var0003))) {
 			var000D->set_item_flag(0x000B);
 			var0010 = var000D->get_item_quantity(0x0000);
-			var0010 = (var0010 * var000A);
+			var0010 *= var000A;
 			while (var0010 > 0x0064) {
 				var0008 = UI_create_new_object(0x0284);
 				if (var0008) {
 					var0011 = var0008->set_item_quantity(0x0064);
 					var0011 = UI_update_last_created(var000E);
 				}
-				var0010 = (var0010 - 0x0064);
+				var0010 -= 0x0064;
 			}
 			var0008 = UI_create_new_object(0x0284);
 			if (var0008) {
@@ -49633,14 +49633,14 @@ void Func060C object#(0x60C) () {
 			if ((var0011[0x0001] <= var000B[0x0001]) && ((var0011[0x0001] >= (var000B[0x0001] - 0x0005)) && ((var0011[0x0002] <= (var000B[0x0002] + 0x0008)) && (var0011[0x0002] >= (var000B[0x0002] - 0x0008))))) {
 				if (var0011[0x0002] == var0005[0x0002]) {
 					var0012 = var0010->get_item_quantity(0x0284);
-					var0012 = (var0012 * var000C);
+					var0012 *= var000C;
 					while (var0012 > 0x0064) {
 						var0013 = UI_create_new_object(0x0284);
 						if (var0013) {
 							var000D = var0013->set_item_quantity(0x0064);
 							var000D = UI_update_last_created(var0011);
 						}
-						var0012 = (var0012 - 0x0064);
+						var0012 -= 0x0064;
 					}
 					var0013 = UI_create_new_object(0x0284);
 					if (var0013) {
@@ -49861,7 +49861,7 @@ void Func060E object#(0x60E) () {
 						};
 					}
 					var0003->move_object(var001D);
-					var0016 = (var0016 + 0x0002);
+					var0016 += 0x0002;
 				}
 			}
 			0xFE9C->clear_item_flag(0x0004);
@@ -50882,10 +50882,10 @@ void Func0626 object#(0x626) () {
 				if ((Func0932(var000A[0x0001] - var0006[var000C]) <= 0x0002) && (Func0932(var000A[0x0002] - var0006[(var000C + 0x0001)]) <= 0x0002)) {
 					var0005->remove_item();
 					var0006 = (var0006 & var000A);
-					var0007 = (var0007 + 0x0001);
+					var0007 += 0x0001;
 					break;
 				}
-				var000B = (var000B + 0x0001);
+				var000B += 0x0001;
 			}
 		}
 		UI_play_sound_effect2(0x0025, item);
@@ -51982,7 +51982,7 @@ void Func063D object#(0x63D) () {
 				say("\"",
 					var0002,
 					"\"");
-				var0001 = (var0001 + 0x0001);
+				var0001 += 0x0001;
 			}
 		}
 	}
@@ -52857,7 +52857,7 @@ void Func0651 object#(0x651) () {
 	if (event == 0x0002) {
 		var0006 = 0x0000;
 		for (var0009 in var0000 with var0007 to var0008) {
-			var0006 = (var0006 + 0x0001);
+			var0006 += 0x0001;
 			if (var0009 == get_item_shape()) {
 				set_item_shape(var0001[var0006]);
 			}
@@ -53226,7 +53226,7 @@ void Func065A object#(0x65A) () {
 	if (event == 0x0002) {
 		var0001 = UI_die_roll(0x0007, 0x000A);
 		while (var0001 > 0x0000) {
-			var0001 = (var0001 - 0x0001);
+			var0001 -= 0x0001;
 			var0002 = 0x0205;
 			var0003 = UI_summon(var0002, false);
 		}
@@ -53461,7 +53461,7 @@ void Func0660 object#(0x660) () {
 		}
 		var0005 = UI_die_roll(var0004, var0003);
 		while (var0005 > 0x0000) {
-			var0005 = (var0005 - 0x0001);
+			var0005 -= 0x0001;
 			var0006 = UI_die_roll(var0004, var0003);
 			var0007 = var0001[var0006];
 			var0008 = UI_summon(var0007, false);
@@ -53677,7 +53677,7 @@ void Func0665 object#(0x665) () {
 			var0006 = 0x0007;
 			var0007 = 0x0000;
 			while (var0007 != 0x000C) {
-				var0007 = (var0007 + 0x0001);
+				var0007 += 0x0001;
 				var0008 = (var0000[0x0001] + var0004[var0007]);
 				var0009 = (var0000[0x0002] + var0005[var0007]);
 				var0003 = [var0008, var0009, 0x0000];
@@ -53754,12 +53754,12 @@ void Func0666 object#(0x666) () {
 			var0005 = UI_game_minute();
 			if (var0004 < 0x0006) {
 				var0006 = ((0x0006 - var0004) * 0x003C);
-				var0006 = (var0006 + (0x003C - var0005));
-				var0006 = (var0006 * 0x0019);
+				var0006 += (0x003C - var0005);
+				var0006 *= 0x0019;
 			} else {
 				var0006 = ((0x0017 - var0004) * 0x003C);
-				var0006 = (var0006 + (0x003C - var0005));
-				var0006 = (var0006 * 0x0019);
+				var0006 += (0x003C - var0005);
+				var0006 *= 0x0019;
 			}
 			var0000 = script item after var0006 ticks {
 				nohalt;
@@ -54336,7 +54336,7 @@ void Func0672 object#(0x672) () {
 			var0004 = [0xFFFE, 0xFFFE, 0xFFFE, 0xFFFF, 0x0000, 0x0001, 0x0002, 0x0002, 0x0002, 0x0001, 0x0000, 0xFFFF];
 			var0005 = 0x0000;
 			while (var0005 < 0x000C) {
-				var0005 = (var0005 + 0x0001);
+				var0005 += 0x0001;
 				var0006 = (var0000[0x0002] + var0003[var0005]);
 				var0007 = (var0000[0x0003] + var0004[var0005]);
 				var0008 = var0000[0x0004];
@@ -54380,7 +54380,7 @@ void Func0672 object#(0x672) () {
 			var000B->set_item_flag(0x0012);
 			var0002 = UI_update_last_created(var0009);
 			var000D = 0x001E;
-			var000D = (var000D + UI_die_roll(0x0001, 0x0005));
+			var000D += UI_die_roll(0x0001, 0x0005);
 			var0002 = script var000B after var000D ticks {
 				nohalt;
 				remove;
@@ -54738,7 +54738,7 @@ void Func0677 object#(0x677) () {
 						};
 						var0009 = [var0009, var000B];
 					}
-					var0008 = (var0008 + 0x0001);
+					var0008 += 0x0001;
 				}
 				var0007->halt_scheduled();
 				var0000 = var0007->run_script(var0009);
@@ -54787,7 +54787,7 @@ void Func0678 object#(0x678) () {
 		}
 	} else {
 		var0005 = get_item_quantity(0x0001);
-		var0005 = (var0005 * 0x000A);
+		var0005 *= 0x000A;
 		set_item_shape(0x0285);
 		var0005 = set_item_quantity(var0005);
 	}
@@ -55493,10 +55493,10 @@ void Func0685 object#(0x685) () {
 		if (UI_die_roll(0x0001, 0x0002) == 0x0001) {
 			var0009 = (0xFFFF * var0009);
 		}
-		var0007 = (var0007 + var0009);
+		var0007 += var0009;
 		while (var0007) {
 			var0000 = UI_summon(var0001[var0005], true);
-			var0007 = (var0007 - 0x0001);
+			var0007 -= 0x0001;
 		}
 	}
 }
@@ -55849,7 +55849,7 @@ void Func0694 object#(0x694) () {
 	var0006 = UI_update_last_created(var0004);
 	var0007 = get_item_quality();
 	if ((var0000 == 0x0002) && var0007) {
-		var0007 = (var0007 - 0x0001);
+		var0007 -= 0x0001;
 		var0008 = set_item_quality(var0007);
 	} else {
 		var0009 = script item {
@@ -55869,7 +55869,7 @@ void Func0695 object#(0x695) () {
 	var0000 = 0xFE9C->get_npc_object()->find_nearest(0x02E4, 0x000A);
 	if (var0000) {
 		var0001 = var0000->get_item_frame();
-		var0001 = (var0001 - 0x0006);
+		var0001 -= 0x0006;
 		var0002 = script var0000 {
 			next frame cycle;
 			wait 1;
@@ -56368,7 +56368,7 @@ void Func0699 object#(0x699) () {
 				var000D = script var000C {
 					face north;
 				};
-				var0007 = (var0007 + 0x0001);
+				var0007 += 0x0001;
 			}
 		}
 		var000E = script item {
@@ -57559,7 +57559,7 @@ void Func06B5 object#(0x6B5) () {
 			if (Func081B(var0004) != 0x0002) {
 				break;
 			}
-			var0005 = (var0005 + 0x0001);
+			var0005 += 0x0001;
 		} while (true);
 		var0006 = var0004->get_item_shape();
 		if (var0006 == 0x010E) {
@@ -57604,7 +57604,7 @@ void Func06B6 object#(0x6B6) () {
 					next frame cycle;
 				};
 			} else {
-				var0005 = (var0005 - var0006);
+				var0005 -= var0006;
 				var0007 = script var0004 {
 					sfx 83;
 					frame var0005;
@@ -57734,7 +57734,7 @@ void Func06BA object#(0x6BA) () {
 			} else {
 				var0007 = (var0007 & (var0006 + var0008));
 			}
-			var0006 = (var0006 + 0x0004);
+			var0006 += 0x0004;
 		}
 		for (var000B in var0007 with var0009 to var000A) {
 			var0005 = UI_create_new_object(0x0390);
@@ -57906,7 +57906,7 @@ void Func06BD object#(0x6BD) () {
 						};
 						var0008 = [var0008, var000A];
 					}
-					var0007 = (var0007 + 0x0001);
+					var0007 += 0x0001;
 				}
 				var0006->halt_scheduled();
 				var000C = var0006->run_script(var0008);
@@ -58451,31 +58451,31 @@ void Func06E1 object#(0x6E1) () {
 		}
 		var0001 = 0x0000;
 		if (gflags[0x01ED]) {
-			var0001 = (var0001 + 0x0001);
+			var0001 += 0x0001;
 		}
 		if (gflags[0x0134]) {
-			var0001 = (var0001 + 0x0001);
+			var0001 += 0x0001;
 		}
 		if (gflags[0x01E2]) {
-			var0001 = (var0001 + 0x0001);
+			var0001 += 0x0001;
 		}
 		if (gflags[0x0257]) {
-			var0001 = (var0001 + 0x0001);
+			var0001 += 0x0001;
 		}
 		if (gflags[0x01E1]) {
-			var0001 = (var0001 + 0x0001);
+			var0001 += 0x0001;
 		}
 		if (gflags[0x0003]) {
-			var0001 = (var0001 + 0x0001);
+			var0001 += 0x0001;
 		}
 		if (gflags[0x012D]) {
-			var0001 = (var0001 + 0x0001);
+			var0001 += 0x0001;
 		}
 		if (gflags[0x0004]) {
-			var0001 = (var0001 + 0x0001);
+			var0001 += 0x0001;
 		}
 		if (gflags[0x0005]) {
-			var0001 = (var0001 + 0x0001);
+			var0001 += 0x0001;
 		}
 		UI_set_orrery(var0000, var0001);
 	}
@@ -59666,7 +59666,7 @@ void Func06F8 object#(0x6F8) () {
 					if (var000C[0x0001] == (var0005[0x0001] - 0x0001)) {
 						if (var000C[0x0002] == var0005[0x0002]) {
 							if (var000C[0x0003] == 0x0004) {
-								var0007 = (var0007 + 0x0001);
+								var0007 += 0x0001;
 							}
 						}
 					}
@@ -59675,7 +59675,7 @@ void Func06F8 object#(0x6F8) () {
 					if (var000C[0x0001] == var0005[0x0001]) {
 						if (var000C[0x0002] == (var0005[0x0002] - 0x0001)) {
 							if (var000C[0x0003] == 0x0004) {
-								var0007 = (var0007 + 0x0001);
+								var0007 += 0x0001;
 							}
 						}
 					}
@@ -59684,7 +59684,7 @@ void Func06F8 object#(0x6F8) () {
 					if (var000C[0x0001] == var0005[0x0001]) {
 						if (var000C[0x0002] == var0005[0x0002]) {
 							if (var000C[0x0003] == 0x0004) {
-								var0007 = (var0007 + 0x0001);
+								var0007 += 0x0001;
 							}
 						}
 					}
@@ -59698,7 +59698,7 @@ void Func06F8 object#(0x6F8) () {
 					if ((var0012[0x0001] == 0x08A0) || (var0012[0x0001] == 0x08AD)) {
 						if (var0012[0x0002] == 0x05EA) {
 							if (var0012[0x0003] == 0x0001) {
-								var000D = (var000D + 0x0001);
+								var000D += 0x0001;
 							}
 						}
 					}
@@ -60944,7 +60944,7 @@ void Func070B object#(0x70B) () {
 					}
 				}
 			}
-			var0001 = (var0001 + 0x0001);
+			var0001 += 0x0001;
 			var0002 = set_last_created();
 		}
 	}
@@ -61372,7 +61372,7 @@ void Func0710 object#(0x710) () {
 			for (var000B in var0000 with var0009 to var000A) {
 				var000C = var000B->get_item_frame();
 				if ((var000C >= 0x0000) && ((var000C <= 0x000A) && var000B->find_nearby(0x0390, 0x0002, 0x00B0))) {
-					var0008 = (var0008 + 0x0001);
+					var0008 += 0x0001;
 				}
 			}
 			if (var0008 >= 0x0005) {
@@ -62008,7 +62008,7 @@ void Func080A 0x80A (var var0000, var var0001) {
 		var0007 = 0x0000;
 		var0008 = 0x270F;
 		for (var000B in var0003 with var0009 to var000A) {
-			var0007 = (var0007 + 0x0001);
+			var0007 += 0x0001;
 			if ((var000B != 0x0000) && (var000B != var0000)) {
 				var000C = var0000->get_distance(var000B);
 				if (var000C < var0008) {
@@ -62032,13 +62032,13 @@ void Func080A 0x80A (var var0000, var var0001) {
 			var0013 = (var0007 - 0x0001);
 			var0012->sit_down(var0002[var0013]);
 		}
-		var0007 = (var0007 + 0x0001);
+		var0007 += 0x0001;
 	}
 }
 
 var Func080B 0x80B (var var0000) {
 	if (var0000 < 0x0005) {
-		var0000 = (var0000 + 0x0002);
+		var0000 += 0x0002;
 		return var0000;
 	}
 	if (var0000 == 0x0005) {
@@ -62224,7 +62224,7 @@ void Func0810 0x810 (var var0000, var var0001) {
 	var0004 = var0003->find_nearby(0x0113, 0x0050, 0x0010);
 	var0005 = 0x0000;
 	for (var0008 in var0004 with var0006 to var0007) {
-		var0005 = (var0005 + 0x0001);
+		var0005 += 0x0001;
 		var0003 = var0008->get_object_position();
 		var0009 = var0003->find_nearby(var0000, 0x0001, 0x0000);
 		if (var0001 == 0x0001) {
@@ -62911,16 +62911,16 @@ void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var
 					if (UI_path_run_usecode(var0009, var0004, var0005, var0006)) {
 						return;
 					}
-					var000B = (var000B - 0x0001);
+					var000B -= 0x0001;
 				}
-				var000A = (var000A - 0x0001);
+				var000A -= 0x0001;
 			}
-			var0008 = (var0008 + 0x0001);
+			var0008 += 0x0001;
 		}
 	} else {
 		var000C = 0x0000;
 		for (var000A in var0001 with var000D to var000E) {
-			var000C = (var000C + 0x0001);
+			var000C += 0x0001;
 			var000B = var0002[var000C];
 			var0008 = var0003[var000C];
 			var0009[0x0001] = (var0007[0x0001] + var000A);
@@ -62932,7 +62932,7 @@ void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var
 					if (UI_path_run_usecode(var0009, var0004, var0005, var0006)) {
 						return;
 					}
-					var0008 = (var0008 - 0x0001);
+					var0008 -= 0x0001;
 				}
 			} else {
 				if (var0003 == 0xFFFF) {
@@ -63005,7 +63005,7 @@ var Func082A 0x82A (var var0000, var var0001, var var0002) {
 
 	var0003 = 0x0000;
 	do {
-		var0003 = (var0003 + 0x0001);
+		var0003 += 0x0001;
 		var0000[var0003] = (var0000[var0003] + var0001[var0003]);
 	} while (!(var0003 == var0002));
 	return var0000;
@@ -63016,7 +63016,7 @@ var Func082B 0x82B (var var0000, var var0001) {
 
 	var0002 = 0x0000;
 	do {
-		var0002 = (var0002 + 0x0001);
+		var0002 += 0x0001;
 		var0000[var0002] = (var0000[var0002] * 0xFFFF);
 	} while (!(var0002 == var0001));
 	return var0000;
@@ -63084,7 +63084,7 @@ var Func082E 0x82E (var var0000) {
 			var0008 = var0006->find_nearest(0x03D5, 0x0001);
 			var0009 = var0008->get_object_position();
 			if ((var0009[0x0001] == var0007[0x0001]) && ((var0009[0x0002] == var0007[0x0002]) && ((var0009[0x0003] == (var0007[0x0003] + 0x0002)) && (var0006->get_item_frame() == var0008->get_item_frame())))) {
-				var0003 = (var0003 + 0x0001);
+				var0003 += 0x0001;
 				if (var0008 == var0000) {
 					var000A = var0008->get_object_position();
 					UI_sprite_effect(0x0007, var000A[0x0001], var000A[0x0002], 0xFFFF, 0xFFFF, 0x0002, 0xFFFF);
@@ -63262,7 +63262,7 @@ void Func082F 0x82F () {
 			};
 			var0018 = 0x0000;
 			for (var001B in var0001 with var0019 to var001A) {
-				var0018 = (var0018 + 0x0001);
+				var0018 += 0x0001;
 				if (var0002 == var0018) {
 					var001C = UI_die_roll(0x0001, 0x0003);
 					if (var001C == 0x0001) {
@@ -63713,13 +63713,13 @@ var Func083B 0x83B () {
 		var0009 = ((var0008 / 0x0008) + 0x0001);
 		var0003 = (var0003 & var0009);
 		if (var0009 == 0x0001) {
-			var0000 = (var0000 + 0x0001);
+			var0000 += 0x0001;
 		}
 		if (var0009 == 0x0002) {
-			var0001 = (var0001 + 0x0001);
+			var0001 += 0x0001;
 		}
 		if (var0009 == 0x0003) {
-			var0002 = (var0002 + 0x0001);
+			var0002 += 0x0001;
 		}
 	}
 	var000A = ((var0003[0x0001] + var0003[0x0002]) + var0003[0x0003]);
@@ -63852,25 +63852,25 @@ void Func083D 0x83D () {
 		var0008 = "@Big eight!@";
 	}
 	if (gflags[0x0006]) {
-		var000B = (var000B * 0x0002);
+		var000B *= 0x0002;
 	}
 	for (var0007 in var0004 with var000C to var000D) {
 		var000E = 0x0000;
 		var000F = false;
 		for (var0012 in var0009 with var0010 to var0011) {
-			var000E = (var000E + 0x0001);
+			var000E += 0x0001;
 			var0013 = var0007->get_object_position();
 			if (var0013[0x0001] == ((var0000[0x0001] - var0009[var000E]) + 0x0001)) {
 				if (var0013[0x0002] == ((var0000[0x0002] - var000A[var000E]) + 0x0001)) {
 					var0014 = var0007->get_item_quantity(0x0009);
-					var0014 = (var0014 * var000B);
+					var0014 *= var000B;
 					while (var0014 > 0x0064) {
 						var0015 = UI_create_new_object(0x0284);
 						if (var0015) {
 							var0016 = var0015->set_item_quantity(0x0064);
 							var0016 = UI_update_last_created(var0013);
 						}
-						var0014 = (var0014 - 0x0064);
+						var0014 -= 0x0064;
 					}
 					var0015 = UI_create_new_object(0x0284);
 					if (var0015) {
@@ -64359,7 +64359,7 @@ void Func084A 0x84A () {
 		var0008 = var0001[var0000];
 		var0008 = (var0008 & var0002[var0000]);
 		var0008 = (var0008 & var0003[var0000]);
-		var0000 = (var0000 + 0x0001);
+		var0000 += 0x0001;
 		var0009 = var0007->get_cont_items(0xFE99, 0xFE99, 0xFE99);
 		for (var000C in var0009 with var000A to var000B) {
 			var000D = var000C->set_last_created();
@@ -65146,9 +65146,9 @@ void Func0855 0x855 () {
 				if (var0003[var000A] == 0x0179) {
 					var000B = "How many ";
 					if (var0009[var000A] > 0x0001) {
-						var000B = (var000B + "packets ");
+						var000B += "packets ";
 					}
-					var000B = (var000B + "wouldst thou like?");
+					var000B += "wouldst thou like?";
 					say("\"^",
 						var000B,
 						"\"");
@@ -65197,7 +65197,7 @@ void Func0856 0x856 (var var0000, var var0001) {
 	}
 	if (var0002 != 0x0000) {
 		if ((var0002 == 0xFFFF) || (var0002 == 0xFFF6)) {
-			var0001 = (var0001 / 0x0002);
+			var0001 /= 0x0002;
 			say("\"I cannot charge a master such as thyself full price.\"");
 		}
 		var0004 = 0x0002;
@@ -65646,9 +65646,9 @@ void Func085D 0x85D () {
 			if (var000D) {
 				var000B = "How many ";
 				if (var0004[var000A] == 0x000F) {
-					var000B = (var000B + "sets ");
+					var000B += "sets ";
 				}
-				var000B = (var000B + "dost thou want?");
+				var000B += "dost thou want?";
 				say("\"",
 					var000B,
 					"\"");
@@ -66367,164 +66367,164 @@ var Func086F 0x86F () {
 	if (var0000 == 0x0000) {
 		var000F = (((("I'll show you my " + var0006) + " ") + var0001) + " if you show me yours.");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var000F = (((((((("All of my " + var0006) + " ") + var0002) + " are ") + var000A) + " ") + var000B) + ".");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var000F = (((((("Stop " + var000A) + " my ") + var0006) + " ") + var0001) + ", please.");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var000F = (((((("Have you seen my " + var0001) + "? It's ") + var000A) + " ") + var000B) + ".");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var000F = (((("There is no " + var0001) + " for you today, little ") + var000C) + ", only death.");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var0010 = UI_a_or_an(var0006);
 		var000F = (((((("Am I having " + var0010) + " ") + var0006) + " ") + var0001) + " yet?");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var0010 = UI_a_or_an(var0006);
 		var000F = (((((("Where is my attorney? I need " + var0010) + " ") + var0006) + " ") + var0001) + " right away.");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var000F = (((((((("You saved my " + var0006) + " ") + var000C) + " from ") + var0001) + ", ") + var000E) + ". How can I ever repay you?");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var0010 = UI_a_or_an(var0001);
 		var000F = (((((((((((("^" + var0010) + " ") + var0001) + ", ") + var0010) + " ") + var0001) + ", my kingdom for ") + var0010) + " ") + var0001) + "!");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var0010 = UI_a_or_an(var0001);
 		var000F = (((("Frankly, my dear, I don't give " + var0010) + " ") + var0001) + ".");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var000F = (((("As " + var0002) + " are my witness, I'll never go ") + var0006) + " again.");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var000F = (("Oh my, " + var000E) + ", I don't think we're in Kansas anymore.");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var000F = (((((("May I borrow your " + var0001) + "? Mine seems to be ") + var0006) + " ") + var000B) + ".");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var000F = (((((("My " + var000D) + " are ") + var000A) + " ") + var000B) + ".");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var000F = (((((("You shall know the " + var0001) + " and the ") + var0001) + " shall make you ") + var0006) + ".");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var0010 = UI_a_or_an(var000C);
 		var000F = (((((((("Thou shalt not " + var0008) + " to ") + var0010) + " ") + var000C) + ", ") + var000E) + ".");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var000F = (((("Honor thy father and thy " + var0001) + ", ") + var000E) + ".");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var000F = (((("Thou shalt not covet thy neighbor's " + var0001) + ", ") + var000E) + ".");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var0010 = UI_a_or_an(var0001);
 		var000F = (((("Neither a borrower nor " + var0010) + " ") + var0001) + " be.");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var000F = (((((("Never " + var0008) + " a gift ") + var000C) + " in the ") + var0001) + ".");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var000F = (((("A fool and his " + var0001) + " are soon ") + var0006) + ".");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var000F = (((("Workers of the world, " + var0008) + "! You have nothing to lose but your ") + var0002) + "!");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var000F = (("Ich bin ein " + var0001) + "er.");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var000F = (((("Damn the " + var0002) + "! ^") + var0006) + " speed ahead!");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var000F = (((((((("Ask not what your " + var0006) + " ") + var0001) + " can do for you, but what you can do for your ") + var0006) + " ") + var0001) + ".");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var000F = (((((("^" + var000E) + "! ") + var000E) + "! You damn ") + var000C) + ".");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var000F = (((((("Let me just remind you that the " + var0002) + " of ") + var0003) + " may be more ") + var0006) + " than they appear.");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var000F = (((((("Destroy your " + var0006) + " and ") + var0007) + " life before it is too late, ") + var000E) + ".");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var0010 = UI_a_or_an(var0006);
 		var0011 = UI_a_or_an(var0001);
 		var000F = (((((((("My head feels like " + var0010) + " ") + var0006) + " with ") + var0011) + " ") + var0001) + " pointed at it.");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var000F = (((((("Beautiful, " + var000E) + ", I'll have my ") + var0001) + " call your ") + var0001) + ".");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var000F = (("No thank you, I'm watching my " + var0001) + " intake.");
 	}
-	var0000 = (var0000 - 0x0001);
+	var0000 -= 0x0001;
 	if (var0000 >= 0x0000) {
 		var0010 = UI_a_or_an(var0006);
 		var0012 = (((((("Ode to " + var0010) + " ") + var0006) + " ") + var0001) + ". ");
 		if (var0000 == 0x0000) {
 			var000F = (((((((((((("O how the " + var000D) + " of ") + var0001) + " ") + var0008) + " ") + var000B) + " amidst the ") + var0006) + " ") + var0003) + ".");
 		}
-		var0000 = (var0000 - 0x0001);
+		var0000 -= 0x0001;
 		if (var0000 == 0x0000) {
 			var0010 = UI_a_or_an(var0006);
 			var000F = (((((((("Shall I compare thee to " + var0010) + " ") + var0006) + " ") + var0001) + "? Thou art far more ") + var0007) + ".");
 		}
-		var0000 = (var0000 - 0x0001);
+		var0000 -= 0x0001;
 		if (var0000 == 0x0000) {
 			var0013 = UI_a_or_an(var0001);
 			var000F = (((((((((((((((((("To be " + var0013) + " ") + var0001) + " or not to be. That is the ") + var0003) + ". Whether tis nobler in the ") + var0004) + " to ") + var0008) + " the ") + var0002) + " and ") + var0005) + " of ") + var0006) + " ") + var0003) + " or...");
 		}
-		var0000 = (var0000 - 0x0001);
+		var0000 -= 0x0001;
 		if (var0000 == 0x0000) {
 			var000F = ((((((((((("This morning I saw a small " + var0001) + " ") + var000A) + " ") + var000B) + ". How the seasons of ") + var0006) + " ") + var0003) + " come and go.") + " Death falls upon us all.");
 		}
-		var0000 = (var0000 - 0x0001);
+		var0000 -= 0x0001;
 		if (var0000 == 0x0000) {
 			var000F = (((("Rage, rage against the " + var000A) + " of the ") + var0001) + ".");
 		}
-		var0000 = (var0000 - 0x0001);
+		var0000 -= 0x0001;
 		if (var0000 == 0x0000) {
 			var000F = (((((((((((((((("Love in the turning " + var0001) + ". The small ") + var000D) + " ") + var0008) + " ") + var000B) + ".  The ") + var0006) + " ") + var0005) + " whisper their ") + var0007) + " muses. Oh, the turning ") + var0001) + ".");
 		}
-		var0000 = (var0000 - 0x0001);
+		var0000 -= 0x0001;
 	}
 	return (var0012 + var000F);
 }
@@ -66674,9 +66674,9 @@ void Func0871 0x871 () {
 				} else {
 					var000B = "How many ";
 					if (var0009[var000A] > 0x0001) {
-						var000B = (var000B + "sets ");
+						var000B += "sets ";
 					}
-					var000B = (var000B + "wouldst thou like?");
+					var000B += "wouldst thou like?";
 					say("\"^",
 						var000B,
 						"\"");
@@ -68292,7 +68292,7 @@ void Func088A 0x88A () {
 	var0003 = 0xFFF8->get_npc_object();
 	var0004 = 0xFFF7->get_npc_object();
 	for (var0007 in var0002 with var0005 to var0006) {
-		var0001 = (var0001 + 0x0001);
+		var0001 += 0x0001;
 	}
 	if (var0001 < 0x0008) {
 		say("He steps in line and motions for you to lead on.*");
@@ -68382,9 +68382,9 @@ void Func088C 0x88C () {
 			if (var000C) {
 				var000A = "How many ";
 				if (var0008[var0009] > 0x0001) {
-					var000A = (var000A + "sets ");
+					var000A += "sets ";
 				}
-				var000A = (var000A + "wouldst thou like?");
+				var000A += "wouldst thou like?";
 				say("\"",
 					var000A,
 					"\"");
@@ -70218,9 +70218,9 @@ void Func08A7 0x8A7 () {
 			if (var000C) {
 				var000A = "How many ";
 				if (var0008[var0009] > 0x0001) {
-					var000A = (var000A + "dozen ");
+					var000A += "dozen ";
 				}
-				var000A = (var000A + "wouldst thou like?");
+				var000A += "wouldst thou like?";
 				say("\"",
 					var000A,
 					"\"");
@@ -70813,7 +70813,7 @@ var Func08B3 0x8B3 (var var0000) {
 	for (var000B in var0007 with var000D to var000E) {
 		if (var000C >= var0001) {
 			var0004[var0001]->sit_down(var000B);
-			var0001 = (var0001 + 0x0001);
+			var0001 += 0x0001;
 		} else {
 			return true;
 		}
@@ -71284,7 +71284,7 @@ void Func08BB 0x8BB (var var0000) {
 	while (var0001) {
 		say("\"Which circle art thou interested in?\"");
 		var0003 = Func090C(["nothing", "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth"]);
-		var0003 = (var0003 - 0x0001);
+		var0003 -= 0x0001;
 		if (var0003 == 0x0000) {
 			break;
 		}
@@ -71847,7 +71847,7 @@ void Func08C3 0x8C3 () {
 	while (var0000) {
 		say("\"In which circle dost thou wish to study?\"");
 		var0002 = Func090C(["none", "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth"]);
-		var0002 = (var0002 - 0x0001);
+		var0002 -= 0x0001;
 		if (var0002 == 0x0000) {
 			break;
 		}
@@ -71991,7 +71991,7 @@ void Func08C5 0x8C5 () {
 	while (var0000) {
 		say("\"In which circle dost thou wish to study?\"");
 		var0002 = Func090C(["none", "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth"]);
-		var0002 = (var0002 - 0x0001);
+		var0002 -= 0x0001;
 		if (var0002 == 0x0000) {
 			break;
 		}
@@ -72287,7 +72287,7 @@ var Func08C9 0x8C9 () {
 			var000E = var000D[0x0001];
 			var000F = var000D[0x0002];
 			if ((!var0009) && ((Func0932(var000E - var0007) <= 0x0001) && (Func0932(var000F - var0008) <= 0x0001))) {
-				var0002 = (var0002 + 0x0001);
+				var0002 += 0x0001;
 				var000C->clear_item_flag(0x0012);
 				var0009 = true;
 			}
@@ -72571,9 +72571,9 @@ void Func08CD 0x8CD () {
 				} else {
 					var000A = "How many ";
 					if (var0008[var0009] > 0x0001) {
-						var000A = (var000A + "sets ");
+						var000A += "sets ";
 					}
-					var000A = (var000A + "wouldst thou like?");
+					var000A += "wouldst thou like?";
 					say("\"^",
 						var000A,
 						"\"");
@@ -73191,7 +73191,7 @@ void Func08D7 0x8D7 () {
 			var0006 = 0x0000;
 			var0001 = UI_get_party_list();
 			for (var0009 in var0001 with var0007 to var0008) {
-				var0006 = (var0006 + 0x0001);
+				var0006 += 0x0001;
 			}
 			if (var0006 < 0x0008) {
 				say("She steps in line and motions for you to lead on.*");
@@ -73303,7 +73303,7 @@ void Func08DB 0x8DB () {
 	while (var0000) {
 		say("\"In which circle dost thou wish to study?\"");
 		var0002 = Func090C(["none", "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth"]);
-		var0002 = (var0002 - 0x0001);
+		var0002 -= 0x0001;
 		if (var0002 == 0x0000) {
 			break;
 		}
@@ -73522,7 +73522,7 @@ void Func08DD 0x8DD () {
 					};
 					var0006 = [var0006, var0008];
 				}
-				var0005 = (var0005 + 0x0001);
+				var0005 += 0x0001;
 			}
 			var0004->halt_scheduled();
 			var000A = var0004->run_script(var0006);
@@ -74131,7 +74131,7 @@ void Func08EB 0x8EB (var var0000, var var0001, var var0002) {
 		var0006[0x0002] = (var0005[0x0002] - 0x0002);
 	}
 	while (!UI_is_not_blocked(var0005, var0001, var0002)) {
-		var0004 = (var0004 + 0x0001);
+		var0004 += 0x0001;
 		var0007 = var0006->find_nearby(0xFFFF, var0004, 0x0000);
 		for (var000A in var0007 with var0013 to var0014) {
 			var000B = var000A->get_object_position();
@@ -74743,8 +74743,8 @@ var Func08F6 0x8F6 (var var0000) {
 	var0002 = (var0001->get_npc_prop(0x0008) / 0x0064);
 	var0003 = 0x0001;
 	while (var0002 > 0x0000) {
-		var0003 = (var0003 + 0x0001);
-		var0002 = (var0002 / 0x0002);
+		var0003 += 0x0001;
+		var0002 /= 0x0002;
 	}
 	return var0003;
 }
@@ -74798,7 +74798,7 @@ var Func08F8 0x8F8 (var var0000, var var0001, var var0002, var var0003, var var0
 			for (var0011 in var000B with var000F to var0010) {
 				var0012 = var0011->get_npc_number();
 				if (!(var0012 == 0xFE9C)) {
-					var000D = (var000D + 0x0001);
+					var000D += 0x0001;
 					var0012->show_npc_face(0x0000);
 					var000E = true;
 					if (var0002 == 0x0001) {
@@ -74977,7 +74977,7 @@ void Func0904 0x904 (var var0000, var var0001) {
 			var0002 = 0x0000;
 			for (var0005 in var0001 with var0003 to var0004) {
 				Func0933(var0000, var0005, var0002);
-				var0002 = (var0002 + 0x0011);
+				var0002 += 0x0011;
 			}
 		}
 	}
@@ -75127,7 +75127,7 @@ var Func0913 0x913 (var var0000, var var0001) {
 
 	var0002 = 0x0000;
 	for (var0005 in var0001 with var0003 to var0004) {
-		var0002 = (var0002 + 0x0001);
+		var0002 += 0x0001;
 		if (var0000 == var0005) {
 			return var0002;
 		}
@@ -75145,7 +75145,7 @@ void Func0914 0x914 (var var0000, var var0001) {
 		Func0912(var0000, 0x0000, 0x0001);
 		Func0912(var0000, 0x0003, 0x0001);
 		Func0912(var0000, 0x0007, 0xFFFF);
-		var0002 = (var0002 + 0x0001);
+		var0002 += 0x0001;
 	}
 }
 
@@ -75168,7 +75168,7 @@ void Func0915 0x915 (var var0000, var var0001) {
 		var0006 = (((var0004 * var0005) + (var0003 - 0x0001)) / var0003);
 		Func0912(var0000, 0x0004, (var0006 - var0005));
 		Func0912(var0000, 0x0007, 0xFFFF);
-		var0002 = (var0002 + 0x0001);
+		var0002 += 0x0001;
 	}
 }
 
@@ -75185,7 +75185,7 @@ void Func0916 0x916 (var var0000, var var0001) {
 		var0003 = Func0910(var0000, 0x0002);
 		Func0912(var0000, 0x0002, 0x0001);
 		Func0912(var0000, 0x0007, 0xFFFF);
-		var0002 = (var0002 + 0x0001);
+		var0002 += 0x0001;
 	}
 }
 
@@ -75211,7 +75211,7 @@ void Func0917 0x917 (var var0000, var var0001) {
 		}
 		Func0912(var0000, 0x0004, (var0005 - var0004));
 		Func0912(var0000, 0x0007, 0xFFFF);
-		var0002 = (var0002 + 0x0001);
+		var0002 += 0x0001;
 	}
 }
 
@@ -75237,7 +75237,7 @@ void Func0918 0x918 (var var0000, var var0001) {
 		}
 		Func0912(var0000, 0x0006, (var0005 - var0004));
 		Func0912(var0000, 0x0007, 0xFFFF);
-		var0002 = (var0002 + 0x0001);
+		var0002 += 0x0001;
 	}
 }
 
@@ -75288,9 +75288,9 @@ var Func091B 0x91B (var var0000, var var0001, var var0002, var var0003, var var0
 
 	var0005 = ((var0000 + var0001) + " ");
 	if (var0002 == 0x0001) {
-		var0005 = (var0005 + "sell ");
+		var0005 += "sell ";
 	} else {
-		var0005 = (var0005 + "sells ");
+		var0005 += "sells ";
 	}
 	var0005 = (((((var0005 + "for ") + var0003) + " gold") + var0004) + ".");
 	return var0005;
@@ -75516,7 +75516,7 @@ void Func0925 0x925 (var var0000) {
 	if (var0001 <= 0x0001) {
 		var0000->remove_item();
 	} else {
-		var0001 = (var0001 - 0x0001);
+		var0001 -= 0x0001;
 		var0002 = var0000->set_item_quantity(var0001);
 	}
 }
@@ -75625,7 +75625,7 @@ void Func0928 0x928 (var var0000) {
 		var0003 = 0x0000;
 		var0004 = get_item_quality();
 		for (var0007 in var0002 with var0005 to var0006) {
-			var0003 = (var0003 + 0x0001);
+			var0003 += 0x0001;
 			if (var0004 == var0003) {
 				var0008 = (("Gee, I bet that " + var0007) + " was pretty good....");
 			}
@@ -75689,7 +75689,7 @@ var Func092B 0x92B (var var0000) {
 
 	var0001 = 0x0000;
 	for (var0004 in var0000 with var0002 to var0003) {
-		var0001 = (var0001 + 0x0001);
+		var0001 += 0x0001;
 	}
 	return var0001;
 }
@@ -75903,7 +75903,7 @@ var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0
 
 var Func0932 0x932 (var var0000) {
 	if (var0000 < 0x0000) {
-		var0000 = (var0000 * 0xFFFF);
+		var0000 *= 0xFFFF;
 	}
 	return var0000;
 }
@@ -76092,7 +76092,7 @@ var Func093D 0x93D (var var0000, var var0001) {
 					var0000[(var0004 + 0x0001)] = var0005;
 					var0003 = true;
 				}
-				var0004 = (var0004 + 0x0001);
+				var0004 += 0x0001;
 			}
 		}
 	}
@@ -76302,7 +76302,7 @@ void Func0947 0x947 () {
 		for (var000A in var0001 with var0008 to var0009) {
 			if ((var000A->get_item_frame() == 0x0000) && var000A->get_item_flag(0x000B)) {
 				if (var000A->get_distance(0xFFCC) <= 0x0019) {
-					var0006 = (var0006 + 0x0001);
+					var0006 += 0x0001;
 					var0007 = (var0007 & var000A);
 				}
 			}
@@ -76579,7 +76579,7 @@ var Func094B 0x94B (var var0000, var var0001) {
 				" gold.\"");
 		}
 		var0009 = (var0003 * 0x0003);
-		var0009 = (var0009 / 0x0002);
+		var0009 /= 0x0002;
 		var000A = (var0003 / 0x0002);
 		var000B = (var0003 / 0x0004);
 		var000C = [var0009, var0003, var000A, var000B];
@@ -76622,7 +76622,7 @@ var Func094B 0x94B (var var0000, var var0001) {
 				if ((var0003 - var000D) <= var0004) {
 					var0003 = (var0004 + 0x0001);
 				} else {
-					var0003 = (var0003 - var000D);
+					var0003 -= var000D;
 				}
 			} else if (var0007 >= 0x001E) {
 				var000D = Func0932((var0004 - var0002) * 0x0002);
@@ -76630,7 +76630,7 @@ var Func094B 0x94B (var var0000, var var0001) {
 				if ((var0003 - var000D) <= var0004) {
 					var0003 = (var0004 + 0x0001);
 				} else {
-					var0003 = (var0003 - var000D);
+					var0003 -= var000D;
 				}
 			} else {
 				say("\"To be agreed!\"");
@@ -76644,7 +76644,7 @@ var Func094B 0x94B (var var0000, var var0001) {
 				if ((var0003 - var000D) <= var0004) {
 					var0003 = (var0004 + 0x0001);
 				} else {
-					var0003 = (var0003 - var000D);
+					var0003 -= var000D;
 				}
 			} else if (var0007 >= 0x000F) {
 				var000D = Func0932((var0004 - var0002) * 0x0002);
@@ -76652,7 +76652,7 @@ var Func094B 0x94B (var var0000, var var0001) {
 				if ((var0003 - var000D) <= var0004) {
 					var0003 = (var0004 + 0x0001);
 				} else {
-					var0003 = (var0003 - var000D);
+					var0003 -= var000D;
 				}
 			} else if (var0007 >= 0x0005) {
 				say("\"To be foolish to accept so little!\"");
@@ -76688,7 +76688,7 @@ void Func094C 0x94C () {
 	while (var0000) {
 		say("\"To be interested in which circle?\"");
 		var0002 = Func090C(["none", "First", "Second", "Third", "Fourth", "Fifth", "Sixth"]);
-		var0002 = (var0002 - 0x0001);
+		var0002 -= 0x0001;
 		if (var0002 == 0x0000) {
 			if (gflags[0x0003]) {
 				say("\"To understand.\"");
