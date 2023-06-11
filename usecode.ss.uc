@@ -739,7 +739,7 @@ labelFunc00E4_0956:
 		var0015 = ["nobody"];
 		for (var000A in var0014 with var0016 to var0017) {
 			if (!(var000A == 0x0000)) {
-				var0015 = (var0015 & var000A->get_npc_name());
+				var0015 &= var000A->get_npc_name();
 			}
 		}
 		var0018 = Func0957(var0015);
@@ -1183,7 +1183,7 @@ void Func00E6 shape#(0xE6) () {
 			say("\"Dost thou desire my body, Avatar?\"");
 			var000E = ["yes", "no", "What about Filbercio?"];
 			if (UI_is_pc_female()) {
-				var000E = (var000E & "I'm not that kind of girl!");
+				var000E &= "I'm not that kind of girl!";
 			}
 			var000F = Func0956(var000E);
 			if (var000F == "What about Filbercio?") {
@@ -1275,7 +1275,7 @@ void Func00E6 shape#(0xE6) () {
 				"?\"");
 			var000E = ["yes", "no"];
 			if (UI_is_pc_female()) {
-				var000E = (var000E & "Of course not!");
+				var000E &= "Of course not!";
 			}
 			var000F = Func0956(var000E);
 			if (var000F == "yes") {
@@ -1491,10 +1491,10 @@ void Func00E6 shape#(0xE6) () {
 				var0017 = [];
 				for (var000F in var000E with var0018 to var0019) {
 					if (var000F->npc_nearby()) {
-						var0017 = (var0017 & var000F);
+						var0017 &= var000F;
 					}
 				}
-				var0017 = (var0017 & UI_get_party_list2());
+				var0017 &= UI_get_party_list2();
 				var0017 = Func0988(0xFE9C->get_npc_object(), var0017);
 				var0017 = Func0988(0xFFE4, var0017);
 				var0017 = Func0988(0xFFE6, var0017);
@@ -1527,10 +1527,10 @@ void Func00E6 shape#(0xE6) () {
 		var0017 = [];
 		for (var000F in var000E with var001C to var001D) {
 			if (var000F->npc_nearby()) {
-				var0017 = (var0017 & var000F);
+				var0017 &= var000F;
 			}
 		}
-		var0017 = (var0017 & UI_get_party_list2());
+		var0017 &= UI_get_party_list2();
 		var0017 = Func0988(0xFE9C->get_npc_object(), var0017);
 		var0017 = Func0988(0xFFE4, var0017);
 		var0017 = Func0988(0xFFE6, var0017);
@@ -1975,7 +1975,7 @@ void Func00FA shape#(0xFA) () {
 	if ((item == var0000) || (item == var0001)) {
 		var0002 = [0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B];
 		if (gflags[0x0270]) {
-			var0002 = (var0002 & 0xFF29);
+			var0002 &= 0xFF29;
 		}
 		var0003 = (var0002 & [0xFF2A, 0xFF30, 0xFF2E]);
 		var0004 = var0000->get_item_quality();
@@ -2073,7 +2073,7 @@ void Func00FB shape#(0xFB) () {
 		var0000 = find_nearby(0x00C7, 0x0005, 0x0000);
 		var0001 = find_nearby(0x00FB, 0x0005, 0x0000);
 		if (!(item in var0001)) {
-			var0001 = (var0001 & item);
+			var0001 &= item;
 		}
 		if (!0xFE9C->get_item_flag(0x000A)) {
 			var0002 = get_item_quality();
@@ -2604,7 +2604,7 @@ void Func0109 shape#(0x109) () {
 			var0004 = [];
 			for (var0007 in var0003 with var0005 to var0006) {
 				if (var0007->get_schedule_type() == 0x000F) {
-					var0004 = (var0004 & var0007);
+					var0004 &= var0007;
 				}
 			}
 			if (0xFF31->get_npc_id() == 0x0008) {
@@ -6597,7 +6597,7 @@ void Func01C7 shape#(0x1C7) () {
 			var000B = [0x0178, 0x010E, 0x01B0, 0x01B1];
 			var000C = [];
 			for (var000F in var000B with var000D to var000E) {
-				var000C = (var000C & 0xFE9C->find_nearby(var000F, 0x000A, 0x0000));
+				var000C &= 0xFE9C->find_nearby(var000F, 0x000A, 0x0000);
 			}
 			var0010 = false;
 			for (var000F in var000C with var0011 to var0012) {
@@ -7547,7 +7547,7 @@ void Func01DC shape#(0x1DC) () {
 	var0000 = UI_click_on_item();
 	if (var0000->get_item_shape() == 0x0280) {
 		var0001 = 0xFE9C->find_nearby(0x010E, 0x000A, 0x00B0);
-		var0001 = (var0001 & 0xFE9C->find_nearby(0x0178, 0x000A, 0x00B0));
+		var0001 &= 0xFE9C->find_nearby(0x0178, 0x000A, 0x00B0);
 		for (var0004 in var0001 with var0002 to var0003) {
 			if (var0004->get_item_quality() == 0x00DB) {
 				if (Func0906(var0004) == 0x0002) {
@@ -13026,9 +13026,9 @@ void Func02E8 shape#(0x2E8) () {
 	}
 	if (var0000 == 0x0074) {
 		var0017 = 0xFE9C->find_nearby(0x010E, 0x0014, 0x00B0);
-		var0017 = (var0017 & 0xFE9C->find_nearby(0x0178, 0x0014, 0x00B0));
-		var0017 = (var0017 & 0xFE9C->find_nearby(0x01B1, 0x0014, 0x00B0));
-		var0017 = (var0017 & 0xFE9C->find_nearby(0x01B0, 0x0014, 0x00B0));
+		var0017 &= 0xFE9C->find_nearby(0x0178, 0x0014, 0x00B0);
+		var0017 &= 0xFE9C->find_nearby(0x01B1, 0x0014, 0x00B0);
+		var0017 &= 0xFE9C->find_nearby(0x01B0, 0x0014, 0x00B0);
 		for (var001A in var0017 with var0018 to var0019) {
 			if (var001A->get_item_quality() == 0x0074) {
 				if (Func0906(var001A) == 0x0002) {
@@ -13503,11 +13503,11 @@ void Func0314 shape#(0x314) () {
 		} else {
 			var0008 = find_nearby(0x0366, 0x000F, 0x0000);
 			var0009 = find_nearby(0x0203, 0x000F, 0x0000);
-			var0008 = (var0008 & var0009);
+			var0008 &= var0009;
 			var0009 = [];
 			for (var000C in var0008 with var000A to var000B) {
 				if (var000C->get_item_quality() == var0007) {
-					var0009 = (var0009 & var000C);
+					var0009 &= var000C;
 				}
 			}
 			var0004 = Func089D(var0009);
@@ -14505,7 +14505,7 @@ void Func0326 shape#(0x326) () {
 			0xFF5D->clear_item_say();
 			Func097F(0xFF5D, "@No, wait!...@", 0x0000);
 			var0004 = 0xFF5D->find_nearby(0x0341, 0x0005, 0x0000);
-			var0004 = (var0004 & 0xFF5D->find_nearby(0x0349, 0x0005, 0x0000));
+			var0004 &= 0xFF5D->find_nearby(0x0349, 0x0005, 0x0000);
 			var0005 = script var0004[0x0001] {
 				wait 5;
 				call Func04A3;
@@ -14545,7 +14545,7 @@ void Func0326 shape#(0x326) () {
 				0xFF5D->clear_item_say();
 				Func097F(0xFF5D, "@No, wait! Please...@", 0x0000);
 				var0004 = 0xFF5D->find_nearby(0x0341, 0x0005, 0x0000);
-				var0004 = (var0004 & 0xFF5D->find_nearby(0x0349, 0x0005, 0x0000));
+				var0004 &= 0xFF5D->find_nearby(0x0349, 0x0005, 0x0000);
 				var0005 = script var0004[0x0001] {
 					wait 5;
 					call Func04A3;
@@ -20400,7 +20400,7 @@ void Func0400 object#(0x400) () {
 				var0017 = Func0988(0xFF2F, var0017);
 			}
 			if (Func08F3()) {
-				var0017 = (var0017 & 0xFF29);
+				var0017 &= 0xFF29;
 			}
 			var0000 = Func09A0(0x0005, 0x0001)->set_item_quality(0x0003);
 			var0000 = script Func09A0(0x0005, 0x0001) after 200 ticks {
@@ -21475,41 +21475,41 @@ void Func0403 object#(0x403) () {
 					var0015 = [];
 					if (Func0957(["old song", "new song"]) == 0x0001) {
 						if (gflags[0x01D3] == true) {
-							var0015 = (var0015 & 0x0001);
+							var0015 &= 0x0001;
 						}
 						if (gflags[0x01D4] == true) {
-							var0015 = (var0015 & 0x0002);
+							var0015 &= 0x0002;
 						}
 						if (gflags[0x01D5] == true) {
-							var0015 = (var0015 & 0x0003);
+							var0015 &= 0x0003;
 						}
 						if (gflags[0x01D6] == true) {
-							var0015 = (var0015 & 0x0004);
+							var0015 &= 0x0004;
 						}
 						if (gflags[0x01D7] == true) {
-							var0015 = (var0015 & 0x0005);
+							var0015 &= 0x0005;
 						}
 						if (gflags[0x01D8] == true) {
-							var0015 = (var0015 & 0x0006);
+							var0015 &= 0x0006;
 						}
 					} else {
 						if (gflags[0x01D3] == false) {
-							var0015 = (var0015 & 0x0001);
+							var0015 &= 0x0001;
 						}
 						if (gflags[0x01D4] == false) {
-							var0015 = (var0015 & 0x0002);
+							var0015 &= 0x0002;
 						}
 						if (gflags[0x01D5] == false) {
-							var0015 = (var0015 & 0x0003);
+							var0015 &= 0x0003;
 						}
 						if (gflags[0x01D6] == false) {
-							var0015 = (var0015 & 0x0004);
+							var0015 &= 0x0004;
 						}
 						if (gflags[0x01D7] == false) {
-							var0015 = (var0015 & 0x0005);
+							var0015 &= 0x0005;
 						}
 						if (gflags[0x01D8] == false) {
-							var0015 = (var0015 & 0x0006);
+							var0015 &= 0x0006;
 						}
 					}
 					if (var0015 == []) {
@@ -22292,61 +22292,61 @@ void Func040D object#(0x40D) () {
 				remove("strange objects");
 				var000E = [];
 				if (gflags[0x027A] && (!gflags[0x028C])) {
-					var000E = (var000E & "pinecone");
+					var000E &= "pinecone";
 				}
 				if (gflags[0x027B] && (!gflags[0x028D])) {
-					var000E = (var000E & "moonsilk stockings");
+					var000E &= "moonsilk stockings";
 				}
 				if (gflags[0x027C] && (!gflags[0x028E])) {
-					var000E = (var000E & "urn");
+					var000E &= "urn";
 				}
 				if (gflags[0x027D] && (!gflags[0x028F])) {
-					var000E = (var000E & "apparatus");
+					var000E &= "apparatus";
 				}
 				if (gflags[0x027E] && (!gflags[0x0290])) {
-					var000E = (var000E & "pumice");
+					var000E &= "pumice";
 				}
 				if (gflags[0x027F] && (!gflags[0x0291])) {
-					var000E = (var000E & "lost ring");
+					var000E &= "lost ring";
 				}
 				if (gflags[0x0280] && (!gflags[0x0292])) {
-					var000E = (var000E & "fur cap");
+					var000E &= "fur cap";
 				}
 				if (gflags[0x0281] && (!gflags[0x0293])) {
-					var000E = (var000E & "slippers");
+					var000E &= "slippers";
 				}
 				if (gflags[0x0282] && (!gflags[0x0294])) {
-					var000E = (var000E & "breastplate");
+					var000E &= "breastplate";
 				}
 				if (gflags[0x0283] && (!gflags[0x0295])) {
-					var000E = (var000E & "blue egg");
+					var000E &= "blue egg";
 				}
 				if (gflags[0x0284] && (!gflags[0x0296])) {
-					var000E = (var000E & "strange hairbrush");
+					var000E &= "strange hairbrush";
 				}
 				if (gflags[0x0285] && (!gflags[0x0297])) {
-					var000E = (var000E & "bottle of wine");
+					var000E &= "bottle of wine";
 				}
 				if (gflags[0x0287] && (!gflags[0x0299])) {
-					var000E = (var000E & "strange coins");
+					var000E &= "strange coins";
 				}
 				if (gflags[0x0288] && (!gflags[0x029A])) {
-					var000E = (var000E & "skull");
+					var000E &= "skull";
 				}
 				if (gflags[0x0289] && (!gflags[0x029B])) {
-					var000E = (var000E & "bloody hand");
+					var000E &= "bloody hand";
 				}
 				if (gflags[0x028A] && (!gflags[0x029C])) {
-					var000E = (var000E & "plain shield");
+					var000E &= "plain shield";
 				}
 				if (gflags[0x028B] && (!gflags[0x029D])) {
-					var000E = (var000E & "glowing rock");
+					var000E &= "glowing rock";
 				}
 				if (gflags[0x007B] && (!gflags[0x007C])) {
-					var000E = (var000E & "fish-net stockings");
+					var000E &= "fish-net stockings";
 				}
 				if (gflags[0x0045] && (0xFFB4->get_schedule_type() != 0x000F)) {
-					var000E = (var000E & "brown bottle");
+					var000E &= "brown bottle";
 				}
 				if (var000E == []) {
 					var000C = Func0992(0x0001, (("@But we have no strange objects to ask about, " + var0002) + ".@"), 0x0000, false);
@@ -25358,9 +25358,9 @@ void Func0417 object#(0x417) () {
 				} else if (Func0942(0xFFFD)) {
 					var000A = Func0992(0xFFFD, "@She doth refer to\r\n\t\t\t\t\t\t\t\t\t\t\t\tLord British!@", 0x0000, false);
 				}
-				var000B = (var000B & ["@I serve Lord British!@", "say nothing"]);
+				var000B &= ["@I serve Lord British!@", "say nothing"];
 				if (var000A != 0x0000) {
-					var000B = (var000B & (("@Hush, " + Func095B(var000A)) + "@"));
+					var000B &= (("@Hush, " + Func095B(var000A)) + "@");
 					0x0000->set_conversation_slot();
 				}
 				var000C = Func0957(var000B);
@@ -28472,13 +28472,13 @@ void Func041F object#(0x41F) () {
 			if ((var0010 == 0x0000) || var0010->get_item_flag(0x0004)) {
 				var0004 = [];
 				if (!0xFFFE->get_item_flag(0x0004)) {
-					var0004 = (var0004 & 0xFFFE);
+					var0004 &= 0xFFFE;
 				}
 				if (gflags[0x0078] && (!0xFFFD->get_item_flag(0x0004))) {
-					var0004 = (var0004 & 0xFFFD);
+					var0004 &= 0xFFFD;
 				}
 				if (gflags[0x00B7] && (!0xFFFF->get_item_flag(0x0004))) {
-					var0004 = (var0004 & 0xFFFF);
+					var0004 &= 0xFFFF;
 				}
 				if (var0004) {
 					var0010 = var0004[UI_get_random(UI_get_array_size(var0004))];
@@ -30984,41 +30984,41 @@ void Func0427 object#(0x427) () {
 				var0008 = [];
 				if (Func0957(["old song", "new song"]) == 0x0001) {
 					if (gflags[0x01D3] == true) {
-						var0008 = (var0008 & 0x0001);
+						var0008 &= 0x0001;
 					}
 					if (gflags[0x01D4] == true) {
-						var0008 = (var0008 & 0x0002);
+						var0008 &= 0x0002;
 					}
 					if (gflags[0x01D5] == true) {
-						var0008 = (var0008 & 0x0003);
+						var0008 &= 0x0003;
 					}
 					if (gflags[0x01D6] == true) {
-						var0008 = (var0008 & 0x0004);
+						var0008 &= 0x0004;
 					}
 					if (gflags[0x01D7] == true) {
-						var0008 = (var0008 & 0x0005);
+						var0008 &= 0x0005;
 					}
 					if (gflags[0x01D8] == true) {
-						var0008 = (var0008 & 0x0006);
+						var0008 &= 0x0006;
 					}
 				} else {
 					if (gflags[0x01D3] == false) {
-						var0008 = (var0008 & 0x0001);
+						var0008 &= 0x0001;
 					}
 					if (gflags[0x01D4] == false) {
-						var0008 = (var0008 & 0x0002);
+						var0008 &= 0x0002;
 					}
 					if (gflags[0x01D5] == false) {
-						var0008 = (var0008 & 0x0003);
+						var0008 &= 0x0003;
 					}
 					if (gflags[0x01D6] == false) {
-						var0008 = (var0008 & 0x0004);
+						var0008 &= 0x0004;
 					}
 					if (gflags[0x01D7] == false) {
-						var0008 = (var0008 & 0x0005);
+						var0008 &= 0x0005;
 					}
 					if (gflags[0x01D8] == false) {
-						var0008 = (var0008 & 0x0006);
+						var0008 &= 0x0006;
 					}
 				}
 				if (var0008 == []) {
@@ -35729,7 +35729,7 @@ void Func0433 object#(0x433) () {
 	if ((event == 0x0000) && (0xFFCD->get_schedule_type() == 0x0007)) {
 		var0004 = ["@Garth will save me...@", (("@Damn " + var0002) + "!@"), "@I need more food!@", "@Jailer!@", "@Be patient.@", "@Curse that weaver!@"];
 		if (0xFFCA->npc_nearby()) {
-			var0004 = (var0004 & ("@Be silent, Priestess!@" & ("@Pleasure me, Kylista!@" & "@Our time shall come...@")));
+			var0004 &= ("@Be silent, Priestess!@" & ("@Pleasure me, Kylista!@" & "@Our time shall come...@"));
 		}
 		Func097F(0xFFCD, var0004[UI_get_random(UI_get_array_size(var0004))], 0x0000);
 	}
@@ -36421,61 +36421,61 @@ void Func0434 object#(0x434) () {
 				var0004 += 0x0001;
 				var000D = [];
 				if (gflags[0x027A] && (!gflags[0x028C])) {
-					var000D = (var000D & "pinecone");
+					var000D &= "pinecone";
 				}
 				if (gflags[0x027B] && (!gflags[0x028D])) {
-					var000D = (var000D & "moonsilk stockings");
+					var000D &= "moonsilk stockings";
 				}
 				if (gflags[0x027C] && (!gflags[0x028E])) {
-					var000D = (var000D & "urn");
+					var000D &= "urn";
 				}
 				if (gflags[0x027D] && (!gflags[0x028F])) {
-					var000D = (var000D & "apparatus");
+					var000D &= "apparatus";
 				}
 				if (gflags[0x027E] && (!gflags[0x0290])) {
-					var000D = (var000D & "pumice");
+					var000D &= "pumice";
 				}
 				if (gflags[0x027F] && (!gflags[0x0291])) {
-					var000D = (var000D & "lost ring");
+					var000D &= "lost ring";
 				}
 				if (gflags[0x0280] && (!gflags[0x0292])) {
-					var000D = (var000D & "fur cap");
+					var000D &= "fur cap";
 				}
 				if (gflags[0x0281] && (!gflags[0x0293])) {
-					var000D = (var000D & "slippers");
+					var000D &= "slippers";
 				}
 				if (gflags[0x0282] && (!gflags[0x0294])) {
-					var000D = (var000D & "breastplate");
+					var000D &= "breastplate";
 				}
 				if (gflags[0x0283] && (!gflags[0x0295])) {
-					var000D = (var000D & "blue egg");
+					var000D &= "blue egg";
 				}
 				if (gflags[0x0284] && (!gflags[0x0296])) {
-					var000D = (var000D & "strange hairbrush");
+					var000D &= "strange hairbrush";
 				}
 				if (gflags[0x0285] && (!gflags[0x0297])) {
-					var000D = (var000D & "bottle of wine");
+					var000D &= "bottle of wine";
 				}
 				if (gflags[0x0287] && (!gflags[0x0299])) {
-					var000D = (var000D & "strange coins");
+					var000D &= "strange coins";
 				}
 				if (gflags[0x0288] && (!gflags[0x029A])) {
-					var000D = (var000D & "skull");
+					var000D &= "skull";
 				}
 				if (gflags[0x0289] && (!gflags[0x029B])) {
-					var000D = (var000D & "bloody hand");
+					var000D &= "bloody hand";
 				}
 				if (gflags[0x028A] && (!gflags[0x029C])) {
-					var000D = (var000D & "plain shield");
+					var000D &= "plain shield";
 				}
 				if (gflags[0x028B] && (!gflags[0x029D])) {
-					var000D = (var000D & "glowing rock");
+					var000D &= "glowing rock";
 				}
 				if (gflags[0x007B] && (!gflags[0x007C])) {
-					var000D = (var000D & "fish-net stockings");
+					var000D &= "fish-net stockings";
 				}
 				if (gflags[0x0045] && (0xFFB4->get_schedule_type() != 0x000F)) {
-					var000D = (var000D & "brown bottle");
+					var000D &= "brown bottle";
 				}
 				if (var000D == []) {
 					var000E = Func0992(0x0001, (("@But we have no strange objects to ask about, " + var0001) + ".@"), 0x0000, false);
@@ -37412,7 +37412,7 @@ void Func0436 object#(0x436) () {
 		if ((gflags[0x0170] && gflags[0x0172]) && (!gflags[0x016E])) {
 			var0006 = ["@I do not deserve this!@", "@Save me, please!@", "@Such filth!@", "@I wish I had a pillow...@", "@Damn Alyssand!@", "@Curse The Fellowship!@"];
 			if (0xFFCD->npc_nearby()) {
-				var0006 = (var0006 & ("@Be still, Voldin.@" & ("@Get away from me...@" & "@Thy dreams are dust.@")));
+				var0006 &= ("@Be still, Voldin.@" & ("@Get away from me...@" & "@Thy dreams are dust.@"));
 			}
 			Func097F(0xFFCA, var0006[UI_get_random(UI_get_array_size(var0006))], 0x0000);
 		}
@@ -40633,7 +40633,7 @@ void Func043F object#(0x43F) () {
 			}
 			if ((var0009 != 0xFE9C) && (!(var0009 in Func098D()))) {
 				var0000 = Func098D();
-				var0000 = (var0000 & 0xFE9C);
+				var0000 &= 0xFE9C;
 				for (var000C in var0000 with var000A to var000B) {
 					if (Func0932(var000C)) {
 						break;
@@ -42292,61 +42292,61 @@ void Func0443 object#(0x443) () {
 				remove("strange objects");
 				var000B = [];
 				if (gflags[0x027A] && (!gflags[0x028C])) {
-					var000B = (var000B & "pinecone");
+					var000B &= "pinecone";
 				}
 				if (gflags[0x027B] && (!gflags[0x028D])) {
-					var000B = (var000B & "moonsilk stockings");
+					var000B &= "moonsilk stockings";
 				}
 				if (gflags[0x027C] && (!gflags[0x028E])) {
-					var000B = (var000B & "urn");
+					var000B &= "urn";
 				}
 				if (gflags[0x027D] && (!gflags[0x028F])) {
-					var000B = (var000B & "apparatus");
+					var000B &= "apparatus";
 				}
 				if (gflags[0x027E] && (!gflags[0x0290])) {
-					var000B = (var000B & "pumice");
+					var000B &= "pumice";
 				}
 				if (gflags[0x027F] && (!gflags[0x0291])) {
-					var000B = (var000B & "lost ring");
+					var000B &= "lost ring";
 				}
 				if (gflags[0x0280] && (!gflags[0x0292])) {
-					var000B = (var000B & "fur cap");
+					var000B &= "fur cap";
 				}
 				if (gflags[0x0281] && (!gflags[0x0293])) {
-					var000B = (var000B & "slippers");
+					var000B &= "slippers";
 				}
 				if (gflags[0x0282] && (!gflags[0x0294])) {
-					var000B = (var000B & "breastplate");
+					var000B &= "breastplate";
 				}
 				if (gflags[0x0283] && (!gflags[0x0295])) {
-					var000B = (var000B & "blue egg");
+					var000B &= "blue egg";
 				}
 				if (gflags[0x0284] && (!gflags[0x0296])) {
-					var000B = (var000B & "strange hairbrush");
+					var000B &= "strange hairbrush";
 				}
 				if (gflags[0x0285] && (!gflags[0x0297])) {
-					var000B = (var000B & "bottle of wine");
+					var000B &= "bottle of wine";
 				}
 				if (gflags[0x0287] && (!gflags[0x0299])) {
-					var000B = (var000B & "strange coins");
+					var000B &= "strange coins";
 				}
 				if (gflags[0x0288] && (!gflags[0x029A])) {
-					var000B = (var000B & "skull");
+					var000B &= "skull";
 				}
 				if (gflags[0x0289] && (!gflags[0x029B])) {
-					var000B = (var000B & "bloody hand");
+					var000B &= "bloody hand";
 				}
 				if (gflags[0x028A] && (!gflags[0x029C])) {
-					var000B = (var000B & "plain shield");
+					var000B &= "plain shield";
 				}
 				if (gflags[0x028B] && (!gflags[0x029D])) {
-					var000B = (var000B & "glowing rock");
+					var000B &= "glowing rock";
 				}
 				if (gflags[0x007B] && (!gflags[0x007C])) {
-					var000B = (var000B & "fish-net stockings");
+					var000B &= "fish-net stockings";
 				}
 				if (gflags[0x0045] && (0xFFB4->get_schedule_type() != 0x000F)) {
-					var000B = (var000B & "brown bottle");
+					var000B &= "brown bottle";
 				}
 				if (var000B == []) {
 					var000A = Func0992(0x0001, (("@But we have no strange objects to ask about, " + var0002) + ".@"), 0x0000, false);
@@ -44258,7 +44258,7 @@ void Func0447 object#(0x447) () {
 			}
 			if ((var0004 != 0xFE9C) && (!(var0004 in Func098D()))) {
 				var0000 = Func098D();
-				var0000 = (var0000 & 0xFE9C);
+				var0000 &= 0xFE9C;
 				for (var0007 in var0000 with var0005 to var0006) {
 					if (Func0932(var0007)) {
 						break;
@@ -45129,7 +45129,7 @@ void Func044A object#(0x44A) () {
 			}
 			if ((var0003 != 0xFE9C) && (!(var0003 in Func098D()))) {
 				var0000 = Func098D();
-				var0000 = (var0000 & 0xFE9C);
+				var0000 &= 0xFE9C;
 				for (var0002 in var0000 with var0004 to var0005) {
 					if (Func0932(var0002)) {
 						break;
@@ -45164,7 +45164,7 @@ void Func044A object#(0x44A) () {
 			var0009 = [];
 			for (var000C in var0008 with var000A to var000B) {
 				if (var000C->get_schedule_type() == 0x001B) {
-					var0009 = (var0009 & var000C);
+					var0009 &= var000C;
 				}
 			}
 			if (var0009 == []) {
@@ -45202,7 +45202,7 @@ void Func044A object#(0x44A) () {
 		} else {
 			var000F = [0xFFC1, 0xFF6A];
 			if (!gflags[0x0092]) {
-				var000F = (var000F & 0xFFB3);
+				var000F &= 0xFFB3;
 			}
 			for (var000C in var000F with var0010 to var0011) {
 				if (!var000C->npc_nearby()) {
@@ -46141,9 +46141,9 @@ void Func044D object#(0x44D) () {
 		} else {
 			var0003 = [0xFFC1, 0xFF6A];
 			if (!gflags[0x0038]) {
-				var0003 = (var0003 & 0xFFBB);
+				var0003 &= 0xFFBB;
 			} else {
-				var0003 = (var0003 & 0xFFB6);
+				var0003 &= 0xFFB6;
 			}
 			for (var0006 in var0003 with var0004 to var0005) {
 				if (!var0006->npc_nearby()) {
@@ -46696,7 +46696,7 @@ void Func044F object#(0x44F) () {
 			}
 			if ((var0005 != 0xFE9C) && (!(var0005 in Func098D()))) {
 				var0000 = Func098D();
-				var0000 = (var0000 & 0xFE9C);
+				var0000 &= 0xFE9C;
 				for (var0008 in var0000 with var0006 to var0007) {
 					if (Func0932(var0008)) {
 						break;
@@ -49312,7 +49312,7 @@ void Func048F object#(0x48F) () {
 				var0004 = ["nobody"];
 				for (var0007 in var0003 with var0005 to var0006) {
 					if (!(var0007 == 0x0000)) {
-						var0004 = (var0004 & var0007->get_npc_name());
+						var0004 &= var0007->get_npc_name();
 					}
 				}
 				var0008 = Func0957(var0004);
@@ -50349,7 +50349,7 @@ void Func0496 object#(0x496) () {
 			}
 			if ((var0007 != 0xFE9C) && (!(var0007 in Func098D()))) {
 				var0008 = Func098D();
-				var0008 = (var0008 & 0xFE9C);
+				var0008 &= 0xFE9C;
 				for (var000B in var0008 with var0009 to var000A) {
 					if (Func0932(var000B)) {
 						break;
@@ -50379,12 +50379,12 @@ void Func0496 object#(0x496) () {
 	if (event == 0x0000) {
 		var000C = [0xFFC1];
 		if (!gflags[0x0038]) {
-			var000C = (var000C & 0xFFBB);
+			var000C &= 0xFFBB;
 		} else {
-			var000C = (var000C & 0xFFB6);
+			var000C &= 0xFFB6;
 		}
 		if (!gflags[0x0092]) {
-			var000C = (var000C & 0xFFB3);
+			var000C &= 0xFFB3;
 		}
 		for (var000F in var000C with var000D to var000E) {
 			if (!var000F->npc_nearby()) {
@@ -52536,8 +52536,8 @@ void Func04A3 object#(0x4A3) () {
 		if (get_item_shape() == 0x031F) {
 			Func09AA();
 			var000F = 0xFF5D->find_nearby(0x031F, 0x001E, 0x0000);
-			var000F = (var000F & 0xFF5D->find_nearby(0x0339, 0x001E, 0x0000));
-			var000F = (var000F & 0xFF5D->find_nearby(0x00E0, 0x001E, 0x0000));
+			var000F &= 0xFF5D->find_nearby(0x0339, 0x001E, 0x0000);
+			var000F &= 0xFF5D->find_nearby(0x00E0, 0x001E, 0x0000);
 			for (var0012 in var000F with var0010 to var0011) {
 				var0004 = var0012->get_object_position();
 				var0004[0x0003] = 0x0000;
@@ -57298,7 +57298,7 @@ void Func04D5 object#(0x4D5) () {
 		var0006 = [];
 		for (var0009 in var0005 with var0007 to var0008) {
 			if (var0009->get_schedule_type() == 0x0004) {
-				var0006 = (var0006 & var0009);
+				var0006 &= var0009;
 			}
 		}
 		if (var0006 == []) {
@@ -57906,41 +57906,41 @@ void Func04DA object#(0x4DA) () {
 				var0005 = [];
 				if (Func0957(["old song", "new song"]) == 0x0001) {
 					if (gflags[0x01D3] == true) {
-						var0005 = (var0005 & 0x0001);
+						var0005 &= 0x0001;
 					}
 					if (gflags[0x01D4] == true) {
-						var0005 = (var0005 & 0x0002);
+						var0005 &= 0x0002;
 					}
 					if (gflags[0x01D5] == true) {
-						var0005 = (var0005 & 0x0003);
+						var0005 &= 0x0003;
 					}
 					if (gflags[0x01D6] == true) {
-						var0005 = (var0005 & 0x0004);
+						var0005 &= 0x0004;
 					}
 					if (gflags[0x01D7] == true) {
-						var0005 = (var0005 & 0x0005);
+						var0005 &= 0x0005;
 					}
 					if (gflags[0x01D8] == true) {
-						var0005 = (var0005 & 0x0006);
+						var0005 &= 0x0006;
 					}
 				} else {
 					if (gflags[0x01D3] == false) {
-						var0005 = (var0005 & 0x0001);
+						var0005 &= 0x0001;
 					}
 					if (gflags[0x01D4] == false) {
-						var0005 = (var0005 & 0x0002);
+						var0005 &= 0x0002;
 					}
 					if (gflags[0x01D5] == false) {
-						var0005 = (var0005 & 0x0003);
+						var0005 &= 0x0003;
 					}
 					if (gflags[0x01D6] == false) {
-						var0005 = (var0005 & 0x0004);
+						var0005 &= 0x0004;
 					}
 					if (gflags[0x01D7] == false) {
-						var0005 = (var0005 & 0x0005);
+						var0005 &= 0x0005;
 					}
 					if (gflags[0x01D8] == false) {
-						var0005 = (var0005 & 0x0006);
+						var0005 &= 0x0006;
 					}
 				}
 				if (var0005 == []) {
@@ -59358,7 +59358,7 @@ void Func0614 object#(0x614) () {
 	var0000 = UI_get_speech_track();
 	if ((var0000 >= 0x0000) && (var0000 < 0x0015)) {
 		var0001 = 0xFE9C->get_readied(0x0007);
-		var0001 = (var0001 & 0xFE9C->get_readied(0x0008));
+		var0001 &= 0xFE9C->get_readied(0x0008);
 		var0002 = 0xFED4;
 		for (var0005 in var0001 with var0003 to var0004) {
 			if ((var0005->get_item_shape() == 0x0377) && (var0005->get_item_frame() == 0x0002)) {
@@ -60171,7 +60171,7 @@ void Func061E object#(0x61E) () {
 		var0001 = false;
 		var0002 = [0x0130, 0x02FE, 0x01D5, 0x0378];
 		if (!(0xFF54->get_schedule_type() == 0x0004)) {
-			var0002 = (var0002 & 0x028C);
+			var0002 &= 0x028C;
 		}
 		var0003 = ["@Help us!@", "@Press the right button!@", "@Free us with the right button!@", "@Be kind...@", "@Do not force us!@", "@Damn the buttons!@"];
 		for (var0006 in var0002 with var0004 to var0005) {
@@ -60490,7 +60490,7 @@ void Func0625 object#(0x625) () {
 					}
 					var0009 = [];
 					for (var000C in var0008 with var000A to var000B) {
-						var0009 = (var0009 & find_nearby(var000C, 0x001E, 0x0000));
+						var0009 &= find_nearby(var000C, 0x001E, 0x0000);
 					}
 					for (var000F in var0009 with var000D to var000E) {
 						var000F->set_schedule_type(0x000C);
@@ -60683,7 +60683,7 @@ void Func0626 object#(0x626) () {
 		var0003 = Func0988(item, find_nearby(0x0206, 0x0006, 0x0000));
 		var0004 = [];
 		for (var0007 in var0003 with var0005 to var0006) {
-			var0004 = (var0004 & var0007->get_distance(item));
+			var0004 &= var0007->get_distance(item);
 		}
 		var0003 = Func0989(var0003, var0004);
 		var0008 = get_object_position();
@@ -60695,7 +60695,7 @@ void Func0626 object#(0x626) () {
 				var000E = (((var000D - 0x0001) * 0x0003) + 0x0001);
 				if ((Func097E(var000C[0x0001] - var0008[var000E]) <= 0x0002) && (Func097E(var000C[0x0002] - var0008[(var000E + 0x0001)]) <= 0x0002)) {
 					var0007->remove_item();
-					var0008 = (var0008 & var000C);
+					var0008 &= var000C;
 					var0009 += 0x0001;
 					break;
 				}
@@ -61193,11 +61193,11 @@ void Func0631 object#(0x631) () {
 		var0000 = get_item_quality();
 		var0001 = find_nearby(0x0366, 0x000F, 0x0000);
 		var0002 = find_nearby(0x0203, 0x000F, 0x0000);
-		var0001 = (var0001 & var0002);
+		var0001 &= var0002;
 		var0002 = [];
 		for (var0005 in var0001 with var0003 to var0004) {
 			if (var0005->get_item_quality() == var0000) {
-				var0002 = (var0002 & var0005);
+				var0002 &= var0005;
 			}
 		}
 		if (Func089D(var0002)) {
@@ -62120,8 +62120,8 @@ void Func063F object#(0x63F) () {
 		var000D = var000A[var0004];
 		var000E = var000B[var0004];
 		while (var000C < 0x0008) {
-			var000D = (var000D & var000A[(var0004 + var000C)]);
-			var000E = (var000E & var000B[(var0004 + var000C)]);
+			var000D &= var000A[(var0004 + var000C)];
+			var000E &= var000B[(var0004 + var000C)];
 			var000C += 0x0001;
 		}
 		Func090D(item, var000D, var000E, 0xFFFF, Func063F, item, 0x000A);
@@ -62943,7 +62943,7 @@ void Func064E object#(0x64E) () {
 	}
 	if (event == 0x0002) {
 		var0001 = UI_get_party_list();
-		var0001 = (var0001 & 0xFE9C);
+		var0001 &= 0xFE9C;
 		for (var0004 in var0001 with var0002 to var0003) {
 			var0004->clear_item_flag(0x0008);
 			var0004->clear_item_flag(0x0007);
@@ -63174,7 +63174,7 @@ void Func0653 object#(0x653) () {
 			};
 			var0004 = 0x000F;
 			for (var0007 in var0001 with var0005 to var0006) {
-				var0002 = (var0002 & var0000->find_nearby(var0007, var0004, 0x0010));
+				var0002 &= var0000->find_nearby(var0007, var0004, 0x0010);
 			}
 			if (UI_get_array_size(var0002) > 0x0000) {
 				for (var0007 in var0002 with var0008 to var0009) {
@@ -63235,7 +63235,7 @@ void Func0654 object#(0x654) () {
 		UI_play_sound_effect(0x005A);
 		obj_sprite_effect(0x0007, 0xFFFE, 0xFFFE, 0x0000, 0x0000, 0x0000, 0xFFFF);
 		var0001 = UI_get_party_list();
-		var0001 = (var0001 & 0xFE9C);
+		var0001 &= 0xFE9C;
 		for (var0004 in var0001 with var0002 to var0003) {
 			var0004->set_item_flag(0x0009);
 		}
@@ -63660,7 +63660,7 @@ void Func065C object#(0x65C) () {
 			var0001 = 0x001E;
 			var0002 = Func0980(var0001);
 			var0003 = UI_get_party_list();
-			var0003 = (var0003 & 0xFE9C);
+			var0003 &= 0xFE9C;
 			for (var0006 in var0002 with var0004 to var0005) {
 				if (!(var0006 in var0003)) {
 					if (!(UI_die_roll(0x0001, 0x0003) == 0x0001)) {
@@ -63735,7 +63735,7 @@ void Func065D object#(0x65D) () {
 				var000A = var0003->find_nearby(0xFE99, var0006, 0x0020);
 				for (var000D in var000A with var000B to var000C) {
 					if (var000D->get_item_flag(0x0000) && (!(var000D in var0001))) {
-						var0001 = (var0001 & var000D);
+						var0001 &= var000D;
 					}
 				}
 			}
@@ -64397,8 +64397,8 @@ void Func0669 object#(0x669) () {
 				sfx 67;
 			};
 			var0001 = find_nearby(0x0097, 0x0019, 0x00B0);
-			var0001 = (var0001 & find_nearby(0x0098, 0x0019, 0x00B0));
-			var0001 = (var0001 & find_nearby(0x0212, 0x0019, 0x00B0));
+			var0001 &= find_nearby(0x0098, 0x0019, 0x00B0);
+			var0001 &= find_nearby(0x0212, 0x0019, 0x00B0);
 			if (var0001) {
 				for (var0004 in var0001 with var0002 to var0003) {
 					var0000 = script var0004 after 6 ticks {
@@ -66209,7 +66209,7 @@ void Func0688 object#(0x688) () {
 	var0004 = [];
 	for (var0007 in var0002 with var0005 to var0006) {
 		if (!(var0007 in var0003)) {
-			var0004 = (var0004 & var0007);
+			var0004 &= var0007;
 		}
 	}
 	var0008 = UI_get_array_size(var0004);
@@ -67374,7 +67374,7 @@ void Func06BB object#(0x6BB) () {
 		}
 		var0000 = UI_find_nearby_avatar(0x0366);
 		var0002 = UI_find_nearby_avatar(0x0203);
-		var0000 = (var0000 & var0002);
+		var0000 &= var0002;
 		var0002 = [];
 		var0001 = Func089D(var0000);
 	}
@@ -67990,7 +67990,7 @@ void Func06CA object#(0x6CA) () {
 	var0001 = var0000[0x0001];
 	var0002 = var0000[0x0002];
 	var0003 = find_nearby(0x01DB, 0x000C, 0x00B0);
-	var0003 = (var0003 & find_nearby(0x02D8, 0x000C, 0x00B0));
+	var0003 &= find_nearby(0x02D8, 0x000C, 0x00B0);
 	var0004 = [0x0000, 0x0000, 0x0000, 0x0000];
 	var0005 = [0x0000, 0x0000, 0x0000, 0x0000];
 	for (var0008 in var0003 with var0006 to var0007) {
@@ -68118,7 +68118,7 @@ void Func06CA object#(0x6CA) () {
 		}
 	}
 	var0003 = find_nearby(0x01DB, 0x000C, 0x00B0);
-	var0003 = (var0003 & find_nearby(0x02D8, 0x000C, 0x00B0));
+	var0003 &= find_nearby(0x02D8, 0x000C, 0x00B0);
 	var0004 = [0x0000, 0x0000, 0x0000, 0x0000];
 	for (var0008 in var0003 with var001C to var001D) {
 		var0009 = var0008->get_object_position();
@@ -69693,7 +69693,7 @@ void Func06E3 object#(0x6E3) () {
 			Func097F(0xFE9C, "@What...?@", 0x0005);
 			Func097F(0xFE9C, "@NO!@", 0x0028);
 			var0004 = find_nearby(0x010C, 0x000F, 0x0000);
-			var0004 = (var0004 & find_nearby(0x0350, 0x000F, 0x0000));
+			var0004 &= find_nearby(0x0350, 0x000F, 0x0000);
 			for (var0007 in var0004 with var0005 to var0006) {
 				var0007->set_item_frame(0x0004);
 			}
@@ -69716,7 +69716,7 @@ void Func06E3 object#(0x6E3) () {
 		}
 		if (gflags[0x0007] == true) {
 			var0004 = find_nearby(0x010C, 0x000F, 0x0000);
-			var0004 = (var0004 & find_nearby(0x0350, 0x000F, 0x0000));
+			var0004 &= find_nearby(0x0350, 0x000F, 0x0000);
 			for (var0007 in var0004 with var0008 to var0009) {
 				var0007->set_item_frame(0x0005);
 			}
@@ -70426,8 +70426,8 @@ void Func06EB object#(0x6EB) () {
 			};
 		} else {
 			var0007 = find_nearby(0x0370, 0x0014, 0x0000);
-			var0007 = (var0007 & find_nearby(0x038A, 0x0014, 0x0000));
-			var0007 = (var0007 & find_nearby(0x013D, 0x0014, 0x0000));
+			var0007 &= find_nearby(0x038A, 0x0014, 0x0000);
+			var0007 &= find_nearby(0x013D, 0x0014, 0x0000);
 			for (var000A in var0007 with var0008 to var0009) {
 				var000B = var000A->get_object_position();
 				UI_sprite_effect(0x001A, var000B[0x0001], var000B[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -71503,11 +71503,11 @@ void Func0707 object#(0x707) () {
 	var var0003;
 
 	var0000 = 0xFE9C->find_nearby(0x010E, 0x000A, 0x00B0);
-	var0000 = (var0000 & 0xFE9C->find_nearby(0x0178, 0x000A, 0x00B0));
-	var0000 = (var0000 & 0xFE9C->find_nearby(0x01B1, 0x000A, 0x00B0));
-	var0000 = (var0000 & 0xFE9C->find_nearby(0x01B0, 0x000A, 0x00B0));
-	var0000 = (var0000 & 0xFE9C->find_nearby(0x0204, 0x000A, 0x00B0));
-	var0000 = (var0000 & 0xFE9C->find_nearby(0x00E1, 0x000A, 0x00B0));
+	var0000 &= 0xFE9C->find_nearby(0x0178, 0x000A, 0x00B0);
+	var0000 &= 0xFE9C->find_nearby(0x01B1, 0x000A, 0x00B0);
+	var0000 &= 0xFE9C->find_nearby(0x01B0, 0x000A, 0x00B0);
+	var0000 &= 0xFE9C->find_nearby(0x0204, 0x000A, 0x00B0);
+	var0000 &= 0xFE9C->find_nearby(0x00E1, 0x000A, 0x00B0);
 	for (var0003 in var0000 with var0001 to var0002) {
 		if (var0003->get_item_quality() == 0x00D9) {
 			if (Func0906(var0003) == 0x0002) {
@@ -72443,7 +72443,7 @@ void Func071E object#(0x71E) () {
 	}
 	if ((gflags[0x02A9] == true) && (gflags[0x02AA] == true)) {
 		var0004 = find_nearby(0x0204, 0x000F, 0x0000);
-		var0004 = (var0004 & find_nearby(0x00F6, 0x000F, 0x0000));
+		var0004 &= find_nearby(0x00F6, 0x000F, 0x0000);
 		for (var0007 in var0004 with var0005 to var0006) {
 			var0003 = var0007->get_item_frame();
 			if ((var0003 == 0x0002) || (var0003 == 0x0012)) {
@@ -73667,7 +73667,7 @@ void Func072B object#(0x72B) () {
 		if (gflags[0x0009] == true) {
 			gflags[0x0009] = false;
 			var000A = find_nearby(0x0204, 0x000F, 0x0000);
-			var000A = (var000A & find_nearby(0x00F6, 0x000F, 0x0000));
+			var000A &= find_nearby(0x00F6, 0x000F, 0x0000);
 			for (var000D in var000A with var000B to var000C) {
 				var0009 = var000D->get_item_frame();
 				if ((var0009 == 0x000E) || (var0009 == 0x001E)) {
@@ -75686,27 +75686,27 @@ void Func0767 object#(0x767) () {
 	}
 	if (var0000 == true) {
 		var0007 = [0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F];
-		var0007 = (var0007 & [0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09EF, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F]);
+		var0007 &= [0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09EF, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F];
 		var0008 = [0x0AE9, 0x0AE9, 0x0AE9, 0x0AE9, 0x0AE9, 0x0ADF, 0x0ADF, 0x0ADF, 0x0ADF, 0x0ADF, 0x0ADF, 0x0AD9, 0x0AD9, 0x0AD9, 0x0AD9, 0x0AD9, 0x0ACF, 0x0ACF, 0x0ACF, 0x0ACF, 0x0ACF, 0x0ACF, 0x0AC9, 0x0AC9, 0x0AC9, 0x0AC9, 0x0AC9];
-		var0008 = (var0008 & [0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0AB9, 0x0AB9, 0x0AB9, 0x0AB9, 0x0AB9, 0x0AB9, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A99, 0x0A99, 0x0A99, 0x0A99, 0x0A99]);
+		var0008 &= [0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0AB9, 0x0AB9, 0x0AB9, 0x0AB9, 0x0AB9, 0x0AB9, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A99, 0x0A99, 0x0A99, 0x0A99, 0x0A99];
 	}
 	if (var0001 == true) {
 		var0007 = [0x095F, 0x094F, 0x093F, 0x092F, 0x091F, 0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919, 0x095F, 0x094F, 0x093F, 0x092F, 0x091F, 0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919, 0x095F, 0x094F, 0x093F, 0x092F, 0x091F];
-		var0007 = (var0007 & [0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919, 0x095F, 0x094F, 0x093F, 0x092F, 0x091F, 0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919, 0x095F, 0x094F, 0x093F, 0x092F, 0x091F, 0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919, 0x095F, 0x094F, 0x093F, 0x092F, 0x091F]);
+		var0007 &= [0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919, 0x095F, 0x094F, 0x093F, 0x092F, 0x091F, 0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919, 0x095F, 0x094F, 0x093F, 0x092F, 0x091F, 0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919, 0x095F, 0x094F, 0x093F, 0x092F, 0x091F];
 		var0008 = [0x0AE9, 0x0AE9, 0x0AE9, 0x0AE9, 0x0AE9, 0x0ADF, 0x0ADF, 0x0ADF, 0x0ADF, 0x0ADF, 0x0ADF, 0x0AD9, 0x0AD9, 0x0AD9, 0x0AD9, 0x0AD9, 0x0ACF, 0x0ACF, 0x0ACF, 0x0ACF, 0x0ACF, 0x0ACF, 0x0AC9, 0x0AC9, 0x0AC9, 0x0AC9, 0x0AC9];
-		var0008 = (var0008 & [0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0AB9, 0x0AB9, 0x0AB9, 0x0AB9, 0x0AB9, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A99, 0x0A99, 0x0A99, 0x0A99, 0x0A99]);
+		var0008 &= [0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0AB9, 0x0AB9, 0x0AB9, 0x0AB9, 0x0AB9, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A99, 0x0A99, 0x0A99, 0x0A99, 0x0A99];
 	}
 	if (var0002 == true) {
 		var0007 = [0x095F, 0x094F, 0x093F, 0x092F, 0x091F, 0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919, 0x095F, 0x094F, 0x093F, 0x092F, 0x091F, 0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919, 0x095F, 0x094F, 0x093F, 0x092F, 0x091F];
-		var0007 = (var0007 & [0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919, 0x095F, 0x094F, 0x093F, 0x092F, 0x091F, 0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919, 0x095F, 0x094F, 0x093F, 0x092F, 0x091F, 0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919, 0x095F, 0x094F, 0x093F, 0x092F, 0x091F]);
+		var0007 &= [0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919, 0x095F, 0x094F, 0x093F, 0x092F, 0x091F, 0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919, 0x095F, 0x094F, 0x093F, 0x092F, 0x091F, 0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919, 0x095F, 0x094F, 0x093F, 0x092F, 0x091F];
 		var0008 = [0x0A69, 0x0A69, 0x0A69, 0x0A69, 0x0A69, 0x0A5F, 0x0A5F, 0x0A5F, 0x0A5F, 0x0A5F, 0x0A5F, 0x0A59, 0x0A59, 0x0A59, 0x0A59, 0x0A59, 0x0A4F, 0x0A4F, 0x0A4F, 0x0A4F, 0x0A4F, 0x0A4F, 0x0A49, 0x0A49, 0x0A49, 0x0A49, 0x0A49];
-		var0008 = (var0008 & [0x0A3F, 0x0A3F, 0x0A3F, 0x0A3F, 0x0A3F, 0x0A3F, 0x0A39, 0x0A39, 0x0A39, 0x0A39, 0x0A39, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A29, 0x0A29, 0x0A29, 0x0A29, 0x0A29, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A19, 0x0A19, 0x0A19, 0x0A19, 0x0A19]);
+		var0008 &= [0x0A3F, 0x0A3F, 0x0A3F, 0x0A3F, 0x0A3F, 0x0A3F, 0x0A39, 0x0A39, 0x0A39, 0x0A39, 0x0A39, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A29, 0x0A29, 0x0A29, 0x0A29, 0x0A29, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A19, 0x0A19, 0x0A19, 0x0A19, 0x0A19];
 	}
 	if (var0003 == true) {
 		var0007 = [0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F];
-		var0007 = (var0007 & [0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F]);
+		var0007 &= [0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F];
 		var0008 = [0x0A69, 0x0A69, 0x0A69, 0x0A69, 0x0A69, 0x0A5F, 0x0A5F, 0x0A5F, 0x0A5F, 0x0A5F, 0x0A5F, 0x0A59, 0x0A59, 0x0A59, 0x0A59, 0x0A59, 0x0A4F, 0x0A4F, 0x0A4F, 0x0A4F, 0x0A4F, 0x0A4F, 0x0A49, 0x0A49, 0x0A49, 0x0A49, 0x0A49];
-		var0008 = (var0008 & [0x0A3F, 0x0A3F, 0x0A3F, 0x0A3F, 0x0A3F, 0x0A3F, 0x0A39, 0x0A39, 0x0A39, 0x0A39, 0x0A39, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A29, 0x0A29, 0x0A29, 0x0A29, 0x0A29, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A19, 0x0A19, 0x0A19, 0x0A19, 0x0A19]);
+		var0008 &= [0x0A3F, 0x0A3F, 0x0A3F, 0x0A3F, 0x0A3F, 0x0A3F, 0x0A39, 0x0A39, 0x0A39, 0x0A39, 0x0A39, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A29, 0x0A29, 0x0A29, 0x0A29, 0x0A29, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A19, 0x0A19, 0x0A19, 0x0A19, 0x0A19];
 	}
 	var0009 = 0x0000;
 	for (var000C in var0007 with var0011 to var0012) {
@@ -76286,7 +76286,7 @@ void Func0795 object#(0x795) () {
 			if (var0007 == 0x0000) {
 				var0007 = (var0006 + var0008);
 			} else {
-				var0007 = (var0007 & (var0006 + var0008));
+				var0007 &= (var0006 + var0008);
 			}
 			var0006 += 0x0004;
 		}
@@ -76727,10 +76727,10 @@ void Func07A4 object#(0x7A4) () {
 	if (event == 0x0003) {
 		event = 0x0001;
 		var0000 = find_nearby(0x010E, 0x0028, 0x0000);
-		var0000 = (var0000 & find_nearby(0x0178, 0x0028, 0x0000));
+		var0000 &= find_nearby(0x0178, 0x0028, 0x0000);
 		var0001 = [];
 		for (var0004 in var0000 with var0002 to var0003) {
-			var0001 = (var0001 & get_distance(var0004));
+			var0001 &= get_distance(var0004);
 		}
 		var0000 = Func0989(var0000, var0001);
 		var0005 = 0x0001;
@@ -76775,7 +76775,7 @@ void Func07A5 object#(0x7A5) () {
 		var0000 = find_nearby(0x0369, 0x0014, 0x0000);
 		var0001 = [];
 		for (var0004 in var0000 with var0002 to var0003) {
-			var0001 = (var0001 & var0004->get_distance(item));
+			var0001 &= var0004->get_distance(item);
 		}
 		var0000 = Func0989(var0000, var0001);
 		var0004 = var0000[0x0001];
@@ -76870,7 +76870,7 @@ void Func07AB object#(0x7AB) () {
 		}
 		var0000 = [0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2A, 0xFF30, 0xFF2E];
 		if (0xFF29->get_item_flag(0x001C)) {
-			var0000 = (var0000 & 0xFF29);
+			var0000 &= 0xFF29;
 		}
 		var0001 = 0x0005;
 		var0002 = Func09A0(0x0005, 0x0001);
@@ -77491,8 +77491,8 @@ void Func07D0 object#(0x7D0) () {
 		var0007 = var0004[var0000];
 		var0008 = var0005[var0000];
 		while (var0006 < 0x0008) {
-			var0007 = (var0007 & var0004[(var0000 + var0006)]);
-			var0008 = (var0008 & var0005[(var0000 + var0006)]);
+			var0007 &= var0004[(var0000 + var0006)];
+			var0008 &= var0005[(var0000 + var0006)];
 			var0006 += 0x0001;
 		}
 		Func090E(item, 0xFE9C, var0007, var0008, 0xFFFF, Func07D0, item, 0x000A, true);
@@ -78193,7 +78193,7 @@ void Func07DE object#(0x7DE) () {
 			var0000 = [0x0974, 0x0470, 0x0000];
 			var0001 = [0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E];
 			if (0xFF29->get_item_flag(0x001C)) {
-				var0001 = (var0001 & 0xFF29);
+				var0001 &= 0xFF29;
 			}
 			var0002 = UI_get_random(0x0008);
 			var0003 = Func09A0(0x0005, 0x0001);
@@ -78690,9 +78690,9 @@ void Func07E2 object#(0x7E2) () {
 	}
 	if ((var0000 == 0x0001) || (var0000 == 0x0048)) {
 		var0001 = 0xFE9C->find_nearby(0x010E, 0x000A, 0x00B0);
-		var0001 = (var0001 & 0xFE9C->find_nearby(0x0178, 0x000A, 0x00B0));
-		var0001 = (var0001 & 0xFE9C->find_nearby(0x01B1, 0x000A, 0x00B0));
-		var0001 = (var0001 & 0xFE9C->find_nearby(0x01B0, 0x000A, 0x00B0));
+		var0001 &= 0xFE9C->find_nearby(0x0178, 0x000A, 0x00B0);
+		var0001 &= 0xFE9C->find_nearby(0x01B1, 0x000A, 0x00B0);
+		var0001 &= 0xFE9C->find_nearby(0x01B0, 0x000A, 0x00B0);
 		for (var0004 in var0001 with var0002 to var0003) {
 			if (var0004->get_item_quality() == 0x0048) {
 				if (Func0906(var0004) == 0x0001) {
@@ -83541,22 +83541,22 @@ void Func080B 0x80B () {
 					var0003 = 0x03B7;
 					var0004 = ["Nothing"];
 					if (Func097D(0xFE9B, 0x0001, 0x03B8, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Guilders");
+						var0004 &= "Guilders";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03B4, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Filari");
+						var0004 &= "Filari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0284, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Gold Coins");
+						var0004 &= "Gold Coins";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0285, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Gold Nuggets");
+						var0004 &= "Gold Nuggets";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03A9, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Jewelry");
+						var0004 &= "Jewelry";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0286, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Gold Bars");
+						var0004 &= "Gold Bars";
 					}
 					var0005 = Func0956(var0004);
 					if (var0005 == "Nothing") {
@@ -83698,22 +83698,22 @@ void Func080B 0x80B () {
 					var0003 = 0x03B8;
 					var0004 = ["Nothing"];
 					if (Func097D(0xFE9B, 0x0001, 0x03B7, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Monetari");
+						var0004 &= "Monetari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03B4, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Filari");
+						var0004 &= "Filari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0284, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Gold Coins");
+						var0004 &= "Gold Coins";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0285, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Gold Nuggets");
+						var0004 &= "Gold Nuggets";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03A9, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Jewelry");
+						var0004 &= "Jewelry";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0286, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Gold Bars");
+						var0004 &= "Gold Bars";
 					}
 					var0005 = Func0956(var0004);
 					if (var0005 == "Nothing") {
@@ -83866,22 +83866,22 @@ void Func080B 0x80B () {
 					var0003 = 0x03B4;
 					var0004 = ["Nothing"];
 					if (Func097D(0xFE9B, 0x0001, 0x03B7, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Monetari");
+						var0004 &= "Monetari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03B8, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Guilders");
+						var0004 &= "Guilders";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0284, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Gold Coins");
+						var0004 &= "Gold Coins";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0285, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Gold Nuggets");
+						var0004 &= "Gold Nuggets";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03A9, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Jewelry");
+						var0004 &= "Jewelry";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0286, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Gold Bars");
+						var0004 &= "Gold Bars";
 					}
 					var0005 = Func0956(var0004);
 					if (var0005 == "Nothing") {
@@ -84024,22 +84024,22 @@ void Func080B 0x80B () {
 					var0003 = 0x0284;
 					var0004 = ["Nothing"];
 					if (Func097D(0xFE9B, 0x0001, 0x03B7, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Monetari");
+						var0004 &= "Monetari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03B4, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Filari");
+						var0004 &= "Filari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03B8, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Guilders");
+						var0004 &= "Guilders";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0285, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Gold Nuggets");
+						var0004 &= "Gold Nuggets";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03A9, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Jewelry");
+						var0004 &= "Jewelry";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0286, 0xFE99, 0xFE99)) {
-						var0004 = (var0004 & "Gold Bars");
+						var0004 &= "Gold Bars";
 					}
 					var0005 = Func0956(var0004);
 					if (var0005 == "Nothing") {
@@ -86460,7 +86460,7 @@ labelFunc081A_00C0:
 				var0009 = ["nobody"];
 				for (var000C in var0008 with var000A to var000B) {
 					if (!(var000C == 0x0000)) {
-						var0009 = (var0009 & var000C->get_npc_name());
+						var0009 &= var000C->get_npc_name();
 					}
 				}
 				var000D = Func0957(var0009);
@@ -86993,22 +86993,22 @@ void Func081D 0x81D () {
 					var0002 = 0x03B7;
 					var0003 = ["Nothing"];
 					if (Func097D(0xFE9B, 0x0001, 0x03B8, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Guilders");
+						var0003 &= "Guilders";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03B4, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Filari");
+						var0003 &= "Filari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0284, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Gold Coins");
+						var0003 &= "Gold Coins";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0285, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Gold Nuggets");
+						var0003 &= "Gold Nuggets";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x02F8, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Gems");
+						var0003 &= "Gems";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03A9, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Jewelry");
+						var0003 &= "Jewelry";
 					}
 					var0004 = Func0956(var0003);
 					if (var0004 == "Nothing") {
@@ -87141,22 +87141,22 @@ void Func081D 0x81D () {
 					var0002 = 0x03B8;
 					var0003 = ["Nothing"];
 					if (Func097D(0xFE9B, 0x0001, 0x03B7, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Monetari");
+						var0003 &= "Monetari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03B4, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Filari");
+						var0003 &= "Filari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0284, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Gold Coins");
+						var0003 &= "Gold Coins";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0285, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Gold Nuggets");
+						var0003 &= "Gold Nuggets";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x02F8, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Gems");
+						var0003 &= "Gems";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03A9, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Jewelry");
+						var0003 &= "Jewelry";
 					}
 					var0004 = Func0956(var0003);
 					if (var0004 == "Nothing") {
@@ -87300,22 +87300,22 @@ void Func081D 0x81D () {
 					var0002 = 0x03B4;
 					var0003 = ["Nothing"];
 					if (Func097D(0xFE9B, 0x0001, 0x03B7, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Monetari");
+						var0003 &= "Monetari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03B8, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Guilders");
+						var0003 &= "Guilders";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0284, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Gold Coins");
+						var0003 &= "Gold Coins";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0285, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Gold Nuggets");
+						var0003 &= "Gold Nuggets";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x02F8, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Gems");
+						var0003 &= "Gems";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03A9, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Jewelry");
+						var0003 &= "Jewelry";
 					}
 					var0004 = Func0956(var0003);
 					if (var0004 == "Nothing") {
@@ -87449,22 +87449,22 @@ void Func081D 0x81D () {
 					var0002 = 0x0284;
 					var0003 = ["Nothing"];
 					if (Func097D(0xFE9B, 0x0001, 0x03B7, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Monetari");
+						var0003 &= "Monetari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03B4, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Filari");
+						var0003 &= "Filari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03B8, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Guilders");
+						var0003 &= "Guilders";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0285, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Gold Nuggets");
+						var0003 &= "Gold Nuggets";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x02F8, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Gems");
+						var0003 &= "Gems";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03A9, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Jewelry");
+						var0003 &= "Jewelry";
 					}
 					var0004 = Func0956(var0003);
 					if (var0004 == "Nothing") {
@@ -89911,7 +89911,7 @@ labelFunc0836_0055:
 				var0008 = ["nobody"];
 				for (var000B in var0007 with var0009 to var000A) {
 					if (!(var000B == 0x0000)) {
-						var0008 = (var0008 & var000B->get_npc_name());
+						var0008 &= var000B->get_npc_name();
 					}
 				}
 				var000C = Func0957(var0008);
@@ -91716,23 +91716,23 @@ void Func0843 0x843 () {
 		var000A = false;
 		var000B = 0xFE99;
 		if (var0004) {
-			var0009 = (var0009 & "leather armour");
+			var0009 &= "leather armour";
 			var000A = true;
 		}
 		if (var0005) {
-			var0009 = (var0009 & "leather gloves");
+			var0009 &= "leather gloves";
 			var000A = true;
 		}
 		if (var0006) {
-			var0009 = (var0009 & "leather boots");
+			var0009 &= "leather boots";
 			var000A = true;
 		}
 		if (var0007) {
-			var0009 = (var0009 & "leather helm");
+			var0009 &= "leather helm";
 			var000A = true;
 		}
 		if (var0008) {
-			var0009 = (var0009 & "leather leggings");
+			var0009 &= "leather leggings";
 			var000A = true;
 		}
 		if (var000A == true) {
@@ -96176,13 +96176,13 @@ void Func0865 0x865 () {
 					var0002 = 0x03B7;
 					var0003 = ["Nothing"];
 					if (Func097D(0xFE9B, 0x0001, 0x03B8, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Guilders");
+						var0003 &= "Guilders";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03B4, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Filari");
+						var0003 &= "Filari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0284, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Gold Coins");
+						var0003 &= "Gold Coins";
 					}
 					var0004 = Func0956(var0003);
 					if (var0004 == "Nothing") {
@@ -96282,13 +96282,13 @@ void Func0865 0x865 () {
 					var0002 = 0x03B8;
 					var0003 = ["Nothing"];
 					if (Func097D(0xFE9B, 0x0001, 0x03B7, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Monetari");
+						var0003 &= "Monetari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03B4, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Filari");
+						var0003 &= "Filari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0284, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Gold Coins");
+						var0003 &= "Gold Coins";
 					}
 					var0004 = Func0956(var0003);
 					if (var0004 == "Nothing") {
@@ -96399,13 +96399,13 @@ void Func0865 0x865 () {
 					var0002 = 0x03B4;
 					var0003 = ["Nothing"];
 					if (Func097D(0xFE9B, 0x0001, 0x03B7, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Monetari");
+						var0003 &= "Monetari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03B8, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Guilders");
+						var0003 &= "Guilders";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0284, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Gold Coins");
+						var0003 &= "Gold Coins";
 					}
 					var0004 = Func0956(var0003);
 					if (var0004 == "Nothing") {
@@ -96506,13 +96506,13 @@ void Func0865 0x865 () {
 					var0002 = 0x0284;
 					var0003 = ["Nothing"];
 					if (Func097D(0xFE9B, 0x0001, 0x03B7, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Monetari");
+						var0003 &= "Monetari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03B4, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Filari");
+						var0003 &= "Filari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03B8, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Guilders");
+						var0003 &= "Guilders";
 					}
 					var0004 = Func0956(var0003);
 					if (var0004 == "Nothing") {
@@ -97105,31 +97105,31 @@ void Func0868 0x868 () {
 		var000C = ["nothing"];
 		var000D = false;
 		if (var0005) {
-			var000C = (var000C & "scale armour");
+			var000C &= "scale armour";
 			var000D = true;
 		}
 		if (var0006) {
-			var000C = (var000C & "chain armour");
+			var000C &= "chain armour";
 			var000D = true;
 		}
 		if (var0007) {
-			var000C = (var000C & "plate armour");
+			var000C &= "plate armour";
 			var000D = true;
 		}
 		if (var0008) {
-			var000C = (var000C & "chain leggings");
+			var000C &= "chain leggings";
 			var000D = true;
 		}
 		if (var0009) {
-			var000C = (var000C & "plate leggings");
+			var000C &= "plate leggings";
 			var000D = true;
 		}
 		if (var000A) {
-			var000C = (var000C & "great helm");
+			var000C &= "great helm";
 			var000D = true;
 		}
 		if (var000B) {
-			var000C = (var000C & "crested helm");
+			var000C &= "crested helm";
 			var000D = true;
 		}
 		if (var000D == true) {
@@ -97828,7 +97828,7 @@ void Func086B 0x86B () {
 		var0003 = ["nobody"];
 		for (var0006 in var0002 with var0004 to var0005) {
 			if (!(var0006 == 0x0000)) {
-				var0003 = (var0003 & var0006->get_npc_name());
+				var0003 &= var0006->get_npc_name();
 			}
 		}
 		var0007 = Func0957(var0003);
@@ -98892,7 +98892,7 @@ void Func0873 0x873 () {
 		var0006 = ["Nobody"];
 		for (var0009 in var0005 with var0007 to var0008) {
 			if (!(var0009 == 0x0000)) {
-				var0006 = (var0006 & var0009->get_npc_name());
+				var0006 &= var0009->get_npc_name();
 			}
 		}
 		var000A = Func0957(var0006);
@@ -99046,7 +99046,7 @@ void Func0875 0x875 () {
 	var0005 = ["Nobody"];
 	for (var0008 in var0004 with var0006 to var0007) {
 		if (!(var0008 == 0x0000)) {
-			var0005 = (var0005 & var0008->get_npc_name());
+			var0005 &= var0008->get_npc_name();
 		}
 	}
 	var0009 = Func0957(var0005);
@@ -99278,13 +99278,13 @@ void Func087B 0x87B () {
 					var0002 = 0x03B7;
 					var0003 = ["Nothing"];
 					if (Func097D(0xFE9B, 0x0001, 0x03B8, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Guilders");
+						var0003 &= "Guilders";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03B4, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Filari");
+						var0003 &= "Filari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0284, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Gold Coins");
+						var0003 &= "Gold Coins";
 					}
 					var0004 = Func0956(var0003);
 					if (var0004 == "Nothing") {
@@ -99384,13 +99384,13 @@ void Func087B 0x87B () {
 					var0002 = 0x03B8;
 					var0003 = ["Nothing"];
 					if (Func097D(0xFE9B, 0x0001, 0x03B7, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Monetari");
+						var0003 &= "Monetari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03B4, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Filari");
+						var0003 &= "Filari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0284, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Gold Coins");
+						var0003 &= "Gold Coins";
 					}
 					var0004 = Func0956(var0003);
 					if (var0004 == "Nothing") {
@@ -99501,13 +99501,13 @@ void Func087B 0x87B () {
 					var0002 = 0x03B4;
 					var0003 = ["Nothing"];
 					if (Func097D(0xFE9B, 0x0001, 0x03B7, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Monetari");
+						var0003 &= "Monetari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03B8, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Guilders");
+						var0003 &= "Guilders";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x0284, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Gold Coins");
+						var0003 &= "Gold Coins";
 					}
 					var0004 = Func0956(var0003);
 					if (var0004 == "Nothing") {
@@ -99608,13 +99608,13 @@ void Func087B 0x87B () {
 					var0002 = 0x0284;
 					var0003 = ["Nothing"];
 					if (Func097D(0xFE9B, 0x0001, 0x03B7, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Monetari");
+						var0003 &= "Monetari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03B4, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Filari");
+						var0003 &= "Filari";
 					}
 					if (Func097D(0xFE9B, 0x0001, 0x03B8, 0xFE99, 0xFE99)) {
-						var0003 = (var0003 & "Guilders");
+						var0003 &= "Guilders";
 					}
 					var0004 = Func0956(var0003);
 					if (var0004 == "Nothing") {
@@ -99973,7 +99973,7 @@ void Func0881 0x881 () {
 	var var0005;
 
 	var0000 = 0xFE9C->find_nearby(0x010E, 0x000C, 0x00B0);
-	var0000 = (var0000 & 0xFE9C->find_nearby(0x0178, 0x000C, 0x00B0));
+	var0000 &= 0xFE9C->find_nearby(0x0178, 0x000C, 0x00B0);
 	for (var0003 in var0000 with var0001 to var0002) {
 		var0004 = var0003->get_item_quality();
 		if ((var0004 == 0x0001) || ((var0004 == 0x0002) || ((var0004 == 0x0003) || ((var0004 == 0x0004) || ((var0004 == 0x0005) || ((var0004 == 0x0006) || ((var0004 == 0x0007) || ((var0004 == 0x000B) || ((var0004 == 0x004A) || (var0004 == 0x00B8)))))))))) {
@@ -100548,7 +100548,7 @@ void Func088D 0x88D (var var0000, var var0001) {
 				}
 			}
 		}
-		var0002 = (var0002 & var0003[var000D]);
+		var0002 &= var0003[var000D];
 		var0003[var000D] = 0x0000;
 	}
 	0xFE9C->sit_down(var0000);
@@ -100631,8 +100631,8 @@ var Func0891 0x891 () {
 	var var0003;
 
 	var0000 = ("soup" & ("*" & ("eruption" & ("*" & ("quagmire" & ("*" & ("bureaucracy" & ("bureaucracies" & ("hoe" & "*")))))))));
-	var0000 = (var0000 & ("tyranny" & ("tyrannies" & ("monarchy" & ("monarchies" & ("hammer" & ("*" & ("sickle" & ("*" & ("imperialism" & "*"))))))))));
-	var0000 = (var0000 & ("axle" & ("*" & ("wheel" & ("*" & ("Gump" & ("*" & ("lenticular cloud" & ("*" & ("clock" & ("*" & ("sloop" & ("*" & ("barge" & "*"))))))))))))));
+	var0000 &= ("tyranny" & ("tyrannies" & ("monarchy" & ("monarchies" & ("hammer" & ("*" & ("sickle" & ("*" & ("imperialism" & "*")))))))));
+	var0000 &= ("axle" & ("*" & ("wheel" & ("*" & ("Gump" & ("*" & ("lenticular cloud" & ("*" & ("clock" & ("*" & ("sloop" & ("*" & ("barge" & "*")))))))))))));
 	var0001 = UI_die_roll(0x0001, (UI_get_array_size(var0000) / 0x0002));
 	var0002 = var0000[((var0001 * 0x0002) - 0x0001)];
 	var0003 = var0000[(var0001 * 0x0002)];
@@ -100649,8 +100649,8 @@ var Func0892 0x892 () {
 	var var0003;
 
 	var0000 = ("cage" & ("*" & ("flagpole" & ("*" & ("digit" & ("*" & ("nail" & ("*" & ("epaphite" & ("*" & ("sycophant" & ("*" & ("demagogue" & "*")))))))))))));
-	var0000 = (var0000 & ("prophet" & ("*" & ("profit" & ("*" & ("pus" & ("pus" & ("mulch" & ("mulch" & ("Garden Gnome" & "*"))))))))));
-	var0000 = (var0000 & ("personal crisis" & ("personal crises" & ("wit" & ("*" & ("bathysphere" & ("*" & ("pudding" & ("*" & ("origami ball" & ("*" & ("communion wafer" & ("*" & ("armageddon" & ("*" & ("balloon" & "*"))))))))))))))));
+	var0000 &= ("prophet" & ("*" & ("profit" & ("*" & ("pus" & ("pus" & ("mulch" & ("mulch" & ("Garden Gnome" & "*")))))))));
+	var0000 &= ("personal crisis" & ("personal crises" & ("wit" & ("*" & ("bathysphere" & ("*" & ("pudding" & ("*" & ("origami ball" & ("*" & ("communion wafer" & ("*" & ("armageddon" & ("*" & ("balloon" & "*")))))))))))))));
 	var0001 = UI_die_roll(0x0001, (UI_get_array_size(var0000) / 0x0002));
 	var0002 = var0000[((var0001 * 0x0002) - 0x0001)];
 	var0003 = var0000[(var0001 * 0x0002)];
@@ -100667,8 +100667,8 @@ var Func0893 0x893 () {
 	var var0003;
 
 	var0000 = ("constipated" & ("fractured" & ("dysfunctional" & ("dyslexic" & ("diuretic" & ("glandular" & ("hormonal" & ("obtuse" & ("obese" & ("partisan" & "bilateral"))))))))));
-	var0000 = (var0000 & ("symmetrical" & ("frontal" & ("superfluous" & ("saturated" & ("molar" & ("low-pressure" & ("diagnostic" & ("acidic" & ("empirical" & ("basic" & ("suicidal" & ("comforting" & "passive")))))))))))));
-	var0000 = (var0000 & ("hedonistic" & ("pagan" & ("philanthropic" & ("operatic" & ("staged" & ("affected" & ("grotesque" & ("orgasmic" & ("organic" & ("pedantic" & ("imperialist" & ("Gumpy" & "dependent")))))))))))));
+	var0000 &= ("symmetrical" & ("frontal" & ("superfluous" & ("saturated" & ("molar" & ("low-pressure" & ("diagnostic" & ("acidic" & ("empirical" & ("basic" & ("suicidal" & ("comforting" & "passive"))))))))))));
+	var0000 &= ("hedonistic" & ("pagan" & ("philanthropic" & ("operatic" & ("staged" & ("affected" & ("grotesque" & ("orgasmic" & ("organic" & ("pedantic" & ("imperialist" & ("Gumpy" & "dependent"))))))))))));
 	var0001 = UI_die_roll(0x0001, UI_get_array_size(var0000));
 	var0002 = var0000[var0001];
 	var0001 = UI_die_roll(0x0001, UI_get_array_size(var0000));
@@ -100684,9 +100684,9 @@ var Func0894 0x894 () {
 	var var0004;
 
 	var0000 = ("lactate" & ("lactated" & ("lactating" & ("grovel" & ("grovelled" & ("grovelling" & ("brew" & ("*" & ("*" & ("digest" & ("*" & ("*" & ("complain" & ("*" & "*"))))))))))))));
-	var0000 = (var0000 & ("gump" & ("*" & ("*" & ("guffaw" & ("*" & ("*" & ("loiter" & ("*" & ("*" & ("solicit" & ("*" & "*"))))))))))));
-	var0000 = (var0000 & ("represent" & ("*" & ("*" & ("conjugate" & ("conjugated" & ("conjugating" & ("sink" & ("sank" & ("*" & ("harvest" & ("*" & ("*" & ("gossip" & ("*" & ("*" & ("falsify" & ("falsified" & ("*" & ("sue" & ("sued" & "suing")))))))))))))))))))));
-	var0000 = (var0000 & ("gyrate" & ("gyrated" & ("gyrating" & ("outstretch" & ("*" & ("*" & ("deflower" & ("*" & "*")))))))));
+	var0000 &= ("gump" & ("*" & ("*" & ("guffaw" & ("*" & ("*" & ("loiter" & ("*" & ("*" & ("solicit" & ("*" & "*")))))))))));
+	var0000 &= ("represent" & ("*" & ("*" & ("conjugate" & ("conjugated" & ("conjugating" & ("sink" & ("sank" & ("*" & ("harvest" & ("*" & ("*" & ("gossip" & ("*" & ("*" & ("falsify" & ("falsified" & ("*" & ("sue" & ("sued" & "suing"))))))))))))))))))));
+	var0000 &= ("gyrate" & ("gyrated" & ("gyrating" & ("outstretch" & ("*" & ("*" & ("deflower" & ("*" & "*"))))))));
 	var0001 = UI_die_roll(0x0001, (UI_get_array_size(var0000) / 0x0003));
 	var0002 = var0000[((var0001 * 0x0003) - 0x0002)];
 	var0003 = var0000[((var0001 * 0x0003) - 0x0001)];
@@ -100708,8 +100708,8 @@ var Func0895 0x895 () {
 	var var0004;
 
 	var0000 = ("collate" & ("collated" & ("collating" & ("sear" & ("*" & ("*" & ("croak" & ("*" & ("*" & ("nap" & ("napped" & ("napping" & ("work" & ("*" & ("*" & ("conjure" & ("conjured" & "conjuring")))))))))))))))));
-	var0000 = (var0000 & ("campaign" & ("*" & ("*" & ("protest" & ("*" & ("*" & ("spew" & ("*" & ("*" & ("inhabit" & ("*" & ("*" & ("censor" & ("*" & "*")))))))))))))));
-	var0000 = (var0000 & ("lay off" & ("laid off" & ("laying off" & ("spray" & ("*" & ("*" & ("tan" & ("tanned" & "tanning")))))))));
+	var0000 &= ("campaign" & ("*" & ("*" & ("protest" & ("*" & ("*" & ("spew" & ("*" & ("*" & ("inhabit" & ("*" & ("*" & ("censor" & ("*" & "*"))))))))))))));
+	var0000 &= ("lay off" & ("laid off" & ("laying off" & ("spray" & ("*" & ("*" & ("tan" & ("tanned" & "tanning"))))))));
 	var0001 = UI_die_roll(0x0001, (UI_get_array_size(var0000) / 0x0003));
 	var0002 = var0000[((var0001 * 0x0003) - 0x0002)];
 	var0003 = var0000[((var0001 * 0x0003) - 0x0001)];
@@ -100729,7 +100729,7 @@ var Func0896 0x896 () {
 	var var0002;
 
 	var0000 = ("between the sheets" & ("with a melon" & ("assuredly" & ("above thine house" & "below the ground"))));
-	var0000 = (var0000 & ("with much consternation" & ("Gumpily" & ("fiscally" & ("similarly" & "throughout the universe")))));
+	var0000 &= ("with much consternation" & ("Gumpily" & ("fiscally" & ("similarly" & "throughout the universe"))));
 	var0001 = UI_die_roll(0x0001, UI_get_array_size(var0000));
 	var0002 = var0000[var0001];
 	return var0002;
@@ -100741,7 +100741,7 @@ var Func0897 0x897 () {
 	var var0002;
 
 	var0000 = ("without my knowledge" & ("without the proper permit" & ("through the ages" & "against all odds")));
-	var0000 = (var0000 & ("with thy mother" & ("in a roundabout manner" & ("implicitly" & ("explicitly" & "anxiously")))));
+	var0000 &= ("with thy mother" & ("in a roundabout manner" & ("implicitly" & ("explicitly" & "anxiously"))));
 	var0001 = UI_die_roll(0x0001, UI_get_array_size(var0000));
 	var0002 = var0000[var0001];
 	return var0002;
@@ -100754,8 +100754,8 @@ var Func0898 0x898 () {
 	var var0003;
 
 	var0000 = ("armadillo" & ("*" & ("octopus" & ("octopi" & ("ungulate" & ("*" & ("cockatoo" & ("*" & ("ferret" & ("*" & ("weasel" & ("*" & ("bassalope" & "*")))))))))))));
-	var0000 = (var0000 & ("platypus" & ("platypuses" & ("no-see-um" & ("*" & ("alpaca" & ("*" & ("mooncow" & ("*" & ("thundermoose" & ("*" & ("llama" & "*"))))))))))));
-	var0000 = (var0000 & ("iguana" & ("*" & ("reptile" & ("*" & ("amphibian" & ("*" & ("mammal" & ("*" & ("invertebrate" & "*"))))))))));
+	var0000 &= ("platypus" & ("platypuses" & ("no-see-um" & ("*" & ("alpaca" & ("*" & ("mooncow" & ("*" & ("thundermoose" & ("*" & ("llama" & "*")))))))))));
+	var0000 &= ("iguana" & ("*" & ("reptile" & ("*" & ("amphibian" & ("*" & ("mammal" & ("*" & ("invertebrate" & "*")))))))));
 	var0001 = UI_die_roll(0x0001, (UI_get_array_size(var0000) / 0x0002));
 	var0002 = var0000[((var0001 * 0x0002) - 0x0001)];
 	var0003 = var0000[(var0001 * 0x0002)];
@@ -100772,7 +100772,7 @@ var Func0899 0x899 () {
 	var var0003;
 
 	var0000 = ("dicot" & ("*" & ("conifer" & ("*" & ("slug" & ("*" & ("sloth" & ("*" & ("mole-person" & ("mole-people" & ("pod-person" & ("pod-people" & ("Saxon" & ("*" & ("Dominican" & ("*" & ("Basque" & "*")))))))))))))))));
-	var0000 = (var0000 & ("Gypsy" & ("Gypsies" & ("Jute" & ("*" & ("Norman" & ("*" & ("Mongol" & ("*" & ("Slav" & ("*" & ("Hindu" & ("*" & ("Christian" & ("*" & ("Albigensian" & ("*" & ("cephalopod" & ("*" & ("rock critic" & "*"))))))))))))))))))));
+	var0000 &= ("Gypsy" & ("Gypsies" & ("Jute" & ("*" & ("Norman" & ("*" & ("Mongol" & ("*" & ("Slav" & ("*" & ("Hindu" & ("*" & ("Christian" & ("*" & ("Albigensian" & ("*" & ("cephalopod" & ("*" & ("rock critic" & "*")))))))))))))))))));
 	var0001 = UI_die_roll(0x0001, (UI_get_array_size(var0000) / 0x0002));
 	var0002 = var0000[((var0001 * 0x0002) - 0x0001)];
 	var0003 = var0000[(var0001 * 0x0002)];
@@ -101378,7 +101378,7 @@ void Func08A6 0x8A6 () {
 
 	var0000 = 0xFE9C->find_nearby(0x01E9, 0x0002, 0x00B0);
 	var0001 = 0xFE9C->find_nearby(0x010E, 0x000A, 0x00B0);
-	var0001 = (var0001 & 0xFE9C->find_nearby(0x0178, 0x000A, 0x00B0));
+	var0001 &= 0xFE9C->find_nearby(0x0178, 0x000A, 0x00B0);
 	if (var0000) {
 		for (var0004 in var0001 with var0002 to var0003) {
 			var0005 = var0004->get_item_quality();
@@ -101579,13 +101579,13 @@ void Func08AD 0x8AD (var var0000, var var0001, var var0002, var var0003) {
 				if (var000B <= 0x0004) {
 					var000C = "@More!@";
 					if (var000D < 0x0006) {
-						var000C = (var000C & "@I must have more!@");
+						var000C &= "@I must have more!@";
 					}
 				} else if (var000B < 0x000A) {
 					var000C = "@I am still hungry.@";
 					if (var000D < 0x0006) {
 						if (!(var0003 == 0xFE9C->get_npc_object())) {
-							var000C = (var000C & "@May I have some more?@");
+							var000C &= "@May I have some more?@";
 						}
 					}
 				} else if (var000B < 0x0014) {
@@ -101597,7 +101597,7 @@ void Func08AD 0x8AD (var var0000, var var0001, var var0002, var var0003) {
 				} else {
 					var000C = "@That did satisfy me!@";
 					if (var000D < 0x0006) {
-						var000C = (var000C & "@Burp@");
+						var000C &= "@Burp@";
 					}
 				}
 			} else if (var000A < 0x0014) {
@@ -101607,14 +101607,14 @@ void Func08AD 0x8AD (var var0000, var var0001, var var0002, var var0003) {
 					var000C = "@Ahh, very tasty.@";
 				}
 				if ((var000B > 0x0018) && (var000D < 0x0003)) {
-					var000C = (var000C & "@Belch@");
+					var000C &= "@Belch@";
 				}
 			} else if (var000D < 0x0005) {
 				var000C = "@I shall soon be plump.@";
 			}
 		}
 		if ((var0005 == 0x0179) && ((var0006 == 0x001F) && (var000A < 0x0019))) {
-			var000C = (var000C & ("@It is very crunchy...@" & ("@Strange taste...@" & ("" & "@How very filling!@"))));
+			var000C &= ("@It is very crunchy...@" & ("@Strange taste...@" & ("" & "@How very filling!@")));
 		}
 		if (!(var000C == "")) {
 			if (Func0983(var0003)) {
@@ -102072,27 +102072,27 @@ void Func08B8 0x8B8 () {
 	}
 	if (var0000 == true) {
 		var0007 = [0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999];
-		var0007 = (var0007 & [0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999]);
+		var0007 &= [0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999];
 		var0008 = [0x0AEF, 0x0AEF, 0x0AEF, 0x0AEF, 0x0AEF, 0x0AEF, 0x0ADF, 0x0ADF, 0x0ADF, 0x0ADF, 0x0ADF, 0x0ADF, 0x0ACF, 0x0ACF, 0x0ACF, 0x0ACF, 0x0ACF, 0x0ACF];
-		var0008 = (var0008 & [0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A8F, 0x0A8F, 0x0A8F, 0x0A8F, 0x0A8F, 0x0A8F]);
+		var0008 &= [0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A8F, 0x0A8F, 0x0A8F, 0x0A8F, 0x0A8F, 0x0A8F];
 	}
 	if (var0001 == true) {
 		var0007 = [0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919, 0x0969, 0x0959, 0x0929, 0x0919, 0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919];
-		var0007 = (var0007 & [0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919, 0x0969, 0x0949, 0x0939, 0x0929, 0x0919, 0x0959, 0x0949, 0x0939, 0x0919, 0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919]);
+		var0007 &= [0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919, 0x0969, 0x0949, 0x0939, 0x0929, 0x0919, 0x0959, 0x0949, 0x0939, 0x0919, 0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919];
 		var0008 = [0x0AEF, 0x0AEF, 0x0AEF, 0x0AEF, 0x0AEF, 0x0AEF, 0x0ADF, 0x0ADF, 0x0ADF, 0x0ADF, 0x0ACF, 0x0ACF, 0x0ACF, 0x0ACF, 0x0ACF, 0x0ACF];
-		var0008 = (var0008 & [0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A8F, 0x0A8F, 0x0A8F, 0x0A8F, 0x0A8F, 0x0A8F]);
+		var0008 &= [0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0ABF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0AAF, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A9F, 0x0A8F, 0x0A8F, 0x0A8F, 0x0A8F, 0x0A8F, 0x0A8F];
 	}
 	if (var0002 == true) {
 		var0007 = [0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919, 0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0969, 0x0959, 0x0949, 0x0939, 0x0919];
-		var0007 = (var0007 & [0x0969, 0x0959, 0x0949, 0x0939, 0x0919, 0x0969, 0x0959, 0x0949, 0x0939, 0x0919, 0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919]);
+		var0007 &= [0x0969, 0x0959, 0x0949, 0x0939, 0x0919, 0x0969, 0x0959, 0x0949, 0x0939, 0x0919, 0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0969, 0x0959, 0x0949, 0x0939, 0x0929, 0x0919];
 		var0008 = [0x0A6F, 0x0A6F, 0x0A6F, 0x0A6F, 0x0A6F, 0x0A6F, 0x0A5F, 0x0A5F, 0x0A5F, 0x0A5F, 0x0A5F, 0x0A4F, 0x0A4F, 0x0A4F, 0x0A4F, 0x0A4F];
-		var0008 = (var0008 & [0x0A3F, 0x0A3F, 0x0A3F, 0x0A3F, 0x0A3F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A0F, 0x0A0F, 0x0A0F, 0x0A0F, 0x0A0F, 0x0A0F]);
+		var0008 &= [0x0A3F, 0x0A3F, 0x0A3F, 0x0A3F, 0x0A3F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A0F, 0x0A0F, 0x0A0F, 0x0A0F, 0x0A0F, 0x0A0F];
 	}
 	if (var0003 == true) {
 		var0007 = [0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09E9, 0x09C9, 0x09B9, 0x09A9, 0x0999, 0x09E9, 0x09A9, 0x0999];
-		var0007 = (var0007 & [0x09E9, 0x09D9, 0x09C9, 0x09A9, 0x0999, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x09E9, 0x09D9, 0x09B9, 0x09A9, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999]);
+		var0007 &= [0x09E9, 0x09D9, 0x09C9, 0x09A9, 0x0999, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x09E9, 0x09D9, 0x09B9, 0x09A9, 0x09E9, 0x09D9, 0x09C9, 0x09B9, 0x09A9, 0x0999];
 		var0008 = [0x0A6F, 0x0A6F, 0x0A6F, 0x0A6F, 0x0A6F, 0x0A6F, 0x0A5F, 0x0A5F, 0x0A5F, 0x0A5F, 0x0A5F, 0x0A4F, 0x0A4F, 0x0A4F];
-		var0008 = (var0008 & [0x0A3F, 0x0A3F, 0x0A3F, 0x0A3F, 0x0A3F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A0F, 0x0A0F, 0x0A0F, 0x0A0F, 0x0A0F, 0x0A0F]);
+		var0008 &= [0x0A3F, 0x0A3F, 0x0A3F, 0x0A3F, 0x0A3F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A2F, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A1F, 0x0A0F, 0x0A0F, 0x0A0F, 0x0A0F, 0x0A0F, 0x0A0F];
 	}
 	var0009 = 0x0000;
 	for (var000C in var0007 with var000A to var000B) {
@@ -102103,27 +102103,27 @@ void Func08B8 0x8B8 () {
 	}
 	if (var0000 == true) {
 		var0007 = [0x09EF, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F, 0x098F, 0x09EF, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F, 0x098F, 0x09EF, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F, 0x098F];
-		var0007 = (var0007 & [0x09CF, 0x09BF, 0x09AF, 0x099F, 0x098F, 0x09EF, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F, 0x098F, 0x09EF, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F, 0x098F]);
+		var0007 &= [0x09CF, 0x09BF, 0x09AF, 0x099F, 0x098F, 0x09EF, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F, 0x098F, 0x09EF, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F, 0x098F];
 		var0008 = [0x0AE9, 0x0AE9, 0x0AE9, 0x0AE9, 0x0AE9, 0x0AE9, 0x0AE9, 0x0AD9, 0x0AD9, 0x0AD9, 0x0AD9, 0x0AD9, 0x0AD9, 0x0AD9, 0x0AC9, 0x0AC9, 0x0AC9, 0x0AC9, 0x0AC9, 0x0AC9, 0x0AC9];
-		var0008 = (var0008 & [0x0AB9, 0x0AB9, 0x0AB9, 0x0AB9, 0x0AB9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0A99, 0x0A99, 0x0A99, 0x0A99, 0x0A99, 0x0A99, 0x0A99]);
+		var0008 &= [0x0AB9, 0x0AB9, 0x0AB9, 0x0AB9, 0x0AB9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0A99, 0x0A99, 0x0A99, 0x0A99, 0x0A99, 0x0A99, 0x0A99];
 	}
 	if (var0001 == true) {
 		var0007 = [0x096F, 0x095F, 0x094F, 0x093F, 0x091F, 0x090F, 0x096F, 0x095F, 0x094F, 0x093F, 0x092F, 0x091F, 0x090F, 0x096F, 0x095F, 0x094F, 0x093F, 0x091F, 0x090F];
-		var0007 = (var0007 & [0x096F, 0x095F, 0x094F, 0x092F, 0x090F, 0x096F, 0x095F, 0x094F, 0x093F, 0x092F, 0x091F, 0x090F, 0x096F, 0x095F, 0x094F, 0x093F, 0x092F, 0x091F, 0x090F]);
+		var0007 &= [0x096F, 0x095F, 0x094F, 0x092F, 0x090F, 0x096F, 0x095F, 0x094F, 0x093F, 0x092F, 0x091F, 0x090F, 0x096F, 0x095F, 0x094F, 0x093F, 0x092F, 0x091F, 0x090F];
 		var0008 = [0x0AE9, 0x0AE9, 0x0AE9, 0x0AE9, 0x0AE9, 0x0AE9, 0x0AD9, 0x0AD9, 0x0AD9, 0x0AD9, 0x0AD9, 0x0AD9, 0x0AD9, 0x0AC9, 0x0AC9, 0x0AC9, 0x0AC9, 0x0AC9, 0x0AC9];
-		var0008 = (var0008 & [0x0AB9, 0x0AB9, 0x0AB9, 0x0AB9, 0x0AB9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0A99, 0x0A99, 0x0A99, 0x0A99, 0x0A99, 0x0A99, 0x0A99]);
+		var0008 &= [0x0AB9, 0x0AB9, 0x0AB9, 0x0AB9, 0x0AB9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0AA9, 0x0A99, 0x0A99, 0x0A99, 0x0A99, 0x0A99, 0x0A99, 0x0A99];
 	}
 	if (var0002 == true) {
 		var0007 = [0x096F, 0x095F, 0x093F, 0x092F, 0x090F, 0x096F, 0x095F, 0x090F, 0x096F, 0x095F, 0x092F, 0x091F, 0x090F];
-		var0007 = (var0007 & [0x096F, 0x095F, 0x094F, 0x093F, 0x090F, 0x096F, 0x095F, 0x094F, 0x093F, 0x092F, 0x091F, 0x090F, 0x096F, 0x095F, 0x094F, 0x093F, 0x092F, 0x090F]);
+		var0007 &= [0x096F, 0x095F, 0x094F, 0x093F, 0x090F, 0x096F, 0x095F, 0x094F, 0x093F, 0x092F, 0x091F, 0x090F, 0x096F, 0x095F, 0x094F, 0x093F, 0x092F, 0x090F];
 		var0008 = [0x0A69, 0x0A69, 0x0A69, 0x0A69, 0x0A69, 0x0A59, 0x0A59, 0x0A59, 0x0A49, 0x0A49, 0x0A49, 0x0A49, 0x0A49];
-		var0008 = (var0008 & [0x0A39, 0x0A39, 0x0A39, 0x0A39, 0x0A39, 0x0A29, 0x0A29, 0x0A29, 0x0A29, 0x0A29, 0x0A29, 0x0A29, 0x0A19, 0x0A19, 0x0A19, 0x0A19, 0x0A19, 0x0A19]);
+		var0008 &= [0x0A39, 0x0A39, 0x0A39, 0x0A39, 0x0A39, 0x0A29, 0x0A29, 0x0A29, 0x0A29, 0x0A29, 0x0A29, 0x0A29, 0x0A19, 0x0A19, 0x0A19, 0x0A19, 0x0A19, 0x0A19];
 	}
 	if (var0003 == true) {
 		var0007 = [0x09EF, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x099F, 0x098F, 0x09EF, 0x09DF, 0x099F, 0x098F, 0x09EF, 0x099F, 0x098F];
-		var0007 = (var0007 & [0x09EF, 0x09DF, 0x09CF, 0x099F, 0x098F, 0x09EF, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x098F, 0x09EF, 0x09BF, 0x09AF, 0x098F]);
+		var0007 &= [0x09EF, 0x09DF, 0x09CF, 0x099F, 0x098F, 0x09EF, 0x09DF, 0x09CF, 0x09BF, 0x09AF, 0x098F, 0x09EF, 0x09BF, 0x09AF, 0x098F];
 		var0008 = [0x0A69, 0x0A69, 0x0A69, 0x0A69, 0x0A69, 0x0A69, 0x0A69, 0x0A59, 0x0A59, 0x0A59, 0x0A59, 0x0A49, 0x0A49, 0x0A49];
-		var0008 = (var0008 & [0x0A39, 0x0A39, 0x0A39, 0x0A39, 0x0A39, 0x0A29, 0x0A29, 0x0A29, 0x0A29, 0x0A29, 0x0A29, 0x0A19, 0x0A19, 0x0A19, 0x0A19]);
+		var0008 &= [0x0A39, 0x0A39, 0x0A39, 0x0A39, 0x0A39, 0x0A29, 0x0A29, 0x0A29, 0x0A29, 0x0A29, 0x0A29, 0x0A19, 0x0A19, 0x0A19, 0x0A19];
 	}
 	var0009 = 0x0000;
 	for (var000C in var0007 with var000F to var0010) {
@@ -102612,8 +102612,8 @@ void Func08C0 0x8C0 (var var0000) {
 	var var0008;
 
 	var0001 = 0xFE9C->find_nearby(0x0267, 0x0028, 0x0000);
-	var0001 = (var0001 & 0xFE9C->find_nearby(0x017C, 0x0028, 0x0000));
-	var0001 = (var0001 & 0xFE9C->find_nearby(0x01D9, 0x0028, 0x0000));
+	var0001 &= 0xFE9C->find_nearby(0x017C, 0x0028, 0x0000);
+	var0001 &= 0xFE9C->find_nearby(0x01D9, 0x0028, 0x0000);
 	if (var0000) {
 		var0002 = Func09A0(0x0007, 0x0001);
 		if (var0002) {
@@ -103633,7 +103633,7 @@ void Func08D2 0x8D2 () {
 
 	var0000 = (0xFF27->get_object_position() & (0xFE99 & 0x0007));
 	var0001 = var0000->find_nearby(0x0113, 0x0005, 0x0010);
-	var0001 = (var0001 & 0xFF27->find_nearby(0x01B8, 0x0005, 0x0080));
+	var0001 &= 0xFF27->find_nearby(0x01B8, 0x0005, 0x0080);
 	for (var0004 in var0001 with var0002 to var0003) {
 		var0004->remove_item();
 	}
@@ -104246,7 +104246,7 @@ void Func08DB 0x8DB (var var0000) {
 							var0001[0x0002] -= 0x0003;
 							if (!var000F->is_npc()) {
 								UI_sprite_effect(0x0009, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-								var000A = (var000A & var000F);
+								var000A &= var000F;
 								var000F->remove_item();
 							}
 						}
@@ -104588,7 +104588,7 @@ void Func08E4 0x8E4 (var var0000) {
 	var0001 = [0x0178, 0x010E, 0x01B0, 0x01B1];
 	var0002 = [];
 	for (var0005 in var0001 with var0003 to var0004) {
-		var0002 = (var0002 & find_nearby(var0005, 0x006E, 0x0000));
+		var0002 &= find_nearby(var0005, 0x006E, 0x0000);
 	}
 	var0006 = false;
 	for (var0005 in var0002 with var0007 to var0008) {
@@ -104703,8 +104703,8 @@ var Func08E7 0x8E7 (var var0000) {
 				var0004 = Func0988(0xFE9C->get_npc_object(), var0004);
 				var0003 = true;
 			} else {
-				var0008 = (var0008 & var000B->get_distance(0xFE9C));
-				var0007 = (var0007 & var000B);
+				var0008 &= var000B->get_distance(0xFE9C);
+				var0007 &= var000B;
 			}
 		}
 	}
@@ -105279,16 +105279,16 @@ var Func08FB 0x8FB () {
 
 	var0000 = [];
 	var0001 = Func099F(0x0190, 0xFE99, 0xFE99);
-	var0000 = (var0000 & var0001);
+	var0000 &= var0001;
 	var0001 = Func099F(0x019E, 0xFE99, 0xFE99);
-	var0000 = (var0000 & var0001);
+	var0000 &= var0001;
 	var0001 = 0xFE9C->find_nearby(0x0190, 0x0050, 0x0000);
-	var0000 = (var0000 & var0001);
+	var0000 &= var0001;
 	var0001 = 0xFE9C->find_nearby(0x019E, 0x0050, 0x0000);
-	var0000 = (var0000 & var0001);
+	var0000 &= var0001;
 	var0001 = [];
 	var0002 = Func098D();
-	var0002 = (var0002 & 0xFFC0);
+	var0002 &= 0xFFC0;
 	for (var0005 in var0000 with var0003 to var0004) {
 		var0006 = var0005->get_item_quality();
 		var0007 = var0005->get_item_quantity(0x0000);
@@ -105299,10 +105299,10 @@ var Func08FB 0x8FB () {
 				var000A = var0005->get_item_frame();
 				var000B = var0005->get_item_shape();
 				if ((var000B == 0x019E) && (var000A == 0x0014)) {
-					var0001 = (var0001 & var0005);
+					var0001 &= var0005;
 				}
 			} else {
-				var0001 = (var0001 & var0005);
+				var0001 &= var0005;
 				if ((var0009 == 0xFFFE) && gflags[0x025B]) {
 					0xFFFE->set_item_flag(0x001D);
 				}
@@ -105356,9 +105356,9 @@ void Func08FE 0x8FE () {
 
 	var0000 = Func08FB();
 	var0001 = Func098D();
-	var0001 = (var0001 & 0xFFC0);
+	var0001 &= 0xFFC0;
 	var0002 = Func08FD();
-	var0002 = (var0002 & "Cantra");
+	var0002 &= "Cantra";
 	for (var0005 in var0000 with var0003 to var0004) {
 		if (var0005 != 0xFE9C->get_npc_object()) {
 			var0006 = var0005->get_body_npc();
@@ -105447,7 +105447,7 @@ var Func0900 0x900 (var var0000) {
 			if (UI_get_array_size(var0002) == 0x0000) {
 				var0002 = [var0003];
 			} else {
-				var0002 = (var0002 & var0003);
+				var0002 &= var0003;
 			}
 		}
 	}
@@ -106128,8 +106128,8 @@ void Func0918 0x918 (var var0000) {
 
 	gflags[0x0005] = false;
 	var0001 = var0000->get_object_position();
-	var0001 = (var0001 & var0000->get_item_quality());
-	var0001 = (var0001 & 0xFE99);
+	var0001 &= var0000->get_item_quality();
+	var0001 &= 0xFE99;
 	var0002 = var0001->find_nearby(0x0096, 0x000C, 0x0000);
 	for (var0005 in var0002 with var0003 to var0004) {
 		if (!Func0910(var0005)) {
@@ -106485,12 +106485,12 @@ void Func0924 0x924 (var var0000, var var0001) {
 	var0002 = var0000->get_item_quality();
 	var0003 = [];
 	if ((var0001 == 0x0001) || (var0001 == 0xFE99)) {
-		var0003 = (var0003 & UI_find_nearby_avatar(0x012F));
-		var0003 = (var0003 & UI_find_nearby_avatar(0x036C));
+		var0003 &= UI_find_nearby_avatar(0x012F);
+		var0003 &= UI_find_nearby_avatar(0x036C);
 	}
 	if ((var0001 == 0x0000) || (var0001 == 0xFE99)) {
-		var0003 = (var0003 & UI_find_nearby_avatar(0x03A8));
-		var0003 = (var0003 & UI_find_nearby_avatar(0x03A7));
+		var0003 &= UI_find_nearby_avatar(0x03A8);
+		var0003 &= UI_find_nearby_avatar(0x03A7);
 	}
 	if (var0003) {
 		for (var0006 in var0003 with var0004 to var0005) {
@@ -106740,11 +106740,11 @@ void Func0928 0x928 (var var0000) {
 	}
 	if (var0000 == 0x0070) {
 		var0002 = 0xFE9C->find_nearby(0x010E, 0x000A, 0x00B0);
-		var0002 = (var0002 & 0xFE9C->find_nearby(0x0178, 0x000A, 0x00B0));
-		var0002 = (var0002 & 0xFE9C->find_nearby(0x01B1, 0x000A, 0x00B0));
-		var0002 = (var0002 & 0xFE9C->find_nearby(0x01B0, 0x000A, 0x00B0));
-		var0002 = (var0002 & 0xFE9C->find_nearby(0x033C, 0x000A, 0x00B0));
-		var0002 = (var0002 & 0xFE9C->find_nearby(0x034D, 0x000A, 0x00B0));
+		var0002 &= 0xFE9C->find_nearby(0x0178, 0x000A, 0x00B0);
+		var0002 &= 0xFE9C->find_nearby(0x01B1, 0x000A, 0x00B0);
+		var0002 &= 0xFE9C->find_nearby(0x01B0, 0x000A, 0x00B0);
+		var0002 &= 0xFE9C->find_nearby(0x033C, 0x000A, 0x00B0);
+		var0002 &= 0xFE9C->find_nearby(0x034D, 0x000A, 0x00B0);
 		var0007 = var0002[0x0001];
 		for (var0005 in var0002 with var0008 to var0009) {
 			if (get_distance(var0005) < get_distance(var0007)) {
@@ -106775,12 +106775,12 @@ void Func0929 0x929 () {
 
 	var0000 = find_nearby(0x0366, 0x000F, 0x0000);
 	var0001 = find_nearby(0x0203, 0x000F, 0x0000);
-	var0000 = (var0000 & var0001);
+	var0000 &= var0001;
 	var0001 = [];
 	var0002 = get_item_quality();
 	for (var0005 in var0000 with var0003 to var0004) {
 		if (var0005->get_item_quality() == var0002) {
-			var0001 = (var0001 & var0005);
+			var0001 &= var0005;
 		}
 	}
 	var0006 = Func089D(var0001);
@@ -106968,7 +106968,7 @@ void Func092E 0x92E (var var0000) {
 	var var0004;
 
 	var0001 = [0xFFC1, 0xFFB1, 0xFFB6, 0xFFB9, 0xFF6A];
-	var0001 = (var0001 & var0000);
+	var0001 &= var0000;
 	UI_end_conversation();
 	0xFE9C->set_item_flag(0x0010);
 	for (var0004 in var0001 with var0002 to var0003) {
@@ -107579,10 +107579,10 @@ void Func0936 0x936 (var var0000, var var0001) {
 	var var000B;
 
 	var0002 = Func098D();
-	var0002 = (var0002 & 0xFE9C);
+	var0002 &= 0xFE9C;
 	var0003 = [];
 	for (var0006 in var0002 with var0004 to var0005) {
-		var0003 = (var0003 & var0006->get_npc_object());
+		var0003 &= var0006->get_npc_object();
 	}
 	if (!((var0000 in var0003) || (var0001 in var0003))) {
 		return;
@@ -108980,7 +108980,7 @@ void Func093B 0x93B (var var0000) {
 				abort;
 			}
 			if (gflags[0x0172]) {
-				var0007 = (var0007 & 0xFFC9);
+				var0007 &= 0xFFC9;
 			}
 		}
 		if (!gflags[0x017E]) {
@@ -108997,7 +108997,7 @@ void Func093B 0x93B (var var0000) {
 				abort;
 			}
 			if (gflags[0x0172]) {
-				var0007 = (var0007 & 0xFFC6);
+				var0007 &= 0xFFC6;
 			}
 		}
 		if (!gflags[0x0182]) {
@@ -109005,7 +109005,7 @@ void Func093B 0x93B (var var0000) {
 				var0007 = 0xFFC3;
 			}
 			if (gflags[0x0172]) {
-				var0007 = (var0007 & 0xFFC3);
+				var0007 &= 0xFFC3;
 			}
 		}
 		if ((!gflags[0x0180]) && (0xFFC4->get_item_flag(0x001C) && ((!0xFFC4->get_item_flag(0x0004)) && gflags[0x0170]))) {
@@ -109021,7 +109021,7 @@ void Func093B 0x93B (var var0000) {
 				var0007 = 0xFFCC;
 			}
 			if (gflags[0x0172]) {
-				var0007 = (var0007 & 0xFFCC);
+				var0007 &= 0xFFCC;
 			}
 		}
 		if ((!gflags[0x017A]) && (gflags[0x0170] && 0xFFCB->get_item_flag(0x001C))) {
@@ -109035,7 +109035,7 @@ void Func093B 0x93B (var var0000) {
 				var0007 = 0xFFC5;
 			}
 			if (gflags[0x0172]) {
-				var0007 = (var0007 & 0xFFCF);
+				var0007 &= 0xFFCF;
 			}
 		}
 		if (!gflags[0x0177]) {
@@ -109043,7 +109043,7 @@ void Func093B 0x93B (var var0000) {
 				var0007 = 0xFFD1;
 			}
 			if (gflags[0x0172]) {
-				var0007 = (var0007 & 0xFFD1);
+				var0007 &= 0xFFD1;
 			}
 		}
 		if (!gflags[0x017D]) {
@@ -109051,7 +109051,7 @@ void Func093B 0x93B (var var0000) {
 				var0007 = 0xFFC8;
 			}
 			if (gflags[0x0172]) {
-				var0007 = (var0007 & 0xFFCE);
+				var0007 &= 0xFFCE;
 			}
 		}
 		if (!gflags[0x0178]) {
@@ -109059,7 +109059,7 @@ void Func093B 0x93B (var var0000) {
 				var0007 = 0xFFD0;
 			}
 			if (gflags[0x0172]) {
-				var0007 = (var0007 & 0xFFD0);
+				var0007 &= 0xFFD0;
 			}
 		}
 		if ((!gflags[0x017B]) && var0007) {
@@ -110051,8 +110051,8 @@ var Func096D 0x96D (var var0000) {
 		var0005 = [];
 		for (var0008 in var0003 with var0006 to var0007) {
 			if (var0008 != var0000) {
-				var0004 = (var0004 & var0008->get_npc_name());
-				var0005 = (var0005 & var0008);
+				var0004 &= var0008->get_npc_name();
+				var0005 &= var0008;
 			}
 		}
 		var0002 = var0004;
@@ -110591,7 +110591,7 @@ var Func0980 0x980 (var var0000) {
 	if (get_item_flag(0x0006)) {
 		for (var0006 in var0001 with var0004 to var0005) {
 			if (!(var0006 in var0002)) {
-				var0003 = (var0003 & var0006);
+				var0003 &= var0006;
 			}
 		}
 		return var0003;
@@ -110683,7 +110683,7 @@ void Func0986 0x986 (var var0000, var var0001) {
 		}
 	}
 	var0007 = var0001->find_nearby(0x02BD, 0x001E, 0x0000);
-	var0007 = (var0007 & var0001->find_nearby(0x0152, 0x001E, 0x0000));
+	var0007 &= var0001->find_nearby(0x0152, 0x001E, 0x0000);
 	for (var000A in var0007 with var0008 to var0009) {
 		var000B = var000A->get_item_quality();
 		if (var000B < (var0000 * 0x001E)) {
@@ -110724,7 +110724,7 @@ var Func0988 0x988 (var var0000, var var0001) {
 	var0002 = [];
 	for (var0005 in var0001 with var0003 to var0004) {
 		if (!(var0005 == var0000)) {
-			var0002 = (var0002 & var0005);
+			var0002 &= var0005;
 		}
 	}
 	return var0002;
@@ -110991,7 +110991,7 @@ var Func098E 0x98E () {
 	var0001 = [];
 	for (var0004 in var0000 with var0002 to var0003) {
 		if (var0004->get_item_shape() != 0x02EB) {
-			var0001 = (var0001 & var0004);
+			var0001 &= var0004;
 		}
 	}
 	return var0001;
@@ -111008,7 +111008,7 @@ var Func098F 0x98F () {
 	var0001 = [];
 	for (var0004 in var0000 with var0002 to var0003) {
 		if (var0004->get_item_shape() != 0x02EB) {
-			var0001 = (var0001 & var0004);
+			var0001 &= var0004;
 		}
 	}
 	return var0001;
@@ -111068,7 +111068,7 @@ var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003) {
 
 	var0004 = Func098E();
 	if (Func097D(0xFE9B, 0x0001, 0x031F, 0xFE99, 0x0012) && (!var0003)) {
-		var0004 = (var0004 & 0xFED3);
+		var0004 &= 0xFED3;
 	}
 	var0005 = UI_get_array_size(var0004);
 	if (var0005 == 0x0001) {
@@ -111203,10 +111203,10 @@ var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003) {
 	var0017 = "";
 	var0018 = UI_get_party_list();
 	for (var001B in var0018 with var0019 to var001A) {
-		var0017 = (var0017 & (var001B & var001B->get_npc_name()));
+		var0017 &= (var001B & var001B->get_npc_name());
 	}
 	if (Func097D(0xFE9B, 0x0001, 0x031F, 0xFE99, 0x0012) && (!var0003)) {
-		var0017 = (var0017 & (0xFED3 & "Boydon's head in party"));
+		var0017 &= (0xFED3 & "Boydon's head in party");
 	}
 	UI_error_message("Copy down this information with the error");
 	UI_error_message(var0017);
@@ -111560,7 +111560,7 @@ var Func099A 0x99A (var var0000, var var0001) {
 	var0003 = [];
 	for (var0006 in var0000 with var0004 to var0005) {
 		if (var0002 != var0001) {
-			var0003 = (var0003 & var0006);
+			var0003 &= var0006;
 		}
 		var0002 += 0x0001;
 	}
@@ -112236,16 +112236,16 @@ void Func09B4 0x9B4 (var var0000) {
 		var0002 = "Monk Isle";
 		if (gflags[0x01CC]) {
 			if (gflags[0x01FE]) {
-				var0002 = (var0002 & ("Fawn" & ("Monitor" & "Moonshade")));
+				var0002 &= ("Fawn" & ("Monitor" & "Moonshade"));
 			} else {
-				var0002 = (var0002 & "Moonshade");
+				var0002 &= "Moonshade";
 			}
 		} else {
 			if (gflags[0x02C3]) {
-				var0002 = (var0002 & "Monitor");
+				var0002 &= "Monitor";
 			}
 			if (0xFFC5->get_item_flag(0x001C)) {
-				var0002 = (var0002 & "Fawn");
+				var0002 &= "Fawn";
 			}
 		}
 		var0001 = Func0956(var0002);
@@ -112475,11 +112475,11 @@ void Func09BB 0x9BB (var var0000, var var0001) {
 		var0002 = get_item_quality();
 		var0003 = find_nearby(0x0366, 0x000F, 0x0000);
 		var0004 = find_nearby(0x0203, 0x000F, 0x0000);
-		var0003 = (var0003 & var0004);
+		var0003 &= var0004;
 		var0004 = [];
 		for (var0007 in var0003 with var0005 to var0006) {
 			if (var0007->get_item_quality() == var0002) {
-				var0004 = (var0004 & var0007);
+				var0004 &= var0007;
 			}
 		}
 		if (Func089D(var0004)) {
