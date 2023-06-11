@@ -170,8 +170,8 @@ void Func00D1 shape#(0xD1) () {
 			Func097F(0xFE9C->get_npc_object(), "@I despise you all!@", 0x0002);
 			for (var0009 in var0002 with var0007 to var0008) {
 				var000A = var0009->get_object_position();
-				var000A[0x0001] -= (var000A[0x0003] / 0x0002);
-				var000A[0x0002] -= (var000A[0x0003] / 0x0002);
+				var000A[0x0001] -= var000A[0x0003] / 0x0002;
+				var000A[0x0002] -= var000A[0x0003] / 0x0002;
 				UI_play_sound_effect(0x0047);
 				UI_sprite_effect(0x0011, var000A[0x0001], var000A[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				var000A = var0009->get_object_position();
@@ -208,9 +208,9 @@ void Func00D2 shape#(0xD2) () {
 				var0002->clear_item_flag(0x000B);
 				var0002->set_item_frame(0x0018);
 				var0003 = get_object_position();
-				var0004 = (var0003[0x0001] - UI_die_roll(0x0000, 0x0001));
-				var0005 = (var0003[0x0002] - UI_die_roll(0x0000, 0x0001));
-				var0006 = (var0003[0x0003] + 0x0001);
+				var0004 = var0003[0x0001] - UI_die_roll(0x0000, 0x0001);
+				var0005 = var0003[0x0002] - UI_die_roll(0x0000, 0x0001);
+				var0006 = var0003[0x0003] + 0x0001;
 				var0001 = UI_update_last_created([var0004, var0005, var0006]);
 			}
 		}
@@ -576,7 +576,7 @@ void Func00E4 shape#(0xE4) () {
 		if (gflags[0x01CD] && (!gflags[0x01CE])) {
 			0xFFD8->set_npc_id(0x0001);
 		}
-		var000F = (0xFFD8->get_npc_id() * 0x0064);
+		var000F = 0xFFD8->get_npc_id() * 0x0064;
 		if (gflags[0x01CE] && (!gflags[0x01D1])) {
 			add("pay fine");
 		}
@@ -634,11 +634,11 @@ void Func00E4 shape#(0xE4) () {
 					say("\"'Tis not enough!\"");
 					var0011 = Func0992(0x0001, (("@But thou didst say the ransom was " + var000F) + " Monetari!@"), (("@But thou didst say the ransom was " + var000F) + " Monetari!@"), false);
 					0x0000->set_conversation_slot();
-					var000F = (((var0010 / 0x0064) + UI_get_random(0x0005)) * 0x0064);
+					var000F = ((var0010 / 0x0064) + UI_get_random(0x0005)) * 0x0064;
 					if (var000F < 0x0BB8) {
-						var0000 = (var000F / 0x0064);
+						var0000 = var000F / 0x0064;
 						0xFFD8->set_npc_id(var0000);
-						var000F = (var0000 * 0x0064);
+						var000F = var0000 * 0x0064;
 						say("\"Well, we changed our minds. Now we want ",
 							var000F,
 							" Monetari!\"");
@@ -735,7 +735,7 @@ labelFunc00E4_0956:
 			say("\"Which of you dost wish to train?\"");
 		}
 		var0014 = Func098E();
-		var0014 = (0x0000 & var0014);
+		var0014 = 0x0000 & var0014;
 		var0015 = ["nobody"];
 		for (var000A in var0014 with var0016 to var0017) {
 			if (!(var000A == 0x0000)) {
@@ -905,15 +905,15 @@ void Func00E6 shape#(0xE6) () {
 	var0007 = [0x0975, 0x0748, 0x0000];
 	var0008 = 0xFFEC->get_object_position();
 	var0009 = [0x0986, 0x0766];
-	var000A = (var0007[0x0001] - var0008[0x0001]);
+	var000A = var0007[0x0001] - var0008[0x0001];
 	if (var000A < 0x0000) {
 		var000A *= 0xFFFF;
 	}
-	var000B = (var0007[0x0002] - var0008[0x0002]);
+	var000B = var0007[0x0002] - var0008[0x0002];
 	if (var000B < 0x0000) {
 		var000B *= 0xFFFF;
 	}
-	var000C = (var000A + var000B);
+	var000C = var000A + var000B;
 	var000D = Func09A0(0x0005, 0x0003);
 	if (event == 0x0002) {
 		if (0xFFEC->get_npc_id() == 0x0011) {
@@ -1977,7 +1977,7 @@ void Func00FA shape#(0xFA) () {
 		if (gflags[0x0270]) {
 			var0002 &= 0xFF29;
 		}
-		var0003 = (var0002 & [0xFF2A, 0xFF30, 0xFF2E]);
+		var0003 = var0002 & [0xFF2A, 0xFF30, 0xFF2E];
 		var0004 = var0000->get_item_quality();
 		if (item == var0000) {
 			if (Func0994() != 0x0002) {
@@ -3056,7 +3056,7 @@ void Func0124 shape#(0x124) () {
 			var0001 = Func08E7(item);
 		} else {
 			Func088D(item, 0x0124);
-			var0002 = (get_distance(0xFE9C) + 0x000F);
+			var0002 = get_distance(0xFE9C) + 0x000F;
 			var0001 = script item after var0002 ticks {
 				nohalt;
 				call Func0124;
@@ -3101,8 +3101,8 @@ void Func0124 shape#(0x124) () {
 			var000E = 0x0001;
 			for (var0011 in var0009 with var000F to var0010) {
 				var0012 = var0011->get_object_position();
-				var000A[var000E] = (var000D[0x0001] - var0012[0x0001]);
-				var000B[var000E] = (var000D[0x0002] - var0012[0x0002]);
+				var000A[var000E] = var000D[0x0001] - var0012[0x0001];
+				var000B[var000E] = var000D[0x0002] - var0012[0x0002];
 				var000C[var000E] = var0011->get_item_frame_rot();
 				var000E += 0x0001;
 			}
@@ -3376,7 +3376,7 @@ void Func013D shape#(0x13D) () {
 			say("\"Together... together... until the fiery, peaceful end! Now enemies... once friends!\"");
 			say("\"Twist and turn and twine about... What was wrong is right, and what was in, is out...\"");
 			say("\"Hide! Hide! For the Avatar seeks!\"");
-			var0003 = ("@Hide!@" & ("@Then we strike!@" & "@What fun!@"));
+			var0003 = "@Hide!@" & ("@Then we strike!@" & "@What fun!@");
 			Func094F(0xFEFA, var0003);
 			UI_end_conversation();
 			0xFEFA->set_npc_id(0x0001);
@@ -3389,7 +3389,7 @@ void Func013D shape#(0x13D) () {
 			0xFEE6->show_npc_face1(0x0000);
 			say("\"Let us bring this world to its knees! Let these pitiful mortals worship us... even as they die!\"");
 			say("\"And I have special plans for the Avatar...!\"");
-			var0003 = ("@Blood!@" & ("@More blood!@" & "@Bleed to death!@"));
+			var0003 = "@Blood!@" & ("@More blood!@" & "@Bleed to death!@");
 			Func094F(0xFEF9, var0003);
 			UI_end_conversation();
 			0xFEFA->set_npc_id(0x0002);
@@ -3566,7 +3566,7 @@ void Func013E shape#(0x13E) () {
 				0xFFC0->set_item_flag(0x0004);
 				var0009 = find_nearby(0x0178, 0x0005, 0x0000);
 				if (var0009) {
-					var000A = (var0009->get_item_frame() - 0x0001);
+					var000A = var0009->get_item_frame() - 0x0001;
 					var0009->set_item_frame(var000A);
 				}
 				set_npc_id(0x0001);
@@ -3773,7 +3773,7 @@ void Func0146 shape#(0x146) () {
 		}
 		if (var0003 == 0x0002) {
 			var0005 = UI_die_roll(0x0001, 0x000A);
-			var0006 = (0x000D - var0005);
+			var0006 = 0x000D - var0005;
 			Func0976(var0004, var0006);
 		}
 		if (var0003 == 0x0003) {
@@ -4195,8 +4195,8 @@ labelFunc0151_0462:
 					};
 					reduce_health(0x0037, 0x0000);
 					var0016 = get_object_position();
-					var0016[0x0001] -= (var0016[0x0003] / 0x0002);
-					var0016[0x0002] -= (var0016[0x0003] / 0x0002);
+					var0016[0x0001] -= var0016[0x0003] / 0x0002;
+					var0016[0x0002] -= var0016[0x0003] / 0x0002;
 					UI_sprite_effect(0x0015, var0016[0x0001], var0016[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				}
 				break;
@@ -4292,7 +4292,7 @@ void Func0154 shape#(0x154) () {
 					var0005 = 0xFE9C->get_npc_prop(0x0005);
 					var0006 = UI_get_random(0x000A);
 					if ((var0005 + var0006) > 0x001F) {
-						var0006 = (0x001F - var0005);
+						var0006 = 0x001F - var0005;
 					}
 					var0007 = 0xFE9C->set_npc_prop(0x0005, var0006);
 				}
@@ -6149,7 +6149,7 @@ labelFunc01C3_073B:
 			0xFE9C->si_path_run_usecode([0x041F, 0x0A90, 0x0000], 0x000D, item, Func01C3, true);
 			UI_set_path_failure(Func01C3, item, 0x000E);
 			gflags[0x00BF] = true;
-			var000A = (0xFE9C->get_object_position() & (0xFE99 & 0x0006));
+			var000A = 0xFE9C->get_object_position() & (0xFE99 & 0x0006);
 			var000B = var000A->find_nearby(0x0113, 0x0028, 0x0010);
 			for (var000E in var000B with var000C to var000D) {
 				var000F = var000E->get_object_position();
@@ -6213,7 +6213,7 @@ labelFunc01C3_073B:
 					};
 				}
 			}
-			var000A = (0xFE9C->get_object_position() & (0x0000 & 0x0007));
+			var000A = 0xFE9C->get_object_position() & (0x0000 & 0x0007);
 			var000B = var000A->find_nearby(0x0113, 0x001E, 0x0010);
 			for (var000E in var000B with var0014 to var0015) {
 				var000E->remove_item();
@@ -6459,7 +6459,7 @@ labelFunc01C3_073B:
 			Func097F(0xFE9C, "@Look! Everyone is here...@", 0x0003);
 			Func097F(0xFFB0, "@Where is Harnna?@", 0x0017);
 			Func097F(0xFFB3, "@Our guest is here...@", 0x0016);
-			var0003 = (0xFE9C->find_nearby(0x010E, 0x000A, 0x0000) & 0xFE9C->find_nearby(0x01B0, 0x000A, 0x0000));
+			var0003 = 0xFE9C->find_nearby(0x010E, 0x000A, 0x0000) & 0xFE9C->find_nearby(0x01B0, 0x000A, 0x0000);
 			for (var0009 in var0003 with var0020 to var0021) {
 				var0009->remove_item();
 			}
@@ -6559,8 +6559,8 @@ void Func01C7 shape#(0x1C7) () {
 	if (event == 0x000E) {
 		if ((0xFFEE->get_npc_id() == 0x000D) && (item == 0xFE9C->get_npc_object())) {
 			var0009 = 0xFE9C->get_object_position();
-			var0009[0x0001] -= (var0009[0x0003] / 0x0002);
-			var0009[0x0002] -= (var0009[0x0003] / 0x0002);
+			var0009[0x0001] -= var0009[0x0003] / 0x0002;
+			var0009[0x0002] -= var0009[0x0003] / 0x0002;
 			UI_sprite_effect(0x0007, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			var0009 = 0xFE9C->get_object_position();
 			0xFE9C->move_object([0x0937, 0x0733, 0x0001]);
@@ -6569,8 +6569,8 @@ void Func01C7 shape#(0x1C7) () {
 		}
 		if ((0xFFEE->get_npc_id() == 0x000C) && (item == 0xFE9C->get_npc_object())) {
 			var0009 = 0xFE9C->get_object_position();
-			var0009[0x0001] -= (var0009[0x0003] / 0x0002);
-			var0009[0x0002] -= (var0009[0x0003] / 0x0002);
+			var0009[0x0001] -= var0009[0x0003] / 0x0002;
+			var0009[0x0002] -= var0009[0x0003] / 0x0002;
 			UI_sprite_effect(0x0007, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			var0009 = 0xFE9C->get_object_position();
 			0xFE9C->move_object([0x093C, 0x0740, 0x0000]);
@@ -6609,10 +6609,10 @@ void Func01C7 shape#(0x1C7) () {
 				}
 			}
 			if (var0010) {
-				var0013 = (var0010->get_item_frame() - 0x0001);
+				var0013 = var0010->get_item_frame() - 0x0001;
 				var0010->set_item_frame(var0013);
 			}
-			var000A = (0xFE9C->find_nearby(0x010E, 0x0028, 0x0000) & 0xFE9C->find_nearby(0x01B0, 0x0028, 0x0000));
+			var000A = 0xFE9C->find_nearby(0x010E, 0x0028, 0x0000) & 0xFE9C->find_nearby(0x01B0, 0x0028, 0x0000);
 			for (var000F in var000A with var0014 to var0015) {
 				if (var000F->get_item_quality() == 0x00D3) {
 					var000F->set_item_frame(var000F->get_item_frame() - 0x0002);
@@ -7163,7 +7163,7 @@ void Func01C7 shape#(0x1C7) () {
 			say("\"I demand that this criminal be punished by the Council of Mages. Let the quorum of Mages be convened instantly!\"");
 			UI_play_sound_effect(0x0082);
 			UI_end_conversation();
-			var0017 = ([0xFE9C, 0xFFEC, 0xFFEE] & Func098D());
+			var0017 = [0xFE9C, 0xFFEC, 0xFFEE] & Func098D();
 			var0017 = Func0988(0xFFE4, var0017);
 			var0017 = Func0988(0xFFE6, var0017);
 			var0017 = Func0988(0xFF58, var0017);
@@ -7479,7 +7479,7 @@ void Func01D6 shape#(0x1D6) () {
 		var0001 = UI_update_last_created(var0002);
 		return;
 	}
-	var0003 = ("@I believe that using a bucket in a well " + "is often more effective than simply spinning the crank.@");
+	var0003 = "@I believe that using a bucket in a well " + "is often more effective than simply spinning the crank.@";
 	Func094A(var0003);
 }
 
@@ -7591,8 +7591,8 @@ void Func01DE shape#(0x1DE) () {
 
 	if (event == 0x0007) {
 		var0000 = get_object_position();
-		var0000[0x0001] -= (var0000[0x0003] / 0x0002);
-		var0000[0x0002] -= (var0000[0x0003] / 0x0002);
+		var0000[0x0001] -= var0000[0x0003] / 0x0002;
+		var0000[0x0002] -= var0000[0x0003] / 0x0002;
 		UI_sprite_effect(0x000C, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		remove_item();
 	} else {
@@ -7911,8 +7911,8 @@ void Func01EF shape#(0x1EF) () {
 	}
 	if (event == 0x0002) {
 		var0002 = get_object_position();
-		var0002[0x0001] -= (var0002[0x0003] / 0x0002);
-		var0002[0x0002] -= (var0002[0x0003] / 0x0002);
+		var0002[0x0001] -= var0002[0x0003] / 0x0002;
+		var0002[0x0002] -= var0002[0x0003] / 0x0002;
 		remove_item();
 		UI_sprite_effect(0x001B, var0002[0x0001], var0002[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_play_sound_effect(0x002A);
@@ -8116,8 +8116,8 @@ void Func0202 shape#(0x202) () {
 			var0004 = set_npc_prop(0x0003, 0x0001);
 			var0005 = UI_die_roll(0x0001, 0x000A);
 			if (var0005 <= 0x0005) {
-				var0003[0x0001] = (0x06B1 + UI_die_roll(0x0000, 0x002D));
-				var0003[0x0002] = (0x0751 + UI_die_roll(0x0000, 0x001D));
+				var0003[0x0001] = 0x06B1 + UI_die_roll(0x0000, 0x002D);
+				var0003[0x0002] = 0x0751 + UI_die_roll(0x0000, 0x001D);
 				move_object(var0003);
 			}
 			if ((var0005 > 0x0005) && (var0005 <= 0x0009)) {
@@ -8358,7 +8358,7 @@ void Func0235 shape#(0x235) () {
 				nohalt;
 				call Func0235;
 			};
-			var0000 = ("@Thank thee...@" & "@Goodbye!@");
+			var0000 = "@Thank thee...@" & "@Goodbye!@";
 			Func094F(0xFF6A, var0000);
 			abort;
 		}
@@ -8433,7 +8433,7 @@ void Func0235 shape#(0x235) () {
 				actor frame standing;
 				call Func0235;
 			};
-			var0000 = ("@Thank thee...@" & "@Goodbye!@");
+			var0000 = "@Thank thee...@" & "@Goodbye!@";
 			Func094F(0xFF6A, var0000);
 			abort;
 		}
@@ -9687,7 +9687,7 @@ void Func0285 shape#(0x285) () {
 	var var0000;
 
 	if (event == 0x0001) {
-		var0000 = ("@I believe I heard somewhere that the innkeeper at " + "Sleeping Bull will exchange those.@");
+		var0000 = "@I believe I heard somewhere that the innkeeper at " + "Sleeping Bull will exchange those.@";
 		Func094A(var0000);
 	}
 }
@@ -9698,7 +9698,7 @@ void Func0286 shape#(0x286) () {
 	var var0000;
 
 	if (event == 0x0001) {
-		var0000 = ("@I do not know where those may be exchanged on the " + "Serpent Isle.@");
+		var0000 = "@I do not know where those may be exchanged on the " + "Serpent Isle.@";
 		Func094A(var0000);
 	}
 }
@@ -9978,17 +9978,17 @@ void Func028A shape#(0x28A) () {
 
 	if (event == 0x0001) {
 		var0000 = 0xFE9C->get_object_position();
-		var0001 = ((var0000[0x0001] - 0x03A5) / 0x000A);
-		var0002 = ((var0000[0x0002] - 0x046E) / 0x000A);
+		var0001 = (var0000[0x0001] - 0x03A5) / 0x000A;
+		var0002 = (var0000[0x0002] - 0x046E) / 0x000A;
 		if (var0001 < 0x0000) {
-			var0003 = ((" " + Func097E(var0001)) + " West");
+			var0003 = (" " + Func097E(var0001)) + " West";
 		} else {
-			var0003 = ((" " + Func097E(var0001)) + " East");
+			var0003 = (" " + Func097E(var0001)) + " East";
 		}
 		if (var0002 < 0x0000) {
-			var0004 = ((" " + Func097E(var0002)) + " North");
+			var0004 = (" " + Func097E(var0002)) + " North";
 		} else {
-			var0004 = ((" " + Func097E(var0002)) + " South");
+			var0004 = (" " + Func097E(var0002)) + " South";
 		}
 		if (!UI_is_pc_inside()) {
 			item_say(var0004 + var0003);
@@ -10052,7 +10052,7 @@ void Func028B shape#(0x28B) () {
 		return;
 	}
 	if (event == 0x0001) {
-		var0006 = ("@I suspect spinning the wool will be more fruitful " + "than spinning an empty wheel.@");
+		var0006 = "@I suspect spinning the wool will be more fruitful " + "than spinning an empty wheel.@";
 		Func094A(var0006);
 	}
 }
@@ -10955,14 +10955,14 @@ void Func02A3 shape#(0x2A3) () {
 			}
 			var0020 = UI_game_minute();
 			if (var0020 <= 0x0009) {
-				var0020 = ("0" + var0020);
+				var0020 = "0" + var0020;
 			}
-			var0021 = ((((" " + var001E) + ":") + var0020) + var001F);
+			var0021 = (((" " + var001E) + ":") + var0020) + var001F;
 			if (UI_in_gump_mode()) {
-				var0021 = ((((" " + var001E) + ":") + var0020) + var001F);
+				var0021 = (((" " + var001E) + ":") + var0020) + var001F;
 				item_say(var0021);
 			} else {
-				var0021 = ((((("@" + var001E) + ":") + var0020) + var001F) + "@");
+				var0021 = (((("@" + var001E) + ":") + var0020) + var001F) + "@";
 				0xFE9C->item_say(var0021);
 			}
 		}
@@ -10997,7 +10997,7 @@ void Func02A3 shape#(0x2A3) () {
 		if ((var0000 == 0x0017) || ((var0000 == 0x0018) || (var0000 == 0x0019))) {
 			0xFE9C->clear_item_say();
 			var0022 = get_item_quality();
-			var0023 = (var0022 + 0x0001);
+			var0023 = var0022 + 0x0001;
 			var0024 = find_nearby(0x02A3, 0x0014, 0x0000);
 			for (var0027 in var0024 with var0025 to var0026) {
 				if ((var0027->get_item_frame() > 0x0016) && (var0027->get_item_frame() < 0x001A)) {
@@ -11128,7 +11128,7 @@ void Func02AF shape#(0x2AF) () {
 			}
 		}
 		if (var0003 && (!gflags[0x01FB])) {
-			var0001 = ("" & ("@Where am I?@" & "@Where are my belongings?@"));
+			var0001 = "" & ("@Where am I?@" & "@Where are my belongings?@");
 			Func094F(0xFE9C, var0001);
 			var0007 = 0x0000;
 			var0008 = 0xFE9C->get_cont_items(0xFE99, 0xFE99, 0xFE99);
@@ -11203,9 +11203,9 @@ void Func02B7 shape#(0x2B7) () {
 		}
 		var0001 = UI_game_minute();
 		if (var0001 < 0x000A) {
-			var0001 = ("0" + var0001);
+			var0001 = "0" + var0001;
 		}
-		var0002 = (((" " + var0000) + ":") + var0001);
+		var0002 = ((" " + var0000) + ":") + var0001;
 		item_say(var0002);
 	}
 }
@@ -11933,8 +11933,8 @@ void Func02C3 shape#(0x2C3) () {
 	if (var0000 == 0x001F) {
 		UI_close_gumps();
 		var0001 = get_object_position();
-		var0001[0x0001] -= (var0001[0x0003] / 0x0002);
-		var0001[0x0002] -= (var0001[0x0003] / 0x0002);
+		var0001[0x0001] -= var0001[0x0003] / 0x0002;
+		var0001[0x0002] -= var0001[0x0003] / 0x0002;
 		remove_item();
 		var0002 = Func0992(0x0001, "@The scroll talks!@", "@The scroll talks...@", true);
 		UI_sprite_effect(0x0015, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -12641,7 +12641,7 @@ void Func02E6 shape#(0x2E6) () {
 				nohalt;
 				call Func02E6;
 			};
-			var0002 = ("@Thank thee...@" & "@Goodbye!@");
+			var0002 = "@Thank thee...@" & "@Goodbye!@";
 			Func094F(0xFFBA, var0002);
 			abort;
 		}
@@ -12711,7 +12711,7 @@ void Func02E6 shape#(0x2E6) () {
 				actor frame standing;
 				call Func02E6;
 			};
-			var0002 = ("@Thank thee...@" & "@Goodbye!@");
+			var0002 = "@Thank thee...@" & "@Goodbye!@";
 			Func094F(0xFFBA, var0002);
 			abort;
 		}
@@ -13258,7 +13258,7 @@ void Func02F8 shape#(0x2F8) () {
 	var var0000;
 
 	if (event == 0x0001) {
-		var0000 = ("@Those are beautiful. I am sure that they would fetch " + "a high price.@");
+		var0000 = "@Those are beautiful. I am sure that they would fetch " + "a high price.@";
 		Func094A(var0000);
 	}
 }
@@ -15350,8 +15350,8 @@ void Func0334 shape#(0x334) () {
 					break;
 				}
 				var0008 = var0000->get_object_position();
-				var0008[0x0001] -= (var0008[0x0003] / 0x0002);
-				var0008[0x0002] -= (var0008[0x0003] / 0x0002);
+				var0008[0x0001] -= var0008[0x0003] / 0x0002;
+				var0008[0x0002] -= var0008[0x0003] / 0x0002;
 				UI_sprite_effect(0x0007, var0008[0x0001], var0008[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x0039);
 				var0000->remove_item();
@@ -15625,7 +15625,7 @@ void Func0337 shape#(0x337) () {
 				if (var0002->get_item_frame() < 0x0002) {
 					var0002 = UI_click_on_item();
 					if (var0002->get_item_shape() == 0x0345) {
-						var0004 = (var0002->get_item_frame() % 0x0008);
+						var0004 = var0002->get_item_frame() % 0x0008;
 						var0005 = UI_die_roll(0x0001, 0x000A);
 						if (var0005 == 0x0001) {
 							var0006 = "@That is quite good!@";
@@ -15634,7 +15634,7 @@ void Func0337 shape#(0x337) () {
 							var0006 = "@Do not change thine occupation for a painter.@";
 						}
 						if (var0005 == 0x0003) {
-							var0006 = ("@I can almost not" & "see the numbers.@");
+							var0006 = "@I can almost not" & "see the numbers.@";
 						}
 						if (var0005 == 0x0004) {
 							var0006 = "@Thou shouldst stay within the lines.@";
@@ -15712,7 +15712,7 @@ void Func033B shape#(0x33B) () {
 				}
 				var0003 = UI_die_roll(0x0001, 0x0004);
 				if ((var0002 + var0003) > var0001) {
-					var0003 = (var0001 - var0002);
+					var0003 = var0001 - var0002;
 				}
 				var0003 = var0000->set_npc_prop(0x0003, var0003);
 				Func0971(item);
@@ -15767,7 +15767,7 @@ void Func033D shape#(0x33D) () {
 			var0000 = Func0953();
 			0xFE9C->set_item_flag(0x0010);
 			UI_end_conversation();
-			var0001 = (("@" + var0000) + ", I am afraid.@");
+			var0001 = ("@" + var0000) + ", I am afraid.@";
 			0xFFE4->item_say(var0001);
 			var0002 = UI_direction_from(0xFE9C, 0xFFE4);
 			var0003 = UI_direction_from(0xFFE4, 0xFE9C);
@@ -16004,7 +16004,7 @@ void Func0345 shape#(0x345) () {
 	var var0001;
 
 	if (event == 0x0001) {
-		var0000 = (("@Thou shouldst use the brush and pigments, " + Func0953()) + ".@");
+		var0000 = ("@Thou shouldst use the brush and pigments, " + Func0953()) + ".@";
 		var0001 = Func0992(0xFFFD, var0000, 0x0000, true);
 	}
 }
@@ -16165,7 +16165,7 @@ void Func0353 shape#(0x353) () {
 	var var0000;
 
 	if (event == 0x0001) {
-		var0000 = ("@That appears to be very fine cloth." + "Perhaps thou couldst cut it into bandages with shears.@");
+		var0000 = "@That appears to be very fine cloth." + "Perhaps thou couldst cut it into bandages with shears.@";
 		Func094A(var0000);
 	}
 }
@@ -16343,7 +16343,7 @@ void Func0357 shape#(0x357) () {
 		UI_lightning();
 		var0004 = UI_get_random(0x0002);
 		0xFE9C->reduce_health(var0004, 0x0005);
-		var0005 = ("@Yow!@" & ("@Ouch!@" & ("@That hurt!@" & ("@Ugh...@" & ("@Damn!@" & "@Yikes!@")))));
+		var0005 = "@Yow!@" & ("@Ouch!@" & ("@That hurt!@" & ("@Ugh...@" & ("@Damn!@" & "@Yikes!@"))));
 		var0002 = var0005[UI_get_random(UI_get_array_size(var0005))];
 		Func097F(0xFE9C, var0002, 0x0001);
 	}
@@ -16484,14 +16484,14 @@ void Func035F shape#(0x35F) () {
 			var0003 = var0001->get_item_shape();
 			var0004 = 0xFFFF;
 			if (var0003 == 0x03FA) {
-				var0004 = (var0002[0x0001] - UI_die_roll(0x0000, 0x0003));
+				var0004 = var0002[0x0001] - UI_die_roll(0x0000, 0x0003);
 				var0005 = var0002[0x0002];
-				var0006 = (var0002[0x0003] + 0x0002);
+				var0006 = var0002[0x0003] + 0x0002;
 			}
 			if (var0003 == 0x03EB) {
 				var0004 = var0002[0x0001];
-				var0005 = (var0002[0x0002] - UI_die_roll(0x0000, 0x0002));
-				var0006 = (var0002[0x0003] + 0x0002);
+				var0005 = var0002[0x0002] - UI_die_roll(0x0000, 0x0002);
+				var0006 = var0002[0x0003] + 0x0002;
 			}
 			if (var0004 == 0xFFFF) {
 				Func094A("@Do not pour flour on that!@");
@@ -16719,7 +16719,7 @@ void Func0363 shape#(0x363) () {
 
 					case "bye":
 						say("\"I must go now, before those who oppose me find that I have been here.\"");
-						var0005 = ("@Farewell!@" & "@No!@");
+						var0005 = "@Farewell!@" & "@No!@";
 						Func094F(0xFF2D, var0005);
 						UI_end_conversation();
 						UI_remove_npc_face0();
@@ -16739,7 +16739,7 @@ void Func0363 shape#(0x363) () {
 							continue;
 							actor frame ready;
 						};
-						var0005 = ("@Thoxa!@" & ("" & ("@Vex Ort!@" & ("@Mas Ort!@" & ("@Vex Ort!@" & ("" & "@She lives!@"))))));
+						var0005 = "@Thoxa!@" & ("" & ("@Vex Ort!@" & ("@Mas Ort!@" & ("@Vex Ort!@" & ("" & "@She lives!@")))));
 						Func094F(0xFF31, var0005);
 						abort;
 				}
@@ -17390,8 +17390,8 @@ void Func03A1 shape#(0x3A1) () {
 		UI_close_gumps();
 		var0000 = UI_click_on_item();
 		var0001 = var0000->get_object_position();
-		var0001[0x0001] -= (var0001[0x0003] / 0x0002);
-		var0001[0x0002] -= (var0001[0x0003] / 0x0002);
+		var0001[0x0001] -= var0001[0x0003] / 0x0002;
+		var0001[0x0002] -= var0001[0x0003] / 0x0002;
 		UI_sprite_effect(0x0015, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		if ((var0000->get_item_shape() == 0x03E6) && (var0000->get_item_frame() == 0x0006)) {
 			UI_play_sound_effect(0x0077);
@@ -19575,7 +19575,7 @@ void Func03DE shape#(0x3DE) () {
 			}
 			if (!gflags[0x0303]) {
 				var0001 = var0000->get_npc_prop(0x0004);
-				var0002 = (0x001E - var0001);
+				var0002 = 0x001E - var0001;
 				if (var0002 > 0x000A) {
 					var0002 = 0x000A;
 				}
@@ -19590,7 +19590,7 @@ void Func03DE shape#(0x3DE) () {
 	if (event == 0x0006) {
 		if (gflags[0x0303]) {
 			var0005 = get_item_quality();
-			var0006 = (0xFFFF * var0005);
+			var0006 = 0xFFFF * var0005;
 			var0004 = var0000->set_npc_prop(0x0004, var0006);
 			if (var0004) {
 				gflags[0x0303] = false;
@@ -19630,7 +19630,7 @@ void Func03E4 shape#(0x3E4) () {
 			}
 			if (!gflags[0x02E8]) {
 				var0001 = var0000->get_npc_prop(0x0000);
-				var0002 = (0x001E - var0001);
+				var0002 = 0x001E - var0001;
 				if (var0002 > 0x000A) {
 					var0002 = 0x000A;
 				}
@@ -19645,14 +19645,14 @@ void Func03E4 shape#(0x3E4) () {
 	if (event == 0x0006) {
 		if (gflags[0x02E8]) {
 			var0005 = get_item_quality();
-			var0006 = (0xFFFF * var0005);
+			var0006 = 0xFFFF * var0005;
 			var0004 = var0000->set_npc_prop(0x0000, var0006);
 			if (var0004) {
 				gflags[0x02E8] = false;
 				var0001 = var0000->get_npc_prop(0x0000);
 				var0007 = var0000->get_npc_prop(0x0003);
 				if (var0007 > var0001) {
-					var0008 = (var0001 - var0007);
+					var0008 = var0001 - var0007;
 					var0004 = var0000->set_npc_prop(0x0003, var0008);
 				}
 			}
@@ -19709,7 +19709,7 @@ void Func03E9 shape#(0x3E9) () {
 			}
 			if (!gflags[0x0302]) {
 				var0001 = var0000->get_npc_prop(0x0001);
-				var0002 = (0x001E - var0001);
+				var0002 = 0x001E - var0001;
 				if (var0002 > 0x000A) {
 					var0002 = 0x000A;
 				}
@@ -19724,7 +19724,7 @@ void Func03E9 shape#(0x3E9) () {
 	if (event == 0x0006) {
 		if (gflags[0x0302]) {
 			var0005 = get_item_quality();
-			var0006 = (0xFFFF * var0005);
+			var0006 = 0xFFFF * var0005;
 			var0004 = var0000->set_npc_prop(0x0001, var0006);
 			if (var0004) {
 				gflags[0x0302] = false;
@@ -20190,7 +20190,7 @@ void Func0400 object#(0x400) () {
 	if (event == 0x0007) {
 		if (gflags[0x0083]) {
 			var0000 = 0xFE9C->get_oppressor();
-			var0000 = (0x0000 - var0000);
+			var0000 = 0x0000 - var0000;
 			if (!gflags[0x0007]) {
 				gflags[0x0007] = true;
 				Func0936(var0000->get_npc_object(), 0xFE9C->get_npc_object());
@@ -20208,7 +20208,7 @@ void Func0400 object#(0x400) () {
 			if ((var0002[0x0001] > 0x09D0) && ((var0002[0x0001] < 0x09FA) && ((var0002[0x0002] > 0x0320) && (var0002[0x0002] < 0x033A)))) {
 				var0000 = 0xFE9C->get_npc_prop(0x0003);
 				if (var0000 < 0x0000) {
-					var0000 = (0x0003 - var0000);
+					var0000 = 0x0003 - var0000;
 				}
 				if (var0000 == 0x0000) {
 					var0000 = 0x0003;
@@ -20278,7 +20278,7 @@ void Func0400 object#(0x400) () {
 			UI_play_music(0x0016, Func09A0(0x0005, 0x0001));
 			0xFE9C->move_object([0x05B4, 0x0652, 0x0000]);
 			if (Func095C(0xFE9C, 0x0000) > Func095C(0xFE9C, 0x0003)) {
-				var0000 = (Func095C(0xFE9C, 0x0000) - Func095C(0xFE9C, 0x0003));
+				var0000 = Func095C(0xFE9C, 0x0000) - Func095C(0xFE9C, 0x0003);
 				Func095E(0xFE9C, 0x0003, var0000);
 			}
 			item->Func07D7();
@@ -20321,11 +20321,11 @@ void Func0400 object#(0x400) () {
 					var0003->clear_item_flag(0x0008);
 					var0003->clear_item_flag(0x0010);
 					if (Func095C(var0003, 0x0000) > Func095C(var0003, 0x0003)) {
-						var0000 = (Func095C(var0003, 0x0000) - Func095C(var0003, 0x0003));
+						var0000 = Func095C(var0003, 0x0000) - Func095C(var0003, 0x0003);
 						Func095E(var0003, 0x0003, var0000);
 					}
 					var0000 = Func095C(var0003, 0x0009);
-					var0000 = (0x001F - var0000);
+					var0000 = 0x001F - var0000;
 					Func095E(var0003, 0x0009, var0000);
 					gflags[0x026F] = true;
 					Func08B8();
@@ -20374,11 +20374,11 @@ void Func0400 object#(0x400) () {
 				var0003->clear_item_flag(0x0008);
 				var0003->clear_item_flag(0x0010);
 				if (Func095C(var0003, 0x0000) > Func095C(var0003, 0x0003)) {
-					var0000 = (Func095C(var0003, 0x0000) - Func095C(var0003, 0x0003));
+					var0000 = Func095C(var0003, 0x0000) - Func095C(var0003, 0x0003);
 					Func095E(var0003, 0x0003, var0000);
 				}
 				var0000 = Func095C(var0003, 0x0009);
-				var0000 = (0x001F - var0000);
+				var0000 = 0x001F - var0000;
 				Func095E(var0003, 0x0009, var0000);
 				var0000 = [(var0002[0x0001] + var0013[var0007]), (var0002[0x0002] + var0014[var0007]), var0002[0x0003]];
 				var0003->move_object(var0000);
@@ -20481,11 +20481,11 @@ void Func0400 object#(0x400) () {
 			if (gflags[0x0007]) {
 				var0000 = UI_game_hour();
 				if (var0000 > 0x000A) {
-					var0003 = (0x000A + (0x0018 - var0000));
+					var0003 = 0x000A + (0x0018 - var0000);
 				} else {
-					var0003 = (0x000A - var0000);
+					var0003 = 0x000A - var0000;
 				}
-				var0000 = ((0x05DC * var0003) + (0x0019 * (0x003C - UI_game_minute())));
+				var0000 = (0x05DC * var0003) + (0x0019 * (0x003C - UI_game_minute()));
 				UI_advance_time(var0000);
 				UI_fade_palette(0x000C, 0x0001, 0x0001);
 				0xFE9C->set_schedule_type(0x001F);
@@ -20568,7 +20568,7 @@ void Func0401 object#(0x401) () {
 	if (event == 0x0007) {
 		if (gflags[0x0083]) {
 			var0004 = 0xFFFF->get_oppressor();
-			var0004 = (0x0000 - var0004);
+			var0004 = 0x0000 - var0004;
 			if (!gflags[0x0007]) {
 				gflags[0x0007] = true;
 				Func0936(var0004->get_npc_object(), 0xFFFF->get_npc_object());
@@ -20820,7 +20820,7 @@ void Func0402 object#(0x402) () {
 	if ((event == 0x0007) && 0xFFFE->get_item_flag(0x001D)) {
 		if (gflags[0x0083]) {
 			var0005 = 0xFFFE->get_oppressor();
-			var0005 = (0x0000 - var0005);
+			var0005 = 0x0000 - var0005;
 			if (!gflags[0x0007]) {
 				gflags[0x0007] = true;
 				Func0936(var0005->get_npc_object(), 0xFFFE->get_npc_object());
@@ -20841,7 +20841,7 @@ void Func0402 object#(0x402) () {
 				say("\"Keep this book as a keepsake between us. Now I must go into the Void, but remember me always...\"");
 				var0006 = Func095C(0xFFFE, 0x0000);
 				var0007 = Func095C(0xFFFE, 0x0003);
-				var0008 = (var0006 - var0007);
+				var0008 = var0006 - var0007;
 				Func095E(0xFFFE, 0x0003, var0008);
 				var0009 = Func099B(0xFFFE, 0x0001, 0x0282, 0x003F, 0x0000, 0x0000, true);
 				gflags[0x025B] = false;
@@ -21156,7 +21156,7 @@ void Func0403 object#(0x403) () {
 	if (event == 0x0007) {
 		if (gflags[0x0083]) {
 			var0003 = 0xFFFD->get_oppressor();
-			var0003 = (0x0000 - var0003);
+			var0003 = 0x0000 - var0003;
 			if (!gflags[0x0007]) {
 				gflags[0x0007] = true;
 				Func0936(var0003->get_npc_object(), 0xFFFD->get_npc_object());
@@ -25360,7 +25360,7 @@ void Func0417 object#(0x417) () {
 				}
 				var000B &= ["@I serve Lord British!@", "say nothing"];
 				if (var000A != 0x0000) {
-					var000B &= (("@Hush, " + Func095B(var000A)) + "@");
+					var000B &= ("@Hush, " + Func095B(var000A)) + "@";
 					0x0000->set_conversation_slot();
 				}
 				var000C = Func0957(var000B);
@@ -26370,7 +26370,7 @@ void Func041A object#(0x41A) () {
 							say("\"I have lost the contact -- there are strange forces connected with this spirit!\"");
 							0xFFFD->show_npc_face1(0x0000);
 							say("\"No! It cannot be true! She cannot be dead! I refuse to believe it!\"");
-							var0006 = ("@Gwenno!@" & "@Come back to me!@");
+							var0006 = "@Gwenno!@" & "@Come back to me!@";
 							Func094F(0xFFFD, var0006);
 							Func097F(0xFFE6, "@Spirits do not lie.@", 0x0005);
 							gflags[0x0131] = true;
@@ -28058,7 +28058,7 @@ void Func041E object#(0x41E) () {
 				}
 				say("\"The cost is 12 guilders per person. Wouldst thou like a room for the night?\"");
 				if (Func0955()) {
-					var000A = (UI_get_array_size(UI_get_party_list()) * 0x000C);
+					var000A = UI_get_array_size(UI_get_party_list()) * 0x000C;
 					var000B = 0xFE9B->count_objects(0x03B8, 0xFE99, 0xFE99);
 					if (var000B >= var000A) {
 						say("\"Here is thy key.\"");
@@ -28314,8 +28314,8 @@ void Func041F object#(0x41F) () {
 		}
 		if (gflags[0x0007]) {
 			var0008 = 0xFE9C->get_object_position();
-			var0008[0x0001] -= (var0008[0x0003] / 0x0002);
-			var0008[0x0002] -= (var0008[0x0003] / 0x0002);
+			var0008[0x0001] -= var0008[0x0003] / 0x0002;
+			var0008[0x0002] -= var0008[0x0003] / 0x0002;
 			UI_sprite_effect(0x001B, (var0008[0x0001] - 0x0001), (var0008[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, 0xFFFF);
 			gflags[0x0007] = false;
 			gflags[0x0008] = true;
@@ -28468,7 +28468,7 @@ void Func041F object#(0x41F) () {
 			0xFFE7->move_object([0x09B9, 0x0715, 0x0000]);
 			0xFFE7->set_schedule_type(0x000F);
 			0xFFE7->set_item_flag(0x001D);
-			var0010 = (0x0000 - 0xFFE1->get_npc_id());
+			var0010 = 0x0000 - 0xFFE1->get_npc_id();
 			if ((var0010 == 0x0000) || var0010->get_item_flag(0x0004)) {
 				var0004 = [];
 				if (!0xFFFE->get_item_flag(0x0004)) {
@@ -28493,8 +28493,8 @@ void Func041F object#(0x41F) () {
 					var0010->show_npc_face0(0x0000);
 					say("\"What! What's happening...\"");
 					var0008 = var0010->get_object_position();
-					var0008[0x0001] -= (var0008[0x0003] / 0x0002);
-					var0008[0x0002] -= (var0008[0x0003] / 0x0002);
+					var0008[0x0001] -= var0008[0x0003] / 0x0002;
+					var0008[0x0002] -= var0008[0x0003] / 0x0002;
 					UI_sprite_effect(0x001A, var0008[0x0001], var0008[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 					var0009 = Func095B(var0010);
 					var0003 = Func0992(0x0001, (("@" + var0009) + "!"), 0x0000, true);
@@ -29214,10 +29214,10 @@ void Func0421 object#(0x421) () {
 							}
 							if (Func0955()) {
 								0xFE9C->set_item_flag(0x0001);
-								var000B = (0x0006 + UI_die_roll(0x0000, 0x0009));
+								var000B = 0x0006 + UI_die_roll(0x0000, 0x0009);
 								UI_fade_palette(0x000C, 0x0001, 0x0000);
 								0xFFDF->move_object([0x0610, 0x078F, 0x0000]);
-								var000C = (var000B * 0x05DC);
+								var000C = var000B * 0x05DC;
 								Func0986(var000B, item);
 								var0006 = script Func09A0(0x0005, 0x0001) after 33 ticks {
 									nohalt;
@@ -29414,7 +29414,7 @@ void Func0422 object#(0x422) () {
 	var0007 = 0xFFDE->get_item_flag(0x0004);
 	if ((event == 0x0007) && gflags[0x0083]) {
 		var0008 = 0xFFDE->get_oppressor();
-		var0008 = (0x0000 - var0008);
+		var0008 = 0x0000 - var0008;
 		if (!gflags[0x0007]) {
 			gflags[0x0007] = true;
 			Func0936(var0008->get_npc_object(), 0xFFDE->get_npc_object());
@@ -29427,8 +29427,8 @@ void Func0422 object#(0x422) () {
 		0xFFDE->clear_item_flag(0x001D);
 		var0009 = 0xFFDE->get_object_position();
 		UI_play_sound_effect(0x002A);
-		var0009[0x0001] -= (var0009[0x0003] / 0x0002);
-		var0009[0x0002] -= (var0009[0x0003] / 0x0002);
+		var0009[0x0001] -= var0009[0x0003] / 0x0002;
+		var0009[0x0002] -= var0009[0x0003] / 0x0002;
 		UI_sprite_effect(0x001E, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		var0009 = 0xFFDE->get_object_position();
 		0xFFDE->kill_npc();
@@ -30189,7 +30189,7 @@ void Func0424 object#(0x424) () {
 	if (event == 0x0001) {
 		0xFE9C->item_say("@A moment, good fellow.@");
 		0xFFDC->Func07D1();
-		var0005 = ("@Do not hit me...@" & "@I beg thee!@");
+		var0005 = "@Do not hit me...@" & "@I beg thee!@";
 		Func094F(0xFFDC, var0005);
 		0xFFDC->set_schedule_type(0x0003);
 	}
@@ -30839,7 +30839,7 @@ void Func0426 object#(0x426) () {
 					for (var000C in var0008 with var000A to var000B) {
 						var0009 += 0x0001;
 					}
-					var000D = (var0009 * 0x0008);
+					var000D = var0009 * 0x0008;
 					var000E = 0xFE9B->count_objects(0x0284, 0xFE99, 0xFE99);
 					if (var000E >= var000D) {
 						say("\"Here is the key to room number 3.\"");
@@ -31910,7 +31910,7 @@ void Func0429 object#(0x429) () {
 			case "room":
 				say("\"The cost is 8 gold coins per person. Wouldst thou like a room for the night?\"");
 				if (Func0955()) {
-					var000E = (UI_get_array_size(UI_get_party_list()) * 0x0008);
+					var000E = UI_get_array_size(UI_get_party_list()) * 0x0008;
 					var000F = 0xFE9B->count_objects(0x0284, 0xFE99, 0xFE99);
 					if (var000F >= var000E) {
 						say("\"Room number 3 is available. I am sure thou wilt like it. Here is the key.\"");
@@ -32901,8 +32901,8 @@ void Func042C object#(0x42C) () {
 			case "Are we there yet?" (remove):
 				var0005 = [0x06D0, 0x0766, 0x0000];
 				var0006 = 0xFFD4->get_object_position();
-				var0007 = (var0005[0x0002] - var0006[0x0002]);
-				var0008 = (var0005[0x0001] - var0006[0x0001]);
+				var0007 = var0005[0x0002] - var0006[0x0002];
+				var0008 = var0005[0x0001] - var0006[0x0001];
 				var0009 = var0007;
 				if (var0007 < 0x0000) {
 					var0009 *= 0xFFFF;
@@ -32911,7 +32911,7 @@ void Func042C object#(0x42C) () {
 				if (var0008 < 0x0000) {
 					var000A *= 0xFFFF;
 				}
-				var000B = (var000A + var0009);
+				var000B = var000A + var0009;
 				if (var000A > var0009) {
 					if (var0008 > 0x0000) {
 						var000C = 0x0002;
@@ -33865,7 +33865,7 @@ void Func042E object#(0x42E) () {
 			nohalt;
 			call Func042E;
 		};
-		var000B = ("" & ("@Psst!@" & "@Avatar...@"));
+		var000B = "" & ("@Psst!@" & "@Avatar...@");
 		Func094F(0xFFD2, var000B);
 		abort;
 	}
@@ -33908,7 +33908,7 @@ void Func042E object#(0x42E) () {
 			gflags[0x01A8] = true;
 			Func097F(0xFFD2, "@Good fortune!@", 0x0000);
 			if (0xFFC3->npc_nearby()) {
-				var000B = ("" & ("@Alyssand!@" & "@What art thou doing?@"));
+				var000B = "" & ("@Alyssand!@" & "@What art thou doing?@");
 				Func094F(0xFFC3, var000B);
 			}
 			0xFFD2->set_schedule_type(0x0014);
@@ -34057,7 +34057,7 @@ void Func042E object#(0x42E) () {
 							gflags[0x01A8] = true;
 							Func097F(0xFFD2, "@Good fortune!@", 0x0000);
 							if (0xFFC3->npc_nearby()) {
-								var000B = ("" & ("@Alyssand!@" & "@What art thou doing?@"));
+								var000B = "" & ("@Alyssand!@" & "@What art thou doing?@");
 								Func094F(0xFFC3, var000B);
 							}
 							0xFFD2->set_schedule_type(0x0014);
@@ -34260,7 +34260,7 @@ void Func042E object#(0x42E) () {
 				say("\"Thou canst find him at the camp outside the city gates.\"");
 				var000E = Func0992(0x0001, 0x0000, 0x0000, false);
 				if ((var000E == 0xFFFD) || ((var000E == 0xFFFF) || (var000E == 0xFFFE))) {
-					var000B = ("@I had thought we had rid ourselves of that blight." & "@But it seems that it is following in Batlin's footsteps.@");
+					var000B = "@I had thought we had rid ourselves of that blight." & "@But it seems that it is following in Batlin's footsteps.@";
 					var000E = Func0992(var000E, var000B, 0x0000, false);
 					0x0000->set_conversation_slot();
 				}
@@ -35729,7 +35729,7 @@ void Func0433 object#(0x433) () {
 	if ((event == 0x0000) && (0xFFCD->get_schedule_type() == 0x0007)) {
 		var0004 = ["@Garth will save me...@", (("@Damn " + var0002) + "!@"), "@I need more food!@", "@Jailer!@", "@Be patient.@", "@Curse that weaver!@"];
 		if (0xFFCA->npc_nearby()) {
-			var0004 &= ("@Be silent, Priestess!@" & ("@Pleasure me, Kylista!@" & "@Our time shall come...@"));
+			var0004 &= "@Be silent, Priestess!@" & ("@Pleasure me, Kylista!@" & "@Our time shall come...@");
 		}
 		Func097F(0xFFCD, var0004[UI_get_random(UI_get_array_size(var0004))], 0x0000);
 	}
@@ -36146,7 +36146,7 @@ void Func0434 object#(0x434) () {
 					for (var0009 in var0005 with var0007 to var0008) {
 						var0006 += 0x0001;
 					}
-					var000A = (var0006 * 0x000C);
+					var000A = var0006 * 0x000C;
 					var000B = 0xFE9B->count_objects(0x03B4, 0xFE99, 0xFE99);
 					if (var000B >= var000A) {
 						say("\"Here is thy key.\"");
@@ -37412,7 +37412,7 @@ void Func0436 object#(0x436) () {
 		if ((gflags[0x0170] && gflags[0x0172]) && (!gflags[0x016E])) {
 			var0006 = ["@I do not deserve this!@", "@Save me, please!@", "@Such filth!@", "@I wish I had a pillow...@", "@Damn Alyssand!@", "@Curse The Fellowship!@"];
 			if (0xFFCD->npc_nearby()) {
-				var0006 &= ("@Be still, Voldin.@" & ("@Get away from me...@" & "@Thy dreams are dust.@"));
+				var0006 &= "@Be still, Voldin.@" & ("@Get away from me...@" & "@Thy dreams are dust.@");
 			}
 			Func097F(0xFFCA, var0006[UI_get_random(UI_get_array_size(var0006))], 0x0000);
 		}
@@ -37809,8 +37809,8 @@ void Func0437 object#(0x437) () {
 				};
 				var0008->set_schedule_type(0x000F);
 				var0010 = var0008->get_object_position();
-				var0010[0x0001] -= (var0010[0x0003] / 0x0002);
-				var0010[0x0002] -= (var0010[0x0003] / 0x0002);
+				var0010[0x0001] -= var0010[0x0003] / 0x0002;
+				var0010[0x0002] -= var0010[0x0003] / 0x0002;
 				UI_sprite_effect(0x0017, var0010[0x0001], var0010[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x0039);
 			}
@@ -37840,8 +37840,8 @@ void Func0437 object#(0x437) () {
 				var0010 = 0xFE9C->get_object_position();
 				0xFE9C->set_item_flag(0x0010);
 				0xFE9C->set_schedule_type(0x000F);
-				var0010[0x0001] -= (var0010[0x0003] / 0x0002);
-				var0010[0x0002] -= (var0010[0x0003] / 0x0002);
+				var0010[0x0001] -= var0010[0x0003] / 0x0002;
+				var0010[0x0002] -= var0010[0x0003] / 0x0002;
 				UI_sprite_effect(0x0017, var0010[0x0001], var0010[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x0039);
 				var0000 = script 0xFE9C {
@@ -39759,7 +39759,7 @@ void Func043B object#(0x43B) () {
 				UI_remove_npc_face0();
 				Func097F(0xFE9C, "@Goodbye, Ruggs.@", 0x0000);
 				if (gflags[0x0004]) {
-					var0008 = ("" & ("@Woe is me...@" & "@My love is slain!@"));
+					var0008 = "" & ("@Woe is me...@" & "@My love is slain!@");
 					Func094F(0xFFC5, var0008);
 				} else {
 					Func097F(0xFFC5, "@Fair weather to thee.@", 0x0005);
@@ -40627,7 +40627,7 @@ void Func043F object#(0x43F) () {
 	if (event == 0x0007) {
 		if (gflags[0x0083]) {
 			var0009 = 0xFFC1->get_oppressor();
-			var0009 = (0x0000 - var0009);
+			var0009 = 0x0000 - var0009;
 			if (!var0009) {
 				var0009 = 0xFE9C;
 			}
@@ -41091,8 +41091,8 @@ void Func043F object#(0x43F) () {
 					var0014 = 0x0003;
 					while (var0014 > 0x0000) {
 						var0015 = 0xFE9C->get_object_position();
-						var0015[0x0001] = ((var0015[0x0001] + 0x0014) - (UI_die_roll(0x0000, 0x0001) * 0x0028));
-						var0015[0x0002] = ((var0015[0x0002] + 0x0014) - (UI_die_roll(0x0000, 0x0001) * 0x0028));
+						var0015[0x0001] = (var0015[0x0001] + 0x0014) - (UI_die_roll(0x0000, 0x0001) * 0x0028);
+						var0015[0x0002] = (var0015[0x0002] + 0x0014) - (UI_die_roll(0x0000, 0x0001) * 0x0028);
 						var0016 = UI_create_new_object2(0x00E4, var0015);
 						var0017 = var0016->approach_avatar(0x0050, 0x0028);
 						if (var0017) {
@@ -44252,7 +44252,7 @@ void Func0447 object#(0x447) () {
 	if (event == 0x0007) {
 		if (gflags[0x0083]) {
 			var0004 = 0xFFB9->get_oppressor();
-			var0004 = (0x0000 - var0004);
+			var0004 = 0x0000 - var0004;
 			if (!var0004) {
 				var0004 = 0xFE9C;
 			}
@@ -45123,7 +45123,7 @@ void Func044A object#(0x44A) () {
 	if (event == 0x0007) {
 		if (gflags[0x0083]) {
 			var0003 = 0xFFB6->get_oppressor();
-			var0003 = (0x0000 - var0003);
+			var0003 = 0x0000 - var0003;
 			if (!var0003) {
 				var0003 = 0xFE9C;
 			}
@@ -45719,8 +45719,8 @@ void Func044C object#(0x44C) () {
 		0xFFB4->set_item_flag(0x001E);
 		0xFFB4->set_item_flag(0x0004);
 		var0004 = 0xFFB4->get_object_position();
-		var0004[0x0001] -= (var0004[0x0003] / 0x0002);
-		var0004[0x0002] -= (var0004[0x0003] / 0x0002);
+		var0004[0x0001] -= var0004[0x0003] / 0x0002;
+		var0004[0x0002] -= var0004[0x0003] / 0x0002;
 		UI_sprite_effect(0x0015, var0004[0x0001], var0004[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_play_sound_effect(0x0077);
 		0xFFB4->remove_npc();
@@ -45846,7 +45846,7 @@ void Func044C object#(0x44C) () {
 				if (0xFFB4->get_schedule_type() == 0x0007) {
 					say("\"The cost is 5 monetari per person. Wouldst thou like a room for the night?\"");
 					if (Func0955()) {
-						var000A = (UI_get_array_size(UI_get_party_list()) * 0x0005);
+						var000A = UI_get_array_size(UI_get_party_list()) * 0x0005;
 						var000B = 0xFE9B->count_objects(0x03B7, 0xFE99, 0xFE99);
 						if (var000B >= var000A) {
 							say("\"Here is thy key.\"");
@@ -46690,7 +46690,7 @@ void Func044F object#(0x44F) () {
 	if (event == 0x0007) {
 		if (gflags[0x0083]) {
 			var0005 = 0xFFB1->get_oppressor();
-			var0005 = (0x0000 - var0005);
+			var0005 = 0x0000 - var0005;
 			if (!var0005) {
 				var0005 = 0xFE9C;
 			}
@@ -47541,7 +47541,7 @@ void Func0451 object#(0x451) () {
 					var0012 = UI_input_numeric_value(0x0000, var0011, 0x0001, 0x0000);
 					var0013 = var0012;
 					if (var000F == "Guilders") {
-						var0013 = ((var0012 * 0x0002) / 0x0003);
+						var0013 = (var0012 * 0x0002) / 0x0003;
 					}
 					if (var0013 < 0x0001) {
 						say("\"Imparting such information is risky. Thou dost offer too little in exchange for mine health...\"");
@@ -49308,7 +49308,7 @@ void Func048F object#(0x48F) () {
 				say("\"Rest easy. I will help thou.\"");
 				say("\"Who thou want to heal?\"");
 				var0003 = Func098E();
-				var0003 = (0x0000 & var0003);
+				var0003 = 0x0000 & var0003;
 				var0004 = ["nobody"];
 				for (var0007 in var0003 with var0005 to var0006) {
 					if (!(var0007 == 0x0000)) {
@@ -49326,7 +49326,7 @@ void Func048F object#(0x48F) () {
 					var000C = var0008->get_npc_prop(0x0003);
 					var000D = var0008->get_npc_name();
 					if (var000B > var000C) {
-						var000E = (var000B - var000C);
+						var000E = var000B - var000C;
 						var000F = var0009->set_npc_prop(0x0003, var000E);
 						say("\"All right, ",
 							var000D,
@@ -50343,7 +50343,7 @@ void Func0496 object#(0x496) () {
 	if (event == 0x0007) {
 		if (gflags[0x0083]) {
 			var0007 = 0xFF6A->get_oppressor();
-			var0007 = (0x0000 - var0007);
+			var0007 = 0x0000 - var0007;
 			if (!var0007) {
 				var0007 = 0xFE9C;
 			}
@@ -50813,8 +50813,8 @@ void Func0496 object#(0x496) () {
 					var0013 = 0x0003;
 					while (var0013 > 0x0000) {
 						var0014 = 0xFE9C->get_object_position();
-						var0014[0x0001] = ((var0014[0x0001] + 0x0014) - (UI_die_roll(0x0000, 0x0001) * 0x0028));
-						var0014[0x0002] = ((var0014[0x0002] + 0x0014) - (UI_die_roll(0x0000, 0x0001) * 0x0028));
+						var0014[0x0001] = (var0014[0x0001] + 0x0014) - (UI_die_roll(0x0000, 0x0001) * 0x0028);
+						var0014[0x0002] = (var0014[0x0002] + 0x0014) - (UI_die_roll(0x0000, 0x0001) * 0x0028);
 						var0015 = UI_create_new_object2(0x00E4, var0014);
 						var0016 = var0015->approach_avatar(0x0032, 0x0028);
 						if (var0016) {
@@ -52105,7 +52105,7 @@ void Func04A0 object#(0x4A0) () {
 		say("\"Greetings, felon!\"");
 		say("\"Thou art in the Mountains of Freedom... A magical prison from which none have escaped.\"");
 		say("\"I am the caretaker here. It is my duty to record thy name and crime.\"");
-		var0011 = (("I am " + var0002) + ".");
+		var0011 = ("I am " + var0002) + ".";
 		var0012 = [var0011, "I am the Avatar.", "None of thy business."];
 		var0013 = Func0956(var0012);
 		if (var0013 == var0011) {
@@ -53248,7 +53248,7 @@ void Func04A9 object#(0x4A9) () {
 		}
 	}
 	if (event == 0x000A) {
-		var0003 = (0xFF57->get_object_position() & (0xFE99 & 0x0006));
+		var0003 = 0xFF57->get_object_position() & (0xFE99 & 0x0006);
 		var0004 = var0003->find_nearby(0x0113, 0x0001, 0x0010);
 		if (var0004) {
 			if (var0004->get_item_quality() == 0x0064) {
@@ -53302,7 +53302,7 @@ void Func04A9 object#(0x4A9) () {
 	}
 	if (event == 0x0002) {
 		if (get_item_shape() == 0xFF57->get_item_shape()) {
-			var0003 = (0xFF57->get_object_position() & (0xFE99 & 0x0000));
+			var0003 = 0xFF57->get_object_position() & (0xFE99 & 0x0000);
 			var0004 = var0003->find_nearby(0x025F, 0x0014, 0x0010);
 			if (var0004) {
 				var0007 = 0xFFFF;
@@ -53402,7 +53402,7 @@ void Func04AA object#(0x4AA) () {
 	var0005 = Func0953();
 	var0006 = Func097D(0xFE9B, 0x0001, 0x0268, 0xFE99, 0x0014);
 	var0007 = 0xFF56->get_item_flag(0x001C);
-	var0008 = (("I am " + var0005) + ".");
+	var0008 = ("I am " + var0005) + ".";
 	var0009 = "his";
 	var000A = "him";
 	var000B = "he";
@@ -53415,7 +53415,7 @@ void Func04AA object#(0x4AA) () {
 		var000C = find_nearby(0x0313, 0x000A, 0x0000);
 		var000D = var000C->get_item_quality();
 		if ((var000D == 0x0047) && (gflags[0x01FE] == false)) {
-			var000E = (var000C->get_item_frame() + 0x0001);
+			var000E = var000C->get_item_frame() + 0x0001;
 			var000C->set_item_frame(var000E);
 			Func087A();
 			Func094F(0xFF56, "To enter our realm...");
@@ -53426,7 +53426,7 @@ void Func04AA object#(0x4AA) () {
 		}
 		if ((var000D == 0x0049) && (gflags[0x01FE] && (!gflags[0x01FF]))) {
 			gflags[0x01FF] = true;
-			var000E = (var000C->get_item_frame() + 0x0001);
+			var000E = var000C->get_item_frame() + 0x0001;
 			var000C->set_item_frame(var000E);
 			Func0924(0x0049, 0xFE99);
 			Func094F(0xFF56, "To go in Virtue!");
@@ -53851,7 +53851,7 @@ void Func04AC object#(0x4AC) () {
 		}
 	}
 	if (event == 0x0000) {
-		var0000 = ("@Thou art so manly!@" & ("@Kiss me!@" & ("@Let us do it again...@" & ("@Come closer...@" & ("@Oh, Shamino!@" & "@I am overcome...@")))));
+		var0000 = "@Thou art so manly!@" & ("@Kiss me!@" & ("@Let us do it again...@" & ("@Come closer...@" & ("@Oh, Shamino!@" & "@I am overcome...@"))));
 		item_say(var0000[UI_get_random(UI_get_array_size(var0000))]);
 	}
 }
@@ -54215,7 +54215,7 @@ void Func04B3 object#(0x4B3) () {
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
 	if (event == 0x0000) {
-		var0003 = ("@I like this place!@" & ("@Pleasure me, woman!@" & ("@Dance, dance, dance!@" & ("@Now!@" & ("@Come to me!@" & "@Thou art beautiful...@")))));
+		var0003 = "@I like this place!@" & ("@Pleasure me, woman!@" & ("@Dance, dance, dance!@" & ("@Now!@" & ("@Come to me!@" & "@Thou art beautiful...@"))));
 		item_say(var0003[UI_get_random(UI_get_array_size(var0003))]);
 	}
 	if (event == 0x0001) {
@@ -54892,7 +54892,7 @@ void Func04B6 object#(0x4B6) () {
 			var0007 = Func095C(0xFE9C, 0x0000);
 			var0008 = Func095C(0xFE9C, 0x0003);
 			if (var0007 > var0008) {
-				var0009 = (var0007 - var0008);
+				var0009 = var0007 - var0008;
 				Func095E(0xFE9C, 0x0003, var0009);
 			}
 			item->Func07D7();
@@ -55526,7 +55526,7 @@ void Func04BE object#(0x4BE) () {
 			say("\"Thou art not permitted here! I and my kind are the only beings allowed to prowl these tunnels. We are here to maintain Order.\"");
 			say("\"Unless thou canst show me thy Medallion of Order, I shall have to slay thee. Dost thou have one?\"");
 			if (Func0955()) {
-				var0000 = (("@But " + Func0954()) + ", we have no such thing!@");
+				var0000 = ("@But " + Func0954()) + ", we have no such thing!@";
 				var0001 = Func0992(0x0001, var0000, 0x0000, false);
 				if (var0001 != 0xFE9C) {
 					0x0000->set_conversation_slot();
@@ -56123,11 +56123,11 @@ void Func04CF object#(0x4CF) () {
 				var0013 = Func095C(var0012, 0x0000);
 				var0014 = Func095C(var0012, 0x0003);
 				if (var0013 > var0014) {
-					var0015 = (var0013 - var0014);
+					var0015 = var0013 - var0014;
 					Func095E(var0012, 0x0003, var0015);
 				}
 				var0016 = Func095C(var0012, 0x0009);
-				var0017 = (0x001F - var0016);
+				var0017 = 0x001F - var0016;
 				Func095E(var0012, 0x0009, var0017);
 				var0018 = [(var000C[0x0001] + var000D[var000F]), (var000C[0x0002] + var000E[var000F]), var000C[0x0003]];
 				var0012->move_object(var0018);
@@ -57009,8 +57009,8 @@ void Func04D3 object#(0x4D3) () {
 				say("\"I must return to Monk Isle.\"");
 				UI_remove_npc_face0();
 				var000D = 0xFF2D->get_object_position();
-				var000D[0x0001] -= (var000D[0x0003] / 0x0002);
-				var000D[0x0002] -= (var000D[0x0003] / 0x0002);
+				var000D[0x0001] -= var000D[0x0003] / 0x0002;
+				var000D[0x0002] -= var000D[0x0003] / 0x0002;
 				UI_sprite_effect(0x0007, var000D[0x0001], var000D[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x0051);
 				0xFF2D->remove_npc();
@@ -57515,8 +57515,8 @@ void Func04D5 object#(0x4D5) () {
 				var000D = 0xFF2B->find_nearest(0x0308, 0x0014);
 				if (var000D) {
 					var000E = var000D->get_object_position();
-					var000F = ((0x0008 * (var000E[0x0001] - 0x0920)) + 0x0064);
-					var0010 = ((0x0008 * (var000E[0x0002] - 0x0420)) + 0x0028);
+					var000F = (0x0008 * (var000E[0x0001] - 0x0920)) + 0x0064;
+					var0010 = (0x0008 * (var000E[0x0002] - 0x0420)) + 0x0028;
 					var000D->obj_sprite_effect(0x0035, var000F, var0010, 0x0000, 0x0000, 0x0000, 0xFFFF);
 					Func097F(0xFF2B, "@Behold, the vision!@", 0x0007);
 					gflags[0x0273] = false;
@@ -58560,7 +58560,7 @@ void Func0600 object#(0x600) () {
 	var var0003;
 	var var0004;
 
-	var0000 = (get_item_quality() - 0x0001);
+	var0000 = get_item_quality() - 0x0001;
 	var0001 = set_item_quality(var0000);
 	if (var0000 == 0x0000) {
 		halt_scheduled();
@@ -58759,8 +58759,8 @@ void Func0606 object#(0x606) () {
 	var var0002;
 
 	var0000 = get_object_position();
-	var0001 = (var0000[0x0001] - (var0000[0x0003] / 0x0002));
-	var0002 = (var0000[0x0002] - (var0000[0x0003] / 0x0002));
+	var0001 = var0000[0x0001] - (var0000[0x0003] / 0x0002);
+	var0002 = var0000[0x0002] - (var0000[0x0003] / 0x0002);
 	var0001 -= 0x0003;
 	var0002 -= 0x0004;
 	UI_sprite_effect(0x0009, var0001, var0002, 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -58770,14 +58770,14 @@ void Func0606 object#(0x606) () {
 void Func0607 object#(0x607) () {
 	var var0000;
 
-	var0000 = (get_lift() + 0x0001);
+	var0000 = get_lift() + 0x0001;
 	set_lift(var0000);
 }
 
 void Func0609 object#(0x609) () {
 	var var0000;
 
-	var0000 = (get_lift() - 0x0001);
+	var0000 = get_lift() - 0x0001;
 	set_lift(var0000);
 }
 
@@ -59088,11 +59088,11 @@ void Func060C object#(0x60C) () {
 		var0009->clear_item_flag(0x0008);
 		var0009->clear_item_flag(0x0010);
 		if (Func095C(var0009, 0x0000) > Func095C(var0009, 0x0003)) {
-			var000A = (Func095C(var0009, 0x0000) - Func095C(var0009, 0x0003));
+			var000A = Func095C(var0009, 0x0000) - Func095C(var0009, 0x0003);
 			Func095E(var0009, 0x0003, var000A);
 		}
 		var000A = Func095C(var0009, 0x0009);
-		var000A = (0x001F - var000A);
+		var000A = 0x001F - var000A;
 		Func095E(var0009, 0x0009, var000A);
 		var000A = [(var0003[0x0001] + var0004[var0006]), (var0003[0x0002] + var0005[var0006]), var0003[0x0003]];
 		var0009->move_object(var000A);
@@ -59253,8 +59253,8 @@ void Func060F object#(0x60F) () {
 	var var0001;
 
 	var0000 = get_object_position();
-	var0000[0x0001] -= (var0000[0x0003] / 0x0002);
-	var0000[0x0002] -= (var0000[0x0003] / 0x0002);
+	var0000[0x0001] -= var0000[0x0003] / 0x0002;
+	var0000[0x0002] -= var0000[0x0003] / 0x0002;
 	UI_sprite_effect(0x0011, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0x0001);
 	UI_play_sound_effect(0x0074);
 	UI_lightning();
@@ -59323,19 +59323,19 @@ void Func0612 object#(0x612) () {
 				var000D->set_schedule_type(var0008[var0009]);
 				var000D->set_npc_id(0x0000);
 				var000E = var000D->get_npc_prop(0x0000);
-				var000F = (var0001[var0009] - var000E);
+				var000F = var0001[var0009] - var000E;
 				var0010 = var000D->set_npc_prop(0x0000, var000F);
 				var000E = var000D->get_npc_prop(0x0001);
-				var000F = (var0002[var0009] - var000E);
+				var000F = var0002[var0009] - var000E;
 				var0010 = var000D->set_npc_prop(0x0001, var000F);
 				var000E = var000D->get_npc_prop(0x0002);
-				var000F = (var0003[var0009] - var000E);
+				var000F = var0003[var0009] - var000E;
 				var0010 = var000D->set_npc_prop(0x0002, var000F);
 				var000E = var000D->get_npc_prop(0x0004);
-				var000F = (var0004[var0009] - var000E);
+				var000F = var0004[var0009] - var000E;
 				var0010 = var000D->set_npc_prop(0x0004, var000F);
 				var000E = var000D->get_npc_prop(0x0003);
-				var000F = (var0005[var0009] - var000E);
+				var000F = var0005[var0009] - var000E;
 				var0010 = var000D->set_npc_prop(0x0003, var000F);
 				if (var000C == 0x03B1) {
 					var000D->set_item_flag(0x001D);
@@ -60239,7 +60239,7 @@ void Func0622 object#(0x622) () {
 		var0001 = UI_get_array_size(UI_get_party_list());
 		if (var0001 == 0x0001) {
 labelFunc0622_0024:
-			var0002 = (0x0006 + UI_die_roll(0x0000, 0x0009));
+			var0002 = 0x0006 + UI_die_roll(0x0000, 0x0009);
 		} else {
 			var0003 = 0xFE9C->get_npc_name();
 			if (var0001 > 0x0002) {
@@ -60279,7 +60279,7 @@ labelFunc0622_0024:
 			UI_remove_npc_face0();
 		}
 		UI_fade_palette_sleep(0x000C, 0x0001, 0x0000);
-		var000C = (var0002 * 0x05DC);
+		var000C = var0002 * 0x05DC;
 		Func0986(var0002, item);
 		var000D = [0x004A, 0x00B8, 0x0001, 0x0002, 0x0003, 0x0004, 0x0005, 0x0006, 0x0007, 0x000B];
 		for (var0010 in var000D with var000E to var000F) {
@@ -60692,7 +60692,7 @@ void Func0626 object#(0x626) () {
 			var000C = var0007->get_object_position();
 			var000D = 0x0001;
 			while (var000D <= var0009) {
-				var000E = (((var000D - 0x0001) * 0x0003) + 0x0001);
+				var000E = ((var000D - 0x0001) * 0x0003) + 0x0001;
 				if ((Func097E(var000C[0x0001] - var0008[var000E]) <= 0x0002) && (Func097E(var000C[0x0002] - var0008[(var000E + 0x0001)]) <= 0x0002)) {
 					var0007->remove_item();
 					var0008 &= var000C;
@@ -61169,7 +61169,7 @@ void Func062F object#(0x62F) () {
 		var0000 = UI_die_roll(0x0001, 0x000A);
 		var0001 = UI_die_roll(0x0001, 0x000A);
 		if (UI_die_roll(0x0001, 0x0002) == 0x0001) {
-			var0001 = (0x0000 - var0001);
+			var0001 = 0x0000 - var0001;
 		}
 		var0002 = [0x0A22, 0x0AB7];
 		set_schedule_type(0x000F);
@@ -61267,7 +61267,7 @@ void Func0632 object#(0x632) () {
 		var0004 = [0x0A3B, 0x0A25, 0x0A3B, 0x0A28, 0x0A3E, 0x0A27];
 		var0005 = 0x0001;
 		while (var0005 <= 0x0003) {
-			var0006 = (var0005 * 0x0002);
+			var0006 = var0005 * 0x0002;
 			var0007 = UI_create_new_object2(0x0151, [var0004[(var0006 - 0x0001)], var0004[var0006], 0x0000]);
 			if (var0007) {
 				var0007->set_schedule_type(0x000F);
@@ -61455,8 +61455,8 @@ void Func0636 object#(0x636) () {
 	UI_fade_palette(0x000C, 0x0001, 0x0001);
 	if (item == 0xFE9C->get_npc_object()) {
 		var0000 = get_object_position();
-		var0000[0x0001] -= (var0000[0x0003] / 0x0002);
-		var0000[0x0002] -= (var0000[0x0003] / 0x0002);
+		var0000[0x0001] -= var0000[0x0003] / 0x0002;
+		var0000[0x0002] -= var0000[0x0003] / 0x0002;
 		UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	}
 }
@@ -61754,7 +61754,7 @@ void Func063A object#(0x63A) () {
 		var0001 = "@Is that virtuous?@";
 	}
 	if (var0000 > 0x0003) {
-		var0001 = (("@" + Func0953()) + "?!@");
+		var0001 = ("@" + Func0953()) + "?!@";
 	}
 	var0002 = Func0992(0x0001, var0001, 0x0000, false);
 }
@@ -62113,9 +62113,9 @@ void Func063F object#(0x63F) () {
 		};
 		var0008 = [0x0000, 0x0002, 0x0002, 0x0002, 0x0000, 0xFFFE, 0xFFFE, 0xFFFE];
 		var0009 = [0xFFFE, 0xFFFE, 0x0000, 0x0002, 0x0002, 0x0002, 0x0000, 0xFFFE];
-		var000A = (var0008 & var0008);
-		var000B = (var0009 & var0009);
-		var0004 = (find_direction(0xFE9C) + 0x0001);
+		var000A = var0008 & var0008;
+		var000B = var0009 & var0009;
+		var0004 = find_direction(0xFE9C) + 0x0001;
 		var000C = 0x0001;
 		var000D = var000A[var0004];
 		var000E = var000B[var0004];
@@ -62260,7 +62260,7 @@ void Func0642 object#(0x642) () {
 				actor frame strike_1h;
 			};
 			var0001 = Func0941(0xFE9C);
-			var0002 = (0x0015 + var0001);
+			var0002 = 0x0015 + var0001;
 			var0003 = find_nearby(0x00C8, var0002, 0x00B0);
 			for (var0006 in var0003 with var0004 to var0005) {
 				var0000 = script var0006 after 5 ticks {
@@ -62270,7 +62270,7 @@ void Func0642 object#(0x642) () {
 			}
 			var0007 = find_nearby(0x0320, var0002, 0x00B0);
 			var0008 = find_nearby(0x020A, var0002, 0x00B0);
-			var0009 = (var0007 & var0008);
+			var0009 = var0007 & var0008;
 			for (var0006 in var0009 with var000A to var000B) {
 				if (var0006->get_item_quality() >= 0x00FA) {
 					var0000 = script var0006 after 5 ticks {
@@ -62325,7 +62325,7 @@ void Func0643 object#(0x643) () {
 				var0006 = find_nearby(var0005, var0001, 0x0000);
 				for (var0009 in var0006 with var0007 to var0008) {
 					var000A = var0009->get_item_shape();
-					var000B = ((get_distance(var0009) / 0x0003) + 0x0002);
+					var000B = (get_distance(var0009) / 0x0003) + 0x0002;
 					UI_telekenesis(var000A);
 					var0000 = script var0009 after var000B ticks {
 						nohalt;
@@ -62377,7 +62377,7 @@ void Func0644 object#(0x644) () {
 				var0006 = find_nearby(var0005, var0001, 0x0000);
 				for (var0009 in var0006 with var0007 to var0008) {
 					var000A = var0009->get_item_shape();
-					var000B = ((get_distance(var0009) / 0x0003) + 0x0002);
+					var000B = (get_distance(var0009) / 0x0003) + 0x0002;
 					UI_telekenesis(var000A);
 					var0000 = script var0009 after var000B ticks {
 						nohalt;
@@ -62685,7 +62685,7 @@ void Func0649 object#(0x649) () {
 		halt_scheduled();
 		item_say("@An Jux@");
 		if (Func0951()) {
-			var0002 = (0x0005 + Func0941(0xFE9C));
+			var0002 = 0x0005 + Func0941(0xFE9C);
 			var0003 = script item {
 				nohalt;
 				face var0001;
@@ -62706,7 +62706,7 @@ void Func0649 object#(0x649) () {
 			}
 			var0008 = var0000->find_nearby(0x0320, var0002, 0x00B0);
 			var0009 = var0000->find_nearby(0x020A, var0002, 0x00B0);
-			var000A = (var0008 & var0009);
+			var000A = var0008 & var0009;
 			for (var0007 in var000A with var000B to var000C) {
 				if (var0007->get_item_quality() >= 0x00FA) {
 					var0003 = var0007->set_item_quality(0x0000);
@@ -62903,7 +62903,7 @@ void Func064D object#(0x64D) () {
 		var0003 = get_npc_prop(0x0000);
 		var0004 = get_npc_prop(0x0003);
 		if (var0004 <= var0003) {
-			var0005 = ((var0003 - var0004) / 0x0002);
+			var0005 = (var0003 - var0004) / 0x0002;
 			var0002 = set_npc_prop(0x0003, var0005);
 		}
 	}
@@ -63035,7 +63035,7 @@ void Func0650 object#(0x650) () {
 	if (event == 0x0002) {
 		UI_play_sound_effect(0x005A);
 		var0001 = Func0941(0xFE9C);
-		var0002 = (0x07D0 + (var0001 * 0x00C8));
+		var0002 = 0x07D0 + (var0001 * 0x00C8);
 		obj_sprite_effect(0x0007, 0xFFFE, 0xFFFE, 0x0000, 0x0000, 0x0000, 0xFFFD);
 		gflags[0x01FC] = true;
 		var0003 = Func09A0(0x0007, 0x0002);
@@ -63408,7 +63408,7 @@ void Func0659 object#(0x659) () {
 			var0003 = Func0980(var0002);
 			for (var0006 in var0003 with var0004 to var0005) {
 				var0002 = get_distance(var0006);
-				var0002 = ((var0002 / 0x0004) + 0x0004);
+				var0002 = (var0002 / 0x0004) + 0x0004;
 				if (!(UI_die_roll(0x0001, 0x0003) == 0x0001)) {
 					var0000 = script var0006 after var0002 ticks {
 						nohalt;
@@ -63546,7 +63546,7 @@ void Func065A object#(0x65A) () {
 						var000B = [var000B, var000D];
 					}
 					if (var000C == 0x0006) {
-						var000E = (NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+						var000E = NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
 						var000D = new script {
 							face var000E;
 							actor frame bowing;
@@ -63555,7 +63555,7 @@ void Func065A object#(0x65A) () {
 						var000B = [var000B, var000D];
 					}
 					if (var000C == 0x0007) {
-						var000E = (NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+						var000E = NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
 						var000D = new script {
 							face var000E;
 							actor frame kneeling;
@@ -63564,7 +63564,7 @@ void Func065A object#(0x65A) () {
 						var000B = [var000B, var000D];
 					}
 					if (var000C == 0x0008) {
-						var000E = (NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+						var000E = NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
 						var000D = new script {
 							face var000E;
 							actor frame ready;
@@ -63665,7 +63665,7 @@ void Func065C object#(0x65C) () {
 				if (!(var0006 in var0003)) {
 					if (!(UI_die_roll(0x0001, 0x0003) == 0x0001)) {
 						var0001 = get_distance(var0006);
-						var0001 = ((var0001 / 0x0003) + 0x0005);
+						var0001 = (var0001 / 0x0003) + 0x0005;
 						var0000 = script var0006 after var0001 ticks {
 							nohalt;
 							call Func065C;
@@ -63729,8 +63729,8 @@ void Func065D object#(0x65D) () {
 			var0007 = 0x0000;
 			while (var0007 != 0x000C) {
 				var0007 += 0x0001;
-				var0008 = (var0000[0x0001] + var0004[var0007]);
-				var0009 = (var0000[0x0002] + var0005[var0007]);
+				var0008 = var0000[0x0001] + var0004[var0007];
+				var0009 = var0000[0x0002] + var0005[var0007];
 				var0003 = [var0008, var0009, 0x0000];
 				var000A = var0003->find_nearby(0xFE99, var0006, 0x0020);
 				for (var000D in var000A with var000B to var000C) {
@@ -63861,7 +63861,7 @@ void Func065F object#(0x65F) () {
 	}
 	if (event == 0x0002) {
 		var0005 = get_item_frame();
-		var0007 = (var0005 - 0x0003);
+		var0007 = var0005 - 0x0003;
 		set_item_frame(var0007);
 		Func091D();
 	}
@@ -63913,7 +63913,7 @@ void Func0660 object#(0x660) () {
 		if (var0003 < 0x0002) {
 			var0003 = 0x0002;
 		}
-		var0004 = (var0003 / 0x0002);
+		var0004 = var0003 / 0x0002;
 		if (var0004 < 0x0001) {
 			var0004 = 0x0001;
 		}
@@ -64292,7 +64292,7 @@ void Func0667 object#(0x667) () {
 			var0002 = UI_get_party_list();
 			for (var0005 in var0001 with var0003 to var0004) {
 				if (!(var0005 in var0002)) {
-					var0006 = (get_distance(var0005) + 0x000F);
+					var0006 = get_distance(var0005) + 0x000F;
 					var0000 = script var0005 after var0006 ticks {
 						nohalt;
 						call Func0667;
@@ -64519,8 +64519,8 @@ void Func066B object#(0x66B) () {
 			};
 			var0003 = UI_create_new_object(0x0231);
 			if (var0003) {
-				var0004 = (var0000[0x0002] + 0x0001);
-				var0005 = (var0000[0x0003] + 0x0001);
+				var0004 = var0000[0x0002] + 0x0001;
+				var0005 = var0000[0x0003] + 0x0001;
 				var0006 = var0000[0x0004];
 				var0007 = [var0004, var0005, var0006];
 				var0008 = UI_update_last_created(var0007);
@@ -64582,8 +64582,8 @@ void Func066C object#(0x66C) () {
 			var0005 = 0x0000;
 			while (var0005 < 0x000C) {
 				var0005 += 0x0001;
-				var0006 = (var0000[0x0002] + var0003[var0005]);
-				var0007 = (var0000[0x0003] + var0004[var0005]);
+				var0006 = var0000[0x0002] + var0003[var0005];
+				var0007 = var0000[0x0003] + var0004[var0005];
 				var0008 = var0000[0x0004];
 				var0009 = [var0006, var0007, var0008];
 				var000A = [var0006, var0007, (var0008 + 0x0001)];
@@ -64684,7 +64684,7 @@ void Func066D object#(0x66D) () {
 					var0002 = UI_update_last_created(var000A);
 					if (var0002) {
 						var000C = UI_die_roll(0x0001, 0x000F);
-						var000D = (0x001E + var000C);
+						var000D = 0x001E + var000C;
 						var0002 = var000B->set_item_quality(var000D);
 						var000B->set_item_flag(0x0012);
 						var0002 = script var000B after var000D ticks {
@@ -64763,7 +64763,7 @@ void Func066E object#(0x66E) () {
 		var0001 = UI_create_new_object(var0005);
 		if (var0001) {
 			var0006 = 0xFE9C->get_object_position();
-			var0007 = (Func0941(0xFE9C) * 0x0008);
+			var0007 = Func0941(0xFE9C) * 0x0008;
 			var0008 = UI_die_roll(var0007, (var0007 + 0x0014));
 			if (var0008 > 0x0063) {
 				var0008 = 0x0063;
@@ -64867,8 +64867,8 @@ void Func0670 object#(0x670) () {
 		halt_scheduled();
 		var0001 = UI_click_on_item();
 		item_say("@In Sanct Grav@");
-		var0002 = (var0001[0x0002] + 0x0001);
-		var0003 = (var0001[0x0003] + 0x0001);
+		var0002 = var0001[0x0002] + 0x0001;
+		var0003 = var0001[0x0003] + 0x0001;
 		var0004 = var0001[0x0004];
 		var0005 = [var0002, var0003, var0004];
 		var0006 = UI_is_not_blocked(var0005, 0x0300, 0x0000);
@@ -65022,7 +65022,7 @@ void Func0673 object#(0x673) () {
 			var0001 = UI_get_party_list();
 			for (var0004 in var0001 with var0002 to var0003) {
 				var0005 = get_distance(var0004);
-				var0005 = ((var0005 / 0x0003) + 0x0005);
+				var0005 = (var0005 / 0x0003) + 0x0005;
 				var0000 = script var0004 after var0005 ticks {
 					nohalt;
 					call Func0673;
@@ -65074,8 +65074,8 @@ void Func0674 object#(0x674) () {
 			};
 			var0003 = UI_create_new_object(0x0384);
 			if (var0003) {
-				var0004 = (var0000[0x0002] + 0x0001);
-				var0005 = (var0000[0x0003] + 0x0001);
+				var0004 = var0000[0x0002] + 0x0001;
+				var0005 = var0000[0x0003] + 0x0001;
 				var0006 = var0000[0x0004];
 				var0007 = [var0004, var0005, var0006];
 				var0003->set_item_flag(0x0012);
@@ -65282,8 +65282,8 @@ void Func0678 object#(0x678) () {
 		halt_scheduled();
 		var0001 = UI_click_on_item();
 		item_say("@In Sanct Grav@");
-		var0002 = (var0001[0x0002] + 0x0001);
-		var0003 = (var0001[0x0003] + 0x0001);
+		var0002 = var0001[0x0002] + 0x0001;
+		var0003 = var0001[0x0003] + 0x0001;
 		var0004 = var0001[0x0004];
 		var0005 = [var0002, var0003, var0004];
 		if (Func0951()) {
@@ -65376,10 +65376,10 @@ void Func0679 object#(0x679) () {
 		}
 		var0005 = get_item_flag(0x000E);
 		if ((var0003 > var0004) && (var0005 == false)) {
-			var0006 = (var0003 - var0004);
+			var0006 = var0003 - var0004;
 			Func0982(item, var0006);
 		} else {
-			var0006 = (var0004 - var0003);
+			var0006 = var0004 - var0003;
 			var0007 = 0xFE9C->get_npc_object();
 			Func0982(var0007, var0006);
 		}
@@ -65575,7 +65575,7 @@ void Func067D object#(0x67D) () {
 	}
 	if (event == 0x0002) {
 		var0001 = get_object_position();
-		var0002 = ((var0001[0x0001] + 0x0002) & ((var0001[0x0002] + 0x0002) & var0001[0x0003]));
+		var0002 = (var0001[0x0001] + 0x0002) & ((var0001[0x0002] + 0x0002) & var0001[0x0003]);
 		var0003 = false;
 		if ((var0001[0x0001] > 0x0550) && ((var0001[0x0001] < 0x0573) && ((var0001[0x0002] > 0x01EA) && (var0001[0x0002] < 0x0212)))) {
 			var0003 = true;
@@ -65608,14 +65608,14 @@ void Func067E object#(0x67E) () {
 	var var0009;
 
 	if (event == 0x0001) {
-		var0000 = (0xFE9C->get_object_position() & (0x0096 & 0x001F));
+		var0000 = 0xFE9C->get_object_position() & (0x0096 & 0x001F);
 		var0001 = var0000->find_nearby(0x025F, 0x0050, 0x0010);
 		for (var0004 in var0001 with var0002 to var0003) {
 			var0005 = var0004->get_item_quality();
 			var0006 = var0004->get_item_frame();
 			if ((var0005 == 0x0096) && (var0006 == 0x001F)) {
 				var0007 = 0xFE9C->get_npc_object()->get_object_position();
-				var0008 = (var0007[0x0003] + 0x0001);
+				var0008 = var0007[0x0003] + 0x0001;
 				var0008 /= 0x0002;
 				0xFE9C->obj_sprite_effect(0x0009, var0008, var0008, 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x0021);
@@ -65748,7 +65748,7 @@ void Func0681 object#(0x681) () {
 			for (var0007 in var0002 with var0005 to var0006) {
 				if (!(var0007 in var0003)) {
 					var0001 = get_distance(var0007);
-					var0001 = ((var0001 / 0x0003) + 0x0005);
+					var0001 = (var0001 / 0x0003) + 0x0005;
 					var0007->halt_scheduled();
 					var0000 = script var0007 after var0001 ticks {
 						nohalt;
@@ -65813,7 +65813,7 @@ void Func0682 object#(0x682) () {
 			var0001 = UI_get_party_list();
 			for (var0004 in var0001 with var0002 to var0003) {
 				var0005 = get_distance(var0004);
-				var0005 = ((var0005 / 0x0003) + 0x0005);
+				var0005 = (var0005 / 0x0003) + 0x0005;
 				var0000 = script var0004 after var0005 ticks {
 					nohalt;
 					call Func0682;
@@ -65864,7 +65864,7 @@ void Func0683 object#(0x683) () {
 				actor frame reach_2h;
 				sfx 67;
 			};
-			var0001 = (Func0941(0xFE9C) + UI_die_roll(0x0001, 0x0004));
+			var0001 = Func0941(0xFE9C) + UI_die_roll(0x0001, 0x0004);
 			if (var0001 > 0x0008) {
 				var0000 = script item after 5 ticks {
 					nohalt;
@@ -66101,13 +66101,13 @@ void Func0685 object#(0x685) () {
 			var0006 = UI_die_roll(0x0001, 0x0064);
 		} while (var0002[var0005] < var0006);
 		var0007 = var0003[var0005];
-		var0008 = (var0007 / 0x0002);
+		var0008 = var0007 / 0x0002;
 		if (var0008 < 0x0001) {
 			var0008 = 0x0001;
 		}
 		var0009 = UI_die_roll(0x0001, var0008);
 		if (UI_die_roll(0x0001, 0x0002) == 0x0001) {
-			var0009 = (0xFFFF * var0009);
+			var0009 = 0xFFFF * var0009;
 		}
 		var0007 += var0009;
 		while (var0007) {
@@ -66158,7 +66158,7 @@ void Func0687 object#(0x687) () {
 				actor frame reach_2h;
 				sfx 67;
 			};
-			var0002 = (0x000F + Func0941(0xFE9C));
+			var0002 = 0x000F + Func0941(0xFE9C);
 			while (var0002 != 0x0000) {
 				var0002 -= 0x0001;
 				var0001 = script 0xFE9C after (var0002 + 0x000A) ticks {
@@ -66203,7 +66203,7 @@ void Func0688 object#(0x688) () {
 	var var0011;
 
 	var0000 = [];
-	var0001 = (0x000A + Func0941(0xFE9C));
+	var0001 = 0x000A + Func0941(0xFE9C);
 	var0002 = find_nearby(0xFE99, var0001, 0x0008);
 	var0003 = UI_get_party_list();
 	var0004 = [];
@@ -66216,8 +66216,8 @@ void Func0688 object#(0x688) () {
 	var0009 = UI_die_roll(0x0001, 0x0003);
 	if (var0009 == 0x0001) {
 		var000A = 0xFE9C->get_object_position();
-		var000B = (var000A[0x0001] + UI_die_roll(0xFFF4, 0x000C));
-		var000C = (var000A[0x0002] + UI_die_roll(0xFFF4, 0x000C));
+		var000B = var000A[0x0001] + UI_die_roll(0xFFF4, 0x000C);
+		var000C = var000A[0x0002] + UI_die_roll(0xFFF4, 0x000C);
 		var000D = var000A[0x0003];
 		var0000 = [var000B, var000C, 0x0000];
 	} else if (var0008 != 0x0000) {
@@ -66450,7 +66450,7 @@ void Func06A7 object#(0x6A7) () {
 			var0005 = get_object_position();
 			UI_sprite_effect(0x0007, (var0005[0x0001] - 0x0001), (var0005[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
 			var0006 = UI_die_roll(0x0001, 0x000A);
-			var0007 = (0x0000 - UI_die_roll(0x0001, 0x000A));
+			var0007 = 0x0000 - UI_die_roll(0x0001, 0x000A);
 			var0008 = var0004->set_last_created();
 			if (var0008) {
 				var0008 = UI_update_last_created([(0x0A21 + var0006), (0x037A + var0007), 0x0000]);
@@ -67166,8 +67166,8 @@ void Func06B6 object#(0x6B6) () {
 		var0003 = var0006->get_object_position();
 		var0007 = true;
 		while (var0007) {
-			var0003[0x0001] = (var0001[0x0001] + UI_die_roll(0x0000, var0002[0x0001]));
-			var0003[0x0002] = (var0001[0x0002] + UI_die_roll(0x0000, var0002[0x0002]));
+			var0003[0x0001] = var0001[0x0001] + UI_die_roll(0x0000, var0002[0x0001]);
+			var0003[0x0002] = var0001[0x0002] + UI_die_roll(0x0000, var0002[0x0002]);
 			if (UI_is_not_blocked(var0003, 0x02D1, 0x0000)) {
 				var0007 = false;
 			}
@@ -67181,8 +67181,8 @@ void Func06B6 object#(0x6B6) () {
 		if (var000A) {
 			for (var000D in var000A with var000B to var000C) {
 				if (var000D->get_item_quality() == var0000) {
-					var0003[0x0001] = (var0001[0x0001] + UI_die_roll(0x0000, var0002[0x0001]));
-					var0003[0x0002] = (var0001[0x0002] + UI_die_roll(0x0000, var0002[0x0002]));
+					var0003[0x0001] = var0001[0x0001] + UI_die_roll(0x0000, var0002[0x0001]);
+					var0003[0x0002] = var0001[0x0002] + UI_die_roll(0x0000, var0002[0x0002]);
 					UI_sprite_effect(0x002F, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 					UI_play_sound_effect(0x0030);
 					var000D->move_object(var0003);
@@ -67193,8 +67193,8 @@ void Func06B6 object#(0x6B6) () {
 			var000E = UI_find_nearby_avatar(0x0202);
 			var000F = UI_get_array_size(var000E);
 			if (var000F < 0x0003) {
-				var0003[0x0001] = (var0001[0x0001] + UI_die_roll(0x0000, var0002[0x0001]));
-				var0003[0x0002] = (var0001[0x0002] + UI_die_roll(0x0000, var0002[0x0002]));
+				var0003[0x0001] = var0001[0x0001] + UI_die_roll(0x0000, var0002[0x0001]);
+				var0003[0x0002] = var0001[0x0002] + UI_die_roll(0x0000, var0002[0x0002]);
 				var0010 = UI_create_new_object2(0x0202, var0003);
 				var0010->set_alignment(0x0002);
 				var0010->set_schedule_type(0x0000);
@@ -67231,14 +67231,14 @@ void Func06B7 object#(0x6B7) () {
 	var0000 = get_object_position();
 	var0001 = get_item_quality();
 	if (var0001 > 0x0064) {
-		var0001 = (0x0000 - (var0001 - 0x0064));
+		var0001 = 0x0000 - (var0001 - 0x0064);
 	}
 	var0002 = get_item_quantity(0x0000);
 	if (var0002 > 0x0064) {
-		var0002 = (0x0000 - (var0002 - 0x0064));
+		var0002 = 0x0000 - (var0002 - 0x0064);
 	}
-	var0003 = (var0001 / 0x0004);
-	var0004 = (var0002 / 0x0004);
+	var0003 = var0001 / 0x0004;
+	var0004 = var0002 / 0x0004;
 	var0005 = 0x0000;
 	while (var0005 < 0x0004) {
 		var0006 = UI_create_new_object(0x0390);
@@ -67328,7 +67328,7 @@ void Func06B9 object#(0x6B9) () {
 		// Bug: NPC numbers returned are always negative, hence this
 		// will result in the *wrong* *function*.
 		// It should be '0x400 - var0000->get_npc_number()' instead.
-		var0004 = (var0000->get_npc_number() + 0x0400);
+		var0004 = var0000->get_npc_number() + 0x0400;
 		var0005 = script item {
 			nohalt;
 			call var0004;
@@ -67432,7 +67432,7 @@ void Func06BC object#(0x6BC) () {
 			UI_sprite_effect(0x0015, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_sprite_effect(0x0029, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			Func093E(var0005);
-			var0006 = ("@Run!@" & ("@'Tis a magic storm!@" & ("@Help!@" & ("@That almost hit me!@" & ("@Whoa!@" & "@I wish I were home!@")))));
+			var0006 = "@Run!@" & ("@'Tis a magic storm!@" & ("@Help!@" & ("@That almost hit me!@" & ("@Whoa!@" & "@I wish I were home!@"))));
 			var0004 = Func0992(0x0001, var0006[UI_get_random(UI_get_array_size(var0006))], 0x0000, true);
 			abort;
 		}
@@ -67445,8 +67445,8 @@ void Func06BC object#(0x6BC) () {
 				var0008[0x0002] += 0x0001;
 				var0003 = UI_update_last_created(var0008);
 				if (var0003) {
-					var0008[0x0001] -= (var0008[0x0003] / 0x0002);
-					var0008[0x0002] -= (var0008[0x0003] / 0x0002);
+					var0008[0x0001] -= var0008[0x0003] / 0x0002;
+					var0008[0x0002] -= var0008[0x0003] / 0x0002;
 					UI_sprite_effect(0x0015, var0008[0x0001], var0008[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 					var0009 = 0xFFFD->find_direction(var0007);
 					var0003 = script 0xFFFD {
@@ -67997,8 +67997,8 @@ void Func06CA object#(0x6CA) () {
 		var0009 = var0008->get_object_position();
 		var000A = var0009[0x0001];
 		var000B = var0009[0x0002];
-		var000C = (var000A - var0001);
-		var000D = (var000B - var0002);
+		var000C = var000A - var0001;
+		var000D = var000B - var0002;
 		if (var000D < 0xFFFB) {
 			var0004[0x0001] = 0x0001;
 			var0005[0x0001] = var0008;
@@ -68023,8 +68023,8 @@ void Func06CA object#(0x6CA) () {
 		var0014 = var0013->get_object_position();
 		var000A = var0014[0x0001];
 		var000B = var0014[0x0002];
-		var000C = (var000A - var0001);
-		var000D = (var000B - var0002);
+		var000C = var000A - var0001;
+		var000D = var000B - var0002;
 		if (var000D < 0xFFFB) {
 			var000F[0x0001] = 0x0001;
 			var0010[0x0001] = var0013;
@@ -68124,8 +68124,8 @@ void Func06CA object#(0x6CA) () {
 		var0009 = var0008->get_object_position();
 		var000A = var0009[0x0001];
 		var000B = var0009[0x0002];
-		var000C = (var000A - var0001);
-		var000D = (var000B - var0002);
+		var000C = var000A - var0001;
+		var000D = var000B - var0002;
 		if (var000D < 0xFFFB) {
 			var0004[0x0001] = 0x0001;
 		}
@@ -68237,8 +68237,8 @@ void Func06CE object#(0x6CE) () {
 			var0001 = find_nearby(0x01FB, 0x0014, 0x0000);
 			for (var0004 in var0001 with var0002 to var0003) {
 				var0005 = var0004->get_object_position();
-				var0005[0x0001] -= (var0005[0x0003] / 0x0002);
-				var0005[0x0002] -= (var0005[0x0003] / 0x0002);
+				var0005[0x0001] -= var0005[0x0003] / 0x0002;
+				var0005[0x0002] -= var0005[0x0003] / 0x0002;
 				UI_sprite_effect(0x0004, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x002A);
 			}
@@ -68254,8 +68254,8 @@ void Func06CE object#(0x6CE) () {
 			var0009 = find_nearby(0x03D1, 0x0014, 0x0000);
 			for (var000C in var0009 with var000A to var000B) {
 				var0005 = var000C->get_object_position();
-				var0005[0x0001] -= (var0005[0x0003] / 0x0002);
-				var0005[0x0002] -= (var0005[0x0003] / 0x0002);
+				var0005[0x0001] -= var0005[0x0003] / 0x0002;
+				var0005[0x0002] -= var0005[0x0003] / 0x0002;
 				UI_sprite_effect(0x001A, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x0077);
 			}
@@ -68271,8 +68271,8 @@ void Func06CE object#(0x6CE) () {
 			var0001 = find_nearby(0x0356, 0x001E, 0x0000);
 			for (var0004 in var0001 with var0010 to var0011) {
 				var0005 = var0004->get_object_position();
-				var0005[0x0001] -= (var0005[0x0003] / 0x0002);
-				var0005[0x0002] -= (var0005[0x0003] / 0x0002);
+				var0005[0x0001] -= var0005[0x0003] / 0x0002;
+				var0005[0x0002] -= var0005[0x0003] / 0x0002;
 				UI_sprite_effect(0x0015, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x005F);
 			}
@@ -68289,8 +68289,8 @@ void Func06CE object#(0x6CE) () {
 			var0001 = find_nearby(0x0356, 0x0008, 0x0000);
 			for (var0004 in var0001 with var0014 to var0015) {
 				var0005 = var0004->get_object_position();
-				var0005[0x0001] -= (var0005[0x0003] / 0x0002);
-				var0005[0x0002] -= (var0005[0x0003] / 0x0002);
+				var0005[0x0001] -= var0005[0x0003] / 0x0002;
+				var0005[0x0002] -= var0005[0x0003] / 0x0002;
 				UI_sprite_effect(0x0015, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x005F);
 			}
@@ -68435,7 +68435,7 @@ void Func06D2 object#(0x6D2) () {
 	var0001 = get_object_position();
 	var0002 = 0x0004;
 	while (var0002 > 0x0000) {
-		var0001[0x0001] = ((var0001[0x0001] - 0x0008) + (var0002 * 0x0002));
+		var0001[0x0001] = (var0001[0x0001] - 0x0008) + (var0002 * 0x0002);
 		var0003 = UI_create_new_object2(0x0151, var0001);
 		if (var0003) {
 			var0003->set_schedule_type(0x000B);
@@ -68478,7 +68478,7 @@ void Func06D4 object#(0x6D4) () {
 	var var0004;
 	var var0005;
 
-	var0000 = (UI_find_nearby_avatar(0x010F) & UI_find_nearby_avatar(0x0110));
+	var0000 = UI_find_nearby_avatar(0x010F) & UI_find_nearby_avatar(0x0110);
 	for (var0003 in var0000 with var0001 to var0002) {
 		var0004 = var0003->get_object_position();
 		UI_sprite_effect(0x0015, var0004[0x0001], var0004[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -69597,8 +69597,8 @@ void Func06E1 object#(0x6E1) () {
 		0xFE9C->clear_item_flag(0x0010);
 		if (var0003) {
 			var0002 = var0003->get_object_position();
-			var0002[0x0001] -= (var0002[0x0003] / 0x0002);
-			var0002[0x0002] -= (var0002[0x0003] / 0x0002);
+			var0002[0x0001] -= var0002[0x0003] / 0x0002;
+			var0002[0x0002] -= var0002[0x0003] / 0x0002;
 			UI_sprite_effect(0x000C, var0002[0x0001], var0002[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_play_sound_effect(0x0039);
 			var0002 = var0003->get_object_position();
@@ -69733,8 +69733,8 @@ void Func06E3 object#(0x6E3) () {
 			var0004 = find_nearby(0x010C, 0x000F, 0x0000);
 			for (var0007 in var0004 with var000A to var000B) {
 				var000C = var0007->get_object_position();
-				var000C[0x0001] -= (var000C[0x0003] / 0x0002);
-				var000C[0x0002] -= (var000C[0x0003] / 0x0002);
+				var000C[0x0001] -= var000C[0x0003] / 0x0002;
+				var000C[0x0002] -= var000C[0x0003] / 0x0002;
 				UI_sprite_effect(0x0009, var000C[0x0001], var000C[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				var000C = var0007->get_object_position();
 				var000D = UI_create_new_object2(0x014E, var000C);
@@ -69752,8 +69752,8 @@ void Func06E3 object#(0x6E3) () {
 			var0004 = find_nearby(0x0350, 0x000F, 0x0000);
 			for (var0007 in var0004 with var000E to var000F) {
 				var000C = var0007->get_object_position();
-				var000C[0x0001] -= (var000C[0x0003] / 0x0002);
-				var000C[0x0002] -= (var000C[0x0003] / 0x0002);
+				var000C[0x0001] -= var000C[0x0003] / 0x0002;
+				var000C[0x0002] -= var000C[0x0003] / 0x0002;
 				UI_sprite_effect(0x0009, var000C[0x0001], var000C[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				var000C = var0007->get_object_position();
 				var000D = UI_create_new_object2(0x014E, var000C);
@@ -70150,7 +70150,7 @@ void Func06E6 object#(0x6E6) () {
 			if ((var0009 == 0x0006) || (var0009 == 0x0007)) {
 				var000A = "dinner";
 			}
-			var0008 = (("Thou'rt just in time for " + var000A) + ", Avatar.");
+			var0008 = ("Thou'rt just in time for " + var000A) + ", Avatar.";
 		}
 		if (var0002 == 0x0006) {
 			var0008 = "Come in, come in, Avatar. I have cooked something special for thee.";
@@ -70313,7 +70313,7 @@ void Func06E9 object#(0x6E9) () {
 			if (UI_die_roll(0x0000, 0x0001) == 0x0000) {
 				var0007 *= 0xFFFF;
 			}
-			var0008 = (var0006 + var0007);
+			var0008 = var0006 + var0007;
 			var0009 = UI_create_new_object(0x037F);
 			if (var0009) {
 				var0009->set_item_flag(0x0012);
@@ -70646,12 +70646,12 @@ void Func06F0 object#(0x6F0) () {
 				var0007->Func01B0();
 			}
 		}
-		var0004 = (find_nearby(0x010E, 0x0014, 0x0000) & (find_nearby(0x0178, 0x0014, 0x0000) & (find_nearby(0x01B1, 0x0014, 0x0000) & find_nearby(0x01B0, 0x0014, 0x0000))));
+		var0004 = find_nearby(0x010E, 0x0014, 0x0000) & (find_nearby(0x0178, 0x0014, 0x0000) & (find_nearby(0x01B1, 0x0014, 0x0000) & find_nearby(0x01B0, 0x0014, 0x0000)));
 		for (var0007 in var0004 with var000E to var000F) {
 			Func0907(var0007, 0x0002);
 		}
 	} else {
-		var0004 = (find_nearby(0x010E, 0x0014, 0x0000) & (find_nearby(0x0178, 0x0014, 0x0000) & (find_nearby(0x01B1, 0x0014, 0x0000) & find_nearby(0x01B0, 0x0014, 0x0000))));
+		var0004 = find_nearby(0x010E, 0x0014, 0x0000) & (find_nearby(0x0178, 0x0014, 0x0000) & (find_nearby(0x01B1, 0x0014, 0x0000) & find_nearby(0x01B0, 0x0014, 0x0000)));
 		for (var0007 in var0004 with var0010 to var0011) {
 			if (Func0906(var0007) == 0x0002) {
 				Func0907(var0007, 0x0000);
@@ -70895,7 +70895,7 @@ void Func06FA object#(0x6FA) () {
 	var var0016;
 
 	if (event == 0x0003) {
-		var0000 = (0xFE9C->find_nearby(0x010F, 0x0064, 0x0000) & 0xFE9C->find_nearby(0x0110, 0x0064, 0x0000));
+		var0000 = 0xFE9C->find_nearby(0x010F, 0x0064, 0x0000) & 0xFE9C->find_nearby(0x0110, 0x0064, 0x0000);
 		var0001 = false;
 		for (var0004 in var0000 with var0002 to var0003) {
 			var0005 = var0004->get_object_position();
@@ -70904,8 +70904,8 @@ void Func06FA object#(0x6FA) () {
 			}
 		}
 		if (var0001) {
-			var0006 = (0xFE9C->find_nearby(0x0114, 0x003C, 0x0000) & 0xFE9C->find_nearby(0x0115, 0x003C, 0x0000));
-			var0007 = (0xFE9C->find_nearby(0x010F, 0x003C, 0x0000) & 0xFE9C->find_nearby(0x0110, 0x003C, 0x0000));
+			var0006 = 0xFE9C->find_nearby(0x0114, 0x003C, 0x0000) & 0xFE9C->find_nearby(0x0115, 0x003C, 0x0000);
+			var0007 = 0xFE9C->find_nearby(0x010F, 0x003C, 0x0000) & 0xFE9C->find_nearby(0x0110, 0x003C, 0x0000);
 			for (var000A in var0007 with var0008 to var0009) {
 				var000B = var000A->get_lift();
 				if (var000B == 0x0001) {
@@ -71226,7 +71226,7 @@ void Func06FF object#(0x6FF) () {
 			abort;
 		}
 	}
-	var0001 = ("@Uh oh...@" & ("@Something is coming!@" & ("@I hear something...@" & ("@What was that?@" & ("@Oh, no!@" & "@Hark!@")))));
+	var0001 = "@Uh oh...@" & ("@Something is coming!@" & ("@I hear something...@" & ("@What was that?@" & ("@Oh, no!@" & "@Hark!@"))));
 	var0002 = Func0992(0x0001, var0001[UI_get_random(UI_get_array_size(var0001))], var0001[UI_get_random(UI_get_array_size(var0001))], true);
 	var0001 = find_nearby(0x036C, 0x0064, 0x0000);
 	for (var0005 in var0001 with var0003 to var0004) {
@@ -71317,7 +71317,7 @@ void Func0702 object#(0x702) () {
 	}
 	if (event == 0x0003) {
 		var0000 = find_nearby(0x016B, 0x001E, 0x0000);
-		var0001 = (0x0006 - UI_get_array_size(var0000));
+		var0001 = 0x0006 - UI_get_array_size(var0000);
 		while (var0001 > 0x0000) {
 			var0002 = UI_create_new_object2(0x016B, [(0x0865 + UI_get_random(0x0013)), 0x083B, 0x0000]);
 			if (var0002) {
@@ -71453,8 +71453,8 @@ void Func0705 object#(0x705) () {
 	if (var0000 && var0001) {
 		var0006 = var0000->get_object_position();
 		UI_play_sound_effect(0x0074);
-		var0006[0x0001] -= (var0006[0x0003] / 0x0002);
-		var0006[0x0002] -= (var0006[0x0003] / 0x0002);
+		var0006[0x0001] -= var0006[0x0003] / 0x0002;
+		var0006[0x0002] -= var0006[0x0003] / 0x0002;
 		UI_sprite_effect(0x0011, (var0006[0x0001] - 0x0002), (var0006[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_sprite_effect(0x001B, (var0006[0x0001] - 0x0003), (var0006[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, 0xFFFF);
 		var0006 = var0000->get_object_position();
@@ -71480,8 +71480,8 @@ void Func0706 object#(0x706) () {
 	var0000 = UI_get_party_list();
 	if (0xFFE6 in var0000) {
 		var0001 = 0xFFE6->get_object_position();
-		var0001[0x0001] -= (var0001[0x0003] / 0x0002);
-		var0001[0x0002] -= (var0001[0x0003] / 0x0002);
+		var0001[0x0001] -= var0001[0x0003] / 0x0002;
+		var0001[0x0002] -= var0001[0x0003] / 0x0002;
 		0xFFE6->remove_npc();
 		UI_sprite_effect(0x0011, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	}
@@ -71601,15 +71601,15 @@ void Func070A object#(0x70A) () {
 		0xFFE4->set_polymorph(0x0292);
 		0xFE9C->set_polymorph(0x02D1);
 		var0001 = 0xFE9C->get_object_position();
-		var0001[0x0001] -= (var0001[0x0003] / 0x0002);
-		var0001[0x0002] -= (var0001[0x0003] / 0x0002);
+		var0001[0x0001] -= var0001[0x0003] / 0x0002;
+		var0001[0x0002] -= var0001[0x0003] / 0x0002;
 		var0002 = UI_die_roll(0x0000, 0x0003);
 		UI_lightning();
 		UI_sprite_effect(0x002B, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, var0002, 0x0001);
 		if (0xFFE4->npc_nearby()) {
 			var0001 = 0xFFE4->get_object_position();
-			var0001[0x0001] -= (var0001[0x0003] / 0x0002);
-			var0001[0x0002] -= (var0001[0x0003] / 0x0002);
+			var0001[0x0001] -= var0001[0x0003] / 0x0002;
+			var0001[0x0002] -= var0001[0x0003] / 0x0002;
 			var0002 = UI_die_roll(0x0000, 0x0003);
 			UI_sprite_effect(0x002B, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, var0002, 0x0001);
 		}
@@ -71879,8 +71879,8 @@ void Func0718 object#(0x718) () {
 		say("\"The body lies in the garden of the Temple of Enthusiasm, in the northeast by the Gate of the Serpent...\"");
 		say("\"Now I go into the Void!\"");
 		var0000 = 0xFF68->get_object_position();
-		var0000[0x0001] -= (var0000[0x0003] / 0x0002);
-		var0000[0x0002] -= (var0000[0x0003] / 0x0002);
+		var0000[0x0001] -= var0000[0x0003] / 0x0002;
+		var0000[0x0002] -= var0000[0x0003] / 0x0002;
 		UI_sprite_effect(0x0009, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		var0000 = 0xFF68->get_object_position();
 		0xFF68->remove_npc();
@@ -71995,7 +71995,7 @@ void Func071A object#(0x71A) () {
 		var0004 = find_nearby(0x014A, 0x0008, 0x0000);
 		for (var0007 in var0004 with var0005 to var0006) {
 			var0008 = var0007->get_item_frame();
-			var0009 = ("I see f " + var0008);
+			var0009 = "I see f " + var0008;
 			if (var0008 == 0x0019) {
 				var0000 = var0007;
 			}
@@ -72014,7 +72014,7 @@ void Func071A object#(0x71A) () {
 			var000B = var0001->get_object_position();
 			var000C = var0002->get_object_position();
 			var000D = var0003->get_object_position();
-			var0009 = (((((((" B=" + var000A[0x0001]) + " C=") + var000B[0x0001]) + " O=") + var000C[0x0001]) + " W=") + var000D[0x0001]);
+			var0009 = ((((((" B=" + var000A[0x0001]) + " C=") + var000B[0x0001]) + " O=") + var000C[0x0001]) + " W=") + var000D[0x0001];
 			var000E = var000A[0x0002];
 			var000F = var000A[0x0002];
 			if (var000B[0x0002] < var000F) {
@@ -72035,7 +72035,7 @@ void Func071A object#(0x71A) () {
 			if (var000D[0x0002] > var000E) {
 				var000E = var000D[0x0002];
 			}
-			var0010 = (var000E - var000F);
+			var0010 = var000E - var000F;
 			if ((var000A[0x0001] < var000B[0x0001]) && ((var000B[0x0001] < var000C[0x0001]) && ((var000C[0x0001] < var000D[0x0001]) && (var0010 < 0x0002)))) {
 				var0011 = find_nearby(0x010E, 0x0008, 0x0000);
 				if (var0011) {
@@ -72585,7 +72585,7 @@ void Func071F object#(0x71F) () {
 	if ((!var0005) || var0004) {
 		if (var0003 == 0x0002) {
 			var0010 = 0x0007;
-			var0011 = (UI_die_roll(0x0005, 0x000A) * 0xFFFF);
+			var0011 = UI_die_roll(0x0005, 0x000A) * 0xFFFF;
 			var0012 = 0x0000;
 		}
 		if (var0003 == 0x0003) {
@@ -73328,8 +73328,8 @@ void Func0725 object#(0x725) () {
 		var0004 = get_item_quality();
 		if (var0004 == 0x0000) {
 			var0003 = 0xFE9C->get_object_position();
-			var0003[0x0001] -= (var0003[0x0003] / 0x0002);
-			var0003[0x0002] -= (var0003[0x0003] / 0x0002);
+			var0003[0x0001] -= var0003[0x0003] / 0x0002;
+			var0003[0x0002] -= var0003[0x0003] / 0x0002;
 			UI_sprite_effect(0x0011, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_play_sound_effect(0x0074);
 		}
@@ -74737,8 +74737,8 @@ void Func073C object#(0x73C) () {
 		var0000[0x0001] += var0001;
 		var0000[0x0002] += var0002;
 		0xFF2D->move_object(var0000);
-		var0000[0x0001] -= (var0000[0x0003] / 0x0002);
-		var0000[0x0002] -= (var0000[0x0003] / 0x0002);
+		var0000[0x0001] -= var0000[0x0003] / 0x0002;
+		var0000[0x0002] -= var0000[0x0003] / 0x0002;
 		UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		0xFF2D->set_schedule_type(0x0003);
 		0xFF2D->set_alignment(0x0000);
@@ -74954,7 +74954,7 @@ void Func0759 object#(0x759) () {
 	var0008 = 0xFE9C->get_object_position();
 	var0009 = [(var0008[0x0001] + 0x00B0), var0008[0x0002], var0008[0x0003]];
 	0xFE9C->move_object(var0009);
-	var000A = ("@Yow!@" & ("" & ("@What happened?@" & ("@Where are my friends!@" & ("@Iolo?@" & ("@Shamino???@" & "@Dupre?!@"))))));
+	var000A = "@Yow!@" & ("" & ("@What happened?@" & ("@Where are my friends!@" & ("@Iolo?@" & ("@Shamino???@" & "@Dupre?!@")))));
 	Func094F(0xFE9C, var000A);
 	UI_sprite_effect(0x000D, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	gflags[0x0006] = true;
@@ -75112,7 +75112,7 @@ void Func075E object#(0x75E) () {
 		if (var0002) {
 			var0002->set_item_frame(0x0000);
 			var0002->set_item_flag(0x0012);
-			var0003 = (var0001 * 0x0002);
+			var0003 = var0001 * 0x0002;
 			var0004 = UI_update_last_created([var0000[(var0003 - 0x0001)], var0000[var0003], 0x0000]);
 			UI_sprite_effect(0x0015, var0000[(var0003 - 0x0001)], var0000[var0003], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			var0001 += 0x0001;
@@ -75236,11 +75236,11 @@ void Func0761 object#(0x761) () {
 
 	UI_play_sound_effect(0x001E);
 	var0000 = [0x038E, 0x0BB8, 0x0000];
-	var0001 = (0x000F + Func0941(0xFE9C));
+	var0001 = 0x000F + Func0941(0xFE9C);
 	while (var0001 != 0x0000) {
 		var0001 -= 0x0001;
-		var0002 = (var0000[0x0001] + UI_die_roll(0xFFF7, 0x000A));
-		var0003 = (var0000[0x0002] + UI_die_roll(0xFFEE, 0x000F));
+		var0002 = var0000[0x0001] + UI_die_roll(0xFFF7, 0x000A);
+		var0003 = var0000[0x0002] + UI_die_roll(0xFFEE, 0x000F);
 		var0004 = var0000[0x0003];
 		var0005 = [var0002, var0003, 0x0000];
 		var0006 = UI_die_roll(0x0001, 0x0004);
@@ -75350,8 +75350,8 @@ void Func0763 object#(0x763) () {
 				}
 			}
 			var0009 = get_object_position();
-			var0009[0x0001] -= (var0009[0x0003] / 0x0002);
-			var0009[0x0002] -= (var0009[0x0003] / 0x0002);
+			var0009[0x0001] -= var0009[0x0003] / 0x0002;
+			var0009[0x0002] -= var0009[0x0003] / 0x0002;
 			UI_sprite_effect(0x0015, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_play_sound_effect(0x0039);
 			var0002->remove_item();
@@ -75761,7 +75761,7 @@ void Func0768 object#(0x768) () {
 		var0001 = [0x00F0, 0x00EF, 0x00EE];
 		var0002 = 0x0001;
 		while (var0002 <= 0x0003) {
-			var0003 = (var0002 * 0x0002);
+			var0003 = var0002 * 0x0002;
 			var0004 = UI_create_new_object2(0x0299, [var0000[(var0003 - 0x0001)], var0000[var0003], 0x0000]);
 			if (var0004) {
 				var0004->set_schedule_type(0x000F);
@@ -75776,19 +75776,19 @@ void Func0768 object#(0x768) () {
 				var0004->clear_item_flag(0x001D);
 				var0004->set_npc_id(var0002 + 0x000A);
 				var0006 = var0004->get_npc_prop(0x0000);
-				var0007 = (0x000B - var0006);
+				var0007 = 0x000B - var0006;
 				var0005 = var0004->set_npc_prop(0x0000, var0007);
 				var0006 = var0004->get_npc_prop(0x0001);
-				var0007 = (0x000D - var0006);
+				var0007 = 0x000D - var0006;
 				var0005 = var0004->set_npc_prop(0x0001, var0007);
 				var0006 = var0004->get_npc_prop(0x0002);
-				var0007 = (0x0014 - var0006);
+				var0007 = 0x0014 - var0006;
 				var0005 = var0004->set_npc_prop(0x0002, var0007);
 				var0006 = var0004->get_npc_prop(0x0004);
-				var0007 = (0x000C - var0006);
+				var0007 = 0x000C - var0006;
 				var0005 = var0004->set_npc_prop(0x0004, var0007);
 				var0006 = var0004->get_npc_prop(0x0003);
-				var0007 = (0x000B - var0006);
+				var0007 = 0x000B - var0006;
 				var0005 = var0004->set_npc_prop(0x0003, var0007);
 				if (var0002 == 0x0003) {
 					var0004->Func07D1();
@@ -75889,19 +75889,19 @@ void Func0769 object#(0x769) () {
 			var0000->set_alignment(0x0002);
 			var0000->set_schedule_type(0x0000);
 			var0002 = var0000->get_npc_prop(0x0000);
-			var0003 = (0x0019 - var0002);
+			var0003 = 0x0019 - var0002;
 			var0001 = var0000->set_npc_prop(0x0000, var0003);
 			var0002 = var0000->get_npc_prop(0x0001);
-			var0003 = (0x0015 - var0002);
+			var0003 = 0x0015 - var0002;
 			var0001 = var0000->set_npc_prop(0x0001, var0003);
 			var0002 = var0000->get_npc_prop(0x0002);
-			var0003 = (0x001E - var0002);
+			var0003 = 0x001E - var0002;
 			var0001 = var0000->set_npc_prop(0x0002, var0003);
 			var0002 = var0000->get_npc_prop(0x0004);
-			var0003 = (0x001E - var0002);
+			var0003 = 0x001E - var0002;
 			var0001 = var0000->set_npc_prop(0x0004, var0003);
 			var0002 = var0000->get_npc_prop(0x0003);
-			var0003 = (0x001E - var0002);
+			var0003 = 0x001E - var0002;
 			var0001 = var0000->set_npc_prop(0x0003, var0003);
 			Func0998(0xFE9C->get_npc_object(), 0x037F);
 			UI_play_sound_effect(0x002A);
@@ -75938,19 +75938,19 @@ void Func076A object#(0x76A) () {
 			var0002->set_item_flag(0x0012);
 			var0002->set_item_flag(0x001D);
 			var0003 = var0002->get_npc_prop(0x0000);
-			var0004 = (0x000B - var0003);
+			var0004 = 0x000B - var0003;
 			var0005 = var0002->set_npc_prop(0x0000, var0004);
 			var0003 = var0002->get_npc_prop(0x0001);
-			var0004 = (0x0012 - var0003);
+			var0004 = 0x0012 - var0003;
 			var0005 = var0002->set_npc_prop(0x0001, var0004);
 			var0003 = var0002->get_npc_prop(0x0002);
-			var0004 = (0x0018 - var0003);
+			var0004 = 0x0018 - var0003;
 			var0005 = var0002->set_npc_prop(0x0002, var0004);
 			var0003 = var0002->get_npc_prop(0x0004);
-			var0004 = (0x0010 - var0003);
+			var0004 = 0x0010 - var0003;
 			var0005 = var0002->set_npc_prop(0x0004, var0004);
 			var0003 = var0002->get_npc_prop(0x0003);
-			var0004 = (0x0010 - var0003);
+			var0004 = 0x0010 - var0003;
 			var0005 = var0002->set_npc_prop(0x0003, var0004);
 		}
 	}
@@ -76284,9 +76284,9 @@ void Func0795 object#(0x795) () {
 		while (var0006 < 0x0010) {
 			var0008 = UI_die_roll(0x0000, 0x0003);
 			if (var0007 == 0x0000) {
-				var0007 = (var0006 + var0008);
+				var0007 = var0006 + var0008;
 			} else {
-				var0007 &= (var0006 + var0008);
+				var0007 &= var0006 + var0008;
 			}
 			var0006 += 0x0004;
 		}
@@ -76436,7 +76436,7 @@ void Func0798 object#(0x798) () {
 						var0008 = [var0008, var000A];
 					}
 					if (var0009 == 0x0006) {
-						var000B = (NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+						var000B = NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
 						var000A = new script {
 							face var000B;
 							actor frame bowing;
@@ -76445,7 +76445,7 @@ void Func0798 object#(0x798) () {
 						var0008 = [var0008, var000A];
 					}
 					if (var0009 == 0x0007) {
-						var000B = (NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+						var000B = NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
 						var000A = new script {
 							face var000B;
 							actor frame kneeling;
@@ -76454,7 +76454,7 @@ void Func0798 object#(0x798) () {
 						var0008 = [var0008, var000A];
 					}
 					if (var0009 == 0x0008) {
-						var000B = (NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002));
+						var000B = NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
 						var000A = new script {
 							face var000B;
 							actor frame ready;
@@ -76781,7 +76781,7 @@ void Func07A5 object#(0x7A5) () {
 		var0004 = var0000[0x0001];
 		if (var0004) {
 			var0005 = var0004->get_item_frame();
-			var0006 = (var0005 % 0x0004);
+			var0006 = var0005 % 0x0004;
 			if (var0006 < 0x0003) {
 				var0007 = script var0004 {
 					next frame cycle;
@@ -76914,7 +76914,7 @@ void Func07AC object#(0x7AC) () {
 	var0001 = get_item_quality();
 	var0002 = get_item_quantity(0x0000);
 	if (UI_get_random(0x0002) == 0x0001) {
-		var0003 = ("@Yikes!@" & ("@Look!@" & ("@That was close!@" & ("@Run!@" & ("@Teleport storm!@" & "@Whoa!@")))));
+		var0003 = "@Yikes!@" & ("@Look!@" & ("@That was close!@" & ("@Run!@" & ("@Teleport storm!@" & "@Whoa!@"))));
 		var0004 = Func0992(0x0001, var0003[UI_get_random(UI_get_array_size(var0003))], 0x0000, true);
 		item->Func07D1();
 	}
@@ -77018,8 +77018,8 @@ void Func07AE object#(0x7AE) () {
 				call Func07AE;
 			};
 		} else {
-			var0002 = (("@" + Func0953()) + "...@");
-			var0003 = (("@" + Func0954()) + "...@");
+			var0002 = ("@" + Func0953()) + "...@";
+			var0003 = ("@" + Func0954()) + "...@";
 			var0004 = ["@Avatar...@", var0002, var0003, "@Pardon thou me...@", "@If I may...@", "@See!@"];
 			0xFFFE->item_say(var0004[UI_get_random(UI_get_array_size(var0004))]);
 			var0005 = 0x0004;
@@ -77130,8 +77130,8 @@ void Func07AF object#(0x7AF) () {
 	if (0xFFE6->get_npc_object() in UI_get_party_list()) {
 		if (event == 0x0002) {
 			var0000 = 0xFFE6->get_object_position();
-			var0000[0x0001] -= (var0000[0x0003] / 0x0002);
-			var0000[0x0002] -= (var0000[0x0003] / 0x0002);
+			var0000[0x0001] -= var0000[0x0003] / 0x0002;
+			var0000[0x0002] -= var0000[0x0003] / 0x0002;
 			UI_play_sound_effect(0x0074);
 			UI_lightning();
 			UI_sprite_effect(0x0029, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -77484,9 +77484,9 @@ void Func07D0 object#(0x7D0) () {
 		};
 		var0002 = [0x0000, 0x0002, 0x0002, 0x0002, 0x0000, 0xFFFE, 0xFFFE, 0xFFFE];
 		var0003 = [0xFFFE, 0xFFFE, 0x0000, 0x0002, 0x0002, 0x0002, 0x0000, 0xFFFE];
-		var0004 = (var0002 & var0002);
-		var0005 = (var0003 & var0003);
-		var0000 = (0xFE9C->find_direction(item) + 0x0001);
+		var0004 = var0002 & var0002;
+		var0005 = var0003 & var0003;
+		var0000 = 0xFE9C->find_direction(item) + 0x0001;
 		var0006 = 0x0001;
 		var0007 = var0004[var0000];
 		var0008 = var0005[var0000];
@@ -78398,14 +78398,14 @@ void Func07DF object#(0x7DF) () {
 						var0009 = var0008->get_object_position();
 						var000A = get_object_position();
 						if (var0009[0x0001] > var000A[0x0001]) {
-							var0000[0x0001] += (var0009[0x0001] - var000A[0x0001]);
+							var0000[0x0001] += var0009[0x0001] - var000A[0x0001];
 						} else {
-							var0000[0x0001] -= (var000A[0x0001] - var0009[0x0001]);
+							var0000[0x0001] -= var000A[0x0001] - var0009[0x0001];
 						}
 						if (var0009[0x0002] > var000A[0x0002]) {
-							var0000[0x0002] += (var0009[0x0002] - var000A[0x0002]);
+							var0000[0x0002] += var0009[0x0002] - var000A[0x0002];
 						} else {
-							var0000[0x0002] -= (var000A[0x0002] - var0009[0x0002]);
+							var0000[0x0002] -= var000A[0x0002] - var0009[0x0002];
 						}
 						var0000[0x0003] = var0009[0x0003];
 						var0008->move_object(var0000);
@@ -78485,7 +78485,7 @@ void Func07DF object#(0x7DF) () {
 		abort;
 	} while (false);
 	if (var0000) {
-		var000C = (var0000 & [0xFE99, 0x0000]);
+		var000C = var0000 & [0xFE99, 0x0000];
 		var000D = var000C->find_nearby(0x0113, 0x0005, 0x0010);
 		for (var0010 in var000D with var000E to var000F) {
 			var0010->remove_item();
@@ -78918,8 +78918,8 @@ void Func07E5 object#(0x7E5) () {
 		var0001 = [0x0000, 0x0003, 0x000C, 0x0028, 0x002B];
 		var0002 = UI_die_roll(0x0001, UI_get_array_size(var0001));
 		var0003 = var0001[var0002];
-		var0004 = (0x0004 * UI_die_roll(0xFFF1, 0x000F));
-		var0005 = (0x0004 * UI_die_roll(0xFFF1, 0x000F));
+		var0004 = 0x0004 * UI_die_roll(0xFFF1, 0x000F);
+		var0005 = 0x0004 * UI_die_roll(0xFFF1, 0x000F);
 		0xFE9C->obj_sprite_effect(var0003, var0004, var0005, 0x0000, 0x0001, 0x0000, 0xFFFF);
 	}
 	if (var0000 == 0x0002) {
@@ -79114,7 +79114,7 @@ void Func07E9 object#(0x7E9) () {
 		var0003 = false;
 		var0004 = 0xFE9C->get_object_position();
 		if ((var0002 == 0x02D1) || (var0002 == 0x03DD)) {
-			var0005 = (var0004[0x0003] + 0x0001);
+			var0005 = var0004[0x0003] + 0x0001;
 			var0005 /= 0x0002;
 			0xFE9C->obj_sprite_effect(0x0009, var0005, var0005, 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_play_sound_effect(0x0021);
@@ -79168,7 +79168,7 @@ void Func07E9 object#(0x7E9) () {
 					if (UI_is_not_blocked(var0004, 0x02D1, 0x0000)) {
 						var0007 = UI_update_last_created(var0004);
 					} else {
-						var0005 = (var0004[0x0003] + 0x0001);
+						var0005 = var0004[0x0003] + 0x0001;
 						var0005 /= 0x0002;
 						0xFE9C->obj_sprite_effect(0x0009, var0005, var0005, 0x0000, 0x0000, 0x0000, 0xFFFF);
 						UI_play_sound_effect(0x0021);
@@ -79208,7 +79208,7 @@ void Func07EA object#(0x7EA) () {
 	if (event == 0x0002) {
 		var0000 = false;
 		var0001 = false;
-		var0002 = (0xFE9C->get_object_position() & (0x0096 & 0x001F));
+		var0002 = 0xFE9C->get_object_position() & (0x0096 & 0x001F);
 		var0003 = var0002->find_nearby(0x025F, 0x0050, 0x0010);
 		for (var0006 in var0003 with var0004 to var0005) {
 			if ((var0006->get_item_quality() == 0x0096) && (var0006->get_item_frame() == 0x001F)) {
@@ -79276,7 +79276,7 @@ void Func07EB object#(0x7EB) () {
 	var var0009;
 
 	var0000 = get_object_position();
-	var0001 = (var0000[0x0003] + 0x0001);
+	var0001 = var0000[0x0003] + 0x0001;
 	var0001 /= 0x0002;
 	UI_sprite_effect(0x0001, (var0000[0x0001] + var0001), (var0000[0x0002] + var0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_play_sound_effect(0x002A);
@@ -79332,7 +79332,7 @@ void Func07EC object#(0x7EC) () {
 			attack;
 		};
 		var0004 = 0xFF2D->get_distance(0xFF31);
-		var0005 = (var0004 / 0x0002);
+		var0005 = var0004 / 0x0002;
 		while (var0005 < 0x002D) {
 			var0003 = script 0xFF2D after var0005 ticks {
 				nohalt;
@@ -79380,9 +79380,9 @@ void Func07EC object#(0x7EC) () {
 		0xFF2D->show_npc_face0(0x0000);
 		say("\"I'm not so easily defeated, friend monk...\"");
 		UI_end_conversation();
-		var0003 = ("@In Frio Grav!@" & ("@Mas Frio!@" & "@Take that!@"));
+		var0003 = "@In Frio Grav!@" & ("@Mas Frio!@" & "@Take that!@");
 		Func094F(0xFF2D, var0003);
-		var0003 = ("" & "@Ah!@");
+		var0003 = "" & "@Ah!@";
 		Func094F(0xFF31, var0003);
 		var0003 = UI_create_new_object(0x0390);
 		if (var0003) {
@@ -79669,8 +79669,8 @@ void Func07EF object#(0x7EF) () {
 	var var0003;
 
 	var0000 = get_object_position();
-	var0000[0x0001] -= (var0000[0x0003] / 0x0002);
-	var0000[0x0002] -= (var0000[0x0003] / 0x0002);
+	var0000[0x0001] -= var0000[0x0003] / 0x0002;
+	var0000[0x0002] -= var0000[0x0003] / 0x0002;
 	UI_sprite_effect(0x002A, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_sprite_effect(0x0009, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	0xFE9C->obj_sprite_effect(0x002A, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -79723,7 +79723,7 @@ void Func07F0 object#(0x7F0) () {
 		nohalt;
 		call Func0636;
 	};
-	var0005 = ("" & ("@Oh...@" & ("@Mine head doth ache!@" & "@Where am I?@")));
+	var0005 = "" & ("@Oh...@" & ("@Mine head doth ache!@" & "@Where am I?@"));
 	Func094F(0xFE9C, var0005);
 }
 
@@ -79840,7 +79840,7 @@ void Func07F5 object#(0x7F5) () {
 		if (var0000->get_item_shape() == 0x0200) {
 			var0002 = var0001->get_item_quality();
 			if (var0002 < 0x0003) {
-				var0003 = (var0002 + 0x0001);
+				var0003 = var0002 + 0x0001;
 				if (!var0001->set_item_quality(var0003)) {
 					abort;
 				}
@@ -80091,9 +80091,9 @@ void Func07F8 object#(0x7F8) () {
 			} else {
 				var0001 = 0x066A;
 			}
-			var0007 = (0x0404 + Func09A0(0x0001, 0x0002)->get_item_quality());
+			var0007 = 0x0404 + Func09A0(0x0001, 0x0002)->get_item_quality();
 			var0004->si_path_run_usecode([var0007, var0001, 0x0000], 0x000D, Func09A0(0x0001, 0x0002), Func07F8, true);
-			var0001 = (Func09A0(0x0001, 0x0002)->get_item_quality() + 0x0002);
+			var0001 = Func09A0(0x0001, 0x0002)->get_item_quality() + 0x0002;
 			var0001 = Func09A0(0x0001, 0x0002)->set_item_quality(var0001);
 			var0001 = script Func09A0(0x0001, 0x0002) {
 				nohalt;
@@ -80128,7 +80128,7 @@ void Func07F8 object#(0x7F8) () {
 		UI_end_conversation();
 		UI_close_gumps();
 		var0001 = Func09A0(0x0001, 0x0001)->set_item_quality(0x00F8);
-		var0001 = (find_nearby(0x01B0, 0x000A, 0x0000) & find_nearby(0x010E, 0x000A, 0x0000));
+		var0001 = find_nearby(0x01B0, 0x000A, 0x0000) & find_nearby(0x010E, 0x000A, 0x0000);
 		for (var0007 in var0001 with var0008 to var0009) {
 			if (var0007->get_item_quality() == 0x00B3) {
 				Func0907(var0007, 0x0000);
@@ -80439,13 +80439,13 @@ void Func07FA object#(0x7FA) () {
 		};
 		for (var0004 in var0000 with var0002 to var0003) {
 			if (var0004->get_item_quality() == 0x00D1) {
-				var0005 = (var0004->get_item_frame() % 0x0002);
+				var0005 = var0004->get_item_frame() % 0x0002;
 			}
 			if (var0004->get_item_quality() == 0x00D0) {
-				var0006 = (var0004->get_item_frame() % 0x0002);
+				var0006 = var0004->get_item_frame() % 0x0002;
 			}
 			if (var0004->get_item_quality() == 0x00CE) {
-				var0007 = (var0004->get_item_frame() % 0x0002);
+				var0007 = var0004->get_item_frame() % 0x0002;
 			}
 		}
 		if ((!var0005) && ((!var0006) && ((!var0007) && (!gflags[0x02C4])))) {
@@ -80619,7 +80619,7 @@ void Func07FB object#(0x7FB) () {
 		Func097F(0xFFD2, "@Don't twist my words...@", 0x0000);
 		UI_end_conversation();
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
-		var0005 = (0xFFD2->get_object_position() & (0x000F & 0x0006));
+		var0005 = 0xFFD2->get_object_position() & (0x000F & 0x0006);
 		var0006 = var0005->find_nearby(0x0113, 0x0028, 0x0010);
 		if (var0006) {
 			var0007 = var0006->get_object_position();
@@ -80705,7 +80705,7 @@ void Func07FB object#(0x7FB) () {
 			face south;
 		};
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
-		var0005 = (0xFFD1->get_object_position() & (0x000E & 0x0006));
+		var0005 = 0xFFD1->get_object_position() & (0x000E & 0x0006);
 		var0006 = var0005->find_nearby(0x0113, 0x0014, 0x0010);
 		if (var0006) {
 			var0007 = var0006->get_object_position();
@@ -80781,7 +80781,7 @@ void Func07FB object#(0x7FB) () {
 		say("\"I have no more questions. Many thanks for thy service, Delphynia. Return to thy seat, if thou wilt.\"");
 		UI_end_conversation();
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
-		var0005 = (get_object_position() & (0x0012 & 0x0006));
+		var0005 = get_object_position() & (0x0012 & 0x0006);
 		var0006 = var0005->find_nearby(0x0113, 0x0014, 0x0010);
 		if (var0006) {
 			var0007 = var0006->get_object_position();
@@ -80828,7 +80828,7 @@ void Func07FB object#(0x7FB) () {
 		say("\"Thou mayest go, Jendon...\"");
 		UI_end_conversation();
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
-		var0005 = (0xFFCC->get_object_position() & (0x0010 & 0x0006));
+		var0005 = 0xFFCC->get_object_position() & (0x0010 & 0x0006);
 		var0006 = var0005->find_nearby(0x0113, 0x0014, 0x0010);
 		if (var0006) {
 			var0007 = var0006->get_object_position();
@@ -80865,7 +80865,7 @@ void Func07FB object#(0x7FB) () {
 		Func097F(0xFFC9, "@Makes me shudder...@", 0x0002);
 		Func097F(0xFFD0, "@How awful!@", 0x0003);
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
-		var0005 = (0xFFCB->get_object_position() & (0x0007 & 0x0006));
+		var0005 = 0xFFCB->get_object_position() & (0x0007 & 0x0006);
 		var0006 = var0005->find_nearby(0x0113, 0x0014, 0x0010);
 		if (var0006) {
 			var0007 = var0006->get_object_position();
@@ -80940,7 +80940,7 @@ void Func07FB object#(0x7FB) () {
 		say("\"Thy vigilance will be our salvation, Priestess. Many thanks for responding to mine unusual summons.\"");
 		UI_end_conversation();
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
-		var0005 = (0xFFCA->get_object_position() & (0x000D & 0x0006));
+		var0005 = 0xFFCA->get_object_position() & (0x000D & 0x0006);
 		var0006 = var0005->find_nearby(0x0113, 0x001E, 0x0010);
 		if (var0006) {
 			var0007 = var0006->get_object_position();
@@ -81137,10 +81137,10 @@ void Func07FB object#(0x7FB) () {
 		UI_end_conversation();
 		Func097F(0xFFD1, "@Take that back!@", 0x0000);
 		Func097F(0xFFD2, "@Daemons? Bah!@", 0x0004);
-		var0004 = ("@Alyssand?@" & "@I never knew...@");
+		var0004 = "@Alyssand?@" & "@I never knew...@";
 		Func094F(0xFFC8, var0004);
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
-		var0005 = (0xFFC3->get_object_position() & (0x000A & 0x0006));
+		var0005 = 0xFFC3->get_object_position() & (0x000A & 0x0006);
 		var0006 = var0005->find_nearby(0x0113, 0x0028, 0x0010);
 		if (var0006) {
 			var0007 = var0006->get_object_position();
@@ -81299,7 +81299,7 @@ void Func07FC object#(0x7FC) () {
 labelFunc07FC_0135:
 		gflags[0x017D] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
-		var0004 = (0xFFCE->get_object_position() & (0x0004 & 0x0006));
+		var0004 = 0xFFCE->get_object_position() & (0x0004 & 0x0006);
 		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
@@ -81367,7 +81367,7 @@ labelFunc07FC_0135:
 labelFunc07FC_02C2:
 		gflags[0x017F] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
-		var0004 = (0xFFCF->get_object_position() & (0x0005 & 0x0006));
+		var0004 = 0xFFCF->get_object_position() & (0x0005 & 0x0006);
 		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
@@ -81504,7 +81504,7 @@ labelFunc07FC_02C2:
 labelFunc07FC_0595:
 		gflags[0x0179] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
-		var0004 = (0xFFCC->get_object_position() & (0x0010 & 0x0006));
+		var0004 = 0xFFCC->get_object_position() & (0x0010 & 0x0006);
 		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
@@ -81587,7 +81587,7 @@ labelFunc07FC_0595:
 labelFunc07FC_074A:
 		gflags[0x0178] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
-		var0004 = (0xFFD0->get_object_position() & (0x0012 & 0x0006));
+		var0004 = 0xFFD0->get_object_position() & (0x0012 & 0x0006);
 		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
@@ -81671,7 +81671,7 @@ labelFunc07FC_074A:
 labelFunc07FC_0904:
 		gflags[0x0177] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
-		var0004 = (0xFFD1->get_object_position() & (0x000E & 0x0006));
+		var0004 = 0xFFD1->get_object_position() & (0x000E & 0x0006);
 		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
@@ -81769,7 +81769,7 @@ labelFunc07FC_0904:
 labelFunc07FC_0B2E:
 		gflags[0x017E] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
-		var0004 = (0xFFC6->get_object_position() & (0x0011 & 0x0006));
+		var0004 = 0xFFC6->get_object_position() & (0x0011 & 0x0006);
 		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
@@ -81844,7 +81844,7 @@ labelFunc07FC_0B2E:
 labelFunc07FC_0CC8:
 		gflags[0x0181] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
-		var0004 = (0xFFC9->get_object_position() & (0x0002 & 0x0006));
+		var0004 = 0xFFC9->get_object_position() & (0x0002 & 0x0006);
 		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
@@ -81937,7 +81937,7 @@ labelFunc07FC_0E12:
 labelFunc07FC_0EB4:
 		gflags[0x0182] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
-		var0004 = (0xFFC3->get_object_position() & (0x000A & 0x0006));
+		var0004 = 0xFFC3->get_object_position() & (0x000A & 0x0006);
 		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
@@ -82160,7 +82160,7 @@ void Func07FF object#(0x7FF) () {
 	var0014 = var0013[0x0001];
 	var0015 = var0013[0x0003];
 	var0013 = var0013[0x0002];
-	var0016 = (0x0000 - get_npc_number());
+	var0016 = 0x0000 - get_npc_number();
 	var0017 = UI_game_hour();
 	say("\"Failed out of tournament code at hour ",
 		var0017,
@@ -82235,7 +82235,7 @@ void Func0801 0x801 () {
 		}
 	}
 	if (var0000 && (!(gflags[0x016F] && gflags[0x0172]))) {
-		var0005 = ("@Lower thy voice, lest our enemies hear...@" & ("@We must whisper, or they shall hear us.@" & ("@Come closer, so none can hear what we say.@" & "@Our enemies are near -- keep thy voice down.@")));
+		var0005 = "@Lower thy voice, lest our enemies hear...@" & ("@We must whisper, or they shall hear us.@" & ("@Come closer, so none can hear what we say.@" & "@Our enemies are near -- keep thy voice down.@"));
 		var0005 = var0005[UI_get_random(UI_get_array_size(var0005))];
 		say(var0005,
 			"");
@@ -82315,7 +82315,7 @@ void Func0803 0x803 () {
 			var0010 = "Wilt thou agree to this price?";
 		}
 		if (var000F == 0x0004) {
-			var0010 = (var000B + ", dost thou agree?");
+			var0010 = var000B + ", dost thou agree?";
 		}
 		if (var000C == 0x0002) {
 			say("\"That will be ",
@@ -82534,8 +82534,8 @@ var Func0804 0x804 (var var0000, var var0001) {
 		var0004 = "Milord";
 	}
 	var0005 = var0000;
-	var0006 = ((var0001 / 0x0003) * 0x0002);
-	var0007 = (0x000F - (0xFFD2->get_npc_id() / 0x0002));
+	var0006 = (var0001 / 0x0003) * 0x0002;
+	var0007 = 0x000F - (0xFFD2->get_npc_id() / 0x0002);
 	var0008 = 0x0000;
 	var0009 = 0x0001;
 	var000A = 0x0000;
@@ -83014,8 +83014,8 @@ var Func0807 0x807 (var var0000, var var0001) {
 	var0002 = Func0954();
 	var0003 = UI_is_pc_female();
 	var0004 = var0000;
-	var0005 = ((var0001 / 0x0003) * 0x0002);
-	var0006 = (0x000F - (0xFFDA->get_npc_id() / 0x0002));
+	var0005 = (var0001 / 0x0003) * 0x0002;
+	var0006 = 0x000F - (0xFFDA->get_npc_id() / 0x0002);
 	var0007 = 0x0000;
 	var0008 = 0x0001;
 	var0009 = 0x0000;
@@ -83276,7 +83276,7 @@ void Func0808 0x808 (var var0000, var var0001) {
 		if ((var0006 == 0xFF3A) || ((var0006 == 0xFF39) || (var0006 == 0xFF38))) {
 			set_schedule_type(0x000A);
 			item->Func07D2();
-			var0006 = (0x0400 - var0006);
+			var0006 = 0x0400 - var0006;
 			var0006 = script item {
 				nohalt;
 				wait 7;
@@ -83610,38 +83610,38 @@ void Func080B 0x80B () {
 								break;
 							}
 							if (var0005 == "Guilders") {
-								var0009 = (var0008 / 0x0003);
+								var0009 = var0008 / 0x0003;
 								var000A = 0x0006;
 							}
 							if (var0005 == "Filari") {
-								var0009 = (var0008 / 0x0004);
+								var0009 = var0008 / 0x0004;
 								var000A = 0x0008;
 							}
 							if (var0005 == "Gold Coins") {
-								var0009 = (var0008 / 0x0002);
+								var0009 = var0008 / 0x0002;
 								var000A = 0x0004;
 							}
 							if (var0005 == "Gold Nuggets") {
-								var0009 = (var0008 * 0x000A);
+								var0009 = var0008 * 0x000A;
 								if (var0008 == 0x0001) {
 									var0005 = "Gold Nugget";
 								}
 							}
 							if (var0005 == "pieces of jewelry") {
-								var0009 = (var0008 * 0x0064);
+								var0009 = var0008 * 0x0064;
 								var0005 = "pieces of jewelry";
 								if (var0008 == 0x0001) {
 									var0005 = "piece of jewelry";
 								}
 							}
 							if (var0005 == "Gold Bars") {
-								var0009 = (var0008 * 0x00C8);
+								var0009 = var0008 * 0x00C8;
 								if (var0008 == 0x0001) {
 									var0005 = "Gold Bar";
 								}
 							}
-							var000B = (var0009 / 0x0028);
-							var000C = (var0009 - var000B);
+							var000B = var0009 / 0x0028;
+							var000C = var0009 - var000B;
 							if (var0009 == 0x0000) {
 								say("\"Thou must offer at least ",
 									var000A,
@@ -83658,7 +83658,7 @@ void Func080B 0x80B () {
 							}
 							if (var0009 <= 0x0028) {
 								var000B = 0x0001;
-								var000C = (var0009 - var000B);
+								var000C = var0009 - var000B;
 							}
 							if (var0008 >= 0x0001) {
 								var000D = UI_remove_party_items(var0008, var0006, 0xFE99, 0xFE99, false);
@@ -83767,37 +83767,37 @@ void Func080B 0x80B () {
 								break;
 							}
 							if (var0005 == "Monetari") {
-								var0009 = (var0008 * 0x0003);
+								var0009 = var0008 * 0x0003;
 							}
 							if (var0005 == "Filari") {
-								var0009 = ((var0008 * 0x0003) / 0x0004);
+								var0009 = (var0008 * 0x0003) / 0x0004;
 								var000A = 0x0003;
 							}
 							if (var0005 == "Gold Coins") {
-								var0009 = ((var0008 * 0x0003) / 0x0002);
+								var0009 = (var0008 * 0x0003) / 0x0002;
 								var000A = 0x0002;
 							}
 							if (var0005 == "Gold Nuggets") {
-								var0009 = (var0008 * 0x001E);
+								var0009 = var0008 * 0x001E;
 								if (var0008 == 0x0001) {
 									var0005 = "Gold Nugget";
 								}
 							}
 							if (var0005 == "pieces of jewelry") {
-								var0009 = (var0008 * 0x012C);
+								var0009 = var0008 * 0x012C;
 								var0005 = "pieces of jewelry";
 								if (var0008 == 0x0001) {
 									var0005 = "piece of jewelry";
 								}
 							}
 							if (var0005 == "Gold Bars") {
-								var0009 = (var0008 * 0x0258);
+								var0009 = var0008 * 0x0258;
 								if (var0008 == 0x0001) {
 									var0005 = "Gold Bar";
 								}
 							}
-							var000B = (var0009 / 0x0028);
-							var000C = (var0009 - var000B);
+							var000B = var0009 / 0x0028;
+							var000C = var0009 - var000B;
 							var000F = "Guilders";
 							var0010 = "Guilders";
 							if (var0009 == 0x0000) {
@@ -83816,7 +83816,7 @@ void Func080B 0x80B () {
 							}
 							if (var0009 <= 0x0028) {
 								var000B = 0x0001;
-								var000C = (var0009 - var000B);
+								var000C = var0009 - var000B;
 							}
 							if (var000C == 0x0001) {
 								var000F = "Guilder";
@@ -83935,39 +83935,39 @@ void Func080B 0x80B () {
 								break;
 							}
 							if (var0005 == "Monetari") {
-								var0009 = (var0008 * 0x0004);
+								var0009 = var0008 * 0x0004;
 							}
 							if (var0005 == "Guilders") {
-								var0009 = ((var0008 * 0x0004) / 0x0003);
+								var0009 = (var0008 * 0x0004) / 0x0003;
 								var000A = 0x0002;
 							}
 							if (var0005 == "Gold Coins") {
-								var0009 = (var0008 * 0x0002);
+								var0009 = var0008 * 0x0002;
 								if (var0008 == 0x0001) {
 									var0005 = "Gold Coin";
 								}
 							}
 							if (var0005 == "Gold Nuggets") {
-								var0009 = (var0008 * 0x0028);
+								var0009 = var0008 * 0x0028;
 								if (var0008 == 0x0001) {
 									var0005 = "Gold Nugget";
 								}
 							}
 							if (var0005 == "pieces of jewelry") {
-								var0009 = (var0008 * 0x0190);
+								var0009 = var0008 * 0x0190;
 								var0005 = "pieces of jewelry";
 								if (var0008 == 0x0001) {
 									var0005 = "piece of jewelry";
 								}
 							}
 							if (var0005 == "Gold Bars") {
-								var0009 = (var0008 * 0x0320);
+								var0009 = var0008 * 0x0320;
 								if (var0008 == 0x0001) {
 									var0005 = "Gold Bar";
 								}
 							}
-							var000B = (var0009 / 0x0028);
-							var000C = (var0009 - var000B);
+							var000B = var0009 / 0x0028;
+							var000C = var0009 - var000B;
 							if (var0009 == 0x0000) {
 								say("\"Thou must offer at least ",
 									var000A,
@@ -83984,7 +83984,7 @@ void Func080B 0x80B () {
 							}
 							if (var0009 <= 0x0028) {
 								var000B = 0x0001;
-								var000C = (var0009 - var000B);
+								var000C = var0009 - var000B;
 							}
 							if (var0008 >= 0x0001) {
 								var000D = UI_remove_party_items(var0008, var0006, 0xFE99, 0xFE99, false);
@@ -84093,37 +84093,37 @@ void Func080B 0x80B () {
 								break;
 							}
 							if (var0005 == "Monetari") {
-								var0009 = (var0008 * 0x0002);
+								var0009 = var0008 * 0x0002;
 							}
 							if (var0005 == "Guilders") {
-								var0009 = ((var0008 * 0x0002) / 0x0003);
+								var0009 = (var0008 * 0x0002) / 0x0003;
 								var000A = 0x0003;
 							}
 							if (var0005 == "Filari") {
-								var0009 = (var0008 / 0x0002);
+								var0009 = var0008 / 0x0002;
 								var000A = 0x0004;
 							}
 							if (var0005 == "Gold Nuggets") {
-								var0009 = (var0008 * 0x0014);
+								var0009 = var0008 * 0x0014;
 								if (var0008 == 0x0001) {
 									var0005 = "Gold Nugget";
 								}
 							}
 							if (var0005 == "pieces of jewelry") {
-								var0009 = (var0008 * 0x00C8);
+								var0009 = var0008 * 0x00C8;
 								var0005 = "pieces of jewelry";
 								if (var0008 == 0x0001) {
 									var0005 = "piece of jewelry";
 								}
 							}
 							if (var0005 == "Gold Bars") {
-								var0009 = (var0008 * 0x0190);
+								var0009 = var0008 * 0x0190;
 								if (var0008 == 0x0001) {
 									var0005 = "Gold Bar";
 								}
 							}
-							var000B = (var0009 / 0x0028);
-							var000C = (var0009 - var000B);
+							var000B = var0009 / 0x0028;
+							var000C = var0009 - var000B;
 							var000F = "Gold Coins";
 							var0010 = "Gold Coins";
 							if (var0009 == 0x0000) {
@@ -84142,7 +84142,7 @@ void Func080B 0x80B () {
 							}
 							if (var0009 <= 0x0028) {
 								var000B = 0x0001;
-								var000C = (var0009 - var000B);
+								var000C = var0009 - var000B;
 							}
 							if (var000C == 0x0001) {
 								var000F = "Gold Coin";
@@ -84450,8 +84450,8 @@ var Func080D 0x80D (var var0000, var var0001) {
 	var0002 = Func0954();
 	var0003 = UI_is_pc_female();
 	var0004 = var0000;
-	var0005 = ((var0001 / 0x0003) * 0x0002);
-	var0006 = (0x000F - (0xFFF3->get_npc_id() / 0x0002));
+	var0005 = (var0001 / 0x0003) * 0x0002;
+	var0006 = 0x000F - (0xFFF3->get_npc_id() / 0x0002);
 	var0007 = 0x0000;
 	var0008 = 0x0001;
 	var0009 = 0x0000;
@@ -84924,10 +84924,10 @@ void Func0811 0x811 () {
 			var0011 = "What dost thou say?";
 		}
 		if (var0010 == 0x0004) {
-			var0011 = (var000C + ", dost thou agree?");
+			var0011 = var000C + ", dost thou agree?";
 		}
 		if (var0010 == 0x0005) {
-			var0011 = (var000C + ", is the price acceptable?");
+			var0011 = var000C + ", is the price acceptable?";
 		}
 		if (var000D == 0x0002) {
 			say("\"I can let thee have it for ",
@@ -85093,8 +85093,8 @@ var Func0812 0x812 (var var0000, var var0001) {
 		var0004 = "Milord";
 	}
 	var0005 = var0000;
-	var0006 = ((var0001 / 0x0003) * 0x0002);
-	var0007 = (0x000F - (0xFFBF->get_npc_id() / 0x0002));
+	var0006 = (var0001 / 0x0003) * 0x0002;
+	var0007 = 0x000F - (0xFFBF->get_npc_id() / 0x0002);
 	var0008 = 0x0000;
 	var0009 = 0x0001;
 	var000A = 0x0000;
@@ -85327,7 +85327,7 @@ var Func0813 0x813 () {
 	var var0004;
 
 	var0000 = UI_get_party_list();
-	var0000 = (0xFE9C->get_npc_object() & var0000);
+	var0000 = 0xFE9C->get_npc_object() & var0000;
 	var0001 = Func0977(var0000);
 	var0002 = false;
 	var0003 = 0x0001;
@@ -85346,7 +85346,7 @@ var Func0813 0x813 () {
 		} else {
 			var0004 = UI_update_last_created(get_object_position());
 			if (var0004) {
-				var0002 = (true + 0x0001);
+				var0002 = true + 0x0001;
 			}
 		}
 	}
@@ -85535,12 +85535,12 @@ void Func0816 0x816 () {
 			say("\"If that is what thou dost wish...\"");
 		} else {
 			var000A = var0006[var0009];
-			var000B = (var0007[var0009] * var0003);
-			var000C = (var0008[var0009] * var0003);
+			var000B = var0007[var0009] * var0003;
+			var000C = var0008[var0009] * var0003;
 			var000D = var0005[var0009];
 			if (var0001 == "Guilders") {
-				var000B = ((var0007[var0009] * 0x0003) / 0x0002);
-				var000C = ((var0008[var0009] * 0x0003) / 0x0002);
+				var000B = (var0007[var0009] * 0x0003) / 0x0002;
+				var000C = (var0008[var0009] * 0x0003) / 0x0002;
 			}
 			if (var000B == var000C) {
 				say("\"",
@@ -85608,8 +85608,8 @@ var Func0817 0x817 (var var0000, var var0001) {
 	var var000E;
 
 	var0002 = var0000;
-	var0003 = ((var0001 / 0x0003) * 0x0002);
-	var0004 = (0x000F - (0xFFF2->get_npc_id() / 0x0002));
+	var0003 = (var0001 / 0x0003) * 0x0002;
+	var0004 = 0x000F - (0xFFF2->get_npc_id() / 0x0002);
 	var0005 = 0x0000;
 	var0006 = 0x0001;
 	var0007 = 0x0000;
@@ -86173,8 +86173,8 @@ var Func0819 0x819 (var var0000, var var0001) {
 
 	var0002 = Func0954();
 	var0003 = var0000;
-	var0004 = ((var0001 / 0x0003) * 0x0002);
-	var0005 = (0x000F - (0xFFD1->get_npc_id() / 0x0002));
+	var0004 = (var0001 / 0x0003) * 0x0002;
+	var0005 = 0x000F - (0xFFD1->get_npc_id() / 0x0002);
 	var0006 = 0x0000;
 	var0007 = 0x0001;
 	var0008 = 0x0000;
@@ -86456,7 +86456,7 @@ labelFunc081A_00C0:
 					var0007 = 0x000A;
 				}
 				var0008 = Func098E();
-				var0008 = (0x0000 & var0008);
+				var0008 = 0x0000 & var0008;
 				var0009 = ["nobody"];
 				for (var000C in var0008 with var000A to var000B) {
 					if (!(var000C == 0x0000)) {
@@ -86474,7 +86474,7 @@ labelFunc081A_00C0:
 					var0011 = Func095C(var000D, 0x0003);
 					var0012 = var000D->get_npc_name();
 					if (var0010 > var0011) {
-						var0013 = (var0010 - var0011);
+						var0013 = var0010 - var0011;
 						var0013 /= 0x0002;
 						Func095E(var000E, 0x0003, var0013);
 						var0014 = UI_remove_party_items(var0007, var0002, 0xFE99, 0xFE99, true);
@@ -86752,8 +86752,8 @@ var Func081C 0x81C (var var0000, var var0001) {
 
 	var0002 = Func0954();
 	var0003 = var0000;
-	var0004 = ((var0001 / 0x0003) * 0x0002);
-	var0005 = (0x000F - (0xFFD0->get_npc_id() / 0x0002));
+	var0004 = (var0001 / 0x0003) * 0x0002;
+	var0005 = 0x000F - (0xFFD0->get_npc_id() / 0x0002);
 	var0006 = 0x0000;
 	var0007 = 0x0001;
 	var0008 = 0x0000;
@@ -87057,38 +87057,38 @@ void Func081D 0x81D () {
 								break;
 							}
 							if (var0004 == "Guilders") {
-								var0008 = (var0007 / 0x0003);
+								var0008 = var0007 / 0x0003;
 								var0009 = 0x0006;
 							}
 							if (var0004 == "Filari") {
-								var0008 = (var0007 / 0x0004);
+								var0008 = var0007 / 0x0004;
 								var0009 = 0x0008;
 							}
 							if (var0004 == "Gold Coins") {
-								var0008 = (var0007 / 0x0002);
+								var0008 = var0007 / 0x0002;
 								var0009 = 0x0004;
 							}
 							if (var0004 == "Gold Nuggets") {
-								var0008 = (var0007 * 0x000A);
+								var0008 = var0007 * 0x000A;
 								if (var0007 == 0x0001) {
 									var0004 = "Gold Nugget";
 								}
 							}
 							if (var0004 == "Gems") {
-								var0008 = (var0007 * 0x0019);
+								var0008 = var0007 * 0x0019;
 								if (var0007 == 0x0001) {
 									var0004 = "Gem";
 								}
 							}
 							if (var0004 == "pieces of jewelry") {
-								var0008 = (var0007 * 0x0064);
+								var0008 = var0007 * 0x0064;
 								var0004 = "pieces of jewelry";
 								if (var0007 == 0x0001) {
 									var0004 = "piece of jewelry";
 								}
 							}
-							var000A = (var0008 / 0x0032);
-							var000B = (var0008 - var000A);
+							var000A = var0008 / 0x0032;
+							var000B = var0008 - var000A;
 							if (var0008 == 0x0000) {
 								say("\"Thou must offer at least ",
 									var0009,
@@ -87105,7 +87105,7 @@ void Func081D 0x81D () {
 							}
 							if (var0008 <= 0x0032) {
 								var000A = 0x0001;
-								var000B = (var0008 - var000A);
+								var000B = var0008 - var000A;
 							}
 							if (var0007 >= 0x0001) {
 								var000C = UI_remove_party_items(var0007, var0005, 0xFE99, 0xFE99, false);
@@ -87205,37 +87205,37 @@ void Func081D 0x81D () {
 								break;
 							}
 							if (var0004 == "Monetari") {
-								var0008 = (var0007 * 0x0003);
+								var0008 = var0007 * 0x0003;
 							}
 							if (var0004 == "Filari") {
-								var0008 = ((var0007 * 0x0003) / 0x0004);
+								var0008 = (var0007 * 0x0003) / 0x0004;
 								var0009 = 0x0003;
 							}
 							if (var0004 == "Gold Coins") {
-								var0008 = ((var0007 * 0x0003) / 0x0002);
+								var0008 = (var0007 * 0x0003) / 0x0002;
 								var0009 = 0x0002;
 							}
 							if (var0004 == "Gold Nuggets") {
-								var0008 = (var0007 * 0x001E);
+								var0008 = var0007 * 0x001E;
 								if (var0007 == 0x0001) {
 									var0004 = "Gold Nugget";
 								}
 							}
 							if (var0004 == "Gems") {
-								var0008 = (var0007 * 0x004B);
+								var0008 = var0007 * 0x004B;
 								if (var0007 == 0x0001) {
 									var0004 = "Gem";
 								}
 							}
 							if (var0004 == "pieces of jewelry") {
-								var0008 = (var0007 * 0x012C);
+								var0008 = var0007 * 0x012C;
 								var0004 = "pieces of jewelry";
 								if (var0007 == 0x0001) {
 									var0004 = "piece of jewelry";
 								}
 							}
-							var000A = (var0008 / 0x0032);
-							var000B = (var0008 - var000A);
+							var000A = var0008 / 0x0032;
+							var000B = var0008 - var000A;
 							var000E = "Guilders";
 							var000F = "Guilders";
 							if (var0008 == 0x0000) {
@@ -87254,7 +87254,7 @@ void Func081D 0x81D () {
 							}
 							if (var0008 <= 0x0019) {
 								var000A = 0x0001;
-								var000B = (var0008 - var000A);
+								var000B = var0008 - var000A;
 							}
 							if (var000B == 0x0001) {
 								var000E = "Guilder";
@@ -87364,39 +87364,39 @@ void Func081D 0x81D () {
 								break;
 							}
 							if (var0004 == "Monetari") {
-								var0008 = (var0007 * 0x0004);
+								var0008 = var0007 * 0x0004;
 							}
 							if (var0004 == "Guilders") {
-								var0008 = ((var0007 * 0x0004) / 0x0003);
+								var0008 = (var0007 * 0x0004) / 0x0003;
 								var0009 = 0x0002;
 							}
 							if (var0004 == "Gold Coins") {
-								var0008 = (var0007 * 0x0002);
+								var0008 = var0007 * 0x0002;
 								if (var0007 == 0x0001) {
 									var0004 = "Gold Coin";
 								}
 							}
 							if (var0004 == "Gold Nuggets") {
-								var0008 = (var0007 * 0x0028);
+								var0008 = var0007 * 0x0028;
 								if (var0007 == 0x0001) {
 									var0004 = "Gold Nugget";
 								}
 							}
 							if (var0004 == "Gems") {
-								var0008 = (var0007 * 0x0064);
+								var0008 = var0007 * 0x0064;
 								if (var0007 == 0x0001) {
 									var0004 = "Gem";
 								}
 							}
 							if (var0004 == "pieces of jewelry") {
-								var0008 = (var0007 * 0x0190);
+								var0008 = var0007 * 0x0190;
 								var0004 = "pieces of jewelry";
 								if (var0007 == 0x0001) {
 									var0004 = "piece of jewelry";
 								}
 							}
-							var000A = (var0008 / 0x0032);
-							var000B = (var0008 - var000A);
+							var000A = var0008 / 0x0032;
+							var000B = var0008 - var000A;
 							if (var0008 == 0x0000) {
 								say("\"Thou must offer at least ",
 									var0009,
@@ -87413,7 +87413,7 @@ void Func081D 0x81D () {
 							}
 							if (var0008 <= 0x0032) {
 								var000A = 0x0001;
-								var000B = (var0008 - var000A);
+								var000B = var0008 - var000A;
 							}
 							if (var0007 >= 0x0001) {
 								var000C = UI_remove_party_items(var0007, var0005, 0xFE99, 0xFE99, false);
@@ -87513,37 +87513,37 @@ void Func081D 0x81D () {
 								break;
 							}
 							if (var0004 == "Monetari") {
-								var0008 = (var0007 * 0x0002);
+								var0008 = var0007 * 0x0002;
 							}
 							if (var0004 == "Guilders") {
-								var0008 = ((var0007 * 0x0002) / 0x0003);
+								var0008 = (var0007 * 0x0002) / 0x0003;
 								var0009 = 0x0003;
 							}
 							if (var0004 == "Filari") {
-								var0008 = (var0007 / 0x0002);
+								var0008 = var0007 / 0x0002;
 								var0009 = 0x0004;
 							}
 							if (var0004 == "Gold Nuggets") {
-								var0008 = (var0007 * 0x0014);
+								var0008 = var0007 * 0x0014;
 								if (var0007 == 0x0001) {
 									var0004 = "Gold Nugget";
 								}
 							}
 							if (var0004 == "Gems") {
-								var0008 = (var0007 * 0x0032);
+								var0008 = var0007 * 0x0032;
 								if (var0007 == 0x0001) {
 									var0004 = "Gem";
 								}
 							}
 							if (var0004 == "pieces of jewelry") {
-								var0008 = (var0007 * 0x00C8);
+								var0008 = var0007 * 0x00C8;
 								var0004 = "pieces of jewelry";
 								if (var0007 == 0x0001) {
 									var0004 = "piece of jewelry";
 								}
 							}
-							var000A = (var0008 / 0x0032);
-							var000B = (var0008 - var000A);
+							var000A = var0008 / 0x0032;
+							var000B = var0008 - var000A;
 							var000E = "Gold Coins";
 							var000F = "Gold Coins";
 							if (var0008 == 0x0000) {
@@ -87562,7 +87562,7 @@ void Func081D 0x81D () {
 							}
 							if (var0008 <= 0x0032) {
 								var000A = 0x0001;
-								var000B = (var0008 - var000A);
+								var000B = var0008 - var000A;
 							}
 							if (var000B == 0x0001) {
 								var000E = "Gold Coin";
@@ -87905,8 +87905,8 @@ var Func0820 0x820 (var var0000, var var0001) {
 	var0002 = Func0954();
 	var0003 = UI_is_pc_female();
 	var0004 = var0000;
-	var0005 = ((var0001 / 0x0003) * 0x0002);
-	var0006 = (0x000F - (0xFFD7->get_npc_id() / 0x0002));
+	var0005 = (var0001 / 0x0003) * 0x0002;
+	var0006 = 0x000F - (0xFFD7->get_npc_id() / 0x0002);
 	var0007 = 0x0000;
 	var0008 = 0x0001;
 	var0009 = 0x0000;
@@ -88340,10 +88340,10 @@ void Func0827 0x827 () {
 			var0010 = "Wilt thou pay my price?";
 		}
 		if (var000F == 0x0004) {
-			var0010 = (var000B + ", dost thou agree?");
+			var0010 = var000B + ", dost thou agree?";
 		}
 		if (var000F == 0x0005) {
-			var0010 = (var000B + ", is the price acceptable?");
+			var0010 = var000B + ", is the price acceptable?";
 		}
 		if (var000C == 0x0002) {
 			say("\"That will be ",
@@ -88526,8 +88526,8 @@ var Func0828 0x828 (var var0000, var var0001) {
 		var0004 = "Milord";
 	}
 	var0005 = var0000;
-	var0006 = ((var0001 / 0x0003) * 0x0002);
-	var0007 = (0x000F - (0xFFF1->get_npc_id() / 0x0002));
+	var0006 = (var0001 / 0x0003) * 0x0002;
+	var0007 = 0x000F - (0xFFF1->get_npc_id() / 0x0002);
 	var0008 = 0x0000;
 	var0009 = 0x0001;
 	var000A = 0x0000;
@@ -88897,9 +88897,9 @@ var Func082B 0x82B (var var0000, var var0001) {
 	var var000F;
 
 	var0002 = var0000;
-	var0003 = ((var0001 / 0x0003) * 0x0002);
+	var0003 = (var0001 / 0x0003) * 0x0002;
 	var0004 = Func0954();
-	var0005 = (0x000F - (0x03F7->get_npc_id() / 0x0002));
+	var0005 = 0x000F - (0x03F7->get_npc_id() / 0x0002);
 	var0006 = 0x0000;
 	var0007 = 0x0001;
 	var0008 = 0x0000;
@@ -89256,12 +89256,12 @@ void Func082D 0x82D () {
 			say("\"So be it...\"");
 		} else {
 			var000A = var0006[var0009];
-			var000B = (var0007[var0009] * var0003);
-			var000C = (var0008[var0009] * var0003);
+			var000B = var0007[var0009] * var0003;
+			var000C = var0008[var0009] * var0003;
 			var000D = var0005[var0009];
 			if (var0001 == "Guilders") {
-				var000B = ((var0007[var0009] * 0x0003) / 0x0002);
-				var000C = ((var0008[var0009] * 0x0003) / 0x0002);
+				var000B = (var0007[var0009] * 0x0003) / 0x0002;
+				var000C = (var0008[var0009] * 0x0003) / 0x0002;
 			}
 			if (var000B == var000C) {
 				say("\"I will sell thee ",
@@ -89329,8 +89329,8 @@ var Func082E 0x82E (var var0000, var var0001) {
 	var var000E;
 
 	var0002 = var0000;
-	var0003 = ((var0001 / 0x0003) * 0x0002);
-	var0004 = (0x000F - (0xFFAF->get_npc_id() / 0x0002));
+	var0003 = (var0001 / 0x0003) * 0x0002;
+	var0004 = 0x000F - (0xFFAF->get_npc_id() / 0x0002);
 	var0005 = 0x0000;
 	var0006 = 0x0001;
 	var0007 = 0x0000;
@@ -89591,11 +89591,11 @@ var Func0831 0x831 (var var0000, var var0001) {
 	var0002 = var0000;
 	var0003 = 0x0000;
 	var0004 = 0x0000;
-	var0003 = (var0000[0x0001] - var0001[0x0001]);
+	var0003 = var0000[0x0001] - var0001[0x0001];
 	if (var0003 < 0x0000) {
 		var0003 *= 0xFFFF;
 	}
-	var0004 = (var0000[0x0002] - var0001[0x0002]);
+	var0004 = var0000[0x0002] - var0001[0x0002];
 	if (var0003 < 0x0000) {
 		var0003 *= 0xFFFF;
 	}
@@ -89691,7 +89691,7 @@ void Func0833 0x833 (var var0000) {
 	}
 	if (var0000 == 0x000A) {
 		0xFFB0->set_schedule_type(0x000F);
-		var0003 = (UI_find_nearby_avatar(0x010F) & UI_find_nearby_avatar(0x0110));
+		var0003 = UI_find_nearby_avatar(0x010F) & UI_find_nearby_avatar(0x0110);
 		var0004 = false;
 		for (var0007 in var0003 with var0005 to var0006) {
 			var0008 = Func0920();
@@ -89907,7 +89907,7 @@ labelFunc0836_0055:
 					var0006 = 0x0000;
 				}
 				var0007 = Func098E();
-				var0007 = (0x0000 & var0007);
+				var0007 = 0x0000 & var0007;
 				var0008 = ["nobody"];
 				for (var000B in var0007 with var0009 to var000A) {
 					if (!(var000B == 0x0000)) {
@@ -89925,7 +89925,7 @@ labelFunc0836_0055:
 				var0010 = Func095C(var000C, 0x0003);
 				var0011 = var000C->get_npc_name();
 				if (var000F > var0010) {
-					var0012 = (var000F - var0010);
+					var0012 = var000F - var0010;
 					Func095E(var000D, 0x0003, var0012);
 					var0013 = UI_remove_party_items(var0006, var0001, 0xFE99, 0xFE99, true);
 					var0004 = true;
@@ -90199,8 +90199,8 @@ var Func0838 0x838 (var var0000, var var0001) {
 		var0003 = "Milord";
 	}
 	var0004 = var0000;
-	var0005 = ((var0001 / 0x0003) * 0x0002);
-	var0006 = (0x000F - (0xFFBD->get_npc_id() / 0x0002));
+	var0005 = (var0001 / 0x0003) * 0x0002;
+	var0006 = 0x000F - (0xFFBD->get_npc_id() / 0x0002);
 	var0007 = 0x0000;
 	var0008 = 0x0001;
 	var0009 = 0x0000;
@@ -90480,8 +90480,8 @@ void Func083B 0x83B (var var0000) {
 		say "@Woof woof! Woof!@";
 	};
 	var0003 = get_object_position();
-	var0004 = (var0000[0x0002] - var0003[0x0002]);
-	var0005 = (var0000[0x0001] - var0003[0x0001]);
+	var0004 = var0000[0x0002] - var0003[0x0002];
+	var0005 = var0000[0x0001] - var0003[0x0001];
 	var0006 = var0004;
 	if (var0004 < 0x0000) {
 		var0006 *= 0xFFFF;
@@ -90839,8 +90839,8 @@ var Func083F 0x83F (var var0000, var var0001) {
 
 	var0002 = Func0954();
 	var0003 = var0000;
-	var0004 = ((var0001 / 0x0003) * 0x0002);
-	var0005 = (0x000F - (0xFFCC->get_npc_id() / 0x0002));
+	var0004 = (var0001 / 0x0003) * 0x0002;
+	var0005 = 0x000F - (0xFFCC->get_npc_id() / 0x0002);
 	var0006 = 0x0000;
 	var0007 = 0x0001;
 	var0008 = 0x0000;
@@ -91196,8 +91196,8 @@ var Func0841 0x841 (var var0000, var var0001) {
 	var0002 = Func0954();
 	var0003 = UI_is_pc_female();
 	var0004 = var0000;
-	var0005 = ((var0001 / 0x0003) * 0x0002);
-	var0006 = (0x000F - (0xFFE9->get_npc_id() / 0x0002));
+	var0005 = (var0001 / 0x0003) * 0x0002;
+	var0006 = 0x000F - (0xFFE9->get_npc_id() / 0x0002);
 	var0007 = 0x0000;
 	var0008 = 0x0001;
 	var0009 = 0x0000;
@@ -91487,10 +91487,10 @@ void Func0842 0x842 () {
 				var0010 = "Dost thou find the price agreeable?";
 			}
 			if (var000F == 0x0004) {
-				var0010 = (var0002 + ", dost thou agree?");
+				var0010 = var0002 + ", dost thou agree?";
 			}
 			if (var000F == 0x0005) {
-				var0010 = (var0002 + ", is the price acceptable?");
+				var0010 = var0002 + ", is the price acceptable?";
 			}
 			if (var0003 == "leather goods") {
 				if (var000C == 0x0002) {
@@ -91759,7 +91759,7 @@ void Func0843 0x843 () {
 				var000E = "What dost thou think?";
 			}
 			if (var000D == 0x0005) {
-				var000E = (var0001 + ", is the price acceptable?");
+				var000E = var0001 + ", is the price acceptable?";
 			}
 			var000F = UI_die_roll(0x0001, 0x0005);
 			if (var000F == 0x0001) {
@@ -91775,8 +91775,8 @@ void Func0843 0x843 () {
 				var0011 = "Harrumph! They are falling to pieces!";
 			}
 			if (var000F == 0x0004) {
-				var0010 = (var0001 + (", is this what thou wishest to sell?" * "'Tis not in very good shape!"));
-				var0011 = (var0001 + ", these goods are in horrible condition!");
+				var0010 = var0001 + (", is this what thou wishest to sell?" * "'Tis not in very good shape!");
+				var0011 = var0001 + ", these goods are in horrible condition!";
 			}
 			if (var000F == 0x0005) {
 				var0010 = "Didst thou take this from the body of a Goblin?";
@@ -91790,7 +91790,7 @@ void Func0843 0x843 () {
 						say("\"How many suits of leather armour wouldst thou care to part with?\"");
 						var0014 = UI_input_numeric_value(0x0000, var0004, 0x0001, 0x0000);
 						if (var0014 != 0x0001) {
-							var0013 = (0x000F * var0014);
+							var0013 = 0x000F * var0014;
 							if (var0014 == 0x0000) {
 								say("\"Perhaps another time, ",
 									var0000,
@@ -91835,7 +91835,7 @@ void Func0843 0x843 () {
 						say("\"How many pairs of leather gloves wouldst thou care to sell?\"");
 						var0014 = UI_input_numeric_value(0x0000, var0005, 0x0001, 0x0000);
 						if (var0014 != 0x0001) {
-							var0013 = (0x0002 * var0014);
+							var0013 = 0x0002 * var0014;
 							if (var0014 == 0x0000) {
 								say("\"Perhaps another time, ",
 									var0000,
@@ -91878,7 +91878,7 @@ void Func0843 0x843 () {
 						say("\"So, how many pairs of leather boots wouldst thou like to sell?\"");
 						var0014 = UI_input_numeric_value(0x0000, var0006, 0x0001, 0x0000);
 						if (var0014 != 0x0001) {
-							var0013 = (0x0004 * var0014);
+							var0013 = 0x0004 * var0014;
 							if (var0014 == 0x0000) {
 								say("\"Perhaps another time, ",
 									var0000,
@@ -91923,7 +91923,7 @@ void Func0843 0x843 () {
 						say("\"Well, how many leather helms wouldst thou care to sell?\"");
 						var0014 = UI_input_numeric_value(0x0000, var0007, 0x0001, 0x0000);
 						if (var0014 != 0x0001) {
-							var0013 = (0x0005 * var0014);
+							var0013 = 0x0005 * var0014;
 							if (var0014 == 0x0000) {
 								say("\"Perhaps another time, ",
 									var0000,
@@ -91968,7 +91968,7 @@ void Func0843 0x843 () {
 						say("\"How many pairs of leather leggings wouldst thou like to sell?\"");
 						var0014 = UI_input_numeric_value(0x0000, var0008, 0x0001, 0x0000);
 						if (var0014 != 0x0001) {
-							var0013 = (0x000A * var0014);
+							var0013 = 0x000A * var0014;
 							if (var0014 == 0x0000) {
 								say("\"Perhaps another time, ",
 									var0000,
@@ -92052,8 +92052,8 @@ var Func0844 0x844 (var var0000, var var0001) {
 		var0004 = "Milord";
 	}
 	var0005 = var0000;
-	var0006 = ((var0001 / 0x0003) * 0x0002);
-	var0007 = (0x000F - (0xFFBC->get_npc_id() / 0x0002));
+	var0006 = (var0001 / 0x0003) * 0x0002;
+	var0007 = 0x000F - (0xFFBC->get_npc_id() / 0x0002);
 	var0008 = 0x0000;
 	var0009 = 0x0001;
 	var000A = 0x0000;
@@ -92645,8 +92645,8 @@ var Func0847 0x847 (var var0000, var var0001) {
 		}
 	}
 	var0006 = var0000;
-	var0007 = ((var0001 / 0x0003) * 0x0002);
-	var0008 = (0x000F - (0xFFBA->get_npc_id() / 0x0002));
+	var0007 = (var0001 / 0x0003) * 0x0002;
+	var0008 = 0x000F - (0xFFBA->get_npc_id() / 0x0002);
 	var0009 = 0x0000;
 	var000A = 0x0001;
 	var000B = 0x0000;
@@ -93179,12 +93179,12 @@ void Func084B 0x84B () {
 			say("\"As thou wishest...\"");
 		} else {
 			var000A = var0006[var0009];
-			var000B = (var0007[var0009] * var0003);
-			var000C = (var0008[var0009] * var0003);
+			var000B = var0007[var0009] * var0003;
+			var000C = var0008[var0009] * var0003;
 			var000D = var0005[var0009];
 			if (var0001 == "Guilders") {
-				var000B = ((var0007[var0009] * 0x0003) / 0x0002);
-				var000C = ((var0008[var0009] * 0x0003) / 0x0002);
+				var000B = (var0007[var0009] * 0x0003) / 0x0002;
+				var000C = (var0008[var0009] * 0x0003) / 0x0002;
 			}
 			if (var000B == var000C) {
 				say("\"The ",
@@ -93254,8 +93254,8 @@ var Func084C 0x84C (var var0000, var var0001) {
 	var var000E;
 
 	var0002 = var0000;
-	var0003 = ((var0001 / 0x0003) * 0x0002);
-	var0004 = (0x000F - (0xFFE8->get_npc_id() / 0x0002));
+	var0003 = (var0001 / 0x0003) * 0x0002;
+	var0004 = 0x000F - (0xFFE8->get_npc_id() / 0x0002);
 	var0005 = 0x0000;
 	var0006 = 0x0001;
 	var0007 = 0x0000;
@@ -93852,8 +93852,8 @@ void Func084F 0x84F () {
 			var000A = var0002[var0006];
 			var000B = 0x03B8;
 			if (gflags[0x0215] == true) {
-				var0008 = (var0004[var0006] / 0x0002);
-				var0009 = (var0005[var0006] / 0x0002);
+				var0008 = var0004[var0006] / 0x0002;
+				var0009 = var0005[var0006] / 0x0002;
 			}
 			if (var0008 == var0009) {
 				say("\"I will sell thee ",
@@ -93918,7 +93918,7 @@ var Func0850 0x850 (var var0000, var var0001) {
 	var var000D;
 
 	var0002 = var0000;
-	var0003 = ((var0001 / 0x0003) * 0x0002);
+	var0003 = (var0001 / 0x0003) * 0x0002;
 	var0004 = 0x0005;
 	var0005 = 0x0000;
 	var0006 = 0x0001;
@@ -94106,7 +94106,7 @@ void Func0851 0x851 () {
 
 	say("\"The cost is 12 guilders per person. Wouldst thou like a room for the night?\"");
 	if (Func0955()) {
-		var0000 = (UI_get_array_size(UI_get_party_list()) * 0x000C);
+		var0000 = UI_get_array_size(UI_get_party_list()) * 0x000C;
 		var0001 = 0xFE9B->count_objects(0x03B8, 0xFE99, 0xFE99);
 		if (var0001 >= var0000) {
 			say("\"Here is thy key.\"");
@@ -94194,10 +94194,10 @@ void Func0852 0x852 () {
 			var000F = "Dost thou find the price agreeable?";
 		}
 		if (var000E == 0x0004) {
-			var000F = (var000A + ", dost thou agree?");
+			var000F = var000A + ", dost thou agree?";
 		}
 		if (var000E == 0x0005) {
-			var000F = (var000A + ", is the price acceptable?");
+			var000F = var000A + ", is the price acceptable?";
 		}
 		if (var000B == 0x0002) {
 			say("\"",
@@ -94427,7 +94427,7 @@ var Func0854 0x854 (var var0000, var var0001) {
 	var0002 = Func0954();
 	var0003 = UI_is_pc_female();
 	var0004 = var0000;
-	var0005 = ((var0001 / 0x0003) * 0x0002);
+	var0005 = (var0001 / 0x0003) * 0x0002;
 	var0006 = 0x0005;
 	var0007 = 0x0000;
 	var0008 = 0x0001;
@@ -94645,7 +94645,7 @@ void Func0855 0x855 (var var0000) {
 		}
 	}
 	if (var0000 == 0x000A) {
-		var0003 = (UI_find_nearby_avatar(0x010F) & UI_find_nearby_avatar(0x0110));
+		var0003 = UI_find_nearby_avatar(0x010F) & UI_find_nearby_avatar(0x0110);
 		var0004 = false;
 		for (var0007 in var0003 with var0005 to var0006) {
 			var0008 = Func0920();
@@ -94749,7 +94749,7 @@ void Func0857 0x857 () {
 		var0001 = UI_input_numeric_value(0x0000, var0000, 0x0001, 0x0000);
 		if (var0001 != 0x0000) {
 			var0000 = UI_remove_party_items(var0001, 0x034A, 0xFE99, 0x000F, 0x0000);
-			var0002 = (0x0078 * var0001);
+			var0002 = 0x0078 * var0001;
 			var0000 = Func099B(0xFE9C, var0002, 0x03B8, 0xFE99, 0xFE99, 0x0000, true);
 			if (var0001 == 0x0001) {
 				say("\"I will take thy Stoneheart and give thee ",
@@ -95208,8 +95208,8 @@ var Func085B 0x85B (var var0000, var var0001) {
 
 	var0002 = Func0954();
 	var0003 = var0000;
-	var0004 = ((var0001 / 0x0003) * 0x0002);
-	var0005 = (0x000F - (0xFFE3->get_npc_id() / 0x0002));
+	var0004 = (var0001 / 0x0003) * 0x0002;
+	var0005 = 0x000F - (0xFFE3->get_npc_id() / 0x0002);
 	var0006 = 0x0000;
 	var0007 = 0x0001;
 	var0008 = 0x0000;
@@ -95515,10 +95515,10 @@ void Func085E 0x85E () {
 			var000F = "Wilt thou pay such a charge?";
 		}
 		if (var000E == 0x0004) {
-			var000F = (var000A + ", dost thou agree?");
+			var000F = var000A + ", dost thou agree?";
 		}
 		if (var000E == 0x0005) {
-			var000F = (var000A + ", is this a price that thou canst pay?");
+			var000F = var000A + ", is this a price that thou canst pay?";
 		}
 		if (var000B == 0x0002) {
 			say("\"I am afraid that the price is ",
@@ -95763,8 +95763,8 @@ var Func0860 0x860 (var var0000, var var0001) {
 	var0002 = Func0954();
 	var0003 = UI_is_pc_female();
 	var0004 = var0000;
-	var0005 = ((var0001 / 0x0003) * 0x0002);
-	var0006 = (0x000F - (0xFFE2->get_npc_id() / 0x0002));
+	var0005 = (var0001 / 0x0003) * 0x0002;
+	var0006 = 0x000F - (0xFFE2->get_npc_id() / 0x0002);
 	var0007 = 0x0000;
 	var0008 = 0x0001;
 	var0009 = 0x0000;
@@ -96116,8 +96116,8 @@ void Func0864 0x864 () {
 	UI_remove_npc_face0();
 	Func097F(item, "@A thousand thanks!@", 0x0000);
 	var0002 = get_object_position();
-	var0002[0x0001] -= (var0002[0x0003] / 0x0002);
-	var0002[0x0002] -= (var0002[0x0003] / 0x0002);
+	var0002[0x0001] -= var0002[0x0003] / 0x0002;
+	var0002[0x0002] -= var0002[0x0003] / 0x0002;
 	UI_sprite_effect(0x0015, var0002[0x0001], var0002[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	var0003 = 0xFFC9->get_npc_object()->get_item_shape();
 	0xFFC9->set_polymorph(var0003);
@@ -96217,19 +96217,19 @@ void Func0865 0x865 () {
 								break;
 							}
 							if (var0004 == "Guilders") {
-								var0008 = (var0007 / 0x0003);
+								var0008 = var0007 / 0x0003;
 								var0009 = 0x0006;
 							}
 							if (var0004 == "Filari") {
-								var0008 = (var0007 / 0x0004);
+								var0008 = var0007 / 0x0004;
 								var0009 = 0x0008;
 							}
 							if (var0004 == "Gold Coins") {
-								var0008 = (var0007 / 0x0002);
+								var0008 = var0007 / 0x0002;
 								var0009 = 0x0004;
 							}
-							var000A = (var0008 / 0x0019);
-							var000B = (var0008 - var000A);
+							var000A = var0008 / 0x0019;
+							var000B = var0008 - var000A;
 							if (var0008 == 0x0000) {
 								say("\"Thou must offer at least ",
 									var0009,
@@ -96246,7 +96246,7 @@ void Func0865 0x865 () {
 							}
 							if (var0008 <= 0x0019) {
 								var000A = 0x0001;
-								var000B = (var0008 - var000A);
+								var000B = var0008 - var000A;
 							}
 							if (var0007 >= 0x0001) {
 								var000C = UI_remove_party_items(var0007, var0005, 0xFE99, 0xFE99, false);
@@ -96323,18 +96323,18 @@ void Func0865 0x865 () {
 								break;
 							}
 							if (var0004 == "Monetari") {
-								var0008 = (var0007 * 0x0003);
+								var0008 = var0007 * 0x0003;
 							}
 							if (var0004 == "Filari") {
-								var0008 = ((var0007 * 0x0003) / 0x0004);
+								var0008 = (var0007 * 0x0003) / 0x0004;
 								var0009 = 0x0003;
 							}
 							if (var0004 == "Gold Coins") {
-								var0008 = ((var0007 * 0x0003) / 0x0002);
+								var0008 = (var0007 * 0x0003) / 0x0002;
 								var0009 = 0x0002;
 							}
-							var000A = (var0008 / 0x0019);
-							var000B = (var0008 - var000A);
+							var000A = var0008 / 0x0019;
+							var000B = var0008 - var000A;
 							var000E = "Guilders";
 							var000F = "Guilders";
 							if (var0008 == 0x0000) {
@@ -96353,7 +96353,7 @@ void Func0865 0x865 () {
 							}
 							if (var0008 <= 0x0019) {
 								var000A = 0x0001;
-								var000B = (var0008 - var000A);
+								var000B = var0008 - var000A;
 							}
 							if (var000B == 0x0001) {
 								var000E = "Guilder";
@@ -96440,20 +96440,20 @@ void Func0865 0x865 () {
 								break;
 							}
 							if (var0004 == "Monetari") {
-								var0008 = (var0007 * 0x0004);
+								var0008 = var0007 * 0x0004;
 							}
 							if (var0004 == "Guilders") {
-								var0008 = ((var0007 * 0x0004) / 0x0003);
+								var0008 = (var0007 * 0x0004) / 0x0003;
 								var0009 = 0x0002;
 							}
 							if (var0004 == "Gold Coins") {
-								var0008 = (var0007 * 0x0002);
+								var0008 = var0007 * 0x0002;
 								if (var0007 == 0x0001) {
 									var0004 = "Gold Coin";
 								}
 							}
-							var000A = (var0008 / 0x0019);
-							var000B = (var0008 - var000A);
+							var000A = var0008 / 0x0019;
+							var000B = var0008 - var000A;
 							if (var0008 == 0x0000) {
 								say("\"Thou must offer at least ",
 									var0009,
@@ -96470,7 +96470,7 @@ void Func0865 0x865 () {
 							}
 							if (var0008 <= 0x0019) {
 								var000A = 0x0001;
-								var000B = (var0008 - var000A);
+								var000B = var0008 - var000A;
 							}
 							if (var0007 >= 0x0001) {
 								var000C = UI_remove_party_items(var0007, var0005, 0xFE99, 0xFE99, false);
@@ -96551,18 +96551,18 @@ void Func0865 0x865 () {
 								break;
 							}
 							if (var0004 == "Monetari") {
-								var0008 = (var0007 * 0x0002);
+								var0008 = var0007 * 0x0002;
 							}
 							if (var0004 == "Guilders") {
-								var0008 = ((var0007 * 0x0002) / 0x0003);
+								var0008 = (var0007 * 0x0002) / 0x0003;
 								var0009 = 0x0003;
 							}
 							if (var0004 == "Filari") {
-								var0008 = (var0007 / 0x0002);
+								var0008 = var0007 / 0x0002;
 								var0009 = 0x0004;
 							}
-							var000A = (var0008 / 0x0019);
-							var000B = (var0008 - var000A);
+							var000A = var0008 / 0x0019;
+							var000B = var0008 - var000A;
 							var000E = "Gold Coins";
 							var000F = "Gold Coins";
 							if (var0008 == 0x0000) {
@@ -96581,7 +96581,7 @@ void Func0865 0x865 () {
 							}
 							if (var0008 <= 0x0019) {
 								var000A = 0x0001;
-								var000B = (var0008 - var000A);
+								var000B = var0008 - var000A;
 							}
 							if (var000B == 0x0001) {
 								var000E = "Gold Coin";
@@ -96705,10 +96705,10 @@ void Func0866 0x866 () {
 			var0010 = "Dost thou find the price agreeable?";
 		}
 		if (var000F == 0x0004) {
-			var0010 = (var000B + ", dost thou agree?");
+			var0010 = var000B + ", dost thou agree?";
 		}
 		if (var000F == 0x0005) {
-			var0010 = (var000B + ", is the price acceptable?");
+			var0010 = var000B + ", is the price acceptable?";
 		}
 		if (var000C == 0x0002) {
 			say("\"",
@@ -97151,10 +97151,10 @@ void Func0868 0x868 () {
 				var0010 = "Dost thou find the price agreeable?";
 			}
 			if (var000F == 0x0004) {
-				var0010 = (var0002 + ", dost thou agree?");
+				var0010 = var0002 + ", dost thou agree?";
 			}
 			if (var000F == 0x0005) {
-				var0010 = (var0002 + ", is the price acceptable?");
+				var0010 = var0002 + ", is the price acceptable?";
 			}
 			var0011 = UI_die_roll(0x0001, 0x0005);
 			if (var0011 == 0x0001) {
@@ -97170,8 +97170,8 @@ void Func0868 0x868 () {
 				var0013 = "They are not in very good condition.";
 			}
 			if (var0011 == 0x0004) {
-				var0012 = (var0002 + ", this will take weeks to repair!");
-				var0013 = (var0002 + ", these will take weeks to repair!");
+				var0012 = var0002 + ", this will take weeks to repair!";
+				var0013 = var0002 + ", these will take weeks to repair!";
 			}
 			if (var0011 == 0x0005) {
 				var0012 = "Where didst thou find this -- buried under the ground?";
@@ -97185,7 +97185,7 @@ void Func0868 0x868 () {
 						say("\"How many suits of scale armour wouldst thou care to sell?\"");
 						var0016 = UI_input_numeric_value(0x0000, var0005, 0x0001, 0x0000);
 						if (var0016 != 0x0001) {
-							var0015 = (0x001E * var0016);
+							var0015 = 0x001E * var0016;
 							if (var0016 == 0x0000) {
 								say("\"Perhaps another time, ",
 									var0000,
@@ -97229,7 +97229,7 @@ void Func0868 0x868 () {
 						say("\"How many suits of chain armour wouldst thou care to sell?\"");
 						var0016 = UI_input_numeric_value(0x0000, var0006, 0x0001, 0x0000);
 						if (var0016 != 0x0001) {
-							var0015 = (0x0032 * var0016);
+							var0015 = 0x0032 * var0016;
 							if (var0016 == 0x0000) {
 								say("\"Perhaps another time, ",
 									var0000,
@@ -97273,7 +97273,7 @@ void Func0868 0x868 () {
 						say("\"How many suits of plate armour wouldst thou care to sell?\"");
 						var0016 = UI_input_numeric_value(0x0000, var0007, 0x0001, 0x0000);
 						if (var0016 != 0x0001) {
-							var0015 = (0x004B * var0016);
+							var0015 = 0x004B * var0016;
 							if (var0016 == 0x0000) {
 								say("\"Perhaps another time, ",
 									var0000,
@@ -97317,7 +97317,7 @@ void Func0868 0x868 () {
 						say("\"How many pairs of chain leggings wouldst thou care to sell?\"");
 						var0016 = UI_input_numeric_value(0x0000, var0008, 0x0001, 0x0000);
 						if (var0016 != 0x0001) {
-							var0015 = (0x0019 * var0016);
+							var0015 = 0x0019 * var0016;
 							if (var0016 == 0x0000) {
 								say("\"Perhaps another time, ",
 									var0000,
@@ -97361,7 +97361,7 @@ void Func0868 0x868 () {
 						say("\"And how many pairs of plate leggings wouldst thou care to sell?\"");
 						var0016 = UI_input_numeric_value(0x0000, var0009, 0x0001, 0x0000);
 						if (var0016 != 0x0001) {
-							var0015 = (0x002D * var0016);
+							var0015 = 0x002D * var0016;
 							if (var0016 == 0x0000) {
 								say("\"Perhaps another time, ",
 									var0000,
@@ -97405,7 +97405,7 @@ void Func0868 0x868 () {
 						say("\"How many great helms wouldst thou care to sell?\"");
 						var0016 = UI_input_numeric_value(0x0000, var000A, 0x0001, 0x0000);
 						if (var0016 != 0x0001) {
-							var0015 = (0x0014 * var0016);
+							var0015 = 0x0014 * var0016;
 							if (var0016 == 0x0000) {
 								say("\"Perhaps another time, ",
 									var0000,
@@ -97449,7 +97449,7 @@ void Func0868 0x868 () {
 						say("\"How many crested helms wouldst thou care to sell?\"");
 						var0016 = UI_input_numeric_value(0x0000, var000B, 0x0001, 0x0000);
 						if (var0016 != 0x0001) {
-							var0015 = (0x000A * var0016);
+							var0015 = 0x000A * var0016;
 							if (var0016 == 0x0000) {
 								say("\"Perhaps another time, ",
 									var0000,
@@ -97537,8 +97537,8 @@ var Func0869 0x869 (var var0000, var var0001) {
 		var0005 = "Milord";
 	}
 	var0006 = var0000;
-	var0007 = ((var0001 / 0x0003) * 0x0002);
-	var0008 = (0x000F - (0xFFB2->get_npc_id() / 0x0002));
+	var0007 = (var0001 / 0x0003) * 0x0002;
+	var0008 = 0x000F - (0xFFB2->get_npc_id() / 0x0002);
 	var0009 = 0x0000;
 	var000A = 0x0001;
 	var000B = 0x0000;
@@ -97824,7 +97824,7 @@ void Func086B 0x86B () {
 	say("\"Whom dost thou wish to heal?\"");
 	while (var0001) {
 		var0002 = Func098E();
-		var0002 = (0x0000 & var0002);
+		var0002 = 0x0000 & var0002;
 		var0003 = ["nobody"];
 		for (var0006 in var0002 with var0004 to var0005) {
 			if (!(var0006 == 0x0000)) {
@@ -97847,7 +97847,7 @@ void Func086B 0x86B () {
 			var000D = "her";
 		}
 		if (var000A > var000B) {
-			var000E = (var000A - var000B);
+			var000E = var000A - var000B;
 			Func095E(var0008, 0x0003, var000E);
 			if (var0008 == 0xFE9C) {
 				say("\"I have healed thee of thy wounds. Rest easy, my friend.\"");
@@ -97918,7 +97918,7 @@ void Func086C 0x86C (var var0000) {
 	}
 	var0004 = Func095C(var0000, 0x0000);
 	var0005 = Func095C(var0000, 0x0003);
-	var0006 = (var0004 - var0005);
+	var0006 = var0004 - var0005;
 	Func095E(var0000, 0x0003, var0006);
 	if (!var0000->get_item_flag(0x0006)) {
 		var0000->add_to_party();
@@ -97972,7 +97972,7 @@ void Func086E 0x86E () {
 	if (var0000 != 0x0000) {
 		var0001 = UI_input_numeric_value(0x0000, var0000, 0x0001, 0x0000);
 		if (var0001 != 0x0000) {
-			var0002 = (var0001 * 0x0064);
+			var0002 = var0001 * 0x0064;
 			var0003 = 0x03B8;
 			var0004 = "gems";
 			if (var0001 == 0x0001) {
@@ -98073,7 +98073,7 @@ void Func086F 0x86F () {
 		var000F = 0x0000;
 		var0010 = UI_die_roll(0x0001, 0x0005);
 		if (var0010 == 0x0001) {
-			var0011 = (("Dost thou accept, " + var0000) + "?");
+			var0011 = ("Dost thou accept, " + var0000) + "?";
 		}
 		if (var0010 == 0x0002) {
 			var0011 = "What dost thou think?";
@@ -98082,10 +98082,10 @@ void Func086F 0x86F () {
 			var0011 = "Wilt thou pay my master's price?";
 		}
 		if (var0010 == 0x0004) {
-			var0011 = (var000C + ", dost thou agree?");
+			var0011 = var000C + ", dost thou agree?";
 		}
 		if (var0010 == 0x0005) {
-			var0011 = (var000C + ", is the price acceptable?");
+			var0011 = var000C + ", is the price acceptable?";
 		}
 		if (var000D == 0x0002) {
 			say("\"Well, our cloaks are not fancy, but they are warm.\" *\"If thou dost want one, it will cost thee ",
@@ -98276,8 +98276,8 @@ var Func0870 0x870 (var var0000, var var0001) {
 		var0004 = "Milord";
 	}
 	var0005 = var0000;
-	var0006 = ((var0001 / 0x0003) * 0x0002);
-	var0007 = (0x000F - (0xFFE0->get_npc_id() / 0x0002));
+	var0006 = (var0001 / 0x0003) * 0x0002;
+	var0007 = 0x000F - (0xFFE0->get_npc_id() / 0x0002);
 	var0008 = 0x0000;
 	var0009 = 0x0001;
 	var000A = 0x0000;
@@ -98656,8 +98656,8 @@ var Func0872 0x872 (var var0000, var var0001) {
 	var var000E;
 
 	var0002 = var0000;
-	var0003 = ((var0001 / 0x0003) * 0x0002);
-	var0004 = (0x000F - (0xFFDF->get_npc_id() / 0x0002));
+	var0003 = (var0001 / 0x0003) * 0x0002;
+	var0004 = 0x000F - (0xFFDF->get_npc_id() / 0x0002);
 	var0005 = 0x0000;
 	var0006 = 0x0001;
 	var0007 = 0x0000;
@@ -98888,7 +98888,7 @@ void Func0873 0x873 () {
 	if (var0004 == "Yes") {
 		say("\"Whom dost thou wish to train?\"");
 		var0005 = Func098E();
-		var0005 = (0x0000 & var0005);
+		var0005 = 0x0000 & var0005;
 		var0006 = ["Nobody"];
 		for (var0009 in var0005 with var0007 to var0008) {
 			if (!(var0009 == 0x0000)) {
@@ -99042,7 +99042,7 @@ void Func0875 0x875 () {
 	}
 	say("\"Whom dost thou wish to train?\"");
 	var0004 = Func098E();
-	var0004 = (0x0000 & var0004);
+	var0004 = 0x0000 & var0004;
 	var0005 = ["Nobody"];
 	for (var0008 in var0004 with var0006 to var0007) {
 		if (!(var0008 == 0x0000)) {
@@ -99125,7 +99125,7 @@ void Func0876 0x876 () {
 	var var0003;
 
 	var0000 = Func0953();
-	var0001 = (("I am " + var0000) + ".");
+	var0001 = ("I am " + var0000) + ".";
 	if (!gflags[0x01FE]) {
 		var0002 = 0xFF56->get_item_flag(0x001C);
 		if (var0002) {
@@ -99319,19 +99319,19 @@ void Func087B 0x87B () {
 								break;
 							}
 							if (var0004 == "Guilders") {
-								var0008 = (var0007 / 0x0003);
+								var0008 = var0007 / 0x0003;
 								var0009 = 0x0006;
 							}
 							if (var0004 == "Filari") {
-								var0008 = (var0007 / 0x0004);
+								var0008 = var0007 / 0x0004;
 								var0009 = 0x0008;
 							}
 							if (var0004 == "Gold Coins") {
-								var0008 = (var0007 / 0x0002);
+								var0008 = var0007 / 0x0002;
 								var0009 = 0x0004;
 							}
-							var000A = (var0008 / 0x0021);
-							var000B = (var0008 - var000A);
+							var000A = var0008 / 0x0021;
+							var000B = var0008 - var000A;
 							if (var0008 == 0x0000) {
 								say("\"Thou must offer at least ",
 									var0009,
@@ -99348,7 +99348,7 @@ void Func087B 0x87B () {
 							}
 							if (var0008 <= 0x0021) {
 								var000A = 0x0001;
-								var000B = (var0008 - var000A);
+								var000B = var0008 - var000A;
 							}
 							if (var0007 >= 0x0001) {
 								var000C = UI_remove_party_items(var0007, var0005, 0xFE99, 0xFE99, false);
@@ -99425,18 +99425,18 @@ void Func087B 0x87B () {
 								break;
 							}
 							if (var0004 == "Monetari") {
-								var0008 = (var0007 * 0x0003);
+								var0008 = var0007 * 0x0003;
 							}
 							if (var0004 == "Filari") {
-								var0008 = ((var0007 * 0x0003) / 0x0004);
+								var0008 = (var0007 * 0x0003) / 0x0004;
 								var0009 = 0x0003;
 							}
 							if (var0004 == "Gold Coins") {
-								var0008 = ((var0007 * 0x0003) / 0x0002);
+								var0008 = (var0007 * 0x0003) / 0x0002;
 								var0009 = 0x0002;
 							}
-							var000A = (var0008 / 0x0021);
-							var000B = (var0008 - var000A);
+							var000A = var0008 / 0x0021;
+							var000B = var0008 - var000A;
 							var000E = "Guilders";
 							var000F = "Guilders";
 							if (var0008 == 0x0000) {
@@ -99455,7 +99455,7 @@ void Func087B 0x87B () {
 							}
 							if (var0008 <= 0x0021) {
 								var000A = 0x0001;
-								var000B = (var0008 - var000A);
+								var000B = var0008 - var000A;
 							}
 							if (var000B == 0x0001) {
 								var000E = "Guilder";
@@ -99542,20 +99542,20 @@ void Func087B 0x87B () {
 								break;
 							}
 							if (var0004 == "Monetari") {
-								var0008 = (var0007 * 0x0004);
+								var0008 = var0007 * 0x0004;
 							}
 							if (var0004 == "Guilders") {
-								var0008 = ((var0007 * 0x0004) / 0x0003);
+								var0008 = (var0007 * 0x0004) / 0x0003;
 								var0009 = 0x0002;
 							}
 							if (var0004 == "Gold Coins") {
-								var0008 = (var0007 * 0x0002);
+								var0008 = var0007 * 0x0002;
 								if (var0007 == 0x0001) {
 									var0004 = "Gold Coin";
 								}
 							}
-							var000A = (var0008 / 0x0021);
-							var000B = (var0008 - var000A);
+							var000A = var0008 / 0x0021;
+							var000B = var0008 - var000A;
 							if (var0008 == 0x0000) {
 								say("\"Thou must offer at least ",
 									var0009,
@@ -99572,7 +99572,7 @@ void Func087B 0x87B () {
 							}
 							if (var0008 <= 0x0021) {
 								var000A = 0x0001;
-								var000B = (var0008 - var000A);
+								var000B = var0008 - var000A;
 							}
 							if (var0007 >= 0x0001) {
 								var000C = UI_remove_party_items(var0007, var0005, 0xFE99, 0xFE99, false);
@@ -99653,18 +99653,18 @@ void Func087B 0x87B () {
 								break;
 							}
 							if (var0004 == "Monetari") {
-								var0008 = (var0007 * 0x0002);
+								var0008 = var0007 * 0x0002;
 							}
 							if (var0004 == "Guilders") {
-								var0008 = ((var0007 * 0x0002) / 0x0003);
+								var0008 = (var0007 * 0x0002) / 0x0003;
 								var0009 = 0x0003;
 							}
 							if (var0004 == "Filari") {
-								var0008 = (var0007 / 0x0002);
+								var0008 = var0007 / 0x0002;
 								var0009 = 0x0004;
 							}
-							var000A = (var0008 / 0x0021);
-							var000B = (var0008 - var000A);
+							var000A = var0008 / 0x0021;
+							var000B = var0008 - var000A;
 							var000E = "Gold Coins";
 							var000F = "Gold Coins";
 							if (var0008 == 0x0000) {
@@ -99683,7 +99683,7 @@ void Func087B 0x87B () {
 							}
 							if (var0008 <= 0x0021) {
 								var000A = 0x0001;
-								var000B = (var0008 - var000A);
+								var000B = var0008 - var000A;
 							}
 							if (var000B == 0x0001) {
 								var000E = "Gold Coin";
@@ -99775,8 +99775,8 @@ void Func087C 0x87C () {
 		var0006 = 0x00A8;
 	}
 	if (var0006 < 0x00A8) {
-		var0007 = (0x0007 - (var0006 / 0x0018));
-		var0008 = (0x0018 - (var0006 % 0x0018));
+		var0007 = 0x0007 - (var0006 / 0x0018);
+		var0008 = 0x0018 - (var0006 % 0x0018);
 		if ((var0006 >= 0x0090) && (var0006 < 0x00A8)) {
 			var0007 = 0x0000;
 		}
@@ -99810,7 +99810,7 @@ void Func087C 0x87C () {
 			gflags[0x0009] = false;
 			gflags[0x000A] = false;
 			var000D = 0xFE9C->get_npc_prop(0x0005);
-			var000D = (0x0000 - var000D);
+			var000D = 0x0000 - var000D;
 			var000E = 0xFE9C->set_npc_prop(0x0005, var000D);
 			var000F = Func09A0(0x0000, 0x0002);
 			UI_play_music(0x001D, var000F);
@@ -100047,7 +100047,7 @@ void Func0884 0x884 (var var0000) {
 	if (var0000 == 0x0003) {
 		var0001 = [0x0B79, 0x0ADE, 0x0000];
 	}
-	var0002 = (find_nearby(0x010E, 0x000A, 0x0000) & find_nearby(0x0178, 0x000A, 0x0000));
+	var0002 = find_nearby(0x010E, 0x000A, 0x0000) & find_nearby(0x0178, 0x000A, 0x0000);
 	for (var0005 in var0002 with var0003 to var0004) {
 		var0001 = var0005->get_object_position();
 		var0006 = var0005->get_item_shape();
@@ -100560,7 +100560,7 @@ void Func088D 0x88D (var var0000, var var0001) {
 			break;
 		}
 		if (!(var0012->get_schedule_type() == 0x0010)) {
-			var0013 = (var0007 - 0x0001);
+			var0013 = var0007 - 0x0001;
 			var0012->sit_down(var0002[var0013]);
 		}
 		var0007 += 0x0001;
@@ -100630,14 +100630,14 @@ var Func0891 0x891 () {
 	var var0002;
 	var var0003;
 
-	var0000 = ("soup" & ("*" & ("eruption" & ("*" & ("quagmire" & ("*" & ("bureaucracy" & ("bureaucracies" & ("hoe" & "*")))))))));
-	var0000 &= ("tyranny" & ("tyrannies" & ("monarchy" & ("monarchies" & ("hammer" & ("*" & ("sickle" & ("*" & ("imperialism" & "*")))))))));
-	var0000 &= ("axle" & ("*" & ("wheel" & ("*" & ("Gump" & ("*" & ("lenticular cloud" & ("*" & ("clock" & ("*" & ("sloop" & ("*" & ("barge" & "*")))))))))))));
+	var0000 = "soup" & ("*" & ("eruption" & ("*" & ("quagmire" & ("*" & ("bureaucracy" & ("bureaucracies" & ("hoe" & "*"))))))));
+	var0000 &= "tyranny" & ("tyrannies" & ("monarchy" & ("monarchies" & ("hammer" & ("*" & ("sickle" & ("*" & ("imperialism" & "*"))))))));
+	var0000 &= "axle" & ("*" & ("wheel" & ("*" & ("Gump" & ("*" & ("lenticular cloud" & ("*" & ("clock" & ("*" & ("sloop" & ("*" & ("barge" & "*"))))))))))));
 	var0001 = UI_die_roll(0x0001, (UI_get_array_size(var0000) / 0x0002));
 	var0002 = var0000[((var0001 * 0x0002) - 0x0001)];
 	var0003 = var0000[(var0001 * 0x0002)];
 	if (var0003 == "*") {
-		var0003 = (var0002 + "s");
+		var0003 = var0002 + "s";
 	}
 	return [var0002, var0003];
 }
@@ -100648,14 +100648,14 @@ var Func0892 0x892 () {
 	var var0002;
 	var var0003;
 
-	var0000 = ("cage" & ("*" & ("flagpole" & ("*" & ("digit" & ("*" & ("nail" & ("*" & ("epaphite" & ("*" & ("sycophant" & ("*" & ("demagogue" & "*")))))))))))));
-	var0000 &= ("prophet" & ("*" & ("profit" & ("*" & ("pus" & ("pus" & ("mulch" & ("mulch" & ("Garden Gnome" & "*")))))))));
-	var0000 &= ("personal crisis" & ("personal crises" & ("wit" & ("*" & ("bathysphere" & ("*" & ("pudding" & ("*" & ("origami ball" & ("*" & ("communion wafer" & ("*" & ("armageddon" & ("*" & ("balloon" & "*")))))))))))))));
+	var0000 = "cage" & ("*" & ("flagpole" & ("*" & ("digit" & ("*" & ("nail" & ("*" & ("epaphite" & ("*" & ("sycophant" & ("*" & ("demagogue" & "*"))))))))))));
+	var0000 &= "prophet" & ("*" & ("profit" & ("*" & ("pus" & ("pus" & ("mulch" & ("mulch" & ("Garden Gnome" & "*"))))))));
+	var0000 &= "personal crisis" & ("personal crises" & ("wit" & ("*" & ("bathysphere" & ("*" & ("pudding" & ("*" & ("origami ball" & ("*" & ("communion wafer" & ("*" & ("armageddon" & ("*" & ("balloon" & "*"))))))))))))));
 	var0001 = UI_die_roll(0x0001, (UI_get_array_size(var0000) / 0x0002));
 	var0002 = var0000[((var0001 * 0x0002) - 0x0001)];
 	var0003 = var0000[(var0001 * 0x0002)];
 	if (var0003 == "*") {
-		var0003 = (var0002 + "s");
+		var0003 = var0002 + "s";
 	}
 	return [var0002, var0003];
 }
@@ -100666,9 +100666,9 @@ var Func0893 0x893 () {
 	var var0002;
 	var var0003;
 
-	var0000 = ("constipated" & ("fractured" & ("dysfunctional" & ("dyslexic" & ("diuretic" & ("glandular" & ("hormonal" & ("obtuse" & ("obese" & ("partisan" & "bilateral"))))))))));
-	var0000 &= ("symmetrical" & ("frontal" & ("superfluous" & ("saturated" & ("molar" & ("low-pressure" & ("diagnostic" & ("acidic" & ("empirical" & ("basic" & ("suicidal" & ("comforting" & "passive"))))))))))));
-	var0000 &= ("hedonistic" & ("pagan" & ("philanthropic" & ("operatic" & ("staged" & ("affected" & ("grotesque" & ("orgasmic" & ("organic" & ("pedantic" & ("imperialist" & ("Gumpy" & "dependent"))))))))))));
+	var0000 = "constipated" & ("fractured" & ("dysfunctional" & ("dyslexic" & ("diuretic" & ("glandular" & ("hormonal" & ("obtuse" & ("obese" & ("partisan" & "bilateral")))))))));
+	var0000 &= "symmetrical" & ("frontal" & ("superfluous" & ("saturated" & ("molar" & ("low-pressure" & ("diagnostic" & ("acidic" & ("empirical" & ("basic" & ("suicidal" & ("comforting" & "passive")))))))))));
+	var0000 &= "hedonistic" & ("pagan" & ("philanthropic" & ("operatic" & ("staged" & ("affected" & ("grotesque" & ("orgasmic" & ("organic" & ("pedantic" & ("imperialist" & ("Gumpy" & "dependent")))))))))));
 	var0001 = UI_die_roll(0x0001, UI_get_array_size(var0000));
 	var0002 = var0000[var0001];
 	var0001 = UI_die_roll(0x0001, UI_get_array_size(var0000));
@@ -100683,19 +100683,19 @@ var Func0894 0x894 () {
 	var var0003;
 	var var0004;
 
-	var0000 = ("lactate" & ("lactated" & ("lactating" & ("grovel" & ("grovelled" & ("grovelling" & ("brew" & ("*" & ("*" & ("digest" & ("*" & ("*" & ("complain" & ("*" & "*"))))))))))))));
-	var0000 &= ("gump" & ("*" & ("*" & ("guffaw" & ("*" & ("*" & ("loiter" & ("*" & ("*" & ("solicit" & ("*" & "*")))))))))));
-	var0000 &= ("represent" & ("*" & ("*" & ("conjugate" & ("conjugated" & ("conjugating" & ("sink" & ("sank" & ("*" & ("harvest" & ("*" & ("*" & ("gossip" & ("*" & ("*" & ("falsify" & ("falsified" & ("*" & ("sue" & ("sued" & "suing"))))))))))))))))))));
-	var0000 &= ("gyrate" & ("gyrated" & ("gyrating" & ("outstretch" & ("*" & ("*" & ("deflower" & ("*" & "*"))))))));
+	var0000 = "lactate" & ("lactated" & ("lactating" & ("grovel" & ("grovelled" & ("grovelling" & ("brew" & ("*" & ("*" & ("digest" & ("*" & ("*" & ("complain" & ("*" & "*")))))))))))));
+	var0000 &= "gump" & ("*" & ("*" & ("guffaw" & ("*" & ("*" & ("loiter" & ("*" & ("*" & ("solicit" & ("*" & "*"))))))))));
+	var0000 &= "represent" & ("*" & ("*" & ("conjugate" & ("conjugated" & ("conjugating" & ("sink" & ("sank" & ("*" & ("harvest" & ("*" & ("*" & ("gossip" & ("*" & ("*" & ("falsify" & ("falsified" & ("*" & ("sue" & ("sued" & "suing")))))))))))))))))));
+	var0000 &= "gyrate" & ("gyrated" & ("gyrating" & ("outstretch" & ("*" & ("*" & ("deflower" & ("*" & "*")))))));
 	var0001 = UI_die_roll(0x0001, (UI_get_array_size(var0000) / 0x0003));
 	var0002 = var0000[((var0001 * 0x0003) - 0x0002)];
 	var0003 = var0000[((var0001 * 0x0003) - 0x0001)];
 	var0004 = var0000[(var0001 * 0x0003)];
 	if (var0003 == "*") {
-		var0003 = (var0002 + "ed");
+		var0003 = var0002 + "ed";
 	}
 	if (var0004 == "*") {
-		var0004 = (var0002 + "ing");
+		var0004 = var0002 + "ing";
 	}
 	return [var0002, var0003, var0004];
 }
@@ -100707,18 +100707,18 @@ var Func0895 0x895 () {
 	var var0003;
 	var var0004;
 
-	var0000 = ("collate" & ("collated" & ("collating" & ("sear" & ("*" & ("*" & ("croak" & ("*" & ("*" & ("nap" & ("napped" & ("napping" & ("work" & ("*" & ("*" & ("conjure" & ("conjured" & "conjuring")))))))))))))))));
-	var0000 &= ("campaign" & ("*" & ("*" & ("protest" & ("*" & ("*" & ("spew" & ("*" & ("*" & ("inhabit" & ("*" & ("*" & ("censor" & ("*" & "*"))))))))))))));
-	var0000 &= ("lay off" & ("laid off" & ("laying off" & ("spray" & ("*" & ("*" & ("tan" & ("tanned" & "tanning"))))))));
+	var0000 = "collate" & ("collated" & ("collating" & ("sear" & ("*" & ("*" & ("croak" & ("*" & ("*" & ("nap" & ("napped" & ("napping" & ("work" & ("*" & ("*" & ("conjure" & ("conjured" & "conjuring"))))))))))))))));
+	var0000 &= "campaign" & ("*" & ("*" & ("protest" & ("*" & ("*" & ("spew" & ("*" & ("*" & ("inhabit" & ("*" & ("*" & ("censor" & ("*" & "*")))))))))))));
+	var0000 &= "lay off" & ("laid off" & ("laying off" & ("spray" & ("*" & ("*" & ("tan" & ("tanned" & "tanning")))))));
 	var0001 = UI_die_roll(0x0001, (UI_get_array_size(var0000) / 0x0003));
 	var0002 = var0000[((var0001 * 0x0003) - 0x0002)];
 	var0003 = var0000[((var0001 * 0x0003) - 0x0001)];
 	var0004 = var0000[(var0001 * 0x0003)];
 	if (var0003 == "*") {
-		var0003 = (var0002 + "ed");
+		var0003 = var0002 + "ed";
 	}
 	if (var0004 == "*") {
-		var0004 = (var0002 + "ing");
+		var0004 = var0002 + "ing";
 	}
 	return [var0002, var0003, var0004];
 }
@@ -100728,8 +100728,8 @@ var Func0896 0x896 () {
 	var var0001;
 	var var0002;
 
-	var0000 = ("between the sheets" & ("with a melon" & ("assuredly" & ("above thine house" & "below the ground"))));
-	var0000 &= ("with much consternation" & ("Gumpily" & ("fiscally" & ("similarly" & "throughout the universe"))));
+	var0000 = "between the sheets" & ("with a melon" & ("assuredly" & ("above thine house" & "below the ground")));
+	var0000 &= "with much consternation" & ("Gumpily" & ("fiscally" & ("similarly" & "throughout the universe")));
 	var0001 = UI_die_roll(0x0001, UI_get_array_size(var0000));
 	var0002 = var0000[var0001];
 	return var0002;
@@ -100740,8 +100740,8 @@ var Func0897 0x897 () {
 	var var0001;
 	var var0002;
 
-	var0000 = ("without my knowledge" & ("without the proper permit" & ("through the ages" & "against all odds")));
-	var0000 &= ("with thy mother" & ("in a roundabout manner" & ("implicitly" & ("explicitly" & "anxiously"))));
+	var0000 = "without my knowledge" & ("without the proper permit" & ("through the ages" & "against all odds"));
+	var0000 &= "with thy mother" & ("in a roundabout manner" & ("implicitly" & ("explicitly" & "anxiously")));
 	var0001 = UI_die_roll(0x0001, UI_get_array_size(var0000));
 	var0002 = var0000[var0001];
 	return var0002;
@@ -100753,14 +100753,14 @@ var Func0898 0x898 () {
 	var var0002;
 	var var0003;
 
-	var0000 = ("armadillo" & ("*" & ("octopus" & ("octopi" & ("ungulate" & ("*" & ("cockatoo" & ("*" & ("ferret" & ("*" & ("weasel" & ("*" & ("bassalope" & "*")))))))))))));
-	var0000 &= ("platypus" & ("platypuses" & ("no-see-um" & ("*" & ("alpaca" & ("*" & ("mooncow" & ("*" & ("thundermoose" & ("*" & ("llama" & "*")))))))))));
-	var0000 &= ("iguana" & ("*" & ("reptile" & ("*" & ("amphibian" & ("*" & ("mammal" & ("*" & ("invertebrate" & "*")))))))));
+	var0000 = "armadillo" & ("*" & ("octopus" & ("octopi" & ("ungulate" & ("*" & ("cockatoo" & ("*" & ("ferret" & ("*" & ("weasel" & ("*" & ("bassalope" & "*"))))))))))));
+	var0000 &= "platypus" & ("platypuses" & ("no-see-um" & ("*" & ("alpaca" & ("*" & ("mooncow" & ("*" & ("thundermoose" & ("*" & ("llama" & "*"))))))))));
+	var0000 &= "iguana" & ("*" & ("reptile" & ("*" & ("amphibian" & ("*" & ("mammal" & ("*" & ("invertebrate" & "*"))))))));
 	var0001 = UI_die_roll(0x0001, (UI_get_array_size(var0000) / 0x0002));
 	var0002 = var0000[((var0001 * 0x0002) - 0x0001)];
 	var0003 = var0000[(var0001 * 0x0002)];
 	if (var0003 == "*") {
-		var0003 = (var0002 + "s");
+		var0003 = var0002 + "s";
 	}
 	return [var0002, var0003];
 }
@@ -100771,13 +100771,13 @@ var Func0899 0x899 () {
 	var var0002;
 	var var0003;
 
-	var0000 = ("dicot" & ("*" & ("conifer" & ("*" & ("slug" & ("*" & ("sloth" & ("*" & ("mole-person" & ("mole-people" & ("pod-person" & ("pod-people" & ("Saxon" & ("*" & ("Dominican" & ("*" & ("Basque" & "*")))))))))))))))));
-	var0000 &= ("Gypsy" & ("Gypsies" & ("Jute" & ("*" & ("Norman" & ("*" & ("Mongol" & ("*" & ("Slav" & ("*" & ("Hindu" & ("*" & ("Christian" & ("*" & ("Albigensian" & ("*" & ("cephalopod" & ("*" & ("rock critic" & "*")))))))))))))))))));
+	var0000 = "dicot" & ("*" & ("conifer" & ("*" & ("slug" & ("*" & ("sloth" & ("*" & ("mole-person" & ("mole-people" & ("pod-person" & ("pod-people" & ("Saxon" & ("*" & ("Dominican" & ("*" & ("Basque" & "*"))))))))))))))));
+	var0000 &= "Gypsy" & ("Gypsies" & ("Jute" & ("*" & ("Norman" & ("*" & ("Mongol" & ("*" & ("Slav" & ("*" & ("Hindu" & ("*" & ("Christian" & ("*" & ("Albigensian" & ("*" & ("cephalopod" & ("*" & ("rock critic" & "*"))))))))))))))))));
 	var0001 = UI_die_roll(0x0001, (UI_get_array_size(var0000) / 0x0002));
 	var0002 = var0000[((var0001 * 0x0002) - 0x0001)];
 	var0003 = var0000[(var0001 * 0x0002)];
 	if (var0003 == "*") {
-		var0003 = (var0002 + "s");
+		var0003 = var0002 + "s";
 	}
 	return [var0002, var0003];
 }
@@ -100787,7 +100787,7 @@ var Func089A 0x89A () {
 	var var0001;
 	var var0002;
 
-	var0000 = ("studmuffin" & ("creampuff" & ("sot" & ("guttersnipe" & ("yellowback" & ("four-eyes" & ("goofball" & ("wretch" & ("shmuck" & ("pox" & ("twig" & ("comrade" & ("babycakes" & ("smart-guy" & ("dumpling" & ("smartypants" & "Spankamiah"))))))))))))))));
+	var0000 = "studmuffin" & ("creampuff" & ("sot" & ("guttersnipe" & ("yellowback" & ("four-eyes" & ("goofball" & ("wretch" & ("shmuck" & ("pox" & ("twig" & ("comrade" & ("babycakes" & ("smart-guy" & ("dumpling" & ("smartypants" & "Spankamiah")))))))))))))));
 	var0001 = UI_die_roll(0x0001, UI_get_array_size(var0000));
 	var0002 = var0000[var0001];
 	return var0002;
@@ -100881,164 +100881,164 @@ var Func089B 0x89B () {
 	var000E = Func089A();
 	var0000 = UI_die_roll(0x0000, 0x0024);
 	if (var0000 == 0x0000) {
-		var000F = (((("I will show thee my " + var0006) + " ") + var0001) + " if thou wilt show me thine.");
+		var000F = ((("I will show thee my " + var0006) + " ") + var0001) + " if thou wilt show me thine.";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
-		var000F = (((((((("All of my " + var0006) + " ") + var0002) + " are ") + var000A) + " ") + var000B) + ".");
+		var000F = ((((((("All of my " + var0006) + " ") + var0002) + " are ") + var000A) + " ") + var000B) + ".";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
-		var000F = (((((("Stop " + var000A) + " my ") + var0006) + " ") + var0001) + ", please.");
+		var000F = ((((("Stop " + var000A) + " my ") + var0006) + " ") + var0001) + ", please.";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
-		var000F = (((((("Hast thou seen my " + var0001) + "? 'Tis ") + var000A) + " ") + var000B) + ".");
+		var000F = ((((("Hast thou seen my " + var0001) + "? 'Tis ") + var000A) + " ") + var000B) + ".";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
-		var000F = (((("There is no " + var0001) + " for thee today, little ") + var000C) + ", only death.");
-	}
-	var0000 -= 0x0001;
-	if (var0000 == 0x0000) {
-		var0010 = UI_a_or_an(var0006);
-		var000F = (((((("Am I having " + var0010) + " ") + var0006) + " ") + var0001) + " yet?");
+		var000F = ((("There is no " + var0001) + " for thee today, little ") + var000C) + ", only death.";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var0010 = UI_a_or_an(var0006);
-		var000F = (((((("Where is mine advisor? I need " + var0010) + " ") + var0006) + " ") + var0001) + " immediately.");
+		var000F = ((((("Am I having " + var0010) + " ") + var0006) + " ") + var0001) + " yet?";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
-		var000F = (((((((("Thou hast saved my " + var0006) + " ") + var000C) + " from ") + var0001) + ", ") + var000E) + ". How can I ever repay thee?");
+		var0010 = UI_a_or_an(var0006);
+		var000F = ((((("Where is mine advisor? I need " + var0010) + " ") + var0006) + " ") + var0001) + " immediately.";
+	}
+	var0000 -= 0x0001;
+	if (var0000 == 0x0000) {
+		var000F = ((((((("Thou hast saved my " + var0006) + " ") + var000C) + " from ") + var0001) + ", ") + var000E) + ". How can I ever repay thee?";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var0010 = UI_a_or_an(var0001);
-		var000F = (((((((((((("^" + var0010) + " ") + var0001) + ", ") + var0010) + " ") + var0001) + ", my kingdom for ") + var0010) + " ") + var0001) + "!");
+		var000F = ((((((((((("^" + var0010) + " ") + var0001) + ", ") + var0010) + " ") + var0001) + ", my kingdom for ") + var0010) + " ") + var0001) + "!";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var0010 = UI_a_or_an(var0001);
-		var000F = (((("Frankly, my dear, I don't give " + var0010) + " ") + var0001) + ".");
+		var000F = ((("Frankly, my dear, I don't give " + var0010) + " ") + var0001) + ".";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
-		var000F = (((("As " + var0002) + " are my witness, I'll never go ") + var0006) + " again.");
+		var000F = ((("As " + var0002) + " are my witness, I'll never go ") + var0006) + " again.";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
-		var000F = (("Oh, my, " + var000E) + ", I don't think we're in Britannia anymore.");
+		var000F = ("Oh, my, " + var000E) + ", I don't think we're in Britannia anymore.";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
-		var000F = (((((("May I borrow thy " + var0001) + "? Mine seems to be ") + var0006) + " ") + var000B) + ".");
+		var000F = ((((("May I borrow thy " + var0001) + "? Mine seems to be ") + var0006) + " ") + var000B) + ".";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
-		var000F = (((((("My " + var000D) + " are ") + var000A) + " ") + var000B) + ".");
+		var000F = ((((("My " + var000D) + " are ") + var000A) + " ") + var000B) + ".";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
-		var000F = (((((("Thou shalt know the " + var0001) + " and the ") + var0001) + " shall make thee ") + var0006) + ".");
+		var000F = ((((("Thou shalt know the " + var0001) + " and the ") + var0001) + " shall make thee ") + var0006) + ".";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var0010 = UI_a_or_an(var000C);
-		var000F = (((((((("Thou shalt not " + var0008) + " to ") + var0010) + " ") + var000C) + ", ") + var000E) + ".");
+		var000F = ((((((("Thou shalt not " + var0008) + " to ") + var0010) + " ") + var000C) + ", ") + var000E) + ".";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
-		var000F = (((("Honor thy father and thy " + var0001) + ", ") + var000E) + ".");
+		var000F = ((("Honor thy father and thy " + var0001) + ", ") + var000E) + ".";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
-		var000F = (((("Thou shalt not covet thy neighbor's " + var0001) + ", ") + var000E) + ".");
+		var000F = ((("Thou shalt not covet thy neighbor's " + var0001) + ", ") + var000E) + ".";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var0010 = UI_a_or_an(var0001);
-		var000F = (((("Neither a borrower nor " + var0010) + " ") + var0001) + " be.");
+		var000F = ((("Neither a borrower nor " + var0010) + " ") + var0001) + " be.";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
-		var000F = (((((("Never " + var0008) + " a gift ") + var000C) + " in the ") + var0001) + ".");
+		var000F = ((((("Never " + var0008) + " a gift ") + var000C) + " in the ") + var0001) + ".";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
-		var000F = (((("A fool and his " + var0001) + " are soon ") + var0006) + ".");
+		var000F = ((("A fool and his " + var0001) + " are soon ") + var0006) + ".";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
-		var000F = (((("Workers of the world, " + var0008) + "! You have nothing to lose but your ") + var0002) + "!");
+		var000F = ((("Workers of the world, " + var0008) + "! You have nothing to lose but your ") + var0002) + "!";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
-		var000F = (("Ich bin ein " + var0001) + "er.");
+		var000F = ("Ich bin ein " + var0001) + "er.";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
-		var000F = (((("Damn the " + var0002) + "! ^") + var0006) + " speed ahead!");
+		var000F = ((("Damn the " + var0002) + "! ^") + var0006) + " speed ahead!";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
-		var000F = (((((((("Ask not what thy " + var0006) + " ") + var0001) + " can do for thee, but what thou canst do for thy ") + var0006) + " ") + var0001) + ".");
+		var000F = ((((((("Ask not what thy " + var0006) + " ") + var0001) + " can do for thee, but what thou canst do for thy ") + var0006) + " ") + var0001) + ".";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
-		var000F = (((((("^" + var000E) + "! ") + var000E) + "! Thou damned ") + var000C) + ".");
+		var000F = ((((("^" + var000E) + "! ") + var000E) + "! Thou damned ") + var000C) + ".";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
-		var000F = (((((("Let me remind thee that the " + var0002) + " of ") + var0003) + " may be more ") + var0006) + " than they appear.");
+		var000F = ((((("Let me remind thee that the " + var0002) + " of ") + var0003) + " may be more ") + var0006) + " than they appear.";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
-		var000F = (((((("Destroy thy " + var0006) + " and ") + var0007) + " life before it is too late, ") + var000E) + ".");
+		var000F = ((((("Destroy thy " + var0006) + " and ") + var0007) + " life before it is too late, ") + var000E) + ".";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
 		var0010 = UI_a_or_an(var0006);
 		var0011 = UI_a_or_an(var0001);
-		var000F = (((((((("Mine head feels like " + var0010) + " ") + var0006) + " with ") + var0011) + " ") + var0001) + " pointed at it.");
+		var000F = ((((((("Mine head feels like " + var0010) + " ") + var0006) + " with ") + var0011) + " ") + var0001) + " pointed at it.";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
-		var000F = (((((("Beautiful, " + var000E) + ", I shall have my ") + var0001) + " call thy ") + var0001) + ".");
+		var000F = ((((("Beautiful, " + var000E) + ", I shall have my ") + var0001) + " call thy ") + var0001) + ".";
 	}
 	var0000 -= 0x0001;
 	if (var0000 == 0x0000) {
-		var000F = (("No, thank thee, I'm watching my " + var0001) + " intake.");
+		var000F = ("No, thank thee, I'm watching my " + var0001) + " intake.";
 	}
 	var0000 -= 0x0001;
 	if (var0000 >= 0x0000) {
 		var0010 = UI_a_or_an(var0006);
-		var0012 = (((((("Ode to " + var0010) + " ") + var0006) + " ") + var0001) + ". ");
+		var0012 = ((((("Ode to " + var0010) + " ") + var0006) + " ") + var0001) + ". ";
 		if (var0000 == 0x0000) {
-			var000F = (((((((((((("O how the " + var000D) + " of ") + var0001) + " ") + var0008) + " ") + var000B) + " amidst the ") + var0006) + " ") + var0003) + ".");
+			var000F = ((((((((((("O how the " + var000D) + " of ") + var0001) + " ") + var0008) + " ") + var000B) + " amidst the ") + var0006) + " ") + var0003) + ".";
 		}
 		var0000 -= 0x0001;
 		if (var0000 == 0x0000) {
 			var0010 = UI_a_or_an(var0006);
-			var000F = (((((((("Shall I compare thee to " + var0010) + " ") + var0006) + " ") + var0001) + "? Thou art far more ") + var0007) + ".");
+			var000F = ((((((("Shall I compare thee to " + var0010) + " ") + var0006) + " ") + var0001) + "? Thou art far more ") + var0007) + ".";
 		}
 		var0000 -= 0x0001;
 		if (var0000 == 0x0000) {
 			var0013 = UI_a_or_an(var0001);
-			var000F = (((((((((((((((((("To be " + var0010) + " ") + var0001) + " or not to be. That is the ") + var0003) + ". Whether 'tis nobler in the ") + var0004) + " to ") + var0008) + " the ") + var0002) + " and ") + var0005) + " of ") + var0006) + " ") + var0003) + " or...");
+			var000F = ((((((((((((((((("To be " + var0010) + " ") + var0001) + " or not to be. That is the ") + var0003) + ". Whether 'tis nobler in the ") + var0004) + " to ") + var0008) + " the ") + var0002) + " and ") + var0005) + " of ") + var0006) + " ") + var0003) + " or...";
 		}
 		var0000 -= 0x0001;
 		if (var0000 == 0x0000) {
-			var000F = ((((((((((("This morning I saw a small " + var0001) + " ") + var000A) + " ") + var000B) + ". How the seasons of ") + var0006) + " ") + var0003) + " come and go.") + " Death falls upon us all.");
+			var000F = (((((((((("This morning I saw a small " + var0001) + " ") + var000A) + " ") + var000B) + ". How the seasons of ") + var0006) + " ") + var0003) + " come and go.") + " Death falls upon us all.";
 		}
 		var0000 -= 0x0001;
 		if (var0000 == 0x0000) {
-			var000F = (((("Rage, rage against the " + var000A) + " of the ") + var0001) + ".");
+			var000F = ((("Rage, rage against the " + var000A) + " of the ") + var0001) + ".";
 		}
 		var0000 -= 0x0001;
 		if (var0000 == 0x0000) {
-			var000F = (((((((((((((((("Love in the turning " + var0001) + ". The small ") + var000D) + " ") + var0008) + " ") + var000B) + ".  The ") + var0006) + " ") + var0005) + " whisper their ") + var0007) + " muses. Oh, the turning ") + var0001) + ".");
+			var000F = ((((((((((((((("Love in the turning " + var0001) + ". The small ") + var000D) + " ") + var0008) + " ") + var000B) + ".  The ") + var0006) + " ") + var0005) + " whisper their ") + var0007) + " muses. Oh, the turning ") + var0001) + ".";
 		}
 		var0000 -= 0x0001;
 	}
@@ -101182,7 +101182,7 @@ var Func08A0 0x8A0 (var var0000) {
 	var0001 = 0x0001;
 	var0002 = 0x0001;
 	var0003 = UI_get_party_list();
-	var0004 = (0xFE9C & Func098D());
+	var0004 = 0xFE9C & Func098D();
 	if (var0000 < 0x0002) {
 		var0001 = UI_get_random(UI_get_array_size(var0003));
 		if (var0000 == 0x0000) {
@@ -101228,7 +101228,7 @@ void Func08A1 0x8A1 () {
 	var0001 = find_nearby(0x02D8, 0x000D, 0x00B0);
 	var0002 = find_nearby(0xFE99, 0x0008, 0x0004);
 	UI_sprite_effect(0x0004, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-	var0003 = (UI_create_new_object(0x00D1) & (UI_create_new_object(0x00C9) & (UI_create_new_object(0x00C9) & (UI_create_new_object(0x00C9) & (UI_create_new_object(0x00C9) & UI_create_new_object(0x00C9))))));
+	var0003 = UI_create_new_object(0x00D1) & (UI_create_new_object(0x00C9) & (UI_create_new_object(0x00C9) & (UI_create_new_object(0x00C9) & (UI_create_new_object(0x00C9) & UI_create_new_object(0x00C9)))));
 	var0003[0x0001]->set_item_frame(0x000D);
 	var0003[0x0002]->set_item_frame(0x000D);
 	var0003[0x0003]->set_item_frame(0x000E);
@@ -101558,12 +101558,12 @@ void Func08AD 0x8AD (var var0000, var var0001, var var0002, var var0003) {
 			return;
 		}
 		if ((var0005 == 0x0194) && (var0006 == 0x0003)) {
-			var0009 = ("@I should eat that?@" & ("@Raw?@" & "@Not likely!@"));
+			var0009 = "@I should eat that?@" & ("@Raw?@" & "@Not likely!@");
 			Func094F(var0003, var0009);
 			abort;
 		}
 		var000A = var0003->get_npc_prop(0x0009);
-		var000B = (var000A + var0001);
+		var000B = var000A + var0001;
 		if (var000A > 0x0018) {
 			var000C = "@No, thank thee.@";
 		} else {
@@ -101614,7 +101614,7 @@ void Func08AD 0x8AD (var var0000, var var0001, var var0002, var var0003) {
 			}
 		}
 		if ((var0005 == 0x0179) && ((var0006 == 0x001F) && (var000A < 0x0019))) {
-			var000C &= ("@It is very crunchy...@" & ("@Strange taste...@" & ("" & "@How very filling!@")));
+			var000C &= "@It is very crunchy...@" & ("@Strange taste...@" & ("" & "@How very filling!@"));
 		}
 		if (!(var000C == "")) {
 			if (Func0983(var0003)) {
@@ -101652,7 +101652,7 @@ void Func08AE 0x8AE () {
 	var0000 = 0xFFFF;
 	var0001 = 0xFFFF;
 	var0002 = 0xFFFD;
-	var0003 = (0xFF57->get_object_position() & (0xFE99 & 0x0006));
+	var0003 = 0xFF57->get_object_position() & (0xFE99 & 0x0006);
 	var0004 = var0003->find_nearby(0x0113, 0x0028, 0x0010);
 	for (var0007 in var0004 with var0005 to var0006) {
 		if (var0007->get_item_quality() == 0x0064) {
@@ -102317,7 +102317,7 @@ void Func08BC 0x8BC () {
 			}
 		}
 		if (get_item_quality() == 0x0005) {
-			var0002 = (get_object_position() & (0x0049 & 0x0016));
+			var0002 = get_object_position() & (0x0049 & 0x0016);
 			var0003 = var0002->find_nearby(0x0178, 0x0005, 0x0000);
 			var0002[0x0005] = 0x000E;
 			var0004 = var0002->find_nearby(0x01B1, 0x0005, 0x0000);
@@ -102326,7 +102326,7 @@ void Func08BC 0x8BC () {
 				var0004->set_item_frame(0x000C);
 				event = 0x0001;
 				var0003->Func0178();
-				var0002 = (0xFE9C->get_object_position() & (0x00DE & 0x0000));
+				var0002 = 0xFE9C->get_object_position() & (0x00DE & 0x0000);
 				var0000 = var0002->find_nearby(0x00F3, 0x0028, 0x0000);
 				if (var0000) {
 					var0001 = script var0000 {
@@ -102450,7 +102450,7 @@ void Func08BF 0x8BF () {
 					UI_play_sound_effect(0x0008);
 					gflags[0x0242] = true;
 					var0003->remove_item();
-					var0006 = (find_nearby(0x037F, 0x0032, 0x0000) & find_nearby(0x0113, 0x001E, 0x0010));
+					var0006 = find_nearby(0x037F, 0x0032, 0x0000) & find_nearby(0x0113, 0x001E, 0x0010);
 					for (var0009 in var0006 with var0007 to var0008) {
 						var000A = var0009->get_object_position();
 						UI_sprite_effect(0x0004, var000A[0x0001], var000A[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -102663,7 +102663,7 @@ void Func08C2 0x8C2 () {
 	var var0008;
 	var var0009;
 
-	var0000 = (0xFE9C->get_object_position() & (0xFE99 & 0x0006));
+	var0000 = 0xFE9C->get_object_position() & (0xFE99 & 0x0006);
 	var0001 = var0000->find_nearby(0x0113, 0x0050, 0x0010);
 	for (var0004 in var0001 with var0002 to var0003) {
 		var0005 = var0004->get_object_position();
@@ -102810,7 +102810,7 @@ void Func08C4 0x8C4 () {
 		Func09AC(var0000, var0002[0x0001], var0002[0x0002], 0x0007);
 		var0003 = UI_part_of_day();
 		if ((var0003 == 0x0000) || (var0003 == 0x0001)) {
-			var0004 = (get_object_position() & (0x0032 & 0x0004));
+			var0004 = get_object_position() & (0x0032 & 0x0004);
 			var0005 = var0004->find_nearby(0x036C, 0x0014, 0x0000);
 			if (var0005) {
 				var0002 = var0005->get_object_position();
@@ -102971,7 +102971,7 @@ void Func08C9 0x8C9 () {
 			var0006 = 0x0000;
 			if (var0004) {
 				for (var0009 in var0004 with var0007 to var0008) {
-					var000A = (var0009->get_item_frame() + 0x0001);
+					var000A = var0009->get_item_frame() + 0x0001;
 					var0006 += 0x0001;
 					do {
 						if ((var0002 == 0x0013) && ((var000A == 0x0002) || (var000A == 0x0003))) {
@@ -103106,7 +103106,7 @@ void Func08CA 0x8CA () {
 			var0000 = find_nearby(0x0103, 0x0005, 0x0008);
 			if (var0000) {
 				remove_item();
-				var0002 = (var0000->get_object_position() & [0xFE99, 0x0015]);
+				var0002 = var0000->get_object_position() & [0xFE99, 0x0015];
 				var0003 = var0002->find_nearby(0x0190, 0x0005, 0x0000);
 				if (var0003) {
 					var0000->clear_item_say();
@@ -103241,9 +103241,9 @@ void Func08CA 0x8CA () {
 	if (event == 0x000A) {
 		if (get_item_shape() == 0x0103) {
 			var0000 = find_nearby(0x0103, 0x001E, 0x0008);
-			var0002 = (get_object_position() & (0x00A3 & 0xFE99));
+			var0002 = get_object_position() & (0x00A3 & 0xFE99);
 			var000B = var0002->find_nearby(0x0313, 0x001E, 0x0000);
-			var0002 = (get_object_position() & (0x0098 & 0xFE99));
+			var0002 = get_object_position() & (0x0098 & 0xFE99);
 			var000C = var0002->find_nearby(0x0313, 0x001E, 0x0000);
 			if (var0000 && (var000B && var000C)) {
 				var0000->clear_item_say();
@@ -103379,7 +103379,7 @@ void Func08CD 0x8CD () {
 		0xFF5D->set_schedule_type(0x000F);
 		set_schedule_type(0x000F);
 		var0001 = find_nearby(0x017D, 0x0000, 0x0008);
-		var0002 = (var0001->get_object_position() & (0xFE99 & 0x0000));
+		var0002 = var0001->get_object_position() & (0xFE99 & 0x0000);
 		var0003 = var0002->find_nearby(0x0113, 0x0000, 0x0000);
 		if (var0001) {
 			var0004 = script var0001 {
@@ -103405,7 +103405,7 @@ void Func08CD 0x8CD () {
 	}
 	if (event == 0x0002) {
 		if ((get_item_shape() == 0x02D1) || (get_item_shape() == 0x03DD)) {
-			var0002 = (0xFE9C->get_object_position() & (0x0004 & 0x0007));
+			var0002 = 0xFE9C->get_object_position() & (0x0004 & 0x0007);
 			var0005 = var0002->find_nearby(0x0113, 0x0028, 0x0010);
 			if (var0005) {
 				0xFE9C->set_item_flag(0x0010);
@@ -103532,7 +103532,7 @@ void Func08D0 0x8D0 () {
 	if (!((var0000[0x0001] == 0x09BF) && ((var0000[0x0002] == 0x06EA) && (var0000[0x0003] == 0x0000)))) {
 		abort;
 	}
-	var0001 = (get_object_position() & [0xFE99, 0x0006]);
+	var0001 = get_object_position() & [0xFE99, 0x0006];
 	var0002 = var0001->find_nearby(0x0113, 0x001E, 0x0010);
 	for (var0005 in var0002 with var0003 to var0004) {
 		var0000 = var0005->get_object_position();
@@ -103631,14 +103631,14 @@ void Func08D2 0x8D2 () {
 	var var0006;
 	var var0007;
 
-	var0000 = (0xFF27->get_object_position() & (0xFE99 & 0x0007));
+	var0000 = 0xFF27->get_object_position() & (0xFE99 & 0x0007);
 	var0001 = var0000->find_nearby(0x0113, 0x0005, 0x0010);
 	var0001 &= 0xFF27->find_nearby(0x01B8, 0x0005, 0x0080);
 	for (var0004 in var0001 with var0002 to var0003) {
 		var0004->remove_item();
 	}
-	var0005[0x0001] = (var0000[0x0001] + 0x0001);
-	var0005[0x0002] = (var0000[0x0002] + 0x0001);
+	var0005[0x0001] = var0000[0x0001] + 0x0001;
+	var0005[0x0002] = var0000[0x0002] + 0x0001;
 	var0005[0x0003] = 0x0000;
 	0xFF27->move_object(var0005);
 	var0006 = UI_direction_from(0xFF27, 0xFE9C);
@@ -103666,8 +103666,8 @@ void Func08D3 0x8D3 () {
 	var var0005;
 
 	var0000 = 0xFE9C->get_object_position();
-	var0000[0x0001] -= (var0000[0x0003] / 0x0002);
-	var0000[0x0002] -= (var0000[0x0003] / 0x0002);
+	var0000[0x0001] -= var0000[0x0003] / 0x0002;
+	var0000[0x0002] -= var0000[0x0003] / 0x0002;
 	UI_sprite_effect(0x0011, (var0000[0x0001] - 0x0001), (var0000[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_sprite_effect(0x0001, (var0000[0x0001] - 0x0001), (var0000[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_lightning();
@@ -103774,7 +103774,7 @@ var Func08D5 0x8D5 () {
 	var var0007;
 	var var0008;
 
-	var0000 = (get_object_position() & [0x009B, 0x0000]);
+	var0000 = get_object_position() & [0x009B, 0x0000];
 	if (var0000->find_nearby(0x03A8, 0x000A, 0x0000)) {
 		var0001 = find_nearby(0x0210, 0x001E, 0x0008);
 		var0002 = 0x0000;
@@ -103806,7 +103806,7 @@ var Func08D6 0x8D6 () {
 	var var0006;
 
 	var0000 = 0x0000;
-	var0001 = (get_object_position() & [0x009F, 0x0000]);
+	var0001 = get_object_position() & [0x009F, 0x0000];
 	if (var0001->find_nearby(0x03A7, 0x000A, 0x0000)) {
 		var0002 = find_nearby(0x0174, 0x001E, 0x0008);
 		for (var0005 in var0002 with var0003 to var0004) {
@@ -103836,7 +103836,7 @@ void Func08D7 0x8D7 () {
 	var var0007;
 
 	if (event == 0x0003) {
-		var0000 = (get_object_position() & (0xFE99 & 0x0012));
+		var0000 = get_object_position() & (0xFE99 & 0x0012);
 		var0001 = var0000->find_nearby(0x0179, 0x0006, 0x0000);
 		if (var0001) {
 			var0002 = find_nearby(0x032B, 0x000A, 0x0008);
@@ -103914,7 +103914,7 @@ void Func08D9 0x8D9 (var var0000) {
 		var0003 = 0x0002;
 	}
 	if (var0001 == 0x0001) {
-		var0004 = ("@Pardon, but the door is already open. " + "Is it not rather futile to lock it now?@");
+		var0004 = "@Pardon, but the door is already open. " + "Is it not rather futile to lock it now?@";
 		Func094A(var0004);
 	}
 	if (var0001 == 0x0002) {
@@ -103922,7 +103922,7 @@ void Func08D9 0x8D9 (var var0000) {
 	}
 	if (var0001 == 0x0003) {
 		if (UI_die_roll(0x0001, 0x000A) == 0x0001) {
-			var0004 = ("@Pardon, but the door appears magically locked. " + "Is it not rather difficult to unlock it with a key?@");
+			var0004 = "@Pardon, but the door appears magically locked. " + "Is it not rather difficult to unlock it with a key?@";
 			Func094A(var0004);
 		}
 	}
@@ -104064,7 +104064,7 @@ void Func08DA 0x8DA (var var0000) {
 			Func0924(item, 0xFE99);
 		}
 		if ((var0002 == 0x0047) || ((var0002 == 0x0048) || (var0002 == 0x0049))) {
-			var0001 = ("@It's stuck...@" & "@I cannot budge it!@");
+			var0001 = "@It's stuck...@" & "@I cannot budge it!@";
 			Func094F(0xFE9C, var0001);
 			var0001 = false;
 			abort;
@@ -104104,7 +104104,7 @@ void Func08DA 0x8DA (var var0000) {
 			var0001 = true;
 		}
 		if (((var0002 >= 0x0001) && (var0002 <= 0x0005)) || (var0002 == 0x0012)) {
-			var0016 = (var0000->find_nearby(0x034D, 0x0050, 0x0000) & var0000->find_nearby(0x033C, 0x0050, 0x0000));
+			var0016 = var0000->find_nearby(0x034D, 0x0050, 0x0000) & var0000->find_nearby(0x033C, 0x0050, 0x0000);
 			for (var0019 in var0016 with var0017 to var0018) {
 				if (var0002 == var0019->get_item_quality()) {
 					if (var0019->get_item_shape() == 0x034D) {
@@ -104116,7 +104116,7 @@ void Func08DA 0x8DA (var var0000) {
 			}
 		}
 		if ((var0002 >= 0x00F0) && (var0002 <= 0x00FA)) {
-			var0016 = (var0000->find_nearby(0x034D, 0x0064, 0x0000) & var0000->find_nearby(0x033C, 0x0064, 0x0000));
+			var0016 = var0000->find_nearby(0x034D, 0x0064, 0x0000) & var0000->find_nearby(0x033C, 0x0064, 0x0000);
 			for (var0019 in var0016 with var001A to var001B) {
 				if (var0002 == var0019->get_item_quality()) {
 					if (var0019->get_item_shape() == 0x034D) {
@@ -104944,15 +104944,15 @@ var Func08F1 0x8F1 () {
 
 	var0000 = [0x03A3, 0x0A46, 0x0000];
 	var0001 = 0xFF6A->get_object_position();
-	var0002 = (var0000[0x0001] - var0001[0x0001]);
+	var0002 = var0000[0x0001] - var0001[0x0001];
 	if (var0002 < 0x0000) {
 		var0002 *= 0xFFFF;
 	}
-	var0003 = (var0000[0x0002] - var0001[0x0002]);
+	var0003 = var0000[0x0002] - var0001[0x0002];
 	if (var0003 < 0x0000) {
 		var0003 *= 0xFFFF;
 	}
-	var0004 = (var0002 + var0003);
+	var0004 = var0002 + var0003;
 	return var0004;
 }
 
@@ -104966,7 +104966,7 @@ void Func08F2 0x8F2 (var var0000) {
 	var0002 = 0x0000;
 	while (var0002 < 0x0007) {
 		if (var0002 > 0x0003) {
-			var0003 = (var0002 - 0x0003);
+			var0003 = var0002 - 0x0003;
 			var0001[var0002]->move_object([(var0000[0x0001] - var0003), (var0000[0x0002] + var0003), var0000[0x0003]]);
 		} else {
 			var0001[var0002]->move_object([(var0000[0x0001] + var0002), (var0000[0x0002] + var0002), var0000[0x0003]]);
@@ -105024,8 +105024,8 @@ void Func08F5 0x8F5 (var var0000) {
 	say("\"Stand thou in awe of my true power... Let there be PEACE!\"");
 	UI_remove_npc_face0();
 	var0001 = var0000->get_object_position();
-	var0001[0x0001] -= (var0001[0x0003] / 0x0002);
-	var0001[0x0002] -= (var0001[0x0003] / 0x0002);
+	var0001[0x0001] -= var0001[0x0003] / 0x0002;
+	var0001[0x0002] -= var0001[0x0003] / 0x0002;
 	UI_sprite_effect(0x001A, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_sprite_effect(0x0007, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_sprite_effect(0x0007, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -105038,7 +105038,7 @@ void Func08F5 0x8F5 (var var0000) {
 		var0006->set_oppressor(0x0000);
 		var0007 = Func095C(var0006, 0x0000);
 		var0008 = Func095C(var0006, 0x0003);
-		var0009 = (var0007 - var0008);
+		var0009 = var0007 - var0008;
 		Func095E(var0006, 0x0003, var0009);
 	}
 	var000A = Func08B6();
@@ -105053,7 +105053,7 @@ void Func08F5 0x8F5 (var var0000) {
 		var0005->set_oppressor(0x0000);
 		var0007 = Func095C(var0005, 0x0000);
 		var0008 = Func095C(var0005, 0x0003);
-		var0009 = (var0007 - var0008);
+		var0009 = var0007 - var0008;
 		Func095E(var0005, 0x0003, var0009);
 	}
 }
@@ -105077,12 +105077,12 @@ void Func08F6 0x8F6 () {
 	var0003 = Func09A0(0x0002, 0x0004);
 	var0004 = Func09A0(0x0000, 0x0004);
 	var0005 = 0xFE9C->get_object_position();
-	var0006 = (var0005[0x0001] / 0x0100);
-	var0007 = (var0005[0x0001] - (var0006 * 0x0100));
+	var0006 = var0005[0x0001] / 0x0100;
+	var0007 = var0005[0x0001] - (var0006 * 0x0100);
 	var0008 = var0000->set_item_quality(var0006);
 	var0008 = var0001->set_item_quality(var0007);
-	var0006 = (var0005[0x0002] / 0x0100);
-	var0007 = (var0005[0x0002] - (var0006 * 0x0100));
+	var0006 = var0005[0x0002] / 0x0100;
+	var0007 = var0005[0x0002] - (var0006 * 0x0100);
 	var0008 = var0002->set_item_quality(var0006);
 	var0008 = var0003->set_item_quality(var0007);
 	var0008 = var0004->set_item_quality(var0005[0x0003]);
@@ -105108,10 +105108,10 @@ var Func08F7 0x8F7 () {
 	var0005 = Func09A0(0x0000, 0x0004);
 	var0006 = var0001->get_item_quality();
 	var0007 = var0002->get_item_quality();
-	var0000[0x0001] = ((var0006 * 0x0100) + var0007);
+	var0000[0x0001] = (var0006 * 0x0100) + var0007;
 	var0006 = var0003->get_item_quality();
 	var0007 = var0004->get_item_quality();
-	var0000[0x0002] = ((var0006 * 0x0100) + var0007);
+	var0000[0x0002] = (var0006 * 0x0100) + var0007;
 	var0000[0x0003] = var0005->get_item_quality();
 	return var0000;
 }
@@ -105377,7 +105377,7 @@ void Func08FE 0x8FE () {
 				var0006->run_schedule();
 				var0006->set_schedule_type(0x000F);
 				var000B = Func095C(var0006, 0x0009);
-				var000C = (0x001F - var000B);
+				var000C = 0x001F - var000B;
 				Func095E(var0006, 0x0009, var000C);
 				if (var0006 == 0xFFC0) {
 					gflags[0x0047] = true;
@@ -105417,7 +105417,7 @@ void Func08FF 0x8FF () {
 	if (gflags[0x00D7]) {
 		abort;
 	}
-	var0000 = (((((((((((((((0xFFEA->get_item_flag(0x001C) + 0xFFE6->get_item_flag(0x001C)) + 0xFFEF->get_item_flag(0x001C)) + 0xFFDF->get_item_flag(0x001C)) + 0xFFF2->get_item_flag(0x001C)) + 0xFFE8->get_item_flag(0x001C)) + 0xFFF1->get_item_flag(0x001C)) + 0xFFE0->get_item_flag(0x001C)) + 0xFFE9->get_item_flag(0x001C)) + 0xFFE2->get_item_flag(0x001C)) + 0xFFE4->get_item_flag(0x001C)) + 0xFFF3->get_item_flag(0x001C)) + 0xFFE5->get_item_flag(0x001C)) + 0xFFFC->get_item_flag(0x001C)) + 0xFFED->get_item_flag(0x001C)) + gflags[0x00D6]);
+	var0000 = ((((((((((((((0xFFEA->get_item_flag(0x001C) + 0xFFE6->get_item_flag(0x001C)) + 0xFFEF->get_item_flag(0x001C)) + 0xFFDF->get_item_flag(0x001C)) + 0xFFF2->get_item_flag(0x001C)) + 0xFFE8->get_item_flag(0x001C)) + 0xFFF1->get_item_flag(0x001C)) + 0xFFE0->get_item_flag(0x001C)) + 0xFFE9->get_item_flag(0x001C)) + 0xFFE2->get_item_flag(0x001C)) + 0xFFE4->get_item_flag(0x001C)) + 0xFFF3->get_item_flag(0x001C)) + 0xFFE5->get_item_flag(0x001C)) + 0xFFFC->get_item_flag(0x001C)) + 0xFFED->get_item_flag(0x001C)) + gflags[0x00D6];
 	if ((var0000 >= 0x0003) && (!gflags[0x00D7])) {
 		var0001 = 0xFFE7->approach_avatar(0x005A, 0x0028);
 		if (var0001) {
@@ -105638,7 +105638,7 @@ void Func0907 0x907 (var var0000, var var0001) {
 	var var0003;
 
 	var0002 = var0000->get_item_frame();
-	var0003 = (var0002 % 0x0004);
+	var0003 = var0002 % 0x0004;
 	var0000->set_item_frame((var0002 - var0003) + var0001);
 	if (var0001 == 0x0002) {
 		var0000->item_say("Click");
@@ -105770,13 +105770,13 @@ void Func090D 0x90D (var var0000, var var0001, var var0002, var var0003, var var
 	if ((var0001 < 0x0000) && (UI_get_array_size(var0001) == 0x0001)) {
 		var0008 = var0003;
 		while (var0008 <= var0007[0x0003]) {
-			var0009[0x0003] = (var0007[0x0003] + var0008);
-			var000A = (0xFFFF * var0001);
+			var0009[0x0003] = var0007[0x0003] + var0008;
+			var000A = 0xFFFF * var0001;
 			while (var000A >= var0001) {
-				var0009[0x0001] = (var0007[0x0001] + var000A);
-				var000B = (0xFFFF * var0002);
+				var0009[0x0001] = var0007[0x0001] + var000A;
+				var000B = 0xFFFF * var0002;
 				while (var000B >= var0002) {
-					var0009[0x0002] = (var0007[0x0002] + var000B);
+					var0009[0x0002] = var0007[0x0002] + var000B;
 					if (UI_path_run_usecode(var0009, var0004, var0005, var0006)) {
 						return;
 					}
@@ -105792,12 +105792,12 @@ void Func090D 0x90D (var var0000, var var0001, var var0002, var var0003, var var
 			var000C += 0x0001;
 			var000B = var0002[var000C];
 			var0008 = var0003[var000C];
-			var0009[0x0001] = (var0007[0x0001] + var000A);
-			var0009[0x0002] = (var0007[0x0002] + var000B);
+			var0009[0x0001] = var0007[0x0001] + var000A;
+			var0009[0x0002] = var0007[0x0002] + var000B;
 			if (var0003 < 0xFFFF) {
 				var0008 = 0x0000;
 				while (var0008 >= var0003) {
-					var0009[0x0003] = (var0007[0x0003] + var0008);
+					var0009[0x0003] = var0007[0x0003] + var0008;
 					if (UI_path_run_usecode(var0009, var0004, var0005, var0006)) {
 						return;
 					}
@@ -105807,7 +105807,7 @@ void Func090D 0x90D (var var0000, var var0001, var var0002, var var0003, var var
 				if (var0003 == 0xFFFF) {
 					var0009[0x0003] = var0007[0x0003];
 				} else {
-					var0009[0x0003] = (var0007[0x0003] + var0008);
+					var0009[0x0003] = var0007[0x0003] + var0008;
 				}
 				if (UI_path_run_usecode(var0009, var0004, var0005, var0006)) {
 					return;
@@ -105840,13 +105840,13 @@ var Func090F 0x90F (var var0000, var var0001, var var0002, var var0003) {
 	if ((var0001 < 0x0000) && (UI_get_array_size(var0001) == 0x0001)) {
 		var0005 = var0003;
 		while (var0005 <= var0004[0x0003]) {
-			var0006[0x0003] = (var0004[0x0003] + var0005);
-			var0007 = (0xFFFF * var0001);
+			var0006[0x0003] = var0004[0x0003] + var0005;
+			var0007 = 0xFFFF * var0001;
 			while (var0007 >= var0001) {
-				var0006[0x0001] = (var0004[0x0001] + var0007);
-				var0008 = (0xFFFF * var0002);
+				var0006[0x0001] = var0004[0x0001] + var0007;
+				var0008 = 0xFFFF * var0002;
 				while (var0008 >= var0002) {
-					var0006[0x0002] = (var0004[0x0002] + var0008);
+					var0006[0x0002] = var0004[0x0002] + var0008;
 					if (UI_can_avatar_reach_pos(var0006)) {
 						return var0006;
 					}
@@ -105862,12 +105862,12 @@ var Func090F 0x90F (var var0000, var var0001, var var0002, var var0003) {
 			var0009 += 0x0001;
 			var0008 = var0002[var0009];
 			var0005 = var0003[var0009];
-			var0006[0x0001] = (var0004[0x0001] + var0007);
-			var0006[0x0002] = (var0004[0x0002] + var0008);
+			var0006[0x0001] = var0004[0x0001] + var0007;
+			var0006[0x0002] = var0004[0x0002] + var0008;
 			if (var0003 < 0xFFFF) {
 				var0005 = 0x0000;
 				while (var0005 >= var0003) {
-					var0006[0x0003] = (var0004[0x0003] + var0005);
+					var0006[0x0003] = var0004[0x0003] + var0005;
 					if (UI_can_avatar_reach_pos(var0006)) {
 						return var0006;
 					}
@@ -105877,7 +105877,7 @@ var Func090F 0x90F (var var0000, var var0001, var var0002, var var0003) {
 				if (var0003 == 0xFFFF) {
 					var0006[0x0003] = var0004[0x0003];
 				} else {
-					var0006[0x0003] = (var0004[0x0003] + var0005);
+					var0006[0x0003] = var0004[0x0003] + var0005;
 				}
 				if (UI_can_avatar_reach_pos(var0006)) {
 					return var0006;
@@ -106322,8 +106322,8 @@ var Func0920 0x920 () {
 	var var0010;
 	var var0011;
 
-	var0000 = (0xFE9C->find_nearby(0x0114, 0x0019, 0x0000) & 0xFE9C->find_nearby(0x0115, 0x0019, 0x0000));
-	var0001 = (0xFE9C->find_nearby(0x010F, 0x0019, 0x0000) & 0xFE9C->find_nearby(0x0110, 0x0019, 0x0000));
+	var0000 = 0xFE9C->find_nearby(0x0114, 0x0019, 0x0000) & 0xFE9C->find_nearby(0x0115, 0x0019, 0x0000);
+	var0001 = 0xFE9C->find_nearby(0x010F, 0x0019, 0x0000) & 0xFE9C->find_nearby(0x0110, 0x0019, 0x0000);
 	for (var0004 in var0001 with var0002 to var0003) {
 		var0005 = var0004->get_lift();
 		if (var0005 == 0x0000) {
@@ -106617,7 +106617,7 @@ void Func0926 0x926 (var var0000) {
 	}
 	if (var0000 == 0x0018) {
 		var0001 = [0xFF55, 0xFF54, 0xFF53, 0xFF52, 0xFF51];
-		var0002 = ("@Thank thee!@" & ("@Bless thee!@" & ("@We are saved!@" & "@Praise the Hero!@")));
+		var0002 = "@Thank thee!@" & ("@Bless thee!@" & ("@We are saved!@" & "@Praise the Hero!@"));
 		for (var0005 in var0001 with var0003 to var0004) {
 			var0005->clear_item_say();
 			Func097F(var0005, var0002[UI_get_random(UI_get_array_size(var0002))], UI_get_random(0x000A));
@@ -106855,7 +106855,7 @@ void Func092B 0x92B () {
 	var0001 = Func092C(0x0002);
 	var0002 = Func092C(0x0003);
 	var0003 = 0x0001;
-	var0004 = (UI_get_array_size(var0000) + 0x0001);
+	var0004 = UI_get_array_size(var0000) + 0x0001;
 	while (var0003 < var0004) {
 		if (Func097D(0xFE9B, 0x0001, var0000[var0003], var0001[var0003], var0002[var0003])) {
 			if (var0000[var0003] == 0x0108) {
@@ -107244,7 +107244,7 @@ void Func0931 0x931 (var var0000) {
 	var0012 = Func09A0(0x0001, 0x0002);
 	var0013 = var0012->get_item_quality();
 	if (var0013) {
-		var0014 = (var0012->get_item_quality() - 0xFE9C->get_npc_prop(0x0003));
+		var0014 = var0012->get_item_quality() - 0xFE9C->get_npc_prop(0x0003);
 		var0001 = 0xFE9C->set_npc_prop(0x0003, var0014);
 		var0001 = var0012->set_item_quality(0x0000);
 		var0002 = 0xFE9C->find_nearby(0xFFFF, 0x002D, 0x0004);
@@ -107255,7 +107255,7 @@ void Func0931 0x931 (var var0000) {
 			}
 		}
 	} else {
-		var0014 = (var0000->get_npc_id() - var0000->get_npc_prop(0x0003));
+		var0014 = var0000->get_npc_id() - var0000->get_npc_prop(0x0003);
 		var0001 = var0000->set_npc_prop(0x0003, var0014);
 		var0000->set_npc_id(0x0000);
 		var0000->add_to_party();
@@ -107603,7 +107603,7 @@ void Func0936 0x936 (var var0000, var var0001) {
 					say("\"Nice show, ",
 						var0002,
 						", thou hast beaten us all! Where didst thou learn to fight like that?\"");
-					var0002 = (("@Hail, " + var0002) + "!@");
+					var0002 = ("@Hail, " + var0002) + "!@";
 					var0007 = var0000->find_nearby(0xFFFF, 0x001E, 0x0008);
 					for (var0001 in var0007 with var0008 to var0009) {
 						var0001->clear_item_say();
@@ -108061,7 +108061,7 @@ void Func093A 0x93A (var var0000) {
 				wait 3;
 				say "@This trial is now in recess!@";
 			};
-			var0004 = ("" & ("@What a farce!@" & ("@What shall I do?@" & "@Woe is me...@")));
+			var0004 = "" & ("@What a farce!@" & ("@What shall I do?@" & "@Woe is me...@"));
 			Func094F(0xFE9C, var0004);
 			Func08AC(true)->remove_npc();
 			0xFE9C->si_path_run_usecode([0x0407, 0x068D, 0x0000], 0x000D, 0xFE9C->get_npc_object(), Func07F8, false);
@@ -108085,7 +108085,7 @@ void Func093A 0x93A (var var0000) {
 			}
 			0xFE9C->clear_item_flag(0x0010);
 			UI_init_conversation();
-			var0003 = (find_nearby(0x01B0, 0x000A, 0x0000) & find_nearby(0x010E, 0x000A, 0x0000));
+			var0003 = find_nearby(0x01B0, 0x000A, 0x0000) & find_nearby(0x010E, 0x000A, 0x0000);
 			for (var0008 in var0003 with var0009 to var000A) {
 				if (var0008->get_item_quality() == 0x00B3) {
 					Func0907(var0008, 0x0002);
@@ -108114,7 +108114,7 @@ void Func093A 0x93A (var var0000) {
 			};
 			var0008 = UI_get_party_list2();
 			for (var0004 in var0008 with var000B to var000C) {
-				var0003 = (0x0007 + UI_get_random(0x0003));
+				var0003 = 0x0007 + UI_get_random(0x0003);
 				var0003 = script var0004 after var0003 ticks {
 					nohalt;
 					face north;
@@ -108188,7 +108188,7 @@ void Func093A 0x93A (var var0000) {
 				Func097F(Func08AC(true), "@What shall we do?@", 0x0001);
 				Func097F(0xFFC9, "@Oh, my...@", 0x0005);
 				UI_end_conversation();
-				var0003 = (0xFE9C->get_object_position() & (0x0001 & 0x0006));
+				var0003 = 0xFE9C->get_object_position() & (0x0001 & 0x0006);
 				var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
 				if (var0003) {
 					var0005 = var0003->get_object_position();
@@ -108239,7 +108239,7 @@ void Func093A 0x93A (var var0000) {
 					face east;
 				};
 			}
-			var0003 = (0xFE9C->get_object_position() & (0x0001 & 0x0006));
+			var0003 = 0xFE9C->get_object_position() & (0x0001 & 0x0006);
 			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
 			if (var0003) {
 				var0005 = var0003->get_object_position();
@@ -108277,7 +108277,7 @@ void Func093A 0x93A (var var0000) {
 				wait 3;
 				face north;
 			};
-			var0003 = (0xFE9C->get_object_position() & (0x0001 & 0x0006));
+			var0003 = 0xFE9C->get_object_position() & (0x0001 & 0x0006);
 			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
 			if (var0003) {
 				var0005 = var0003->get_object_position();
@@ -108292,7 +108292,7 @@ void Func093A 0x93A (var var0000) {
 			abort;
 		}
 		if (var0000 == 0x005B) {
-			var0003 = (0xFE9C->get_object_position() & (0x0001 & 0x0006));
+			var0003 = 0xFE9C->get_object_position() & (0x0001 & 0x0006);
 			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
 			if (var0003) {
 				var0005 = var0003->get_object_position();
@@ -108349,7 +108349,7 @@ void Func093A 0x93A (var var0000) {
 			};
 			var0008 = UI_get_party_list2();
 			for (var0004 in var0008 with var0017 to var0018) {
-				var0003 = (0x0007 + UI_get_random(0x0003));
+				var0003 = 0x0007 + UI_get_random(0x0003);
 				var0003 = script var0004 after var0003 ticks {
 					nohalt;
 					face north;
@@ -108406,7 +108406,7 @@ void Func093A 0x93A (var var0000) {
 			}
 			UI_end_conversation();
 			Func097F(0xFFCB, "@Come with me...@", 0x0000);
-			var0003 = (0xFE9C->get_object_position() & (0x0001 & 0x0006));
+			var0003 = 0xFE9C->get_object_position() & (0x0001 & 0x0006);
 			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
 			if (var0003) {
 				var0005 = var0003->get_object_position();
@@ -108418,7 +108418,7 @@ void Func093A 0x93A (var var0000) {
 		if (var0000 == 0x005F) {
 			0xFFCB->move_object([0x0000, 0x0000, 0x0000]);
 			0xFFCB->set_schedule_type(0x000F);
-			var0003 = (0xFE9C->get_object_position() & (0x0001 & 0x0006));
+			var0003 = 0xFE9C->get_object_position() & (0x0001 & 0x0006);
 			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
 			if (var0003) {
 				var0005 = var0003->get_object_position();
@@ -108438,7 +108438,7 @@ void Func093A 0x93A (var var0000) {
 					call Func07F8;
 				};
 			} else {
-				var0003 = (0xFE9C->get_object_position() & (0x0001 & 0x0006));
+				var0003 = 0xFE9C->get_object_position() & (0x0001 & 0x0006);
 				var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
 				if (var0003) {
 					var0005 = var0003->get_object_position();
@@ -108468,7 +108468,7 @@ void Func093A 0x93A (var var0000) {
 			var0003 = Func099B(var0003, 0x0001, 0x0289, 0xFE99, 0x0003, 0x0000, true);
 			Func095D(0x0190);
 			if (gflags[0x016F]) {
-				var0003 = (0xFE9C->get_object_position() & (0x0001 & 0x0006));
+				var0003 = 0xFE9C->get_object_position() & (0x0001 & 0x0006);
 				var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
 				if (var0003) {
 					var0005 = var0003->get_object_position();
@@ -108516,7 +108516,7 @@ void Func093A 0x93A (var var0000) {
 					face east;
 				};
 			}
-			var0003 = (0xFE9C->get_object_position() & (0x0001 & 0x0006));
+			var0003 = 0xFE9C->get_object_position() & (0x0001 & 0x0006);
 			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
 			if (var0003) {
 				var0005 = var0003->get_object_position();
@@ -108576,7 +108576,7 @@ void Func093A 0x93A (var var0000) {
 				var0003,
 				".\"");
 			UI_end_conversation();
-			var0003 = (0xFE9C->get_object_position() & (0x0001 & 0x0006));
+			var0003 = 0xFE9C->get_object_position() & (0x0001 & 0x0006);
 			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
 			if (var0003) {
 				var0004 = var0003->find_nearby(0x017D, 0x0003, 0x0008);
@@ -108611,7 +108611,7 @@ void Func093A 0x93A (var var0000) {
 					var0008->remove_item();
 				}
 			}
-			var0003 = (find_nearby(0x01B1, 0x0032, 0x0000) & find_nearby(0x0178, 0x0032, 0x0000));
+			var0003 = find_nearby(0x01B1, 0x0032, 0x0000) & find_nearby(0x0178, 0x0032, 0x0000);
 			for (var0008 in var0003 with var0027 to var0028) {
 				if (var0008->get_item_quality() == 0x0028) {
 					Func0907(var0008, 0x0000);
@@ -108626,7 +108626,7 @@ void Func093A 0x93A (var var0000) {
 			abort;
 		}
 		if (var0000 == 0x0068) {
-			var0003 = (0xFE9C->get_object_position() & (0x0001 & 0x0006));
+			var0003 = 0xFE9C->get_object_position() & (0x0001 & 0x0006);
 			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
 			if (var0003) {
 				var0005 = var0003->get_object_position();
@@ -108903,7 +108903,7 @@ void Func093B 0x93B (var var0000) {
 				wait 2;
 				actor frame sitting;
 			};
-			var0004 = (0xFFCD->get_object_position() & (0x0003 & 0x0006));
+			var0004 = 0xFFCD->get_object_position() & (0x0003 & 0x0006);
 			var0005 = var0004->find_nearby(0x0113, 0x001E, 0x0010);
 			if (var0005) {
 				var0006 = var0005->get_object_position();
@@ -109140,7 +109140,7 @@ void Func093B 0x93B (var var0000) {
 				sfx 30;
 			};
 			var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x0057);
-			var0004 = (0xFFCD->get_object_position() & (0x0006 & 0x0006));
+			var0004 = 0xFFCD->get_object_position() & (0x0006 & 0x0006);
 			var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
 			if (var0005) {
 				var0006 = var0005->get_object_position();
@@ -109168,7 +109168,7 @@ void Func093B 0x93B (var var0000) {
 		}
 		if (gflags[0x0172] && (!var0007)) {
 			UI_play_music(0x0013, Func09A0(0x0005, 0x0001));
-			var000B = (((((((((((gflags[0x0176] + gflags[0x0177]) + gflags[0x0178]) + gflags[0x0179]) + gflags[0x017A]) + gflags[0x017C]) + gflags[0x017D]) + gflags[0x017E]) + gflags[0x017F]) + gflags[0x0180]) + gflags[0x0181]) + gflags[0x0182]);
+			var000B = ((((((((((gflags[0x0176] + gflags[0x0177]) + gflags[0x0178]) + gflags[0x0179]) + gflags[0x017A]) + gflags[0x017C]) + gflags[0x017D]) + gflags[0x017E]) + gflags[0x017F]) + gflags[0x0180]) + gflags[0x0181]) + gflags[0x0182];
 			if (var000B == 0x0000) {
 				say("\"Thou hast not even called one person... No doubt thy trust in the Oracle's perception will be rewarded.\"");
 			}
@@ -109195,7 +109195,7 @@ void Func093B 0x93B (var var0000) {
 		}
 	}
 	if (var0000 == 0x001B) {
-		var0004 = (get_object_position() & (0x0001 & 0x0006));
+		var0004 = get_object_position() & (0x0001 & 0x0006);
 		var0005 = var0004->find_nearby(0x0113, 0x0014, 0x0010);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
@@ -109300,7 +109300,7 @@ void Func093C 0x93C (var var0000) {
 	var var0003;
 
 	var0001 = [", come forward!@", ", stand before the Oracle!@", ", step forward!@", ", please come forward.@", ", come on down!@", "...@"];
-	var0002 = (("@" + var0000->get_npc_name()) + var0001[UI_get_random(UI_get_array_size(var0001))]);
+	var0002 = ("@" + var0000->get_npc_name()) + var0001[UI_get_random(UI_get_array_size(var0001))];
 	var0003 = script 0xFFC3 {
 		actor frame bowing;
 		wait 2;
@@ -109394,9 +109394,9 @@ var Func0940 0x940 (var var0000, var var0001) {
 	var var0002;
 
 	if (var0001 > 0x0000) {
-		var0002 = ((var0001 * 0x0002) + 0x0001);
-		var0000[0x0001] += ((UI_get_random(var0002) - 0x0001) - var0001);
-		var0000[0x0002] += ((UI_get_random(var0002) - 0x0001) - var0001);
+		var0002 = (var0001 * 0x0002) + 0x0001;
+		var0000[0x0001] += (UI_get_random(var0002) - 0x0001) - var0001;
+		var0000[0x0002] += (UI_get_random(var0002) - 0x0001) - var0001;
 	}
 	return var0000;
 }
@@ -109407,7 +109407,7 @@ var Func0941 0x941 (var var0000) {
 	var var0003;
 
 	var0001 = var0000->get_npc_object();
-	var0002 = (var0001->get_npc_prop(0x0008) / 0x0064);
+	var0002 = var0001->get_npc_prop(0x0008) / 0x0064;
 	var0003 = 0x0001;
 	while (var0002 > 0x0000) {
 		var0003 += 0x0001;
@@ -109445,7 +109445,7 @@ var Func0943 0x943 (var var0000, var var0001, var var0002, var var0003, var var0
 		var0009 = UI_input_numeric_value(var0006, var0005, 0x0001, 0x0001);
 	}
 	if (var0002 > 0x0001) {
-		var000A = (var0002 * var0009);
+		var000A = var0002 * var0009;
 	} else {
 		var000A = var0009;
 	}
@@ -109698,8 +109698,8 @@ var Func0958 0x958 () {
 	var var0002;
 	var var0003;
 
-	var0000 = (Func098E() & 0x0000);
-	var0001 = (var0000->get_npc_name() & "Nobody");
+	var0000 = Func098E() & 0x0000;
+	var0001 = var0000->get_npc_name() & "Nobody";
 	var0002 = Func0957([var0001]);
 	var0003 = var0000[var0002];
 	if (var0003 == 0x0000) {
@@ -109716,8 +109716,8 @@ var Func0959 0x959 () {
 	var var0002;
 	var var0003;
 
-	var0000 = (UI_get_party_list() & 0x0000);
-	var0001 = (var0000->get_npc_name() & "Nobody");
+	var0000 = UI_get_party_list() & 0x0000;
+	var0001 = var0000->get_npc_name() & "Nobody";
 	var0002 = Func0957([var0001]);
 	var0003 = var0000[var0002];
 	if (var0003 == 0x0000) {
@@ -109734,8 +109734,8 @@ var Func095A 0x95A () {
 	var var0002;
 	var var0003;
 
-	var0000 = (UI_get_party_list2() & 0x0000);
-	var0001 = (var0000->get_npc_name() & "Nobody");
+	var0000 = UI_get_party_list2() & 0x0000;
+	var0001 = var0000->get_npc_name() & "Nobody";
 	var0002 = Func0957([var0001]);
 	var0003 = var0000[var0002];
 	if (var0003 == 0x0000) {
@@ -109817,9 +109817,9 @@ void Func0961 0x961 (var var0000, var var0001) {
 	while (var0002 < var0001) {
 		var0003 = Func095C(var0000, 0x0001);
 		Func095E(var0000, 0x0001, 0x0001);
-		var0004 = (var0003 + 0x0001);
+		var0004 = var0003 + 0x0001;
 		var0005 = Func095C(var0000, 0x0004);
-		var0006 = (((var0004 * var0005) + (var0003 - 0x0001)) / var0003);
+		var0006 = ((var0004 * var0005) + (var0003 - 0x0001)) / var0003;
 		Func095E(var0000, 0x0004, (var0006 - var0005));
 		Func095E(var0000, 0x0007, 0xFFFF);
 		var0002 += 0x0001;
@@ -109855,9 +109855,9 @@ void Func0963 0x963 (var var0000, var var0001) {
 	while (var0002 < var0001) {
 		var0003 = Func095C(var0000, 0x0001);
 		var0004 = Func095C(var0000, 0x0004);
-		var0005 = (((var0004 + var0003) + 0x0001) / 0x0002);
+		var0005 = ((var0004 + var0003) + 0x0001) / 0x0002;
 		if (var0005 >= var0003) {
-			var0005 = (var0004 + 0x0001);
+			var0005 = var0004 + 0x0001;
 			if (var0005 >= 0x001E) {
 				var0005 = 0x001E;
 			}
@@ -109881,9 +109881,9 @@ void Func0964 0x964 (var var0000, var var0001) {
 	while (var0002 < var0001) {
 		var0003 = Func095C(var0000, 0x0002);
 		var0004 = Func095C(var0000, 0x0006);
-		var0005 = (((var0004 + var0003) + 0x0001) / 0x0002);
+		var0005 = ((var0004 + var0003) + 0x0001) / 0x0002;
 		if (var0005 >= var0003) {
-			var0005 = (var0004 + 0x0001);
+			var0005 = var0004 + 0x0001;
 			if (var0005 >= 0x001E) {
 				var0005 = 0x001E;
 			}
@@ -109941,20 +109941,20 @@ void Func0966 0x966 () {
 var Func0967 0x967 (var var0000, var var0001, var var0002, var var0003, var var0004) {
 	var var0005;
 
-	var0005 = ((var0000 + var0001) + " ");
+	var0005 = (var0000 + var0001) + " ";
 	if (var0002 == 0x0001) {
 		var0005 += "sell ";
 	} else {
 		var0005 += "sells ";
 	}
-	var0005 = (((((var0005 + "for ") + var0003) + " gold") + var0004) + ".");
+	var0005 = ((((var0005 + "for ") + var0003) + " gold") + var0004) + ".";
 	return var0005;
 }
 
 var Func0968 0x968 (var var0000, var var0001, var var0002, var var0003, var var0004) {
 	var var0005;
 
-	var0005 = ((((((("To sell " + var0000) + var0001) + " for ") + var0003) + " gold") + var0004) + ".");
+	var0005 = (((((("To sell " + var0000) + var0001) + " for ") + var0003) + " gold") + var0004) + ".";
 	return var0005;
 }
 
@@ -109972,7 +109972,7 @@ void Func0969 0x969 (var var0000, var var0001, var var0002) {
 	var0004 = Func095C(var0000, 0x0003);
 	var0005 = var0000->get_npc_name();
 	if (var0003 > var0004) {
-		var0006 = (var0003 - var0004);
+		var0006 = var0003 - var0004;
 		Func095E(var0000, 0x0003, var0006);
 		var0007 = UI_remove_party_items(var0002, var0001, 0xFE99, 0xFE99, true);
 		say("\"The wounds have been healed.\"");
@@ -110235,13 +110235,13 @@ void Func0973 0x973 (var var0000) {
 		UI_play_sound_effect(0x0024);
 		var0003 = UI_die_roll(0x0001, 0x000A);
 		var0004 = var0002[var0001];
-		var0005 = (("Zounds, I wager that " + var0004) + " was right good....");
+		var0005 = ("Zounds, I wager that " + var0004) + " was right good....";
 		if (var0003 == 0x0001) {
 			var0006 = "mmmm... I wager that would cure a body's thirst.";
 		}
 		if (var0003 == 0x0002) {
 			var0007 = Func0953();
-			var0005 = (((("Why dost thou not wait until dinner to drink that " + var0004) + ", ") + var0007) + "?");
+			var0005 = ((("Why dost thou not wait until dinner to drink that " + var0004) + ", ") + var0007) + "?";
 		}
 		Func094A(var0005);
 	}
@@ -110266,7 +110266,7 @@ void Func0974 0x974 (var var0000) {
 	var var000B;
 
 	Func0945(var0000);
-	var0001 = (var0000->get_item_frame() % 0x0002);
+	var0001 = var0000->get_item_frame() % 0x0002;
 	if (var0001 == 0x0000) {
 		Func094A(["I wager that would work much better if thou wouldst put some liquid in it..."]);
 		Func094E(0xFFFF, "Perhaps some BEER for instance.");
@@ -110278,7 +110278,7 @@ void Func0974 0x974 (var var0000) {
 		for (var0007 in var0002 with var0005 to var0006) {
 			var0003 += 0x0001;
 			if (var0004 == var0003) {
-				var0008 = (("Zounds, I wager that " + var0007) + " was right good....");
+				var0008 = ("Zounds, I wager that " + var0007) + " was right good....";
 			}
 		}
 		UI_play_sound_effect(0x0024);
@@ -110289,7 +110289,7 @@ void Func0974 0x974 (var var0000) {
 		if (var0009 == 0x0002) {
 			var000A = var0002[var0001];
 			var000B = Func0953();
-			var0008 = (((("Why dost thou not wait until dinner to drink that " + var000A) + ", ") + var000B) + "?");
+			var0008 = ((("Why dost thou not wait until dinner to drink that " + var000A) + ", ") + var000B) + "?";
 			Func094A(var0008);
 		}
 		if (var0009 > 0x0002) {
@@ -110324,9 +110324,9 @@ void Func0976 0x976 (var var0000, var var0001) {
 		var0002 = var0000->get_npc_prop(0x0000);
 		var0003 = var0000->get_npc_prop(0x0003);
 		if ((var0003 + var0001) < 0x0001) {
-			var0001 = (0xFFFF * var0003);
+			var0001 = 0xFFFF * var0003;
 		} else if ((var0003 + var0001) > var0002) {
-			var0001 = (var0002 - var0003);
+			var0001 = var0002 - var0003;
 		}
 		var0004 = var0000->set_npc_prop(0x0003, var0001);
 	}
@@ -110708,7 +110708,7 @@ void Func0987 0x987 (var var0000, var var0001, var var0002, var var0003) {
 	var var0006;
 
 	var0004 = var0000->get_npc_prop(var0001);
-	var0005 = (var0004 + (0x0002 * var0003));
+	var0005 = var0004 + (0x0002 * var0003);
 	if (var0005 > var0000->get_npc_prop(var0002)) {
 		var0005 = var0000->get_npc_prop(var0002);
 	}
@@ -110801,8 +110801,8 @@ void Func098B 0x98B (var var0000) {
 	var var0001;
 
 	var0001 = var0000->get_object_position();
-	var0001[0x0001] -= (var0001[0x0003] / 0x0002);
-	var0001[0x0002] -= (var0001[0x0003] / 0x0002);
+	var0001[0x0001] -= var0001[0x0003] / 0x0002;
+	var0001[0x0002] -= var0001[0x0003] / 0x0002;
 	UI_sprite_effect(0x0018, var0001[0x0001], var0001[0x0002], 0xFFFE, 0xFFFE, 0x0000, 0xFFFF);
 }
 
@@ -111173,7 +111173,7 @@ var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003) {
 		var0015 = var0012;
 	}
 	var0014 = 0x0002;
-	var0016 = (var0007 + 0x0001);
+	var0016 = var0007 + 0x0001;
 	while (var0014 != var0016) {
 		var0000 = var0006[var0015[var0014]];
 		if (var0000->get_npc_object() in var0004) {
@@ -111203,10 +111203,10 @@ var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003) {
 	var0017 = "";
 	var0018 = UI_get_party_list();
 	for (var001B in var0018 with var0019 to var001A) {
-		var0017 &= (var001B & var001B->get_npc_name());
+		var0017 &= var001B & var001B->get_npc_name();
 	}
 	if (Func097D(0xFE9B, 0x0001, 0x031F, 0xFE99, 0x0012) && (!var0003)) {
-		var0017 &= (0xFED3 & "Boydon's head in party");
+		var0017 &= 0xFED3 & "Boydon's head in party";
 	}
 	UI_error_message("Copy down this information with the error");
 	UI_error_message(var0017);
@@ -111434,12 +111434,12 @@ void Func0998 0x998 (var var0000, var var0001) {
 	var0002 = [0xFFFF, 0x0000, 0x0001, 0x0002, 0x0002, 0x0002, 0x0001, 0x0000, 0xFFFF, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFE, 0xFFFF, 0x0000, 0x0001, 0x0002, 0x0003, 0x0004, 0x0004, 0x0004, 0x0004, 0x0004, 0x0003, 0x0002, 0x0001, 0x0000, 0xFFFF, 0xFFFE, 0xFFFD, 0xFFFC, 0xFFFC, 0xFFFC, 0xFFFC, 0xFFFC, 0xFFFD];
 	var0003 = [0xFFFE, 0xFFFE, 0xFFFE, 0xFFFF, 0x0000, 0x0001, 0x0002, 0x0002, 0x0002, 0x0001, 0x0000, 0xFFFF, 0xFFFC, 0xFFFC, 0xFFFC, 0xFFFC, 0xFFFC, 0xFFFD, 0xFFFE, 0xFFFF, 0x0000, 0x0001, 0x0002, 0x0003, 0x0004, 0x0004, 0x0004, 0x0004, 0x0004, 0x0003, 0x0002, 0x0001, 0x0000, 0xFFFF, 0xFFFE, 0xFFFD];
 	var0004 = var0000->get_object_position();
-	var0005 = (var0000 & var0004);
+	var0005 = var0000 & var0004;
 	var0006 = 0x0000;
 	while (var0006 < 0x0024) {
 		var0006 += 0x0001;
-		var0007 = (var0005[0x0002] + var0002[var0006]);
-		var0008 = (var0005[0x0003] + var0003[var0006]);
+		var0007 = var0005[0x0002] + var0002[var0006];
+		var0008 = var0005[0x0003] + var0003[var0006];
 		var0009 = var0005[0x0004];
 		var000A = [var0007, var0008, var0009];
 		var000B = [var0007, var0008, (var0009 + 0x0001)];
@@ -111478,7 +111478,7 @@ var Func0999 0x999 (var var0000, var var0001, var var0002, var var0003, var var0
 		if (var0007 == var0000) {
 			continue;
 		}
-		var0008 = (var0000 - var0007);
+		var0008 = var0000 - var0007;
 		if (var0006 == 0x0001) {
 			var0009 = 0x0005;
 			var000A = var0000;
@@ -111523,16 +111523,16 @@ var Func0999 0x999 (var var0000, var var0001, var var0002, var var0003, var var0
 	} while (false)
 	nobreak {
 		if (var0002 == 0x0001) {
-			var000A = (var0000 - (var0008 / 0x0002));
+			var000A = var0000 - (var0008 / 0x0002);
 		}
 		if (var0002 == 0x0002) {
-			var000A = (var0000 - (var0008 / 0x0003));
+			var000A = var0000 - (var0008 / 0x0003);
 		}
 		if (var0002 == 0x0003) {
-			var000A = (var0000 - (var0008 / 0x0004));
+			var000A = var0000 - (var0008 / 0x0004);
 		}
-		var000B = (var0000 - var000A);
-		var000A = (var0000 - ((var000B * (0x0050 + UI_get_random(0x0028))) / 0x0064));
+		var000B = var0000 - var000A;
+		var000A = var0000 - ((var000B * (0x0050 + UI_get_random(0x0028))) / 0x0064);
 		if (var000A >= var0000) {
 			var000A -= 0x0001;
 		}
@@ -111674,14 +111674,14 @@ var Func09A0 0x9A0 (var var0000, var var0001) {
 		return false;
 	}
 	if ((var0000 == 0x0000) || (var0000 == 0x0001)) {
-		var0002 = (((var0000 * 0x0002) + 0x0017) + var0001);
+		var0002 = ((var0000 * 0x0002) + 0x0017) + var0001;
 		var0003 = 0xFE9C->get_cont_items(0x025F, 0xFE99, var0002);
 		if (var0003 < 0x0008) {
 			UI_error_message(["WARNING! GimmePathEgg returning ref = ", var0003]);
 		}
 		return var0003;
 	}
-	var0002 = (((var0000 * 0x0004) + var0001) - 0x0001);
+	var0002 = ((var0000 * 0x0004) + var0001) - 0x0001;
 	var0003 = 0xFE9C->get_cont_items(0x025F, 0xFE99, var0002);
 	if (var0003 < 0x0008) {
 		UI_error_message(["WARNING! GimmePathEgg returning ref = ", var0003]);
@@ -112176,7 +112176,7 @@ void Func09B1 0x9B1 () {
 void Func09B2 0x9B2 () {
 	var var0000;
 
-	var0000 = (0x0406 + ((0x0002 - UI_get_skin_colour()) * 0x0002));
+	var0000 = 0x0406 + ((0x0002 - UI_get_skin_colour()) * 0x0002);
 	if (UI_is_pc_female()) {
 		0xFE9C->set_polymorph(var0000 + 0x0001);
 	} else {
@@ -112236,7 +112236,7 @@ void Func09B4 0x9B4 (var var0000) {
 		var0002 = "Monk Isle";
 		if (gflags[0x01CC]) {
 			if (gflags[0x01FE]) {
-				var0002 &= ("Fawn" & ("Monitor" & "Moonshade"));
+				var0002 &= "Fawn" & ("Monitor" & "Moonshade");
 			} else {
 				var0002 &= "Moonshade";
 			}
@@ -112547,7 +112547,7 @@ void Func09BE 0x9BE (var var0000, var var0001) {
 	var var000E;
 	var var000F;
 
-	var0002 = (UI_find_nearby_avatar(0x010F) & UI_find_nearby_avatar(0x0110));
+	var0002 = UI_find_nearby_avatar(0x010F) & UI_find_nearby_avatar(0x0110);
 	var0003 = false;
 	for (var0006 in var0002 with var0004 to var0005) {
 		if (var0006->get_item_quality() == var0000->get_item_quality()) {
