@@ -170,8 +170,8 @@ void Func00D1 shape#(0xD1) () {
 			Func097F(0xFE9C->get_npc_object(), "@I despise you all!@", 0x0002);
 			for (var0009 in var0002 with var0007 to var0008) {
 				var000A = var0009->get_object_position();
-				var000A[0x0001] = (var000A[0x0001] - (var000A[0x0003] / 0x0002));
-				var000A[0x0002] = (var000A[0x0002] - (var000A[0x0003] / 0x0002));
+				var000A[0x0001] -= (var000A[0x0003] / 0x0002);
+				var000A[0x0002] -= (var000A[0x0003] / 0x0002);
 				UI_play_sound_effect(0x0047);
 				UI_sprite_effect(0x0011, var000A[0x0001], var000A[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				var000A = var0009->get_object_position();
@@ -1736,7 +1736,7 @@ void Func00F3 shape#(0xF3) () {
 			UI_play_sound_effect(0x006A);
 			var0002 = set_item_quality(0x0000);
 			var0003 = get_object_position();
-			var0003[0x0001] = (var0003[0x0001] + 0x0002);
+			var0003[0x0001] += 0x0002;
 			var0004 = UI_create_new_object2(0x01EE, var0003);
 			Func09AD(var0004);
 			var0004->obj_sprite_effect(0x000C, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -1748,7 +1748,7 @@ void Func00F3 shape#(0xF3) () {
 				UI_play_sound_effect(0x006A);
 				var0002 = set_item_quality(0x0000);
 				var0003 = get_object_position();
-				var0003[0x0001] = (var0003[0x0001] + 0x0002);
+				var0003[0x0001] += 0x0002;
 				var0004 = UI_create_new_object2(0x01EE, var0003);
 				Func09AD(var0004);
 				var0004->obj_sprite_effect(0x000C, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -1764,7 +1764,7 @@ void Func00F3 shape#(0xF3) () {
 				UI_play_sound_effect(0x006A);
 				var0002 = set_item_quality(0x0000);
 				var0003 = get_object_position();
-				var0003[0x0001] = (var0003[0x0001] + 0x0002);
+				var0003[0x0001] += 0x0002;
 				var0004 = UI_create_new_object2(0x0175, var0003);
 				Func09AD(var0004);
 				obj_sprite_effect(0x0007, 0xFFFE, 0xFFFE, 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -2119,8 +2119,8 @@ void Func0102 shape#(0x102) () {
 	}
 	if (event == 0x000B) {
 		var0000 = get_object_position();
-		var0000[0x0001] = (var0000[0x0001] - 0x0002);
-		var0000[0x0002] = (var0000[0x0002] + 0x0001);
+		var0000[0x0001] -= 0x0002;
+		var0000[0x0002] += 0x0001;
 		var0001 = 0xFE9C->get_cont_items(0x032A, 0xFE99, 0xFE99);
 		if (var0001) {
 			var0002 = var0001->set_last_created();
@@ -2547,8 +2547,8 @@ void Func0105 shape#(0x105) () {
 			var0003->set_item_flag(0x000B);
 			var0003->set_item_frame(UI_die_roll(0x0000, 0x0004));
 			var0004 = get_object_position();
-			var0004[0x0001] = (var0004[0x0001] + 0x0001);
-			var0004[0x0002] = (var0004[0x0002] + 0x0001);
+			var0004[0x0001] += 0x0001;
+			var0004[0x0002] += 0x0001;
 			var0000 = UI_update_last_created(var0004);
 		}
 	}
@@ -2861,8 +2861,8 @@ void Func010E shape#(0x10E) () {
 		var0004 = get_distance(0xFE9C);
 		0xFE9C->set_item_flag(0x0010);
 		var0005 = get_object_position();
-		var0005[0x0001] = (var0005[0x0001] - 0x0002);
-		var0005[0x0002] = (var0005[0x0002] + 0x0003);
+		var0005[0x0001] -= 0x0002;
+		var0005[0x0002] += 0x0003;
 		0xFE9C->si_path_run_usecode(var0005, 0x000A, item, Func07F6, true);
 		UI_play_sound_effect(0x0039);
 		var0001 = script item after (var0004 + 0x0002) ticks {
@@ -3070,7 +3070,7 @@ void Func0124 shape#(0x124) () {
 		var0006 = 0x0000;
 		if ((var0003[0x0001] == var0005[0x0001]) && ((var0003[0x0002] == var0005[0x0002]) && (gflags[0x0001] == false))) {
 			gflags[0x0001] = true;
-			var0005[0x0002] = (var0005[0x0002] + 0x0002);
+			var0005[0x0002] += 0x0002;
 			UI_sprite_effect(0x0011, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, 0x0001);
 			UI_play_sound_effect2(0x0074, item);
 			UI_lightning();
@@ -3736,8 +3736,8 @@ void Func0146 shape#(0x146) () {
 	if (event == 0x0002) {
 		var0001 = 0xFE9C->find_nearest(0x0146, 0x000A);
 		var0002 = var0001->get_object_position();
-		var0002[0x0001] = (var0002[0x0001] + 0x0001);
-		var0002[0x0002] = (var0002[0x0002] + 0x0001);
+		var0002[0x0001] += 0x0001;
+		var0002[0x0002] += 0x0001;
 		var0001 = set_last_created();
 		if (var0001) {
 			if (get_item_frame() == 0x0000) {
@@ -4195,8 +4195,8 @@ labelFunc0151_0462:
 					};
 					reduce_health(0x0037, 0x0000);
 					var0016 = get_object_position();
-					var0016[0x0001] = (var0016[0x0001] - (var0016[0x0003] / 0x0002));
-					var0016[0x0002] = (var0016[0x0002] - (var0016[0x0003] / 0x0002));
+					var0016[0x0001] -= (var0016[0x0003] / 0x0002);
+					var0016[0x0002] -= (var0016[0x0003] / 0x0002);
 					UI_sprite_effect(0x0015, var0016[0x0001], var0016[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				}
 				break;
@@ -4655,8 +4655,8 @@ void Func0178 shape#(0x178) () {
 		}
 		var0007 = get_distance(0xFE9C);
 		0xFE9C->set_item_flag(0x0010);
-		var0004[0x0001] = (var0004[0x0001] + var0006);
-		var0004[0x0002] = (var0004[0x0002] - 0x0003);
+		var0004[0x0001] += var0006;
+		var0004[0x0002] -= 0x0003;
 		0xFE9C->si_path_run_usecode(var0004, 0x000A, item, Func07F6, true);
 		UI_play_sound_effect(0x0039);
 		var0003 = script item after (var0007 + 0x0002) ticks {
@@ -4910,9 +4910,9 @@ void Func017D shape#(0x17D) () {
 	if (event == 0x0007) {
 		var0001 = get_object_position();
 		if (var0001[0x0003] > 0x0000) {
-			var0001[0x0001] = (var0001[0x0001] - 0x0001);
-			var0001[0x0002] = (var0001[0x0002] - 0x0001);
-			var0001[0x0003] = (var0001[0x0003] - 0x0002);
+			var0001[0x0001] -= 0x0001;
+			var0001[0x0002] -= 0x0001;
+			var0001[0x0003] -= 0x0002;
 		}
 		UI_sprite_effect(0x0007, (var0001[0x0001] - 0x0001), (var0001[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
 		set_polymorph(0x017D);
@@ -4963,7 +4963,7 @@ void Func017D shape#(0x17D) () {
 						say("\"There hath been trouble of late here in Fawn...\"");
 						say("\"...And here comes part of it now.\"");
 						var0009 = get_object_position();
-						var0009[0x0002] = (var0009[0x0002] + 0x0014);
+						var0009[0x0002] += 0x0014;
 						0xFFC5->move_object([var0009[0x0001], var0009[0x0002], 0x0000]);
 						0xFE9C->set_item_flag(0x0010);
 						0xFFC5->set_schedule_type(0x0003);
@@ -5334,8 +5334,8 @@ void Func019C shape#(0x19C) () {
 	if (event == 0x0002) {
 		var0001 = 0xFE9C->find_nearest(0x019C, 0x000F);
 		var0002 = var0001->get_object_position();
-		var0002[0x0001] = (var0002[0x0001] + 0x0001);
-		var0002[0x0002] = (var0002[0x0002] - 0x0003);
+		var0002[0x0001] += 0x0001;
+		var0002[0x0002] -= 0x0003;
 		var0001 = set_last_created();
 		if (var0001) {
 			if (get_item_frame() == 0x0000) {
@@ -5555,8 +5555,8 @@ void Func01B2 shape#(0x1B2) () {
 	}
 	if (event == 0x000B) {
 		var0000 = get_object_position();
-		var0000[0x0001] = (var0000[0x0001] + 0x0001);
-		var0000[0x0002] = (var0000[0x0002] - 0x0001);
+		var0000[0x0001] += 0x0001;
+		var0000[0x0002] -= 0x0001;
 		var0001 = 0xFE9C->get_cont_items(0x032A, 0xFE99, 0xFE99);
 		if (var0001) {
 			var0002 = var0001->set_last_created();
@@ -6559,8 +6559,8 @@ void Func01C7 shape#(0x1C7) () {
 	if (event == 0x000E) {
 		if ((0xFFEE->get_npc_id() == 0x000D) && (item == 0xFE9C->get_npc_object())) {
 			var0009 = 0xFE9C->get_object_position();
-			var0009[0x0001] = (var0009[0x0001] - (var0009[0x0003] / 0x0002));
-			var0009[0x0002] = (var0009[0x0002] - (var0009[0x0003] / 0x0002));
+			var0009[0x0001] -= (var0009[0x0003] / 0x0002);
+			var0009[0x0002] -= (var0009[0x0003] / 0x0002);
 			UI_sprite_effect(0x0007, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			var0009 = 0xFE9C->get_object_position();
 			0xFE9C->move_object([0x0937, 0x0733, 0x0001]);
@@ -6569,8 +6569,8 @@ void Func01C7 shape#(0x1C7) () {
 		}
 		if ((0xFFEE->get_npc_id() == 0x000C) && (item == 0xFE9C->get_npc_object())) {
 			var0009 = 0xFE9C->get_object_position();
-			var0009[0x0001] = (var0009[0x0001] - (var0009[0x0003] / 0x0002));
-			var0009[0x0002] = (var0009[0x0002] - (var0009[0x0003] / 0x0002));
+			var0009[0x0001] -= (var0009[0x0003] / 0x0002);
+			var0009[0x0002] -= (var0009[0x0003] / 0x0002);
 			UI_sprite_effect(0x0007, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			var0009 = 0xFE9C->get_object_position();
 			0xFE9C->move_object([0x093C, 0x0740, 0x0000]);
@@ -7463,8 +7463,8 @@ void Func01D6 shape#(0x1D6) () {
 	}
 	if (event == 0x0002) {
 		var0002 = 0xFE9C->get_object_position();
-		var0002[0x0001] = (var0002[0x0001] + 0x0001);
-		var0002[0x0002] = (var0002[0x0002] + 0x0001);
+		var0002[0x0001] += 0x0001;
+		var0002[0x0002] += 0x0001;
 		set_item_frame(0x0001);
 		if (Func0994() == 0x0012) {
 			var0001 = set_item_quality(0x000A);
@@ -7591,8 +7591,8 @@ void Func01DE shape#(0x1DE) () {
 
 	if (event == 0x0007) {
 		var0000 = get_object_position();
-		var0000[0x0001] = (var0000[0x0001] - (var0000[0x0003] / 0x0002));
-		var0000[0x0002] = (var0000[0x0002] - (var0000[0x0003] / 0x0002));
+		var0000[0x0001] -= (var0000[0x0003] / 0x0002);
+		var0000[0x0002] -= (var0000[0x0003] / 0x0002);
 		UI_sprite_effect(0x000C, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		remove_item();
 	} else {
@@ -7911,8 +7911,8 @@ void Func01EF shape#(0x1EF) () {
 	}
 	if (event == 0x0002) {
 		var0002 = get_object_position();
-		var0002[0x0001] = (var0002[0x0001] - (var0002[0x0003] / 0x0002));
-		var0002[0x0002] = (var0002[0x0002] - (var0002[0x0003] / 0x0002));
+		var0002[0x0001] -= (var0002[0x0003] / 0x0002);
+		var0002[0x0002] -= (var0002[0x0003] / 0x0002);
 		remove_item();
 		UI_sprite_effect(0x001B, var0002[0x0001], var0002[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_play_sound_effect(0x002A);
@@ -8271,8 +8271,8 @@ void Func020E shape#(0x20E) () {
 		}
 		var0001 = find_nearby(0x01B8, 0x000A, 0x0080);
 		var0002 = get_object_position();
-		var0002[0x0001] = (var0002[0x0001] + 0x0003);
-		var0002[0x0002] = (var0002[0x0002] + 0x0003);
+		var0002[0x0001] += 0x0003;
+		var0002[0x0002] += 0x0003;
 		for (var0005 in var0001 with var0003 to var0004) {
 			var0006 = var0005->get_object_position();
 			if ((var0002[0x0001] == var0006[0x0001]) && ((var0002[0x0002] == var0006[0x0002]) && (var0002[0x0003] == var0006[0x0003]))) {
@@ -8695,7 +8695,7 @@ void Func0247 shape#(0x247) () {
 					0xFE9C->halt_scheduled();
 					Func090D(item, var0003, var0004, 0xFFFF, Func0247, item, 0x000A);
 				} else {
-					var0000[0x0002] = (var0000[0x0002] - 0x0005);
+					var0000[0x0002] -= 0x0005;
 					Func094A("@There is no room for thy bedroll there.@");
 				}
 			}
@@ -8782,20 +8782,20 @@ void Func025F shape#(0x25F) () {
 		var0000 = 0xFE9C->find_nearest(0x025F, 0x0003);
 		var0001 = var0000->get_item_frame();
 		if (var0001 == 0x0000) {
-			var0004[0x0001] = (var0004[0x0001] - 0x0001);
-			var0004[0x0002] = (var0004[0x0002] + 0x0001);
+			var0004[0x0001] -= 0x0001;
+			var0004[0x0002] += 0x0001;
 		}
 		if (var0001 == 0x0001) {
-			var0004[0x0001] = (var0004[0x0001] - 0x0001);
-			var0004[0x0002] = (var0004[0x0002] - 0x0001);
+			var0004[0x0001] -= 0x0001;
+			var0004[0x0002] -= 0x0001;
 		}
 		if (var0001 == 0x0002) {
-			var0004[0x0001] = (var0004[0x0001] - 0x0000);
-			var0004[0x0002] = (var0004[0x0002] - 0x0001);
+			var0004[0x0001] -= 0x0000;
+			var0004[0x0002] -= 0x0001;
 		}
 		if (var0001 == 0x0003) {
-			var0004[0x0001] = (var0004[0x0001] - 0x0002);
-			var0004[0x0002] = (var0004[0x0002] - 0x0000);
+			var0004[0x0001] -= 0x0002;
+			var0004[0x0002] -= 0x0000;
 		}
 		var0003 = set_last_created();
 		if (var0003) {
@@ -8969,8 +8969,8 @@ void Func0269 shape#(0x269) () {
 	}
 	if (event == 0x0002) {
 		var0002 = 0xFE9C->get_object_position();
-		var0002[0x0001] = (var0002[0x0001] - 0x0004);
-		var0002[0x0002] = (var0002[0x0002] - 0x0000);
+		var0002[0x0001] -= 0x0004;
+		var0002[0x0002] -= 0x0000;
 		var0001 = set_last_created();
 		if (var0001) {
 			if (get_item_frame() == 0x0000) {
@@ -10045,8 +10045,8 @@ void Func028B shape#(0x28B) () {
 			var0004->set_item_flag(0x000B);
 			var0004->set_item_frame(UI_die_roll(0x0000, 0x0009));
 			var0005 = get_object_position();
-			var0005[0x0001] = (var0005[0x0001] + 0x0001);
-			var0005[0x0002] = (var0005[0x0002] + 0x0001);
+			var0005[0x0001] += 0x0001;
+			var0005[0x0002] += 0x0001;
 			var0002 = UI_update_last_created(var0005);
 		}
 		return;
@@ -10084,9 +10084,9 @@ void Func028C shape#(0x28C) () {
 	if (event == 0x000E) {
 		var0004 = var0003->get_object_position();
 		if (item == 0xFFB8->get_npc_object()) {
-			var0004[0x0002] = (var0004[0x0002] + 0x0001);
+			var0004[0x0002] += 0x0001;
 		} else {
-			var0004[0x0001] = (var0004[0x0001] + 0x0001);
+			var0004[0x0001] += 0x0001;
 		}
 		move_object(var0004);
 		var0005 = script 0xFFB8 {
@@ -10170,7 +10170,7 @@ void Func028C shape#(0x28C) () {
 			0xFFB8->set_npc_id(0x0001);
 			Func097F(0xFFB8, "@Now we begin...@", 0x0000);
 			var0004 = var0003->get_object_position();
-			var0004[0x0002] = (var0004[0x0002] + 0x0001);
+			var0004[0x0002] += 0x0001;
 			0xFFB8->si_path_run_usecode(var0004, 0x0002, item, Func028C, false);
 			UI_set_path_failure(Func028C, item, 0x000E);
 			var0005 = script 0xFE9C {
@@ -10491,7 +10491,7 @@ void Func0296 shape#(0x296) () {
 			return;
 		}
 		var0002 = 0xFE9C->get_object_position();
-		var0002[0x0001] = (var0002[0x0001] + 0x0001);
+		var0002[0x0001] += 0x0001;
 		if (UI_die_roll(0x0001, 0x0014) > 0x0011) {
 			var0003 = UI_create_new_object(0x0179);
 			if (var0003) {
@@ -11933,8 +11933,8 @@ void Func02C3 shape#(0x2C3) () {
 	if (var0000 == 0x001F) {
 		UI_close_gumps();
 		var0001 = get_object_position();
-		var0001[0x0001] = (var0001[0x0001] - (var0001[0x0003] / 0x0002));
-		var0001[0x0002] = (var0001[0x0002] - (var0001[0x0003] / 0x0002));
+		var0001[0x0001] -= (var0001[0x0003] / 0x0002);
+		var0001[0x0002] -= (var0001[0x0003] / 0x0002);
 		remove_item();
 		var0002 = Func0992(0x0001, "@The scroll talks!@", "@The scroll talks...@", true);
 		UI_sprite_effect(0x0015, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -12301,8 +12301,8 @@ void Func02CF shape#(0x2CF) () {
 		var0002 = 0xFE9C->find_nearest(0x02CF, 0x000A);
 		var0003 = var0002->get_item_frame();
 		var0004 = var0002->get_object_position();
-		var0004[0x0001] = (var0004[0x0001] + 0x0001);
-		var0004[0x0002] = (var0004[0x0002] + 0x0001);
+		var0004[0x0001] += 0x0001;
+		var0004[0x0002] += 0x0001;
 		var0001 = set_last_created();
 		if (var0001) {
 			if (get_item_frame() == 0x0000) {
@@ -12583,8 +12583,8 @@ void Func02E5 shape#(0x2E5) () {
 		var0002 = 0xFE9C->find_nearest(0x02E5, 0x000A);
 		var0003 = var0002->get_item_frame();
 		var0004 = var0002->get_object_position();
-		var0004[0x0001] = (var0004[0x0001] + 0x0001);
-		var0004[0x0002] = (var0004[0x0002] + 0x0001);
+		var0004[0x0001] += 0x0001;
+		var0004[0x0002] += 0x0001;
 		var0001 = set_last_created();
 		if (var0001) {
 			if (get_item_frame() == 0x0000) {
@@ -13423,7 +13423,7 @@ void Func0313 shape#(0x313) () {
 							}
 						}
 						var0011 = var000D->get_object_position();
-						var0011[0x0002] = (var0011[0x0002] + 0x0001);
+						var0011[0x0002] += 0x0001;
 						0xFF58->si_path_run_usecode(var0011, 0x000A, 0xFF58, Func04A8, true);
 						UI_set_path_failure([Func04A8], 0xFF58, 0x000E);
 						abort;
@@ -14828,7 +14828,7 @@ void Func032C shape#(0x32C) () {
 			}
 			set_item_frame(0x0000);
 			var000D = get_object_position();
-			var000D[0x0002] = (var000D[0x0002] + 0x0002);
+			var000D[0x0002] += 0x0002;
 			0xFE9C->move_object(var000D);
 			0xFE9C->set_polymorph(0x02D1);
 			var0006 = script 0xFE9C after 5 ticks {
@@ -15350,8 +15350,8 @@ void Func0334 shape#(0x334) () {
 					break;
 				}
 				var0008 = var0000->get_object_position();
-				var0008[0x0001] = (var0008[0x0001] - (var0008[0x0003] / 0x0002));
-				var0008[0x0002] = (var0008[0x0002] - (var0008[0x0003] / 0x0002));
+				var0008[0x0001] -= (var0008[0x0003] / 0x0002);
+				var0008[0x0002] -= (var0008[0x0003] / 0x0002);
 				UI_sprite_effect(0x0007, var0008[0x0001], var0008[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x0039);
 				var0000->remove_item();
@@ -16038,8 +16038,8 @@ void Func0346 shape#(0x346) () {
 	} else {
 		set_item_frame(0x0000);
 		var0001 = get_object_position();
-		var0001[0x0001] = (var0001[0x0001] - 0x0001);
-		var0001[0x0002] = (var0001[0x0002] - 0x0001);
+		var0001[0x0001] -= 0x0001;
+		var0001[0x0002] -= 0x0001;
 		0xFFDB->move_object([var0001[0x0001], var0001[0x0002], 0x0000]);
 		0xFFDB->set_new_schedules(0x0000, 0x0011, [var0001[0x0001], var0001[0x0002]]);
 		0xFFDB->run_schedule();
@@ -16524,8 +16524,8 @@ void Func035F shape#(0x35F) () {
 				var0008 = set_last_created();
 				if (var0008) {
 					var0002 = var0001->get_object_position();
-					var0002[0x0001] = (var0002[0x0001] - UI_die_roll(0x0001, 0x0002));
-					var0002[0x0003] = (var0002[0x0003] + 0x0001);
+					var0002[0x0001] -= UI_die_roll(0x0001, 0x0002);
+					var0002[0x0003] += 0x0001;
 					var0008 = UI_update_last_created(var0002);
 					if (var0008) {
 						var0008 = script item after 60 ticks {
@@ -16621,9 +16621,9 @@ void Func0363 shape#(0x363) () {
 		if ((item == var0003) && (var0001 == 0x0018)) {
 			var0006 = 0xFF2D->get_object_position();
 			while (var0006[0x0003] > 0x0000) {
-				var0006[0x0001] = (var0006[0x0001] - 0x0001);
-				var0006[0x0002] = (var0006[0x0002] - 0x0001);
-				var0006[0x0003] = (var0006[0x0003] - 0x0002);
+				var0006[0x0001] -= 0x0001;
+				var0006[0x0002] -= 0x0001;
+				var0006[0x0003] -= 0x0002;
 			}
 			UI_sprite_effect(0x0007, var0006[0x0001], var0006[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			0xFF2D->remove_npc();
@@ -16724,8 +16724,8 @@ void Func0363 shape#(0x363) () {
 						UI_end_conversation();
 						UI_remove_npc_face0();
 						var0007 = 0xFF2D->get_object_position();
-						var0007[0x0001] = (var0007[0x0001] + 0x000C);
-						var0007[0x0002] = (var0007[0x0002] - 0x0003);
+						var0007[0x0001] += 0x000C;
+						var0007[0x0002] -= 0x0003;
 						0xFF31->move_object(var0007);
 						UI_play_sound_effect(0x0051);
 						UI_sprite_effect(0x001A, var0007[0x0001], var0007[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -17240,8 +17240,8 @@ void Func0379 shape#(0x379) () {
 		var0001 = UI_create_new_object(0x01B8);
 		if (var0001) {
 			var0002 = get_object_position();
-			var0002[0x0001] = (var0002[0x0001] + 0x0003);
-			var0002[0x0002] = (var0002[0x0002] + 0x0003);
+			var0002[0x0001] += 0x0003;
+			var0002[0x0002] += 0x0003;
 			var0001->set_item_frame(UI_die_roll(0x0000, 0x0007));
 			if (UI_update_last_created(var0002)) {
 				set_item_shape(0x020E);
@@ -17390,8 +17390,8 @@ void Func03A1 shape#(0x3A1) () {
 		UI_close_gumps();
 		var0000 = UI_click_on_item();
 		var0001 = var0000->get_object_position();
-		var0001[0x0001] = (var0001[0x0001] - (var0001[0x0003] / 0x0002));
-		var0001[0x0002] = (var0001[0x0002] - (var0001[0x0003] / 0x0002));
+		var0001[0x0001] -= (var0001[0x0003] / 0x0002);
+		var0001[0x0002] -= (var0001[0x0003] / 0x0002);
 		UI_sprite_effect(0x0015, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		if ((var0000->get_item_shape() == 0x03E6) && (var0000->get_item_frame() == 0x0006)) {
 			UI_play_sound_effect(0x0077);
@@ -19753,7 +19753,7 @@ void Func03F2 shape#(0x3F2) () {
 			if (var0006[0x0003] == 0x0001) {
 				var0007 = var0005->set_last_created();
 				if (var0007) {
-					var0006[0x0001] = (var0006[0x0001] - 0x0001);
+					var0006[0x0001] -= 0x0001;
 					var0006[0x0003] = 0x0000;
 					var0007 = UI_update_last_created(var0006);
 				}
@@ -19771,8 +19771,8 @@ void Func03F2 shape#(0x3F2) () {
 			}
 		} else {
 			var0008 = var0000->get_object_position();
-			var0008[0x0001] = (var0008[0x0001] - 0x0001);
-			var0008[0x0002] = (var0008[0x0002] - 0x0001);
+			var0008[0x0001] -= 0x0001;
+			var0008[0x0002] -= 0x0001;
 			var0008[0x0003] = 0x0001;
 			var0007 = UI_create_new_object(0x0392);
 			if (var0007) {
@@ -20229,17 +20229,17 @@ void Func0400 object#(0x400) () {
 				actor frame sleeping;
 			};
 			var0002 = 0xFE9C->get_object_position();
-			var0002[0x0001] = (var0002[0x0001] + 0x0001);
+			var0002[0x0001] += 0x0001;
 			var0000 = UI_create_new_object(0x0390);
 			if (var0000) {
 				var0000 = UI_update_last_created(var0002);
 			}
-			var0002[0x0001] = (var0002[0x0001] - 0x0002);
+			var0002[0x0001] -= 0x0002;
 			var0000 = UI_create_new_object(0x0390);
 			if (var0000) {
 				var0000 = UI_update_last_created(var0002);
 			}
-			var0002[0x0002] = (var0002[0x0002] + 0x0001);
+			var0002[0x0002] += 0x0001;
 			var0000 = UI_create_new_object(0x0390);
 			if (var0000) {
 				var0000 = UI_update_last_created(var0002);
@@ -21343,7 +21343,7 @@ void Func0403 object#(0x403) () {
 								if (var000D[0x0001] == 0x0000) {
 									var000D[0x0001] = var000B[0x0001];
 								}
-								var000D[0x0002] = (var000D[0x0002] + var000B[Func0977(var000B)]);
+								var000D[0x0002] += var000B[Func0977(var000B)];
 								var0011->remove_item();
 							}
 						}
@@ -21420,7 +21420,7 @@ void Func0403 object#(0x403) () {
 									if (var000D[0x0001] == 0x0000) {
 										var000D[0x0001] = var000B[0x0001];
 									}
-									var000D[0x0002] = (var000D[0x0002] + var000B[Func0977(var000B)]);
+									var000D[0x0002] += var000B[Func0977(var000B)];
 									var0011->remove_item();
 								}
 							}
@@ -23428,23 +23428,23 @@ void Func0410 object#(0x410) () {
 			Func097F(0xFFF0, "@Oh, no!@", 0x0000);
 			UI_play_sound_effect(0x0074);
 			var0004 = 0xFFF0->get_object_position();
-			var0004[0x0001] = (var0004[0x0001] - 0x0004);
-			var0004[0x0002] = (var0004[0x0002] - 0x0003);
+			var0004[0x0001] -= 0x0004;
+			var0004[0x0002] -= 0x0003;
 			UI_sprite_effect(0x0028, var0004[0x0001], var0004[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		}
 		if (0xFFF0->get_npc_id() == 0x0006) {
 			Func097F(0xFFF0, "@Must hide...@", 0x0000);
 			UI_play_sound_effect(0x0074);
 			var0004 = 0xFFF0->get_object_position();
-			var0004[0x0001] = (var0004[0x0001] + 0x0011);
+			var0004[0x0001] += 0x0011;
 			UI_sprite_effect(0x0029, var0004[0x0001], var0004[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		}
 		if (0xFFF0->get_npc_id() == 0x0005) {
 			Func097F(0xFFF0, "@Teleport storm!@", 0x0000);
 			UI_play_sound_effect(0x0074);
 			var0004 = 0xFFF0->get_object_position();
-			var0004[0x0001] = (var0004[0x0001] + 0x000C);
-			var0004[0x0002] = (var0004[0x0002] + 0x0007);
+			var0004[0x0001] += 0x000C;
+			var0004[0x0002] += 0x0007;
 			UI_sprite_effect(0x002A, var0004[0x0001], var0004[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		}
 		if (0xFFF0->get_npc_id() == 0x0004) {
@@ -23487,7 +23487,7 @@ void Func0410 object#(0x410) () {
 				}
 				if ((var000C->get_item_frame() == 0x0002) || (var000C->get_item_frame() == 0x0003)) {
 					var0004 = var000C->get_object_position();
-					var0004[0x0002] = (var0004[0x0002] + 0x0001);
+					var0004[0x0002] += 0x0001;
 					var0009 = UI_create_new_object(var0006);
 					if (var0009) {
 						var0009->set_item_flag(0x0012);
@@ -26707,8 +26707,8 @@ void Func041B object#(0x41B) () {
 					say("\"I have no need for others, when I can create mine own friends.\"");
 					Func097F(0xFFE5, "@See for thyself!@", 0x0000);
 					var000D = 0xFFE5->get_object_position();
-					var000D[0x0001] = (var000D[0x0001] + 0x0002);
-					var000D[0x0002] = (var000D[0x0002] - 0x0002);
+					var000D[0x0001] += 0x0002;
+					var000D[0x0002] -= 0x0002;
 					var0008 = UI_create_new_object2(0x020B, var000D);
 					if (var0008) {
 						var0008->obj_sprite_effect(0x0015, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -28314,8 +28314,8 @@ void Func041F object#(0x41F) () {
 		}
 		if (gflags[0x0007]) {
 			var0008 = 0xFE9C->get_object_position();
-			var0008[0x0001] = (var0008[0x0001] - (var0008[0x0003] / 0x0002));
-			var0008[0x0002] = (var0008[0x0002] - (var0008[0x0003] / 0x0002));
+			var0008[0x0001] -= (var0008[0x0003] / 0x0002);
+			var0008[0x0002] -= (var0008[0x0003] / 0x0002);
 			UI_sprite_effect(0x001B, (var0008[0x0001] - 0x0001), (var0008[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, 0xFFFF);
 			gflags[0x0007] = false;
 			gflags[0x0008] = true;
@@ -28493,8 +28493,8 @@ void Func041F object#(0x41F) () {
 					var0010->show_npc_face0(0x0000);
 					say("\"What! What's happening...\"");
 					var0008 = var0010->get_object_position();
-					var0008[0x0001] = (var0008[0x0001] - (var0008[0x0003] / 0x0002));
-					var0008[0x0002] = (var0008[0x0002] - (var0008[0x0003] / 0x0002));
+					var0008[0x0001] -= (var0008[0x0003] / 0x0002);
+					var0008[0x0002] -= (var0008[0x0003] / 0x0002);
 					UI_sprite_effect(0x001A, var0008[0x0001], var0008[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 					var0009 = Func095B(var0010);
 					var0003 = Func0992(0x0001, (("@" + var0009) + "!"), 0x0000, true);
@@ -29427,8 +29427,8 @@ void Func0422 object#(0x422) () {
 		0xFFDE->clear_item_flag(0x001D);
 		var0009 = 0xFFDE->get_object_position();
 		UI_play_sound_effect(0x002A);
-		var0009[0x0001] = (var0009[0x0001] - (var0009[0x0003] / 0x0002));
-		var0009[0x0002] = (var0009[0x0002] - (var0009[0x0003] / 0x0002));
+		var0009[0x0001] -= (var0009[0x0003] / 0x0002);
+		var0009[0x0002] -= (var0009[0x0003] / 0x0002);
 		UI_sprite_effect(0x001E, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		var0009 = 0xFFDE->get_object_position();
 		0xFFDE->kill_npc();
@@ -33443,9 +33443,9 @@ void Func042C object#(0x42C) () {
 			Func097F(0xFFD4, "@We shall meet again!@", 0x0000);
 			var0005 = 0xFFD4->get_object_position();
 			while (var0005[0x0003] > 0x0000) {
-				var0005[0x0001] = (var0005[0x0001] - 0x0001);
-				var0005[0x0002] = (var0005[0x0002] - 0x0001);
-				var0005[0x0003] = (var0005[0x0003] - 0x0002);
+				var0005[0x0001] -= 0x0001;
+				var0005[0x0002] -= 0x0001;
+				var0005[0x0003] -= 0x0002;
 			}
 			UI_sprite_effect(0x0021, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_sprite_effect(0x001A, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -37809,8 +37809,8 @@ void Func0437 object#(0x437) () {
 				};
 				var0008->set_schedule_type(0x000F);
 				var0010 = var0008->get_object_position();
-				var0010[0x0001] = (var0010[0x0001] - (var0010[0x0003] / 0x0002));
-				var0010[0x0002] = (var0010[0x0002] - (var0010[0x0003] / 0x0002));
+				var0010[0x0001] -= (var0010[0x0003] / 0x0002);
+				var0010[0x0002] -= (var0010[0x0003] / 0x0002);
 				UI_sprite_effect(0x0017, var0010[0x0001], var0010[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x0039);
 			}
@@ -37840,8 +37840,8 @@ void Func0437 object#(0x437) () {
 				var0010 = 0xFE9C->get_object_position();
 				0xFE9C->set_item_flag(0x0010);
 				0xFE9C->set_schedule_type(0x000F);
-				var0010[0x0001] = (var0010[0x0001] - (var0010[0x0003] / 0x0002));
-				var0010[0x0002] = (var0010[0x0002] - (var0010[0x0003] / 0x0002));
+				var0010[0x0001] -= (var0010[0x0003] / 0x0002);
+				var0010[0x0002] -= (var0010[0x0003] / 0x0002);
 				UI_sprite_effect(0x0017, var0010[0x0001], var0010[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x0039);
 				var0000 = script 0xFE9C {
@@ -44820,7 +44820,7 @@ void Func0448 object#(0x448) () {
 						0xFE9C->set_item_flag(0x0010);
 						UI_end_conversation();
 						var0010 = var0005->get_object_position();
-						var0010[0x0001] = (var0010[0x0001] + 0x0001);
+						var0010[0x0001] += 0x0001;
 						0xFFB8->set_npc_id(0x0000);
 						0xFE9C->si_path_run_usecode(var0010, 0x0002, item, Func028C, false);
 						UI_set_path_failure(Func028C, item, 0x000E);
@@ -45719,8 +45719,8 @@ void Func044C object#(0x44C) () {
 		0xFFB4->set_item_flag(0x001E);
 		0xFFB4->set_item_flag(0x0004);
 		var0004 = 0xFFB4->get_object_position();
-		var0004[0x0001] = (var0004[0x0001] - (var0004[0x0003] / 0x0002));
-		var0004[0x0002] = (var0004[0x0002] - (var0004[0x0003] / 0x0002));
+		var0004[0x0001] -= (var0004[0x0003] / 0x0002);
+		var0004[0x0002] -= (var0004[0x0003] / 0x0002);
 		UI_sprite_effect(0x0015, var0004[0x0001], var0004[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_play_sound_effect(0x0077);
 		0xFFB4->remove_npc();
@@ -46034,9 +46034,9 @@ void Func044C object#(0x44C) () {
 				say("\"So I have been found out! Well, to the blazes with it all!!\"");
 				var0004 = 0xFFB4->get_object_position();
 				while (var0004[0x0003] > 0x0000) {
-					var0004[0x0001] = (var0004[0x0001] - 0x0001);
-					var0004[0x0002] = (var0004[0x0002] - 0x0001);
-					var0004[0x0003] = (var0004[0x0003] - 0x0002);
+					var0004[0x0001] -= 0x0001;
+					var0004[0x0002] -= 0x0001;
+					var0004[0x0003] -= 0x0002;
 				}
 				0xFFB4->obj_sprite_effect(0x0015, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
 				var0004 = 0xFFB4->get_object_position();
@@ -52150,9 +52150,9 @@ void Func04A0 object#(0x4A0) () {
 	if (event == 0x0007) {
 		var000D = get_object_position();
 		while (var000D[0x0003] > 0x0000) {
-			var000D[0x0001] = (var000D[0x0001] - 0x0001);
-			var000D[0x0002] = (var000D[0x0002] - 0x0001);
-			var000D[0x0003] = (var000D[0x0003] - 0x0002);
+			var000D[0x0001] -= 0x0001;
+			var000D[0x0002] -= 0x0001;
+			var000D[0x0003] -= 0x0002;
 		}
 		do {
 			var0016 = 0xFF60->get_cont_items(0xFE99, 0xFE99, 0xFE99);
@@ -52231,9 +52231,9 @@ void Func04A1 object#(0x4A1) () {
 	if (event == 0x0007) {
 		var0005 = get_object_position();
 		while (var0005[0x0003] > 0x0000) {
-			var0005[0x0001] = (var0005[0x0001] - 0x0001);
-			var0005[0x0002] = (var0005[0x0002] - 0x0001);
-			var0005[0x0003] = (var0005[0x0003] - 0x0002);
+			var0005[0x0001] -= 0x0001;
+			var0005[0x0002] -= 0x0001;
+			var0005[0x0003] -= 0x0002;
 		}
 		UI_sprite_effect(0x001B, (var0005[0x0001] - 0x0001), (var0005[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_play_sound_effect(0x002A);
@@ -53166,7 +53166,7 @@ void Func04A8 object#(0x4A8) () {
 				var0007 = 0xFF22->approach_avatar(0x0078, 0x0028);
 				if (!var0007) {
 					var0007 = 0xFE9C->get_object_position();
-					var0007[0x0001] = (var0007[0x0001] + 0x000A);
+					var0007[0x0001] += 0x000A;
 					0xFF22->move_object(var0007);
 					UI_sprite_effect(0x001A, var0007[0x0001], var0007[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 					UI_play_sound_effect(0x0082);
@@ -53323,8 +53323,8 @@ void Func04A9 object#(0x4A9) () {
 			var0002 = get_object_position();
 			UI_sprite_effect(0x0009, (var0002[0x0001] - 0x0001), (var0002[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_play_sound_effect(0x0021);
-			var0002[0x0001] = (var0002[0x0001] + 0x0001);
-			var0002[0x0002] = (var0002[0x0002] + 0x0001);
+			var0002[0x0001] += 0x0001;
+			var0002[0x0002] += 0x0001;
 			var000A = UI_create_new_object(0x03D1);
 			if (var000A) {
 				var000A->set_item_frame(0x0001);
@@ -54016,11 +54016,11 @@ void Func04B2 object#(0x4B2) () {
 					var0008 = 0xFE9C->find_nearby(0x0360, 0x0019, 0x0000);
 					if (var0008) {
 						var0005 = var0008->get_object_position();
-						var0005[0x0001] = (var0005[0x0001] - 0x0001);
-						var0005[0x0002] = (var0005[0x0002] + 0x0001);
+						var0005[0x0001] -= 0x0001;
+						var0005[0x0002] += 0x0001;
 						0xFE9C->si_path_run_usecode(var0005, 0x000A, var0008, Func04B2, true);
 						var0009 = Func09A0(0x0000, 0x0001);
-						var0005[0x0001] = (var0005[0x0001] - 0x0002);
+						var0005[0x0001] -= 0x0002;
 						0xFF4E->si_path_run_usecode(var0005, 0x000B, var0009, Func04B2, false);
 					} else {
 						0xFE9C->clear_item_flag(0x0010);
@@ -54081,11 +54081,11 @@ void Func04B2 object#(0x4B2) () {
 					var0008 = 0xFE9C->find_nearby(0x0360, 0x0019, 0x0000);
 					if (var0008) {
 						var0005 = var0008->get_object_position();
-						var0005[0x0001] = (var0005[0x0001] - 0x0001);
-						var0005[0x0002] = (var0005[0x0002] + 0x0001);
+						var0005[0x0001] -= 0x0001;
+						var0005[0x0002] += 0x0001;
 						0xFE9C->si_path_run_usecode(var0005, 0x000A, var0008, Func04B2, true);
 						var0009 = Func09A0(0x0000, 0x0001);
-						var0005[0x0001] = (var0005[0x0001] - 0x0002);
+						var0005[0x0001] -= 0x0002;
 						0xFF4E->si_path_run_usecode(var0005, 0x000B, var0009, Func04B2, false);
 					} else {
 						0xFE9C->clear_item_flag(0x0010);
@@ -54124,11 +54124,11 @@ void Func04B2 object#(0x4B2) () {
 					var0008 = 0xFE9C->find_nearby(0x0360, 0x0019, 0x0000);
 					if (var0008) {
 						var0005 = var0008->get_object_position();
-						var0005[0x0001] = (var0005[0x0001] - 0x0001);
-						var0005[0x0002] = (var0005[0x0002] + 0x0001);
+						var0005[0x0001] -= 0x0001;
+						var0005[0x0002] += 0x0001;
 						0xFE9C->si_path_run_usecode(var0005, 0x000A, var0008, Func04B2, true);
 						var0009 = Func09A0(0x0000, 0x0001);
-						var0005[0x0001] = (var0005[0x0001] - 0x0002);
+						var0005[0x0001] -= 0x0002;
 						0xFF4E->si_path_run_usecode(var0005, 0x000B, var0009, Func04B2, false);
 					} else {
 						0xFE9C->clear_item_flag(0x0010);
@@ -54309,7 +54309,7 @@ void Func04B3 object#(0x4B3) () {
 							UI_play_music(0x001C, Func09A0(0x0005, 0x0001));
 							var000E = 0xFF4D->get_distance(var000C);
 							var0007 = var000C->get_object_position();
-							var0007[0x0001] = (var0007[0x0001] + 0x0001);
+							var0007[0x0001] += 0x0001;
 							0xFF4D->set_npc_id(0x0001);
 							0xFF4D->si_path_run_usecode(var0007, 0x000D, 0xFF4D->get_npc_object(), Func04B3, true);
 						}
@@ -54427,8 +54427,8 @@ void Func04B3 object#(0x4B3) () {
 			if (var0006) {
 				0xFE9C->set_item_flag(0x0010);
 				var0007 = var0006->get_object_position();
-				var0007[0x0001] = (var0007[0x0001] + 0x0001);
-				var0007[0x0002] = (var0007[0x0002] - 0x0002);
+				var0007[0x0001] += 0x0001;
+				var0007[0x0002] -= 0x0002;
 				0xFE9C->si_path_run_usecode(var0007, 0x0007, 0xFE9C->get_npc_object(), Func04B3, true);
 			}
 			gflags[0x0202] = true;
@@ -54990,7 +54990,7 @@ void Func04B6 object#(0x4B6) () {
 					say("\"After all these centuries of waiting... I had almost given up hope.\" *\"But there is one that I must see one last time, before our paths forever separate.\"");
 					UI_remove_npc_face0();
 					var0017 = 0xFF4A->get_object_position();
-					var0017[0x0001] = (var0017[0x0001] + 0x0002);
+					var0017[0x0001] += 0x0002;
 					0xFFF0->move_object(var0017);
 					UI_sprite_effect(0x0007, var0017[0x0001], var0017[0x0002], var0017[0x0003], 0x0000, 0x0000, 0xFFFF);
 					0xFFF0->set_schedule_type(0x000F);
@@ -55048,7 +55048,7 @@ void Func04B6 object#(0x4B6) () {
 						say("\"After all these centuries of waiting... I had almost given up hope.\" *\"But there is one that I must see one last time, before our paths forever separate.\"");
 						UI_remove_npc_face0();
 						var0017 = 0xFF4A->get_object_position();
-						var0017[0x0001] = (var0017[0x0001] + 0x0002);
+						var0017[0x0001] += 0x0002;
 						0xFFF0->move_object(var0017);
 						UI_sprite_effect(0x0007, var0017[0x0001], var0017[0x0002], var0017[0x0003], 0x0000, 0x0000, 0xFFFF);
 						0xFFF0->set_schedule_type(0x000F);
@@ -55233,7 +55233,7 @@ void Func04B6 object#(0x4B6) () {
 						say("\"After all these centuries of waiting... I had almost given up hope.\" *\"But there is one that I must see one last time, before our paths forever separate.\"");
 						UI_remove_npc_face0();
 						var0017 = 0xFF4A->get_object_position();
-						var0017[0x0001] = (var0017[0x0001] + 0x0002);
+						var0017[0x0001] += 0x0002;
 						0xFFF0->move_object(var0017);
 						UI_sprite_effect(0x0007, var0017[0x0001], var0017[0x0002], var0017[0x0003], 0x0000, 0x0000, 0xFFFF);
 						0xFFF0->set_schedule_type(0x000F);
@@ -57009,8 +57009,8 @@ void Func04D3 object#(0x4D3) () {
 				say("\"I must return to Monk Isle.\"");
 				UI_remove_npc_face0();
 				var000D = 0xFF2D->get_object_position();
-				var000D[0x0001] = (var000D[0x0001] - (var000D[0x0003] / 0x0002));
-				var000D[0x0002] = (var000D[0x0002] - (var000D[0x0003] / 0x0002));
+				var000D[0x0001] -= (var000D[0x0003] / 0x0002);
+				var000D[0x0002] -= (var000D[0x0003] / 0x0002);
 				UI_sprite_effect(0x0007, var000D[0x0001], var000D[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x0051);
 				0xFF2D->remove_npc();
@@ -58538,7 +58538,7 @@ labelFunc0526_0008:
 				break;
 			}
 			UI_play_sound_effect(0x002A);
-			var000B[0x0002] = (var000B[0x0002] + 0x0002);
+			var000B[0x0002] += 0x0002;
 			0xFEDA->move_object(var000B);
 			var000C = script 0xFEDA {
 				face south;
@@ -59253,8 +59253,8 @@ void Func060F object#(0x60F) () {
 	var var0001;
 
 	var0000 = get_object_position();
-	var0000[0x0001] = (var0000[0x0001] - (var0000[0x0003] / 0x0002));
-	var0000[0x0002] = (var0000[0x0002] - (var0000[0x0003] / 0x0002));
+	var0000[0x0001] -= (var0000[0x0003] / 0x0002);
+	var0000[0x0002] -= (var0000[0x0003] / 0x0002);
 	UI_sprite_effect(0x0011, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0x0001);
 	UI_play_sound_effect(0x0074);
 	UI_lightning();
@@ -59277,7 +59277,7 @@ void Func0611 object#(0x611) () {
 		var0002 = 0xFFF9;
 	}
 	var0003 = get_object_position();
-	var0003[0x0002] = (var0003[0x0002] + var0002);
+	var0003[0x0002] += var0002;
 	set_item_shape(var0001);
 	if (set_last_created()) {
 		var0004 = UI_update_last_created(var0003);
@@ -60811,8 +60811,8 @@ void Func0628 object#(0x628) () {
 				}
 			}
 		}
-		var0001[0x0001] = (var0001[0x0001] - UI_die_roll(0x0001, 0x0003));
-		var0001[0x0002] = (var0001[0x0002] + UI_die_roll(0x0001, 0x0002));
+		var0001[0x0001] -= UI_die_roll(0x0001, 0x0003);
+		var0001[0x0002] += UI_die_roll(0x0001, 0x0002);
 		var0007 = UI_update_last_created(var0001);
 		var0008 = UI_die_roll(0x0001, 0x0002);
 		if (var0008 == 0x0001) {
@@ -60863,8 +60863,8 @@ void Func0629 object#(0x629) () {
 				}
 			}
 		}
-		var0001[0x0001] = (var0001[0x0001] + UI_die_roll(0x0001, 0x0002));
-		var0001[0x0002] = (var0001[0x0002] - UI_die_roll(0x0000, 0x0002));
+		var0001[0x0001] += UI_die_roll(0x0001, 0x0002);
+		var0001[0x0002] -= UI_die_roll(0x0000, 0x0002);
 		var0007 = UI_update_last_created(var0001);
 		var0008 = UI_die_roll(0x0001, 0x0002);
 		if (var0008 == 0x0001) {
@@ -61455,8 +61455,8 @@ void Func0636 object#(0x636) () {
 	UI_fade_palette(0x000C, 0x0001, 0x0001);
 	if (item == 0xFE9C->get_npc_object()) {
 		var0000 = get_object_position();
-		var0000[0x0001] = (var0000[0x0001] - (var0000[0x0003] / 0x0002));
-		var0000[0x0002] = (var0000[0x0002] - (var0000[0x0003] / 0x0002));
+		var0000[0x0001] -= (var0000[0x0003] / 0x0002);
+		var0000[0x0002] -= (var0000[0x0003] / 0x0002);
 		UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	}
 }
@@ -67442,11 +67442,11 @@ void Func06BC object#(0x6BC) () {
 			if (var0007) {
 				var0007->set_item_frame(0x0002);
 				var0008 = 0xFFFD->get_object_position();
-				var0008[0x0002] = (var0008[0x0002] + 0x0001);
+				var0008[0x0002] += 0x0001;
 				var0003 = UI_update_last_created(var0008);
 				if (var0003) {
-					var0008[0x0001] = (var0008[0x0001] - (var0008[0x0003] / 0x0002));
-					var0008[0x0002] = (var0008[0x0002] - (var0008[0x0003] / 0x0002));
+					var0008[0x0001] -= (var0008[0x0003] / 0x0002);
+					var0008[0x0002] -= (var0008[0x0003] / 0x0002);
 					UI_sprite_effect(0x0015, var0008[0x0001], var0008[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 					var0009 = 0xFFFD->find_direction(var0007);
 					var0003 = script 0xFFFD {
@@ -67674,7 +67674,7 @@ void Func06C3 object#(0x6C3) () {
 	var0005 = 0xFE9C->get_object_position();
 	var0006 = get_object_position();
 	if ((var0005[0x0001] > var0001) && ((var0005[0x0001] < var0002) && ((var0005[0x0002] > var0003) && (var0005[0x0002] < var0004)))) {
-		var0006[0x0002] = (var0006[0x0002] + 0x001E);
+		var0006[0x0002] += 0x001E;
 	}
 	var0007 = false;
 	var0008 = 0x0000;
@@ -67754,7 +67754,7 @@ void Func06C4 object#(0x6C4) () {
 			};
 		} else {
 			var0005 = 0xFE9C->get_object_position();
-			var0005[0x0002] = (var0005[0x0002] - 0x0014);
+			var0005[0x0002] -= 0x0014;
 			var0006 = UI_create_new_object2(0x0202, var0005);
 			if (var0006) {
 				var0006->set_polymorph(0x0202);
@@ -68237,8 +68237,8 @@ void Func06CE object#(0x6CE) () {
 			var0001 = find_nearby(0x01FB, 0x0014, 0x0000);
 			for (var0004 in var0001 with var0002 to var0003) {
 				var0005 = var0004->get_object_position();
-				var0005[0x0001] = (var0005[0x0001] - (var0005[0x0003] / 0x0002));
-				var0005[0x0002] = (var0005[0x0002] - (var0005[0x0003] / 0x0002));
+				var0005[0x0001] -= (var0005[0x0003] / 0x0002);
+				var0005[0x0002] -= (var0005[0x0003] / 0x0002);
 				UI_sprite_effect(0x0004, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x002A);
 			}
@@ -68254,8 +68254,8 @@ void Func06CE object#(0x6CE) () {
 			var0009 = find_nearby(0x03D1, 0x0014, 0x0000);
 			for (var000C in var0009 with var000A to var000B) {
 				var0005 = var000C->get_object_position();
-				var0005[0x0001] = (var0005[0x0001] - (var0005[0x0003] / 0x0002));
-				var0005[0x0002] = (var0005[0x0002] - (var0005[0x0003] / 0x0002));
+				var0005[0x0001] -= (var0005[0x0003] / 0x0002);
+				var0005[0x0002] -= (var0005[0x0003] / 0x0002);
 				UI_sprite_effect(0x001A, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x0077);
 			}
@@ -68271,8 +68271,8 @@ void Func06CE object#(0x6CE) () {
 			var0001 = find_nearby(0x0356, 0x001E, 0x0000);
 			for (var0004 in var0001 with var0010 to var0011) {
 				var0005 = var0004->get_object_position();
-				var0005[0x0001] = (var0005[0x0001] - (var0005[0x0003] / 0x0002));
-				var0005[0x0002] = (var0005[0x0002] - (var0005[0x0003] / 0x0002));
+				var0005[0x0001] -= (var0005[0x0003] / 0x0002);
+				var0005[0x0002] -= (var0005[0x0003] / 0x0002);
 				UI_sprite_effect(0x0015, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x005F);
 			}
@@ -68289,8 +68289,8 @@ void Func06CE object#(0x6CE) () {
 			var0001 = find_nearby(0x0356, 0x0008, 0x0000);
 			for (var0004 in var0001 with var0014 to var0015) {
 				var0005 = var0004->get_object_position();
-				var0005[0x0001] = (var0005[0x0001] - (var0005[0x0003] / 0x0002));
-				var0005[0x0002] = (var0005[0x0002] - (var0005[0x0003] / 0x0002));
+				var0005[0x0001] -= (var0005[0x0003] / 0x0002);
+				var0005[0x0002] -= (var0005[0x0003] / 0x0002);
 				UI_sprite_effect(0x0015, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x005F);
 			}
@@ -68401,7 +68401,7 @@ void Func06D1 object#(0x6D1) () {
 			0xFE9C->set_item_flag(0x0010);
 			UI_end_conversation();
 			var0001 = 0xFE9C->get_object_position();
-			var0001[0x0001] = (var0001[0x0001] + 0x0005);
+			var0001[0x0001] += 0x0005;
 			UI_sprite_effect(0x0007, (var0001[0x0001] - 0x0003), (var0001[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, 0xFFFF);
 			0xFF2C->move_object(var0001);
 			UI_play_sound_effect(0x0051);
@@ -68534,7 +68534,7 @@ void Func06D5 object#(0x6D5) () {
 		var0000 = find_nearby(0x012D, 0x000F, 0x0000);
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0004 = var0003->get_object_position();
-			var0004[0x0002] = (var0004[0x0002] + 0x0002);
+			var0004[0x0002] += 0x0002;
 			var0003->remove_item();
 			var0005 = UI_create_new_object(0x0121);
 			if (var0005) {
@@ -69561,7 +69561,7 @@ void Func06E1 object#(0x6E1) () {
 		if (gflags[0x0004] == true) {
 			0xFE9C->set_item_flag(0x0010);
 			var0002 = get_object_position();
-			var0002[0x0002] = (var0002[0x0002] - 0x0007);
+			var0002[0x0002] -= 0x0007;
 			var0003 = UI_create_new_object2(0x0151, var0002);
 			if (var0003) {
 				var0003->set_schedule_type(0x000F);
@@ -69597,8 +69597,8 @@ void Func06E1 object#(0x6E1) () {
 		0xFE9C->clear_item_flag(0x0010);
 		if (var0003) {
 			var0002 = var0003->get_object_position();
-			var0002[0x0001] = (var0002[0x0001] - (var0002[0x0003] / 0x0002));
-			var0002[0x0002] = (var0002[0x0002] - (var0002[0x0003] / 0x0002));
+			var0002[0x0001] -= (var0002[0x0003] / 0x0002);
+			var0002[0x0002] -= (var0002[0x0003] / 0x0002);
 			UI_sprite_effect(0x000C, var0002[0x0001], var0002[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_play_sound_effect(0x0039);
 			var0002 = var0003->get_object_position();
@@ -69733,8 +69733,8 @@ void Func06E3 object#(0x6E3) () {
 			var0004 = find_nearby(0x010C, 0x000F, 0x0000);
 			for (var0007 in var0004 with var000A to var000B) {
 				var000C = var0007->get_object_position();
-				var000C[0x0001] = (var000C[0x0001] - (var000C[0x0003] / 0x0002));
-				var000C[0x0002] = (var000C[0x0002] - (var000C[0x0003] / 0x0002));
+				var000C[0x0001] -= (var000C[0x0003] / 0x0002);
+				var000C[0x0002] -= (var000C[0x0003] / 0x0002);
 				UI_sprite_effect(0x0009, var000C[0x0001], var000C[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				var000C = var0007->get_object_position();
 				var000D = UI_create_new_object2(0x014E, var000C);
@@ -69752,8 +69752,8 @@ void Func06E3 object#(0x6E3) () {
 			var0004 = find_nearby(0x0350, 0x000F, 0x0000);
 			for (var0007 in var0004 with var000E to var000F) {
 				var000C = var0007->get_object_position();
-				var000C[0x0001] = (var000C[0x0001] - (var000C[0x0003] / 0x0002));
-				var000C[0x0002] = (var000C[0x0002] - (var000C[0x0003] / 0x0002));
+				var000C[0x0001] -= (var000C[0x0003] / 0x0002);
+				var000C[0x0002] -= (var000C[0x0003] / 0x0002);
 				UI_sprite_effect(0x0009, var000C[0x0001], var000C[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				var000C = var0007->get_object_position();
 				var000D = UI_create_new_object2(0x014E, var000C);
@@ -70338,8 +70338,8 @@ void Func06E9 object#(0x6E9) () {
 			if (UI_die_roll(0x0000, 0x0001) == 0x0000) {
 				var000D *= 0xFFFF;
 			}
-			var0005[0x0001] = (var0005[0x0001] + var000C);
-			var0005[0x0002] = (var0005[0x0002] + var000D);
+			var0005[0x0001] += var000C;
+			var0005[0x0002] += var000D;
 			var0009 = UI_create_new_object(0x037F);
 			if (var0009) {
 				var0009->set_item_flag(0x0012);
@@ -70814,7 +70814,7 @@ void Func06F6 object#(0x6F6) () {
 			}
 		}
 		if (var0001 == 0x0003) {
-			var0000[0x0002] = (var0000[0x0002] - 0x000A);
+			var0000[0x0002] -= 0x000A;
 			UI_sprite_effect(0x000D, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			var0002 = UI_create_new_object2(0x016B, var0000);
 			if (var0002) {
@@ -71453,8 +71453,8 @@ void Func0705 object#(0x705) () {
 	if (var0000 && var0001) {
 		var0006 = var0000->get_object_position();
 		UI_play_sound_effect(0x0074);
-		var0006[0x0001] = (var0006[0x0001] - (var0006[0x0003] / 0x0002));
-		var0006[0x0002] = (var0006[0x0002] - (var0006[0x0003] / 0x0002));
+		var0006[0x0001] -= (var0006[0x0003] / 0x0002);
+		var0006[0x0002] -= (var0006[0x0003] / 0x0002);
 		UI_sprite_effect(0x0011, (var0006[0x0001] - 0x0002), (var0006[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_sprite_effect(0x001B, (var0006[0x0001] - 0x0003), (var0006[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, 0xFFFF);
 		var0006 = var0000->get_object_position();
@@ -71480,8 +71480,8 @@ void Func0706 object#(0x706) () {
 	var0000 = UI_get_party_list();
 	if (0xFFE6 in var0000) {
 		var0001 = 0xFFE6->get_object_position();
-		var0001[0x0001] = (var0001[0x0001] - (var0001[0x0003] / 0x0002));
-		var0001[0x0002] = (var0001[0x0002] - (var0001[0x0003] / 0x0002));
+		var0001[0x0001] -= (var0001[0x0003] / 0x0002);
+		var0001[0x0002] -= (var0001[0x0003] / 0x0002);
 		0xFFE6->remove_npc();
 		UI_sprite_effect(0x0011, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	}
@@ -71601,15 +71601,15 @@ void Func070A object#(0x70A) () {
 		0xFFE4->set_polymorph(0x0292);
 		0xFE9C->set_polymorph(0x02D1);
 		var0001 = 0xFE9C->get_object_position();
-		var0001[0x0001] = (var0001[0x0001] - (var0001[0x0003] / 0x0002));
-		var0001[0x0002] = (var0001[0x0002] - (var0001[0x0003] / 0x0002));
+		var0001[0x0001] -= (var0001[0x0003] / 0x0002);
+		var0001[0x0002] -= (var0001[0x0003] / 0x0002);
 		var0002 = UI_die_roll(0x0000, 0x0003);
 		UI_lightning();
 		UI_sprite_effect(0x002B, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, var0002, 0x0001);
 		if (0xFFE4->npc_nearby()) {
 			var0001 = 0xFFE4->get_object_position();
-			var0001[0x0001] = (var0001[0x0001] - (var0001[0x0003] / 0x0002));
-			var0001[0x0002] = (var0001[0x0002] - (var0001[0x0003] / 0x0002));
+			var0001[0x0001] -= (var0001[0x0003] / 0x0002);
+			var0001[0x0002] -= (var0001[0x0003] / 0x0002);
 			var0002 = UI_die_roll(0x0000, 0x0003);
 			UI_sprite_effect(0x002B, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, var0002, 0x0001);
 		}
@@ -71879,8 +71879,8 @@ void Func0718 object#(0x718) () {
 		say("\"The body lies in the garden of the Temple of Enthusiasm, in the northeast by the Gate of the Serpent...\"");
 		say("\"Now I go into the Void!\"");
 		var0000 = 0xFF68->get_object_position();
-		var0000[0x0001] = (var0000[0x0001] - (var0000[0x0003] / 0x0002));
-		var0000[0x0002] = (var0000[0x0002] - (var0000[0x0003] / 0x0002));
+		var0000[0x0001] -= (var0000[0x0003] / 0x0002);
+		var0000[0x0002] -= (var0000[0x0003] / 0x0002);
 		UI_sprite_effect(0x0009, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		var0000 = 0xFF68->get_object_position();
 		0xFF68->remove_npc();
@@ -72081,8 +72081,8 @@ void Func071B object#(0x71B) () {
 			var0007 = var0006->get_item_frame();
 			if (var0007 == 0x0002) {
 				var0008 = var0006->get_object_position();
-				var0008[0x0001] = (var0008[0x0001] - var0001[0x0001]);
-				var0008[0x0002] = (var0008[0x0002] - var0001[0x0002]);
+				var0008[0x0001] -= var0001[0x0001];
+				var0008[0x0002] -= var0001[0x0002];
 				var0009 = Func09A9(var0008, var0002, var0003);
 				if (var0009) {
 					var0002 = Func09A7(var0009[0x0001], var0002);
@@ -73328,8 +73328,8 @@ void Func0725 object#(0x725) () {
 		var0004 = get_item_quality();
 		if (var0004 == 0x0000) {
 			var0003 = 0xFE9C->get_object_position();
-			var0003[0x0001] = (var0003[0x0001] - (var0003[0x0003] / 0x0002));
-			var0003[0x0002] = (var0003[0x0002] - (var0003[0x0003] / 0x0002));
+			var0003[0x0001] -= (var0003[0x0003] / 0x0002);
+			var0003[0x0002] -= (var0003[0x0003] / 0x0002);
 			UI_sprite_effect(0x0011, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_play_sound_effect(0x0074);
 		}
@@ -74548,13 +74548,13 @@ void Func073B object#(0x73B) () {
 				var000B = [0xFFFF, 0xFFFF];
 			}
 			var000C = var0008->get_distance(var0009);
-			var000B[0x0001] = (var000B[0x0001] * var000C);
-			var000B[0x0002] = (var000B[0x0002] * var000C);
+			var000B[0x0001] *= var000C;
+			var000B[0x0002] *= var000C;
 			var0000 = var0008->get_object_position();
-			var0000[0x0001] = (var0000[0x0001] + var000B[0x0001]);
-			var0000[0x0002] = (var0000[0x0002] + var000B[0x0002]);
-			var000B[0x0001] = (var000B[0x0001] * 0xFFFF);
-			var000B[0x0002] = (var000B[0x0002] * 0xFFFF);
+			var0000[0x0001] += var000B[0x0001];
+			var0000[0x0002] += var000B[0x0002];
+			var000B[0x0001] *= 0xFFFF;
+			var000B[0x0002] *= 0xFFFF;
 			UI_sprite_effect(0x0020, var0000[0x0001], var0000[0x0002], var000B[0x0001], var000B[0x0002], 0x0000, var000C);
 			var0002 = var0003->set_item_quality(var0004 + 0x0001);
 			var0002 = script var0003 {
@@ -74734,11 +74734,11 @@ void Func073C object#(0x73C) () {
 		var0000 = 0xFE9C->get_object_position();
 		var0001 = UI_die_roll(0xFFFD, 0x0003);
 		var0002 = UI_die_roll(0xFFFD, 0x0003);
-		var0000[0x0001] = (var0000[0x0001] + var0001);
-		var0000[0x0002] = (var0000[0x0002] + var0002);
+		var0000[0x0001] += var0001;
+		var0000[0x0002] += var0002;
 		0xFF2D->move_object(var0000);
-		var0000[0x0001] = (var0000[0x0001] - (var0000[0x0003] / 0x0002));
-		var0000[0x0002] = (var0000[0x0002] - (var0000[0x0003] / 0x0002));
+		var0000[0x0001] -= (var0000[0x0003] / 0x0002);
+		var0000[0x0002] -= (var0000[0x0003] / 0x0002);
 		UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		0xFF2D->set_schedule_type(0x0003);
 		0xFF2D->set_alignment(0x0000);
@@ -75014,7 +75014,7 @@ void Func075A object#(0x75A) () {
 		UI_end_conversation();
 		0xFE9C->clear_item_say();
 		var0000 = 0xFE9C->get_object_position();
-		var0000[0x0002] = (var0000[0x0002] + 0x0007);
+		var0000[0x0002] += 0x0007;
 		0xFF2D->set_schedule_type(0x000F);
 		0xFF2D->move_object(var0000);
 		Func097F(0xFF2D, "@Thou hast arrived!@", 0x0000);
@@ -75350,8 +75350,8 @@ void Func0763 object#(0x763) () {
 				}
 			}
 			var0009 = get_object_position();
-			var0009[0x0001] = (var0009[0x0001] - (var0009[0x0003] / 0x0002));
-			var0009[0x0002] = (var0009[0x0002] - (var0009[0x0003] / 0x0002));
+			var0009[0x0001] -= (var0009[0x0003] / 0x0002);
+			var0009[0x0002] -= (var0009[0x0003] / 0x0002);
 			UI_sprite_effect(0x0015, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_play_sound_effect(0x0039);
 			var0002->remove_item();
@@ -76176,8 +76176,8 @@ void Func0780 object#(0x780) () {
 				UI_sprite_effect(0x001B, (var0003[0x0001] - 0x0001), (var0003[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x002A);
 				var0000->remove_item();
-				var0003[0x0001] = (var0003[0x0001] - 0x0002);
-				var0003[0x0002] = (var0003[0x0002] - 0x0002);
+				var0003[0x0001] -= 0x0002;
+				var0003[0x0002] -= 0x0002;
 				var0002 = UI_create_new_object2(0x02BE, var0003);
 				if (var0002) {
 					var0002->set_schedule_type(0x000A);
@@ -77130,8 +77130,8 @@ void Func07AF object#(0x7AF) () {
 	if (0xFFE6->get_npc_object() in UI_get_party_list()) {
 		if (event == 0x0002) {
 			var0000 = 0xFFE6->get_object_position();
-			var0000[0x0001] = (var0000[0x0001] - (var0000[0x0003] / 0x0002));
-			var0000[0x0002] = (var0000[0x0002] - (var0000[0x0003] / 0x0002));
+			var0000[0x0001] -= (var0000[0x0003] / 0x0002);
+			var0000[0x0002] -= (var0000[0x0003] / 0x0002);
 			UI_play_sound_effect(0x0074);
 			UI_lightning();
 			UI_sprite_effect(0x0029, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -78398,14 +78398,14 @@ void Func07DF object#(0x7DF) () {
 						var0009 = var0008->get_object_position();
 						var000A = get_object_position();
 						if (var0009[0x0001] > var000A[0x0001]) {
-							var0000[0x0001] = (var0000[0x0001] + (var0009[0x0001] - var000A[0x0001]));
+							var0000[0x0001] += (var0009[0x0001] - var000A[0x0001]);
 						} else {
-							var0000[0x0001] = (var0000[0x0001] - (var000A[0x0001] - var0009[0x0001]));
+							var0000[0x0001] -= (var000A[0x0001] - var0009[0x0001]);
 						}
 						if (var0009[0x0002] > var000A[0x0002]) {
-							var0000[0x0002] = (var0000[0x0002] + (var0009[0x0002] - var000A[0x0002]));
+							var0000[0x0002] += (var0009[0x0002] - var000A[0x0002]);
 						} else {
-							var0000[0x0002] = (var0000[0x0002] - (var000A[0x0002] - var0009[0x0002]));
+							var0000[0x0002] -= (var000A[0x0002] - var0009[0x0002]);
 						}
 						var0000[0x0003] = var0009[0x0003];
 						var0008->move_object(var0000);
@@ -79142,16 +79142,16 @@ void Func07E9 object#(0x7E9) () {
 			face var0008;
 		};
 		if (var0003[0x0001] < var0004[0x0001]) {
-			var0004[0x0001] = (var0004[0x0001] - 0x0002);
+			var0004[0x0001] -= 0x0002;
 		}
 		if (var0003[0x0001] > var0004[0x0001]) {
-			var0004[0x0001] = (var0004[0x0001] + 0x0002);
+			var0004[0x0001] += 0x0002;
 		}
 		if (var0003[0x0002] < var0004[0x0002]) {
-			var0004[0x0002] = (var0004[0x0002] - 0x0002);
+			var0004[0x0002] -= 0x0002;
 		}
 		if (var0003[0x0001] > var0004[0x0001]) {
-			var0004[0x0002] = (var0004[0x0002] + 0x0002);
+			var0004[0x0002] += 0x0002;
 		}
 		var0009 = UI_create_new_object(0x037F);
 		if (var0009) {
@@ -79160,11 +79160,11 @@ void Func07E9 object#(0x7E9) () {
 			if (UI_is_not_blocked(var0004, 0x0284, 0x0000)) {
 				var0007 = UI_update_last_created(var0004);
 			} else {
-				var0004[0x0003] = (var0004[0x0003] + 0x0001);
+				var0004[0x0003] += 0x0001;
 				if (UI_is_not_blocked(var0004, 0x0284, 0x0000)) {
 					var0007 = UI_update_last_created(var0004);
 				} else {
-					var0004[0x0003] = (var0004[0x0003] - 0x0002);
+					var0004[0x0003] -= 0x0002;
 					if (UI_is_not_blocked(var0004, 0x02D1, 0x0000)) {
 						var0007 = UI_update_last_created(var0004);
 					} else {
@@ -79476,8 +79476,8 @@ void Func07ED object#(0x7ED) () {
 		if (var0005) {
 			var0005->clear_item_flag(0x0012);
 			var0000 = 0xFF2D->get_object_position();
-			var0000[0x0001] = (var0000[0x0001] + 0x0008);
-			var0000[0x0002] = (var0000[0x0002] + 0x0003);
+			var0000[0x0001] += 0x0008;
+			var0000[0x0002] += 0x0003;
 			var0001 = UI_update_last_created(var0000);
 			var0007 = 0xFF2D->get_distance(var0005);
 			// Note: these generate si_path_run_usecode calls to Func0000, which
@@ -79669,8 +79669,8 @@ void Func07EF object#(0x7EF) () {
 	var var0003;
 
 	var0000 = get_object_position();
-	var0000[0x0001] = (var0000[0x0001] - (var0000[0x0003] / 0x0002));
-	var0000[0x0002] = (var0000[0x0002] - (var0000[0x0003] / 0x0002));
+	var0000[0x0001] -= (var0000[0x0003] / 0x0002);
+	var0000[0x0002] -= (var0000[0x0003] / 0x0002);
 	UI_sprite_effect(0x002A, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_sprite_effect(0x0009, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	0xFE9C->obj_sprite_effect(0x002A, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -85363,7 +85363,7 @@ void Func0814 0x814 () {
 	if (var0000) {
 		var0001 = 0xFF4E->get_distance(var0000);
 		var0002 = var0000->get_object_position();
-		var0002[0x0001] = (var0002[0x0001] - 0x0002);
+		var0002[0x0001] -= 0x0002;
 		0xFF4E->si_path_run_usecode(var0002, 0x000D, 0xFF4E->get_npc_object(), Func04B2, true);
 	}
 }
@@ -89622,19 +89622,19 @@ var Func0831 0x831 (var var0000, var var0001) {
 	if (var0001[0x0002] > var0000[0x0002]) {
 		var0004 = UI_die_roll(0x0000, 0x0002);
 	}
-	var0000[0x0001] = (var0000[0x0001] + var0003);
-	var0000[0x0002] = (var0000[0x0002] + var0004);
+	var0000[0x0001] += var0003;
+	var0000[0x0002] += var0004;
 	if (var0000[0x0003] > 0x0000) {
 		var0002 = var0000;
-		var0002[0x0003] = (var0002[0x0003] - 0x0001);
+		var0002[0x0003] -= 0x0001;
 		if ((!UI_is_not_blocked(var0000, 0x037F, 0x0001)) && UI_is_not_blocked(var0002, 0x037F, 0x0001)) {
-			var0000[0x0003] = (var0000[0x0003] - 0x0001);
+			var0000[0x0003] -= 0x0001;
 		}
 	}
 	var0002 = var0000;
-	var0002[0x0003] = (var0002[0x0003] + 0x0001);
+	var0002[0x0003] += 0x0001;
 	if ((!UI_is_not_blocked(var0000, 0x037F, 0x0001)) && UI_is_not_blocked(var0002, 0x037F, 0x0001)) {
-		var0000[0x0003] = (var0000[0x0003] + 0x0001);
+		var0000[0x0003] += 0x0001;
 	}
 	return var0000;
 }
@@ -90494,20 +90494,20 @@ void Func083B 0x83B (var var0000) {
 		if (var0005 > 0x0000) {
 			var0008 = 0x0002;
 			var0009 = "east";
-			var0003[0x0001] = (var0003[0x0001] + 0x0014);
+			var0003[0x0001] += 0x0014;
 		} else {
 			var0008 = 0x0006;
 			var0009 = "west";
-			var0003[0x0001] = (var0003[0x0001] - 0x0014);
+			var0003[0x0001] -= 0x0014;
 		}
 	} else if (var0004 > 0x0000) {
 		var0008 = 0x0004;
 		var0009 = "south";
-		var0003[0x0002] = (var0003[0x0002] + 0x0014);
+		var0003[0x0002] += 0x0014;
 	} else {
 		var0008 = 0x0000;
 		var0009 = "north";
-		var0003[0x0002] = (var0003[0x0002] - 0x0014);
+		var0003[0x0002] -= 0x0014;
 	}
 	var0001 = script item {
 		nohalt;
@@ -96116,8 +96116,8 @@ void Func0864 0x864 () {
 	UI_remove_npc_face0();
 	Func097F(item, "@A thousand thanks!@", 0x0000);
 	var0002 = get_object_position();
-	var0002[0x0001] = (var0002[0x0001] - (var0002[0x0003] / 0x0002));
-	var0002[0x0002] = (var0002[0x0002] - (var0002[0x0003] / 0x0002));
+	var0002[0x0001] -= (var0002[0x0003] / 0x0002);
+	var0002[0x0002] -= (var0002[0x0003] / 0x0002);
 	UI_sprite_effect(0x0015, var0002[0x0001], var0002[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	var0003 = 0xFFC9->get_npc_object()->get_item_shape();
 	0xFFC9->set_polymorph(var0003);
@@ -97911,8 +97911,8 @@ void Func086C 0x86C (var var0000) {
 		var0001 = get_object_position();
 		var0002 = UI_die_roll(0xFFFE, 0x0002);
 		var0003 = UI_die_roll(0xFFFE, 0x0002);
-		var0001[0x0001] = (var0001[0x0001] + var0002);
-		var0001[0x0002] = (var0001[0x0002] + var0003);
+		var0001[0x0001] += var0002;
+		var0001[0x0002] += var0003;
 		var0000->move_object([var0001[0x0001], var0001[0x0002], var0001[0x0003]]);
 		UI_sprite_effect(0x0015, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	}
@@ -102477,7 +102477,7 @@ void Func08BF 0x8BF () {
 				if ((var0011[0x0001] <= var0005[0x0001]) && ((var0011[0x0003] == 0x0002) && (var0010->get_item_frame() == 0x0003))) {
 					var000C = var0010->set_last_created();
 					if (var000C) {
-						var0005[0x0002] = (var0005[0x0002] + 0x0002);
+						var0005[0x0002] += 0x0002;
 						var000C = UI_update_last_created(var0005);
 					}
 					gflags[0x023E] = true;
@@ -103465,7 +103465,7 @@ void Func08CD 0x8CD () {
 				};
 			}
 			if (var0009) {
-				var0000[0x0003] = (var0000[0x0003] + 0x0001);
+				var0000[0x0003] += 0x0001;
 				var0004 = UI_update_last_created(var0000);
 				var0004 = script var0009 {
 					wait 22;
@@ -103507,9 +103507,9 @@ void Func08CF 0x8CF (var var0000) {
 	for (var0004 in var0001 with var0002 to var0003) {
 		var0005 = var0004->get_object_position();
 		if (!var0000) {
-			var0005[0x0002] = (var0005[0x0002] - 0x0010);
+			var0005[0x0002] -= 0x0010;
 		} else {
-			var0005[0x0002] = (var0005[0x0002] + 0x0010);
+			var0005[0x0002] += 0x0010;
 		}
 		var0004->move_object(var0005);
 	}
@@ -103666,8 +103666,8 @@ void Func08D3 0x8D3 () {
 	var var0005;
 
 	var0000 = 0xFE9C->get_object_position();
-	var0000[0x0001] = (var0000[0x0001] - (var0000[0x0003] / 0x0002));
-	var0000[0x0002] = (var0000[0x0002] - (var0000[0x0003] / 0x0002));
+	var0000[0x0001] -= (var0000[0x0003] / 0x0002);
+	var0000[0x0002] -= (var0000[0x0003] / 0x0002);
 	UI_sprite_effect(0x0011, (var0000[0x0001] - 0x0001), (var0000[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_sprite_effect(0x0001, (var0000[0x0001] - 0x0001), (var0000[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_lightning();
@@ -103879,8 +103879,8 @@ void Func08D7 0x8D7 () {
 		var0007 = UI_create_new_object(0x03E7);
 		if (var0007) {
 			var0007->set_item_frame(0x0004);
-			var0003[0x0001] = (var0003[0x0001] + 0x0001);
-			var0003[0x0002] = (var0003[0x0002] + 0x0001);
+			var0003[0x0001] += 0x0001;
+			var0003[0x0002] += 0x0001;
 			var0004 = UI_update_last_created(var0003);
 		}
 		UI_sprite_effect(0x000D, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -104175,8 +104175,8 @@ void Func08DB 0x8DB (var var0000) {
 			say("\"Let it be said that Sir Dupre died bravely!\"");
 			UI_remove_npc_face0();
 			var0001 = 0xFFFF->get_object_position();
-			var0001[0x0001] = (var0001[0x0001] - 0x0003);
-			var0001[0x0002] = (var0001[0x0002] - 0x0003);
+			var0001[0x0001] -= 0x0003;
+			var0001[0x0002] -= 0x0003;
 			UI_sprite_effect(0x0009, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			gflags[0x0007] = true;
 			gflags[0x0061] = true;
@@ -104242,8 +104242,8 @@ void Func08DB 0x8DB (var var0000) {
 								gflags[0x00BE] = true;
 							}
 							var0001 = var000F->get_object_position();
-							var0001[0x0001] = (var0001[0x0001] - 0x0003);
-							var0001[0x0002] = (var0001[0x0002] - 0x0003);
+							var0001[0x0001] -= 0x0003;
+							var0001[0x0002] -= 0x0003;
 							if (!var000F->is_npc()) {
 								UI_sprite_effect(0x0009, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 								var000A = (var000A & var000F);
@@ -104528,7 +104528,7 @@ var Func08E2 0x8E2 (var var0000) {
 			var0006 = Func07F1;
 			var0005 = 0x0028;
 			var0010 = var0004;
-			var0010[0x0003] = (var0010[0x0003] + 0x0001);
+			var0010[0x0003] += 0x0001;
 			UI_sprite_effect(0x0015, (var0010[0x0001] - 0x0006), (var0010[0x0002] - 0x0006), 0x0000, 0x0000, 0x0000, 0xFFFF);
 			var0011 = [0x0108, 0x0179, 0x0274, 0x023C];
 			var000A = UI_create_new_object(var0011[UI_get_random(0x0004)]);
@@ -104961,7 +104961,7 @@ void Func08F2 0x8F2 (var var0000) {
 	var var0002;
 	var var0003;
 
-	var0000[0x0002] = (var0000[0x0002] - 0x0003);
+	var0000[0x0002] -= 0x0003;
 	var0001 = [0xFF2D, 0xFF2C, 0xFF2B, 0xFF31, 0xFF2F, 0xFF2A, 0xFF30, 0xFF2E];
 	var0002 = 0x0000;
 	while (var0002 < 0x0007) {
@@ -104992,7 +104992,7 @@ void Func08F4 0x8F4 () {
 
 	if (Func08F3() && (!0xFF29->get_item_flag(0x001C))) {
 		var0000 = 0xFE9C->get_object_position();
-		var0000[0x0002] = (var0000[0x0002] - 0x0002);
+		var0000[0x0002] -= 0x0002;
 		0xFF31->move_object(var0000);
 		UI_play_sound_effect(0x0051);
 		0xFF31->set_npc_id(0x001F);
@@ -105024,8 +105024,8 @@ void Func08F5 0x8F5 (var var0000) {
 	say("\"Stand thou in awe of my true power... Let there be PEACE!\"");
 	UI_remove_npc_face0();
 	var0001 = var0000->get_object_position();
-	var0001[0x0001] = (var0001[0x0001] - (var0001[0x0003] / 0x0002));
-	var0001[0x0002] = (var0001[0x0002] - (var0001[0x0003] / 0x0002));
+	var0001[0x0001] -= (var0001[0x0003] / 0x0002);
+	var0001[0x0002] -= (var0001[0x0003] / 0x0002);
 	UI_sprite_effect(0x001A, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_sprite_effect(0x0007, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_sprite_effect(0x0007, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -105654,8 +105654,8 @@ var Func0908 0x908 (var var0000, var var0001, var var0002, var var0003, var var0
 	Func0907(var0000, var0002);
 	var0000->set_item_shape(var0001);
 	var0006 = var0000->get_object_position();
-	var0006[0x0001] = (var0006[0x0001] + var0003);
-	var0006[0x0002] = (var0006[0x0002] + var0004);
+	var0006[0x0001] += var0003;
+	var0006[0x0002] += var0004;
 	if (var0000->set_last_created()) {
 		var0007 = UI_update_last_created(var0006);
 	}
@@ -105947,7 +105947,7 @@ var Func0911 0x911 (var var0000, var var0001, var var0002) {
 	var0003 = 0x0000;
 	do {
 		var0003 += 0x0001;
-		var0000[var0003] = (var0000[var0003] + var0001[var0003]);
+		var0000[var0003] += var0001[var0003];
 	} while (!(var0003 == var0002));
 	return var0000;
 }
@@ -105958,7 +105958,7 @@ var Func0912 0x912 (var var0000, var var0001) {
 	var0002 = 0x0000;
 	do {
 		var0002 += 0x0001;
-		var0000[var0002] = (var0000[var0002] * 0xFFFF);
+		var0000[var0002] *= 0xFFFF;
 	} while (!(var0002 == var0001));
 	return var0000;
 }
@@ -106547,15 +106547,15 @@ void Func0925 0x925 () {
 	var0002 = [0x0000, 0x0000, 0x0000];
 	for (var0005 in var0001 with var0003 to var0004) {
 		if (var0005->get_item_frame() == 0x000B) {
-			var0002[0x0001] = (var0002[0x0001] + var0005->get_item_quantity(0x0000));
+			var0002[0x0001] += var0005->get_item_quantity(0x0000);
 			var0006 = true;
 		}
 		if (var0005->get_item_frame() == 0x000C) {
-			var0002[0x0002] = (var0002[0x0002] + var0005->get_item_quantity(0x0000));
+			var0002[0x0002] += var0005->get_item_quantity(0x0000);
 			var0007 = true;
 		}
 		if (var0005->get_item_frame() == 0x000D) {
-			var0002[0x0003] = (var0002[0x0003] + var0005->get_item_quantity(0x0000));
+			var0002[0x0003] += var0005->get_item_quantity(0x0000);
 			var0008 = true;
 		}
 		var0005->remove_item();
@@ -107861,7 +107861,7 @@ void Func0939 0x939 (var var0000) {
 	}
 	if (var0000 == 0x00FC) {
 		var0001 = get_object_position();
-		var0001[0x0001] = (var0001[0x0001] + 0x0003);
+		var0001[0x0001] += 0x0003;
 		si_path_run_usecode(var0001, 0x000D, item, Func07F8, false);
 		abort;
 	}
@@ -108008,7 +108008,7 @@ void Func093A 0x93A (var var0000) {
 					say "@Yes, Priestess.@";
 				};
 				var0005 = var0004->get_object_position();
-				var0005[0x0001] = (var0005[0x0001] - 0x0003);
+				var0005[0x0001] -= 0x0003;
 				var0004->si_path_run_usecode(var0005, 0x000D, var0004, Func07F8, false);
 			}
 			abort;
@@ -108192,7 +108192,7 @@ void Func093A 0x93A (var var0000) {
 				var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
 				if (var0003) {
 					var0005 = var0003->get_object_position();
-					var0005[0x0002] = (var0005[0x0002] + 0x000A);
+					var0005[0x0002] += 0x000A;
 					UI_play_music(0x0014, Func09A0(0x0005, 0x0001));
 					0xFFD2->move_object(var0005);
 					0xFFD2->si_path_run_usecode([0x0408, 0x0670, 0x0000], 0x000D, 0xFFD2->get_npc_object(), Func07F8, false);
@@ -108243,7 +108243,7 @@ void Func093A 0x93A (var var0000) {
 			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
 			if (var0003) {
 				var0005 = var0003->get_object_position();
-				var0005[0x0002] = (var0005[0x0002] + 0x000A);
+				var0005[0x0002] += 0x000A;
 				0xFFCB->move_object(var0005);
 				0xFFCB->si_path_run_usecode([0x0406, 0x0670, 0x0000], 0x000D, 0xFFCB->get_npc_object(), Func07F8, false);
 			}
@@ -108281,7 +108281,7 @@ void Func093A 0x93A (var var0000) {
 			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
 			if (var0003) {
 				var0005 = var0003->get_object_position();
-				var0005[0x0002] = (var0005[0x0002] + 0x000A);
+				var0005[0x0002] += 0x000A;
 				0xFFCA->move_object(var0005);
 				0xFFCA->si_path_run_usecode([0x0408, 0x0672, 0x0000], 0x000D, 0xFFCA->get_npc_object(), Func07F8, false);
 				Func097F(0xFFCA, "@Don't shove me!@", 0x0007);
@@ -108296,7 +108296,7 @@ void Func093A 0x93A (var var0000) {
 			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
 			if (var0003) {
 				var0005 = var0003->get_object_position();
-				var0005[0x0002] = (var0005[0x0002] + 0x000A);
+				var0005[0x0002] += 0x000A;
 				0xFFCD->move_object(var0005);
 				0xFFCD->si_path_run_usecode([0x0406, 0x0672, 0x0000], 0x000D, 0xFFCD->get_npc_object(), Func07F8, false);
 				Func097F(0xFFCD, "@Save us, Lady Yelinda!@", 0x0002);
@@ -108410,7 +108410,7 @@ void Func093A 0x93A (var var0000) {
 			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
 			if (var0003) {
 				var0005 = var0003->get_object_position();
-				var0005[0x0002] = (var0005[0x0002] + 0x000A);
+				var0005[0x0002] += 0x000A;
 				0xFFCB->si_path_run_usecode(var0005, 0x000D, 0xFFCB->get_npc_object(), Func07F8, false);
 			}
 			abort;
@@ -108422,7 +108422,7 @@ void Func093A 0x93A (var var0000) {
 			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
 			if (var0003) {
 				var0005 = var0003->get_object_position();
-				var0005[0x0002] = (var0005[0x0002] + 0x000B);
+				var0005[0x0002] += 0x000B;
 				0xFFCA->si_path_run_usecode(var0005, 0x000D, 0xFFCA->get_npc_object(), Func07F8, false);
 				Func097F(0xFFCA, "@Vengeance shall be mine!@", 0x0000);
 				Func097F(0xFFD2, "@Truth shall prevail!@", 0x0004);
@@ -108442,7 +108442,7 @@ void Func093A 0x93A (var var0000) {
 				var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
 				if (var0003) {
 					var0005 = var0003->get_object_position();
-					var0005[0x0002] = (var0005[0x0002] + 0x000A);
+					var0005[0x0002] += 0x000A;
 					0xFFCD->si_path_run_usecode(var0005, 0x000D, 0xFFCD->get_npc_object(), Func07F8, false);
 					Func097F(0xFFCD, "@She lied to me...@", 0x0000);
 				}
@@ -108472,10 +108472,10 @@ void Func093A 0x93A (var var0000) {
 				var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
 				if (var0003) {
 					var0005 = var0003->get_object_position();
-					var0005[0x0002] = (var0005[0x0002] + 0x000A);
+					var0005[0x0002] += 0x000A;
 					UI_play_music(0x0014, Func09A0(0x0005, 0x0001));
 					0xFFD2->move_object(var0005);
-					var0005[0x0002] = (var0005[0x0002] - 0x0008);
+					var0005[0x0002] -= 0x0008;
 					0xFFD2->si_path_run_usecode(var0005, 0x000D, 0xFFD2->get_npc_object(), Func07F8, false);
 				}
 				UI_end_conversation();
@@ -108520,7 +108520,7 @@ void Func093A 0x93A (var var0000) {
 			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
 			if (var0003) {
 				var0005 = var0003->get_object_position();
-				var0005[0x0002] = (var0005[0x0002] + 0x000A);
+				var0005[0x0002] += 0x000A;
 				0xFFCB->move_object(var0005);
 				0xFFCB->si_path_run_usecode([0x0406, 0x0670, 0x0000], 0x000D, 0xFFCB->get_npc_object(), Func07F8, false);
 			}
@@ -108582,7 +108582,7 @@ void Func093A 0x93A (var var0000) {
 				var0004 = var0003->find_nearby(0x017D, 0x0003, 0x0008);
 				if (var0004) {
 					var0005 = var0003->get_object_position();
-					var0005[0x0002] = (var0005[0x0002] + 0x0001);
+					var0005[0x0002] += 0x0001;
 					var0004->si_path_run_usecode(var0005, 0x000D, var0004, Func07F8, false);
 				}
 			}
@@ -108630,8 +108630,8 @@ void Func093A 0x93A (var var0000) {
 			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
 			if (var0003) {
 				var0005 = var0003->get_object_position();
-				var0005[0x0001] = (var0005[0x0001] + 0x0003);
-				var0005[0x0002] = (var0005[0x0002] + 0x0001);
+				var0005[0x0001] += 0x0003;
+				var0005[0x0002] += 0x0001;
 				si_path_run_usecode(var0005, 0x000D, item, Func07F8, false);
 			}
 			abort;
@@ -109199,7 +109199,7 @@ void Func093B 0x93B (var var0000) {
 		var0005 = var0004->find_nearby(0x0113, 0x0014, 0x0010);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
-			var0006[0x0002] = (var0006[0x0002] + 0x0005);
+			var0006[0x0002] += 0x0005;
 			si_path_run_usecode(var0006, 0x000D, item, Func07F8, false);
 		}
 		abort;
@@ -109395,8 +109395,8 @@ var Func0940 0x940 (var var0000, var var0001) {
 
 	if (var0001 > 0x0000) {
 		var0002 = ((var0001 * 0x0002) + 0x0001);
-		var0000[0x0001] = (var0000[0x0001] + ((UI_get_random(var0002) - 0x0001) - var0001));
-		var0000[0x0002] = (var0000[0x0002] + ((UI_get_random(var0002) - 0x0001) - var0001));
+		var0000[0x0001] += ((UI_get_random(var0002) - 0x0001) - var0001);
+		var0000[0x0002] += ((UI_get_random(var0002) - 0x0001) - var0001);
 	}
 	return var0000;
 }
@@ -110801,8 +110801,8 @@ void Func098B 0x98B (var var0000) {
 	var var0001;
 
 	var0001 = var0000->get_object_position();
-	var0001[0x0001] = (var0001[0x0001] - (var0001[0x0003] / 0x0002));
-	var0001[0x0002] = (var0001[0x0002] - (var0001[0x0003] / 0x0002));
+	var0001[0x0001] -= (var0001[0x0003] / 0x0002);
+	var0001[0x0002] -= (var0001[0x0003] / 0x0002);
 	UI_sprite_effect(0x0018, var0001[0x0001], var0001[0x0002], 0xFFFE, 0xFFFE, 0x0000, 0xFFFF);
 }
 
@@ -112203,7 +112203,7 @@ var Func09B3 0x9B3 (var var0000) {
 			if (var0001[0x0001] == 0x0000) {
 				var0001[0x0001] = var0006[0x0001];
 			}
-			var0001[0x0002] = (var0001[0x0002] + var0006[Func0977(var0006)]);
+			var0001[0x0002] += var0006[Func0977(var0006)];
 			var0005->remove_item();
 		}
 	}
@@ -112673,8 +112673,8 @@ void Func09BF 0x9BF () {
 	var0000 = [0x009A, 0x066C, 0x0000];
 	var0001 = UI_die_roll(0x0001, 0x0006);
 	var0002 = UI_die_roll(0x0001, 0x0006);
-	var0000[0x0001] = (var0000[0x0001] + var0001);
-	var0000[0x0002] = (var0000[0x0002] + var0002);
+	var0000[0x0001] += var0001;
+	var0000[0x0002] += var0002;
 	UI_sprite_effect(0x0015, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_play_sound_effect(0x0082);
 	var0003 = UI_create_new_object(0x0200);

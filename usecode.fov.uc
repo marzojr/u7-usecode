@@ -943,8 +943,8 @@ void Func0102 shape#(0x102) () {
 	}
 	if (event == 0x0008) {
 		var0000 = get_object_position();
-		var0000[0x0001] = (var0000[0x0001] - 0x0002);
-		var0000[0x0002] = (var0000[0x0002] + 0x0001);
+		var0000[0x0001] -= 0x0002;
+		var0000[0x0002] += 0x0001;
 		var0001 = 0xFE9C->get_cont_items(0x032A, 0xFE99, 0xFE99);
 		if (var0001) {
 			var0002 = var0001->set_last_created();
@@ -1004,8 +1004,8 @@ void Func0105 shape#(0x105) () {
 			var0003->set_item_flag(0x000B);
 			var0003->set_item_frame(UI_die_roll(0x0000, 0x0004));
 			var0004 = get_object_position();
-			var0004[0x0001] = (var0004[0x0001] + 0x0001);
-			var0004[0x0002] = (var0004[0x0002] + 0x0001);
+			var0004[0x0001] += 0x0001;
+			var0004[0x0002] += 0x0001;
 			var0000 = UI_update_last_created(var0004);
 		}
 	}
@@ -1160,7 +1160,7 @@ void Func0124 shape#(0x124) () {
 		var0006 = 0x0000;
 		if ((var0003[0x0001] == var0005[0x0001]) && ((var0003[0x0002] == var0005[0x0002]) && (gflags[0x02E7] == false))) {
 			gflags[0x02E7] = true;
-			var0005[0x0002] = (var0005[0x0002] + 0x0002);
+			var0005[0x0002] += 0x0002;
 			UI_sprite_effect(0x0011, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, 0x0001);
 			UI_play_sound_effect2(0x003E, item);
 			UI_lightning();
@@ -1425,7 +1425,7 @@ void Func0149 shape#(0x149) () {
 		var0000 = get_container();
 		if (var0000) {
 			var0001 = 0xFE9C->get_object_position();
-			var0001[0x0001] = (var0001[0x0001] + 0x0001);
+			var0001[0x0001] += 0x0001;
 			var0002 = set_last_created();
 			if (var0002) {
 				var0002 = UI_update_last_created(var0001);
@@ -2083,7 +2083,7 @@ void Func01A2 shape#(0x1A2) () {
 					var0002->set_item_flag(0x000B);
 					var0003 = var0002->set_item_quantity(UI_die_roll(0x0001, 0x0064));
 					var0004 = get_object_position();
-					var0004[0x0001] = (var0004[0x0001] + 0x0001);
+					var0004[0x0001] += 0x0001;
 					var0003 = UI_update_last_created(var0004);
 					if (var0003) {
 						var0003 = set_item_quality(UI_game_hour());
@@ -2474,8 +2474,8 @@ void Func01B2 shape#(0x1B2) () {
 	}
 	if (event == 0x0008) {
 		var0000 = get_object_position();
-		var0000[0x0001] = (var0000[0x0001] + 0x0001);
-		var0000[0x0002] = (var0000[0x0002] - 0x0001);
+		var0000[0x0001] += 0x0001;
+		var0000[0x0002] -= 0x0001;
 		var0001 = 0xFE9C->get_cont_items(0x032A, 0xFE99, 0xFE99);
 		if (var0001) {
 			var0002 = var0001->set_last_created();
@@ -2911,8 +2911,8 @@ void Func020E shape#(0x20E) () {
 	if ((event == 0x0001) || (event == 0x0002)) {
 		var0000 = find_nearby(0x01B8, 0x000A, 0x0080);
 		var0001 = get_object_position();
-		var0001[0x0001] = (var0001[0x0001] + 0x0003);
-		var0001[0x0002] = (var0001[0x0002] + 0x0003);
+		var0001[0x0001] += 0x0003;
+		var0001[0x0002] += 0x0003;
 		for (var0004 in var0000 with var0002 to var0003) {
 			var0005 = var0004->get_object_position();
 			if ((var0001[0x0001] == var0005[0x0001]) && ((var0001[0x0002] == var0005[0x0002]) && (var0001[0x0003] == var0005[0x0003]))) {
@@ -2954,7 +2954,7 @@ void Func0247 shape#(0x247) () {
 					0xFE9C->halt_scheduled();
 					Func0828(item, var0003, var0004, 0xFFFF, Func0247, item, 0x0007);
 				} else {
-					var0000[0x0002] = (var0000[0x0002] - 0x0005);
+					var0000[0x0002] -= 0x0005;
 					Func08FF("@There is no room for thy bedroll there.@");
 				}
 			}
@@ -3391,8 +3391,8 @@ void Func0270 shape#(0x270) () {
 						var0012->set_item_frame(0x0003 - var0011);
 						var0013 = var000E->get_object_position();
 						var0013[0x0001] = ((var0013[0x0001] + 0x0001) + var0011);
-						var0013[0x0002] = (var0013[0x0002] + 0x0002);
-						var0013[0x0003] = (var0013[0x0003] - 0x0003);
+						var0013[0x0002] += 0x0002;
+						var0013[0x0003] -= 0x0003;
 						var0014 = UI_update_last_created(var0013);
 						var0011 += 0x0001;
 					}
@@ -4283,8 +4283,8 @@ void Func028B shape#(0x28B) () {
 			var0004->set_item_flag(0x000B);
 			var0004->set_item_frame(UI_die_roll(0x0000, 0x0009));
 			var0005 = get_object_position();
-			var0005[0x0001] = (var0005[0x0001] + 0x0001);
-			var0005[0x0002] = (var0005[0x0002] + 0x0001);
+			var0005[0x0001] += 0x0001;
+			var0005[0x0002] += 0x0001;
 			var0002 = UI_update_last_created(var0005);
 		}
 		return;
@@ -4418,8 +4418,8 @@ void Func0292 shape#(0x292) () {
 				var0003 = set_last_created();
 				if (var0003) {
 					var0004 = var0001->get_object_position();
-					var0004[0x0001] = (var0004[0x0001] - UI_die_roll(0x0001, 0x0002));
-					var0004[0x0003] = (var0004[0x0003] + 0x0001);
+					var0004[0x0001] -= UI_die_roll(0x0001, 0x0002);
+					var0004[0x0003] += 0x0001;
 					var0003 = UI_update_last_created(var0004);
 					if (var0003) {
 						var0003 = script item after 60 ticks {
@@ -4493,7 +4493,7 @@ void Func0296 shape#(0x296) () {
 			return;
 		}
 		var0002 = 0xFE9C->get_object_position();
-		var0002[0x0001] = (var0002[0x0001] + 0x0001);
+		var0002[0x0001] += 0x0001;
 		var0003 = false;
 		var0004 = 0x0000;
 		var0005 = 0xFE9C->find_nearby(0x01FD, 0x000F, 0x0000);
@@ -6245,11 +6245,11 @@ void Func0311 shape#(0x311) () {
 				var0003 = 0x0002;
 				var0004 = 0x009D;
 			}
-			var0001[var0003] = (var0001[var0003] + 0x0002);
+			var0001[var0003] += 0x0002;
 			if (!UI_is_not_blocked(var0001, var0004, 0x0000)) {
 				var0005 = [0x0001, 0x0002, 0x0003];
 				for (var0008 in var0005 with var0006 to var0007) {
-					var0001[0x0003] = (var0001[0x0003] + 0x0001);
+					var0001[0x0003] += 0x0001;
 					if (UI_is_not_blocked(var0001, var0004, 0x0000)) {
 						break;
 					}
@@ -6263,7 +6263,7 @@ void Func0311 shape#(0x311) () {
 			if (var0009) {
 				UI_close_gumps();
 				var000A = UI_update_last_created(var0001);
-				var0001[var0003] = (var0001[var0003] - 0x0002);
+				var0001[var0003] -= 0x0002;
 				UI_play_music(0x0033, 0x0000);
 				var0009->set_item_flag(0x0012);
 				var000A = var0009->set_item_quality(var0002);
@@ -6305,7 +6305,7 @@ void Func0311 shape#(0x311) () {
 				} else {
 					var000E = 0xFFFF;
 				}
-				var0001[var0003] = (var0001[var0003] + var000E);
+				var0001[var0003] += var000E;
 				var000A = UI_path_run_usecode(var0001, Func0311, var0009, 0x0007);
 				if (var000A) {
 					UI_set_path_failure(Func0311, var0009, 0x0008);
@@ -7070,7 +7070,7 @@ void Func032A shape#(0x32A) () {
 			}
 			var0006 = Func093C(var0006[0x0001], var0006);
 			var0006[0x0001] = var0006[0x0001];
-			var0006[0x0002] = (var0006[0x0002] + 0x0001);
+			var0006[0x0002] += 0x0001;
 			var0009 = UI_path_run_usecode(var0006, Func032A, item, 0x000A);
 		}
 		if (var0006[0x0001] == 0x0000) {
@@ -7079,7 +7079,7 @@ void Func032A shape#(0x32A) () {
 				return;
 			}
 			var0006 = Func093C(var0006[0x0001], var0006);
-			var0006[0x0002] = (var0006[0x0002] + 0x0001);
+			var0006[0x0002] += 0x0001;
 			var0009 = UI_path_run_usecode(var0006, Func032A, item, 0x000A);
 		}
 	}
@@ -8198,8 +8198,8 @@ void Func0379 shape#(0x379) () {
 		var0000 = UI_create_new_object(0x01B8);
 		if (var0000) {
 			var0001 = get_object_position();
-			var0001[0x0001] = (var0001[0x0001] + 0x0003);
-			var0001[0x0002] = (var0001[0x0002] + 0x0003);
+			var0001[0x0001] += 0x0003;
+			var0001[0x0002] += 0x0003;
 			var0000->set_item_frame(UI_die_roll(0x0000, 0x0007));
 			if (UI_update_last_created(var0001)) {
 				set_item_shape(0x020E);
@@ -8384,7 +8384,7 @@ void Func03D5 shape#(0x3D5) () {
 		if ((var0001 == 0x0241) && (var0000->get_item_frame() == get_item_frame())) {
 			var0003 = set_last_created();
 			if (var0003) {
-				var0002[0x0003] = (var0002[0x0003] + 0x0002);
+				var0002[0x0003] += 0x0002;
 				var0003 = UI_update_last_created(var0002);
 			}
 		} else {
@@ -49970,7 +49970,7 @@ void Func0611 object#(0x611) () {
 		var0002 = 0xFFF9;
 	}
 	var0003 = get_object_position();
-	var0003[0x0002] = (var0003[0x0002] + var0002);
+	var0003[0x0002] += var0002;
 	set_item_shape(var0001);
 	if (set_last_created()) {
 		var0004 = UI_update_last_created(var0003);
@@ -50967,8 +50967,8 @@ void Func0628 object#(0x628) () {
 				}
 			}
 		}
-		var0001[0x0001] = (var0001[0x0001] - UI_die_roll(0x0001, 0x0003));
-		var0001[0x0002] = (var0001[0x0002] + UI_die_roll(0x0001, 0x0002));
+		var0001[0x0001] -= UI_die_roll(0x0001, 0x0003);
+		var0001[0x0002] += UI_die_roll(0x0001, 0x0002);
 		var0007 = UI_update_last_created(var0001);
 		var0008 = UI_die_roll(0x0001, 0x0002);
 		if (var0008 == 0x0001) {
@@ -51019,8 +51019,8 @@ void Func0629 object#(0x629) () {
 				}
 			}
 		}
-		var0001[0x0001] = (var0001[0x0001] + UI_die_roll(0x0001, 0x0002));
-		var0001[0x0002] = (var0001[0x0002] - UI_die_roll(0x0000, 0x0002));
+		var0001[0x0001] += UI_die_roll(0x0001, 0x0002);
+		var0001[0x0002] -= UI_die_roll(0x0000, 0x0002);
 		var0007 = UI_update_last_created(var0001);
 		var0008 = UI_die_roll(0x0001, 0x0002);
 		if (var0008 == 0x0001) {
@@ -52003,7 +52003,7 @@ void Func063E object#(0x63E) () {
 		var0000 = 0xFFE9->set_last_created();
 		if (var0000) {
 			var0001 = 0xFE9C->get_object_position();
-			var0001[0x0002] = (var0001[0x0002] - 0x0004);
+			var0001[0x0002] -= 0x0004;
 			var0000 = UI_update_last_created(var0001);
 			0xFFE9->set_item_frame(0x0010);
 		}
@@ -56878,7 +56878,7 @@ void Func06A2 object#(0x6A2) () {
 				var0007 = UI_create_new_object(0x02A3);
 				var0007->set_item_frame(0x0010);
 				var0008 = var0006;
-				var0008[0x0001] = (var0008[0x0001] - 0x0001);
+				var0008[0x0001] -= 0x0001;
 				var0009 = UI_update_last_created(var0008);
 				UI_sprite_effect(0x000D, (var0006[0x0001] - 0x0002), (var0006[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 			}
@@ -57294,8 +57294,8 @@ void Func06AA object#(0x6AA) () {
 		if (var0000) {
 			0xFE9C->set_item_frame_rot(0x0020);
 			var0001 = 0xFE9C->get_object_position();
-			var0001[0x0001] = (var0001[0x0001] + 0x0001);
-			var0001[0x0002] = (var0001[0x0002] + 0x0001);
+			var0001[0x0001] += 0x0001;
+			var0001[0x0002] += 0x0001;
 			var0002 = UI_update_last_created(var0001);
 			if (var0002) {
 				var0002 = script var0000 {
@@ -58512,8 +58512,8 @@ void Func06F5 object#(0x6F5) () {
 		say("He places the sword upon the firepit and wearily turns away.\"*");
 		var0002 = find_nearest(0x02E3, 0x000A);
 		var0003 = var0002->get_object_position();
-		var0003[0x0002] = (var0003[0x0002] - 0x0001);
-		var0003[0x0003] = (var0003[0x0003] + 0x0002);
+		var0003[0x0002] -= 0x0001;
+		var0003[0x0003] += 0x0002;
 		var0004 = UI_update_last_created(var0003);
 	}
 	0xFEE2->hide();
@@ -59720,9 +59720,9 @@ void Func06F8 object#(0x6F8) () {
 					var0014 = UI_create_new_object(0x03BB);
 					var0014->set_item_frame(0x0007);
 					var0004->set_item_frame(0x0001);
-					var0005[0x0001] = (var0005[0x0001] - 0x0001);
-					var0005[0x0002] = (var0005[0x0002] - 0x0001);
-					var0005[0x0003] = (var0005[0x0003] + 0x0002);
+					var0005[0x0001] -= 0x0001;
+					var0005[0x0002] -= 0x0001;
+					var0005[0x0003] += 0x0002;
 					var0015 = UI_update_last_created(var0005);
 					UI_sprite_effect(0x0007, (var0005[0x0001] - 0x0002), (var0005[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 					UI_play_sound_effect(0x0044);
@@ -60394,16 +60394,16 @@ void Func06FC object#(0x6FC) () {
 		};
 		if (!(var0002[0x0001] == var0003[0x0001])) {
 			if (var0002[0x0001] < var0003[0x0001]) {
-				var0003[0x0001] = (var0003[0x0001] - 0x0001);
+				var0003[0x0001] -= 0x0001;
 			} else {
-				var0003[0x0001] = (var0003[0x0001] + 0x0002);
+				var0003[0x0001] += 0x0002;
 			}
 		}
 		if (!(var0002[0x0002] == var0003[0x0002])) {
 			if (var0002[0x0002] < var0003[0x0002]) {
-				var0003[0x0002] = (var0003[0x0002] - 0x0001);
+				var0003[0x0002] -= 0x0001;
 			} else {
-				var0003[0x0002] = (var0003[0x0002] + 0x0002);
+				var0003[0x0002] += 0x0002;
 			}
 		}
 		var0008 = UI_create_new_object(0x037F);
@@ -60412,11 +60412,11 @@ void Func06FC object#(0x6FC) () {
 		if (UI_is_not_blocked(var0003, 0x02D1, 0x0000)) {
 			var0005 = UI_update_last_created(var0003);
 		} else {
-			var0003[0x0003] = (var0003[0x0003] + 0x0001);
+			var0003[0x0003] += 0x0001;
 			if (UI_is_not_blocked(var0003, 0x02D1, 0x0000)) {
 				var0005 = UI_update_last_created(var0003);
 			} else {
-				var0003[0x0003] = (var0003[0x0003] - 0x0002);
+				var0003[0x0003] -= 0x0002;
 				if (UI_is_not_blocked(var0003, 0x02D1, 0x0000)) {
 					var0005 = UI_update_last_created(var0003);
 				} else {
@@ -60507,11 +60507,11 @@ void Func06FD object#(0x6FD) () {
 		if (UI_is_not_blocked(var0009, 0x02D1, 0x0000)) {
 			var000B = UI_update_last_created(var0009);
 		} else {
-			var0009[0x0003] = (var0009[0x0003] + 0x0001);
+			var0009[0x0003] += 0x0001;
 			if (UI_is_not_blocked(var0009, 0x02D1, 0x0000)) {
 				var000B = UI_update_last_created(var0009);
 			} else {
-				var0009[0x0003] = (var0009[0x0003] - 0x0002);
+				var0009[0x0003] -= 0x0002;
 				if (UI_is_not_blocked(var0009, 0x02D1, 0x0000)) {
 					var000B = UI_update_last_created(var0009);
 				} else {
@@ -60545,11 +60545,11 @@ void Func06FD object#(0x6FD) () {
 		if (UI_is_not_blocked(var0009, 0x02D1, 0x0000)) {
 			var000B = UI_update_last_created(var0009);
 		} else {
-			var0009[0x0003] = (var0009[0x0003] + 0x0001);
+			var0009[0x0003] += 0x0001;
 			if (UI_is_not_blocked(var0009, 0x02D1, 0x0000)) {
 				var000B = UI_update_last_created(var0009);
 			} else {
-				var0009[0x0003] = (var0009[0x0003] - 0x0002);
+				var0009[0x0003] -= 0x0002;
 				if (UI_is_not_blocked(var0009, 0x02D1, 0x0000)) {
 					var000B = UI_update_last_created(var0009);
 				} else {
@@ -61416,9 +61416,9 @@ void Func0710 object#(0x710) () {
 		var0012 = var0011->give_last_created();
 		var0014 = UI_create_new_object(0x00CB);
 		var0014->set_item_frame(0x000A);
-		var0010[0x0001] = (var0010[0x0001] + 0x0004);
-		var0010[0x0002] = (var0010[0x0002] - 0x0001);
-		var0010[0x0003] = (var0010[0x0003] + 0x0002);
+		var0010[0x0001] += 0x0004;
+		var0010[0x0002] -= 0x0001;
+		var0010[0x0003] += 0x0002;
 		var0012 = UI_update_last_created(var0010);
 		Func08FF("@He gave up his heart... so that Adjhar may live!* Well, not to be morbid, but I suppose the incantation should work now.@");
 		0xFE9C->halt_scheduled();
@@ -61815,7 +61815,7 @@ void Func0803 0x803 (var var0000) {
 		gflags[0x0003] = true;
 		var0002 = [0x0AB7, 0x0375, 0x0000];
 		var0000->move_object(var0002);
-		var0002[0x0002] = (var0002[0x0002] + 0x0002);
+		var0002[0x0002] += 0x0002;
 		0xFE9C->move_object(var0002);
 		Func0808();
 		var0003 = 0x00C8;
@@ -61866,7 +61866,7 @@ void Func0805 0x805 (var var0000) {
 		var0000->set_item_shape(0x03D5);
 		var0001 = [0x0217, 0x0460, 0x0000];
 		var0000->move_object(var0001);
-		var0001[0x0002] = (var0001[0x0002] + 0x0002);
+		var0001[0x0002] += 0x0002;
 		0xFE9C->move_object(var0001);
 		Func0808();
 		var0002 = 0xFE9C->find_nearby(0x0308, 0x000A, 0x0010);
@@ -61915,7 +61915,7 @@ void Func0807 0x807 (var var0000) {
 		var0000->set_item_shape(0x03D5);
 		var0001 = [0x06E7, 0x0AE0, 0x0000];
 		var0000->move_object(var0001);
-		var0001[0x0002] = (var0001[0x0002] + 0x0002);
+		var0001[0x0002] += 0x0002;
 		0xFE9C->move_object(var0001);
 		Func0808();
 		var0002 = script 0xFE9C after 8 ticks {
@@ -62660,8 +62660,8 @@ var Func081D 0x81D (var var0000, var var0001, var var0002, var var0003, var var0
 	Func081C(var0000, var0002);
 	var0000->set_item_shape(var0001);
 	var0006 = var0000->get_object_position();
-	var0006[0x0001] = (var0006[0x0001] + var0003);
-	var0006[0x0002] = (var0006[0x0002] + var0004);
+	var0006[0x0001] += var0003;
+	var0006[0x0002] += var0004;
 	if (var0000->set_last_created()) {
 		var0007 = UI_update_last_created(var0006);
 	}
@@ -62855,7 +62855,7 @@ var Func0825 0x825 (var var0000, var var0001, var var0002) {
 		}
 		var0005 = 0xFFFD;
 	}
-	var0000[var0002] = (var0000[var0002] + var0005);
+	var0000[var0002] += var0005;
 	if (0xFE9C->get_npc_prop(0x0003) > 0x0000) {
 		var0006 = script 0xFE9C {
 			face var0004;
@@ -63006,7 +63006,7 @@ var Func082A 0x82A (var var0000, var var0001, var var0002) {
 	var0003 = 0x0000;
 	do {
 		var0003 += 0x0001;
-		var0000[var0003] = (var0000[var0003] + var0001[var0003]);
+		var0000[var0003] += var0001[var0003];
 	} while (!(var0003 == var0002));
 	return var0000;
 }
@@ -63017,7 +63017,7 @@ var Func082B 0x82B (var var0000, var var0001) {
 	var0002 = 0x0000;
 	do {
 		var0002 += 0x0001;
-		var0000[var0002] = (var0000[var0002] * 0xFFFF);
+		var0000[var0002] *= 0xFFFF;
 	} while (!(var0002 == var0001));
 	return var0000;
 }
@@ -63566,9 +63566,9 @@ var Func0837 0x837 (var var0000, var var0001, var var0002, var var0003, var var0
 	var var0008;
 
 	var0005 = var0001->get_object_position();
-	var0005[0x0001] = (var0005[0x0001] + var0002);
-	var0005[0x0002] = (var0005[0x0002] + var0003);
-	var0005[0x0003] = (var0005[0x0003] + var0004);
+	var0005[0x0001] += var0002;
+	var0005[0x0002] += var0003;
+	var0005[0x0003] += var0004;
 	var0006 = get_container();
 	var0007 = get_object_position();
 	var0008 = set_last_created();
@@ -68039,10 +68039,10 @@ var Func0887 0x887 (var var0000, var var0001, var var0002) {
 	var000B = false;
 	if (!(var0001[0x0001] == var0000[0x0001])) {
 		if (var0001[0x0001] < var0000[0x0001]) {
-			var0000[0x0001] = (var0000[0x0001] - 0x0001);
+			var0000[0x0001] -= 0x0001;
 			var0004 = true;
 		} else {
-			var0000[0x0001] = (var0000[0x0001] + 0x0001);
+			var0000[0x0001] += 0x0001;
 			var0005 = true;
 		}
 	} else {
@@ -68050,7 +68050,7 @@ var Func0887 0x887 (var var0000, var var0001, var var0002) {
 	}
 	if (!(var0001[0x0002] == var0000[0x0002])) {
 		if (var0001[0x0002] < var0000[0x0002]) {
-			var0000[0x0002] = (var0000[0x0002] - 0x0001);
+			var0000[0x0002] -= 0x0001;
 			if (var0004) {
 				var0008 = true;
 				var0004 = false;
@@ -68061,7 +68061,7 @@ var Func0887 0x887 (var var0000, var var0001, var var0002) {
 				var0006 = true;
 			}
 		} else {
-			var0000[0x0002] = (var0000[0x0002] + 0x0001);
+			var0000[0x0002] += 0x0001;
 			if (var0004) {
 				var0009 = true;
 				var0004 = false;
@@ -68092,43 +68092,43 @@ var Func0887 0x887 (var var0000, var var0001, var var0002) {
 	}
 	if (var0004 || var0005) {
 		var000F = UI_die_roll(0xFFFF, 0x0001);
-		var0000[0x0002] = (var0000[0x0002] + var000F);
+		var0000[0x0002] += var000F;
 	}
 	if (var0006 || var0007) {
 		var000F = UI_die_roll(0xFFFF, 0x0001);
-		var0000[0x0001] = (var0000[0x0001] + var000F);
+		var0000[0x0001] += var000F;
 	}
 	var000F = UI_die_roll(0x0001, 0x0003);
 	if (var000A) {
 		if (var000F == 0x0001) {
-			var0000[0x0002] = (var0000[0x0002] + 0x0001);
+			var0000[0x0002] += 0x0001;
 		}
 		if (var000F == 0x0002) {
-			var0000[0x0001] = (var0000[0x0001] - 0x0001);
+			var0000[0x0001] -= 0x0001;
 		}
 	}
 	if (var0008) {
 		if (var000F == 0x0001) {
-			var0000[0x0002] = (var0000[0x0002] + 0x0001);
+			var0000[0x0002] += 0x0001;
 		}
 		if (var000F == 0x0002) {
-			var0000[0x0001] = (var0000[0x0001] + 0x0001);
+			var0000[0x0001] += 0x0001;
 		}
 	}
 	if (var000B) {
 		if (var000F == 0x0001) {
-			var0000[0x0002] = (var0000[0x0002] - 0x0001);
+			var0000[0x0002] -= 0x0001;
 		}
 		if (var000F == 0x0002) {
-			var0000[0x0001] = (var0000[0x0001] - 0x0001);
+			var0000[0x0001] -= 0x0001;
 		}
 	}
 	if (var0009) {
 		if (var000F == 0x0001) {
-			var0000[0x0002] = (var0000[0x0002] - 0x0001);
+			var0000[0x0002] -= 0x0001;
 		}
 		if (var000F == 0x0002) {
-			var0000[0x0001] = (var0000[0x0001] + 0x0001);
+			var0000[0x0001] += 0x0001;
 		}
 	}
 	return var0000;
@@ -74078,14 +74078,14 @@ void Func08EB 0x8EB (var var0000, var var0001, var var0002) {
 				var000C = var000A->set_last_created();
 				var000D = UI_die_roll(0x0001, 0x0003);
 				if (var000D == 0x0001) {
-					var000B[0x0001] = (var000B[0x0001] - 0x0001);
+					var000B[0x0001] -= 0x0001;
 				}
 				if (var000D == 0x0002) {
-					var000B[0x0002] = (var000B[0x0002] - 0x0001);
+					var000B[0x0002] -= 0x0001;
 				}
 				if (var000D == 0x0003) {
-					var000B[0x0001] = (var000B[0x0001] - 0x0001);
-					var000B[0x0002] = (var000B[0x0002] - 0x0001);
+					var000B[0x0001] -= 0x0001;
+					var000B[0x0002] -= 0x0001;
 				}
 				var000C = UI_update_last_created(var000B);
 			}
@@ -74098,11 +74098,11 @@ void Func08EB 0x8EB (var var0000, var var0001, var var0002) {
 			if (var000B[0x0003] < 0x0005) {
 				var000C = var000A->set_last_created();
 				if ((var000B[0x0001] == var0005[0x0001]) && (var000B[0x0002] == var0005[0x0002])) {
-					var000B[0x0001] = (var000B[0x0001] - 0x0002);
-					var000B[0x0002] = (var000B[0x0002] - 0x0002);
+					var000B[0x0001] -= 0x0002;
+					var000B[0x0002] -= 0x0002;
 				} else if ((var000B[0x0001] <= var0005[0x0001]) && (var000B[0x0002] <= var0005[0x0002])) {
-					var000B[0x0001] = (var000B[0x0001] - 0x0001);
-					var000B[0x0002] = (var000B[0x0002] - 0x0001);
+					var000B[0x0001] -= 0x0001;
+					var000B[0x0002] -= 0x0001;
 				}
 				var000C = UI_update_last_created(var000B);
 			}
@@ -74116,13 +74116,13 @@ void Func08EB 0x8EB (var var0000, var var0001, var var0002) {
 			var000B = var000A->get_object_position();
 			if ((var000B[0x0003] < 0x0005) && ((!(var000A->get_item_shape() == 0x014B)) && (!(var000A->get_item_shape() == 0x00E0)))) {
 				if ((var000B[0x0001] == var0005[0x0001]) && (var000B[0x0002] == var0005[0x0002])) {
-					var000B[0x0001] = (var000B[0x0001] - 0x0004);
-					var000B[0x0002] = (var000B[0x0002] - 0x0004);
+					var000B[0x0001] -= 0x0004;
+					var000B[0x0002] -= 0x0004;
 				} else if ((var000B[0x0001] <= var0005[0x0001]) && (var000B[0x0002] <= var0005[0x0002])) {
 					var000C = var000A->set_last_created();
 					var0012 = (0x0004 - var000A->get_distance(item));
-					var000B[0x0001] = (var000B[0x0001] - var0012);
-					var000B[0x0002] = (var000B[0x0002] - var0012);
+					var000B[0x0001] -= var0012;
+					var000B[0x0002] -= var0012;
 					var000C = UI_update_last_created(var000B);
 				}
 			}
@@ -74139,14 +74139,14 @@ void Func08EB 0x8EB (var var0000, var var0001, var var0002) {
 				var000C = var000A->set_last_created();
 				if ((var000B[0x0001] == var0005[0x0001]) || (var000B[0x0002] == var0005[0x0002])) {
 					if (var000B[0x0001] == var0005[0x0001]) {
-						var000B[0x0001] = (var000B[0x0001] + 0x0001);
+						var000B[0x0001] += 0x0001;
 					}
 					if (var000B[0x0002] == var0005[0x0002]) {
-						var000B[0x0002] = (var000B[0x0002] + 0x0001);
+						var000B[0x0002] += 0x0001;
 					}
 				} else {
-					var000B[0x0001] = (var000B[0x0001] + 0x0001);
-					var000B[0x0002] = (var000B[0x0002] + 0x0001);
+					var000B[0x0001] += 0x0001;
+					var000B[0x0002] += 0x0001;
 				}
 				var000C = UI_update_last_created(var000B);
 			}
