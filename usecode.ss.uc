@@ -73,11 +73,55 @@ enum item_flags {
 									// Other NPCs should use set_polymorph instead.
 };
 
+enum events {
+	PROXIMITY		= 0,	// Object is on-screen or nearby
+							// This is called repeatedly, with a random delay
+							// between each call
+	DOUBLECLICK		= 1,	// Object is double-clicked on
+	SCRIPTED		= 2,	// Function is called from inside a script{} block
+							// (very common)
+	EGG				= 3,	// Object is an egg that just hatched (triggered by
+							// egg activation conditions)
+	WEAPON			= 4,	// Object was wielded and 'swung' in combat
+							// This is mainly used with 'weapon-like' objects
+							// - e.g. smokebombs and fishing rods - that have more
+							// advanced 'attack' behaviour.
+
+	READIED			= 5,	// Object was worn or readied in inventory - used by
+							// items like the Ring of Invisibility
+	UNREADIED		= 6,	// Object was taken off or put away in inventory
+
+	DEATH			= 7,	// NPC has just been killed (SI-only)
+	STARTED_TALKING	= 9,	// NPC starts conversation with you (has TALK
+							// schedule and has reached the Avatar)
+							// This is SI-only - BG uses event 1 for this,
+							// both for conversations triggered by doubleclick
+							// and by the TALK schedule
+
+	BG_PATH_SUCCESS	= 7,	// Set with calls to UI_path_run_usecode, to indicate
+							// a successful pathfind to the target object
+	BG_PATH_FAILURE	= 8,	// Set with calls to UI_set_path_failure, to indicate
+							// an interrupted pathfind (e.g. when the player
+							// moves the Avatar manually)
+	PATH_SUCCESS_9	= 9,	// Set with calls to UI_path_run_usecode, to indicate
+							// a successful pathfind to the target object
+
+	PATH_SUCCESS	= 10,	// Set with calls to UI_path_run_usecode, to indicate
+							// a successful pathfind to the target object
+	PATH_FAILURE	= 11,	// Set with calls to UI_set_path_failure, to indicate
+							// an interrupted pathfind (e.g. when the player
+							// moves the Avatar manually)
+	SI_PATH_SUCCESS	= 13,
+	SI_PATH_FAILURE	= 14	// Set with calls to UI_set_path_failure, to indicate
+							// an interrupted pathfind (e.g. when the player
+							// moves the Avatar manually)
+};
+
 extern void Func094A 0x94A (var var0000);
 extern var Func0910 0x910 (var var0000);
 
 void Func0096 shape#(0x96) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (gflags[0x01CB]) {
 			abort;
 		}
@@ -108,7 +152,7 @@ void Func00A0 shape#(0xA0) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (gflags[0x0007]) {
 			UI_error_message("WARNING: $Temp1Flag is set!!! Report at what point in the game you are in.");
 			gflags[0x0007] = false;
@@ -141,13 +185,13 @@ void Func00A0 shape#(0xA0) () {
 				var0007 = 0xFE9C->get_cont_items(0x022B, 0xFE99, 0xFE99);
 				if (var0007) {
 					if (var0007->get_cont_items(0x022F, 0xFE99, 0xFE99)) {
-						Func090D(var0006, 0xFFFF, 0xFFFF, 0xFFFF, Func00A0, var0006, 0x000A);
+						Func090D(var0006, 0xFFFF, 0xFFFF, 0xFFFF, Func00A0, var0006, PATH_SUCCESS);
 					}
 				}
 			}
 		}
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		var0008 = script 0xFE9C {
 			nohalt;
 			wait 2;
@@ -175,7 +219,7 @@ void Func00B2 shape#(0xB2) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		var0001 = UI_si_display_map(var0000);
 	}
@@ -197,7 +241,7 @@ void Func00D1 shape#(0xD1) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (var0000 == 0x0016) {
 			set_item_frame(0x0017);
@@ -212,7 +256,7 @@ void Func00D1 shape#(0xD1) () {
 			abort;
 		}
 	}
-	if (event == 0x0005) {
+	if (event == READIED) {
 		var0000 = get_item_frame();
 		if (var0000 == 0x000A) {
 			UI_close_gumps();
@@ -256,7 +300,7 @@ void Func00D2 shape#(0xD2) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_quality();
 		if (var0000 == UI_part_of_day()) {
 			return;
@@ -283,7 +327,7 @@ void Func00D7 shape#(0xD7) () {
 	var var0001;
 	var var0002;
 
-	if ((event == 0x0002) || (event == 0x0001)) {
+	if ((event == SCRIPTED) || (event == DOUBLECLICK)) {
 		var0000 = 0xFE9C->find_nearby(0x03C1, 0x0028, 0x00B0);
 		if (!UI_on_barge()) {
 			var0001 = script item after 2 ticks {
@@ -312,7 +356,7 @@ extern void Func0905 0x905 (var var0000);
 void Func00E1 shape#(0xE1) () {
 	var var0000;
 
-	if ((event != 0x0001) && (event != 0x0002)) {
+	if ((event != DOUBLECLICK) && (event != SCRIPTED)) {
 		return;
 	}
 	var0000 = Func0906(item);
@@ -403,7 +447,7 @@ void Func00E4 shape#(0xE4) () {
 	}
 	var0001 = Func0954();
 	if (var0000 == 0x000E) {
-		if ((event == 0x0007) && (!gflags[0x00C9])) {
+		if ((event == DEATH) && (!gflags[0x00C9])) {
 			clear_item_flag(SI_TOURNAMENT);
 			reduce_health(0x0032, 0x0000);
 			gflags[0x00C9] = true;
@@ -429,12 +473,12 @@ void Func00E4 shape#(0xE4) () {
 		abort;
 	}
 	if (var0000 == 0x001E) {
-		if ((event == 0x000A) || (event == 0x0002)) {
+		if ((event == PATH_SUCCESS) || (event == SCRIPTED)) {
 			Func0855(event);
 			abort;
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Pikeman!@");
 		Func097F(item, "@Yes?@", 0x0002);
 		if (var0000 == 0x0009) {
@@ -462,13 +506,13 @@ void Func00E4 shape#(0xE4) () {
 				if (!gflags[0x0048]) {
 					0xFEEA->show_npc_face0(0x0000);
 					say("\"Stand back while I crank the winch. 'Tis heavy and dangerous. Thou dost never know when it might come down upon thine head.\"");
-					event = 0x0009;
+					event = STARTED_TALKING;
 					Func0855(event);
 					abort;
 				}
 				0xFEEA->show_npc_face0(0x0000);
 				say("\"Gladly I will for a fellow Knight. Have a pleasant day and may goblin blood stain thy sword soon.\"");
-				event = 0x0009;
+				event = STARTED_TALKING;
 				Func0855(event);
 				abort;
 			}
@@ -479,7 +523,8 @@ void Func00E4 shape#(0xE4) () {
 		}
 		set_schedule_type(0x0003);
 	}
-	if (event == 0x000D) {
+	// This looks like it should have been event == SI_PATH_FAILURE instead.
+	if (event == SI_PATH_SUCCESS) {
 		set_schedule_type(0x000F);
 		var0002 = script item after 5 ticks {
 			nohalt;
@@ -487,7 +532,7 @@ void Func00E4 shape#(0xE4) () {
 		};
 		return;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x0007]) {
 			gflags[0x0007] = false;
 			var0004 = 0xFE9C->get_object_position();
@@ -506,7 +551,7 @@ void Func00E4 shape#(0xE4) () {
 		}
 		return;
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0006 = UI_die_roll(0x0000, 0x0008);
 		if (var0006 == 0x0001) {
 			item_say("@Do not tarry here!@");
@@ -532,7 +577,7 @@ void Func00E4 shape#(0xE4) () {
 		}
 		abort;
 	}
-	if ((event == 0x0009) && (var0000 == 0x000A)) {
+	if ((event == STARTED_TALKING) && (var0000 == 0x000A)) {
 		set_schedule_type(0x000C);
 		0xFEF1->show_npc_face0(0x0000);
 		say("\"Why dost thou interrupt? I am a Pikeman of Monitor.\"");
@@ -541,7 +586,7 @@ void Func00E4 shape#(0xE4) () {
 		Func097F(0xFE9C, "@Farewell!@", 0x0000);
 		Func097F(item, "@Be vigilant!@", 0x0002);
 	}
-	if ((event == 0x0009) && (var0000 == 0x000B)) {
+	if ((event == STARTED_TALKING) && (var0000 == 0x000B)) {
 		set_schedule_type(0x000C);
 		0xFEED->show_npc_face0(0x0000);
 		say("\"I would have words with thee but my duties call.\"");
@@ -550,7 +595,7 @@ void Func00E4 shape#(0xE4) () {
 		Func097F(0xFE9C, "@Farewell!@", 0x0000);
 		Func097F(item, "@Be vigilant!@", 0x0002);
 	}
-	if ((event == 0x0009) && (var0000 == 0x000C)) {
+	if ((event == STARTED_TALKING) && (var0000 == 0x000C)) {
 		set_schedule_type(0x000C);
 		0xFEEA->show_npc_face0(0x0000);
 		say("\"Greetings. I'm a Pikeman of Monitor.\"");
@@ -559,7 +604,7 @@ void Func00E4 shape#(0xE4) () {
 		Func097F(0xFE9C, "@Farewell!@", 0x0000);
 		Func097F(item, "@Be vigilant!@", 0x0002);
 	}
-	if ((event == 0x0009) && (var0000 == 0x0003)) {
+	if ((event == STARTED_TALKING) && (var0000 == 0x0003)) {
 		set_schedule_type(0x0009);
 		0xFEED->show_npc_face0(0x0000);
 		if (!0xFFBB->get_item_flag(MET)) {
@@ -574,7 +619,7 @@ void Func00E4 shape#(0xE4) () {
 		UI_remove_npc_face0();
 		Func097F(item, "@Move along!@", 0x0002);
 	}
-	if ((event == 0x0009) && (var0000 == 0x0005)) {
+	if ((event == STARTED_TALKING) && (var0000 == 0x0005)) {
 		var0007 = find_nearby(0x00E4, 0x001E, 0x0000);
 		for (var000A in var0007 with var0008 to var0009) {
 			var000A->set_schedule_type(0x0014);
@@ -599,7 +644,7 @@ void Func00E4 shape#(0xE4) () {
 		}
 		abort;
 	}
-	if ((event == 0x0009) && (var0000 == 0x000F)) {
+	if ((event == STARTED_TALKING) && (var0000 == 0x000F)) {
 		set_schedule_type(0x0009);
 		0xFEED->show_npc_face0(0x0000);
 		say("\"Please spare me! I shall do anything! I do not want to be roasted over a goblin's fire...\"");
@@ -610,14 +655,14 @@ void Func00E4 shape#(0xE4) () {
 		Func097F(item, "@To Monitor!@", 0x0005);
 		set_npc_id(0x0010);
 	}
-	if ((event == 0x0001) && (var0000 == 0x0010)) {
+	if ((event == DOUBLECLICK) && (var0000 == 0x0010)) {
 		set_schedule_type(0x0009);
 		0xFEED->show_npc_face0(0x0000);
 		say("\"There is no time for small talk! We must be on our way back to Monitor!\" *\"Thou wouldst not want us to be eaten before we have the chance to become heroes, wouldst thou?\" *\" Of course not! Let us be on our way!\"");
 		UI_remove_npc_face0();
 		Func097F(item, "@I shan't fear goblins...@", 0x0005);
 	}
-	if ((event == 0x0009) && (var0000 == 0x000D)) {
+	if ((event == STARTED_TALKING) && (var0000 == 0x000D)) {
 		set_npc_id(0x0003);
 		set_schedule_type(0x000C);
 		var000B = find_nearby(0x00E4, 0x0014, 0x0000);
@@ -626,7 +671,7 @@ void Func00E4 shape#(0xE4) () {
 		}
 		abort;
 	}
-	if ((event == 0x0009) && (var0000 == 0x0001)) {
+	if ((event == STARTED_TALKING) && (var0000 == 0x0001)) {
 		set_schedule_type(0x0007);
 		0xFEF1->show_npc_face0(0x0000);
 		say("\"This is the Bull Tower, knave. State thy business or be gone. We have no time for idle chit-chat with Goblins about.\"");
@@ -759,7 +804,7 @@ void Func00E4 shape#(0xE4) () {
 				abort;
 		}
 	}
-	if ((event == 0x0009) && (var0000 == 0x0009)) {
+	if ((event == STARTED_TALKING) && (var0000 == 0x0009)) {
 labelFunc00E4_0956:
 		clear_item_say();
 		if (0xFE9C->get_item_flag(INVISIBLE)) {
@@ -775,7 +820,7 @@ labelFunc00E4_0956:
 		var0004 = get_object_position();
 		if ((get_item_frame() != 0x000A) || ((var0004[0x0001] != 0x03F8) || ((var0004[0x0002] != 0x0A77) || (var0004[0x0003] != 0x0006)))) {
 			say("\"Sorry, but I cannot help thee until I return to my desk. All the paperwork that I have to fill out is there.\"");
-			si_path_run_usecode([0x03FB, 0x0A77, 0x0006], 0x000D, item, Func00E4, true);
+			si_path_run_usecode([0x03FB, 0x0A77, 0x0006], SI_PATH_SUCCESS, item, Func00E4, true);
 			return;
 		}
 		say("\"My, what a fine-looking warrior! How might I be of service to thee?\"");
@@ -976,7 +1021,7 @@ void Func00E6 shape#(0xE6) () {
 	}
 	var000C = var000A + var000B;
 	var000D = Func09A0(0x0005, 0x0003);
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (0xFFEC->get_npc_id() == 0x0011) {
 			Func08EC();
 			abort;
@@ -1078,7 +1123,7 @@ void Func00E6 shape#(0xE6) () {
 			};
 			// Note: the function is passed in two words, possibly as a mistake
 			// caused by the need to do so in scripts.
-			0xFFEC->si_path_run_usecode([0x0975, 0x0747, 0x0000], 0x000D, item, [Func00E6, 0x0000], false);
+			0xFFEC->si_path_run_usecode([0x0975, 0x0747, 0x0000], SI_PATH_SUCCESS, item, [Func00E6, 0x0000], false);
 			abort;
 		}
 		if (0xFFEC->get_npc_id() == 0x000B) {
@@ -1094,7 +1139,7 @@ void Func00E6 shape#(0xE6) () {
 				Func097F(0xFE9C, "@I cannot wait!@", 0x0000);
 				// Note: the function is passed in two words, possibly as a mistake
 				// caused by the need to do so in scripts.
-				0xFE9C->si_path_run_usecode([0x0975, 0x0749, 0x0000], 0x000D, 0xFE9C->get_npc_object(), [Func00E6, 0x0000], false);
+				0xFE9C->si_path_run_usecode([0x0975, 0x0749, 0x0000], SI_PATH_SUCCESS, 0xFE9C->get_npc_object(), [Func00E6, 0x0000], false);
 				var000E = script 0xFFEC after 4 ticks {
 					nohalt;
 					face south;
@@ -1253,7 +1298,7 @@ void Func00E6 shape#(0xE6) () {
 				UI_end_conversation();
 				// Note: the function is passed in two words, possibly as a mistake
 				// caused by the need to do so in scripts.
-				0xFFEC->si_path_run_usecode([0x097B, 0x0743, 0x0000], 0x000D, item, [Func00E6, 0x0000], false);
+				0xFFEC->si_path_run_usecode([0x097B, 0x0743, 0x0000], SI_PATH_SUCCESS, item, [Func00E6, 0x0000], false);
 				var000E = script 0xFFEC {
 					wait 2;
 					actor frame cast_up;
@@ -1266,7 +1311,7 @@ void Func00E6 shape#(0xE6) () {
 				UI_end_conversation();
 				// Note: the function is passed in two words, possibly as a mistake
 				// caused by the need to do so in scripts.
-				0xFFEC->si_path_run_usecode([0x097B, 0x0743, 0x0000], 0x000D, item, [Func00E6, 0x0000], false);
+				0xFFEC->si_path_run_usecode([0x097B, 0x0743, 0x0000], SI_PATH_SUCCESS, item, [Func00E6, 0x0000], false);
 				var000E = script 0xFFEC {
 					wait 2;
 					actor frame cast_up;
@@ -1427,7 +1472,7 @@ void Func00E6 shape#(0xE6) () {
 				UI_play_sound_effect(0x0028);
 				// Note: the function is passed in two words, possibly as a mistake
 				// caused by the need to do so in scripts.
-				0xFE9C->si_path_run_usecode([0x0980, 0x0748, 0x0000], 0x000D, 0xFE9C->get_npc_object(), [Func00E6, 0x0000], false);
+				0xFE9C->si_path_run_usecode([0x0980, 0x0748, 0x0000], SI_PATH_SUCCESS, 0xFE9C->get_npc_object(), [Func00E6, 0x0000], false);
 				var000E = script 0xFFEC {
 					nohalt;
 					actor frame cast_up;
@@ -1446,7 +1491,7 @@ void Func00E6 shape#(0xE6) () {
 				Func097F(0xFFEC, "@Do not be shy with me...@", 0x0000);
 				// Note: the function is passed in two words, possibly as a mistake
 				// caused by the need to do so in scripts.
-				0xFE9C->si_path_run_usecode([0x0980, 0x0748, 0x0000], 0x000D, 0xFE9C->get_npc_object(), [Func00E6, 0x0000], false);
+				0xFE9C->si_path_run_usecode([0x0980, 0x0748, 0x0000], SI_PATH_SUCCESS, 0xFE9C->get_npc_object(), [Func00E6, 0x0000], false);
 				var000E = script 0xFFEC {
 					nohalt;
 					wait while far 2;
@@ -1467,7 +1512,7 @@ void Func00E6 shape#(0xE6) () {
 				Func097F(0xFE9C, "@Hey!@", 0x0000);
 				// Note: the function is passed in two words, possibly as a mistake
 				// caused by the need to do so in scripts.
-				0xFE9C->si_path_run_usecode([0x0980, 0x0748, 0x0000], 0x000D, 0xFE9C->get_npc_object(), [Func00E6, 0x0000], false);
+				0xFE9C->si_path_run_usecode([0x0980, 0x0748, 0x0000], SI_PATH_SUCCESS, 0xFE9C->get_npc_object(), [Func00E6, 0x0000], false);
 				var000E = script 0xFFEC {
 					nohalt;
 					actor frame cast_up;
@@ -1516,7 +1561,7 @@ void Func00E6 shape#(0xE6) () {
 			Func094F(0xFFEC, var000E);
 			// Note: the function is passed in two words, possibly as a mistake
 			// caused by the need to do so in scripts.
-			0xFFEC->si_path_run_usecode([0x0980, 0x0746, 0x0000], 0x000D, item, [Func00E6, 0x0000], false);
+			0xFFEC->si_path_run_usecode([0x0980, 0x0746, 0x0000], SI_PATH_SUCCESS, item, [Func00E6, 0x0000], false);
 			abort;
 		}
 		0xFFEC->show_npc_face0(0x0000);
@@ -1612,39 +1657,39 @@ void Func00E6 shape#(0xE6) () {
 		0xFFEC->set_npc_id(0x0001);
 		abort;
 	}
-	if (event == 0x000E) {
+	if (event == SI_PATH_FAILURE) {
 		if ((0xFFEC->get_npc_id() == 0x000D) && (item == 0xFFEC->get_npc_object())) {
 			var0009 = 0xFFEC->get_object_position();
 			UI_sprite_effect(0x0007, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			0xFFEC->move_object([0x0975, 0x0747, 0x0000]);
-			event = 0x000D;
+			event = SI_PATH_SUCCESS;
 		}
 		if ((0xFFEC->get_npc_id() == 0x000C) && (item == 0xFE9C->get_npc_object())) {
 			var0009 = 0xFE9C->get_object_position();
 			UI_sprite_effect(0x0007, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			0xFE9C->move_object([0x0975, 0x0749, 0x0000]);
-			event = 0x000D;
+			event = SI_PATH_SUCCESS;
 		}
 		if ((0xFFEC->get_npc_id() == 0x0006) && (item == 0xFFEC->get_npc_object())) {
 			var0009 = 0xFFEC->get_object_position();
 			UI_sprite_effect(0x0007, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			0xFFEC->move_object([0x097B, 0x0743, 0x0000]);
-			event = 0x000D;
+			event = SI_PATH_SUCCESS;
 		}
 		if ((0xFFEC->get_npc_id() == 0x0004) && (item == 0xFE9C->get_npc_object())) {
 			var0009 = 0xFE9C->get_object_position();
 			UI_sprite_effect(0x0007, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			0xFE9C->move_object([0x0980, 0x0748, 0x0000]);
-			event = 0x000D;
+			event = SI_PATH_SUCCESS;
 		}
 		if ((0xFFEC->get_npc_id() == 0x0001) && (item == 0xFFEC->get_npc_object())) {
 			var0009 = 0xFFEC->get_object_position();
 			UI_sprite_effect(0x0007, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			0xFFEC->move_object([0x0980, 0x0746, 0x0000]);
-			event = 0x000D;
+			event = SI_PATH_SUCCESS;
 		}
 	}
-	if (event == 0x000D) {
+	if (event == SI_PATH_SUCCESS) {
 		if ((0xFFEC->get_npc_id() == 0x000D) && (item == 0xFFEC->get_npc_object())) {
 			var000E = script 0xFFEC {
 				nohalt;
@@ -1765,7 +1810,7 @@ void Func00F3 shape#(0xF3) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_quality();
 		var0001 = get_item_frame();
 		if (var0001 == 0x0000) {
@@ -1849,7 +1894,7 @@ extern void Func0905 0x905 (var var0000);
 void Func00F6 shape#(0xF6) () {
 	var var0000;
 
-	if ((event != 0x0001) && (event != 0x0002)) {
+	if ((event != DOUBLECLICK) && (event != SCRIPTED)) {
 		return;
 	}
 	var0000 = Func0906(item);
@@ -1896,7 +1941,7 @@ void Func00F9 shape#(0xF9) () {
 		var0002 = "her";
 	}
 	var0003 = false;
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFEFB->show_npc_face0(0x0000);
 		say("\"What dost thou wish, Master?\"");
 		if (gflags[0x0171]) {
@@ -2124,7 +2169,7 @@ void Func00FB shape#(0xFB) () {
 	var var0003;
 	var var0004;
 
-	if (event != 0x0001) {
+	if (event != DOUBLECLICK) {
 		return;
 	}
 	if (UI_in_gump_mode()) {
@@ -2170,7 +2215,7 @@ void Func0102 shape#(0x102) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (in_usecode()) {
 			halt_scheduled();
 			Func0949("@'Tis about time!@");
@@ -2178,7 +2223,7 @@ void Func0102 shape#(0x102) () {
 			item->Func0628();
 		}
 	}
-	if (event == 0x000B) {
+	if (event == PATH_FAILURE) {
 		var0000 = get_object_position();
 		var0000[0x0001] -= 0x0002;
 		var0000[0x0002] += 0x0001;
@@ -2220,18 +2265,18 @@ void Func0103 shape#(0x103) () {
 	var0003 = UI_is_pc_female();
 	var0004 = Func0953();
 	var0005 = false;
-	if ((event == 0x0007) && (var0001 == 0x0001)) {
+	if ((event == DEATH) && (var0001 == 0x0001)) {
 		clear_item_flag(SI_TOURNAMENT);
 		reduce_health(0x0032, 0x0000);
 		gflags[0x0120] = true;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Ranger!@");
 		item->Func07D1();
 		Func097F(item, "@Yes?@", 0x0002);
 		set_schedule_type(0x0003);
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		if (var0001 != 0x0001) {
 			var0006 = UI_get_random(0x0006);
 			if (var0006 == 0x0001) {
@@ -2254,7 +2299,7 @@ void Func0103 shape#(0x103) () {
 			}
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		if (var0001 == 0x0000) {
 			set_schedule_type(0x0007);
 			clear_item_say();
@@ -2575,7 +2620,7 @@ void Func0105 shape#(0x105) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		halt_scheduled();
 		var0000 = script item {
 			frame 0;
@@ -2597,7 +2642,7 @@ void Func0105 shape#(0x105) () {
 			};
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0002 = 0xFE9C->get_cont_items(0x028E, 0xFE99, 0xFE99);
 		if (var0002) {
 			var0002->remove_item();
@@ -2613,7 +2658,7 @@ void Func0105 shape#(0x105) () {
 			var0000 = UI_update_last_created(var0004);
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func094A("@I believe that one threads a loom before using it.@");
 	}
 }
@@ -2650,7 +2695,7 @@ void Func0109 shape#(0x109) () {
 	if (UI_is_pc_female()) {
 		var0000 = "her";
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (Func0994() == 0x0002) {
 			if (!0xFF31->npc_nearby()) {
 				0xFF31->set_schedule_type(0x0007);
@@ -2858,7 +2903,7 @@ void Func010E shape#(0x10E) () {
 	var var0004;
 	var var0005;
 
-	if ((event != 0x0001) && (event != 0x0002)) {
+	if ((event != DOUBLECLICK) && (event != SCRIPTED)) {
 		return;
 	}
 	var0000 = get_item_quality();
@@ -2924,7 +2969,7 @@ void Func010E shape#(0x10E) () {
 		var0005 = get_object_position();
 		var0005[0x0001] -= 0x0002;
 		var0005[0x0002] += 0x0003;
-		0xFE9C->si_path_run_usecode(var0005, 0x000A, item, Func07F6, true);
+		0xFE9C->si_path_run_usecode(var0005, PATH_SUCCESS, item, Func07F6, true);
 		UI_play_sound_effect(0x0039);
 		var0001 = script item after (var0004 + 0x0002) ticks {
 			nohalt;
@@ -3000,7 +3045,7 @@ void Func011C shape#(0x11C) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_game_hour();
 		if ((var0000 >= 0x0006) && (var0000 <= 0x000B)) {
 			item_say((" " + UI_game_hour()) + " o'clock");
@@ -3052,7 +3097,7 @@ void Func011E shape#(0x11E) () {
 void Func0122 shape#(0x122) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (var0000 > 0x0003) {
 			set_item_frame(var0000 - 0x0004);
@@ -3066,7 +3111,7 @@ void Func0122 shape#(0x122) () {
 void Func0123 shape#(0x123) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (var0000 > 0x0003) {
 			set_item_frame(var0000 - 0x0004);
@@ -3105,7 +3150,7 @@ void Func0124 shape#(0x124) () {
 	var var0013;
 	var var0014;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (get_barge()) {
 			var0000 = find_nearby(0x0316, 0x0014, 0x0000);
 			if (var0000) {
@@ -3124,7 +3169,7 @@ void Func0124 shape#(0x124) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0003 = 0xFE9C->get_object_position();
 		var0004 = [0x0AE7, 0x09D5, 0x0A37, 0x09D5, 0x0AA7, 0x08E5, 0x0A37, 0x09A5];
 		var0005 = [0x0AD7, 0x0885];
@@ -3196,7 +3241,7 @@ void Func0128 shape#(0x128) () {
 
 	var0000 = get_item_frame();
 	if (var0000 == 0x0000) {
-		if ((event == 0x0005) || (event == 0x0006)) {
+		if ((event == READIED) || (event == UNREADIED)) {
 			var0001 = get_container();
 			while ((var0001 != 0x0000) && (!var0001->is_npc())) {
 				var0001 = var0001->get_container();
@@ -3206,15 +3251,15 @@ void Func0128 shape#(0x128) () {
 				return;
 			}
 		}
-		if (event == 0x0005) {
+		if (event == READIED) {
 			var0001->set_item_flag(INVISIBLE);
 		}
-		if (event == 0x0006) {
+		if (event == UNREADIED) {
 			var0001->clear_item_flag(INVISIBLE);
 		}
 	}
 	if (var0000 == 0x0001) {
-		if (event == 0x0005) {
+		if (event == READIED) {
 			var0001 = get_container();
 			if (var0001 && var0001->is_npc()) {
 				halt_scheduled();
@@ -3226,10 +3271,10 @@ void Func0128 shape#(0x128) () {
 				UI_flash_mouse(0x0000);
 			}
 		}
-		if (event == 0x0006) {
+		if (event == UNREADIED) {
 			halt_scheduled();
 		}
-		if (event == 0x0002) {
+		if (event == SCRIPTED) {
 			halt_scheduled();
 			var0001 = get_container();
 			if (var0001 && var0001->is_npc()) {
@@ -3250,10 +3295,10 @@ void Func0128 shape#(0x128) () {
 		}
 	}
 	if (var0000 == 0x0002) {
-		if ((event == 0x0005) || ((event == 0x0006) || (event == 0x0002))) {
+		if ((event == READIED) || ((event == UNREADIED) || (event == SCRIPTED))) {
 			var0001 = Func099E(item);
 		}
-		if (event == 0x0006) {
+		if (event == UNREADIED) {
 			var0005 = Func0942(0xFFD4);
 			if (var0005) {
 				var0002 = script item {
@@ -3262,7 +3307,7 @@ void Func0128 shape#(0x128) () {
 				};
 			}
 		}
-		if (event == 0x0002) {
+		if (event == SCRIPTED) {
 			var0005 = Func0942(0xFFD4);
 			if (var0005) {
 				0xFFD4->item_say("Do not touch my ring!");
@@ -3283,7 +3328,7 @@ void Func0128 shape#(0x128) () {
 		}
 	}
 	if (var0000 == 0x0003) {
-		if (event == 0x0005) {
+		if (event == READIED) {
 			if (!gflags[0x0315]) {
 				Func095D(0x03E8);
 				gflags[0x0315] = true;
@@ -3295,7 +3340,7 @@ void Func0128 shape#(0x128) () {
 void Func012E shape#(0x12E) () {
 	var var0000;
 
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		if (get_npc_id() == 0x000F) {
 			clear_item_flag(SI_TOURNAMENT);
 		}
@@ -3309,7 +3354,7 @@ void Func012E shape#(0x12E) () {
 			clear_item_flag(SI_TOURNAMENT);
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (get_npc_id() == 0x000F) {
 			var0000 = 0x0001;
 		}
@@ -3324,7 +3369,7 @@ void Func012F shape#(0x12F) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = get_object_position();
 		var0001 = get_item_quality();
 		var0002 = get_item_frame();
@@ -3353,7 +3398,7 @@ void Func012F shape#(0x12F) () {
 		}
 		abort;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_flash_mouse(0x0000);
 	}
 }
@@ -3361,7 +3406,7 @@ void Func012F shape#(0x12F) () {
 void Func0133 shape#(0x133) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_play_sound_effect(0x0041);
 		var0000 = get_item_frame();
 		if (var0000 == 0x0000) {
@@ -3388,7 +3433,7 @@ void Func013D shape#(0x13D) () {
 	var var0004;
 
 	var0000 = 0xFEF8->get_npc_id();
-	if (gflags[0x022C] && ((event == 0x0000) && (!gflags[0x022D]))) {
+	if (gflags[0x022C] && ((event == PROXIMITY) && (!gflags[0x022D]))) {
 		set_npc_id(get_npc_id() + 0x0001);
 		var0001 = find_nearby(0x0370, 0x0005, 0x0000);
 		var0002 = find_nearby(0x038A, 0x0005, 0x0000);
@@ -3441,7 +3486,7 @@ void Func013D shape#(0x13D) () {
 			Func094F(0xFEFA, var0003);
 			UI_end_conversation();
 			0xFEFA->set_npc_id(0x0001);
-			0xFEFA->si_path_run_usecode([0x0998, 0x0069, 0x0001], 0x000D, 0xFEFA->get_npc_object(), Func0370, true);
+			0xFEFA->si_path_run_usecode([0x0998, 0x0069, 0x0001], SI_PATH_SUCCESS, 0xFEFA->get_npc_object(), Func0370, true);
 		}
 		if ((0xFEFA->get_npc_id() == 0x0001) && var0002) {
 			0xFEF4->show_npc_face0(0x0000);
@@ -3454,11 +3499,11 @@ void Func013D shape#(0x13D) () {
 			Func094F(0xFEF9, var0003);
 			UI_end_conversation();
 			0xFEFA->set_npc_id(0x0002);
-			0xFEF9->si_path_run_usecode([0x0998, 0x0075, 0x0001], 0x000D, 0xFEF9->get_npc_object(), Func038A, true);
+			0xFEF9->si_path_run_usecode([0x0998, 0x0075, 0x0001], SI_PATH_SUCCESS, 0xFEF9->get_npc_object(), Func038A, true);
 		}
 		abort;
 	}
-	if (gflags[0x022C] && ((event == 0x0002) && (!gflags[0x022D]))) {
+	if (gflags[0x022C] && ((event == SCRIPTED) && (!gflags[0x022D]))) {
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		0xFE9C->set_camera();
 		var0003 = script Func09A0(0x0005, 0x0001) after 10 ticks {
@@ -3474,7 +3519,7 @@ void Func013D shape#(0x13D) () {
 		gflags[0x002A] = false;
 		abort;
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		if (!gflags[0x00CE]) {
 			abort;
 		}
@@ -3500,7 +3545,7 @@ void Func013D shape#(0x13D) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFEF4->show_npc_face0(0x0000);
 		say("\"Stop!\"");
 		UI_remove_npc_face0();
@@ -3545,7 +3590,7 @@ void Func013E shape#(0x13E) () {
 	var0002 = Func0994();
 	if (gflags[0x021E]) {
 		var0003 = 0xFE9C->find_nearby(0x013E, 0x0014, 0x0000);
-		if (event == 0x0002) {
+		if (event == SCRIPTED) {
 			0xFEE1->show_npc_face0(0x0000);
 			say("\"Well, well, well... If it isn't the Avatar!\" *\"Fool! Thou didst think me dead... But now it is time for thee to die!\"");
 			var0004 = var0003->add_cont_items(0x0001, 0x0321, 0xFE99, 0x0000, 0x0012);
@@ -3570,7 +3615,7 @@ void Func013E shape#(0x13E) () {
 				var0004 = 0xFE9C->set_npc_prop(0x0003, (0x000F - var0005));
 			}
 		}
-		if (event == 0x0007) {
+		if (event == DEATH) {
 			0xFEE1->show_npc_face0(0x0000);
 			var0006 = UI_die_roll(0x0001, 0x0003);
 			if (var0006 == 0x0001) {
@@ -3590,7 +3635,7 @@ void Func013E shape#(0x13E) () {
 		abort;
 	}
 	if (Func0994() == 0x0010) {
-		if (event == 0x0002) {
+		if (event == SCRIPTED) {
 			0xFEE1->show_npc_face0(0x0001);
 			say("\"Thou art too late, Avatar! Nothing can stop me now! The girl is dead and the last Bane is mine!\"");
 			say("\"Soon I shall rival the Guardian himself and crush thee like the irritating insect thou art!\"");
@@ -3611,7 +3656,7 @@ void Func013E shape#(0x13E) () {
 				call Func0377;
 			};
 		}
-		if ((event == 0x0007) && (!get_item_flag(SI_ZOMBIE))) {
+		if ((event == DEATH) && (!get_item_flag(SI_ZOMBIE))) {
 			Func097F(item, "@At last...@", 0x0000);
 			item->Func07D2();
 			item->Func07D1();
@@ -3622,7 +3667,7 @@ void Func013E shape#(0x13E) () {
 			};
 			set_item_flag(SI_ZOMBIE);
 		}
-		if (event == 0x0000) {
+		if (event == PROXIMITY) {
 			if (var0007 == 0x0000) {
 				0xFFC0->set_item_flag(DEAD);
 				var0009 = find_nearby(0x0178, 0x0005, 0x0000);
@@ -3644,7 +3689,7 @@ void Func013E shape#(0x13E) () {
 			}
 		}
 	}
-	if (gflags[0x024F] && ((event == 0x0000) && (!gflags[0x0250]))) {
+	if (gflags[0x024F] && ((event == PROXIMITY) && (!gflags[0x0250]))) {
 		set_npc_id(get_npc_id() + 0x0001);
 		if (get_npc_id() == 0x000A) {
 			UI_init_conversation();
@@ -3687,7 +3732,7 @@ void Func013E shape#(0x13E) () {
 			var000C = [0x0924, 0x017E, 0x0000];
 			var000B = find_nearby(0x0373, 0x0014, 0x0000);
 			if (var000B) {
-				var000B->si_path_run_usecode(var000C, 0x000D, var000B, Func0373, false);
+				var000B->si_path_run_usecode(var000C, SI_PATH_SUCCESS, var000B, Func0373, false);
 			}
 		}
 		if (get_npc_id() == 0x0007) {
@@ -3695,7 +3740,7 @@ void Func013E shape#(0x13E) () {
 		}
 		if (get_npc_id() == 0x0006) {
 			var000D = [0x0926, 0x0187, 0x0000];
-			0xFF81->si_path_run_usecode(var000D, 0x000D, 0xFF81, Func047F, false);
+			0xFF81->si_path_run_usecode(var000D, SI_PATH_SUCCESS, 0xFF81, Func047F, false);
 			Func097F(item, "@I must be certain...@", 0x0000);
 		}
 		if (get_npc_id() == 0x0005) {
@@ -3726,7 +3771,7 @@ void Func013E shape#(0x13E) () {
 			say("\"I must prepare an appropriate welcome for mine old enemy!\"");
 			UI_end_conversation();
 			var000E = [0x092A, 0x0199, 0x0000];
-			0xFF80->si_path_run_usecode(var000E, 0x000D, 0xFF80, Func0480, false);
+			0xFF80->si_path_run_usecode(var000E, SI_PATH_SUCCESS, 0xFF80, Func0480, false);
 		}
 		if (get_npc_id() == 0x0002) {
 			Func097F(item, "@...before the Avatar cometh.@", 0x0000);
@@ -3738,7 +3783,7 @@ void Func013E shape#(0x13E) () {
 		}
 		abort;
 	}
-	if (gflags[0x024F] && ((event == 0x0002) && (!gflags[0x0250]))) {
+	if (gflags[0x024F] && ((event == SCRIPTED) && (!gflags[0x0250]))) {
 		UI_ambient_light(0x0001);
 		UI_set_time_palette();
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
@@ -3755,7 +3800,7 @@ void Func013E shape#(0x13E) () {
 		0xFF80->remove_npc();
 		gflags[0x002A] = false;
 	}
-	if ((event == 0x0003) && (var0002 == 0x001F)) {
+	if ((event == EGG) && (var0002 == 0x001F)) {
 		0xFEE1->show_npc_face0(0x0000);
 		say("\"Ah, Avatar! Thou wert ne'er a match for me...\" *\"Soon I will have power to rival even the Guardian himself! And thou wilt be powerless, just as thou art now.\" *\"I will bury my blade deep within thine entrails, twisting it ever so slowly, enjoying each of thy pitiful screams.\" *\"Farewell, hero of Britannia. Though thou wilt beg for a quick end to thy life, I shall resist. I want to enjoy thy death...\"");
 		UI_remove_npc_face0();
@@ -3782,7 +3827,7 @@ void Func0146 shape#(0x146) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		var0000 = Func090C(0xFE9C, item);
 		var0001 = script 0xFE9C {
 			face var0000;
@@ -3794,7 +3839,7 @@ void Func0146 shape#(0x146) () {
 			call Func02E5;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = 0xFE9C->find_nearest(0x0146, 0x000A);
 		var0002 = var0001->get_object_position();
 		var0002[0x0001] += 0x0001;
@@ -3809,7 +3854,7 @@ void Func0146 shape#(0x146) () {
 		}
 		var0001 = UI_update_last_created(var0002);
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0003 = get_item_quality();
 		var0004 = UI_click_on_item();
 		if (gflags[0x0004]) {
@@ -3927,7 +3972,7 @@ void Func014A shape#(0x14A) () {
 }
 
 void Func014E shape#(0x14E) () {
-	if (event == 0x0008) {
+	if (event == BG_PATH_FAILURE) {
 		set_polymorph(0x02D1);
 	}
 }
@@ -3935,7 +3980,7 @@ void Func014E shape#(0x14E) () {
 extern void Func098A 0x98A (var var0000, var var0001);
 
 void Func0150 shape#(0x150) () {
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		Func098A(item, 0x0152);
 	}
 }
@@ -3972,7 +4017,7 @@ void Func0151 shape#(0x151) () {
 	var var0016;
 
 	var0000 = get_npc_id();
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		if ((var0000 < 0x0001) || (var0000 > 0x0004)) {
 			abort;
 		}
@@ -4028,7 +4073,7 @@ void Func0151 shape#(0x151) () {
 			};
 		}
 	}
-	if ((event == 0x0001) && (var0000 != 0x0000)) {
+	if ((event == DOUBLECLICK) && (var0000 != 0x0000)) {
 		0xFE9C->item_say("@Pardon me...@");
 		item->Func07D1();
 		if (var0000 != 0x0005) {
@@ -4052,7 +4097,7 @@ void Func0151 shape#(0x151) () {
 			}
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		if (var0000 < 0x0005) {
 			set_schedule_type(0x001D);
 		} else {
@@ -4272,11 +4317,11 @@ void Func0152 shape#(0x152) () {
 	var var0000;
 	var var0001;
 
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		set_item_shape(0x0150);
 		halt_scheduled();
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		set_item_shape(0x0150);
 		var0000 = Func090C(0xFE9C, item);
 		var0001 = script 0xFE9C {
@@ -4286,7 +4331,7 @@ void Func0152 shape#(0x152) () {
 			actor frame standing;
 		};
 	}
-	if (event == 0x0005) {
+	if (event == READIED) {
 		Func0950(item);
 	}
 }
@@ -4311,7 +4356,7 @@ void Func0154 shape#(0x154) () {
 	var var000A;
 
 	var0000 = false;
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func0945(item);
 		var0001 = get_item_frame();
 		var0002 = UI_click_on_item();
@@ -4388,13 +4433,13 @@ extern void Func0856 0x856 ();
 void Func0162 shape#(0x162) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Ho! Goblin King!@");
 		item->Func07D1();
 		Func097F(item, "@What doing here?@", 0x0003);
 		set_schedule_type(0x0003);
 	}
-	if (((event == 0x0009) || (event == 0x0007)) && (!get_item_flag(SI_ZOMBIE))) {
+	if (((event == STARTED_TALKING) || (event == DEATH)) && (!get_item_flag(SI_ZOMBIE))) {
 		var0000 = set_npc_prop(0x0003, 0x001E);
 		set_item_flag(SI_ZOMBIE);
 		clear_item_say();
@@ -4444,7 +4489,7 @@ void Func0162 shape#(0x162) () {
 				Func0856();
 		}
 	}
-	if ((event == 0x0007) && get_item_flag(SI_ZOMBIE)) {
+	if ((event == DEATH) && get_item_flag(SI_ZOMBIE)) {
 		clear_item_flag(SI_TOURNAMENT);
 		Func097F(item, "@Thou hast slain me...@", 0x0000);
 		reduce_health(0x0037, 0x0000);
@@ -4461,7 +4506,7 @@ void Func016B shape#(0x16B) () {
 	var var0002;
 	var var0003;
 
-	if ((event == 0x0000) && (Func0994() == 0x000E)) {
+	if ((event == PROXIMITY) && (Func0994() == 0x000E)) {
 		clear_item_say();
 		var0000 = ["@I want an eyeball!@", "@Yes, mistress!@", "@We must hurry!@", "@Break his bones...@", "@I cannot wait!@", "@Skin him alive!@"];
 		Func097F(item, var0000[UI_get_random(UI_get_array_size(var0000))], 0x0000);
@@ -4469,7 +4514,7 @@ void Func016B shape#(0x16B) () {
 			set_schedule_type(0x0004);
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = find_nearby(0x016B, 0x001E, 0x0000);
 		if (var0001) {
 			var0002 = script Func09A0(0x0005, 0x0001) after UI_get_random(0x0014) ticks {
@@ -4496,7 +4541,7 @@ void Func0175 shape#(0x175) () {
 	var var0003;
 
 	var0000 = Func0953();
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = get_object_position();
 		if (get_npc_id() == 0x0000) {
 			Func0922(0x0001);
@@ -4536,7 +4581,7 @@ void Func0175 shape#(0x175) () {
 			abort;
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		UI_play_music(0x0032, Func09A0(0x0005, 0x0001));
 		0xFEF5->show_npc_face0(0x0000);
 		gflags[0x0279] = true;
@@ -4656,7 +4701,7 @@ void Func0178 shape#(0x178) () {
 	var var0006;
 	var var0007;
 
-	if ((event != 0x0001) && (event != 0x0002)) {
+	if ((event != DOUBLECLICK) && (event != SCRIPTED)) {
 		return;
 	}
 	var0000 = get_item_quality();
@@ -4718,7 +4763,7 @@ void Func0178 shape#(0x178) () {
 		0xFE9C->set_item_flag(DONT_MOVE);
 		var0004[0x0001] += var0006;
 		var0004[0x0002] -= 0x0003;
-		0xFE9C->si_path_run_usecode(var0004, 0x000A, item, Func07F6, true);
+		0xFE9C->si_path_run_usecode(var0004, PATH_SUCCESS, item, Func07F6, true);
 		UI_play_sound_effect(0x0039);
 		var0003 = script item after (var0007 + 0x0002) ticks {
 			nohalt;
@@ -4747,7 +4792,7 @@ void Func017B shape#(0x17B) () {
 	var var0000;
 	var var0001;
 
-	if (event != 0x0001) {
+	if (event != DOUBLECLICK) {
 		return;
 	}
 	var0000 = Func0953();
@@ -4965,10 +5010,10 @@ void Func017D shape#(0x17D) () {
 	var var0010;
 
 	var0000 = Func0953();
-	if ((event == 0x000D) || (event == 0x000E)) {
+	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
 		set_schedule_type(0x0000);
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0001 = get_object_position();
 		if (var0001[0x0003] > 0x0000) {
 			var0001[0x0001] -= 0x0001;
@@ -4980,7 +5025,7 @@ void Func017D shape#(0x17D) () {
 		clear_item_flag(SI_TOURNAMENT);
 		kill_npc();
 	}
-	if (event == 0x0008) {
+	if (event == BG_PATH_FAILURE) {
 		var0002 = 0xFE9C->find_nearby(0x017D, 0x001E, 0x0008);
 		if (var0002) {
 			var0002->set_polymorph(0x01CC);
@@ -5005,15 +5050,15 @@ void Func017D shape#(0x17D) () {
 		var0005 = Func0954();
 		var0006 = UI_is_pc_female();
 		var0007 = Func0953();
-		if (event == 0x0002) {
+		if (event == SCRIPTED) {
 			Func097F(item, "@Stand and be recognized, stranger!@", 0x0005);
 			set_schedule_type(0x0003);
 		}
-		if (event == 0x0001) {
+		if (event == DOUBLECLICK) {
 			Func097F(item, "@Stand and be recognized, stranger!@", 0x0005);
 			set_schedule_type(0x0003);
 		}
-		if (event == 0x0009) {
+		if (event == STARTED_TALKING) {
 			set_schedule_type(0x000A);
 			clear_item_say();
 			0xFEF3->show_npc_face0(0x0000);
@@ -5142,19 +5187,19 @@ void Func017D shape#(0x17D) () {
 		var0005 = Func0954();
 		var0006 = UI_is_pc_female();
 		var0007 = Func0953();
-		if ((event == 0x0000) && (get_schedule_type() == 0x0009)) {
+		if ((event == PROXIMITY) && (get_schedule_type() == 0x0009)) {
 			if (UI_get_random(0x000A) < 0x0006) {
 				abort;
 			}
 			var000C = ["@A tattooed woman!@", "@I'll show thee mine...@", "@A painted lady!@", "@Want a good time?@", "@I'll protect thee.@", "@Buy thee a drink?@"];
 			Func097F(item, var000C[UI_get_random(0x0006)], 0x0000);
 		}
-		if (event == 0x0001) {
+		if (event == DOUBLECLICK) {
 			0xFE9C->item_say("@Thou... guard!@");
 			Func097F(item, (("@Yes, " + var0005) + "?@"), 0x0005);
 			set_schedule_type(0x0003);
 		}
-		if (event == 0x0009) {
+		if (event == STARTED_TALKING) {
 			set_schedule_type(0x000A);
 			clear_item_say();
 			0xFEF3->show_npc_face0(0x0000);
@@ -5235,12 +5280,12 @@ void Func017D shape#(0x17D) () {
 		var0005 = Func0954();
 		var0006 = UI_is_pc_female();
 		var0007 = Func0953();
-		if (event == 0x0001) {
+		if (event == DOUBLECLICK) {
 			0xFE9C->item_say("@Might I speak with thee, guard?@");
 			Func097F(item, (("@What dost thou need, " + var0005) + "?@"), 0x0005);
 			set_schedule_type(0x0003);
 		}
-		if (event == 0x0009) {
+		if (event == STARTED_TALKING) {
 			set_schedule_type(0x000A);
 			clear_item_say();
 			0xFEF3->show_npc_face0(0x0000);
@@ -5380,7 +5425,7 @@ void Func019C shape#(0x19C) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x000B) {
+	if (event == PATH_FAILURE) {
 		var0000 = Func090C(0xFE9C, item);
 		var0001 = script 0xFE9C {
 			face var0000;
@@ -5392,7 +5437,7 @@ void Func019C shape#(0x19C) () {
 			call Func019C;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = 0xFE9C->find_nearest(0x019C, 0x000F);
 		var0002 = var0001->get_object_position();
 		var0002[0x0001] += 0x0001;
@@ -5438,14 +5483,14 @@ void Func01AF shape#(0x1AF) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = [0x0001, 0x0001];
 		var0001 = [0x0000, 0x0000];
 		var0002 = 0xFFFF;
-		Func090D(item, var0000, var0001, var0002, Func01AF, item, 0x000A);
+		Func090D(item, var0000, var0001, var0002, Func01AF, item, PATH_SUCCESS);
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		halt_scheduled();
 		var0003 = script item {
 			sfx 7;
@@ -5513,7 +5558,7 @@ void Func01B0 shape#(0x1B0) () {
 	var var0001;
 	var var0002;
 
-	if ((event != 0x0001) && (event != 0x0002)) {
+	if ((event != DOUBLECLICK) && (event != SCRIPTED)) {
 		return;
 	}
 	var0000 = get_item_quality();
@@ -5570,7 +5615,7 @@ extern void Func0905 0x905 (var var0000);
 void Func01B1 shape#(0x1B1) () {
 	var var0000;
 
-	if ((event != 0x0001) && (event != 0x0002)) {
+	if ((event != DOUBLECLICK) && (event != SCRIPTED)) {
 		return;
 	}
 	var0000 = Func0906(item);
@@ -5606,7 +5651,7 @@ void Func01B2 shape#(0x1B2) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (in_usecode()) {
 			halt_scheduled();
 			Func0949("@'Tis about time!@");
@@ -5614,7 +5659,7 @@ void Func01B2 shape#(0x1B2) () {
 			item->Func0629();
 		}
 	}
-	if (event == 0x000B) {
+	if (event == PATH_FAILURE) {
 		var0000 = get_object_position();
 		var0000[0x0001] += 0x0001;
 		var0000[0x0002] -= 0x0001;
@@ -5640,11 +5685,11 @@ void Func01B3 shape#(0x1B3) () {
 	var var0000;
 	var var0001;
 
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		set_item_shape(0x01E1);
 		halt_scheduled();
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		set_item_shape(0x01E1);
 		var0000 = Func090C(0xFE9C, item);
 		var0001 = script 0xFE9C {
@@ -5761,17 +5806,17 @@ void Func01C3 shape#(0x1C3) () {
 	if (UI_is_pc_female()) {
 		var0002 = "she";
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if ((0xFFBB->get_npc_id() == 0x000C) && (item == 0xFFBC->get_npc_object())) {
 			Func097F(0xFFBC, "@Keep him away from me!@", 0x0000);
 			0xFFBC->set_item_flag(MET);
-			0xFFBC->si_path_run_usecode([0x0413, 0x0A8B, 0x0000], 0x000D, item, Func01C3, false);
-			UI_set_path_failure(Func01C3, item, 0x000E);
+			0xFFBC->si_path_run_usecode([0x0413, 0x0A8B, 0x0000], SI_PATH_SUCCESS, item, Func01C3, false);
+			UI_set_path_failure(Func01C3, item, SI_PATH_FAILURE);
 			abort;
 		}
 		if ((0xFFBB->get_npc_id() == 0x0001) && (item == 0xFFBC->get_npc_object())) {
-			0xFFBC->si_path_run_usecode([0x0415, 0x0A7D, 0x0000], 0x000D, item, Func01C3, false);
-			UI_set_path_failure(Func01C3, item, 0x000E);
+			0xFFBC->si_path_run_usecode([0x0415, 0x0A7D, 0x0000], SI_PATH_SUCCESS, item, Func01C3, false);
+			UI_set_path_failure(Func01C3, item, SI_PATH_FAILURE);
 			abort;
 		}
 		if (0xFFBB->get_npc_id() == 0x000E) {
@@ -5827,8 +5872,8 @@ void Func01C3 shape#(0x1C3) () {
 		}
 		if (0xFFBB->get_npc_id() == 0x000C) {
 			0xFFBB->set_npc_id(0x000D);
-			0xFFB6->si_path_run_usecode([0x041B, 0x0A84, 0x0000], 0x000D, 0xFFB6->get_npc_object(), Func01C3, false);
-			UI_set_path_failure(Func01C3, 0xFFB6->get_npc_object(), 0x000E);
+			0xFFB6->si_path_run_usecode([0x041B, 0x0A84, 0x0000], SI_PATH_SUCCESS, 0xFFB6->get_npc_object(), Func01C3, false);
+			UI_set_path_failure(Func01C3, 0xFFB6->get_npc_object(), SI_PATH_FAILURE);
 			abort;
 		}
 		if (0xFFBB->get_npc_id() == 0x000B) {
@@ -5838,8 +5883,8 @@ void Func01C3 shape#(0x1C3) () {
 			say("\"I am weary of thine insults, Luther! I am no more of a traitor than thou art!\"");
 			UI_end_conversation();
 			0xFFB6->set_schedule_type(0x0000);
-			0xFFB9->si_path_run_usecode([0x0425, 0x0A82, 0x0000], 0x000D, 0xFFB9->get_npc_object(), Func01C3, false);
-			UI_set_path_failure(Func01C3, 0xFFB9->get_npc_object(), 0x000E);
+			0xFFB9->si_path_run_usecode([0x0425, 0x0A82, 0x0000], SI_PATH_SUCCESS, 0xFFB9->get_npc_object(), Func01C3, false);
+			UI_set_path_failure(Func01C3, 0xFFB9->get_npc_object(), SI_PATH_FAILURE);
 			var0003 = script 0xFFBC after 10 ticks {
 				nohalt;
 				call Func01C3;
@@ -5882,8 +5927,8 @@ void Func01C3 shape#(0x1C3) () {
 				wait 4;
 				call Func01C3;
 			};
-			0xFFBA->si_path_run_usecode([0x0439, 0x0A77, 0x0000], 0x000D, 0xFFBA->get_npc_object(), Func01C3, false);
-			UI_set_path_failure(Func01C3, 0xFFBA->get_npc_object(), 0x000E);
+			0xFFBA->si_path_run_usecode([0x0439, 0x0A77, 0x0000], SI_PATH_SUCCESS, 0xFFBA->get_npc_object(), Func01C3, false);
+			UI_set_path_failure(Func01C3, 0xFFBA->get_npc_object(), SI_PATH_FAILURE);
 			abort;
 		}
 		if (0xFFBB->get_npc_id() == 0x0009) {
@@ -6037,8 +6082,8 @@ labelFunc01C3_073B:
 			}
 			UI_end_conversation();
 			0xFFBD->move_object([0x0437, 0x0A7C, 0x0000]);
-			0xFFBD->si_path_run_usecode([0x0421, 0x0A74, 0x0000], 0x000D, 0xFFBD->get_npc_object(), Func01C3, false);
-			UI_set_path_failure(Func01C3, 0xFFBD->get_npc_object(), 0x000E);
+			0xFFBD->si_path_run_usecode([0x0421, 0x0A74, 0x0000], SI_PATH_SUCCESS, 0xFFBD->get_npc_object(), Func01C3, false);
+			UI_set_path_failure(Func01C3, 0xFFBD->get_npc_object(), SI_PATH_FAILURE);
 			Func097F(0xFFBD, "@Terrible news!@", 0x000A);
 			0xFFBD->set_item_flag(MET);
 			UI_play_music(0x001E, Func09A0(0x0005, 0x0001));
@@ -6177,8 +6222,8 @@ labelFunc01C3_073B:
 			abort;
 		}
 		if (0xFFBB->get_npc_id() == 0x0001) {
-			0xFE9C->si_path_run_usecode([0x041F, 0x0A7B, 0x0000], 0x000D, item, Func01C3, false);
-			UI_set_path_failure(Func01C3, item, 0x000E);
+			0xFE9C->si_path_run_usecode([0x041F, 0x0A7B, 0x0000], SI_PATH_SUCCESS, item, Func01C3, false);
+			UI_set_path_failure(Func01C3, item, SI_PATH_FAILURE);
 			var0003 = script 0xFFBC after 15 ticks {
 				nohalt;
 				call Func01C3;
@@ -6207,8 +6252,8 @@ labelFunc01C3_073B:
 				var0009->run_schedule();
 			}
 			0xFE9C->item_say("@This must be the place!@");
-			0xFE9C->si_path_run_usecode([0x041F, 0x0A90, 0x0000], 0x000D, item, Func01C3, true);
-			UI_set_path_failure(Func01C3, item, 0x000E);
+			0xFE9C->si_path_run_usecode([0x041F, 0x0A90, 0x0000], SI_PATH_SUCCESS, item, Func01C3, true);
+			UI_set_path_failure(Func01C3, item, SI_PATH_FAILURE);
 			gflags[0x00BF] = true;
 			var000A = 0xFE9C->get_object_position() & (0xFE99 & 0x0006);
 			var000B = var000A->find_nearby(0x0113, 0x0028, 0x0010);
@@ -6328,7 +6373,7 @@ labelFunc01C3_073B:
 			var0005->clear_item_flag(SI_TOURNAMENT);
 		}
 	}
-	if (event == 0x000E) {
+	if (event == SI_PATH_FAILURE) {
 		if ((item == 0xFFBF->get_npc_object()) && (0xFFBB->get_npc_id() == 0x0008)) {
 			0xFFBF->set_schedule_type(0x000F);
 			0xFFBF->item_say("@Poor Cantra...@");
@@ -6362,13 +6407,13 @@ labelFunc01C3_073B:
 			UI_end_conversation();
 			Func097F(0xFF6A, "@No, Shazzana...@", 0x0004);
 			Func097F(0xFFB6, "@Thou shalt not tell me what to do!@", 0x0002);
-			0xFFB6->si_path_run_usecode([0x041C, 0x0A81, 0x0000], 0x000D, 0xFFB6->get_npc_object(), Func01C3, false);
-			UI_set_path_failure(Func01C3, 0xFFB6->get_npc_object(), 0x000E);
+			0xFFB6->si_path_run_usecode([0x041C, 0x0A81, 0x0000], SI_PATH_SUCCESS, 0xFFB6->get_npc_object(), Func01C3, false);
+			UI_set_path_failure(Func01C3, 0xFFB6->get_npc_object(), SI_PATH_FAILURE);
 			abort;
 		}
 		if (item == 0xFFBD->get_npc_object()) {
 			0xFFBD->move_object([0x0421, 0x0A74, 0x0000]);
-			event = 0x000D;
+			event = SI_PATH_SUCCESS;
 		}
 		if ((item == 0xFFBC->get_npc_object()) && (0xFFBB->get_npc_id() == 0x000C)) {
 			0xFFBC->set_schedule_type(0x000F);
@@ -6376,18 +6421,18 @@ labelFunc01C3_073B:
 		}
 		if ((item == 0xFFBC->get_npc_object()) && (0xFFBB->get_npc_id() == 0x0002)) {
 			0xFFBC->move_object([0x0415, 0x0A7D, 0x0000]);
-			event = 0x000D;
+			event = SI_PATH_SUCCESS;
 		}
 		if ((0xFFBB->get_npc_id() == 0x0001) && (item == 0xFE9C->get_npc_object())) {
 			0xFE9C->move_object([0x041F, 0x0A7B, 0x0000]);
-			event = 0x000D;
+			event = SI_PATH_SUCCESS;
 		}
 		if ((0xFFBB->get_npc_id() == 0x0000) && ((get_item_shape() == 0x01B0) || (get_item_shape() == 0x010E))) {
 			0xFE9C->move_object([0x041F, 0x0A90, 0x0000]);
-			event = 0x000D;
+			event = SI_PATH_SUCCESS;
 		}
 	}
-	if (event == 0x000D) {
+	if (event == SI_PATH_SUCCESS) {
 		if ((item == 0xFFBF->get_npc_object()) && (0xFFBB->get_npc_id() == 0x0008)) {
 			0xFFBF->set_schedule_type(0x000F);
 			var0003 = script 0xFFBF {
@@ -6430,8 +6475,8 @@ labelFunc01C3_073B:
 			UI_end_conversation();
 			Func097F(0xFF6A, "@No, Shazzana...@", 0x0004);
 			Func097F(0xFFB6, "@Thou shalt not tell me what to do!@", 0x0002);
-			0xFFB6->si_path_run_usecode([0x041C, 0x0A81, 0x0000], 0x000D, 0xFFB6->get_npc_object(), Func01C3, false);
-			UI_set_path_failure(Func01C3, 0xFFB6->get_npc_object(), 0x000E);
+			0xFFB6->si_path_run_usecode([0x041C, 0x0A81, 0x0000], SI_PATH_SUCCESS, 0xFFB6->get_npc_object(), Func01C3, false);
+			UI_set_path_failure(Func01C3, 0xFFB6->get_npc_object(), SI_PATH_FAILURE);
 			abort;
 		}
 		if (item == 0xFFBD->get_npc_object()) {
@@ -6475,8 +6520,8 @@ labelFunc01C3_073B:
 			};
 			Func097F(0xFFC1, "@Kill the Goblins!@", 0x0005);
 			Func097F(0xFFBF, "@Poor dear!@", 0x0002);
-			0xFFBF->si_path_run_usecode([0x0422, 0x0A73, 0x0000], 0x000D, 0xFFBF->get_npc_object(), Func01C3, false);
-			UI_set_path_failure(Func01C3, 0xFFBF->get_npc_object(), 0x000E);
+			0xFFBF->si_path_run_usecode([0x0422, 0x0A73, 0x0000], SI_PATH_SUCCESS, 0xFFBF->get_npc_object(), Func01C3, false);
+			UI_set_path_failure(Func01C3, 0xFFBF->get_npc_object(), SI_PATH_FAILURE);
 			UI_remove_npc_face1();
 			abort;
 		}
@@ -6617,7 +6662,7 @@ void Func01C7 shape#(0x1C7) () {
 	} else {
 		var0007 = "evening";
 	}
-	if (event == 0x000E) {
+	if (event == SI_PATH_FAILURE) {
 		if ((0xFFEE->get_npc_id() == 0x000D) && (item == 0xFE9C->get_npc_object())) {
 			var0009 = 0xFE9C->get_object_position();
 			var0009[0x0001] -= var0009[0x0003] / 0x0002;
@@ -6626,7 +6671,7 @@ void Func01C7 shape#(0x1C7) () {
 			var0009 = 0xFE9C->get_object_position();
 			0xFE9C->move_object([0x0937, 0x0733, 0x0001]);
 			UI_play_sound_effect(0x0082);
-			event = 0x000D;
+			event = SI_PATH_SUCCESS;
 		}
 		if ((0xFFEE->get_npc_id() == 0x000C) && (item == 0xFE9C->get_npc_object())) {
 			var0009 = 0xFE9C->get_object_position();
@@ -6636,7 +6681,7 @@ void Func01C7 shape#(0x1C7) () {
 			var0009 = 0xFE9C->get_object_position();
 			0xFE9C->move_object([0x093C, 0x0740, 0x0000]);
 			UI_play_sound_effect(0x0082);
-			event = 0x000D;
+			event = SI_PATH_SUCCESS;
 		}
 		if ((0xFFEE->get_npc_id() == 0x0001) && (item == 0xFFEE->get_npc_object())) {
 			if (0xFFEE->get_distance(0xFE9C) > 0x0002) {
@@ -6649,7 +6694,7 @@ void Func01C7 shape#(0x1C7) () {
 			}
 		}
 	}
-	if ((event == 0x000D) && gflags[0x00E2]) {
+	if ((event == SI_PATH_SUCCESS) && gflags[0x00E2]) {
 		if ((0xFFEE->get_npc_id() == 0x000D) && (item == 0xFE9C->get_npc_object())) {
 			Func0901();
 			abort;
@@ -6685,10 +6730,10 @@ void Func01C7 shape#(0x1C7) () {
 			};
 		}
 	}
-	if ((event == 0x0002) && gflags[0x00E2]) {
+	if ((event == SCRIPTED) && gflags[0x00E2]) {
 		if (0xFFEE->get_npc_id() == 0x000C) {
 			0xFFEE->set_npc_id(0x000D);
-			0xFE9C->si_path_run_usecode([0x0937, 0x0733, 0x0001], 0x000D, 0xFE9C->get_npc_object(), Func01C7, false);
+			0xFE9C->si_path_run_usecode([0x0937, 0x0733, 0x0001], SI_PATH_SUCCESS, 0xFE9C->get_npc_object(), Func01C7, false);
 			abort;
 		}
 		if (0xFFEE->get_npc_id() == 0x000B) {
@@ -6698,7 +6743,7 @@ void Func01C7 shape#(0x1C7) () {
 			UI_sprite_effect(0x000D, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			var000A = ["@What's going on?@", "@Cannot stop...@", "@Where am I going?@"];
 			Func094F(0xFE9C, var000A);
-			0xFE9C->si_path_run_usecode([0x093C, 0x0740, 0x0000], 0x000D, 0xFE9C->get_npc_object(), Func01C7, false);
+			0xFE9C->si_path_run_usecode([0x093C, 0x0740, 0x0000], SI_PATH_SUCCESS, 0xFE9C->get_npc_object(), Func01C7, false);
 			0xFFEC->set_npc_id(0x0000);
 			abort;
 		}
@@ -7255,7 +7300,7 @@ void Func01C7 shape#(0x1C7) () {
 		0xFFEE->set_npc_id(0x0001);
 		Func097F(0xFFEE, "@What is happening?!@", 0x0000);
 		var0009 = 0xFE9C->get_object_position();
-		0xFFEE->si_path_run_usecode(var0009, 0x0003, 0xFFEE->get_npc_object(), Func01C7, true);
+		0xFFEE->si_path_run_usecode(var0009, EGG, 0xFFEE->get_npc_object(), Func01C7, true);
 		0xFFEE->Func07D1();
 		var000A = script 0xFE9C {
 			nohalt;
@@ -7278,7 +7323,7 @@ void Func01C8 shape#(0x1C8) () {
 	var var0005;
 
 	var0000 = Func09A0(0x0005, 0x0003);
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0001 = get_item_frame();
 		if (var0001 < 0x0006) {
 			var0002 = script item after 20 ticks {
@@ -7294,7 +7339,7 @@ void Func01C8 shape#(0x1C8) () {
 			UI_play_sound_effect(0x004A);
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0003 = UI_click_on_item();
 		var0004 = var0003->get_item_shape();
 		if (var0004 == 0x0326) {
@@ -7353,7 +7398,7 @@ void Func01D1 shape#(0x1D1) () {
 	var var0005;
 
 	var0000 = Func0954();
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x0006]) {
 			if (gflags[0x0078]) {
 				if (gflags[0x018B] && (!gflags[0x0190])) {
@@ -7454,7 +7499,7 @@ void Func01D3 shape#(0x1D3) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (var0000 < 0x0002) {
 			var0001 = UI_click_on_item();
@@ -7490,7 +7535,7 @@ void Func01D6 shape#(0x1D6) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x000B) {
+	if (event == PATH_FAILURE) {
 		if (get_item_frame() == 0x0000) {
 			var0000 = find_nearby(0x01D6, 0x0005, 0x0000);
 		} else {
@@ -7522,7 +7567,7 @@ void Func01D6 shape#(0x1D6) () {
 			return;
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0002 = 0xFE9C->get_object_position();
 		var0002[0x0001] += 0x0001;
 		var0002[0x0002] += 0x0001;
@@ -7555,7 +7600,7 @@ extern void Func0905 0x905 (var var0000);
 void Func01D7 shape#(0x1D7) () {
 	var var0000;
 
-	if ((event != 0x0001) && (event != 0x0002)) {
+	if ((event != DOUBLECLICK) && (event != SCRIPTED)) {
 		return;
 	}
 	var0000 = Func0906(item);
@@ -7650,7 +7695,7 @@ void Func01DC shape#(0x1DC) () {
 void Func01DE shape#(0x1DE) () {
 	var var0000;
 
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0000 = get_object_position();
 		var0000[0x0001] -= var0000[0x0003] / 0x0002;
 		var0000[0x0002] -= var0000[0x0003] / 0x0002;
@@ -7719,7 +7764,7 @@ extern void Func098A 0x98A (var var0000, var var0001);
 void Func01E1 shape#(0x1E1) () {
 	var var0000;
 
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		var0000 = get_item_frame();
 		if (var0000 > 0x0001) {
 			item_say("Burnt out");
@@ -7733,7 +7778,7 @@ void Func01E2 shape#(0x1E2) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = 0xFE9C->find_nearby(0x01E2, 0x0064, 0x0000);
 		if (var0000) {
 			var0001 = var0000->get_object_position();
@@ -7770,7 +7815,7 @@ void Func01E3 shape#(0x1E3) () {
 	var var0011;
 	var var0012;
 
-	if ((item == Func09A0(0x0005, 0x0001)) && (event == 0x0002)) {
+	if ((item == Func09A0(0x0005, 0x0001)) && (event == SCRIPTED)) {
 		UI_play_music(0x0027, Func09A0(0x0005, 0x0001));
 		item->Func07D7();
 		if (!gflags[0x021D]) {
@@ -7813,14 +7858,14 @@ void Func01E3 shape#(0x1E3) () {
 	if (var000B != 0x0002) {
 		abort;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->set_item_flag(DONT_MOVE);
 		if (UI_in_gump_mode()) {
 			UI_close_gumps();
 		}
 		0xFE9C->halt_scheduled();
 		var000C = get_object_position();
-		0xFE9C->si_path_run_usecode([(var000C[0x0001] - 0x0003), (var000C[0x0002] - 0x0003), 0x0000], 0x000A, item, Func01E3, true);
+		0xFE9C->si_path_run_usecode([(var000C[0x0001] - 0x0003), (var000C[0x0002] - 0x0003), 0x0000], PATH_SUCCESS, item, Func01E3, true);
 		0xFE9C->clear_item_flag(INVISIBLE);
 		var000D = find_nearby(0x0320, 0x001E, 0x0000);
 		var0005 = false;
@@ -7863,11 +7908,11 @@ void Func01E3 shape#(0x1E3) () {
 			var000D = 0xFE9C->add_cont_items(0x0001, 0x0286, 0xFE99, 0x0000, 0x0012);
 		}
 	}
-	if (event == 0x000E) {
+	if (event == SI_PATH_FAILURE) {
 		var000C = get_object_position();
 		0xFE9C->move_object([(var000C[0x0001] - 0x0003), (var000C[0x0002] - 0x0003), 0x0000]);
 	}
-	if ((event == 0x000A) || (event == 0x000E)) {
+	if ((event == PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
 		0xFE9C->set_item_flag(DONT_MOVE);
 		0xFE9C->set_schedule_type(0x000F);
 		UI_end_conversation();
@@ -7883,7 +7928,7 @@ void Func01E3 shape#(0x1E3) () {
 			call Func01E3;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		var000D = script 0xFE9C after 4 ticks {
 			nohalt;
@@ -7908,7 +7953,7 @@ void Func01E5 shape#(0x1E5) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = [0x020A, 0x0320, 0x010E, 0x01B0, 0x0178, 0x01B1, 0x0204, 0x00F6, 0x00E1, 0x01D7];
 		var0001 = UI_click_on_item();
 		var0002 = var0001->get_item_shape();
@@ -7942,7 +7987,7 @@ void Func01EF shape#(0x1EF) () {
 	var var0003;
 
 	var0000 = get_npc_id();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (var0000 > 0x0002) {
 			if (UI_die_roll(0x0001, 0x0014) == 0x000D) {
 				clear_item_say();
@@ -7970,7 +8015,7 @@ void Func01EF shape#(0x1EF) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0002 = get_object_position();
 		var0002[0x0001] -= var0002[0x0003] / 0x0002;
 		var0002[0x0002] -= var0002[0x0003] / 0x0002;
@@ -7980,7 +8025,7 @@ void Func01EF shape#(0x1EF) () {
 		var0003 = Func0992(0xFFFE, 0x0000, 0x0000, false);
 		Func097F(var0003, "@Bloody cats!@", 0x0008);
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		if (gflags[0x000D]) {
 			set_npc_id(var0000 + 0x0001);
 			if (get_npc_id() == 0x0002) {
@@ -8013,11 +8058,11 @@ void Func01EF shape#(0x1EF) () {
 void Func01F0 shape#(0x1F0) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Good pup.@");
 		set_schedule_type(0x0009);
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0000 = ["@Arf!@", "@Woof!@", "@Bark!@"];
 		item_say(var0000[UI_get_random(UI_get_array_size(var0000))]);
 	}
@@ -8032,7 +8077,7 @@ void Func01F4 shape#(0x1F4) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = Func098E();
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0004 = script var0003 after UI_die_roll(0x0001, 0x000A) ticks {
@@ -8045,7 +8090,7 @@ void Func01F4 shape#(0x1F4) () {
 			};
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0004 = script item {
 			nohalt;
 			say "@Moo!@";
@@ -8065,7 +8110,7 @@ void Func01F8 shape#(0x1F8) () {
 	var var0006;
 	var var0007;
 
-	if (event != 0x0001) {
+	if (event != DOUBLECLICK) {
 		return;
 	}
 	if (UI_in_gump_mode()) {
@@ -8083,7 +8128,7 @@ void Func01F8 shape#(0x1F8) () {
 					var0002 = var0005;
 				}
 			}
-			Func090D(var0002, 0x0000, 0x0000, 0x0001, Func01F8, var0002, 0x000A);
+			Func090D(var0002, 0x0000, 0x0000, 0x0001, Func01F8, var0002, PATH_SUCCESS);
 			set_item_flag(ACTIVE_SAILOR);
 			0xFE9C->clear_item_flag(ACTIVE_SAILOR);
 			set_item_flag(ON_MOVING_BARGE);
@@ -8103,10 +8148,10 @@ void Func01F9 shape#(0x1F9) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (var0000 == 0x0000) {
-			0xFE9C->si_path_run_usecode(get_object_position(), 0x000D, item, Func01F9, true);
+			0xFE9C->si_path_run_usecode(get_object_position(), SI_PATH_SUCCESS, item, Func01F9, true);
 		}
 		if (var0000 == 0x0002) {
 			obj_sprite_effect(0x0015, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -8118,11 +8163,11 @@ void Func01F9 shape#(0x1F9) () {
 			UI_play_sound_effect(0x0039);
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFE9C->clear_item_flag(READ);
 		UI_play_sound_effect(0x0030);
 	}
-	if ((event == 0x000D) || (event == 0x000E)) {
+	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
 		Func09B5();
 	}
 }
@@ -8165,13 +8210,13 @@ void Func0202 shape#(0x202) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0008) {
+	if (event == BG_PATH_FAILURE) {
 		var0000 = [0x0210, 0x0151, 0x0215, 0x01F5, 0x0373, 0x0202, 0x0295, 0x02C2];
 		var0001 = Func0977(var0000);
 		var0002 = get_npc_id();
 		set_polymorph(var0000[var0002]);
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0003 = get_object_position();
 		if (get_npc_id() > 0x0000) {
 			var0004 = set_npc_prop(0x0003, 0x0001);
@@ -8214,7 +8259,7 @@ extern void Func0905 0x905 (var var0000);
 void Func0204 shape#(0x204) () {
 	var var0000;
 
-	if ((event != 0x0001) && (event != 0x0002)) {
+	if ((event != DOUBLECLICK) && (event != SCRIPTED)) {
 		return;
 	}
 	var0000 = Func0906(item);
@@ -8257,13 +8302,13 @@ void Func0207 shape#(0x207) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (Func0994() == 0x001F) {
 			abort;
 		}
-		0xFE9C->si_path_run_usecode(get_object_position(), 0x000D, item, Func0207, true);
+		0xFE9C->si_path_run_usecode(get_object_position(), SI_PATH_SUCCESS, item, Func0207, true);
 	}
-	if ((event == 0x000D) || ((event == 0x000E) || (event == 0x0002))) {
+	if ((event == SI_PATH_SUCCESS) || ((event == SI_PATH_FAILURE) || (event == SCRIPTED))) {
 		var0000 = get_item_frame();
 		if ((var0000 == 0x0000) || (get_item_shape() == 0x0310)) {
 			Func09B5();
@@ -8308,7 +8353,7 @@ void Func0207 shape#(0x207) () {
 extern void Func02C0 shape#(0x2C0) ();
 
 void Func020A shape#(0x20A) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		item_say("Locked");
 	}
 	if (get_item_quality() == 0x00FF) {
@@ -8325,7 +8370,7 @@ void Func020E shape#(0x20E) () {
 	var var0005;
 	var var0006;
 
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		var0000 = get_item_frame();
 		if ((var0000 == 0x0000) || ((var0000 == 0x0001) || ((var0000 == 0x0004) || (var0000 == 0x0005)))) {
 			return;
@@ -8351,7 +8396,7 @@ void Func0215 shape#(0x215) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0000 = get_npc_id();
 		if (var0000 == 0x0001) {
 			clear_item_flag(SI_TOURNAMENT);
@@ -8376,7 +8421,7 @@ void Func0215 shape#(0x215) () {
 }
 
 void Func0219 shape#(0x219) () {
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		clear_item_flag(SI_TOURNAMENT);
 		reduce_health(0x0037, 0x0000);
 	}
@@ -8408,9 +8453,9 @@ void Func0235 shape#(0x235) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x000E) {
+	if (event == SI_PATH_FAILURE) {
 		if ((0xFF6A->get_npc_id() == 0x0008) && (item == 0xFE9C->get_npc_object())) {
-			event = 0x000D;
+			event = SI_PATH_SUCCESS;
 		}
 		if ((0xFF6A->get_npc_id() == 0x0006) && (item == 0xFF6A->get_npc_object())) {
 			0xFF6A->set_schedule_type(0x000F);
@@ -8448,7 +8493,7 @@ void Func0235 shape#(0x235) () {
 			abort;
 		}
 		if ((0xFF6A->get_npc_id() > 0x0000) && (item == 0xFE9C->get_npc_object())) {
-			event = 0x000D;
+			event = SI_PATH_SUCCESS;
 		}
 		if ((0xFF6A->get_npc_id() > 0x0000) && (item == 0xFF6A->get_npc_object())) {
 			0xFF6A->set_schedule_type(0x000F);
@@ -8468,10 +8513,10 @@ void Func0235 shape#(0x235) () {
 			abort;
 		}
 		if ((0xFF6A->get_npc_id() == 0x0000) && (item == 0xFF6A->get_npc_object())) {
-			event = 0x000D;
+			event = SI_PATH_SUCCESS;
 		}
 	}
-	if (event == 0x000D) {
+	if (event == SI_PATH_SUCCESS) {
 		set_schedule_type(0x000F);
 		if ((0xFF6A->get_npc_id() == 0x0008) && (item == 0xFE9C->get_npc_object())) {
 			0xFE9C->set_polymorph(0x02D1);
@@ -8569,8 +8614,8 @@ void Func0235 shape#(0x235) () {
 			UI_play_sound_effect(0x0001);
 			0xFF6A->set_npc_id(0x0001);
 			0xFF6A->set_schedule_type(0x000F);
-			0xFE9C->si_path_run_usecode([0x03A7, 0x0A43, 0x0000], 0x000D, 0xFE9C->get_npc_object(), Func0235, false);
-			UI_set_path_failure(Func0235, 0xFE9C->get_npc_object(), 0x000E);
+			0xFE9C->si_path_run_usecode([0x03A7, 0x0A43, 0x0000], SI_PATH_SUCCESS, 0xFE9C->get_npc_object(), Func0235, false);
+			UI_set_path_failure(Func0235, 0xFE9C->get_npc_object(), SI_PATH_FAILURE);
 			0xFE9C->clear_item_say();
 			Func097F(0xFE9C, "@I should change...@", 0x0000);
 			var0000 = script 0xFF6A {
@@ -8582,7 +8627,7 @@ void Func0235 shape#(0x235) () {
 			abort;
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x0007] && (item == 0xFF6A->get_npc_object())) {
 			gflags[0x0007] = false;
 			0xFF6A->set_npc_id(0x0003);
@@ -8600,8 +8645,8 @@ void Func0235 shape#(0x235) () {
 		if (0xFF6A->get_npc_id() == 0x0008) {
 			0xFE9C->clear_item_say();
 			Func097F(0xFE9C, "@I should dress myself...@", 0x0003);
-			0xFE9C->si_path_run_usecode([0x03A7, 0x0A43, 0x0000], 0x000D, 0xFE9C->get_npc_object(), Func0235, false);
-			UI_set_path_failure(Func0235, 0xFE9C->get_npc_object(), 0x000E);
+			0xFE9C->si_path_run_usecode([0x03A7, 0x0A43, 0x0000], SI_PATH_SUCCESS, 0xFE9C->get_npc_object(), Func0235, false);
+			UI_set_path_failure(Func0235, 0xFE9C->get_npc_object(), SI_PATH_FAILURE);
 			abort;
 		}
 		if (0xFF6A->get_npc_id() == 0x0007) {
@@ -8614,8 +8659,8 @@ void Func0235 shape#(0x235) () {
 			abort;
 		}
 		if (0xFF6A->get_npc_id() == 0x0006) {
-			0xFF6A->si_path_run_usecode([0x03A4, 0x0A47, 0x0000], 0x000D, 0xFF6A->get_npc_object(), Func0235, false);
-			UI_set_path_failure(Func0235, 0xFF6A->get_npc_object(), 0x000E);
+			0xFF6A->si_path_run_usecode([0x03A4, 0x0A47, 0x0000], SI_PATH_SUCCESS, 0xFF6A->get_npc_object(), Func0235, false);
+			UI_set_path_failure(Func0235, 0xFF6A->get_npc_object(), SI_PATH_FAILURE);
 			abort;
 		}
 		if (0xFF6A->get_npc_id() == 0x0005) {
@@ -8693,13 +8738,13 @@ void Func0235 shape#(0x235) () {
 			Func097F(0xFE9C, "@I am ready...@", 0x0000);
 			0xFF6A->clear_item_say();
 			Func097F(0xFF6A, "@As am I!@", 0x0003);
-			0xFE9C->si_path_run_usecode([0x03A4, 0x0A4B, 0x0000], 0x000D, 0xFE9C->get_npc_object(), Func0235, false);
-			UI_set_path_failure(Func0235, 0xFE9C->get_npc_object(), 0x000E);
+			0xFE9C->si_path_run_usecode([0x03A4, 0x0A4B, 0x0000], SI_PATH_SUCCESS, 0xFE9C->get_npc_object(), Func0235, false);
+			UI_set_path_failure(Func0235, 0xFE9C->get_npc_object(), SI_PATH_FAILURE);
 			abort;
 		}
 		if (0xFF6A->get_npc_id() == 0x0001) {
-			0xFF6A->si_path_run_usecode([0x03A3, 0x0A4B, 0x0000], 0x000D, 0xFF6A->get_npc_object(), Func0235, false);
-			UI_set_path_failure(Func0235, 0xFF6A->get_npc_object(), 0x000E);
+			0xFF6A->si_path_run_usecode([0x03A3, 0x0A4B, 0x0000], SI_PATH_SUCCESS, 0xFF6A->get_npc_object(), Func0235, false);
+			UI_set_path_failure(Func0235, 0xFF6A->get_npc_object(), SI_PATH_FAILURE);
 			abort;
 		}
 		if (0xFF6A->get_npc_id() == 0x0000) {
@@ -8718,8 +8763,8 @@ void Func0235 shape#(0x235) () {
 				}
 				UI_end_conversation();
 				0xFE9C->set_item_flag(DONT_MOVE);
-				0xFF6A->si_path_run_usecode([0x03A5, 0x0A43, 0x0000], 0x000D, 0xFF6A->get_npc_object(), Func0235, false);
-				UI_set_path_failure(Func0235, 0xFF6A->get_npc_object(), 0x000E);
+				0xFF6A->si_path_run_usecode([0x03A5, 0x0A43, 0x0000], SI_PATH_SUCCESS, 0xFF6A->get_npc_object(), Func0235, false);
+				UI_set_path_failure(Func0235, 0xFF6A->get_npc_object(), SI_PATH_FAILURE);
 				0xFF6A->clear_item_say();
 				Func097F(0xFF6A, "@Come, my love!@", 0x0000);
 				abort;
@@ -8742,7 +8787,7 @@ void Func0247 shape#(0x247) () {
 	var var0003;
 	var var0004;
 
-	if ((event == 0x0001) && (!get_container())) {
+	if ((event == DOUBLECLICK) && (!get_container())) {
 		var0000 = get_object_position();
 		if (get_item_frame() == 0x0000) {
 			var0001 = set_last_created();
@@ -8754,7 +8799,7 @@ void Func0247 shape#(0x247) () {
 					var0003 = [0xFFFF, 0xFFFF, 0xFFFF, 0x0000, 0x0000, 0x0000, 0x0001, 0x0001, 0x0001];
 					var0004 = [0x0001, 0x0000, 0xFFFF, 0x0001, 0x0000, 0xFFFF, 0x0001, 0x0000, 0xFFFF];
 					0xFE9C->halt_scheduled();
-					Func090D(item, var0003, var0004, 0xFFFF, Func0247, item, 0x000A);
+					Func090D(item, var0003, var0004, 0xFFFF, Func0247, item, PATH_SUCCESS);
 				} else {
 					var0000[0x0002] -= 0x0005;
 					Func094A("@There is no room for thy bedroll there.@");
@@ -8762,7 +8807,7 @@ void Func0247 shape#(0x247) () {
 			}
 		}
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		var0001 = script 0xFE9C {
 			face NORTH;
 			actor frame bowing;
@@ -8773,7 +8818,7 @@ void Func0247 shape#(0x247) () {
 			call Func0247;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_item_shape(0x03F3);
 		set_item_frame(0x0015);
 	}
@@ -8800,7 +8845,7 @@ void Func024C shape#(0x24C) () {
 extern void Func098A 0x98A (var var0000, var var0001);
 
 void Func0253 shape#(0x253) () {
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		Func098A(item, 0x02BD);
 	}
 }
@@ -8812,7 +8857,7 @@ void Func025F shape#(0x25F) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x000B) {
+	if (event == PATH_FAILURE) {
 		var0000 = 0xFE9C->find_nearest(0x025F, 0x0003);
 		var0001 = var0000->get_item_frame();
 		var0002 = 0x0000;
@@ -8838,7 +8883,7 @@ void Func025F shape#(0x25F) () {
 			call Func025F;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0004 = 0xFE9C->get_object_position();
 		var0000 = 0xFE9C->find_nearest(0x025F, 0x0003);
 		var0001 = var0000->get_item_frame();
@@ -8897,7 +8942,7 @@ void Func0266 shape#(0x266) () {
 	var var0010;
 	var var0011;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = find_nearby(0xFE99, 0x003C, 0x0008);
 		for (var0003 in var0000 with var0001 to var0002) {
 			if (!var0003->get_item_flag(IN_PARTY)) {
@@ -9016,7 +9061,7 @@ void Func0269 shape#(0x269) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x000B) {
+	if (event == PATH_FAILURE) {
 		var0000 = Func090C(0xFE9C, item);
 		var0001 = script 0xFE9C {
 			face var0000;
@@ -9028,7 +9073,7 @@ void Func0269 shape#(0x269) () {
 			call Func0269;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0002 = 0xFE9C->get_object_position();
 		var0002[0x0001] -= 0x0004;
 		var0002[0x0002] -= 0x0000;
@@ -9065,7 +9110,7 @@ void Func0273 shape#(0x273) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		UI_play_sound_effect2(0x0044, item);
 		var0001 = var0000->get_item_shape();
@@ -9126,7 +9171,7 @@ void Func0275 shape#(0x275) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 	} else {
 		var0000 = item;
@@ -9146,7 +9191,7 @@ void Func0276 shape#(0x276) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 	} else {
 		var0000 = item;
@@ -9179,7 +9224,7 @@ void Func0280 shape#(0x280) () {
 	var var0009;
 	var var000A;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var0000 = UI_get_party_list();
 		var0001 = 0x0001;
@@ -9244,10 +9289,10 @@ void Func0281 shape#(0x281) () {
 	var var000A;
 
 	do {
-		if (event == 0x0002) {
+		if (event == SCRIPTED) {
 			var0000 = item;
 		} else {
-			if (!(event == 0x0001)) {
+			if (!(event == DOUBLECLICK)) {
 				break;
 			}
 			var0000 = UI_click_on_item();
@@ -9333,7 +9378,7 @@ void Func0282 shape#(0x282) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_play_sound_effect2(0x005E, item);
 		book_mode();
 		var0000 = get_item_quality();
@@ -9719,7 +9764,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 void Func0284 shape#(0x284) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		UI_play_sound_effect2(0x001C, item);
 		if (!(Func0983(0xFE9C) || (!Func0983(0xFFFD)))) {
@@ -9747,7 +9792,7 @@ extern void Func094A 0x94A (var var0000);
 void Func0285 shape#(0x285) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = "@I believe I heard somewhere that the innkeeper at " + "Sleeping Bull will exchange those.@";
 		Func094A(var0000);
 	}
@@ -9758,7 +9803,7 @@ extern void Func094A 0x94A (var var0000);
 void Func0286 shape#(0x286) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = "@I do not know where those may be exchanged on the " + "Serpent Isle.@";
 		Func094A(var0000);
 	}
@@ -9771,7 +9816,7 @@ void Func0288 shape#(0x288) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if ((var0000 == 0x0000) || (var0000 == 0x0001)) {
 			var0001 = UI_click_on_item();
@@ -9854,7 +9899,7 @@ void Func0289 shape#(0x289) () {
 	var var001C;
 
 	var0000 = get_item_frame();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (var0000 == 0x0006) {
 			var0001 = UI_click_on_item();
 			if (var0001->is_npc()) {
@@ -9892,7 +9937,7 @@ void Func0289 shape#(0x289) () {
 				0xFEF3->set_alignment(0x0001);
 				var000A = 0xFEF3->approach_avatar(0x0078, 0x0028);
 				if (var000A) {
-					0xFEF3->si_path_run_usecode([0x0000, 0x0000, 0x0000], 0x0009, 0xFEF3->get_npc_object(), Func036A, true);
+					0xFEF3->si_path_run_usecode([0x0000, 0x0000, 0x0000], STARTED_TALKING, 0xFEF3->get_npc_object(), Func036A, true);
 				} else {
 					gflags[0x0007] = true;
 					var0002 = script Func09A0(0x0005, 0x0001) after 15 ticks {
@@ -10011,7 +10056,7 @@ void Func0289 shape#(0x289) () {
 			var001C = Func0992(0x0001, "@That won't work!@", "@That won't work!@", false);
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x0007] == true) {
 			gflags[0x0007] = false;
 			var001C = Func0992(0x0001, 0x0000, 0x0000, false);
@@ -10037,7 +10082,7 @@ void Func028A shape#(0x28A) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = 0xFE9C->get_object_position();
 		var0001 = (var0000[0x0001] - 0x03A5) / 0x000A;
 		var0002 = (var0000[0x0002] - 0x046E) / 0x000A;
@@ -10070,7 +10115,7 @@ void Func028B shape#(0x28B) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		var0000 = 0xFE9C->find_nearby(0x0369, 0x0001, 0x0000);
 		var0001 = 0x0000;
 		if (UI_get_array_size(var0000) > 0x0000) {
@@ -10095,7 +10140,7 @@ void Func028B shape#(0x28B) () {
 		};
 		return;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0003 = 0xFE9C->get_cont_items(0x028D, 0xFE99, 0xFE99);
 		if (var0003) {
 			var0003->remove_item();
@@ -10112,7 +10157,7 @@ void Func028B shape#(0x28B) () {
 		}
 		return;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0006 = "@I suspect spinning the wool will be more fruitful " + "than spinning an empty wheel.@";
 		Func094A(var0006);
 	}
@@ -10142,7 +10187,7 @@ void Func028C shape#(0x28C) () {
 	var0001 = Func0953();
 	var0002 = UI_get_party_list();
 	var0003 = 0xFFB8->find_nearby(0x0381, 0x0014, 0x0000);
-	if (event == 0x000E) {
+	if (event == SI_PATH_FAILURE) {
 		var0004 = var0003->get_object_position();
 		if (item == 0xFFB8->get_npc_object()) {
 			var0004[0x0002] += 0x0001;
@@ -10155,7 +10200,7 @@ void Func028C shape#(0x28C) () {
 			call Func028C;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (0xFFB8->get_npc_id() == 0x0003) {
 			0xFFB8->set_npc_id(0x0004);
 			var0005 = UI_create_new_object(0x0390);
@@ -10232,8 +10277,8 @@ void Func028C shape#(0x28C) () {
 			Func097F(0xFFB8, "@Now we begin...@", 0x0000);
 			var0004 = var0003->get_object_position();
 			var0004[0x0002] += 0x0001;
-			0xFFB8->si_path_run_usecode(var0004, 0x0002, item, Func028C, false);
-			UI_set_path_failure(Func028C, item, 0x000E);
+			0xFFB8->si_path_run_usecode(var0004, SCRIPTED, item, Func028C, false);
+			UI_set_path_failure(Func028C, item, SI_PATH_FAILURE);
 			var0005 = script 0xFE9C {
 				nohalt;
 				face east;
@@ -10291,10 +10336,10 @@ void Func028D shape#(0x28D) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_container();
 		if (var0000 == 0xFE9C->get_npc_object()) {
-			event = 0x000A;
+			event = PATH_SUCCESS;
 			item->Func062D();
 			return;
 		}
@@ -10310,14 +10355,14 @@ void Func028D shape#(0x28D) () {
 			} else {
 				return;
 			}
-			event = 0x000A;
+			event = PATH_SUCCESS;
 			item->Func062D();
 			return;
 		}
 		var0002 = 0xFFFF;
 		var0003 = 0xFFFF;
 		var0004 = 0xFFFF;
-		Func090D(item, var0002, var0003, var0004, Func062D, item, 0x000A);
+		Func090D(item, var0002, var0003, var0004, Func062D, item, PATH_SUCCESS);
 	}
 }
 
@@ -10331,10 +10376,10 @@ void Func028E shape#(0x28E) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_container();
 		if (var0000 == 0xFE9C->get_npc_object()) {
-			event = 0x000A;
+			event = PATH_SUCCESS;
 			item->Func062E();
 			return;
 		}
@@ -10347,7 +10392,7 @@ void Func028E shape#(0x28E) () {
 					UI_flash_mouse(0x0004);
 					abort;
 				}
-				event = 0x000A;
+				event = PATH_SUCCESS;
 				item->Func062E();
 			}
 			return;
@@ -10355,7 +10400,7 @@ void Func028E shape#(0x28E) () {
 		var0002 = 0xFFFF;
 		var0003 = 0xFFFF;
 		var0004 = 0xFFFF;
-		Func090D(item, var0002, var0003, var0004, Func062E, item, 0x000A);
+		Func090D(item, var0002, var0003, var0004, Func062E, item, PATH_SUCCESS);
 	}
 }
 
@@ -10363,7 +10408,7 @@ void Func0291 shape#(0x291) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if ((var0000 % 0x0002) == 0x0000) {
 			var0001 = 0x0001;
@@ -10399,7 +10444,7 @@ void Func0294 shape#(0x294) () {
 	var0003 = Func0994();
 	var0004 = false;
 	var0005 = false;
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		run_schedule();
 		clear_item_say();
 		0xFEF6->show_npc_face0(0x0000);
@@ -10540,7 +10585,7 @@ void Func0296 shape#(0x296) () {
 	var var0003;
 	var var0004;
 
-	if ((event == 0x0001) || (event == 0x0004)) {
+	if ((event == DOUBLECLICK) || (event == WEAPON)) {
 		UI_close_gumps();
 		var0000 = UI_click_on_item();
 		var0001 = script 0xFE9C {
@@ -10601,7 +10646,7 @@ void Func0298 shape#(0x298) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (var0000 == 0x0000) {
 			UI_play_sound_effect(0x0019);
@@ -10614,7 +10659,7 @@ void Func0298 shape#(0x298) () {
 			abort;
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_item_frame(0x0000);
 		UI_play_sound_effect(0x00FF);
 	}
@@ -10633,7 +10678,7 @@ void Func0299 shape#(0x299) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = 0x0000;
 		var0001 = get_npc_id();
 		if ((var0001 == 0x0001) || (var0001 == 0x000B)) {
@@ -10695,6 +10740,7 @@ void Func0299 shape#(0x299) () {
 		}
 		abort;
 	}
+	// No idea what this is supposed to be.
 	if (event == 0x001D) {
 		var0004 = get_object_position();
 		remove_item();
@@ -10753,7 +10799,7 @@ void Func02A3 shape#(0x2A3) () {
 	var var002A;
 	var var002B;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->clear_item_say();
 		var0000 = get_item_frame();
 		if (var0000 == 0x0000) {
@@ -10997,7 +11043,7 @@ void Func02A3 shape#(0x2A3) () {
 			if (!Func090F(item, var001B, var001C, var001D)) {
 				UI_flash_mouse(0x0000);
 			} else {
-				Func090D(item, var001B, var001C, var001D, Func02A3, item, 0x000A);
+				Func090D(item, var001B, var001C, var001D, Func02A3, item, PATH_SUCCESS);
 			}
 		}
 		if (var0000 == 0x0015) {
@@ -11105,7 +11151,7 @@ void Func02A3 shape#(0x2A3) () {
 		Func097F(0xFE9C, "I cannot read this.", 0x0001);
 		Func097F(0xFE9C, "This book is ruined.", 0x0012);
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		if (get_item_frame() == 0x0014) {
 			var002B = script item {
 				repeat 4 {
@@ -11121,7 +11167,7 @@ void Func02A6 shape#(0x2A6) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if ((var0000 % 0x0002) == 0x0000) {
 			var0001 = 0x0001;
@@ -11154,7 +11200,7 @@ void Func02AF shape#(0x2AF) () {
 	var var0009;
 	var var000A;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (var0000 == 0x000A) {
 			if (gflags[0x0205] && (gflags[0x0203] && gflags[0x0204])) {
@@ -11164,7 +11210,7 @@ void Func02AF shape#(0x2AF) () {
 				nohalt;
 				call Func07D6;
 			};
-			Func090D(item, [0x0001, 0x0002], [0x0001, 0x0002], 0xFFFF, Func02AF, item, 0x000A);
+			Func090D(item, [0x0001, 0x0002], [0x0001, 0x0002], 0xFFFF, Func02AF, item, PATH_SUCCESS);
 			var0002 = 0xFE9C->get_distance(item);
 			var0001 = script 0xFE9C after (var0002 + 0x0002) ticks {
 				nohalt;
@@ -11172,7 +11218,7 @@ void Func02AF shape#(0x2AF) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFE9C->clear_item_flag(INVISIBLE);
 		UI_play_sound_effect(0x0082);
 		UI_lightning();
@@ -11226,25 +11272,25 @@ void Func02AF shape#(0x2AF) () {
 }
 
 void Func02B1 shape#(0x2B1) () {
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		UI_play_music(0x002E, item);
 	}
 }
 
 void Func02B2 shape#(0x2B2) () {
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		UI_play_music(0x002D, item);
 	}
 }
 
 void Func02B4 shape#(0x2B4) () {
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		UI_play_music(0x0030, item);
 	}
 }
 
 void Func02B5 shape#(0x2B5) () {
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		UI_play_sound_effect(0x0055);
 	}
 }
@@ -11254,7 +11300,7 @@ void Func02B7 shape#(0x2B7) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_game_hour();
 		if (var0000 > 0x000C) {
 			var0000 -= 0x000C;
@@ -11274,7 +11320,7 @@ void Func02B7 shape#(0x2B7) () {
 extern void Func087F 0x87F (var var0000);
 
 void Func02B8 shape#(0x2B8) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func087F(item);
 	}
 }
@@ -11285,7 +11331,7 @@ void Func02BA shape#(0x2BA) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = var0000[0x0001]->get_item_shape();
 		if (var0001 == 0x0353) {
@@ -11305,10 +11351,10 @@ void Func02BD shape#(0x2BD) () {
 	var var0000;
 	var var0001;
 
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		Func092D(item, 0x0253, event);
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		var0000 = Func090C(0xFE9C, item);
 		var0001 = script 0xFE9C {
 			face var0000;
@@ -11318,7 +11364,7 @@ void Func02BD shape#(0x2BD) () {
 		};
 		Func092D(item, 0x0253, event);
 	}
-	if (event == 0x0005) {
+	if (event == READIED) {
 		Func0950(item);
 	}
 }
@@ -11339,16 +11385,16 @@ void Func02BE shape#(0x2BE) () {
 
 	var0000 = Func0954();
 	var0001 = Func0953();
-	if (event == 0x000E) {
+	if (event == SI_PATH_FAILURE) {
 		0xFE9C->clear_item_flag(DONT_MOVE);
 		UI_init_conversation();
 		if (gflags[0x01BC]) {
-			event = 0x000A;
+			event = PATH_SUCCESS;
 		} else {
-			event = 0x000B;
+			event = PATH_FAILURE;
 		}
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		0xFEF0->show_npc_face0(0x0000);
 		say("\"It is a phoenix egg. It is obviously quite rare, and it possesses magical qualities that go beyond explanation.\"");
 		var0002 = Func099B(0xFE9C, 0x0001, 0x0289, 0x0000, 0x0001, 0x0000, true);
@@ -11359,12 +11405,12 @@ void Func02BE shape#(0x2BE) () {
 			call Func02BE;
 		};
 	}
-	if ((event == 0x000B) || ((event == 0x0001) || (event == 0x0002))) {
+	if ((event == PATH_FAILURE) || ((event == DOUBLECLICK) || (event == SCRIPTED))) {
 		0xFE9C->clear_item_flag(DONT_MOVE);
-		if ((event == 0x0001) || (event == 0x0002)) {
-			if ((event == 0x0002) && gflags[0x0007]) {
+		if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
+			if ((event == SCRIPTED) && gflags[0x0007]) {
 				UI_play_sound_effect(0x000F);
-				si_path_run_usecode([0x0862, 0x04AE, 0x0000], 0x000B, item, Func02BE, true);
+				si_path_run_usecode([0x0862, 0x04AE, 0x0000], PATH_FAILURE, item, Func02BE, true);
 				gflags[0x0007] = false;
 				abort;
 			}
@@ -11372,7 +11418,7 @@ void Func02BE shape#(0x2BE) () {
 			say("\"Greetings to thee!\"");
 			add(["name", "bye"]);
 		}
-		if (event == 0x000B) {
+		if (event == PATH_FAILURE) {
 			0xFEF0->show_npc_face0(0x0000);
 			say("\"That is the greatest gift that I can give to thee. Use it wisely.\"");
 			UI_play_sound_effect(0x000F);
@@ -11406,7 +11452,7 @@ void Func02BE shape#(0x2BE) () {
 				} else {
 					say("\"As a token of mine appreciation, I shall give thee the most valuable possession I could bestow upon thee.\"");
 					var0004 = 0xFE9C->get_object_position();
-					si_path_run_usecode([(var0004[0x0001] + 0x0001), (var0004[0x0002] + 0x0001), 0x0000], 0x000A, item, Func02BE, true);
+					si_path_run_usecode([(var0004[0x0001] + 0x0001), (var0004[0x0002] + 0x0001), 0x0000], PATH_SUCCESS, item, Func02BE, true);
 					UI_play_sound_effect(0x000F);
 					abort;
 				}
@@ -11485,7 +11531,7 @@ void Func02C0 shape#(0x2C0) () {
 	var var0010;
 
 	var0000 = get_object_position();
-	if ((event == 0x0001) || ((event == 0x0002) || (event == 0x0003))) {
+	if ((event == DOUBLECLICK) || ((event == SCRIPTED) || (event == EGG))) {
 		var0001 = get_container();
 		if (!var0001->is_npc()) {
 			UI_close_gumps();
@@ -11561,7 +11607,7 @@ void Func02C1 shape#(0x2C1) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_play_sound_effect2(0x005E, item);
 		book_mode();
 		var0000 = get_item_quality();
@@ -11987,7 +12033,7 @@ void Func02C3 shape#(0x2C3) () {
 	var var0002;
 	var var0003;
 
-	if (event != 0x0001) {
+	if (event != DOUBLECLICK) {
 		return;
 	}
 	var0000 = get_item_quality();
@@ -12143,7 +12189,7 @@ void Func02C4 shape#(0x2C4) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		var0001 = var0000;
 		if (var0000 == 0x0001) {
@@ -12323,7 +12369,7 @@ void Func02CA shape#(0x2CA) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x000B) {
+	if (event == PATH_FAILURE) {
 		var0000 = Func090C(0xFE9C, item);
 		var0001 = script 0xFE9C {
 			face var0000;
@@ -12346,7 +12392,7 @@ void Func02CF shape#(0x2CF) () {
 	var var0003;
 	var var0004;
 
-	if ((event == 0x000A) || (event == 0x000B)) {
+	if ((event == PATH_SUCCESS) || (event == PATH_FAILURE)) {
 		var0000 = Func090C(0xFE9C, item);
 		var0001 = script 0xFE9C {
 			face var0000;
@@ -12358,7 +12404,7 @@ void Func02CF shape#(0x2CF) () {
 			call Func02CF;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0002 = 0xFE9C->find_nearest(0x02CF, 0x000A);
 		var0003 = var0002->get_item_frame();
 		var0004 = var0002->get_object_position();
@@ -12387,7 +12433,7 @@ extern var Func0953 0x953 ();
 void Func02D3 shape#(0x2D3) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = Func0953();
 		if (0xFFFD->npc_nearby()) {
 			0xFFFD->say("\"",
@@ -12404,7 +12450,7 @@ void Func02D8 shape#(0x2D8) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (var0000 != 0x0001) {
 			abort;
@@ -12419,7 +12465,7 @@ void Func02D8 shape#(0x2D8) () {
 			raw(0x0000);	// Note: should probably not he here
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFEFE->show_npc_face0(0x0000);
 		say("\"I am trapped! Help me!\"");
 		converse (["name", "Trapped?", "bye"]) {
@@ -12509,7 +12555,7 @@ void Func02DA shape#(0x2DA) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = ["@'Tis tragic that one so young should perish in the dawn of life.@"];
 		var0001 = ["@'Tis horrible to find one so young to have perished so early in life.@"];
 		var0002 = Func0992(0xFFFE, var0000, var0001, false);
@@ -12521,7 +12567,7 @@ extern void Func094A 0x94A (var var0000);
 void Func02DF shape#(0x2DF) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = "@I believe those are for the trainers to use. If thou art in need of practice, thou shouldst seek a trainer.@";
 		Func094A(var0000);
 	}
@@ -12533,7 +12579,7 @@ void Func02E3 shape#(0x2E3) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		var0000 = Func090C(0xFE9C, item);
 		var0001 = script 0xFE9C {
 			face var0000;
@@ -12564,7 +12610,7 @@ void Func02E4 shape#(0x2E4) () {
 	var var000C;
 	var var000D;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		var0001 = false;
 		var0002 = find_nearby(0x032A, 0x0014, 0x0000);
@@ -12590,7 +12636,7 @@ void Func02E4 shape#(0x2E4) () {
 		var000A = ["@Hummmm. I'll wager I could fill an empty bucket if I placed one at its base...@"];
 		var0008 = Func0992(0xFFFE, var0009, var000A, false);
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0002 = find_nearby(0x032A, 0x000A, 0x0000);
 		for (var0005 in var0002 with var000B to var000C) {
 			var0007 = var0005->get_item_frame();
@@ -12628,7 +12674,7 @@ void Func02E5 shape#(0x2E5) () {
 	var var0003;
 	var var0004;
 
-	if ((event == 0x000A) || (event == 0x000B)) {
+	if ((event == PATH_SUCCESS) || (event == PATH_FAILURE)) {
 		var0000 = Func090C(0xFE9C, item);
 		var0001 = script 0xFE9C {
 			face var0000;
@@ -12640,7 +12686,7 @@ void Func02E5 shape#(0x2E5) () {
 			call Func02E5;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0002 = 0xFE9C->find_nearest(0x02E5, 0x000A);
 		var0003 = var0002->get_item_frame();
 		var0004 = var0002->get_object_position();
@@ -12692,9 +12738,9 @@ void Func02E6 shape#(0x2E6) () {
 
 	var0000 = Func0954();
 	var0001 = 0xFFBA->get_object_position();
-	if (event == 0x000E) {
+	if (event == SI_PATH_FAILURE) {
 		if ((0xFFBA->get_npc_id() == 0x0008) && (item == 0xFE9C->get_npc_object())) {
-			event = 0x000D;
+			event = SI_PATH_SUCCESS;
 		}
 		if ((0xFFBA->get_npc_id() == 0x0006) && (item == 0xFFBA->get_npc_object())) {
 			0xFFBA->set_npc_id(0x0007);
@@ -12722,7 +12768,7 @@ void Func02E6 shape#(0x2E6) () {
 			abort;
 		}
 		if ((0xFFBA->get_npc_id() < 0x0002) && (item == 0xFE9C->get_npc_object())) {
-			event = 0x000D;
+			event = SI_PATH_SUCCESS;
 		}
 		if ((0xFFBA->get_npc_id() == 0x0000) && (item == 0xFFBA->get_npc_object())) {
 			0xFFBA->clear_item_say();
@@ -12742,13 +12788,13 @@ void Func02E6 shape#(0x2E6) () {
 				call Func02E6;
 				actor frame sleeping;
 			};
-			0xFE9C->si_path_run_usecode([0x043B, 0x0A52, 0x0000], 0x000D, 0xFE9C->get_npc_object(), Func02E6, false);
+			0xFE9C->si_path_run_usecode([0x043B, 0x0A52, 0x0000], SI_PATH_SUCCESS, 0xFE9C->get_npc_object(), Func02E6, false);
 			0xFE9C->clear_item_say();
 			Func097F(0xFE9C, "@Just a moment...@", 0x0000);
 			abort;
 		}
 	}
-	if (event == 0x000D) {
+	if (event == SI_PATH_SUCCESS) {
 		if ((0xFFBA->get_npc_id() == 0x0008) && (item == 0xFE9C->get_npc_object())) {
 			0xFE9C->set_polymorph(0x02D1);
 			UI_play_sound_effect(0x0001);
@@ -12830,17 +12876,17 @@ void Func02E6 shape#(0x2E6) () {
 				continue;
 				actor frame sleeping;
 			};
-			0xFE9C->si_path_run_usecode([0x043B, 0x0A52, 0x0000], 0x000D, 0xFE9C->get_npc_object(), Func02E6, false);
+			0xFE9C->si_path_run_usecode([0x043B, 0x0A52, 0x0000], SI_PATH_SUCCESS, 0xFE9C->get_npc_object(), Func02E6, false);
 			0xFE9C->clear_item_say();
 			Func097F(0xFE9C, "@Just a moment...@", 0x0000);
 			abort;
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (0xFFBA->get_npc_id() == 0x0008) {
 			0xFE9C->clear_item_say();
 			Func097F(0xFE9C, "@I should dress...@", 0x0003);
-			0xFE9C->si_path_run_usecode([0x043B, 0x0A52, 0x0000], 0x000D, 0xFE9C->get_npc_object(), Func02E6, false);
+			0xFE9C->si_path_run_usecode([0x043B, 0x0A52, 0x0000], SI_PATH_SUCCESS, 0xFE9C->get_npc_object(), Func02E6, false);
 			abort;
 		}
 		if (0xFFBA->get_npc_id() == 0x0007) {
@@ -12853,7 +12899,7 @@ void Func02E6 shape#(0x2E6) () {
 			abort;
 		}
 		if (0xFFBA->get_npc_id() == 0x0006) {
-			0xFFBA->si_path_run_usecode([0x0437, 0x0A5A, 0x0000], 0x000D, 0xFFBA->get_npc_object(), Func02E6, false);
+			0xFFBA->si_path_run_usecode([0x0437, 0x0A5A, 0x0000], SI_PATH_SUCCESS, 0xFFBA->get_npc_object(), Func02E6, false);
 			abort;
 		}
 		if (0xFFBA->get_npc_id() == 0x0005) {
@@ -12918,7 +12964,7 @@ void Func02E6 shape#(0x2E6) () {
 			Func097F(0xFE9C, "@I'm ready...@", 0x0000);
 			0xFFBA->clear_item_say();
 			Func097F(0xFFBA, "@As am I!@", 0x0003);
-			0xFE9C->si_path_run_usecode([0x043A, 0x0A5C, 0x0000], 0x000D, 0xFE9C->get_npc_object(), Func02E6, false);
+			0xFE9C->si_path_run_usecode([0x043A, 0x0A5C, 0x0000], SI_PATH_SUCCESS, 0xFE9C->get_npc_object(), Func02E6, false);
 			abort;
 		}
 		if (0xFFBA->get_npc_id() == 0x0001) {
@@ -12942,7 +12988,7 @@ void Func02E6 shape#(0x2E6) () {
 				}
 				UI_end_conversation();
 				0xFE9C->set_item_flag(DONT_MOVE);
-				0xFFBA->si_path_run_usecode([0x043A, 0x0A5C, 0x0000], 0x000D, 0xFFBA->get_npc_object(), Func02E6, false);
+				0xFFBA->si_path_run_usecode([0x043A, 0x0A5C, 0x0000], SI_PATH_SUCCESS, 0xFFBA->get_npc_object(), Func02E6, false);
 				0xFFBA->clear_item_say();
 				Func097F(0xFFBA, "@Come, my love!@", 0x0000);
 				abort;
@@ -12961,7 +13007,7 @@ void Func02E7 shape#(0x2E7) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		Func0922(0x0009);
 		gflags[0x02E3] = true;
 		var0000 = find_nearby(0x02E7, 0x002D, 0x0000);
@@ -13033,7 +13079,8 @@ void Func02E8 shape#(0x2E8) () {
 		gflags[0x021C] = true;
 		if (var0001) {
 			var0007 = get_object_position();
-			0xFF69->si_path_run_usecode(var0007, 0x0007, item, Func0314, false);
+			// BUG: This should use PATH_SUCCESS instead of BG_PATH_SUCCESS.
+			0xFF69->si_path_run_usecode(var0007, BG_PATH_SUCCESS, item, Func0314, false);
 			var0006 = script var0001 after 10 ticks {
 				nohalt;
 				say "@Thou didst risk thy life...@";
@@ -13156,7 +13203,7 @@ void Func02E8 shape#(0x2E8) () {
 }
 
 void Func02E9 shape#(0x2E9) () {
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		UI_play_music(0x002F, item);
 	}
 }
@@ -13164,7 +13211,7 @@ void Func02E9 shape#(0x2E9) () {
 void Func02F0 shape#(0x2F0) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (var0000 == 0x0000) {
 			set_item_frame(0x0001);
@@ -13177,7 +13224,7 @@ void Func02F0 shape#(0x2F0) () {
 }
 
 void Func02F2 shape#(0x2F2) () {
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		if (get_npc_id() == 0x000F) {
 			clear_item_flag(SI_TOURNAMENT);
 		}
@@ -13208,7 +13255,7 @@ void Func02F7 shape#(0x2F7) () {
 
 	var0000 = Func09A0(0x0002, 0x0001);
 	var0001 = var0000->get_item_quality();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_play_sound_effect(0x001E);
 		if (!find_nearby(0x03C1, 0x0028, 0x00B0)) {
 			abort;
@@ -13238,16 +13285,16 @@ void Func02F7 shape#(0x2F7) () {
 			}
 		}
 	}
-	if (event == 0x000E) {
+	if (event == SI_PATH_FAILURE) {
 		0xFE9C->move_object([0x08A8, 0x0501, 0x0001]);
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (var0001 == 0x0000) {
 			Func0922(0x0003);
 		}
 		if (var0001 == 0x0001) {
-			0xFE9C->si_path_run_usecode([0x08A8, 0x0501, 0x0001], 0x000D, var0000, Func02F7, false);
-			UI_set_path_failure(Func02F7, item, 0x000E);
+			0xFE9C->si_path_run_usecode([0x08A8, 0x0501, 0x0001], SI_PATH_SUCCESS, var0000, Func02F7, false);
+			UI_set_path_failure(Func02F7, item, SI_PATH_FAILURE);
 			var0003 = [0x08C4, 0x04FE, 0x0000];
 			UI_sprite_effect(0x002E, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			var0002 = var0000->set_item_quality(0x0002);
@@ -13318,7 +13365,7 @@ extern void Func094A 0x94A (var var0000);
 void Func02F8 shape#(0x2F8) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = "@Those are beautiful. I am sure that they would fetch " + "a high price.@";
 		Func094A(var0000);
 	}
@@ -13332,7 +13379,7 @@ void Func0303 shape#(0x303) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0004) {
+	if (event == WEAPON) {
 		var0000 = item;
 	} else {
 		var0000 = UI_click_on_item();
@@ -13386,7 +13433,7 @@ extern void Func094A 0x94A (var var0000);
 extern var Func0910 0x910 (var var0000);
 
 void Func030D shape#(0x30D) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (gflags[0x01CB]) {
 			abort;
 		}
@@ -13401,11 +13448,11 @@ void Func030D shape#(0x30D) () {
 extern void Func09B5 0x9B5 ();
 
 void Func0310 shape#(0x310) () {
-	if ((event == 0x000D) || (event == 0x000E)) {
+	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
 		Func09B5();
 	}
-	if (event == 0x0001) {
-		0xFE9C->si_path_run_usecode(get_object_position(), 0x000D, item, Func0310, true);
+	if (event == DOUBLECLICK) {
+		0xFE9C->si_path_run_usecode(get_object_position(), SI_PATH_SUCCESS, item, Func0310, true);
 	}
 }
 
@@ -13433,13 +13480,13 @@ void Func0313 shape#(0x313) () {
 	var var0010;
 	var var0011;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		if (0xFE9C->get_distance(item) > 0x0001) {
 			var0000 = 0xFFFF;
 			var0001 = 0xFFFF;
 			var0002 = 0xFFFD;
-			Func090D(item, var0000, var0001, var0002, Func0313, item, 0x0001);
+			Func090D(item, var0000, var0001, var0002, Func0313, item, DOUBLECLICK);
 		} else if ((get_item_quality() == 0x0094) || (get_item_quality() == 0x0095)) {
 			var0003 = script 0xFE9C after 1 ticks {
 				call Func0313;
@@ -13456,7 +13503,7 @@ void Func0313 shape#(0x313) () {
 			Func08DA(item);
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if ((get_item_shape() == 0x02D1) || (get_item_shape() == 0x03DD)) {
 			var0006 = 0xFE9C->find_nearest(0x0313, 0x0001);
 			var0007 = find_nearby(0x0113, 0x0028, 0x0010);
@@ -13485,8 +13532,8 @@ void Func0313 shape#(0x313) () {
 						}
 						var0011 = var000D->get_object_position();
 						var0011[0x0002] += 0x0001;
-						0xFF58->si_path_run_usecode(var0011, 0x000A, 0xFF58, Func04A8, true);
-						UI_set_path_failure([Func04A8], 0xFF58, 0x000E);
+						0xFF58->si_path_run_usecode(var0011, PATH_SUCCESS, 0xFF58, Func04A8, true);
+						UI_set_path_failure([Func04A8], 0xFF58, SI_PATH_FAILURE);
 						abort;
 					} else {
 						0xFE9C->item_say("@The lever will not move.@");
@@ -13523,15 +13570,15 @@ void Func0314 shape#(0x314) () {
 	var var000C;
 	var var000D;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var0000 = 0xFFFF;
 		var0001 = 0xFFFF;
 		var0002 = 0xFFFD;
-		Func090D(item, var0000, var0001, var0002, Func0314, item, 0x000A);
+		Func090D(item, var0000, var0001, var0002, Func0314, item, PATH_SUCCESS);
 	}
-	if ((event == 0x000A) || (event == 0x0002)) {
-		if (event != 0x0002) {
+	if ((event == PATH_SUCCESS) || (event == SCRIPTED)) {
+		if (event != SCRIPTED) {
 			var0003 = Func090C(0xFE9C, item);
 			var0004 = script 0xFE9C {
 				face var0003;
@@ -13598,7 +13645,7 @@ void Func0316 shape#(0x316) () {
 	var var0001;
 	var var0002;
 
-	if (event != 0x0001) {
+	if (event != DOUBLECLICK) {
 		return;
 	}
 	if (UI_in_gump_mode()) {
@@ -13645,7 +13692,7 @@ void Func0319 shape#(0x319) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0003 = UI_die_roll(0x0001, 0x0004);
 		if (var0003 == 0x0001) {
 			item_say("@All dead...@");
@@ -13660,11 +13707,11 @@ void Func0319 shape#(0x319) () {
 			item_say("@Curse the Guardian!@");
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		item_say("@Ah, there thou art, Avatar!@");
 		set_schedule_type(0x0003);
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		0xFEEC->show_npc_face0(0x0000);
 		say("\"This nightmare hath become too much to bear! The Avatar himself hath turned against me!\" *\"The Guardian's foul deeds have even corrupted our last bastion of virtue. Britannia is lost without its hero! I must awake...\"");
 		UI_remove_npc_face0();
@@ -13673,7 +13720,7 @@ void Func0319 shape#(0x319) () {
 		UI_play_sound_effect(0x004C);
 		kill_npc();
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFEEC->show_npc_face0(0x0000);
 		say("\"Avatar! At last thou hast come. Seeing thee again hath brought me strength.\"");
 		say("\"Dost thou know that I expected to find thee here, in my dreams? I wish that thou wert truly here to counsel me...");
@@ -13807,7 +13854,7 @@ void Func031D shape#(0x31D) () {
 	var var0007;
 	var var0008;
 
-	if (event != 0x0001) {
+	if (event != DOUBLECLICK) {
 		return;
 	}
 	var0000 = UI_is_pc_female();
@@ -14372,7 +14419,7 @@ extern void Func0422 object#(0x422) ();
 void Func031F shape#(0x31F) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (get_item_frame() != 0x0012) {
 			abort;
 		}
@@ -14495,7 +14542,7 @@ void Func0326 shape#(0x326) () {
 	var var0006;
 
 	UI_close_gumps();
-	if (event == 0x0006) {
+	if (event == UNREADIED) {
 		if ((gflags[0x023A] == false) && (gflags[0x00CF] == true)) {
 			if (!Func099D(item)) {
 				Func08AF(item, 0x0000);
@@ -14503,7 +14550,7 @@ void Func0326 shape#(0x326) () {
 		}
 		abort;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (gflags[0x00CF] == false) {
 			if (gflags[0x00D0] || (gflags[0x00D2] || gflags[0x00D1])) {
 				var0000 = UI_click_on_item();
@@ -14596,7 +14643,7 @@ void Func0326 shape#(0x326) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x00CF] == false) {
 			if (0xFE9C->get_distance(0xFF5D) < 0x002D) {
 				0xFF00->say("\"Avatar! Because thou didst keep thy promise to release me\"");
@@ -14684,10 +14731,10 @@ void Func032A shape#(0x32A) () {
 	if (get_item_frame() == 0x0006) {
 		return;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_container();
 		if (var0000 == 0xFE9C->get_npc_object()) {
-			event = 0x000A;
+			event = PATH_SUCCESS;
 			item->Func062C();
 			return;
 		}
@@ -14699,7 +14746,7 @@ void Func032A shape#(0x32A) () {
 					var0001 = var0000->give_last_created();
 					UI_flash_mouse(0x0000);
 				}
-				event = 0x000A;
+				event = PATH_SUCCESS;
 				item->Func062C();
 				return;
 			}
@@ -14708,7 +14755,7 @@ void Func032A shape#(0x32A) () {
 		UI_close_gumps();
 		var0002 = [0x0001, 0xFFFF, 0x0000, 0x0001, 0xFFFF, 0xFFFF, 0x0000, 0xFFFF];
 		var0003 = [0x0000, 0xFFFF, 0xFFFF, 0xFFFF, 0x0000, 0x0001, 0x0001, 0x0001];
-		Func090D(item, var0002, var0003, 0xFFFF, Func062C, item, 0x000A);
+		Func090D(item, var0002, var0003, 0xFFFF, Func062C, item, PATH_SUCCESS);
 	}
 }
 
@@ -14730,13 +14777,13 @@ void Func032B shape#(0x32B) () {
 	var var000C;
 	var var000D;
 
-	if (event == 0x0008) {
+	if (event == BG_PATH_FAILURE) {
 		set_polymorph(0x02E6);
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_schedule_type(0x001D);
 	}
-	if ((event == 0x0000) && (get_schedule_type() == 0x001D)) {
+	if ((event == PROXIMITY) && (get_schedule_type() == 0x001D)) {
 		0xFE9C->move_object([0x018E, 0x09B3, 0x0001]);
 		var0000 = UI_create_new_object(0x02F9);
 		if (var0000) {
@@ -14823,7 +14870,7 @@ void Func032C shape#(0x32C) () {
 	var var000C;
 	var var000D;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = find_nearby(0x0113, 0x0005, 0x0010);
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0004 = var0003->get_item_quality();
@@ -14845,12 +14892,12 @@ void Func032C shape#(0x32C) () {
 		}
 		if (var0007 == 0x0000) {
 			if (gflags[0x0314] == false) {
-				Func090D(item, [0x0001, 0x0000], [0x0000, 0x0001], 0xFFFF, Func032C, item, 0x000A);
+				Func090D(item, [0x0001, 0x0000], [0x0000, 0x0001], 0xFFFF, Func032C, item, PATH_SUCCESS);
 				abort;
 			}
 		}
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		0xFE9C->set_item_flag(DONT_MOVE);
 		0xFE9C->set_polymorph(0x00EF);
 		set_item_frame(0x0001);
@@ -14864,7 +14911,7 @@ void Func032C shape#(0x32C) () {
 		};
 		abort;
 	}
-	if ((event == 0x0002) && (gflags[0x0007] == false)) {
+	if ((event == SCRIPTED) && (gflags[0x0007] == false)) {
 		var0007 = get_item_frame();
 		if (var0007 == 0x0000) {
 			var0006 = script item {
@@ -14910,7 +14957,7 @@ void Func032C shape#(0x32C) () {
 			abort;
 		}
 	}
-	if ((event == 0x0002) && (gflags[0x0007] == true)) {
+	if ((event == SCRIPTED) && (gflags[0x0007] == true)) {
 		Func09AA();
 		gflags[0x0007] = false;
 		var0006 = 0xFE9C->get_npc_prop(0x0003);
@@ -15006,14 +15053,14 @@ void Func032E shape#(0x32E) () {
 	} else {
 		var0007 = "evening";
 	}
-	if (event == 0x0003) {
+	if (event == EGG) {
 		set_schedule_type(0x000F);
 		abort;
 	}
-	if (event == 0x000E) {
-		event = 0x0002;
+	if (event == SI_PATH_FAILURE) {
+		event = SCRIPTED;
 	}
-	if ((event == 0x0002) && (!gflags[0x00D9])) {
+	if ((event == SCRIPTED) && (!gflags[0x00D9])) {
 		if (0xFFEE->get_npc_id() == 0x000C) {
 			0xFFEE->set_npc_id(0x000D);
 			var0009 = script 0xFFE3 {
@@ -15032,7 +15079,7 @@ void Func032E shape#(0x32E) () {
 			0xFFEE->show_npc_face0(0x0000);
 			say("\"And to think she was once a young and beautiful sorceress, before her ambitions turned her cold and heartless...\"");
 			UI_end_conversation();
-			0xFFE3->si_path_run_usecode([0x090A, 0x071A, 0x0000], 0x0002, item, Func032E, false);
+			0xFFE3->si_path_run_usecode([0x090A, 0x071A, 0x0000], SCRIPTED, item, Func032E, false);
 			Func097F(0xFFE3, "@Pardon me...@", 0x0005);
 			UI_play_music(0x0012, Func09A0(0x0005, 0x0001));
 			abort;
@@ -15196,7 +15243,7 @@ void Func032E shape#(0x32E) () {
 				call Func032E;
 			};
 			Func097F(0xFFF6, "@Help!@", 0x0000);
-			0xFFF6->si_path_run_usecode([0x0916, 0x0742, 0x0000], 0x0003, item, Func032E, false);
+			0xFFF6->si_path_run_usecode([0x0916, 0x0742, 0x0000], EGG, item, Func032E, false);
 			Func097F(0xFFEC, "@How rude...@", 0x0006);
 			Func097F(0xFFFE, "@Stop that!@", 0x0002);
 			Func097F(0xFFFF, "@No!@", 0x000A);
@@ -15378,7 +15425,7 @@ void Func0334 shape#(0x334) () {
 
 	var0000 = item;
 	var0001 = var0000->get_item_quality();
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (get_item_shape() != 0x0334) {
 			var0000 = var0000->find_nearby(0x0334, 0x0005, 0x00B0);
 			var0000 = Func0989(var0000, var0000);
@@ -15629,7 +15676,7 @@ void Func0336 shape#(0x336) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (var0000 == 0x0000) {
 			var0001 = UI_click_on_item();
@@ -15675,7 +15722,7 @@ void Func0337 shape#(0x337) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (var0000 < 0x0002) {
 			var0001 = Func0992(0xFFFD, "@Thou art painting with thy fingers again?@", 0x0000, false);
@@ -15726,7 +15773,7 @@ void Func0339 shape#(0x339) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		var0000 = Func090C(0xFE9C, item);
 		var0001 = script 0xFE9C {
 			face var0000;
@@ -15749,7 +15796,7 @@ void Func033B shape#(0x33B) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		if (var0000->is_npc()) {
 			var0001 = var0000->get_npc_prop(0x0000);
@@ -15789,7 +15836,7 @@ extern var Func090A 0x90A (var var0000);
 void Func033C shape#(0x33C) () {
 	var var0000;
 
-	if ((event != 0x0001) && (event != 0x0002)) {
+	if ((event != DOUBLECLICK) && (event != SCRIPTED)) {
 		return;
 	}
 	if (get_item_quality() == 0x0000) {
@@ -15820,9 +15867,9 @@ void Func033D shape#(0x33D) () {
 	var var000D;
 	var var000E;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if ((!gflags[0x0007]) && ((!gflags[0x0008]) && ((!gflags[0x0009]) && (!gflags[0x000A])))) {
-			Func090D(item, 0x0000, 0x0000, 0xFFFF, Func033D, item, 0x000A);
+			Func090D(item, 0x0000, 0x0000, 0xFFFF, Func033D, item, PATH_SUCCESS);
 		}
 		if (gflags[0x0007]) {
 			var0000 = Func0953();
@@ -16043,7 +16090,7 @@ void Func033D shape#(0x33D) () {
 			var0004 = var0008->set_item_quality(var0009 + 0x0001);
 		}
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		var000D = UI_direction_from(0xFE9C, 0xFFE4);
 		var000E = UI_direction_from(0xFFE4, 0xFE9C);
 		gflags[0x0007] = true;
@@ -16064,7 +16111,7 @@ void Func0345 shape#(0x345) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = ("@Thou shouldst use the brush and pigments, " + Func0953()) + ".@";
 		var0001 = Func0992(0xFFFD, var0000, 0x0000, true);
 	}
@@ -16091,7 +16138,7 @@ void Func0346 shape#(0x346) () {
 				var0000 = set_last_created();
 				var0000 = 0xFE9C->give_last_created();
 				0xFFDB->set_schedule_type(0x000A);
-				Func090D(0xFFDB, 0xFFFF, 0xFFFF, 0xFFFD, Func0346, item, 0x0001);
+				Func090D(0xFFDB, 0xFFFF, 0xFFFF, 0xFFFD, Func0346, item, DOUBLECLICK);
 			}
 		} else {
 			Func097F(0xFE9C, "@Ale? Where art thou?@", 0x0000);
@@ -16124,7 +16171,7 @@ void Func0347 shape#(0x347) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (var0000 == 0x0001) {
 			var0001 = get_object_position();
@@ -16212,7 +16259,7 @@ extern var Func090B 0x90B (var var0000);
 void Func034D shape#(0x34D) () {
 	var var0000;
 
-	if ((event != 0x0001) && (event != 0x0002)) {
+	if ((event != DOUBLECLICK) && (event != SCRIPTED)) {
 		return;
 	}
 	if (get_item_quality() == 0x0000) {
@@ -16225,7 +16272,7 @@ extern void Func094A 0x94A (var var0000);
 void Func0353 shape#(0x353) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = "@That appears to be very fine cloth." + "Perhaps thou couldst cut it into bandages with shears.@";
 		Func094A(var0000);
 	}
@@ -16241,7 +16288,7 @@ void Func0355 shape#(0x355) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = get_object_position();
 		if (get_npc_id() == 0x000F) {
 			var0001 = UI_create_new_object(0x037F);
@@ -16537,7 +16584,7 @@ void Func035F shape#(0x35F) () {
 	var var000B;
 	var var000C;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (var0000 == 0x0000) {
 			var0001 = UI_click_on_item();
@@ -16601,7 +16648,7 @@ void Func035F shape#(0x35F) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0002 = get_object_position();
 		var000A = find_nearby(0x033F, 0x0002, 0x0000);
 		if (UI_get_array_size(var000A) > 0x0000) {
@@ -16660,7 +16707,7 @@ void Func0363 shape#(0x363) () {
 	if (var0000) {
 		var0002 = "daughter";
 	}
-	if ((event == 0x0003) && (var0001 == 0x001F)) {
+	if ((event == EGG) && (var0001 == 0x001F)) {
 		0xFF2D->show_npc_face0(0x0000);
 		say("Greetings, hero from another world!\"");
 		say("\"I foretold that we would meet again, though I had not expected thee in the realm of dreams.\" *\"That which thou dost see before thee is the Moon's Eye. It is thy goal in the waking world.\"");
@@ -16678,7 +16725,7 @@ void Func0363 shape#(0x363) () {
 		};
 		abort;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if ((item == var0003) && (var0001 == 0x0018)) {
 			var0006 = 0xFF2D->get_object_position();
 			while (var0006[0x0003] > 0x0000) {
@@ -16819,7 +16866,7 @@ void Func0368 shape#(0x368) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (var0000 == 0x0000) {
 			UI_play_sound_effect(0x0061);
@@ -16832,7 +16879,7 @@ void Func0368 shape#(0x368) () {
 			abort;
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_item_frame(0x0000);
 		UI_play_sound_effect(0x00FF);
 	}
@@ -16843,7 +16890,7 @@ extern void Func088D 0x88D (var var0000, var var0001);
 void Func0369 shape#(0x369) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_container();
 		if (var0000) {
 			return;
@@ -16870,7 +16917,7 @@ void Func036A shape#(0x36A) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0000 = UI_die_roll(0x0001, 0x0002);
 		clear_item_say();
 		if (var0000 == 0x0001) {
@@ -16881,7 +16928,7 @@ void Func036A shape#(0x36A) () {
 		}
 		set_attack_mode(0x0007);
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Come here, boy!@");
 		0xFEF3->Func07D1();
 		var0001 = script item after 2 ticks {
@@ -16890,7 +16937,7 @@ void Func036A shape#(0x36A) () {
 		};
 		0xFEF3->set_schedule_type(0x0003);
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (item == Func09A0(0x0005, 0x0001)) {
 			var0002 = 0xFE9C->find_nearby(0x036A, 0x0028, 0x0000);
 			if (var0002) {
@@ -16959,7 +17006,7 @@ void Func036A shape#(0x36A) () {
 		Func097F(var0007, "@The hound looks confused.@", 0x0004);
 		abort;
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFEF3->set_schedule_type(0x0009);
 		0xFEE9->show_npc_face0(0x0000);
 		say("\"Woof!\"");
@@ -17017,17 +17064,17 @@ void Func036A shape#(0x36A) () {
 				abort;
 		}
 	}
-	if (event == 0x000D) {
+	if (event == SI_PATH_SUCCESS) {
 		set_schedule_type(0x0009);
 		var0001 = script item {
 			nohalt;
 			say "@Ruff!@";
 		};
 	}
-	if (event == 0x000E) {
+	if (event == SI_PATH_FAILURE) {
 		set_schedule_type(0x0009);
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0008 = UI_die_roll(0x0001, 0x0002);
 		if (var0008 == 0x0001) {
 			0xFEF3->item_say("@Woof!@");
@@ -17046,7 +17093,7 @@ void Func036C shape#(0x36C) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = get_object_position();
 		var0001 = get_item_quality();
 		var0002 = get_item_frame();
@@ -17075,7 +17122,7 @@ void Func036C shape#(0x36C) () {
 		}
 		abort;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_flash_mouse(0x0000);
 	}
 }
@@ -17084,7 +17131,7 @@ void Func0370 shape#(0x370) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x000D) {
+	if (event == SI_PATH_SUCCESS) {
 		var0000 = script item {
 			nohalt;
 			face east;
@@ -17092,10 +17139,10 @@ void Func0370 shape#(0x370) () {
 			actor frame sitting;
 		};
 	}
-	if (event == 0x000E) {
+	if (event == SI_PATH_FAILURE) {
 		set_schedule_type(0x000C);
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		if (!gflags[0x00CE]) {
 			abort;
 		}
@@ -17142,10 +17189,10 @@ void Func0373 shape#(0x373) () {
 		Func0919(0xFEDB);
 		abort;
 	}
-	if (event == 0x0008) {
+	if (event == BG_PATH_FAILURE) {
 		set_polymorph(0x01F5);
 	}
-	if ((event == 0x000D) || (event == 0x000E)) {
+	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
 		set_schedule_type(0x000F);
 		var0002 = script item {
 			nohalt;
@@ -17158,10 +17205,10 @@ void Func0373 shape#(0x373) () {
 		var0003 = Func0954();
 		var0004 = UI_is_pc_female();
 		var0005 = Func0953();
-		if (event == 0x0001) {
+		if (event == DOUBLECLICK) {
 			0x0373->set_schedule_type(0x0003);
 		}
-		if (event == 0x0000) {
+		if (event == PROXIMITY) {
 			var0006 = UI_die_roll(0x0001, 0x0005);
 			if (var0006 == 0x0001) {
 				item_say("@To fight, these snakes!@");
@@ -17184,10 +17231,10 @@ void Func0373 shape#(0x373) () {
 		var0003 = Func0954();
 		var0004 = UI_is_pc_female();
 		var0005 = Func0953();
-		if (event == 0x0001) {
+		if (event == DOUBLECLICK) {
 			0x0373->set_schedule_type(0x0003);
 		}
-		if (event == 0x0000) {
+		if (event == PROXIMITY) {
 			var0006 = UI_die_roll(0x0001, 0x0005);
 			if (var0006 == 0x0001) {
 				item_say("@To seek help, for this fight!@");
@@ -17210,10 +17257,10 @@ void Func0373 shape#(0x373) () {
 		var0003 = Func0954();
 		var0004 = UI_is_pc_female();
 		var0005 = Func0953();
-		if (event == 0x0001) {
+		if (event == DOUBLECLICK) {
 			0x0373->set_schedule_type(0x0003);
 		}
-		if (event == 0x0000) {
+		if (event == PROXIMITY) {
 			var0006 = UI_die_roll(0x0001, 0x0005);
 			if (var0006 == 0x0001) {
 				item_say("@To need unity, these snakes!@");
@@ -17239,7 +17286,7 @@ extern void Func09A3 0x9A3 (var var0000);
 void Func0375 shape#(0x375) () {
 	var var0000;
 
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFED8->show_npc_face0(0x0000);
 		say("\"Avatar! How good it is to see thee! How long hath it been since we last met?\"");
 		0xFE9C->show_npc_face1(0x0000);
@@ -17264,7 +17311,7 @@ void Func0375 shape#(0x375) () {
 		remove_item();
 		UI_play_sound_effect(0x004C);
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFE9C->clear_item_flag(DONT_MOVE);
 		clear_item_flag(SI_TOURNAMENT);
 		var0000 = get_object_position();
@@ -17282,7 +17329,7 @@ extern void Func0916 0x916 ();
 
 void Func0377 shape#(0x377) () {
 	if (item == Func09A0(0x0005, 0x0004)) {
-		if (event == 0x0002) {
+		if (event == SCRIPTED) {
 			Func0916();
 		}
 	}
@@ -17293,7 +17340,7 @@ void Func0379 shape#(0x379) () {
 	var var0001;
 	var var0002;
 
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		var0000 = get_item_frame();
 		if ((var0000 == 0x0000) || ((var0000 == 0x0001) || ((var0000 == 0x0004) || (var0000 == 0x0005)))) {
 			return;
@@ -17316,7 +17363,7 @@ void Func038A shape#(0x38A) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x000D) {
+	if (event == SI_PATH_SUCCESS) {
 		var0000 = script item {
 			nohalt;
 			face east;
@@ -17324,10 +17371,10 @@ void Func038A shape#(0x38A) () {
 			actor frame sitting;
 		};
 	}
-	if (event == 0x000E) {
+	if (event == SI_PATH_FAILURE) {
 		set_schedule_type(0x000C);
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		if (!gflags[0x00CE]) {
 			abort;
 		}
@@ -17353,7 +17400,7 @@ void Func038A shape#(0x38A) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFEE6->show_npc_face0(0x0000);
 		say("\"Puny mortal!\"");
 		UI_remove_npc_face0();
@@ -17377,7 +17424,7 @@ void Func0395 shape#(0x395) () {
 	if ((var0002 > 0x0498) && ((var0002 < 0x04F8) && ((var0003 > 0x01AF) && (var0003 < 0x021F)))) {
 		var0000 = true;
 	}
-	if ((event == 0x0007) && 0xFEED->get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && 0xFEED->get_item_flag(SI_TOURNAMENT)) {
 		0xFEE8->show_npc_face0(0x0000);
 		say("\"Argh! Thou thinkest thou canst save thy precious Gwani by slaying me? Fool! Thou hast the brain of a headless!\" *\"I laugh at thee, even as I lie here dying in mine own blood. The Gwani are doomed I tell thee, doomed like a feeble rabbit in my trap, hahaha...\"");
 		UI_remove_npc_face0();
@@ -17386,19 +17433,19 @@ void Func0395 shape#(0x395) () {
 		0xFEED->reduce_health(0x0037, 0x0000);
 		gflags[0x0263] = true;
 	}
-	if ((event == 0x0001) && (var0000 == false)) {
+	if ((event == DOUBLECLICK) && (var0000 == false)) {
 		0xFE9C->item_say("@Stand fast, trapper!@");
 		0x0395->Func07D1();
 		Func097F(0x0395, "@Thou shalt not take me!@", 0x0003);
 		Func09AD(item);
 	}
-	if ((event == 0x0001) && var0000) {
+	if ((event == DOUBLECLICK) && var0000) {
 		0xFE9C->item_say("@Stand fast, Trapper!@");
 		0x0395->Func07D1();
 		Func097F(0x0395, "@At last!@", 0x0003);
 		set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		run_schedule();
 		clear_item_say();
 		0xFEE8->show_npc_face0(0x0000);
@@ -17447,7 +17494,7 @@ void Func03A1 shape#(0x3A1) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var0000 = UI_click_on_item();
 		var0001 = var0000->get_object_position();
@@ -17478,7 +17525,7 @@ void Func03A6 shape#(0x3A6) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (Func0994() == 0x000B) {
 			var0001 = UI_create_new_object2(0x01EF, [0x0259, 0x0255, 0x0000]);
@@ -17559,7 +17606,7 @@ void Func03A6 shape#(0x3A6) () {
 		};
 		abort;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		0xFE9C->clear_item_flag(DONT_MOVE);
 		UI_init_conversation();
@@ -17579,7 +17626,7 @@ void Func03A7 shape#(0x3A7) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = get_object_position();
 		var0001 = get_item_quality();
 		var0002 = get_item_frame();
@@ -17599,7 +17646,7 @@ void Func03A7 shape#(0x3A7) () {
 		}
 		abort;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_flash_mouse(0x0000);
 	}
 }
@@ -17611,7 +17658,7 @@ void Func03A8 shape#(0x3A8) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = get_object_position();
 		var0001 = get_item_quality();
 		var0002 = get_item_frame();
@@ -17631,7 +17678,7 @@ void Func03A8 shape#(0x3A8) () {
 		}
 		abort;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_flash_mouse(0x0000);
 	}
 }
@@ -17641,7 +17688,7 @@ extern var Func0983 0x983 (var var0000);
 void Func03B0 shape#(0x3B0) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (get_item_frame()) {
 			if (Func0983(0xFE9C)) {
 				0xFE9C->item_say("Ptui!");
@@ -17674,13 +17721,13 @@ void Func03B1 shape#(0x3B1) () {
 	if (UI_is_pc_female()) {
 		var0002 = "she";
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Might I speak with thee?@");
 		item->Func07D1();
 		Func097F(item, (("@Certainly, " + var0000) + ".@"), 0x0005);
 		set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		set_schedule_type(0x000A);
 		clear_item_say();
 		0xFECE->show_npc_face0(0x0000);
@@ -17993,13 +18040,13 @@ void Func03B2 shape#(0x3B2) () {
 	} else {
 		var0001 = "evening";
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Greetings, sir.@");
 		item->Func07D1();
 		Func097F(item, "@Greetings to thee.@", 0x0002);
 		set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		set_schedule_type(0x000A);
 		clear_item_say();
 		0xFECC->show_npc_face0(0x0000);
@@ -18229,7 +18276,7 @@ void Func03B3 shape#(0x3B3) () {
 
 	var0000 = get_npc_id();
 	var0001 = Func0953();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (!var0000) {
 			0xFE9C->item_say("@Pardon me, Milord.@");
 		} else {
@@ -18239,7 +18286,7 @@ void Func03B3 shape#(0x3B3) () {
 		Func097F(item, "@Dost thou address me?@", 0x0002);
 		set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		set_schedule_type(0x000A);
 		clear_item_say();
 		0xFECB->show_npc_face0(0x0000);
@@ -18489,7 +18536,7 @@ void Func03BB shape#(0x3BB) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = 0xFE9C->get_readied(0x0003);
 		if (var0000 == item) {
 			var0001 = var0000->get_item_frame();
@@ -18504,7 +18551,7 @@ void Func03BB shape#(0x3BB) () {
 			}
 		}
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		if (!gflags[0x02EE]) {
 			gflags[0x02EE] = true;
 			save_pos();
@@ -18539,7 +18586,7 @@ void Func03BB shape#(0x3BB) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0004 = Func0994();
 		if (var0004 == 0x0020) {
 			teleport_to_saved_pos();
@@ -18565,13 +18612,13 @@ void Func03BD shape#(0x3BD) () {
 	var var0005;
 
 	var0000 = get_npc_id();
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		if (get_schedule_type() == 0x001D) {
 			var0001 = ["@Leave Yurel alone!@", "@Stay away from Yurel!@", "@Yurel wants to go home!@", "@Oh, woe!@", "@Yurel hungry!@", "@Help me!@"];
 			Func097F(item, var0001[UI_get_random(UI_get_array_size(var0001))], 0x0000);
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (!var0000) {
 			0xFE9C->item_say("@Stop, monster!@");
 		} else {
@@ -18585,7 +18632,7 @@ void Func03BD shape#(0x3BD) () {
 		}
 		set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		set_schedule_type(0x000A);
 		clear_item_say();
 		0xFEC9->show_npc_face0(0x0000);
@@ -18716,10 +18763,10 @@ void Func03BE shape#(0x3BE) () {
 	var var0002;
 
 	var0000 = Func097D(0xFE9B, 0x0001, 0x0289, 0xFE99, 0x000D);
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (var0000 || gflags[0x02FF]) {
-			0xFE9C->si_path_run_usecode(get_object_position(), 0x000D, item, Func03BE, true);
-			UI_set_path_failure([Func0400], item, 0x000E);
+			0xFE9C->si_path_run_usecode(get_object_position(), SI_PATH_SUCCESS, item, Func03BE, true);
+			UI_set_path_failure([Func0400], item, SI_PATH_FAILURE);
 		} else if ((!var0000) || (!gflags[0x02FF])) {
 			var0001 = Func0992(0x0001, "@Maybe we can climb down?!@", "@Maybe I can climb down?!@", true);
 			var0002 = Func0992(0x0001, "@But with what?@", 0x0000, true);
@@ -18729,7 +18776,7 @@ void Func03BE shape#(0x3BE) () {
 			abort;
 		}
 	}
-	if ((event == 0x000D) || ((event == 0x000E) || (event == 0x0002))) {
+	if ((event == SI_PATH_SUCCESS) || ((event == SI_PATH_FAILURE) || (event == SCRIPTED))) {
 		Func0887(item);
 	}
 }
@@ -18741,12 +18788,12 @@ void Func03C0 shape#(0x3C0) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func091A(0x03C0);
 		abort;
 	}
 	var0000 = get_npc_number();
-	if ((event == 0x0002) && var0000->get_item_flag(CAN_FLY)) {
+	if ((event == SCRIPTED) && var0000->get_item_flag(CAN_FLY)) {
 		if (var0000->get_item_flag(IN_PARTY)) {
 			var0001 = script item {
 				nohalt;
@@ -18761,7 +18808,7 @@ void Func03C0 shape#(0x3C0) () {
 		}
 		abort;
 	}
-	if ((event == 0x0002) && (!var0000->get_item_flag(CAN_FLY))) {
+	if ((event == SCRIPTED) && (!var0000->get_item_flag(CAN_FLY))) {
 		item_say("@Whoa. Bad shrooms.@");
 		if (var0000 == 0xFE9C) {
 			var0000->clear_item_flag(CONFUSED);
@@ -18782,7 +18829,7 @@ void Func03CA shape#(0x3CA) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_npc_id();
 		if (var0000 < 0x0003) {
 			set_npc_id(var0000 + 0x0001);
@@ -18796,10 +18843,10 @@ void Func03CA shape#(0x3CA) () {
 			var0002 = [0x0001, 0x0001];
 			var0003 = [0x0000, 0x0000];
 			var0004 = 0xFFFF;
-			Func090D(item, var0002, var0003, var0004, Func03CA, item, 0x000A);
+			Func090D(item, var0002, var0003, var0004, Func03CA, item, PATH_SUCCESS);
 		}
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		var0005 = Func090C(0xFE9C, item);
 		var0006 = Func090C(item, 0xFE9C);
 		0xFE9C->halt_scheduled();
@@ -18838,7 +18885,7 @@ void Func03CA shape#(0x3CA) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFE9C->clear_item_flag(DONT_MOVE);
 		set_schedule_type(0x0014);
 		var0001 = Func0992(0x0001, "@Thou art SICK!@", "@That felt good!@", true);
@@ -18863,13 +18910,13 @@ void Func03CF shape#(0x3CF) () {
 	var0000 = Func0953();
 	var0001 = Func097D(0xFE9B, 0x0001, 0x0128, 0xFE99, 0x0003);
 	var0002 = false;
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@I would have words with thee!@");
 		item->Func07D1();
 		Func097F(item, "@They will be thine last.@", 0x0005);
 		set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		set_schedule_type(0x0004);
 		0xFECF->show_npc_face0(0x0000);
 		add(["name", "bye"]);
@@ -19095,11 +19142,11 @@ void Func03D2 shape#(0x3D2) () {
 	var0008 = false;
 	var0009 = false;
 	var000A = false;
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		item->Func07D1();
 		set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFECA->show_npc_face0(0x0000);
 		if (var0000 == false) {
 			say("\"A human. How interesting. What dost thou want?\"");
@@ -19515,7 +19562,7 @@ void Func03DB shape#(0x3DB) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if ((var0000 > 0x0009) && (var0000 < 0x0010)) {
 			if (!in_usecode()) {
@@ -19618,7 +19665,7 @@ void Func03DE shape#(0x3DE) () {
 	var var0005;
 	var var0006;
 
-	if ((event == 0x0005) || (event == 0x0006)) {
+	if ((event == READIED) || (event == UNREADIED)) {
 		var0000 = get_container();
 		while ((var0000 != 0x0000) && (!var0000->is_npc())) {
 			var0000 = var0000->get_container();
@@ -19628,7 +19675,7 @@ void Func03DE shape#(0x3DE) () {
 			return;
 		}
 	}
-	if (event == 0x0005) {
+	if (event == READIED) {
 		if (get_container()->get_readied(0x0001)) {
 			if (!gflags[0x0304]) {
 				Func095D(0x03E8);
@@ -19648,7 +19695,7 @@ void Func03DE shape#(0x3DE) () {
 			}
 		}
 	}
-	if (event == 0x0006) {
+	if (event == UNREADIED) {
 		if (gflags[0x0303]) {
 			var0005 = get_item_quality();
 			var0006 = 0xFFFF * var0005;
@@ -19673,7 +19720,7 @@ void Func03E4 shape#(0x3E4) () {
 	var var0007;
 	var var0008;
 
-	if ((event == 0x0005) || (event == 0x0006)) {
+	if ((event == READIED) || (event == UNREADIED)) {
 		var0000 = get_container();
 		while ((var0000 != 0x0000) && (!var0000->is_npc())) {
 			var0000 = var0000->get_container();
@@ -19683,7 +19730,7 @@ void Func03E4 shape#(0x3E4) () {
 			return;
 		}
 	}
-	if (event == 0x0005) {
+	if (event == READIED) {
 		if (get_container()->get_readied(0x000B)) {
 			if (!gflags[0x02E9]) {
 				Func095D(0x03E8);
@@ -19703,7 +19750,7 @@ void Func03E4 shape#(0x3E4) () {
 			}
 		}
 	}
-	if (event == 0x0006) {
+	if (event == UNREADIED) {
 		if (gflags[0x02E8]) {
 			var0005 = get_item_quality();
 			var0006 = 0xFFFF * var0005;
@@ -19727,7 +19774,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 void Func03E6 shape#(0x3E6) () {
 	var var0000;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		UI_play_music(0x002C, Func09A0(0x0005, 0x0001));
 		var0000 = get_object_position();
 		remove_item();
@@ -19752,7 +19799,7 @@ void Func03E9 shape#(0x3E9) () {
 	var var0005;
 	var var0006;
 
-	if ((event == 0x0005) || (event == 0x0006)) {
+	if ((event == READIED) || (event == UNREADIED)) {
 		var0000 = get_container();
 		while ((var0000 != 0x0000) && (!var0000->is_npc())) {
 			var0000 = var0000->get_container();
@@ -19762,7 +19809,7 @@ void Func03E9 shape#(0x3E9) () {
 			return;
 		}
 	}
-	if (event == 0x0005) {
+	if (event == READIED) {
 		if (get_container()->get_readied(0x0005)) {
 			if (!gflags[0x02F9]) {
 				Func095D(0x03E8);
@@ -19782,7 +19829,7 @@ void Func03E9 shape#(0x3E9) () {
 			}
 		}
 	}
-	if (event == 0x0006) {
+	if (event == UNREADIED) {
 		if (gflags[0x0302]) {
 			var0005 = get_item_quality();
 			var0006 = 0xFFFF * var0005;
@@ -19805,7 +19852,7 @@ void Func03F2 shape#(0x3F2) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = find_nearby(0x03FB, 0x000A, 0x0000);
 		var0001 = var0000->find_nearby(0xFE99, 0x0005, 0x0000);
 		var0002 = var0000->get_object_position();
@@ -19854,16 +19901,16 @@ void Func03F2 shape#(0x3F2) () {
 extern void Func087F 0x87F (var var0000);
 
 void Func03F3 shape#(0x3F3) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func087F(item);
 	}
 }
 
 void Func03F5 shape#(0x3F5) () {
-	if (event == 0x0005) {
+	if (event == READIED) {
 		get_container()->infravision(true);
 	}
-	if (event == 0x0006) {
+	if (event == UNREADIED) {
 		get_container()->infravision(false);
 	}
 }
@@ -19885,13 +19932,13 @@ void Func03F7 shape#(0x3F7) () {
 
 	var0000 = Func0954();
 	var0001 = Func0953();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Might I speak with thee?@");
 		item->Func07D1();
 		Func097F(item, (("@Certainly, " + var0000) + ".@"), 0x0002);
 		set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		set_schedule_type(0x000A);
 		clear_item_say();
 		0xFECD->show_npc_face0(0x0000);
@@ -20170,7 +20217,7 @@ void Func03FD shape#(0x3FD) () {
 
 	UI_close_gumps();
 	var0000 = get_item_frame();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (var0000 == 0x0003) {
 			var0001 = Func0992(0x0001, "@It hath been picked clean.@", "@No more berries...@", true);
 		} else {
@@ -20241,14 +20288,14 @@ void Func0400 object#(0x400) () {
 	var var001A;
 	var var001B;
 
-	if (event == 0x0008) {
+	if (event == BG_PATH_FAILURE) {
 		if (0xFE9C->get_item_flag(ISPETRA)) {
 			0xFE9C->set_polymorph(0x0292);
 		} else {
 			0xFE9C->set_polymorph(0x0212);
 		}
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		if (gflags[0x0083]) {
 			var0000 = 0xFE9C->get_oppressor();
 			var0000 = 0x0000 - var0000;
@@ -20502,7 +20549,7 @@ void Func0400 object#(0x400) () {
 			gflags[0x026F] = true;
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x021E]) {
 			set_schedule_type(0x0000);
 			0xFEE1->show_npc_face0(0x0000);
@@ -20626,7 +20673,7 @@ void Func0401 object#(0x401) () {
 	var0001 = Func0954();
 	var0002 = Func0953();
 	var0003 = UI_is_pc_female();
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		if (gflags[0x0083]) {
 			var0004 = 0xFFFF->get_oppressor();
 			var0004 = 0x0000 - var0004;
@@ -20639,7 +20686,7 @@ void Func0401 object#(0x401) () {
 			return;
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Dupre...@");
 		0xFFFF->Func07D1();
 		if (!0xFFFF->get_item_flag(SI_ZOMBIE)) {
@@ -20661,7 +20708,7 @@ void Func0401 object#(0x401) () {
 			}
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFFF->show_npc_face0(0x0000);
 		0xFFFF->clear_item_say();
 		if (0xFFFF->get_item_flag(IN_PARTY)) {
@@ -20828,7 +20875,7 @@ void Func0401 object#(0x401) () {
 				break;
 		}
 	}
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0007 = Func0994();
 		if (var0007 == 0x0016) {
 			0xFFFF->show_npc_face0(0x0000);
@@ -20878,7 +20925,7 @@ void Func0402 object#(0x402) () {
 	var0002 = UI_is_pc_female();
 	var0003 = Func0953();
 	var0004 = UI_part_of_day();
-	if ((event == 0x0007) && 0xFFFE->get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && 0xFFFE->get_item_flag(SI_TOURNAMENT)) {
 		if (gflags[0x0083]) {
 			var0005 = 0xFFFE->get_oppressor();
 			var0005 = 0x0000 - var0005;
@@ -20914,7 +20961,7 @@ void Func0402 object#(0x402) () {
 			}
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("Shamino...");
 		0xFFFE->Func07D1();
 		if (!0xFFFE->get_item_flag(SI_ZOMBIE)) {
@@ -20936,7 +20983,7 @@ void Func0402 object#(0x402) () {
 			}
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFFE->clear_item_say();
 		if (0xFFFE->get_item_flag(IN_PARTY)) {
 			0xFFFE->set_schedule_type(0x001F);
@@ -21144,7 +21191,7 @@ labelFunc0402_02F8:
 				break;
 		}
 	}
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var000D = Func0994();
 		if (var000D == 0x0016) {
 			0xFFFD->show_npc_face0(0x0000);
@@ -21214,7 +21261,7 @@ void Func0403 object#(0x403) () {
 	var0000 = 0xFFFD->get_npc_id();
 	var0001 = Func0954();
 	var0002 = Func0953();
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		if (gflags[0x0083]) {
 			var0003 = 0xFFFD->get_oppressor();
 			var0003 = 0x0000 - var0003;
@@ -21227,7 +21274,7 @@ void Func0403 object#(0x403) () {
 			return;
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func097F(0xFE9C, "@Dear friend...@", 0x0000);
 		0xFFFD->Func07D1();
 		if (!0xFFFD->get_item_flag(SI_ZOMBIE)) {
@@ -21277,7 +21324,7 @@ void Func0403 object#(0x403) () {
 			}
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFFD->clear_item_say();
 		0xFE9C->clear_item_say();
 		if (!gflags[0x0003]) {
@@ -21612,7 +21659,7 @@ void Func0403 object#(0x403) () {
 				break;
 		}
 	}
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0018 = Func0994();
 		var0019 = get_item_quality();
 		if (var0018 == 0x001F) {
@@ -21647,7 +21694,7 @@ void Func0403 object#(0x403) () {
 			abort;
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		if (0xFFFD->get_schedule_type() == 0x001D) {
 			if (gflags[0x0006] && (!gflags[0x0078])) {
 				var001B = ["@Woe is me!@", "@I feel cold.@", "@I am hungry.@", "@Release me!@", "@I'm innocent!@", "@Pity an old man...@"];
@@ -21685,26 +21732,26 @@ void Func0404 object#(0x404) () {
 	} else {
 		var0003 = "evening";
 	}
-	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		var0004 = script item {
 			nohalt;
 			call Func0329;
 		};
 	}
-	if ((event == 0x0000) && (0xFFFC->get_schedule_type() == 0x0009)) {
+	if ((event == PROXIMITY) && (0xFFFC->get_schedule_type() == 0x0009)) {
 		if (UI_get_random(0x000A) < 0x0006) {
 			abort;
 		}
 		var0005 = ["@How fascinating!@", "@Pay me no mind.@", "@I am simply watching...@", "@What art thou doing?@", "@I do hope I'm not in the way...@", "@May I see?@"];
 		Func097F(0xFFFC, var0005[UI_get_random(UI_get_array_size(var0005))], 0x0000);
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say(("@Good " + var0003) + "!@");
 		0xFFFC->Func07D1();
 		Func097F(0xFFFC, (("@Greetings, " + var0000) + "."), 0x0002);
 		0xFFFC->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFFC->run_schedule();
 		0xFFFC->clear_item_say();
 		0xFFFC->show_npc_face0(0x0000);
@@ -22023,7 +22070,7 @@ void Func040D object#(0x40D) () {
 	var0005 = 0x0000;
 	var0006 = false;
 	var0007 = 0xFFF3->get_item_flag(MET);
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0008 = UI_get_random(0x0006);
 		if (Func097D(0xFE9B, 0x0001, 0x0241, 0xFE99, 0x0003)) {
 			if (var0008 == 0x0001) {
@@ -22077,7 +22124,7 @@ void Func040D object#(0x40D) () {
 			}
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Greetings!@");
 		0xFFF3->Func07D1();
 		Func097F(0xFFF3, (("@Yes, " + var0002) + "?@"), 0x0002);
@@ -22093,10 +22140,10 @@ void Func040D object#(0x40D) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
-		event = 0x0009;
+	if (event == SCRIPTED) {
+		event = STARTED_TALKING;
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFF3->run_schedule();
 		0xFFF3->clear_item_say();
 		var0000 = false;
@@ -22928,22 +22975,22 @@ void Func040E object#(0x40E) () {
 	} else {
 		var0003 = "evening";
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("Hello, there.");
 		0xFFF2->Func07D1();
 		Func097F(0xFFF2, (("@Greetings, " + var0000) + "."), 0x0002);
 		0xFFF2->set_schedule_type(0x0003);
 	}
-	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		var0004 = script item {
 			nohalt;
 			call Func0329;
 		};
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		set_schedule_type(0x0015);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFF2->run_schedule();
 		0xFFF2->clear_item_say();
 		0xFFF2->halt_scheduled();
@@ -23148,16 +23195,16 @@ void Func040F object#(0x40F) () {
 	} else {
 		var0003 = "evening";
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		Func0826(event);
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hello!@");
 		0xFFF1->Func07D1();
 		Func097F(0xFFF1, (("@Good " + var0003) + ".@"), 0x0002);
 		0xFFF1->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFF1->run_schedule();
 		0xFFF1->clear_item_say();
 		0xFFF1->show_npc_face0(0x0000);
@@ -23474,7 +23521,7 @@ void Func0410 object#(0x410) () {
 	} else {
 		var0003 = "evening";
 	}
-	if (gflags[0x0128] && ((event == 0x0000) && (!gflags[0x00E6]))) {
+	if (gflags[0x0128] && ((event == PROXIMITY) && (!gflags[0x00E6]))) {
 		0xFFF0->set_npc_id(0xFFF0->get_npc_id() + 0x0001);
 		if (0xFFF0->get_npc_id() == 0x0008) {
 			UI_play_sound_effect(0x0074);
@@ -23559,7 +23606,7 @@ void Func0410 object#(0x410) () {
 		}
 		abort;
 	}
-	if (gflags[0x0128] && ((event == 0x0002) && (!gflags[0x00E6]))) {
+	if (gflags[0x0128] && ((event == SCRIPTED) && (!gflags[0x00E6]))) {
 		0xFFDB->set_schedule_type(0x000C);
 		Func097F(0xFFDB, "@Awk!@", 0x0002);
 		0xFFDB->set_camera();
@@ -23570,12 +23617,12 @@ void Func0410 object#(0x410) () {
 			call Func0425;
 		};
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Excuse me...@");
 		Func097F(0xFFF0, "@But of course!@", 0x0002);
 		0xFFF0->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFF0->run_schedule();
 		0xFFF0->show_npc_face0(0x0000);
 		0xFFF0->clear_item_say();
@@ -23802,18 +23849,18 @@ void Func0411 object#(0x411) () {
 	} else {
 		var0003 = "evening";
 	}
-	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		var0004 = script item {
 			nohalt;
 			call Func0329;
 		};
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say(("@Good " + var0003) + "!@");
 		Func097F(0xFFEF, "@Hush...@", 0x0002);
 		0xFFEF->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFEF->run_schedule();
 		0xFFEF->clear_item_say();
 		0xFFEF->show_npc_face0(0x0000);
@@ -24300,19 +24347,19 @@ void Func0412 object#(0x412) () {
 	} else {
 		var0007 = "evening";
 	}
-	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		var0009 = script item {
 			nohalt;
 			call Func0329;
 		};
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Greetings!@");
 		0xFFEE->Func07D1();
 		Func097F(0xFFEE, "@Ah, yes...@", 0x0002);
 		0xFFEE->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFEE->run_schedule();
 		0xFFEE->halt_scheduled();
 		0xFFEE->show_npc_face0(0x0000);
@@ -24581,26 +24628,26 @@ void Func0413 object#(0x413) () {
 
 	var0000 = Func0954();
 	var0001 = false;
-	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		var0002 = script item {
 			nohalt;
 			call Func0329;
 		};
 	}
-	if ((event == 0x0000) && (0xFFED->get_schedule_type() == 0x0009)) {
+	if ((event == PROXIMITY) && (0xFFED->get_schedule_type() == 0x0009)) {
 		if (UI_get_random(0x000A) < 0x0006) {
 			abort;
 		}
 		var0003 = ["@Zounds!@", "@A true warrior!@", "@Tell me a story!@", "@Look! A stranger!@", "@May I be thy friend?@", "@Beware the mages...@"];
 		Func097F(0xFFED, var0003[UI_get_random(0x0006)], 0x0000);
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Little boy!@");
 		0xFFED->Func07D1();
 		Func097F(0xFFED, "@Hi!@", 0x0002);
 		0xFFED->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFED->run_schedule();
 		0xFFED->clear_item_say();
 		0xFFED->show_npc_face0(0x0000);
@@ -24811,13 +24858,13 @@ void Func0414 object#(0x414) () {
 	var0008 = 0xFFEC->get_object_position();
 	var0009 = [0x0986, 0x0766];
 	var000A = Func09A0(0x0005, 0x0003);
-	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		var000B = script item {
 			nohalt;
 			call Func0329;
 		};
 	}
-	if ((event == 0x0001) && (0xFFEC->get_schedule_type() != 0x000F)) {
+	if ((event == DOUBLECLICK) && (0xFFEC->get_schedule_type() != 0x000F)) {
 		if (0xFFEC->get_npc_id() != 0x0000) {
 			0xFFEC->set_npc_id(0x0000);
 		}
@@ -24842,7 +24889,7 @@ void Func0414 object#(0x414) () {
 			0xFFEC->set_schedule_type(0x0003);
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFEC->run_schedule();
 		0xFFEC->clear_item_say();
 		0xFFEC->show_npc_face0(0x0000);
@@ -24974,19 +25021,19 @@ void Func0416 object#(0x416) () {
 	}
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		var0003 = script item {
 			nohalt;
 			call Func0329;
 		};
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@A moment, sir.@");
 		0xFFEA->Func07D1();
 		Func097F(0xFFEA, "@I am a busy mage...@", 0x0002);
 		0xFFEA->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFEA->run_schedule();
 		0xFFEA->clear_item_say();
 		0xFFEA->show_npc_face0(0x0000);
@@ -25272,13 +25319,13 @@ void Func0417 object#(0x417) () {
 	} else {
 		var0003 = "evening";
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say(("@Good " + var0003) + ", miss.@");
 		0xFFE9->Func07D1();
 		Func097F(0xFFE9, "@So?@", 0x0002);
 		0xFFE9->set_schedule_type(0x0003);
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0004 = UI_get_random(0x0006);
 		if (var0004 == 0x0001) {
 			0xFFE9->item_say("@Do not go there!@");
@@ -25307,7 +25354,7 @@ void Func0417 object#(0x417) () {
 			0xFFE9->item_say("@Taste the wine!@");
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFE9->run_schedule();
 		0xFFE9->clear_item_say();
 		0xFFE9->show_npc_face0(0x0000);
@@ -25733,19 +25780,19 @@ void Func0418 object#(0x418) () {
 	} else {
 		var0006 = "evening";
 	}
-	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		var0007 = script item {
 			nohalt;
 			call Func0329;
 		};
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("Hello there.");
 		0xFFE8->Func07D1();
 		Func097F(0xFFE8, (("@Greetings, " + var0002) + "."), 0x0002);
 		0xFFE8->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFE8->run_schedule();
 		0xFFE8->clear_item_say();
 		0xFFE8->show_npc_face0(0x0000);
@@ -26018,12 +26065,12 @@ void Func0419 object#(0x419) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Excuse me...@");
 		Func097F(0xFFE7, (("@At thy service, " + var0000) + "!@"), 0x0002);
 		0xFFE7->set_schedule_type(0x0003);
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0003 = UI_get_random(0x0006);
 		if (var0003 == 0x0001) {
 			0xFFE7->item_say("@Please leave...@");
@@ -26044,7 +26091,7 @@ void Func0419 object#(0x419) () {
 			0xFFE7->item_say("@Go quickly!@");
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFE7->run_schedule();
 		0xFFE7->clear_item_say();
 		0xFED6->show_npc_face0(0x0000);
@@ -26130,7 +26177,7 @@ void Func0419 object#(0x419) () {
 				break;
 		}
 	}
-	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
 			0xFED6->show_npc_face0(0x0000);
 			say("\"Rotoluncia shall avenge my loss...\"");
@@ -26180,16 +26227,16 @@ void Func041A object#(0x41A) () {
 	var0003 = Func0994();
 	var0004 = Func097D(0xFE9B, 0x0001, 0x024B, 0x0000, 0x0005);
 	var0005 = Func097D(0xFE9B, 0x0001, 0x031A, 0x0000, 0x0000);
-	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		var0006 = script item {
 			nohalt;
 			call Func0329;
 		};
 	}
-	if ((event == 0x0002) && ((var0003 == 0x0016) && (!gflags[0x0215]))) {
-		event = 0x0009;
+	if ((event == SCRIPTED) && ((var0003 == 0x0016) && (!gflags[0x0215]))) {
+		event = STARTED_TALKING;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Ho, mage!@");
 		0xFFE6->Func07D1();
 		var0006 = find_nearby(0x0366, 0x0014, 0x0000);
@@ -26210,7 +26257,7 @@ void Func041A object#(0x41A) () {
 			0xFFE6->set_schedule_type(0x0003);
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		if ((var0003 == 0x0016) && (!gflags[0x0215])) {
 			var000A = UI_get_random(0x0006);
 			if (var000A == 0x0001) {
@@ -26255,7 +26302,7 @@ void Func041A object#(0x41A) () {
 			}
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFE6->clear_item_say();
 		if (0xFFE6->get_item_flag(IN_PARTY)) {
 			0xFFE6->set_schedule_type(0x001F);
@@ -26588,18 +26635,18 @@ void Func041B object#(0x41B) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		var0003 = script item {
 			nohalt;
 			call Func0329;
 		};
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Could we speak?@");
 		0xFFE5->Func07D1();
 		0xFFE5->set_schedule_type(0x0003);
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0004 = UI_get_array_size(0xFE9C->find_nearby(0x020B, 0x0023, 0x0000));
 		if (var0004 < 0x000A) {
 			var0005 = 0x0000;
@@ -26656,7 +26703,7 @@ void Func041B object#(0x41B) () {
 			}
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFE5->run_schedule();
 		0xFFE5->clear_item_say();
 		0xFFE5->show_npc_face0(0x0000);
@@ -26904,7 +26951,7 @@ void Func041C object#(0x41C) () {
 	} else {
 		var0006 = "evening";
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		if (0xFFE4->get_item_flag(SI_TOURNAMENT)) {
 			Func0976(0xFFE4, 0x0005);
 			0xFFE4->clear_item_flag(SI_TOURNAMENT);
@@ -26913,13 +26960,13 @@ void Func041C object#(0x41C) () {
 			};
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hello, there.@");
 		0xFFE4->Func07D1();
 		Func097F(0xFFE4, (("@Greetings, " + var0000) + ".@"), 0x0002);
 		0xFFE4->set_schedule_type(0x0003);
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0007 = UI_get_random(0x0006);
 		if (var0007 == 0x0001) {
 			0xFFE4->item_say("@Art thou thirsty?@");
@@ -26945,7 +26992,7 @@ void Func041C object#(0x41C) () {
 			0xFFE4->item_say("@Baked fish!@");
 		}
 	}
-	if (event == 0x0008) {
+	if (event == BG_PATH_FAILURE) {
 		if (gflags[0x0228]) {
 			var0003 = 0xFE9C->set_npc_prop(0x000A, 0x0000);
 			0xFFE4->set_polymorph(0x02D1);
@@ -26954,10 +27001,10 @@ void Func041C object#(0x41C) () {
 			0xFFE4->set_polymorph(0x02D1);
 		}
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		0xFFE4->item_say("@I'm ready.@");
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		if (0xFFE4->get_item_flag(IN_PARTY)) {
 			0xFFE4->set_schedule_type(0x001F);
 			add("leave");
@@ -27253,7 +27300,7 @@ void Func041C object#(0x41C) () {
 							var0003 = UI_update_last_created([(var000E[0x0001] - 0x0001), (var000E[0x0002] - 0x0001), (var000E[0x0003] + 0x0001)]);
 							if (var0003) {
 								0xFFE4->set_schedule_type(0x000F);
-								Func090E(0xFFE4, var000F, 0x0000, 0x0000, 0xFFFF, Func041C, 0xFFE4->get_npc_object(), 0x000A, false);
+								Func090E(0xFFE4, var000F, 0x0000, 0x0000, 0xFFFF, Func041C, 0xFFE4->get_npc_object(), PATH_SUCCESS, false);
 							}
 						}
 						return;
@@ -27313,13 +27360,13 @@ void Func041D object#(0x41D) () {
 		var0002 = "her";
 	}
 	var0003 = Func0953();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Excuse me...@");
 		0xFFE3->Func07D1();
 		Func097F(0xFFE3, (("@Yes, " + var0000) + "?@"), 0x0002);
 		0xFFE3->set_schedule_type(0x0003);
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0004 = UI_get_random(0x0006);
 		if (var0004 == 0x0001) {
 			0xFFE3->item_say("@Wares for sale!@");
@@ -27344,7 +27391,7 @@ void Func041D object#(0x41D) () {
 			}
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFE3->run_schedule();
 		0xFFE3->clear_item_say();
 		0xFFE3->show_npc_face0(0x0000);
@@ -27869,7 +27916,7 @@ void Func041E object#(0x41E) () {
 	if (var0001) {
 		var0005 = "her";
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0006 = UI_get_random(0x0006);
 		if (var0006 == 0x0001) {
 			0xFFE2->item_say("@Petra, bring wine!@");
@@ -27891,13 +27938,13 @@ void Func041E object#(0x41E) () {
 			0xFFE2->item_say("@Have a seat...@");
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Might I speak with thee?@");
 		0xFFE2->Func07D1();
 		Func097F(0xFFE2, (("@Certainly, " + var0000) + ".@"), 0x0005);
 		0xFFE2->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFE2->run_schedule();
 		0xFFE2->clear_item_say();
 		0xFFE2->show_npc_face0(0x0000);
@@ -28264,7 +28311,7 @@ void Func041F object#(0x41F) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	if ((event == 0x0007) && 0xFFE1->get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && 0xFFE1->get_item_flag(SI_TOURNAMENT)) {
 		0xFFE1->show_npc_face0(0x0000);
 		0xFFE1->clear_item_flag(SI_TOURNAMENT);
 		0xFFE1->reduce_health(0x0032, 0x0000);
@@ -28277,7 +28324,7 @@ void Func041F object#(0x41F) () {
 			call Func016B;
 		};
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Listen, witch!@");
 		Func097F(0xFFE1, "@Cretin!@", 0x0005);
 		var0004 = script item {
@@ -28286,7 +28333,7 @@ void Func041F object#(0x41F) () {
 			call Func041F;
 		};
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFE1->show_npc_face0(0x0000);
 		if (!gflags[0x0133]) {
 			say("\"So, thou hast come to rescue thy friend? Well, thou must kill me first -- I have the only key to his cell!\"");
@@ -28336,7 +28383,7 @@ void Func041F object#(0x41F) () {
 		}
 		gflags[0x0148] = true;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x000A]) {
 			gflags[0x000A] = false;
 			0xFFE1->set_schedule_type(0x0003);
@@ -28642,13 +28689,13 @@ void Func0420 object#(0x420) () {
 	} else {
 		var0004 = "evening";
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Pardon me...@");
 		0xFFE0->Func07D1();
 		Func097F(0xFFE0, (("@Yes " + var0000) + "?@"), 0x0002);
 		0xFFE0->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFE0->run_schedule();
 		0xFFE0->clear_item_say();
 		0xFFE0->show_npc_face0(0x0000);
@@ -29034,19 +29081,19 @@ void Func0421 object#(0x421) () {
 		var0004 = "evening";
 	}
 	var0005 = false;
-	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		var0006 = script item {
 			nohalt;
 			call Func0329;
 		};
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Might we speak?@");
 		0xFFDF->Func07D1();
 		Func097F(0xFFDF, "@Make it brief...@", 0x0002);
 		0xFFDF->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFDF->run_schedule();
 		0xFFDF->clear_item_say();
 		0xFFDF->show_npc_face0(0x0000);
@@ -29473,7 +29520,7 @@ void Func0422 object#(0x422) () {
 	var0005 = 0xFFDE->get_item_flag(IN_PARTY);
 	var0006 = 0xFFDE->get_item_flag(MET);
 	var0007 = 0xFFDE->get_item_flag(DEAD);
-	if ((event == 0x0007) && gflags[0x0083]) {
+	if ((event == DEATH) && gflags[0x0083]) {
 		var0008 = 0xFFDE->get_oppressor();
 		var0008 = 0x0000 - var0008;
 		if (!gflags[0x0007]) {
@@ -29484,7 +29531,7 @@ void Func0422 object#(0x422) () {
 		Func092E(item);
 		return;
 	}
-	if ((event == 0x0007) && 0xFFDE->get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && 0xFFDE->get_item_flag(SI_TOURNAMENT)) {
 		0xFFDE->clear_item_flag(SI_TOURNAMENT);
 		var0009 = 0xFFDE->get_object_position();
 		UI_play_sound_effect(0x002A);
@@ -29530,16 +29577,16 @@ void Func0422 object#(0x422) () {
 			}
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Ahem...@");
 		0xFFDE->Func07D1();
 		Func097F(0xFFDE, "@Thou didst speak?@", 0x0002);
 		0xFFDE->set_schedule_type(0x0003);
 	}
-	if (event == 0x0002) {
-		event = 0x0009;
+	if (event == SCRIPTED) {
+		event = STARTED_TALKING;
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		if (item == 0xFFDE->get_npc_object()) {
 			if (0xFFDE->get_item_flag(IN_PARTY)) {
 				0xFFDE->set_schedule_type(0x001F);
@@ -29793,7 +29840,7 @@ void Func0423 object#(0x423) () {
 	var000C = Func097D(0xFE9B, 0x0001, 0x02ED, 0xFE99, 0x0001);
 	var000D = Func097D(0xFE9B, 0x0001, 0x0241, 0xFE99, 0x0003);
 	var000E = Func097D(0xFE9B, 0x0001, 0x0281, 0x00CA, 0x000C);
-	if ((event == 0x0002) || (event == 0x000E)) {
+	if ((event == SCRIPTED) || (event == SI_PATH_FAILURE)) {
 		if (gflags[0x0007]) {
 			gflags[0x0007] = false;
 			0xFFDD->show_npc_face0(0x0000);
@@ -29817,13 +29864,13 @@ void Func0423 object#(0x423) () {
 		};
 		0xFE9B->move_object([0x07F6, 0x04C5, 0x0000]);
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Might we speak?@");
 		0xFFDD->Func07D1();
 		Func097F(0xFFDD, "@No!@", 0x0002);
 		0xFFDD->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFDD->run_schedule();
 		0xFFDD->clear_item_say();
 		0xFFDD->show_npc_face0(0x0000);
@@ -30247,14 +30294,14 @@ void Func0424 object#(0x424) () {
 	var0002 = Func0942(0xFFDD);
 	var0003 = 0xFFFD->get_item_flag(IN_PARTY);
 	var0004 = 0xFFDC->get_item_flag(MET);
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@A moment, good fellow.@");
 		0xFFDC->Func07D1();
 		var0005 = "@Do not hit me...@" & "@I beg thee!@";
 		Func094F(0xFFDC, var0005);
 		0xFFDC->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFDC->run_schedule();
 		0xFFDC->clear_item_say();
 		0xFFDC->show_npc_face0(0x0000);
@@ -30472,7 +30519,7 @@ void Func0425 object#(0x425) () {
 	var var0006;
 
 	var0000 = 0xFFDB->get_schedule_type();
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		UI_set_weather(0x0000);
 		0xFE9C->set_camera();
@@ -30487,7 +30534,7 @@ void Func0425 object#(0x425) () {
 		0xFFDB->run_schedule();
 		gflags[0x002A] = false;
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		if (var0000 == 0x001D) {
 			var0002 = 0xFFDB->find_nearby(0x025F, 0x0002, 0x0010);
 			var0003 = var0002->get_item_quality();
@@ -30506,7 +30553,7 @@ void Func0425 object#(0x425) () {
 			}
 		}
 	}
-	if ((event == 0x0001) || ((event == 0x0000) && (get_schedule_type() == 0x0009))) {
+	if ((event == DOUBLECLICK) || ((event == PROXIMITY) && (get_schedule_type() == 0x0009))) {
 		var0005 = UI_get_random(0x0006);
 		if (var0005 == 0x0001) {
 			0xFFDB->item_say("@Awk!@");
@@ -30531,7 +30578,7 @@ void Func0425 object#(0x425) () {
 			0xFFDB->item_say("@Squawk!@");
 		}
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		Func097F(0xFFDB, "@Skreee!@", 0x0000);
 		0xFE9C->set_oppressor(0xFFDB);
 		0xFFDB->set_attack_mode(0x0007);
@@ -30574,13 +30621,13 @@ void Func0426 object#(0x426) () {
 	var0003 = Func0942(0xFFD7);
 	var0004 = false;
 	var0005 = false;
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hello!@");
 		0xFFDA->Func07D1();
 		Func097F(0xFFDA, (("@Yes, " + var0000) + "?@"), 0x0002);
 		0xFFDA->set_schedule_type(0x0003);
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0006 = UI_get_random(0x0006);
 		if (var0006 == 0x0001) {
 			0xFFDA->item_say("@Dost thou want a drink?@");
@@ -30605,7 +30652,7 @@ void Func0426 object#(0x426) () {
 			0xFFDA->item_say("@Do not break the chairs!@");
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFDA->run_schedule();
 		0xFFDA->clear_item_say();
 		0xFFDA->show_npc_face0(0x0000);
@@ -30956,13 +31003,13 @@ void Func0427 object#(0x427) () {
 	var0005 = Func0942(0xFFFD);
 	var0006 = Func0942(0xFFFF);
 	var0007 = Func0942(0xFFFE);
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hail, minstrel!@");
 		0xFFD9->Func07D1();
 		Func097F(0xFFD9, (("@Greetings, " + var0000) + "!@"), 0x0005);
 		0xFFD9->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFD9->run_schedule();
 		0xFFD9->clear_item_say();
 		0xFFD9->show_npc_face0(0x0000);
@@ -31349,7 +31396,7 @@ void Func0428 object#(0x428) () {
 		0xFFD8->set_npc_id(0x0001);
 		var0000 = 0x0001;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var000A = 0xFFD8->find_nearby(0x025F, 0x0028, 0x0010);
 		for (var000D in var000A with var000B to var000C) {
 			var000E = var000D->get_item_flag(TEMPORARY);
@@ -31364,7 +31411,7 @@ void Func0428 object#(0x428) () {
 		var0012 = find_nearby(0x03C1, 0x0064, 0x0010);
 		Func083A(var0012);
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		if (var0001 == 0x001D) {
 			if (var0000 == 0x0000) {
 				var000D = 0xFFD8->find_nearby(0x025F, 0x0002, 0x0010);
@@ -31388,7 +31435,7 @@ void Func0428 object#(0x428) () {
 			}
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Captain?@");
 		0xFFD8->Func07D1();
 		Func097F(0xFFD8, "@Aye, matey?@", 0x0002);
@@ -31401,7 +31448,7 @@ void Func0428 object#(0x428) () {
 			abort;
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFD8->run_schedule();
 		0xFFD8->show_npc_face0(0x0000);
 		if (gflags[0x0004]) {
@@ -31712,13 +31759,13 @@ void Func0429 object#(0x429) () {
 	} else {
 		var0006 = "evening";
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Pardon me...@");
 		0xFFD7->Func07D1();
 		Func097F(0xFFD7, (((("Good " + var0006) + ", ") + var0000) + "."), 0x0002);
 		0xFFD7->set_schedule_type(0x0003);
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0007 = UI_get_random(0x0006);
 		if (var0007 == 0x0001) {
 			0xFFD7->item_say("@Wouldst thou like another?@");
@@ -31744,7 +31791,7 @@ void Func0429 object#(0x429) () {
 			0xFFD7->item_say("@Sigh...@");
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFD7->run_schedule();
 		0xFFD7->clear_item_say();
 		0xFFD7->show_npc_face0(0x0000);
@@ -32033,7 +32080,7 @@ void Func042A object#(0x42A) () {
 	var0002 = Func0953();
 	var0003 = 0xFFD6->get_schedule_type();
 	var0004 = Func0994();
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		if (var0003 == 0x001D) {
 			var0005 = 0xFFD6->find_nearby(0x025F, 0x0002, 0x0010);
 			var0006 = var0005->get_item_quality();
@@ -32051,13 +32098,13 @@ void Func042A object#(0x42A) () {
 			}
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@May we speak?@");
 		0xFFD6->Func07D1();
 		Func097F(0xFFD6, "@I have little time!@", 0x0002);
 		0xFFD6->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFD6->run_schedule();
 		0xFFD6->clear_item_say();
 		0xFFD6->show_npc_face0(0x0000);
@@ -32562,7 +32609,7 @@ void Func042B object#(0x42B) () {
 	var0002 = Func0953();
 	var0003 = Func0994();
 	var0004 = 0xFFD5->get_schedule_type();
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		if (var0004 == 0x001D) {
 			var0005 = 0xFFD5->find_nearby(0x025F, 0x0002, 0x0010);
 			var0006 = var0005->get_item_quality();
@@ -32578,13 +32625,13 @@ void Func042B object#(0x42B) () {
 			}
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@A moment, young sir!@");
 		0xFFD5->Func07D1();
 		Func097F(0xFFD5, "@Who, me?@", 0x0002);
 		0xFFD5->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFD5->run_schedule();
 		0xFFD5->clear_item_say();
 		var0009 = 0xFFD5->get_item_flag(MET);
@@ -32794,7 +32841,7 @@ void Func042B object#(0x42B) () {
 				break;
 		}
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		Func097F(0xFFD5, "@Yowie!@", 0x0000);
 		0xFE9C->set_oppressor(0xFFD5);
 		0xFFD5->set_attack_mode(0x0007);
@@ -32859,7 +32906,7 @@ void Func042C object#(0x42C) () {
 	var0002 = [0x04F4, 0x08B8];
 	var0003 = [0x04F4, 0x08B8];
 	var0004 = [0x04F4, 0x08B8];
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (UI_is_pc_female()) {
 			0xFE9C->item_say("@Hello.@");
 		} else {
@@ -32869,7 +32916,7 @@ void Func042C object#(0x42C) () {
 		Func097F(0xFFD4, (("@Yes, " + var0000) + "?@"), 0x0002);
 		0xFFD4->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFD4->show_npc_face0(0x0000);
 		0xFFD4->clear_item_say();
 		if (Func0994() == 0x0018) {
@@ -33366,7 +33413,7 @@ void Func042C object#(0x42C) () {
 				abort;
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0013 = 0xFFD4->get_npc_id();
 		if (var0013 == 0x0000) {
 			if (!0xFFD4->get_item_flag(IN_PARTY)) {
@@ -33459,7 +33506,7 @@ void Func042C object#(0x42C) () {
 			}
 		}
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		if (gflags[0x024E]) {
 			var0019 = 0xFEF0->get_item_flag(DEAD);
 			var001A = 0xFF80->get_item_flag(DEAD);
@@ -33556,7 +33603,7 @@ void Func042D object#(0x42D) () {
 	var0004 = Func0942(0xFFFD);
 	var0005 = Func0942(0xFFFF);
 	var0006 = Func0942(0xFFFE);
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0007 = UI_get_random(0x0006);
 		if (var0007 == 0x0001) {
 			0xFFD3->item_say("@Care to fight?@");
@@ -33581,7 +33628,7 @@ void Func042D object#(0x42D) () {
 			0xFFD3->item_say("@My sword wants blood!@");
 		}
 	}
-	if ((event == 0x0002) && (!0xFFD3->get_item_flag(DEAD))) {
+	if ((event == SCRIPTED) && (!0xFFD3->get_item_flag(DEAD))) {
 		var0008 = 0xFFD3->set_npc_prop(0x0003, 0x000A);
 		0xFFD3->show_npc_face0(0x0000);
 		say("\"I was a fool to join with thee, Avatar! Now I am to lose my life in this foolish quest.\"");
@@ -33595,7 +33642,7 @@ void Func042D object#(0x42D) () {
 		Func09AC(0xFFD3, 0xFFFF, 0x0000, 0x000C);
 		abort;
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		if (0xFFD3->get_item_flag(SI_TOURNAMENT)) {
 			0xFFD3->clear_item_flag(SI_TOURNAMENT);
 			var0008 = 0xFFD3->set_npc_prop(0x0003, 0x000A);
@@ -33607,13 +33654,13 @@ void Func042D object#(0x42D) () {
 			};
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Well met, Knight!@");
 		0xFFD3->Func07D1();
 		Func097F(0xFFD3, "@Greetings!@", 0x0005);
 		0xFFD3->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFD3->run_schedule();
 		0xFFD3->clear_item_say();
 		0xFFD3->show_npc_face0(0x0000);
@@ -33913,10 +33960,10 @@ void Func042E object#(0x42E) () {
 	var0008 = false;
 	var0009 = false;
 	var000A = "";
-	if ((event == 0x000D) || (event == 0x000E)) {
+	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
 		0xFFD2->set_schedule_type(0x000C);
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x01A8] || (!gflags[0x0171])) {
 			abort;
 		}
@@ -33930,19 +33977,19 @@ void Func042E object#(0x42E) () {
 		Func094F(0xFFD2, var000B);
 		abort;
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var000B = script item {
 			nohalt;
 			call Func0112;
 		};
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Might I speak with thee?@");
 		0xFFD2->Func07D1();
 		Func097F(0xFFD2, (("@Certainly, " + var0001) + ".@"), 0x0005);
 		0xFFD2->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFD2->run_schedule();
 		var0000 = false;
 		if (0xFFD2->get_schedule_type() == 0x0013) {
@@ -34506,19 +34553,19 @@ void Func042F object#(0x42F) () {
 	var0000 = Func0954();
 	var0001 = false;
 	var0002 = false;
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0003 = script item {
 			nohalt;
 			call Func0112;
 		};
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Excuse me, sir.@");
 		0xFFD1->Func07D1();
 		Func097F(0xFFD1, "@Do I know thee?@", 0x0005);
 		0xFFD1->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFD1->run_schedule();
 		0xFFD1->clear_item_say();
 		0xFFD1->show_npc_face0(0x0000);
@@ -35011,19 +35058,19 @@ void Func0430 object#(0x430) () {
 	var var0002;
 
 	var0000 = Func0954();
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0001 = script item {
 			nohalt;
 			call Func0112;
 		};
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@A moment, if thou wilt.@");
 		0xFFD0->Func07D1();
 		Func097F(0xFFD0, (("@At thy service, " + var0000) + ".@"), 0x0005);
 		0xFFD0->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFD0->run_schedule();
 		0xFFD0->clear_item_say();
 		0xFFD0->show_npc_face0(0x0000);
@@ -35338,19 +35385,19 @@ void Func0431 object#(0x431) () {
 	var0000 = Func0954();
 	var0001 = Func0953();
 	var0002 = UI_is_pc_female();
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0003 = script item {
 			nohalt;
 			call Func0112;
 		};
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@A moment, sir.@");
 		0xFFCF->Func07D1();
 		Func097F(0xFFCF, "@At thy service.@", 0x0005);
 		0xFFCF->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFCF->run_schedule();
 		0xFFCF->clear_item_say();
 		0xFFCF->show_npc_face0(0x0000);
@@ -35595,19 +35642,19 @@ void Func0432 object#(0x432) () {
 	var0000 = Func0954();
 	var0001 = Func0953();
 	var0002 = UI_is_pc_female();
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0003 = script item {
 			nohalt;
 			call Func0112;
 		};
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Greetings, good sir.@");
 		0xFFCE->Func07D1();
 		Func097F(0xFFCE, (("@Greetings, " + var0000) + ".@"), 0x0005);
 		0xFFCE->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFCE->run_schedule();
 		0xFFCE->clear_item_say();
 		0xFFCE->show_npc_face0(0x0000);
@@ -35781,20 +35828,20 @@ void Func0433 object#(0x433) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0003 = script item {
 			nohalt;
 			call Func0112;
 		};
 	}
-	if ((event == 0x0000) && (0xFFCD->get_schedule_type() == 0x0007)) {
+	if ((event == PROXIMITY) && (0xFFCD->get_schedule_type() == 0x0007)) {
 		var0004 = ["@Garth will save me...@", (("@Damn " + var0002) + "!@"), "@I need more food!@", "@Jailer!@", "@Be patient.@", "@Curse that weaver!@"];
 		if (0xFFCA->npc_nearby()) {
 			var0004 &= "@Be silent, Priestess!@" & ("@Pleasure me, Kylista!@" & "@Our time shall come...@");
 		}
 		Func097F(0xFFCD, var0004[UI_get_random(UI_get_array_size(var0004))], 0x0000);
 	}
-	if ((event == 0x0001) && (0xFFCD->get_schedule_type() != 0x000F)) {
+	if ((event == DOUBLECLICK) && (0xFFCD->get_schedule_type() != 0x000F)) {
 		0xFFCD->Func07D1();
 		if ((gflags[0x0170] && gflags[0x0172]) && (!gflags[0x016E])) {
 			0xFE9C->item_say("@Hail, criminal!@");
@@ -35811,7 +35858,7 @@ void Func0433 object#(0x433) () {
 			0xFFCD->set_schedule_type(0x0003);
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFFCD->run_schedule();
 		0xFFCD->clear_item_say();
 		0xFFCD->show_npc_face0(0x0000);
@@ -35819,7 +35866,7 @@ void Func0433 object#(0x433) () {
 			var0002,
 			"? Well, I'm not done yet!\"");
 		add(["false Oracle", "Kylista", "not done yet"]);
-	} else if (!(event == 0x0009)) {
+	} else if (!(event == STARTED_TALKING)) {
 		// Need to make UCC optimize this
 		goto labelFunc0433_05E8;
 	} else {
@@ -36118,19 +36165,19 @@ void Func0434 object#(0x434) () {
 	} else {
 		var0002 = "afternoon";
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0000 = script item {
 			nohalt;
 			call Func0112;
 		};
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say(("@Good " + var0002) + ", barkeep.@");
 		0xFFCC->Func07D1();
 		Func097F(0xFFCC, (((("@Good " + var0002) + ", ") + var0001) + ".@"), 0x0002);
 		0xFFCC->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFCC->run_schedule();
 		0xFFCC->clear_item_say();
 		0xFFCC->show_npc_face0(0x0000);
@@ -37060,10 +37107,10 @@ void Func0435 object#(0x435) () {
 	var0002 = Func0953();
 	var0003 = Func097D(0xFE9B, 0x0001, 0x0377, 0xFE99, 0x0000);
 	var0004 = Func0994();
-	if ((event == 0x000D) || (event == 0x000E)) {
+	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
 		0xFFCB->set_schedule_type(0x000A);
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x015C]) {
 			abort;
 		}
@@ -37082,19 +37129,19 @@ void Func0435 object#(0x435) () {
 			};
 		}
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0005 = script item {
 			nohalt;
 			call Func0112;
 		};
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hail, guardsman!@");
 		0xFFCB->Func07D1();
 		Func097F(0xFFCB, (("@Hail, " + var0000) + "!@"), 0x0005);
 		0xFFCB->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFCB->run_schedule();
 		0xFFCB->clear_item_say();
 		0xFFCB->show_npc_face0(0x0000);
@@ -37463,13 +37510,13 @@ void Func0436 object#(0x436) () {
 	var0002 = Func0953();
 	var0003 = Func0942(0xFFFD);
 	var0004 = find_nearby(0x00F9, 0x0028, 0x0000);
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0005 = script item {
 			nohalt;
 			call Func0112;
 		};
 	}
-	if ((event == 0x0000) && (0xFFCA->get_schedule_type() == 0x0007)) {
+	if ((event == PROXIMITY) && (0xFFCA->get_schedule_type() == 0x0007)) {
 		if ((gflags[0x0170] && gflags[0x0172]) && (!gflags[0x016E])) {
 			var0006 = ["@I do not deserve this!@", "@Save me, please!@", "@Such filth!@", "@I wish I had a pillow...@", "@Damn Alyssand!@", "@Curse The Fellowship!@"];
 			if (0xFFCD->npc_nearby()) {
@@ -37478,7 +37525,7 @@ void Func0436 object#(0x436) () {
 			Func097F(0xFFCA, var0006[UI_get_random(UI_get_array_size(var0006))], 0x0000);
 		}
 	}
-	if ((event == 0x0001) && (0xFFCA->get_schedule_type() != 0x000F)) {
+	if ((event == DOUBLECLICK) && (0xFFCA->get_schedule_type() != 0x000F)) {
 		0xFFCA->Func07D1();
 		if ((gflags[0x0170] && gflags[0x0172]) && (!gflags[0x016E])) {
 			0xFE9C->item_say("@Surprise!@");
@@ -37496,7 +37543,7 @@ void Func0436 object#(0x436) () {
 			0xFFCA->set_schedule_type(0x0003);
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFFCA->run_schedule();
 		0xFFCA->clear_item_say();
 		0xFFCA->show_npc_face0(0x0000);
@@ -37504,7 +37551,7 @@ void Func0436 object#(0x436) () {
 			var0002,
 			"! Everyone else hath forgotten me. I am so lonely here...\"");
 		add(["plot", "Voldin", "lonely"]);
-	} else if (event != 0x0009) {
+	} else if (event != STARTED_TALKING) {
 		// Need to make UCC optimize this
 		goto labelFunc0436_0679;
 	} else {
@@ -37789,7 +37836,7 @@ void Func0437 object#(0x437) () {
 	var var0015;
 	var var0016;
 
-	if (0xFFC9->get_item_flag(POLYMORPH) && (event == 0x0009)) {
+	if (0xFFC9->get_item_flag(POLYMORPH) && (event == STARTED_TALKING)) {
 		var0000 = script 0xFFC9->get_npc_object() {
 			nohalt;
 			call Func0294;
@@ -37797,7 +37844,7 @@ void Func0437 object#(0x437) () {
 		0xFFC9->run_schedule();
 		abort;
 	}
-	if (event == 0x0008) {
+	if (event == BG_PATH_FAILURE) {
 		if (gflags[0x0004] && (!gflags[0x0212])) {
 			0xFFC9->set_polymorph(0x0294);
 		}
@@ -37806,13 +37853,13 @@ void Func0437 object#(0x437) () {
 	var0002 = UI_is_pc_female();
 	var0003 = Func0953();
 	var0004 = 0xFFC9->get_npc_id();
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0000 = script item {
 			nohalt;
 			call Func0112;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0005 = UI_get_party_list2();
 		for (var0008 in var0005 with var0006 to var0007) {
 			var0009 = var0008->get_schedule_type();
@@ -37929,7 +37976,7 @@ void Func0437 object#(0x437) () {
 		}
 		abort;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (0xFFC9->get_item_flag(POLYMORPH)) {
 			0xFE9C->item_say("@Lady!@");
 			item->Func07D1();
@@ -37941,11 +37988,11 @@ void Func0437 object#(0x437) () {
 			Func097F(0xFFC9, (("@Greetings, " + var0001) + ".@"), 0x0002);
 			0xFFC9->set_schedule_type(0x0003);
 			if (gflags[0x015C] && (!(gflags[0x0173] || (gflags[0x0175] || gflags[0x0174])))) {
-				0xFFCB->si_path_run_usecode(0xFFC9->get_object_position(), 0x000D, 0xFFCB->get_npc_object(), Func0435, false);
+				0xFFCB->si_path_run_usecode(0xFFC9->get_object_position(), SI_PATH_SUCCESS, 0xFFCB->get_npc_object(), Func0435, false);
 			}
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFC9->run_schedule();
 		0xFFC9->clear_item_say();
 		0xFFC9->show_npc_face0(0x0000);
@@ -38026,7 +38073,7 @@ void Func0437 object#(0x437) () {
 						if (var0008) {
 							var0000 = var0008->approach_avatar(0x005A, 0x0028);
 							if (var0000) {
-								var0008->si_path_run_usecode(0xFFCB->get_object_position(), 0x000D, var0008, Func017D, true);
+								var0008->si_path_run_usecode(0xFFCB->get_object_position(), SI_PATH_SUCCESS, var0008, Func017D, true);
 							}
 						}
 						var0000 -= 0x0001;
@@ -38218,19 +38265,19 @@ void Func0438 object#(0x438) () {
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
 	var0003 = Func0942(0xFFC7);
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0004 = script item {
 			nohalt;
 			call Func0112;
 		};
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@A moment if thou wilt, sir.@");
 		0xFFC8->Func07D1();
 		Func097F(0xFFC8, (("@At thy service, " + var0000) + ".@"), 0x0002);
 		0xFFC8->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFC8->run_schedule();
 		0xFFC8->clear_item_say();
 		0xFFC8->show_npc_face0(0x0000);
@@ -38471,13 +38518,13 @@ void Func0439 object#(0x439) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Greetings.@");
 		0xFFC7->Func07D1();
 		Func097F(0xFFC7, "@What dost thou want?@", 0x0005);
 		0xFFC7->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFC7->run_schedule();
 		0xFFC7->clear_item_say();
 		0xFFC7->show_npc_face0(0x0000);
@@ -38547,14 +38594,14 @@ void Func0439 object#(0x439) () {
 				break;
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (0xFFC7->get_item_flag(DEAD)) {
 			abort;
 		}
 		Func097F(0xFFC7, "@I shall return!@", 0x0000);
 		0xFFC7->set_attack_mode(0x0007);
 	}
-	if ((event == 0x0007) && 0xFFC7->get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && 0xFFC7->get_item_flag(SI_TOURNAMENT)) {
 		gflags[0x015D] = true;
 		0xFFC7->show_npc_face0(0x0000);
 		0xFFC7->clear_item_flag(SI_TOURNAMENT);
@@ -38603,7 +38650,7 @@ void Func043A object#(0x43A) () {
 	if ((var0005[0x0001] > 0x03A0) && ((var0005[0x0001] < 0x06D1) && ((var0005[0x0002] > 0x03BF) && (var0005[0x0002] < 0x06EF)))) {
 		var0006 = true;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x0190] || gflags[0x018B]) {
 			abort;
 		}
@@ -38622,19 +38669,19 @@ void Func043A object#(0x43A) () {
 			};
 		}
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0007 = script item {
 			nohalt;
 			call Func0112;
 		};
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@A word with thee, friend.@");
 		0xFFC6->Func07D1();
 		Func097F(0xFFC6, "@If thou art paying...@", 0x0005);
 		0xFFC6->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFC6->run_schedule();
 		0xFFC6->clear_item_say();
 		0xFFC6->show_npc_face0(0x0000);
@@ -39417,23 +39464,23 @@ void Func043B object#(0x43B) () {
 	var0005 = Func0942(0xFFFE);
 	var0006 = 0xFFC5->find_nearby(0x017D, 0x0014, 0x0000);
 	var0007 = [0x040A, 0x07E9, 0x0000];
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0008 = script item {
 			nohalt;
 			call Func0112;
 		};
 	}
-	if ((event == 0x0000) || (event == 0x000E)) {
+	if ((event == PROXIMITY) || (event == SI_PATH_FAILURE)) {
 		0xFFC5->run_schedule();
 		Func097F(0xFFC5, "@I must work...@", 0x0002);
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Excuse me, friend.@");
 		0xFFC5->Func07D1();
 		Func097F(0xFFC5, "@How may I be of service?@", 0x0002);
 		0xFFC5->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFC5->clear_item_say();
 		0xFFC5->run_schedule();
 		0xFFC5->show_npc_face0(0x0000);
@@ -39470,7 +39517,7 @@ void Func043B object#(0x43B) () {
 						var000E->set_schedule_type(0x0003);
 					}
 				}
-				0xFFC5->si_path_run_usecode(var0007, 0x0000, item, Func043B, false);
+				0xFFC5->si_path_run_usecode(var0007, PROXIMITY, item, Func043B, false);
 				abort;
 			}
 			say("\"I have searched all my life for a woman who would overlook my deformity and learn to love me. Somehow I will find a way to tell Delphynia of my love...\"");
@@ -39492,7 +39539,7 @@ void Func043B object#(0x43B) () {
 							var000E->set_schedule_type(0x0003);
 						}
 					}
-					0xFFC5->si_path_run_usecode(var0007, 0x0000, item, Func043B, false);
+					0xFFC5->si_path_run_usecode(var0007, PROXIMITY, item, Func043B, false);
 					abort;
 				}
 				say("\"I am sure that thou hast thy reasons, Avatar. But I am sorely disappointed.\"");
@@ -39507,7 +39554,7 @@ void Func043B object#(0x43B) () {
 						var000E->set_schedule_type(0x0003);
 					}
 				}
-				0xFFC5->si_path_run_usecode(var0007, 0x0000, item, Func043B, false);
+				0xFFC5->si_path_run_usecode(var0007, PROXIMITY, item, Func043B, false);
 				abort;
 			}
 			if (var0004 == true) {
@@ -39530,7 +39577,7 @@ void Func043B object#(0x43B) () {
 				}
 			}
 			gflags[0x0167] = true;
-			0xFFC5->si_path_run_usecode(var0007, 0x0000, item, Func043B, false);
+			0xFFC5->si_path_run_usecode(var0007, PROXIMITY, item, Func043B, false);
 			var000B = 0xFE9C->find_nearby(0x017D, 0x0014, 0x0000);
 			for (var000E in var000B with var0013 to var0014) {
 				if (var000E->get_npc_id() == 0x0001) {
@@ -39847,19 +39894,19 @@ void Func043C object#(0x43C) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0003 = script item {
 			nohalt;
 			call Func0112;
 		};
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Greetings, sir.@");
 		0xFFC4->Func07D1();
 		Func097F(0xFFC4, (("@Hello, " + var0000) + ".@"), 0x0005);
 		0xFFC4->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFC4->run_schedule();
 		0xFFC4->clear_item_say();
 		0xFFC4->show_npc_face0(0x0000);
@@ -40067,13 +40114,13 @@ void Func043D object#(0x43D) () {
 	var0005 = false;
 	var0006 = false;
 	var0007 = Func0994();
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0008 = script item {
 			nohalt;
 			call Func0112;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x018F]) {
 			abort;
 		}
@@ -40091,13 +40138,13 @@ void Func043D object#(0x43D) () {
 			};
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@A moment, if thou wilt.@");
 		0xFFC3->Func07D1();
 		Func097F(0xFFC3, "@At thy service.@", 0x0005);
 		0xFFC3->set_schedule_type(0x0003);
 	}
-	if ((event == 0x0000) && (gflags[0x01B2] && (!gflags[0x018F]))) {
+	if ((event == PROXIMITY) && (gflags[0x01B2] && (!gflags[0x018F]))) {
 		var0009 = UI_get_random(0x0006);
 		if (var0009 == 0x0001) {
 			var000A = "@He is following us!@";
@@ -40121,7 +40168,7 @@ void Func043D object#(0x43D) () {
 		0xFFC3->set_schedule_type(0x0009);
 		gflags[0x018E] = true;
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFC3->run_schedule();
 		0xFFC3->clear_item_say();
 		0xFFC3->show_npc_face0(0x0000);
@@ -40385,13 +40432,13 @@ void Func043E object#(0x43E) () {
 
 	var0000 = Func0953();
 	var0001 = 0xFFC2->get_item_flag(MET);
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func097F(0xFE9C, "Hello, sir.", 0x0000);
 		0xFFC2->Func07D1();
 		Func097F(0xFFC2, "Greetings.", 0x0002);
 		0xFFC2->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFC2->run_schedule();
 		0xFFC2->clear_item_say();
 		0xFFC2->show_npc_face0(0x0000);
@@ -40557,7 +40604,7 @@ void Func043E object#(0x43E) () {
 				break;
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		0xFFC2->clear_item_say();
 		if (0xFFB9->npc_nearby() && (0xFFB9->get_schedule_type() == 0x0010)) {
 			0xFFB9->clear_item_say();
@@ -40583,8 +40630,8 @@ void Func043E object#(0x43E) () {
 				Func097F(0xFFC2, "@Aha!@", 0x0000);
 				var0006 = 0xFFC2->find_nearby(0x037E, 0x000A, 0x0000);
 				if (var0006) {
-					0xFFC2->si_path_run_usecode(var0006->get_object_position(), 0x000D, item, Func043E, false);
-					UI_set_path_failure([Func043E], item, 0x000E);
+					0xFFC2->si_path_run_usecode(var0006->get_object_position(), SI_PATH_SUCCESS, item, Func043E, false);
+					UI_set_path_failure([Func043E], item, SI_PATH_FAILURE);
 				}
 			}
 		} else {
@@ -40592,16 +40639,16 @@ void Func043E object#(0x43E) () {
 			Func097F(0xFFC2, var0007[UI_get_random(UI_get_array_size(var0007))], 0x0000);
 		}
 	}
-	if (event == 0x000E) {
+	if (event == SI_PATH_FAILURE) {
 		var0006 = 0xFFC2->find_nearby(0x037E, 0x0004, 0x0000);
 		if (var0006) {
-			event = 0x000D;
+			event = SI_PATH_SUCCESS;
 		} else {
 			0xFFC2->run_schedule();
 			abort;
 		}
 	}
-	if (event == 0x000D) {
+	if (event == SI_PATH_SUCCESS) {
 		var0006 = 0xFFC2->find_nearby(0x037E, 0x0004, 0x0000);
 		if (var0006) {
 			var0008 = UI_direction_from(0xFFC2, var0006);
@@ -40624,7 +40671,7 @@ void Func043E object#(0x43E) () {
 		}
 		abort;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0007 = ["@Much better!@", "@'Tis taking shape!@", "@Hmmm...@", "@Uh-oh...@", "@Ouch!@", "@A masterpiece!@"];
 		Func097F(0xFFC2, var0007[UI_get_random(UI_get_array_size(var0007))], 0x0000);
 		0xFFC2->run_schedule();
@@ -40685,7 +40732,7 @@ void Func043F object#(0x43F) () {
 	var0006 = false;
 	var0007 = false;
 	var0008 = false;
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		if (gflags[0x0083]) {
 			var0009 = 0xFFC1->get_oppressor();
 			var0009 = 0x0000 - var0009;
@@ -40721,7 +40768,7 @@ void Func043F object#(0x43F) () {
 			call Func01D0;
 		};
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		if (gflags[0x0083]) {
 			var000E = UI_die_roll(0x0001, 0x0003);
 			0xFFC1->clear_item_say();
@@ -40737,7 +40784,7 @@ void Func043F object#(0x43F) () {
 		}
 		return;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func097F(0xFE9C, "@Greetings, Knight.@", 0x0000);
 		0xFFC1->Func07D1();
 		if (gflags[0x0090] && (!gflags[0x004C])) {
@@ -40748,7 +40795,7 @@ void Func043F object#(0x43F) () {
 		Func097F(0xFFC1, "@Greetings.@", 0x0002);
 		0xFFC1->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFC1->run_schedule();
 		0xFFC1->clear_item_say();
 		0xFFC1->show_npc_face0(0x0000);
@@ -41236,7 +41283,7 @@ void Func0440 object#(0x440) () {
 	var0000 = 0xFFC0->find_nearby(0x013E, 0x001E, 0x0000);
 	var0001 = 0xFFC0->get_item_flag(MET);
 	var0002 = Func0954();
-	if (gflags[0x008B] && ((event == 0x0000) && (!gflags[0x02E2]))) {
+	if (gflags[0x008B] && ((event == PROXIMITY) && (!gflags[0x02E2]))) {
 		0xFFC0->set_npc_id(0xFFC0->get_npc_id() + 0x0001);
 		if (0xFFC0->get_npc_id() == 0x0005) {
 			Func080E();
@@ -41264,7 +41311,7 @@ void Func0440 object#(0x440) () {
 		}
 		abort;
 	}
-	if (gflags[0x008B] && ((event == 0x0002) && (!gflags[0x02E2]))) {
+	if (gflags[0x008B] && ((event == SCRIPTED) && (!gflags[0x02E2]))) {
 		UI_ambient_light(0x0001);
 		UI_set_time_palette();
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
@@ -41297,14 +41344,14 @@ void Func0440 object#(0x440) () {
 		0xFFC0->set_npc_id(0x0000);
 		gflags[0x002A] = false;
 	}
-	if ((event == 0x0000) && (0xFFC0->get_schedule_type() == 0x0009)) {
+	if ((event == PROXIMITY) && (0xFFC0->get_schedule_type() == 0x0009)) {
 		if (UI_get_random(0x000A) < 0x0007) {
 			abort;
 		}
 		var0004 = ["@Hello, there!@", "@May I watch?@", "@Art thou a hero?@", "@Where are we going?@", "@May I come?@", "@I'm a warrior, too.@"];
 		Func097F(0xFFC0, var0004[UI_get_random(0x0006)], 0x0000);
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (0xFFC0->get_item_flag(SI_ZOMBIE)) {
 			Func097F(0xFE9C, "Hello, Cantra.", 0x0000);
 			var0005 = UI_get_random(0x0006);
@@ -41339,7 +41386,7 @@ void Func0440 object#(0x440) () {
 		0xFFC0->Func07D1();
 		0xFFC0->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFC0->run_schedule();
 		0xFFC0->clear_item_say();
 		0xFFC0->show_npc_face0(0x0000);
@@ -41445,7 +41492,7 @@ void Func0440 object#(0x440) () {
 				break;
 		}
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		if (gflags[0x0047]) {
 			0xFFC0->clear_item_flag(SI_TOURNAMENT);
 			abort;
@@ -41456,7 +41503,7 @@ void Func0440 object#(0x440) () {
 			0xFFC0->set_attack_mode(0x0007);
 		}
 	}
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0007 = Func0994();
 		if ((var0007 == 0x001F) && (gflags[0x004A] == true)) {
 			0xFFC0->show_npc_face0(0x0000);
@@ -41501,19 +41548,19 @@ void Func0441 object#(0x441) () {
 	}
 	var0002 = Func097D(0xFE9B, 0xFE99, 0x037C, 0xFE99, 0x0007);
 	var0003 = Func0954();
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0004 = script item {
 			nohalt;
 			call Func01D0;
 		};
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func097F(0xFE9C, "@Pardon me....@", 0x0000);
 		0xFFBF->Func07D1();
 		Func097F(0xFFBF, (("@Yes, " + var0001) + "?@"), 0x0002);
 		0xFFBF->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFBF->run_schedule();
 		0xFFBF->clear_item_say();
 		var0005 = false;
@@ -41683,7 +41730,7 @@ void Func0442 object#(0x442) () {
 	var var0002;
 
 	var0000 = 0xFFBE->get_object_position();
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (0xFFBE->get_item_flag(MET)) {
 			0xFFBE->show_npc_face0(0x0000);
 			say("\"Thou hast slain me! My blood spills away... all because of Pomdirgun, that betrayer!\"");
@@ -41748,7 +41795,7 @@ void Func0442 object#(0x442) () {
 			abort;
 		}
 	}
-	if ((event == 0x0007) && (!0xFFBE->get_item_flag(MET))) {
+	if ((event == DEATH) && (!0xFFBE->get_item_flag(MET))) {
 		0xFFBE->set_schedule_type(0x000F);
 		0xFFBE->set_item_flag(DEAD);
 		var0002 = script 0xFFBE {
@@ -41811,21 +41858,21 @@ void Func0443 object#(0x443) () {
 		var0000 = "evening";
 	}
 	var0003 = false;
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0004 = script item {
 			call Func01D0;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		Func09AC(0xFFBD, 0xFFFF, 0xFFFF, 0x0003);
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Greetings, milady.@");
 		0xFFBD->Func07D1();
 		Func097F(0xFFBD, "@Greetings to thee.@", 0x0002);
 		0xFFBD->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFBD->clear_item_say();
 		0xFFBD->run_schedule();
 		0xFFBD->show_npc_face0(0x0000);
@@ -42855,12 +42902,12 @@ void Func0444 object#(0x444) () {
 	var0006 = false;
 	var0007 = false;
 	var0008 = false;
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0009 = script item {
 			call Func01D0;
 		};
 	}
-	if ((event == 0x0001) && (0xFFBC->get_schedule_type() != 0x000A)) {
+	if ((event == DOUBLECLICK) && (0xFFBC->get_schedule_type() != 0x000A)) {
 		0xFE9C->item_say("@Hello, sir.@");
 		0xFFBC->Func07D1();
 		if (var0000) {
@@ -42876,10 +42923,10 @@ void Func0444 object#(0x444) () {
 			0xFFBC->set_schedule_type(0x0003);
 		}
 	}
-	if (event == 0x0002) {
-		event = 0x0009;
+	if (event == SCRIPTED) {
+		event = STARTED_TALKING;
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFBC->run_schedule();
 		0xFFBC->clear_item_say();
 		if (0xFFBC->get_schedule_type() == 0x0007) {
@@ -43169,7 +43216,7 @@ void Func0444 object#(0x444) () {
 				break;
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var000D = UI_die_roll(0x0001, 0x0005);
 		if (var0000) {
 			if (var000D == 0x0001) {
@@ -43258,7 +43305,7 @@ void Func0445 object#(0x445) () {
 	if (UI_is_pc_female()) {
 		var000D = "she";
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x0038]) {
 			0xFFBB->run_schedule();
 			// I see no way other than this
@@ -43290,7 +43337,7 @@ void Func0445 object#(0x445) () {
 			abort;
 		}
 	}
-	if ((event == 0x0007) && 0xFFBB->get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && 0xFFBB->get_item_flag(SI_TOURNAMENT)) {
 		if (gflags[0x0093]) {
 			0xFFBB->show_npc_face0(0x0000);
 			say("\"Thou hast ruined everything! With the current emotional and spiritual state of the city, the Goblins are certain to win this war against us!\"");
@@ -43305,7 +43352,7 @@ void Func0445 object#(0x445) () {
 			call Func01D0;
 		};
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Greetings, sir.@");
 		0xFFBB->Func07D1();
 		if (gflags[0x0038]) {
@@ -43321,7 +43368,7 @@ void Func0445 object#(0x445) () {
 		Func097F(0xFFBB, "@Hello.@", 0x0002);
 		0xFFBB->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFBB->run_schedule();
 labelFunc0445_0257:
 		0xFFBB->clear_item_say();
@@ -43823,7 +43870,7 @@ labelFunc0445_0257:
 				goto labelFunc0445_0D4F;
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		if (gflags[0x0038]) {
 			var0017 = UI_die_roll(0x0001, 0x0003);
 			if (var0017 == 0x0001) {
@@ -43916,13 +43963,13 @@ void Func0446 object#(0x446) () {
 		abort;
 	}
 	var0001 = Func0954();
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0000 = script item {
 			nohalt;
 			call Func01D0;
 		};
 	}
-	if ((event == 0x0001) && (0xFFBA->get_schedule_type() != 0x000F)) {
+	if ((event == DOUBLECLICK) && (0xFFBA->get_schedule_type() != 0x000F)) {
 		var0002 = 0xFFBA->get_object_position();
 		if (gflags[0x0054] && ((0xFFBA->get_schedule_type() == 0x000E) && ((var0002[0x0001] > 0x042F) && ((var0002[0x0001] < 0x043F) && ((var0002[0x0002] > 0x0A50) && (var0002[0x0002] < 0x0A5F)))))) {
 			0xFFBA->Func07D2();
@@ -43945,7 +43992,7 @@ void Func0446 object#(0x446) () {
 			0xFFBA->set_schedule_type(0x0003);
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFBA->run_schedule();
 		0xFFBA->clear_item_say();
 		0xFFBA->show_npc_face0(0x0000);
@@ -44194,7 +44241,7 @@ labelFunc0446_05A1:
 				gflags[0x0055] = true;
 				Func097F(0xFFBA, "@Farewell!@", 0x0000);
 				Func097F(0xFFB3, "@Anon!@", 0x0002);
-				0xFFB3->si_path_run_usecode([0x041B, 0x0A52, 0x0000], 0x000D, 0xFFB3, Func044D, true);
+				0xFFB3->si_path_run_usecode([0x041B, 0x0A52, 0x0000], SI_PATH_SUCCESS, 0xFFB3, Func044D, true);
 				abort;
 
 			case "rendezvous" (remove):
@@ -44310,7 +44357,7 @@ void Func0447 object#(0x447) () {
 	var0001 = UI_is_pc_female();
 	var0002 = 0xFFB9->get_item_flag(MET);
 	var0003 = Func0953();
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		if (gflags[0x0083]) {
 			var0004 = 0xFFB9->get_oppressor();
 			var0004 = 0x0000 - var0004;
@@ -44346,7 +44393,7 @@ void Func0447 object#(0x447) () {
 			call Func01D0;
 		};
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		if (gflags[0x0083]) {
 			var0009 = UI_die_roll(0x0001, 0x0003);
 			0xFFB9->clear_item_say();
@@ -44361,7 +44408,7 @@ void Func0447 object#(0x447) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFFB9->show_npc_face0(0x0000);
 		if (gflags[0x0041]) {
 			say("\"I would love to converse with thee, friend Avatar. But this is the hour when Andral sculpts my likeness.\"");
@@ -44374,7 +44421,7 @@ void Func0447 object#(0x447) () {
 		Func097F(0xFFB9, "@Move on!@", 0x0000);
 		abort;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Sir Knight!@");
 		0xFFB9->Func07D1();
 		Func097F(0xFFB9, "@Eh?@", 0x0000);
@@ -44387,7 +44434,7 @@ void Func0447 object#(0x447) () {
 			0xFFB9->set_schedule_type(0x0003);
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFB9->halt_scheduled();
 		0xFFB9->run_schedule();
 		0xFFB9->show_npc_face0(0x0000);
@@ -44674,7 +44721,7 @@ void Func0448 object#(0x448) () {
 	var0004 = Func098E();
 	var0005 = 0xFFB8->find_nearby(0x0381, 0x0014, 0x0000);
 	var0006 = Func0942(0xFFFF);
-	if ((event == 0x0007) && 0xFFB8->get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && 0xFFB8->get_item_flag(SI_TOURNAMENT)) {
 		0xFFB8->show_npc_face0(0x0000);
 		if (!gflags[0x00CA]) {
 			say("\"So! Thou hast discovered me!\"");
@@ -44689,7 +44736,7 @@ void Func0448 object#(0x448) () {
 		Func097F(0xFE9C, "@Whew!@", 0x0002);
 		abort;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (0xFFB8->get_item_flag(SI_ZOMBIE) && (item == Func09A0(0x0005, 0x0002))) {
 			if (0xFE9C->get_item_flag(DONT_MOVE) || (Func0994() == 0x001F)) {
 				var0007 = Func09A0(0x0005, 0x0002);
@@ -44741,14 +44788,14 @@ void Func0448 object#(0x448) () {
 			};
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hello, there.@");
 		0xFFB8->Func07D1();
 		0xFFB8->set_schedule_type(0x0003);
 		Func097F(0xFFB8, "@Hello.@", 0x0002);
 		0xFFB8->clear_item_say();
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFB8->run_schedule();
 		var000A = false;
 		if (0xFFB8->get_schedule_type() == 0x0007) {
@@ -44883,8 +44930,8 @@ void Func0448 object#(0x448) () {
 						var0010 = var0005->get_object_position();
 						var0010[0x0001] += 0x0001;
 						0xFFB8->set_npc_id(0x0000);
-						0xFE9C->si_path_run_usecode(var0010, 0x0002, item, Func028C, false);
-						UI_set_path_failure(Func028C, item, 0x000E);
+						0xFE9C->si_path_run_usecode(var0010, SCRIPTED, item, Func028C, false);
+						UI_set_path_failure(Func028C, item, SI_PATH_FAILURE);
 						UI_play_music(0x001D, Func09A0(0x0005, 0x0001));
 						0xFFB8->set_schedule_type(0x000F);
 						abort;
@@ -44963,13 +45010,13 @@ void Func0449 object#(0x449) () {
 	if (UI_is_pc_female()) {
 		var0000 = "She";
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Greetings, sir.@");
 		0xFFB7->Func07D1();
 		Func097F(0xFFB7, "@What?@", 0x0002);
 		0xFFB7->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFB7->run_schedule();
 		0xFFB7->clear_item_say();
 		0xFFB7->show_npc_face0(0x0000);
@@ -45181,7 +45228,7 @@ void Func044A object#(0x44A) () {
 	if (gflags[0x0048]) {
 		var0002 = "Knight";
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		if (gflags[0x0083]) {
 			var0003 = 0xFFB6->get_oppressor();
 			var0003 = 0x0000 - var0003;
@@ -45217,7 +45264,7 @@ void Func044A object#(0x44A) () {
 			call Func01D0;
 		};
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0007 = 0xFFB6->get_object_position();
 		if (var0007[0x0002] > 0x0A41) {
 			var0008 = 0xFFB6->find_nearby(0xFFFF, 0x0014, 0x0008);
@@ -45307,13 +45354,13 @@ void Func044A object#(0x44A) () {
 			}
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hail, Knight!@");
 		0xFFB6->Func07D1();
 		Func097F(0xFFB6, "@Yes?@", 0x0002);
 		0xFFB6->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFB6->run_schedule();
 		0xFFB6->clear_item_say();
 		0xFFB6->show_npc_face0(0x0000);
@@ -45507,7 +45554,7 @@ void Func044B object#(0x44B) () {
 
 	var0000 = Func0953();
 	var0001 = Func0994();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Greetings, Guard!@");
 		0xFFB5->Func07D1();
 		if (gflags[0x0004]) {
@@ -45523,7 +45570,7 @@ void Func044B object#(0x44B) () {
 		}
 		0xFFB5->set_schedule_type(0x0003);
 	}
-	if ((event == 0x0007) && 0xFFB5->get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && 0xFFB5->get_item_flag(SI_TOURNAMENT)) {
 		0xFFB5->clear_item_say();
 		if (!gflags[0x00C5]) {
 			0xFFB5->show_npc_face0(0x0000);
@@ -45536,7 +45583,7 @@ void Func044B object#(0x44B) () {
 		0xFFB5->reduce_health(0x0037, 0x0000);
 		abort;
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFB5->run_schedule();
 		0xFFB5->clear_item_say();
 		var0002 = false;
@@ -45695,7 +45742,8 @@ void Func044B object#(0x44B) () {
 							}
 							var0015 = 0xFE9C->add_cont_items(0x0001, 0x0293, 0xFE99, 0x0000, false);
 							var0015 = 0xFE9C->add_cont_items(0x0001, 0x0239, 0xFE99, 0x0000, false);
-							0xFFB5->si_path_run_usecode([0x0339, 0x08D7, 0x0000], 0x0007, 0xFE9C, Func0739, true);
+							// BUG: This should use PATH_SUCCESS instead of BG_PATH_SUCCESS.
+							0xFFB5->si_path_run_usecode([0x0339, 0x08D7, 0x0000], BG_PATH_SUCCESS, 0xFE9C, Func0739, true);
 							Func097F(0xFFB5, "@Follow me...@", 0x0002);
 							Func097F(0xFE9C, "@Lead onwards...@", 0x0005);
 							0xFE9C->set_item_flag(DONT_MOVE);
@@ -45721,7 +45769,7 @@ void Func044B object#(0x44B) () {
 				return;
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var001D = 0xFE9C->find_nearby(0x010E, 0x000A, 0x00B0);
 		for (var0020 in var001D with var001E to var001F) {
 			if (var0020->get_item_quality() == 0x0048) {
@@ -45774,7 +45822,7 @@ void Func044C object#(0x44C) () {
 	var0001 = 0xFFB4->get_item_flag(MET);
 	var0002 = Func0953();
 	var0003 = false;
-	if ((event == 0x0007) && ((gflags[0x0045] || gflags[0x005F]) && ((!0xFFB4->get_item_flag(SI_ZOMBIE)) && (!gflags[0x0044])))) {
+	if ((event == DEATH) && ((gflags[0x0045] || gflags[0x005F]) && ((!0xFFB4->get_item_flag(SI_ZOMBIE)) && (!gflags[0x0044])))) {
 		0xFFB4->show_npc_face0(0x0000);
 		say("\"So, thou hast found me out? Well, to the blazes with it all!\"");
 		0xFFB4->set_item_flag(SI_ZOMBIE);
@@ -45803,7 +45851,7 @@ void Func044C object#(0x44C) () {
 		}
 		abort;
 	}
-	if ((event == 0x0001) && (0xFFB4->get_schedule_type() != 0x000A)) {
+	if ((event == DOUBLECLICK) && (0xFFB4->get_schedule_type() != 0x000A)) {
 		Func097F(0xFE9C, "@Hello!@", 0x0000);
 		0xFFB4->Func07D1();
 		Func097F(0xFFB4, "@Welcome!@", 0x0002);
@@ -45817,10 +45865,10 @@ void Func044C object#(0x44C) () {
 			0xFFB4->set_schedule_type(0x000A);
 		}
 	}
-	if (event == 0x0002) {
-		event = 0x0009;
+	if (event == SCRIPTED) {
+		event = STARTED_TALKING;
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFB4->run_schedule();
 		0xFFB4->clear_item_say();
 		0xFFB4->show_npc_face0(0x0000);
@@ -46130,7 +46178,7 @@ void Func044C object#(0x44C) () {
 				break;
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0012 = 0xFFB4->get_schedule_type();
 		var0013 = UI_die_roll(0x0001, 0x0004);
 		if (var0012 == 0x0007) {
@@ -46181,10 +46229,10 @@ void Func044D object#(0x44D) () {
 
 	var0000 = Func0954();
 	var0001 = Func0953();
-	if ((event == 0x000D) || (event == 0x000E)) {
+	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
 		0xFFB3->set_schedule_type(0x000C);
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		if (gflags[0x0092]) {
 			var0002 = UI_die_roll(0x0001, 0x0003);
 			if (var0002 == 0x0001) {
@@ -46261,7 +46309,7 @@ void Func044D object#(0x44D) () {
 			}
 		}
 	}
-	if ((event == 0x0007) && 0xFFB3->get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && 0xFFB3->get_item_flag(SI_TOURNAMENT)) {
 		if (gflags[0x0094]) {
 			0xFFB3->show_npc_face0(0x0000);
 			say("\"Very well, I have been found out. Listen to my secrets, brute, for I must confess all with my dying breath...\"");
@@ -46278,7 +46326,7 @@ void Func044D object#(0x44D) () {
 			call Func01D0;
 		};
 	}
-	if ((event == 0x0001) && (0xFFB3->get_schedule_type() != 0x000F)) {
+	if ((event == DOUBLECLICK) && (0xFFB3->get_schedule_type() != 0x000F)) {
 		0xFE9C->item_say("@Greetings, milord.@");
 		0xFFB3->Func07D1();
 		if (gflags[0x0092]) {
@@ -46294,8 +46342,8 @@ void Func044D object#(0x44D) () {
 		Func097F(0xFFB3, "Yes?", 0x0002);
 		0xFFB3->set_schedule_type(0x0003);
 	}
-	if (event != 0x0002) {
-		if (event != 0x0009) {
+	if (event != SCRIPTED) {
+		if (event != STARTED_TALKING) {
 			// Need to make UCC optimize this
 			goto labelFunc044C_09C6;
 		}
@@ -46555,13 +46603,13 @@ void Func044E object#(0x44E) () {
 	if (0xFFB2->get_schedule_type() == 0x000D) {
 		var0002 = true;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hail there!@");
 		0xFFB2->Func07D1();
 		Func097F(0xFFB2, "@Greetings.@", 0x0003);
 		0xFFB2->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFB2->run_schedule();
 		0xFFB2->clear_item_say();
 		0xFFB2->show_npc_face0(0x0000);
@@ -46678,7 +46726,7 @@ void Func044E object#(0x44E) () {
 				break;
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0006 = UI_die_roll(0x0001, 0x0004);
 		if (var0002) {
 			if (var0006 == 0x0001) {
@@ -46728,13 +46776,13 @@ void Func044F object#(0x44F) () {
 	var0001 = 0xFFB1->get_item_flag(MET);
 	var0002 = Func097D(0xFE9B, 0x0001, 0x011D, 0xFE99, 0x0006);
 	var0003 = false;
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hail, Knight.@");
 		0xFFB1->Func07D1();
 		Func097F(0xFFB1, "@Hail.@", 0x0002);
 		0xFFB1->set_schedule_type(0x0003);
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		if (gflags[0x0083]) {
 			var0004 = UI_die_roll(0x0001, 0x0003);
 			if (var0004 == 0x0001) {
@@ -46748,7 +46796,7 @@ void Func044F object#(0x44F) () {
 			}
 		}
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		if (gflags[0x0083]) {
 			var0005 = 0xFFB1->get_oppressor();
 			var0005 = 0x0000 - var0005;
@@ -46783,7 +46831,7 @@ void Func044F object#(0x44F) () {
 			call Func01D0;
 		};
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFB1->clear_item_say();
 		0xFFB1->run_schedule();
 		0xFFB1->show_npc_face0(0x0000);
@@ -47035,17 +47083,17 @@ void Func0450 object#(0x450) () {
 	var0000 = false;
 	var0001 = 0xFFB0->get_item_flag(MET);
 	var0002 = Func0953();
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0003 = script item {
 			nohalt;
 			call Func01D0;
 		};
 	}
-	if ((event == 0x000A) || (event == 0x0002)) {
+	if ((event == PATH_SUCCESS) || (event == SCRIPTED)) {
 		0xFFB0->Func07D1();
 		Func0833(event);
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func097F(0xFE9C, "@Hail!@", 0x0000);
 		0xFFB0->Func07D1();
 		0xFFB0->clear_item_say();
@@ -47328,7 +47376,7 @@ void Func0451 object#(0x451) () {
 	var000A = false;
 	var000B = false;
 	var000C = false;
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var000D = UI_get_random(0x0006);
 		if (var000D == 0x0001) {
 			0xFFAF->item_say("@I shall have revenge!@");
@@ -47354,13 +47402,13 @@ void Func0451 object#(0x451) () {
 			0xFFAF->item_say("@What do I here?@");
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Greetings!@");
 		0xFFAF->Func07D1();
 		Func097F(0xFFAF, "@Art thou speaking to me?@", 0x0005);
 		0xFFAF->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFAF->run_schedule();
 		0xFFAF->clear_item_say();
 		0xFFAF->show_npc_face0(0x0000);
@@ -47789,7 +47837,7 @@ void Func0451 object#(0x451) () {
 				break;
 		}
 	}
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (var0004 == 0x001F) {
 			0xFFEE->item_say("@Save me from this madman!@");
 			0xFFAF->show_npc_face0(0x0000);
@@ -47821,13 +47869,13 @@ void Func0452 object#(0x452) () {
 	}
 	var0000 = Func0954();
 	var0001 = Func0953();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Speak, automaton!@");
 		0xFFAE->Func07D1();
 		Func097F(0xFFAE, "@Obedience... Failed...@", 0x0002);
 		0xFFAE->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFAE->run_schedule();
 		0xFFAE->clear_item_say();
 		0xFED6->show_npc_face0(0x0000);
@@ -47855,13 +47903,13 @@ void Func0453 object#(0x453) () {
 	}
 	var0000 = Func0954();
 	var0001 = Func0953();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@May we speak?@");
 		0xFFAD->Func07D1();
 		Func097F(0xFFAD, "@Speak... Creak... Weak...@", 0x0002);
 		0xFFAD->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFAD->run_schedule();
 		0xFFAD->clear_item_say();
 		0xFED6->show_npc_face0(0x0000);
@@ -47889,7 +47937,7 @@ void Func0454 object#(0x454) () {
 extern void Func08B2 0x8B2 ();
 
 void Func0455 object#(0x455) () {
-	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		clear_item_flag(SI_TOURNAMENT);
 		reduce_health(0x0032, 0x0000);
 		gflags[0x0209] = true;
@@ -47907,7 +47955,7 @@ void Func0456 object#(0x456) () {
 extern void Func08B2 0x8B2 ();
 
 void Func0457 object#(0x457) () {
-	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		clear_item_flag(SI_TOURNAMENT);
 		reduce_health(0x0032, 0x0000);
 		gflags[0x020A] = true;
@@ -47943,7 +47991,7 @@ void Func045B object#(0x45B) () {
 extern void Func08B2 0x8B2 ();
 
 void Func045C object#(0x45C) () {
-	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		clear_item_flag(SI_TOURNAMENT);
 		reduce_health(0x0032, 0x0000);
 		gflags[0x020B] = true;
@@ -47955,7 +48003,7 @@ void Func045C object#(0x45C) () {
 extern void Func08B2 0x8B2 ();
 
 void Func045D object#(0x45D) () {
-	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		clear_item_flag(SI_TOURNAMENT);
 		reduce_health(0x0032, 0x0000);
 		gflags[0x020C] = true;
@@ -47986,13 +48034,13 @@ void Func045E object#(0x45E) () {
 	}
 	var0000 = Func0954();
 	var0001 = Func0953();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@May we speak?@");
 		0xFFA2->Func07D1();
 		Func097F(0xFFA2, (("@Yes, " + var0000) + "?@"), 0x0002);
 		0xFFA2->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFA2->run_schedule();
 		0xFFA2->clear_item_say();
 		0xFFA2->show_npc_face0(0x0000);
@@ -48075,13 +48123,13 @@ void Func045F object#(0x45F) () {
 	}
 	var0000 = Func0954();
 	var0001 = Func0953();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@May we speak?@");
 		0xFFA1->Func07D1();
 		Func097F(0xFFA1, (("@Yes, " + var0000) + "?@"), 0x0002);
 		0xFFA1->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFA1->run_schedule();
 		0xFFA1->clear_item_say();
 		0xFFA1->show_npc_face0(0x0000);
@@ -48184,13 +48232,13 @@ void Func0460 object#(0x460) () {
 	}
 	var0000 = Func0954();
 	var0001 = Func0953();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@May we speak?@");
 		0xFFA0->Func07D1();
 		Func097F(0xFFA0, (("@Yes, " + var0000) + "?@"), 0x0002);
 		0xFFA0->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFA0->run_schedule();
 		0xFFA0->clear_item_say();
 		0xFFA0->show_npc_face0(0x0000);
@@ -48271,13 +48319,13 @@ void Func0461 object#(0x461) () {
 	}
 	var0000 = Func0954();
 	var0001 = Func0953();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@May we speak?@");
 		0xFF9F->Func07D1();
 		Func097F(0xFF9F, (("@Yes, " + var0000) + "?@"), 0x0002);
 		0xFF9F->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF9F->run_schedule();
 		0xFF9F->clear_item_say();
 		0xFF9F->show_npc_face0(0x0000);
@@ -48362,13 +48410,13 @@ void Func0462 object#(0x462) () {
 	}
 	var0000 = Func0954();
 	var0001 = Func0953();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@May we speak?@");
 		0xFF9E->Func07D1();
 		Func097F(0xFF9E, (("@Yes, " + var0000) + "?@"), 0x0002);
 		0xFF9E->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF9E->run_schedule();
 		0xFF9E->clear_item_say();
 		0xFF9E->show_npc_face0(0x0000);
@@ -48466,13 +48514,13 @@ void Func0463 object#(0x463) () {
 	}
 	var0000 = Func0954();
 	var0001 = Func0953();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@May we speak?@");
 		0xFF9D->Func07D1();
 		Func097F(0xFF9D, (("@Yes, " + var0000) + "?@"), 0x0002);
 		0xFF9D->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF9D->run_schedule();
 		0xFF9D->clear_item_say();
 		0xFF9D->show_npc_face0(0x0000);
@@ -48553,7 +48601,7 @@ void Func0464 object#(0x464) () {
 		Func0809();
 		abort;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		Func09AA();
 		UI_play_music(0x0040, Func09A0(0x0005, 0x0001));
 		0xFED6->show_npc_face0(0x0000);
@@ -48868,7 +48916,7 @@ labelFunc0464_0169:
 extern void Func09B7 0x9B7 ();
 
 void Func0477 object#(0x477) () {
-	if ((event == 0x0007) || (event == 0x0002)) {
+	if ((event == DEATH) || (event == SCRIPTED)) {
 		Func09B7();
 	}
 }
@@ -48876,7 +48924,7 @@ void Func0477 object#(0x477) () {
 extern void Func09B7 0x9B7 ();
 
 void Func0478 object#(0x478) () {
-	if ((event == 0x0007) || (event == 0x0002)) {
+	if ((event == DEATH) || (event == SCRIPTED)) {
 		Func09B7();
 	}
 }
@@ -48884,7 +48932,7 @@ void Func0478 object#(0x478) () {
 extern void Func09B7 0x9B7 ();
 
 void Func0479 object#(0x479) () {
-	if ((event == 0x0007) || (event == 0x0002)) {
+	if ((event == DEATH) || (event == SCRIPTED)) {
 		Func09B7();
 	}
 }
@@ -48892,7 +48940,7 @@ void Func0479 object#(0x479) () {
 extern void Func09B7 0x9B7 ();
 
 void Func047A object#(0x47A) () {
-	if ((event == 0x0007) || (event == 0x0002)) {
+	if ((event == DEATH) || (event == SCRIPTED)) {
 		Func09B7();
 	}
 }
@@ -48900,7 +48948,7 @@ void Func047A object#(0x47A) () {
 extern void Func09B7 0x9B7 ();
 
 void Func047B object#(0x47B) () {
-	if ((event == 0x0007) || (event == 0x0002)) {
+	if ((event == DEATH) || (event == SCRIPTED)) {
 		Func09B7();
 	}
 }
@@ -48908,7 +48956,7 @@ void Func047B object#(0x47B) () {
 void Func047C object#(0x47C) () {
 	var var0000;
 
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		0xFF58->show_npc_face0(0x0000);
 		say("\"Why dost thou interrupt my dreaming? Canst thou not see that I have important matters to attend to?\" *\"Argh! I am waking...\"");
 		UI_remove_npc_face0();
@@ -48917,7 +48965,7 @@ void Func047C object#(0x47C) () {
 		UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		0xFF84->remove_npc();
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF58->show_npc_face0(0x0000);
 		say("\"Ah, Avatar!\" ~\"This is as it should be... The food is good, the wine is sweet and the company is warm! Wouldst thou care to join me?\"");
 		say("\"Still bound by thy quest, I see.\" ~\"Well, if thou dost change thy mind, thou art welcome here any time.\" *\"Oh, and Avatar?\" ~\"Thou shouldst honestly relax a bit...\"");
@@ -48942,7 +48990,7 @@ void Func047D object#(0x47D) () {
 		Func0809();
 		abort;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (gflags[0x024D]) {
 			0xFED6->show_npc_face0(0x0000);
 			say("\"Thou dost have the sceptre. My work is complete. I must rest. I have waited for thee for so long...\"*");
@@ -48956,7 +49004,7 @@ void Func047D object#(0x47D) () {
 		Func097F(item, "@I would speak with thee...@", 0x0003);
 		set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		run_schedule();
 		clear_item_say();
 		0xFED6->show_npc_face0(0x0000);
@@ -48999,12 +49047,12 @@ void Func047E object#(0x47E) () {
 		Func0809();
 		abort;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("A guard of metal!@");
 		Func097F(0xFF82, "@Thou art a fool!@", 0x0003);
 		set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFED6->show_npc_face0(0x0000);
 		say("\"Avatar, thou shalt fail!\"");
 		var0000 = Func0992(0xFFFF, "@Why, Avatar! Canst thou not hear it?! This automaton speaks with Batlin's voice!@", "@I recognize that voice! Batlin!@", false);
@@ -49032,10 +49080,10 @@ void Func047F object#(0x47F) () {
 	var var0005;
 
 	var0000 = get_item_quality();
-	if (event == 0x0008) {
+	if (event == BG_PATH_FAILURE) {
 		set_polymorph(0x01F5);
 	}
-	if ((event == 0x000D) || (event == 0x000E)) {
+	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
 		0xFF81->set_schedule_type(0x000F);
 		var0001 = script 0xFF81 {
 			nohalt;
@@ -49044,16 +49092,16 @@ void Func047F object#(0x47F) () {
 			say "@Master!@";
 		};
 	}
-	if ((event == 0x0002) && ((gflags[0x0007] == false) && (gflags[0x0253] == false))) {
+	if ((event == SCRIPTED) && ((gflags[0x0007] == false) && (gflags[0x0253] == false))) {
 		gflags[0x0253] = true;
 		0xFF81->move_object([0x0797, 0x028B, 0x0000]);
-		0xFF81->si_path_run_usecode([0x0799, 0x027F, 0x0000], 0x000A, 0xFF81, Func047F, true);
+		0xFF81->si_path_run_usecode([0x0799, 0x027F, 0x0000], PATH_SUCCESS, 0xFF81, Func047F, true);
 	}
-	if ((event == 0x0002) && gflags[0x0007]) {
+	if ((event == SCRIPTED) && gflags[0x0007]) {
 		gflags[0x0007] = false;
-		0xFF81->si_path_run_usecode([0x0794, 0x028F, 0x0000], 0x000B, 0xFF81, Func047F, true);
+		0xFF81->si_path_run_usecode([0x0794, 0x028F, 0x0000], PATH_FAILURE, 0xFF81, Func047F, true);
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		0xFF81->show_npc_face0(0x0000);
 		say("\"Avatar! That fiend Batlin will destroy us all if he is not stopped!\"* \"'Twill be our destruction! He is attempting to open that cursed Wall of Lights!\"* \"Quickly, follow me! I will lead thee straight to him.\"");
 		UI_remove_npc_face1();
@@ -49066,7 +49114,7 @@ void Func047F object#(0x47F) () {
 		};
 		abort;
 	}
-	if ((event == 0x000B) || (event == 0x000E)) {
+	if ((event == PATH_FAILURE) || (event == SI_PATH_FAILURE)) {
 		var0002 = find_nearby(0x0314, 0x0014, 0x0000);
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0000 = var0005->get_item_quality();
@@ -49091,10 +49139,10 @@ void Func0480 object#(0x480) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0008) {
+	if (event == BG_PATH_FAILURE) {
 		set_polymorph(0x01F5);
 	}
-	if ((event == 0x000D) || (event == 0x000E)) {
+	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
 		0xFF80->set_schedule_type(0x000F);
 		var0000 = script 0xFF80 {
 			nohalt;
@@ -49103,16 +49151,16 @@ void Func0480 object#(0x480) () {
 			say "@Arrr, Master!@";
 		};
 	}
-	if ((event == 0x0002) && ((gflags[0x0007] == false) && (gflags[0x0255] == false))) {
+	if ((event == SCRIPTED) && ((gflags[0x0007] == false) && (gflags[0x0255] == false))) {
 		gflags[0x0255] = true;
 		0xFF80->move_object([0x0926, 0x0284, 0x0000]);
-		0xFF80->si_path_run_usecode([0x0927, 0x028D, 0x0000], 0x000A, 0xFF80, Func0480, true);
+		0xFF80->si_path_run_usecode([0x0927, 0x028D, 0x0000], PATH_SUCCESS, 0xFF80, Func0480, true);
 	}
-	if ((event == 0x0002) && gflags[0x0007]) {
+	if ((event == SCRIPTED) && gflags[0x0007]) {
 		gflags[0x0007] = false;
-		0xFF80->si_path_run_usecode([0x092A, 0x0284, 0x0000], 0x000B, 0xFF80, Func0480, true);
+		0xFF80->si_path_run_usecode([0x092A, 0x0284, 0x0000], PATH_FAILURE, 0xFF80, Func0480, true);
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		0xFF80->show_npc_face0(0x0000);
 		say("\"The time hath come for thee to feel me steel!\"* \"Face me, Avatar, if thou dost have the courage!\"* \"I shall cut thee for bait, then feed thee to the minnows shouldst thou try to cross me sword!\"");
 		UI_remove_npc_face1();
@@ -49125,7 +49173,7 @@ void Func0480 object#(0x480) () {
 		};
 		abort;
 	}
-	if ((event == 0x000B) || (event == 0x000E)) {
+	if ((event == PATH_FAILURE) || (event == SI_PATH_FAILURE)) {
 		var0001 = find_nearby(0x0314, 0x0014, 0x0000);
 		for (var0004 in var0001 with var0002 to var0003) {
 			var0005 = var0004->get_item_quality();
@@ -49153,16 +49201,16 @@ void Func0481 object#(0x481) () {
 		Func0809();
 		abort;
 	}
-	if (event == 0x000E) {
-		event = 0x000A;
+	if (event == SI_PATH_FAILURE) {
+		event = PATH_SUCCESS;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func097F(0xFE9C, "@Hail, metal servant!@", 0x0000);
 		Func097F(item, "@Halt, stranger!@", 0x0001);
 		0xFF7F->set_schedule_type(0x000A);
-		si_path_run_usecode([0x0766, 0x027C, 0x0000], 0x000A, item, Func0481, true);
+		si_path_run_usecode([0x0766, 0x027C, 0x0000], PATH_SUCCESS, item, Func0481, true);
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		0xFF7F->set_schedule_type(0x001D);
 		0xFF7F->set_item_frame(0x0010);
 		var0000 = script item after 3 ticks {
@@ -49170,7 +49218,7 @@ void Func0481 object#(0x481) () {
 			call Func0481;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		run_schedule();
 		0xFE9C->clear_item_say();
 		clear_item_say();
@@ -49228,13 +49276,13 @@ extern void Func07D1 object#(0x7D1) ();
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
 void Func0482 object#(0x482) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@A metal man!@");
 		0xFF7E->Func07D1();
 		Func097F(0xFF7E, "@Who goes there?@", 0x0003);
 		0xFF7E->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF7E->run_schedule();
 		0xFF7E->clear_item_say();
 		0xFED6->show_npc_face0(0x0000);
@@ -49300,12 +49348,12 @@ void Func048F object#(0x48F) () {
 	var var0012;
 	var var0013;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Greetings@");
 		Func097F(0xFF71, "@We knew thou would come.@", 0x0003);
 		0xFF71->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF71->run_schedule();
 		0xFF71->clear_item_say();
 		0xFF71->show_npc_face0(0x0000);
@@ -49496,12 +49544,12 @@ void Func0490 object#(0x490) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hail there!@");
 		Func097F(0xFF70, "@Aruk nok! Raag!@", 0x0003);
 		0xFF70->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF70->run_schedule();
 		0xFF70->clear_item_say();
 		0xFF70->show_npc_face0(0x0000);
@@ -49558,12 +49606,12 @@ void Func0491 object#(0x491) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hail there!@");
 		Func097F(0xFF6F, "@Gruk! Barama tu!@", 0x0003);
 		0xFF6F->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF6F->run_schedule();
 		0xFF6F->clear_item_say();
 		0xFF6F->show_npc_face0(0x0000);
@@ -49632,12 +49680,12 @@ void Func0492 object#(0x492) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hail, Gwani elder!@");
 		Func097F(0xFF6E, "@Thou are here.@", 0x0003);
 		0xFF6E->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF6E->run_schedule();
 		0xFF6E->clear_item_say();
 		0xFF6E->show_npc_face0(0x0000);
@@ -49761,7 +49809,7 @@ void Func0493 object#(0x493) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = 0xFF6D->get_item_flag(SI_ZOMBIE);
 		if (var0000) {
 			0xFE9C->item_say("@Wake up, little one!@");
@@ -49772,7 +49820,7 @@ void Func0493 object#(0x493) () {
 		Func097F(0xFF6D, "@Tee hee hee hee!@", 0x0003);
 		0xFF6D->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF6D->run_schedule();
 		0xFF6D->clear_item_say();
 		0xFF6D->show_npc_face0(0x0000);
@@ -49840,13 +49888,13 @@ void Func0494 object#(0x494) () {
 	var var0007;
 
 	var0000 = Func097D(0xFE9B, 0x0001, 0x01DF, 0xFE99, 0x0002);
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hail there, Gwani person.@");
 		0xFF6C->Func07D1();
 		Func097F(0xFF6C, "@Hello there, Avatar!@", 0x0003);
 		0xFF6C->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF6C->run_schedule();
 		0xFF6C->clear_item_say();
 		0xFF6C->show_npc_face0(0x0000);
@@ -50027,7 +50075,7 @@ void Func0495 object#(0x495) () {
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
 	var0003 = UI_part_of_day();
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		0xFE9C->item_say("@A pleasure to see thee...@");
 		0xFF6B->Func07D1();
 		if (!0xFF6B->get_item_flag(SI_ZOMBIE)) {
@@ -50058,7 +50106,7 @@ void Func0495 object#(0x495) () {
 			}
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		if (0xFF6B->get_item_flag(IN_PARTY)) {
 			0xFF6B->set_schedule_type(0x001F);
 			add("leave");
@@ -50401,7 +50449,7 @@ void Func0496 object#(0x496) () {
 			var0006 = true;
 		}
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		if (gflags[0x0083]) {
 			var0007 = 0xFF6A->get_oppressor();
 			var0007 = 0x0000 - var0007;
@@ -50437,7 +50485,7 @@ void Func0496 object#(0x496) () {
 			call Func01D0;
 		};
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var000C = [0xFFC1];
 		if (!gflags[0x0038]) {
 			var000C &= 0xFFBB;
@@ -50500,7 +50548,7 @@ void Func0496 object#(0x496) () {
 			Func097F(0xFF6A, "@The Bears are wrong!@", 0x0000);
 		}
 	}
-	if ((event == 0x0001) && (0xFF6A->get_schedule_type() != 0x000F)) {
+	if ((event == DOUBLECLICK) && (0xFF6A->get_schedule_type() != 0x000F)) {
 		if (gflags[0x003D] && (((0xFF6A->get_schedule_type() == 0x000E) || (0xFF6A->get_schedule_type() == 0x000A)) && (Func08F1() < 0x000F))) {
 			0xFF6A->Func07D2();
 			0xFF6A->Func07D1();
@@ -50522,13 +50570,13 @@ void Func0496 object#(0x496) () {
 			0xFF6A->set_schedule_type(0x0003);
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = script 0xFF6A {
 			nohalt;
 			call Func0235;
 		};
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF6A->run_schedule();
 		0xFF6A->clear_item_say();
 		0xFF6A->show_npc_face0(0x0000);
@@ -50987,7 +51035,7 @@ void Func0498 object#(0x498) () {
 
 	var0000 = Func0954();
 	var0001 = Func0953();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Greetings, friend!@");
 		0xFF68->Func07D1();
 		if (gflags[0x0279]) {
@@ -50997,7 +51045,7 @@ void Func0498 object#(0x498) () {
 		}
 		0xFF68->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF68->clear_item_say();
 		0xFF68->show_npc_face0(0x0000);
 		if (0xFF68->get_item_flag(IN_PARTY)) {
@@ -51160,13 +51208,13 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 void Func0499 object#(0x499) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hail, Gwani hunter!@");
 		0xFF67->Func07D1();
 		Func097F(0xFF67, "@Noo Koomba!@", 0x0003);
 		0xFF67->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF67->set_new_schedules([0x0000, 0x0003, 0x0004], [0x000E, 0x0005, 0x000C], [0x03A6, 0x035F, 0x03A6, 0x035F, 0x03A6, 0x035F]);
 		0xFF67->run_schedule();
 		0xFF67->clear_item_say();
@@ -51216,12 +51264,12 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 void Func049A object#(0x49A) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hail, Gwani!@");
 		Func097F(0xFF66, "@Noocha Ta, Avatar!@", 0x0003);
 		0xFF66->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF66->run_schedule();
 		0xFF66->clear_item_say();
 		0xFF66->show_npc_face0(0x0000);
@@ -51290,7 +51338,7 @@ void Func049B object#(0x49B) () {
 	var0000 = Func0954();
 	var0001 = Func0953();
 	var0002 = Func0942(0xFF64);
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if ((Func0994() != 0x0007) || (0xFF65->get_item_flag(DEAD) || (0xFF64->get_item_flag(DEAD) || (!gflags[0x02BE])))) {
 			abort;
 		}
@@ -51307,13 +51355,13 @@ void Func049B object#(0x49B) () {
 		}
 		abort;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hello.@");
 		0xFF65->Func07D1();
 		Func097F(0xFF65, "@Speaking to me?@", 0x0002);
 		0xFF65->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF65->run_schedule();
 		0xFF65->show_npc_face0(0x0000);
 		0xFF65->set_item_flag(MET);
@@ -51549,20 +51597,20 @@ void Func049C object#(0x49C) () {
 
 	var0000 = Func0954();
 	var0001 = Func0953();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hello.@");
 		0xFF64->Func07D1();
 		Func097F(0xFF64, "@Speaking to me?@", 0x0002);
 		0xFF64->set_schedule_type(0x0003);
 	}
-	if ((event == 0x0000) && (0xFF64->get_schedule_type() == 0x0007)) {
+	if ((event == PROXIMITY) && (0xFF64->get_schedule_type() == 0x0007)) {
 		if (UI_get_random(0x000A) < 0x0007) {
 			abort;
 		}
 		var0002 = ["@Leave us!@", "@Go thy way!@", "@Do not steal...@", "@I am destiny.@", "@Ignore the others.@", "@I am Master here.@"];
 		Func097F(0xFF64, var0002[UI_get_random(UI_get_array_size(var0002))], 0x0000);
 	}
-	if ((event == 0x0007) && 0xFF64->get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && 0xFF64->get_item_flag(SI_TOURNAMENT)) {
 		if (gflags[0x02BC]) {
 			var0003 = script Func09A0(0x0005, 0x0001) after 50 ticks {
 				nohalt;
@@ -51577,7 +51625,7 @@ void Func049C object#(0x49C) () {
 			0xFF65->set_schedule_type(0x0003);
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF64->run_schedule();
 		0xFF64->clear_item_say();
 		0xFF64->show_npc_face0(0x0000);
@@ -51685,7 +51733,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 void Func049D object#(0x49D) () {
 	var var0000;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (0xFF64->get_item_flag(DEAD) || ((Func0994() != 0x0007) || (0xFF63->get_item_flag(DEAD) || (0xFF63->get_npc_id() > 0x0003)))) {
 			abort;
 		}
@@ -51702,7 +51750,7 @@ void Func049D object#(0x49D) () {
 		}
 		abort;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Pardon me...@");
 		0xFF63->Func07D1();
 		if (0xFF64->npc_nearby()) {
@@ -51726,7 +51774,7 @@ extern void Func09AD 0x9AD (var var0000);
 void Func049E object#(0x49E) () {
 	var var0000;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (0xFF64->get_item_flag(DEAD) || ((Func0994() != 0x0007) || (0xFF62->get_item_flag(DEAD) || (0xFF62->get_npc_id() > 0x0004)))) {
 			abort;
 		}
@@ -51744,7 +51792,7 @@ void Func049E object#(0x49E) () {
 		}
 		abort;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Greetings!@");
 		0xFF62->clear_item_say();
 		0xFF62->Func07D1();
@@ -51789,7 +51837,7 @@ void Func049F object#(0x49F) () {
 	var0001 = Func0954();
 	var0002 = Func0953();
 	var0003 = Func097D(0xFE9B, 0x0001, 0x01C2, 0xFE99, 0x0000);
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (0xFF61->get_item_flag(SI_ZOMBIE)) {
 			Func09AC(0xFF61, 0xFFFF, 0x0000, 0x0003);
 		} else {
@@ -51808,13 +51856,13 @@ void Func049F object#(0x49F) () {
 			};
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Greetings, old man...@");
 		0xFF61->Func07D1();
 		Func097F(0xFF61, "@Who calleth me old?@", 0x0002);
 		0xFF61->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF61->run_schedule();
 		0xFF61->clear_item_say();
 		0xFF61->show_npc_face0(0x0000);
@@ -52087,7 +52135,7 @@ void Func04A0 object#(0x4A0) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0003 = find_nearby(0x025F, 0x0000, 0x0010);
 		for (var0006 in var0003 with var0004 to var0005) {
 			var0007 = var0006->get_item_frame();
@@ -52149,7 +52197,7 @@ void Func04A0 object#(0x4A0) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFED6->show_npc_face0(0x0000);
 		if (gflags[0x023B]) {
 			say("\"Yes, felon?\"");
@@ -52202,13 +52250,13 @@ void Func04A0 object#(0x4A0) () {
 		UI_remove_npc_face0();
 		item_say("@Goodbye, felon!@");
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0010 = script item {
 			wait 2;
 			call Func04A0;
 		};
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var000D = get_object_position();
 		while (var000D[0x0003] > 0x0000) {
 			var000D[0x0001] -= 0x0001;
@@ -52255,7 +52303,7 @@ void Func04A1 object#(0x4A1) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0003 = UI_die_roll(0x0001, 0x0003);
 		if (var0003 == 0x0001) {
 			0xFF5F->item_say("@Healing potions!@");
@@ -52267,7 +52315,7 @@ void Func04A1 object#(0x4A1) () {
 			0xFF5F->item_say("@Bandages!@");
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF5F->Func07D1();
 		0xFED6->show_npc_face0(0x0000);
 		say("\"Greetings, felon!\"");
@@ -52289,7 +52337,7 @@ void Func04A1 object#(0x4A1) () {
 			return;
 		}
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		var0005 = get_object_position();
 		while (var0005[0x0003] > 0x0000) {
 			var0005[0x0001] -= 0x0001;
@@ -52329,7 +52377,7 @@ void Func04A2 object#(0x4A2) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		item_say("@Well done!@");
 		0xFF5E->Func07D1();
 		var0003 = script item {
@@ -52337,7 +52385,7 @@ void Func04A2 object#(0x4A2) () {
 			call Func04A2;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFED6->show_npc_face0(0x0000);
 		say("\"Thou hast made it this far... Dost thou wish to purchase food or healing potions?\"");
 		if (Func0955() == true) {
@@ -52356,7 +52404,7 @@ void Func04A2 object#(0x4A2) () {
 			abort;
 		}
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		0xFED6->show_npc_face0(0x0000);
 		say("\"Congratulations, ",
 			var0000,
@@ -52399,13 +52447,13 @@ void Func04A3 object#(0x4A3) () {
 	var var0017;
 	var var0018;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = script 0xFF5D {
 			call Func04A3;
 		};
 		Func097F(0xFF5D, "@Die, mortal!@", 0x0002);
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (get_item_shape() == 0x0331) {
 			var0001 = UI_die_roll(0x0001, 0x0003);
 			if ((var0001 == 0x0001) && (gflags[0x023A] == false)) {
@@ -52698,7 +52746,7 @@ void Func04A5 object#(0x4A5) () {
 	var var0000;
 	var var0001;
 
-	if ((event == 0x0007) && 0xFF5B->get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && 0xFF5B->get_item_flag(SI_TOURNAMENT)) {
 		var0000 = get_cont_items(0x0326, 0xFE99, 0xFE99);
 		if (var0000) {
 			0xFF5B->clear_item_flag(SI_TOURNAMENT);
@@ -52726,7 +52774,7 @@ void Func04A5 object#(0x4A5) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if ((gflags[0x023A] == false) && (gflags[0x00CF] == true)) {
 			if (!Func099D(item)) {
 				Func08AF(item, 0x0000);
@@ -52779,13 +52827,13 @@ void Func04A8 object#(0x4A8) () {
 	} else {
 		var0004 = "evening";
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hello!@");
 		0xFF58->Func07D1();
 		Func097F(0xFF58, (("@Felicitations, " + var0000) + ".@"), 0x0002);
 		0xFF58->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF58->run_schedule();
 		0xFF58->clear_item_say();
 		0xFF58->show_npc_face0(0x0000);
@@ -53154,12 +53202,12 @@ void Func04A8 object#(0x4A8) () {
 				abort;
 		}
 	}
-	if (event == 0x000E) {
+	if (event == SI_PATH_FAILURE) {
 		Func097F(0xFF58, "@Eeek! A spider!@", 0x0002);
 		Func097F(0xFF58, "@Kill it, Avatar!@", 0x0016);
 		abort;
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		var000A = 0xFE9C->find_nearest(0x0313, 0x0003);
 		var000B = 0xFF58->find_nearest(0x0313, 0x0003);
 		if (var000A && var000B) {
@@ -53200,7 +53248,7 @@ void Func04A8 object#(0x4A8) () {
 		}
 		0xFF58->set_schedule_type(0x001F);
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x0007]) {
 			gflags[0x0007] = false;
 			0xFF58->show_npc_face0(0x0000);
@@ -53275,7 +53323,7 @@ void Func04A9 object#(0x4A9) () {
 	var var0009;
 	var var000A;
 
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF57->clear_item_say();
 		var0000 = Func099F(0x034A, 0xFE99, 0x000F);
 		var0001 = Func099F(0x034A, 0xFE99, 0x0008);
@@ -53308,7 +53356,7 @@ void Func04A9 object#(0x4A9) () {
 			Func08AE();
 		}
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		var0003 = 0xFF57->get_object_position() & (0xFE99 & 0x0006);
 		var0004 = var0003->find_nearby(0x0113, 0x0001, 0x0010);
 		if (var0004) {
@@ -53351,7 +53399,7 @@ void Func04A9 object#(0x4A9) () {
 			}
 		}
 	}
-	if (event == 0x000B) {
+	if (event == PATH_FAILURE) {
 		var0006 = find_nearest(0x00E9, 0x0005);
 		if (var0006) {
 			var0002 = var0006->get_object_position();
@@ -53361,7 +53409,7 @@ void Func04A9 object#(0x4A9) () {
 		0xFF57->remove_npc();
 		Func09AA();
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (get_item_shape() == 0xFF57->get_item_shape()) {
 			var0003 = 0xFF57->get_object_position() & (0xFE99 & 0x0000);
 			var0004 = var0003->find_nearby(0x025F, 0x0014, 0x0010);
@@ -53369,17 +53417,17 @@ void Func04A9 object#(0x4A9) () {
 				var0007 = 0xFFFF;
 				var0008 = 0xFFFF;
 				var0009 = 0xFFFD;
-				Func090E(0xFF57, var0004, var0007, var0008, var0009, Func04A9, 0xFF57->get_npc_object(), 0x000B, false);
-				UI_set_path_failure(Func04A9, item, 0x000B);
+				Func090E(0xFF57, var0004, var0007, var0008, var0009, Func04A9, 0xFF57->get_npc_object(), PATH_FAILURE, false);
+				UI_set_path_failure(Func04A9, item, PATH_FAILURE);
 			}
 		} else {
 			Func08AE();
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		item_say("@Leave me be!@");
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		if (gflags[0x0236] || gflags[0x0237]) {
 			var0002 = get_object_position();
 			UI_sprite_effect(0x0009, (var0002[0x0001] - 0x0001), (var0002[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -53399,7 +53447,7 @@ void Func04A9 object#(0x4A9) () {
 		0xFE9C->set_schedule_type(0x001F);
 		Func08AE();
 	}
-	if (event == 0x0008) {
+	if (event == BG_PATH_FAILURE) {
 		if (gflags[0x0236]) {
 			0xFF57->set_polymorph(0x01F2);
 		} else if (gflags[0x0237]) {
@@ -53472,7 +53520,7 @@ void Func04AA object#(0x4AA) () {
 		var000A = "her";
 		var000B = "she";
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var000C = find_nearby(0x0313, 0x000A, 0x0000);
 		var000D = var000C->get_item_quality();
 		if ((var000D == 0x0047) && (gflags[0x01FE] == false)) {
@@ -53505,7 +53553,7 @@ void Func04AA object#(0x4AA) () {
 			abort;
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Greetings, fine Gargoyle!@");
 		0xFF56->Func07D1();
 		Func097F(0xFF56, "@To say greetings.@", 0x0002);
@@ -53520,14 +53568,14 @@ void Func04AA object#(0x4AA) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (item == 0xFF56->get_npc_object()) {
-			event = 0x0009;
+			event = STARTED_TALKING;
 		} else {
 			Func087A();
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF56->run_schedule();
 		0xFF56->clear_item_say();
 		0xFF56->show_npc_face0(0x0000);
@@ -53896,7 +53944,7 @@ void Func04AA object#(0x4AA) () {
 }
 
 void Func04AB object#(0x4AB) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		item_say("@Save us, stranger!@");
 	}
 }
@@ -53904,33 +53952,33 @@ void Func04AB object#(0x4AB) () {
 void Func04AC object#(0x4AC) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (0xFF54->get_schedule_type() == 0x0004) {
 			item_say("@Later...@");
 		} else {
 			item_say("@Not the left button!@");
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0000 = "@Thou art so manly!@" & ("@Kiss me!@" & ("@Let us do it again...@" & ("@Come closer...@" & ("@Oh, Shamino!@" & "@I am overcome...@"))));
 		item_say(var0000[UI_get_random(UI_get_array_size(var0000))]);
 	}
 }
 
 void Func04AD object#(0x4AD) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		item_say("@Please free me...@");
 	}
 }
 
 void Func04AE object#(0x4AE) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		item_say("@Thy friend lies...@");
 	}
 }
 
 void Func04AF object#(0x4AF) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		item_say("@Spare us!@");
 	}
 }
@@ -53948,10 +53996,10 @@ void Func04B0 object#(0x4B0) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF50->item_say("@Water, please!@");
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF50->set_schedule_type(0x0007);
 		0xFF50->item_say("@Water, please!@");
 		var0000 = script 0xFF50 after 80 ticks {
@@ -53959,13 +54007,13 @@ void Func04B0 object#(0x4B0) () {
 			call Func04B0;
 		};
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		var0001 = UI_die_roll(0x0001, 0x0003);
 		var0002 = ["Give me some water!", "Water! I'm thirsty!", "I must have water!"];
 		var0003 = var0002[var0001];
 		0xFF50->item_say(var0003);
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0004 = find_nearby(0xFE99, 0x0028, 0x0008);
 		for (var0007 in var0004 with var0005 to var0006) {
 			if (!var0007->get_item_flag(IN_PARTY)) {
@@ -53983,10 +54031,10 @@ void Func04B1 object#(0x4B1) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF4F->item_say("@I need water!@");
 	}
-	if ((event == 0x0009) || (event == 0x0000)) {
+	if ((event == STARTED_TALKING) || (event == PROXIMITY)) {
 		var0000 = UI_die_roll(0x0001, 0x0003);
 		var0001 = ["Water! Please!", "I beseech thee!", "My throat is so dry..."];
 		var0002 = var0001[var0000];
@@ -54020,7 +54068,7 @@ void Func04B2 object#(0x4B2) () {
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
 	var0003 = false;
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFE9C->clear_item_flag(DONT_MOVE);
 		var0004 = 0xFE9C->find_nearby(0x0178, 0x0019, 0x0000);
 		if (var0004) {
@@ -54079,10 +54127,10 @@ void Func04B2 object#(0x4B2) () {
 						var0005 = var0008->get_object_position();
 						var0005[0x0001] -= 0x0001;
 						var0005[0x0002] += 0x0001;
-						0xFE9C->si_path_run_usecode(var0005, 0x000A, var0008, Func04B2, true);
+						0xFE9C->si_path_run_usecode(var0005, PATH_SUCCESS, var0008, Func04B2, true);
 						var0009 = Func09A0(0x0000, 0x0001);
 						var0005[0x0001] -= 0x0002;
-						0xFF4E->si_path_run_usecode(var0005, 0x000B, var0009, Func04B2, false);
+						0xFF4E->si_path_run_usecode(var0005, PATH_FAILURE, var0009, Func04B2, false);
 					} else {
 						0xFE9C->clear_item_flag(DONT_MOVE);
 					}
@@ -54144,10 +54192,10 @@ void Func04B2 object#(0x4B2) () {
 						var0005 = var0008->get_object_position();
 						var0005[0x0001] -= 0x0001;
 						var0005[0x0002] += 0x0001;
-						0xFE9C->si_path_run_usecode(var0005, 0x000A, var0008, Func04B2, true);
+						0xFE9C->si_path_run_usecode(var0005, PATH_SUCCESS, var0008, Func04B2, true);
 						var0009 = Func09A0(0x0000, 0x0001);
 						var0005[0x0001] -= 0x0002;
-						0xFF4E->si_path_run_usecode(var0005, 0x000B, var0009, Func04B2, false);
+						0xFF4E->si_path_run_usecode(var0005, PATH_FAILURE, var0009, Func04B2, false);
 					} else {
 						0xFE9C->clear_item_flag(DONT_MOVE);
 					}
@@ -54187,10 +54235,10 @@ void Func04B2 object#(0x4B2) () {
 						var0005 = var0008->get_object_position();
 						var0005[0x0001] -= 0x0001;
 						var0005[0x0002] += 0x0001;
-						0xFE9C->si_path_run_usecode(var0005, 0x000A, var0008, Func04B2, true);
+						0xFE9C->si_path_run_usecode(var0005, PATH_SUCCESS, var0008, Func04B2, true);
 						var0009 = Func09A0(0x0000, 0x0001);
 						var0005[0x0001] -= 0x0002;
-						0xFF4E->si_path_run_usecode(var0005, 0x000B, var0009, Func04B2, false);
+						0xFF4E->si_path_run_usecode(var0005, PATH_FAILURE, var0009, Func04B2, false);
 					} else {
 						0xFE9C->clear_item_flag(DONT_MOVE);
 					}
@@ -54199,17 +54247,17 @@ void Func04B2 object#(0x4B2) () {
 
 		}
 	}
-	if (event == 0x000E) {
+	if (event == SI_PATH_FAILURE) {
 		var000A = get_item_shape();
 		if (var000A == 0x0360) {
-			event = 0x000A;
+			event = PATH_SUCCESS;
 		} else if (var000A == 0x01D1) {
-			event = 0x000D;
+			event = SI_PATH_SUCCESS;
 		} else {
 			abort;
 		}
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		var0008 = 0xFE9C->find_nearby(0x0360, 0x000A, 0x0000);
 		Func09AA();
 		var0005 = 0xFF4E->get_object_position();
@@ -54225,7 +54273,7 @@ void Func04B2 object#(0x4B2) () {
 		};
 		abort;
 	}
-	if (event == 0x000D) {
+	if (event == SI_PATH_SUCCESS) {
 		var0005 = 0xFF4E->get_object_position();
 		UI_sprite_effect(0x001A, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		0xFF4E->remove_npc();
@@ -54275,17 +54323,17 @@ void Func04B3 object#(0x4B3) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0003 = "@I like this place!@" & ("@Pleasure me, woman!@" & ("@Dance, dance, dance!@" & ("@Now!@" & ("@Come to me!@" & "@Thou art beautiful...@"))));
 		item_say(var0003[UI_get_random(UI_get_array_size(var0003))]);
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Old friend...@");
 		0xFF4D->Func07D1();
 		Func097F(0xFF4D, "@What dost thou wish?@", 0x0002);
 		0xFF4D->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF4D->clear_item_say();
 		if (0xFE9C->get_item_flag(DONT_MOVE)) {
 			var0004 = Func09A0(0x0000, 0x0001);
@@ -54372,7 +54420,7 @@ void Func04B3 object#(0x4B3) () {
 							var0007 = var000C->get_object_position();
 							var0007[0x0001] += 0x0001;
 							0xFF4D->set_npc_id(0x0001);
-							0xFF4D->si_path_run_usecode(var0007, 0x000D, 0xFF4D->get_npc_object(), Func04B3, true);
+							0xFF4D->si_path_run_usecode(var0007, SI_PATH_SUCCESS, 0xFF4D->get_npc_object(), Func04B3, true);
 						}
 					}
 					abort;
@@ -54402,7 +54450,7 @@ void Func04B3 object#(0x4B3) () {
 				remove("discovery");
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x01EE]) {
 			0xFFFE->show_npc_face0(0x0000);
 			say("\"See, Avatar? When I press this button, the women become so friendly towards me...\"");
@@ -54420,8 +54468,8 @@ void Func04B3 object#(0x4B3) () {
 				if (var0006) {
 					var0007 = var0006->get_object_position();
 					0xFF4D->set_npc_id(0x0000);
-					0xFF4D->si_path_run_usecode([(var0007[0x0001] + 0x0001), var0007[0x0002], var0007[0x0003]], 0x000A, item, Func04B3, true);
-					0xFF54->si_path_run_usecode([(var0007[0x0001] + 0x0001), (var0007[0x0002] + 0x0002), var0007[0x0003]], 0x000A, item, Func04B3, true);
+					0xFF4D->si_path_run_usecode([(var0007[0x0001] + 0x0001), var0007[0x0002], var0007[0x0003]], PATH_SUCCESS, item, Func04B3, true);
+					0xFF54->si_path_run_usecode([(var0007[0x0001] + 0x0001), (var0007[0x0002] + 0x0002), var0007[0x0003]], PATH_SUCCESS, item, Func04B3, true);
 				}
 			}
 			Func097F(0xFE9C, "@Hey, come back!@", 0x0003);
@@ -54435,31 +54483,31 @@ void Func04B3 object#(0x4B3) () {
 		UI_remove_npc_face0();
 		abort;
 	}
-	if (event == 0x000E) {
+	if (event == SI_PATH_FAILURE) {
 		var0010 = get_item_shape();
 		if (var0010 == 0x0378) {
-			event = 0x0007;
+			event = DEATH;
 		}
 		if ((var0010 == 0x02D1) && (gflags[0x0202] == true)) {
-			event = 0x0007;
+			event = DEATH;
 		}
 		if ((var0010 == 0x01E7) && (0xFF4D->get_npc_id() == 0x0001)) {
-			event = 0x000D;
+			event = SI_PATH_SUCCESS;
 		}
 		if ((var0010 == 0x01E7) && (0xFF4D->get_npc_id() == 0x0000)) {
-			event = 0x000A;
+			event = PATH_SUCCESS;
 		}
 		if (var0010 == 0x028C) {
-			event = 0x000A;
+			event = PATH_SUCCESS;
 		}
 	}
-	if (event == 0x000D) {
+	if (event == SI_PATH_SUCCESS) {
 		var0005 = script 0xFF4D {
 			call Func072A;
 		};
 		abort;
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		if (gflags[0x0202]) {
 			var0011 = 0xFF4D->get_object_position();
 			var0012 = 0xFF54->get_object_position();
@@ -54473,7 +54521,7 @@ void Func04B3 object#(0x4B3) () {
 		}
 		abort;
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		if (gflags[0x0202]) {
 			var0013 = 0xFE9C->get_object_position();
 			var0012 = 0xFF53->get_object_position();
@@ -54490,13 +54538,14 @@ void Func04B3 object#(0x4B3) () {
 				var0007 = var0006->get_object_position();
 				var0007[0x0001] += 0x0001;
 				var0007[0x0002] -= 0x0002;
-				0xFE9C->si_path_run_usecode(var0007, 0x0007, 0xFE9C->get_npc_object(), Func04B3, true);
+				// BUG: This should use PATH_SUCCESS instead of BG_PATH_SUCCESS.
+				0xFE9C->si_path_run_usecode(var0007, BG_PATH_SUCCESS, 0xFE9C->get_npc_object(), Func04B3, true);
 			}
 			gflags[0x0202] = true;
 		}
 		abort;
 	}
-	if (event == 0x000B) {
+	if (event == PATH_FAILURE) {
 		var0014 = get_npc_number();
 		var0007 = var0014->get_object_position();
 		var0014->remove_npc();
@@ -54549,13 +54598,13 @@ void Func04B4 object#(0x4B4) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	if ((event == 0x0001) && (gflags[0x01F3] == true)) {
+	if ((event == DOUBLECLICK) && (gflags[0x01F3] == true)) {
 		0xFF4C->show_npc_face0(0x0000);
 		say("\"No time to talk, Avatar. There is exploring to be done!\"");
 		UI_remove_npc_face0();
 		abort;
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		if (Func097D(item, 0xFE99, 0x025C, 0xFE99, 0xFE99)) {
 			Func094F(item, ["@Look!@", "@A glass sword!@", "@So much treasure!@"]);
 		} else {
@@ -54565,19 +54614,19 @@ void Func04B4 object#(0x4B4) () {
 			}
 		}
 	}
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (gflags[0x01F3] && (!gflags[0x01ED])) {
 			item->Func07F7();
 		} else {
 			Func09C1();
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFF4C->move_object([0x00A7, 0x0655, 0x0000]);
 		0xFF4C->set_new_schedules(0x0000, 0x0003, [0x00A6, 0x0664]);
 		set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF4C->set_new_schedules(0x0000, 0x0007, [0x00AB, 0x0631]);
 		0xFF4C->run_schedule();
 		0xFE9C->clear_item_flag(DONT_MOVE);
@@ -54775,7 +54824,7 @@ void Func04B5 object#(0x4B5) () {
 	var0004 = Func097D(0xFE9B, 0x0001, 0x0289, 0xFE99, 0x0003);
 	var0005 = Func097D(0xFE9B, 0x0001, 0x0289, 0xFE99, 0x000B);
 	var0006 = 0xFF4B->get_npc_id();
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if ((var0006 == 0x0001) || ((var0006 == 0x0007) || (var0006 == 0x0008))) {
 			if (var0006 == 0x0001) {
 				0xFF4B->set_npc_id(0x0000);
@@ -54808,7 +54857,7 @@ void Func04B5 object#(0x4B5) () {
 			};
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func097F(0xFE9C, "@Excuse me...@", 0x0000);
 		Func097F(0xFF4B, "@Who art thou?@", 0x0002);
 		var0007 = script 0xFF4B {
@@ -54817,7 +54866,7 @@ void Func04B5 object#(0x4B5) () {
 		0xFF4B->set_schedule_type(0x0003);
 		0xFF4B->Func07D1();
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF4B->run_schedule();
 		0xFF4B->clear_item_say();
 		0xFF4B->show_npc_face0(0x0000);
@@ -54935,13 +54984,13 @@ void Func04B6 object#(0x4B6) () {
 	var0002 = Func0953();
 	var0003 = Func097D(0xFE9B, 0x0001, 0x0289, 0xFE99, 0x000A);
 	var0004 = 0xFFF0->get_item_flag(MET);
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func097F(0xFE9C, "@Hello, there!@", 0x0000);
 		Func097F(0xFF4A, "@Yes?@", 0x0002);
 		0xFF4A->set_schedule_type(0x0003);
 		0xFF4A->Func07D1();
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x0211]) {
 			UI_fade_palette(0x000C, 0x0001, 0x0000);
 			UI_play_music(0x0016, Func09A0(0x0005, 0x0001));
@@ -55037,7 +55086,7 @@ void Func04B6 object#(0x4B6) () {
 		}
 		abort;
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF4A->run_schedule();
 		0xFF4A->clear_item_say();
 		0xFF4A->show_npc_face0(0x0000);
@@ -55353,10 +55402,10 @@ void Func04B7 object#(0x4B7) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF49->item_say("@Dammit, I need water!@");
 	}
-	if ((event == 0x0009) || (event == 0x0000)) {
+	if ((event == STARTED_TALKING) || (event == PROXIMITY)) {
 		var0000 = UI_die_roll(0x0001, 0x0003);
 		var0001 = ["Just a drop!", "Water, dammit!", "I have to have water!!!"];
 		var0002 = var0001[var0000];
@@ -55378,13 +55427,13 @@ void Func04B8 object#(0x4B8) () {
 	var0000 = 0xFF48->get_npc_id();
 	var0001 = Func0954();
 	var0002 = Func0953();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@May we speak?@");
 		0xFF48->Func07D1();
 		Func097F(0xFF48, (("@Yes, " + var0001) + "?@"), 0x0002);
 		0xFF48->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF48->run_schedule();
 		0xFF48->show_npc_face0(0x0000);
 		say("\"What... hath... happened? Where... am I? Who am I?\"");
@@ -55418,7 +55467,7 @@ void Func04BA object#(0x4BA) () {
 		Func0809();
 		abort;
 	}
-	if ((event == 0x0001) && (0xFF46->get_schedule_type() != 0x000F)) {
+	if ((event == DOUBLECLICK) && (0xFF46->get_schedule_type() != 0x000F)) {
 		0xFE9C->item_say("@Hello!@");
 		0xFF46->Func07D1();
 		Func097F(0xFF46, "@Intruder!@", 0x0005);
@@ -55429,7 +55478,7 @@ void Func04BA object#(0x4BA) () {
 			call Func04BA;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (item != 0xFF46->get_npc_object()) {
 			Func097F(0xFF46, "@Intruder!@", 0x0005);
 			0xFF46->Func07D2();
@@ -55477,7 +55526,7 @@ void Func04BC object#(0x4BC) () {
 		Func0809();
 		abort;
 	}
-	if ((event == 0x0001) && (0xFF44->get_schedule_type() != 0x000F)) {
+	if ((event == DOUBLECLICK) && (0xFF44->get_schedule_type() != 0x000F)) {
 		0xFE9C->item_say("@Greetings!@");
 		0xFF44->Func07D1();
 		Func097F(0xFF44, "@Keep away!@", 0x0005);
@@ -55488,7 +55537,7 @@ void Func04BC object#(0x4BC) () {
 			call Func04BC;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (item != 0xFF44->get_npc_object()) {
 			Func097F(0xFF44, "@Keep Away!@", 0x0005);
 			0xFF44->Func07D2();
@@ -55505,7 +55554,7 @@ void Func04BC object#(0x4BC) () {
 			Func097F(0xFF44, "@Be on thy way!@", 0x0000);
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0001 = UI_get_random(0x000A);
 		if (var0001 == 0x0006) {
 			Func097F(0xFF44, "@I asked nicely...@", 0x0000);
@@ -55529,13 +55578,13 @@ void Func04BD object#(0x4BD) () {
 		Func0809();
 		abort;
 	}
-	if ((event == 0x0001) && (0xFF43->get_schedule_type() != 0x000F)) {
+	if ((event == DOUBLECLICK) && (0xFF43->get_schedule_type() != 0x000F)) {
 		0xFE9C->item_say("@Hello!@");
 		0xFF43->Func07D1();
 		Func097F(0xFF43, "@Die, fool!@", 0x0005);
 		Func09AD(0xFF43);
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (item != 0xFF43->get_npc_object()) {
 			Func097F(0xFF43, "@Die, intruder!@", 0x0005);
 			Func09AD(0xFF43);
@@ -55560,7 +55609,7 @@ void Func04BE object#(0x4BE) () {
 		Func0809();
 		abort;
 	}
-	if ((event == 0x0001) && (0xFF42->get_schedule_type() != 0x000F)) {
+	if ((event == DOUBLECLICK) && (0xFF42->get_schedule_type() != 0x000F)) {
 		0xFE9C->item_say("@Pardon me...@");
 		0xFF42->Func07D1();
 		Func097F(0xFF42, "@Hold!@", 0x0005);
@@ -55571,7 +55620,7 @@ void Func04BE object#(0x4BE) () {
 			call Func04BE;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (item != 0xFF42->get_npc_object()) {
 			Func097F(0xFF42, "@Hold!@", 0x0005);
 			0xFF42->Func07D2();
@@ -55700,7 +55749,7 @@ void Func04C9 object#(0x4C9) () {
 	var var0002;
 
 	var0000 = 0xFF37->get_item_flag(MET);
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		0xFFC0->show_npc_face0(0x0000);
 		say("\"Why dost thou attack me? Do thine eyes deceive thee so?\" *\"Slay the foul bane that wishes to devour me instead! If it is not stopped, it will destroy us all!\" *\"I can stand this nightmare no more...\"");
 		UI_remove_npc_face0();
@@ -55709,7 +55758,7 @@ void Func04C9 object#(0x4C9) () {
 		UI_sprite_effect(0x001B, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		0xFF37->remove_npc();
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0002 = UI_die_roll(0x0001, 0x0004);
 		if (var0002 == 0x0001) {
 			Func097F(0xFF37, "@Make it stop!@", 0x0000);
@@ -55724,7 +55773,7 @@ void Func04C9 object#(0x4C9) () {
 			Func097F(0xFF37, "@It is pure evil!@", 0x0000);
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (var0000 != true) {
 			0xFFC0->show_npc_face0(0x0000);
 			say("\"Iieeeee.... Help me!\" ~\"I cannot escape...\" ~\"It will catch and devour me!\" *\"Canst thou not see it? Please, help me!\"");
@@ -55765,7 +55814,7 @@ void Func04CA object#(0x4CA) () {
 		abort;
 	}
 	var0000 = 0xFF36->get_item_flag(MET);
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF36->clear_item_say();
 		0xFED6->show_npc_face0(0x0000);
 		if (!var0000) {
@@ -55915,20 +55964,20 @@ extern void Func07D1 object#(0x7D1) ();
 extern void Func0919 0x919 (var var0000);
 
 void Func04CB object#(0x4CB) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("Excuse me...");
 		0xFF35->Func07D1();
 		Func0919(item);
 	}
-	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		clear_item_flag(SI_TOURNAMENT);
 		reduce_health(0x0032, 0x0000);
 		Func0919(item);
 	}
-	if ((event == 0x000D) || (event == 0x000E)) {
+	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
 		set_schedule_type(0x000F);
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFF35->Func07D1();
 		Func0919(item);
 	}
@@ -55938,12 +55987,12 @@ extern void Func07D1 object#(0x7D1) ();
 extern void Func0919 0x919 (var var0000);
 
 void Func04CC object#(0x4CC) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("Excuse me...");
 		0xFF34->Func07D1();
 		Func0919(item);
 	}
-	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		Func0919(item);
 		clear_item_flag(SI_TOURNAMENT);
 		reduce_health(0x0032, 0x0000);
@@ -55967,12 +56016,12 @@ void Func04CD object#(0x4CD) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("Could we speak?");
 		0xFF33->Func07D1();
 		Func09AD(0xFF33);
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0003 = 0xFF33->get_distance(0xFE9C);
 		if (UI_get_random(0x000C) > var0003) {
 			Func097F(item, "@'Tis him!@", 0x0005);
@@ -56002,7 +56051,7 @@ void Func04CD object#(0x4CD) () {
 			}
 		}
 	}
-	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		clear_item_flag(SI_TOURNAMENT);
 	}
 }
@@ -56088,7 +56137,7 @@ void Func04CF object#(0x4CF) () {
 		var0002 = "daughter";
 	}
 	var0005 = Func0953();
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x02FD]) {
 			0xFF31->item_say("@What a wonder!@");
 			0xFF31->Func07D1();
@@ -56127,7 +56176,7 @@ void Func04CF object#(0x4CF) () {
 			Func097F(0xFF31, "@Plant it now.@", 0x0002);
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (0xFF31->get_npc_id() != 0x0000) {
 			abort;
 		}
@@ -56136,7 +56185,7 @@ void Func04CF object#(0x4CF) () {
 		Func097F(0xFF31, (("@Yes, my " + var0002) + "?@"), 0x0002);
 		0xFF31->set_schedule_type(0x0003);
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		if ((Func09A0(0x0005, 0x0001)->get_item_quality() == 0x000A) && (!0xFF29->get_item_flag(MET))) {
 			0xFF31->set_schedule_type(0x000F);
 			var0007 = script Func09A0(0x0005, 0x0003) {
@@ -56145,7 +56194,7 @@ void Func04CF object#(0x4CF) () {
 			};
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF31->run_schedule();
 		0xFF31->clear_item_say();
 		0xFF31->show_npc_face0(0x0000);
@@ -56559,7 +56608,7 @@ void Func04CF object#(0x4CF) () {
 			Func08FA();
 		}
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		Func08F5(0xFF31);
 	}
 }
@@ -56571,7 +56620,7 @@ void Func04D0 object#(0x4D0) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF30->set_schedule_type(0x0014);
 		var0000 = 0xFF30->find_nearby(0x00FA, 0x000A, 0x0000);
 		if (0xFF2A->get_npc_object() in var0000) {
@@ -56617,7 +56666,7 @@ void Func04D1 object#(0x4D1) () {
 		var0003 = "daughter";
 	}
 	var0004 = Func0953();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (0xFF31->get_npc_id() != 0x0000) {
 			0xFF2F->item_say("@Be silent...@");
 			abort;
@@ -56627,7 +56676,7 @@ void Func04D1 object#(0x4D1) () {
 		Func097F(0xFF2F, (("@Yes, my " + var0003) + "?@"), 0x0002);
 		0xFF2F->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF2F->run_schedule();
 		0xFF2F->clear_item_say();
 		0xFF2F->show_npc_face0(0x0000);
@@ -56826,7 +56875,7 @@ void Func04D1 object#(0x4D1) () {
 				break;
 		}
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		Func08F5(0xFF2F);
 	}
 }
@@ -56838,7 +56887,7 @@ void Func04D2 object#(0x4D2) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF2E->set_schedule_type(0x0014);
 		var0000 = 0xFF2E->find_nearby(0x00FA, 0x000A, 0x0000);
 		if (0xFF2A->get_npc_object() in var0000) {
@@ -56897,7 +56946,7 @@ void Func04D3 object#(0x4D3) () {
 		var0003 = "daughter";
 	}
 	var0007 = Func0953();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (0xFF31->get_npc_id() != 0x0000) {
 			0xFF2D->item_say("@Not now...@");
 			abort;
@@ -56907,7 +56956,7 @@ void Func04D3 object#(0x4D3) () {
 		Func097F(0xFF2D, (("@Yes, my " + var0003) + "?@"), 0x0002);
 		0xFF2D->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF2D->run_schedule();
 		0xFF2D->clear_item_say();
 		0xFF2D->show_npc_face0(0x0000);
@@ -57078,7 +57127,7 @@ void Func04D3 object#(0x4D3) () {
 				abort;
 		}
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		Func08F5(0xFF2D);
 	}
 }
@@ -57119,7 +57168,7 @@ void Func04D4 object#(0x4D4) () {
 	if (var0001) {
 		var0003 = "daughter";
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x0004]) {
 			0xFE9C->clear_item_flag(DONT_MOVE);
 			UI_init_conversation();
@@ -57171,7 +57220,7 @@ void Func04D4 object#(0x4D4) () {
 		}
 		abort;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (0xFF31->get_npc_id() != 0x0000) {
 			0xFF2C->item_say("@Not now...@");
 			abort;
@@ -57181,7 +57230,7 @@ void Func04D4 object#(0x4D4) () {
 		Func097F(0xFF2C, (("@Yes, my " + var0003) + "?@"), 0x0002);
 		0xFF2C->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF2C->run_schedule();
 		0xFF2C->clear_item_say();
 		0xFF2C->show_npc_face0(0x0000);
@@ -57310,7 +57359,7 @@ void Func04D4 object#(0x4D4) () {
 				break;
 		}
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		Func08F5(0xFF31);
 	}
 }
@@ -57354,7 +57403,7 @@ void Func04D5 object#(0x4D5) () {
 		var0003 = "my daughter";
 		var0004 = "her";
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0005 = 0xFF2B->find_nearby(0xFFFF, 0x0014, 0x0008);
 		var0006 = [];
 		for (var0009 in var0005 with var0007 to var0008) {
@@ -57395,7 +57444,7 @@ void Func04D5 object#(0x4D5) () {
 			Func097F(0xFF2B, "@Peace to all.@", 0x000A);
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (0xFF31->get_npc_id() != 0x0000) {
 			0xFF2B->item_say("@Hush...@");
 			abort;
@@ -57405,7 +57454,7 @@ void Func04D5 object#(0x4D5) () {
 		Func097F(0xFF2B, (("@Yes, " + var0003) + "?@"), 0x0002);
 		0xFF2B->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF2B->run_schedule();
 		0xFF2B->clear_item_say();
 		0xFF2B->show_npc_face0(0x0000);
@@ -57594,7 +57643,7 @@ void Func04D5 object#(0x4D5) () {
 				break;
 		}
 	}
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		Func08F5(0xFF2B);
 	}
 }
@@ -57606,7 +57655,7 @@ void Func04D6 object#(0x4D6) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF2A->set_schedule_type(0x0014);
 		var0000 = 0xFF2A->find_nearby(0x00FA, 0x000A, 0x0000);
 		if (0xFF2A->get_npc_object() in var0000) {
@@ -57645,13 +57694,13 @@ void Func04D7 object#(0x4D7) () {
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
 	var0003 = 0xFF29->get_item_flag(MET);
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("Most honored one...");
 		0xFF29->Func07D1();
 		Func097F(0xFF29, "@What?@", 0x0002);
 		0xFF29->set_schedule_type(0x0003);
 	}
-	if ((event == 0x0009) || (event == 0x0002)) {
+	if ((event == STARTED_TALKING) || (event == SCRIPTED)) {
 		0xFF29->set_schedule_type(0x000A);
 		0xFF29->show_npc_face0(0x0000);
 		if (var0003) {
@@ -57892,7 +57941,7 @@ void Func04DA object#(0x4DA) () {
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
 	var0003 = 0xFFD9->get_item_flag(MET);
-	if (event == 0x0007) {
+	if (event == DEATH) {
 		0xFFD9->show_npc_face0(0x0000);
 		say("\"Art thou insane? Why art thou attacking me? This is my dream!\" *\"If I had a two-handed sword, I would make mincemeat of thee!\" *\"I must awaken...\"");
 		UI_remove_npc_face0();
@@ -57901,13 +57950,13 @@ void Func04DA object#(0x4DA) () {
 		UI_sprite_effect(0x0007, var0004[0x0001], var0004[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		0xFF26->remove_npc();
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hail, minstrel!@");
 		0xFF26->Func07D1();
 		Func097F(0xFF26, (("@Greetings, " + var0000) + "!@"), 0x0005);
 		0xFF26->set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFF26->set_schedule_type(0x000C);
 		0xFFD9->show_npc_face0(0x0000);
 		if (var0003 == true) {
@@ -58203,7 +58252,7 @@ void Func04DB object#(0x4DB) () {
 	var var0001;
 
 	var0000 = 0xFFAF->get_item_flag(MET);
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFFAF->show_npc_face0(0x0000);
 		if (var0000 == true) {
 			say("\"Do not interfere with me, Avatar!\" ~\"I am the MageLord now...");
@@ -58239,7 +58288,7 @@ void Func04DB object#(0x4DB) () {
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
 void Func04DE object#(0x4DE) () {
-	if ((event == 0x0007) && 0xFF22->get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && 0xFF22->get_item_flag(SI_TOURNAMENT)) {
 		0xFF22->clear_item_flag(SI_TOURNAMENT);
 		0xFF22->reduce_health(0x0032, 0x0000);
 		if (0xFF58->get_item_flag(IN_PARTY)) {
@@ -58318,10 +58367,10 @@ void Func0510 object#(0x510) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0008) {
+	if (event == BG_PATH_FAILURE) {
 		set_polymorph(0x01F5);
 	}
-	if ((event == 0x000D) || (event == 0x000E)) {
+	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
 		0xFEF0->set_schedule_type(0x000F);
 		var0000 = script 0xFEF0 {
 			nohalt;
@@ -58330,16 +58379,16 @@ void Func0510 object#(0x510) () {
 			say "@To serve thee!@";
 		};
 	}
-	if ((event == 0x0002) && ((gflags[0x0007] == false) && (gflags[0x0254] == false))) {
+	if ((event == SCRIPTED) && ((gflags[0x0007] == false) && (gflags[0x0254] == false))) {
 		gflags[0x0254] = true;
 		0xFEF0->move_object([0x08AF, 0x02C6, 0x0000]);
-		0xFEF0->si_path_run_usecode([0x08A2, 0x02C6, 0x0000], 0x000A, 0xFEF0, Func0510, true);
+		0xFEF0->si_path_run_usecode([0x08A2, 0x02C6, 0x0000], PATH_SUCCESS, 0xFEF0, Func0510, true);
 	}
-	if ((event == 0x0002) && gflags[0x0007]) {
+	if ((event == SCRIPTED) && gflags[0x0007]) {
 		gflags[0x0007] = false;
-		0xFEF0->si_path_run_usecode([0x08B2, 0x02C8, 0x0000], 0x000B, 0xFEF0, Func0510, true);
+		0xFEF0->si_path_run_usecode([0x08B2, 0x02C8, 0x0000], PATH_FAILURE, 0xFEF0, Func0510, true);
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		0xFEEF->show_npc_face0(0x0000);
 		say("\"To meet at last the false hero! To serve my master and to avenge the death of many of my people thou didst slay in ancient times.\" *\"To see thy bones with thy skin burned from thy body! To smell thy flesh as it is eaten away by fire and flame!\" *\"To avenge and to serve my master! To thy death, false hero!\"");
 		UI_remove_npc_face1();
@@ -58352,7 +58401,7 @@ void Func0510 object#(0x510) () {
 		};
 		abort;
 	}
-	if ((event == 0x000B) || (event == 0x000E)) {
+	if ((event == PATH_FAILURE) || (event == SI_PATH_FAILURE)) {
 		var0001 = find_nearby(0x0314, 0x0028, 0x0000);
 		for (var0004 in var0001 with var0002 to var0003) {
 			var0005 = var0004->get_item_quality();
@@ -58390,7 +58439,7 @@ void Func0526 object#(0x526) () {
 	var var000D;
 	var var000E;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 labelFunc0526_0008:
 		Func09AA();
 		0xFEF8->show_npc_face0(0x0000);
@@ -58557,7 +58606,7 @@ labelFunc0526_0008:
 		}
 	}
 	do {
-		if (event != 0x0002) {
+		if (event != SCRIPTED) {
 			break;
 		}
 		if (get_item_shape() == 0x024C) {
@@ -58652,7 +58701,7 @@ extern void Func089E 0x89E ();
 void Func0601 object#(0x601) () {
 	var var0000;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (UI_in_gump_mode()) {
 			UI_close_gumps();
 		}
@@ -58746,7 +58795,7 @@ void Func0603 object#(0x603) () {
 	var var000C;
 	var var000D;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		UI_close_gumps();
 		var0000 = 0xFE9C->find_nearby(0x03BE, 0x0028, 0x0000);
 		if (var0000) {
@@ -58869,10 +58918,10 @@ void Func060A object#(0x60A) () {
 			abort;
 		}
 		if (var0005 == 0x0000) {
-			Func090D(item, [0x0001, 0x0000], [0x0000, 0x0001], 0xFFFF, Func060A, item, 0x000B);
+			Func090D(item, [0x0001, 0x0000], [0x0000, 0x0001], 0xFFFF, Func060A, item, PATH_FAILURE);
 		}
 	}
-	if (event == 0x000B) {
+	if (event == PATH_FAILURE) {
 		var0001->set_item_frame(0x0001);
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		0xFE9B->move_object(var0000);
@@ -59364,7 +59413,7 @@ void Func0612 object#(0x612) () {
 	var var000F;
 	var var0010;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = [0x03B1, 0x03F7, 0x03B2, 0x03B3, 0x03CF, 0x03BD, 0x03D2];
 		var0001 = [0x001E, 0x000C, 0x0008, 0x0018, 0x001E, 0x0017, 0x001E];
 		var0002 = [0x001E, 0x000F, 0x000C, 0x0010, 0x001E, 0x001E, 0x0014];
@@ -59601,7 +59650,7 @@ void Func0615 object#(0x615) () {
 		}
 		abort;
 	}
-	event = 0x0008;
+	event = BG_PATH_FAILURE;
 	var0002 = [0x0004, 0x0006, 0x0002, 0x0005, 0x0006, 0x0006, 0x0001, 0x000C, 0x0018, 0x0010, 0x0018, 0x0018, 0x0004, 0x0008, 0x0010, 0x000A, 0x0002, 0x0003, 0x0002, 0x0001, 0x0004, 0x0003, 0x0001, 0x0018, 0x0003, 0x0001, 0x0009, 0x0002, 0x0014, 0x0008, 0x0006, 0x001F];
 	var0003 = Func099F(0x0179, 0xFE99, 0xFE99);
 	while (var0003) {
@@ -59629,7 +59678,7 @@ void Func0615 object#(0x615) () {
 }
 
 void Func0616 object#(0x616) () {
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		gflags[0x026F] = false;
 	}
 }
@@ -59640,7 +59689,7 @@ void Func0618 object#(0x618) () {
 	var var0002;
 	var var0003;
 
-	if ((event == 0x0002) && ((gflags[0x0007] == false) && ((gflags[0x0008] == false) && ((gflags[0x0009] == false) && (gflags[0x000A] == false))))) {
+	if ((event == SCRIPTED) && ((gflags[0x0007] == false) && ((gflags[0x0008] == false) && ((gflags[0x0009] == false) && (gflags[0x000A] == false))))) {
 		var0000 = [0x0238, 0x0BCA, 0x0000];
 		UI_sprite_effect(0x0011, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_sprite_effect(0x001F, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -59657,7 +59706,7 @@ void Func0618 object#(0x618) () {
 		gflags[0x0008] = true;
 		abort;
 	}
-	if ((event == 0x0002) && (gflags[0x0008] == true)) {
+	if ((event == SCRIPTED) && (gflags[0x0008] == true)) {
 		remove_item();
 		var0000 = [0x0238, 0x0BCA, 0x0000];
 		UI_sprite_effect(0x0011, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -59676,7 +59725,7 @@ void Func0618 object#(0x618) () {
 		gflags[0x0009] = true;
 		abort;
 	}
-	if ((event == 0x0002) && (gflags[0x0009] == true)) {
+	if ((event == SCRIPTED) && (gflags[0x0009] == true)) {
 		remove_item();
 		UI_sprite_effect(0x0011, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_sprite_effect(0x001F, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -59709,7 +59758,7 @@ void Func0618 object#(0x618) () {
 		gflags[0x000A] = true;
 		abort;
 	}
-	if ((event == 0x0002) && (gflags[0x000A] == true)) {
+	if ((event == SCRIPTED) && (gflags[0x000A] == true)) {
 		UI_set_weather(0x0000);
 		0xFE9C->item_say("@By Lord British's Beard!@");
 		0xFE9C->show_npc_face0(0x0000);
@@ -59762,7 +59811,7 @@ void Func0619 object#(0x619) () {
 	if (var0001 == 0x000B) {
 		var0000 = true;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_schedule_type(0x000A);
 		clear_item_say();
 		0xFEC6->show_npc_face0(0x0000);
@@ -59871,7 +59920,7 @@ void Func061A object#(0x61A) () {
 	if (var0001 == 0x000C) {
 		var0000 = true;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_schedule_type(0x000A);
 		clear_item_say();
 		0xFEC8->show_npc_face0(0x0000);
@@ -60000,7 +60049,7 @@ void Func061B object#(0x61B) () {
 	if (var0003 == 0x000D) {
 		var0002 = true;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_schedule_type(0x000A);
 		clear_item_say();
 		0xFEC7->show_npc_face0(0x0000);
@@ -60144,7 +60193,7 @@ void Func061D object#(0x61D) () {
 	var var0009;
 	var var000A;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFE9C->show_npc_face0(0x0000);
 		say("\"Quickly! Surround Batlin!\"");
 		UI_remove_npc_face0();
@@ -60158,7 +60207,7 @@ void Func061D object#(0x61D) () {
 			var0006 = var0005->get_item_frame();
 			if (var0006 == 0x0014) {
 				var0007 = 0xFE9C->get_distance(var0005);
-				0xFE9C->si_path_run_usecode(var0005->get_object_position(), 0x000A, var0005, Func061D, true);
+				0xFE9C->si_path_run_usecode(var0005->get_object_position(), PATH_SUCCESS, var0005, Func061D, true);
 				var0008 = script 0xFE9C after (var0007 + 0x0002) ticks {
 					nohalt;
 					face EAST;
@@ -60166,7 +60215,7 @@ void Func061D object#(0x61D) () {
 			}
 			if (var0006 == 0x0015) {
 				var0007 = 0xFFFD->get_distance(var0005);
-				0xFFFD->si_path_run_usecode(var0005->get_object_position(), 0x000A, var0005, Func061D, true);
+				0xFFFD->si_path_run_usecode(var0005->get_object_position(), PATH_SUCCESS, var0005, Func061D, true);
 				var0008 = script 0xFFFD after (var0007 + 0x0002) ticks {
 					nohalt;
 					face NORTH;
@@ -60174,7 +60223,7 @@ void Func061D object#(0x61D) () {
 			}
 			if (var0006 == 0x0016) {
 				var0007 = 0xFFFE->get_distance(var0005);
-				0xFFFE->si_path_run_usecode(var0005->get_object_position(), 0x000A, var0005, Func061D, true);
+				0xFFFE->si_path_run_usecode(var0005->get_object_position(), PATH_SUCCESS, var0005, Func061D, true);
 				var0008 = script 0xFFFE after (var0007 + 0x0002) ticks {
 					nohalt;
 					face NORTH;
@@ -60182,7 +60231,7 @@ void Func061D object#(0x61D) () {
 			}
 			if (var0006 == 0x0017) {
 				var0007 = 0xFFFF->get_distance(var0005);
-				0xFFFF->si_path_run_usecode(var0005->get_object_position(), 0x000A, var0005, Func061D, true);
+				0xFFFF->si_path_run_usecode(var0005->get_object_position(), PATH_SUCCESS, var0005, Func061D, true);
 				var0008 = script 0xFFFF after (var0007 + 0x0002) ticks {
 					nohalt;
 					face WEST;
@@ -60198,7 +60247,7 @@ void Func061D object#(0x61D) () {
 		};
 		abort;
 	}
-	if ((event == 0x000A) || (event == 0x000E)) {
+	if ((event == PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
 		var0009 = get_object_position();
 		UI_play_sound_effect(0x0082);
 		UI_play_sound_effect(0x0074);
@@ -60228,7 +60277,7 @@ void Func061E object#(0x61E) () {
 		abort;
 	}
 	var0000 = 0xFE9C->get_object_position();
-	if ((event == 0x0002) && ((var0000[0x0001] > 0x0010) && ((var0000[0x0001] < 0x004F) && ((var0000[0x0002] > 0x0660) && (var0000[0x0002] < 0x067A))))) {
+	if ((event == SCRIPTED) && ((var0000[0x0001] > 0x0010) && ((var0000[0x0001] < 0x004F) && ((var0000[0x0002] > 0x0660) && (var0000[0x0002] < 0x067A))))) {
 		var0001 = false;
 		var0002 = [0x0130, 0x02FE, 0x01D5, 0x0378];
 		if (!(0xFF54->get_schedule_type() == 0x0004)) {
@@ -60295,7 +60344,7 @@ void Func0622 object#(0x622) () {
 	var var0016;
 	var var0017;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_get_party_list();
 		var0001 = UI_get_array_size(UI_get_party_list());
 		if (var0001 == 0x0001) {
@@ -60368,7 +60417,7 @@ labelFunc0622_0024:
 		};
 		UI_advance_time(var000C);
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		UI_fade_palette_sleep(0x000C, 0x0001, 0x0001);
 	}
 }
@@ -60383,7 +60432,7 @@ void Func0623 object#(0x623) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = UI_get_party_list();
 		if (UI_get_array_size(var0000) > 0x0001) {
 			var0001 = 0xFE9C->get_npc_name();
@@ -60395,7 +60444,7 @@ void Func0623 object#(0x623) () {
 		0xFE9C->set_item_flag(ASLEEP);
 		0xFE9C->clear_item_flag(ASLEEP);
 		if ((get_item_shape() == 0x03F3) && (get_item_frame() == 0x0015)) {
-			event = 0x0001;
+			event = DOUBLECLICK;
 			item->Func0624();
 		}
 	}
@@ -60408,19 +60457,19 @@ void Func0624 object#(0x624) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var0000 = [0xFFFF, 0xFFFF, 0xFFFF, 0x0000, 0x0000, 0x0000, 0x0001, 0x0001, 0x0001];
 		var0001 = [0x0001, 0x0000, 0xFFFF, 0x0001, 0x0000, 0xFFFF, 0x0001, 0x0000, 0xFFFF];
 		0xFE9C->halt_scheduled();
-		Func090D(item, var0000, var0001, 0xFFFF, Func0624, item, 0x000A);
-		UI_set_path_failure(Func0624, item, 0x0002);
+		Func090D(item, var0000, var0001, 0xFFFF, Func0624, item, PATH_SUCCESS);
+		UI_set_path_failure(Func0624, item, SCRIPTED);
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_item_shape(0x0247);
 		set_item_frame(0x0000);
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		UI_close_gumps();
 		var0002 = script 0xFE9C {
 			face NORTH;
@@ -60481,7 +60530,7 @@ void Func0625 object#(0x625) () {
 	var var001F;
 	var var0020;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_shape();
 		if (get_npc_prop(0x000A)) {
 			var0001 = "her";
@@ -60612,7 +60661,7 @@ labelFunc0625_031E:
 				return;
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0014 = UI_get_party_list();
 		for (var001E in var0014 with var001C to var001D) {
 			var001E->set_schedule_type(0x001F);
@@ -60674,7 +60723,7 @@ void Func0626 object#(0x626) () {
 	var var0013;
 	var var0014;
 
-	if ((event == 0x0002) && gflags[0x000A]) {
+	if ((event == SCRIPTED) && gflags[0x000A]) {
 		0xFE9C->set_item_flag(DONT_MOVE);
 		gflags[0x000A] = false;
 		gflags[0x0009] = true;
@@ -60689,7 +60738,7 @@ void Func0626 object#(0x626) () {
 		Func097F(0xFE9C, "@Ooouch!@", 0x0004);
 		abort;
 	}
-	if ((event == 0x0002) && gflags[0x0009]) {
+	if ((event == SCRIPTED) && gflags[0x0009]) {
 		gflags[0x0009] = false;
 		gflags[0x0008] = true;
 		UI_play_sound_effect(0x0029);
@@ -60702,7 +60751,7 @@ void Func0626 object#(0x626) () {
 		};
 		abort;
 	}
-	if ((event == 0x0002) && gflags[0x0008]) {
+	if ((event == SCRIPTED) && gflags[0x0008]) {
 		gflags[0x0008] = false;
 		gflags[0x0007] = true;
 		UI_play_sound_effect(0x002A);
@@ -60716,7 +60765,7 @@ void Func0626 object#(0x626) () {
 		Func097F(0xFE9C, "@Aaargh!@", 0x0004);
 		abort;
 	}
-	if ((event == 0x0002) && gflags[0x0007]) {
+	if ((event == SCRIPTED) && gflags[0x0007]) {
 		gflags[0x0007] = false;
 		0xFE9C->set_polymorph(0x00EF);
 		UI_play_sound_effect(0x0074);
@@ -60732,7 +60781,7 @@ void Func0626 object#(0x626) () {
 		};
 		abort;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFE9C->clear_item_flag(DONT_MOVE);
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		UI_run_endgame(true);
@@ -60956,7 +61005,7 @@ void Func062A object#(0x62A) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_play_sound_effect2(0x005E, item);
 		book_mode();
 		var0000 = get_item_quality();
@@ -61024,7 +61073,7 @@ void Func062B object#(0x62B) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		var0000 = script 0xFE9C {
 			actor frame bowing;
 			actor frame standing;
@@ -61084,7 +61133,7 @@ extern void Func062C object#(0x62C) ();
 void Func062C object#(0x62C) () {
 	var var0000;
 
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		UI_close_gumps();
 		var0000 = get_container();
 		if (!var0000) {
@@ -61092,7 +61141,7 @@ void Func062C object#(0x62C) () {
 			Func088B(item, Func062C);
 		}
 	}
-	if ((event == 0x0002) || var0000) {
+	if ((event == SCRIPTED) || var0000) {
 		if (get_item_frame() == 0x0000) {
 			Func0889(item);
 		} else {
@@ -61118,7 +61167,7 @@ void Func062D object#(0x62D) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		var0000 = get_container();
 		if (!var0000) {
 			var0001 = Func090C(0xFE9C, item);
@@ -61145,14 +61194,14 @@ void Func062D object#(0x62D) () {
 			UI_close_gumps();
 		}
 	}
-	if ((event == 0x0002) || var0000) {
+	if ((event == SCRIPTED) || var0000) {
 		var0004 = UI_click_on_item();
 		var0005 = var0004->get_item_shape();
 		if (var0005 == 0x028B) {
 			var0006 = [0x0001, 0x0001];
 			var0007 = [0x0000, 0x0000];
 			var0008 = 0xFFFF;
-			Func090D(var0004, var0006, var0007, var0008, Func028B, var0004, 0x000A);
+			Func090D(var0004, var0006, var0007, var0008, Func028B, var0004, PATH_SUCCESS);
 		} else {
 			var0009 = "@Why dost thou not spin that wool into thread?@";
 			Func094A(var0009);
@@ -61177,7 +61226,7 @@ void Func062E object#(0x62E) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		var0000 = get_container();
 		if (!var0000) {
 			var0001 = Func090C(0xFE9C, item);
@@ -61204,14 +61253,14 @@ void Func062E object#(0x62E) () {
 			UI_close_gumps();
 		}
 	}
-	if ((event == 0x0002) || var0000) {
+	if ((event == SCRIPTED) || var0000) {
 		var0004 = UI_click_on_item();
 		var0005 = var0004->get_item_shape();
 		if (var0005 == 0x0105) {
 			var0006 = [0x0000, 0xFFFF, 0xFFFE];
 			var0007 = [0x0001, 0x0001, 0x0001];
 			var0008 = 0xFFFF;
-			Func090D(var0004, var0006, var0007, var0008, Func0105, var0004, 0x000A);
+			Func090D(var0004, var0006, var0007, var0008, Func0105, var0004, PATH_SUCCESS);
 		} else {
 			var0009 = "@Why dost thou not weave cloth with that thread on the loom?@";
 			Func094A(var0009);
@@ -61226,7 +61275,7 @@ void Func062F object#(0x62F) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = UI_die_roll(0x0001, 0x000A);
 		var0001 = UI_die_roll(0x0001, 0x000A);
 		if (UI_die_roll(0x0001, 0x0002) == 0x0001) {
@@ -61250,7 +61299,7 @@ void Func0631 object#(0x631) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		var0000 = get_item_quality();
 		var0001 = find_nearby(0x0366, 0x000F, 0x0000);
 		var0002 = find_nearby(0x0203, 0x000F, 0x0000);
@@ -61283,7 +61332,7 @@ void Func0631 object#(0x631) () {
 		}
 		Func09BE(item, true);
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		Func09BE(item, true);
 	}
 }
@@ -61324,7 +61373,7 @@ void Func0632 object#(0x632) () {
 		var0002 = "her";
 		var0003 = "her";
 	}
-	if ((event == 0x0002) && (gflags[0x0007] == false)) {
+	if ((event == SCRIPTED) && (gflags[0x0007] == false)) {
 		var0004 = [0x0A3B, 0x0A25, 0x0A3B, 0x0A28, 0x0A3E, 0x0A27];
 		var0005 = 0x0001;
 		while (var0005 <= 0x0003) {
@@ -61352,7 +61401,7 @@ void Func0632 object#(0x632) () {
 		};
 		abort;
 	}
-	if ((event == 0x0002) && (gflags[0x0007] == true)) {
+	if ((event == SCRIPTED) && (gflags[0x0007] == true)) {
 		gflags[0x0007] = false;
 		0xFEC6->show_npc_face0(0x0000);
 		say("\"Blast! The Amulet seems to be protecting ",
@@ -61394,7 +61443,7 @@ extern void Func09AC 0x9AC (var var0000, var var0001, var var0002, var var0003);
 void Func0633 object#(0x633) () {
 	var var0000;
 
-	if (!((event == 0x0001) || (event == 0x0002))) {
+	if (!((event == DOUBLECLICK) || (event == SCRIPTED))) {
 		// Need to make UCC optimize this
 		goto labelFunc0633_0128;
 	}
@@ -61473,7 +61522,7 @@ void Func0635 object#(0x635) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = find_nearby(0x035F, 0x0000, 0x0000);
 		var0001 = var0000->get_item_frame();
 		if ((var0001 > 0x000F) && (var0001 < 0x0013)) {
@@ -61486,7 +61535,7 @@ void Func0635 object#(0x635) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0003 = get_object_position();
 		var0004 = find_nearby(0x033F, 0x0002, 0x0000);
 		if (UI_get_array_size(var0004) > 0x0000) {
@@ -61530,7 +61579,7 @@ void Func0637 object#(0x637) () {
 void Func0638 object#(0x638) () {
 	var var0000;
 
-	if (event != 0x0001) {
+	if (event != DOUBLECLICK) {
 		return;
 	}
 	UI_play_sound_effect2(0x005E, item);
@@ -61824,7 +61873,7 @@ void Func063B object#(0x63B) () {
 	var var0000;
 	var var0001;
 
-	if (event != 0x0001) {
+	if (event != DOUBLECLICK) {
 		return;
 	}
 	UI_play_sound_effect2(0x005E, item);
@@ -62110,7 +62159,7 @@ void Func063D object#(0x63D) () {
 	var var0001;
 	var var0002;
 
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		var0000 = get_npc_number();
 		if (var0000 < 0x0100) {
 			var0000->show_npc_face(0x0000);
@@ -62124,7 +62173,7 @@ void Func063D object#(0x63D) () {
 			}
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		item_say("@Oink@");
 	}
 }
@@ -62154,7 +62203,7 @@ void Func063F object#(0x63F) () {
 	var var000D;
 	var var000E;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = Func098E();
 		for (var0003 in var0000 with var0001 to var0002) {
 			if (var0003->npc_nearby()) {
@@ -62185,7 +62234,7 @@ void Func063F object#(0x63F) () {
 			var000E &= var000B[(var0004 + var000C)];
 			var000C += 0x0001;
 		}
-		Func090D(item, var000D, var000E, 0xFFFF, Func063F, item, 0x000A);
+		Func090D(item, var000D, var000E, 0xFFFF, Func063F, item, PATH_SUCCESS);
 	}
 }
 
@@ -62201,7 +62250,7 @@ void Func0640 object#(0x640) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@In Mani Ylem@");
 		if (Func0951()) {
@@ -62223,7 +62272,7 @@ void Func0640 object#(0x640) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = UI_get_party_list();
 		for (var0004 in var0001 with var0002 to var0003) {
 			var0005 = var0004->get_object_position();
@@ -62246,7 +62295,7 @@ void Func0641 object#(0x641) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		halt_scheduled();
 		var0001 = Func0979(var0000);
@@ -62286,7 +62335,7 @@ void Func0641 object#(0x641) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		clear_item_flag(POISONED);
 		clear_item_flag(PARALYZED);
 		clear_item_flag(CAN_FLY);
@@ -62310,7 +62359,7 @@ void Func0642 object#(0x642) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Wis Jux@");
 		if (Func0951()) {
@@ -62349,7 +62398,7 @@ void Func0642 object#(0x642) () {
 			};
 		}
 	}
-	if ((event == 0x0002) || (event == 0x0003)) {
+	if ((event == SCRIPTED) || (event == EGG)) {
 		obj_sprite_effect(0x0010, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
 	}
 }
@@ -62370,7 +62419,7 @@ void Func0643 object#(0x643) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Vas An Flam@");
 		if (Func0951()) {
@@ -62422,7 +62471,7 @@ void Func0644 object#(0x644) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Vas In Flam@");
 		if (Func0951()) {
@@ -62463,7 +62512,7 @@ extern var Func0951 0x951 ();
 void Func0645 object#(0x645) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@In Lor@");
 		if (Func0951()) {
@@ -62483,7 +62532,7 @@ void Func0645 object#(0x645) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		UI_cause_light(0x029A);
 	}
 }
@@ -62496,7 +62545,7 @@ void Func0646 object#(0x646) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		item_say("@In Wis@");
 		if (Func0951()) {
 			var0000 = script item {
@@ -62518,7 +62567,7 @@ void Func0646 object#(0x646) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = Func0994();
 		var0002 = "We must be lost.";
 		if (var0001 == 0xFFFF) {
@@ -62629,7 +62678,7 @@ void Func0647 object#(0x647) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = UI_click_on_item();
 		if (var0000[0x0001] == 0x0000) {
@@ -62657,7 +62706,7 @@ void Func0647 object#(0x647) () {
 			};
 		}
 	}
-	if (event == 0x0004) {
+	if (event == WEAPON) {
 		var0003 = [0x0105, 0x028E, 0x028B, 0x028D, 0x032A, 0x01AF, 0x0102, 0x01B2, 0x01D6, 0x0369, 0x0247, 0x02B8, 0x03F3];
 		var0004 = [0x03B5, 0x03B6, 0x0314, 0x0313];
 		var0005 = get_item_shape();
@@ -62685,7 +62734,7 @@ void Func0648 object#(0x648) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = UI_click_on_item();
 		var0001 = Func0979(var0000);
@@ -62712,7 +62761,7 @@ void Func0648 object#(0x648) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (is_npc()) {
 			clear_item_flag(ASLEEP);
 		} else {
@@ -62740,7 +62789,7 @@ void Func0649 object#(0x649) () {
 	var var000B;
 	var var000C;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = Func0979(var0000);
 		halt_scheduled();
@@ -62801,7 +62850,7 @@ void Func064A object#(0x64A) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = var0000->get_item_shape();
 		var0002 = Func0979(var0000);
@@ -62829,7 +62878,7 @@ void Func064A object#(0x64A) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0005 = 0xFE9C->get_object_position();
 		var0001 = get_item_shape();
 		var0006 = get_item_quantity(var0001);
@@ -62855,7 +62904,7 @@ void Func064B object#(0x64B) () {
 	var var0002;
 	var var0003;
 
-	if ((event == 0x0001) || (event == 0x0004)) {
+	if ((event == DOUBLECLICK) || (event == WEAPON)) {
 		halt_scheduled();
 		var0000 = UI_click_on_item();
 		var0001 = Func0979(var0000);
@@ -62891,7 +62940,7 @@ extern var Func0951 0x951 ();
 void Func064C object#(0x64C) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Vas Lor@");
 		if (Func0951()) {
@@ -62911,7 +62960,7 @@ void Func064C object#(0x64C) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		UI_cause_light(0x1388);
 	}
 }
@@ -62927,7 +62976,7 @@ void Func064D object#(0x64D) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = Func0979(var0000);
 		halt_scheduled();
@@ -62960,7 +63009,7 @@ void Func064D object#(0x64D) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0003 = get_npc_prop(0x0000);
 		var0004 = get_npc_prop(0x0003);
 		if (var0004 <= var0003) {
@@ -62979,7 +63028,7 @@ void Func064E object#(0x64E) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		obj_sprite_effect(0x0007, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
 		item_say("@Vas An Nox@");
@@ -63002,7 +63051,7 @@ void Func064E object#(0x64E) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = UI_get_party_list();
 		var0001 &= 0xFE9C;
 		for (var0004 in var0001 with var0002 to var0003) {
@@ -63023,7 +63072,7 @@ void Func064F object#(0x64F) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = UI_click_on_item();
 		var0001 = Func0979(var0000);
@@ -63054,7 +63103,7 @@ void Func064F object#(0x64F) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_item_flag(PROTECTION);
 	}
 }
@@ -63070,7 +63119,7 @@ void Func0650 object#(0x650) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		item_say("@Rel Frio Mani@");
 		if (Func0951()) {
 			halt_scheduled();
@@ -63093,7 +63142,7 @@ void Func0650 object#(0x650) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		UI_play_sound_effect(0x005A);
 		var0001 = Func0941(0xFE9C);
 		var0002 = 0x07D0 + (var0001 * 0x00C8);
@@ -63117,7 +63166,7 @@ void Func0651 object#(0x651) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = UI_click_on_item();
 		var0001 = Func0979(var0000);
@@ -63163,7 +63212,7 @@ void Func0652 object#(0x652) () {
 
 	var0000 = [0x02D2, 0x02D3];
 	var0001 = [0x022C, 0x01A1];
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0002 = UI_click_on_item();
 		var0003 = var0002->get_item_shape();
@@ -63193,7 +63242,7 @@ void Func0652 object#(0x652) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0006 = 0x0000;
 		for (var0009 in var0000 with var0007 to var0008) {
 			var0006 += 0x0001;
@@ -63219,7 +63268,7 @@ void Func0653 object#(0x653) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = 0xFE9C->get_object_position();
 		var0001 = [0x00C8, 0x0113];
@@ -63269,7 +63318,7 @@ void Func0654 object#(0x654) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		item_say("@Vas Uus Sanct@");
 		if (Func0951()) {
 			halt_scheduled();
@@ -63292,7 +63341,7 @@ void Func0654 object#(0x654) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		UI_play_sound_effect(0x005A);
 		obj_sprite_effect(0x0007, 0xFFFE, 0xFFFE, 0x0000, 0x0000, 0x0000, 0xFFFF);
 		var0001 = UI_get_party_list();
@@ -63312,7 +63361,7 @@ void Func0655 object#(0x655) () {
 	var var0002;
 	var var0003;
 
-	if ((event == 0x0001) || (event == 0x0004)) {
+	if ((event == DOUBLECLICK) || (event == WEAPON)) {
 		var0000 = UI_click_on_item();
 		var0001 = Func0979(var0000);
 		halt_scheduled();
@@ -63349,7 +63398,7 @@ void Func0656 object#(0x656) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = Func0979(var0000);
 		halt_scheduled();
@@ -63386,7 +63435,7 @@ void Func0657 object#(0x657) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Rel Wis@");
 		if (Func0951()) {
@@ -63416,7 +63465,7 @@ void Func0657 object#(0x657) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFE9C->clear_item_flag(READ);
 	}
 }
@@ -63424,7 +63473,7 @@ void Func0657 object#(0x657) () {
 void Func0658 object#(0x658) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Rel Por@");
 		var0000 = script item {
@@ -63451,7 +63500,7 @@ void Func0659 object#(0x659) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@An Xen Jux@");
 		if (Func0951()) {
@@ -63488,7 +63537,7 @@ void Func0659 object#(0x659) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0007 = get_npc_number();
 		if (!(var0007 in [0xFE9C])) {
 			var0008 = 0xFE9C->get_alignment();
@@ -63522,7 +63571,7 @@ void Func065A object#(0x65A) () {
 
 	var0000 = 0xFE9C->get_object_position();
 	var0001 = 0xFE9C->get_npc_object();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@In Vas Lor@");
 		if (Func0951()) {
@@ -63545,7 +63594,7 @@ void Func065A object#(0x65A) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001->obj_sprite_effect(0x0007, 0xFFFE, 0xFFFE, 0x0000, 0x0000, 0x0000, 0xFFFF);
 		var0003 = find_nearby(0xFE99, 0x0028, 0x0008);
 		var0004 = UI_get_party_list();
@@ -63653,7 +63702,7 @@ void Func065B object#(0x65B) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = var0000->get_item_shape();
 		var0002 = var0000->get_item_frame();
@@ -63684,7 +63733,7 @@ void Func065B object#(0x65B) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0005 = get_object_position();
 		var0004 = set_last_created();
 		set_item_frame(0x0001);
@@ -63705,7 +63754,7 @@ void Func065C object#(0x65C) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Vas Des Sanct@");
 		if (Func0951()) {
@@ -63745,7 +63794,7 @@ void Func065C object#(0x65C) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_item_flag(CURSED);
 	}
 }
@@ -63770,7 +63819,7 @@ void Func065D object#(0x65D) () {
 	var var000E;
 	var var000F;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = 0xFE9C->get_object_position();
 		var0001 = [];
@@ -63821,7 +63870,7 @@ void Func065D object#(0x65D) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		clear_item_flag(INVISIBLE);
 	}
 }
@@ -63837,7 +63886,7 @@ void Func065E object#(0x65E) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = var0000->get_item_shape();
 		var0002 = Func0979(item);
@@ -63879,7 +63928,7 @@ void Func065F object#(0x65F) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = var0000->get_item_shape();
 		var0002 = Func0979(item);
@@ -63920,7 +63969,7 @@ void Func065F object#(0x65F) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0005 = get_item_frame();
 		var0007 = var0005 - 0x0003;
 		set_item_frame(var0007);
@@ -63942,7 +63991,7 @@ void Func0660 object#(0x660) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Kal Xen@");
 		if (Func0951()) {
@@ -63964,7 +64013,7 @@ void Func0660 object#(0x660) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = [0x02CC, 0x032B, 0x020B, 0x01FE, 0x01F6, 0x0219, 0x012E];
 		var0002 = UI_get_array_size(var0001);
 		var0003 = Func0941(0xFE9C);
@@ -64000,7 +64049,7 @@ void Func0661 object#(0x661) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = Func0979(var0000);
 		halt_scheduled();
@@ -64045,7 +64094,7 @@ void Func0662 object#(0x662) () {
 	var var0001;
 	var var0002;
 
-	if ((event == 0x0001) || (event == 0x0004)) {
+	if ((event == DOUBLECLICK) || (event == WEAPON)) {
 		var0000 = UI_click_on_item();
 		halt_scheduled();
 		var0001 = Func0979(var0000);
@@ -64087,7 +64136,7 @@ void Func0663 object#(0x663) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0000->halt_scheduled();
 		var0001 = Func0979(var0000);
@@ -64127,7 +64176,7 @@ void Func0664 object#(0x664) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		halt_scheduled();
 		var0001 = Func0979(var0000);
@@ -64156,7 +64205,7 @@ void Func0664 object#(0x664) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_item_flag(INVISIBLE);
 	}
 }
@@ -64172,7 +64221,7 @@ void Func0665 object#(0x665) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Vas Zu@");
 		if (Func0951()) {
@@ -64199,7 +64248,7 @@ void Func0665 object#(0x665) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = 0x0019;
 		var0002 = find_nearby(0xFFFF, var0001, 0x0004);
 		var0003 = UI_get_party_list();
@@ -64242,7 +64291,7 @@ void Func0666 object#(0x666) () {
 	var var0016;
 	var var0017;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = true;
 		var0001 = 0x0000;
 		var0002 = 0xFE9C->get_object_position();
@@ -64336,7 +64385,7 @@ void Func0667 object#(0x667) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Ex Por@");
 		if (Func0951()) {
@@ -64370,7 +64419,7 @@ void Func0667 object#(0x667) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (item == 0xFE9C->get_npc_object()) {
 			obj_sprite_effect(0x0003, 0x0000, 0x0000, 0xFFFD, 0xFFFD, 0x0004, 0x0019);
 			obj_sprite_effect(0x0003, 0x0000, 0x0000, 0x0000, 0xFFFC, 0x0004, 0x0019);
@@ -64407,7 +64456,7 @@ void Func0668 object#(0x668) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = Func0979(var0000);
 		halt_scheduled();
@@ -64447,7 +64496,7 @@ void Func0669 object#(0x669) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@An Quas@");
 		if (Func0951()) {
@@ -64477,7 +64526,7 @@ void Func0669 object#(0x669) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0005 = [0x0212];
 		var0006 = get_item_shape();
 		if (var0006 in var0005) {
@@ -64508,7 +64557,7 @@ void Func066A object#(0x66A) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Quas Wis@");
 		if (Func0951()) {
@@ -64534,7 +64583,7 @@ void Func066A object#(0x66A) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = find_nearby(0xFE99, 0x0019, 0x0008);
 		var0002 = UI_get_party_list();
 		for (var0005 in var0001 with var0003 to var0004) {
@@ -64564,7 +64613,7 @@ void Func066B object#(0x66B) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = Func0979(var0000);
 		halt_scheduled();
@@ -64624,7 +64673,7 @@ void Func066C object#(0x66C) () {
 	var var000C;
 	var var000D;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		halt_scheduled();
 		var0001 = Func0979(var0000);
@@ -64678,7 +64727,7 @@ void Func066C object#(0x66C) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0009 = get_object_position();
 		var0002 = set_last_created();
 		if (var0002) {
@@ -64719,7 +64768,7 @@ void Func066D object#(0x66D) () {
 	var var000C;
 	var var000D;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = 0x0019;
 		halt_scheduled();
 		var0001 = Func0980(var0000);
@@ -64784,7 +64833,7 @@ void Func066E object#(0x66E) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@In Hur Sanct@");
 		if (Func0951()) {
@@ -64812,7 +64861,7 @@ void Func066E object#(0x66E) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0002 = 0xFE9B->count_objects(0x0255, 0xFE99, 0xFE99);
 		var0003 = 0xFE9B->count_objects(0x025E, 0xFE99, 0xFE99);
 		var0004 = 0xFE9B->count_objects(0x0256, 0xFE99, 0xFE99);
@@ -64850,7 +64899,7 @@ void Func066F object#(0x66F) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = var0000->get_item_shape();
 		var0002 = var0000->get_item_frame();
@@ -64924,7 +64973,7 @@ void Func0670 object#(0x670) () {
 	var var000A;
 
 	var0000 = false;
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0001 = UI_click_on_item();
 		item_say("@In Sanct Grav@");
@@ -64979,7 +65028,7 @@ void Func0671 object#(0x671) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = UI_click_on_item();
 		var0001 = Func0979(var0000);
@@ -65021,7 +65070,7 @@ void Func0672 object#(0x672) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_object_position();
 		halt_scheduled();
 		item_say("@Vas An Zu@");
@@ -65050,7 +65099,7 @@ void Func0672 object#(0x672) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		halt_scheduled();
 		clear_item_flag(ASLEEP);
 	}
@@ -65066,7 +65115,7 @@ void Func0673 object#(0x673) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@In Vas Por@");
 		if (Func0951()) {
@@ -65100,7 +65149,7 @@ void Func0673 object#(0x673) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_item_flag(MIGHT);
 	}
 }
@@ -65119,7 +65168,7 @@ void Func0674 object#(0x674) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		halt_scheduled();
 		var0001 = Func0979(var0000);
@@ -65166,7 +65215,7 @@ void Func0675 object#(0x675) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Vas Mani@");
 		if (Func0951()) {
@@ -65218,7 +65267,7 @@ void Func0676 object#(0x676) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = var0000->get_item_shape();
 		var0002 = Func0979(item);
@@ -65252,7 +65301,7 @@ void Func0676 object#(0x676) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0004 = get_cont_items(0xFE99, 0xFE99, 0xFE99);
 		if (UI_get_array_size(var0004)) {
 			var0005 = var0004[0x0001]->set_last_created();
@@ -65292,7 +65341,7 @@ void Func0677 object#(0x677) () {
 	var var0001;
 	var var0002;
 
-	if ((event == 0x0001) || (event == 0x0004)) {
+	if ((event == DOUBLECLICK) || (event == WEAPON)) {
 		var0000 = UI_click_on_item();
 		halt_scheduled();
 		var0001 = Func0979(var0000);
@@ -65339,7 +65388,7 @@ void Func0678 object#(0x678) () {
 	var var0008;
 
 	var0000 = false;
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0001 = UI_click_on_item();
 		item_say("@In Sanct Grav@");
@@ -65398,7 +65447,7 @@ void Func0679 object#(0x679) () {
 	var var0006;
 	var var0007;
 
-	if ((event == 0x0001) || ((event == 0x0004) && (get_npc_number() == 0xFE9C))) {
+	if ((event == DOUBLECLICK) || ((event == WEAPON) && (get_npc_number() == 0xFE9C))) {
 		halt_scheduled();
 		var0000 = UI_click_on_item();
 		var0001 = Func0979(var0000);
@@ -65427,7 +65476,7 @@ void Func0679 object#(0x679) () {
 			};
 		}
 	}
-	if ((event == 0x0004) && (item != 0xFE9C)) {
+	if ((event == WEAPON) && (item != 0xFE9C)) {
 		if (is_npc()) {
 			var0003 = 0xFE9C->get_npc_prop(0x0002);
 			var0004 = get_npc_prop(0x0002);
@@ -65458,7 +65507,7 @@ void Func067A object#(0x67A) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = false;
 		halt_scheduled();
 		var0001 = UI_click_on_item();
@@ -65523,7 +65572,7 @@ void Func067B object#(0x67B) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = var0000->get_item_shape();
 		var0002 = var0000->get_item_weight();
@@ -65555,7 +65604,7 @@ extern var Func0951 0x951 ();
 void Func067C object#(0x67C) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("Kal Frio Xen");
 		if (Func0951()) {
@@ -65581,7 +65630,7 @@ void Func067C object#(0x67C) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = UI_summon(0x02FB, true);
 	}
 }
@@ -65596,7 +65645,7 @@ void Func067D object#(0x67D) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@An Frio Xen Ex@");
 		if (Func0951() && (!0xFE9C->get_item_flag(ISPETRA))) {
@@ -65634,7 +65683,7 @@ void Func067D object#(0x67D) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = get_object_position();
 		var0002 = (var0001[0x0001] + 0x0002) & ((var0001[0x0002] + 0x0002) & var0001[0x0003]);
 		var0003 = false;
@@ -65668,7 +65717,7 @@ void Func067E object#(0x67E) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = 0xFE9C->get_object_position() & (0x0096 & 0x001F);
 		var0001 = var0000->find_nearby(0x025F, 0x0050, 0x0010);
 		for (var0004 in var0001 with var0002 to var0003) {
@@ -65699,7 +65748,7 @@ void Func067F object#(0x67F) () {
 	var var0002;
 	var var0003;
 
-	if ((event == 0x0001) || (event == 0x0004)) {
+	if ((event == DOUBLECLICK) || (event == WEAPON)) {
 		halt_scheduled();
 		var0000 = UI_click_on_item();
 		var0001 = Func0979(var0000);
@@ -65743,7 +65792,7 @@ void Func0680 object#(0x680) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = Func0979(var0000);
 		halt_scheduled();
@@ -65788,7 +65837,7 @@ void Func0681 object#(0x681) () {
 	var var000B;
 	var var000C;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Vas Corp@");
 		if (Func0951()) {
@@ -65836,7 +65885,7 @@ void Func0681 object#(0x681) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var000C = get_item_flag(CANT_DIE);
 		if (var000C == false) {
 			var000B = get_npc_prop(0x0003);
@@ -65857,7 +65906,7 @@ void Func0682 object#(0x682) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Vas Sact Lor@");
 		if (Func0951()) {
@@ -65892,7 +65941,7 @@ void Func0682 object#(0x682) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_item_flag(INVISIBLE);
 	}
 }
@@ -65911,7 +65960,7 @@ void Func0683 object#(0x683) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("Uus Vas Jux Ylem@");
 		if (Func0951()) {
@@ -66066,7 +66115,7 @@ void Func0683 object#(0x683) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0002 = 0x0019;
 		var0003 = Func0980(var0002);
 		var0004 = UI_get_array_size(var0003);
@@ -66087,7 +66136,7 @@ extern var Func0951 0x951 ();
 void Func0684 object#(0x684) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Rel Hur@");
 		if (Func0951()) {
@@ -66126,7 +66175,7 @@ void Func0685 object#(0x685) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("Kal Vas Xen");
 		if (Func0951()) {
@@ -66152,7 +66201,7 @@ void Func0685 object#(0x685) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = [0x0210, 0x0151, 0x0215, 0x01F5, 0x0202, 0x0295, 0x02C2];
 		var0002 = [0x0005, 0x0005, 0x0005, 0x0005, 0x0005, 0x0005, 0x0005];
 		var0003 = [0x0005, 0x0005, 0x0001, 0x0002, 0x0003, 0x0005, 0x0002];
@@ -66200,7 +66249,7 @@ void Func0687 object#(0x687) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = get_object_position();
 		item_say("@Ex Por@");
@@ -66387,7 +66436,7 @@ void Func068C object#(0x68C) () {
 extern void Func094A 0x94A (var var0000);
 
 void Func06A4 object#(0x6A4) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		Func094A("Damn! I've stepped on an egg! Egg 0, to be precise!");
 	}
 }
@@ -66404,7 +66453,7 @@ void Func06A5 object#(0x6A5) () {
 	var var0003;
 	var var0004;
 
-	if ((event == 0x0003) && (!gflags[0x021C])) {
+	if ((event == EGG) && (!gflags[0x021C])) {
 		var0000 = find_nearby(0x0178, 0x000A, 0x0000);
 		if (var0000) {
 			var0001 = script var0000 {
@@ -66459,7 +66508,7 @@ void Func06A6 object#(0x6A6) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = get_npc_id();
 		if (var0000 == 0x0000) {
 			var0001 = script item {
@@ -66524,7 +66573,7 @@ void Func06A8 object#(0x6A8) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = script item {
 			call Func0636;
 		};
@@ -66563,7 +66612,7 @@ void Func06A9 object#(0x6A9) () {
 	var var0010;
 	var var0011;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = script 0xFE9C {
 			nohalt;
 			wait 10;
@@ -66630,7 +66679,7 @@ void Func06AB object#(0x6AB) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = find_nearby(0x0113, 0x0014, 0x0010);
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0004 = var0003->get_item_frame();
@@ -66647,7 +66696,7 @@ void Func06AB object#(0x6AB) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0006 = find_nearby(0x0215, 0x0014, 0x0000);
 		if (var0006) {
 			var0006[0x0001]->set_npc_id(0x0001);
@@ -66661,7 +66710,7 @@ void Func06AB object#(0x6AB) () {
 void Func06AC object#(0x6AC) () {
 	var var0000;
 
-	if ((event == 0x0002) || (event == 0x0003)) {
+	if ((event == SCRIPTED) || (event == EGG)) {
 		var0000 = find_nearby(0x0280, 0x0001, 0x0000);
 		if (!var0000) {
 			gflags[0x01F9] = true;
@@ -66687,7 +66736,7 @@ void Func06AD object#(0x6AD) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (!gflags[0x00C8]) {
 			abort;
 		}
@@ -66710,7 +66759,7 @@ void Func06AD object#(0x6AD) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0006 = find_nearby(0x0113, 0x0014, 0x0010);
 		for (var0009 in var0006 with var0007 to var0008) {
 			if (var0009->get_item_frame() == 0x0007) {
@@ -66756,7 +66805,7 @@ void Func06AE object#(0x6AE) () {
 	var0000 = find_nearby(0x0212, 0x0014, 0x0000);
 	var0001 = find_nearby(0x0373, 0x0014, 0x0000);
 	var0002 = find_nearby(0x01FB, 0x0014, 0x0000);
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (var0000) {
 			var0003 = Func0992(0xFFFD, 0x0000, 0x0000, false);
 			var0003->item_say("@Snakes!@");
@@ -66786,7 +66835,7 @@ void Func06AE object#(0x6AE) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		clear_item_say();
 		get_npc_number()->show_npc_face0(0x0000);
 		if ((!var0000) && ((!var0001) && (!var0002))) {
@@ -66856,7 +66905,7 @@ void Func06AF object#(0x6AF) () {
 	var var000C;
 	var var000D;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = Func09A0(0x0007, 0x0003);
 		if (var0000) {
 			var0001 = script var0000 after 300 ticks {
@@ -66865,7 +66914,7 @@ void Func06AF object#(0x6AF) () {
 			var0001 = var0000->set_item_quality(0x00FA);
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0002 = 0xFE9C->get_object_position();
 		var0003 = var0002[0x0001];
 		var0004 = var0002[0x0002];
@@ -67014,7 +67063,7 @@ void Func06B3 object#(0x6B3) () {
 		remove_item();
 		abort;
 	}
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0001 = Func0992(0x0001, "@I feel sleepy@", "@I feel sleepy@", true);
 		var0001 = var0000->set_item_quality(0x0000);
 		var0001 = script var0000 after 15 ticks {
@@ -67022,7 +67071,7 @@ void Func06B3 object#(0x6B3) () {
 			call Func06B3;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0002 = var0000->get_item_quality();
 		if (var0002 == 0x0000) {
 			var0001 = Func0992(0x0001, "@Mine eyes are closing...@", "@I can go no further...@", true);
@@ -67159,7 +67208,7 @@ void Func06B3 object#(0x6B3) () {
 extern void Func0922 0x922 (var var0000);
 
 void Func06B4 object#(0x6B4) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		Func0922(0x0002);
 	}
 }
@@ -67208,7 +67257,7 @@ void Func06B6 object#(0x6B6) () {
 	var var0010;
 	var var0011;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = get_item_quality();
 		var0001 = [];
 		var0002 = [];
@@ -67401,7 +67450,7 @@ void Func06BA object#(0x6BA) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = get_item_quality();
 		if (var0000 == 0x0000) {
 			0xFE9C->clear_item_flag(FREEZE);
@@ -67425,7 +67474,7 @@ void Func06BB object#(0x6BB) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (gflags[0x0174] || (gflags[0x0173] || gflags[0x0175])) {
 			var0000 = UI_find_nearby_avatar(0x0366);
 			if (UI_get_array_size(var0000)) {
@@ -67463,7 +67512,7 @@ void Func06BC object#(0x6BC) () {
 
 	var0000 = Func09A0(0x0002, 0x0001);
 	var0001 = 0x0006;
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (gflags[0x0190]) {
 			remove_item();
 		}
@@ -67480,7 +67529,7 @@ void Func06BC object#(0x6BC) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0002 = var0000->get_item_quality();
 		if (var0002 < var0001) {
 			var0003 = script var0000 after 10 ticks {
@@ -67599,7 +67648,7 @@ void Func06BF object#(0x6BF) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = UI_is_pc_female();
 		var0001 = Func0942(0xFFC3);
 		if (var0000 && (gflags[0x003E] && (!var0001))) {
@@ -67618,7 +67667,7 @@ void Func06C0 object#(0x6C0) () {
 		abort;
 	}
 	var0000 = UI_part_of_day();
-	if ((event == 0x0003) && ((var0000 > 0x0001) && (var0000 < 0x0006))) {
+	if ((event == EGG) && ((var0000 > 0x0001) && (var0000 < 0x0006))) {
 		var0001 = script 0xFE9C after 5 ticks {
 			// Bug: the next line should probably be 'music 26', but it
 			// lacks the continuous flag.
@@ -67683,7 +67732,7 @@ extern void Func00F9 shape#(0xF9) ();
 void Func06C1 object#(0x6C1) () {
 	var var0000;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (!gflags[0x0170]) {
 			var0000 = UI_game_hour();
 			if ((var0000 > 0x0006) && (var0000 < 0x0014)) {
@@ -67698,13 +67747,13 @@ void Func06C1 object#(0x6C1) () {
 void Func06C2 object#(0x6C2) () {
 	var var0000;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = script 0xFE9C {
 			nohalt;
 			call Func0437;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = script 0xFE9C {
 			nohalt;
 			call Func0437;
@@ -68221,7 +68270,7 @@ void Func06CC object#(0x6CC) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = get_object_position();
 		var0001 = UI_create_new_object2(0x02FB, var0000);
 		if (var0001) {
@@ -68292,7 +68341,7 @@ void Func06CE object#(0x6CE) () {
 	var var0016;
 	var var0017;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = get_item_quality();
 		if (var0000 == 0x0000) {
 			var0001 = find_nearby(0x01FB, 0x0014, 0x0000);
@@ -68371,14 +68420,14 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 void Func06CF object#(0x6CF) () {
 	var var0000;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		0xFED9->item_say("@Help me...@");
 		var0000 = script 0xFE9C after 10 ticks {
 			nohalt;
 			call Func06CF;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFEDF->show_npc_face0(0x0000);
 		say("\"Oh, the pain... The end is near...\"");
 		converse (["Who art thou?", "What happened?"]) {
@@ -68434,7 +68483,7 @@ void Func06D1 object#(0x6D1) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (!gflags[0x0000]) {
 			abort;
 		}
@@ -68445,7 +68494,7 @@ void Func06D1 object#(0x6D1) () {
 		remove_item();
 		abort;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = 0xFE9C->get_object_position();
 		var0000 = 0xFE9C->find_nearby(0x019E, 0x001E, 0x0000);
 		var0002 = false;
@@ -68669,7 +68718,7 @@ void Func06D6 object#(0x6D6) () {
 	var var002D;
 	var var002E;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (gflags[0x0004]) {
 			var0000 = get_item_quality();
 			if (var0000 == 0x0001) {
@@ -68981,10 +69030,10 @@ void Func06D7 object#(0x6D7) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		var0000 = Func0992(0x0001, "@Let us leave here.@", "@Unusual place...@", true);
 	}
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0001 = get_item_quality();
 		var0002 = get_object_position();
 		if (var0001 == 0x0001) {
@@ -69011,7 +69060,7 @@ void Func06D7 object#(0x6D7) () {
 				UI_sprite_effect(0x001A, var0002[0x0001], var0002[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				0xFE9B->move_object([0x0508, 0x062F, 0x0000]);
 				var0007 = [0x0508, 0x0636, 0x0000];
-				var0000 = UI_path_run_usecode(var0007, Func06D7, 0xFE9C, 0x000A);
+				var0000 = UI_path_run_usecode(var0007, Func06D7, 0xFE9C, PATH_SUCCESS);
 			}
 		}
 	}
@@ -69020,7 +69069,7 @@ void Func06D7 object#(0x6D7) () {
 void Func06D8 object#(0x6D8) () {
 	var var0000;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = script 0xFE9C {
 			nohalt;
 			hit 50, normal_damage;
@@ -69063,7 +69112,7 @@ void Func06D9 object#(0x6D9) () {
 	var var0019;
 	var var001A;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = UI_get_skin_colour();
 		var0001 = UI_is_pc_female();
 		var0002 = get_item_quality();
@@ -69250,7 +69299,7 @@ void Func06DA object#(0x6DA) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = get_item_quality();
 		if (var0000 == 0x0001) {
 			var0001 = Func0992(0xFE9C, "@A Software Pirate!@", 0x0000, true);
@@ -69294,7 +69343,7 @@ void Func06DB object#(0x6DB) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = get_item_quality();
 		if (var0000 > 0x0064) {
 			var0001 = 0xFE9C->get_object_position();
@@ -69481,7 +69530,7 @@ void Func06DD object#(0x6DD) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = get_item_quality();
 		if (var0000 == 0x0000) {
 			var0001 = set_item_quality(0x0001);
@@ -69508,7 +69557,7 @@ void Func06DE object#(0x6DE) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (gflags[0x0004] && (!0xFEFA->is_dead())) {
 			var0000 = get_item_quality();
 			var0001 = get_object_position();
@@ -69554,7 +69603,7 @@ void Func06E0 object#(0x6E0) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = 0xFE9C->get_object_position();
 		if (var0000[0x0003] < 0x0002) {
 			gflags[0x01A6] = true;
@@ -69572,7 +69621,7 @@ void Func06E0 object#(0x6E0) () {
 			remove_item();
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFFCD->clear_item_say();
 		var0002 = Func08AC(false);
 		0xFFCD->show_npc_face0(0x0000);
@@ -69618,7 +69667,7 @@ void Func06E1 object#(0x6E1) () {
 
 	var0000 = 0xFE9C->get_object_position();
 	var0001 = get_object_position();
-	if ((event == 0x0003) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
+	if ((event == EGG) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
 		if (gflags[0x0004] == true) {
 			0xFE9C->set_item_flag(DONT_MOVE);
 			var0002 = get_object_position();
@@ -69639,7 +69688,7 @@ void Func06E1 object#(0x6E1) () {
 			remove_item();
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0005 = UI_get_party_list();
 		var0003 = find_nearby(0x0151, 0x000A, 0x0000);
 		if (0xFFFE in var0005) {
@@ -69731,7 +69780,7 @@ void Func06E3 object#(0x6E3) () {
 	}
 	var0000 = 0xFE9C->get_object_position();
 	var0001 = get_object_position();
-	if ((event == 0x0003) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
+	if ((event == EGG) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
 		var0002 = get_item_quality();
 		if (var0002 == 0x0000) {
 			UI_sprite_effect(0x0015, 0x071E, 0x05A6, 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -69767,7 +69816,7 @@ void Func06E3 object#(0x6E3) () {
 			abort;
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if ((gflags[0x0007] == false) && (gflags[0x0008] == false)) {
 			0xFEE0->show_npc_face0(0x0000);
 			say("\"Come and see the freak show, Avatar!\"");
@@ -69859,7 +69908,7 @@ void Func06E4 object#(0x6E4) () {
 	}
 	var0000 = 0xFE9C->get_object_position();
 	var0001 = get_object_position();
-	if ((event == 0x0003) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
+	if ((event == EGG) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
 		UI_sprite_effect(0x0015, 0x06D8, 0x0591, 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_play_sound_effect(0x0051);
 		0xFEFA->move_object([0x06D8, 0x0591, 0x0000]);
@@ -69884,7 +69933,7 @@ void Func06E4 object#(0x6E4) () {
 		remove_item();
 		abort;
 	}
-	if ((event == 0x0002) && (gflags[0x0007] == false)) {
+	if ((event == SCRIPTED) && (gflags[0x0007] == false)) {
 		0xFEE0->show_npc_face0(0x0000);
 		say("\"Want to try some spinning...\"* \"...and dying, Avatar?\"");
 		UI_remove_npc_face0();
@@ -69902,7 +69951,7 @@ void Func06E4 object#(0x6E4) () {
 		}
 		abort;
 	}
-	if ((event == 0x0002) && (gflags[0x0007] == true)) {
+	if ((event == SCRIPTED) && (gflags[0x0007] == true)) {
 		var0006 = find_nearby(0x00C8, 0x001E, 0x0010);
 		for (var0009 in var0006 with var0007 to var0008) {
 			var000A = var0009->get_item_frame();
@@ -69941,7 +69990,7 @@ void Func06E5 object#(0x6E5) () {
 	}
 	var0000 = 0xFE9C->get_object_position();
 	var0001 = get_object_position();
-	if ((event == 0x0003) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
+	if ((event == EGG) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
 		UI_sprite_effect(0x0015, 0x06F2, 0x05A5, 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_play_sound_effect(0x0051);
 		0xFEFA->move_object([0x06F2, 0x05A5, 0x0000]);
@@ -70001,7 +70050,7 @@ void Func06E5 object#(0x6E5) () {
 		}
 		remove_item();
 	}
-	if ((event == 0x0002) && (gflags[0x0007] == false)) {
+	if ((event == SCRIPTED) && (gflags[0x0007] == false)) {
 		0xFEE0->show_npc_face0(0x0000);
 		say("\"Want to sing an opera, Avatar?\"");
 		UI_remove_npc_face0();
@@ -70035,7 +70084,7 @@ void Func06E6 object#(0x6E6) () {
 	}
 	var0000 = 0xFE9C->get_object_position();
 	var0001 = get_object_position();
-	if ((event == 0x0003) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
+	if ((event == EGG) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
 		var0002 = get_item_quality();
 		var0003 = 0x0000;
 		var0004 = 0x0000;
@@ -70175,7 +70224,7 @@ void Func06E6 object#(0x6E6) () {
 		remove_item();
 		abort;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0006 = get_npc_number();
 		var0008 = "";
 		var0004 = Func09A0(0x0000, 0x0001);
@@ -70271,7 +70320,7 @@ void Func06E7 object#(0x6E7) () {
 	}
 	var0000 = 0xFE9C->get_object_position();
 	var0001 = get_object_position();
-	if ((event == 0x0003) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
+	if ((event == EGG) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
 		UI_sprite_effect(0x0015, 0x06C9, 0x0588, 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_play_sound_effect(0x0051);
 		0xFEFA->move_object([0x06C9, 0x0588, 0x0000]);
@@ -70293,7 +70342,7 @@ void Func06E7 object#(0x6E7) () {
 		}
 		remove_item();
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFEE0->show_npc_face0(0x0000);
 		say("\"Welcome to mine own private shooting gallery, Avatar.\"");
 		UI_remove_npc_face0();
@@ -70328,7 +70377,7 @@ void Func06E8 object#(0x6E8) () {
 
 	var0000 = 0xFE9C->get_object_position();
 	var0001 = get_object_position();
-	if ((event == 0x0003) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
+	if ((event == EGG) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
 		var0002 = find_nearby(0x00C8, 0x0028, 0x0010);
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0006 = script var0005 {
@@ -70358,7 +70407,7 @@ void Func06E9 object#(0x6E9) () {
 	var var000C;
 	var var000D;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = find_nearby(0x00C8, 0x0082, 0x0010);
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0004 = var0003->get_item_frame();
@@ -70417,7 +70466,7 @@ extern void Func09AD 0x9AD (var var0000);
 void Func06EA object#(0x6EA) () {
 	var var0000;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (!gflags[0x00D5]) {
 			0xFEE0->show_npc_face0(0x0000);
 			say("\"I had almost tired of waiting for thee, Avatar. Thou'rt some hero... it\ttook thee long enough.\"");
@@ -70463,7 +70512,7 @@ void Func06EB object#(0x6EB) () {
 	var var000C;
 	var var000D;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = find_nearby(0x0113, 0x000F, 0x0010);
 		var0001 = 0x0000;
 		for (var0004 in var0000 with var0002 to var0003) {
@@ -70497,7 +70546,7 @@ void Func06EB object#(0x6EB) () {
 			Func09B8();
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = find_nearby(0x0113, 0x000F, 0x0010);
 		var0001 = 0x0000;
 		for (var0004 in var0000 with var000C to var000D) {
@@ -70535,7 +70584,7 @@ void Func06EC object#(0x6EC) () {
 	}
 	var0000 = 0xFE9C->get_object_position();
 	var0001 = get_object_position();
-	if ((event == 0x0003) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
+	if ((event == EGG) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
 		if (!gflags[0x0259]) {
 			var0002 = 0x0000;
 			var0003 = get_item_quality();
@@ -70580,7 +70629,7 @@ void Func06EC object#(0x6EC) () {
 		gflags[0x0259] = true;
 		remove_item();
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFEE0->show_npc_face0(0x0000);
 		say("\"Thou'rt not here to sleep, Avatar.\"");
 		UI_remove_npc_face0();
@@ -70617,7 +70666,7 @@ void Func06EE object#(0x6EE) () {
 	var var0006;
 
 	var0000 = find_nearby(0x0106, 0x0002, 0x0000);
-	event = 0x0001;
+	event = DOUBLECLICK;
 	if (var0000) {
 		var0000 = find_nearby(0x033C, 0x0019, 0x0000);
 		for (var0003 in var0000 with var0001 to var0002) {
@@ -70682,7 +70731,7 @@ void Func06F0 object#(0x6F0) () {
 		}
 	}
 	if (!var0000) {
-		event = 0x0001;
+		event = DOUBLECLICK;
 		var0004 = find_nearby(0x010E, 0x0014, 0x0000);
 		for (var0007 in var0004 with var0005 to var0006) {
 			if (Func0906(var0007) == 0x0001) {
@@ -70850,7 +70899,7 @@ void Func06F6 object#(0x6F6) () {
 	var var0003;
 
 	var0000 = get_object_position();
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0001 = get_item_quality();
 		UI_sprite_effect(0x000D, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		if (var0001 == 0x0000) {
@@ -70902,7 +70951,7 @@ extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, v
 void Func06F7 object#(0x6F7) () {
 	var var0000;
 
-	if ((event == 0x0003) && 0xFFFE->get_item_flag(IN_PARTY)) {
+	if ((event == EGG) && 0xFFFE->get_item_flag(IN_PARTY)) {
 		Func097F(0xFFFE, "@I know this place!@", 0x0002);
 		remove_item();
 		var0000 = script 0xFE9C after 12 ticks {
@@ -70910,7 +70959,7 @@ void Func06F7 object#(0x6F7) () {
 			call Func06F7;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFFFE->clear_item_say();
 		0xFFFE->show_npc_face0(0x0000);
 		say("\"I never thought to see this again!\"");
@@ -70955,7 +71004,7 @@ void Func06FA object#(0x6FA) () {
 	var var0015;
 	var var0016;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = 0xFE9C->find_nearby(0x010F, 0x0064, 0x0000) & 0xFE9C->find_nearby(0x0110, 0x0064, 0x0000);
 		var0001 = false;
 		for (var0004 in var0000 with var0002 to var0003) {
@@ -71069,8 +71118,8 @@ void Func06FB object#(0x6FB) () {
 	UI_play_music(0x0012, Func09A0(0x0005, 0x0001));
 	0xFF35->move_object([0x0762, 0x03ED, 0x0000]);
 	0xFF35->set_new_schedules(0x0000, 0x000C, [0x0762, 0x03ED]);
-	0xFF35->si_path_run_usecode([0x0762, 0x03F1, 0x0000], 0x000D, 0xFF35->get_npc_object(), Func04CB, false);
-	UI_set_path_failure(Func04CB, 0xFF35->get_npc_object(), 0x000E);
+	0xFF35->si_path_run_usecode([0x0762, 0x03F1, 0x0000], SI_PATH_SUCCESS, 0xFF35->get_npc_object(), Func04CB, false);
+	UI_set_path_failure(Func04CB, 0xFF35->get_npc_object(), SI_PATH_FAILURE);
 	var0000 = script 0xFF35 after 8 ticks {
 		nohalt;
 		wait while far 10;
@@ -71170,17 +71219,17 @@ void Func06FD object#(0x6FD) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x000E) {
+	if (event == SI_PATH_FAILURE) {
 		set_schedule_type(0x000C);
 	}
-	if (event == 0x000D) {
+	if (event == SI_PATH_SUCCESS) {
 		0xFFAC->set_schedule_type(0x000F);
 		var0000 = get_object_position();
 		UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		0xFFAC->move_object([0x0722, 0x0273, 0x0000]);
 		UI_sprite_effect(0x0007, 0x0722, 0x0273, 0x0000, 0x0000, 0x000F, 0xFFFD);
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = get_object_position();
 		if ((get_schedule_type() == 0x000F) || (get_schedule_type() == 0x0018)) {
 			abort;
@@ -71190,7 +71239,7 @@ void Func06FD object#(0x6FD) () {
 		0xFFAC->move_object([0x0722, 0x0273, 0x0000]);
 		UI_sprite_effect(0x0007, 0x0722, 0x0273, 0x0000, 0x0000, 0x000F, 0xFFFD);
 	}
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0001 = 0xFE9C->find_nearby(0x02EC, 0x000C, 0x0000);
 		for (var0004 in var0001 with var0002 to var0003) {
 			if (var0004->get_item_frame() == 0x000A) {
@@ -71220,7 +71269,7 @@ void Func06FD object#(0x6FD) () {
 					0xFFAC->set_alignment(0x0003);
 					0xFFAC->set_npc_id(0x000D);
 					Func09AC(0xFFAC, (var0000[0x0001] - 0x0004), var0000[0x0002], 0x000C);
-					0xFFAC->si_path_run_usecode([0x071E, 0x0277, 0x0000], 0x000D, 0xFFAC->get_npc_object(), Func06FD, false);
+					0xFFAC->si_path_run_usecode([0x071E, 0x0277, 0x0000], SI_PATH_SUCCESS, 0xFFAC->get_npc_object(), Func06FD, false);
 				} else {
 					gflags[0x022A] = true;
 				}
@@ -71311,8 +71360,8 @@ void Func06FF object#(0x6FF) () {
 	if (var0001) {
 		var0001->set_new_schedules(0x0000, 0x0000, [0x0733, 0x0A79]);
 		var0006 = var0001->get_object_position();
-		var0001->si_path_run_usecode([var0006[0x0001], (var0006[0x0002] + 0x000F), 0x0000], 0x000D, var0001->get_npc_object(), Func0455, true);
-		UI_set_path_failure(Func0455, var0001->get_npc_object(), 0x000E);
+		var0001->si_path_run_usecode([var0006[0x0001], (var0006[0x0002] + 0x000F), 0x0000], SI_PATH_SUCCESS, var0001->get_npc_object(), Func0455, true);
+		UI_set_path_failure(Func0455, var0001->get_npc_object(), SI_PATH_FAILURE);
 	}
 	remove_item();
 }
@@ -71337,10 +71386,10 @@ void Func0701 object#(0x701) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		Func0922(0x0003);
 	}
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (!gflags[0x0004]) {
 			abort;
 		}
@@ -71372,11 +71421,11 @@ void Func0702 object#(0x702) () {
 	var var0003;
 	var var0004;
 
-	if (0xFFE1->get_item_flag(DEAD) && (event == 0x0003)) {
+	if (0xFFE1->get_item_flag(DEAD) && (event == EGG)) {
 		remove_item();
 		abort;
 	}
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = find_nearby(0x016B, 0x001E, 0x0000);
 		var0001 = 0x0006 - UI_get_array_size(var0000);
 		while (var0001 > 0x0000) {
@@ -71476,7 +71525,7 @@ void Func0703 object#(0x703) () {
 	var var0005;
 
 	var0000 = get_object_position();
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0001 = UI_create_new_object2(0x014E, var0000);
 		if (var0001) {
 			var0001->set_polymorph(0x014E);
@@ -71686,7 +71735,7 @@ void Func070B object#(0x70B) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = find_nearby(0x034D, 0x0014, 0x0000);
 		if (var0000) {
 			var0001 = Func0992(0x0001, "There hath not been a jail made yet that can hold me!", "I am glad to be out of there!", false);
@@ -71933,7 +71982,7 @@ void Func0718 object#(0x718) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFF68->show_npc_face0(0x0000);
 		say("\"I am undone -- I am outside the Temple, and now the years burden me...\"");
 		say("\"Take the Chaos Stone from my dead body... it shall be the token that thou needest to summon the shade...\"");
@@ -71980,7 +72029,7 @@ void Func0718 object#(0x718) () {
 		}
 		0xFE9C->clear_item_flag(DONT_MOVE);
 	}
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0008 = UI_get_party_list2();
 		if (0xFF68->get_npc_object() in var0008) {
 			0xFF68->remove_from_party();
@@ -72048,7 +72097,7 @@ void Func071A object#(0x71A) () {
 	var var0012;
 	var var0013;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = false;
 		var0001 = false;
 		var0002 = false;
@@ -72133,7 +72182,7 @@ void Func071B object#(0x71B) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = find_nearby(0x014A, 0x0003, 0x0000);
 		var0001 = get_object_position();
 		var0002 = [0x0000, 0x0000, 0xFFFE, 0x0002, 0x0000, 0x0000];
@@ -72168,7 +72217,7 @@ extern void Func08E9 0x8E9 ();
 void Func071C object#(0x71C) () {
 	var var0000;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = get_item_quality();
 		if (var0000 == 0x0000) {
 			if ((!gflags[0x022E]) && ((!gflags[0x0230]) && ((!gflags[0x0231]) && ((!gflags[0x022F]) && (!gflags[0x0232]))))) {
@@ -72252,7 +72301,7 @@ void Func071D object#(0x71D) () {
 	var var0024;
 	var var0025;
 
-	if (event == 0x000E) {
+	if (event == SI_PATH_FAILURE) {
 		0xFE9C->clear_item_flag(DONT_MOVE);
 		var0000 = Func09A0(0x0000, 0x0001)->get_item_quality();
 		if ((var0000 == 0x0000) || (var0000 == 0x0001)) {
@@ -72265,11 +72314,11 @@ void Func071D object#(0x71D) () {
 		UI_sprite_effect(0x0007, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		abort;
 	}
-	if (((gflags[0x02A5] == true) && (gflags[0x02A4] == true)) || (event == 0x000A)) {
+	if (((gflags[0x02A5] == true) && (gflags[0x02A4] == true)) || (event == PATH_SUCCESS)) {
 		Func09AA();
 		abort;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = get_item_quality();
 		var0002 = find_nearby(0x02CE, 0x000A, 0x0000);
 		if ((var0000 == 0x0000) || (var0000 == 0x0001)) {
@@ -72435,7 +72484,7 @@ void Func071D object#(0x71D) () {
 		Func097F(0xFE9C, "@That should do it.@", 0x0002);
 		0xFE9C->set_item_flag(DONT_MOVE);
 		var0001 = var001F->get_object_position();
-		0xFE9C->si_path_run_usecode([var0001[0x0001], (var0001[0x0002] + var0023), 0x0000], 0x000A, item, Func071D, false);
+		0xFE9C->si_path_run_usecode([var0001[0x0001], (var0001[0x0002] + var0023), 0x0000], PATH_SUCCESS, item, Func071D, false);
 		var0025 = Func09A0(0x0000, 0x0001);
 		if (var0025) {
 			var0007 = var0025->set_item_quality(var0000);
@@ -72571,7 +72620,7 @@ void Func071F object#(0x71F) () {
 		UI_remove_npc_face0();
 		abort;
 	}
-	if ((event == 0x000A) || (event == 0x000E)) {
+	if ((event == PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
 		Func09AA();
 		Func08C0(true);
 		0xFE9C->set_schedule_type(0x000F);
@@ -72587,7 +72636,7 @@ void Func071F object#(0x71F) () {
 		};
 		abort;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFE9C->clear_item_flag(DONT_MOVE);
 		UI_init_conversation();
 		Func0922(0x0008);
@@ -72683,8 +72732,8 @@ void Func071F object#(0x71F) () {
 		UI_sprite_effect(0x0007, var0018[0x0001], var0018[0x0002], 0xFFFB, 0x0005, 0x0000, 0xFFFF);
 		UI_sprite_effect(0x001A, var0018[0x0001], var0018[0x0002], 0x0005, 0xFFFB, 0x0000, 0xFFFF);
 		var0019 = [0x068B, 0x0015, 0x0002];
-		0xFE9C->si_path_run_usecode(var0019, 0x000A, item, Func071F, true);
-		UI_set_path_failure(Func071F, item, 0x000A);
+		0xFE9C->si_path_run_usecode(var0019, PATH_SUCCESS, item, Func071F, true);
+		UI_set_path_failure(Func071F, item, PATH_SUCCESS);
 	}
 }
 
@@ -72723,7 +72772,7 @@ void Func0720 object#(0x720) () {
 	if (!gflags[0x02B8]) {
 		abort;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = get_object_position();
 		var0001 = UI_die_roll(0xFFFD, 0x0003);
 		var0002 = UI_die_roll(0xFFFD, 0x0003);
@@ -72734,13 +72783,13 @@ void Func0720 object#(0x720) () {
 		UI_sprite_effect(0x001A, (var0000[0x0001] - 0x0003), (var0000[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, 0xFFFF);
 		abort;
 	}
-	if ((event == 0x000A) || (event == 0x000E)) {
+	if ((event == PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
 		Func09AA();
 		var0003 = find_nearby(0x02E7, 0x002D, 0x0000);
 		var0004 = 0x0000;
 		while ((var0004 < 0x000A) && var0003) {
 			var0005 = UI_die_roll(0x0002, 0x0004);
-			event = 0x0002;
+			event = SCRIPTED;
 			var0006 = script var0003 after (var0004 * var0005) ticks {
 				nohalt;
 				call Func0720;
@@ -72826,8 +72875,8 @@ void Func0720 object#(0x720) () {
 		Func097F(0xFE9C, "@That did it!@", 0x0000);
 		0xFE9C->set_item_flag(DONT_MOVE);
 		var0018 = [0x068B, 0x0015, 0x0002];
-		0xFE9C->si_path_run_usecode(var0018, 0x000A, item, Func0720, true);
-		UI_set_path_failure(Func0720, item, 0x000A);
+		0xFE9C->si_path_run_usecode(var0018, PATH_SUCCESS, item, Func0720, true);
+		UI_set_path_failure(Func0720, item, PATH_SUCCESS);
 	}
 }
 
@@ -72860,7 +72909,7 @@ void Func0721 object#(0x721) () {
 	var var0015;
 	var var0016;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = [0x01FF, 0x0211, 0x0218, 0x02C2, 0x020C, 0x035D];
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0004 = find_nearby(var0003, 0x0014, 0x0000);
@@ -72969,7 +73018,7 @@ void Func0722 object#(0x722) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = get_item_quality();
 		if ((var0000 == 0x0096) || (var0000 == 0x0097)) {
 			var0001 = [0x069B, 0x069B, 0x069B];
@@ -73185,7 +73234,7 @@ void Func0724 object#(0x724) () {
 	var var000E;
 	var var000F;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		Func0971(item);
 		abort;
 	}
@@ -73346,7 +73395,7 @@ void Func0725 object#(0x725) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = 0xFE9C->get_object_position();
 		if (var0000[0x0003] != 0x0005) {
 			abort;
@@ -73385,7 +73434,7 @@ void Func0725 object#(0x725) () {
 		UI_play_sound_effect(0x0051);
 		abort;
 	}
-	if ((event == 0x0002) && (gflags[0x0009] == false)) {
+	if ((event == SCRIPTED) && (gflags[0x0009] == false)) {
 		var0004 = get_item_quality();
 		if (var0004 == 0x0000) {
 			var0003 = 0xFE9C->get_object_position();
@@ -73410,7 +73459,7 @@ void Func0725 object#(0x725) () {
 		}
 		abort;
 	}
-	if ((event == 0x0002) && (gflags[0x0009] == true)) {
+	if ((event == SCRIPTED) && (gflags[0x0009] == true)) {
 		gflags[0x0009] = false;
 		if (!gflags[0x02B1]) {
 			Func0922(0x0004);
@@ -73432,12 +73481,12 @@ void Func0726 object#(0x726) () {
 	var var0006;
 	var var0007;
 
-	if ((event == 0x0002) && gflags[0x000A]) {
+	if ((event == SCRIPTED) && gflags[0x000A]) {
 		gflags[0x000A] = false;
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		Func097F(0xFFFD, "@Where didst thou go?@", 0x001B);
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFE9C->move_object([0x0684, 0x007B, 0x0000]);
 		var0000 = script 0xFE9C after 5 ticks {
 			nohalt;
@@ -73448,7 +73497,7 @@ void Func0726 object#(0x726) () {
 			call Func0636;
 		};
 	}
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (gflags[0x02B1]) {
 			Func0922(0x0004);
 			abort;
@@ -73494,7 +73543,7 @@ void Func0727 object#(0x727) () {
 	var var0002;
 	var var0003;
 
-	if ((event == 0x0003) && (gflags[0x0004] == false)) {
+	if ((event == EGG) && (gflags[0x0004] == false)) {
 		var0000 = get_item_quality();
 		var0001 = get_object_position();
 		var0002 = UI_create_new_object2(0x0103, var0001);
@@ -73530,10 +73579,10 @@ void Func0728 object#(0x728) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		remove_item();
 	}
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = get_object_position();
 		var0001 = false;
 		var0002 = get_item_quality();
@@ -73607,7 +73656,7 @@ void Func0729 object#(0x729) () {
 	var var0002;
 	var var0003;
 
-	if ((event == 0x0003) && (gflags[0x0004] == false)) {
+	if ((event == EGG) && (gflags[0x0004] == false)) {
 		var0000 = get_item_quality();
 		var0001 = get_object_position();
 		var0002 = UI_create_new_object2(0x00E4, var0001);
@@ -73647,7 +73696,7 @@ void Func072A object#(0x72A) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = 0xFF4D->find_nearby(0x0314, 0x0004, 0x0000);
 		if (var0000) {
 			var0001 = var0000->get_item_quality();
@@ -73684,7 +73733,7 @@ void Func072B object#(0x72B) () {
 	var var0014;
 	var var0015;
 
-	if ((event == 0x0002) && (gflags[0x0007] == true)) {
+	if ((event == SCRIPTED) && (gflags[0x0007] == true)) {
 		gflags[0x0007] = false;
 		Func0922(0x0007);
 		gflags[0x02E5] = true;
@@ -73724,7 +73773,7 @@ void Func072B object#(0x72B) () {
 		}
 		abort;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x0009] == true) {
 			gflags[0x0009] = false;
 			var000A = find_nearby(0x0204, 0x000F, 0x0000);
@@ -73793,7 +73842,7 @@ void Func072B object#(0x72B) () {
 		};
 		abort;
 	}
-	if (event == 0x0003) {
+	if (event == EGG) {
 		gflags[0x0007] = 0x0000;
 		gflags[0x0008] = 0x0000;
 		gflags[0x0009] = 0x0000;
@@ -73852,12 +73901,12 @@ void Func072C object#(0x72C) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = 0xFE9C->get_object_position();
 		UI_sprite_effect(0x001A, (var0000[0x0001] - 0x0003), (var0000[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_sprite_effect(0x0007, (var0000[0x0001] - 0x0003), (var0000[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, 0xFFFF);
 	}
-	if (event == 0x0003) {
+	if (event == EGG) {
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		UI_play_sound_effect(0x0051);
 		0xFE9C->move_object([0x0687, 0x0072, 0x0000]);
@@ -73887,7 +73936,7 @@ void Func072D object#(0x72D) () {
 	var var0006;
 	var var0007;
 
-	if ((event == 0x0003) && ((gflags[0x0004] == false) && (gflags[0x014E] == true))) {
+	if ((event == EGG) && ((gflags[0x0004] == false) && (gflags[0x014E] == true))) {
 		var0000 = get_item_quality();
 		var0001 = get_object_position();
 		var0002 = find_nearby(0x019F, 0x0032, 0x0000);
@@ -73934,7 +73983,7 @@ void Func072E object#(0x72E) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = get_object_position();
 		var0001 = get_item_quality();
 		if (gflags[0x0261]) {
@@ -73958,7 +74007,7 @@ void Func072F object#(0x72F) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (gflags[0x02AB] && (gflags[0x02AC] && (gflags[0x02AD] && (gflags[0x02AE] && (gflags[0x02AF] && gflags[0x02B0]))))) {
 			if (!Func097D(0xFE9B, 0x0001, 0x02C1, 0x00F1, 0xFE99)) {
 				var0000 = UI_create_new_object(0x02C1);
@@ -73979,7 +74028,7 @@ void Func0730 object#(0x730) () {
 	var var0003;
 	var var0004;
 
-	if ((event == 0x0003) && gflags[0x0004]) {
+	if ((event == EGG) && gflags[0x0004]) {
 		var0000 = UI_create_new_object(0x0320);
 		var0000->clear_item_flag(TEMPORARY);
 		UI_play_sound_effect(0x003E);
@@ -74024,7 +74073,7 @@ void Func0731 object#(0x731) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = get_object_position();
 		var0001 = UI_create_new_object2(0x0175, var0000);
 		Func09AD(var0001);
@@ -74049,7 +74098,7 @@ void Func0733 object#(0x733) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = 0x0000;
 		Func0922(0x001A);
 		while (var0000 < 0x000A) {
@@ -74073,7 +74122,7 @@ void Func0734 object#(0x734) () {
 	var var0002;
 	var var0003;
 
-	if ((event == 0x0003) && (gflags[0x0004] == false)) {
+	if ((event == EGG) && (gflags[0x0004] == false)) {
 		var0000 = get_item_quality();
 		var0001 = get_object_position();
 		var0002 = UI_create_new_object2(0x017D, var0001);
@@ -74149,7 +74198,7 @@ void Func0738 object#(0x738) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = 0xFF4A->get_item_flag(MET);
 		if (var0000) {
 			var0001 = find_nearby(0x010F, 0x0006, 0x0000);
@@ -74178,24 +74227,24 @@ void Func0739 object#(0x739) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x000E) {
+	if (event == SI_PATH_FAILURE) {
 		0xFE9C->clear_item_flag(DONT_MOVE);
 		UI_init_conversation();
 		Func097F(0xFE9C, "@I can do this...@", 0x0000);
 		Func097F(0xFE9C, "@I changed my mind...@", 0x0010);
 		abort;
 	}
-	if (event == 0x0000) {
-		0xFFB5->si_path_run_usecode([0x0339, 0x08C4, 0x0000], 0x0003, 0xFFB5, Func0739, true);
+	if (event == PROXIMITY) {
+		0xFFB5->si_path_run_usecode([0x0339, 0x08C4, 0x0000], EGG, 0xFFB5, Func0739, true);
 		Func097F(0xFE9C, "@To the test!@", 0x0000);
 		abort;
 	}
-	if (event == 0x0007) {
-		0xFE9C->si_path_run_usecode([0x0337, 0x08D7, 0x0000], 0x0000, 0xFE9C, Func0739, true);
+	if (event == DEATH) {
+		0xFE9C->si_path_run_usecode([0x0337, 0x08D7, 0x0000], PROXIMITY, 0xFE9C, Func0739, true);
 		abort;
 	}
-	if (event == 0x0003) {
-		0xFE9C->si_path_run_usecode([0x0337, 0x08C1, 0x0000], 0x000A, 0xFE9C, Func0739, true);
+	if (event == EGG) {
+		0xFE9C->si_path_run_usecode([0x0337, 0x08C1, 0x0000], PATH_SUCCESS, 0xFE9C, Func0739, true);
 		var0000 = script 0xFE9C {
 			face west;
 		};
@@ -74203,7 +74252,7 @@ void Func0739 object#(0x739) () {
 		Func097F(0xFFB5, "@To the test!@", 0x0000);
 		abort;
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		var0001 = 0xFE9C->find_nearby(0x010E, 0x000A, 0x0000);
 		for (var0004 in var0001 with var0002 to var0003) {
 			var0005 = var0004->get_object_position();
@@ -74218,10 +74267,10 @@ void Func0739 object#(0x739) () {
 		};
 		abort;
 	}
-	if (event == 0x0002) {
-		0xFE9C->si_path_run_usecode([0x0337, 0x08BA, 0x0000], 0x000B, 0xFE9C, Func0739, true);
+	if (event == SCRIPTED) {
+		0xFE9C->si_path_run_usecode([0x0337, 0x08BA, 0x0000], PATH_FAILURE, 0xFE9C, Func0739, true);
 	}
-	if (event == 0x000B) {
+	if (event == PATH_FAILURE) {
 		var0001 = 0xFE9C->find_nearby(0x0178, 0x000A, 0x0000);
 		for (var0004 in var0001 with var0007 to var0008) {
 			if (var0004->get_item_quality() == 0x0048) {
@@ -74234,7 +74283,7 @@ void Func0739 object#(0x739) () {
 			UI_init_conversation();
 			Func097F(0xFE9C, "@I have a bad feeling...@", 0x0007);
 		}
-		0xFE9C->si_path_run_usecode([0x0337, 0x08C1, 0x0000], 0x000B, 0xFE9C, Func0739, true);
+		0xFE9C->si_path_run_usecode([0x0337, 0x08C1, 0x0000], PATH_FAILURE, 0xFE9C, Func0739, true);
 	}
 }
 
@@ -74246,7 +74295,7 @@ void Func073A object#(0x73A) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = get_object_position();
 		if (!0xFFD4->get_item_flag(IN_PARTY)) {
 			0xFFD4->move_object([0x0924, 0x01CF, 0x0000]);
@@ -74341,7 +74390,7 @@ void Func073B object#(0x73B) () {
 	var var0017;
 	var var0018;
 
-	if ((get_item_quality() == 0x00FF) && (event == 0x0003)) {
+	if ((get_item_quality() == 0x00FF) && (event == EGG)) {
 		UI_set_weather(0x0003);
 		UI_play_sound_effect(0x0082);
 		var0000 = get_object_position();
@@ -74365,7 +74414,7 @@ void Func073B object#(0x73B) () {
 		abort;
 	}
 	var0003 = Func09A0(0x0002, 0x0001);
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0002 = var0003->set_item_quality(0x0000);
 		var0001 = 0xFE9C->find_nearby(0x013E, 0x0028, 0x0000);
 		var0002 = Func0992(0x0001, "@Batlin!@", "@Batlin!@", true);
@@ -74404,7 +74453,7 @@ void Func073B object#(0x73B) () {
 		UI_end_conversation();
 		abort;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0004 = var0003->get_item_quality();
 		if (var0004 == 0x0000) {
 			var0001 = 0xFE9C->find_nearby(0x013E, 0x0014, 0x0000);
@@ -74791,7 +74840,7 @@ void Func073C object#(0x73C) () {
 	var var0001;
 	var var0002;
 
-	if ((event == 0x0003) && (!Func0923())) {
+	if ((event == EGG) && (!Func0923())) {
 		var0000 = 0xFE9C->get_object_position();
 		var0001 = UI_die_roll(0xFFFD, 0x0003);
 		var0002 = UI_die_roll(0xFFFD, 0x0003);
@@ -74811,7 +74860,7 @@ void Func073D object#(0x73D) () {
 	var var0001;
 	var var0002;
 
-	if ((event == 0x0003) && gflags[0x0004]) {
+	if ((event == EGG) && gflags[0x0004]) {
 		var0000 = get_object_position();
 		var0001 = UI_create_new_object(0x03BB);
 		if (var0001) {
@@ -74834,7 +74883,7 @@ void Func0742 object#(0x742) () {
 	UI_error_message(["WARNING: remove this egg at ", get_object_position()]);
 	abort;
 	// Dead code.
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = Func097D(0xFE9B, 0x0001, 0x01DF, 0xFE99, 0x0002);
 		if (var0000) {
 			gflags[0x025E] = true;
@@ -74856,7 +74905,7 @@ extern void Func095D 0x95D (var var0000);
 void Func0743 object#(0x743) () {
 	var var0000;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = Func097D(0xFE9B, 0x0001, 0x017F, 0xFE99, 0x0001);
 		if (var0000) {
 			gflags[0x002C] = true;
@@ -74872,7 +74921,7 @@ void Func0744 object#(0x744) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = find_nearby(0x00C6, 0x000F, 0x0080);
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0003->remove_item();
@@ -74890,7 +74939,7 @@ void Func0745 object#(0x745) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = UI_find_nearby_avatar(0x017D);
 		var0001 = true;
 		for (var0004 in var0000 with var0002 to var0003) {
@@ -75070,7 +75119,7 @@ void Func075A object#(0x75A) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		0xFE9C->set_item_flag(DONT_MOVE);
 		UI_end_conversation();
 		0xFE9C->clear_item_say();
@@ -75094,7 +75143,7 @@ void Func075A object#(0x75A) () {
 		var0002 = Func09A0(0x0000, 0x0001);
 		UI_play_music(0x003F, var0002);
 	}
-	if ((event == 0x0002) && (gflags[0x000A] == true)) {
+	if ((event == SCRIPTED) && (gflags[0x000A] == true)) {
 		UI_init_conversation();
 		0xFF2D->show_npc_face0(0x0000);
 		say("\"This fire ring shall save thee from being destroyed during this battle, Hero. Neither of us means thee harm, but errors can occur in the heat of combat. Remain within the ring!\"");
@@ -75112,7 +75161,7 @@ void Func075A object#(0x75A) () {
 		gflags[0x000A] = false;
 		abort;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		UI_play_sound_effect(0x0047);
 		0xFF2D->obj_sprite_effect(0x0011, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
 	}
@@ -75368,7 +75417,7 @@ void Func0763 object#(0x763) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = get_item_quality();
 		var0001 = find_nearby(0x00D1, 0x0001, 0x0000);
 		var0002 = 0x0000;
@@ -75562,11 +75611,11 @@ void Func0766 object#(0x766) () {
 	var var0010;
 	var var0011;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFE9C->clear_item_flag(DONT_MOVE);
 		abort;
 	}
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = UI_get_party_list2();
 		var0001 = 0xFE9C->get_npc_object();
 		var0002 = false;
@@ -75816,7 +75865,7 @@ void Func0768 object#(0x768) () {
 	var var0011;
 	var var0012;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		gflags[0x02FC] = true;
 		var0000 = [0x0A45, 0x0A27, 0x0A45, 0x0A24, 0x0A47, 0x0A22];
 		var0001 = [0x00F0, 0x00EF, 0x00EE];
@@ -75863,7 +75912,7 @@ void Func0768 object#(0x768) () {
 		};
 		abort;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0009 = UI_is_pc_female();
 		var000A = "he";
 		var000B = "him";
@@ -75941,7 +75990,7 @@ void Func0769 object#(0x769) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = UI_create_new_object2(0x03D5, [0x0BC7, 0x0A0C, 0x0001]);
 		if (var0000) {
 			var0000->clear_item_flag(TEMPORARY);
@@ -75981,7 +76030,7 @@ void Func076A object#(0x76A) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (gflags[0x02FC]) {
 			abort;
 		}
@@ -76027,7 +76076,7 @@ void Func076B object#(0x76B) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (gflags[0x0313]) {
 			remove_item();
 			abort;
@@ -76071,7 +76120,7 @@ void Func077E object#(0x77E) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = get_object_position();
 		var0001 = find_nearby(0x0315, 0x0028, 0x0000);
 		if (var0001) {
@@ -76098,7 +76147,7 @@ void Func077E object#(0x77E) () {
 				gflags[0x0007] = true;
 				0xFFDD->move_object([0x0813, 0x053A, 0x0000]);
 				UI_sprite_effect(0x0007, (var0000[0x0001] - 0x0002), (var0000[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
-				0xFFDD->si_path_run_usecode([0x081A, 0x052A, 0x0000], 0x0002, 0xFFDD, Func0423, true);
+				0xFFDD->si_path_run_usecode([0x081A, 0x052A, 0x0000], SCRIPTED, 0xFFDD, Func0423, true);
 				abort;
 			}
 		}
@@ -76227,7 +76276,7 @@ void Func0780 object#(0x780) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = find_nearby(0x037C, 0x0019, 0x0000);
 		var0001 = var0000->get_item_quality();
 		var0002 = var0000->set_item_quality(var0001 + 0x0001);
@@ -76307,7 +76356,7 @@ void Func0795 object#(0x795) () {
 	var var000B;
 	var var000C;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = UI_get_party_list();
 		for (var0003 in var0000 with var0001 to var0002) {
 			if (!UI_roll_to_win(var0003->get_npc_prop(0x0000), get_item_quality())) {
@@ -76339,7 +76388,7 @@ void Func0795 object#(0x795) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0006 = 0x0000;
 		var0007 = 0x0000;
 		while (var0006 < 0x0010) {
@@ -76370,7 +76419,7 @@ void Func0796 object#(0x796) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = get_item_quality();
 		var0001 = UI_get_party_list();
 		for (var0004 in var0001 with var0002 to var0003) {
@@ -76388,7 +76437,7 @@ void Func0796 object#(0x796) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_schedule_type(0x001F);
 	}
 }
@@ -76404,7 +76453,7 @@ void Func0797 object#(0x797) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = find_nearby(0xFE99, 0x0028, 0x0008);
 		var0001 = Func098D();
 		for (var0004 in var0000 with var0002 to var0003) {
@@ -76434,7 +76483,7 @@ void Func0798 object#(0x798) () {
 	var var000C;
 	var var000D;
 
-	if ((event == 0x0003) || (event == 0x0002)) {
+	if ((event == EGG) || (event == SCRIPTED)) {
 		var0000 = find_nearby(0xFE99, 0x0028, 0x0008);
 		var0001 = UI_get_party_list();
 		var0002 = get_item_quality();
@@ -76541,7 +76590,7 @@ void Func0798 object#(0x798) () {
 }
 
 void Func0799 object#(0x799) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		UI_stop_time(get_item_quality());
 	}
 }
@@ -76556,7 +76605,7 @@ void Func079A object#(0x79A) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = UI_get_party_list();
 		var0001 = get_item_quality();
 		for (var0004 in var0000 with var0002 to var0003) {
@@ -76576,7 +76625,7 @@ void Func079B object#(0x79B) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		UI_play_sound_effect(0x0046);
 		var0000 = UI_get_party_list();
 		for (var0003 in var0000 with var0001 to var0002) {
@@ -76599,7 +76648,7 @@ void Func079C object#(0x79C) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		UI_play_sound_effect(0x0046);
 		var0000 = UI_get_party_list();
 		for (var0003 in var0000 with var0001 to var0002) {
@@ -76620,7 +76669,7 @@ void Func079D object#(0x79D) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		UI_play_sound_effect(0x0046);
 		var0000 = UI_get_party_list();
 		for (var0003 in var0000 with var0001 to var0002) {
@@ -76646,7 +76695,7 @@ void Func079E object#(0x79E) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		UI_play_sound_effect(0x0046);
 		var0000 = UI_get_party_list();
 		var0001 = Func0977(var0000);
@@ -76663,7 +76712,7 @@ void Func079F object#(0x79F) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		UI_play_sound_effect(0x0046);
 		var0000 = UI_get_party_list();
 		var0001 = UI_die_roll(0x0001, Func0977(var0000));
@@ -76674,7 +76723,7 @@ void Func079F object#(0x79F) () {
 extern void Func02C0 shape#(0x2C0) ();
 
 void Func07A0 object#(0x7A0) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		item->Func02C0();
 	}
 }
@@ -76688,7 +76737,7 @@ void Func07A1 object#(0x7A1) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = find_nearby(0x0356, 0x0005, 0x0000);
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0004 = var0003->get_item_frame();
@@ -76718,8 +76767,8 @@ void Func07A2 object#(0x7A2) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0003) {
-		event = 0x0001;
+	if (event == EGG) {
+		event = DOUBLECLICK;
 		UI_play_sound_effect(0x0046);
 		var0000 = get_item_quality();
 		var0001 = find_nearby(0x0150, var0000, 0x0000);
@@ -76752,9 +76801,9 @@ void Func07A3 object#(0x7A3) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		UI_play_sound_effect(0x0046);
-		event = 0x0001;
+		event = DOUBLECLICK;
 		var0000 = get_item_quality();
 		var0001 = find_nearby(0x0152, var0000, 0x0000);
 		for (var0004 in var0001 with var0002 to var0003) {
@@ -76785,8 +76834,8 @@ void Func07A4 object#(0x7A4) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0003) {
-		event = 0x0001;
+	if (event == EGG) {
+		event = DOUBLECLICK;
 		var0000 = find_nearby(0x010E, 0x0028, 0x0000);
 		var0000 &= find_nearby(0x0178, 0x0028, 0x0000);
 		var0001 = [];
@@ -76830,9 +76879,9 @@ void Func07A5 object#(0x7A5) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		UI_play_sound_effect(0x0046);
-		event = 0x0001;
+		event = DOUBLECLICK;
 		var0000 = find_nearby(0x0369, 0x0014, 0x0000);
 		var0001 = [];
 		for (var0004 in var0000 with var0002 to var0003) {
@@ -76860,7 +76909,7 @@ void Func07A5 object#(0x7A5) () {
 extern void Func0924 0x924 (var var0000, var var0001);
 
 void Func07A6 object#(0x7A6) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		Func0924(item, 0xFE99);
 	}
 }
@@ -76868,7 +76917,7 @@ void Func07A6 object#(0x7A6) () {
 extern void Func0924 0x924 (var var0000, var var0001);
 
 void Func07A7 object#(0x7A7) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		Func0924(item, 0x0001);
 	}
 }
@@ -76876,7 +76925,7 @@ void Func07A7 object#(0x7A7) () {
 extern void Func0924 0x924 (var var0000, var var0001);
 
 void Func07A8 object#(0x7A8) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		Func0924(item, 0x0000);
 	}
 }
@@ -76894,7 +76943,7 @@ void Func07AA object#(0x7AA) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = find_nearby(0x02F7, 0x0019, 0x0000);
 		var0001 = UI_get_array_size(var0000);
 		var0000 = Func09A7(var0001, var0000);
@@ -76925,7 +76974,7 @@ void Func07AB object#(0x7AB) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (!gflags[0x0273]) {
 			abort;
 		}
@@ -77071,7 +77120,7 @@ void Func07AE object#(0x7AE) () {
 	var var0008;
 
 	var0000 = get_item_quality();
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (var0000 == 0x0007) {
 			gflags[0x02A3] = true;
 		} else if (var0000 == 0x0005) {
@@ -77101,7 +77150,7 @@ void Func07AE object#(0x7AE) () {
 		}
 		remove_item();
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (item == Func09A0(0x0000, 0x0001)) {
 			if (Func0942(0xFFFE) && (!gflags[0x02A3])) {
 				0xFFFE->show_npc_face0(0x0000);
@@ -77189,7 +77238,7 @@ void Func07AF object#(0x7AF) () {
 	var var0007;
 
 	if (0xFFE6->get_npc_object() in UI_get_party_list()) {
-		if (event == 0x0002) {
+		if (event == SCRIPTED) {
 			var0000 = 0xFFE6->get_object_position();
 			var0000[0x0001] -= var0000[0x0003] / 0x0002;
 			var0000[0x0002] -= var0000[0x0003] / 0x0002;
@@ -77265,7 +77314,7 @@ void Func07B1 object#(0x7B1) () {
 
 	var0000 = 0xFE9C->get_object_position();
 	var0001 = get_object_position();
-	if ((event == 0x0003) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
+	if ((event == EGG) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
 		var0002 = get_item_quality();
 		if (var0002 == 0x0000) {
 			UI_error_message("Error: Quality not set for usecode egg. (uegg_269)");
@@ -77331,7 +77380,7 @@ void Func07B1 object#(0x7B1) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0008 = find_nearby(0xFE99, 0x0003, 0x0000);
 		for (var000B in var0008 with var0009 to var000A) {
 			if (!((var000B->get_item_shape() == 0x00F2) || ((var000B->get_item_shape() == 0x009F) || (var000B->get_item_shape() == 0x019A)))) {
@@ -77359,7 +77408,7 @@ void Func07B2 object#(0x7B2) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = get_item_quality();
 		var0001 = get_object_position();
 		var0002 = 0x0300;
@@ -77538,7 +77587,7 @@ void Func07D0 object#(0x7D0) () {
 	if (item in UI_get_party_list()) {
 		abort;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = direction_from(0xFE9C);
 		var0001 = script item {
 			face var0000;
@@ -77556,7 +77605,7 @@ void Func07D0 object#(0x7D0) () {
 			var0008 &= var0005[(var0000 + var0006)];
 			var0006 += 0x0001;
 		}
-		Func090E(item, 0xFE9C, var0007, var0008, 0xFFFF, Func07D0, item, 0x000A, true);
+		Func090E(item, 0xFE9C, var0007, var0008, 0xFFFF, Func07D0, item, PATH_SUCCESS, true);
 	}
 }
 
@@ -77613,7 +77662,7 @@ void Func07D3 object#(0x7D3) () {
 	var var000A;
 	var var000B;
 
-	if ((event == 0x0002) && (gflags[0x0007] == false)) {
+	if ((event == SCRIPTED) && (gflags[0x0007] == false)) {
 		var0000 = Func09A0(0x0000, 0x0001);
 		var0001 = var0000->set_item_quality(0x0028);
 		var0001 = script var0000 after 10 ticks {
@@ -77671,7 +77720,7 @@ void Func07D3 object#(0x7D3) () {
 		gflags[0x0007] = true;
 		abort;
 	}
-	if ((event == 0x0002) && (gflags[0x0007] == true)) {
+	if ((event == SCRIPTED) && (gflags[0x0007] == true)) {
 		var0007 = find_nearby(0x00A0, 0x0014, 0x0000);
 		var0008 = 0x0000;
 		for (var000B in var0007 with var0009 to var000A) {
@@ -77695,7 +77744,7 @@ void Func07D4 object#(0x7D4) () {
 	var var0003;
 	var var0004;
 
-	if ((event == 0x0002) && (gflags[0x000A] == false)) {
+	if ((event == SCRIPTED) && (gflags[0x000A] == false)) {
 		UI_play_sound_effect(0x005B);
 		var0000 = Func09A0(0x0000, 0x0001);
 		UI_play_music(0x0040, var0000);
@@ -77778,7 +77827,7 @@ void Func07D4 object#(0x7D4) () {
 		};
 		abort;
 	}
-	if ((event == 0x0002) && (gflags[0x000A] == true)) {
+	if ((event == SCRIPTED) && (gflags[0x000A] == true)) {
 		var0003 = false;
 		var0001 = Func09A0(0x0000, 0x0002);
 		var0004 = var0001->get_item_quality();
@@ -77817,7 +77866,7 @@ void Func07D5 object#(0x7D5) () {
 	var var000C;
 	var var000D;
 
-	if ((event == 0x0002) && (gflags[0x0007] == false)) {
+	if ((event == SCRIPTED) && (gflags[0x0007] == false)) {
 		0xFE9B->move_object([0x0A87, 0x0B02, 0x0002]);
 		var0000 = 0xFE9C->find_nearby(0x00A0, 0x000A, 0x0000);
 		for (var0003 in var0000 with var0001 to var0002) {
@@ -77836,7 +77885,7 @@ void Func07D5 object#(0x7D5) () {
 		gflags[0x0007] = true;
 		abort;
 	}
-	if ((event == 0x0002) && (gflags[0x0007] == true)) {
+	if ((event == SCRIPTED) && (gflags[0x0007] == true)) {
 		var0008 = UI_get_party_list();
 		for (var000B in var0008 with var0009 to var000A) {
 			var000C = var000B->get_item_shape();
@@ -78319,16 +78368,16 @@ void Func07DF object#(0x7DF) () {
 	var var000F;
 	var var0010;
 
-	if (event == 0x000E) {
+	if (event == SI_PATH_FAILURE) {
 		Func09AA();
-		event = 0x000A;
+		event = PATH_SUCCESS;
 		if (get_item_shape() == 0x0103) {
 			var0000 = [0x0A09, 0x055A, 0x0000];
 			move_object(var0000);
 		}
 	}
 	do {
-		if (event == 0x0003) {
+		if (event == EGG) {
 			if (!get_item_quality()) {
 				Func08C9();
 			} else {
@@ -78497,7 +78546,7 @@ void Func07DF object#(0x7DF) () {
 				}
 			}
 		}
-		if (event == 0x0002) {
+		if (event == SCRIPTED) {
 			if ((get_item_shape() == 0x037F) || (get_item_shape() == 0x00E0)) {
 				Func08CC();
 			}
@@ -78532,7 +78581,7 @@ void Func07DF object#(0x7DF) () {
 				Func08D7();
 			}
 		}
-		if (event == 0x000A) {
+		if (event == PATH_SUCCESS) {
 			if (get_item_shape() == 0xFF27->get_item_shape()) {
 				Func08D4();
 			}
@@ -78669,7 +78718,7 @@ void Func07E1 object#(0x7E1) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0004) {
+	if (event == WEAPON) {
 		var0000 = UI_click_on_item();
 		if (!var0000->is_npc()) {
 			abort;
@@ -78775,7 +78824,7 @@ void Func07E2 object#(0x7E2) () {
 				}
 			}
 		}
-		if (event == 0x0002) {
+		if (event == SCRIPTED) {
 			Func0907(item, 0x0002);
 		}
 	}
@@ -79083,7 +79132,7 @@ extern void Func08BF 0x8BF ();
 void Func07E7 object#(0x7E7) () {
 	var var0000;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = get_item_quality();
 		if (!var0000) {
 			UI_error_message("Invalid Egg!");
@@ -79122,7 +79171,7 @@ void Func07E7 object#(0x7E7) () {
 			Func08BF();
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (get_item_shape() == 0x0210) {
 			Func08BB();
 		}
@@ -79169,7 +79218,7 @@ void Func07E9 object#(0x7E9) () {
 	var var0009;
 
 	var0000 = 0x0000;
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = UI_click_on_item();
 		var0002 = var0001->get_item_shape();
 		var0003 = false;
@@ -79266,7 +79315,7 @@ void Func07EA object#(0x7EA) () {
 	var var0009;
 	var var000A;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = false;
 		var0001 = false;
 		var0002 = 0xFE9C->get_object_position() & (0x0096 & 0x001F);
@@ -79379,7 +79428,7 @@ void Func07EC object#(0x7EC) () {
 	var var0009;
 	var var000A;
 
-	if ((event == 0x0002) && ((gflags[0x0007] == false) && (gflags[0x0008] == false))) {
+	if ((event == SCRIPTED) && ((gflags[0x0007] == false) && (gflags[0x0008] == false))) {
 		var0000 = 0xFF31->get_object_position();
 		UI_sprite_effect(0x0015, (var0000[0x0001] - 0x0002), (var0000[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_play_sound_effect(0x0082);
@@ -79436,7 +79485,7 @@ void Func07EC object#(0x7EC) () {
 		gflags[0x0007] = true;
 		abort;
 	}
-	if ((event == 0x0002) && (gflags[0x0007] == true)) {
+	if ((event == SCRIPTED) && (gflags[0x0007] == true)) {
 		UI_init_conversation();
 		0xFF2D->show_npc_face0(0x0000);
 		say("\"I'm not so easily defeated, friend monk...\"");
@@ -79471,7 +79520,7 @@ void Func07EC object#(0x7EC) () {
 		gflags[0x0008] = true;
 		abort;
 	}
-	if ((event == 0x0002) && (gflags[0x0008] == true)) {
+	if ((event == SCRIPTED) && (gflags[0x0008] == true)) {
 		UI_play_sound_effect(0x0029);
 		obj_sprite_effect(0x001F, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
 		abort;
@@ -79492,7 +79541,7 @@ void Func07ED object#(0x7ED) () {
 	var var0006;
 	var var0007;
 
-	if ((event == 0x0002) && (gflags[0x0008] == true)) {
+	if ((event == SCRIPTED) && (gflags[0x0008] == true)) {
 		UI_set_weather(0x0000);
 		gflags[0x0008] = false;
 		UI_init_conversation();
@@ -79532,7 +79581,7 @@ void Func07ED object#(0x7ED) () {
 		gflags[0x0009] = true;
 		abort;
 	}
-	if ((event == 0x0002) && (gflags[0x0009] == true)) {
+	if ((event == SCRIPTED) && (gflags[0x0009] == true)) {
 		var0005 = UI_create_new_object(0x025F);
 		if (var0005) {
 			var0005->clear_item_flag(TEMPORARY);
@@ -79544,8 +79593,8 @@ void Func07ED object#(0x7ED) () {
 			// Note: these generate si_path_run_usecode calls to Func0000, which
 			// does not exist. Maybe they are just for making the NPCs move to
 			// where var0005 is?
-			Func090E(0xFF2D, var0005, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, true);
-			Func090E(0xFF31, var0005, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, true);
+			Func090E(0xFF2D, var0005, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, PROXIMITY, true);
+			Func090E(0xFF31, var0005, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, PROXIMITY, true);
 			var0001 = script var0005 after (var0007 - 0x0002) ticks {
 				call Func07ED;
 			};
@@ -79554,7 +79603,7 @@ void Func07ED object#(0x7ED) () {
 			abort;
 		}
 	}
-	if ((event == 0x0002) && (gflags[0x000A] == true)) {
+	if ((event == SCRIPTED) && (gflags[0x000A] == true)) {
 		var0000 = get_object_position();
 		UI_sprite_effect(0x001F, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_play_sound_effect(0x002A);
@@ -79615,11 +79664,11 @@ void Func07EE object#(0x7EE) () {
 	var var0008;
 	var var0009;
 
-	if ((event == 0x0002) && (item == 0xFFFE->get_npc_object())) {
+	if ((event == SCRIPTED) && (item == 0xFFFE->get_npc_object())) {
 		Func09AC(0xFFFE, 0xFFFF, 0x0000, 0x0003);
 		abort;
 	}
-	if ((event == 0x0002) && (gflags[0x0008] == true)) {
+	if ((event == SCRIPTED) && (gflags[0x0008] == true)) {
 		var0000 = 0xFF2D->set_to_attack(item, 0x0118);
 		var0001 = script 0xFF2D {
 			nohalt;
@@ -79631,7 +79680,7 @@ void Func07EE object#(0x7EE) () {
 		};
 		abort;
 	}
-	if ((event == 0x0002) && (gflags[0x000A] == true)) {
+	if ((event == SCRIPTED) && (gflags[0x000A] == true)) {
 		0xFF2D->set_schedule_type(0x000F);
 		var0002 = 0xFF31->get_object_position();
 		UI_play_sound_effect(0x0051);
@@ -79656,7 +79705,7 @@ void Func07EE object#(0x7EE) () {
 		gflags[0x0007] = true;
 		abort;
 	}
-	if ((event == 0x0002) && (gflags[0x0007] == true)) {
+	if ((event == SCRIPTED) && (gflags[0x0007] == true)) {
 		UI_init_conversation();
 		0xFF2D->show_npc_face0(0x0000);
 		0xFE9C->clear_item_flag(DONT_MOVE);
@@ -79704,7 +79753,7 @@ void Func07EE object#(0x7EE) () {
 		};
 		abort;
 	}
-	if ((event == 0x0002) && (gflags[0x0009] == true)) {
+	if ((event == SCRIPTED) && (gflags[0x0009] == true)) {
 		0xFFFE->set_schedule_type(0x0003);
 		var0001 = script 0xFFFE after 2 ticks {
 			nohalt;
@@ -79895,7 +79944,7 @@ void Func07F5 object#(0x7F5) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0004) {
+	if (event == WEAPON) {
 		var0000 = UI_click_on_item();
 		var0001 = Func09A0(0x0004, 0x0002);
 		if (var0000->get_item_shape() == 0x0200) {
@@ -79922,7 +79971,7 @@ void Func07F5 object#(0x7F5) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		Func09BF();
 	}
 }
@@ -79934,14 +79983,14 @@ void Func07F6 object#(0x7F6) () {
 	var var0003;
 	var var0004;
 
-	if ((event == 0x0002) && (gflags[0x0007] == false)) {
+	if ((event == SCRIPTED) && (gflags[0x0007] == false)) {
 		var0000 = get_item_quality();
 		var0001 = find_nearby(0x025F, 0x001E, 0x0010);
 		if (var0001) {
 			0xFE9C->set_item_flag(DONT_MOVE);
 			var0002 = get_distance(var0001);
 			var0003 = var0001->get_object_position();
-			0xFE9C->si_path_run_usecode(var0003, 0x000A, var0001, Func07F6, false);
+			0xFE9C->si_path_run_usecode(var0003, PATH_SUCCESS, var0001, Func07F6, false);
 			if (var0000 == 0x0005) {
 				var0004 = script 0xFF4E after (var0002 + 0x000A) ticks {
 					call Func07F6;
@@ -79964,7 +80013,7 @@ void Func07F6 object#(0x7F6) () {
 		gflags[0x0007] = true;
 		abort;
 	}
-	if ((event == 0x0002) && (gflags[0x0007] == true)) {
+	if ((event == SCRIPTED) && (gflags[0x0007] == true)) {
 		gflags[0x0007] = false;
 		set_schedule_type(0x0003);
 		if (get_npc_number() == 0xFF4E) {
@@ -79980,7 +80029,7 @@ void Func07F6 object#(0x7F6) () {
 			abort;
 		}
 	}
-	if (event == 0x000E) {
+	if (event == SI_PATH_FAILURE) {
 		var0003 = get_object_position();
 		UI_sprite_effect(0x0007, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		0xFE9C->move_object(var0003);
@@ -80098,7 +80147,7 @@ void Func07F8 object#(0x7F8) () {
 	var var000D;
 
 	var0000 = get_item_quality();
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (var0000 == 0x0001) {
 			abort;
 		}
@@ -80109,7 +80158,7 @@ void Func07F8 object#(0x7F8) () {
 			Func08C3();
 		}
 	}
-	if ((event == 0x000D) && (get_npc_number() == 0xFE9C)) {
+	if ((event == SI_PATH_SUCCESS) && (get_npc_number() == 0xFE9C)) {
 		if (!gflags[0x0171]) {
 			0xFE9C->set_schedule_type(0x000F);
 			var0001 = script 0xFFC3 {
@@ -80138,7 +80187,7 @@ void Func07F8 object#(0x7F8) () {
 		}
 		abort;
 	}
-	if ((event == 0x0002) && (item == Func09A0(0x0001, 0x0002))) {
+	if ((event == SCRIPTED) && (item == Func09A0(0x0001, 0x0002))) {
 		var0001 = UI_get_party_list2();
 		var0004 = false;
 		for (var0007 in var0001 with var0005 to var0006) {
@@ -80153,7 +80202,7 @@ void Func07F8 object#(0x7F8) () {
 				var0001 = 0x066A;
 			}
 			var0007 = 0x0404 + Func09A0(0x0001, 0x0002)->get_item_quality();
-			var0004->si_path_run_usecode([var0007, var0001, 0x0000], 0x000D, Func09A0(0x0001, 0x0002), Func07F8, true);
+			var0004->si_path_run_usecode([var0007, var0001, 0x0000], SI_PATH_SUCCESS, Func09A0(0x0001, 0x0002), Func07F8, true);
 			var0001 = Func09A0(0x0001, 0x0002)->get_item_quality() + 0x0002;
 			var0001 = Func09A0(0x0001, 0x0002)->set_item_quality(var0001);
 			var0001 = script Func09A0(0x0001, 0x0002) {
@@ -80163,7 +80212,7 @@ void Func07F8 object#(0x7F8) () {
 		}
 		abort;
 	}
-	if ((event == 0x0002) && (var0000 == 0x00B3)) {
+	if ((event == SCRIPTED) && (var0000 == 0x00B3)) {
 		var0001 = UI_part_of_day();
 		if ((var0001 < 0x0003) || (var0001 > 0x0006)) {
 			var0001 = Func0992(0x0001, 0x0000, 0x0000, true);
@@ -80204,7 +80253,7 @@ void Func07F8 object#(0x7F8) () {
 			nohalt;
 			call Func07F8;
 		};
-		0xFE9C->si_path_run_usecode([0x0407, 0x0668, 0x0000], 0x000D, 0xFE9C->get_npc_object(), Func07F8, false);
+		0xFE9C->si_path_run_usecode([0x0407, 0x0668, 0x0000], SI_PATH_SUCCESS, 0xFE9C->get_npc_object(), Func07F8, false);
 		Func08C2();
 		if (gflags[0x0170]) {
 			var000C = Func0992(0x0001, "@The trial awaits!@", "@The trial awaits our presence.@", true);
@@ -80218,10 +80267,10 @@ void Func07F8 object#(0x7F8) () {
 		}
 		abort;
 	}
-	if ((event == 0x000D) && (item == Func09A0(0x0001, 0x0002))) {
+	if ((event == SI_PATH_SUCCESS) && (item == Func09A0(0x0001, 0x0002))) {
 		abort;
 	}
-	if ((event == 0x0002) || (event == 0x000D)) {
+	if ((event == SCRIPTED) || (event == SI_PATH_SUCCESS)) {
 		var000D = Func09A0(0x0001, 0x0001)->get_item_quality();
 		if (var000D == 0x00FD) {
 			var0001 = Func09A0(0x0001, 0x0001)->set_item_quality(0x0014);
@@ -80277,7 +80326,7 @@ void Func07F9 object#(0x7F9) () {
 	var var0015;
 	var var0016;
 
-	if (event == 0x0008) {
+	if (event == BG_PATH_FAILURE) {
 		gflags[0x0083] = false;
 		gflags[0x0007] = false;
 		var0000 = Func0930(item, 0x0178, 0x000F);
@@ -80304,7 +80353,7 @@ void Func07F9 object#(0x7F9) () {
 		};
 		return;
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		var0001 = find_nearest(0x025F, 0x000F);
 		if (var0001) {
 			var0001->remove_item();
@@ -80323,10 +80372,10 @@ void Func07F9 object#(0x7F9) () {
 		Func0931(item);
 		abort;
 	}
-	if (event == 0x000E) {
+	if (event == SI_PATH_FAILURE) {
 		Func092F(item, 0x0007);
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		var0004 = 0xFE9C->find_nearby(0x00E4, 0x0023, 0x0000);
 		for (var0007 in var0004 with var0005 to var0006) {
 			if (var0007->get_npc_id() == 0x0009) {
@@ -80341,7 +80390,7 @@ void Func07F9 object#(0x7F9) () {
 			call Func07FD;
 		};
 	}
-	if (event == 0x000B) {
+	if (event == PATH_FAILURE) {
 		var0000 = Func0930(item, 0x0178, 0x0023);
 		if (!var0000) {
 			Func092F(item, 0x0009);
@@ -80365,7 +80414,7 @@ void Func07F9 object#(0x7F9) () {
 			call Func07F9;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x0007]) {
 			gflags[0x0007] = false;
 			var0001 = find_nearest(0x025F, 0x000F);
@@ -80380,7 +80429,7 @@ void Func07F9 object#(0x7F9) () {
 					var000D->run_schedule();
 				}
 			}
-			Func0937(item, var0001, var0008, var0009, 0x0000, Func07F9, item, 0x0009);
+			Func0937(item, var0001, var0008, var0009, 0x0000, Func07F9, item, STARTED_TALKING);
 			return;
 		}
 		var000E = find_nearby(0x00E4, 0x001E, 0x0000);
@@ -80408,9 +80457,9 @@ void Func07F9 object#(0x7F9) () {
 		var0009 = [0x0000, 0x0001, 0x0000, 0xFFFF, 0xFFFE, 0x0002, 0x0002, 0x0001, 0x0000, 0xFFFF, 0xFFFE];
 		var0013 = 0xFFFF;
 		var0001 = find_nearest(0x025F, 0x000F);
-		Func0937(item, var0001, var0008, var0009, var0013, Func07F9, item, 0x000D);
+		Func0937(item, var0001, var0008, var0009, var0013, Func07F9, item, SI_PATH_SUCCESS);
 	}
-	if (event == 0x000D) {
+	if (event == SI_PATH_SUCCESS) {
 		var000A = [0xFFC1, 0xFFB1, 0xFFB6, 0xFFB9, 0xFF6A];
 		for (var000D in var000A with var0014 to var0015) {
 			if (Func0932(var000D)) {
@@ -80591,7 +80640,7 @@ void Func07FA object#(0x7FA) () {
 			Func08A3();
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0009 = get_item_quality();
 		var000A = Func08A0(0x0003);
 		if (var000A != 0x0045) {
@@ -80684,7 +80733,7 @@ void Func07FB object#(0x7FB) () {
 		var0006 = var0005->find_nearby(0x0113, 0x0028, 0x0010);
 		if (var0006) {
 			var0007 = var0006->get_object_position();
-			si_path_run_usecode(var0007, 0x000D, item, Func07F8, false);
+			si_path_run_usecode(var0007, SI_PATH_SUCCESS, item, Func07F8, false);
 		}
 		abort;
 	}
@@ -80772,7 +80821,7 @@ void Func07FB object#(0x7FB) () {
 			var0007 = var0006->get_object_position();
 			Func08C5();
 			Func097F(0xFFD1, "@What is going on?@", 0x0004);
-			si_path_run_usecode(var0007, 0x000D, item, Func07F8, false);
+			si_path_run_usecode(var0007, SI_PATH_SUCCESS, item, Func07F8, false);
 		}
 		abort;
 	}
@@ -80846,7 +80895,7 @@ void Func07FB object#(0x7FB) () {
 		var0006 = var0005->find_nearby(0x0113, 0x0014, 0x0010);
 		if (var0006) {
 			var0007 = var0006->get_object_position();
-			si_path_run_usecode(var0007, 0x000D, item, Func07F8, false);
+			si_path_run_usecode(var0007, SI_PATH_SUCCESS, item, Func07F8, false);
 		}
 		abort;
 	}
@@ -80894,7 +80943,7 @@ void Func07FB object#(0x7FB) () {
 		if (var0006) {
 			var0007 = var0006->get_object_position();
 			Func08C5();
-			si_path_run_usecode(var0007, 0x000D, item, Func07F8, false);
+			si_path_run_usecode(var0007, SI_PATH_SUCCESS, item, Func07F8, false);
 		}
 		abort;
 	}
@@ -80931,7 +80980,7 @@ void Func07FB object#(0x7FB) () {
 		if (var0006) {
 			var0007 = var0006->get_object_position();
 			Func08C5();
-			si_path_run_usecode(var0007, 0x000D, item, Func07F8, false);
+			si_path_run_usecode(var0007, SI_PATH_SUCCESS, item, Func07F8, false);
 		}
 		abort;
 	}
@@ -81005,7 +81054,7 @@ void Func07FB object#(0x7FB) () {
 		var0006 = var0005->find_nearby(0x0113, 0x001E, 0x0010);
 		if (var0006) {
 			var0007 = var0006->get_object_position();
-			si_path_run_usecode(var0007, 0x000D, item, Func07F8, false);
+			si_path_run_usecode(var0007, SI_PATH_SUCCESS, item, Func07F8, false);
 		}
 		abort;
 	}
@@ -81039,7 +81088,7 @@ void Func07FB object#(0x7FB) () {
 		Func097F(0xFFC3, "@Beware of Leon!@", 0x0003);
 		Func097F(0xFFD2, "@Shame on us...@", 0x0007);
 		Func097F(0xFFC8, "@I forgive thee...@", 0x0003);
-		si_path_run_usecode([0x0407, 0x0679, 0x0000], 0x000D, item, Func07FB, false);
+		si_path_run_usecode([0x0407, 0x0679, 0x0000], SI_PATH_SUCCESS, item, Func07FB, false);
 		abort;
 	}
 	if (var0000 == 0x002D) {
@@ -81063,7 +81112,7 @@ void Func07FB object#(0x7FB) () {
 		Func097F(0xFFC3, "@Get back here!@", 0x0002);
 		Func097F(0xFFCD, "@Let him go...@", 0x0005);
 		Func08C5();
-		si_path_run_usecode([0x0407, 0x0679, 0x0000], 0x000D, item, Func07FB, false);
+		si_path_run_usecode([0x0407, 0x0679, 0x0000], SI_PATH_SUCCESS, item, Func07FB, false);
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x002D);
 		abort;
 	}
@@ -81093,7 +81142,7 @@ void Func07FB object#(0x7FB) () {
 		Func097F(0xFFC5, "@I love thee, Delphynia!@", 0x0000);
 		Func097F(0xFFD0, "@I cannot...@", 0x0002);
 		Func097F(0xFFC3, "@Ruggs, be silent!@", 0x0003);
-		si_path_run_usecode([0x0407, 0x0679, 0x0000], 0x000D, item, Func07FB, false);
+		si_path_run_usecode([0x0407, 0x0679, 0x0000], SI_PATH_SUCCESS, item, Func07FB, false);
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x002D);
 		abort;
 	}
@@ -81116,7 +81165,7 @@ void Func07FB object#(0x7FB) () {
 		UI_end_conversation();
 		Func097F(0xFFC4, "@Not the wand!@", 0x0000);
 		Func097F(0xFFCD, "@Jorvin...@", 0x0003);
-		si_path_run_usecode([0x0407, 0x0679, 0x0000], 0x000D, item, Func07FB, false);
+		si_path_run_usecode([0x0407, 0x0679, 0x0000], SI_PATH_SUCCESS, item, Func07FB, false);
 		var0004 = script 0xFFCB after 4 ticks {
 			nohalt;
 			actor frame bowing;
@@ -81205,7 +81254,7 @@ void Func07FB object#(0x7FB) () {
 		var0006 = var0005->find_nearby(0x0113, 0x0028, 0x0010);
 		if (var0006) {
 			var0007 = var0006->get_object_position();
-			si_path_run_usecode(var0007, 0x000D, item, Func07F8, false);
+			si_path_run_usecode(var0007, SI_PATH_SUCCESS, item, Func07F8, false);
 		}
 		abort;
 	}
@@ -81364,7 +81413,7 @@ labelFunc07FC_0135:
 		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
-			si_path_run_usecode(var0006, 0x000D, item, Func07F8, false);
+			si_path_run_usecode(var0006, SI_PATH_SUCCESS, item, Func07F8, false);
 		}
 		UI_end_conversation();
 		abort;
@@ -81432,7 +81481,7 @@ labelFunc07FC_02C2:
 		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
-			si_path_run_usecode(var0006, 0x000D, item, Func07F8, false);
+			si_path_run_usecode(var0006, SI_PATH_SUCCESS, item, Func07F8, false);
 		}
 		UI_end_conversation();
 		abort;
@@ -81569,7 +81618,7 @@ labelFunc07FC_0595:
 		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
-			si_path_run_usecode(var0006, 0x000D, item, Func07F8, false);
+			si_path_run_usecode(var0006, SI_PATH_SUCCESS, item, Func07F8, false);
 		}
 		UI_end_conversation();
 		abort;
@@ -81652,7 +81701,7 @@ labelFunc07FC_074A:
 		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
-			si_path_run_usecode(var0006, 0x000D, item, Func07F8, false);
+			si_path_run_usecode(var0006, SI_PATH_SUCCESS, item, Func07F8, false);
 		}
 		UI_end_conversation();
 		abort;
@@ -81736,7 +81785,7 @@ labelFunc07FC_0904:
 		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
-			si_path_run_usecode(var0006, 0x000D, item, Func07F8, false);
+			si_path_run_usecode(var0006, SI_PATH_SUCCESS, item, Func07F8, false);
 		}
 		UI_end_conversation();
 		abort;
@@ -81834,7 +81883,7 @@ labelFunc07FC_0B2E:
 		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
-			si_path_run_usecode(var0006, 0x000D, item, Func07F8, false);
+			si_path_run_usecode(var0006, SI_PATH_SUCCESS, item, Func07F8, false);
 		}
 		UI_end_conversation();
 		abort;
@@ -81909,7 +81958,7 @@ labelFunc07FC_0CC8:
 		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
-			si_path_run_usecode(var0006, 0x000D, item, Func07F8, false);
+			si_path_run_usecode(var0006, SI_PATH_SUCCESS, item, Func07F8, false);
 		}
 		UI_end_conversation();
 		abort;
@@ -82002,7 +82051,7 @@ labelFunc07FC_0EB4:
 		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
-			si_path_run_usecode(var0006, 0x000D, item, Func07F8, false);
+			si_path_run_usecode(var0006, SI_PATH_SUCCESS, item, Func07F8, false);
 		}
 		UI_end_conversation();
 		abort;
@@ -82030,25 +82079,25 @@ void Func07FD object#(0x7FD) () {
 	var var000B;
 	var var000C;
 
-	if (event == 0x0008) {
+	if (event == BG_PATH_FAILURE) {
 		gflags[0x0007] = true;
 		var0000 = script item after 1 ticks {
 			call Func07FD;
 		};
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		gflags[0x0008] = true;
 		var0000 = script item after 1 ticks {
 			call Func07FD;
 		};
 	}
-	if (event == 0x000B) {
+	if (event == PATH_FAILURE) {
 		gflags[0x000A] = true;
 		var0000 = script item after 1 ticks {
 			call Func07FD;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x0007] && (!gflags[0x0009])) {
 			gflags[0x0007] = false;
 			set_camera();
@@ -82063,7 +82112,7 @@ void Func07FD object#(0x7FD) () {
 			}
 			var0006 = [0xFFFE, 0xFFFD, 0xFFFF];
 			var0007 = [0x0000, 0x0000, 0x0000];
-			Func0937(item, var0004, var0006, var0007, 0x0000, Func07FD, item, 0x000A);
+			Func0937(item, var0004, var0006, var0007, 0x0000, Func07FD, item, PATH_SUCCESS);
 		}
 		if (gflags[0x0008]) {
 			gflags[0x0008] = false;
@@ -82073,7 +82122,7 @@ void Func07FD object#(0x7FD) () {
 			}
 			var0006 = [0x0003, 0x0003, 0x0003];
 			var0007 = [0xFFFF, 0xFFFE, 0x0000];
-			Func0937(item, var0008, var0006, var0007, 0x0000, Func07F9, item, 0x000B);
+			Func0937(item, var0008, var0006, var0007, 0x0000, Func07F9, item, PATH_FAILURE);
 		}
 		if (gflags[0x0009]) {
 			gflags[0x000A] = true;
@@ -82095,10 +82144,10 @@ void Func07FD object#(0x7FD) () {
 				Func092F(item, 0x0016);
 			}
 			var0005 = var0008->get_object_position();
-			var000C->si_path_run_usecode([(var0005[0x0001] + 0x0002), (var0005[0x0002] - 0x0004), var0005[0x0003]], 0x000A, item, Func07F9, true);
+			var000C->si_path_run_usecode([(var0005[0x0001] + 0x0002), (var0005[0x0002] - 0x0004), var0005[0x0003]], PATH_SUCCESS, item, Func07F9, true);
 		}
 	}
-	if (event == 0x000E) {
+	if (event == SI_PATH_FAILURE) {
 		Func092F(item, 0x0015);
 	}
 }
@@ -82186,7 +82235,7 @@ void Func07FF object#(0x7FF) () {
 			break;
 		}
 		var0000->clear_item_say();
-		var0000->si_path_run_usecode([0x03FB, 0x0A77, 0x0006], 0x000D, var0000, Func00E4, true);
+		var0000->si_path_run_usecode([0x03FB, 0x0A77, 0x0006], SI_PATH_SUCCESS, var0000, Func00E4, true);
 		break;
 	} while (false);
 	var0005 = find_nearby(0x020A, 0x002D, 0x0000);
@@ -83322,14 +83371,14 @@ void Func0808 0x808 (var var0000, var var0001) {
 	var0002 = "";
 	var0003 = Func0954();
 	var0004 = UI_is_pc_female();
-	if ((event == 0x0000) && (get_schedule_type() == 0x0009)) {
+	if ((event == PROXIMITY) && (get_schedule_type() == 0x0009)) {
 		if (UI_get_random(0x000A) < 0x0006) {
 			abort;
 		}
 		var0005 = ["@Leave this place!@", "@Intrude not!@", "@Call the Rangers!@", "@Anger not the Mages...@", "@Take nothing!@", "@Thief! Thief!@"];
 		Func097F(item, var0005[UI_get_random(0x0006)], 0x0000);
 	}
-	if ((event == 0x0001) && (get_schedule_type() != 0x000A)) {
+	if ((event == DOUBLECLICK) && (get_schedule_type() != 0x000A)) {
 		0xFE9C->item_say("Hold!");
 		item->Func07D1();
 		Func097F(item, "@Yes?@", 0x0002);
@@ -83347,7 +83396,7 @@ void Func0808 0x808 (var var0000, var var0001) {
 		}
 		set_schedule_type(0x0003);
 	}
-	if ((event == 0x0009) || (event == 0x0002)) {
+	if ((event == STARTED_TALKING) || (event == SCRIPTED)) {
 		run_schedule();
 		clear_item_say();
 		0xFED6->show_npc_face0(0x0000);
@@ -83469,13 +83518,13 @@ void Func0809 0x809 () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("Hold!");
 		item->Func07D1();
 		Func097F(item, "@What was that?@", 0x0002);
 		set_schedule_type(0x0003);
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		0xFED6->show_npc_face0(0x0000);
 		clear_item_say();
 		run_schedule();
@@ -85425,7 +85474,7 @@ void Func0814 0x814 () {
 		var0001 = 0xFF4E->get_distance(var0000);
 		var0002 = var0000->get_object_position();
 		var0002[0x0001] -= 0x0002;
-		0xFF4E->si_path_run_usecode(var0002, 0x000D, 0xFF4E->get_npc_object(), Func04B2, true);
+		0xFF4E->si_path_run_usecode(var0002, SI_PATH_SUCCESS, 0xFF4E->get_npc_object(), Func04B2, true);
 	}
 }
 
@@ -85467,7 +85516,8 @@ void Func0815 0x815 (var var0000) {
 		gflags[0x021C] = true;
 		if (var0001) {
 			var0007 = get_object_position();
-			0xFF69->si_path_run_usecode(var0007, 0x0007, item, Func0314, false);
+			// BUG: This should use PATH_SUCCESS instead of BG_PATH_SUCCESS.
+			0xFF69->si_path_run_usecode(var0007, BG_PATH_SUCCESS, item, Func0314, false);
 			var0006 = script var0001 after 10 ticks {
 				nohalt;
 				say "@Thou art truly ethical!@";
@@ -88302,8 +88352,8 @@ void Func0826 0x826 (var var0000) {
 	var0002 = var0001->get_object_position();
 	if (var0000 == 0x0009) {
 		if (var0001) {
-			0xFFF1->si_path_run_usecode(var0002, 0x000A, 0xFFF1->get_npc_object(), Func040F, true);
-			UI_set_path_failure([Func040F], item, 0x000E);
+			0xFFF1->si_path_run_usecode(var0002, PATH_SUCCESS, 0xFFF1->get_npc_object(), Func040F, true);
+			UI_set_path_failure([Func040F], item, SI_PATH_FAILURE);
 		}
 	}
 	if (var0000 == 0x000A) {
@@ -89747,7 +89797,7 @@ void Func0833 0x833 (var var0000) {
 	if (var0000 == 0x0001) {
 		if (var0001) {
 			var0002 = var0001->get_object_position();
-			0xFFB0->si_path_run_usecode(var0002, 0x000A, 0xFFB0->get_npc_object(), Func0450, true);
+			0xFFB0->si_path_run_usecode(var0002, PATH_SUCCESS, 0xFFB0->get_npc_object(), Func0450, true);
 		}
 	}
 	if (var0000 == 0x000A) {
@@ -90575,7 +90625,7 @@ void Func083B 0x83B (var var0000) {
 		face var0008;
 	};
 	var0001 = Func0992(0x0001, (("@The dog points " + var0009) + "!@"), (("@" + var0009) + "!@"), true);
-	si_path_run_usecode(var0003, 0x000D, item, Func036A, true);
+	si_path_run_usecode(var0003, SI_PATH_SUCCESS, item, Func036A, true);
 	abort;
 }
 
@@ -94702,7 +94752,7 @@ void Func0855 0x855 (var var0000) {
 		Func097F(item, "@Stand back...@", 0x0000);
 		if (var0001) {
 			var0002 = [0x0465, 0x099C, 0x0000];
-			si_path_run_usecode(var0002, 0x000A, item, Func00E4, true);
+			si_path_run_usecode(var0002, PATH_SUCCESS, item, Func00E4, true);
 		}
 	}
 	if (var0000 == 0x000A) {
@@ -99876,7 +99926,7 @@ void Func087C 0x87C () {
 			var000F = Func09A0(0x0000, 0x0002);
 			UI_play_music(0x001D, var000F);
 			var0010 = var000C->get_object_position();
-			Func090D(var000C, 0xFFFF, 0xFFFF, 0xFFFF, Func03BB, var000C, 0x000A);
+			Func090D(var000C, 0xFFFF, 0xFFFF, 0xFFFF, Func03BB, var000C, PATH_SUCCESS);
 		}
 	}
 }
@@ -100295,7 +100345,7 @@ void Func0889 0x889 (var var0000) {
 		var0005 = [0x0000];
 		var0006 = [0x0000];
 		var0007 = 0xFFFF;
-		Func090D(var0004, var0005, var0006, var0007, Func025F, var0000, 0x000B);
+		Func090D(var0004, var0005, var0006, var0007, Func025F, var0000, PATH_FAILURE);
 		return;
 	}
 	if (!var0001) {
@@ -100384,7 +100434,7 @@ void Func0889 0x889 (var var0000) {
 		var0008 = true;
 	}
 	if (var0008) {
-		Func090D(var0001, var0005, var0006, var0007, var0009, var0000, 0x000B);
+		Func090D(var0001, var0005, var0006, var0007, var0009, var0000, PATH_FAILURE);
 	}
 }
 
@@ -100477,7 +100527,7 @@ void Func088A 0x88A (var var0000) {
 			return;
 		}
 		if (var0000->get_item_quality() > 0x0000) {
-			event = 0x000A;
+			event = PATH_SUCCESS;
 			var0000->Func062B();
 		}
 		var0007 = false;
@@ -100518,14 +100568,14 @@ void Func088A 0x88A (var var0000) {
 			return;
 		}
 		if (var0007) {
-			Func090D(var0001, var0008, var0009, var000A, var0006, var0001, 0x000A);
+			Func090D(var0001, var0008, var0009, var000A, var0006, var0001, PATH_SUCCESS);
 		} else if (var0000->get_item_frame() < 0x0006) {
 			var0000->set_item_frame(0x0000);
 		}
 	} else {
-		var0004 = UI_path_run_usecode([var0001[0x0002], var0001[0x0003], var0001[0x0004]], Func062B, var0000, 0x000A);
+		var0004 = UI_path_run_usecode([var0001[0x0002], var0001[0x0003], var0001[0x0004]], Func062B, var0000, PATH_SUCCESS);
 		if (!var0004) {
-			event = 0x000A;
+			event = PATH_SUCCESS;
 			var0000->Func062B();
 		}
 	}
@@ -101679,7 +101729,7 @@ void Func08AD 0x8AD (var var0000, var var0001, var var0002, var var0003) {
 		}
 		if (!(var000C == "")) {
 			if (Func0983(var0003)) {
-				if ((event != 0x0008) || (var000A < 0x0019)) {
+				if ((event != BG_PATH_FAILURE) || (var000A < 0x0019)) {
 					var0003->clear_item_say();
 					Func094F(var0003, var000C);
 				}
@@ -101718,16 +101768,16 @@ void Func08AE 0x8AE () {
 	for (var0007 in var0004 with var0005 to var0006) {
 		if (var0007->get_item_quality() == 0x0064) {
 			var0008 = var0007->get_object_position();
-			Func090E(0xFF57, var0007, var0000, var0001, var0002, Func04A9, 0xFF57->get_npc_object(), 0x000A, true);
-			UI_set_path_failure(Func04A9, item, 0x000A);
+			Func090E(0xFF57, var0007, var0000, var0001, var0002, Func04A9, 0xFF57->get_npc_object(), PATH_SUCCESS, true);
+			UI_set_path_failure(Func04A9, item, PATH_SUCCESS);
 			return;
 		}
 	}
 	for (var0007 in var0004 with var0009 to var000A) {
 		if (var0007->get_item_quality() == 0x0000) {
 			var0008 = var0007->get_object_position();
-			Func090E(0xFF57, var0007, var0000, var0001, var0002, Func04A9, 0xFF57->get_npc_object(), 0x000A, true);
-			UI_set_path_failure(Func04A9, item, 0x000A);
+			Func090E(0xFF57, var0007, var0000, var0001, var0002, Func04A9, 0xFF57->get_npc_object(), PATH_SUCCESS, true);
+			UI_set_path_failure(Func04A9, item, PATH_SUCCESS);
 			// Need to make UCC optimize this
 			goto labelFunc08AE_00DD;
 		}
@@ -101932,7 +101982,7 @@ extern void Func09AD 0x9AD (var var0000);
 extern void Func0809 0x809 ();
 
 void Func08B2 0x8B2 () {
-	if ((event == 0x000D) || (event == 0x000E)) {
+	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
 		Func09AD(item);
 	}
 	if (get_item_flag(SI_ZOMBIE)) {
@@ -102266,14 +102316,14 @@ void Func08BA 0x8BA () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = 0xFF64->get_object_position();
 		0xFF64->obj_sprite_effect(0x000C, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
 		var0001 = script item {
 			call Func0334;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0002 = UI_die_roll(0x0001, 0x0005);
 		var0003 = [0x0361, 0x0219, 0x012E, 0x0149, 0x036D];
 		var0004 = ["Spiders", "Wolves", "Bears", "Boars", "Doom"];
@@ -102297,7 +102347,7 @@ void Func08BB 0x8BB () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (get_item_quality() == 0x0001) {
 			var0000 = get_object_position();
 			var0001 = find_nearest(0x0210, 0x0000);
@@ -102317,7 +102367,7 @@ void Func08BB 0x8BB () {
 			var0001 = 0x0000;
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = false;
 		if (get_item_shape() == 0x0210) {
 			var0001 = item;
@@ -102365,7 +102415,7 @@ void Func08BC 0x8BC () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (get_item_quality() == 0x0003) {
 			var0000 = 0xFE9C->find_nearby(0x00F3, 0x0028, 0x0000);
 			if (var0000) {
@@ -102385,7 +102435,7 @@ void Func08BC 0x8BC () {
 			if (var0003 && var0004) {
 				var0003->set_item_frame(0x0014);
 				var0004->set_item_frame(0x000C);
-				event = 0x0001;
+				event = DOUBLECLICK;
 				var0003->Func0178();
 				var0002 = 0xFE9C->get_object_position() & (0x00DE & 0x0000);
 				var0000 = var0002->find_nearby(0x00F3, 0x0028, 0x0000);
@@ -102409,7 +102459,7 @@ void Func08BC 0x8BC () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if ((get_item_shape() == 0x00F3) && (!gflags[0x0248])) {
 			var0001 = script item after 10 ticks {
 				nohalt;
@@ -102496,7 +102546,7 @@ void Func08BF 0x8BF () {
 	var var001C;
 	var var001D;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if ((get_item_quality() == 0x0007) && (gflags[0x023E] && (gflags[0x0241] && (gflags[0x0240] && gflags[0x023F])))) {
 			gflags[0x0242] = false;
 			var0000 = find_nearby(0x0392, 0x0001, 0x0000);
@@ -102606,7 +102656,7 @@ void Func08BF 0x8BF () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (get_item_shape() == 0x0106) {
 			if (Func08C1()) {
 				var000B = 0xFE9C->find_nearest(0x017C, 0x0028);
@@ -103149,7 +103199,7 @@ void Func08CA 0x8CA () {
 	var var000E;
 	var var000F;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (get_item_quality() == 0x0001) {
 			var0000 = find_nearby(0x0103, 0x0003, 0x0008);
 			if (var0000) {
@@ -103208,7 +103258,7 @@ void Func08CA 0x8CA () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (get_item_shape() == 0x0103) {
 			var0006 = UI_die_roll(0x0001, 0x0005);
 			if (var0006 == 0x0001) {
@@ -103243,7 +103293,7 @@ void Func08CA 0x8CA () {
 				};
 				var0000->set_schedule_type(0x000F);
 				var0008 = [0x0A09, 0x055A, 0x0000];
-				var0000->si_path_run_usecode(var0008, 0x000A, var0000, Func07DF, true);
+				var0000->si_path_run_usecode(var0008, PATH_SUCCESS, var0000, Func07DF, true);
 				abort;
 			}
 		}
@@ -103299,7 +103349,7 @@ void Func08CA 0x8CA () {
 			abort;
 		}
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		if (get_item_shape() == 0x0103) {
 			var0000 = find_nearby(0x0103, 0x001E, 0x0008);
 			var0002 = get_object_position() & (0x00A3 & 0xFE99);
@@ -103325,8 +103375,8 @@ void Func08CA 0x8CA () {
 				var000D = 0x0001;
 				var000E = 0xFFFD;
 				var000F = 0x0000;
-				Func090D(var000C, var000D, var000E, var000F, Func07DF, var0000, 0x000B);
-				UI_set_path_failure(Func07DF, var0000, 0x000B);
+				Func090D(var000C, var000D, var000E, var000F, Func07DF, var0000, PATH_FAILURE);
+				UI_set_path_failure(Func07DF, var0000, PATH_FAILURE);
 			}
 		}
 	}
@@ -103363,7 +103413,7 @@ void Func08CC 0x8CC () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (get_item_quality() == 0x0003) {
 			var0000 = find_nearby(0x037F, 0x000A, 0x0000);
 			for (var0003 in var0000 with var0001 to var0002) {
@@ -103397,7 +103447,7 @@ void Func08CC 0x8CC () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (get_item_shape() == 0x037F) {
 			var0006 = get_object_position();
 			remove_item();
@@ -103434,7 +103484,7 @@ void Func08CD 0x8CD () {
 	var var0009;
 	var var000A;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = [0x08FA, 0x055F, 0x0001];
 		0xFF5D->move_object(var0000);
 		0xFF5D->set_schedule_type(0x000F);
@@ -103464,7 +103514,7 @@ void Func08CD 0x8CD () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if ((get_item_shape() == 0x02D1) || (get_item_shape() == 0x03DD)) {
 			var0002 = 0xFE9C->get_object_position() & (0x0004 & 0x0007);
 			var0005 = var0002->find_nearby(0x0113, 0x0028, 0x0010);
@@ -103473,8 +103523,8 @@ void Func08CD 0x8CD () {
 				var0006 = 0x0006;
 				var0007 = 0x0000;
 				var0008 = 0x0000;
-				Func090D(var0005, var0006, var0007, var0008, Func07DF, item, 0x000A);
-				UI_set_path_failure(Func07DF, item, 0x000A);
+				Func090D(var0005, var0006, var0007, var0008, Func07DF, item, PATH_SUCCESS);
+				UI_set_path_failure(Func07DF, item, PATH_SUCCESS);
 			}
 		}
 		if (get_item_shape() == 0x0331) {
@@ -103752,18 +103802,18 @@ void Func08D4 0x8D4 () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = find_nearby(0x0375, 0x000C, 0x0000);
 		if (var0000) {
 			0xFF27->set_schedule_type(0x000F);
 			var0001 = 0xFFFF;
 			var0002 = 0xFFFF;
 			var0003 = 0xFFFD;
-			Func090E(0xFF27, item, var0001, var0002, var0003, Func07DF, 0xFF27->get_npc_object(), 0x000A, true);
-			UI_set_path_failure(Func07DF, 0xFF27->get_npc_object(), 0x000A);
+			Func090E(0xFF27, item, var0001, var0002, var0003, Func07DF, 0xFF27->get_npc_object(), PATH_SUCCESS, true);
+			UI_set_path_failure(Func07DF, 0xFF27->get_npc_object(), PATH_SUCCESS);
 		}
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		set_schedule_type(0x000A);
 		var0000 = find_nearby(0x0375, 0x000A, 0x0000);
 		if (var0000) {
@@ -103786,7 +103836,7 @@ void Func08D4 0x8D4 () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (get_item_shape() == 0x0375) {
 			var0007 = 0xFF27->get_cont_items(0x0179, 0xFE99, 0x0012);
 			if (var0007) {
@@ -103896,7 +103946,7 @@ void Func08D7 0x8D7 () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = get_object_position() & (0xFE99 & 0x0012);
 		var0001 = var0000->find_nearby(0x0179, 0x0006, 0x0000);
 		if (var0001) {
@@ -103932,7 +103982,7 @@ void Func08D7 0x8D7 () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0003 = get_object_position();
 		UI_sprite_effect(0x0009, (var0003[0x0001] - 0x0001), (var0003[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
 		set_polymorph(0x032B);
@@ -106273,7 +106323,7 @@ void Func091A 0x91A (var var0000) {
 }
 
 void Func091B 0x91B () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF6A->show_npc_face0(0x0000);
 		say("\"Avatar! Release thou me from this vile cell!\"");
 		say("\"Some fell sorcery brought me here and nothing I do can unlock the door. Release me and together we shall find the key to this mystery!\"");
@@ -106282,7 +106332,7 @@ void Func091B 0x91B () {
 }
 
 void Func091C 0x91C () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFBA->show_npc_face0(0x0000);
 		say("\"Avatar! Save me!\"");
 		say("\"Some fell sorcery brought me here and nothing I do can unlock the door. Release me, I beg thee! -- Before the fiend that did this comes for me!\"");
@@ -106322,7 +106372,7 @@ void Func091D 0x91D () {
 			var0003 = var0000->find_nearest(0x010E, 0x0005);
 			if (var0003) {
 				var0003->set_item_frame(0x0004);
-				event = 0x0001;
+				event = DOUBLECLICK;
 				var0003->Func010E();
 			}
 		}
@@ -106750,7 +106800,8 @@ void Func0927 0x927 () {
 		var0007 = find_nearby(0x0178, 0x000A, 0x0000);
 		if (var0007) {
 			var0008 = var0007->get_object_position();
-			0xFF51->si_path_run_usecode([(var0008[0x0001] + 0x0001), var0008[0x0002], var0008[0x0003]], 0x0007, 0xFF51->get_npc_object(), Func04B3, true);
+			// BUG: This should use PATH_SUCCESS instead of BG_PATH_SUCCESS.
+			0xFF51->si_path_run_usecode([(var0008[0x0001] + 0x0001), var0008[0x0002], var0008[0x0003]], BG_PATH_SUCCESS, 0xFF51->get_npc_object(), Func04B3, true);
 		}
 	} else {
 		0xFF53->clear_item_say();
@@ -106758,7 +106809,8 @@ void Func0927 0x927 () {
 		var0007 = find_nearby(0x0178, 0x000A, 0x0000);
 		if (var0007) {
 			var0008 = var0007->get_object_position();
-			0xFF53->si_path_run_usecode([(var0008[0x0001] + 0x0001), var0008[0x0002], var0008[0x0003]], 0x0007, 0xFF53->get_npc_object(), Func04B3, true);
+			// BUG: This should use PATH_SUCCESS instead of BG_PATH_SUCCESS.
+			0xFF53->si_path_run_usecode([(var0008[0x0001] + 0x0001), var0008[0x0002], var0008[0x0003]], BG_PATH_SUCCESS, 0xFF53->get_npc_object(), Func04B3, true);
 		}
 	}
 	abort;
@@ -107057,12 +107109,12 @@ void Func092E 0x92E (var var0000) {
 					if ((var0000 == 0xFE9C->get_npc_object()) || (var0000 == 0xFE9C)) {
 						0xFE9C->set_schedule_type(0x001F);
 						UI_end_conversation();
-						Func090D(var0004, [0xFFFC, 0xFFFC, 0xFFFC, 0xFFFC, 0xFFFC], [0xFFFF, 0xFFFE, 0x0000, 0xFFFD, 0xFFFF], 0x0000, Func07F9, var0000, 0x0008);
-						UI_set_path_failure(Func07F9, var0000, 0x000E);
+						Func090D(var0004, [0xFFFC, 0xFFFC, 0xFFFC, 0xFFFC, 0xFFFC], [0xFFFF, 0xFFFE, 0x0000, 0xFFFD, 0xFFFF], 0x0000, Func07F9, var0000, BG_PATH_FAILURE);
+						UI_set_path_failure(Func07F9, var0000, SI_PATH_FAILURE);
 					} else {
 						var0000->set_schedule_type(0x000F);
 						var0004 = var0004->get_object_position();
-						var0000->si_path_run_usecode([(var0004[0x0001] - 0x0004), (var0004[0x0002] - 0x0001), var0004[0x0003]], 0x0008, var0000, Func07F9, true);
+						var0000->si_path_run_usecode([(var0004[0x0001] - 0x0004), (var0004[0x0002] - 0x0001), var0004[0x0003]], BG_PATH_FAILURE, var0000, Func07F9, true);
 					}
 				}
 			}
@@ -107333,7 +107385,7 @@ void Func0931 0x931 (var var0000) {
 	} nobreak {
 		Func092F(var0000, 0x000F);
 	}
-	var001A->si_path_run_usecode([0x03FB, 0x0A77, 0x0006], 0x000D, var001A, Func00E4, true);
+	var001A->si_path_run_usecode([0x03FB, 0x0A77, 0x0006], SI_PATH_SUCCESS, var001A, Func00E4, true);
 }
 
 var Func0932 0x932 (var var0000) {
@@ -107617,7 +107669,7 @@ void Func0935 0x935 (var var0000) {
 	}
 	var000D = [0xFFFE, 0xFFFD, 0xFFFF];
 	var000E = [0x0000, 0x0000, 0x0000];
-	var0007->si_path_run_usecode([(var000C[0x0001] - 0x0002), (var000C[0x0002] - 0x0000), var000C[0x0003]], 0x000B, var0000, Func07FD, true);
+	var0007->si_path_run_usecode([(var000C[0x0001] - 0x0002), (var000C[0x0002] - 0x0000), var000C[0x0003]], PATH_FAILURE, var0000, Func07FD, true);
 }
 
 extern var Func098D 0x98D ();
@@ -107839,7 +107891,7 @@ void Func0937 0x937 (var var0000, var var0001, var var0002, var var0003, var var
 
 	if (var0000 == 0xFE9C->get_npc_object()) {
 		Func090D(var0001, var0002, var0003, var0004, var0005, var0006, var0007);
-		UI_set_path_failure(var0005, var0006, 0x000E);
+		UI_set_path_failure(var0005, var0006, SI_PATH_FAILURE);
 	} else {
 		var0008 = var0001->get_object_position();
 		var0008 = [(var0008[0x0001] + var0002[0x0001]), (var0008[0x0002] + var0003[0x0001]), var0008[0x0003]];
@@ -107867,7 +107919,7 @@ void Func0939 0x939 (var var0000) {
 	if (var0000 == 0x00F8) {
 		var0001 = Func08AC(true);
 		var0001->move_object([0x0407, 0x0679]);
-		var0001->si_path_run_usecode([0x0407, 0x066B], 0x000D, var0001->get_npc_object(), Func07F8, false);
+		var0001->si_path_run_usecode([0x0407, 0x066B], SI_PATH_SUCCESS, var0001->get_npc_object(), Func07F8, false);
 		Func08C5();
 		Func097F(var0001, (("@" + Func0954()) + "...@"), 0x000A);
 		var0005 = Func0954();
@@ -107882,7 +107934,7 @@ void Func0939 0x939 (var var0000) {
 			var0004->set_schedule_type(0x000F);
 		}
 		var0001 = UI_create_new_object2(0x017D, [0x0407, 0x0679]);
-		var0001->si_path_run_usecode([0x0408, 0x066F], 0x000D, var0001, Func07F8, false);
+		var0001->si_path_run_usecode([0x0408, 0x066F], SI_PATH_SUCCESS, var0001, Func07F8, false);
 		abort;
 	}
 	if (var0000 == 0x00FA) {
@@ -107923,7 +107975,7 @@ void Func0939 0x939 (var var0000) {
 	if (var0000 == 0x00FC) {
 		var0001 = get_object_position();
 		var0001[0x0001] += 0x0003;
-		si_path_run_usecode(var0001, 0x000D, item, Func07F8, false);
+		si_path_run_usecode(var0001, SI_PATH_SUCCESS, item, Func07F8, false);
 		abort;
 	}
 	if (var0000 == 0x00FD) {
@@ -108070,7 +108122,7 @@ void Func093A 0x93A (var var0000) {
 				};
 				var0005 = var0004->get_object_position();
 				var0005[0x0001] -= 0x0003;
-				var0004->si_path_run_usecode(var0005, 0x000D, var0004, Func07F8, false);
+				var0004->si_path_run_usecode(var0005, SI_PATH_SUCCESS, var0004, Func07F8, false);
 			}
 			abort;
 		}
@@ -108102,14 +108154,14 @@ void Func093A 0x93A (var var0000) {
 				nohalt;
 				say "@Come with me, prisoner.@";
 			};
-			si_path_run_usecode([0x0407, 0x0679, 0x0000], 0x000D, item, Func07F8, false);
+			si_path_run_usecode([0x0407, 0x0679, 0x0000], SI_PATH_SUCCESS, item, Func07F8, false);
 			abort;
 		}
 		if (var0000 == 0x005B) {
 			remove_item();
 			var0003 = Func08AC(true);
 			var0003->remove_from_party();
-			var0003->si_path_run_usecode([0x0408, 0x067A, 0x0000], 0x000D, var0003->get_npc_object(), Func07F8, false);
+			var0003->si_path_run_usecode([0x0408, 0x067A, 0x0000], SI_PATH_SUCCESS, var0003->get_npc_object(), Func07F8, false);
 			Func097F(var0003, "@Goodbye...@", 0x0000);
 			abort;
 		}
@@ -108125,7 +108177,7 @@ void Func093A 0x93A (var var0000) {
 			var0004 = "" & ("@What a farce!@" & ("@What shall I do?@" & "@Woe is me...@"));
 			Func094F(0xFE9C, var0004);
 			Func08AC(true)->remove_npc();
-			0xFE9C->si_path_run_usecode([0x0407, 0x068D, 0x0000], 0x000D, 0xFE9C->get_npc_object(), Func07F8, false);
+			0xFE9C->si_path_run_usecode([0x0407, 0x068D, 0x0000], SI_PATH_SUCCESS, 0xFE9C->get_npc_object(), Func07F8, false);
 			var0003 = Func09A0(0x0001, 0x0002)->set_item_quality(0x0000);
 			var0003 = script Func09A0(0x0001, 0x0002) after 500 ticks {
 				nohalt;
@@ -108256,7 +108308,7 @@ void Func093A 0x93A (var var0000) {
 					var0005[0x0002] += 0x000A;
 					UI_play_music(0x0014, Func09A0(0x0005, 0x0001));
 					0xFFD2->move_object(var0005);
-					0xFFD2->si_path_run_usecode([0x0408, 0x0670, 0x0000], 0x000D, 0xFFD2->get_npc_object(), Func07F8, false);
+					0xFFD2->si_path_run_usecode([0x0408, 0x0670, 0x0000], SI_PATH_SUCCESS, 0xFFD2->get_npc_object(), Func07F8, false);
 				}
 			} else {
 				UI_end_conversation();
@@ -108306,7 +108358,7 @@ void Func093A 0x93A (var var0000) {
 				var0005 = var0003->get_object_position();
 				var0005[0x0002] += 0x000A;
 				0xFFCB->move_object(var0005);
-				0xFFCB->si_path_run_usecode([0x0406, 0x0670, 0x0000], 0x000D, 0xFFCB->get_npc_object(), Func07F8, false);
+				0xFFCB->si_path_run_usecode([0x0406, 0x0670, 0x0000], SI_PATH_SUCCESS, 0xFFCB->get_npc_object(), Func07F8, false);
 			}
 			abort;
 		}
@@ -108344,7 +108396,7 @@ void Func093A 0x93A (var var0000) {
 				var0005 = var0003->get_object_position();
 				var0005[0x0002] += 0x000A;
 				0xFFCA->move_object(var0005);
-				0xFFCA->si_path_run_usecode([0x0408, 0x0672, 0x0000], 0x000D, 0xFFCA->get_npc_object(), Func07F8, false);
+				0xFFCA->si_path_run_usecode([0x0408, 0x0672, 0x0000], SI_PATH_SUCCESS, 0xFFCA->get_npc_object(), Func07F8, false);
 				Func097F(0xFFCA, "@Don't shove me!@", 0x0007);
 			}
 			if (0xFFCD->get_item_flag(DEAD)) {
@@ -108359,7 +108411,7 @@ void Func093A 0x93A (var var0000) {
 				var0005 = var0003->get_object_position();
 				var0005[0x0002] += 0x000A;
 				0xFFCD->move_object(var0005);
-				0xFFCD->si_path_run_usecode([0x0406, 0x0672, 0x0000], 0x000D, 0xFFCD->get_npc_object(), Func07F8, false);
+				0xFFCD->si_path_run_usecode([0x0406, 0x0672, 0x0000], SI_PATH_SUCCESS, 0xFFCD->get_npc_object(), Func07F8, false);
 				Func097F(0xFFCD, "@Save us, Lady Yelinda!@", 0x0002);
 			}
 			abort;
@@ -108472,7 +108524,7 @@ void Func093A 0x93A (var var0000) {
 			if (var0003) {
 				var0005 = var0003->get_object_position();
 				var0005[0x0002] += 0x000A;
-				0xFFCB->si_path_run_usecode(var0005, 0x000D, 0xFFCB->get_npc_object(), Func07F8, false);
+				0xFFCB->si_path_run_usecode(var0005, SI_PATH_SUCCESS, 0xFFCB->get_npc_object(), Func07F8, false);
 			}
 			abort;
 		}
@@ -108484,7 +108536,7 @@ void Func093A 0x93A (var var0000) {
 			if (var0003) {
 				var0005 = var0003->get_object_position();
 				var0005[0x0002] += 0x000B;
-				0xFFCA->si_path_run_usecode(var0005, 0x000D, 0xFFCA->get_npc_object(), Func07F8, false);
+				0xFFCA->si_path_run_usecode(var0005, SI_PATH_SUCCESS, 0xFFCA->get_npc_object(), Func07F8, false);
 				Func097F(0xFFCA, "@Vengeance shall be mine!@", 0x0000);
 				Func097F(0xFFD2, "@Truth shall prevail!@", 0x0004);
 			}
@@ -108504,7 +108556,7 @@ void Func093A 0x93A (var var0000) {
 				if (var0003) {
 					var0005 = var0003->get_object_position();
 					var0005[0x0002] += 0x000A;
-					0xFFCD->si_path_run_usecode(var0005, 0x000D, 0xFFCD->get_npc_object(), Func07F8, false);
+					0xFFCD->si_path_run_usecode(var0005, SI_PATH_SUCCESS, 0xFFCD->get_npc_object(), Func07F8, false);
 					Func097F(0xFFCD, "@She lied to me...@", 0x0000);
 				}
 			}
@@ -108537,7 +108589,7 @@ void Func093A 0x93A (var var0000) {
 					UI_play_music(0x0014, Func09A0(0x0005, 0x0001));
 					0xFFD2->move_object(var0005);
 					var0005[0x0002] -= 0x0008;
-					0xFFD2->si_path_run_usecode(var0005, 0x000D, 0xFFD2->get_npc_object(), Func07F8, false);
+					0xFFD2->si_path_run_usecode(var0005, SI_PATH_SUCCESS, 0xFFD2->get_npc_object(), Func07F8, false);
 				}
 				UI_end_conversation();
 				abort;
@@ -108583,7 +108635,7 @@ void Func093A 0x93A (var var0000) {
 				var0005 = var0003->get_object_position();
 				var0005[0x0002] += 0x000A;
 				0xFFCB->move_object(var0005);
-				0xFFCB->si_path_run_usecode([0x0406, 0x0670, 0x0000], 0x000D, 0xFFCB->get_npc_object(), Func07F8, false);
+				0xFFCB->si_path_run_usecode([0x0406, 0x0670, 0x0000], SI_PATH_SUCCESS, 0xFFCB->get_npc_object(), Func07F8, false);
 			}
 			abort;
 		}
@@ -108644,7 +108696,7 @@ void Func093A 0x93A (var var0000) {
 				if (var0004) {
 					var0005 = var0003->get_object_position();
 					var0005[0x0002] += 0x0001;
-					var0004->si_path_run_usecode(var0005, 0x000D, var0004, Func07F8, false);
+					var0004->si_path_run_usecode(var0005, SI_PATH_SUCCESS, var0004, Func07F8, false);
 				}
 			}
 			abort;
@@ -108693,7 +108745,7 @@ void Func093A 0x93A (var var0000) {
 				var0005 = var0003->get_object_position();
 				var0005[0x0001] += 0x0003;
 				var0005[0x0002] += 0x0001;
-				si_path_run_usecode(var0005, 0x000D, item, Func07F8, false);
+				si_path_run_usecode(var0005, SI_PATH_SUCCESS, item, Func07F8, false);
 			}
 			abort;
 		}
@@ -108794,7 +108846,7 @@ void Func093B 0x93B (var var0000) {
 			say("\"It is most improper that neither Voldin nor Kylista are here... But I shall not have justice detained.\"");
 			say("\"I shall continue in Kylista's place...\"");
 			UI_end_conversation();
-			0xFFC9->si_path_run_usecode([0x03FE, 0x0666, 0x0006], 0x000D, 0xFFC9->get_npc_object(), Func07F8, false);
+			0xFFC9->si_path_run_usecode([0x03FE, 0x0666, 0x0006], SI_PATH_SUCCESS, 0xFFC9->get_npc_object(), Func07F8, false);
 		}
 		abort;
 	}
@@ -108968,7 +109020,7 @@ void Func093B 0x93B (var var0000) {
 			var0005 = var0004->find_nearby(0x0113, 0x001E, 0x0010);
 			if (var0005) {
 				var0006 = var0005->get_object_position();
-				0xFFCD->si_path_run_usecode(var0006, 0x000D, 0xFFCD->get_npc_object(), Func07F8, false);
+				0xFFCD->si_path_run_usecode(var0006, SI_PATH_SUCCESS, 0xFFCD->get_npc_object(), Func07F8, false);
 			}
 			Func08C6();
 		} else {
@@ -109205,7 +109257,7 @@ void Func093B 0x93B (var var0000) {
 			var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
 			if (var0005) {
 				var0006 = var0005->get_object_position();
-				0xFFCD->si_path_run_usecode(var0006, 0x000D, 0xFFCD->get_npc_object(), Func07F8, false);
+				0xFFCD->si_path_run_usecode(var0006, SI_PATH_SUCCESS, 0xFFCD->get_npc_object(), Func07F8, false);
 			}
 			abort;
 		}
@@ -109261,7 +109313,7 @@ void Func093B 0x93B (var var0000) {
 		if (var0005) {
 			var0006 = var0005->get_object_position();
 			var0006[0x0002] += 0x0005;
-			si_path_run_usecode(var0006, 0x000D, item, Func07F8, false);
+			si_path_run_usecode(var0006, SI_PATH_SUCCESS, item, Func07F8, false);
 		}
 		abort;
 	}
@@ -112380,7 +112432,7 @@ extern void Func07D1 object#(0x7D1) ();
 void Func09B6 0x9B6 (var var0000, var var0001) {
 	var var0002;
 
-	if ((event == 0x0001) || ((event == 0x000D) || (event == 0x000E))) {
+	if ((event == DOUBLECLICK) || ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE))) {
 		if (gflags[0x002A]) {
 			abort;
 		}
@@ -112392,7 +112444,7 @@ void Func09B6 0x9B6 (var var0000, var var0001) {
 			call Func0207;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (var0000 == 0x01EF) {
 			var0000 = UI_create_new_object2(var0000, var0001);
 			var0000->set_item_flag(TEMPORARY);
@@ -112530,7 +112582,7 @@ void Func09BB 0x9BB (var var0000, var var0001) {
 		if (var0000->in_usecode()) {
 			return;
 		}
-		Func090D(var0000, 0xFFFE, 0xFFFE, 0xFFFF, Func0631, var0000, 0x000A);
+		Func090D(var0000, 0xFFFE, 0xFFFE, 0xFFFF, Func0631, var0000, PATH_SUCCESS);
 	}
 	if (var0001 == 0x0002) {
 		var0002 = get_item_quality();

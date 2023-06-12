@@ -73,11 +73,56 @@ enum item_flags {
 									// Other NPCs should use set_polymorph instead.
 };
 
+enum events {
+	PROXIMITY		= 0,	// Object is on-screen or nearby
+							// This is called repeatedly, with a random delay
+							// between each call
+	DOUBLECLICK		= 1,	// Object is double-clicked on
+	SCRIPTED		= 2,	// Function is called from inside a script{} block
+							// (very common)
+	EGG				= 3,	// Object is an egg that just hatched (triggered by
+							// egg activation conditions)
+	WEAPON			= 4,	// Object was wielded and 'swung' in combat
+							// This is mainly used with 'weapon-like' objects
+							// - e.g. smokebombs and fishing rods - that have more
+							// advanced 'attack' behaviour.
+
+	READIED			= 5,	// Object was worn or readied in inventory - used by
+							// items like the Ring of Invisibility
+	UNREADIED		= 6,	// Object was taken off or put away in inventory
+
+	DEATH			= 7,	// NPC has just been killed (SI-only)
+	STARTED_TALKING	= 9,	// NPC starts conversation with you (has TALK
+							// schedule and has reached the Avatar)
+							// This is SI-only - BG uses event 1 for this,
+							// both for conversations triggered by doubleclick
+							// and by the TALK schedule
+
+	//The following events are arbitrary programmer conventions:
+	BG_PATH_SUCCESS	= 7,	// Set with calls to UI_path_run_usecode, to indicate
+							// a successful pathfind to the target object
+	BG_PATH_FAILURE	= 8,	// Set with calls to UI_set_path_failure, to indicate
+							// an interrupted pathfind (e.g. when the player
+							// moves the Avatar manually)
+	PATH_SUCCESS_9	= 9,	// Set with calls to UI_path_run_usecode, to indicate
+							// a successful pathfind to the target object
+
+	PATH_SUCCESS	= 10,	// Set with calls to UI_path_run_usecode, to indicate
+							// a successful pathfind to the target object
+	PATH_FAILURE	= 11,	// Set with calls to UI_set_path_failure, to indicate
+							// an interrupted pathfind (e.g. when the player
+							// moves the Avatar manually)
+	SI_PATH_SUCCESS	= 13,
+	SI_PATH_FAILURE	= 14	// Set with calls to UI_set_path_failure, to indicate
+							// an interrupted pathfind (e.g. when the player
+							// moves the Avatar manually)
+};
+
 extern void Func08FF 0x8FF (var var0000);
 extern var Func0829 0x829 (var var0000);
 
 void Func0096 shape#(0x96) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (get_item_flag(ON_MOVING_BARGE)) {
 			Func08FF("@The sails must be furled before the planks are raised.@");
 		} else if (!Func0829(item)) {
@@ -124,7 +169,7 @@ void Func009A shape#(0x9A) () {
 	var var0018;
 	var var0019;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0000 = find_nearest(0x0150, 0x0001);
 		var0001 = find_nearest(0x0152, 0x0001);
 		var0002 = find_nearest(0x03E5, 0x0001);
@@ -164,7 +209,7 @@ void Func009A shape#(0x9A) () {
 			if (var000A || var000B) {
 				if (var000A) {
 					item_say("@My door, at last.@");
-					event = 0x0001;
+					event = DOUBLECLICK;
 					var000A->Func01B0();
 					return;
 				}
@@ -194,7 +239,7 @@ void Func009A shape#(0x9A) () {
 	if (!get_cont_items(0x031D, 0x00F0, 0x0004)) {
 		return;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (!Func0881()) {
 			var0011 = Func092D(item);
 			var0012 = (var0011 + 0x0004) % 0x0008;
@@ -207,7 +252,7 @@ void Func009A shape#(0x9A) () {
 			abort;
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0013 = Func0908();
 		if (gflags[0x030E]) {
 			0xFEE2->show_npc_face(0x0001);
@@ -596,7 +641,7 @@ void Func009B shape#(0x9B) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFEE3->show_npc_face(0x0000);
 		var0000 = Func08F7(0xFFFE);
 		var0001 = Func08F7(0xFFFD);
@@ -724,7 +769,7 @@ void Func009B shape#(0x9B) () {
 				abort;
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -735,7 +780,7 @@ void Func009F shape#(0x9F) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_game_hour();
 		var0001 = "am";
 		if (var0000 > 0x000C) {
@@ -762,7 +807,7 @@ void Func009F shape#(0x9F) () {
 void Func00B2 shape#(0xB2) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_display_map();
 	}
 }
@@ -776,7 +821,7 @@ void Func00D2 shape#(0xD2) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_quality();
 		if (var0000 == UI_part_of_day()) {
 			return;
@@ -808,7 +853,7 @@ extern void Func081A 0x81A (var var0000);
 void Func00E1 shape#(0xE1) () {
 	var var0000;
 
-	if (event != 0x0001) {
+	if (event != DOUBLECLICK) {
 		return;
 	}
 	var0000 = Func081B(item);
@@ -846,7 +891,7 @@ extern void Func081A 0x81A (var var0000);
 void Func00F6 shape#(0xF6) () {
 	var var0000;
 
-	if (event != 0x0001) {
+	if (event != DOUBLECLICK) {
 		return;
 	}
 	var0000 = Func081B(item);
@@ -884,7 +929,7 @@ extern void Func081A 0x81A (var var0000);
 void Func00FA shape#(0xFA) () {
 	var var0000;
 
-	if (event != 0x0001) {
+	if (event != DOUBLECLICK) {
 		return;
 	}
 	var0000 = Func081B(item);
@@ -925,7 +970,7 @@ void Func00FB shape#(0xFB) () {
 	var var0003;
 	var var0004;
 
-	if (event != 0x0001) {
+	if (event != DOUBLECLICK) {
 		return;
 	}
 	if (UI_in_gump_mode()) {
@@ -969,7 +1014,7 @@ void Func00FC shape#(0xFC) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_game_hour();
 		if (var0000 > 0x000C) {
 			var0000 -= 0x000C;
@@ -994,7 +1039,7 @@ void Func0102 shape#(0x102) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (in_usecode()) {
 			halt_scheduled();
 			Func08FE("@It is about time!@");
@@ -1002,7 +1047,7 @@ void Func0102 shape#(0x102) () {
 			item->Func0628();
 		}
 	}
-	if (event == 0x0008) {
+	if (event == BG_PATH_FAILURE) {
 		var0000 = get_object_position();
 		var0000[0x0001] -= 0x0002;
 		var0000[0x0002] += 0x0001;
@@ -1032,7 +1077,7 @@ void Func0105 shape#(0x105) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0007) {
+	if (event == BG_PATH_SUCCESS) {
 		halt_scheduled();
 		var0000 = script item {
 			frame 0;
@@ -1054,7 +1099,7 @@ void Func0105 shape#(0x105) () {
 			};
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0002 = 0xFE9C->get_cont_items(0x028E, 0xFE99, 0xFE99);
 		if (var0002) {
 			var0002->remove_item();
@@ -1070,13 +1115,13 @@ void Func0105 shape#(0x105) () {
 			var0000 = UI_update_last_created(var0004);
 		}
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func08FF("@I believe that one threads a loom before using it.@");
 	}
 }
 
 void Func010B shape#(0x10B) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_play_music(0x0027, item);
 	}
 }
@@ -1091,7 +1136,7 @@ extern void Func081A 0x81A (var var0000);
 void Func010E shape#(0x10E) () {
 	var var0000;
 
-	if (event != 0x0001) {
+	if (event != DOUBLECLICK) {
 		return;
 	}
 	var0000 = Func081B(item);
@@ -1126,7 +1171,7 @@ void Func011C shape#(0x11C) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_game_hour();
 		if ((var0000 >= 0x0006) && (var0000 <= 0x000B)) {
 			item_say((" " + UI_game_hour()) + " o'clock");
@@ -1147,14 +1192,14 @@ void Func011C shape#(0x11C) () {
 }
 
 void Func0122 shape#(0x122) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		set_item_shape(0x0174);
 		UI_play_sound_effect2(0x0002, item);
 	}
 }
 
 void Func0123 shape#(0x123) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		set_item_shape(0x0142);
 		UI_play_sound_effect2(0x0002, item);
 	}
@@ -1190,7 +1235,7 @@ void Func0124 shape#(0x124) () {
 	var var0013;
 	var var0014;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (get_barge()) {
 			var0000 = Func080C(item);
 			if ((var0000 == 0x028C) || (var0000 == 0x0348)) {
@@ -1214,7 +1259,7 @@ void Func0124 shape#(0x124) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0003 = 0xFE9C->get_object_position();
 		var0004 = [0x0AE7, 0x09D5, 0x0A37, 0x09D5, 0x0AA7, 0x08E5, 0x0A37, 0x09A5];
 		var0005 = [0x0AD7, 0x0885];
@@ -1271,7 +1316,7 @@ void Func0124 shape#(0x124) () {
 void Func0128 shape#(0x128) () {
 	var var0000;
 
-	if ((event == 0x0005) || (event == 0x0006)) {
+	if ((event == READIED) || (event == UNREADIED)) {
 		var0000 = get_container();
 		while ((var0000 != 0x0000) && (!var0000->is_npc())) {
 			var0000 = var0000->get_container();
@@ -1281,10 +1326,10 @@ void Func0128 shape#(0x128) () {
 			return;
 		}
 	}
-	if (event == 0x0005) {
+	if (event == READIED) {
 		var0000->set_item_flag(INVISIBLE);
 	}
-	if (event == 0x0006) {
+	if (event == UNREADIED) {
 		var0000->clear_item_flag(INVISIBLE);
 	}
 }
@@ -1295,7 +1340,7 @@ void Func012A shape#(0x12A) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0005) {
+	if (event == READIED) {
 		var0000 = get_container();
 		if (var0000 && var0000->is_npc()) {
 			halt_scheduled();
@@ -1306,10 +1351,10 @@ void Func012A shape#(0x12A) () {
 			UI_flash_mouse(0x0000);
 		}
 	}
-	if (event == 0x0006) {
+	if (event == UNREADIED) {
 		halt_scheduled();
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		halt_scheduled();
 		var0000 = get_container();
 		if (var0000 && var0000->is_npc()) {
@@ -1332,7 +1377,7 @@ void Func012A shape#(0x12A) () {
 extern void Func0809 0x809 (var var0000);
 
 void Func012D shape#(0x12D) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func0809(item);
 	}
 }
@@ -1341,11 +1386,11 @@ extern void Func0833 0x833 (var var0000, var var0001);
 extern void Func03A8 shape#(0x3A8) ();
 
 void Func012F shape#(0x12F) () {
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_item_shape(0x012F);
 		abort;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_flash_mouse(0x0000);
 		return;
 	}
@@ -1379,7 +1424,7 @@ void Func0133 shape#(0x133) () {
 	var var0014;
 	var var0015;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (get_item_frame() == 0x0000) {
 			var0000 = get_object_position();
 			var0001 = find_nearby(0x0154, 0x0005, 0x0000);
@@ -1461,7 +1506,7 @@ void Func0133 shape#(0x133) () {
 }
 
 void Func0142 shape#(0x142) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		set_item_shape(0x0123);
 		UI_play_sound_effect2(0x0002, item);
 	}
@@ -1482,7 +1527,7 @@ void Func0149 shape#(0x149) () {
 	if (in_usecode()) {
 		return;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_container();
 		if (var0000) {
 			var0001 = 0xFE9C->get_object_position();
@@ -1500,9 +1545,9 @@ void Func0149 shape#(0x149) () {
 		var0003 = 0xFFFF;
 		var0004 = 0xFFFF;
 		var0005 = 0xFFFE;
-		Func0828(item, var0003, var0004, var0005, Func0149, item, 0x0007);
+		Func0828(item, var0003, var0004, var0005, Func0149, item, BG_PATH_SUCCESS);
 	}
-	if (event == 0x0007) {
+	if (event == BG_PATH_SUCCESS) {
 		if (!UI_is_pc_inside()) {
 			var0002 = script item {
 				frame 0;
@@ -1542,7 +1587,7 @@ void Func0149 shape#(0x149) () {
 extern void Func0942 0x942 (var var0000, var var0001);
 
 void Func0150 shape#(0x150) () {
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		Func0942(item, 0x0152);
 	}
 }
@@ -1554,11 +1599,11 @@ void Func0152 shape#(0x152) () {
 	var var0000;
 	var var0001;
 
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		set_item_shape(0x0150);
 		halt_scheduled();
 	}
-	if (event == 0x0007) {
+	if (event == BG_PATH_SUCCESS) {
 		set_item_shape(0x0150);
 		var0000 = Func0827(0xFE9C, item);
 		var0001 = script 0xFE9C {
@@ -1568,7 +1613,7 @@ void Func0152 shape#(0x152) () {
 			actor frame standing;
 		};
 	}
-	if (event == 0x0005) {
+	if (event == READIED) {
 		Func0905(item);
 	}
 }
@@ -1588,7 +1633,7 @@ void Func0154 shape#(0x154) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func08FA(item);
 		var0000 = get_item_frame();
 		var0001 = UI_click_on_item();
@@ -1648,7 +1693,7 @@ void Func0154 shape#(0x154) () {
 }
 
 void Func0174 shape#(0x174) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		set_item_shape(0x0122);
 		UI_play_sound_effect2(0x0002, item);
 	}
@@ -1664,7 +1709,7 @@ extern void Func081A 0x81A (var var0000);
 void Func0178 shape#(0x178) () {
 	var var0000;
 
-	if (event != 0x0001) {
+	if (event != DOUBLECLICK) {
 		return;
 	}
 	var0000 = Func081B(item);
@@ -1709,7 +1754,7 @@ void Func017B shape#(0x17B) () {
 	var var0000;
 	var var0001;
 
-	if (event != 0x0001) {
+	if (event != DOUBLECLICK) {
 		return;
 	}
 	var0000 = Func0908();
@@ -2005,7 +2050,7 @@ extern void Func081A 0x81A (var var0000);
 void Func0188 shape#(0x188) () {
 	var var0000;
 
-	if (event != 0x0001) {
+	if (event != DOUBLECLICK) {
 		return;
 	}
 	var0000 = Func081B(item);
@@ -2040,7 +2085,7 @@ void Func018A shape#(0x18A) () {
 	var var0003;
 
 	var0000 = 0x018A->get_npc_object()->get_schedule_type();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFEFE->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		say("You see a tough-looking palace guard who takes his job -very- seriously.");
@@ -2059,7 +2104,7 @@ void Func018A shape#(0x18A) () {
 		}
 		say("\"Goodbye.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0001 = 0x018A->get_npc_object()->get_schedule_type();
 		if (var0001 == 0x001D) {
 			var0002 = UI_die_roll(0x0001, 0x0004);
@@ -2089,7 +2134,7 @@ void Func019A shape#(0x19A) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var0000 = find_nearby(0x019B, 0x000A, 0x0000);
 		var0001 = get_item_quality();
@@ -2133,7 +2178,7 @@ void Func01A2 shape#(0x1A2) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_quality();
 		if (!(var0000 == UI_game_hour())) {
 			var0001 = find_nearby(0x0245, 0x0005, 0x0000);
@@ -2180,10 +2225,10 @@ void Func01AF shape#(0x1AF) () {
 
 	var0000 = get_item_frame();
 	if ((var0000 >= 0x0003) && (var0000 <= 0x0005)) {
-		if (event == 0x0001) {
-			Func0828(item, 0x0001, 0x0000, 0xFFFF, Func01AF, item, 0x0007);
+		if (event == DOUBLECLICK) {
+			Func0828(item, 0x0001, 0x0000, 0xFFFF, Func01AF, item, BG_PATH_SUCCESS);
 		}
-		if (event == 0x0007) {
+		if (event == BG_PATH_SUCCESS) {
 			var0001 = script item {
 				sfx 47;
 				continue;
@@ -2328,11 +2373,11 @@ void Func01AF shape#(0x1AF) () {
 			}
 		}
 	} else {
-		if (event == 0x0001) {
+		if (event == DOUBLECLICK) {
 			halt_scheduled();
-			Func0828(item, 0x0001, 0x0000, 0xFFFF, Func01AF, item, 0x0007);
+			Func0828(item, 0x0001, 0x0000, 0xFFFF, Func01AF, item, BG_PATH_SUCCESS);
 		}
-		if (event == 0x0007) {
+		if (event == BG_PATH_SUCCESS) {
 			halt_scheduled();
 			var000A = script item {
 				sfx 47;
@@ -2451,7 +2496,7 @@ extern void Func081A 0x81A (var var0000);
 void Func01B0 shape#(0x1B0) () {
 	var var0000;
 
-	if (event != 0x0001) {
+	if (event != DOUBLECLICK) {
 		return;
 	}
 	var0000 = Func081B(item);
@@ -2489,7 +2534,7 @@ extern void Func081A 0x81A (var var0000);
 void Func01B1 shape#(0x1B1) () {
 	var var0000;
 
-	if (event != 0x0001) {
+	if (event != DOUBLECLICK) {
 		return;
 	}
 	var0000 = Func081B(item);
@@ -2525,7 +2570,7 @@ void Func01B2 shape#(0x1B2) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (in_usecode()) {
 			halt_scheduled();
 			Func08FE("@It is about time!@");
@@ -2533,7 +2578,7 @@ void Func01B2 shape#(0x1B2) () {
 			item->Func0629();
 		}
 	}
-	if (event == 0x0008) {
+	if (event == BG_PATH_FAILURE) {
 		var0000 = get_object_position();
 		var0000[0x0001] += 0x0001;
 		var0000[0x0002] -= 0x0001;
@@ -2559,11 +2604,11 @@ void Func01B3 shape#(0x1B3) () {
 	var var0000;
 	var var0001;
 
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		set_item_shape(0x01E1);
 		halt_scheduled();
 	}
-	if (event == 0x0007) {
+	if (event == BG_PATH_SUCCESS) {
 		set_item_shape(0x01E1);
 		var0000 = Func0827(0xFE9C, item);
 		var0001 = script 0xFE9C {
@@ -2576,7 +2621,7 @@ void Func01B3 shape#(0x1B3) () {
 }
 
 void Func01BF shape#(0x1BF) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		item_say("Arghh");
 	}
 }
@@ -2593,7 +2638,7 @@ void Func01D6 shape#(0x1D6) () {
 	if (var0000) {
 		var0001 = [0xFFFB, 0xFFFB];
 		var0002 = [0xFFFF, 0xFFFF];
-		Func0828(item, var0001, var0002, 0x0000, Func032A, var0000, 0x0009);
+		Func0828(item, var0001, var0002, 0x0000, Func032A, var0000, PATH_SUCCESS_9);
 	}
 }
 
@@ -2614,7 +2659,7 @@ void Func01DF shape#(0x1DF) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = Func0931(0xFE9B, 0x0001, 0x0304, 0xFE99, 0xFE99);
 		0xFEE5->show_npc_face(0x0000);
 		if (!gflags[0x0154]) {
@@ -2708,7 +2753,7 @@ void Func01DF shape#(0x1DF) () {
 		}
 		say("\"Farewell is said to you.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -2716,7 +2761,7 @@ void Func01DF shape#(0x1DF) () {
 extern void Func0942 0x942 (var var0000, var var0001);
 
 void Func01E1 shape#(0x1E1) () {
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		Func0942(item, 0x01B3);
 	}
 }
@@ -2724,7 +2769,7 @@ void Func01E1 shape#(0x1E1) () {
 void Func01EF shape#(0x1EF) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Here kitty, kitty@");
 		set_schedule_type(0x0000);
 		set_attack_mode(0x0007);
@@ -2736,7 +2781,7 @@ void Func01EF shape#(0x1EF) () {
 			};
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		item_say("@Meow@");
 	}
 }
@@ -2744,11 +2789,11 @@ void Func01EF shape#(0x1EF) () {
 void Func01F0 shape#(0x1F0) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Good doggy.@");
 		set_schedule_type(0x0009);
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0000 = UI_die_roll(0x0001, 0x0002);
 		if (var0000 == 0x0001) {
 			item_say("@Arf@");
@@ -2766,7 +2811,7 @@ void Func01F4 shape#(0x1F4) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_get_party_list();
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0004 = script var0003 after UI_die_roll(0x0001, 0x000A) ticks {
@@ -2779,7 +2824,7 @@ void Func01F4 shape#(0x1F4) () {
 			};
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		item_say("@Moo@");
 	}
 }
@@ -2789,7 +2834,7 @@ extern var Func090A 0x90A ();
 void Func01F7 shape#(0x1F7) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (in_usecode()) {
 			return;
 		}
@@ -2845,10 +2890,10 @@ void Func01F8 shape#(0x1F8) () {
 	var var000D;
 	var var000E;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		return;
 	}
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = false;
 		var0001 = get_item_shape();
 		if (!(var0001 == 0x01F8)) {
@@ -2884,7 +2929,7 @@ void Func01F8 shape#(0x1F8) () {
 			var0000->set_schedule_type(0x0000);
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFEDB->show_npc_face(0x0000);
 		if (gflags[0x02EF]) {
 			say("The dragon lets out a searing sigh, \"Released at last. I go now to seek my reward, for this has been a test of my courage as well as thine. Thy reward lies beyond the door to the north. Enter the blue gate and the Amulet of Courage will be thine.\"*");
@@ -2945,18 +2990,18 @@ extern void Func0639 object#(0x639) ();
 void Func01FA shape#(0x1FA) () {
 	var var0000;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFFE6->say("Batlin watches Hook's death with icy resignation. Time seems to slow as he turns to you. \"This battle is not done, Avatar. Dost thou imagine thyself an immortal? The Guardian is far more. Return to your precious Earth and rest.~Sleep, that he may visit your dreams with countless visions of death in the belly of the Great Sea Serpent.\"");
 		say("\"As for me, I shall begone! Thou shalt never find me! Farewell, Avatar!\"");
 		0xFFE6->hide();
 		var0000 = 0xFE9C->find_nearby(0x0193, 0x0028, 0x0000);
-		event = 0x0001;
+		event = DOUBLECLICK;
 		var0000[0x0001]->Func0639();
 	}
 }
 
 void Func020A shape#(0x20A) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		item_say("Locked");
 	}
 }
@@ -2969,7 +3014,7 @@ void Func020E shape#(0x20E) () {
 	var var0004;
 	var var0005;
 
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		var0000 = find_nearby(0x01B8, 0x000A, 0x0080);
 		var0001 = get_object_position();
 		var0001[0x0001] += 0x0003;
@@ -3001,7 +3046,7 @@ void Func0247 shape#(0x247) () {
 	var var0003;
 	var var0004;
 
-	if ((event == 0x0001) && (!get_container())) {
+	if ((event == DOUBLECLICK) && (!get_container())) {
 		var0000 = get_object_position();
 		if (get_item_frame() == 0x0000) {
 			var0001 = set_last_created();
@@ -3013,7 +3058,7 @@ void Func0247 shape#(0x247) () {
 					var0003 = [0xFFFF, 0xFFFF, 0xFFFF, 0x0000, 0x0000, 0x0000, 0x0001, 0x0001, 0x0001];
 					var0004 = [0x0001, 0x0000, 0xFFFF, 0x0001, 0x0000, 0xFFFF, 0x0001, 0x0000, 0xFFFF];
 					0xFE9C->halt_scheduled();
-					Func0828(item, var0003, var0004, 0xFFFF, Func0247, item, 0x0007);
+					Func0828(item, var0003, var0004, 0xFFFF, Func0247, item, BG_PATH_SUCCESS);
 				} else {
 					var0000[0x0002] -= 0x0005;
 					Func08FF("@There is no room for thy bedroll there.@");
@@ -3021,7 +3066,7 @@ void Func0247 shape#(0x247) () {
 			}
 		}
 	}
-	if (event == 0x0007) {
+	if (event == BG_PATH_SUCCESS) {
 		var0001 = script 0xFE9C {
 			face NORTH;
 			actor frame bowing;
@@ -3032,7 +3077,7 @@ void Func0247 shape#(0x247) () {
 			call Func0247;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_item_shape(0x03F3);
 		set_item_frame(0x0011);
 	}
@@ -3041,7 +3086,7 @@ void Func0247 shape#(0x247) () {
 extern void Func0942 0x942 (var var0000, var var0001);
 
 void Func0253 shape#(0x253) () {
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		Func0942(item, 0x02BD);
 	}
 }
@@ -3061,7 +3106,7 @@ void Func0269 shape#(0x269) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFEE4->show_npc_face(0x0000);
@@ -3293,7 +3338,7 @@ void Func026F shape#(0x26F) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (!0xFE9C->is_readied(0x0001, 0x026F, 0xFE99)) {
 			UI_flash_mouse(0x0002);
 			return;
@@ -3301,7 +3346,7 @@ void Func026F shape#(0x26F) () {
 		UI_close_gumps();
 		item->Func0690();
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = false;
 		var0001 = get_item_shape();
 		if (var0001 == 0x03DF) {
@@ -3320,7 +3365,7 @@ void Func026F shape#(0x26F) () {
 						if ((var0004[0x0003] - 0x0001) == var0003[0x0003]) {
 							var0005 = var0000->get_item_frame();
 							if ((var0005 >= 0x0008) && (var0005 <= 0x000F)) {
-								Func0828(var0002, 0x0000, 0x0002, 0x0000, Func026F, var0002, 0x0007);
+								Func0828(var0002, 0x0000, 0x0002, 0x0000, Func026F, var0002, BG_PATH_SUCCESS);
 							}
 						}
 					}
@@ -3328,7 +3373,7 @@ void Func026F shape#(0x26F) () {
 			}
 		}
 	}
-	if (event == 0x0007) {
+	if (event == BG_PATH_SUCCESS) {
 		var0006 = 0xFE9C->get_npc_object()->find_nearest(0x029C, 0x0003);
 		var0005 = var0006->get_item_frame();
 		var0007 = 0xFE9C->get_npc_object();
@@ -3392,7 +3437,7 @@ void Func0270 shape#(0x270) () {
 	var var0015;
 	var var0016;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (!0xFE9C->is_readied(0x0001, 0x0270, 0xFE99)) {
 			Func08FF("@Thou must hold that in thine hand.@");
 			return;
@@ -3404,7 +3449,7 @@ void Func0270 shape#(0x270) () {
 				var0002 = [0x0002, 0x0001, 0x0000];
 				var0003 = [0x0002, 0x0002, 0x0002];
 				var0004 = [0xFFFB];
-				Func0828(var0000, var0002, var0003, var0004, 0x0270, item, 0x0007);
+				Func0828(var0000, var0002, var0003, var0004, 0x0270, item, BG_PATH_SUCCESS);
 				UI_close_gumps();
 			} else {
 				Func08FF("It seems the tree will yield nothing of value.");
@@ -3413,7 +3458,7 @@ void Func0270 shape#(0x270) () {
 			Func08FF("It seems that a pick is not needed for that.");
 		}
 	}
-	if (event == 0x0007) {
+	if (event == BG_PATH_SUCCESS) {
 		var0005 = 0xFE9C->find_nearby(0x03A4, 0x0003, 0x0000);
 		for (var0008 in var0005 with var0006 to var0007) {
 			var0009 = var0008->get_item_frame();
@@ -3434,7 +3479,7 @@ void Func0270 shape#(0x270) () {
 			call Func0270;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x0321]) {
 			var000C = UI_create_new_object(0x00CB);
 			var000C->set_item_frame(0x000A);
@@ -3486,7 +3531,7 @@ void Func0273 shape#(0x273) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		UI_play_sound_effect2(0x001B, item);
 		var0001 = var0000->get_item_shape();
@@ -3547,7 +3592,7 @@ void Func0275 shape#(0x275) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 	} else {
 		var0000 = item;
@@ -3567,7 +3612,7 @@ void Func0276 shape#(0x276) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 	} else {
 		var0000 = item;
@@ -3594,7 +3639,7 @@ void Func0281 shape#(0x281) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		UI_play_sound_effect2(0x001B, item);
 		var0001 = var0000->get_item_shape();
@@ -3643,7 +3688,7 @@ void Func0282 shape#(0x282) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = 0x0089;
 		UI_play_sound_effect2(0x000E, item);
 		book_mode();
@@ -4060,7 +4105,7 @@ void Func0282 shape#(0x282) () {
 		if (var0002 == 0x0051) {
 			say("~~ ~~BROMMER'S BRITANNIA~~ ~~by Brommer*");
 			say("     Betwixt the covers of this atlas is a detailed description of the entire continent of Britannia and the nearby islands.*");
-			if (event == 0x0001) {
+			if (event == DOUBLECLICK) {
 				var0003 = UI_display_map();
 			}
 			say("~~ ~~BROMMER'S BRITANNIA~~ ~~by Brommer*");
@@ -4154,7 +4199,7 @@ extern void Func0933 0x933 (var var0000, var var0001, var var0002);
 void Func0284 shape#(0x284) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		UI_play_sound_effect2(0x0017, item);
 		if (!(Func0937(0xFE9C) || (!Func0937(0xFFFF)))) {
@@ -4182,7 +4227,7 @@ extern void Func08FF 0x8FF (var var0000);
 void Func0285 shape#(0x285) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = "@I believe that the current exchange rate is " + "ten crowns per nugget at the mint in Britian.@";
 		Func08FF(var0000);
 	}
@@ -4193,7 +4238,7 @@ extern void Func08FF 0x8FF (var var0000);
 void Func0286 shape#(0x286) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = "@I believe the current exchange rate is " + "one hundred crowns per bar at the Britannian mint.@";
 		Func08FF(var0000);
 	}
@@ -4205,7 +4250,7 @@ extern void Func0925 0x925 (var var0000);
 void Func0288 shape#(0x288) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		if (var0000->is_npc()) {
 			var0000->set_item_flag(ASLEEP);
@@ -4227,7 +4272,7 @@ void Func0289 shape#(0x289) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		if (var0000->is_npc()) {
 			var0001 = var0000->get_npc_prop(0x0000);
@@ -4275,7 +4320,7 @@ void Func028A shape#(0x28A) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = 0xFE9C->get_object_position();
 		var0001 = (var0000[0x0001] - 0x03A5) / 0x000A;
 		var0002 = (var0000[0x0002] - 0x046E) / 0x000A;
@@ -4308,7 +4353,7 @@ void Func028B shape#(0x28B) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0007) {
+	if (event == BG_PATH_SUCCESS) {
 		var0000 = 0xFE9C->find_nearby(0x0369, 0x0001, 0x0000);
 		var0001 = 0x0000;
 		if (UI_get_array_size(var0000) > 0x0000) {
@@ -4333,7 +4378,7 @@ void Func028B shape#(0x28B) () {
 		};
 		return;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0003 = 0xFE9C->get_cont_items(0x028D, 0xFE99, 0xFE99);
 		if (var0003) {
 			var0003->remove_item();
@@ -4350,7 +4395,7 @@ void Func028B shape#(0x28B) () {
 		}
 		return;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0006 = "@I suspect spinning the wool will be more fruitful " + "than spinning an empty wheel.@";
 		Func08FF(var0006);
 	}
@@ -4359,7 +4404,7 @@ void Func028B shape#(0x28B) () {
 extern void Func0809 0x809 (var var0000);
 
 void Func028C shape#(0x28C) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func0809(item);
 	}
 }
@@ -4374,10 +4419,10 @@ void Func028D shape#(0x28D) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_container();
 		if (var0000 == 0xFE9C->get_npc_object()) {
-			event = 0x0007;
+			event = BG_PATH_SUCCESS;
 			item->Func062D();
 			return;
 		}
@@ -4393,14 +4438,14 @@ void Func028D shape#(0x28D) () {
 			} else {
 				return;
 			}
-			event = 0x0007;
+			event = BG_PATH_SUCCESS;
 			item->Func062D();
 			return;
 		}
 		var0002 = 0xFFFF;
 		var0003 = 0xFFFF;
 		var0004 = 0xFFFF;
-		Func0828(item, var0002, var0003, var0004, Func062D, item, 0x0007);
+		Func0828(item, var0002, var0003, var0004, Func062D, item, BG_PATH_SUCCESS);
 	}
 }
 
@@ -4414,10 +4459,10 @@ void Func028E shape#(0x28E) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_container();
 		if (var0000 == 0xFE9C->get_npc_object()) {
-			event = 0x0007;
+			event = BG_PATH_SUCCESS;
 			item->Func062E();
 			return;
 		}
@@ -4430,7 +4475,7 @@ void Func028E shape#(0x28E) () {
 					UI_flash_mouse(0x0004);
 					abort;
 				}
-				event = 0x0007;
+				event = BG_PATH_SUCCESS;
 				item->Func062E();
 			}
 			return;
@@ -4438,7 +4483,7 @@ void Func028E shape#(0x28E) () {
 		var0002 = 0xFFFF;
 		var0003 = 0xFFFF;
 		var0004 = 0xFFFF;
-		Func0828(item, var0002, var0003, var0004, Func062E, item, 0x0007);
+		Func0828(item, var0002, var0003, var0004, Func062E, item, BG_PATH_SUCCESS);
 	}
 }
 
@@ -4446,7 +4491,7 @@ void Func0291 shape#(0x291) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if ((var0000 % 0x0002) == 0x0000) {
 			var0001 = 0x0001;
@@ -4470,7 +4515,7 @@ void Func0292 shape#(0x292) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if ((var0000 == 0x0001) || (var0000 == 0x0002)) {
 			var0001 = UI_click_on_item();
@@ -4495,7 +4540,7 @@ void Func0292 shape#(0x292) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0004 = get_object_position();
 		var0005 = find_nearby(0x033F, 0x0002, 0x0000);
 		if (UI_get_array_size(var0005) > 0x0000) {
@@ -4522,7 +4567,7 @@ void Func0292 shape#(0x292) () {
 extern void Func0809 0x809 (var var0000);
 
 void Func0294 shape#(0x294) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func0809(item);
 	}
 }
@@ -4542,7 +4587,7 @@ void Func0296 shape#(0x296) () {
 	var var0008;
 	var var0009;
 
-	if ((event == 0x0001) || (event == 0x0004)) {
+	if ((event == DOUBLECLICK) || (event == WEAPON)) {
 		UI_close_gumps();
 		var0000 = UI_click_on_item();
 		var0001 = script 0xFE9C {
@@ -4632,7 +4677,7 @@ void Func029C shape#(0x29C) () {
 	var var000B;
 	var var000C;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (0xFE9C->is_readied(0x0001, 0x026F, 0xFE99)) {
 			var0000 = find_nearest(0x03DF, 0x0003);
 			if (var0000) {
@@ -4657,12 +4702,12 @@ void Func029C shape#(0x29C) () {
 			if (!get_container()) {
 				var0005 = [0x0000, 0x0001, 0xFFFF, 0x0001];
 				var0006 = [0x0002, 0x0001, 0x0002, 0x0000];
-				Func0828(item, var0005, var0006, 0xFFFD, Func029C, item, 0x0007);
+				Func0828(item, var0005, var0006, 0xFFFD, Func029C, item, BG_PATH_SUCCESS);
 			} else if (!Func0944(item)) {
 				var0007 = Func0945(item);
 				var0005 = [0x0000, 0x0001, 0xFFFF, 0x0001];
 				var0006 = [0x0002, 0x0001, 0x0002, 0x0000];
-				Func0828(var0007, var0005, var0006, 0xFFFD, Func029C, var0007, 0x0007);
+				Func0828(var0007, var0005, var0006, 0xFFFD, Func029C, var0007, BG_PATH_SUCCESS);
 			} else {
 				var0008 = script item {
 					wait 2;
@@ -4671,7 +4716,7 @@ void Func029C shape#(0x29C) () {
 			}
 		}
 	}
-	if (event == 0x0007) {
+	if (event == BG_PATH_SUCCESS) {
 		var0009 = Func092D(item);
 		var0008 = script 0xFE9C->get_npc_object() {
 			face var0009;
@@ -4685,25 +4730,25 @@ void Func029C shape#(0x29C) () {
 			call Func0717;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var000A = 0xFE9C->get_npc_object()->get_cont_items(0x029C, 0xFE99, 0xFE99);
 		if (var000A) {
 			var000B = UI_click_on_item();
 			var000C = var000B->get_item_shape();
 			if (var000C == 0x03DF) {
 				if (var000B->get_item_frame() == 0x0001) {
-					Func0828(var000B, 0x0000, 0x0002, 0x0000, Func029C, var000B, 0x0008);
+					Func0828(var000B, 0x0000, 0x0002, 0x0000, Func029C, var000B, BG_PATH_FAILURE);
 				}
 			}
 			if (var000C == 0x02E3) {
 				if ((var000B->get_item_frame() >= 0x0004) && (var000B->get_item_frame() <= 0x0007)) {
-					Func0828(var000B, 0x0001, 0x0000, 0x0000, Func029C, var000B, 0x0009);
+					Func0828(var000B, 0x0001, 0x0000, 0x0000, Func029C, var000B, PATH_SUCCESS_9);
 				}
 			}
 			if (var000C == 0x02E5) {
 				var0003 = var000A->get_item_frame();
 				if ((var0003 >= 0x0008) && (var0003 <= 0x000C)) {
-					Func0828(var000B, 0x0000, 0x0001, 0x0000, Func029C, var000B, 0x000A);
+					Func0828(var000B, 0x0000, 0x0001, 0x0000, Func029C, var000B, PATH_SUCCESS);
 				} else {
 					0xFE9C->get_npc_object()->item_say("@The sword's not hot.@");
 				}
@@ -4713,7 +4758,7 @@ void Func029C shape#(0x29C) () {
 			return;
 		}
 	}
-	if (event == 0x0008) {
+	if (event == BG_PATH_FAILURE) {
 		var0009 = Func092D(item);
 		var0008 = script 0xFE9C->get_npc_object() {
 			face var0009;
@@ -4727,7 +4772,7 @@ void Func029C shape#(0x29C) () {
 			call Func068B;
 		};
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		var0009 = Func092D(item);
 		var0008 = script 0xFE9C->get_npc_object() {
 			face var0009;
@@ -4741,7 +4786,7 @@ void Func029C shape#(0x29C) () {
 			call Func068C;
 		};
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		var0009 = Func092D(item);
 		var0008 = script 0xFE9C->get_npc_object() {
 			face var0009;
@@ -4762,7 +4807,7 @@ void Func02A3 shape#(0x2A3) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (var0000 == 0x0000) {
 			var0001 = UI_click_on_item();
@@ -4880,7 +4925,7 @@ void Func02A6 shape#(0x2A6) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if ((var0000 % 0x0002) == 0x0000) {
 			var0001 = 0x0001;
@@ -4893,25 +4938,25 @@ void Func02A6 shape#(0x2A6) () {
 }
 
 void Func02B1 shape#(0x2B1) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_play_music(0x0039, item);
 	}
 }
 
 void Func02B2 shape#(0x2B2) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_play_music(0x0038, item);
 	}
 }
 
 void Func02B3 shape#(0x2B3) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_play_music(0x003A, item);
 	}
 }
 
 void Func02B4 shape#(0x2B4) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_play_music(0x003B, item);
 	}
 }
@@ -4922,7 +4967,7 @@ void Func02B5 shape#(0x2B5) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_play_music(0x0037, item);
 		if (get_item_frame() == 0x0001) {
 			UI_close_gumps();
@@ -4937,7 +4982,7 @@ void Func02B5 shape#(0x2B5) () {
 extern void Func00FC shape#(0xFC) ();
 
 void Func02B7 shape#(0x2B7) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		item->Func00FC();
 	}
 }
@@ -4945,7 +4990,7 @@ void Func02B7 shape#(0x2B7) () {
 extern void Func0800 0x800 (var var0000);
 
 void Func02B8 shape#(0x2B8) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func0800(item);
 	}
 }
@@ -4956,7 +5001,7 @@ void Func02BA shape#(0x2BA) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = var0000[0x0001]->get_item_shape();
 		if (var0001 == 0x0353) {
@@ -4976,10 +5021,10 @@ void Func02BD shape#(0x2BD) () {
 	var var0000;
 	var var0001;
 
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		Func0839(item, 0x0253, event);
 	}
-	if (event == 0x0007) {
+	if (event == BG_PATH_SUCCESS) {
 		var0000 = Func0827(0xFE9C, item);
 		var0001 = script 0xFE9C {
 			face var0000;
@@ -4989,7 +5034,7 @@ void Func02BD shape#(0x2BD) () {
 		};
 		Func0839(item, 0x0253, event);
 	}
-	if (event == 0x0005) {
+	if (event == READIED) {
 		Func0905(item);
 	}
 }
@@ -5015,7 +5060,7 @@ void Func02BE shape#(0x2BE) () {
 	var var000C;
 	var var000D;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var0000 = find_nearby(0x02C0, 0x000A, 0x0000);
 		var0001 = find_nearby(0x02BF, 0x000A, 0x0000);
@@ -5047,7 +5092,7 @@ void Func02BE shape#(0x2BE) () {
 		set_item_frame(var0006 / 0x0002);
 		fire_projectile(var0006, 0x02BF, 0x001E, 0x02BE, 0x02BE);
 	}
-	if (event == 0x0004) {
+	if (event == WEAPON) {
 		var0007 = get_item_shape();
 		var0008 = get_item_frame();
 		if (var0007 == 0x02C0) {
@@ -5080,7 +5125,7 @@ void Func02C0 shape#(0x2C0) () {
 	var var0000;
 	var var0001;
 
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		var0000 = get_container();
 		if (!var0000->is_npc()) {
 			UI_close_gumps();
@@ -5095,10 +5140,10 @@ extern void Func03DE shape#(0x3DE) ();
 void Func02C3 shape#(0x2C3) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		item->Func06F6();
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (get_item_shape() == 0x03DE) {
 			UI_fade_palette(0x000C, 0x0001, 0x0000);
 			var0000 = script item {
@@ -5113,7 +5158,7 @@ void Func02C4 shape#(0x2C4) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		var0001 = var0000;
 		if (var0000 == 0x0001) {
@@ -5137,7 +5182,7 @@ void Func02C5 shape#(0x2C5) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_object_position();
 		var0001 = find_nearby(0x02DE, 0x0004, 0x0000);
 		for (var0004 in var0001 with var0002 to var0003) {
@@ -5160,7 +5205,7 @@ void Func02CB shape#(0x2CB) () {
 	var var0000;
 	var var0001;
 
-	if (event != 0x0001) {
+	if (event != DOUBLECLICK) {
 		return;
 	}
 	var0000 = Func0908();
@@ -5492,13 +5537,13 @@ void Func02CF shape#(0x2CF) () {
 	if (var0000) {
 		var0001 = [0x0001, 0x0001, 0xFFFE, 0xFFFE, 0x0000, 0xFFFF, 0x0000, 0xFFFF];
 		var0002 = [0xFFFF, 0xFFFE, 0xFFFF, 0xFFFE, 0x0001, 0x0001, 0xFFFC, 0xFFFC];
-		Func0828(item, var0001, var0002, 0x0000, Func032A, var0000, 0x0007);
+		Func0828(item, var0001, var0002, 0x0000, Func032A, var0000, BG_PATH_SUCCESS);
 	} else {
 		var0000 = 0xFE9C->get_npc_object()->get_cont_items(0x032A, 0xFE99, 0x0000);
 		if (var0000) {
 			var0001 = [0x0001, 0x0001, 0xFFFE, 0xFFFE, 0x0000, 0xFFFF, 0x0000, 0xFFFF];
 			var0002 = [0xFFFF, 0xFFFE, 0xFFFF, 0xFFFE, 0x0001, 0x0001, 0xFFFC, 0xFFFC];
-			Func0828(item, var0001, var0002, 0x0000, Func032A, var0000, 0x0007);
+			Func0828(item, var0001, var0002, 0x0000, Func032A, var0000, BG_PATH_SUCCESS);
 		}
 	}
 }
@@ -5508,7 +5553,7 @@ extern var Func0908 0x908 ();
 void Func02D3 shape#(0x2D3) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = Func0908();
 		if (0xFFFF->npc_nearby()) {
 			0xFFFF->say("\"",
@@ -5532,7 +5577,7 @@ void Func02D5 shape#(0x2D5) () {
 	var var0005;
 	var var0006;
 
-	if ((event == 0x0001) && (!in_usecode())) {
+	if ((event == DOUBLECLICK) && (!in_usecode())) {
 		var0000 = UI_die_roll(0x0001, 0x0010);
 		halt_scheduled();
 		var0001 = script item {
@@ -5583,7 +5628,7 @@ void Func02D5 shape#(0x2D5) () {
 }
 
 void Func02D8 shape#(0x2D8) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (0xFFFE->npc_nearby()) {
 			0xFFFE->say("\"Thou dost need a blacksmith to do that. I wager my dad could do it... I mean, could have... if he were still alive...\"");
 			0xFFFE->hide();
@@ -5597,7 +5642,7 @@ void Func02D9 shape#(0x2D9) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var0000 = get_item_quality();
 		if ((var0000 == 0x0000) || (var0000 > 0x0007)) {
@@ -5645,7 +5690,7 @@ void Func02DA shape#(0x2DA) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (get_item_frame() == 0x0002) {
 			var0000 = "@Praise All! The child is still alive. He must" + " be returned to Lady Tory immediately!@";
 			Func08FF(var0000);
@@ -5668,7 +5713,7 @@ void Func02DE shape#(0x2DE) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (!in_usecode()) {
 			if (get_item_frame() < 0x0005) {
 				set_item_frame(0x0000);
@@ -5712,7 +5757,7 @@ extern void Func08FF 0x8FF (var var0000);
 void Func02DF shape#(0x2DF) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = ("@I believe those are for the trainers to use.*" + "If thou art in need of practice, why not ") + "seek out a trainer?@";
 		Func08FF(var0000);
 	}
@@ -5736,7 +5781,7 @@ void Func02E4 shape#(0x2E4) () {
 		var0002 = [0xFFFF, 0xFFFF];
 		var0003 = find_nearest(0x01D6, 0x0005);
 		if (var0003) {
-			Func0828(var0003, var0001, var0002, 0x0000, Func032A, var0000, 0x0009);
+			Func0828(var0003, var0001, var0002, 0x0000, Func032A, var0000, PATH_SUCCESS_9);
 		}
 	}
 }
@@ -5753,13 +5798,13 @@ void Func02E5 shape#(0x2E5) () {
 	if (var0000) {
 		var0001 = [0xFFFF, 0xFFFE, 0xFFFF, 0xFFFE, 0x0001, 0x0001, 0xFFFC, 0xFFFC];
 		var0002 = [0x0001, 0x0001, 0xFFFE, 0xFFFE, 0x0000, 0xFFFF, 0x0000, 0xFFFF];
-		Func0828(item, var0001, var0002, 0x0000, Func032A, var0000, 0x0007);
+		Func0828(item, var0001, var0002, 0x0000, Func032A, var0000, BG_PATH_SUCCESS);
 	} else {
 		var0000 = 0xFE9C->get_npc_object()->get_cont_items(0x032A, 0xFE99, 0x0000);
 		if (var0000) {
 			var0001 = [0xFFFF, 0xFFFE, 0xFFFF, 0xFFFE, 0x0001, 0x0001, 0xFFFC, 0xFFFC];
 			var0002 = [0x0001, 0x0001, 0xFFFE, 0xFFFE, 0x0000, 0xFFFF, 0x0000, 0xFFFF];
-			Func0828(item, var0001, var0002, 0x0000, Func032A, var0000, 0x0007);
+			Func0828(item, var0001, var0002, 0x0000, Func032A, var0000, BG_PATH_SUCCESS);
 		}
 	}
 }
@@ -5767,7 +5812,7 @@ void Func02E5 shape#(0x2E5) () {
 extern var Func0937 0x937 (var var0000);
 
 void Func02E6 shape#(0x2E6) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (0xFFFE->npc_nearby() && Func0937(0xFFFE)) {
 			0xFFFE->item_say("@Gee, is that neat.@");
 		}
@@ -5786,14 +5831,14 @@ void Func02E7 shape#(0x2E7) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var0000 = [0x0000, 0xFFFF, 0x0001];
 		var0001 = [0x0001, 0x0001, 0x0001];
 		var0002 = 0xFFFF;
-		Func0828(item, var0000, var0001, var0002, Func02E7, item, 0x0007);
+		Func0828(item, var0000, var0001, var0002, Func02E7, item, BG_PATH_SUCCESS);
 	}
-	if (event == 0x0007) {
+	if (event == BG_PATH_SUCCESS) {
 		var0003 = Func0827(0xFE9C, item);
 		var0004 = script 0xFE9C {
 			face var0003;
@@ -5863,13 +5908,13 @@ void Func02E7 shape#(0x2E7) () {
 }
 
 void Func02E8 shape#(0x2E8) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_wizard_eye(0x2710, 0x03E8);
 	}
 }
 
 void Func02E9 shape#(0x2E9) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_play_music(0x003A, item);
 	}
 }
@@ -5880,7 +5925,7 @@ void Func02EB shape#(0x2EB) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		var0001 = UI_click_on_item();
 		if (var0000 == 0x0000) {
@@ -5911,7 +5956,7 @@ extern void Func0490 object#(0x490) ();
 void Func02F0 shape#(0x2F0) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (var0000 == 0x0000) {
 			set_item_frame(0x0001);
@@ -5940,7 +5985,7 @@ void Func02F2 shape#(0x2F2) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (get_item_frame() == 0x0005) {
 			var0000 = UI_click_on_item();
 			var0001 = var0000->get_item_shape();
@@ -5970,7 +6015,7 @@ void Func02F2 shape#(0x2F2) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		gflags[0x01AA] = true;
 		var0005 = [0xFF71, 0xFF70, 0xFF74, 0xFF6F, 0xFF6E, 0xFF6D, 0xFF73];
 		for (var0008 in var0005 with var0006 to var0007) {
@@ -5986,7 +6031,7 @@ void Func02F2 shape#(0x2F2) () {
 extern void Func0809 0x809 (var var0000);
 
 void Func02F5 shape#(0x2F5) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func0809(item);
 	}
 }
@@ -6010,7 +6055,7 @@ void Func02F8 shape#(0x2F8) () {
 	var var0008;
 
 	var0000 = get_item_frame();
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (var0000 <= 0x000B) {
 			var0001 = "@Those are beautiful. I am sure that they would fetch " + "a high price at the jewelers' in Britain.@";
 			Func08FF(var0001);
@@ -6049,17 +6094,17 @@ void Func02F8 shape#(0x2F8) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0004 = UI_click_on_item();
 		var0005 = var0004->get_item_shape();
 		var0006 = var0004->get_item_frame();
 		if (var0005 == 0x0350) {
 			if (var0006 == 0x0003) {
-				Func0828(var0004, 0x0000, 0x0002, 0xFFFE, Func02F8, var0004, 0x0007);
+				Func0828(var0004, 0x0000, 0x0002, 0xFFFE, Func02F8, var0004, BG_PATH_SUCCESS);
 			}
 		}
 	}
-	if (event == 0x0007) {
+	if (event == BG_PATH_SUCCESS) {
 		var0007 = Func092D(item);
 		var0003 = script 0xFE9C->get_npc_object() {
 			face var0007;
@@ -6090,7 +6135,7 @@ void Func02F8 shape#(0x2F8) () {
 extern void Func082F 0x82F ();
 
 void Func02FB shape#(0x2FB) () {
-	if ((!in_usecode()) && (event == 0x0001)) {
+	if ((!in_usecode()) && (event == DOUBLECLICK)) {
 		if ((UI_game_hour() >= 0x000F) || (UI_game_hour() <= 0x0003)) {
 			0xFF18->set_schedule_type(0x0009);
 		}
@@ -6105,7 +6150,7 @@ void Func0301 shape#(0x301) () {
 	var var0003;
 	var var0004;
 
-	if ((event == 0x0001) || (event == 0x0004)) {
+	if ((event == DOUBLECLICK) || (event == WEAPON)) {
 		UI_close_gumps();
 		var0000 = find_nearby(0x01EE, 0x012C, 0x0000);
 		for (var0003 in var0000 with var0001 to var0002) {
@@ -6132,10 +6177,10 @@ extern var Func0906 0x906 ();
 extern void Func06E1 object#(0x6E1) ();
 
 void Func0302 shape#(0x302) () {
-	if ((event == 0x0001) && Func0906()) {
+	if ((event == DOUBLECLICK) && Func0906()) {
 		UI_close_gumps();
 		UI_view_tile([0x0B4C, 0x058C]);
-		event = 0x0003;
+		event = EGG;
 		0x0000->Func06E1();
 		UI_display_area([0x0B4C, 0x058C, 0x0003]);
 	}
@@ -6151,7 +6196,7 @@ void Func0303 shape#(0x303) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0004) {
+	if (event == WEAPON) {
 		var0000 = item;
 	} else {
 		var0000 = UI_click_on_item();
@@ -6195,7 +6240,7 @@ void Func0303 shape#(0x303) () {
 extern void Func0809 0x809 (var var0000);
 
 void Func0305 shape#(0x305) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func0809(item);
 	}
 }
@@ -6203,7 +6248,7 @@ void Func0305 shape#(0x305) () {
 extern void Func0809 0x809 (var var0000);
 
 void Func0306 shape#(0x306) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func0809(item);
 	}
 }
@@ -6212,7 +6257,7 @@ extern void Func08FF 0x8FF (var var0000);
 extern var Func0829 0x829 (var var0000);
 
 void Func030D shape#(0x30D) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (get_item_flag(ON_MOVING_BARGE)) {
 			Func08FF("@The sails must be furled before the planks can be lowered.@");
 		} else if (!Func0829(item)) {
@@ -6232,10 +6277,10 @@ void Func030E shape#(0x30E) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func08FF("@Perhaps thou shouldst attack with it.@");
 	}
-	if (event == 0x0004) {
+	if (event == WEAPON) {
 		var0000 = UI_click_on_item();
 		var0001 = [var0000[0x0002], var0000[0x0003], var0000[0x0004]];
 		var0002 = UI_create_new_object(0x037F);
@@ -6290,7 +6335,7 @@ void Func0311 shape#(0x311) () {
 	var var000F;
 	var var0010;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (gflags[0x0004]) {
 			Func08FE(["@How odd!@", "@It work before.@"]);
 			return;
@@ -6367,9 +6412,9 @@ void Func0311 shape#(0x311) () {
 					var000E = 0xFFFF;
 				}
 				var0001[var0003] += var000E;
-				var000A = UI_path_run_usecode(var0001, Func0311, var0009, 0x0007);
+				var000A = UI_path_run_usecode(var0001, Func0311, var0009, BG_PATH_SUCCESS);
 				if (var000A) {
-					UI_set_path_failure(Func0311, var0009, 0x0008);
+					UI_set_path_failure(Func0311, var0009, BG_PATH_FAILURE);
 					var000F = get_container();
 					var0010 = UI_get_party_list();
 					while (true) {
@@ -6390,13 +6435,13 @@ void Func0311 shape#(0x311) () {
 			}
 		}
 	}
-	if (event == 0x0008) {
+	if (event == BG_PATH_FAILURE) {
 		if (Func0826(item)) {
 			Func0821(item);
 			Func08FE(["@No, Avatar.@", "@Let thyself enter.@"]);
 		}
 	}
-	if (event == 0x0007) {
+	if (event == BG_PATH_SUCCESS) {
 		if (Func0826(item)) {
 			Func0821(item);
 			Func0824(item);
@@ -6415,14 +6460,14 @@ void Func0313 shape#(0x313) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var0000 = 0xFFFF;
 		var0001 = 0xFFFF;
 		var0002 = 0xFFFD;
-		Func0828(item, var0000, var0001, var0002, Func0313, item, 0x0007);
+		Func0828(item, var0000, var0001, var0002, Func0313, item, BG_PATH_SUCCESS);
 	}
-	if (event == 0x0007) {
+	if (event == BG_PATH_SUCCESS) {
 		var0003 = Func0827(0xFE9C, item);
 		var0004 = script 0xFE9C {
 			face var0003;
@@ -6432,7 +6477,7 @@ void Func0313 shape#(0x313) () {
 		};
 		Func0816(item);
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		Func0816(item);
 	}
 }
@@ -6456,15 +6501,15 @@ void Func0314 shape#(0x314) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var0000 = 0xFFFF;
 		var0001 = 0xFFFF;
 		var0002 = 0xFFFD;
-		Func0828(item, var0000, var0001, var0002, Func0314, item, 0x0007);
+		Func0828(item, var0000, var0001, var0002, Func0314, item, BG_PATH_SUCCESS);
 	}
-	if ((event == 0x0007) || (event == 0x0002)) {
-		if (event != 0x0002) {
+	if ((event == BG_PATH_SUCCESS) || (event == SCRIPTED)) {
+		if (event != SCRIPTED) {
 			var0003 = Func0827(0xFE9C, item);
 			var0004 = script 0xFE9C {
 				face var0003;
@@ -6501,7 +6546,7 @@ extern void Func0925 0x925 (var var0000);
 void Func0316 shape#(0x316) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		if (var0000->is_npc()) {
 			var0000->set_item_flag(INVISIBLE);
@@ -6519,7 +6564,7 @@ void Func0316 shape#(0x316) () {
 extern void Func0809 0x809 (var var0000);
 
 void Func031C shape#(0x31C) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func0809(item);
 	}
 }
@@ -6808,7 +6853,7 @@ void Func031D shape#(0x31D) () {
 }
 
 void Func031E shape#(0x31E) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		set_item_shape(0x031F);
 		UI_play_sound_effect2(0x000E, item);
 	}
@@ -6823,7 +6868,7 @@ void Func0326 shape#(0x326) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	var0000 = get_npc_object()->get_schedule_type();
@@ -6890,7 +6935,7 @@ void Func0329 shape#(0x329) () {
 	var var000A;
 	var var000B;
 
-	if ((event == 0x0001) && (!in_usecode())) {
+	if ((event == DOUBLECLICK) && (!in_usecode())) {
 		UI_close_gumps();
 		var0000 = Func083C(Func083A());
 		if ((UI_game_hour() >= 0x000F) || (UI_game_hour() <= 0x0003)) {
@@ -6977,7 +7022,7 @@ void Func032A shape#(0x32A) () {
 	var var0021;
 	var var0022;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var0000 = get_item_frame();
 		if (var0000 == 0x0006) {
@@ -6986,13 +7031,13 @@ void Func032A shape#(0x32A) () {
 		if (!get_container()) {
 			var0001 = [0x0000, 0x0001, 0x0001, 0x0001, 0xFFFF, 0xFFFF, 0x0000, 0xFFFF];
 			var0002 = [0x0001, 0x0001, 0x0000, 0xFFFF, 0x0001, 0x0000, 0xFFFF, 0xFFFF];
-			Func0828(item, var0001, var0002, 0xFFFD, Func032A, item, 0x0003);
+			Func0828(item, var0001, var0002, 0xFFFD, Func032A, item, EGG);
 		} else if (!Func0944(item)) {
 			UI_close_gumps();
 			var0003 = Func0945(item);
 			var0001 = [0x0000, 0x0001, 0xFFFF, 0x0001];
 			var0002 = [0x0002, 0x0001, 0x0002, 0x0000];
-			Func0828(var0003, var0001, var0002, 0xFFFD, Func032A, item, 0x0003);
+			Func0828(var0003, var0001, var0002, 0xFFFD, Func032A, item, EGG);
 		} else {
 			UI_close_gumps();
 			var0004 = script item {
@@ -7001,7 +7046,7 @@ void Func032A shape#(0x32A) () {
 			};
 		}
 	}
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0003 = Func0945(item);
 		var0005 = Func092D(var0003);
 		if (var0003->is_npc()) {
@@ -7032,7 +7077,7 @@ void Func032A shape#(0x32A) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = get_item_frame();
 		var0006 = UI_click_on_item();
 		var0007 = var0006->get_item_shape();
@@ -7060,18 +7105,18 @@ void Func032A shape#(0x32A) () {
 						wait 1;
 					};
 				};
-				Func0828(var0006, var0001, var0002, 0x0000, Func032A, var0006, 0x0004);
+				Func0828(var0006, var0001, var0002, 0x0000, Func032A, var0006, WEAPON);
 			}
 		}
 		if (var0007 == 0x02E5) {
 			var0001 = [0xFFFF, 0xFFFE, 0xFFFF, 0xFFFE, 0x0001, 0x0001, 0xFFFC, 0xFFFC];
 			var0002 = [0x0001, 0x0001, 0xFFFE, 0xFFFE, 0x0000, 0xFFFF, 0x0000, 0xFFFF];
-			Func0828(var0006, var0001, var0002, 0x0000, Func032A, item, 0x0007);
+			Func0828(var0006, var0001, var0002, 0x0000, Func032A, item, BG_PATH_SUCCESS);
 		}
 		if (var0007 == 0x02CF) {
 			var0001 = [0x0001, 0x0001, 0xFFFE, 0xFFFE, 0x0000, 0xFFFF, 0x0000, 0xFFFF];
 			var0002 = [0xFFFF, 0xFFFE, 0xFFFF, 0xFFFE, 0x0001, 0x0001, 0xFFFC, 0xFFFC];
-			Func0828(var0006, var0001, var0002, 0x0000, Func032A, item, 0x0007);
+			Func0828(var0006, var0001, var0002, 0x0000, Func032A, item, BG_PATH_SUCCESS);
 		}
 		if (var0007 == 0x02E3) {
 			if ((var0006->get_item_frame() >= 0x0004) && (var0006->get_item_frame() <= 0x0007)) {
@@ -7084,7 +7129,7 @@ void Func032A shape#(0x32A) () {
 					return;
 				}
 				if (var0000 == 0x0001) {
-					Func0828(var0006, var0001, var0002, 0x0000, Func032A, var0006, 0x0008);
+					Func0828(var0006, var0001, var0002, 0x0000, Func032A, var0006, BG_PATH_FAILURE);
 				}
 			} else {
 				return;
@@ -7100,7 +7145,7 @@ void Func032A shape#(0x32A) () {
 				return;
 			}
 			if (var0000 == 0x0001) {
-				Func0828(var0006, var0001, var0002, 0xFFFB, Func032A, var0006, 0x0008);
+				Func0828(var0006, var0001, var0002, 0xFFFB, Func032A, var0006, BG_PATH_FAILURE);
 			}
 		}
 		if (var0007 == 0x02E4) {
@@ -7109,7 +7154,7 @@ void Func032A shape#(0x32A) () {
 				if (var0008) {
 					var0001 = [0xFFFB, 0xFFFB];
 					var0002 = [0xFFFF, 0xFFFF];
-					Func0828(var0008, var0001, var0002, 0x0000, Func032A, item, 0x0009);
+					Func0828(var0008, var0001, var0002, 0x0000, Func032A, item, PATH_SUCCESS_9);
 				}
 			} else {
 				0xFE9C->get_npc_object()->item_say("@The bucket is full.@");
@@ -7119,7 +7164,7 @@ void Func032A shape#(0x32A) () {
 			if (var0000 == 0x0000) {
 				var0001 = [0xFFFB, 0xFFFB];
 				var0002 = [0xFFFF, 0xFFFF];
-				Func0828(var0006, var0001, var0002, 0x0000, Func032A, item, 0x0009);
+				Func0828(var0006, var0001, var0002, 0x0000, Func032A, item, PATH_SUCCESS_9);
 			} else {
 				0xFE9C->get_npc_object()->item_say("@The bucket is full.@");
 			}
@@ -7132,7 +7177,7 @@ void Func032A shape#(0x32A) () {
 			var0006 = Func093C(var0006[0x0001], var0006);
 			var0006[0x0001] = var0006[0x0001];
 			var0006[0x0002] += 0x0001;
-			var0009 = UI_path_run_usecode(var0006, Func032A, item, 0x000A);
+			var0009 = UI_path_run_usecode(var0006, Func032A, item, PATH_SUCCESS);
 		}
 		if (var0006[0x0001] == 0x0000) {
 			if (var0000 == 0x0000) {
@@ -7141,10 +7186,10 @@ void Func032A shape#(0x32A) () {
 			}
 			var0006 = Func093C(var0006[0x0001], var0006);
 			var0006[0x0002] += 0x0001;
-			var0009 = UI_path_run_usecode(var0006, Func032A, item, 0x000A);
+			var0009 = UI_path_run_usecode(var0006, Func032A, item, PATH_SUCCESS);
 		}
 	}
-	if (event == 0x0004) {
+	if (event == WEAPON) {
 		var000A = 0xFE9C->get_npc_object()->get_cont_items(0x032A, 0xFE99, 0xFE99);
 		var0000 = var000A->get_item_frame();
 		var000B = Func092D(item);
@@ -7175,7 +7220,7 @@ void Func032A shape#(0x32A) () {
 			frame 0;
 		};
 	}
-	if (event == 0x0007) {
+	if (event == BG_PATH_SUCCESS) {
 		var0010 = false;
 		var0010 = 0xFE9C->get_npc_object()->find_nearest(0x02E5, 0x0005);
 		if (!var0010) {
@@ -7220,7 +7265,7 @@ void Func032A shape#(0x32A) () {
 			};
 		}
 	}
-	if (event == 0x0008) {
+	if (event == BG_PATH_FAILURE) {
 		var000A = 0xFE9C->get_npc_object()->get_cont_items(0x032A, 0xFE99, 0x0001);
 		var0000 = var000A->get_item_frame();
 		var0007 = get_item_shape();
@@ -7355,7 +7400,7 @@ void Func032A shape#(0x32A) () {
 			}
 		}
 	}
-	if (event == 0x0009) {
+	if (event == STARTED_TALKING) {
 		var0020 = 0xFE9C->get_npc_object()->find_nearest(0x02E4, 0x000A);
 		var0021 = var0020->get_item_frame();
 		if ((var0021 >= 0x0000) && (var0021 <= 0x000B)) {
@@ -7398,7 +7443,7 @@ void Func032A shape#(0x32A) () {
 			call Func0695;
 		};
 	}
-	if (event == 0x000A) {
+	if (event == PATH_SUCCESS) {
 		var000E = script 0xFE9C->get_npc_object() {
 			face north;
 			actor frame bowing;
@@ -7435,7 +7480,7 @@ void Func0334 shape#(0x334) () {
 
 	var0000 = item;
 	var0001 = var0000->get_item_quality();
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (get_item_shape() != 0x0334) {
 			var0000 = var0000->find_nearby(0x0334, 0x0005, 0x00B0);
 			var0000 = Func093D(var0000, var0000);
@@ -7482,7 +7527,7 @@ void Func0334 shape#(0x334) () {
 			abort;
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFFE9->kill_npc();
 		0xFFE9->halt_scheduled();
 		0xFFE9->remove_npc();
@@ -7662,7 +7707,7 @@ void Func0336 shape#(0x336) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (var0000 == 0x0000) {
 			var0001 = UI_click_on_item();
@@ -7706,7 +7751,7 @@ void Func0337 shape#(0x337) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (var0000 < 0x0002) {
 			Func08FE("@Finger-painting again?@");
@@ -7762,7 +7807,7 @@ void Func033B shape#(0x33B) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		if (var0000->is_npc()) {
 			var0001 = var0000->get_npc_prop(0x0000);
@@ -7802,7 +7847,7 @@ extern var Func081F 0x81F (var var0000);
 void Func033C shape#(0x33C) () {
 	var var0000;
 
-	if (event != 0x0001) {
+	if (event != DOUBLECLICK) {
 		return;
 	}
 	if (get_item_quality() == 0x0000) {
@@ -7816,7 +7861,7 @@ extern void Func08FF 0x8FF (var var0000);
 void Func0345 shape#(0x345) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = ("@Thou shouldst use the brush and pigments, " + Func0908()) + ".@";
 		Func08FF(var0000);
 	}
@@ -7827,7 +7872,7 @@ extern void Func0269 shape#(0x269) ();
 void Func0347 shape#(0x347) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (var0000 == 0x0001) {
 			if (gflags[0x0004]) {
@@ -7848,7 +7893,7 @@ void Func0348 shape#(0x348) () {
 	var var0001;
 
 	var0000 = get_barge();
-	if ((event == 0x0001) && (!(var0000 == 0x0000))) {
+	if ((event == DOUBLECLICK) && (!(var0000 == 0x0000))) {
 		if (!get_item_flag(ON_MOVING_BARGE)) {
 			if (Func080D()) {
 				Func0812(var0000);
@@ -7884,7 +7929,7 @@ extern var Func0820 0x820 (var var0000);
 void Func034D shape#(0x34D) () {
 	var var0000;
 
-	if (event != 0x0001) {
+	if (event != DOUBLECLICK) {
 		return;
 	}
 	if (get_item_quality() == 0x0000) {
@@ -7898,7 +7943,7 @@ void Func0350 shape#(0x350) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (var0000 == 0x0003) {
 			var0001 = script item {
@@ -7913,7 +7958,7 @@ void Func0350 shape#(0x350) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		gflags[0x032F] = true;
 		item->Func06F6();
 	}
@@ -7924,7 +7969,7 @@ extern void Func08FF 0x8FF (var var0000);
 void Func0353 shape#(0x353) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = ("@That appears to be fine cloth, no doubt it would fetch " + "a fair price in Minoc. Or, perhapse, thou couldst cut ") + "it into bandages with shears.@";
 		Func08FF(var0000);
 	}
@@ -7942,7 +7987,7 @@ void Func0356 shape#(0x356) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (gflags[0x0317]) {
 			abort;
 		}
@@ -8011,7 +8056,7 @@ void Func0356 shape#(0x356) () {
 			abort;
 		}
 	}
-	if (event == 0x0004) {
+	if (event == WEAPON) {
 		var0000 = get_item_frame();
 		if (var0000 == 0x0010) {
 			0xFEE1->say("\"Thou hast mastered the Test of Truth, and so a boon of great intellect and magical ability will be bestowed upon thee. Use -- and respect -- thy powers well, Avatar.\"");
@@ -8040,7 +8085,7 @@ void Func0356 shape#(0x356) () {
 			call Func0356;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = get_item_frame();
 		if (var0000 == 0x0010) {
 			if (!gflags[0x0318]) {
@@ -8137,7 +8182,7 @@ void Func035F shape#(0x35F) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (var0000 == 0x0000) {
 			var0001 = UI_click_on_item();
@@ -8185,7 +8230,7 @@ extern void Func080A 0x80A (var var0000, var var0001);
 void Func0369 shape#(0x369) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_container();
 		if (var0000) {
 			return;
@@ -8198,11 +8243,11 @@ extern void Func0833 0x833 (var var0000, var var0001);
 extern void Func03A7 shape#(0x3A7) ();
 
 void Func036C shape#(0x36C) () {
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_item_shape(0x036C);
 		abort;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_flash_mouse(0x0000);
 		return;
 	}
@@ -8220,7 +8265,7 @@ void Func0378 shape#(0x378) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (get_item_frame() == 0x0001) {
 			UI_play_music(0x0030, item);
 			var0000 = Func093C(item, find_nearby(0x0378, 0x007D, 0x0000));
@@ -8255,7 +8300,7 @@ void Func0379 shape#(0x379) () {
 	var var0000;
 	var var0001;
 
-	if ((event == 0x0001) || (event == 0x0002)) {
+	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		var0000 = UI_create_new_object(0x01B8);
 		if (var0000) {
 			var0001 = get_object_position();
@@ -8278,7 +8323,7 @@ void Func037D shape#(0x37D) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_quality();
 		var0001 = UI_click_on_item();
 		UI_play_sound_effect2(0x005A, item);
@@ -8319,11 +8364,11 @@ extern void Func0832 0x832 (var var0000, var var0001);
 extern void Func036C shape#(0x36C) ();
 
 void Func03A7 shape#(0x3A7) () {
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_item_shape(0x03A7);
 		abort;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_flash_mouse(0x0000);
 		return;
 	}
@@ -8334,11 +8379,11 @@ extern void Func0832 0x832 (var var0000, var var0001);
 extern void Func012F shape#(0x12F) ();
 
 void Func03A8 shape#(0x3A8) () {
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_item_shape(0x03A8);
 		abort;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_flash_mouse(0x0000);
 		return;
 	}
@@ -8350,7 +8395,7 @@ extern var Func0937 0x937 (var var0000);
 void Func03B0 shape#(0x3B0) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (get_item_frame()) {
 			if (Func0937(0xFE9C)) {
 				0xFE9C->item_say("ptui!");
@@ -8368,7 +8413,7 @@ void Func03B2 shape#(0x3B2) () {
 	var var0000;
 
 	var0000 = get_npc_object()->get_schedule_type();
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFEFE->show_npc_face(0x0000);
@@ -8412,7 +8457,7 @@ void Func03C8 shape#(0x3C8) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (var0000 == 0x0000) {
 			Func0805(item);
@@ -8424,7 +8469,7 @@ void Func03C8 shape#(0x3C8) () {
 			Func0803(item);
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = get_object_position();
 		UI_sprite_effect(0x0007, (var0001[0x0001] - 0x0003), (var0001[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, 0xFFFF);
 	}
@@ -8438,7 +8483,7 @@ void Func03D5 shape#(0x3D5) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = var0000->get_item_shape();
 		var0002 = var0000->get_object_position();
@@ -8461,7 +8506,7 @@ void Func03DB shape#(0x3DB) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		// Equivalent code to everything up to, and including, the call
 		// to run_script:
@@ -8520,7 +8565,7 @@ void Func03DB shape#(0x3DB) () {
 void Func03DE shape#(0x3DE) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (!gflags[0x0301]) {
 			gflags[0x0301] = true;
 			0xFE9C->show_npc_face(UI_is_pc_female());
@@ -8545,7 +8590,7 @@ void Func03DE shape#(0x3DE) () {
 			say("Your mind is quickly probed, then cast aside, leaving you feeling slightly ill and filled with an irrational sense of forboding.");
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		UI_fade_palette(0x000C, 0x0001, 0x0001);
 		var0000 = script 0xFE9C->get_npc_object() {
 			wait 3;
@@ -8566,7 +8611,7 @@ void Func03DF shape#(0x3DF) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (0xFE9C->is_readied(0x0001, 0x026F, 0xFE99)) {
 			var0000 = find_nearest(0x029C, 0x0003);
 			if (var0000) {
@@ -8591,7 +8636,7 @@ void Func03E0 shape#(0x3E0) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		// Equivalent code to everything up to, and including, the call
 		// to run_script:
@@ -8637,7 +8682,7 @@ void Func03E0 shape#(0x3E0) () {
 extern void Func0800 0x800 (var var0000);
 
 void Func03F3 shape#(0x3F3) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		Func0800(item);
 	}
 }
@@ -8646,7 +8691,7 @@ void Func03F5 shape#(0x3F5) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (!in_usecode()) {
 			// Equivalent code to everything up to, and including, the call
 			// to run_script:
@@ -8707,7 +8752,7 @@ void Func03F7 shape#(0x3F7) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (get_cont_items(0x031D, 0x00F3, 0x0004)) {
 			0xFEE0->show_npc_face(0x0000);
 			if (gflags[0x0328]) {
@@ -8810,7 +8855,7 @@ void Func0401 object#(0x401) () {
 	var0002 = 0xFFFF->get_npc_object();
 	var0003 = Func0909();
 	var0004 = UI_is_pc_female();
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if ((!gflags[0x003B]) && ((!gflags[0x005C]) && 0xFE9C->get_item_flag(DONT_RENDER))) {
 			UI_play_music(0x0023, 0x0000);
 			var0005 = script 0xFE9C->get_npc_object() after 125 ticks {
@@ -8859,7 +8904,7 @@ void Func0401 object#(0x401) () {
 		}
 		0xFFFF->add_to_party();
 	}
-	if ((gflags[0x003B] == false) && (event == 0x0002)) {
+	if ((gflags[0x003B] == false) && (event == SCRIPTED)) {
 		0xFFFF->say("A rather large, familiar man looks up and sees you. The shock that is evident from his dumbfounded expression quickly evolves into delight. He smiles broadly.~~\"",
 			var0000,
 			"! If I did not trust the infallibility of mine own eyes, I would not believe it! I was just thinking to myself, 'If only the Avatar were here!' Then...~~\"Lo and behold! Who says that magic is dying! Here is living proof that it is not!~~ \"Dost thou realize, ",
@@ -8901,7 +8946,7 @@ void Func0401 object#(0x401) () {
 		}
 		abort;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = Func0908();
 		var0001 = UI_get_party_list();
 		var0002 = 0xFFFF->get_npc_object();
@@ -9163,7 +9208,7 @@ void Func0401 object#(0x401) () {
 		}
 		say("\"'Tis always a pleasure to speak with thee, my friend.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFFF);
 	}
 }
@@ -9196,7 +9241,7 @@ void Func0402 object#(0x402) () {
 	var var0011;
 	var var0012;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = Func0908();
 		var0001 = "Avatar";
 		var0002 = UI_get_party_list();
@@ -9524,7 +9569,7 @@ void Func0402 object#(0x402) () {
 			gflags[0x0064] = true;
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -9548,7 +9593,7 @@ void Func0403 object#(0x403) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFFD->show_npc_face(0x0000);
 		var0000 = UI_is_pc_female();
 		var0001 = UI_get_party_list();
@@ -9774,7 +9819,7 @@ void Func0403 object#(0x403) () {
 		}
 		say("Shamino bows slightly.*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFFD);
 	}
 }
@@ -9807,7 +9852,7 @@ void Func0404 object#(0x404) () {
 	var var0012;
 	var var0013;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFFC->show_npc_face(0x0000);
 		if (gflags[0x02EB]) {
 			if (UI_get_timer(0x000B) < 0x0001) {
@@ -10047,7 +10092,7 @@ void Func0404 object#(0x404) () {
 		}
 		say("\"I shall speak with thee later, then.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFFC);
 	}
 }
@@ -10077,7 +10122,7 @@ void Func0405 object#(0x405) () {
 	var var000D;
 	var var000E;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFFB->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = 0xFFFB->get_npc_object();
@@ -10266,7 +10311,7 @@ void Func0405 object#(0x405) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFFB);
 	}
 }
@@ -10296,7 +10341,7 @@ void Func0406 object#(0x406) () {
 	var var000E;
 	var var000F;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = Func0908();
 		var0001 = "Avatar";
 		var0002 = UI_get_party_list();
@@ -10500,7 +10545,7 @@ void Func0406 object#(0x406) () {
 		}
 		say("\"Good luck is hoped for you.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var000C = UI_part_of_day();
 		var000D = 0xFFFA->get_npc_object()->get_schedule_type();
 		var000E = UI_die_roll(0x0001, 0x0004);
@@ -10553,7 +10598,7 @@ void Func0407 object#(0x407) () {
 	var var000D;
 	var var000E;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFF9->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = UI_is_pc_female();
@@ -10732,7 +10777,7 @@ void Func0407 object#(0x407) () {
 		}
 		say("\"Until later.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFF9);
 	}
 }
@@ -10761,7 +10806,7 @@ void Func0408 object#(0x408) () {
 	var var000C;
 	var var000D;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFF8->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_get_party_list();
@@ -10982,7 +11027,7 @@ void Func0408 object#(0x408) () {
 			var0003,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFF8);
 	}
 }
@@ -11007,7 +11052,7 @@ void Func0409 object#(0x409) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFF7->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_get_party_list();
@@ -11212,7 +11257,7 @@ void Func0409 object#(0x409) () {
 			var0003,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFF7);
 	}
 }
@@ -11273,7 +11318,7 @@ void Func040A object#(0x40A) () {
 	var var0029;
 	var var002A;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFF6->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -11817,7 +11862,7 @@ void Func040A object#(0x40A) () {
 				}
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -11837,7 +11882,7 @@ void Func040B object#(0x40B) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = Func0909();
 		var0001 = UI_get_party_list();
 		var0002 = UI_is_pc_female();
@@ -11972,7 +12017,7 @@ void Func040B object#(0x40B) () {
 		}
 		say("\"Goodbye,\" the man sniffs.*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFF5);
 	}
 }
@@ -12006,7 +12051,7 @@ void Func040C object#(0x40C) () {
 	var var000D;
 	var var000E;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFF4->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func0908();
@@ -12280,7 +12325,7 @@ void Func040C object#(0x40C) () {
 		}
 		say("The Mayor nods his head at you and goes on about his business.*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var000C = 0xFFF4->get_npc_object()->get_schedule_type();
 		var000D = UI_die_roll(0x0001, 0x0004);
 		if (var000C == 0x000B) {
@@ -12312,7 +12357,7 @@ void Func040D object#(0x40D) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFFF3->show_npc_face(0x0000);
@@ -12450,7 +12495,7 @@ void Func040E object#(0x40E) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFFF2->show_npc_face(0x0000);
@@ -12569,7 +12614,7 @@ void Func040F object#(0x40F) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFFF1->show_npc_face(0x0000);
@@ -12669,7 +12714,7 @@ void Func0410 object#(0x410) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = Func0908();
 		var0001 = UI_part_of_day();
 		var0002 = false;
@@ -12826,7 +12871,7 @@ void Func0410 object#(0x410) () {
 			var0000,
 			", let me know.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFF0);
 	}
 }
@@ -12842,7 +12887,7 @@ void Func0411 object#(0x411) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFEF->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
@@ -12896,7 +12941,7 @@ void Func0411 object#(0x411) () {
 		}
 		say("\"Goodbye.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0002 = 0xFFEF->get_npc_object()->get_schedule_type();
 		var0003 = UI_die_roll(0x0001, 0x0004);
 		if (var0002 == 0x001D) {
@@ -12943,7 +12988,7 @@ void Func0412 object#(0x412) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFEE->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = Func0909();
@@ -13048,7 +13093,7 @@ void Func0412 object#(0x412) () {
 			say("\"Spend more money next time thou dost come in.\"*");
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0000 = UI_part_of_day();
 		var0003 = 0xFFEE->get_npc_object()->get_schedule_type();
 		var0008 = UI_die_roll(0x0001, 0x0004);
@@ -13095,7 +13140,7 @@ void Func0413 object#(0x413) () {
 	var var000D;
 	var var000E;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_part_of_day();
 		var0001 = Func0908();
 		var0002 = Func0909();
@@ -13214,7 +13259,7 @@ void Func0413 object#(0x413) () {
 			say("Apollonia waves at you. \"Do come again!\"*");
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFED);
 	}
 }
@@ -13227,7 +13272,7 @@ void Func0414 object#(0x414) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFEC->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = 0xFFEC->get_npc_object()->get_schedule_type();
@@ -13278,7 +13323,7 @@ void Func0414 object#(0x414) () {
 		}
 		say("\"Goodbye,\" the fighter bows.*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFEC);
 	}
 }
@@ -13300,7 +13345,7 @@ void Func0415 object#(0x415) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFEB->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = 0xFFEB->get_npc_object()->get_schedule_type();
@@ -13480,7 +13525,7 @@ void Func0415 object#(0x415) () {
 		}
 		say("\"May thy day have smooth sailing,\" the sailor starts to say, but a coughing spasm interrupts him.*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFEB);
 	}
 }
@@ -13497,7 +13542,7 @@ void Func0416 object#(0x416) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFEA->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		if (var0000 == 0x0007) {
@@ -13559,7 +13604,7 @@ void Func0416 object#(0x416) () {
 		}
 		say("\"Goodbye!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0002 = 0xFFEA->get_npc_object()->get_schedule_type();
 		var0003 = UI_die_roll(0x0001, 0x0004);
 		if (var0002 == 0x000C) {
@@ -13612,7 +13657,7 @@ void Func0417 object#(0x417) () {
 	var var0011;
 
 	var0000 = false;
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 labelFunc0417_000C:
 		var0001 = Func0908();
 		if (gflags[0x001E]) {
@@ -14003,7 +14048,7 @@ labelFunc0417_000C:
 			var0001,
 			". Do come back soon.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFE9);
 	}
 labelFunc0417_0743:
@@ -14033,9 +14078,9 @@ labelFunc0417_0743:
 			actor frame standing;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x001E]) {
-			event = 0x0001;
+			event = DOUBLECLICK;
 			// I see no way other than this
 			goto labelFunc0417_000C;
 			// Dead code
@@ -14075,7 +14120,7 @@ void Func0418 object#(0x418) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFFE8->show_npc_face(0x0000);
@@ -14175,7 +14220,7 @@ void Func0419 object#(0x419) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFE7->show_npc_face(0x0000);
 		if (!gflags[0x009A]) {
 			say("You are wary of conversing with that trickster Chuckles, but decide to anyway.");
@@ -14308,7 +14353,7 @@ void Func0419 object#(0x419) () {
 			say("\"Bye for now!\"*");
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0003 = 0xFFE7->get_npc_object()->get_schedule_type();
 		if (var0003 == 0x0004) {
 			var0004 = UI_die_roll(0x0001, 0x0004);
@@ -14357,7 +14402,7 @@ void Func041A object#(0x41A) () {
 	var var000C;
 	var var000D;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFE6->show_npc_face(0x0000);
 		var0000 = 0xFFE6->get_npc_object()->get_schedule_type();
 		var0001 = Func0931(0xFE9B, 0x0001, 0x03D5, 0xFE99, 0x0001);
@@ -14721,7 +14766,7 @@ void Func041A object#(0x41A) () {
 		}
 		say("\"Until we meet again, Avatar.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFE6);
 	}
 }
@@ -14743,7 +14788,7 @@ void Func041B object#(0x41B) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFE5->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = 0xFFE5->get_npc_object()->get_schedule_type();
@@ -14874,7 +14919,7 @@ void Func041B object#(0x41B) () {
 		}
 		say("\"Leaving? Sorry, I do not give autographs.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0000 = UI_part_of_day();
 		var0001 = 0xFFE5->get_npc_object()->get_schedule_type();
 		var0008 = UI_die_roll(0x0001, 0x0004);
@@ -14908,7 +14953,7 @@ void Func041C object#(0x41C) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_is_pc_female();
 		if (var0000) {
 			0xFFE4->show_npc_face(0x0001);
@@ -14986,7 +15031,7 @@ void Func041C object#(0x41C) () {
 		}
 		say("\"Goodbye. Be sure to come to the show when it opens!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0002 = UI_part_of_day();
 		var0003 = 0xFFE4->get_npc_object()->get_schedule_type();
 		var0004 = UI_die_roll(0x0001, 0x0004);
@@ -15020,7 +15065,7 @@ void Func041D object#(0x41D) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFE3->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x009E]) {
@@ -15083,7 +15128,7 @@ void Func041D object#(0x41D) () {
 		}
 		say("\"Goodbye. Be sure to come to the show when it opens!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0001 = UI_part_of_day();
 		var0002 = 0xFFE3->get_npc_object()->get_schedule_type();
 		var0003 = UI_die_roll(0x0001, 0x0004);
@@ -15117,7 +15162,7 @@ void Func041E object#(0x41E) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFE2->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		add(["name", "job", "bye"]);
@@ -15199,7 +15244,7 @@ void Func041E object#(0x41E) () {
 		}
 		say("\"Adieu!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0002 = 0xFFE2->get_npc_object()->get_schedule_type();
 		var0003 = UI_die_roll(0x0001, 0x0004);
 		if (var0002 == 0x001D) {
@@ -15230,7 +15275,7 @@ void Func041F object#(0x41F) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFE1->show_npc_face(0x0000);
 		var0000 = Func08F7(0xFFDE);
 		add(["name", "job", "bye"]);
@@ -15292,7 +15337,7 @@ void Func041F object#(0x41F) () {
 		}
 		say("\"Bye bye!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0001 = 0xFFE1->get_npc_object()->get_schedule_type();
 		if (var0001 == 0x0019) {
 			var0002 = UI_die_roll(0x0001, 0x0004);
@@ -15321,7 +15366,7 @@ void Func0420 object#(0x420) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFE0->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x00A1]) {
@@ -15374,7 +15419,7 @@ void Func0420 object#(0x420) () {
 		}
 		say("\"Bye bye!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0001 = 0xFFE0->get_npc_object()->get_schedule_type();
 		if (var0001 == 0x0019) {
 			var0002 = UI_die_roll(0x0001, 0x0004);
@@ -15403,7 +15448,7 @@ void Func0421 object#(0x421) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFDF->show_npc_face(0x0000);
 		var0000 = Func08F7(0xFFDE);
 		add(["name", "job", "bye"]);
@@ -15468,7 +15513,7 @@ void Func0421 object#(0x421) () {
 		}
 		say("\"Bye bye!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0001 = 0xFFDF->get_npc_object()->get_schedule_type();
 		if (var0001 == 0x0019) {
 			var0002 = UI_die_roll(0x0001, 0x0004);
@@ -15504,7 +15549,7 @@ void Func0422 object#(0x422) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFDE->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = 0xFFDE->get_npc_object()->get_schedule_type();
@@ -15630,7 +15675,7 @@ void Func0422 object#(0x422) () {
 		}
 		say("\"Good day! Do come back and visit again soon!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFDE);
 	}
 }
@@ -15647,7 +15692,7 @@ void Func0423 object#(0x423) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFDD->show_npc_face(0x0000);
 		var0000 = 0xFFDD->get_npc_object()->get_schedule_type();
 		add(["name", "job", "services", "bye"]);
@@ -15742,7 +15787,7 @@ void Func0423 object#(0x423) () {
 		}
 		say("\"Goodbye, Avatar.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFDD);
 	}
 }
@@ -15755,7 +15800,7 @@ void Func0424 object#(0x424) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFDC->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = 0xFFDC->get_npc_object()->get_schedule_type();
@@ -15823,7 +15868,7 @@ void Func0424 object#(0x424) () {
 		}
 		say("\"Good day to thee.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFDC);
 	}
 }
@@ -15845,7 +15890,7 @@ void Func0425 object#(0x425) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFDB->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = "Avatar";
@@ -15987,7 +16032,7 @@ void Func0425 object#(0x425) () {
 		}
 		say("\"Talk to thee later!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFDB);
 	}
 }
@@ -16006,7 +16051,7 @@ void Func0426 object#(0x426) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFDA->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -16123,7 +16168,7 @@ void Func0426 object#(0x426) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0001 = UI_part_of_day();
 		var0002 = 0xFFDA->get_npc_object()->get_schedule_type();
 		var0005 = UI_die_roll(0x0001, 0x0004);
@@ -16154,7 +16199,7 @@ void Func0427 object#(0x427) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFD9->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		if (var0000 == 0x0007) {
@@ -16211,7 +16256,7 @@ void Func0427 object#(0x427) () {
 		}
 		say("\"Farewell! Thou must watch the postings for our performance dates!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFD9);
 	}
 }
@@ -16223,7 +16268,7 @@ void Func0428 object#(0x428) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFD8->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		if (var0000 == 0x0007) {
@@ -16309,7 +16354,7 @@ void Func0428 object#(0x428) () {
 		}
 		say("Judith goes back to her instrument after a smile and a wave.*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFD8);
 	}
 }
@@ -16326,7 +16371,7 @@ void Func0429 object#(0x429) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFD7->show_npc_face(0x0000);
 		var0000 = 0xFFD7->get_npc_object()->get_schedule_type();
 		var0001 = UI_wearing_fellowship();
@@ -16446,7 +16491,7 @@ void Func0429 object#(0x429) () {
 		}
 		say("\"Good day, Avatar.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFD7);
 	}
 }
@@ -16474,7 +16519,7 @@ void Func042A object#(0x42A) () {
 	var var000E;
 	var var000F;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFD6->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -16618,7 +16663,7 @@ void Func042A object#(0x42A) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFD6);
 	}
 }
@@ -16634,7 +16679,7 @@ void Func042B object#(0x42B) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFD5->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		if (var0000 == 0x0007) {
@@ -16791,7 +16836,7 @@ void Func042B object#(0x42B) () {
 		}
 		say("Patterson nods his head at you.*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFD5);
 	}
 }
@@ -16813,7 +16858,7 @@ void Func042C object#(0x42C) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFD4->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -16950,7 +16995,7 @@ void Func042C object#(0x42C) () {
 		}
 		say("\"Perchance to find in mercy's ear, A voice to know as gentle friend,~\"I bid thee well, but hark return, If thou wouldst see the puppet's play or test thy strength again.\"");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0001 = UI_part_of_day();
 		var0002 = 0xFFD4->get_npc_object()->get_schedule_type();
 		var0008 = UI_die_roll(0x0001, 0x0004);
@@ -16995,7 +17040,7 @@ void Func042D object#(0x42D) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFD3->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = Func0909();
@@ -17159,7 +17204,7 @@ void Func042D object#(0x42D) () {
 		}
 		say("\"I can see that thou shouldst be on thy way.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFD3);
 	}
 }
@@ -17182,7 +17227,7 @@ void Func042E object#(0x42E) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFD2->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -17340,7 +17385,7 @@ void Func042E object#(0x42E) () {
 		}
 		say("\"Oh, thou shalt just come back again wanting something else from me! I just know it!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFD2);
 	}
 }
@@ -17356,7 +17401,7 @@ void Func042F object#(0x42F) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFD1->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = 0xFFD1->get_npc_object()->get_schedule_type();
@@ -17448,7 +17493,7 @@ void Func042F object#(0x42F) () {
 		}
 		say("\"Farewell!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFD1);
 	}
 }
@@ -17461,7 +17506,7 @@ void Func0430 object#(0x430) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFFD0->show_npc_face(0x0000);
@@ -17583,7 +17628,7 @@ void Func0431 object#(0x431) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFCF->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		var0000 = UI_part_of_day();
@@ -17637,7 +17682,7 @@ void Func0431 object#(0x431) () {
 		}
 		say("Denby puts his palms together and bows.*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFCF);
 	}
 }
@@ -17655,7 +17700,7 @@ void Func0432 object#(0x432) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFCE->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -17738,7 +17783,7 @@ void Func0432 object#(0x432) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0001 = UI_part_of_day();
 		var0002 = 0xFFCE->get_npc_object()->get_schedule_type();
 		var0004 = UI_die_roll(0x0001, 0x0004);
@@ -17775,7 +17820,7 @@ void Func0433 object#(0x433) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFCD->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -17867,7 +17912,7 @@ void Func0433 object#(0x433) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0001 = UI_part_of_day();
 		var0002 = 0xFFCD->get_npc_object()->get_schedule_type();
 		var0004 = UI_die_roll(0x0001, 0x0004);
@@ -17918,7 +17963,7 @@ void Func0434 object#(0x434) () {
 	var var000D;
 	var var000E;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFCC->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func0908();
@@ -18105,7 +18150,7 @@ void Func0434 object#(0x434) () {
 			var0000,
 			", and bon appetit!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0003 = UI_part_of_day();
 		var0002 = 0xFFCC->get_npc_object()->get_schedule_type();
 		var000D = UI_die_roll(0x0001, 0x0004);
@@ -18150,7 +18195,7 @@ void Func0435 object#(0x435) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFCB->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
@@ -18254,7 +18299,7 @@ void Func0435 object#(0x435) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0002 = UI_part_of_day();
 		var0003 = 0xFFCB->get_npc_object()->get_schedule_type();
 		var000A = UI_die_roll(0x0001, 0x0004);
@@ -18295,7 +18340,7 @@ void Func0436 object#(0x436) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFCA->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -18418,7 +18463,7 @@ void Func0436 object#(0x436) () {
 		}
 		say("\"Goodbye!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0002 = UI_part_of_day();
 		var0003 = 0xFFCA->get_npc_object()->get_schedule_type();
 		var0007 = UI_die_roll(0x0001, 0x0004);
@@ -18458,7 +18503,7 @@ void Func0437 object#(0x437) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFC9->show_npc_face(0x0000);
 		var0000 = UI_wearing_fellowship();
 		var0001 = UI_part_of_day();
@@ -18563,7 +18608,7 @@ void Func0437 object#(0x437) () {
 			var0004,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0001 = UI_part_of_day();
 		var0002 = 0xFFC9->get_npc_object()->get_schedule_type();
 		var0005 = UI_die_roll(0x0001, 0x0004);
@@ -18600,7 +18645,7 @@ void Func0438 object#(0x438) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFC8->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
@@ -18698,7 +18743,7 @@ void Func0438 object#(0x438) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFC8);
 	}
 }
@@ -18721,7 +18766,7 @@ void Func0439 object#(0x439) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFC7->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = 0xFFC7->get_npc_object()->get_schedule_type();
@@ -18849,7 +18894,7 @@ void Func0439 object#(0x439) () {
 		}
 		say("\"May thy travels do well.\" *");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0001 = 0xFFC7->get_npc_object()->get_schedule_type();
 		var000A = UI_die_roll(0x0001, 0x0004);
 		if (var0001 == 0x0007) {
@@ -18892,7 +18937,7 @@ void Func043A object#(0x43A) () {
 	var var0009;
 	var var000A;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFC6->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
@@ -19022,7 +19067,7 @@ void Func043A object#(0x43A) () {
 			var0000,
 			".\" *");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0002 = UI_part_of_day();
 		var0003 = 0xFFC6->get_npc_object()->get_schedule_type();
 		var0009 = UI_die_roll(0x0001, 0x0004);
@@ -19075,7 +19120,7 @@ void Func043B object#(0x43B) () {
 	var var0011;
 	var var0012;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFC5->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -19234,7 +19279,7 @@ void Func043B object#(0x43B) () {
 		}
 		say("\"I am sure thou must be on thy way.\" Sean smiles.*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0001 = UI_part_of_day();
 		var0002 = 0xFFC5->get_npc_object()->get_schedule_type();
 		var0011 = UI_die_roll(0x0001, 0x0004);
@@ -19275,7 +19320,7 @@ void Func043C object#(0x43C) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFC4->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
@@ -19403,7 +19448,7 @@ void Func043C object#(0x43C) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFC4);
 	}
 }
@@ -19418,7 +19463,7 @@ void Func043D object#(0x43D) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFC3->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
@@ -19586,7 +19631,7 @@ void Func043D object#(0x43D) () {
 		}
 		say("\"I thank thee for thy decency and consideration.\"");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFC3);
 	}
 }
@@ -19616,7 +19661,7 @@ void Func043E object#(0x43E) () {
 	var var0011;
 	var var0012;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFC2->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
@@ -19811,7 +19856,7 @@ void Func043E object#(0x43E) () {
 		}
 		say("\"I do hope I did amuse thee.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var000F = UI_part_of_day();
 		var0010 = 0xFFC2->get_npc_object()->get_schedule_type();
 		var0011 = UI_die_roll(0x0001, 0x0004);
@@ -19852,7 +19897,7 @@ void Func043F object#(0x43F) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFC1->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
@@ -19945,7 +19990,7 @@ void Func043F object#(0x43F) () {
 		}
 		say("\"I shall see thee later! Maybe even at tonight's Fellowship meeting!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0002 = UI_part_of_day();
 		var0005 = 0xFFC1->get_npc_object()->get_schedule_type();
 		var0006 = UI_die_roll(0x0001, 0x0004);
@@ -19975,7 +20020,7 @@ extern void Func092E 0x92E (var var0000);
 void Func0440 object#(0x440) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFC0->show_npc_face(0x0000);
 		var0000 = Func0908();
 		add(["name", "job", "bye"]);
@@ -20042,7 +20087,7 @@ void Func0440 object#(0x440) () {
 		}
 		say("\"Have courage. Have faith. Be strong. Be wise.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFC0);
 	}
 }
@@ -20052,10 +20097,10 @@ extern var Func090A 0x90A ();
 void Func0441 object#(0x441) () {
 	var var0000;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFBF->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x00C2]) {
@@ -20133,7 +20178,7 @@ void Func0442 object#(0x442) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFBE->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -20232,7 +20277,7 @@ void Func0442 object#(0x442) () {
 			var0001,
 			"!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0002 = 0xFFBE->get_npc_object()->get_schedule_type();
 		if (var0002 == 0x0019) {
 			var0007 = UI_die_roll(0x0001, 0x0004);
@@ -20260,7 +20305,7 @@ extern void Func092E 0x92E (var var0000);
 void Func0443 object#(0x443) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFBD->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (gflags[0x0072] == true) {
@@ -20334,7 +20379,7 @@ void Func0443 object#(0x443) () {
 		}
 		say("\"Bye now!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFBD);
 	}
 }
@@ -20356,7 +20401,7 @@ void Func0444 object#(0x444) () {
 	var var0009;
 	var var000A;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFBC->show_npc_face(0x0000);
 		var0000 = Func0908();
 		add(["name", "job", "bye"]);
@@ -20440,7 +20485,7 @@ void Func0444 object#(0x444) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFBC);
 	}
 }
@@ -20452,7 +20497,7 @@ void Func0445 object#(0x445) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFFBB->show_npc_face(0x0000);
@@ -20625,7 +20670,7 @@ void Func0446 object#(0x446) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFBA->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = UI_part_of_day();
@@ -20755,7 +20800,7 @@ void Func0446 object#(0x446) () {
 		}
 		say("\"We shall see thee again soon, I hope, Avatar.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFBA);
 	}
 }
@@ -20763,7 +20808,7 @@ void Func0446 object#(0x446) () {
 extern void Func092F 0x92F (var var0000);
 
 void Func0447 object#(0x447) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFB9->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x00C8]) {
@@ -20850,7 +20895,7 @@ void Func0447 object#(0x447) () {
 		}
 		say("\"To say farewell.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092F(0xFFB9);
 	}
 }
@@ -20867,7 +20912,7 @@ void Func0448 object#(0x448) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = Func0908();
 		var0001 = "Avatar";
 		0xFFB8->show_npc_face(0x0000);
@@ -20965,7 +21010,7 @@ void Func0448 object#(0x448) () {
 			var0002,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFB8);
 	}
 }
@@ -20983,7 +21028,7 @@ void Func0449 object#(0x449) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFB7->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (gflags[0x0076]) {
@@ -21089,7 +21134,7 @@ void Func0449 object#(0x449) () {
 		}
 		say("Charles nods his head at you, then goes about his business.*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFB7);
 	}
 }
@@ -21103,7 +21148,7 @@ void Func044A object#(0x44A) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFFB6->show_npc_face(0x0000);
@@ -21228,10 +21273,10 @@ void Func044B object#(0x44B) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = script item {
 			nohalt;
 			music 26, 1;
@@ -21447,7 +21492,7 @@ void Func044C object#(0x44C) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFB4->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = 0xFFB4->get_npc_object()->get_schedule_type();
@@ -21520,7 +21565,7 @@ void Func044C object#(0x44C) () {
 		say("Rayburt bows.*");
 		gflags[0x00EE] = true;
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFB4);
 	}
 }
@@ -21537,7 +21582,7 @@ void Func044D object#(0x44D) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFB3->show_npc_face(0x0000);
 		var0000 = UI_is_pc_female();
 		add(["name", "job", "bye"]);
@@ -21658,7 +21703,7 @@ void Func044D object#(0x44D) () {
 		}
 		say("\"Do come and visit again, Avatar!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFB3);
 	}
 }
@@ -21678,7 +21723,7 @@ void Func044E object#(0x44E) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFB2->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		var0000 = 0xFFB2->get_npc_object()->get_schedule_type();
@@ -21765,7 +21810,7 @@ void Func044E object#(0x44E) () {
 		}
 		say("\"See thee soon!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFB2);
 	}
 }
@@ -21776,7 +21821,7 @@ extern void Func092E 0x92E (var var0000);
 void Func044F object#(0x44F) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFB1->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		var0000 = 0xFFB1->get_npc_object()->get_schedule_type();
@@ -21845,7 +21890,7 @@ void Func044F object#(0x44F) () {
 		}
 		say("\"Come again soon!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFB1);
 	}
 }
@@ -21860,7 +21905,7 @@ void Func0450 object#(0x450) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFB0->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (gflags[0x00E3]) {
@@ -21942,7 +21987,7 @@ void Func0450 object#(0x450) () {
 		}
 		say("\"Do take care of thyself!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFB0);
 	}
 }
@@ -21968,7 +22013,7 @@ void Func0451 object#(0x451) () {
 	var var0009;
 	var var000A;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFAF->show_npc_face(0x0000);
 		var0000 = UI_wearing_fellowship();
 		var0001 = Func0931(0xFE9B, 0x0001, 0x03D5, 0xFE99, 0x0001);
@@ -22211,7 +22256,7 @@ void Func0451 object#(0x451) () {
 		}
 		say("\"I have a feeling that we shall see each other again.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFAF);
 	}
 }
@@ -22228,7 +22273,7 @@ void Func0452 object#(0x452) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFAE->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = 0xFFAE->get_npc_object()->get_schedule_type();
@@ -22349,7 +22394,7 @@ void Func0452 object#(0x452) () {
 		}
 		say("\"Be on thy way then.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFAE);
 	}
 }
@@ -22361,7 +22406,7 @@ void Func0453 object#(0x453) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFFAD->show_npc_face(0x0000);
@@ -22471,7 +22516,7 @@ extern void Func091A 0x91A ();
 void Func0454 object#(0x454) () {
 	var var0000;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFFAC->show_npc_face(0x0000);
@@ -22552,7 +22597,7 @@ void Func0455 object#(0x455) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFAB->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
@@ -22661,7 +22706,7 @@ void Func0455 object#(0x455) () {
 		}
 		say("\"Good journey, my friend.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFAB);
 	}
 }
@@ -22674,7 +22719,7 @@ void Func0456 object#(0x456) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFAA->show_npc_face(0x0000);
 		var0000 = Func0909();
 		if (!gflags[0x0111]) {
@@ -22769,7 +22814,7 @@ void Func0456 object#(0x456) () {
 			var0000,
 			". I hope I was of some assistance to thee.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFAA);
 	}
 }
@@ -22793,7 +22838,7 @@ void Func0457 object#(0x457) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFA9->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -22943,7 +22988,7 @@ void Func0457 object#(0x457) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0002 = 0xFFA9->get_npc_object()->get_schedule_type();
 		if (var0002 == 0x000D) {
 			var0008 = UI_die_roll(0x0001, 0x0004);
@@ -22975,7 +23020,7 @@ void Func0458 object#(0x458) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFA8->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
@@ -23090,7 +23135,7 @@ void Func0458 object#(0x458) () {
 			var0000,
 			". Do come see us again.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFA8);
 	}
 }
@@ -23104,7 +23149,7 @@ void Func0459 object#(0x459) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFFA7->show_npc_face(0x0000);
@@ -23254,7 +23299,7 @@ void Func045A object#(0x45A) () {
 	var var0010;
 	var var0011;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFA6->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = 0xFFA6->get_npc_object()->get_schedule_type();
@@ -23556,7 +23601,7 @@ void Func045A object#(0x45A) () {
 			say("\"Be on thy way, then. Time is fleeting, as is fame.\"*");
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFA6);
 	}
 }
@@ -23574,7 +23619,7 @@ void Func045B object#(0x45B) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFA5->show_npc_face(0x0000);
 		var0000 = 0xFFA5->get_npc_object()->get_schedule_type();
 		var0001 = UI_part_of_day();
@@ -23728,7 +23773,7 @@ void Func045B object#(0x45B) () {
 		}
 		say("\"A pleasure, friend Avatar. A pleasure.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFA5);
 	}
 }
@@ -23756,7 +23801,7 @@ void Func045C object#(0x45C) () {
 	var var000C;
 	var var000D;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFA4->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -23908,7 +23953,7 @@ void Func045C object#(0x45C) () {
 		}
 		say("\"I shall see thee later... At least I will if thou dost stay in the front o' me good eye.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFA4);
 	}
 }
@@ -23928,7 +23973,7 @@ void Func045D object#(0x45D) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFA3->show_npc_face(0x0000);
 		var0000 = 0xFFA3->get_npc_object()->get_schedule_type();
 		var0001 = UI_part_of_day();
@@ -24025,7 +24070,7 @@ void Func045D object#(0x45D) () {
 		}
 		say("As soon as he has dismissed you, the overwrought William hides his face in his hands.*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFA3);
 	}
 }
@@ -24042,7 +24087,7 @@ void Func045E object#(0x45E) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFA2->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -24163,7 +24208,7 @@ void Func045E object#(0x45E) () {
 		}
 		say("\"Farewell. May all thy journeys be interesting ones.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFA2);
 	}
 }
@@ -24181,7 +24226,7 @@ void Func045F object#(0x45F) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFFA1->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -24299,7 +24344,7 @@ void Func045F object#(0x45F) () {
 		}
 		say("\"It has been a pleasure speaking with thee.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFFA1);
 	}
 }
@@ -24311,7 +24356,7 @@ void Func0460 object#(0x460) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFFA0->show_npc_face(0x0000);
@@ -24419,7 +24464,7 @@ void Func0461 object#(0x461) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFF9F->show_npc_face(0x0000);
@@ -24504,7 +24549,7 @@ void Func0462 object#(0x462) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = Func0931(0xFE9B, 0x0001, 0x0304, 0xFE99, 0xFE99);
 		0xFF9E->show_npc_face(0x0000);
 		if (!gflags[0x0154]) {
@@ -24632,7 +24677,7 @@ void Func0462 object#(0x462) () {
 		}
 		say("\"Goodbye is said to you, human.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -24642,10 +24687,10 @@ extern var Func0909 0x909 ();
 void Func0463 object#(0x463) () {
 	var var0000;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF9D->show_npc_face(0x0000);
 		var0000 = Func0909();
 		if (!gflags[0x011D]) {
@@ -24707,7 +24752,7 @@ void Func0464 object#(0x464) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = Func0931(0xFE9B, 0x0001, 0x0304, 0xFE99, 0xFE99);
 		0xFF9C->show_npc_face(0x0000);
 		if (!gflags[0x0154]) {
@@ -24813,7 +24858,7 @@ void Func0464 object#(0x464) () {
 		}
 		say("\"You are told `goodbye.'\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -24834,7 +24879,7 @@ void Func0465 object#(0x465) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = Func0931(0xFE9B, 0x0001, 0x0304, 0xFE99, 0xFE99);
 		0xFF9B->show_npc_face(0x0000);
 		if (!gflags[0x0154]) {
@@ -24976,7 +25021,7 @@ void Func0465 object#(0x465) () {
 		}
 		say("\"My hope is for your welfare, human.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0007 = 0xFF9B->get_npc_object()->get_schedule_type();
 		var0008 = UI_die_roll(0x0001, 0x0004);
 		var0000 = Func0931(0xFE9B, 0x0001, 0x0304, 0xFE99, 0xFE99);
@@ -25020,7 +25065,7 @@ void Func0466 object#(0x466) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFF9A->show_npc_face(0x0000);
@@ -25200,7 +25245,7 @@ void Func0467 object#(0x467) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF99->show_npc_face(0x0000);
 		var0000 = UI_wearing_fellowship();
 		if (var0000) {
@@ -25289,7 +25334,7 @@ void Func0467 object#(0x467) () {
 			var0002,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -25305,7 +25350,7 @@ void Func0468 object#(0x468) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF98->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
@@ -25394,7 +25439,7 @@ void Func0468 object#(0x468) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF98);
 	}
 }
@@ -25406,7 +25451,7 @@ void Func0469 object#(0x469) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF97->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
@@ -25477,7 +25522,7 @@ void Func0469 object#(0x469) () {
 			var0000,
 			".\"");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -25490,7 +25535,7 @@ void Func046A object#(0x46A) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF96->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -25584,7 +25629,7 @@ void Func046A object#(0x46A) () {
 			var0001,
 			". 'Ave a pleasant journey. Oi'll tell Malc 'allo for ye.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -25600,7 +25645,7 @@ void Func046B object#(0x46B) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFF95->show_npc_face(0x0000);
@@ -25800,7 +25845,7 @@ void Func046C object#(0x46C) () {
 	var var0017;
 	var var0018;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF94->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -26019,7 +26064,7 @@ void Func046C object#(0x46C) () {
 		say("\"May health always follow thee!\"*");
 		gflags[0x013A] = false;
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -26030,7 +26075,7 @@ extern void Func092E 0x92E (var var0000);
 void Func046D object#(0x46D) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF93->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
@@ -26144,7 +26189,7 @@ void Func046D object#(0x46D) () {
 		}
 		say("\"May thy good fortune guide thee down the trail of life.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF93);
 	}
 }
@@ -26165,7 +26210,7 @@ void Func046E object#(0x46E) () {
 	var var0009;
 	var var000A;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFF92->show_npc_face(0x0000);
@@ -26319,7 +26364,7 @@ void Func046F object#(0x46F) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF91->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -26391,7 +26436,7 @@ void Func046F object#(0x46F) () {
 		}
 		say("He grunts and turns away.*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -26411,7 +26456,7 @@ void Func0470 object#(0x470) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF90->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -26515,7 +26560,7 @@ void Func0470 object#(0x470) () {
 		}
 		say("\"Aye, get thy face from my sight!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -26533,7 +26578,7 @@ void Func0471 object#(0x471) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF8F->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func08F7(0xFFFF);
@@ -26668,7 +26713,7 @@ void Func0471 object#(0x471) () {
 				abort;
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -26689,7 +26734,7 @@ void Func0472 object#(0x472) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF8E->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = false;
@@ -26817,7 +26862,7 @@ void Func0472 object#(0x472) () {
 				abort;
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF8E);
 	}
 }
@@ -26839,7 +26884,7 @@ void Func0473 object#(0x473) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF8D->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -26952,7 +26997,7 @@ void Func0473 object#(0x473) () {
 			var0001,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF8D);
 	}
 }
@@ -26970,7 +27015,7 @@ void Func0474 object#(0x474) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF8C->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
@@ -27093,7 +27138,7 @@ void Func0474 object#(0x474) () {
 			var0000,
 			". Pleasant journeys, ay.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -27116,7 +27161,7 @@ void Func0475 object#(0x475) () {
 	var var000B;
 	var var000C;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF8B->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
@@ -27249,7 +27294,7 @@ void Func0475 object#(0x475) () {
 		}
 		say("\"Indeed, knave. Get thee gone!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -27268,7 +27313,7 @@ void Func0476 object#(0x476) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF8A->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -27391,7 +27436,7 @@ void Func0476 object#(0x476) () {
 				abort;
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF8A);
 	}
 }
@@ -27417,7 +27462,7 @@ void Func0477 object#(0x477) () {
 	var var0009;
 	var var000A;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF89->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -27566,7 +27611,7 @@ void Func0477 object#(0x477) () {
 			say("\"May thy stay in Jhelom be a memorable one,\" De Snel laughs as he turns and walks away.*");
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF89);
 	}
 }
@@ -27578,7 +27623,7 @@ void Func0478 object#(0x478) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF88->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
@@ -27720,7 +27765,7 @@ void Func0478 object#(0x478) () {
 		}
 		say("\"Enjoy thy stay in my city. But if thou hast no stomach for fighting thou shouldst not stay long.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF88);
 	}
 }
@@ -27741,7 +27786,7 @@ void Func0479 object#(0x479) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF87->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -27903,7 +27948,7 @@ void Func0479 object#(0x479) () {
 		}
 		say("\"Good day.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0001 = UI_part_of_day();
 		var0002 = 0xFF87->get_npc_object()->get_schedule_type();
 		var0006 = UI_die_roll(0x0001, 0x0004);
@@ -27960,7 +28005,7 @@ void Func047A object#(0x47A) () {
 	var var0018;
 	var var0019;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF86->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_is_pc_female();
@@ -28209,7 +28254,7 @@ labelFunc047A_0447:
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF86);
 	}
 }
@@ -28243,7 +28288,7 @@ void Func047B object#(0x47B) () {
 	var var0013;
 	var var0014;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF85->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -28418,7 +28463,7 @@ labelFunc047B_0352:
 		}
 		say("\"Enjoy thyself.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF85);
 	}
 }
@@ -28437,7 +28482,7 @@ void Func047C object#(0x47C) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF84->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
@@ -28673,7 +28718,7 @@ void Func047C object#(0x47C) () {
 		}
 		say("\"Good day to thee, Avatar.\"");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF84);
 	}
 }
@@ -28692,7 +28737,7 @@ void Func047D object#(0x47D) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF83->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -28805,7 +28850,7 @@ void Func047D object#(0x47D) () {
 		}
 		say("\"If I am not killed and thou art not killed perhaps we may raise a\tglass together some day!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF83);
 	}
 }
@@ -28824,7 +28869,7 @@ void Func047E object#(0x47E) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF82->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -28978,7 +29023,7 @@ void Func047E object#(0x47E) () {
 		}
 		say("\"We do not appreciate people who interfere in our private matters. We shall be watching thee.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF82);
 	}
 }
@@ -28994,7 +29039,7 @@ void Func047F object#(0x47F) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF81->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -29076,7 +29121,7 @@ void Func047F object#(0x47F) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF81);
 	}
 }
@@ -29091,7 +29136,7 @@ void Func0480 object#(0x480) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFF80->show_npc_face(0x0000);
@@ -29181,7 +29226,7 @@ void Func0481 object#(0x481) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF7F->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -29364,7 +29409,7 @@ void Func0481 object#(0x481) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF7F);
 	}
 }
@@ -29393,7 +29438,7 @@ void Func0482 object#(0x482) () {
 	var var000E;
 	var var000F;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF7E->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -29615,7 +29660,7 @@ labelFunc0482_00E5:
 		}
 		say("\"Good journey!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF7E);
 	}
 }
@@ -29632,7 +29677,7 @@ void Func0483 object#(0x483) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF7D->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
@@ -29779,7 +29824,7 @@ void Func0483 object#(0x483) () {
 		}
 		say("\"I look forward to the next time when I will see thee.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF7D);
 	}
 }
@@ -29797,7 +29842,7 @@ void Func0484 object#(0x484) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF7C->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
@@ -29927,7 +29972,7 @@ void Func0484 object#(0x484) () {
 		}
 		say("\"Travel safely and be well.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF7C);
 	}
 }
@@ -29946,7 +29991,7 @@ void Func0485 object#(0x485) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF7B->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func08F7(0xFFFD);
@@ -30110,7 +30155,7 @@ void Func0485 object#(0x485) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF7B);
 	}
 }
@@ -30134,7 +30179,7 @@ void Func0486 object#(0x486) () {
 	var var0009;
 	var var000A;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF7A->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = 0xFF7A->get_npc_object();
@@ -30336,7 +30381,7 @@ void Func0486 object#(0x486) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF7A);
 	}
 }
@@ -30351,7 +30396,7 @@ void Func0487 object#(0x487) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF79->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -30468,7 +30513,7 @@ void Func0487 object#(0x487) () {
 		}
 		say("\"Be seein' ye.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF79);
 	}
 }
@@ -30483,7 +30528,7 @@ void Func0488 object#(0x488) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF78->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -30647,7 +30692,7 @@ void Func0488 object#(0x488) () {
 		}
 		say("With that Leavell goes back to playing with his dagger.*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF78);
 	}
 }
@@ -30676,7 +30721,7 @@ void Func0489 object#(0x489) () {
 	var var000E;
 	var var000F;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF77->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -30843,7 +30888,7 @@ void Func0489 object#(0x489) () {
 		}
 		say("\"Enjoy thy life, friend.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0002 = UI_part_of_day();
 		var0003 = 0xFF77->get_npc_object()->get_schedule_type();
 		var000E = UI_die_roll(0x0001, 0x0004);
@@ -30881,7 +30926,7 @@ void Func048A object#(0x48A) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFF76->show_npc_face(0x0000);
@@ -31071,7 +31116,7 @@ void Func048C object#(0x48C) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF74->show_npc_face(0x0000);
 		if (!gflags[0x01B4]) {
 			say("This undead fellow looks through you. Though he is obviously aware of his surroundings, you are quite sure that he doesn't even see you.*");
@@ -31212,7 +31257,7 @@ void Func048C object#(0x48C) () {
 				abort;
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -31238,7 +31283,7 @@ void Func048D object#(0x48D) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (!gflags[0x01B5]) {
 			0xFF73->say("You attempt to speak to the undead creature, but it does not, or cannot, respond.*");
 			abort;
@@ -31415,7 +31460,7 @@ void Func048E object#(0x48E) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF72->show_npc_face(0x0000);
 		var0000 = Func0931(0xFE9B, 0x0001, 0x0127, 0x0000, 0xFE99);
 		var0001 = Func0909();
@@ -31535,7 +31580,7 @@ void Func048E object#(0x48E) () {
 				abort;
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -31572,7 +31617,7 @@ void Func048F object#(0x48F) () {
 	var var0013;
 	var var0014;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF71->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func0908();
@@ -31790,7 +31835,7 @@ void Func048F object#(0x48F) () {
 				abort;
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -31808,7 +31853,7 @@ void Func0490 object#(0x490) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		if (!gflags[0x01B8]) {
 			0xFF70->say("The beautiful ghost looks through you with a slack look. Nothing\tyou do seems to attract her attention.*");
 			gflags[0x01A7] = false;
@@ -31883,7 +31928,7 @@ void Func0490 object#(0x490) () {
 				abort;
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -31906,7 +31951,7 @@ void Func0491 object#(0x491) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF6F->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_is_pc_female();
@@ -32092,7 +32137,7 @@ void Func0491 object#(0x491) () {
 			say("Paulette rushes up to you as you say goodbye and gives you a little kiss on the cheek. She backs away slowly, \"Farewell, handsome.\"*");
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -32112,7 +32157,7 @@ void Func0492 object#(0x492) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF6E->show_npc_face(0x0000);
 		if (!gflags[0x01BA]) {
 			say("The pale ghost seems to see you but cannot speak to you for some reason. In frustration the ghost turns away.*");
@@ -32313,7 +32358,7 @@ void Func0492 object#(0x492) () {
 				".*");
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -32333,7 +32378,7 @@ void Func0493 object#(0x493) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF6D->show_npc_face(0x0000);
 		var0000 = false;
 		var0001 = UI_part_of_day();
@@ -32572,7 +32617,7 @@ void Func0493 object#(0x493) () {
 				abort;
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -32585,7 +32630,7 @@ void Func0495 object#(0x495) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFEE8->show_npc_face(0x0000);
@@ -32757,7 +32802,7 @@ void Func0496 object#(0x496) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFF6A->show_npc_face(0x0000);
@@ -32963,7 +33008,7 @@ void Func0497 object#(0x497) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF69->show_npc_face(0x0000);
 		var0000 = Func08F7(0xFFFF);
 		var0001 = Func08F7(0xFFFE);
@@ -33117,7 +33162,7 @@ void Func0497 object#(0x497) () {
 		}
 		say("\"Goodbye, my love! Oh yes! I love thee! It is true!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0007 = UI_part_of_day();
 		var0005 = 0xFF69->get_npc_object()->get_schedule_type();
 		var0008 = UI_die_roll(0x0001, 0x0004);
@@ -33155,7 +33200,7 @@ void Func0498 object#(0x498) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF68->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -33326,7 +33371,7 @@ void Func0498 object#(0x498) () {
 		}
 		say("\"Good day.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -33346,7 +33391,7 @@ void Func0499 object#(0x499) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF67->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func0908();
@@ -33481,7 +33526,7 @@ void Func0499 object#(0x499) () {
 			}
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0003 = 0xFF67->get_npc_object()->get_schedule_type();
 		var0004 = UI_die_roll(0x0001, 0x0004);
 		if (var0003 == 0x000B) {
@@ -33529,7 +33574,7 @@ void Func049A object#(0x49A) () {
 	var var000D;
 	var var000E;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF66->show_npc_face(0x0000);
 		add(["name", "job", "Fellowship", "bye"]);
 		var0000 = Func08F7(0xFFFF);
@@ -33704,7 +33749,7 @@ void Func049A object#(0x49A) () {
 		}
 		say("\"Come back and visit Grod. Hear victims squeal!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -33719,7 +33764,7 @@ void Func049B object#(0x49B) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF65->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -33810,7 +33855,7 @@ void Func049B object#(0x49B) () {
 			var0001,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF65);
 	}
 }
@@ -33830,7 +33875,7 @@ void Func049C object#(0x49C) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF64->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -33986,7 +34031,7 @@ void Func049C object#(0x49C) () {
 				".\"*");
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF64);
 	}
 }
@@ -34001,7 +34046,7 @@ void Func049D object#(0x49D) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF63->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -34118,7 +34163,7 @@ void Func049D object#(0x49D) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF63);
 	}
 }
@@ -34131,7 +34176,7 @@ void Func049E object#(0x49E) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF62->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -34207,7 +34252,7 @@ void Func049E object#(0x49E) () {
 		}
 		say("\"B-b-bye.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -34223,7 +34268,7 @@ void Func049F object#(0x49F) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF61->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -34286,7 +34331,7 @@ void Func049F object#(0x49F) () {
 			var0000,
 			",\" she says, returning to her previous activity.*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF61);
 	}
 }
@@ -34309,7 +34354,7 @@ void Func04A0 object#(0x4A0) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF60->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -34418,7 +34463,7 @@ void Func04A0 object#(0x4A0) () {
 				". I understand, thou hast real man things to do.\"*");
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF60);
 	}
 }
@@ -34441,7 +34486,7 @@ void Func04A1 object#(0x4A1) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF5F->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -34545,7 +34590,7 @@ void Func04A1 object#(0x4A1) () {
 		}
 		say("\"Remember, always keeps thy wits about and thy blade ready.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF5F);
 	}
 }
@@ -34560,7 +34605,7 @@ void Func04A2 object#(0x4A2) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF5E->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -34664,7 +34709,7 @@ void Func04A2 object#(0x4A2) () {
 			var0001,
 			", I will have the opportunity to join thee. Pleasant journey, my friend.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF5E);
 	}
 }
@@ -34689,7 +34734,7 @@ void Func04A3 object#(0x4A3) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF5D->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -34922,7 +34967,7 @@ void Func04A3 object#(0x4A3) () {
 		}
 		say("\"Remember! Tell them thou didst eat at the Friendly Knave!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF5D);
 	}
 }
@@ -34940,7 +34985,7 @@ void Func04A4 object#(0x4A4) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF5C->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -35076,7 +35121,7 @@ void Func04A4 object#(0x4A4) () {
 			var0001,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -35093,7 +35138,7 @@ void Func04A5 object#(0x4A5) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF5B->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -35208,7 +35253,7 @@ void Func04A5 object#(0x4A5) () {
 		}
 		say("\"Thou hast the manners of a pig. 'Tis not polite to break conversation so abruptly.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -35229,7 +35274,7 @@ void Func04A6 object#(0x4A6) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF5A->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -35398,7 +35443,7 @@ labelFunc04A6_02F6:
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF5A);
 	}
 }
@@ -35419,7 +35464,7 @@ void Func04A7 object#(0x4A7) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF59->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
@@ -35659,7 +35704,7 @@ void Func04A7 object#(0x4A7) () {
 			say("You realize that the Cube did not bring out anything that Feridwyn did not actually believe himself. He is one of the innocent followers of The Guardian.");
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF59);
 	}
 }
@@ -35676,7 +35721,7 @@ void Func04A8 object#(0x4A8) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF58->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
@@ -35813,7 +35858,7 @@ void Func04A8 object#(0x4A8) () {
 				abort;
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF58);
 	}
 }
@@ -35825,7 +35870,7 @@ void Func04A9 object#(0x4A9) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF57->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
@@ -35920,7 +35965,7 @@ void Func04A9 object#(0x4A9) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF57);
 	}
 }
@@ -35941,7 +35986,7 @@ void Func04AA object#(0x4AA) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF56->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = "Avatar";
@@ -36082,7 +36127,7 @@ void Func04AA object#(0x4AA) () {
 			var0004,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF56);
 	}
 }
@@ -36105,7 +36150,7 @@ void Func04AB object#(0x4AB) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF55->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
@@ -36290,7 +36335,7 @@ void Func04AB object#(0x4AB) () {
 			0xFF55->get_npc_object()->set_schedule_type(0x000B);
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0006 = 0xFF55->get_npc_object()->get_schedule_type();
 		var0007 = UI_die_roll(0x0001, 0x0004);
 		if (var0006 == 0x0019) {
@@ -36349,7 +36394,7 @@ void Func04AC object#(0x4AC) () {
 	var var0019;
 	var var001A;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF54->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -36657,7 +36702,7 @@ void Func04AC object#(0x4AC) () {
 		}
 		say("\"Good day to thee.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF54);
 	}
 }
@@ -36688,7 +36733,7 @@ void Func04AD object#(0x4AD) () {
 	var var0012;
 	var var0013;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF53->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -36866,7 +36911,7 @@ void Func04AD object#(0x4AD) () {
 			var0000,
 			".\" *");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0002 = 0xFF53->get_npc_object()->get_schedule_type();
 		if (var0002 == 0x0007) {
 			var0012 = UI_die_roll(0x0001, 0x0004);
@@ -36906,7 +36951,7 @@ void Func04AE object#(0x4AE) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF52->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func08F7(0xFF51);
@@ -37038,7 +37083,7 @@ void Func04AE object#(0x4AE) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0005 = UI_part_of_day();
 		var0006 = 0xFF52->get_npc_object()->get_schedule_type();
 		var0007 = UI_die_roll(0x0001, 0x0004);
@@ -37079,7 +37124,7 @@ void Func04AF object#(0x4AF) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF51->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
@@ -37251,7 +37296,7 @@ void Func04AF object#(0x4AF) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0005 = UI_part_of_day();
 		var0006 = 0xFF51->get_npc_object()->get_schedule_type();
 		var0007 = UI_die_roll(0x0001, 0x0004);
@@ -37294,7 +37339,7 @@ void Func04B0 object#(0x4B0) () {
 	var var000B;
 	var var000C;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF50->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -37470,7 +37515,7 @@ labelFunc04B0_0332:
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF50);
 	}
 }
@@ -37491,7 +37536,7 @@ void Func04B1 object#(0x4B1) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF4F->show_npc_face(0x0000);
 		var0000 = Func0909();
 		if (gflags[0x0213] && (!gflags[0x0234])) {
@@ -37641,7 +37686,7 @@ void Func04B1 object#(0x4B1) () {
 		}
 		say("\"Pleasant journey, Avatar.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF4F);
 	}
 }
@@ -37655,7 +37700,7 @@ void Func04B2 object#(0x4B2) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF4E->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = 0xFF4E->get_npc_object()->get_schedule_type();
@@ -37816,7 +37861,7 @@ void Func04B2 object#(0x4B2) () {
 			say("\"Be on thy way then, o great and wise Avatar.\"*");
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF4E);
 	}
 }
@@ -37840,7 +37885,7 @@ void Func04B3 object#(0x4B3) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF4D->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -37956,7 +38001,7 @@ void Func04B3 object#(0x4B3) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF4D);
 	}
 }
@@ -37970,7 +38015,7 @@ void Func04B4 object#(0x4B4) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF4C->show_npc_face(0x0000);
 		var0000 = Func0908();
 		add(["name", "job", "bye"]);
@@ -38114,7 +38159,7 @@ void Func04B4 object#(0x4B4) () {
 		}
 		say("\"To bid farewell, old friend. To not be hesitating to return if there is aught else I can do for you. To be lonely here now for an old gargoyle dedicated to the ancient ways...\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -38129,7 +38174,7 @@ void Func04B5 object#(0x4B5) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF4B->show_npc_face(0x0000);
 		var0000 = false;
 		var0001 = UI_part_of_day();
@@ -38226,7 +38271,7 @@ void Func04B5 object#(0x4B5) () {
 		}
 		say("\"To expect to see you again, human.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092F(0xFF4B);
 	}
 }
@@ -38238,7 +38283,7 @@ void Func04B6 object#(0x4B6) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF4A->show_npc_face(0x0000);
 		var0000 = 0xFF4A;
 		add(["name", "job", "bye"]);
@@ -38339,7 +38384,7 @@ void Func04B6 object#(0x4B6) () {
 		}
 		say("\"To wish you good health, human.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092F(0xFF4A);
 	}
 }
@@ -38356,7 +38401,7 @@ void Func04B7 object#(0x4B7) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF49->show_npc_face(0x0000);
 		var0000 = Func0908();
 		add(["name", "job", "bye"]);
@@ -38508,7 +38553,7 @@ void Func04B7 object#(0x4B7) () {
 		}
 		say("\"To tell you goodbye for now, human. To return and be welcome.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092F(0xFF49);
 	}
 }
@@ -38522,7 +38567,7 @@ void Func04B8 object#(0x4B8) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF48->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = 0xFF48->get_npc_object();
@@ -38595,7 +38640,7 @@ void Func04B8 object#(0x4B8) () {
 		}
 		say("He waits for you to leave before he returns to what he was doing.*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -38612,7 +38657,7 @@ void Func04B9 object#(0x4B9) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF47->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = UI_part_of_day();
@@ -38778,7 +38823,7 @@ void Func04B9 object#(0x4B9) () {
 			say("The Cube did not vibrate once while speaking with Quan. You realize he is totally innocent of the dangerous powers above him.*");
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092F(0xFF47);
 	}
 }
@@ -38792,7 +38837,7 @@ void Func04BA object#(0x4BA) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF46->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = false;
@@ -38920,13 +38965,13 @@ void Func04BA object#(0x4BA) () {
 		}
 		say("\"To hope for your well-being and happiness.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092F(0xFF46);
 	}
 }
 
 void Func04BB object#(0x4BB) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF45->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x024C]) {
@@ -38981,7 +39026,7 @@ void Func04BB object#(0x4BB) () {
 		}
 		say("\"To get back to work.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -38999,7 +39044,7 @@ void Func04BC object#(0x4BC) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF44->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = 0xFF44->get_npc_object()->get_schedule_type();
@@ -39112,7 +39157,7 @@ void Func04BC object#(0x4BC) () {
 		}
 		say("\"To give you farewell, human.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092F(0xFF44);
 	}
 }
@@ -39131,7 +39176,7 @@ void Func04BD object#(0x4BD) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF43->show_npc_face(0x0000);
 		var0000 = false;
 		var0001 = false;
@@ -39300,7 +39345,7 @@ void Func04BD object#(0x4BD) () {
 		}
 		say("\"To wish you well, human.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092F(0xFF43);
 	}
 }
@@ -39314,7 +39359,7 @@ void Func04BE object#(0x4BE) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF42->show_npc_face(0x0000);
 		var0000 = false;
 		add(["name", "job", "bye"]);
@@ -39420,7 +39465,7 @@ void Func04BE object#(0x4BE) () {
 		}
 		say("\"To wish you safe travels, human.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092F(0xFF42);
 	}
 }
@@ -39443,7 +39488,7 @@ void Func04BF object#(0x4BF) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF41->show_npc_face(0x0000);
 		var0000 = UI_is_pc_female();
 		var0001 = Func0908();
@@ -39590,7 +39635,7 @@ void Func04BF object#(0x4BF) () {
 		}
 		say("\"Fine. Go away. It shall do thee good!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF41);
 	}
 }
@@ -39607,7 +39652,7 @@ void Func04C0 object#(0x4C0) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF40->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = 0xFF40->get_npc_object()->get_schedule_type();
@@ -39697,7 +39742,7 @@ void Func04C0 object#(0x4C0) () {
 		}
 		say("\"May the strength in thine arms always match the strength of thy will.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF40);
 	}
 }
@@ -39709,7 +39754,7 @@ void Func04C1 object#(0x4C1) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF3F->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = false;
@@ -39816,7 +39861,7 @@ void Func04C1 object#(0x4C1) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF3F);
 	}
 }
@@ -39841,7 +39886,7 @@ void Func04C2 object#(0x4C2) () {
 	var var000B;
 	var var000C;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF3E->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -39992,7 +40037,7 @@ void Func04C2 object#(0x4C2) () {
 				abort;
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var000A = UI_part_of_day();
 		var0008 = 0xFF3E->get_npc_object()->get_schedule_type();
 		var000B = UI_die_roll(0x0001, 0x0004);
@@ -40043,7 +40088,7 @@ void Func04C3 object#(0x4C3) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF3D->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -40246,7 +40291,7 @@ void Func04C3 object#(0x4C3) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -40273,7 +40318,7 @@ void Func04C4 object#(0x4C4) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF3C->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func0908();
@@ -40461,7 +40506,7 @@ void Func04C4 object#(0x4C4) () {
 		}
 		say("\"Pleasant journeys. Remember, trust thy brother.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF3C);
 	}
 }
@@ -40474,7 +40519,7 @@ void Func04C5 object#(0x4C5) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF3B->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x026E]) {
@@ -40576,7 +40621,7 @@ void Func04C5 object#(0x4C5) () {
 		}
 		say("\"To say goodbye.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092F(0xFF3B);
 	}
 }
@@ -40599,7 +40644,7 @@ void Func04C6 object#(0x4C6) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF3A->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func0908();
@@ -40742,7 +40787,7 @@ void Func04C6 object#(0x4C6) () {
 			var0005,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF3A);
 	}
 }
@@ -40765,7 +40810,7 @@ void Func04C7 object#(0x4C7) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF39->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -40997,7 +41042,7 @@ void Func04C7 object#(0x4C7) () {
 			var0001,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF39);
 	}
 }
@@ -41021,7 +41066,7 @@ void Func04C8 object#(0x4C8) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF38->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -41197,7 +41242,7 @@ void Func04C8 object#(0x4C8) () {
 		}
 		say("\"I sense thou hast pressing engagements elsewhere. I bid thee farewell.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF38);
 	}
 }
@@ -41212,7 +41257,7 @@ void Func04C9 object#(0x4C9) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF37->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = 0xFF37->get_npc_object()->get_schedule_type();
@@ -41315,7 +41360,7 @@ void Func04C9 object#(0x4C9) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF37);
 	}
 }
@@ -41328,7 +41373,7 @@ void Func04CA object#(0x4CA) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF36->show_npc_face(0x0000);
 		var0000 = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
@@ -41441,7 +41486,7 @@ void Func04CA object#(0x4CA) () {
 		}
 		say("\"Goodbye.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF36);
 	}
 }
@@ -41461,7 +41506,7 @@ void Func04CB object#(0x4CB) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF35->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func0908();
@@ -41576,7 +41621,7 @@ void Func04CB object#(0x4CB) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -41597,7 +41642,7 @@ void Func04CC object#(0x4CC) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF34->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func0908();
@@ -41692,7 +41737,7 @@ void Func04CC object#(0x4CC) () {
 		}
 		say("Mara shakes your hand and slaps you on the back, saying, \"Fare thee well, friend!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF34);
 	}
 }
@@ -41710,7 +41755,7 @@ void Func04CD object#(0x4CD) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF33->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -41798,7 +41843,7 @@ void Func04CD object#(0x4CD) () {
 		}
 		say("\"May thy strength be thy guide.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0002 = 0xFF33->get_npc_object()->get_schedule_type();
 		var0003 = UI_part_of_day();
 		var0004 = UI_die_roll(0x0001, 0x0004);
@@ -41842,7 +41887,7 @@ void Func04CE object#(0x4CE) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF32->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = 0xFF32->get_npc_object()->get_schedule_type();
@@ -41942,7 +41987,7 @@ void Func04CE object#(0x4CE) () {
 			var0000,
 			". Never forget, the grass is always greener when it rains.\"");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0002 = UI_part_of_day();
 		var0001 = 0xFF32->get_npc_object()->get_schedule_type();
 		var0003 = UI_die_roll(0x0001, 0x0004);
@@ -41989,7 +42034,7 @@ void Func04CF object#(0x4CF) () {
 	var var000C;
 	var var000D;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF31->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -42126,7 +42171,7 @@ void Func04CF object#(0x4CF) () {
 		}
 		say("\"May the road rise up ta meet ye!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var000A = UI_part_of_day();
 		var000B = 0xFF31->get_npc_object()->get_schedule_type();
 		var000C = UI_die_roll(0x0001, 0x0004);
@@ -42165,7 +42210,7 @@ void Func04D0 object#(0x4D0) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF30->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
@@ -42254,7 +42299,7 @@ void Func04D0 object#(0x4D0) () {
 		}
 		say("He gives a slight nod and a quiet grunt, and returns to his business.*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -42270,7 +42315,7 @@ void Func04D1 object#(0x4D1) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF2F->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -42396,7 +42441,7 @@ void Func04D1 object#(0x4D1) () {
 			var0001,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -42412,7 +42457,7 @@ void Func04D2 object#(0x4D2) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF2E->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -42527,7 +42572,7 @@ void Func04D2 object#(0x4D2) () {
 		}
 		say("She nods at you as she returns to her business.*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -42542,7 +42587,7 @@ void Func04D3 object#(0x4D3) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF2D->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x0290]) {
@@ -42639,7 +42684,7 @@ void Func04D3 object#(0x4D3) () {
 		}
 		say("\"To hope to see you again soon.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092F(0xFF2D);
 	}
 }
@@ -42664,7 +42709,7 @@ void Func04D4 object#(0x4D4) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF2C->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -42834,7 +42879,7 @@ void Func04D4 object#(0x4D4) () {
 			var0001,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF2C);
 	}
 }
@@ -42847,7 +42892,7 @@ void Func04D5 object#(0x4D5) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF2B->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
@@ -42925,7 +42970,7 @@ void Func04D5 object#(0x4D5) () {
 			var0000,
 			" Avatar.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -42939,7 +42984,7 @@ void Func04D6 object#(0x4D6) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF2A->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		var0000 = Func08F7(0xFF2B);
@@ -43014,7 +43059,7 @@ void Func04D6 object#(0x4D6) () {
 		}
 		say("\"To tell you goodbye, human.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092F(0xFF2A);
 	}
 }
@@ -43031,7 +43076,7 @@ void Func04D7 object#(0x4D7) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF29->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x0294]) {
@@ -43149,7 +43194,7 @@ void Func04D7 object#(0x4D7) () {
 		}
 		say("\"To hope you will bring peace again to our people, Avatar.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092F(0xFF29);
 	}
 }
@@ -43164,7 +43209,7 @@ void Func04D8 object#(0x4D8) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF28->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (gflags[0x0003]) {
@@ -43275,7 +43320,7 @@ void Func04D8 object#(0x4D8) () {
 			}
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -43303,7 +43348,7 @@ void Func04D9 object#(0x4D9) () {
 	var var000E;
 	var var000F;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF27->show_npc_face(0x0000);
 		var0000 = 0xFF27->get_npc_object();
 		var0001 = 0xFF26->get_npc_object();
@@ -43378,7 +43423,7 @@ void Func04D9 object#(0x4D9) () {
 			abort;
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -43405,7 +43450,7 @@ void Func04DA object#(0x4DA) () {
 	var var000D;
 	var var000E;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF26->show_npc_face(0x0000);
 		var0000 = 0xFF26->get_npc_object();
 		var0001 = 0xFF27->get_npc_object();
@@ -43475,7 +43520,7 @@ void Func04DA object#(0x4DA) () {
 			abort;
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -43488,7 +43533,7 @@ void Func04DB object#(0x4DB) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF25->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x0298]) {
@@ -43554,7 +43599,7 @@ void Func04DB object#(0x4DB) () {
 		}
 		say("\"To bid you goodbye.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092F(0xFF25);
 	}
 }
@@ -43575,7 +43620,7 @@ void Func04DC object#(0x4DC) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF24->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func0908();
@@ -43731,7 +43776,7 @@ void Func04DC object#(0x4DC) () {
 			var0000,
 			". See thee soon on the surface world!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF24);
 	}
 }
@@ -43752,7 +43797,7 @@ void Func04DD object#(0x4DD) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFF23->show_npc_face(0x0000);
@@ -43917,7 +43962,7 @@ void Func04DE object#(0x4DE) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF22->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = UI_wearing_fellowship();
@@ -44031,7 +44076,7 @@ void Func04DE object#(0x4DE) () {
 		}
 		say("\"Leaving so soon?\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0000 = UI_part_of_day();
 		var0007 = 0xFF22->get_npc_object()->get_schedule_type();
 		var0008 = UI_die_roll(0x0001, 0x0004);
@@ -44074,7 +44119,7 @@ void Func04DF object#(0x4DF) () {
 	var var0009;
 	var var000A;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFF21->show_npc_face(0x0000);
@@ -44231,7 +44276,7 @@ void Func04E0 object#(0x4E0) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFF20->show_npc_face(0x0000);
@@ -44381,7 +44426,7 @@ void Func04E1 object#(0x4E1) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF1F->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = 0xFF1F->get_npc_object()->get_schedule_type();
@@ -44489,7 +44534,7 @@ void Func04E1 object#(0x4E1) () {
 		}
 		say("Sintag grunts.*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0001 = 0xFF1F->get_npc_object()->get_schedule_type();
 		var0004 = UI_die_roll(0x0001, 0x0004);
 		if (var0001 == 0x0007) {
@@ -44532,7 +44577,7 @@ void Func04E2 object#(0x4E2) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF1E->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = UI_wearing_fellowship();
@@ -44661,7 +44706,7 @@ void Func04E2 object#(0x4E2) () {
 			say("\"Yeah, goodbye! Leave! They all leave me alone eventually!\"*");
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0009 = 0xFF1E->get_npc_object()->get_schedule_type();
 		if (var0009 == 0x000B) {
 			var000A = UI_die_roll(0x0001, 0x0004);
@@ -44698,7 +44743,7 @@ void Func04E3 object#(0x4E3) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF1D->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
@@ -44811,7 +44856,7 @@ void Func04E3 object#(0x4E3) () {
 		}
 		say("\"Goodbye, stranger.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0004 = 0xFF1D->get_npc_object()->get_schedule_type();
 		if (var0004 == 0x000B) {
 			var0005 = UI_die_roll(0x0001, 0x0004);
@@ -44844,7 +44889,7 @@ void Func04E4 object#(0x4E4) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF1C->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = 0xFF1C->get_npc_object()->get_schedule_type();
@@ -44902,7 +44947,7 @@ void Func04E4 object#(0x4E4) () {
 		}
 		say("\"Be careful, my friend.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0001 = 0xFF1C->get_npc_object()->get_schedule_type();
 		if (var0001 == 0x000B) {
 			var0002 = UI_die_roll(0x0001, 0x0004);
@@ -44948,7 +44993,7 @@ void Func04E5 object#(0x4E5) () {
 	var var000B;
 	var var000C;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF1B->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = 0xFF1B->get_npc_object()->get_schedule_type();
@@ -45094,7 +45139,7 @@ void Func04E5 object#(0x4E5) () {
 		}
 		say("\"I hope I can help thee again some time, my friend!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0000 = UI_part_of_day();
 		var0001 = 0xFF1B->get_npc_object()->get_schedule_type();
 		var000B = UI_die_roll(0x0001, 0x0004);
@@ -45136,7 +45181,7 @@ void Func04E6 object#(0x4E6) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF1A->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = UI_wearing_fellowship();
@@ -45253,7 +45298,7 @@ void Func04E6 object#(0x4E6) () {
 		}
 		say("\"Farewell, friend. I look forward to thy return.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF1A);
 	}
 }
@@ -45282,7 +45327,7 @@ void Func04E7 object#(0x4E7) () {
 	var var000D;
 	var var000E;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF19->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = 0xFF19->get_npc_object()->get_schedule_type();
@@ -45522,7 +45567,7 @@ void Func04E7 object#(0x4E7) () {
 		}
 		say("\"Nice talking with thee. I shall see thee later, I hope.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF19);
 	}
 }
@@ -45540,7 +45585,7 @@ void Func04E8 object#(0x4E8) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF18->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
@@ -45603,7 +45648,7 @@ void Func04E8 object#(0x4E8) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0001 = UI_part_of_day();
 		var0002 = 0xFF18->get_npc_object()->get_schedule_type();
 		var0004 = UI_die_roll(0x0001, 0x0004);
@@ -45647,7 +45692,7 @@ void Func04E9 object#(0x4E9) () {
 	var var000B;
 	var var000C;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF17->show_npc_face(0x0000);
 		var0000 = 0xFF17->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
@@ -45717,7 +45762,7 @@ void Func04E9 object#(0x4E9) () {
 		}
 		say("The actor bows to you.*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var000A = UI_part_of_day();
 		var0000 = 0xFF17->get_npc_object()->get_schedule_type();
 		var000B = UI_die_roll(0x0001, 0x0004);
@@ -45749,10 +45794,10 @@ void Func04EA object#(0x4EA) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF16->say("You see a middle-aged actress with a very serious expression. She is unable to speak with you because she is concentrating on her part in the Passion Play. Perhaps you should speak to Paul.*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0000 = UI_part_of_day();
 		var0001 = 0xFF16->get_npc_object()->get_schedule_type();
 		var0002 = UI_die_roll(0x0001, 0x0004);
@@ -45784,10 +45829,10 @@ void Func04EB object#(0x4EB) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF15->say("You see a short, stocky actor in his mid- to late forties. He cannot speak to you now because he is concentrating on his lines for the Passion Play. Perhaps you should speak to Paul.");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		var0000 = UI_part_of_day();
 		var0001 = 0xFF15->get_npc_object()->get_schedule_type();
 		var0002 = UI_die_roll(0x0001, 0x0004);
@@ -45819,7 +45864,7 @@ void Func04EC object#(0x4EC) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF14->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		if (var0000 == 0x0007) {
@@ -45879,7 +45924,7 @@ void Func04EC object#(0x4EC) () {
 		}
 		say("\"Goodbye. I hope to see thee again, soon.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF14);
 	}
 }
@@ -45902,7 +45947,7 @@ void Func04ED object#(0x4ED) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF13->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = 0xFF13->get_npc_object()->get_schedule_type();
@@ -46064,7 +46109,7 @@ void Func04ED object#(0x4ED) () {
 			var0002,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF13);
 	}
 }
@@ -46081,7 +46126,7 @@ void Func04EE object#(0x4EE) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF12->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -46167,7 +46212,7 @@ void Func04EE object#(0x4EE) () {
 			var0000,
 			". Best of luck in thy journeys.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF12);
 	}
 }
@@ -46182,7 +46227,7 @@ void Func04EF object#(0x4EF) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFF11->show_npc_face(0x0000);
@@ -46314,7 +46359,7 @@ void Func04F0 object#(0x4F0) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF10->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func08F7(0xFF24);
@@ -46456,7 +46501,7 @@ void Func04F0 object#(0x4F0) () {
 			var0000,
 			", for the world as we know it will soon be no more.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -46469,7 +46514,7 @@ void Func04F1 object#(0x4F1) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFF0F->show_npc_face(0x0000);
@@ -46644,7 +46689,7 @@ void Func04F2 object#(0x4F2) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF0E->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = false;
@@ -46795,7 +46840,7 @@ void Func04F2 object#(0x4F2) () {
 			var0000,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -46812,7 +46857,7 @@ void Func04F3 object#(0x4F3) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFF0D->show_npc_face(0x0000);
@@ -46952,7 +46997,7 @@ void Func04F4 object#(0x4F4) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF0C->show_npc_face(0x0000);
 		var0000 = Func08F7(0xFF03);
 		var0001 = Func08F7(0xFF04);
@@ -47042,7 +47087,7 @@ void Func04F4 object#(0x4F4) () {
 			var0002,
 			".\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func085B();
 	}
 }
@@ -47062,7 +47107,7 @@ void Func04F5 object#(0x4F5) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF0B->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = 0xFF0B->get_npc_object();
@@ -47181,7 +47226,7 @@ void Func04F5 object#(0x4F5) () {
 		}
 		say("He nods farewell to you.*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF0B);
 	}
 }
@@ -47199,7 +47244,7 @@ void Func04F6 object#(0x4F6) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF0A->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = UI_wearing_fellowship();
@@ -47362,7 +47407,7 @@ void Func04F6 object#(0x4F6) () {
 		}
 		say("\"Farewell. May thy journeys be profitable.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF0A);
 	}
 }
@@ -47378,7 +47423,7 @@ void Func04F7 object#(0x4F7) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF09->show_npc_face(0x0000);
 		if (!gflags[0x01B2]) {
 			say("The non-corporeal man stares past you, seemingly past the confines of the building, and, perhaps, of the world. Then, he suddenly shudders, as if he is filled with pain.*");
@@ -47597,7 +47642,7 @@ void Func04F7 object#(0x4F7) () {
 			var0003,
 			".\" He suppresses a pained scream as you depart.*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
@@ -47628,7 +47673,7 @@ void Func04F8 object#(0x4F8) () {
 	var var0010;
 	var var0011;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF08->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -47851,7 +47896,7 @@ void Func04F8 object#(0x4F8) () {
 				fallthrough;
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF08);
 	}
 }
@@ -47882,7 +47927,7 @@ void Func04F9 object#(0x4F9) () {
 	var var0012;
 	var var0013;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF07->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
@@ -48084,7 +48129,7 @@ void Func04F9 object#(0x4F9) () {
 				fallthrough;
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF07);
 	}
 }
@@ -48113,7 +48158,7 @@ void Func04FA object#(0x4FA) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF06->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = false;
@@ -48394,7 +48439,7 @@ void Func04FA object#(0x4FA) () {
 				".\"*");
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF06);
 	}
 }
@@ -48408,7 +48453,7 @@ void Func04FB object#(0x4FB) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF05->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = UI_wearing_fellowship();
@@ -48582,7 +48627,7 @@ void Func04FB object#(0x4FB) () {
 		}
 		say("\"Farewell!\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func092E(0xFF05);
 	}
 }
@@ -48599,7 +48644,7 @@ void Func04FC object#(0x4FC) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF04->show_npc_face(0x0000);
 		var0000 = Func08F7(0xFF03);
 		var0001 = Func08F7(0xFF0C);
@@ -48691,7 +48736,7 @@ void Func04FC object#(0x4FC) () {
 			var0003,
 			",\" he says.*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func08A5();
 	}
 }
@@ -48705,7 +48750,7 @@ void Func04FD object#(0x4FD) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFF03->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func08F7(0xFF04);
@@ -48813,7 +48858,7 @@ void Func04FD object#(0x4FD) () {
 			var0000,
 			". If thou dost see the unicorn, tell it to wait for me.\"*");
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		Func0864();
 	}
 }
@@ -48831,7 +48876,7 @@ void Func04FE object#(0x4FE) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFF02->show_npc_face(0x0000);
@@ -49055,7 +49100,7 @@ void Func04FF object#(0x4FF) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	0xFF01->show_npc_face(0x0000);
@@ -49163,7 +49208,7 @@ void Func0500 object#(0x500) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 	var0000 = UI_get_party_list();
@@ -49431,7 +49476,7 @@ void Func0608 object#(0x608) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		Func0941(0x000D);
 		var0000 = UI_is_pc_female();
 		0xFFE6->say("\"Avatar! Stop where thou art! Thou shalt not succeed in thy quest to destroy the Black Gate! Art thou mad??! The Guardian is much too powerful for thee! He shall crush thee like an insect! The fate of Britannia now belongs to him and to The Fellowship! The Guardian is the land's true ruler! Bow down to him, Avatar, and perhaps he shall give thee a place at his side. Bow down to him -now-!\"*");
@@ -49507,7 +49552,7 @@ void Func060A object#(0x60A) () {
 	var var0010;
 	var var0011;
 
-	if (event != 0x0002) {
+	if (event != SCRIPTED) {
 		return;
 	}
 	if (0xFF18->get_schedule_type() == 0x0009) {
@@ -49608,7 +49653,7 @@ void Func060A object#(0x60A) () {
 extern void Func083D 0x83D ();
 
 void Func060B object#(0x60B) () {
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x001F] && gflags[0x0020]) {
 			Func083D();
 			return;
@@ -49752,7 +49797,7 @@ void Func060D object#(0x60D) () {
 	var var0010;
 	var var0011;
 
-	if (event != 0x0002) {
+	if (event != SCRIPTED) {
 		return;
 	}
 	var0000 = find_nearby(0x019A, 0x000A, 0x0000);
@@ -49831,7 +49876,7 @@ void Func060E object#(0x60E) () {
 	var var001D;
 	var var001E;
 
-	if (event == 0x0004) {
+	if (event == WEAPON) {
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		UI_play_music(0x00FF, 0x0000);
 		UI_play_music(0x0011, 0x0000);
@@ -49845,7 +49890,7 @@ void Func060E object#(0x60E) () {
 			call Func060E;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0005 = get_item_shape();
 		var0006 = get_object_position();
 		gflags[0x0039] = false;
@@ -50185,7 +50230,7 @@ void Func0614 object#(0x614) () {
 }
 
 void Func0615 object#(0x615) () {
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_item_shape(0x02F2);
 		set_item_frame(0x0000);
 	}
@@ -50196,7 +50241,7 @@ void Func0617 object#(0x617) () {
 	var var0001;
 
 	gflags[0x01A8] = true;
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = script item after 20 ticks {
 			nohalt;
 			finish;
@@ -50208,7 +50253,7 @@ void Func0617 object#(0x617) () {
 			frame 1;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_schedule_type(0x000F);
 		if (0xFF72->npc_nearby()) {
 			0xFF72->show_npc_face(0x0001);
@@ -50252,7 +50297,7 @@ void Func061B object#(0x61B) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		Func0806(0x00EA, item);
 		var0000 = 0x0269->get_npc_object();
 		0x0269->set_schedule_type(0x000F);
@@ -50302,7 +50347,7 @@ void Func061D object#(0x61D) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = get_object_position();
 		Func0806(0x00EE, item);
 		// This is likely meant to be 'item' instead of 0x0269.
@@ -50321,7 +50366,7 @@ void Func061E object#(0x61E) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		Func0806(0x00F2, item);
 		var0000 = 0x0113;
 		var0001 = 0x0005;
@@ -50349,7 +50394,7 @@ void Func0621 object#(0x621) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = "";
 		var0001 = get_item_quality();
 		var0002 = item;
@@ -50638,7 +50683,7 @@ void Func0622 object#(0x622) () {
 	var var000B;
 	var var000C;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_get_party_list();
 		var0001 = Func0900();
 		if (var0001 == 0xFE9C) {
@@ -50709,7 +50754,7 @@ void Func0623 object#(0x623) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = Func0900();
 		if (!(var0000 == 0xFE9C)) {
 			var0000->show_npc_face(0x0000);
@@ -50726,7 +50771,7 @@ void Func0623 object#(0x623) () {
 		0xFE9C->set_item_flag(ASLEEP);
 		0xFE9C->clear_item_flag(ASLEEP);
 		if ((get_item_shape() == 0x03F3) && (get_item_frame() == 0x0011)) {
-			event = 0x0001;
+			event = DOUBLECLICK;
 			item->Func0624();
 		}
 	}
@@ -50739,19 +50784,19 @@ void Func0624 object#(0x624) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var0000 = [0xFFFF, 0xFFFF, 0xFFFF, 0x0000, 0x0000, 0x0000, 0x0001, 0x0001, 0x0001];
 		var0001 = [0x0001, 0x0000, 0xFFFF, 0x0001, 0x0000, 0xFFFF, 0x0001, 0x0000, 0xFFFF];
 		0xFE9C->halt_scheduled();
-		Func0828(item, var0000, var0001, 0xFFFF, Func0624, item, 0x0007);
-		UI_set_path_failure(Func0624, item, 0x0002);
+		Func0828(item, var0000, var0001, 0xFFFF, Func0624, item, BG_PATH_SUCCESS);
+		UI_set_path_failure(Func0624, item, SCRIPTED);
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_item_shape(0x0247);
 		set_item_frame(0x0000);
 	}
-	if (event == 0x0007) {
+	if (event == BG_PATH_SUCCESS) {
 		UI_close_gumps();
 		var0002 = script 0xFE9C {
 			face NORTH;
@@ -50806,7 +50851,7 @@ void Func0625 object#(0x625) () {
 	var var0018;
 	var var0019;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_item_shape();
 		var0001 = [0x017B, 0x0111];
 		var0002 = [0x01B8, 0x0133];
@@ -50882,7 +50927,7 @@ labelFunc0625_01DB:
 		UI_attack_avatar();
 		return;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0014 = UI_get_party_list();
 		for (var0017 in var0014 with var0015 to var0016) {
 			Func093F(var0017, 0x001F);
@@ -51193,7 +51238,7 @@ void Func062D object#(0x62D) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0007) {
+	if (event == BG_PATH_SUCCESS) {
 		var0000 = get_container();
 		if (!var0000) {
 			var0001 = Func0827(0xFE9C, item);
@@ -51220,14 +51265,14 @@ void Func062D object#(0x62D) () {
 			UI_close_gumps();
 		}
 	}
-	if ((event == 0x0002) || var0000) {
+	if ((event == SCRIPTED) || var0000) {
 		var0004 = UI_click_on_item();
 		var0005 = var0004->get_item_shape();
 		if (var0005 == 0x028B) {
 			var0006 = [0x0001, 0x0001];
 			var0007 = [0x0000, 0x0000];
 			var0008 = 0xFFFF;
-			Func0828(var0004, var0006, var0007, var0008, Func028B, var0004, 0x0007);
+			Func0828(var0004, var0006, var0007, var0008, Func028B, var0004, BG_PATH_SUCCESS);
 		} else {
 			var0009 = "@Why dost thou not spin that wool into thread?@";
 			Func08FF(var0009);
@@ -51252,7 +51297,7 @@ void Func062E object#(0x62E) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0007) {
+	if (event == BG_PATH_SUCCESS) {
 		var0000 = get_container();
 		if (!var0000) {
 			var0001 = Func0827(0xFE9C, item);
@@ -51279,14 +51324,14 @@ void Func062E object#(0x62E) () {
 			UI_close_gumps();
 		}
 	}
-	if ((event == 0x0002) || var0000) {
+	if ((event == SCRIPTED) || var0000) {
 		var0004 = UI_click_on_item();
 		var0005 = var0004->get_item_shape();
 		if (var0005 == 0x0105) {
 			var0006 = [0x0000, 0xFFFF, 0xFFFE];
 			var0007 = [0x0001, 0x0001, 0x0001];
 			var0008 = 0xFFFF;
-			Func0828(var0004, var0006, var0007, var0008, Func0105, var0004, 0x0007);
+			Func0828(var0004, var0006, var0007, var0008, Func0105, var0004, BG_PATH_SUCCESS);
 		} else {
 			var0009 = "@Why dost thou not weave cloth with that thread on the loom?@";
 			Func08FF(var0009);
@@ -51309,7 +51354,7 @@ void Func0631 object#(0x631) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0007) {
+	if (event == BG_PATH_SUCCESS) {
 		var0000 = get_item_quality();
 		var0001 = find_nearby(0x0366, 0x000F, 0x0000);
 		var0002 = find_nearby(0x0203, 0x000F, 0x0000);
@@ -51431,7 +51476,7 @@ void Func0631 object#(0x631) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		Func083F(item, true);
 	}
 }
@@ -51440,7 +51485,7 @@ void Func0632 object#(0x632) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = 0xFF92->get_object_position();
 		UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		var0001 = script item {
@@ -51455,7 +51500,7 @@ void Func0632 object#(0x632) () {
 			call Func0632;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFF92->get_npc_object()->remove_npc();
 	}
 }
@@ -51465,7 +51510,7 @@ extern var Func0937 0x937 (var var0000);
 extern void Func093F 0x93F (var var0000, var var0001);
 
 void Func0633 object#(0x633) () {
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		item->Func063A();
 		if (UI_die_roll(0x0001, 0x0008) == 0x0001) {
 			if (0xFFFC->get_item_flag(IN_PARTY) && Func0937(0xFFFC)) {
@@ -51542,7 +51587,7 @@ void Func0635 object#(0x635) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = find_nearby(0x0292, 0x0000, 0x0000);
 		if (var0000) {
 			var0001 = script var0000 after 60 ticks {
@@ -51554,7 +51599,7 @@ void Func0635 object#(0x635) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0002 = get_object_position();
 		var0003 = find_nearby(0x033F, 0x0002, 0x0000);
 		if (UI_get_array_size(var0003) > 0x0000) {
@@ -51605,10 +51650,10 @@ void Func0638 object#(0x638) () {
 	var var0006;
 
 	var0000 = get_item_quality();
-	if ((event != 0x0001) && (event != 0x0002)) {
+	if ((event != DOUBLECLICK) && (event != SCRIPTED)) {
 		return;
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if ((var0000 == 0x0090) && (get_item_shape() == 0x0282)) {
 			Func08FF("@Odd. The page is smudged with dirt here. I cannot make out this text.@");
 			var0001 = set_item_quality(0x0091);
@@ -51961,7 +52006,7 @@ void Func0639 object#(0x639) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = script item {
 			face NORTH;
@@ -51975,7 +52020,7 @@ void Func0639 object#(0x639) () {
 			call Func0639;
 		};
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = get_object_position();
 		UI_sprite_effect(0x0007, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0002, 0xFFFF);
 		item->Func060F();
@@ -51991,7 +52036,7 @@ void Func063A object#(0x63A) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_get_array_size(UI_get_party_list());
 		var0001 = UI_die_roll(0x0001, 0x0004);
 		if (var0001 == 0x0001) {
@@ -52033,7 +52078,7 @@ void Func063D object#(0x63D) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_npc_number();
 		if (var0000 < 0x0100) {
 			var0000->show_npc_face(0x0000);
@@ -52047,7 +52092,7 @@ void Func063D object#(0x63D) () {
 			}
 		}
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		item_say("@Oink@");
 	}
 }
@@ -52060,7 +52105,7 @@ void Func063E object#(0x63E) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = 0xFFE9->set_last_created();
 		if (var0000) {
 			var0001 = 0xFE9C->get_object_position();
@@ -52082,7 +52127,7 @@ void Func063E object#(0x63E) () {
 		var0000 = 0xFE9C->set_npc_prop(0x0007, 0x0000);
 		var0000 = 0xFE9C->set_npc_prop(0x0008, 0x0000);
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		0xFFE9->say("Busted, you thieving scoundrel bastard! Perhaps the only thing more ridiculous than your pathetic attempt to destroy the black gate without paying proper dues is your inevitably embarassing explanation\tto the friend to whom you are, no doubt, showing this!");
 		say("For the atrocious crime of cheating against the virtues of Britannia, I find you guilty.*");
 		UI_play_sound_effect(0x000F);
@@ -52132,7 +52177,7 @@ void Func0640 object#(0x640) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = UI_click_on_item();
 		var0001 = Func092D(var0000);
@@ -52157,7 +52202,7 @@ void Func0640 object#(0x640) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (is_npc()) {
 			clear_item_flag(ASLEEP);
 		} else {
@@ -52174,7 +52219,7 @@ void Func0641 object#(0x641) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Rel Hur@");
 		if (Func0906()) {
@@ -52211,7 +52256,7 @@ void Func0642 object#(0x642) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = UI_click_on_item();
 		var0001 = Func092D(var0000);
@@ -52233,7 +52278,7 @@ void Func0642 object#(0x642) () {
 			};
 		}
 	}
-	if (event == 0x0004) {
+	if (event == WEAPON) {
 		var0003 = get_item_shape();
 		if (var0003 in [0x02BD, 0x020E, 0x0152, 0x01B3]) {
 			UI_telekenesis(var0003);
@@ -52253,7 +52298,7 @@ void Func0643 object#(0x643) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Bet Ort@");
 		if (Func0906()) {
@@ -52271,7 +52316,7 @@ void Func0643 object#(0x643) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = get_object_position();
 		UI_sprite_effect(0x000C, (var0001[0x0001] - 0x0002), (var0001[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 	}
@@ -52282,7 +52327,7 @@ extern var Func0906 0x906 ();
 void Func0644 object#(0x644) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Bet Lor@");
 		if (Func0906()) {
@@ -52301,7 +52346,7 @@ void Func0644 object#(0x644) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		UI_cause_light(0x006E);
 	}
 }
@@ -52316,7 +52361,7 @@ void Func0645 object#(0x645) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		do {
 			if (gflags[0x003D] != false) {
@@ -52354,7 +52399,7 @@ void Func0645 object#(0x645) () {
 			};
 		} while (false);
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0005 = [0x03A8, 0x047A, 0x0000];
 		0xFE9B->move_object(var0005);
 	}
@@ -52370,7 +52415,7 @@ void Func0646 object#(0x646) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = UI_click_on_item();
 		var0001 = Func092D(var0000);
@@ -52394,7 +52439,7 @@ void Func0646 object#(0x646) () {
 			};
 		}
 	}
-	if (event == 0x0004) {
+	if (event == WEAPON) {
 		var0003 = get_item_shape();
 		if (var0003 in [0x0253, 0x0379, 0x0150, 0x01E1]) {
 			UI_telekenesis(var0003);
@@ -52413,7 +52458,7 @@ extern var Func0906 0x906 ();
 void Func0647 object#(0x647) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Vas Kal@");
 		if (Func0906()) {
@@ -52444,7 +52489,7 @@ void Func0648 object#(0x648) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@In Mani Ylem@");
 		if (Func0906()) {
@@ -52464,7 +52509,7 @@ void Func0648 object#(0x648) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = UI_get_party_list();
 		for (var0004 in var0001 with var0002 to var0003) {
 			var0005 = var0004->get_object_position();
@@ -52487,7 +52532,7 @@ void Func0649 object#(0x649) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		halt_scheduled();
 		var0001 = Func092D(var0000);
@@ -52524,7 +52569,7 @@ void Func0649 object#(0x649) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		clear_item_flag(POISONED);
 		clear_item_flag(PARALYZED);
 	}
@@ -52548,7 +52593,7 @@ void Func064A object#(0x64A) () {
 	var var000B;
 	var var000C;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Wis Jux@");
 		if (Func0906()) {
@@ -52585,7 +52630,7 @@ void Func064A object#(0x64A) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var000C = get_object_position();
 		UI_sprite_effect(0x0010, var000C[0x0001], var000C[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	}
@@ -52607,7 +52652,7 @@ void Func064B object#(0x64B) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Vas An Flam@");
 		if (Func0906()) {
@@ -52657,7 +52702,7 @@ void Func064C object#(0x64C) () {
 	var var000A;
 	var var000B;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Vas In Flam@");
 		if (Func0906()) {
@@ -52696,7 +52741,7 @@ extern var Func0906 0x906 ();
 void Func064D object#(0x64D) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@In Lor@");
 		if (Func0906()) {
@@ -52715,7 +52760,7 @@ void Func064D object#(0x64D) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		UI_cause_light(0x01F4);
 	}
 }
@@ -52731,7 +52776,7 @@ void Func064E object#(0x64E) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		item_say("@In Wis@");
 		if (Func0906()) {
 			var0000 = script item {
@@ -52751,7 +52796,7 @@ void Func064E object#(0x64E) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = 0xFE9C->get_object_position();
 		var0002 = (var0001[0x0001] - 0x03A5) / 0x000A;
 		var0003 = (var0001[0x0002] - 0x046E) / 0x000A;
@@ -52780,7 +52825,7 @@ void Func064F object#(0x64F) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = get_object_position();
 		halt_scheduled();
 		item_say("@Vas An Zu@");
@@ -52807,7 +52852,7 @@ void Func064F object#(0x64F) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		halt_scheduled();
 		clear_item_flag(ASLEEP);
 	}
@@ -52827,7 +52872,7 @@ void Func0650 object#(0x650) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = Func092D(var0000);
 		halt_scheduled();
@@ -52887,7 +52932,7 @@ void Func0651 object#(0x651) () {
 
 	var0000 = [0x02D2, 0x02D3];
 	var0001 = [0x022C, 0x01A1];
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0002 = UI_click_on_item();
 		var0003 = var0002->get_item_shape();
@@ -52915,7 +52960,7 @@ void Func0651 object#(0x651) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0006 = 0x0000;
 		for (var0009 in var0000 with var0007 to var0008) {
 			var0006 += 0x0001;
@@ -52935,7 +52980,7 @@ void Func0652 object#(0x652) () {
 	var var0002;
 	var var0003;
 
-	if ((event == 0x0001) || (event == 0x0004)) {
+	if ((event == DOUBLECLICK) || (event == WEAPON)) {
 		halt_scheduled();
 		var0000 = UI_click_on_item();
 		var0001 = Func092D(var0000);
@@ -52969,7 +53014,7 @@ extern var Func0906 0x906 ();
 void Func0653 object#(0x653) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Vas Lor@");
 		if (Func0906()) {
@@ -52988,7 +53033,7 @@ void Func0653 object#(0x653) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		UI_cause_light(0x1388);
 	}
 }
@@ -53003,7 +53048,7 @@ void Func0654 object#(0x654) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = get_object_position();
 		UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -53025,7 +53070,7 @@ void Func0654 object#(0x654) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0002 = UI_get_party_list();
 		var0002 &= 0xFE9C;
 		for (var0005 in var0002 with var0003 to var0004) {
@@ -53045,7 +53090,7 @@ void Func0655 object#(0x655) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = UI_click_on_item();
 		var0001 = Func092D(var0000);
@@ -53074,7 +53119,7 @@ void Func0655 object#(0x655) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_item_flag(PROTECTION);
 	}
 }
@@ -53090,7 +53135,7 @@ void Func0656 object#(0x656) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = UI_click_on_item();
 		if (var0000[0x0001] == 0x0000) {
@@ -53116,7 +53161,7 @@ void Func0656 object#(0x656) () {
 			};
 		}
 	}
-	if (event == 0x0004) {
+	if (event == WEAPON) {
 		var0003 = [0x0105, 0x028E, 0x028B, 0x028D, 0x0149, 0x032A, 0x01AF, 0x0102, 0x01B2, 0x02E7, 0x01D6, 0x02E4, 0x0369, 0x0247, 0x02B8, 0x03F3, 0x0311];
 		var0004 = [0x03B5, 0x03B6, 0x0314, 0x0313];
 		var0005 = get_item_shape();
@@ -53141,7 +53186,7 @@ void Func0657 object#(0x657) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		item_say("@Por Ort Wis@");
 		if (Func0906()) {
 			var0000 = script item {
@@ -53162,7 +53207,7 @@ void Func0657 object#(0x657) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = get_object_position();
 		UI_wizard_eye(0x002D, 0x00C8);
 	}
@@ -53177,7 +53222,7 @@ void Func0658 object#(0x658) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = UI_click_on_item();
 		var0001 = Func092D(var0000);
@@ -53215,7 +53260,7 @@ void Func0659 object#(0x659) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = Func092D(var0000);
 		halt_scheduled();
@@ -53246,7 +53291,7 @@ void Func0659 object#(0x659) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0003 = get_npc_prop(0x0000);
 		var0004 = get_npc_prop(0x0003);
 		if (var0004 <= var0003) {
@@ -53264,7 +53309,7 @@ void Func065A object#(0x65A) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Kal Bet Xen@");
 		if (Func0906()) {
@@ -53284,7 +53329,7 @@ void Func065A object#(0x65A) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = UI_die_roll(0x0007, 0x000A);
 		while (var0001 > 0x0000) {
 			var0001 -= 0x0001;
@@ -53304,7 +53349,7 @@ void Func065B object#(0x65B) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		item_say("@Vas Uus Sanct@");
 		if (Func0906()) {
 			halt_scheduled();
@@ -53325,7 +53370,7 @@ void Func065B object#(0x65B) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		UI_play_sound_effect(0x006D);
 		var0001 = get_object_position();
 		UI_sprite_effect(0x0007, (var0001[0x0001] - 0x0002), (var0001[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -53346,7 +53391,7 @@ void Func065C object#(0x65C) () {
 	var var0002;
 	var var0003;
 
-	if ((event == 0x0001) || (event == 0x0004)) {
+	if ((event == DOUBLECLICK) || (event == WEAPON)) {
 		var0000 = UI_click_on_item();
 		var0001 = Func092D(var0000);
 		halt_scheduled();
@@ -53377,7 +53422,7 @@ extern var Func0906 0x906 ();
 void Func065D object#(0x65D) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Vas Wis@");
 		if (Func0906()) {
@@ -53397,7 +53442,7 @@ void Func065D object#(0x65D) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = UI_display_map();
 	}
 }
@@ -53411,7 +53456,7 @@ void Func065E object#(0x65E) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = Func092D(var0000);
 		item_say("@In Nox@");
@@ -53446,7 +53491,7 @@ void Func065F object#(0x65F) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = Func092D(var0000);
 		halt_scheduled();
@@ -53486,7 +53531,7 @@ void Func0660 object#(0x660) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Kal Xen@");
 		if (Func0906()) {
@@ -53506,7 +53551,7 @@ void Func0660 object#(0x660) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = [0x02CC, 0x032B, 0x020B, 0x01FE, 0x0212, 0x01F6, 0x0219];
 		var0002 = UI_get_array_size(var0001);
 		var0003 = Func08F6(0xFE9C);
@@ -53538,7 +53583,7 @@ void Func0661 object#(0x661) () {
 	var var0001;
 	var var0002;
 
-	if ((event == 0x0001) || (event == 0x0004)) {
+	if ((event == DOUBLECLICK) || (event == WEAPON)) {
 		var0000 = UI_click_on_item();
 		halt_scheduled();
 		var0001 = Func092D(var0000);
@@ -53576,7 +53621,7 @@ void Func0662 object#(0x662) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = UI_click_on_item();
 		if (var0000->get_item_shape() == 0x014A) {
@@ -53621,7 +53666,7 @@ void Func0663 object#(0x663) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Vas Des Sanct@");
 		if (Func0906()) {
@@ -53660,7 +53705,7 @@ void Func0663 object#(0x663) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_item_flag(CURSED);
 	}
 }
@@ -53672,7 +53717,7 @@ void Func0664 object#(0x664) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = UI_click_on_item();
 		var0001 = get_object_position();
@@ -53720,7 +53765,7 @@ void Func0665 object#(0x665) () {
 	var var000E;
 	var var000F;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = 0xFE9C->get_object_position();
 		var0001 = [];
@@ -53769,7 +53814,7 @@ void Func0665 object#(0x665) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		clear_item_flag(INVISIBLE);
 	}
 }
@@ -53785,7 +53830,7 @@ void Func0666 object#(0x666) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Kal Wis Corp@");
 		if (Func0906()) {
@@ -53836,7 +53881,7 @@ void Func0666 object#(0x666) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		gflags[0x01B2] = false;
 		gflags[0x01B3] = false;
 		gflags[0x01B4] = false;
@@ -53864,7 +53909,7 @@ void Func0667 object#(0x667) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = var0000->get_item_shape();
 		var0002 = Func092D(item);
@@ -53901,7 +53946,7 @@ void Func0667 object#(0x667) () {
 			};
 		} while (false);
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0005 = get_item_frame();
 		var0007 = var0005 - 0x0003;
 		set_item_frame(var0007);
@@ -53916,7 +53961,7 @@ void Func0668 object#(0x668) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = Func092D(var0000);
 		halt_scheduled();
@@ -53962,7 +54007,7 @@ void Func0669 object#(0x669) () {
 	var var0009;
 	var var000A;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Por Xen@");
 		if (Func0906()) {
@@ -53983,7 +54028,7 @@ void Func0669 object#(0x669) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = 0x0019;
 		var0002 = Func0934(var0001);
 		for (var0005 in var0002 with var0003 to var0004) {
@@ -54019,7 +54064,7 @@ void Func066A object#(0x66A) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = Func092D(var0000);
 		halt_scheduled();
@@ -54062,7 +54107,7 @@ void Func066B object#(0x66B) () {
 	var var0001;
 	var var0002;
 
-	if ((event == 0x0001) || (event == 0x0004)) {
+	if ((event == DOUBLECLICK) || (event == WEAPON)) {
 		var0000 = UI_click_on_item();
 		halt_scheduled();
 		var0001 = Func092D(var0000);
@@ -54102,7 +54147,7 @@ void Func066C object#(0x66C) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0000->halt_scheduled();
 		var0001 = Func092D(var0000);
@@ -54140,7 +54185,7 @@ void Func066D object#(0x66D) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		halt_scheduled();
 		var0001 = Func092D(var0000);
@@ -54167,7 +54212,7 @@ void Func066D object#(0x66D) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_item_flag(INVISIBLE);
 	}
 }
@@ -54187,7 +54232,7 @@ void Func066E object#(0x66E) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = Func092D(var0000);
 		halt_scheduled();
@@ -54236,7 +54281,7 @@ void Func066F object#(0x66F) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = get_object_position();
 		item_say("@Vas Zu@");
@@ -54262,7 +54307,7 @@ void Func066F object#(0x66F) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0002 = 0x0019;
 		var0003 = find_nearby(0xFFFF, var0002, 0x0004);
 		var0004 = UI_get_party_list();
@@ -54285,7 +54330,7 @@ void Func0670 object#(0x670) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Quas Wis@");
 		if (Func0906()) {
@@ -54309,7 +54354,7 @@ void Func0670 object#(0x670) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = find_nearby(0xFFFF, 0x0019, 0x0008);
 		var0002 = UI_get_party_list();
 		for (var0005 in var0001 with var0003 to var0004) {
@@ -54332,7 +54377,7 @@ void Func0671 object#(0x671) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = Func092D(var0000);
 		halt_scheduled();
@@ -54356,7 +54401,7 @@ void Func0671 object#(0x671) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0002 = clone();
 	}
 }
@@ -54380,7 +54425,7 @@ void Func0672 object#(0x672) () {
 	var var000C;
 	var var000D;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		halt_scheduled();
 		var0001 = Func092D(var0000);
@@ -54430,7 +54475,7 @@ void Func0672 object#(0x672) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0009 = get_object_position();
 		var0002 = set_last_created();
 		if (var0002) {
@@ -54469,7 +54514,7 @@ void Func0673 object#(0x673) () {
 	var var000C;
 	var var000D;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = 0x0019;
 		halt_scheduled();
 		var0001 = Func0934(var0000);
@@ -54527,7 +54572,7 @@ void Func0674 object#(0x674) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Vas Oort Hur@");
 		if (Func0906()) {
@@ -54560,7 +54605,7 @@ void Func0674 object#(0x674) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x02ED] == true) {
 			var0002 = 0x002D;
 			var0003 = Func0934(var0002);
@@ -54594,7 +54639,7 @@ void Func0675 object#(0x675) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		halt_scheduled();
 		var0001 = Func092D(var0000);
@@ -54642,7 +54687,7 @@ void Func0676 object#(0x676) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		halt_scheduled();
 		var0001 = Func092D(var0000);
@@ -54693,7 +54738,7 @@ void Func0677 object#(0x677) () {
 	var var000B;
 	var var000C;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Vas Por Ylem@");
 		if (Func0906()) {
@@ -54713,7 +54758,7 @@ void Func0677 object#(0x677) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = find_nearby(0xFE99, 0x0028, 0x0008);
 		var0002 = UI_get_party_list();
 		var0003 = 0x000C;
@@ -54820,7 +54865,7 @@ void Func0678 object#(0x678) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = UI_click_on_item();
 		var0001 = Func092D(var0000);
@@ -54866,7 +54911,7 @@ void Func0679 object#(0x679) () {
 	var var0004;
 	var var0005;
 
-	if ((event == 0x0001) || ((event == 0x0004) && (get_npc_number() == 0xFE9C))) {
+	if ((event == DOUBLECLICK) || ((event == WEAPON) && (get_npc_number() == 0xFE9C))) {
 		halt_scheduled();
 		var0000 = UI_click_on_item();
 		var0001 = Func092D(var0000);
@@ -54893,7 +54938,7 @@ void Func0679 object#(0x679) () {
 			};
 		}
 	}
-	if ((event == 0x0004) && (item != 0xFE9C)) {
+	if ((event == WEAPON) && (item != 0xFE9C)) {
 		if (is_npc()) {
 			var0003 = 0xFE9C->get_npc_prop(0x0002);
 			var0004 = get_npc_prop(0x0002);
@@ -54920,7 +54965,7 @@ void Func067A object#(0x67A) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = false;
 		halt_scheduled();
 		var0001 = UI_click_on_item();
@@ -54989,7 +55034,7 @@ void Func067B object#(0x67B) () {
 	var var000A;
 
 	var0000 = false;
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0001 = UI_click_on_item();
 		item_say("@In Sanct Grav@");
@@ -55041,7 +55086,7 @@ void Func067C object#(0x67C) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = UI_click_on_item();
 		var0001 = Func092D(var0000);
@@ -55084,7 +55129,7 @@ void Func067D object#(0x67D) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Vas An Xen Ex@");
 		if (Func0906()) {
@@ -55120,7 +55165,7 @@ void Func067D object#(0x67D) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0007 = get_npc_number();
 		if (!(var0007 in [0xFF27, 0xFF26, 0xFE9C])) {
 			var0008 = 0xFE9C->get_alignment();
@@ -55144,7 +55189,7 @@ void Func067E object#(0x67E) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@In Vas Por@");
 		if (Func0906()) {
@@ -55177,7 +55222,7 @@ void Func067E object#(0x67E) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_item_flag(MIGHT);
 	}
 }
@@ -55193,7 +55238,7 @@ void Func067F object#(0x67F) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Vas Mani@");
 		if (Func0906()) {
@@ -55229,7 +55274,7 @@ void Func0680 object#(0x680) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Vas Kal An Mani@");
 		if (Func0906()) {
@@ -55268,7 +55313,7 @@ void Func0680 object#(0x680) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		item_say("@In Corp Hur Tym@");
 		UI_earthquake(0x0028);
 		UI_armageddon();
@@ -55285,7 +55330,7 @@ void Func0681 object#(0x681) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = Func092D(var0000);
 		halt_scheduled();
@@ -55329,7 +55374,7 @@ void Func0682 object#(0x682) () {
 	var var000C;
 	var var000D;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Vas Corp@");
 		if (Func0906()) {
@@ -55378,7 +55423,7 @@ void Func0682 object#(0x682) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var000D = get_item_flag(CANT_DIE);
 		if (var000D == false) {
 			var000C = get_npc_prop(0x0003);
@@ -55400,7 +55445,7 @@ void Func0683 object#(0x683) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@Vas Sact Lor@");
 		if (Func0906()) {
@@ -55434,7 +55479,7 @@ void Func0683 object#(0x683) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		set_item_flag(INVISIBLE);
 	}
 }
@@ -55453,7 +55498,7 @@ void Func0684 object#(0x684) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		var0001 = var0000->get_item_shape();
 		var0002 = var0000->get_object_position();
@@ -55512,7 +55557,7 @@ void Func0685 object#(0x685) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("Kal Vas Xen");
 		if (Func0906()) {
@@ -55536,7 +55581,7 @@ void Func0685 object#(0x685) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = [0x0210, 0x01F8, 0x0151, 0x0215, 0x009A, 0x01F5, 0x01F9, 0x0373, 0x0112, 0x0202, 0x0162, 0x0295, 0x02C2];
 		var0002 = [0x0005, 0x000F, 0x0005, 0x0005, 0x0005, 0x0005, 0x0005, 0x0005, 0x000E, 0x0005, 0x000A, 0x0005, 0x0005];
 		var0003 = [0x0005, 0x0001, 0x0005, 0x0001, 0x0002, 0x0002, 0x0002, 0x0001, 0x0001, 0x0003, 0x0001, 0x0005, 0x0002];
@@ -55571,7 +55616,7 @@ void Func0686 object#(0x686) () {
 	var var0002;
 	var var0003;
 
-	if ((event == 0x0001) || (event == 0x0004)) {
+	if ((event == DOUBLECLICK) || (event == WEAPON)) {
 		halt_scheduled();
 		var0000 = UI_click_on_item();
 		var0001 = Func092D(var0000);
@@ -55609,7 +55654,7 @@ extern var Func0906 0x906 ();
 void Func0687 object#(0x687) () {
 	var var0000;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		item_say("@An Tym@");
 		if (Func0906()) {
@@ -55627,7 +55672,7 @@ void Func0687 object#(0x687) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		UI_stop_time(0x0064);
 	}
 }
@@ -55635,7 +55680,7 @@ void Func0687 object#(0x687) () {
 extern void Func093F 0x93F (var var0000, var var0001);
 
 void Func0688 object#(0x688) () {
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		Func093F(item, 0x000C);
 		clear_item_flag(IN_ACTION);
 	}
@@ -55773,14 +55818,14 @@ void Func0690 object#(0x690) () {
 		};
 		return;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0001 = script item {
 			wait 1;
 			call Func026F;
 		};
 	}
-	if (event == 0x0002) {
-		event = 0x0001;
+	if (event == SCRIPTED) {
+		event = DOUBLECLICK;
 		item->Func0691();
 	}
 }
@@ -55791,7 +55836,7 @@ void Func0691 object#(0x691) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = 0xFE9C->get_npc_object()->find_nearest(0x029C, 0x0002);
 		var0001 = var0000->get_object_position();
 		var0002 = script item {
@@ -55803,7 +55848,7 @@ void Func0691 object#(0x691) () {
 			call Func0690;
 		};
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var0003 = UI_get_random(0x0064);
 		if (!gflags[0x032D]) {
 			if (var0003 > 0x0042) {
@@ -56548,7 +56593,7 @@ void Func069D object#(0x69D) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0007) {
+	if (event == BG_PATH_SUCCESS) {
 		(@0x70)();
 		return;
 	}
@@ -56582,7 +56627,7 @@ void Func069D object#(0x69D) () {
 		var0002 = [0xFFFF, 0x0000, 0x0001, 0x0000];
 	}
 	var0005 = 0xFE9C->get_npc_object();
-	Func0828(var0005, var0001, var0002, 0x0000, Func069D, var0005, 0x0007);
+	Func0828(var0005, var0001, var0002, 0x0000, Func069D, var0005, BG_PATH_SUCCESS);
 }
 
 extern void Func069F object#(0x69F) ();
@@ -56996,7 +57041,7 @@ void Func06A3 object#(0x6A3) () {
 	var var001C;
 	var var001D;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = get_item_quality();
 		if (var0000 == 0x0001) {
 			if (!gflags[0x02EE]) {
@@ -57291,7 +57336,7 @@ void Func06A3 object#(0x6A3) () {
 }
 
 void Func06A4 object#(0x6A4) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		gflags[0x003C] = true;
 	}
 }
@@ -57300,7 +57345,7 @@ extern void Func0904 0x904 (var var0000, var var0001);
 extern void Func0467 object#(0x467) ();
 
 void Func06A5 object#(0x6A5) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (gflags[0x0006]) {
 			0xFF99->get_npc_object()->set_schedule_type(0x0000);
 			Func0904(0xFF99, "@Fellowship scum!@");
@@ -57313,7 +57358,7 @@ void Func06A5 object#(0x6A5) () {
 extern void Func0911 0x911 (var var0000);
 
 void Func06A6 object#(0x6A6) () {
-	if ((event == 0x0003) && (!gflags[0x0000])) {
+	if ((event == EGG) && (!gflags[0x0000])) {
 		Func0911(0x03E8);
 		gflags[0x0000] = true;
 	}
@@ -57322,7 +57367,7 @@ void Func06A6 object#(0x6A6) () {
 extern void Func0911 0x911 (var var0000);
 
 void Func06A7 object#(0x6A7) () {
-	if ((event == 0x0003) && (!gflags[0x0001])) {
+	if ((event == EGG) && (!gflags[0x0001])) {
 		Func0911(0x03E8);
 		gflags[0x0001] = true;
 	}
@@ -57331,14 +57376,14 @@ void Func06A7 object#(0x6A7) () {
 extern void Func0911 0x911 (var var0000);
 
 void Func06A8 object#(0x6A8) () {
-	if ((event == 0x0003) && (!gflags[0x0002])) {
+	if ((event == EGG) && (!gflags[0x0002])) {
 		Func0911(0x03E8);
 		gflags[0x0002] = true;
 	}
 }
 
 void Func06A9 object#(0x6A9) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		gflags[0x0009] = true;
 	}
 }
@@ -57350,7 +57395,7 @@ void Func06AA object#(0x6AA) () {
 	var var0001;
 	var var0002;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = UI_create_new_object(0x009D);
 		if (var0000) {
 			0xFE9C->set_item_frame_rot(0x0020);
@@ -57386,7 +57431,7 @@ void Func06AB object#(0x6AB) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		gflags[0x0122] = true;
 		var0000 = [0xFFA9, 0xFFAA, 0xFFA4, 0xFFA6];
 		for (var0003 in var0000 with var0001 to var0002) {
@@ -57401,7 +57446,7 @@ void Func06AC object#(0x6AC) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = find_nearby(0x02F1, 0x0005, 0x0000);
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0003->set_alignment(0x0002);
@@ -57415,7 +57460,7 @@ void Func06AC object#(0x6AC) () {
 extern void Func02C0 shape#(0x2C0) ();
 
 void Func06AD object#(0x6AD) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		item->Func02C0();
 	}
 }
@@ -57423,7 +57468,7 @@ void Func06AD object#(0x6AD) () {
 extern void Func0495 object#(0x495) ();
 
 void Func06AE object#(0x6AE) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		0xFF6B->get_npc_object()->Func0495();
 	}
 }
@@ -57438,7 +57483,7 @@ void Func06AF object#(0x6AF) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		UI_play_sound_effect(0x001C);
 		var0000 = UI_get_party_list();
 		for (var0003 in var0000 with var0001 to var0002) {
@@ -57461,7 +57506,7 @@ void Func06B0 object#(0x6B0) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		UI_play_sound_effect(0x001C);
 		var0000 = UI_get_party_list();
 		for (var0003 in var0000 with var0001 to var0002) {
@@ -57482,7 +57527,7 @@ void Func06B1 object#(0x6B1) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		UI_play_sound_effect(0x001C);
 		var0000 = UI_get_party_list();
 		for (var0003 in var0000 with var0001 to var0002) {
@@ -57514,8 +57559,8 @@ void Func06B2 object#(0x6B2) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0003) {
-		event = 0x0001;
+	if (event == EGG) {
+		event = DOUBLECLICK;
 		UI_play_sound_effect(0x001C);
 		var0000 = get_item_quality();
 		var0001 = find_nearby(0x0150, var0000, 0x0000);
@@ -57548,9 +57593,9 @@ void Func06B3 object#(0x6B3) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		UI_play_sound_effect(0x001C);
-		event = 0x0001;
+		event = DOUBLECLICK;
 		var0000 = get_item_quality();
 		var0001 = find_nearby(0x0152, var0000, 0x0000);
 		for (var0004 in var0001 with var0002 to var0003) {
@@ -57576,7 +57621,7 @@ void Func06B4 object#(0x6B4) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		UI_play_sound_effect(0x001C);
 		var0000 = UI_get_party_list();
 		var0001 = Func092B(var0000);
@@ -57600,8 +57645,8 @@ void Func06B5 object#(0x6B5) () {
 	var var0005;
 	var var0006;
 
-	if (event == 0x0003) {
-		event = 0x0001;
+	if (event == EGG) {
+		event = DOUBLECLICK;
 		var0000 = find_nearby(0x010E, 0x0028, 0x0000);
 		var0000 &= find_nearby(0x0178, 0x0028, 0x0000);
 		var0001 = [];
@@ -57646,9 +57691,9 @@ void Func06B6 object#(0x6B6) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		UI_play_sound_effect(0x001C);
-		event = 0x0001;
+		event = DOUBLECLICK;
 		var0000 = find_nearby(0x0369, 0x0014, 0x0000);
 		var0001 = [];
 		for (var0004 in var0000 with var0002 to var0003) {
@@ -57682,7 +57727,7 @@ void Func06B7 object#(0x6B7) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		UI_play_sound_effect(0x001C);
 		var0000 = UI_get_party_list();
 		var0001 = UI_die_roll(0x0001, Func092B(var0000));
@@ -57703,7 +57748,7 @@ void Func06B8 object#(0x6B8) () {
 	var var0006;
 	var var0007;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = UI_get_party_list();
 		var0001 = get_item_quality();
 		for (var0004 in var0000 with var0002 to var0003) {
@@ -57723,13 +57768,13 @@ void Func06B8 object#(0x6B8) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		Func093F(item, 0x001F);
 	}
 }
 
 void Func06B9 object#(0x6B9) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		item_say("@Help! Help!@");
 	}
 }
@@ -57753,7 +57798,7 @@ void Func06BA object#(0x6BA) () {
 	var var000B;
 	var var000C;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = UI_get_party_list();
 		for (var0003 in var0000 with var0001 to var0002) {
 			if (!UI_roll_to_win(var0003->get_npc_prop(0x0000), get_item_quality())) {
@@ -57785,7 +57830,7 @@ void Func06BA object#(0x6BA) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0006 = 0x0000;
 		var0007 = 0x0000;
 		while (var0006 < 0x0010) {
@@ -57818,7 +57863,7 @@ void Func06BB object#(0x6BB) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = get_item_quality();
 		var0001 = UI_get_party_list();
 		for (var0004 in var0001 with var0002 to var0003) {
@@ -57836,7 +57881,7 @@ void Func06BB object#(0x6BB) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		Func093F(item, 0x001F);
 	}
 }
@@ -57850,7 +57895,7 @@ void Func06BC object#(0x6BC) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = get_item_quality();
 		if (!var0000) {
 			var0001 = find_nearby(0xFE99, 0x0028, 0x0008);
@@ -57881,7 +57926,7 @@ void Func06BD object#(0x6BD) () {
 	var var000B;
 	var var000C;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = find_nearby(0xFE99, 0x0028, 0x0008);
 		var0001 = UI_get_party_list();
 		var0002 = 0x000A;
@@ -57978,7 +58023,7 @@ void Func06BD object#(0x6BD) () {
 }
 
 void Func06BE object#(0x6BE) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		UI_stop_time(get_item_quality());
 	}
 }
@@ -57993,7 +58038,7 @@ void Func06BF object#(0x6BF) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = UI_get_party_list();
 		var0001 = get_item_quality();
 		for (var0004 in var0000 with var0002 to var0003) {
@@ -58012,7 +58057,7 @@ void Func06C0 object#(0x6C0) () {
 	var var0003;
 	var var0004;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = find_nearby(0x01EE, 0x0063, 0x0000);
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0004 = var0003->get_schedule_type();
@@ -58044,7 +58089,7 @@ void Func06C1 object#(0x6C1) () {
 	var var000F;
 	var var0010;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (gflags[0x0157] && (!gflags[0x0194])) {
 			0xFF0A->remove_npc();
 			var0000 = find_nearby(0x0363, 0x000F, 0x0000);
@@ -58100,7 +58145,7 @@ void Func06C2 object#(0x6C2) () {
 	var var0008;
 	var var0009;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (gflags[0x0057]) {
 			Func080F();
 			var0000 = find_nearby(0x0390, 0x003C, 0x00B0);
@@ -58130,7 +58175,7 @@ extern void Func080F 0x80F ();
 void Func06C3 object#(0x6C3) () {
 	var var0000;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (!gflags[0x0122]) {
 			gflags[0x0122] = true;
 			UI_set_timer(0x0005);
@@ -58145,13 +58190,13 @@ void Func06C3 object#(0x6C3) () {
 }
 
 void Func06C4 object#(0x6C4) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		gflags[0x02B7] = true;
 	}
 }
 
 void Func06C5 object#(0x6C5) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		gflags[0x0097] = true;
 	}
 }
@@ -58159,7 +58204,7 @@ void Func06C5 object#(0x6C5) () {
 extern void Func093F 0x93F (var var0000, var var0001);
 
 void Func06C6 object#(0x6C6) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (gflags[0x0220] && (gflags[0x022B] && (gflags[0x0224] && (gflags[0x022A] && gflags[0x0225])))) {
 			gflags[0x0236] = true;
 		}
@@ -58180,7 +58225,7 @@ void Func06C7 object#(0x6C7) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = [0xFFA3, 0xFFA5, 0xFFAF, 0xFFAE, 0xFFA6];
 		for (var0003 in var0000 with var0001 to var0002) {
 			Func093F(var0003, 0x000B);
@@ -58196,7 +58241,7 @@ void Func06C8 object#(0x6C8) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = [0xFFA8, 0xFFF8, 0xFFAB];
 		for (var0003 in var0000 with var0001 to var0002) {
 			Func093F(var0003, 0x000B);
@@ -58212,7 +58257,7 @@ void Func06C9 object#(0x6C9) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = [0xFFA1, 0xFFA2];
 		for (var0003 in var0000 with var0001 to var0002) {
 			Func093F(var0003, 0x000B);
@@ -58228,7 +58273,7 @@ void Func06CA object#(0x6CA) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = [0xFFA9, 0xFFAA, 0xFFA4];
 		for (var0003 in var0000 with var0001 to var0002) {
 			Func093F(var0003, 0x000B);
@@ -58239,7 +58284,7 @@ void Func06CA object#(0x6CA) () {
 void Func06CB object#(0x6CB) () {
 	var var0000;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = 0x0000;
 	}
 }
@@ -58252,7 +58297,7 @@ void Func06CC object#(0x6CC) () {
 	var var0004;
 	var var0005;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (gflags[0x0005] == 0x0000) {
 			var0000 = get_item_quality();
 			var0001 = UI_get_party_list();
@@ -58289,7 +58334,7 @@ void Func06D0 object#(0x6D0) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = 0x0000;
 		var0001 = 0x0000;
 		Func0810(var0000, var0001);
@@ -58302,7 +58347,7 @@ void Func06D1 object#(0x6D1) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = 0x0000;
 		var0001 = 0x0001;
 		Func0810(var0000, var0001);
@@ -58315,7 +58360,7 @@ void Func06D2 object#(0x6D2) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = 0x0001;
 		var0001 = 0x0000;
 		Func0810(var0000, var0001);
@@ -58328,7 +58373,7 @@ void Func06D3 object#(0x6D3) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = 0x0001;
 		var0001 = 0x0001;
 		Func0810(var0000, var0001);
@@ -58340,7 +58385,7 @@ extern void Func0811 0x811 ();
 void Func06D4 object#(0x6D4) () {
 	var var0000;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (gflags[0x0004] == 0x0000) {
 			var0000 = [0x0258, 0x0508, 0x0001];
 			Func0811();
@@ -58354,7 +58399,7 @@ extern void Func0811 0x811 ();
 void Func06D5 object#(0x6D5) () {
 	var var0000;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (gflags[0x0005] == 0x0000) {
 			var0000 = [0x073F, 0x0B1E, 0x0001];
 			Func0811();
@@ -58377,7 +58422,7 @@ void Func06D6 object#(0x6D6) () {
 	var var0007;
 	var var0008;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = find_nearby(0x03D5, 0x0001, 0x0000);
 		var0001 = [];
 		for (var0004 in var0000 with var0002 to var0003) {
@@ -58398,7 +58443,7 @@ void Func06D6 object#(0x6D6) () {
 extern void Func0940 0x940 (var var0000);
 
 void Func06D7 object#(0x6D7) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (gflags[0x01D4]) {
 			Func0940(0x0005);
 			remove_item();
@@ -58409,7 +58454,7 @@ void Func06D7 object#(0x6D7) () {
 extern void Func0940 0x940 (var var0000);
 
 void Func06D8 object#(0x6D8) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (gflags[0x0157]) {
 			Func0940(0x0003);
 			remove_item();
@@ -58420,7 +58465,7 @@ void Func06D8 object#(0x6D8) () {
 extern void Func0940 0x940 (var var0000);
 
 void Func06D9 object#(0x6D9) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (gflags[0x008E]) {
 			Func0940(0x0004);
 			remove_item();
@@ -58431,7 +58476,7 @@ void Func06D9 object#(0x6D9) () {
 extern void Func0836 0x836 (var var0000, var var0001);
 
 void Func06DA object#(0x6DA) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		Func0836(item, 0xFE99);
 	}
 }
@@ -58439,13 +58484,13 @@ void Func06DA object#(0x6DA) () {
 extern void Func0824 0x824 (var var0000);
 
 void Func06DB object#(0x6DB) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		Func0824(item);
 	}
 }
 
 void Func06DC object#(0x6DC) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		UI_run_endgame(false);
 	}
 }
@@ -58453,7 +58498,7 @@ void Func06DC object#(0x6DC) () {
 extern void Func0836 0x836 (var var0000, var var0001);
 
 void Func06DD object#(0x6DD) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		Func0836(item, 0x0001);
 	}
 }
@@ -58461,7 +58506,7 @@ void Func06DD object#(0x6DD) () {
 extern void Func0836 0x836 (var var0000, var var0001);
 
 void Func06DE object#(0x6DE) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		Func0836(item, 0x0000);
 	}
 }
@@ -58471,7 +58516,7 @@ extern void Func0811 0x811 ();
 void Func06DF object#(0x6DF) () {
 	var var0000;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if ((!gflags[0x0003]) && (0xFE9C->is_readied(0x0006, 0x02F7, 0x0001) || 0xFE9C->is_readied(0x0007, 0x02F7, 0x0001))) {
 			var0000 = [0x0A67, 0x034D, 0x0000];
 			Func0811();
@@ -58488,7 +58533,7 @@ void Func06E0 object#(0x6E0) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (gflags[0x0004]) {
 			var0000 = find_nearby(0x0308, 0x000A, 0x0010);
 			var0000 &= find_nearby(0x0309, 0x000A, 0x0010);
@@ -58504,7 +58549,7 @@ void Func06E1 object#(0x6E1) () {
 	var var0000;
 	var var0001;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (item == 0x0000) {
 			var0000 = [0x0B4C, 0x058C, 0x0000];
 		} else {
@@ -58543,7 +58588,7 @@ void Func06E1 object#(0x6E1) () {
 }
 
 void Func06E2 object#(0x6E2) () {
-	if (event == 0x0003) {
+	if (event == EGG) {
 		0xFF80->get_npc_object()->set_schedule_type(0x0000);
 	}
 }
@@ -58806,11 +58851,11 @@ void Func06F6 object#(0x6F6) () {
 		return;
 	}
 	if (!gflags[0x0330]) {
-		if (event == 0x0001) {
+		if (event == DOUBLECLICK) {
 			UI_close_gumps();
 			item->Func0690();
 		}
-		if (!(event == 0x0002)) {
+		if (!(event == SCRIPTED)) {
 			return;
 		}
 		0xFEDD->show_npc_face(0x0000);
@@ -58967,11 +59012,11 @@ void Func06F6 object#(0x6F6) () {
 		}
 		return;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		item->Func0690();
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (!gflags[0x0313]) {
 			if (!gflags[0x0343]) {
 				var0010 = script 0xFE9C->get_npc_object() {
@@ -59676,7 +59721,7 @@ void Func06F8 object#(0x6F8) () {
 	var var002F;
 	var var0030;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = get_item_quality();
 		do {
 			if (var0000 == 0x0000) {
@@ -59800,7 +59845,7 @@ void Func06F8 object#(0x6F8) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (gflags[0x030C]) {
 			if (!gflags[0x02EE]) {
 				Func08FF("@'Tis sad that Erethian's lust for power has brought him to this evil pass.@");
@@ -60041,7 +60086,7 @@ void Func06F9 object#(0x6F9) () {
 
 	var0000 = false;
 	var0001 = false;
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0002 = get_item_shape();
 		if (var0002 == 0x0356) {
 			goto labelFunc06F9_0025;
@@ -60072,26 +60117,26 @@ void Func06F9 object#(0x6F9) () {
 					}
 				}
 			}
-			event = 0x0004;
+			event = WEAPON;
 			var0003->Func0356();
 		}
 		return;
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 labelFunc06F9_0025:
 		var0000 = [0x0878, 0x0665, 0x0000];
 		var0001 = 0x0004;
 	}
-	if (event == 0x0004) {
+	if (event == WEAPON) {
 labelFunc06F9_0032:
 		var0000 = [0x0890, 0x05FA, 0x0000];
 		var0001 = 0x0000;
 	}
-	if (event == 0x0007) {
+	if (event == BG_PATH_SUCCESS) {
 		var0000 = [0x088B, 0x05CF, 0x0000];
 		var0001 = 0x0006;
 	}
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0008 = get_item_quality();
 		if (var0008 == 0x0001) {
 			if (!gflags[0x0328]) {
@@ -60372,7 +60417,7 @@ extern void Func06FA object#(0x6FA) ();
 void Func06FB object#(0x6FB) () {
 	var var0000;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (get_item_quality() == 0x0064) {
 			if (!gflags[0x02FF]) {
 				gflags[0x02FF] = true;
@@ -60390,7 +60435,7 @@ void Func06FB object#(0x6FB) () {
 			}
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = script 0xFE9C->get_npc_object() {
 			nohalt;
 			finish;
@@ -60426,7 +60471,7 @@ void Func06FC object#(0x6FC) () {
 	var var0011;
 	var var0012;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = UI_click_on_item();
 		var0001 = var0000->get_item_shape();
 		var0002 = false;
@@ -60497,7 +60542,7 @@ void Func06FC object#(0x6FC) () {
 			call Func06FD;
 		};
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		var000B = 0xFE9C->get_npc_object()->find_nearby(0x031D, 0x0050, 0x0000);
 		for (var000E in var000B with var000C to var000D) {
 			var000F = var000E->get_item_quality();
@@ -60542,7 +60587,7 @@ void Func06FD object#(0x6FD) () {
 	var var000D;
 	var var000E;
 
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0000 = false;
 		var0001 = false;
 		var0002 = 0xFE9C->get_npc_object()->find_nearby(0x031D, 0x0050, 0x0000);
@@ -60699,7 +60744,7 @@ void Func070A object#(0x70A) () {
 	var var002C;
 	var var002D;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		if (!get_item_quality()) {
 			if (!gflags[0x033B]) {
 				gflags[0x033B] = true;
@@ -60791,7 +60836,7 @@ void Func070A object#(0x70A) () {
 			remove_item();
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		if (get_item_shape() == 0x009A) {
 			var001A = get_object_position() & (0x00C8 & 0x0006);
 			var0003 = var001A->find_nearby(0x0113, 0x0014, 0x0010);
@@ -61405,7 +61450,7 @@ void Func0710 object#(0x710) () {
 	var var0013;
 	var var0014;
 
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		var0000 = find_nearby(0x03F7, 0x0028, 0x0008);
 		var0001 = false;
@@ -61464,7 +61509,7 @@ void Func0710 object#(0x710) () {
 			};
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		gflags[0x031C] = true;
 		var0010 = get_object_position();
 		Func08E6(item);
@@ -61494,7 +61539,7 @@ void Func0712 object#(0x712) () {
 	var var0002;
 	var var0003;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = UI_find_nearby_avatar(0x01F9);
 		var0000 &= UI_find_nearby_avatar(0x03CA);
 		if (var0000) {
@@ -61515,7 +61560,7 @@ void Func0713 object#(0x713) () {
 	var var0005;
 
 	var0000 = item;
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0001 = var0000->get_object_position();
 		UI_sprite_effect(0x000C, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_play_sound_effect(0x003E);
@@ -61571,7 +61616,7 @@ void Func0714 object#(0x714) () {
 			var0006 = var0002;
 		}
 	}
-	if (event == 0x0002) {
+	if (event == SCRIPTED) {
 		var0007 = false;
 		var0008 = Func0814();
 		for (var000B in var0008 with var0009 to var000A) {
@@ -62246,7 +62291,7 @@ void Func080F 0x80F () {
 	var var0009;
 	var var000A;
 
-	if (event == 0x0003) {
+	if (event == EGG) {
 		var0000 = find_nearby(0x0363, 0x000F, 0x0000);
 		var0001 = find_nearby(0x0152, 0x000F, 0x0000);
 		var0002 = find_nearby(0x0150, 0x000F, 0x0000);
@@ -63965,7 +64010,7 @@ void Func083E 0x83E (var var0000, var var0001) {
 		if (var0000->in_usecode()) {
 			return;
 		}
-		Func0828(var0000, 0xFFFE, 0xFFFE, 0xFFFF, Func0631, var0000, 0x0007);
+		Func0828(var0000, 0xFFFE, 0xFFFE, 0xFFFF, Func0631, var0000, BG_PATH_SUCCESS);
 	}
 	if (var0001 == 0x0002) {
 		var0002 = get_item_quality();
@@ -68792,7 +68837,7 @@ void Func0892 0x892 () {
 	}
 labelFunc0892_00CA:
 	if (gflags[0x0328] && (!gflags[0x0327])) {
-		event = 0x0007;
+		event = BG_PATH_SUCCESS;
 		var0000->Func06F9();
 		abort;
 	}
@@ -68830,7 +68875,7 @@ void Func0894 0x894 (var var0000) {
 	if (gflags[0x031B]) {
 		var0000->set_schedule_type(0x000B);
 	}
-	if (event == 0x0001) {
+	if (event == DOUBLECLICK) {
 		0xFEDF->show_npc_face(0x0000);
 		if (gflags[0x0324] && (!gflags[0x031C])) {
 			say("\"I -must- return his life to him. He -will- have a new heart!\" The determination is quite evident by his forceful glare and stance.");
@@ -70825,7 +70870,7 @@ void Func08B2 0x8B2 () {
 				". I hope that thou farest well in thy quest.\" He turns away.*");
 			abort;
 	}
-	if (event == 0x0000) {
+	if (event == PROXIMITY) {
 		abort;
 	}
 }
