@@ -12,6 +12,67 @@ enum directions : byte {
 	NORTHWEST	= 0x37
 };
 
+enum item_flags {
+	INVISIBLE			= 0,
+	ASLEEP				= 1,
+	CHARMED				= 2,
+	CURSED				= 3,
+	DEAD				= 4,
+	UNKNOWN_FLAG_05		= 5,
+	IN_PARTY			= 6,
+	PARALYZED			= 7,
+	PARALYSED			= 7,		//British spelling
+	POISONED			= 8,
+	PROTECTION			= 9,
+	ON_MOVING_BARGE		= 10,
+	OKAY_TO_TAKE		= 11,		// The item does not belong to anyone, and won't
+									// trigger stealing behaviour if you take it.
+	MIGHT				= 12,		// Double strength, dext, intel.
+	IMMUNITIES			= 13,		// Lots of immunities; can be gotten only.
+	CANT_DIE			= 14,		// Test flag in monster_info.
+	IN_ACTION			= 15,		// If the NPC is doing something. Set by "Dance" spell in BG.
+	DONT_MOVE			= 16,		// SI-only. NPC can't move; "cutscene" mode.
+	DONT_RENDER			= 16,		// BG-only. Like DONT_MOVE, but avatar also
+									// completely invisible.
+	UNKNOWN_FLAG_17		= 17,
+	TEMPORARY			= 18,		// Is temporary - this means that the item will
+									// be deleted once the party gets beyond a certain
+									// range from it (outside the superchunk?)
+	ACTIVE_SAILOR		= 20,		// The barge's 'captain'. When getting the flag,
+									// you will actually get the current captain.
+	OKAY_TO_LAND		= 21,		// Used for flying-carpet.
+	BG_DONT_MOVE		= 22,		// BG-only. NPC can't move; "cutscene" mode.
+	SI_DONT_RENDER		= 22,		// SI-only. Like DONT_MOVE, but avatar also
+									// completely invisible.
+	IN_DUNGEON			= 23,		// If set, you won't be accused of stealing.
+	IS_SOLID			= 24,		// Used by gangplank usecode to determine if an object is solid.
+	CONFUSED			= 25,
+	ACTIVE_BARGE		= 26,		// Object is a barge object moving, or on a barge
+									// object that is moving. Set in usecode, and mostly
+									// used for the SI 'NPC' ships such as the turtle.
+	UNKNOWN_FLAG_27		= 27,
+	MET					= 28,		// Has the npc been met before - originally this
+									// was SI-only, but Exult implements it for BG
+									// too. This determines conversation behaviour,
+									// and whether the NPC's real name or shape name
+									// is displayed when they are single-clicked on.
+									// BG originally used global flags for this, which
+									// amounts to an extra 250-odd flags.
+	SI_TOURNAMENT		= 29,		// Call usecode (eventid = 7) on death
+	SI_ZOMBIE			= 30,		// Used for sick Neyobi, Cantra, post-Bane companions.
+
+	NO_SPELL_CASTING	= 31,
+	POLYMORPH			= 32,		// Do not set this flag directly; use the
+									// UI_set_polymorph intrinsic instead.
+	TATTOOED			= 33,
+	READ				= 34,		// Can read non-Latin alphabet scrolls, books, signs.
+	ISPETRA				= 35,
+	CAN_FLY				= 36,
+	FREEZE				= 37,
+	NAKED				= 38 		// Exult. Makes the avatar naked given its skin.
+									// Other NPCs should use set_polymorph instead.
+};
+
 extern void Func094A 0x94A (var var0000);
 extern var Func0910 0x910 (var var0000);
 
@@ -20,7 +81,7 @@ void Func0096 shape#(0x96) () {
 		if (gflags[0x01CB]) {
 			abort;
 		}
-		if (get_item_flag(0x000A)) {
+		if (get_item_flag(ON_MOVING_BARGE)) {
 			Func094A("@The sails must be furled before the planks are raised.@");
 		} else if (!Func0910(item)) {
 			Func094A("@I believe the gangplank is blocked.@");
@@ -67,7 +128,7 @@ void Func00A0 shape#(0xA0) () {
 		if (gflags[0x0004]) {
 			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, 0xFFF3, 0xFFD8, 0xFFEA, 0xFFE8, 0xFFE9, 0xFFE2, 0xFFE0, 0xFFE3, 0xFFE5, 0xFFEE, 0xFFEC, 0xFFD6, 0xFFD5, 0xFFEB, 0xFFF0, 0xFFF2, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
-				if ((var0003->get_schedule_type() != 0x000F) && (!var0003->get_item_flag(0x0004))) {
+				if ((var0003->get_schedule_type() != 0x000F) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
 					UI_error_message("His current activity is #" + var0003->get_schedule_type());
 					UI_error_message("Save game, and report to Brendann NOW!");
@@ -204,8 +265,8 @@ void Func00D2 shape#(0xD2) () {
 		if (UI_die_roll(0x0001, 0x0004) > 0x0001) {
 			var0002 = UI_create_new_object(0x0179);
 			if (var0002) {
-				var0002->set_item_flag(0x0012);
-				var0002->clear_item_flag(0x000B);
+				var0002->set_item_flag(TEMPORARY);
+				var0002->clear_item_flag(OKAY_TO_TAKE);
 				var0002->set_item_frame(0x0018);
 				var0003 = get_object_position();
 				var0004 = var0003[0x0001] - UI_die_roll(0x0000, 0x0001);
@@ -343,14 +404,14 @@ void Func00E4 shape#(0xE4) () {
 	var0001 = Func0954();
 	if (var0000 == 0x000E) {
 		if ((event == 0x0007) && (!gflags[0x00C9])) {
-			clear_item_flag(0x001D);
+			clear_item_flag(SI_TOURNAMENT);
 			reduce_health(0x0032, 0x0000);
 			gflags[0x00C9] = true;
 			abort;
 		}
-		if (get_item_flag(0x0000)) {
+		if (get_item_flag(INVISIBLE)) {
 			UI_play_sound_effect(0x0030);
-			clear_item_flag(0x0000);
+			clear_item_flag(INVISIBLE);
 			var0002 = script item after UI_get_random(0x0006) ticks {
 				nohalt;
 				call Func00E4;
@@ -359,7 +420,7 @@ void Func00E4 shape#(0xE4) () {
 			UI_play_sound_effect(0x0039);
 			var0003 = get_object_position();
 			UI_sprite_effect(0x0009, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-			set_item_flag(0x0000);
+			set_item_flag(INVISIBLE);
 			var0002 = script item after 2 ticks {
 				nohalt;
 				call Func00E4;
@@ -501,7 +562,7 @@ void Func00E4 shape#(0xE4) () {
 	if ((event == 0x0009) && (var0000 == 0x0003)) {
 		set_schedule_type(0x0009);
 		0xFEED->show_npc_face0(0x0000);
-		if (!0xFFBB->get_item_flag(0x001C)) {
+		if (!0xFFBB->get_item_flag(MET)) {
 			say("\"I will not discuss matters with a stranger to Monitor. Thou shouldst speak with Lord Marsten.\"");
 		} else if (!gflags[0x0048]) {
 			say("\"Thou art not a Knight. Only warriors are welcome here. Move along before thou dost feel the cold steel of mine halberd.\"");
@@ -701,7 +762,7 @@ void Func00E4 shape#(0xE4) () {
 	if ((event == 0x0009) && (var0000 == 0x0009)) {
 labelFunc00E4_0956:
 		clear_item_say();
-		if (0xFE9C->get_item_flag(0x0000)) {
+		if (0xFE9C->get_item_flag(INVISIBLE)) {
 			item_say("@What!!?@");
 			Func097F(item, "@Who said that?!@", 0x0008);
 			abort;
@@ -751,14 +812,14 @@ labelFunc00E4_0956:
 		var0018 = var0018->get_npc_object();
 		var000A = var0018->get_object_position();
 		var0015 = get_object_position();
-		if ((var0018->get_distance(item) > 0x0008) || ((var000A[0x0003] != var0015[0x0003]) || var0018->get_item_flag(0x0000))) {
+		if ((var0018->get_distance(item) > 0x0008) || ((var000A[0x0003] != var0015[0x0003]) || var0018->get_item_flag(INVISIBLE))) {
 			say("\"Where is he, anyway? Tell him to step forward before bothering me again.\"");
 			return;
 		}
 		var0014 = [0xFFC1, 0xFFB9, 0xFFB1];
 		for (var0001 in var0014 with var0019 to var001A) {
 			if ((UI_game_hour() > 0x0008) && (UI_game_hour() < 0x000C)) {
-				if ((!Func0932(var0001)) && (!var0001->get_item_flag(0x0004))) {
+				if ((!Func0932(var0001)) && (!var0001->get_item_flag(DEAD))) {
 					var0001->move_object([0x03D4, 0x0A8C, 0x0000]);
 				}
 			}
@@ -766,13 +827,13 @@ labelFunc00E4_0956:
 		var0014 = [0xFFB6, 0xFFB1];
 		for (var0001 in var0014 with var001B to var001C) {
 			if ((UI_game_hour() > 0x000B) && (UI_game_hour() < 0x000F)) {
-				if ((!Func0932(var0001)) && (!var0001->get_item_flag(0x0004))) {
+				if ((!Func0932(var0001)) && (!var0001->get_item_flag(DEAD))) {
 					var0001->move_object([0x03D4, 0x0A8C, 0x0000]);
 				}
 			}
 		}
 		if ((UI_game_hour() > 0x000E) && (UI_game_hour() < 0x0012)) {
-			if ((!Func0932(0xFF6A)) && (!var0001->get_item_flag(0x0004))) {
+			if ((!Func0932(0xFF6A)) && (!var0001->get_item_flag(DEAD))) {
 				0xFF6A->move_object([0x03D4, 0x0A8C, 0x0000]);
 			}
 		}
@@ -887,7 +948,7 @@ void Func00E6 shape#(0xE6) () {
 	var var001F;
 	var var0020;
 
-	var0000 = 0xFFEC->get_item_flag(0x001C);
+	var0000 = 0xFFEC->get_item_flag(MET);
 	var0001 = Func0954();
 	var0002 = UI_is_pc_female();
 	var0003 = Func0953();
@@ -1342,7 +1403,7 @@ void Func00E6 shape#(0xE6) () {
 			var000E = UI_create_new_object(0x011D);
 			if (var000E) {
 				var000E->set_item_frame(0x0005);
-				var000E->clear_item_flag(0x0012);
+				var000E->clear_item_flag(TEMPORARY);
 				var000E = UI_update_last_created([0x097F, 0x0744, 0x0002]);
 			}
 			UI_init_conversation();
@@ -1462,14 +1523,14 @@ void Func00E6 shape#(0xE6) () {
 		Func09AC(0xFFEC, 0xFFFF, 0x0000, 0x000A);
 		0xFFEB->set_new_schedules(0x0000, 0x000A, [0x0986, 0x0766]);
 		0xFFEB->run_schedule();
-		0xFFEB->clear_item_flag(0x0001);
+		0xFFEB->clear_item_flag(ASLEEP);
 		Func097F(0xFFEB, "@Tar gorlfog!@", 0x0003);
 		if ((var000C < 0x000F) && ((!0xFFFD->npc_nearby()) && ((!0xFFFF->npc_nearby()) && ((!0xFFFE->npc_nearby()) && (!0xFFDE->npc_nearby()))))) {
 			say("\"I am so glad that thou hast agreed to meet me here.\"");
 			UI_play_music(0x001F, Func09A0(0x0005, 0x0001));
 			0xFFEC->set_npc_id(0x0001);
 			UI_end_conversation();
-			0xFE9C->set_item_flag(0x0010);
+			0xFE9C->set_item_flag(DONT_MOVE);
 			var000E = script 0xFFEC {
 				nohalt;
 				call Func00E6;
@@ -1483,7 +1544,7 @@ void Func00E6 shape#(0xE6) () {
 			say("\"But this matter of the spells, it must be discussed in private. Only Mages may hear the secrets which I am about to reveal.\"");
 			say("\"Wouldst thou please ask thy minions to depart?\"");
 			if (Func0955()) {
-				0xFE9C->set_item_flag(0x0010);
+				0xFE9C->set_item_flag(DONT_MOVE);
 				UI_play_music(0x001F, Func09A0(0x0005, 0x0001));
 				var0016 = Func0992(0x0001, "@Um, I think I will wait outside...@", 0x0000, false);
 				UI_end_conversation();
@@ -1500,7 +1561,7 @@ void Func00E6 shape#(0xE6) () {
 				var0017 = Func0988(0xFFE6, var0017);
 				var0017 = Func0988(0xFF58, var0017);
 				for (var000F in var0017 with var001A to var001B) {
-					if (var000F->get_item_flag(0x0006)) {
+					if (var000F->get_item_flag(IN_PARTY)) {
 						var000F->remove_from_party();
 					}
 					var000F->set_new_schedules(0x0000, 0x000A, var0009);
@@ -1521,7 +1582,7 @@ void Func00E6 shape#(0xE6) () {
 		}
 		say("\"But we must wait, darling, until we are alone...\"");
 		UI_end_conversation();
-		0xFE9C->set_item_flag(0x0010);
+		0xFE9C->set_item_flag(DONT_MOVE);
 		Func097F(0xFFEC, "@Wait...@", 0x0000);
 		var000E = Func098D();
 		var0017 = [];
@@ -1536,7 +1597,7 @@ void Func00E6 shape#(0xE6) () {
 		var0017 = Func0988(0xFFE6, var0017);
 		var0017 = Func0988(0xFF58, var0017);
 		for (var000F in var0017 with var001E to var001F) {
-			if (var000F->get_item_flag(0x0006)) {
+			if (var000F->get_item_flag(IN_PARTY)) {
 				var000F->remove_from_party();
 			}
 			var000F->set_new_schedules(0x0000, 0x000A, var0009);
@@ -1687,7 +1748,7 @@ void Func00E6 shape#(0xE6) () {
 			if (var000E) {
 				var000E->set_item_frame(0x0000);
 				var000E->set_schedule_type(0x0011);
-				var000E->clear_item_flag(0x0012);
+				var000E->clear_item_flag(TEMPORARY);
 			}
 			0xFFEC->set_schedule_type(0x000F);
 			abort;
@@ -1986,7 +2047,7 @@ void Func00FA shape#(0xFA) () {
 			while (var0004 == get_item_quality()) {
 				var0004 = UI_get_random(0x0009);
 			}
-			if (gflags[0x00D4] && (gflags[0x00D5] && (gflags[0x00D3] && ((!0xFFFE->get_item_flag(0x001E)) && ((!0xFFFD->get_item_flag(0x001E)) && ((!0xFFFF->get_item_flag(0x001E)) && (!0xFF29->get_item_flag(0x001C)))))))) {
+			if (gflags[0x00D4] && (gflags[0x00D5] && (gflags[0x00D3] && ((!0xFFFE->get_item_flag(SI_ZOMBIE)) && ((!0xFFFD->get_item_flag(SI_ZOMBIE)) && ((!0xFFFF->get_item_flag(SI_ZOMBIE)) && (!0xFF29->get_item_flag(MET)))))))) {
 				var0004 = 0x000A;
 			}
 			var0005 = set_item_quality(var0004);
@@ -2075,7 +2136,7 @@ void Func00FB shape#(0xFB) () {
 		if (!(item in var0001)) {
 			var0001 &= item;
 		}
-		if (!0xFE9C->get_item_flag(0x000A)) {
+		if (!0xFE9C->get_item_flag(ON_MOVING_BARGE)) {
 			var0002 = get_item_quality();
 			var0003 = 0xFE9B->count_objects(0x031D, var0002, 0xFE99);
 			if (((!var0003) && (!gflags[0x0005])) && (!((var0002 == 0x0001) && gflags[0x00EC]))) {
@@ -2090,13 +2151,13 @@ void Func00FB shape#(0xFB) () {
 				Func0918(item);
 			} else {
 				var0004 = Func08E7(var0000[0x0001]);
-				set_item_flag(0x0014);
+				set_item_flag(ACTIVE_SAILOR);
 			}
 		} else {
-			clear_item_flag(0x0014);
+			clear_item_flag(ACTIVE_SAILOR);
 			Func0917(var0001, 0x0000);
-			clear_item_flag(0x000A);
-			clear_item_flag(0x001A);
+			clear_item_flag(ON_MOVING_BARGE);
+			clear_item_flag(ACTIVE_BARGE);
 		}
 	}
 }
@@ -2160,7 +2221,7 @@ void Func0103 shape#(0x103) () {
 	var0004 = Func0953();
 	var0005 = false;
 	if ((event == 0x0007) && (var0001 == 0x0001)) {
-		clear_item_flag(0x001D);
+		clear_item_flag(SI_TOURNAMENT);
 		reduce_health(0x0032, 0x0000);
 		gflags[0x0120] = true;
 	}
@@ -2208,7 +2269,7 @@ void Func0103 shape#(0x103) () {
 			if (gflags[0x0118] && (!gflags[0x029C])) {
 				add("mystery shield");
 			}
-			if (gflags[0x00EA] && (!0xFFE1->get_item_flag(0x0004))) {
+			if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
 				add("kidnap");
 			}
 			converse (["Ranger", "bye"]) {
@@ -2359,7 +2420,7 @@ void Func0103 shape#(0x103) () {
 			if (gflags[0x0118] && (!gflags[0x029C])) {
 				add("mystery shield");
 			}
-			if (gflags[0x00EA] && (!0xFFE1->get_item_flag(0x0004))) {
+			if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
 				add("kidnap");
 			}
 			converse (["Ranger", "bye"]) {
@@ -2543,8 +2604,8 @@ void Func0105 shape#(0x105) () {
 		}
 		var0003 = UI_create_new_object(0x0353);
 		if (var0003) {
-			var0003->set_item_flag(0x0012);
-			var0003->set_item_flag(0x000B);
+			var0003->set_item_flag(TEMPORARY);
+			var0003->set_item_flag(OKAY_TO_TAKE);
 			var0003->set_item_frame(UI_die_roll(0x0000, 0x0004));
 			var0004 = get_object_position();
 			var0004[0x0001] += 0x0001;
@@ -2608,7 +2669,7 @@ void Func0109 shape#(0x109) () {
 				}
 			}
 			if (0xFF31->get_npc_id() == 0x0008) {
-				0xFE9C->clear_item_flag(0x0010);
+				0xFE9C->clear_item_flag(DONT_MOVE);
 				0xFF31->set_npc_id(0x0000);
 				UI_set_weather(0x0000);
 				0xFF29->set_schedule_type(0x0003);
@@ -2691,7 +2752,7 @@ void Func0109 shape#(0x109) () {
 			if (0xFF31->get_npc_id() == 0x0001) {
 				UI_set_weather(0x0003);
 				UI_play_music(0x0041, var0001);
-				0xFE9C->set_item_flag(0x0010);
+				0xFE9C->set_item_flag(DONT_MOVE);
 				0xFF31->item_say("@Long have we waited...@");
 				var000A = "@No more!@";
 				var0008 = script Func09A0(0x0005, 0x0003) after 10 ticks {
@@ -2731,7 +2792,7 @@ void Func0109 shape#(0x109) () {
 			UI_remove_npc_face1();
 			UI_remove_npc_face0();
 			UI_end_conversation();
-			0xFE9C->set_item_flag(0x0010);
+			0xFE9C->set_item_flag(DONT_MOVE);
 			var0008 = script 0xFF2D {
 				nohalt;
 				face NORTH;
@@ -2766,7 +2827,7 @@ void Func0109 shape#(0x109) () {
 			while (var0011 <= 0x0007) {
 				var0012 = UI_create_new_object(0x025F);
 				if (var0012) {
-					var0012->clear_item_flag(0x0012);
+					var0012->clear_item_flag(TEMPORARY);
 					var0008 = UI_update_last_created([(var000D[0x0001] + var000F[var0011]), (var000D[0x0002] + var0010[var0011]), 0x0000]);
 				}
 				var0011 += 0x0001;
@@ -2859,7 +2920,7 @@ void Func010E shape#(0x10E) () {
 	if (var0000 == 0x0005) {
 		UI_play_music(0x0029, Func09A0(0x0005, 0x0001));
 		var0004 = get_distance(0xFE9C);
-		0xFE9C->set_item_flag(0x0010);
+		0xFE9C->set_item_flag(DONT_MOVE);
 		var0005 = get_object_position();
 		var0005[0x0001] -= 0x0002;
 		var0005[0x0002] += 0x0003;
@@ -2887,7 +2948,7 @@ void Func0112 shape#(0x112) () {
 	var var0008;
 
 	if (gflags[0x0004]) {
-		clear_item_flag(0x001D);
+		clear_item_flag(SI_TOURNAMENT);
 		var0000 = script item {
 			nohalt;
 			hit 100, normal_damage;
@@ -3076,7 +3137,7 @@ void Func0124 shape#(0x124) () {
 			UI_lightning();
 			var0007 = UI_create_new_object(0x037F);
 			if (var0007) {
-				var0007->set_item_flag(0x0012);
+				var0007->set_item_flag(TEMPORARY);
 				var0001 = UI_update_last_created(var0005);
 			}
 			abort;
@@ -3146,10 +3207,10 @@ void Func0128 shape#(0x128) () {
 			}
 		}
 		if (event == 0x0005) {
-			var0001->set_item_flag(0x0000);
+			var0001->set_item_flag(INVISIBLE);
 		}
 		if (event == 0x0006) {
-			var0001->clear_item_flag(0x0000);
+			var0001->clear_item_flag(INVISIBLE);
 		}
 	}
 	if (var0000 == 0x0001) {
@@ -3236,16 +3297,16 @@ void Func012E shape#(0x12E) () {
 
 	if (event == 0x0007) {
 		if (get_npc_id() == 0x000F) {
-			clear_item_flag(0x001D);
+			clear_item_flag(SI_TOURNAMENT);
 		}
 		if (get_npc_id() == 0x0010) {
-			clear_item_flag(0x001D);
+			clear_item_flag(SI_TOURNAMENT);
 		}
 		if (get_npc_id() == 0x0011) {
-			clear_item_flag(0x001D);
+			clear_item_flag(SI_TOURNAMENT);
 		}
 		if (get_npc_id() == 0x0012) {
-			clear_item_flag(0x001D);
+			clear_item_flag(SI_TOURNAMENT);
 		}
 	}
 	if (event == 0x0001) {
@@ -3404,7 +3465,7 @@ void Func013D shape#(0x13D) () {
 			nohalt;
 			call Func0636;
 		};
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		UI_init_conversation();
 		set_npc_id(0x0000);
 		0xFEFA->set_npc_id(0x0000);
@@ -3429,10 +3490,10 @@ void Func013D shape#(0x13D) () {
 				set_schedule_type(0x000F);
 				0xFE9C->set_opponent(0x0001);
 				move_object([0x008E, 0x002E, 0x0000]);
-				0xFFFE->clear_item_flag(0x0004);
+				0xFFFE->clear_item_flag(DEAD);
 				0xFFFE->move_object(var0004);
-				0xFFFE->set_item_flag(0x001E);
-				0xFFFE->clear_item_flag(0x001D);
+				0xFFFE->set_item_flag(SI_ZOMBIE);
+				0xFFFE->clear_item_flag(SI_TOURNAMENT);
 				0xFFFE->reduce_health(0x0037, 0x0000);
 				gflags[0x00D0] = true;
 				gflags[0x00D4] = true;
@@ -3499,8 +3560,8 @@ void Func013E shape#(0x13E) () {
 				say "@Thou art no match for me!@";
 			};
 			UI_remove_npc_face0();
-			0xFE9C->set_item_flag(0x001D);
-			var0003->set_item_flag(0x001D);
+			0xFE9C->set_item_flag(SI_TOURNAMENT);
+			var0003->set_item_flag(SI_TOURNAMENT);
 			var0004 = var0003->set_npc_prop(0x0004, 0x000A);
 			var0004 = var0003->set_npc_prop(0x0002, 0x000A);
 			var0004 = var0003->set_npc_prop(0x0000, 0x000A);
@@ -3550,7 +3611,7 @@ void Func013E shape#(0x13E) () {
 				call Func0377;
 			};
 		}
-		if ((event == 0x0007) && (!get_item_flag(0x001E))) {
+		if ((event == 0x0007) && (!get_item_flag(SI_ZOMBIE))) {
 			Func097F(item, "@At last...@", 0x0000);
 			item->Func07D2();
 			item->Func07D1();
@@ -3559,18 +3620,18 @@ void Func013E shape#(0x13E) () {
 				nohalt;
 				call Func013E;
 			};
-			set_item_flag(0x001E);
+			set_item_flag(SI_ZOMBIE);
 		}
 		if (event == 0x0000) {
 			if (var0007 == 0x0000) {
-				0xFFC0->set_item_flag(0x0004);
+				0xFFC0->set_item_flag(DEAD);
 				var0009 = find_nearby(0x0178, 0x0005, 0x0000);
 				if (var0009) {
 					var000A = var0009->get_item_frame() - 0x0001;
 					var0009->set_item_frame(var000A);
 				}
 				set_npc_id(0x0001);
-			} else if ((0xFE9C->get_distance(item) < 0x000C) && (!get_item_flag(0x001E))) {
+			} else if ((0xFE9C->get_distance(item) < 0x000C) && (!get_item_flag(SI_ZOMBIE))) {
 				Func097F(item, "@At last...@", 0x0000);
 				0xFE9C->Func07D2();
 				item->Func07D1();
@@ -3579,7 +3640,7 @@ void Func013E shape#(0x13E) () {
 					nohalt;
 					call Func013E;
 				};
-				set_item_flag(0x001E);
+				set_item_flag(SI_ZOMBIE);
 			}
 		}
 	}
@@ -3686,7 +3747,7 @@ void Func013E shape#(0x13E) () {
 			nohalt;
 			call Func0636;
 		};
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		UI_init_conversation();
 		set_npc_id(0x0000);
 		gflags[0x0250] = true;
@@ -3769,7 +3830,7 @@ void Func0146 shape#(0x146) () {
 		}
 		UI_play_sound_effect2(0x0024, item);
 		if (var0003 == 0x0001) {
-			var0004->set_item_flag(0x0001);
+			var0004->set_item_flag(ASLEEP);
 		}
 		if (var0003 == 0x0002) {
 			var0005 = UI_die_roll(0x0001, 0x000A);
@@ -3777,26 +3838,26 @@ void Func0146 shape#(0x146) () {
 			Func0976(var0004, var0006);
 		}
 		if (var0003 == 0x0003) {
-			var0004->clear_item_flag(0x0008);
-			var0004->clear_item_flag(0x0007);
-			var0004->clear_item_flag(0x0001);
-			var0004->clear_item_flag(0x0002);
-			var0004->clear_item_flag(0x0003);
+			var0004->clear_item_flag(POISONED);
+			var0004->clear_item_flag(PARALYZED);
+			var0004->clear_item_flag(ASLEEP);
+			var0004->clear_item_flag(CHARMED);
+			var0004->clear_item_flag(CURSED);
 		}
 		if (var0003 == 0x0004) {
-			var0004->set_item_flag(0x0008);
+			var0004->set_item_flag(POISONED);
 		}
 		if (var0003 == 0x0005) {
-			var0004->clear_item_flag(0x0001);
+			var0004->clear_item_flag(ASLEEP);
 		}
 		if (var0003 == 0x0006) {
-			var0004->set_item_flag(0x0009);
+			var0004->set_item_flag(PROTECTION);
 		}
 		if (var0003 == 0x0007) {
 			UI_cause_light(0x0064);
 		}
 		if (var0003 == 0x0008) {
-			var0004->set_item_flag(0x0000);
+			var0004->set_item_flag(INVISIBLE);
 		}
 	}
 }
@@ -4023,7 +4084,7 @@ void Func0151 shape#(0x151) () {
 			if (var0012) {
 				var0012->set_item_frame(0x0000);
 				var0014 = var0012->set_item_quality(0x004B);
-				var0012->clear_item_flag(0x0012);
+				var0012->clear_item_flag(TEMPORARY);
 				var000C = UI_update_last_created(var0013);
 			}
 			var000C = script item {
@@ -4134,7 +4195,7 @@ labelFunc0151_0462:
 
 			case "spy" (remove):
 				say("\"One sent by the Soldiers of Order, to break our wills and stop the Ode to Chaos. Why else dost thou listen so attentively?\"");
-				if (!0xFEDA->get_item_flag(0x0004)) {
+				if (!0xFEDA->get_item_flag(DEAD)) {
 					say("\"I predict this: I see thee lying dead at the feet of one who prowls this labyrinth.\"");
 					if (!Func097D(0xFE9B, 0x0001, 0x00E7, 0xFE99, 0xFE99)) {
 						say("\"Thou hast not the weapon to defeat him! His powers overwhelm thee, and thou dost die!\"");
@@ -4259,33 +4320,33 @@ void Func0154 shape#(0x154) () {
 		if (var0003) {
 			UI_play_sound_effect(0x0039);
 			if (var0001 == 0x0000) {
-				var0002->set_item_flag(0x0001);
+				var0002->set_item_flag(ASLEEP);
 			}
 			if (var0001 == 0x0001) {
 				var0004 = UI_die_roll(0x0003, 0x000C);
 				Func0976(var0002, var0004);
 			}
 			if (var0001 == 0x0002) {
-				var0002->clear_item_flag(0x0008);
-				var0002->clear_item_flag(0x0007);
-				var0002->clear_item_flag(0x0001);
-				var0002->clear_item_flag(0x0002);
-				var0002->clear_item_flag(0x0003);
+				var0002->clear_item_flag(POISONED);
+				var0002->clear_item_flag(PARALYZED);
+				var0002->clear_item_flag(ASLEEP);
+				var0002->clear_item_flag(CHARMED);
+				var0002->clear_item_flag(CURSED);
 			}
 			if (var0001 == 0x0003) {
-				var0002->set_item_flag(0x0008);
+				var0002->set_item_flag(POISONED);
 			}
 			if (var0001 == 0x0004) {
-				var0002->clear_item_flag(0x0001);
+				var0002->clear_item_flag(ASLEEP);
 			}
 			if (var0001 == 0x0005) {
-				var0002->set_item_flag(0x0009);
+				var0002->set_item_flag(PROTECTION);
 			}
 			if (var0001 == 0x0006) {
 				UI_cause_light(0x00C8);
 			}
 			if (var0001 == 0x0007) {
-				var0002->set_item_flag(0x0000);
+				var0002->set_item_flag(INVISIBLE);
 			}
 			if (var0001 == 0x0008) {
 				if (var0002 == 0xFE9C->get_npc_object()) {
@@ -4311,7 +4372,7 @@ void Func0154 shape#(0x154) () {
 		var0008 = Func0992(0x0001, (("@Please, " + Func0954()) + ", waste them not!@"), 0x0000, false);
 		var000A = UI_create_new_object(0x0390);
 		if (var000A) {
-			var000A->set_item_flag(0x0012);
+			var000A->set_item_flag(TEMPORARY);
 			var000A->set_item_frame(UI_die_roll(0x0004, 0x0017));
 			var0007 = UI_update_last_created(var0009);
 		}
@@ -4333,9 +4394,9 @@ void Func0162 shape#(0x162) () {
 		Func097F(item, "@What doing here?@", 0x0003);
 		set_schedule_type(0x0003);
 	}
-	if (((event == 0x0009) || (event == 0x0007)) && (!get_item_flag(0x001E))) {
+	if (((event == 0x0009) || (event == 0x0007)) && (!get_item_flag(SI_ZOMBIE))) {
 		var0000 = set_npc_prop(0x0003, 0x001E);
-		set_item_flag(0x001E);
+		set_item_flag(SI_ZOMBIE);
 		clear_item_say();
 		set_schedule_type(0x0000);
 		0xFEF2->show_npc_face0(0x0000);
@@ -4383,8 +4444,8 @@ void Func0162 shape#(0x162) () {
 				Func0856();
 		}
 	}
-	if ((event == 0x0007) && get_item_flag(0x001E)) {
-		clear_item_flag(0x001D);
+	if ((event == 0x0007) && get_item_flag(SI_ZOMBIE)) {
+		clear_item_flag(SI_TOURNAMENT);
 		Func097F(item, "@Thou hast slain me...@", 0x0000);
 		reduce_health(0x0037, 0x0000);
 	}
@@ -4462,7 +4523,7 @@ void Func0175 shape#(0x175) () {
 				var0002 = UI_update_last_created(var0001);
 			}
 			remove_item();
-			0xFE9C->clear_item_flag(0x0010);
+			0xFE9C->clear_item_flag(DONT_MOVE);
 			UI_init_conversation();
 			abort;
 		} else {
@@ -4552,7 +4613,7 @@ void Func0175 shape#(0x175) () {
 				if (Func0955()) {
 					UI_play_music(0x0032, Func09A0(0x0005, 0x0001));
 					say("\"I must go now -- into the Void! My blessings are given to thee, Hero from Another World!\"");
-					0xFE9C->set_item_flag(0x0010);
+					0xFE9C->set_item_flag(DONT_MOVE);
 					UI_end_conversation();
 					set_schedule_type(0x000F);
 					var0002 = script item after 8 ticks {
@@ -4654,7 +4715,7 @@ void Func0178 shape#(0x178) () {
 			UI_play_music(0x0018, Func09A0(0x0005, 0x0001));
 		}
 		var0007 = get_distance(0xFE9C);
-		0xFE9C->set_item_flag(0x0010);
+		0xFE9C->set_item_flag(DONT_MOVE);
 		var0004[0x0001] += var0006;
 		var0004[0x0002] -= 0x0003;
 		0xFE9C->si_path_run_usecode(var0004, 0x000A, item, Func07F6, true);
@@ -4916,7 +4977,7 @@ void Func017D shape#(0x17D) () {
 		}
 		UI_sprite_effect(0x0007, (var0001[0x0001] - 0x0001), (var0001[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
 		set_polymorph(0x017D);
-		clear_item_flag(0x001D);
+		clear_item_flag(SI_TOURNAMENT);
 		kill_npc();
 	}
 	if (event == 0x0008) {
@@ -4965,7 +5026,7 @@ void Func017D shape#(0x17D) () {
 						var0009 = get_object_position();
 						var0009[0x0002] += 0x0014;
 						0xFFC5->move_object([var0009[0x0001], var0009[0x0002], 0x0000]);
-						0xFE9C->set_item_flag(0x0010);
+						0xFE9C->set_item_flag(DONT_MOVE);
 						0xFFC5->set_schedule_type(0x0003);
 						0xFFC5->set_new_schedules([0x0000], [0x0003], [var0009[0x0001], var0009[0x0002]]);
 						abort;
@@ -5342,17 +5403,17 @@ void Func019C shape#(0x19C) () {
 				set_item_frame(0x0001);
 				if (Func0994() == 0x0015) {
 					var0001 = set_item_quality(0x000D);
-					clear_item_flag(0x0012);
+					clear_item_flag(TEMPORARY);
 					gflags[0x0222] = true;
 				}
 				if ((Func0994() == 0x0014) && gflags[0x021B]) {
 					var0001 = set_item_quality(0x000E);
-					clear_item_flag(0x0012);
+					clear_item_flag(TEMPORARY);
 					gflags[0x0221] = true;
 				}
 				if (Func0994() == 0x0011) {
 					var0001 = set_item_quality(0x000F);
-					clear_item_flag(0x0012);
+					clear_item_flag(TEMPORARY);
 					gflags[0x0220] = true;
 				}
 			} else if (get_item_frame() < 0x0006) {
@@ -5703,7 +5764,7 @@ void Func01C3 shape#(0x1C3) () {
 	if (event == 0x0002) {
 		if ((0xFFBB->get_npc_id() == 0x000C) && (item == 0xFFBC->get_npc_object())) {
 			Func097F(0xFFBC, "@Keep him away from me!@", 0x0000);
-			0xFFBC->set_item_flag(0x001C);
+			0xFFBC->set_item_flag(MET);
 			0xFFBC->si_path_run_usecode([0x0413, 0x0A8B, 0x0000], 0x000D, item, Func01C3, false);
 			UI_set_path_failure(Func01C3, item, 0x000E);
 			abort;
@@ -5717,11 +5778,11 @@ void Func01C3 shape#(0x1C3) () {
 			0xFFBB->set_npc_id(0x000F);
 			0xFE9C->set_alignment(0x0001);
 			Func097F(0xFFBB, "@Stop this!@", 0x0000);
-			0xFFBB->set_item_flag(0x001C);
-			0xFFB6->set_item_flag(0x0004);
+			0xFFBB->set_item_flag(MET);
+			0xFFB6->set_item_flag(DEAD);
 			0xFFB6->set_schedule_type(0x000F);
 			0xFFB6->set_alignment(0x0000);
-			0xFFB9->set_item_flag(0x0004);
+			0xFFB9->set_item_flag(DEAD);
 			0xFFB9->set_schedule_type(0x000F);
 			0xFFB9->set_alignment(0x0000);
 			var0003 = script 0xFFBB after 10 ticks {
@@ -5749,11 +5810,11 @@ void Func01C3 shape#(0x1C3) () {
 			0xFFB6->set_opponent(0xFFB9);
 			0xFFB6->set_oppressor(0xFFB9);
 			Func097F(0xFF6A, "@Strike for his eyes!@", 0x000F);
-			0xFF6A->set_item_flag(0x001C);
+			0xFF6A->set_item_flag(MET);
 			Func097F(0xFFB3, "@Tell them to stop.@", 0x0019);
-			0xFFB3->set_item_flag(0x001C);
+			0xFFB3->set_item_flag(MET);
 			Func097F(0xFFC1, "@Strike, Luther!@", 0x000A);
-			0xFFC1->set_item_flag(0x001C);
+			0xFFC1->set_item_flag(MET);
 			Func097F(0xFE9C, "@Hey, careful!@", 0x0005);
 			var0003 = script 0xFFBB after 35 ticks {
 				nohalt;
@@ -5795,7 +5856,7 @@ void Func01C3 shape#(0x1C3) () {
 			UI_init_conversation();
 			0xFFB9->show_npc_face0(0x0000);
 			say("\"Listen, Knights -- it doth not take a wizard to untangle this skein. Who among us acts strangely, doth do things in secret, and avoids his knightly duties?\"");
-			0xFFB9->set_item_flag(0x001C);
+			0xFFB9->set_item_flag(MET);
 			UI_end_conversation();
 			UI_play_music(0x0010, Func09A0(0x0005, 0x0001));
 			var0003 = script 0xFFB9 {
@@ -5848,11 +5909,11 @@ void Func01C3 shape#(0x1C3) () {
 			UI_init_conversation();
 			0xFFB1->show_npc_face0(0x0000);
 			say("\"Forgive me, lord, but I, too, have a serious matter to put before the leaders of Monitor.\"");
-			0xFFB1->set_item_flag(0x001C);
+			0xFFB1->set_item_flag(MET);
 			0xFFB6->show_npc_face1(0x0000);
 			say("\"Dost thou not need to rest thyself, Templar? Thou hast had no time to heal from thy wounds.\"");
 			UI_remove_npc_face1();
-			0xFFB6->set_item_flag(0x001C);
+			0xFFB6->set_item_flag(MET);
 			0x0000->set_conversation_slot();
 			say("\"I am right enough, Shazzana. And I cannot rest until I have aired my concerns.\"");
 			0xFFBB->show_npc_face1(0x0000);
@@ -5979,7 +6040,7 @@ labelFunc01C3_073B:
 			0xFFBD->si_path_run_usecode([0x0421, 0x0A74, 0x0000], 0x000D, 0xFFBD->get_npc_object(), Func01C3, false);
 			UI_set_path_failure(Func01C3, 0xFFBD->get_npc_object(), 0x000E);
 			Func097F(0xFFBD, "@Terrible news!@", 0x000A);
-			0xFFBD->set_item_flag(0x001C);
+			0xFFBD->set_item_flag(MET);
 			UI_play_music(0x001E, Func09A0(0x0005, 0x0001));
 			abort;
 		}
@@ -6001,7 +6062,7 @@ labelFunc01C3_073B:
 			};
 			Func097F(0xFFB9, "@Hurry, Lucilla!@", 0x0004);
 			Func097F(0xFFBF, "@This knife is dull...@", 0x0008);
-			0xFFBF->set_item_flag(0x001C);
+			0xFFBF->set_item_flag(MET);
 			Func097F(0xFFB0, (("@" + var0001) + "...@"), 0x0010);
 			UI_play_music(0x0022, Func09A0(0x0005, 0x0001));
 			abort;
@@ -6060,7 +6121,7 @@ labelFunc01C3_073B:
 			} else {
 				Func097F(0xFFBA, "@Glad to meet thee.@", 0x0003);
 			}
-			0xFFBA->set_item_flag(0x001C);
+			0xFFBA->set_item_flag(MET);
 			abort;
 		}
 		if (0xFFBB->get_npc_id() == 0x0003) {
@@ -6126,7 +6187,7 @@ labelFunc01C3_073B:
 		}
 		if (0xFFBB->get_npc_id() == 0x0000) {
 			UI_play_music(0x000F, Func09A0(0x0005, 0x0001));
-			0xFE9C->set_item_flag(0x0010);
+			0xFE9C->set_item_flag(DONT_MOVE);
 			var0004 = 0xFFB6->get_npc_prop(0x0003);
 			var0003 = 0xFFB6->set_npc_prop(0x0003, (0xFFB6->get_npc_prop(0x0000) - var0004));
 			var0004 = 0xFFB9->get_npc_prop(0x0003);
@@ -6203,7 +6264,7 @@ labelFunc01C3_073B:
 					var0012 = 0x0006;
 					var0011 = 0xFFB9;
 				}
-				if (var0011 && (!var0011->get_item_flag(0x0004))) {
+				if (var0011 && (!var0011->get_item_flag(DEAD))) {
 					var0011->move_object(var000F);
 					var0011->set_schedule_type(0x000F);
 					var0013 = script var0011 {
@@ -6220,9 +6281,9 @@ labelFunc01C3_073B:
 			}
 			abort;
 		}
-		0xFE9C->clear_item_flag(0x0010);
-		0xFFB9->clear_item_flag(0x0004);
-		0xFFB6->clear_item_flag(0x0004);
+		0xFE9C->clear_item_flag(DONT_MOVE);
+		0xFFB9->clear_item_flag(DEAD);
+		0xFFB6->clear_item_flag(DEAD);
 		UI_init_conversation();
 		0xFFBB->show_npc_face0(0x0000);
 		say("\"Lay down thine arms, Knights! Such fighting belongs on the List Field, not in the banquet hall.\"");
@@ -6264,7 +6325,7 @@ labelFunc01C3_073B:
 		};
 		var001D = [0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, 0xFFBB, 0xFFB3];
 		for (var0005 in var001D with var001E to var001F) {
-			var0005->clear_item_flag(0x001D);
+			var0005->clear_item_flag(SI_TOURNAMENT);
 		}
 	}
 	if (event == 0x000E) {
@@ -6467,14 +6528,14 @@ labelFunc01C3_073B:
 			if (var0009) {
 				var0003 = var0009->set_item_quality(0x0000);
 				var0009->set_item_frame(0x0009);
-				var0009->clear_item_flag(0x0012);
+				var0009->clear_item_flag(TEMPORARY);
 				var0003 = UI_update_last_created([0x041C, 0x0A8F, 0x0000]);
 			}
 			var0009 = UI_create_new_object(0x0178);
 			if (var0009) {
 				var0003 = var0009->set_item_quality(0x0000);
 				var0009->set_item_frame(0x000D);
-				var0009->clear_item_flag(0x0012);
+				var0009->clear_item_flag(TEMPORARY);
 				var0003 = UI_update_last_created([0x0423, 0x0A8F, 0x0000]);
 			}
 			UI_play_sound_effect2(0x0020, item);
@@ -7024,7 +7085,7 @@ void Func01C7 shape#(0x1C7) () {
 			0xFFFE->set_npc_id(0x001E);
 			var000A = 0xFFFE->get_object_position();
 			if (!(((var000A[0x0001] > 0x0859) && ((var000A[0x0001] < 0x0AB4) && ((var000A[0x0002] > 0x0500) && (var000A[0x0002] < 0x0994)))) || (((var000A[0x0001] > 0x0762) && ((var000A[0x0001] < 0x085B) && ((var000A[0x0002] > 0x0585) && (var000A[0x0002] < 0x0957)))) || (((var000A[0x0001] > 0x0744) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x06F9) && (var000A[0x0002] < 0x073D)))) || (((var000A[0x0001] > 0x071E) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x0828) && (var000A[0x0002] < 0x088D)))) || (((var000A[0x0001] > 0x06FC) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x07A6) && (var000A[0x0002] < 0x082A)))) || ((var000A[0x0001] > 0x074C) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x0719) && (var000A[0x0002] < 0x07A8)))))))))) {
-				if (!0xFFFE->get_item_flag(0x0004)) {
+				if (!0xFFFE->get_item_flag(DEAD)) {
 					gflags[0x013A] = true;
 				}
 			}
@@ -7276,7 +7337,7 @@ void Func01D0 shape#(0x1D0) () {
 			}
 		}
 	}
-	set_item_flag(0x0001);
+	set_item_flag(ASLEEP);
 }
 
 extern var Func0954 0x954 ();
@@ -7468,12 +7529,12 @@ void Func01D6 shape#(0x1D6) () {
 		set_item_frame(0x0001);
 		if (Func0994() == 0x0012) {
 			var0001 = set_item_quality(0x000A);
-			clear_item_flag(0x0012);
+			clear_item_flag(TEMPORARY);
 			gflags[0x0223] = true;
 		}
 		if (Func0994() == 0x0013) {
 			var0001 = set_item_quality(0x000B);
-			clear_item_flag(0x0012);
+			clear_item_flag(TEMPORARY);
 			gflags[0x0224] = true;
 		}
 		var0001 = UI_update_last_created(var0002);
@@ -7632,8 +7693,8 @@ void Func01DF shape#(0x1DF) () {
 				if (!var0003) {
 					UI_error_message("Wolf Creation Failed!");
 				}
-				var0003->set_item_flag(0x001D);
-				var0003->clear_item_flag(0x0012);
+				var0003->set_item_flag(SI_TOURNAMENT);
+				var0003->clear_item_flag(TEMPORARY);
 				var0003->set_schedule_type(0x0000);
 				0xFE9C->set_oppressor(var0003);
 				var0003->set_alignment(0x0002);
@@ -7643,7 +7704,7 @@ void Func01DF shape#(0x1DF) () {
 				0xFFC0->remove_npc();
 				gflags[0x004A] = true;
 				0xFFB5->set_alignment(0x0003);
-				0xFFB5->set_item_flag(0x001D);
+				0xFFB5->set_item_flag(SI_TOURNAMENT);
 			} else {
 				Func0948(0x003C);
 			}
@@ -7753,14 +7814,14 @@ void Func01E3 shape#(0x1E3) () {
 		abort;
 	}
 	if (event == 0x0001) {
-		0xFE9C->set_item_flag(0x0010);
+		0xFE9C->set_item_flag(DONT_MOVE);
 		if (UI_in_gump_mode()) {
 			UI_close_gumps();
 		}
 		0xFE9C->halt_scheduled();
 		var000C = get_object_position();
 		0xFE9C->si_path_run_usecode([(var000C[0x0001] - 0x0003), (var000C[0x0002] - 0x0003), 0x0000], 0x000A, item, Func01E3, true);
-		0xFE9C->clear_item_flag(0x0000);
+		0xFE9C->clear_item_flag(INVISIBLE);
 		var000D = find_nearby(0x0320, 0x001E, 0x0000);
 		var0005 = false;
 		for (var0003 in var000D with var000E to var000F) {
@@ -7793,7 +7854,7 @@ void Func01E3 shape#(0x1E3) () {
 			var000D = 0xFE9C->add_cont_items(0x0001, 0x0321, 0xFE99, 0x0000, 0x0012);
 			var0003 = UI_create_new_object(0x0284);
 			if (var0003) {
-				var0003->clear_item_flag(0x0012);
+				var0003->clear_item_flag(TEMPORARY);
 				var0003->set_item_frame(0x0007);
 				var000D = var0003->set_item_quantity(0x0046);
 				var000D = 0xFE9C->give_last_created();
@@ -7807,7 +7868,7 @@ void Func01E3 shape#(0x1E3) () {
 		0xFE9C->move_object([(var000C[0x0001] - 0x0003), (var000C[0x0002] - 0x0003), 0x0000]);
 	}
 	if ((event == 0x000A) || (event == 0x000E)) {
-		0xFE9C->set_item_flag(0x0010);
+		0xFE9C->set_item_flag(DONT_MOVE);
 		0xFE9C->set_schedule_type(0x000F);
 		UI_end_conversation();
 		var000D = script 0xFE9C {
@@ -7926,7 +7987,7 @@ void Func01EF shape#(0x1EF) () {
 				UI_fade_palette(0x000C, 0x0001, 0x0000);
 				set_polymorph(0x01EF);
 				0xFE9C->set_camera();
-				0xFE9C->clear_item_flag(0x0010);
+				0xFE9C->clear_item_flag(DONT_MOVE);
 				UI_init_conversation();
 				var0001 = script Func09A0(0x0005, 0x0001) after 10 ticks {
 					nohalt;
@@ -8012,7 +8073,7 @@ void Func01F8 shape#(0x1F8) () {
 	}
 	var0000 = get_barge();
 	if (var0000) {
-		if (!0xFE9C->get_item_flag(0x000A)) {
+		if (!0xFE9C->get_item_flag(ON_MOVING_BARGE)) {
 			var0001 = find_nearby(0x01F8, 0x0019, 0x0000);
 			var0002 = var0001[0x0001];
 			for (var0005 in var0001 with var0003 to var0004) {
@@ -8023,14 +8084,14 @@ void Func01F8 shape#(0x1F8) () {
 				}
 			}
 			Func090D(var0002, 0x0000, 0x0000, 0x0001, Func01F8, var0002, 0x000A);
-			set_item_flag(0x0014);
-			0xFE9C->clear_item_flag(0x0014);
-			set_item_flag(0x000A);
-			var0000->set_item_flag(0x001A);
+			set_item_flag(ACTIVE_SAILOR);
+			0xFE9C->clear_item_flag(ACTIVE_SAILOR);
+			set_item_flag(ON_MOVING_BARGE);
+			var0000->set_item_flag(ACTIVE_BARGE);
 		} else {
-			clear_item_flag(0x0014);
-			clear_item_flag(0x000A);
-			clear_item_flag(0x001A);
+			clear_item_flag(ACTIVE_SAILOR);
+			clear_item_flag(ON_MOVING_BARGE);
+			clear_item_flag(ACTIVE_BARGE);
 		}
 	}
 }
@@ -8049,7 +8110,7 @@ void Func01F9 shape#(0x1F9) () {
 		}
 		if (var0000 == 0x0002) {
 			obj_sprite_effect(0x0015, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
-			0xFE9C->set_item_flag(0x0022);
+			0xFE9C->set_item_flag(READ);
 			var0001 = script Func09A0(0x0005, 0x0001) after 100 ticks {
 				nohalt;
 				call Func01F9;
@@ -8058,7 +8119,7 @@ void Func01F9 shape#(0x1F9) () {
 		}
 	}
 	if (event == 0x0002) {
-		0xFE9C->clear_item_flag(0x0022);
+		0xFE9C->clear_item_flag(READ);
 		UI_play_sound_effect(0x0030);
 	}
 	if ((event == 0x000D) || (event == 0x000E)) {
@@ -8085,7 +8146,7 @@ void Func01FA shape#(0x1FA) () {
 	var0001 = find_nearby(0x017E, 0x0014, 0x0000);
 	for (var0004 in var0001 with var0002 to var0003) {
 		var0004->set_alignment(0x0000);
-		var0004->set_item_flag(0x0001);
+		var0004->set_item_flag(ASLEEP);
 	}
 }
 
@@ -8127,7 +8188,7 @@ void Func0202 shape#(0x202) () {
 				var0006 = 0xFE9C->find_nearby(0x0202, 0x003C, 0x0000);
 				for (var0009 in var0006 with var0007 to var0008) {
 					if (var0009->get_npc_id()) {
-						var0009->clear_item_flag(0x0020);
+						var0009->clear_item_flag(POLYMORPH);
 						var0009->set_npc_id(var0002);
 					}
 				}
@@ -8135,7 +8196,7 @@ void Func0202 shape#(0x202) () {
 				set_npc_id(var0002);
 			}
 			if (var0005 == 0x000A) {
-				clear_item_flag(0x001D);
+				clear_item_flag(SI_TOURNAMENT);
 				Func0971(item);
 			}
 		}
@@ -8223,7 +8284,7 @@ void Func0207 shape#(0x207) () {
 							face south;
 							actor frame cast_up;
 						};
-						var0004->set_item_flag(0x0012);
+						var0004->set_item_flag(TEMPORARY);
 						var0004->set_schedule_type(0x000F);
 						var0005 = var0004->add_cont_items(0x0001, 0x0321, 0xFE99, 0x0000, 0x0012);
 					}
@@ -8293,7 +8354,7 @@ void Func0215 shape#(0x215) () {
 	if (event == 0x0007) {
 		var0000 = get_npc_id();
 		if (var0000 == 0x0001) {
-			clear_item_flag(0x001D);
+			clear_item_flag(SI_TOURNAMENT);
 			var0001 = UI_create_new_object(0x0281);
 			if (var0001) {
 				var0001->set_item_frame(0x0013);
@@ -8303,7 +8364,7 @@ void Func0215 shape#(0x215) () {
 			}
 		}
 		if (var0000 == 0x0002) {
-			clear_item_flag(0x001D);
+			clear_item_flag(SI_TOURNAMENT);
 			var0003 = UI_create_new_object(0x0289);
 			if (var0003) {
 				var0003->set_item_frame(0x0008);
@@ -8316,7 +8377,7 @@ void Func0215 shape#(0x215) () {
 
 void Func0219 shape#(0x219) () {
 	if (event == 0x0007) {
-		clear_item_flag(0x001D);
+		clear_item_flag(SI_TOURNAMENT);
 		reduce_health(0x0037, 0x0000);
 	}
 }
@@ -8415,7 +8476,7 @@ void Func0235 shape#(0x235) () {
 		if ((0xFF6A->get_npc_id() == 0x0008) && (item == 0xFE9C->get_npc_object())) {
 			0xFE9C->set_polymorph(0x02D1);
 			UI_play_sound_effect(0x0001);
-			0xFE9C->clear_item_flag(0x0010);
+			0xFE9C->clear_item_flag(DONT_MOVE);
 			UI_init_conversation();
 			Func097F(0xFE9C, "@What a beautiful morning!@", 0x0000);
 			UI_play_music(0x0016, Func09A0(0x0005, 0x0001));
@@ -8656,7 +8717,7 @@ void Func0235 shape#(0x235) () {
 					Func097F(var000B, "@Farewell...@", 0x0000);
 				}
 				UI_end_conversation();
-				0xFE9C->set_item_flag(0x0010);
+				0xFE9C->set_item_flag(DONT_MOVE);
 				0xFF6A->si_path_run_usecode([0x03A5, 0x0A43, 0x0000], 0x000D, 0xFF6A->get_npc_object(), Func0235, false);
 				UI_set_path_failure(Func0235, 0xFF6A->get_npc_object(), 0x000E);
 				0xFF6A->clear_item_say();
@@ -8725,7 +8786,7 @@ void Func024C shape#(0x24C) () {
 	var var0000;
 
 	if (get_npc_number() == 0xFEDA) {
-		0xFE9C->set_item_flag(0x0010);
+		0xFE9C->set_item_flag(DONT_MOVE);
 		Func097F(0xFEDA, "@Ahhh, a victim...@", 0x0000);
 		var0000 = script item {
 			nohalt;
@@ -8804,7 +8865,7 @@ void Func025F shape#(0x25F) () {
 				if (gflags[0x02CD] && (gflags[0x02CE] && (gflags[0x02CF] && gflags[0x02D0]))) {
 					var0003 = set_item_quality(0x000A);
 					gflags[0x0223] = true;
-					clear_item_flag(0x0012);
+					clear_item_flag(TEMPORARY);
 				}
 			} else if (get_item_frame() < 0x0006) {
 				set_item_frame(0x0000);
@@ -8839,7 +8900,7 @@ void Func0266 shape#(0x266) () {
 	if (event == 0x0002) {
 		var0000 = find_nearby(0xFE99, 0x003C, 0x0008);
 		for (var0003 in var0000 with var0001 to var0002) {
-			if (!var0003->get_item_flag(0x0006)) {
+			if (!var0003->get_item_flag(IN_PARTY)) {
 				var0003->run_schedule();
 				var0003->clear_item_say();
 			}
@@ -8852,7 +8913,7 @@ void Func0266 shape#(0x266) () {
 		UI_play_music(0x00FF, item);
 		var0000 = find_nearby(0xFE99, 0x0028, 0x0008);
 		for (var0003 in var0000 with var0005 to var0006) {
-			if (!var0003->get_item_flag(0x0006)) {
+			if (!var0003->get_item_flag(IN_PARTY)) {
 				var0003->run_schedule();
 			}
 		}
@@ -8863,9 +8924,9 @@ void Func0266 shape#(0x266) () {
 		UI_play_music(0x000D, item);
 		var0000 = find_nearby(0xFE99, 0x0028, 0x0008);
 		for (var0003 in var0000 with var0007 to var0008) {
-			if (!var0003->get_item_flag(0x0006)) {
+			if (!var0003->get_item_flag(IN_PARTY)) {
 				var0003->set_schedule_type(0x001A);
-				var0003->clear_item_flag(0x0001);
+				var0003->clear_item_flag(ASLEEP);
 			}
 		}
 	}
@@ -8884,9 +8945,9 @@ void Func0266 shape#(0x266) () {
 		UI_play_music(0x001F, item);
 		var0000 = find_nearby(0xFE99, 0x0028, 0x0008);
 		for (var0003 in var0000 with var0009 to var000A) {
-			if (!var0003->get_item_flag(0x0006)) {
+			if (!var0003->get_item_flag(IN_PARTY)) {
 				var0003->set_schedule_type(0x0010);
-				var0003->clear_item_flag(0x0001);
+				var0003->clear_item_flag(ASLEEP);
 			}
 		}
 	}
@@ -8902,9 +8963,9 @@ void Func0266 shape#(0x266) () {
 		UI_play_music(0x0015, item);
 		var0000 = find_nearby(0xFE99, 0x0028, 0x0008);
 		for (var0003 in var0000 with var000B to var000C) {
-			if (!var0003->get_item_flag(0x0006)) {
+			if (!var0003->get_item_flag(IN_PARTY)) {
 				var0003->set_schedule_type(0x000C);
-				var0003->clear_item_flag(0x0001);
+				var0003->clear_item_flag(ASLEEP);
 			}
 		}
 	}
@@ -8914,9 +8975,9 @@ void Func0266 shape#(0x266) () {
 		Func097F(0xFFFD, "@Cease!@", 0x000A);
 		var0000 = find_nearby(0xFE99, 0x0028, 0x0008);
 		for (var0003 in var0000 with var000D to var000E) {
-			if (!var0003->get_item_flag(0x0006)) {
+			if (!var0003->get_item_flag(IN_PARTY)) {
 				var0003->set_schedule_type(0x0000);
-				var0003->clear_item_flag(0x0001);
+				var0003->clear_item_flag(ASLEEP);
 			}
 		}
 	}
@@ -8925,9 +8986,9 @@ void Func0266 shape#(0x266) () {
 		UI_play_music(0x0010, item);
 		var0000 = find_nearby(0xFE99, 0x0028, 0x0008);
 		for (var0003 in var0000 with var000F to var0010) {
-			if (!var0003->get_item_flag(0x0006)) {
+			if (!var0003->get_item_flag(IN_PARTY)) {
 				var0003->set_schedule_type(0x0004);
-				var0003->clear_item_flag(0x0001);
+				var0003->clear_item_flag(ASLEEP);
 			}
 		}
 	}
@@ -8975,7 +9036,7 @@ void Func0269 shape#(0x269) () {
 		if (var0001) {
 			if (get_item_frame() == 0x0000) {
 				set_item_frame(0x0001);
-				clear_item_flag(0x0012);
+				clear_item_flag(TEMPORARY);
 				var0001 = set_item_quality(0x000B);
 				gflags[0x0224] = true;
 			} else if (get_item_frame() < 0x0006) {
@@ -9139,7 +9200,7 @@ void Func0280 shape#(0x280) () {
 			}
 			if (var0006 < 0x0002) {
 				UI_play_sound_effect(0x0008);
-				var0005->set_item_flag(0x0008);
+				var0005->set_item_flag(POISONED);
 				if (Func099D(item) && (var0001 != 0x0000)) {
 					if (var0001 < 0x0005) {
 						var0009 = Func09A0(0x0004, var0001);
@@ -9208,9 +9269,9 @@ void Func0281 shape#(0x281) () {
 			abort;
 		}
 		if (get_item_quality() == 0x00BA) {
-			if ((!0xFFE1->get_item_flag(0x0004)) && ((var0000->get_item_quality() == 0x00BA) && ((var0001 == 0x0178) && (!gflags[0x0148])))) {
+			if ((!0xFFE1->get_item_flag(DEAD)) && ((var0000->get_item_quality() == 0x00BA) && ((var0001 == 0x0178) && (!gflags[0x0148])))) {
 				0xFFE1->set_schedule_type(0x0003);
-				0xFFE1->set_item_flag(0x001D);
+				0xFFE1->set_item_flag(SI_TOURNAMENT);
 				Func097F(0xFFE1, "@Aha!@", 0x0000);
 				var0005 = find_nearby(0x016B, 0x001E, 0x0000);
 				for (var0008 in var0005 with var0006 to var0007) {
@@ -9222,7 +9283,7 @@ void Func0281 shape#(0x281) () {
 			if (var0000->get_item_quality() == 0x0075) {
 				gflags[0x01E8] = true;
 			}
-			if ((!gflags[0x01E6]) && ((var0000->get_item_quality() == 0x0075) && (!0xFFD4->get_item_flag(0x0006)))) {
+			if ((!gflags[0x01E6]) && ((var0000->get_item_quality() == 0x0075) && (!0xFFD4->get_item_flag(IN_PARTY)))) {
 				0xFFD4->add_to_party();
 				Func097F(0xFFD4, "@Wait for me!@", 0x0002);
 			}
@@ -9715,7 +9776,7 @@ void Func0288 shape#(0x288) () {
 		if ((var0000 == 0x0000) || (var0000 == 0x0001)) {
 			var0001 = UI_click_on_item();
 			if (var0001->is_npc()) {
-				var0001->set_item_flag(0x0001);
+				var0001->set_item_flag(ASLEEP);
 			} else {
 				Func0949("@Do not waste that!@");
 			}
@@ -9724,10 +9785,10 @@ void Func0288 shape#(0x288) () {
 		if (var0000 == 0x0002) {
 			var0001 = UI_click_on_item();
 			if (var0001->is_npc()) {
-				var0001->set_item_flag(0x0000);
+				var0001->set_item_flag(INVISIBLE);
 			} else {
-				if (var0001->get_item_flag(0x0012)) {
-					var0001->set_item_flag(0x0000);
+				if (var0001->get_item_flag(TEMPORARY)) {
+					var0001->set_item_flag(INVISIBLE);
 				}
 				Func0949("@Waste that not!@");
 			}
@@ -9737,10 +9798,10 @@ void Func0288 shape#(0x288) () {
 		if (var0000 == 0x0003) {
 			var0001 = UI_click_on_item();
 			if (var0001->is_npc()) {
-				var0001->set_item_flag(0x0003);
+				var0001->set_item_flag(CURSED);
 			} else {
-				if (var0001->get_item_flag(0x0012)) {
-					var0001->set_item_flag(0x0003);
+				if (var0001->get_item_flag(TEMPORARY)) {
+					var0001->set_item_flag(CURSED);
 				}
 				Func0949("@Is that a good idea!@");
 			}
@@ -9827,7 +9888,7 @@ void Func0289 shape#(0x289) () {
 			UI_play_sound_effect(0x001D);
 			var0009 = 0xFE9C->find_nearby(0x036A, 0x001E, 0x0000);
 			if (var0009 == []) {
-				0xFEF3->set_item_flag(0x001D);
+				0xFEF3->set_item_flag(SI_TOURNAMENT);
 				0xFEF3->set_alignment(0x0001);
 				var000A = 0xFEF3->approach_avatar(0x0078, 0x0028);
 				if (var000A) {
@@ -9862,7 +9923,7 @@ void Func0289 shape#(0x289) () {
 				call Func060F;
 			};
 			Func097F(0xFE9C, "Yeeooww!", 0x0003);
-			clear_item_flag(0x0012);
+			clear_item_flag(TEMPORARY);
 			remove_item();
 			var0002 = script 0xFE9C after 10 ticks {
 				nohalt;
@@ -10041,8 +10102,8 @@ void Func028B shape#(0x28B) () {
 		}
 		var0004 = UI_create_new_object(0x028E);
 		if (var0004) {
-			var0004->set_item_flag(0x0012);
-			var0004->set_item_flag(0x000B);
+			var0004->set_item_flag(TEMPORARY);
+			var0004->set_item_flag(OKAY_TO_TAKE);
 			var0004->set_item_frame(UI_die_roll(0x0000, 0x0009));
 			var0005 = get_object_position();
 			var0005[0x0001] += 0x0001;
@@ -10099,7 +10160,7 @@ void Func028C shape#(0x28C) () {
 			0xFFB8->set_npc_id(0x0004);
 			var0005 = UI_create_new_object(0x0390);
 			if (var0005) {
-				var0005->set_item_flag(0x0012);
+				var0005->set_item_flag(TEMPORARY);
 				var0005 = UI_update_last_created(0xFE9C->get_object_position());
 			}
 			var0005 = script 0xFFB8 {
@@ -10188,8 +10249,8 @@ void Func028C shape#(0x28C) () {
 			var0008->set_schedule_type(0x001F);
 		}
 		0xFFB8->run_schedule();
-		0xFE9C->set_item_flag(0x0021);
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->set_item_flag(TATTOOED);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		gflags[0x0098] = true;
 		gflags[0x003E] = true;
 		var0005 = script Func09A0(0x0005, 0x0001) after 1000 ticks {
@@ -10345,7 +10406,7 @@ void Func0294 shape#(0x294) () {
 		if (gflags[0x0004] == false) {
 			abort;
 		}
-		if (get_item_flag(0x001E)) {
+		if (get_item_flag(SI_ZOMBIE)) {
 			say("\"I told thee, ",
 				var0002,
 				", there is nothing left for me... Without the Comb of Beauty there is no hope in the world!\"");
@@ -10430,7 +10491,7 @@ void Func0294 shape#(0x294) () {
 						"! Without the Comb of Beauty I will remain here, within this fetid swamp -- where I belong!\"");
 					UI_remove_npc_face0();
 					Func097F(item, "@Leave me!@", 0x0000);
-					set_item_flag(0x001E);
+					set_item_flag(SI_ZOMBIE);
 					abort;
 				}
 				fallthrough;
@@ -10496,7 +10557,7 @@ void Func0296 shape#(0x296) () {
 			var0003 = UI_create_new_object(0x0179);
 			if (var0003) {
 				var0003->set_item_frame(0x000C);
-				var0003->set_item_flag(0x000B);
+				var0003->set_item_flag(OKAY_TO_TAKE);
 				var0001 = UI_update_last_created(var0002);
 				var0004 = UI_die_roll(0x0001, 0x0003);
 				if (var0004 == 0x0001) {
@@ -10868,9 +10929,9 @@ void Func02A3 shape#(0x2A3) () {
 			}
 		}
 		if (var0000 == 0x0010) {
-			var0014 = 0xFFFE->get_item_flag(0x0006);
-			var0015 = 0xFFFD->get_item_flag(0x0006);
-			var0016 = 0xFFFF->get_item_flag(0x0006);
+			var0014 = 0xFFFE->get_item_flag(IN_PARTY);
+			var0015 = 0xFFFD->get_item_flag(IN_PARTY);
+			var0016 = 0xFFFF->get_item_flag(IN_PARTY);
 			var0017 = "him";
 			var0018 = "he";
 			var0019 = "himself";
@@ -11112,7 +11173,7 @@ void Func02AF shape#(0x2AF) () {
 		}
 	}
 	if (event == 0x0002) {
-		0xFE9C->clear_item_flag(0x0000);
+		0xFE9C->clear_item_flag(INVISIBLE);
 		UI_play_sound_effect(0x0082);
 		UI_lightning();
 		0xFE9C->set_camera();
@@ -11279,7 +11340,7 @@ void Func02BE shape#(0x2BE) () {
 	var0000 = Func0954();
 	var0001 = Func0953();
 	if (event == 0x000E) {
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		UI_init_conversation();
 		if (gflags[0x01BC]) {
 			event = 0x000A;
@@ -11299,7 +11360,7 @@ void Func02BE shape#(0x2BE) () {
 		};
 	}
 	if ((event == 0x000B) || ((event == 0x0001) || (event == 0x0002))) {
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		if ((event == 0x0001) || (event == 0x0002)) {
 			if ((event == 0x0002) && gflags[0x0007]) {
 				UI_play_sound_effect(0x000F);
@@ -12693,7 +12754,7 @@ void Func02E6 shape#(0x2E6) () {
 			UI_play_sound_effect(0x0001);
 			0xFFBA->set_npc_id(Func09A0(0x0005, 0x0003)->get_item_quality());
 			var0002 = Func09A0(0x0005, 0x0003)->set_item_quality(0x0000);
-			0xFE9C->clear_item_flag(0x0010);
+			0xFE9C->clear_item_flag(DONT_MOVE);
 			UI_init_conversation();
 			Func097F(0xFE9C, "@What a beautiful morning!@", 0x0000);
 			UI_play_music(0x0016, Func09A0(0x0005, 0x0001));
@@ -12880,7 +12941,7 @@ void Func02E6 shape#(0x2E6) () {
 					Func097F(var000B, "@Farewell...@", 0x0000);
 				}
 				UI_end_conversation();
-				0xFE9C->set_item_flag(0x0010);
+				0xFE9C->set_item_flag(DONT_MOVE);
 				0xFFBA->si_path_run_usecode([0x043A, 0x0A5C, 0x0000], 0x000D, 0xFFBA->get_npc_object(), Func02E6, false);
 				0xFFBA->clear_item_say();
 				Func097F(0xFFBA, "@Come, my love!@", 0x0000);
@@ -13118,16 +13179,16 @@ void Func02F0 shape#(0x2F0) () {
 void Func02F2 shape#(0x2F2) () {
 	if (event == 0x0007) {
 		if (get_npc_id() == 0x000F) {
-			clear_item_flag(0x001D);
+			clear_item_flag(SI_TOURNAMENT);
 		}
 		if (get_npc_id() == 0x0010) {
-			clear_item_flag(0x001D);
+			clear_item_flag(SI_TOURNAMENT);
 		}
 		if (get_npc_id() == 0x0011) {
-			clear_item_flag(0x001D);
+			clear_item_flag(SI_TOURNAMENT);
 		}
 		if (get_npc_id() == 0x0012) {
-			clear_item_flag(0x001D);
+			clear_item_flag(SI_TOURNAMENT);
 		}
 	}
 }
@@ -13159,10 +13220,10 @@ void Func02F7 shape#(0x2F7) () {
 			say("\"I Re-Ten Bentas Juxark I!\"");
 			say("\"Praetimde Mir-Wis Re-Por I.\"");
 			UI_remove_npc_face0();
-			if (0xFFE1->get_item_flag(0x0004)) {
+			if (0xFFE1->get_item_flag(DEAD)) {
 				if (var0001 == 0x0000) {
 					gflags[0x013D] = false;
-					0xFE9C->set_item_flag(0x0010);
+					0xFE9C->set_item_flag(DONT_MOVE);
 					var0002 = var0000->set_item_quality(0x0001);
 					var0002 = script var0000 {
 						nohalt;
@@ -13197,27 +13258,27 @@ void Func02F7 shape#(0x2F7) () {
 		if (var0001 == 0x0002) {
 			var0002 = UI_create_new_object(0x00D7);
 			if (var0002) {
-				var0002->clear_item_flag(0x0012);
+				var0002->clear_item_flag(TEMPORARY);
 				var0002 = UI_update_last_created([0x08B8, 0x04F9, 0x0001]);
 			}
 			var0002 = UI_create_new_object(0x00DB);
 			if (var0002) {
-				var0002->clear_item_flag(0x0012);
+				var0002->clear_item_flag(TEMPORARY);
 				var0002 = UI_update_last_created([0x08BC, 0x04FF, 0x0000]);
 			}
 			var0002 = UI_create_new_object(0x00DD);
 			if (var0002) {
-				var0002->clear_item_flag(0x0012);
+				var0002->clear_item_flag(TEMPORARY);
 				var0002 = UI_update_last_created([0x08C4, 0x04FF, 0x0000]);
 			}
 			var0002 = UI_create_new_object(0x00FC);
 			if (var0002) {
-				var0002->clear_item_flag(0x0012);
+				var0002->clear_item_flag(TEMPORARY);
 				var0002 = UI_update_last_created([0x08BC, 0x04F7, 0x0000]);
 			}
 			var0002 = UI_create_new_object(0x01CB);
 			if (var0002) {
-				var0002->clear_item_flag(0x0012);
+				var0002->clear_item_flag(TEMPORARY);
 				var0002 = UI_update_last_created([0x08C4, 0x04F7, 0x0000]);
 			}
 			var0002 = var0000->set_item_quality(0x0003);
@@ -13241,7 +13302,7 @@ void Func02F7 shape#(0x2F7) () {
 						step west;
 					};
 				} else {
-					0xFE9C->clear_item_flag(0x0010);
+					0xFE9C->clear_item_flag(DONT_MOVE);
 				}
 				var0002 = script var0000 after 3 ticks {
 					call Func02F7;
@@ -13329,7 +13390,7 @@ void Func030D shape#(0x30D) () {
 		if (gflags[0x01CB]) {
 			abort;
 		}
-		if (get_item_flag(0x000A)) {
+		if (get_item_flag(ON_MOVING_BARGE)) {
 			Func094A("@The sails must be furled before the planks can be lowered.@");
 		} else if (!Func0910(item)) {
 			Func094A("@I believe the gangplank is blocked.@");
@@ -13544,7 +13605,7 @@ void Func0316 shape#(0x316) () {
 		UI_close_gumps();
 	}
 	if (get_barge()) {
-		if (!0xFE9C->get_item_flag(0x000A)) {
+		if (!0xFE9C->get_item_flag(ON_MOVING_BARGE)) {
 			var0000 = get_item_quality();
 			var0001 = 0xFE9B->count_objects(0x031D, var0000, 0xFE99);
 			if (((!var0001) && (!gflags[0x0005])) && (!((var0000 == 0x0001) && gflags[0x00EC]))) {
@@ -13556,17 +13617,17 @@ void Func0316 shape#(0x316) () {
 				return;
 			}
 			if (Func0890()) {
-				0xFE9C->clear_item_flag(0x0014);
-				0xFE9C->set_item_flag(0x000A);
-				0xFE9C->get_barge()->set_item_flag(0x001A);
+				0xFE9C->clear_item_flag(ACTIVE_SAILOR);
+				0xFE9C->set_item_flag(ON_MOVING_BARGE);
+				0xFE9C->get_barge()->set_item_flag(ACTIVE_BARGE);
 			} else {
 				var0002 = Func08E7(item);
-				set_item_flag(0x0014);
+				set_item_flag(ACTIVE_SAILOR);
 			}
 		} else {
-			clear_item_flag(0x0014);
-			clear_item_flag(0x000A);
-			clear_item_flag(0x001A);
+			clear_item_flag(ACTIVE_SAILOR);
+			clear_item_flag(ON_MOVING_BARGE);
+			clear_item_flag(ACTIVE_BARGE);
 		}
 	}
 }
@@ -14104,18 +14165,18 @@ void Func031D shape#(0x31D) () {
 			say("Rotoluncia,~~ I saw thee staring at that pig Torrissio at the banquet last night and I know now that thine affections shown toward me were false. Thou art a cow and a shabby sorceress as well!~ Do not try to pretend otherwise, for I know the truth now. I want nothing more from thee ever again!~~ Filbercio ");
 		} else if (var0003 == 0x0078) {
 			say("Marsten, Lord of Monitor:~~ The destruction of thine enemies is certain. My brave Goblin warriors have already plundered the Fawn Tower, and the Wolves which guarded it.~ Next, we shall strike the Bull Tower, and the Bears which serve there. Hail to victory! Soon, the Wolves and Bears shall cease to trouble thee. Then Monitor and the Goblins shall live in peace, and thou shalt be King of the Monitorians.~~ Do not let this messenger fall into the hands of our enemies.~~ Pomdirgun,~Chieftain of the Goblin Horde");
-			0xFFBB->set_item_flag(0x001D);
+			0xFFBB->set_item_flag(SI_TOURNAMENT);
 			gflags[0x0093] = true;
 		} else if (var0003 == 0x0079) {
 			say("   Honor be to thee, Pomdirgun, Chieftain of the Goblin Horde:~~ Letting thee know that all of our plans in these parts fare well. I have learned from the Wolves that they plan to launch a patrol in the early morning hours of the seventh day of the new moon.~ If thou dost ambush the patrol, then it shall be easy for thee to overrun Fawn Tower itself.~ The Wolves shall be critically weakened, and the City of Fawn shall quake in fear!~ But if thou canst, spare the life of the leader of the patrol. She is a favorite of my liege.~~ We beg of thee not to let this messenger fall into the hands of our enemies, the Wolves.~~ Spektor, writing on behalf of Lord Marsten");
 			gflags[0x0093] = true;
-			0xFFBB->set_item_flag(0x001D);
+			0xFFBB->set_item_flag(SI_TOURNAMENT);
 			gflags[0x0094] = true;
-			0xFFB3->set_item_flag(0x001D);
+			0xFFB3->set_item_flag(SI_TOURNAMENT);
 		} else if (var0003 == 0x007A) {
 			say("   Honor be to thee, Pomdirgun, Chieftain of the Goblin Horde:~~ Letting thee know that all of our plans in these parts fare well. Having learned from our successful experience with Fawn Tower, we have decided to withdraw, on the fourth night of the coming moon, as many troops as possible from Bull Tower.~ The Bears shall be marching westward on the plains, and shall be easily slaughtered.~ Then thou canst take the Tower, and plunder the Inn of the Sleeping Bull.~~ We want to remind thee of the supreme importance not to let this messenger fall into the hands of our enemies, the Wolves and the Bears.~~ Marsten, King of Monitor");
 			gflags[0x0093] = true;
-			0xFFBB->set_item_flag(0x001D);
+			0xFFBB->set_item_flag(SI_TOURNAMENT);
 		} else if (var0003 == 0x007B) {
 			say("   Old man, if thou dost truly wish to survive Freedom, but dost feel that thou canst live to tell the tale of Lorthondo's final test, thou hast only to serve in my slave pit. Tend to my pets and I shall personally show thee to the door and to the blue skies of daylight and freedom. Guard my nightmare and care for him well.~ He is a treasure and a daemon in one. Take him through the teleporter once each day and let him feel the grass beneath his hooves.~ Take care, for one strike of his hoof could kill an old fool such as thou.~ Be thou sure to keep Sabrina from him. I fear that she doth frighten him. I find it strange that such a wild, untamed creature such as that should be frightened of her touch. Then again, mayhaps I can fathom why. ~");
 			say("   Lastly, take great care of my small furry prize. Do not be fooled by its diminutive size, it hath taken the lives of many a foolhardy man who dared to approach thinking it might make a tasty morsel.~ Thou shouldst treat it with as much respect as thou wouldst bestow upon me. If thou dost not, either one of us could end thy miserable existence.~ In the supply room, thou wilt find a year's worth of carrots for Buggs. Feed him but one per day. Place the carrots upon his golden plate -- 'tis the only way that he will feed. He is of royal lineage -- a born predator. If thou dost not, thou mayest find that thou art his next meal.~ Serve me well, old man, and thou mayest live to see the outside of this prison some year...");
@@ -14354,10 +14415,10 @@ void Func0320 shape#(0x320) () {
 			var0005 = UI_get_party_list();
 			var0006 = 0x0010;
 			for (var0009 in var0005 with var0007 to var0008) {
-				var0009->set_item_flag(0x0008);
-				var0009->set_item_flag(0x0007);
-				var0009->set_item_flag(0x0002);
-				var0009->set_item_flag(0x0003);
+				var0009->set_item_flag(POISONED);
+				var0009->set_item_flag(PARALYZED);
+				var0009->set_item_flag(CHARMED);
+				var0009->set_item_flag(CURSED);
 				var0006 += 0x0010;
 				Func097F(0xFE9C, "@Arrrgh!@", var0006);
 			}
@@ -14372,7 +14433,7 @@ void Func0320 shape#(0x320) () {
 		UI_play_sound_effect(0x001D);
 		Func097F(0xFE9C, "@Yow!", 0x0002);
 		Func097F(0xFE9C, "'Twas trapped!@", 0x0012);
-		0xFE9C->set_item_flag(0x0003);
+		0xFE9C->set_item_flag(CURSED);
 		UI_sprite_effect(0x001A, var0004[0x0001], var0004[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	}
 	if (var0001 == 0x00FC) {
@@ -14497,7 +14558,7 @@ void Func0326 shape#(0x326) () {
 			UI_remove_npc_face0();
 		}
 		if (0xFF5D->npc_nearby() && (gflags[0x023A] == true)) {
-			0xFE9C->set_item_flag(0x0010);
+			0xFE9C->set_item_flag(DONT_MOVE);
 			var0003 = 0xFF5D->find_nearby(0x0113, 0x0000, 0x0010);
 			if (var0003) {
 				var0003->remove_item();
@@ -14595,7 +14656,7 @@ void Func0329 shape#(0x329) () {
 	var var0002;
 
 	if (gflags[0x0004]) {
-		clear_item_flag(0x001D);
+		clear_item_flag(SI_TOURNAMENT);
 		clear_item_say();
 		Func097F(item, "@No! It must work!@", 0x0000);
 		obj_sprite_effect(0x0009, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -14709,35 +14770,35 @@ void Func032B shape#(0x32B) () {
 				raw((byte)0x54); raw(0x000D);
 			};
 		}
-		0xFE9C->clear_item_flag(0x0022);
-		0xFE9C->clear_item_flag(0x0021);
+		0xFE9C->clear_item_flag(READ);
+		0xFE9C->clear_item_flag(TATTOOED);
 		var0007 = 0xFFFF;
 		while (var0007 > 0xFE9B) {
 			if (var0007 != 0xFE9C) {
 				var0007->set_npc_id(0x0000);
-				var0007->clear_item_flag(0x001C);
-				var0007->clear_item_flag(0x001E);
-				var0007->clear_item_flag(0x001F);
+				var0007->clear_item_flag(MET);
+				var0007->clear_item_flag(SI_ZOMBIE);
+				var0007->clear_item_flag(NO_SPELL_CASTING);
 			}
-			var0007->clear_item_flag(0x001D);
-			var0007->clear_item_flag(0x0020);
+			var0007->clear_item_flag(SI_TOURNAMENT);
+			var0007->clear_item_flag(POLYMORPH);
 			var0007->set_temperature(0x0000);
 			var0007 -= 0x0001;
 		}
-		0xFFFF->set_item_flag(0x001C);
-		0xFFFE->set_item_flag(0x001C);
-		0xFFFD->set_item_flag(0x001C);
-		0xFEFC->set_item_flag(0x001C);
-		0xFEFB->set_item_flag(0x001C);
-		0xFF6D->set_item_flag(0x001E);
-		0xFF6B->set_item_flag(0x001E);
+		0xFFFF->set_item_flag(MET);
+		0xFFFE->set_item_flag(MET);
+		0xFFFD->set_item_flag(MET);
+		0xFEFC->set_item_flag(MET);
+		0xFEFB->set_item_flag(MET);
+		0xFF6D->set_item_flag(SI_ZOMBIE);
+		0xFF6B->set_item_flag(SI_ZOMBIE);
 		var0008 = [0xFE9C, 0xFFD4, 0xFFC7, 0xFFDB, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, 0xFFCB, 0xFF33, 0xFF35, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, 0xFF4B, 0xFF4A, 0xFFC0, 0xFF6A, 0xFFB6, 0xFFC1, 0xFFB1, 0xFFB9, 0xFEF7, 0xFF89, 0xFF88, 0xFF87, 0xFF86, 0xFF85, 0xFF58];
 		for (var000B in var0008 with var0009 to var000A) {
-			var000B->set_item_flag(0x001D);
+			var000B->set_item_flag(SI_TOURNAMENT);
 		}
 		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, 0xFFD2, 0xFFD1, 0xFFD0, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, 0xFFDE, 0xFF64, 0xFFBB, 0xFFB3, 0xFFEE, 0xFFDF, 0xFFE6, 0xFFEC, 0xFFEF, 0xFFFC, 0xFFED, 0xFFF2, 0xFFE8, 0xFFEA, 0xFFE5, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
-			var000B->set_item_flag(0x001D);
+			var000B->set_item_flag(SI_TOURNAMENT);
 		}
 	}
 }
@@ -14790,7 +14851,7 @@ void Func032C shape#(0x32C) () {
 		}
 	}
 	if (event == 0x000A) {
-		0xFE9C->set_item_flag(0x0010);
+		0xFE9C->set_item_flag(DONT_MOVE);
 		0xFE9C->set_polymorph(0x00EF);
 		set_item_frame(0x0001);
 		var0006 = script item after 25 ticks {
@@ -14816,7 +14877,7 @@ void Func032C shape#(0x32C) () {
 			while (var0008 < 0x000F) {
 				var0009 = UI_create_new_object(0x0390);
 				if (var0009) {
-					var0009->set_item_flag(0x0012);
+					var0009->set_item_flag(TEMPORARY);
 					var000A = UI_die_roll(0x0000, 0x0003);
 					var0009->set_item_frame(var000A);
 					var000B = UI_die_roll(0xFFFE, 0x0002);
@@ -14997,7 +15058,7 @@ void Func032E shape#(0x32E) () {
 			0xFFE1->set_new_schedules(0x0000, 0x000C, [0x086D, 0x0837]);
 			0xFFE1->run_schedule();
 			0xFFE1->move_object([0x086D, 0x0837, 0x0000]);
-			0xFFE1->set_item_flag(0x001D);
+			0xFFE1->set_item_flag(SI_TOURNAMENT);
 			Func097F(0xFFEC, "@Goodbye, witch...@", 0x0004);
 			var0009 = script 0xFFEA {
 				nohalt;
@@ -15084,7 +15145,7 @@ void Func032E shape#(0x32E) () {
 			}
 			var000B = UI_create_new_object(0x025F);
 			if (var000B) {
-				var000B->clear_item_flag(0x0012);
+				var000B->clear_item_flag(TEMPORARY);
 				var000A = 0xFE9C->get_object_position();
 				var0009 = UI_update_last_created([(var000A[0x0001] + 0x0002), var000A[0x0002], var000A[0x0003]]);
 				var0009 = 0xFFE1->set_to_attack(var000B, 0x0118);
@@ -15117,7 +15178,7 @@ void Func032E shape#(0x32E) () {
 			}
 			var000B = UI_create_new_object(0x025F);
 			if (var000B) {
-				var000B->clear_item_flag(0x0012);
+				var000B->clear_item_flag(TEMPORARY);
 				var000A = 0xFE9C->get_object_position();
 				var0009 = UI_update_last_created([(var000A[0x0001] - 0x0002), var000A[0x0002], var000A[0x0003]]);
 				var0009 = 0xFFE1->set_to_attack(var000B, 0x0118);
@@ -15164,7 +15225,7 @@ void Func032E shape#(0x32E) () {
 			UI_remove_npc_face1();
 			var000B = UI_create_new_object(0x025F);
 			if (var000B) {
-				var000B->clear_item_flag(0x0012);
+				var000B->clear_item_flag(TEMPORARY);
 				var000A = 0xFE9C->get_object_position();
 				var0009 = UI_update_last_created([var000A[0x0001], (var000A[0x0002] + 0x0002), var000A[0x0003]]);
 				var0009 = 0xFFE1->set_to_attack(var000B, 0x0118);
@@ -15227,7 +15288,7 @@ void Func032E shape#(0x32E) () {
 		if (0xFFEE->get_npc_id() == 0x0000) {
 			UI_play_music(0x001B, Func09A0(0x0005, 0x0001));
 			0xFFEE->set_npc_id(0x0001);
-			0xFFEE->set_item_flag(0x001C);
+			0xFFEE->set_item_flag(MET);
 			var000F = 0xFE9C->find_nearby(0x010E, 0x002D, 0x0000);
 			var0010 = 0xFE9C->find_nearby(0x01B0, 0x002D, 0x0000);
 			for (var0013 in var000F with var0011 to var0012) {
@@ -15288,7 +15349,7 @@ void Func032E shape#(0x32E) () {
 				var000B->add_to_party();
 			}
 		}
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		gflags[0x00DA] = false;
 		0xFFEE->set_npc_id(0x0000);
 		abort;
@@ -15765,7 +15826,7 @@ void Func033D shape#(0x33D) () {
 		}
 		if (gflags[0x0007]) {
 			var0000 = Func0953();
-			0xFE9C->set_item_flag(0x0010);
+			0xFE9C->set_item_flag(DONT_MOVE);
 			UI_end_conversation();
 			var0001 = ("@" + var0000) + ", I am afraid.@";
 			0xFFE4->item_say(var0001);
@@ -15799,7 +15860,7 @@ void Func033D shape#(0x33D) () {
 			0xFFE4->halt_scheduled();
 			0xFFE4->set_polymorph(0x014E);
 			0xFFE4->set_schedule_type(0x000F);
-			0xFE9C->set_item_flag(0x0023);
+			0xFE9C->set_item_flag(ISPETRA);
 			var0005 = 0xFFE4->get_object_position();
 			var0006 = 0xFE9C->get_object_position();
 			var0002 = UI_direction_from(0xFE9C, 0xFFE4);
@@ -15967,9 +16028,9 @@ void Func033D shape#(0x33D) () {
 					call Func070A;
 				};
 				0xFE9C->set_polymorph(0x0292);
-				0xFE9C->clear_item_flag(0x0010);
+				0xFE9C->clear_item_flag(DONT_MOVE);
 				UI_init_conversation();
-				0xFFE4->set_item_flag(0x001D);
+				0xFFE4->set_item_flag(SI_TOURNAMENT);
 				gflags[0x000A] = false;
 				if (!var000A) {
 					gflags[0x0228] = true;
@@ -16188,7 +16249,7 @@ void Func0355 shape#(0x355) () {
 				var0002 = UI_update_last_created(var0000);
 			}
 			remove_item();
-			0xFE9C->clear_item_flag(0x0010);
+			0xFE9C->clear_item_flag(DONT_MOVE);
 			UI_init_conversation();
 			abort;
 		}
@@ -16299,7 +16360,7 @@ void Func0355 shape#(0x355) () {
 				UI_play_music(0x0035, Func09A0(0x0005, 0x0001));
 				set_schedule_type(0x000F);
 				Func097F(0xFE9C, "@Many thanks!@", 0x0000);
-				0xFE9C->set_item_flag(0x0010);
+				0xFE9C->set_item_flag(DONT_MOVE);
 				UI_end_conversation();
 				set_schedule_type(0x000F);
 				var0002 = script item {
@@ -16498,7 +16559,7 @@ void Func035F shape#(0x35F) () {
 			} else {
 				var0007 = UI_create_new_object(0x035F);
 				if (var0007) {
-					var0007->set_item_flag(0x0012);
+					var0007->set_item_flag(TEMPORARY);
 					var0007->set_item_frame(0x0010);
 					var0008 = UI_update_last_created([var0004, var0005, var0006]);
 				}
@@ -16547,7 +16608,7 @@ void Func035F shape#(0x35F) () {
 			remove_item();
 			var000B = UI_create_new_object(0x0179);
 			if (var000B) {
-				var000B->set_item_flag(0x0012);
+				var000B->set_item_flag(TEMPORARY);
 				set_item_frame(0x0000);
 				var0008 = UI_update_last_created(var0002);
 				if (var0008) {
@@ -16627,9 +16688,9 @@ void Func0363 shape#(0x363) () {
 			}
 			UI_sprite_effect(0x0007, var0006[0x0001], var0006[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			0xFF2D->remove_npc();
-			0xFFFF->clear_item_flag(0x0001);
-			0xFFFE->clear_item_flag(0x0001);
-			0xFFFD->clear_item_flag(0x0001);
+			0xFFFF->clear_item_flag(ASLEEP);
+			0xFFFE->clear_item_flag(ASLEEP);
+			0xFFFD->clear_item_flag(ASLEEP);
 			abort;
 		}
 		if (var0001 == 0x001B) {
@@ -16747,7 +16808,7 @@ void Func0363 shape#(0x363) () {
 				0xFF2D->set_schedule_type(0x0014);
 				0xFF2D->clear_item_say();
 				Func097F(0xFF2D, "@An impostor!@", 0x0000);
-				0xFE9C->clear_item_flag(0x0010);
+				0xFE9C->clear_item_flag(DONT_MOVE);
 				abort;
 			}
 		}
@@ -17050,9 +17111,9 @@ void Func0370 shape#(0x370) () {
 				set_schedule_type(0x000F);
 				0xFE9C->set_opponent(0x0001);
 				move_object([0x008E, 0x002E, 0x0000]);
-				0xFFFD->clear_item_flag(0x0004);
-				0xFFFD->set_item_flag(0x001E);
-				0xFFFD->clear_item_flag(0x001D);
+				0xFFFD->clear_item_flag(DEAD);
+				0xFFFD->set_item_flag(SI_ZOMBIE);
+				0xFFFD->clear_item_flag(SI_TOURNAMENT);
 				0xFFFD->move_object(var0001);
 				0xFFFD->reduce_health(0x0037, 0x0000);
 				gflags[0x00D2] = true;
@@ -17204,8 +17265,8 @@ void Func0375 shape#(0x375) () {
 		UI_play_sound_effect(0x004C);
 	}
 	if (event == 0x0002) {
-		0xFE9C->clear_item_flag(0x0010);
-		clear_item_flag(0x001D);
+		0xFE9C->clear_item_flag(DONT_MOVE);
+		clear_item_flag(SI_TOURNAMENT);
 		var0000 = get_object_position();
 		UI_sprite_effect(0x0004, (var0000[0x0001] - 0x0001), (var0000[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_sprite_effect(0x0011, (var0000[0x0001] - 0x0001), (var0000[0x0002] - 0x0001), 0x0000, 0x0000, 0x0002, 0x0003);
@@ -17282,10 +17343,10 @@ void Func038A shape#(0x38A) () {
 				set_schedule_type(0x000F);
 				0xFE9C->set_opponent(0x0001);
 				move_object([0x008E, 0x002E, 0x0000]);
-				0xFFFF->clear_item_flag(0x0004);
+				0xFFFF->clear_item_flag(DEAD);
 				0xFFFF->move_object(var0001);
-				0xFFFF->set_item_flag(0x001E);
-				0xFFFF->clear_item_flag(0x001D);
+				0xFFFF->set_item_flag(SI_ZOMBIE);
+				0xFFFF->clear_item_flag(SI_TOURNAMENT);
 				0xFFFF->reduce_health(0x0037, 0x0000);
 				gflags[0x00D1] = true;
 				gflags[0x00D3] = true;
@@ -17316,11 +17377,11 @@ void Func0395 shape#(0x395) () {
 	if ((var0002 > 0x0498) && ((var0002 < 0x04F8) && ((var0003 > 0x01AF) && (var0003 < 0x021F)))) {
 		var0000 = true;
 	}
-	if ((event == 0x0007) && 0xFEED->get_item_flag(0x001D)) {
+	if ((event == 0x0007) && 0xFEED->get_item_flag(SI_TOURNAMENT)) {
 		0xFEE8->show_npc_face0(0x0000);
 		say("\"Argh! Thou thinkest thou canst save thy precious Gwani by slaying me? Fool! Thou hast the brain of a headless!\" *\"I laugh at thee, even as I lie here dying in mine own blood. The Gwani are doomed I tell thee, doomed like a feeble rabbit in my trap, hahaha...\"");
 		UI_remove_npc_face0();
-		0xFEED->clear_item_flag(0x001D);
+		0xFEED->clear_item_flag(SI_TOURNAMENT);
 		Func097F(0xFE9C, "@Taste my steel, trapper!@", 0x0001);
 		0xFEED->reduce_health(0x0037, 0x0000);
 		gflags[0x0263] = true;
@@ -17481,12 +17542,12 @@ void Func03A6 shape#(0x3A6) () {
 			abort;
 		}
 		var0001->set_schedule_type(0x000F);
-		var0001->set_item_flag(0x001D);
+		var0001->set_item_flag(SI_TOURNAMENT);
 		var0001->set_polymorph(0x00EF);
 		UI_end_conversation();
-		0xFE9C->set_item_flag(0x0010);
+		0xFE9C->set_item_flag(DONT_MOVE);
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
-		var0001->set_item_flag(0x0012);
+		var0001->set_item_flag(TEMPORARY);
 		var0001->set_camera();
 		var0004 = script Func09A0(0x0005, 0x0002) after 1 ticks {
 			nohalt;
@@ -17500,7 +17561,7 @@ void Func03A6 shape#(0x3A6) () {
 	}
 	if (event == 0x0002) {
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		UI_init_conversation();
 		set_polymorph(0x01EF);
 		0xFE9C->set_camera();
@@ -18447,7 +18508,7 @@ void Func03BB shape#(0x3BB) () {
 		if (!gflags[0x02EE]) {
 			gflags[0x02EE] = true;
 			save_pos();
-			0xFE9C->set_item_flag(0x0010);
+			0xFE9C->set_item_flag(DONT_MOVE);
 			Func097F(0xFE9C, "@What?@", 0x0023);
 			Func097F(0xFE9C, "@Why isn't this working?@", 0x0037);
 			var0003 = script 0xFE9C {
@@ -18685,8 +18746,8 @@ void Func03C0 shape#(0x3C0) () {
 		abort;
 	}
 	var0000 = get_npc_number();
-	if ((event == 0x0002) && var0000->get_item_flag(0x0024)) {
-		if (var0000->get_item_flag(0x0006)) {
+	if ((event == 0x0002) && var0000->get_item_flag(CAN_FLY)) {
+		if (var0000->get_item_flag(IN_PARTY)) {
 			var0001 = script item {
 				nohalt;
 				call Func063D;
@@ -18696,14 +18757,14 @@ void Func03C0 shape#(0x3C0) () {
 				call Func03C0;
 			};
 		} else {
-			var0000->clear_item_flag(0x0024);
+			var0000->clear_item_flag(CAN_FLY);
 		}
 		abort;
 	}
-	if ((event == 0x0002) && (!var0000->get_item_flag(0x0024))) {
+	if ((event == 0x0002) && (!var0000->get_item_flag(CAN_FLY))) {
 		item_say("@Whoa. Bad shrooms.@");
 		if (var0000 == 0xFE9C) {
-			var0000->clear_item_flag(0x0019);
+			var0000->clear_item_flag(CONFUSED);
 		}
 	}
 }
@@ -18742,14 +18803,14 @@ void Func03CA shape#(0x3CA) () {
 		var0005 = Func090C(0xFE9C, item);
 		var0006 = Func090C(item, 0xFE9C);
 		0xFE9C->halt_scheduled();
-		0xFE9C->set_item_flag(0x0010);
+		0xFE9C->set_item_flag(DONT_MOVE);
 		if (UI_is_pc_female()) {
 			var0001 = script 0xFE9C {
 				face var0005;
 				actor frame sleeping;
 			};
 			if (!var0001) {
-				0xFE9C->clear_item_flag(0x0010);
+				0xFE9C->clear_item_flag(DONT_MOVE);
 			}
 			var0001 = script item {
 				face var0006;
@@ -18757,7 +18818,7 @@ void Func03CA shape#(0x3CA) () {
 				call Func03CA;
 			};
 			if (!var0001) {
-				0xFE9C->clear_item_flag(0x0010);
+				0xFE9C->clear_item_flag(DONT_MOVE);
 			}
 		} else {
 			var0001 = script 0xFE9C {
@@ -18765,7 +18826,7 @@ void Func03CA shape#(0x3CA) () {
 				actor frame kneeling;
 			};
 			if (!var0001) {
-				0xFE9C->clear_item_flag(0x0010);
+				0xFE9C->clear_item_flag(DONT_MOVE);
 			}
 			var0001 = script item {
 				face var0005;
@@ -18773,12 +18834,12 @@ void Func03CA shape#(0x3CA) () {
 				call Func03CA;
 			};
 			if (!var0001) {
-				0xFE9C->clear_item_flag(0x0010);
+				0xFE9C->clear_item_flag(DONT_MOVE);
 			}
 		}
 	}
 	if (event == 0x0002) {
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		set_schedule_type(0x0014);
 		var0001 = Func0992(0x0001, "@Thou art SICK!@", "@That felt good!@", true);
 	}
@@ -20181,7 +20242,7 @@ void Func0400 object#(0x400) () {
 	var var001B;
 
 	if (event == 0x0008) {
-		if (0xFE9C->get_item_flag(0x0023)) {
+		if (0xFE9C->get_item_flag(ISPETRA)) {
 			0xFE9C->set_polymorph(0x0292);
 		} else {
 			0xFE9C->set_polymorph(0x0212);
@@ -20203,7 +20264,7 @@ void Func0400 object#(0x400) () {
 			abort;
 		}
 		var0001 = Func0994();
-		if ((var0001 == 0x0014) && (!0xFE9C->get_item_flag(0x0010))) {
+		if ((var0001 == 0x0014) && (!0xFE9C->get_item_flag(DONT_MOVE))) {
 			var0002 = 0xFE9C->get_object_position();
 			if ((var0002[0x0001] > 0x09D0) && ((var0002[0x0001] < 0x09FA) && ((var0002[0x0002] > 0x0320) && (var0002[0x0002] < 0x033A)))) {
 				var0000 = 0xFE9C->get_npc_prop(0x0003);
@@ -20222,7 +20283,7 @@ void Func0400 object#(0x400) () {
 				nohalt;
 				face var0000;
 			};
-			0xFE9C->set_item_flag(0x0010);
+			0xFE9C->set_item_flag(DONT_MOVE);
 			0xFE9C->set_schedule_type(0x000F);
 			var0000 = script 0xFE9C {
 				nohalt;
@@ -20284,7 +20345,7 @@ void Func0400 object#(0x400) () {
 			item->Func07D7();
 			var0004 = Func08B6();
 			for (var0007 in var0004 with var000B to var000C) {
-				var0007->clear_item_flag(0x0001);
+				var0007->clear_item_flag(ASLEEP);
 				var0007->set_schedule_type(0x001F);
 				var0000 = script var0007 {
 					nohalt;
@@ -20308,18 +20369,18 @@ void Func0400 object#(0x400) () {
 				for (var0003 in var0004 with var0010 to var0011) {
 					var0003->halt_scheduled();
 					var0003->clear_item_say();
-					if (!var0003->get_item_flag(0x001E)) {
+					if (!var0003->get_item_flag(SI_ZOMBIE)) {
 						var0003->set_schedule_type(0x001F);
 					}
 					var0003->set_temperature(0x0000);
-					var0003->clear_item_flag(0x0001);
-					var0003->clear_item_flag(0x0002);
-					var0003->clear_item_flag(0x0003);
-					var0003->clear_item_flag(0x0004);
-					var0003->clear_item_flag(0x0005);
-					var0003->clear_item_flag(0x0007);
-					var0003->clear_item_flag(0x0008);
-					var0003->clear_item_flag(0x0010);
+					var0003->clear_item_flag(ASLEEP);
+					var0003->clear_item_flag(CHARMED);
+					var0003->clear_item_flag(CURSED);
+					var0003->clear_item_flag(DEAD);
+					var0003->clear_item_flag(UNKNOWN_FLAG_05);
+					var0003->clear_item_flag(PARALYZED);
+					var0003->clear_item_flag(POISONED);
+					var0003->clear_item_flag(DONT_MOVE);
 					if (Func095C(var0003, 0x0000) > Func095C(var0003, 0x0003)) {
 						var0000 = Func095C(var0003, 0x0000) - Func095C(var0003, 0x0003);
 						Func095E(var0003, 0x0003, var0000);
@@ -20347,9 +20408,9 @@ void Func0400 object#(0x400) () {
 		}
 		if ((var0001 != 0x0014) && ((var0001 != 0x001F) && ((var0001 != 0x0020) && (!gflags[0x026F])))) {
 			Func08F6();
-			0xFE9C->set_item_flag(0x0010);
+			0xFE9C->set_item_flag(DONT_MOVE);
 			UI_fade_palette(0x000C, 0x0001, 0x0000);
-			0xFE9C->clear_item_flag(0x0025);
+			0xFE9C->clear_item_flag(FREEZE);
 			var0004 = Func08B6();
 			var0004 = [0xFE9C, var0004];
 			var0002 = [0x0967, 0x047C, 0x0000];
@@ -20361,18 +20422,18 @@ void Func0400 object#(0x400) () {
 			for (var0003 in var0004 with var0015 to var0016) {
 				var0003->halt_scheduled();
 				var0003->clear_item_say();
-				if (!var0003->get_item_flag(0x001E)) {
+				if (!var0003->get_item_flag(SI_ZOMBIE)) {
 					var0003->set_schedule_type(0x001F);
 				}
 				var0003->set_temperature(0x0000);
-				var0003->clear_item_flag(0x0001);
-				var0003->clear_item_flag(0x0002);
-				var0003->clear_item_flag(0x0003);
-				var0003->clear_item_flag(0x0004);
-				var0003->clear_item_flag(0x0005);
-				var0003->clear_item_flag(0x0007);
-				var0003->clear_item_flag(0x0008);
-				var0003->clear_item_flag(0x0010);
+				var0003->clear_item_flag(ASLEEP);
+				var0003->clear_item_flag(CHARMED);
+				var0003->clear_item_flag(CURSED);
+				var0003->clear_item_flag(DEAD);
+				var0003->clear_item_flag(UNKNOWN_FLAG_05);
+				var0003->clear_item_flag(PARALYZED);
+				var0003->clear_item_flag(POISONED);
+				var0003->clear_item_flag(DONT_MOVE);
 				if (Func095C(var0003, 0x0000) > Func095C(var0003, 0x0003)) {
 					var0000 = Func095C(var0003, 0x0000) - Func095C(var0003, 0x0003);
 					Func095E(var0003, 0x0003, var0000);
@@ -20412,14 +20473,14 @@ void Func0400 object#(0x400) () {
 				var0003->set_new_schedules(0x0000, 0x0010, Func084E(var0003, 0x0003));
 				var0003->run_schedule();
 				if (var0003 == 0xFF31) {
-					var0003->clear_item_flag(0x0001);
-					var0003->clear_item_flag(0x0002);
-					var0003->clear_item_flag(0x0003);
-					var0003->clear_item_flag(0x0004);
-					var0003->clear_item_flag(0x0005);
-					var0003->clear_item_flag(0x0007);
-					var0003->clear_item_flag(0x0008);
-					var0003->clear_item_flag(0x0010);
+					var0003->clear_item_flag(ASLEEP);
+					var0003->clear_item_flag(CHARMED);
+					var0003->clear_item_flag(CURSED);
+					var0003->clear_item_flag(DEAD);
+					var0003->clear_item_flag(UNKNOWN_FLAG_05);
+					var0003->clear_item_flag(PARALYZED);
+					var0003->clear_item_flag(POISONED);
+					var0003->clear_item_flag(DONT_MOVE);
 					0xFF31->set_npc_id(0x0000);
 					0xFF31->set_schedule_type(0x0003);
 					var0000 = script 0xFF31 {
@@ -20437,7 +20498,7 @@ void Func0400 object#(0x400) () {
 					};
 				}
 			}
-			0xFE9C->set_item_flag(0x0010);
+			0xFE9C->set_item_flag(DONT_MOVE);
 			gflags[0x026F] = true;
 		}
 	}
@@ -20445,7 +20506,7 @@ void Func0400 object#(0x400) () {
 		if (gflags[0x021E]) {
 			set_schedule_type(0x0000);
 			0xFEE1->show_npc_face0(0x0000);
-			0xFE9C->set_item_flag(0x0010);
+			0xFE9C->set_item_flag(DONT_MOVE);
 			set_schedule_type(0x000F);
 			say("\"Thou art nearly dead, Avatar!\"");
 			say("\"Yield to me, and perhaps I shall spare thy life! Dost thou yield?\"");
@@ -20489,7 +20550,7 @@ void Func0400 object#(0x400) () {
 				UI_advance_time(var0000);
 				UI_fade_palette(0x000C, 0x0001, 0x0001);
 				0xFE9C->set_schedule_type(0x001F);
-				0xFE9C->clear_item_flag(0x0010);
+				0xFE9C->clear_item_flag(DONT_MOVE);
 				gflags[0x0007] = false;
 			} else {
 				gflags[0x0007] = true;
@@ -20581,7 +20642,7 @@ void Func0401 object#(0x401) () {
 	if (event == 0x0001) {
 		0xFE9C->item_say("@Dupre...@");
 		0xFFFF->Func07D1();
-		if (!0xFFFF->get_item_flag(0x001E)) {
+		if (!0xFFFF->get_item_flag(SI_ZOMBIE)) {
 			Func097F(0xFFFF, (("@Yes, " + var0001) + "?@"), 0x0002);
 			0xFFFF->set_schedule_type(0x0003);
 		} else {
@@ -20603,7 +20664,7 @@ void Func0401 object#(0x401) () {
 	if (event == 0x0009) {
 		0xFFFF->show_npc_face0(0x0000);
 		0xFFFF->clear_item_say();
-		if (0xFFFF->get_item_flag(0x0006)) {
+		if (0xFFFF->get_item_flag(IN_PARTY)) {
 			0xFFFF->set_schedule_type(0x001F);
 			add("leave");
 		} else {
@@ -20670,7 +20731,7 @@ void Func0401 object#(0x401) () {
 		if (0xFFDE->get_npc_id() == 0x001E) {
 			add("Boydon's whereabouts");
 		}
-		if (gflags[0x0017] && ((!0xFFFF->get_item_flag(0x0006)) && 0xFFFF->get_cont_items(0xFE99, 0xFE99, 0xFE99))) {
+		if (gflags[0x0017] && ((!0xFFFF->get_item_flag(IN_PARTY)) && 0xFFFF->get_cont_items(0xFE99, 0xFE99, 0xFE99))) {
 			add("belongings");
 		}
 		converse (["bye"]) {
@@ -20679,7 +20740,7 @@ void Func0401 object#(0x401) () {
 				fallthrough;
 
 			case "good news" (remove):
-				if (0xFFFD->get_item_flag(0x0006) || (0xFFFD->get_npc_id() == 0x001E)) {
+				if (0xFFFD->get_item_flag(IN_PARTY) || (0xFFFD->get_npc_id() == 0x001E)) {
 					say("\"But I should let Iolo tell thee...\"");
 				} else {
 					say("\"The wizard Gustacio hath agreed to aid us, if we will but assist him in his experiments.\"");
@@ -20817,7 +20878,7 @@ void Func0402 object#(0x402) () {
 	var0002 = UI_is_pc_female();
 	var0003 = Func0953();
 	var0004 = UI_part_of_day();
-	if ((event == 0x0007) && 0xFFFE->get_item_flag(0x001D)) {
+	if ((event == 0x0007) && 0xFFFE->get_item_flag(SI_TOURNAMENT)) {
 		if (gflags[0x0083]) {
 			var0005 = 0xFFFE->get_oppressor();
 			var0005 = 0x0000 - var0005;
@@ -20846,9 +20907,9 @@ void Func0402 object#(0x402) () {
 				var0009 = Func099B(0xFFFE, 0x0001, 0x0282, 0x003F, 0x0000, 0x0000, true);
 				gflags[0x025B] = false;
 				gflags[0x025C] = true;
-				0xFFFE->clear_item_flag(0x001D);
+				0xFFFE->clear_item_flag(SI_TOURNAMENT);
 			} else {
-				0xFFFE->clear_item_flag(0x001D);
+				0xFFFE->clear_item_flag(SI_TOURNAMENT);
 				0xFFFE->reduce_health(0x0032, 0x0000);
 			}
 		}
@@ -20856,7 +20917,7 @@ void Func0402 object#(0x402) () {
 	if (event == 0x0001) {
 		0xFE9C->item_say("Shamino...");
 		0xFFFE->Func07D1();
-		if (!0xFFFE->get_item_flag(0x001E)) {
+		if (!0xFFFE->get_item_flag(SI_ZOMBIE)) {
 			Func097F(0xFFFE, (("@Yes, " + var0003) + "?"), 0x0002);
 			0xFFFE->set_schedule_type(0x0003);
 		} else {
@@ -20877,7 +20938,7 @@ void Func0402 object#(0x402) () {
 	}
 	if (event == 0x0009) {
 		0xFFFE->clear_item_say();
-		if (0xFFFE->get_item_flag(0x0006)) {
+		if (0xFFFE->get_item_flag(IN_PARTY)) {
 			0xFFFE->set_schedule_type(0x001F);
 			add("leave");
 		} else {
@@ -20944,7 +21005,7 @@ labelFunc0402_02F8:
 			if (0xFFDE->get_npc_id() == 0x001E) {
 				add("Boydon's whereabouts");
 			}
-			if ((!0xFFFE->get_item_flag(0x0006)) && (0xFFFE->get_cont_items(0xFE99, 0xFE99, 0xFE99) && (gflags[0x0018] == true))) {
+			if ((!0xFFFE->get_item_flag(IN_PARTY)) && (0xFFFE->get_cont_items(0xFE99, 0xFE99, 0xFE99) && (gflags[0x0018] == true))) {
 				add("belongings");
 			}
 			add(["bye"]);
@@ -20972,7 +21033,7 @@ labelFunc0402_02F8:
 				fallthrough;
 
 			case "news" (remove):
-				if (0xFFFD->get_item_flag(0x0006)) {
+				if (0xFFFD->get_item_flag(IN_PARTY)) {
 					say("\"To be honest, this is not my news -- it belongs to our good friend, the Bard. Thou shouldst ask Iolo.\"");
 				} else if (0xFFFD->get_npc_id() == 0x001E) {
 					say("\"Quickly, let us find Iolo. He can tell thee all about the discovery!\"");
@@ -21169,7 +21230,7 @@ void Func0403 object#(0x403) () {
 	if (event == 0x0001) {
 		Func097F(0xFE9C, "@Dear friend...@", 0x0000);
 		0xFFFD->Func07D1();
-		if (!0xFFFD->get_item_flag(0x001E)) {
+		if (!0xFFFD->get_item_flag(SI_ZOMBIE)) {
 			if (gflags[0x0006] && (!gflags[0x0078])) {
 				var0004 = false;
 				var0005 = 0xFFFD->find_nearby(0x0178, 0x000F, 0x0000);
@@ -21250,7 +21311,7 @@ void Func0403 object#(0x403) () {
 			0xFFFF->add_to_party();
 			0xFFFE->add_to_party();
 			gflags[0x0003] = true;
-			0xFE9C->clear_item_flag(0x0010);
+			0xFE9C->clear_item_flag(DONT_MOVE);
 			abort;
 		}
 		if (gflags[0x0006] && (!gflags[0x0078])) {
@@ -21282,7 +21343,7 @@ void Func0403 object#(0x403) () {
 			abort;
 		}
 		0xFFFD->show_npc_face0(0x0000);
-		if (0xFFFD->get_item_flag(0x0006)) {
+		if (0xFFFD->get_item_flag(IN_PARTY)) {
 			0xFFFD->set_schedule_type(0x001F);
 			add("leave");
 		} else {
@@ -21324,7 +21385,7 @@ void Func0403 object#(0x403) () {
 		if (0xFFDE->get_npc_id() == 0x001E) {
 			add("Boydon's whereabouts");
 		}
-		if (gflags[0x0019] && (0xFFFD->get_cont_items(0xFE99, 0xFE99, 0xFE99) && (!0xFFFD->get_item_flag(0x0006)))) {
+		if (gflags[0x0019] && (0xFFFD->get_cont_items(0xFE99, 0xFE99, 0xFE99) && (!0xFFFD->get_item_flag(IN_PARTY)))) {
 			add("belongings");
 		}
 		0xFFFD->show_npc_face0(0x0000);
@@ -21339,7 +21400,7 @@ void Func0403 object#(0x403) () {
 						var000E = 0xFFFD->get_cont_items(0xFE99, 0xFE99, 0xFE99);
 						for (var0011 in var000E with var000F to var0010) {
 							if (!((var0011->get_item_shape() == 0x0128) && (var0011->get_item_frame() == 0x0002))) {
-								var000B = Func099B(0xFE9C, var0011->get_item_quantity(0x0000), var0011->get_item_shape(), var0011->get_item_quality(), var0011->get_item_frame(), var0011->get_item_flag(0x0012), false);
+								var000B = Func099B(0xFE9C, var0011->get_item_quantity(0x0000), var0011->get_item_shape(), var0011->get_item_quality(), var0011->get_item_frame(), var0011->get_item_flag(TEMPORARY), false);
 								if (var000D[0x0001] == 0x0000) {
 									var000D[0x0001] = var000B[0x0001];
 								}
@@ -21416,7 +21477,7 @@ void Func0403 object#(0x403) () {
 							var000E = 0xFFFD->get_cont_items(0xFE99, 0xFE99, 0xFE99);
 							for (var0011 in var000E with var0012 to var0013) {
 								if (!((var0011->get_item_shape() == 0x0128) && (var0011->get_item_frame() == 0x0002))) {
-									var000B = Func099B(0xFE9C, var0011->get_item_quantity(0x0000), var0011->get_item_shape(), var0011->get_item_quality(), var0011->get_item_frame(), var0011->get_item_flag(0x0012), false);
+									var000B = Func099B(0xFE9C, var0011->get_item_quantity(0x0000), var0011->get_item_shape(), var0011->get_item_quality(), var0011->get_item_frame(), var0011->get_item_flag(TEMPORARY), false);
 									if (var000D[0x0001] == 0x0000) {
 										var000D[0x0001] = var000B[0x0001];
 									}
@@ -21449,7 +21510,7 @@ void Func0403 object#(0x403) () {
 
 			case "Gwenno" (remove):
 				var000B = Func0942(0xFF6B);
-				if (0xFF6B->get_item_flag(0x0006) || (var000B && (!0xFF6B->get_item_flag(0x001E)))) {
+				if (0xFF6B->get_item_flag(IN_PARTY) || (var000B && (!0xFF6B->get_item_flag(SI_ZOMBIE)))) {
 					say("\"No truer friend have I had in all of my life than thee, ",
 						var0002,
 						". With my lady love Gwenno returned to my side where she doth belong, my life is once again complete.\"");
@@ -21461,7 +21522,7 @@ void Func0403 object#(0x403) () {
 						", how could our good and noble quest have ended in such tragedy!\"");
 				} else if (gflags[0x026A]) {
 					say("\"Now that we have succeeded in freeing Gwenno's body, perhaps the Monks of Monk Isle -- the self-professed masters of life and death -- may be able to help her.\"");
-				} else if (0xFF6B->get_item_flag(0x001E)) {
+				} else if (0xFF6B->get_item_flag(SI_ZOMBIE)) {
 					say("\"We must find some way of restoring Gwenno's mind! Unless we can do that her precious spirit is lost to me.\"");
 				} else {
 					say("\"My soul is at peace. Joy is to know Gwenno, and to have her once more in thriving good health.\"");
@@ -21469,7 +21530,7 @@ void Func0403 object#(0x403) () {
 				fallthrough;
 
 			case "a song" (remove):
-				var0014 = 0xFFD9->get_item_flag(0x001C);
+				var0014 = 0xFFD9->get_item_flag(MET);
 				if (var0014) {
 					say("\"Dost thou wish me to repeat a song thou hast already heard? Or dost thou wish to hear a new song?\"");
 					var0015 = [];
@@ -21624,7 +21685,7 @@ void Func0404 object#(0x404) () {
 	} else {
 		var0003 = "evening";
 	}
-	if ((event == 0x0007) && get_item_flag(0x001D)) {
+	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
 		var0004 = script item {
 			nohalt;
 			call Func0329;
@@ -21647,20 +21708,20 @@ void Func0404 object#(0x404) () {
 		0xFFFC->run_schedule();
 		0xFFFC->clear_item_say();
 		0xFFFC->show_npc_face0(0x0000);
-		var0006 = 0xFFFC->get_item_flag(0x001C);
+		var0006 = 0xFFFC->get_item_flag(MET);
 		if (gflags[0x0004]) {
 			say("\"Oh, am I glad to see thee! I have been very scared.\"");
 			add("scared");
 			gflags[0x00F4] = true;
 		} else if (var0006 == false) {
-			0xFFFC->set_item_flag(0x001C);
+			0xFFFC->set_item_flag(MET);
 			say("\"Hello, I am Andrio. I never meet outsiders. Couldst thou tell me all about thy travels and adventures?\"");
 			add("adventures");
 		} else {
 			say("\"Hast thou done anything exciting lately?\"");
 			add("exciting");
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(0x0004))) {
+		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
 		converse (["bye"]) {
@@ -21961,7 +22022,7 @@ void Func040D object#(0x40D) () {
 	var0004 = Func0953();
 	var0005 = 0x0000;
 	var0006 = false;
-	var0007 = 0xFFF3->get_item_flag(0x001C);
+	var0007 = 0xFFF3->get_item_flag(MET);
 	if (event == 0x0000) {
 		var0008 = UI_get_random(0x0006);
 		if (Func097D(0xFE9B, 0x0001, 0x0241, 0xFE99, 0x0003)) {
@@ -22054,7 +22115,7 @@ void Func040D object#(0x40D) () {
 			} else {
 				say("\"Strangers are always welcome in Moonshade. My name is Bucia -- if thou needest help, thou hast merely to ask.\"");
 			}
-			0xFFF3->set_item_flag(0x001C);
+			0xFFF3->set_item_flag(MET);
 		} else {
 			say("\"I am so glad to see thee again, ",
 				var0002,
@@ -22064,7 +22125,7 @@ void Func040D object#(0x40D) () {
 			add(["provisions", "exchange"]);
 			var0009 = 0x0003;
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(0x0004))) {
+		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
 		if (Func0942(0xFFD6)) {
@@ -22873,7 +22934,7 @@ void Func040E object#(0x40E) () {
 		Func097F(0xFFF2, (("@Greetings, " + var0000) + "."), 0x0002);
 		0xFFF2->set_schedule_type(0x0003);
 	}
-	if ((event == 0x0007) && get_item_flag(0x001D)) {
+	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
 		var0004 = script item {
 			nohalt;
 			call Func0329;
@@ -22887,7 +22948,7 @@ void Func040E object#(0x40E) () {
 		0xFFF2->clear_item_say();
 		0xFFF2->halt_scheduled();
 		0xFE9C->halt_scheduled();
-		var0005 = 0xFF58->get_item_flag(0x0004);
+		var0005 = 0xFF58->get_item_flag(DEAD);
 		if (gflags[0x00E2]) {
 			if (!var0005) {
 				add("Stefano");
@@ -22907,9 +22968,9 @@ void Func040E object#(0x40E) () {
 			Func097F(0xFFF2, "@Honestly!@", 0x0000);
 			abort;
 		}
-		var0007 = 0xFFF2->get_item_flag(0x001C);
+		var0007 = 0xFFF2->get_item_flag(MET);
 		if (var0007 == false) {
-			0xFFF2->set_item_flag(0x001C);
+			0xFFF2->set_item_flag(MET);
 			say("\"I do not believe that we've met. It is so nice to make the acquaintance of a new, young Mage.\"");
 			say("\"I am Columna, the Green Enchantress.\"");
 		} else {
@@ -23100,10 +23161,10 @@ void Func040F object#(0x40F) () {
 		0xFFF1->run_schedule();
 		0xFFF1->clear_item_say();
 		0xFFF1->show_npc_face0(0x0000);
-		var0006 = 0xFFF1->get_item_flag(0x001C);
+		var0006 = 0xFFF1->get_item_flag(MET);
 		if (var0006 == false) {
 			say("\"I am Ducio, the Master Artisan.\"");
-			0xFFF1->set_item_flag(0x001C);
+			0xFFF1->set_item_flag(MET);
 			add("Master Artisan");
 		} else if (gflags[0x0004]) {
 			say("\"Thou art alive! Thou hast survived the holocaust! So many are dead...\"");
@@ -23130,7 +23191,7 @@ void Func040F object#(0x40F) () {
 		if (gflags[0x0113] && (!gflags[0x0291])) {
 			add("lost ring");
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(0x0004))) {
+		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
 		converse (["bye"]) {
@@ -23324,7 +23385,7 @@ labelFunc040F_046D:
 				if (Func097D(0xFE9B, 0x0001, 0x0326, 0xFE99, 0xFE99)) {
 					say("\"'Tis a magic sword, right enough. I'll take thy word about the Daemon...\"");
 					say("\"The structure of the blade is not damaged. It is not a problem that I can repair.\"");
-					if (0xFFEA->get_item_flag(0x0004)) {
+					if (0xFFEA->get_item_flag(DEAD)) {
 						say("\"Thou must seek out a Mage to aid thee, if there are any left among the living...\"");
 						say("\"If Gustacio's flux analyzer had not been stolen, I would have sent thee to his lab. It was the only thing that might have helped thee.\"");
 					} else {
@@ -23475,7 +23536,7 @@ void Func0410 object#(0x410) () {
 			var0008 = 0xFFF0->find_nearby(0x025F, 0x0014, 0x0010);
 			var0009 = UI_create_new_object(0x0339);
 			if (var0009) {
-				var0009->set_item_flag(0x0012);
+				var0009->set_item_flag(TEMPORARY);
 				var0005 = UI_update_last_created(var0004);
 			}
 			for (var000C in var0008 with var000A to var000B) {
@@ -23490,7 +23551,7 @@ void Func0410 object#(0x410) () {
 					var0004[0x0002] += 0x0001;
 					var0009 = UI_create_new_object(var0006);
 					if (var0009) {
-						var0009->set_item_flag(0x0012);
+						var0009->set_item_flag(TEMPORARY);
 						var0005 = UI_update_last_created(var0004);
 					}
 				}
@@ -23518,9 +23579,9 @@ void Func0410 object#(0x410) () {
 		0xFFF0->run_schedule();
 		0xFFF0->show_npc_face0(0x0000);
 		0xFFF0->clear_item_say();
-		var000D = 0xFFF0->get_item_flag(0x001C);
+		var000D = 0xFFF0->get_item_flag(MET);
 		if (var000D == false) {
-			0xFFF0->set_item_flag(0x001C);
+			0xFFF0->set_item_flag(MET);
 			say("\"I am a man! I am a man! I cannot tell thee how miserable it is to be a bird.\"");
 			add("bird");
 			UI_set_timer(0x0005);
@@ -23618,7 +23679,7 @@ void Func0410 object#(0x410) () {
 				} else {
 					say("\"Oh, well, I cannot remember.\"");
 				}
-				if (0xFFD8->get_item_flag(0x0004)) {
+				if (0xFFD8->get_item_flag(DEAD)) {
 					say("\"Anyway, now that he hath been killed, I know not what we'll do. I suppose we must await the arrival of another ship.\"");
 					add("killed");
 				} else {
@@ -23741,7 +23802,7 @@ void Func0411 object#(0x411) () {
 	} else {
 		var0003 = "evening";
 	}
-	if ((event == 0x0007) && get_item_flag(0x001D)) {
+	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
 		var0004 = script item {
 			nohalt;
 			call Func0329;
@@ -23756,7 +23817,7 @@ void Func0411 object#(0x411) () {
 		0xFFEF->run_schedule();
 		0xFFEF->clear_item_say();
 		0xFFEF->show_npc_face0(0x0000);
-		var0005 = 0xFFEF->get_item_flag(0x001C);
+		var0005 = 0xFFEF->get_item_flag(MET);
 		if (gflags[0x00F0] && (!gflags[0x0128])) {
 			say("\"I cannot give thee what thou dost desire until thou hast gazed into my crystal ball, ",
 				var0000,
@@ -23789,7 +23850,7 @@ void Func0411 object#(0x411) () {
 			}
 		} else {
 			if (var0005 == false) {
-				0xFFEF->set_item_flag(0x001C);
+				0xFFEF->set_item_flag(MET);
 				say("\"Thou must be a seeker after knowledge. I am the Mage Fedabiblio, and I serve as the Magister of Moonshade.\"");
 			} else {
 				say("\"Thou hast a voracious appetite for knowledge. What dost thou desire to learn?\"");
@@ -23802,7 +23863,7 @@ void Func0411 object#(0x411) () {
 		if (gflags[0x00E4] && (!gflags[0x0128])) {
 			add("Gustacio's experiment");
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(0x0004))) {
+		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
 		if ((gflags[0x010B] && (!gflags[0x028C])) || ((gflags[0x010C] && (!gflags[0x0295])) || ((gflags[0x010E] && (!gflags[0x029A])) || ((gflags[0x0110] && (!gflags[0x028F])) || ((gflags[0x0112] && (!gflags[0x0290])) || (gflags[0x0114] && (!gflags[0x0293]))))))) {
@@ -23908,7 +23969,7 @@ void Func0411 object#(0x411) () {
 				say("\"The three Adepts are the most powerful wizards in the city. They compose the Council of Mages, which governs the city.\"");
 				say("\"One of the Adepts serves as MageLord. Currently, Filbercio rules as Lord of Moonshade.\"");
 				add("Filbercio");
-				if (0xFFE1->get_item_flag(0x0004)) {
+				if (0xFFE1->get_item_flag(DEAD)) {
 					if (gflags[0x00E2]) {
 						say("\"All is in an uproar, with Rotoluncia dead and her replacement -- the Necromancer Mortegro -- missing.\"");
 						say("\"Gustacio hath asked that I join the Council in this troubled time, and I have done so.\"");
@@ -24074,7 +24135,7 @@ void Func0411 object#(0x411) () {
 					say("\"A blue egg... have I ever read of such a thing? Blue hens, blue frogs -- but eggs?\"");
 				}
 				say("\"I do not know what it is! And if I do not know, then no one shall.\"");
-				if (!(0xFFD8->get_item_flag(0x0004) && Func0942(0xFFED))) {
+				if (!(0xFFD8->get_item_flag(DEAD) && Func0942(0xFFED))) {
 					0xFFED->show_npc_face1(0x0000);
 					say("\"Cap'n Hawk might know! He hath been everywhere in the world!\"");
 					gflags[0x010A] = true;
@@ -24239,7 +24300,7 @@ void Func0412 object#(0x412) () {
 	} else {
 		var0007 = "evening";
 	}
-	if ((event == 0x0007) && get_item_flag(0x001D)) {
+	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
 		var0009 = script item {
 			nohalt;
 			call Func0329;
@@ -24255,10 +24316,10 @@ void Func0412 object#(0x412) () {
 		0xFFEE->run_schedule();
 		0xFFEE->halt_scheduled();
 		0xFFEE->show_npc_face0(0x0000);
-		var000A = 0xFFEE->get_item_flag(0x001C);
+		var000A = 0xFFEE->get_item_flag(MET);
 		say("\"'Tis thee again. Hast thou good news?\"");
 		add(["duties", "politics"]);
-		if (gflags[0x00EA] && ((!gflags[0x00EB]) && (!0xFFE1->get_item_flag(0x0004)))) {
+		if (gflags[0x00EA] && ((!gflags[0x00EB]) && (!0xFFE1->get_item_flag(DEAD)))) {
 			add("kidnap");
 		}
 		if (gflags[0x00EB] && (!0xFFE1->is_dead())) {
@@ -24319,7 +24380,7 @@ void Func0412 object#(0x412) () {
 			case "politics" (remove):
 				say("\"Is there no end to the bickering among the Mages? We have three factions here, and each elects its favorite to the Council of Moonshade.\"");
 				say("\"As the voice of compromise and experience, I have always been selected MageLord by the Adepts.\"");
-				if (0xFFE1->get_item_flag(0x0004)) {
+				if (0xFFE1->get_item_flag(DEAD)) {
 					say("\"My fellow Lords are Gustacio and Mortegro.\"");
 				} else {
 					say("\"My fellow Lords are Rotoluncia and Gustacio.\"");
@@ -24327,7 +24388,7 @@ void Func0412 object#(0x412) () {
 				Func0830();
 				UI_push_answers();
 				add(["Adept Gustacio"]);
-				if (0xFFE1->get_item_flag(0x0004)) {
+				if (0xFFE1->get_item_flag(DEAD)) {
 					add("Adept Mortegro");
 				} else {
 					add("Adept Rotoluncia");
@@ -24421,7 +24482,7 @@ void Func0412 object#(0x412) () {
 				fallthrough;
 
 			case "Rotoluncia" (remove):
-				if (0xFFE1->get_item_flag(0x0004)) {
+				if (0xFFE1->get_item_flag(DEAD)) {
 					say("\"A tragedy that the two of thee were unable to settle thy differences amicably.\"");
 					UI_pop_answers();
 				} else {
@@ -24520,7 +24581,7 @@ void Func0413 object#(0x413) () {
 
 	var0000 = Func0954();
 	var0001 = false;
-	if ((event == 0x0007) && get_item_flag(0x001D)) {
+	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
 		var0002 = script item {
 			nohalt;
 			call Func0329;
@@ -24543,7 +24604,7 @@ void Func0413 object#(0x413) () {
 		0xFFED->run_schedule();
 		0xFFED->clear_item_say();
 		0xFFED->show_npc_face0(0x0000);
-		var0004 = 0xFFED->get_item_flag(0x001C);
+		var0004 = 0xFFED->get_item_flag(MET);
 		if (gflags[0x0004]) {
 			if (gflags[0x00F1]) {
 				say("\"I am so glad to see thee, ",
@@ -24554,7 +24615,7 @@ void Func0413 object#(0x413) () {
 			}
 			add("trouble");
 		} else if (var0004 == false) {
-			0xFFED->set_item_flag(0x001C);
+			0xFFED->set_item_flag(MET);
 			say("\"Art thou the great hero from a distant land?! Oh, my name is Freli. I am glad to meet thee!\"");
 			add(["hero", "distant land"]);
 		} else {
@@ -24567,7 +24628,7 @@ void Func0413 object#(0x413) () {
 		if (gflags[0x018D] && (!gflags[0x00E7])) {
 			add("Delin");
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(0x0004))) {
+		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
 		converse (["bye"]) {
@@ -24731,7 +24792,7 @@ void Func0414 object#(0x414) () {
 	var var000D;
 	var var000E;
 
-	var0000 = 0xFFEC->get_item_flag(0x001C);
+	var0000 = 0xFFEC->get_item_flag(MET);
 	var0001 = Func0954();
 	var0002 = UI_is_pc_female();
 	var0003 = Func0953();
@@ -24750,7 +24811,7 @@ void Func0414 object#(0x414) () {
 	var0008 = 0xFFEC->get_object_position();
 	var0009 = [0x0986, 0x0766];
 	var000A = Func09A0(0x0005, 0x0003);
-	if ((event == 0x0007) && get_item_flag(0x001D)) {
+	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
 		var000B = script item {
 			nohalt;
 			call Func0329;
@@ -24786,7 +24847,7 @@ void Func0414 object#(0x414) () {
 		0xFFEC->clear_item_say();
 		0xFFEC->show_npc_face0(0x0000);
 		if (var0000 == false) {
-			0xFFEC->set_item_flag(0x001C);
+			0xFFEC->set_item_flag(MET);
 			say("\"Yes, we met at the MageLord's banquet. I am Frigidazzi, of course.\"");
 		} else {
 			say("\"Back so soon? But of course.\"");
@@ -24913,7 +24974,7 @@ void Func0416 object#(0x416) () {
 	}
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	if ((event == 0x0007) && get_item_flag(0x001D)) {
+	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
 		var0003 = script item {
 			nohalt;
 			call Func0329;
@@ -24929,7 +24990,7 @@ void Func0416 object#(0x416) () {
 		0xFFEA->run_schedule();
 		0xFFEA->clear_item_say();
 		0xFFEA->show_npc_face0(0x0000);
-		var0004 = 0xFFEA->get_item_flag(0x001C);
+		var0004 = 0xFFEA->get_item_flag(MET);
 		if (0xFFEA->get_schedule_type() == 0x000E) {
 			say("\"Canst thou not see that I am trying to sleep!\"");
 			Func097F(0xFFEA, "@Return tomorrow!@", 0x0000);
@@ -24942,7 +25003,7 @@ void Func0416 object#(0x416) () {
 				say("\"A pleasure to meet thee, I am certain. But I have no patience for idle tongue wagging.\"");
 			}
 			say("\"Forgive me, but this is an absolute waste of time, when there are other matters which are pressing...\"");
-			0xFFEA->set_item_flag(0x001C);
+			0xFFEA->set_item_flag(MET);
 			0xFFEA->set_schedule_type(0x000C);
 			Func097F(0xFFEA, "@To work...@", 0x0000);
 			abort;
@@ -25250,10 +25311,10 @@ void Func0417 object#(0x417) () {
 		0xFFE9->run_schedule();
 		0xFFE9->clear_item_say();
 		0xFFE9->show_npc_face0(0x0000);
-		var0009 = 0xFFE9->get_item_flag(0x001C);
+		var0009 = 0xFFE9->get_item_flag(MET);
 		if (var0009 == false) {
 			say("\"In what way can I help thee, stranger?\"");
-			0xFFE9->set_item_flag(0x001C);
+			0xFFE9->set_item_flag(MET);
 		} else {
 			say("\"We meet again.\"");
 		}
@@ -25275,7 +25336,7 @@ void Func0417 object#(0x417) () {
 		if (gflags[0x0106] && (!gflags[0x011B])) {
 			add("Celennia's disappearance");
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(0x0004))) {
+		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
 		converse (["name", "wine", "bye"]) {
@@ -25672,7 +25733,7 @@ void Func0418 object#(0x418) () {
 	} else {
 		var0006 = "evening";
 	}
-	if ((event == 0x0007) && get_item_flag(0x001D)) {
+	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
 		var0007 = script item {
 			nohalt;
 			call Func0329;
@@ -25698,9 +25759,9 @@ void Func0418 object#(0x418) () {
 			Func097F(0xFFE8, "@Never!@", 0x0000);
 			abort;
 		}
-		var0008 = 0xFFE8->get_item_flag(0x001C);
+		var0008 = 0xFFE8->get_item_flag(MET);
 		if (var0008 == false) {
-			0xFFE8->set_item_flag(0x001C);
+			0xFFE8->set_item_flag(MET);
 			say("\"I do not believe that we have met. 'Tis so nice to make the acquaintance of a new, young Mage.\"");
 			say("\"I am Melino, husband of the Green Enchantress.\"");
 			add(["new Mage", "Green Enchantress"]);
@@ -25950,7 +26011,7 @@ void Func0419 object#(0x419) () {
 	var var0005;
 	var var0006;
 
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -26069,15 +26130,15 @@ void Func0419 object#(0x419) () {
 				break;
 		}
 	}
-	if ((event == 0x0007) && get_item_flag(0x001D)) {
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(0x0004))) {
+	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
 			0xFED6->show_npc_face0(0x0000);
 			say("\"Rotoluncia shall avenge my loss...\"");
 			gflags[0x00EB] = true;
 			0xFFE1->set_alignment(0x0003);
 			UI_remove_npc_face0();
 		}
-		0xFFE7->clear_item_flag(0x001D);
+		0xFFE7->clear_item_flag(SI_TOURNAMENT);
 		0xFFE7->reduce_health(0x0037, 0x0000);
 	}
 }
@@ -26119,7 +26180,7 @@ void Func041A object#(0x41A) () {
 	var0003 = Func0994();
 	var0004 = Func097D(0xFE9B, 0x0001, 0x024B, 0x0000, 0x0005);
 	var0005 = Func097D(0xFE9B, 0x0001, 0x031A, 0x0000, 0x0000);
-	if ((event == 0x0007) && get_item_flag(0x001D)) {
+	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
 		var0006 = script item {
 			nohalt;
 			call Func0329;
@@ -26196,14 +26257,14 @@ void Func041A object#(0x41A) () {
 	}
 	if (event == 0x0009) {
 		0xFFE6->clear_item_say();
-		if (0xFFE6->get_item_flag(0x0006)) {
+		if (0xFFE6->get_item_flag(IN_PARTY)) {
 			0xFFE6->set_schedule_type(0x001F);
 			add("leave");
 		} else {
 			0xFFE6->run_schedule();
 		}
 		0xFFE6->show_npc_face0(0x0000);
-		var000B = 0xFFE6->get_item_flag(0x001C);
+		var000B = 0xFFE6->get_item_flag(MET);
 		if ((gflags[0x0215] == true) && (!gflags[0x0216])) {
 			gflags[0x0216] = true;
 			say("\"Many thanks, ",
@@ -26231,7 +26292,7 @@ void Func041A object#(0x41A) () {
 					say("\"Excuse me, ",
 						var0000,
 						"! My name is Mortegro, mage of Moonshade.\"");
-					0xFFE6->set_item_flag(0x001C);
+					0xFFE6->set_item_flag(MET);
 				} else {
 					say("\"Avatar! I am glad to see thee!\"");
 				}
@@ -26240,7 +26301,7 @@ void Func041A object#(0x41A) () {
 			add(["trapped", "spell"]);
 		} else if (var000B == false) {
 			say("\"Hello, there! I am Mortegro, the Necromage of Moonshade.\"");
-			0xFFE6->set_item_flag(0x001C);
+			0xFFE6->set_item_flag(MET);
 		} else {
 			say("\"Hello once again, ",
 				var0002,
@@ -26261,7 +26322,7 @@ void Func041A object#(0x41A) () {
 		if (gflags[0x0132]) {
 			add("seance");
 		}
-		if (gflags[0x013F] && (!0xFFE1->get_item_flag(0x0004))) {
+		if (gflags[0x013F] && (!0xFFE1->get_item_flag(DEAD))) {
 			add("accuse");
 		}
 		add(["Necromage", "learn spells"]);
@@ -26458,7 +26519,7 @@ void Func041A object#(0x41A) () {
 				fallthrough;
 
 			case "bye":
-				if (gflags[0x0216] && (!0xFFE6->get_item_flag(0x0006))) {
+				if (gflags[0x0216] && (!0xFFE6->get_item_flag(IN_PARTY))) {
 					say("\"Wouldst thou allow me to accompany thee back to Moonshade? I am afraid that I do not know where I am.\"");
 					do {
 						if (UI_get_array_size(UI_get_party_list2()) > 0x0004) {
@@ -26527,7 +26588,7 @@ void Func041B object#(0x41B) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	if ((event == 0x0007) && get_item_flag(0x001D)) {
+	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
 		var0003 = script item {
 			nohalt;
 			call Func0329;
@@ -26548,7 +26609,7 @@ void Func041B object#(0x41B) () {
 				var0007 = 0xFFE5->get_object_position();
 				var0008 = UI_create_new_object2(0x020B, [(var0007[0x0001] - 0x0001), (var0007[0x0002] - 0x0001), var0007[0x0003]]);
 				if (var0008) {
-					var0008->set_item_flag(0x0012);
+					var0008->set_item_flag(TEMPORARY);
 					var0008->set_schedule_type(0x0009);
 				}
 			}
@@ -26599,9 +26660,9 @@ void Func041B object#(0x41B) () {
 		0xFFE5->run_schedule();
 		0xFFE5->clear_item_say();
 		0xFFE5->show_npc_face0(0x0000);
-		var000B = 0xFFE5->get_item_flag(0x001C);
+		var000B = 0xFFE5->get_item_flag(MET);
 		if (var000B == false) {
-			0xFFE5->set_item_flag(0x001C);
+			0xFFE5->set_item_flag(MET);
 			say("\"So what'rt thou looking at, eh?\"");
 		} else if (gflags[0x00EF]) {
 			if (Func097D(0xFE9B, 0x0001, 0x0179, 0xFE99, 0x000D)) {
@@ -26620,7 +26681,7 @@ void Func041B object#(0x41B) () {
 		if (gflags[0x0115] && (!gflags[0x0293])) {
 			add("slippers");
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(0x0004))) {
+		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
 		converse (["bye"]) {
@@ -26844,9 +26905,9 @@ void Func041C object#(0x41C) () {
 		var0006 = "evening";
 	}
 	if (event == 0x0007) {
-		if (0xFFE4->get_item_flag(0x001D)) {
+		if (0xFFE4->get_item_flag(SI_TOURNAMENT)) {
 			Func0976(0xFFE4, 0x0005);
-			0xFFE4->clear_item_flag(0x001D);
+			0xFFE4->clear_item_flag(SI_TOURNAMENT);
 			var0003 = script 0xFFE4 {
 				call Func070A;
 			};
@@ -26897,7 +26958,7 @@ void Func041C object#(0x41C) () {
 		0xFFE4->item_say("@I'm ready.@");
 	}
 	if (event == 0x0009) {
-		if (0xFFE4->get_item_flag(0x0006)) {
+		if (0xFFE4->get_item_flag(IN_PARTY)) {
 			0xFFE4->set_schedule_type(0x001F);
 			add("leave");
 		} else {
@@ -26908,9 +26969,9 @@ void Func041C object#(0x41C) () {
 			}
 		}
 		0xFFE4->show_npc_face0(0x0000);
-		var0008 = 0xFFE4->get_item_flag(0x001C);
+		var0008 = 0xFFE4->get_item_flag(MET);
 		if ((var0008 == false) && (!gflags[0x0004])) {
-			0xFFE4->set_item_flag(0x001C);
+			0xFFE4->set_item_flag(MET);
 			say("\"This is the Blue Boar Inn, and I am the barmaid. My name is Petra.\"");
 			add(["Blue Boar Inn", "barmaid"]);
 		} else if (gflags[0x0004]) {
@@ -26920,7 +26981,7 @@ void Func041C object#(0x41C) () {
 					". Rocco -- my love -- is dead, and the Blue Boar destroyed.\"");
 				say("\"I am only an automaton, with no hope that any soul I may have will join Rocco in the world beyond this one. There is nothing left for me.\"");
 				gflags[0x0139] = true;
-			} else if (0xFFE4->get_item_flag(0x0006) || (!(Func0994() == 0x000E))) {
+			} else if (0xFFE4->get_item_flag(IN_PARTY) || (!(Func0994() == 0x000E))) {
 				say("\"Glad to talk to thee again, ",
 					var0002,
 					". I only wish I could be of more help to thee. I am merely an automaton...\"");
@@ -26936,10 +26997,10 @@ void Func041C object#(0x41C) () {
 		} else {
 			say("\"Is this not a nice day?\"");
 		}
-		if (gflags[0x0226] && (!0xFFE4->get_item_flag(0x0006))) {
+		if (gflags[0x0226] && (!0xFFE4->get_item_flag(IN_PARTY))) {
 			add("acid");
 		}
-		if (gflags[0x0227] && ((Func0994() == 0x0011) && (!0xFE9C->get_item_flag(0x0023)))) {
+		if (gflags[0x0227] && ((Func0994() == 0x0011) && (!0xFE9C->get_item_flag(ISPETRA)))) {
 			var0009 = 0xFE9C->find_nearby(0x0314, 0x000F, 0x0000);
 			for (var000C in var0009 with var000A to var000B) {
 				if (var000C->get_item_quality() == 0x003D) {
@@ -26948,10 +27009,10 @@ void Func041C object#(0x41C) () {
 				}
 			}
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(0x0004))) {
+		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
-		if (var0004 && (!0xFFE4->get_item_flag(0x0006))) {
+		if (var0004 && (!0xFFE4->get_item_flag(IN_PARTY))) {
 			add(["food", "drink", "room"]);
 		}
 		converse (["bye"]) {
@@ -27203,7 +27264,7 @@ void Func041C object#(0x41C) () {
 
 			case "bye":
 				UI_remove_npc_face0();
-				if (0xFFE4->get_item_flag(0x0006) || (!(Func0994() == 0x000E))) {
+				if (0xFFE4->get_item_flag(IN_PARTY) || (!(Func0994() == 0x000E))) {
 					Func097F(0xFE9C, "@Thanks.@", 0x0000);
 					Func097F(0xFFE4, "@Glad to be of help.@", 0x0002);
 				} else {
@@ -27287,9 +27348,9 @@ void Func041D object#(0x41D) () {
 		0xFFE3->run_schedule();
 		0xFFE3->clear_item_say();
 		0xFFE3->show_npc_face0(0x0000);
-		if (!0xFFE3->get_item_flag(0x001C)) {
+		if (!0xFFE3->get_item_flag(MET)) {
 			say("\"Yes, I remember thee from the banquet -- Rotoluncia wanted to kill thee!\"");
-			0xFFE3->set_item_flag(0x001C);
+			0xFFE3->set_item_flag(MET);
 			if (0xFFE3->get_schedule_type() == 0x001D) {
 				say("\"Welcome to the Apothecary Shop. I am Pothos, the proprietor.\"");
 			} else {
@@ -27345,10 +27406,10 @@ void Func041D object#(0x41D) () {
 		if (gflags[0x00DC] && (!gflags[0x00E8])) {
 			add("secret");
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(0x0004))) {
+		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
-		if (!0xFFE1->get_item_flag(0x0004)) {
+		if (!0xFFE1->get_item_flag(DEAD)) {
 			add("Rotoluncia");
 		}
 		converse (["bye"]) {
@@ -27840,7 +27901,7 @@ void Func041E object#(0x41E) () {
 		0xFFE2->run_schedule();
 		0xFFE2->clear_item_say();
 		0xFFE2->show_npc_face0(0x0000);
-		var0007 = 0xFFE2->get_item_flag(0x001C);
+		var0007 = 0xFFE2->get_item_flag(MET);
 		if (var0007 == false) {
 			if (0xFFE2->get_schedule_type() == 0x0007) {
 				say("\"Welcome to the Blue Boar Inn. I am the innkeeper. My name is Rocco.\"");
@@ -27848,7 +27909,7 @@ void Func041E object#(0x41E) () {
 				say("\"I do not believe we've met. I'm Rocco, the innkeeper at the Blue Boar.\"");
 			}
 			say("\"'Tis good to have more visitors again. We had despaired, what with the storms and all.\"");
-			0xFFE2->set_item_flag(0x001C);
+			0xFFE2->set_item_flag(MET);
 		} else {
 			say("\"So good to see thee again, ",
 				var0000,
@@ -27862,7 +27923,7 @@ void Func041E object#(0x41E) () {
 		if (gflags[0x0115] && (!gflags[0x0293])) {
 			add("slippers");
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(0x0004))) {
+		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
 		converse ("bye") {
@@ -28203,9 +28264,9 @@ void Func041F object#(0x41F) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	if ((event == 0x0007) && 0xFFE1->get_item_flag(0x001D)) {
+	if ((event == 0x0007) && 0xFFE1->get_item_flag(SI_TOURNAMENT)) {
 		0xFFE1->show_npc_face0(0x0000);
-		0xFFE1->clear_item_flag(0x001D);
+		0xFFE1->clear_item_flag(SI_TOURNAMENT);
 		0xFFE1->reduce_health(0x0032, 0x0000);
 		var0003 = Func0992(0x0001, 0x0000, 0x0000, true);
 		Func097F(var0003, "@The witch is dead!@", 0x0005);
@@ -28248,7 +28309,7 @@ void Func041F object#(0x41F) () {
 			say("\"This is thy last chance -- wilt thou tell me the secret which I desire, the key to controlling Daemons!!!\"");
 			if (Func0955()) {
 				say("\"Thou shalt not live to regret this. Open thy mind to me!\"");
-				0xFE9C->set_item_flag(0x0010);
+				0xFE9C->set_item_flag(DONT_MOVE);
 				0xFFE1->set_schedule_type(0x000A);
 				0xFE9C->set_schedule_type(0x000F);
 				gflags[0x0007] = true;
@@ -28288,7 +28349,7 @@ void Func041F object#(0x41F) () {
 			0xFFE1->move_object([0x086F, 0x0822, 0x0000]);
 			gflags[0x0009] = false;
 			gflags[0x000A] = true;
-			0xFE9C->clear_item_flag(0x0010);
+			0xFE9C->clear_item_flag(DONT_MOVE);
 			var0004 = script 0xFE9C after 5 ticks {
 				nohalt;
 				call Func0636;
@@ -28299,7 +28360,7 @@ void Func041F object#(0x41F) () {
 		}
 		if (gflags[0x0008]) {
 			0xFE9C->set_schedule_type(0x001F);
-			0xFE9C->clear_item_flag(0x0010);
+			0xFE9C->clear_item_flag(DONT_MOVE);
 			var0004 = script 0xFE9C {
 				nohalt;
 				actor frame sleeping;
@@ -28330,7 +28391,7 @@ void Func041F object#(0x41F) () {
 		}
 		if (gflags[0x0134] && (!gflags[0x00EA])) {
 			0xFED2->show_npc_face0(0x0000);
-			if (0xFFE1->get_item_flag(0x0004)) {
+			if (0xFFE1->get_item_flag(DEAD)) {
 				say("\"I am speaking to thee from beyond the grave. I shall have vengeance!\"");
 				abort;
 			}
@@ -28436,11 +28497,11 @@ void Func041F object#(0x41F) () {
 							var0010->get_npc_object()->obj_sprite_effect(0x000D, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
 							var0011 = UI_create_new_object(0x037F);
 							if (var0011) {
-								var0011->set_item_flag(0x0012);
+								var0011->set_item_flag(TEMPORARY);
 								var0004 = UI_update_last_created(var0008);
 							}
 						} else {
-							0xFE9C->set_item_flag(0x0010);
+							0xFE9C->set_item_flag(DONT_MOVE);
 							0xFE9C->set_schedule_type(0x000F);
 							gflags[0x0007] = true;
 							var0004 = script 0xFE9C {
@@ -28467,17 +28528,17 @@ void Func041F object#(0x41F) () {
 		if (gflags[0x00DD] && (!gflags[0x00EA])) {
 			0xFFE7->move_object([0x09B9, 0x0715, 0x0000]);
 			0xFFE7->set_schedule_type(0x000F);
-			0xFFE7->set_item_flag(0x001D);
+			0xFFE7->set_item_flag(SI_TOURNAMENT);
 			var0010 = 0x0000 - 0xFFE1->get_npc_id();
-			if ((var0010 == 0x0000) || var0010->get_item_flag(0x0004)) {
+			if ((var0010 == 0x0000) || var0010->get_item_flag(DEAD)) {
 				var0004 = [];
-				if (!0xFFFE->get_item_flag(0x0004)) {
+				if (!0xFFFE->get_item_flag(DEAD)) {
 					var0004 &= 0xFFFE;
 				}
-				if (gflags[0x0078] && (!0xFFFD->get_item_flag(0x0004))) {
+				if (gflags[0x0078] && (!0xFFFD->get_item_flag(DEAD))) {
 					var0004 &= 0xFFFD;
 				}
-				if (gflags[0x00B7] && (!0xFFFF->get_item_flag(0x0004))) {
+				if (gflags[0x00B7] && (!0xFFFF->get_item_flag(DEAD))) {
 					var0004 &= 0xFFFF;
 				}
 				if (var0004) {
@@ -28523,7 +28584,7 @@ void Func041F object#(0x41F) () {
 						}
 					}
 				}
-				if (var0010->get_item_flag(0x0006)) {
+				if (var0010->get_item_flag(IN_PARTY)) {
 					var0010->remove_from_party();
 				}
 				var0010->set_new_schedules(0x0000, 0x0007, [0x0858, 0x0837]);
@@ -28537,7 +28598,7 @@ void Func041F object#(0x41F) () {
 				var0012->remove_from_party();
 				Func09AC(var0012, 0xFFFF, 0x0000, 0x000C);
 			}
-			0xFE9C->set_item_flag(0x0010);
+			0xFE9C->set_item_flag(DONT_MOVE);
 			var0008 = 0xFE9C->get_object_position();
 			0xFE9C->obj_sprite_effect(0x001A, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
 			var0004 = script 0xFE9C after 13 ticks {
@@ -28591,10 +28652,10 @@ void Func0420 object#(0x420) () {
 		0xFFE0->run_schedule();
 		0xFFE0->clear_item_say();
 		0xFFE0->show_npc_face0(0x0000);
-		var0005 = 0xFFE0->get_item_flag(0x001C);
+		var0005 = 0xFFE0->get_item_flag(MET);
 		if (var0005 == false) {
 			say("\"Allow me to introduce myself. I'm Topo the Artisan, apprenticed to Master Ducio.\"");
-			0xFFE0->set_item_flag(0x001C);
+			0xFFE0->set_item_flag(MET);
 			if (Func0942(0xFFF1)) {
 				say("\"I'm a lucky man, to serve such a talented craftsman.\"");
 				Func094E(0xFFF1, "@He's a good boy.@");
@@ -28629,7 +28690,7 @@ void Func0420 object#(0x420) () {
 		if (0xFFE0->get_schedule_type() == 0x000C) {
 			add("buy");
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(0x0004))) {
+		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
 		if (Func097D(0xFE9B, 0x0001, 0x02F8, 0xFE99, 0xFE99)) {
@@ -28973,7 +29034,7 @@ void Func0421 object#(0x421) () {
 		var0004 = "evening";
 	}
 	var0005 = false;
-	if ((event == 0x0007) && get_item_flag(0x001D)) {
+	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
 		var0006 = script item {
 			nohalt;
 			call Func0329;
@@ -28989,9 +29050,9 @@ void Func0421 object#(0x421) () {
 		0xFFDF->run_schedule();
 		0xFFDF->clear_item_say();
 		0xFFDF->show_npc_face0(0x0000);
-		var0007 = 0xFFDF->get_item_flag(0x001C);
+		var0007 = 0xFFDF->get_item_flag(MET);
 		if (var0007 == false) {
-			0xFFDF->set_item_flag(0x001C);
+			0xFFDF->set_item_flag(MET);
 			say("\"I am Torrissio, a Mage of Moonshade.\"");
 		}
 		say("\"I am not a sociable man, so this will be brief. What dost thou desire of me, and at what price?\"");
@@ -29013,10 +29074,10 @@ void Func0421 object#(0x421) () {
 		if (gflags[0x00FF]) {
 			add("Worm Gems");
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(0x0004))) {
+		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
-		if (gflags[0x00E2] && (!0xFF58->get_item_flag(0x0004))) {
+		if (gflags[0x00E2] && (!0xFF58->get_item_flag(DEAD))) {
 			add("Stefano");
 		}
 		if (Func097D(0xFE9B, 0x0001, 0x02A5, 0xFE99, 0x0000) && (!gflags[0x013B])) {
@@ -29136,7 +29197,7 @@ void Func0421 object#(0x421) () {
 
 			case "politics" (remove):
 				say("\"Of course, nothing ever gets done without a little politics.");
-				if (0xFFE1->get_item_flag(0x0004)) {
+				if (0xFFE1->get_item_flag(DEAD)) {
 					say("\"I was allied with Rotoluncia, but her death makes our partnership void.\"");
 				} else {
 					say("\"One's enemies and allies are constantly shifting. That is why Rotoluncia and I have formed a sort of coalition, wherein we both work to protect each other's best interests.\"");
@@ -29213,7 +29274,7 @@ void Func0421 object#(0x421) () {
 								gflags[0x013B] = true;
 							}
 							if (Func0955()) {
-								0xFE9C->set_item_flag(0x0001);
+								0xFE9C->set_item_flag(ASLEEP);
 								var000B = 0x0006 + UI_die_roll(0x0000, 0x0009);
 								UI_fade_palette(0x000C, 0x0001, 0x0000);
 								0xFFDF->move_object([0x0610, 0x078F, 0x0000]);
@@ -29406,12 +29467,12 @@ void Func0422 object#(0x422) () {
 
 	var0000 = Func0954();
 	var0001 = Func0953();
-	var0002 = 0xFFFE->get_item_flag(0x0006);
-	var0003 = 0xFFFD->get_item_flag(0x0006);
-	var0004 = 0xFFFF->get_item_flag(0x0006);
-	var0005 = 0xFFDE->get_item_flag(0x0006);
-	var0006 = 0xFFDE->get_item_flag(0x001C);
-	var0007 = 0xFFDE->get_item_flag(0x0004);
+	var0002 = 0xFFFE->get_item_flag(IN_PARTY);
+	var0003 = 0xFFFD->get_item_flag(IN_PARTY);
+	var0004 = 0xFFFF->get_item_flag(IN_PARTY);
+	var0005 = 0xFFDE->get_item_flag(IN_PARTY);
+	var0006 = 0xFFDE->get_item_flag(MET);
+	var0007 = 0xFFDE->get_item_flag(DEAD);
 	if ((event == 0x0007) && gflags[0x0083]) {
 		var0008 = 0xFFDE->get_oppressor();
 		var0008 = 0x0000 - var0008;
@@ -29423,8 +29484,8 @@ void Func0422 object#(0x422) () {
 		Func092E(item);
 		return;
 	}
-	if ((event == 0x0007) && 0xFFDE->get_item_flag(0x001D)) {
-		0xFFDE->clear_item_flag(0x001D);
+	if ((event == 0x0007) && 0xFFDE->get_item_flag(SI_TOURNAMENT)) {
+		0xFFDE->clear_item_flag(SI_TOURNAMENT);
 		var0009 = 0xFFDE->get_object_position();
 		UI_play_sound_effect(0x002A);
 		var0009[0x0001] -= var0009[0x0003] / 0x0002;
@@ -29480,7 +29541,7 @@ void Func0422 object#(0x422) () {
 	}
 	if (event == 0x0009) {
 		if (item == 0xFFDE->get_npc_object()) {
-			if (0xFFDE->get_item_flag(0x0006)) {
+			if (0xFFDE->get_item_flag(IN_PARTY)) {
 				0xFFDE->set_schedule_type(0x001F);
 				add("leave");
 			} else {
@@ -29503,7 +29564,7 @@ void Func0422 object#(0x422) () {
 				add(["leave"]);
 			} else if (!var0006) {
 				say("\"I have a body! I have a body!\"");
-				0xFFDE->set_item_flag(0x001C);
+				0xFFDE->set_item_flag(MET);
 			} else {
 				say("\"Hello, there!\"");
 			}
@@ -29519,7 +29580,7 @@ void Func0422 object#(0x422) () {
 				gflags[0x01C0] = true;
 			}
 		}
-		if (gflags[0x0013] && ((!0xFFDE->get_item_flag(0x0006)) && 0xFFDE->get_cont_items(0xFE99, 0xFE99, 0xFE99))) {
+		if (gflags[0x0013] && ((!0xFFDE->get_item_flag(IN_PARTY)) && 0xFFDE->get_cont_items(0xFE99, 0xFE99, 0xFE99))) {
 			add("return my belongings");
 		}
 		converse (["name", "duties", "bye"]) {
@@ -29721,7 +29782,7 @@ void Func0423 object#(0x423) () {
 	var0001 = Func0953();
 	var0002 = Func0942(0xFFDC);
 	var0003 = Func0942(0xFFDE);
-	var0004 = 0xFFDD->get_item_flag(0x001C);
+	var0004 = 0xFFDD->get_item_flag(MET);
 	var0005 = Func097D(0xFE9B, 0x0001, 0x0268, 0xFE99, 0x0010);
 	var0006 = Func097D(0xFE9B, 0x0001, 0x0252, 0xFE99, 0xFE99);
 	var0007 = Func097D(0xFE9B, 0x0001, 0x0289, 0xFE99, 0x0001);
@@ -29829,7 +29890,7 @@ void Func0423 object#(0x423) () {
 		converse ("bye") {
 			case "Introduce thyself" (remove):
 				say("\"I do not care to know thy name! As for myself, my fame hath grown with each passing century. I am Erstam, he whom some dare call the Mad Mage!\"");
-				0xFFDD->set_item_flag(0x001C);
+				0xFFDD->set_item_flag(MET);
 				add("Mad Mage");
 				fallthrough;
 
@@ -30184,8 +30245,8 @@ void Func0424 object#(0x424) () {
 	var0000 = Func0954();
 	var0001 = Func0953();
 	var0002 = Func0942(0xFFDD);
-	var0003 = 0xFFFD->get_item_flag(0x0006);
-	var0004 = 0xFFDC->get_item_flag(0x001C);
+	var0003 = 0xFFFD->get_item_flag(IN_PARTY);
+	var0004 = 0xFFDC->get_item_flag(MET);
 	if (event == 0x0001) {
 		0xFE9C->item_say("@A moment, good fellow.@");
 		0xFFDC->Func07D1();
@@ -30243,7 +30304,7 @@ void Func0424 object#(0x424) () {
 
 			case "master" (remove):
 				say("\"'Tis my master who calls me Vasel. Thou mayest address me by that name as well.\"");
-				0xFFDC->set_item_flag(0x001C);
+				0xFFDC->set_item_flag(MET);
 				if (var0002) {
 					0xFFDD->show_npc_face1(0x0000);
 					say("\"They shall be carving that name on thy tombstone if thou dost not return to work!\"");
@@ -30419,7 +30480,7 @@ void Func0425 object#(0x425) () {
 			nohalt;
 			call Func0636;
 		};
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		UI_init_conversation();
 		0xFFF0->set_npc_id(0x0000);
 		0xFFDB->set_new_schedules(0x0000, 0x000C, [0x09A7, 0x07F7]);
@@ -30548,14 +30609,14 @@ void Func0426 object#(0x426) () {
 		0xFFDA->run_schedule();
 		0xFFDA->clear_item_say();
 		0xFFDA->show_npc_face0(0x0000);
-		var0007 = 0xFFDA->get_item_flag(0x001C);
+		var0007 = 0xFFDA->get_item_flag(MET);
 		if (var0007 == false) {
 			if (gflags[0x003E] == true) {
 				say("\"Greetings, fellow Pikeman!\" ~\"Come in outta them strange storms and rest a bit...\" *\"This be the Inn of the Sleeping Bull.\" *\"And I be Argus, the innkeeper.\"");
 			} else {
 				say("\"Greetings, stranger.\" *\"Come in outta them strange storms and rest a bit...\" *\"This be the Inn of the Sleeping Bull.\" *\"And I be Argus, the innkeeper.\"");
 			}
-			0xFFDA->set_item_flag(0x001C);
+			0xFFDA->set_item_flag(MET);
 		} else {
 			say("\"Welcome back, ",
 				var0002,
@@ -30890,7 +30951,7 @@ void Func0427 object#(0x427) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	var0003 = 0xFFD9->get_item_flag(0x001C);
+	var0003 = 0xFFD9->get_item_flag(MET);
 	var0004 = Func0994();
 	var0005 = Func0942(0xFFFD);
 	var0006 = Func0942(0xFFFF);
@@ -30910,7 +30971,7 @@ void Func0427 object#(0x427) () {
 				say("\"I had wondered when I would encounter thee here, Avatar. Thou wouldst like some answers, no doubt.\" *\"Or perhaps I could sing thee a song to ease thy way.\"");
 			} else {
 				say("\"Welcome, fellow dreamer! I am Byrin, a gleeman by trade.\" *\"Thou dost look perplexed. I'll warrant that thou wouldst like some answers. Or perhaps I could sing thee a song to ease thy way.\"");
-				0xFFD9->set_item_flag(0x001C);
+				0xFFD9->set_item_flag(MET);
 			}
 			add(["answers", "song", "bye"]);
 		} else {
@@ -30924,7 +30985,7 @@ void Func0427 object#(0x427) () {
 				} else {
 					say("\"Thou art welcome to the Sleeping Bull, fellow traveller! I am Byrin, a wandering gleeman... or minstrel, if thou wilt. I know many tales and tunes to help pass the evenings.\"");
 				}
-				0xFFD9->set_item_flag(0x001C);
+				0xFFD9->set_item_flag(MET);
 			} else {
 				say("\"",
 					var0002,
@@ -31291,7 +31352,7 @@ void Func0428 object#(0x428) () {
 	if (event == 0x0002) {
 		var000A = 0xFFD8->find_nearby(0x025F, 0x0028, 0x0010);
 		for (var000D in var000A with var000B to var000C) {
-			var000E = var000D->get_item_flag(0x0012);
+			var000E = var000D->get_item_flag(TEMPORARY);
 			if (!var000E) {
 				var000D->remove_item();
 			}
@@ -31354,7 +31415,7 @@ void Func0428 object#(0x428) () {
 			0xFFD8->kill_npc();
 			abort;
 		}
-		var0015 = 0xFFD8->get_item_flag(0x001C);
+		var0015 = 0xFFD8->get_item_flag(MET);
 		if (var0015 == false) {
 			say("\"How pleasant to make thine acquaintance, ",
 				var0005,
@@ -31362,7 +31423,7 @@ void Func0428 object#(0x428) () {
 			0xFFD8->set_npc_id(0x0000);
 			0xFFD8->set_new_schedules(0x0000, 0x001A, [0x0503, 0x08C7]);
 			0xFFD8->run_schedule();
-			0xFFD8->set_item_flag(0x001C);
+			0xFFD8->set_item_flag(MET);
 		} else {
 			say("\"A pleasure ta see ye again, ",
 				var0004,
@@ -31379,14 +31440,14 @@ void Func0428 object#(0x428) () {
 				if (var000D) {
 					var0011 = var000D->set_item_quality(0x0000);
 					var000D->set_item_frame(0x0000);
-					var000D->set_item_flag(0x0012);
+					var000D->set_item_flag(TEMPORARY);
 					var0011 = UI_update_last_created([0x0AFC, 0x00CF, 0x0000]);
 				}
 				var000D = UI_create_new_object(0x025F);
 				if (var000D) {
 					var0011 = var000D->set_item_quality(0x000F);
 					var000D->set_item_frame(0x0001);
-					var000D->set_item_flag(0x0012);
+					var000D->set_item_flag(TEMPORARY);
 					var0011 = UI_update_last_created([0x0AF6, 0x00DE, 0x0003]);
 				}
 				0xFFD8->set_schedule_type(0x001D);
@@ -31404,7 +31465,7 @@ void Func0428 object#(0x428) () {
 		if ((!gflags[0x01CC]) && (!gflags[0x01CB])) {
 			add("journey");
 		}
-		if (gflags[0x01CC] && (!0x01E0->get_item_flag(0x001C))) {
+		if (gflags[0x01CC] && (!0x01E0->get_item_flag(MET))) {
 			add("leave island");
 		}
 		if (gflags[0x0108] && (!gflags[0x028C])) {
@@ -31687,12 +31748,12 @@ void Func0429 object#(0x429) () {
 		0xFFD7->run_schedule();
 		0xFFD7->clear_item_say();
 		0xFFD7->show_npc_face0(0x0000);
-		var0008 = 0xFFD7->get_item_flag(0x001C);
+		var0008 = 0xFFD7->get_item_flag(MET);
 		if (var0008 == false) {
 			say("\"Welcome to the Sleeping Bull, ",
 				var0000,
 				"! Enter before we suffer another storm.\" *\"I am Devra... My son, Argus, and I are running the inn since Angus disappeared.\"");
-			0xFFD7->set_item_flag(0x001C);
+			0xFFD7->set_item_flag(MET);
 			add(["storm", "Argus", "disappeared"]);
 		} else {
 			say("\"Welcome back, ",
@@ -32000,7 +32061,7 @@ void Func042A object#(0x42A) () {
 		0xFFD6->run_schedule();
 		0xFFD6->clear_item_say();
 		0xFFD6->show_npc_face0(0x0000);
-		var0009 = 0xFFD6->get_item_flag(0x001C);
+		var0009 = 0xFFD6->get_item_flag(MET);
 		if (gflags[0x0004] == true) {
 			say("\"So, thou art still alive!\" ~\"I had wondered when thy companion arrived in such a strange state.\"");
 			say("\"I never thought I would live to see mighty Moonshade humbled, but Shamino hath certainly managed it quite handily.\"");
@@ -32015,7 +32076,7 @@ void Func042A object#(0x42A) () {
 			} else {
 				say("\"The name is Flindo. I own a provisioning shop in Moonshade and have many important connections there.\"");
 			}
-			0xFFD6->set_item_flag(0x001C);
+			0xFFD6->set_item_flag(MET);
 		} else {
 			say("\"Returned again?\"");
 		}
@@ -32526,7 +32587,7 @@ void Func042B object#(0x42B) () {
 	if (event == 0x0009) {
 		0xFFD5->run_schedule();
 		0xFFD5->clear_item_say();
-		var0009 = 0xFFD5->get_item_flag(0x001C);
+		var0009 = 0xFFD5->get_item_flag(MET);
 		0xFFD5->show_npc_face0(0x0000);
 		if (var0009 == false) {
 			if (gflags[0x003E] == true) {
@@ -32563,7 +32624,7 @@ void Func042B object#(0x42B) () {
 					add("passage");
 				}
 			}
-			0xFFD5->set_item_flag(0x001C);
+			0xFFD5->set_item_flag(MET);
 		} else {
 			say("\"Welcome back, ",
 				var0000,
@@ -32815,7 +32876,7 @@ void Func042C object#(0x42C) () {
 			say("\"I want to be alone.\"");
 			abort;
 		}
-		if (0xFFD4->get_item_flag(0x0006)) {
+		if (0xFFD4->get_item_flag(IN_PARTY)) {
 			0xFFD4->set_schedule_type(0x001F);
 			add("leave");
 		} else {
@@ -32825,22 +32886,22 @@ void Func042C object#(0x42C) () {
 				0xFFD4->run_schedule();
 			}
 		}
-		if ((!0xFFD4->get_item_flag(0x0006)) && gflags[0x01CE]) {
+		if ((!0xFFD4->get_item_flag(IN_PARTY)) && gflags[0x01CE]) {
 			if (gflags[0x01E5]) {
 				say("\"If thou hast the stomach to face great danger, then perhaps we can resume the quest for the lost gold.\"");
 				add(["resume quest"]);
 			} else {
-				if (!0xFFD4->get_item_flag(0x001C)) {
+				if (!0xFFD4->get_item_flag(MET)) {
 					say("\"Allow me to introduce myself. My name is Selina. And I have heard that thou art in need of... finances, shall we say.\"");
 					say("\"I believe that I can be of help...\"");
-					0xFFD4->set_item_flag(0x001C);
+					0xFFD4->set_item_flag(MET);
 				} else {
 					say("\"I have heard that thou art in need of... finances, shall we say.\"");
 					say("\"I believe that I can be of help...\"");
 				}
 				add(["finances", "help"]);
 			}
-		} else if (!0xFFD4->get_item_flag(0x001C)) {
+		} else if (!0xFFD4->get_item_flag(MET)) {
 			if (UI_is_pc_female()) {
 				say("\"'Tis a pleasure to meet thee, ",
 					var0000,
@@ -32856,8 +32917,8 @@ void Func042C object#(0x42C) () {
 				say("\"I need thy protection.\"");
 				add("protection");
 			}
-			0xFFD4->set_item_flag(0x001C);
-		} else if (!0xFFD4->get_item_flag(0x0006)) {
+			0xFFD4->set_item_flag(MET);
+		} else if (!0xFFD4->get_item_flag(IN_PARTY)) {
 			say("\"So, we meet again, ",
 				var0001,
 				"!\"");
@@ -32891,10 +32952,10 @@ void Func042C object#(0x42C) () {
 		if (gflags[0x028B] && (!gflags[0x029D])) {
 			add("Stoneheart");
 		}
-		if (gflags[0x0011] && ((!0xFFD4->get_item_flag(0x0006)) && 0xFFD4->get_cont_items(0xFE99, 0xFE99, 0xFE99))) {
+		if (gflags[0x0011] && ((!0xFFD4->get_item_flag(IN_PARTY)) && 0xFFD4->get_cont_items(0xFE99, 0xFE99, 0xFE99))) {
 			add("belongings");
 		}
-		if (0xFFD4->get_item_flag(0x0006) && (!gflags[0x01E6])) {
+		if (0xFFD4->get_item_flag(IN_PARTY) && (!gflags[0x01E6])) {
 			add("Are we there yet?");
 		}
 		converse ("bye") {
@@ -33238,7 +33299,7 @@ void Func042C object#(0x42C) () {
 						say("\"Congratulations, ",
 							var0001,
 							"! Who is the lucky man?\"");
-						if (!0xFFD4->get_item_flag(0x0006)) {
+						if (!0xFFD4->get_item_flag(IN_PARTY)) {
 							var0012 = Func0992(0x0001, "@Indeed, young lady!@", "@It isn't mine...@", false);
 							0x0000->set_conversation_slot();
 						}
@@ -33250,7 +33311,7 @@ void Func042C object#(0x42C) () {
 					} else {
 						say("\"An engagement ring!\"");
 						say("\"I suppose it would be too much to hope that it was for me...\"");
-						if (!0xFFD4->get_item_flag(0x0006)) {
+						if (!0xFFD4->get_item_flag(IN_PARTY)) {
 							var0012 = Func0992(0x0001, "@Honestly, young lady!@", "@It isn't mine...@", false);
 							0x0000->set_conversation_slot();
 						}
@@ -33308,7 +33369,7 @@ void Func042C object#(0x42C) () {
 	if (event == 0x0002) {
 		var0013 = 0xFFD4->get_npc_id();
 		if (var0013 == 0x0000) {
-			if (!0xFFD4->get_item_flag(0x0006)) {
+			if (!0xFFD4->get_item_flag(IN_PARTY)) {
 				abort;
 			}
 			var0005 = 0xFFD4->get_object_position();
@@ -33389,20 +33450,20 @@ void Func042C object#(0x42C) () {
 			if (var0018) {
 				var0018->set_item_frame(0x0000);
 				var000E = var0018->set_item_quality(0x0021);
-				var0018->clear_item_flag(0x0012);
+				var0018->clear_item_flag(TEMPORARY);
 				var000E = give_last_created();
 			}
 			if (var000E) {
-				0xFFD4->clear_item_flag(0x001D);
+				0xFFD4->clear_item_flag(SI_TOURNAMENT);
 				0xFFD4->reduce_health(0x0032, 0x0000);
 			}
 		}
 	}
 	if (event == 0x0007) {
 		if (gflags[0x024E]) {
-			var0019 = 0xFEF0->get_item_flag(0x0004);
-			var001A = 0xFF80->get_item_flag(0x0004);
-			var001B = 0xFF81->get_item_flag(0x0004);
+			var0019 = 0xFEF0->get_item_flag(DEAD);
+			var001A = 0xFF80->get_item_flag(DEAD);
+			var001B = 0xFF81->get_item_flag(DEAD);
 			if (var0019 && (var001A && var001B)) {
 				if (0xFFD4->get_npc_id() != 0x0001) {
 					// Need to make UCC optimize this
@@ -33431,7 +33492,7 @@ void Func042C object#(0x42C) () {
 		var0022 = Func097D(0xFE9B, 0x0001, 0x0281, 0x0075, 0x0003);
 		if (var0020) {
 			var0023 = 0xFFD4->get_oppressor();
-			if (var0023->get_item_flag(0x0006)) {
+			if (var0023->get_item_flag(IN_PARTY)) {
 				0xFFD4->show_npc_face0(0x0000);
 				say("\"Thou shalt not find me such easy prey, mighty Avatar!\"");
 				say("\"When thou dost least expect it, thou shalt find me a worthy opponent!\"");
@@ -33449,7 +33510,7 @@ void Func042C object#(0x42C) () {
 			}
 			UI_sprite_effect(0x0021, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_sprite_effect(0x001A, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-			if (0xFFD4->get_item_flag(0x0006)) {
+			if (0xFFD4->get_item_flag(IN_PARTY)) {
 				0xFFD4->remove_from_party();
 			}
 			0xFFD4->remove_npc();
@@ -33520,7 +33581,7 @@ void Func042D object#(0x42D) () {
 			0xFFD3->item_say("@My sword wants blood!@");
 		}
 	}
-	if ((event == 0x0002) && (!0xFFD3->get_item_flag(0x0004))) {
+	if ((event == 0x0002) && (!0xFFD3->get_item_flag(DEAD))) {
 		var0008 = 0xFFD3->set_npc_prop(0x0003, 0x000A);
 		0xFFD3->show_npc_face0(0x0000);
 		say("\"I was a fool to join with thee, Avatar! Now I am to lose my life in this foolish quest.\"");
@@ -33535,8 +33596,8 @@ void Func042D object#(0x42D) () {
 		abort;
 	}
 	if (event == 0x0007) {
-		if (0xFFD3->get_item_flag(0x001D)) {
-			0xFFD3->clear_item_flag(0x001D);
+		if (0xFFD3->get_item_flag(SI_TOURNAMENT)) {
+			0xFFD3->clear_item_flag(SI_TOURNAMENT);
 			var0008 = 0xFFD3->set_npc_prop(0x0003, 0x000A);
 			0xFFD3->set_attack_mode(0x0007);
 			Func097F(0xFFD3, "@I am dying!@", 0x0000);
@@ -33556,14 +33617,14 @@ void Func042D object#(0x42D) () {
 		0xFFD3->run_schedule();
 		0xFFD3->clear_item_say();
 		0xFFD3->show_npc_face0(0x0000);
-		if (0xFFD3->get_item_flag(0x0006)) {
+		if (0xFFD3->get_item_flag(IN_PARTY)) {
 			0xFFD3->set_schedule_type(0x001F);
 			add("leave");
 		} else {
 			0xFFD3->run_schedule();
 		}
-		var0009 = 0xFFD3->get_item_flag(0x001C);
-		if (!0xFFD3->get_item_flag(0x0006)) {
+		var0009 = 0xFFD3->get_item_flag(MET);
+		if (!0xFFD3->get_item_flag(IN_PARTY)) {
 			0xFFD3->run_schedule();
 		} else {
 			0xFFD3->set_schedule_type(0x001F);
@@ -33574,7 +33635,7 @@ void Func042D object#(0x42D) () {
 		}
 		if (gflags[0x0004] == true) {
 			if (gflags[0x01E1]) {
-				if (0xFFD3->get_item_flag(0x0006)) {
+				if (0xFFD3->get_item_flag(IN_PARTY)) {
 					say("\"I am ready to aid thee. Thou couldst have chosen no better companion than myself!\"");
 				} else {
 					say("\"Why dost thou trouble me now? Canst thou not see that I am very busy...\"");
@@ -33602,7 +33663,7 @@ void Func042D object#(0x42D) () {
 						say("\"Together, none can stand in our way!\"");
 						0xFFD3->add_to_party();
 						gflags[0x0016] = true;
-						0xFFD3->set_item_flag(0x001D);
+						0xFFD3->set_item_flag(SI_TOURNAMENT);
 						add("leave");
 						gflags[0x01E1] = true;
 					} else {
@@ -33651,7 +33712,7 @@ void Func042D object#(0x42D) () {
 					say("\"I can see that thou dost need a strong arm like myself. Since it is thy wish, I shall come with thee.\"");
 					0xFFD3->add_to_party();
 					gflags[0x0016] = true;
-					0xFFD3->set_item_flag(0x001D);
+					0xFFD3->set_item_flag(SI_TOURNAMENT);
 					add("leave");
 				}
 				fallthrough;
@@ -33664,7 +33725,7 @@ void Func042D object#(0x42D) () {
 					0xFFD3->remove_from_party();
 					Func0874();
 					gflags[0x01E3] = true;
-					0xFFD3->clear_item_flag(0x001D);
+					0xFFD3->clear_item_flag(SI_TOURNAMENT);
 					Func097F(0xFFD3, "@Damn thee!@", 0x0000);
 					0xFFD3->set_schedule_type(0x0014);
 					0xFFD3->set_new_schedules([0x0000, 0x0003, 0x0004, 0x0005, 0x0007], [0x000E, 0x0005, 0x0003, 0x000B, 0x0005], [0x0516, 0x08F7, 0x04F7, 0x08CC, 0x050D, 0x08B6, 0x0516, 0x08A2, 0x04F7, 0x08CC]);
@@ -33677,7 +33738,7 @@ void Func042D object#(0x42D) () {
 				say("\"What! Thou hast not heard of me?\"");
 				say("\"Where hast thou been all thy life, the frozen north?\"");
 				say("\"I am Wilfred, Knight of the Bear Command -- formerly of Sleeping Bull Inn.\"");
-				0xFFD3->set_item_flag(0x001C);
+				0xFFD3->set_item_flag(MET);
 				add("Sleeping Bull");
 				fallthrough;
 
@@ -33892,7 +33953,7 @@ void Func042E object#(0x42E) () {
 		}
 		0xFFD2->clear_item_say();
 		0xFFD2->show_npc_face0(0x0000);
-		var000C = 0xFFD2->get_item_flag(0x001C);
+		var000C = 0xFFD2->get_item_flag(MET);
 		if (gflags[0x0171] && (gflags[0x01B3] && (!gflags[0x01A8]))) {
 			UI_play_music(0x0014, Func09A0(0x0005, 0x0001));
 			Func0801();
@@ -33920,7 +33981,7 @@ void Func042E object#(0x42E) () {
 			} else {
 				say("\"I am Alyssand, daughter of Delin. I am a weaver by trade.\" *\"How might I be of assistance?\"");
 			}
-			0xFFD2->set_item_flag(0x001C);
+			0xFFD2->set_item_flag(MET);
 		} else if (gflags[0x01B2] && (!gflags[0x01B3])) {
 			UI_play_music(0x0014, Func09A0(0x0005, 0x0001));
 			Func0801();
@@ -34461,7 +34522,7 @@ void Func042F object#(0x42F) () {
 		0xFFD1->run_schedule();
 		0xFFD1->clear_item_say();
 		0xFFD1->show_npc_face0(0x0000);
-		var0004 = 0xFFD1->get_item_flag(0x001C);
+		var0004 = 0xFFD1->get_item_flag(MET);
 		if (gflags[0x014D] == true) {
 			say("\"Unless thou bearest word from my son, I will not bother with thee! Go back to Fedabiblio and tell him I have no business with the affairs of Mages!\"");
 			if (gflags[0x00E7] == true) {
@@ -34489,7 +34550,7 @@ void Func042F object#(0x42F) () {
 					"? Or art thou here to court my daughter? I fear I cannot recall...\"");
 				say("\"I am Delin, provisioner of Fawn. In case we have not been introduced.\"");
 			}
-			0xFFD1->set_item_flag(0x001C);
+			0xFFD1->set_item_flag(MET);
 			if (gflags[0x0195] && (!gflags[0x0292])) {
 				add("fur cap");
 			}
@@ -34966,7 +35027,7 @@ void Func0430 object#(0x430) () {
 		0xFFD0->run_schedule();
 		0xFFD0->clear_item_say();
 		0xFFD0->show_npc_face0(0x0000);
-		var0002 = 0xFFD0->get_item_flag(0x001C);
+		var0002 = 0xFFD0->get_item_flag(MET);
 		if (gflags[0x0171] || (gflags[0x0170] && (!gflags[0x0172]))) {
 			say("\"Leave! I have no wish to be seen with thee! Thou dost consort with criminals and blasphemers.\"");
 			UI_remove_npc_face0();
@@ -34985,7 +35046,7 @@ void Func0430 object#(0x430) () {
 					var0000,
 					"?\"");
 			}
-			0xFFD0->set_item_flag(0x001C);
+			0xFFD0->set_item_flag(MET);
 		} else {
 			say("\"'Tis always a pleasure to see thee, Avatar. How may I be of service to thee?\"");
 		}
@@ -35293,7 +35354,7 @@ void Func0431 object#(0x431) () {
 		0xFFCF->run_schedule();
 		0xFFCF->clear_item_say();
 		0xFFCF->show_npc_face0(0x0000);
-		var0004 = 0xFFCF->get_item_flag(0x001C);
+		var0004 = 0xFFCF->get_item_flag(MET);
 		if (gflags[0x0171] || (gflags[0x0170] && (!gflags[0x0172]))) {
 			say("\"Why, thou art the confidant of the accused blasphemer! I cannot be seen speaking with thee...\"");
 			UI_remove_npc_face0();
@@ -35321,7 +35382,7 @@ void Func0431 object#(0x431) () {
 					var0000,
 					".\" ~\"We are sorely in need of more able-bodied fighters in Fawn's darkest hour.\" *\"I am Great Captain Garth. Call me Garth.\"");
 			}
-			0xFFCF->set_item_flag(0x001C);
+			0xFFCF->set_item_flag(MET);
 		} else if (var0002 == true) {
 			say("\"Now may I rest my weary eyes on thy lovely face. Thou art always a welcome sight, ",
 				var0001,
@@ -35550,7 +35611,7 @@ void Func0432 object#(0x432) () {
 		0xFFCE->run_schedule();
 		0xFFCE->clear_item_say();
 		0xFFCE->show_npc_face0(0x0000);
-		var0004 = 0xFFCE->get_item_flag(0x001C);
+		var0004 = 0xFFCE->get_item_flag(MET);
 		if (var0004 == false) {
 			if (gflags[0x003E] == true) {
 				say("\"Welcome ta Fawn. I am Great Captain Joth. Thou canst call me Joth.\" *\"'Tis always a pleasure ta meet a Pikeman.\"");
@@ -35559,7 +35620,7 @@ void Func0432 object#(0x432) () {
 					var0000,
 					".\"");
 			}
-			0xFFCE->set_item_flag(0x001C);
+			0xFFCE->set_item_flag(MET);
 		} else {
 			say("\"Good ta see thee again.\"");
 		}
@@ -35765,7 +35826,7 @@ void Func0433 object#(0x433) () {
 		0xFFCD->run_schedule();
 		0xFFCD->clear_item_say();
 		0xFFCD->show_npc_face0(0x0000);
-		var0005 = 0xFFCD->get_item_flag(0x001C);
+		var0005 = 0xFFCD->get_item_flag(MET);
 		if (gflags[0x0171] || (gflags[0x0170] && (!gflags[0x0172]))) {
 			say("\"Thou dost dare to confront me? Thou, that didst bring the blasphemer to Lady Yelinda!\"");
 			UI_remove_npc_face0();
@@ -35787,7 +35848,7 @@ void Func0433 object#(0x433) () {
 			} else {
 				say("\"It is a pleasure to meet thee. I am Great Captain Voldin.\" *\"Fawn is in sore need of more men to help hold the Goblins at bay.\"");
 			}
-			0xFFCD->set_item_flag(0x001C);
+			0xFFCD->set_item_flag(MET);
 		} else {
 			say("\"How might I be of service this time, ",
 				var0002,
@@ -36081,7 +36142,7 @@ void Func0434 object#(0x434) () {
 			Func097F(0xFFCC, "@Be gone!@", 0x0000);
 			abort;
 		}
-		if (!0xFFCC->get_item_flag(0x001C)) {
+		if (!0xFFCC->get_item_flag(MET)) {
 			if (UI_is_pc_female()) {
 				say("\"I am Jendon, ",
 					var0001,
@@ -36100,7 +36161,7 @@ void Func0434 object#(0x434) () {
 					var0002,
 					"?\"");
 			}
-			0xFFCC->set_item_flag(0x001C);
+			0xFFCC->set_item_flag(MET);
 			add("proprietor");
 		} else {
 			say("\"Returned so soon? How may I help thee now?\"");
@@ -36268,7 +36329,7 @@ void Func0434 object#(0x434) () {
 			case "the Great Captains" (remove):
 				if (gflags[0x0170] && (gflags[0x0172] && (!gflags[0x016E]))) {
 					say("\"Why, they have been in disrepute ever since the trial. Joth hath taken to drinking, and as for Garth -- well, no woman will give him the time of day!");
-					if (0xFFCD->get_item_flag(0x0004)) {
+					if (0xFFCD->get_item_flag(DEAD)) {
 						say("\"As for old Voldin, I think he is not greatly missed.\"");
 					} else {
 						say("\"Voldin doth scheme endlessly in his cell, but what can come of it?\"");
@@ -37037,7 +37098,7 @@ void Func0435 object#(0x435) () {
 		0xFFCB->run_schedule();
 		0xFFCB->clear_item_say();
 		0xFFCB->show_npc_face0(0x0000);
-		var0006 = 0xFFCB->get_item_flag(0x001C);
+		var0006 = 0xFFCB->get_item_flag(MET);
 		if (gflags[0x01B6] && (!gflags[0x015C])) {
 			0xFFCB->show_npc_face0(0x0000);
 			say("\"Greetings, visitors! Thanks to the beautiful songs of the bard Iolo, thou hast found favor in our good city.\"");
@@ -37061,7 +37122,7 @@ void Func0435 object#(0x435) () {
 					var0000,
 					". I am Jorvin, Captain of the guard. How may I be of service?\"");
 			}
-			0xFFCB->set_item_flag(0x001C);
+			0xFFCB->set_item_flag(MET);
 		} else {
 			say("\"Well met, ",
 				var0002,
@@ -37450,7 +37511,7 @@ void Func0436 object#(0x436) () {
 		0xFFCA->run_schedule();
 		0xFFCA->clear_item_say();
 		0xFFCA->show_npc_face0(0x0000);
-		var0007 = 0xFFCA->get_item_flag(0x001C);
+		var0007 = 0xFFCA->get_item_flag(MET);
 		if (gflags[0x0171] || (gflags[0x0170] && (!gflags[0x0172]))) {
 			say("\"Thou dost make my spine shiver, thou who dost associate with the enemies of Beauty!");
 			say("\"I beg thee to depart...\"");
@@ -37486,7 +37547,7 @@ void Func0436 object#(0x436) () {
 					say("\"A pity. Private instruction is available.\"");
 				}
 			}
-			0xFFCA->set_item_flag(0x001C);
+			0xFFCA->set_item_flag(MET);
 		} else if (gflags[0x015E] == true) {
 			0xFFCA->set_schedule_type(0x0000);
 			0xFFCA->set_attack_mode(0x0007);
@@ -37611,7 +37672,7 @@ void Func0436 object#(0x436) () {
 
 		case "Voldin" (remove):
 			if ((gflags[0x0170] && gflags[0x0172]) && (!gflags[0x016E])) {
-				if (0xFFCD->get_item_flag(0x0004)) {
+				if (0xFFCD->get_item_flag(DEAD)) {
 					say("\"He was an evil man, Avatar. Captain Voldin forced me to do his bidding, beating me when I refused!\"");
 					say("\"I am glad that thou didst kill him -- glad!\"");
 				} else {
@@ -37728,7 +37789,7 @@ void Func0437 object#(0x437) () {
 	var var0015;
 	var var0016;
 
-	if (0xFFC9->get_item_flag(0x0020) && (event == 0x0009)) {
+	if (0xFFC9->get_item_flag(POLYMORPH) && (event == 0x0009)) {
 		var0000 = script 0xFFC9->get_npc_object() {
 			nohalt;
 			call Func0294;
@@ -37798,8 +37859,8 @@ void Func0437 object#(0x437) () {
 		}
 		var0005 = Func0988(0xFE9C->get_npc_object(), UI_get_party_list2());
 		for (var0008 in var0005 with var000E to var000F) {
-			if (var0008->get_item_flag(0x001E)) {
-				var0008->clear_item_flag(0x001E);
+			if (var0008->get_item_flag(SI_ZOMBIE)) {
+				var0008->clear_item_flag(SI_ZOMBIE);
 				var0000 = script var0008 {
 					nohalt;
 					say "@Oh!@";
@@ -37817,12 +37878,12 @@ void Func0437 object#(0x437) () {
 		}
 		var0008 = false;
 		for (var0013 in var0005 with var0011 to var0012) {
-			if (var0013->npc_nearby() && ((!(var0013->get_schedule_type() == 0x000F)) && (!var0013->get_item_flag(0x001E)))) {
+			if (var0013->npc_nearby() && ((!(var0013->get_schedule_type() == 0x000F)) && (!var0013->get_item_flag(SI_ZOMBIE)))) {
 				var0008 = var0013;
 			}
 		}
 		if (var0008) {
-			var0008->set_item_flag(0x001E);
+			var0008->set_item_flag(SI_ZOMBIE);
 			var0000 = 0xFFCB->set_to_attack(var0008, 0x0118);
 			var0000 = script 0xFFCB {
 				actor frame strike_1h;
@@ -37835,10 +37896,10 @@ void Func0437 object#(0x437) () {
 				call Func0437;
 			};
 		} else {
-			if (0xFFCB->get_item_flag(0x001E)) {
+			if (0xFFCB->get_item_flag(SI_ZOMBIE)) {
 				gflags[0x0007] = true;
 				var0010 = 0xFE9C->get_object_position();
-				0xFE9C->set_item_flag(0x0010);
+				0xFE9C->set_item_flag(DONT_MOVE);
 				0xFE9C->set_schedule_type(0x000F);
 				var0010[0x0001] -= var0010[0x0003] / 0x0002;
 				var0010[0x0002] -= var0010[0x0003] / 0x0002;
@@ -37863,13 +37924,13 @@ void Func0437 object#(0x437) () {
 					nohalt;
 					call Func0437;
 				};
-				0xFFCB->set_item_flag(0x001E);
+				0xFFCB->set_item_flag(SI_ZOMBIE);
 			}
 		}
 		abort;
 	}
 	if (event == 0x0001) {
-		if (0xFFC9->get_item_flag(0x0020)) {
+		if (0xFFC9->get_item_flag(POLYMORPH)) {
 			0xFE9C->item_say("@Lady!@");
 			item->Func07D1();
 			Func097F(item, "@Avert thine eyes!@", 0x0002);
@@ -37904,9 +37965,9 @@ void Func0437 object#(0x437) () {
 					". I wish thee luck on thy quest!\"");
 			}
 		} else {
-			var0014 = 0xFFC9->get_item_flag(0x001C);
+			var0014 = 0xFFC9->get_item_flag(MET);
 			if (gflags[0x015C] && (!gflags[0x01B5])) {
-				if (0xFFFD->npc_nearby() && 0xFFFD->get_item_flag(0x0006)) {
+				if (0xFFFD->npc_nearby() && 0xFFFD->get_item_flag(IN_PARTY)) {
 					gflags[0x0170] = true;
 					gflags[0x01B5] = true;
 					UI_play_music(0x001F, Func09A0(0x0005, 0x0001));
@@ -37996,7 +38057,7 @@ void Func0437 object#(0x437) () {
 					". Thy presence in Fawn adds greatly\tto its Beauty.\"");
 			}
 		}
-		0xFFC9->set_item_flag(0x001C);
+		0xFFC9->set_item_flag(MET);
 		add(["Fawn", "Beauty", "goblins", "storms", "name"]);
 		converse ("bye") {
 			case "goblins":
@@ -38173,7 +38234,7 @@ void Func0438 object#(0x438) () {
 		0xFFC8->run_schedule();
 		0xFFC8->clear_item_say();
 		0xFFC8->show_npc_face0(0x0000);
-		var0005 = 0xFFC8->get_item_flag(0x001C);
+		var0005 = 0xFFC8->get_item_flag(MET);
 		if (var0005 == false) {
 			if (gflags[0x003E] == true) {
 				say("\"At last, the values of The Fellowship have reached into the ranks of the Pikemen! I am honored.\"");
@@ -38183,7 +38244,7 @@ void Func0438 object#(0x438) () {
 				say("\"I always have time for those who come seeking knowledge. Be welcome.\"");
 				say("\"I am Leon, a speaker for The Fellowship and former farmer.\"");
 			}
-			0xFFC8->set_item_flag(0x001C);
+			0xFFC8->set_item_flag(MET);
 		} else {
 			say("\"As always, I am honored that thou choosest to visit me, ",
 				var0002,
@@ -38420,7 +38481,7 @@ void Func0439 object#(0x439) () {
 		0xFFC7->run_schedule();
 		0xFFC7->clear_item_say();
 		0xFFC7->show_npc_face0(0x0000);
-		var0003 = 0xFFC7->get_item_flag(0x001C);
+		var0003 = 0xFFC7->get_item_flag(MET);
 		if (var0003 == false) {
 			if (gflags[0x003E] == true) {
 				if (var0001 == true) {
@@ -38431,7 +38492,7 @@ void Func0439 object#(0x439) () {
 			} else {
 				say("\"I have business to attend to. Be quick.\"");
 			}
-			0xFFC7->set_item_flag(0x001C);
+			0xFFC7->set_item_flag(MET);
 		} else {
 			say("\"Returned again?\"");
 		}
@@ -38487,16 +38548,16 @@ void Func0439 object#(0x439) () {
 		}
 	}
 	if (event == 0x0002) {
-		if (0xFFC7->get_item_flag(0x0004)) {
+		if (0xFFC7->get_item_flag(DEAD)) {
 			abort;
 		}
 		Func097F(0xFFC7, "@I shall return!@", 0x0000);
 		0xFFC7->set_attack_mode(0x0007);
 	}
-	if ((event == 0x0007) && 0xFFC7->get_item_flag(0x001D)) {
+	if ((event == 0x0007) && 0xFFC7->get_item_flag(SI_TOURNAMENT)) {
 		gflags[0x015D] = true;
 		0xFFC7->show_npc_face0(0x0000);
-		0xFFC7->clear_item_flag(0x001D);
+		0xFFC7->clear_item_flag(SI_TOURNAMENT);
 		0xFFC7->reduce_health(0x0032, 0x0000);
 		Func097F(0xFFC7, "@Urgghh...@", 0x0000);
 		var0004 = Func0992(0x0001, 0x0000, 0x0000, true);
@@ -38603,7 +38664,7 @@ void Func043A object#(0x43A) () {
 			};
 			abort;
 		}
-		var0008 = 0xFFC6->get_item_flag(0x001C);
+		var0008 = 0xFFC6->get_item_flag(MET);
 		if ((UI_get_timer(0x000C) < 0x0003) && gflags[0x0165]) {
 			say("\"Go away, I'm not drunk enough yet.\"");
 			Func097F(0xFFC6, "@A drink!@", 0x0000);
@@ -38624,7 +38685,7 @@ void Func043A object#(0x43A) () {
 				say("\"If it's a word or three thou art wantin' of me, I do me best talkin' wit' a bottle of Fawn ale! Me name's Olon, and I'm a fisherman by trade.\"");
 				add("Fawn ale");
 			}
-			0xFFC6->set_item_flag(0x001C);
+			0xFFC6->set_item_flag(MET);
 		} else {
 			say("\"Welcome back, ol' friend. These're thirsty times, aye?\"");
 			if (gflags[0x003E] == true) {
@@ -39376,12 +39437,12 @@ void Func043B object#(0x43B) () {
 		0xFFC5->clear_item_say();
 		0xFFC5->run_schedule();
 		0xFFC5->show_npc_face0(0x0000);
-		var0009 = 0xFFC5->get_item_flag(0x001C);
-		var000A = 0xFFD0->get_item_flag(0x001C);
+		var0009 = 0xFFC5->get_item_flag(MET);
+		var000A = 0xFFD0->get_item_flag(MET);
 		if ((gflags[0x0168] == false) && var0006) {
-			0xFFC5->set_item_flag(0x001C);
+			0xFFC5->set_item_flag(MET);
 			gflags[0x0168] = true;
-			0xFE9C->clear_item_flag(0x0010);
+			0xFE9C->clear_item_flag(DONT_MOVE);
 			0xFFC5->set_new_schedules([0x0002, 0x0005, 0x0006, 0x0007], [0x001A, 0x0006, 0x001A, 0x000E], [0x0479, 0x076B, 0x04BC, 0x0741, 0x0479, 0x076B, 0x049D, 0x0752]);
 			0xFFC5->run_schedule();
 			say("\"Oh, please, ",
@@ -39478,9 +39539,9 @@ void Func043B object#(0x43B) () {
 			}
 			abort;
 			// Dead code
-			0xFFC5->set_item_flag(0x001C);
+			0xFFC5->set_item_flag(MET);
 			gflags[0x0168] = true;
-			0xFE9C->clear_item_flag(0x0010);
+			0xFE9C->clear_item_flag(DONT_MOVE);
 		} else {
 			if (var0009 == false) {
 				if (gflags[0x003E] == true) {
@@ -39489,7 +39550,7 @@ void Func043B object#(0x43B) () {
 				} else {
 					say("\"I am Ruggs, a poor sailor exiled from Britannia and from Fawn. How may I serve thee today?\"");
 				}
-				0xFFC5->set_item_flag(0x001C);
+				0xFFC5->set_item_flag(MET);
 			} else if (gflags[0x0004]) {
 				say("\"All is lost, Avatar! All is lost!\"");
 			} else {
@@ -39802,10 +39863,10 @@ void Func043C object#(0x43C) () {
 		0xFFC4->run_schedule();
 		0xFFC4->clear_item_say();
 		0xFFC4->show_npc_face0(0x0000);
-		var0004 = 0xFFC4->get_item_flag(0x001C);
+		var0004 = 0xFFC4->get_item_flag(MET);
 		if (var0004 == false) {
 			say("\"Good, a new face! I am Scots, a geographer. Perhaps thou wouldst share tales of other places with me, so I might add detail to my maps.\"");
-			0xFFC4->set_item_flag(0x001C);
+			0xFFC4->set_item_flag(MET);
 		} else {
 			say("\"Welcome back, ",
 				var0002,
@@ -40064,7 +40125,7 @@ void Func043D object#(0x43D) () {
 		0xFFC3->run_schedule();
 		0xFFC3->clear_item_say();
 		0xFFC3->show_npc_face0(0x0000);
-		var000C = 0xFFC3->get_item_flag(0x001C);
+		var000C = 0xFFC3->get_item_flag(MET);
 		if (gflags[0x0171] || (gflags[0x0170] && (!gflags[0x0172]))) {
 			say("\"I know thee for what thou art, stranger! And I shall testify at the trial.\"");
 			UI_remove_npc_face0();
@@ -40087,7 +40148,7 @@ void Func043D object#(0x43D) () {
 					var0000,
 					"?\"");
 			}
-			0xFFC3->set_item_flag(0x001C);
+			0xFFC3->set_item_flag(MET);
 		} else {
 			say("\"Well met, ",
 				var0000,
@@ -40323,7 +40384,7 @@ void Func043E object#(0x43E) () {
 	var var0008;
 
 	var0000 = Func0953();
-	var0001 = 0xFFC2->get_item_flag(0x001C);
+	var0001 = 0xFFC2->get_item_flag(MET);
 	if (event == 0x0001) {
 		Func097F(0xFE9C, "Hello, sir.", 0x0000);
 		0xFFC2->Func07D1();
@@ -40336,7 +40397,7 @@ void Func043E object#(0x43E) () {
 		0xFFC2->show_npc_face0(0x0000);
 		if (!var0001) {
 			say("\"Hello, stranger. I am Andral of Monitor. Dost thou need the services of a master artist?\"");
-			0xFFC2->set_item_flag(0x001C);
+			0xFFC2->set_item_flag(MET);
 		} else {
 			say("\"Welcome, ",
 				var0000,
@@ -40617,7 +40678,7 @@ void Func043F object#(0x43F) () {
 
 	var0000 = Func0954();
 	var0001 = Func0953();
-	var0002 = 0xFFC1->get_item_flag(0x001C);
+	var0002 = 0xFFC1->get_item_flag(MET);
 	var0003 = UI_get_array_size(UI_get_party_list());
 	var0004 = false;
 	var0005 = false;
@@ -40719,7 +40780,7 @@ void Func043F object#(0x43F) () {
 		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != 0x000F)) {
 			add("brown bottle");
 		}
-		if (gflags[0x0048] && (!0xFFB4->get_item_flag(0x0004))) {
+		if (gflags[0x0048] && (!0xFFB4->get_item_flag(DEAD))) {
 			add("traitor");
 		}
 		if (gflags[0x002C]) {
@@ -40760,7 +40821,7 @@ void Func043F object#(0x43F) () {
 
 			case "name" (remove):
 				if (!var0002) {
-					0xFFC1->set_item_flag(0x001C);
+					0xFFC1->set_item_flag(MET);
 					say("\"I am called Caladin, after mine own grandfather. He was a Champion Knight!\"");
 					add("Champion Knight");
 					if (!gflags[0x004C]) {
@@ -40877,7 +40938,7 @@ void Func043F object#(0x43F) () {
 				say("\"The wretched beasts! I suppose thou hast heard of the ambush at Fawn Tower. They do not fight fair!\"");
 				say("\"Poor Astrid... she was an inspiring warrior, as well as a lusty wench. Damn, but she could kill Goblins...\"");
 				add("Fawn Tower");
-				if (!0xFEF7->get_item_flag(0x0004)) {
+				if (!0xFEF7->get_item_flag(DEAD)) {
 					say("\"The Wolves and Leopards are useless in a crisis like this, but the Bears shall exact revenge from the Goblins. And if I ever find out who betrayed that patrol...\"");
 					add(["useless", "betrayed"]);
 				} else {
@@ -40922,12 +40983,12 @@ void Func043F object#(0x43F) () {
 					}
 					say("\"Someone should question that weakling, and see if his guilt can be proven.\"");
 				}
-				if (0xFFB8->get_item_flag(0x0004) || 0xFFB5->get_item_flag(0x0004)) {
+				if (0xFFB8->get_item_flag(DEAD) || 0xFFB5->get_item_flag(DEAD)) {
 					UI_push_answers();
-					if (0xFFB8->get_item_flag(0x0004)) {
+					if (0xFFB8->get_item_flag(DEAD)) {
 						add("Was Lydia the traitor?");
 					}
-					if (0xFFB5->get_item_flag(0x0004)) {
+					if (0xFFB5->get_item_flag(DEAD)) {
 						add("Was Shmed the traitor?");
 					}
 					add("change subject");
@@ -41079,11 +41140,11 @@ void Func043F object#(0x43F) () {
 						say("\"Marsten sought to betray Bull Tower! I will send a messenger to alert them immediately!\"");
 						gflags[0x0038] = true;
 					}
-					if (gflags[0x0038] && (!0xFFBB->get_item_flag(0x0004))) {
+					if (gflags[0x0038] && (!0xFFBB->get_item_flag(DEAD))) {
 						0xFFBB->move_object([0x0446, 0x09C5, 0x0000]);
 						0xFFBB->set_new_schedules([0x0007, 0x0002], [0x000E, 0x0007], [0x0446, 0x09C5, 0x0446, 0x09C5]);
 					}
-					if (gflags[0x0092] && (!0xFFB3->get_item_flag(0x0004))) {
+					if (gflags[0x0092] && (!0xFFB3->get_item_flag(DEAD))) {
 						0xFFB3->move_object([0x0448, 0x09D6, 0x0000]);
 						0xFFB3->set_new_schedules([0x0007, 0x0002], [0x000E, 0x0007], [0x0448, 0x09D6, 0x0448, 0x09D6]);
 					}
@@ -41096,7 +41157,7 @@ void Func043F object#(0x43F) () {
 						var0016 = UI_create_new_object2(0x00E4, var0015);
 						var0017 = var0016->approach_avatar(0x0050, 0x0028);
 						if (var0017) {
-							var0016->set_item_flag(0x0012);
+							var0016->set_item_flag(TEMPORARY);
 							var0005 = true;
 						} else {
 							var0016->remove_item();
@@ -41173,7 +41234,7 @@ void Func0440 object#(0x440) () {
 	var var0007;
 
 	var0000 = 0xFFC0->find_nearby(0x013E, 0x001E, 0x0000);
-	var0001 = 0xFFC0->get_item_flag(0x001C);
+	var0001 = 0xFFC0->get_item_flag(MET);
 	var0002 = Func0954();
 	if (gflags[0x008B] && ((event == 0x0000) && (!gflags[0x02E2]))) {
 		0xFFC0->set_npc_id(0xFFC0->get_npc_id() + 0x0001);
@@ -41217,7 +41278,7 @@ void Func0440 object#(0x440) () {
 		if (gflags[0x0095] && (!gflags[0x005B])) {
 			0xFFBD->move_object([0x0345, 0x0A8B, 0x0000]);
 			Func09AC(0xFFBD, 0xFFFF, 0xFFFF, 0x000F);
-			0xFFBD->clear_item_flag(0x0001);
+			0xFFBD->clear_item_flag(ASLEEP);
 			var0003 = script 0xFFBD {
 				nohalt;
 				face east;
@@ -41231,7 +41292,7 @@ void Func0440 object#(0x440) () {
 			nohalt;
 			call Func0636;
 		};
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		UI_init_conversation();
 		0xFFC0->set_npc_id(0x0000);
 		gflags[0x002A] = false;
@@ -41244,7 +41305,7 @@ void Func0440 object#(0x440) () {
 		Func097F(0xFFC0, var0004[UI_get_random(0x0006)], 0x0000);
 	}
 	if (event == 0x0001) {
-		if (0xFFC0->get_item_flag(0x001E)) {
+		if (0xFFC0->get_item_flag(SI_ZOMBIE)) {
 			Func097F(0xFE9C, "Hello, Cantra.", 0x0000);
 			var0005 = UI_get_random(0x0006);
 			if (var0005 == 0x0001) {
@@ -41285,7 +41346,7 @@ void Func0440 object#(0x440) () {
 		if (!var0001) {
 			say("\"I am not as young as I look! Dost thou know how hard it is to be small for one's age? I am fourteen years old, nearly old enough to be a Knight of Monitor. But everyone thinks that I'm a little girl...\"");
 			say("\"Um, sorry. I mean, welcome to Monitor! My name is Cantra.\"");
-			0xFFC0->set_item_flag(0x001C);
+			0xFFC0->set_item_flag(MET);
 		} else if (gflags[0x0047]) {
 			say("\"I feel tired, but I am all right! My mind was full of awful dreams. Thou hast saved me! I shall remember thee always!\"");
 		} else {
@@ -41386,7 +41447,7 @@ void Func0440 object#(0x440) () {
 	}
 	if (event == 0x0007) {
 		if (gflags[0x0047]) {
-			0xFFC0->clear_item_flag(0x001D);
+			0xFFC0->clear_item_flag(SI_TOURNAMENT);
 			abort;
 		}
 		if (gflags[0x0079]) {
@@ -41430,7 +41491,7 @@ void Func0441 object#(0x441) () {
 	var var000A;
 	var var000B;
 
-	var0000 = 0xFFBF->get_item_flag(0x001C);
+	var0000 = 0xFFBF->get_item_flag(MET);
 	var0001 = "stranger";
 	if (var0000) {
 		var0001 = Func0954();
@@ -41470,7 +41531,7 @@ void Func0441 object#(0x441) () {
 				Func097F(0xFFBF, "@Farewell.@", 0x0000);
 				abort;
 			}
-			0xFFBF->set_item_flag(0x001C);
+			0xFFBF->set_item_flag(MET);
 		} else if (gflags[0x004A]) {
 			say("\"Glad to see thee again, ",
 				var0001,
@@ -41623,7 +41684,7 @@ void Func0442 object#(0x442) () {
 
 	var0000 = 0xFFBE->get_object_position();
 	if (event == 0x0002) {
-		if (0xFFBE->get_item_flag(0x001C)) {
+		if (0xFFBE->get_item_flag(MET)) {
 			0xFFBE->show_npc_face0(0x0000);
 			say("\"Thou hast slain me! My blood spills away... all because of Pomdirgun, that betrayer!\"");
 			say("\"Come nearer, that I may boast of my deeds before I die.\"");
@@ -41668,17 +41729,17 @@ void Func0442 object#(0x442) () {
 					say("\"Urrgh...\"");
 					var0001 = Func0992(0x0001, "@He's dead.@", "@He's dead.@", true);
 					0x0000->set_conversation_slot();
-					0xFFBE->clear_item_flag(0x001D);
-					0xFFBE->clear_item_flag(0x0004);
+					0xFFBE->clear_item_flag(SI_TOURNAMENT);
+					0xFFBE->clear_item_flag(DEAD);
 					0xFFBE->kill_npc();
-					0xFFB4->set_item_flag(0x0004);
+					0xFFB4->set_item_flag(DEAD);
 					gflags[0x0046] = true;
 					abort;
 			}
 		} else {
 			0xFFBE->show_npc_face0(0x0000);
 			say("\"Thou hast found out my secret! Now, thou must die...\"");
-			0xFFBE->set_item_flag(0x001D);
+			0xFFBE->set_item_flag(SI_TOURNAMENT);
 			0xFFBE->set_alignment(0x0002);
 			Func097F(0xFFBE, "@Die!@", 0x0000);
 			0xFFBE->set_new_schedules(0x0000, 0x0000, [var0000[0x0001], var0000[0x0002]]);
@@ -41687,9 +41748,9 @@ void Func0442 object#(0x442) () {
 			abort;
 		}
 	}
-	if ((event == 0x0007) && (!0xFFBE->get_item_flag(0x001C))) {
+	if ((event == 0x0007) && (!0xFFBE->get_item_flag(MET))) {
 		0xFFBE->set_schedule_type(0x000F);
-		0xFFBE->set_item_flag(0x0004);
+		0xFFBE->set_item_flag(DEAD);
 		var0002 = script 0xFFBE {
 			actor frame sleeping;
 			actor frame sleeping;
@@ -41702,7 +41763,7 @@ void Func0442 object#(0x442) () {
 			actor frame sleeping;
 			actor frame sleeping;
 		};
-		0xFFBE->set_item_flag(0x001C);
+		0xFFBE->set_item_flag(MET);
 		var0002 = script 0xFE9C {
 			nohalt;
 			wait 10;
@@ -41802,10 +41863,10 @@ void Func0443 object#(0x443) () {
 			if (!gflags[0x0079]) {
 				say("\"My daughter Cantra is missing! I know she would never run away from me, but I feel certain that the Goblins did not take her.\"");
 				gflags[0x0079] = true;
-				if (!0xFFBD->get_item_flag(0x001C)) {
+				if (!0xFFBD->get_item_flag(MET)) {
 					say("\"Pray excuse my poor manners, stranger! I am Widow Harnna, the Healer of Monitor. I also sell vegetables from my garden.\"");
 					add(["widow", "healing", "food", "information"]);
-					0xFFBD->set_item_flag(0x001C);
+					0xFFBD->set_item_flag(MET);
 				} else {
 					say("\"Pray excuse mine outburst, ",
 						var0002,
@@ -41813,10 +41874,10 @@ void Func0443 object#(0x443) () {
 				}
 				add(["healing", "food", "information"]);
 			} else {
-				if (!0xFFBD->get_item_flag(0x001C)) {
+				if (!0xFFBD->get_item_flag(MET)) {
 					say("\"I am Widow Harnna, the Healer of Monitor. I also sell vegetables from my garden.\"");
 					add(["widow", "healing", "food", "information"]);
-					0xFFBD->set_item_flag(0x001C);
+					0xFFBD->set_item_flag(MET);
 				} else {
 					say("\"How may I help thee now? Dost thou have need of healing, or dost thou wish to buy my vegetables?\"");
 				}
@@ -41830,10 +41891,10 @@ void Func0443 object#(0x443) () {
 					abort;
 				}
 			}
-			if (!0xFFBD->get_item_flag(0x001C)) {
+			if (!0xFFBD->get_item_flag(MET)) {
 				say("\"How may I help thee? I am Widow Harnna, the Healer of Monitor. I also grow mine own food.\"");
 				add(["widow", "healing", "food", "information"]);
-				0xFFBD->set_item_flag(0x001C);
+				0xFFBD->set_item_flag(MET);
 			} else {
 				say("\"How may I help thee now? Dost thou have need of healing, or dost thou wish to buy my vegetables?\"");
 			}
@@ -41925,7 +41986,7 @@ void Func0443 object#(0x443) () {
 					abort;
 				} else if (!gflags[0x0047]) {
 					say("\"I am so grateful that thou hast taken on the quest of saving my daughter. If I can help thee, ask.\"");
-				} else if (0xFFC0->get_item_flag(0x001E)) {
+				} else if (0xFFC0->get_item_flag(SI_ZOMBIE)) {
 					say("\"I am glad that my daughter is alive, but I have a strange foreboding that all is not as it should be with her. A small private part of her is still awash in madness and death.\"");
 				} else {
 					say("\"I am so happy my daughter hath been found, resurrected by the monks, and that thou hast restored her mind.\"");
@@ -41968,10 +42029,10 @@ void Func0443 object#(0x443) () {
 								say("\"Hold thou still while I apply these directly upon thy tattoo...\"");
 								say("\"There, 'tis done. Thine infection hath been healed.\"");
 								gflags[0x005A] = true;
-								0xFE9C->clear_item_flag(0x0008);
+								0xFE9C->clear_item_flag(POISONED);
 								break;
 							}
-							if (0xFE9C->get_item_flag(0x0008)) {
+							if (0xFE9C->get_item_flag(POISONED)) {
 								say("\"My cure can have only a temporary effect, for thou art enthralled by a powerful disease.\"");
 							}
 							say("\"In order for me to provide a permanent cure to thine affliction, thou must bring me five leaves of the Varo plant.\"");
@@ -41997,7 +42058,7 @@ void Func0443 object#(0x443) () {
 					say("\"Didst thou speak with Lydia?\"");
 					0xFE9C->show_npc_face1(0x0000);
 					say("\"Indeed, the wench hath confessed to her crime!\"");
-					if (0xFFB8->get_item_flag(0x0004)) {
+					if (0xFFB8->get_item_flag(DEAD)) {
 						say("\"Moreover, she hath paid for her treachery in blood. She is slain.\"");
 					}
 					UI_remove_npc_face1();
@@ -42016,7 +42077,7 @@ void Func0443 object#(0x443) () {
 					say("\"Thou shouldst have words with her, I think.\"");
 					gflags[0x0035] = true;
 					0xFFB8->set_alignment(0x0003);
-					0xFFB8->set_item_flag(0x001D);
+					0xFFB8->set_item_flag(SI_TOURNAMENT);
 				}
 				gflags[0x00CB] = true;
 				fallthrough;
@@ -42165,7 +42226,7 @@ void Func0443 object#(0x443) () {
 				fallthrough;
 
 			case "Shmed" (remove):
-				if (0xFFB5->get_item_flag(0x0004)) {
+				if (0xFFB5->get_item_flag(DEAD)) {
 					say("\"They say that Shmed was the traitor who sold our secrets to the Goblins.\"");
 					say("\"Mine heart tells me that they were wrong. Shmed was a coward, a fool, and a reprobate -- but not a traitor.\"");
 				} else {
@@ -42826,7 +42887,7 @@ void Func0444 object#(0x444) () {
 		}
 		0xFFBC->show_npc_face0(0x0000);
 		Func08F0();
-		var000A = 0xFFBC->get_item_flag(0x001C);
+		var000A = 0xFFBC->get_item_flag(MET);
 		if (!var000A) {
 			if (var0000) {
 				say("\"Hello, ",
@@ -42837,7 +42898,7 @@ void Func0444 object#(0x444) () {
 					var0001,
 					". How can I help thee?\"");
 			}
-			0xFFBC->set_item_flag(0x001C);
+			0xFFBC->set_item_flag(MET);
 		} else if (gflags[0x0048]) {
 			say("\"Hello again, ",
 				var0001,
@@ -43182,16 +43243,16 @@ void Func0445 object#(0x445) () {
 
 	var0000 = Func0954();
 	var0001 = Func0953();
-	var0002 = 0xFFBB->get_item_flag(0x001C);
+	var0002 = 0xFFBB->get_item_flag(MET);
 	var0003 = "I serve Lord British";
 	var0004 = false;
 	var0005 = false;
 	var0006 = false;
 	var0007 = "He is my friend";
 	var0008 = false;
-	var0009 = 0xFFFD->get_item_flag(0x0006);
-	var000A = 0xFFFE->get_item_flag(0x0006);
-	var000B = 0xFFFF->get_item_flag(0x0006);
+	var0009 = 0xFFFD->get_item_flag(IN_PARTY);
+	var000A = 0xFFFE->get_item_flag(IN_PARTY);
+	var000B = 0xFFFF->get_item_flag(IN_PARTY);
 	var000C = 0xFFB4->is_dead();
 	var000D = "he";
 	if (UI_is_pc_female()) {
@@ -43229,13 +43290,13 @@ void Func0445 object#(0x445) () {
 			abort;
 		}
 	}
-	if ((event == 0x0007) && 0xFFBB->get_item_flag(0x001D)) {
+	if ((event == 0x0007) && 0xFFBB->get_item_flag(SI_TOURNAMENT)) {
 		if (gflags[0x0093]) {
 			0xFFBB->show_npc_face0(0x0000);
 			say("\"Thou hast ruined everything! With the current emotional and spiritual state of the city, the Goblins are certain to win this war against us!\"");
 			say("\"The problem lies with the Bears and Wolves -- their bickering weakens us. So I had a plan! The Leopards would rule, and I would be King.\"");
 			say("\"And with the miracle weapons in our hidden arsenal, not even the Goblins could have taken this city...\"");
-			0xFFBB->clear_item_flag(0x001D);
+			0xFFBB->clear_item_flag(SI_TOURNAMENT);
 			0xFFBB->reduce_health(0x0032, 0x0000);
 			abort;
 		}
@@ -43272,7 +43333,7 @@ labelFunc0445_0257:
 					var0014->revert_schedule();
 				}
 				say("\"Greetings, stranger. I am Lord Marsten. Thou hast come to this city at a grievous hour. We are here to entomb the ashes of this brave Pikeman Groat, as well as to mourn the loss of our Knight Champion.\"");
-				0xFFBB->set_item_flag(0x001C);
+				0xFFBB->set_item_flag(MET);
 				Func094E(0xFFC1, "@Astrid was the finest Knight that Monitor ever had!@");
 				UI_remove_npc_face1();
 				0x0000->set_conversation_slot();
@@ -43386,7 +43447,7 @@ labelFunc0445_0257:
 				if (!var0008) {
 					add("Knight Champion");
 				}
-				if (!0xFEF7->get_item_flag(0x0004)) {
+				if (!0xFEF7->get_item_flag(DEAD)) {
 					say("\"We need to reclaim it! Else, the Goblins shall again build their Horde and invade this great city.\"");
 					add("raid the Goblins");
 				}
@@ -43558,14 +43619,14 @@ labelFunc0445_0257:
 			case "traitor" (remove):
 				if (var000C) {
 					say("\"Thou hast done us a valuable service by rooting out that miserable traitor, Simon. Although in the true sense of the word, he was merely a loyal Goblin, not a traitor... Bah! A pox on all Goblins!\"");
-				} else if (0xFFB8->get_item_flag(0x0004)) {
+				} else if (0xFFB8->get_item_flag(DEAD)) {
 					say("\"Thou hast slain the traitor, Knight! Well done!");
-					if (0xFFB5->get_item_flag(0x0004)) {
+					if (0xFFB5->get_item_flag(DEAD)) {
 						say("\"Lydia must have been part of Shmed's secret conspiracy. But that no longer matters -- both of the Goblin spies are dead!\"");
 					} else {
 						say("\"The Goblins shall no more steal our secrets, eh!\"");
 					}
-				} else if (0xFFB5->get_item_flag(0x0004)) {
+				} else if (0xFFB5->get_item_flag(DEAD)) {
 					say("\"I must apologize to thee for the attack upon thee by the traitor, Shmed.\"");
 					say("\"I did not believe that there was a traitor, but this evidence proves it.\"");
 				} else {
@@ -43797,7 +43858,7 @@ labelFunc0445_0D4F:
 				0xFFBB->item_say("@Calm yourselves.@");
 			}
 			if (var001C == 0x0003) {
-				if (0xFEF7->get_item_flag(0x0004)) {
+				if (0xFEF7->get_item_flag(DEAD)) {
 					var0015->item_say("@The Goblins are no threat.@");
 					Func097F(0xFFBB, "@I told thee so.@", 0x0003);
 				} else {
@@ -43894,7 +43955,7 @@ void Func0446 object#(0x446) () {
 			0xFFBA->run_schedule();
 			abort;
 		}
-		if (!0xFFBA->get_item_flag(0x001C)) {
+		if (!0xFFBA->get_item_flag(MET)) {
 			if (!UI_is_pc_female()) {
 				say("\"Forgive my boldness, but I must say that thou hast a fine build, milord! Surely, thou hast overcome many foes with the powerful thrust of thy weapon...\"");
 			} else {
@@ -43905,7 +43966,7 @@ void Func0446 object#(0x446) () {
 				0x0000->set_conversation_slot();
 			}
 			say("\"My name is Lucilla. Is there anything I can do for thee? Anything at all?\"");
-			0xFFBA->set_item_flag(0x001C);
+			0xFFBA->set_item_flag(MET);
 		} else {
 			say("\"Hello again!\"");
 		}
@@ -43931,7 +43992,7 @@ void Func0446 object#(0x446) () {
 		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != 0x000F)) {
 			add("brown bottle");
 		}
-		if (gflags[0x0048] && (!(0xFFB4->get_item_flag(0x0004) && (!(gflags[0x0038] && (!gflags[0x0092])))))) {
+		if (gflags[0x0048] && (!(0xFFB4->get_item_flag(DEAD) && (!(gflags[0x0038] && (!gflags[0x0092])))))) {
 			add("traitor");
 		}
 		converse (["name", "buy", "bye"]) {
@@ -43959,7 +44020,7 @@ void Func0446 object#(0x446) () {
 
 			case "name" (remove):
 				say("\"My name is Lucilla.\"");
-				0xFFBA->set_item_flag(0x001C);
+				0xFFBA->set_item_flag(MET);
 				fallthrough;
 
 			case "duties" (remove):
@@ -44247,7 +44308,7 @@ void Func0447 object#(0x447) () {
 
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
-	var0002 = 0xFFB9->get_item_flag(0x001C);
+	var0002 = 0xFFB9->get_item_flag(MET);
 	var0003 = Func0953();
 	if (event == 0x0007) {
 		if (gflags[0x0083]) {
@@ -44364,7 +44425,7 @@ void Func0447 object#(0x447) () {
 		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != 0x000F)) {
 			add("brown bottle");
 		}
-		if (gflags[0x0048] && (!0xFFB4->get_item_flag(0x0004))) {
+		if (gflags[0x0048] && (!0xFFB4->get_item_flag(DEAD))) {
 			add("traitor");
 		}
 		converse ("bye") {
@@ -44385,7 +44446,7 @@ void Func0447 object#(0x447) () {
 
 			case "name" (remove):
 				say("\"I am Luther! I am a Bear and a trainer of unequalled strength. It is my destiny to become the next Knight Champion of Monitor!\"");
-				0xFFB9->set_item_flag(0x001C);
+				0xFFB9->set_item_flag(MET);
 				add(["Knight Champion", "destiny"]);
 				fallthrough;
 
@@ -44446,7 +44507,7 @@ void Func0447 object#(0x447) () {
 
 			case "bully" (remove):
 				say("\"How darest thou call me a bully! That little whore Lydia must have put thee up to this...\"");
-				if (0xFFB8->get_item_flag(0x0004)) {
+				if (0xFFB8->get_item_flag(DEAD)) {
 					say("\"I am glad that she is dead, the bitch!\"");
 				} else {
 					say("\"So, thou and she are teaming against me, aye? Spreading lies and rumors? Poisoning my reputation?\"");
@@ -44554,7 +44615,7 @@ void Func0447 object#(0x447) () {
 				}
 				0x0000->set_conversation_slot();
 				say("\"Thou couldst use a warrior like myself, to guard thee against thine enemies. With me on hand, nothing could harm thee!\"");
-				if (0xFEF7->get_item_flag(0x0004)) {
+				if (0xFEF7->get_item_flag(DEAD)) {
 					say("\"But alas, my duty as a Knight keeps me here in Monitor. The Goblins are a constant threat, even though thou hast slain their king.\"");
 				} else {
 					say("\"But alas, my duty as a Knight keeps me here in Monitor. The Goblins are a constant threat.\"");
@@ -44609,11 +44670,11 @@ void Func0448 object#(0x448) () {
 	var0000 = Func0953();
 	var0001 = Func0954();
 	var0002 = UI_is_pc_female();
-	var0003 = 0xFFB8->get_item_flag(0x001C);
+	var0003 = 0xFFB8->get_item_flag(MET);
 	var0004 = Func098E();
 	var0005 = 0xFFB8->find_nearby(0x0381, 0x0014, 0x0000);
 	var0006 = Func0942(0xFFFF);
-	if ((event == 0x0007) && 0xFFB8->get_item_flag(0x001D)) {
+	if ((event == 0x0007) && 0xFFB8->get_item_flag(SI_TOURNAMENT)) {
 		0xFFB8->show_npc_face0(0x0000);
 		if (!gflags[0x00CA]) {
 			say("\"So! Thou hast discovered me!\"");
@@ -44623,14 +44684,14 @@ void Func0448 object#(0x448) () {
 			}
 		}
 		say("\"I spit upon thee, pawn of the Demon British!\"");
-		0xFFB8->clear_item_flag(0x001D);
+		0xFFB8->clear_item_flag(SI_TOURNAMENT);
 		0xFFB8->reduce_health(0x0032, 0x0000);
 		Func097F(0xFE9C, "@Whew!@", 0x0002);
 		abort;
 	}
 	if (event == 0x0002) {
-		if (0xFFB8->get_item_flag(0x001E) && (item == Func09A0(0x0005, 0x0002))) {
-			if (0xFE9C->get_item_flag(0x0010) || (Func0994() == 0x001F)) {
+		if (0xFFB8->get_item_flag(SI_ZOMBIE) && (item == Func09A0(0x0005, 0x0002))) {
+			if (0xFE9C->get_item_flag(DONT_MOVE) || (Func0994() == 0x001F)) {
 				var0007 = Func09A0(0x0005, 0x0002);
 				var0008 = script var0007 after 100 ticks {
 					nohalt;
@@ -44638,7 +44699,7 @@ void Func0448 object#(0x448) () {
 				};
 				abort;
 			}
-			0xFFB8->clear_item_flag(0x001E);
+			0xFFB8->clear_item_flag(SI_ZOMBIE);
 			var0009 = Func0992(0xFFFE, 0x0000, 0x0000, false);
 			if ((var0009 != 0xFE9C) && Func0942(var0009)) {
 				var0009->show_npc_face0(0x0000);
@@ -44650,10 +44711,10 @@ void Func0448 object#(0x448) () {
 			}
 			abort;
 		}
-		if (0xFE9C->get_item_flag(0x0008) && (item == Func09A0(0x0005, 0x0002))) {
+		if (0xFE9C->get_item_flag(POISONED) && (item == Func09A0(0x0005, 0x0002))) {
 			var0009 = Func0992(0xFFFE, "@Art thou all right?@", "@Oh...@", true);
 			if (var0009 != 0xFE9C) {
-				0xFFB8->set_item_flag(0x001E);
+				0xFFB8->set_item_flag(SI_ZOMBIE);
 				var0007 = Func09A0(0x0005, 0x0002);
 				var0008 = script var0007 after 5 ticks {
 					nohalt;
@@ -44662,10 +44723,10 @@ void Func0448 object#(0x448) () {
 			}
 		}
 		if ((item == Func09A0(0x0005, 0x0001)) && (!gflags[0x005A])) {
-			if (!0xFE9C->get_item_flag(0x0008)) {
+			if (!0xFE9C->get_item_flag(POISONED)) {
 				if (Func0994() != 0x001F) {
 					gflags[0x00C2] = true;
-					0xFE9C->set_item_flag(0x0008);
+					0xFE9C->set_item_flag(POISONED);
 					var0007 = Func09A0(0x0005, 0x0002);
 					var0008 = script var0007 after 20 ticks {
 						nohalt;
@@ -44702,7 +44763,7 @@ void Func0448 object#(0x448) () {
 			say("\"I am Lydia. What can I do for thee, ",
 				var0001,
 				"?\"");
-			0xFFB8->set_item_flag(0x001C);
+			0xFFB8->set_item_flag(MET);
 		} else {
 			say("\"Hello, ",
 				var0001,
@@ -44712,7 +44773,7 @@ void Func0448 object#(0x448) () {
 		if (gflags[0x004A] && (!gflags[0x003E])) {
 			add("tattoo");
 		}
-		if (gflags[0x0048] && (!0xFFB4->get_item_flag(0x0004))) {
+		if (gflags[0x0048] && (!0xFFB4->get_item_flag(DEAD))) {
 			add("traitor");
 		}
 		if (gflags[0x0035]) {
@@ -44817,7 +44878,7 @@ void Func0448 object#(0x448) () {
 						for (var000F in var0004 with var000D to var000E) {
 							Func09AC(var000F, 0xFFFF, 0x0000, 0x0010);
 						}
-						0xFE9C->set_item_flag(0x0010);
+						0xFE9C->set_item_flag(DONT_MOVE);
 						UI_end_conversation();
 						var0010 = var0005->get_object_position();
 						var0010[0x0001] += 0x0001;
@@ -44912,7 +44973,7 @@ void Func0449 object#(0x449) () {
 		0xFFB7->run_schedule();
 		0xFFB7->clear_item_say();
 		0xFFB7->show_npc_face0(0x0000);
-		var0001 = 0xFFB7->get_item_flag(0x001C);
+		var0001 = 0xFFB7->get_item_flag(MET);
 		if (!gflags[0x0032]) {
 			say("\"Say here! I'm Renfry the Cremator and there is a funeral in progress. Lords Marsten, Spektor, Brendann and Caladin are all in the crypts paying their last respects.\"");
 			abort;
@@ -44947,7 +45008,7 @@ void Func0449 object#(0x449) () {
 					0x0000->set_conversation_slot();
 					say("\"Oh. As thou canst tell, mine hearing is not what it once was. 'Tis the roar of the fires which hath done it...\"");
 					say("\"I am Renfry, Knight and Cremator.\"");
-					0xFFB7->set_item_flag(0x001C);
+					0xFFB7->set_item_flag(MET);
 				}
 				fallthrough;
 
@@ -45115,7 +45176,7 @@ void Func044A object#(0x44A) () {
 	var var0014;
 
 	var0000 = Func0954();
-	var0001 = 0xFFB6->get_item_flag(0x001C);
+	var0001 = 0xFFB6->get_item_flag(MET);
 	var0002 = "stranger";
 	if (gflags[0x0048]) {
 		var0002 = "Knight";
@@ -45259,7 +45320,7 @@ void Func044A object#(0x44A) () {
 		if (!var0001) {
 			say("\"We have not had many strangers in our town lately. Let me introduce myself. I am Shazzana, a Knight of the Leopards.\"");
 			add("Leopards");
-			0xFFB6->set_item_flag(0x001C);
+			0xFFB6->set_item_flag(MET);
 		} else {
 			say("\"I am not one to waste time with words. What is thy business with me, Knight?\"");
 		}
@@ -45319,9 +45380,9 @@ void Func044A object#(0x44A) () {
 				say("\"I teach the art of combat. My technique is based on swiftness and accuracy of movement. If thou wert to be at the List Field at noon, I could spar with thee.\"");
 				if (UI_get_array_size(UI_get_party_list()) > 0x0001) {
 					say("\"I am certain I could also teach thy friend a thing or two...\"");
-					var0012 = 0xFFFD->get_item_flag(0x0006);
-					var0013 = 0xFFFE->get_item_flag(0x0006);
-					var0014 = 0xFFFF->get_item_flag(0x0006);
+					var0012 = 0xFFFD->get_item_flag(IN_PARTY);
+					var0013 = 0xFFFE->get_item_flag(IN_PARTY);
+					var0014 = 0xFFFF->get_item_flag(IN_PARTY);
 					if (var0012) {
 						0xFFFD->show_npc_face1(0x0000);
 						say("\"Art thou referring to me?\"");
@@ -45462,14 +45523,14 @@ void Func044B object#(0x44B) () {
 		}
 		0xFFB5->set_schedule_type(0x0003);
 	}
-	if ((event == 0x0007) && 0xFFB5->get_item_flag(0x001D)) {
+	if ((event == 0x0007) && 0xFFB5->get_item_flag(SI_TOURNAMENT)) {
 		0xFFB5->clear_item_say();
 		if (!gflags[0x00C5]) {
 			0xFFB5->show_npc_face0(0x0000);
 			say("\"But I don't understand. How didst thou survive the Knight's Test? We fixed the place with traps to be absolutely fatal!\"");
 			say("\"I did not want to do it. She seduced me into trying to kill thee! Yet even now, I cannot betray her...\"");
 		}
-		0xFFB5->clear_item_flag(0x001D);
+		0xFFB5->clear_item_flag(SI_TOURNAMENT);
 		Func097F(0xFFB5, "@My love!@", 0x0000);
 		Func097F(0xFE9C, "@Die with dishonor!@", 0x0005);
 		0xFFB5->reduce_health(0x0037, 0x0000);
@@ -45487,17 +45548,17 @@ void Func044B object#(0x44B) () {
 			say("\"But I don't understand. How didst thou survive the Knight's Test? We fixed the place with traps to be absolutely fatal!\"");
 			say("\"I did not want to do it. She seduced me into trying to kill thee! Yet even now, I cannot betray her...\"");
 			Func09AD(0xFFB5);
-			0xFFB5->set_item_flag(0x001D);
+			0xFFB5->set_item_flag(SI_TOURNAMENT);
 			Func097F(0xFFB5, "@Take this!@", 0x0000);
 			gflags[0x00C5] = true;
 			abort;
 		}
-		var0003 = 0xFFB5->get_item_flag(0x001C);
+		var0003 = 0xFFB5->get_item_flag(MET);
 		if (var0003) {
 			say("\"Hello again.\"");
 		} else {
 			say("\"My name is Shmed. I am a Knight of Monitor, at thy service...\"");
-			0xFFB5->set_item_flag(0x001C);
+			0xFFB5->set_item_flag(MET);
 			var0004 = false;
 		}
 		if (gflags[0x0080]) {
@@ -45525,7 +45586,7 @@ void Func044B object#(0x44B) () {
 					say("\"The Test of the Knights is a challenge which only one stout of heart, keen of mind and strong of arm can pass. It is specially designed to test thy might, thy fleetness, thy courage and thy wits. If thou dost complete the test thou shouldst follow the directions of the words contained in the scrolls that thou wilt find. Thy totem animal will then appear. Slay it and take it back to town. Cellia will take its skin to make a cloak for thee. Lucilla will cook its meat. All the Knights will have a banquet in thine honor -- if thou dost pass the test.\"");
 					if (UI_get_array_size(UI_get_party_list()) > 0x0001) {
 						say("\"It is a test which one must endure alone, without companions.\"");
-						if (0xFFD4->get_item_flag(0x0006)) {
+						if (0xFFD4->get_item_flag(IN_PARTY)) {
 							Func094E(0xFFD4, (("@But not before finishing our quest, " + var0000) + "!@"));
 							0x0000->set_conversation_slot();
 						}
@@ -45559,7 +45620,7 @@ void Func044B object#(0x44B) () {
 							say("\"Steel thyself! If thou dost make it through to the other side, then all will know that thou art worthy to be a Knight of Monitor.\"");
 							if (UI_get_array_size(UI_get_party_list()) > 0x0001) {
 								say("\"Thy friends must wait for thee here.\"");
-								if (0xFFD4->get_item_flag(0x0006)) {
+								if (0xFFD4->get_item_flag(IN_PARTY)) {
 									Func094E(0xFFD4, "@Then he cannot take this Test! I refuse to leave!@");
 									0x0000->set_conversation_slot();
 									say("\"I cannot change the rules of the Test. Therefore, I cannot admit thee, stranger.\"");
@@ -45591,7 +45652,7 @@ void Func044B object#(0x44B) () {
 									}
 								}
 							}
-							0xFE9C->clear_item_flag(0x0000);
+							0xFE9C->clear_item_flag(INVISIBLE);
 							var0010 = 0xFFB5->find_nearby(0x020A, 0x0064, 0x0000);
 							var0011 = 0x0000;
 							for (var0014 in var0010 with var0012 to var0013) {
@@ -45637,7 +45698,7 @@ void Func044B object#(0x44B) () {
 							0xFFB5->si_path_run_usecode([0x0339, 0x08D7, 0x0000], 0x0007, 0xFE9C, Func0739, true);
 							Func097F(0xFFB5, "@Follow me...@", 0x0002);
 							Func097F(0xFE9C, "@Lead onwards...@", 0x0005);
-							0xFE9C->set_item_flag(0x0010);
+							0xFE9C->set_item_flag(DONT_MOVE);
 							UI_end_conversation();
 							abort;
 						}
@@ -45710,14 +45771,14 @@ void Func044C object#(0x44C) () {
 	var var0014;
 
 	var0000 = Func0954();
-	var0001 = 0xFFB4->get_item_flag(0x001C);
+	var0001 = 0xFFB4->get_item_flag(MET);
 	var0002 = Func0953();
 	var0003 = false;
-	if ((event == 0x0007) && ((gflags[0x0045] || gflags[0x005F]) && ((!0xFFB4->get_item_flag(0x001E)) && (!gflags[0x0044])))) {
+	if ((event == 0x0007) && ((gflags[0x0045] || gflags[0x005F]) && ((!0xFFB4->get_item_flag(SI_ZOMBIE)) && (!gflags[0x0044])))) {
 		0xFFB4->show_npc_face0(0x0000);
 		say("\"So, thou hast found me out? Well, to the blazes with it all!\"");
-		0xFFB4->set_item_flag(0x001E);
-		0xFFB4->set_item_flag(0x0004);
+		0xFFB4->set_item_flag(SI_ZOMBIE);
+		0xFFB4->set_item_flag(DEAD);
 		var0004 = 0xFFB4->get_object_position();
 		var0004[0x0001] -= var0004[0x0003] / 0x0002;
 		var0004[0x0002] -= var0004[0x0003] / 0x0002;
@@ -45764,7 +45825,7 @@ void Func044C object#(0x44C) () {
 		0xFFB4->clear_item_say();
 		0xFFB4->show_npc_face0(0x0000);
 		if (item == 0xFE9C->get_npc_object()) {
-			0xFE9C->clear_item_flag(0x000F);
+			0xFE9C->clear_item_flag(IN_ACTION);
 			gflags[0x00B8] = true;
 			say("\"Unusual taste, eh? I dare say I am the only one outside of the city of Fawn who drinks it.\"");
 			say("\"I would share more with thee, but I think that thou dost not appreciate it. Besides, I must clean this foulness!\"");
@@ -45774,7 +45835,7 @@ void Func044C object#(0x44C) () {
 		}
 		if (!var0001) {
 			say("\"How may I help thee? My name is Simon.\"");
-			0xFFB4->set_item_flag(0x001C);
+			0xFFB4->set_item_flag(MET);
 		} else {
 			say("\"How can I help, ",
 				var0000,
@@ -45915,7 +45976,7 @@ void Func044C object#(0x44C) () {
 					var000F = UI_create_new_object(0x0268);
 					if (var000F) {
 						var000F->set_item_frame(0x0009);
-						var000F->set_item_flag(0x0012);
+						var000F->set_item_flag(TEMPORARY);
 						var0010 = 0xFE9C->get_object_position();
 						var0011 = UI_update_last_created(var0010);
 					}
@@ -46165,7 +46226,7 @@ void Func044D object#(0x44D) () {
 				0xFFB3->item_say("@Must write this down.@");
 			}
 			if (var0008 == 0x0003) {
-				if (0xFEF7->get_item_flag(0x0004)) {
+				if (0xFEF7->get_item_flag(DEAD)) {
 					var0007->item_say("@The Goblins are weak.@");
 					Func097F(0xFFB3, "@Be cautious...@", 0x0003);
 				} else {
@@ -46200,14 +46261,14 @@ void Func044D object#(0x44D) () {
 			}
 		}
 	}
-	if ((event == 0x0007) && 0xFFB3->get_item_flag(0x001D)) {
+	if ((event == 0x0007) && 0xFFB3->get_item_flag(SI_TOURNAMENT)) {
 		if (gflags[0x0094]) {
 			0xFFB3->show_npc_face0(0x0000);
 			say("\"Very well, I have been found out. Listen to my secrets, brute, for I must confess all with my dying breath...\"");
 			say("\"Yes, Marsten and I did plot with the Goblins -- but we did think to cheat them in the end! Then the Leopards would have ruled Monitor.\"");
 			say("\"And it was I who stole from the town treasury, for we needed the money to acquire a cache of powerful weapons -- explosive weapons...\"");
 			say("\"The blood of Cantra's father weighs upon my soul. He did stumble into our secret, so he had to be killed. If our secret had not been protected, Marsten would have killed me.\"");
-			0xFFB3->clear_item_flag(0x001D);
+			0xFFB3->clear_item_flag(SI_TOURNAMENT);
 			0xFFB3->reduce_health(0x0032, 0x0000);
 			gflags[0x00B4] = true;
 			abort;
@@ -46252,12 +46313,12 @@ void Func044D object#(0x44D) () {
 			gflags[0x00B4] = true;
 		}
 	} else {
-		var000A = 0xFFB3->get_item_flag(0x001C);
+		var000A = 0xFFB3->get_item_flag(MET);
 		if (var000A) {
 			say("\"Yes, how may I help?\"");
 		} else {
 			say("\"I am Spektor, treasurer of Monitor.\"");
-			0xFFB3->set_item_flag(0x001C);
+			0xFFB3->set_item_flag(MET);
 		}
 		add(["duties", "exchange coins"]);
 		if (gflags[0x0093] && (!(gflags[0x0038] || gflags[0x00B3]))) {
@@ -46290,7 +46351,7 @@ void Func044D object#(0x44D) () {
 		case "taxes" (remove):
 			say("\"Our Pikemen patrol the major roads connecting Monitor with Fawn and Sleeping Bull, and man the guard towers.\"");
 			say("\"In better times, caravans travelled these routes, and we collected a fat reward from merchants eager for our protection.\"");
-			if (0xFEF7->get_item_flag(0x0004)) {
+			if (0xFEF7->get_item_flag(DEAD)) {
 				say("\"With the Goblin King slain, perhaps the roads will again be filled. But the storms also discourage travel...\"");
 			} else {
 				say("\"But now, the rumors of a gathering Goblin invasion have scared the travellers off the roads! Frankly, this is nonsense.\"");
@@ -46490,7 +46551,7 @@ void Func044E object#(0x44E) () {
 	if (gflags[0x0048]) {
 		var0000 = "Knight";
 	}
-	var0001 = 0xFFB2->get_item_flag(0x001C);
+	var0001 = 0xFFB2->get_item_flag(MET);
 	if (0xFFB2->get_schedule_type() == 0x000D) {
 		var0002 = true;
 	}
@@ -46510,7 +46571,7 @@ void Func044E object#(0x44E) () {
 				"?\"");
 		} else {
 			say("\"I am Standarr the Armourer. What dost thou wish of me?\"");
-			0xFFB2->set_item_flag(0x001C);
+			0xFFB2->set_item_flag(MET);
 		}
 		if (gflags[0x009F] && (!gflags[0x0294])) {
 			add("strange breastplate");
@@ -46664,7 +46725,7 @@ void Func044F object#(0x44F) () {
 	var var000A;
 
 	var0000 = Func0954();
-	var0001 = 0xFFB1->get_item_flag(0x001C);
+	var0001 = 0xFFB1->get_item_flag(MET);
 	var0002 = Func097D(0xFE9B, 0x0001, 0x011D, 0xFE99, 0x0006);
 	var0003 = false;
 	if (event == 0x0001) {
@@ -46729,7 +46790,7 @@ void Func044F object#(0x44F) () {
 		Func08F0();
 		if (!var0001) {
 			say("\"What can I do for thee? I am Templar.\"");
-			0xFFB1->set_item_flag(0x001C);
+			0xFFB1->set_item_flag(MET);
 		} else {
 			say("\"Yes?\"");
 		}
@@ -46972,7 +47033,7 @@ void Func0450 object#(0x450) () {
 	var var0008;
 
 	var0000 = false;
-	var0001 = 0xFFB0->get_item_flag(0x001C);
+	var0001 = 0xFFB0->get_item_flag(MET);
 	var0002 = Func0953();
 	if (event == 0x0007) {
 		var0003 = script item {
@@ -47017,7 +47078,7 @@ void Func0450 object#(0x450) () {
 				add(["gate"]);
 			}
 		}
-		if (gflags[0x0048] && (!0xFFB4->get_item_flag(0x0004))) {
+		if (gflags[0x0048] && (!0xFFB4->get_item_flag(DEAD))) {
 			add("traitor");
 		}
 		if (gflags[0x00CC]) {
@@ -47066,9 +47127,9 @@ void Func0450 object#(0x450) () {
 						var0008->set_alignment(0x0000);
 						var0003 = var0008->set_npc_prop(0x0001, 0x000A);
 					}
-					0xFE9C->set_item_flag(0x0010);
+					0xFE9C->set_item_flag(DONT_MOVE);
 					Func0833(event);
-					0xFFB0->set_item_flag(0x001C);
+					0xFFB0->set_item_flag(MET);
 					abort;
 				}
 				say("\"Then I shall certainly not let thee in.\"");
@@ -47100,7 +47161,7 @@ void Func0450 object#(0x450) () {
 
 			case "gate" (remove):
 				say("\"Aye, 'tis a gate indeed. And a strong one at that. To repel any foe who dares attempt to breach these walls.\" *\"I suppose thou dost want me to operate it. As if I had naught to do...\"");
-				0xFE9C->set_item_flag(0x0010);
+				0xFE9C->set_item_flag(DONT_MOVE);
 				Func0833(event);
 				abort;
 
@@ -47257,7 +47318,7 @@ void Func0451 object#(0x451) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	var0003 = 0xFFAF->get_item_flag(0x001C);
+	var0003 = 0xFFAF->get_item_flag(MET);
 	var0004 = Func0994();
 	var0005 = Func0942(0xFFFF);
 	var0006 = Func0942(0xFFFE);
@@ -47323,7 +47384,7 @@ void Func0451 object#(0x451) () {
 					say("\"So, leave thou before I grow tired of thee and thou dost feel the wrath of Ensorcio the Adept!\"");
 					add(["hero", "wrongs", "bye"]);
 				}
-				0xFFAF->set_item_flag(0x001C);
+				0xFFAF->set_item_flag(MET);
 			} else if (gflags[0x003E] == true) {
 				say("\"So, thou art returned... Failed in thy puny quest already, Pikeman?\"");
 			} else {
@@ -47755,7 +47816,7 @@ void Func0452 object#(0x452) () {
 	var var0000;
 	var var0001;
 
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 	}
 	var0000 = Func0954();
@@ -47789,7 +47850,7 @@ void Func0453 object#(0x453) () {
 	var var0000;
 	var var0001;
 
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 	}
 	var0000 = Func0954();
@@ -47818,7 +47879,7 @@ extern void Func0809 0x809 ();
 extern void Func09AD 0x9AD (var var0000);
 
 void Func0454 object#(0x454) () {
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 	} else {
 		Func09AD(item);
@@ -47828,8 +47889,8 @@ void Func0454 object#(0x454) () {
 extern void Func08B2 0x8B2 ();
 
 void Func0455 object#(0x455) () {
-	if ((event == 0x0007) && get_item_flag(0x001D)) {
-		clear_item_flag(0x001D);
+	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+		clear_item_flag(SI_TOURNAMENT);
 		reduce_health(0x0032, 0x0000);
 		gflags[0x0209] = true;
 		abort;
@@ -47846,8 +47907,8 @@ void Func0456 object#(0x456) () {
 extern void Func08B2 0x8B2 ();
 
 void Func0457 object#(0x457) () {
-	if ((event == 0x0007) && get_item_flag(0x001D)) {
-		clear_item_flag(0x001D);
+	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+		clear_item_flag(SI_TOURNAMENT);
 		reduce_health(0x0032, 0x0000);
 		gflags[0x020A] = true;
 		abort;
@@ -47882,8 +47943,8 @@ void Func045B object#(0x45B) () {
 extern void Func08B2 0x8B2 ();
 
 void Func045C object#(0x45C) () {
-	if ((event == 0x0007) && get_item_flag(0x001D)) {
-		clear_item_flag(0x001D);
+	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+		clear_item_flag(SI_TOURNAMENT);
 		reduce_health(0x0032, 0x0000);
 		gflags[0x020B] = true;
 		abort;
@@ -47894,8 +47955,8 @@ void Func045C object#(0x45C) () {
 extern void Func08B2 0x8B2 ();
 
 void Func045D object#(0x45D) () {
-	if ((event == 0x0007) && get_item_flag(0x001D)) {
-		clear_item_flag(0x001D);
+	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+		clear_item_flag(SI_TOURNAMENT);
 		reduce_health(0x0032, 0x0000);
 		gflags[0x020C] = true;
 		abort;
@@ -47919,7 +47980,7 @@ void Func045E object#(0x45E) () {
 	var var0004;
 	var var0005;
 
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -48008,7 +48069,7 @@ void Func045F object#(0x45F) () {
 	var var0004;
 	var var0005;
 
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -48117,7 +48178,7 @@ void Func0460 object#(0x460) () {
 	var var0004;
 	var var0005;
 
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -48204,7 +48265,7 @@ void Func0461 object#(0x461) () {
 	var var0001;
 	var var0002;
 
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -48295,7 +48356,7 @@ void Func0462 object#(0x462) () {
 	var var0004;
 	var var0005;
 
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -48399,7 +48460,7 @@ void Func0463 object#(0x463) () {
 	var var0004;
 	var var0005;
 
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -48487,8 +48548,8 @@ void Func0464 object#(0x464) () {
 	var var0002;
 	var var0003;
 
-	0xFE9C->clear_item_flag(0x0010);
-	if (0xFF9C->get_item_flag(0x001E)) {
+	0xFE9C->clear_item_flag(DONT_MOVE);
+	if (0xFF9C->get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -48496,7 +48557,7 @@ void Func0464 object#(0x464) () {
 		Func09AA();
 		UI_play_music(0x0040, Func09A0(0x0005, 0x0001));
 		0xFED6->show_npc_face0(0x0000);
-		var0000 = 0xFF9C->get_item_flag(0x001C);
+		var0000 = 0xFF9C->get_item_flag(MET);
 		if (var0000 == false) {
 			say("\"I am the Educator here, seeker. It is my task to determine how far thine Ethicality hath already progressed before the test may begin.\"");
 			say("\"Dost thou wish to begin the test?\"");
@@ -48541,7 +48602,7 @@ void Func0464 object#(0x464) () {
 						say("\"Thou hast answered well... Of all virtues, Ethicality is often the most subjective and tenuous.\" *\"Thou art worthy to begin the test...\"");
 						UI_pop_answers();
 						UI_pop_answers();
-						0xFF9C->set_item_flag(0x001C);
+						0xFF9C->set_item_flag(MET);
 						UI_fade_palette(0x000C, 0x0001, 0x0000);
 						0xFE9C->move_object([0x09AE, 0x036F, 0x0000]);
 						UI_play_sound_effect(0x0066);
@@ -48877,7 +48938,7 @@ void Func047D object#(0x47D) () {
 	var var0002;
 	var var0003;
 
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -48934,7 +48995,7 @@ extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 void Func047E object#(0x47E) () {
 	var var0000;
 
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -49088,7 +49149,7 @@ void Func0481 object#(0x481) () {
 	var var0002;
 	var var0003;
 
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -49114,7 +49175,7 @@ void Func0481 object#(0x481) () {
 		0xFE9C->clear_item_say();
 		clear_item_say();
 		0xFF7F->set_schedule_type(0x001D);
-		var0001 = 0xFFFF->get_item_flag(0x0006);
+		var0001 = 0xFFFF->get_item_flag(IN_PARTY);
 		0xFED6->show_npc_face0(0x0000);
 		say("\"I am the guardian of the city of Order. Dost thou wish to enter the great city of Spinebreaker?\"");
 		var0002 = Func0955();
@@ -49152,7 +49213,7 @@ void Func0481 object#(0x481) () {
 				0x0000->set_conversation_slot();
 				say("\"That is not the correct password! Thou art forbidden to enter!\"");
 				say("\"Thou shouldst not loiter about here. Thou must leave this place immediately.\"");
-				var0001 = 0xFFFF->get_item_flag(0x0006);
+				var0001 = 0xFFFF->get_item_flag(IN_PARTY);
 				if (var0001) {
 					0xFFFF->show_npc_face1(0x0000);
 					0x0001->set_conversation_slot();
@@ -49249,7 +49310,7 @@ void Func048F object#(0x48F) () {
 		0xFF71->clear_item_say();
 		0xFF71->show_npc_face0(0x0000);
 		var0000 = Func097D(0xFE9B, 0x0001, 0x032A, 0x0009, 0x0002);
-		var0001 = 0xFF71->get_item_flag(0x001C);
+		var0001 = 0xFF71->get_item_flag(MET);
 		if (var0001) {
 			say("\"We meet again.\"");
 		} else {
@@ -49266,7 +49327,7 @@ void Func048F object#(0x48F) () {
 
 			case "name" (remove):
 				say("\"I am Baiyanda, mate of Mwaerno and healer for Gwani people.\"");
-				0xFF71->set_item_flag(0x001C);
+				0xFF71->set_item_flag(MET);
 				add(["Mwaerno", "healer"]);
 				fallthrough;
 
@@ -49321,7 +49382,7 @@ void Func048F object#(0x48F) () {
 					say("\"Maybe thou return later.\"");
 				} else {
 					var0009 = var0008->get_npc_number();
-					var000A = var0008->get_item_flag(0x0008);
+					var000A = var0008->get_item_flag(POISONED);
 					var000B = var0008->get_npc_prop(0x0000);
 					var000C = var0008->get_npc_prop(0x0003);
 					var000D = var0008->get_npc_name();
@@ -49347,7 +49408,7 @@ void Func048F object#(0x48F) () {
 							" poisoned bad! I fix.\"");
 					}
 					if (var000A == true) {
-						var0008->clear_item_flag(0x0008);
+						var0008->clear_item_flag(POISONED);
 						say("\"Good! Poison gone now.\"");
 					}
 				}
@@ -49378,7 +49439,7 @@ void Func048F object#(0x48F) () {
 				say("\"Special things about blood of Ice Dragon that can cure almost any sickness.\"");
 				say("\"But Ice Dragons very rare creatures. Gwani honor all life -- try everything before we hunt them.\"");
 				say("\"One did live north of our village. We drove different one east many years ago.\"");
-				var0012 = 0xFF6D->get_item_flag(0x001E);
+				var0012 = 0xFF6D->get_item_flag(SI_ZOMBIE);
 				if (var0012) {
 					say("\"Ice Dragon blood maybe only thing powerful enough to cure Neyobi. But it so rare that it very hard to find. Five of our hunters looking for it.\"");
 					say("\"Gwenno said thou help people in need. Thou must find some Ice Dragon blood for Neyobi! It is the last hope!\"");
@@ -49405,7 +49466,7 @@ void Func048F object#(0x48F) () {
 				fallthrough;
 
 			case "Neyobi" (remove):
-				var0012 = 0xFF6D->get_item_flag(0x001E);
+				var0012 = 0xFF6D->get_item_flag(SI_ZOMBIE);
 				if (var0012) {
 					say("\"Neyobi ill from strange sickness. Baiyanda never seen before. Nothing Baiyanda tried help her. Ice Dragon blood only thing that could save her.\"");
 				} else {
@@ -49447,7 +49508,7 @@ void Func0490 object#(0x490) () {
 		var0000 = Func0942(0xFF6F);
 		var0001 = Func097D(0xFE9B, 0x0001, 0x03D1, 0xFE99, 0x0008);
 		var0002 = Func097D(0xFE9B, 0x0001, 0x0002, 0xFE99, 0x0004);
-		var0003 = get_item_flag(0x001C);
+		var0003 = get_item_flag(MET);
 		if (var0001 || var0002) {
 			say("\"Botoka na guta!\" *This creature looks at you with eyes so filled with hate that it is painful to look at them.");
 			if (var0000) {
@@ -49466,7 +49527,7 @@ void Func0490 object#(0x490) () {
 		converse (["name", "Gwani", "bye"]) {
 			case "name" (remove):
 				say("\"Bwundai my name is.\"");
-				set_item_flag(0x001C);
+				set_item_flag(MET);
 				fallthrough;
 
 			case "Gwani" (remove):
@@ -49507,9 +49568,9 @@ void Func0491 object#(0x491) () {
 		0xFF6F->clear_item_say();
 		0xFF6F->show_npc_face0(0x0000);
 		var0000 = Func0942(0xFF70);
-		var0001 = 0xFFFD->get_item_flag(0x0006);
-		var0002 = 0xFFFE->get_item_flag(0x0006);
-		var0003 = 0xFFFF->get_item_flag(0x0006);
+		var0001 = 0xFFFD->get_item_flag(IN_PARTY);
+		var0002 = 0xFFFE->get_item_flag(IN_PARTY);
+		var0003 = 0xFFFF->get_item_flag(IN_PARTY);
 		var0004 = Func097D(0xFE9B, 0x0001, 0x00E3, 0xFE99, 0x0008);
 		var0005 = Func097D(0xFE9B, 0x0001, 0x0002, 0xFE99, 0x0004);
 		if (var0004 || var0005) {
@@ -49604,7 +49665,7 @@ void Func0492 object#(0x492) () {
 				fallthrough;
 
 			case "Neyobi" (remove):
-				var0000 = 0xFF6D->get_item_flag(0x001E);
+				var0000 = 0xFF6D->get_item_flag(SI_ZOMBIE);
 				if (var0000) {
 					say("\"Neyobi my only daughter. She very sick. Strange sickness put her to sleep. Now she not wake. If she not cured soon, sleeping sickness kill her.\"");
 					add(["strange sickness", "When did this happen?", "cure"]);
@@ -49627,7 +49688,7 @@ void Func0492 object#(0x492) () {
 				fallthrough;
 
 			case "Kapyundi" (remove):
-				var0001 = 0xFF66->get_item_flag(0x0004);
+				var0001 = 0xFF66->get_item_flag(DEAD);
 				if (var0001) {
 					say("\"The Trapper killed him. He was great hunter. He fought fiercely for his life and his people. My heart burn at loss of him but he live forever in my memory.\"");
 				} else {
@@ -49701,7 +49762,7 @@ void Func0493 object#(0x493) () {
 	var var0003;
 
 	if (event == 0x0001) {
-		var0000 = 0xFF6D->get_item_flag(0x001E);
+		var0000 = 0xFF6D->get_item_flag(SI_ZOMBIE);
 		if (var0000) {
 			0xFE9C->item_say("@Wake up, little one!@");
 			var0001 = Func0992(0x0001, "@She cannot wake, Avatar. She is very sick.@", "@Poor little one! She is very sick.@", false);
@@ -49737,7 +49798,7 @@ void Func0493 object#(0x493) () {
 				fallthrough;
 
 			case "Baiyanda" (remove):
-				var0003 = 0xFF71->get_item_flag(0x0004);
+				var0003 = 0xFF71->get_item_flag(DEAD);
 				if (var0003) {
 					say("\"I not see her in long time! I miss her lot.\"");
 				} else {
@@ -49747,7 +49808,7 @@ void Func0493 object#(0x493) () {
 
 			case "lessons" (remove):
 				say("\"Mother tells me the stories of the old days. She also teach me language of Men. She say Gwani very good at learn languages. Especially young ones.\"");
-				var0003 = 0xFF71->get_item_flag(0x0004);
+				var0003 = 0xFF71->get_item_flag(DEAD);
 				if (!var0003) {
 					say("\"Baiyanda teach me about plants and things.\"");
 				}
@@ -49790,7 +49851,7 @@ void Func0494 object#(0x494) () {
 		0xFF6C->clear_item_say();
 		0xFF6C->show_npc_face0(0x0000);
 		var0001 = Func097D(0xFE9B, 0x0001, 0x032A, 0x0009, 0x0002);
-		var0002 = 0xFF6C->get_item_flag(0x001C);
+		var0002 = 0xFF6C->get_item_flag(MET);
 		add(["name", "bye"]);
 		if (var0001) {
 			add("got blood");
@@ -49823,7 +49884,7 @@ void Func0494 object#(0x494) () {
 
 			case "name":
 				say("\"I am Yenani, mate of Myauri, mother of Neyobi and Kapyundi, leader of Gwani people and teller of Gwani history.\"");
-				0xFF6C->set_item_flag(0x001C);
+				0xFF6C->set_item_flag(MET);
 				remove("name");
 				add(["Myauri", "Neyobi", "Kapyundi", "history"]);
 				fallthrough;
@@ -49843,7 +49904,7 @@ void Func0494 object#(0x494) () {
 				fallthrough;
 
 			case "Neyobi" (remove):
-				var0005 = 0xFF6D->get_item_flag(0x001E);
+				var0005 = 0xFF6D->get_item_flag(SI_ZOMBIE);
 				if (var0005) {
 					say("\"My daughter have severe fever. She dying and only thou canst save her!\"");
 					add("save Neyobi");
@@ -49916,7 +49977,7 @@ void Func0494 object#(0x494) () {
 						add("valuable secret");
 					}
 					gflags[0x0260] = true;
-					0xFF6D->clear_item_flag(0x001E);
+					0xFF6D->clear_item_flag(SI_ZOMBIE);
 				} else {
 					say("\"Thou must give me the blood of an ice dragon so I save daughter.\"");
 				}
@@ -49969,7 +50030,7 @@ void Func0495 object#(0x495) () {
 	if ((event == 0x0001) || (event == 0x0002)) {
 		0xFE9C->item_say("@A pleasure to see thee...@");
 		0xFF6B->Func07D1();
-		if (!0xFF6B->get_item_flag(0x001E)) {
+		if (!0xFF6B->get_item_flag(SI_ZOMBIE)) {
 			Func097F(0xFF6B, "@'Tis good to see thee!@", 0x0002);
 			0xFF6B->set_schedule_type(0x0003);
 		} else {
@@ -49998,7 +50059,7 @@ void Func0495 object#(0x495) () {
 		}
 	}
 	if (event == 0x0009) {
-		if (0xFF6B->get_item_flag(0x0006)) {
+		if (0xFF6B->get_item_flag(IN_PARTY)) {
 			0xFF6B->set_schedule_type(0x001F);
 			add("leave");
 		} else {
@@ -50007,8 +50068,8 @@ void Func0495 object#(0x495) () {
 		}
 		0xFF6B->clear_item_say();
 		0xFF6B->show_npc_face0(0x0000);
-		var0006 = 0xFF6B->get_item_flag(0x001C);
-		if (((!0xFFFD->get_item_flag(0x001E)) && gflags[0x00D5]) && (!gflags[0x0275])) {
+		var0006 = 0xFF6B->get_item_flag(MET);
+		if (((!0xFFFD->get_item_flag(SI_ZOMBIE)) && gflags[0x00D5]) && (!gflags[0x0275])) {
 			say("\"Iolo! My beloved Iolo!\"");
 			say("\"Oh, I had feared that I would never see thee again!\"");
 			0xFFFD->show_npc_face1(0x0000);
@@ -50037,15 +50098,15 @@ void Func0495 object#(0x495) () {
 			}
 			gflags[0x0275] = true;
 		}
-		if (0xFFFD->get_item_flag(0x001E) && gflags[0x00D5]) {
+		if (0xFFFD->get_item_flag(SI_ZOMBIE) && gflags[0x00D5]) {
 			say("\"A thousand thanks for bringing back mine husband, ",
 				var0002,
 				".\"");
 			say("\"I grieve that his wits seem to have left him. But at least he is safe with me.\"");
 			say("\"I shall do all that I can to aid thee in restoring him. Or gladly care for him all the remainder of my days... even as he is.\"");
 		}
-		if (!0xFF6B->get_item_flag(0x001C)) {
-			0xFF6B->set_item_flag(0x001C);
+		if (!0xFF6B->get_item_flag(MET)) {
+			0xFF6B->set_item_flag(MET);
 			say("\"What a relief to see thee again, ",
 				var0002,
 				".\"");
@@ -50068,7 +50129,7 @@ void Func0495 object#(0x495) () {
 			say("\"Now I understand what Xenka meant by being aided by specters. But, unless thou canst find the grave of the last Chaos Hierophant, I know not how thou wilt restore Balance.\"");
 			say("\"Perhaps if thou wouldst ask one of the monks -- perhaps Thoxa -- she could try to divine where the Chaos Hierophant lies.\"");
 		}
-		if (gflags[0x0010] && ((!0xFF6B->get_item_flag(0x0006)) && 0xFF6B->get_cont_items(0xFE99, 0xFE99, 0xFE99))) {
+		if (gflags[0x0010] && ((!0xFF6B->get_item_flag(IN_PARTY)) && 0xFF6B->get_cont_items(0xFE99, 0xFE99, 0xFE99))) {
 			add("belongings");
 		}
 		converse (["bye"]) {
@@ -50087,7 +50148,7 @@ void Func0495 object#(0x495) () {
 						say("\"I hardly think that thou hast need of me, Avatar. Look at all thy fine companions!\"");
 						say("\"Instead, I shall remain here. After all, what can one old woman do for thee?\"");
 					}
-				} else if (0xFFFD->get_item_flag(0x001E)) {
+				} else if (0xFFFD->get_item_flag(SI_ZOMBIE)) {
 					say("\"But I must remain here and study! I must help thee find a way to restore my dear Iolo!\"");
 				} else {
 					say("\"I will be of more use to thee if I remain here. I seem to have a talent for finding the information thou dost need.\"");
@@ -50333,7 +50394,7 @@ void Func0496 object#(0x496) () {
 	var0001 = Func0954();
 	var0002 = Func0953();
 	var0003 = false;
-	var0004 = 0xFFB8->get_item_flag(0x0004);
+	var0004 = 0xFFB8->get_item_flag(DEAD);
 	if (gflags[0x003D] && ((0xFF6A->get_schedule_type() == 0x000E) && (Func08F1() < 0x000F))) {
 		var0005 = true;
 		if ((!0xFFFD->npc_nearby()) && ((!0xFFFF->npc_nearby()) && ((!0xFFFE->npc_nearby()) && (!0xFFDE->npc_nearby())))) {
@@ -50471,7 +50532,7 @@ void Func0496 object#(0x496) () {
 		0xFF6A->run_schedule();
 		0xFF6A->clear_item_say();
 		0xFF6A->show_npc_face0(0x0000);
-		if (!0xFF6A->get_item_flag(0x001C)) {
+		if (!0xFF6A->get_item_flag(MET)) {
 			if (gflags[0x0079] == false) {
 				say("\"I am Brendann, stranger.\"");
 			} else {
@@ -50480,7 +50541,7 @@ void Func0496 object#(0x496) () {
 			if (UI_is_pc_female()) {
 				say("\"And thou art the most beautiful creature I have ever seen.\"");
 			}
-			0xFF6A->set_item_flag(0x001C);
+			0xFF6A->set_item_flag(MET);
 		} else {
 			say("\"So we meet again, ",
 				var0002,
@@ -50501,7 +50562,7 @@ void Func0496 object#(0x496) () {
 		if (gflags[0x003D]) {
 			add("ready to spar");
 		}
-		if (gflags[0x0048] && (!0xFFB4->get_item_flag(0x0004))) {
+		if (gflags[0x0048] && (!0xFFB4->get_item_flag(DEAD))) {
 			add("traitor");
 		}
 		if (gflags[0x0093] && (!gflags[0x0038])) {
@@ -50620,12 +50681,12 @@ void Func0496 object#(0x496) () {
 					}
 					add(["Luther", "List Field"]);
 					if ((!gflags[0x0038]) && (!gflags[0x0092])) {
-						if (0xFFB8->get_item_flag(0x0004) || 0xFFB5->get_item_flag(0x0004)) {
+						if (0xFFB8->get_item_flag(DEAD) || 0xFFB5->get_item_flag(DEAD)) {
 							UI_push_answers();
-							if (0xFFB8->get_item_flag(0x0004)) {
+							if (0xFFB8->get_item_flag(DEAD)) {
 								add("Was Lydia the traitor?");
 							}
-							if (0xFFB5->get_item_flag(0x0004)) {
+							if (0xFFB5->get_item_flag(DEAD)) {
 								add("Was Shmed the traitor?");
 							}
 							add("change subject");
@@ -50646,7 +50707,7 @@ void Func0496 object#(0x496) () {
 					var0002,
 					"? Hast thou been to Moonshade?\"");
 				say("\"Lord Marsten may want us to believe that the traitor hath been caught, but I do not believe it.\"");
-				if (!0xFFB8->get_item_flag(0x0004)) {
+				if (!0xFFB8->get_item_flag(DEAD)) {
 					say("\"As a favor to me, please continue searching for the spy. Surely, conclusive evidence shall appear sooner or later...\"");
 				}
 				fallthrough;
@@ -50801,11 +50862,11 @@ void Func0496 object#(0x496) () {
 					} else if (var0000 > 0x0001) {
 						say("\"I thank thee for showing me these documents. Justice will be served. Thou mayest keep these documents if thou wishest.\"");
 					}
-					if (gflags[0x0038] && (!0xFFBB->get_item_flag(0x0004))) {
+					if (gflags[0x0038] && (!0xFFBB->get_item_flag(DEAD))) {
 						0xFFBB->move_object([0x0446, 0x09C5, 0x0000]);
 						0xFFBB->set_new_schedules([0x0007, 0x0002], [0x000E, 0x0007], [0x0446, 0x09C5, 0x0446, 0x09C5]);
 					}
-					if (gflags[0x0092] && (!0xFFB3->get_item_flag(0x0004))) {
+					if (gflags[0x0092] && (!0xFFB3->get_item_flag(DEAD))) {
 						0xFFB3->move_object([0x0448, 0x09D6, 0x0000]);
 						0xFFB3->set_new_schedules([0x0007, 0x0002], [0x000E, 0x0007], [0x0448, 0x09D6, 0x0448, 0x09D6]);
 					}
@@ -50818,7 +50879,7 @@ void Func0496 object#(0x496) () {
 						var0015 = UI_create_new_object2(0x00E4, var0014);
 						var0016 = var0015->approach_avatar(0x0032, 0x0028);
 						if (var0016) {
-							var0015->set_item_flag(0x0012);
+							var0015->set_item_flag(TEMPORARY);
 							var0017 = true;
 						} else {
 							var0015->remove_item();
@@ -50939,22 +51000,22 @@ void Func0498 object#(0x498) () {
 	if (event == 0x0009) {
 		0xFF68->clear_item_say();
 		0xFF68->show_npc_face0(0x0000);
-		if (0xFF68->get_item_flag(0x0006)) {
+		if (0xFF68->get_item_flag(IN_PARTY)) {
 			say("\"We must hasten to the Serpent Gate!\"");
 			0xFF68->set_schedule_type(0x001F);
 			add("leave");
 		} else {
 			0xFF68->run_schedule();
-			var0002 = 0xFF68->get_item_flag(0x001C);
+			var0002 = 0xFF68->get_item_flag(MET);
 			if (gflags[0x0279]) {
 				say("\"Thou art late! I have been waiting for thee for a very long time...\"");
 				add(["waiting", "long time"]);
 			} else {
-				if (0xFF68->get_item_flag(0x001C)) {
+				if (0xFF68->get_item_flag(MET)) {
 					say("\"Thou art returned! What tortures hast thou devised for me, Order dog?\"");
 				} else {
 					say("\"I knew that thou wouldst come for me, Order dog! Thou canst take my life, but the key is gone! Gone!\" *\"Sethys shall not fail the Chaos Hierophant!\"");
-					0xFF68->set_item_flag(0x001C);
+					0xFF68->set_item_flag(MET);
 				}
 				add(["Order dog", "key", "Chaos Hierophant"]);
 			}
@@ -51081,7 +51142,7 @@ void Func0498 object#(0x498) () {
 
 			case "bye":
 				UI_remove_npc_face0();
-				if (0xFF68->get_item_flag(0x0006)) {
+				if (0xFF68->get_item_flag(IN_PARTY)) {
 					Func097F(0xFE9C, "@Thank thee!@", 0x0000);
 					Func097F(0xFF68, "@Hasten!@", 0x0002);
 				} else {
@@ -51110,7 +51171,7 @@ void Func0499 object#(0x499) () {
 		0xFF67->run_schedule();
 		0xFF67->clear_item_say();
 		0xFF67->show_npc_face0(0x0000);
-		var0000 = 0xFF67->get_item_flag(0x001C);
+		var0000 = 0xFF67->get_item_flag(MET);
 		if (var0000) {
 			say("\"Greetings again.\"");
 		} else {
@@ -51122,7 +51183,7 @@ void Func0499 object#(0x499) () {
 					say("\"Am still Gilwoyai.\"");
 				} else {
 					say("\"Am Gilwoyai, means @Of the Wind@.\"");
-					0xFF67->set_item_flag(0x001C);
+					0xFF67->set_item_flag(MET);
 				}
 				fallthrough;
 
@@ -51164,7 +51225,7 @@ void Func049A object#(0x49A) () {
 		0xFF66->run_schedule();
 		0xFF66->clear_item_say();
 		0xFF66->show_npc_face0(0x0000);
-		var0000 = 0xFF66->get_item_flag(0x001C);
+		var0000 = 0xFF66->get_item_flag(MET);
 		if (var0000) {
 			say("\"Greetings, great hunter.\"");
 		} else {
@@ -51173,7 +51234,7 @@ void Func049A object#(0x49A) () {
 		converse (["name", "hunt", "bye"]) {
 			case "name" (remove):
 				say("\"Me Kapyundi, mean @little glacier@. Me son of Yenani and Myauri.\"");
-				0xFF66->set_item_flag(0x001C);
+				0xFF66->set_item_flag(MET);
 				fallthrough;
 
 			case "hunt" (remove):
@@ -51230,7 +51291,7 @@ void Func049B object#(0x49B) () {
 	var0001 = Func0953();
 	var0002 = Func0942(0xFF64);
 	if (event == 0x0002) {
-		if ((Func0994() != 0x0007) || (0xFF65->get_item_flag(0x0004) || (0xFF64->get_item_flag(0x0004) || (!gflags[0x02BE])))) {
+		if ((Func0994() != 0x0007) || (0xFF65->get_item_flag(DEAD) || (0xFF64->get_item_flag(DEAD) || (!gflags[0x02BE])))) {
 			abort;
 		}
 		var0003 = script Func09A0(0x0005, 0x0001) after (0x0014 + UI_get_random(0x0032)) ticks {
@@ -51255,7 +51316,7 @@ void Func049B object#(0x49B) () {
 	if (event == 0x0009) {
 		0xFF65->run_schedule();
 		0xFF65->show_npc_face0(0x0000);
-		0xFF65->set_item_flag(0x001C);
+		0xFF65->set_item_flag(MET);
 		0xFF65->clear_item_say();
 		if (var0002) {
 			say("\"My name is Beryl. I need thine help, but I cannot speak now...\"");
@@ -51278,15 +51339,15 @@ void Func049B object#(0x49B) () {
 			};
 			abort;
 		}
-		if (0xFF64->get_item_flag(0x0004)) {
-			if (0xFF65->get_item_flag(0x001E)) {
+		if (0xFF64->get_item_flag(DEAD)) {
+			if (0xFF65->get_item_flag(SI_ZOMBIE)) {
 				say("\"I am content now, ",
 					var0001,
 					". There is such a peacefulness in my life, now that Morghrim doth care for me.\"");
 				Func097F(0xFF65, "@Good fortune!@", 0x0000);
 				abort;
 			}
-			0xFF65->set_item_flag(0x001E);
+			0xFF65->set_item_flag(SI_ZOMBIE);
 			say("\"I am so glad that the tyrant is dead! Thanks to thee, ",
 				var0001,
 				".\"");
@@ -51311,13 +51372,13 @@ void Func049B object#(0x49B) () {
 			0xFF65->run_schedule();
 			abort;
 		}
-		if (gflags[0x02BF] && (!0xFF64->get_item_flag(0x0004))) {
+		if (gflags[0x02BF] && (!0xFF64->get_item_flag(DEAD))) {
 			say("\"Why dost thou wait? Use the arrow! Use it to strike down the tyrant Draygan!\"");
 			say("\"Then we shall find the secret of his power, and he shall not stop me from obtaining my freedom.\"");
 			Func097F(0xFF65, "@Use the arrow!@", 0x0000);
 			abort;
 		}
-		if (gflags[0x02C0] && (!0xFF64->get_item_flag(0x0004))) {
+		if (gflags[0x02C0] && (!0xFF64->get_item_flag(DEAD))) {
 			say("\"Tell me -- hast thou prepared the arrow? To defeat the tyrant Draygan?\"");
 			if (Func0955()) {
 				if (Func097D(0xFE9B, 0x0001, 0x0238, 0xFE99, 0xFE99)) {
@@ -51501,14 +51562,14 @@ void Func049C object#(0x49C) () {
 		var0002 = ["@Leave us!@", "@Go thy way!@", "@Do not steal...@", "@I am destiny.@", "@Ignore the others.@", "@I am Master here.@"];
 		Func097F(0xFF64, var0002[UI_get_random(UI_get_array_size(var0002))], 0x0000);
 	}
-	if ((event == 0x0007) && 0xFF64->get_item_flag(0x001D)) {
+	if ((event == 0x0007) && 0xFF64->get_item_flag(SI_TOURNAMENT)) {
 		if (gflags[0x02BC]) {
 			var0003 = script Func09A0(0x0005, 0x0001) after 50 ticks {
 				nohalt;
 				call Func049F;
 			};
 			gflags[0x02BC] = false;
-			0xFF64->clear_item_flag(0x001D);
+			0xFF64->clear_item_flag(SI_TOURNAMENT);
 			Func0982(0xFF64, 0x0032);
 			0xFF65->run_schedule();
 			0xFF65->set_alignment(0x0000);
@@ -51520,9 +51581,9 @@ void Func049C object#(0x49C) () {
 		0xFF64->run_schedule();
 		0xFF64->clear_item_say();
 		0xFF64->show_npc_face0(0x0000);
-		var0004 = 0xFF64->get_item_flag(0x001C);
+		var0004 = 0xFF64->get_item_flag(MET);
 		if (var0004 == false) {
-			0xFF64->set_item_flag(0x001C);
+			0xFF64->set_item_flag(MET);
 			say("\"I do not believe we have met. My name is Draygan. I am lord of all the land that I survey.\"");
 			say("\"At present, I am hard at work fulfilling mine appointed destiny. Conversing with thee is nothing but a useless distraction from achieving that end.\"");
 		} else {
@@ -51625,7 +51686,7 @@ void Func049D object#(0x49D) () {
 	var var0000;
 
 	if (event == 0x0002) {
-		if (0xFF64->get_item_flag(0x0004) || ((Func0994() != 0x0007) || (0xFF63->get_item_flag(0x0004) || (0xFF63->get_npc_id() > 0x0003)))) {
+		if (0xFF64->get_item_flag(DEAD) || ((Func0994() != 0x0007) || (0xFF63->get_item_flag(DEAD) || (0xFF63->get_npc_id() > 0x0003)))) {
 			abort;
 		}
 		var0000 = script Func09A0(0x0005, 0x0001) after (0x0064 + UI_get_random(0x01F4)) ticks {
@@ -51666,7 +51727,7 @@ void Func049E object#(0x49E) () {
 	var var0000;
 
 	if (event == 0x0002) {
-		if (0xFF64->get_item_flag(0x0004) || ((Func0994() != 0x0007) || (0xFF62->get_item_flag(0x0004) || (0xFF62->get_npc_id() > 0x0004)))) {
+		if (0xFF64->get_item_flag(DEAD) || ((Func0994() != 0x0007) || (0xFF62->get_item_flag(DEAD) || (0xFF62->get_npc_id() > 0x0004)))) {
 			abort;
 		}
 		var0000 = script Func09A0(0x0005, 0x0002) after UI_get_random(0x01F4) ticks {
@@ -51729,12 +51790,12 @@ void Func049F object#(0x49F) () {
 	var0002 = Func0953();
 	var0003 = Func097D(0xFE9B, 0x0001, 0x01C2, 0xFE99, 0x0000);
 	if (event == 0x0002) {
-		if (0xFF61->get_item_flag(0x001E)) {
+		if (0xFF61->get_item_flag(SI_ZOMBIE)) {
 			Func09AC(0xFF61, 0xFFFF, 0x0000, 0x0003);
 		} else {
 			UI_play_sound_effect(0x0077);
-			0xFF61->set_item_flag(0x001E);
-			0xFF61->clear_item_flag(0x0001);
+			0xFF61->set_item_flag(SI_ZOMBIE);
+			0xFF61->clear_item_flag(ASLEEP);
 			0xFF61->set_item_frame(0x001E);
 			0xFF61->move_object([0x063E, 0x044D, 0x0000]);
 			0xFF61->set_schedule_type(0x000F);
@@ -51758,8 +51819,8 @@ void Func049F object#(0x49F) () {
 		0xFF61->clear_item_say();
 		0xFF61->show_npc_face0(0x0000);
 		add(["Master"]);
-		var0005 = 0xFF61->get_item_flag(0x001C);
-		if (0xFF64->get_item_flag(0x0004) && (!gflags[0x02BB])) {
+		var0005 = 0xFF61->get_item_flag(MET);
+		if (0xFF64->get_item_flag(DEAD) && (!gflags[0x02BB])) {
 			if (Func097D(0xFE9B, 0x0001, 0x01C2, 0xFE99, 0x0000)) {
 				Func09AC(0xFF61, 0xFFFF, 0x0000, 0x000C);
 				say("\"Thou must return the Heart of Elerion to me! I need it to restore balance to the forest and its creatures.\"");
@@ -51782,11 +51843,11 @@ void Func049F object#(0x49F) () {
 			} else {
 				say("\"There thou art! I knew thou wert here somewhere!\"");
 			}
-			if (gflags[0x02B9] && (!0xFF64->get_item_flag(0x0004))) {
+			if (gflags[0x02B9] && (!0xFF64->get_item_flag(DEAD))) {
 				add("King's Savior");
 			}
 		}
-		if (0xFF64->get_item_flag(0x0004) && gflags[0x02BB]) {
+		if (0xFF64->get_item_flag(DEAD) && gflags[0x02BB]) {
 			say("\"I thank thee for all that thou hast done. The forest and its animals are free from the evil that Draygan had instilled in them.\"");
 			say("\"Stay here as long as thou wishest, friend.\"");
 			add("Hound of Doskar");
@@ -51822,7 +51883,7 @@ void Func049F object#(0x49F) () {
 
 			case "Master" (remove):
 				say("\"That is correct! I am the Forest Master! Friend to Windrunner! Former protector of Elerion, and now refugee of Pagan! Of course that will mean nothing to a foreigner like thyself. Dost thou know that I can speak to animals and trees? Do not smirk, knave!\"");
-				0xFF61->set_item_flag(0x001C);
+				0xFF61->set_item_flag(MET);
 				add(["Windrunner", "Pagan", "Elerion", "speak to animals and trees"]);
 				fallthrough;
 
@@ -52019,7 +52080,7 @@ void Func04A0 object#(0x4A0) () {
 	var var0015;
 	var var0016;
 
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -52187,7 +52248,7 @@ void Func04A1 object#(0x4A1) () {
 	var var0004;
 	var var0005;
 
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -52261,7 +52322,7 @@ void Func04A2 object#(0x4A2) () {
 	var var0004;
 	var var0005;
 
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -52577,7 +52638,7 @@ void Func04A3 object#(0x4A3) () {
 			remove_item();
 			var0017 = UI_create_new_object2(0x017D, var0004);
 			var0017->set_polymorph(0x01CC);
-			var0017->set_item_flag(0x001D);
+			var0017->set_item_flag(SI_TOURNAMENT);
 			Func09AD(var0017);
 			var0003 = var0017->find_direction(0xFE9C);
 			var0000 = script var0017 {
@@ -52637,10 +52698,10 @@ void Func04A5 object#(0x4A5) () {
 	var var0000;
 	var var0001;
 
-	if ((event == 0x0007) && 0xFF5B->get_item_flag(0x001D)) {
+	if ((event == 0x0007) && 0xFF5B->get_item_flag(SI_TOURNAMENT)) {
 		var0000 = get_cont_items(0x0326, 0xFE99, 0xFE99);
 		if (var0000) {
-			0xFF5B->clear_item_flag(0x001D);
+			0xFF5B->clear_item_flag(SI_TOURNAMENT);
 			UI_play_sound_effect(0x004C);
 			gflags[0x0234] = true;
 			var0001 = script var0000 after 2 ticks {
@@ -52728,16 +52789,16 @@ void Func04A8 object#(0x4A8) () {
 		0xFF58->run_schedule();
 		0xFF58->clear_item_say();
 		0xFF58->show_npc_face0(0x0000);
-		if (0xFF58->get_item_flag(0x0006)) {
+		if (0xFF58->get_item_flag(IN_PARTY)) {
 			0xFF58->set_schedule_type(0x001F);
 			add("leave");
 		} else {
 			0xFF58->run_schedule();
 			add("join");
 		}
-		var0006 = 0xFF58->get_item_flag(0x001C);
+		var0006 = 0xFF58->get_item_flag(MET);
 		if (gflags[0x0004]) {
-			if (!0xFF22->get_item_flag(0x0004)) {
+			if (!0xFF22->get_item_flag(DEAD)) {
 				say("\"I am not a cowardly man, ",
 					var0000,
 					", but I am powerfully glad to see thee again. I am in terrible trouble.\"");
@@ -52762,7 +52823,7 @@ void Func04A8 object#(0x4A8) () {
 				say("\"If I were not quaking with fear, ",
 					var0000,
 					", I would go down on both knees before thee. I am so grateful for thine aid.\"");
-				if (0xFF58->get_item_flag(0x0006)) {
+				if (0xFF58->get_item_flag(IN_PARTY)) {
 					0xFF58->remove_from_party();
 					Func086A();
 					remove("leave");
@@ -52777,7 +52838,7 @@ void Func04A8 object#(0x4A8) () {
 			}
 		} else if (var0003 == 0x000F) {
 			if (var0006 == false) {
-				0xFF58->set_item_flag(0x001C);
+				0xFF58->set_item_flag(MET);
 				Func09AC(0xFF58, 0xFFFF, 0x0000, 0x000C);
 				0xFF58->set_schedule_type(0x0014);
 				say("\"I am Stefano, late of Moonshade, and obtainer of rarities...\"");
@@ -52792,7 +52853,7 @@ void Func04A8 object#(0x4A8) () {
 			say("\"I see that thou art still hale and whole, Avatar!\"");
 			add(["Moonshade", "rarities"]);
 		}
-		if (gflags[0x000F] && ((!0xFF58->get_item_flag(0x0006)) && 0xFF58->get_cont_items(0xFE99, 0xFE99, 0xFE99))) {
+		if (gflags[0x000F] && ((!0xFF58->get_item_flag(IN_PARTY)) && 0xFF58->get_cont_items(0xFE99, 0xFE99, 0xFE99))) {
 			add("belongings");
 		}
 		converse (["bye"]) {
@@ -53079,12 +53140,12 @@ void Func04A8 object#(0x4A8) () {
 					gflags[0x00FA] = true;
 				}
 				UI_remove_npc_face0();
-				if (0xFF58->get_item_flag(0x0006)) {
+				if (0xFF58->get_item_flag(IN_PARTY)) {
 					Func097F(0xFF58, "@Pleased to be of service.@", 0x0002);
 					Func097F(0xFE9C, "@Thanks!@", 0x0000);
 				} else {
 					Func097F(0xFE9C, "@So long!@", 0x0000);
-					if (gflags[0x0004] && (!0xFF22->get_item_flag(0x0004))) {
+					if (gflags[0x0004] && (!0xFF22->get_item_flag(DEAD))) {
 						Func097F(0xFF58, "@Please protect me...@", 0x0000);
 					} else {
 						Func097F(0xFF58, "@'Til we meet again!@", 0x0002);
@@ -53154,7 +53215,7 @@ void Func04A8 object#(0x4A8) () {
 			abort;
 		}
 		if (gflags[0x0004]) {
-			if (0xFF22->get_item_flag(0x0004)) {
+			if (0xFF22->get_item_flag(DEAD)) {
 				abort;
 			}
 			var0007 = script Func09A0(0x0005, 0x0002) after (UI_get_random(0x0064) + 0x0032) ticks {
@@ -53281,7 +53342,7 @@ void Func04A9 object#(0x4A9) () {
 					UI_sprite_effect(0x000D, (var0002[0x0001] - 0x0002), (var0002[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 					UI_play_sound_effect(0x0043);
 				}
-				0xFE9C->set_item_flag(0x0010);
+				0xFE9C->set_item_flag(DONT_MOVE);
 				0xFF57->set_schedule_type(0x000F);
 			} else {
 				var0005 = script 0xFE9C after 1 ticks {
@@ -53401,7 +53462,7 @@ void Func04AA object#(0x4AA) () {
 	var0004 = UI_is_pc_female();
 	var0005 = Func0953();
 	var0006 = Func097D(0xFE9B, 0x0001, 0x0268, 0xFE99, 0x0014);
-	var0007 = 0xFF56->get_item_flag(0x001C);
+	var0007 = 0xFF56->get_item_flag(MET);
 	var0008 = ("I am " + var0005) + ".";
 	var0009 = "his";
 	var000A = "him";
@@ -53907,8 +53968,8 @@ void Func04B0 object#(0x4B0) () {
 	if (event == 0x0002) {
 		var0004 = find_nearby(0xFE99, 0x0028, 0x0008);
 		for (var0007 in var0004 with var0005 to var0006) {
-			if (!var0007->get_item_flag(0x0006)) {
-				var0007->clear_item_flag(0x0001);
+			if (!var0007->get_item_flag(IN_PARTY)) {
+				var0007->clear_item_flag(ASLEEP);
 				var0007->clear_item_say();
 				Func097F(var0007, "@Water!@", 0x0000);
 				Func09AD(var0007);
@@ -53960,7 +54021,7 @@ void Func04B2 object#(0x4B2) () {
 	var0002 = Func0953();
 	var0003 = false;
 	if (event == 0x0009) {
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		var0004 = 0xFE9C->find_nearby(0x0178, 0x0019, 0x0000);
 		if (var0004) {
 			var0005 = var0004->get_object_position();
@@ -54012,7 +54073,7 @@ void Func04B2 object#(0x4B2) () {
 				} else {
 					say("\"Follow me through the gate, Avatar! Thou wilt soon be home...\"");
 					UI_remove_npc_face0();
-					0xFE9C->set_item_flag(0x0010);
+					0xFE9C->set_item_flag(DONT_MOVE);
 					var0008 = 0xFE9C->find_nearby(0x0360, 0x0019, 0x0000);
 					if (var0008) {
 						var0005 = var0008->get_object_position();
@@ -54023,7 +54084,7 @@ void Func04B2 object#(0x4B2) () {
 						var0005[0x0001] -= 0x0002;
 						0xFF4E->si_path_run_usecode(var0005, 0x000B, var0009, Func04B2, false);
 					} else {
-						0xFE9C->clear_item_flag(0x0010);
+						0xFE9C->clear_item_flag(DONT_MOVE);
 					}
 					abort;
 				}
@@ -54077,7 +54138,7 @@ void Func04B2 object#(0x4B2) () {
 				} else {
 					say("\"Follow me through the gate, Avatar! Thou wilt soon be home...\"");
 					UI_remove_npc_face0();
-					0xFE9C->set_item_flag(0x0010);
+					0xFE9C->set_item_flag(DONT_MOVE);
 					var0008 = 0xFE9C->find_nearby(0x0360, 0x0019, 0x0000);
 					if (var0008) {
 						var0005 = var0008->get_object_position();
@@ -54088,7 +54149,7 @@ void Func04B2 object#(0x4B2) () {
 						var0005[0x0001] -= 0x0002;
 						0xFF4E->si_path_run_usecode(var0005, 0x000B, var0009, Func04B2, false);
 					} else {
-						0xFE9C->clear_item_flag(0x0010);
+						0xFE9C->clear_item_flag(DONT_MOVE);
 					}
 					abort;
 				}
@@ -54120,7 +54181,7 @@ void Func04B2 object#(0x4B2) () {
 				} else {
 					say("\"Follow me through the gate, Avatar! Thou wilt soon be home...\"");
 					UI_remove_npc_face0();
-					0xFE9C->set_item_flag(0x0010);
+					0xFE9C->set_item_flag(DONT_MOVE);
 					var0008 = 0xFE9C->find_nearby(0x0360, 0x0019, 0x0000);
 					if (var0008) {
 						var0005 = var0008->get_object_position();
@@ -54131,7 +54192,7 @@ void Func04B2 object#(0x4B2) () {
 						var0005[0x0001] -= 0x0002;
 						0xFF4E->si_path_run_usecode(var0005, 0x000B, var0009, Func04B2, false);
 					} else {
-						0xFE9C->clear_item_flag(0x0010);
+						0xFE9C->clear_item_flag(DONT_MOVE);
 					}
 					abort;
 				}
@@ -54226,13 +54287,13 @@ void Func04B3 object#(0x4B3) () {
 	}
 	if (event == 0x0009) {
 		0xFF4D->clear_item_say();
-		if (0xFE9C->get_item_flag(0x0010)) {
+		if (0xFE9C->get_item_flag(DONT_MOVE)) {
 			var0004 = Func09A0(0x0000, 0x0001);
 			var0005 = script var0004 after 2 ticks {
 				nohalt;
 				call Func061E;
 			};
-			0xFE9C->clear_item_flag(0x0010);
+			0xFE9C->clear_item_flag(DONT_MOVE);
 			var0006 = 0xFE9C->find_nearby(0x010E, 0x001E, 0x0000);
 			if (var0006) {
 				var0007 = var0006->get_object_position();
@@ -54419,13 +54480,13 @@ void Func04B3 object#(0x4B3) () {
 			0xFF53->remove_npc();
 			UI_sprite_effect(0x001A, var0013[0x0001], var0013[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_sprite_effect(0x001A, var0012[0x0001], var0012[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-			0xFE9C->clear_item_flag(0x0010);
+			0xFE9C->clear_item_flag(DONT_MOVE);
 			0x0000->Func07F7();
 		} else {
 			Func097F(0xFF53, "@Come, Avatar...@", 0x0002);
 			var0006 = find_nearby(0x0178, 0x000A, 0x0000);
 			if (var0006) {
-				0xFE9C->set_item_flag(0x0010);
+				0xFE9C->set_item_flag(DONT_MOVE);
 				var0007 = var0006->get_object_position();
 				var0007[0x0001] += 0x0001;
 				var0007[0x0002] -= 0x0002;
@@ -54519,7 +54580,7 @@ void Func04B4 object#(0x4B4) () {
 	if (event == 0x0009) {
 		0xFF4C->set_new_schedules(0x0000, 0x0007, [0x00AB, 0x0631]);
 		0xFF4C->run_schedule();
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		var0005 = 0xFE9C->find_nearby(0x010E, 0x0050, 0x0000);
 		for (var0008 in var0005 with var0006 to var0007) {
 			var0009 = var0008->get_item_quality();
@@ -54762,7 +54823,7 @@ void Func04B5 object#(0x4B5) () {
 		0xFF4B->show_npc_face0(0x0000);
 		if (var0006 == 0x0000) {
 			say("\"Hast thou seen the firebird's death or followed thy dreams to seek power? Canst thou touch the face of a dream that clutches thee with bony claws? How wouldst thou know the power that leaps from dream to dream, devouring death as it went?\"");
-			0xFF4B->set_item_flag(0x001C);
+			0xFF4B->set_item_flag(MET);
 			say("\"Dost thou have the protection of Courage to face thy dreams? Can thine helm face the power and kiss the lips of sweet death?\"");
 			if (var0003 == true) {
 				0xFF4B->set_npc_id(0x0002);
@@ -54873,7 +54934,7 @@ void Func04B6 object#(0x4B6) () {
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
 	var0003 = Func097D(0xFE9B, 0x0001, 0x0289, 0xFE99, 0x000A);
-	var0004 = 0xFFF0->get_item_flag(0x001C);
+	var0004 = 0xFFF0->get_item_flag(MET);
 	if (event == 0x0001) {
 		Func097F(0xFE9C, "@Hello, there!@", 0x0000);
 		Func097F(0xFF4A, "@Yes?@", 0x0002);
@@ -54898,7 +54959,7 @@ void Func04B6 object#(0x4B6) () {
 			item->Func07D7();
 			var000A = Func08B6();
 			for (var000D in var000A with var000B to var000C) {
-				var000D->clear_item_flag(0x0001);
+				var000D->clear_item_flag(ASLEEP);
 				var000D->set_schedule_type(0x001F);
 				var0006 = script var000D {
 					nohalt;
@@ -54980,7 +55041,7 @@ void Func04B6 object#(0x4B6) () {
 		0xFF4A->run_schedule();
 		0xFF4A->clear_item_say();
 		0xFF4A->show_npc_face0(0x0000);
-		var0015 = 0xFF4A->get_item_flag(0x001C);
+		var0015 = 0xFF4A->get_item_flag(MET);
 		if (gflags[0x020D] == true) {
 			if (var0003) {
 				say("\"Hast thou reconsidered my request, Avatar? Wilt thou give to me the Dream Crystal?\"");
@@ -55027,15 +55088,15 @@ void Func04B6 object#(0x4B6) () {
 		}
 		if ((var0004 == true) && (!gflags[0x020D])) {
 			if (var0015 == false) {
-				var001A = 0xFF4B->get_item_flag(0x0004);
+				var001A = 0xFF4B->get_item_flag(DEAD);
 				if (var001A) {
 					say("\"I am Siranush. I have been expecting thee...\"");
 					say("\"Now that the foul mage Rabindrinath is dead, we have some hope of escaping his evil spell.\"");
-					0xFF4A->set_item_flag(0x001C);
+					0xFF4A->set_item_flag(MET);
 					add(["expecting", "Rabindrinath", "evil spell"]);
 				} else {
 					say("\"Thou hast come at last! I am Siranush. I have been expecting thee... I knew that thou wert the one destined to free us from Rabindrinath's evil spell.\"");
-					0xFF4A->set_item_flag(0x001C);
+					0xFF4A->set_item_flag(MET);
 					add(["expecting", "Rabindrinath", "evil spell"]);
 				}
 			} else {
@@ -55338,7 +55399,7 @@ void Func04B8 object#(0x4B8) () {
 extern void Func0809 0x809 ();
 
 void Func04B9 object#(0x4B9) () {
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -55353,7 +55414,7 @@ extern void Func09AD 0x9AD (var var0000);
 void Func04BA object#(0x4BA) () {
 	var var0000;
 
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -55394,7 +55455,7 @@ extern void Func0809 0x809 ();
 extern void Func04BA object#(0x4BA) ();
 
 void Func04BB object#(0x4BB) () {
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -55412,7 +55473,7 @@ void Func04BC object#(0x4BC) () {
 	var var0001;
 	var var0002;
 
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -55464,7 +55525,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern void Func09AD 0x9AD (var var0000);
 
 void Func04BD object#(0x4BD) () {
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -55495,7 +55556,7 @@ void Func04BE object#(0x4BE) () {
 	var var0000;
 	var var0001;
 
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -55592,7 +55653,7 @@ void Func04C2 object#(0x4C2) () {
 extern void Func0809 0x809 ();
 
 void Func04C5 object#(0x4C5) () {
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -55638,7 +55699,7 @@ void Func04C9 object#(0x4C9) () {
 	var var0001;
 	var var0002;
 
-	var0000 = 0xFF37->get_item_flag(0x001C);
+	var0000 = 0xFF37->get_item_flag(MET);
 	if (event == 0x0007) {
 		0xFFC0->show_npc_face0(0x0000);
 		say("\"Why dost thou attack me? Do thine eyes deceive thee so?\" *\"Slay the foul bane that wishes to devour me instead! If it is not stopped, it will destroy us all!\" *\"I can stand this nightmare no more...\"");
@@ -55667,7 +55728,7 @@ void Func04C9 object#(0x4C9) () {
 		if (var0000 != true) {
 			0xFFC0->show_npc_face0(0x0000);
 			say("\"Iieeeee.... Help me!\" ~\"I cannot escape...\" ~\"It will catch and devour me!\" *\"Canst thou not see it? Please, help me!\"");
-			0xFF37->set_item_flag(0x001C);
+			0xFF37->set_item_flag(MET);
 			UI_remove_npc_face0();
 			0xFF37->set_schedule_type(0x001D);
 			abort;
@@ -55699,11 +55760,11 @@ void Func04CA object#(0x4CA) () {
 	var var000B;
 	var var000C;
 
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
-	var0000 = 0xFF36->get_item_flag(0x001C);
+	var0000 = 0xFF36->get_item_flag(MET);
 	if (event == 0x0001) {
 		0xFF36->clear_item_say();
 		0xFED6->show_npc_face0(0x0000);
@@ -55859,8 +55920,8 @@ void Func04CB object#(0x4CB) () {
 		0xFF35->Func07D1();
 		Func0919(item);
 	}
-	if ((event == 0x0007) && get_item_flag(0x001D)) {
-		clear_item_flag(0x001D);
+	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+		clear_item_flag(SI_TOURNAMENT);
 		reduce_health(0x0032, 0x0000);
 		Func0919(item);
 	}
@@ -55882,9 +55943,9 @@ void Func04CC object#(0x4CC) () {
 		0xFF34->Func07D1();
 		Func0919(item);
 	}
-	if ((event == 0x0007) && get_item_flag(0x001D)) {
+	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
 		Func0919(item);
-		clear_item_flag(0x001D);
+		clear_item_flag(SI_TOURNAMENT);
 		reduce_health(0x0032, 0x0000);
 	}
 }
@@ -55941,8 +56002,8 @@ void Func04CD object#(0x4CD) () {
 			}
 		}
 	}
-	if ((event == 0x0007) && get_item_flag(0x001D)) {
-		clear_item_flag(0x001D);
+	if ((event == 0x0007) && get_item_flag(SI_TOURNAMENT)) {
+		clear_item_flag(SI_TOURNAMENT);
 	}
 }
 
@@ -56076,7 +56137,7 @@ void Func04CF object#(0x4CF) () {
 		0xFF31->set_schedule_type(0x0003);
 	}
 	if (event == 0x0000) {
-		if ((Func09A0(0x0005, 0x0001)->get_item_quality() == 0x000A) && (!0xFF29->get_item_flag(0x001C))) {
+		if ((Func09A0(0x0005, 0x0001)->get_item_quality() == 0x000A) && (!0xFF29->get_item_flag(MET))) {
 			0xFF31->set_schedule_type(0x000F);
 			var0007 = script Func09A0(0x0005, 0x0003) {
 				nohalt;
@@ -56088,7 +56149,7 @@ void Func04CF object#(0x4CF) () {
 		0xFF31->run_schedule();
 		0xFF31->clear_item_say();
 		0xFF31->show_npc_face0(0x0000);
-		var0008 = 0xFF31->get_item_flag(0x001C);
+		var0008 = 0xFF31->get_item_flag(MET);
 		var0009 = false;
 		if (0xFF31->get_npc_id() == 0x001F) {
 			0xFF31->set_npc_id(0x0000);
@@ -56099,7 +56160,7 @@ void Func04CF object#(0x4CF) () {
 				say("\"Prepare yourselves for the coming of Xenka!\"");
 			}
 			UI_remove_npc_face0();
-			0xFE9C->clear_item_flag(0x0025);
+			0xFE9C->clear_item_flag(FREEZE);
 			var000B = Func08B6();
 			var000B = [0xFE9C, var000B];
 			var000C = [0x0967, 0x047C, 0x0000];
@@ -56109,17 +56170,17 @@ void Func04CF object#(0x4CF) () {
 			UI_sprite_effect(0x0007, var000C[0x0001], var000C[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_play_sound_effect(0x0051);
 			for (var0012 in var000B with var0010 to var0011) {
-				if (!var0012->get_item_flag(0x001E)) {
+				if (!var0012->get_item_flag(SI_ZOMBIE)) {
 					var0012->set_schedule_type(0x001F);
 				}
 				var0012->set_temperature(0x0000);
-				var0012->clear_item_flag(0x0001);
-				var0012->clear_item_flag(0x0002);
-				var0012->clear_item_flag(0x0003);
-				var0012->clear_item_flag(0x0004);
-				var0012->clear_item_flag(0x0007);
-				var0012->clear_item_flag(0x0008);
-				var0012->clear_item_flag(0x0010);
+				var0012->clear_item_flag(ASLEEP);
+				var0012->clear_item_flag(CHARMED);
+				var0012->clear_item_flag(CURSED);
+				var0012->clear_item_flag(DEAD);
+				var0012->clear_item_flag(PARALYZED);
+				var0012->clear_item_flag(POISONED);
+				var0012->clear_item_flag(DONT_MOVE);
 				var0013 = Func095C(var0012, 0x0000);
 				var0014 = Func095C(var0012, 0x0003);
 				if (var0013 > var0014) {
@@ -56162,12 +56223,12 @@ void Func04CF object#(0x4CF) () {
 			};
 			abort;
 		}
-		if (!0xFF31->get_item_flag(0x001C)) {
+		if (!0xFF31->get_item_flag(MET)) {
 			say("\"I am Karnax, a Xenkan monk. Please forgive our previous meeting, my ",
 				var0002,
 				".\"");
 			say("\"I have nothing against thee, but I fear that Thoxa's willful interference shall be the undoing of all for which we have prepared.\"");
-			0xFF31->set_item_flag(0x001C);
+			0xFF31->set_item_flag(MET);
 			add(["previous meeting", "Thoxa", "interference"]);
 		} else {
 			if ((gflags[0x0267] == true) && (!gflags[0x0274])) {
@@ -56200,9 +56261,9 @@ void Func04CF object#(0x4CF) () {
 		var000B = Func08B6();
 		var000B = [0xFE9C, var000B];
 		for (var0012 in var000B with var001F to var0020) {
-			var0012->clear_item_flag(0x0001);
+			var0012->clear_item_flag(ASLEEP);
 		}
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		if (gflags[0x0274] && (!gflags[0x0220])) {
 			add("the secret");
 		}
@@ -56433,7 +56494,7 @@ void Func04CF object#(0x4CF) () {
 				if (gflags[0x025F]) {
 					if (gflags[0x026A]) {
 						say("\"I share thy grief over the loss of Goodwife Gwenno. I am sure that we can resurrect her, if thou dost wish.\"");
-					} else if (!0xFF6B->get_item_flag(0x001E)) {
+					} else if (!0xFF6B->get_item_flag(SI_ZOMBIE)) {
 						say("\"It hath been quite a pleasure having Gwenno here, ",
 							var0000,
 							". She is quite knowledgeable, and shares her wisdom willingly.\"");
@@ -56570,16 +56631,16 @@ void Func04D1 object#(0x4D1) () {
 		0xFF2F->run_schedule();
 		0xFF2F->clear_item_say();
 		0xFF2F->show_npc_face0(0x0000);
-		var0005 = 0xFF2F->get_item_flag(0x001C);
+		var0005 = 0xFF2F->get_item_flag(MET);
 		if (var0002 == 0x0009) {
 			say("\"My name is Miggim. I am the librarian on Monk Isle.\"");
 			say("\"I have been awaiting thine arrival...\"");
-			0xFF2F->set_item_flag(0x001C);
+			0xFF2F->set_item_flag(MET);
 			add(["librarian", "Monk Isle", "arrival"]);
 		} else if (var0005 == false) {
 			say("\"So, thou art the one whose arrival we have been awaiting.\"");
 			say("\"I am Miggim, the librarian here on Monk Isle.\"");
-			0xFF2F->set_item_flag(0x001C);
+			0xFF2F->set_item_flag(MET);
 			add(["arrival", "librarian", "Monk Isle"]);
 		} else {
 			say("\"Welcome to Monk Isle, ",
@@ -56831,7 +56892,7 @@ void Func04D3 object#(0x4D3) () {
 	var0003 = "son";
 	var0004 = Func09A0(0x0002, 0x0001);
 	var0005 = 0xFF2D->get_npc_object();
-	var0006 = 0xFF2D->get_item_flag(0x001C);
+	var0006 = 0xFF2D->get_item_flag(MET);
 	if (var0001) {
 		var0003 = "daughter";
 	}
@@ -56895,7 +56956,7 @@ void Func04D3 object#(0x4D3) () {
 			say("\"I see... Thou hast made great progress in thy quest, my ",
 				var0003,
 				". But before thou canst continue, thou must seek the wisdom of the last child of Chaos. He alone holds the key to the location of the Chaos Hierophant.\"");
-			if (0xFF68->get_item_flag(0x001C)) {
+			if (0xFF68->get_item_flag(MET)) {
 				say("\"Thou didst meet him in his imprisonment, my ",
 					var0003,
 					". Yet he remains a prisoner out of time. Seek him within the Shrine that is his home.\"");
@@ -56955,7 +57016,7 @@ void Func04D3 object#(0x4D3) () {
 
 			case "visitors" (remove):
 				if (Func0942(0xFF6B)) {
-					if (!0xFF6B->get_item_flag(0x001E)) {
+					if (!0xFF6B->get_item_flag(SI_ZOMBIE)) {
 						say("\"Such visitors are rare, for the journey here is not an easy one. As I remember it, Gwenno was our last visitor.\"");
 					} else {
 						say("\"Such visitors are rare, for the journey here is not an easy one. As I remember it, our last visitor was poor Gwenno.\"");
@@ -56968,7 +57029,7 @@ void Func04D3 object#(0x4D3) () {
 
 			case "Gwenno" (remove):
 				if (Func0942(0xFF6B)) {
-					if (!0xFF6B->get_item_flag(0x001E)) {
+					if (!0xFF6B->get_item_flag(SI_ZOMBIE)) {
 						say("\"It is a pleasure having her here, my ",
 							var0003,
 							", now that her proper state of mind hath been restored.\"");
@@ -57060,7 +57121,7 @@ void Func04D4 object#(0x4D4) () {
 	}
 	if (event == 0x0002) {
 		if (gflags[0x0004]) {
-			0xFE9C->clear_item_flag(0x0010);
+			0xFE9C->clear_item_flag(DONT_MOVE);
 			UI_init_conversation();
 			0xFF2C->show_npc_face0(0x0000);
 			say("\"Well done, my ",
@@ -57085,7 +57146,7 @@ void Func04D4 object#(0x4D4) () {
 		} else {
 			UI_init_conversation();
 			0xFF2C->show_npc_face0(0x0000);
-			0xFE9C->clear_item_flag(0x0010);
+			0xFE9C->clear_item_flag(DONT_MOVE);
 			say("\"We mourn with thee, Hero From Another World, for this purposeless death of the girl once known as Cantra.\"");
 			say("\"We shall take her lifeless body to Monk Isle, where perhaps we can restore life where death doth now reign.\"");
 			say("\"Continue on thy quest. Trouble not thyself for this girl, as we shall do all that is possible for her.\"");
@@ -57103,9 +57164,9 @@ void Func04D4 object#(0x4D4) () {
 			var0005 = 0xFF2C->get_object_position();
 			UI_sprite_effect(0x0007, (var0005[0x0001] - 0x0003), (var0005[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, 0xFFFF);
 			0xFF2C->remove_npc();
-			0xFFC0->clear_item_flag(0x0004);
+			0xFFC0->clear_item_flag(DEAD);
 			Func09AC(0xFFC0, 0x097D, 0x0469, 0x000C);
-			0xFFC0->set_item_flag(0x001E);
+			0xFFC0->set_item_flag(SI_ZOMBIE);
 			UI_play_sound_effect(0x0051);
 		}
 		abort;
@@ -57348,16 +57409,16 @@ void Func04D5 object#(0x4D5) () {
 		0xFF2B->run_schedule();
 		0xFF2B->clear_item_say();
 		0xFF2B->show_npc_face0(0x0000);
-		var000C = 0xFF2B->get_item_flag(0x001C);
+		var000C = 0xFF2B->get_item_flag(MET);
 		if (var000C == false) {
-			0xFF2B->set_item_flag(0x001C);
+			0xFF2B->set_item_flag(MET);
 			say("\"I tremble before the Hero from Another World! Thou art even as Xenka said!\"");
 			add(["name", "Hero From Another World", "Xenka"]);
 		} else {
 			say("\"Welcome again, Hero from Another World! Thy destiny hath again brought thee to the place of Xenka's wisdom!\"");
 			add(["Hero From Another World", "Xenka", "destiny"]);
 		}
-		if (gflags[0x02DD] && 0xFF6B->get_item_flag(0x001E)) {
+		if (gflags[0x02DD] && 0xFF6B->get_item_flag(SI_ZOMBIE)) {
 			add("Gwenno");
 		}
 		if (Func08FC()) {
@@ -57583,7 +57644,7 @@ void Func04D7 object#(0x4D7) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	var0003 = 0xFF29->get_item_flag(0x001C);
+	var0003 = 0xFF29->get_item_flag(MET);
 	if (event == 0x0001) {
 		0xFE9C->item_say("Most honored one...");
 		0xFF29->Func07D1();
@@ -57598,7 +57659,7 @@ void Func04D7 object#(0x4D7) () {
 				var0002,
 				".  How may I aid thee?\"");
 		} else {
-			0xFF29->set_item_flag(0x001C);
+			0xFF29->set_item_flag(MET);
 			say("\"Let the bells ring... for Xenka hath returned!!!\"");
 			say("\"So, ",
 				var0002,
@@ -57830,7 +57891,7 @@ void Func04DA object#(0x4DA) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	var0003 = 0xFFD9->get_item_flag(0x001C);
+	var0003 = 0xFFD9->get_item_flag(MET);
 	if (event == 0x0007) {
 		0xFFD9->show_npc_face0(0x0000);
 		say("\"Art thou insane? Why art thou attacking me? This is my dream!\" *\"If I had a two-handed sword, I would make mincemeat of thee!\" *\"I must awaken...\"");
@@ -58141,7 +58202,7 @@ void Func04DB object#(0x4DB) () {
 	var var0000;
 	var var0001;
 
-	var0000 = 0xFFAF->get_item_flag(0x001C);
+	var0000 = 0xFFAF->get_item_flag(MET);
 	if (event == 0x0009) {
 		0xFFAF->show_npc_face0(0x0000);
 		if (var0000 == true) {
@@ -58178,10 +58239,10 @@ void Func04DB object#(0x4DB) () {
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
 void Func04DE object#(0x4DE) () {
-	if ((event == 0x0007) && 0xFF22->get_item_flag(0x001D)) {
-		0xFF22->clear_item_flag(0x001D);
+	if ((event == 0x0007) && 0xFF22->get_item_flag(SI_TOURNAMENT)) {
+		0xFF22->clear_item_flag(SI_TOURNAMENT);
 		0xFF22->reduce_health(0x0032, 0x0000);
-		if (0xFF58->get_item_flag(0x0006)) {
+		if (0xFF58->get_item_flag(IN_PARTY)) {
 			0xFF58->set_schedule_type(0x001F);
 		} else {
 			0xFF58->set_new_schedules([0x0000, 0x0004, 0x0005, 0x0006, 0x0007], [0x000E, 0x001A, 0x000C, 0x001A, 0x0004], [0x09A7, 0x0778, 0x08C7, 0x0714, 0x099F, 0x078F, 0x08BE, 0x0707, 0x08B6, 0x070C]);
@@ -58194,7 +58255,7 @@ void Func04DE object#(0x4DE) () {
 extern void Func0809 0x809 ();
 
 void Func04E4 object#(0x4E4) () {
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -58203,7 +58264,7 @@ void Func04E4 object#(0x4E4) () {
 extern void Func0809 0x809 ();
 
 void Func04E5 object#(0x4E5) () {
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -58212,7 +58273,7 @@ void Func04E5 object#(0x4E5) () {
 extern void Func0809 0x809 ();
 
 void Func04E6 object#(0x4E6) () {
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -58221,7 +58282,7 @@ void Func04E6 object#(0x4E6) () {
 extern void Func0809 0x809 ();
 
 void Func04E7 object#(0x4E7) () {
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -58230,7 +58291,7 @@ void Func04E7 object#(0x4E7) () {
 extern void Func0809 0x809 ();
 
 void Func04E8 object#(0x4E8) () {
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -58336,9 +58397,9 @@ labelFunc0526_0008:
 		say("\"Why hast thou disturbed my slumber?\"");
 		0xFE9C->show_npc_face1(0x0000);
 		say("\"Back, creature of the undead! Thou art a thing of evil!\"");
-		var0000 = 0xFFFD->get_item_flag(0x0006);
-		var0001 = 0xFFFE->get_item_flag(0x0006);
-		var0002 = 0xFFFF->get_item_flag(0x0006);
+		var0000 = 0xFFFD->get_item_flag(IN_PARTY);
+		var0001 = 0xFFFE->get_item_flag(IN_PARTY);
+		var0002 = 0xFFFF->get_item_flag(IN_PARTY);
 		var0003 = Func097D(0xFE9B, 0x0001, 0x00E7, 0xFE99, 0xFE99);
 		UI_remove_npc_face1();
 		0x0000->set_conversation_slot();
@@ -59065,7 +59126,7 @@ void Func060C object#(0x60C) () {
 	Func08F6();
 	var0001 = Func0994();
 	UI_fade_palette(0x000C, 0x0001, 0x0000);
-	0xFE9C->clear_item_flag(0x0025);
+	0xFE9C->clear_item_flag(FREEZE);
 	var0002 = UI_get_party_list2();
 	var0002 = [0xFE9C, var0002];
 	var0003 = [0x0AA7, 0x0AF3, 0x0000];
@@ -59075,18 +59136,18 @@ void Func060C object#(0x60C) () {
 	for (var0009 in var0002 with var0007 to var0008) {
 		var0009->halt_scheduled();
 		var0009->clear_item_say();
-		if (!var0009->get_item_flag(0x001E)) {
+		if (!var0009->get_item_flag(SI_ZOMBIE)) {
 			var0009->set_schedule_type(0x001F);
 		}
 		var0009->set_temperature(0x0000);
-		var0009->clear_item_flag(0x0001);
-		var0009->clear_item_flag(0x0002);
-		var0009->clear_item_flag(0x0003);
-		var0009->clear_item_flag(0x0004);
-		var0009->clear_item_flag(0x0005);
-		var0009->clear_item_flag(0x0007);
-		var0009->clear_item_flag(0x0008);
-		var0009->clear_item_flag(0x0010);
+		var0009->clear_item_flag(ASLEEP);
+		var0009->clear_item_flag(CHARMED);
+		var0009->clear_item_flag(CURSED);
+		var0009->clear_item_flag(DEAD);
+		var0009->clear_item_flag(UNKNOWN_FLAG_05);
+		var0009->clear_item_flag(PARALYZED);
+		var0009->clear_item_flag(POISONED);
+		var0009->clear_item_flag(DONT_MOVE);
 		if (Func095C(var0009, 0x0000) > Func095C(var0009, 0x0003)) {
 			var000A = Func095C(var0009, 0x0000) - Func095C(var0009, 0x0003);
 			Func095E(var0009, 0x0003, var000A);
@@ -59108,14 +59169,14 @@ void Func060C object#(0x60C) () {
 		for (var000F in var000C with var000D to var000E) {
 			var0010 = [0x0AA7, 0x0AEF, 0x0000];
 			var000F->move_object(var0010);
-			var000F->clear_item_flag(0x0001);
-			var000F->clear_item_flag(0x0002);
-			var000F->clear_item_flag(0x0003);
-			var000F->clear_item_flag(0x0004);
-			var000F->clear_item_flag(0x0005);
-			var000F->clear_item_flag(0x0007);
-			var000F->clear_item_flag(0x0008);
-			var000F->clear_item_flag(0x0010);
+			var000F->clear_item_flag(ASLEEP);
+			var000F->clear_item_flag(CHARMED);
+			var000F->clear_item_flag(CURSED);
+			var000F->clear_item_flag(DEAD);
+			var000F->clear_item_flag(UNKNOWN_FLAG_05);
+			var000F->clear_item_flag(PARALYZED);
+			var000F->clear_item_flag(POISONED);
+			var000F->clear_item_flag(DONT_MOVE);
 			var000F->set_schedule_type(0x0003);
 			var000A = script var000F {
 				face south;
@@ -59318,7 +59379,7 @@ void Func0612 object#(0x612) () {
 			var0009 += 0x0001;
 			var000D = UI_create_new_object2(var000C, [var0006[var0009], var0007[var0009], 0x0000]);
 			if (var000D) {
-				var000D->clear_item_flag(0x0012);
+				var000D->clear_item_flag(TEMPORARY);
 				var000D->set_alignment(0x0000);
 				var000D->set_schedule_type(var0008[var0009]);
 				var000D->set_npc_id(0x0000);
@@ -59338,7 +59399,7 @@ void Func0612 object#(0x612) () {
 				var000F = var0005[var0009] - var000E;
 				var0010 = var000D->set_npc_prop(0x0003, var000F);
 				if (var000C == 0x03B1) {
-					var000D->set_item_flag(0x001D);
+					var000D->set_item_flag(SI_TOURNAMENT);
 				}
 			} else {
 				UI_error_message("Error! Silver Seed Installation.");
@@ -59523,7 +59584,7 @@ void Func0615 object#(0x615) () {
 	if (!var0000->is_npc()) {
 		abort;
 	}
-	if (!var0000->get_item_flag(0x0006)) {
+	if (!var0000->get_item_flag(IN_PARTY)) {
 		abort;
 	}
 	if (var0000->get_npc_prop(0x0009) > 0x0018) {
@@ -60193,11 +60254,11 @@ void Func061E object#(0x61E) () {
 }
 
 void Func061F object#(0x61F) () {
-	clear_item_flag(0x000F);
+	clear_item_flag(IN_ACTION);
 }
 
 void Func0620 object#(0x620) () {
-	set_item_flag(0x000F);
+	set_item_flag(IN_ACTION);
 }
 
 extern var Func098D 0x98D ();
@@ -60249,7 +60310,7 @@ labelFunc0622_0024:
 			}
 			var0005 = Func098D();
 			for (var0008 in var0005 with var0006 to var0007) {
-				if (var0008->npc_nearby() && var0008->get_item_flag(0x0006)) {
+				if (var0008->npc_nearby() && var0008->get_item_flag(IN_PARTY)) {
 					break;
 				}
 			} nobreak {
@@ -60272,7 +60333,7 @@ labelFunc0622_0024:
 				for (var000B in var0000 with var0009 to var000A) {
 					var000B->set_schedule_type(0x001F);
 				}
-				0xFE9C->clear_item_flag(0x0001);
+				0xFE9C->clear_item_flag(ASLEEP);
 				return;
 			}
 			say("\"Pleasant dreams.\"");
@@ -60331,8 +60392,8 @@ void Func0623 object#(0x623) () {
 		for (var0004 in var0000 with var0002 to var0003) {
 			var0004->set_schedule_type(0x001F);
 		}
-		0xFE9C->set_item_flag(0x0001);
-		0xFE9C->clear_item_flag(0x0001);
+		0xFE9C->set_item_flag(ASLEEP);
+		0xFE9C->clear_item_flag(ASLEEP);
 		if ((get_item_shape() == 0x03F3) && (get_item_frame() == 0x0015)) {
 			event = 0x0001;
 			item->Func0624();
@@ -60614,7 +60675,7 @@ void Func0626 object#(0x626) () {
 	var var0014;
 
 	if ((event == 0x0002) && gflags[0x000A]) {
-		0xFE9C->set_item_flag(0x0010);
+		0xFE9C->set_item_flag(DONT_MOVE);
 		gflags[0x000A] = false;
 		gflags[0x0009] = true;
 		UI_play_sound_effect(0x0027);
@@ -60672,7 +60733,7 @@ void Func0626 object#(0x626) () {
 		abort;
 	}
 	if (event == 0x0002) {
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		UI_run_endgame(true);
 		abort;
@@ -60794,7 +60855,7 @@ void Func0628 object#(0x628) () {
 
 	var0000 = UI_create_new_object(0x0390);
 	if (var0000) {
-		var0000->set_item_flag(0x0012);
+		var0000->set_item_flag(TEMPORARY);
 		var0000->set_item_frame(UI_die_roll(0x000C, 0x000F));
 		var0001 = get_object_position();
 		var0002 = find_nearby(0x032A, 0x0002, 0x0000);
@@ -60846,7 +60907,7 @@ void Func0629 object#(0x629) () {
 
 	var0000 = UI_create_new_object(0x0390);
 	if (var0000) {
-		var0000->set_item_flag(0x0012);
+		var0000->set_item_flag(TEMPORARY);
 		var0000->set_item_frame(UI_die_roll(0x0014, 0x0017));
 		var0001 = get_object_position();
 		var0002 = find_nearby(0x032A, 0x0002, 0x0000);
@@ -60982,7 +61043,7 @@ void Func062B object#(0x62B) () {
 		if ((var0002 == 0x0001) || (var0002 == 0x0006)) {
 			var0005 = UI_create_new_object(0x0390);
 			if (var0005) {
-				var0005->set_item_flag(0x0012);
+				var0005->set_item_flag(TEMPORARY);
 				var0005->set_item_frame(UI_die_roll(0x0010, 0x0013));
 				var0005 = UI_update_last_created(var0001);
 			}
@@ -60990,7 +61051,7 @@ void Func062B object#(0x62B) () {
 		if (var0002 == 0x0002) {
 			var0005 = UI_create_new_object(0x0390);
 			if (var0005) {
-				var0005->set_item_flag(0x0012);
+				var0005->set_item_flag(TEMPORARY);
 				var0005->set_item_frame(UI_die_roll(0x0000, 0x0003));
 				var0005 = UI_update_last_created(var0001);
 			}
@@ -60998,7 +61059,7 @@ void Func062B object#(0x62B) () {
 		if (var0002 == 0x0003) {
 			var0005 = UI_create_new_object(0x0390);
 			if (var0005) {
-				var0005->set_item_flag(0x0012);
+				var0005->set_item_flag(TEMPORARY);
 				var0005->set_item_frame(UI_die_roll(0x0014, 0x0017));
 				var0005 = UI_update_last_created(var0001);
 			}
@@ -61006,7 +61067,7 @@ void Func062B object#(0x62B) () {
 		if ((var0002 == 0x0004) || (var0002 == 0x0005)) {
 			var0005 = UI_create_new_object(0x0390);
 			if (var0005) {
-				var0005->set_item_flag(0x0012);
+				var0005->set_item_flag(TEMPORARY);
 				var0005->set_item_frame(UI_die_roll(0x000C, 0x000F));
 				var0005 = UI_update_last_created(var0001);
 			}
@@ -61276,8 +61337,8 @@ void Func0632 object#(0x632) () {
 				UI_play_sound_effect(0x0051);
 				var0007->Func07D2();
 				var0007->set_alignment(0x0002);
-				var0007->set_item_flag(0x0012);
-				var0007->clear_item_flag(0x001D);
+				var0007->set_item_flag(TEMPORARY);
+				var0007->clear_item_flag(SI_TOURNAMENT);
 			}
 		}
 		var0008 = 0xFE9C->get_object_position();
@@ -61345,7 +61406,7 @@ void Func0633 object#(0x633) () {
 	// Dead code.
 	item->Func063A();
 	if (UI_die_roll(0x0001, 0x0008) == 0x0001) {
-		if (0xFFFF->get_item_flag(0x0006) && Func0983(0xFFFF)) {
+		if (0xFFFF->get_item_flag(IN_PARTY) && Func0983(0xFFFF)) {
 			0xFFFF->clear_item_say();
 			Func097F(0xFFFF, "@I am leaving!@", 0x0000);
 			0xFFFF->remove_from_party();
@@ -61354,7 +61415,7 @@ void Func0633 object#(0x633) () {
 			gflags[0x02D4] = true;
 			return;
 		}
-		if (0xFFFE->get_item_flag(0x0006) && Func0983(0xFFFE)) {
+		if (0xFFFE->get_item_flag(IN_PARTY) && Func0983(0xFFFE)) {
 			0xFFFE->clear_item_say();
 			Func097F(0xFFFE, "@I am leaving!@", 0x0000);
 			gflags[0x02D5] = true;
@@ -61363,7 +61424,7 @@ void Func0633 object#(0x633) () {
 			Func09AC(0xFFFE, var0000[0x0001], var0000[0x0002], 0x000C);
 			return;
 		}
-		if (0xFFFD->get_item_flag(0x0006) && Func0983(0xFFFD)) {
+		if (0xFFFD->get_item_flag(IN_PARTY) && Func0983(0xFFFD)) {
 			0xFFFD->clear_item_say();
 			Func097F(0xFFFD, "@I am leaving!@", 0x0000);
 			gflags[0x02D3] = true;
@@ -61388,12 +61449,12 @@ void Func0634 object#(0x634) () {
 	if (var0000) {
 		var0001 = Func088F(item);
 		if (var0001 == 0x0316) {
-			0xFE9C->clear_item_flag(0x0014);
-			0x0001->set_item_flag(0x000A);
-			0xFE9C->get_barge()->set_item_flag(0x001A);
+			0xFE9C->clear_item_flag(ACTIVE_SAILOR);
+			0x0001->set_item_flag(ON_MOVING_BARGE);
+			0xFE9C->get_barge()->set_item_flag(ACTIVE_BARGE);
 		}
 		if (var0001 == 0x00C7) {
-			var0002 = 0xFE9C->get_item_flag(0x0014);
+			var0002 = 0xFE9C->get_item_flag(ACTIVE_SAILOR);
 			if (var0002) {
 				Func0918(var0002);
 			}
@@ -61432,7 +61493,7 @@ void Func0635 object#(0x635) () {
 			remove_item();
 			var0005 = UI_create_new_object(0x0179);
 			if (var0005) {
-				var0005->set_item_flag(0x0012);
+				var0005->set_item_flag(TEMPORARY);
 				set_item_frame(0x0000);
 				var0002 = UI_update_last_created(var0003);
 				if (var0002) {
@@ -61462,7 +61523,7 @@ void Func0636 object#(0x636) () {
 }
 
 void Func0637 object#(0x637) () {
-	clear_item_flag(0x001A);
+	clear_item_flag(ACTIVE_BARGE);
 	0xFE9C->set_camera();
 }
 
@@ -62170,7 +62231,7 @@ void Func0640 object#(0x640) () {
 			if (var0006) {
 				var0007 = UI_die_roll(0x0001, 0x001E);
 				var0006->set_item_frame(var0007);
-				var0006->set_item_flag(0x0012);
+				var0006->set_item_flag(TEMPORARY);
 				var0000 = UI_update_last_created(var0005);
 			}
 		}
@@ -62226,9 +62287,9 @@ void Func0641 object#(0x641) () {
 		}
 	}
 	if (event == 0x0002) {
-		clear_item_flag(0x0008);
-		clear_item_flag(0x0007);
-		clear_item_flag(0x0024);
+		clear_item_flag(POISONED);
+		clear_item_flag(PARALYZED);
+		clear_item_flag(CAN_FLY);
 	}
 }
 
@@ -62653,7 +62714,7 @@ void Func0648 object#(0x648) () {
 	}
 	if (event == 0x0002) {
 		if (is_npc()) {
-			clear_item_flag(0x0001);
+			clear_item_flag(ASLEEP);
 		} else {
 			Func0948(0x003C);
 		}
@@ -62777,7 +62838,7 @@ void Func064A object#(0x64A) () {
 			var0007 += 0x0001;
 			var0008 = UI_create_new_object(var0001);
 			if (var0008) {
-				var0008->set_item_flag(0x0012);
+				var0008->set_item_flag(TEMPORARY);
 				var0004 = var0008->set_item_quantity(var0006);
 				var0004 = UI_update_last_created(var0005);
 			}
@@ -62945,9 +63006,9 @@ void Func064E object#(0x64E) () {
 		var0001 = UI_get_party_list();
 		var0001 &= 0xFE9C;
 		for (var0004 in var0001 with var0002 to var0003) {
-			var0004->clear_item_flag(0x0008);
-			var0004->clear_item_flag(0x0007);
-			var0004->clear_item_flag(0x0024);
+			var0004->clear_item_flag(POISONED);
+			var0004->clear_item_flag(PARALYZED);
+			var0004->clear_item_flag(CAN_FLY);
 		}
 	}
 }
@@ -62994,7 +63055,7 @@ void Func064F object#(0x64F) () {
 		}
 	}
 	if (event == 0x0002) {
-		set_item_flag(0x0009);
+		set_item_flag(PROTECTION);
 	}
 }
 
@@ -63237,7 +63298,7 @@ void Func0654 object#(0x654) () {
 		var0001 = UI_get_party_list();
 		var0001 &= 0xFE9C;
 		for (var0004 in var0001 with var0002 to var0003) {
-			var0004->set_item_flag(0x0009);
+			var0004->set_item_flag(PROTECTION);
 		}
 	}
 }
@@ -63336,7 +63397,7 @@ void Func0657 object#(0x657) () {
 				actor frame strike_1h;
 				actor frame standing;
 			};
-			0xFE9C->set_item_flag(0x0022);
+			0xFE9C->set_item_flag(READ);
 			var0001 = 0x2710;
 			var0002 = Func09A0(0x0003, 0x0001);
 			if (var0002) {
@@ -63356,7 +63417,7 @@ void Func0657 object#(0x657) () {
 		}
 	}
 	if (event == 0x0002) {
-		0xFE9C->clear_item_flag(0x0022);
+		0xFE9C->clear_item_flag(READ);
 	}
 }
 
@@ -63432,9 +63493,9 @@ void Func0659 object#(0x659) () {
 		if (!(var0007 in [0xFE9C])) {
 			var0008 = 0xFE9C->get_alignment();
 			if (var0008) {
-				set_item_flag(0x0002);
+				set_item_flag(CHARMED);
 			} else {
-				clear_item_flag(0x0002);
+				clear_item_flag(CHARMED);
 			}
 		}
 	}
@@ -63489,7 +63550,7 @@ void Func065A object#(0x65A) () {
 		var0003 = find_nearby(0xFE99, 0x0028, 0x0008);
 		var0004 = UI_get_party_list();
 		var0005 = 0x000C;
-		var0006 = get_item_flag(0x0006);
+		var0006 = get_item_flag(IN_PARTY);
 		for (var0009 in var0003 with var0007 to var0008) {
 			if ((!var0006) || (!(var0009 in var0004))) {
 				var000A = 0x0000;
@@ -63627,7 +63688,7 @@ void Func065B object#(0x65B) () {
 		var0005 = get_object_position();
 		var0004 = set_last_created();
 		set_item_frame(0x0001);
-		clear_item_flag(0x0012);
+		clear_item_flag(TEMPORARY);
 		var0004 = UI_update_last_created(var0005);
 	}
 }
@@ -63685,7 +63746,7 @@ void Func065C object#(0x65C) () {
 		}
 	}
 	if (event == 0x0002) {
-		set_item_flag(0x0003);
+		set_item_flag(CURSED);
 	}
 }
 
@@ -63734,7 +63795,7 @@ void Func065D object#(0x65D) () {
 				var0003 = [var0008, var0009, 0x0000];
 				var000A = var0003->find_nearby(0xFE99, var0006, 0x0020);
 				for (var000D in var000A with var000B to var000C) {
-					if (var000D->get_item_flag(0x0000) && (!(var000D in var0001))) {
+					if (var000D->get_item_flag(INVISIBLE) && (!(var000D in var0001))) {
 						var0001 &= var000D;
 					}
 				}
@@ -63761,7 +63822,7 @@ void Func065D object#(0x65D) () {
 		}
 	}
 	if (event == 0x0002) {
-		clear_item_flag(0x0000);
+		clear_item_flag(INVISIBLE);
 	}
 }
 
@@ -64096,7 +64157,7 @@ void Func0664 object#(0x664) () {
 		}
 	}
 	if (event == 0x0002) {
-		set_item_flag(0x0000);
+		set_item_flag(INVISIBLE);
 	}
 }
 
@@ -64145,7 +64206,7 @@ void Func0665 object#(0x665) () {
 		for (var0006 in var0002 with var0004 to var0005) {
 			if (!(var0006 in var0003)) {
 				var0006->halt_scheduled();
-				var0006->set_item_flag(0x0001);
+				var0006->set_item_flag(ASLEEP);
 			}
 		}
 	}
@@ -64328,11 +64389,11 @@ void Func0667 object#(0x667) () {
 			}
 			if (var0007 == 0x0002) {
 				halt_scheduled();
-				set_item_flag(0x0001);
+				set_item_flag(ASLEEP);
 			}
 			if (var0007 == 0x0003) {
 				halt_scheduled();
-				set_item_flag(0x0008);
+				set_item_flag(POISONED);
 			}
 		}
 	}
@@ -64420,7 +64481,7 @@ void Func0669 object#(0x669) () {
 		var0005 = [0x0212];
 		var0006 = get_item_shape();
 		if (var0006 in var0005) {
-			if (get_item_flag(0x001E)) {
+			if (get_item_flag(SI_ZOMBIE)) {
 				var0000 = script item after 6 ticks {
 					nohalt;
 					remove;
@@ -64527,7 +64588,7 @@ void Func066B object#(0x66B) () {
 				if (var0008) {
 					var0009 = 0x0064;
 					var0008 = var0003->set_item_quality(var0009);
-					var0003->set_item_flag(0x0012);
+					var0003->set_item_flag(TEMPORARY);
 					var0008 = script var0003 after var0009 ticks remove;;
 				}
 			}
@@ -64593,8 +64654,8 @@ void Func066C object#(0x66C) () {
 				if (UI_is_not_blocked(var0009, 0x026D, 0x0000)) {
 					var000B = UI_create_new_object(0x026D);
 					if (var000B) {
-						var000B->set_item_flag(0x0012);
-						var000B->set_item_flag(0x0000);
+						var000B->set_item_flag(TEMPORARY);
+						var000B->set_item_flag(INVISIBLE);
 						var0002 = UI_update_last_created(var0009);
 						if (var0002) {
 							var0002 = var000B->set_npc_prop(0x0003, 0x0001);
@@ -64625,7 +64686,7 @@ void Func066C object#(0x66C) () {
 		}
 		var000B = UI_create_new_object(0x0231);
 		if (var000B) {
-			var000B->set_item_flag(0x0012);
+			var000B->set_item_flag(TEMPORARY);
 			var0002 = UI_update_last_created(var0009);
 			if (var0002) {
 				var000D = 0x001E;
@@ -64686,7 +64747,7 @@ void Func066D object#(0x66D) () {
 						var000C = UI_die_roll(0x0001, 0x000F);
 						var000D = 0x001E + var000C;
 						var0002 = var000B->set_item_quality(var000D);
-						var000B->set_item_flag(0x0012);
+						var000B->set_item_flag(TEMPORARY);
 						var0002 = script var000B after var000D ticks {
 							nohalt;
 							remove;
@@ -64768,7 +64829,7 @@ void Func066E object#(0x66E) () {
 			if (var0008 > 0x0063) {
 				var0008 = 0x0063;
 			}
-			var0001->set_item_flag(0x0012);
+			var0001->set_item_flag(TEMPORARY);
 			var0000 = var0001->set_item_quantity(var0008);
 			var0000 = UI_update_last_created(var0006);
 		}
@@ -64817,7 +64878,7 @@ void Func066F object#(0x66F) () {
 						var0007 = 0xFE9C->get_object_position();
 						Func09AC(var0005, var0007[0x0001], var0007[0x0002], 0x000C);
 						var0005->set_alignment(0x0000);
-						var0005->set_item_flag(0x001E);
+						var0005->set_item_flag(SI_ZOMBIE);
 					} else {
 						var0005 = script item {
 							nohalt;
@@ -64883,7 +64944,7 @@ void Func0670 object#(0x670) () {
 			if (var0008) {
 				var0009 = UI_update_last_created(var0005);
 				if (var0009) {
-					var0008->set_item_flag(0x0012);
+					var0008->set_item_flag(TEMPORARY);
 					var000A = 0x00C8;
 					var0009 = var0008->set_item_quality(var000A);
 					var0009 = script var0008 after var000A ticks remove;;
@@ -64991,7 +65052,7 @@ void Func0672 object#(0x672) () {
 	}
 	if (event == 0x0002) {
 		halt_scheduled();
-		clear_item_flag(0x0001);
+		clear_item_flag(ASLEEP);
 	}
 }
 
@@ -65040,7 +65101,7 @@ void Func0673 object#(0x673) () {
 		}
 	}
 	if (event == 0x0002) {
-		set_item_flag(0x000C);
+		set_item_flag(MIGHT);
 	}
 }
 
@@ -65078,7 +65139,7 @@ void Func0674 object#(0x674) () {
 				var0005 = var0000[0x0003] + 0x0001;
 				var0006 = var0000[0x0004];
 				var0007 = [var0004, var0005, var0006];
-				var0003->set_item_flag(0x0012);
+				var0003->set_item_flag(TEMPORARY);
 				var0002 = UI_update_last_created(var0007);
 			}
 		} else {
@@ -65119,9 +65180,9 @@ void Func0675 object#(0x675) () {
 			var0001 = UI_get_party_list2();
 			for (var0004 in var0001 with var0002 to var0003) {
 				var0004->obj_sprite_effect(0x000D, 0xFFFF, 0xFFFF, 0x0000, 0x0000, 0x0000, 0xFFFF);
-				var0004->clear_item_flag(0x0007);
-				var0004->clear_item_flag(0x0008);
-				var0004->clear_item_flag(0x0001);
+				var0004->clear_item_flag(PARALYZED);
+				var0004->clear_item_flag(POISONED);
+				var0004->clear_item_flag(ASLEEP);
 				var0005 = var0004->get_npc_prop(0x0000);
 				var0006 = var0004->get_npc_prop(0x0003);
 				if (var0006 < 0x0001) {
@@ -65298,7 +65359,7 @@ void Func0678 object#(0x678) () {
 				var0007->set_item_frame(0x0009);
 				var0006 = UI_update_last_created(var0005);
 				if (var0006) {
-					var0007->set_item_flag(0x0012);
+					var0007->set_item_flag(TEMPORARY);
 					var0006 = script var0007 after 200 ticks remove;;
 				} else {
 					var0000 = true;
@@ -65374,7 +65435,7 @@ void Func0679 object#(0x679) () {
 			var0003 = 0x0000;
 			var0004 = 0x0001;
 		}
-		var0005 = get_item_flag(0x000E);
+		var0005 = get_item_flag(CANT_DIE);
 		if ((var0003 > var0004) && (var0005 == false)) {
 			var0006 = var0003 - var0004;
 			Func0982(item, var0006);
@@ -65407,8 +65468,8 @@ void Func067A object#(0x67A) () {
 		if (Func0951()) {
 			var0004 = UI_create_new_object(0x026D);
 			if (var0004) {
-				var0004->set_item_flag(0x0012);
-				var0004->set_item_flag(0x0000);
+				var0004->set_item_flag(TEMPORARY);
+				var0004->set_item_flag(INVISIBLE);
 				var0005 = UI_update_last_created(var0003);
 				if (var0005) {
 					var0005 = var0004->set_npc_prop(0x0003, 0x0001);
@@ -65538,7 +65599,7 @@ void Func067D object#(0x67D) () {
 	if (event == 0x0001) {
 		halt_scheduled();
 		item_say("@An Frio Xen Ex@");
-		if (Func0951() && (!0xFE9C->get_item_flag(0x0023))) {
+		if (Func0951() && (!0xFE9C->get_item_flag(ISPETRA))) {
 			var0000 = script item {
 				nohalt;
 				actor frame raise_2h;
@@ -65776,7 +65837,7 @@ void Func0681 object#(0x681) () {
 		}
 	}
 	if (event == 0x0002) {
-		var000C = get_item_flag(0x000E);
+		var000C = get_item_flag(CANT_DIE);
 		if (var000C == false) {
 			var000B = get_npc_prop(0x0003);
 			Func0982(item, (var000B - 0x0002));
@@ -65832,7 +65893,7 @@ void Func0682 object#(0x682) () {
 		}
 	}
 	if (event == 0x0002) {
-		set_item_flag(0x0000);
+		set_item_flag(INVISIBLE);
 	}
 }
 
@@ -66242,7 +66303,7 @@ void Func0688 object#(0x688) () {
 			if (var000F) {
 				var0011 = UI_die_roll(0x0005, 0x000F);
 				var000F = var0010->set_item_quality(var0011);
-				var0010->set_item_flag(0x0012);
+				var0010->set_item_flag(TEMPORARY);
 				var000F = script var0010 after var0011 ticks {
 					nohalt;
 					call Func0688;
@@ -66590,9 +66651,9 @@ void Func06AB object#(0x6AB) () {
 		var0006 = find_nearby(0x0215, 0x0014, 0x0000);
 		if (var0006) {
 			var0006[0x0001]->set_npc_id(0x0001);
-			var0006[0x0001]->set_item_flag(0x001D);
+			var0006[0x0001]->set_item_flag(SI_TOURNAMENT);
 			var0006[0x0002]->set_npc_id(0x0002);
-			var0006[0x0002]->set_item_flag(0x001D);
+			var0006[0x0002]->set_item_flag(SI_TOURNAMENT);
 		}
 	}
 }
@@ -66639,7 +66700,7 @@ void Func06AD object#(0x6AD) () {
 		if (UI_get_array_size(var0000) == 0x0000) {
 			gflags[0x0045] = true;
 			0xFFB4->set_alignment(0x0003);
-			0xFFB4->set_item_flag(0x001D);
+			0xFFB4->set_item_flag(SI_TOURNAMENT);
 			var0004 = Func0992(0x0001, "@A clue...@", "@A clue...@", true);
 			if (var0004 != 0xFE9C) {
 				var0005 = script var0004 after 10 ticks {
@@ -66877,7 +66938,7 @@ void Func06B1 object#(0x6B1) () {
 		if (var0001) {
 			if (var0001->get_distance(item) < 0x001E) {
 				var0001->kill_npc();
-			} else if (!var0001->get_item_flag(0x0004)) {
+			} else if (!var0001->get_item_flag(DEAD)) {
 				var0002 = get_object_position();
 				var0003 = var0001->get_object_position();
 				UI_error_message(["Trying to kill npc#", var0000, ". Teleporting him to", var0002, ". He was at ", var0003, "."]);
@@ -66976,14 +67037,14 @@ void Func06B3 object#(0x6B3) () {
 			var0003 = Func08B5();
 			if (var0003) {
 				var0004 = var0003->get_npc_object();
-				var0004->set_item_flag(0x0001);
+				var0004->set_item_flag(ASLEEP);
 				var0004->set_schedule_type(0x000E);
 				var0005 = var0003->get_object_position();
 				var0003->set_new_schedules(0x0000, 0x000E, var0005);
 			} else {
 				var0001 = var0000->set_item_quality(0x0002);
 				0xFE9C->clear_item_say();
-				0xFE9C->set_item_flag(0x0010);
+				0xFE9C->set_item_flag(DONT_MOVE);
 				0xFE9C->set_schedule_type(0x000E);
 			}
 			var0001 = script var0000 after 15 ticks {
@@ -67046,7 +67107,7 @@ void Func06B3 object#(0x6B3) () {
 			if (var000F == 0x0004) {
 				var0010 = [0x0011, 0x05CE, 0x0000];
 			}
-			0xFE9C->clear_item_flag(0x0008);
+			0xFE9C->clear_item_flag(POISONED);
 			UI_fade_palette(0x000C, 0x0001, 0x0000);
 			0xFE9C->move_object(var0010);
 			var0001 = var0000->set_item_quality(0x0004);
@@ -67056,7 +67117,7 @@ void Func06B3 object#(0x6B3) () {
 			};
 		}
 		if (var0002 == 0x0004) {
-			0xFE9C->clear_item_flag(0x0000);
+			0xFE9C->clear_item_flag(INVISIBLE);
 			var0011 = 0x0000;
 			var0012 = 0xFE9C->get_cont_items(0xFE99, 0xFE99, 0xFE99);
 			while (var0011 < 0x0002) {
@@ -67087,7 +67148,7 @@ void Func06B3 object#(0x6B3) () {
 				var0001 = 0xFE9C->add_cont_items(0x0001, 0x0289, 0xFE99, 0x000B, 0x0000);
 			}
 			UI_fade_palette(0x000C, 0x0001, 0x0001);
-			0xFE9C->clear_item_flag(0x0010);
+			0xFE9C->clear_item_flag(DONT_MOVE);
 			UI_play_music(0x0018, Func09A0(0x0005, 0x0001));
 			0xFE9C->set_schedule_type(0x001F);
 			var0001 = var0000->set_item_quality(0x0000);
@@ -67113,7 +67174,7 @@ void Func06B5 object#(0x6B5) () {
 			var0000 = UI_create_new_object(0x0268);
 			if (var0000) {
 				var0000->set_item_frame(0x0009);
-				var0000->clear_item_flag(0x0012);
+				var0000->clear_item_flag(TEMPORARY);
 				var0001 = get_object_position();
 				var0002 = UI_update_last_created(var0001);
 				if (var0002) {
@@ -67199,8 +67260,8 @@ void Func06B6 object#(0x6B6) () {
 				var0010->set_alignment(0x0002);
 				var0010->set_schedule_type(0x0000);
 				var0010->set_oppressor(0xFE9C->get_npc_object());
-				var0010->set_item_flag(0x001D);
-				var0010->set_item_flag(0x0012);
+				var0010->set_item_flag(SI_TOURNAMENT);
+				var0010->set_item_flag(TEMPORARY);
 				var0010->set_npc_id(0x0001);
 				var0011 = var0010->get_npc_prop(0x0003);
 				var0007 = var0010->set_npc_prop(0x0003, (0x0001 - var0011));
@@ -67320,7 +67381,7 @@ void Func06B9 object#(0x6B9) () {
 
 	var0000 = find_nearby(0x02EB, 0x0014, 0x0000);
 	for (var0003 in var0000 with var0001 to var0002) {
-		if (var0003->get_item_flag(0x001E)) {
+		if (var0003->get_item_flag(SI_ZOMBIE)) {
 			var0000 = Func0988(var0003, var0000);
 		}
 	}
@@ -67343,7 +67404,7 @@ void Func06BA object#(0x6BA) () {
 	if (event == 0x0003) {
 		var0000 = get_item_quality();
 		if (var0000 == 0x0000) {
-			0xFE9C->clear_item_flag(0x0025);
+			0xFE9C->clear_item_flag(FREEZE);
 			var0001 = 0xFE9C->get_temperature();
 			var0001 -= 0x0005;
 			if (var0001 < 0x0000) {
@@ -67352,7 +67413,7 @@ void Func06BA object#(0x6BA) () {
 			0xFE9C->set_temperature(var0001);
 		}
 		if (var0000 == 0x0001) {
-			0xFE9C->set_item_flag(0x0025);
+			0xFE9C->set_item_flag(FREEZE);
 		}
 	}
 }
@@ -67437,7 +67498,7 @@ void Func06BC object#(0x6BC) () {
 			abort;
 		}
 		if (var0002 == var0001) {
-			0xFE9C->set_item_flag(0x0010);
+			0xFE9C->set_item_flag(DONT_MOVE);
 			var0007 = UI_create_new_object(0x02B4);
 			if (var0007) {
 				var0007->set_item_frame(0x0002);
@@ -67490,7 +67551,7 @@ void Func06BC object#(0x6BC) () {
 				call Func06BC;
 			};
 			var0003 = var0000->set_item_quality(var0002 + 0x0001);
-			0xFE9C->clear_item_flag(0x0010);
+			0xFE9C->clear_item_flag(DONT_MOVE);
 			Func097F(0xFFFD, "@A lute!@", 0x0000);
 		}
 		if (var0002 == (var0001 + 0x0002)) {
@@ -67681,7 +67742,7 @@ void Func06C3 object#(0x6C3) () {
 	while (var0008 < 0x0008) {
 		if (var0008 < 0x0003) {
 			var0009 = UI_create_new_object2(0x00E4, [(var0006[0x0001] + var0008), (var0006[0x0002] + var0008), 0x0000]);
-			var0009->set_item_flag(0x0012);
+			var0009->set_item_flag(TEMPORARY);
 			var0009->set_schedule_type(0x0007);
 		} else if (var0008 < 0x0005) {
 			if (var0007) {
@@ -67690,11 +67751,11 @@ void Func06C3 object#(0x6C3) () {
 				var0009 = UI_create_new_object2(0x00E4, [0x04C9, 0x084C, 0x0006]);
 				var0007 = true;
 			}
-			var0009->set_item_flag(0x0012);
+			var0009->set_item_flag(TEMPORARY);
 			var0009->set_schedule_type(0x000E);
 		} else {
 			var0009 = UI_create_new_object2(0x00E4, [(var0006[0x0001] - (var0008 / 0x0002)), (var0006[0x0002] - (var0008 / 0x0002)), 0x0000]);
-			var0009->set_item_flag(0x0012);
+			var0009->set_item_flag(TEMPORARY);
 			var0009->set_schedule_type(0x000C);
 		}
 		var0009->set_npc_id(0x0001);
@@ -67722,7 +67783,7 @@ void Func06C4 object#(0x6C4) () {
 	var var0009;
 	var var000A;
 
-	var0000 = 0xFFD4->get_item_flag(0x0006);
+	var0000 = 0xFFD4->get_item_flag(IN_PARTY);
 	if (gflags[0x01EA]) {
 		if (var0000) {
 			0xFFD4->show_npc_face0(0x0000);
@@ -67873,7 +67934,7 @@ void Func06C7 object#(0x6C7) () {
 		var0001 = UI_create_new_object(0x034A);
 		if (var0001) {
 			var0001->set_item_frame(0x0003);
-			var0001->clear_item_flag(0x0012);
+			var0001->clear_item_flag(TEMPORARY);
 			var0001 = var0001->set_item_quantity(get_item_quality());
 			var0002 = UI_update_last_created(var0000);
 			if (var0002) {
@@ -67929,25 +67990,25 @@ void Func06C9 object#(0x6C9) () {
 			var0008 = UI_create_new_object2(0x0103, var0002);
 			var0008->set_schedule_type(0x000E);
 			var0008->set_npc_id(0x0001);
-			var0008->set_item_flag(0x001D);
+			var0008->set_item_flag(SI_TOURNAMENT);
 		}
 		if ((var0001 > 0x0007) && ((var0001 < 0x000F) && var0003)) {
 			var0008 = UI_create_new_object2(0x0103, var0002);
 			var0008->set_schedule_type(0x0007);
 			var0008->set_npc_id(0x0001);
-			var0008->set_item_flag(0x001D);
+			var0008->set_item_flag(SI_TOURNAMENT);
 		}
 		if ((var0001 > 0x0010) && ((var0001 < 0x0014) && var0003)) {
 			var0008 = UI_create_new_object2(0x0103, var0002);
 			var0008->set_schedule_type(0x001D);
 			var0008->set_npc_id(0x0001);
-			var0008->set_item_flag(0x001D);
+			var0008->set_item_flag(SI_TOURNAMENT);
 		}
 		if ((var0001 > 0x0013) && var0003) {
 			var0008 = UI_create_new_object2(0x0103, var0002);
 			var0008->set_schedule_type(0x0007);
 			var0008->set_npc_id(0x0001);
-			var0008->set_item_flag(0x001D);
+			var0008->set_item_flag(SI_TOURNAMENT);
 		}
 	}
 }
@@ -68051,7 +68112,7 @@ void Func06CA object#(0x6CA) () {
 			UI_play_sound_effect(0x0025);
 			var0018 = UI_create_new_object(0x02D8);
 			var0018->set_item_frame(0x0004);
-			var0018->clear_item_flag(0x0012);
+			var0018->clear_item_flag(TEMPORARY);
 			var0016 = 0x0002;
 			var0017 = 0xFFF8;
 			var0019 = UI_update_last_created([(var0001 + var0016), (var0002 + var0017), 0x0000]);
@@ -68059,7 +68120,7 @@ void Func06CA object#(0x6CA) () {
 			var0005[0x0001]->remove_item();
 			var001A = UI_create_new_object(0x0216);
 			var001A->set_item_frame(0x0000);
-			var001A->clear_item_flag(0x0012);
+			var001A->clear_item_flag(TEMPORARY);
 			var0019 = UI_update_last_created([(var0001 + 0x0002), (var0002 - 0x0008), 0x0000]);
 		}
 	}
@@ -68069,7 +68130,7 @@ void Func06CA object#(0x6CA) () {
 			UI_play_sound_effect(0x0025);
 			var0018 = UI_create_new_object(0x01DB);
 			var0018->set_item_frame(0x000A);
-			var0018->clear_item_flag(0x0012);
+			var0018->clear_item_flag(TEMPORARY);
 			var0016 = 0x0008;
 			var0017 = 0x0002;
 			var0019 = UI_update_last_created([(var0001 + var0016), (var0002 + var0017), 0x0000]);
@@ -68077,7 +68138,7 @@ void Func06CA object#(0x6CA) () {
 			var0005[0x0002]->remove_item();
 			var001A = UI_create_new_object(0x0216);
 			var001A->set_item_frame(0x0000);
-			var001A->clear_item_flag(0x0012);
+			var001A->clear_item_flag(TEMPORARY);
 			var0019 = UI_update_last_created([(var0001 + 0x0008), (var0002 + 0x0002), 0x0000]);
 		}
 	}
@@ -68087,7 +68148,7 @@ void Func06CA object#(0x6CA) () {
 			UI_play_sound_effect(0x0025);
 			var0018 = UI_create_new_object(0x02D8);
 			var0018->set_item_frame(0x0004);
-			var0018->clear_item_flag(0x0012);
+			var0018->clear_item_flag(TEMPORARY);
 			var0016 = 0x0002;
 			var0017 = 0x0008;
 			var0019 = UI_update_last_created([(var0001 + var0016), (var0002 + var0017), 0x0000]);
@@ -68095,7 +68156,7 @@ void Func06CA object#(0x6CA) () {
 			var0005[0x0003]->remove_item();
 			var001A = UI_create_new_object(0x0216);
 			var001A->set_item_frame(0x0000);
-			var001A->clear_item_flag(0x0012);
+			var001A->clear_item_flag(TEMPORARY);
 			var001B = UI_update_last_created([(var0001 + 0x0002), (var0002 + 0x0008), 0x0000]);
 		}
 	}
@@ -68105,7 +68166,7 @@ void Func06CA object#(0x6CA) () {
 			UI_play_sound_effect(0x0025);
 			var0018 = UI_create_new_object(0x01DB);
 			var0018->set_item_frame(0x000A);
-			var0018->clear_item_flag(0x0012);
+			var0018->clear_item_flag(TEMPORARY);
 			var0016 = 0xFFF8;
 			var0017 = 0x0002;
 			var0019 = UI_update_last_created([(var0001 + var0016), (var0002 + var0017), 0x0000]);
@@ -68113,7 +68174,7 @@ void Func06CA object#(0x6CA) () {
 			var0005[0x0004]->remove_item();
 			var001A = UI_create_new_object(0x0216);
 			var001A->set_item_frame(0x0000);
-			var001A->clear_item_flag(0x0012);
+			var001A->clear_item_flag(TEMPORARY);
 			var001B = UI_update_last_created([(var0001 - 0x0008), (var0002 + 0x0002), 0x0000]);
 		}
 	}
@@ -68145,7 +68206,7 @@ void Func06CA object#(0x6CA) () {
 }
 
 void Func06CB object#(0x6CB) () {
-	0xFE9C->set_item_flag(0x0010);
+	0xFE9C->set_item_flag(DONT_MOVE);
 	UI_end_conversation();
 	0xFE9C->set_polymorph(0x00EF);
 	remove_item();
@@ -68168,7 +68229,7 @@ void Func06CC object#(0x6CC) () {
 			var0002 = UI_create_new_object(0x034A);
 			if (var0002) {
 				var0002->set_item_frame(0x000A);
-				var0002->set_item_flag(0x000B);
+				var0002->set_item_flag(OKAY_TO_TAKE);
 				var0003 = var0001->give_last_created();
 			}
 		}
@@ -68189,7 +68250,7 @@ void Func06CD object#(0x6CD) () {
 	if (gflags[0x0004]) {
 		var0000 = UI_create_new_object(0x03E6);
 		if (var0000) {
-			var0000->clear_item_flag(0x0012);
+			var0000->clear_item_flag(TEMPORARY);
 			var0000->set_item_frame(0x0006);
 			var0001 = UI_update_last_created(get_object_position());
 			if (var0001) {
@@ -68350,7 +68411,7 @@ void Func06CF object#(0x6CF) () {
 extern void Func0922 0x922 (var var0000);
 
 void Func06D0 object#(0x6D0) () {
-	if (0xFEDA->get_item_flag(0x0004)) {
+	if (0xFEDA->get_item_flag(DEAD)) {
 		remove_item();
 	} else {
 		Func0922(0x000D);
@@ -68398,7 +68459,7 @@ void Func06D1 object#(0x6D1) () {
 			var0006 = var0002->get_distance(0xFE9C);
 		}
 		if ((var0001[0x0003] > 0x0005) && ((var0006 < 0x0006) || Func097D(0xFE9B, 0xFE99, 0x019E, 0xFE99, 0x0015))) {
-			0xFE9C->set_item_flag(0x0010);
+			0xFE9C->set_item_flag(DONT_MOVE);
 			UI_end_conversation();
 			var0001 = 0xFE9C->get_object_position();
 			var0001[0x0001] += 0x0005;
@@ -68440,7 +68501,7 @@ void Func06D2 object#(0x6D2) () {
 		if (var0003) {
 			var0003->set_schedule_type(0x000B);
 			var0003->set_alignment(0x0000);
-			var0003->set_item_flag(0x001D);
+			var0003->set_item_flag(SI_TOURNAMENT);
 			var0003->set_npc_id(var0002);
 		}
 		var0002 -= 0x0001;
@@ -68538,19 +68599,19 @@ void Func06D5 object#(0x6D5) () {
 			var0003->remove_item();
 			var0005 = UI_create_new_object(0x0121);
 			if (var0005) {
-				var0005->clear_item_flag(0x0012);
+				var0005->clear_item_flag(TEMPORARY);
 				var0006 = UI_update_last_created(var0004);
 			}
 			var0005 = UI_create_new_object(0x00E0);
 			if (var0005) {
-				var0005->clear_item_flag(0x0012);
+				var0005->clear_item_flag(TEMPORARY);
 				var0006 = UI_update_last_created(var0004);
 			}
 		}
 		var0005 = UI_create_new_object(0x0192);
 		if (var0005) {
 			var0005->set_item_frame(0x0004);
-			var0005->clear_item_flag(0x0012);
+			var0005->clear_item_flag(TEMPORARY);
 			var0006 = UI_update_last_created([0x0750, 0x0416, 0x0000]);
 		}
 		remove_item();
@@ -69087,8 +69148,8 @@ void Func06D9 object#(0x6D9) () {
 			var0008->set_oppressor(var0006);
 			var0006->set_opponent(var0008);
 			var0008->set_opponent(var0006);
-			var0006->set_item_flag(0x001D);
-			var0008->set_item_flag(0x001D);
+			var0006->set_item_flag(SI_TOURNAMENT);
+			var0008->set_item_flag(SI_TOURNAMENT);
 			var0008->set_polymorph(0x02D1);
 			UI_play_sound_effect(0x0051);
 			UI_sprite_effect(0x001A, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x000C, 0xFFFD);
@@ -69478,9 +69539,9 @@ void Func06DF object#(0x6DF) () {
 
 	var0000 = get_item_quality();
 	if (var0000 < 0x0001) {
-		0xFE9C->set_item_flag(0x0025);
+		0xFE9C->set_item_flag(FREEZE);
 	} else {
-		0xFE9C->clear_item_flag(0x0025);
+		0xFE9C->clear_item_flag(FREEZE);
 	}
 }
 
@@ -69498,8 +69559,8 @@ void Func06E0 object#(0x6E0) () {
 		if (var0000[0x0003] < 0x0002) {
 			gflags[0x01A6] = true;
 			Func097F(0xFFCD, "@Ah, 'tis thee...@", 0x0000);
-			0xFE9C->set_item_flag(0x0010);
-			0xFFCD->clear_item_flag(0x001D);
+			0xFE9C->set_item_flag(DONT_MOVE);
+			0xFFCD->clear_item_flag(SI_TOURNAMENT);
 			var0001 = script 0xFFCD {
 				actor frame standing;
 				continue;
@@ -69528,7 +69589,7 @@ void Func06E0 object#(0x6E0) () {
 		}
 		say("\"Of course, I can never allow thee to leave this chamber alive...\"");
 		Func09AD(0xFFCD);
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 	}
 }
 
@@ -69559,7 +69620,7 @@ void Func06E1 object#(0x6E1) () {
 	var0001 = get_object_position();
 	if ((event == 0x0003) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
 		if (gflags[0x0004] == true) {
-			0xFE9C->set_item_flag(0x0010);
+			0xFE9C->set_item_flag(DONT_MOVE);
 			var0002 = get_object_position();
 			var0002[0x0002] -= 0x0007;
 			var0003 = UI_create_new_object2(0x0151, var0002);
@@ -69594,7 +69655,7 @@ void Func06E1 object#(0x6E1) () {
 			say("\"I shall protect thee... I shall take thee beyond all mortal concerns -- into my kingdom of death!\"");
 			UI_remove_npc_face0();
 		}
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		if (var0003) {
 			var0002 = var0003->get_object_position();
 			var0002[0x0001] -= var0002[0x0003] / 0x0002;
@@ -69689,7 +69750,7 @@ void Func06E3 object#(0x6E3) () {
 			abort;
 		}
 		if (var0002 == 0x0001) {
-			0xFE9C->set_item_flag(0x0010);
+			0xFE9C->set_item_flag(DONT_MOVE);
 			Func097F(0xFE9C, "@What...?@", 0x0005);
 			Func097F(0xFE9C, "@NO!@", 0x0028);
 			var0004 = find_nearby(0x010C, 0x000F, 0x0000);
@@ -69770,7 +69831,7 @@ void Func06E3 object#(0x6E3) () {
 			}
 			UI_play_sound_effect(0x0052);
 			gflags[0x0008] = false;
-			0xFE9C->clear_item_flag(0x0010);
+			0xFE9C->clear_item_flag(DONT_MOVE);
 		}
 	}
 }
@@ -70316,12 +70377,12 @@ void Func06E9 object#(0x6E9) () {
 			var0008 = var0006 + var0007;
 			var0009 = UI_create_new_object(0x037F);
 			if (var0009) {
-				var0009->set_item_flag(0x0012);
+				var0009->set_item_flag(TEMPORARY);
 				var000A = UI_update_last_created(Func09B9(var0005[0x0001], (var0005[0x0002] + var0008)));
 			}
 			var000B = UI_create_new_object(0x037F);
 			if (var000B) {
-				var000B->set_item_flag(0x0012);
+				var000B->set_item_flag(TEMPORARY);
 				var000A = UI_update_last_created(Func09B9(var0005[0x0001], (var0005[0x0002] - var0008)));
 			}
 			var0006 += 0x0001;
@@ -70342,7 +70403,7 @@ void Func06E9 object#(0x6E9) () {
 			var0005[0x0002] += var000D;
 			var0009 = UI_create_new_object(0x037F);
 			if (var0009) {
-				var0009->set_item_flag(0x0012);
+				var0009->set_item_flag(TEMPORARY);
 				var000A = UI_update_last_created(Func09B9(var0005[0x0001], var0005[0x0002]));
 			}
 			var0006 += 0x0001;
@@ -70364,19 +70425,19 @@ void Func06EA object#(0x6EA) () {
 		}
 		var0000 = [0xFEFA, 0xFEF9, 0xFEF8];
 		if (!gflags[0x00D5]) {
-			0xFEFA->set_item_flag(0x001D);
+			0xFEFA->set_item_flag(SI_TOURNAMENT);
 			0xFEFA->set_alignment(0x0002);
 			0xFEFA->set_schedule_type(0x0000);
 			Func09AD(0xFEFA);
 		}
 		if (!gflags[0x00D3]) {
-			0xFEF9->set_item_flag(0x001D);
+			0xFEF9->set_item_flag(SI_TOURNAMENT);
 			0xFEF9->set_alignment(0x0002);
 			0xFEF9->set_schedule_type(0x0000);
 			Func09AD(0xFEF9);
 		}
 		if (!gflags[0x00D4]) {
-			0xFEF8->set_item_flag(0x001D);
+			0xFEF8->set_item_flag(SI_TOURNAMENT);
 			0xFEF8->set_alignment(0x0002);
 			0xFEF8->set_schedule_type(0x0000);
 			Func09AD(0xFEF8);
@@ -70841,7 +70902,7 @@ extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, v
 void Func06F7 object#(0x6F7) () {
 	var var0000;
 
-	if ((event == 0x0003) && 0xFFFE->get_item_flag(0x0006)) {
+	if ((event == 0x0003) && 0xFFFE->get_item_flag(IN_PARTY)) {
 		Func097F(0xFFFE, "@I know this place!@", 0x0002);
 		remove_item();
 		var0000 = script 0xFE9C after 12 ticks {
@@ -70977,19 +71038,19 @@ void Func06FA object#(0x6FA) () {
 			};
 			var0016 = Func0992(0x0001, "@Look -- the gates!@", "@The gates are closing!@", true);
 			0xFFAB->set_alignment(0x0002);
-			0xFFAB->set_item_flag(0x001D);
+			0xFFAB->set_item_flag(SI_TOURNAMENT);
 			0xFFAB->move_object([0x0723, 0x0A65]);
 			0xFFAB->set_schedule_type(0x000F);
 			0xFFA9->set_alignment(0x0002);
-			0xFFA9->set_item_flag(0x001D);
+			0xFFA9->set_item_flag(SI_TOURNAMENT);
 			0xFFA9->move_object([0x074C, 0x0A67]);
 			0xFFA9->set_schedule_type(0x000F);
 			0xFFA4->set_alignment(0x0002);
-			0xFFA4->set_item_flag(0x001D);
+			0xFFA4->set_item_flag(SI_TOURNAMENT);
 			0xFFA4->move_object([0x071B, 0x0A66]);
 			0xFFA4->set_schedule_type(0x000F);
 			0xFFA3->set_alignment(0x0002);
-			0xFFA3->set_item_flag(0x001D);
+			0xFFA3->set_item_flag(SI_TOURNAMENT);
 			0xFFA3->move_object([0x0754, 0x0A64]);
 			0xFFA3->set_schedule_type(0x000F);
 		}
@@ -71089,13 +71150,13 @@ void Func06FC object#(0x6FC) () {
 	var0000->set_schedule_type(0x0000);
 	var0000->set_opponent(0xFFFE);
 	var0000->set_oppressor(0xFE9C);
-	var0000->set_item_flag(0x001D);
-	var0000->set_item_flag(0x0012);
+	var0000->set_item_flag(SI_TOURNAMENT);
+	var0000->set_item_flag(TEMPORARY);
 	var0000 = script Func09A0(0x0005, 0x0001) after 20 ticks {
 		nohalt;
 		call Func01E2;
 	};
-	0xFFFE->set_item_flag(0x001D);
+	0xFFFE->set_item_flag(SI_TOURNAMENT);
 	gflags[0x025B] = true;
 }
 
@@ -71142,7 +71203,7 @@ void Func06FD object#(0x6FD) () {
 			var0004->remove_item();
 			if (gflags[0x0229]) {
 				if (gflags[0x022A]) {
-					if ((0xFFAC->get_schedule_type() != 0x000F) || 0xFFAC->get_item_flag(0x001E)) {
+					if ((0xFFAC->get_schedule_type() != 0x000F) || 0xFFAC->get_item_flag(SI_ZOMBIE)) {
 						abort;
 					}
 					0xFFAC->set_npc_id(0x000D);
@@ -71181,7 +71242,7 @@ void Func06FE object#(0x6FE) () {
 	var var0007;
 	var var0008;
 
-	if (0xFE9C->get_item_flag(0x0023)) {
+	if (0xFE9C->get_item_flag(ISPETRA)) {
 		var0000 = UI_get_party_list();
 		for (var0003 in var0000 with var0001 to var0002) {
 			if ((var0003->get_item_shape() != 0x02EB) && (var0003 != 0xFE9C->get_npc_object())) {
@@ -71261,7 +71322,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
 void Func0700 object#(0x700) () {
 	if (gflags[0x00EA] && (!gflags[0x00EB])) {
-		if (0xFFE7->get_item_flag(0x0004)) {
+		if (0xFFE7->get_item_flag(DEAD)) {
 			gflags[0x00EB] = true;
 		} else {
 			Func09AC(0xFFE7, 0xFFFF, 0x0000, 0x0003);
@@ -71311,7 +71372,7 @@ void Func0702 object#(0x702) () {
 	var var0003;
 	var var0004;
 
-	if (0xFFE1->get_item_flag(0x0004) && (event == 0x0003)) {
+	if (0xFFE1->get_item_flag(DEAD) && (event == 0x0003)) {
 		remove_item();
 		abort;
 	}
@@ -71423,7 +71484,7 @@ void Func0703 object#(0x703) () {
 		}
 		var0002 = UI_find_nearby_avatar(0x014E);
 		for (var0005 in var0002 with var0003 to var0004) {
-			var0005->clear_item_flag(0x0020);
+			var0005->clear_item_flag(POLYMORPH);
 		}
 	}
 }
@@ -71593,7 +71654,7 @@ void Func070A object#(0x70A) () {
 	var var0001;
 	var var0002;
 
-	if (0xFE9C->get_item_flag(0x0023)) {
+	if (0xFE9C->get_item_flag(ISPETRA)) {
 		if (gflags[0x0228]) {
 			var0000 = 0xFFE4->set_npc_prop(0x000A, 0x0001);
 			var0000 = 0xFE9C->set_npc_prop(0x000A, 0x0000);
@@ -71613,8 +71674,8 @@ void Func070A object#(0x70A) () {
 			var0002 = UI_die_roll(0x0000, 0x0003);
 			UI_sprite_effect(0x002B, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, var0002, 0x0001);
 		}
-		0xFE9C->clear_item_flag(0x0023);
-		0xFFE4->clear_item_flag(0x001D);
+		0xFE9C->clear_item_flag(ISPETRA);
+		0xFFE4->clear_item_flag(SI_TOURNAMENT);
 	}
 }
 
@@ -71725,7 +71786,7 @@ void Func0710 object#(0x710) () {
 	for (var0005 in var0000 with var0003 to var0004) {
 		var0006 = var0005->get_distance(item);
 		if (var0006 < var0001) {
-			if (0xFE9C->get_item_flag(0x0023)) {
+			if (0xFE9C->get_item_flag(ISPETRA)) {
 				if ((var0005 != 0xFE9C) && ((var0005 != 0xFE9C->get_npc_object()) && (var0005->get_item_shape() != 0x02EB))) {
 					var0001 = var0006;
 					var0002 = var0005;
@@ -71781,7 +71842,7 @@ void Func0711 object#(0x711) () {
 			if (var0004) {
 				var0009 = UI_create_new_object(0x00A0);
 				if (var0009) {
-					var0009->clear_item_flag(0x0012);
+					var0009->clear_item_flag(TEMPORARY);
 					var0009->set_item_frame(0x0008);
 					UI_sprite_effect(0x002F, 0x0702, 0x0276, 0x0000, 0x0000, 0x0000, 0xFFFF);
 					UI_play_sound_effect(0x006C);
@@ -71905,7 +71966,7 @@ void Func0718 object#(0x718) () {
 				for (var0006 in var0003 with var0004 to var0005) {
 					var0007 = var0006->set_last_created();
 					if (var0007) {
-						var0006->set_item_flag(0x000B);
+						var0006->set_item_flag(OKAY_TO_TAKE);
 						var0007 = var0001->give_last_created();
 					}
 				}
@@ -71917,14 +71978,14 @@ void Func0718 object#(0x718) () {
 				var0001->remove_item();
 			}
 		}
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 	}
 	if (event == 0x0003) {
 		var0008 = UI_get_party_list2();
 		if (0xFF68->get_npc_object() in var0008) {
 			0xFF68->remove_from_party();
 			0xFF68->set_schedule_type(0x000F);
-			0xFE9C->set_item_flag(0x0010);
+			0xFE9C->set_item_flag(DONT_MOVE);
 			var0002 = script 0xFF68 {
 				nohalt;
 				say "@The weight of the years!@";
@@ -72192,7 +72253,7 @@ void Func071D object#(0x71D) () {
 	var var0025;
 
 	if (event == 0x000E) {
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		var0000 = Func09A0(0x0000, 0x0001)->get_item_quality();
 		if ((var0000 == 0x0000) || (var0000 == 0x0001)) {
 			var0001 = [0x068E, 0x0100, 0x0000];
@@ -72215,17 +72276,17 @@ void Func071D object#(0x71D) () {
 			gflags[0x02A5] = true;
 			var0003 = UI_create_new_object(0x00D1);
 			if (var0003) {
-				var0003->clear_item_flag(0x0012);
+				var0003->clear_item_flag(TEMPORARY);
 				var0003->set_item_frame(0x0004);
 			}
 			var0003 = UI_create_new_object(0x00D1);
 			if (var0003) {
-				var0003->clear_item_flag(0x0012);
+				var0003->clear_item_flag(TEMPORARY);
 				var0003->set_item_frame(0x0006);
 			}
 			var0003 = UI_create_new_object(0x00D1);
 			if (var0003) {
-				var0003->clear_item_flag(0x0012);
+				var0003->clear_item_flag(TEMPORARY);
 				var0003->set_item_frame(0x0008);
 			}
 			for (var0006 in var0002 with var0004 to var0005) {
@@ -72251,17 +72312,17 @@ void Func071D object#(0x71D) () {
 			gflags[0x02A4] = true;
 			var0003 = UI_create_new_object(0x00D1);
 			if (var0003) {
-				var0003->clear_item_flag(0x0012);
+				var0003->clear_item_flag(TEMPORARY);
 				var0003->set_item_frame(0x0003);
 			}
 			var0003 = UI_create_new_object(0x00D1);
 			if (var0003) {
-				var0003->clear_item_flag(0x0012);
+				var0003->clear_item_flag(TEMPORARY);
 				var0003->set_item_frame(0x0007);
 			}
 			var0003 = UI_create_new_object(0x00D1);
 			if (var0003) {
-				var0003->clear_item_flag(0x0012);
+				var0003->clear_item_flag(TEMPORARY);
 				var0003->set_item_frame(0x0012);
 			}
 			for (var0006 in var0002 with var000C to var000D) {
@@ -72372,7 +72433,7 @@ void Func071D object#(0x71D) () {
 		}
 		var0024 = 0xFE9C->get_distance(var001F);
 		Func097F(0xFE9C, "@That should do it.@", 0x0002);
-		0xFE9C->set_item_flag(0x0010);
+		0xFE9C->set_item_flag(DONT_MOVE);
 		var0001 = var001F->get_object_position();
 		0xFE9C->si_path_run_usecode([var0001[0x0001], (var0001[0x0002] + var0023), 0x0000], 0x000A, item, Func071D, false);
 		var0025 = Func09A0(0x0000, 0x0001);
@@ -72527,7 +72588,7 @@ void Func071F object#(0x71F) () {
 		abort;
 	}
 	if (event == 0x0002) {
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		UI_init_conversation();
 		Func0922(0x0008);
 		gflags[0x02E4] = true;
@@ -72556,7 +72617,7 @@ void Func071F object#(0x71F) () {
 			}
 			var0004 = true;
 		} else {
-			var0005->set_item_flag(0x0012);
+			var0005->set_item_flag(TEMPORARY);
 			var0005->remove_item();
 			var000C = find_nearby(0x039F, 0x0001, 0x0000);
 			if (var000C) {
@@ -72614,7 +72675,7 @@ void Func071F object#(0x71F) () {
 	}
 	if (gflags[0x02A6] && (gflags[0x02A7] && gflags[0x02A8])) {
 		UI_play_sound_effect(0x0077);
-		0xFE9C->set_item_flag(0x0010);
+		0xFE9C->set_item_flag(DONT_MOVE);
 		gflags[0x02B8] = true;
 		var0018 = [0x0687, 0x001C, 0x0000];
 		UI_sprite_effect(0x001A, var0018[0x0001], var0018[0x0002], 0x0005, 0x0005, 0x0000, 0xFFFF);
@@ -72695,7 +72756,7 @@ void Func0720 object#(0x720) () {
 			};
 		}
 		var0003->set_item_frame(0x0006);
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		UI_init_conversation();
 		0xFE9C->set_schedule_type(0x001F);
 		abort;
@@ -72763,7 +72824,7 @@ void Func0720 object#(0x720) () {
 	}
 	if (var0009 && var000A) {
 		Func097F(0xFE9C, "@That did it!@", 0x0000);
-		0xFE9C->set_item_flag(0x0010);
+		0xFE9C->set_item_flag(DONT_MOVE);
 		var0018 = [0x068B, 0x0015, 0x0002];
 		0xFE9C->si_path_run_usecode(var0018, 0x000A, item, Func0720, true);
 		UI_set_path_failure(Func0720, item, 0x000A);
@@ -72883,7 +72944,7 @@ void Func0721 object#(0x721) () {
 			UI_sprite_effect(0x0007, var0008[0x0001], (var0008[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
 			var0016 = UI_create_new_object(0x02C1);
 			if (var0016) {
-				var0016->clear_item_flag(0x0012);
+				var0016->clear_item_flag(TEMPORARY);
 				var0010 = var0016->set_item_quality(0x00F1);
 				var000A = find_nearby(0x00D1, 0x0001, 0x0000);
 				if (var000A) {
@@ -72919,7 +72980,7 @@ void Func0722 object#(0x722) () {
 				var0005 = UI_create_new_object(0x018A);
 				if (var0005) {
 					var0005->set_item_frame(0x0002);
-					var0005->set_item_flag(0x0012);
+					var0005->set_item_flag(TEMPORARY);
 					var0006 = UI_update_last_created([var0001[var0003], var0002[var0003], 0x0000]);
 				}
 				var0003 += 0x0001;
@@ -72931,7 +72992,7 @@ void Func0722 object#(0x722) () {
 				while (var0008 > 0xFFE8) {
 					var0009 = UI_create_new_object(0x0121);
 					if (var0009) {
-						var0009->set_item_flag(0x0012);
+						var0009->set_item_flag(TEMPORARY);
 						var0009->set_item_frame(UI_die_roll(0x0006, 0x000B));
 						UI_play_sound_effect(0x0029);
 						var0006 = UI_update_last_created([(var0007[0x0001] + var0003), (var0007[0x0002] + var0008), 0x0001]);
@@ -72950,7 +73011,7 @@ void Func0722 object#(0x722) () {
 				var0005 = UI_create_new_object(0x018A);
 				if (var0005) {
 					var0005->set_item_frame(0x0002);
-					var0005->set_item_flag(0x0012);
+					var0005->set_item_flag(TEMPORARY);
 					var0006 = UI_update_last_created([var0001[var0003], var0002[var0003], 0x0000]);
 				}
 				var0003 += 0x0001;
@@ -72962,7 +73023,7 @@ void Func0722 object#(0x722) () {
 				while (var0008 > 0xFFE8) {
 					var0009 = UI_create_new_object(0x0121);
 					if (var0009) {
-						var0009->set_item_flag(0x0012);
+						var0009->set_item_flag(TEMPORARY);
 						UI_play_sound_effect(0x0029);
 						var0009->set_item_frame(UI_die_roll(0x0000, 0x0005));
 						var0006 = UI_update_last_created([(var0007[0x0001] + var0003), (var0007[0x0002] + var0008), 0x0001]);
@@ -73165,7 +73226,7 @@ void Func0724 object#(0x724) () {
 			}
 			var0005 = UI_create_new_object(var0004);
 			if (var0005) {
-				var0005->clear_item_flag(0x0012);
+				var0005->clear_item_flag(TEMPORARY);
 				var0006 = UI_update_last_created(var0003);
 				var0006 = script var0005 after 12 ticks {
 					nohalt;
@@ -73187,7 +73248,7 @@ void Func0724 object#(0x724) () {
 					var0008 += 0x0001;
 					if (var000C) {
 						var000C->set_item_frame(var000B[var0008]);
-						var000C->clear_item_flag(0x0012);
+						var000C->clear_item_flag(TEMPORARY);
 						var0006 = UI_update_last_created([var0009[var0008], var000A[var0008], 0x0000]);
 					}
 				}
@@ -73203,7 +73264,7 @@ void Func0724 object#(0x724) () {
 					var0008 += 0x0001;
 					if (var000C) {
 						var000C->set_item_frame(var000B[var0008]);
-						var000C->clear_item_flag(0x0012);
+						var000C->clear_item_flag(TEMPORARY);
 						var0006 = UI_update_last_created([var0009[var0008], var000A[var0008], 0x0001]);
 					}
 				}
@@ -73219,7 +73280,7 @@ void Func0724 object#(0x724) () {
 					var0008 += 0x0001;
 					if (var000C) {
 						var000C->set_item_frame(var000B[var0008]);
-						var000C->clear_item_flag(0x0012);
+						var000C->clear_item_flag(TEMPORARY);
 						var0006 = UI_update_last_created([var0009[var0008], var000A[var0008], 0x0002]);
 					}
 				}
@@ -73235,7 +73296,7 @@ void Func0724 object#(0x724) () {
 					var0008 += 0x0001;
 					if (var000C) {
 						var000C->set_item_frame(var000B[var0008]);
-						var000C->clear_item_flag(0x0012);
+						var000C->clear_item_flag(TEMPORARY);
 						var0006 = UI_update_last_created([var0009[var0008], var000A[var0008], 0x0003]);
 					}
 				}
@@ -73299,7 +73360,7 @@ void Func0725 object#(0x725) () {
 				nohalt;
 				call Func07D6;
 			};
-			0xFE9C->set_item_flag(0x0010);
+			0xFE9C->set_item_flag(DONT_MOVE);
 			var0003 = get_object_position();
 			0xFE9C->obj_sprite_effect(0x001A, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
 			0xFE9C->obj_sprite_effect(0x0007, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -73336,7 +73397,7 @@ void Func0725 object#(0x725) () {
 		if (var0004 == 0x0001) {
 			UI_fade_palette(0x000C, 0x0001, 0x0000);
 			0xFE9C->move_object([0x093C, 0x0046, 0x0001]);
-			0xFE9C->clear_item_flag(0x0010);
+			0xFE9C->clear_item_flag(DONT_MOVE);
 			gflags[0x0009] = true;
 			var0002 = script item after 10 ticks {
 				nohalt;
@@ -73485,7 +73546,7 @@ void Func0728 object#(0x728) () {
 				if (!var0001) {
 					var0007 = UI_create_new_object(0x02D6);
 					if (var0007) {
-						var0007->clear_item_flag(0x0012);
+						var0007->clear_item_flag(TEMPORARY);
 						var0007->set_item_frame(UI_die_roll(0x0000, 0x001A));
 						var0008 = UI_update_last_created(var0000);
 					}
@@ -73495,7 +73556,7 @@ void Func0728 object#(0x728) () {
 		if (var0002 == 0x0001) {
 			var0007 = UI_create_new_object(0x014C);
 			if (var0007) {
-				var0007->clear_item_flag(0x0012);
+				var0007->clear_item_flag(TEMPORARY);
 				UI_play_sound_effect(0x006A);
 				if (UI_die_roll(0x0001, 0x0004) > 0x0002) {
 					var0007->set_item_frame(0x0009);
@@ -73717,7 +73778,7 @@ void Func072B object#(0x72B) () {
 		var0004 = Func099B(0xFE9C, 0x0001, 0x0280, 0x0000, 0x0000, 0x0000, false);
 		var0004 = Func099B(0xFE9C, 0x0001, 0x027E, 0x0000, 0x0000, 0x0000, false);
 		var0004 = Func099B(0xFE9C, 0x0001, 0x03EC, 0x0000, 0x0002, 0x0000, false);
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		if (gflags[0x000A]) {
 			var0004 = Func099B(0xFE9C, 0x0001, 0x00D1, 0x0000, 0x0014, 0x0000, false);
 			gflags[0x000A] = false;
@@ -73756,12 +73817,12 @@ void Func072B object#(0x72B) () {
 		}
 		if (var0000 && (var0001 && var0002)) {
 			0xFE9C->set_item_frame(0x0000);
-			0xFE9C->set_item_flag(0x0010);
+			0xFE9C->set_item_flag(DONT_MOVE);
 			if (!gflags[0x02B1]) {
 				var0011 = UI_create_new_object(0x00D1);
 				if (var0011) {
 					var0011->set_item_frame(0x0014);
-					var0011->clear_item_flag(0x0012);
+					var0011->clear_item_flag(TEMPORARY);
 					var0004 = find_nearby(0x02B0, 0x000A, 0x00B0);
 					for (var0014 in var0004 with var0012 to var0013) {
 						var0015 = var0014->get_object_position();
@@ -73920,7 +73981,7 @@ void Func0730 object#(0x730) () {
 
 	if ((event == 0x0003) && gflags[0x0004]) {
 		var0000 = UI_create_new_object(0x0320);
-		var0000->clear_item_flag(0x0012);
+		var0000->clear_item_flag(TEMPORARY);
 		UI_play_sound_effect(0x003E);
 		if (var0000) {
 			var0000->set_item_frame(0x0004);
@@ -73941,10 +74002,10 @@ void Func0730 object#(0x730) () {
 				}
 				if (var0002 == 0x0005) {
 					var0001->set_item_frame(0x0001);
-					var0001->clear_item_flag(0x0012);
+					var0001->clear_item_flag(TEMPORARY);
 					var0003 = var0000->give_last_created();
 				}
-				var0001->clear_item_flag(0x0012);
+				var0001->clear_item_flag(TEMPORARY);
 				var0003 = var0000->give_last_created();
 			}
 			var0004 = get_object_position();
@@ -74089,7 +74150,7 @@ void Func0738 object#(0x738) () {
 	var var0004;
 
 	if (event == 0x0003) {
-		var0000 = 0xFF4A->get_item_flag(0x001C);
+		var0000 = 0xFF4A->get_item_flag(MET);
 		if (var0000) {
 			var0001 = find_nearby(0x010F, 0x0006, 0x0000);
 			for (var0004 in var0001 with var0002 to var0003) {
@@ -74118,7 +74179,7 @@ void Func0739 object#(0x739) () {
 	var var0008;
 
 	if (event == 0x000E) {
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		UI_init_conversation();
 		Func097F(0xFE9C, "@I can do this...@", 0x0000);
 		Func097F(0xFE9C, "@I changed my mind...@", 0x0010);
@@ -74169,7 +74230,7 @@ void Func0739 object#(0x739) () {
 				UI_play_sound_effect(0x001F);
 				var0006 = Func09AB(0x010E, 0x000E, 0x0048, false, var0005);
 			}
-			0xFE9C->clear_item_flag(0x0010);
+			0xFE9C->clear_item_flag(DONT_MOVE);
 			UI_init_conversation();
 			Func097F(0xFE9C, "@I have a bad feeling...@", 0x0007);
 		}
@@ -74187,7 +74248,7 @@ void Func073A object#(0x73A) () {
 
 	if (event == 0x0003) {
 		var0000 = get_object_position();
-		if (!0xFFD4->get_item_flag(0x0006)) {
+		if (!0xFFD4->get_item_flag(IN_PARTY)) {
 			0xFFD4->move_object([0x0924, 0x01CF, 0x0000]);
 			0xFFD4->set_npc_id(0x0001);
 			UI_sprite_effect(0x0007, 0x0924, 0x01CF, 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -74197,7 +74258,7 @@ void Func073A object#(0x73A) () {
 		0xFFD4->set_opponent(0xFE9C);
 		0xFFD4->set_attack_mode(0x0002);
 		0xFFD4->set_oppressor(0xFE9C);
-		0xFFD4->set_item_flag(0x001D);
+		0xFFD4->set_item_flag(SI_TOURNAMENT);
 		gflags[0x024E] = true;
 		0xFFD4->item_say("@This should stop thee!@");
 		var0001 = UI_create_new_object(0x0300);
@@ -74220,7 +74281,7 @@ void Func073A object#(0x73A) () {
 		0xFEF0->set_opponent(0xFE9C);
 		0xFEF0->set_attack_mode(0x0002);
 		0xFEF0->set_oppressor(0xFE9C);
-		0xFEF0->clear_item_flag(0x001D);
+		0xFEF0->clear_item_flag(SI_TOURNAMENT);
 		0xFF80->move_object([0x0928, 0x01CF, 0x0000]);
 		UI_sprite_effect(0x0007, 0x0928, 0x01CF, 0x0000, 0x0000, 0x0000, 0xFFFF);
 		0xFF80->set_schedule_type(0x0000);
@@ -74228,7 +74289,7 @@ void Func073A object#(0x73A) () {
 		0xFF80->set_opponent(0xFE9C);
 		0xFF80->set_attack_mode(0x0002);
 		0xFF80->set_oppressor(0xFE9C);
-		0xFF80->clear_item_flag(0x001D);
+		0xFF80->clear_item_flag(SI_TOURNAMENT);
 		0xFF81->move_object([0x092A, 0x01CF, 0x0000]);
 		UI_sprite_effect(0x0007, 0x092A, 0x01CF, 0x0000, 0x0000, 0x0000, 0xFFFF);
 		0xFF81->set_schedule_type(0x0000);
@@ -74236,7 +74297,7 @@ void Func073A object#(0x73A) () {
 		0xFF81->set_opponent(0xFE9C);
 		0xFF81->set_attack_mode(0x0002);
 		0xFF81->set_oppressor(0xFE9C);
-		0xFF81->clear_item_flag(0x001D);
+		0xFF81->clear_item_flag(SI_TOURNAMENT);
 		var0005 = 0xFFD4->get_npc_object();
 		var0002 = script var0005 after 25 ticks {
 			nohalt;
@@ -74287,17 +74348,17 @@ void Func073B object#(0x73B) () {
 		var0001 = UI_create_new_object2(0x013E, [var0000[0x0001], (var0000[0x0002] + 0x0001), var0000[0x0003]]);
 		var0001->set_schedule_type(0x000F);
 		var0001->set_alignment(0x0001);
-		var0001->set_item_flag(0x001D);
+		var0001->set_item_flag(SI_TOURNAMENT);
 		var0002 = Func0992(0x0001, "@We must hurry!@", "@I must hurry!@", true);
-		if (!0xFFFD->get_item_flag(0x0006)) {
+		if (!0xFFFD->get_item_flag(IN_PARTY)) {
 			0xFFFD->add_to_party();
 			Func097F(0xFFFD, "@Wait, Avatar!@", 0x0000);
 		}
-		if (!0xFFFE->get_item_flag(0x0006)) {
+		if (!0xFFFE->get_item_flag(IN_PARTY)) {
 			0xFFFE->add_to_party();
 			Func097F(0xFFFE, "@Hold, Avatar!@", 0x0000);
 		}
-		if (!0xFFFF->get_item_flag(0x0006)) {
+		if (!0xFFFF->get_item_flag(IN_PARTY)) {
 			0xFFFF->add_to_party();
 			Func097F(0xFFFF, "@Stop, Avatar!@", 0x0000);
 		}
@@ -74339,7 +74400,7 @@ void Func073B object#(0x73B) () {
 			nohalt;
 			call Func061D;
 		};
-		0xFE9C->set_item_flag(0x0010);
+		0xFE9C->set_item_flag(DONT_MOVE);
 		UI_end_conversation();
 		abort;
 	}
@@ -74395,7 +74456,7 @@ void Func073B object#(0x73B) () {
 			say("\"No... The banes, they have... Oh, what have I done!\"");
 			say("\"I have been tricked! Avatar! I beseech thee! Help me before...\"");
 			UI_remove_npc_face0();
-			var0001->clear_item_flag(0x001D);
+			var0001->clear_item_flag(SI_TOURNAMENT);
 			Func08C0(false);
 			var0001->obj_sprite_effect(0x002A, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
 			var0001->obj_sprite_effect(0x001B, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -74489,7 +74550,7 @@ void Func073B object#(0x73B) () {
 					var0002 = UI_update_last_created(var0000);
 				}
 			}
-			var0001->clear_item_flag(0x001D);
+			var0001->clear_item_flag(SI_TOURNAMENT);
 			var0001->kill_npc();
 			var0002 = var0003->set_item_quality(0x0003);
 			var0002 = script var0003 {
@@ -74564,7 +74625,7 @@ void Func073B object#(0x73B) () {
 			};
 		}
 		if (var0004 == 0x0004) {
-			if (0xFFFE->get_item_flag(0x0006)) {
+			if (0xFFFE->get_item_flag(IN_PARTY)) {
 				var0000 = 0xFFFE->get_object_position();
 				var000D = 0xFFFE->get_item_frame();
 				0xFFFE->remove_from_party();
@@ -74574,11 +74635,11 @@ void Func073B object#(0x73B) () {
 				var000E->set_item_frame(var000D);
 				var000E->set_schedule_type(0x000F);
 				UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-				0xFFFE->set_item_flag(0x0004);
+				0xFFFE->set_item_flag(DEAD);
 			}
 		}
 		if (var0004 == 0x0005) {
-			if (0xFFFF->get_item_flag(0x0006)) {
+			if (0xFFFF->get_item_flag(IN_PARTY)) {
 				var0000 = 0xFFFF->get_object_position();
 				var000D = 0xFFFF->get_item_frame();
 				0xFFFF->remove_from_party();
@@ -74588,11 +74649,11 @@ void Func073B object#(0x73B) () {
 				var000E->set_item_frame(var000D);
 				var000E->set_schedule_type(0x000F);
 				UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-				0xFFFF->set_item_flag(0x0004);
+				0xFFFF->set_item_flag(DEAD);
 			}
 		}
 		if (var0004 == 0x0006) {
-			if (0xFFFD->get_item_flag(0x0006)) {
+			if (0xFFFD->get_item_flag(IN_PARTY)) {
 				var0000 = 0xFFFD->get_object_position();
 				var000D = 0xFFFD->get_item_frame();
 				0xFFFD->remove_from_party();
@@ -74602,7 +74663,7 @@ void Func073B object#(0x73B) () {
 				var000E->set_item_frame(var000D);
 				var000E->set_schedule_type(0x000F);
 				UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-				0xFFFD->set_item_flag(0x0004);
+				0xFFFD->set_item_flag(DEAD);
 			}
 		}
 		if (var0004 == 0x0007) {
@@ -74716,7 +74777,7 @@ void Func073B object#(0x73B) () {
 				call Func0377;
 			};
 			var0002 = var0003->set_item_quality(0x0000);
-			0xFE9C->clear_item_flag(0x0010);
+			0xFE9C->clear_item_flag(DONT_MOVE);
 			UI_init_conversation();
 			UI_set_weather(0x0000);
 		}
@@ -74846,7 +74907,7 @@ void Func0745 object#(0x745) () {
 			if (var0007) {
 				var0007->set_npc_id(0x0001);
 				var0007->set_schedule_type(0x0003);
-				var0007->clear_item_flag(0x0001);
+				var0007->clear_item_flag(ASLEEP);
 			}
 		}
 	}
@@ -74905,7 +74966,7 @@ void Func0759 object#(0x759) () {
 		} else {
 			UI_sprite_effect(0x0029, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_sprite_effect(0x001A, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-			if (var0002->get_item_flag(0x0006)) {
+			if (var0002->get_item_flag(IN_PARTY)) {
 				var0002->remove_from_party();
 			}
 			var0002->remove_npc();
@@ -75010,7 +75071,7 @@ void Func075A object#(0x75A) () {
 	var var0002;
 
 	if (event == 0x0003) {
-		0xFE9C->set_item_flag(0x0010);
+		0xFE9C->set_item_flag(DONT_MOVE);
 		UI_end_conversation();
 		0xFE9C->clear_item_say();
 		var0000 = 0xFE9C->get_object_position();
@@ -75071,7 +75132,7 @@ void Func075B object#(0x75B) () {
 		UI_sprite_effect(0x0012, (var0002[0x0001] - 0x0003), (var0002[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, 0xFFFF);
 		var0000->set_item_frame(0x0001);
 		var0003 = var0000->set_item_quality(0x000C);
-		var0000->clear_item_flag(0x0012);
+		var0000->clear_item_flag(TEMPORARY);
 		gflags[0x0225] = true;
 	}
 }
@@ -75111,7 +75172,7 @@ void Func075E object#(0x75E) () {
 		var0002 = UI_create_new_object(0x02D8);
 		if (var0002) {
 			var0002->set_item_frame(0x0000);
-			var0002->set_item_flag(0x0012);
+			var0002->set_item_flag(TEMPORARY);
 			var0003 = var0001 * 0x0002;
 			var0004 = UI_update_last_created([var0000[(var0003 - 0x0001)], var0000[var0003], 0x0000]);
 			UI_sprite_effect(0x0015, var0000[(var0003 - 0x0001)], var0000[var0003], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -75254,7 +75315,7 @@ void Func0761 object#(0x761) () {
 			var0008 = UI_die_roll(0x0005, 0x000F);
 			var0006 = var0007->set_item_quality(var0008);
 			var0009 = UI_update_last_created(var0005);
-			var0007->set_item_flag(0x0012);
+			var0007->set_item_flag(TEMPORARY);
 			UI_play_sound_effect(0x0029);
 		}
 	}
@@ -75291,7 +75352,7 @@ void Func0762 object#(0x762) () {
 	if (var0004) {
 		var0005 = UI_update_last_created(var0001);
 		UI_play_sound_effect(var0003);
-		var0004->clear_item_flag(0x0012);
+		var0004->clear_item_flag(TEMPORARY);
 	}
 }
 
@@ -75376,7 +75437,7 @@ void Func0764 object#(0x764) () {
 	if (var0001) {
 		var0002 = UI_update_last_created(var0000);
 		var0001->set_item_frame(0x0004);
-		var0001->clear_item_flag(0x0012);
+		var0001->clear_item_flag(TEMPORARY);
 	}
 }
 
@@ -75502,7 +75563,7 @@ void Func0766 object#(0x766) () {
 	var var0011;
 
 	if (event == 0x0002) {
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		abort;
 	}
 	if (event == 0x0003) {
@@ -75522,7 +75583,7 @@ void Func0766 object#(0x766) () {
 			}
 		}
 		if (var0002) {
-			0xFE9C->set_item_flag(0x0010);
+			0xFE9C->set_item_flag(DONT_MOVE);
 			var0008 = script 0xFE9C after 50 ticks {
 				nohalt;
 				call Func0766;
@@ -75536,13 +75597,13 @@ void Func0766 object#(0x766) () {
 			}
 		} else {
 			var000E = UI_create_new_object(0x0320);
-			var000E->clear_item_flag(0x0012);
+			var000E->clear_item_flag(TEMPORARY);
 			var000E->set_item_frame(0x0004);
 			var0008 = UI_update_last_created([0x0A0B, 0x0AB4, 0x0000]);
 			var0009 = var000E;
 		}
 		if (var0009) {
-			0xFE9C->clear_item_flag(0x0000);
+			0xFE9C->clear_item_flag(INVISIBLE);
 			var000F = 0x0000;
 			var000A = 0xFE9C->get_cont_items(0xFE99, 0xFE99, 0xFE99);
 			while (var000F < 0x0002) {
@@ -75772,8 +75833,8 @@ void Func0768 object#(0x768) () {
 				var0004->Func07D2();
 				var0004->set_npc_id(var0002);
 				var0004->set_alignment(0x0002);
-				var0004->clear_item_flag(0x0012);
-				var0004->clear_item_flag(0x001D);
+				var0004->clear_item_flag(TEMPORARY);
+				var0004->clear_item_flag(SI_TOURNAMENT);
 				var0004->set_npc_id(var0002 + 0x000A);
 				var0006 = var0004->get_npc_prop(0x0000);
 				var0007 = 0x000B - var0006;
@@ -75883,7 +75944,7 @@ void Func0769 object#(0x769) () {
 	if (event == 0x0003) {
 		var0000 = UI_create_new_object2(0x03D5, [0x0BC7, 0x0A0C, 0x0001]);
 		if (var0000) {
-			var0000->clear_item_flag(0x0012);
+			var0000->clear_item_flag(TEMPORARY);
 			var0001 = Func099B(var0000, 0x0001, 0x0281, 0x00E6, 0x0007, 0x0000, false);
 			var0001 = Func099B(var0000, 0x0001, 0x0281, 0x00DF, 0x0009, 0x0000, false);
 			var0000->set_alignment(0x0002);
@@ -75935,8 +75996,8 @@ void Func076A object#(0x76A) () {
 			var0002->set_alignment(0x0000);
 			var0002->set_schedule_type(0x000F);
 			var0002->set_npc_id(var0000);
-			var0002->set_item_flag(0x0012);
-			var0002->set_item_flag(0x001D);
+			var0002->set_item_flag(TEMPORARY);
+			var0002->set_item_flag(SI_TOURNAMENT);
 			var0003 = var0002->get_npc_prop(0x0000);
 			var0004 = 0x000B - var0003;
 			var0005 = var0002->set_npc_prop(0x0000, var0004);
@@ -76033,7 +76094,7 @@ void Func077E object#(0x77E) () {
 				nohalt;
 				say "I live!";
 			};
-			if (!0xFFDD->get_item_flag(0x0004)) {
+			if (!0xFFDD->get_item_flag(DEAD)) {
 				gflags[0x0007] = true;
 				0xFFDD->move_object([0x0813, 0x053A, 0x0000]);
 				UI_sprite_effect(0x0007, (var0000[0x0001] - 0x0002), (var0000[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -76189,7 +76250,7 @@ void Func0780 object#(0x780) () {
 						call Func02BE;
 					};
 				}
-				0xFE9C->clear_item_flag(0x0010);
+				0xFE9C->clear_item_flag(DONT_MOVE);
 				UI_init_conversation();
 				abort;
 			}
@@ -76199,7 +76260,7 @@ void Func0780 object#(0x780) () {
 				UI_play_sound_effect(0x0029);
 				var0006 = UI_create_new_object(0x037F);
 				if (var0006) {
-					var0006->clear_item_flag(0x0012);
+					var0006->clear_item_flag(TEMPORARY);
 					var0006->set_item_frame(UI_die_roll(0x0001, 0x0002));
 					var0002 = UI_update_last_created([var0004[var0001], var0005[var0001], 0x0001]);
 				}
@@ -76293,7 +76354,7 @@ void Func0795 object#(0x795) () {
 		for (var000B in var0007 with var0009 to var000A) {
 			var0005 = UI_create_new_object(0x0390);
 			if (var0005) {
-				var0005->set_item_flag(0x0012);
+				var0005->set_item_flag(TEMPORARY);
 				var0005->set_item_frame(var000B);
 				var000C = UI_update_last_created(get_object_position());
 			}
@@ -76347,9 +76408,9 @@ void Func0797 object#(0x797) () {
 		var0000 = find_nearby(0xFE99, 0x0028, 0x0008);
 		var0001 = Func098D();
 		for (var0004 in var0000 with var0002 to var0003) {
-			if (!var0004->get_item_flag(0x0006)) {
+			if (!var0004->get_item_flag(IN_PARTY)) {
 				if (!Func095F(var0004->get_npc_number(), var0001)) {
-					var0004->clear_item_flag(0x0001);
+					var0004->clear_item_flag(ASLEEP);
 					Func09AD(var0004);
 				}
 			}
@@ -76380,7 +76441,7 @@ void Func0798 object#(0x798) () {
 		if (var0002 == 0x0000) {
 			var0002 = 0x001E;
 		}
-		var0003 = get_item_flag(0x0006);
+		var0003 = get_item_flag(IN_PARTY);
 		for (var0006 in var0000 with var0004 to var0005) {
 			if ((!var0003) || (!(var0006 in var0001))) {
 				var0007 = 0x0000;
@@ -76522,7 +76583,7 @@ void Func079B object#(0x79B) () {
 			if (!UI_roll_to_win(var0003->get_npc_prop(0x0000), get_item_quality())) {
 				var0004 = var0003->get_npc_object();
 				var0004->Func0620();
-				var0004->set_item_flag(0x0001);
+				var0004->set_item_flag(ASLEEP);
 				var0005 = script var0004 after 100 ticks {
 					nohalt;
 					call Func061F;
@@ -76543,7 +76604,7 @@ void Func079C object#(0x79C) () {
 		var0000 = UI_get_party_list();
 		for (var0003 in var0000 with var0001 to var0002) {
 			if (!UI_roll_to_win(var0003->get_npc_prop(0x0000), get_item_quality())) {
-				var0003->get_npc_object()->set_item_flag(0x0008);
+				var0003->get_npc_object()->set_item_flag(POISONED);
 			}
 		}
 	}
@@ -76564,7 +76625,7 @@ void Func079D object#(0x79D) () {
 		var0000 = UI_get_party_list();
 		for (var0003 in var0000 with var0001 to var0002) {
 			if (!UI_roll_to_win(var0003->get_npc_prop(0x0000), get_item_quality())) {
-				var0003->get_npc_object()->set_item_flag(0x0007);
+				var0003->get_npc_object()->set_item_flag(PARALYZED);
 				var0004 = var0003->get_npc_object();
 				var0004->Func0620();
 				var0005 = script var0004 after 100 ticks {
@@ -76869,7 +76930,7 @@ void Func07AB object#(0x7AB) () {
 			abort;
 		}
 		var0000 = [0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2A, 0xFF30, 0xFF2E];
-		if (0xFF29->get_item_flag(0x001C)) {
+		if (0xFF29->get_item_flag(MET)) {
 			var0000 &= 0xFF29;
 		}
 		var0001 = 0x0005;
@@ -77144,7 +77205,7 @@ void Func07AF object#(0x7AF) () {
 				if ((var0005 == 0x0118) || ((var0005 == 0x0119) || ((var0005 == 0x011F) || ((var0005 == 0x0198) || ((var0005 == 0x01A8) || ((var0005 == 0x020F) || (var0005 == 0x0327))))))) {
 					var0004->remove_item();
 				} else if (var0004->set_last_created()) {
-					var0004->set_item_flag(0x000B);
+					var0004->set_item_flag(OKAY_TO_TAKE);
 					var0006 = UI_update_last_created(var0000);
 					if (!var0006) {
 						var0006 = UI_update_last_created([(var0000[0x0001] - 0x0002), var0000[0x0002], var0000[0x0003]]);
@@ -77376,7 +77437,7 @@ void Func07B3 object#(0x7B3) () {
 	var0002 = find_nearby(0x03C1, 0x0064, 0x0010);
 	if (var0000 == 0x0002) {
 		if (var0002) {
-			0xFE9C->set_item_flag(0x0010);
+			0xFE9C->set_item_flag(DONT_MOVE);
 			var0003 = Func0992(0x0001, "@We should find a seat.@", "@I should sit.@", true);
 			var0003 = Func08E7(var0002);
 			if (var0003) {
@@ -77398,19 +77459,19 @@ void Func07B3 object#(0x7B3) () {
 			if (var0004) {
 				var0004->set_item_frame(0x0000);
 				var0003 = var0004->set_item_quality(0x0000);
-				var0004->clear_item_flag(0x0012);
+				var0004->clear_item_flag(TEMPORARY);
 				var0003 = UI_update_last_created([0x0552, 0x08A7, 0x0002]);
 			}
 			var0004 = UI_create_new_object(0x025F);
 			if (var0004) {
-				var0004->clear_item_flag(0x0012);
+				var0004->clear_item_flag(TEMPORARY);
 				var0003 = var0004->set_item_quality(0x0000);
 				var0004->set_item_frame(0x0001);
 				var0003 = UI_update_last_created([0x0564, 0x08A7, 0x0002]);
 			}
 			var0004 = UI_create_new_object(0x025F);
 			if (var0004) {
-				var0004->clear_item_flag(0x0012);
+				var0004->clear_item_flag(TEMPORARY);
 				var0003 = var0004->set_item_quality(0x000F);
 				var0004->set_item_frame(0x0002);
 				var0003 = UI_update_last_created([0x056E, 0x08A4, 0x0001]);
@@ -77422,7 +77483,7 @@ void Func07B3 object#(0x7B3) () {
 				var0009->set_new_schedules([0x0000], [0x001D], [0x055B, 0x08A7]);
 				var0009->set_schedule_type(0x001D);
 			}
-			0xFFDB->clear_item_flag(0x0024);
+			0xFFDB->clear_item_flag(CAN_FLY);
 			0xFFD8->set_npc_id(0x0004);
 			var0000 = 0x0004;
 			var0003 = script item after var0001 ticks {
@@ -77795,7 +77856,7 @@ void Func07D5 object#(0x7D5) () {
 		}
 		UI_remove_npc_face0();
 		UI_play_sound_effect(0x0082);
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		UI_set_weather(0x0000);
 		gflags[0x0007] = false;
 		gflags[0x0008] = false;
@@ -77852,12 +77913,12 @@ void Func07D8 object#(0x7D8) () {
 		var0000 = 0xFE9C->find_nearby(0x019E, 0x000A, 0x0000);
 		if (var0000) {
 			if (var0000->get_item_frame() == 0x0010) {
-				var0000->clear_item_flag(0x0012);
+				var0000->clear_item_flag(TEMPORARY);
 			}
 		}
 		0xFFEF->remove_npc();
 		0xFFB7->remove_npc();
-		0xFFB7->set_item_flag(0x0004);
+		0xFFB7->set_item_flag(DEAD);
 		Func09AC(0xFFC2, 0x0366, 0x0AA9, 0x000F);
 		Func09AC(0xFF6A, 0x03B6, 0x0A54, 0x000F);
 		Func09AC(0xFFB0, 0x0323, 0x0ABC, 0x000F);
@@ -77902,7 +77963,7 @@ void Func07D8 object#(0x7D8) () {
 		0xFFF1->run_schedule();
 		0xFFED->run_schedule();
 		0xFFFC->run_schedule();
-		if (0xFF58->get_item_flag(0x0004)) {
+		if (0xFF58->get_item_flag(DEAD)) {
 			0xFF58->resurrect_npc();
 			gflags[0x0149] = true;
 		}
@@ -77927,7 +77988,7 @@ void Func07D8 object#(0x7D8) () {
 		0xFFC9->set_polymorph(0x0294);
 		0xFFC9->move_object([0x0619, 0x05B9]);
 		Func09AC(0xFFC9, 0x0619, 0x05B9, 0x000C);
-		if (0xFFC6->get_item_flag(0x001C)) {
+		if (0xFFC6->get_item_flag(MET)) {
 			var0001 = 0xFFC6->add_cont_items(0x0001, 0x0268, 0x0005, 0x0009, 0x0000);
 			var0001 = 0xFFC6->add_cont_items(0x0001, 0x0268, 0x0005, 0x0009, 0x0000);
 			var0001 = 0xFFC6->add_cont_items(0x0001, 0x0282, 0x007C, 0x0004, 0x0000);
@@ -77967,7 +78028,7 @@ void Func07D9 object#(0x7D9) () {
 			var0001 = var0000->get_object_position();
 			var0002 = UI_create_new_object(0x0121);
 			if (var0002) {
-				var0002->set_item_flag(0x0012);
+				var0002->set_item_flag(TEMPORARY);
 				var0003 = UI_update_last_created(var0001);
 				if (var0003) {
 					var0003 = script var0002 after 1 ticks {
@@ -77985,7 +78046,7 @@ void Func07D9 object#(0x7D9) () {
 		};
 		var0005 = 0xFE9C->find_nearby(0x037F, 0x0014, 0x0000);
 		for (var0002 in var0005 with var0006 to var0007) {
-			var0002->set_item_flag(0x0012);
+			var0002->set_item_flag(TEMPORARY);
 		}
 	} else {
 		var0004 = Func09A0(0x0000, 0x0001);
@@ -78058,7 +78119,7 @@ void Func07DB object#(0x7DB) () {
 		0xFFC1->remove_npc();
 		var0002 = UI_create_new_object2(0x012E, var0000);
 		var0002->set_npc_id(0x000F);
-		var0002->set_item_flag(0x001D);
+		var0002->set_item_flag(SI_TOURNAMENT);
 		var0002->set_schedule_type(0x000C);
 	}
 }
@@ -78087,8 +78148,8 @@ void Func07DC object#(0x7DC) () {
 
 	if (item == Func09A0(0x0001, 0x0003)) {
 		var0000 = UI_get_party_list();
-		0xFE9C->set_item_flag(0x0010);
-		0xFE9C->clear_item_flag(0x0025);
+		0xFE9C->set_item_flag(DONT_MOVE);
+		0xFE9C->clear_item_flag(FREEZE);
 		UI_end_conversation();
 		UI_play_sound_effect(0x0082);
 		for (var0003 in var0000 with var0001 to var0002) {
@@ -78146,7 +78207,7 @@ void Func07DC object#(0x7DC) () {
 		abort;
 	}
 	if (gflags[0x0187]) {
-		if (gflags[0x0172] || (gflags[0x0171] || 0xFE9C->get_item_flag(0x0010))) {
+		if (gflags[0x0172] || (gflags[0x0171] || 0xFE9C->get_item_flag(DONT_MOVE))) {
 			abort;
 		}
 		var000C = script Func09A0(0x0001, 0x0004) after UI_get_random(0x02EE) ticks {
@@ -78192,7 +78253,7 @@ void Func07DE object#(0x7DE) () {
 		if (Func0994() == 0x0002) {
 			var0000 = [0x0974, 0x0470, 0x0000];
 			var0001 = [0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E];
-			if (0xFF29->get_item_flag(0x001C)) {
+			if (0xFF29->get_item_flag(MET)) {
 				var0001 &= 0xFF29;
 			}
 			var0002 = UI_get_random(0x0008);
@@ -78345,7 +78406,7 @@ void Func07DF object#(0x7DF) () {
 						var0003 = UI_create_new_object2(0x017D, var0000);
 						var0004 = var0003->set_last_created();
 						var0003->set_polymorph(0x017D);
-						var0003->clear_item_flag(0x001D);
+						var0003->clear_item_flag(SI_TOURNAMENT);
 						var0000 = [0x0976, 0x0567, 0x0000];
 					}
 				}
@@ -78416,12 +78477,12 @@ void Func07DF object#(0x7DF) () {
 					var0000 = [0x0A15, 0x0557, 0x0000];
 				}
 				if (var0000) {
-					if ((get_item_quality() == 0x00CF) && ((gflags[0x0239] == false) && 0xFF58->get_item_flag(0x0006))) {
+					if ((get_item_quality() == 0x00CF) && ((gflags[0x0239] == false) && 0xFF58->get_item_flag(IN_PARTY))) {
 						0xFE9B->move_object(var0000);
 						UI_sprite_effect(0x0007, (var0000[0x0001] - 0x0001), (var0000[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
 						UI_play_sound_effect(0x0053);
 						gflags[0x0239] = true;
-						0xFF58->clear_item_flag(0x001D);
+						0xFF58->clear_item_flag(SI_TOURNAMENT);
 						gflags[0x0007] = true;
 						var000B = script 0xFE9C after 15 ticks {
 							nohalt;
@@ -78515,78 +78576,78 @@ void Func07E0 object#(0x7E0) () {
 		if (var0001 <= 0x0012) {
 			if (var0001 == 0x0001) {
 				var0005 = [0x068F, 0x010F, 0x0006];
-				0xFE9C->set_item_flag(0x0025);
+				0xFE9C->set_item_flag(FREEZE);
 			}
 			if (var0001 == 0x0002) {
 				var0005 = [0x0597, 0x03BF, 0x0001];
-				0xFE9C->set_item_flag(0x0025);
+				0xFE9C->set_item_flag(FREEZE);
 			}
 			if (var0001 == 0x0003) {
 				var0005 = [0x04CB, 0x038B, 0x0001];
-				0xFE9C->set_item_flag(0x0025);
+				0xFE9C->set_item_flag(FREEZE);
 			}
 			if (var0001 == 0x0004) {
 				var0005 = [0x0850, 0x0298, 0x0003];
-				0xFE9C->set_item_flag(0x0025);
+				0xFE9C->set_item_flag(FREEZE);
 			}
 			if (var0001 == 0x0005) {
-				0xFE9C->set_item_flag(0x0025);
+				0xFE9C->set_item_flag(FREEZE);
 				var0005 = [0x06F8, 0x0288, 0x0001];
 			}
 			if (var0001 == 0x0006) {
-				0xFE9C->clear_item_flag(0x0025);
+				0xFE9C->clear_item_flag(FREEZE);
 				var0005 = [0x0AB7, 0x0477, 0x0001];
 			}
 			if (var0001 == 0x0007) {
-				0xFE9C->set_item_flag(0x0025);
+				0xFE9C->set_item_flag(FREEZE);
 				var0005 = [0x00E3, 0x0348, 0x0001];
 			}
 			if (var0001 == 0x0008) {
-				0xFE9C->clear_item_flag(0x0025);
+				0xFE9C->clear_item_flag(FREEZE);
 				var0005 = [0x0437, 0x0617, 0x0001];
 			}
 			if (var0001 == 0x0009) {
-				0xFE9C->clear_item_flag(0x0025);
+				0xFE9C->clear_item_flag(FREEZE);
 				var0005 = [0x06B0, 0x0498, 0x0001];
 			}
 			if (var0001 == 0x000A) {
-				0xFE9C->clear_item_flag(0x0025);
+				0xFE9C->clear_item_flag(FREEZE);
 				var0005 = [0x018F, 0x060F, 0x0001];
 			}
 			if (var0001 == 0x000B) {
-				0xFE9C->clear_item_flag(0x0025);
+				0xFE9C->clear_item_flag(FREEZE);
 				var0005 = [0x0B56, 0x0664, 0x0001];
 			}
 			if (var0001 == 0x000C) {
-				0xFE9C->clear_item_flag(0x0025);
+				0xFE9C->clear_item_flag(FREEZE);
 				var0005 = [0x07F5, 0x0568, 0x0001];
 			}
 			if (var0001 == 0x000D) {
-				0xFE9C->clear_item_flag(0x0025);
+				0xFE9C->clear_item_flag(FREEZE);
 				var0005 = [0x0998, 0x0827, 0x0001];
 			}
 			if (var0001 == 0x000E) {
-				0xFE9C->set_item_flag(0x0025);
+				0xFE9C->set_item_flag(FREEZE);
 				var0005 = [0x0928, 0x0137, 0x0001];
 			}
 			if (var0001 == 0x000F) {
-				0xFE9C->set_item_flag(0x0025);
+				0xFE9C->set_item_flag(FREEZE);
 				var0005 = [0x0627, 0x01F5, 0x0001];
 			}
 			if (var0001 == 0x0010) {
-				0xFE9C->clear_item_flag(0x0025);
+				0xFE9C->clear_item_flag(FREEZE);
 				var0005 = [0x02CF, 0x0A31, 0x0001];
 			}
 			if (var0001 == 0x0011) {
-				0xFE9C->clear_item_flag(0x0025);
+				0xFE9C->clear_item_flag(FREEZE);
 				var0005 = [0x0A4F, 0x03BB, 0x0001];
 			}
 			if (var0001 == 0x0012) {
-				0xFE9C->set_item_flag(0x0025);
+				0xFE9C->set_item_flag(FREEZE);
 				var0005 = [0x0632, 0x0349, 0x0001];
 			}
 		} else {
-			0xFE9C->set_item_flag(0x0025);
+			0xFE9C->set_item_flag(FREEZE);
 			var0005 = [0x0AF8, 0x01F8, 0x0001];
 		}
 		0xFE9B->move_object(var0005);
@@ -78617,7 +78678,7 @@ void Func07E1 object#(0x7E1) () {
 		var0001 = var0000->get_npc_number();
 		if (var0001 == 0xFF64) {
 			gflags[0x02BC] = true;
-			0xFF64->set_item_flag(0x001D);
+			0xFF64->set_item_flag(SI_TOURNAMENT);
 			0xFF64->set_alignment(0x0003);
 			0xFF64->set_item_frame(0x000D);
 			0xFF64->set_schedule_type(0x000F);
@@ -78632,7 +78693,7 @@ void Func07E1 object#(0x7E1) () {
 				Func09AD(0xFF62);
 				Func097F(0xFF62, "@Hold on, Master!@", 0x0007);
 			}
-			if (0xFF65->get_item_flag(0x0004)) {
+			if (0xFF65->get_item_flag(DEAD)) {
 				abort;
 			}
 			if (!find_nearby(0x02E6, 0xFFFF, 0x00B0)) {
@@ -78644,7 +78705,7 @@ void Func07E1 object#(0x7E1) () {
 					actor frame sleeping;
 				};
 			}
-			0xFF65->clear_item_flag(0x0001);
+			0xFF65->clear_item_flag(ASLEEP);
 			0xFF65->set_schedule_type(0x0000);
 			0xFF65->set_opponent(0xFF64);
 			0xFF65->set_oppressor(0xFF64);
@@ -78652,7 +78713,7 @@ void Func07E1 object#(0x7E1) () {
 			0xFF65->clear_item_say();
 			Func094F(0xFF65, ["Die, Draygan!", "I shall kill thee!", "Whoreson!"]);
 		} else {
-			var0000->set_item_flag(0x0001);
+			var0000->set_item_flag(ASLEEP);
 			var0000->set_schedule_type(0x000E);
 		}
 	}
@@ -78758,8 +78819,8 @@ void Func07E2 object#(0x7E2) () {
 		var000B = get_object_position();
 		UI_sprite_effect(0x0007, var000B[0x0001], var000B[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		0xFEE4->move_object(var000B);
-		0xFEE4->set_item_flag(0x001D);
-		0xFEE4->set_item_flag(0x0000);
+		0xFEE4->set_item_flag(SI_TOURNAMENT);
+		0xFEE4->set_item_flag(INVISIBLE);
 		0xFEE4->set_npc_id(0x000E);
 		Func09AD(0xFEE4);
 		Func097F(0xFEE4, "@Accept thy death, Avatar!@", 0x0002);
@@ -78964,7 +79025,7 @@ void Func07E6 object#(0x7E6) () {
 	var var0012;
 	var var0013;
 
-	0xFE9C->clear_item_flag(0x0010);
+	0xFE9C->clear_item_flag(DONT_MOVE);
 	var0000 = find_nearby(0x00FB, 0x0019, 0x0000);
 	Func0917(var0000, 0x0000);
 	var0001 = find_nearby(0x030D, 0x0019, 0x0000);
@@ -78985,10 +79046,10 @@ void Func07E6 object#(0x7E6) () {
 	say("\"If ye be wantin' Captain Hawk, I'll be at the bottom of a mug at the Blue Boar Inn.\"");
 	UI_remove_npc_face0();
 	UI_set_weather(0x0000);
-	0xFE9C->clear_item_flag(0x0011);
-	0xFFD8->clear_item_flag(0x0010);
-	0xFFDB->set_item_flag(0x0024);
-	0xFFE7->set_item_flag(0x001D);
+	0xFE9C->clear_item_flag(UNKNOWN_FLAG_17);
+	0xFFD8->clear_item_flag(DONT_MOVE);
+	0xFFDB->set_item_flag(CAN_FLY);
+	0xFFE7->set_item_flag(SI_TOURNAMENT);
 	var0004 = [0xFFD8, 0xFFD6, 0xFFDB, 0xFFD5];
 	var0005 = [0x08AC, 0x0718];
 	var0006 = [0x07BA, 0x08D3];
@@ -79133,7 +79194,7 @@ void Func07E9 object#(0x7E9) () {
 		var0006 = UI_create_new_object(0x025F);
 		if (var0006) {
 			var0006->set_item_frame(0x001F);
-			var0006->set_item_flag(0x0012);
+			var0006->set_item_flag(TEMPORARY);
 			var0007 = var0006->set_item_quality(0x0096);
 			var0007 = UI_update_last_created(var0003);
 			var0008 = Func0979(var0006);
@@ -79156,7 +79217,7 @@ void Func07E9 object#(0x7E9) () {
 		var0009 = UI_create_new_object(0x037F);
 		if (var0009) {
 			var0009->set_item_frame(0x0000);
-			var0009->set_item_flag(0x0012);
+			var0009->set_item_flag(TEMPORARY);
 			if (UI_is_not_blocked(var0004, 0x0284, 0x0000)) {
 				var0007 = UI_update_last_created(var0004);
 			} else {
@@ -79248,7 +79309,7 @@ void Func07EA object#(0x7EA) () {
 		var000A = UI_create_new_object(0x037F);
 		if (var000A) {
 			var000A->set_item_frame(0x0000);
-			var000A->set_item_flag(0x0012);
+			var000A->set_item_flag(TEMPORARY);
 			if (UI_update_last_created(var0008)) {
 				var0009 = script var000A after 9 ticks {
 					nohalt;
@@ -79386,7 +79447,7 @@ void Func07EC object#(0x7EC) () {
 		Func094F(0xFF31, var0003);
 		var0003 = UI_create_new_object(0x0390);
 		if (var0003) {
-			var0003->set_item_flag(0x0012);
+			var0003->set_item_flag(TEMPORARY);
 			var0003 = UI_update_last_created(0xFF2D->get_object_position());
 		}
 		var0006 = 0xFF2D->get_npc_object()->find_nearby(0x025F, 0x0019, 0x0010);
@@ -79462,7 +79523,7 @@ void Func07ED object#(0x7ED) () {
 			if (var0005) {
 				var0006 = UI_die_roll(0x0000, 0x0005);
 				var0005->set_item_frame(var0006);
-				var0005->clear_item_flag(0x0012);
+				var0005->clear_item_flag(TEMPORARY);
 				var0001 = UI_update_last_created([(var0000[0x0001] + var0003), (var0000[0x0002] + var0004), 0x0000]);
 			}
 			var0002 += 0x0001;
@@ -79474,7 +79535,7 @@ void Func07ED object#(0x7ED) () {
 	if ((event == 0x0002) && (gflags[0x0009] == true)) {
 		var0005 = UI_create_new_object(0x025F);
 		if (var0005) {
-			var0005->clear_item_flag(0x0012);
+			var0005->clear_item_flag(TEMPORARY);
 			var0000 = 0xFF2D->get_object_position();
 			var0000[0x0001] += 0x0008;
 			var0000[0x0002] += 0x0003;
@@ -79578,7 +79639,7 @@ void Func07EE object#(0x7EE) () {
 		0xFF31->remove_npc();
 		var0001 = UI_create_new_object(0x0390);
 		if (var0001) {
-			var0001->set_item_flag(0x0012);
+			var0001->set_item_flag(TEMPORARY);
 			var0001 = UI_update_last_created(0xFF31->get_object_position());
 		}
 		Func097F(0xFF2D, "@Goodbye...@", 0x0002);
@@ -79598,7 +79659,7 @@ void Func07EE object#(0x7EE) () {
 	if ((event == 0x0002) && (gflags[0x0007] == true)) {
 		UI_init_conversation();
 		0xFF2D->show_npc_face0(0x0000);
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		say("\"Karnax is defeated, for now... I am weak, and must leave...\"");
 		if (gflags[0x02C3]) {
 			say("\"Remember to seek out the Three Companions -- they must be at thy side!\"");
@@ -79625,7 +79686,7 @@ void Func07EE object#(0x7EE) () {
 		0xFF2D->remove_npc();
 		var0001 = UI_create_new_object(0x0390);
 		if (var0001) {
-			var0001->set_item_flag(0x0012);
+			var0001->set_item_flag(TEMPORARY);
 			var0001 = UI_update_last_created(0xFF2D->get_object_position());
 		}
 		var0005 = 0xFE9C->find_nearby(0x037F, 0x000A, 0x0000);
@@ -79678,7 +79739,7 @@ void Func07EF object#(0x7EF) () {
 	UI_lightning();
 	0xFE9C->set_schedule_type(0x000F);
 	var0001 = Func0992(0x0001, "@Oh, no!@", 0x0000, true);
-	0xFE9C->set_item_flag(0x0010);
+	0xFE9C->set_item_flag(DONT_MOVE);
 	var0002 = script 0xFE9C {
 		nohalt;
 		say "@Arggh!@";
@@ -79718,7 +79779,7 @@ void Func07F0 object#(0x7F0) () {
 	UI_fade_palette(0x000C, 0x0001, 0x0000);
 	0xFE9C->move_object([0x091D, 0x063C]);
 	0xFE9C->set_schedule_type(0x001F);
-	0xFE9C->clear_item_flag(0x0010);
+	0xFE9C->clear_item_flag(DONT_MOVE);
 	var0005 = script Func09A0(0x0005, 0x0001) after 30 ticks {
 		nohalt;
 		call Func0636;
@@ -79877,7 +79938,7 @@ void Func07F6 object#(0x7F6) () {
 		var0000 = get_item_quality();
 		var0001 = find_nearby(0x025F, 0x001E, 0x0010);
 		if (var0001) {
-			0xFE9C->set_item_flag(0x0010);
+			0xFE9C->set_item_flag(DONT_MOVE);
 			var0002 = get_distance(var0001);
 			var0003 = var0001->get_object_position();
 			0xFE9C->si_path_run_usecode(var0003, 0x000A, var0001, Func07F6, false);
@@ -80124,7 +80185,7 @@ void Func07F8 object#(0x7F8) () {
 		}
 		UI_play_music(0x0013, Func09A0(0x0005, 0x0001));
 		gflags[0x0171] = false;
-		0xFE9C->set_item_flag(0x0010);
+		0xFE9C->set_item_flag(DONT_MOVE);
 		UI_end_conversation();
 		UI_close_gumps();
 		var0001 = Func09A0(0x0001, 0x0001)->set_item_quality(0x00F8);
@@ -80408,7 +80469,7 @@ void Func07F9 object#(0x7F9) () {
 		if (!gflags[0x0084]) {
 			set_schedule_type(0x0000);
 		}
-		set_item_flag(0x001D);
+		set_item_flag(SI_TOURNAMENT);
 	}
 }
 
@@ -81239,7 +81300,7 @@ void Func07FC object#(0x7FC) () {
 	if (var0000 == 0x002C) {
 		UI_init_conversation();
 		0xFFCE->show_npc_face0(0x0000);
-		if (0xFFCE->get_item_flag(0x001C)) {
+		if (0xFFCE->get_item_flag(MET)) {
 			say("\"I am prepared for thy questions, ",
 				var0001,
 				". What dost thou care to question me about?\"");
@@ -81252,7 +81313,7 @@ void Func07FC object#(0x7FC) () {
 			case "the character of the accused":
 				remove(["the character of the accused", "no questions"]);
 				add("no further questions");
-				if (0xFFCE->get_item_flag(0x001C)) {
+				if (0xFFCE->get_item_flag(MET)) {
 					var0003 = Func08AC(false);
 					if (gflags[0x0174]) {
 						say("\"To be honest, he did not strike me as an honest man. Never cared much for bards. Louts, every one of them!\"");
@@ -81448,7 +81509,7 @@ labelFunc07FC_02C2:
 			case "the character of the accused":
 				remove(["the character of the accused", "no questions"]);
 				add("no further questions");
-				if (0xFFCC->get_item_flag(0x001C)) {
+				if (0xFFCC->get_item_flag(MET)) {
 					if (gflags[0x0174]) {
 						say("\"A prince of a man! Why, when he breaks into song, I can hardly keep the crowds out of mine inn!\"");
 						0xFFC9->show_npc_face1(0x0000);
@@ -81693,7 +81754,7 @@ labelFunc07FC_0904:
 			case "the character of the accused":
 				remove(["the character of the accused", "no questions"]);
 				add("no further questions");
-				if (0xFFC6->get_item_flag(0x001C)) {
+				if (0xFFC6->get_item_flag(MET)) {
 					if (gflags[0x0174]) {
 						say("\"He looks like he hath had one too many tips of the bottle, if ya know what I mean.\"");
 					}
@@ -82102,7 +82163,7 @@ void Func07FF object#(0x7FF) () {
 	var0005 = [0xFFC1, 0xFFB1, 0xFFB6, 0xFFB9, 0xFF6A];
 	for (var0000 in var0005 with var0008 to var0009) {
 		if (Func0932(var0000)) {
-			var0000->clear_item_flag(0x0004);
+			var0000->clear_item_flag(DEAD);
 			var0000->set_npc_id(0x0000);
 			var0000->run_schedule();
 		}
@@ -83254,7 +83315,7 @@ void Func0808 0x808 (var var0000, var var0001) {
 	var var0007;
 	var var0008;
 
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -83419,7 +83480,7 @@ void Func0809 0x809 () {
 		clear_item_say();
 		run_schedule();
 		say("\"What dost thou wish?\"");
-		if (get_item_flag(0x0006)) {
+		if (get_item_flag(IN_PARTY)) {
 			set_schedule_type(0x001F);
 			add("leave");
 		} else {
@@ -84680,7 +84741,7 @@ void Func080E 0x80E () {
 		call Func0440;
 	};
 	if (var0000) {
-		var0000->set_item_flag(0x001D);
+		var0000->set_item_flag(SI_TOURNAMENT);
 		var0000->set_alignment(0x0002);
 		var0001 = var0000->add_cont_items(0x0001, 0x0358, 0x0003, 0xFE99, 0x0012);
 		var0001 = var0000->add_cont_items(0x0001, 0x0327, 0x0003, 0xFE99, 0x0012);
@@ -86469,7 +86530,7 @@ labelFunc081A_00C0:
 					say("\"As thou dost wish.\"");
 				} else {
 					var000E = var000D->get_npc_number();
-					var000F = var000D->get_item_flag(0x0008);
+					var000F = var000D->get_item_flag(POISONED);
 					var0010 = Func095C(var000D, 0x0000);
 					var0011 = Func095C(var000D, 0x0003);
 					var0012 = var000D->get_npc_name();
@@ -86499,7 +86560,7 @@ labelFunc081A_00C0:
 						if (var0005 == false) {
 							var0014 = UI_remove_party_items(var0007, var0002, 0xFE99, 0xFE99, true);
 						}
-						var000D->clear_item_flag(0x0008);
+						var000D->clear_item_flag(POISONED);
 						say("\"'Tis done, ",
 							var0000,
 							"! The poison hath been removed.\"");
@@ -89718,7 +89779,7 @@ void Func0833 0x833 (var var0000) {
 	}
 	if (var0000 == 0x0002) {
 		0xFFB0->run_schedule();
-		0xFE9C->clear_item_flag(0x0010);
+		0xFE9C->clear_item_flag(DONT_MOVE);
 		var0009 = 0xFFB0->find_nearby(0x010F, 0x0014, 0x0000);
 		if (var0009) {
 			if (var0009->npc_nearby()) {
@@ -89920,7 +89981,7 @@ labelFunc0836_0055:
 					break;
 				}
 				var000D = var000C->get_npc_number();
-				var000E = var000C->get_item_flag(0x0008);
+				var000E = var000C->get_item_flag(POISONED);
 				var000F = Func095C(var000C, 0x0000);
 				var0010 = Func095C(var000C, 0x0003);
 				var0011 = var000C->get_npc_name();
@@ -89957,7 +90018,7 @@ labelFunc0836_0055:
 					if (var0004 == false) {
 						var0013 = UI_remove_party_items(var0006, var0001, 0xFE99, 0xFE99, true);
 					}
-					var000C->clear_item_flag(0x0008);
+					var000C->clear_item_flag(POISONED);
 					say("\"The poisoning hath been healed.\"");
 				}
 			}
@@ -90429,8 +90490,8 @@ void Func083A 0x83A (var var0000) {
 	0xFFD8->show_npc_face0(0x0000);
 	say("\"I'd advise ye ta hold fast an' keep a weather eye on that there horizon! We'll be runnin' afore the wind hard enough to splinter the mast as it is.\"");
 	UI_remove_npc_face0();
-	0xFE9C->set_item_flag(0x0011);
-	var0000->set_item_flag(0x001A);
+	0xFE9C->set_item_flag(UNKNOWN_FLAG_17);
+	var0000->set_item_flag(ACTIVE_BARGE);
 	if (!var0000->in_usecode()) {
 		var0002 = new script {
 			finish;
@@ -93051,7 +93112,7 @@ void Func0848 0x848 () {
 		if (var0000) {
 			var0000 = UI_create_new_object(0x02D9);
 			if (var0000) {
-				var0000->set_item_flag(0x0012);
+				var0000->set_item_flag(TEMPORARY);
 				var0002 = 0xFFB9->get_object_position();
 				var0003 = UI_update_last_created(var0002);
 			}
@@ -96045,7 +96106,7 @@ void Func0862 0x862 () {
 		if (!((var0004->get_item_shape() == 0x0128) && (var0004->get_item_frame() == 0x0002))) {
 			var0004 = var0004->set_last_created();
 			if (var0004) {
-				var0004->set_item_flag(0x000B);
+				var0004->set_item_flag(OKAY_TO_TAKE);
 				var0004 = UI_update_last_created(var0001);
 				if (!var0004) {
 					var0004 = UI_update_last_created([(var0001[0x0001] - 0x0002), var0001[0x0002], var0001[0x0003]]);
@@ -96107,7 +96168,7 @@ void Func0864 0x864 () {
 	var var0003;
 
 	var0000 = UI_remove_party_items(0x0001, 0x0289, 0x0000, 0x0000, true);
-	clear_item_flag(0x001E);
+	clear_item_flag(SI_ZOMBIE);
 	say("\"Thank thee, Avatar! Thank thee for returning to me the Comb of Beauty. Take this key...\"");
 	var0001 = Func099B(0xFE9C, 0x0001, 0x0281, 0x000F, 0x0002, 0x0000, true);
 	say("\"...And go to the southeast corner of the Throne Room. Seek the illusionary wall -- it will reveal the path to the treasure thou dost seek.\"");
@@ -96126,7 +96187,7 @@ void Func0864 0x864 () {
 	0xFF2C->move_object([(var0002[0x0001] + 0x0002), (var0002[0x0002] + 0x0002), 0x0000]);
 	0xFF2C->set_schedule_type(0x000F);
 	0xFFC9->set_schedule_type(0x000F);
-	0xFE9C->set_item_flag(0x0010);
+	0xFE9C->set_item_flag(DONT_MOVE);
 	UI_end_conversation();
 	var0001 = script 0xFF2C after 10 ticks {
 		nohalt;
@@ -96661,7 +96722,7 @@ void Func0866 0x866 () {
 	var var0013;
 
 	var0000 = "friend";
-	var0001 = 0xFFB2->get_item_flag(0x001C);
+	var0001 = 0xFFB2->get_item_flag(MET);
 	if (!var0001) {
 		var0000 = "stranger";
 	}
@@ -96870,7 +96931,7 @@ void Func0867 0x867 () {
 	var var0013;
 
 	var0000 = "friend";
-	var0001 = 0xFFB2->get_item_flag(0x001C);
+	var0001 = 0xFFB2->get_item_flag(MET);
 	if (!var0001) {
 		var0000 = "stranger";
 	}
@@ -97082,7 +97143,7 @@ void Func0868 0x868 () {
 	var var0017;
 
 	var0000 = "friend";
-	var0001 = 0xFFB2->get_item_flag(0x001C);
+	var0001 = 0xFFB2->get_item_flag(MET);
 	if (!var0001) {
 		var0000 = "stranger";
 	}
@@ -97526,7 +97587,7 @@ var Func0869 0x869 (var var0000, var var0001) {
 	var var0012;
 
 	var0002 = "friend";
-	var0003 = 0xFFB2->get_item_flag(0x001C);
+	var0003 = 0xFFB2->get_item_flag(MET);
 	if (!var0003) {
 		var0002 = "stranger";
 	}
@@ -97838,7 +97899,7 @@ void Func086B 0x86B () {
 			break;
 		}
 		var0008 = var0007->get_npc_number();
-		var0009 = var0007->get_item_flag(0x0008);
+		var0009 = var0007->get_item_flag(POISONED);
 		var000A = Func095C(var0007, 0x0000);
 		var000B = Func095C(var0007, 0x0003);
 		var000C = var0007->get_npc_name();
@@ -97874,12 +97935,12 @@ void Func086B 0x86B () {
 				break;
 			}
 			say("\"Ah, this poison I can remedy. A moment... *There, 'tis done. Thou art whole once more.\"");
-			0xFE9C->clear_item_flag(0x0008);
+			0xFE9C->clear_item_flag(POISONED);
 		} else {
 			say("\"Your companion ",
 				var000C,
 				" is badly poisoned. I shall remove it. *There. 'Tis done.\"");
-			var0007->clear_item_flag(0x0008);
+			var0007->clear_item_flag(POISONED);
 		}
 	}
 }
@@ -97897,16 +97958,16 @@ void Func086C 0x86C (var var0000) {
 	var var0006;
 	var var0007;
 
-	if (var0000->get_item_flag(0x0004)) {
+	if (var0000->get_item_flag(DEAD)) {
 		var0000->resurrect_npc();
 	}
-	var0000->clear_item_flag(0x0001);
-	var0000->clear_item_flag(0x0002);
-	var0000->clear_item_flag(0x0003);
-	var0000->clear_item_flag(0x0007);
-	var0000->clear_item_flag(0x0008);
-	var0000->clear_item_flag(0x0010);
-	var0000->clear_item_flag(0x0004);
+	var0000->clear_item_flag(ASLEEP);
+	var0000->clear_item_flag(CHARMED);
+	var0000->clear_item_flag(CURSED);
+	var0000->clear_item_flag(PARALYZED);
+	var0000->clear_item_flag(POISONED);
+	var0000->clear_item_flag(DONT_MOVE);
+	var0000->clear_item_flag(DEAD);
 	if (!Func0942(var0000)) {
 		var0001 = get_object_position();
 		var0002 = UI_die_roll(0xFFFE, 0x0002);
@@ -97920,7 +97981,7 @@ void Func086C 0x86C (var var0000) {
 	var0005 = Func095C(var0000, 0x0003);
 	var0006 = var0004 - var0005;
 	Func095E(var0000, 0x0003, var0006);
-	if (!var0000->get_item_flag(0x0006)) {
+	if (!var0000->get_item_flag(IN_PARTY)) {
 		var0000->add_to_party();
 	}
 	var0000->set_schedule_type(0x001F);
@@ -99127,13 +99188,13 @@ void Func0876 0x876 () {
 	var0000 = Func0953();
 	var0001 = ("I am " + var0000) + ".";
 	if (!gflags[0x01FE]) {
-		var0002 = 0xFF56->get_item_flag(0x001C);
+		var0002 = 0xFF56->get_item_flag(MET);
 		if (var0002) {
 			say("\"To be asking what you want with Zhelkas, ruler of Gargoyles! To be thinking how sad and sorry you look as you cower over to speak. To be telling you to be brave!  To be telling you to have pride.  To be telling you announce yourself.\"");
 		} else {
 			say("\"To be called ruler of gargoyles. To respond to Zhelkas. To mean `Iron Helm.'\"");
 			say("\"To ask who you are and why you are here.\"");
-			0xFF56->set_item_flag(0x001C);
+			0xFF56->set_item_flag(MET);
 		}
 		add([var0001, "I am the Avatar.", "I am lost..."]);
 		if (!gflags[0x02DA]) {
@@ -99804,7 +99865,7 @@ void Func087C 0x87C () {
 	for (var000C in var0009 with var000A to var000B) {
 		if (var000C->get_item_frame() == 0x0006) {
 			UI_close_gumps();
-			0xFE9C->clear_item_flag(0x0025);
+			0xFE9C->clear_item_flag(FREEZE);
 			gflags[0x0007] = false;
 			gflags[0x0008] = false;
 			gflags[0x0009] = false;
@@ -100000,7 +100061,7 @@ void Func0882 0x882 () {
 	if (var0001) {
 		var0001 = UI_update_last_created(var0000);
 		UI_play_sound_effect(0x0029);
-		var0001->set_item_flag(0x0012);
+		var0001->set_item_flag(TEMPORARY);
 	}
 }
 
@@ -100359,29 +100420,29 @@ void Func088A 0x88A (var var0000) {
 			}
 			if (var0002) {
 				if ((var0002 == 0x000D) && (var0003 == 0xFFFD)) {
-					0xFFFD->clear_item_flag(0x001E);
-					if (!0xFFFD->get_item_flag(0x0006)) {
+					0xFFFD->clear_item_flag(SI_ZOMBIE);
+					if (!0xFFFD->get_item_flag(IN_PARTY)) {
 						0xFFFD->set_schedule_type(0x0003);
 					}
 					Func08F4();
 				}
 				if ((var0002 == 0x000E) && (var0003 == 0xFFFE)) {
-					0xFFFE->clear_item_flag(0x001E);
-					if (!0xFFFE->get_item_flag(0x0006)) {
+					0xFFFE->clear_item_flag(SI_ZOMBIE);
+					if (!0xFFFE->get_item_flag(IN_PARTY)) {
 						0xFFFE->set_schedule_type(0x0003);
 					}
 					Func08F4();
 				}
 				if ((var0002 == 0x000F) && (var0003 == 0xFFFF)) {
-					0xFFFF->clear_item_flag(0x001E);
-					if (!0xFFFF->get_item_flag(0x0006)) {
+					0xFFFF->clear_item_flag(SI_ZOMBIE);
+					if (!0xFFFF->get_item_flag(IN_PARTY)) {
 						0xFFFF->set_schedule_type(0x0003);
 					}
 					Func08F4();
 				}
 				if ((var0002 == 0x000F) && (var0003 == 0xFF6B)) {
-					0xFF6B->clear_item_flag(0x001E);
-					if (!0xFF6B->get_item_flag(0x0006)) {
+					0xFF6B->clear_item_flag(SI_ZOMBIE);
+					if (!0xFF6B->get_item_flag(IN_PARTY)) {
 						0xFF6B->set_schedule_type(0x0003);
 					}
 					Func08F4();
@@ -101157,7 +101218,7 @@ void Func089F 0x89F () {
 		Func094A("@I think that the floor is trying to lower. I suggest that everyone board.@");
 		return;
 	}
-	if (var0000->get_item_flag(0x0015)) {
+	if (var0000->get_item_flag(OKAY_TO_LAND)) {
 		var0001 = var0000->get_object_position();
 		var0001 = var0001[0x0003];
 		var0001 = script var0000 {
@@ -101453,7 +101514,7 @@ void Func08AA 0x8AA () {
 	if (gflags[0x01B6]) {
 		abort;
 	}
-	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((0xFFD2->get_item_flag(0x001C) + 0xFFD1->get_item_flag(0x001C)) + 0xFFD0->get_item_flag(0x001C)) + 0xFFCD->get_item_flag(0x001C)) + 0xFFCC->get_item_flag(0x001C)) + 0xFFCB->get_item_flag(0x001C)) + 0xFFCA->get_item_flag(0x001C)) + 0xFFC6->get_item_flag(0x001C)) + 0xFFCF->get_item_flag(0x001C)) + 0xFFCE->get_item_flag(0x001C)) + 0xFFC3->get_item_flag(0x001C)) > 0x0004) && 0xFFFD->npc_nearby())))) {
+	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((0xFFD2->get_item_flag(MET) + 0xFFD1->get_item_flag(MET)) + 0xFFD0->get_item_flag(MET)) + 0xFFCD->get_item_flag(MET)) + 0xFFCC->get_item_flag(MET)) + 0xFFCB->get_item_flag(MET)) + 0xFFCA->get_item_flag(MET)) + 0xFFC6->get_item_flag(MET)) + 0xFFCF->get_item_flag(MET)) + 0xFFCE->get_item_flag(MET)) + 0xFFC3->get_item_flag(MET)) > 0x0004) && 0xFFFD->npc_nearby())))) {
 		var0000 = script Func09A0(0x0005, 0x0001) after 200 ticks {
 			nohalt;
 			call Func0435;
@@ -101469,7 +101530,7 @@ extern var Func09A0 0x9A0 (var var0000, var var0001);
 void Func08AB 0x8AB () {
 	var var0000;
 
-	if ((Func0994() == 0x0003) && ((!0xFFC7->get_item_flag(0x0004)) && (gflags[0x0190] && 0xFFCC->get_item_flag(0x001C)))) {
+	if ((Func0994() == 0x0003) && ((!0xFFC7->get_item_flag(DEAD)) && (gflags[0x0190] && 0xFFCC->get_item_flag(MET)))) {
 		var0000 = 0xFFC7->approach_avatar(0x0078, 0x0028);
 		if (var0000) {
 			Func09AD(0xFFC7);
@@ -101481,7 +101542,7 @@ void Func08AB 0x8AB () {
 			abort;
 		}
 	}
-	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((0xFFD2->get_item_flag(0x001C) + 0xFFD1->get_item_flag(0x001C)) + 0xFFD0->get_item_flag(0x001C)) + 0xFFCF->get_item_flag(0x001C)) + 0xFFCE->get_item_flag(0x001C)) + 0xFFCD->get_item_flag(0x001C)) + 0xFFCC->get_item_flag(0x001C)) + 0xFFCB->get_item_flag(0x001C)) + 0xFFC7->get_item_flag(0x001C)) + 0xFFCA->get_item_flag(0x001C)) + 0xFFC6->get_item_flag(0x001C)) + 0xFFC3->get_item_flag(0x001C)) > 0x0004)))) {
+	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((0xFFD2->get_item_flag(MET) + 0xFFD1->get_item_flag(MET)) + 0xFFD0->get_item_flag(MET)) + 0xFFCF->get_item_flag(MET)) + 0xFFCE->get_item_flag(MET)) + 0xFFCD->get_item_flag(MET)) + 0xFFCC->get_item_flag(MET)) + 0xFFCB->get_item_flag(MET)) + 0xFFC7->get_item_flag(MET)) + 0xFFCA->get_item_flag(MET)) + 0xFFC6->get_item_flag(MET)) + 0xFFC3->get_item_flag(MET)) > 0x0004)))) {
 		0xFFCB->modify_schedule(0x0004, 0x000A, [0x040E, 0x06BF]);
 		0xFFCB->modify_schedule(0x0005, 0x000A, [0x040E, 0x06BF]);
 	}
@@ -101536,7 +101597,7 @@ void Func08AD 0x8AD (var var0000, var var0001, var var0002, var var0003) {
 		var0003->item_say("@I do not require food.@");
 		abort;
 	}
-	if ((var0003 in var0004) && ((!var0003->get_item_flag(0x0001)) && ((!var0003->get_item_flag(0x0007)) && (!var0003->get_item_flag(0x0004))))) {
+	if ((var0003 in var0004) && ((!var0003->get_item_flag(ASLEEP)) && ((!var0003->get_item_flag(PARALYZED)) && (!var0003->get_item_flag(DEAD))))) {
 		if ((var0005 == 0x0268) && (var0006 == 0x0009)) {
 			var0003->halt_scheduled();
 			var0003->Func0620();
@@ -101874,7 +101935,7 @@ void Func08B2 0x8B2 () {
 	if ((event == 0x000D) || (event == 0x000E)) {
 		Func09AD(item);
 	}
-	if (get_item_flag(0x001E)) {
+	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -101970,7 +102031,7 @@ var Func08B5 0x8B5 () {
 	if (var0002) {
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0006 = false;
-			var0006 = var0005->get_item_flag(0x0001);
+			var0006 = var0005->get_item_flag(ASLEEP);
 			if (!var0006) {
 				return var0005;
 			}
@@ -102781,7 +102842,7 @@ void Func08C3 0x8C3 () {
 				continue;
 				actor frame standing;
 			};
-			var0000->set_item_flag(0x0012);
+			var0000->set_item_flag(TEMPORARY);
 		}
 	}
 }
@@ -103279,9 +103340,9 @@ void Func08CB 0x8CB () {
 	gflags[0x0008] = false;
 	gflags[0x0009] = false;
 	gflags[0x000A] = false;
-	0xFF5B->set_item_flag(0x001D);
-	0xFF5D->set_item_flag(0x001D);
-	0xFF57->set_item_flag(0x001D);
+	0xFF5B->set_item_flag(SI_TOURNAMENT);
+	0xFF5D->set_item_flag(SI_TOURNAMENT);
+	0xFF57->set_item_flag(SI_TOURNAMENT);
 	0xFF57->set_schedule_type(0x000F);
 	var0000 = find_nearest(0x02EB, 0x0014);
 	if (var0000) {
@@ -103408,7 +103469,7 @@ void Func08CD 0x8CD () {
 			var0002 = 0xFE9C->get_object_position() & (0x0004 & 0x0007);
 			var0005 = var0002->find_nearby(0x0113, 0x0028, 0x0010);
 			if (var0005) {
-				0xFE9C->set_item_flag(0x0010);
+				0xFE9C->set_item_flag(DONT_MOVE);
 				var0006 = 0x0006;
 				var0007 = 0x0000;
 				var0008 = 0x0000;
@@ -103491,7 +103552,7 @@ void Func08CE 0x8CE () {
 	};
 	var0002 = find_nearby(0x0375, 0x0019, 0x0000);
 	if (var0002) {
-		var0002->set_item_flag(0x001D);
+		var0002->set_item_flag(SI_TOURNAMENT);
 	}
 	remove_item();
 }
@@ -103538,7 +103599,7 @@ void Func08D0 0x8D0 () {
 		var0000 = var0005->get_object_position();
 		var0006 = false;
 		if (var0005->get_item_quality() == 0x0000) {
-			0xFF5D->clear_item_flag(0x0004);
+			0xFF5D->clear_item_flag(DEAD);
 			0xFF5D->set_schedule_type(0x000F);
 			0xFF5D->move_object(var0000);
 			UI_sprite_effect(0x0007, (var0000[0x0001] - 0x0001), (var0000[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -103706,7 +103767,7 @@ void Func08D4 0x8D4 () {
 		set_schedule_type(0x000A);
 		var0000 = find_nearby(0x0375, 0x000A, 0x0000);
 		if (var0000) {
-			0xFE9C->set_item_flag(0x0010);
+			0xFE9C->set_item_flag(DONT_MOVE);
 			var0004 = direction_from(var0000);
 			var0005 = script item {
 				say "@Wake up, girl!@";
@@ -103751,7 +103812,7 @@ void Func08D4 0x8D4 () {
 			var0000 = find_nearby(0x0375, 0x000A, 0x0000);
 			if (var0000) {
 				0xFF27->kill_npc();
-				var0000->clear_item_flag(0x0004);
+				var0000->clear_item_flag(DEAD);
 				var0005 = script var0000 {
 					wait 5;
 					call Func0375;
@@ -104180,10 +104241,10 @@ void Func08DB 0x8DB (var var0000) {
 			UI_sprite_effect(0x0009, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			gflags[0x0007] = true;
 			gflags[0x0061] = true;
-			if (0xFFFF->get_item_flag(0x0006)) {
+			if (0xFFFF->get_item_flag(IN_PARTY)) {
 				0xFFFF->remove_from_party();
 			}
-			0xFFFF->set_item_flag(0x0004);
+			0xFFFF->set_item_flag(DEAD);
 			Func08E5();
 			0xFFFF->remove_npc();
 			UI_play_music(0x0036, 0x0000);
@@ -104281,7 +104342,7 @@ void Func08DD 0x8DD (var var0000, var var0001, var var0002) {
 	var0000->remove_item();
 	var0004 = UI_create_new_object(var0001);
 	if (var0004) {
-		var0004->set_item_flag(0x0012);
+		var0004->set_item_flag(TEMPORARY);
 		var0004->set_item_frame(var0002);
 		var0005 = UI_update_last_created(var0003);
 	}
@@ -104313,7 +104374,7 @@ void Func08DF 0x8DF (var var0000, var var0001) {
 	if (var0001 == 0x01EF) {
 		var0003 = UI_create_new_object2(var0001, var0002);
 		if (var0003) {
-			var0003->set_item_flag(0x0012);
+			var0003->set_item_flag(TEMPORARY);
 			var0003->set_schedule_type(0x0011);
 			var0003->set_item_frame(0x0000);
 			var0001 = var0003->find_nearest(0x0179, 0x0001);
@@ -104324,7 +104385,7 @@ void Func08DF 0x8DF (var var0000, var var0001) {
 	} else {
 		var0003 = UI_create_new_object(var0001);
 		if (var0003) {
-			var0003->set_item_flag(0x0012);
+			var0003->set_item_flag(TEMPORARY);
 			var0003->set_item_frame(0x0000);
 			var0001 = UI_update_last_created(var0002);
 		}
@@ -104436,7 +104497,7 @@ var Func08E2 0x8E2 (var var0000) {
 								var000F = UI_create_new_object(0x0179);
 								if (var000F) {
 									var000F->set_item_frame(0x000C);
-									var000F->set_item_flag(0x0012);
+									var000F->set_item_flag(TEMPORARY);
 									var0010 = var000E->get_object_position();
 									var0002 = UI_update_last_created(var0010);
 								} else {
@@ -104533,7 +104594,7 @@ var Func08E2 0x8E2 (var var0000) {
 			var0011 = [0x0108, 0x0179, 0x0274, 0x023C];
 			var000A = UI_create_new_object(var0011[UI_get_random(0x0004)]);
 			if (var000A) {
-				var000A->set_item_flag(0x0012);
+				var000A->set_item_flag(TEMPORARY);
 				var0002 = UI_update_last_created(var0010);
 			}
 		}
@@ -104979,7 +105040,7 @@ void Func08F2 0x8F2 (var var0000) {
 
 var Func08F3 0x8F3 () {
 
-	if ((gflags[0x00D4] && (!0xFFFE->get_item_flag(0x001E))) && ((gflags[0x00D3] && (!0xFFFF->get_item_flag(0x001E))) && (gflags[0x00D5] && (!0xFFFD->get_item_flag(0x001E))))) {
+	if ((gflags[0x00D4] && (!0xFFFE->get_item_flag(SI_ZOMBIE))) && ((gflags[0x00D3] && (!0xFFFF->get_item_flag(SI_ZOMBIE))) && (gflags[0x00D5] && (!0xFFFD->get_item_flag(SI_ZOMBIE))))) {
 		return true;
 	}
 	return false;
@@ -104990,7 +105051,7 @@ extern var Func08F3 0x8F3 ();
 void Func08F4 0x8F4 () {
 	var var0000;
 
-	if (Func08F3() && (!0xFF29->get_item_flag(0x001C))) {
+	if (Func08F3() && (!0xFF29->get_item_flag(MET))) {
 		var0000 = 0xFE9C->get_object_position();
 		var0000[0x0002] -= 0x0002;
 		0xFF31->move_object(var0000);
@@ -105146,7 +105207,7 @@ var Func08F9 0x8F9 () {
 	if (var0001 == 0x000C) {
 		return true;
 	}
-	if (!0xFFB0->get_item_flag(0x001C)) {
+	if (!0xFFB0->get_item_flag(MET)) {
 		return true;
 	}
 	if (Func08F8(var0000, [0x08A3, 0x07B1], [0x08CE, 0x07DF]) || Func08F8(var0000, [0x0853, 0x0821], [0x087E, 0x083D])) {
@@ -105243,14 +105304,14 @@ void Func08FA 0x8FA () {
 	var0008 = Func08B6();
 	var0008 = [0xFE9C, var0008];
 	for (var000B in var0008 with var0009 to var000A) {
-		var000B->clear_item_flag(0x0001);
+		var000B->clear_item_flag(ASLEEP);
 		var000B->move_object(var0004);
 	}
 	UI_sprite_effect(0x0007, var0004[0x0001], var0004[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_play_sound_effect(0x0051);
 	gflags[0x026F] = false;
 	if (Func0995()) {
-		0xFE9C->set_item_flag(0x0025);
+		0xFE9C->set_item_flag(FREEZE);
 	}
 	var000C = Func09A0(0x0005, 0x0001);
 	var000D = Func09A0(0x0005, 0x0002);
@@ -105304,7 +105365,7 @@ var Func08FB 0x8FB () {
 			} else {
 				var0001 &= var0005;
 				if ((var0009 == 0xFFFE) && gflags[0x025B]) {
-					0xFFFE->set_item_flag(0x001D);
+					0xFFFE->set_item_flag(SI_TOURNAMENT);
 				}
 			}
 		}
@@ -105370,7 +105431,7 @@ void Func08FE 0x8FE () {
 				say("\"Now thy friend ",
 					var0008,
 					" doth live again.\"");
-				if (var0006->get_item_flag(0x0006) && var0006->get_item_flag(0x001E)) {
+				if (var0006->get_item_flag(IN_PARTY) && var0006->get_item_flag(SI_ZOMBIE)) {
 					var0006->remove_from_party();
 				}
 				var0006->set_new_schedules(0x0000, 0x000F, [var0009[0x0001], var0009[0x0002]]);
@@ -105417,7 +105478,7 @@ void Func08FF 0x8FF () {
 	if (gflags[0x00D7]) {
 		abort;
 	}
-	var0000 = ((((((((((((((0xFFEA->get_item_flag(0x001C) + 0xFFE6->get_item_flag(0x001C)) + 0xFFEF->get_item_flag(0x001C)) + 0xFFDF->get_item_flag(0x001C)) + 0xFFF2->get_item_flag(0x001C)) + 0xFFE8->get_item_flag(0x001C)) + 0xFFF1->get_item_flag(0x001C)) + 0xFFE0->get_item_flag(0x001C)) + 0xFFE9->get_item_flag(0x001C)) + 0xFFE2->get_item_flag(0x001C)) + 0xFFE4->get_item_flag(0x001C)) + 0xFFF3->get_item_flag(0x001C)) + 0xFFE5->get_item_flag(0x001C)) + 0xFFFC->get_item_flag(0x001C)) + 0xFFED->get_item_flag(0x001C)) + gflags[0x00D6];
+	var0000 = ((((((((((((((0xFFEA->get_item_flag(MET) + 0xFFE6->get_item_flag(MET)) + 0xFFEF->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + 0xFFF2->get_item_flag(MET)) + 0xFFE8->get_item_flag(MET)) + 0xFFF1->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + 0xFFE9->get_item_flag(MET)) + 0xFFE2->get_item_flag(MET)) + 0xFFE4->get_item_flag(MET)) + 0xFFF3->get_item_flag(MET)) + 0xFFE5->get_item_flag(MET)) + 0xFFFC->get_item_flag(MET)) + 0xFFED->get_item_flag(MET)) + gflags[0x00D6];
 	if ((var0000 >= 0x0003) && (!gflags[0x00D7])) {
 		var0001 = 0xFFE7->approach_avatar(0x005A, 0x0028);
 		if (var0001) {
@@ -105475,12 +105536,12 @@ void Func0901 0x901 () {
 	var var000D;
 	var var000E;
 
-	0xFE9C->clear_item_flag(0x0000);
+	0xFE9C->clear_item_flag(INVISIBLE);
 	var0000 = UI_create_new_object(0x0320);
 	if (var0000) {
 		var0000->set_item_frame(0x0000);
 		var0001 = var0000->set_item_quality(0x003D);
-		var0000->clear_item_flag(0x0012);
+		var0000->clear_item_flag(TEMPORARY);
 		var0001 = UI_update_last_created([0x0937, 0x0738, 0x0000]);
 		if (var0001) {
 			UI_sprite_effect(0x0015, 0x0939, 0x0732, 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -105528,8 +105589,8 @@ void Func0901 0x901 () {
 			var0001 = 0xFE9C->add_cont_items(0x0001, 0x023A, 0xFE99, 0x0000, 0x0000);
 		}
 	}
-	0xFE9C->clear_item_flag(0x0010);
-	if (0xFFFE->get_item_flag(0x0004)) {
+	0xFE9C->clear_item_flag(DONT_MOVE);
+	if (0xFFFE->get_item_flag(DEAD)) {
 		0xFFFE->resurrect_npc();
 		0xFFFE->remove_from_party();
 		0xFFFE->set_npc_id(0x001E);
@@ -105975,7 +106036,7 @@ var Func0913 0x913 (var var0000, var var0001, var var0002, var var0003) {
 	var0004 = var0000->find_nearby(0xFE99, Func097E(var0002), 0x0020);
 	for (var0007 in var0004 with var0005 to var0006) {
 		var0008 = var0007->get_object_position();
-		if ((var0008[0x0001] <= var0001[0x0001]) && ((var0008[0x0001] >= (var0001[0x0001] + var0002)) && ((var0008[0x0002] <= var0001[0x0002]) && ((var0008[0x0002] >= (var0001[0x0002] + var0002)) && ((var0008[0x0003] <= 0x0002) && ((!(var0007 == var0000)) && ((!(var0007->get_item_shape() in var0003)) && var0000->get_item_flag(0x0018)))))))) {
+		if ((var0008[0x0001] <= var0001[0x0001]) && ((var0008[0x0001] >= (var0001[0x0001] + var0002)) && ((var0008[0x0002] <= var0001[0x0002]) && ((var0008[0x0002] >= (var0001[0x0002] + var0002)) && ((var0008[0x0003] <= 0x0002) && ((!(var0007 == var0000)) && ((!(var0007->get_item_shape() in var0003)) && var0000->get_item_flag(IS_SOLID)))))))) {
 			return true;
 		}
 	}
@@ -106005,11 +106066,11 @@ extern void Func0922 0x922 (var var0000);
 extern var Func0994 0x994 ();
 
 void Func0916 0x916 () {
-	if (0xFF6B->get_item_flag(0x001E) && gflags[0x025F]) {
+	if (0xFF6B->get_item_flag(SI_ZOMBIE) && gflags[0x025F]) {
 		Func0922(0x000F);
 		abort;
 	}
-	if ((Func0994() == 0x0017) && (!0xFEDA->get_item_flag(0x0004))) {
+	if ((Func0994() == 0x0017) && (!0xFEDA->get_item_flag(DEAD))) {
 		Func0922(0x000D);
 		abort;
 	}
@@ -106139,9 +106200,9 @@ void Func0918 0x918 (var var0000) {
 	}
 	var0006 = var0001->find_nearby(0x00FB, 0x0012, 0x0000);
 	Func0917(var0006, 0x0001);
-	0xFE9C->clear_item_flag(0x0014);
-	var0000->set_item_flag(0x000A);
-	0xFE9C->get_barge()->set_item_flag(0x001A);
+	0xFE9C->clear_item_flag(ACTIVE_SAILOR);
+	var0000->set_item_flag(ON_MOVING_BARGE);
+	0xFE9C->get_barge()->set_item_flag(ACTIVE_BARGE);
 }
 
 extern void Func09AD 0x9AD (var var0000);
@@ -106171,7 +106232,7 @@ void Func0919 0x919 (var var0000) {
 		if (var0006) {
 			var0006->set_alignment(0x0000);
 			var0006->set_schedule_type(0x001D);
-			var0006->set_item_flag(0x001D);
+			var0006->set_item_flag(SI_TOURNAMENT);
 			0xFF34->set_npc_id(0x0002);
 			var0007 = var0006->add_cont_items(0x0001, 0x0321, 0xFE99, 0x0000, 0x0012);
 			var0007 = var0006->add_cont_items(0x0001, 0x0358, 0x0003, 0xFE99, 0x0012);
@@ -106195,14 +106256,14 @@ void Func091A 0x91A (var var0000) {
 	if (var0001->is_npc()) {
 		UI_play_sound_effect(0x0077);
 		var0002 = var0001->get_npc_number();
-		if (var0002->get_item_flag(0x0006)) {
+		if (var0002->get_item_flag(IN_PARTY)) {
 			var0002->show_npc_face0(0x0000);
 			say("\"I am the Lizard King. I can do anything.\"");
 			UI_remove_npc_face0();
 			if (var0002 == 0xFE9C) {
-				var0002->set_item_flag(0x0019);
+				var0002->set_item_flag(CONFUSED);
 			}
-			var0002->set_item_flag(0x0024);
+			var0002->set_item_flag(CAN_FLY);
 			var0003 = script var0002 after 20 ticks {
 				nohalt;
 				call Func03C0;
@@ -106443,22 +106504,22 @@ var Func0923 0x923 () {
 	if (!Func0942(0xFFFF)) {
 		return false;
 	}
-	if (!0xFFFD->get_item_flag(0x0006)) {
+	if (!0xFFFD->get_item_flag(IN_PARTY)) {
 		return false;
 	}
-	if (!0xFFFE->get_item_flag(0x0006)) {
+	if (!0xFFFE->get_item_flag(IN_PARTY)) {
 		return false;
 	}
-	if (!0xFFFF->get_item_flag(0x0006)) {
+	if (!0xFFFF->get_item_flag(IN_PARTY)) {
 		return false;
 	}
-	if (0xFFFD->get_item_flag(0x0004)) {
+	if (0xFFFD->get_item_flag(DEAD)) {
 		return false;
 	}
-	if (0xFFFE->get_item_flag(0x0004)) {
+	if (0xFFFE->get_item_flag(DEAD)) {
 		return false;
 	}
-	if (0xFFFF->get_item_flag(0x0004)) {
+	if (0xFFFF->get_item_flag(DEAD)) {
 		return false;
 	}
 	return true;
@@ -106515,7 +106576,7 @@ void Func0924 0x924 (var var0000, var var0001) {
 		if (var0002 == 0x007B) {
 			var0009 = 0xFE9C->find_nearby(0x037C, 0x0019, 0x0000);
 			if (var0009) {
-				0xFE9C->set_item_flag(0x0010);
+				0xFE9C->set_item_flag(DONT_MOVE);
 				var000A = var0009->set_item_quality(0x0001);
 				var000A = script var0009 after 10 ticks {
 					nohalt;
@@ -106630,7 +106691,7 @@ void Func0926 0x926 (var var0000) {
 		};
 		abort;
 	}
-	if ((var0000 == 0x003D) && (gflags[0x0227] && (!0xFE9C->get_item_flag(0x0020)))) {
+	if ((var0000 == 0x003D) && (gflags[0x0227] && (!0xFE9C->get_item_flag(POLYMORPH)))) {
 		var0006 = 0xFFE4->get_object_position();
 		if ((var0006[0x0001] == 0x06E3) && ((var0006[0x0002] == 0x0273) && (var0006[0x0003] == 0x0001))) {
 			var0007 = UI_create_new_object(0x025F);
@@ -106970,25 +107031,25 @@ void Func092E 0x92E (var var0000) {
 	var0001 = [0xFFC1, 0xFFB1, 0xFFB6, 0xFFB9, 0xFF6A];
 	var0001 &= var0000;
 	UI_end_conversation();
-	0xFE9C->set_item_flag(0x0010);
+	0xFE9C->set_item_flag(DONT_MOVE);
 	for (var0004 in var0001 with var0002 to var0003) {
 		if (Func0932(var0004)) {
 			var0004->set_opponent(0xFFFF);
 			var0004->set_attack_mode(0x0007);
 			var0004->set_oppressor(0xFFFF);
-			var0004->set_item_flag(0x0004);
+			var0004->set_item_flag(DEAD);
 			gflags[0x0009] = true;
 			if (var0004 == var0000) {
 				if (!gflags[0x000A]) {
 					if (!gflags[0x0085]) {
 						gflags[0x0085] = true;
-						var0000->set_item_flag(0x0004);
+						var0000->set_item_flag(DEAD);
 						var0004 = script var0000 after 12 ticks {
 							call Func07FD;
 						};
 					}
 				} else {
-					var0000->clear_item_flag(0x0004);
+					var0000->clear_item_flag(DEAD);
 					var0004 = Func0930(var0000, 0x0178, 0x003C);
 					if (!var0004) {
 						Func092F(var0000, 0x0001);
@@ -107081,7 +107142,7 @@ void Func092F 0x92F (var var0000, var var0001) {
 		say("\"Failure in Brendan2Usable(_Action) because we couldn't find the guard that is supposedly pathfinding to the door.\"");
 	}
 	UI_remove_npc_face0();
-	0xFE9C->clear_item_flag(0x0010);
+	0xFE9C->clear_item_flag(DONT_MOVE);
 	var0002 = script var0000 after 1 ticks {
 		call Func07FF;
 	};
@@ -107195,14 +107256,14 @@ void Func0931 0x931 (var var0000) {
 	var0002 = [0xFFC1, 0xFFB1, 0xFFB6, 0xFFB9, 0xFF6A];
 	for (var0005 in var0002 with var0003 to var0004) {
 		if (Func0932(var0005)) {
-			var0005->clear_item_flag(0x0004);
+			var0005->clear_item_flag(DEAD);
 			var0005->run_schedule();
 			var0005->set_npc_id(0x0000);
 		}
 	}
 	gflags[0x0084] = false;
 	if (!(0xFE9C->get_npc_object() == var0000)) {
-		var0000->clear_item_flag(0x001D);
+		var0000->clear_item_flag(SI_TOURNAMENT);
 	}
 	0xFEED->show_npc_face0(0x0000);
 	say("\"Very good, very good,\" he says as he returns your equipment.");
@@ -107410,7 +107471,7 @@ void Func0934 0x934 (var var0000) {
 		var0000->set_schedule_type(0x000F);
 		var0000->set_alignment(0x0001);
 	}
-	var0000->set_item_flag(0x001D);
+	var0000->set_item_flag(SI_TOURNAMENT);
 	var0003 = var0000->find_nearby(0x020A, 0x000F, 0x0000);
 	for (var0002 in var0003 with var0006 to var0007) {
 		if (var0002->get_item_quality() == 0x00EB) {
@@ -107533,7 +107594,7 @@ void Func0935 0x935 (var var0000) {
 	say("\"All right. If thou'lt follow me, then.\"");
 	UI_remove_npc_face0();
 	UI_play_music(0x0022, 0x0000);
-	0xFE9C->set_item_flag(0x0010);
+	0xFE9C->set_item_flag(DONT_MOVE);
 	UI_end_conversation();
 	var0004 = 0xFE9C->find_nearby(0x00E4, 0x0023, 0x0000);
 	for (var0007 in var0004 with var0005 to var0006) {
@@ -108083,7 +108144,7 @@ void Func093A 0x93A (var var0000) {
 			for (var0008 in var0003 with var0006 to var0007) {
 				var0008->set_schedule_type(0x001F);
 			}
-			0xFE9C->clear_item_flag(0x0010);
+			0xFE9C->clear_item_flag(DONT_MOVE);
 			UI_init_conversation();
 			var0003 = find_nearby(0x01B0, 0x000A, 0x0000) & find_nearby(0x010E, 0x000A, 0x0000);
 			for (var0008 in var0003 with var0009 to var000A) {
@@ -108261,7 +108322,7 @@ void Func093A 0x93A (var var0000) {
 			0xFFCB->show_npc_face1(0x0000);
 			say("\"I have grave news, dearest Lady. There have been foul deeds done in this Temple!\"");
 			0xFFCB->clear_item_say();
-			if (0xFFCD->get_item_flag(0x0004)) {
+			if (0xFFCD->get_item_flag(DEAD)) {
 				say("\"Acting upon information supplied by Alyssand, I did enter a secret room within this building. Here, I discovered Priestess Kylista manipulating some form of machine.\"");
 				Func097F(0xFFCB, "@Guards, send in the traitor!@", 0x0000);
 			} else {
@@ -108286,7 +108347,7 @@ void Func093A 0x93A (var var0000) {
 				0xFFCA->si_path_run_usecode([0x0408, 0x0672, 0x0000], 0x000D, 0xFFCA->get_npc_object(), Func07F8, false);
 				Func097F(0xFFCA, "@Don't shove me!@", 0x0007);
 			}
-			if (0xFFCD->get_item_flag(0x0004)) {
+			if (0xFFCD->get_item_flag(DEAD)) {
 				var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x005C);
 			}
 			abort;
@@ -108307,7 +108368,7 @@ void Func093A 0x93A (var var0000) {
 			UI_init_conversation();
 			0xFFD2->show_npc_face0(0x0000);
 			say("\"Voldin and Kylista have played us all for fools! And we have followed blindly along...\"");
-			if (0xFFCD->get_item_flag(0x0004)) {
+			if (0xFFCD->get_item_flag(DEAD)) {
 				0xFFCA->show_npc_face1(0x0000);
 			} else {
 				0xFFCD->show_npc_face1(0x0000);
@@ -108399,7 +108460,7 @@ void Func093A 0x93A (var var0000) {
 			0xFFCB->show_npc_face0(0x0000);
 			say("\"This means, dearest Lady, that the Oracle will proclaim any result which the secret levers request. I saw Alyssand instruct the Oracle to give this verdict, with my very own eyes!\"");
 			0xFFC9->show_npc_face1(0x0000);
-			if (0xFFCD->get_item_flag(0x0004)) {
+			if (0xFFCD->get_item_flag(DEAD)) {
 				say("\"We are betrayed! Take Kylista from my sight! I shall deal with her perfidy later...\"");
 			} else {
 				say("\"We are betrayed! Take them from my sight! I shall deal with their perfidy later...\"");
@@ -108431,7 +108492,7 @@ void Func093A 0x93A (var var0000) {
 		}
 		if (var0000 == 0x0060) {
 			Func09AC(0xFFCA, 0x03DC, 0x0616, 0x0007);
-			if (0xFFCD->get_item_flag(0x0004)) {
+			if (0xFFCD->get_item_flag(DEAD)) {
 				var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x0062);
 				var0003 = script 0xFE9C {
 					nohalt;
@@ -108530,7 +108591,7 @@ void Func093A 0x93A (var var0000) {
 			0xFFCB->set_schedule_type(0x000F);
 			UI_init_conversation();
 			0xFFCB->show_npc_face0(0x0000);
-			if (0xFFCD->get_item_flag(0x0004)) {
+			if (0xFFCD->get_item_flag(DEAD)) {
 				say("\"We have captured the falsehearted traitor, Lady Yelinda! Kylista is in chains, and Great Captain Voldin hath been found dead...\"");
 			} else {
 				say("\"We have captured the falsehearted traitors, Lady Yelinda! Kylista and Voldin are in chains.\"");
@@ -108549,7 +108610,7 @@ void Func093A 0x93A (var var0000) {
 			0x0000->set_conversation_slot();
 			say("\"I did mistrust thy words previously, Alyssand, but now that Kylista hath confessed... I know not what to believe.\"");
 			0xFFC9->show_npc_face1(0x0000);
-			if (0xFFCD->get_item_flag(0x0004)) {
+			if (0xFFCD->get_item_flag(DEAD)) {
 				say("\"Such perfidy makes my blood run cold. Have the Priestess jailed until I decide what fate she deserves!\"");
 				say("\"As for Voldin's death -- that saves me the trouble of having him executed. Praise the deed!\"");
 			} else {
@@ -108637,7 +108698,7 @@ void Func093A 0x93A (var var0000) {
 			abort;
 		}
 		if (var0000 == 0x0069) {
-			0xFE9C->clear_item_flag(0x0010);
+			0xFE9C->clear_item_flag(DONT_MOVE);
 			UI_init_conversation();
 			set_schedule_type(0x000A);
 			var0003 = script 0xFFC3 {
@@ -109001,37 +109062,37 @@ void Func093B 0x93B (var var0000) {
 			}
 		}
 		if (!gflags[0x0182]) {
-			if (gflags[0x0170] && 0xFFC3->get_item_flag(0x001C)) {
+			if (gflags[0x0170] && 0xFFC3->get_item_flag(MET)) {
 				var0007 = 0xFFC3;
 			}
 			if (gflags[0x0172]) {
 				var0007 &= 0xFFC3;
 			}
 		}
-		if ((!gflags[0x0180]) && (0xFFC4->get_item_flag(0x001C) && ((!0xFFC4->get_item_flag(0x0004)) && gflags[0x0170]))) {
+		if ((!gflags[0x0180]) && (0xFFC4->get_item_flag(MET) && ((!0xFFC4->get_item_flag(DEAD)) && gflags[0x0170]))) {
 			var0007 = 0xFFC4;
 		}
-		if ((!gflags[0x0176]) && 0xFFD2->get_item_flag(0x001C)) {
+		if ((!gflags[0x0176]) && 0xFFD2->get_item_flag(MET)) {
 			if (gflags[0x0170]) {
 				var0007 = 0xFFD2;
 			}
 		}
 		if (!gflags[0x0179]) {
-			if (gflags[0x0170] && 0xFFCC->get_item_flag(0x001C)) {
+			if (gflags[0x0170] && 0xFFCC->get_item_flag(MET)) {
 				var0007 = 0xFFCC;
 			}
 			if (gflags[0x0172]) {
 				var0007 &= 0xFFCC;
 			}
 		}
-		if ((!gflags[0x017A]) && (gflags[0x0170] && 0xFFCB->get_item_flag(0x001C))) {
+		if ((!gflags[0x017A]) && (gflags[0x0170] && 0xFFCB->get_item_flag(MET))) {
 			var0007 = 0xFFCB;
 		}
-		if ((!gflags[0x017C]) && (0xFFCA->get_item_flag(0x001C) && gflags[0x0170])) {
+		if ((!gflags[0x017C]) && (0xFFCA->get_item_flag(MET) && gflags[0x0170])) {
 			var0007 = 0xFFCA;
 		}
 		if (!gflags[0x017F]) {
-			if (gflags[0x0170] && (0xFFC5->get_item_flag(0x001C) && (!0xFFC5->get_item_flag(0x0004)))) {
+			if (gflags[0x0170] && (0xFFC5->get_item_flag(MET) && (!0xFFC5->get_item_flag(DEAD)))) {
 				var0007 = 0xFFC5;
 			}
 			if (gflags[0x0172]) {
@@ -109039,7 +109100,7 @@ void Func093B 0x93B (var var0000) {
 			}
 		}
 		if (!gflags[0x0177]) {
-			if (gflags[0x0170] && 0xFFD1->get_item_flag(0x001C)) {
+			if (gflags[0x0170] && 0xFFD1->get_item_flag(MET)) {
 				var0007 = 0xFFD1;
 			}
 			if (gflags[0x0172]) {
@@ -109047,7 +109108,7 @@ void Func093B 0x93B (var var0000) {
 			}
 		}
 		if (!gflags[0x017D]) {
-			if (gflags[0x0170] && (0xFFC8->get_item_flag(0x001C) && (!0xFFC8->get_item_flag(0x0004)))) {
+			if (gflags[0x0170] && (0xFFC8->get_item_flag(MET) && (!0xFFC8->get_item_flag(DEAD)))) {
 				var0007 = 0xFFC8;
 			}
 			if (gflags[0x0172]) {
@@ -109055,7 +109116,7 @@ void Func093B 0x93B (var var0000) {
 			}
 		}
 		if (!gflags[0x0178]) {
-			if (gflags[0x0170] && 0xFFD0->get_item_flag(0x001C)) {
+			if (gflags[0x0170] && 0xFFD0->get_item_flag(MET)) {
 				var0007 = 0xFFD0;
 			}
 			if (gflags[0x0172]) {
@@ -109364,7 +109425,7 @@ void Func093E 0x93E (var var0000) {
 	var0004 = UI_get_random(var0003);
 	var0005 = UI_create_new_object(var0001[var0004]);
 	if (var0005) {
-		var0005->set_item_flag(0x0012);
+		var0005->set_item_flag(TEMPORARY);
 		var0005->set_item_frame(UI_get_random(var0002[var0004]) - 0x0001);
 		var0006 = UI_update_last_created(var0000);
 	}
@@ -109384,7 +109445,7 @@ void Func093F 0x93F (var var0000) {
 	var0004 = UI_get_random(var0003);
 	var0005 = UI_create_new_object(var0001[var0004]);
 	if (var0005) {
-		var0005->set_item_flag(0x0012);
+		var0005->set_item_flag(TEMPORARY);
 		var0005->set_item_frame(UI_get_random(var0002[var0004]) - 0x0001);
 		var0006 = UI_update_last_created(var0000);
 	}
@@ -109422,7 +109483,7 @@ var Func0942 0x942 (var var0000) {
 
 	var0001 = var0000->get_npc_object();
 	var0002 = var0001->npc_nearby();
-	if (var0001->get_item_flag(0x0000)) {
+	if (var0001->get_item_flag(INVISIBLE)) {
 		var0002 = false;
 	}
 	return var0002;
@@ -109481,7 +109542,7 @@ extern var Func09A0 0x9A0 (var var0000, var var0001);
 void Func0945 0x945 (var var0000) {
 	var var0001;
 
-	if ((!var0000->get_item_flag(0x000B)) && (!var0000->get_item_flag(0x0017))) {
+	if ((!var0000->get_item_flag(OKAY_TO_TAKE)) && (!var0000->get_item_flag(IN_DUNGEON))) {
 		gflags[0x000E] = true;
 		UI_close_gumps();
 		var0001 = script Func09A0(0x0001, 0x0001) after 3 ticks {
@@ -109567,7 +109628,7 @@ void Func094E 0x94E (var var0000, var var0001) {
 
 	if (var0000 == 0xFED3) {
 		var0000->show_npc_face1(0x0000);
-		if (var0000->get_item_flag(0x0019)) {
+		if (var0000->get_item_flag(CONFUSED)) {
 			say("\"Slurp\"");
 		} else {
 			for (var0004 in var0001 with var0002 to var0003) {
@@ -109583,7 +109644,7 @@ void Func094E 0x94E (var var0000, var var0001) {
 			var0000 = 0xFED6;
 		}
 		var0000->show_npc_face1(0x0000);
-		if (var0000->get_item_flag(0x0019)) {
+		if (var0000->get_item_flag(CONFUSED)) {
 			say("\"Slurp\"");
 		} else {
 			for (var0004 in var0001 with var0005 to var0006) {
@@ -109604,7 +109665,7 @@ void Func094F 0x94F (var var0000, var var0001) {
 	var var0005;
 
 	if (var0000->npc_nearby()) {
-		if (var0000->get_item_flag(0x0019)) {
+		if (var0000->get_item_flag(CONFUSED)) {
 			var0000->item_say("@Slurp@");
 		} else {
 			var0002 = 0x0000;
@@ -109990,8 +110051,8 @@ void Func096A 0x96A (var var0000, var var0001, var var0002) {
 	var var0004;
 
 	var0003 = var0000->get_npc_object();
-	if (var0003->get_item_flag(0x0008)) {
-		var0003->clear_item_flag(0x0008);
+	if (var0003->get_item_flag(POISONED)) {
+		var0003->clear_item_flag(POISONED);
 		var0004 = UI_remove_party_items(var0002, var0001, 0xFE99, 0xFE99, true);
 		say("\"The wounds have been healed.\"");
 	} else {
@@ -110588,7 +110649,7 @@ var Func0980 0x980 (var var0000) {
 	var0001 = find_nearby(0xFE99, var0000, 0x0008);
 	var0002 = UI_get_party_list();
 	var0003 = [];
-	if (get_item_flag(0x0006)) {
+	if (get_item_flag(IN_PARTY)) {
 		for (var0006 in var0001 with var0004 to var0005) {
 			if (!(var0006 in var0002)) {
 				var0003 &= var0006;
@@ -110620,7 +110681,7 @@ void Func0982 0x982 (var var0000, var var0001) {
 
 var Func0983 0x983 (var var0000) {
 
-	if ((var0000->get_npc_prop(0x0002) >= 0x000A) && ((!var0000->get_item_flag(0x0001)) && ((!var0000->get_item_flag(0x0007)) && ((!var0000->get_item_flag(0x0004)) && ((var0000->get_npc_prop(0x0003) > 0x0000) && var0000->is_npc()))))) {
+	if ((var0000->get_npc_prop(0x0002) >= 0x000A) && ((!var0000->get_item_flag(ASLEEP)) && ((!var0000->get_item_flag(PARALYZED)) && ((!var0000->get_item_flag(DEAD)) && ((var0000->get_npc_prop(0x0003) > 0x0000) && var0000->is_npc()))))) {
 		return true;
 	}
 	return false;
@@ -110631,7 +110692,7 @@ extern var Func0985 0x985 (var var0000);
 var Func0984 0x984 (var var0000) {
 
 	var0000 = Func0985(var0000);
-	if (var0000->get_item_flag(0x0001) || (var0000->get_item_flag(0x0007) || (var0000->get_item_flag(0x0004) || (var0000->get_npc_prop(0x0003) <= 0x0000)))) {
+	if (var0000->get_item_flag(ASLEEP) || (var0000->get_item_flag(PARALYZED) || (var0000->get_item_flag(DEAD) || (var0000->get_npc_prop(0x0003) <= 0x0000)))) {
 		return true;
 	}
 	return false;
@@ -110667,14 +110728,14 @@ void Func0986 0x986 (var var0000, var var0001) {
 	for (var0005 in var0002 with var0003 to var0004) {
 		if (var0005->get_npc_prop(0x0009) >= 0x000A) {
 			if (!(var0005 == 0xFE9C->get_npc_object())) {
-				var0005->clear_item_flag(0x0001);
+				var0005->clear_item_flag(ASLEEP);
 			}
-			var0005->clear_item_flag(0x0008);
-			var0005->clear_item_flag(0x0007);
-			var0005->clear_item_flag(0x0003);
-			var0005->clear_item_flag(0x0002);
-			var0005->clear_item_flag(0x0000);
-			var0005->clear_item_flag(0x0009);
+			var0005->clear_item_flag(POISONED);
+			var0005->clear_item_flag(PARALYZED);
+			var0005->clear_item_flag(CURSED);
+			var0005->clear_item_flag(CHARMED);
+			var0005->clear_item_flag(INVISIBLE);
+			var0005->clear_item_flag(PROTECTION);
 			Func0987(var0005, 0x0003, 0x0000, var0000);
 			if (var0005 == 0xFE9C->get_npc_object()) {
 				Func0987(var0005, 0x0005, 0x0006, var0000);
@@ -110961,7 +111022,7 @@ var Func098C 0x98C () {
 			}
 		}
 		if (var0000 && var0001) {
-			0xFE9C->set_item_flag(0x0019);
+			0xFE9C->set_item_flag(CONFUSED);
 			return false;
 		}
 		if (!var0001) {
@@ -111451,7 +111512,7 @@ void Func0998 0x998 (var var0000, var var0001) {
 			if (var000C) {
 				var000D = UI_die_roll(0x0000, 0x0005);
 				var000C->set_item_frame(var000D);
-				var000C->set_item_flag(0x0012);
+				var000C->set_item_flag(TEMPORARY);
 				var000E = UI_update_last_created(var000A);
 			}
 		} else {
@@ -111847,7 +111908,7 @@ var Func09A9 0x9A9 (var var0000, var var0001, var var0002) {
 }
 
 void Func09AA 0x9AA () {
-	0xFE9C->clear_item_flag(0x0010);
+	0xFE9C->clear_item_flag(DONT_MOVE);
 	UI_init_conversation();
 }
 
@@ -111866,9 +111927,9 @@ var Func09AB 0x9AB (var var0000, var var0001, var var0002, var var0003, var var0
 		}
 	}
 	if (var0003) {
-		var0005->set_item_flag(0x0012);
+		var0005->set_item_flag(TEMPORARY);
 	} else {
-		var0005->clear_item_flag(0x0012);
+		var0005->clear_item_flag(TEMPORARY);
 	}
 	if (UI_get_array_size(var0004) == 0x0003) {
 		if (!UI_update_last_created(var0004)) {
@@ -112199,7 +112260,7 @@ var Func09B3 0x9B3 (var var0000) {
 	var0002 = var0000->get_cont_items(0xFE99, 0xFE99, 0xFE99);
 	for (var0005 in var0002 with var0003 to var0004) {
 		if (!((var0005->get_item_shape() == 0x0128) && (var0005->get_item_frame() == 0x0002))) {
-			var0006 = Func099B(0xFE9C, var0005->get_item_quantity(0x0000), var0005->get_item_shape(), var0005->get_item_quality(), var0005->get_item_frame(), var0005->get_item_flag(0x0012), false);
+			var0006 = Func099B(0xFE9C, var0005->get_item_quantity(0x0000), var0005->get_item_shape(), var0005->get_item_quality(), var0005->get_item_frame(), var0005->get_item_flag(TEMPORARY), false);
 			if (var0001[0x0001] == 0x0000) {
 				var0001[0x0001] = var0006[0x0001];
 			}
@@ -112244,7 +112305,7 @@ void Func09B4 0x9B4 (var var0000) {
 			if (gflags[0x02C3]) {
 				var0002 &= "Monitor";
 			}
-			if (0xFFC5->get_item_flag(0x001C)) {
+			if (0xFFC5->get_item_flag(MET)) {
 				var0002 &= "Fawn";
 			}
 		}
@@ -112334,12 +112395,12 @@ void Func09B6 0x9B6 (var var0000, var var0001) {
 	if (event == 0x0002) {
 		if (var0000 == 0x01EF) {
 			var0000 = UI_create_new_object2(var0000, var0001);
-			var0000->set_item_flag(0x0012);
+			var0000->set_item_flag(TEMPORARY);
 			var0000->set_polymorph(0x00EF);
 			gflags[0x000D] = true;
 		} else if (var0000 == 0x013E) {
 			var0000 = UI_create_new_object2(0x013E, var0001);
-			var0000->set_item_flag(0x0012);
+			var0000->set_item_flag(TEMPORARY);
 		} else {
 			var0000->move_object(var0001);
 			if (var0000 != 0xFEF8) {
@@ -112349,7 +112410,7 @@ void Func09B6 0x9B6 (var var0000, var var0001) {
 		var0000->set_schedule_type(0x001D);
 		var0000->set_camera();
 		UI_end_conversation();
-		0xFE9C->set_item_flag(0x0010);
+		0xFE9C->set_item_flag(DONT_MOVE);
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		UI_ambient_light(0x0000);
 	}
@@ -112370,7 +112431,7 @@ void Func09B7 0x9B7 () {
 	var0000 = [0xFF85, 0xFF86, 0xFF87, 0xFF88, 0xFF89];
 	var0001 = 0x0000;
 	for (var0004 in var0000 with var0002 to var0003) {
-		var0001 += var0004->get_item_flag(0x0004);
+		var0001 += var0004->get_item_flag(DEAD);
 	}
 	if (var0001 == (UI_get_array_size(var0000) - 0x0001)) {
 		gflags[0x014E] = true;
@@ -112379,12 +112440,12 @@ void Func09B7 0x9B7 () {
 		var0005 = "@Grok...@";
 	}
 	var0006 = get_object_position();
-	set_item_flag(0x0004);
+	set_item_flag(DEAD);
 	remove_npc();
 	var0007 = UI_create_new_object(0x019E);
 	if (var0007) {
 		var0007->set_item_frame(0x0004);
-		var0007->set_item_flag(0x0012);
+		var0007->set_item_flag(TEMPORARY);
 		var0008 = var0007->add_cont_items(0x0001, 0x024B, 0x0000, 0x0006, true);
 		var0008 = var0007->add_cont_items(0x0001, 0x0344, 0x0000, 0x0000, true);
 		var0009 = UI_die_roll(0x0001, 0x0009);
