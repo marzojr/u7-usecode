@@ -53399,6 +53399,7 @@ void Func04A9 object#(0x4A9) () {
 			}
 		}
 	}
+	// BUG: This should use SI_PATH_FAILURE instead of PATH_FAILURE.
 	if (event == PATH_FAILURE) {
 		var0006 = find_nearest(0x00E9, 0x0005);
 		if (var0006) {
@@ -53418,6 +53419,7 @@ void Func04A9 object#(0x4A9) () {
 				var0008 = 0xFFFF;
 				var0009 = 0xFFFD;
 				Func090E(0xFF57, var0004, var0007, var0008, var0009, Func04A9, 0xFF57->get_npc_object(), PATH_FAILURE, false);
+				// BUG: This should use SI_PATH_FAILURE instead of PATH_FAILURE.
 				UI_set_path_failure(Func04A9, item, PATH_FAILURE);
 			}
 		} else {
@@ -72733,6 +72735,7 @@ void Func071F object#(0x71F) () {
 		UI_sprite_effect(0x001A, var0018[0x0001], var0018[0x0002], 0x0005, 0xFFFB, 0x0000, 0xFFFF);
 		var0019 = [0x068B, 0x0015, 0x0002];
 		0xFE9C->si_path_run_usecode(var0019, PATH_SUCCESS, item, Func071F, true);
+		// BUG: This should use SI_PATH_FAILURE instead of PATH_SUCCESS.
 		UI_set_path_failure(Func071F, item, PATH_SUCCESS);
 	}
 }
@@ -72876,6 +72879,7 @@ void Func0720 object#(0x720) () {
 		0xFE9C->set_item_flag(DONT_MOVE);
 		var0018 = [0x068B, 0x0015, 0x0002];
 		0xFE9C->si_path_run_usecode(var0018, PATH_SUCCESS, item, Func0720, true);
+		// BUG: This should use SI_PATH_FAILURE instead of PATH_SUCCESS.
 		UI_set_path_failure(Func0720, item, PATH_SUCCESS);
 	}
 }
@@ -101769,6 +101773,7 @@ void Func08AE 0x8AE () {
 		if (var0007->get_item_quality() == 0x0064) {
 			var0008 = var0007->get_object_position();
 			Func090E(0xFF57, var0007, var0000, var0001, var0002, Func04A9, 0xFF57->get_npc_object(), PATH_SUCCESS, true);
+			// BUG: This should use SI_PATH_FAILURE instead of PATH_SUCCESS.
 			UI_set_path_failure(Func04A9, item, PATH_SUCCESS);
 			return;
 		}
@@ -101777,6 +101782,7 @@ void Func08AE 0x8AE () {
 		if (var0007->get_item_quality() == 0x0000) {
 			var0008 = var0007->get_object_position();
 			Func090E(0xFF57, var0007, var0000, var0001, var0002, Func04A9, 0xFF57->get_npc_object(), PATH_SUCCESS, true);
+			// BUG: This should use SI_PATH_FAILURE instead of PATH_SUCCESS.
 			UI_set_path_failure(Func04A9, item, PATH_SUCCESS);
 			// Need to make UCC optimize this
 			goto labelFunc08AE_00DD;
@@ -103810,6 +103816,7 @@ void Func08D4 0x8D4 () {
 			var0002 = 0xFFFF;
 			var0003 = 0xFFFD;
 			Func090E(0xFF27, item, var0001, var0002, var0003, Func07DF, 0xFF27->get_npc_object(), PATH_SUCCESS, true);
+			// BUG: This should use SI_PATH_FAILURE instead of PATH_SUCCESS.
 			UI_set_path_failure(Func07DF, 0xFF27->get_npc_object(), PATH_SUCCESS);
 		}
 	}
