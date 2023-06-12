@@ -98,6 +98,7 @@ enum events {
 							// both for conversations triggered by doubleclick
 							// and by the TALK schedule
 
+	//The following events are arbitrary programmer conventions:
 	BG_PATH_SUCCESS	= 7,	// Set with calls to UI_path_run_usecode, to indicate
 							// a successful pathfind to the target object
 	BG_PATH_FAILURE	= 8,	// Set with calls to UI_set_path_failure, to indicate
@@ -105,13 +106,13 @@ enum events {
 							// moves the Avatar manually)
 	PATH_SUCCESS_9	= 9,	// Set with calls to UI_path_run_usecode, to indicate
 							// a successful pathfind to the target object
-
 	PATH_SUCCESS	= 10,	// Set with calls to UI_path_run_usecode, to indicate
 							// a successful pathfind to the target object
 	PATH_FAILURE	= 11,	// Set with calls to UI_set_path_failure, to indicate
 							// an interrupted pathfind (e.g. when the player
 							// moves the Avatar manually)
-	SI_PATH_SUCCESS	= 13,
+	SI_PATH_SUCCESS	= 13,	// Set with calls to UI_path_run_usecode, to indicate
+							// a successful pathfind to the target object
 	SI_PATH_FAILURE	= 14	// Set with calls to UI_set_path_failure, to indicate
 							// an interrupted pathfind (e.g. when the player
 							// moves the Avatar manually)
