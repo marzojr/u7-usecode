@@ -13,6 +13,31 @@ enum directions : byte {
 };
 
 /*
+ *	NPC properties (mostly ability scores)
+ *	These can be retrieved and set using UI_get_npc_property(npc, property) and
+ *	UI_set_npc_property(npc, property, value) respectively.
+ *	Note however that UI_set_npc_property will actually *add* the value to the
+ *	original property, not set it to that value. Which means you will need to
+ *	calculate a relative positive/negative adjustment to set it to a target
+ *	value.
+ */
+enum npc_properties {
+	STRENGTH		= 0,
+	DEXTERITY		= 1,
+	INTELLIGENCE	= 2,
+	HEALTH			= 3,
+	COMBAT			= 4,
+	MANA			= 5,
+	MAX_MANA		= 6,
+	TRAINING		= 7,
+	EXPERIENCE		= 8,
+	FOODLEVEL		= 9,
+	SEX_FLAG		= 10,	// 1 (nonzero) if female, 0 if male.
+	MISSILE_WEAPON	= 11	// Cannot be set; returns 1 if wearing a missile
+							// or (good) thrown weapon, 0 otherwise.
+};
+
+/*
  *	parts of the day (3-hour intervals). Returned by UI_part_of_day. This is
  *	usually only used by conversation scripts, as a way of narrowing down
  *	schedule-related behaviour.
@@ -3083,7 +3108,7 @@ void Func0112 shape#(0x112) () {
 	}
 	var0002 = UI_get_party_list();
 	if (var0001 in var0002) {
-		var0000 = set_npc_prop(0x0003, 0x0005);
+		var0000 = set_npc_prop(HEALTH, 5);
 		var0003 = 0xFE9C->find_nearby(0x017D, 0x001E, 0x0000);
 		for (var0006 in var0003 with var0004 to var0005) {
 			var0006->set_schedule_type(TALK);
@@ -3105,7 +3130,7 @@ void Func0112 shape#(0x112) () {
 			}
 		}
 	} else {
-		var0000 = set_npc_prop(0x0003, 0x0014);
+		var0000 = set_npc_prop(HEALTH, 20);
 		clear_item_say();
 		var0007 = ["@Oh, my!@", "@I am bleeding...@", "@Oh, help me!@", "@Ouch!@", "@Fiend, stop that!@", "@I die!@"];
 		Func097F(item, [var0007[UI_get_random(UI_get_array_size(var0007))]], 0x0000);
@@ -3353,10 +3378,10 @@ void Func0128 shape#(0x128) () {
 			halt_scheduled();
 			var0001 = get_container();
 			if (var0001 && var0001->is_npc()) {
-				var0003 = var0001->get_npc_prop(0x0000);
-				var0004 = var0001->get_npc_prop(0x0003);
+				var0003 = var0001->get_npc_prop(STRENGTH);
+				var0004 = var0001->get_npc_prop(HEALTH);
 				if (var0004 < var0003) {
-					var0002 = var0001->set_npc_prop(0x0003, 0x0001);
+					var0002 = var0001->set_npc_prop(HEALTH, 1);
 					if (UI_die_roll(0x0001, 0x0064) == 0x0001) {
 						remove_item();
 						return;
@@ -3682,12 +3707,12 @@ void Func013E shape#(0x13E) () {
 			UI_remove_npc_face0();
 			0xFE9C->set_item_flag(SI_TOURNAMENT);
 			var0003->set_item_flag(SI_TOURNAMENT);
-			var0004 = var0003->set_npc_prop(0x0004, 0x000A);
-			var0004 = var0003->set_npc_prop(0x0002, 0x000A);
-			var0004 = var0003->set_npc_prop(0x0000, 0x000A);
-			var0005 = 0xFE9C->get_npc_prop(0x0003);
-			if (var0005 > 0x000F) {
-				var0004 = 0xFE9C->set_npc_prop(0x0003, (0x000F - var0005));
+			var0004 = var0003->set_npc_prop(COMBAT, 10);
+			var0004 = var0003->set_npc_prop(INTELLIGENCE, 10);
+			var0004 = var0003->set_npc_prop(STRENGTH, 10);
+			var0005 = 0xFE9C->get_npc_prop(HEALTH);
+			if (var0005 > 15) {
+				var0004 = 0xFE9C->set_npc_prop(HEALTH, 15 - var0005);
 			}
 		}
 		if (event == DEATH) {
@@ -3702,7 +3727,7 @@ void Func013E shape#(0x13E) () {
 			if (var0006 == 0x0003) {
 				say("\"No! Thou canst not escape that easily!\"");
 			}
-			var0004 = var0003->set_npc_prop(0x0003, 0x0014);
+			var0004 = var0003->set_npc_prop(HEALTH, 20);
 		}
 	}
 	var0007 = get_npc_id();
@@ -4470,12 +4495,12 @@ void Func0154 shape#(0x154) () {
 			}
 			if (var0001 == 0x0008) {
 				if (var0002 == 0xFE9C->get_npc_object()) {
-					var0005 = 0xFE9C->get_npc_prop(0x0005);
+					var0005 = 0xFE9C->get_npc_prop(MANA);
 					var0006 = UI_get_random(0x000A);
-					if ((var0005 + var0006) > 0x001F) {
-						var0006 = 0x001F - var0005;
+					if ((var0005 + var0006) > 31) {
+						var0006 = 31 - var0005;
 					}
-					var0007 = 0xFE9C->set_npc_prop(0x0005, var0006);
+					var0007 = 0xFE9C->set_npc_prop(MANA, var0006);
 				}
 			}
 			if (var0001 == 0x0009) {
@@ -4515,7 +4540,7 @@ void Func0162 shape#(0x162) () {
 		set_schedule_type(TALK);
 	}
 	if (((event == STARTED_TALKING) || (event == DEATH)) && (!get_item_flag(SI_ZOMBIE))) {
-		var0000 = set_npc_prop(0x0003, 0x001E);
+		var0000 = set_npc_prop(HEALTH, 30);
 		set_item_flag(SI_ZOMBIE);
 		clear_item_say();
 		set_schedule_type(IN_COMBAT);
@@ -5910,10 +5935,10 @@ void Func01C3 shape#(0x1C3) () {
 				call Func01C3;
 			};
 			UI_play_music(0x001D, Func09A0(0x0005, 0x0001));
-			var0004 = 0xFFB6->get_npc_prop(0x0003);
-			var0003 = 0xFFB6->set_npc_prop(0x0003, (0xFFB6->get_npc_prop(0x0000) - var0004));
-			var0004 = 0xFFB9->get_npc_prop(0x0003);
-			var0003 = 0xFFB9->set_npc_prop(0x0003, (0xFFB6->get_npc_prop(0x0000) - var0004));
+			var0004 = 0xFFB6->get_npc_prop(HEALTH);
+			var0003 = 0xFFB6->set_npc_prop(HEALTH, 0xFFB6->get_npc_prop(STRENGTH) - var0004);
+			var0004 = 0xFFB9->get_npc_prop(HEALTH);
+			var0003 = 0xFFB9->set_npc_prop(HEALTH, 0xFFB6->get_npc_prop(STRENGTH) - var0004);
 			abort;
 		}
 		if (0xFFBB->get_npc_id() == 0x000D) {
@@ -6308,10 +6333,10 @@ labelFunc01C3_073B:
 		if (0xFFBB->get_npc_id() == 0x0000) {
 			UI_play_music(0x000F, Func09A0(0x0005, 0x0001));
 			0xFE9C->set_item_flag(DONT_MOVE);
-			var0004 = 0xFFB6->get_npc_prop(0x0003);
-			var0003 = 0xFFB6->set_npc_prop(0x0003, (0xFFB6->get_npc_prop(0x0000) - var0004));
-			var0004 = 0xFFB9->get_npc_prop(0x0003);
-			var0003 = 0xFFB9->set_npc_prop(0x0003, (0xFFB6->get_npc_prop(0x0000) - var0004));
+			var0004 = 0xFFB6->get_npc_prop(HEALTH);
+			var0003 = 0xFFB6->set_npc_prop(HEALTH, 0xFFB6->get_npc_prop(STRENGTH) - var0004);
+			var0004 = 0xFFB9->get_npc_prop(HEALTH);
+			var0003 = 0xFFB9->set_npc_prop(HEALTH, 0xFFB6->get_npc_prop(STRENGTH) - var0004);
 			UI_end_conversation();
 			var0006 = Func0992(0x0001, 0x0000, 0x0000, true);
 			var0003 = "We";
@@ -7441,7 +7466,7 @@ void Func01D0 shape#(0x1D0) () {
 	if (gflags[0x00BF]) {
 		abort;
 	}
-	var0000 = set_npc_prop(0x0003, 0x0005);
+	var0000 = set_npc_prop(HEALTH, 5);
 	if (UI_get_array_size(0xFE9C->find_nearby(0x00E4, 0x001E, 0x0000)) > 0x0006) {
 		abort;
 	}
@@ -8294,7 +8319,7 @@ void Func0202 shape#(0x202) () {
 	if (event == DEATH) {
 		var0003 = get_object_position();
 		if (get_npc_id() > 0x0000) {
-			var0004 = set_npc_prop(0x0003, 0x0001);
+			var0004 = set_npc_prop(HEALTH, 1);
 			var0005 = UI_die_roll(0x0001, 0x000A);
 			if (var0005 <= 0x0005) {
 				var0003[0x0001] = 0x06B1 + UI_die_roll(0x0000, 0x002D);
@@ -9190,7 +9215,7 @@ void Func0273 shape#(0x273) () {
 		UI_play_sound_effect2(0x0044, item);
 		var0001 = var0000->get_item_shape();
 		var0002 = var0000->get_item_quality();
-		if (UI_die_roll(0x0001, 0x001E) < 0xFE9C->get_npc_prop(0x0001)) {
+		if (UI_die_roll(0x0001, 0x001E) < 0xFE9C->get_npc_prop(DEXTERITY)) {
 			var0003 = true;
 		} else {
 			var0003 = false;
@@ -10063,7 +10088,7 @@ void Func0289 shape#(0x289) () {
 						var0007->Func02C0();
 						for (var0013 in var0010 with var0011 to var0012) {
 							if ((var0013->get_item_shape() == 0x0190) && (var0013->get_item_frame() == 0x0008)) {
-								var0014 = 0xFF6B->set_npc_prop(0x0003, 0x0001);
+								var0014 = 0xFF6B->set_npc_prop(HEALTH, 1);
 								gflags[0x025F] = true;
 								gflags[0x0262] = true;
 							}
@@ -12428,8 +12453,8 @@ void Func02C5 shape#(0x2C5) () {
 				nohalt;
 				call Func010E;
 			};
-			var0004 = 0xFF69->get_npc_prop(0x0003);
-			var0003 = 0xFF69->set_npc_prop(0x0003, (0x0064 - var0004));
+			var0004 = 0xFF69->get_npc_prop(HEALTH);
+			var0003 = 0xFF69->set_npc_prop(HEALTH, 100 - var0004);
 			0xFF69->move_object([0x09E5, 0x032F, 0x0000]);
 			var0003 = script 0xFF69 {
 				face SOUTH;
@@ -13087,7 +13112,7 @@ void Func02E7 shape#(0x2E7) () {
 		gflags[0x02E3] = true;
 		var0000 = find_nearby(0x02E7, 0x002D, 0x0000);
 		if (var0000) {
-			var0001 = var0000->set_npc_prop(0x0003, 0x0001);
+			var0001 = var0000->set_npc_prop(HEALTH, 1);
 		}
 	}
 }
@@ -14785,7 +14810,7 @@ void Func0329 shape#(0x329) () {
 		UI_play_sound_effect(0x002B);
 		abort;
 	}
-	var0000 = set_npc_prop(0x0003, 0x0005);
+	var0000 = set_npc_prop(HEALTH, 5);
 	var0001 = get_object_position();
 	UI_sprite_effect(0x001A, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_play_sound_effect(0x0082);
@@ -15035,7 +15060,7 @@ void Func032C shape#(0x32C) () {
 	if ((event == SCRIPTED) && (gflags[0x0007] == true)) {
 		Func09AA();
 		gflags[0x0007] = false;
-		var0006 = 0xFE9C->get_npc_prop(0x0003);
+		var0006 = 0xFE9C->get_npc_prop(HEALTH);
 		0xFE9C->reduce_health(var0006, 0x0000);
 	}
 }
@@ -15874,8 +15899,8 @@ void Func033B shape#(0x33B) () {
 	if (event == DOUBLECLICK) {
 		var0000 = UI_click_on_item();
 		if (var0000->is_npc()) {
-			var0001 = var0000->get_npc_prop(0x0000);
-			var0002 = var0000->get_npc_prop(0x0003);
+			var0001 = var0000->get_npc_prop(STRENGTH);
+			var0002 = var0000->get_npc_prop(HEALTH);
 			if (var0002 == var0001) {
 				Func094A("@It doth not appear that a bandage is needed.@");
 			} else {
@@ -15897,7 +15922,7 @@ void Func033B shape#(0x33B) () {
 				if ((var0002 + var0003) > var0001) {
 					var0003 = var0001 - var0002;
 				}
-				var0003 = var0000->set_npc_prop(0x0003, var0003);
+				var0003 = var0000->set_npc_prop(HEALTH, var0003);
 				Func0971(item);
 			}
 		} else {
@@ -16156,8 +16181,8 @@ void Func033D shape#(0x33D) () {
 				gflags[0x000A] = false;
 				if (!var000A) {
 					gflags[0x0228] = true;
-					var0004 = 0xFFE4->set_npc_prop(0x000A, 0x0000);
-					var0004 = 0xFE9C->set_npc_prop(0x000A, 0x0001);
+					var0004 = 0xFFE4->set_npc_prop(SEX_FLAG, 0);
+					var0004 = 0xFE9C->set_npc_prop(SEX_FLAG, 1);
 				}
 				UI_play_music(0x0040, 0x0000);
 				return;
@@ -19757,13 +19782,13 @@ void Func03DE shape#(0x3DE) () {
 				gflags[0x0304] = true;
 			}
 			if (!gflags[0x0303]) {
-				var0001 = var0000->get_npc_prop(0x0004);
-				var0002 = 0x001E - var0001;
-				if (var0002 > 0x000A) {
-					var0002 = 0x000A;
+				var0001 = var0000->get_npc_prop(COMBAT);
+				var0002 = 30 - var0001;
+				if (var0002 > 10) {
+					var0002 = 10;
 				}
 				var0003 = set_item_quality(var0002);
-				var0004 = var0000->set_npc_prop(0x0004, var0002);
+				var0004 = var0000->set_npc_prop(COMBAT, var0002);
 				if (var0004) {
 					gflags[0x0303] = true;
 				}
@@ -19773,8 +19798,8 @@ void Func03DE shape#(0x3DE) () {
 	if (event == UNREADIED) {
 		if (gflags[0x0303]) {
 			var0005 = get_item_quality();
-			var0006 = 0xFFFF * var0005;
-			var0004 = var0000->set_npc_prop(0x0004, var0006);
+			var0006 = -1 * var0005;
+			var0004 = var0000->set_npc_prop(COMBAT, var0006);
 			if (var0004) {
 				gflags[0x0303] = false;
 			}
@@ -19812,13 +19837,13 @@ void Func03E4 shape#(0x3E4) () {
 				gflags[0x02E9] = true;
 			}
 			if (!gflags[0x02E8]) {
-				var0001 = var0000->get_npc_prop(0x0000);
-				var0002 = 0x001E - var0001;
-				if (var0002 > 0x000A) {
-					var0002 = 0x000A;
+				var0001 = var0000->get_npc_prop(STRENGTH);
+				var0002 = 30 - var0001;
+				if (var0002 > 10) {
+					var0002 = 10;
 				}
 				var0003 = set_item_quality(var0002);
-				var0004 = var0000->set_npc_prop(0x0000, var0002);
+				var0004 = var0000->set_npc_prop(STRENGTH, var0002);
 				if (var0004) {
 					gflags[0x02E8] = true;
 				}
@@ -19829,14 +19854,14 @@ void Func03E4 shape#(0x3E4) () {
 		if (gflags[0x02E8]) {
 			var0005 = get_item_quality();
 			var0006 = 0xFFFF * var0005;
-			var0004 = var0000->set_npc_prop(0x0000, var0006);
+			var0004 = var0000->set_npc_prop(STRENGTH, var0006);
 			if (var0004) {
 				gflags[0x02E8] = false;
-				var0001 = var0000->get_npc_prop(0x0000);
-				var0007 = var0000->get_npc_prop(0x0003);
+				var0001 = var0000->get_npc_prop(STRENGTH);
+				var0007 = var0000->get_npc_prop(HEALTH);
 				if (var0007 > var0001) {
 					var0008 = var0001 - var0007;
-					var0004 = var0000->set_npc_prop(0x0003, var0008);
+					var0004 = var0000->set_npc_prop(HEALTH, var0008);
 				}
 			}
 		}
@@ -19891,13 +19916,13 @@ void Func03E9 shape#(0x3E9) () {
 				gflags[0x02F9] = true;
 			}
 			if (!gflags[0x0302]) {
-				var0001 = var0000->get_npc_prop(0x0001);
-				var0002 = 0x001E - var0001;
-				if (var0002 > 0x000A) {
-					var0002 = 0x000A;
+				var0001 = var0000->get_npc_prop(DEXTERITY);
+				var0002 = 30 - var0001;
+				if (var0002 > 10) {
+					var0002 = 10;
 				}
 				var0003 = set_item_quality(var0002);
-				var0004 = var0000->set_npc_prop(0x0001, var0002);
+				var0004 = var0000->set_npc_prop(DEXTERITY, var0002);
 				if (var0004) {
 					gflags[0x0302] = true;
 				}
@@ -19907,8 +19932,8 @@ void Func03E9 shape#(0x3E9) () {
 	if (event == UNREADIED) {
 		if (gflags[0x0302]) {
 			var0005 = get_item_quality();
-			var0006 = 0xFFFF * var0005;
-			var0004 = var0000->set_npc_prop(0x0001, var0006);
+			var0006 = -1 * var0005;
+			var0004 = var0000->set_npc_prop(DEXTERITY, var0006);
 			if (var0004) {
 				gflags[0x0302] = false;
 			}
@@ -20389,14 +20414,14 @@ void Func0400 object#(0x400) () {
 		if ((var0001 == 0x0014) && (!0xFE9C->get_item_flag(DONT_MOVE))) {
 			var0002 = 0xFE9C->get_object_position();
 			if ((var0002[0x0001] > 0x09D0) && ((var0002[0x0001] < 0x09FA) && ((var0002[0x0002] > 0x0320) && (var0002[0x0002] < 0x033A)))) {
-				var0000 = 0xFE9C->get_npc_prop(0x0003);
-				if (var0000 < 0x0000) {
-					var0000 = 0x0003 - var0000;
+				var0000 = 0xFE9C->get_npc_prop(HEALTH);
+				if (var0000 < 0) {
+					var0000 = 3 - var0000;
 				}
-				if (var0000 == 0x0000) {
-					var0000 = 0x0003;
+				if (var0000 == 0) {
+					var0000 = 3;
 				}
-				var0000 = 0xFE9C->set_npc_prop(0x0003, var0000);
+				var0000 = 0xFE9C->set_npc_prop(HEALTH, var0000);
 				abort;
 			}
 			var0003 = 0xFE9C->find_nearby(0x013E, 0x0014, 0x0000);
@@ -20460,9 +20485,9 @@ void Func0400 object#(0x400) () {
 			}
 			UI_play_music(0x0016, Func09A0(0x0005, 0x0001));
 			0xFE9C->move_object([0x05B4, 0x0652, 0x0000]);
-			if (Func095C(0xFE9C, 0x0000) > Func095C(0xFE9C, 0x0003)) {
-				var0000 = Func095C(0xFE9C, 0x0000) - Func095C(0xFE9C, 0x0003);
-				Func095E(0xFE9C, 0x0003, var0000);
+			if (Func095C(0xFE9C, STRENGTH) > Func095C(0xFE9C, HEALTH)) {
+				var0000 = Func095C(0xFE9C, STRENGTH) - Func095C(0xFE9C, HEALTH);
+				Func095E(0xFE9C, HEALTH, var0000);
 			}
 			item->Func07D7();
 			var0004 = Func08B6();
@@ -20503,13 +20528,13 @@ void Func0400 object#(0x400) () {
 					var0003->clear_item_flag(PARALYZED);
 					var0003->clear_item_flag(POISONED);
 					var0003->clear_item_flag(DONT_MOVE);
-					if (Func095C(var0003, 0x0000) > Func095C(var0003, 0x0003)) {
-						var0000 = Func095C(var0003, 0x0000) - Func095C(var0003, 0x0003);
-						Func095E(var0003, 0x0003, var0000);
+					if (Func095C(var0003, STRENGTH) > Func095C(var0003, HEALTH)) {
+						var0000 = Func095C(var0003, STRENGTH) - Func095C(var0003, HEALTH);
+						Func095E(var0003, HEALTH, var0000);
 					}
-					var0000 = Func095C(var0003, 0x0009);
-					var0000 = 0x001F - var0000;
-					Func095E(var0003, 0x0009, var0000);
+					var0000 = Func095C(var0003, FOODLEVEL);
+					var0000 = 31 - var0000;
+					Func095E(var0003, FOODLEVEL, var0000);
 					gflags[0x026F] = true;
 					Func08B8();
 					var0012 = Func09A0(0x0000, 0x0004);
@@ -20556,13 +20581,13 @@ void Func0400 object#(0x400) () {
 				var0003->clear_item_flag(PARALYZED);
 				var0003->clear_item_flag(POISONED);
 				var0003->clear_item_flag(DONT_MOVE);
-				if (Func095C(var0003, 0x0000) > Func095C(var0003, 0x0003)) {
-					var0000 = Func095C(var0003, 0x0000) - Func095C(var0003, 0x0003);
-					Func095E(var0003, 0x0003, var0000);
+				if (Func095C(var0003, STRENGTH) > Func095C(var0003, HEALTH)) {
+					var0000 = Func095C(var0003, STRENGTH) - Func095C(var0003, HEALTH);
+					Func095E(var0003, HEALTH, var0000);
 				}
-				var0000 = Func095C(var0003, 0x0009);
-				var0000 = 0x001F - var0000;
-				Func095E(var0003, 0x0009, var0000);
+				var0000 = Func095C(var0003, FOODLEVEL);
+				var0000 = 31 - var0000;
+				Func095E(var0003, FOODLEVEL, var0000);
 				var0000 = [(var0002[0x0001] + var0013[var0007]), (var0002[0x0002] + var0014[var0007]), var0002[0x0003]];
 				var0003->move_object(var0000);
 				var0000 = script var0003 {
@@ -20642,7 +20667,7 @@ void Func0400 object#(0x400) () {
 					nohalt;
 					actor frame strike_1h;
 				};
-				var0000 = 0xFE9C->set_npc_prop(0x0003, 0x000A);
+				var0000 = 0xFE9C->set_npc_prop(HEALTH, 10);
 				var0000 = script Func09A0(0x0005, 0x0001) after 10 ticks {
 					nohalt;
 					call Func07DA;
@@ -20650,7 +20675,7 @@ void Func0400 object#(0x400) () {
 				Func097F(item, "@Die, fool!@", 0x0000);
 			} else {
 				Func097F(item, "@Damn thee!@", 0x0000);
-				var0000 = 0xFE9C->set_npc_prop(0x0003, 0x000A);
+				var0000 = 0xFE9C->set_npc_prop(HEALTH, 10);
 				gflags[0x021F] = true;
 				var0000 = script 0xFE9C after 10 ticks {
 					nohalt;
@@ -21022,10 +21047,10 @@ void Func0402 object#(0x402) () {
 				0x0000->set_conversation_slot();
 				say("\"I forgive thee for deserting us, King Shamino. To prove that my love for thee is stronger than eternity, I shall heal thee of thy wounds.\"");
 				say("\"Keep this book as a keepsake between us. Now I must go into the Void, but remember me always...\"");
-				var0006 = Func095C(0xFFFE, 0x0000);
-				var0007 = Func095C(0xFFFE, 0x0003);
+				var0006 = Func095C(0xFFFE, STRENGTH);
+				var0007 = Func095C(0xFFFE, HEALTH);
 				var0008 = var0006 - var0007;
-				Func095E(0xFFFE, 0x0003, var0008);
+				Func095E(0xFFFE, HEALTH, var0008);
 				var0009 = Func099B(0xFFFE, 0x0001, 0x0282, 0x003F, 0x0000, 0x0000, true);
 				gflags[0x025B] = false;
 				gflags[0x025C] = true;
@@ -27069,9 +27094,9 @@ void Func041C object#(0x41C) () {
 	}
 	if (event == BG_PATH_FAILURE) {
 		if (gflags[0x0228]) {
-			var0003 = 0xFE9C->set_npc_prop(0x000A, 0x0000);
+			var0003 = 0xFE9C->set_npc_prop(SEX_FLAG, 0);
 			0xFFE4->set_polymorph(0x02D1);
-			var0003 = 0xFE9C->set_npc_prop(0x000A, 0x0001);
+			var0003 = 0xFE9C->set_npc_prop(SEX_FLAG, 1);
 		} else {
 			0xFFE4->set_polymorph(0x02D1);
 		}
@@ -33704,7 +33729,7 @@ void Func042D object#(0x42D) () {
 		}
 	}
 	if ((event == SCRIPTED) && (!0xFFD3->get_item_flag(DEAD))) {
-		var0008 = 0xFFD3->set_npc_prop(0x0003, 0x000A);
+		var0008 = 0xFFD3->set_npc_prop(HEALTH, 10);
 		0xFFD3->show_npc_face0(0x0000);
 		say("\"I was a fool to join with thee, Avatar! Now I am to lose my life in this foolish quest.\"");
 		0xFFD3->remove_from_party();
@@ -33720,7 +33745,7 @@ void Func042D object#(0x42D) () {
 	if (event == DEATH) {
 		if (0xFFD3->get_item_flag(SI_TOURNAMENT)) {
 			0xFFD3->clear_item_flag(SI_TOURNAMENT);
-			var0008 = 0xFFD3->set_npc_prop(0x0003, 0x000A);
+			var0008 = 0xFFD3->set_npc_prop(HEALTH, 10);
 			0xFFD3->set_attack_mode(0x0007);
 			Func097F(0xFFD3, "@I am dying!@", 0x0000);
 			var0008 = script 0xFFD3 after 7 ticks {
@@ -47241,14 +47266,14 @@ void Func0450 object#(0x450) () {
 						var0008->set_npc_id(0x0003);
 						var0008->set_schedule_type(HOUND);
 						var0008->set_alignment(0x0000);
-						var0003 = var0008->set_npc_prop(0x0001, 0x000A);
+						var0003 = var0008->set_npc_prop(DEXTERITY, 10);
 					}
 					var0008 = UI_create_new_object2(0x00E4, [0x032C, 0x0ABE, 0x0000]);
 					if (var0008) {
 						var0008->set_npc_id(0x0003);
 						var0008->set_schedule_type(HOUND);
 						var0008->set_alignment(0x0000);
-						var0003 = var0008->set_npc_prop(0x0001, 0x000A);
+						var0003 = var0008->set_npc_prop(DEXTERITY, 10);
 					}
 					0xFE9C->set_item_flag(DONT_MOVE);
 					Func0833(event);
@@ -49506,12 +49531,12 @@ void Func048F object#(0x48F) () {
 				} else {
 					var0009 = var0008->get_npc_number();
 					var000A = var0008->get_item_flag(POISONED);
-					var000B = var0008->get_npc_prop(0x0000);
-					var000C = var0008->get_npc_prop(0x0003);
+					var000B = var0008->get_npc_prop(STRENGTH);
+					var000C = var0008->get_npc_prop(HEALTH);
 					var000D = var0008->get_npc_name();
 					if (var000B > var000C) {
 						var000E = var000B - var000C;
-						var000F = var0009->set_npc_prop(0x0003, var000E);
+						var000F = var0009->set_npc_prop(HEALTH, var000E);
 						say("\"All right, ",
 							var000D,
 							" healed now!\"");
@@ -52612,7 +52637,7 @@ void Func04A3 object#(0x4A3) () {
 				UI_sprite_effect(0x0011, var0004[0x0001], var0004[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_lightning();
 				UI_play_sound_effect(0x0074);
-				var0000 = UI_apply_damage(0xFE9C->get_npc_prop(0x0000), 0x0004, 0x0003, 0xFE9C);
+				var0000 = UI_apply_damage(0xFE9C->get_npc_prop(STRENGTH), 0x0004, 0x0003, 0xFE9C);
 				var0000 = script 0xFF5D {
 					face var0003;
 					say "@Kal Grav!@";
@@ -52648,7 +52673,7 @@ void Func04A3 object#(0x4A3) () {
 				UI_play_sound_effect(0x002A);
 				var0005 = UI_get_party_list();
 				for (var0008 in var0005 with var000C to var000D) {
-					var0000 = UI_apply_damage(var0008->get_npc_prop(0x0000), 0x0004, 0x0003, var0008);
+					var0000 = UI_apply_damage(var0008->get_npc_prop(STRENGTH), 0x0004, 0x0003, var0008);
 				}
 				var0000 = script 0xFF5D {
 					face var0003;
@@ -55076,11 +55101,11 @@ void Func04B6 object#(0x4B6) () {
 				nohalt;
 				call Func0636;
 			};
-			var0007 = Func095C(0xFE9C, 0x0000);
-			var0008 = Func095C(0xFE9C, 0x0003);
+			var0007 = Func095C(0xFE9C, STRENGTH);
+			var0008 = Func095C(0xFE9C, HEALTH);
 			if (var0007 > var0008) {
 				var0009 = var0007 - var0008;
-				Func095E(0xFE9C, 0x0003, var0009);
+				Func095E(0xFE9C, HEALTH, var0009);
 			}
 			item->Func07D7();
 			var000A = Func08B6();
@@ -56307,15 +56332,15 @@ void Func04CF object#(0x4CF) () {
 				var0012->clear_item_flag(PARALYZED);
 				var0012->clear_item_flag(POISONED);
 				var0012->clear_item_flag(DONT_MOVE);
-				var0013 = Func095C(var0012, 0x0000);
-				var0014 = Func095C(var0012, 0x0003);
+				var0013 = Func095C(var0012, STRENGTH);
+				var0014 = Func095C(var0012, HEALTH);
 				if (var0013 > var0014) {
 					var0015 = var0013 - var0014;
-					Func095E(var0012, 0x0003, var0015);
+					Func095E(var0012, HEALTH, var0015);
 				}
-				var0016 = Func095C(var0012, 0x0009);
-				var0017 = 0x001F - var0016;
-				Func095E(var0012, 0x0009, var0017);
+				var0016 = Func095C(var0012, FOODLEVEL);
+				var0017 = 31 - var0016;
+				Func095E(var0012, FOODLEVEL, var0017);
 				var0018 = [(var000C[0x0001] + var000D[var000F]), (var000C[0x0002] + var000E[var000F]), var000C[0x0003]];
 				var0012->move_object(var0018);
 				var0012->halt_scheduled();
@@ -59274,13 +59299,13 @@ void Func060C object#(0x60C) () {
 		var0009->clear_item_flag(PARALYZED);
 		var0009->clear_item_flag(POISONED);
 		var0009->clear_item_flag(DONT_MOVE);
-		if (Func095C(var0009, 0x0000) > Func095C(var0009, 0x0003)) {
-			var000A = Func095C(var0009, 0x0000) - Func095C(var0009, 0x0003);
-			Func095E(var0009, 0x0003, var000A);
+		if (Func095C(var0009, STRENGTH) > Func095C(var0009, HEALTH)) {
+			var000A = Func095C(var0009, STRENGTH) - Func095C(var0009, HEALTH);
+			Func095E(var0009, HEALTH, var000A);
 		}
-		var000A = Func095C(var0009, 0x0009);
-		var000A = 0x001F - var000A;
-		Func095E(var0009, 0x0009, var000A);
+		var000A = Func095C(var0009, FOODLEVEL);
+		var000A = 31 - var000A;
+		Func095E(var0009, FOODLEVEL, var000A);
 		var000A = [(var0003[0x0001] + var0004[var0006]), (var0003[0x0002] + var0005[var0006]), var0003[0x0003]];
 		var0009->move_object(var000A);
 		var000A = script var0009 {
@@ -59445,7 +59470,7 @@ void Func060F object#(0x60F) () {
 	UI_sprite_effect(0x0011, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0x0001);
 	UI_play_sound_effect(0x0074);
 	UI_lightning();
-	var0001 = UI_apply_damage(get_npc_prop(0x0000), 0x000C, 0x0003, item);
+	var0001 = UI_apply_damage(get_npc_prop(STRENGTH), 0x000C, 0x0003, item);
 }
 
 void Func0611 object#(0x611) () {
@@ -59509,21 +59534,21 @@ void Func0612 object#(0x612) () {
 				var000D->set_alignment(0x0000);
 				var000D->set_schedule_type(var0008[var0009]);
 				var000D->set_npc_id(0x0000);
-				var000E = var000D->get_npc_prop(0x0000);
+				var000E = var000D->get_npc_prop(STRENGTH);
 				var000F = var0001[var0009] - var000E;
-				var0010 = var000D->set_npc_prop(0x0000, var000F);
-				var000E = var000D->get_npc_prop(0x0001);
+				var0010 = var000D->set_npc_prop(STRENGTH, var000F);
+				var000E = var000D->get_npc_prop(DEXTERITY);
 				var000F = var0002[var0009] - var000E;
-				var0010 = var000D->set_npc_prop(0x0001, var000F);
-				var000E = var000D->get_npc_prop(0x0002);
+				var0010 = var000D->set_npc_prop(DEXTERITY, var000F);
+				var000E = var000D->get_npc_prop(INTELLIGENCE);
 				var000F = var0003[var0009] - var000E;
-				var0010 = var000D->set_npc_prop(0x0002, var000F);
-				var000E = var000D->get_npc_prop(0x0004);
+				var0010 = var000D->set_npc_prop(INTELLIGENCE, var000F);
+				var000E = var000D->get_npc_prop(COMBAT);
 				var000F = var0004[var0009] - var000E;
-				var0010 = var000D->set_npc_prop(0x0004, var000F);
-				var000E = var000D->get_npc_prop(0x0003);
+				var0010 = var000D->set_npc_prop(COMBAT, var000F);
+				var000E = var000D->get_npc_prop(HEALTH);
 				var000F = var0005[var0009] - var000E;
-				var0010 = var000D->set_npc_prop(0x0003, var000F);
+				var0010 = var000D->set_npc_prop(HEALTH, var000F);
 				if (var000C == 0x03B1) {
 					var000D->set_item_flag(SI_TOURNAMENT);
 				}
@@ -59713,7 +59738,7 @@ void Func0615 object#(0x615) () {
 	if (!var0000->get_item_flag(IN_PARTY)) {
 		abort;
 	}
-	if (var0000->get_npc_prop(0x0009) > 0x0018) {
+	if (var0000->get_npc_prop(FOODLEVEL) > 24) {
 		var0001 = UI_die_roll(0x0001, 0x0005);
 		var0000->clear_item_say();
 		if ((var0001 == 0x0001) || (var0001 == 0x0002)) {
@@ -59846,32 +59871,32 @@ void Func0618 object#(0x618) () {
 			call Func04CF;
 		};
 		gflags[0x000A] = false;
-		var0003 = 0xFE9C->get_npc_prop(0x0008);
+		var0003 = 0xFE9C->get_npc_prop(EXPERIENCE);
 		if (var0003 <= 0x0320) {
-			var0002 = 0xFE9C->set_npc_prop(0x0008, 0x0320);
+			var0002 = 0xFE9C->set_npc_prop(EXPERIENCE, 0x0320);
 			abort;
 		}
 		if (var0003 <= 0x0640) {
-			var0002 = 0xFE9C->set_npc_prop(0x0008, 0x0640);
+			var0002 = 0xFE9C->set_npc_prop(EXPERIENCE, 0x0640);
 			abort;
 		}
 		if (var0003 <= 0x0C80) {
-			var0002 = 0xFE9C->set_npc_prop(0x0008, 0x0C80);
+			var0002 = 0xFE9C->set_npc_prop(EXPERIENCE, 0x0C80);
 			abort;
 		}
 		if (var0003 <= 0x1900) {
-			var0002 = 0xFE9C->set_npc_prop(0x0008, 0x1900);
+			var0002 = 0xFE9C->set_npc_prop(EXPERIENCE, 0x1900);
 			abort;
 		}
 		if (var0003 <= 0x3200) {
-			var0002 = 0xFE9C->set_npc_prop(0x0008, 0x3200);
+			var0002 = 0xFE9C->set_npc_prop(EXPERIENCE, 0x3200);
 			abort;
 		}
 		if (var0003 <= 0x6400) {
-			var0002 = 0xFE9C->set_npc_prop(0x0008, 0x6400);
+			var0002 = 0xFE9C->set_npc_prop(EXPERIENCE, 0x6400);
 			abort;
 		}
-		var0002 = 0xFE9C->set_npc_prop(0x0008, 0xC800);
+		var0002 = 0xFE9C->set_npc_prop(EXPERIENCE, 0xC800);
 	}
 }
 
@@ -60609,7 +60634,7 @@ void Func0625 object#(0x625) () {
 
 	if (event == DOUBLECLICK) {
 		var0000 = get_item_shape();
-		if (get_npc_prop(0x000A)) {
+		if (get_npc_prop(SEX_FLAG)) {
 			var0001 = "her";
 			var0002 = "she";
 		} else {
@@ -63087,11 +63112,11 @@ void Func064D object#(0x64D) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		var0003 = get_npc_prop(0x0000);
-		var0004 = get_npc_prop(0x0003);
+		var0003 = get_npc_prop(STRENGTH);
+		var0004 = get_npc_prop(HEALTH);
 		if (var0004 <= var0003) {
-			var0005 = (var0003 - var0004) / 0x0002;
-			var0002 = set_npc_prop(0x0003, var0005);
+			var0005 = (var0003 - var0004) / 2;
+			var0002 = set_npc_prop(HEALTH, var0005);
 		}
 	}
 }
@@ -64228,9 +64253,9 @@ void Func0663 object#(0x663) () {
 				sfx 64;
 			};
 			if (var0000->is_npc()) {
-				var0003 = var0000->get_npc_prop(0x0000);
-				var0004 = var0000->get_npc_prop(0x0003);
-				var0005 = var0000->set_npc_prop(0x0003, (var0003 - var0004));
+				var0003 = var0000->get_npc_prop(STRENGTH);
+				var0004 = var0000->get_npc_prop(HEALTH);
+				var0005 = var0000->set_npc_prop(HEALTH, var0003 - var0004);
 			}
 		} else {
 			var0002 = script item {
@@ -64665,7 +64690,7 @@ void Func066A object#(0x66A) () {
 		var0002 = UI_get_party_list();
 		for (var0005 in var0001 with var0003 to var0004) {
 			if (!(var0005 in var0002)) {
-				if (var0005->get_npc_prop(0x0002) > 0x0005) {
+				if (var0005->get_npc_prop(INTELLIGENCE) > 0x0005) {
 					var0005->set_schedule_type(IN_COMBAT);
 					var0005->set_attack_mode(0x0007);
 					var0005->set_oppressor(UI_get_avatar_ref());
@@ -64784,7 +64809,7 @@ void Func066C object#(0x66C) () {
 						var000B->set_item_flag(INVISIBLE);
 						var0002 = UI_update_last_created(var0009);
 						if (var0002) {
-							var0002 = var000B->set_npc_prop(0x0003, 0x0001);
+							var0002 = var000B->set_npc_prop(HEALTH, 1);
 							var0002 = script var000B after var0005 ticks {
 								nohalt;
 								call Func066C;
@@ -65309,16 +65334,16 @@ void Func0675 object#(0x675) () {
 				var0004->clear_item_flag(PARALYZED);
 				var0004->clear_item_flag(POISONED);
 				var0004->clear_item_flag(ASLEEP);
-				var0005 = var0004->get_npc_prop(0x0000);
-				var0006 = var0004->get_npc_prop(0x0003);
-				if (var0006 < 0x0001) {
-					var0000 = var0004->set_npc_prop(0x0003, var0005);
+				var0005 = var0004->get_npc_prop(STRENGTH);
+				var0006 = var0004->get_npc_prop(HEALTH);
+				if (var0006 < 1) {
+					var0000 = var0004->set_npc_prop(HEALTH, var0005);
 				}
-				var0006 = var0004->get_npc_prop(0x0003);
-				if (var0006 < 0x0000) {
-					var0006 = 0x0001;
+				var0006 = var0004->get_npc_prop(HEALTH);
+				if (var0006 < 0) {
+					var0006 = 1;
 				}
-				var0000 = var0004->set_npc_prop(0x0003, (var0005 - var0006));
+				var0000 = var0004->set_npc_prop(HEALTH, var0005 - var0006);
 			}
 		} else {
 			var0000 = script item {
@@ -65555,11 +65580,11 @@ void Func0679 object#(0x679) () {
 	}
 	if ((event == WEAPON) && (item != 0xFE9C)) {
 		if (is_npc()) {
-			var0003 = 0xFE9C->get_npc_prop(0x0002);
-			var0004 = get_npc_prop(0x0002);
+			var0003 = 0xFE9C->get_npc_prop(INTELLIGENCE);
+			var0004 = get_npc_prop(INTELLIGENCE);
 		} else {
-			var0003 = 0x0000;
-			var0004 = 0x0001;
+			var0003 = 0;
+			var0004 = 1;
 		}
 		var0005 = get_item_flag(CANT_DIE);
 		if ((var0003 > var0004) && (var0005 == false)) {
@@ -65598,7 +65623,7 @@ void Func067A object#(0x67A) () {
 				var0004->set_item_flag(INVISIBLE);
 				var0005 = UI_update_last_created(var0003);
 				if (var0005) {
-					var0005 = var0004->set_npc_prop(0x0003, 0x0001);
+					var0005 = var0004->set_npc_prop(HEALTH, 1);
 					var0005 = set_to_attack(var0004, 0x026D);
 					var0005 = script item after 12 ticks {
 						nohalt;
@@ -65947,8 +65972,8 @@ void Func0681 object#(0x681) () {
 			if (var0004 == true) {
 				var0003 = UI_get_party_list();
 				for (var000A in var0003 with var0008 to var0009) {
-					var000B = var000A->get_npc_prop(0x0003);
-					Func0982(var000A, (var000B - 0x0002));
+					var000B = var000A->get_npc_prop(HEALTH);
+					Func0982(var000A, var000B - 2);
 				}
 			}
 		} else {
@@ -65965,9 +65990,9 @@ void Func0681 object#(0x681) () {
 	if (event == SCRIPTED) {
 		var000C = get_item_flag(CANT_DIE);
 		if (var000C == false) {
-			var000B = get_npc_prop(0x0003);
-			Func0982(item, (var000B - 0x0002));
-			Func0982(item, 0x0032);
+			var000B = get_npc_prop(HEALTH);
+			Func0982(item, var000B - 2);
+			Func0982(item, 50);
 		}
 	}
 }
@@ -67389,12 +67414,12 @@ void Func06B6 object#(0x6B6) () {
 				var0010->set_item_flag(SI_TOURNAMENT);
 				var0010->set_item_flag(TEMPORARY);
 				var0010->set_npc_id(0x0001);
-				var0011 = var0010->get_npc_prop(0x0003);
-				var0007 = var0010->set_npc_prop(0x0003, (0x0001 - var0011));
-				var0011 = var0010->get_npc_prop(0x0000);
-				var0007 = var0010->set_npc_prop(0x0000, (0x0000 - var0011));
-				var0011 = var0010->get_npc_prop(0x0001);
-				var0007 = var0010->set_npc_prop(0x0001, (0x0005 - var0011));
+				var0011 = var0010->get_npc_prop(HEALTH);
+				var0007 = var0010->set_npc_prop(HEALTH, 1 - var0011);
+				var0011 = var0010->get_npc_prop(STRENGTH);
+				var0007 = var0010->set_npc_prop(STRENGTH, 0 - var0011);
+				var0011 = var0010->get_npc_prop(DEXTERITY);
+				var0007 = var0010->set_npc_prop(DEXTERITY, 5 - var0011);
 			}
 		}
 	}
@@ -69926,7 +69951,7 @@ void Func06E3 object#(0x6E3) () {
 				var000C = var0007->get_object_position();
 				var000D = UI_create_new_object2(0x014E, var000C);
 				if (var000D) {
-					var0003 = var000D->set_npc_prop(0x0002, 0x0014);
+					var0003 = var000D->set_npc_prop(INTELLIGENCE, 20);
 					var000D->set_polymorph(0x02D1);
 					var0003 = script var000D {
 						nohalt;
@@ -69945,7 +69970,7 @@ void Func06E3 object#(0x6E3) () {
 				var000C = var0007->get_object_position();
 				var000D = UI_create_new_object2(0x014E, var000C);
 				if (var000D) {
-					var0003 = var000D->set_npc_prop(0x0002, 0x0014);
+					var0003 = var000D->set_npc_prop(INTELLIGENCE, 20);
 					var000D->set_polymorph(0x02D1);
 					var0003 = script var000D {
 						nohalt;
@@ -70934,7 +70959,7 @@ void Func06F3 object#(0x6F3) () {
 		}
 	}
 	var000A = var0005->add_cont_items(0x0001, 0x0259, 0x0000, 0x0000, true);
-	var000A = var0005->set_npc_prop(0x0002, 0x000A);
+	var000A = var0005->set_npc_prop(INTELLIGENCE, 10);
 	var0005->set_npc_id(0x0009);
 	var0005->set_schedule_type(IN_COMBAT);
 	var0005->set_schedule_type(MAJOR_SIT);
@@ -71782,8 +71807,8 @@ void Func070A object#(0x70A) () {
 
 	if (0xFE9C->get_item_flag(ISPETRA)) {
 		if (gflags[0x0228]) {
-			var0000 = 0xFFE4->set_npc_prop(0x000A, 0x0001);
-			var0000 = 0xFE9C->set_npc_prop(0x000A, 0x0000);
+			var0000 = 0xFFE4->set_npc_prop(SEX_FLAG, 1);
+			var0000 = 0xFE9C->set_npc_prop(SEX_FLAG, 0);
 		}
 		0xFFE4->set_polymorph(0x0292);
 		0xFE9C->set_polymorph(0x02D1);
@@ -75964,21 +75989,21 @@ void Func0768 object#(0x768) () {
 				var0004->clear_item_flag(TEMPORARY);
 				var0004->clear_item_flag(SI_TOURNAMENT);
 				var0004->set_npc_id(var0002 + 0x000A);
-				var0006 = var0004->get_npc_prop(0x0000);
-				var0007 = 0x000B - var0006;
-				var0005 = var0004->set_npc_prop(0x0000, var0007);
-				var0006 = var0004->get_npc_prop(0x0001);
-				var0007 = 0x000D - var0006;
-				var0005 = var0004->set_npc_prop(0x0001, var0007);
-				var0006 = var0004->get_npc_prop(0x0002);
-				var0007 = 0x0014 - var0006;
-				var0005 = var0004->set_npc_prop(0x0002, var0007);
-				var0006 = var0004->get_npc_prop(0x0004);
-				var0007 = 0x000C - var0006;
-				var0005 = var0004->set_npc_prop(0x0004, var0007);
-				var0006 = var0004->get_npc_prop(0x0003);
-				var0007 = 0x000B - var0006;
-				var0005 = var0004->set_npc_prop(0x0003, var0007);
+				var0006 = var0004->get_npc_prop(STRENGTH);
+				var0007 = 11 - var0006;
+				var0005 = var0004->set_npc_prop(STRENGTH, var0007);
+				var0006 = var0004->get_npc_prop(DEXTERITY);
+				var0007 = 13 - var0006;
+				var0005 = var0004->set_npc_prop(DEXTERITY, var0007);
+				var0006 = var0004->get_npc_prop(INTELLIGENCE);
+				var0007 = 20 - var0006;
+				var0005 = var0004->set_npc_prop(INTELLIGENCE, var0007);
+				var0006 = var0004->get_npc_prop(COMBAT);
+				var0007 = 12 - var0006;
+				var0005 = var0004->set_npc_prop(COMBAT, var0007);
+				var0006 = var0004->get_npc_prop(HEALTH);
+				var0007 = 11 - var0006;
+				var0005 = var0004->set_npc_prop(HEALTH, var0007);
 				if (var0002 == 0x0003) {
 					var0004->Func07D1();
 				}
@@ -76077,21 +76102,21 @@ void Func0769 object#(0x769) () {
 			var0001 = Func099B(var0000, 0x0001, 0x0281, 0x00DF, 0x0009, 0x0000, false);
 			var0000->set_alignment(0x0002);
 			var0000->set_schedule_type(IN_COMBAT);
-			var0002 = var0000->get_npc_prop(0x0000);
-			var0003 = 0x0019 - var0002;
-			var0001 = var0000->set_npc_prop(0x0000, var0003);
-			var0002 = var0000->get_npc_prop(0x0001);
-			var0003 = 0x0015 - var0002;
-			var0001 = var0000->set_npc_prop(0x0001, var0003);
-			var0002 = var0000->get_npc_prop(0x0002);
-			var0003 = 0x001E - var0002;
-			var0001 = var0000->set_npc_prop(0x0002, var0003);
-			var0002 = var0000->get_npc_prop(0x0004);
-			var0003 = 0x001E - var0002;
-			var0001 = var0000->set_npc_prop(0x0004, var0003);
-			var0002 = var0000->get_npc_prop(0x0003);
-			var0003 = 0x001E - var0002;
-			var0001 = var0000->set_npc_prop(0x0003, var0003);
+			var0002 = var0000->get_npc_prop(STRENGTH);
+			var0003 = 25 - var0002;
+			var0001 = var0000->set_npc_prop(STRENGTH, var0003);
+			var0002 = var0000->get_npc_prop(DEXTERITY);
+			var0003 = 21 - var0002;
+			var0001 = var0000->set_npc_prop(DEXTERITY, var0003);
+			var0002 = var0000->get_npc_prop(INTELLIGENCE);
+			var0003 = 30 - var0002;
+			var0001 = var0000->set_npc_prop(INTELLIGENCE, var0003);
+			var0002 = var0000->get_npc_prop(COMBAT);
+			var0003 = 30 - var0002;
+			var0001 = var0000->set_npc_prop(COMBAT, var0003);
+			var0002 = var0000->get_npc_prop(HEALTH);
+			var0003 = 30 - var0002;
+			var0001 = var0000->set_npc_prop(HEALTH, var0003);
 			Func0998(0xFE9C->get_npc_object(), 0x037F);
 			UI_play_sound_effect(0x002A);
 		}
@@ -76126,21 +76151,21 @@ void Func076A object#(0x76A) () {
 			var0002->set_npc_id(var0000);
 			var0002->set_item_flag(TEMPORARY);
 			var0002->set_item_flag(SI_TOURNAMENT);
-			var0003 = var0002->get_npc_prop(0x0000);
-			var0004 = 0x000B - var0003;
-			var0005 = var0002->set_npc_prop(0x0000, var0004);
-			var0003 = var0002->get_npc_prop(0x0001);
-			var0004 = 0x0012 - var0003;
-			var0005 = var0002->set_npc_prop(0x0001, var0004);
-			var0003 = var0002->get_npc_prop(0x0002);
-			var0004 = 0x0018 - var0003;
-			var0005 = var0002->set_npc_prop(0x0002, var0004);
-			var0003 = var0002->get_npc_prop(0x0004);
-			var0004 = 0x0010 - var0003;
-			var0005 = var0002->set_npc_prop(0x0004, var0004);
-			var0003 = var0002->get_npc_prop(0x0003);
-			var0004 = 0x0010 - var0003;
-			var0005 = var0002->set_npc_prop(0x0003, var0004);
+			var0003 = var0002->get_npc_prop(STRENGTH);
+			var0004 = 11 - var0003;
+			var0005 = var0002->set_npc_prop(STRENGTH, var0004);
+			var0003 = var0002->get_npc_prop(DEXTERITY);
+			var0004 = 18 - var0003;
+			var0005 = var0002->set_npc_prop(DEXTERITY, var0004);
+			var0003 = var0002->get_npc_prop(INTELLIGENCE);
+			var0004 = 24 - var0003;
+			var0005 = var0002->set_npc_prop(INTELLIGENCE, var0004);
+			var0003 = var0002->get_npc_prop(COMBAT);
+			var0004 = 16 - var0003;
+			var0005 = var0002->set_npc_prop(COMBAT, var0004);
+			var0003 = var0002->get_npc_prop(HEALTH);
+			var0004 = 16 - var0003;
+			var0005 = var0002->set_npc_prop(HEALTH, var0004);
 		}
 	}
 }
@@ -76438,7 +76463,7 @@ void Func0795 object#(0x795) () {
 	if (event == EGG) {
 		var0000 = UI_get_party_list();
 		for (var0003 in var0000 with var0001 to var0002) {
-			if (!UI_roll_to_win(var0003->get_npc_prop(0x0000), get_item_quality())) {
+			if (!UI_roll_to_win(var0003->get_npc_prop(STRENGTH), get_item_quality())) {
 				var0004 = var0003->get_npc_object();
 				var0004->halt_scheduled();
 				var0004->Func0620();
@@ -76503,7 +76528,7 @@ void Func0796 object#(0x796) () {
 		var0001 = UI_get_party_list();
 		for (var0004 in var0001 with var0002 to var0003) {
 			if (var0004 != 0xFE9C->get_npc_object()) {
-				if (!UI_roll_to_win(var0004->get_npc_prop(0x0002), 0x000F)) {
+				if (!UI_roll_to_win(var0004->get_npc_prop(INTELLIGENCE), 15)) {
 					var0004->halt_scheduled();
 					var0004->set_schedule_type(IN_COMBAT);
 					var0004->set_attack_mode(0x0007);
@@ -76708,7 +76733,7 @@ void Func079B object#(0x79B) () {
 		UI_play_sound_effect(0x0046);
 		var0000 = UI_get_party_list();
 		for (var0003 in var0000 with var0001 to var0002) {
-			if (!UI_roll_to_win(var0003->get_npc_prop(0x0000), get_item_quality())) {
+			if (!UI_roll_to_win(var0003->get_npc_prop(STRENGTH), get_item_quality())) {
 				var0004 = var0003->get_npc_object();
 				var0004->Func0620();
 				var0004->set_item_flag(ASLEEP);
@@ -76731,7 +76756,7 @@ void Func079C object#(0x79C) () {
 		UI_play_sound_effect(0x0046);
 		var0000 = UI_get_party_list();
 		for (var0003 in var0000 with var0001 to var0002) {
-			if (!UI_roll_to_win(var0003->get_npc_prop(0x0000), get_item_quality())) {
+			if (!UI_roll_to_win(var0003->get_npc_prop(STRENGTH), get_item_quality())) {
 				var0003->get_npc_object()->set_item_flag(POISONED);
 			}
 		}
@@ -76752,7 +76777,7 @@ void Func079D object#(0x79D) () {
 		UI_play_sound_effect(0x0046);
 		var0000 = UI_get_party_list();
 		for (var0003 in var0000 with var0001 to var0002) {
-			if (!UI_roll_to_win(var0003->get_npc_prop(0x0000), get_item_quality())) {
+			if (!UI_roll_to_win(var0003->get_npc_prop(STRENGTH), get_item_quality())) {
 				var0003->get_npc_object()->set_item_flag(PARALYZED);
 				var0004 = var0003->get_npc_object();
 				var0004->Func0620();
@@ -77464,7 +77489,7 @@ void Func07B1 object#(0x7B1) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			if (!((var000B->get_item_shape() == 0x00F2) || ((var000B->get_item_shape() == 0x009F) || (var000B->get_item_shape() == 0x019A)))) {
 				if (var000B->is_npc()) {
-					if (var000B->get_npc_prop(0x0003) >= 0x0006) {
+					if (var000B->get_npc_prop(HEALTH) >= 6) {
 						Func0982(var000B, 0x0005);
 					}
 				}
@@ -78810,8 +78835,8 @@ void Func07E1 object#(0x7E1) () {
 			0xFF64->set_alignment(0x0003);
 			0xFF64->set_item_frame(0x000D);
 			0xFF64->set_schedule_type(WAIT);
-			var0002 = 0xFF64->get_npc_prop(0x0003);
-			Func0982(0xFF64, (var0002 - 0x0001));
+			var0002 = 0xFF64->get_npc_prop(HEALTH);
+			Func0982(0xFF64, var0002 - 0x0001);
 			Func097F(0xFF64, "@zzzzzz....@", 0x0002);
 			if (0xFF63->npc_nearby()) {
 				Func09AD(0xFF63);
@@ -79474,9 +79499,9 @@ void Func07EB object#(0x7EB) () {
 	for (var0006 in var0003 with var0004 to var0005) {
 		if (!(var0006 in var0002)) {
 			var0007 = UI_die_roll(0x0005, 0x000A);
-			var0008 = UI_apply_damage(var0006->get_npc_prop(0x0000), var0007, 0x0001, var0006);
+			var0008 = UI_apply_damage(var0006->get_npc_prop(STRENGTH), var0007, 0x0001, var0006);
 			var0007 = UI_die_roll(0x0005, 0x000A);
-			var0008 = UI_apply_damage(var0006->get_npc_prop(0x0000), var0007, 0x0002, var0006);
+			var0008 = UI_apply_damage(var0006->get_npc_prop(STRENGTH), var0007, 0x0002, var0006);
 			var0009 = var0006->get_alignment();
 			if ((var0009 == 0x0002) || (var0009 == 0x0003)) {
 				var0006->set_schedule_type(IN_COMBAT);
@@ -80503,8 +80528,8 @@ void Func07F9 object#(0x7F9) () {
 			for (var000D in var000A with var000B to var000C) {
 				if (Func0932(var000D)) {
 					var000D->set_alignment(0x0000);
-					var0003 = var000D->get_npc_prop(0x0003);
-					var0003 = var000D->set_npc_prop(0x0003, (var000D->get_npc_prop(0x0000) - var0003));
+					var0003 = var000D->get_npc_prop(HEALTH);
+					var0003 = var000D->set_npc_prop(HEALTH, var000D->get_npc_prop(STRENGTH) - var0003);
 					var000D->run_schedule();
 				}
 			}
@@ -80542,8 +80567,8 @@ void Func07F9 object#(0x7F9) () {
 		var000A = [0xFFC1, 0xFFB1, 0xFFB6, 0xFFB9, 0xFF6A];
 		for (var000D in var000A with var0014 to var0015) {
 			if (Func0932(var000D)) {
-				var0016 = var000D->get_npc_prop(0x0003);
-				var0003 = var000D->set_npc_prop(0x0003, (var000D->get_npc_prop(0x0000) - var0016));
+				var0016 = var000D->get_npc_prop(HEALTH);
+				var0003 = var000D->set_npc_prop(HEALTH, var000D->get_npc_prop(STRENGTH) - var0016);
 				if (gflags[0x0084]) {
 					if (var000D->get_npc_id()) {
 						var000D->set_alignment(0x0002);
@@ -86660,13 +86685,13 @@ labelFunc081A_00C0:
 				} else {
 					var000E = var000D->get_npc_number();
 					var000F = var000D->get_item_flag(POISONED);
-					var0010 = Func095C(var000D, 0x0000);
-					var0011 = Func095C(var000D, 0x0003);
+					var0010 = Func095C(var000D, STRENGTH);
+					var0011 = Func095C(var000D, HEALTH);
 					var0012 = var000D->get_npc_name();
 					if (var0010 > var0011) {
 						var0013 = var0010 - var0011;
-						var0013 /= 0x0002;
-						Func095E(var000E, 0x0003, var0013);
+						var0013 /= 2;
+						Func095E(var000E, HEALTH, var0013);
 						var0014 = UI_remove_party_items(var0007, var0002, 0xFE99, 0xFE99, true);
 						var0005 = true;
 						say("\"I have done all that I can.\"");
@@ -89323,7 +89348,7 @@ void Func082C 0x82C () {
 		}
 		do {
 			if (var0005 == 0x0002) {
-				if (Func095C(0xFE9C, 0x0006) < 0x001E) {
+				if (Func095C(0xFE9C, MAX_MANA) < 30) {
 					continue;
 				}
 				say("\"Thou dost already possess more skill than I could teach thee!\"");
@@ -89342,11 +89367,11 @@ void Func082C 0x82C () {
 			UI_sprite_effect(0x001A, var0006[0x0001], var0006[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			say("\"Thou hast potential but thou must pratice, or thou wilt be undone when haste is called for.\"");
 			var0007 = UI_remove_party_items(var0003, var0001, 0xFE99, 0xFE99, true);
-			if (Func095C(0xFE9C, 0x0006) < 0x001E) {
-				Func0964(0xFE9C, 0x0001);
+			if (Func095C(0xFE9C, MAX_MANA) < 30) {
+				Func0964(0xFE9C, 1);
 			}
-			if (Func095C(0xFE9C, 0x0002) < 0x001E) {
-				Func0962(0xFE9C, 0x0001);
+			if (Func095C(0xFE9C, INTELLIGENCE) < 30) {
+				Func0962(0xFE9C, 1);
 			}
 		}
 	}
@@ -90111,12 +90136,12 @@ labelFunc0836_0055:
 				}
 				var000D = var000C->get_npc_number();
 				var000E = var000C->get_item_flag(POISONED);
-				var000F = Func095C(var000C, 0x0000);
-				var0010 = Func095C(var000C, 0x0003);
+				var000F = Func095C(var000C, STRENGTH);
+				var0010 = Func095C(var000C, HEALTH);
 				var0011 = var000C->get_npc_name();
 				if (var000F > var0010) {
 					var0012 = var000F - var0010;
-					Func095E(var000D, 0x0003, var0012);
+					Func095E(var000D, HEALTH, var0012);
 					var0013 = UI_remove_party_items(var0006, var0001, 0xFE99, 0xFE99, true);
 					var0004 = true;
 					say("\"The bodily wounds have been healed.\"");
@@ -93261,9 +93286,9 @@ void Func0849 0x849 () {
 	}
 	0xFFB9->set_new_schedules([EVENING, MIDNIGHT], [SLEEP, DUEL], [0x0388, 0x0A46, 0x03DA, 0x0A86]);
 	gflags[0x0043] = true;
-	var0000 = 0xFFB9->set_npc_prop(0x0000, 0xFFEE);
-	var0000 = 0xFFB9->set_npc_prop(0x0004, 0xFFF7);
-	var0000 = 0xFFB9->set_npc_prop(0x0001, 0xFFF8);
+	var0000 = 0xFFB9->set_npc_prop(STRENGTH, -18);
+	var0000 = 0xFFB9->set_npc_prop(COMBAT, -9);
+	var0000 = 0xFFB9->set_npc_prop(DEXTERITY, -8);
 }
 
 extern var Func0955 0x955 ();
@@ -94922,7 +94947,7 @@ void Func0856 0x856 () {
 		}
 		var0000 -= 0x0001;
 	}
-	var0002 = set_npc_prop(0x0003, 0x001B);
+	var0002 = set_npc_prop(HEALTH, 27);
 	abort;
 }
 
@@ -98029,8 +98054,8 @@ void Func086B 0x86B () {
 		}
 		var0008 = var0007->get_npc_number();
 		var0009 = var0007->get_item_flag(POISONED);
-		var000A = Func095C(var0007, 0x0000);
-		var000B = Func095C(var0007, 0x0003);
+		var000A = Func095C(var0007, STRENGTH);
+		var000B = Func095C(var0007, HEALTH);
 		var000C = var0007->get_npc_name();
 		var000D = "his";
 		if (var000C == "Petra") {
@@ -98038,7 +98063,7 @@ void Func086B 0x86B () {
 		}
 		if (var000A > var000B) {
 			var000E = var000A - var000B;
-			Func095E(var0008, 0x0003, var000E);
+			Func095E(var0008, HEALTH, var000E);
 			if (var0008 == 0xFE9C) {
 				say("\"I have healed thee of thy wounds. Rest easy, my friend.\"");
 			} else {
@@ -98106,10 +98131,10 @@ void Func086C 0x86C (var var0000) {
 		var0000->move_object([var0001[0x0001], var0001[0x0002], var0001[0x0003]]);
 		UI_sprite_effect(0x0015, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	}
-	var0004 = Func095C(var0000, 0x0000);
-	var0005 = Func095C(var0000, 0x0003);
+	var0004 = Func095C(var0000, STRENGTH);
+	var0005 = Func095C(var0000, HEALTH);
 	var0006 = var0004 - var0005;
-	Func095E(var0000, 0x0003, var0006);
+	Func095E(var0000, HEALTH, var0006);
 	if (!var0000->get_item_flag(IN_PARTY)) {
 		var0000->add_to_party();
 	}
@@ -99093,7 +99118,7 @@ void Func0873 0x873 () {
 			say("\"Thou wilt never be warrior with such weak resolve!\"");
 		} else {
 			var000D = Func096E(var0002, var0001, var0003, var000B, 0x0002);
-			if (Func095C(var000A, 0x0007) < 0x0002) {
+			if (Func095C(var000A, TRAINING) < 2) {
 				var000D = 0x0000;
 			}
 			if (var000D == 0x0000) {
@@ -99112,10 +99137,10 @@ void Func0873 0x873 () {
 			}
 			do {
 				if (var000D == 0x0002) {
-					if (Func095C(var000A, 0x0004) < 0x001E) {
+					if (Func095C(var000A, COMBAT) < 30) {
 						continue;
 					}
-					if (Func095C(var000A, 0x0000) < 0x001E) {
+					if (Func095C(var000A, STRENGTH) < 30) {
 						continue;
 					}
 					if (var000B == 0xFE9C) {
@@ -99139,11 +99164,11 @@ void Func0873 0x873 () {
 				say("\"Here, hold it like so. Seest thou? Thou hast sacrificed nothing of control, and have gained much in speed.");
 				say("\"I know this feels awkward. Practice with this and thou wilt see no loss of accuracy.\"");
 				var000E = UI_remove_party_items(var0003, var0001, 0xFE99, 0xFE99, true);
-				if (Func095C(var000A, 0x0004) < 0x001E) {
-					Func0963(var000A, 0x0001);
+				if (Func095C(var000A, COMBAT) < 30) {
+					Func0963(var000A, 1);
 				}
-				if (Func095C(var000A, 0x0000) < 0x001E) {
-					Func0960(var000A, 0x0001);
+				if (Func095C(var000A, STRENGTH) < 30) {
+					Func0960(var000A, 1);
 				}
 			}
 		}
@@ -99249,7 +99274,7 @@ void Func0875 0x875 () {
 		say("\"I do not train myself!\"");
 	} else {
 		var000C = Func096E(var0001, var0000, var0002, var000A, 0x0002);
-		if (Func095C(var0009, 0x0007) < 0x0002) {
+		if (Func095C(var0009, TRAINING) < 2) {
 			var000C = 0x0000;
 		}
 		if (var000C == 0x0000) {
@@ -99269,10 +99294,10 @@ void Func0875 0x875 () {
 		} else {
 			do {
 				if (var000C == 0x0002) {
-					if (Func095C(var0009, 0x0004) < 0x001E) {
+					if (Func095C(var0009, COMBAT) < 30) {
 						break;
 					}
-					if (Func095C(var0009, 0x0000) < 0x001E) {
+					if (Func095C(var0009, STRENGTH) < 30) {
 						break;
 					}
 					if (var000A == 0xFE9C) {
@@ -99294,11 +99319,11 @@ void Func0875 0x875 () {
 		say("\"Secondly, thou shouldst always carry through with thy swing, as it will improve thy chances of recovering to land succeeding blows.\"");
 		say("\"I do see some improvement in thee!\"");
 		var000D = UI_remove_party_items(var0002, var0000, 0xFE99, 0xFE99, true);
-		if (Func095C(var0009, 0x0004) < 0x001E) {
-			Func0963(var0009, 0x0001);
+		if (Func095C(var0009, COMBAT) < 30) {
+			Func0963(var0009, 1);
 		}
-		if (Func095C(var0009, 0x0000) < 0x001E) {
-			Func0960(var0009, 0x0001);
+		if (Func095C(var0009, STRENGTH) < 30) {
+			Func0960(var0009, 1);
 		}
 	}
 labelFunc0875_0216:
@@ -99999,9 +100024,9 @@ void Func087C 0x87C () {
 			gflags[0x0008] = false;
 			gflags[0x0009] = false;
 			gflags[0x000A] = false;
-			var000D = 0xFE9C->get_npc_prop(0x0005);
+			var000D = 0xFE9C->get_npc_prop(MANA);
 			var000D = 0x0000 - var000D;
-			var000E = 0xFE9C->set_npc_prop(0x0005, var000D);
+			var000E = 0xFE9C->set_npc_prop(MANA, var000D);
 			var000F = Func09A0(0x0000, 0x0002);
 			UI_play_music(0x001D, var000F);
 			var0010 = var000C->get_object_position();
@@ -101437,8 +101462,8 @@ void Func08A1 0x8A1 () {
 	var0005 = UI_update_last_created(var0004);
 	var0005 = UI_update_last_created(var0000);
 	for (var0008 in var0002 with var0006 to var0007) {
-		var0009 = var0008->get_npc_prop(0x0003);
-		var0005 = UI_apply_damage(var0008->get_npc_prop(0x0000), ((var0009 / 0x0003) * 0x0002), 0x0001, var0008);
+		var0009 = var0008->get_npc_prop(HEALTH);
+		var0005 = UI_apply_damage(var0008->get_npc_prop(STRENGTH), (var0009 / 3) * 2, 0x0001, var0008);
 	}
 	if (var0001->get_item_frame() == 0x0001) {
 		var0001->set_item_frame(0x0002);
@@ -101468,9 +101493,9 @@ void Func08A2 0x8A2 () {
 	var0002 = UI_get_party_list();
 	for (var0005 in var0002 with var0003 to var0004) {
 		var0006 = var0005->get_object_position();
-		var0007 = var0005->get_npc_prop(0x0000);
-		var0008 = var0005->get_npc_prop(0x0003);
-		var0009 = var0005->set_npc_prop(0x0003, (var0007 - var0008));
+		var0007 = var0005->get_npc_prop(STRENGTH);
+		var0008 = var0005->get_npc_prop(HEALTH);
+		var0009 = var0005->set_npc_prop(HEALTH, var0007 - var0008);
 		UI_sprite_effect(0x000D, var0006[0x0001], var0006[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_play_sound_effect(0x0040);
 		if (var0000 < 0x0008) {
@@ -101752,9 +101777,9 @@ void Func08AD 0x8AD (var var0000, var var0001, var var0002, var var0003) {
 			Func094F(var0003, var0009);
 			abort;
 		}
-		var000A = var0003->get_npc_prop(0x0009);
+		var000A = var0003->get_npc_prop(FOODLEVEL);
 		var000B = var000A + var0001;
-		if (var000A > 0x0018) {
+		if (var000A > 24) {
 			var000C = "@No, thank thee.@";
 		} else {
 			Func0945(var0000);
@@ -101808,16 +101833,16 @@ void Func08AD 0x8AD (var var0000, var var0001, var var0002, var var0003) {
 		}
 		if (!(var000C == "")) {
 			if (Func0983(var0003)) {
-				if ((event != BG_PATH_FAILURE) || (var000A < 0x0019)) {
+				if ((event != BG_PATH_FAILURE) || (var000A < 25)) {
 					var0003->clear_item_say();
 					Func094F(var0003, var000C);
 				}
 			}
 		}
-		if (var000A < 0x0019) {
-			var0008 = var0003->set_npc_prop(0x0009, var0001);
+		if (var000A < 25) {
+			var0008 = var0003->set_npc_prop(FOODLEVEL, var0001);
 		}
-		if (var000A > 0x0018) {
+		if (var000A > 24) {
 			abort;
 		}
 	}
@@ -103867,7 +103892,7 @@ void Func08D3 0x8D3 () {
 	UI_play_sound_effect(0x002A);
 	var0001 = UI_get_party_list();
 	for (var0004 in var0001 with var0002 to var0003) {
-		var0005 = UI_apply_damage(var0004->get_npc_prop(0x0000), 0x001E, 0x0003, var0004);
+		var0005 = UI_apply_damage(var0004->get_npc_prop(STRENGTH), 0x001E, 0x0003, var0004);
 	}
 }
 
@@ -105230,10 +105255,10 @@ void Func08F5 0x8F5 (var var0000) {
 		var0006->set_schedule_type(STANDTHERE);
 		var0006->set_alignment(0x0000);
 		var0006->set_oppressor(0x0000);
-		var0007 = Func095C(var0006, 0x0000);
-		var0008 = Func095C(var0006, 0x0003);
+		var0007 = Func095C(var0006, STRENGTH);
+		var0008 = Func095C(var0006, HEALTH);
 		var0009 = var0007 - var0008;
-		Func095E(var0006, 0x0003, var0009);
+		Func095E(var0006, HEALTH, var0009);
 	}
 	var000A = Func08B6();
 	var000A = [0xFE9C, var000A];
@@ -105245,10 +105270,10 @@ void Func08F5 0x8F5 (var var0000) {
 		};
 		var0005->set_schedule_type(FOLLOW_AVATAR);
 		var0005->set_oppressor(0x0000);
-		var0007 = Func095C(var0005, 0x0000);
-		var0008 = Func095C(var0005, 0x0003);
+		var0007 = Func095C(var0005, STRENGTH);
+		var0008 = Func095C(var0005, HEALTH);
 		var0009 = var0007 - var0008;
-		Func095E(var0005, 0x0003, var0009);
+		Func095E(var0005, HEALTH, var0009);
 	}
 }
 
@@ -105570,9 +105595,9 @@ void Func08FE 0x8FE () {
 				var0006->set_new_schedules(MIDNIGHT, WAIT, [var0009[0x0001], var0009[0x0002]]);
 				var0006->run_schedule();
 				var0006->set_schedule_type(WAIT);
-				var000B = Func095C(var0006, 0x0009);
-				var000C = 0x001F - var000B;
-				Func095E(var0006, 0x0009, var000C);
+				var000B = Func095C(var0006, FOODLEVEL);
+				var000C = 31 - var000B;
+				Func095E(var0006, FOODLEVEL, var000C);
 				if (var0006 == 0xFFC0) {
 					gflags[0x0047] = true;
 				}
@@ -107338,54 +107363,54 @@ void Func0931 0x931 (var var0000) {
 	var var001A;
 
 	Func09AA();
-	var0001 = var0000->set_npc_prop(0x0008, UI_die_roll(0x0001, 0x0032));
+	var0001 = var0000->set_npc_prop(EXPERIENCE, UI_die_roll(0x0001, 0x0032));
 	gflags[0x0007] = false;
 	gflags[0x0008] = false;
 	gflags[0x0009] = false;
 	gflags[0x000A] = false;
 	gflags[0x0085] = false;
 	if (0xFF6A->get_npc_id() && gflags[0x0084]) {
-		if (Func095C(var0000, 0x0001) < 0x001E) {
-			Func0961(var0000, 0x0001);
+		if (Func095C(var0000, DEXTERITY) < 30) {
+			Func0961(var0000, 1);
 		}
-		if (Func095C(var0000, 0x0004) < 0x001E) {
-			Func0963(var0000, 0x0001);
+		if (Func095C(var0000, COMBAT) < 30) {
+			Func0963(var0000, 1);
 		}
-		if (Func095C(var0000, 0x0004) < 0x001E) {
-			Func0963(var0000, 0x0001);
+		if (Func095C(var0000, COMBAT) < 30) {
+			Func0963(var0000, 1);
 		}
 	}
 	if (0xFFC1->get_npc_id() && gflags[0x0084]) {
-		if (Func095C(var0000, 0x0000) < 0x001E) {
-			Func0960(var0000, 0x0001);
+		if (Func095C(var0000, STRENGTH) < 30) {
+			Func0960(var0000, 1);
 		}
-		if (Func095C(var0000, 0x0000) < 0x001E) {
-			Func0960(var0000, 0x0001);
+		if (Func095C(var0000, STRENGTH) < 30) {
+			Func0960(var0000, 1);
 		}
-		if (Func095C(var0000, 0x0004) < 0x001E) {
-			Func0963(var0000, 0x0001);
+		if (Func095C(var0000, COMBAT) < 30) {
+			Func0963(var0000, 1);
 		}
 	}
 	if (0xFFB6->get_npc_id() && gflags[0x0084]) {
-		if (Func095C(var0000, 0x0001) < 0x001E) {
-			Func0961(var0000, 0x0001);
+		if (Func095C(var0000, DEXTERITY) < 30) {
+			Func0961(var0000, 1);
 		}
-		if (Func095C(var0000, 0x0001) < 0x001E) {
-			Func0961(var0000, 0x0001);
+		if (Func095C(var0000, DEXTERITY) < 30) {
+			Func0961(var0000, 1);
 		}
-		if (Func095C(var0000, 0x0004) < 0x001E) {
-			Func0963(var0000, 0x0001);
+		if (Func095C(var0000, COMBAT) < 30) {
+			Func0963(var0000, 1);
 		}
 	}
 	if (0xFFB9->get_npc_id() && gflags[0x0084]) {
-		if (Func095C(var0000, 0x0000) < 0x001E) {
-			Func0960(var0000, 0x0001);
+		if (Func095C(var0000, STRENGTH) < 30) {
+			Func0960(var0000, 1);
 		}
-		if (Func095C(var0000, 0x0000) < 0x001E) {
-			Func0960(var0000, 0x0001);
+		if (Func095C(var0000, STRENGTH) < 30) {
+			Func0960(var0000, 1);
 		}
-		if (Func095C(var0000, 0x0000) < 0x001E) {
-			Func0960(var0000, 0x0001);
+		if (Func095C(var0000, STRENGTH) < 30) {
+			Func0960(var0000, 1);
 		}
 	}
 	var0002 = [0xFFC1, 0xFFB1, 0xFFB6, 0xFFB9, 0xFF6A];
@@ -107440,8 +107465,8 @@ void Func0931 0x931 (var var0000) {
 	var0012 = Func09A0(0x0001, 0x0002);
 	var0013 = var0012->get_item_quality();
 	if (var0013) {
-		var0014 = var0012->get_item_quality() - 0xFE9C->get_npc_prop(0x0003);
-		var0001 = 0xFE9C->set_npc_prop(0x0003, var0014);
+		var0014 = var0012->get_item_quality() - 0xFE9C->get_npc_prop(HEALTH);
+		var0001 = 0xFE9C->set_npc_prop(HEALTH, var0014);
 		var0001 = var0012->set_item_quality(0x0000);
 		var0002 = 0xFE9C->find_nearby(0xFFFF, 0x002D, 0x0004);
 		for (var0005 in var0002 with var0015 to var0016) {
@@ -107451,8 +107476,8 @@ void Func0931 0x931 (var var0000) {
 			}
 		}
 	} else {
-		var0014 = var0000->get_npc_id() - var0000->get_npc_prop(0x0003);
-		var0001 = var0000->set_npc_prop(0x0003, var0014);
+		var0014 = var0000->get_npc_id() - var0000->get_npc_prop(HEALTH);
+		var0001 = var0000->set_npc_prop(HEALTH, var0014);
 		var0000->set_npc_id(0x0000);
 		var0000->add_to_party();
 	}
@@ -107581,7 +107606,7 @@ void Func0934 0x934 (var var0000) {
 	var var000B;
 	var var000C;
 
-	var0001 = var0000->get_npc_prop(0x0003);
+	var0001 = var0000->get_npc_prop(HEALTH);
 	if (var0000 == 0xFE9C->get_npc_object()) {
 		var0002 = Func09A0(0x0001, 0x0002);
 		var0003 = var0002->set_item_quality(var0001);
@@ -107590,7 +107615,7 @@ void Func0934 0x934 (var var0000) {
 		var0002 = Func09A0(0x0001, 0x0002);
 		var0003 = var0002->set_item_quality(0x0000);
 	}
-	var0003 = var0000->set_npc_prop(0x0003, (var0000->get_npc_prop(0x0000) - var0001));
+	var0003 = var0000->set_npc_prop(HEALTH, var0000->get_npc_prop(STRENGTH) - var0001);
 	gflags[0x0083] = true;
 	if (var0000 == 0xFE9C->get_npc_object()) {
 		var0003 = UI_get_party_list2();
@@ -107953,12 +107978,12 @@ labelFunc0936_0460:
 	}
 	0xFFB9->revert_schedule();
 	gflags[0x0041] = true;
-	var0002 = 0xFFB9->set_npc_prop(0x0000, 0x0012);
-	var0002 = 0xFFB9->set_npc_prop(0x0004, 0x0009);
-	var0002 = 0xFFB9->set_npc_prop(0x0001, 0x0008);
+	var0002 = 0xFFB9->set_npc_prop(STRENGTH, 18);
+	var0002 = 0xFFB9->set_npc_prop(COMBAT, 9);
+	var0002 = 0xFFB9->set_npc_prop(DEXTERITY, 8);
 	0xFFB9->clear_item_say();
 	Func097F(0xFFB9, "@Hail the Avatar!@", 0x0000);
-	var0001 = 0xFE9C->find_nearby(0xFFFF, 0x0032, 0x0008);
+	var0001 = 0xFE9C->find_nearby(0xFFFF, 0x0032, 8);
 	var0001 = Func0988(0xFFB9->get_npc_object(), var0001);
 	for (var0002 in var0001 with var000A to var000B) {
 		var0002->clear_item_say();
@@ -109603,11 +109628,11 @@ var Func0941 0x941 (var var0000) {
 	var var0003;
 
 	var0001 = var0000->get_npc_object();
-	var0002 = var0001->get_npc_prop(0x0008) / 0x0064;
-	var0003 = 0x0001;
-	while (var0002 > 0x0000) {
-		var0003 += 0x0001;
-		var0002 /= 0x0002;
+	var0002 = var0001->get_npc_prop(EXPERIENCE) / 100;
+	var0003 = 1;
+	while (var0002 > 0) {
+		var0003 += 1;
+		var0002 /= 2;
 	}
 	return var0003;
 }
@@ -109959,7 +109984,7 @@ void Func095D 0x95D (var var0000) {
 
 	var0001 = UI_get_party_list();
 	for (var0004 in var0001 with var0002 to var0003) {
-		var0005 = var0004->set_npc_prop(0x0008, var0000);
+		var0005 = var0004->set_npc_prop(EXPERIENCE, var0000);
 	}
 }
 
@@ -109992,9 +110017,9 @@ void Func0960 0x960 (var var0000, var var0001) {
 
 	var0002 = 0x0000;
 	while (var0002 < var0001) {
-		Func095E(var0000, 0x0000, 0x0001);
-		Func095E(var0000, 0x0003, 0x0001);
-		Func095E(var0000, 0x0007, 0xFFFF);
+		Func095E(var0000, STRENGTH, 1);
+		Func095E(var0000, HEALTH, 1);
+		Func095E(var0000, TRAINING, -1);
 		var0002 += 0x0001;
 	}
 }
@@ -110009,16 +110034,16 @@ void Func0961 0x961 (var var0000, var var0001) {
 	var var0005;
 	var var0006;
 
-	var0002 = 0x0000;
+	var0002 = 0;
 	while (var0002 < var0001) {
-		var0003 = Func095C(var0000, 0x0001);
-		Func095E(var0000, 0x0001, 0x0001);
-		var0004 = var0003 + 0x0001;
-		var0005 = Func095C(var0000, 0x0004);
-		var0006 = ((var0004 * var0005) + (var0003 - 0x0001)) / var0003;
-		Func095E(var0000, 0x0004, (var0006 - var0005));
-		Func095E(var0000, 0x0007, 0xFFFF);
-		var0002 += 0x0001;
+		var0003 = Func095C(var0000, DEXTERITY);
+		Func095E(var0000, DEXTERITY, 1);
+		var0004 = var0003 + 1;
+		var0005 = Func095C(var0000, COMBAT);
+		var0006 = ((var0004 * var0005) + (var0003 - 1)) / var0003;
+		Func095E(var0000, COMBAT, var0006 - var0005);
+		Func095E(var0000, TRAINING, -1);
+		var0002 += 1;
 	}
 }
 
@@ -110029,12 +110054,12 @@ void Func0962 0x962 (var var0000, var var0001) {
 	var var0002;
 	var var0003;
 
-	var0002 = 0x0000;
+	var0002 = 0;
 	while (var0002 < var0001) {
-		var0003 = Func095C(var0000, 0x0002);
-		Func095E(var0000, 0x0002, 0x0001);
-		Func095E(var0000, 0x0007, 0xFFFF);
-		var0002 += 0x0001;
+		var0003 = Func095C(var0000, INTELLIGENCE);
+		Func095E(var0000, INTELLIGENCE, 1);
+		Func095E(var0000, TRAINING, -1);
+		var0002 += 1;
 	}
 }
 
@@ -110047,20 +110072,20 @@ void Func0963 0x963 (var var0000, var var0001) {
 	var var0004;
 	var var0005;
 
-	var0002 = 0x0000;
+	var0002 = 0;
 	while (var0002 < var0001) {
-		var0003 = Func095C(var0000, 0x0001);
-		var0004 = Func095C(var0000, 0x0004);
-		var0005 = ((var0004 + var0003) + 0x0001) / 0x0002;
+		var0003 = Func095C(var0000, DEXTERITY);
+		var0004 = Func095C(var0000, COMBAT);
+		var0005 = ((var0004 + var0003) + 1) / 2;
 		if (var0005 >= var0003) {
-			var0005 = var0004 + 0x0001;
-			if (var0005 >= 0x001E) {
-				var0005 = 0x001E;
+			var0005 = var0004 + 1;
+			if (var0005 >= 30) {
+				var0005 = 30;
 			}
 		}
-		Func095E(var0000, 0x0004, (var0005 - var0004));
-		Func095E(var0000, 0x0007, 0xFFFF);
-		var0002 += 0x0001;
+		Func095E(var0000, COMBAT, var0005 - var0004);
+		Func095E(var0000, TRAINING, -1);
+		var0002 += 1;
 	}
 }
 
@@ -110073,22 +110098,22 @@ void Func0964 0x964 (var var0000, var var0001) {
 	var var0004;
 	var var0005;
 
-	var0002 = 0x0000;
+	var0002 = 0;
 	while (var0002 < var0001) {
-		var0003 = Func095C(var0000, 0x0002);
-		var0004 = Func095C(var0000, 0x0006);
-		var0005 = ((var0004 + var0003) + 0x0001) / 0x0002;
+		var0003 = Func095C(var0000, INTELLIGENCE);
+		var0004 = Func095C(var0000, MAX_MANA);
+		var0005 = ((var0004 + var0003) + 1) / 2;
 		if (var0005 >= var0003) {
-			var0005 = var0004 + 0x0001;
-			if (var0005 >= 0x001E) {
-				var0005 = 0x001E;
+			var0005 = var0004 + 1;
+			if (var0005 >= 30) {
+				var0005 = 30;
 			}
 		}
 		if ((var0000 == 0xFE9C) || (var0000 == 0xFE9C->get_npc_object())) {
-			Func095E(var0000, 0x0006, (var0005 - var0004));
+			Func095E(var0000, MAX_MANA, var0005 - var0004);
 		}
-		Func095E(var0000, 0x0007, 0xFFFF);
-		var0002 += 0x0001;
+		Func095E(var0000, TRAINING, -1);
+		var0002 += 1;
 	}
 }
 
@@ -110164,12 +110189,12 @@ void Func0969 0x969 (var var0000, var var0001, var var0002) {
 	var var0006;
 	var var0007;
 
-	var0003 = Func095C(var0000, 0x0000);
-	var0004 = Func095C(var0000, 0x0003);
+	var0003 = Func095C(var0000, STRENGTH);
+	var0004 = Func095C(var0000, HEALTH);
 	var0005 = var0000->get_npc_name();
 	if (var0003 > var0004) {
 		var0006 = var0003 - var0004;
-		Func095E(var0000, 0x0003, var0006);
+		Func095E(var0000, HEALTH, var0006);
 		var0007 = UI_remove_party_items(var0002, var0001, 0xFE99, 0xFE99, true);
 		say("\"The wounds have been healed.\"");
 	} else if (var0000 == 0xFE9C) {
@@ -110280,13 +110305,13 @@ var Func096E 0x96E (var var0000, var var0001, var var0002, var var0003, var var0
 	var var000B;
 
 	var0005 = false;
-	var0006 = Func095C(var0003, 0x0007);
+	var0006 = Func095C(var0003, TRAINING);
 	var0007 = 0xFE9B->count_objects(var0001, 0xFE99, 0xFE99);
 	if (!(var0007 >= var0002)) {
-		return 0x0001;
+		return 1;
 	}
 	if (!(var0006 >= var0004)) {
-		return 0x0000;
+		return 0;
 	}
 	for (var000A in var0000 with var0008 to var0009) {
 		var000B = Func095C(var0003, var000A);
@@ -110295,9 +110320,9 @@ var Func096E 0x96E (var var0000, var var0001, var var0002, var var0003, var var0
 		}
 	}
 	if (var0005 == false) {
-		return 0x0002;
+		return 2;
 	}
-	return 0x0003;
+	return 3;
 }
 
 var Func096F 0x96F (var var0000, var var0001, var var0002) {
@@ -110517,14 +110542,14 @@ void Func0976 0x976 (var var0000, var var0001) {
 	var var0004;
 
 	if (var0000->is_npc()) {
-		var0002 = var0000->get_npc_prop(0x0000);
-		var0003 = var0000->get_npc_prop(0x0003);
-		if ((var0003 + var0001) < 0x0001) {
-			var0001 = 0xFFFF * var0003;
+		var0002 = var0000->get_npc_prop(STRENGTH);
+		var0003 = var0000->get_npc_prop(HEALTH);
+		if ((var0003 + var0001) < 1) {
+			var0001 = -1 * var0003;
 		} else if ((var0003 + var0001) > var0002) {
 			var0001 = var0002 - var0003;
 		}
-		var0004 = var0000->set_npc_prop(0x0003, var0001);
+		var0004 = var0000->set_npc_prop(HEALTH, var0001);
 	}
 }
 
@@ -110816,7 +110841,7 @@ void Func0982 0x982 (var var0000, var var0001) {
 
 var Func0983 0x983 (var var0000) {
 
-	if ((var0000->get_npc_prop(0x0002) >= 0x000A) && ((!var0000->get_item_flag(ASLEEP)) && ((!var0000->get_item_flag(PARALYZED)) && ((!var0000->get_item_flag(DEAD)) && ((var0000->get_npc_prop(0x0003) > 0x0000) && var0000->is_npc()))))) {
+	if ((var0000->get_npc_prop(INTELLIGENCE) >= 10) && ((!var0000->get_item_flag(ASLEEP)) && ((!var0000->get_item_flag(PARALYZED)) && ((!var0000->get_item_flag(DEAD)) && ((var0000->get_npc_prop(HEALTH) > 0) && var0000->is_npc()))))) {
 		return true;
 	}
 	return false;
@@ -110827,7 +110852,7 @@ extern var Func0985 0x985 (var var0000);
 var Func0984 0x984 (var var0000) {
 
 	var0000 = Func0985(var0000);
-	if (var0000->get_item_flag(ASLEEP) || (var0000->get_item_flag(PARALYZED) || (var0000->get_item_flag(DEAD) || (var0000->get_npc_prop(0x0003) <= 0x0000)))) {
+	if (var0000->get_item_flag(ASLEEP) || (var0000->get_item_flag(PARALYZED) || (var0000->get_item_flag(DEAD) || (var0000->get_npc_prop(HEALTH) <= 0)))) {
 		return true;
 	}
 	return false;
@@ -110861,7 +110886,7 @@ void Func0986 0x986 (var var0000, var var0001) {
 
 	var0002 = UI_get_party_list2();
 	for (var0005 in var0002 with var0003 to var0004) {
-		if (var0005->get_npc_prop(0x0009) >= 0x000A) {
+		if (var0005->get_npc_prop(FOODLEVEL) >= 10) {
 			if (!(var0005 == 0xFE9C->get_npc_object())) {
 				var0005->clear_item_flag(ASLEEP);
 			}
@@ -110871,11 +110896,11 @@ void Func0986 0x986 (var var0000, var var0001) {
 			var0005->clear_item_flag(CHARMED);
 			var0005->clear_item_flag(INVISIBLE);
 			var0005->clear_item_flag(PROTECTION);
-			Func0987(var0005, 0x0003, 0x0000, var0000);
+			Func0987(var0005, HEALTH, STRENGTH, var0000);
 			if (var0005 == 0xFE9C->get_npc_object()) {
-				Func0987(var0005, 0x0005, 0x0006, var0000);
+				Func0987(var0005, MANA, MAX_MANA, var0000);
 			}
-			var0006 = var0005->set_npc_prop(0x0009, (var0000 * 0xFFFF));
+			var0006 = var0005->set_npc_prop(FOODLEVEL, var0000 * -1);
 		}
 	}
 	var0007 = var0001->find_nearby(0x02BD, 0x001E, 0x0000);
@@ -110908,7 +110933,7 @@ void Func0987 0x987 (var var0000, var var0001, var var0002, var var0003) {
 	if (var0005 > var0000->get_npc_prop(var0002)) {
 		var0005 = var0000->get_npc_prop(var0002);
 	}
-	var0006 = var0000->set_npc_prop(var0001, (var0005 - var0004));
+	var0006 = var0000->set_npc_prop(var0001, var0005 - var0004);
 }
 
 var Func0988 0x988 (var var0000, var var0001) {
