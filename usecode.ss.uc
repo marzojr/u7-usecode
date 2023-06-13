@@ -12,6 +12,23 @@ enum directions : byte {
 	NORTHWEST	= 0x37
 };
 
+/*
+ *	parts of the day (3-hour intervals). Returned by UI_part_of_day. This is
+ *	usually only used by conversation scripts, as a way of narrowing down
+ *	schedule-related behaviour.
+ */
+enum day_periods {
+	// The period is equal to one-third of the current game hour.
+	MIDNIGHT		= 0,	// 0-2
+	EARLY			= 1,	// 3-5
+	DAWN			= 2,	// 6-8
+	MORNING			= 3,	// 9-11
+	NOON			= 4,	// 12-14
+	AFTERNOON		= 5,	// 15-17
+	EVENING			= 6,	// 18-20
+	NIGHT			= 7		// 21-23
+};
+
 enum item_flags {
 	INVISIBLE			= 0,
 	ASLEEP				= 1,
@@ -118,6 +135,63 @@ enum events {
 							// moves the Avatar manually)
 };
 
+// Business activities (taken from the cheat screen)
+enum schedules {
+	IN_COMBAT		= 0,	// renamed to not conflict with COMBAT, the NPC
+							// stat property.
+	PACE_HORIZONTAL	= 1,	// Walk horizontally until you hit a wall, then
+							// turn around. (Patrolling on the cheap.)
+	PACE_VERTICAL	= 2,	// Same as above, but vertically.
+	TALK			= 3,	// NPC runs to the Avatar to talk to them. When
+							// they get within a certain distance of where the
+							// Avatar was when this schedule was set, a
+							// STARTED_TALKING event is triggered on the NPC.
+							// At this point the schedule must be changed.
+	DANCE			= 4,
+	EAT				= 5,
+	FARM			= 6,	// Waves farm implements around.
+	TEND_SHOP		= 7,	// This is really just a more specific version of
+							// LOITER, used for narrowing down schedule barks.
+							// See BAKE, SEW and BLACKSMITH for more specific
+							// examples of shop behaviour.
+	MINE			= 8,
+	MINER			= 8,
+	HOUND			= 9,
+	STANDTHERE		= 10,	// renamed to not conflict with STAND, the NPC
+							// animation frame
+	LOITER			= 11,	// Hangs around a certain point, within 10 units
+							// or so
+	WANDER			= 12,	// Roams nearby a certain point (as much as a
+							// 320x200 screen away)
+	BLACKSMITH		= 13,
+	SLEEP			= 14,
+	WAIT			= 15,	// Similar to STAND, except that they will never
+							// leave the WAIT schedule until it is manually
+							// changed: their preset schedule list is ignored.
+	MAJOR_SIT		= 16,
+	GRAZE			= 17,
+	BAKE			= 18,
+	SEW				= 19,
+	SHY				= 20,	// Tries to keep out of the Avatar's way - will
+							// half-heartedly flee until out of a certain range.
+	LAB				= 21,
+	THIEF			= 22,	// Approaches the party and will take gold from the Avatar's
+							// backpack, then will bark "Greetings!" in SI.
+	WAITER			= 23,
+	SPECIAL			= 24,	// ??
+	KID_GAMES		= 25,	// Tag! Thou art it! And so forth.
+	TAG				= 25,
+	EAT_AT_INN		= 26,	// same as Eat, only with different barks.
+	DUEL			= 27,
+	SPAR			= 27,
+	PREACH			= 28,	// Broken in SI, Leon resets to Loiter after trying it.
+	PATROL			= 29,	// This tells the AI to follow a particular set of
+							// patrol waypoints, defined by path eggs.
+	DESK_WORK		= 30,
+	FOLLOW_AVATAR	= 31	// That most noble of pursuits. Like WAIT, this
+							// completely overrides the NPC's schedule list.
+};
+
 extern void Func094A 0x94A (var var0000);
 extern var Func0910 0x910 (var var0000);
 
@@ -173,7 +247,7 @@ void Func00A0 shape#(0xA0) () {
 		if (gflags[0x0004]) {
 			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, 0xFFF3, 0xFFD8, 0xFFEA, 0xFFE8, 0xFFE9, 0xFFE2, 0xFFE0, 0xFFE3, 0xFFE5, 0xFFEE, 0xFFEC, 0xFFD6, 0xFFD5, 0xFFEB, 0xFFF0, 0xFFF2, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
-				if ((var0003->get_schedule_type() != 0x000F) && (!var0003->get_item_flag(DEAD))) {
+				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
 					UI_error_message("His current activity is #" + var0003->get_schedule_type());
 					UI_error_message("Save game, and report to Brendann NOW!");
@@ -522,11 +596,11 @@ void Func00E4 shape#(0xE4) () {
 			Func097F(item, "@Watch out for goblins...@", 0x0002);
 			abort;
 		}
-		set_schedule_type(0x0003);
+		set_schedule_type(TALK);
 	}
 	// This looks like it should have been event == SI_PATH_FAILURE instead.
 	if (event == SI_PATH_SUCCESS) {
-		set_schedule_type(0x000F);
+		set_schedule_type(WAIT);
 		var0002 = script item after 5 ticks {
 			nohalt;
 			call Func00E4;
@@ -548,7 +622,7 @@ void Func00E4 shape#(0xE4) () {
 			abort;
 		}
 		if ((get_item_frame() != 0x000A) && (!gflags[0x0083])) {
-			set_schedule_type(0x0010);
+			set_schedule_type(MAJOR_SIT);
 		}
 		return;
 	}
@@ -579,7 +653,7 @@ void Func00E4 shape#(0xE4) () {
 		abort;
 	}
 	if ((event == STARTED_TALKING) && (var0000 == 0x000A)) {
-		set_schedule_type(0x000C);
+		set_schedule_type(WANDER);
 		0xFEF1->show_npc_face0(0x0000);
 		say("\"Why dost thou interrupt? I am a Pikeman of Monitor.\"");
 		say("\"I must return to my duties lest the goblin horde take us.\"");
@@ -588,7 +662,7 @@ void Func00E4 shape#(0xE4) () {
 		Func097F(item, "@Be vigilant!@", 0x0002);
 	}
 	if ((event == STARTED_TALKING) && (var0000 == 0x000B)) {
-		set_schedule_type(0x000C);
+		set_schedule_type(WANDER);
 		0xFEED->show_npc_face0(0x0000);
 		say("\"I would have words with thee but my duties call.\"");
 		say("\"Please consult me when I am not on duty.\"");
@@ -597,7 +671,7 @@ void Func00E4 shape#(0xE4) () {
 		Func097F(item, "@Be vigilant!@", 0x0002);
 	}
 	if ((event == STARTED_TALKING) && (var0000 == 0x000C)) {
-		set_schedule_type(0x000C);
+		set_schedule_type(WANDER);
 		0xFEEA->show_npc_face0(0x0000);
 		say("\"Greetings. I'm a Pikeman of Monitor.\"");
 		say("\"The Goblins are dangerous. Watch out for them. As for me, I must return to my duties now.\"");
@@ -606,16 +680,16 @@ void Func00E4 shape#(0xE4) () {
 		Func097F(item, "@Be vigilant!@", 0x0002);
 	}
 	if ((event == STARTED_TALKING) && (var0000 == 0x0003)) {
-		set_schedule_type(0x0009);
+		set_schedule_type(HOUND);
 		0xFEED->show_npc_face0(0x0000);
 		if (!0xFFBB->get_item_flag(MET)) {
 			say("\"I will not discuss matters with a stranger to Monitor. Thou shouldst speak with Lord Marsten.\"");
 		} else if (!gflags[0x0048]) {
 			say("\"Thou art not a Knight. Only warriors are welcome here. Move along before thou dost feel the cold steel of mine halberd.\"");
-			set_schedule_type(0x000C);
+			set_schedule_type(WANDER);
 		} else {
 			say("\"Welcome, Knight. I must be about my duties.\"");
-			set_schedule_type(0x000C);
+			set_schedule_type(WANDER);
 		}
 		UI_remove_npc_face0();
 		Func097F(item, "@Move along!@", 0x0002);
@@ -623,7 +697,7 @@ void Func00E4 shape#(0xE4) () {
 	if ((event == STARTED_TALKING) && (var0000 == 0x0005)) {
 		var0007 = find_nearby(0x00E4, 0x001E, 0x0000);
 		for (var000A in var0007 with var0008 to var0009) {
-			var000A->set_schedule_type(0x0014);
+			var000A->set_schedule_type(SHY);
 			Func097F(var000A, "@Find the traitor!@", UI_get_random(0x0014));
 		}
 		0xFEF1->show_npc_face0(0x0000);
@@ -646,7 +720,7 @@ void Func00E4 shape#(0xE4) () {
 		abort;
 	}
 	if ((event == STARTED_TALKING) && (var0000 == 0x000F)) {
-		set_schedule_type(0x0009);
+		set_schedule_type(HOUND);
 		0xFEED->show_npc_face0(0x0000);
 		say("\"Please spare me! I shall do anything! I do not want to be roasted over a goblin's fire...\"");
 		say("\"Oh, er, hello there. My name is Johnson. Pardon mine outburst, but I thought thou mightest be a goblin. I was attempting to scare them, surprise them, before I rushed them.\"");
@@ -657,7 +731,7 @@ void Func00E4 shape#(0xE4) () {
 		set_npc_id(0x0010);
 	}
 	if ((event == DOUBLECLICK) && (var0000 == 0x0010)) {
-		set_schedule_type(0x0009);
+		set_schedule_type(HOUND);
 		0xFEED->show_npc_face0(0x0000);
 		say("\"There is no time for small talk! We must be on our way back to Monitor!\" *\"Thou wouldst not want us to be eaten before we have the chance to become heroes, wouldst thou?\" *\" Of course not! Let us be on our way!\"");
 		UI_remove_npc_face0();
@@ -665,15 +739,15 @@ void Func00E4 shape#(0xE4) () {
 	}
 	if ((event == STARTED_TALKING) && (var0000 == 0x000D)) {
 		set_npc_id(0x0003);
-		set_schedule_type(0x000C);
+		set_schedule_type(WANDER);
 		var000B = find_nearby(0x00E4, 0x0014, 0x0000);
 		for (var000E in var000B with var000C to var000D) {
-			var000E->set_schedule_type(0x000C);
+			var000E->set_schedule_type(WANDER);
 		}
 		abort;
 	}
 	if ((event == STARTED_TALKING) && (var0000 == 0x0001)) {
-		set_schedule_type(0x0007);
+		set_schedule_type(TEND_SHOP);
 		0xFEF1->show_npc_face0(0x0000);
 		say("\"This is the Bull Tower, knave. State thy business or be gone. We have no time for idle chit-chat with Goblins about.\"");
 		add(["Goblins", "pikeman", "Bull Tower"]);
@@ -1567,7 +1641,7 @@ void Func00E6 shape#(0xE6) () {
 		}
 		0xFFEC->show_npc_face0(0x0000);
 		Func09AC(0xFFEC, 0xFFFF, 0x0000, 0x000A);
-		0xFFEB->set_new_schedules(0x0000, 0x000A, [0x0986, 0x0766]);
+		0xFFEB->set_new_schedules(MIDNIGHT, STANDTHERE, [0x0986, 0x0766]);
 		0xFFEB->run_schedule();
 		0xFFEB->clear_item_flag(ASLEEP);
 		Func097F(0xFFEB, "@Tar gorlfog!@", 0x0003);
@@ -1610,7 +1684,7 @@ void Func00E6 shape#(0xE6) () {
 					if (var000F->get_item_flag(IN_PARTY)) {
 						var000F->remove_from_party();
 					}
-					var000F->set_new_schedules(0x0000, 0x000A, var0009);
+					var000F->set_new_schedules(MIDNIGHT, STANDTHERE, var0009);
 					var000F->run_schedule();
 				}
 				Func097F(var000F, "@Have fun...@", 0x0000);
@@ -1646,7 +1720,7 @@ void Func00E6 shape#(0xE6) () {
 			if (var000F->get_item_flag(IN_PARTY)) {
 				var000F->remove_from_party();
 			}
-			var000F->set_new_schedules(0x0000, 0x000A, var0009);
+			var000F->set_new_schedules(MIDNIGHT, STANDTHERE, var0009);
 			var000F->run_schedule();
 		}
 		Func097F(var000F, "@Have fun...@", 0x0000);
@@ -1793,10 +1867,10 @@ void Func00E6 shape#(0xE6) () {
 			UI_play_sound_effect(0x0039);
 			if (var000E) {
 				var000E->set_item_frame(0x0000);
-				var000E->set_schedule_type(0x0011);
+				var000E->set_schedule_type(GRAZE);
 				var000E->clear_item_flag(TEMPORARY);
 			}
-			0xFFEC->set_schedule_type(0x000F);
+			0xFFEC->set_schedule_type(WAIT);
 			abort;
 		}
 	}
@@ -2117,8 +2191,8 @@ void Func00FA shape#(0xFA) () {
 			}
 			for (var0009 in var0003 with var000A to var000B) {
 				var000C = var0009->get_schedule_type();
-				if ((var000C != 0x000F) && (var000C != 0x0003)) {
-					var0009->set_schedule_type(0x000C);
+				if ((var000C != WAIT) && (var000C != TALK)) {
+					var0009->set_schedule_type(WANDER);
 				}
 			}
 			gflags[0x0272] = false;
@@ -2131,8 +2205,8 @@ void Func00FA shape#(0xFA) () {
 		if (item == var0001) {
 			for (var0009 in var0003 with var000D to var000E) {
 				var000C = var0009->get_schedule_type();
-				if (((var000C != 0x000F) && ((var000C != 0x0003) && (var000C != Func084D(var0009, var0004)))) || (var000C == 0x000C)) {
-					var0009->set_new_schedules(0x0000, Func084D(var0009, var0004), Func084E(var0009, var0004));
+				if (((var000C != WAIT) && ((var000C != TALK) && (var000C != Func084D(var0009, var0004)))) || (var000C == WANDER)) {
+					var0009->set_new_schedules(MIDNIGHT, Func084D(var0009, var0004), Func084E(var0009, var0004));
 					var0009->run_schedule();
 				} else if ((var000C == 0x0003) || (var000C == 0x000F)) {
 					gflags[0x0272] = true;
@@ -2275,7 +2349,7 @@ void Func0103 shape#(0x103) () {
 		0xFE9C->item_say("@Ranger!@");
 		item->Func07D1();
 		Func097F(item, "@Yes?@", 0x0002);
-		set_schedule_type(0x0003);
+		set_schedule_type(TALK);
 	}
 	if (event == PROXIMITY) {
 		if (var0001 != 0x0001) {
@@ -2302,14 +2376,14 @@ void Func0103 shape#(0x103) () {
 	}
 	if (event == STARTED_TALKING) {
 		if (var0001 == 0x0000) {
-			set_schedule_type(0x0007);
+			set_schedule_type(TEND_SHOP);
 			clear_item_say();
 			0xFEEE->show_npc_face0(0x0000);
 			say("\"How may I help thee? As a Ranger, I must help thee in any way that I can.\"");
 			if (gflags[0x0285] && (!gflags[0x0297])) {
 				add("strange wine");
 			}
-			if (gflags[0x0045] && (0xFFB4->get_schedule_type() != 0x000F)) {
+			if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
 				add("brown bottle");
 			}
 			if (gflags[0x0118] && (!gflags[0x029C])) {
@@ -2322,7 +2396,7 @@ void Func0103 shape#(0x103) () {
 				case "kidnap" (remove):
 					say("\"Thou shouldst report such a crime as this to Julia. She can aid thee.\"");
 					if (0xFFE9->npc_nearby()) {
-						0xFFE9->set_schedule_type(0x0003);
+						0xFFE9->set_schedule_type(TALK);
 						Func097F(0xFFE9, "@Yes?@", 0x0000);
 					}
 					fallthrough;
@@ -2448,7 +2522,7 @@ void Func0103 shape#(0x103) () {
 			}
 		}
 		if (var0001 == 0x0001) {
-			set_schedule_type(0x0007);
+			set_schedule_type(TEND_SHOP);
 			clear_item_say();
 			0xFEE7->show_npc_face0(0x0000);
 			say("\"My name is Ernesto the Ranger. How may I be of service, ",
@@ -2460,7 +2534,7 @@ void Func0103 shape#(0x103) () {
 			if (gflags[0x0285] && (!gflags[0x0297])) {
 				add("strange wine");
 			}
-			if (gflags[0x0045] && (0xFFB4->get_schedule_type() != 0x000F)) {
+			if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
 				add("brown bottle");
 			}
 			if (gflags[0x0118] && (!gflags[0x029C])) {
@@ -2474,7 +2548,7 @@ void Func0103 shape#(0x103) () {
 					say("\"This is such a terrible crime. And it involves magic!");
 					if (0xFFE9->npc_nearby()) {
 						say("\"Thou shouldst report such a crime as this to Julia. She can aid thee.\"");
-						0xFFE9->set_schedule_type(0x0003);
+						0xFFE9->set_schedule_type(TALK);
 						Func097F(0xFFE9, "@Yes?@", 0x0000);
 					} else {
 						say("\"Do not tell that I told thee this, but do not take such a matter to Julia -- \"");
@@ -2490,7 +2564,7 @@ void Func0103 shape#(0x103) () {
 					fallthrough;
 
 				case "MageLord" (remove):
-					if (gflags[0x0004] && (0x038A->get_schedule_type() != 0x000F)) {
+					if (gflags[0x0004] && (0x038A->get_schedule_type() != WAIT)) {
 						say("\"Shamino the Anarch is the current MageLord. He hath brought great change to our city...\"");
 						say("\"No longer must a Mage or Mundane be bound by petty rules. It is quite exciting!\"");
 					} else {
@@ -2606,7 +2680,7 @@ void Func0103 shape#(0x103) () {
 		0xFEEE->show_npc_face0(0x0000);
 		say("\"Please, I cannot speak with thee at this time. My grief doth take the words from my mouth and leave me only with tears.\" ~\"Please away, I do not wish to be seen in this state.\"");
 		Func097F(item, "@If only I had flowers...@", 0x0002);
-		set_schedule_type(0x000F);
+		set_schedule_type(WAIT);
 		UI_remove_npc_face0();
 	}
 }
@@ -2699,7 +2773,7 @@ void Func0109 shape#(0x109) () {
 	if (event == SCRIPTED) {
 		if (Func0994() == 0x0002) {
 			if (!0xFF31->npc_nearby()) {
-				0xFF31->set_schedule_type(0x0007);
+				0xFF31->set_schedule_type(TEND_SHOP);
 				abort;
 			}
 			var0001 = Func09A0(0x0002, 0x0001);
@@ -2710,7 +2784,7 @@ void Func0109 shape#(0x109) () {
 			var0003 = 0xFF31->find_nearby(0xFFFF, 0x0014, 0x0008);
 			var0004 = [];
 			for (var0007 in var0003 with var0005 to var0006) {
-				if (var0007->get_schedule_type() == 0x000F) {
+				if (var0007->get_schedule_type() == WAIT) {
 					var0004 &= var0007;
 				}
 			}
@@ -2718,7 +2792,7 @@ void Func0109 shape#(0x109) () {
 				0xFE9C->clear_item_flag(DONT_MOVE);
 				0xFF31->set_npc_id(0x0000);
 				UI_set_weather(0x0000);
-				0xFF29->set_schedule_type(0x0003);
+				0xFF29->set_schedule_type(TALK);
 				var0008 = script Func09A0(0x0005, 0x0001) after 1000 ticks {
 					nohalt;
 					call Func00FA;
@@ -3012,7 +3086,7 @@ void Func0112 shape#(0x112) () {
 		var0000 = set_npc_prop(0x0003, 0x0005);
 		var0003 = 0xFE9C->find_nearby(0x017D, 0x001E, 0x0000);
 		for (var0006 in var0003 with var0004 to var0005) {
-			var0006->set_schedule_type(0x0003);
+			var0006->set_schedule_type(TALK);
 			var0006->set_npc_id(0x0007);
 		}
 		var0007 = ["@Hold there!@", "@Cease!@", "@Murderer!@", "@Stop him!@", "@Arrest that dog!@", "@Ruffian!@"];
@@ -3026,7 +3100,7 @@ void Func0112 shape#(0x112) () {
 				var0000 = var0008->approach_avatar(0x005A, 0x0028);
 				if (var0000) {
 					var0008->set_npc_id(0x0007);
-					var0008->set_schedule_type(0x0003);
+					var0008->set_schedule_type(TALK);
 				}
 			}
 		}
@@ -3440,7 +3514,7 @@ void Func013D shape#(0x13D) () {
 		var0002 = find_nearby(0x038A, 0x0005, 0x0000);
 		if (get_npc_id() == 0x0006) {
 			Func097F(item, "@The world shall die...@", 0x0000);
-			set_schedule_type(0x000F);
+			set_schedule_type(WAIT);
 			var0003 = script item {
 				nohalt;
 				face east;
@@ -3533,7 +3607,7 @@ void Func013D shape#(0x13D) () {
 				say("\"I shall not forget that thou hast beaten me, vile human!\"");
 				UI_remove_npc_face0();
 				var0004 = get_object_position();
-				set_schedule_type(0x000F);
+				set_schedule_type(WAIT);
 				0xFE9C->set_opponent(0x0001);
 				move_object([0x008E, 0x002E, 0x0000]);
 				0xFFFE->clear_item_flag(DEAD);
@@ -3600,7 +3674,7 @@ void Func013E shape#(0x13E) () {
 			var0004 = var0003->add_cont_items(0x0001, 0x011F, 0x0001, 0xFE99, 0x0012);
 			var0004 = var0003->add_cont_items(0x0001, 0x02DB, 0x0006, 0xFE99, 0x0012);
 			var0003->set_alignment(0x0002);
-			var0003->set_schedule_type(0x0000);
+			var0003->set_schedule_type(IN_COMBAT);
 			var0004 = script var0003 after 20 ticks {
 				nohalt;
 				say "@Thou art no match for me!@";
@@ -3632,7 +3706,7 @@ void Func013E shape#(0x13E) () {
 		}
 	}
 	var0007 = get_npc_id();
-	if ((get_schedule_type() == 0x001D) && (0xFFC0->get_npc_id() != 0x0000)) {
+	if ((get_schedule_type() == PATROL) && (0xFFC0->get_npc_id() != 0x0000)) {
 		abort;
 	}
 	if (Func0994() == 0x0010) {
@@ -3661,7 +3735,7 @@ void Func013E shape#(0x13E) () {
 			Func097F(item, "@At last...@", 0x0000);
 			item->Func07D2();
 			item->Func07D1();
-			set_schedule_type(0x000F);
+			set_schedule_type(WAIT);
 			var0004 = script item after 10 ticks {
 				nohalt;
 				call Func013E;
@@ -3681,7 +3755,7 @@ void Func013E shape#(0x13E) () {
 				Func097F(item, "@At last...@", 0x0000);
 				0xFE9C->Func07D2();
 				item->Func07D1();
-				set_schedule_type(0x000F);
+				set_schedule_type(WAIT);
 				var0004 = script item after 10 ticks {
 					nohalt;
 					call Func013E;
@@ -3702,7 +3776,7 @@ void Func013E shape#(0x13E) () {
 			0x0000->set_conversation_slot();
 			var000B = find_nearby(0x0373, 0x0014, 0x0000);
 			if (var000B) {
-				var000B->set_schedule_type(0x000B);
+				var000B->set_schedule_type(LOITER);
 			}
 			UI_end_conversation();
 		}
@@ -3729,7 +3803,7 @@ void Func013E shape#(0x13E) () {
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
 			UI_end_conversation();
-			0xFF81->set_schedule_type(0x000B);
+			0xFF81->set_schedule_type(LOITER);
 			var000C = [0x0924, 0x017E, 0x0000];
 			var000B = find_nearby(0x0373, 0x0014, 0x0000);
 			if (var000B) {
@@ -3760,7 +3834,7 @@ void Func013E shape#(0x13E) () {
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
 			say("\"Ah, yes... I had nearly forgotten.\"");
-			0xFF80->set_schedule_type(0x000B);
+			0xFF80->set_schedule_type(LOITER);
 			UI_end_conversation();
 		}
 		if (get_npc_id() == 0x0004) {
@@ -4031,15 +4105,15 @@ void Func0151 shape#(0x151) () {
 			} else {
 				var0002 = 0x0000;
 				for (var0005 in var0001 with var0003 to var0004) {
-					var0005->set_schedule_type(0x000C);
+					var0005->set_schedule_type(WANDER);
 				}
 			}
 			set_temperature(var0002);
 			if ((var0002 == 0x0004) || ((var0002 == 0x0008) || (var0002 == 0x000C))) {
 				var0006 = false;
 				for (var0005 in var0001 with var0007 to var0008) {
-					if ((var0005->get_schedule_type() != 0x001D) && (!var0006)) {
-						var0005->set_schedule_type(0x001D);
+					if ((var0005->get_schedule_type() != PATROL) && (!var0006)) {
+						var0005->set_schedule_type(PATROL);
 						var0006 = true;
 					}
 				}
@@ -4082,7 +4156,7 @@ void Func0151 shape#(0x151) () {
 				nohalt;
 				say "@Yesss?@";
 			};
-			set_schedule_type(0x0003);
+			set_schedule_type(TALK);
 		} else if (!Func097D(0xFE9B, 0x0001, 0x02C1, 0x0000, 0x004B)) {
 			var000E = find_nearby(0x02C1, 0x0019, 0x0000);
 			var000F = false;
@@ -4092,17 +4166,17 @@ void Func0151 shape#(0x151) () {
 				}
 			}
 			if (!var000F) {
-				set_schedule_type(0x0003);
+				set_schedule_type(TALK);
 			} else {
-				set_schedule_type(0x0014);
+				set_schedule_type(SHY);
 			}
 		}
 	}
 	if (event == STARTED_TALKING) {
 		if (var0000 < 0x0005) {
-			set_schedule_type(0x001D);
+			set_schedule_type(PATROL);
 		} else {
-			set_schedule_type(0x0014);
+			set_schedule_type(SHY);
 		}
 		if (var0000 == 0x0001) {
 			0xFEEB->show_npc_face0(0x0000);
@@ -4438,13 +4512,13 @@ void Func0162 shape#(0x162) () {
 		0xFE9C->item_say("@Ho! Goblin King!@");
 		item->Func07D1();
 		Func097F(item, "@What doing here?@", 0x0003);
-		set_schedule_type(0x0003);
+		set_schedule_type(TALK);
 	}
 	if (((event == STARTED_TALKING) || (event == DEATH)) && (!get_item_flag(SI_ZOMBIE))) {
 		var0000 = set_npc_prop(0x0003, 0x001E);
 		set_item_flag(SI_ZOMBIE);
 		clear_item_say();
-		set_schedule_type(0x0000);
+		set_schedule_type(IN_COMBAT);
 		0xFEF2->show_npc_face0(0x0000);
 		say("\"So, brave warrior come to kill King Goblin? Ha! We speak first...\"");
 		converse (["name", "goblins", "Helm of Monitor", "Simon", "bye"]) {
@@ -4512,7 +4586,7 @@ void Func016B shape#(0x16B) () {
 		var0000 = ["@I want an eyeball!@", "@Yes, mistress!@", "@We must hurry!@", "@Break his bones...@", "@I cannot wait!@", "@Skin him alive!@"];
 		Func097F(item, var0000[UI_get_random(UI_get_array_size(var0000))], 0x0000);
 		if (UI_get_random(0x000A) == 0x0001) {
-			set_schedule_type(0x0004);
+			set_schedule_type(DANCE);
 		}
 	}
 	if (event == SCRIPTED) {
@@ -4661,7 +4735,7 @@ void Func0175 shape#(0x175) () {
 					say("\"I must go now -- into the Void! My blessings are given to thee, Hero from Another World!\"");
 					0xFE9C->set_item_flag(DONT_MOVE);
 					UI_end_conversation();
-					set_schedule_type(0x000F);
+					set_schedule_type(WAIT);
 					var0002 = script item after 8 ticks {
 						nohalt;
 						actor frame cast_up;
@@ -5012,7 +5086,7 @@ void Func017D shape#(0x17D) () {
 
 	var0000 = Func0953();
 	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
-		set_schedule_type(0x0000);
+		set_schedule_type(IN_COMBAT);
 	}
 	if (event == DEATH) {
 		var0001 = get_object_position();
@@ -5053,28 +5127,28 @@ void Func017D shape#(0x17D) () {
 		var0007 = Func0953();
 		if (event == SCRIPTED) {
 			Func097F(item, "@Stand and be recognized, stranger!@", 0x0005);
-			set_schedule_type(0x0003);
+			set_schedule_type(TALK);
 		}
 		if (event == DOUBLECLICK) {
 			Func097F(item, "@Stand and be recognized, stranger!@", 0x0005);
-			set_schedule_type(0x0003);
+			set_schedule_type(TALK);
 		}
 		if (event == STARTED_TALKING) {
-			set_schedule_type(0x000A);
+			set_schedule_type(STANDTHERE);
 			clear_item_say();
 			0xFEF3->show_npc_face0(0x0000);
 			if (gflags[0x014F] == true) {
 				if (gflags[0x0168] == false) {
 					var0008 = 0xFFC5->get_schedule_type();
-					if (var0008 != 0x0003) {
+					if (var0008 != TALK) {
 						say("\"There hath been trouble of late here in Fawn...\"");
 						say("\"...And here comes part of it now.\"");
 						var0009 = get_object_position();
 						var0009[0x0002] += 0x0014;
 						0xFFC5->move_object([var0009[0x0001], var0009[0x0002], 0x0000]);
 						0xFE9C->set_item_flag(DONT_MOVE);
-						0xFFC5->set_schedule_type(0x0003);
-						0xFFC5->set_new_schedules([0x0000], [0x0003], [var0009[0x0001], var0009[0x0002]]);
+						0xFFC5->set_schedule_type(TALK);
+						0xFFC5->set_new_schedules([MIDNIGHT], [TALK], [var0009[0x0001], var0009[0x0002]]);
 						abort;
 					}
 				} else {
@@ -5188,7 +5262,7 @@ void Func017D shape#(0x17D) () {
 		var0005 = Func0954();
 		var0006 = UI_is_pc_female();
 		var0007 = Func0953();
-		if ((event == PROXIMITY) && (get_schedule_type() == 0x0009)) {
+		if ((event == PROXIMITY) && (get_schedule_type() == HOUND)) {
 			if (UI_get_random(0x000A) < 0x0006) {
 				abort;
 			}
@@ -5198,10 +5272,10 @@ void Func017D shape#(0x17D) () {
 		if (event == DOUBLECLICK) {
 			0xFE9C->item_say("@Thou... guard!@");
 			Func097F(item, (("@Yes, " + var0005) + "?@"), 0x0005);
-			set_schedule_type(0x0003);
+			set_schedule_type(TALK);
 		}
 		if (event == STARTED_TALKING) {
-			set_schedule_type(0x000A);
+			set_schedule_type(STANDTHERE);
 			clear_item_say();
 			0xFEF3->show_npc_face0(0x0000);
 			var000D = UI_die_roll(0x0001, 0x0004);
@@ -5284,10 +5358,10 @@ void Func017D shape#(0x17D) () {
 		if (event == DOUBLECLICK) {
 			0xFE9C->item_say("@Might I speak with thee, guard?@");
 			Func097F(item, (("@What dost thou need, " + var0005) + "?@"), 0x0005);
-			set_schedule_type(0x0003);
+			set_schedule_type(TALK);
 		}
 		if (event == STARTED_TALKING) {
-			set_schedule_type(0x000A);
+			set_schedule_type(STANDTHERE);
 			clear_item_say();
 			0xFEF3->show_npc_face0(0x0000);
 			var000D = UI_die_roll(0x0001, 0x0004);
@@ -5826,10 +5900,10 @@ void Func01C3 shape#(0x1C3) () {
 			Func097F(0xFFBB, "@Stop this!@", 0x0000);
 			0xFFBB->set_item_flag(MET);
 			0xFFB6->set_item_flag(DEAD);
-			0xFFB6->set_schedule_type(0x000F);
+			0xFFB6->set_schedule_type(WAIT);
 			0xFFB6->set_alignment(0x0000);
 			0xFFB9->set_item_flag(DEAD);
-			0xFFB9->set_schedule_type(0x000F);
+			0xFFB9->set_schedule_type(WAIT);
 			0xFFB9->set_alignment(0x0000);
 			var0003 = script 0xFFBB after 10 ticks {
 				nohalt;
@@ -5848,11 +5922,11 @@ void Func01C3 shape#(0x1C3) () {
 			0xFFB9->set_attack_mode(0x0000);
 			0xFFB6->set_attack_mode(0x0000);
 			0xFFB9->set_alignment(0x0002);
-			0xFFB9->set_schedule_type(0x0000);
+			0xFFB9->set_schedule_type(IN_COMBAT);
 			0xFFB9->set_opponent(0xFFB6);
 			0xFFB9->set_oppressor(0xFFB6);
 			0xFFB6->set_alignment(0x0001);
-			0xFFB6->set_schedule_type(0x0000);
+			0xFFB6->set_schedule_type(IN_COMBAT);
 			0xFFB6->set_opponent(0xFFB9);
 			0xFFB6->set_oppressor(0xFFB9);
 			Func097F(0xFF6A, "@Strike for his eyes!@", 0x000F);
@@ -5883,7 +5957,7 @@ void Func01C3 shape#(0x1C3) () {
 			0xFFBC->show_npc_face0(0x0000);
 			say("\"I am weary of thine insults, Luther! I am no more of a traitor than thou art!\"");
 			UI_end_conversation();
-			0xFFB6->set_schedule_type(0x0000);
+			0xFFB6->set_schedule_type(IN_COMBAT);
 			0xFFB9->si_path_run_usecode([0x0425, 0x0A82, 0x0000], SI_PATH_SUCCESS, 0xFFB9->get_npc_object(), Func01C3, false);
 			UI_set_path_failure(Func01C3, 0xFFB9->get_npc_object(), SI_PATH_FAILURE);
 			var0003 = script 0xFFBC after 10 ticks {
@@ -6118,8 +6192,8 @@ labelFunc01C3_073B:
 			UI_init_conversation();
 			0xFFBB->show_npc_face0(0x0000);
 			say("\"And I am here, both as the Lord of Monitor, and as the leader of the Leopards.\"");
-			if (0xFFBA->get_schedule_type() == 0x000F) {
-				0xFFBA->set_schedule_type(0x0017);
+			if (0xFFBA->get_schedule_type() == WAIT) {
+				0xFFBA->set_schedule_type(WAITER);
 			}
 			UI_end_conversation();
 			Func097F(0xFFB3, "@Hurrah!@", 0x0000);
@@ -6161,7 +6235,7 @@ labelFunc01C3_073B:
 			Func097F(0xFFBF, "@Welcome, warrior.@", 0x0000);
 			Func097F(0xFFBC, "@Wolves!@", 0x0001);
 			if (!UI_is_pc_female()) {
-				0xFFBA->set_schedule_type(0x000F);
+				0xFFBA->set_schedule_type(WAIT);
 				0xFFBA->Func07D2();
 				Func097F(0xFFBA, "@I like his looks.@", 0x0003);
 			} else {
@@ -6249,7 +6323,7 @@ labelFunc01C3_073B:
 			for (var0009 in var0003 with var0007 to var0008) {
 				var0009->remove_from_party();
 				var0005 = var0009->get_object_position();
-				var0009->set_new_schedules(0x0000, 0x000A, [var0005[0x0001], var0005[0x0002]]);
+				var0009->set_new_schedules(MIDNIGHT, STANDTHERE, [var0005[0x0001], var0005[0x0002]]);
 				var0009->run_schedule();
 			}
 			0xFE9C->item_say("@This must be the place!@");
@@ -6288,7 +6362,7 @@ labelFunc01C3_073B:
 				}
 				if (var0010 == 0x000C) {
 					0xFFBA->move_object(var000F);
-					0xFFBA->set_schedule_type(0x000F);
+					0xFFBA->set_schedule_type(WAIT);
 					var0013 = script 0xFFBA {
 						face west;
 						actor frame standing;
@@ -6312,7 +6386,7 @@ labelFunc01C3_073B:
 				}
 				if (var0011 && (!var0011->get_item_flag(DEAD))) {
 					var0011->move_object(var000F);
-					var0011->set_schedule_type(0x000F);
+					var0011->set_schedule_type(WAIT);
 					var0013 = script var0011 {
 						face var0012;
 						continue;
@@ -6355,9 +6429,9 @@ labelFunc01C3_073B:
 		}
 		var0018 = [0xFFB0, 0xFFC1, 0xFFB1, 0xFFB9];
 		for (var0005 in var0018 with var001B to var001C) {
-			var0005->set_schedule_type(0x001A);
+			var0005->set_schedule_type(EAT_AT_INN);
 		}
-		0xFFBA->set_schedule_type(0x0017);
+		0xFFBA->set_schedule_type(WAITER);
 		var0003 = script 0xFFBF {
 			nohalt;
 			actor frame bowing;
@@ -6376,13 +6450,13 @@ labelFunc01C3_073B:
 	}
 	if (event == SI_PATH_FAILURE) {
 		if ((item == 0xFFBF->get_npc_object()) && (0xFFBB->get_npc_id() == 0x0008)) {
-			0xFFBF->set_schedule_type(0x000F);
+			0xFFBF->set_schedule_type(WAIT);
 			0xFFBF->item_say("@Poor Cantra...@");
 			abort;
 		}
 		if ((item == 0xFFB6->get_npc_object()) && (0xFFBB->get_npc_id() == 0x000C)) {
 			0xFFBB->set_npc_id(0x000D);
-			0xFFB6->set_schedule_type(0x000F);
+			0xFFB6->set_schedule_type(WAIT);
 			var0003 = script 0xFFB6 {
 				nohalt;
 				actor frame ready;
@@ -6399,7 +6473,7 @@ labelFunc01C3_073B:
 			abort;
 		}
 		if ((item == 0xFFB9->get_npc_object()) && (0xFFBB->get_npc_id() == 0x000C)) {
-			0xFFB9->set_schedule_type(0x000F);
+			0xFFB9->set_schedule_type(WAIT);
 			UI_init_conversation();
 			0xFFB6->show_npc_face0(0x0000);
 			say("\"Leave him alone, Luther.\"");
@@ -6417,7 +6491,7 @@ labelFunc01C3_073B:
 			event = SI_PATH_SUCCESS;
 		}
 		if ((item == 0xFFBC->get_npc_object()) && (0xFFBB->get_npc_id() == 0x000C)) {
-			0xFFBC->set_schedule_type(0x000F);
+			0xFFBC->set_schedule_type(WAIT);
 			abort;
 		}
 		if ((item == 0xFFBC->get_npc_object()) && (0xFFBB->get_npc_id() == 0x0002)) {
@@ -6435,7 +6509,7 @@ labelFunc01C3_073B:
 	}
 	if (event == SI_PATH_SUCCESS) {
 		if ((item == 0xFFBF->get_npc_object()) && (0xFFBB->get_npc_id() == 0x0008)) {
-			0xFFBF->set_schedule_type(0x000F);
+			0xFFBF->set_schedule_type(WAIT);
 			var0003 = script 0xFFBF {
 				nohalt;
 				face south;
@@ -6450,7 +6524,7 @@ labelFunc01C3_073B:
 		}
 		if ((item == 0xFFB6->get_npc_object()) && (0xFFBB->get_npc_id() == 0x000C)) {
 			0xFFBB->set_npc_id(0x000D);
-			0xFFB6->set_schedule_type(0x000F);
+			0xFFB6->set_schedule_type(WAIT);
 			var0003 = script 0xFFB6 {
 				nohalt;
 				actor frame ready;
@@ -6467,7 +6541,7 @@ labelFunc01C3_073B:
 			abort;
 		}
 		if ((item == 0xFFB9->get_npc_object()) && (0xFFBB->get_npc_id() == 0x000C)) {
-			0xFFB9->set_schedule_type(0x000F);
+			0xFFB9->set_schedule_type(WAIT);
 			UI_init_conversation();
 			0xFFB6->show_npc_face0(0x0000);
 			say("\"Leave him alone, Luther.\"");
@@ -6482,7 +6556,7 @@ labelFunc01C3_073B:
 		}
 		if (item == 0xFFBD->get_npc_object()) {
 			gflags[0x0079] = true;
-			0xFFBD->set_schedule_type(0x000F);
+			0xFFBD->set_schedule_type(WAIT);
 			UI_init_conversation();
 			0xFFBD->show_npc_face0(0x0000);
 			say("\"My daughter Cantra is gone! I have looked everywhere for her. We need to send out a patrol!\"");
@@ -6527,7 +6601,7 @@ labelFunc01C3_073B:
 			abort;
 		}
 		if ((item == 0xFFBC->get_npc_object()) && (0xFFBB->get_npc_id() == 0x000C)) {
-			0xFFBC->set_schedule_type(0x000F);
+			0xFFBC->set_schedule_type(WAIT);
 			abort;
 		}
 		if ((item == 0xFFBC->get_npc_object()) && (0xFFBB->get_npc_id() == 0x0002)) {
@@ -6538,7 +6612,7 @@ labelFunc01C3_073B:
 				actor frame bowing;
 				actor frame sitting;
 			};
-			0xFFBC->set_schedule_type(0x000F);
+			0xFFBC->set_schedule_type(WAIT);
 			abort;
 		}
 		if ((0xFFBB->get_npc_id() == 0x0001) && (item == 0xFE9C->get_npc_object())) {
@@ -7105,7 +7179,7 @@ void Func01C7 shape#(0x1C7) () {
 			var0018 = 0x0000;
 			for (var0016 in var0017 with var0019 to var001A) {
 				if (var0016->npc_nearby2()) {
-					var0016->set_schedule_type(0x000F);
+					var0016->set_schedule_type(WAIT);
 					var0016->move_object([0x0938, (0x074A + var0018), 0x0000]);
 					var000A = script var0016 {
 						nohalt;
@@ -7162,7 +7236,7 @@ void Func01C7 shape#(0x1C7) () {
 				wait 8;
 				call Func01C7;
 			};
-			0xFFEA->set_schedule_type(0x000F);
+			0xFFEA->set_schedule_type(WAIT);
 			0xFFEA->move_object([0x092F, 0x0746, 0x0001]);
 			var000A = script 0xFFEA after 12 ticks {
 				nohalt;
@@ -7170,7 +7244,7 @@ void Func01C7 shape#(0x1C7) () {
 				actor frame bowing;
 				actor frame sitting;
 			};
-			0xFFE6->set_schedule_type(0x000F);
+			0xFFE6->set_schedule_type(WAIT);
 			0xFFE6->move_object([0x092F, 0x0758, 0x0001]);
 			var000A = script 0xFFE6 after 12 ticks {
 				nohalt;
@@ -7187,7 +7261,7 @@ void Func01C7 shape#(0x1C7) () {
 				actor frame bowing;
 				actor frame sitting;
 			};
-			0xFFF3->set_schedule_type(0x000F);
+			0xFFF3->set_schedule_type(WAIT);
 			0xFFF3->move_object([0x0938, 0x0756, 0x0000]);
 			var000A = script 0xFFF3 after 12 ticks {
 				nohalt;
@@ -7197,7 +7271,7 @@ void Func01C7 shape#(0x1C7) () {
 				actor frame bowing;
 				actor frame sitting;
 			};
-			0xFFD6->set_schedule_type(0x000F);
+			0xFFD6->set_schedule_type(WAIT);
 			0xFFD6->move_object([0x0938, 0x0754, 0x0000]);
 			var000A = script 0xFFD6 after 12 ticks {
 				nohalt;
@@ -7215,7 +7289,7 @@ void Func01C7 shape#(0x1C7) () {
 			0xFFEE->set_npc_id(0x0002);
 			var000A = find_nearby(0x01FD, 0x0014, 0x0000);
 			if (var000A) {
-				var000A->set_schedule_type(0x0014);
+				var000A->set_schedule_type(SHY);
 			}
 			UI_init_conversation();
 			0xFFEE->show_npc_face0(0x0000);
@@ -7282,7 +7356,7 @@ void Func01C7 shape#(0x1C7) () {
 				}
 			}
 			Func097F(0xFFEE, "@Vas Ibex Ort!@", 0x0000);
-			0xFFEE->set_schedule_type(0x000F);
+			0xFFEE->set_schedule_type(WAIT);
 			Func097F(0xFE9C, "@Hey!@", 0x0009);
 			Func097F(0xFFEC, (("@Do not hurt " + var0003) + "!@"), 0x000B);
 			if (0xFFEC->get_npc_id() == 0x0010) {
@@ -7425,7 +7499,7 @@ void Func01D1 shape#(0x1D1) () {
 					UI_remove_npc_face0();
 					0xFFC6->revert_schedule();
 					0xFFC6->run_schedule();
-					0xFFC6->set_schedule_type(0x000C);
+					0xFFC6->set_schedule_type(WANDER);
 					Func097F(0xFFD0, "@How sad...@", 0x0000);
 					Func097F(0xFFCB, "@Catchy tune...@", 0x000A);
 					abort;
@@ -7468,8 +7542,8 @@ void Func01D1 shape#(0x1D1) () {
 					Func097F(0xFFFE, "@What happened?@", 0x0000);
 				}
 				if (var0002 == 0x0009) {
-					0xFFFF->set_schedule_type(0x000F);
-					0xFFFE->set_schedule_type(0x000F);
+					0xFFFF->set_schedule_type(WAIT);
+					0xFFFE->set_schedule_type(WAIT);
 					0xFFFF->Func07D2();
 					0xFFFE->Func07D2();
 					var0005 = script 0xFFFD after 15 ticks {
@@ -7485,7 +7559,7 @@ void Func01D1 shape#(0x1D1) () {
 				0xFFFD->set_npc_id(var0002 + 0x0001);
 				abort;
 			}
-			0xFFFD->set_schedule_type(0x0003);
+			0xFFFD->set_schedule_type(TALK);
 			Func097F(0xFFFD, "@Avatar!@", 0x0000);
 		}
 	}
@@ -7741,7 +7815,7 @@ void Func01DF shape#(0x1DF) () {
 				}
 				var0003->set_item_flag(SI_TOURNAMENT);
 				var0003->clear_item_flag(TEMPORARY);
-				var0003->set_schedule_type(0x0000);
+				var0003->set_schedule_type(IN_COMBAT);
 				0xFE9C->set_oppressor(var0003);
 				var0003->set_alignment(0x0002);
 				var0004 = var0003->add_cont_items(0x0001, 0x0281, 0x003D, 0x0004, false);
@@ -7915,7 +7989,7 @@ void Func01E3 shape#(0x1E3) () {
 	}
 	if ((event == PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
 		0xFE9C->set_item_flag(DONT_MOVE);
-		0xFE9C->set_schedule_type(0x000F);
+		0xFE9C->set_schedule_type(WAIT);
 		UI_end_conversation();
 		var000D = script 0xFE9C {
 			nohalt;
@@ -8009,7 +8083,7 @@ void Func01EF shape#(0x1EF) () {
 			}
 		} else {
 			0xFE9C->item_say("@Here, kitty, kitty!@");
-			set_schedule_type(0x0014);
+			set_schedule_type(SHY);
 			set_npc_id(var0000 + 0x0001);
 			if (0xFFFE->npc_nearby()) {
 				Func097F(0xFFFE, "@I hate cats.@", 0x0008);
@@ -8061,7 +8135,7 @@ void Func01F0 shape#(0x1F0) () {
 
 	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Good pup.@");
-		set_schedule_type(0x0009);
+		set_schedule_type(HOUND);
 	}
 	if (event == PROXIMITY) {
 		var0000 = ["@Arf!@", "@Woof!@", "@Bark!@"];
@@ -8331,7 +8405,7 @@ void Func0207 shape#(0x207) () {
 							actor frame cast_up;
 						};
 						var0004->set_item_flag(TEMPORARY);
-						var0004->set_schedule_type(0x000F);
+						var0004->set_schedule_type(WAIT);
 						var0005 = var0004->add_cont_items(0x0001, 0x0321, 0xFE99, 0x0000, 0x0012);
 					}
 				}
@@ -8343,7 +8417,7 @@ void Func0207 shape#(0x207) () {
 				0xFFDB->set_polymorph(0x00EF);
 				var0006 = [0x037D, 0x095A, 0x0000];
 				0xFFDB->move_object(var0006);
-				0xFFDB->set_new_schedules(0x0000, 0x000F, [var0006[0x0001], var0006[0x0002]]);
+				0xFFDB->set_new_schedules(MIDNIGHT, WAIT, [var0006[0x0001], var0006[0x0002]]);
 				0xFFDB->run_schedule();
 			}
 			Func09B6(var0001, var0002);
@@ -8459,7 +8533,7 @@ void Func0235 shape#(0x235) () {
 			event = SI_PATH_SUCCESS;
 		}
 		if ((0xFF6A->get_npc_id() == 0x0006) && (item == 0xFF6A->get_npc_object())) {
-			0xFF6A->set_schedule_type(0x000F);
+			0xFF6A->set_schedule_type(WAIT);
 			0xFF6A->set_npc_id(0x0007);
 			var0000 = script 0xFF6A {
 				nohalt;
@@ -8474,7 +8548,7 @@ void Func0235 shape#(0x235) () {
 			Func097F(0xFE9C, "@Yes!@", 0x0004);
 			0xFF6A->clear_item_say();
 			Func097F(0xFF6A, "@Oh, my!@", 0x0007);
-			0xFE9C->set_schedule_type(0x000F);
+			0xFE9C->set_schedule_type(WAIT);
 			gflags[0x0008] = true;
 			if (gflags[0x0009]) {
 				0xFF6A->set_npc_id(0x0003);
@@ -8497,7 +8571,7 @@ void Func0235 shape#(0x235) () {
 			event = SI_PATH_SUCCESS;
 		}
 		if ((0xFF6A->get_npc_id() > 0x0000) && (item == 0xFF6A->get_npc_object())) {
-			0xFF6A->set_schedule_type(0x000F);
+			0xFF6A->set_schedule_type(WAIT);
 			gflags[0x0007] = true;
 			var0000 = find_nearby(0x03F3, 0x000A, 0x0000);
 			for (var0003 in var0000 with var0001 to var0002) {
@@ -8518,7 +8592,7 @@ void Func0235 shape#(0x235) () {
 		}
 	}
 	if (event == SI_PATH_SUCCESS) {
-		set_schedule_type(0x000F);
+		set_schedule_type(WAIT);
 		if ((0xFF6A->get_npc_id() == 0x0008) && (item == 0xFE9C->get_npc_object())) {
 			0xFE9C->set_polymorph(0x02D1);
 			UI_play_sound_effect(0x0001);
@@ -8549,7 +8623,7 @@ void Func0235 shape#(0x235) () {
 			Func097F(0xFE9C, "@Yes!@", 0x0004);
 			0xFF6A->clear_item_say();
 			Func097F(0xFF6A, "@Oh, my!@", 0x0007);
-			0xFE9C->set_schedule_type(0x000F);
+			0xFE9C->set_schedule_type(WAIT);
 			gflags[0x0008] = true;
 			if (gflags[0x0009]) {
 				0xFF6A->set_npc_id(0x0003);
@@ -8578,7 +8652,7 @@ void Func0235 shape#(0x235) () {
 			abort;
 		}
 		if ((0xFF6A->get_npc_id() > 0x0000) && (item == 0xFE9C->get_npc_object())) {
-			0xFE9C->set_schedule_type(0x000F);
+			0xFE9C->set_schedule_type(WAIT);
 			0xFF6A->set_npc_id(0x0002);
 			Func09B2();
 			UI_play_sound_effect(0x0001);
@@ -8614,7 +8688,7 @@ void Func0235 shape#(0x235) () {
 			0xFF6A->set_polymorph(0x00E5);
 			UI_play_sound_effect(0x0001);
 			0xFF6A->set_npc_id(0x0001);
-			0xFF6A->set_schedule_type(0x000F);
+			0xFF6A->set_schedule_type(WAIT);
 			0xFE9C->si_path_run_usecode([0x03A7, 0x0A43, 0x0000], SI_PATH_SUCCESS, 0xFE9C->get_npc_object(), Func0235, false);
 			UI_set_path_failure(Func0235, 0xFE9C->get_npc_object(), SI_PATH_FAILURE);
 			0xFE9C->clear_item_say();
@@ -8712,7 +8786,7 @@ void Func0235 shape#(0x235) () {
 				}
 			}
 			0xFF6A->move_object([0x03A4, 0x0A52, 0x0000]);
-			0xFF6A->set_schedule_type(0x000F);
+			0xFF6A->set_schedule_type(WAIT);
 			0xFE9C->move_object([0x03A3, 0x0A4A, 0x0001]);
 			0xFF6A->set_polymorph(0x0235);
 			var0000 = script 0xFF6A after 30 ticks {
@@ -8757,7 +8831,7 @@ void Func0235 shape#(0x235) () {
 					var0000 = Func0988(0xFE9C->get_npc_object(), UI_get_party_list2());
 					for (var000B in var0000 with var0009 to var000A) {
 						var000B->remove_from_party();
-						var000B->set_new_schedules(0x0000, 0x000C, [0x03B4, 0x0A6F]);
+						var000B->set_new_schedules(MIDNIGHT, WANDER, [0x03B4, 0x0A6F]);
 						var000B->run_schedule();
 					}
 					Func097F(var000B, "@Farewell...@", 0x0000);
@@ -8772,7 +8846,7 @@ void Func0235 shape#(0x235) () {
 			}
 			say("\"This is not a good time, my love. Perhaps thou couldst come some other morning.\"");
 			Func097F(0xFF6A, "@Adieu...@", 0x0000);
-			0xFF6A->set_schedule_type(0x0014);
+			0xFF6A->set_schedule_type(SHY);
 			abort;
 		}
 	}
@@ -8971,7 +9045,7 @@ void Func0266 shape#(0x266) () {
 		var0000 = find_nearby(0xFE99, 0x0028, 0x0008);
 		for (var0003 in var0000 with var0007 to var0008) {
 			if (!var0003->get_item_flag(IN_PARTY)) {
-				var0003->set_schedule_type(0x001A);
+				var0003->set_schedule_type(EAT_AT_INN);
 				var0003->clear_item_flag(ASLEEP);
 			}
 		}
@@ -8992,7 +9066,7 @@ void Func0266 shape#(0x266) () {
 		var0000 = find_nearby(0xFE99, 0x0028, 0x0008);
 		for (var0003 in var0000 with var0009 to var000A) {
 			if (!var0003->get_item_flag(IN_PARTY)) {
-				var0003->set_schedule_type(0x0010);
+				var0003->set_schedule_type(MAJOR_SIT);
 				var0003->clear_item_flag(ASLEEP);
 			}
 		}
@@ -9010,7 +9084,7 @@ void Func0266 shape#(0x266) () {
 		var0000 = find_nearby(0xFE99, 0x0028, 0x0008);
 		for (var0003 in var0000 with var000B to var000C) {
 			if (!var0003->get_item_flag(IN_PARTY)) {
-				var0003->set_schedule_type(0x000C);
+				var0003->set_schedule_type(WANDER);
 				var0003->clear_item_flag(ASLEEP);
 			}
 		}
@@ -9022,7 +9096,7 @@ void Func0266 shape#(0x266) () {
 		var0000 = find_nearby(0xFE99, 0x0028, 0x0008);
 		for (var0003 in var0000 with var000D to var000E) {
 			if (!var0003->get_item_flag(IN_PARTY)) {
-				var0003->set_schedule_type(0x0000);
+				var0003->set_schedule_type(IN_COMBAT);
 				var0003->clear_item_flag(ASLEEP);
 			}
 		}
@@ -9033,7 +9107,7 @@ void Func0266 shape#(0x266) () {
 		var0000 = find_nearby(0xFE99, 0x0028, 0x0008);
 		for (var0003 in var0000 with var000F to var0010) {
 			if (!var0003->get_item_flag(IN_PARTY)) {
-				var0003->set_schedule_type(0x0004);
+				var0003->set_schedule_type(DANCE);
 				var0003->clear_item_flag(ASLEEP);
 			}
 		}
@@ -9316,12 +9390,12 @@ void Func0281 shape#(0x281) () {
 		}
 		if (get_item_quality() == 0x00BA) {
 			if ((!0xFFE1->get_item_flag(DEAD)) && ((var0000->get_item_quality() == 0x00BA) && ((var0001 == 0x0178) && (!gflags[0x0148])))) {
-				0xFFE1->set_schedule_type(0x0003);
+				0xFFE1->set_schedule_type(TALK);
 				0xFFE1->set_item_flag(SI_TOURNAMENT);
 				Func097F(0xFFE1, "@Aha!@", 0x0000);
 				var0005 = find_nearby(0x016B, 0x001E, 0x0000);
 				for (var0008 in var0005 with var0006 to var0007) {
-					var0008->set_schedule_type(0x0009);
+					var0008->set_schedule_type(HOUND);
 				}
 			}
 		}
@@ -9947,7 +10021,7 @@ void Func0289 shape#(0x289) () {
 					};
 				}
 			} else {
-				var0009[0x0001]->set_schedule_type(0x0003);
+				var0009[0x0001]->set_schedule_type(TALK);
 			}
 		}
 		if (var0000 == 0x0008) {
@@ -10254,7 +10328,7 @@ void Func028C shape#(0x28C) () {
 			abort;
 		}
 		if (0xFFB8->get_npc_id() == 0x0001) {
-			0xFFB8->set_schedule_type(0x000F);
+			0xFFB8->set_schedule_type(WAIT);
 			0xFFB8->set_npc_id(0x0002);
 			var0005 = script 0xFFB8 {
 				nohalt;
@@ -10273,7 +10347,7 @@ void Func028C shape#(0x28C) () {
 			abort;
 		}
 		if (0xFFB8->get_npc_id() == 0x0000) {
-			0xFE9C->set_schedule_type(0x000F);
+			0xFE9C->set_schedule_type(WAIT);
 			0xFFB8->set_npc_id(0x0001);
 			Func097F(0xFFB8, "@Now we begin...@", 0x0000);
 			var0004 = var0003->get_object_position();
@@ -10292,7 +10366,7 @@ void Func028C shape#(0x28C) () {
 		0xFFB8->show_npc_face0(0x0000);
 		say("\"Use a cloth to soak up the blood...\"");
 		for (var0008 in var0002 with var0006 to var0007) {
-			var0008->set_schedule_type(0x001F);
+			var0008->set_schedule_type(FOLLOW_AVATAR);
 		}
 		0xFFB8->run_schedule();
 		0xFE9C->set_item_flag(TATTOOED);
@@ -12758,7 +12832,7 @@ void Func02E6 shape#(0x2E6) () {
 			Func097F(0xFE9C, "@Yes!@", 0x0004);
 			0xFFBA->clear_item_say();
 			Func097F(0xFFBA, "@Oh, my!@", 0x0007);
-			0xFE9C->set_schedule_type(0x000F);
+			0xFE9C->set_schedule_type(WAIT);
 			0xFFBA->set_npc_id(0x0003);
 			var0002 = script 0xFE9C {
 				nohalt;
@@ -12781,7 +12855,7 @@ void Func02E6 shape#(0x2E6) () {
 				}
 			}
 			0xFFBA->set_npc_id(0x0001);
-			0xFFBA->set_schedule_type(0x000F);
+			0xFFBA->set_schedule_type(WAIT);
 			var0002 = script 0xFFBA {
 				nohalt;
 				face west;
@@ -12828,7 +12902,7 @@ void Func02E6 shape#(0x2E6) () {
 			Func097F(0xFE9C, "@Yes!@", 0x0004);
 			0xFFBA->clear_item_say();
 			Func097F(0xFFBA, "@Oh, my!@", 0x0007);
-			0xFE9C->set_schedule_type(0x000F);
+			0xFE9C->set_schedule_type(WAIT);
 			0xFFBA->set_npc_id(0x0003);
 			var0002 = script 0xFE9C {
 				nohalt;
@@ -12845,7 +12919,7 @@ void Func02E6 shape#(0x2E6) () {
 			abort;
 		}
 		if ((0xFFBA->get_npc_id() < 0x0002) && (item == 0xFE9C->get_npc_object())) {
-			0xFE9C->set_schedule_type(0x000F);
+			0xFE9C->set_schedule_type(WAIT);
 			0xFFBA->set_npc_id(0x0002);
 			Func09B2();
 			UI_play_sound_effect(0x0001);
@@ -12865,7 +12939,7 @@ void Func02E6 shape#(0x2E6) () {
 				}
 			}
 			0xFFBA->set_npc_id(0x0001);
-			0xFFBA->set_schedule_type(0x000F);
+			0xFFBA->set_schedule_type(WAIT);
 			var0002 = script 0xFFBA {
 				nohalt;
 				face west;
@@ -12982,7 +13056,7 @@ void Func02E6 shape#(0x2E6) () {
 					var0002 = Func0988(0xFE9C->get_npc_object(), UI_get_party_list2());
 					for (var000B in var0002 with var0009 to var000A) {
 						var000B->remove_from_party();
-						var000B->set_new_schedules(0x0000, 0x001A, [0x0409, 0x0A4F]);
+						var000B->set_new_schedules(MIDNIGHT, EAT_AT_INN, [0x0409, 0x0A4F]);
 						var000B->run_schedule();
 					}
 					Func097F(var000B, "@Farewell...@", 0x0000);
@@ -13521,9 +13595,9 @@ void Func0313 shape#(0x313) () {
 							actor frame standing;
 						};
 						Func08DA(var0006);
-					} else if (0xFF58->get_schedule_type() == 0x001F) {
+					} else if (0xFF58->get_schedule_type() == FOLLOW_AVATAR) {
 						0xFF58->item_say("@I shall set the other lever...@");
-						0xFF58->set_schedule_type(0x000F);
+						0xFF58->set_schedule_type(WAIT);
 						var000C = 0xFE9C->find_nearby(0x0313, 0x0028, 0x0000);
 						var000D = false;
 						for (var0010 in var000C with var000E to var000F) {
@@ -13710,7 +13784,7 @@ void Func0319 shape#(0x319) () {
 	}
 	if (event == STARTED_TALKING) {
 		item_say("@Ah, there thou art, Avatar!@");
-		set_schedule_type(0x0003);
+		set_schedule_type(TALK);
 	}
 	if (event == DEATH) {
 		0xFEEC->show_npc_face0(0x0000);
@@ -13827,12 +13901,12 @@ void Func0319 shape#(0x319) () {
 			case "answers":
 				say("\"There are no answers, Avatar. No answers for those who sleep. I must wake and seek what answers I can without thee here.\" *\"I do not know that thou couldst save us if thou wert here, but I would have more hope if thou didst return...\"");
 				UI_remove_npc_face1();
-				set_schedule_type(0x0007);
+				set_schedule_type(TEND_SHOP);
 				abort;
 
 			case "bye":
 				say("\"Yes, yes. I should not be talking to myself anyway. With Britannia in the grip of these dark events it would be best if the people not fear that I have become afflicted, too. Thank thee, Avatar. Though thou art just a dream thou hast given me hope that Britannia will yet survive these dark days.\"");
-				set_schedule_type(0x0007);
+				set_schedule_type(TEND_SHOP);
 				UI_remove_npc_face1();
 				abort;
 		}
@@ -14716,7 +14790,7 @@ void Func0329 shape#(0x329) () {
 	UI_sprite_effect(0x001A, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_play_sound_effect(0x0082);
 	remove_npc();
-	set_schedule_type(0x0004);
+	set_schedule_type(DANCE);
 	var0002 = Func0992(0x0001, "@What happened?@", "@Gone!@", 0x0003);
 }
 
@@ -14782,9 +14856,9 @@ void Func032B shape#(0x32B) () {
 		set_polymorph(0x02E6);
 	}
 	if (event == SCRIPTED) {
-		set_schedule_type(0x001D);
+		set_schedule_type(PATROL);
 	}
-	if ((event == PROXIMITY) && (get_schedule_type() == 0x001D)) {
+	if ((event == PROXIMITY) && (get_schedule_type() == PATROL)) {
 		0xFE9C->move_object([0x018E, 0x09B3, 0x0001]);
 		var0000 = UI_create_new_object(0x02F9);
 		if (var0000) {
@@ -14801,9 +14875,9 @@ void Func032B shape#(0x32B) () {
 		var0005 = 0xFE9C->add_cont_items(0x0001, 0x0303, 0xFE99, 0x0000, 0x0000);
 		UI_play_sound_effect(0x0074);
 		0xFE9C->set_polymorph(0x02D1);
-		0xFFFE->set_schedule_type(0x000C);
-		0xFFFF->set_schedule_type(0x000C);
-		0xFFFD->set_schedule_type(0x000C);
+		0xFFFE->set_schedule_type(WANDER);
+		0xFFFF->set_schedule_type(WANDER);
+		0xFFFD->set_schedule_type(WANDER);
 		var0005 = script 0xFFFD after 0 ticks {
 			nohalt;
 			call Func01D1;
@@ -15055,7 +15129,7 @@ void Func032E shape#(0x32E) () {
 		var0007 = "evening";
 	}
 	if (event == EGG) {
-		set_schedule_type(0x000F);
+		set_schedule_type(WAIT);
 		abort;
 	}
 	if (event == SI_PATH_FAILURE) {
@@ -15103,7 +15177,7 @@ void Func032E shape#(0x32E) () {
 			var000A = 0xFFE1->get_object_position();
 			UI_sprite_effect(0x001A, var000A[0x0001], var000A[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_play_sound_effect(0x0082);
-			0xFFE1->set_new_schedules(0x0000, 0x000C, [0x086D, 0x0837]);
+			0xFFE1->set_new_schedules(MIDNIGHT, WANDER, [0x086D, 0x0837]);
 			0xFFE1->run_schedule();
 			0xFFE1->move_object([0x086D, 0x0837, 0x0000]);
 			0xFFE1->set_item_flag(SI_TOURNAMENT);
@@ -15351,7 +15425,7 @@ void Func032E shape#(0x32E) () {
 			}
 			var0016 = UI_get_party_list();
 			for (var000B in var0016 with var0017 to var0018) {
-				var000B->set_schedule_type(0x001F);
+				var000B->set_schedule_type(FOLLOW_AVATAR);
 			}
 			UI_init_conversation();
 			0xFFEE->show_npc_face0(0x0000);
@@ -15380,14 +15454,14 @@ void Func032E shape#(0x32E) () {
 			UI_sprite_effect(0x0007, var000A[0x0001], var000A[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			var000B->remove_npc();
 		}
-		0xFFEA->set_schedule_type(0x001A);
-		0xFFF6->set_schedule_type(0x0017);
+		0xFFEA->set_schedule_type(EAT_AT_INN);
+		0xFFF6->set_schedule_type(WAITER);
 		UI_play_sound_effect(0x0082);
-		0xFFEE->set_new_schedules([0x0000, 0x0001, 0x0003, 0x0004, 0x0006, 0x0007], [0x0010, 0x000E, 0x001A, 0x0010, 0x001A, 0x000C], [0x0926, 0x0726, 0x08F7, 0x071C, 0x090A, 0x0717, 0x08F7, 0x0737, 0x090A, 0x0717, 0x0918, 0x072F]);
+		0xFFEE->set_new_schedules([MIDNIGHT, EARLY, MORNING, NOON, EVENING, NIGHT], [0x0010, SLEEP, 0x001A, MAJOR_SIT, EAT_AT_INN, WANDER], [0x0926, 0x0726, 0x08F7, 0x071C, 0x090A, 0x0717, 0x08F7, 0x0737, 0x090A, 0x0717, 0x0918, 0x072F]);
 		var001E = [0x08F3, 0x0779];
 		var001F = [0x08E6, 0x0776];
 		var0020 = [0x08C8, 0x0716];
-		0xFFE3->set_new_schedules([0x0002, 0x0003, 0x0007], [0x001A, 0x001D, 0x000E], [var0020, var001E, var001F]);
+		0xFFE3->set_new_schedules([DAWN, MORNING, NIGHT], [EAT_AT_INN, PATROL, SLEEP], [var0020, var001E, var001F]);
 		0xFFE3->move_object([0x08F9, 0x0778, 0x0000]);
 		0xFFE3->run_schedule();
 		var0016 = 0xFE9C->find_nearby(0xFFFF, 0x002D, 0x0004);
@@ -15662,7 +15736,7 @@ void Func0334 shape#(0x334) () {
 		var0007 = Func09AB(0x031D, 0x0004, 0x0096, false, var0008);
 		var0008 = get_object_position();
 		var000C = UI_create_new_object2(0x0151, [(var0008[0x0001] + 0x0001), (var0008[0x0002] + 0x0001), 0x0002]);
-		var000C->set_schedule_type(0x0014);
+		var000C->set_schedule_type(SHY);
 		UI_play_sound_effect(0x003A);
 		abort;
 	}
@@ -15695,7 +15769,7 @@ void Func0336 shape#(0x336) () {
 		if (var0000 == 0x0001) {
 			var0001 = UI_click_on_item();
 			if (var0001->is_npc()) {
-				var0001->set_schedule_type(0x0000);
+				var0001->set_schedule_type(IN_COMBAT);
 				var0001->set_attack_mode(0x0007);
 				var0001->set_oppressor(0xFE9C);
 				Func0971(item);
@@ -15907,7 +15981,7 @@ void Func033D shape#(0x33D) () {
 			0xFE9C->halt_scheduled();
 			0xFFE4->halt_scheduled();
 			0xFFE4->set_polymorph(0x014E);
-			0xFFE4->set_schedule_type(0x000F);
+			0xFFE4->set_schedule_type(WAIT);
 			0xFE9C->set_item_flag(ISPETRA);
 			var0005 = 0xFFE4->get_object_position();
 			var0006 = 0xFE9C->get_object_position();
@@ -16138,7 +16212,7 @@ void Func0346 shape#(0x346) () {
 			} else {
 				var0000 = set_last_created();
 				var0000 = 0xFE9C->give_last_created();
-				0xFFDB->set_schedule_type(0x000A);
+				0xFFDB->set_schedule_type(STANDTHERE);
 				Func090D(0xFFDB, 0xFFFF, 0xFFFF, 0xFFFD, Func0346, item, DOUBLECLICK);
 			}
 		} else {
@@ -16150,7 +16224,7 @@ void Func0346 shape#(0x346) () {
 		var0001[0x0001] -= 0x0001;
 		var0001[0x0002] -= 0x0001;
 		0xFFDB->move_object([var0001[0x0001], var0001[0x0002], 0x0000]);
-		0xFFDB->set_new_schedules(0x0000, 0x0011, [var0001[0x0001], var0001[0x0002]]);
+		0xFFDB->set_new_schedules(MIDNIGHT, GRAZE, [var0001[0x0001], var0001[0x0002]]);
 		0xFFDB->run_schedule();
 	}
 }
@@ -16186,7 +16260,7 @@ void Func0347 shape#(0x347) () {
 			var0003 = 0xFE9C->find_nearby(0xFE99, 0x000A, 0x0004);
 			for (var0006 in var0003 with var0004 to var0005) {
 				var0007 = var0006->get_schedule_type();
-				if (var0007 == 0x0000) {
+				if (var0007 == IN_COMBAT) {
 					var0002 = false;
 				}
 			}
@@ -16195,7 +16269,7 @@ void Func0347 shape#(0x347) () {
 					var0008 = 0xFE9C->get_object_position();
 					0xFF2D->move_object(var0008);
 					0xFF2D->Func07D2();
-					0xFF2D->set_schedule_type(0x0003);
+					0xFF2D->set_schedule_type(TALK);
 					0xFF2D->obj_sprite_effect(0x0007, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
 					UI_play_sound_effect(0x0051);
 					var0009 = Func09A0(0x0002, 0x0001);
@@ -16406,11 +16480,11 @@ void Func0355 shape#(0x355) () {
 				say("\"Seek the answer to this mystery, or thou shalt not succeed! Now, I must go...\"");
 				UI_remove_npc_face0();
 				UI_play_music(0x0035, Func09A0(0x0005, 0x0001));
-				set_schedule_type(0x000F);
+				set_schedule_type(WAIT);
 				Func097F(0xFE9C, "@Many thanks!@", 0x0000);
 				0xFE9C->set_item_flag(DONT_MOVE);
 				UI_end_conversation();
-				set_schedule_type(0x000F);
+				set_schedule_type(WAIT);
 				var0002 = script item {
 					nohalt;
 					actor frame cast_up;
@@ -16853,7 +16927,7 @@ void Func0363 shape#(0x363) () {
 						abort;
 				}
 			} else {
-				0xFF2D->set_schedule_type(0x0014);
+				0xFF2D->set_schedule_type(SHY);
 				0xFF2D->clear_item_say();
 				Func097F(0xFF2D, "@An impostor!@", 0x0000);
 				0xFE9C->clear_item_flag(DONT_MOVE);
@@ -16936,13 +17010,13 @@ void Func036A shape#(0x36A) () {
 			nohalt;
 			say "@Woof!@";
 		};
-		0xFEF3->set_schedule_type(0x0003);
+		0xFEF3->set_schedule_type(TALK);
 	}
 	if (event == SCRIPTED) {
 		if (item == Func09A0(0x0005, 0x0001)) {
 			var0002 = 0xFE9C->find_nearby(0x036A, 0x0028, 0x0000);
 			if (var0002) {
-				var0002->set_schedule_type(0x0009);
+				var0002->set_schedule_type(HOUND);
 			}
 			abort;
 		}
@@ -17008,7 +17082,7 @@ void Func036A shape#(0x36A) () {
 		abort;
 	}
 	if (event == STARTED_TALKING) {
-		0xFEF3->set_schedule_type(0x0009);
+		0xFEF3->set_schedule_type(HOUND);
 		0xFEE9->show_npc_face0(0x0000);
 		say("\"Woof!\"");
 		converse (["trick", "track", "attack", "bye"]) {
@@ -17020,7 +17094,7 @@ void Func036A shape#(0x36A) () {
 				abort;
 
 			case "trick":
-				set_schedule_type(0x0004);
+				set_schedule_type(DANCE);
 				var0001 = script item {
 					nohalt;
 					say "@Ruff ruff ruff!@";
@@ -17034,21 +17108,21 @@ void Func036A shape#(0x36A) () {
 				} else {
 					if (var0003->get_alignment() == 0x0000) {
 						say("\"Woof.\"");
-						set_schedule_type(0x0000);
+						set_schedule_type(IN_COMBAT);
 						set_opponent(var0003);
 						set_oppressor(var0003);
 						abort;
 					}
 					if (var0003->get_alignment() == 0x0003) {
 						say("\"Woof!\"");
-						set_schedule_type(0x0000);
+						set_schedule_type(IN_COMBAT);
 						set_opponent(var0003);
 						set_oppressor(var0003);
 						abort;
 					}
 					if (var0003->get_alignment() == 0x0002) {
 						say("\"Woof!!\"");
-						set_schedule_type(0x0000);
+						set_schedule_type(IN_COMBAT);
 						set_opponent(var0003);
 						set_oppressor(var0003);
 						abort;
@@ -17066,14 +17140,14 @@ void Func036A shape#(0x36A) () {
 		}
 	}
 	if (event == SI_PATH_SUCCESS) {
-		set_schedule_type(0x0009);
+		set_schedule_type(HOUND);
 		var0001 = script item {
 			nohalt;
 			say "@Ruff!@";
 		};
 	}
 	if (event == SI_PATH_FAILURE) {
-		set_schedule_type(0x0009);
+		set_schedule_type(HOUND);
 	}
 	if (event == PROXIMITY) {
 		var0008 = UI_die_roll(0x0001, 0x0002);
@@ -17141,7 +17215,7 @@ void Func0370 shape#(0x370) () {
 		};
 	}
 	if (event == SI_PATH_FAILURE) {
-		set_schedule_type(0x000C);
+		set_schedule_type(WANDER);
 	}
 	if (event == DEATH) {
 		if (!gflags[0x00CE]) {
@@ -17156,7 +17230,7 @@ void Func0370 shape#(0x370) () {
 				say("\"Thou hast beaten me, vile human. I will remember this day!\"");
 				UI_remove_npc_face0();
 				var0001 = get_object_position();
-				set_schedule_type(0x000F);
+				set_schedule_type(WAIT);
 				0xFE9C->set_opponent(0x0001);
 				move_object([0x008E, 0x002E, 0x0000]);
 				0xFFFD->clear_item_flag(DEAD);
@@ -17194,7 +17268,7 @@ void Func0373 shape#(0x373) () {
 		set_polymorph(0x01F5);
 	}
 	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
-		set_schedule_type(0x000F);
+		set_schedule_type(WAIT);
 		var0002 = script item {
 			nohalt;
 			actor frame bowing;
@@ -17207,7 +17281,7 @@ void Func0373 shape#(0x373) () {
 		var0004 = UI_is_pc_female();
 		var0005 = Func0953();
 		if (event == DOUBLECLICK) {
-			0x0373->set_schedule_type(0x0003);
+			0x0373->set_schedule_type(TALK);
 		}
 		if (event == PROXIMITY) {
 			var0006 = UI_die_roll(0x0001, 0x0005);
@@ -17233,7 +17307,7 @@ void Func0373 shape#(0x373) () {
 		var0004 = UI_is_pc_female();
 		var0005 = Func0953();
 		if (event == DOUBLECLICK) {
-			0x0373->set_schedule_type(0x0003);
+			0x0373->set_schedule_type(TALK);
 		}
 		if (event == PROXIMITY) {
 			var0006 = UI_die_roll(0x0001, 0x0005);
@@ -17259,7 +17333,7 @@ void Func0373 shape#(0x373) () {
 		var0004 = UI_is_pc_female();
 		var0005 = Func0953();
 		if (event == DOUBLECLICK) {
-			0x0373->set_schedule_type(0x0003);
+			0x0373->set_schedule_type(TALK);
 		}
 		if (event == PROXIMITY) {
 			var0006 = UI_die_roll(0x0001, 0x0005);
@@ -17373,7 +17447,7 @@ void Func038A shape#(0x38A) () {
 		};
 	}
 	if (event == SI_PATH_FAILURE) {
-		set_schedule_type(0x000C);
+		set_schedule_type(WANDER);
 	}
 	if (event == DEATH) {
 		if (!gflags[0x00CE]) {
@@ -17388,7 +17462,7 @@ void Func038A shape#(0x38A) () {
 				say("\"Vanquished! By a mere mortal!\"");
 				UI_remove_npc_face0();
 				var0001 = get_object_position();
-				set_schedule_type(0x000F);
+				set_schedule_type(WAIT);
 				0xFE9C->set_opponent(0x0001);
 				move_object([0x008E, 0x002E, 0x0000]);
 				0xFFFF->clear_item_flag(DEAD);
@@ -17444,7 +17518,7 @@ void Func0395 shape#(0x395) () {
 		0xFE9C->item_say("@Stand fast, Trapper!@");
 		0x0395->Func07D1();
 		Func097F(0x0395, "@At last!@", 0x0003);
-		set_schedule_type(0x0003);
+		set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		run_schedule();
@@ -17589,7 +17663,7 @@ void Func03A6 shape#(0x3A6) () {
 			var0003 = Func0992(0x0001, "@It doesn't work!@", "@'Tis broken...@", true);
 			abort;
 		}
-		var0001->set_schedule_type(0x000F);
+		var0001->set_schedule_type(WAIT);
 		var0001->set_item_flag(SI_TOURNAMENT);
 		var0001->set_polymorph(0x00EF);
 		UI_end_conversation();
@@ -17726,10 +17800,10 @@ void Func03B1 shape#(0x3B1) () {
 		0xFE9C->item_say("@Might I speak with thee?@");
 		item->Func07D1();
 		Func097F(item, (("@Certainly, " + var0000) + ".@"), 0x0005);
-		set_schedule_type(0x0003);
+		set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		set_schedule_type(0x000A);
+		set_schedule_type(STANDTHERE);
 		clear_item_say();
 		0xFECE->show_npc_face0(0x0000);
 		var0003 = get_npc_id();
@@ -17998,7 +18072,7 @@ void Func03B1 shape#(0x3B1) () {
 				UI_remove_npc_face0();
 				0xFE9C->item_say("@Farewell!@");
 				Func097F(item, "@Mind thy duty!@", 0x0002);
-				set_schedule_type(0x000B);
+				set_schedule_type(LOITER);
 				break;
 		}
 	}
@@ -18045,10 +18119,10 @@ void Func03B2 shape#(0x3B2) () {
 		0xFE9C->item_say("@Greetings, sir.@");
 		item->Func07D1();
 		Func097F(item, "@Greetings to thee.@", 0x0002);
-		set_schedule_type(0x0003);
+		set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		set_schedule_type(0x000A);
+		set_schedule_type(STANDTHERE);
 		clear_item_say();
 		0xFECC->show_npc_face0(0x0000);
 		var0008 = get_npc_id();
@@ -18260,7 +18334,7 @@ void Func03B2 shape#(0x3B2) () {
 				UI_remove_npc_face1();
 				Func097F(0xFE9C, (("@Good " + var0001) + "!@"), 0x0000);
 				Func097F(item, "@Be careful!@", 0x0002);
-				set_schedule_type(0x000B);
+				set_schedule_type(LOITER);
 				abort;
 		}
 	}
@@ -18285,10 +18359,10 @@ void Func03B3 shape#(0x3B3) () {
 		}
 		item->Func07D1();
 		Func097F(item, "@Dost thou address me?@", 0x0002);
-		set_schedule_type(0x0003);
+		set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		set_schedule_type(0x000A);
+		set_schedule_type(STANDTHERE);
 		clear_item_say();
 		0xFECB->show_npc_face0(0x0000);
 		if (!var0000) {
@@ -18499,7 +18573,7 @@ void Func03B3 shape#(0x3B3) () {
 				UI_remove_npc_face0();
 				Func097F(0xFE9C, "@Goodbye!@", 0x0000);
 				Func097F(item, "@Have Discipline!@", 0x0002);
-				set_schedule_type(0x000B);
+				set_schedule_type(LOITER);
 				break;
 		}
 	}
@@ -18614,7 +18688,7 @@ void Func03BD shape#(0x3BD) () {
 
 	var0000 = get_npc_id();
 	if (event == PROXIMITY) {
-		if (get_schedule_type() == 0x001D) {
+		if (get_schedule_type() == PATROL) {
 			var0001 = ["@Leave Yurel alone!@", "@Stay away from Yurel!@", "@Yurel wants to go home!@", "@Oh, woe!@", "@Yurel hungry!@", "@Help me!@"];
 			Func097F(item, var0001[UI_get_random(UI_get_array_size(var0001))], 0x0000);
 		}
@@ -18631,10 +18705,10 @@ void Func03BD shape#(0x3BD) () {
 		} else {
 			Func097F(item, "@Good to see thee.@", 0x0002);
 		}
-		set_schedule_type(0x0003);
+		set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		set_schedule_type(0x000A);
+		set_schedule_type(STANDTHERE);
 		clear_item_say();
 		0xFEC9->show_npc_face0(0x0000);
 		var0000 = get_npc_id();
@@ -18840,7 +18914,7 @@ void Func03CA shape#(0x3CA) () {
 			set_npc_id(0x0000);
 			var0001 = Func0992(0x0001, "@That's baaaad!@", "@I'm baaaad!@", true);
 			halt_scheduled();
-			set_schedule_type(0x000F);
+			set_schedule_type(WAIT);
 			var0002 = [0x0001, 0x0001];
 			var0003 = [0x0000, 0x0000];
 			var0004 = 0xFFFF;
@@ -18888,7 +18962,7 @@ void Func03CA shape#(0x3CA) () {
 	}
 	if (event == SCRIPTED) {
 		0xFE9C->clear_item_flag(DONT_MOVE);
-		set_schedule_type(0x0014);
+		set_schedule_type(SHY);
 		var0001 = Func0992(0x0001, "@Thou art SICK!@", "@That felt good!@", true);
 	}
 }
@@ -18915,10 +18989,10 @@ void Func03CF shape#(0x3CF) () {
 		0xFE9C->item_say("@I would have words with thee!@");
 		item->Func07D1();
 		Func097F(item, "@They will be thine last.@", 0x0005);
-		set_schedule_type(0x0003);
+		set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		set_schedule_type(0x0004);
+		set_schedule_type(DANCE);
 		0xFECF->show_npc_face0(0x0000);
 		add(["name", "bye"]);
 		var0003 = get_npc_id();
@@ -19145,7 +19219,7 @@ void Func03D2 shape#(0x3D2) () {
 	var000A = false;
 	if (event == DOUBLECLICK) {
 		item->Func07D1();
-		set_schedule_type(0x0003);
+		set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFECA->show_npc_face0(0x0000);
@@ -19552,7 +19626,7 @@ void Func03D2 shape#(0x3D2) () {
 				UI_remove_npc_face0();
 				Func097F(0xFE9C, "@So long!@", 0x0000);
 				Func097F(item, "@Fare thee well!@", 0x0002);
-				set_schedule_type(0x000B);
+				set_schedule_type(LOITER);
 				abort;
 		}
 	}
@@ -19780,10 +19854,10 @@ void Func03E6 shape#(0x3E6) () {
 		var0000 = get_object_position();
 		remove_item();
 		0xFFEF->move_object(var0000);
-		0xFFEF->set_new_schedules([0x0000, 0x0002, 0x0004, 0x0005, 0x0006], [0x000E, 0x0015, 0x0015, 0x001A, 0x0015], [0x0939, 0x081A, 0x0950, 0x0823, 0x09A7, 0x07E5, 0x0943, 0x0835, 0x0950, 0x0823]);
-		0xFF3F->set_new_schedules([0x0000, 0x0003, 0x0005, 0x0006], [0x0001, 0x0002, 0x0017, 0x0002], [0x094F, 0x082D, 0x0970, 0x0813, 0x0943, 0x0834, 0x0961, 0x0812]);
+		0xFFEF->set_new_schedules([MIDNIGHT, DAWN, NOON, AFTERNOON, EVENING], [SLEEP, 0x0015, 0x0015, EAT_AT_INN, LAB], [0x0939, 0x081A, 0x0950, 0x0823, 0x09A7, 0x07E5, 0x0943, 0x0835, 0x0950, 0x0823]);
+		0xFF3F->set_new_schedules([MIDNIGHT, MORNING, AFTERNOON, EVENING], [PACE_HORIZONTAL, 0x0002, WAITER, PACE_VERTICAL], [0x094F, 0x082D, 0x0970, 0x0813, 0x0943, 0x0834, 0x0961, 0x0812]);
 		0xFF3F->run_schedule();
-		0xFFEF->set_schedule_type(0x0003);
+		0xFFEF->set_schedule_type(TALK);
 		Func097F(0xFFEF, "@Much better...@", 0x0000);
 		gflags[0x00F1] = true;
 	}
@@ -19937,10 +20011,10 @@ void Func03F7 shape#(0x3F7) () {
 		0xFE9C->item_say("@Might I speak with thee?@");
 		item->Func07D1();
 		Func097F(item, (("@Certainly, " + var0000) + ".@"), 0x0002);
-		set_schedule_type(0x0003);
+		set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		set_schedule_type(0x000A);
+		set_schedule_type(STANDTHERE);
 		clear_item_say();
 		0xFECD->show_npc_face0(0x0000);
 		var0002 = get_npc_id();
@@ -20203,7 +20277,7 @@ void Func03F7 shape#(0x3F7) () {
 				UI_remove_npc_face0();
 				Func097F(0xFE9C, "@Goodbye!@", 0x0000);
 				Func097F(item, "@Farewell!@", 0x0002);
-				set_schedule_type(0x0015);
+				set_schedule_type(LAB);
 				break;
 		}
 	}
@@ -20332,7 +20406,7 @@ void Func0400 object#(0x400) () {
 				face var0000;
 			};
 			0xFE9C->set_item_flag(DONT_MOVE);
-			0xFE9C->set_schedule_type(0x000F);
+			0xFE9C->set_schedule_type(WAIT);
 			var0000 = script 0xFE9C {
 				nohalt;
 				actor frame sleeping;
@@ -20354,7 +20428,7 @@ void Func0400 object#(0x400) () {
 				var0000 = UI_update_last_created(var0002);
 			}
 			var0003->halt_scheduled();
-			var0003->set_schedule_type(0x000F);
+			var0003->set_schedule_type(WAIT);
 			var0000 = script var0003 after 5 ticks {
 				nohalt;
 				call Func0400;
@@ -20394,7 +20468,7 @@ void Func0400 object#(0x400) () {
 			var0004 = Func08B6();
 			for (var0007 in var0004 with var000B to var000C) {
 				var0007->clear_item_flag(ASLEEP);
-				var0007->set_schedule_type(0x001F);
+				var0007->set_schedule_type(FOLLOW_AVATAR);
 				var0000 = script var0007 {
 					nohalt;
 					actor frame standing;
@@ -20418,7 +20492,7 @@ void Func0400 object#(0x400) () {
 					var0003->halt_scheduled();
 					var0003->clear_item_say();
 					if (!var0003->get_item_flag(SI_ZOMBIE)) {
-						var0003->set_schedule_type(0x001F);
+						var0003->set_schedule_type(FOLLOW_AVATAR);
 					}
 					var0003->set_temperature(0x0000);
 					var0003->clear_item_flag(ASLEEP);
@@ -20471,7 +20545,7 @@ void Func0400 object#(0x400) () {
 				var0003->halt_scheduled();
 				var0003->clear_item_say();
 				if (!var0003->get_item_flag(SI_ZOMBIE)) {
-					var0003->set_schedule_type(0x001F);
+					var0003->set_schedule_type(FOLLOW_AVATAR);
 				}
 				var0003->set_temperature(0x0000);
 				var0003->clear_item_flag(ASLEEP);
@@ -20518,7 +20592,7 @@ void Func0400 object#(0x400) () {
 			};
 			for (var0003 in var0017 with var0018 to var0019) {
 				var0003->move_object(Func084E(var0003, 0x0003));
-				var0003->set_new_schedules(0x0000, 0x0010, Func084E(var0003, 0x0003));
+				var0003->set_new_schedules(MIDNIGHT, MAJOR_SIT, Func084E(var0003, 0x0003));
 				var0003->run_schedule();
 				if (var0003 == 0xFF31) {
 					var0003->clear_item_flag(ASLEEP);
@@ -20530,7 +20604,7 @@ void Func0400 object#(0x400) () {
 					var0003->clear_item_flag(POISONED);
 					var0003->clear_item_flag(DONT_MOVE);
 					0xFF31->set_npc_id(0x0000);
-					0xFF31->set_schedule_type(0x0003);
+					0xFF31->set_schedule_type(TALK);
 					var0000 = script 0xFF31 {
 						face south;
 						actor frame standing;
@@ -20552,10 +20626,10 @@ void Func0400 object#(0x400) () {
 	}
 	if (event == SCRIPTED) {
 		if (gflags[0x021E]) {
-			set_schedule_type(0x0000);
+			set_schedule_type(IN_COMBAT);
 			0xFEE1->show_npc_face0(0x0000);
 			0xFE9C->set_item_flag(DONT_MOVE);
-			set_schedule_type(0x000F);
+			set_schedule_type(WAIT);
 			say("\"Thou art nearly dead, Avatar!\"");
 			say("\"Yield to me, and perhaps I shall spare thy life! Dost thou yield?\"");
 			if (Func0955()) {
@@ -20597,7 +20671,7 @@ void Func0400 object#(0x400) () {
 				var0000 = (0x05DC * var0003) + (0x0019 * (0x003C - UI_game_minute()));
 				UI_advance_time(var0000);
 				UI_fade_palette(0x000C, 0x0001, 0x0001);
-				0xFE9C->set_schedule_type(0x001F);
+				0xFE9C->set_schedule_type(FOLLOW_AVATAR);
 				0xFE9C->clear_item_flag(DONT_MOVE);
 				gflags[0x0007] = false;
 			} else {
@@ -20607,7 +20681,7 @@ void Func0400 object#(0x400) () {
 					var0000 = script var0003 {
 						actor frame standing;
 					};
-					var0003->set_schedule_type(0x001F);
+					var0003->set_schedule_type(FOLLOW_AVATAR);
 				}
 				gflags[0x0187] = true;
 				var0000 = UI_create_new_object(0x0281);
@@ -20692,7 +20766,7 @@ void Func0401 object#(0x401) () {
 		0xFFFF->Func07D1();
 		if (!0xFFFF->get_item_flag(SI_ZOMBIE)) {
 			Func097F(0xFFFF, (("@Yes, " + var0001) + "?@"), 0x0002);
-			0xFFFF->set_schedule_type(0x0003);
+			0xFFFF->set_schedule_type(TALK);
 		} else {
 			var0005 = UI_die_roll(0x0001, 0x0004);
 			if (var0005 == 0x0001) {
@@ -20713,7 +20787,7 @@ void Func0401 object#(0x401) () {
 		0xFFFF->show_npc_face0(0x0000);
 		0xFFFF->clear_item_say();
 		if (0xFFFF->get_item_flag(IN_PARTY)) {
-			0xFFFF->set_schedule_type(0x001F);
+			0xFFFF->set_schedule_type(FOLLOW_AVATAR);
 			add("leave");
 		} else {
 			0xFFFF->run_schedule();
@@ -20754,7 +20828,7 @@ void Func0401 object#(0x401) () {
 			0xFFFF->add_to_party();
 			remove("join");
 			add("leave");
-			0xFFFF->set_new_schedules(0x0000, 0x001A, [0x097C, 0x0464]);
+			0xFFFF->set_new_schedules(MIDNIGHT, EAT_AT_INN, [0x097C, 0x0464]);
 		} else {
 			var0006 = UI_die_roll(0x0001, 0x0004);
 			if (var0006 == 0x0001) {
@@ -20967,7 +21041,7 @@ void Func0402 object#(0x402) () {
 		0xFFFE->Func07D1();
 		if (!0xFFFE->get_item_flag(SI_ZOMBIE)) {
 			Func097F(0xFFFE, (("@Yes, " + var0003) + "?"), 0x0002);
-			0xFFFE->set_schedule_type(0x0003);
+			0xFFFE->set_schedule_type(TALK);
 		} else {
 			var000A = UI_die_roll(0x0001, 0x0004);
 			if (var000A == 0x0001) {
@@ -20987,7 +21061,7 @@ void Func0402 object#(0x402) () {
 	if (event == STARTED_TALKING) {
 		0xFFFE->clear_item_say();
 		if (0xFFFE->get_item_flag(IN_PARTY)) {
-			0xFFFE->set_schedule_type(0x001F);
+			0xFFFE->set_schedule_type(FOLLOW_AVATAR);
 			add("leave");
 		} else {
 			0xFFFE->run_schedule();
@@ -21006,7 +21080,7 @@ void Func0402 object#(0x402) () {
 			Func09AA();
 			0xFFFE->add_to_party();
 			gflags[0x0018] = true;
-			0xFFFE->set_new_schedules(0x0000, 0x001A, [0x097C, 0x0464]);
+			0xFFFE->set_new_schedules(MIDNIGHT, EAT_AT_INN, [0x097C, 0x0464]);
 			abort;
 		}
 		do {
@@ -21295,7 +21369,7 @@ void Func0403 object#(0x403) () {
 				}
 				if (var0004) {
 					Func097F(0xFFFD, "@I am free!@", 0x0002);
-					0xFFFD->set_schedule_type(0x0003);
+					0xFFFD->set_schedule_type(TALK);
 				} else {
 					0xFFFD->Func07D2();
 					Func097F(0xFFFD, "@Help me, Avatar!@", 0x0002);
@@ -21303,11 +21377,11 @@ void Func0403 object#(0x403) () {
 						nohalt;
 						call Func01D1;
 					};
-					0xFFFD->set_schedule_type(0x000F);
+					0xFFFD->set_schedule_type(WAIT);
 				}
 			} else {
 				Func097F(0xFFFD, "@Yes?@", 0x0002);
-				0xFFFD->set_schedule_type(0x0003);
+				0xFFFD->set_schedule_type(TALK);
 			}
 		} else {
 			var000C = UI_get_random(0x0004);
@@ -21384,7 +21458,7 @@ void Func0403 object#(0x403) () {
 				say("\"I shall make a list of the strange things I have found in my packs. Perhaps these are clues to where our real belongings have gone.\"");
 			}
 			0xFFFD->add_to_party();
-			0xFFFD->set_new_schedules(0x0000, 0x001A, [0x097C, 0x0464]);
+			0xFFFD->set_new_schedules(MIDNIGHT, EAT_AT_INN, [0x097C, 0x0464]);
 			gflags[0x0019] = true;
 			Func092B();
 			gflags[0x0078] = true;
@@ -21392,7 +21466,7 @@ void Func0403 object#(0x403) () {
 		}
 		0xFFFD->show_npc_face0(0x0000);
 		if (0xFFFD->get_item_flag(IN_PARTY)) {
-			0xFFFD->set_schedule_type(0x001F);
+			0xFFFD->set_schedule_type(FOLLOW_AVATAR);
 			add("leave");
 		} else {
 			0xFFFD->run_schedule();
@@ -21696,7 +21770,7 @@ void Func0403 object#(0x403) () {
 		}
 	}
 	if (event == PROXIMITY) {
-		if (0xFFFD->get_schedule_type() == 0x001D) {
+		if (0xFFFD->get_schedule_type() == PATROL) {
 			if (gflags[0x0006] && (!gflags[0x0078])) {
 				var001B = ["@Woe is me!@", "@I feel cold.@", "@I am hungry.@", "@Release me!@", "@I'm innocent!@", "@Pity an old man...@"];
 				Func097F(0xFFFD, var001B[UI_get_random(UI_get_array_size(var001B))], 0x0000);
@@ -21739,7 +21813,7 @@ void Func0404 object#(0x404) () {
 			call Func0329;
 		};
 	}
-	if ((event == PROXIMITY) && (0xFFFC->get_schedule_type() == 0x0009)) {
+	if ((event == PROXIMITY) && (0xFFFC->get_schedule_type() == HOUND)) {
 		if (UI_get_random(0x000A) < 0x0006) {
 			abort;
 		}
@@ -21750,7 +21824,7 @@ void Func0404 object#(0x404) () {
 		0xFE9C->item_say(("@Good " + var0003) + "!@");
 		0xFFFC->Func07D1();
 		Func097F(0xFFFC, (("@Greetings, " + var0000) + "."), 0x0002);
-		0xFFFC->set_schedule_type(0x0003);
+		0xFFFC->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFFC->run_schedule();
@@ -21780,7 +21854,7 @@ void Func0404 object#(0x404) () {
 
 			case "Fedabiblio" (remove):
 				var0007 = 0xFFEF->get_schedule_type();
-				if (var0007 == 0x000F) {
+				if (var0007 == WAIT) {
 					say("\"Fedabiblio fought a terrific battle, but when the Glowing Man was done with him, he had been turned into a statue. It remains beyond mine abilities to restore him.\"");
 					add("restore");
 				} else {
@@ -21907,7 +21981,7 @@ void Func0404 object#(0x404) () {
 			case "Torrissio" (remove):
 				if (gflags[0x0004]) {
 					var0007 = 0xFFEF->get_schedule_type();
-					if (var0007 == 0x000F) {
+					if (var0007 == WAIT) {
 						say("\"I know not if the wand is in Torrissio's possession, but perhap thou wilt be able to\tconvince him to help thee. Be wary of him, however! He hath a reputation for being very tricky!\"");
 					} else {
 						say("\"I am glad thou wert able to successfully deal with him, without him getting the best of thee!\"");
@@ -22061,7 +22135,7 @@ void Func040D object#(0x40D) () {
 	var var0010;
 
 	var0000 = false;
-	if (0xFFF3->get_schedule_type() == 0x0007) {
+	if (0xFFF3->get_schedule_type() == TEND_SHOP) {
 		var0000 = true;
 	}
 	var0001 = Func097D(0xFE9B, 0x0001, 0x034A, 0xFE99, 0x000F);
@@ -22130,9 +22204,9 @@ void Func040D object#(0x40D) () {
 		0xFFF3->Func07D1();
 		Func097F(0xFFF3, (("@Yes, " + var0002) + "?@"), 0x0002);
 		if (!var0000) {
-			0xFFF3->set_schedule_type(0x0003);
+			0xFFF3->set_schedule_type(TALK);
 		} else {
-			0xFFF3->set_schedule_type(0x000A);
+			0xFFF3->set_schedule_type(STANDTHERE);
 			0xFFF3->Func07D2();
 			var0008 = script 0xFFF3 {
 				nohalt;
@@ -22148,7 +22222,7 @@ void Func040D object#(0x40D) () {
 		0xFFF3->run_schedule();
 		0xFFF3->clear_item_say();
 		var0000 = false;
-		if (0xFFF3->get_schedule_type() == 0x0007) {
+		if (0xFFF3->get_schedule_type() == TEND_SHOP) {
 			var0000 = true;
 		}
 		0xFFF3->show_npc_face0(0x0000);
@@ -22454,7 +22528,7 @@ void Func040D object#(0x40D) () {
 				if (gflags[0x007B] && (!gflags[0x007C])) {
 					var000E &= "fish-net stockings";
 				}
-				if (gflags[0x0045] && (0xFFB4->get_schedule_type() != 0x000F)) {
+				if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
 					var000E &= "brown bottle";
 				}
 				if (var000E == []) {
@@ -22786,7 +22860,7 @@ void Func040D object#(0x40D) () {
 				if (Func097D(0xFE9B, 0x0001, 0x031A, 0xFE99, 0x0000)) {
 					say("\"What dost thou have there? Why, 'tis moving...\"");
 					Func097F(0xFFF3, "@Ah!!!@", 0x0000);
-					0xFFF3->set_schedule_type(0x0014);
+					0xFFF3->set_schedule_type(SHY);
 				} else {
 					say("\"How repugnant.\"");
 					say("\"Probably the work of the Goblins -- I have heard that they are most crude, though they do not bother us here on this island.\"");
@@ -22980,7 +23054,7 @@ void Func040E object#(0x40E) () {
 		0xFE9C->item_say("Hello, there.");
 		0xFFF2->Func07D1();
 		Func097F(0xFFF2, (("@Greetings, " + var0000) + "."), 0x0002);
-		0xFFF2->set_schedule_type(0x0003);
+		0xFFF2->set_schedule_type(TALK);
 	}
 	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		var0004 = script item {
@@ -22989,7 +23063,7 @@ void Func040E object#(0x40E) () {
 		};
 	}
 	if (event == PROXIMITY) {
-		set_schedule_type(0x0015);
+		set_schedule_type(LAB);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFF2->run_schedule();
@@ -23122,7 +23196,7 @@ void Func040E object#(0x40E) () {
 						var000A = UI_remove_party_items(0x0001, 0x02A5, 0xFE99, 0x0000, true);
 						say("\"Ha! There was thy spell, foolish woman! Now the stockings are destroyed and they shall trouble me no more!\"");
 						Func097F(0xFFF2, "@Fool!@", 0x0000);
-						0xFFF2->set_schedule_type(0x000C);
+						0xFFF2->set_schedule_type(WANDER);
 						abort;
 					}
 					say("\"Please, I beg of thee to reconsider.\"");
@@ -23203,7 +23277,7 @@ void Func040F object#(0x40F) () {
 		0xFE9C->item_say("@Hello!@");
 		0xFFF1->Func07D1();
 		Func097F(0xFFF1, (("@Good " + var0003) + ".@"), 0x0002);
-		0xFFF1->set_schedule_type(0x0003);
+		0xFFF1->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFF1->run_schedule();
@@ -23336,7 +23410,7 @@ labelFunc040F_032A:
 					} else {
 						say("\"Thou hast no such object! Do not waste my time, for I am a busy man...\"");
 						Func097F(0xFFF1, "@Must work...@", 0x0000);
-						0xFFF1->set_schedule_type(0x0014);
+						0xFFF1->set_schedule_type(SHY);
 						abort;
 					}
 				} else {
@@ -23608,7 +23682,7 @@ void Func0410 object#(0x410) () {
 		abort;
 	}
 	if (gflags[0x0128] && ((event == SCRIPTED) && (!gflags[0x00E6]))) {
-		0xFFDB->set_schedule_type(0x000C);
+		0xFFDB->set_schedule_type(WANDER);
 		Func097F(0xFFDB, "@Awk!@", 0x0002);
 		0xFFDB->set_camera();
 		0xFFF0->remove_npc();
@@ -23621,7 +23695,7 @@ void Func0410 object#(0x410) () {
 	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Excuse me...@");
 		Func097F(0xFFF0, "@But of course!@", 0x0002);
-		0xFFF0->set_schedule_type(0x0003);
+		0xFFF0->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFF0->run_schedule();
@@ -23859,7 +23933,7 @@ void Func0411 object#(0x411) () {
 	if (event == DOUBLECLICK) {
 		0xFE9C->item_say(("@Good " + var0003) + "!@");
 		Func097F(0xFFEF, "@Hush...@", 0x0002);
-		0xFFEF->set_schedule_type(0x0003);
+		0xFFEF->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFEF->run_schedule();
@@ -24265,17 +24339,17 @@ void Func0411 object#(0x411) () {
 							var000E = [0x0975, 0x0748];
 							var000F = [0x0968, 0x0767];
 							var0010 = [0x096F, 0x075E];
-							0xFFEC->set_new_schedules([0x0000, 0x0003, 0x0004], [0x000E, 0x001A, 0x0015], [var000E, var000F, var0010]);
+							0xFFEC->set_new_schedules([MIDNIGHT, MORNING, NOON], [SLEEP, EAT_AT_INN, LAB], [var000E, var000F, var0010]);
 							0xFFEC->move_object([0x0978, 0x0764, 0x0000]);
 							0xFFEC->run_schedule();
 							var000E = [0x0988, 0x0742];
 							var000F = [0x0969, 0x0768];
 							var0010 = [0x0961, 0x0764];
-							0xFFEB->set_new_schedules([0x0000, 0x0003, 0x0004], [0x000E, 0x0017, 0x000C], [var000E, var000F, var0010]);
+							0xFFEB->set_new_schedules([MIDNIGHT, MORNING, NOON], [SLEEP, WAITER, WANDER], [var000E, var000F, var0010]);
 							0xFFEB->move_object([0x096F, 0x075E, 0x0000]);
 							0xFFEB->run_schedule();
 						} else {
-							0xFFEF->set_schedule_type(0x0014);
+							0xFFEF->set_schedule_type(SHY);
 							0xFFEF->clear_item_say();
 							Func097F(0xFFEF, "@Be gone, rogue!@", 0x0000);
 							abort;
@@ -24358,7 +24432,7 @@ void Func0412 object#(0x412) () {
 		0xFE9C->item_say("@Greetings!@");
 		0xFFEE->Func07D1();
 		Func097F(0xFFEE, "@Ah, yes...@", 0x0002);
-		0xFFEE->set_schedule_type(0x0003);
+		0xFFEE->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFEE->run_schedule();
@@ -24595,7 +24669,7 @@ void Func0412 object#(0x412) () {
 				var000C = 0xFFEE->get_object_position();
 				UI_sprite_effect(0x0007, var000C[0x0001], var000C[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				0xFFEE->remove_npc();
-				0xFFEE->set_schedule_type(0x0004);
+				0xFFEE->set_schedule_type(DANCE);
 				Func097F(0xFE9C, "@Gosh!@", 0x0003);
 				abort;
 
@@ -24635,7 +24709,7 @@ void Func0413 object#(0x413) () {
 			call Func0329;
 		};
 	}
-	if ((event == PROXIMITY) && (0xFFED->get_schedule_type() == 0x0009)) {
+	if ((event == PROXIMITY) && (0xFFED->get_schedule_type() == HOUND)) {
 		if (UI_get_random(0x000A) < 0x0006) {
 			abort;
 		}
@@ -24646,7 +24720,7 @@ void Func0413 object#(0x413) () {
 		0xFE9C->item_say("@Little boy!@");
 		0xFFED->Func07D1();
 		Func097F(0xFFED, "@Hi!@", 0x0002);
-		0xFFED->set_schedule_type(0x0003);
+		0xFFED->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFED->run_schedule();
@@ -24683,7 +24757,7 @@ void Func0413 object#(0x413) () {
 			case "kidnap" (remove):
 				say("\"Thou shouldst ask Andrio -- I am certain that he could help thee! He is very bright.\"");
 				if (0xFFFC->npc_nearby()) {
-					0xFFFC->set_schedule_type(0x0003);
+					0xFFFC->set_schedule_type(TALK);
 					Func097F(0xFFFC, "@I can help!@", 0x0002);
 				}
 				fallthrough;
@@ -24865,7 +24939,7 @@ void Func0414 object#(0x414) () {
 			call Func0329;
 		};
 	}
-	if ((event == DOUBLECLICK) && (0xFFEC->get_schedule_type() != 0x000F)) {
+	if ((event == DOUBLECLICK) && (0xFFEC->get_schedule_type() != WAIT)) {
 		if (0xFFEC->get_npc_id() != 0x0000) {
 			0xFFEC->set_npc_id(0x0000);
 		}
@@ -24873,7 +24947,7 @@ void Func0414 object#(0x414) () {
 		if (gflags[0x0125] && ((var0008[0x0001] > 0x0587) && ((var0008[0x0001] < 0x098A) && ((var0008[0x0002] > 0x0740) && (var0008[0x0002] < 0x0750))))) {
 			0xFFEC->Func07D2();
 			0xFFEC->Func07D1();
-			0xFFEC->set_schedule_type(0x000F);
+			0xFFEC->set_schedule_type(WAIT);
 			Func097F(0xFFEC, "@Oh, 'tis thee!@", 0x0002);
 			var000B = script 0xFFEC after 5 ticks {
 				nohalt;
@@ -24887,7 +24961,7 @@ void Func0414 object#(0x414) () {
 			} else {
 				Func097F(0xFFEC, "@Yes, handsome?@", 0x0002);
 			}
-			0xFFEC->set_schedule_type(0x0003);
+			0xFFEC->set_schedule_type(TALK);
 		}
 	}
 	if (event == STARTED_TALKING) {
@@ -25032,14 +25106,14 @@ void Func0416 object#(0x416) () {
 		0xFE9C->item_say("@A moment, sir.@");
 		0xFFEA->Func07D1();
 		Func097F(0xFFEA, "@I am a busy mage...@", 0x0002);
-		0xFFEA->set_schedule_type(0x0003);
+		0xFFEA->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFEA->run_schedule();
 		0xFFEA->clear_item_say();
 		0xFFEA->show_npc_face0(0x0000);
 		var0004 = 0xFFEA->get_item_flag(MET);
-		if (0xFFEA->get_schedule_type() == 0x000E) {
+		if (0xFFEA->get_schedule_type() == SLEEP) {
 			say("\"Canst thou not see that I am trying to sleep!\"");
 			Func097F(0xFFEA, "@Return tomorrow!@", 0x0000);
 			abort;
@@ -25052,7 +25126,7 @@ void Func0416 object#(0x416) () {
 			}
 			say("\"Forgive me, but this is an absolute waste of time, when there are other matters which are pressing...\"");
 			0xFFEA->set_item_flag(MET);
-			0xFFEA->set_schedule_type(0x000C);
+			0xFFEA->set_schedule_type(WANDER);
 			Func097F(0xFFEA, "@To work...@", 0x0000);
 			abort;
 		}
@@ -25324,7 +25398,7 @@ void Func0417 object#(0x417) () {
 		0xFE9C->item_say(("@Good " + var0003) + ", miss.@");
 		0xFFE9->Func07D1();
 		Func097F(0xFFE9, "@So?@", 0x0002);
-		0xFFE9->set_schedule_type(0x0003);
+		0xFFE9->set_schedule_type(TALK);
 	}
 	if (event == PROXIMITY) {
 		var0004 = UI_get_random(0x0006);
@@ -25378,7 +25452,7 @@ void Func0417 object#(0x417) () {
 		if (gflags[0x0285] && (!gflags[0x0297])) {
 			add("strange wine");
 		}
-		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != 0x000F)) {
+		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
 			add("brown bottle");
 		}
 		if (gflags[0x0106] && (!gflags[0x011B])) {
@@ -25548,7 +25622,7 @@ void Func0417 object#(0x417) () {
 				fallthrough;
 
 			case "MageLord" (remove):
-				if (gflags[0x0004] && (0xFEF9->get_schedule_type() != 0x000F)) {
+				if (gflags[0x0004] && (0xFEF9->get_schedule_type() != WAIT)) {
 					say("\"Our city is ruled by Shamino the Anarch, a most powerful wizard.\"");
 					say("\"He is a great improvement over our previous MageLord, who was indolent and deceitful. I am glad that Shamino rules.\"");
 				} else {
@@ -25560,7 +25634,7 @@ void Func0417 object#(0x417) () {
 				fallthrough;
 
 			case "transgressor" (remove):
-				if (gflags[0x0004] && (0xFEF9->get_schedule_type() != 0x000F)) {
+				if (gflags[0x0004] && (0xFEF9->get_schedule_type() != WAIT)) {
 					say("\"'Tis best not to try and second guess Shamino the Anarch. His definition of a transgression changes from moment to moment...\"");
 					say("\"And the fine could be as insignificant as a verbal upbraiding, or as serious as thy life.\"");
 				} else {
@@ -25593,7 +25667,7 @@ void Func0417 object#(0x417) () {
 				fallthrough;
 
 			case "wine" (remove):
-				if (0xFFE9->get_schedule_type() == 0x0007) {
+				if (0xFFE9->get_schedule_type() == TEND_SHOP) {
 					say("\"We make the finest wine that thou wilt find anywhere. Wouldst thou care to try some?\"");
 					if (Func0955() == true) {
 						say("\"Good...\"");
@@ -25791,7 +25865,7 @@ void Func0418 object#(0x418) () {
 		0xFE9C->item_say("Hello there.");
 		0xFFE8->Func07D1();
 		Func097F(0xFFE8, (("@Greetings, " + var0002) + "."), 0x0002);
-		0xFFE8->set_schedule_type(0x0003);
+		0xFFE8->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFE8->run_schedule();
@@ -25831,7 +25905,7 @@ void Func0418 object#(0x418) () {
 		if (var0003) {
 			add("Moonsilk stockings");
 		}
-		if (0xFFE8->get_schedule_type() == 0x000C) {
+		if (0xFFE8->get_schedule_type() == WANDER) {
 			add("spells");
 		}
 		converse (["bye"]) {
@@ -26069,7 +26143,7 @@ void Func0419 object#(0x419) () {
 	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Excuse me...@");
 		Func097F(0xFFE7, (("@At thy service, " + var0000) + "!@"), 0x0002);
-		0xFFE7->set_schedule_type(0x0003);
+		0xFFE7->set_schedule_type(TALK);
 	}
 	if (event == PROXIMITY) {
 		var0003 = UI_get_random(0x0006);
@@ -26120,7 +26194,7 @@ void Func0419 object#(0x419) () {
 			} else {
 				say("\"I must be about my duties.\"");
 				Func097F(item, "@Pardom me...@", 0x0000);
-				set_schedule_type(0x000C);
+				set_schedule_type(WANDER);
 				abort;
 			}
 		}
@@ -26168,12 +26242,12 @@ void Func0419 object#(0x419) () {
 					say("\"Now I must kill thee...\"");
 					0xFFE7->set_alignment(0x0003);
 					Func097F(0xFFE7, "@Must kill!@", 0x0000);
-					0xFFE7->set_schedule_type(0x0000);
+					0xFFE7->set_schedule_type(IN_COMBAT);
 					0xFE9C->set_oppressor(0xFFE7);
 					abort;
 				} else {
 					say("\"If thou dost not leave quickly, I must call the Rangers!\"");
-					0xFFE7->set_schedule_type(0x0007);
+					0xFFE7->set_schedule_type(TEND_SHOP);
 				}
 				break;
 		}
@@ -26255,7 +26329,7 @@ void Func041A object#(0x41A) () {
 			};
 		} else {
 			Func097F(0xFFE6, "@What dost thou wish?@", 0x0005);
-			0xFFE6->set_schedule_type(0x0003);
+			0xFFE6->set_schedule_type(TALK);
 		}
 	}
 	if (event == PROXIMITY) {
@@ -26295,18 +26369,18 @@ void Func041A object#(0x41A) () {
 			}
 			if (var000A == 0x0005) {
 				0xFFE6->item_say("@I am so cold...@");
-				0xFFE6->set_schedule_type(0x0004);
+				0xFFE6->set_schedule_type(DANCE);
 			}
 			if (var000A == 0x0006) {
 				0xFFE6->item_say("@Perhaps this direction...@");
-				0xFFE6->set_schedule_type(0x0001);
+				0xFFE6->set_schedule_type(PACE_HORIZONTAL);
 			}
 		}
 	}
 	if (event == STARTED_TALKING) {
 		0xFFE6->clear_item_say();
 		if (0xFFE6->get_item_flag(IN_PARTY)) {
-			0xFFE6->set_schedule_type(0x001F);
+			0xFFE6->set_schedule_type(FOLLOW_AVATAR);
 			add("leave");
 		} else {
 			0xFFE6->run_schedule();
@@ -26331,7 +26405,7 @@ void Func041A object#(0x41A) () {
 					say("\"Suit thyself...\"");
 					say("\"Perhaps I can find another way to escape before I starve to death.\"");
 					gflags[0x0214] = true;
-					0xFFE6->set_schedule_type(0x0014);
+					0xFFE6->set_schedule_type(SHY);
 					Func097F(0xFFE6, "@So cold...@", 0x0000);
 					abort;
 				}
@@ -26455,7 +26529,7 @@ void Func041A object#(0x41A) () {
 				fallthrough;
 
 			case "seance" (remove):
-				if (0xFFE6->get_schedule_type() == 0x0015) {
+				if (0xFFE6->get_schedule_type() == LAB) {
 					if ((UI_get_timer(0x0006) < 0x000C) && gflags[0x0129]) {
 						say("\"Speaking with the spirits of the dead doth fatigue me. We must wait another day before I can muster the energies required.\"");
 					} else {
@@ -26584,7 +26658,7 @@ void Func041A object#(0x41A) () {
 					nobreak {
 						say("\"Well, perhaps I can find my way home on mine own... I am an Adept, after all.\"");
 						Func097F(0xFFE6, "@What lies this way?@", 0x0000);
-						0xFFE6->set_schedule_type(0x000C);
+						0xFFE6->set_schedule_type(WANDER);
 						abort;
 					}
 				}
@@ -26645,7 +26719,7 @@ void Func041B object#(0x41B) () {
 	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Could we speak?@");
 		0xFFE5->Func07D1();
-		0xFFE5->set_schedule_type(0x0003);
+		0xFFE5->set_schedule_type(TALK);
 	}
 	if (event == PROXIMITY) {
 		var0004 = UI_get_array_size(0xFE9C->find_nearby(0x020B, 0x0023, 0x0000));
@@ -26658,7 +26732,7 @@ void Func041B object#(0x41B) () {
 				var0008 = UI_create_new_object2(0x020B, [(var0007[0x0001] - 0x0001), (var0007[0x0002] - 0x0001), var0007[0x0003]]);
 				if (var0008) {
 					var0008->set_item_flag(TEMPORARY);
-					var0008->set_schedule_type(0x0009);
+					var0008->set_schedule_type(HOUND);
 				}
 			}
 		}
@@ -26782,7 +26856,7 @@ void Func041B object#(0x41B) () {
 				} else {
 					say("\"Then I do not like thee!\"");
 					Func097F(0xFFE5, "@Away from me!@", 0x0000);
-					0xFFE5->set_schedule_type(0x0014);
+					0xFFE5->set_schedule_type(SHY);
 					abort;
 				}
 				fallthrough;
@@ -26821,7 +26895,7 @@ void Func041B object#(0x41B) () {
 					var0008 = UI_create_new_object2(0x020B, var000D);
 					if (var0008) {
 						var0008->obj_sprite_effect(0x0015, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
-						var0008->set_schedule_type(0x0009);
+						var0008->set_schedule_type(HOUND);
 						Func097F(var0008, "@Eek!@", 0x0005);
 					} else {
 						UI_sprite_effect(0x0015, var000D[0x0001], var000D[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -26858,7 +26932,7 @@ void Func041B object#(0x41B) () {
 				if (var000E == "believe Columna") {
 					say("\"Thou art worthless.\"");
 					Func097F(0xFFE5, "@Come, rats!@", 0x0000);
-					0xFFE5->set_schedule_type(0x0014);
+					0xFFE5->set_schedule_type(SHY);
 					abort;
 				}
 				say("\"Thou dost truly believe me now... ah, I see that thou dost. Thou art truly one I can say is my friend.\"");
@@ -26965,7 +27039,7 @@ void Func041C object#(0x41C) () {
 		0xFE9C->item_say("@Hello, there.@");
 		0xFFE4->Func07D1();
 		Func097F(0xFFE4, (("@Greetings, " + var0000) + ".@"), 0x0002);
-		0xFFE4->set_schedule_type(0x0003);
+		0xFFE4->set_schedule_type(TALK);
 	}
 	if (event == PROXIMITY) {
 		var0007 = UI_get_random(0x0006);
@@ -27007,7 +27081,7 @@ void Func041C object#(0x41C) () {
 	}
 	if (event == STARTED_TALKING) {
 		if (0xFFE4->get_item_flag(IN_PARTY)) {
-			0xFFE4->set_schedule_type(0x001F);
+			0xFFE4->set_schedule_type(FOLLOW_AVATAR);
 			add("leave");
 		} else {
 			0xFFE4->run_schedule();
@@ -27300,7 +27374,7 @@ void Func041C object#(0x41C) () {
 							var000F->set_item_frame(0x0007);
 							var0003 = UI_update_last_created([(var000E[0x0001] - 0x0001), (var000E[0x0002] - 0x0001), (var000E[0x0003] + 0x0001)]);
 							if (var0003) {
-								0xFFE4->set_schedule_type(0x000F);
+								0xFFE4->set_schedule_type(WAIT);
 								Func090E(0xFFE4, var000F, 0x0000, 0x0000, 0xFFFF, Func041C, 0xFFE4->get_npc_object(), PATH_SUCCESS, false);
 							}
 						}
@@ -27365,7 +27439,7 @@ void Func041D object#(0x41D) () {
 		0xFE9C->item_say("@Excuse me...@");
 		0xFFE3->Func07D1();
 		Func097F(0xFFE3, (("@Yes, " + var0000) + "?@"), 0x0002);
-		0xFFE3->set_schedule_type(0x0003);
+		0xFFE3->set_schedule_type(TALK);
 	}
 	if (event == PROXIMITY) {
 		var0004 = UI_get_random(0x0006);
@@ -27399,7 +27473,7 @@ void Func041D object#(0x41D) () {
 		if (!0xFFE3->get_item_flag(MET)) {
 			say("\"Yes, I remember thee from the banquet -- Rotoluncia wanted to kill thee!\"");
 			0xFFE3->set_item_flag(MET);
-			if (0xFFE3->get_schedule_type() == 0x001D) {
+			if (0xFFE3->get_schedule_type() == PATROL) {
 				say("\"Welcome to the Apothecary Shop. I am Pothos, the proprietor.\"");
 			} else {
 				say("\"I am Pothos, the Apothecary in this city.\"");
@@ -27423,7 +27497,7 @@ void Func041D object#(0x41D) () {
 					var0000,
 					".\"");
 			}
-		} else if (0xFFE3->get_schedule_type() == 0x001D) {
+		} else if (0xFFE3->get_schedule_type() == PATROL) {
 			say("\"Shopping for something, ",
 				var0000,
 				"?\"");
@@ -27433,7 +27507,7 @@ void Func041D object#(0x41D) () {
 		if (gflags[0x00DD] && (!gflags[0x01B7])) {
 			add("tell me about Erstam");
 		}
-		if (0xFFE3->get_schedule_type() == 0x001D) {
+		if (0xFFE3->get_schedule_type() == PATROL) {
 			add("buy");
 		}
 		if (gflags[0x0285] && (!gflags[0x0297])) {
@@ -27867,7 +27941,7 @@ void Func041D object#(0x41D) () {
 
 			case "bye":
 				UI_remove_npc_face0();
-				if (0xFFE3->get_schedule_type() == 0x001D) {
+				if (0xFFE3->get_schedule_type() == PATROL) {
 					Func097F(0xFE9C, "@Nice shop.@", 0x0000);
 					Func097F(0xFFE3, "@Come again!@", 0x0002);
 				} else {
@@ -27943,7 +28017,7 @@ void Func041E object#(0x41E) () {
 		0xFE9C->item_say("@Might I speak with thee?@");
 		0xFFE2->Func07D1();
 		Func097F(0xFFE2, (("@Certainly, " + var0000) + ".@"), 0x0005);
-		0xFFE2->set_schedule_type(0x0003);
+		0xFFE2->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFE2->run_schedule();
@@ -27951,7 +28025,7 @@ void Func041E object#(0x41E) () {
 		0xFFE2->show_npc_face0(0x0000);
 		var0007 = 0xFFE2->get_item_flag(MET);
 		if (var0007 == false) {
-			if (0xFFE2->get_schedule_type() == 0x0007) {
+			if (0xFFE2->get_schedule_type() == TEND_SHOP) {
 				say("\"Welcome to the Blue Boar Inn. I am the innkeeper. My name is Rocco.\"");
 			} else {
 				say("\"I do not believe we've met. I'm Rocco, the innkeeper at the Blue Boar.\"");
@@ -27965,7 +28039,7 @@ void Func041E object#(0x41E) () {
 		}
 		add(["Blue Boar", "visitors"]);
 		add(["food", "drink", "room"]);
-		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != 0x000F)) {
+		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
 			add("brown bottle");
 		}
 		if (gflags[0x0115] && (!gflags[0x0293])) {
@@ -28115,7 +28189,7 @@ void Func041E object#(0x41E) () {
 				fallthrough;
 
 			case "food":
-				if ((0xFFE2->get_schedule_type() == 0x0007) || (0xFFE2->get_schedule_type() == 0x0017)) {
+				if ((0xFFE2->get_schedule_type() == TEND_SHOP) || (0xFFE2->get_schedule_type() == WAITER)) {
 					say("\"We serve nothing pretentious, but it fills the belly and warms the soul.\"");
 					if (!var0003) {
 						say("\"Petra is a surprisingly good cook, considering that she is an automaton.\"");
@@ -28150,7 +28224,7 @@ void Func041E object#(0x41E) () {
 				fallthrough;
 
 			case "drink":
-				if ((0xFFE2->get_schedule_type() == 0x0007) || (0xFFE2->get_schedule_type() == 0x0017)) {
+				if ((0xFFE2->get_schedule_type() == TEND_SHOP) || (0xFFE2->get_schedule_type() == WAITER)) {
 					say("\"We serve only the finest of beverages.\"");
 					Func085F();
 				} else {
@@ -28358,8 +28432,8 @@ void Func041F object#(0x41F) () {
 			if (Func0955()) {
 				say("\"Thou shalt not live to regret this. Open thy mind to me!\"");
 				0xFE9C->set_item_flag(DONT_MOVE);
-				0xFFE1->set_schedule_type(0x000A);
-				0xFE9C->set_schedule_type(0x000F);
+				0xFFE1->set_schedule_type(STANDTHERE);
+				0xFE9C->set_schedule_type(WAIT);
 				gflags[0x0007] = true;
 				var0004 = script 0xFE9C {
 					nohalt;
@@ -28387,7 +28461,7 @@ void Func041F object#(0x41F) () {
 	if (event == SCRIPTED) {
 		if (gflags[0x000A]) {
 			gflags[0x000A] = false;
-			0xFFE1->set_schedule_type(0x0003);
+			0xFFE1->set_schedule_type(TALK);
 			Func097F(0xFFE1, "@Surprised, Avatar?@", 0x0003);
 			abort;
 		}
@@ -28407,7 +28481,7 @@ void Func041F object#(0x41F) () {
 			abort;
 		}
 		if (gflags[0x0008]) {
-			0xFE9C->set_schedule_type(0x001F);
+			0xFE9C->set_schedule_type(FOLLOW_AVATAR);
 			0xFE9C->clear_item_flag(DONT_MOVE);
 			var0004 = script 0xFE9C {
 				nohalt;
@@ -28550,7 +28624,7 @@ void Func041F object#(0x41F) () {
 							}
 						} else {
 							0xFE9C->set_item_flag(DONT_MOVE);
-							0xFE9C->set_schedule_type(0x000F);
+							0xFE9C->set_schedule_type(WAIT);
 							gflags[0x0007] = true;
 							var0004 = script 0xFE9C {
 								nohalt;
@@ -28575,7 +28649,7 @@ void Func041F object#(0x41F) () {
 		}
 		if (gflags[0x00DD] && (!gflags[0x00EA])) {
 			0xFFE7->move_object([0x09B9, 0x0715, 0x0000]);
-			0xFFE7->set_schedule_type(0x000F);
+			0xFFE7->set_schedule_type(WAIT);
 			0xFFE7->set_item_flag(SI_TOURNAMENT);
 			var0010 = 0x0000 - 0xFFE1->get_npc_id();
 			if ((var0010 == 0x0000) || var0010->get_item_flag(DEAD)) {
@@ -28635,7 +28709,7 @@ void Func041F object#(0x41F) () {
 				if (var0010->get_item_flag(IN_PARTY)) {
 					var0010->remove_from_party();
 				}
-				var0010->set_new_schedules(0x0000, 0x0007, [0x0858, 0x0837]);
+				var0010->set_new_schedules(MIDNIGHT, TEND_SHOP, [0x0858, 0x0837]);
 				var0010->run_schedule();
 				var0010->move_object([0x0858, 0x0837, 0x0000]);
 				abort;
@@ -28694,7 +28768,7 @@ void Func0420 object#(0x420) () {
 		0xFE9C->item_say("@Pardon me...@");
 		0xFFE0->Func07D1();
 		Func097F(0xFFE0, (("@Yes " + var0000) + "?@"), 0x0002);
-		0xFFE0->set_schedule_type(0x0003);
+		0xFFE0->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFE0->run_schedule();
@@ -28735,7 +28809,7 @@ void Func0420 object#(0x420) () {
 		if (gflags[0x0116] && (!gflags[0x0296])) {
 			add("strange brush");
 		}
-		if (0xFFE0->get_schedule_type() == 0x000C) {
+		if (0xFFE0->get_schedule_type() == WANDER) {
 			add("buy");
 		}
 		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
@@ -29008,7 +29082,7 @@ void Func0420 object#(0x420) () {
 				fallthrough;
 
 			case "buy":
-				if (0xFFE0->get_schedule_type() == 0x000C) {
+				if (0xFFE0->get_schedule_type() == WANDER) {
 					Func086F();
 				} else {
 					say("\"If thou wouldst talk to me when I am at work, I would gladly sell thee something.\"");
@@ -29016,7 +29090,7 @@ void Func0420 object#(0x420) () {
 				fallthrough;
 
 			case "sell gems":
-				if (0xFFE0->get_schedule_type() == 0x000C) {
+				if (0xFFE0->get_schedule_type() == WANDER) {
 					Func086E();
 				} else {
 					say("\"I can buy thy gems when I am at work, ",
@@ -29092,7 +29166,7 @@ void Func0421 object#(0x421) () {
 		0xFE9C->item_say("@Might we speak?@");
 		0xFFDF->Func07D1();
 		Func097F(0xFFDF, "@Make it brief...@", 0x0002);
-		0xFFDF->set_schedule_type(0x0003);
+		0xFFDF->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFDF->run_schedule();
@@ -29148,7 +29222,7 @@ void Func0421 object#(0x421) () {
 						say("\"Search my manor! I have no prisoners there...\"");
 					}
 					Func097F(0xFFDF, "@Now leave me alone...@", 0x0000);
-					0xFFDF->set_schedule_type(0x000C);
+					0xFFDF->set_schedule_type(WANDER);
 					abort;
 				}
 				say("\"Such poor luck, ",
@@ -29366,7 +29440,7 @@ labelFunc0421_0614:
 							var000E = UI_remove_party_items(0x0001, 0x02A5, 0xFE99, 0x0000, 0x0000);
 							say("\"Ha! Now I have what I want and I did not have to give thee a thing! Thou art not dealing with a child here!\"");
 							Func097F(0xFFDF, "@I have them!@", 0x0000);
-							0xFFDF->set_schedule_type(0x0014);
+							0xFFDF->set_schedule_type(SHY);
 							if (var000E) {
 								gflags[0x013B] = true;
 							}
@@ -29381,7 +29455,7 @@ labelFunc0421_0614:
 						abort;
 						// Dead code
 						Func097F(0xFFDF, "@Begone, foul knave.@", 0x0000);
-						0xFFDF->set_schedule_type(0x000C);
+						0xFFDF->set_schedule_type(WANDER);
 labelFunc0421_06AC:
 						say("\"I ask thee again -- surrender those stockings to me!\"");
 					} while (true);
@@ -29451,7 +29525,7 @@ labelFunc0421_06AC:
 			case "magic wand" (remove):
 				var0011 = 0xFFEF->get_schedule_type();
 				if (!gflags[0x023D]) {
-					if (var0011 == 0x000F) {
+					if (var0011 == WAIT) {
 						say("\"I no longer have the Philanderer's Friend, else I would certainly aid thee in helping the good Fedabiblio. It was stolen from me. I do not know for sure, but I suspect mine old enemy Vasculio of the crime.\"");
 					}
 				} else if (!gflags[0x0136]) {
@@ -29461,7 +29535,7 @@ labelFunc0421_06AC:
 						var0012 = 0xFE9C->get_object_position();
 						0xFE9C->obj_sprite_effect(0x000D, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
 						var0013 = 0xFFDF->add_cont_items(0x0001, 0x03A1, 0xFE99, 0xFE99, false);
-						0xFFDF->set_schedule_type(0x0014);
+						0xFFDF->set_schedule_type(SHY);
 						Func097F(0xFFDF, "@I have it!@", 0x0000);
 						gflags[0x0136] = true;
 						abort;
@@ -29582,7 +29656,7 @@ void Func0422 object#(0x422) () {
 		0xFE9C->item_say("@Ahem...@");
 		0xFFDE->Func07D1();
 		Func097F(0xFFDE, "@Thou didst speak?@", 0x0002);
-		0xFFDE->set_schedule_type(0x0003);
+		0xFFDE->set_schedule_type(TALK);
 	}
 	if (event == SCRIPTED) {
 		event = STARTED_TALKING;
@@ -29590,7 +29664,7 @@ void Func0422 object#(0x422) () {
 	if (event == STARTED_TALKING) {
 		if (item == 0xFFDE->get_npc_object()) {
 			if (0xFFDE->get_item_flag(IN_PARTY)) {
-				0xFFDE->set_schedule_type(0x001F);
+				0xFFDE->set_schedule_type(FOLLOW_AVATAR);
 				add("leave");
 			} else {
 				0xFFDE->run_schedule();
@@ -29869,7 +29943,7 @@ void Func0423 object#(0x423) () {
 		0xFE9C->item_say("@Might we speak?@");
 		0xFFDD->Func07D1();
 		Func097F(0xFFDD, "@No!@", 0x0002);
-		0xFFDD->set_schedule_type(0x0003);
+		0xFFDD->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFDD->run_schedule();
@@ -30300,7 +30374,7 @@ void Func0424 object#(0x424) () {
 		0xFFDC->Func07D1();
 		var0005 = "@Do not hit me...@" & "@I beg thee!@";
 		Func094F(0xFFDC, var0005);
-		0xFFDC->set_schedule_type(0x0003);
+		0xFFDC->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFDC->run_schedule();
@@ -30531,16 +30605,16 @@ void Func0425 object#(0x425) () {
 		0xFE9C->clear_item_flag(DONT_MOVE);
 		UI_init_conversation();
 		0xFFF0->set_npc_id(0x0000);
-		0xFFDB->set_new_schedules(0x0000, 0x000C, [0x09A7, 0x07F7]);
+		0xFFDB->set_new_schedules(MIDNIGHT, WANDER, [0x09A7, 0x07F7]);
 		0xFFDB->run_schedule();
 		gflags[0x002A] = false;
 	}
 	if (event == PROXIMITY) {
-		if (var0000 == 0x001D) {
+		if (var0000 == PATROL) {
 			var0002 = 0xFFDB->find_nearby(0x025F, 0x0002, 0x0010);
 			var0003 = var0002->get_item_quality();
 			if (var0003 == 0x000F) {
-				0xFFDB->set_schedule_type(0x000F);
+				0xFFDB->set_schedule_type(WAIT);
 				var0001 = script item {
 					nohalt;
 					step south;
@@ -30554,7 +30628,7 @@ void Func0425 object#(0x425) () {
 			}
 		}
 	}
-	if ((event == DOUBLECLICK) || ((event == PROXIMITY) && (get_schedule_type() == 0x0009))) {
+	if ((event == DOUBLECLICK) || ((event == PROXIMITY) && (get_schedule_type() == HOUND))) {
 		var0005 = UI_get_random(0x0006);
 		if (var0005 == 0x0001) {
 			0xFFDB->item_say("@Awk!@");
@@ -30626,7 +30700,7 @@ void Func0426 object#(0x426) () {
 		0xFE9C->item_say("@Hello!@");
 		0xFFDA->Func07D1();
 		Func097F(0xFFDA, (("@Yes, " + var0000) + "?@"), 0x0002);
-		0xFFDA->set_schedule_type(0x0003);
+		0xFFDA->set_schedule_type(TALK);
 	}
 	if (event == PROXIMITY) {
 		var0006 = UI_get_random(0x0006);
@@ -30909,7 +30983,7 @@ void Func0426 object#(0x426) () {
 				abort;
 
 			case "food":
-				if ((0xFFDA->get_schedule_type() == 0x0007) || (0xFFDA->get_schedule_type() == 0x0017)) {
+				if ((0xFFDA->get_schedule_type() == TEND_SHOP) || (0xFFDA->get_schedule_type() == WAITER)) {
 					if (!var0005) {
 						say("\"Mother doth do all the cooking here... and she is very good.\"");
 						if (var0003 == true) {
@@ -30929,7 +31003,7 @@ void Func0426 object#(0x426) () {
 				fallthrough;
 
 			case "drink":
-				if ((0xFFDA->get_schedule_type() == 0x0007) || (0xFFDA->get_schedule_type() == 0x0017)) {
+				if ((0xFFDA->get_schedule_type() == TEND_SHOP) || (0xFFDA->get_schedule_type() == WAITER)) {
 					say("\"I am certain our selection will please thee, ",
 						var0000,
 						".\"");
@@ -31008,7 +31082,7 @@ void Func0427 object#(0x427) () {
 		0xFE9C->item_say("@Hail, minstrel!@");
 		0xFFD9->Func07D1();
 		Func097F(0xFFD9, (("@Greetings, " + var0000) + "!@"), 0x0005);
-		0xFFD9->set_schedule_type(0x0003);
+		0xFFD9->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFD9->run_schedule();
@@ -31413,19 +31487,19 @@ void Func0428 object#(0x428) () {
 		Func083A(var0012);
 	}
 	if (event == PROXIMITY) {
-		if (var0001 == 0x001D) {
+		if (var0001 == PATROL) {
 			if (var0000 == 0x0000) {
 				var000D = 0xFFD8->find_nearby(0x025F, 0x0002, 0x0010);
 				var0013 = var000D->get_item_quality();
 				if (var0013 == 0x000F) {
 					var000D->remove_item();
 					0xFFD8->move_object([0x0503, 0x08C7, 0x0000]);
-					0xFFD8->set_new_schedules(0x0000, 0x001A, [0x0503, 0x08C7]);
+					0xFFD8->set_new_schedules(MIDNIGHT, EAT_AT_INN, [0x0503, 0x08C7]);
 					0xFFD8->run_schedule();
 				}
 			}
 			if (var0000 > 0x0002) {
-				0xFFD8->set_schedule_type(0x000F);
+				0xFFD8->set_schedule_type(WAIT);
 				var0011 = script 0xFFD8 {
 					nohalt;
 					step north;
@@ -31441,7 +31515,7 @@ void Func0428 object#(0x428) () {
 		0xFFD8->Func07D1();
 		Func097F(0xFFD8, "@Aye, matey?@", 0x0002);
 		if (gflags[0x01D1]) {
-			0xFFD8->set_schedule_type(0x0003);
+			0xFFD8->set_schedule_type(TALK);
 		} else {
 			0xFFD8->show_npc_face0(0x0000);
 			say("\"Could ye unlock this door and let me go?\"");
@@ -31469,7 +31543,7 @@ void Func0428 object#(0x428) () {
 				var0005,
 				".\" ~\"I be Hawk, captain of the good ship Arabella.\"");
 			0xFFD8->set_npc_id(0x0000);
-			0xFFD8->set_new_schedules(0x0000, 0x001A, [0x0503, 0x08C7]);
+			0xFFD8->set_new_schedules(MIDNIGHT, EAT_AT_INN, [0x0503, 0x08C7]);
 			0xFFD8->run_schedule();
 			0xFFD8->set_item_flag(MET);
 		} else {
@@ -31498,7 +31572,7 @@ void Func0428 object#(0x428) () {
 					var000D->set_item_flag(TEMPORARY);
 					var0011 = UI_update_last_created([0x0AF6, 0x00DE, 0x0003]);
 				}
-				0xFFD8->set_schedule_type(0x001D);
+				0xFFD8->set_schedule_type(PATROL);
 			}
 			Func097F(0xFFD8, "@I need a drink!@", 0x0000);
 			abort;
@@ -31764,7 +31838,7 @@ void Func0429 object#(0x429) () {
 		0xFE9C->item_say("@Pardon me...@");
 		0xFFD7->Func07D1();
 		Func097F(0xFFD7, (((("Good " + var0006) + ", ") + var0000) + "."), 0x0002);
-		0xFFD7->set_schedule_type(0x0003);
+		0xFFD7->set_schedule_type(TALK);
 	}
 	if (event == PROXIMITY) {
 		var0007 = UI_get_random(0x0006);
@@ -31968,7 +32042,7 @@ void Func0429 object#(0x429) () {
 				fallthrough;
 
 			case "food":
-				if ((0xFFD7->get_schedule_type() == 0x0007) || (0xFFD7->get_schedule_type() == 0x0017)) {
+				if ((0xFFD7->get_schedule_type() == TEND_SHOP) || (0xFFD7->get_schedule_type() == WAITER)) {
 					say("\"Thou wilt not find our cooking fancy as in Moonshade. But 'tis hardy fare and thou wilt find the portions ample.\"");
 					if (!var0004) {
 						say("\"I've done all the cooking here since Donal hired me, before I married Angus. I've had my share of compliments, if I do say so myself.\"");
@@ -32007,7 +32081,7 @@ void Func0429 object#(0x429) () {
 				fallthrough;
 
 			case "drink":
-				if ((0xFFD7->get_schedule_type() == 0x0007) || (0xFFD7->get_schedule_type() == 0x0017)) {
+				if ((0xFFD7->get_schedule_type() == TEND_SHOP) || (0xFFD7->get_schedule_type() == WAITER)) {
 					say("\"Thou wilt like our selection, I'm certain.\"");
 					Func081F();
 				} else {
@@ -32082,11 +32156,11 @@ void Func042A object#(0x42A) () {
 	var0003 = 0xFFD6->get_schedule_type();
 	var0004 = Func0994();
 	if (event == PROXIMITY) {
-		if (var0003 == 0x001D) {
+		if (var0003 == PATROL) {
 			var0005 = 0xFFD6->find_nearby(0x025F, 0x0002, 0x0010);
 			var0006 = var0005->get_item_quality();
 			if (var0006 == 0x000F) {
-				0xFFD6->set_schedule_type(0x000F);
+				0xFFD6->set_schedule_type(WAIT);
 				var0007 = script item {
 					nohalt;
 					step south;
@@ -32103,7 +32177,7 @@ void Func042A object#(0x42A) () {
 		0xFE9C->item_say("@May we speak?@");
 		0xFFD6->Func07D1();
 		Func097F(0xFFD6, "@I have little time!@", 0x0002);
-		0xFFD6->set_schedule_type(0x0003);
+		0xFFD6->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFD6->run_schedule();
@@ -32611,11 +32685,11 @@ void Func042B object#(0x42B) () {
 	var0003 = Func0994();
 	var0004 = 0xFFD5->get_schedule_type();
 	if (event == PROXIMITY) {
-		if (var0004 == 0x001D) {
+		if (var0004 == PATROL) {
 			var0005 = 0xFFD5->find_nearby(0x025F, 0x0002, 0x0010);
 			var0006 = var0005->get_item_quality();
 			if (var0006 == 0x000F) {
-				0xFFD5->set_schedule_type(0x000F);
+				0xFFD5->set_schedule_type(WAIT);
 				var0007 = script item {
 					nohalt;
 					step south;
@@ -32630,7 +32704,7 @@ void Func042B object#(0x42B) () {
 		0xFE9C->item_say("@A moment, young sir!@");
 		0xFFD5->Func07D1();
 		Func097F(0xFFD5, "@Who, me?@", 0x0002);
-		0xFFD5->set_schedule_type(0x0003);
+		0xFFD5->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFD5->run_schedule();
@@ -32915,7 +32989,7 @@ void Func042C object#(0x42C) () {
 		}
 		0xFFD4->Func07D1();
 		Func097F(0xFFD4, (("@Yes, " + var0000) + "?@"), 0x0002);
-		0xFFD4->set_schedule_type(0x0003);
+		0xFFD4->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFD4->show_npc_face0(0x0000);
@@ -32925,11 +32999,11 @@ void Func042C object#(0x42C) () {
 			abort;
 		}
 		if (0xFFD4->get_item_flag(IN_PARTY)) {
-			0xFFD4->set_schedule_type(0x001F);
+			0xFFD4->set_schedule_type(FOLLOW_AVATAR);
 			add("leave");
 		} else {
 			0xFFD4->run_schedule();
-			if (0xFFD4->get_schedule_type() == 0x0003) {
+			if (0xFFD4->get_schedule_type() == TALK) {
 				0xFFD4->revert_schedule();
 				0xFFD4->run_schedule();
 			}
@@ -33116,7 +33190,7 @@ void Func042C object#(0x42C) () {
 							var000E = Func0988(0xFE9C->get_npc_object(), UI_get_party_list2());
 							for (var0011 in var000E with var000F to var0010) {
 								var0011->remove_from_party();
-								var0011->set_new_schedules([0x0000, 0x0002, 0x0003], [0x000E, 0x001A, 0x0007], [var0002, var0003, var0004]);
+								var0011->set_new_schedules([MIDNIGHT, DAWN, MORNING], [SLEEP, EAT_AT_INN, TEND_SHOP], [var0002, var0003, var0004]);
 								var0011->run_schedule();
 							}
 							Func097F(var0011, "@I need a drink!@", 0x0002);
@@ -33131,8 +33205,8 @@ void Func042C object#(0x42C) () {
 						var000E->show_npc_face1(0x0000);
 						say("\"This group is getting a little large for my tastes. I think I'll stay at the Inn for a while...\"");
 						var000E->remove_from_party();
-						var000E->set_new_schedules([0x0000, 0x0002, 0x0003], [0x000E, 0x001A, 0x0007], [var0002, var0003, var0004]);
-						var000E->set_schedule_type(0x000C);
+						var000E->set_new_schedules([MIDNIGHT, DAWN, MORNING], [SLEEP, EAT_AT_INN, TEND_SHOP], [var0002, var0003, var0004]);
+						var000E->set_schedule_type(WANDER);
 						Func097F(var000E, "@So long...@", 0x0000);
 						UI_remove_npc_face1();
 						0x0000->set_conversation_slot();
@@ -33162,7 +33236,7 @@ void Func042C object#(0x42C) () {
 				if (gflags[0x01E5]) {
 					say("\"But how shall I gain the gold, if thou dost not aid me?\"");
 					Func097F(0xFFD4, "@Oh!@", 0x0000);
-					0xFFD4->set_schedule_type(0x0014);
+					0xFFD4->set_schedule_type(SHY);
 					abort;
 				}
 				say("\"I had thought thou wouldst be interested! Oh, well, 'tis his loss for buying my... favors so cheaply! And thy loss for not joining me!\" *\"But, I will not hold it against thee, ",
@@ -33639,7 +33713,7 @@ void Func042D object#(0x42D) () {
 		say("\"I am leaving -- do not try to stop me!\"");
 		Func097F(0xFFD3, "@Farewell!@", 0x0000);
 		0xFFD3->set_attack_mode(0x0007);
-		0xFFD3->set_schedule_type(0x0014);
+		0xFFD3->set_schedule_type(SHY);
 		Func09AC(0xFFD3, 0xFFFF, 0x0000, 0x000C);
 		abort;
 	}
@@ -33659,14 +33733,14 @@ void Func042D object#(0x42D) () {
 		0xFE9C->item_say("@Well met, Knight!@");
 		0xFFD3->Func07D1();
 		Func097F(0xFFD3, "@Greetings!@", 0x0005);
-		0xFFD3->set_schedule_type(0x0003);
+		0xFFD3->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFD3->run_schedule();
 		0xFFD3->clear_item_say();
 		0xFFD3->show_npc_face0(0x0000);
 		if (0xFFD3->get_item_flag(IN_PARTY)) {
-			0xFFD3->set_schedule_type(0x001F);
+			0xFFD3->set_schedule_type(FOLLOW_AVATAR);
 			add("leave");
 		} else {
 			0xFFD3->run_schedule();
@@ -33675,7 +33749,7 @@ void Func042D object#(0x42D) () {
 		if (!0xFFD3->get_item_flag(IN_PARTY)) {
 			0xFFD3->run_schedule();
 		} else {
-			0xFFD3->set_schedule_type(0x001F);
+			0xFFD3->set_schedule_type(FOLLOW_AVATAR);
 			add("leave");
 		}
 		if ((gflags[0x01E2] || gflags[0x01E3]) && (gflags[0x0016] && 0xFFD3->get_cont_items(0xFE99, 0xFE99, 0xFE99))) {
@@ -33702,7 +33776,7 @@ void Func042D object#(0x42D) () {
 				} else {
 					say("\"Then I must continue to seek him.\"");
 					Func097F(0xFFD3, "@Batlin must die!@", 0x0000);
-					0xFFD3->set_schedule_type(0x0014);
+					0xFFD3->set_schedule_type(SHY);
 					abort;
 				}
 				if (UI_get_array_size(UI_get_party_list()) < 0x0005) {
@@ -33775,8 +33849,8 @@ void Func042D object#(0x42D) () {
 					gflags[0x01E3] = true;
 					0xFFD3->clear_item_flag(SI_TOURNAMENT);
 					Func097F(0xFFD3, "@Damn thee!@", 0x0000);
-					0xFFD3->set_schedule_type(0x0014);
-					0xFFD3->set_new_schedules([0x0000, 0x0003, 0x0004, 0x0005, 0x0007], [0x000E, 0x0005, 0x0003, 0x000B, 0x0005], [0x0516, 0x08F7, 0x04F7, 0x08CC, 0x050D, 0x08B6, 0x0516, 0x08A2, 0x04F7, 0x08CC]);
+					0xFFD3->set_schedule_type(SHY);
+					0xFFD3->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, NIGHT], [SLEEP, 0x0005, TALK, LOITER, EAT], [0x0516, 0x08F7, 0x04F7, 0x08CC, 0x050D, 0x08B6, 0x0516, 0x08A2, 0x04F7, 0x08CC]);
 					abort;
 				}
 				say("\"Thou couldst not succeed without me!\"");
@@ -33948,7 +34022,7 @@ void Func042E object#(0x42E) () {
 	var var0010;
 
 	var0000 = false;
-	if (0xFFD2->get_schedule_type() == 0x0013) {
+	if (0xFFD2->get_schedule_type() == SEW) {
 		var0000 = true;
 	}
 	var0001 = Func0954();
@@ -33962,14 +34036,14 @@ void Func042E object#(0x42E) () {
 	var0009 = false;
 	var000A = "";
 	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
-		0xFFD2->set_schedule_type(0x000C);
+		0xFFD2->set_schedule_type(WANDER);
 	}
 	if (event == SCRIPTED) {
 		if (gflags[0x01A8] || (!gflags[0x0171])) {
 			abort;
 		}
 		var000B = 0xFFD2->approach_avatar(0x0078, 0x0028);
-		0xFFD2->set_schedule_type(0x0003);
+		0xFFD2->set_schedule_type(TALK);
 		var000B = script Func09A0(0x0001, 0x0002) after 50 ticks {
 			nohalt;
 			call Func042E;
@@ -33988,16 +34062,16 @@ void Func042E object#(0x42E) () {
 		0xFE9C->item_say("@Might I speak with thee?@");
 		0xFFD2->Func07D1();
 		Func097F(0xFFD2, (("@Certainly, " + var0001) + ".@"), 0x0005);
-		0xFFD2->set_schedule_type(0x0003);
+		0xFFD2->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFD2->run_schedule();
 		var0000 = false;
-		if (0xFFD2->get_schedule_type() == 0x0013) {
+		if (0xFFD2->get_schedule_type() == SEW) {
 			var0000 = true;
 		}
-		if (0xFFD2->get_schedule_type() == 0x0003) {
-			0xFFD2->set_schedule_type(0x0014);
+		if (0xFFD2->get_schedule_type() == TALK) {
+			0xFFD2->set_schedule_type(SHY);
 		}
 		0xFFD2->clear_item_say();
 		0xFFD2->show_npc_face0(0x0000);
@@ -34020,7 +34094,7 @@ void Func042E object#(0x42E) () {
 				var000B = "" & ("@Alyssand!@" & "@What art thou doing?@");
 				Func094F(0xFFC3, var000B);
 			}
-			0xFFD2->set_schedule_type(0x0014);
+			0xFFD2->set_schedule_type(SHY);
 			abort;
 		}
 		if (var000C == false) {
@@ -34066,7 +34140,7 @@ void Func042E object#(0x42E) () {
 		}
 		converse (["storms", "Goblins", "bye"]) {
 			case "provisions":
-				if (0xFFD2->get_schedule_type() == 0x0013) {
+				if (0xFFD2->get_schedule_type() == SEW) {
 					say("\"I help father with the shop when he is... indisposed. What dost thou wish to purchase?\"");
 					Func0803();
 				} else {
@@ -34169,7 +34243,7 @@ void Func042E object#(0x42E) () {
 								var000B = "" & ("@Alyssand!@" & "@What art thou doing?@");
 								Func094F(0xFFC3, var000B);
 							}
-							0xFFD2->set_schedule_type(0x0014);
+							0xFFD2->set_schedule_type(SHY);
 							abort;
 						}
 						say("\"Be ready at any time, for one doth not know when the time to act shall arrive.\"");
@@ -34479,7 +34553,7 @@ void Func042E object#(0x42E) () {
 					say("\"I thank thee for telling me that thou hast seen it... But if thou dost have it, thou mayest keep it.\"");
 				}
 				gflags[0x01B2] = true;
-				0xFFC3->set_new_schedules([0x0000, 0x0002, 0x0003, 0x0004, 0x0005, 0x0006, 0x0007], [0x0009, 0x0009, 0x0009, 0x0009, 0x0009, 0x0009, 0x0009], [0x0408, 0x0778, 0x03A8, 0x0728, 0x03A8, 0x06C8, 0x0448, 0x06C4, 0x0408, 0x0788, 0x03A8, 0x0728, 0x0448, 0x06C4]);
+				0xFFC3->set_new_schedules([MIDNIGHT, DAWN, MORNING, NOON, AFTERNOON, EVENING, NIGHT], [0x0009, 0x0009, 0x0009, 0x0009, 0x0009, 0x0009, HOUND], [0x0408, 0x0778, 0x03A8, 0x0728, 0x03A8, 0x06C8, 0x0448, 0x06C4, 0x0408, 0x0788, 0x03A8, 0x0728, 0x0448, 0x06C4]);
 				var000B = script Func09A0(0x0005, 0x0001) after 100 ticks {
 					nohalt;
 					call Func043D;
@@ -34564,7 +34638,7 @@ void Func042F object#(0x42F) () {
 		0xFE9C->item_say("@Excuse me, sir.@");
 		0xFFD1->Func07D1();
 		Func097F(0xFFD1, "@Do I know thee?@", 0x0005);
-		0xFFD1->set_schedule_type(0x0003);
+		0xFFD1->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFD1->run_schedule();
@@ -34605,7 +34679,7 @@ void Func042F object#(0x42F) () {
 			if (gflags[0x0196] && (!gflags[0x0293])) {
 				add("slippers");
 			}
-			if (0xFFD1->get_schedule_type() == 0x0007) {
+			if (0xFFD1->get_schedule_type() == TEND_SHOP) {
 				add("provisions");
 			}
 			if (gflags[0x0157] == true) {
@@ -34778,7 +34852,7 @@ void Func042F object#(0x42F) () {
 					say("\"That is as much as the storm took from me...\"");
 					var0003 = Func0992(0x0001, "@These must be his coins then, Avatar!@", 0x0000, false);
 					0x0000->set_conversation_slot();
-					if (0xFFD1->get_schedule_type() == 0x0007) {
+					if (0xFFD1->get_schedule_type() == TEND_SHOP) {
 						say("\"I would accept thy money if thou dost wish to purchase something.\"");
 						Func0818();
 					} else {
@@ -35025,7 +35099,7 @@ void Func042F object#(0x42F) () {
 				} else {
 					say("\"Thou art having fun with me, stranger! I see no letter.\"");
 					Func097F(0xFFD1, "@Out with ye!@", 0x0000);
-					0xFFD1->set_schedule_type(0x0014);
+					0xFFD1->set_schedule_type(SHY);
 					abort;
 				}
 				fallthrough;
@@ -35069,7 +35143,7 @@ void Func0430 object#(0x430) () {
 		0xFE9C->item_say("@A moment, if thou wilt.@");
 		0xFFD0->Func07D1();
 		Func097F(0xFFD0, (("@At thy service, " + var0000) + ".@"), 0x0005);
-		0xFFD0->set_schedule_type(0x0003);
+		0xFFD0->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFD0->run_schedule();
@@ -35202,7 +35276,7 @@ void Func0430 object#(0x430) () {
 				fallthrough;
 
 			case "buy":
-				if (0xFFD0->get_schedule_type() == 0x0007) {
+				if (0xFFD0->get_schedule_type() == TEND_SHOP) {
 					say("\"What dost thou wish to purchase?\"");
 					Func081B();
 				} else {
@@ -35342,7 +35416,7 @@ void Func0430 object#(0x430) () {
 				} else {
 					say("\"Thou dost lie! I see no letter!\"");
 					Func097F(0xFFD0, "@Liar!@", 0x0000);
-					0xFFD0->set_schedule_type(0x0014);
+					0xFFD0->set_schedule_type(SHY);
 					abort;
 				}
 				remove("letter");
@@ -35396,7 +35470,7 @@ void Func0431 object#(0x431) () {
 		0xFE9C->item_say("@A moment, sir.@");
 		0xFFCF->Func07D1();
 		Func097F(0xFFCF, "@At thy service.@", 0x0005);
-		0xFFCF->set_schedule_type(0x0003);
+		0xFFCF->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFCF->run_schedule();
@@ -35407,7 +35481,7 @@ void Func0431 object#(0x431) () {
 			say("\"Why, thou art the confidant of the accused blasphemer! I cannot be seen speaking with thee...\"");
 			UI_remove_npc_face0();
 			Func097F(0xFFCF, "@Off with thee!@", 0x0000);
-			0xFFCF->set_schedule_type(0x000C);
+			0xFFCF->set_schedule_type(WANDER);
 			abort;
 		}
 		if (var0004 == false) {
@@ -35653,7 +35727,7 @@ void Func0432 object#(0x432) () {
 		0xFE9C->item_say("@Greetings, good sir.@");
 		0xFFCE->Func07D1();
 		Func097F(0xFFCE, (("@Greetings, " + var0000) + ".@"), 0x0005);
-		0xFFCE->set_schedule_type(0x0003);
+		0xFFCE->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFCE->run_schedule();
@@ -35835,18 +35909,18 @@ void Func0433 object#(0x433) () {
 			call Func0112;
 		};
 	}
-	if ((event == PROXIMITY) && (0xFFCD->get_schedule_type() == 0x0007)) {
+	if ((event == PROXIMITY) && (0xFFCD->get_schedule_type() == TEND_SHOP)) {
 		var0004 = ["@Garth will save me...@", (("@Damn " + var0002) + "!@"), "@I need more food!@", "@Jailer!@", "@Be patient.@", "@Curse that weaver!@"];
 		if (0xFFCA->npc_nearby()) {
 			var0004 &= "@Be silent, Priestess!@" & ("@Pleasure me, Kylista!@" & "@Our time shall come...@");
 		}
 		Func097F(0xFFCD, var0004[UI_get_random(UI_get_array_size(var0004))], 0x0000);
 	}
-	if ((event == DOUBLECLICK) && (0xFFCD->get_schedule_type() != 0x000F)) {
+	if ((event == DOUBLECLICK) && (0xFFCD->get_schedule_type() != WAIT)) {
 		0xFFCD->Func07D1();
 		if ((gflags[0x0170] && gflags[0x0172]) && (!gflags[0x016E])) {
 			0xFE9C->item_say("@Hail, criminal!@");
-			0xFFCD->set_schedule_type(0x000F);
+			0xFFCD->set_schedule_type(WAIT);
 			Func097F(0xFFCD, "@Not thee!@", 0x0002);
 			0xFFCD->Func07D2();
 			var0003 = script 0xFFCD after 7 ticks {
@@ -35856,7 +35930,7 @@ void Func0433 object#(0x433) () {
 		} else {
 			0xFE9C->item_say("@A moment of thy time, sir.@");
 			Func097F(0xFFCD, (("@At thy service, " + var0000) + ".@"), 0x0005);
-			0xFFCD->set_schedule_type(0x0003);
+			0xFFCD->set_schedule_type(TALK);
 		}
 	}
 	if (event == SCRIPTED) {
@@ -35879,7 +35953,7 @@ void Func0433 object#(0x433) () {
 			say("\"Thou dost dare to confront me? Thou, that didst bring the blasphemer to Lady Yelinda!\"");
 			UI_remove_npc_face0();
 			Func097F(0xFFCD, "@Spare me thy presence!@", 0x0000);
-			0xFFCD->set_schedule_type(0x0014);
+			0xFFCD->set_schedule_type(SHY);
 			abort;
 		}
 		if (var0005 == false) {
@@ -36176,7 +36250,7 @@ void Func0434 object#(0x434) () {
 		0xFE9C->item_say(("@Good " + var0002) + ", barkeep.@");
 		0xFFCC->Func07D1();
 		Func097F(0xFFCC, (((("@Good " + var0002) + ", ") + var0001) + ".@"), 0x0002);
-		0xFFCC->set_schedule_type(0x0003);
+		0xFFCC->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFCC->run_schedule();
@@ -36218,11 +36292,11 @@ void Func0434 object#(0x434) () {
 		if (Func0942(0xFFC6)) {
 			var0003 = 0x0003;
 		}
-		if (0xFFCC->get_schedule_type() == 0x0010) {
+		if (0xFFCC->get_schedule_type() == MAJOR_SIT) {
 			var0003 = 0x0001;
 		}
 		add(["information"]);
-		if (0xFFCC->get_schedule_type() == 0x0017) {
+		if (0xFFCC->get_schedule_type() == WAITER) {
 			add("buy");
 		}
 		add("bye");
@@ -36583,7 +36657,7 @@ void Func0434 object#(0x434) () {
 				if (gflags[0x007B] && (!gflags[0x007C])) {
 					var000D &= "fish-net stockings";
 				}
-				if (gflags[0x0045] && (0xFFB4->get_schedule_type() != 0x000F)) {
+				if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
 					var000D &= "brown bottle";
 				}
 				if (var000D == []) {
@@ -36826,7 +36900,7 @@ void Func0434 object#(0x434) () {
 				if (Func097D(0xFE9B, 0x0001, 0x0241, 0xFE99, 0x0003)) {
 					say("\"A rotten egg! How it smells! Leave here with that!\"");
 					Func097F(0xFFCC, "@Whew!@", 0x0000);
-					0xFFCC->set_schedule_type(0x0014);
+					0xFFCC->set_schedule_type(SHY);
 					abort;
 				}
 				say("\"I have never heard of a blue egg.\"");
@@ -37109,7 +37183,7 @@ void Func0435 object#(0x435) () {
 	var0003 = Func097D(0xFE9B, 0x0001, 0x0377, 0xFE99, 0x0000);
 	var0004 = Func0994();
 	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
-		0xFFCB->set_schedule_type(0x000A);
+		0xFFCB->set_schedule_type(STANDTHERE);
 	}
 	if (event == SCRIPTED) {
 		if (gflags[0x015C]) {
@@ -37121,7 +37195,7 @@ void Func0435 object#(0x435) () {
 				call Func0435;
 			};
 			var0005 = 0xFFCB->approach_avatar(0x0078, 0x0028);
-			0xFFCB->set_schedule_type(0x0003);
+			0xFFCB->set_schedule_type(TALK);
 			Func097F(0xFFCB, (("@Hail, " + var0002) + "!@"), 0x0002);
 		} else {
 			var0005 = script Func09A0(0x0005, 0x0001) after 150 ticks {
@@ -37140,7 +37214,7 @@ void Func0435 object#(0x435) () {
 		0xFE9C->item_say("@Hail, guardsman!@");
 		0xFFCB->Func07D1();
 		Func097F(0xFFCB, (("@Hail, " + var0000) + "!@"), 0x0005);
-		0xFFCB->set_schedule_type(0x0003);
+		0xFFCB->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFCB->run_schedule();
@@ -37517,7 +37591,7 @@ void Func0436 object#(0x436) () {
 			call Func0112;
 		};
 	}
-	if ((event == PROXIMITY) && (0xFFCA->get_schedule_type() == 0x0007)) {
+	if ((event == PROXIMITY) && (0xFFCA->get_schedule_type() == TEND_SHOP)) {
 		if ((gflags[0x0170] && gflags[0x0172]) && (!gflags[0x016E])) {
 			var0006 = ["@I do not deserve this!@", "@Save me, please!@", "@Such filth!@", "@I wish I had a pillow...@", "@Damn Alyssand!@", "@Curse The Fellowship!@"];
 			if (0xFFCD->npc_nearby()) {
@@ -37526,11 +37600,11 @@ void Func0436 object#(0x436) () {
 			Func097F(0xFFCA, var0006[UI_get_random(UI_get_array_size(var0006))], 0x0000);
 		}
 	}
-	if ((event == DOUBLECLICK) && (0xFFCA->get_schedule_type() != 0x000F)) {
+	if ((event == DOUBLECLICK) && (0xFFCA->get_schedule_type() != WAIT)) {
 		0xFFCA->Func07D1();
 		if ((gflags[0x0170] && gflags[0x0172]) && (!gflags[0x016E])) {
 			0xFE9C->item_say("@Surprise!@");
-			0xFFCA->set_schedule_type(0x000F);
+			0xFFCA->set_schedule_type(WAIT);
 			Func097F(0xFFCA, "@Hello, there...!@", 0x0002);
 			0xFFCA->Func07D2();
 			var0005 = script 0xFFCA after 7 ticks {
@@ -37541,7 +37615,7 @@ void Func0436 object#(0x436) () {
 			0xFE9C->item_say("@Greetings, noble lady!@");
 			0xFFCA->Func07D1();
 			Func097F(0xFFCA, (("@At thy service, " + var0000) + ".@"), 0x0005);
-			0xFFCA->set_schedule_type(0x0003);
+			0xFFCA->set_schedule_type(TALK);
 		}
 	}
 	if (event == SCRIPTED) {
@@ -37597,7 +37671,7 @@ void Func0436 object#(0x436) () {
 			}
 			0xFFCA->set_item_flag(MET);
 		} else if (gflags[0x015E] == true) {
-			0xFFCA->set_schedule_type(0x0000);
+			0xFFCA->set_schedule_type(IN_COMBAT);
 			0xFFCA->set_attack_mode(0x0007);
 			say("\"Thou hast found me out! The Oracle is a fraud!\"");
 			abort;
@@ -37864,7 +37938,7 @@ void Func0437 object#(0x437) () {
 		var0005 = UI_get_party_list2();
 		for (var0008 in var0005 with var0006 to var0007) {
 			var0009 = var0008->get_schedule_type();
-			if (var0008->get_schedule_type() == 0x000F) {
+			if (var0008->get_schedule_type() == WAIT) {
 				var0000 += 0x0001;
 			}
 		}
@@ -37885,7 +37959,7 @@ void Func0437 object#(0x437) () {
 			var0008->remove_npc();
 			var0005 = UI_get_party_list2();
 			for (var0008 in var0005 with var000C to var000D) {
-				var0008->set_schedule_type(0x001F);
+				var0008->set_schedule_type(FOLLOW_AVATAR);
 				var0008->move_object([0x03A9, (0x06F1 + (var000B * 0x0002)), 0x0006]);
 				var0000 = script var0008 {
 					nohalt;
@@ -37916,7 +37990,7 @@ void Func0437 object#(0x437) () {
 					actor frame kneeling;
 					actor frame sleeping;
 				};
-				var0008->set_schedule_type(0x000F);
+				var0008->set_schedule_type(WAIT);
 				var0010 = var0008->get_object_position();
 				var0010[0x0001] -= var0010[0x0003] / 0x0002;
 				var0010[0x0002] -= var0010[0x0003] / 0x0002;
@@ -37926,7 +38000,7 @@ void Func0437 object#(0x437) () {
 		}
 		var0008 = false;
 		for (var0013 in var0005 with var0011 to var0012) {
-			if (var0013->npc_nearby() && ((!(var0013->get_schedule_type() == 0x000F)) && (!var0013->get_item_flag(SI_ZOMBIE)))) {
+			if (var0013->npc_nearby() && ((!(var0013->get_schedule_type() == WAIT)) && (!var0013->get_item_flag(SI_ZOMBIE)))) {
 				var0008 = var0013;
 			}
 		}
@@ -37948,7 +38022,7 @@ void Func0437 object#(0x437) () {
 				gflags[0x0007] = true;
 				var0010 = 0xFE9C->get_object_position();
 				0xFE9C->set_item_flag(DONT_MOVE);
-				0xFE9C->set_schedule_type(0x000F);
+				0xFE9C->set_schedule_type(WAIT);
 				var0010[0x0001] -= var0010[0x0003] / 0x0002;
 				var0010[0x0002] -= var0010[0x0003] / 0x0002;
 				UI_sprite_effect(0x0017, var0010[0x0001], var0010[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -37982,12 +38056,12 @@ void Func0437 object#(0x437) () {
 			0xFE9C->item_say("@Lady!@");
 			item->Func07D1();
 			Func097F(item, "@Avert thine eyes!@", 0x0002);
-			set_schedule_type(0x0003);
+			set_schedule_type(TALK);
 		} else {
 			0xFE9C->item_say("@Greetings, Lady.@");
 			0xFFC9->Func07D1();
 			Func097F(0xFFC9, (("@Greetings, " + var0001) + ".@"), 0x0002);
-			0xFFC9->set_schedule_type(0x0003);
+			0xFFC9->set_schedule_type(TALK);
 			if (gflags[0x015C] && (!(gflags[0x0173] || (gflags[0x0175] || gflags[0x0174])))) {
 				0xFFCB->si_path_run_usecode(0xFFC9->get_object_position(), SI_PATH_SUCCESS, 0xFFCB->get_npc_object(), Func0435, false);
 			}
@@ -38058,14 +38132,14 @@ void Func0437 object#(0x437) () {
 					0x0000->set_conversation_slot();
 					say("\"This is blasphemy! Jorvin, lock that criminal away and call for a speedy trial. Let this intruder be executed, even as Beast British slew our forefathers during his conquest of Sosaria!\"");
 					UI_remove_npc_face0();
-					0xFFCB->set_schedule_type(0x000F);
+					0xFFCB->set_schedule_type(WAIT);
 					0xFFCB->Func07D2();
 					var0000 = script 0xFE9C after 0 ticks {
 						nohalt;
 						call Func0437;
 					};
 					Func097F(0xFFCB, "@Take this!@", 0x0000);
-					0xFFC9->set_new_schedules(0x0000, 0x0014, [0x0000, 0x0000]);
+					0xFFC9->set_new_schedules(MIDNIGHT, SHY, [0x0000, 0x0000]);
 					0xFFC9->run_schedule();
 					Func097F(0xFFC9, "@Blasphemer!@", 0x0005);
 					var0000 = 0x0003;
@@ -38276,7 +38350,7 @@ void Func0438 object#(0x438) () {
 		0xFE9C->item_say("@A moment if thou wilt, sir.@");
 		0xFFC8->Func07D1();
 		Func097F(0xFFC8, (("@At thy service, " + var0000) + ".@"), 0x0002);
-		0xFFC8->set_schedule_type(0x0003);
+		0xFFC8->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFC8->run_schedule();
@@ -38490,7 +38564,7 @@ void Func0438 object#(0x438) () {
 				say("\"Perhaps our good name was degraded by those wishing to stop our ministering... But that shows a lack of Trust.\"");
 				say("\"I must meditate on this. Mine Inner Voice will no doubt provide an answer for such horrible news.\"");
 				Func097F(0xFFC8, "@This cannot be!@", 0x0000);
-				0xFFC8->set_schedule_type(0x0014);
+				0xFFC8->set_schedule_type(SHY);
 				abort;
 
 			case "bye":
@@ -38523,7 +38597,7 @@ void Func0439 object#(0x439) () {
 		0xFE9C->item_say("@Greetings.@");
 		0xFFC7->Func07D1();
 		Func097F(0xFFC7, "@What dost thou want?@", 0x0005);
-		0xFFC7->set_schedule_type(0x0003);
+		0xFFC7->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFC7->run_schedule();
@@ -38577,13 +38651,13 @@ void Func0439 object#(0x439) () {
 
 			case "assassin":
 				say("\"Thou art hard to catch, Avatar. But now thou must die!\"");
-				0xFFC7->set_schedule_type(0x0000);
+				0xFFC7->set_schedule_type(IN_COMBAT);
 				0xFE9C->set_oppressor(0xFFC7);
 				abort;
 
 			case "Iolo the Mad":
 				say("\"He is Master of Fawn now, Avatar. Thou wouldst be wise to leave while it amuses him to let ye live.\" *\"He might grant to me that fine wench, Alyssand, if I bring him thine head...\"");
-				0xFFC7->set_schedule_type(0x0000);
+				0xFFC7->set_schedule_type(IN_COMBAT);
 				0xFE9C->set_oppressor(0xFFC7);
 				abort;
 
@@ -38661,7 +38735,7 @@ void Func043A object#(0x43A) () {
 				call Func043A;
 			};
 			var0007 = 0xFFC6->approach_avatar(0x0078, 0x0028);
-			0xFFC6->set_schedule_type(0x0003);
+			0xFFC6->set_schedule_type(TALK);
 			Func097F(0xFFC6, "@Hold there, old man!@", 0x0002);
 		} else {
 			var0007 = script Func09A0(0x0005, 0x0001) after 50 ticks {
@@ -38680,7 +38754,7 @@ void Func043A object#(0x43A) () {
 		0xFE9C->item_say("@A word with thee, friend.@");
 		0xFFC6->Func07D1();
 		Func097F(0xFFC6, "@If thou art paying...@", 0x0005);
-		0xFFC6->set_schedule_type(0x0003);
+		0xFFC6->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFC6->run_schedule();
@@ -38699,7 +38773,7 @@ void Func043A object#(0x43A) () {
 			UI_remove_npc_face0();
 			UI_remove_npc_face1();
 			gflags[0x018B] = true;
-			0xFFC6->set_schedule_type(0x000F);
+			0xFFC6->set_schedule_type(WAIT);
 			Func097F(0xFFFD, "@Hmmmm...@", 0x0000);
 			Func097F(0xFFD0, "@Please sing...@", 0x0002);
 			Func097F(0xFFCA, "@Sing of Beauty!@", 0x0004);
@@ -38716,7 +38790,7 @@ void Func043A object#(0x43A) () {
 		if ((UI_get_timer(0x000C) < 0x0003) && gflags[0x0165]) {
 			say("\"Go away, I'm not drunk enough yet.\"");
 			Func097F(0xFFC6, "@A drink!@", 0x0000);
-			0xFFC6->set_schedule_type(0x001A);
+			0xFFC6->set_schedule_type(EAT_AT_INN);
 			abort;
 		}
 		gflags[0x0165] = false;
@@ -39282,13 +39356,13 @@ void Func043A object#(0x43A) () {
 								0x0000->set_conversation_slot();
 								say("\"Not enough filari, no drink. No drink, no stories. Well, thou knowest where ta find me, if thou dost wish ta hear me stories.\"");
 								Func097F(0xFFC6, "@I'm thirsty...@", 0x0000);
-								0xFFC6->set_schedule_type(0x001A);
+								0xFFC6->set_schedule_type(EAT_AT_INN);
 								abort;
 							}
 						} else {
 							say("\"Changed thy mind, aye? No drink, no stories. Well, thou knowest where ta find me, if thou dost wish ta hear me stories.\"");
 							Func097F(0xFFC6, "@I'm thirsty...@", 0x0000);
-							0xFFC6->set_schedule_type(0x001A);
+							0xFFC6->set_schedule_type(EAT_AT_INN);
 							abort;
 						}
 						0x0000->set_conversation_slot();
@@ -39298,7 +39372,7 @@ void Func043A object#(0x43A) () {
 				} else {
 					say("\"No drink, no stories! Thou knowest where ta find me, if thou dost wish ta hear me stories.\"");
 					Func097F(0xFFC6, "@I'm thirsty...@", 0x0000);
-					0xFFC6->set_schedule_type(0x001A);
+					0xFFC6->set_schedule_type(EAT_AT_INN);
 					abort;
 				}
 				remove("Fawn ale");
@@ -39377,7 +39451,7 @@ void Func043A object#(0x43A) () {
 				gflags[0x0165] = true;
 				UI_set_timer(0x000C);
 				Func097F(0xFFC6, "@Bottom of the sea!@", 0x0000);
-				0xFFC6->set_schedule_type(0x000C);
+				0xFFC6->set_schedule_type(WANDER);
 				abort;
 
 			case "pinecone" (remove):
@@ -39479,7 +39553,7 @@ void Func043B object#(0x43B) () {
 		0xFE9C->item_say("@Excuse me, friend.@");
 		0xFFC5->Func07D1();
 		Func097F(0xFFC5, "@How may I be of service?@", 0x0002);
-		0xFFC5->set_schedule_type(0x0003);
+		0xFFC5->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFC5->clear_item_say();
@@ -39491,7 +39565,7 @@ void Func043B object#(0x43B) () {
 			0xFFC5->set_item_flag(MET);
 			gflags[0x0168] = true;
 			0xFE9C->clear_item_flag(DONT_MOVE);
-			0xFFC5->set_new_schedules([0x0002, 0x0005, 0x0006, 0x0007], [0x001A, 0x0006, 0x001A, 0x000E], [0x0479, 0x076B, 0x04BC, 0x0741, 0x0479, 0x076B, 0x049D, 0x0752]);
+			0xFFC5->set_new_schedules([DAWN, AFTERNOON, EVENING, NIGHT], [0x001A, FARM, EAT_AT_INN, SLEEP], [0x0479, 0x076B, 0x04BC, 0x0741, 0x0479, 0x076B, 0x049D, 0x0752]);
 			0xFFC5->run_schedule();
 			say("\"Oh, please, ",
 				var0000,
@@ -39515,7 +39589,7 @@ void Func043B object#(0x43B) () {
 				var000B = 0xFE9C->find_nearby(0x017D, 0x0014, 0x0000);
 				for (var000E in var000B with var000C to var000D) {
 					if (var000E->get_npc_id() == 0x0001) {
-						var000E->set_schedule_type(0x0003);
+						var000E->set_schedule_type(TALK);
 					}
 				}
 				0xFFC5->si_path_run_usecode(var0007, PROXIMITY, item, Func043B, false);
@@ -39537,7 +39611,7 @@ void Func043B object#(0x43B) () {
 					var000B = 0xFE9C->find_nearby(0x017D, 0x0014, 0x0000);
 					for (var000E in var000B with var000F to var0010) {
 						if (var000E->get_npc_id() == 0x0001) {
-							var000E->set_schedule_type(0x0003);
+							var000E->set_schedule_type(TALK);
 						}
 					}
 					0xFFC5->si_path_run_usecode(var0007, PROXIMITY, item, Func043B, false);
@@ -39552,7 +39626,7 @@ void Func043B object#(0x43B) () {
 				var000B = 0xFE9C->find_nearby(0x017D, 0x0014, 0x0000);
 				for (var000E in var000B with var0011 to var0012) {
 					if (var000E->get_npc_id() == 0x0001) {
-						var000E->set_schedule_type(0x0003);
+						var000E->set_schedule_type(TALK);
 					}
 				}
 				0xFFC5->si_path_run_usecode(var0007, PROXIMITY, item, Func043B, false);
@@ -39582,7 +39656,7 @@ void Func043B object#(0x43B) () {
 			var000B = 0xFE9C->find_nearby(0x017D, 0x0014, 0x0000);
 			for (var000E in var000B with var0013 to var0014) {
 				if (var000E->get_npc_id() == 0x0001) {
-					var000E->set_schedule_type(0x0003);
+					var000E->set_schedule_type(TALK);
 				}
 			}
 			abort;
@@ -39905,7 +39979,7 @@ void Func043C object#(0x43C) () {
 		0xFE9C->item_say("@Greetings, sir.@");
 		0xFFC4->Func07D1();
 		Func097F(0xFFC4, (("@Hello, " + var0000) + ".@"), 0x0005);
-		0xFFC4->set_schedule_type(0x0003);
+		0xFFC4->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFC4->run_schedule();
@@ -40131,7 +40205,7 @@ void Func043D object#(0x43D) () {
 				call Func043D;
 			};
 			var0008 = 0xFFC3->approach_avatar(0x0078, 0x0028);
-			0xFFC3->set_schedule_type(0x0009);
+			0xFFC3->set_schedule_type(HOUND);
 		} else {
 			var0008 = script Func09A0(0x0005, 0x0001) after 100 ticks {
 				nohalt;
@@ -40143,7 +40217,7 @@ void Func043D object#(0x43D) () {
 		0xFE9C->item_say("@A moment, if thou wilt.@");
 		0xFFC3->Func07D1();
 		Func097F(0xFFC3, "@At thy service.@", 0x0005);
-		0xFFC3->set_schedule_type(0x0003);
+		0xFFC3->set_schedule_type(TALK);
 	}
 	if ((event == PROXIMITY) && (gflags[0x01B2] && (!gflags[0x018F]))) {
 		var0009 = UI_get_random(0x0006);
@@ -40166,7 +40240,7 @@ void Func043D object#(0x43D) () {
 			var000A = "@Do not look now...@";
 		}
 		var000B = Func0992(0x0001, var000A, 0x0000, true);
-		0xFFC3->set_schedule_type(0x0009);
+		0xFFC3->set_schedule_type(HOUND);
 		gflags[0x018E] = true;
 	}
 	if (event == STARTED_TALKING) {
@@ -40215,7 +40289,7 @@ void Func043D object#(0x43D) () {
 				Func097F(0xFFC3, "@Arrogant strangers!@", 0x0000);
 				gflags[0x018F] = true;
 				0xFFC3->revert_schedule();
-				0xFFC3->set_schedule_type(0x0014);
+				0xFFC3->set_schedule_type(SHY);
 				break;
 
 			case "storms" (remove):
@@ -40437,7 +40511,7 @@ void Func043E object#(0x43E) () {
 		Func097F(0xFE9C, "Hello, sir.", 0x0000);
 		0xFFC2->Func07D1();
 		Func097F(0xFFC2, "Greetings.", 0x0002);
-		0xFFC2->set_schedule_type(0x0003);
+		0xFFC2->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFC2->run_schedule();
@@ -40607,7 +40681,7 @@ void Func043E object#(0x43E) () {
 	}
 	if (event == PROXIMITY) {
 		0xFFC2->clear_item_say();
-		if (0xFFB9->npc_nearby() && (0xFFB9->get_schedule_type() == 0x0010)) {
+		if (0xFFB9->npc_nearby() && (0xFFB9->get_schedule_type() == MAJOR_SIT)) {
 			0xFFB9->clear_item_say();
 			var0004 = UI_direction_from(0xFFC2, 0xFFB9);
 			var0004 = script 0xFFC2 {
@@ -40653,7 +40727,7 @@ void Func043E object#(0x43E) () {
 		var0006 = 0xFFC2->find_nearby(0x037E, 0x0004, 0x0000);
 		if (var0006) {
 			var0008 = UI_direction_from(0xFFC2, var0006);
-			0xFFC2->set_schedule_type(0x000F);
+			0xFFC2->set_schedule_type(WAIT);
 			var0004 = script item {
 				nohalt;
 				face var0008;
@@ -40790,11 +40864,11 @@ void Func043F object#(0x43F) () {
 		0xFFC1->Func07D1();
 		if (gflags[0x0090] && (!gflags[0x004C])) {
 			Func097F(0xFFC1, "@Away with thee!@", 0x0000);
-			0xFFC1->set_schedule_type(0x0014);
+			0xFFC1->set_schedule_type(SHY);
 			abort;
 		}
 		Func097F(0xFFC1, "@Greetings.@", 0x0002);
-		0xFFC1->set_schedule_type(0x0003);
+		0xFFC1->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFC1->run_schedule();
@@ -40825,7 +40899,7 @@ void Func043F object#(0x43F) () {
 		if (gflags[0x00BB] || gflags[0x00BC]) {
 			add("trainer");
 		}
-		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != 0x000F)) {
+		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
 			add("brown bottle");
 		}
 		if (gflags[0x0048] && (!0xFFB4->get_item_flag(DEAD))) {
@@ -41190,13 +41264,13 @@ void Func043F object#(0x43F) () {
 					}
 					if (gflags[0x0038] && (!0xFFBB->get_item_flag(DEAD))) {
 						0xFFBB->move_object([0x0446, 0x09C5, 0x0000]);
-						0xFFBB->set_new_schedules([0x0007, 0x0002], [0x000E, 0x0007], [0x0446, 0x09C5, 0x0446, 0x09C5]);
+						0xFFBB->set_new_schedules([NIGHT, DAWN], [SLEEP, TEND_SHOP], [0x0446, 0x09C5, 0x0446, 0x09C5]);
 					}
 					if (gflags[0x0092] && (!0xFFB3->get_item_flag(DEAD))) {
 						0xFFB3->move_object([0x0448, 0x09D6, 0x0000]);
-						0xFFB3->set_new_schedules([0x0007, 0x0002], [0x000E, 0x0007], [0x0448, 0x09D6, 0x0448, 0x09D6]);
+						0xFFB3->set_new_schedules([NIGHT, DAWN], [SLEEP, TEND_SHOP], [0x0448, 0x09D6, 0x0448, 0x09D6]);
 					}
-					0xFFC1->set_new_schedules([0x0000, 0x0003, 0x0004, 0x0005, 0x0006, 0x0007], [0x000E, 0x001B, 0x0007, 0x001B, 0x0010, 0x001A], [0x03B1, 0x0A49, 0x03D7, 0x0A8A, 0x03CE, 0x09FF, 0x039B, 0x0A76, 0x03B2, 0x0A05, 0x041C, 0x0A57]);
+					0xFFC1->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, EVENING, NIGHT], [SLEEP, 0x001B, TEND_SHOP, DUEL, MAJOR_SIT, EAT_AT_INN], [0x03B1, 0x0A49, 0x03D7, 0x0A8A, 0x03CE, 0x09FF, 0x039B, 0x0A76, 0x03B2, 0x0A05, 0x041C, 0x0A57]);
 					var0014 = 0x0003;
 					while (var0014 > 0x0000) {
 						var0015 = 0xFE9C->get_object_position();
@@ -41215,7 +41289,7 @@ void Func043F object#(0x43F) () {
 					var0018 = 0xFFC1->find_nearby(0x00E4, 0x001E, 0x0000);
 					if (var0018) {
 						for (var001B in var0018 with var0019 to var001A) {
-							var001B->set_schedule_type(0x0003);
+							var001B->set_schedule_type(TALK);
 							var001B->set_npc_id(0x0005);
 						}
 					}
@@ -41226,7 +41300,7 @@ void Func043F object#(0x43F) () {
 							say("\"Do not worry -- I shall personally see that Marsten is hunted down like the dog he is.\"");
 						}
 						Func097F(0xFFC1, "@Pikemen!@", 0x0000);
-						0xFFC1->set_schedule_type(0x000A);
+						0xFFC1->set_schedule_type(STANDTHERE);
 						Func097F(var0018[0x0001], "@Yes, lord!@", 0x0002);
 						abort;
 					}
@@ -41236,7 +41310,7 @@ void Func043F object#(0x43F) () {
 						say("\"Do not worry, Avatar! I shall order the Pikemen to place the traitor under arrest!\"");
 					}
 					Func097F(0xFFC1, "@Pikemen!@", 0x0000);
-					0xFFC1->set_schedule_type(0x0014);
+					0xFFC1->set_schedule_type(SHY);
 					abort;
 				}
 				var0010 = Func0992(0xFFFE, "@We did not bring it with us.@", "@I did not bring it.@", false);
@@ -41306,7 +41380,7 @@ void Func0440 object#(0x440) () {
 			Func097F(0xFFC0, "@Help!@", 0x0000);
 			UI_play_music(0x0034, Func09A0(0x0005, 0x0001));
 			if (var0000) {
-				var0000->set_schedule_type(0x001D);
+				var0000->set_schedule_type(PATROL);
 			}
 			UI_ambient_light(0x0000);
 		}
@@ -41345,7 +41419,7 @@ void Func0440 object#(0x440) () {
 		0xFFC0->set_npc_id(0x0000);
 		gflags[0x002A] = false;
 	}
-	if ((event == PROXIMITY) && (0xFFC0->get_schedule_type() == 0x0009)) {
+	if ((event == PROXIMITY) && (0xFFC0->get_schedule_type() == HOUND)) {
 		if (UI_get_random(0x000A) < 0x0007) {
 			abort;
 		}
@@ -41385,7 +41459,7 @@ void Func0440 object#(0x440) () {
 			Func097F(0xFFC0, "@Glad to see thee!@", 0x0002);
 		}
 		0xFFC0->Func07D1();
-		0xFFC0->set_schedule_type(0x0003);
+		0xFFC0->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFC0->run_schedule();
@@ -41487,8 +41561,8 @@ void Func0440 object#(0x440) () {
 					say("\"Oh, I hope that thou dost attempt the Knight's Test! And when thou dost, please come back to tell me about it!\"");
 					Func097F(0xFFC0, "@Slay a Goblin!@", 0x0002);
 				}
-				if (0xFFC0->get_schedule_type() == 0x0009) {
-					0xFFC0->set_schedule_type(0x0014);
+				if (0xFFC0->get_schedule_type() == HOUND) {
+					0xFFC0->set_schedule_type(SHY);
 				}
 				break;
 		}
@@ -41559,13 +41633,13 @@ void Func0441 object#(0x441) () {
 		Func097F(0xFE9C, "@Pardon me....@", 0x0000);
 		0xFFBF->Func07D1();
 		Func097F(0xFFBF, (("@Yes, " + var0001) + "?@"), 0x0002);
-		0xFFBF->set_schedule_type(0x0003);
+		0xFFBF->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFBF->run_schedule();
 		0xFFBF->clear_item_say();
 		var0005 = false;
-		if (0xFFBF->get_schedule_type() == 0x0007) {
+		if (0xFFBF->get_schedule_type() == TEND_SHOP) {
 			var0005 = true;
 		}
 		0xFFBF->show_npc_face0(0x0000);
@@ -41696,7 +41770,7 @@ void Func0441 object#(0x441) () {
 				fallthrough;
 
 			case "buy":
-				if (0xFFBF->get_schedule_type() == 0x0007) {
+				if (0xFFBF->get_schedule_type() == TEND_SHOP) {
 					say("\"Dost thou wish to buy one of my pelts or cloaks?\"");
 					if (Func0955()) {
 						Func0811();
@@ -41790,14 +41864,14 @@ void Func0442 object#(0x442) () {
 			0xFFBE->set_item_flag(SI_TOURNAMENT);
 			0xFFBE->set_alignment(0x0002);
 			Func097F(0xFFBE, "@Die!@", 0x0000);
-			0xFFBE->set_new_schedules(0x0000, 0x0000, [var0000[0x0001], var0000[0x0002]]);
+			0xFFBE->set_new_schedules(MIDNIGHT, IN_COMBAT, [var0000[0x0001], var0000[0x0002]]);
 			0xFFBE->run_schedule();
 			0xFE9C->set_oppressor(0xFFBE);
 			abort;
 		}
 	}
 	if ((event == DEATH) && (!0xFFBE->get_item_flag(MET))) {
-		0xFFBE->set_schedule_type(0x000F);
+		0xFFBE->set_schedule_type(WAIT);
 		0xFFBE->set_item_flag(DEAD);
 		var0002 = script 0xFFBE {
 			actor frame sleeping;
@@ -41853,7 +41927,7 @@ void Func0443 object#(0x443) () {
 	var0000 = UI_part_of_day();
 	var0001 = Func097D(0xFE9B, 0x0001, 0x034A, 0xFE99, 0x000F);
 	var0002 = Func0954();
-	if ((var0000 > 0x0001) || (var0000 < 0x0006)) {
+	if ((var0000 > EARLY) || (var0000 < EVENING)) {
 		var0000 = "day";
 	} else {
 		var0000 = "evening";
@@ -41871,7 +41945,7 @@ void Func0443 object#(0x443) () {
 		0xFE9C->item_say("@Greetings, milady.@");
 		0xFFBD->Func07D1();
 		Func097F(0xFFBD, "@Greetings to thee.@", 0x0002);
-		0xFFBD->set_schedule_type(0x0003);
+		0xFFBD->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFBD->clear_item_say();
@@ -41894,10 +41968,10 @@ void Func0443 object#(0x443) () {
 					say("\"This is the very same practice sword that Cantra used every day.\"");
 					say("\"Now that thou hast my daughter's sword, thou shouldst find one of the legendary Hounds of Doskar. They will be able to sniff Cantra's essence from the sword, and then track her to anywhere in the Serpent Isle.\"");
 					say("\"The only dilemma thou dost face now is to find one of the Hounds of Doskar. I do not know where one may be found, but I foresee that thou must find the Hound before thou canst rescue my daughter.\"");
-					0xFFBD->set_schedule_type(0x0014);
+					0xFFBD->set_schedule_type(SHY);
 				} else {
 					say("\"Then mine only daughter Cantra shall soon be dead... or worse. Leave thou me now.\"");
-					0xFFBD->set_schedule_type(0x0014);
+					0xFFBD->set_schedule_type(SHY);
 					Func097F(0xFFBD, "@Oh...@", 0x0000);
 					abort;
 				}
@@ -42025,7 +42099,7 @@ void Func0443 object#(0x443) () {
 						say("\"What I have to show thee should quell any doubts thou mayest yet have.\"");
 					}
 					gflags[0x0095] = true;
-					if (0xFFBD->get_schedule_type() != 0x001D) {
+					if (0xFFBD->get_schedule_type() != PATROL) {
 						say("\"Go to mine home. There thou shalt find a crystal ball. Gaze into it, and let thy mind be clear.\"");
 					} else {
 						say("\"Look into my crystal ball. Thou shalt find it on the table within mine home. Let thy mind be clear.\"");
@@ -42454,7 +42528,7 @@ void Func0443 object#(0x443) () {
 				if (gflags[0x007B] && (!gflags[0x007C])) {
 					var000B &= "fish-net stockings";
 				}
-				if (gflags[0x0045] && (0xFFB4->get_schedule_type() != 0x000F)) {
+				if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
 					var000B &= "brown bottle";
 				}
 				if (var000B == []) {
@@ -42886,7 +42960,7 @@ void Func0444 object#(0x444) () {
 	var var000E;
 
 	var0000 = false;
-	if (0xFFBC->get_schedule_type() == 0x0007) {
+	if (0xFFBC->get_schedule_type() == TEND_SHOP) {
 		var0000 = true;
 	}
 	var0001 = Func0954();
@@ -42908,12 +42982,12 @@ void Func0444 object#(0x444) () {
 			call Func01D0;
 		};
 	}
-	if ((event == DOUBLECLICK) && (0xFFBC->get_schedule_type() != 0x000A)) {
+	if ((event == DOUBLECLICK) && (0xFFBC->get_schedule_type() != STANDTHERE)) {
 		0xFE9C->item_say("@Hello, sir.@");
 		0xFFBC->Func07D1();
 		if (var0000) {
 			Func097F(0xFFBC, "@Hello.@", 0x0002);
-			0xFFBC->set_schedule_type(0x000A);
+			0xFFBC->set_schedule_type(STANDTHERE);
 			0xFFBC->Func07D2();
 			var0009 = script 0xFFBC after 7 ticks {
 				nohalt;
@@ -42921,7 +42995,7 @@ void Func0444 object#(0x444) () {
 			};
 		} else {
 			Func097F(0xFFBC, "@Hello.@", 0x0002);
-			0xFFBC->set_schedule_type(0x0003);
+			0xFFBC->set_schedule_type(TALK);
 		}
 	}
 	if (event == SCRIPTED) {
@@ -42930,7 +43004,7 @@ void Func0444 object#(0x444) () {
 	if (event == STARTED_TALKING) {
 		0xFFBC->run_schedule();
 		0xFFBC->clear_item_say();
-		if (0xFFBC->get_schedule_type() == 0x0007) {
+		if (0xFFBC->get_schedule_type() == TEND_SHOP) {
 			var0000 = true;
 		}
 		0xFFBC->show_npc_face0(0x0000);
@@ -42981,7 +43055,7 @@ void Func0444 object#(0x444) () {
 				if (gflags[0x00A6]) {
 					add("ruins");
 				}
-				if (gflags[0x0045] && (0xFFB4->get_schedule_type() != 0x000F)) {
+				if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
 					add("brown bottle");
 				}
 				add("change subject");
@@ -43327,13 +43401,13 @@ void Func0445 object#(0x445) () {
 					var0011 = UI_create_new_object2(0x00E4, [(var000F[0x0001] - 0x0001), (var000F[0x0002] - 0x0001), var000F[0x0003]]);
 					var0010->set_alignment(0x0000);
 					var0011->set_alignment(0x0000);
-					var0010->set_schedule_type(0x0003);
-					var0011->set_schedule_type(0x0003);
+					var0010->set_schedule_type(TALK);
+					var0011->set_schedule_type(TALK);
 					var0010->set_npc_id(0x000D);
 					var0011->set_npc_id(0x000D);
 				}
 				Func09AC(0xFFFF, 0xFFFF, 0x0000, 0x0003);
-				0xFFFF->set_schedule_type(0x0003);
+				0xFFFF->set_schedule_type(TALK);
 			}
 			abort;
 		}
@@ -43357,7 +43431,7 @@ void Func0445 object#(0x445) () {
 		0xFE9C->item_say("@Greetings, sir.@");
 		0xFFBB->Func07D1();
 		if (gflags[0x0038]) {
-			0xFFBB->set_schedule_type(0x000F);
+			0xFFBB->set_schedule_type(WAIT);
 			Func097F(0xFFBB, "@What!@", 0x0002);
 			0xFFBB->Func07D2();
 			var000E = script 0xFFBB after 7 ticks {
@@ -43367,7 +43441,7 @@ void Func0445 object#(0x445) () {
 			abort;
 		}
 		Func097F(0xFFBB, "@Hello.@", 0x0002);
-		0xFFBB->set_schedule_type(0x0003);
+		0xFFBB->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFBB->run_schedule();
@@ -43424,10 +43498,10 @@ labelFunc0445_0257:
 			if (gflags[0x00A9] && (!gflags[0x0078])) {
 				add("enchanter");
 			}
-			if ((0xFFBB->get_schedule_type() == 0x0007) && (!gflags[0x0038])) {
+			if ((0xFFBB->get_schedule_type() == TEND_SHOP) && (!gflags[0x0038])) {
 				add("Hall of Monitor");
 			}
-			if (gflags[0x0045] && (0xFFB4->get_schedule_type() != 0x000F)) {
+			if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
 				add("brown bottle");
 			}
 		} while (false);
@@ -43856,9 +43930,9 @@ labelFunc0445_0257:
 					Func097F(0xFFBB, "@There is no spy!@", 0x0000);
 					Func097F(0xFFC1, "@I am not convinced...@", 0x0004);
 					Func097F(0xFF6A, "@Nor I!@", 0x0008);
-					0xFFBB->set_schedule_type(0x0014);
-					0xFFC1->set_schedule_type(0x0014);
-					0xFF6A->set_schedule_type(0x0014);
+					0xFFBB->set_schedule_type(SHY);
+					0xFFC1->set_schedule_type(SHY);
+					0xFF6A->set_schedule_type(SHY);
 					var000E = script Func09A0(0x0005, 0x0001) {
 						nohalt;
 						call Func0445;
@@ -43970,11 +44044,11 @@ void Func0446 object#(0x446) () {
 			call Func01D0;
 		};
 	}
-	if ((event == DOUBLECLICK) && (0xFFBA->get_schedule_type() != 0x000F)) {
+	if ((event == DOUBLECLICK) && (0xFFBA->get_schedule_type() != WAIT)) {
 		var0002 = 0xFFBA->get_object_position();
-		if (gflags[0x0054] && ((0xFFBA->get_schedule_type() == 0x000E) && ((var0002[0x0001] > 0x042F) && ((var0002[0x0001] < 0x043F) && ((var0002[0x0002] > 0x0A50) && (var0002[0x0002] < 0x0A5F)))))) {
+		if (gflags[0x0054] && ((0xFFBA->get_schedule_type() == SLEEP) && ((var0002[0x0001] > 0x042F) && ((var0002[0x0001] < 0x043F) && ((var0002[0x0002] > 0x0A50) && (var0002[0x0002] < 0x0A5F)))))) {
 			0xFFBA->Func07D2();
-			0xFFBA->set_schedule_type(0x000F);
+			0xFFBA->set_schedule_type(WAIT);
 			Func097F(0xFFBA, "@Yes, love?@", 0x0002);
 			var0000 = script 0xFFBA after 10 ticks {
 				nohalt;
@@ -43990,14 +44064,14 @@ void Func0446 object#(0x446) () {
 				Func097F(0xFFBA, "@Yes, handsome?@", 0x0002);
 			}
 			Func097F(0xFFBA, "Hello.", 0x0002);
-			0xFFBA->set_schedule_type(0x0003);
+			0xFFBA->set_schedule_type(TALK);
 		}
 	}
 	if (event == STARTED_TALKING) {
 		0xFFBA->run_schedule();
 		0xFFBA->clear_item_say();
 		0xFFBA->show_npc_face0(0x0000);
-		if (gflags[0x0054] && (0xFFBA->get_schedule_type() == 0x000E)) {
+		if (gflags[0x0054] && (0xFFBA->get_schedule_type() == SLEEP)) {
 			say("\"Oh, darling! Let us meet in my bedroom...\"");
 			Func097F(0xFFBA, "@I am so sleepy...@", 0x0000);
 			0xFFBA->run_schedule();
@@ -44037,7 +44111,7 @@ void Func0446 object#(0x446) () {
 		if (gflags[0x004A] && (!gflags[0x0091])) {
 			add("banquet stew");
 		}
-		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != 0x000F)) {
+		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
 			add("brown bottle");
 		}
 		if (gflags[0x0048] && (!(0xFFB4->get_item_flag(DEAD) && (!(gflags[0x0038] && (!gflags[0x0092])))))) {
@@ -44073,7 +44147,7 @@ void Func0446 object#(0x446) () {
 
 			case "duties" (remove):
 				say("\"I run the Slashing Sword, the best pub in Monitor. Thou mightest think that cooking is not a very Knightly activity, but I assure thee, feeding the warriors in this town is indeed a Quest of Courage!\"");
-				if (0xFFBA->get_schedule_type() == 0x0017) {
+				if (0xFFBA->get_schedule_type() == WAITER) {
 					say("\"If thou dost want anything to eat or drink, thou hast merely to say so, ",
 						var0001,
 						".\"");
@@ -44089,7 +44163,7 @@ void Func0446 object#(0x446) () {
 				fallthrough;
 
 			case "buy":
-				if (0xFFBA->get_schedule_type() == 0x0017) {
+				if (0xFFBA->get_schedule_type() == WAITER) {
 					say("\"What wouldst thou like, ",
 						var0001,
 						"?\"");
@@ -44426,13 +44500,13 @@ void Func0447 object#(0x447) () {
 		0xFE9C->item_say("@Sir Knight!@");
 		0xFFB9->Func07D1();
 		Func097F(0xFFB9, "@Eh?@", 0x0000);
-		if ((0xFFB9->get_schedule_type() == 0x0010) && 0xFFC2->npc_nearby()) {
+		if ((0xFFB9->get_schedule_type() == MAJOR_SIT) && 0xFFC2->npc_nearby()) {
 			var0008 = script 0xFFB9 after 5 ticks {
 				nohalt;
 				call Func0447;
 			};
 		} else {
-			0xFFB9->set_schedule_type(0x0003);
+			0xFFB9->set_schedule_type(TALK);
 		}
 	}
 	if (event == STARTED_TALKING) {
@@ -44470,7 +44544,7 @@ void Func0447 object#(0x447) () {
 		if (gflags[0x00AC] && (!gflags[0x00B2])) {
 			add("new shield");
 		}
-		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != 0x000F)) {
+		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
 			add("brown bottle");
 		}
 		if (gflags[0x0048] && (!0xFFB4->get_item_flag(DEAD))) {
@@ -44563,7 +44637,7 @@ void Func0447 object#(0x447) () {
 				gflags[0x00B1] = true;
 				Func0849();
 				Func097F(0xFFB9, "@Damn thee!@", 0x0000);
-				0xFFB9->set_schedule_type(0x0014);
+				0xFFB9->set_schedule_type(SHY);
 				fallthrough;
 
 			case "braggart" (remove):
@@ -44576,7 +44650,7 @@ void Func0447 object#(0x447) () {
 				gflags[0x00AF] = true;
 				Func0849();
 				Func097F(0xFFB9, "@Curse thee!@", 0x0000);
-				0xFFB9->set_schedule_type(0x0014);
+				0xFFB9->set_schedule_type(SHY);
 				fallthrough;
 
 			case "repulsive" (remove):
@@ -44585,7 +44659,7 @@ void Func0447 object#(0x447) () {
 				gflags[0x00B0] = true;
 				Func0849();
 				Func097F(0xFFB9, "@Blast thee!@", 0x0000);
-				0xFFB9->set_schedule_type(0x0014);
+				0xFFB9->set_schedule_type(SHY);
 				fallthrough;
 
 			case "found shield" (remove):
@@ -44792,14 +44866,14 @@ void Func0448 object#(0x448) () {
 	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hello, there.@");
 		0xFFB8->Func07D1();
-		0xFFB8->set_schedule_type(0x0003);
+		0xFFB8->set_schedule_type(TALK);
 		Func097F(0xFFB8, "@Hello.@", 0x0002);
 		0xFFB8->clear_item_say();
 	}
 	if (event == STARTED_TALKING) {
 		0xFFB8->run_schedule();
 		var000A = false;
-		if (0xFFB8->get_schedule_type() == 0x0007) {
+		if (0xFFB8->get_schedule_type() == TEND_SHOP) {
 			var000A = true;
 		}
 		0xFFB8->show_npc_face0(0x0000);
@@ -44934,7 +45008,7 @@ void Func0448 object#(0x448) () {
 						0xFE9C->si_path_run_usecode(var0010, SCRIPTED, item, Func028C, false);
 						UI_set_path_failure(Func028C, item, SI_PATH_FAILURE);
 						UI_play_music(0x001D, Func09A0(0x0005, 0x0001));
-						0xFFB8->set_schedule_type(0x000F);
+						0xFFB8->set_schedule_type(WAIT);
 						abort;
 					}
 					if (var000C == "Will it hurt?") {
@@ -45015,7 +45089,7 @@ void Func0449 object#(0x449) () {
 		0xFE9C->item_say("@Greetings, sir.@");
 		0xFFB7->Func07D1();
 		Func097F(0xFFB7, "@What?@", 0x0002);
-		0xFFB7->set_schedule_type(0x0003);
+		0xFFB7->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFB7->run_schedule();
@@ -45272,7 +45346,7 @@ void Func044A object#(0x44A) () {
 			var0008 = Func0988(0xFFB6->get_npc_object(), var0008);
 			var0009 = [];
 			for (var000C in var0008 with var000A to var000B) {
-				if (var000C->get_schedule_type() == 0x001B) {
+				if (var000C->get_schedule_type() == DUEL) {
 					var0009 &= var000C;
 				}
 			}
@@ -45359,7 +45433,7 @@ void Func044A object#(0x44A) () {
 		0xFE9C->item_say("@Hail, Knight!@");
 		0xFFB6->Func07D1();
 		Func097F(0xFFB6, "@Yes?@", 0x0002);
-		0xFFB6->set_schedule_type(0x0003);
+		0xFFB6->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFB6->run_schedule();
@@ -45569,7 +45643,7 @@ void Func044B object#(0x44B) () {
 		} else {
 			Func097F(0xFFB5, "@It cannot be!@", 0x0002);
 		}
-		0xFFB5->set_schedule_type(0x0003);
+		0xFFB5->set_schedule_type(TALK);
 	}
 	if ((event == DEATH) && 0xFFB5->get_item_flag(SI_TOURNAMENT)) {
 		0xFFB5->clear_item_say();
@@ -45694,7 +45768,7 @@ void Func044B object#(0x44B) () {
 										if (!(var000E->get_npc_number() == 0xFE9C)) {
 											var000E->remove_from_party();
 											var000F = [0x0322, 0x08DA];
-											var000E->set_new_schedules(0x0000, 0x000B, var000F);
+											var000E->set_new_schedules(MIDNIGHT, LOITER, var000F);
 											var000E->run_schedule();
 										}
 									}
@@ -45836,7 +45910,7 @@ void Func044C object#(0x44C) () {
 		0xFFB4->remove_npc();
 		0xFFBE->move_object(var0004);
 		0xFFBE->set_alignment(0x0002);
-		0xFFBE->set_new_schedules(0x0000, 0x0004, [var0004[0x0001], var0004[0x0002]]);
+		0xFFBE->set_new_schedules(MIDNIGHT, DANCE, [var0004[0x0001], var0004[0x0002]]);
 		0xFFBE->run_schedule();
 		Func097F(0xFFBE, "@Lorfag Tar!@", 0x0002);
 		var0005 = script 0xFE9C {
@@ -45852,18 +45926,18 @@ void Func044C object#(0x44C) () {
 		}
 		abort;
 	}
-	if ((event == DOUBLECLICK) && (0xFFB4->get_schedule_type() != 0x000A)) {
+	if ((event == DOUBLECLICK) && (0xFFB4->get_schedule_type() != STANDTHERE)) {
 		Func097F(0xFE9C, "@Hello!@", 0x0000);
 		0xFFB4->Func07D1();
 		Func097F(0xFFB4, "@Welcome!@", 0x0002);
-		if (0xFFB4->get_schedule_type() != 0x0007) {
-			0xFFB4->set_schedule_type(0x0003);
+		if (0xFFB4->get_schedule_type() != TEND_SHOP) {
+			0xFFB4->set_schedule_type(TALK);
 		} else {
 			var0005 = script 0xFFB4 after 5 ticks {
 				nohalt;
 				call Func044C;
 			};
-			0xFFB4->set_schedule_type(0x000A);
+			0xFFB4->set_schedule_type(STANDTHERE);
 		}
 	}
 	if (event == SCRIPTED) {
@@ -45878,7 +45952,7 @@ void Func044C object#(0x44C) () {
 			gflags[0x00B8] = true;
 			say("\"Unusual taste, eh? I dare say I am the only one outside of the city of Fawn who drinks it.\"");
 			say("\"I would share more with thee, but I think that thou dost not appreciate it. Besides, I must clean this foulness!\"");
-			0xFFB4->set_schedule_type(0x000B);
+			0xFFB4->set_schedule_type(LOITER);
 			Func097F(0xFFB4, "@Such a waste!@", 0x0000);
 			abort;
 		}
@@ -45953,7 +46027,7 @@ void Func044C object#(0x44C) () {
 				fallthrough;
 
 			case "bed" (remove):
-				if (0xFFB4->get_schedule_type() == 0x0007) {
+				if (0xFFB4->get_schedule_type() == TEND_SHOP) {
 					say("\"The cost is 5 monetari per person. Wouldst thou like a room for the night?\"");
 					if (Func0955()) {
 						var000A = UI_get_array_size(UI_get_party_list()) * 0x0005;
@@ -45988,7 +46062,7 @@ void Func044C object#(0x44C) () {
 				}
 				var000E = Func0955();
 				if (var000E) {
-					0xFFB4->set_schedule_type(0x000F);
+					0xFFB4->set_schedule_type(WAIT);
 					Func094E(0xFE9C, "@Pfffz!@");
 					var000D = Func0992(0x0001, 0x0000, 0x0000, false);
 					if (var000D != 0xFE9C) {
@@ -46153,7 +46227,7 @@ void Func044C object#(0x44C) () {
 				0xFFB4->remove_npc();
 				0xFFBE->move_object(var0004);
 				0xFFBE->set_alignment(0x0002);
-				0xFFBE->set_new_schedules(0x0000, 0x0004, [var0004[0x0001], var0004[0x0002]]);
+				0xFFBE->set_new_schedules(MIDNIGHT, DANCE, [var0004[0x0001], var0004[0x0002]]);
 				0xFFBE->run_schedule();
 				Func097F(0xFFBE, "@Lorfag Tar!@", 0x0002);
 				var0005 = script 0xFE9C {
@@ -46182,7 +46256,7 @@ void Func044C object#(0x44C) () {
 	if (event == PROXIMITY) {
 		var0012 = 0xFFB4->get_schedule_type();
 		var0013 = UI_die_roll(0x0001, 0x0004);
-		if (var0012 == 0x0007) {
+		if (var0012 == TEND_SHOP) {
 			if (var0013 == 0x0001) {
 				var0014 = "@Need a room?@";
 			}
@@ -46231,7 +46305,7 @@ void Func044D object#(0x44D) () {
 	var0000 = Func0954();
 	var0001 = Func0953();
 	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
-		0xFFB3->set_schedule_type(0x000C);
+		0xFFB3->set_schedule_type(WANDER);
 	}
 	if (event == PROXIMITY) {
 		if (gflags[0x0092]) {
@@ -46327,11 +46401,11 @@ void Func044D object#(0x44D) () {
 			call Func01D0;
 		};
 	}
-	if ((event == DOUBLECLICK) && (0xFFB3->get_schedule_type() != 0x000F)) {
+	if ((event == DOUBLECLICK) && (0xFFB3->get_schedule_type() != WAIT)) {
 		0xFE9C->item_say("@Greetings, milord.@");
 		0xFFB3->Func07D1();
 		if (gflags[0x0092]) {
-			0xFFB3->set_schedule_type(0x000F);
+			0xFFB3->set_schedule_type(WAIT);
 			Func097F(0xFFB3, "@Not thee!@", 0x0002);
 			0xFFB3->Func07D2();
 			var0009 = script 0xFFB3 after 7 ticks {
@@ -46341,7 +46415,7 @@ void Func044D object#(0x44D) () {
 			abort;
 		}
 		Func097F(0xFFB3, "Yes?", 0x0002);
-		0xFFB3->set_schedule_type(0x0003);
+		0xFFB3->set_schedule_type(TALK);
 	}
 	if (event != SCRIPTED) {
 		if (event != STARTED_TALKING) {
@@ -46491,7 +46565,7 @@ void Func044D object#(0x44D) () {
 		case "know traitor" (remove):
 			if (gflags[0x0094]) {
 				say("\"What!? What dost thou mean? Art thou calling me a traitor? I may not be much of a fighter, but I can defend myself!\"");
-				0xFFB3->set_schedule_type(0x0014);
+				0xFFB3->set_schedule_type(SHY);
 				Func097F(0xFFB3, "@Beware!@", 0x0000);
 				abort;
 			}
@@ -46601,14 +46675,14 @@ void Func044E object#(0x44E) () {
 		var0000 = "Knight";
 	}
 	var0001 = 0xFFB2->get_item_flag(MET);
-	if (0xFFB2->get_schedule_type() == 0x000D) {
+	if (0xFFB2->get_schedule_type() == BLACKSMITH) {
 		var0002 = true;
 	}
 	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hail there!@");
 		0xFFB2->Func07D1();
 		Func097F(0xFFB2, "@Greetings.@", 0x0003);
-		0xFFB2->set_schedule_type(0x0003);
+		0xFFB2->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFB2->run_schedule();
@@ -46670,7 +46744,7 @@ void Func044E object#(0x44E) () {
 				fallthrough;
 
 			case "buy":
-				if (0xFFB2->get_schedule_type() == 0x000D) {
+				if (0xFFB2->get_schedule_type() == BLACKSMITH) {
 					say("\"Wouldst thou be interested in buying or selling?\"");
 					var0003 = Func0956(["nothing", "buying", "selling"]);
 					if (var0003 == "buying") {
@@ -46781,7 +46855,7 @@ void Func044F object#(0x44F) () {
 		0xFE9C->item_say("@Hail, Knight.@");
 		0xFFB1->Func07D1();
 		Func097F(0xFFB1, "@Hail.@", 0x0002);
-		0xFFB1->set_schedule_type(0x0003);
+		0xFFB1->set_schedule_type(TALK);
 	}
 	if (event == PROXIMITY) {
 		if (gflags[0x0083]) {
@@ -46850,7 +46924,7 @@ void Func044F object#(0x44F) () {
 		if (gflags[0x00A4] && gflags[0x0048]) {
 			add("Goblins");
 		}
-		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != 0x000F)) {
+		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
 			add("brown bottle");
 		}
 		if (gflags[0x01CA] && gflags[0x0048]) {
@@ -46891,7 +46965,7 @@ void Func044F object#(0x44F) () {
 					say("\"What business is it of thee, stranger? Canst thou not see that I am recovering from wounds?\"");
 					say("\"I do not wish to spend my limited vitality in idle chatter. I am a warrior, not a clerk...\"");
 					Func097F(0xFFB1, "@Excuse me...@", 0x0000);
-					0xFFB1->set_schedule_type(0x0014);
+					0xFFB1->set_schedule_type(SHY);
 					abort;
 				}
 				say("\"I am a Knight of Monitor, and a member of the Command of the Bear. I also serve Lord Marsten as his tactical adviser.\"");
@@ -47165,14 +47239,14 @@ void Func0450 object#(0x450) () {
 					var0008 = UI_create_new_object2(0x00E4, [0x032E, 0x0AAF, 0x0000]);
 					if (var0008) {
 						var0008->set_npc_id(0x0003);
-						var0008->set_schedule_type(0x0009);
+						var0008->set_schedule_type(HOUND);
 						var0008->set_alignment(0x0000);
 						var0003 = var0008->set_npc_prop(0x0001, 0x000A);
 					}
 					var0008 = UI_create_new_object2(0x00E4, [0x032C, 0x0ABE, 0x0000]);
 					if (var0008) {
 						var0008->set_npc_id(0x0003);
-						var0008->set_schedule_type(0x0009);
+						var0008->set_schedule_type(HOUND);
 						var0008->set_alignment(0x0000);
 						var0003 = var0008->set_npc_prop(0x0001, 0x000A);
 					}
@@ -47407,13 +47481,13 @@ void Func0451 object#(0x451) () {
 		0xFE9C->item_say("@Greetings!@");
 		0xFFAF->Func07D1();
 		Func097F(0xFFAF, "@Art thou speaking to me?@", 0x0005);
-		0xFFAF->set_schedule_type(0x0003);
+		0xFFAF->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFAF->run_schedule();
 		0xFFAF->clear_item_say();
 		0xFFAF->show_npc_face0(0x0000);
-		if (0xFFAF->get_schedule_type() == 0x0007) {
+		if (0xFFAF->get_schedule_type() == TEND_SHOP) {
 			var000E = true;
 		}
 		if ((gflags[0x0004] == true) && (gflags[0x00D4] == false)) {
@@ -47874,7 +47948,7 @@ void Func0452 object#(0x452) () {
 		0xFE9C->item_say("@Speak, automaton!@");
 		0xFFAE->Func07D1();
 		Func097F(0xFFAE, "@Obedience... Failed...@", 0x0002);
-		0xFFAE->set_schedule_type(0x0003);
+		0xFFAE->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFAE->run_schedule();
@@ -47908,7 +47982,7 @@ void Func0453 object#(0x453) () {
 		0xFE9C->item_say("@May we speak?@");
 		0xFFAD->Func07D1();
 		Func097F(0xFFAD, "@Speak... Creak... Weak...@", 0x0002);
-		0xFFAD->set_schedule_type(0x0003);
+		0xFFAD->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFAD->run_schedule();
@@ -48039,7 +48113,7 @@ void Func045E object#(0x45E) () {
 		0xFE9C->item_say("@May we speak?@");
 		0xFFA2->Func07D1();
 		Func097F(0xFFA2, (("@Yes, " + var0000) + "?@"), 0x0002);
-		0xFFA2->set_schedule_type(0x0003);
+		0xFFA2->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFA2->run_schedule();
@@ -48082,7 +48156,7 @@ void Func045E object#(0x45E) () {
 					var0002 = [0xFFA2, 0xFFA1, 0xFFA0, 0xFF9F, 0xFF9E, 0xFF9D];
 					for (var0005 in var0002 with var0003 to var0004) {
 						var0005->set_alignment(0x0003);
-						var0005->set_schedule_type(0x0000);
+						var0005->set_schedule_type(IN_COMBAT);
 						0xFE9C->set_oppressor(var0005);
 					}
 					abort;
@@ -48096,7 +48170,7 @@ void Func045E object#(0x45E) () {
 				UI_remove_npc_face0();
 				Func097F(0xFE9C, "@Many thanks!@", 0x0000);
 				Func097F(0xFFA2, "@Use thy Logic!@", 0x0002);
-				0xFFA2->set_schedule_type(0x000B);
+				0xFFA2->set_schedule_type(LOITER);
 				break;
 		}
 	}
@@ -48128,7 +48202,7 @@ void Func045F object#(0x45F) () {
 		0xFE9C->item_say("@May we speak?@");
 		0xFFA1->Func07D1();
 		Func097F(0xFFA1, (("@Yes, " + var0000) + "?@"), 0x0002);
-		0xFFA1->set_schedule_type(0x0003);
+		0xFFA1->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFA1->run_schedule();
@@ -48191,7 +48265,7 @@ void Func045F object#(0x45F) () {
 					var0002 = [0xFFA2, 0xFFA1, 0xFFA0, 0xFF9F, 0xFF9E, 0xFF9D];
 					for (var0005 in var0002 with var0003 to var0004) {
 						var0005->set_alignment(0x0003);
-						var0005->set_schedule_type(0x0000);
+						var0005->set_schedule_type(IN_COMBAT);
 						0xFE9C->set_oppressor(var0005);
 					}
 					abort;
@@ -48205,7 +48279,7 @@ void Func045F object#(0x45F) () {
 				UI_remove_npc_face0();
 				Func097F(0xFE9C, "@Goodbye!@", 0x0000);
 				Func097F(0xFFA1, "@Use thy Logic!@", 0x0002);
-				0xFFA1->set_schedule_type(0x000B);
+				0xFFA1->set_schedule_type(LOITER);
 				break;
 		}
 	}
@@ -48237,7 +48311,7 @@ void Func0460 object#(0x460) () {
 		0xFE9C->item_say("@May we speak?@");
 		0xFFA0->Func07D1();
 		Func097F(0xFFA0, (("@Yes, " + var0000) + "?@"), 0x0002);
-		0xFFA0->set_schedule_type(0x0003);
+		0xFFA0->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFFA0->run_schedule();
@@ -48280,7 +48354,7 @@ void Func0460 object#(0x460) () {
 					var0002 = [0xFFA2, 0xFFA1, 0xFFA0, 0xFF9F, 0xFF9E, 0xFF9D];
 					for (var0005 in var0002 with var0003 to var0004) {
 						var0005->set_alignment(0x0003);
-						var0005->set_schedule_type(0x0000);
+						var0005->set_schedule_type(IN_COMBAT);
 						0xFE9C->set_oppressor(var0005);
 					}
 					abort;
@@ -48294,7 +48368,7 @@ void Func0460 object#(0x460) () {
 				UI_remove_npc_face0();
 				Func097F(0xFE9C, "@Fare well!@", 0x0000);
 				Func097F(0xFFA0, "@Use thy Logic!@", 0x0002);
-				0xFFA0->set_schedule_type(0x000B);
+				0xFFA0->set_schedule_type(LOITER);
 				break;
 		}
 	}
@@ -48324,7 +48398,7 @@ void Func0461 object#(0x461) () {
 		0xFE9C->item_say("@May we speak?@");
 		0xFF9F->Func07D1();
 		Func097F(0xFF9F, (("@Yes, " + var0000) + "?@"), 0x0002);
-		0xFF9F->set_schedule_type(0x0003);
+		0xFF9F->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFF9F->run_schedule();
@@ -48333,7 +48407,7 @@ void Func0461 object#(0x461) () {
 		if (gflags[0x0233]) {
 			say("\"Thou hast ruined it all! Die!\"");
 			0xFF9F->set_alignment(0x0003);
-			0xFF9F->set_schedule_type(0x0000);
+			0xFF9F->set_schedule_type(IN_COMBAT);
 			0xFE9C->set_oppressor(0xFF9F);
 			abort;
 		}
@@ -48369,7 +48443,7 @@ void Func0461 object#(0x461) () {
 					var0002 = Func099B(0xFE9C, 0x0001, 0x0281, 0x0046, 0x0005, false, true);
 					say("\"I confess. It was I that destroyed Number 7... as I shall destroy thee! I should have been the keeper of the key all along! Number 7 was wrong not to give it to me!\"");
 					0xFF9F->set_alignment(0x0003);
-					0xFF9F->set_schedule_type(0x0000);
+					0xFF9F->set_schedule_type(IN_COMBAT);
 					0xFE9C->set_oppressor(0xFF9F);
 					gflags[0x0233] = true;
 					abort;
@@ -48383,7 +48457,7 @@ void Func0461 object#(0x461) () {
 				UI_remove_npc_face0();
 				Func097F(0xFE9C, "@Until later...@", 0x0000);
 				Func097F(0xFF9F, "@Use thy Logic!@", 0x0002);
-				0xFF9F->set_schedule_type(0x000B);
+				0xFF9F->set_schedule_type(LOITER);
 				break;
 		}
 	}
@@ -48415,7 +48489,7 @@ void Func0462 object#(0x462) () {
 		0xFE9C->item_say("@May we speak?@");
 		0xFF9E->Func07D1();
 		Func097F(0xFF9E, (("@Yes, " + var0000) + "?@"), 0x0002);
-		0xFF9E->set_schedule_type(0x0003);
+		0xFF9E->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFF9E->run_schedule();
@@ -48473,7 +48547,7 @@ void Func0462 object#(0x462) () {
 					var0002 = [0xFFA2, 0xFFA1, 0xFFA0, 0xFF9F, 0xFF9E, 0xFF9D];
 					for (var0005 in var0002 with var0003 to var0004) {
 						var0005->set_alignment(0x0003);
-						var0005->set_schedule_type(0x0000);
+						var0005->set_schedule_type(IN_COMBAT);
 						0xFE9C->set_oppressor(var0005);
 					}
 					abort;
@@ -48487,7 +48561,7 @@ void Func0462 object#(0x462) () {
 				UI_remove_npc_face0();
 				Func097F(0xFE9C, "@Many thanks!@", 0x0000);
 				Func097F(0xFF9E, "@Use thy Logic!@", 0x0002);
-				0xFF9E->set_schedule_type(0x000B);
+				0xFF9E->set_schedule_type(LOITER);
 				break;
 		}
 	}
@@ -48519,7 +48593,7 @@ void Func0463 object#(0x463) () {
 		0xFE9C->item_say("@May we speak?@");
 		0xFF9D->Func07D1();
 		Func097F(0xFF9D, (("@Yes, " + var0000) + "?@"), 0x0002);
-		0xFF9D->set_schedule_type(0x0003);
+		0xFF9D->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFF9D->run_schedule();
@@ -48564,7 +48638,7 @@ void Func0463 object#(0x463) () {
 					var0002 = [0xFFA2, 0xFFA1, 0xFFA0, 0xFF9F, 0xFF9E, 0xFF9D];
 					for (var0005 in var0002 with var0003 to var0004) {
 						var0005->set_alignment(0x0003);
-						var0005->set_schedule_type(0x0000);
+						var0005->set_schedule_type(IN_COMBAT);
 						0xFE9C->set_oppressor(var0005);
 					}
 					abort;
@@ -48578,7 +48652,7 @@ void Func0463 object#(0x463) () {
 				UI_remove_npc_face0();
 				Func097F(0xFE9C, "@Until later...@", 0x0000);
 				Func097F(0xFF9D, "@Use thy Logic!@", 0x0002);
-				0xFF9D->set_schedule_type(0x000B);
+				0xFF9D->set_schedule_type(LOITER);
 				break;
 		}
 	}
@@ -48770,7 +48844,7 @@ labelFunc0464_0169:
 					UI_play_sound_effect(0x0066);
 					var0002 = UI_create_new_object2(0x013E, [0x0ABE, 0x037A, 0x0000]);
 					if (var0002) {
-						var0002->set_schedule_type(0x000F);
+						var0002->set_schedule_type(WAIT);
 						UI_sprite_effect(0x001A, 0x0A22, 0x0373, 0x0000, 0x0000, 0x0000, 0xFFFF);
 						var0001 = script var0002 {
 							face SOUTH;
@@ -48865,7 +48939,7 @@ labelFunc0464_0169:
 			UI_play_sound_effect(0x0066);
 			var0002 = UI_create_new_object2(0x013E, [0x0ABE, 0x037A, 0x0000]);
 			if (var0002) {
-				var0002->set_schedule_type(0x000F);
+				var0002->set_schedule_type(WAIT);
 				UI_sprite_effect(0x001A, 0x0A22, 0x0373, 0x0000, 0x0000, 0x0000, 0xFFFF);
 				var0001 = script var0002 {
 					face SOUTH;
@@ -49003,7 +49077,7 @@ void Func047D object#(0x47D) () {
 		}
 		0xFE9C->item_say("@Hold there, Automaton!@");
 		Func097F(item, "@I would speak with thee...@", 0x0003);
-		set_schedule_type(0x0003);
+		set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		run_schedule();
@@ -49028,11 +49102,11 @@ void Func047D object#(0x47D) () {
 				nohalt;
 				hit 50, normal_damage;
 			};
-			0xFF83->set_schedule_type(0x0014);
+			0xFF83->set_schedule_type(SHY);
 			abort;
 		}
 		say("\"Error! I have waited centuries for the Hierophant and to have almost given the Serpent Sceptre to a total stranger!\"* \"Error! To almost let the key to the Great Library fall into the wrong hands! I should have my works examined...\"* \"Begone! Thou art a hazard to the safety of the Great Library.\" *\"Now what was it that the Hierophant wanted...?\"");
-		0xFF83->set_schedule_type(0x0014);
+		0xFF83->set_schedule_type(SHY);
 		abort;
 	}
 }
@@ -49051,7 +49125,7 @@ void Func047E object#(0x47E) () {
 	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("A guard of metal!@");
 		Func097F(0xFF82, "@Thou art a fool!@", 0x0003);
-		set_schedule_type(0x0003);
+		set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFED6->show_npc_face0(0x0000);
@@ -49062,7 +49136,7 @@ void Func047E object#(0x47E) () {
 		say("\"Canst thou hear me, Avatar? Thou art too late! By the time thou hast found the Shrine of Order, I shall have become as powerful as the Guardian himself!\"");
 		say("\"Come! Come and witness mine ascent to power.\"");
 		say("\"Come, Avatar... Come and meet thy death!\"");
-		0xFF82->set_schedule_type(0x0000);
+		0xFF82->set_schedule_type(IN_COMBAT);
 		0xFF82->set_alignment(0x0002);
 		0xFE9C->set_oppressor(0xFF82);
 		UI_remove_npc_face0();
@@ -49085,7 +49159,7 @@ void Func047F object#(0x47F) () {
 		set_polymorph(0x01F5);
 	}
 	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
-		0xFF81->set_schedule_type(0x000F);
+		0xFF81->set_schedule_type(WAIT);
 		var0001 = script 0xFF81 {
 			nohalt;
 			actor frame bowing;
@@ -49144,7 +49218,7 @@ void Func0480 object#(0x480) () {
 		set_polymorph(0x01F5);
 	}
 	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
-		0xFF80->set_schedule_type(0x000F);
+		0xFF80->set_schedule_type(WAIT);
 		var0000 = script 0xFF80 {
 			nohalt;
 			actor frame bowing;
@@ -49208,11 +49282,11 @@ void Func0481 object#(0x481) () {
 	if (event == DOUBLECLICK) {
 		Func097F(0xFE9C, "@Hail, metal servant!@", 0x0000);
 		Func097F(item, "@Halt, stranger!@", 0x0001);
-		0xFF7F->set_schedule_type(0x000A);
+		0xFF7F->set_schedule_type(STANDTHERE);
 		si_path_run_usecode([0x0766, 0x027C, 0x0000], PATH_SUCCESS, item, Func0481, true);
 	}
 	if (event == PATH_SUCCESS) {
-		0xFF7F->set_schedule_type(0x001D);
+		0xFF7F->set_schedule_type(PATROL);
 		0xFF7F->set_item_frame(0x0010);
 		var0000 = script item after 3 ticks {
 			nohalt;
@@ -49223,7 +49297,7 @@ void Func0481 object#(0x481) () {
 		run_schedule();
 		0xFE9C->clear_item_say();
 		clear_item_say();
-		0xFF7F->set_schedule_type(0x001D);
+		0xFF7F->set_schedule_type(PATROL);
 		var0001 = 0xFFFF->get_item_flag(IN_PARTY);
 		0xFED6->show_npc_face0(0x0000);
 		say("\"I am the guardian of the city of Order. Dost thou wish to enter the great city of Spinebreaker?\"");
@@ -49281,7 +49355,7 @@ void Func0482 object#(0x482) () {
 		0xFE9C->item_say("@A metal man!@");
 		0xFF7E->Func07D1();
 		Func097F(0xFF7E, "@Who goes there?@", 0x0003);
-		0xFF7E->set_schedule_type(0x0003);
+		0xFF7E->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFF7E->run_schedule();
@@ -49304,10 +49378,10 @@ void Func0482 object#(0x482) () {
 
 			case "I serve Chaos" (remove):
 				say("\"Thanks to thee for thine identification.\"");
-				0xFF7E->set_schedule_type(0x0000);
-				0xFF7D->set_schedule_type(0x0000);
-				0xFF7C->set_schedule_type(0x0000);
-				0xFF7B->set_schedule_type(0x0000);
+				0xFF7E->set_schedule_type(IN_COMBAT);
+				0xFF7D->set_schedule_type(IN_COMBAT);
+				0xFF7C->set_schedule_type(IN_COMBAT);
+				0xFF7B->set_schedule_type(IN_COMBAT);
 				abort;
 
 			case "bye":
@@ -49352,7 +49426,7 @@ void Func048F object#(0x48F) () {
 	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Greetings@");
 		Func097F(0xFF71, "@We knew thou would come.@", 0x0003);
-		0xFF71->set_schedule_type(0x0003);
+		0xFF71->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFF71->run_schedule();
@@ -49396,7 +49470,7 @@ void Func048F object#(0x48F) () {
 
 			case "Gwenno" (remove):
 				var0002 = 0xFF6B->get_schedule_type();
-				if (var0002 == 0x000F) {
+				if (var0002 == WAIT) {
 					say("\"Gwenno dead. She good woman. Very generous. She once make gift of bucket to Baiyanda. Baiyanda place body at sacred Gwani Death Temple.\"");
 					gflags[0x0262] = true;
 					add("Where is the temple?");
@@ -49548,7 +49622,7 @@ void Func0490 object#(0x490) () {
 	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hail there!@");
 		Func097F(0xFF70, "@Aruk nok! Raag!@", 0x0003);
-		0xFF70->set_schedule_type(0x0003);
+		0xFF70->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFF70->run_schedule();
@@ -49586,8 +49660,8 @@ void Func0490 object#(0x490) () {
 			case "bye":
 				UI_remove_npc_face0();
 				UI_remove_npc_face1();
-				set_schedule_type(0x0014);
-				0xFF70->set_new_schedules([0x0001, 0x0003, 0x0006], [0x000B, 0x0010, 0x000E], [0x03A4, 0x0368, 0x0431, 0x0348, 0x0427, 0x034D]);
+				set_schedule_type(SHY);
+				0xFF70->set_new_schedules([EARLY, MORNING, EVENING], [LOITER, MAJOR_SIT, SLEEP], [0x03A4, 0x0368, 0x0431, 0x0348, 0x0427, 0x034D]);
 				Func097F(0xFE9C, "@Farewell, little fellow.@", 0x0000);
 				Func097F(0xFF70, "@Fare -- well@", 0x0003);
 				abort;
@@ -49610,7 +49684,7 @@ void Func0491 object#(0x491) () {
 	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hail there!@");
 		Func097F(0xFF6F, "@Gruk! Barama tu!@", 0x0003);
-		0xFF6F->set_schedule_type(0x0003);
+		0xFF6F->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFF6F->run_schedule();
@@ -49684,7 +49758,7 @@ void Func0492 object#(0x492) () {
 	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hail, Gwani elder!@");
 		Func097F(0xFF6E, "@Thou are here.@", 0x0003);
-		0xFF6E->set_schedule_type(0x0003);
+		0xFF6E->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFF6E->run_schedule();
@@ -49755,7 +49829,7 @@ void Func0492 object#(0x492) () {
 
 			case "Gwenno" (remove):
 				var0002 = 0xFF6B->get_schedule_type();
-				if (var0002 == 0x000F) {
+				if (var0002 == WAIT) {
 					say("\"Gwenno great friend to our people. It thanks to her that many of our people speak thy tongue. She even told us all about thou. She said thou would come. Her death tragedy.\"");
 					gflags[0x0262] = true;
 					add(["How did Gwenno die?", "Where is Gwenno's body?"]);
@@ -49819,7 +49893,7 @@ void Func0493 object#(0x493) () {
 		}
 		0xFE9C->item_say("@Good morning, little one!@");
 		Func097F(0xFF6D, "@Tee hee hee hee!@", 0x0003);
-		0xFF6D->set_schedule_type(0x0003);
+		0xFF6D->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFF6D->run_schedule();
@@ -49893,7 +49967,7 @@ void Func0494 object#(0x494) () {
 		0xFE9C->item_say("@Hail there, Gwani person.@");
 		0xFF6C->Func07D1();
 		Func097F(0xFF6C, "@Hello there, Avatar!@", 0x0003);
-		0xFF6C->set_schedule_type(0x0003);
+		0xFF6C->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFF6C->run_schedule();
@@ -49985,7 +50059,7 @@ void Func0494 object#(0x494) () {
 
 			case "Gwenno":
 				var0006 = 0xFF6B->get_schedule_type();
-				if (var0006 == 0x000F) {
+				if (var0006 == WAIT) {
 					say("\"Gwenno was good friend to us. She spent weeks teaching me human language. Over time I slowly teaching others.\tMany days we have mourned death of good woman Gwenno. She horribly killed by men of one we call The Trapper. She spoke of thee often.\"");
 					gflags[0x0262] = true;
 					add(["Spoke of me?"]);
@@ -50081,9 +50155,9 @@ void Func0495 object#(0x495) () {
 		0xFF6B->Func07D1();
 		if (!0xFF6B->get_item_flag(SI_ZOMBIE)) {
 			Func097F(0xFF6B, "@'Tis good to see thee!@", 0x0002);
-			0xFF6B->set_schedule_type(0x0003);
+			0xFF6B->set_schedule_type(TALK);
 		} else {
-			0xFF6B->set_new_schedules(0x0000, 0x001E, [0x0977, 0x048C]);
+			0xFF6B->set_new_schedules(MIDNIGHT, DESK_WORK, [0x0977, 0x048C]);
 			0xFF6B->run_schedule();
 			if (!gflags[0x02DD]) {
 				gflags[0x02DD] = true;
@@ -50109,7 +50183,7 @@ void Func0495 object#(0x495) () {
 	}
 	if (event == STARTED_TALKING) {
 		if (0xFF6B->get_item_flag(IN_PARTY)) {
-			0xFF6B->set_schedule_type(0x001F);
+			0xFF6B->set_schedule_type(FOLLOW_AVATAR);
 			add("leave");
 		} else {
 			0xFF6B->run_schedule();
@@ -50444,7 +50518,7 @@ void Func0496 object#(0x496) () {
 	var0002 = Func0953();
 	var0003 = false;
 	var0004 = 0xFFB8->get_item_flag(DEAD);
-	if (gflags[0x003D] && ((0xFF6A->get_schedule_type() == 0x000E) && (Func08F1() < 0x000F))) {
+	if (gflags[0x003D] && ((0xFF6A->get_schedule_type() == SLEEP) && (Func08F1() < 0x000F))) {
 		var0005 = true;
 		if ((!0xFFFD->npc_nearby()) && ((!0xFFFF->npc_nearby()) && ((!0xFFFE->npc_nearby()) && (!0xFFDE->npc_nearby())))) {
 			var0006 = true;
@@ -50549,11 +50623,11 @@ void Func0496 object#(0x496) () {
 			Func097F(0xFF6A, "@The Bears are wrong!@", 0x0000);
 		}
 	}
-	if ((event == DOUBLECLICK) && (0xFF6A->get_schedule_type() != 0x000F)) {
-		if (gflags[0x003D] && (((0xFF6A->get_schedule_type() == 0x000E) || (0xFF6A->get_schedule_type() == 0x000A)) && (Func08F1() < 0x000F))) {
+	if ((event == DOUBLECLICK) && (0xFF6A->get_schedule_type() != WAIT)) {
+		if (gflags[0x003D] && (((0xFF6A->get_schedule_type() == SLEEP) || (0xFF6A->get_schedule_type() == STANDTHERE)) && (Func08F1() < 0x000F))) {
 			0xFF6A->Func07D2();
 			0xFF6A->Func07D1();
-			0xFF6A->set_schedule_type(0x000F);
+			0xFF6A->set_schedule_type(WAIT);
 			Func097F(0xFF6A, "@At last!@", 0x0002);
 			UI_play_music(0x001C, Func09A0(0x0005, 0x0001));
 			0xFF6A->set_npc_id(0x0000);
@@ -50568,7 +50642,7 @@ void Func0496 object#(0x496) () {
 			Func097F(0xFE9C, "@Greetings, sir.@", 0x0000);
 			0xFF6A->Func07D1();
 			Func097F(0xFF6A, "@Hello.@", 0x0002);
-			0xFF6A->set_schedule_type(0x0003);
+			0xFF6A->set_schedule_type(TALK);
 		}
 	}
 	if (event == SCRIPTED) {
@@ -50629,7 +50703,7 @@ void Func0496 object#(0x496) () {
 		if (gflags[0x0038] && (!gflags[0x0078])) {
 			add("Iolo");
 		}
-		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != 0x000F)) {
+		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
 			add("brown bottle");
 		}
 		if (gflags[0x002C]) {
@@ -50913,13 +50987,13 @@ void Func0496 object#(0x496) () {
 					}
 					if (gflags[0x0038] && (!0xFFBB->get_item_flag(DEAD))) {
 						0xFFBB->move_object([0x0446, 0x09C5, 0x0000]);
-						0xFFBB->set_new_schedules([0x0007, 0x0002], [0x000E, 0x0007], [0x0446, 0x09C5, 0x0446, 0x09C5]);
+						0xFFBB->set_new_schedules([NIGHT, DAWN], [SLEEP, TEND_SHOP], [0x0446, 0x09C5, 0x0446, 0x09C5]);
 					}
 					if (gflags[0x0092] && (!0xFFB3->get_item_flag(DEAD))) {
 						0xFFB3->move_object([0x0448, 0x09D6, 0x0000]);
-						0xFFB3->set_new_schedules([0x0007, 0x0002], [0x000E, 0x0007], [0x0448, 0x09D6, 0x0448, 0x09D6]);
+						0xFFB3->set_new_schedules([NIGHT, DAWN], [SLEEP, TEND_SHOP], [0x0448, 0x09D6, 0x0448, 0x09D6]);
 					}
-					0xFFC1->set_new_schedules([0x0000, 0x0003, 0x0004, 0x0005, 0x0006, 0x0007], [0x000E, 0x001B, 0x0007, 0x001B, 0x0010, 0x001A], [0x03B1, 0x0A49, 0x03D7, 0x0A8A, 0x03CE, 0x09FF, 0x039B, 0x0A76, 0x03B2, 0x0A05, 0x041C, 0x0A57]);
+					0xFFC1->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, EVENING, NIGHT], [SLEEP, 0x001B, TEND_SHOP, DUEL, MAJOR_SIT, EAT_AT_INN], [0x03B1, 0x0A49, 0x03D7, 0x0A8A, 0x03CE, 0x09FF, 0x039B, 0x0A76, 0x03B2, 0x0A05, 0x041C, 0x0A57]);
 					var0013 = 0x0003;
 					while (var0013 > 0x0000) {
 						var0014 = 0xFE9C->get_object_position();
@@ -50938,7 +51012,7 @@ void Func0496 object#(0x496) () {
 					var0018 = 0xFF6A->find_nearby(0x00E4, 0x001E, 0x0000);
 					if (var0018) {
 						for (var001B in var0018 with var0019 to var001A) {
-							var001B->set_schedule_type(0x0003);
+							var001B->set_schedule_type(TALK);
 							var001B->set_npc_id(0x0006);
 						}
 					}
@@ -50949,7 +51023,7 @@ void Func0496 object#(0x496) () {
 							say("\"Do not worry -- I shall personally see that Marsten is hunted down like the dog he is.\"");
 						}
 						Func097F(0xFF6A, "@Pikemen!@", 0x0000);
-						0xFF6A->set_schedule_type(0x000A);
+						0xFF6A->set_schedule_type(STANDTHERE);
 						Func097F(var0018[0x0001], "@Yes, lord!@", 0x0002);
 						abort;
 					}
@@ -50963,7 +51037,7 @@ void Func0496 object#(0x496) () {
 							"! I shall order the Pikemen to place the traitor under arrest!\"");
 					}
 					Func097F(0xFF6A, "@Pikemen!@", 0x0000);
-					0xFF6A->set_schedule_type(0x0014);
+					0xFF6A->set_schedule_type(SHY);
 					abort;
 				}
 				var0010 = Func0992(0xFFFE, "@We did not bring it with us.@", "@I did not bring it.@", false);
@@ -51044,14 +51118,14 @@ void Func0498 object#(0x498) () {
 		} else {
 			Func097F(0xFF68, "@Don't hurt me!@", 0x0002);
 		}
-		0xFF68->set_schedule_type(0x0003);
+		0xFF68->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFF68->clear_item_say();
 		0xFF68->show_npc_face0(0x0000);
 		if (0xFF68->get_item_flag(IN_PARTY)) {
 			say("\"We must hasten to the Serpent Gate!\"");
-			0xFF68->set_schedule_type(0x001F);
+			0xFF68->set_schedule_type(FOLLOW_AVATAR);
 			add("leave");
 		} else {
 			0xFF68->run_schedule();
@@ -51121,7 +51195,7 @@ void Func0498 object#(0x498) () {
 			case "fled":
 				say("\"Down that small tunnel in the wall...\" *\"I have tried to enlarge the hole so that I might retrieve the key... But I have nothing as strong and sharp as a rat's teeth.\" *\"Oh, I am doomed!\"");
 				Func097F(0xFF68, "@Doomed!@", 0x0000);
-				0xFF68->set_schedule_type(0x0014);
+				0xFF68->set_schedule_type(SHY);
 				abort;
 
 			case "Chaos Hierophant" (remove):
@@ -51213,10 +51287,10 @@ void Func0499 object#(0x499) () {
 		0xFE9C->item_say("@Hail, Gwani hunter!@");
 		0xFF67->Func07D1();
 		Func097F(0xFF67, "@Noo Koomba!@", 0x0003);
-		0xFF67->set_schedule_type(0x0003);
+		0xFF67->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF67->set_new_schedules([0x0000, 0x0003, 0x0004], [0x000E, 0x0005, 0x000C], [0x03A6, 0x035F, 0x03A6, 0x035F, 0x03A6, 0x035F]);
+		0xFF67->set_new_schedules([MIDNIGHT, MORNING, NOON], [SLEEP, EAT, WANDER], [0x03A6, 0x035F, 0x03A6, 0x035F, 0x03A6, 0x035F]);
 		0xFF67->run_schedule();
 		0xFF67->clear_item_say();
 		0xFF67->show_npc_face0(0x0000);
@@ -51252,7 +51326,7 @@ void Func0499 object#(0x499) () {
 			case "bye":
 				UI_remove_npc_face0();
 				UI_remove_npc_face1();
-				set_schedule_type(0x0014);
+				set_schedule_type(SHY);
 				Func097F(0xFE9C, "@Go home now!@", 0x0000);
 				Func097F(0xFF67, "@Kill Ice Dragon!@", 0x0003);
 				abort;
@@ -51268,7 +51342,7 @@ void Func049A object#(0x49A) () {
 	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Hail, Gwani!@");
 		Func097F(0xFF66, "@Noocha Ta, Avatar!@", 0x0003);
-		0xFF66->set_schedule_type(0x0003);
+		0xFF66->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFF66->run_schedule();
@@ -51352,7 +51426,7 @@ void Func049B object#(0x49B) () {
 		}
 		var0003 = 0xFF65->approach_avatar(0x0078, 0x0028);
 		if (var0003) {
-			0xFF65->set_schedule_type(0x0003);
+			0xFF65->set_schedule_type(TALK);
 		}
 		abort;
 	}
@@ -51360,7 +51434,7 @@ void Func049B object#(0x49B) () {
 		0xFE9C->item_say("@Hello.@");
 		0xFF65->Func07D1();
 		Func097F(0xFF65, "@Speaking to me?@", 0x0002);
-		0xFF65->set_schedule_type(0x0003);
+		0xFF65->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFF65->run_schedule();
@@ -51381,7 +51455,7 @@ void Func049B object#(0x49B) () {
 				say("\"Nothing, Lord Draygan.\"");
 				Func097F(0xFF65, "@Nothing.@", 0x0000);
 			}
-			0xFF64->set_schedule_type(0x0009);
+			0xFF64->set_schedule_type(HOUND);
 			var0003 = script Func09A0(0x0005, 0x0001) after 50 ticks {
 				nohalt;
 				call Func049B;
@@ -51409,7 +51483,7 @@ void Func049B object#(0x49B) () {
 				say("\"I shall accept thy kind offer, Forest Master.\"");
 				Func097F(0xFF61, "@Stay with me.@", 0x0000);
 				Func097F(0xFF65, "@I shall.@", 0x0005);
-				0xFF65->set_new_schedules([0x0000, 0x0002, 0x0006], [0x000E, 0x0007, 0x000C], [0x02B1, 0x0676, 0x02B9, 0x0686, 0x02C1, 0x06AD]);
+				0xFF65->set_new_schedules([MIDNIGHT, DAWN, EVENING], [SLEEP, TEND_SHOP, WANDER], [0x02B1, 0x0676, 0x02B9, 0x0686, 0x02C1, 0x06AD]);
 				0xFF65->run_schedule();
 				abort;
 			}
@@ -51417,7 +51491,7 @@ void Func049B object#(0x49B) () {
 			say("\"Thank thee Avatar for thine help. Thou hast given me back my life.\"");
 			Func097F(0xFF65, "@Fear not for me!@", 0x0000);
 			Func097F(0xFE9C, "@Live long and prosper!@", 0x0000);
-			0xFF65->set_new_schedules([0x0000, 0x0002, 0x0006], [0x000E, 0x0007, 0x000C], [0x02B1, 0x0676, 0x02B9, 0x0686, 0x02C1, 0x06AD]);
+			0xFF65->set_new_schedules([MIDNIGHT, DAWN, EVENING], [SLEEP, TEND_SHOP, WANDER], [0x02B1, 0x0676, 0x02B9, 0x0686, 0x02C1, 0x06AD]);
 			0xFF65->run_schedule();
 			abort;
 		}
@@ -51602,9 +51676,9 @@ void Func049C object#(0x49C) () {
 		0xFE9C->item_say("@Hello.@");
 		0xFF64->Func07D1();
 		Func097F(0xFF64, "@Speaking to me?@", 0x0002);
-		0xFF64->set_schedule_type(0x0003);
+		0xFF64->set_schedule_type(TALK);
 	}
-	if ((event == PROXIMITY) && (0xFF64->get_schedule_type() == 0x0007)) {
+	if ((event == PROXIMITY) && (0xFF64->get_schedule_type() == TEND_SHOP)) {
 		if (UI_get_random(0x000A) < 0x0007) {
 			abort;
 		}
@@ -51623,7 +51697,7 @@ void Func049C object#(0x49C) () {
 			0xFF65->run_schedule();
 			0xFF65->set_alignment(0x0000);
 			0xFF61->set_alignment(0x0000);
-			0xFF65->set_schedule_type(0x0003);
+			0xFF65->set_schedule_type(TALK);
 		}
 	}
 	if (event == STARTED_TALKING) {
@@ -51720,7 +51794,7 @@ void Func049C object#(0x49C) () {
 				};
 				Func097F(0xFE9C, "@Interesting....@", 0x0000);
 				Func097F(0xFF64, "@Do not return!@", 0x0003);
-				0xFF64->set_schedule_type(0x0007);
+				0xFF64->set_schedule_type(TEND_SHOP);
 				abort;
 		}
 	}
@@ -51747,7 +51821,7 @@ void Func049D object#(0x49D) () {
 		}
 		var0000 = 0xFF63->approach_avatar(0x0078, 0x0028);
 		if (var0000) {
-			0xFF63->set_schedule_type(0x0016);
+			0xFF63->set_schedule_type(THIEF);
 		}
 		abort;
 	}
@@ -51756,13 +51830,13 @@ void Func049D object#(0x49D) () {
 		0xFF63->Func07D1();
 		if (0xFF64->npc_nearby()) {
 			Func097F(0xFF63, "@Go away!@", 0x0003);
-			0xFF64->set_schedule_type(0x0009);
+			0xFF64->set_schedule_type(HOUND);
 			Func097F(0xFF64, "@Leave him alone!@", 0x0005);
 		} else {
 			Func097F(0xFF63, "@I am not a spy...@", 0x0003);
 			0xFF63->set_npc_id(0xFF63->get_npc_id() + 0x0001);
 		}
-		0xFF63->set_schedule_type(0x0014);
+		0xFF63->set_schedule_type(SHY);
 	}
 }
 
@@ -51788,7 +51862,7 @@ void Func049E object#(0x49E) () {
 		}
 		var0000 = 0xFF62->approach_avatar(0x0078, 0x0028);
 		if (var0000) {
-			0xFF62->set_schedule_type(0x0014);
+			0xFF62->set_schedule_type(SHY);
 			0xFF62->set_npc_id(0xFF62->get_npc_id() + 0x0001);
 		}
 		abort;
@@ -51799,16 +51873,16 @@ void Func049E object#(0x49E) () {
 		0xFF62->Func07D1();
 		if (0xFF64->npc_nearby()) {
 			Func097F(0xFF62, "@We cannot speak...@", 0x0003);
-			0xFF64->set_schedule_type(0x0009);
+			0xFF64->set_schedule_type(HOUND);
 			0xFF64->clear_item_say();
 			Func097F(0xFF64, "@Go away!@", 0x0005);
-			0xFF62->set_schedule_type(0x0014);
+			0xFF62->set_schedule_type(SHY);
 		} else {
 			Func097F(0xFF62, "@I'm no thief!@", 0x0003);
 			if (0xFF62->get_npc_id() > 0x0003) {
 				Func09AD(0xFF62);
 			} else {
-				0xFF62->set_schedule_type(0x000C);
+				0xFF62->set_schedule_type(WANDER);
 			}
 		}
 	}
@@ -51847,7 +51921,7 @@ void Func049F object#(0x49F) () {
 			0xFF61->clear_item_flag(ASLEEP);
 			0xFF61->set_item_frame(0x001E);
 			0xFF61->move_object([0x063E, 0x044D, 0x0000]);
-			0xFF61->set_schedule_type(0x000F);
+			0xFF61->set_schedule_type(WAIT);
 			UI_sprite_effect(0x0007, 0x063E, 0x044D, 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_sprite_effect(0x0007, 0x063E, 0x044D, 0x0000, 0x0000, 0x000C, 0xFFFD);
 			Func097F(0xFF61, "Draygan's power is broken!", 0x0003);
@@ -51861,7 +51935,7 @@ void Func049F object#(0x49F) () {
 		0xFE9C->item_say("@Greetings, old man...@");
 		0xFF61->Func07D1();
 		Func097F(0xFF61, "@Who calleth me old?@", 0x0002);
-		0xFF61->set_schedule_type(0x0003);
+		0xFF61->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFF61->run_schedule();
@@ -51873,15 +51947,15 @@ void Func049F object#(0x49F) () {
 			if (Func097D(0xFE9B, 0x0001, 0x01C2, 0xFE99, 0x0000)) {
 				Func09AC(0xFF61, 0xFFFF, 0x0000, 0x000C);
 				say("\"Thou must return the Heart of Elerion to me! I need it to restore balance to the forest and its creatures.\"");
-				0xFF61->set_schedule_type(0x0009);
-				0xFF65->set_schedule_type(0x0009);
+				0xFF61->set_schedule_type(HOUND);
+				0xFF65->set_schedule_type(HOUND);
 				0xFF65->set_alignment(0x0000);
 				add("give Orb");
 				remove("Master");
 			} else {
-				0xFF65->set_schedule_type(0x0009);
+				0xFF65->set_schedule_type(HOUND);
 				0xFF65->set_alignment(0x0000);
-				0xFF61->set_schedule_type(0x0009);
+				0xFF61->set_schedule_type(HOUND);
 				say("\"I must have the Heart of Elerion. Draygan had it, but it belongs to me. If thou canst find it, I shall reward thee.\"");
 				add("reward");
 				remove("Master");
@@ -52146,7 +52220,7 @@ void Func04A0 object#(0x4A0) () {
 					if ((var000B->get_item_frame() == 0x0006) && (var000B->get_item_quality() == 0x0001)) {
 						if (var000B->get_distance(0xFE9C) < 0x0009) {
 							item_say("@Thou shan't steal the gold!@");
-							set_schedule_type(0x0000);
+							set_schedule_type(IN_COMBAT);
 							set_alignment(0x0002);
 						}
 					}
@@ -52163,7 +52237,7 @@ void Func04A0 object#(0x4A0) () {
 						var0010 = UI_update_last_created(var000D);
 						UI_play_sound_effect2(0x0020, var000F);
 					}
-				} else if (!(get_schedule_type() == 0x0000)) {
+				} else if (!(get_schedule_type() == IN_COMBAT)) {
 					var000C = find_nearest(0x0178, 0x0005);
 					if (var000C) {
 						var000D = var000C->get_object_position();
@@ -52206,7 +52280,7 @@ void Func04A0 object#(0x4A0) () {
 			say("\"But thou shouldst journey further into the mountain soon, felon. The only source of food and water lies deeper in the heart of Freedom... if thou canst pay for it.\"");
 			say("\"Forgive me if I do not linger. I have many things to attend to before I can begin my rounds. Remember, if thou canst find thy way out, thou wilt be free!\"");
 			if (UI_die_roll(0x0001, 0x000A) > 0x0009) {
-				set_schedule_type(0x001D);
+				set_schedule_type(PATROL);
 			}
 			UI_remove_npc_face0();
 			item_say("@So long, felon!@");
@@ -52723,7 +52797,7 @@ void Func04A3 object#(0x4A3) () {
 		if (get_item_shape() == 0x0124) {
 			var0017 = 0xFF5D->find_nearby(0x017D, 0x0014, 0x0008);
 			if (var0017) {
-				var0017->set_schedule_type(0x0000);
+				var0017->set_schedule_type(IN_COMBAT);
 				var0000 = script var0017 {
 					say "@Die, mortal!@";
 				};
@@ -52832,14 +52906,14 @@ void Func04A8 object#(0x4A8) () {
 		0xFE9C->item_say("@Hello!@");
 		0xFF58->Func07D1();
 		Func097F(0xFF58, (("@Felicitations, " + var0000) + ".@"), 0x0002);
-		0xFF58->set_schedule_type(0x0003);
+		0xFF58->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFF58->run_schedule();
 		0xFF58->clear_item_say();
 		0xFF58->show_npc_face0(0x0000);
 		if (0xFF58->get_item_flag(IN_PARTY)) {
-			0xFF58->set_schedule_type(0x001F);
+			0xFF58->set_schedule_type(FOLLOW_AVATAR);
 			add("leave");
 		} else {
 			0xFF58->run_schedule();
@@ -52877,8 +52951,8 @@ void Func04A8 object#(0x4A8) () {
 					Func086A();
 					remove("leave");
 				}
-				0xFF58->set_new_schedules([0x0000, 0x0004, 0x0005, 0x0006, 0x0007], [0x000E, 0x001A, 0x000C, 0x001A, 0x0004], [0x09A7, 0x0778, 0x08C7, 0x0714, 0x099F, 0x078F, 0x08BE, 0x0707, 0x08B6, 0x070C]);
-				0xFF58->set_schedule_type(0x000C);
+				0xFF58->set_new_schedules([MIDNIGHT, NOON, AFTERNOON, EVENING, NIGHT], [SLEEP, 0x001A, WANDER, EAT_AT_INN, DANCE], [0x09A7, 0x0778, 0x08C7, 0x0714, 0x099F, 0x078F, 0x08BE, 0x0707, 0x08B6, 0x070C]);
+				0xFF58->set_schedule_type(WANDER);
 				add("grateful");
 			}
 			add("happenings");
@@ -52889,7 +52963,7 @@ void Func04A8 object#(0x4A8) () {
 			if (var0006 == false) {
 				0xFF58->set_item_flag(MET);
 				Func09AC(0xFF58, 0xFFFF, 0x0000, 0x000C);
-				0xFF58->set_schedule_type(0x0014);
+				0xFF58->set_schedule_type(SHY);
 				say("\"I am Stefano, late of Moonshade, and obtainer of rarities...\"");
 				say("\"I was unjustly imprisoned here, ",
 					var0000,
@@ -53247,7 +53321,7 @@ void Func04A8 object#(0x4A8) () {
 				call Func04A8;
 			};
 		}
-		0xFF58->set_schedule_type(0x001F);
+		0xFF58->set_schedule_type(FOLLOW_AVATAR);
 	}
 	if (event == SCRIPTED) {
 		if (gflags[0x0007]) {
@@ -53258,8 +53332,8 @@ void Func04A8 object#(0x4A8) () {
 			Func097F(0xFE9C, "@So long, Stefano.@", 0x0005);
 			0xFF58->remove_from_party();
 			Func086A();
-			0xFF58->set_new_schedules([0x0000, 0x0004, 0x0005, 0x0006, 0x0007], [0x000E, 0x001A, 0x000C, 0x001A, 0x0004], [0x09A7, 0x0778, 0x08C7, 0x0714, 0x099F, 0x078F, 0x08BE, 0x0707, 0x08B6, 0x070C]);
-			0xFF58->set_schedule_type(0x0014);
+			0xFF58->set_new_schedules([MIDNIGHT, NOON, AFTERNOON, EVENING, NIGHT], [SLEEP, 0x001A, WANDER, EAT_AT_INN, DANCE], [0x09A7, 0x0778, 0x08C7, 0x0714, 0x099F, 0x078F, 0x08BE, 0x0707, 0x08B6, 0x070C]);
+			0xFF58->set_schedule_type(SHY);
 			0xFF58->run_schedule();
 			abort;
 		}
@@ -53282,14 +53356,14 @@ void Func04A8 object#(0x4A8) () {
 					UI_play_sound_effect(0x0082);
 				}
 				0xFF22->set_alignment(0x0002);
-				0xFF22->set_schedule_type(0x0000);
+				0xFF22->set_schedule_type(IN_COMBAT);
 				0xFF22->set_opponent(0xFF58);
 				0xFF22->set_oppressor(0xFF58);
 				0xFF22->clear_item_say();
 				Func097F(0xFF22, "@Die, Stefano!@", 0x0000);
 				0xFF58->clear_item_say();
 				Func097F(0xFF58, "@Save me!@", 0x0002);
-				0xFF58->set_schedule_type(0x0000);
+				0xFF58->set_schedule_type(IN_COMBAT);
 				0xFF58->set_attack_mode(0x0007);
 			}
 		} else {
@@ -53339,7 +53413,7 @@ void Func04A9 object#(0x4A9) () {
 			0xFF57->set_polymorph(0x012E);
 			gflags[0x0236] = false;
 			gflags[0x0237] = true;
-			0xFF57->set_schedule_type(0x0000);
+			0xFF57->set_schedule_type(IN_COMBAT);
 			0xFF57->set_alignment(0x0003);
 			var0002 = 0xFF57->get_object_position();
 			UI_sprite_effect(0x0009, (var0002[0x0001] - 0x0001), (var0002[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -53349,7 +53423,7 @@ void Func04A9 object#(0x4A9) () {
 			0xFF57->set_polymorph(0x01F2);
 			gflags[0x0236] = true;
 			gflags[0x0237] = false;
-			set_schedule_type(0x000F);
+			set_schedule_type(WAIT);
 			set_alignment(0x0000);
 			var0002 = get_object_position();
 			UI_sprite_effect(0x0009, (var0002[0x0001] - 0x0001), (var0002[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -53392,7 +53466,7 @@ void Func04A9 object#(0x4A9) () {
 					UI_play_sound_effect(0x0043);
 				}
 				0xFE9C->set_item_flag(DONT_MOVE);
-				0xFF57->set_schedule_type(0x000F);
+				0xFF57->set_schedule_type(WAIT);
 			} else {
 				var0005 = script 0xFE9C after 1 ticks {
 					call Func04A9;
@@ -53447,7 +53521,7 @@ void Func04A9 object#(0x4A9) () {
 		gflags[0x0236] = false;
 		gflags[0x0237] = false;
 		set_alignment(0x0000);
-		0xFE9C->set_schedule_type(0x001F);
+		0xFE9C->set_schedule_type(FOLLOW_AVATAR);
 		Func08AE();
 	}
 	if (event == BG_PATH_FAILURE) {
@@ -53561,9 +53635,9 @@ void Func04AA object#(0x4AA) () {
 		0xFF56->Func07D1();
 		Func097F(0xFF56, "@To say greetings.@", 0x0002);
 		if (gflags[0x01FE]) {
-			0xFF56->set_schedule_type(0x0003);
-		} else if (0xFF56->get_schedule_type() != 0x000F) {
-			0xFF56->set_schedule_type(0x000F);
+			0xFF56->set_schedule_type(TALK);
+		} else if (0xFF56->get_schedule_type() != WAIT) {
+			0xFF56->set_schedule_type(WAIT);
 			0xFF56->Func07D2();
 			var0014 = script 0xFF56 after 7 ticks {
 				nohalt;
@@ -53586,7 +53660,7 @@ void Func04AA object#(0x4AA) () {
 			say("\"To have told you to seek the Pillar of Fire. To grasp it and enter the Test of the Ancients.\"");
 			say("\"To delay no longer.\"");
 			Func097F(0xFF56, "@The Pillar!@", 0x0000);
-			0xFF56->set_schedule_type(0x0014);
+			0xFF56->set_schedule_type(SHY);
 			abort;
 		}
 		if (gflags[0x01FB]) {
@@ -53642,7 +53716,7 @@ void Func04AA object#(0x4AA) () {
 				Func0879();
 			} else {
 				say("\"To waste our precious time! To leave now!\"");
-				0xFF56->set_schedule_type(0x000C);
+				0xFF56->set_schedule_type(WANDER);
 				abort;
 			}
 		} else {
@@ -53724,7 +53798,7 @@ void Func04AA object#(0x4AA) () {
 				say("\"To go your way! To leave my people to their slumbers, and the fate which grasps them in the night.\"");
 				say("\"To hope the Hero comes soon...\"");
 				Func097F(0xFF56, "@Soon...@", 0x0000);
-				0xFF56->set_schedule_type(0x000C);
+				0xFF56->set_schedule_type(WANDER);
 				abort;
 
 			case "tell me more":
@@ -53793,7 +53867,7 @@ void Func04AA object#(0x4AA) () {
 				} else {
 					say("\"To be sad... To know that we are fading rapidly. To hope that the Hero comes soon.\"");
 					Func097F(0xFF56, "@Depart...@", 0x0000);
-					0xFF56->set_schedule_type(0x000C);
+					0xFF56->set_schedule_type(WANDER);
 					abort;
 				}
 				fallthrough;
@@ -53816,7 +53890,7 @@ void Func04AA object#(0x4AA) () {
 			case "I am lost...":
 				say("\"To think that you wish to do us harm, like all of your kind. To think that you are here to steal our treasures. To demand that you leave now!\"");
 				Func097F(0xFF56, "@Leave!@", 0x0000);
-				0xFF56->set_schedule_type(0x000C);
+				0xFF56->set_schedule_type(WANDER);
 				abort;
 
 			case "dreaming sickness":
@@ -53902,7 +53976,7 @@ void Func04AA object#(0x4AA) () {
 				if (var0018->get_item_quality() == 0x0049) {
 					say("\"To open the brass gate, that you may gain the surface.\"");
 					Func097F(0xFF56, "@To wait.@", 0x0000);
-					0xFF56->set_new_schedules(0x0000, 0x001D, 0xFF56->get_object_position());
+					0xFF56->set_new_schedules(MIDNIGHT, PATROL, 0xFF56->get_object_position());
 					0xFF56->run_schedule();
 				} else {
 					say("\"To know that the only exit is at the brass gate at where we first met. To know that Men are too weak to pull the levers to open it.\"");
@@ -53910,7 +53984,7 @@ void Func04AA object#(0x4AA) () {
 					Func097F(0xFF56, "@To meet you there...@", 0x0000);
 					Func097F(0xFE9C, "@See thee at the gate...@", 0x0000);
 					var0019 = [0x05C4, 0x09B3];
-					0xFF56->set_new_schedules(0x0000, 0x000A, [var0019]);
+					0xFF56->set_new_schedules(MIDNIGHT, STANDTHERE, [var0019]);
 					0xFF56->run_schedule();
 					abort;
 				}
@@ -53934,7 +54008,7 @@ void Func04AA object#(0x4AA) () {
 						say("\"To know that time is short. To wish that the true Hero shall come soon.\"");
 						Func097F(0xFF56, "@Soon...@", 0x0000);
 					}
-					0xFF56->set_schedule_type(0x0014);
+					0xFF56->set_schedule_type(SHY);
 					abort;
 				}
 				UI_remove_npc_face0();
@@ -53956,7 +54030,7 @@ void Func04AC object#(0x4AC) () {
 	var var0000;
 
 	if (event == DOUBLECLICK) {
-		if (0xFF54->get_schedule_type() == 0x0004) {
+		if (0xFF54->get_schedule_type() == DANCE) {
 			item_say("@Later...@");
 		} else {
 			item_say("@Not the left button!@");
@@ -54003,7 +54077,7 @@ void Func04B0 object#(0x4B0) () {
 		0xFF50->item_say("@Water, please!@");
 	}
 	if (event == STARTED_TALKING) {
-		0xFF50->set_schedule_type(0x0007);
+		0xFF50->set_schedule_type(TEND_SHOP);
 		0xFF50->item_say("@Water, please!@");
 		var0000 = script 0xFF50 after 80 ticks {
 			nohalt;
@@ -54042,7 +54116,7 @@ void Func04B1 object#(0x4B1) () {
 		var0001 = ["Water! Please!", "I beseech thee!", "My throat is so dry..."];
 		var0002 = var0001[var0000];
 		0xFF4F->item_say(var0002);
-		0xFF4F->set_schedule_type(0x0007);
+		0xFF4F->set_schedule_type(TEND_SHOP);
 	}
 }
 
@@ -54084,7 +54158,7 @@ void Func04B2 object#(0x4B2) () {
 			}
 		}
 		0xFF4E->run_schedule();
-		0xFF4E->set_schedule_type(0x000F);
+		0xFF4E->set_schedule_type(WAIT);
 		0xFF4E->show_npc_face0(0x0000);
 		say("\"Thank the heavens I have found thee! Thou didst disappear...\"");
 		say("\"When the Guardian appeared, we feared thou wert taken. Thou must hurry, I have found a way for thee to return home!\"");
@@ -54334,7 +54408,7 @@ void Func04B3 object#(0x4B3) () {
 		0xFE9C->item_say("@Old friend...@");
 		0xFF4D->Func07D1();
 		Func097F(0xFF4D, "@What dost thou wish?@", 0x0002);
-		0xFF4D->set_schedule_type(0x0003);
+		0xFF4D->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFF4D->clear_item_say();
@@ -54356,7 +54430,7 @@ void Func04B3 object#(0x4B3) () {
 				}
 			}
 		}
-		0xFF4D->set_schedule_type(0x000F);
+		0xFF4D->set_schedule_type(WAIT);
 		0xFFFE->show_npc_face0(0x0000);
 		say("\"We feared for thee when thou didst disappear from between the pillars. While searching, I became trapped here. I cannot seem to find the way out. Though I suspect that those buttons on the wall might be part of the answer.\"");
 		converse (["disappear", "trapped", "buttons", "bye"]) {
@@ -54464,7 +54538,7 @@ void Func04B3 object#(0x4B3) () {
 			var000F = 0xFF4D->find_nearby(0x028C, 0x001E, 0x0004);
 			if (var000F) {
 				Func097F(0xFF4D, "@I think 'tis THY turn...@", 0x0001);
-				var000F->set_schedule_type(0x000F);
+				var000F->set_schedule_type(WAIT);
 				0xFF54->clear_item_say();
 				Func097F(0xFF54, "@Yes, Shamino...@", 0x0002);
 				var0006 = 0xFF4D->find_nearby(0x0178, 0x000A, 0x0000);
@@ -54626,11 +54700,11 @@ void Func04B4 object#(0x4B4) () {
 	}
 	if (event == SCRIPTED) {
 		0xFF4C->move_object([0x00A7, 0x0655, 0x0000]);
-		0xFF4C->set_new_schedules(0x0000, 0x0003, [0x00A6, 0x0664]);
-		set_schedule_type(0x0003);
+		0xFF4C->set_new_schedules(MIDNIGHT, TALK, [0x00A6, 0x0664]);
+		set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF4C->set_new_schedules(0x0000, 0x0007, [0x00AB, 0x0631]);
+		0xFF4C->set_new_schedules(MIDNIGHT, TEND_SHOP, [0x00AB, 0x0631]);
 		0xFF4C->run_schedule();
 		0xFE9C->clear_item_flag(DONT_MOVE);
 		var0005 = 0xFE9C->find_nearby(0x010E, 0x0050, 0x0000);
@@ -54847,7 +54921,7 @@ void Func04B5 object#(0x4B5) () {
 		} else {
 			UI_play_sound_effect(0x0030);
 			0xFE9C->obj_sprite_effect(0x0009, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
-			0xFF4B->set_schedule_type(0x0003);
+			0xFF4B->set_schedule_type(TALK);
 			var0007 = script 0xFF4B {
 				actor frame reach_1h;
 				actor frame raise_1h;
@@ -54866,7 +54940,7 @@ void Func04B5 object#(0x4B5) () {
 		var0007 = script 0xFF4B {
 			nop2;
 		};
-		0xFF4B->set_schedule_type(0x0003);
+		0xFF4B->set_schedule_type(TALK);
 		0xFF4B->Func07D1();
 	}
 	if (event == STARTED_TALKING) {
@@ -54990,7 +55064,7 @@ void Func04B6 object#(0x4B6) () {
 	if (event == DOUBLECLICK) {
 		Func097F(0xFE9C, "@Hello, there!@", 0x0000);
 		Func097F(0xFF4A, "@Yes?@", 0x0002);
-		0xFF4A->set_schedule_type(0x0003);
+		0xFF4A->set_schedule_type(TALK);
 		0xFF4A->Func07D1();
 	}
 	if (event == SCRIPTED) {
@@ -55012,7 +55086,7 @@ void Func04B6 object#(0x4B6) () {
 			var000A = Func08B6();
 			for (var000D in var000A with var000B to var000C) {
 				var000D->clear_item_flag(ASLEEP);
-				var000D->set_schedule_type(0x001F);
+				var000D->set_schedule_type(FOLLOW_AVATAR);
 				var0006 = script var000D {
 					nohalt;
 					actor frame standing;
@@ -55106,8 +55180,8 @@ void Func04B6 object#(0x4B6) () {
 					var0017[0x0001] += 0x0002;
 					0xFFF0->move_object(var0017);
 					UI_sprite_effect(0x0007, var0017[0x0001], var0017[0x0002], var0017[0x0003], 0x0000, 0x0000, 0xFFFF);
-					0xFFF0->set_schedule_type(0x000F);
-					0xFF4A->set_schedule_type(0x000F);
+					0xFFF0->set_schedule_type(WAIT);
+					0xFF4A->set_schedule_type(WAIT);
 					var0018 = 0xFFF0->find_direction(0xFF4A);
 					var0019 = 0xFF4A->find_direction(0xFFF0);
 					var0006 = script 0xFFF0 {
@@ -55164,8 +55238,8 @@ void Func04B6 object#(0x4B6) () {
 						var0017[0x0001] += 0x0002;
 						0xFFF0->move_object(var0017);
 						UI_sprite_effect(0x0007, var0017[0x0001], var0017[0x0002], var0017[0x0003], 0x0000, 0x0000, 0xFFFF);
-						0xFFF0->set_schedule_type(0x000F);
-						0xFF4A->set_schedule_type(0x000F);
+						0xFFF0->set_schedule_type(WAIT);
+						0xFF4A->set_schedule_type(WAIT);
 						var0018 = 0xFFF0->find_direction(0xFF4A);
 						var0019 = 0xFF4A->find_direction(0xFFF0);
 						var0006 = script 0xFFF0 {
@@ -55349,8 +55423,8 @@ void Func04B6 object#(0x4B6) () {
 						var0017[0x0001] += 0x0002;
 						0xFFF0->move_object(var0017);
 						UI_sprite_effect(0x0007, var0017[0x0001], var0017[0x0002], var0017[0x0003], 0x0000, 0x0000, 0xFFFF);
-						0xFFF0->set_schedule_type(0x000F);
-						0xFF4A->set_schedule_type(0x000F);
+						0xFFF0->set_schedule_type(WAIT);
+						0xFF4A->set_schedule_type(WAIT);
 						var0018 = 0xFFF0->find_direction(0xFF4A);
 						var0019 = 0xFF4A->find_direction(0xFFF0);
 						var0006 = script 0xFFF0 {
@@ -55413,7 +55487,7 @@ void Func04B7 object#(0x4B7) () {
 		var0001 = ["Just a drop!", "Water, dammit!", "I have to have water!!!"];
 		var0002 = var0001[var0000];
 		0xFF49->item_say(var0002);
-		0xFF49->set_schedule_type(0x0007);
+		0xFF49->set_schedule_type(TEND_SHOP);
 	}
 }
 
@@ -55434,7 +55508,7 @@ void Func04B8 object#(0x4B8) () {
 		0xFE9C->item_say("@May we speak?@");
 		0xFF48->Func07D1();
 		Func097F(0xFF48, (("@Yes, " + var0001) + "?@"), 0x0002);
-		0xFF48->set_schedule_type(0x0003);
+		0xFF48->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFF48->run_schedule();
@@ -55470,12 +55544,12 @@ void Func04BA object#(0x4BA) () {
 		Func0809();
 		abort;
 	}
-	if ((event == DOUBLECLICK) && (0xFF46->get_schedule_type() != 0x000F)) {
+	if ((event == DOUBLECLICK) && (0xFF46->get_schedule_type() != WAIT)) {
 		0xFE9C->item_say("@Hello!@");
 		0xFF46->Func07D1();
 		Func097F(0xFF46, "@Intruder!@", 0x0005);
 		0xFF46->Func07D2();
-		0xFF46->set_schedule_type(0x000F);
+		0xFF46->set_schedule_type(WAIT);
 		var0000 = script 0xFF46 after 10 ticks {
 			nohalt;
 			call Func04BA;
@@ -55485,7 +55559,7 @@ void Func04BA object#(0x4BA) () {
 		if (item != 0xFF46->get_npc_object()) {
 			Func097F(0xFF46, "@Intruder!@", 0x0005);
 			0xFF46->Func07D2();
-			0xFF46->set_schedule_type(0x000F);
+			0xFF46->set_schedule_type(WAIT);
 			var0000 = script 0xFF46 after 10 ticks {
 				nohalt;
 				call Func04BA;
@@ -55529,12 +55603,12 @@ void Func04BC object#(0x4BC) () {
 		Func0809();
 		abort;
 	}
-	if ((event == DOUBLECLICK) && (0xFF44->get_schedule_type() != 0x000F)) {
+	if ((event == DOUBLECLICK) && (0xFF44->get_schedule_type() != WAIT)) {
 		0xFE9C->item_say("@Greetings!@");
 		0xFF44->Func07D1();
 		Func097F(0xFF44, "@Keep away!@", 0x0005);
 		0xFF44->Func07D2();
-		0xFF44->set_schedule_type(0x000F);
+		0xFF44->set_schedule_type(WAIT);
 		var0000 = script 0xFF44 after 10 ticks {
 			nohalt;
 			call Func04BC;
@@ -55544,14 +55618,14 @@ void Func04BC object#(0x4BC) () {
 		if (item != 0xFF44->get_npc_object()) {
 			Func097F(0xFF44, "@Keep Away!@", 0x0005);
 			0xFF44->Func07D2();
-			0xFF44->set_schedule_type(0x000F);
+			0xFF44->set_schedule_type(WAIT);
 			var0000 = script 0xFF44 after 10 ticks {
 				nohalt;
 				call Func04BC;
 			};
 		} else {
 			0xFF44->clear_item_say();
-			0xFF44->set_schedule_type(0x0009);
+			0xFF44->set_schedule_type(HOUND);
 			0xFED6->show_npc_face0(0x0000);
 			say("\"Thou art not permitted here. It is dangerous here. The forces beyond these doors are not of mortal understanding.\"");
 			Func097F(0xFF44, "@Be on thy way!@", 0x0000);
@@ -55581,7 +55655,7 @@ void Func04BD object#(0x4BD) () {
 		Func0809();
 		abort;
 	}
-	if ((event == DOUBLECLICK) && (0xFF43->get_schedule_type() != 0x000F)) {
+	if ((event == DOUBLECLICK) && (0xFF43->get_schedule_type() != WAIT)) {
 		0xFE9C->item_say("@Hello!@");
 		0xFF43->Func07D1();
 		Func097F(0xFF43, "@Die, fool!@", 0x0005);
@@ -55612,12 +55686,12 @@ void Func04BE object#(0x4BE) () {
 		Func0809();
 		abort;
 	}
-	if ((event == DOUBLECLICK) && (0xFF42->get_schedule_type() != 0x000F)) {
+	if ((event == DOUBLECLICK) && (0xFF42->get_schedule_type() != WAIT)) {
 		0xFE9C->item_say("@Pardon me...@");
 		0xFF42->Func07D1();
 		Func097F(0xFF42, "@Hold!@", 0x0005);
 		0xFF42->Func07D2();
-		0xFF42->set_schedule_type(0x000F);
+		0xFF42->set_schedule_type(WAIT);
 		var0000 = script 0xFF42 after 10 ticks {
 			nohalt;
 			call Func04BE;
@@ -55627,7 +55701,7 @@ void Func04BE object#(0x4BE) () {
 		if (item != 0xFF42->get_npc_object()) {
 			Func097F(0xFF42, "@Hold!@", 0x0005);
 			0xFF42->Func07D2();
-			0xFF42->set_schedule_type(0x000F);
+			0xFF42->set_schedule_type(WAIT);
 			var0000 = script 0xFF42 after 10 ticks {
 				nohalt;
 				call Func04BE;
@@ -55782,13 +55856,13 @@ void Func04C9 object#(0x4C9) () {
 			say("\"Iieeeee.... Help me!\" ~\"I cannot escape...\" ~\"It will catch and devour me!\" *\"Canst thou not see it? Please, help me!\"");
 			0xFF37->set_item_flag(MET);
 			UI_remove_npc_face0();
-			0xFF37->set_schedule_type(0x001D);
+			0xFF37->set_schedule_type(PATROL);
 			abort;
 		}
 		0xFFC0->show_npc_face0(0x0000);
 		say("\"Art thou blind! Canst thou not see the foul beast?\" *\"Have mercy! I beg thee to slay such an horror! Please, thou must kill it before it takes me!\"");
 		UI_remove_npc_face0();
-		0xFF37->set_schedule_type(0x001D);
+		0xFF37->set_schedule_type(PATROL);
 		abort;
 	}
 }
@@ -55949,7 +56023,7 @@ void Func04CA object#(0x4CA) () {
 			case "I follow Chaos" (remove):
 				say("\"Then thou shalt not pass.\"");
 				Func097F(0xFF36, "@Duty.@", 0x0003);
-				0xFF36->set_schedule_type(0x001D);
+				0xFF36->set_schedule_type(PATROL);
 				break;
 
 			case "bye":
@@ -55957,7 +56031,7 @@ void Func04CA object#(0x4CA) () {
 				UI_remove_npc_face1();
 				Func097F(0xFE9C, "@I have heard enough.@", 0x0000);
 				Func097F(0xFF36, "@Always follow Order.@", 0x0003);
-				0xFF36->set_schedule_type(0x001D);
+				0xFF36->set_schedule_type(PATROL);
 				break;
 		}
 	}
@@ -55978,7 +56052,7 @@ void Func04CB object#(0x4CB) () {
 		Func0919(item);
 	}
 	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
-		set_schedule_type(0x000F);
+		set_schedule_type(WAIT);
 	}
 	if (event == SCRIPTED) {
 		0xFF35->Func07D1();
@@ -56186,11 +56260,11 @@ void Func04CF object#(0x4CF) () {
 		0xFE9C->item_say("@Pardon me...@");
 		0xFF31->Func07D1();
 		Func097F(0xFF31, (("@Yes, my " + var0002) + "?@"), 0x0002);
-		0xFF31->set_schedule_type(0x0003);
+		0xFF31->set_schedule_type(TALK);
 	}
 	if (event == PROXIMITY) {
 		if ((Func09A0(0x0005, 0x0001)->get_item_quality() == 0x000A) && (!0xFF29->get_item_flag(MET))) {
-			0xFF31->set_schedule_type(0x000F);
+			0xFF31->set_schedule_type(WAIT);
 			var0007 = script Func09A0(0x0005, 0x0003) {
 				nohalt;
 				call Func0109;
@@ -56223,7 +56297,7 @@ void Func04CF object#(0x4CF) () {
 			UI_play_sound_effect(0x0051);
 			for (var0012 in var000B with var0010 to var0011) {
 				if (!var0012->get_item_flag(SI_ZOMBIE)) {
-					var0012->set_schedule_type(0x001F);
+					var0012->set_schedule_type(FOLLOW_AVATAR);
 				}
 				var0012->set_temperature(0x0000);
 				var0012->clear_item_flag(ASLEEP);
@@ -56260,9 +56334,9 @@ void Func04CF object#(0x4CF) () {
 			for (var0012 in var0019 with var001B to var001C) {
 				var001D = Func084E(var0012, var001A);
 				var0012->move_object(var001D);
-				var0012->set_new_schedules(0x0000, 0x000F, var001D);
+				var0012->set_new_schedules(MIDNIGHT, WAIT, var001D);
 				var0012->run_schedule();
-				var0012->set_schedule_type(0x000F);
+				var0012->set_schedule_type(WAIT);
 				var0007 = script var0012 {
 					face north;
 					actor frame standing;
@@ -56624,7 +56698,7 @@ void Func04D0 object#(0x4D0) () {
 	var var0001;
 
 	if (event == DOUBLECLICK) {
-		0xFF30->set_schedule_type(0x0014);
+		0xFF30->set_schedule_type(SHY);
 		var0000 = 0xFF30->find_nearby(0x00FA, 0x000A, 0x0000);
 		if (0xFF2A->get_npc_object() in var0000) {
 			var0000 = Func0988(0xFF2A->get_npc_object(), var0000);
@@ -56677,7 +56751,7 @@ void Func04D1 object#(0x4D1) () {
 		0xFE9C->item_say("@A moment, monk!@");
 		0xFF2F->Func07D1();
 		Func097F(0xFF2F, (("@Yes, my " + var0003) + "?@"), 0x0002);
-		0xFF2F->set_schedule_type(0x0003);
+		0xFF2F->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFF2F->run_schedule();
@@ -56891,7 +56965,7 @@ void Func04D2 object#(0x4D2) () {
 	var var0001;
 
 	if (event == DOUBLECLICK) {
-		0xFF2E->set_schedule_type(0x0014);
+		0xFF2E->set_schedule_type(SHY);
 		var0000 = 0xFF2E->find_nearby(0x00FA, 0x000A, 0x0000);
 		if (0xFF2A->get_npc_object() in var0000) {
 			var0000 = Func0988(0xFF2A->get_npc_object(), var0000);
@@ -56957,7 +57031,7 @@ void Func04D3 object#(0x4D3) () {
 		0xFE9C->item_say("@Excuse me...@");
 		0xFF2D->Func07D1();
 		Func097F(0xFF2D, (("@Yes, my " + var0003) + "?@"), 0x0002);
-		0xFF2D->set_schedule_type(0x0003);
+		0xFF2D->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFF2D->run_schedule();
@@ -56972,7 +57046,7 @@ void Func04D3 object#(0x4D3) () {
 			for (var000B in var0008 with var0009 to var000A) {
 				if (!var000B->npc_nearby()) {
 					var000C = var000B->approach_avatar(0x0050, 0x0028);
-					if (!(var000B->get_schedule_type() == 0x001F)) {
+					if (!(var000B->get_schedule_type() == FOLLOW_AVATAR)) {
 						var000B->add_to_party();
 					}
 				}
@@ -57231,7 +57305,7 @@ void Func04D4 object#(0x4D4) () {
 		0xFE9C->item_say("@Excuse me...@");
 		0xFF2C->Func07D1();
 		Func097F(0xFF2C, (("@Yes, my " + var0003) + "?@"), 0x0002);
-		0xFF2C->set_schedule_type(0x0003);
+		0xFF2C->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFF2C->run_schedule();
@@ -57410,7 +57484,7 @@ void Func04D5 object#(0x4D5) () {
 		var0005 = 0xFF2B->find_nearby(0xFFFF, 0x0014, 0x0008);
 		var0006 = [];
 		for (var0009 in var0005 with var0007 to var0008) {
-			if (var0009->get_schedule_type() == 0x0004) {
+			if (var0009->get_schedule_type() == DANCE) {
 				var0006 &= var0009;
 			}
 		}
@@ -57455,7 +57529,7 @@ void Func04D5 object#(0x4D5) () {
 		0xFE9C->item_say("@Might we speak?@");
 		0xFF2B->Func07D1();
 		Func097F(0xFF2B, (("@Yes, " + var0003) + "?@"), 0x0002);
-		0xFF2B->set_schedule_type(0x0003);
+		0xFF2B->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFF2B->run_schedule();
@@ -57659,7 +57733,7 @@ void Func04D6 object#(0x4D6) () {
 	var var0001;
 
 	if (event == DOUBLECLICK) {
-		0xFF2A->set_schedule_type(0x0014);
+		0xFF2A->set_schedule_type(SHY);
 		var0000 = 0xFF2A->find_nearby(0x00FA, 0x000A, 0x0000);
 		if (0xFF2A->get_npc_object() in var0000) {
 			var0000 = Func0988(0xFF2A->get_npc_object(), var0000);
@@ -57701,10 +57775,10 @@ void Func04D7 object#(0x4D7) () {
 		0xFE9C->item_say("Most honored one...");
 		0xFF29->Func07D1();
 		Func097F(0xFF29, "@What?@", 0x0002);
-		0xFF29->set_schedule_type(0x0003);
+		0xFF29->set_schedule_type(TALK);
 	}
 	if ((event == STARTED_TALKING) || (event == SCRIPTED)) {
-		0xFF29->set_schedule_type(0x000A);
+		0xFF29->set_schedule_type(STANDTHERE);
 		0xFF29->show_npc_face0(0x0000);
 		if (var0003) {
 			say("\"We meet again, ",
@@ -57919,7 +57993,7 @@ void Func04D9 object#(0x4D9) () {
 		say "@I beg of thee...@";
 	};
 	0xFF27->set_alignment(0x0000);
-	0xFF27->set_schedule_type(0x0009);
+	0xFF27->set_schedule_type(HOUND);
 }
 
 extern var Func0954 0x954 ();
@@ -57957,10 +58031,10 @@ void Func04DA object#(0x4DA) () {
 		0xFE9C->item_say("@Hail, minstrel!@");
 		0xFF26->Func07D1();
 		Func097F(0xFF26, (("@Greetings, " + var0000) + "!@"), 0x0005);
-		0xFF26->set_schedule_type(0x0003);
+		0xFF26->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF26->set_schedule_type(0x000C);
+		0xFF26->set_schedule_type(WANDER);
 		0xFFD9->show_npc_face0(0x0000);
 		if (var0003 == true) {
 			say("\"I had wondered when I would encounter thee here, Avatar.\" ~\"I expect that thou wouldst like some answers, no doubt.\" *\"Or perhaps I could sing thee a song to ease thy way.\"");
@@ -58273,7 +58347,7 @@ void Func04DB object#(0x4DB) () {
 		0xFFAF->show_npc_face0(0x0000);
 		say("Ha, ha, ha, ha, ha!");
 		UI_remove_npc_face0();
-		0xFF25->set_schedule_type(0x000A);
+		0xFF25->set_schedule_type(STANDTHERE);
 		var0001 = 0xFF25->get_object_position();
 		UI_sprite_effect(0x0004, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		var0001 = 0xFF24->get_object_position();
@@ -58295,10 +58369,10 @@ void Func04DE object#(0x4DE) () {
 		0xFF22->clear_item_flag(SI_TOURNAMENT);
 		0xFF22->reduce_health(0x0032, 0x0000);
 		if (0xFF58->get_item_flag(IN_PARTY)) {
-			0xFF58->set_schedule_type(0x001F);
+			0xFF58->set_schedule_type(FOLLOW_AVATAR);
 		} else {
-			0xFF58->set_new_schedules([0x0000, 0x0004, 0x0005, 0x0006, 0x0007], [0x000E, 0x001A, 0x000C, 0x001A, 0x0004], [0x09A7, 0x0778, 0x08C7, 0x0714, 0x099F, 0x078F, 0x08BE, 0x0707, 0x08B6, 0x070C]);
-			0xFF58->set_schedule_type(0x0003);
+			0xFF58->set_new_schedules([MIDNIGHT, NOON, AFTERNOON, EVENING, NIGHT], [SLEEP, 0x001A, WANDER, EAT_AT_INN, DANCE], [0x09A7, 0x0778, 0x08C7, 0x0714, 0x099F, 0x078F, 0x08BE, 0x0707, 0x08B6, 0x070C]);
+			0xFF58->set_schedule_type(TALK);
 		}
 		Func097F(0xFF58, "@I am saved!@", 0x0000);
 	}
@@ -58374,7 +58448,7 @@ void Func0510 object#(0x510) () {
 		set_polymorph(0x01F5);
 	}
 	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
-		0xFEF0->set_schedule_type(0x000F);
+		0xFEF0->set_schedule_type(WAIT);
 		var0000 = script 0xFEF0 {
 			nohalt;
 			actor frame bowing;
@@ -59189,7 +59263,7 @@ void Func060C object#(0x60C) () {
 		var0009->halt_scheduled();
 		var0009->clear_item_say();
 		if (!var0009->get_item_flag(SI_ZOMBIE)) {
-			var0009->set_schedule_type(0x001F);
+			var0009->set_schedule_type(FOLLOW_AVATAR);
 		}
 		var0009->set_temperature(0x0000);
 		var0009->clear_item_flag(ASLEEP);
@@ -59229,7 +59303,7 @@ void Func060C object#(0x60C) () {
 			var000F->clear_item_flag(PARALYZED);
 			var000F->clear_item_flag(POISONED);
 			var000F->clear_item_flag(DONT_MOVE);
-			var000F->set_schedule_type(0x0003);
+			var000F->set_schedule_type(TALK);
 			var000A = script var000F {
 				face south;
 				actor frame standing;
@@ -59815,7 +59889,7 @@ void Func0619 object#(0x619) () {
 		var0000 = true;
 	}
 	if (event == SCRIPTED) {
-		set_schedule_type(0x000A);
+		set_schedule_type(STANDTHERE);
 		clear_item_say();
 		0xFEC6->show_npc_face0(0x0000);
 		if (!gflags[0x0310]) {
@@ -59905,7 +59979,7 @@ void Func0619 object#(0x619) () {
 				UI_remove_npc_face0();
 				0xFE9C->item_say("@Goodbye!@");
 				Func097F(item, "@Be off wit' ye!@", 0x0002);
-				set_schedule_type(0x000B);
+				set_schedule_type(LOITER);
 				break;
 		}
 	}
@@ -59924,7 +59998,7 @@ void Func061A object#(0x61A) () {
 		var0000 = true;
 	}
 	if (event == SCRIPTED) {
-		set_schedule_type(0x000A);
+		set_schedule_type(STANDTHERE);
 		clear_item_say();
 		0xFEC8->show_npc_face0(0x0000);
 		if (!gflags[0x030F]) {
@@ -60026,7 +60100,7 @@ void Func061A object#(0x61A) () {
 
 			case "bye":
 				UI_remove_npc_face0();
-				set_schedule_type(0x000B);
+				set_schedule_type(LOITER);
 				Func097F(0xFE9C, "@Good riddance!@", 0x0000);
 				Func097F(item, "@Pea brain!@", 0x0002);
 				break;
@@ -60053,7 +60127,7 @@ void Func061B object#(0x61B) () {
 		var0002 = true;
 	}
 	if (event == SCRIPTED) {
-		set_schedule_type(0x000A);
+		set_schedule_type(STANDTHERE);
 		clear_item_say();
 		0xFEC7->show_npc_face0(0x0000);
 		if (!gflags[0x0311]) {
@@ -60174,7 +60248,7 @@ void Func061B object#(0x61B) () {
 				UI_remove_npc_face0();
 				Func097F(0xFE9C, "@Farewell!@", 0x0000);
 				Func097F(item, "@Take care!@", 0x0002);
-				set_schedule_type(0x000B);
+				set_schedule_type(LOITER);
 				break;
 		}
 	}
@@ -60283,7 +60357,7 @@ void Func061E object#(0x61E) () {
 	if ((event == SCRIPTED) && ((var0000[0x0001] > 0x0010) && ((var0000[0x0001] < 0x004F) && ((var0000[0x0002] > 0x0660) && (var0000[0x0002] < 0x067A))))) {
 		var0001 = false;
 		var0002 = [0x0130, 0x02FE, 0x01D5, 0x0378];
-		if (!(0xFF54->get_schedule_type() == 0x0004)) {
+		if (!(0xFF54->get_schedule_type() == DANCE)) {
 			var0002 &= 0x028C;
 		}
 		var0003 = ["@Help us!@", "@Press the right button!@", "@Free us with the right button!@", "@Be kind...@", "@Do not force us!@", "@Damn the buttons!@"];
@@ -60383,7 +60457,7 @@ labelFunc0622_0024:
 					item->Func0624();
 				}
 				for (var000B in var0000 with var0009 to var000A) {
-					var000B->set_schedule_type(0x001F);
+					var000B->set_schedule_type(FOLLOW_AVATAR);
 				}
 				0xFE9C->clear_item_flag(ASLEEP);
 				return;
@@ -60406,7 +60480,7 @@ labelFunc0622_0024:
 		Func0881();
 		var0000 = Func0988(0xFE9C->get_npc_object(), var0000);
 		for (var000B in var0000 with var0015 to var0016) {
-			var000B->set_schedule_type(0x000B);
+			var000B->set_schedule_type(LOITER);
 		}
 		var0017 = script 0xFE9C {
 			wait 34;
@@ -60442,7 +60516,7 @@ void Func0623 object#(0x623) () {
 			Func094A(("Arise, " + var0001) + ". 'Tis time to continue the quest.");
 		}
 		for (var0004 in var0000 with var0002 to var0003) {
-			var0004->set_schedule_type(0x001F);
+			var0004->set_schedule_type(FOLLOW_AVATAR);
 		}
 		0xFE9C->set_item_flag(ASLEEP);
 		0xFE9C->clear_item_flag(ASLEEP);
@@ -60606,12 +60680,12 @@ void Func0625 object#(0x625) () {
 						var0009 &= find_nearby(var000C, 0x001E, 0x0000);
 					}
 					for (var000F in var0009 with var000D to var000E) {
-						var000F->set_schedule_type(0x000C);
+						var000F->set_schedule_type(WANDER);
 					}
 					var0010 = find_nearby(0xFE99, 0x0041, 0x0008);
 					for (var0013 in var0010 with var0011 to var0012) {
-						if (var0013->get_schedule_type() == 0x0000) {
-							var0013->set_schedule_type(0x000C);
+						if (var0013->get_schedule_type() == IN_COMBAT) {
+							var0013->set_schedule_type(WANDER);
 						}
 					}
 					say("\"I am pleased to see that thou art a thinking ",
@@ -60640,8 +60714,8 @@ void Func0625 object#(0x625) () {
 				say("\"Very well. Thou shalt remain in prison until we see fit to release thee.\"");
 				var0010 = find_nearby(0xFE99, 0x0041, 0x0008);
 				for (var0013 in var0010 with var0019 to var001A) {
-					if (var0013->get_schedule_type() == 0x0000) {
-						var0013->set_schedule_type(0x000C);
+					if (var0013->get_schedule_type() == IN_COMBAT) {
+						var0013->set_schedule_type(WANDER);
 					}
 				}
 				UI_stop_arresting();
@@ -60667,7 +60741,7 @@ labelFunc0625_031E:
 	if (event == SCRIPTED) {
 		var0014 = UI_get_party_list();
 		for (var001E in var0014 with var001C to var001D) {
-			var001E->set_schedule_type(0x001F);
+			var001E->set_schedule_type(FOLLOW_AVATAR);
 			var001E->set_item_frame(0x0000);
 		}
 		if (Func0994() == 0x000D) {
@@ -61285,7 +61359,7 @@ void Func062F object#(0x62F) () {
 			var0001 = 0x0000 - var0001;
 		}
 		var0002 = [0x0A22, 0x0AB7];
-		set_schedule_type(0x000F);
+		set_schedule_type(WAIT);
 		Func09AC(item, (var0002[0x0001] + var0000), (var0002[0x0002] + var0001), 0x000F);
 	}
 }
@@ -61383,7 +61457,7 @@ void Func0632 object#(0x632) () {
 			var0006 = var0005 * 0x0002;
 			var0007 = UI_create_new_object2(0x0151, [var0004[(var0006 - 0x0001)], var0004[var0006], 0x0000]);
 			if (var0007) {
-				var0007->set_schedule_type(0x000F);
+				var0007->set_schedule_type(WAIT);
 				var0005 += 0x0001;
 				UI_sprite_effect(0x001A, var0004[(var0006 - 0x0001)], var0004[var0006], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x0051);
@@ -61423,7 +61497,7 @@ void Func0632 object#(0x632) () {
 		var0009 = Func09A0(0x0005, 0x0001);
 		var000D = var0009->find_nearby(0x0299, 0x0014, 0x0000);
 		for (var0010 in var000D with var000E to var000F) {
-			var0010->set_schedule_type(0x0000);
+			var0010->set_schedule_type(IN_COMBAT);
 			0xFE9C->set_oppressor(var0010);
 			Func097F(var0010, var000B[var000C], (var000C * 0x0002));
 			var000C += 0x0001;
@@ -61431,7 +61505,7 @@ void Func0632 object#(0x632) () {
 		var0009 = Func09A0(0x0005, 0x0002);
 		var0011 = var0009->find_nearby(0x0151, 0x001E, 0x0000);
 		for (var0014 in var0011 with var0012 to var0013) {
-			var0014->set_schedule_type(0x0000);
+			var0014->set_schedule_type(IN_COMBAT);
 			0xFE9C->set_oppressor(var0014);
 			var000C += 0x0001;
 		}
@@ -64331,7 +64405,7 @@ void Func0666 object#(0x666) () {
 					var0008 = var0001->set_item_quality(0x0000);
 					var000E = var0001->get_object_position();
 					var000F = UI_create_new_object2(0x0355, var000E);
-					var000F->set_schedule_type(0x0003);
+					var000F->set_schedule_type(TALK);
 					var0000 = false;
 				}
 				var0005 = 0x0000;
@@ -64360,7 +64434,7 @@ void Func0666 object#(0x666) () {
 					var000E = [0x0B4D, 0x07D0, 0x0005];
 					var000F = UI_create_new_object2(0x0175, var000E);
 					var000F->set_npc_id(0x0001);
-					var000F->set_schedule_type(0x0003);
+					var000F->set_schedule_type(TALK);
 					var0000 = false;
 				}
 				if (var0000 != true) {
@@ -64435,7 +64509,7 @@ void Func0667 object#(0x667) () {
 		} else {
 			var0007 = UI_die_roll(0x0001, 0x0003);
 			if (var0007 == 0x0001) {
-				set_schedule_type(0x0000);
+				set_schedule_type(IN_COMBAT);
 				set_attack_mode(0x0007);
 				set_oppressor(0xFE9C);
 			}
@@ -64592,7 +64666,7 @@ void Func066A object#(0x66A) () {
 		for (var0005 in var0001 with var0003 to var0004) {
 			if (!(var0005 in var0002)) {
 				if (var0005->get_npc_prop(0x0002) > 0x0005) {
-					var0005->set_schedule_type(0x0000);
+					var0005->set_schedule_type(IN_COMBAT);
 					var0005->set_attack_mode(0x0007);
 					var0005->set_oppressor(UI_get_avatar_ref());
 				}
@@ -67090,14 +67164,14 @@ void Func06B3 object#(0x6B3) () {
 			if (var0003) {
 				var0004 = var0003->get_npc_object();
 				var0004->set_item_flag(ASLEEP);
-				var0004->set_schedule_type(0x000E);
+				var0004->set_schedule_type(SLEEP);
 				var0005 = var0003->get_object_position();
-				var0003->set_new_schedules(0x0000, 0x000E, var0005);
+				var0003->set_new_schedules(MIDNIGHT, SLEEP, var0005);
 			} else {
 				var0001 = var0000->set_item_quality(0x0002);
 				0xFE9C->clear_item_say();
 				0xFE9C->set_item_flag(DONT_MOVE);
-				0xFE9C->set_schedule_type(0x000E);
+				0xFE9C->set_schedule_type(SLEEP);
 			}
 			var0001 = script var0000 after 15 ticks {
 				nohalt;
@@ -67138,11 +67212,11 @@ void Func06B3 object#(0x6B3) () {
 			var0008 = Func0988(var0007, var0006);
 			for (var000B in var0008 with var0009 to var000A) {
 				var000C = var000B->get_npc_object();
-				var000C->set_schedule_type(0x000F);
+				var000C->set_schedule_type(WAIT);
 				var000D = UI_die_roll(0xFFFE, 0x0002);
 				var000E = UI_die_roll(0xFFFE, 0x0002);
 				var000C->move_object([(0x05B4 + var000D), (0x0652 + var000E), 0x0000]);
-				var000C->set_new_schedules(0x0000, 0x000E, [(0x05B4 + var000D), (0x0652 + var000E), 0x0000]);
+				var000C->set_new_schedules(MIDNIGHT, SLEEP, [(0x05B4 + var000D), (0x0652 + var000E), 0x0000]);
 			}
 			item->Func07D6();
 			var000F = UI_die_roll(0x0001, 0x0004);
@@ -67202,7 +67276,7 @@ void Func06B3 object#(0x6B3) () {
 			UI_fade_palette(0x000C, 0x0001, 0x0001);
 			0xFE9C->clear_item_flag(DONT_MOVE);
 			UI_play_music(0x0018, Func09A0(0x0005, 0x0001));
-			0xFE9C->set_schedule_type(0x001F);
+			0xFE9C->set_schedule_type(FOLLOW_AVATAR);
 			var0001 = var0000->set_item_quality(0x0000);
 		}
 	}
@@ -67310,7 +67384,7 @@ void Func06B6 object#(0x6B6) () {
 				var0003[0x0002] = var0001[0x0002] + UI_die_roll(0x0000, var0002[0x0002]);
 				var0010 = UI_create_new_object2(0x0202, var0003);
 				var0010->set_alignment(0x0002);
-				var0010->set_schedule_type(0x0000);
+				var0010->set_schedule_type(IN_COMBAT);
 				var0010->set_oppressor(0xFE9C->get_npc_object());
 				var0010->set_item_flag(SI_TOURNAMENT);
 				var0010->set_item_flag(TEMPORARY);
@@ -67614,7 +67688,7 @@ void Func06BC object#(0x6BC) () {
 			};
 			var0003 = 0xFFD0->approach_avatar(0x0078, 0x0028);
 			if (var0003) {
-				0xFFD0->set_schedule_type(0x0009);
+				0xFFD0->set_schedule_type(HOUND);
 				Func097F(0xFFD0, "@The storm is over!@", 0x0000);
 			}
 			var0003 = script var0000 after 10 ticks {
@@ -67626,7 +67700,7 @@ void Func06BC object#(0x6BC) () {
 			var0003 = var0000->set_item_quality(var0002 + 0x0001);
 			var0003 = 0xFFCB->approach_avatar(0x0078, 0x0028);
 			if (var0003) {
-				0xFFCB->set_schedule_type(0x0009);
+				0xFFCB->set_schedule_type(HOUND);
 				Func097F(0xFFCB, "@All is safe now!@", 0x0000);
 			}
 			var0003 = script var0000 after 10 ticks {
@@ -67637,7 +67711,7 @@ void Func06BC object#(0x6BC) () {
 		if (var0002 == (var0001 + 0x0004)) {
 			var0003 = 0xFFCA->approach_avatar(0x0078, 0x0028);
 			if (var0003) {
-				0xFFCA->set_schedule_type(0x0009);
+				0xFFCA->set_schedule_type(HOUND);
 				Func097F(0xFFCA, "@Praise Beauty!@", 0x0000);
 			}
 		}
@@ -67656,7 +67730,7 @@ void Func06BF object#(0x6BF) () {
 		var0001 = Func0942(0xFFC3);
 		if (var0000 && (gflags[0x003E] && (!var0001))) {
 			var0002 = UI_summon(0x017D, false);
-			var0002->set_schedule_type(0x0009);
+			var0002->set_schedule_type(HOUND);
 		}
 	}
 }
@@ -67670,7 +67744,7 @@ void Func06C0 object#(0x6C0) () {
 		abort;
 	}
 	var0000 = UI_part_of_day();
-	if ((event == EGG) && ((var0000 > 0x0001) && (var0000 < 0x0006))) {
+	if ((event == EGG) && ((var0000 > EARLY) && (var0000 < EVENING))) {
 		var0001 = script 0xFE9C after 5 ticks {
 			// Bug: the next line should probably be 'music 26', but it
 			// lacks the continuous flag.
@@ -67681,7 +67755,7 @@ void Func06C0 object#(0x6C0) () {
 		if (!0xFFC8->is_dead()) {
 			0xFFC8->move_object([0x0498, 0x0765, 0x0000]);
 			0xFFC8->set_item_frame(0x0010);
-			0xFFC8->set_schedule_type(0x000B);
+			0xFFC8->set_schedule_type(LOITER);
 			var0001 = script 0xFFC8 {
 				nohalt;
 				wait 24;
@@ -67692,7 +67766,7 @@ void Func06C0 object#(0x6C0) () {
 		}
 		if (!0xFFC7->is_dead()) {
 			0xFFC7->move_object([0x0493, 0x076A, 0x0000]);
-			0xFFC7->set_schedule_type(0x000B);
+			0xFFC7->set_schedule_type(LOITER);
 			var0001 = script 0xFFC7 {
 				nohalt;
 				wait 16;
@@ -67701,7 +67775,7 @@ void Func06C0 object#(0x6C0) () {
 		}
 		if (!0xFFC5->is_dead()) {
 			0xFFC5->move_object([0x0496, 0x076B, 0x0000]);
-			0xFFC5->set_schedule_type(0x000B);
+			0xFFC5->set_schedule_type(LOITER);
 			var0001 = script 0xFFC5 {
 				nohalt;
 				wait 32;
@@ -67710,7 +67784,7 @@ void Func06C0 object#(0x6C0) () {
 		}
 		if (!0xFFC4->is_dead()) {
 			0xFFC4->move_object([0x049B, 0x0769, 0x0000]);
-			0xFFC4->set_schedule_type(0x000B);
+			0xFFC4->set_schedule_type(LOITER);
 			var0001 = script 0xFFCA {
 				nohalt;
 				wait 64;
@@ -67719,7 +67793,7 @@ void Func06C0 object#(0x6C0) () {
 		}
 		if (!0xFFD2->is_dead()) {
 			0xFFD2->move_object([0x049C, 0x076F, 0x0000]);
-			0xFFD2->set_schedule_type(0x000B);
+			0xFFD2->set_schedule_type(LOITER);
 			var0001 = script 0xFFD2 {
 				nohalt;
 				wait 48;
@@ -67795,7 +67869,7 @@ void Func06C3 object#(0x6C3) () {
 		if (var0008 < 0x0003) {
 			var0009 = UI_create_new_object2(0x00E4, [(var0006[0x0001] + var0008), (var0006[0x0002] + var0008), 0x0000]);
 			var0009->set_item_flag(TEMPORARY);
-			var0009->set_schedule_type(0x0007);
+			var0009->set_schedule_type(TEND_SHOP);
 		} else if (var0008 < 0x0005) {
 			if (var0007) {
 				var0009 = UI_create_new_object2(0x00E4, [0x04CA, 0x0846, 0x0006]);
@@ -67804,11 +67878,11 @@ void Func06C3 object#(0x6C3) () {
 				var0007 = true;
 			}
 			var0009->set_item_flag(TEMPORARY);
-			var0009->set_schedule_type(0x000E);
+			var0009->set_schedule_type(SLEEP);
 		} else {
 			var0009 = UI_create_new_object2(0x00E4, [(var0006[0x0001] - (var0008 / 0x0002)), (var0006[0x0002] - (var0008 / 0x0002)), 0x0000]);
 			var0009->set_item_flag(TEMPORARY);
-			var0009->set_schedule_type(0x000C);
+			var0009->set_schedule_type(WANDER);
 		}
 		var0009->set_npc_id(0x0001);
 		var0008 += 0x0001;
@@ -67847,7 +67921,7 @@ void Func06C4 object#(0x6C4) () {
 			Func0862();
 			0xFFD4->remove_npc();
 		}
-		0xFFD3->set_new_schedules([0x0000, 0x0003, 0x0004, 0x0005, 0x0007], [0x000E, 0x001A, 0x0007, 0x000C, 0x001A], [0x0516, 0x08F7, 0x04F7, 0x08CC, 0x050D, 0x08B6, 0x0516, 0x08A2, 0x04F7, 0x08CC]);
+		0xFFD3->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, NIGHT], [SLEEP, 0x001A, TEND_SHOP, WANDER, EAT_AT_INN], [0x0516, 0x08F7, 0x04F7, 0x08CC, 0x050D, 0x08B6, 0x0516, 0x08A2, 0x04F7, 0x08CC]);
 		0xFFD3->run_schedule();
 		abort;
 	}
@@ -68040,25 +68114,25 @@ void Func06C9 object#(0x6C9) () {
 		}
 		if ((var0001 < 0x0007) && ((var0000 == 0x0001) && var0003)) {
 			var0008 = UI_create_new_object2(0x0103, var0002);
-			var0008->set_schedule_type(0x000E);
+			var0008->set_schedule_type(SLEEP);
 			var0008->set_npc_id(0x0001);
 			var0008->set_item_flag(SI_TOURNAMENT);
 		}
 		if ((var0001 > 0x0007) && ((var0001 < 0x000F) && var0003)) {
 			var0008 = UI_create_new_object2(0x0103, var0002);
-			var0008->set_schedule_type(0x0007);
+			var0008->set_schedule_type(TEND_SHOP);
 			var0008->set_npc_id(0x0001);
 			var0008->set_item_flag(SI_TOURNAMENT);
 		}
 		if ((var0001 > 0x0010) && ((var0001 < 0x0014) && var0003)) {
 			var0008 = UI_create_new_object2(0x0103, var0002);
-			var0008->set_schedule_type(0x001D);
+			var0008->set_schedule_type(PATROL);
 			var0008->set_npc_id(0x0001);
 			var0008->set_item_flag(SI_TOURNAMENT);
 		}
 		if ((var0001 > 0x0013) && var0003) {
 			var0008 = UI_create_new_object2(0x0103, var0002);
-			var0008->set_schedule_type(0x0007);
+			var0008->set_schedule_type(TEND_SHOP);
 			var0008->set_npc_id(0x0001);
 			var0008->set_item_flag(SI_TOURNAMENT);
 		}
@@ -68551,7 +68625,7 @@ void Func06D2 object#(0x6D2) () {
 		var0001[0x0001] = (var0001[0x0001] - 0x0008) + (var0002 * 0x0002);
 		var0003 = UI_create_new_object2(0x0151, var0001);
 		if (var0003) {
-			var0003->set_schedule_type(0x000B);
+			var0003->set_schedule_type(LOITER);
 			var0003->set_alignment(0x0000);
 			var0003->set_item_flag(SI_TOURNAMENT);
 			var0003->set_npc_id(var0002);
@@ -68559,7 +68633,7 @@ void Func06D2 object#(0x6D2) () {
 		var0002 -= 0x0001;
 	}
 	if (var0003) {
-		var0003->set_schedule_type(0x001D);
+		var0003->set_schedule_type(PATROL);
 	}
 }
 
@@ -68577,7 +68651,7 @@ void Func06D3 object#(0x6D3) () {
 	var0002 = get_object_position();
 	var0003 = UI_create_new_object2(0x0151, var0002);
 	if (var0003) {
-		var0003->set_schedule_type(0x000B);
+		var0003->set_schedule_type(LOITER);
 		var0003->set_alignment(0x0000);
 		var0003->set_npc_id(var0001);
 	}
@@ -69047,7 +69121,7 @@ void Func06D7 object#(0x6D7) () {
 				var0004 = [(var0002[0x0001] + var0003), var0002[0x0002], 0x0000];
 				var0005 = UI_create_new_object2(0x0373, var0004);
 				var0005->set_alignment(0x0002);
-				var0005->set_schedule_type(0x0000);
+				var0005->set_schedule_type(IN_COMBAT);
 				0xFE9C->set_oppressor(var0005);
 				var0003 += 0x0002;
 			}
@@ -69145,7 +69219,7 @@ void Func06D9 object#(0x6D9) () {
 			UI_play_sound_effect(0x0051);
 			UI_sprite_effect(0x001A, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x000C, 0xFFFD);
 			0xFF4E->move_object(var0003);
-			0xFF4E->set_schedule_type(0x000A);
+			0xFF4E->set_schedule_type(STANDTHERE);
 			Func097F(0xFF4E, "@Avatar!@", 0x0001);
 			var0005 = script item after 8 ticks {
 				nohalt;
@@ -69157,14 +69231,14 @@ void Func06D9 object#(0x6D9) () {
 		if (var0002 == 0x0003) {
 			remove_item();
 			var0003 = [0x0061, 0x0644, 0x0000];
-			0xFF4E->set_schedule_type(0x0014);
+			0xFF4E->set_schedule_type(SHY);
 			0xFF4E->move_object(var0003);
 		}
 		if (var0002 == 0x0004) {
 			UI_play_sound_effect(0x0051);
 			UI_sprite_effect(0x0007, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x000C, 0xFFFD);
 			0xFF2D->move_object(var0003);
-			0xFF2D->set_schedule_type(0x000A);
+			0xFF2D->set_schedule_type(STANDTHERE);
 			0xFF2D->Func07D2();
 			Func097F(0xFF2D, "@Avatar!@", 0x0001);
 			var0005 = script item after 10 ticks {
@@ -69178,7 +69252,7 @@ void Func06D9 object#(0x6D9) () {
 			remove_item();
 		}
 		if (var0002 == 0x0006) {
-			0xFF25->set_schedule_type(0x0003);
+			0xFF25->set_schedule_type(TALK);
 			var0005 = set_item_quality(0x00FF);
 		}
 		if (var0002 == 0x0007) {
@@ -69188,12 +69262,12 @@ void Func06D9 object#(0x6D9) () {
 		}
 		if (var0002 == 0x0008) {
 			var0006 = UI_create_new_object2(0x013E, var0003);
-			var0006->set_schedule_type(0x0000);
+			var0006->set_schedule_type(IN_COMBAT);
 			var0006->set_alignment(0x0003);
 			Func09A4(var0006);
 			var0007 = [(var0003[0x0001] + 0x0009), var0003[0x0002], var0003[0x0003]];
 			var0008 = UI_create_new_object2(0x012E, var0007);
-			var0008->set_schedule_type(0x0000);
+			var0008->set_schedule_type(IN_COMBAT);
 			var0008->set_alignment(0x0002);
 			Func09A4(var0008);
 			var0006->set_oppressor(var0008);
@@ -69224,7 +69298,7 @@ void Func06D9 object#(0x6D9) () {
 				var0010 = find_nearby(0x013E, 0x0014, 0x0000);
 				for (var0013 in var0010 with var0011 to var0012) {
 					var0013->set_alignment(0x0001);
-					var0013->set_schedule_type(0x0004);
+					var0013->set_schedule_type(DANCE);
 				}
 				if (var0001) {
 					if (var0000 == 0x0000) {
@@ -69565,7 +69639,7 @@ void Func06DE object#(0x6DE) () {
 			var0000 = get_item_quality();
 			var0001 = get_object_position();
 			var0002 = UI_create_new_object2(0x00F7, var0001);
-			var0002->set_schedule_type(0x0000);
+			var0002->set_schedule_type(IN_COMBAT);
 			var0002->set_alignment(0x0002);
 			0xFE9C->set_oppressor(var0002);
 			var0003 = UI_die_roll(0x0000, 0x001E);
@@ -69677,7 +69751,7 @@ void Func06E1 object#(0x6E1) () {
 			var0002[0x0002] -= 0x0007;
 			var0003 = UI_create_new_object2(0x0151, var0002);
 			if (var0003) {
-				var0003->set_schedule_type(0x000F);
+				var0003->set_schedule_type(WAIT);
 				var0004 = script var0003 {
 					nohalt;
 					face SOUTH;
@@ -69788,7 +69862,7 @@ void Func06E3 object#(0x6E3) () {
 		if (var0002 == 0x0000) {
 			UI_sprite_effect(0x0015, 0x071E, 0x05A6, 0x0000, 0x0000, 0x0000, 0xFFFF);
 			0xFEFA->move_object([0x071E, 0x05A6, 0x0000]);
-			0xFEFA->set_schedule_type(0x000F);
+			0xFEFA->set_schedule_type(WAIT);
 			var0003 = script 0xFEFA {
 				nohalt;
 				actor frame standing;
@@ -69915,7 +69989,7 @@ void Func06E4 object#(0x6E4) () {
 		UI_sprite_effect(0x0015, 0x06D8, 0x0591, 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_play_sound_effect(0x0051);
 		0xFEFA->move_object([0x06D8, 0x0591, 0x0000]);
-		0xFEFA->set_schedule_type(0x000F);
+		0xFEFA->set_schedule_type(WAIT);
 		var0002 = script 0xFEFA {
 			nohalt;
 			actor frame standing;
@@ -69997,7 +70071,7 @@ void Func06E5 object#(0x6E5) () {
 		UI_sprite_effect(0x0015, 0x06F2, 0x05A5, 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_play_sound_effect(0x0051);
 		0xFEFA->move_object([0x06F2, 0x05A5, 0x0000]);
-		0xFEFA->set_schedule_type(0x000F);
+		0xFEFA->set_schedule_type(WAIT);
 		var0002 = script 0xFEFA {
 			nohalt;
 			actor frame standing;
@@ -70219,7 +70293,7 @@ void Func06E6 object#(0x6E6) () {
 				var0007 = var0004->set_item_quality(0x0008);
 			}
 		}
-		var0006->set_schedule_type(0x000F);
+		var0006->set_schedule_type(WAIT);
 		var0007 = script var0006 after 10 ticks {
 			nohalt;
 			call Func06E6;
@@ -70294,7 +70368,7 @@ void Func06E6 object#(0x6E6) () {
 			var000C = UI_create_new_object2(0x0151, var000B);
 			if (var000C) {
 				var000C->set_alignment(0x0002);
-				var000C->set_schedule_type(0x0000);
+				var000C->set_schedule_type(IN_COMBAT);
 				var0007->set_oppressor(0xFE9C->get_npc_object());
 			}
 			var0007 = Func09A1(0x0151);
@@ -70479,19 +70553,19 @@ void Func06EA object#(0x6EA) () {
 		if (!gflags[0x00D5]) {
 			0xFEFA->set_item_flag(SI_TOURNAMENT);
 			0xFEFA->set_alignment(0x0002);
-			0xFEFA->set_schedule_type(0x0000);
+			0xFEFA->set_schedule_type(IN_COMBAT);
 			Func09AD(0xFEFA);
 		}
 		if (!gflags[0x00D3]) {
 			0xFEF9->set_item_flag(SI_TOURNAMENT);
 			0xFEF9->set_alignment(0x0002);
-			0xFEF9->set_schedule_type(0x0000);
+			0xFEF9->set_schedule_type(IN_COMBAT);
 			Func09AD(0xFEF9);
 		}
 		if (!gflags[0x00D4]) {
 			0xFEF8->set_item_flag(SI_TOURNAMENT);
 			0xFEF8->set_alignment(0x0002);
-			0xFEF8->set_schedule_type(0x0000);
+			0xFEF8->set_schedule_type(IN_COMBAT);
 			Func09AD(0xFEF8);
 		}
 	}
@@ -70862,8 +70936,8 @@ void Func06F3 object#(0x6F3) () {
 	var000A = var0005->add_cont_items(0x0001, 0x0259, 0x0000, 0x0000, true);
 	var000A = var0005->set_npc_prop(0x0002, 0x000A);
 	var0005->set_npc_id(0x0009);
-	var0005->set_schedule_type(0x0000);
-	var0005->set_schedule_type(0x0010);
+	var0005->set_schedule_type(IN_COMBAT);
+	var0005->set_schedule_type(MAJOR_SIT);
 }
 
 extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
@@ -70890,7 +70964,7 @@ void Func06F5 object#(0x6F5) () {
 	var0000 = 0xFF2D->approach_avatar(0x0050, 0x0028);
 	UI_play_sound_effect(0x0051);
 	Func097F(0xFF2D, "@Avatar!@", 0x0005);
-	0xFF2D->set_schedule_type(0x0003);
+	0xFF2D->set_schedule_type(TALK);
 }
 
 extern void Func09AD 0x9AD (var var0000);
@@ -70922,7 +70996,7 @@ void Func06F6 object#(0x6F6) () {
 			var0003 = UI_create_new_object2(0x01F5, var0000);
 			if (var0003) {
 				var0003->set_alignment(0x0002);
-				var0003->set_schedule_type(0x0000);
+				var0003->set_schedule_type(IN_COMBAT);
 				var0003->set_oppressor(0xFE9C);
 			}
 		}
@@ -71092,19 +71166,19 @@ void Func06FA object#(0x6FA) () {
 			0xFFAB->set_alignment(0x0002);
 			0xFFAB->set_item_flag(SI_TOURNAMENT);
 			0xFFAB->move_object([0x0723, 0x0A65]);
-			0xFFAB->set_schedule_type(0x000F);
+			0xFFAB->set_schedule_type(WAIT);
 			0xFFA9->set_alignment(0x0002);
 			0xFFA9->set_item_flag(SI_TOURNAMENT);
 			0xFFA9->move_object([0x074C, 0x0A67]);
-			0xFFA9->set_schedule_type(0x000F);
+			0xFFA9->set_schedule_type(WAIT);
 			0xFFA4->set_alignment(0x0002);
 			0xFFA4->set_item_flag(SI_TOURNAMENT);
 			0xFFA4->move_object([0x071B, 0x0A66]);
-			0xFFA4->set_schedule_type(0x000F);
+			0xFFA4->set_schedule_type(WAIT);
 			0xFFA3->set_alignment(0x0002);
 			0xFFA3->set_item_flag(SI_TOURNAMENT);
 			0xFFA3->move_object([0x0754, 0x0A64]);
-			0xFFA3->set_schedule_type(0x000F);
+			0xFFA3->set_schedule_type(WAIT);
 		}
 		gflags[0x0208] = true;
 		remove_item();
@@ -71120,7 +71194,7 @@ void Func06FB object#(0x6FB) () {
 
 	UI_play_music(0x0012, Func09A0(0x0005, 0x0001));
 	0xFF35->move_object([0x0762, 0x03ED, 0x0000]);
-	0xFF35->set_new_schedules(0x0000, 0x000C, [0x0762, 0x03ED]);
+	0xFF35->set_new_schedules(MIDNIGHT, WANDER, [0x0762, 0x03ED]);
 	0xFF35->si_path_run_usecode([0x0762, 0x03F1, 0x0000], SI_PATH_SUCCESS, 0xFF35->get_npc_object(), Func04CB, false);
 	UI_set_path_failure(Func04CB, 0xFF35->get_npc_object(), SI_PATH_FAILURE);
 	var0000 = script 0xFF35 after 8 ticks {
@@ -71134,11 +71208,11 @@ void Func06FB object#(0x6FB) () {
 		call Func04CB;
 	};
 	0xFF34->move_object([0x076C, 0x03E7, 0x0000]);
-	0xFF34->set_new_schedules(0x0000, 0x000C, [0x076C, 0x03E7]);
+	0xFF34->set_new_schedules(MIDNIGHT, WANDER, [0x076C, 0x03E7]);
 	0xFF34->run_schedule();
 	Func097F(0xFF34, "@I be bored.@", 0x0003);
 	0xFEDB->move_object([0x0767, 0x03E4, 0x0001]);
-	0xFEDB->set_schedule_type(0x000F);
+	0xFEDB->set_schedule_type(WAIT);
 	var0000 = script 0xFEDB {
 		nohalt;
 		face south;
@@ -71199,7 +71273,7 @@ void Func06FC object#(0x6FC) () {
 		};
 	}
 	var0000->set_alignment(0x0002);
-	var0000->set_schedule_type(0x0000);
+	var0000->set_schedule_type(IN_COMBAT);
 	var0000->set_opponent(0xFFFE);
 	var0000->set_oppressor(0xFE9C);
 	var0000->set_item_flag(SI_TOURNAMENT);
@@ -71223,10 +71297,10 @@ void Func06FD object#(0x6FD) () {
 	var var0005;
 
 	if (event == SI_PATH_FAILURE) {
-		set_schedule_type(0x000C);
+		set_schedule_type(WANDER);
 	}
 	if (event == SI_PATH_SUCCESS) {
-		0xFFAC->set_schedule_type(0x000F);
+		0xFFAC->set_schedule_type(WAIT);
 		var0000 = get_object_position();
 		UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		0xFFAC->move_object([0x0722, 0x0273, 0x0000]);
@@ -71234,10 +71308,10 @@ void Func06FD object#(0x6FD) () {
 	}
 	if (event == SCRIPTED) {
 		var0000 = get_object_position();
-		if ((get_schedule_type() == 0x000F) || (get_schedule_type() == 0x0018)) {
+		if ((get_schedule_type() == WAIT) || (get_schedule_type() == SPECIAL)) {
 			abort;
 		}
-		0xFFAC->set_schedule_type(0x000F);
+		0xFFAC->set_schedule_type(WAIT);
 		UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		0xFFAC->move_object([0x0722, 0x0273, 0x0000]);
 		UI_sprite_effect(0x0007, 0x0722, 0x0273, 0x0000, 0x0000, 0x000F, 0xFFFD);
@@ -71255,7 +71329,7 @@ void Func06FD object#(0x6FD) () {
 			var0004->remove_item();
 			if (gflags[0x0229]) {
 				if (gflags[0x022A]) {
-					if ((0xFFAC->get_schedule_type() != 0x000F) || 0xFFAC->get_item_flag(SI_ZOMBIE)) {
+					if ((0xFFAC->get_schedule_type() != WAIT) || 0xFFAC->get_item_flag(SI_ZOMBIE)) {
 						abort;
 					}
 					0xFFAC->set_npc_id(0x000D);
@@ -71361,7 +71435,7 @@ void Func06FF object#(0x6FF) () {
 		var0001 = 0xFFA3;
 	}
 	if (var0001) {
-		var0001->set_new_schedules(0x0000, 0x0000, [0x0733, 0x0A79]);
+		var0001->set_new_schedules(MIDNIGHT, IN_COMBAT, [0x0733, 0x0A79]);
 		var0006 = var0001->get_object_position();
 		var0001->si_path_run_usecode([var0006[0x0001], (var0006[0x0002] + 0x000F), 0x0000], SI_PATH_SUCCESS, var0001->get_npc_object(), Func0455, true);
 		UI_set_path_failure(Func0455, var0001->get_npc_object(), SI_PATH_FAILURE);
@@ -71437,7 +71511,7 @@ void Func0702 object#(0x702) () {
 				if (gflags[0x0148]) {
 					Func09AD(var0002);
 				} else {
-					var0002->set_schedule_type(0x0007);
+					var0002->set_schedule_type(TEND_SHOP);
 					var0002->set_alignment(0x0000);
 				}
 				var0001 -= 0x0001;
@@ -71446,9 +71520,9 @@ void Func0702 object#(0x702) () {
 	}
 	if (gflags[0x0148]) {
 		Func097F(0xFFE1, "@Aha!@", 0x0000);
-		0xFFE1->set_schedule_type(0x0000);
+		0xFFE1->set_schedule_type(IN_COMBAT);
 	}
-	if ((0xFFE1->get_schedule_type() == 0x0000) || (0xFFE1->get_schedule_type() == 0x0003)) {
+	if ((0xFFE1->get_schedule_type() == IN_COMBAT) || (0xFFE1->get_schedule_type() == TALK)) {
 		abort;
 	}
 	0xFFE1->clear_item_say();
@@ -71922,7 +71996,7 @@ void Func0714 object#(0x714) () {
 		if (!gflags[0x0004]) {
 			var0001 = UI_create_new_object2(0x00E4, get_object_position());
 			var0001->set_npc_id(0x001E);
-			var0001->set_schedule_type(0x0001);
+			var0001->set_schedule_type(PACE_HORIZONTAL);
 		}
 	}
 }
@@ -72036,7 +72110,7 @@ void Func0718 object#(0x718) () {
 		var0008 = UI_get_party_list2();
 		if (0xFF68->get_npc_object() in var0008) {
 			0xFF68->remove_from_party();
-			0xFF68->set_schedule_type(0x000F);
+			0xFF68->set_schedule_type(WAIT);
 			0xFE9C->set_item_flag(DONT_MOVE);
 			var0002 = script 0xFF68 {
 				nohalt;
@@ -72626,7 +72700,7 @@ void Func071F object#(0x71F) () {
 	if ((event == PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
 		Func09AA();
 		Func08C0(true);
-		0xFE9C->set_schedule_type(0x000F);
+		0xFE9C->set_schedule_type(WAIT);
 		var0001 = find_nearby(0x02E7, 0x002D, 0x0000);
 		var0002 = script var0001 after 15 ticks {
 			nohalt;
@@ -72644,7 +72718,7 @@ void Func071F object#(0x71F) () {
 		UI_init_conversation();
 		Func0922(0x0008);
 		gflags[0x02E4] = true;
-		0xFE9C->set_schedule_type(0x001F);
+		0xFE9C->set_schedule_type(FOLLOW_AVATAR);
 		abort;
 	}
 	if (gflags[0x02B8]) {
@@ -72811,7 +72885,7 @@ void Func0720 object#(0x720) () {
 		var0003->set_item_frame(0x0006);
 		0xFE9C->clear_item_flag(DONT_MOVE);
 		UI_init_conversation();
-		0xFE9C->set_schedule_type(0x001F);
+		0xFE9C->set_schedule_type(FOLLOW_AVATAR);
 		abort;
 	}
 	var0008 = find_nearby(0xFE99, 0x0001, 0x0000);
@@ -73556,18 +73630,18 @@ void Func0727 object#(0x727) () {
 		var0003 = var0002->add_cont_items(0x0001, 0x0255, 0x0000, 0x0000, true);
 		var0003 = var0002->add_cont_items(0x000C, 0x02D2, 0x0000, 0x0000, true);
 		var0003 = var0002->add_cont_items(0x0001, 0x0239, 0x0000, 0x0000, true);
-		var0002->set_schedule_type(0x000B);
+		var0002->set_schedule_type(LOITER);
 		if (var0000 == 0x0001) {
-			var0002->set_schedule_type(0x000E);
+			var0002->set_schedule_type(SLEEP);
 		}
 		if (var0000 == 0x0002) {
-			var0002->set_schedule_type(0x0005);
+			var0002->set_schedule_type(EAT);
 		}
 		if (var0000 == 0x0003) {
-			var0002->set_schedule_type(0x0006);
+			var0002->set_schedule_type(FARM);
 		}
 		if (var0000 > 0x0003) {
-			var0002->set_schedule_type(0x0000);
+			var0002->set_schedule_type(IN_COMBAT);
 		}
 	}
 }
@@ -73670,27 +73744,27 @@ void Func0729 object#(0x729) () {
 		var0003 = var0002->add_cont_items(0x0001, 0x023B, 0x0000, 0x0000, true);
 		var0003 = var0002->add_cont_items(0x0001, 0x02D9, 0x0000, 0x0000, true);
 		var0003 = var0002->add_cont_items(0x0001, 0x021B, 0x0000, 0x0000, true);
-		var0002->set_schedule_type(0x000B);
+		var0002->set_schedule_type(LOITER);
 		if (var0000 == 0x0001) {
-			var0002->set_schedule_type(0x0010);
+			var0002->set_schedule_type(MAJOR_SIT);
 		}
 		if (var0000 == 0x0002) {
-			var0002->set_schedule_type(0x001D);
+			var0002->set_schedule_type(PATROL);
 		}
 		if (var0000 == 0x0003) {
-			var0002->set_schedule_type(0x0001);
+			var0002->set_schedule_type(PACE_HORIZONTAL);
 		}
 		if (var0000 == 0x0004) {
-			var0002->set_schedule_type(0x0002);
+			var0002->set_schedule_type(PACE_VERTICAL);
 		}
 		if (var0000 == 0x0005) {
-			var0002->set_schedule_type(0x000E);
+			var0002->set_schedule_type(SLEEP);
 		}
 		if (var0000 == 0x0006) {
-			var0002->set_schedule_type(0x0000);
+			var0002->set_schedule_type(IN_COMBAT);
 		}
 		if (var0000 > 0x0006) {
-			var0002->set_schedule_type(0x000C);
+			var0002->set_schedule_type(WANDER);
 		}
 	}
 }
@@ -73954,27 +74028,27 @@ void Func072D object#(0x72D) () {
 		var0007 = var0006->add_cont_items(0x0001, 0x023B, 0x0000, 0x0000, true);
 		var0007 = var0006->add_cont_items(0x0001, 0x021B, 0x0000, 0x0000, true);
 		var0007 = var0006->add_cont_items(0x0001, 0x02D9, 0x0000, 0x0000, true);
-		var0006->set_schedule_type(0x000B);
+		var0006->set_schedule_type(LOITER);
 		if (var0000 == 0x0001) {
-			var0006->set_schedule_type(0x0010);
+			var0006->set_schedule_type(MAJOR_SIT);
 		}
 		if (var0000 == 0x0002) {
-			var0006->set_schedule_type(0x001D);
+			var0006->set_schedule_type(PATROL);
 		}
 		if (var0000 == 0x0003) {
-			var0006->set_schedule_type(0x0001);
+			var0006->set_schedule_type(PACE_HORIZONTAL);
 		}
 		if (var0000 == 0x0004) {
-			var0006->set_schedule_type(0x0002);
+			var0006->set_schedule_type(PACE_VERTICAL);
 		}
 		if (var0000 == 0x0005) {
-			var0006->set_schedule_type(0x000E);
+			var0006->set_schedule_type(SLEEP);
 		}
 		if (var0000 == 0x0006) {
-			var0006->set_schedule_type(0x0000);
+			var0006->set_schedule_type(IN_COMBAT);
 		}
 		if (var0000 > 0x0006) {
-			var0006->set_schedule_type(0x000C);
+			var0006->set_schedule_type(WANDER);
 		}
 	}
 }
@@ -74142,27 +74216,27 @@ void Func0734 object#(0x734) () {
 			var0003 = var0002->add_cont_items(0x0001, 0x0257, 0x0000, 0x0000, true);
 			var0003 = var0002->add_cont_items(UI_die_roll(0x0005, 0x000F), 0x03B4, 0x0000, 0x0005, true);
 		}
-		var0002->set_schedule_type(0x000B);
+		var0002->set_schedule_type(LOITER);
 		if (var0000 == 0x0001) {
-			var0002->set_schedule_type(0x000B);
+			var0002->set_schedule_type(LOITER);
 		}
 		if (var0000 == 0x0002) {
-			var0002->set_schedule_type(0x001D);
+			var0002->set_schedule_type(PATROL);
 		}
 		if (var0000 == 0x0003) {
-			var0002->set_schedule_type(0x0001);
+			var0002->set_schedule_type(PACE_HORIZONTAL);
 		}
 		if (var0000 == 0x0004) {
-			var0002->set_schedule_type(0x0002);
+			var0002->set_schedule_type(PACE_VERTICAL);
 		}
 		if (var0000 == 0x0005) {
-			var0002->set_schedule_type(0x000E);
+			var0002->set_schedule_type(SLEEP);
 		}
 		if (var0000 == 0x0006) {
-			var0002->set_schedule_type(0x001B);
+			var0002->set_schedule_type(DUEL);
 		}
 		if (var0000 > 0x0006) {
-			var0002->set_schedule_type(0x0005);
+			var0002->set_schedule_type(EAT);
 		}
 	}
 }
@@ -74253,7 +74327,7 @@ void Func0739 object#(0x739) () {
 		var0000 = script 0xFE9C {
 			face west;
 		};
-		0xFFB5->set_schedule_type(0x000A);
+		0xFFB5->set_schedule_type(STANDTHERE);
 		Func097F(0xFFB5, "@To the test!@", 0x0000);
 		abort;
 	}
@@ -74307,7 +74381,7 @@ void Func073A object#(0x73A) () {
 			0xFFD4->set_npc_id(0x0001);
 			UI_sprite_effect(0x0007, 0x0924, 0x01CF, 0x0000, 0x0000, 0x0000, 0xFFFF);
 		}
-		0xFFD4->set_schedule_type(0x0000);
+		0xFFD4->set_schedule_type(IN_COMBAT);
 		0xFFD4->set_alignment(0x0002);
 		0xFFD4->set_opponent(0xFE9C);
 		0xFFD4->set_attack_mode(0x0002);
@@ -74330,7 +74404,7 @@ void Func073A object#(0x73A) () {
 		}
 		0xFEF0->move_object([0x0926, 0x01CF, 0x0000]);
 		UI_sprite_effect(0x0007, 0x0926, 0x01CF, 0x0000, 0x0000, 0x0000, 0xFFFF);
-		0xFEF0->set_schedule_type(0x0000);
+		0xFEF0->set_schedule_type(IN_COMBAT);
 		0xFEF0->set_alignment(0x0002);
 		0xFEF0->set_opponent(0xFE9C);
 		0xFEF0->set_attack_mode(0x0002);
@@ -74338,7 +74412,7 @@ void Func073A object#(0x73A) () {
 		0xFEF0->clear_item_flag(SI_TOURNAMENT);
 		0xFF80->move_object([0x0928, 0x01CF, 0x0000]);
 		UI_sprite_effect(0x0007, 0x0928, 0x01CF, 0x0000, 0x0000, 0x0000, 0xFFFF);
-		0xFF80->set_schedule_type(0x0000);
+		0xFF80->set_schedule_type(IN_COMBAT);
 		0xFF80->set_alignment(0x0002);
 		0xFF80->set_opponent(0xFE9C);
 		0xFF80->set_attack_mode(0x0002);
@@ -74346,7 +74420,7 @@ void Func073A object#(0x73A) () {
 		0xFF80->clear_item_flag(SI_TOURNAMENT);
 		0xFF81->move_object([0x092A, 0x01CF, 0x0000]);
 		UI_sprite_effect(0x0007, 0x092A, 0x01CF, 0x0000, 0x0000, 0x0000, 0xFFFF);
-		0xFF81->set_schedule_type(0x0000);
+		0xFF81->set_schedule_type(IN_COMBAT);
 		0xFF81->set_alignment(0x0002);
 		0xFF81->set_opponent(0xFE9C);
 		0xFF81->set_attack_mode(0x0002);
@@ -74400,7 +74474,7 @@ void Func073B object#(0x73B) () {
 		UI_play_sound_effect(0x0082);
 		var0000 = get_object_position();
 		var0001 = UI_create_new_object2(0x013E, [var0000[0x0001], (var0000[0x0002] + 0x0001), var0000[0x0003]]);
-		var0001->set_schedule_type(0x000F);
+		var0001->set_schedule_type(WAIT);
 		var0001->set_alignment(0x0001);
 		var0001->set_item_flag(SI_TOURNAMENT);
 		var0002 = Func0992(0x0001, "@We must hurry!@", "@I must hurry!@", true);
@@ -74687,7 +74761,7 @@ void Func073B object#(0x73B) () {
 				Func09AC(0xFFFE, 0x0065, 0x0036, 0x000F);
 				var000E = UI_create_new_object2(0x013D, var0000);
 				var000E->set_item_frame(var000D);
-				var000E->set_schedule_type(0x000F);
+				var000E->set_schedule_type(WAIT);
 				UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				0xFFFE->set_item_flag(DEAD);
 			}
@@ -74701,7 +74775,7 @@ void Func073B object#(0x73B) () {
 				Func09AC(0xFFFF, 0x0068, 0x0036, 0x000F);
 				var000E = UI_create_new_object2(0x038A, var0000);
 				var000E->set_item_frame(var000D);
-				var000E->set_schedule_type(0x000F);
+				var000E->set_schedule_type(WAIT);
 				UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				0xFFFF->set_item_flag(DEAD);
 			}
@@ -74715,7 +74789,7 @@ void Func073B object#(0x73B) () {
 				Func09AC(0xFFFD, 0x0062, 0x0036, 0x000F);
 				var000E = UI_create_new_object2(0x0370, var0000);
 				var000E->set_item_frame(var000D);
-				var000E->set_schedule_type(0x000F);
+				var000E->set_schedule_type(WAIT);
 				UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				0xFFFD->set_item_flag(DEAD);
 			}
@@ -74855,7 +74929,7 @@ void Func073C object#(0x73C) () {
 		var0000[0x0001] -= var0000[0x0003] / 0x0002;
 		var0000[0x0002] -= var0000[0x0003] / 0x0002;
 		UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-		0xFF2D->set_schedule_type(0x0003);
+		0xFF2D->set_schedule_type(TALK);
 		0xFF2D->set_alignment(0x0000);
 	}
 }
@@ -74951,7 +75025,7 @@ void Func0745 object#(0x745) () {
 			var0005 = var0004->get_npc_id();
 			if (var0005 == 0x0001) {
 				var0001 = false;
-				var0004->set_schedule_type(0x0003);
+				var0004->set_schedule_type(TALK);
 			}
 		}
 		var0000 = [];
@@ -74960,7 +75034,7 @@ void Func0745 object#(0x745) () {
 			var0007 = UI_create_new_object2(0x017D, var0006);
 			if (var0007) {
 				var0007->set_npc_id(0x0001);
-				var0007->set_schedule_type(0x0003);
+				var0007->set_schedule_type(TALK);
 				var0007->clear_item_flag(ASLEEP);
 			}
 		}
@@ -75058,11 +75132,11 @@ void Func0759 object#(0x759) () {
 	if (0xFFFD->get_npc_object() in var0007) {
 		0xFFFD->remove_from_party();
 	}
-	0xFFFF->set_schedule_type(0x000F);
+	0xFFFF->set_schedule_type(WAIT);
 	0xFFFF->remove_npc();
-	0xFFFE->set_new_schedules(0x0000, 0x000A, [0x025F, 0x0A33]);
+	0xFFFE->set_new_schedules(MIDNIGHT, STANDTHERE, [0x025F, 0x0A33]);
 	0xFFFE->run_schedule();
-	0xFFFD->set_new_schedules(0x0000, 0x001D, [0x0428, 0x09C7]);
+	0xFFFD->set_new_schedules(MIDNIGHT, PATROL, [0x0428, 0x09C7]);
 	0xFFFD->move_object([0x0428, 0x09C7, 0x0000]);
 	0xFFFD->run_schedule();
 	Func092B();
@@ -75130,7 +75204,7 @@ void Func075A object#(0x75A) () {
 		0xFE9C->clear_item_say();
 		var0000 = 0xFE9C->get_object_position();
 		var0000[0x0002] += 0x0007;
-		0xFF2D->set_schedule_type(0x000F);
+		0xFF2D->set_schedule_type(WAIT);
 		0xFF2D->move_object(var0000);
 		Func097F(0xFF2D, "@Thou hast arrived!@", 0x0000);
 		Func097F(0xFE9C, "@Who said that?@", 0x0003);
@@ -75141,7 +75215,7 @@ void Func075A object#(0x75A) () {
 		};
 		UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_play_sound_effect(0x0051);
-		0xFF31->set_schedule_type(0x000F);
+		0xFF31->set_schedule_type(WAIT);
 		var0001 = script 0xFF31 {
 			face WEST;
 		};
@@ -75632,7 +75706,7 @@ void Func0766 object#(0x766) () {
 				var0005->remove_from_party();
 				var0005->set_npc_id(0x001F);
 				var0007 = var0005->get_object_position();
-				var0005->set_schedule_type(0x001D);
+				var0005->set_schedule_type(PATROL);
 				Func09AC(var0005, var0007[0x0001], var0007[0x0002], 0x001D);
 			}
 		}
@@ -75879,7 +75953,7 @@ void Func0768 object#(0x768) () {
 			var0003 = var0002 * 0x0002;
 			var0004 = UI_create_new_object2(0x0299, [var0000[(var0003 - 0x0001)], var0000[var0003], 0x0000]);
 			if (var0004) {
-				var0004->set_schedule_type(0x000F);
+				var0004->set_schedule_type(WAIT);
 				var0005 = var0004->add_cont_items(0x0001, 0x0281, var0001[var0002], var0003, false);
 				var0002 += 0x0001;
 				UI_sprite_effect(0x001A, var0000[(var0003 - 0x0001)], var0000[var0003], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -76002,7 +76076,7 @@ void Func0769 object#(0x769) () {
 			var0001 = Func099B(var0000, 0x0001, 0x0281, 0x00E6, 0x0007, 0x0000, false);
 			var0001 = Func099B(var0000, 0x0001, 0x0281, 0x00DF, 0x0009, 0x0000, false);
 			var0000->set_alignment(0x0002);
-			var0000->set_schedule_type(0x0000);
+			var0000->set_schedule_type(IN_COMBAT);
 			var0002 = var0000->get_npc_prop(0x0000);
 			var0003 = 0x0019 - var0002;
 			var0001 = var0000->set_npc_prop(0x0000, var0003);
@@ -76048,7 +76122,7 @@ void Func076A object#(0x76A) () {
 			var0002->Func07D2();
 			var0002->Func07D1();
 			var0002->set_alignment(0x0000);
-			var0002->set_schedule_type(0x000F);
+			var0002->set_schedule_type(WAIT);
 			var0002->set_npc_id(var0000);
 			var0002->set_item_flag(TEMPORARY);
 			var0002->set_item_flag(SI_TOURNAMENT);
@@ -76133,7 +76207,7 @@ void Func077E object#(0x77E) () {
 			0xFFDE->move_object([(var0000[0x0001] - 0x0001), (var0000[0x0002] + 0x0001), 0x0000]);
 			0xFFDE->get_npc_object()->set_item_frame(0x0010);
 			gflags[0x01BB] = true;
-			0xFFDE->set_new_schedules([0x0000, 0x0003, 0x0004, 0x0005, 0x0006, 0x0007], [0x000E, 0x0005, 0x000C, 0x0005, 0x000B, 0x0005], [0x0813, 0x0525, 0x0817, 0x0540, 0x0802, 0x0550, 0x0817, 0x0540, 0x081A, 0x0534, 0x0817, 0x0540]);
+			0xFFDE->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, EVENING, NIGHT], [SLEEP, 0x0005, WANDER, 0x0005, LOITER, EAT], [0x0813, 0x0525, 0x0817, 0x0540, 0x0802, 0x0550, 0x0817, 0x0540, 0x081A, 0x0534, 0x0817, 0x0540]);
 			0xFFDE->run_schedule();
 			UI_play_sound_effect(0x0077);
 			var0002 = script 0xFFDD after 1 ticks {
@@ -76295,7 +76369,7 @@ void Func0780 object#(0x780) () {
 				var0003[0x0002] -= 0x0002;
 				var0002 = UI_create_new_object2(0x02BE, var0003);
 				if (var0002) {
-					var0002->set_schedule_type(0x000A);
+					var0002->set_schedule_type(STANDTHERE);
 					var0002->Func07D2();
 					Func097F(0xFE9C, "@By the Virtues!@", 0x0005);
 					UI_play_sound_effect(0x000F);
@@ -76431,7 +76505,7 @@ void Func0796 object#(0x796) () {
 			if (var0004 != 0xFE9C->get_npc_object()) {
 				if (!UI_roll_to_win(var0004->get_npc_prop(0x0002), 0x000F)) {
 					var0004->halt_scheduled();
-					var0004->set_schedule_type(0x0000);
+					var0004->set_schedule_type(IN_COMBAT);
 					var0004->set_attack_mode(0x0007);
 					var0004->set_oppressor(0xFE9C);
 					var0005 = script var0004 after var0000 ticks {
@@ -76443,7 +76517,7 @@ void Func0796 object#(0x796) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		set_schedule_type(0x001F);
+		set_schedule_type(FOLLOW_AVATAR);
 	}
 }
 
@@ -76751,7 +76825,7 @@ void Func07A1 object#(0x7A1) () {
 				var0003->remove_item();
 				var0006 = UI_create_new_object2(0x02F1, var0005);
 				var0006->set_alignment(0x0002);
-				var0006->set_schedule_type(0x0000);
+				var0006->set_schedule_type(IN_COMBAT);
 			}
 		}
 	}
@@ -76993,12 +77067,12 @@ void Func07AB object#(0x7AB) () {
 		for (var0006 in var0000 with var0004 to var0005) {
 			var0007 = Func084E(var0006, var0001);
 			var0006->move_object(var0007);
-			var0006->set_new_schedules(0x0000, 0x0010, var0007);
+			var0006->set_new_schedules(MIDNIGHT, MAJOR_SIT, var0007);
 			var0006->run_schedule();
 		}
 		var0008 = get_object_position();
 		0xFF2B->move_object(var0008);
-		0xFF2B->set_schedule_type(0x000F);
+		0xFF2B->set_schedule_type(WAIT);
 		var0003 = script 0xFF2B {
 			nohalt;
 			face south;
@@ -77534,8 +77608,8 @@ void Func07B3 object#(0x7B3) () {
 			var0006 = [0xFFD8, 0xFFD6, 0xFFDB, 0xFFD5];
 			for (var0009 in var0006 with var0007 to var0008) {
 				var0009->move_object(var0005);
-				var0009->set_new_schedules([0x0000], [0x001D], [0x055B, 0x08A7]);
-				var0009->set_schedule_type(0x001D);
+				var0009->set_new_schedules([MIDNIGHT], [PATROL], [0x055B, 0x08A7]);
+				var0009->set_schedule_type(PATROL);
 			}
 			0xFFDB->clear_item_flag(CAN_FLY);
 			0xFFD8->set_npc_id(0x0004);
@@ -77932,7 +78006,7 @@ void Func07D6 object#(0x7D6) () {
 		if (var0004 != var0001) {
 			var0004->remove_from_party();
 			var0004->set_npc_id(0x001F);
-			var0004->set_schedule_type(0x000F);
+			var0004->set_schedule_type(WAIT);
 		}
 	}
 }
@@ -77988,11 +78062,11 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(0xFFBB, 0x0427, 0x09C7, 0x000F);
 		Func09AC(0xFFB3, 0x0442, 0x09CA, 0x000F);
 		Func09AC(0xFFBA, 0x03F6, 0x0A45, 0x000F);
-		0xFFBD->set_new_schedules([0x0002, 0x0004, 0x0005, 0x0007], [0x000B, 0x000B, 0x000C, 0x000E], [0x034A, 0x0AB4, 0x0409, 0x0A24, 0x03A9, 0x0A1B, 0x035B, 0x0A8A]);
+		0xFFBD->set_new_schedules([DAWN, NOON, AFTERNOON, NIGHT], [0x000B, LOITER, WANDER, SLEEP], [0x034A, 0x0AB4, 0x0409, 0x0A24, 0x03A9, 0x0A1B, 0x035B, 0x0A8A]);
 		0xFFBD->run_schedule();
 		0xFF00->set_alignment(0x0002);
 		0xFF00->move_object([0x040C, 0x0A26]);
-		0xFF00->set_schedule_type(0x0000);
+		0xFF00->set_schedule_type(IN_COMBAT);
 		Func09AC(0xFFF3, 0x0963, 0x0815, 0x000F);
 		Func09AC(0xFFD8, 0x08C2, 0x0715, 0x000F);
 		Func09AC(0xFFEA, 0x0978, 0x0819, 0x000F);
@@ -78009,10 +78083,10 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(0xFFEB, 0x08B6, 0x0736, 0x000F);
 		Func09AC(0xFFF0, 0x08C2, 0x0705, 0x000F);
 		Func09AC(0xFFF2, 0x0953, 0x07B5, 0x000F);
-		0xFFDF->set_new_schedules([0x0000, 0x0003, 0x0004, 0x0005, 0x0006], [0x000E, 0x0005, 0x0010, 0x000C, 0x0005], [0x08F8, 0x071C, 0x090A, 0x0718, 0x08F7, 0x0737, 0x0915, 0x0722, 0x090A, 0x0718]);
-		0xFFF1->set_new_schedules([0x0000, 0x0002, 0x0003], [0x000E, 0x0005, 0x0007], [0x0914, 0x06E7, 0x0919, 0x06E7, 0x093C, 0x0782]);
-		0xFFED->set_new_schedules([0x0000, 0x0002, 0x0005, 0x0006], [0x000E, 0x000C, 0x000C, 0x000C], [0x0937, 0x07C5, 0x08E3, 0x0743, 0x0983, 0x07A6, 0x09A3, 0x0823]);
-		0xFFFC->set_new_schedules([0x0000, 0x0002, 0x0005, 0x0006], [0x000E, 0x000C, 0x000C, 0x000C], [0x0937, 0x07C5, 0x08E3, 0x0743, 0x0983, 0x07A6, 0x09A3, 0x0823]);
+		0xFFDF->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, EVENING], [SLEEP, 0x0005, MAJOR_SIT, WANDER, EAT], [0x08F8, 0x071C, 0x090A, 0x0718, 0x08F7, 0x0737, 0x0915, 0x0722, 0x090A, 0x0718]);
+		0xFFF1->set_new_schedules([MIDNIGHT, DAWN, MORNING], [SLEEP, EAT, TEND_SHOP], [0x0914, 0x06E7, 0x0919, 0x06E7, 0x093C, 0x0782]);
+		0xFFED->set_new_schedules([MIDNIGHT, DAWN, AFTERNOON, EVENING], [SLEEP, 0x000C, 0x000C, WANDER], [0x0937, 0x07C5, 0x08E3, 0x0743, 0x0983, 0x07A6, 0x09A3, 0x0823]);
+		0xFFFC->set_new_schedules([MIDNIGHT, DAWN, AFTERNOON, EVENING], [SLEEP, 0x000C, 0x000C, WANDER], [0x0937, 0x07C5, 0x08E3, 0x0743, 0x0983, 0x07A6, 0x09A3, 0x0823]);
 		0xFFDF->run_schedule();
 		0xFFF1->run_schedule();
 		0xFFED->run_schedule();
@@ -78035,7 +78109,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(0xFFC6, 0x0467, 0x06C9, 0x000F);
 		Func09AC(0xFFC4, 0x0407, 0x0780, 0x000F);
 		Func09AC(0xFFC3, 0x03F7, 0x0796, 0x000F);
-		0xFFC5->set_new_schedules([0x0002, 0x0003, 0x0004, 0x0005, 0x0006, 0x0007], [0x000B, 0x000C, 0x000C, 0x000B, 0x001A, 0x000E], [0x0406, 0x0777, 0x0409, 0x074E, 0x0406, 0x0718, 0x0466, 0x06ED, 0x03AF, 0x06E0, 0x03D6, 0x06C6]);
+		0xFFC5->set_new_schedules([DAWN, MORNING, NOON, AFTERNOON, EVENING, NIGHT], [0x000B, 0x000C, WANDER, LOITER, EAT_AT_INN, SLEEP], [0x0406, 0x0777, 0x0409, 0x074E, 0x0406, 0x0718, 0x0466, 0x06ED, 0x03AF, 0x06E0, 0x03D6, 0x06C6]);
 		0xFFC5->run_schedule();
 		var0001 = 0xFFC8->add_cont_items(0x0001, 0x031D, 0x000A, 0x0000, 0x0000);
 		var0001 = 0xFFC3->add_cont_items(0x0001, 0x031D, 0x0007, 0x0000, 0x0000);
@@ -78052,7 +78126,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(0xFFDA, 0x04E8, 0x08B9, 0x000F);
 		Func09AC(0xFFD9, 0x0517, 0x0893, 0x000F);
 		Func09AC(0xFFD7, 0x04F8, 0x08A6, 0x000F);
-		0xFFD3->set_new_schedules([0x0000, 0x0003, 0x0004, 0x0005, 0x0007], [0x000E, 0x0005, 0x0003, 0x000B, 0x0005], [0x0516, 0x08F7, 0x04F7, 0x08CC, 0x050D, 0x08B6, 0x0516, 0x08A2, 0x04F7, 0x08CC]);
+		0xFFD3->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, NIGHT], [SLEEP, 0x0005, TALK, LOITER, EAT], [0x0516, 0x08F7, 0x04F7, 0x08CC, 0x050D, 0x08B6, 0x0516, 0x08A2, 0x04F7, 0x08CC]);
 		0xFFD3->run_schedule();
 		Func09AC(0xFF71, 0x0436, 0x036B, 0x000F);
 		Func09AC(0xFF70, 0x0440, 0x0348, 0x000F);
@@ -78174,7 +78248,7 @@ void Func07DB object#(0x7DB) () {
 		var0002 = UI_create_new_object2(0x012E, var0000);
 		var0002->set_npc_id(0x000F);
 		var0002->set_item_flag(SI_TOURNAMENT);
-		var0002->set_schedule_type(0x000C);
+		var0002->set_schedule_type(WANDER);
 	}
 }
 
@@ -78231,7 +78305,7 @@ void Func07DC object#(0x7DC) () {
 				continue;
 				actor frame sitting;
 			};
-			var0003->set_schedule_type(0x000F);
+			var0003->set_schedule_type(WAIT);
 			var0009 += 0x0001;
 		}
 		0xFFEE->move_object([0x090A, 0x0717, 0x0000]);
@@ -78243,7 +78317,7 @@ void Func07DC object#(0x7DC) () {
 		var0007 = [0x0002, 0x0000, 0x0004, 0x0004, 0x0000];
 		var0009 = 0x0001;
 		for (var0003 in var0004 with var000D to var000E) {
-			var0003->set_schedule_type(0x000F);
+			var0003->set_schedule_type(WAIT);
 			var000C = script var0003 {
 				face var0007[var0009];
 				continue;
@@ -78319,7 +78393,7 @@ void Func07DE object#(0x7DE) () {
 			};
 			for (var0007 in var0001 with var0005 to var0006) {
 				var0007->move_object(Func084E(var0007, var0002));
-				var0007->set_new_schedules(0x0000, Func084D(var0007, var0002), Func084E(var0007, var0002));
+				var0007->set_new_schedules(MIDNIGHT, Func084D(var0007, var0002), Func084E(var0007, var0002));
 				var0007->run_schedule();
 			}
 		}
@@ -78735,7 +78809,7 @@ void Func07E1 object#(0x7E1) () {
 			0xFF64->set_item_flag(SI_TOURNAMENT);
 			0xFF64->set_alignment(0x0003);
 			0xFF64->set_item_frame(0x000D);
-			0xFF64->set_schedule_type(0x000F);
+			0xFF64->set_schedule_type(WAIT);
 			var0002 = 0xFF64->get_npc_prop(0x0003);
 			Func0982(0xFF64, (var0002 - 0x0001));
 			Func097F(0xFF64, "@zzzzzz....@", 0x0002);
@@ -78760,7 +78834,7 @@ void Func07E1 object#(0x7E1) () {
 				};
 			}
 			0xFF65->clear_item_flag(ASLEEP);
-			0xFF65->set_schedule_type(0x0000);
+			0xFF65->set_schedule_type(IN_COMBAT);
 			0xFF65->set_opponent(0xFF64);
 			0xFF65->set_oppressor(0xFF64);
 			0xFF65->set_alignment(0x0001);
@@ -78768,7 +78842,7 @@ void Func07E1 object#(0x7E1) () {
 			Func094F(0xFF65, ["Die, Draygan!", "I shall kill thee!", "Whoreson!"]);
 		} else {
 			var0000->set_item_flag(ASLEEP);
-			var0000->set_schedule_type(0x000E);
+			var0000->set_schedule_type(SLEEP);
 		}
 	}
 }
@@ -78851,7 +78925,7 @@ void Func07E2 object#(0x7E2) () {
 		}
 		Func097F(0xFE9C, "@I made it!@", 0x0002);
 		Func097F(0xFFB5, "@Thou didst survive?@", 0x000A);
-		0xFFB5->set_schedule_type(0x0003);
+		0xFFB5->set_schedule_type(TALK);
 		Func09AC(0xFFB5, 0x0337, 0x08C8, 0x0003);
 	}
 	if (var0000 == 0x0003) {
@@ -78909,10 +78983,10 @@ void Func07E4 object#(0x7E4) () {
 	var0002 = 0xFE9C->find_nearby(0x03C1, 0x0064, 0x0010);
 	if (var0001 == 0x0000) {
 		UI_play_music(0x0010, var0000);
-		0xFFD8->set_schedule_type(0x000C);
-		0xFFD5->set_schedule_type(0x000C);
-		0xFFDB->set_schedule_type(0x000C);
-		0xFFD6->set_schedule_type(0x000C);
+		0xFFD8->set_schedule_type(WANDER);
+		0xFFD5->set_schedule_type(WANDER);
+		0xFFDB->set_schedule_type(WANDER);
+		0xFFD6->set_schedule_type(WANDER);
 		var0002->set_barge_dir(0x0002);
 		var0003 = new script {
 			finish;
@@ -79108,19 +79182,19 @@ void Func07E6 object#(0x7E6) () {
 	var0005 = [0x08AC, 0x0718];
 	var0006 = [0x07BA, 0x08D3];
 	var0007 = [0x08C8, 0x0716];
-	0xFFD8->set_new_schedules([0x0000, 0x0003, 0x0004], [0x000E, 0x0007, 0x001A], [var0005, var0006, var0007]);
+	0xFFD8->set_new_schedules([MIDNIGHT, MORNING, NOON], [SLEEP, TEND_SHOP, EAT_AT_INN], [var0005, var0006, var0007]);
 	var0008 = [0x0935, 0x06E3];
 	var0009 = [0x08B9, 0x070B];
 	var000A = [0x08CB, 0x074A];
 	var000B = [0x087E, 0x0747];
 	var000C = [0x0942, 0x077E];
-	0xFFD6->set_new_schedules([0x0000, 0x0003, 0x0005, 0x0006, 0x0007], [0x000E, 0x001A, 0x0007, 0x0007, 0x0007], [var0008, var0009, var000A, var000B, var000C]);
+	0xFFD6->set_new_schedules([MIDNIGHT, MORNING, AFTERNOON, EVENING, NIGHT], [SLEEP, EAT_AT_INN, 0x0007, 0x0007, TEND_SHOP], [var0008, var0009, var000A, var000B, var000C]);
 	var000D = [0x08BD, 0x0713];
 	var000E = [0x0893, 0x0718];
-	0xFFDB->set_new_schedules([0x0002, 0x0003, 0x0007], [0x000C, 0x0009, 0x000A], [var000D, var000D, var000E]);
+	0xFFDB->set_new_schedules([DAWN, MORNING, NIGHT], [WANDER, HOUND, STANDTHERE], [var000D, var000D, var000E]);
 	var000F = [0x08B9, 0x0710];
 	var0010 = [0x0895, 0x0719];
-	0xFFD5->set_new_schedules([0x0002, 0x0003, 0x0007], [0x001A, 0x0007, 0x000E], [var000F, var000F, var0010]);
+	0xFFD5->set_new_schedules([DAWN, MORNING, NIGHT], [EAT_AT_INN, TEND_SHOP, SLEEP], [var000F, var000F, var0010]);
 	for (var0013 in var0004 with var0011 to var0012) {
 		var0013->run_schedule();
 	}
@@ -79405,11 +79479,11 @@ void Func07EB object#(0x7EB) () {
 			var0008 = UI_apply_damage(var0006->get_npc_prop(0x0000), var0007, 0x0002, var0006);
 			var0009 = var0006->get_alignment();
 			if ((var0009 == 0x0002) || (var0009 == 0x0003)) {
-				var0006->set_schedule_type(0x0000);
+				var0006->set_schedule_type(IN_COMBAT);
 			}
 			if (var0009 == 0x0000) {
 				var0006->set_alignment(0x0002);
-				var0006->set_schedule_type(0x0000);
+				var0006->set_schedule_type(IN_COMBAT);
 			}
 		}
 	}
@@ -79612,7 +79686,7 @@ void Func07ED object#(0x7ED) () {
 		var0000 = get_object_position();
 		UI_sprite_effect(0x001F, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_play_sound_effect(0x002A);
-		0xFF31->set_schedule_type(0x000F);
+		0xFF31->set_schedule_type(WAIT);
 		var0001 = script 0xFF31 {
 			say "@Aaahhh!@";
 			actor frame bowing;
@@ -79686,7 +79760,7 @@ void Func07EE object#(0x7EE) () {
 		abort;
 	}
 	if ((event == SCRIPTED) && (gflags[0x000A] == true)) {
-		0xFF2D->set_schedule_type(0x000F);
+		0xFF2D->set_schedule_type(WAIT);
 		var0002 = 0xFF31->get_object_position();
 		UI_play_sound_effect(0x0051);
 		UI_sprite_effect(0x001A, var0002[0x0001], var0002[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -79759,7 +79833,7 @@ void Func07EE object#(0x7EE) () {
 		abort;
 	}
 	if ((event == SCRIPTED) && (gflags[0x0009] == true)) {
-		0xFFFE->set_schedule_type(0x0003);
+		0xFFFE->set_schedule_type(TALK);
 		var0001 = script 0xFFFE after 2 ticks {
 			nohalt;
 			say "@The Avatar!@";
@@ -79791,7 +79865,7 @@ void Func07EF object#(0x7EF) () {
 	0xFE9C->obj_sprite_effect(0x002A, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_play_sound_effect(0x0074);
 	UI_lightning();
-	0xFE9C->set_schedule_type(0x000F);
+	0xFE9C->set_schedule_type(WAIT);
 	var0001 = Func0992(0x0001, "@Oh, no!@", 0x0000, true);
 	0xFE9C->set_item_flag(DONT_MOVE);
 	var0002 = script 0xFE9C {
@@ -79824,7 +79898,7 @@ void Func07F0 object#(0x7F0) () {
 	for (var0004 in var0000 with var0002 to var0003) {
 		if (var0004 != 0xFE9C->get_npc_object()) {
 			var0004->remove_from_party();
-			var0004->set_new_schedules(0x0000, 0x000C, [var0001, 0x05E2]);
+			var0004->set_new_schedules(MIDNIGHT, WANDER, [var0001, 0x05E2]);
 			var0004->move_object([var0001, 0x05E2]);
 			var0004->run_schedule();
 			var0001 += 0x0002;
@@ -79832,7 +79906,7 @@ void Func07F0 object#(0x7F0) () {
 	}
 	UI_fade_palette(0x000C, 0x0001, 0x0000);
 	0xFE9C->move_object([0x091D, 0x063C]);
-	0xFE9C->set_schedule_type(0x001F);
+	0xFE9C->set_schedule_type(FOLLOW_AVATAR);
 	0xFE9C->clear_item_flag(DONT_MOVE);
 	var0005 = script Func09A0(0x0005, 0x0001) after 30 ticks {
 		nohalt;
@@ -80020,7 +80094,7 @@ void Func07F6 object#(0x7F6) () {
 	}
 	if ((event == SCRIPTED) && (gflags[0x0007] == true)) {
 		gflags[0x0007] = false;
-		set_schedule_type(0x0003);
+		set_schedule_type(TALK);
 		if (get_npc_number() == 0xFF4E) {
 			0xFF4E->item_say("@Avatar! Avatar!@");
 			abort;
@@ -80107,7 +80181,7 @@ void Func07F7 object#(0x7F7) () {
 			UI_fade_palette(0x000C, 0x0001, 0x0000);
 			UI_play_sound_effect(0x0082);
 			0xFF56->move_object([0x074A, 0x0A03, 0x0000]);
-			0xFF56->set_schedule_type(0x0003);
+			0xFF56->set_schedule_type(TALK);
 			var0000 = script Func09A0(0x0005, 0x0002) {
 				nohalt;
 				call Func07F7;
@@ -80165,7 +80239,7 @@ void Func07F8 object#(0x7F8) () {
 	}
 	if ((event == SI_PATH_SUCCESS) && (get_npc_number() == 0xFE9C)) {
 		if (!gflags[0x0171]) {
-			0xFE9C->set_schedule_type(0x000F);
+			0xFE9C->set_schedule_type(WAIT);
 			var0001 = script 0xFFC3 {
 				actor frame bowing;
 				wait 2;
@@ -80196,7 +80270,7 @@ void Func07F8 object#(0x7F8) () {
 		var0001 = UI_get_party_list2();
 		var0004 = false;
 		for (var0007 in var0001 with var0005 to var0006) {
-			if (var0007->get_schedule_type() == 0x000F) {
+			if (var0007->get_schedule_type() == WAIT) {
 				var0004 = var0007;
 			}
 		}
@@ -80251,7 +80325,7 @@ void Func07F8 object#(0x7F8) () {
 		}
 		var0001 = UI_get_party_list2();
 		for (var0007 in var0001 with var000A to var000B) {
-			var0007->set_schedule_type(0x000F);
+			var0007->set_schedule_type(WAIT);
 		}
 		var0001 = Func09A0(0x0001, 0x0002)->set_item_quality(0x0000);
 		var0001 = script Func09A0(0x0001, 0x0002) {
@@ -80473,16 +80547,16 @@ void Func07F9 object#(0x7F9) () {
 				if (gflags[0x0084]) {
 					if (var000D->get_npc_id()) {
 						var000D->set_alignment(0x0002);
-						var000D->set_schedule_type(0x0000);
+						var000D->set_schedule_type(IN_COMBAT);
 						var000D->set_attack_mode(0x0000);
 						var000D->set_opponent(item);
 						if (item == 0xFE9C->get_npc_object()) {
 							set_attack_mode(0x0000);
 							set_opponent(var000D);
 							set_oppressor(var000D);
-							set_schedule_type(0x001F);
+							set_schedule_type(FOLLOW_AVATAR);
 						} else {
-							set_schedule_type(0x0000);
+							set_schedule_type(IN_COMBAT);
 							set_opponent(var000D);
 						}
 					} else {
@@ -80492,11 +80566,11 @@ void Func07F9 object#(0x7F9) () {
 							var000D->set_oppressor(item);
 						}
 						var000D->set_attack_mode(0x0000);
-						var000D->set_schedule_type(0x0007);
+						var000D->set_schedule_type(TEND_SHOP);
 					}
 				} else {
 					var000D->set_alignment(0x0003);
-					var000D->set_schedule_type(0x0000);
+					var000D->set_schedule_type(IN_COMBAT);
 					var000D->set_attack_mode(0x0000);
 				}
 			}
@@ -80521,7 +80595,7 @@ void Func07F9 object#(0x7F9) () {
 			return;
 		}
 		if (!gflags[0x0084]) {
-			set_schedule_type(0x0000);
+			set_schedule_type(IN_COMBAT);
 		}
 		set_item_flag(SI_TOURNAMENT);
 	}
@@ -81098,7 +81172,7 @@ void Func07FB object#(0x7FB) () {
 	}
 	if (var0000 == 0x002D) {
 		remove_npc();
-		set_schedule_type(0x0004);
+		set_schedule_type(DANCE);
 		Func08C6();
 		var0004 = script 0xFFCD {
 			nohalt;
@@ -82228,7 +82302,7 @@ void Func07FF object#(0x7FF) () {
 	set_alignment(0x0001);
 	if (!(item == 0xFE9C->get_npc_object())) {
 		0xFE9C->get_npc_object()->set_camera();
-		set_schedule_type(0x001F);
+		set_schedule_type(FOLLOW_AVATAR);
 	}
 	var0005 = find_nearby(0x00E4, 0x0023, 0x0000);
 	do {
@@ -83376,20 +83450,20 @@ void Func0808 0x808 (var var0000, var var0001) {
 	var0002 = "";
 	var0003 = Func0954();
 	var0004 = UI_is_pc_female();
-	if ((event == PROXIMITY) && (get_schedule_type() == 0x0009)) {
+	if ((event == PROXIMITY) && (get_schedule_type() == HOUND)) {
 		if (UI_get_random(0x000A) < 0x0006) {
 			abort;
 		}
 		var0005 = ["@Leave this place!@", "@Intrude not!@", "@Call the Rangers!@", "@Anger not the Mages...@", "@Take nothing!@", "@Thief! Thief!@"];
 		Func097F(item, var0005[UI_get_random(0x0006)], 0x0000);
 	}
-	if ((event == DOUBLECLICK) && (get_schedule_type() != 0x000A)) {
+	if ((event == DOUBLECLICK) && (get_schedule_type() != STANDTHERE)) {
 		0xFE9C->item_say("Hold!");
 		item->Func07D1();
 		Func097F(item, "@Yes?@", 0x0002);
 		var0006 = get_npc_number();
 		if ((var0006 == 0xFF3A) || ((var0006 == 0xFF39) || (var0006 == 0xFF38))) {
-			set_schedule_type(0x000A);
+			set_schedule_type(STANDTHERE);
 			item->Func07D2();
 			var0006 = 0x0400 - var0006;
 			var0006 = script item {
@@ -83399,7 +83473,7 @@ void Func0808 0x808 (var var0000, var var0001) {
 			};
 			abort;
 		}
-		set_schedule_type(0x0003);
+		set_schedule_type(TALK);
 	}
 	if ((event == STARTED_TALKING) || (event == SCRIPTED)) {
 		run_schedule();
@@ -83501,11 +83575,11 @@ void Func0808 0x808 (var var0000, var var0001) {
 			case "bye":
 				Func097F(0xFE9C, "@Goodbye.@", 0x0000);
 				if ((var0000 == "Canton") || ((var0000 == "Filbercio") || (var0000 == "Rocco"))) {
-					set_schedule_type(0x0001);
+					set_schedule_type(PACE_HORIZONTAL);
 					Func097F(item, "@Goodbye@", 0x0005);
 					abort;
 				}
-				set_schedule_type(0x0009);
+				set_schedule_type(HOUND);
 				Func097F(item, "@Move along...@", 0x000A);
 				abort;
 
@@ -83527,7 +83601,7 @@ void Func0809 0x809 () {
 		0xFE9C->item_say("Hold!");
 		item->Func07D1();
 		Func097F(item, "@What was that?@", 0x0002);
-		set_schedule_type(0x0003);
+		set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
 		0xFED6->show_npc_face0(0x0000);
@@ -83535,7 +83609,7 @@ void Func0809 0x809 () {
 		run_schedule();
 		say("\"What dost thou wish?\"");
 		if (get_item_flag(IN_PARTY)) {
-			set_schedule_type(0x001F);
+			set_schedule_type(FOLLOW_AVATAR);
 			add("leave");
 		} else {
 			run_schedule();
@@ -84801,7 +84875,7 @@ void Func080E 0x80E () {
 		var0001 = var0000->add_cont_items(0x0001, 0x0327, 0x0003, 0xFE99, 0x0012);
 		var0001 = var0000->add_cont_items(0x0001, 0x011F, 0x0001, 0xFE99, 0x0012);
 		var0001 = var0000->add_cont_items(0x0001, 0x02DB, 0x0006, 0xFE99, 0x0012);
-		var0000->set_schedule_type(0x0000);
+		var0000->set_schedule_type(IN_COMBAT);
 		var0000->set_oppressor(0xFFC0);
 		var0000->set_opponent(0xFFC0);
 	}
@@ -84810,7 +84884,7 @@ void Func080E 0x80E () {
 	var0001 = 0xFFC0->add_cont_items(0x0001, 0x0359, 0x0002, 0xFE99, 0x0012);
 	var0001 = 0xFFC0->add_cont_items(0x0001, 0x02A4, 0x0005, 0xFE99, 0x0012);
 	var0001 = 0xFFC0->add_cont_items(0x0001, 0x020F, 0x0001, 0xFE99, 0x0012);
-	0xFFC0->set_schedule_type(0x0000);
+	0xFFC0->set_schedule_type(IN_COMBAT);
 	0xFFC0->set_oppressor(var0000);
 	0xFFC0->set_opponent(var0000);
 	UI_end_conversation();
@@ -89806,7 +89880,7 @@ void Func0833 0x833 (var var0000) {
 		}
 	}
 	if (var0000 == 0x000A) {
-		0xFFB0->set_schedule_type(0x000F);
+		0xFFB0->set_schedule_type(WAIT);
 		var0003 = UI_find_nearby_avatar(0x010F) & UI_find_nearby_avatar(0x0110);
 		var0004 = false;
 		for (var0007 in var0003 with var0005 to var0006) {
@@ -90581,7 +90655,7 @@ void Func083B 0x83B (var var0000) {
 			nohalt;
 			say "@Woof woof! Rrruff!@";
 		};
-		set_schedule_type(0x0004);
+		set_schedule_type(DANCE);
 		var0002 = Func0992(0x0001, 0x0000, 0x0000, false);
 		var0002->clear_item_say();
 		Func097F(var0002, "@We must be close!@", 0x0004);
@@ -93185,7 +93259,7 @@ void Func0849 0x849 () {
 	if (gflags[0x0043]) {
 		return;
 	}
-	0xFFB9->set_new_schedules([0x0006, 0x0000], [0x000E, 0x001B], [0x0388, 0x0A46, 0x03DA, 0x0A86]);
+	0xFFB9->set_new_schedules([EVENING, MIDNIGHT], [SLEEP, DUEL], [0x0388, 0x0A46, 0x03DA, 0x0A86]);
 	gflags[0x0043] = true;
 	var0000 = 0xFFB9->set_npc_prop(0x0000, 0xFFEE);
 	var0000 = 0xFFB9->set_npc_prop(0x0004, 0xFFF7);
@@ -93565,68 +93639,68 @@ var Func084D 0x84D (var var0000, var var0001) {
 
 	if (var0001 == 0x0001) {
 		if (var0000 == 0xFF2A) {
-			return 0x0012;
+			return BAKE;
 		}
 		if ((var0000 == 0xFF30) || (var0000 == 0xFF2E)) {
-			return 0x0017;
+			return WAITER;
 		}
-		return 0x001A;
+		return EAT_AT_INN;
 	}
 	if (var0001 == 0x0002) {
 		if ((var0000 == 0xFF2D) || ((var0000 == 0xFF2F) || (var0000 == 0xFF2C))) {
-			return 0x0007;
+			return TEND_SHOP;
 		}
-		return 0x0006;
+		return FARM;
 	}
 	if ((var0001 == 0x0003) || (var0001 == 0x000A)) {
 		if ((var0000 == 0xFF31) || (var0000 == 0xFF29)) {
-			return 0x0007;
+			return TEND_SHOP;
 		}
-		return 0x0010;
+		return MAJOR_SIT;
 	}
 	if (var0001 == 0x0004) {
 		if ((var0000 == 0xFF30) || (var0000 == 0xFF2E)) {
-			return 0x000C;
+			return WANDER;
 		}
 		if (var0000 == 0xFF2A) {
-			return 0x0002;
+			return PACE_VERTICAL;
 		}
-		return 0x001E;
+		return DESK_WORK;
 	}
 	if (var0001 == 0x0005) {
 		if ((var0000 == 0xFF2B) || (var0000 == 0xFF29)) {
-			return 0x0007;
+			return TEND_SHOP;
 		}
-		return 0x0010;
+		return MAJOR_SIT;
 	}
 	if (var0001 == 0x0006) {
-		return 0x0007;
+		return TEND_SHOP;
 	}
 	if (var0001 == 0x0007) {
 		if ((var0000 == 0xFF29) || ((var0000 == 0xFF2F) || (var0000 == 0xFF31))) {
-			return 0x001E;
+			return DESK_WORK;
 		}
 		if ((var0000 == 0xFF2D) || (var0000 == 0xFF2B)) {
-			return 0x000C;
+			return WANDER;
 		}
 		if (var0000 == 0xFF2C) {
-			return 0x0006;
+			return FARM;
 		}
 		if (var0000 == 0xFF2E) {
-			return 0x0002;
+			return PACE_VERTICAL;
 		}
-		return 0x0012;
+		return BAKE;
 	}
 	if (var0001 == 0x0008) {
-		return 0x000E;
+		return SLEEP;
 	}
 	if (var0001 == 0x0009) {
 		if (var0000 == 0xFF2B) {
-			return 0x0007;
+			return TEND_SHOP;
 		}
-		return 0x0004;
+		return DANCE;
 	}
-	return 0;
+	return IN_COMBAT;
 }
 
 var Func084E 0x84E (var var0000, var var0001) {
@@ -94831,7 +94905,7 @@ void Func0856 0x856 () {
 	while (var0000 > 0x0000) {
 		var0001 = UI_create_new_object2(0x02B3, [0x0000, 0x0000, 0x0000]);
 		if (var0001) {
-			var0001->set_schedule_type(0x0000);
+			var0001->set_schedule_type(IN_COMBAT);
 			var0001->set_alignment(0x0002);
 			0xFE9C->set_oppressor(var0001);
 			var0002 = var0001->approach_avatar(0x0050, 0x0028);
@@ -95560,7 +95634,7 @@ void Func085D 0x85D (var var0000, var var0001) {
 	UI_sprite_effect(0x0011, var0002[0x0001], var0002[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_sprite_effect(0x0015, var0002[0x0001], var0002[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	0xFF4B->move_object([var0000, var0001, 0x0000]);
-	0xFF4B->set_new_schedules(0x0000, 0x0007, [var0000, var0001]);
+	0xFF4B->set_new_schedules(MIDNIGHT, TEND_SHOP, [var0000, var0001]);
 	0xFF4B->run_schedule();
 }
 
@@ -96237,11 +96311,11 @@ void Func0864 0x864 () {
 	UI_sprite_effect(0x0015, var0002[0x0001], var0002[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	var0003 = 0xFFC9->get_npc_object()->get_item_shape();
 	0xFFC9->set_polymorph(var0003);
-	0xFFC9->set_new_schedules([0x0000, 0x0003, 0x0004], [0x000E, 0x0005, 0x000C], [0x0436, 0x06C9, 0x03AD, 0x06DD, 0x0407, 0x075B]);
+	0xFFC9->set_new_schedules([MIDNIGHT, MORNING, NOON], [SLEEP, EAT, WANDER], [0x0436, 0x06C9, 0x03AD, 0x06DD, 0x0407, 0x075B]);
 	UI_sprite_effect(0x000D, (var0002[0x0001] + 0x0002), (var0002[0x0002] + 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 	0xFF2C->move_object([(var0002[0x0001] + 0x0002), (var0002[0x0002] + 0x0002), 0x0000]);
-	0xFF2C->set_schedule_type(0x000F);
-	0xFFC9->set_schedule_type(0x000F);
+	0xFF2C->set_schedule_type(WAIT);
+	0xFFC9->set_schedule_type(WAIT);
 	0xFE9C->set_item_flag(DONT_MOVE);
 	UI_end_conversation();
 	var0001 = script 0xFF2C after 10 ticks {
@@ -98039,7 +98113,7 @@ void Func086C 0x86C (var var0000) {
 	if (!var0000->get_item_flag(IN_PARTY)) {
 		var0000->add_to_party();
 	}
-	var0000->set_schedule_type(0x001F);
+	var0000->set_schedule_type(FOLLOW_AVATAR);
 	var0007 = script var0000 {
 		actor frame standing;
 	};
@@ -99316,7 +99390,7 @@ void Func0878 0x878 () {
 	var0004 = [0x06EB, 0x0A37];
 	var0005 = [0x063B, 0x0A37];
 	var0006 = [0x06AB, 0x0A38];
-	0xFF56->set_new_schedules([0x0000, 0x0001, 0x0002, 0x0003, 0x0004, 0x0005, 0x0006], [0x000B, 0x000C, 0x000C, 0x0002, 0x0001, 0x000C, 0x000C], [var0000, var0001, var0002, var0003, var0004, var0005, var0006]);
+	0xFF56->set_new_schedules([MIDNIGHT, EARLY, DAWN, MORNING, NOON, AFTERNOON, EVENING], [LOITER, 0x000C, 0x000C, PACE_VERTICAL, PACE_HORIZONTAL, 0x000C, WANDER], [var0000, var0001, var0002, var0003, var0004, var0005, var0006]);
 	0xFF56->run_schedule();
 }
 
@@ -99327,7 +99401,7 @@ void Func0879 0x879 () {
 	say("\"To ask you to prepare yourself in virtue. Then to grasp the Pillar of Fire and let the Test begin...\"");
 	say("\"To admit you to the Underground City.\"");
 	Func097F(0xFF56, "@A moment!@", 0x0000);
-	0xFF56->set_new_schedules(0x0000, 0x001D, 0xFF56->get_object_position());
+	0xFF56->set_new_schedules(MIDNIGHT, PATROL, 0xFF56->get_object_position());
 	0xFF56->run_schedule();
 	abort;
 }
@@ -100063,7 +100137,7 @@ void Func087F 0x87F (var var0000) {
 			};
 		}
 		var000B = Func0988(0xFE9C->get_npc_object(), UI_get_party_list());
-		0xFE9C->set_schedule_type(0x000E);
+		0xFE9C->set_schedule_type(SLEEP);
 		var0000->nap_time();
 	}
 }
@@ -100477,28 +100551,28 @@ void Func088A 0x88A (var var0000) {
 				if ((var0002 == 0x000D) && (var0003 == 0xFFFD)) {
 					0xFFFD->clear_item_flag(SI_ZOMBIE);
 					if (!0xFFFD->get_item_flag(IN_PARTY)) {
-						0xFFFD->set_schedule_type(0x0003);
+						0xFFFD->set_schedule_type(TALK);
 					}
 					Func08F4();
 				}
 				if ((var0002 == 0x000E) && (var0003 == 0xFFFE)) {
 					0xFFFE->clear_item_flag(SI_ZOMBIE);
 					if (!0xFFFE->get_item_flag(IN_PARTY)) {
-						0xFFFE->set_schedule_type(0x0003);
+						0xFFFE->set_schedule_type(TALK);
 					}
 					Func08F4();
 				}
 				if ((var0002 == 0x000F) && (var0003 == 0xFFFF)) {
 					0xFFFF->clear_item_flag(SI_ZOMBIE);
 					if (!0xFFFF->get_item_flag(IN_PARTY)) {
-						0xFFFF->set_schedule_type(0x0003);
+						0xFFFF->set_schedule_type(TALK);
 					}
 					Func08F4();
 				}
 				if ((var0002 == 0x000F) && (var0003 == 0xFF6B)) {
 					0xFF6B->clear_item_flag(SI_ZOMBIE);
 					if (!0xFF6B->get_item_flag(IN_PARTY)) {
-						0xFF6B->set_schedule_type(0x0003);
+						0xFF6B->set_schedule_type(TALK);
 					}
 					Func08F4();
 				}
@@ -100675,7 +100749,7 @@ void Func088D 0x88D (var var0000, var var0001) {
 		if ((var0007 - 0x0001) > var000E) {
 			break;
 		}
-		if (!(var0012->get_schedule_type() == 0x0010)) {
+		if (!(var0012->get_schedule_type() == MAJOR_SIT)) {
 			var0013 = var0007 - 0x0001;
 			var0012->sit_down(var0002[var0013]);
 		}
@@ -101557,7 +101631,7 @@ var Func08A8 0x8A8 (var var0000) {
 void Func08A9 0x8A9 () {
 	if (!gflags[0x014C]) {
 		gflags[0x014C] = true;
-		0xFFD2->set_new_schedules([0x0002, 0x0003, 0x0004, 0x0005, 0x0006, 0x0007], [0x0003, 0x0003, 0x0003, 0x0003, 0x0003, 0x000E], [0x03A8, 0x0728, 0x03A8, 0x06C8, 0x0448, 0x06C4, 0x0408, 0x0788, 0x03A8, 0x0728, 0x03D7, 0x075B]);
+		0xFFD2->set_new_schedules([DAWN, MORNING, NOON, AFTERNOON, EVENING, NIGHT], [0x0003, 0x0003, 0x0003, 0x0003, TALK, SLEEP], [0x03A8, 0x0728, 0x03A8, 0x06C8, 0x0448, 0x06C4, 0x0408, 0x0788, 0x03A8, 0x0728, 0x03D7, 0x075B]);
 	}
 }
 
@@ -101598,8 +101672,8 @@ void Func08AB 0x8AB () {
 		}
 	}
 	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((0xFFD2->get_item_flag(MET) + 0xFFD1->get_item_flag(MET)) + 0xFFD0->get_item_flag(MET)) + 0xFFCF->get_item_flag(MET)) + 0xFFCE->get_item_flag(MET)) + 0xFFCD->get_item_flag(MET)) + 0xFFCC->get_item_flag(MET)) + 0xFFCB->get_item_flag(MET)) + 0xFFC7->get_item_flag(MET)) + 0xFFCA->get_item_flag(MET)) + 0xFFC6->get_item_flag(MET)) + 0xFFC3->get_item_flag(MET)) > 0x0004)))) {
-		0xFFCB->modify_schedule(0x0004, 0x000A, [0x040E, 0x06BF]);
-		0xFFCB->modify_schedule(0x0005, 0x000A, [0x040E, 0x06BF]);
+		0xFFCB->modify_schedule(NOON, STANDTHERE, [0x040E, 0x06BF]);
+		0xFFCB->modify_schedule(AFTERNOON, STANDTHERE, [0x040E, 0x06BF]);
 	}
 }
 
@@ -102067,7 +102141,7 @@ void Func08B4 0x8B4 () {
 
 	var0000 = Func0988(0xFE9C->get_npc_object(), UI_get_party_list());
 	for (var0003 in var0000 with var0001 to var0002) {
-		var0003->set_schedule_type(0x000F);
+		var0003->set_schedule_type(WAIT);
 	}
 }
 
@@ -102113,8 +102187,9 @@ void Func08B7 0x8B7 () {
 
 	var0000 = [0x03A5, 0x035B, 0x03B4, 0x0357, 0x0380, 0x0457];
 	var0001 = [0x0425, 0x034B, 0x0441, 0x0347, 0x038E, 0x04A7];
-	var0002 = [0x0003, 0x0006, 0x0008];
-	var0003 = [0x000E, 0x000C, 0x000C];
+	// BUG: 0x0008 is not a valid time. Maybe it was meant to be MIDNIGHT?
+	var0002 = [MORNING, EVENING, 0x0008];
+	var0003 = [SLEEP, WANDER, WANDER];
 	0xFF66->get_npc_object()->set_new_schedules(var0002, var0003, var0000);
 	0xFF67->get_npc_object()->set_new_schedules(var0002, var0003, var0001);
 }
@@ -102362,7 +102437,7 @@ void Func08BB 0x8BB () {
 				var0001 = UI_create_new_object2(0x0210, var0000);
 			}
 			if (var0001) {
-				var0001->set_schedule_type(0x000F);
+				var0001->set_schedule_type(WAIT);
 				var0002 = script var0001 {
 					nohalt;
 					face south;
@@ -102692,8 +102767,8 @@ void Func08BF 0x8BF () {
 				var001D = UI_part_of_day();
 				0xFF29->move_object(var001C);
 				Func097F(0xFF29, "@Wait!@", 0x0000);
-				0xFF29->set_schedule_type(0x0003);
-				0xFF29->set_new_schedules(0x0000, 0x0003, var001C);
+				0xFF29->set_schedule_type(TALK);
+				0xFF29->set_new_schedules(MIDNIGHT, TALK, var001C);
 				var000C = script 0xFF29 {
 					actor frame kneeling;
 					wait 3;
@@ -102873,7 +102948,7 @@ void Func08C2 0x8C2 () {
 		}
 		if (var0007) {
 			var0007->get_npc_object()->move_object(var0005);
-			var0007->set_schedule_type(0x000F);
+			var0007->set_schedule_type(WAIT);
 			var0009 = script var0007 {
 				face var0008;
 				continue;
@@ -102893,7 +102968,7 @@ void Func08C3 0x8C3 () {
 		if (!var0000) {
 			var0001 = get_object_position();
 			var0000 = UI_create_new_object2(0x017D, var0001);
-			var0000->set_schedule_type(0x000F);
+			var0000->set_schedule_type(WAIT);
 			var0002 = script var0000 {
 				face south;
 				continue;
@@ -103210,7 +103285,7 @@ void Func08CA 0x8CA () {
 		if (get_item_quality() == 0x0001) {
 			var0000 = find_nearby(0x0103, 0x0003, 0x0008);
 			if (var0000) {
-				var0000->set_schedule_type(0x000F);
+				var0000->set_schedule_type(WAIT);
 				var0000->set_alignment(0x0000);
 				var0000->set_npc_id(0x0002);
 				var0001 = script var0000 {
@@ -103298,7 +103373,7 @@ void Func08CA 0x8CA () {
 				var0001 = script 0xFE9C {
 					face var0005;
 				};
-				var0000->set_schedule_type(0x000F);
+				var0000->set_schedule_type(WAIT);
 				var0008 = [0x0A09, 0x055A, 0x0000];
 				var0000->si_path_run_usecode(var0008, PATH_SUCCESS, var0000, Func07DF, true);
 				abort;
@@ -103331,7 +103406,7 @@ void Func08CA 0x8CA () {
 					var0009 = var0000->get_item_frame_rot();
 					Func09A3(var0000);
 					var000A = UI_create_new_object2(0x0210, var0008);
-					var000A->set_schedule_type(0x000F);
+					var000A->set_schedule_type(WAIT);
 					var000A->set_item_frame_rot(var0009);
 					var0001 = script var000A {
 						actor frame ready;
@@ -103400,7 +103475,7 @@ void Func08CB 0x8CB () {
 	0xFF5B->set_item_flag(SI_TOURNAMENT);
 	0xFF5D->set_item_flag(SI_TOURNAMENT);
 	0xFF57->set_item_flag(SI_TOURNAMENT);
-	0xFF57->set_schedule_type(0x000F);
+	0xFF57->set_schedule_type(WAIT);
 	var0000 = find_nearest(0x02EB, 0x0014);
 	if (var0000) {
 		var0000->item_say("@Good morning.@");
@@ -103494,8 +103569,8 @@ void Func08CD 0x8CD () {
 	if (event == EGG) {
 		var0000 = [0x08FA, 0x055F, 0x0001];
 		0xFF5D->move_object(var0000);
-		0xFF5D->set_schedule_type(0x000F);
-		set_schedule_type(0x000F);
+		0xFF5D->set_schedule_type(WAIT);
+		set_schedule_type(WAIT);
 		var0001 = find_nearby(0x017D, 0x0000, 0x0008);
 		var0002 = var0001->get_object_position() & (0xFE99 & 0x0000);
 		var0003 = var0002->find_nearby(0x0113, 0x0000, 0x0000);
@@ -103599,7 +103674,7 @@ void Func08CE 0x8CE () {
 	var var0001;
 	var var0002;
 
-	0xFF27->set_schedule_type(0x000F);
+	0xFF27->set_schedule_type(WAIT);
 	var0000 = [0x0A18, 0x054F, 0x0001];
 	0xFF27->move_object(var0000);
 	var0001 = script 0xFF27 {
@@ -103657,7 +103732,7 @@ void Func08D0 0x8D0 () {
 		var0006 = false;
 		if (var0005->get_item_quality() == 0x0000) {
 			0xFF5D->clear_item_flag(DEAD);
-			0xFF5D->set_schedule_type(0x000F);
+			0xFF5D->set_schedule_type(WAIT);
 			0xFF5D->move_object(var0000);
 			UI_sprite_effect(0x0007, (var0000[0x0001] - 0x0001), (var0000[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_play_sound_effect(0x0082);
@@ -103772,7 +103847,7 @@ void Func08D2 0x8D2 () {
 		wait 3;
 	};
 	0xFF27->set_alignment(0x0000);
-	0xFF27->set_schedule_type(0x0009);
+	0xFF27->set_schedule_type(HOUND);
 }
 
 void Func08D3 0x8D3 () {
@@ -103812,7 +103887,7 @@ void Func08D4 0x8D4 () {
 	if (event == EGG) {
 		var0000 = find_nearby(0x0375, 0x000C, 0x0000);
 		if (var0000) {
-			0xFF27->set_schedule_type(0x000F);
+			0xFF27->set_schedule_type(WAIT);
 			var0001 = 0xFFFF;
 			var0002 = 0xFFFF;
 			var0003 = 0xFFFD;
@@ -103822,7 +103897,7 @@ void Func08D4 0x8D4 () {
 		}
 	}
 	if (event == PATH_SUCCESS) {
-		set_schedule_type(0x000A);
+		set_schedule_type(STANDTHERE);
 		var0000 = find_nearby(0x0375, 0x000A, 0x0000);
 		if (var0000) {
 			0xFE9C->set_item_flag(DONT_MOVE);
@@ -103931,7 +104006,7 @@ var Func08D6 0x8D6 () {
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0000 += 0x0007;
 			var0005->set_alignment(0x0002);
-			var0005->set_schedule_type(0x0000);
+			var0005->set_schedule_type(IN_COMBAT);
 			var0006 = script var0005 after var0000 ticks {
 				nohalt;
 				say "@I kill thee!@";
@@ -103994,7 +104069,7 @@ void Func08D7 0x8D7 () {
 		var0003 = get_object_position();
 		UI_sprite_effect(0x0009, (var0003[0x0001] - 0x0001), (var0003[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
 		set_polymorph(0x032B);
-		set_schedule_type(0x0011);
+		set_schedule_type(GRAZE);
 		var0007 = UI_create_new_object(0x03E7);
 		if (var0007) {
 			var0007->set_item_frame(0x0004);
@@ -104013,7 +104088,7 @@ void Func08D7 0x8D7 () {
 }
 
 void Func08D8 0x8D8 () {
-	0xFF57->set_schedule_type(0x0003);
+	0xFF57->set_schedule_type(TALK);
 }
 
 extern var Func0906 0x906 (var var0000);
@@ -104433,7 +104508,7 @@ void Func08DF 0x8DF (var var0000, var var0001) {
 		var0003 = UI_create_new_object2(var0001, var0002);
 		if (var0003) {
 			var0003->set_item_flag(TEMPORARY);
-			var0003->set_schedule_type(0x0011);
+			var0003->set_schedule_type(GRAZE);
 			var0003->set_item_frame(0x0000);
 			var0001 = var0003->find_nearest(0x0179, 0x0001);
 			if (var0001 && (var0001->get_item_frame() == 0x000C)) {
@@ -104628,8 +104703,8 @@ var Func08E2 0x8E2 (var var0000) {
 							UI_sprite_effect(0x0009, (var0010[0x0001] - 0x0006), (var0010[0x0002] - 0x0006), 0x0000, 0x0000, 0x0000, 0xFFFF);
 							var000A->remove_item();
 							0xFFF0->move_object(var0010);
-							0xFFF0->set_schedule_type(0x0003);
-							0xFFF0->set_new_schedules(0x0000, 0x000C, [var0010[0x0001], var0010[0x0002]]);
+							0xFFF0->set_schedule_type(TALK);
+							0xFFF0->set_new_schedules(MIDNIGHT, WANDER, [var0010[0x0001], var0010[0x0002]]);
 							gflags[0x00E6] = true;
 						}
 					}
@@ -105048,8 +105123,8 @@ void Func08F0 0x8F0 () {
 			say("\"Forgive me, Avatar. I must prepare for thy banquet.\"");
 		}
 		Func097F(item, "@The banquet!@", 0x0000);
-		set_schedule_type(0x0014);
-		set_new_schedules(0x0000, 0x000C, [0x0000, 0x0000]);
+		set_schedule_type(SHY);
+		set_new_schedules(MIDNIGHT, WANDER, [0x0000, 0x0000]);
 		abort;
 	}
 }
@@ -105090,7 +105165,7 @@ void Func08F2 0x8F2 (var var0000) {
 		} else {
 			var0001[var0002]->move_object([(var0000[0x0001] + var0002), (var0000[0x0002] + var0002), var0000[0x0003]]);
 		}
-		var0001[var0002]->set_schedule_type(0x000F);
+		var0001[var0002]->set_schedule_type(WAIT);
 		var0001[var0002]->set_npc_id(var0002);
 		var0002 += 0x0001;
 	}
@@ -105115,7 +105190,7 @@ void Func08F4 0x8F4 () {
 		0xFF31->move_object(var0000);
 		UI_play_sound_effect(0x0051);
 		0xFF31->set_npc_id(0x001F);
-		0xFF31->set_schedule_type(0x0003);
+		0xFF31->set_schedule_type(TALK);
 	}
 }
 
@@ -105152,7 +105227,7 @@ void Func08F5 0x8F5 (var var0000) {
 	for (var0005 in var0002 with var0003 to var0004) {
 		var0005->halt_scheduled();
 		var0006 = var0005->get_npc_object();
-		var0006->set_schedule_type(0x000A);
+		var0006->set_schedule_type(STANDTHERE);
 		var0006->set_alignment(0x0000);
 		var0006->set_oppressor(0x0000);
 		var0007 = Func095C(var0006, 0x0000);
@@ -105168,7 +105243,7 @@ void Func08F5 0x8F5 (var var0000) {
 			nohalt;
 			actor frame standing;
 		};
-		var0005->set_schedule_type(0x001F);
+		var0005->set_schedule_type(FOLLOW_AVATAR);
 		var0005->set_oppressor(0x0000);
 		var0007 = Func095C(var0005, 0x0000);
 		var0008 = Func095C(var0005, 0x0003);
@@ -105492,9 +105567,9 @@ void Func08FE 0x8FE () {
 				if (var0006->get_item_flag(IN_PARTY) && var0006->get_item_flag(SI_ZOMBIE)) {
 					var0006->remove_from_party();
 				}
-				var0006->set_new_schedules(0x0000, 0x000F, [var0009[0x0001], var0009[0x0002]]);
+				var0006->set_new_schedules(MIDNIGHT, WAIT, [var0009[0x0001], var0009[0x0002]]);
 				var0006->run_schedule();
-				var0006->set_schedule_type(0x000F);
+				var0006->set_schedule_type(WAIT);
 				var000B = Func095C(var0006, 0x0009);
 				var000C = 0x001F - var000B;
 				Func095E(var0006, 0x0009, var000C);
@@ -105502,7 +105577,7 @@ void Func08FE 0x8FE () {
 					gflags[0x0047] = true;
 				}
 				if (var0006 == 0xFF6B) {
-					0xFF6B->set_schedule_type(0x0003);
+					0xFF6B->set_schedule_type(TALK);
 					gflags[0x026A] = false;
 					var000A = script 0xFE9C->get_npc_object() after 5 ticks {
 						call Func0495;
@@ -105530,7 +105605,7 @@ void Func08FF 0x8FF () {
 		abort;
 	}
 	if (gflags[0x00D9]) {
-		0xFFEE->set_schedule_type(0x0004);
+		0xFFEE->set_schedule_type(DANCE);
 		gflags[0x0146] = true;
 	}
 	if (gflags[0x00D7]) {
@@ -105540,7 +105615,7 @@ void Func08FF 0x8FF () {
 	if ((var0000 >= 0x0003) && (!gflags[0x00D7])) {
 		var0001 = 0xFFE7->approach_avatar(0x005A, 0x0028);
 		if (var0001) {
-			0xFFE7->set_schedule_type(0x0003);
+			0xFFE7->set_schedule_type(TALK);
 			var0002 = 0xFE9C->get_object_position();
 			var0003 = Func0954();
 			Func097F(0xFFE7, (("@One moment, " + var0003) + " .@"), 0x0002);
@@ -105662,19 +105737,19 @@ void Func0901 0x901 () {
 	0xFFEE->remove_npc();
 	0xFFEC->remove_npc();
 	0xFFF3->revert_schedule();
-	0xFFF3->set_schedule_type(0x0010);
+	0xFFF3->set_schedule_type(MAJOR_SIT);
 	0xFFEA->revert_schedule();
-	0xFFEA->set_schedule_type(0x0010);
+	0xFFEA->set_schedule_type(MAJOR_SIT);
 	var000A = [0x0935, 0x06E3];
 	var000B = [0x08B9, 0x070B];
 	var000C = [0x08CB, 0x074A];
 	var000D = [0x087E, 0x0747];
 	var000E = [0x0942, 0x077E];
-	0xFFD6->set_new_schedules([0x0000, 0x0003, 0x0005, 0x0006, 0x0007], [0x000E, 0x001A, 0x0007, 0x0007, 0x0007], [var000A, var000B, var000C, var000D, var000E]);
-	0xFFD6->set_schedule_type(0x0010);
-	0xFFD5->set_new_schedules(0x0000, 0x0010, [0x09A6, 0x07F8]);
+	0xFFD6->set_new_schedules([MIDNIGHT, MORNING, AFTERNOON, EVENING, NIGHT], [SLEEP, EAT_AT_INN, 0x0007, 0x0007, TEND_SHOP], [var000A, var000B, var000C, var000D, var000E]);
+	0xFFD6->set_schedule_type(MAJOR_SIT);
+	0xFFD5->set_new_schedules(MIDNIGHT, MAJOR_SIT, [0x09A6, 0x07F8]);
 	0xFFD5->run_schedule();
-	0xFFDB->set_new_schedules(0x0000, 0x000C, [0x09A7, 0x07F7]);
+	0xFFDB->set_new_schedules(MIDNIGHT, WANDER, [0x09A7, 0x07F7]);
 	0xFFDB->run_schedule();
 	Func09AC(0xFFE6, 0x060E, 0x020F, 0x0007);
 	if (0xFFFF->get_npc_id() == 0x001E) {
@@ -105687,7 +105762,7 @@ void Func0901 0x901 () {
 		Func09AC(0xFFFE, 0x07F8, 0x0799, 0x000C);
 	}
 	if (0xFFDE->get_npc_id() == 0x001E) {
-		0xFFDE->set_new_schedules([0x0000, 0x0003, 0x0007], [0x000A, 0x000C, 0x0010], [0x0912, 0x06D1, 0x08D5, 0x0754, 0x08C4, 0x070B]);
+		0xFFDE->set_new_schedules([MIDNIGHT, MORNING, NIGHT], [STANDTHERE, WANDER, MAJOR_SIT], [0x0912, 0x06D1, 0x08D5, 0x0754, 0x08C4, 0x070B]);
 		0xFFDE->run_schedule();
 	}
 	abort;
@@ -106289,7 +106364,7 @@ void Func0919 0x919 (var var0000) {
 		var0006 = UI_create_new_object2(0x013E, var0005);
 		if (var0006) {
 			var0006->set_alignment(0x0000);
-			var0006->set_schedule_type(0x001D);
+			var0006->set_schedule_type(PATROL);
 			var0006->set_item_flag(SI_TOURNAMENT);
 			0xFF34->set_npc_id(0x0002);
 			var0007 = var0006->add_cont_items(0x0001, 0x0321, 0xFE99, 0x0000, 0x0012);
@@ -106361,7 +106436,7 @@ void Func091D 0x91D () {
 		var0001 = var0000->get_object_position();
 		if ((var0001[0x0001] >= 0x0432) && ((var0001[0x0001] <= 0x0439) && ((var0001[0x0002] >= 0x03E4) && ((var0001[0x0002] <= 0x03EB) && (var0001[0x0003] == 0x0000))))) {
 			var0000->set_alignment(0x0002);
-			var0000->set_schedule_type(0x0000);
+			var0000->set_schedule_type(IN_COMBAT);
 			0xFE9C->set_oppressor(var0000);
 			UI_sprite_effect(0x000D, (var0001[0x0001] - 0x0002), (var0001[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_play_sound_effect(0x0082);
@@ -107115,12 +107190,12 @@ void Func092E 0x92E (var var0000) {
 						Func092F(var0000, 0x0001);
 					}
 					if ((var0000 == 0xFE9C->get_npc_object()) || (var0000 == 0xFE9C)) {
-						0xFE9C->set_schedule_type(0x001F);
+						0xFE9C->set_schedule_type(FOLLOW_AVATAR);
 						UI_end_conversation();
 						Func090D(var0004, [0xFFFC, 0xFFFC, 0xFFFC, 0xFFFC, 0xFFFC], [0xFFFF, 0xFFFE, 0x0000, 0xFFFD, 0xFFFF], 0x0000, Func07F9, var0000, BG_PATH_FAILURE);
 						UI_set_path_failure(Func07F9, var0000, SI_PATH_FAILURE);
 					} else {
-						var0000->set_schedule_type(0x000F);
+						var0000->set_schedule_type(WAIT);
 						var0004 = var0004->get_object_position();
 						var0000->si_path_run_usecode([(var0004[0x0001] - 0x0004), (var0004[0x0002] - 0x0001), var0004[0x0003]], BG_PATH_FAILURE, var0000, Func07F9, true);
 					}
@@ -107383,7 +107458,7 @@ void Func0931 0x931 (var var0000) {
 	}
 	if (!(var0000 == 0xFE9C->get_npc_object())) {
 		0xFE9C->get_npc_object()->set_camera();
-		var0000->set_schedule_type(0x001F);
+		var0000->set_schedule_type(FOLLOW_AVATAR);
 	}
 	var0017 = var0000->find_nearby(0x00E4, 0x0023, 0x0000);
 	for (var001A in var0017 with var0018 to var0019) {
@@ -107523,12 +107598,12 @@ void Func0934 0x934 (var var0000) {
 			if (!(var0002 == var0000)) {
 				var0002->set_npc_id(0x000D);
 				var0002->remove_from_party();
-				var0002->set_schedule_type(0x000F);
+				var0002->set_schedule_type(WAIT);
 			}
 		}
 	} else {
 		var0000->remove_from_party();
-		var0000->set_schedule_type(0x000F);
+		var0000->set_schedule_type(WAIT);
 		var0000->set_alignment(0x0001);
 	}
 	var0000->set_item_flag(SI_TOURNAMENT);
@@ -107939,14 +108014,14 @@ void Func0939 0x939 (var var0000) {
 		Func08AC(true)->add_to_party();
 		var0001 = UI_get_party_list2();
 		for (var0004 in var0001 with var0002 to var0003) {
-			var0004->set_schedule_type(0x000F);
+			var0004->set_schedule_type(WAIT);
 		}
 		var0001 = UI_create_new_object2(0x017D, [0x0407, 0x0679]);
 		var0001->si_path_run_usecode([0x0408, 0x066F], SI_PATH_SUCCESS, var0001, Func07F8, false);
 		abort;
 	}
 	if (var0000 == 0x00FA) {
-		set_schedule_type(0x000F);
+		set_schedule_type(WAIT);
 		var0001 = script item {
 			nohalt;
 			wait 2;
@@ -108202,7 +108277,7 @@ void Func093A 0x93A (var var0000) {
 			gflags[0x0172] = true;
 			var0003 = UI_get_party_list2();
 			for (var0008 in var0003 with var0006 to var0007) {
-				var0008->set_schedule_type(0x001F);
+				var0008->set_schedule_type(FOLLOW_AVATAR);
 			}
 			0xFE9C->clear_item_flag(DONT_MOVE);
 			UI_init_conversation();
@@ -108331,7 +108406,7 @@ void Func093A 0x93A (var var0000) {
 		if (var0000 == 0x0059) {
 			0xFFD2->clear_item_say();
 			Func097F(0xFFD2, "@Stop the proceedings!@", 0x0000);
-			0xFFD2->set_schedule_type(0x000F);
+			0xFFD2->set_schedule_type(WAIT);
 			var0003 = script 0xFFD2 {
 				nohalt;
 				actor frame cast_out;
@@ -108538,7 +108613,7 @@ void Func093A 0x93A (var var0000) {
 		}
 		if (var0000 == 0x005F) {
 			0xFFCB->move_object([0x0000, 0x0000, 0x0000]);
-			0xFFCB->set_schedule_type(0x000F);
+			0xFFCB->set_schedule_type(WAIT);
 			var0003 = 0xFE9C->get_object_position() & (0x0001 & 0x0006);
 			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
 			if (var0003) {
@@ -108608,7 +108683,7 @@ void Func093A 0x93A (var var0000) {
 		if (var0000 == 0x0063) {
 			0xFFD2->clear_item_say();
 			Func097F(0xFFD2, "@Good news!@", 0x0000);
-			0xFFD2->set_schedule_type(0x000F);
+			0xFFD2->set_schedule_type(WAIT);
 			var0003 = script 0xFFD2 {
 				nohalt;
 				actor frame cast_out;
@@ -108648,7 +108723,7 @@ void Func093A 0x93A (var var0000) {
 			abort;
 		}
 		if (var0000 == 0x0064) {
-			0xFFCB->set_schedule_type(0x000F);
+			0xFFCB->set_schedule_type(WAIT);
 			UI_init_conversation();
 			0xFFCB->show_npc_face0(0x0000);
 			if (0xFFCD->get_item_flag(DEAD)) {
@@ -108760,7 +108835,7 @@ void Func093A 0x93A (var var0000) {
 		if (var0000 == 0x0069) {
 			0xFE9C->clear_item_flag(DONT_MOVE);
 			UI_init_conversation();
-			set_schedule_type(0x000A);
+			set_schedule_type(STANDTHERE);
 			var0003 = script 0xFFC3 {
 				say "@This trial is now dismissed!@";
 			};
@@ -108874,7 +108949,7 @@ void Func093B 0x93B (var var0000) {
 				call Func07F8;
 			};
 		} else {
-			set_schedule_type(0x000F);
+			set_schedule_type(WAIT);
 			var0003 = script 0xFFC3 {
 				nohalt;
 				say "@Hail the Lady!@";
@@ -109406,7 +109481,7 @@ void Func093B 0x93B (var var0000) {
 			actor frame sitting;
 		};
 		Func08C6();
-		set_schedule_type(0x000F);
+		set_schedule_type(WAIT);
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x0019);
 		var0003 = script 0xFFCD after 5 ticks {
 			call Func07F8;
@@ -110490,7 +110565,7 @@ void Func097A 0x97A (var var0000) {
 	var0002 = var0001->get_schedule_type();
 	var0003 = "";
 	var0004 = UI_die_roll(0x0001, 0x0004);
-	if (var0002 == 0x000B) {
+	if (var0002 == LOITER) {
 		if (var0004 == 0x0001) {
 			var0003 = "@It doth seem as it would rain...@";
 		}
@@ -110504,10 +110579,10 @@ void Func097A 0x97A (var var0000) {
 			var0003 = "@Ho hum...@";
 		}
 	}
-	if (var0002 == 0x000E) {
+	if (var0002 == SLEEP) {
 		var0003 = "@Z-z-z-z...@";
 	}
-	if (var0002 == 0x0017) {
+	if (var0002 == WAITER) {
 		if (var0004 == 0x0001) {
 			var0003 = "@Thou shouldst try the wine.@";
 		}
@@ -110521,7 +110596,7 @@ void Func097A 0x97A (var var0000) {
 			var0003 = "@I recommend the ale.@";
 		}
 	}
-	if (var0002 == 0x001C) {
+	if (var0002 == PREACH) {
 		if (var0004 == 0x0001) {
 			var0003 = "@Strive For Unity.@";
 		}
@@ -110535,7 +110610,7 @@ void Func097A 0x97A (var var0000) {
 			var0003 = "@Join The Fellowship!@";
 		}
 	}
-	if (var0002 == 0x001A) {
+	if (var0002 == EAT_AT_INN) {
 		if (var0004 == 0x0001) {
 			var0003 = "@Mmmm! Good!@";
 		}
@@ -110549,7 +110624,7 @@ void Func097A 0x97A (var var0000) {
 			var0003 = "@Waiter! Waiter!@";
 		}
 	}
-	if (var0002 == 0x0006) {
+	if (var0002 == FARM) {
 		if (var0004 == 0x0001) {
 			var0003 = "@Whew! 'Tis hot!@";
 		}
@@ -110563,7 +110638,7 @@ void Func097A 0x97A (var var0000) {
 			var0003 = "@We need rain...@";
 		}
 	}
-	if (var0002 == 0x0019) {
+	if (var0002 == KID_GAMES) {
 		if (var0004 == 0x0001) {
 			var0003 = "@Tag! Thou art it!@";
 		}
@@ -110595,7 +110670,7 @@ void Func097B 0x97B (var var0000) {
 	var0002 = var0001->get_schedule_type();
 	var0003 = "";
 	var0004 = UI_die_roll(0x0001, 0x0004);
-	if (var0002 == 0x000B) {
+	if (var0002 == LOITER) {
 		if (var0004 == 0x0001) {
 			var0003 = "@To say hello!@";
 		}
@@ -110609,10 +110684,10 @@ void Func097B 0x97B (var var0000) {
 			var0003 = "@To ask how you are?@";
 		}
 	}
-	if (var0002 == 0x000E) {
+	if (var0002 == SLEEP) {
 		var0003 = "@Z-z-z-z...@";
 	}
-	if (var0002 == 0x0017) {
+	if (var0002 == WAITER) {
 		if (var0004 == 0x0001) {
 			var0003 = "@To suggest you try the wine.@";
 		}
@@ -110626,7 +110701,7 @@ void Func097B 0x97B (var var0000) {
 			var0003 = "@To recommend the ale.@";
 		}
 	}
-	if (var0002 == 0x001C) {
+	if (var0002 == PREACH) {
 		if (var0004 == 0x0001) {
 			var0003 = "@To Strive For Unity.@";
 		}
@@ -110640,7 +110715,7 @@ void Func097B 0x97B (var var0000) {
 			var0003 = "@To join The Fellowship!@";
 		}
 	}
-	if (var0002 == 0x001A) {
+	if (var0002 == EAT_AT_INN) {
 		if (var0004 == 0x0001) {
 			var0003 = "@To be very Good!@";
 		}
@@ -111818,7 +111893,7 @@ var Func09A1 0x9A1 (var var0000) {
 
 	var0001 = UI_create_new_object2(var0000, [0x0000, 0x0000, 0x0000]);
 	if (!(var0001 == 0x0000)) {
-		var0001->set_schedule_type(0x0000);
+		var0001->set_schedule_type(IN_COMBAT);
 		var0001->set_oppressor(0xFE9C->get_npc_object());
 		var0001->set_alignment(0x0003);
 		var0002 = var0001->approach_avatar(0x0032, 0x0028);
@@ -112019,15 +112094,15 @@ void Func09AC 0x9AC (var var0000, var var0001, var var0002, var var0003) {
 				var0002 = var0004[0x0002];
 			} else {
 				var0000->set_item_frame(0x0000);
-				var0000->set_schedule_type(0x000F);
+				var0000->set_schedule_type(WAIT);
 				var0005 = Func098D();
 				if (var0000 in var0005) {
-					var0000->set_new_schedules(0x0000, 0x001A, [0x097C, 0x0464]);
+					var0000->set_new_schedules(MIDNIGHT, EAT_AT_INN, [0x097C, 0x0464]);
 				}
 				break;
 			}
 		}
-		var0000->set_new_schedules(0x0000, var0003, [var0001, var0002]);
+		var0000->set_new_schedules(MIDNIGHT, var0003, [var0001, var0002]);
 		if (!var0004) {
 			var0000->move_object([var0001, var0002, 0x0000]);
 		}
@@ -112038,7 +112113,7 @@ void Func09AC 0x9AC (var var0000, var var0001, var var0002, var var0003) {
 
 void Func09AD 0x9AD (var var0000) {
 	var0000->set_alignment(0x0002);
-	var0000->set_schedule_type(0x0000);
+	var0000->set_schedule_type(IN_COMBAT);
 	var0000->set_opponent(0xFE9C);
 	var0000->set_oppressor(0xFE9C);
 }
@@ -112052,13 +112127,13 @@ var Func09AE 0x9AE (var var0000) {
 	if (var0000 < 0x0000) {
 		if (item == 0xFFCC->get_npc_object()) {
 			gflags[0x01A0] = true;
-			if (0xFFCC->get_schedule_type() == 0x0017) {
+			if (0xFFCC->get_schedule_type() == WAITER) {
 				Func094E(0xFFC6, "@I need a drink...@");
 				0x0000->set_conversation_slot();
 				say("\"I've enjoyed jawin' with ye, mate, but I'd better be back to me duties...\"");
 				Func097F(0xFFCC, "@What'll ye have?@", 0x0000);
 			}
-			if (0xFFCC->get_schedule_type() == 0x0010) {
+			if (0xFFCC->get_schedule_type() == MAJOR_SIT) {
 				if (0xFFCA->npc_nearby()) {
 					Func094E(0xFFCA, "@Be still! Beauty is not irreverent.@");
 					0x0000->set_conversation_slot();
@@ -112066,7 +112141,7 @@ var Func09AE 0x9AE (var var0000) {
 				say("\"This isn't the place for a long talk, mate. Meet me later, back at the tavern, and we'll talk more.\"");
 				Func097F(0xFFCC, "@Not now...@", 0x0000);
 			}
-			if (0xFFCC->get_schedule_type() == 0x000E) {
+			if (0xFFCC->get_schedule_type() == SLEEP) {
 				say("\"Better we talk in the morning, mate. As for right now, I'm goin' back to sleep...\"");
 				Func097F(0xFFCC, "@Time for bed!@", 0x0000);
 			}
@@ -112074,7 +112149,7 @@ var Func09AE 0x9AE (var var0000) {
 		if (item == 0xFFF3->get_npc_object()) {
 			Func097F(0xFFF3, "@Have a nice day!@", 0x0000);
 			gflags[0x0103] = true;
-			if (0xFFF3->get_schedule_type() == 0x0007) {
+			if (0xFFF3->get_schedule_type() == TEND_SHOP) {
 				Func094E(0xFFD6, "@I do not pay thee to stand jabbering, Bucia.@");
 				0x0000->set_conversation_slot();
 				say("\"I must be getting back to work now. But it hath been nice talking with thee.\"");
@@ -112093,25 +112168,25 @@ var Func09AE 0x9AE (var var0000) {
 			} else {
 				Func097F(0xFFBD, "@Courage to thee!@", 0x0000);
 			}
-			if (0xFFBD->get_schedule_type() == 0x0006) {
+			if (0xFFBD->get_schedule_type() == FARM) {
 				say("\"I must return to my duties. These crops will not wait!\"");
 			}
-			if (0xFFBD->get_schedule_type() == 0x0005) {
+			if (0xFFBD->get_schedule_type() == EAT) {
 				say("\"Pardon me, but my dinner is wasting. We can talk again later.\"");
 			}
-			if (0xFFBD->get_schedule_type() == 0x000E) {
+			if (0xFFBD->get_schedule_type() == SLEEP) {
 				say("\"I must get some sleep! Thou shouldst return tomorrow...\"");
 			}
 		}
 		if (item == 0x03B2->get_npc_object()) {
 			gflags[0x02F4] = true;
-			if (0x03B2->get_schedule_type() == 0x0015) {
+			if (0x03B2->get_schedule_type() == LAB) {
 				say("\"I must return to my duties...\"");
 			}
-			if (0x03B2->get_schedule_type() == 0x0005) {
+			if (0x03B2->get_schedule_type() == EAT) {
 				say("\"I am sorry, but my dinner is waiting. We can talk again later.\"");
 			}
-			if (0x03B2->get_schedule_type() == 0x000E) {
+			if (0x03B2->get_schedule_type() == SLEEP) {
 				say("\"I need rest! Return tomorrow...\"");
 			}
 		}
@@ -112341,18 +112416,18 @@ void Func09B4 0x9B4 (var var0000) {
 	var0001 = var0000->get_object_position();
 	if (var0001[0x0003] != 0x0000) {
 		if (var0000 == 0xFF6B) {
-			var0000->set_schedule_type(0x000F);
+			var0000->set_schedule_type(WAIT);
 			say("\"We must plan for every eventuality, Avatar. Should I not be able to remain here, I shall await thee on Monk Isle.\"");
-			var0000->set_new_schedules(0x0000, 0x001E, [0x0977, 0x048C]);
+			var0000->set_new_schedules(MIDNIGHT, DESK_WORK, [0x0977, 0x048C]);
 			abort;
 		}
 		if (var0000 == 0xFFE4) {
-			var0000->set_schedule_type(0x000F);
+			var0000->set_schedule_type(WAIT);
 			say("\"If I cannot remain here, I shall go home to the inn. Thou canst always find me there.\"");
 			0xFFE4->revert_schedule();
 			abort;
 		}
-		var0000->set_schedule_type(0x000F);
+		var0000->set_schedule_type(WAIT);
 		say("\"I shall attempt to wait for thee here, but if I cannot, where shall we meet?\"");
 		var0002 = "Monk Isle";
 		if (gflags[0x01CC]) {
@@ -112372,16 +112447,16 @@ void Func09B4 0x9B4 (var var0000) {
 		var0001 = Func0956(var0002);
 		if (var0001 == "Monitor") {
 			say("\"Then in an emergency, I shall find thee at the Town Hall in Monitor.\"");
-			var0000->set_new_schedules(0x0000, 0x000C, [0x03D0, 0x09FA]);
+			var0000->set_new_schedules(MIDNIGHT, WANDER, [0x03D0, 0x09FA]);
 		} else if (var0001 == "Moonshade") {
 			say("\"If I cannot remain here, we shall meet at the Blue Boar Inn in Moonshade.\"");
-			var0000->set_new_schedules(0x0000, 0x001A, [0x08C1, 0x0710]);
+			var0000->set_new_schedules(MIDNIGHT, EAT_AT_INN, [0x08C1, 0x0710]);
 		} else if (var0001 == "Fawn") {
 			say("\"If I cannot stay here, I shall travel to Fawn. We can meet at the tavern there.\"");
-			var0000->set_new_schedules(0x0000, 0x001A, [0x03AD, 0x06E2]);
+			var0000->set_new_schedules(MIDNIGHT, EAT_AT_INN, [0x03AD, 0x06E2]);
 		} else {
 			say("\"Let us meet at the abbey on Monk Isle, should I be forced to wander from this spot. No doubt Thoxa can fetch me there.\"");
-			var0000->set_new_schedules(0x0000, 0x001A, [0x097C, 0x0464]);
+			var0000->set_new_schedules(MIDNIGHT, EAT_AT_INN, [0x097C, 0x0464]);
 		}
 	} else {
 		Func09AC(var0000, 0xFFFF, 0x0000, 0x000C);
@@ -112405,17 +112480,17 @@ void Func09B5 0x9B5 () {
 	if ((!gflags[0x0004]) && (!gflags[0x0250])) {
 		if (!gflags[0x024F]) {
 			var0002 = [0x0931, 0x0190, 0x0000];
-			0xFF80->set_new_schedules(0x0000, 0x000F, var0002);
-			0xFF80->set_schedule_type(0x000F);
+			0xFF80->set_new_schedules(MIDNIGHT, WAIT, var0002);
+			0xFF80->set_schedule_type(WAIT);
 			0xFF80->move_object(var0002);
 			var0003 = [0x092B, 0x017E, 0x0000];
-			0xFF81->set_new_schedules(0x0000, 0x000F, var0003);
-			0xFF81->set_schedule_type(0x000F);
+			0xFF81->set_new_schedules(MIDNIGHT, WAIT, var0003);
+			0xFF81->set_schedule_type(WAIT);
 			0xFF81->move_object(var0003);
 			var0004 = [0x0921, 0x0176, 0x0000];
 			var0005 = UI_create_new_object2(0x0373, var0004);
 			var0005->set_npc_id(0x0002);
-			var0005->set_schedule_type(0x000F);
+			var0005->set_schedule_type(WAIT);
 		}
 		gflags[0x024F] = true;
 		var0000 = 0x013E;
@@ -112426,10 +112501,10 @@ void Func09B5 0x9B5 () {
 		var0000 = 0xFEF8;
 		var0001 = [0x09D9, 0x004E, 0x0000];
 		var0006 = [0x09AC, 0x006E, 0x0000];
-		0xFEFA->set_schedule_type(0x000F);
+		0xFEFA->set_schedule_type(WAIT);
 		0xFEFA->move_object(var0006);
 		var0007 = [0x099F, 0x0073, 0x0000];
-		0xFEF9->set_schedule_type(0x000F);
+		0xFEF9->set_schedule_type(WAIT);
 		0xFEF9->move_object(var0007);
 	}
 	Func09B6(var0000, var0001);
@@ -112464,10 +112539,10 @@ void Func09B6 0x9B6 (var var0000, var var0001) {
 		} else {
 			var0000->move_object(var0001);
 			if (var0000 != 0xFEF8) {
-				var0000->set_new_schedules(0x0000, 0x001D, [var0001[0x0001], var0001[0x0002]]);
+				var0000->set_new_schedules(MIDNIGHT, PATROL, [var0001[0x0001], var0001[0x0002]]);
 			}
 		}
-		var0000->set_schedule_type(0x001D);
+		var0000->set_schedule_type(PATROL);
 		var0000->set_camera();
 		UI_end_conversation();
 		0xFE9C->set_item_flag(DONT_MOVE);
@@ -112530,17 +112605,17 @@ void Func09B8 0x9B8 () {
 	if (!gflags[0x00D5]) {
 		0xFEFA->move_object([0x0995, 0x006E, 0x0002]);
 		0xFEFA->set_alignment(0x0000);
-		0xFEFA->set_schedule_type(0x0010);
+		0xFEFA->set_schedule_type(MAJOR_SIT);
 	}
 	if (!gflags[0x00D3]) {
 		0xFEF9->move_object([0x0999, 0x0075, 0x0001]);
 		0xFEF9->set_alignment(0x0000);
-		0xFEF9->set_schedule_type(0x0010);
+		0xFEF9->set_schedule_type(MAJOR_SIT);
 	}
 	if (!gflags[0x00D4]) {
 		0xFEF8->move_object([0x0999, 0x0069, 0x0001]);
 		0xFEF8->set_alignment(0x0000);
-		0xFEF8->set_schedule_type(0x0010);
+		0xFEF8->set_schedule_type(MAJOR_SIT);
 	}
 }
 
