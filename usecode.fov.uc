@@ -256,6 +256,19 @@ enum inv_slots_si {
 	SI_BOTH_HANDS	= 20
 };
 
+enum npc_attack_modes {
+	NEAREST		= 0,
+	WEAKEST		= 1,
+	STRONGEST	= 2,
+	BERSERK		= 3,
+	PROTECT		= 4,
+	DEFEND		= 5,
+	FLANK		= 6,
+	FLEE		= 7,
+	RANDOM		= 8,
+	MANUAL		= 9
+};
+
 extern void Func08FF 0x8FF (var var0000);
 extern var Func0829 0x829 (var var0000);
 
@@ -2910,7 +2923,7 @@ void Func01EF shape#(0x1EF) () {
 	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Here kitty, kitty@");
 		set_schedule_type(IN_COMBAT);
-		set_attack_mode(0x0007);
+		set_attack_mode(FLEE);
 		set_oppressor(0xFE9C);
 		if (0xFFFD->npc_nearby()) {
 			var0000 = script 0xFFFD after 4 ticks {
@@ -6293,7 +6306,7 @@ void Func0301 shape#(0x301) () {
 		var0000 = find_nearby(0x01EE, 0x012C, 0x0000);
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0003->set_schedule_type(IN_COMBAT);
-			var0003->set_attack_mode(0x0007);
+			var0003->set_attack_mode(FLEE);
 			var0003->set_oppressor(0xFE9C);
 		}
 		var0004 = get_object_position();
@@ -7864,7 +7877,7 @@ void Func0336 shape#(0x336) () {
 			var0001 = UI_click_on_item();
 			if (var0001->is_npc()) {
 				var0001->set_schedule_type(IN_COMBAT);
-				var0001->set_attack_mode(0x0007);
+				var0001->set_attack_mode(FLEE);
 				var0001->set_oppressor(0xFE9C);
 				Func0925(item);
 			} else if (var0001->get_item_shape() == 0x0336) {
@@ -52284,7 +52297,7 @@ void Func063E object#(0x63E) () {
 		UI_armageddon();
 		gflags[0x001E] = true;
 		0xFFE9->set_alignment(0x0002);
-		0xFFE9->set_attack_mode(0x0000);
+		0xFFE9->set_attack_mode(NEAREST);
 		0xFFE9->set_schedule_type(IN_COMBAT);
 		set_item_flag(CONFUSED);
 	}
@@ -54499,7 +54512,7 @@ void Func0670 object#(0x670) () {
 			if (!(var0005 in var0002)) {
 				if (var0005->get_npc_prop(INTELLIGENCE) > 5) {
 					var0005->set_schedule_type(IN_COMBAT);
-					var0005->set_attack_mode(0x0007);
+					var0005->set_attack_mode(FLEE);
 					var0005->set_oppressor(UI_get_avatar_ref());
 				}
 			}
@@ -58009,7 +58022,7 @@ void Func06BB object#(0x6BB) () {
 				if (!UI_roll_to_win(var0004->get_npc_prop(INTELLIGENCE), 15)) {
 					var0004->halt_scheduled();
 					Func093F(var0004, IN_COMBAT);
-					var0004->set_attack_mode(0x0007);
+					var0004->set_attack_mode(FLEE);
 					var0004->set_oppressor(0xFE9C);
 					var0005 = script var0004 after var0000 ticks {
 						nohalt;

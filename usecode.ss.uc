@@ -256,6 +256,19 @@ enum inv_slots_si {
 	SI_BOTH_HANDS	= 20
 };
 
+enum npc_attack_modes {
+	NEAREST		= 0,
+	WEAKEST		= 1,
+	STRONGEST	= 2,
+	BERSERK		= 3,
+	PROTECT		= 4,
+	DEFEND		= 5,
+	FLANK		= 6,
+	FLEE		= 7,
+	RANDOM		= 8,
+	MANUAL		= 9
+};
+
 extern void Func094A 0x94A (var var0000);
 extern var Func0910 0x910 (var var0000);
 
@@ -3173,7 +3186,7 @@ void Func0112 shape#(0x112) () {
 		clear_item_say();
 		var0007 = ["@Oh, my!@", "@I am bleeding...@", "@Oh, help me!@", "@Ouch!@", "@Fiend, stop that!@", "@I die!@"];
 		Func097F(item, [var0007[UI_get_random(UI_get_array_size(var0007))]], 0x0000);
-		set_attack_mode(0x0007);
+		set_attack_mode(FLEE);
 	}
 }
 
@@ -5983,8 +5996,8 @@ void Func01C3 shape#(0x1C3) () {
 		if (0xFFBB->get_npc_id() == 0x000D) {
 			0xFFBB->set_npc_id(0x000E);
 			0xFE9C->set_alignment(0x0000);
-			0xFFB9->set_attack_mode(0x0000);
-			0xFFB6->set_attack_mode(0x0000);
+			0xFFB9->set_attack_mode(NEAREST);
+			0xFFB6->set_attack_mode(NEAREST);
 			0xFFB9->set_alignment(0x0002);
 			0xFFB9->set_schedule_type(IN_COMBAT);
 			0xFFB9->set_opponent(0xFFB6);
@@ -15834,7 +15847,7 @@ void Func0336 shape#(0x336) () {
 			var0001 = UI_click_on_item();
 			if (var0001->is_npc()) {
 				var0001->set_schedule_type(IN_COMBAT);
-				var0001->set_attack_mode(0x0007);
+				var0001->set_attack_mode(FLEE);
 				var0001->set_oppressor(0xFE9C);
 				Func0971(item);
 			} else if (var0001->get_item_shape() == 0x0336) {
@@ -17065,7 +17078,7 @@ void Func036A shape#(0x36A) () {
 		if (var0000 == 0x0002) {
 			item_say("@Aoaaoouuu!@");
 		}
-		set_attack_mode(0x0007);
+		set_attack_mode(FLEE);
 	}
 	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Come here, boy!@");
@@ -30720,7 +30733,7 @@ void Func0425 object#(0x425) () {
 	if (event == DEATH) {
 		Func097F(0xFFDB, "@Skreee!@", 0x0000);
 		0xFE9C->set_oppressor(0xFFDB);
-		0xFFDB->set_attack_mode(0x0007);
+		0xFFDB->set_attack_mode(FLEE);
 	}
 }
 
@@ -32983,7 +32996,7 @@ void Func042B object#(0x42B) () {
 	if (event == DEATH) {
 		Func097F(0xFFD5, "@Yowie!@", 0x0000);
 		0xFE9C->set_oppressor(0xFFD5);
-		0xFFD5->set_attack_mode(0x0007);
+		0xFFD5->set_attack_mode(FLEE);
 	}
 }
 
@@ -33776,7 +33789,7 @@ void Func042D object#(0x42D) () {
 		Func0874();
 		say("\"I am leaving -- do not try to stop me!\"");
 		Func097F(0xFFD3, "@Farewell!@", 0x0000);
-		0xFFD3->set_attack_mode(0x0007);
+		0xFFD3->set_attack_mode(FLEE);
 		0xFFD3->set_schedule_type(SHY);
 		Func09AC(0xFFD3, 0xFFFF, 0x0000, 0x000C);
 		abort;
@@ -33785,7 +33798,7 @@ void Func042D object#(0x42D) () {
 		if (0xFFD3->get_item_flag(SI_TOURNAMENT)) {
 			0xFFD3->clear_item_flag(SI_TOURNAMENT);
 			var0008 = 0xFFD3->set_npc_prop(HEALTH, 10);
-			0xFFD3->set_attack_mode(0x0007);
+			0xFFD3->set_attack_mode(FLEE);
 			Func097F(0xFFD3, "@I am dying!@", 0x0000);
 			var0008 = script 0xFFD3 after 7 ticks {
 				nohalt;
@@ -37736,7 +37749,7 @@ void Func0436 object#(0x436) () {
 			0xFFCA->set_item_flag(MET);
 		} else if (gflags[0x015E] == true) {
 			0xFFCA->set_schedule_type(IN_COMBAT);
-			0xFFCA->set_attack_mode(0x0007);
+			0xFFCA->set_attack_mode(FLEE);
 			say("\"Thou hast found me out! The Oracle is a fraud!\"");
 			abort;
 		} else {
@@ -38738,7 +38751,7 @@ void Func0439 object#(0x439) () {
 			abort;
 		}
 		Func097F(0xFFC7, "@I shall return!@", 0x0000);
-		0xFFC7->set_attack_mode(0x0007);
+		0xFFC7->set_attack_mode(FLEE);
 	}
 	if ((event == DEATH) && 0xFFC7->get_item_flag(SI_TOURNAMENT)) {
 		gflags[0x015D] = true;
@@ -41639,7 +41652,7 @@ void Func0440 object#(0x440) () {
 		if (gflags[0x0079]) {
 			var0003 = 0x0000;
 		} else {
-			0xFFC0->set_attack_mode(0x0007);
+			0xFFC0->set_attack_mode(FLEE);
 		}
 	}
 	if (event == EGG) {
@@ -45699,7 +45712,7 @@ void Func044B object#(0x44B) () {
 		if (gflags[0x0004]) {
 			0xFFB5->show_npc_face0(0x0000);
 			say("\"It was horrible! I was a wolf! I know I was! I saw myself in a reflection on a puddle of water!\"");
-			0xFFB5->set_attack_mode(0x0007);
+			0xFFB5->set_attack_mode(FLEE);
 			Func097F(0xFFB5, "@Aieee!!@", 0x0000);
 			abort;
 		} else if (!gflags[0x004A]) {
@@ -53428,7 +53441,7 @@ void Func04A8 object#(0x4A8) () {
 				0xFF58->clear_item_say();
 				Func097F(0xFF58, "@Save me!@", 0x0002);
 				0xFF58->set_schedule_type(IN_COMBAT);
-				0xFF58->set_attack_mode(0x0007);
+				0xFF58->set_attack_mode(FLEE);
 			}
 		} else {
 			var000F = find_nearby(0x00E9, 0x0028, 0x0000);
@@ -64574,7 +64587,7 @@ void Func0667 object#(0x667) () {
 			var0007 = UI_die_roll(0x0001, 0x0003);
 			if (var0007 == 0x0001) {
 				set_schedule_type(IN_COMBAT);
-				set_attack_mode(0x0007);
+				set_attack_mode(FLEE);
 				set_oppressor(0xFE9C);
 			}
 			if (var0007 == 0x0002) {
@@ -64731,7 +64744,7 @@ void Func066A object#(0x66A) () {
 			if (!(var0005 in var0002)) {
 				if (var0005->get_npc_prop(INTELLIGENCE) > 0x0005) {
 					var0005->set_schedule_type(IN_COMBAT);
-					var0005->set_attack_mode(0x0007);
+					var0005->set_attack_mode(FLEE);
 					var0005->set_oppressor(UI_get_avatar_ref());
 				}
 			}
@@ -74448,7 +74461,7 @@ void Func073A object#(0x73A) () {
 		0xFFD4->set_schedule_type(IN_COMBAT);
 		0xFFD4->set_alignment(0x0002);
 		0xFFD4->set_opponent(0xFE9C);
-		0xFFD4->set_attack_mode(0x0002);
+		0xFFD4->set_attack_mode(STRONGEST);
 		0xFFD4->set_oppressor(0xFE9C);
 		0xFFD4->set_item_flag(SI_TOURNAMENT);
 		gflags[0x024E] = true;
@@ -74471,7 +74484,7 @@ void Func073A object#(0x73A) () {
 		0xFEF0->set_schedule_type(IN_COMBAT);
 		0xFEF0->set_alignment(0x0002);
 		0xFEF0->set_opponent(0xFE9C);
-		0xFEF0->set_attack_mode(0x0002);
+		0xFEF0->set_attack_mode(STRONGEST);
 		0xFEF0->set_oppressor(0xFE9C);
 		0xFEF0->clear_item_flag(SI_TOURNAMENT);
 		0xFF80->move_object([0x0928, 0x01CF, 0x0000]);
@@ -74479,7 +74492,7 @@ void Func073A object#(0x73A) () {
 		0xFF80->set_schedule_type(IN_COMBAT);
 		0xFF80->set_alignment(0x0002);
 		0xFF80->set_opponent(0xFE9C);
-		0xFF80->set_attack_mode(0x0002);
+		0xFF80->set_attack_mode(STRONGEST);
 		0xFF80->set_oppressor(0xFE9C);
 		0xFF80->clear_item_flag(SI_TOURNAMENT);
 		0xFF81->move_object([0x092A, 0x01CF, 0x0000]);
@@ -74487,7 +74500,7 @@ void Func073A object#(0x73A) () {
 		0xFF81->set_schedule_type(IN_COMBAT);
 		0xFF81->set_alignment(0x0002);
 		0xFF81->set_opponent(0xFE9C);
-		0xFF81->set_attack_mode(0x0002);
+		0xFF81->set_attack_mode(STRONGEST);
 		0xFF81->set_oppressor(0xFE9C);
 		0xFF81->clear_item_flag(SI_TOURNAMENT);
 		var0005 = 0xFFD4->get_npc_object();
@@ -76570,7 +76583,7 @@ void Func0796 object#(0x796) () {
 				if (!UI_roll_to_win(var0004->get_npc_prop(INTELLIGENCE), 15)) {
 					var0004->halt_scheduled();
 					var0004->set_schedule_type(IN_COMBAT);
-					var0004->set_attack_mode(0x0007);
+					var0004->set_attack_mode(FLEE);
 					var0004->set_oppressor(0xFE9C);
 					var0005 = script var0004 after var0000 ticks {
 						nohalt;
@@ -80612,10 +80625,10 @@ void Func07F9 object#(0x7F9) () {
 					if (var000D->get_npc_id()) {
 						var000D->set_alignment(0x0002);
 						var000D->set_schedule_type(IN_COMBAT);
-						var000D->set_attack_mode(0x0000);
+						var000D->set_attack_mode(NEAREST);
 						var000D->set_opponent(item);
 						if (item == 0xFE9C->get_npc_object()) {
-							set_attack_mode(0x0000);
+							set_attack_mode(NEAREST);
 							set_opponent(var000D);
 							set_oppressor(var000D);
 							set_schedule_type(FOLLOW_AVATAR);
@@ -80629,13 +80642,13 @@ void Func07F9 object#(0x7F9) () {
 							var000D->set_opponent(item);
 							var000D->set_oppressor(item);
 						}
-						var000D->set_attack_mode(0x0000);
+						var000D->set_attack_mode(NEAREST);
 						var000D->set_schedule_type(TEND_SHOP);
 					}
 				} else {
 					var000D->set_alignment(0x0003);
 					var000D->set_schedule_type(IN_COMBAT);
-					var000D->set_attack_mode(0x0000);
+					var000D->set_attack_mode(NEAREST);
 				}
 			}
 		}
@@ -107234,7 +107247,7 @@ void Func092E 0x92E (var var0000) {
 	for (var0004 in var0001 with var0002 to var0003) {
 		if (Func0932(var0004)) {
 			var0004->set_opponent(0xFFFF);
-			var0004->set_attack_mode(0x0007);
+			var0004->set_attack_mode(FLEE);
 			var0004->set_oppressor(0xFFFF);
 			var0004->set_item_flag(DEAD);
 			gflags[0x0009] = true;
@@ -107850,14 +107863,14 @@ void Func0936 0x936 (var var0000, var var0001) {
 	UI_init_conversation();
 	do {
 		if (var0000 in var0003) {
-			var0001->set_attack_mode(0x0007);
+			var0001->set_attack_mode(FLEE);
 			if (!gflags[0x0084]) {
 				if (gflags[0x0043] && ((var0001 == 0xFFB9->get_npc_object()) && ((!gflags[0x0041]) && (var0000 == 0xFE9C->get_npc_object())))) {
 					break;
 				}
 				var0001->clear_item_say();
 				var0001->item_say("@Thou hast beaten me!@");
-				if (((!Func0932(0xFF6A)) || (Func0932(0xFF6A) && (0xFF6A->get_attack_mode() == 0x0007))) && (((!Func0932(0xFFB9)) || (Func0932(0xFFB9) && (0xFFB9->get_attack_mode() == 0x0007))) && (((!Func0932(0xFFB6)) || (Func0932(0xFFB6) && (0xFFB6->get_attack_mode() == 0x0007))) && (((!Func0932(0xFFC1)) || (Func0932(0xFFC1) && (0xFFC1->get_attack_mode() == 0x0007))) && ((!Func0932(0xFFB1)) || (Func0932(0xFFB1) && (0xFFB1->get_attack_mode() == 0x0007))))))) {
+				if (((!Func0932(0xFF6A)) || (Func0932(0xFF6A) && (0xFF6A->get_attack_mode() == FLEE))) && (((!Func0932(0xFFB9)) || (Func0932(0xFFB9) && (0xFFB9->get_attack_mode() == FLEE))) && (((!Func0932(0xFFB6)) || (Func0932(0xFFB6) && (0xFFB6->get_attack_mode() == FLEE))) && (((!Func0932(0xFFC1)) || (Func0932(0xFFC1) && (0xFFC1->get_attack_mode() == FLEE))) && ((!Func0932(0xFFB1)) || (Func0932(0xFFB1) && (0xFFB1->get_attack_mode() == FLEE))))))) {
 					0xFEED->show_npc_face0(0x0000);
 					var0002 = var0000->get_npc_name();
 					say("\"Nice show, ",
