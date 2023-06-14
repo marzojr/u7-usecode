@@ -210,6 +210,52 @@ enum schedules {
 							// completely overrides the NPC's schedule list.
 };
 
+enum inv_slots_bg {
+	BG_BACKPACK		=  0,
+	BG_WEAPON_HAND	=  1,
+	BG_SHIELD_HAND	=  2,
+	BG_OFF_HAND		=  2,
+	BG_BELT			=  3,
+	BG_TORSO		=  5,
+	BG_LEFT_RING	=  6,
+	BG_RIGHT_RING	=  7,
+	BG_QUIVER		=  8,
+	BG_HEAD			=  9,
+	BG_LEGS			= 10,
+	BG_FEET			= 11,
+	BG_USECODE		= 12,
+	BG_CLOAK		= 13,	// Exult-only
+	BG_GLOVES		= 14,	// Exult-only
+	BG_EARS			= 16,	// Exult-only
+	BG_BACK_SHIELD	= 17,	// Exult-only
+	BG_BACK_2H		= 19,	// Exult-only
+	BG_BOTH_HANDS	= 20,
+	BG_AMULET		= 22	// Exult-only
+};
+
+enum inv_slots_si {
+	SI_SHIELD_HAND	=  0,
+	SI_OFF_HAND		=  0,
+	SI_WEAPON_HAND	=  1,
+	SI_CLOAK		=  2,
+	SI_AMULET		=  3,
+	SI_HEAD			=  4,
+	SI_GLOVES		=  5,
+	SI_USECODE		=  6,
+	SI_RIGHT_RING	=  7,
+	SI_LEFT_RING	=  8,
+	SI_EARS			=  9,
+	SI_QUIVER		= 10,
+	SI_BELT			= 11,
+	SI_TORSO		= 12,
+	SI_FEET			= 13,
+	SI_LEGS			= 14,
+	SI_BACKPACK		= 15,
+	SI_BACK_SHIELD	= 16,
+	SI_BACK_2H		= 17,
+	SI_BOTH_HANDS	= 20
+};
+
 extern void Func094A 0x94A (var var0000);
 extern var Func0910 0x910 (var var0000);
 
@@ -18630,7 +18676,7 @@ void Func03BB shape#(0x3BB) () {
 	var var0004;
 
 	if (event == DOUBLECLICK) {
-		var0000 = 0xFE9C->get_readied(0x0003);
+		var0000 = 0xFE9C->get_readied(SI_AMULET);
 		if (var0000 == item) {
 			var0001 = var0000->get_item_frame();
 			var0002 = var0000->get_item_shape();
@@ -19769,7 +19815,7 @@ void Func03DE shape#(0x3DE) () {
 		}
 	}
 	if (event == READIED) {
-		if (get_container()->get_readied(0x0001)) {
+		if (get_container()->get_readied(SI_WEAPON_HAND)) {
 			if (!gflags[0x0304]) {
 				Func095D(0x03E8);
 				gflags[0x0304] = true;
@@ -19824,7 +19870,7 @@ void Func03E4 shape#(0x3E4) () {
 		}
 	}
 	if (event == READIED) {
-		if (get_container()->get_readied(0x000B)) {
+		if (get_container()->get_readied(SI_BELT)) {
 			if (!gflags[0x02E9]) {
 				Func095D(0x03E8);
 				gflags[0x02E9] = true;
@@ -19903,7 +19949,7 @@ void Func03E9 shape#(0x3E9) () {
 		}
 	}
 	if (event == READIED) {
-		if (get_container()->get_readied(0x0005)) {
+		if (get_container()->get_readied(SI_GLOVES)) {
 			if (!gflags[0x02F9]) {
 				Func095D(0x03E8);
 				gflags[0x02F9] = true;
@@ -54705,7 +54751,7 @@ void Func04B4 object#(0x4B4) () {
 		} else {
 			var0003 = UI_create_new_object(0x025C);
 			if (Func0952(item)) {
-				var0004 = is_readied(0x0001, 0x025C, 0x0000);
+				var0004 = is_readied(SI_WEAPON_HAND, 0x025C, 0x0000);
 			}
 		}
 	}
@@ -59562,8 +59608,8 @@ void Func0614 object#(0x614) () {
 
 	var0000 = UI_get_speech_track();
 	if ((var0000 >= 0x0000) && (var0000 < 0x0015)) {
-		var0001 = 0xFE9C->get_readied(0x0007);
-		var0001 &= 0xFE9C->get_readied(0x0008);
+		var0001 = 0xFE9C->get_readied(SI_RIGHT_RING);
+		var0001 &= 0xFE9C->get_readied(SI_LEFT_RING);
 		var0002 = 0xFED4;
 		for (var0005 in var0001 with var0003 to var0004) {
 			if ((var0005->get_item_shape() == 0x0377) && (var0005->get_item_frame() == 0x0002)) {
@@ -101908,8 +101954,8 @@ void Func08AF 0x8AF (var var0000, var var0001) {
 		var0003 = var0000->get_object_position();
 	}
 	if (var0001) {
-		var0004 = 0xFE9C->get_readied(0x0001);
-		var0005 = 0xFE9C->get_readied(0x0000);
+		var0004 = 0xFE9C->get_readied(SI_WEAPON_HAND);
+		var0005 = 0xFE9C->get_readied(SI_SHIELD_HAND);
 		if (var0004 || var0005) {
 			var0006 = Func08B0(var0004, var0005, 0x0001);
 			var0006 = var0000->set_last_created();
@@ -101995,7 +102041,7 @@ void Func08B1 0x8B1 (var var0000, var var0001, var var0002, var var0003) {
 	var var0008;
 
 	var0004 = 0x0000;
-	var0005 = 0x0000;
+	var0005 = SI_SHIELD_HAND;
 	while (true) {
 		var0006 = var0000->get_readied(var0005);
 		if (var0006) {
@@ -102013,55 +102059,55 @@ void Func08B1 0x8B1 (var var0000, var var0001, var var0002, var var0003) {
 				var0007 = UI_update_last_created(var0003);
 			}
 		}
-		if (var0005 == 0x0000) {
-			var0005 = 0x0005;
+		if (var0005 == SI_SHIELD_HAND) {
+			var0005 = SI_GLOVES;
 			continue;
 		}
-		if (var0005 == 0x0005) {
-			var0005 = 0x0010;
+		if (var0005 == SI_GLOVES) {
+			var0005 = SI_BACK_SHIELD;
 			continue;
 		}
-		if (var0005 == 0x0010) {
-			var0005 = 0x0011;
+		if (var0005 == SI_BACK_SHIELD) {
+			var0005 = SI_BACK_2H;
 			continue;
 		}
-		if (var0005 == 0x0011) {
-			var0005 = 0x000F;
+		if (var0005 == SI_BACK_2H) {
+			var0005 = SI_BACKPACK;
 			continue;
 		}
-		if (var0005 == 0x000F) {
-			var0005 = 0x000B;
+		if (var0005 == SI_BACKPACK) {
+			var0005 = SI_BELT;
 			continue;
 		}
-		if (var0005 == 0x000B) {
-			var0005 = 0x0001;
+		if (var0005 == SI_BELT) {
+			var0005 = SI_WEAPON_HAND;
 			continue;
 		}
-		if (var0005 == 0x0001) {
-			var0005 = 0x000C;
+		if (var0005 == SI_WEAPON_HAND) {
+			var0005 = SI_TORSO;
 			continue;
 		}
-		if (var0005 == 0x000C) {
-			var0005 = 0x0004;
+		if (var0005 == SI_TORSO) {
+			var0005 = SI_HEAD;
 			continue;
 		}
-		if (var0005 == 0x0004) {
-			var0005 = 0x000E;
+		if (var0005 == SI_HEAD) {
+			var0005 = SI_LEGS;
 			continue;
 		}
-		if (var0005 == 0x000E) {
-			var0005 = 0x000D;
+		if (var0005 == SI_LEGS) {
+			var0005 = SI_FEET;
 			continue;
 		}
-		if (var0005 == 0x000D) {
-			var0005 = 0x0002;
+		if (var0005 == SI_FEET) {
+			var0005 = SI_CLOAK;
 			continue;
 		}
-		if (var0005 == 0x0002) {
-			var0005 = 0x0003;
+		if (var0005 == SI_CLOAK) {
+			var0005 = SI_AMULET;
 			continue;
 		}
-		if (var0005 == 0x0003) {
+		if (var0005 == SI_AMULET) {
 			var0007 = var0001->set_last_created();
 			if (var0007) {
 				var0008 = var0000->get_object_position();
@@ -110993,7 +111039,7 @@ void Func098A 0x98A (var var0000, var var0001) {
 	}
 	var0004 = var0000->get_container();
 	if (var0004->is_npc()) {
-		if (var0004->get_readied(0x000B) == var0000) {
+		if (var0004->get_readied(SI_BELT) == var0000) {
 			UI_flash_mouse(0x0000);
 			return;
 		}

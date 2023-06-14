@@ -210,6 +210,52 @@ enum schedules {
 							// completely overrides the NPC's schedule list.
 };
 
+enum inv_slots_bg {
+	BG_BACKPACK		=  0,
+	BG_WEAPON_HAND	=  1,
+	BG_SHIELD_HAND	=  2,
+	BG_OFF_HAND		=  2,
+	BG_BELT			=  3,
+	BG_TORSO		=  5,
+	BG_LEFT_RING	=  6,
+	BG_RIGHT_RING	=  7,
+	BG_QUIVER		=  8,
+	BG_HEAD			=  9,
+	BG_LEGS			= 10,
+	BG_FEET			= 11,
+	BG_USECODE		= 12,
+	BG_CLOAK		= 13,	// Exult-only
+	BG_GLOVES		= 14,	// Exult-only
+	BG_EARS			= 16,	// Exult-only
+	BG_BACK_SHIELD	= 17,	// Exult-only
+	BG_BACK_2H		= 19,	// Exult-only
+	BG_BOTH_HANDS	= 20,
+	BG_AMULET		= 22	// Exult-only
+};
+
+enum inv_slots_si {
+	SI_SHIELD_HAND	=  0,
+	SI_OFF_HAND		=  0,
+	SI_WEAPON_HAND	=  1,
+	SI_CLOAK		=  2,
+	SI_AMULET		=  3,
+	SI_HEAD			=  4,
+	SI_GLOVES		=  5,
+	SI_USECODE		=  6,
+	SI_RIGHT_RING	=  7,
+	SI_LEFT_RING	=  8,
+	SI_EARS			=  9,
+	SI_QUIVER		= 10,
+	SI_BELT			= 11,
+	SI_TORSO		= 12,
+	SI_FEET			= 13,
+	SI_LEGS			= 14,
+	SI_BACKPACK		= 15,
+	SI_BACK_SHIELD	= 16,
+	SI_BACK_2H		= 17,
+	SI_BOTH_HANDS	= 20
+};
+
 extern void Func08FF 0x8FF (var var0000);
 extern var Func0829 0x829 (var var0000);
 
@@ -3431,7 +3477,7 @@ void Func026F shape#(0x26F) () {
 	var var0009;
 
 	if (event == DOUBLECLICK) {
-		if (!0xFE9C->is_readied(0x0001, 0x026F, FRAME_ANY)) {
+		if (!0xFE9C->is_readied(BG_WEAPON_HAND, 0x026F, FRAME_ANY)) {
 			UI_flash_mouse(0x0002);
 			return;
 		}
@@ -3530,7 +3576,7 @@ void Func0270 shape#(0x270) () {
 	var var0016;
 
 	if (event == DOUBLECLICK) {
-		if (!0xFE9C->is_readied(0x0001, 0x0270, FRAME_ANY)) {
+		if (!0xFE9C->is_readied(BG_WEAPON_HAND, 0x0270, FRAME_ANY)) {
 			Func08FF("@Thou must hold that in thine hand.@");
 			return;
 		}
@@ -4770,7 +4816,7 @@ void Func029C shape#(0x29C) () {
 	var var000C;
 
 	if (event == DOUBLECLICK) {
-		if (0xFE9C->is_readied(0x0001, 0x026F, FRAME_ANY)) {
+		if (0xFE9C->is_readied(BG_WEAPON_HAND, 0x026F, FRAME_ANY)) {
 			var0000 = find_nearest(0x03DF, 0x0003);
 			if (var0000) {
 				var0001 = get_object_position();
@@ -6173,7 +6219,7 @@ void Func02F8 shape#(0x2F8) () {
 					return;
 				}
 				if (var0000 == 0x000C) {
-					if (!0xFE9C->is_readied(0x0001, 0x02F8, 0x000C)) {
+					if (!0xFE9C->is_readied(BG_WEAPON_HAND, 0x02F8, 0x000C)) {
 						Func08FF("@I believe the gem must be held in the weapon hand to break the mirror.@");
 						return;
 					}
@@ -8704,7 +8750,7 @@ void Func03DF shape#(0x3DF) () {
 	var var0003;
 
 	if (event == DOUBLECLICK) {
-		if (0xFE9C->is_readied(0x0001, 0x026F, FRAME_ANY)) {
+		if (0xFE9C->is_readied(BG_WEAPON_HAND, 0x026F, FRAME_ANY)) {
 			var0000 = find_nearest(0x029C, 0x0003);
 			if (var0000) {
 				var0001 = var0000->get_object_position();
@@ -58394,7 +58440,7 @@ void Func06CC object#(0x6CC) () {
 			var0000 = get_item_quality();
 			var0001 = UI_get_party_list();
 			for (var0004 in var0001 with var0002 to var0003) {
-				if (!var0004->is_readied(0x0009, 0x027E, FRAME_ANY)) {
+				if (!var0004->is_readied(BG_HEAD, 0x027E, FRAME_ANY)) {
 					if (var0000 == 0x001E) {
 						var0005 = 0x001E;
 					} else {
@@ -58609,7 +58655,7 @@ void Func06DF object#(0x6DF) () {
 	var var0000;
 
 	if (event == EGG) {
-		if ((!gflags[0x0003]) && (0xFE9C->is_readied(0x0006, 0x02F7, 0x0001) || 0xFE9C->is_readied(0x0007, 0x02F7, 0x0001))) {
+		if ((!gflags[0x0003]) && (0xFE9C->is_readied(BG_LEFT_RING, 0x02F7, 0x0001) || 0xFE9C->is_readied(BG_RIGHT_RING, 0x02F7, 0x0001))) {
 			var0000 = [0x0A67, 0x034D, 0x0000];
 			Func0811();
 			0xFE9C->move_object(var0000);
@@ -59165,7 +59211,7 @@ void Func06F6 object#(0x6F6) () {
 				fallthrough;
 
 			case "powers":
-				if (!0xFE9C->get_npc_object()->is_readied(0x0001, 0x02C3, FRAME_ANY)) {
+				if (!0xFE9C->get_npc_object()->is_readied(BG_WEAPON_HAND, 0x02C3, FRAME_ANY)) {
 					say("\"I needs must be in thy hand, master, if thou wishest to use my powers.\"");
 				} else {
 					say("\"Which of my powers dost thou seek to use?\"");
@@ -64417,13 +64463,13 @@ void Func0845 0x845 (var var0000) {
 }
 
 var Func0846 0x846 () {
-	if (!0xFE9C->get_npc_object()->is_readied(0x0001, 0x029C, 0x000F)) {
-		if (!0xFE9C->get_npc_object()->is_readied(0x0002, 0x029C, 0x000F)) {
+	if (!0xFE9C->get_npc_object()->is_readied(BG_WEAPON_HAND, 0x029C, 0x000F)) {
+		if (!0xFE9C->get_npc_object()->is_readied(BG_SHIELD_HAND, 0x029C, 0x000F)) {
 			return 0x0000;
 		}
 	}
-	if (!0xFE9C->get_npc_object()->is_readied(0x0001, 0x02F8, 0x000D)) {
-		if (!0xFE9C->get_npc_object()->is_readied(0x0002, 0x02F8, 0x000D)) {
+	if (!0xFE9C->get_npc_object()->is_readied(BG_WEAPON_HAND, 0x02F8, 0x000D)) {
+		if (!0xFE9C->get_npc_object()->is_readied(BG_SHIELD_HAND, 0x02F8, 0x000D)) {
 			return 0x0000;
 		}
 	}
@@ -74220,13 +74266,13 @@ var Func08E9 0x8E9 (var var0000) {
 
 	var0001 = var0000->get_item_shape();
 	var0002 = var0000->get_item_frame();
-	if (0xFE9C->is_readied(0x0001, var0001, var0002)) {
+	if (0xFE9C->is_readied(BG_WEAPON_HAND, var0001, var0002)) {
 		return 0x0001;
 	}
-	if (0xFE9C->is_readied(0x0002, var0001, var0002)) {
+	if (0xFE9C->is_readied(BG_SHIELD_HAND, var0001, var0002)) {
 		return 0x0001;
 	}
-	if (0xFE9C->is_readied(0x0014, var0001, var0002)) {
+	if (0xFE9C->is_readied(BG_BOTH_HANDS, var0001, var0002)) {
 		return 0x0001;
 	}
 	return 0x0000;
@@ -74238,7 +74284,7 @@ var Func08EA 0x8EA (var var0000) {
 
 	var0001 = var0000->get_item_shape();
 	var0002 = var0000->get_item_frame();
-	if (0xFE9C->is_readied(0x0000, var0001, var0002)) {
+	if (0xFE9C->is_readied(BG_BACKPACK, var0001, var0002)) {
 		return 0x0001;
 	}
 	return 0x0000;
