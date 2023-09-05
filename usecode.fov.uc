@@ -32616,21 +32616,19 @@ void Func0493 object#(0x493) () {
 					". May I be off assistance to thee?\"");
 			}
 			gflags[0x01CC] = true;
+		} else if (gflags[0x01A2]) {
+			say("\"Greetings, ",
+				var0005,
+				".\" The mayor smiles at you half-heartedly.");
 		} else {
-			if (gflags[0x01A2]) {
-				say("\"Greetings, ",
-					var0005,
-					".\" The mayor smiles at you half-heartedly.");
+			if (gflags[0x01AA]) {
+				var0008 = "";
 			} else {
-				if (gflags[0x01AA]) {
-					var0008 = "";
-				} else {
-					var0008 = "Is that Liche gone yet? ";
-				}
-				say("\"Ah yes, good Avatar. 'Tis good to see thee again. ",
-					var0008,
-					"Of what service can I be to one so great as thee?\" He bows.");
+				var0008 = "Is that Liche gone yet? ";
 			}
+			say("\"Ah yes, good Avatar. 'Tis good to see thee again. ",
+				var0008,
+				"Of what service can I be to one so great as thee?\" He bows.");
 		}
 		add(["name", "job", "bye"]);
 		if (!gflags[0x01AA]) {

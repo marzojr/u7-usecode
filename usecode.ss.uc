@@ -38094,37 +38094,35 @@ void Func0437 object#(0x437) () {
 				nohalt;
 				call Func0437;
 			};
+		} else if (0xFFCB->get_item_flag(SI_ZOMBIE)) {
+			gflags[0x0007] = true;
+			var0010 = 0xFE9C->get_object_position();
+			0xFE9C->set_item_flag(DONT_MOVE);
+			0xFE9C->set_schedule_type(WAIT);
+			var0010[0x0001] -= var0010[0x0003] / 0x0002;
+			var0010[0x0002] -= var0010[0x0003] / 0x0002;
+			UI_sprite_effect(0x0017, var0010[0x0001], var0010[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
+			UI_play_sound_effect(0x0039);
+			var0000 = script 0xFE9C {
+				nohalt;
+				actor frame bowing;
+				actor frame kneeling;
+				actor frame sleeping;
+				call Func0437;
+			};
 		} else {
-			if (0xFFCB->get_item_flag(SI_ZOMBIE)) {
-				gflags[0x0007] = true;
-				var0010 = 0xFE9C->get_object_position();
-				0xFE9C->set_item_flag(DONT_MOVE);
-				0xFE9C->set_schedule_type(WAIT);
-				var0010[0x0001] -= var0010[0x0003] / 0x0002;
-				var0010[0x0002] -= var0010[0x0003] / 0x0002;
-				UI_sprite_effect(0x0017, var0010[0x0001], var0010[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-				UI_play_sound_effect(0x0039);
-				var0000 = script 0xFE9C {
-					nohalt;
-					actor frame bowing;
-					actor frame kneeling;
-					actor frame sleeping;
-					call Func0437;
-				};
-			} else {
-				var0000 = 0xFFCB->set_to_attack(0xFE9C, 0x0118);
-				var0000 = script 0xFFCB {
-					actor frame strike_1h;
-					sfx 53;
-					attack;
-					actor frame standing;
-				};
-				var0000 = script 0xFE9C after 2 ticks {
-					nohalt;
-					call Func0437;
-				};
-				0xFFCB->set_item_flag(SI_ZOMBIE);
-			}
+			var0000 = 0xFFCB->set_to_attack(0xFE9C, 0x0118);
+			var0000 = script 0xFFCB {
+				actor frame strike_1h;
+				sfx 53;
+				attack;
+				actor frame standing;
+			};
+			var0000 = script 0xFE9C after 2 ticks {
+				nohalt;
+				call Func0437;
+			};
+			0xFFCB->set_item_flag(SI_ZOMBIE);
 		}
 		abort;
 	}
@@ -82841,49 +82839,45 @@ var Func0804 0x804 (var var0000, var var0001) {
 						var0002,
 						", to bring me to this price.\"");
 				}
+			} else if (var0005 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var0011 == 0x0001) {
+					say("\"Our prices are fair here.\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"",
+						var0004,
+						", Father would not believe I had sold goods at this price!\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"Father must make some profit!\"");
+				}
+			} else if (var0005 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var0011 == 0x0001) {
+					say("\"Thou couldst not obtain a better deal from Father, ",
+						var0002,
+						".\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"Father enjoys bargaining much more than I, ",
+						var0002,
+						".\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"I am sure Father would be pleased with this price.\"");
+				}
 			} else {
-				if (var0005 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var0011 == 0x0001) {
-						say("\"Our prices are fair here.\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"",
-							var0004,
-							", Father would not believe I had sold goods at this price!\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"Father must make some profit!\"");
-					}
-				} else {
-					if (var0005 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-						if (var0011 == 0x0001) {
-							say("\"Thou couldst not obtain a better deal from Father, ",
-								var0002,
-								".\"");
-						}
-						if (var0011 == 0x0002) {
-							say("\"Father enjoys bargaining much more than I, ",
-								var0002,
-								".\"");
-						}
-						if (var0011 == 0x0003) {
-							say("\"I am sure Father would be pleased with this price.\"");
-						}
-					} else {
-						if (var0011 == 0x0001) {
-							say("\"This is a good price ",
-								var0002,
-								". I am sure Father will be pleased.\"");
-						}
-						if (var0011 == 0x0002) {
-							say("\"",
-								var0004,
-								", I am sure Father will be happy with this price.\"");
-						}
-						if (var0011 == 0x0003) {
-							say("\"Father must charge reasonably high prices or we will be made paupers!\"");
-						}
-					}
+				if (var0011 == 0x0001) {
+					say("\"This is a good price ",
+						var0002,
+						". I am sure Father will be pleased.\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"",
+						var0004,
+						", I am sure Father will be happy with this price.\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"Father must charge reasonably high prices or we will be made paupers!\"");
 				}
 			}
 			say("\"Thou dost agree to a price of ",
@@ -83325,45 +83319,43 @@ var Func0807 0x807 (var var0000, var var0001) {
 						var0002,
 						"! It hath been some time since I was beaten at this game!\"");
 				}
+			} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var0010 == 0x0001) {
+					say("\"Our prices are honest here at the Sleeping Bull!\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"Thou hast found me in a generous mood, ",
+						var0002,
+						"! 'Tis not every day I sell goods at these prices!\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"Thou art a shrewd bargainer, ",
+						var0002,
+						"!\"");
+				}
+			} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var0010 == 0x0001) {
+					say("\"Fair enough, if I do say so myself.\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"With customers such as thou, I shall never make a profit...\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"With these troubled times, I must charge higher prices...\"");
+				}
 			} else {
-				if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var0010 == 0x0001) {
-						say("\"Our prices are honest here at the Sleeping Bull!\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"Thou hast found me in a generous mood, ",
-							var0002,
-							"! 'Tis not every day I sell goods at these prices!\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"Thou art a shrewd bargainer, ",
-							var0002,
-							"!\"");
-					}
-				} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-					if (var0010 == 0x0001) {
-						say("\"Fair enough, if I do say so myself.\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"With customers such as thou, I shall never make a profit...\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"With these troubled times, I must charge higher prices...\"");
-					}
-				} else {
-					if (var0010 == 0x0001) {
-						say("\"'Tis a pleasure to bargain with thee, ",
-							var0002,
-							"!\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"Thou art most generous with thy money, ",
-							var0002,
-							"!\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"'Tis a shame I must charge high prices like this.\"");
-					}
+				if (var0010 == 0x0001) {
+					say("\"'Tis a pleasure to bargain with thee, ",
+						var0002,
+						"!\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"Thou art most generous with thy money, ",
+						var0002,
+						"!\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"'Tis a shame I must charge high prices like this.\"");
 				}
 			}
 			say("\"Dost thou agree on a price of ",
@@ -84751,48 +84743,46 @@ var Func080D 0x80D (var var0000, var var0001) {
 				if (var0010 == 0x0003) {
 					say("\"Well, no one else in town is spending coins, so I must reluctantly accept thine offer.\"");
 				}
+			} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var0010 == 0x0001) {
+					say("\"Believe me, I am allowing thee a fantastic price. Please do not tell anyone!\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"Thou must be poor, if thou must bargain me down so low. Very well, I shall have pity on thee.\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"I think thou hast talked me into a price that is too low...\"");
+					say("\"But I do not care. Hast thou noticed how beautiful the sunsets have been lately?\"");
+				}
+			} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var0010 == 0x0001) {
+					say("\"'Tis a good price, and a great value.\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"So that will be ",
+						var0004,
+						" guilders -- and I will say again that it hath been nice chatting with thee today.\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"'Tis a fair deal -- only ",
+						var0004,
+						" guilders. Be certain to tell all thy friends!\"");
+				}
 			} else {
-				if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var0010 == 0x0001) {
-						say("\"Believe me, I am allowing thee a fantastic price. Please do not tell anyone!\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"Thou must be poor, if thou must bargain me down so low. Very well, I shall have pity on thee.\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"I think thou hast talked me into a price that is too low...\"");
-						say("\"But I do not care. Hast thou noticed how beautiful the sunsets have been lately?\"");
-					}
-				} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-					if (var0010 == 0x0001) {
-						say("\"'Tis a good price, and a great value.\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"So that will be ",
-							var0004,
-							" guilders -- and I will say again that it hath been nice chatting with thee today.\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"'Tis a fair deal -- only ",
-							var0004,
-							" guilders. Be certain to tell all thy friends!\"");
-					}
-				} else {
-					if (var0010 == 0x0001) {
-						say("\"",
-							var0004,
-							" guilders! Thank thee, ",
-							var0002,
-							".\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"That is wonderful! ",
-							var0004,
-							" whole guilders... why, the owner shall be so proud of me for this sale!\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"As I always say, one must pay high prices to obtain high quality.\"");
-					}
+				if (var0010 == 0x0001) {
+					say("\"",
+						var0004,
+						" guilders! Thank thee, ",
+						var0002,
+						".\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"That is wonderful! ",
+						var0004,
+						" whole guilders... why, the owner shall be so proud of me for this sale!\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"As I always say, one must pay high prices to obtain high quality.\"");
 				}
 			}
 			say("\"",
@@ -85400,51 +85390,49 @@ var Func0812 0x812 (var var0000, var var0001) {
 						var0002,
 						".\"");
 				}
+			} else if (var0005 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var0011 == 0x0001) {
+					say("\"I must be taken with thee, ",
+						var0002,
+						"! To offer such a price...\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"",
+						var0004,
+						", thou wilt put me out of business if thou dost stay much longer!\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"I have met my match in thee, ",
+						var0002,
+						"!\"");
+				}
+			} else if (var0005 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var0011 == 0x0001) {
+					say("\"No one else is willing to put such care into their work as I do, ",
+						var0002,
+						".\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"Thou art a worthy opponent, ",
+						var0002,
+						".\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"Remember me, if thou dost ever need any more furs!\"");
+				}
 			} else {
-				if (var0005 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var0011 == 0x0001) {
-						say("\"I must be taken with thee, ",
-							var0002,
-							"! To offer such a price...\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"",
-							var0004,
-							", thou wilt put me out of business if thou dost stay much longer!\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"I have met my match in thee, ",
-							var0002,
-							"!\"");
-					}
-				} else if (var0005 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-					if (var0011 == 0x0001) {
-						say("\"No one else is willing to put such care into their work as I do, ",
-							var0002,
-							".\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"Thou art a worthy opponent, ",
-							var0002,
-							".\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"Remember me, if thou dost ever need any more furs!\"");
-					}
-				} else {
-					if (var0011 == 0x0001) {
-						say("\"Thou art always welcome in my shop, ",
-							var0002,
-							"!\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"May it give thee great pleasure, ",
-							var0002,
-							"!\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"'Tis hard to offer lower prices these days. The Goblins have hurt everyone's business.\"");
-					}
+				if (var0011 == 0x0001) {
+					say("\"Thou art always welcome in my shop, ",
+						var0002,
+						"!\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"May it give thee great pleasure, ",
+						var0002,
+						"!\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"'Tis hard to offer lower prices these days. The Goblins have hurt everyone's business.\"");
 				}
 			}
 			say("\"Thou hast agreed to a price of ",
@@ -85910,37 +85898,35 @@ var Func0817 0x817 (var var0000, var var0001) {
 				if (var000E == 0x0003) {
 					say("\"'Tis truly amazing... thou hast a facile tongue to convince me to lower my price by so much.\"");
 				}
+			} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var000E == 0x0001) {
+					say("\"'Tis lower than I expected... but I shall agree to this price.\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"Thou art very good at bargaining. I will accept this price.\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"I see.\" *\"Very well, I will agree to this price even though 'tis lower than I did expect.\"");
+				}
+			} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var000E == 0x0001) {
+					say("\"Hmm...\" ~\"I suppose one must accept such a price -- though it could have been higher.\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"'Tis not such an indecent offer.\" ~\"I accept.\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"I will accept\tthis price.\" ~\"I can always use the extra funds for research.\"");
+				}
 			} else {
-				if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var000E == 0x0001) {
-						say("\"'Tis lower than I expected... but I shall agree to this price.\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"Thou art very good at bargaining. I will accept this price.\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"I see.\" *\"Very well, I will agree to this price even though 'tis lower than I did expect.\"");
-					}
-				} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-					if (var000E == 0x0001) {
-						say("\"Hmm...\" ~\"I suppose one must accept such a price -- though it could have been higher.\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"'Tis not such an indecent offer.\" ~\"I accept.\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"I will accept\tthis price.\" ~\"I can always use the extra funds for research.\"");
-					}
-				} else {
-					if (var000E == 0x0001) {
-						say("\"Very well.\" *\"I accept thine offer!\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"It hath been a pleasure!\" *\"I will accept thine offer.\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"Yes...\"*\"'Tis a very good price.\"");
-					}
+				if (var000E == 0x0001) {
+					say("\"Very well.\" *\"I accept thine offer!\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"It hath been a pleasure!\" *\"I will accept thine offer.\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"Yes...\"*\"'Tis a very good price.\"");
 				}
 			}
 			say("\"So, have we agreed on the price of ",
@@ -86479,48 +86465,46 @@ var Func0819 0x819 (var var0000, var var0001) {
 				if (var000F == 0x0003) {
 					say("\"Troublesome are the times that force me to agree to such bargains!\"");
 				}
+			} else if (var0003 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var000F == 0x0001) {
+					say("\"Ah... My prices are fair here. Fair indeed.\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"Thou art a rogue! I would not believe mine ears if I were told I had sold goods at this price!\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"Let me see... Ah, I do believe thou wouldst make a good shopkeeper, ",
+						var0002,
+						"! 'Tis not often I make such unwise bargains!\"");
+					var000B = Func0992(0x0001, "@A shopkeeper? Surely thou art jesting?\r\n\t\t\t\t\t\t The Avatar is embarked on a Quest!@", 0x0000, false);
+				}
+			} else if (var0003 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var000F == 0x0001) {
+					say("\"Most fair, if I do say so myself.\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"'Tis a pleasure to bargain with thee, ",
+						var0002,
+						".\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"What were we discussing? Ah, yes... 'Tis a fairer price than most would give, ",
+						var0002,
+						".\"");
+				}
 			} else {
-				if (var0003 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var000F == 0x0001) {
-						say("\"Ah... My prices are fair here. Fair indeed.\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"Thou art a rogue! I would not believe mine ears if I were told I had sold goods at this price!\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"Let me see... Ah, I do believe thou wouldst make a good shopkeeper, ",
-							var0002,
-							"! 'Tis not often I make such unwise bargains!\"");
-						var000B = Func0992(0x0001, "@A shopkeeper? Surely thou art jesting?\r\n\t\t\t\t\t\t The Avatar is embarked on a Quest!@", 0x0000, false);
-					}
-				} else if (var0003 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-					if (var000F == 0x0001) {
-						say("\"Most fair, if I do say so myself.\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"'Tis a pleasure to bargain with thee, ",
-							var0002,
-							".\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"What were we discussing? Ah, yes... 'Tis a fairer price than most would give, ",
-							var0002,
-							".\"");
-					}
-				} else {
-					if (var000F == 0x0001) {
-						say("\"Thou hast made me a happy man, ",
-							var0002,
-							"! Walk with Beauty!\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"Ah... A blessing upon thee, ",
-							var0002,
-							".\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"Hmmm... In these trying times, I must charge steep prices or become a pauper.\"");
-					}
+				if (var000F == 0x0001) {
+					say("\"Thou hast made me a happy man, ",
+						var0002,
+						"! Walk with Beauty!\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"Ah... A blessing upon thee, ",
+						var0002,
+						".\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"Hmmm... In these trying times, I must charge steep prices or become a pauper.\"");
 				}
 			}
 			say("\"We have agreed on a price of ",
@@ -87056,47 +87040,45 @@ var Func081C 0x81C (var var0000, var var0001) {
 				if (var000F == 0x0003) {
 					say("\"I would never agree to such a price, if times were not so bad!\"");
 				}
+			} else if (var0003 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var000F == 0x0001) {
+					say("\"My prices are reasonable, given my limited supply.\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"Thou couldst talk a beggar out of his begging bowl! I cannot believe I have agreed to such a price!\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"Thou shouldst have been a shopkeeper, ",
+						var0002,
+						"...\"");
+				}
+			} else if (var0003 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var000F == 0x0001) {
+					say("\"A fair deal...\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"'Tis a pleasure to deal with thee, ",
+						var0002,
+						".\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"There are few people left who specialize in herbs, ",
+						var0002,
+						". Thou wilt find no better price, I assure thee.\"");
+				}
 			} else {
-				if (var0003 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var000F == 0x0001) {
-						say("\"My prices are reasonable, given my limited supply.\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"Thou couldst talk a beggar out of his begging bowl! I cannot believe I have agreed to such a price!\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"Thou shouldst have been a shopkeeper, ",
-							var0002,
-							"...\"");
-					}
-				} else if (var0003 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-					if (var000F == 0x0001) {
-						say("\"A fair deal...\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"'Tis a pleasure to deal with thee, ",
-							var0002,
-							".\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"There are few people left who specialize in herbs, ",
-							var0002,
-							". Thou wilt find no better price, I assure thee.\"");
-					}
-				} else {
-					if (var000F == 0x0001) {
-						say("\"Thou hast made me a happy woman, ",
-							var0002,
-							"! Walk with Beauty!\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"May Beauty follow thee ever, ",
-							var0002,
-							".\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"I fear that the storms have driven my prices up. I have no choice unless I wish to starve.\"");
-					}
+				if (var000F == 0x0001) {
+					say("\"Thou hast made me a happy woman, ",
+						var0002,
+						"! Walk with Beauty!\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"May Beauty follow thee ever, ",
+						var0002,
+						".\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"I fear that the storms have driven my prices up. I have no choice unless I wish to starve.\"");
 				}
 			}
 			say("\"We have agreed on a price of ",
@@ -88215,43 +88197,41 @@ var Func0820 0x820 (var var0000, var var0001) {
 						0x0000->set_conversation_slot();
 					}
 				}
+			} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var0010 == 0x0001) {
+					say("\"We offer honest prices here at the Sleeping Bull!\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"I would quickly have to beg if I offered such prices every day!\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"Thou hast a shrewd head on thy shoulders, ",
+						var0002,
+						". Thou dost bargain like a innkeeper!\"");
+				}
+			} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var0010 == 0x0001) {
+					say("\"Fair enough, if I do say so myself.\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"I shall never make a profit with customers like thee...\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"We try only to please! Tell thy friends about the Sleeping Bull!\"");
+				}
 			} else {
-				if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var0010 == 0x0001) {
-						say("\"We offer honest prices here at the Sleeping Bull!\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"I would quickly have to beg if I offered such prices every day!\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"Thou hast a shrewd head on thy shoulders, ",
-							var0002,
-							". Thou dost bargain like a innkeeper!\"");
-					}
-				} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-					if (var0010 == 0x0001) {
-						say("\"Fair enough, if I do say so myself.\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"I shall never make a profit with customers like thee...\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"We try only to please! Tell thy friends about the Sleeping Bull!\"");
-					}
-				} else {
-					if (var0010 == 0x0001) {
-						say("\"I am content, ",
-							var0002,
-							".\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"Blessing thee and thy companions, ",
-							var0002,
-							"!\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"If the suppliers ever come, I won't have to charge such high prices.\"");
-					}
+				if (var0010 == 0x0001) {
+					say("\"I am content, ",
+						var0002,
+						".\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"Blessing thee and thy companions, ",
+						var0002,
+						"!\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"If the suppliers ever come, I won't have to charge such high prices.\"");
 				}
 			}
 			say("\"Dost thou agree on a price of ",
@@ -88834,51 +88814,49 @@ var Func0828 0x828 (var var0000, var var0001) {
 						var0002,
 						".\"");
 				}
+			} else if (var0005 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var0011 == 0x0001) {
+					say("\"Do not allow Topo to hear of this, ",
+						var0002,
+						"! 'Tis not often I lower my prices such...\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"",
+						var0004,
+						", I must be addled! I do not normally offer such a price...\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"Thou art honorable, ",
+						var0002,
+						", I can tell. For thee only will I offer such a price!\"");
+				}
+			} else if (var0005 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var0011 == 0x0001) {
+					say("\"Thou wilt find that my prices are more than fair, ",
+						var0002,
+						", once thou hast travelled a bit.\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"'Tis a pleasure to trade with thee, ",
+						var0002,
+						".\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"Please come to see me whenever thou art in Moonshade again.\"");
+				}
 			} else {
-				if (var0005 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var0011 == 0x0001) {
-						say("\"Do not allow Topo to hear of this, ",
-							var0002,
-							"! 'Tis not often I lower my prices such...\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"",
-							var0004,
-							", I must be addled! I do not normally offer such a price...\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"Thou art honorable, ",
-							var0002,
-							", I can tell. For thee only will I offer such a price!\"");
-					}
-				} else if (var0005 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-					if (var0011 == 0x0001) {
-						say("\"Thou wilt find that my prices are more than fair, ",
-							var0002,
-							", once thou hast travelled a bit.\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"'Tis a pleasure to trade with thee, ",
-							var0002,
-							".\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"Please come to see me whenever thou art in Moonshade again.\"");
-					}
-				} else {
-					if (var0011 == 0x0001) {
-						say("\"",
-							var0004,
-							", thou art a fine customer!\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"Many thanks, ",
-							var0002,
-							"!\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"I fear that I must charge more, now that my raw materials are so limited.\"");
-					}
+				if (var0011 == 0x0001) {
+					say("\"",
+						var0004,
+						", thou art a fine customer!\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"Many thanks, ",
+						var0002,
+						"!\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"I fear that I must charge more, now that my raw materials are so limited.\"");
 				}
 			}
 			say("\"Hast thou agreed to a price of ",
@@ -89200,43 +89178,41 @@ var Func082B 0x82B (var var0000, var var0001) {
 				if (var000F == 0x0003) {
 					say("\"I will accept\tthine offer. But I shall deny it to my dying day... I have a reputation to uphold, thou knowest.\"");
 				}
+			} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var000F == 0x0001) {
+					say("\"Times are strange, ",
+						var0004,
+						". But thou hast the spell, and I have a bit more gold.\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"Thou dost bargain well, ",
+						var0004,
+						". I will accept this price.\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"I hope thou dost realize that thou art getting a bargain with this price.\"");
+				}
+			} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var000F == 0x0001) {
+					say("\"Only ",
+						var0002,
+						"??! All right, all right... I will accept this price.\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"A decent price.\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"How else shall I make money, eh? I will accept this price.\"");
+				}
 			} else {
-				if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var000F == 0x0001) {
-						say("\"Times are strange, ",
-							var0004,
-							". But thou hast the spell, and I have a bit more gold.\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"Thou dost bargain well, ",
-							var0004,
-							". I will accept this price.\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"I hope thou dost realize that thou art getting a bargain with this price.\"");
-					}
-				} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-					if (var000F == 0x0001) {
-						say("\"Only ",
-							var0002,
-							"??! All right, all right... I will accept this price.\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"A decent price.\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"How else shall I make money, eh? I will accept this price.\"");
-					}
-				} else {
-					if (var000F == 0x0001) {
-						say("\"I accept thine offer!\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"I accept thine offer. Thou hast a fine eye for a bargain!\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"Yes, a good price that is!\"");
-					}
+				if (var000F == 0x0001) {
+					say("\"I accept thine offer!\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"I accept thine offer. Thou hast a fine eye for a bargain!\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"Yes, a good price that is!\"");
 				}
 			}
 			say("\"So, dost thou agree to a price of ",
@@ -89631,39 +89607,37 @@ var Func082E 0x82E (var var0000, var var0001) {
 				if (var000E == 0x0003) {
 					say("\"I must be a fool for doing this, but I will accept thine offer. Please, do not tell anyone about this...\"");
 				}
+			} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var000E == 0x0001) {
+					say("\"One must have money to drink, eh? I will accept this price.\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"Thou dost bargain well, hero. I will accept this price.\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"Ummph. Thou art getting a good bargain with this price.\"");
+				}
+			} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var000E == 0x0001) {
+					say("\"Only ",
+						var0002,
+						"??! All right, all right... I will accept this price.\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"A decent price.\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"One must make a living, must one not? I will accept this price.\"");
+				}
 			} else {
-				if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var000E == 0x0001) {
-						say("\"One must have money to drink, eh? I will accept this price.\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"Thou dost bargain well, hero. I will accept this price.\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"Ummph. Thou art getting a good bargain with this price.\"");
-					}
-				} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-					if (var000E == 0x0001) {
-						say("\"Only ",
-							var0002,
-							"??! All right, all right... I will accept this price.\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"A decent price.\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"One must make a living, must one not? I will accept this price.\"");
-					}
-				} else {
-					if (var000E == 0x0001) {
-						say("\"I accept thine offer!\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"I accept thine offer. And did I say how much of a pleasure it is doing business with thee?\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"Yes, a good price that is!\"");
-					}
+				if (var000E == 0x0001) {
+					say("\"I accept thine offer!\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"I accept thine offer. And did I say how much of a pleasure it is doing business with thee?\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"Yes, a good price that is!\"");
 				}
 			}
 			say("\"So, have we agreed on the price of ",
@@ -90505,47 +90479,45 @@ var Func0838 0x838 (var var0000, var var0001) {
 				if (var0010 == 0x0003) {
 					say("\"I must be losing my mind to agree to such a price!\"");
 				}
+			} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var0010 == 0x0001) {
+					say("\"Thou canst see that my prices are fair...\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"",
+						var0003,
+						", thou hast charmed me, I am certain! I would never offer prices this low!\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"Who would have thought I would lose my mind so young! To accept such a price...\"");
+				}
+			} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var0010 == 0x0001) {
+					say("\"A good deal, if I do say so myself.\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"Thou art a worthy customer, ",
+						var0002,
+						".\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"'Tis a pleasure doing business with thee, ",
+						var0002,
+						".\"");
+				}
 			} else {
-				if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var0010 == 0x0001) {
-						say("\"Thou canst see that my prices are fair...\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"",
-							var0003,
-							", thou hast charmed me, I am certain! I would never offer prices this low!\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"Who would have thought I would lose my mind so young! To accept such a price...\"");
-					}
-				} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-					if (var0010 == 0x0001) {
-						say("\"A good deal, if I do say so myself.\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"Thou art a worthy customer, ",
-							var0002,
-							".\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"'Tis a pleasure doing business with thee, ",
-							var0002,
-							".\"");
-					}
-				} else {
-					if (var0010 == 0x0001) {
-						say("\"Thou hast made me a happy woman, ",
-							var0002,
-							"!\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"I appreciate thy business, ",
-							var0002,
-							".");
-					}
-					if (var0010 == 0x0003) {
-						say("\"I hate charging such prices, but times are hard...\"");
-					}
+				if (var0010 == 0x0001) {
+					say("\"Thou hast made me a happy woman, ",
+						var0002,
+						"!\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"I appreciate thy business, ",
+						var0002,
+						".");
+				}
+				if (var0010 == 0x0003) {
+					say("\"I hate charging such prices, but times are hard...\"");
 				}
 			}
 			say("\"Wilt thou agree to a price of ",
@@ -91143,43 +91115,41 @@ var Func083F 0x83F (var var0000, var var0001) {
 				if (var000F == 0x0003) {
 					say("\"Out-bargained by a stranger! What be next, a goblin?\"");
 				}
+			} else if (var0003 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var000F == 0x0001) {
+					say("\"Fairest prices thou wilt find hereabouts...\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"I must be going slack-witted, ta offer thee a price like this!\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"Art thou sure thou art not a wizard... Ta talk me into a price such as this?\"");
+				}
+			} else if (var0003 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var000F == 0x0001) {
+					say("\"Not bad... Not bad at all.\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"If this is the best I can get, I had best take it.\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"Remember me, if thou dost need anythin' more, ",
+						var0002,
+						".\"");
+				}
 			} else {
-				if (var0003 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var000F == 0x0001) {
-						say("\"Fairest prices thou wilt find hereabouts...\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"I must be going slack-witted, ta offer thee a price like this!\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"Art thou sure thou art not a wizard... Ta talk me into a price such as this?\"");
-					}
-				} else if (var0003 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-					if (var000F == 0x0001) {
-						say("\"Not bad... Not bad at all.\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"If this is the best I can get, I had best take it.\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"Remember me, if thou dost need anythin' more, ",
-							var0002,
-							".\"");
-					}
-				} else {
-					if (var000F == 0x0001) {
-						say("\"Not a bad piece of business, ",
-							var0002,
-							".\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"Thou art tough... like an ol' sailor!\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"I wish things were better, ",
-							var0002,
-							". Thou wouldst find me prices fairer, ta be sure.\"");
-					}
+				if (var000F == 0x0001) {
+					say("\"Not a bad piece of business, ",
+						var0002,
+						".\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"Thou art tough... like an ol' sailor!\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"I wish things were better, ",
+						var0002,
+						". Thou wouldst find me prices fairer, ta be sure.\"");
 				}
 			}
 			say("\"Dost thou agree ta a price of ",
@@ -91498,45 +91468,43 @@ var Func0841 0x841 (var var0000, var var0001) {
 				if (var0010 == 0x0003) {
 					say("\"Thou art certainly a fast talker. I will have to watch thee carefully...\"");
 				}
+			} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var0010 == 0x0001) {
+					say("\"A good price for such fine wine, eh?\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"I am feeling generous today... Thou art lucky!\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"I shall have to count my fingers after thou dost leave. Thou art a slick bargainer, indeed!\"");
+				}
+			} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var0010 == 0x0001) {
+					say("\"Good price. Good wine.\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"I shall have no profit today, it seems.\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"Tell everyone thou dost meet about our wine, ",
+						var0002,
+						"... and about our fair prices!\"");
+				}
 			} else {
-				if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var0010 == 0x0001) {
-						say("\"A good price for such fine wine, eh?\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"I am feeling generous today... Thou art lucky!\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"I shall have to count my fingers after thou dost leave. Thou art a slick bargainer, indeed!\"");
-					}
-				} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-					if (var0010 == 0x0001) {
-						say("\"Good price. Good wine.\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"I shall have no profit today, it seems.\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"Tell everyone thou dost meet about our wine, ",
-							var0002,
-							"... and about our fair prices!\"");
-					}
-				} else {
-					if (var0010 == 0x0001) {
-						say("\"A well-made bargain, ",
-							var0002,
-							".\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"Enjoy thy stay here in Moonshade, ",
-							var0002,
-							". I am certain that I shall not have any trouble from thee.\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"Our wine is in great demand during these hard times, ",
-							var0002,
-							". So our prices are higher than they once were.\"");
-					}
+				if (var0010 == 0x0001) {
+					say("\"A well-made bargain, ",
+						var0002,
+						".\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"Enjoy thy stay here in Moonshade, ",
+						var0002,
+						". I am certain that I shall not have any trouble from thee.\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"Our wine is in great demand during these hard times, ",
+						var0002,
+						". So our prices are higher than they once were.\"");
 				}
 			}
 			say("\"Wilt thou agree to ",
@@ -92360,55 +92328,53 @@ var Func0844 0x844 (var var0000, var var0001) {
 						var0002,
 						".\"");
 				}
+			} else if (var0005 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var0011 == 0x0001) {
+					say("\"Thou art lucky I am in such a good mood today, ",
+						var0002,
+						"! 'Tis not often I lower my prices such...\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"",
+						var0004,
+						", thou art a scoundrel! I would be penniless very soon if I bargained such a price more than a few times!\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"'Tis not often I practically give my goods away! Thou art a skilled trader, ",
+						var0002,
+						"!\"");
+				}
+			} else if (var0005 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var0011 == 0x0001) {
+					say("\"My prices are just, ",
+						var0002,
+						".  Thou shouldst travel to Fawn if thou dost believe mine steep.\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"'Tis a pleasure to trade with thee, ",
+						var0002,
+						".\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"",
+						var0004,
+						", I shall remember thee!  Please come to my shop whenever thou art in Monitor!\"");
+				}
 			} else {
-				if (var0005 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var0011 == 0x0001) {
-						say("\"Thou art lucky I am in such a good mood today, ",
-							var0002,
-							"! 'Tis not often I lower my prices such...\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"",
-							var0004,
-							", thou art a scoundrel! I would be penniless very soon if I bargained such a price more than a few times!\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"'Tis not often I practically give my goods away! Thou art a skilled trader, ",
-							var0002,
-							"!\"");
-					}
-				} else if (var0005 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-					if (var0011 == 0x0001) {
-						say("\"My prices are just, ",
-							var0002,
-							".  Thou shouldst travel to Fawn if thou dost believe mine steep.\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"'Tis a pleasure to trade with thee, ",
-							var0002,
-							".\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"",
-							var0004,
-							", I shall remember thee!  Please come to my shop whenever thou art in Monitor!\"");
-					}
-				} else {
-					if (var0011 == 0x0001) {
-						say("\"",
-							var0004,
-							", thou hast my gratitude!\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"A blessing upon thee, ",
-							var0002,
-							"!\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"My prices are steep, ",
-							var0002,
-							", for supplies are very scarce due to the Goblin raids.\"");
-					}
+				if (var0011 == 0x0001) {
+					say("\"",
+						var0004,
+						", thou hast my gratitude!\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"A blessing upon thee, ",
+						var0002,
+						"!\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"My prices are steep, ",
+						var0002,
+						", for supplies are very scarce due to the Goblin raids.\"");
 				}
 			}
 			say("\"Thou hast agreed to a price of ",
@@ -92965,99 +92931,97 @@ var Func0847 0x847 (var var0000, var var0001) {
 						say("\"Ah, my sweet... Thou hast a very quick wit to bargain me so low. Are other parts of thee as well-equipped as thy tongue?\"");
 					}
 				}
-			} else {
-				if (var0006 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var0003) {
-						if (var0012 == 0x0001) {
-							say("\"A low price, but thou hast bargained well, dost thou not think?\"");
-						}
-						if (var0012 == 0x0002) {
-							say("\"",
-								var0004,
-								", thou hast bargained fairly, but this is a very low price.\"");
-						}
-						if (var0012 == 0x0003) {
-							say("\"A bit lower than I had hoped, ",
-								var0002,
-								", but 'twill do.\"");
-						}
-					} else {
-						if (var0012 == 0x0001) {
-							say("\"",
-								var0004,
-								", thou art getting a very good value for thy monetari, even if thy clever tongue did lower my price...\"");
-						}
-						if (var0012 == 0x0002) {
-							say("\"'Tis not often a man gets the better of me! Thou shouldst enjoy thyself, ",
-								var0002,
-								", taking advantage of a poor girl so...\"");
-						}
-						if (var0012 == 0x0003) {
-							say("\"Oooh...\"");
-							say("\"Thou didst certainly haggle a good price from me! Thou art naughty...\"");
-						}
-					}
-				} else if (var0006 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-					if (var0003) {
-						if (var0012 == 0x0001) {
-							say("\"A fair enough price, ",
-								var0002,
-								".\"");
-						}
-						if (var0012 == 0x0002) {
-							say("\"It hath a been pleasure to trade with thee, ",
-								var0002,
-								".\"");
-						}
-						if (var0012 == 0x0003) {
-							say("\"Thou hast made a good bargain, ",
-								var0002,
-								".\"");
-						}
-					} else {
-						if (var0012 == 0x0001) {
-							say("\"Oooh...\"");
-							say("\"Thou hast given me goose bumps, ",
-								var0002,
-								". Perhaps thou wilt spend more?\"");
-						}
-						if (var0012 == 0x0002) {
-							say("\"It hath been a pleasure trading with thee! Most men would try to take advantage of my sweet nature and lower my price even further!\"");
-						}
-						if (var0012 == 0x0003) {
-							say("\"Ah, my sweet, thou dost know how to make a girl feel well-liked!\"");
-						}
-					}
-				} else if (var0003) {
+			} else if (var0006 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var0003) {
 					if (var0012 == 0x0001) {
-						say("\"",
-							var0004,
-							", thou mayest buy from me anytime!\"");
+						say("\"A low price, but thou hast bargained well, dost thou not think?\"");
 					}
 					if (var0012 == 0x0002) {
-						say("\"Thou art most generous to offer such a price, ",
-							var0002,
-							"!\"");
+						say("\"",
+							var0004,
+							", thou hast bargained fairly, but this is a very low price.\"");
 					}
 					if (var0012 == 0x0003) {
-						say("\"Enjoy thy stay in Monitor, ",
+						say("\"A bit lower than I had hoped, ",
 							var0002,
-							". Thou art most welcome at The Slashing Blade!\"");
+							", but 'twill do.\"");
 					}
 				} else {
 					if (var0012 == 0x0001) {
 						say("\"",
 							var0004,
-							", thou hast made me cry! 'Tis most generous of thee!\"");
+							", thou art getting a very good value for thy monetari, even if thy clever tongue did lower my price...\"");
 					}
 					if (var0012 == 0x0002) {
-						say("\"Dost thou give all of thy money to other girls too, ",
+						say("\"'Tis not often a man gets the better of me! Thou shouldst enjoy thyself, ",
 							var0002,
-							", or only to me?\"");
+							", taking advantage of a poor girl so...\"");
 					}
 					if (var0012 == 0x0003) {
-						say("\"'Tis sweet of thee to agree to this price, love...\"");
+						say("\"Oooh...\"");
+						say("\"Thou didst certainly haggle a good price from me! Thou art naughty...\"");
 					}
+				}
+			} else if (var0006 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var0003) {
+					if (var0012 == 0x0001) {
+						say("\"A fair enough price, ",
+							var0002,
+							".\"");
+					}
+					if (var0012 == 0x0002) {
+						say("\"It hath a been pleasure to trade with thee, ",
+							var0002,
+							".\"");
+					}
+					if (var0012 == 0x0003) {
+						say("\"Thou hast made a good bargain, ",
+							var0002,
+							".\"");
+					}
+				} else {
+					if (var0012 == 0x0001) {
+						say("\"Oooh...\"");
+						say("\"Thou hast given me goose bumps, ",
+							var0002,
+							". Perhaps thou wilt spend more?\"");
+					}
+					if (var0012 == 0x0002) {
+						say("\"It hath been a pleasure trading with thee! Most men would try to take advantage of my sweet nature and lower my price even further!\"");
+					}
+					if (var0012 == 0x0003) {
+						say("\"Ah, my sweet, thou dost know how to make a girl feel well-liked!\"");
+					}
+				}
+			} else if (var0003) {
+				if (var0012 == 0x0001) {
+					say("\"",
+						var0004,
+						", thou mayest buy from me anytime!\"");
+				}
+				if (var0012 == 0x0002) {
+					say("\"Thou art most generous to offer such a price, ",
+						var0002,
+						"!\"");
+				}
+				if (var0012 == 0x0003) {
+					say("\"Enjoy thy stay in Monitor, ",
+						var0002,
+						". Thou art most welcome at The Slashing Blade!\"");
+				}
+			} else {
+				if (var0012 == 0x0001) {
+					say("\"",
+						var0004,
+						", thou hast made me cry! 'Tis most generous of thee!\"");
+				}
+				if (var0012 == 0x0002) {
+					say("\"Dost thou give all of thy money to other girls too, ",
+						var0002,
+						", or only to me?\"");
+				}
+				if (var0012 == 0x0003) {
+					say("\"'Tis sweet of thee to agree to this price, love...\"");
 				}
 			}
 			if (var0003) {
@@ -93556,37 +93520,35 @@ var Func084C 0x84C (var var0000, var var0001) {
 				if (var000E == 0x0003) {
 					say("\"'Tis truly amazing... thou hast a facile tongue to make me lower my price by so much.\"");
 				}
+			} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var000E == 0x0001) {
+					say("\"'Tis lower than I expected... but I shall agree to this price.\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"Thou art very good at bargaining. I will accept this price.\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"I see.\" *\"Very well, I will agree to this price even though 'tis lower than I did wish.\"");
+				}
+			} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var000E == 0x0001) {
+					say("\"Hmm...\" ~\"I suppose one must accept such a price -- though it could have been higher.\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"'Tis not such an indecent offer.\" ~\"I accept.\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"I will accept\tthis price.\" ~\"I can always use the extra funds for research.\"");
+				}
 			} else {
-				if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var000E == 0x0001) {
-						say("\"'Tis lower than I expected... but I shall agree to this price.\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"Thou art very good at bargaining. I will accept this price.\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"I see.\" *\"Very well, I will agree to this price even though 'tis lower than I did wish.\"");
-					}
-				} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-					if (var000E == 0x0001) {
-						say("\"Hmm...\" ~\"I suppose one must accept such a price -- though it could have been higher.\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"'Tis not such an indecent offer.\" ~\"I accept.\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"I will accept\tthis price.\" ~\"I can always use the extra funds for research.\"");
-					}
-				} else {
-					if (var000E == 0x0001) {
-						say("\"Very well.\" *\"I accept thine offer!\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"It hath been a pleasure!\" *\"I will accept thine offer.\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"Yes...\"*\"'Tis a very good price.\"");
-					}
+				if (var000E == 0x0001) {
+					say("\"Very well.\" *\"I accept thine offer!\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"It hath been a pleasure!\" *\"I will accept thine offer.\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"Yes...\"*\"'Tis a very good price.\"");
 				}
 			}
 			say("\"So, have we agreed on the price of ",
@@ -94219,39 +94181,37 @@ var Func0850 0x850 (var var0000, var var0001) {
 				if (var000D == 0x0003) {
 					say("\"I must be spending too much time speaking with the dead. I cannot believe that I am agreeing to this!\"");
 				}
+			} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var000D == 0x0001) {
+					say("\"I have little enough business these days. I shall have to accept.\"");
+				}
+				if (var000D == 0x0002) {
+					say("\"Thou hast a talent for bargaining. I will accept this price.\"");
+				}
+				if (var000D == 0x0003) {
+					say("\"I should retire from magery. I am losing mine edge.\"");
+				}
+			} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var000D == 0x0001) {
+					say("\"Only ",
+						var0002,
+						"??! I suppose it is the best I can hope for.\"");
+				}
+				if (var000D == 0x0002) {
+					say("\"A modest amount. Not bad...\"");
+				}
+				if (var000D == 0x0003) {
+					say("\"There is simply no profit in selling spells...\"");
+				}
 			} else {
-				if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var000D == 0x0001) {
-						say("\"I have little enough business these days. I shall have to accept.\"");
-					}
-					if (var000D == 0x0002) {
-						say("\"Thou hast a talent for bargaining. I will accept this price.\"");
-					}
-					if (var000D == 0x0003) {
-						say("\"I should retire from magery. I am losing mine edge.\"");
-					}
-				} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-					if (var000D == 0x0001) {
-						say("\"Only ",
-							var0002,
-							"??! I suppose it is the best I can hope for.\"");
-					}
-					if (var000D == 0x0002) {
-						say("\"A modest amount. Not bad...\"");
-					}
-					if (var000D == 0x0003) {
-						say("\"There is simply no profit in selling spells...\"");
-					}
-				} else {
-					if (var000D == 0x0001) {
-						say("\"I accept thine offer!\"");
-					}
-					if (var000D == 0x0002) {
-						say("\"It is a pleasure doing business with thee!\"");
-					}
-					if (var000D == 0x0003) {
-						say("\"Thou art most generous! I accept.\"");
-					}
+				if (var000D == 0x0001) {
+					say("\"I accept thine offer!\"");
+				}
+				if (var000D == 0x0002) {
+					say("\"It is a pleasure doing business with thee!\"");
+				}
+				if (var000D == 0x0003) {
+					say("\"Thou art most generous! I accept.\"");
 				}
 			}
 			say("\"So, have we agreed on the price of ",
@@ -94730,39 +94690,37 @@ var Func0854 0x854 (var var0000, var var0001) {
 				if (var000F == 0x0003) {
 					say("\"Rocco would never have been out-bargained so!\"");
 				}
+			} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var000F == 0x0001) {
+					say("\"The Blue Boar doth have the finest prices, eh?\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"Today hath gone well, so I will be generous. On another day thou mayest not be so lucky!\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"Perhaps it is a human trait... To bargain so well.\"");
+				}
+			} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var000F == 0x0001) {
+					say("\"Even Rocco would consider this a fair deal...\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"We shall not profit this way...\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"Good service and fair prices is what hath made the Blue Boar famous!\"");
+				}
 			} else {
-				if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var000F == 0x0001) {
-						say("\"The Blue Boar doth have the finest prices, eh?\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"Today hath gone well, so I will be generous. On another day thou mayest not be so lucky!\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"Perhaps it is a human trait... To bargain so well.\"");
-					}
-				} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-					if (var000F == 0x0001) {
-						say("\"Even Rocco would consider this a fair deal...\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"We shall not profit this way...\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"Good service and fair prices is what hath made the Blue Boar famous!\"");
-					}
-				} else {
-					if (var000F == 0x0001) {
-						say("\"I am pleased, ",
-							var0002,
-							".\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"Thou art a fine person!\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"If times were not so bad, our prices would be far lower...\"");
-					}
+				if (var000F == 0x0001) {
+					say("\"I am pleased, ",
+						var0002,
+						".\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"Thou art a fine person!\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"If times were not so bad, our prices would be far lower...\"");
 				}
 			}
 			say("\"Dost thou agree to ",
@@ -95510,47 +95468,45 @@ var Func085B 0x85B (var var0000, var var0001) {
 				if (var000F == 0x0003) {
 					say("\"Would that I had more stock, that I might make a better deal!\"");
 				}
+			} else if (var0003 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var000F == 0x0001) {
+					say("\"I offer only the finest merchandise at the fairest prices!\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"It would do me better to tell everyone that thou hadst stolen this from me!\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"I could almost suspect thee of charming me...\"");
+				}
+			} else if (var0003 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var000F == 0x0001) {
+					say("\"I think we have both made a good deal, ",
+						var0002,
+						".\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"Trading with thee is most challenging, ",
+						var0002,
+						".\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"There are not many others who sell such things, ",
+						var0002,
+						".\"");
+				}
 			} else {
-				if (var0003 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var000F == 0x0001) {
-						say("\"I offer only the finest merchandise at the fairest prices!\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"It would do me better to tell everyone that thou hadst stolen this from me!\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"I could almost suspect thee of charming me...\"");
-					}
-				} else if (var0003 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-					if (var000F == 0x0001) {
-						say("\"I think we have both made a good deal, ",
-							var0002,
-							".\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"Trading with thee is most challenging, ",
-							var0002,
-							".\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"There are not many others who sell such things, ",
-							var0002,
-							".\"");
-					}
-				} else {
-					if (var000F == 0x0001) {
-						say("\"Thou art a fine customer... Return any time!\"");
-					}
-					if (var000F == 0x0002) {
-						say("\"May fortune favor thee, ",
-							var0002,
-							"!\"");
-					}
-					if (var000F == 0x0003) {
-						say("\"If I had more stock, ",
-							var0002,
-							", I could offer thee a better price. \"");
-					}
+				if (var000F == 0x0001) {
+					say("\"Thou art a fine customer... Return any time!\"");
+				}
+				if (var000F == 0x0002) {
+					say("\"May fortune favor thee, ",
+						var0002,
+						"!\"");
+				}
+				if (var000F == 0x0003) {
+					say("\"If I had more stock, ",
+						var0002,
+						", I could offer thee a better price. \"");
 				}
 			}
 			say("\"Wilt thou agree on a price of ",
@@ -96074,53 +96030,51 @@ var Func0860 0x860 (var var0000, var var0001) {
 						say("\"Isn't that the truth...\"");
 					}
 				}
+			} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var0010 == 0x0001) {
+					say("\"Our prices are fair here at the Blue Boar, eh?\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"Yesterday, thou wouldst not have found me in such a generous mood as this. I should starve, if I sold goods at this price every day!\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"Thou hast a bargaining tongue, my friend. It reminds me of when I was thine age...\"");
+					if (var0003) {
+						var0011 = "lass";
+					} else {
+						var0011 = "lad";
+					}
+					say("\"Hast thou ever considered a change of employment? I'll be retiring someday, and perhaps a young ",
+						var0011,
+						" such as thyself might be interested in running an inn...\"");
+					if (var0003) {
+						var0012 = "her";
+					} else {
+						var0012 = "his";
+					}
+					var0013 = Func0992(0x0001, (("@I think not, innkeeper. The Avatar is not one to let grass grow under " + var0012) + " feet.@"), 0x0000, false);
+				}
+			} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var0010 == 0x0001) {
+					say("\"Most fair, if I do say so myself.\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"I shall not become a rich man from customers like thee...\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"And let me remind thee that we give service with a smile around here. 'Tis why the Blue Boar Inn is famous throughout these parts.\"");
+				}
 			} else {
-				if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var0010 == 0x0001) {
-						say("\"Our prices are fair here at the Blue Boar, eh?\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"Yesterday, thou wouldst not have found me in such a generous mood as this. I should starve, if I sold goods at this price every day!\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"Thou hast a bargaining tongue, my friend. It reminds me of when I was thine age...\"");
-						if (var0003) {
-							var0011 = "lass";
-						} else {
-							var0011 = "lad";
-						}
-						say("\"Hast thou ever considered a change of employment? I'll be retiring someday, and perhaps a young ",
-							var0011,
-							" such as thyself might be interested in running an inn...\"");
-						if (var0003) {
-							var0012 = "her";
-						} else {
-							var0012 = "his";
-						}
-						var0013 = Func0992(0x0001, (("@I think not, innkeeper. The Avatar is not one to let grass grow under " + var0012) + " feet.@"), 0x0000, false);
-					}
-				} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-					if (var0010 == 0x0001) {
-						say("\"Most fair, if I do say so myself.\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"I shall not become a rich man from customers like thee...\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"And let me remind thee that we give service with a smile around here. 'Tis why the Blue Boar Inn is famous throughout these parts.\"");
-					}
-				} else {
-					if (var0010 == 0x0001) {
-						say("\"Thou hast made me a happy man, ",
-							var0002,
-							".\"");
-					}
-					if (var0010 == 0x0002) {
-						say("\"Thou art a blessing to this inn, thee and thy companions!\"");
-					}
-					if (var0010 == 0x0003) {
-						say("\"In times like these, I must charge high prices or close...\"");
-					}
+				if (var0010 == 0x0001) {
+					say("\"Thou hast made me a happy man, ",
+						var0002,
+						".\"");
+				}
+				if (var0010 == 0x0002) {
+					say("\"Thou art a blessing to this inn, thee and thy companions!\"");
+				}
+				if (var0010 == 0x0003) {
+					say("\"In times like these, I must charge high prices or close...\"");
 				}
 			}
 			say("\"We have agreed on a price of ",
@@ -97845,55 +97799,53 @@ var Func0869 0x869 (var var0000, var var0001) {
 						var0002,
 						".\"");
 				}
+			} else if (var0006 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var0012 == 0x0001) {
+					say("\"Thou shouldst be glad that I like thee, ",
+						var0002,
+						"! 'Tis not often I lower my prices...\"");
+				}
+				if (var0012 == 0x0002) {
+					say("\"",
+						var0005,
+						", I hope thou dost leave town soon! If thou stayest much longer I will be penniless!\"");
+				}
+				if (var0012 == 0x0003) {
+					say("\"I hope thou art as fine a warrior as thou art as a trader, ",
+						var0002,
+						"! Thou wilt do my products honor.\"");
+				}
+			} else if (var0006 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var0012 == 0x0001) {
+					say("\"Thou art paying for quality work, ",
+						var0002,
+						". If thou dost not agree, then thou shouldst leave.\"");
+				}
+				if (var0012 == 0x0002) {
+					say("\"'Tis not often I have such a challenge in bargaining, ",
+						var0002,
+						". Please come again!\"");
+				}
+				if (var0012 == 0x0003) {
+					say("\"",
+						var0005,
+						", remember that we take great pride in our work!\"");
+				}
 			} else {
-				if (var0006 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var0012 == 0x0001) {
-						say("\"Thou shouldst be glad that I like thee, ",
-							var0002,
-							"! 'Tis not often I lower my prices...\"");
-					}
-					if (var0012 == 0x0002) {
-						say("\"",
-							var0005,
-							", I hope thou dost leave town soon! If thou stayest much longer I will be penniless!\"");
-					}
-					if (var0012 == 0x0003) {
-						say("\"I hope thou art as fine a warrior as thou art as a trader, ",
-							var0002,
-							"! Thou wilt do my products honor.\"");
-					}
-				} else if (var0006 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-					if (var0012 == 0x0001) {
-						say("\"Thou art paying for quality work, ",
-							var0002,
-							". If thou dost not agree, then thou shouldst leave.\"");
-					}
-					if (var0012 == 0x0002) {
-						say("\"'Tis not often I have such a challenge in bargaining, ",
-							var0002,
-							". Please come again!\"");
-					}
-					if (var0012 == 0x0003) {
-						say("\"",
-							var0005,
-							", remember that we take great pride in our work!\"");
-					}
-				} else {
-					if (var0012 == 0x0001) {
-						say("\"Many thanks, ",
-							var0005,
-							"!\"");
-					}
-					if (var0012 == 0x0002) {
-						say("\"May it serve thee well, ",
-							var0002,
-							"!\"");
-					}
-					if (var0012 == 0x0003) {
-						say("\"I fear the Goblin raids have raised my prices, ",
-							var0002,
-							". It takes time to produce quality goods, and demand hath been great.\"");
-					}
+				if (var0012 == 0x0001) {
+					say("\"Many thanks, ",
+						var0005,
+						"!\"");
+				}
+				if (var0012 == 0x0002) {
+					say("\"May it serve thee well, ",
+						var0002,
+						"!\"");
+				}
+				if (var0012 == 0x0003) {
+					say("\"I fear the Goblin raids have raised my prices, ",
+						var0002,
+						". It takes time to produce quality goods, and demand hath been great.\"");
 				}
 			}
 			say("\"Thou hast agreed to a price of ",
@@ -98584,55 +98536,53 @@ var Func0870 0x870 (var var0000, var var0001) {
 						var0002,
 						".\"");
 				}
+			} else if (var0005 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var0011 == 0x0001) {
+					say("\"Thou art lucky I am in such a good mood today, ",
+						var0002,
+						"! 'Tis not often I lower my prices such...\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"",
+						var0004,
+						", thou art a scoundrel! I would be penniless very soon if I bargained such a price more than a few times!\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"'Tis not often I practically give my goods away! Thou art a skilled trader, ",
+						var0002,
+						"!\"");
+				}
+			} else if (var0005 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var0011 == 0x0001) {
+					say("\"My prices are just, ",
+						var0002,
+						". Thou shouldst travel to Fawn if thou dost believe mine steep.\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"'Tis a pleasure to trade with thee, ",
+						var0002,
+						".\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"",
+						var0004,
+						", I shall remember thee! Please come to my shop whenever thou art in Monitor!\"");
+				}
 			} else {
-				if (var0005 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var0011 == 0x0001) {
-						say("\"Thou art lucky I am in such a good mood today, ",
-							var0002,
-							"! 'Tis not often I lower my prices such...\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"",
-							var0004,
-							", thou art a scoundrel! I would be penniless very soon if I bargained such a price more than a few times!\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"'Tis not often I practically give my goods away! Thou art a skilled trader, ",
-							var0002,
-							"!\"");
-					}
-				} else if (var0005 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-					if (var0011 == 0x0001) {
-						say("\"My prices are just, ",
-							var0002,
-							". Thou shouldst travel to Fawn if thou dost believe mine steep.\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"'Tis a pleasure to trade with thee, ",
-							var0002,
-							".\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"",
-							var0004,
-							", I shall remember thee! Please come to my shop whenever thou art in Monitor!\"");
-					}
-				} else {
-					if (var0011 == 0x0001) {
-						say("\"",
-							var0004,
-							", thou hast my gratitude!\"");
-					}
-					if (var0011 == 0x0002) {
-						say("\"A blessing upon thee, ",
-							var0002,
-							"!\"");
-					}
-					if (var0011 == 0x0003) {
-						say("\"My prices are steep, ",
-							var0002,
-							", for supplies are very scarce due to the Goblin raids.\"");
-					}
+				if (var0011 == 0x0001) {
+					say("\"",
+						var0004,
+						", thou hast my gratitude!\"");
+				}
+				if (var0011 == 0x0002) {
+					say("\"A blessing upon thee, ",
+						var0002,
+						"!\"");
+				}
+				if (var0011 == 0x0003) {
+					say("\"My prices are steep, ",
+						var0002,
+						", for supplies are very scarce due to the Goblin raids.\"");
 				}
 			}
 			say("\"Thou hast agreed to a price of ",
@@ -98958,39 +98908,37 @@ var Func0872 0x872 (var var0000, var var0001) {
 				if (var000E == 0x0003) {
 					say("\"If thou dost tell anyone that I accepted such an offer, I will say that thou art a liar.\"");
 				}
+			} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
+				if (var000E == 0x0001) {
+					say("\"I have not had much business of late. I will accept thine offer.\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"Thou dost bargain well. I will accept this price.\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"I hope thou dost know that thou art getting a good bargain at this price.\"");
+				}
+			} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
+				if (var000E == 0x0001) {
+					say("\"Only ",
+						var0002,
+						"??! I may as well give this away...\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"Not bad...\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"Thou canst not fault me for trying to make a profit. I will accept this price.\"");
+				}
 			} else {
-				if (var0002 < (var0001 + ((var0000 - var0001) / 0x0003))) {
-					if (var000E == 0x0001) {
-						say("\"I have not had much business of late. I will accept thine offer.\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"Thou dost bargain well. I will accept this price.\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"I hope thou dost know that thou art getting a good bargain at this price.\"");
-					}
-				} else if (var0002 < (var0001 + ((var0000 - var0001) / 0x0002))) {
-					if (var000E == 0x0001) {
-						say("\"Only ",
-							var0002,
-							"??! I may as well give this away...\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"Not bad...\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"Thou canst not fault me for trying to make a profit. I will accept this price.\"");
-					}
-				} else {
-					if (var000E == 0x0001) {
-						say("\"I accept thine offer!\"");
-					}
-					if (var000E == 0x0002) {
-						say("\"Thou art a fine customer. Please stop by any time.\"");
-					}
-					if (var000E == 0x0003) {
-						say("\"'Tis a fine price by me!\"");
-					}
+				if (var000E == 0x0001) {
+					say("\"I accept thine offer!\"");
+				}
+				if (var000E == 0x0002) {
+					say("\"Thou art a fine customer. Please stop by any time.\"");
+				}
+				if (var000E == 0x0003) {
+					say("\"'Tis a fine price by me!\"");
 				}
 			}
 			say("\"So, dost thou agree to a price of ",
