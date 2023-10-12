@@ -163,7 +163,7 @@ enum schedules {
 	TALK			= 3,	// NPC runs to the Avatar to talk to them. When
 							// they get within a certain distance of where the
 							// Avatar was when this schedule was set, a
-							// STARTED_TALKING event is triggered on the NPC.
+							// DOUBLECLICK event is triggered on the NPC.
 							// At this point the schedule must be changed.
 	DANCE			= 4,
 	EAT				= 5,
@@ -223,14 +223,16 @@ enum inv_slots_bg {
 	BG_HEAD			=  9,
 	BG_LEGS			= 10,
 	BG_FEET			= 11,
-	BG_USECODE		= 12,
-	BG_CLOAK		= 13,	// Exult-only
-	BG_GLOVES		= 14,	// Exult-only
-	BG_EARS			= 16,	// Exult-only
-	BG_BACK_SHIELD	= 17,	// Exult-only
-	BG_BACK_2H		= 19,	// Exult-only
+	BG_USECODE		= 12,	// Exult-only; ported from SI
+	BG_CLOAK		= 13,	// Exult-only; ported from SI
+	BG_GLOVES		= 14,	// Exult-only; ported from SI
+	BG_TRIPLE_BOLTS	= 15,
+	BG_EARS			= 16,	// Exult-only; ported from SI
+	BG_BACK_SHIELD	= 17,	// Exult-only; ported from SI
+	BG_BACK_2H		= 19,	// Exult-only; ported from SI
 	BG_BOTH_HANDS	= 20,
-	BG_AMULET		= 22	// Exult-only
+	BG_LRGLOVES		= 21,	// Uses both ring slots
+	BG_AMULET		= 22	// Exult-only; ported from SI
 };
 
 enum inv_slots_si {
@@ -253,7 +255,9 @@ enum inv_slots_si {
 	SI_BACKPACK		= 15,
 	SI_BACK_SHIELD	= 16,
 	SI_BACK_2H		= 17,
-	SI_BOTH_HANDS	= 20
+	SI_TRIPLE_BOLTS	= 18,	// Exult-only; ported from BG
+	SI_BOTH_HANDS	= 20,
+	SI_LRGLOVES		= 21,	// Exult-only; ported from BG ; uses both ring slots
 };
 
 enum npc_attack_modes {
