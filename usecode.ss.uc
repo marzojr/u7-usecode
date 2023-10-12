@@ -63804,7 +63804,6 @@ void Func065A object#(0x65A) () {
 					}
 					if (var000C == 0x0005) {
 						var000D = new script {
-
 							actor frame ready;
 							actor frame kneeling;
 							actor frame standing;
@@ -89885,7 +89884,6 @@ var Func0831 0x831 (var var0000, var var0001) {
 }
 
 var Func0832 0x832 (var var0000) {
-
 	if ((var0000 == 0x0000) || (var0000 == 0x0001)) {
 		return 0x0000;
 	}
@@ -93679,7 +93677,6 @@ var Func084C 0x84C (var var0000, var var0001) {
 }
 
 var Func084D 0x84D (var var0000, var var0001) {
-
 	if (var0001 == 0x0001) {
 		if (var0000 == 0xFF2A) {
 			return BAKE;
@@ -93747,7 +93744,6 @@ var Func084D 0x84D (var var0000, var var0001) {
 }
 
 var Func084E 0x84E (var var0000, var var0001) {
-
 	if (var0000 > 0x0000) {
 		var0000 = var0000->get_npc_number();
 	}
@@ -100787,7 +100783,6 @@ void Func088D 0x88D (var var0000, var var0001) {
 }
 
 var Func088E 0x88E (var var0000) {
-
 	if (var0000 < 0x0005) {
 		var0000 += 0x0002;
 		return var0000;
@@ -101265,7 +101260,6 @@ var Func089B 0x89B () {
 }
 
 var Func089C 0x89C (var var0000, var var0001) {
-
 	return ((0x0406 + var0001) + ((0x0002 - var0000) * 0x0002));
 }
 
@@ -101707,7 +101701,6 @@ void Func08AB 0x8AB () {
 }
 
 var Func08AC 0x8AC (var var0000) {
-
 	if (gflags[0x0173] == true) {
 		if (var0000) {
 			return 0xFFFF;
@@ -102591,7 +102584,6 @@ void Func08BD 0x8BD () {
 }
 
 var Func08BE 0x8BE (var var0000) {
-
 	if (var0000 == 0x0001) {
 		if (gflags[0x0243]) {
 			return false;
@@ -102866,7 +102858,6 @@ void Func08C0 0x8C0 (var var0000) {
 }
 
 var Func08C1 0x8C1 () {
-
 	if (gflags[0x0241] && (gflags[0x0240] && (gflags[0x023F] && (gflags[0x0242] && (gflags[0x023E] && (!gflags[0x024A])))))) {
 		return true;
 	}
@@ -105201,7 +105192,6 @@ void Func08F2 0x8F2 (var var0000) {
 }
 
 var Func08F3 0x8F3 () {
-
 	if ((gflags[0x00D4] && (!0xFFFE->get_item_flag(SI_ZOMBIE))) && ((gflags[0x00D3] && (!0xFFFF->get_item_flag(SI_ZOMBIE))) && (gflags[0x00D5] && (!0xFFFD->get_item_flag(SI_ZOMBIE))))) {
 		return true;
 	}
@@ -105340,7 +105330,6 @@ var Func08F7 0x8F7 () {
 }
 
 var Func08F8 0x8F8 (var var0000, var var0001, var var0002) {
-
 	if ((var0000[0x0001] > var0001[0x0001]) && ((var0000[0x0001] < var0002[0x0001]) && ((var0000[0x0002] > var0001[0x0002]) && (var0000[0x0002] < var0002[0x0002])))) {
 		return true;
 	}
@@ -105852,7 +105841,6 @@ void Func0905 0x905 (var var0000) {
 }
 
 var Func0906 0x906 (var var0000) {
-
 	return (var0000->get_item_frame() % 0x0004);
 }
 
@@ -105970,7 +105958,6 @@ var Func090B 0x90B (var var0000) {
 }
 
 var Func090C 0x90C (var var0000, var var0001) {
-
 	return var0000->find_direction(var0001);
 }
 
@@ -106209,7 +106196,6 @@ extern var Func0912 0x912 (var var0000, var var0001);
 extern var Func0911 0x911 (var var0000, var var0001, var var0002);
 
 var Func0914 0x914 (var var0000, var var0001, var var0002) {
-
 	if (var0002 == 0x030D) {
 		var0001 = Func0912(var0001, 0x0003);
 		var0000 = Func0911(var0000, var0001, 0x0003);
@@ -106656,7 +106642,6 @@ void Func0922 0x922 (var var0000) {
 extern var Func0942 0x942 (var var0000);
 
 var Func0923 0x923 () {
-
 	if (!Func0942(0xFFFD)) {
 		return false;
 	}
@@ -109718,7 +109703,6 @@ void Func0945 0x945 (var var0000) {
 extern var Func098E 0x98E ();
 
 var Func0946 0x946 () {
-
 	return Func098E()->get_npc_name();
 }
 
@@ -109854,7 +109838,6 @@ void Func0950 0x950 (var var0000) {
 }
 
 var Func0951 0x951 () {
-
 	if (UI_get_weather() == 0x0003) {
 		return false;
 	}
@@ -109862,17 +109845,14 @@ var Func0951 0x951 () {
 }
 
 var Func0952 0x952 (var var0000) {
-
 	return var0000->get_npc_object()->give_last_created();
 }
 
 var Func0953 0x953 () {
-
 	return UI_get_avatar_ref()->get_npc_name();
 }
 
 var Func0954 0x954 () {
-
 	if (UI_is_pc_female() == 0x0000) {
 		return "milord";
 	}
@@ -109880,7 +109860,6 @@ var Func0954 0x954 () {
 }
 
 var Func0955 0x955 () {
-
 	UI_push_answers();
 	converse (["Yes", "No"]) {
 		case "Yes":
@@ -109970,12 +109949,10 @@ var Func095A 0x95A () {
 }
 
 var Func095B 0x95B (var var0000) {
-
 	return var0000->get_npc_object()->get_npc_name();
 }
 
 var Func095C 0x95C (var var0000, var var0001) {
-
 	return var0000->get_npc_object()->get_npc_prop(var0001);
 }
 
@@ -110575,7 +110552,6 @@ void Func0978 0x978 (var var0000) {
 }
 
 var Func0979 0x979 (var var0000) {
-
 	return UI_direction_from(0xFE9C, var0000);
 }
 
@@ -110779,7 +110755,6 @@ var Func097D 0x97D (var var0000, var var0001, var var0002, var var0003, var var0
 }
 
 var Func097E 0x97E (var var0000) {
-
 	if (var0000 < 0x0000) {
 		var0000 *= 0xFFFF;
 	}
@@ -110844,7 +110819,6 @@ void Func0982 0x982 (var var0000, var var0001) {
 }
 
 var Func0983 0x983 (var var0000) {
-
 	if ((var0000->get_npc_prop(INTELLIGENCE) >= 10) && ((!var0000->get_item_flag(ASLEEP)) && ((!var0000->get_item_flag(PARALYZED)) && ((!var0000->get_item_flag(DEAD)) && ((var0000->get_npc_prop(HEALTH) > 0) && var0000->is_npc()))))) {
 		return true;
 	}
@@ -110854,7 +110828,6 @@ var Func0983 0x983 (var var0000) {
 extern var Func0985 0x985 (var var0000);
 
 var Func0984 0x984 (var var0000) {
-
 	var0000 = Func0985(var0000);
 	if (var0000->get_item_flag(ASLEEP) || (var0000->get_item_flag(PARALYZED) || (var0000->get_item_flag(DEAD) || (var0000->get_npc_prop(HEALTH) <= 0)))) {
 		return true;
@@ -112003,7 +111976,6 @@ void Func09A5 0x9A5 () {
 }
 
 var Func09A6 0x9A6 (var var0000) {
-
 	if (var0000->get_item_shape() in [0x01E6, 0x020A, 0x0320, 0x0321, 0x0322, 0x0323, 0x0324, 0x0333, 0x0129, 0x0196, 0x0197, 0x011B, 0x01A0, 0x02A7, 0x0190, 0x019E, 0x030A, 0x037C, 0x02FA, 0x01FB, 0x0195, 0x022B, 0x02F3]) {
 		return true;
 	}
@@ -112151,7 +112123,6 @@ extern void Func094E 0x94E (var var0000, var var0001);
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
 var Func09AE 0x9AE (var var0000) {
-
 	var0000 -= 0x0001;
 	if (var0000 < 0x0000) {
 		if (item == 0xFFCC->get_npc_object()) {
@@ -112670,7 +112641,6 @@ var Func09B9 0x9B9 (var var0000, var var0001) {
 }
 
 var Func09BA 0x9BA () {
-
 	if (gflags[0x00D3] || (gflags[0x00D4] || gflags[0x00D5])) {
 		return true;
 	}
