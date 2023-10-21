@@ -1,6 +1,12 @@
 #game "serpentisle"
 #strictbraces "true"
 
+snum skins {
+	BLACK_AVATAR = 0,
+	LATINO_AVATAR = 1,
+	BLONDE_AVATAR = 2
+};
+
 enum alignments {
 	NEUTRAL			= 0,
 	GOOD			= 1,
@@ -16156,10 +16162,10 @@ void Func033D shape#(0x33D) () {
 				UI_play_sound_effect(0x0074);
 			}
 			if (var0009 == 0x0002) {
-				if (var000B == 0x0002) {
-					0xFE9C->set_polymorph(Func089C(0x0001, 0x0000));
+				if (var000B == BLONDE_AVATAR) {
+					0xFE9C->set_polymorph(Func089C(LATINO_AVATAR, 0x0000));
 				} else {
-					0xFE9C->set_polymorph(Func089C(0x0002, 0x0000));
+					0xFE9C->set_polymorph(Func089C(BLONDE_AVATAR, 0x0000));
 				}
 				var0004 = script 0xFFE4 after 5 ticks {
 					nohalt;
@@ -16188,10 +16194,10 @@ void Func033D shape#(0x33D) () {
 				};
 			}
 			if (var0009 == 0x0006) {
-				if (var000B == 0x0002) {
-					0xFFE4->set_polymorph(Func089C(0x0000, 0x0001));
+				if (var000B == BLONDE_AVATAR) {
+					0xFFE4->set_polymorph(Func089C(BLACK_AVATAR, 0x0001));
 				} else {
-					0xFFE4->set_polymorph(Func089C(0x0002, 0x0001));
+					0xFFE4->set_polymorph(Func089C(BLONDE_AVATAR, 0x0001));
 				}
 				var0004 = script 0xFFE4 after 4 ticks {
 					nohalt;
@@ -16199,10 +16205,10 @@ void Func033D shape#(0x33D) () {
 				};
 			}
 			if (var0009 == 0x0007) {
-				if (var000B == 0x0001) {
-					0xFFE4->set_polymorph(Func089C(0x0000, 0x0001));
+				if (var000B == LATINO_AVATAR) {
+					0xFFE4->set_polymorph(Func089C(BLACK_AVATAR, 0x0001));
 				} else {
-					0xFFE4->set_polymorph(Func089C(0x0001, 0x0001));
+					0xFFE4->set_polymorph(Func089C(LATINO_AVATAR, 0x0001));
 				}
 				var0004 = script 0xFE9C after 3 ticks {
 					nohalt;
@@ -16211,10 +16217,10 @@ void Func033D shape#(0x33D) () {
 				var0007 = 0xFE9C->get_object_position();
 				var000C = UI_die_roll(0x0000, 0x0003);
 				UI_sprite_effect(0x002B, var0007[0x0001], var0007[0x0002], 0x0000, 0x0000, var000C, 0x0001);
-				if (var000B == 0x0001) {
-					0xFE9C->set_polymorph(Func089C(0x0000, 0x0000));
+				if (var000B == LATINO_AVATAR) {
+					0xFE9C->set_polymorph(Func089C(BLACK_AVATAR, 0x0000));
 				} else {
-					0xFE9C->set_polymorph(Func089C(0x0001, 0x0000));
+					0xFE9C->set_polymorph(Func089C(LATINO_AVATAR, 0x0000));
 				}
 			}
 			if (var0009 == 0x0008) {
@@ -69425,28 +69431,28 @@ void Func06D9 object#(0x6D9) () {
 					var0013->set_schedule_type(DANCE);
 				}
 				if (var0001) {
-					if (var0000 == 0x0000) {
+					if (var0000 == BLACK_AVATAR) {
 						var000E = 0x0190;
 						var000F = 0x0002;
 					}
-					if (var0000 == 0x0001) {
+					if (var0000 == LATINO_AVATAR) {
 						var000E = 0x019E;
 						var000F = 0x001F;
 					}
-					if (var0000 > 0x0001) {
+					if (var0000 > LATINO_AVATAR) {
 						var000E = 0x019E;
 						var000F = 0x001D;
 					}
 				} else {
-					if (var0000 == 0x0000) {
+					if (var0000 == BLACK_AVATAR) {
 						var000E = 0x0190;
 						var000F = 0x0001;
 					}
-					if (var0000 == 0x0001) {
+					if (var0000 == LATINO_AVATAR) {
 						var000E = 0x019E;
 						var000F = 0x001E;
 					}
-					if (var0000 > 0x0001) {
+					if (var0000 > LATINO_AVATAR) {
 						var000E = 0x019E;
 						var000F = 0x001C;
 					}
@@ -101306,7 +101312,7 @@ var Func089B 0x89B () {
 }
 
 var Func089C 0x89C (var var0000, var var0001) {
-	return ((0x0406 + var0001) + ((0x0002 - var0000) * 0x0002));
+	return ((0x0406 + var0001) + ((BLONDE_AVATAR - var0000) * 0x0002));
 }
 
 extern void Func094A 0x94A (var var0000);
@@ -112418,7 +112424,7 @@ void Func09B1 0x9B1 () {
 void Func09B2 0x9B2 () {
 	var var0000;
 
-	var0000 = 0x0406 + ((0x0002 - UI_get_skin_colour()) * 0x0002);
+	var0000 = 0x0406 + ((BLONDE_AVATAR - UI_get_skin_colour()) * 0x0002);
 	if (UI_is_pc_female()) {
 		0xFE9C->set_polymorph(var0000 + 0x0001);
 	} else {
