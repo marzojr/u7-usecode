@@ -1,6 +1,13 @@
 #game "blackgate"
 #strictbraces "true"
 
+enum alignments {
+	NEUTRAL			= 0,
+	GOOD			= 1,
+	EVIL			= 2,
+	CHAOTIC			= 3
+};
+
 enum damage_types {
 	NORMAL_DAMAGE		= 0,
 	FIRE_DAMAGE			= 1,
@@ -25441,7 +25448,7 @@ void Func0467 object#(0x467) () {
 		if (var0000) {
 			var0001 = 0xFF99->get_npc_object();
 			say("The man scowls at you. \"Thou wearest the symbol of that most foul of groups, The Fellowship. Prepare to die!\"*");
-			var0001->set_alignment(0x0002);
+			var0001->set_alignment(EVIL);
 			var0001->set_schedule_type(IN_COMBAT);
 			abort;
 		}
@@ -27752,7 +27759,7 @@ void Func0477 object#(0x477) () {
 			case "demonstration":
 				if (gflags[0x016C]) {
 					say("\"Very well. Let us begin!\"*");
-					var0003->set_alignment(0x0002);
+					var0003->set_alignment(EVIL);
 					var0003->set_schedule_type(IN_COMBAT);
 					abort;
 				}
@@ -27795,7 +27802,7 @@ void Func0477 object#(0x477) () {
 		}
 		if (gflags[0x016C]) {
 			say("\"Thou canst walk away so easy without a demonstration! Thou shalt have one anyway!\"*");
-			var0003->set_alignment(0x0002);
+			var0003->set_alignment(EVIL);
 			var0003->set_schedule_type(IN_COMBAT);
 		} else {
 			say("\"May thy stay in Jhelom be a memorable one,\" De Snel laughs as he turns and walks away.*");
@@ -28953,9 +28960,9 @@ void Func047D object#(0x47D) () {
 			if (var0001 == 0x0004) {
 				say("\"So, thou wishest to fight for the cowardly Sprellic! Then I have no choice but to finish thee myself!\"*");
 				Func0911(0x0064);
-				var0002->set_alignment(0x0003);
-				var0004->set_alignment(0x0003);
-				var0003->set_alignment(0x0003);
+				var0002->set_alignment(CHAOTIC);
+				var0004->set_alignment(CHAOTIC);
+				var0003->set_alignment(CHAOTIC);
 				var0002->set_schedule_type(IN_COMBAT);
 				var0003->set_schedule_type(IN_COMBAT);
 				var0004->set_schedule_type(IN_COMBAT);
@@ -29090,9 +29097,9 @@ void Func047E object#(0x47E) () {
 					}
 					say("\"It has come to our attention that thou hast been given our honor flag. Apparently Sprellic gave it to thee to return to us. If thou dost wish to keep it then our quarrel is now with thee.\"*");
 					Func0911(0x0064);
-					var0002->set_alignment(0x0003);
-					var0004->set_alignment(0x0003);
-					var0003->set_alignment(0x0003);
+					var0002->set_alignment(CHAOTIC);
+					var0004->set_alignment(CHAOTIC);
+					var0003->set_alignment(CHAOTIC);
 					var0002->set_schedule_type(IN_COMBAT);
 					var0004->set_schedule_type(IN_COMBAT);
 					var0003->set_schedule_type(IN_COMBAT);
@@ -29102,9 +29109,9 @@ void Func047E object#(0x47E) () {
 			if (gflags[0x0170] && (!gflags[0x0168])) {
 				say("\"Thou mayest fight for Sprellic, but I fight for honor!\"*");
 				Func0911(0x0064);
-				var0002->set_alignment(0x0003);
-				var0004->set_alignment(0x0003);
-				var0003->set_alignment(0x0003);
+				var0002->set_alignment(CHAOTIC);
+				var0004->set_alignment(CHAOTIC);
+				var0003->set_alignment(CHAOTIC);
 				var0002->set_schedule_type(IN_COMBAT);
 				var0004->set_schedule_type(IN_COMBAT);
 				var0003->set_schedule_type(IN_COMBAT);
@@ -29196,9 +29203,9 @@ void Func047E object#(0x47E) () {
 				} else {
 					say("\"Prepare to die!\"*");
 					Func0911(0x0064);
-					var0002->set_alignment(0x0003);
-					var0004->set_alignment(0x0003);
-					var0003->set_alignment(0x0003);
+					var0002->set_alignment(CHAOTIC);
+					var0004->set_alignment(CHAOTIC);
+					var0003->set_alignment(CHAOTIC);
 					var0002->set_schedule_type(IN_COMBAT);
 					var0004->set_schedule_type(IN_COMBAT);
 					var0003->set_schedule_type(IN_COMBAT);
@@ -29254,9 +29261,9 @@ void Func047F object#(0x47F) () {
 					", I must prove myself to De Snel. If thou art the one who suffers, I will apologize, but I will not back down!\"");
 				say("\"Prepare to die!\"*");
 				Func0911(0x0064);
-				var0002->set_alignment(0x0003);
-				var0003->set_alignment(0x0003);
-				var0004->set_alignment(0x0003);
+				var0002->set_alignment(CHAOTIC);
+				var0003->set_alignment(CHAOTIC);
+				var0004->set_alignment(CHAOTIC);
 				var0002->set_schedule_type(IN_COMBAT);
 				var0003->set_schedule_type(IN_COMBAT);
 				var0004->set_schedule_type(IN_COMBAT);
@@ -32842,7 +32849,7 @@ void Func0495 object#(0x495) () {
 		gflags[0x02C7] = true;
 	} else {
 		say("\"We are not talking to thee! We are trying to eat thee!\"*");
-		0xFF6B->get_npc_object()->set_alignment(0x0002);
+		0xFF6B->get_npc_object()->set_alignment(EVIL);
 		0xFF6B->get_npc_object()->set_schedule_type(IN_COMBAT);
 		abort;
 	}
@@ -32960,7 +32967,7 @@ void Func0495 object#(0x495) () {
 			0xFEE7->say("Shanda nods his head furiously, licking his lips.*");
 			0xFEE7->hide();
 			0xFEE8->say("\"Very well! Let's eat it!\"*");
-			0xFF6B->get_npc_object()->set_alignment(0x0002);
+			0xFF6B->get_npc_object()->set_alignment(EVIL);
 			0xFF6B->get_npc_object()->set_schedule_type(IN_COMBAT);
 			abort;
 
@@ -33771,7 +33778,7 @@ void Func049A object#(0x49A) () {
 		var0003 = Func08F7(0xFF24);
 		var0004 = Func0909();
 		var0005 = Func0908();
-		0xFF66->get_npc_object()->set_alignment(0x0002);
+		0xFF66->get_npc_object()->set_alignment(EVIL);
 		if (!gflags[0x02BE]) {
 			say("The troll snarls at you, obviously displeased at your presence.");
 			gflags[0x02BE] = true;
@@ -38820,7 +38827,7 @@ void Func04B8 object#(0x4B8) () {
 				Func0911(0x0064);
 				say("\"To be sorry you know that. To need now to kill Sarpling.\" He grins at you.~~\"To need now to kill you!\"*");
 				var0001->set_schedule_type(IN_COMBAT);
-				var0001->set_alignment(0x0002);
+				var0001->set_alignment(EVIL);
 				abort;
 
 			case "bye":
@@ -41705,7 +41712,7 @@ void Func04CB object#(0x4CB) () {
 		var0006 = var0004->get_schedule_type();
 		var0007 = var0004->get_alignment();
 		add(["name", "job", "bye", "Fellowship"]);
-		if (var0007 == 0x0002) {
+		if (var0007 == EVIL) {
 			var0004->set_schedule_type(IN_COMBAT);
 			var0005->set_schedule_type(IN_COMBAT);
 		}
@@ -41729,9 +41736,9 @@ void Func04CB object#(0x4CB) () {
 					if (var0008 == var0002) {
 						say("\"What? Dost thou mean to tell me that thou art the one who brought those gargoyles to our precious land?\" He turns quite angry.~~\"Daemon lover!\"*");
 						var0004->set_schedule_type(IN_COMBAT);
-						var0004->set_alignment(0x0002);
+						var0004->set_alignment(EVIL);
 						var0005->set_schedule_type(IN_COMBAT);
-						var0005->set_alignment(0x0002);
+						var0005->set_alignment(EVIL);
 						abort;
 					}
 					say("\"I am happy to make thine acquaintance, ",
@@ -41841,7 +41848,7 @@ void Func04CC object#(0x4CC) () {
 		var0005 = UI_part_of_day();
 		var0006 = var0003->get_schedule_type();
 		var0007 = var0003->get_alignment();
-		if (var0007 == 0x0002) {
+		if (var0007 == EVIL) {
 			var0003->set_schedule_type(IN_COMBAT);
 			var0004->set_schedule_type(IN_COMBAT);
 		}
@@ -41862,9 +41869,9 @@ void Func04CC object#(0x4CC) () {
 					if (var0008 == var0002) {
 						say("\"The Avatar!\" she shouts angrily. \"Why thou art the one responsible for bringing those wretched gargoyles into our fine land!\"*");
 						var0003->set_schedule_type(IN_COMBAT);
-						var0003->set_alignment(0x0002);
+						var0003->set_alignment(EVIL);
 						var0004->set_schedule_type(IN_COMBAT);
-						var0004->set_alignment(0x0002);
+						var0004->set_alignment(EVIL);
 						abort;
 					}
 					say("\"'Tis good to meet thee!\"");
@@ -43544,10 +43551,10 @@ void Func04D9 object#(0x4D9) () {
 		var0003 = Func0909();
 		var0004 = "the Avatar";
 		var0005 = var0000->get_alignment();
-		if (var0005 == 0x0001) {
+		if (var0005 == GOOD) {
 			say("The gargoyle's hatred is so bitter that he resists the spell.*");
-			var0000->set_alignment(0x0002);
-			var0001->set_alignment(0x0002);
+			var0000->set_alignment(EVIL);
+			var0001->set_alignment(EVIL);
 			abort;
 		}
 		var0006 = var0000->get_schedule_type();
@@ -43590,8 +43597,8 @@ void Func04D9 object#(0x4D9) () {
 						}
 						var0000->set_schedule_type(IN_COMBAT);
 						var0001->set_schedule_type(IN_COMBAT);
-						var0000->set_alignment(0x0002);
-						var0001->set_alignment(0x0002);
+						var0000->set_alignment(EVIL);
+						var0001->set_alignment(EVIL);
 						abort;
 					}
 					say("\"To tell you to go away!\"*");
@@ -43646,10 +43653,10 @@ void Func04DA object#(0x4DA) () {
 		var0003 = Func0909();
 		var0004 = "the Avatar";
 		var0005 = var0001->get_alignment();
-		if (var0005 == 0x0001) {
+		if (var0005 == GOOD) {
 			say("The gargoyle's anger is so great that he resists the spell.*");
-			var0000->set_alignment(0x0002);
-			var0001->set_alignment(0x0002);
+			var0000->set_alignment(EVIL);
+			var0001->set_alignment(EVIL);
 			abort;
 		}
 		var0006 = var0000->get_schedule_type();
@@ -43687,8 +43694,8 @@ void Func04DA object#(0x4DA) () {
 							", to die!\"*");
 						var0000->set_schedule_type(IN_COMBAT);
 						var0001->set_schedule_type(IN_COMBAT);
-						var0001->set_alignment(0x0002);
-						var0000->set_alignment(0x0002);
+						var0001->set_alignment(EVIL);
+						var0000->set_alignment(EVIL);
 						abort;
 					}
 					say("\"To tell you to go away!\"*");
@@ -47301,7 +47308,7 @@ void Func04F5 object#(0x4F5) () {
 		var0001 = 0xFF0B->get_npc_object();
 		add(["name", "job", "bye"]);
 		var0002 = var0001->get_alignment();
-		if (var0002 == 0x0002) {
+		if (var0002 == EVIL) {
 			var0001->set_schedule_type(IN_COMBAT);
 		}
 		if (gflags[0x0159] && gflags[0x0148]) {
@@ -47342,7 +47349,7 @@ void Func04F5 object#(0x4F5) () {
 					var0004 = UI_create_new_object(0x0231);
 					var0005 = 0xFF0B->give_last_created();
 				}
-				var0001->set_alignment(0x0002);
+				var0001->set_alignment(EVIL);
 				var0001->set_schedule_type(IN_COMBAT);
 				abort;
 
@@ -50090,10 +50097,10 @@ void Func060E object#(0x60E) () {
 				for (var000A in var0007 with var0008 to var0009) {
 					if (var000A->get_schedule_type() == IN_COMBAT) {
 						var000B = var000A->get_alignment();
-						if ((var000B == 0x0000) || 0x0001) {
+						if ((var000B == NEUTRAL) || GOOD) {
 							var000A->set_schedule_type(WANDER);
 						}
-						if ((var000B == 0x0003) || (var000B == 0x0002)) {
+						if ((var000B == CHAOTIC) || (var000B == EVIL)) {
 							var000C = var000A->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
 							for (var000F in var000C with var000D to var000E) {
 								var000F->remove_item();
@@ -50201,7 +50208,7 @@ void Func0610 object#(0x610) () {
 	UI_fade_palette(0x0024, 0x0001, 0x0001);
 	var0000 = find_nearby(SHAPE_ANY, 0x0023, MASK_NPC);
 	for (var0003 in var0000 with var0001 to var0002) {
-		if ((var0003->get_alignment() == 0x0000) && (var0003->get_schedule_type() == IN_COMBAT)) {
+		if ((var0003->get_alignment() == NEUTRAL) && (var0003->get_schedule_type() == IN_COMBAT)) {
 			return;
 		}
 	}
@@ -52333,7 +52340,7 @@ void Func063E object#(0x63E) () {
 		UI_set_weather(0x0002);
 		UI_armageddon();
 		gflags[0x001E] = true;
-		0xFFE9->set_alignment(0x0002);
+		0xFFE9->set_alignment(EVIL);
 		0xFFE9->set_attack_mode(NEAREST);
 		0xFFE9->set_schedule_type(IN_COMBAT);
 		set_item_flag(CONFUSED);
@@ -57348,7 +57355,7 @@ void Func06A3 object#(0x6A3) () {
 						} else {
 							var0006->set_schedule_type(WAIT);
 						}
-						var0006->set_alignment(0x0000);
+						var0006->set_alignment(NEUTRAL);
 						var0012 = UI_create_new_object(0x031D);
 						var0012->set_item_flag(TEMPORARY);
 						var0009 = var0012->set_item_quality(0x00F3);
@@ -57395,7 +57402,7 @@ void Func06A3 object#(0x6A3) () {
 						} else {
 							var0006->set_schedule_type(WAIT);
 						}
-						var0006->set_alignment(0x0000);
+						var0006->set_alignment(NEUTRAL);
 						var0012 = UI_create_new_object(0x031D);
 						var0012->set_item_flag(TEMPORARY);
 						var0009 = var0012->set_item_quality(0x00F4);
@@ -57506,7 +57513,7 @@ void Func06A3 object#(0x6A3) () {
 							face var001A;
 						};
 					}
-					var0006->set_alignment(0x0002);
+					var0006->set_alignment(EVIL);
 					var0012 = UI_create_new_object(0x031D);
 					var0012->set_item_flag(TEMPORARY);
 					var0009 = var0012->set_item_quality(var0019);
@@ -57637,7 +57644,7 @@ void Func06AC object#(0x6AC) () {
 	if (event == EGG) {
 		var0000 = find_nearby(0x02F1, 0x0005, MASK_NONE);
 		for (var0003 in var0000 with var0001 to var0002) {
-			var0003->set_alignment(0x0002);
+			var0003->set_alignment(EVIL);
 			var0003->set_schedule_type(IN_COMBAT);
 			var0003->clear_item_flag(ASLEEP);
 		}
@@ -61511,8 +61518,8 @@ void Func070F object#(0x70F) () {
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0006 = var0005->get_item_shape();
 			if (!((var0006 == 0x02D1) || (var0006 == 0x03DD))) {
-				if (var0005->get_alignment() == 0x0000) {
-					var0005->set_alignment(0x0002);
+				if (var0005->get_alignment() == NEUTRAL) {
+					var0005->set_alignment(EVIL);
 					var0005->set_schedule_type(IN_COMBAT);
 				}
 			}
@@ -61544,7 +61551,7 @@ void Func070F object#(0x70F) () {
 				var0006 = var0005->get_item_shape();
 				if (!((var0006 == 0x02D1) || (var0006 == 0x03DD))) {
 					if (var0005->get_alignment() == var000C) {
-						var0005->set_alignment(0x0002);
+						var0005->set_alignment(EVIL);
 						var0005->set_schedule_type(IN_COMBAT);
 					}
 				}
@@ -61587,7 +61594,7 @@ void Func070F object#(0x70F) () {
 					var0006 = var0005->get_item_shape();
 					if (!((var0006 == 0x02D1) || (var0006 == 0x03DD))) {
 						if (var0005->get_alignment() == var000C) {
-							var0005->set_alignment(0x0002);
+							var0005->set_alignment(EVIL);
 							var0005->set_schedule_type(IN_COMBAT);
 						}
 					}
@@ -61599,7 +61606,7 @@ void Func070F object#(0x70F) () {
 					var0006 = var0005->get_item_shape();
 					if (!((var0006 == 0x02D1) || (var0006 == 0x03DD))) {
 						if (var0005->get_alignment() == var000C) {
-							var0005->set_alignment(0x0002);
+							var0005->set_alignment(EVIL);
 							var0005->set_schedule_type(IN_COMBAT);
 						}
 					}
@@ -68458,13 +68465,13 @@ void Func0888 0x888 (var var0000) {
 		var0008 = UI_die_roll(0x000F, 0x0014);
 		var0009 = UI_apply_damage(var0007->get_npc_prop(STRENGTH), var0008, MAGIC_DAMAGE, var0007);
 		var000A = var0007->get_alignment();
-		if (var000A == 0x0002) {
+		if (var000A == EVIL) {
 			var0001 = true;
 		}
-		if (var000A == 0x0003) {
+		if (var000A == CHAOTIC) {
 			var0002 = true;
 		}
-		if (var000A == 0x0000) {
+		if (var000A == NEUTRAL) {
 			var0003 = true;
 		}
 	}
@@ -68481,7 +68488,7 @@ void Func0888 0x888 (var var0000) {
 		for (var0007 in var0004 with var000E to var000F) {
 			var000D = var0007->get_item_shape();
 			if (!((var000D == 0x02D1) || (var000D == 0x03DD))) {
-				var0007->set_alignment(0x0002);
+				var0007->set_alignment(EVIL);
 				var0007->set_schedule_type(IN_COMBAT);
 			}
 		}
@@ -74769,7 +74776,7 @@ void Func08F2 0x8F2 (var var0000, var var0001) {
 				var0009,
 				"! Thy soul shall wail in the catacombs of the netherworld!\"");
 			0xFFF6->set_schedule_type(IN_COMBAT);
-			0xFFF6->set_alignment(0x0002);
+			0xFFF6->set_alignment(EVIL);
 		} else {
 			say("\"^",
 				var0004,
@@ -74777,12 +74784,12 @@ void Func08F2 0x8F2 (var var0000, var var0001) {
 				var0009,
 				".\"");
 			0xFFF6->set_schedule_type(HOUND);
-			0xFFF6->set_alignment(0x0000);
+			0xFFF6->set_alignment(NEUTRAL);
 		}
 	} else {
 		say("\"I shall not take this deception lightly.\"");
 		gflags[0x001D] = true;
-		0xFFF6->set_alignment(0x0000);
+		0xFFF6->set_alignment(NEUTRAL);
 	}
 	abort;
 }

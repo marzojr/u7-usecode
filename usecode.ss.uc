@@ -1,6 +1,13 @@
 #game "serpentisle"
 #strictbraces "true"
 
+enum alignments {
+	NEUTRAL			= 0,
+	GOOD			= 1,
+	EVIL			= 2,
+	CHAOTIC			= 3
+};
+
 enum damage_types {
 	NORMAL_DAMAGE		= 0,
 	FIRE_DAMAGE			= 1,
@@ -3789,7 +3796,7 @@ void Func013E shape#(0x13E) () {
 			var0004 = var0003->add_cont_items(0x0001, 0x0327, 0x0003, FRAME_ANY, 0x0012);
 			var0004 = var0003->add_cont_items(0x0001, 0x011F, 0x0001, FRAME_ANY, 0x0012);
 			var0004 = var0003->add_cont_items(0x0001, 0x02DB, 0x0006, FRAME_ANY, 0x0012);
-			var0003->set_alignment(0x0002);
+			var0003->set_alignment(EVIL);
 			var0003->set_schedule_type(IN_COMBAT);
 			var0004 = script var0003 after 20 ticks {
 				nohalt;
@@ -6012,15 +6019,15 @@ void Func01C3 shape#(0x1C3) () {
 		}
 		if (0xFFBB->get_npc_id() == 0x000E) {
 			0xFFBB->set_npc_id(0x000F);
-			0xFE9C->set_alignment(0x0001);
+			0xFE9C->set_alignment(GOOD);
 			Func097F(0xFFBB, "@Stop this!@", 0x0000);
 			0xFFBB->set_item_flag(MET);
 			0xFFB6->set_item_flag(DEAD);
 			0xFFB6->set_schedule_type(WAIT);
-			0xFFB6->set_alignment(0x0000);
+			0xFFB6->set_alignment(NEUTRAL);
 			0xFFB9->set_item_flag(DEAD);
 			0xFFB9->set_schedule_type(WAIT);
-			0xFFB9->set_alignment(0x0000);
+			0xFFB9->set_alignment(NEUTRAL);
 			var0003 = script 0xFFBB after 10 ticks {
 				nohalt;
 				call Func01C3;
@@ -6034,14 +6041,14 @@ void Func01C3 shape#(0x1C3) () {
 		}
 		if (0xFFBB->get_npc_id() == 0x000D) {
 			0xFFBB->set_npc_id(0x000E);
-			0xFE9C->set_alignment(0x0000);
+			0xFE9C->set_alignment(NEUTRAL);
 			0xFFB9->set_attack_mode(NEAREST);
 			0xFFB6->set_attack_mode(NEAREST);
-			0xFFB9->set_alignment(0x0002);
+			0xFFB9->set_alignment(EVIL);
 			0xFFB9->set_schedule_type(IN_COMBAT);
 			0xFFB9->set_opponent(0xFFB6);
 			0xFFB9->set_oppressor(0xFFB6);
-			0xFFB6->set_alignment(0x0001);
+			0xFFB6->set_alignment(GOOD);
 			0xFFB6->set_schedule_type(IN_COMBAT);
 			0xFFB6->set_opponent(0xFFB9);
 			0xFFB6->set_oppressor(0xFFB9);
@@ -7933,13 +7940,13 @@ void Func01DF shape#(0x1DF) () {
 				var0003->clear_item_flag(TEMPORARY);
 				var0003->set_schedule_type(IN_COMBAT);
 				0xFE9C->set_oppressor(var0003);
-				var0003->set_alignment(0x0002);
+				var0003->set_alignment(EVIL);
 				var0004 = var0003->add_cont_items(0x0001, 0x0281, 0x003D, 0x0004, false);
 				var0004 = var0003->add_cont_items(0x0003, 0x0194, QUALITY_ANY, 0x0003, false);
 				Func09AC(0xFFC0, 0x00A0, 0x002E, WAIT);
 				0xFFC0->remove_npc();
 				gflags[0x004A] = true;
-				0xFFB5->set_alignment(0x0003);
+				0xFFB5->set_alignment(CHAOTIC);
 				0xFFB5->set_item_flag(SI_TOURNAMENT);
 			} else {
 				Func0948(0x003C);
@@ -8381,7 +8388,7 @@ void Func01FA shape#(0x1FA) () {
 	}
 	var0001 = find_nearby(0x017E, 0x0014, MASK_NONE);
 	for (var0004 in var0001 with var0002 to var0003) {
-		var0004->set_alignment(0x0000);
+		var0004->set_alignment(NEUTRAL);
 		var0004->set_item_flag(ASLEEP);
 	}
 }
@@ -9427,7 +9434,7 @@ void Func0280 shape#(0x280) () {
 				var0006 = UI_die_roll(0x0001, 0x0006);
 			}
 			var0007 = var0005->get_alignment();
-			if ((var0007 == 0x0002) || (var0007 == 0x0003)) {
+			if ((var0007 == EVIL) || (var0007 == CHAOTIC)) {
 				var0006 -= 0x0001;
 			}
 			var0008 = UI_game_hour();
@@ -10125,7 +10132,7 @@ void Func0289 shape#(0x289) () {
 			var0009 = 0xFE9C->find_nearby(0x036A, 0x001E, MASK_NONE);
 			if (var0009 == []) {
 				0xFEF3->set_item_flag(SI_TOURNAMENT);
-				0xFEF3->set_alignment(0x0001);
+				0xFEF3->set_alignment(GOOD);
 				var000A = 0xFEF3->approach_avatar(0x0078, 0x0028);
 				if (var000A) {
 					0xFEF3->si_path_run_usecode([0x0000, 0x0000, 0x0000], STARTED_TALKING, 0xFEF3->get_npc_object(), Func036A, true);
@@ -17221,24 +17228,24 @@ void Func036A shape#(0x36A) () {
 
 			case "attack":
 				var0003 = UI_click_on_item();
-				if ((!var0003) || ((var0003->get_alignment() == 0x0001) || (!var0003->is_npc()))) {
+				if ((!var0003) || ((var0003->get_alignment() == GOOD) || (!var0003->is_npc()))) {
 					say("\"Woof?\"");
 				} else {
-					if (var0003->get_alignment() == 0x0000) {
+					if (var0003->get_alignment() == NEUTRAL) {
 						say("\"Woof.\"");
 						set_schedule_type(IN_COMBAT);
 						set_opponent(var0003);
 						set_oppressor(var0003);
 						abort;
 					}
-					if (var0003->get_alignment() == 0x0003) {
+					if (var0003->get_alignment() == CHAOTIC) {
 						say("\"Woof!\"");
 						set_schedule_type(IN_COMBAT);
 						set_opponent(var0003);
 						set_oppressor(var0003);
 						abort;
 					}
-					if (var0003->get_alignment() == 0x0002) {
+					if (var0003->get_alignment() == EVIL) {
 						say("\"Woof!!\"");
 						set_schedule_type(IN_COMBAT);
 						set_opponent(var0003);
@@ -26360,7 +26367,7 @@ void Func0419 object#(0x419) () {
 				} else if (gflags[0x00EA] && var0006) {
 					say("\"Thou dost look at me oddly... I think I have said too much!\"");
 					say("\"Now I must kill thee...\"");
-					0xFFE7->set_alignment(0x0003);
+					0xFFE7->set_alignment(CHAOTIC);
 					Func097F(0xFFE7, "@Must kill!@", 0x0000);
 					0xFFE7->set_schedule_type(IN_COMBAT);
 					0xFE9C->set_oppressor(0xFFE7);
@@ -26377,7 +26384,7 @@ void Func0419 object#(0x419) () {
 			0xFED6->show_npc_face0(0x0000);
 			say("\"Rotoluncia shall avenge my loss...\"");
 			gflags[0x00EB] = true;
-			0xFFE1->set_alignment(0x0003);
+			0xFFE1->set_alignment(CHAOTIC);
 			UI_remove_npc_face0();
 		}
 		0xFFE7->clear_item_flag(SI_TOURNAMENT);
@@ -33934,7 +33941,7 @@ void Func042D object#(0x42D) () {
 		converse (0) {
 			case "return my belongings" (remove):
 				say("\"Art thou jesting? They belong to me now! I gave thee thy chance when I left. If thou still wantest them, thou wilt have to take them from me!!\"");
-				0xFFD3->set_alignment(0x0003);
+				0xFFD3->set_alignment(CHAOTIC);
 				0xFFD3->clear_item_say();
 				Func097F(0xFFD3, "@They are mine!@", 0x0000);
 				abort;
@@ -38087,7 +38094,7 @@ void Func0437 object#(0x437) () {
 				};
 				var000B += 0x0002;
 			}
-			0xFFCB->set_alignment(0x0000);
+			0xFFCB->set_alignment(NEUTRAL);
 			0xFE9C->move_object(var000A);
 			var0000 = script 0xFE9C after 10 ticks {
 				nohalt;
@@ -41980,7 +41987,7 @@ void Func0442 object#(0x442) () {
 			0xFFBE->show_npc_face0(0x0000);
 			say("\"Thou hast found out my secret! Now, thou must die...\"");
 			0xFFBE->set_item_flag(SI_TOURNAMENT);
-			0xFFBE->set_alignment(0x0002);
+			0xFFBE->set_alignment(EVIL);
 			Func097F(0xFFBE, "@Die!@", 0x0000);
 			0xFFBE->set_new_schedules(MIDNIGHT, IN_COMBAT, [var0000[0x0001], var0000[0x0002]]);
 			0xFFBE->run_schedule();
@@ -42316,7 +42323,7 @@ void Func0443 object#(0x443) () {
 					say("\"I know that Lydia must have given thee this tattoo, yet I find it difficult to believe she would poison a stranger.\"");
 					say("\"Thou shouldst have words with her, I think.\"");
 					gflags[0x0035] = true;
-					0xFFB8->set_alignment(0x0003);
+					0xFFB8->set_alignment(CHAOTIC);
 					0xFFB8->set_item_flag(SI_TOURNAMENT);
 				}
 				gflags[0x00CB] = true;
@@ -43517,8 +43524,8 @@ void Func0445 object#(0x445) () {
 					var000F = 0xFFFF->get_object_position();
 					var0010 = UI_create_new_object2(0x00E4, [(var000F[0x0001] + 0x0001), (var000F[0x0002] - 0x0001), var000F[0x0003]]);
 					var0011 = UI_create_new_object2(0x00E4, [(var000F[0x0001] - 0x0001), (var000F[0x0002] - 0x0001), var000F[0x0003]]);
-					var0010->set_alignment(0x0000);
-					var0011->set_alignment(0x0000);
+					var0010->set_alignment(NEUTRAL);
+					var0011->set_alignment(NEUTRAL);
 					var0010->set_schedule_type(TALK);
 					var0011->set_schedule_type(TALK);
 					var0010->set_npc_id(0x000D);
@@ -46027,7 +46034,7 @@ void Func044C object#(0x44C) () {
 		UI_play_sound_effect(0x0077);
 		0xFFB4->remove_npc();
 		0xFFBE->move_object(var0004);
-		0xFFBE->set_alignment(0x0002);
+		0xFFBE->set_alignment(EVIL);
 		0xFFBE->set_new_schedules(MIDNIGHT, DANCE, [var0004[0x0001], var0004[0x0002]]);
 		0xFFBE->run_schedule();
 		Func097F(0xFFBE, "@Lorfag Tar!@", 0x0002);
@@ -46344,7 +46351,7 @@ void Func044C object#(0x44C) () {
 				var0004 = 0xFFB4->get_object_position();
 				0xFFB4->remove_npc();
 				0xFFBE->move_object(var0004);
-				0xFFBE->set_alignment(0x0002);
+				0xFFBE->set_alignment(EVIL);
 				0xFFBE->set_new_schedules(MIDNIGHT, DANCE, [var0004[0x0001], var0004[0x0002]]);
 				0xFFBE->run_schedule();
 				Func097F(0xFFBE, "@Lorfag Tar!@", 0x0002);
@@ -47358,14 +47365,14 @@ void Func0450 object#(0x450) () {
 					if (var0008) {
 						var0008->set_npc_id(0x0003);
 						var0008->set_schedule_type(HOUND);
-						var0008->set_alignment(0x0000);
+						var0008->set_alignment(NEUTRAL);
 						var0003 = var0008->set_npc_prop(DEXTERITY, 10);
 					}
 					var0008 = UI_create_new_object2(0x00E4, [0x032C, 0x0ABE, 0x0000]);
 					if (var0008) {
 						var0008->set_npc_id(0x0003);
 						var0008->set_schedule_type(HOUND);
-						var0008->set_alignment(0x0000);
+						var0008->set_alignment(NEUTRAL);
 						var0003 = var0008->set_npc_prop(DEXTERITY, 10);
 					}
 					0xFE9C->set_item_flag(DONT_MOVE);
@@ -48273,7 +48280,7 @@ void Func045E object#(0x45E) () {
 					say("\"Thou hast wronged me!\"");
 					var0002 = [0xFFA2, 0xFFA1, 0xFFA0, 0xFF9F, 0xFF9E, 0xFF9D];
 					for (var0005 in var0002 with var0003 to var0004) {
-						var0005->set_alignment(0x0003);
+						var0005->set_alignment(CHAOTIC);
 						var0005->set_schedule_type(IN_COMBAT);
 						0xFE9C->set_oppressor(var0005);
 					}
@@ -48382,7 +48389,7 @@ void Func045F object#(0x45F) () {
 					say("\"Thou shalt pay!\"");
 					var0002 = [0xFFA2, 0xFFA1, 0xFFA0, 0xFF9F, 0xFF9E, 0xFF9D];
 					for (var0005 in var0002 with var0003 to var0004) {
-						var0005->set_alignment(0x0003);
+						var0005->set_alignment(CHAOTIC);
 						var0005->set_schedule_type(IN_COMBAT);
 						0xFE9C->set_oppressor(var0005);
 					}
@@ -48471,7 +48478,7 @@ void Func0460 object#(0x460) () {
 					say("\"I shall make thee bleed!\"");
 					var0002 = [0xFFA2, 0xFFA1, 0xFFA0, 0xFF9F, 0xFF9E, 0xFF9D];
 					for (var0005 in var0002 with var0003 to var0004) {
-						var0005->set_alignment(0x0003);
+						var0005->set_alignment(CHAOTIC);
 						var0005->set_schedule_type(IN_COMBAT);
 						0xFE9C->set_oppressor(var0005);
 					}
@@ -48524,7 +48531,7 @@ void Func0461 object#(0x461) () {
 		0xFF9F->show_npc_face0(0x0000);
 		if (gflags[0x0233]) {
 			say("\"Thou hast ruined it all! Die!\"");
-			0xFF9F->set_alignment(0x0003);
+			0xFF9F->set_alignment(CHAOTIC);
 			0xFF9F->set_schedule_type(IN_COMBAT);
 			0xFE9C->set_oppressor(0xFF9F);
 			abort;
@@ -48560,7 +48567,7 @@ void Func0461 object#(0x461) () {
 					say("\"Thou hast caught me! Very well... the key is thine.\"");
 					var0002 = Func099B(0xFE9C, 0x0001, 0x0281, 0x0046, 0x0005, false, true);
 					say("\"I confess. It was I that destroyed Number 7... as I shall destroy thee! I should have been the keeper of the key all along! Number 7 was wrong not to give it to me!\"");
-					0xFF9F->set_alignment(0x0003);
+					0xFF9F->set_alignment(CHAOTIC);
 					0xFF9F->set_schedule_type(IN_COMBAT);
 					0xFE9C->set_oppressor(0xFF9F);
 					gflags[0x0233] = true;
@@ -48664,7 +48671,7 @@ void Func0462 object#(0x462) () {
 					say("\"I shall have thine head for this outrage!\"");
 					var0002 = [0xFFA2, 0xFFA1, 0xFFA0, 0xFF9F, 0xFF9E, 0xFF9D];
 					for (var0005 in var0002 with var0003 to var0004) {
-						var0005->set_alignment(0x0003);
+						var0005->set_alignment(CHAOTIC);
 						var0005->set_schedule_type(IN_COMBAT);
 						0xFE9C->set_oppressor(var0005);
 					}
@@ -48755,7 +48762,7 @@ void Func0463 object#(0x463) () {
 					say("\"Thou shalt regret thy words!\"");
 					var0002 = [0xFFA2, 0xFFA1, 0xFFA0, 0xFF9F, 0xFF9E, 0xFF9D];
 					for (var0005 in var0002 with var0003 to var0004) {
-						var0005->set_alignment(0x0003);
+						var0005->set_alignment(CHAOTIC);
 						var0005->set_schedule_type(IN_COMBAT);
 						0xFE9C->set_oppressor(var0005);
 					}
@@ -49255,7 +49262,7 @@ void Func047E object#(0x47E) () {
 		say("\"Come! Come and witness mine ascent to power.\"");
 		say("\"Come, Avatar... Come and meet thy death!\"");
 		0xFF82->set_schedule_type(IN_COMBAT);
-		0xFF82->set_alignment(0x0002);
+		0xFF82->set_alignment(EVIL);
 		0xFE9C->set_oppressor(0xFF82);
 		UI_remove_npc_face0();
 	}
@@ -51813,8 +51820,8 @@ void Func049C object#(0x49C) () {
 			0xFF64->clear_item_flag(SI_TOURNAMENT);
 			Func0982(0xFF64, 0x0032);
 			0xFF65->run_schedule();
-			0xFF65->set_alignment(0x0000);
-			0xFF61->set_alignment(0x0000);
+			0xFF65->set_alignment(NEUTRAL);
+			0xFF61->set_alignment(NEUTRAL);
 			0xFF65->set_schedule_type(TALK);
 		}
 	}
@@ -52067,12 +52074,12 @@ void Func049F object#(0x49F) () {
 				say("\"Thou must return the Heart of Elerion to me! I need it to restore balance to the forest and its creatures.\"");
 				0xFF61->set_schedule_type(HOUND);
 				0xFF65->set_schedule_type(HOUND);
-				0xFF65->set_alignment(0x0000);
+				0xFF65->set_alignment(NEUTRAL);
 				add("give Orb");
 				remove("Master");
 			} else {
 				0xFF65->set_schedule_type(HOUND);
-				0xFF65->set_alignment(0x0000);
+				0xFF65->set_alignment(NEUTRAL);
 				0xFF61->set_schedule_type(HOUND);
 				say("\"I must have the Heart of Elerion. Draygan had it, but it belongs to me. If thou canst find it, I shall reward thee.\"");
 				add("reward");
@@ -52339,7 +52346,7 @@ void Func04A0 object#(0x4A0) () {
 						if (var000B->get_distance(0xFE9C) < 0x0009) {
 							item_say("@Thou shan't steal the gold!@");
 							set_schedule_type(IN_COMBAT);
-							set_alignment(0x0002);
+							set_alignment(EVIL);
 						}
 					}
 				}
@@ -53473,7 +53480,7 @@ void Func04A8 object#(0x4A8) () {
 					UI_sprite_effect(0x001A, var0007[0x0001], var0007[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 					UI_play_sound_effect(0x0082);
 				}
-				0xFF22->set_alignment(0x0002);
+				0xFF22->set_alignment(EVIL);
 				0xFF22->set_schedule_type(IN_COMBAT);
 				0xFF22->set_opponent(0xFF58);
 				0xFF22->set_oppressor(0xFF58);
@@ -53532,7 +53539,7 @@ void Func04A9 object#(0x4A9) () {
 			gflags[0x0236] = false;
 			gflags[0x0237] = true;
 			0xFF57->set_schedule_type(IN_COMBAT);
-			0xFF57->set_alignment(0x0003);
+			0xFF57->set_alignment(CHAOTIC);
 			var0002 = 0xFF57->get_object_position();
 			UI_sprite_effect(0x0009, (var0002[0x0001] - 0x0001), (var0002[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_play_sound_effect(0x0021);
@@ -53542,7 +53549,7 @@ void Func04A9 object#(0x4A9) () {
 			gflags[0x0236] = true;
 			gflags[0x0237] = false;
 			set_schedule_type(WAIT);
-			set_alignment(0x0000);
+			set_alignment(NEUTRAL);
 			var0002 = get_object_position();
 			UI_sprite_effect(0x0009, (var0002[0x0001] - 0x0001), (var0002[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_play_sound_effect(0x0021);
@@ -53638,7 +53645,7 @@ void Func04A9 object#(0x4A9) () {
 		0xFF57->set_polymorph(0x0191);
 		gflags[0x0236] = false;
 		gflags[0x0237] = false;
-		set_alignment(0x0000);
+		set_alignment(NEUTRAL);
 		0xFE9C->set_schedule_type(FOLLOW_AVATAR);
 		Func08AE();
 	}
@@ -58110,7 +58117,7 @@ void Func04D9 object#(0x4D9) () {
 		wait 15;
 		say "@I beg of thee...@";
 	};
-	0xFF27->set_alignment(0x0000);
+	0xFF27->set_alignment(NEUTRAL);
 	0xFF27->set_schedule_type(HOUND);
 }
 
@@ -59624,7 +59631,7 @@ void Func0612 object#(0x612) () {
 			var000D = UI_create_new_object2(var000C, [var0006[var0009], var0007[var0009], 0x0000]);
 			if (var000D) {
 				var000D->clear_item_flag(TEMPORARY);
-				var000D->set_alignment(0x0000);
+				var000D->set_alignment(NEUTRAL);
 				var000D->set_schedule_type(var0008[var0009]);
 				var000D->set_npc_id(0x0000);
 				var000E = var000D->get_npc_prop(STRENGTH);
@@ -61580,7 +61587,7 @@ void Func0632 object#(0x632) () {
 				UI_sprite_effect(0x001A, var0004[(var0006 - 0x0001)], var0004[var0006], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x0051);
 				var0007->Func07D2();
-				var0007->set_alignment(0x0002);
+				var0007->set_alignment(EVIL);
 				var0007->set_item_flag(TEMPORARY);
 				var0007->clear_item_flag(SI_TOURNAMENT);
 			}
@@ -65120,7 +65127,7 @@ void Func066F object#(0x66F) () {
 					if (var0006) {
 						var0007 = 0xFE9C->get_object_position();
 						Func09AC(var0005, var0007[0x0001], var0007[0x0002], WANDER);
-						var0005->set_alignment(0x0000);
+						var0005->set_alignment(NEUTRAL);
 						var0005->set_item_flag(SI_ZOMBIE);
 					} else {
 						var0005 = script item {
@@ -66942,7 +66949,7 @@ void Func06AD object#(0x6AD) () {
 		}
 		if (UI_get_array_size(var0000) == 0x0000) {
 			gflags[0x0045] = true;
-			0xFFB4->set_alignment(0x0003);
+			0xFFB4->set_alignment(CHAOTIC);
 			0xFFB4->set_item_flag(SI_TOURNAMENT);
 			var0004 = Func0992(0x0001, "@A clue...@", "@A clue...@", true);
 			if (var0004 != 0xFE9C) {
@@ -67500,7 +67507,7 @@ void Func06B6 object#(0x6B6) () {
 				var0003[0x0001] = var0001[0x0001] + UI_die_roll(0x0000, var0002[0x0001]);
 				var0003[0x0002] = var0001[0x0002] + UI_die_roll(0x0000, var0002[0x0002]);
 				var0010 = UI_create_new_object2(0x0202, var0003);
-				var0010->set_alignment(0x0002);
+				var0010->set_alignment(EVIL);
 				var0010->set_schedule_type(IN_COMBAT);
 				var0010->set_oppressor(0xFE9C->get_npc_object());
 				var0010->set_item_flag(SI_TOURNAMENT);
@@ -68743,7 +68750,7 @@ void Func06D2 object#(0x6D2) () {
 		var0003 = UI_create_new_object2(0x0151, var0001);
 		if (var0003) {
 			var0003->set_schedule_type(LOITER);
-			var0003->set_alignment(0x0000);
+			var0003->set_alignment(NEUTRAL);
 			var0003->set_item_flag(SI_TOURNAMENT);
 			var0003->set_npc_id(var0002);
 		}
@@ -68769,7 +68776,7 @@ void Func06D3 object#(0x6D3) () {
 	var0003 = UI_create_new_object2(0x0151, var0002);
 	if (var0003) {
 		var0003->set_schedule_type(LOITER);
-		var0003->set_alignment(0x0000);
+		var0003->set_alignment(NEUTRAL);
 		var0003->set_npc_id(var0001);
 	}
 }
@@ -69237,7 +69244,7 @@ void Func06D7 object#(0x6D7) () {
 			while (var0003 < 0x0002) {
 				var0004 = [(var0002[0x0001] + var0003), var0002[0x0002], 0x0000];
 				var0005 = UI_create_new_object2(0x0373, var0004);
-				var0005->set_alignment(0x0002);
+				var0005->set_alignment(EVIL);
 				var0005->set_schedule_type(IN_COMBAT);
 				0xFE9C->set_oppressor(var0005);
 				var0003 += 0x0002;
@@ -69380,12 +69387,12 @@ void Func06D9 object#(0x6D9) () {
 		if (var0002 == 0x0008) {
 			var0006 = UI_create_new_object2(0x013E, var0003);
 			var0006->set_schedule_type(IN_COMBAT);
-			var0006->set_alignment(0x0003);
+			var0006->set_alignment(CHAOTIC);
 			Func09A4(var0006);
 			var0007 = [(var0003[0x0001] + 0x0009), var0003[0x0002], var0003[0x0003]];
 			var0008 = UI_create_new_object2(0x012E, var0007);
 			var0008->set_schedule_type(IN_COMBAT);
-			var0008->set_alignment(0x0002);
+			var0008->set_alignment(EVIL);
 			Func09A4(var0008);
 			var0006->set_oppressor(var0008);
 			var0008->set_oppressor(var0006);
@@ -69414,7 +69421,7 @@ void Func06D9 object#(0x6D9) () {
 				var000F = 0x0001;
 				var0010 = find_nearby(0x013E, 0x0014, MASK_NONE);
 				for (var0013 in var0010 with var0011 to var0012) {
-					var0013->set_alignment(0x0001);
+					var0013->set_alignment(GOOD);
 					var0013->set_schedule_type(DANCE);
 				}
 				if (var0001) {
@@ -69757,7 +69764,7 @@ void Func06DE object#(0x6DE) () {
 			var0001 = get_object_position();
 			var0002 = UI_create_new_object2(0x00F7, var0001);
 			var0002->set_schedule_type(IN_COMBAT);
-			var0002->set_alignment(0x0002);
+			var0002->set_alignment(EVIL);
 			0xFE9C->set_oppressor(var0002);
 			var0003 = UI_die_roll(0x0000, 0x001E);
 			var0004 = var0002->add_cont_items(0x0001, 0x019F, 0x0000, var0003, false);
@@ -70484,7 +70491,7 @@ void Func06E6 object#(0x6E6) () {
 		if (var0002 == 0x0006) {
 			var000C = UI_create_new_object2(0x0151, var000B);
 			if (var000C) {
-				var000C->set_alignment(0x0002);
+				var000C->set_alignment(EVIL);
 				var000C->set_schedule_type(IN_COMBAT);
 				var0007->set_oppressor(0xFE9C->get_npc_object());
 			}
@@ -70669,19 +70676,19 @@ void Func06EA object#(0x6EA) () {
 		var0000 = [0xFEFA, 0xFEF9, 0xFEF8];
 		if (!gflags[0x00D5]) {
 			0xFEFA->set_item_flag(SI_TOURNAMENT);
-			0xFEFA->set_alignment(0x0002);
+			0xFEFA->set_alignment(EVIL);
 			0xFEFA->set_schedule_type(IN_COMBAT);
 			Func09AD(0xFEFA);
 		}
 		if (!gflags[0x00D3]) {
 			0xFEF9->set_item_flag(SI_TOURNAMENT);
-			0xFEF9->set_alignment(0x0002);
+			0xFEF9->set_alignment(EVIL);
 			0xFEF9->set_schedule_type(IN_COMBAT);
 			Func09AD(0xFEF9);
 		}
 		if (!gflags[0x00D4]) {
 			0xFEF8->set_item_flag(SI_TOURNAMENT);
-			0xFEF8->set_alignment(0x0002);
+			0xFEF8->set_alignment(EVIL);
 			0xFEF8->set_schedule_type(IN_COMBAT);
 			Func09AD(0xFEF8);
 		}
@@ -71112,7 +71119,7 @@ void Func06F6 object#(0x6F6) () {
 		if (var0001 == 0x0002) {
 			var0003 = UI_create_new_object2(0x01F5, var0000);
 			if (var0003) {
-				var0003->set_alignment(0x0002);
+				var0003->set_alignment(EVIL);
 				var0003->set_schedule_type(IN_COMBAT);
 				var0003->set_oppressor(0xFE9C);
 			}
@@ -71280,19 +71287,19 @@ void Func06FA object#(0x6FA) () {
 				call Func06FA;
 			};
 			var0016 = Func0992(0x0001, "@Look -- the gates!@", "@The gates are closing!@", true);
-			0xFFAB->set_alignment(0x0002);
+			0xFFAB->set_alignment(EVIL);
 			0xFFAB->set_item_flag(SI_TOURNAMENT);
 			0xFFAB->move_object([0x0723, 0x0A65]);
 			0xFFAB->set_schedule_type(WAIT);
-			0xFFA9->set_alignment(0x0002);
+			0xFFA9->set_alignment(EVIL);
 			0xFFA9->set_item_flag(SI_TOURNAMENT);
 			0xFFA9->move_object([0x074C, 0x0A67]);
 			0xFFA9->set_schedule_type(WAIT);
-			0xFFA4->set_alignment(0x0002);
+			0xFFA4->set_alignment(EVIL);
 			0xFFA4->set_item_flag(SI_TOURNAMENT);
 			0xFFA4->move_object([0x071B, 0x0A66]);
 			0xFFA4->set_schedule_type(WAIT);
-			0xFFA3->set_alignment(0x0002);
+			0xFFA3->set_alignment(EVIL);
 			0xFFA3->set_item_flag(SI_TOURNAMENT);
 			0xFFA3->move_object([0x0754, 0x0A64]);
 			0xFFA3->set_schedule_type(WAIT);
@@ -71352,7 +71359,7 @@ void Func06FC object#(0x6FC) () {
 	}
 	UI_play_music(0x0038, Func09A0(0x0005, 0x0001));
 	var0000 = UI_create_new_object2(0x01E2, get_object_position());
-	var0000->set_alignment(0x0001);
+	var0000->set_alignment(GOOD);
 	UI_play_sound_effect(0x0039);
 	var0001 = var0000->add_cont_items(0x0001, 0x01A8, 0x0005, FRAME_ANY, 0x0012);
 	var0001 = var0000->add_cont_items(0x0001, 0x0359, 0x0002, FRAME_ANY, 0x0012);
@@ -71389,7 +71396,7 @@ void Func06FC object#(0x6FC) () {
 			say "@Die, King!@";
 		};
 	}
-	var0000->set_alignment(0x0002);
+	var0000->set_alignment(EVIL);
 	var0000->set_schedule_type(IN_COMBAT);
 	var0000->set_opponent(0xFFFE);
 	var0000->set_oppressor(0xFE9C);
@@ -71460,7 +71467,7 @@ void Func06FD object#(0x6FD) () {
 						wait 60;
 						call Func06FD;
 					};
-					0xFFAC->set_alignment(0x0003);
+					0xFFAC->set_alignment(CHAOTIC);
 					0xFFAC->set_npc_id(0x000D);
 					Func09AC(0xFFAC, (var0000[0x0001] - 0x0004), var0000[0x0002], WANDER);
 					0xFFAC->si_path_run_usecode([0x071E, 0x0277, 0x0000], SI_PATH_SUCCESS, 0xFFAC->get_npc_object(), Func06FD, false);
@@ -71629,7 +71636,7 @@ void Func0702 object#(0x702) () {
 					Func09AD(var0002);
 				} else {
 					var0002->set_schedule_type(TEND_SHOP);
-					var0002->set_alignment(0x0000);
+					var0002->set_alignment(NEUTRAL);
 				}
 				var0001 -= 0x0001;
 			}
@@ -73743,7 +73750,7 @@ void Func0727 object#(0x727) () {
 		var0000 = get_item_quality();
 		var0001 = get_object_position();
 		var0002 = UI_create_new_object2(0x0103, var0001);
-		var0002->set_alignment(0x0000);
+		var0002->set_alignment(NEUTRAL);
 		var0003 = var0002->add_cont_items(0x0001, 0x0255, 0x0000, 0x0000, true);
 		var0003 = var0002->add_cont_items(0x000C, 0x02D2, 0x0000, 0x0000, true);
 		var0003 = var0002->add_cont_items(0x0001, 0x0239, 0x0000, 0x0000, true);
@@ -73856,7 +73863,7 @@ void Func0729 object#(0x729) () {
 		var0000 = get_item_quality();
 		var0001 = get_object_position();
 		var0002 = UI_create_new_object2(0x00E4, var0001);
-		var0002->set_alignment(0x0000);
+		var0002->set_alignment(NEUTRAL);
 		var0003 = var0002->add_cont_items(0x0001, 0x025B, 0x0000, 0x0000, true);
 		var0003 = var0002->add_cont_items(0x0001, 0x023B, 0x0000, 0x0000, true);
 		var0003 = var0002->add_cont_items(0x0001, 0x02D9, 0x0000, 0x0000, true);
@@ -74140,7 +74147,7 @@ void Func072D object#(0x72D) () {
 			var0005->remove_item();
 		}
 		var0006 = UI_create_new_object2(0x00E4, var0001);
-		var0006->set_alignment(0x0000);
+		var0006->set_alignment(NEUTRAL);
 		var0007 = var0006->add_cont_items(0x0001, 0x025B, 0x0000, 0x0000, true);
 		var0007 = var0006->add_cont_items(0x0001, 0x023B, 0x0000, 0x0000, true);
 		var0007 = var0006->add_cont_items(0x0001, 0x021B, 0x0000, 0x0000, true);
@@ -74322,7 +74329,7 @@ void Func0734 object#(0x734) () {
 		var0000 = get_item_quality();
 		var0001 = get_object_position();
 		var0002 = UI_create_new_object2(0x017D, var0001);
-		var0002->set_alignment(0x0000);
+		var0002->set_alignment(NEUTRAL);
 		var0003 = var0002->add_cont_items(0x0001, 0x023E, 0x0000, 0x0000, true);
 		var0003 = var0002->add_cont_items(0x0001, 0x0239, 0x0000, 0x0000, true);
 		var0003 = var0002->add_cont_items(0x0001, 0x024B, 0x0000, 0x0000, true);
@@ -74499,7 +74506,7 @@ void Func073A object#(0x73A) () {
 			UI_sprite_effect(0x0007, 0x0924, 0x01CF, 0x0000, 0x0000, 0x0000, 0xFFFF);
 		}
 		0xFFD4->set_schedule_type(IN_COMBAT);
-		0xFFD4->set_alignment(0x0002);
+		0xFFD4->set_alignment(EVIL);
 		0xFFD4->set_opponent(0xFE9C);
 		0xFFD4->set_attack_mode(STRONGEST);
 		0xFFD4->set_oppressor(0xFE9C);
@@ -74522,7 +74529,7 @@ void Func073A object#(0x73A) () {
 		0xFEF0->move_object([0x0926, 0x01CF, 0x0000]);
 		UI_sprite_effect(0x0007, 0x0926, 0x01CF, 0x0000, 0x0000, 0x0000, 0xFFFF);
 		0xFEF0->set_schedule_type(IN_COMBAT);
-		0xFEF0->set_alignment(0x0002);
+		0xFEF0->set_alignment(EVIL);
 		0xFEF0->set_opponent(0xFE9C);
 		0xFEF0->set_attack_mode(STRONGEST);
 		0xFEF0->set_oppressor(0xFE9C);
@@ -74530,7 +74537,7 @@ void Func073A object#(0x73A) () {
 		0xFF80->move_object([0x0928, 0x01CF, 0x0000]);
 		UI_sprite_effect(0x0007, 0x0928, 0x01CF, 0x0000, 0x0000, 0x0000, 0xFFFF);
 		0xFF80->set_schedule_type(IN_COMBAT);
-		0xFF80->set_alignment(0x0002);
+		0xFF80->set_alignment(EVIL);
 		0xFF80->set_opponent(0xFE9C);
 		0xFF80->set_attack_mode(STRONGEST);
 		0xFF80->set_oppressor(0xFE9C);
@@ -74538,7 +74545,7 @@ void Func073A object#(0x73A) () {
 		0xFF81->move_object([0x092A, 0x01CF, 0x0000]);
 		UI_sprite_effect(0x0007, 0x092A, 0x01CF, 0x0000, 0x0000, 0x0000, 0xFFFF);
 		0xFF81->set_schedule_type(IN_COMBAT);
-		0xFF81->set_alignment(0x0002);
+		0xFF81->set_alignment(EVIL);
 		0xFF81->set_opponent(0xFE9C);
 		0xFF81->set_attack_mode(STRONGEST);
 		0xFF81->set_oppressor(0xFE9C);
@@ -74592,7 +74599,7 @@ void Func073B object#(0x73B) () {
 		var0000 = get_object_position();
 		var0001 = UI_create_new_object2(0x013E, [var0000[0x0001], (var0000[0x0002] + 0x0001), var0000[0x0003]]);
 		var0001->set_schedule_type(WAIT);
-		var0001->set_alignment(0x0001);
+		var0001->set_alignment(GOOD);
 		var0001->set_item_flag(SI_TOURNAMENT);
 		var0002 = Func0992(0x0001, "@We must hurry!@", "@I must hurry!@", true);
 		if (!0xFFFD->get_item_flag(IN_PARTY)) {
@@ -75047,7 +75054,7 @@ void Func073C object#(0x73C) () {
 		var0000[0x0002] -= var0000[0x0003] / 0x0002;
 		UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		0xFF2D->set_schedule_type(TALK);
-		0xFF2D->set_alignment(0x0000);
+		0xFF2D->set_alignment(NEUTRAL);
 	}
 }
 
@@ -76077,7 +76084,7 @@ void Func0768 object#(0x768) () {
 				UI_play_sound_effect(0x0051);
 				var0004->Func07D2();
 				var0004->set_npc_id(var0002);
-				var0004->set_alignment(0x0002);
+				var0004->set_alignment(EVIL);
 				var0004->clear_item_flag(TEMPORARY);
 				var0004->clear_item_flag(SI_TOURNAMENT);
 				var0004->set_npc_id(var0002 + 0x000A);
@@ -76192,7 +76199,7 @@ void Func0769 object#(0x769) () {
 			var0000->clear_item_flag(TEMPORARY);
 			var0001 = Func099B(var0000, 0x0001, 0x0281, 0x00E6, 0x0007, 0x0000, false);
 			var0001 = Func099B(var0000, 0x0001, 0x0281, 0x00DF, 0x0009, 0x0000, false);
-			var0000->set_alignment(0x0002);
+			var0000->set_alignment(EVIL);
 			var0000->set_schedule_type(IN_COMBAT);
 			var0002 = var0000->get_npc_prop(STRENGTH);
 			var0003 = 25 - var0002;
@@ -76238,7 +76245,7 @@ void Func076A object#(0x76A) () {
 			UI_play_sound_effect(0x0051);
 			var0002->Func07D2();
 			var0002->Func07D1();
-			var0002->set_alignment(0x0000);
+			var0002->set_alignment(NEUTRAL);
 			var0002->set_schedule_type(WAIT);
 			var0002->set_npc_id(var0000);
 			var0002->set_item_flag(TEMPORARY);
@@ -76941,7 +76948,7 @@ void Func07A1 object#(0x7A1) () {
 				var0005 = var0003->get_object_position();
 				var0003->remove_item();
 				var0006 = UI_create_new_object2(0x02F1, var0005);
-				var0006->set_alignment(0x0002);
+				var0006->set_alignment(EVIL);
 				var0006->set_schedule_type(IN_COMBAT);
 			}
 		}
@@ -78181,7 +78188,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(0xFFBA, 0x03F6, 0x0A45, WAIT);
 		0xFFBD->set_new_schedules([DAWN, NOON, AFTERNOON, NIGHT], [0x000B, LOITER, WANDER, SLEEP], [0x034A, 0x0AB4, 0x0409, 0x0A24, 0x03A9, 0x0A1B, 0x035B, 0x0A8A]);
 		0xFFBD->run_schedule();
-		0xFF00->set_alignment(0x0002);
+		0xFF00->set_alignment(EVIL);
 		0xFF00->move_object([0x040C, 0x0A26]);
 		0xFF00->set_schedule_type(IN_COMBAT);
 		Func09AC(0xFFF3, 0x0963, 0x0815, WAIT);
@@ -78924,7 +78931,7 @@ void Func07E1 object#(0x7E1) () {
 		if (var0001 == 0xFF64) {
 			gflags[0x02BC] = true;
 			0xFF64->set_item_flag(SI_TOURNAMENT);
-			0xFF64->set_alignment(0x0003);
+			0xFF64->set_alignment(CHAOTIC);
 			0xFF64->set_item_frame(0x000D);
 			0xFF64->set_schedule_type(WAIT);
 			var0002 = 0xFF64->get_npc_prop(HEALTH);
@@ -78954,7 +78961,7 @@ void Func07E1 object#(0x7E1) () {
 			0xFF65->set_schedule_type(IN_COMBAT);
 			0xFF65->set_opponent(0xFF64);
 			0xFF65->set_oppressor(0xFF64);
-			0xFF65->set_alignment(0x0001);
+			0xFF65->set_alignment(GOOD);
 			0xFF65->clear_item_say();
 			Func094F(0xFF65, ["Die, Draygan!", "I shall kill thee!", "Whoreson!"]);
 		} else {
@@ -79595,11 +79602,11 @@ void Func07EB object#(0x7EB) () {
 			var0007 = UI_die_roll(0x0005, 0x000A);
 			var0008 = UI_apply_damage(var0006->get_npc_prop(STRENGTH), var0007, MAGIC_DAMAGE, var0006);
 			var0009 = var0006->get_alignment();
-			if ((var0009 == 0x0002) || (var0009 == 0x0003)) {
+			if ((var0009 == EVIL) || (var0009 == CHAOTIC)) {
 				var0006->set_schedule_type(IN_COMBAT);
 			}
-			if (var0009 == 0x0000) {
-				var0006->set_alignment(0x0002);
+			if (var0009 == NEUTRAL) {
+				var0006->set_alignment(EVIL);
 				var0006->set_schedule_type(IN_COMBAT);
 			}
 		}
@@ -80619,7 +80626,7 @@ void Func07F9 object#(0x7F9) () {
 			var000A = [0xFFC1, 0xFFB1, 0xFFB6, 0xFFB9, 0xFF6A];
 			for (var000D in var000A with var000B to var000C) {
 				if (Func0932(var000D)) {
-					var000D->set_alignment(0x0000);
+					var000D->set_alignment(NEUTRAL);
 					var0003 = var000D->get_npc_prop(HEALTH);
 					var0003 = var000D->set_npc_prop(HEALTH, var000D->get_npc_prop(STRENGTH) - var0003);
 					var000D->run_schedule();
@@ -80663,7 +80670,7 @@ void Func07F9 object#(0x7F9) () {
 				var0003 = var000D->set_npc_prop(HEALTH, var000D->get_npc_prop(STRENGTH) - var0016);
 				if (gflags[0x0084]) {
 					if (var000D->get_npc_id()) {
-						var000D->set_alignment(0x0002);
+						var000D->set_alignment(EVIL);
 						var000D->set_schedule_type(IN_COMBAT);
 						var000D->set_attack_mode(NEAREST);
 						var000D->set_opponent(item);
@@ -80677,7 +80684,7 @@ void Func07F9 object#(0x7F9) () {
 							set_opponent(var000D);
 						}
 					} else {
-						var000D->set_alignment(0x0003);
+						var000D->set_alignment(CHAOTIC);
 						if (item == 0xFE9C->get_npc_object()) {
 							var000D->set_opponent(item);
 							var000D->set_oppressor(item);
@@ -80686,7 +80693,7 @@ void Func07F9 object#(0x7F9) () {
 						var000D->set_schedule_type(TEND_SHOP);
 					}
 				} else {
-					var000D->set_alignment(0x0003);
+					var000D->set_alignment(CHAOTIC);
 					var000D->set_schedule_type(IN_COMBAT);
 					var000D->set_attack_mode(NEAREST);
 				}
@@ -82416,7 +82423,7 @@ void Func07FF object#(0x7FF) () {
 	if (item != 0xFE9C->get_npc_object()) {
 		set_npc_id(0x0000);
 	}
-	set_alignment(0x0001);
+	set_alignment(GOOD);
 	if (!(item == 0xFE9C->get_npc_object())) {
 		0xFE9C->get_npc_object()->set_camera();
 		set_schedule_type(FOLLOW_AVATAR);
@@ -84979,7 +84986,7 @@ void Func080E 0x80E () {
 	};
 	if (var0000) {
 		var0000->set_item_flag(SI_TOURNAMENT);
-		var0000->set_alignment(0x0002);
+		var0000->set_alignment(EVIL);
 		var0001 = var0000->add_cont_items(0x0001, 0x0358, 0x0003, FRAME_ANY, 0x0012);
 		var0001 = var0000->add_cont_items(0x0001, 0x0327, 0x0003, FRAME_ANY, 0x0012);
 		var0001 = var0000->add_cont_items(0x0001, 0x011F, 0x0001, FRAME_ANY, 0x0012);
@@ -84988,7 +84995,7 @@ void Func080E 0x80E () {
 		var0000->set_oppressor(0xFFC0);
 		var0000->set_opponent(0xFFC0);
 	}
-	0xFFC0->set_alignment(0x0001);
+	0xFFC0->set_alignment(GOOD);
 	var0001 = 0xFFC0->add_cont_items(0x0001, 0x01A8, 0x0005, FRAME_ANY, 0x0012);
 	var0001 = 0xFFC0->add_cont_items(0x0001, 0x0359, 0x0002, FRAME_ANY, 0x0012);
 	var0001 = 0xFFC0->add_cont_items(0x0001, 0x02A4, 0x0005, FRAME_ANY, 0x0012);
@@ -94980,7 +94987,7 @@ void Func0856 0x856 () {
 		var0001 = UI_create_new_object2(0x02B3, [0x0000, 0x0000, 0x0000]);
 		if (var0001) {
 			var0001->set_schedule_type(IN_COMBAT);
-			var0001->set_alignment(0x0002);
+			var0001->set_alignment(EVIL);
 			0xFE9C->set_oppressor(var0001);
 			var0002 = var0001->approach_avatar(0x0050, 0x0028);
 			var0003 = UI_get_random(0x0006);
@@ -103345,7 +103352,7 @@ void Func08CA 0x8CA () {
 			var0000 = find_nearby(0x0103, 0x0003, MASK_NPC2);
 			if (var0000) {
 				var0000->set_schedule_type(WAIT);
-				var0000->set_alignment(0x0000);
+				var0000->set_alignment(NEUTRAL);
 				var0000->set_npc_id(0x0002);
 				var0001 = script var0000 {
 					face west;
@@ -103365,7 +103372,7 @@ void Func08CA 0x8CA () {
 					var0000->item_say("@She loved flowers so...@");
 				} else {
 					var0000->item_say("@If I had flowers...@");
-					var0000->set_alignment(0x0000);
+					var0000->set_alignment(NEUTRAL);
 				}
 			}
 		}
@@ -103394,7 +103401,7 @@ void Func08CA 0x8CA () {
 					}
 				} else {
 					var0000->item_say("@If I had flowers...@");
-					var0000->set_alignment(0x0000);
+					var0000->set_alignment(NEUTRAL);
 				}
 			}
 		}
@@ -103905,7 +103912,7 @@ void Func08D2 0x8D2 () {
 	var0007 = script 0xFE9C {
 		wait 3;
 	};
-	0xFF27->set_alignment(0x0000);
+	0xFF27->set_alignment(NEUTRAL);
 	0xFF27->set_schedule_type(HOUND);
 }
 
@@ -104064,7 +104071,7 @@ var Func08D6 0x8D6 () {
 		var0002 = find_nearby(0x0174, 0x001E, MASK_NPC2);
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0000 += 0x0007;
-			var0005->set_alignment(0x0002);
+			var0005->set_alignment(EVIL);
 			var0005->set_schedule_type(IN_COMBAT);
 			var0006 = script var0005 after var0000 ticks {
 				nohalt;
@@ -105286,7 +105293,7 @@ void Func08F5 0x8F5 (var var0000) {
 		var0005->halt_scheduled();
 		var0006 = var0005->get_npc_object();
 		var0006->set_schedule_type(STANDTHERE);
-		var0006->set_alignment(0x0000);
+		var0006->set_alignment(NEUTRAL);
 		var0006->set_oppressor(0x0000);
 		var0007 = Func095C(var0006, STRENGTH);
 		var0008 = Func095C(var0006, HEALTH);
@@ -106417,7 +106424,7 @@ void Func0919 0x919 (var var0000) {
 		var0005 = [0x0752, 0x03E5, 0x0006];
 		var0006 = UI_create_new_object2(0x013E, var0005);
 		if (var0006) {
-			var0006->set_alignment(0x0000);
+			var0006->set_alignment(NEUTRAL);
 			var0006->set_schedule_type(PATROL);
 			var0006->set_item_flag(SI_TOURNAMENT);
 			0xFF34->set_npc_id(0x0002);
@@ -106489,7 +106496,7 @@ void Func091D 0x91D () {
 	if (var0000) {
 		var0001 = var0000->get_object_position();
 		if ((var0001[0x0001] >= 0x0432) && ((var0001[0x0001] <= 0x0439) && ((var0001[0x0002] >= 0x03E4) && ((var0001[0x0002] <= 0x03EB) && (var0001[0x0003] == 0x0000))))) {
-			var0000->set_alignment(0x0002);
+			var0000->set_alignment(EVIL);
 			var0000->set_schedule_type(IN_COMBAT);
 			0xFE9C->set_oppressor(var0000);
 			UI_sprite_effect(0x000D, (var0001[0x0001] - 0x0002), (var0001[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -107455,7 +107462,7 @@ void Func0931 0x931 (var var0000) {
 	}
 	0xFEED->show_npc_face0(0x0000);
 	say("\"Very good, very good,\" he says as he returns your equipment.");
-	var0000->set_alignment(0x0001);
+	var0000->set_alignment(GOOD);
 	var0006 = var0000->find_nearby(0x020A, 0x002D, MASK_NONE);
 	do {
 		for (var0009 in var0006 with var0007 to var0008) {
@@ -107657,7 +107664,7 @@ void Func0934 0x934 (var var0000) {
 	} else {
 		var0000->remove_from_party();
 		var0000->set_schedule_type(WAIT);
-		var0000->set_alignment(0x0001);
+		var0000->set_alignment(GOOD);
 	}
 	var0000->set_item_flag(SI_TOURNAMENT);
 	var0003 = var0000->find_nearby(0x020A, 0x000F, MASK_NONE);
@@ -111936,7 +111943,7 @@ var Func09A1 0x9A1 (var var0000) {
 	if (!(var0001 == 0x0000)) {
 		var0001->set_schedule_type(IN_COMBAT);
 		var0001->set_oppressor(0xFE9C->get_npc_object());
-		var0001->set_alignment(0x0003);
+		var0001->set_alignment(CHAOTIC);
 		var0002 = var0001->approach_avatar(0x0032, 0x0028);
 		if (!var0002) {
 			Func09A2(var0001, 0xFE9C);
@@ -112152,7 +112159,7 @@ void Func09AC 0x9AC (var var0000, var var0001, var var0002, var var0003) {
 }
 
 void Func09AD 0x9AD (var var0000) {
-	var0000->set_alignment(0x0002);
+	var0000->set_alignment(EVIL);
 	var0000->set_schedule_type(IN_COMBAT);
 	var0000->set_opponent(0xFE9C);
 	var0000->set_oppressor(0xFE9C);
@@ -112643,17 +112650,17 @@ void Func09B7 0x9B7 () {
 void Func09B8 0x9B8 () {
 	if (!gflags[0x00D5]) {
 		0xFEFA->move_object([0x0995, 0x006E, 0x0002]);
-		0xFEFA->set_alignment(0x0000);
+		0xFEFA->set_alignment(NEUTRAL);
 		0xFEFA->set_schedule_type(MAJOR_SIT);
 	}
 	if (!gflags[0x00D3]) {
 		0xFEF9->move_object([0x0999, 0x0075, 0x0001]);
-		0xFEF9->set_alignment(0x0000);
+		0xFEF9->set_alignment(NEUTRAL);
 		0xFEF9->set_schedule_type(MAJOR_SIT);
 	}
 	if (!gflags[0x00D4]) {
 		0xFEF8->move_object([0x0999, 0x0069, 0x0001]);
-		0xFEF8->set_alignment(0x0000);
+		0xFEF8->set_alignment(NEUTRAL);
 		0xFEF8->set_schedule_type(MAJOR_SIT);
 	}
 }
