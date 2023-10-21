@@ -5270,14 +5270,14 @@ void Func02BE shape#(0x2BE) () {
 		var0005 = var0002[0x0003] - var0003[0x0002];
 		if (Func0932(var0004) > Func0932(var0005)) {
 			if (var0004 > 0x0000) {
-				var0006 = 0x0002;
+				var0006 = EAST;
 			} else {
-				var0006 = 0x0006;
+				var0006 = WEST;
 			}
 		} else if (var0005 > 0x0000) {
-			var0006 = 0x0004;
+			var0006 = SOUTH;
 		} else {
-			var0006 = 0x0000;
+			var0006 = NORTH;
 		}
 		set_item_frame(var0006 / 0x0002);
 		fire_projectile(var0006, 0x02BF, 0x001E, 0x02BE, 0x02BE);
