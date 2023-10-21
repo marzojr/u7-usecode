@@ -1,6 +1,16 @@
 #game "serpentisle"
 #strictbraces "true"
 
+enum weather_types {
+	CLEAR_WEATHER	= 0,
+	SNOWING			= 1,	//Unsure; in Exult, works the same as RAIN, below and seems identical to RAIN in the originals
+	RAIN			= 2,
+	SPARKLE			= 3,	//Prevents casting of spells in BG (and maybe SI too?)
+	FOG				= 4,	//Seems to work like RAIN in the originals
+	OVERCAST		= 5,	//Seems to clear weather in the originals
+	CLOUDY			= 6
+};
+
 snum skins {
 	BLACK_AVATAR = 0,
 	LATINO_AVATAR = 1,
@@ -2920,7 +2930,7 @@ void Func0109 shape#(0x109) () {
 			if (0xFF31->get_npc_id() == 0x0008) {
 				0xFE9C->clear_item_flag(DONT_MOVE);
 				0xFF31->set_npc_id(0x0000);
-				UI_set_weather(0x0000);
+				UI_set_weather(CLEAR_WEATHER);
 				0xFF29->set_schedule_type(TALK);
 				var0008 = script Func09A0(0x0005, 0x0001) after 1000 ticks {
 					nohalt;
@@ -2999,7 +3009,7 @@ void Func0109 shape#(0x109) () {
 				};
 			}
 			if (0xFF31->get_npc_id() == 0x0001) {
-				UI_set_weather(0x0003);
+				UI_set_weather(SPARKLE);
 				UI_play_music(0x0041, var0001);
 				0xFE9C->set_item_flag(DONT_MOVE);
 				0xFF31->item_say("@Long have we waited...@");
@@ -10219,7 +10229,7 @@ void Func0289 shape#(0x289) () {
 				gflags[0x0008] = false;
 				gflags[0x0009] = false;
 				gflags[0x000A] = false;
-				UI_set_weather(0x0002);
+				UI_set_weather(RAIN);
 				var000B = get_object_position();
 				remove_item();
 				UI_sprite_effect(0x001A, var000B[0x0001], var000B[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -23762,7 +23772,7 @@ void Func0410 object#(0x410) () {
 			UI_sprite_effect(0x002A, var0004[0x0001], var0004[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		}
 		if (0xFFF0->get_npc_id() == 0x0004) {
-			UI_set_weather(0x0003);
+			UI_set_weather(SPARKLE);
 			Func097F(0xFFF0, "@'Tis so windy!@", 0x0003);
 			var0006 = 0x0247;
 			var0007 = 0xFFF0->find_nearby(var0006, 0x000A, MASK_NONE);
@@ -23785,7 +23795,7 @@ void Func0410 object#(0x410) () {
 		}
 		if (0xFFF0->get_npc_id() == 0x0001) {
 			UI_play_sound_effect(0x0074);
-			UI_set_weather(0x0002);
+			UI_set_weather(RAIN);
 			var0008 = 0xFFF0->find_nearby(0x025F, 0x0014, MASK_EGG);
 			var0009 = UI_create_new_object(0x0339);
 			if (var0009) {
@@ -30729,7 +30739,7 @@ void Func0425 object#(0x425) () {
 	var0000 = 0xFFDB->get_schedule_type();
 	if (event == SCRIPTED) {
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
-		UI_set_weather(0x0000);
+		UI_set_weather(CLEAR_WEATHER);
 		0xFE9C->set_camera();
 		var0001 = script Func09A0(0x0005, 0x0001) after 30 ticks {
 			nohalt;
@@ -46492,7 +46502,7 @@ void Func044D object#(0x44D) () {
 				if (!gflags[0x00B4]) {
 					0xFFB3->item_say("@A storm approaches.@");
 					Func097F(var0007, "@Another one?@", 0x0003);
-					UI_set_weather(0x0002);
+					UI_set_weather(RAIN);
 				} else {
 					0xFFB3->item_say("@I am not a thief.@");
 					Func097F(var0007, "@Of course not.@", 0x0003);
@@ -59967,7 +59977,7 @@ void Func0618 object#(0x618) () {
 		abort;
 	}
 	if ((event == SCRIPTED) && (gflags[0x000A] == true)) {
-		UI_set_weather(0x0000);
+		UI_set_weather(CLEAR_WEATHER);
 		0xFE9C->item_say("@By Lord British's Beard!@");
 		0xFE9C->show_npc_face0(0x0000);
 		say("\"Look at how quickly it has grown! It looks as if it has been here for decades!\"");
@@ -66353,8 +66363,8 @@ void Func0684 object#(0x684) () {
 				actor frame strike_1h;
 				sfx 57;
 			};
-			if (UI_get_weather() != 0x0003) {
-				UI_set_weather(0x0000);
+			if (UI_get_weather() != SPARKLE) {
+				UI_set_weather(CLEAR_WEATHER);
 			}
 		} else {
 			var0000 = script item {
@@ -67728,7 +67738,7 @@ void Func06BC object#(0x6BC) () {
 			UI_play_music(0x0017, Func09A0(0x0005, 0x0001));
 			var0003 = var0000->set_item_quality(0x0000);
 			gflags[0x018C] = true;
-			UI_set_weather(0x0002);
+			UI_set_weather(RAIN);
 			var0004 = Func0992(0x0001, "@Looks like a storm coming...@", 0x0000, true);
 			var0003 = script var0000 after 30 ticks {
 				nohalt;
@@ -67777,7 +67787,7 @@ void Func06BC object#(0x6BC) () {
 						call Func06BC;
 					};
 					var0003 = var0000->set_item_quality(var0002 + 0x0001);
-					UI_set_weather(0x0000);
+					UI_set_weather(CLEAR_WEATHER);
 				} else {
 					var0003 = script var0000 after 10 ticks {
 						nohalt;
@@ -68123,7 +68133,7 @@ void Func06C5 object#(0x6C5) () {
 			}
 		}
 	} else if (var0000) {
-		UI_set_weather(0x0000);
+		UI_set_weather(CLEAR_WEATHER);
 		var0006 = var0000->set_item_quality(0x00C8);
 	}
 }
@@ -72169,10 +72179,10 @@ void Func0716 object#(0x716) () {
 }
 
 void Func0717 object#(0x717) () {
-	if (UI_get_weather() == 0x0003) {
-		UI_set_weather(0x0000);
+	if (UI_get_weather() == SPARKLE) {
+		UI_set_weather(CLEAR_WEATHER);
 	} else {
-		UI_set_weather(0x0003);
+		UI_set_weather(SPARKLE);
 	}
 }
 
@@ -74600,7 +74610,7 @@ void Func073B object#(0x73B) () {
 	var var0018;
 
 	if ((get_item_quality() == 0x00FF) && (event == EGG)) {
-		UI_set_weather(0x0003);
+		UI_set_weather(SPARKLE);
 		UI_play_sound_effect(0x0082);
 		var0000 = get_object_position();
 		var0001 = UI_create_new_object2(0x013E, [var0000[0x0001], (var0000[0x0002] + 0x0001), var0000[0x0003]]);
@@ -75037,7 +75047,7 @@ void Func073B object#(0x73B) () {
 			var0002 = var0003->set_item_quality(0x0000);
 			0xFE9C->clear_item_flag(DONT_MOVE);
 			UI_init_conversation();
-			UI_set_weather(0x0000);
+			UI_set_weather(CLEAR_WEATHER);
 		}
 	}
 }
@@ -77279,7 +77289,7 @@ void Func07AD object#(0x7AD) () {
 	var0001 = get_item_quality();
 	var0002 = get_item_quantity(0x0000);
 	if (var0001 == 0x0000) {
-		UI_set_weather(0x0002);
+		UI_set_weather(RAIN);
 		if (!Func093D(var0000, (var0002 + 0x0001))) {
 			var0000 = Func0940(var0000, var0002);
 			Func093E(var0000);
@@ -77307,7 +77317,7 @@ void Func07AD object#(0x7AD) () {
 		var0003 = script item after 3 ticks {
 			call Func07AC;
 		};
-		UI_set_weather(0x0000);
+		UI_set_weather(CLEAR_WEATHER);
 	}
 }
 
@@ -77879,7 +77889,7 @@ void Func07D3 object#(0x7D3) () {
 			call Func0798;
 		};
 		UI_play_sound_effect(0x0027);
-		UI_set_weather(0x0003);
+		UI_set_weather(SPARKLE);
 		Func097F(0xFE9C, "@Oh...@", 0x0002);
 		Func097F(0xFE9C, "@AAAAHHHH!!!!!@", 0x002D);
 		Func097F(0xFE9C, "@NOOOO!!!!!@", 0x003C);
@@ -78115,7 +78125,7 @@ void Func07D5 object#(0x7D5) () {
 		UI_remove_npc_face0();
 		UI_play_sound_effect(0x0082);
 		0xFE9C->clear_item_flag(DONT_MOVE);
-		UI_set_weather(0x0000);
+		UI_set_weather(CLEAR_WEATHER);
 		gflags[0x0007] = false;
 		gflags[0x0008] = false;
 		gflags[0x0009] = false;
@@ -79210,7 +79220,7 @@ void Func07E4 object#(0x7E4) () {
 			};
 			call Func07E6;
 		};
-		UI_set_weather(0x0002);
+		UI_set_weather(RAIN);
 		var0004 = var0002->run_script(var0003);
 		var0004 = var0000->set_item_quality(0x0000);
 	}
@@ -79303,7 +79313,7 @@ void Func07E6 object#(0x7E6) () {
 	say("\"I'll not even attempt to make the Arabella seaworthy until these blasted storms are over!\"");
 	say("\"If ye be wantin' Captain Hawk, I'll be at the bottom of a mug at the Blue Boar Inn.\"");
 	UI_remove_npc_face0();
-	UI_set_weather(0x0000);
+	UI_set_weather(CLEAR_WEATHER);
 	0xFE9C->clear_item_flag(UNKNOWN_FLAG_17);
 	0xFFD8->clear_item_flag(DONT_MOVE);
 	0xFFDB->set_item_flag(CAN_FLY);
@@ -79751,7 +79761,7 @@ void Func07ED object#(0x7ED) () {
 	var var0007;
 
 	if ((event == SCRIPTED) && (gflags[0x0008] == true)) {
-		UI_set_weather(0x0000);
+		UI_set_weather(CLEAR_WEATHER);
 		gflags[0x0008] = false;
 		UI_init_conversation();
 		0xFF31->show_npc_face0(0x0000);
@@ -80022,7 +80032,7 @@ void Func07F0 object#(0x7F0) () {
 	var var0004;
 	var var0005;
 
-	UI_set_weather(0x0000);
+	UI_set_weather(CLEAR_WEATHER);
 	var0000 = UI_get_party_list2();
 	var0001 = 0x0935;
 	for (var0004 in var0000 with var0002 to var0003) {
@@ -109890,7 +109900,7 @@ void Func0950 0x950 (var var0000) {
 }
 
 var Func0951 0x951 () {
-	if (UI_get_weather() == 0x0003) {
+	if (UI_get_weather() == SPARKLE) {
 		return false;
 	}
 	return true;
@@ -112833,7 +112843,7 @@ void Func09BE 0x9BE (var var0000, var var0001) {
 			}
 			if (var0008 == 0x00C9) {
 				var0009 = var0000->set_item_quality(0x00CA);
-				UI_set_weather(0x0002);
+				UI_set_weather(RAIN);
 				var000A = Func0992(0x0001, 0x0000, 0x0000, false);
 				if (var000A != 0xFE9C) {
 					var0009 = script var000A after 10 ticks {
@@ -112865,14 +112875,14 @@ void Func09BE 0x9BE (var var0000, var var0001) {
 						call Func07EF;
 					};
 				} else {
-					UI_set_weather(0x0000);
+					UI_set_weather(CLEAR_WEATHER);
 					var0009 = var0000->set_item_quality(0x00C9);
 				}
 				Func09BD(var0000);
 			}
 			if (var0008 == 0x00CB) {
 				var0009 = var0000->set_item_quality(0x00CC);
-				UI_set_weather(0x0002);
+				UI_set_weather(RAIN);
 				if (Func0942(0xFFFD)) {
 					var0009 = script 0xFFFD after 10 ticks {
 						nohalt;
@@ -112888,7 +112898,7 @@ void Func09BE 0x9BE (var var0000, var var0001) {
 				Func09BC(var0000);
 			}
 			if (var0008 == 0x00CC) {
-				UI_set_weather(0x0000);
+				UI_set_weather(CLEAR_WEATHER);
 				var0009 = var0000->set_item_quality(0x00CB);
 				Func09BD(var0000);
 			}

@@ -1,6 +1,16 @@
 #game "blackgate"
 #strictbraces "true"
 
+enum weather_types {
+	CLEAR_WEATHER	= 0,
+	SNOWING			= 1,	//Unsure; in Exult, works the same as RAIN, below and seems identical to RAIN in the originals
+	RAIN			= 2,
+	SPARKLE			= 3,	//Prevents casting of spells in BG (and maybe SI too?)
+	FOG				= 4,	//Seems to work like RAIN in the originals
+	OVERCAST		= 5,	//Seems to clear weather in the originals
+	CLOUDY			= 6
+};
+
 enum alignments {
 	NEUTRAL			= 0,
 	GOOD			= 1,
@@ -52337,7 +52347,7 @@ void Func063E object#(0x63E) () {
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0005->set_item_flag(PARALYZED);
 		}
-		UI_set_weather(0x0002);
+		UI_set_weather(RAIN);
 		UI_armageddon();
 		gflags[0x001E] = true;
 		0xFFE9->set_alignment(EVIL);
@@ -52424,12 +52434,12 @@ void Func0641 object#(0x641) () {
 				sfx 68;
 			};
 			var0001 = [0x0000, 0x0001, 0x0002];
-			if (UI_get_weather() == 0x0000) {
+			if (UI_get_weather() == CLEAR_WEATHER) {
 				var0002 = UI_die_roll(0x0002, 0x0003);
 				var0003 = var0001[var0002];
 				UI_set_weather(var0003);
-			} else if (UI_get_weather() != 0x0003) {
-				UI_set_weather(0x0000);
+			} else if (UI_get_weather() != SPARKLE) {
+				UI_set_weather(CLEAR_WEATHER);
 			}
 		} else {
 			var0000 = script item {
@@ -54773,7 +54783,7 @@ void Func0674 object#(0x674) () {
 		if (Func0906()) {
 			var0000 = 0x0046;
 			gflags[0x02ED] = true;
-			UI_set_weather(0x0002);
+			UI_set_weather(RAIN);
 			var0001 = script item {
 				sfx 65;
 				actor frame cast_up;
@@ -55475,7 +55485,7 @@ void Func0680 object#(0x680) () {
 		if (Func0906()) {
 			var0000 = get_object_position();
 			UI_sprite_effect(0x0007, (var0000[0x0001] - 0x0002), (var0000[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
-			UI_set_weather(0x0002);
+			UI_set_weather(RAIN);
 			halt_scheduled();
 			var0001 = script item {
 				sfx 65;
@@ -55897,7 +55907,7 @@ void Func0689 object#(0x689) () {
 
 void Func068A object#(0x68A) () {
 	gflags[0x02ED] = false;
-	UI_set_weather(0x0000);
+	UI_set_weather(CLEAR_WEATHER);
 }
 
 extern var Func0837 0x837 (var var0000, var var0001, var var0002, var var0003, var var0004);
@@ -75297,7 +75307,7 @@ void Func0905 0x905 (var var0000) {
 }
 
 var Func0906 0x906 () {
-	if (UI_get_weather() == 0x0003) {
+	if (UI_get_weather() == SPARKLE) {
 		return false;
 	}
 	return true;
