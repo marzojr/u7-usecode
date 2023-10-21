@@ -1,6 +1,18 @@
 #game "blackgate"
 #strictbraces "true"
 
+enum damage_types {
+	NORMAL_DAMAGE		= 0,
+	FIRE_DAMAGE			= 1,
+	MAGIC_DAMAGE		= 2,
+	LIGHTNING_DAMAGE	= 3,
+	POISON_DAMAGE		= 3,
+	STARVATION_DAMAGE	= 3,
+	FREEZING_DAMAGE		= 3,
+	ETHEREAL_DAMAGE		= 4,
+	SONIC_DAMAGE		= 5
+};
+
 enum wildcards {
 	FIND_ON_SCREEN	= -359,
 	QUANTITY_ANY	= -359,
@@ -50165,7 +50177,7 @@ void Func060F object#(0x60F) () {
 	UI_sprite_effect(0x0011, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0x0001);
 	UI_play_sound_effect(0x003E);
 	UI_lightning();
-	var0001 = UI_apply_damage(get_npc_prop(STRENGTH), 0x000C, 0x0003, item);
+	var0001 = UI_apply_damage(get_npc_prop(STRENGTH), 0x000C, LIGHTNING_DAMAGE, item);
 }
 
 extern var Func0909 0x909 ();
@@ -58484,7 +58496,7 @@ void Func06CC object#(0x6CC) () {
 					} else {
 						var0005 = UI_die_roll(0x0001, var0000);
 					}
-					var0004->reduce_health(var0005, 0x0005);
+					var0004->reduce_health(var0005, SONIC_DAMAGE);
 				}
 			}
 		}
@@ -63083,7 +63095,7 @@ void Func0824 0x824 (var var0000) {
 	var var0004;
 
 	if ((UI_die_roll(0x0001, 0x0003) == 0x0001) && (!(var0000->get_item_quality() == 0x0008))) {
-		0xFE9C->reduce_health(0x0003, 0x0004);
+		0xFE9C->reduce_health(0x0003, ETHEREAL_DAMAGE);
 		UI_play_sound_effect2(0x003E, item);
 		var0001 = 0xFE9C->get_object_position();
 		var0002 = var0000->get_object_position();
@@ -68444,7 +68456,7 @@ void Func0888 0x888 (var var0000) {
 	var0004 = var0000->find_nearby(ANY_SHAPE, 0x0005, MASK_NPC2);
 	for (var0007 in var0004 with var0005 to var0006) {
 		var0008 = UI_die_roll(0x000F, 0x0014);
-		var0009 = UI_apply_damage(var0007->get_npc_prop(STRENGTH), var0008, 0x0002, var0007);
+		var0009 = UI_apply_damage(var0007->get_npc_prop(STRENGTH), var0008, MAGIC_DAMAGE, var0007);
 		var000A = var0007->get_alignment();
 		if (var000A == 0x0002) {
 			var0001 = true;
@@ -76241,7 +76253,7 @@ var Func0935 0x935 (var var0000, var var0001) {
 }
 
 void Func0936 0x936 (var var0000, var var0001) {
-	var0000->reduce_health(var0001, 0x0000);
+	var0000->reduce_health(var0001, NORMAL_DAMAGE);
 }
 
 var Func0937 0x937 (var var0000) {

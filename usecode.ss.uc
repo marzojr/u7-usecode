@@ -1,6 +1,18 @@
 #game "serpentisle"
 #strictbraces "true"
 
+enum damage_types {
+	NORMAL_DAMAGE		= 0,
+	FIRE_DAMAGE			= 1,
+	MAGIC_DAMAGE		= 2,
+	LIGHTNING_DAMAGE	= 3,
+	POISON_DAMAGE		= 3,
+	STARVATION_DAMAGE	= 3,
+	FREEZING_DAMAGE		= 3,
+	ETHEREAL_DAMAGE		= 4,
+	SONIC_DAMAGE		= 5
+};
+
 enum wildcards {
 	FIND_ON_SCREEN	= -359,
 	QUANTITY_ANY	= -359,
@@ -628,7 +640,7 @@ void Func00E4 shape#(0xE4) () {
 	if (var0000 == 0x000E) {
 		if ((event == DEATH) && (!gflags[0x00C9])) {
 			clear_item_flag(SI_TOURNAMENT);
-			reduce_health(0x0032, 0x0000);
+			reduce_health(0x0032, NORMAL_DAMAGE);
 			gflags[0x00C9] = true;
 			abort;
 		}
@@ -2446,7 +2458,7 @@ void Func0103 shape#(0x103) () {
 	var0005 = false;
 	if ((event == DEATH) && (var0001 == 0x0001)) {
 		clear_item_flag(SI_TOURNAMENT);
-		reduce_health(0x0032, 0x0000);
+		reduce_health(0x0032, NORMAL_DAMAGE);
 		gflags[0x0120] = true;
 	}
 	if (event == DOUBLECLICK) {
@@ -3718,7 +3730,7 @@ void Func013D shape#(0x13D) () {
 				0xFFFE->move_object(var0004);
 				0xFFFE->set_item_flag(SI_ZOMBIE);
 				0xFFFE->clear_item_flag(SI_TOURNAMENT);
-				0xFFFE->reduce_health(0x0037, 0x0000);
+				0xFFFE->reduce_health(0x0037, NORMAL_DAMAGE);
 				gflags[0x00D0] = true;
 				gflags[0x00D4] = true;
 			}
@@ -4478,7 +4490,7 @@ labelFunc0151_0462:
 						nohalt;
 						say "@Goodbye...@";
 					};
-					reduce_health(0x0037, 0x0000);
+					reduce_health(0x0037, NORMAL_DAMAGE);
 					var0016 = get_object_position();
 					var0016[0x0001] -= var0016[0x0003] / 0x0002;
 					var0016[0x0002] -= var0016[0x0003] / 0x0002;
@@ -4671,7 +4683,7 @@ void Func0162 shape#(0x162) () {
 	if ((event == DEATH) && get_item_flag(SI_ZOMBIE)) {
 		clear_item_flag(SI_TOURNAMENT);
 		Func097F(item, "@Thou hast slain me...@", 0x0000);
-		reduce_health(0x0037, 0x0000);
+		reduce_health(0x0037, NORMAL_DAMAGE);
 	}
 }
 
@@ -8602,7 +8614,7 @@ void Func0215 shape#(0x215) () {
 void Func0219 shape#(0x219) () {
 	if (event == DEATH) {
 		clear_item_flag(SI_TOURNAMENT);
-		reduce_health(0x0037, 0x0000);
+		reduce_health(0x0037, NORMAL_DAMAGE);
 	}
 }
 
@@ -15140,7 +15152,7 @@ void Func032C shape#(0x32C) () {
 		Func09AA();
 		gflags[0x0007] = false;
 		var0006 = 0xFE9C->get_npc_prop(HEALTH);
-		0xFE9C->reduce_health(var0006, 0x0000);
+		0xFE9C->reduce_health(var0006, NORMAL_DAMAGE);
 	}
 }
 
@@ -16631,7 +16643,7 @@ void Func0357 shape#(0x357) () {
 		UI_sprite_effect(0x0005, (var0003[0x0001] - 0x0001), (var0003[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_lightning();
 		var0004 = UI_get_random(0x0002);
-		0xFE9C->reduce_health(var0004, 0x0005);
+		0xFE9C->reduce_health(var0004, SONIC_DAMAGE);
 		var0005 = "@Yow!@" & ("@Ouch!@" & ("@That hurt!@" & ("@Ugh...@" & ("@Damn!@" & "@Yikes!@"))));
 		var0002 = var0005[UI_get_random(UI_get_array_size(var0005))];
 		Func097F(0xFE9C, var0002, 0x0001);
@@ -17343,7 +17355,7 @@ void Func0370 shape#(0x370) () {
 				0xFFFD->set_item_flag(SI_ZOMBIE);
 				0xFFFD->clear_item_flag(SI_TOURNAMENT);
 				0xFFFD->move_object(var0001);
-				0xFFFD->reduce_health(0x0037, 0x0000);
+				0xFFFD->reduce_health(0x0037, NORMAL_DAMAGE);
 				gflags[0x00D2] = true;
 				gflags[0x00D5] = true;
 			}
@@ -17575,7 +17587,7 @@ void Func038A shape#(0x38A) () {
 				0xFFFF->move_object(var0001);
 				0xFFFF->set_item_flag(SI_ZOMBIE);
 				0xFFFF->clear_item_flag(SI_TOURNAMENT);
-				0xFFFF->reduce_health(0x0037, 0x0000);
+				0xFFFF->reduce_health(0x0037, NORMAL_DAMAGE);
 				gflags[0x00D1] = true;
 				gflags[0x00D3] = true;
 			}
@@ -17611,7 +17623,7 @@ void Func0395 shape#(0x395) () {
 		UI_remove_npc_face0();
 		0xFEED->clear_item_flag(SI_TOURNAMENT);
 		Func097F(0xFE9C, "@Taste my steel, trapper!@", 0x0001);
-		0xFEED->reduce_health(0x0037, 0x0000);
+		0xFEED->reduce_health(0x0037, NORMAL_DAMAGE);
 		gflags[0x0263] = true;
 	}
 	if ((event == DOUBLECLICK) && (var0000 == false)) {
@@ -21138,7 +21150,7 @@ void Func0402 object#(0x402) () {
 				0xFFFE->clear_item_flag(SI_TOURNAMENT);
 			} else {
 				0xFFFE->clear_item_flag(SI_TOURNAMENT);
-				0xFFFE->reduce_health(0x0032, 0x0000);
+				0xFFFE->reduce_health(0x0032, NORMAL_DAMAGE);
 			}
 		}
 	}
@@ -26369,7 +26381,7 @@ void Func0419 object#(0x419) () {
 			UI_remove_npc_face0();
 		}
 		0xFFE7->clear_item_flag(SI_TOURNAMENT);
-		0xFFE7->reduce_health(0x0037, 0x0000);
+		0xFFE7->reduce_health(0x0037, NORMAL_DAMAGE);
 	}
 }
 
@@ -28497,7 +28509,7 @@ void Func041F object#(0x41F) () {
 	if ((event == DEATH) && 0xFFE1->get_item_flag(SI_TOURNAMENT)) {
 		0xFFE1->show_npc_face0(0x0000);
 		0xFFE1->clear_item_flag(SI_TOURNAMENT);
-		0xFFE1->reduce_health(0x0032, 0x0000);
+		0xFFE1->reduce_health(0x0032, NORMAL_DAMAGE);
 		var0003 = Func0992(0x0001, 0x0000, 0x0000, true);
 		Func097F(var0003, "@The witch is dead!@", 0x0005);
 		say("\"With my dying breath, I place the Curse of the Red Witch upon thee!\"");
@@ -33685,7 +33697,7 @@ void Func042C object#(0x42C) () {
 			}
 			if (var000E) {
 				0xFFD4->clear_item_flag(SI_TOURNAMENT);
-				0xFFD4->reduce_health(0x0032, 0x0000);
+				0xFFD4->reduce_health(0x0032, NORMAL_DAMAGE);
 			}
 		}
 	}
@@ -38786,7 +38798,7 @@ void Func0439 object#(0x439) () {
 		gflags[0x015D] = true;
 		0xFFC7->show_npc_face0(0x0000);
 		0xFFC7->clear_item_flag(SI_TOURNAMENT);
-		0xFFC7->reduce_health(0x0032, 0x0000);
+		0xFFC7->reduce_health(0x0032, NORMAL_DAMAGE);
 		Func097F(0xFFC7, "@Urgghh...@", 0x0000);
 		var0004 = Func0992(0x0001, 0x0000, 0x0000, true);
 		Func097F(var0004, "@He is dead...@", 0x0005);
@@ -43525,7 +43537,7 @@ void Func0445 object#(0x445) () {
 			say("\"The problem lies with the Bears and Wolves -- their bickering weakens us. So I had a plan! The Leopards would rule, and I would be King.\"");
 			say("\"And with the miracle weapons in our hidden arsenal, not even the Goblins could have taken this city...\"");
 			0xFFBB->clear_item_flag(SI_TOURNAMENT);
-			0xFFBB->reduce_health(0x0032, 0x0000);
+			0xFFBB->reduce_health(0x0032, NORMAL_DAMAGE);
 			abort;
 		}
 		var000E = script item {
@@ -44913,7 +44925,7 @@ void Func0448 object#(0x448) () {
 		}
 		say("\"I spit upon thee, pawn of the Demon British!\"");
 		0xFFB8->clear_item_flag(SI_TOURNAMENT);
-		0xFFB8->reduce_health(0x0032, 0x0000);
+		0xFFB8->reduce_health(0x0032, NORMAL_DAMAGE);
 		Func097F(0xFE9C, "@Whew!@", 0x0002);
 		abort;
 	}
@@ -45761,7 +45773,7 @@ void Func044B object#(0x44B) () {
 		0xFFB5->clear_item_flag(SI_TOURNAMENT);
 		Func097F(0xFFB5, "@My love!@", 0x0000);
 		Func097F(0xFE9C, "@Die with dishonor!@", 0x0005);
-		0xFFB5->reduce_health(0x0037, 0x0000);
+		0xFFB5->reduce_health(0x0037, NORMAL_DAMAGE);
 		abort;
 	}
 	if (event == STARTED_TALKING) {
@@ -46498,7 +46510,7 @@ void Func044D object#(0x44D) () {
 			say("\"And it was I who stole from the town treasury, for we needed the money to acquire a cache of powerful weapons -- explosive weapons...\"");
 			say("\"The blood of Cantra's father weighs upon my soul. He did stumble into our secret, so he had to be killed. If our secret had not been protected, Marsten would have killed me.\"");
 			0xFFB3->clear_item_flag(SI_TOURNAMENT);
-			0xFFB3->reduce_health(0x0032, 0x0000);
+			0xFFB3->reduce_health(0x0032, NORMAL_DAMAGE);
 			gflags[0x00B4] = true;
 			abort;
 		}
@@ -48120,7 +48132,7 @@ extern void Func08B2 0x8B2 ();
 void Func0455 object#(0x455) () {
 	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		clear_item_flag(SI_TOURNAMENT);
-		reduce_health(0x0032, 0x0000);
+		reduce_health(0x0032, NORMAL_DAMAGE);
 		gflags[0x0209] = true;
 		abort;
 	}
@@ -48138,7 +48150,7 @@ extern void Func08B2 0x8B2 ();
 void Func0457 object#(0x457) () {
 	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		clear_item_flag(SI_TOURNAMENT);
-		reduce_health(0x0032, 0x0000);
+		reduce_health(0x0032, NORMAL_DAMAGE);
 		gflags[0x020A] = true;
 		abort;
 	}
@@ -48174,7 +48186,7 @@ extern void Func08B2 0x8B2 ();
 void Func045C object#(0x45C) () {
 	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		clear_item_flag(SI_TOURNAMENT);
-		reduce_health(0x0032, 0x0000);
+		reduce_health(0x0032, NORMAL_DAMAGE);
 		gflags[0x020B] = true;
 		abort;
 	}
@@ -48186,7 +48198,7 @@ extern void Func08B2 0x8B2 ();
 void Func045D object#(0x45D) () {
 	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		clear_item_flag(SI_TOURNAMENT);
-		reduce_health(0x0032, 0x0000);
+		reduce_health(0x0032, NORMAL_DAMAGE);
 		gflags[0x020C] = true;
 		abort;
 	}
@@ -52718,7 +52730,7 @@ void Func04A3 object#(0x4A3) () {
 				UI_sprite_effect(0x0011, var0004[0x0001], var0004[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_lightning();
 				UI_play_sound_effect(0x0074);
-				var0000 = UI_apply_damage(0xFE9C->get_npc_prop(STRENGTH), 0x0004, 0x0003, 0xFE9C);
+				var0000 = UI_apply_damage(0xFE9C->get_npc_prop(STRENGTH), 0x0004, LIGHTNING_DAMAGE, 0xFE9C);
 				var0000 = script 0xFF5D {
 					face var0003;
 					say "@Kal Grav!@";
@@ -52754,7 +52766,7 @@ void Func04A3 object#(0x4A3) () {
 				UI_play_sound_effect(0x002A);
 				var0005 = UI_get_party_list();
 				for (var0008 in var0005 with var000C to var000D) {
-					var0000 = UI_apply_damage(var0008->get_npc_prop(STRENGTH), 0x0004, 0x0003, var0008);
+					var0000 = UI_apply_damage(var0008->get_npc_prop(STRENGTH), 0x0004, LIGHTNING_DAMAGE, var0008);
 				}
 				var0000 = script 0xFF5D {
 					face var0003;
@@ -56154,7 +56166,7 @@ void Func04CB object#(0x4CB) () {
 	}
 	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		clear_item_flag(SI_TOURNAMENT);
-		reduce_health(0x0032, 0x0000);
+		reduce_health(0x0032, NORMAL_DAMAGE);
 		Func0919(item);
 	}
 	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
@@ -56178,7 +56190,7 @@ void Func04CC object#(0x4CC) () {
 	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		Func0919(item);
 		clear_item_flag(SI_TOURNAMENT);
-		reduce_health(0x0032, 0x0000);
+		reduce_health(0x0032, NORMAL_DAMAGE);
 	}
 }
 
@@ -58473,7 +58485,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 void Func04DE object#(0x4DE) () {
 	if ((event == DEATH) && 0xFF22->get_item_flag(SI_TOURNAMENT)) {
 		0xFF22->clear_item_flag(SI_TOURNAMENT);
-		0xFF22->reduce_health(0x0032, 0x0000);
+		0xFF22->reduce_health(0x0032, NORMAL_DAMAGE);
 		if (0xFF58->get_item_flag(IN_PARTY)) {
 			0xFF58->set_schedule_type(FOLLOW_AVATAR);
 		} else {
@@ -59551,7 +59563,7 @@ void Func060F object#(0x60F) () {
 	UI_sprite_effect(0x0011, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0x0001);
 	UI_play_sound_effect(0x0074);
 	UI_lightning();
-	var0001 = UI_apply_damage(get_npc_prop(STRENGTH), 0x000C, 0x0003, item);
+	var0001 = UI_apply_damage(get_npc_prop(STRENGTH), 0x000C, LIGHTNING_DAMAGE, item);
 }
 
 void Func0611 object#(0x611) () {
@@ -68050,7 +68062,7 @@ void Func06C4 object#(0x6C4) () {
 			var0006 = UI_create_new_object2(0x0202, var0005);
 			if (var0006) {
 				var0006->set_polymorph(0x0202);
-				var0006->reduce_health(0x0032, 0x0000);
+				var0006->reduce_health(0x0032, NORMAL_DAMAGE);
 			}
 			Func097F(0xFFD4, "@Oh, my!@", 0x0000);
 			gflags[0x01EA] = true;
@@ -72029,7 +72041,7 @@ void Func0710 object#(0x710) () {
 		}
 	}
 	if (var0002 != 0xFE9C) {
-		var0002->reduce_health(0x0005, 0x0005);
+		var0002->reduce_health(0x0005, SONIC_DAMAGE);
 	}
 	gflags[0x0226] = true;
 	if (UI_die_roll(0x0001, 0x0003) == 0x0002) {
@@ -79579,9 +79591,9 @@ void Func07EB object#(0x7EB) () {
 	for (var0006 in var0003 with var0004 to var0005) {
 		if (!(var0006 in var0002)) {
 			var0007 = UI_die_roll(0x0005, 0x000A);
-			var0008 = UI_apply_damage(var0006->get_npc_prop(STRENGTH), var0007, 0x0001, var0006);
+			var0008 = UI_apply_damage(var0006->get_npc_prop(STRENGTH), var0007, FIRE_DAMAGE, var0006);
 			var0007 = UI_die_roll(0x0005, 0x000A);
-			var0008 = UI_apply_damage(var0006->get_npc_prop(STRENGTH), var0007, 0x0002, var0006);
+			var0008 = UI_apply_damage(var0006->get_npc_prop(STRENGTH), var0007, MAGIC_DAMAGE, var0006);
 			var0009 = var0006->get_alignment();
 			if ((var0009 == 0x0002) || (var0009 == 0x0003)) {
 				var0006->set_schedule_type(IN_COMBAT);
@@ -101488,7 +101500,7 @@ void Func08A1 0x8A1 () {
 	var0005 = UI_update_last_created(var0000);
 	for (var0008 in var0002 with var0006 to var0007) {
 		var0009 = var0008->get_npc_prop(HEALTH);
-		var0005 = UI_apply_damage(var0008->get_npc_prop(STRENGTH), (var0009 / 3) * 2, 0x0001, var0008);
+		var0005 = UI_apply_damage(var0008->get_npc_prop(STRENGTH), (var0009 / 3) * 2, FIRE_DAMAGE, var0008);
 	}
 	if (var0001->get_item_frame() == 0x0001) {
 		var0001->set_item_frame(0x0002);
@@ -103914,7 +103926,7 @@ void Func08D3 0x8D3 () {
 	UI_play_sound_effect(0x002A);
 	var0001 = UI_get_party_list();
 	for (var0004 in var0001 with var0002 to var0003) {
-		var0005 = UI_apply_damage(var0004->get_npc_prop(STRENGTH), 0x001E, 0x0003, var0004);
+		var0005 = UI_apply_damage(var0004->get_npc_prop(STRENGTH), 0x001E, LIGHTNING_DAMAGE, var0004);
 	}
 }
 
@@ -110842,7 +110854,7 @@ var Func0981 0x981 (var var0000, var var0001) {
 }
 
 void Func0982 0x982 (var var0000, var var0001) {
-	var0000->reduce_health(var0001, 0x0000);
+	var0000->reduce_health(var0001, NORMAL_DAMAGE);
 }
 
 var Func0983 0x983 (var var0000) {
