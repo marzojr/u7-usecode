@@ -1,6 +1,15 @@
 #game "blackgate"
 #strictbraces "true"
 
+enum cursors {
+	CURSOR_HAND			= 0,
+	CURSOR_X			= 1,	//Default "no you can't do that" X cursor
+	CURSOR_OUT_OF_RANGE = 2,
+	CURSOR_OUT_OF_AMMO	= 3,
+	CURSOR_TOO_HEAVY	= 4,
+	CURSOR_WONT_FIT		= 5
+};
+
 enum weather_types {
 	CLEAR_WEATHER	= 0,
 	SNOWING			= 1,	//Unsure; in Exult, works the same as RAIN, below and seems identical to RAIN in the originals
@@ -1529,7 +1538,7 @@ void Func0128 shape#(0x128) () {
 			var0000 = var0000->get_container();
 		}
 		if (var0000 == 0x0000) {
-			UI_flash_mouse(0x0000);
+			UI_flash_mouse(CURSOR_HAND);
 			return;
 		}
 	}
@@ -1555,7 +1564,7 @@ void Func012A shape#(0x12A) () {
 				call Func012A;
 			};
 		} else {
-			UI_flash_mouse(0x0000);
+			UI_flash_mouse(CURSOR_HAND);
 		}
 	}
 	if (event == UNREADIED) {
@@ -1598,7 +1607,7 @@ void Func012F shape#(0x12F) () {
 		abort;
 	}
 	if (event == DOUBLECLICK) {
-		UI_flash_mouse(0x0000);
+		UI_flash_mouse(CURSOR_HAND);
 		return;
 	}
 	Func0833(item, Func03A8);
@@ -3547,7 +3556,7 @@ void Func026F shape#(0x26F) () {
 
 	if (event == DOUBLECLICK) {
 		if (!0xFE9C->is_readied(BG_WEAPON_HAND, 0x026F, FRAME_ANY)) {
-			UI_flash_mouse(0x0002);
+			UI_flash_mouse(CURSOR_OUT_OF_RANGE);
 			return;
 		}
 		UI_close_gumps();
@@ -4639,7 +4648,7 @@ void Func028D shape#(0x28D) () {
 				var0001 = 0xFE9C->give_last_created();
 				if (!var0001) {
 					var0001 = var0000->give_last_created();
-					UI_flash_mouse(0x0004);
+					UI_flash_mouse(CURSOR_TOO_HEAVY);
 					abort;
 				}
 			} else {
@@ -4679,7 +4688,7 @@ void Func028E shape#(0x28E) () {
 				var0001 = 0xFE9C->give_last_created();
 				if (!var0001) {
 					var0001 = var0000->give_last_created();
-					UI_flash_mouse(0x0004);
+					UI_flash_mouse(CURSOR_TOO_HEAVY);
 					abort;
 				}
 				event = BG_PATH_SUCCESS;
@@ -4802,7 +4811,7 @@ void Func0296 shape#(0x296) () {
 			actor frame standing;
 		};
 		if (!UI_is_water([var0000[0x0002], var0000[0x0003], var0000[0x0004]])) {
-			UI_flash_mouse(0x0000);
+			UI_flash_mouse(CURSOR_HAND);
 			return;
 		}
 		var0002 = 0xFE9C->get_object_position();
@@ -6567,7 +6576,7 @@ void Func0311 shape#(0x311) () {
 						break;
 					}
 				} nobreak {
-					UI_flash_mouse(0x0000);
+					UI_flash_mouse(CURSOR_HAND);
 					return;
 				}
 			}
@@ -8455,7 +8464,7 @@ void Func036C shape#(0x36C) () {
 		abort;
 	}
 	if (event == DOUBLECLICK) {
-		UI_flash_mouse(0x0000);
+		UI_flash_mouse(CURSOR_HAND);
 		return;
 	}
 	Func0833(item, Func03A7);
@@ -8576,7 +8585,7 @@ void Func03A7 shape#(0x3A7) () {
 		abort;
 	}
 	if (event == DOUBLECLICK) {
-		UI_flash_mouse(0x0000);
+		UI_flash_mouse(CURSOR_HAND);
 		return;
 	}
 	Func0832(item, Func036C);
@@ -8591,7 +8600,7 @@ void Func03A8 shape#(0x3A8) () {
 		abort;
 	}
 	if (event == DOUBLECLICK) {
-		UI_flash_mouse(0x0000);
+		UI_flash_mouse(CURSOR_HAND);
 		return;
 	}
 	Func0832(item, Func012F);
@@ -8701,7 +8710,7 @@ void Func03D5 shape#(0x3D5) () {
 				var0003 = UI_update_last_created(var0002);
 			}
 		} else {
-			UI_flash_mouse(0x0000);
+			UI_flash_mouse(CURSOR_HAND);
 		}
 		var0003 = Func082E(item);
 	}
@@ -51453,7 +51462,7 @@ void Func062D object#(0x62D) () {
 				var0003 = 0xFE9C->give_last_created();
 				if (!var0003) {
 					var0003 = UI_update_last_created(var0002);
-					UI_flash_mouse(0x0004);
+					UI_flash_mouse(CURSOR_TOO_HEAVY);
 					abort;
 				}
 				var0003 = script 0xFE9C {
@@ -51512,7 +51521,7 @@ void Func062E object#(0x62E) () {
 				var0003 = 0xFE9C->give_last_created();
 				if (!var0003) {
 					var0003 = UI_update_last_created(var0002);
-					UI_flash_mouse(0x0004);
+					UI_flash_mouse(CURSOR_TOO_HEAVY);
 					abort;
 				}
 				var0003 = script 0xFE9C {
@@ -56094,13 +56103,13 @@ void Func0692 object#(0x692) () {
 		var0002 = set_last_created();
 		if (!0xFE9C->get_npc_object()->give_last_created()) {
 			var0002 = UI_update_last_created(var0001);
-			UI_flash_mouse(0x0005);
+			UI_flash_mouse(CURSOR_WONT_FIT);
 		}
 	} else {
 		var0002 = set_last_created();
 		if (!0xFE9C->get_npc_object()->give_last_created()) {
 			var0002 = var0000->give_last_created();
-			UI_flash_mouse(0x0005);
+			UI_flash_mouse(CURSOR_WONT_FIT);
 		}
 	}
 }
@@ -62001,7 +62010,7 @@ void Func0717 object#(0x717) () {
 		var0001 = set_last_created();
 		if (!0xFE9C->get_npc_object()->give_last_created()) {
 			if (UI_update_last_created(var0000)) {
-				UI_flash_mouse(0x0005);
+				UI_flash_mouse(CURSOR_WONT_FIT);
 			}
 		}
 	} else {
@@ -62010,7 +62019,7 @@ void Func0717 object#(0x717) () {
 		var0001 = var0002->set_last_created();
 		if (!0xFE9C->get_npc_object()->give_last_created()) {
 			if (var0003->give_last_created()) {
-				UI_flash_mouse(0x0005);
+				UI_flash_mouse(CURSOR_WONT_FIT);
 			}
 		}
 	}
@@ -62896,7 +62905,7 @@ void Func0816 0x816 (var var0000) {
 		}
 		UI_play_sound_effect2(0x001C, item);
 	} else {
-		UI_flash_mouse(0x0000);
+		UI_flash_mouse(CURSOR_HAND);
 	}
 }
 
@@ -63204,7 +63213,7 @@ void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var
 	var var000E;
 
 	if (var0000->get_container()) {
-		UI_flash_mouse(0x0000);
+		UI_flash_mouse(CURSOR_HAND);
 		abort;
 	}
 	0xFE9C->halt_scheduled();
@@ -63256,7 +63265,7 @@ void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var
 				}
 			}
 		}
-		UI_flash_mouse(0x0000);
+		UI_flash_mouse(CURSOR_HAND);
 		abort;
 	}
 }
@@ -63889,7 +63898,7 @@ var Func0837 0x837 (var var0000, var var0001, var var0002, var var0003, var var0
 			return 0x0001;
 		}
 	} else {
-		UI_flash_mouse(0x0005);
+		UI_flash_mouse(CURSOR_WONT_FIT);
 		if (var0006) {
 			if (var0006->give_last_created()) {
 				return 0x0000;
@@ -76479,7 +76488,7 @@ void Func0942 0x942 (var var0000, var var0001) {
 			Func0905(var0000);
 		}
 	} else {
-		UI_flash_mouse(0x0000);
+		UI_flash_mouse(CURSOR_HAND);
 	}
 	var0000->set_light(true);
 	UI_set_time_palette();

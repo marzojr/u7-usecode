@@ -1,6 +1,15 @@
 #game "serpentisle"
 #strictbraces "true"
 
+enum cursors {
+	CURSOR_HAND			= 0,
+	CURSOR_X			= 1,	//Default "no you can't do that" X cursor
+	CURSOR_OUT_OF_RANGE = 2,
+	CURSOR_OUT_OF_AMMO	= 3,
+	CURSOR_TOO_HEAVY	= 4,
+	CURSOR_WONT_FIT		= 5
+};
+
 enum weather_types {
 	CLEAR_WEATHER	= 0,
 	SNOWING			= 1,	//Unsure; in Exult, works the same as RAIN, below and seems identical to RAIN in the originals
@@ -11,7 +20,7 @@ enum weather_types {
 	CLOUDY			= 6
 };
 
-snum skins {
+enum skins {
 	BLACK_AVATAR = 0,
 	LATINO_AVATAR = 1,
 	BLONDE_AVATAR = 2
@@ -3461,7 +3470,7 @@ void Func0128 shape#(0x128) () {
 				var0001 = var0001->get_container();
 			}
 			if (var0001 == 0x0000) {
-				UI_flash_mouse(0x0000);
+				UI_flash_mouse(CURSOR_HAND);
 				return;
 			}
 		}
@@ -3482,7 +3491,7 @@ void Func0128 shape#(0x128) () {
 					call Func0128;
 				};
 			} else {
-				UI_flash_mouse(0x0000);
+				UI_flash_mouse(CURSOR_HAND);
 			}
 		}
 		if (event == UNREADIED) {
@@ -3613,7 +3622,7 @@ void Func012F shape#(0x12F) () {
 		abort;
 	}
 	if (event == DOUBLECLICK) {
-		UI_flash_mouse(0x0000);
+		UI_flash_mouse(CURSOR_HAND);
 	}
 }
 
@@ -8180,7 +8189,7 @@ void Func01E5 shape#(0x1E5) () {
 					call Func0281;
 				};
 			} else {
-				UI_flash_mouse(0x0000);
+				UI_flash_mouse(CURSOR_HAND);
 				var0005 = ["@We don't have that key.@", "@It's not on the keyring.@"];
 				var0006 = UI_die_roll(0x0001, 0x0002);
 				var0007 = Func0992(0x0001, var0005[var0006], var0005[var0006], true);
@@ -10563,7 +10572,7 @@ void Func028D shape#(0x28D) () {
 				var0001 = 0xFE9C->give_last_created();
 				if (!var0001) {
 					var0001 = var0000->give_last_created();
-					UI_flash_mouse(0x0004);
+					UI_flash_mouse(CURSOR_TOO_HEAVY);
 					abort;
 				}
 			} else {
@@ -10603,7 +10612,7 @@ void Func028E shape#(0x28E) () {
 				var0001 = 0xFE9C->give_last_created();
 				if (!var0001) {
 					var0001 = var0000->give_last_created();
-					UI_flash_mouse(0x0004);
+					UI_flash_mouse(CURSOR_TOO_HEAVY);
 					abort;
 				}
 				event = PATH_SUCCESS;
@@ -10807,7 +10816,7 @@ void Func0296 shape#(0x296) () {
 			actor frame standing;
 		};
 		if (!UI_is_water([var0000[0x0002], var0000[0x0003], var0000[0x0004]])) {
-			UI_flash_mouse(0x0000);
+			UI_flash_mouse(CURSOR_HAND);
 			return;
 		}
 		var0002 = 0xFE9C->get_object_position();
@@ -11255,7 +11264,7 @@ void Func02A3 shape#(0x2A3) () {
 			var001C = [0x0001, 0x0000, 0xFFFF, 0x0001, 0xFFFF, 0x0001, 0x0009, 0xFFFF];
 			var001D = 0xFFFA;
 			if (!Func090F(item, var001B, var001C, var001D)) {
-				UI_flash_mouse(0x0000);
+				UI_flash_mouse(CURSOR_HAND);
 			} else {
 				Func090D(item, var001B, var001C, var001D, Func02A3, item, PATH_SUCCESS);
 			}
@@ -14958,7 +14967,7 @@ void Func032A shape#(0x32A) () {
 				var0001 = 0xFE9C->give_last_created();
 				if (!var0001) {
 					var0001 = var0000->give_last_created();
-					UI_flash_mouse(0x0000);
+					UI_flash_mouse(CURSOR_HAND);
 				}
 				event = PATH_SUCCESS;
 				item->Func062C();
@@ -16777,7 +16786,7 @@ void Func0357 shape#(0x357) () {
 		}
 		UI_play_sound_effect2(0x0046, item);
 	} else {
-		UI_flash_mouse(0x0000);
+		UI_flash_mouse(CURSOR_HAND);
 	}
 }
 
@@ -17339,7 +17348,7 @@ void Func036C shape#(0x36C) () {
 		abort;
 	}
 	if (event == DOUBLECLICK) {
-		UI_flash_mouse(0x0000);
+		UI_flash_mouse(CURSOR_HAND);
 	}
 }
 
@@ -17863,7 +17872,7 @@ void Func03A7 shape#(0x3A7) () {
 		abort;
 	}
 	if (event == DOUBLECLICK) {
-		UI_flash_mouse(0x0000);
+		UI_flash_mouse(CURSOR_HAND);
 	}
 }
 
@@ -17895,7 +17904,7 @@ void Func03A8 shape#(0x3A8) () {
 		abort;
 	}
 	if (event == DOUBLECLICK) {
-		UI_flash_mouse(0x0000);
+		UI_flash_mouse(CURSOR_HAND);
 	}
 }
 
@@ -19887,7 +19896,7 @@ void Func03DE shape#(0x3DE) () {
 			var0000 = var0000->get_container();
 		}
 		if (var0000 == 0x0000) {
-			UI_flash_mouse(0x0000);
+			UI_flash_mouse(CURSOR_HAND);
 			return;
 		}
 	}
@@ -19942,7 +19951,7 @@ void Func03E4 shape#(0x3E4) () {
 			var0000 = var0000->get_container();
 		}
 		if (var0000 == 0x0000) {
-			UI_flash_mouse(0x0000);
+			UI_flash_mouse(CURSOR_HAND);
 			return;
 		}
 	}
@@ -20021,7 +20030,7 @@ void Func03E9 shape#(0x3E9) () {
 			var0000 = var0000->get_container();
 		}
 		if (var0000 == 0x0000) {
-			UI_flash_mouse(0x0000);
+			UI_flash_mouse(CURSOR_HAND);
 			return;
 		}
 	}
@@ -61395,7 +61404,7 @@ void Func062D object#(0x62D) () {
 				var0003 = 0xFE9C->give_last_created();
 				if (!var0003) {
 					var0003 = UI_update_last_created(var0002);
-					UI_flash_mouse(0x0004);
+					UI_flash_mouse(CURSOR_TOO_HEAVY);
 					abort;
 				}
 				var0003 = script 0xFE9C {
@@ -61454,7 +61463,7 @@ void Func062E object#(0x62E) () {
 				var0003 = 0xFE9C->give_last_created();
 				if (!var0003) {
 					var0003 = UI_update_last_created(var0002);
-					UI_flash_mouse(0x0004);
+					UI_flash_mouse(CURSOR_TOO_HEAVY);
 					abort;
 				}
 				var0003 = script 0xFE9C {
@@ -100779,7 +100788,7 @@ void Func088C 0x88C () {
 			var0002 = 0xFE9C->give_last_created();
 			if (!var0002) {
 				var0002 = UI_update_last_created(var0001);
-				UI_flash_mouse(0x0005);
+				UI_flash_mouse(CURSOR_WONT_FIT);
 				abort;
 			}
 		} else {
@@ -104413,7 +104422,7 @@ void Func08DA 0x8DA (var var0000) {
 		}
 		UI_play_sound_effect2(0x0046, item);
 	} else {
-		UI_flash_mouse(0x0000);
+		UI_flash_mouse(CURSOR_HAND);
 	}
 }
 
@@ -106034,7 +106043,7 @@ void Func090D 0x90D (var var0000, var var0001, var var0002, var var0003, var var
 	var var000E;
 
 	if (var0000->get_container()) {
-		UI_flash_mouse(0x0000);
+		UI_flash_mouse(CURSOR_HAND);
 		abort;
 	}
 	0xFE9C->halt_scheduled();
@@ -106086,7 +106095,7 @@ void Func090D 0x90D (var var0000, var var0001, var var0002, var var0003, var var
 				}
 			}
 		}
-		UI_flash_mouse(0x0000);
+		UI_flash_mouse(CURSOR_HAND);
 		abort;
 	}
 }
@@ -111040,7 +111049,7 @@ void Func098A 0x98A (var var0000, var var0001) {
 	var0004 = var0000->get_container();
 	if (var0004->is_npc()) {
 		if (var0004->get_readied(SI_BELT) == var0000) {
-			UI_flash_mouse(0x0000);
+			UI_flash_mouse(CURSOR_HAND);
 			return;
 		}
 	}
@@ -111051,7 +111060,7 @@ void Func098A 0x98A (var var0000, var var0001) {
 			Func0950(var0000);
 		}
 	} else {
-		UI_flash_mouse(0x0000);
+		UI_flash_mouse(CURSOR_HAND);
 	}
 	var0000->set_light(true);
 	UI_set_time_palette();
