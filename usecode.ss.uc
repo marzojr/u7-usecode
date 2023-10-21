@@ -79092,7 +79092,7 @@ void Func07E4 object#(0x7E4) () {
 		0xFFD5->set_schedule_type(WANDER);
 		0xFFDB->set_schedule_type(WANDER);
 		0xFFD6->set_schedule_type(WANDER);
-		var0002->set_barge_dir(0x0002);
+		var0002->set_barge_dir(EAST);
 		var0003 = new script {
 			finish;
 			repeat 8 {
@@ -79105,7 +79105,7 @@ void Func07E4 object#(0x7E4) () {
 		var0004 = var0000->set_item_quality(0x0001);
 	}
 	if (var0001 == 0x0001) {
-		var0002->set_barge_dir(0x0004);
+		var0002->set_barge_dir(SOUTH);
 		var0003 = new script {
 			finish;
 			repeat 17 {
@@ -79118,7 +79118,7 @@ void Func07E4 object#(0x7E4) () {
 		var0004 = var0000->set_item_quality(0x0002);
 	}
 	if (var0001 == 0x0002) {
-		var0002->set_barge_dir(0x0002);
+		var0002->set_barge_dir(EAST);
 		var0003 = new script {
 			finish;
 			repeat 9 {
@@ -79131,7 +79131,7 @@ void Func07E4 object#(0x7E4) () {
 		var0004 = var0000->set_item_quality(0x0003);
 	}
 	if (var0001 == 0x0003) {
-		var0002->set_barge_dir(0x0004);
+		var0002->set_barge_dir(SOUTH);
 		var0003 = new script {
 			finish;
 			repeat 9 {
@@ -79144,7 +79144,7 @@ void Func07E4 object#(0x7E4) () {
 		var0004 = var0000->set_item_quality(0x0004);
 	}
 	if (var0001 == 0x0004) {
-		var0002->set_barge_dir(0x0002);
+		var0002->set_barge_dir(EAST);
 		var0003 = new script {
 			finish;
 			repeat 56 {
@@ -79157,7 +79157,7 @@ void Func07E4 object#(0x7E4) () {
 		var0004 = var0000->set_item_quality(0x0005);
 	}
 	if (var0001 == 0x0005) {
-		var0002->set_barge_dir(0x0004);
+		var0002->set_barge_dir(SOUTH);
 		var0003 = new script {
 			finish;
 			repeat 6 {
@@ -79170,12 +79170,12 @@ void Func07E4 object#(0x7E4) () {
 		var0004 = var0000->set_item_quality(0x0006);
 	}
 	if (var0001 == 0x0006) {
-		var0002->set_barge_dir(0x0002);
+		var0002->set_barge_dir(EAST);
 		0xFFD8->show_npc_face0(0x0000);
 		say("\"Reef the sails an' hang on! There be one of those damned storms a bearin' down on us! Heavens help us!\"");
 		UI_remove_npc_face0();
 		UI_play_music(0x0016, var0000);
-		var0002->set_barge_dir(0x0002);
+		var0002->set_barge_dir(EAST);
 		var0003 = new script {
 			finish;
 			repeat 90 {
