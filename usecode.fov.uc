@@ -10,15 +10,26 @@ enum wildcards {
 	FRAME_ANY		= -359
 };
 
-enum directions : byte {
-	NORTH		= 0x30,
-	NORTHEAST	= 0x31,
-	EAST		= 0x32,
-	SOUTHEAST	= 0x33,
-	SOUTH		= 0x34,
-	SOUTHWEST	= 0x35,
-	WEST		= 0x36,
-	NORTHWEST	= 0x37
+enum directions {
+	NORTH		= 0,
+	NORTHEAST	= 1,
+	EAST		= 2,
+	SOUTHEAST	= 3,
+	SOUTH		= 4,
+	SOUTHWEST	= 5,
+	WEST		= 6,
+	NORTHWEST	= 7
+};
+
+enum face_directions : byte {
+	FACE_NORTH		= 0x30,
+	FACE_NORTHEAST	= 0x31,
+	FACE_EAST		= 0x32,
+	FACE_SOUTHEAST	= 0x33,
+	FACE_SOUTH		= 0x34,
+	FACE_SOUTHWEST	= 0x35,
+	FACE_WEST		= 0x36,
+	FACE_NORTHWEST	= 0x37
 };
 
 enum npc_properties {
@@ -3235,7 +3246,7 @@ void Func0247 shape#(0x247) () {
 	}
 	if (event == BG_PATH_SUCCESS) {
 		var0001 = script 0xFE9C {
-			face NORTH;
+			face FACE_NORTH;
 			actor frame bowing;
 			actor frame standing;
 		};
@@ -6511,7 +6522,7 @@ void Func0311 shape#(0x311) () {
 			var0000 = UI_click_on_item();
 			var0001 = Func0822(var0000);
 			var0002 = 0xFE9C->find_direction(var0001);
-			if ((var0002 == 0x0000) || (var0002 == 0x0004)) {
+			if ((var0002 == NORTH) || (var0002 == SOUTH)) {
 				var0003 = 0x0001;
 				var0004 = 0x030B;
 			} else {
@@ -6559,7 +6570,7 @@ void Func0311 shape#(0x311) () {
 				};
 				var000B = 0x0005 - 0xFE9C->get_distance(var0009);
 				var000C = new script {
-					face (NORTH + var0002);
+					face (FACE_NORTH + var0002);
 				};
 				if (var000B > 0x0000) {
 					var000C = var000C & new script {
@@ -50085,7 +50096,7 @@ void Func060E object#(0x60E) () {
 			0xFE9C->set_item_flag(ASLEEP);
 			var0011 = [0xFFFC, 0x0000, 0x0004, 0x0000, 0x0000, 0x0004, 0xFFFC, 0x0001, 0x0004, 0x0001, 0xFFFC, 0xFFFF, 0x0004, 0xFFFF, 0x0001, 0x0002, 0xFFFF, 0x0002];
 			var0012 = 0x0000;
-			var0013 = [EAST, var0012, WEST, var0012, NORTH, var0012, EAST, var0012, WEST, var0012, EAST, var0012, WEST, var0012, NORTH, var0012, NORTH];
+			var0013 = [FACE_EAST, var0012, FACE_WEST, var0012, FACE_NORTH, var0012, FACE_EAST, var0012, FACE_WEST, var0012, FACE_EAST, var0012, FACE_WEST, var0012, FACE_NORTH, var0012, FACE_NORTH];
 			var0014 = [0xFFF9, 0x0000, 0x0008, 0x0000, 0x0000, 0x0008, 0xFFF9, 0x0008, 0x0008, 0x0008, 0xFFEF, 0x0000, 0xFFEF, 0x0008];
 			var0015 = [0x000D, var0012, 0x000D, var0012, 0x001D, var0012, 0x001D, var0012, 0x001D, var0012, 0x000D, var0012, 0x000D];
 			var0016 = 0x0001;
@@ -50437,9 +50448,9 @@ void Func0618 object#(0x618) () {
 	if (0xFE9C->get_item_flag(DONT_RENDER)) {
 		0xFE9C->clear_item_flag(DONT_RENDER);
 		var0000 = script 0xFE9C {
-			step WEST, 0;
-			step WEST, 0;
-			step WEST, 0;
+			step FACE_WEST, 0;
+			step FACE_WEST, 0;
+			step FACE_WEST, 0;
 			wait 10;
 			call Func0401;
 			call Func061A;
@@ -50964,7 +50975,7 @@ void Func0624 object#(0x624) () {
 	if (event == BG_PATH_SUCCESS) {
 		UI_close_gumps();
 		var0002 = script 0xFE9C {
-			face NORTH;
+			face FACE_NORTH;
 			actor frame bowing;
 			wait 1;
 			actor frame standing;
@@ -52174,7 +52185,7 @@ void Func0639 object#(0x639) () {
 	if (event == DOUBLECLICK) {
 		halt_scheduled();
 		var0000 = script item {
-			face NORTH;
+			face FACE_NORTH;
 			actor frame kneeling;
 			wait 1;
 			say "@Kal Ort Por@";
@@ -54983,7 +54994,7 @@ void Func0677 object#(0x677) () {
 						var0009 = [var0009, var000B];
 					}
 					if (var000A == 0x0006) {
-						var000C = NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
+						var000C = FACE_NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
 						var000B = new script {
 							face var000C;
 							actor frame bowing;
@@ -54992,7 +55003,7 @@ void Func0677 object#(0x677) () {
 						var0009 = [var0009, var000B];
 					}
 					if (var000A == 0x0007) {
-						var000C = NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
+						var000C = FACE_NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
 						var000B = new script {
 							face var000C;
 							actor frame kneeling;
@@ -55001,7 +55012,7 @@ void Func0677 object#(0x677) () {
 						var0009 = [var0009, var000B];
 					}
 					if (var000A == 0x0008) {
-						var000C = NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
+						var000C = FACE_NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
 						var000B = new script {
 							face var000C;
 							actor frame ready;
@@ -58151,7 +58162,7 @@ void Func06BD object#(0x6BD) () {
 						var0008 = [var0008, var000A];
 					}
 					if (var0009 == 0x0006) {
-						var000B = NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
+						var000B = FACE_NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
 						var000A = new script {
 							face var000B;
 							actor frame bowing;
@@ -58160,7 +58171,7 @@ void Func06BD object#(0x6BD) () {
 						var0008 = [var0008, var000A];
 					}
 					if (var0009 == 0x0007) {
-						var000B = NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
+						var000B = FACE_NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
 						var000A = new script {
 							face var000B;
 							actor frame kneeling;
@@ -58169,7 +58180,7 @@ void Func06BD object#(0x6BD) () {
 						var0008 = [var0008, var000A];
 					}
 					if (var0009 == 0x0008) {
-						var000B = NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
+						var000B = FACE_NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
 						var000A = new script {
 							face var000B;
 							actor frame ready;
@@ -61113,7 +61124,7 @@ void Func070A object#(0x70A) () {
 						var0029 = [var0029, var002B];
 					}
 					if (var002A == 0x0006) {
-						var002C = NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
+						var002C = FACE_NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
 						var002B = new script {
 							face var002C;
 							actor frame bowing;
@@ -61122,7 +61133,7 @@ void Func070A object#(0x70A) () {
 						var0029 = [var0029, var002B];
 					}
 					if (var002A == 0x0007) {
-						var002C = NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
+						var002C = FACE_NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
 						var002B = new script {
 							face var002C;
 							actor frame kneeling;
@@ -61131,7 +61142,7 @@ void Func070A object#(0x70A) () {
 						var0029 = [var0029, var002B];
 					}
 					if (var002A == 0x0008) {
-						var002C = NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
+						var002C = FACE_NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
 						var002B = new script {
 							face var002C;
 							actor frame ready;
@@ -61895,7 +61906,7 @@ void Func0715 object#(0x715) () {
 	if (var0001) {
 		var0005 = script var0001 {
 			wait 3;
-			face SOUTH;
+			face FACE_SOUTH;
 			actor frame kneeling;
 			wait 2;
 			actor frame standing;
@@ -63103,12 +63114,12 @@ var Func0825 0x825 (var var0000, var var0001, var var0002) {
 
 	if (var0000[var0002] >= var0001[var0002]) {
 		if (var0002 == 0x0001) {
-			var0003 = WEST;
-			var0004 = EAST;
+			var0003 = FACE_WEST;
+			var0004 = FACE_EAST;
 		}
 		if (var0002 == 0x0002) {
-			var0003 = NORTH;
-			var0004 = SOUTH;
+			var0003 = FACE_NORTH;
+			var0004 = FACE_SOUTH;
 		}
 		if (var0000[var0002] == var0001[var0002]) {
 			var0005 = 0x0004;
@@ -63117,12 +63128,12 @@ var Func0825 0x825 (var var0000, var var0001, var var0002) {
 		}
 	} else {
 		if (var0002 == 0x0001) {
-			var0003 = EAST;
-			var0004 = WEST;
+			var0003 = FACE_EAST;
+			var0004 = FACE_WEST;
 		}
 		if (var0002 == 0x0002) {
-			var0003 = SOUTH;
-			var0004 = NORTH;
+			var0003 = FACE_SOUTH;
+			var0004 = FACE_NORTH;
 		}
 		var0005 = 0xFFFD;
 	}
@@ -73767,7 +73778,7 @@ void Func08DD 0x8DD () {
 					var0006 = [var0006, var0008];
 				}
 				if (var0007 == 0x0006) {
-					var0009 = NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
+					var0009 = FACE_NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
 					var0008 = new script {
 						face var0009;
 						actor frame bowing;
@@ -73776,7 +73787,7 @@ void Func08DD 0x8DD () {
 					var0006 = [var0006, var0008];
 				}
 				if (var0007 == 0x0007) {
-					var0009 = NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
+					var0009 = FACE_NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
 					var0008 = new script {
 						face var0009;
 						actor frame kneeling;
@@ -73785,7 +73796,7 @@ void Func08DD 0x8DD () {
 					var0006 = [var0006, var0008];
 				}
 				if (var0007 == 0x0008) {
-					var0009 = NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
+					var0009 = FACE_NORTH + (UI_die_roll(0x0000, 0x0003) * 0x0002);
 					var0008 = new script {
 						face var0009;
 						actor frame ready;
