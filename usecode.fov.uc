@@ -18398,7 +18398,7 @@ void Func0435 object#(0x435) () {
 		var0001 = UI_wearing_fellowship();
 		var0002 = UI_part_of_day();
 		var0003 = 0xFFCB->get_npc_object()->get_schedule_type();
-		if (var0002 == 0x0007) {
+		if (var0002 == NIGHT) {
 			var0004 = Func08FC(0xFFCB, 0xFFE6);
 			if (var0004) {
 				say("Gaye is watching the Fellowship meeting. She turns to you brusquely and puts a finger to her lips, gesturing for you to be silent.*");
@@ -18543,7 +18543,7 @@ void Func0436 object#(0x436) () {
 		var0001 = Func0909();
 		var0002 = UI_part_of_day();
 		var0003 = 0xFFCA->get_npc_object()->get_schedule_type();
-		if (var0002 == 0x0007) {
+		if (var0002 == NIGHT) {
 			var0004 = Func08F7(0xFFD9);
 			var0005 = Func08F7(0xFFD8);
 			if (var0004 && var0005) {
@@ -18705,7 +18705,7 @@ void Func0437 object#(0x437) () {
 		var0000 = UI_wearing_fellowship();
 		var0001 = UI_part_of_day();
 		var0002 = 0xFFC9->get_npc_object()->get_schedule_type();
-		if (var0001 == 0x0007) {
+		if (var0001 == NIGHT) {
 			var0003 = Func08FC(0xFFC9, 0xFFE6);
 			if (var0003) {
 				say("Grayson shushes you, as you are disturbing the Fellowship meeting.*");
@@ -19140,7 +19140,7 @@ void Func043A object#(0x43A) () {
 		var0001 = UI_wearing_fellowship();
 		var0002 = UI_part_of_day();
 		var0003 = 0xFFC6->get_npc_object()->get_schedule_type();
-		if (var0002 == 0x0007) {
+		if (var0002 == NIGHT) {
 			var0004 = Func08FC(0xFFC6, 0xFFE6);
 			if (var0004) {
 				say("Gordon is too involved in listening to the Fellowship meeting to hear you.*");
@@ -19324,7 +19324,7 @@ void Func043B object#(0x43B) () {
 		var0002 = 0xFFC5->get_npc_object()->get_schedule_type();
 		var0003 = UI_wearing_fellowship();
 		var0001 = UI_part_of_day();
-		if (var0001 == 0x0007) {
+		if (var0001 == NIGHT) {
 			var0004 = Func08FC(0xFFC5, 0xFFE6);
 			if (var0004) {
 				say("Sean is deep in concentration, listening to the Fellowship meeting.*");
@@ -20099,7 +20099,7 @@ void Func043F object#(0x43F) () {
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
 		var0002 = UI_part_of_day();
-		if (var0002 == 0x0007) {
+		if (var0002 == NIGHT) {
 			var0003 = Func08FC(0xFFC1, 0xFFE6);
 			if (var0003) {
 				say("Millie ignores your attempts to get her attention and goes back to intently watching the Fellowship ceremony.*");
@@ -20631,7 +20631,7 @@ void Func0444 object#(0x444) () {
 
 			case "meals":
 				say("\"My wife, Boots, is the head cook. Her specialty is roast beef. She makes wonderful pastries, too. Enough of those will give thee a very un-Avatar-like figure!");
-				if ((var0001 == 0x0003) || (var0001 == 0x0006)) {
+				if ((var0001 == MORNING) || (var0001 == EVENING)) {
 					say("\"Wouldst thou like to order a meal?\"");
 					var0003 = Func090A();
 					if (var0003) {
@@ -20914,7 +20914,7 @@ void Func0446 object#(0x446) () {
 
 			case "child":
 				say("Miranda smiles. \"Yes, my son's name is Max.");
-				if ((var0001 == 0x0002) || ((var0001 == 0x0003) || ((var0001 == 0x0004) || (var0001 == 0x0005)))) {
+				if ((var0001 == DAWN) || ((var0001 == MORNING) || ((var0001 == NOON) || (var0001 == AFTERNOON)))) {
 					say("\"He is probably in the Royal Nursery.");
 				} else {
 					var0002 = Func08F7(0xFFE0);
@@ -20933,7 +20933,7 @@ void Func0446 object#(0x446) () {
 				fallthrough;
 
 			case "bill":
-				if ((var0001 == 0x0002) || ((var0001 == 0x0003) || ((var0001 == 0x0004) || (var0001 == 0x0005)))) {
+				if ((var0001 == DAWN) || ((var0001 == MORNING) || ((var0001 == NOON) || (var0001 == AFTERNOON)))) {
 					say("\"Inwisloklem and I are drafting a bill which would make illegal any distribution of waste products in Lock Lake, near Cove. The lake is quite defiled.\"");
 					add("Cove");
 				} else {
@@ -22217,7 +22217,7 @@ void Func0451 object#(0x451) () {
 		var0002 = Func0909();
 		var0003 = UI_part_of_day();
 		var0004 = 0xFFAF->get_npc_object()->get_schedule_type();
-		if (var0003 == 0x0007) {
+		if (var0003 == NIGHT) {
 			if (var0004 == PREACH) {
 				say("\"It is time for the ceremony to begin.\" says Elynor.");
 				Func087B();
@@ -23820,7 +23820,7 @@ void Func045B object#(0x45B) () {
 		0xFFA5->show_npc_face(0x0000);
 		var0000 = 0xFFA5->get_npc_object()->get_schedule_type();
 		var0001 = UI_part_of_day();
-		if (var0001 == 0x0007) {
+		if (var0001 == NIGHT) {
 			if (var0000 == MAJOR_SIT) {
 				var0002 = Func08FC(0xFFA5, 0xFFAF);
 				if (var0002) {
@@ -24174,7 +24174,7 @@ void Func045D object#(0x45D) () {
 		0xFFA3->show_npc_face(0x0000);
 		var0000 = 0xFFA3->get_npc_object()->get_schedule_type();
 		var0001 = UI_part_of_day();
-		if (var0001 == 0x0007) {
+		if (var0001 == NIGHT) {
 			if (var0000 == MAJOR_SIT) {
 				var0002 = Func08FC(0xFFA3, 0xFFAF);
 				if (var0002) {
@@ -26187,7 +26187,7 @@ void Func046C object#(0x46C) () {
 				fallthrough;
 
 			case "heal":
-				if ((var0001 == 0x0003) || ((var0001 == 0x0004) || (var0001 == 0x0005))) {
+				if ((var0001 == MORNING) || ((var0001 == NOON) || (var0001 == AFTERNOON))) {
 					gflags[0x013A] = true;
 				}
 				if (gflags[0x013A]) {
@@ -27532,7 +27532,7 @@ void Func0476 object#(0x476) () {
 
 			case "job":
 				say("\"I am the tailor of Moonglow.\"");
-				if (var0001 == 0x0007) {
+				if (var0001 == NIGHT) {
 					say("\"I also tend the bar for Phearcy in the evenings.\"");
 					add("buy refreshment");
 					if (!var0002) {
@@ -27564,7 +27564,7 @@ void Func0476 object#(0x476) () {
 				fallthrough;
 
 			case "Phearcy":
-				if (var0001 == 0x0007) {
+				if (var0001 == NIGHT) {
 					var0003 = "here";
 				} else {
 					var0003 = "at the Friendly Knave";
@@ -27610,7 +27610,7 @@ void Func0476 object#(0x476) () {
 				fallthrough;
 
 			case "tailor":
-				if ((var0001 == 0x0003) || ((var0001 == 0x0004) || ((var0001 == 0x0005) || (var0001 == 0x0006)))) {
+				if ((var0001 == MORNING) || ((var0001 == NOON) || ((var0001 == AFTERNOON) || (var0001 == EVENING)))) {
 					say("\"Yes, I love sewing clothing. Wouldst thou be interested in seeing or purchasing some of my creations?\"");
 					var0004 = Func090A();
 					if (var0004) {
@@ -28957,7 +28957,7 @@ void Func047D object#(0x47D) () {
 				abort;
 			}
 		} else if (gflags[0x0170]) {
-			if (var0001 == 0x0004) {
+			if (var0001 == NOON) {
 				say("\"So, thou wishest to fight for the cowardly Sprellic! Then I have no choice but to finish thee myself!\"*");
 				Func0911(0x0064);
 				var0002->set_alignment(CHAOTIC);
@@ -29076,13 +29076,13 @@ void Func047E object#(0x47E) () {
 		var0005 = Func08F7(0xFF83);
 		add(["name", "job", "bye"]);
 		if (gflags[0x0168]) {
-			if (!(var0001 == 0x0004)) {
+			if (!(var0001 == NOON)) {
 				if (!gflags[0x016A]) {
 					add("return flag");
 				}
 			}
 		}
-		if (var0001 == 0x0004) {
+		if (var0001 == NOON) {
 			if (gflags[0x0168]) {
 				if (!gflags[0x016A]) {
 					say("\"I see that coward Sprellic has given thee the flag so that it may be returned to us. Thou hadst better hand it over.\"");
@@ -29198,7 +29198,7 @@ void Func047E object#(0x47E) () {
 					abort;
 				}
 				say("\"It has come to our attention that thou hast been given our honor flag. Apparently Sprellic gave it to thee to return to us. If thou dost wish to keep it then our quarrel is now with thee.\"");
-				if (!(var0001 == 0x0004)) {
+				if (!(var0001 == NOON)) {
 					say("\"Meet us at the dueling area at next noon!\"*");
 				} else {
 					say("\"Prepare to die!\"*");
@@ -29255,7 +29255,7 @@ void Func047F object#(0x47F) () {
 				abort;
 			}
 		} else if (gflags[0x0170]) {
-			if (var0001 == 0x0004) {
+			if (var0001 == NOON) {
 				say("\"Well, ",
 					var0000,
 					", I must prove myself to De Snel. If thou art the one who suffers, I will apologize, but I will not back down!\"");
@@ -31332,7 +31332,7 @@ void Func048C object#(0x48C) () {
 		var0003 = UI_part_of_day();
 		var0004 = 0xFF74->get_schedule_type();
 		if (!gflags[0x01AA]) {
-			if ((var0003 == 0x0000) || (var0003 == 0x0001)) {
+			if ((var0003 == MIDNIGHT) || (var0003 == EARLY)) {
 				if (var0004 == SLEEP) {
 					say("You attempt to start a conversation with the portly ghost, but he seems distanced from you and everything else.*");
 					abort;
@@ -31506,7 +31506,7 @@ void Func048D object#(0x48D) () {
 		}
 		var0004 = UI_part_of_day();
 		var0005 = 0xFF73->get_schedule_type();
-		if ((var0004 == 0x0000) || (var0004 == 0x0001)) {
+		if ((var0004 == MIDNIGHT) || (var0004 == EARLY)) {
 			if (var0005 == SLEEP) {
 				Func08B0();
 			} else {
@@ -31831,7 +31831,7 @@ void Func048F object#(0x48F) () {
 			gflags[0x01B7] = true;
 		}
 		if (!gflags[0x01AA]) {
-			if ((var0006 == 0x0000) || (var0006 == 0x0001)) {
+			if ((var0006 == MIDNIGHT) || (var0006 == EARLY)) {
 				if (var0009 == SLEEP) {
 					say("The old, ghostly woman looks very strange. Her eyes are open, but she doesn't seem to be awake, or at least not aware of her surroundings.*");
 					abort;
@@ -32077,7 +32077,7 @@ void Func0490 object#(0x490) () {
 		}
 		var0002 = UI_part_of_day();
 		var0003 = 0xFF70->get_schedule_type();
-		if ((var0002 == 0x0000) || (var0002 == 0x0001)) {
+		if ((var0002 == MIDNIGHT) || (var0002 == EARLY)) {
 			if (var0003 == SLEEP) {
 				0xFF70->show_npc_face(0x0000);
 				Func08D9();
@@ -32165,7 +32165,7 @@ void Func0491 object#(0x491) () {
 			abort;
 		}
 		if (!gflags[0x01AA]) {
-			if ((var0002 == 0x0000) || (var0002 == 0x0001)) {
+			if ((var0002 == MIDNIGHT) || (var0002 == EARLY)) {
 				if (var0003 == SLEEP) {
 					say("The lovely barmaid stares off into oblivion, completely unaware of her location and position.*");
 					abort;
@@ -32374,7 +32374,7 @@ void Func0492 object#(0x492) () {
 		var0004 = UI_part_of_day();
 		var0005 = 0xFF6E->get_schedule_type();
 		if (!gflags[0x01AA]) {
-			if ((var0004 == 0x0000) || (var0004 == 0x0001)) {
+			if ((var0004 == MIDNIGHT) || (var0004 == EARLY)) {
 				if (var0005 == SLEEP) {
 					say("As you start to speak to the pale ghost, you notice that he seems to be looking through you, as if you don't exist at all. You wave your hand in front of his face, but there is no response.*");
 					abort;
@@ -32642,7 +32642,7 @@ void Func0493 object#(0x493) () {
 			}
 		}
 		if (!gflags[0x01AA]) {
-			if ((var0001 == 0x0000) && (var0001 == 0x0001)) {
+			if ((var0001 == MIDNIGHT) && (var0001 == EARLY)) {
 				if (var0002 == SLEEP) {
 					say("The man looks strangely relaxed, almost too relaxed. He also ignores your attempt to converse with him. It would seem that he is not in control of his actions.*");
 					abort;
@@ -34077,7 +34077,7 @@ void Func049C object#(0x49C) () {
 		var0002 = UI_part_of_day();
 		var0003 = false;
 		add(["name", "job", "Fellowship", "bye"]);
-		if (var0002 == 0x0007) {
+		if (var0002 == NIGHT) {
 			var0004 = Func08FC(0xFF64, 0xFF06);
 			if (var0004) {
 				say("Glaring, she puts a finger over her lips, indicating that you should be silent.*");
@@ -34250,7 +34250,7 @@ void Func049D object#(0x49D) () {
 			say("\"Get thee away! I'll hear no more of thy lies!\"*");
 			abort;
 		}
-		if (var0001 == 0x0007) {
+		if (var0001 == NIGHT) {
 			var0002 = Func08FC(0xFF63, 0xFF06);
 			if (var0002) {
 				say("\"I am trying to pay attention!\" he says, glaring at you.");
@@ -34507,7 +34507,7 @@ void Func049F object#(0x49F) () {
 
 			case "tutor":
 				var0002 = UI_part_of_day();
-				if ((var0002 >= 0x0003) || (var0002 <= 0x0006)) {
+				if ((var0002 >= MORNING) || (var0002 <= EVENING)) {
 					say("\"My price is 35 gold for each training session. Art thou willing to pay that?\"");
 					if (Func090A()) {
 						Func08A2([MAX_MANA, INTELLIGENCE], 35);
@@ -34768,7 +34768,7 @@ void Func04A1 object#(0x4A1) () {
 
 			case "train":
 				var0007 = UI_part_of_day();
-				if ((var0007 == 0x0006) || (var0007 == 0x0007)) {
+				if ((var0007 == EVENING) || (var0007 == NIGHT)) {
 					say("\"Yes, I train people. But only during the day. Now, 'tis time for drink!\"");
 				} else {
 					say("\"Wilt thou pay the 45 gold for the training session?\"");
@@ -34846,7 +34846,7 @@ void Func04A2 object#(0x4A2) () {
 
 			case "services":
 				var0002 = UI_part_of_day();
-				if ((var0002 == 0x0002) || ((var0002 == 0x0003) || ((var0002 == 0x0004) || (var0002 == 0x0006)))) {
+				if ((var0002 == DAWN) || ((var0002 == MORNING) || ((var0002 == NOON) || (var0002 == EVENING)))) {
 					Func0879(0x0019, 0x000A, 0x01A9);
 				} else {
 					say("\"Perhaps thou couldst come for healing when I am working in my shop.\"");
@@ -34936,7 +34936,7 @@ void Func04A3 object#(0x4A3) () {
 		var0002 = Func08F7(0xFFFC);
 		var0003 = UI_part_of_day();
 		var0004 = false;
-		if (var0003 == 0x0007) {
+		if (var0003 == NIGHT) {
 			var0005 = Func08FC(0xFF5D, 0xFF06);
 			if (var0005) {
 				say("\"Sorry, ",
@@ -38401,7 +38401,7 @@ void Func04B5 object#(0x4B5) () {
 				fallthrough;
 
 			case "buy":
-				if ((var0001 == 0x0003) || ((var0001 == 0x0004) || (var0001 == 0x0005))) {
+				if ((var0001 == MORNING) || ((var0001 == NOON) || (var0001 == AFTERNOON))) {
 					Func089C();
 				} else {
 					say("\"To sell during shop hours. To ask you to come back to me at that time, please.\"");
@@ -38409,7 +38409,7 @@ void Func04B5 object#(0x4B5) () {
 				fallthrough;
 
 			case "train":
-				if ((var0001 == 0x0003) || ((var0001 == 0x0004) || (var0001 == 0x0005))) {
+				if ((var0001 == MORNING) || ((var0001 == NOON) || (var0001 == AFTERNOON))) {
 					say("\"To be a better warrior or mage?\"");
 					add(["warrior", "mage"]);
 				} else {
@@ -38510,7 +38510,7 @@ void Func04B6 object#(0x4B6) () {
 
 			case "heal":
 				var0001 = UI_part_of_day();
-				if ((var0001 == 0x0002) || ((var0001 == 0x0003) || ((var0001 == 0x0004) || (var0001 == 0x0005)))) {
+				if ((var0001 == DAWN) || ((var0001 == MORNING) || ((var0001 == NOON) || (var0001 == AFTERNOON)))) {
 					Func089D(0x0019, 0x000A, 0x01AE);
 				} else {
 					say("\"To feel sorry, but to be busy with other things now. To ask you to come back when I have the time to heal you.\"");
@@ -38857,7 +38857,7 @@ void Func04B9 object#(0x4B9) () {
 		var0000 = Func0908();
 		var0001 = UI_part_of_day();
 		var0002 = Func0931(0xFE9B, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
-		if (var0001 == 0x0007) {
+		if (var0001 == NIGHT) {
 			say("The gargoyle seems to be too busy conducting the Fellowship meeting to speak with you now.");
 			Func08CE();
 		}
@@ -39913,7 +39913,7 @@ void Func04C0 object#(0x4C0) () {
 
 			case "forge":
 				say("\"Dost thou wish to make a sword?\"");
-				if ((var0002 == 0x0003) || ((var0002 == 0x0004) || (var0002 == 0x0005))) {
+				if ((var0002 == MORNING) || ((var0002 == NOON) || (var0002 == AFTERNOON))) {
 					var0003 = Func090A();
 					if (!var0003) {
 						say("\"Perhaps sometime when thou hast more time.\"");
@@ -42042,12 +42042,12 @@ void Func04CD object#(0x4CD) () {
 		var0002 = 0xFF33->get_npc_object()->get_schedule_type();
 		var0003 = UI_part_of_day();
 		var0004 = UI_die_roll(0x0001, 0x0004);
-		if ((var0003 == 0x0007) || ((var0003 == 0x0000) || (var0003 == 0x0001))) {
+		if ((var0003 == NIGHT) || ((var0003 == MIDNIGHT) || (var0003 == EARLY))) {
 			if (var0002 == SLEEP) {
 				var0005 = "@Zzzzz . . .@";
 			}
 		}
-		if ((var0003 >= 0x0002) && (var0003 <= 0x0005)) {
+		if ((var0003 >= DAWN) && (var0003 <= AFTERNOON)) {
 			if (var0002 == TEND_SHOP) {
 				if (var0004 == 0x0001) {
 					var0005 = "@Increase thy skill here!@";
@@ -42063,7 +42063,7 @@ void Func04CD object#(0x4CD) () {
 				}
 			}
 		}
-		if (var0003 == 0x0006) {
+		if (var0003 == EVENING) {
 			if (var0002 == EAT_AT_INN) {
 				var0005 = "@Mmmmm, excellent wine!@";
 			}
@@ -42186,7 +42186,7 @@ void Func04CE object#(0x4CE) () {
 		var0002 = UI_part_of_day();
 		var0001 = 0xFF32->get_npc_object()->get_schedule_type();
 		var0003 = UI_die_roll(0x0001, 0x0004);
-		if ((var0002 >= 0x0002) || (var0002 <= 0x0006)) {
+		if ((var0002 >= DAWN) || (var0002 <= EVENING)) {
 			if ((var0001 == TEND_SHOP) || (var0001 == EAT)) {
 				if (var0003 == 0x0001) {
 					var0004 = "@A stitch in time uses more thread.@";
@@ -42370,12 +42370,12 @@ void Func04CF object#(0x4CF) () {
 		var000A = UI_part_of_day();
 		var000B = 0xFF31->get_npc_object()->get_schedule_type();
 		var000C = UI_die_roll(0x0001, 0x0004);
-		if ((var000A >= 0x0001) && (var000A <= 0x0003)) {
+		if ((var000A >= EARLY) && (var000A <= MORNING)) {
 			if (var000B == SLEEP) {
 				var000D = "@Zzzzz . . .@";
 			}
 		}
-		if ((var000A == 0x0004) || ((var000A == 0x0005) || ((var000A == 0x0006) || ((var000A == 0x0007) || (var000A == 0x0000))))) {
+		if ((var000A == NOON) || ((var000A == AFTERNOON) || ((var000A == EVENING) || ((var000A == NIGHT) || (var000A == MIDNIGHT))))) {
 			if (var000B == LOITER) {
 				if (var000C == 0x0001) {
 					var000D = "@Refreshments here!@";
@@ -42976,7 +42976,7 @@ void Func04D4 object#(0x4D4) () {
 				} else {
 					say("\"Cador is mine husband. He is the overseer at the Britannian Mining Company here in Vesper.\"");
 					var0007 = UI_part_of_day();
-					if ((var0007 == 0x0006) || (var0007 == 0x0007)) {
+					if ((var0007 == EVENING) || (var0007 == NIGHT)) {
 						say("\"He is often at the tavern at this time. I do wish he would not go there every night with that... that...\twoman!\"");
 						add("woman");
 					}
@@ -48360,7 +48360,7 @@ void Func04FA object#(0x4FA) () {
 		var0002 = Func08F7(0xFF64);
 		var0003 = UI_part_of_day();
 		var0004 = Func0931(0xFE9B, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
-		if (var0003 == 0x0007) {
+		if (var0003 == NIGHT) {
 			if (gflags[0x01FC]) {
 				say("Rankin is unable to speak with you now, for he is conducting the Fellowship meeting.*");
 				Func08CF();
@@ -59300,7 +59300,7 @@ void Func06F6 object#(0x6F6) () {
 
 			case "Magic":
 				var0016 = UI_part_of_day();
-				if ((var0016 == 0x0007) || ((var0016 == 0x0000) || (var0016 == 0x0001))) {
+				if ((var0016 == NIGHT) || ((var0016 == MIDNIGHT) || (var0016 == EARLY))) {
 					Func0845(true);
 				} else {
 					say("The blade croons quietly, \"Alas, master. My energies seem a trifle low. Perhaps if thou were to find some creature to slay, my power would be sufficient. After all, I have needs just as thou dost.\"");

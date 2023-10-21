@@ -1202,7 +1202,7 @@ void Func00E6 shape#(0xE6) () {
 	var0002 = UI_is_pc_female();
 	var0003 = Func0953();
 	var0004 = UI_part_of_day();
-	if ((var0004 > 0x0001) || (var0004 < 0x0006)) {
+	if ((var0004 > EARLY) || (var0004 < EVENING)) {
 		var0004 = "day";
 	} else {
 		var0004 = "evening";
@@ -6861,7 +6861,7 @@ void Func01C7 shape#(0x1C7) () {
 	if ((0xFFEC->get_npc_id() > 0x0006) && (0xFFEC->get_npc_id() != 0x0011)) {
 		var0008 = 0x0002;
 	}
-	if ((var0007 > 0x0001) || (var0007 < 0x0006)) {
+	if ((var0007 > EARLY) || (var0007 < EVENING)) {
 		var0007 = "day";
 	} else {
 		var0007 = "evening";
@@ -15252,7 +15252,7 @@ void Func032E shape#(0x32E) () {
 	if (0xFFEC->get_npc_id() > 0x0001) {
 		var0008 = 0x0002;
 	}
-	if ((var0007 > 0x0001) || (var0007 < 0x0006)) {
+	if ((var0007 > EARLY) || (var0007 < EVENING)) {
 		var0007 = "day";
 	} else {
 		var0007 = "evening";
@@ -18241,7 +18241,7 @@ void Func03B2 shape#(0x3B2) () {
 	var0005 = Func097D(0xFE9B, 0x0001, 0x03DE, QUALITY_ANY, FRAME_ANY);
 	var0006 = Func097D(0xFE9B, 0x0001, 0x0128, QUALITY_ANY, 0x0003);
 	var0007 = Func097D(0xFE9B, 0x0001, 0x03F5, QUALITY_ANY, FRAME_ANY);
-	if ((var0001 > 0x0001) || (var0001 < 0x0006)) {
+	if ((var0001 > EARLY) || (var0001 < EVENING)) {
 		var0001 = "day";
 	} else {
 		var0001 = "evening";
@@ -21933,7 +21933,7 @@ void Func0404 object#(0x404) () {
 	var0001 = Func0953();
 	var0002 = UI_is_pc_female();
 	var0003 = UI_part_of_day();
-	if ((var0003 > 0x0001) || (var0003 < 0x0006)) {
+	if ((var0003 > EARLY) || (var0003 < EVENING)) {
 		var0003 = "day";
 	} else {
 		var0003 = "evening";
@@ -23176,7 +23176,7 @@ void Func040E object#(0x40E) () {
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
 	var0003 = UI_part_of_day();
-	if ((var0003 > 0x0001) || (var0003 < 0x0006)) {
+	if ((var0003 > EARLY) || (var0003 < EVENING)) {
 		var0003 = "day";
 	} else {
 		var0003 = "evening";
@@ -23396,7 +23396,7 @@ void Func040F object#(0x40F) () {
 	var0003 = UI_part_of_day();
 	var0004 = false;
 	var0005 = 0xFFF1->find_nearby(0x02E3, 0x001E, MASK_NONE);
-	if ((var0003 > 0x0001) || (var0003 < 0x0006)) {
+	if ((var0003 > EARLY) || (var0003 < EVENING)) {
 		var0003 = "day";
 	} else {
 		var0003 = "evening";
@@ -23722,7 +23722,7 @@ void Func0410 object#(0x410) () {
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
 	var0003 = UI_part_of_day();
-	if ((var0003 > 0x0001) || (var0003 < 0x0006)) {
+	if ((var0003 > EARLY) || (var0003 < EVENING)) {
 		var0003 = "day";
 	} else {
 		var0003 = "evening";
@@ -24050,7 +24050,7 @@ void Func0411 object#(0x411) () {
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
 	var0003 = UI_part_of_day();
-	if ((var0003 > 0x0001) || (var0003 < 0x0006)) {
+	if ((var0003 > EARLY) || (var0003 < EVENING)) {
 		var0003 = "day";
 	} else {
 		var0003 = "evening";
@@ -24548,7 +24548,7 @@ void Func0412 object#(0x412) () {
 	if (0xFFEC->get_npc_id() > 0x0001) {
 		var0008 = 0x0002;
 	}
-	if ((var0007 > 0x0001) || (var0007 < 0x0006)) {
+	if ((var0007 > EARLY) || (var0007 < EVENING)) {
 		var0007 = "day";
 	} else {
 		var0007 = "evening";
@@ -25050,7 +25050,7 @@ void Func0414 object#(0x414) () {
 	var0002 = UI_is_pc_female();
 	var0003 = Func0953();
 	var0004 = UI_part_of_day();
-	if ((var0004 > 0x0001) || (var0004 < 0x0006)) {
+	if ((var0004 > EARLY) || (var0004 < EVENING)) {
 		var0004 = "day";
 	} else {
 		var0004 = "evening";
@@ -25520,7 +25520,7 @@ void Func0417 object#(0x417) () {
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
 	var0003 = UI_part_of_day();
-	if ((var0003 > 0x0001) || (var0003 < 0x0006)) {
+	if ((var0003 > EARLY) || (var0003 < EVENING)) {
 		var0003 = "day";
 	} else {
 		var0003 = "evening";
@@ -25983,7 +25983,7 @@ void Func0418 object#(0x418) () {
 	}
 	var0005 = Func097D(0xFE9B, 0x0001, 0x034A, QUALITY_ANY, 0x000F);
 	var0006 = UI_part_of_day();
-	if ((var0006 > 0x0001) || (var0006 < 0x0006)) {
+	if ((var0006 > EARLY) || (var0006 < EVENING)) {
 		var0006 = "day";
 	} else {
 		var0006 = "evening";
@@ -27154,7 +27154,7 @@ void Func041C object#(0x41C) () {
 	}
 	var0005 = false;
 	var0006 = UI_part_of_day();
-	if ((var0006 > 0x0001) || (var0006 < 0x0006)) {
+	if ((var0006 > EARLY) || (var0006 < EVENING)) {
 		var0006 = "day";
 	} else {
 		var0006 = "evening";
@@ -28892,7 +28892,7 @@ void Func0420 object#(0x420) () {
 	var0002 = UI_is_pc_female();
 	var0003 = Func0953();
 	var0004 = UI_part_of_day();
-	if ((var0004 > 0x0001) || (var0004 < 0x0006)) {
+	if ((var0004 > EARLY) || (var0004 < EVENING)) {
 		var0004 = "day";
 	} else {
 		var0004 = "evening";
@@ -29283,7 +29283,7 @@ void Func0421 object#(0x421) () {
 	var0002 = Func0953();
 	var0003 = false;
 	var0004 = UI_part_of_day();
-	if ((var0004 > 0x0001) || (var0004 < 0x0006)) {
+	if ((var0004 > EARLY) || (var0004 < EVENING)) {
 		var0004 = "day";
 	} else {
 		var0004 = "evening";
@@ -31962,7 +31962,7 @@ void Func0429 object#(0x429) () {
 	var0004 = false;
 	var0005 = false;
 	var0006 = UI_part_of_day();
-	if ((var0006 > 0x0001) || (var0006 < 0x0006)) {
+	if ((var0006 > EARLY) || (var0006 < EVENING)) {
 		var0006 = "day";
 	} else {
 		var0006 = "evening";
@@ -53028,7 +53028,7 @@ void Func04A8 object#(0x4A8) () {
 	var0003 = Func0994();
 	var0004 = UI_part_of_day();
 	var0005 = false;
-	if ((var0004 > 0x0001) || (var0004 < 0x0006)) {
+	if ((var0004 > EARLY) || (var0004 < EVENING)) {
 		var0004 = "day";
 	} else {
 		var0004 = "evening";
@@ -70455,16 +70455,16 @@ void Func06E6 object#(0x6E6) () {
 		}
 		if (var0002 == 0x0005) {
 			var0009 = UI_part_of_day();
-			if ((var0009 == 0x0000) || (var0009 == 0x0001)) {
+			if ((var0009 == MIDNIGHT) || (var0009 == EARLY)) {
 				var000A = "a late night morsel";
 			}
-			if ((var0009 == 0x0002) || (var0009 == 0x0003)) {
+			if ((var0009 == DAWN) || (var0009 == MORNING)) {
 				var000A = "breakfast";
 			}
-			if ((var0009 == 0x0004) || (var0009 == 0x0005)) {
+			if ((var0009 == NOON) || (var0009 == AFTERNOON)) {
 				var000A = "lunch";
 			}
-			if ((var0009 == 0x0006) || (var0009 == 0x0007)) {
+			if ((var0009 == EVENING) || (var0009 == NIGHT)) {
 				var000A = "dinner";
 			}
 			var0008 = ("Thou'rt just in time for " + var000A) + ", Avatar.";
@@ -80423,7 +80423,7 @@ void Func07F8 object#(0x7F8) () {
 	}
 	if ((event == SCRIPTED) && (var0000 == 0x00B3)) {
 		var0001 = UI_part_of_day();
-		if ((var0001 < 0x0003) || (var0001 > 0x0006)) {
+		if ((var0001 < MORNING) || (var0001 > EVENING)) {
 			var0001 = Func0992(0x0001, 0x0000, 0x0000, true);
 			if (var0001 == 0xFE9C) {
 				Func097F(0xFE9C, "@I should come back later...@", 0x0000);
@@ -83642,7 +83642,7 @@ void Func0808 0x808 (var var0000, var var0001) {
 				}
 				if (var0001 == 0x0006) {
 					var0008 = UI_part_of_day();
-					if ((var0008 == 0x0007) || ((var0008 == 0x0000) || (var0008 == 0x0001))) {
+					if ((var0008 == NIGHT) || ((var0008 == MIDNIGHT) || (var0008 == EARLY))) {
 						var0002 = ", especially at this time of night";
 					}
 					say("\"As I have said, I serve and protect my master's possessions from the many thieves who would take them",
@@ -94984,7 +94984,7 @@ void Func0856 0x856 () {
 	var var0003;
 
 	Func097F(item, "@Attack him!@", 0x0000);
-	if (UI_part_of_day() < 0x0002) {
+	if (UI_part_of_day() < DAWN) {
 		var0000 = 0x0003;
 	} else {
 		var0000 = 0x0006;
@@ -103074,7 +103074,7 @@ void Func08C4 0x8C4 () {
 		var0000->move_object(var0002);
 		Func09AC(var0000, var0002[0x0001], var0002[0x0002], TEND_SHOP);
 		var0003 = UI_part_of_day();
-		if ((var0003 == 0x0000) || (var0003 == 0x0001)) {
+		if ((var0003 == MIDNIGHT) || (var0003 == EARLY)) {
 			var0004 = get_object_position() & (0x0032 & 0x0004);
 			var0005 = var0004->find_nearby(0x036C, 0x0014, MASK_NONE);
 			if (var0005) {
