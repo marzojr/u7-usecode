@@ -10756,7 +10756,7 @@ void Func0406 object#(0x406) () {
 				}
 			}
 		}
-		if (var000D == 0x000E) {
+		if (var000D == SLEEP) {
 			var000F = "@Zzzzz...@";
 		}
 		0xFFFA->item_say(var000F);
@@ -22211,7 +22211,7 @@ void Func0451 object#(0x451) () {
 		var0003 = UI_part_of_day();
 		var0004 = 0xFFAF->get_npc_object()->get_schedule_type();
 		if (var0003 == 0x0007) {
-			if (var0004 == 0x001C) {
+			if (var0004 == PREACH) {
 				say("\"It is time for the ceremony to begin.\" says Elynor.");
 				Func087B();
 			}
