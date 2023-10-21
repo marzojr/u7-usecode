@@ -5,6 +5,7 @@ enum wildcards {
 	FIND_ON_SCREEN	= -359,
 	QUANTITY_ANY	= -359,
 	SHAPE_ANY		= -359,
+	ANY_SHAPE		= -1,	// For find_nearby
 	QUALITY_ANY		= -359,
 	FRAME_ANY		= -359
 };
@@ -273,6 +274,17 @@ enum npc_attack_modes {
 	MANUAL		= 9
 };
 
+enum item_masks {
+	MASK_NONE				= 0x0,
+	MASK_NPC				= 0x04,		//Only find NPCs, alive or dead
+	MASK_NPC2				= 0x08,		//Only find living NPCs
+	MASK_EGG				= 0x10,		//Also for barges
+	MASK_INVISIBLE			= 0x20,
+	MASK_PARTY_INVISIBLE	= 0x40,
+	MASK_TRANSLUCENT		= 0x80,
+	MASK_ALL_UNSEEN			= 0xB0		//MASK_EGG+MASK_INVISIBLE+MASK_TRANSLUCENT
+};
+
 extern void Func094A 0x94A (var var0000);
 extern var Func0910 0x910 (var var0000);
 
@@ -335,7 +347,7 @@ void Func00A0 shape#(0xA0) () {
 				}
 			}
 		}
-		var0000 = find_nearby(0x0113, 0x0008, 0x0010);
+		var0000 = find_nearby(0x0113, 0x0008, MASK_EGG);
 		for (var0006 in var0000 with var0004 to var0005) {
 			if (var0006->get_item_quality() && (var0006->get_item_frame() == 0x0006)) {
 				var0007 = 0xFE9C->get_cont_items(0x022B, QUALITY_ANY, FRAME_ANY);
@@ -416,8 +428,8 @@ void Func00D1 shape#(0xD1) () {
 		var0000 = get_item_frame();
 		if (var0000 == 0x000A) {
 			UI_close_gumps();
-			var0002 = find_nearby(0x0210, 0x001E, 0x0000);
-			var0003 = find_nearby(0x0113, 0x000F, 0x00B0);
+			var0002 = find_nearby(0x0210, 0x001E, MASK_NONE);
+			var0003 = find_nearby(0x0113, 0x000F, MASK_ALL_UNSEEN);
 			for (var0006 in var0003 with var0004 to var0005) {
 				var0006->remove_item();
 			}
@@ -484,7 +496,7 @@ void Func00D7 shape#(0xD7) () {
 	var var0002;
 
 	if ((event == SCRIPTED) || (event == DOUBLECLICK)) {
-		var0000 = 0xFE9C->find_nearby(0x03C1, 0x0028, 0x00B0);
+		var0000 = 0xFE9C->find_nearby(0x03C1, 0x0028, MASK_ALL_UNSEEN);
 		if (!UI_on_barge()) {
 			var0001 = script item after 2 ticks {
 				call Func00D7;
@@ -776,7 +788,7 @@ void Func00E4 shape#(0xE4) () {
 		Func097F(item, "@Move along!@", 0x0002);
 	}
 	if ((event == STARTED_TALKING) && (var0000 == 0x0005)) {
-		var0007 = find_nearby(0x00E4, 0x001E, 0x0000);
+		var0007 = find_nearby(0x00E4, 0x001E, MASK_NONE);
 		for (var000A in var0007 with var0008 to var0009) {
 			var000A->set_schedule_type(SHY);
 			Func097F(var000A, "@Find the traitor!@", UI_get_random(0x0014));
@@ -821,7 +833,7 @@ void Func00E4 shape#(0xE4) () {
 	if ((event == STARTED_TALKING) && (var0000 == 0x000D)) {
 		set_npc_id(0x0003);
 		set_schedule_type(WANDER);
-		var000B = find_nearby(0x00E4, 0x0014, 0x0000);
+		var000B = find_nearby(0x00E4, 0x0014, MASK_NONE);
 		for (var000E in var000B with var000C to var000D) {
 			var000E->set_schedule_type(WANDER);
 		}
@@ -1236,7 +1248,7 @@ void Func00E6 shape#(0xE6) () {
 			0xFFEC->show_npc_face0(0x0002);
 			say("\"We need not these blankets...\"");
 			UI_end_conversation();
-			var000F = find_nearby(0x02B8, 0x000A, 0x0000);
+			var000F = find_nearby(0x02B8, 0x000A, MASK_NONE);
 			for (var0012 in var000F with var0010 to var0011) {
 				var0009 = var0012->get_object_position();
 				if (var0009[0x0003] == 0x0001) {
@@ -1690,7 +1702,7 @@ void Func00E6 shape#(0xE6) () {
 			0xFFEC->show_npc_face0(0x0000);
 			say("\"I am so glad that thou hast met me here, sweet Avatar. I find strangers...\"");
 			UI_end_conversation();
-			var000E = find_nearby(0x011D, 0x0005, 0x0000);
+			var000E = find_nearby(0x011D, 0x0005, MASK_NONE);
 			for (var000F in var000E with var0014 to var0015) {
 				if (var000F->get_item_frame() == 0x0005) {
 					var000E->remove_item();
@@ -2332,8 +2344,8 @@ void Func00FB shape#(0xFB) () {
 		UI_close_gumps();
 	}
 	if (get_barge()) {
-		var0000 = find_nearby(0x00C7, 0x0005, 0x0000);
-		var0001 = find_nearby(0x00FB, 0x0005, 0x0000);
+		var0000 = find_nearby(0x00C7, 0x0005, MASK_NONE);
+		var0001 = find_nearby(0x00FB, 0x0005, MASK_NONE);
 		if (!(item in var0001)) {
 			var0001 &= item;
 		}
@@ -2862,7 +2874,7 @@ void Func0109 shape#(0x109) () {
 			0xFF31->Func07D2();
 			0xFF31->set_npc_id(0xFF31->get_npc_id() + 0x0001);
 			0xFF31->clear_item_say();
-			var0003 = 0xFF31->find_nearby(0xFFFF, 0x0014, 0x0008);
+			var0003 = 0xFF31->find_nearby(ANY_SHAPE, 0x0014, MASK_NPC2);
 			var0004 = [];
 			for (var0007 in var0003 with var0005 to var0006) {
 				if (var0007->get_schedule_type() == WAIT) {
@@ -2883,7 +2895,7 @@ void Func0109 shape#(0x109) () {
 			if (0xFF31->get_npc_id() == 0x0007) {
 				0xFF31->show_npc_face0(0x0000);
 				say("\"The energies from beyond the Void now converge upon this place and time. It is the moment when Xenka shall move across the eons and bring us the light of prophecy...\"");
-				var0009 = 0xFE9C->find_nearby(0x02D6, 0x0014, 0x0000);
+				var0009 = 0xFE9C->find_nearby(0x02D6, 0x0014, MASK_NONE);
 				var0009->remove_item();
 				UI_play_music(0x003F, var0001);
 				0xFF29->move_object(var0002);
@@ -3165,7 +3177,7 @@ void Func0112 shape#(0x112) () {
 	var0002 = UI_get_party_list();
 	if (var0001 in var0002) {
 		var0000 = set_npc_prop(HEALTH, 5);
-		var0003 = 0xFE9C->find_nearby(0x017D, 0x001E, 0x0000);
+		var0003 = 0xFE9C->find_nearby(0x017D, 0x001E, MASK_NONE);
 		for (var0006 in var0003 with var0004 to var0005) {
 			var0006->set_schedule_type(TALK);
 			var0006->set_npc_id(0x0007);
@@ -3308,7 +3320,7 @@ void Func0124 shape#(0x124) () {
 
 	if (event == DOUBLECLICK) {
 		if (get_barge()) {
-			var0000 = find_nearby(0x0316, 0x0014, 0x0000);
+			var0000 = find_nearby(0x0316, 0x0014, MASK_NONE);
 			if (var0000) {
 				if ((var0000->get_item_quality() == 0x0001) && (!gflags[0x00EC])) {
 					Func094A("This is Filbercio's barge!");
@@ -3591,8 +3603,8 @@ void Func013D shape#(0x13D) () {
 	var0000 = 0xFEF8->get_npc_id();
 	if (gflags[0x022C] && ((event == PROXIMITY) && (!gflags[0x022D]))) {
 		set_npc_id(get_npc_id() + 0x0001);
-		var0001 = find_nearby(0x0370, 0x0005, 0x0000);
-		var0002 = find_nearby(0x038A, 0x0005, 0x0000);
+		var0001 = find_nearby(0x0370, 0x0005, MASK_NONE);
+		var0002 = find_nearby(0x038A, 0x0005, MASK_NONE);
 		if (get_npc_id() == 0x0006) {
 			Func097F(item, "@The world shall die...@", 0x0000);
 			set_schedule_type(WAIT);
@@ -3745,7 +3757,7 @@ void Func013E shape#(0x13E) () {
 	}
 	var0002 = Func0994();
 	if (gflags[0x021E]) {
-		var0003 = 0xFE9C->find_nearby(0x013E, 0x0014, 0x0000);
+		var0003 = 0xFE9C->find_nearby(0x013E, 0x0014, MASK_NONE);
 		if (event == SCRIPTED) {
 			0xFEE1->show_npc_face0(0x0000);
 			say("\"Well, well, well... If it isn't the Avatar!\" *\"Fool! Thou didst think me dead... But now it is time for thee to die!\"");
@@ -3826,7 +3838,7 @@ void Func013E shape#(0x13E) () {
 		if (event == PROXIMITY) {
 			if (var0007 == 0x0000) {
 				0xFFC0->set_item_flag(DEAD);
-				var0009 = find_nearby(0x0178, 0x0005, 0x0000);
+				var0009 = find_nearby(0x0178, 0x0005, MASK_NONE);
 				if (var0009) {
 					var000A = var0009->get_item_frame() - 0x0001;
 					var0009->set_item_frame(var000A);
@@ -3855,7 +3867,7 @@ void Func013E shape#(0x13E) () {
 			say("\"To be my great pleasure. To look forward to the meeting...\"");
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
-			var000B = find_nearby(0x0373, 0x0014, 0x0000);
+			var000B = find_nearby(0x0373, 0x0014, MASK_NONE);
 			if (var000B) {
 				var000B->set_schedule_type(LOITER);
 			}
@@ -3886,7 +3898,7 @@ void Func013E shape#(0x13E) () {
 			UI_end_conversation();
 			0xFF81->set_schedule_type(LOITER);
 			var000C = [0x0924, 0x017E, 0x0000];
-			var000B = find_nearby(0x0373, 0x0014, 0x0000);
+			var000B = find_nearby(0x0373, 0x0014, MASK_NONE);
 			if (var000B) {
 				var000B->si_path_run_usecode(var000C, SI_PATH_SUCCESS, var000B, Func0373, false);
 			}
@@ -4177,7 +4189,7 @@ void Func0151 shape#(0x151) () {
 		if ((var0000 < 0x0001) || (var0000 > 0x0004)) {
 			abort;
 		}
-		var0001 = find_nearby(0x0151, 0x0019, 0x0000);
+		var0001 = find_nearby(0x0151, 0x0019, MASK_NONE);
 		var0001 = Func0988(item, var0001);
 		if (var0000 == 0x0001) {
 			var0002 = get_temperature();
@@ -4239,7 +4251,7 @@ void Func0151 shape#(0x151) () {
 			};
 			set_schedule_type(TALK);
 		} else if (!Func097D(0xFE9B, 0x0001, 0x02C1, 0x0000, 0x004B)) {
-			var000E = find_nearby(0x02C1, 0x0019, 0x0000);
+			var000E = find_nearby(0x02C1, 0x0019, MASK_NONE);
 			var000F = false;
 			for (var0012 in var000E with var0010 to var0011) {
 				if (var0012->get_item_quality() == 0x004B) {
@@ -4671,7 +4683,7 @@ void Func016B shape#(0x16B) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		var0001 = find_nearby(0x016B, 0x001E, 0x0000);
+		var0001 = find_nearby(0x016B, 0x001E, MASK_NONE);
 		if (var0001) {
 			var0002 = script Func09A0(0x0005, 0x0001) after UI_get_random(0x0014) ticks {
 				nohalt;
@@ -5182,7 +5194,7 @@ void Func017D shape#(0x17D) () {
 		kill_npc();
 	}
 	if (event == BG_PATH_FAILURE) {
-		var0002 = 0xFE9C->find_nearby(0x017D, 0x001E, 0x0008);
+		var0002 = 0xFE9C->find_nearby(0x017D, 0x001E, MASK_NPC2);
 		if (var0002) {
 			var0002->set_polymorph(0x01CC);
 		}
@@ -5681,7 +5693,7 @@ void Func01AF shape#(0x1AF) () {
 			wait 3;
 			actor frame standing;
 		};
-		var0005 = find_nearby(0x02E3, 0x0004, 0x00B0);
+		var0005 = find_nearby(0x02E3, 0x0004, MASK_ALL_UNSEEN);
 		for (var0008 in var0005 with var0006 to var0007) {
 			var0003 = script var0008 {
 				nohalt;
@@ -6412,7 +6424,7 @@ labelFunc01C3_073B:
 			UI_set_path_failure(Func01C3, item, SI_PATH_FAILURE);
 			gflags[0x00BF] = true;
 			var000A = 0xFE9C->get_object_position() & (QUALITY_ANY & 0x0006);
-			var000B = var000A->find_nearby(0x0113, 0x0028, 0x0010);
+			var000B = var000A->find_nearby(0x0113, 0x0028, MASK_EGG);
 			for (var000E in var000B with var000C to var000D) {
 				var000F = var000E->get_object_position();
 				var0010 = var000E->get_item_quality();
@@ -6476,7 +6488,7 @@ labelFunc01C3_073B:
 				}
 			}
 			var000A = 0xFE9C->get_object_position() & (0x0000 & 0x0007);
-			var000B = var000A->find_nearby(0x0113, 0x001E, 0x0010);
+			var000B = var000A->find_nearby(0x0113, 0x001E, MASK_EGG);
 			for (var000E in var000B with var0014 to var0015) {
 				var000E->remove_item();
 			}
@@ -6492,7 +6504,7 @@ labelFunc01C3_073B:
 		say("\"",
 			var0001,
 			", couldst thou please speak to Harnna about her daughter? Perhaps thou mightest have some new insights.\"");
-		var0003 = 0xFE9C->find_nearby(0x01B0, 0x0028, 0x0000);
+		var0003 = 0xFE9C->find_nearby(0x01B0, 0x0028, MASK_NONE);
 		for (var0009 in var0003 with var0016 to var0017) {
 			if (var0009->get_item_quality() == 0x0033) {
 				Func0907(var0009, 0x0001);
@@ -6721,7 +6733,7 @@ labelFunc01C3_073B:
 			Func097F(0xFE9C, "@Look! Everyone is here...@", 0x0003);
 			Func097F(0xFFB0, "@Where is Harnna?@", 0x0017);
 			Func097F(0xFFB3, "@Our guest is here...@", 0x0016);
-			var0003 = 0xFE9C->find_nearby(0x010E, 0x000A, 0x0000) & 0xFE9C->find_nearby(0x01B0, 0x000A, 0x0000);
+			var0003 = 0xFE9C->find_nearby(0x010E, 0x000A, MASK_NONE) & 0xFE9C->find_nearby(0x01B0, 0x000A, MASK_NONE);
 			for (var0009 in var0003 with var0020 to var0021) {
 				var0009->remove_item();
 			}
@@ -6859,7 +6871,7 @@ void Func01C7 shape#(0x1C7) () {
 			var000B = [0x0178, 0x010E, 0x01B0, 0x01B1];
 			var000C = [];
 			for (var000F in var000B with var000D to var000E) {
-				var000C &= 0xFE9C->find_nearby(var000F, 0x000A, 0x0000);
+				var000C &= 0xFE9C->find_nearby(var000F, 0x000A, MASK_NONE);
 			}
 			var0010 = false;
 			for (var000F in var000C with var0011 to var0012) {
@@ -6874,7 +6886,7 @@ void Func01C7 shape#(0x1C7) () {
 				var0013 = var0010->get_item_frame() - 0x0001;
 				var0010->set_item_frame(var0013);
 			}
-			var000A = 0xFE9C->find_nearby(0x010E, 0x0028, 0x0000) & 0xFE9C->find_nearby(0x01B0, 0x0028, 0x0000);
+			var000A = 0xFE9C->find_nearby(0x010E, 0x0028, MASK_NONE) & 0xFE9C->find_nearby(0x01B0, 0x0028, MASK_NONE);
 			for (var000F in var000A with var0014 to var0015) {
 				if (var000F->get_item_quality() == 0x00D3) {
 					var000F->set_item_frame(var000F->get_item_frame() - 0x0002);
@@ -7368,7 +7380,7 @@ void Func01C7 shape#(0x1C7) () {
 		}
 		if (0xFFEE->get_npc_id() == 0x0001) {
 			0xFFEE->set_npc_id(0x0002);
-			var000A = find_nearby(0x01FD, 0x0014, 0x0000);
+			var000A = find_nearby(0x01FD, 0x0014, MASK_NONE);
 			if (var000A) {
 				var000A->set_schedule_type(SHY);
 			}
@@ -7523,7 +7535,7 @@ void Func01D0 shape#(0x1D0) () {
 		abort;
 	}
 	var0000 = set_npc_prop(HEALTH, 5);
-	if (UI_get_array_size(0xFE9C->find_nearby(0x00E4, 0x001E, 0x0000)) > 0x0006) {
+	if (UI_get_array_size(0xFE9C->find_nearby(0x00E4, 0x001E, MASK_NONE)) > 0x0006) {
 		abort;
 	}
 	var0001 = UI_create_new_object2(0x00E4, [0x0000, 0x0000, 0x0000]);
@@ -7693,7 +7705,7 @@ void Func01D6 shape#(0x1D6) () {
 
 	if (event == PATH_FAILURE) {
 		if (get_item_frame() == 0x0000) {
-			var0000 = find_nearby(0x01D6, 0x0005, 0x0000);
+			var0000 = find_nearby(0x01D6, 0x0005, MASK_NONE);
 		} else {
 			var0000 = item;
 		}
@@ -7808,8 +7820,8 @@ void Func01DC shape#(0x1DC) () {
 
 	var0000 = UI_click_on_item();
 	if (var0000->get_item_shape() == 0x0280) {
-		var0001 = 0xFE9C->find_nearby(0x010E, 0x000A, 0x00B0);
-		var0001 &= 0xFE9C->find_nearby(0x0178, 0x000A, 0x00B0);
+		var0001 = 0xFE9C->find_nearby(0x010E, 0x000A, MASK_ALL_UNSEEN);
+		var0001 &= 0xFE9C->find_nearby(0x0178, 0x000A, MASK_ALL_UNSEEN);
 		for (var0004 in var0001 with var0002 to var0003) {
 			if (var0004->get_item_quality() == 0x00DB) {
 				if (Func0906(var0004) == 0x0002) {
@@ -7935,7 +7947,7 @@ void Func01E2 shape#(0x1E2) () {
 	var var0001;
 
 	if (event == SCRIPTED) {
-		var0000 = 0xFE9C->find_nearby(0x01E2, 0x0064, 0x0000);
+		var0000 = 0xFE9C->find_nearby(0x01E2, 0x0064, MASK_NONE);
 		if (var0000) {
 			var0001 = var0000->get_object_position();
 			UI_sprite_effect(0x001A, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -7983,7 +7995,7 @@ void Func01E3 shape#(0x1E3) () {
 				}
 			}
 		}
-		var0000 = find_nearby(0x0320, 0x002D, 0x0000);
+		var0000 = find_nearby(0x0320, 0x002D, MASK_NONE);
 		var0005 = false;
 		for (var0003 in var0000 with var0006 to var0007) {
 			if (var0003->get_object_position() == [0x0AAB, 0x03C1, 0x0000]) {
@@ -8023,7 +8035,7 @@ void Func01E3 shape#(0x1E3) () {
 		var000C = get_object_position();
 		0xFE9C->si_path_run_usecode([(var000C[0x0001] - 0x0003), (var000C[0x0002] - 0x0003), 0x0000], PATH_SUCCESS, item, Func01E3, true);
 		0xFE9C->clear_item_flag(INVISIBLE);
-		var000D = find_nearby(0x0320, 0x001E, 0x0000);
+		var000D = find_nearby(0x0320, 0x001E, MASK_NONE);
 		var0005 = false;
 		for (var0003 in var000D with var000E to var000F) {
 			if (var0003->get_object_position() == [0x0AAB, 0x03C1, 0x0000]) {
@@ -8275,7 +8287,7 @@ void Func01F8 shape#(0x1F8) () {
 	var0000 = get_barge();
 	if (var0000) {
 		if (!0xFE9C->get_item_flag(ON_MOVING_BARGE)) {
-			var0001 = find_nearby(0x01F8, 0x0019, 0x0000);
+			var0001 = find_nearby(0x01F8, 0x0019, MASK_NONE);
 			var0002 = var0001[0x0001];
 			for (var0005 in var0001 with var0003 to var0004) {
 				var0006 = var0005->get_object_position();
@@ -8344,7 +8356,7 @@ void Func01FA shape#(0x1FA) () {
 	} else {
 		UI_play_music(0x002F, item);
 	}
-	var0001 = find_nearby(0x017E, 0x0014, 0x0000);
+	var0001 = find_nearby(0x017E, 0x0014, MASK_NONE);
 	for (var0004 in var0001 with var0002 to var0003) {
 		var0004->set_alignment(0x0000);
 		var0004->set_item_flag(ASLEEP);
@@ -8386,7 +8398,7 @@ void Func0202 shape#(0x202) () {
 				var0000 = [0x0210, 0x0151, 0x0215, 0x01F5, 0x0373, 0x0202, 0x0295, 0x02C2];
 				var0001 = Func0977(var0000);
 				var0002 = UI_die_roll(0x0001, var0001);
-				var0006 = 0xFE9C->find_nearby(0x0202, 0x003C, 0x0000);
+				var0006 = 0xFE9C->find_nearby(0x0202, 0x003C, MASK_NONE);
 				for (var0009 in var0006 with var0007 to var0008) {
 					if (var0009->get_npc_id()) {
 						var0009->clear_item_flag(POLYMORPH);
@@ -8531,7 +8543,7 @@ void Func020E shape#(0x20E) () {
 		if ((var0000 == 0x0000) || ((var0000 == 0x0001) || ((var0000 == 0x0004) || (var0000 == 0x0005)))) {
 			return;
 		}
-		var0001 = find_nearby(0x01B8, 0x000A, 0x0080);
+		var0001 = find_nearby(0x01B8, 0x000A, MASK_TRANSLUCENT);
 		var0002 = get_object_position();
 		var0002[0x0001] += 0x0003;
 		var0002[0x0002] += 0x0003;
@@ -8654,7 +8666,7 @@ void Func0235 shape#(0x235) () {
 		if ((0xFF6A->get_npc_id() > 0x0000) && (item == 0xFF6A->get_npc_object())) {
 			0xFF6A->set_schedule_type(WAIT);
 			gflags[0x0007] = true;
-			var0000 = find_nearby(0x03F3, 0x000A, 0x0000);
+			var0000 = find_nearby(0x03F3, 0x000A, MASK_NONE);
 			for (var0003 in var0000 with var0001 to var0002) {
 				if (var0003->get_item_frame() == 0x000D) {
 					var0003->set_item_frame(0x000E);
@@ -8745,7 +8757,7 @@ void Func0235 shape#(0x235) () {
 		}
 		if ((0xFF6A->get_npc_id() > 0x0000) && (item == 0xFF6A->get_npc_object())) {
 			gflags[0x0007] = true;
-			var0000 = find_nearby(0x03F3, 0x000A, 0x0000);
+			var0000 = find_nearby(0x03F3, 0x000A, MASK_NONE);
 			for (var0003 in var0000 with var0004 to var0005) {
 				if (var0003->get_item_frame() == 0x000D) {
 					var0003->set_item_frame(0x000E);
@@ -9099,7 +9111,7 @@ void Func0266 shape#(0x266) () {
 	var var0011;
 
 	if (event == SCRIPTED) {
-		var0000 = find_nearby(SHAPE_ANY, 0x003C, 0x0008);
+		var0000 = find_nearby(SHAPE_ANY, 0x003C, MASK_NPC2);
 		for (var0003 in var0000 with var0001 to var0002) {
 			if (!var0003->get_item_flag(IN_PARTY)) {
 				var0003->run_schedule();
@@ -9112,7 +9124,7 @@ void Func0266 shape#(0x266) () {
 	0xFE9B->clear_item_say();
 	if (var0004 == 0x0000) {
 		UI_play_music(0x00FF, item);
-		var0000 = find_nearby(SHAPE_ANY, 0x0028, 0x0008);
+		var0000 = find_nearby(SHAPE_ANY, 0x0028, MASK_NPC2);
 		for (var0003 in var0000 with var0005 to var0006) {
 			if (!var0003->get_item_flag(IN_PARTY)) {
 				var0003->run_schedule();
@@ -9123,7 +9135,7 @@ void Func0266 shape#(0x266) () {
 		Func097F(0xFFFD, "@Ahhh, Stones!@", 0x0002);
 		Func097F(0xFFFE, "@Not Stones again...@", 0x000A);
 		UI_play_music(0x000D, item);
-		var0000 = find_nearby(SHAPE_ANY, 0x0028, 0x0008);
+		var0000 = find_nearby(SHAPE_ANY, 0x0028, MASK_NPC2);
 		for (var0003 in var0000 with var0007 to var0008) {
 			if (!var0003->get_item_flag(IN_PARTY)) {
 				var0003->set_schedule_type(EAT_AT_INN);
@@ -9144,7 +9156,7 @@ void Func0266 shape#(0x266) () {
 		Func097F(0xFE9C, "@Ahhh, pretty.@", 0x0002);
 		Func097F(0xFFFD, "@I do think I am sleepy...@", 0x0011);
 		UI_play_music(0x001F, item);
-		var0000 = find_nearby(SHAPE_ANY, 0x0028, 0x0008);
+		var0000 = find_nearby(SHAPE_ANY, 0x0028, MASK_NPC2);
 		for (var0003 in var0000 with var0009 to var000A) {
 			if (!var0003->get_item_flag(IN_PARTY)) {
 				var0003->set_schedule_type(MAJOR_SIT);
@@ -9162,7 +9174,7 @@ void Func0266 shape#(0x266) () {
 		Func097F(0xFE9C, "@Too slow...@", 0x000A);
 		Func097F(0xFFFF, "@Another song perhaps...@", 0x000F);
 		UI_play_music(0x0015, item);
-		var0000 = find_nearby(SHAPE_ANY, 0x0028, 0x0008);
+		var0000 = find_nearby(SHAPE_ANY, 0x0028, MASK_NPC2);
 		for (var0003 in var0000 with var000B to var000C) {
 			if (!var0003->get_item_flag(IN_PARTY)) {
 				var0003->set_schedule_type(WANDER);
@@ -9174,7 +9186,7 @@ void Func0266 shape#(0x266) () {
 		UI_play_music(0x000C, item);
 		Func097F(0xFE9C, "@Not 'Sea Shanty!'@", 0x0003);
 		Func097F(0xFFFD, "@Cease!@", 0x000A);
-		var0000 = find_nearby(SHAPE_ANY, 0x0028, 0x0008);
+		var0000 = find_nearby(SHAPE_ANY, 0x0028, MASK_NPC2);
 		for (var0003 in var0000 with var000D to var000E) {
 			if (!var0003->get_item_flag(IN_PARTY)) {
 				var0003->set_schedule_type(IN_COMBAT);
@@ -9185,7 +9197,7 @@ void Func0266 shape#(0x266) () {
 	if (var0004 == 0x0008) {
 		Func097F(0xFE9C, "@Everyone dance!@", 0x0000);
 		UI_play_music(0x0010, item);
-		var0000 = find_nearby(SHAPE_ANY, 0x0028, 0x0008);
+		var0000 = find_nearby(SHAPE_ANY, 0x0028, MASK_NPC2);
 		for (var0003 in var0000 with var000F to var0010) {
 			if (!var0003->get_item_flag(IN_PARTY)) {
 				var0003->set_schedule_type(DANCE);
@@ -9384,7 +9396,7 @@ void Func0280 shape#(0x280) () {
 		UI_close_gumps();
 		var0000 = UI_get_party_list();
 		var0001 = 0x0001;
-		var0002 = find_nearby(SHAPE_ANY, 0xFFFF, 0x0008);
+		var0002 = find_nearby(SHAPE_ANY, 0xFFFF, MASK_NPC2);
 		for (var0005 in var0002 with var0003 to var0004) {
 			if (var0005->get_npc_number() in var0000) {
 				var0006 = UI_die_roll(0x0001, 0x000F);
@@ -9474,7 +9486,7 @@ void Func0281 shape#(0x281) () {
 				0xFFE1->set_schedule_type(TALK);
 				0xFFE1->set_item_flag(SI_TOURNAMENT);
 				Func097F(0xFFE1, "@Aha!@", 0x0000);
-				var0005 = find_nearby(0x016B, 0x001E, 0x0000);
+				var0005 = find_nearby(0x016B, 0x001E, MASK_NONE);
 				for (var0008 in var0005 with var0006 to var0007) {
 					var0008->set_schedule_type(HOUND);
 				}
@@ -10064,7 +10076,7 @@ void Func0289 shape#(0x289) () {
 					nohalt;
 					hit 1, normal_damage;
 				};
-				var0003 = 0xFE9C->find_nearby(0x032A, 0x000A, 0x0000);
+				var0003 = 0xFE9C->find_nearby(0x032A, 0x000A, MASK_NONE);
 				var0004 = 0x0000;
 				if (var0003) {
 					for (var0007 in var0003 with var0005 to var0006) {
@@ -10087,7 +10099,7 @@ void Func0289 shape#(0x289) () {
 			}
 			var0008->obj_sprite_effect(0x0018, 0xFFFE, 0xFFFE, 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_play_sound_effect(0x001D);
-			var0009 = 0xFE9C->find_nearby(0x036A, 0x001E, 0x0000);
+			var0009 = 0xFE9C->find_nearby(0x036A, 0x001E, MASK_NONE);
 			if (var0009 == []) {
 				0xFEF3->set_item_flag(SI_TOURNAMENT);
 				0xFEF3->set_alignment(0x0001);
@@ -10135,7 +10147,7 @@ void Func0289 shape#(0x289) () {
 			var000C = get_object_position();
 			if (!(((var000C[0x0001] > 0x0610) && (var000C[0x0001] < 0x066F)) && ((var000C[0x0002] > 0x0070) && (var000C[0x0002] < 0x00BF)))) {
 				UI_play_sound_effect(0x003F);
-				var000D = find_nearby(0x02F3, 0x000A, 0x0000);
+				var000D = find_nearby(0x02F3, 0x000A, MASK_NONE);
 				if (var000D) {
 					for (var0007 in var000D with var000E to var000F) {
 						var000B = var0007->get_object_position();
@@ -10153,7 +10165,7 @@ void Func0289 shape#(0x289) () {
 						}
 					}
 				}
-				var0015 = find_nearby(0x00E8, 0x000A, 0x0000);
+				var0015 = find_nearby(0x00E8, 0x000A, MASK_NONE);
 				if (var0015) {
 					for (var0007 in var0015 with var0016 to var0017) {
 						var000B = var0007->get_object_position();
@@ -10272,7 +10284,7 @@ void Func028B shape#(0x28B) () {
 	var var0006;
 
 	if (event == PATH_SUCCESS) {
-		var0000 = 0xFE9C->find_nearby(0x0369, 0x0001, 0x0000);
+		var0000 = 0xFE9C->find_nearby(0x0369, 0x0001, MASK_NONE);
 		var0001 = 0x0000;
 		if (UI_get_array_size(var0000) > 0x0000) {
 			var0002 = script 0xFE9C {
@@ -10342,7 +10354,7 @@ void Func028C shape#(0x28C) () {
 	var0000 = UI_is_pc_female();
 	var0001 = Func0953();
 	var0002 = UI_get_party_list();
-	var0003 = 0xFFB8->find_nearby(0x0381, 0x0014, 0x0000);
+	var0003 = 0xFFB8->find_nearby(0x0381, 0x0014, MASK_NONE);
 	if (event == SI_PATH_FAILURE) {
 		var0004 = var0003->get_object_position();
 		if (item == 0xFFB8->get_npc_object()) {
@@ -11261,7 +11273,7 @@ void Func02A3 shape#(0x2A3) () {
 			0xFE9C->clear_item_say();
 			var0022 = get_item_quality();
 			var0023 = var0022 + 0x0001;
-			var0024 = find_nearby(0x02A3, 0x0014, 0x0000);
+			var0024 = find_nearby(0x02A3, 0x0014, MASK_NONE);
 			for (var0027 in var0024 with var0025 to var0026) {
 				if ((var0027->get_item_frame() > 0x0016) && (var0027->get_item_frame() < 0x001A)) {
 					var0002 = var0027->set_item_quality(var0023);
@@ -11291,7 +11303,7 @@ void Func02A3 shape#(0x2A3) () {
 					nohalt;
 					say "Curse that Stokes!";
 				};
-				var0024 = 0xFE9C->find_nearby(0x02A3, 0x001E, 0x0000);
+				var0024 = 0xFE9C->find_nearby(0x02A3, 0x001E, MASK_NONE);
 				for (var0027 in var0024 with var0028 to var0029) {
 					if ((var0027->get_item_frame() > 0x0016) && (var0027->get_item_frame() < 0x001A)) {
 						var002A = var0027->get_object_position();
@@ -11382,7 +11394,7 @@ void Func02AF shape#(0x2AF) () {
 		0xFE9C->halt_scheduled();
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		if (!gflags[0x01FB]) {
-			var0001 = find_nearby(0x0320, 0x001E, 0x0000);
+			var0001 = find_nearby(0x0320, 0x001E, MASK_NONE);
 			var0003 = false;
 			for (var0006 in var0001 with var0004 to var0005) {
 				if (var0006->get_item_quality() == 0x003D) {
@@ -11695,7 +11707,7 @@ void Func02C0 shape#(0x2C0) () {
 			var0003 = var0000[0x0001];
 			var0004 = var0000[0x0002];
 			if (((var0003 > 0x04C2) && ((var0003 < 0x04CE) && ((var0004 > 0x036B) && (var0004 < 0x0375)))) && (gflags[0x024B] == false)) {
-				var0005 = 0xFE9C->find_nearby(0x00F6, 0x003C, 0x0000);
+				var0005 = 0xFE9C->find_nearby(0x00F6, 0x003C, MASK_NONE);
 				for (var0008 in var0005 with var0006 to var0007) {
 					var0009 = var0008->get_object_position();
 					if (var0008->get_item_frame() == 0x0002) {
@@ -11707,7 +11719,7 @@ void Func02C0 shape#(0x2C0) () {
 						var0002 = Func09AB(0x0374, 0x0003, 0x0000, 0x0000, var0009);
 					}
 				}
-				var0005 = 0xFE9C->find_nearby(0x0204, 0x003C, 0x0000);
+				var0005 = 0xFE9C->find_nearby(0x0204, 0x003C, MASK_NONE);
 				for (var0008 in var0005 with var000A to var000B) {
 					var0009 = var0008->get_object_position();
 					if (var0008->get_item_frame() == 0x0002) {
@@ -12502,7 +12514,7 @@ void Func02C5 shape#(0x2C5) () {
 	}
 	UI_display_runes(0x0031, var0001);
 	if (var0000 == 0x0002) {
-		var0002 = find_nearby(0x010E, 0x000A, 0x0000);
+		var0002 = find_nearby(0x010E, 0x000A, MASK_NONE);
 		if (var0002) {
 			var0002->set_item_frame(0x000C);
 			var0003 = script var0002 after 4 ticks {
@@ -12769,7 +12781,7 @@ void Func02E4 shape#(0x2E4) () {
 	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		var0001 = false;
-		var0002 = find_nearby(0x032A, 0x0014, 0x0000);
+		var0002 = find_nearby(0x032A, 0x0014, MASK_NONE);
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0006 = var0005->get_object_position();
 			var0007 = var0005->get_item_frame();
@@ -12793,7 +12805,7 @@ void Func02E4 shape#(0x2E4) () {
 		var0008 = Func0992(0xFFFE, var0009, var000A, false);
 	}
 	if (event == SCRIPTED) {
-		var0002 = find_nearby(0x032A, 0x000A, 0x0000);
+		var0002 = find_nearby(0x032A, 0x000A, MASK_NONE);
 		for (var0005 in var0002 with var000B to var000C) {
 			var0007 = var0005->get_item_frame();
 			var0006 = var0005->get_object_position();
@@ -12929,7 +12941,7 @@ void Func02E6 shape#(0x2E6) () {
 		if ((0xFFBA->get_npc_id() == 0x0000) && (item == 0xFFBA->get_npc_object())) {
 			0xFFBA->clear_item_say();
 			Func097F(0xFFBA, "@Hurry!@", 0x0003);
-			var0002 = find_nearby(0x02B8, 0x000C, 0x0000);
+			var0002 = find_nearby(0x02B8, 0x000C, MASK_NONE);
 			for (var0005 in var0002 with var0003 to var0004) {
 				if (var0005->get_item_frame() == 0x000B) {
 					var0005->set_item_frame(0x000C);
@@ -13013,7 +13025,7 @@ void Func02E6 shape#(0x2E6) () {
 		if ((0xFFBA->get_npc_id() == 0x0000) && (item == 0xFFBA->get_npc_object())) {
 			0xFFBA->clear_item_say();
 			Func097F(0xFFBA, "@Hurry!@", 0x0003);
-			var0002 = find_nearby(0x02B8, 0x000C, 0x0000);
+			var0002 = find_nearby(0x02B8, 0x000C, MASK_NONE);
 			for (var0005 in var0002 with var0006 to var0007) {
 				if (var0005->get_item_frame() == 0x000B) {
 					var0005->set_item_frame(0x000C);
@@ -13166,7 +13178,7 @@ void Func02E7 shape#(0x2E7) () {
 	if (event == SCRIPTED) {
 		Func0922(0x0009);
 		gflags[0x02E3] = true;
-		var0000 = find_nearby(0x02E7, 0x002D, 0x0000);
+		var0000 = find_nearby(0x02E7, 0x002D, MASK_NONE);
 		if (var0000) {
 			var0001 = var0000->set_npc_prop(HEALTH, 1);
 		}
@@ -13220,12 +13232,12 @@ void Func02E8 shape#(0x2E8) () {
 
 	var0000 = get_item_quality();
 	if (var0000 == 0x0001) {
-		var0001 = find_nearby(0x0331, 0x0014, 0x0000);
+		var0001 = find_nearby(0x0331, 0x0014, MASK_NONE);
 		if (var0001) {
 			var0001->halt_scheduled();
 			var0001->clear_item_say();
 		}
-		var0002 = find_nearby(0x037F, 0x001E, 0x0000);
+		var0002 = find_nearby(0x037F, 0x001E, MASK_NONE);
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0006 = script var0005 {
 				nohalt;
@@ -13259,7 +13271,7 @@ void Func02E8 shape#(0x2E8) () {
 		}
 		var000D = Func097D(0xFE9C, 0x0001, 0x02B0, QUALITY_ANY, 0x0004);
 		if (var000D) {
-			var000E = find_nearby(0x0320, 0x00A0, 0x0000);
+			var000E = find_nearby(0x0320, 0x00A0, MASK_NONE);
 			for (var0011 in var000E with var000F to var0010) {
 				if (!Func097D(var0011, 0x0001, 0x02B0, QUALITY_ANY, 0x0004)) {
 					var0012 = UI_create_new_object(0x02B0);
@@ -13279,7 +13291,7 @@ void Func02E8 shape#(0x2E8) () {
 			nohalt;
 			call Func07DA;
 		};
-		var0013 = find_nearby(0x00C8, 0x00A0, 0x0010);
+		var0013 = find_nearby(0x00C8, 0x00A0, MASK_EGG);
 		for (var0016 in var0013 with var0014 to var0015) {
 			var0006 = script var0016 {
 				nohalt;
@@ -13289,10 +13301,10 @@ void Func02E8 shape#(0x2E8) () {
 		abort;
 	}
 	if (var0000 == 0x0074) {
-		var0017 = 0xFE9C->find_nearby(0x010E, 0x0014, 0x00B0);
-		var0017 &= 0xFE9C->find_nearby(0x0178, 0x0014, 0x00B0);
-		var0017 &= 0xFE9C->find_nearby(0x01B1, 0x0014, 0x00B0);
-		var0017 &= 0xFE9C->find_nearby(0x01B0, 0x0014, 0x00B0);
+		var0017 = 0xFE9C->find_nearby(0x010E, 0x0014, MASK_ALL_UNSEEN);
+		var0017 &= 0xFE9C->find_nearby(0x0178, 0x0014, MASK_ALL_UNSEEN);
+		var0017 &= 0xFE9C->find_nearby(0x01B1, 0x0014, MASK_ALL_UNSEEN);
+		var0017 &= 0xFE9C->find_nearby(0x01B0, 0x0014, MASK_ALL_UNSEEN);
 		for (var001A in var0017 with var0018 to var0019) {
 			if (var001A->get_item_quality() == 0x0074) {
 				if (Func0906(var001A) == 0x0002) {
@@ -13413,7 +13425,7 @@ void Func02F7 shape#(0x2F7) () {
 	var0001 = var0000->get_item_quality();
 	if (event == DOUBLECLICK) {
 		UI_play_sound_effect(0x001E);
-		if (!find_nearby(0x03C1, 0x0028, 0x00B0)) {
+		if (!find_nearby(0x03C1, 0x0028, MASK_ALL_UNSEEN)) {
 			abort;
 		}
 		if (gflags[0x013D]) {
@@ -13490,7 +13502,7 @@ void Func02F7 shape#(0x2F7) () {
 			};
 		}
 		if (var0001 == 0x0003) {
-			var0004 = 0xFE9C->find_nearby(0x03C1, 0x0050, 0x00B0);
+			var0004 = 0xFE9C->find_nearby(0x03C1, 0x0050, MASK_ALL_UNSEEN);
 			if (UI_on_barge()) {
 				UI_play_music(0x000C, var0000);
 				var0002 = var0000->set_item_quality(0x0000);
@@ -13662,7 +13674,7 @@ void Func0313 shape#(0x313) () {
 	if (event == SCRIPTED) {
 		if ((get_item_shape() == 0x02D1) || (get_item_shape() == 0x03DD)) {
 			var0006 = 0xFE9C->find_nearest(0x0313, 0x0001);
-			var0007 = find_nearby(0x0113, 0x0028, 0x0010);
+			var0007 = find_nearby(0x0113, 0x0028, MASK_EGG);
 			for (var000A in var0007 with var0008 to var0009) {
 				if ((var000A->get_item_quality() == 0x00C8) && (var000A->get_item_frame() == 0x0007)) {
 					var000B = var000A->find_nearest(0x00E9, 0x0008);
@@ -13679,7 +13691,7 @@ void Func0313 shape#(0x313) () {
 					} else if (0xFF58->get_schedule_type() == FOLLOW_AVATAR) {
 						0xFF58->item_say("@I shall set the other lever...@");
 						0xFF58->set_schedule_type(WAIT);
-						var000C = 0xFE9C->find_nearby(0x0313, 0x0028, 0x0000);
+						var000C = 0xFE9C->find_nearby(0x0313, 0x0028, MASK_NONE);
 						var000D = false;
 						for (var0010 in var000C with var000E to var000F) {
 							if (!(var0010 == var0006)) {
@@ -13765,8 +13777,8 @@ void Func0314 shape#(0x314) () {
 				};
 			}
 		} else {
-			var0008 = find_nearby(0x0366, 0x000F, 0x0000);
-			var0009 = find_nearby(0x0203, 0x000F, 0x0000);
+			var0008 = find_nearby(0x0366, 0x000F, MASK_NONE);
+			var0009 = find_nearby(0x0203, 0x000F, MASK_NONE);
 			var0008 &= var0009;
 			var0009 = [];
 			for (var000C in var0008 with var000A to var000B) {
@@ -14283,7 +14295,7 @@ void Func031D shape#(0x31D) () {
 		}
 		if (var0003 == 0x0045) {
 			say("Parting Verses: by Vasculio~~ As they lower me down,~ To this hole in the ground,~ I scream for help,~ But they can't hear a sound.~ I scratch on this lid,~ My fingers they bleed.~ They plant me deep,~ Like an evil seed.~ Now my bones decompose,~ My flesh doth rot,~ But soon I will rise,~ And torture the lot.");
-			var0006 = 0xFE9C->find_nearby(0x00F3, 0x0028, 0x0000);
+			var0006 = 0xFE9C->find_nearby(0x00F3, 0x0028, MASK_NONE);
 			if (!var0006) {
 				// Need to make UCC optimize this
 				goto labelFunc031D_0A44;
@@ -14762,14 +14774,14 @@ void Func0326 shape#(0x326) () {
 		}
 		if (0xFF5D->npc_nearby() && (gflags[0x023A] == true)) {
 			0xFE9C->set_item_flag(DONT_MOVE);
-			var0003 = 0xFF5D->find_nearby(0x0113, 0x0000, 0x0010);
+			var0003 = 0xFF5D->find_nearby(0x0113, 0x0000, MASK_EGG);
 			if (var0003) {
 				var0003->remove_item();
 			}
 			0xFF5D->clear_item_say();
 			Func097F(0xFF5D, "@No, wait!...@", 0x0000);
-			var0004 = 0xFF5D->find_nearby(0x0341, 0x0005, 0x0000);
-			var0004 &= 0xFF5D->find_nearby(0x0349, 0x0005, 0x0000);
+			var0004 = 0xFF5D->find_nearby(0x0341, 0x0005, MASK_NONE);
+			var0004 &= 0xFF5D->find_nearby(0x0349, 0x0005, MASK_NONE);
 			var0005 = script var0004[0x0001] {
 				wait 5;
 				call Func04A3;
@@ -14808,8 +14820,8 @@ void Func0326 shape#(0x326) () {
 				UI_remove_npc_face0();
 				0xFF5D->clear_item_say();
 				Func097F(0xFF5D, "@No, wait! Please...@", 0x0000);
-				var0004 = 0xFF5D->find_nearby(0x0341, 0x0005, 0x0000);
-				var0004 &= 0xFF5D->find_nearby(0x0349, 0x0005, 0x0000);
+				var0004 = 0xFF5D->find_nearby(0x0341, 0x0005, MASK_NONE);
+				var0004 &= 0xFF5D->find_nearby(0x0349, 0x0005, MASK_NONE);
 				var0005 = script var0004[0x0001] {
 					wait 5;
 					call Func04A3;
@@ -15027,7 +15039,7 @@ void Func032C shape#(0x32C) () {
 	var var000D;
 
 	if (event == DOUBLECLICK) {
-		var0000 = find_nearby(0x0113, 0x0005, 0x0010);
+		var0000 = find_nearby(0x0113, 0x0005, MASK_EGG);
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0004 = var0003->get_item_quality();
 			var0005 = var0003->get_item_frame();
@@ -15281,7 +15293,7 @@ void Func032E shape#(0x32E) () {
 		}
 		if (0xFFEE->get_npc_id() == 0x0009) {
 			0xFFEE->set_npc_id(0x000A);
-			var000B = find_nearby(0x0121, 0x0014, 0x0000);
+			var000B = find_nearby(0x0121, 0x0014, MASK_NONE);
 			for (var000E in var000B with var000C to var000D) {
 				var000A = var000E->get_object_position();
 				var000E->remove_item();
@@ -15314,7 +15326,7 @@ void Func032E shape#(0x32E) () {
 		}
 		if (0xFFEE->get_npc_id() == 0x0007) {
 			0xFFEE->set_npc_id(0x0008);
-			var000B = find_nearby(0x025F, 0x0014, 0x0010);
+			var000B = find_nearby(0x025F, 0x0014, MASK_EGG);
 			var000A = var000B->get_object_position();
 			var000B->remove_item();
 			var000B = UI_create_new_object(0x0121);
@@ -15337,7 +15349,7 @@ void Func032E shape#(0x32E) () {
 		}
 		if (0xFFEE->get_npc_id() == 0x0006) {
 			0xFFEE->set_npc_id(0x0007);
-			var000B = find_nearby(0x025F, 0x0014, 0x0010);
+			var000B = find_nearby(0x025F, 0x0014, MASK_EGG);
 			var000A = var000B->get_object_position();
 			var000B->remove_item();
 			var000B = UI_create_new_object(0x0121);
@@ -15370,7 +15382,7 @@ void Func032E shape#(0x32E) () {
 		}
 		if (0xFFEE->get_npc_id() == 0x0005) {
 			0xFFEE->set_npc_id(0x0006);
-			var000B = find_nearby(0x025F, 0x0014, 0x0010);
+			var000B = find_nearby(0x025F, 0x0014, MASK_EGG);
 			var000A = var000B->get_object_position();
 			var000B->remove_item();
 			var000B = UI_create_new_object(0x0121);
@@ -15492,8 +15504,8 @@ void Func032E shape#(0x32E) () {
 			UI_play_music(0x001B, Func09A0(0x0005, 0x0001));
 			0xFFEE->set_npc_id(0x0001);
 			0xFFEE->set_item_flag(MET);
-			var000F = 0xFE9C->find_nearby(0x010E, 0x002D, 0x0000);
-			var0010 = 0xFE9C->find_nearby(0x01B0, 0x002D, 0x0000);
+			var000F = 0xFE9C->find_nearby(0x010E, 0x002D, MASK_NONE);
+			var0010 = 0xFE9C->find_nearby(0x01B0, 0x002D, MASK_NONE);
 			for (var0013 in var000F with var0011 to var0012) {
 				if (var0013->get_item_quality() == 0x00CF) {
 					Func0907(var0013, 0x0000);
@@ -15545,7 +15557,7 @@ void Func032E shape#(0x32E) () {
 		0xFFE3->set_new_schedules([DAWN, MORNING, NIGHT], [EAT_AT_INN, PATROL, SLEEP], [var0020, var001E, var001F]);
 		0xFFE3->move_object([0x08F9, 0x0778, 0x0000]);
 		0xFFE3->run_schedule();
-		var0016 = 0xFE9C->find_nearby(0xFFFF, 0x002D, 0x0004);
+		var0016 = 0xFE9C->find_nearby(ANY_SHAPE, 0x002D, MASK_NPC);
 		var0009 = Func098D();
 		for (var000B in var0016 with var0021 to var0022) {
 			if ((var000B->get_npc_id() == 0x000B) && (var000B->get_npc_number() in var0009)) {
@@ -15583,7 +15595,7 @@ void Func0334 shape#(0x334) () {
 	var0001 = var0000->get_item_quality();
 	if (event == EGG) {
 		if (get_item_shape() != 0x0334) {
-			var0000 = var0000->find_nearby(0x0334, 0x0005, 0x00B0);
+			var0000 = var0000->find_nearby(0x0334, 0x0005, MASK_ALL_UNSEEN);
 			var0000 = Func0989(var0000, var0000);
 			if (!var0000) {
 				abort;
@@ -15605,7 +15617,7 @@ void Func0334 shape#(0x334) () {
 		}
 		var0003 = false;
 		for (var0006 in var0002 with var0004 to var0005) {
-			if (var0000->find_nearby(var0006, 0x0005, 0x00B0)) {
+			if (var0000->find_nearby(var0006, 0x0005, MASK_ALL_UNSEEN)) {
 				if (var0001 < 0x000B) {
 					var0001 += 0x0001;
 					var0007 = var0000->set_item_quality(var0001);
@@ -15632,7 +15644,9 @@ void Func0334 shape#(0x334) () {
 		var000A = ["po,\{dot}no", "plaques\{dot}here", "on\{dot}pain\{dot}of\{dot}d\{ea}\{th}"];
 	} else if (var0001 == 0x0001) {
 		var000A = ["choose"];
-		var000B = find_nearby(0x010E, 0x0005, 0xFE99);
+		// BUG: Invalid mask. Instead of FIND_ON_SCREEN, it should have
+		// been MASK_NONE instead.
+		var000B = find_nearby(0x010E, 0x0005, FIND_ON_SCREEN);
 		var0007 = script var000B after 5 ticks {
 			call Func010E;
 		};
@@ -16338,7 +16352,7 @@ void Func0347 shape#(0x347) () {
 				abort;
 			}
 			var0002 = true;
-			var0003 = 0xFE9C->find_nearby(SHAPE_ANY, 0x000A, 0x0004);
+			var0003 = 0xFE9C->find_nearby(SHAPE_ANY, 0x000A, MASK_NPC);
 			for (var0006 in var0003 with var0004 to var0005) {
 				var0007 = var0006->get_schedule_type();
 				if (var0007 == IN_COMBAT) {
@@ -16402,7 +16416,7 @@ void Func034A shape#(0x34A) () {
 		if ((var0001[0x0001]->get_item_shape() == 0x0379) && ((var0001[0x0001]->get_item_frame() == 0x0000) || ((var0001[0x0001]->get_item_frame() == 0x0001) || ((var0001[0x0001]->get_item_frame() == 0x0004) || (var0001[0x0001]->get_item_frame() == 0x0005))))) {
 			Func0971(item);
 			var0001[0x0001]->set_item_shape(0x020E);
-			var0002 = var0001[0x0001]->find_nearby(0x0211, 0x0028, 0x0000);
+			var0002 = var0001[0x0001]->find_nearby(0x0211, 0x0028, MASK_NONE);
 			for (var0005 in var0002 with var0003 to var0004) {
 				var0005->kill_npc();
 			}
@@ -16630,7 +16644,7 @@ void Func0357 shape#(0x357) () {
 				gflags[0x016B] = false;
 			} else {
 				gflags[0x016B] = true;
-				var0006 = find_nearby(0x00F9, 0x001E, 0x0000);
+				var0006 = find_nearby(0x00F9, 0x001E, MASK_NONE);
 				for (var0009 in var0006 with var0007 to var0008) {
 					if (var0009->get_item_frame() == 0x0001) {
 						var0002 = script var0009 {
@@ -16662,7 +16676,7 @@ void Func0357 shape#(0x357) () {
 	}
 	if (var0000 == 0x000C) {
 		if (gflags[0x016D]) {
-			var000B = find_nearby(0x00C8, 0x000F, 0x0010);
+			var000B = find_nearby(0x00C8, 0x000F, MASK_EGG);
 			if (var000B) {
 				var0002 = true;
 				if (var0001) {
@@ -16689,7 +16703,7 @@ void Func0357 shape#(0x357) () {
 			if (!var0001) {
 				gflags[0x0166] = true;
 				UI_earthquake(0x0002);
-				var0006 = find_nearby(0x00F9, 0x001E, 0x0000);
+				var0006 = find_nearby(0x00F9, 0x001E, MASK_NONE);
 				for (var0009 in var0006 with var000C to var000D) {
 					if (var0009->get_item_frame() == 0x0001) {
 						var0002 = script var0009 {
@@ -16806,7 +16820,7 @@ void Func035F shape#(0x35F) () {
 	}
 	if (event == SCRIPTED) {
 		var0002 = get_object_position();
-		var000A = find_nearby(0x033F, 0x0002, 0x0000);
+		var000A = find_nearby(0x033F, 0x0002, MASK_NONE);
 		if (UI_get_array_size(var000A) > 0x0000) {
 			remove_item();
 			var000B = UI_create_new_object(0x0179);
@@ -17095,7 +17109,7 @@ void Func036A shape#(0x36A) () {
 	}
 	if (event == SCRIPTED) {
 		if (item == Func09A0(0x0005, 0x0001)) {
-			var0002 = 0xFE9C->find_nearby(0x036A, 0x0028, 0x0000);
+			var0002 = 0xFE9C->find_nearby(0x036A, 0x0028, MASK_NONE);
 			if (var0002) {
 				var0002->set_schedule_type(HOUND);
 			}
@@ -20009,8 +20023,8 @@ void Func03F2 shape#(0x3F2) () {
 	var var0008;
 
 	if (event == SCRIPTED) {
-		var0000 = find_nearby(0x03FB, 0x000A, 0x0000);
-		var0001 = var0000->find_nearby(SHAPE_ANY, 0x0005, 0x0000);
+		var0000 = find_nearby(0x03FB, 0x000A, MASK_NONE);
+		var0001 = var0000->find_nearby(SHAPE_ANY, 0x0005, MASK_NONE);
 		var0002 = var0000->get_object_position();
 		for (var0005 in var0001 with var0003 to var0004) {
 			var0006 = var0005->get_object_position();
@@ -20480,7 +20494,7 @@ void Func0400 object#(0x400) () {
 				var0000 = 0xFE9C->set_npc_prop(HEALTH, var0000);
 				abort;
 			}
-			var0003 = 0xFE9C->find_nearby(0x013E, 0x0014, 0x0000);
+			var0003 = 0xFE9C->find_nearby(0x013E, 0x0014, MASK_NONE);
 			var0000 = var0003->find_direction(0xFE9C);
 			var0000 = script var0003 {
 				nohalt;
@@ -21436,13 +21450,13 @@ void Func0403 object#(0x403) () {
 		if (!0xFFFD->get_item_flag(SI_ZOMBIE)) {
 			if (gflags[0x0006] && (!gflags[0x0078])) {
 				var0004 = false;
-				var0005 = 0xFFFD->find_nearby(0x0178, 0x000F, 0x0000);
+				var0005 = 0xFFFD->find_nearby(0x0178, 0x000F, MASK_NONE);
 				for (var0008 in var0005 with var0006 to var0007) {
 					if ((var0008->get_item_quality() == 0x0068) && (Func0906(var0008) != 0x0002)) {
 						var0004 = true;
 					}
 				}
-				var0005 = 0xFFFD->find_nearby(0x010E, 0x000F, 0x0000);
+				var0005 = 0xFFFD->find_nearby(0x010E, 0x000F, MASK_NONE);
 				for (var0008 in var0005 with var0009 to var000A) {
 					if (var0008->get_item_quality() == 0x0068) {
 						var0004 = true;
@@ -23345,7 +23359,7 @@ void Func040F object#(0x40F) () {
 	var0002 = Func0953();
 	var0003 = UI_part_of_day();
 	var0004 = false;
-	var0005 = 0xFFF1->find_nearby(0x02E3, 0x001E, 0x0000);
+	var0005 = 0xFFF1->find_nearby(0x02E3, 0x001E, MASK_NONE);
 	if ((var0003 > 0x0001) || (var0003 < 0x0006)) {
 		var0003 = "day";
 	} else {
@@ -23715,7 +23729,7 @@ void Func0410 object#(0x410) () {
 			UI_set_weather(0x0003);
 			Func097F(0xFFF0, "@'Tis so windy!@", 0x0003);
 			var0006 = 0x0247;
-			var0007 = 0xFFF0->find_nearby(var0006, 0x000A, 0x0000);
+			var0007 = 0xFFF0->find_nearby(var0006, 0x000A, MASK_NONE);
 			if (var0007) {
 				var0007->remove_item();
 			}
@@ -23723,7 +23737,7 @@ void Func0410 object#(0x410) () {
 		if (0xFFF0->get_npc_id() == 0x0003) {
 			Func097F(0xFFF0, "@I should fetch my belongings.@", 0x0000);
 			var0006 = 0x0321;
-			var0007 = 0xFFF0->find_nearby(var0006, 0x000A, 0x0000);
+			var0007 = 0xFFF0->find_nearby(var0006, 0x000A, MASK_NONE);
 			if (var0007) {
 				var0007->remove_item();
 			}
@@ -23736,7 +23750,7 @@ void Func0410 object#(0x410) () {
 		if (0xFFF0->get_npc_id() == 0x0001) {
 			UI_play_sound_effect(0x0074);
 			UI_set_weather(0x0002);
-			var0008 = 0xFFF0->find_nearby(0x025F, 0x0014, 0x0010);
+			var0008 = 0xFFF0->find_nearby(0x025F, 0x0014, MASK_EGG);
 			var0009 = UI_create_new_object(0x0339);
 			if (var0009) {
 				var0009->set_item_flag(TEMPORARY);
@@ -25108,7 +25122,7 @@ void Func0414 object#(0x414) () {
 					". Come after midnight, alone, to my manor, and I shall reveal such knowledge as thou hast never before beheld.\"");
 				say("\"I am a heavy sleeper, so thou shalt most likely have to awaken me...\"");
 				gflags[0x0125] = true;
-				var000B = 0xFE9C->find_nearby(0x010E, 0x003C, 0x0000);
+				var000B = 0xFE9C->find_nearby(0x010E, 0x003C, MASK_NONE);
 				for (var000E in var000B with var000C to var000D) {
 					if (var000E->get_item_quality() == 0x00C8) {
 						Func0907(var000E, 0x0001);
@@ -25496,7 +25510,9 @@ void Func0417 object#(0x417) () {
 			0xFFE9->item_say("@Magical wine!@");
 		}
 		if (var0004 == 0x0005) {
-			var0005 = 0xFFE9->find_nearby(0x0103, 0x000A, 0xFE99);
+			// BUG: Invalid mask. Instead of FIND_ON_SCREEN, it should have
+			// been MASK_NPC2 instead.
+			var0005 = 0xFFE9->find_nearby(0x0103, 0x000A, FIND_ON_SCREEN);
 			if (var0005 != []) {
 				0xFFE9->item_say("@Clean this!@");
 				for (var0008 in var0005 with var0006 to var0007) {
@@ -26395,7 +26411,7 @@ void Func041A object#(0x41A) () {
 	if (event == DOUBLECLICK) {
 		0xFE9C->item_say("@Ho, mage!@");
 		0xFFE6->Func07D1();
-		var0006 = find_nearby(0x0366, 0x0014, 0x0000);
+		var0006 = find_nearby(0x0366, 0x0014, MASK_NONE);
 		for (var0009 in var0006 with var0007 to var0008) {
 			if (var0009->get_item_quality() == 0x00B5) {
 				gflags[0x0215] = true;
@@ -26803,7 +26819,7 @@ void Func041B object#(0x41B) () {
 		0xFFE5->set_schedule_type(TALK);
 	}
 	if (event == PROXIMITY) {
-		var0004 = UI_get_array_size(0xFE9C->find_nearby(0x020B, 0x0023, 0x0000));
+		var0004 = UI_get_array_size(0xFE9C->find_nearby(0x020B, 0x0023, MASK_NONE));
 		if (var0004 < 0x000A) {
 			var0005 = 0x0000;
 			var0006 = UI_get_random(0x0002);
@@ -27204,7 +27220,7 @@ void Func041C object#(0x41C) () {
 			add("acid");
 		}
 		if (gflags[0x0227] && ((Func0994() == 0x0011) && (!0xFE9C->get_item_flag(ISPETRA)))) {
-			var0009 = 0xFE9C->find_nearby(0x0314, 0x000F, 0x0000);
+			var0009 = 0xFE9C->find_nearby(0x0314, 0x000F, MASK_NONE);
 			for (var000C in var0009 with var000A to var000B) {
 				if (var000C->get_item_quality() == 0x003D) {
 					add("switch bodies");
@@ -28501,7 +28517,7 @@ void Func041F object#(0x41F) () {
 			0xFFE1->clear_item_say();
 			Func097F(0xFFE1, "@Kill the Avatar!@", 0x0000);
 			Func09AC(0xFFE1, 0xFFFF, 0x0000, 0x0000);
-			var0004 = find_nearby(0x016B, 0x001E, 0x0000);
+			var0004 = find_nearby(0x016B, 0x001E, MASK_NONE);
 			for (var0007 in var0004 with var0005 to var0006) {
 				Func09AD(var0007);
 			}
@@ -30692,7 +30708,7 @@ void Func0425 object#(0x425) () {
 	}
 	if (event == PROXIMITY) {
 		if (var0000 == PATROL) {
-			var0002 = 0xFFDB->find_nearby(0x025F, 0x0002, 0x0010);
+			var0002 = 0xFFDB->find_nearby(0x025F, 0x0002, MASK_EGG);
 			var0003 = var0002->get_item_quality();
 			if (var0003 == 0x000F) {
 				0xFFDB->set_schedule_type(WAIT);
@@ -31553,24 +31569,24 @@ void Func0428 object#(0x428) () {
 		var0000 = 0x0001;
 	}
 	if (event == SCRIPTED) {
-		var000A = 0xFFD8->find_nearby(0x025F, 0x0028, 0x0010);
+		var000A = 0xFFD8->find_nearby(0x025F, 0x0028, MASK_EGG);
 		for (var000D in var000A with var000B to var000C) {
 			var000E = var000D->get_item_flag(TEMPORARY);
 			if (!var000E) {
 				var000D->remove_item();
 			}
 		}
-		var000F = find_nearby(0x00FB, 0x0019, 0x0000);
+		var000F = find_nearby(0x00FB, 0x0019, MASK_NONE);
 		Func0917(var000F, 0x0001);
-		var0010 = find_nearby(0x0096, 0x0019, 0x0000);
+		var0010 = find_nearby(0x0096, 0x0019, MASK_NONE);
 		var0011 = Func0910(var0010);
-		var0012 = find_nearby(0x03C1, 0x0064, 0x0010);
+		var0012 = find_nearby(0x03C1, 0x0064, MASK_EGG);
 		Func083A(var0012);
 	}
 	if (event == PROXIMITY) {
 		if (var0001 == PATROL) {
 			if (var0000 == 0x0000) {
-				var000D = 0xFFD8->find_nearby(0x025F, 0x0002, 0x0010);
+				var000D = 0xFFD8->find_nearby(0x025F, 0x0002, MASK_EGG);
 				var0013 = var000D->get_item_quality();
 				if (var0013 == 0x000F) {
 					var000D->remove_item();
@@ -32238,7 +32254,7 @@ void Func042A object#(0x42A) () {
 	var0004 = Func0994();
 	if (event == PROXIMITY) {
 		if (var0003 == PATROL) {
-			var0005 = 0xFFD6->find_nearby(0x025F, 0x0002, 0x0010);
+			var0005 = 0xFFD6->find_nearby(0x025F, 0x0002, MASK_EGG);
 			var0006 = var0005->get_item_quality();
 			if (var0006 == 0x000F) {
 				0xFFD6->set_schedule_type(WAIT);
@@ -32767,7 +32783,7 @@ void Func042B object#(0x42B) () {
 	var0004 = 0xFFD5->get_schedule_type();
 	if (event == PROXIMITY) {
 		if (var0004 == PATROL) {
-			var0005 = 0xFFD5->find_nearby(0x025F, 0x0002, 0x0010);
+			var0005 = 0xFFD5->find_nearby(0x025F, 0x0002, MASK_EGG);
 			var0006 = var0005->get_item_quality();
 			if (var0006 == 0x000F) {
 				0xFFD5->set_schedule_type(WAIT);
@@ -33643,7 +33659,7 @@ void Func042C object#(0x42C) () {
 			say("\"Even as we speak, Batlin is opening the Wall of Lights in the next room! With the Guardian's help he and I shall meet in the Eternal Void to conquer new realms together!\"");
 			say("\"Batlin! Guardian! I await thee in the Void!\"");
 			UI_remove_npc_face0();
-			var0014 = find_nearby(0x0300, 0x003C, 0x0000);
+			var0014 = find_nearby(0x0300, 0x003C, MASK_NONE);
 			for (var0017 in var0014 with var0015 to var0016) {
 				var0005 = var0017->get_object_position();
 				Func0971(var0017);
@@ -37665,7 +37681,7 @@ void Func0436 object#(0x436) () {
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
 	var0003 = Func0942(0xFFFD);
-	var0004 = find_nearby(0x00F9, 0x0028, 0x0000);
+	var0004 = find_nearby(0x00F9, 0x0028, MASK_NONE);
 	if (event == DEATH) {
 		var0005 = script item {
 			nohalt;
@@ -39616,7 +39632,7 @@ void Func043B object#(0x43B) () {
 	var0003 = Func0942(0xFFFD);
 	var0004 = Func0942(0xFFFF);
 	var0005 = Func0942(0xFFFE);
-	var0006 = 0xFFC5->find_nearby(0x017D, 0x0014, 0x0000);
+	var0006 = 0xFFC5->find_nearby(0x017D, 0x0014, MASK_NONE);
 	var0007 = [0x040A, 0x07E9, 0x0000];
 	if (event == DEATH) {
 		var0008 = script item {
@@ -39665,7 +39681,7 @@ void Func043B object#(0x43B) () {
 				say("\"Perhaps his cartography would be of aid to thee.\"");
 				var0008 = Func099B(0xFE9C, 0x0001, 0x031D, 0x0004, 0x0005, false, true);
 				gflags[0x0152] = true;
-				var000B = 0xFE9C->find_nearby(0x017D, 0x0014, 0x0000);
+				var000B = 0xFE9C->find_nearby(0x017D, 0x0014, MASK_NONE);
 				for (var000E in var000B with var000C to var000D) {
 					if (var000E->get_npc_id() == 0x0001) {
 						var000E->set_schedule_type(TALK);
@@ -39687,7 +39703,7 @@ void Func043B object#(0x43B) () {
 					say("\"If thou shouldst bring a return message, I will introduce thee to my shipmate, Scots, who makes maps.\"");
 					say("\"Perhaps his cartography would be of aid to thee.\"");
 					gflags[0x0152] = true;
-					var000B = 0xFE9C->find_nearby(0x017D, 0x0014, 0x0000);
+					var000B = 0xFE9C->find_nearby(0x017D, 0x0014, MASK_NONE);
 					for (var000E in var000B with var000F to var0010) {
 						if (var000E->get_npc_id() == 0x0001) {
 							var000E->set_schedule_type(TALK);
@@ -39702,7 +39718,7 @@ void Func043B object#(0x43B) () {
 				say("\"The Avatar! Forgive me... unlike these local folk, I know whom thou art!\"");
 				say("\"I am certain that thy business is far more urgent.\"");
 				gflags[0x0167] = true;
-				var000B = 0xFE9C->find_nearby(0x017D, 0x0014, 0x0000);
+				var000B = 0xFE9C->find_nearby(0x017D, 0x0014, MASK_NONE);
 				for (var000E in var000B with var0011 to var0012) {
 					if (var000E->get_npc_id() == 0x0001) {
 						var000E->set_schedule_type(TALK);
@@ -39732,7 +39748,7 @@ void Func043B object#(0x43B) () {
 			}
 			gflags[0x0167] = true;
 			0xFFC5->si_path_run_usecode(var0007, PROXIMITY, item, Func043B, false);
-			var000B = 0xFE9C->find_nearby(0x017D, 0x0014, 0x0000);
+			var000B = 0xFE9C->find_nearby(0x017D, 0x0014, MASK_NONE);
 			for (var000E in var000B with var0013 to var0014) {
 				if (var000E->get_npc_id() == 0x0001) {
 					var000E->set_schedule_type(TALK);
@@ -40782,7 +40798,7 @@ void Func043E object#(0x43E) () {
 			}
 			if (var0005 > 0x0003) {
 				Func097F(0xFFC2, "@Aha!@", 0x0000);
-				var0006 = 0xFFC2->find_nearby(0x037E, 0x000A, 0x0000);
+				var0006 = 0xFFC2->find_nearby(0x037E, 0x000A, MASK_NONE);
 				if (var0006) {
 					0xFFC2->si_path_run_usecode(var0006->get_object_position(), SI_PATH_SUCCESS, item, Func043E, false);
 					UI_set_path_failure([Func043E], item, SI_PATH_FAILURE);
@@ -40794,7 +40810,7 @@ void Func043E object#(0x43E) () {
 		}
 	}
 	if (event == SI_PATH_FAILURE) {
-		var0006 = 0xFFC2->find_nearby(0x037E, 0x0004, 0x0000);
+		var0006 = 0xFFC2->find_nearby(0x037E, 0x0004, MASK_NONE);
 		if (var0006) {
 			event = SI_PATH_SUCCESS;
 		} else {
@@ -40803,7 +40819,7 @@ void Func043E object#(0x43E) () {
 		}
 	}
 	if (event == SI_PATH_SUCCESS) {
-		var0006 = 0xFFC2->find_nearby(0x037E, 0x0004, 0x0000);
+		var0006 = 0xFFC2->find_nearby(0x037E, 0x0004, MASK_NONE);
 		if (var0006) {
 			var0008 = UI_direction_from(0xFFC2, var0006);
 			0xFFC2->set_schedule_type(WAIT);
@@ -41365,7 +41381,7 @@ void Func043F object#(0x43F) () {
 						}
 						var0014 -= 0x0001;
 					}
-					var0018 = 0xFFC1->find_nearby(0x00E4, 0x001E, 0x0000);
+					var0018 = 0xFFC1->find_nearby(0x00E4, 0x001E, MASK_NONE);
 					if (var0018) {
 						for (var001B in var0018 with var0019 to var001A) {
 							var001B->set_schedule_type(TALK);
@@ -41434,7 +41450,7 @@ void Func0440 object#(0x440) () {
 	var var0006;
 	var var0007;
 
-	var0000 = 0xFFC0->find_nearby(0x013E, 0x001E, 0x0000);
+	var0000 = 0xFFC0->find_nearby(0x013E, 0x001E, MASK_NONE);
 	var0001 = 0xFFC0->get_item_flag(MET);
 	var0002 = Func0954();
 	if (gflags[0x008B] && ((event == PROXIMITY) && (!gflags[0x02E2]))) {
@@ -42085,7 +42101,7 @@ void Func0443 object#(0x443) () {
 				add(["healing", "food", "information"]);
 			}
 		} else {
-			var0004 = 0xFFBD->find_nearby(0x0334, 0x0014, 0x0000);
+			var0004 = 0xFFBD->find_nearby(0x0334, 0x0014, MASK_NONE);
 			for (var0007 in var0004 with var0005 to var0006) {
 				if (var0007->get_item_quality() == 0x0048) {
 					say("\"Perhaps we may speak at another time. Mine husband is recently dead, and I am in mourning.\"");
@@ -44873,7 +44889,7 @@ void Func0448 object#(0x448) () {
 	var0002 = UI_is_pc_female();
 	var0003 = 0xFFB8->get_item_flag(MET);
 	var0004 = Func098E();
-	var0005 = 0xFFB8->find_nearby(0x0381, 0x0014, 0x0000);
+	var0005 = 0xFFB8->find_nearby(0x0381, 0x0014, MASK_NONE);
 	var0006 = Func0942(0xFFFF);
 	if ((event == DEATH) && 0xFFB8->get_item_flag(SI_TOURNAMENT)) {
 		0xFFB8->show_npc_face0(0x0000);
@@ -45421,7 +45437,7 @@ void Func044A object#(0x44A) () {
 	if (event == PROXIMITY) {
 		var0007 = 0xFFB6->get_object_position();
 		if (var0007[0x0002] > 0x0A41) {
-			var0008 = 0xFFB6->find_nearby(0xFFFF, 0x0014, 0x0008);
+			var0008 = 0xFFB6->find_nearby(ANY_SHAPE, 0x0014, MASK_NPC2);
 			var0008 = Func0988(0xFFB6->get_npc_object(), var0008);
 			var0009 = [];
 			for (var000C in var0008 with var000A to var000B) {
@@ -45854,7 +45870,7 @@ void Func044B object#(0x44B) () {
 								}
 							}
 							0xFE9C->clear_item_flag(INVISIBLE);
-							var0010 = 0xFFB5->find_nearby(0x020A, 0x0064, 0x0000);
+							var0010 = 0xFFB5->find_nearby(0x020A, 0x0064, MASK_NONE);
 							var0011 = 0x0000;
 							for (var0014 in var0010 with var0012 to var0013) {
 								if (var0014->get_item_quality() == 0x0048) {
@@ -45924,7 +45940,7 @@ void Func044B object#(0x44B) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		var001D = 0xFE9C->find_nearby(0x010E, 0x000A, 0x00B0);
+		var001D = 0xFE9C->find_nearby(0x010E, 0x000A, MASK_ALL_UNSEEN);
 		for (var0020 in var001D with var001E to var001F) {
 			if (var0020->get_item_quality() == 0x0048) {
 				if (Func0906(var0020) == 0x0002) {
@@ -45998,7 +46014,7 @@ void Func044C object#(0x44C) () {
 			call Func0442;
 		};
 		gflags[0x0044] = true;
-		var0005 = 0xFE9C->find_nearby(0xFFFF, 0x0028, 0x0008);
+		var0005 = 0xFE9C->find_nearby(ANY_SHAPE, 0x0028, MASK_NPC2);
 		for (var0008 in var0005 with var0006 to var0007) {
 			var0008->set_opponent(0xFFBE);
 			var0008->set_oppressor(0xFFBE);
@@ -49269,7 +49285,7 @@ void Func047F object#(0x47F) () {
 		abort;
 	}
 	if ((event == PATH_FAILURE) || (event == SI_PATH_FAILURE)) {
-		var0002 = find_nearby(0x0314, 0x0014, 0x0000);
+		var0002 = find_nearby(0x0314, 0x0014, MASK_NONE);
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0000 = var0005->get_item_quality();
 			if (var0000 == 0x0092) {
@@ -49328,7 +49344,7 @@ void Func0480 object#(0x480) () {
 		abort;
 	}
 	if ((event == PATH_FAILURE) || (event == SI_PATH_FAILURE)) {
-		var0001 = find_nearby(0x0314, 0x0014, 0x0000);
+		var0001 = find_nearby(0x0314, 0x0014, MASK_NONE);
 		for (var0004 in var0001 with var0002 to var0003) {
 			var0005 = var0004->get_item_quality();
 			if (var0005 == 0x0093) {
@@ -51088,7 +51104,7 @@ void Func0496 object#(0x496) () {
 						}
 						var0013 -= 0x0001;
 					}
-					var0018 = 0xFF6A->find_nearby(0x00E4, 0x001E, 0x0000);
+					var0018 = 0xFF6A->find_nearby(0x00E4, 0x001E, MASK_NONE);
 					if (var0018) {
 						for (var001B in var0018 with var0019 to var001A) {
 							var001B->set_schedule_type(TALK);
@@ -52290,11 +52306,11 @@ void Func04A0 object#(0x4A0) () {
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
 	if (event == PROXIMITY) {
-		var0003 = find_nearby(0x025F, 0x0000, 0x0010);
+		var0003 = find_nearby(0x025F, 0x0000, MASK_EGG);
 		for (var0006 in var0003 with var0004 to var0005) {
 			var0007 = var0006->get_item_frame();
 			if ((var0007 <= 0x0001) || (var0007 >= 0x0007)) {
-				var0008 = find_nearby(0x0113, 0x0014, 0x0010);
+				var0008 = find_nearby(0x0113, 0x0014, MASK_EGG);
 				for (var000B in var0008 with var0009 to var000A) {
 					if ((var000B->get_item_frame() == 0x0006) && (var000B->get_item_quality() == 0x0001)) {
 						if (var000B->get_distance(0xFE9C) < 0x0009) {
@@ -52622,7 +52638,7 @@ void Func04A3 object#(0x4A3) () {
 				Func097F(0xFE9C, "@Liberate me, Avatar!@", 0x0005);
 				Func097F(0xFF58, "@Do it! Do it! Do it!@", 0x0009);
 			}
-			var0001 = 0xFF5D->find_nearby(0x0113, 0x0000, 0x0010);
+			var0001 = 0xFF5D->find_nearby(0x0113, 0x0000, MASK_EGG);
 			if (var0001) {
 				var0002 = UI_die_roll(0x0002, 0x0008);
 				var0000 = script var0001 after (0x0019 + var0002) ticks {
@@ -52798,15 +52814,15 @@ void Func04A3 object#(0x4A3) () {
 		}
 		if (get_item_shape() == 0x031F) {
 			Func09AA();
-			var000F = 0xFF5D->find_nearby(0x031F, 0x001E, 0x0000);
-			var000F &= 0xFF5D->find_nearby(0x0339, 0x001E, 0x0000);
-			var000F &= 0xFF5D->find_nearby(0x00E0, 0x001E, 0x0000);
+			var000F = 0xFF5D->find_nearby(0x031F, 0x001E, MASK_NONE);
+			var000F &= 0xFF5D->find_nearby(0x0339, 0x001E, MASK_NONE);
+			var000F &= 0xFF5D->find_nearby(0x00E0, 0x001E, MASK_NONE);
 			for (var0012 in var000F with var0010 to var0011) {
 				var0004 = var0012->get_object_position();
 				var0004[0x0003] = 0x0000;
 				var0012->move_object(var0004);
 			}
-			var0013 = 0xFF5D->find_nearby(0x00A3, 0x001E, 0x0000);
+			var0013 = 0xFF5D->find_nearby(0x00A3, 0x001E, MASK_NONE);
 			for (var0016 in var0013 with var0014 to var0015) {
 				var0002 = UI_die_roll(0x0001, 0x0003);
 				var0000 = script var0016 {
@@ -52874,7 +52890,7 @@ void Func04A3 object#(0x4A3) () {
 			abort;
 		}
 		if (get_item_shape() == 0x0124) {
-			var0017 = 0xFF5D->find_nearby(0x017D, 0x0014, 0x0008);
+			var0017 = 0xFF5D->find_nearby(0x017D, 0x0014, MASK_NPC2);
 			if (var0017) {
 				var0017->set_schedule_type(IN_COMBAT);
 				var0000 = script var0017 {
@@ -53446,7 +53462,7 @@ void Func04A8 object#(0x4A8) () {
 				0xFF58->set_attack_mode(FLEE);
 			}
 		} else {
-			var000F = find_nearby(0x00E9, 0x0028, 0x0000);
+			var000F = find_nearby(0x00E9, 0x0028, MASK_NONE);
 			for (var0012 in var000F with var0010 to var0011) {
 				if (var0012->get_item_frame() == 0x0002) {
 					var0012->set_item_frame(0x0001);
@@ -53512,7 +53528,7 @@ void Func04A9 object#(0x4A9) () {
 	}
 	if (event == PATH_SUCCESS) {
 		var0003 = 0xFF57->get_object_position() & (QUANTITY_ANY & 0x0006);
-		var0004 = var0003->find_nearby(0x0113, 0x0001, 0x0010);
+		var0004 = var0003->find_nearby(0x0113, 0x0001, MASK_EGG);
 		if (var0004) {
 			if (var0004->get_item_quality() == 0x0064) {
 				item_say("@Thou shalt not have my reagents!@");
@@ -53567,7 +53583,7 @@ void Func04A9 object#(0x4A9) () {
 	if (event == SCRIPTED) {
 		if (get_item_shape() == 0xFF57->get_item_shape()) {
 			var0003 = 0xFF57->get_object_position() & (QUANTITY_ANY & 0x0000);
-			var0004 = var0003->find_nearby(0x025F, 0x0014, 0x0010);
+			var0004 = var0003->find_nearby(0x025F, 0x0014, MASK_EGG);
 			if (var0004) {
 				var0007 = 0xFFFF;
 				var0008 = 0xFFFF;
@@ -53677,7 +53693,7 @@ void Func04AA object#(0x4AA) () {
 		var000B = "she";
 	}
 	if (event == PROXIMITY) {
-		var000C = find_nearby(0x0313, 0x000A, 0x0000);
+		var000C = find_nearby(0x0313, 0x000A, MASK_NONE);
 		var000D = var000C->get_item_quality();
 		if ((var000D == 0x0047) && (gflags[0x01FE] == false)) {
 			var000E = var000C->get_item_frame() + 0x0001;
@@ -53697,7 +53713,7 @@ void Func04AA object#(0x4AA) () {
 			Func094F(0xFF56, "To go in Virtue!");
 			Func097F(0xFE9C, "@May Virtue be with thee!@", 0x0010);
 			Func0878();
-			var000F = find_nearby(0x0314, 0x001E, 0x0000);
+			var000F = find_nearby(0x0314, 0x001E, MASK_NONE);
 			for (var0012 in var000F with var0010 to var0011) {
 				var0013 = var0012->get_item_quality();
 				if (var0013 == 0x0000) {
@@ -54051,7 +54067,7 @@ void Func04AA object#(0x4AA) () {
 				abort;
 
 			case "leave Furnace" (remove):
-				var0018 = 0xFF56->find_nearby(0x0313, 0x0014, 0x0000);
+				var0018 = 0xFF56->find_nearby(0x0313, 0x0014, MASK_NONE);
 				if (var0018->get_item_quality() == 0x0049) {
 					say("\"To open the brass gate, that you may gain the surface.\"");
 					Func097F(0xFF56, "@To wait.@", 0x0000);
@@ -54170,7 +54186,7 @@ void Func04B0 object#(0x4B0) () {
 		0xFF50->item_say(var0003);
 	}
 	if (event == SCRIPTED) {
-		var0004 = find_nearby(SHAPE_ANY, 0x0028, 0x0008);
+		var0004 = find_nearby(SHAPE_ANY, 0x0028, MASK_NPC2);
 		for (var0007 in var0004 with var0005 to var0006) {
 			if (!var0007->get_item_flag(IN_PARTY)) {
 				var0007->clear_item_flag(ASLEEP);
@@ -54226,7 +54242,7 @@ void Func04B2 object#(0x4B2) () {
 	var0003 = false;
 	if (event == STARTED_TALKING) {
 		0xFE9C->clear_item_flag(DONT_MOVE);
-		var0004 = 0xFE9C->find_nearby(0x0178, 0x0019, 0x0000);
+		var0004 = 0xFE9C->find_nearby(0x0178, 0x0019, MASK_NONE);
 		if (var0004) {
 			var0005 = var0004->get_object_position();
 			var0006 = UI_create_new_object(0x010E);
@@ -54278,7 +54294,7 @@ void Func04B2 object#(0x4B2) () {
 					say("\"Follow me through the gate, Avatar! Thou wilt soon be home...\"");
 					UI_remove_npc_face0();
 					0xFE9C->set_item_flag(DONT_MOVE);
-					var0008 = 0xFE9C->find_nearby(0x0360, 0x0019, 0x0000);
+					var0008 = 0xFE9C->find_nearby(0x0360, 0x0019, MASK_NONE);
 					if (var0008) {
 						var0005 = var0008->get_object_position();
 						var0005[0x0001] -= 0x0001;
@@ -54343,7 +54359,7 @@ void Func04B2 object#(0x4B2) () {
 					say("\"Follow me through the gate, Avatar! Thou wilt soon be home...\"");
 					UI_remove_npc_face0();
 					0xFE9C->set_item_flag(DONT_MOVE);
-					var0008 = 0xFE9C->find_nearby(0x0360, 0x0019, 0x0000);
+					var0008 = 0xFE9C->find_nearby(0x0360, 0x0019, MASK_NONE);
 					if (var0008) {
 						var0005 = var0008->get_object_position();
 						var0005[0x0001] -= 0x0001;
@@ -54386,7 +54402,7 @@ void Func04B2 object#(0x4B2) () {
 					say("\"Follow me through the gate, Avatar! Thou wilt soon be home...\"");
 					UI_remove_npc_face0();
 					0xFE9C->set_item_flag(DONT_MOVE);
-					var0008 = 0xFE9C->find_nearby(0x0360, 0x0019, 0x0000);
+					var0008 = 0xFE9C->find_nearby(0x0360, 0x0019, MASK_NONE);
 					if (var0008) {
 						var0005 = var0008->get_object_position();
 						var0005[0x0001] -= 0x0001;
@@ -54414,7 +54430,7 @@ void Func04B2 object#(0x4B2) () {
 		}
 	}
 	if (event == PATH_SUCCESS) {
-		var0008 = 0xFE9C->find_nearby(0x0360, 0x000A, 0x0000);
+		var0008 = 0xFE9C->find_nearby(0x0360, 0x000A, MASK_NONE);
 		Func09AA();
 		var0005 = 0xFF4E->get_object_position();
 		UI_sprite_effect(0x001A, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -54498,7 +54514,7 @@ void Func04B3 object#(0x4B3) () {
 				call Func061E;
 			};
 			0xFE9C->clear_item_flag(DONT_MOVE);
-			var0006 = 0xFE9C->find_nearby(0x010E, 0x001E, 0x0000);
+			var0006 = 0xFE9C->find_nearby(0x010E, 0x001E, MASK_NONE);
 			if (var0006) {
 				var0007 = var0006->get_object_position();
 				var0008 = UI_create_new_object(0x0178);
@@ -54567,7 +54583,7 @@ void Func04B3 object#(0x4B3) () {
 					UI_remove_npc_face0();
 					Func097F(0xFF4D, "@Watch this!@", 0x0000);
 					gflags[0x01EE] = true;
-					var0009 = 0xFE9C->find_nearby(0x0314, 0x0014, 0x0000);
+					var0009 = 0xFE9C->find_nearby(0x0314, 0x0014, MASK_NONE);
 					for (var000C in var0009 with var000A to var000B) {
 						var000D = var000C->get_item_quality();
 						if (var000D == 0x0017) {
@@ -54614,13 +54630,13 @@ void Func04B3 object#(0x4B3) () {
 			say("\"I do not think I'll be back for quite a while, Avatar. Thou shalt have to find the way out thyself.\"");
 			say("\"If thou wishest to...\"");
 			UI_remove_npc_face0();
-			var000F = 0xFF4D->find_nearby(0x028C, 0x001E, 0x0004);
+			var000F = 0xFF4D->find_nearby(0x028C, 0x001E, MASK_NPC);
 			if (var000F) {
 				Func097F(0xFF4D, "@I think 'tis THY turn...@", 0x0001);
 				var000F->set_schedule_type(WAIT);
 				0xFF54->clear_item_say();
 				Func097F(0xFF54, "@Yes, Shamino...@", 0x0002);
-				var0006 = 0xFF4D->find_nearby(0x0178, 0x000A, 0x0000);
+				var0006 = 0xFF4D->find_nearby(0x0178, 0x000A, MASK_NONE);
 				if (var0006) {
 					var0007 = var0006->get_object_position();
 					0xFF4D->set_npc_id(0x0000);
@@ -54688,7 +54704,7 @@ void Func04B3 object#(0x4B3) () {
 			0x0000->Func07F7();
 		} else {
 			Func097F(0xFF53, "@Come, Avatar...@", 0x0002);
-			var0006 = find_nearby(0x0178, 0x000A, 0x0000);
+			var0006 = find_nearby(0x0178, 0x000A, MASK_NONE);
 			if (var0006) {
 				0xFE9C->set_item_flag(DONT_MOVE);
 				var0007 = var0006->get_object_position();
@@ -54709,7 +54725,7 @@ void Func04B3 object#(0x4B3) () {
 		if (gflags[0x01EC] == true) {
 			var0007 = 0xFE9C->get_object_position();
 			UI_sprite_effect(0x0007, var0007[0x0001], var0007[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-			if (0xFE9C->find_nearby(0x01E7, 0x0014, 0x0000)) {
+			if (0xFE9C->find_nearby(0x01E7, 0x0014, MASK_NONE)) {
 				0xFF4D->show_npc_face0(0x0000);
 				say("\"The slaves, Avatar! Thou didst release them all! Damn thee!\"");
 				UI_remove_npc_face0();
@@ -54786,7 +54802,7 @@ void Func04B4 object#(0x4B4) () {
 		0xFF4C->set_new_schedules(MIDNIGHT, TEND_SHOP, [0x00AB, 0x0631]);
 		0xFF4C->run_schedule();
 		0xFE9C->clear_item_flag(DONT_MOVE);
-		var0005 = 0xFE9C->find_nearby(0x010E, 0x0050, 0x0000);
+		var0005 = 0xFE9C->find_nearby(0x010E, 0x0050, MASK_NONE);
 		for (var0008 in var0005 with var0006 to var0007) {
 			var0009 = var0008->get_item_quality();
 			if (var0009 == 0x0007) {
@@ -56044,7 +56060,7 @@ void Func04CA object#(0x4CA) () {
 				UI_pop_answers();
 				say("\"Ah, so thou art a true accolyte of Order. I will permit thee to enter the Grand Shrine.\"");
 				UI_remove_npc_face0();
-				var0001 = find_nearby(0x0314, 0x001E, 0x0000);
+				var0001 = find_nearby(0x0314, 0x001E, MASK_NONE);
 				for (var0004 in var0001 with var0002 to var0003) {
 					var0005 = var0004->get_item_quality();
 					if (var0005 == 0x0000) {
@@ -56058,14 +56074,14 @@ void Func04CA object#(0x4CA) () {
 						var0006 = var0004->set_item_quality(0x0093);
 					}
 				}
-				var0001 = find_nearby(0x036C, 0x0014, 0x0000);
+				var0001 = find_nearby(0x036C, 0x0014, MASK_NONE);
 				for (var000A in var0001 with var0008 to var0009) {
 					var0006 = var000A->set_item_quality(0x0093);
 				}
-				var0001 = find_nearby(0x03A7, 0x0014, 0x0000);
+				var0001 = find_nearby(0x03A7, 0x0014, MASK_NONE);
 				for (var000A in var0001 with var000B to var000C) {
 					var0006 = var000A->set_item_quality(0x0093);
-					var0001 = find_nearby(0x0314, 0x0014, 0x0000);
+					var0001 = find_nearby(0x0314, 0x0014, MASK_NONE);
 					var0005 = var0004->get_item_quality();
 					if (var0005 == 0x0093) {
 						Func0924(var0004, 0x0000);
@@ -56778,7 +56794,7 @@ void Func04D0 object#(0x4D0) () {
 
 	if (event == DOUBLECLICK) {
 		0xFF30->set_schedule_type(SHY);
-		var0000 = 0xFF30->find_nearby(0x00FA, 0x000A, 0x0000);
+		var0000 = 0xFF30->find_nearby(0x00FA, 0x000A, MASK_NONE);
 		if (0xFF2A->get_npc_object() in var0000) {
 			var0000 = Func0988(0xFF2A->get_npc_object(), var0000);
 		}
@@ -56996,7 +57012,7 @@ void Func04D1 object#(0x4D1) () {
 				fallthrough;
 
 			case "maps" (remove):
-				var0006 = 0xFE9C->find_nearby(0x0282, 0x000A, 0x0000);
+				var0006 = 0xFE9C->find_nearby(0x0282, 0x000A, MASK_NONE);
 				if (var0006) {
 					say("\"We have no maps to aid thee, I fear. But I know that there is a book describing the old temples here in the abbey.\"");
 					say("\"It is written in the Ophidian runes, of course. But thou canst use the Lens of Translating to aid thee in reading it.\"");
@@ -57045,7 +57061,7 @@ void Func04D2 object#(0x4D2) () {
 
 	if (event == DOUBLECLICK) {
 		0xFF2E->set_schedule_type(SHY);
-		var0000 = 0xFF2E->find_nearby(0x00FA, 0x000A, 0x0000);
+		var0000 = 0xFF2E->find_nearby(0x00FA, 0x000A, MASK_NONE);
 		if (0xFF2A->get_npc_object() in var0000) {
 			var0000 = Func0988(0xFF2A->get_npc_object(), var0000);
 		}
@@ -57357,7 +57373,7 @@ void Func04D4 object#(0x4D4) () {
 			say("\"Continue on thy quest. Trouble not thyself for this girl, as we shall do all that is possible for her.\"");
 			var0007 = UI_remove_party_items(QUANTITY_ANY, 0x019E, QUALITY_ANY, 0x0015, 0x0000);
 			if (!var0007) {
-				var0008 = find_nearby(0x019E, 0x001E, 0x0000);
+				var0008 = find_nearby(0x019E, 0x001E, MASK_NONE);
 				for (var000B in var0008 with var0009 to var000A) {
 					if (var000B->get_item_frame() == 0x0015) {
 						var0005 = var000B->get_object_position();
@@ -57560,7 +57576,7 @@ void Func04D5 object#(0x4D5) () {
 		var0004 = "her";
 	}
 	if (event == PROXIMITY) {
-		var0005 = 0xFF2B->find_nearby(0xFFFF, 0x0014, 0x0008);
+		var0005 = 0xFF2B->find_nearby(ANY_SHAPE, 0x0014, MASK_NPC2);
 		var0006 = [];
 		for (var0009 in var0005 with var0007 to var0008) {
 			if (var0009->get_schedule_type() == DANCE) {
@@ -57655,7 +57671,7 @@ void Func04D5 object#(0x4D5) () {
 				say("\"A work of divine wisdom, certainly! It is where Xenka inscribed all of her visions.\"");
 				var000A = Func0992(0x0001, "@Such wisdom might aid thee in thy quest, Avatar.@", 0x0000, false);
 				0x0000->set_conversation_slot();
-				if (find_nearby(0x03E6, 0x000F, 0x0000)) {
+				if (find_nearby(0x03E6, 0x000F, MASK_NONE)) {
 					say("\"Thou mayest find the book here in the Chapel, upon the altar.\"");
 				} else {
 					say("\"Thou mayest find the book upon the altar within the Chapel.\"");
@@ -57813,7 +57829,7 @@ void Func04D6 object#(0x4D6) () {
 
 	if (event == DOUBLECLICK) {
 		0xFF2A->set_schedule_type(SHY);
-		var0000 = 0xFF2A->find_nearby(0x00FA, 0x000A, 0x0000);
+		var0000 = 0xFF2A->find_nearby(0x00FA, 0x000A, MASK_NONE);
 		if (0xFF2A->get_npc_object() in var0000) {
 			var0000 = Func0988(0xFF2A->get_npc_object(), var0000);
 		}
@@ -58558,7 +58574,7 @@ void Func0510 object#(0x510) () {
 		abort;
 	}
 	if ((event == PATH_FAILURE) || (event == SI_PATH_FAILURE)) {
-		var0001 = find_nearby(0x0314, 0x0028, 0x0000);
+		var0001 = find_nearby(0x0314, 0x0028, MASK_NONE);
 		for (var0004 in var0001 with var0002 to var0003) {
 			var0005 = var0004->get_item_quality();
 			if (var0005 == 0x0091) {
@@ -58783,7 +58799,7 @@ labelFunc0526_0008:
 			return;
 		}
 		var000D = 0xFE9C->get_object_position();
-		var000E = 0xFE9C->find_nearby(0x00F3, 0x0028, 0x0000);
+		var000E = 0xFE9C->find_nearby(0x00F3, 0x0028, MASK_NONE);
 		if (var000E) {
 			var000B = var000E->get_object_position();
 			if (var000E->get_item_frame() == 0x0000) {
@@ -58888,9 +58904,9 @@ void Func0602 object#(0x602) () {
 				UI_play_sound_effect(0x0043);
 				0xFE9C->obj_sprite_effect(0x0015, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
 				gflags[0x02EA] = true;
-				var0001 = find_nearby(0x00C8, 0x000A, 0x0010);
+				var0001 = find_nearby(0x00C8, 0x000A, MASK_EGG);
 				var0001->remove_item();
-				var0002 = find_nearby(0x037F, 0x000A, 0x0000);
+				var0002 = find_nearby(0x037F, 0x000A, MASK_NONE);
 				var0002->remove_item();
 				Func0883();
 			} else {
@@ -58905,9 +58921,9 @@ void Func0602 object#(0x602) () {
 				gflags[0x02EB] = true;
 				UI_play_sound_effect(0x0043);
 				0xFE9C->obj_sprite_effect(0x0015, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
-				var0001 = find_nearby(0x00C8, 0x000A, 0x0010);
+				var0001 = find_nearby(0x00C8, 0x000A, MASK_EGG);
 				var0001->remove_item();
-				var0002 = find_nearby(0x037F, 0x000A, 0x0000);
+				var0002 = find_nearby(0x037F, 0x000A, MASK_NONE);
 				var0002->remove_item();
 			}
 		} else {
@@ -58921,9 +58937,9 @@ void Func0602 object#(0x602) () {
 				gflags[0x02EC] = true;
 				UI_play_sound_effect(0x0043);
 				0xFE9C->obj_sprite_effect(0x0015, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF);
-				var0001 = find_nearby(0x00C8, 0x000A, 0x0010);
+				var0001 = find_nearby(0x00C8, 0x000A, MASK_EGG);
 				var0001->remove_item();
-				var0002 = find_nearby(0x037F, 0x000A, 0x0000);
+				var0002 = find_nearby(0x037F, 0x000A, MASK_NONE);
 				var0002->remove_item();
 			}
 		} else {
@@ -58953,9 +58969,9 @@ void Func0603 object#(0x603) () {
 
 	if (event == SCRIPTED) {
 		UI_close_gumps();
-		var0000 = 0xFE9C->find_nearby(0x03BE, 0x0028, 0x0000);
+		var0000 = 0xFE9C->find_nearby(0x03BE, 0x0028, MASK_NONE);
 		if (var0000) {
-			var0001 = 0xFE9C->find_nearby(0x02D8, 0x000A, 0x0000);
+			var0001 = 0xFE9C->find_nearby(0x02D8, 0x000A, MASK_NONE);
 			if (var0001) {
 				for (var0004 in var0001 with var0002 to var0003) {
 					if (var0004->get_item_frame() == 0x0000) {
@@ -58969,7 +58985,7 @@ void Func0603 object#(0x603) () {
 				if (var0006) {
 					var0007 = UI_remove_party_items(0x0001, 0x02C3, 0x007C, FRAME_ANY, 0x0000);
 				} else {
-					var0008 = Func09A0(0x0000, 0x0001)->find_nearby(0x02C3, 0x001E, 0x0000);
+					var0008 = Func09A0(0x0000, 0x0001)->find_nearby(0x02C3, 0x001E, MASK_NONE);
 					for (var000B in var0008 with var0009 to var000A) {
 						var000C = var000B->get_item_quality();
 						if (var000C == 0x007C) {
@@ -58995,9 +59011,9 @@ void Func0605 object#(0x605) () {
 	var var0007;
 	var var0008;
 
-	var0000 = find_nearby(0x01B2, 0x0050, 0x0000);
+	var0000 = find_nearby(0x01B2, 0x0050, MASK_NONE);
 	for (var0003 in var0000 with var0001 to var0002) {
-		var0004 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
+		var0004 = var0003->find_nearby(0x0113, 0x000A, MASK_EGG);
 		if (var0004) {
 			if (var0004->get_item_quality() == 0x00D2) {
 				var0005 = var0003->get_object_position();
@@ -59066,7 +59082,7 @@ void Func060A object#(0x60A) () {
 	var var000B;
 
 	var0000 = [0x06A7, 0x0BC5, 0x0000];
-	var0001 = find_nearby(0x032C, 0x0005, 0x0000);
+	var0001 = find_nearby(0x032C, 0x0005, MASK_NONE);
 	for (var0004 in var0001 with var0002 to var0003) {
 		var0005 = var0004->get_item_frame();
 		if (var0005 == 0x0001) {
@@ -59157,7 +59173,7 @@ void Func060B object#(0x60B) () {
 	var000E = false;
 	var000F = get_item_frame();
 	var0010 = get_item_quality();
-	var0011 = find_nearby(0x0313, 0x000A, 0x00B0);
+	var0011 = find_nearby(0x0313, 0x000A, MASK_ALL_UNSEEN);
 	if (var0010 == 0x0001) {
 		for (var0014 in var0011 with var0012 to var0013) {
 			var0015 = var0014->get_item_quality();
@@ -59179,7 +59195,7 @@ void Func060B object#(0x60B) () {
 			}
 		}
 		if (var0000 && (var0001 && var0002)) {
-			var0017 = find_nearby(0x010E, 0x000F, 0x00B0);
+			var0017 = find_nearby(0x010E, 0x000F, MASK_ALL_UNSEEN);
 			for (var001A in var0017 with var0018 to var0019) {
 				if (var001A->get_item_quality() == 0x00F1) {
 					var001B = var001A->get_object_position();
@@ -59226,7 +59242,7 @@ void Func060B object#(0x60B) () {
 			}
 		}
 		if (var0003 && (var0004 && (var0005 && (var0006 && var0007)))) {
-			var0017 = find_nearby(0x010E, 0x000F, 0x00B0);
+			var0017 = find_nearby(0x010E, 0x000F, MASK_ALL_UNSEEN);
 			for (var001A in var0017 with var0020 to var0021) {
 				if (var001A->get_item_quality() == 0x00F1) {
 					var001B = var001A->get_object_position();
@@ -59283,7 +59299,7 @@ void Func060B object#(0x60B) () {
 			}
 		}
 		if (var0008 && (var0009 && (var000A && (var000B && (var000C && (var000D && var000E)))))) {
-			var0017 = find_nearby(0x010E, 0x000F, 0x00B0);
+			var0017 = find_nearby(0x010E, 0x000F, MASK_ALL_UNSEEN);
 			for (var001A in var0017 with var0024 to var0025) {
 				if (var001A->get_item_quality() == 0x00F1) {
 					var001B = var001A->get_object_position();
@@ -59369,7 +59385,7 @@ void Func060C object#(0x60C) () {
 		var0006 += 0x0001;
 	}
 	var000B = Func09A0(0x0000, 0x0001);
-	var000C = var000B->find_nearby(0x03B2, 0x003C, 0x0000);
+	var000C = var000B->find_nearby(0x03B2, 0x003C, MASK_NONE);
 	if (var000C) {
 		for (var000F in var000C with var000D to var000E) {
 			var0010 = [0x0AA7, 0x0AEF, 0x0000];
@@ -59441,7 +59457,7 @@ void Func060E object#(0x60E) () {
 	var0009 = false;
 	var000A = get_item_frame();
 	var000B = get_item_quality();
-	var000C = find_nearby(0x0314, 0x0064, 0x00B0);
+	var000C = find_nearby(0x0314, 0x0064, MASK_ALL_UNSEEN);
 	if (var000B == 0x00ED) {
 		for (var000F in var000C with var000D to var000E) {
 			var0010 = var000F->get_item_quality();
@@ -59498,7 +59514,7 @@ void Func060E object#(0x60E) () {
 			}
 		}
 		if (var0000 && (var0001 && (var0002 && (var0003 && (var0004 && (var0005 && (var0006 && (var0007 && (var0008 && var0009))))))))) {
-			var0012 = find_nearby(0x010E, 0x0064, 0x00B0);
+			var0012 = find_nearby(0x010E, 0x0064, MASK_ALL_UNSEEN);
 			for (var0015 in var0012 with var0013 to var0014) {
 				if (var0015->get_item_quality() == 0x00F1) {
 					var0016 = var0015->get_object_position();
@@ -60353,11 +60369,11 @@ void Func061D object#(0x61D) () {
 		0xFE9C->show_npc_face0(0x0000);
 		say("\"Quickly! Surround Batlin!\"");
 		UI_remove_npc_face0();
-		var0000 = 0xFE9C->find_nearby(0x013E, 0x0014, 0x0000);
+		var0000 = 0xFE9C->find_nearby(0x013E, 0x0014, MASK_NONE);
 		if (var0000) {
 			Func097F(var0000, "@Stay back!@", 0x000A);
 		}
-		var0001 = 0xFE9C->find_nearby(0x025F, 0x0028, 0x0010);
+		var0001 = 0xFE9C->find_nearby(0x025F, 0x0028, MASK_EGG);
 		var0002 = 0x0000;
 		for (var0005 in var0001 with var0003 to var0004) {
 			var0006 = var0005->get_item_frame();
@@ -60441,7 +60457,7 @@ void Func061E object#(0x61E) () {
 		}
 		var0003 = ["@Help us!@", "@Press the right button!@", "@Free us with the right button!@", "@Be kind...@", "@Do not force us!@", "@Damn the buttons!@"];
 		for (var0006 in var0002 with var0004 to var0005) {
-			var0007 = 0xFE9C->find_nearby(var0006, 0x0014, 0x0000);
+			var0007 = 0xFE9C->find_nearby(var0006, 0x0014, MASK_NONE);
 			if (var0007) {
 				Func097F(var0007, var0003[UI_get_random(UI_get_array_size(var0003))], UI_get_random(0x000A));
 				var0001 = true;
@@ -60756,12 +60772,12 @@ void Func0625 object#(0x625) () {
 					}
 					var0009 = [];
 					for (var000C in var0008 with var000A to var000B) {
-						var0009 &= find_nearby(var000C, 0x001E, 0x0000);
+						var0009 &= find_nearby(var000C, 0x001E, MASK_NONE);
 					}
 					for (var000F in var0009 with var000D to var000E) {
 						var000F->set_schedule_type(WANDER);
 					}
-					var0010 = find_nearby(SHAPE_ANY, 0x0041, 0x0008);
+					var0010 = find_nearby(SHAPE_ANY, 0x0041, MASK_NPC2);
 					for (var0013 in var0010 with var0011 to var0012) {
 						if (var0013->get_schedule_type() == IN_COMBAT) {
 							var0013->set_schedule_type(WANDER);
@@ -60791,7 +60807,7 @@ void Func0625 object#(0x625) () {
 		converse (0) {
 			case "Yes":
 				say("\"Very well. Thou shalt remain in prison until we see fit to release thee.\"");
-				var0010 = find_nearby(SHAPE_ANY, 0x0041, 0x0008);
+				var0010 = find_nearby(SHAPE_ANY, 0x0041, MASK_NPC2);
 				for (var0013 in var0010 with var0019 to var001A) {
 					if (var0013->get_schedule_type() == IN_COMBAT) {
 						var0013->set_schedule_type(WANDER);
@@ -60835,7 +60851,7 @@ labelFunc0625_031E:
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		UI_play_music(0x00FF, item);
 		0xFE9B->move_object(var001F);
-		var0020 = 0xFE9C->find_nearby(0x033C, 0x000A, 0x0000);
+		var0020 = 0xFE9C->find_nearby(0x033C, 0x000A, MASK_NONE);
 		if (var0020 && (Func0906(var0020) == 0x0001)) {
 			var001B = Func090A(var0020);
 		}
@@ -60946,7 +60962,7 @@ void Func0626 object#(0x626) () {
 	var0002 = get_item_shape();
 	if (var0002 == 0x0206) {
 		UI_call_guards();
-		var0003 = Func0988(item, find_nearby(0x0206, 0x0006, 0x0000));
+		var0003 = Func0988(item, find_nearby(0x0206, 0x0006, MASK_NONE));
 		var0004 = [];
 		for (var0007 in var0003 with var0005 to var0006) {
 			var0004 &= var0007->get_distance(item);
@@ -61063,7 +61079,7 @@ void Func0628 object#(0x628) () {
 		var0000->set_item_flag(TEMPORARY);
 		var0000->set_item_frame(UI_die_roll(0x000C, 0x000F));
 		var0001 = get_object_position();
-		var0002 = find_nearby(0x032A, 0x0002, 0x0000);
+		var0002 = find_nearby(0x032A, 0x0002, MASK_NONE);
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0006 = var0005->get_object_position();
 			if ((var0006[0x0001] == (var0001[0x0001] - 0x0001)) && ((var0006[0x0002] == (var0001[0x0002] + 0x0001)) && (var0006[0x0003] == var0001[0x0003]))) {
@@ -61115,7 +61131,7 @@ void Func0629 object#(0x629) () {
 		var0000->set_item_flag(TEMPORARY);
 		var0000->set_item_frame(UI_die_roll(0x0014, 0x0017));
 		var0001 = get_object_position();
-		var0002 = find_nearby(0x032A, 0x0002, 0x0000);
+		var0002 = find_nearby(0x032A, 0x0002, MASK_NONE);
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0006 = var0005->get_object_position();
 			if ((var0006[0x0001] == (var0001[0x0001] + 0x0001)) && ((var0006[0x0002] == (var0001[0x0002] - 0x0001)) && (var0006[0x0003] == var0001[0x0003]))) {
@@ -61180,11 +61196,11 @@ void Func062A object#(0x62A) () {
 		if (var0000 == 0x00F1) {
 			var0001 = 0x0000;
 			var0002 = 0x0000;
-			var0003 = 0xFE9C->find_nearby(0x0113, 0x0005, 0x0010);
+			var0003 = 0xFE9C->find_nearby(0x0113, 0x0005, MASK_EGG);
 			if (var0003) {
 				var0001 = var0003->get_item_quality();
 			}
-			var0004 = var0003->find_nearby(0x032C, 0x0007, 0x0000);
+			var0004 = var0003->find_nearby(0x032C, 0x0007, MASK_NONE);
 			if (((var0001 == 0x0096) || (var0001 == 0x0098)) && var0004) {
 				say("Behold! Thou art worthy to cross to the Temple of Balance!");
 				var0005 = Func09A0(0x0000, 0x0001);
@@ -61457,8 +61473,8 @@ void Func0631 object#(0x631) () {
 
 	if (event == PATH_SUCCESS) {
 		var0000 = get_item_quality();
-		var0001 = find_nearby(0x0366, 0x000F, 0x0000);
-		var0002 = find_nearby(0x0203, 0x000F, 0x0000);
+		var0001 = find_nearby(0x0366, 0x000F, MASK_NONE);
+		var0002 = find_nearby(0x0203, 0x000F, MASK_NONE);
 		var0001 &= var0002;
 		var0002 = [];
 		for (var0005 in var0001 with var0003 to var0004) {
@@ -61574,7 +61590,7 @@ void Func0632 object#(0x632) () {
 		var000B = ["@Attack!@", "@Die, Dog of Prophecy!@", "@Ha ha ha ha!@"];
 		var000C = 0x0001;
 		var0009 = Func09A0(0x0005, 0x0001);
-		var000D = var0009->find_nearby(0x0299, 0x0014, 0x0000);
+		var000D = var0009->find_nearby(0x0299, 0x0014, MASK_NONE);
 		for (var0010 in var000D with var000E to var000F) {
 			var0010->set_schedule_type(IN_COMBAT);
 			0xFE9C->set_oppressor(var0010);
@@ -61582,7 +61598,7 @@ void Func0632 object#(0x632) () {
 			var000C += 0x0001;
 		}
 		var0009 = Func09A0(0x0005, 0x0002);
-		var0011 = var0009->find_nearby(0x0151, 0x001E, 0x0000);
+		var0011 = var0009->find_nearby(0x0151, 0x001E, MASK_NONE);
 		for (var0014 in var0011 with var0012 to var0013) {
 			var0014->set_schedule_type(IN_COMBAT);
 			0xFE9C->set_oppressor(var0014);
@@ -61679,7 +61695,7 @@ void Func0635 object#(0x635) () {
 	var var0006;
 
 	if (event == EGG) {
-		var0000 = find_nearby(0x035F, 0x0000, 0x0000);
+		var0000 = find_nearby(0x035F, 0x0000, MASK_NONE);
 		var0001 = var0000->get_item_frame();
 		if ((var0001 > 0x000F) && (var0001 < 0x0013)) {
 			var0002 = script var0000 after 60 ticks {
@@ -61693,7 +61709,7 @@ void Func0635 object#(0x635) () {
 	}
 	if (event == SCRIPTED) {
 		var0003 = get_object_position();
-		var0004 = find_nearby(0x033F, 0x0002, 0x0000);
+		var0004 = find_nearby(0x033F, 0x0002, MASK_NONE);
 		if (UI_get_array_size(var0004) > 0x0000) {
 			remove_item();
 			var0005 = UI_create_new_object(0x0179);
@@ -62298,7 +62314,7 @@ void Func063C object#(0x63C) () {
 	var var0001;
 
 	UI_fade_palette(0x000C, 0x0001, 0x0001);
-	var0000 = 0xFE9C->find_nearby(0x0178, 0x0006, 0x0000);
+	var0000 = 0xFE9C->find_nearby(0x0178, 0x0006, MASK_NONE);
 	if (var0000) {
 		var0001 = script var0000 after 1 ticks {
 			nohalt;
@@ -62527,15 +62543,15 @@ void Func0642 object#(0x642) () {
 			};
 			var0001 = Func0941(0xFE9C);
 			var0002 = 0x0015 + var0001;
-			var0003 = find_nearby(0x00C8, var0002, 0x00B0);
+			var0003 = find_nearby(0x00C8, var0002, MASK_ALL_UNSEEN);
 			for (var0006 in var0003 with var0004 to var0005) {
 				var0000 = script var0006 after 5 ticks {
 					nohalt;
 					call Func0642;
 				};
 			}
-			var0007 = find_nearby(0x0320, var0002, 0x00B0);
-			var0008 = find_nearby(0x020A, var0002, 0x00B0);
+			var0007 = find_nearby(0x0320, var0002, MASK_ALL_UNSEEN);
+			var0008 = find_nearby(0x020A, var0002, MASK_ALL_UNSEEN);
 			var0009 = var0007 & var0008;
 			for (var0006 in var0009 with var000A to var000B) {
 				if (var0006->get_item_quality() >= 0x00FA) {
@@ -62588,7 +62604,7 @@ void Func0643 object#(0x643) () {
 			var0001 = 0x0019;
 			var0002 = [0x02BD, 0x020E, 0x0152, 0x01B3];
 			for (var0005 in var0002 with var0003 to var0004) {
-				var0006 = find_nearby(var0005, var0001, 0x0000);
+				var0006 = find_nearby(var0005, var0001, MASK_NONE);
 				for (var0009 in var0006 with var0007 to var0008) {
 					var000A = var0009->get_item_shape();
 					var000B = (get_distance(var0009) / 0x0003) + 0x0002;
@@ -62640,7 +62656,7 @@ void Func0644 object#(0x644) () {
 			var0001 = 0x0019;
 			var0002 = [0x0253, 0x0379, 0x0150, 0x01E1];
 			for (var0005 in var0002 with var0003 to var0004) {
-				var0006 = find_nearby(var0005, var0001, 0x0000);
+				var0006 = find_nearby(var0005, var0001, MASK_NONE);
 				for (var0009 in var0006 with var0007 to var0008) {
 					var000A = var0009->get_item_shape();
 					var000B = (get_distance(var0009) / 0x0003) + 0x0002;
@@ -62959,7 +62975,7 @@ void Func0649 object#(0x649) () {
 				actor frame cast_out;
 				actor frame strike_2h;
 			};
-			var0004 = var0000->find_nearby(0x00C8, var0002, 0x00B0);
+			var0004 = var0000->find_nearby(0x00C8, var0002, MASK_ALL_UNSEEN);
 			for (var0007 in var0004 with var0005 to var0006) {
 				var0000 = var0007->get_object_position();
 				var0003 = var0007->set_last_created();
@@ -62970,8 +62986,8 @@ void Func0649 object#(0x649) () {
 					UI_play_sound_effect(0x0043);
 				}
 			}
-			var0008 = var0000->find_nearby(0x0320, var0002, 0x00B0);
-			var0009 = var0000->find_nearby(0x020A, var0002, 0x00B0);
+			var0008 = var0000->find_nearby(0x0320, var0002, MASK_ALL_UNSEEN);
+			var0009 = var0000->find_nearby(0x020A, var0002, MASK_ALL_UNSEEN);
 			var000A = var0008 & var0009;
 			for (var0007 in var000A with var000B to var000C) {
 				if (var0007->get_item_quality() >= 0x00FA) {
@@ -63440,7 +63456,7 @@ void Func0653 object#(0x653) () {
 			};
 			var0004 = 0x000F;
 			for (var0007 in var0001 with var0005 to var0006) {
-				var0002 &= var0000->find_nearby(var0007, var0004, 0x0010);
+				var0002 &= var0000->find_nearby(var0007, var0004, MASK_EGG);
 			}
 			if (UI_get_array_size(var0002) > 0x0000) {
 				for (var0007 in var0002 with var0008 to var0009) {
@@ -63752,7 +63768,7 @@ void Func065A object#(0x65A) () {
 	}
 	if (event == SCRIPTED) {
 		var0001->obj_sprite_effect(0x0007, 0xFFFE, 0xFFFE, 0x0000, 0x0000, 0x0000, 0xFFFF);
-		var0003 = find_nearby(SHAPE_ANY, 0x0028, 0x0008);
+		var0003 = find_nearby(SHAPE_ANY, 0x0028, MASK_NPC2);
 		var0004 = UI_get_party_list();
 		var0005 = 0x000C;
 		var0006 = get_item_flag(IN_PARTY);
@@ -63997,7 +64013,7 @@ void Func065D object#(0x65D) () {
 				var0008 = var0000[0x0001] + var0004[var0007];
 				var0009 = var0000[0x0002] + var0005[var0007];
 				var0003 = [var0008, var0009, 0x0000];
-				var000A = var0003->find_nearby(SHAPE_ANY, var0006, 0x0020);
+				var000A = var0003->find_nearby(SHAPE_ANY, var0006, MASK_INVISIBLE);
 				for (var000D in var000A with var000B to var000C) {
 					if (var000D->get_item_flag(INVISIBLE) && (!(var000D in var0001))) {
 						var0001 &= var000D;
@@ -64405,7 +64421,7 @@ void Func0665 object#(0x665) () {
 	}
 	if (event == SCRIPTED) {
 		var0001 = 0x0019;
-		var0002 = find_nearby(0xFFFF, var0001, 0x0004);
+		var0002 = find_nearby(ANY_SHAPE, var0001, MASK_NPC);
 		var0003 = UI_get_party_list();
 		for (var0006 in var0002 with var0004 to var0005) {
 			if (!(var0006 in var0003)) {
@@ -64466,7 +64482,7 @@ void Func0666 object#(0x666) () {
 				};
 				var0005 = 0x0000;
 				var0006 = 0x0000;
-				var0009 = find_nearby(0x01FB, 0x000F, 0x00B0);
+				var0009 = find_nearby(0x01FB, 0x000F, MASK_ALL_UNSEEN);
 				for (var000C in var0009 with var000A to var000B) {
 					if (var000C->get_item_quality() == 0x000D) {
 						var0001 = var000C;
@@ -64501,7 +64517,7 @@ void Func0666 object#(0x666) () {
 				if ((var0010 == true) || ((var0011 == true) || (var0012 == true))) {
 					var000D = true;
 				}
-				var0013 = find_nearby(0x00F3, 0x000F, 0x00B0);
+				var0013 = find_nearby(0x00F3, 0x000F, MASK_ALL_UNSEEN);
 				for (var0016 in var0013 with var0014 to var0015) {
 					if (var0016->get_item_quality() == 0x0001) {
 						var0017 = true;
@@ -64553,7 +64569,7 @@ void Func0667 object#(0x667) () {
 				wait 5;
 				call Func0667;
 			};
-			var0001 = find_nearby(SHAPE_ANY, 0x001E, 0x0008);
+			var0001 = find_nearby(SHAPE_ANY, 0x001E, MASK_NPC2);
 			var0002 = UI_get_party_list();
 			for (var0005 in var0001 with var0003 to var0004) {
 				if (!(var0005 in var0002)) {
@@ -64661,9 +64677,9 @@ void Func0669 object#(0x669) () {
 				actor frame strike_2h;
 				sfx 67;
 			};
-			var0001 = find_nearby(0x0097, 0x0019, 0x00B0);
-			var0001 &= find_nearby(0x0098, 0x0019, 0x00B0);
-			var0001 &= find_nearby(0x0212, 0x0019, 0x00B0);
+			var0001 = find_nearby(0x0097, 0x0019, MASK_ALL_UNSEEN);
+			var0001 &= find_nearby(0x0098, 0x0019, MASK_ALL_UNSEEN);
+			var0001 &= find_nearby(0x0212, 0x0019, MASK_ALL_UNSEEN);
 			if (var0001) {
 				for (var0004 in var0001 with var0002 to var0003) {
 					var0000 = script var0004 after 6 ticks {
@@ -64739,7 +64755,7 @@ void Func066A object#(0x66A) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		var0001 = find_nearby(SHAPE_ANY, 0x0019, 0x0008);
+		var0001 = find_nearby(SHAPE_ANY, 0x0019, MASK_NPC2);
 		var0002 = UI_get_party_list();
 		for (var0005 in var0001 with var0003 to var0004) {
 			if (!(var0005 in var0002)) {
@@ -65238,7 +65254,7 @@ void Func0672 object#(0x672) () {
 				actor frame strike_1h;
 			};
 			var0002 = 0x0019;
-			var0003 = find_nearby(0xFFFF, var0002, 0x0004);
+			var0003 = find_nearby(ANY_SHAPE, var0002, MASK_NPC);
 			for (var0006 in var0003 with var0004 to var0005) {
 				var0001 = script var0006 {
 					nohalt;
@@ -65874,7 +65890,7 @@ void Func067E object#(0x67E) () {
 
 	if (event == DOUBLECLICK) {
 		var0000 = 0xFE9C->get_object_position() & (0x0096 & 0x001F);
-		var0001 = var0000->find_nearby(0x025F, 0x0050, 0x0010);
+		var0001 = var0000->find_nearby(0x025F, 0x0050, MASK_EGG);
 		for (var0004 in var0001 with var0002 to var0003) {
 			var0005 = var0004->get_item_quality();
 			var0006 = var0004->get_item_frame();
@@ -66007,7 +66023,7 @@ void Func0681 object#(0x681) () {
 				sfx 130;
 			};
 			var0001 = 0x0019;
-			var0002 = find_nearby(0xFFFF, var0001, 0x0004);
+			var0002 = find_nearby(ANY_SHAPE, var0001, MASK_NPC);
 			var0003 = UI_get_party_list2();
 			var0004 = false;
 			for (var0007 in var0002 with var0005 to var0006) {
@@ -66469,7 +66485,7 @@ void Func0688 object#(0x688) () {
 
 	var0000 = [];
 	var0001 = 0x000A + Func0941(0xFE9C);
-	var0002 = find_nearby(SHAPE_ANY, var0001, 0x0008);
+	var0002 = find_nearby(SHAPE_ANY, var0001, MASK_NPC2);
 	var0003 = UI_get_party_list();
 	var0004 = [];
 	for (var0007 in var0002 with var0005 to var0006) {
@@ -66609,7 +66625,7 @@ void Func06A5 object#(0x6A5) () {
 	var var0004;
 
 	if ((event == EGG) && (!gflags[0x021C])) {
-		var0000 = find_nearby(0x0178, 0x000A, 0x0000);
+		var0000 = find_nearby(0x0178, 0x000A, MASK_NONE);
 		if (var0000) {
 			var0001 = script var0000 {
 				nohalt;
@@ -66620,8 +66636,8 @@ void Func06A5 object#(0x6A5) () {
 				frame 14;
 			};
 		}
-		var0002 = find_nearby(0x0331, 0x000A, 0x0000);
-		var0003 = find_nearby(0x0314, 0x0014, 0x0000);
+		var0002 = find_nearby(0x0331, 0x000A, MASK_NONE);
+		var0003 = find_nearby(0x0314, 0x0014, MASK_NONE);
 		if (var0002) {
 			Func0998(var0002, 0x037F);
 		}
@@ -66709,7 +66725,7 @@ void Func06A7 object#(0x6A7) () {
 
 	var0000 = [0x03B4, 0x03B8, 0x03B7, 0x0284, 0x0285, 0x0286, 0x02F8];
 	for (var0003 in var0000 with var0001 to var0002) {
-		var0004 = find_nearby(var0003, 0x0001, 0x0000);
+		var0004 = find_nearby(var0003, 0x0001, MASK_NONE);
 		if (var0004) {
 			UI_play_sound_effect(0x0039);
 			var0005 = get_object_position();
@@ -66732,7 +66748,7 @@ void Func06A8 object#(0x6A8) () {
 		var0000 = script item {
 			call Func0636;
 		};
-		var0001 = find_nearby(0x02EB, 0x0005, 0x0000);
+		var0001 = find_nearby(0x02EB, 0x0005, MASK_NONE);
 		if (var0001) {
 			var0000 = script var0001 after 2 ticks {
 				call Func0464;
@@ -66776,7 +66792,7 @@ void Func06A9 object#(0x6A9) () {
 		UI_play_sound_effect(0x0039);
 		var0001 = Func097D(0xFE9C, 0x0001, 0x02B0, QUALITY_ANY, 0x0004);
 		if (var0001) {
-			var0002 = find_nearby(0x0320, 0x0014, 0x0000);
+			var0002 = find_nearby(0x0320, 0x0014, MASK_NONE);
 			for (var0005 in var0002 with var0003 to var0004) {
 				if (!Func097D(var0005, 0x0001, 0x02B0, QUALITY_ANY, 0x0004)) {
 					var0006 = UI_create_new_object(0x02B0);
@@ -66798,7 +66814,7 @@ void Func06A9 object#(0x6A9) () {
 				var0007 = true;
 			}
 		}
-		var000C = find_nearby(0x00C8, 0x00A0, 0x0010);
+		var000C = find_nearby(0x00C8, 0x00A0, MASK_EGG);
 		if (var0007) {
 			for (var000F in var000C with var000D to var000E) {
 				var0000 = script var000F {
@@ -66835,7 +66851,7 @@ void Func06AB object#(0x6AB) () {
 	var var0006;
 
 	if (event == EGG) {
-		var0000 = find_nearby(0x0113, 0x0014, 0x0010);
+		var0000 = find_nearby(0x0113, 0x0014, MASK_EGG);
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0004 = var0003->get_item_frame();
 			if (var0004 == 0x0000) {
@@ -66852,7 +66868,7 @@ void Func06AB object#(0x6AB) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		var0006 = find_nearby(0x0215, 0x0014, 0x0000);
+		var0006 = find_nearby(0x0215, 0x0014, MASK_NONE);
 		if (var0006) {
 			var0006[0x0001]->set_npc_id(0x0001);
 			var0006[0x0001]->set_item_flag(SI_TOURNAMENT);
@@ -66866,7 +66882,7 @@ void Func06AC object#(0x6AC) () {
 	var var0000;
 
 	if ((event == SCRIPTED) || (event == EGG)) {
-		var0000 = find_nearby(0x0280, 0x0001, 0x0000);
+		var0000 = find_nearby(0x0280, 0x0001, MASK_NONE);
 		if (!var0000) {
 			gflags[0x01F9] = true;
 			if (!((item == 0xFE9C->get_npc_object()) || (item == 0xFE9C))) {
@@ -66895,7 +66911,7 @@ void Func06AD object#(0x6AD) () {
 		if (!gflags[0x00C8]) {
 			abort;
 		}
-		var0000 = find_nearby(0x0268, 0x0001, 0x0000);
+		var0000 = find_nearby(0x0268, 0x0001, MASK_NONE);
 		for (var0003 in var0000 with var0001 to var0002) {
 			if (var0003->get_item_frame() != 0x0007) {
 				var0000 = Func0988(var0003, var0000);
@@ -66915,7 +66931,7 @@ void Func06AD object#(0x6AD) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		var0006 = find_nearby(0x0113, 0x0014, 0x0010);
+		var0006 = find_nearby(0x0113, 0x0014, MASK_EGG);
 		for (var0009 in var0006 with var0007 to var0008) {
 			if (var0009->get_item_frame() == 0x0007) {
 				var0009->remove_item();
@@ -66957,9 +66973,9 @@ void Func06AE object#(0x6AE) () {
 	var var000C;
 	var var000D;
 
-	var0000 = find_nearby(0x0212, 0x0014, 0x0000);
-	var0001 = find_nearby(0x0373, 0x0014, 0x0000);
-	var0002 = find_nearby(0x01FB, 0x0014, 0x0000);
+	var0000 = find_nearby(0x0212, 0x0014, MASK_NONE);
+	var0001 = find_nearby(0x0373, 0x0014, MASK_NONE);
+	var0002 = find_nearby(0x01FB, 0x0014, MASK_NONE);
 	if (event == EGG) {
 		if (var0000) {
 			var0003 = Func0992(0xFFFD, 0x0000, 0x0000, false);
@@ -66970,7 +66986,7 @@ void Func06AE object#(0x6AE) () {
 		} else if (var0002) {
 			var0003 = Func0992(0xFFFF, 0x0000, 0x0000, false);
 			var0003->item_say("@Damned bones!@");
-			var0004 = find_nearby(0x0113, 0x000F, 0x0010);
+			var0004 = find_nearby(0x0113, 0x000F, MASK_EGG);
 			var0005 = 0x0000;
 			for (var0008 in var0004 with var0006 to var0007) {
 				if (var0008->get_item_frame() == 0x0000) {
@@ -67004,7 +67020,7 @@ void Func06AE object#(0x6AE) () {
 			Func097F(0xFE9C, "@Oh, desist...@", 0x0005);
 			abort;
 		}
-		var0004 = find_nearby(0x0113, 0x000F, 0x0010);
+		var0004 = find_nearby(0x0113, 0x000F, MASK_EGG);
 		var0005 = 0x0000;
 		for (var0008 in var0004 with var000A to var000B) {
 			if (var0008->get_item_frame() == 0x0000) {
@@ -67118,11 +67134,11 @@ void Func06B0 object#(0x6B0) () {
 	var var0001;
 
 	if (gflags[0x021B] == true) {
-		var0000 = find_nearby(0x02CA, 0x000A, 0x0000);
+		var0000 = find_nearby(0x02CA, 0x000A, MASK_NONE);
 		if (var0000) {
 			var0000->set_item_frame(0x0000);
 		}
-		var0001 = find_nearby(0x019C, 0x000A, 0x0000);
+		var0001 = find_nearby(0x019C, 0x000A, MASK_NONE);
 		if (var0001) {
 			var0001->set_item_frame(0x0001);
 		}
@@ -67165,7 +67181,7 @@ void Func06B2 object#(0x6B2) () {
 
 	if (gflags[0x0004] != 0x0000) {
 		var0000 = get_item_quality();
-		var0001 = find_nearby(0x0113, 0x000A, 0x0010);
+		var0001 = find_nearby(0x0113, 0x000A, MASK_EGG);
 		for (var0004 in var0001 with var0002 to var0003) {
 			if ((var0004->get_item_frame() == 0x0000) || (var0004->get_item_frame() == 0x0004)) {
 				var0005 = UI_die_roll(0x0001, var0000);
@@ -67442,7 +67458,7 @@ void Func06B6 object#(0x6B6) () {
 		var0009 = var0008[UI_get_random(UI_get_array_size(var0008))];
 		Func097F(var0006, var0009, 0x0014);
 		UI_sprite_effect(0x001A, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-		var000A = find_nearby(0x0113, 0x001E, 0x0010);
+		var000A = find_nearby(0x0113, 0x001E, MASK_EGG);
 		if (var000A) {
 			for (var000D in var000A with var000B to var000C) {
 				if (var000D->get_item_quality() == var0000) {
@@ -67583,7 +67599,7 @@ void Func06B9 object#(0x6B9) () {
 	var var0004;
 	var var0005;
 
-	var0000 = find_nearby(0x02EB, 0x0014, 0x0000);
+	var0000 = find_nearby(0x02EB, 0x0014, MASK_NONE);
 	for (var0003 in var0000 with var0001 to var0002) {
 		if (var0003->get_item_flag(SI_ZOMBIE)) {
 			var0000 = Func0988(var0003, var0000);
@@ -67741,7 +67757,7 @@ void Func06BC object#(0x6BC) () {
 			abort;
 		}
 		if (var0002 == (var0001 + 0x0001)) {
-			var0007 = 0xFFFD->find_nearby(0x02B4, 0x0019, 0x0000);
+			var0007 = 0xFFFD->find_nearby(0x02B4, 0x0019, MASK_NONE);
 			if (var0007) {
 				var0007->remove_item();
 				var0003 = Func099B(0xFFFD, 0x0001, 0x02B4, 0x0000, 0x0002, 0x0000, false);
@@ -68004,7 +68020,7 @@ void Func06C4 object#(0x6C4) () {
 		abort;
 	}
 	var0002 = Func097D(0xFE9B, 0x0001, 0x0286, QUALITY_ANY, 0x0002);
-	var0003 = 0xFFD4->find_nearby(0x0202, 0x001E, 0x0000);
+	var0003 = 0xFFD4->find_nearby(0x0202, 0x001E, MASK_NONE);
 	if (var0002) {
 		gflags[0x01E6] = true;
 	}
@@ -68053,7 +68069,7 @@ void Func06C5 object#(0x6C5) () {
 	var var0006;
 
 	var0000 = find_nearest(0x03B5, 0x0014);
-	var0001 = find_nearby(0x01C2, 0x0001, 0x0000);
+	var0001 = find_nearby(0x01C2, 0x0001, MASK_NONE);
 	if (UI_get_array_size(var0001) > 0x0000) {
 		for (var0004 in var0001 with var0002 to var0003) {
 			if (var0000 && (var0000->get_item_quality() == 0x00C8)) {
@@ -68099,7 +68115,7 @@ void Func06C6 object#(0x6C6) () {
 	if (var0000 == 0x0005) {
 		var0001 = 0x0289;
 	}
-	var0002 = find_nearby(var0001, 0x0001, 0x0000);
+	var0002 = find_nearby(var0001, 0x0001, MASK_NONE);
 	if (UI_get_array_size(var0002) == 0x0000) {
 		if (var0000 == 0x0001) {
 			gflags[0x023D] = true;
@@ -68155,9 +68171,9 @@ void Func06C8 object#(0x6C8) () {
 	var var0003;
 	var var0004;
 
-	var0000 = UI_get_array_size(find_nearby(0x0113, 0x0005, 0x0010));
+	var0000 = UI_get_array_size(find_nearby(0x0113, 0x0005, MASK_EGG));
 	if (var0000 < 0x0002) {
-		var0001 = find_nearby(0x034A, 0x0001, 0x0000);
+		var0001 = find_nearby(0x034A, 0x0001, MASK_NONE);
 		for (var0004 in var0001 with var0002 to var0003) {
 			if (var0004->get_item_frame() == 0x0003) {
 				abort;
@@ -68254,8 +68270,8 @@ void Func06CA object#(0x6CA) () {
 	var0000 = get_object_position();
 	var0001 = var0000[0x0001];
 	var0002 = var0000[0x0002];
-	var0003 = find_nearby(0x01DB, 0x000C, 0x00B0);
-	var0003 &= find_nearby(0x02D8, 0x000C, 0x00B0);
+	var0003 = find_nearby(0x01DB, 0x000C, MASK_ALL_UNSEEN);
+	var0003 &= find_nearby(0x02D8, 0x000C, MASK_ALL_UNSEEN);
 	var0004 = [0x0000, 0x0000, 0x0000, 0x0000];
 	var0005 = [0x0000, 0x0000, 0x0000, 0x0000];
 	for (var0008 in var0003 with var0006 to var0007) {
@@ -68281,7 +68297,7 @@ void Func06CA object#(0x6CA) () {
 			var0005[0x0004] = var0008;
 		}
 	}
-	var000E = find_nearby(0x0216, 0x000C, 0x00B0);
+	var000E = find_nearby(0x0216, 0x000C, MASK_ALL_UNSEEN);
 	var000F = [0x0000, 0x0000, 0x0000, 0x0000];
 	var0010 = [0x0000, 0x0000, 0x0000, 0x0000];
 	for (var0013 in var000E with var0011 to var0012) {
@@ -68382,8 +68398,8 @@ void Func06CA object#(0x6CA) () {
 			var001B = UI_update_last_created([(var0001 - 0x0008), (var0002 + 0x0002), 0x0000]);
 		}
 	}
-	var0003 = find_nearby(0x01DB, 0x000C, 0x00B0);
-	var0003 &= find_nearby(0x02D8, 0x000C, 0x00B0);
+	var0003 = find_nearby(0x01DB, 0x000C, MASK_ALL_UNSEEN);
+	var0003 &= find_nearby(0x02D8, 0x000C, MASK_ALL_UNSEEN);
 	var0004 = [0x0000, 0x0000, 0x0000, 0x0000];
 	for (var0008 in var0003 with var001C to var001D) {
 		var0009 = var0008->get_object_position();
@@ -68499,7 +68515,7 @@ void Func06CE object#(0x6CE) () {
 	if (event == EGG) {
 		var0000 = get_item_quality();
 		if (var0000 == 0x0000) {
-			var0001 = find_nearby(0x01FB, 0x0014, 0x0000);
+			var0001 = find_nearby(0x01FB, 0x0014, MASK_NONE);
 			for (var0004 in var0001 with var0002 to var0003) {
 				var0005 = var0004->get_object_position();
 				var0005[0x0001] -= var0005[0x0003] / 0x0002;
@@ -68516,7 +68532,7 @@ void Func06CE object#(0x6CE) () {
 			Func097F(0xFE9C, "@Uh-oh...@", 0x0005);
 		}
 		if (var0000 == 0x0001) {
-			var0009 = find_nearby(0x03D1, 0x0014, 0x0000);
+			var0009 = find_nearby(0x03D1, 0x0014, MASK_NONE);
 			for (var000C in var0009 with var000A to var000B) {
 				var0005 = var000C->get_object_position();
 				var0005[0x0001] -= var0005[0x0003] / 0x0002;
@@ -68533,7 +68549,7 @@ void Func06CE object#(0x6CE) () {
 			Func097F(0xFE9C, "@By the Virtues!@", 0x0005);
 		}
 		if (var0000 == 0x0002) {
-			var0001 = find_nearby(0x0356, 0x001E, 0x0000);
+			var0001 = find_nearby(0x0356, 0x001E, MASK_NONE);
 			for (var0004 in var0001 with var0010 to var0011) {
 				var0005 = var0004->get_object_position();
 				var0005[0x0001] -= var0005[0x0003] / 0x0002;
@@ -68551,7 +68567,7 @@ void Func06CE object#(0x6CE) () {
 			Func097F(0xFE9C, "@By the Virtues!@", 0x0005);
 		}
 		if (var0000 == 0x0003) {
-			var0001 = find_nearby(0x0356, 0x0008, 0x0000);
+			var0001 = find_nearby(0x0356, 0x0008, MASK_NONE);
 			for (var0004 in var0001 with var0014 to var0015) {
 				var0005 = var0004->get_object_position();
 				var0005[0x0001] -= var0005[0x0003] / 0x0002;
@@ -68651,7 +68667,7 @@ void Func06D1 object#(0x6D1) () {
 	}
 	if (event == SCRIPTED) {
 		var0001 = 0xFE9C->get_object_position();
-		var0000 = 0xFE9C->find_nearby(0x019E, 0x001E, 0x0000);
+		var0000 = 0xFE9C->find_nearby(0x019E, 0x001E, MASK_NONE);
 		var0002 = false;
 		for (var0005 in var0000 with var0003 to var0004) {
 			if (var0005->get_item_frame() == 0x0015) {
@@ -68693,7 +68709,7 @@ void Func06D2 object#(0x6D2) () {
 	var var0002;
 	var var0003;
 
-	var0000 = find_nearby(0x0151, 0x0019, 0x0000);
+	var0000 = find_nearby(0x0151, 0x0019, MASK_NONE);
 	if (var0000) {
 		abort;
 	}
@@ -68721,7 +68737,7 @@ void Func06D3 object#(0x6D3) () {
 	var var0002;
 	var var0003;
 
-	var0000 = find_nearby(0x0151, 0x0019, 0x0000);
+	var0000 = find_nearby(0x0151, 0x0019, MASK_NONE);
 	var0001 = get_item_quality();
 	if (var0000) {
 		abort;
@@ -68796,7 +68812,7 @@ void Func06D5 object#(0x6D5) () {
 	var var0006;
 
 	if (gflags[0x0000]) {
-		var0000 = find_nearby(0x012D, 0x000F, 0x0000);
+		var0000 = find_nearby(0x012D, 0x000F, MASK_NONE);
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0004 = var0003->get_object_position();
 			var0004[0x0002] += 0x0002;
@@ -68877,7 +68893,7 @@ void Func06D6 object#(0x6D6) () {
 		if (gflags[0x0004]) {
 			var0000 = get_item_quality();
 			if (var0000 == 0x0001) {
-				var0001 = find_nearby(0x03C2, 0x0050, 0x0000);
+				var0001 = find_nearby(0x03C2, 0x0050, MASK_NONE);
 				for (var0004 in var0001 with var0002 to var0003) {
 					var0005 = var0004->get_object_position();
 					if ((var0005[0x0001] == 0x03E7) && (var0005[0x0002] == 0x0A0F)) {
@@ -68945,7 +68961,7 @@ void Func06D6 object#(0x6D6) () {
 						}
 					}
 				}
-				var0008 = find_nearby(0x038D, 0x0050, 0x0000);
+				var0008 = find_nearby(0x038D, 0x0050, MASK_NONE);
 				for (var000B in var0008 with var0009 to var000A) {
 					var0005 = var000B->get_object_position();
 					if ((var0005[0x0001] == 0x03E8) && (var0005[0x0002] == 0x0A0F)) {
@@ -69021,7 +69037,7 @@ void Func06D6 object#(0x6D6) () {
 						}
 					}
 				}
-				var0008 = find_nearby(0x038E, 0x0050, 0x0000);
+				var0008 = find_nearby(0x038E, 0x0050, MASK_NONE);
 				for (var000B in var0008 with var000D to var000E) {
 					var0005 = var000B->get_object_position();
 					if ((var0005[0x0001] == 0x03EF) && (var0005[0x0002] == 0x0A0D)) {
@@ -69042,7 +69058,7 @@ void Func06D6 object#(0x6D6) () {
 					}
 				}
 				var000F = 0x0000;
-				var0010 = find_nearby(0x02A3, 0x000A, 0x0000);
+				var0010 = find_nearby(0x02A3, 0x000A, MASK_NONE);
 				for (var0013 in var0010 with var0011 to var0012) {
 					if (var0013->get_item_quality() == 0x0001) {
 						var000F = 0x0001;
@@ -69050,11 +69066,11 @@ void Func06D6 object#(0x6D6) () {
 				}
 				if (var000F == 0x0000) {
 					var0007 = Func09AB(0x02A3, 0x0000, 0x0001, false, item);
-					var0014 = find_nearby(0x01B0, 0x0050, 0x0000);
+					var0014 = find_nearby(0x01B0, 0x0050, MASK_NONE);
 					for (var0017 in var0014 with var0015 to var0016) {
 						var0017->remove_item();
 					}
-					var0014 = find_nearby(0x0178, 0x0050, 0x0000);
+					var0014 = find_nearby(0x0178, 0x0050, MASK_NONE);
 					for (var0017 in var0014 with var0018 to var0019) {
 						var0017->remove_item();
 					}
@@ -69145,7 +69161,7 @@ void Func06D6 object#(0x6D6) () {
 			for (var0007 in var0026 with var0027 to var0028) {
 				var0007->remove_item();
 			}
-			var0029 = find_nearby(0x0369, 0x0050, 0x0000);
+			var0029 = find_nearby(0x0369, 0x0050, MASK_NONE);
 			for (var002C in var0029 with var002A to var002B) {
 				var0005 = var002C->get_object_position();
 				var002C->remove_item();
@@ -69273,14 +69289,14 @@ void Func06D9 object#(0x6D9) () {
 		var0002 = get_item_quality();
 		var0003 = get_object_position();
 		if (var0002 == 0x0001) {
-			var0004 = find_nearby(0x00E4, 0x0014, 0x0000);
+			var0004 = find_nearby(0x00E4, 0x0014, MASK_NONE);
 			if (var0004) {
 				var0004->set_npc_id(0x000F);
 			}
 			abort;
 		}
 		if (var0002 == 0x00DE) {
-			var0004 = find_nearby(0x00E4, 0x0014, 0x0000);
+			var0004 = find_nearby(0x00E4, 0x0014, MASK_NONE);
 			if (var0004) {
 				var0004->clear_item_say();
 				0xFEED->show_npc_face0(0x0000);
@@ -69366,14 +69382,14 @@ void Func06D9 object#(0x6D9) () {
 			var0005 = var0006->add_cont_items(0x0001, 0x02C6, 0x0000, 0x0000, false);
 		}
 		if (var0002 == 0x0010) {
-			var0009 = find_nearby(0x012E, 0x0028, 0x0000);
+			var0009 = find_nearby(0x012E, 0x0028, MASK_NONE);
 			for (var000C in var0009 with var000A to var000B) {
 				var000D = var000C->get_object_position();
 				var000C->set_polymorph(0x012E);
 				Func09A3(var000C);
 				var000E = 0x0190;
 				var000F = 0x0001;
-				var0010 = find_nearby(0x013E, 0x0014, 0x0000);
+				var0010 = find_nearby(0x013E, 0x0014, MASK_NONE);
 				for (var0013 in var0010 with var0011 to var0012) {
 					var0013->set_alignment(0x0001);
 					var0013->set_schedule_type(DANCE);
@@ -69417,21 +69433,21 @@ void Func06D9 object#(0x6D9) () {
 			};
 		}
 		if (var0002 == 0x0009) {
-			var0010 = find_nearby(0x013E, 0x001E, 0x0000);
+			var0010 = find_nearby(0x013E, 0x001E, MASK_NONE);
 			for (var0013 in var0010 with var0014 to var0015) {
 				var0003 = var0013->get_object_position();
 				Func09A3(var0013);
 				UI_sprite_effect(0x001A, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 				UI_play_sound_effect(0x0082);
 			}
-			var0016 = find_nearby(0x019E, 0x0014, 0x0000);
+			var0016 = find_nearby(0x019E, 0x0014, MASK_NONE);
 			for (var000C in var0016 with var0017 to var0018) {
 				var0003 = var000C->get_object_position();
 				Func09A3(var000C);
 				UI_play_sound_effect(0x004C);
 				UI_sprite_effect(0x001A, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			}
-			var0016 = find_nearby(0x0190, 0x0014, 0x0000);
+			var0016 = find_nearby(0x0190, 0x0014, MASK_NONE);
 			for (var000C in var0016 with var0019 to var001A) {
 				var0003 = var000C->get_object_position();
 				Func09A3(var000C);
@@ -69585,7 +69601,7 @@ void Func06DC object#(0x6DC) () {
 
 	var0000 = get_object_position();
 	var0001 = get_item_quality();
-	var0002 = find_nearby(SHAPE_ANY, 0x0002, 0x0000);
+	var0002 = find_nearby(SHAPE_ANY, 0x0002, MASK_NONE);
 	for (var0005 in var0002 with var0003 to var0004) {
 		var0006 = var0005->get_item_shape();
 		if ((var0001 == 0x0001) && (var0006 == 0x02C3)) {
@@ -69595,7 +69611,7 @@ void Func06DC object#(0x6DC) () {
 			UI_play_sound_effect(0x0028);
 			var0005->remove_item();
 			var0007 = set_item_quality(0x0002);
-			var0008 = find_nearby(0x02C5, 0x0005, 0x0000);
+			var0008 = find_nearby(0x02C5, 0x0005, MASK_NONE);
 			for (var000B in var0008 with var0009 to var000A) {
 				var0007 = var000B->set_item_quality(0x0097);
 			}
@@ -69611,7 +69627,7 @@ void Func06DC object#(0x6DC) () {
 			var0005->remove_item();
 			var0007 = set_item_quality(0x0003);
 			Func097F(0xFE9C, "@The plaque hath changed!@", 0x0002);
-			var0008 = find_nearby(0x02C5, 0x0005, 0x0000);
+			var0008 = find_nearby(0x02C5, 0x0005, MASK_NONE);
 			for (var000E in var0008 with var000C to var000D) {
 				var0007 = var000E->set_item_quality(0x0098);
 			}
@@ -69625,7 +69641,7 @@ void Func06DC object#(0x6DC) () {
 			var0005->remove_item();
 			var0007 = set_item_quality(0x0004);
 			Func097F(0xFE9C, "@The door opened!@", 0x0005);
-			var000F = find_nearby(0x0178, 0x0014, 0x0000);
+			var000F = find_nearby(0x0178, 0x0014, MASK_NONE);
 			for (var0012 in var000F with var0010 to var0011) {
 				var0000 = var0012->get_object_position();
 				UI_sprite_effect(0x0007, (var0000[0x0001] - 0x0003), (var0000[0x0002] - 0x0003), var0000[0x0003], 0x0000, 0x0000, 0xFFFF);
@@ -69650,7 +69666,7 @@ void Func06DC object#(0x6DC) () {
 		}
 	}
 	var0014 = false;
-	var0002 = find_nearby(SHAPE_ANY, 0x0002, 0x0000);
+	var0002 = find_nearby(SHAPE_ANY, 0x0002, MASK_NONE);
 	for (var0017 in var0002 with var0015 to var0016) {
 		var0000 = var0017->get_object_position();
 		var0018 = get_object_position();
@@ -69691,7 +69707,7 @@ void Func06DD object#(0x6DD) () {
 			var0001 = set_item_quality(0x0001);
 		}
 		if (var0000 == 0x0001) {
-			var0002 = find_nearby(0x00C8, 0x0014, 0x0010);
+			var0002 = find_nearby(0x00C8, 0x0014, MASK_EGG);
 			for (var0005 in var0002 with var0003 to var0004) {
 				var0001 = script var0005 {
 					hatch;
@@ -69845,7 +69861,7 @@ void Func06E1 object#(0x6E1) () {
 	}
 	if (event == SCRIPTED) {
 		var0005 = UI_get_party_list();
-		var0003 = find_nearby(0x0151, 0x000A, 0x0000);
+		var0003 = find_nearby(0x0151, 0x000A, MASK_NONE);
 		if (0xFFFE in var0005) {
 			if (var0003) {
 				0xFEEB->show_npc_face0(0x0002);
@@ -69867,7 +69883,7 @@ void Func06E1 object#(0x6E1) () {
 			UI_sprite_effect(0x000C, var0002[0x0001], var0002[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_play_sound_effect(0x0039);
 			var0002 = var0003->get_object_position();
-			var0006 = find_nearby(0x0113, 0x000A, 0x0010);
+			var0006 = find_nearby(0x0113, 0x000A, MASK_EGG);
 			for (var0009 in var0006 with var0007 to var0008) {
 				var000A = var0009->get_item_frame();
 				if (var000A == 0x0000) {
@@ -69877,8 +69893,8 @@ void Func06E1 object#(0x6E1) () {
 				}
 			}
 			var0003->remove_item();
-			var000B = find_nearby(0x01B0, 0x0014, 0x0000);
-			var000C = find_nearby(0x010E, 0x0014, 0x0000);
+			var000B = find_nearby(0x01B0, 0x0014, MASK_NONE);
+			var000C = find_nearby(0x010E, 0x0014, MASK_NONE);
 			if (var000B) {
 				for (var000F in var000B with var000D to var000E) {
 					Func0907(var000F, 0x0000);
@@ -69957,8 +69973,8 @@ void Func06E3 object#(0x6E3) () {
 			0xFE9C->set_item_flag(DONT_MOVE);
 			Func097F(0xFE9C, "@What...?@", 0x0005);
 			Func097F(0xFE9C, "@NO!@", 0x0028);
-			var0004 = find_nearby(0x010C, 0x000F, 0x0000);
-			var0004 &= find_nearby(0x0350, 0x000F, 0x0000);
+			var0004 = find_nearby(0x010C, 0x000F, MASK_NONE);
+			var0004 &= find_nearby(0x0350, 0x000F, MASK_NONE);
 			for (var0007 in var0004 with var0005 to var0006) {
 				var0007->set_item_frame(0x0004);
 			}
@@ -69980,8 +69996,8 @@ void Func06E3 object#(0x6E3) () {
 			abort;
 		}
 		if (gflags[0x0007] == true) {
-			var0004 = find_nearby(0x010C, 0x000F, 0x0000);
-			var0004 &= find_nearby(0x0350, 0x000F, 0x0000);
+			var0004 = find_nearby(0x010C, 0x000F, MASK_NONE);
+			var0004 &= find_nearby(0x0350, 0x000F, MASK_NONE);
 			for (var0007 in var0004 with var0008 to var0009) {
 				var0007->set_item_frame(0x0005);
 			}
@@ -69995,7 +70011,7 @@ void Func06E3 object#(0x6E3) () {
 			abort;
 		}
 		if (gflags[0x0008] == true) {
-			var0004 = find_nearby(0x010C, 0x000F, 0x0000);
+			var0004 = find_nearby(0x010C, 0x000F, MASK_NONE);
 			for (var0007 in var0004 with var000A to var000B) {
 				var000C = var0007->get_object_position();
 				var000C[0x0001] -= var000C[0x0003] / 0x0002;
@@ -70014,7 +70030,7 @@ void Func06E3 object#(0x6E3) () {
 					var0007->remove_item();
 				}
 			}
-			var0004 = find_nearby(0x0350, 0x000F, 0x0000);
+			var0004 = find_nearby(0x0350, 0x000F, MASK_NONE);
 			for (var0007 in var0004 with var000E to var000F) {
 				var000C = var0007->get_object_position();
 				var000C[0x0001] -= var000C[0x0003] / 0x0002;
@@ -70077,7 +70093,7 @@ void Func06E4 object#(0x6E4) () {
 			nohalt;
 			call Func06E4;
 		};
-		var0003 = find_nearby(0x010E, 0x0006, 0x0000);
+		var0003 = find_nearby(0x010E, 0x0006, MASK_NONE);
 		if (var0003) {
 			var0002 = script var0003 {
 				nohalt;
@@ -70092,7 +70108,7 @@ void Func06E4 object#(0x6E4) () {
 		0xFEE0->show_npc_face0(0x0000);
 		say("\"Want to try some spinning...\"* \"...and dying, Avatar?\"");
 		UI_remove_npc_face0();
-		var0004 = find_nearby(0x0178, 0x000A, 0x0000);
+		var0004 = find_nearby(0x0178, 0x000A, MASK_NONE);
 		if (var0004) {
 			var0004->set_item_frame(0x0002);
 		}
@@ -70107,7 +70123,7 @@ void Func06E4 object#(0x6E4) () {
 		abort;
 	}
 	if ((event == SCRIPTED) && (gflags[0x0007] == true)) {
-		var0006 = find_nearby(0x00C8, 0x001E, 0x0010);
+		var0006 = find_nearby(0x00C8, 0x001E, MASK_EGG);
 		for (var0009 in var0006 with var0007 to var0008) {
 			var000A = var0009->get_item_frame();
 			if ((var000A > 0x0001) && (var000A < 0x0006)) {
@@ -70159,42 +70175,42 @@ void Func06E5 object#(0x6E5) () {
 			nohalt;
 			call Func06E5;
 		};
-		var0003 = find_nearby(0x02B1, 0x000F, 0x0000);
+		var0003 = find_nearby(0x02B1, 0x000F, MASK_NONE);
 		if (var0003) {
 			var0002 = script var0003 after 5 ticks {
 				nohalt;
 				call Func02B1;
 			};
 		}
-		var0004 = find_nearby(0x02B4, 0x0014, 0x0000);
+		var0004 = find_nearby(0x02B4, 0x0014, MASK_NONE);
 		if (var0004) {
 			var0002 = script var0004 after 25 ticks {
 				nohalt;
 				call Func02B4;
 			};
 		}
-		var0005 = find_nearby(0x02B2, 0x000F, 0x0000);
+		var0005 = find_nearby(0x02B2, 0x000F, MASK_NONE);
 		if (var0005) {
 			var0002 = script var0005 after 45 ticks {
 				nohalt;
 				call Func02B2;
 			};
 		}
-		var0006 = find_nearby(0x02E9, 0x000F, 0x0000);
+		var0006 = find_nearby(0x02E9, 0x000F, MASK_NONE);
 		if (var0006) {
 			var0002 = script var0006 after 65 ticks {
 				nohalt;
 				call Func02E9;
 			};
 		}
-		var0007 = find_nearby(0x02B5, 0x0014, 0x0000);
+		var0007 = find_nearby(0x02B5, 0x0014, MASK_NONE);
 		if (var0007) {
 			var0002 = script var0007 after 85 ticks {
 				nohalt;
 				call Func02B5;
 			};
 		}
-		var0008 = find_nearby(0x0113, 0x0014, 0x0010);
+		var0008 = find_nearby(0x0113, 0x0014, MASK_EGG);
 		for (var000B in var0008 with var0009 to var000A) {
 			var000C = var000B->get_item_frame();
 			if (var000C == 0x0000) {
@@ -70488,7 +70504,7 @@ void Func06E7 object#(0x6E7) () {
 			nohalt;
 			call Func06E7;
 		};
-		var0003 = find_nearby(0x010E, 0x0006, 0x0000);
+		var0003 = find_nearby(0x010E, 0x0006, MASK_NONE);
 		if (var0003) {
 			var0002 = script var0003 {
 				nohalt;
@@ -70502,11 +70518,11 @@ void Func06E7 object#(0x6E7) () {
 		say("\"Welcome to mine own private shooting gallery, Avatar.\"");
 		UI_remove_npc_face0();
 		Func09B8();
-		var0004 = find_nearby(0x0178, 0x000A, 0x0000);
+		var0004 = find_nearby(0x0178, 0x000A, MASK_NONE);
 		if (var0004) {
 			var0004->set_item_frame(0x0002);
 		}
-		var0005 = find_nearby(0x00C8, 0x001E, 0x0010);
+		var0005 = find_nearby(0x00C8, 0x001E, MASK_EGG);
 		for (var0008 in var0005 with var0006 to var0007) {
 			var0009 = var0008->get_item_frame();
 			if (((var0009 > 0x0001) && (var0009 < 0x0006)) || ((var0009 > 0x0008) && (var0009 < 0x000D))) {
@@ -70533,7 +70549,7 @@ void Func06E8 object#(0x6E8) () {
 	var0000 = 0xFE9C->get_object_position();
 	var0001 = get_object_position();
 	if ((event == EGG) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
-		var0002 = find_nearby(0x00C8, 0x0028, 0x0010);
+		var0002 = find_nearby(0x00C8, 0x0028, MASK_EGG);
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0006 = script var0005 {
 				setegg avatar_near, 15;
@@ -70563,7 +70579,7 @@ void Func06E9 object#(0x6E9) () {
 	var var000D;
 
 	if (event == EGG) {
-		var0000 = find_nearby(0x00C8, 0x0082, 0x0010);
+		var0000 = find_nearby(0x00C8, 0x0082, MASK_EGG);
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0004 = var0003->get_item_frame();
 			if (((var0004 > 0x0002) && (var0004 < 0x0007)) || ((var0004 > 0x0008) && (var0004 < 0x000D))) {
@@ -70668,7 +70684,7 @@ void Func06EB object#(0x6EB) () {
 	var var000D;
 
 	if (event == EGG) {
-		var0000 = find_nearby(0x0113, 0x000F, 0x0010);
+		var0000 = find_nearby(0x0113, 0x000F, MASK_EGG);
 		var0001 = 0x0000;
 		for (var0004 in var0000 with var0002 to var0003) {
 			var0005 = var0004->get_item_frame();
@@ -70690,9 +70706,9 @@ void Func06EB object#(0x6EB) () {
 				call Func06EB;
 			};
 		} else {
-			var0007 = find_nearby(0x0370, 0x0014, 0x0000);
-			var0007 &= find_nearby(0x038A, 0x0014, 0x0000);
-			var0007 &= find_nearby(0x013D, 0x0014, 0x0000);
+			var0007 = find_nearby(0x0370, 0x0014, MASK_NONE);
+			var0007 &= find_nearby(0x038A, 0x0014, MASK_NONE);
+			var0007 &= find_nearby(0x013D, 0x0014, MASK_NONE);
 			for (var000A in var0007 with var0008 to var0009) {
 				var000B = var000A->get_object_position();
 				UI_sprite_effect(0x001A, var000B[0x0001], var000B[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -70702,7 +70718,7 @@ void Func06EB object#(0x6EB) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		var0000 = find_nearby(0x0113, 0x000F, 0x0010);
+		var0000 = find_nearby(0x0113, 0x000F, MASK_EGG);
 		var0001 = 0x0000;
 		for (var0004 in var0000 with var000C to var000D) {
 			var0005 = var0004->get_item_frame();
@@ -70820,15 +70836,15 @@ void Func06EE object#(0x6EE) () {
 	var var0005;
 	var var0006;
 
-	var0000 = find_nearby(0x0106, 0x0002, 0x0000);
+	var0000 = find_nearby(0x0106, 0x0002, MASK_NONE);
 	event = DOUBLECLICK;
 	if (var0000) {
-		var0000 = find_nearby(0x033C, 0x0019, 0x0000);
+		var0000 = find_nearby(0x033C, 0x0019, MASK_NONE);
 		for (var0003 in var0000 with var0001 to var0002) {
 			Func0907(var0003, 0x0000);
 			var0004 = Func090A(var0003);
 		}
-		var0000 = find_nearby(0x034D, 0x0019, 0x0000);
+		var0000 = find_nearby(0x034D, 0x0019, MASK_NONE);
 		for (var0003 in var0000 with var0005 to var0006) {
 			Func0907(var0003, 0x0000);
 			var0004 = Func090B(var0003);
@@ -70877,7 +70893,7 @@ void Func06F0 object#(0x6F0) () {
 	var var0016;
 
 	var0000 = false;
-	var0001 = find_nearby(0x02B0, 0x0002, 0x0000);
+	var0001 = find_nearby(0x02B0, 0x0002, MASK_NONE);
 	if (var0001) {
 		for (var0004 in var0001 with var0002 to var0003) {
 			if (var0004->get_item_frame() == 0x0004) {
@@ -70887,43 +70903,43 @@ void Func06F0 object#(0x6F0) () {
 	}
 	if (!var0000) {
 		event = DOUBLECLICK;
-		var0004 = find_nearby(0x010E, 0x0014, 0x0000);
+		var0004 = find_nearby(0x010E, 0x0014, MASK_NONE);
 		for (var0007 in var0004 with var0005 to var0006) {
 			if (Func0906(var0007) == 0x0001) {
 				var0007->Func010E();
 			}
 		}
-		var0004 = find_nearby(0x0178, 0x0014, 0x0000);
+		var0004 = find_nearby(0x0178, 0x0014, MASK_NONE);
 		for (var0007 in var0004 with var0008 to var0009) {
 			if (Func0906(var0007) == 0x0001) {
 				var0007->Func0178();
 			}
 		}
-		var0004 = find_nearby(0x01B1, 0x0014, 0x0000);
+		var0004 = find_nearby(0x01B1, 0x0014, MASK_NONE);
 		for (var0007 in var0004 with var000A to var000B) {
 			if (Func0906(var0007) == 0x0001) {
 				var0007->Func01B1();
 			}
 		}
-		var0004 = find_nearby(0x01B0, 0x0014, 0x0000);
+		var0004 = find_nearby(0x01B0, 0x0014, MASK_NONE);
 		for (var0007 in var0004 with var000C to var000D) {
 			if (Func0906(var0007) == 0x0001) {
 				var0007->Func01B0();
 			}
 		}
-		var0004 = find_nearby(0x010E, 0x0014, 0x0000) & (find_nearby(0x0178, 0x0014, 0x0000) & (find_nearby(0x01B1, 0x0014, 0x0000) & find_nearby(0x01B0, 0x0014, 0x0000)));
+		var0004 = find_nearby(0x010E, 0x0014, MASK_NONE) & (find_nearby(0x0178, 0x0014, MASK_NONE) & (find_nearby(0x01B1, 0x0014, MASK_NONE) & find_nearby(0x01B0, 0x0014, MASK_NONE)));
 		for (var0007 in var0004 with var000E to var000F) {
 			Func0907(var0007, 0x0002);
 		}
 	} else {
-		var0004 = find_nearby(0x010E, 0x0014, 0x0000) & (find_nearby(0x0178, 0x0014, 0x0000) & (find_nearby(0x01B1, 0x0014, 0x0000) & find_nearby(0x01B0, 0x0014, 0x0000)));
+		var0004 = find_nearby(0x010E, 0x0014, MASK_NONE) & (find_nearby(0x0178, 0x0014, MASK_NONE) & (find_nearby(0x01B1, 0x0014, MASK_NONE) & find_nearby(0x01B0, 0x0014, MASK_NONE)));
 		for (var0007 in var0004 with var0010 to var0011) {
 			if (Func0906(var0007) == 0x0002) {
 				Func0907(var0007, 0x0000);
 			}
 		}
 	}
-	var0012 = find_nearby(0x00C8, 0x003C, 0x00B0);
+	var0012 = find_nearby(0x00C8, 0x003C, MASK_ALL_UNSEEN);
 	for (var0015 in var0012 with var0013 to var0014) {
 		if (var0015->get_item_frame() == 0x0001) {
 			if (!var0000) {
@@ -70955,7 +70971,7 @@ void Func06F1 object#(0x6F1) () {
 	var var000C;
 
 	var0000 = false;
-	var0001 = find_nearby(0x02B0, 0x000A, 0x0000);
+	var0001 = find_nearby(0x02B0, 0x000A, MASK_NONE);
 	if (var0001) {
 		for (var0004 in var0001 with var0002 to var0003) {
 			if (var0004->get_item_frame() == 0x0004) {
@@ -70967,7 +70983,7 @@ void Func06F1 object#(0x6F1) () {
 			}
 		}
 		if (var0000) {
-			var0001 = find_nearby(0x02C3, 0x0003, 0x0000);
+			var0001 = find_nearby(0x02C3, 0x0003, MASK_NONE);
 			for (var0004 in var0001 with var0007 to var0008) {
 				if (var0004->get_item_quality() == 0x003D) {
 					var0009 = UI_get_party_list();
@@ -70997,7 +71013,7 @@ void Func06F3 object#(0x6F3) () {
 		remove_item();
 		abort;
 	}
-	var0000 = find_nearby(0x00E4, 0x001E, 0x0000);
+	var0000 = find_nearby(0x00E4, 0x001E, MASK_NONE);
 	for (var0003 in var0000 with var0001 to var0002) {
 		if (var0003->get_npc_id() == 0x0009) {
 			abort;
@@ -71087,7 +71103,7 @@ void Func06F6 object#(0x6F6) () {
 			}
 			remove_item();
 		}
-		var0002 = find_nearby(0x025F, 0x0014, 0x0010);
+		var0002 = find_nearby(0x025F, 0x0014, MASK_EGG);
 		if (var0002) {
 			var0000 = var0002->get_object_position();
 			UI_sprite_effect(0x000D, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -71160,7 +71176,7 @@ void Func06FA object#(0x6FA) () {
 	var var0016;
 
 	if (event == EGG) {
-		var0000 = 0xFE9C->find_nearby(0x010F, 0x0064, 0x0000) & 0xFE9C->find_nearby(0x0110, 0x0064, 0x0000);
+		var0000 = 0xFE9C->find_nearby(0x010F, 0x0064, MASK_NONE) & 0xFE9C->find_nearby(0x0110, 0x0064, MASK_NONE);
 		var0001 = false;
 		for (var0004 in var0000 with var0002 to var0003) {
 			var0005 = var0004->get_object_position();
@@ -71169,8 +71185,8 @@ void Func06FA object#(0x6FA) () {
 			}
 		}
 		if (var0001) {
-			var0006 = 0xFE9C->find_nearby(0x0114, 0x003C, 0x0000) & 0xFE9C->find_nearby(0x0115, 0x003C, 0x0000);
-			var0007 = 0xFE9C->find_nearby(0x010F, 0x003C, 0x0000) & 0xFE9C->find_nearby(0x0110, 0x003C, 0x0000);
+			var0006 = 0xFE9C->find_nearby(0x0114, 0x003C, MASK_NONE) & 0xFE9C->find_nearby(0x0115, 0x003C, MASK_NONE);
+			var0007 = 0xFE9C->find_nearby(0x010F, 0x003C, MASK_NONE) & 0xFE9C->find_nearby(0x0110, 0x003C, MASK_NONE);
 			for (var000A in var0007 with var0008 to var0009) {
 				var000B = var000A->get_lift();
 				if (var000B == 0x0001) {
@@ -71395,7 +71411,7 @@ void Func06FD object#(0x6FD) () {
 		UI_sprite_effect(0x0007, 0x0722, 0x0273, 0x0000, 0x0000, 0x000F, 0xFFFD);
 	}
 	if (event == EGG) {
-		var0001 = 0xFE9C->find_nearby(0x02EC, 0x000C, 0x0000);
+		var0001 = 0xFE9C->find_nearby(0x02EC, 0x000C, MASK_NONE);
 		for (var0004 in var0001 with var0002 to var0003) {
 			if (var0004->get_item_frame() == 0x000A) {
 				break;
@@ -71456,7 +71472,7 @@ void Func06FE object#(0x6FE) () {
 			abort;
 		}
 	}
-	var0004 = 0xFE9C->find_nearby(0x02EC, 0x000C, 0x0000);
+	var0004 = 0xFE9C->find_nearby(0x02EC, 0x000C, MASK_NONE);
 	for (var0007 in var0004 with var0005 to var0006) {
 		if (var0007->get_item_frame() == 0x000A) {
 			return;
@@ -71493,7 +71509,7 @@ void Func06FF object#(0x6FF) () {
 	}
 	var0001 = "@Uh oh...@" & ("@Something is coming!@" & ("@I hear something...@" & ("@What was that?@" & ("@Oh, no!@" & "@Hark!@"))));
 	var0002 = Func0992(0x0001, var0001[UI_get_random(UI_get_array_size(var0001))], var0001[UI_get_random(UI_get_array_size(var0001))], true);
-	var0001 = find_nearby(0x036C, 0x0064, 0x0000);
+	var0001 = find_nearby(0x036C, 0x0064, MASK_NONE);
 	for (var0005 in var0001 with var0003 to var0004) {
 		if (var0005->get_item_quality() == var0000) {
 			Func0924(var0005, 0x0001);
@@ -71581,7 +71597,7 @@ void Func0702 object#(0x702) () {
 		abort;
 	}
 	if (event == EGG) {
-		var0000 = find_nearby(0x016B, 0x001E, 0x0000);
+		var0000 = find_nearby(0x016B, 0x001E, MASK_NONE);
 		var0001 = 0x0006 - UI_get_array_size(var0000);
 		while (var0001 > 0x0000) {
 			var0002 = UI_create_new_object2(0x016B, [(0x0865 + UI_get_random(0x0013)), 0x083B, 0x0000]);
@@ -71623,7 +71639,7 @@ void Func0702 object#(0x702) () {
 	if (var0003 == 0x0006) {
 		Func097F(0xFFE1, "@Torture him...@", 0x0000);
 	}
-	var0000 = find_nearby(0x016B, 0x001E, 0x0000);
+	var0000 = find_nearby(0x016B, 0x001E, MASK_NONE);
 	var0004 = false;
 	if (var0000) {
 		var0004 = var0000[UI_get_random(UI_get_array_size(var0000))];
@@ -71706,7 +71722,7 @@ void Func0705 object#(0x705) () {
 
 	var0000 = 0x0000;
 	var0001 = 0x0000;
-	var0002 = find_nearby(0x0281, 0x0002, 0x0000);
+	var0002 = find_nearby(0x0281, 0x0002, MASK_NONE);
 	for (var0005 in var0002 with var0003 to var0004) {
 		if (var0005->get_item_frame() == 0x0015) {
 			var0000 = var0005;
@@ -71767,12 +71783,12 @@ void Func0707 object#(0x707) () {
 	var var0002;
 	var var0003;
 
-	var0000 = 0xFE9C->find_nearby(0x010E, 0x000A, 0x00B0);
-	var0000 &= 0xFE9C->find_nearby(0x0178, 0x000A, 0x00B0);
-	var0000 &= 0xFE9C->find_nearby(0x01B1, 0x000A, 0x00B0);
-	var0000 &= 0xFE9C->find_nearby(0x01B0, 0x000A, 0x00B0);
-	var0000 &= 0xFE9C->find_nearby(0x0204, 0x000A, 0x00B0);
-	var0000 &= 0xFE9C->find_nearby(0x00E1, 0x000A, 0x00B0);
+	var0000 = 0xFE9C->find_nearby(0x010E, 0x000A, MASK_ALL_UNSEEN);
+	var0000 &= 0xFE9C->find_nearby(0x0178, 0x000A, MASK_ALL_UNSEEN);
+	var0000 &= 0xFE9C->find_nearby(0x01B1, 0x000A, MASK_ALL_UNSEEN);
+	var0000 &= 0xFE9C->find_nearby(0x01B0, 0x000A, MASK_ALL_UNSEEN);
+	var0000 &= 0xFE9C->find_nearby(0x0204, 0x000A, MASK_ALL_UNSEEN);
+	var0000 &= 0xFE9C->find_nearby(0x00E1, 0x000A, MASK_ALL_UNSEEN);
 	for (var0003 in var0000 with var0001 to var0002) {
 		if (var0003->get_item_quality() == 0x00D9) {
 			if (Func0906(var0003) == 0x0002) {
@@ -71813,7 +71829,7 @@ void Func0709 object#(0x709) () {
 
 	var0000 = get_item_quality();
 	if (var0000 == 0x0001) {
-		var0001 = find_nearby(0x0106, 0x0002, 0x0000);
+		var0001 = find_nearby(0x0106, 0x0002, MASK_NONE);
 		if (var0001) {
 			var0002 = var0001->get_item_frame();
 			if (var0002 == 0x0003) {
@@ -71823,14 +71839,14 @@ void Func0709 object#(0x709) () {
 			gflags[0x023E] = false;
 		}
 	} else {
-		var0003 = find_nearby(0x0392, 0x0002, 0x0000);
+		var0003 = find_nearby(0x0392, 0x0002, MASK_NONE);
 		if (var0003) {
 			var0000 = var0003->get_item_quality();
 			if (var0000 == 0x0001) {
 				gflags[0x0242] = true;
 			}
 		}
-		var0004 = find_nearby(0x01BD, 0x0002, 0x0000);
+		var0004 = find_nearby(0x01BD, 0x0002, MASK_NONE);
 		if (var0004) {
 			var0002 = var0004->get_item_frame();
 			if (var0002 == 0x0005) {
@@ -71891,7 +71907,7 @@ void Func070B object#(0x70B) () {
 	var var0002;
 
 	if (event == EGG) {
-		var0000 = find_nearby(0x034D, 0x0014, 0x0000);
+		var0000 = find_nearby(0x034D, 0x0014, MASK_NONE);
 		if (var0000) {
 			var0001 = Func0992(0x0001, "There hath not been a jail made yet that can hold me!", "I am glad to be out of there!", false);
 			var0002 = script 0xFE9C {
@@ -71913,10 +71929,10 @@ void Func070D object#(0x70D) () {
 	var var0003;
 	var var0004;
 
-	var0000 = find_nearby(0x00D1, 0x0001, 0x0000);
+	var0000 = find_nearby(0x00D1, 0x0001, MASK_NONE);
 	if (var0000) {
 		if (var0000->get_item_frame() == 0x0010) {
-			var0001 = find_nearby(0x010E, 0x0014, 0x0000);
+			var0001 = find_nearby(0x010E, 0x0014, MASK_NONE);
 			for (var0004 in var0001 with var0002 to var0003) {
 				if (var0004->get_item_quality() == 0x0056) {
 					if (Func0908(var0004, 0x0178, 0x0001, 0x0000, 0x0000, 0x0007)) {
@@ -71940,13 +71956,13 @@ void Func070E object#(0x70E) () {
 	var var0005;
 	var var0006;
 
-	var0000 = find_nearby(0x00D1, 0x0001, 0x0000);
+	var0000 = find_nearby(0x00D1, 0x0001, MASK_NONE);
 	if (var0000) {
 		var0001 = var0000->set_last_created();
 		var0002 = get_object_position();
 		var0001 = UI_update_last_created(var0002);
 		if (var0000->get_item_frame() == 0x000E) {
-			var0003 = find_nearby(0x0113, 0x0004, 0x0010);
+			var0003 = find_nearby(0x0113, 0x0004, MASK_EGG);
 			for (var0006 in var0003 with var0004 to var0005) {
 				if (var0006->get_item_quality() == 0x000D) {
 					var0006->remove_item();
@@ -71962,7 +71978,7 @@ void Func070F object#(0x70F) () {
 	var var0000;
 	var var0001;
 
-	var0000 = find_nearby(0x00C8, 0x000F, 0x0010);
+	var0000 = find_nearby(0x00C8, 0x000F, MASK_EGG);
 	if (var0000) {
 		var0001 = script var0000 after 3 ticks {
 			hatch;
@@ -72028,13 +72044,13 @@ void Func0711 object#(0x711) () {
 	var var0008;
 	var var0009;
 
-	var0000 = find_nearby(0x00D1, 0x0001, 0x0000);
+	var0000 = find_nearby(0x00D1, 0x0001, MASK_NONE);
 	if (var0000) {
 		var0001 = var0000->set_last_created();
 		var0002 = get_object_position();
 		var0001 = UI_update_last_created(var0002);
 		if (var0000->get_item_frame() == 0x000F) {
-			var0003 = find_nearby(0x00A0, 0x000F, 0x0000);
+			var0003 = find_nearby(0x00A0, 0x000F, MASK_NONE);
 			var0004 = true;
 			for (var0007 in var0003 with var0005 to var0006) {
 				var0008 = var0007->get_object_position();
@@ -72066,7 +72082,7 @@ void Func0714 object#(0x714) () {
 
 	var0000 = get_item_quality();
 	if (var0000 != 0x00DE) {
-		if (0xFE9C->find_nearby(0x01D1, 0xFFFF, 0x00B0)) {
+		if (0xFE9C->find_nearby(0x01D1, 0xFFFF, MASK_ALL_UNSEEN)) {
 			0xFFFD->get_npc_object()->Func01D1();
 		}
 	}
@@ -72093,13 +72109,13 @@ void Func0715 object#(0x715) () {
 
 	var0000 = get_item_quality();
 	if (var0000 != 0x00E0) {
-		var0001 = 0xFE9C->find_nearby(0x01E9, 0xFFFF, 0x00B0);
+		var0001 = 0xFE9C->find_nearby(0x01E9, 0xFFFF, MASK_ALL_UNSEEN);
 		for (var0004 in var0001 with var0002 to var0003) {
 			var0004->Func060F();
 		}
 	}
 	if (var0000 == 0x00E0) {
-		var0005 = find_nearby(0x0215, 0xFFFF, 0x0000);
+		var0005 = find_nearby(0x0215, 0xFFFF, MASK_NONE);
 		if (var0005) {
 			var0006 = UI_create_new_object(0x0281);
 			if (var0006) {
@@ -72257,7 +72273,7 @@ void Func071A object#(0x71A) () {
 		var0001 = false;
 		var0002 = false;
 		var0003 = false;
-		var0004 = find_nearby(0x014A, 0x0008, 0x0000);
+		var0004 = find_nearby(0x014A, 0x0008, MASK_NONE);
 		for (var0007 in var0004 with var0005 to var0006) {
 			var0008 = var0007->get_item_frame();
 			var0009 = "I see f " + var0008;
@@ -72302,11 +72318,11 @@ void Func071A object#(0x71A) () {
 			}
 			var0010 = var000E - var000F;
 			if ((var000A[0x0001] < var000B[0x0001]) && ((var000B[0x0001] < var000C[0x0001]) && ((var000C[0x0001] < var000D[0x0001]) && (var0010 < 0x0002)))) {
-				var0011 = find_nearby(0x010E, 0x0008, 0x0000);
+				var0011 = find_nearby(0x010E, 0x0008, MASK_NONE);
 				if (var0011) {
 					Func0907(var0011, 0x0000);
 				}
-				var0012 = find_nearby(0x01B0, 0x0008, 0x0000);
+				var0012 = find_nearby(0x01B0, 0x0008, MASK_NONE);
 				if (var0012) {
 					Func0907(var0012, 0x0000);
 					var0013 = script var0012 {
@@ -72338,7 +72354,7 @@ void Func071B object#(0x71B) () {
 	var var000B;
 
 	if (event == EGG) {
-		var0000 = find_nearby(0x014A, 0x0003, 0x0000);
+		var0000 = find_nearby(0x014A, 0x0003, MASK_NONE);
 		var0001 = get_object_position();
 		var0002 = [0x0000, 0x0000, 0xFFFE, 0x0002, 0x0000, 0x0000];
 		var0003 = [0x0000, 0x0000, 0x0000, 0x0000, 0xFFFE, 0x0002];
@@ -72358,7 +72374,7 @@ void Func071B object#(0x71B) () {
 		var000A = UI_get_array_size(var0002);
 		var000A += UI_get_array_size(var0003);
 		if (var000A == 0x0000) {
-			var000B = find_nearby(0x0300, 0x0004, 0x0000);
+			var000B = find_nearby(0x0300, 0x0004, MASK_NONE);
 			if (var000B) {
 				Func0971(var000B);
 			}
@@ -72475,7 +72491,7 @@ void Func071D object#(0x71D) () {
 	}
 	if (event == SCRIPTED) {
 		var0000 = get_item_quality();
-		var0002 = find_nearby(0x02CE, 0x000A, 0x0000);
+		var0002 = find_nearby(0x02CE, 0x000A, MASK_NONE);
 		if ((var0000 == 0x0000) || (var0000 == 0x0001)) {
 			gflags[0x02A5] = true;
 			var0003 = UI_create_new_object(0x00D1);
@@ -72500,13 +72516,13 @@ void Func071D object#(0x71D) () {
 				UI_play_sound_effect(0x0077);
 				UI_sprite_effect(0x0007, (var0001[0x0001] - 0x0002), (var0001[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 			}
-			var0002 = find_nearby(0x00F6, 0x0019, 0x0000);
+			var0002 = find_nearby(0x00F6, 0x0019, MASK_NONE);
 			for (var0007 in var0002 with var0008 to var0009) {
 				var0003 = var0007->get_item_frame();
 				var0007->set_item_frame(var0003 - 0x0002);
 				UI_sprite_effect(0x0015, (var0001[0x0001] - 0x0002), (var0001[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 			}
-			var0002 = find_nearby(0x0204, 0x0019, 0x0000);
+			var0002 = find_nearby(0x0204, 0x0019, MASK_NONE);
 			for (var0007 in var0002 with var000A to var000B) {
 				var0003 = var0007->get_item_frame();
 				var0007->set_item_frame(var0003 - 0x0002);
@@ -72536,13 +72552,13 @@ void Func071D object#(0x71D) () {
 				UI_play_sound_effect(0x0077);
 				UI_sprite_effect(0x001A, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			}
-			var0002 = find_nearby(0x00F6, 0x0019, 0x0000);
+			var0002 = find_nearby(0x00F6, 0x0019, MASK_NONE);
 			for (var0007 in var0002 with var000E to var000F) {
 				var0003 = var0007->get_item_frame();
 				var0007->set_item_frame(var0003 - 0x0002);
 				UI_sprite_effect(0x0015, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			}
-			var0002 = find_nearby(0x0204, 0x0019, 0x0000);
+			var0002 = find_nearby(0x0204, 0x0019, MASK_NONE);
 			for (var0007 in var0002 with var0010 to var0011) {
 				var0003 = var0007->get_item_frame();
 				var0007->set_item_frame(var0003 - 0x0002);
@@ -72551,12 +72567,12 @@ void Func071D object#(0x71D) () {
 		}
 		abort;
 	}
-	var0012 = find_nearby(0x02AA, 0x0001, 0x0000);
+	var0012 = find_nearby(0x02AA, 0x0001, MASK_NONE);
 	var0013 = false;
 	var0014 = false;
 	var0015 = false;
 	var0016 = false;
-	var0017 = find_nearby(0x0262, 0x000A, 0x0000);
+	var0017 = find_nearby(0x0262, 0x000A, MASK_NONE);
 	var0018 = get_object_position();
 	for (var001B in var0017 with var0019 to var001A) {
 		var001C = var001B->get_object_position();
@@ -72600,7 +72616,7 @@ void Func071D object#(0x71D) () {
 	if ((!var0013) && (!var0014)) {
 		abort;
 	}
-	var0022 = var001E->find_nearby(0x02AA, 0x0001, 0x0000);
+	var0022 = var001E->find_nearby(0x02AA, 0x0001, MASK_NONE);
 	if (var0022) {
 		var0021 = var0022->get_item_frame();
 		if ((var0021 == 0x000C) || (var0021 == 0x000D)) {
@@ -72687,7 +72703,7 @@ void Func071E object#(0x71E) () {
 		abort;
 	}
 	var0000 = get_item_quality();
-	var0001 = find_nearby(0x00D1, 0x0001, 0x0000);
+	var0001 = find_nearby(0x00D1, 0x0001, MASK_NONE);
 	if (var0001) {
 		var0002 = var0001->get_object_position();
 		var0003 = var0001->get_item_frame();
@@ -72707,8 +72723,8 @@ void Func071E object#(0x71E) () {
 		}
 	}
 	if ((gflags[0x02A9] == true) && (gflags[0x02AA] == true)) {
-		var0004 = find_nearby(0x0204, 0x000F, 0x0000);
-		var0004 &= find_nearby(0x00F6, 0x000F, 0x0000);
+		var0004 = find_nearby(0x0204, 0x000F, MASK_NONE);
+		var0004 &= find_nearby(0x00F6, 0x000F, MASK_NONE);
 		for (var0007 in var0004 with var0005 to var0006) {
 			var0003 = var0007->get_item_frame();
 			if ((var0003 == 0x0002) || (var0003 == 0x0012)) {
@@ -72779,7 +72795,7 @@ void Func071F object#(0x71F) () {
 		Func09AA();
 		Func08C0(true);
 		0xFE9C->set_schedule_type(WAIT);
-		var0001 = find_nearby(0x02E7, 0x002D, 0x0000);
+		var0001 = find_nearby(0x02E7, 0x002D, MASK_NONE);
 		var0002 = script var0001 after 15 ticks {
 			nohalt;
 			call Func071F;
@@ -72804,7 +72820,7 @@ void Func071F object#(0x71F) () {
 	}
 	var0003 = get_item_quality();
 	var0004 = false;
-	var0005 = find_nearby(0x0106, 0x0001, 0x0000);
+	var0005 = find_nearby(0x0106, 0x0001, MASK_NONE);
 	if (var0005) {
 		var0006 = var0005->get_item_frame();
 		if ((var0006 + 0x0001) != var0003) {
@@ -72823,7 +72839,7 @@ void Func071F object#(0x71F) () {
 		} else {
 			var0005->set_item_flag(TEMPORARY);
 			var0005->remove_item();
-			var000C = find_nearby(0x039F, 0x0001, 0x0000);
+			var000C = find_nearby(0x039F, 0x0001, MASK_NONE);
 			if (var000C) {
 				var000D = var000C->get_object_position();
 				var000E = var000C->get_item_frame();
@@ -72864,7 +72880,7 @@ void Func071F object#(0x71F) () {
 			var0012 = 0x0000;
 		}
 		var0013 = [0x039F, 0x01CF, 0x0201];
-		var0014 = find_nearby(SHAPE_ANY, 0x0001, 0x0000);
+		var0014 = find_nearby(SHAPE_ANY, 0x0001, MASK_NONE);
 		for (var0017 in var0014 with var0015 to var0016) {
 			if (!(var0017->get_item_shape() in var0013)) {
 				var0018 = get_object_position();
@@ -72941,7 +72957,7 @@ void Func0720 object#(0x720) () {
 	}
 	if ((event == PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
 		Func09AA();
-		var0003 = find_nearby(0x02E7, 0x002D, 0x0000);
+		var0003 = find_nearby(0x02E7, 0x002D, MASK_NONE);
 		var0004 = 0x0000;
 		while ((var0004 < 0x000A) && var0003) {
 			var0005 = UI_die_roll(0x0002, 0x0004);
@@ -72966,7 +72982,7 @@ void Func0720 object#(0x720) () {
 		0xFE9C->set_schedule_type(FOLLOW_AVATAR);
 		abort;
 	}
-	var0008 = find_nearby(SHAPE_ANY, 0x0001, 0x0000);
+	var0008 = find_nearby(SHAPE_ANY, 0x0001, MASK_NONE);
 	var0009 = false;
 	var000A = false;
 	var000B = [0x0382, 0x033D, 0x039F, 0x01CF, 0x02D4, 0x02E7, 0x0184, 0x03F8, 0x03E0, 0x00D1, 0x03AD];
@@ -73069,7 +73085,7 @@ void Func0721 object#(0x721) () {
 	if (event == SCRIPTED) {
 		var0000 = [0x01FF, 0x0211, 0x0218, 0x02C2, 0x020C, 0x035D];
 		for (var0003 in var0000 with var0001 to var0002) {
-			var0004 = find_nearby(var0003, 0x0014, 0x0000);
+			var0004 = find_nearby(var0003, 0x0014, MASK_NONE);
 			for (var0007 in var0004 with var0005 to var0006) {
 				var0008 = var0007->get_object_position();
 				UI_play_sound_effect(0x0074);
@@ -73079,7 +73095,7 @@ void Func0721 object#(0x721) () {
 		abort;
 	}
 	var0009 = get_item_quality();
-	var000A = find_nearby(0x00D1, 0x0001, 0x0000);
+	var000A = find_nearby(0x00D1, 0x0001, MASK_NONE);
 	var000B = var000A->get_item_frame();
 	var0003 = true;
 	if (var0009 == 0x0000) {
@@ -73119,7 +73135,7 @@ void Func0721 object#(0x721) () {
 		}
 	}
 	if (var0003) {
-		var000C = find_nearby(0x0113, 0x0019, 0x0010);
+		var000C = find_nearby(0x0113, 0x0019, MASK_EGG);
 		for (var000F in var000C with var000D to var000E) {
 			var0010 = script var000F {
 				hatch;
@@ -73138,7 +73154,7 @@ void Func0721 object#(0x721) () {
 		Func097F(0xFE9C, "@That did it!@", 0x0005);
 		var0000 = [0x01FF, 0x0211, 0x0218, 0x02C2, 0x020C, 0x035D];
 		for (var0003 in var0000 with var0012 to var0013) {
-			var0004 = find_nearby(var0003, 0x0028, 0x0000);
+			var0004 = find_nearby(var0003, 0x0028, MASK_NONE);
 			for (var0007 in var0004 with var0014 to var0015) {
 				var0008 = var0007->get_object_position();
 				UI_play_sound_effect(0x0074);
@@ -73152,7 +73168,7 @@ void Func0721 object#(0x721) () {
 			if (var0016) {
 				var0016->clear_item_flag(TEMPORARY);
 				var0010 = var0016->set_item_quality(0x00F1);
-				var000A = find_nearby(0x00D1, 0x0001, 0x0000);
+				var000A = find_nearby(0x00D1, 0x0001, MASK_NONE);
 				if (var000A) {
 					var0008 = var000A->get_object_position();
 					Func0971(var000A);
@@ -73267,7 +73283,7 @@ void Func0723 object#(0x723) () {
 
 	var0000 = get_item_quality();
 	if (gflags[0x0007] && gflags[0x02B2]) {
-		var0001 = find_nearby(0x00E8, 0x0014, 0x0000);
+		var0001 = find_nearby(0x00E8, 0x0014, MASK_NONE);
 		for (var0004 in var0001 with var0002 to var0003) {
 			var0005 = var0004->get_object_position();
 			var0004->remove_item();
@@ -73279,7 +73295,7 @@ void Func0723 object#(0x723) () {
 		}
 	}
 	if ((var0000 == 0x0000) && (gflags[0x02B2] == false)) {
-		var0007 = find_nearby(0x00D1, 0x0002, 0x0000);
+		var0007 = find_nearby(0x00D1, 0x0002, MASK_NONE);
 		if (var0007) {
 			var0008 = var0007->get_item_frame();
 			if (var0008 == 0x0016) {
@@ -73301,7 +73317,7 @@ void Func0723 object#(0x723) () {
 			}
 			gflags[0x02B2] = true;
 			gflags[0x0007] = true;
-			var0001 = find_nearby(0x00E8, 0x0014, 0x0000);
+			var0001 = find_nearby(0x00E8, 0x0014, MASK_NONE);
 			if (var0001) {
 				for (var0004 in var0001 with var0009 to var000A) {
 					var0005 = var0004->get_object_position();
@@ -73318,7 +73334,7 @@ void Func0723 object#(0x723) () {
 					}
 				}
 			}
-			var0001 = find_nearby(0x00E8, 0x0014, 0x0000);
+			var0001 = find_nearby(0x00E8, 0x0014, MASK_NONE);
 			for (var0004 in var0001 with var000F to var0010) {
 				var0005 = var0004->get_object_position();
 				UI_play_sound_effect(0x0077);
@@ -73342,7 +73358,7 @@ void Func0723 object#(0x723) () {
 		}
 	}
 	if ((var0000 == 0x0001) && (gflags[0x02B3] == false)) {
-		var0001 = find_nearby(0x0289, 0x0001, 0x0000);
+		var0001 = find_nearby(0x0289, 0x0001, MASK_NONE);
 		if (var0001) {
 			var0008 = var0001->get_item_frame();
 			if (var0008 == 0x0005) {
@@ -73395,7 +73411,7 @@ void Func0724 object#(0x724) () {
 		Func0971(item);
 		abort;
 	}
-	var0000 = find_nearby(0x00D1, 0x0001, 0x0000);
+	var0000 = find_nearby(0x00D1, 0x0001, MASK_NONE);
 	if (var0000) {
 		var0001 = var0000->get_item_frame();
 		if (!((var0001 == 0x0001) || (var0001 == 0x0002))) {
@@ -73745,7 +73761,7 @@ void Func0728 object#(0x728) () {
 		var0002 = get_item_quality();
 		if (var0002 == 0x0000) {
 			if (UI_die_roll(0x0001, 0x0006) > 0x0001) {
-				var0003 = find_nearby(0x02D6, 0x0003, 0x0010);
+				var0003 = find_nearby(0x02D6, 0x0003, MASK_EGG);
 				for (var0006 in var0003 with var0004 to var0005) {
 					var0001 = true;
 				}
@@ -73854,7 +73870,7 @@ void Func072A object#(0x72A) () {
 	var var0001;
 
 	if (event == SCRIPTED) {
-		var0000 = 0xFF4D->find_nearby(0x0314, 0x0004, 0x0000);
+		var0000 = 0xFF4D->find_nearby(0x0314, 0x0004, MASK_NONE);
 		if (var0000) {
 			var0001 = var0000->get_item_quality();
 			Func0815(var0001);
@@ -73894,9 +73910,9 @@ void Func072B object#(0x72B) () {
 		gflags[0x0007] = false;
 		Func0922(0x0007);
 		gflags[0x02E5] = true;
-		var0000 = find_nearby(0x0280, 0x0019, 0x0000);
-		var0001 = find_nearby(0x027E, 0x0019, 0x0000);
-		var0002 = find_nearby(0x03EC, 0x0019, 0x0000);
+		var0000 = find_nearby(0x0280, 0x0019, MASK_NONE);
+		var0001 = find_nearby(0x027E, 0x0019, MASK_NONE);
+		var0002 = find_nearby(0x03EC, 0x0019, MASK_NONE);
 		var0003 = var0000->get_object_position();
 		UI_sprite_effect(0x0015, (var0003[0x0001] - 0x0003), (var0003[0x0002] - 0x0003), 0xFFFB, 0x0000, 0x0000, 0xFFFF);
 		var0000->remove_item();
@@ -73915,7 +73931,7 @@ void Func072B object#(0x72B) () {
 		var0005 = 0xFE9C->get_object_position();
 		UI_sprite_effect(0x0007, (var0005[0x0001] - 0x0004), (var0005[0x0002] - 0x0004), 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_sprite_effect(0x001A, (var0005[0x0001] - 0x0003), (var0005[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, 0xFFFF);
-		var0006 = find_nearby(0x00D1, 0x000F, 0x0000);
+		var0006 = find_nearby(0x00D1, 0x000F, MASK_NONE);
 		for (var0004 in var0006 with var0007 to var0008) {
 			var0009 = var0004->get_item_frame();
 			if (var0009 == 0x0014) {
@@ -73933,8 +73949,8 @@ void Func072B object#(0x72B) () {
 	if (event == SCRIPTED) {
 		if (gflags[0x0009] == true) {
 			gflags[0x0009] = false;
-			var000A = find_nearby(0x0204, 0x000F, 0x0000);
-			var000A &= find_nearby(0x00F6, 0x000F, 0x0000);
+			var000A = find_nearby(0x0204, 0x000F, MASK_NONE);
+			var000A &= find_nearby(0x00F6, 0x000F, MASK_NONE);
 			for (var000D in var000A with var000B to var000C) {
 				var0009 = var000D->get_item_frame();
 				if ((var0009 == 0x000E) || (var0009 == 0x001E)) {
@@ -74004,9 +74020,9 @@ void Func072B object#(0x72B) () {
 		gflags[0x0008] = 0x0000;
 		gflags[0x0009] = 0x0000;
 		gflags[0x000A] = 0x0000;
-		var0000 = find_nearby(0x0280, 0x0005, 0x0000);
-		var0001 = find_nearby(0x027E, 0x0005, 0x0000);
-		var0002 = find_nearby(0x03EC, 0x0005, 0x0000);
+		var0000 = find_nearby(0x0280, 0x0005, MASK_NONE);
+		var0001 = find_nearby(0x027E, 0x0005, MASK_NONE);
+		var0002 = find_nearby(0x03EC, 0x0005, MASK_NONE);
 		if (var0002) {
 			if (var0002->get_item_frame() != 0x0002) {
 				var0002 = 0x0000;
@@ -74029,7 +74045,7 @@ void Func072B object#(0x72B) () {
 				if (var0011) {
 					var0011->set_item_frame(0x0014);
 					var0011->clear_item_flag(TEMPORARY);
-					var0004 = find_nearby(0x02B0, 0x000A, 0x00B0);
+					var0004 = find_nearby(0x02B0, 0x000A, MASK_ALL_UNSEEN);
 					for (var0014 in var0004 with var0012 to var0013) {
 						var0015 = var0014->get_object_position();
 						var0014->remove_item();
@@ -74096,7 +74112,7 @@ void Func072D object#(0x72D) () {
 	if ((event == EGG) && ((gflags[0x0004] == false) && (gflags[0x014E] == true))) {
 		var0000 = get_item_quality();
 		var0001 = get_object_position();
-		var0002 = find_nearby(0x019F, 0x0032, 0x0000);
+		var0002 = find_nearby(0x019F, 0x0032, MASK_NONE);
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0005->remove_item();
 		}
@@ -74144,7 +74160,7 @@ void Func072E object#(0x72E) () {
 		var0000 = get_object_position();
 		var0001 = get_item_quality();
 		if (gflags[0x0261]) {
-			var0002 = find_nearby(0x010E, 0x000F, 0x0000);
+			var0002 = find_nearby(0x010E, 0x000F, MASK_NONE);
 			for (var0005 in var0002 with var0003 to var0004) {
 				var0005->set_item_frame(0x0008);
 				var0006 = var0005->set_item_quality(0x0000);
@@ -74331,7 +74347,7 @@ void Func0737 object#(0x737) () {
 		remove_item();
 		abort;
 	}
-	var0000 = find_nearby(0x0110, 0x0014, 0x0000);
+	var0000 = find_nearby(0x0110, 0x0014, MASK_NONE);
 	for (var0003 in var0000 with var0001 to var0002) {
 		var0004 = var0003->set_item_quality(0x004B);
 		var0005 = var0003->get_object_position();
@@ -74358,7 +74374,7 @@ void Func0738 object#(0x738) () {
 	if (event == EGG) {
 		var0000 = 0xFF4A->get_item_flag(MET);
 		if (var0000) {
-			var0001 = find_nearby(0x010F, 0x0006, 0x0000);
+			var0001 = find_nearby(0x010F, 0x0006, MASK_NONE);
 			for (var0004 in var0001 with var0002 to var0003) {
 				var0004->remove_item();
 				remove_item();
@@ -74410,7 +74426,7 @@ void Func0739 object#(0x739) () {
 		abort;
 	}
 	if (event == PATH_SUCCESS) {
-		var0001 = 0xFE9C->find_nearby(0x010E, 0x000A, 0x0000);
+		var0001 = 0xFE9C->find_nearby(0x010E, 0x000A, MASK_NONE);
 		for (var0004 in var0001 with var0002 to var0003) {
 			var0005 = var0004->get_object_position();
 			var0004->remove_item();
@@ -74428,7 +74444,7 @@ void Func0739 object#(0x739) () {
 		0xFE9C->si_path_run_usecode([0x0337, 0x08BA, 0x0000], PATH_FAILURE, 0xFE9C, Func0739, true);
 	}
 	if (event == PATH_FAILURE) {
-		var0001 = 0xFE9C->find_nearby(0x0178, 0x000A, 0x0000);
+		var0001 = 0xFE9C->find_nearby(0x0178, 0x000A, MASK_NONE);
 		for (var0004 in var0001 with var0007 to var0008) {
 			if (var0004->get_item_quality() == 0x0048) {
 				var0005 = var0004->get_object_position();
@@ -74573,7 +74589,7 @@ void Func073B object#(0x73B) () {
 	var0003 = Func09A0(0x0002, 0x0001);
 	if (event == EGG) {
 		var0002 = var0003->set_item_quality(0x0000);
-		var0001 = 0xFE9C->find_nearby(0x013E, 0x0028, 0x0000);
+		var0001 = 0xFE9C->find_nearby(0x013E, 0x0028, MASK_NONE);
 		var0002 = Func0992(0x0001, "@Batlin!@", "@Batlin!@", true);
 		var0002 = script var0001 {
 			nohalt;
@@ -74613,7 +74629,7 @@ void Func073B object#(0x73B) () {
 	if (event == SCRIPTED) {
 		var0004 = var0003->get_item_quality();
 		if (var0004 == 0x0000) {
-			var0001 = 0xFE9C->find_nearby(0x013E, 0x0014, 0x0000);
+			var0001 = 0xFE9C->find_nearby(0x013E, 0x0014, MASK_NONE);
 			0xFEE1->show_npc_face0(0x0001);
 			say("\"Fool! Thou art too late. Now I shall enter the Wall of Lights and become immortal!\"");
 			say("\"Then I shall return to destroy thy mortal soul!\"");
@@ -74653,7 +74669,7 @@ void Func073B object#(0x73B) () {
 			var0002 = var0003->set_item_quality(0x0001);
 		}
 		if (var0004 == 0x0001) {
-			var0001 = 0xFE9C->find_nearby(0x013E, 0x0014, 0x0000);
+			var0001 = 0xFE9C->find_nearby(0x013E, 0x0014, MASK_NONE);
 			if (!var0001) {
 				UI_error_message("No Batlin");
 			}
@@ -74678,7 +74694,7 @@ void Func073B object#(0x73B) () {
 			abort;
 		}
 		if (var0004 == 0x0002) {
-			var0001 = 0xFE9C->find_nearby(0x013E, 0x0014, 0x0000);
+			var0001 = 0xFE9C->find_nearby(0x013E, 0x0014, MASK_NONE);
 			if (!var0001) {
 				UI_error_message("No Batlin");
 			}
@@ -74887,7 +74903,7 @@ void Func073B object#(0x73B) () {
 			UI_remove_npc_face0();
 			var0000 = 0xFE9C->get_object_position();
 			UI_sprite_effect(0x0007, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-			var000F = 0xFE9C->find_nearby(0x0370, 0x0028, 0x0000);
+			var000F = 0xFE9C->find_nearby(0x0370, 0x0028, MASK_NONE);
 			if (var000F) {
 				var0000 = var000F->get_object_position();
 				var000F->remove_item();
@@ -74914,7 +74930,7 @@ void Func073B object#(0x73B) () {
 				}
 			}
 			UI_sprite_effect(0x001F, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-			var000F = 0xFE9C->find_nearby(0x038A, 0x0028, 0x0000);
+			var000F = 0xFE9C->find_nearby(0x038A, 0x0028, MASK_NONE);
 			if (var000F) {
 				var0000 = var000F->get_object_position();
 				var000F->remove_item();
@@ -74941,7 +74957,7 @@ void Func073B object#(0x73B) () {
 				}
 			}
 			UI_sprite_effect(0x001F, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
-			var000F = 0xFE9C->find_nearby(0x013D, 0x0028, 0x0000);
+			var000F = 0xFE9C->find_nearby(0x013D, 0x0028, MASK_NONE);
 			if (var000F) {
 				var0000 = var000F->get_object_position();
 				var000F->remove_item();
@@ -75079,7 +75095,7 @@ void Func0744 object#(0x744) () {
 	var var0003;
 
 	if (event == EGG) {
-		var0000 = find_nearby(0x00C6, 0x000F, 0x0080);
+		var0000 = find_nearby(0x00C6, 0x000F, MASK_TRANSLUCENT);
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0003->remove_item();
 		}
@@ -75155,7 +75171,7 @@ void Func0759 object#(0x759) () {
 	var var0017;
 
 	var0000 = [0xFE9C, 0xFFFD, 0xFFFE, 0xFFFF];
-	var0001 = 0xFE9C->find_nearby(0xFFFF, 0x001E, 0x0004);
+	var0001 = 0xFE9C->find_nearby(ANY_SHAPE, 0x001E, MASK_NPC);
 	if (UI_get_array_size(var0001) > 0x0001) {
 		var0001 = Func0988(0xFE9C->get_npc_object(), var0001);
 		var0002 = var0001[UI_get_random(UI_get_array_size(var0001))];
@@ -75330,7 +75346,7 @@ void Func075B object#(0x75B) () {
 	var var0002;
 	var var0003;
 
-	var0000 = find_nearby(0x032A, 0x0003, 0x0000);
+	var0000 = find_nearby(0x032A, 0x0003, MASK_NONE);
 	var0001 = var0000->get_item_frame();
 	if ((var0001 == 0x0000) || (var0001 == 0x0001)) {
 		var0002 = var0000->get_object_position();
@@ -75349,7 +75365,7 @@ void Func075D object#(0x75D) () {
 	var var0002;
 	var var0003;
 
-	var0000 = find_nearby(0x031F, 0x000A, 0x0000);
+	var0000 = find_nearby(0x031F, 0x000A, MASK_NONE);
 	for (var0003 in var0000 with var0001 to var0002) {
 		if (var0003->get_item_frame() == 0x0012) {
 			var0000 = script var0003 {
@@ -75395,7 +75411,7 @@ void Func075F object#(0x75F) () {
 	var var0001;
 	var var0002;
 
-	var0000 = find_nearby(0x0376, 0x0005, 0x0000);
+	var0000 = find_nearby(0x0376, 0x0005, MASK_NONE);
 	var0001 = var0000->get_item_frame();
 	if ((var0001 % 0x0002) == 0x0000) {
 		var0000->set_item_frame(var0001 + 0x0001);
@@ -75450,14 +75466,14 @@ void Func0760 object#(0x760) () {
 	var var0011;
 
 	var0000 = [0x0225];
-	var0001 = find_nearby(var0000, 0x0002, 0x0000);
+	var0001 = find_nearby(var0000, 0x0002, MASK_NONE);
 	var0002 = var0001->get_object_position();
 	if (var0001) {
 		Func095D(0x0064);
 		var0001->remove_item();
 		UI_play_sound_effect(0x0074);
 		UI_sprite_effect(0x0019, var0002[0x0001], var0002[0x0002], 0x0001, 0x0000, 0x0000, 0xFFFF);
-		var0003 = find_nearby(0x0121, 0x0006, 0x0000);
+		var0003 = find_nearby(0x0121, 0x0006, MASK_NONE);
 		for (var0006 in var0003 with var0004 to var0005) {
 			var0006->remove_item();
 		}
@@ -75466,13 +75482,13 @@ void Func0760 object#(0x760) () {
 			var0008 = UI_update_last_created([0x09B8, 0x0B5C, 0x0001]);
 			var0007->set_item_frame(0x0000);
 		}
-		var0009 = find_nearby(0x0300, 0x000C, 0x0000);
+		var0009 = find_nearby(0x0300, 0x000C, MASK_NONE);
 		for (var000C in var0009 with var000A to var000B) {
 			UI_play_sound_effect(0x0021);
 			var000C->remove_item();
 			UI_sprite_effect(0x0020, var0002[0x0001], var0002[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		}
-		var000D = 0xFE9C->find_nearby(0x0113, 0x0010, 0x0010);
+		var000D = 0xFE9C->find_nearby(0x0113, 0x0010, MASK_EGG);
 		for (var0010 in var000D with var000E to var000F) {
 			var0011 = var0010->get_item_frame();
 			if (var0011 == 0x0000) {
@@ -75576,7 +75592,7 @@ void Func0763 object#(0x763) () {
 
 	if (event == EGG) {
 		var0000 = get_item_quality();
-		var0001 = find_nearby(0x00D1, 0x0001, 0x0000);
+		var0001 = find_nearby(0x00D1, 0x0001, MASK_NONE);
 		var0002 = 0x0000;
 		for (var0005 in var0001 with var0003 to var0004) {
 			var0006 = var0005->get_item_frame();
@@ -75661,7 +75677,7 @@ void Func0765 object#(0x765) () {
 	var var0007;
 
 	var0000 = get_item_quality();
-	var0001 = find_nearby(0x01C2, 0x0001, 0x0000);
+	var0001 = find_nearby(0x01C2, 0x0001, MASK_NONE);
 	for (var0004 in var0001 with var0002 to var0003) {
 		var0005 = var0004->get_item_frame();
 		var0006 = var0004->get_object_position();
@@ -75796,7 +75812,7 @@ void Func0766 object#(0x766) () {
 			};
 		}
 		var0009 = false;
-		var000A = find_nearby(0x0129, 0x0032, 0x0000);
+		var000A = find_nearby(0x0129, 0x0032, MASK_NONE);
 		if (var000A != 0x0000) {
 			for (var000D in var000A with var000B to var000C) {
 				var0009 = var000D;
@@ -76113,7 +76129,7 @@ void Func0768 object#(0x768) () {
 			" fate! Wilt thou never learn to think beyond thy bed?!\"");
 		UI_remove_npc_face0();
 		UI_remove_npc_face1();
-		var000D = 0xFE9C->find_nearby(0x0299, 0x001E, 0x0000);
+		var000D = 0xFE9C->find_nearby(0x0299, 0x001E, MASK_NONE);
 		var000E = ["@Oh dear...@", "@Fool!@", "@Take that!@"];
 		var000F = 0x0001;
 		for (var0012 in var000D with var0010 to var0011) {
@@ -76279,7 +76295,7 @@ void Func077E object#(0x77E) () {
 
 	if (event == SCRIPTED) {
 		var0000 = get_object_position();
-		var0001 = find_nearby(0x0315, 0x0028, 0x0000);
+		var0001 = find_nearby(0x0315, 0x0028, MASK_NONE);
 		if (var0001) {
 			var0000 = var0001->get_object_position();
 			0xFFDE->move_object([(var0000[0x0001] - 0x0001), (var0000[0x0002] + 0x0001), 0x0000]);
@@ -76311,7 +76327,7 @@ void Func077E object#(0x77E) () {
 	} else {
 		var0003 = get_item_quality();
 		var0000 = get_object_position();
-		var0004 = find_nearby(SHAPE_ANY, 0x0002, 0x0000);
+		var0004 = find_nearby(SHAPE_ANY, 0x0002, MASK_NONE);
 		for (var0007 in var0004 with var0005 to var0006) {
 			if (var0007->get_lift() == var0000[0x0003]) {
 				var0008 = 0x0000;
@@ -76360,7 +76376,7 @@ void Func077E object#(0x77E) () {
 				if (var0008) {
 					var0007->remove_item();
 					UI_sprite_effect(0x0020, (var0000[0x0001] - 0x0002), (var0000[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
-					var0001 = find_nearby(0x0316, 0x0012, 0x0000);
+					var0001 = find_nearby(0x0316, 0x0012, MASK_NONE);
 					if (var0001) {
 						var0002 = script var0001 after 1 ticks {
 							frame 1;
@@ -76391,7 +76407,7 @@ void Func077E object#(0x77E) () {
 		}
 		var0002 = set_item_quality(var0003);
 		if ((!gflags[0x01BB]) && (var0003 == 0x00FD)) {
-			var0001 = find_nearby(0x0315, 0x0008, 0x0000);
+			var0001 = find_nearby(0x0315, 0x0008, MASK_NONE);
 			if (var0001) {
 				UI_play_sound_effect(0x0077);
 				var0002 = script var0001 after 2 ticks {
@@ -76434,7 +76450,7 @@ void Func0780 object#(0x780) () {
 	var var0007;
 
 	if (event == SCRIPTED) {
-		var0000 = find_nearby(0x037C, 0x0019, 0x0000);
+		var0000 = find_nearby(0x037C, 0x0019, MASK_NONE);
 		var0001 = var0000->get_item_quality();
 		var0002 = var0000->set_item_quality(var0001 + 0x0001);
 		if (var0000) {
@@ -76611,7 +76627,7 @@ void Func0797 object#(0x797) () {
 	var var0004;
 
 	if (event == EGG) {
-		var0000 = find_nearby(SHAPE_ANY, 0x0028, 0x0008);
+		var0000 = find_nearby(SHAPE_ANY, 0x0028, MASK_NPC2);
 		var0001 = Func098D();
 		for (var0004 in var0000 with var0002 to var0003) {
 			if (!var0004->get_item_flag(IN_PARTY)) {
@@ -76641,7 +76657,7 @@ void Func0798 object#(0x798) () {
 	var var000D;
 
 	if ((event == EGG) || (event == SCRIPTED)) {
-		var0000 = find_nearby(SHAPE_ANY, 0x0028, 0x0008);
+		var0000 = find_nearby(SHAPE_ANY, 0x0028, MASK_NPC2);
 		var0001 = UI_get_party_list();
 		var0002 = get_item_quality();
 		if (var0002 == 0x0000) {
@@ -76895,7 +76911,7 @@ void Func07A1 object#(0x7A1) () {
 	var var0006;
 
 	if (event == EGG) {
-		var0000 = find_nearby(0x0356, 0x0005, 0x0000);
+		var0000 = find_nearby(0x0356, 0x0005, MASK_NONE);
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0004 = var0003->get_item_frame();
 			if (var0004 == 0x0000) {
@@ -76928,15 +76944,15 @@ void Func07A2 object#(0x7A2) () {
 		event = DOUBLECLICK;
 		UI_play_sound_effect(0x0046);
 		var0000 = get_item_quality();
-		var0001 = find_nearby(0x0150, var0000, 0x0000);
+		var0001 = find_nearby(0x0150, var0000, MASK_NONE);
 		for (var0004 in var0001 with var0002 to var0003) {
 			var0004->Func0150();
 		}
-		var0001 = find_nearby(0x0253, var0000, 0x0000);
+		var0001 = find_nearby(0x0253, var0000, MASK_NONE);
 		for (var0004 in var0001 with var0005 to var0006) {
 			var0004->Func0253();
 		}
-		var0001 = find_nearby(0x0379, var0000, 0x0000);
+		var0001 = find_nearby(0x0379, var0000, MASK_NONE);
 		for (var0004 in var0001 with var0007 to var0008) {
 			var0004->Func0379();
 		}
@@ -76962,15 +76978,15 @@ void Func07A3 object#(0x7A3) () {
 		UI_play_sound_effect(0x0046);
 		event = DOUBLECLICK;
 		var0000 = get_item_quality();
-		var0001 = find_nearby(0x0152, var0000, 0x0000);
+		var0001 = find_nearby(0x0152, var0000, MASK_NONE);
 		for (var0004 in var0001 with var0002 to var0003) {
 			var0004->Func0152();
 		}
-		var0001 = find_nearby(0x02BD, var0000, 0x0000);
+		var0001 = find_nearby(0x02BD, var0000, MASK_NONE);
 		for (var0004 in var0001 with var0005 to var0006) {
 			var0004->Func02BD();
 		}
-		var0001 = find_nearby(0x020E, var0000, 0x0000);
+		var0001 = find_nearby(0x020E, var0000, MASK_NONE);
 		for (var0004 in var0001 with var0007 to var0008) {
 			var0004->Func020E();
 		}
@@ -76993,8 +77009,8 @@ void Func07A4 object#(0x7A4) () {
 
 	if (event == EGG) {
 		event = DOUBLECLICK;
-		var0000 = find_nearby(0x010E, 0x0028, 0x0000);
-		var0000 &= find_nearby(0x0178, 0x0028, 0x0000);
+		var0000 = find_nearby(0x010E, 0x0028, MASK_NONE);
+		var0000 &= find_nearby(0x0178, 0x0028, MASK_NONE);
 		var0001 = [];
 		for (var0004 in var0000 with var0002 to var0003) {
 			var0001 &= get_distance(var0004);
@@ -77039,7 +77055,7 @@ void Func07A5 object#(0x7A5) () {
 	if (event == EGG) {
 		UI_play_sound_effect(0x0046);
 		event = DOUBLECLICK;
-		var0000 = find_nearby(0x0369, 0x0014, 0x0000);
+		var0000 = find_nearby(0x0369, 0x0014, MASK_NONE);
 		var0001 = [];
 		for (var0004 in var0000 with var0002 to var0003) {
 			var0001 &= var0004->get_distance(item);
@@ -77101,7 +77117,7 @@ void Func07AA object#(0x7AA) () {
 	var var0006;
 
 	if (event == EGG) {
-		var0000 = find_nearby(0x02F7, 0x0019, 0x0000);
+		var0000 = find_nearby(0x02F7, 0x0019, MASK_NONE);
 		var0001 = UI_get_array_size(var0000);
 		var0000 = Func09A7(var0001, var0000);
 		for (var0004 in var0000 with var0002 to var0003) {
@@ -77334,7 +77350,7 @@ void Func07AE object#(0x7AE) () {
 					}
 				}
 				if (var0000 == 0x0002) {
-					var0001 = 0xFE9C->find_nearby(0x020A, 0x0014, 0x0000);
+					var0001 = 0xFE9C->find_nearby(0x020A, 0x0014, MASK_NONE);
 					if (var0001) {
 						if (Func097D(0xFE9B, 0x0001, 0x0273, QUALITY_ANY, FRAME_ANY)) {
 							say("\"I'll wager that chest is locked. Thou shouldst try thy lockpicks on it.\"");
@@ -77348,7 +77364,7 @@ void Func07AE object#(0x7AE) () {
 					}
 				}
 				if (var0000 == 0x0003) {
-					var0001 = 0xFE9C->find_nearby(0x031D, 0x0014, 0x0000);
+					var0001 = 0xFE9C->find_nearby(0x031D, 0x0014, MASK_NONE);
 					if (var0001) {
 						say("\"I see a scroll. Perhaps it contains clues about this place, or counsel for our future adventurings.\"");
 					} else {
@@ -77356,7 +77372,7 @@ void Func07AE object#(0x7AE) () {
 					}
 				}
 				if (var0000 == 0x0004) {
-					if (!0xFE9C->find_nearby(0x0253, 0x000A, 0x0000)) {
+					if (!0xFE9C->find_nearby(0x0253, 0x000A, MASK_NONE)) {
 						say("\"Thou wert wise to pick up that torch! We need all that we can find, for they do not burn for long.\"");
 						say("\"No doubt we shall be in many strange dungeons before our adventure is over...\"");
 					} else {
@@ -77365,7 +77381,7 @@ void Func07AE object#(0x7AE) () {
 					}
 				}
 				if (var0000 == 0x0006) {
-					var0001 = 0xFE9C->find_nearby(0x025E, 0x001E, 0x0000);
+					var0001 = 0xFE9C->find_nearby(0x025E, 0x001E, MASK_NONE);
 					if (var0001) {
 						var0008 = Func0953();
 						say("\"That seems alike to the bow I did lose to the magical storm!\"");
@@ -77482,7 +77498,7 @@ void Func07B1 object#(0x7B1) () {
 			} else {
 				var0003 = 0x0010;
 			}
-			var0004 = find_nearby(0x009F, var0003, 0x0000);
+			var0004 = find_nearby(0x009F, var0003, MASK_NONE);
 			var0005 = get_item_quantity(0x0000);
 			if (var0004) {
 				var0006 = script var0004 after var0005 ticks {
@@ -77502,7 +77518,7 @@ void Func07B1 object#(0x7B1) () {
 			} else {
 				var0003 = 0x0010;
 			}
-			var0007 = find_nearby(0x00F2, var0003, 0x0000);
+			var0007 = find_nearby(0x00F2, var0003, MASK_NONE);
 			var0005 = get_item_quantity(0x0000);
 			if (var0007) {
 				var0006 = script var0007 after var0005 ticks {
@@ -77522,7 +77538,7 @@ void Func07B1 object#(0x7B1) () {
 			} else {
 				var0003 = 0x0010;
 			}
-			var0007 = find_nearby(0x019A, var0003, 0x0000);
+			var0007 = find_nearby(0x019A, var0003, MASK_NONE);
 			var0005 = get_item_quantity(0x0000);
 			if (var0007) {
 				var0006 = script var0007 after var0005 ticks {
@@ -77538,7 +77554,7 @@ void Func07B1 object#(0x7B1) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		var0008 = find_nearby(SHAPE_ANY, 0x0003, 0x0000);
+		var0008 = find_nearby(SHAPE_ANY, 0x0003, MASK_NONE);
 		for (var000B in var0008 with var0009 to var000A) {
 			if (!((var000B->get_item_shape() == 0x00F2) || ((var000B->get_item_shape() == 0x009F) || (var000B->get_item_shape() == 0x019A)))) {
 				if (var000B->is_npc()) {
@@ -77579,7 +77595,7 @@ void Func07B2 object#(0x7B2) () {
 		if (var0000 == 0x0001) {
 			var0002 = 0x0300;
 			var0004 = false;
-			var0005 = find_nearby(var0002, 0x0003, 0x0000);
+			var0005 = find_nearby(var0002, 0x0003, MASK_NONE);
 			for (var0008 in var0005 with var0006 to var0007) {
 				var0004 = true;
 			}
@@ -77609,7 +77625,7 @@ void Func07B2 object#(0x7B2) () {
 			var0003 = 0x0045;
 		}
 		var0004 = false;
-		var0005 = find_nearby(var0002, 0x0003, 0x0010);
+		var0005 = find_nearby(var0002, 0x0003, MASK_EGG);
 		for (var0008 in var0005 with var000A to var000B) {
 			var0004 = true;
 		}
@@ -77640,7 +77656,7 @@ void Func07B3 object#(0x7B3) () {
 
 	var0000 = 0xFFD8->get_npc_id();
 	var0001 = 0x0019;
-	var0002 = find_nearby(0x03C1, 0x0064, 0x0010);
+	var0002 = find_nearby(0x03C1, 0x0064, MASK_EGG);
 	if (var0000 == 0x0002) {
 		if (var0002) {
 			0xFE9C->set_item_flag(DONT_MOVE);
@@ -77831,7 +77847,7 @@ void Func07D3 object#(0x7D3) () {
 		Func097F(0xFE9C, "@Oh...@", 0x0002);
 		Func097F(0xFE9C, "@AAAAHHHH!!!!!@", 0x002D);
 		Func097F(0xFE9C, "@NOOOO!!!!!@", 0x003C);
-		var0002 = 0xFE9C->find_nearby(0x00A0, 0x0005, 0x0000);
+		var0002 = 0xFE9C->find_nearby(0x00A0, 0x0005, MASK_NONE);
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0006 = var0005->get_object_position();
 			UI_sprite_effect(0x0007, (var0006[0x0001] - 0x0002), (var0006[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -77878,7 +77894,7 @@ void Func07D3 object#(0x7D3) () {
 		abort;
 	}
 	if ((event == SCRIPTED) && (gflags[0x0007] == true)) {
-		var0007 = find_nearby(0x00A0, 0x0014, 0x0000);
+		var0007 = find_nearby(0x00A0, 0x0014, MASK_NONE);
 		var0008 = 0x0000;
 		for (var000B in var0007 with var0009 to var000A) {
 			var0006 = var000B->get_object_position();
@@ -78025,7 +78041,7 @@ void Func07D5 object#(0x7D5) () {
 
 	if ((event == SCRIPTED) && (gflags[0x0007] == false)) {
 		0xFE9B->move_object([0x0A87, 0x0B02, 0x0002]);
-		var0000 = 0xFE9C->find_nearby(0x00A0, 0x000A, 0x0000);
+		var0000 = 0xFE9C->find_nearby(0x00A0, 0x000A, MASK_NONE);
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0004 = var0003->get_item_frame();
 			if (var0004 < 0x0005) {
@@ -78116,7 +78132,7 @@ void Func07D8 object#(0x7D8) () {
 	var var0001;
 
 	if (gflags[0x0004]) {
-		var0000 = 0xFE9C->find_nearby(0x019E, 0x000A, 0x0000);
+		var0000 = 0xFE9C->find_nearby(0x019E, 0x000A, MASK_NONE);
 		if (var0000) {
 			if (var0000->get_item_frame() == 0x0010) {
 				var0000->clear_item_flag(TEMPORARY);
@@ -78229,7 +78245,7 @@ void Func07D9 object#(0x7D9) () {
 	var var0007;
 
 	if (!gflags[0x021C]) {
-		var0000 = 0xFE9C->find_nearby(0x0331, 0x0014, 0x0000);
+		var0000 = 0xFE9C->find_nearby(0x0331, 0x0014, MASK_NONE);
 		if (var0000) {
 			var0001 = var0000->get_object_position();
 			var0002 = UI_create_new_object(0x0121);
@@ -78250,7 +78266,7 @@ void Func07D9 object#(0x7D9) () {
 		var0003 = script var0004 after 15 ticks {
 			call Func07DA;
 		};
-		var0005 = 0xFE9C->find_nearby(0x037F, 0x0014, 0x0000);
+		var0005 = 0xFE9C->find_nearby(0x037F, 0x0014, MASK_NONE);
 		for (var0002 in var0005 with var0006 to var0007) {
 			var0002->set_item_flag(TEMPORARY);
 		}
@@ -78753,7 +78769,7 @@ void Func07DF object#(0x7DF) () {
 	} while (false);
 	if (var0000) {
 		var000C = var0000 & [QUALITY_ANY, 0x0000];
-		var000D = var000C->find_nearby(0x0113, 0x0005, 0x0010);
+		var000D = var000C->find_nearby(0x0113, 0x0005, MASK_EGG);
 		for (var0010 in var000D with var000E to var000F) {
 			var0010->remove_item();
 		}
@@ -78770,7 +78786,7 @@ void Func07E0 object#(0x7E0) () {
 	var var0005;
 	var var0006;
 
-	var0000 = find_nearby(0x0113, 0x0008, 0x0010);
+	var0000 = find_nearby(0x0113, 0x0008, MASK_EGG);
 	var0001 = 0x0000;
 	for (var0004 in var0000 with var0002 to var0003) {
 		if (var0004->get_item_frame() == 0x0006) {
@@ -78902,7 +78918,7 @@ void Func07E1 object#(0x7E1) () {
 			if (0xFF65->get_item_flag(DEAD)) {
 				abort;
 			}
-			if (!find_nearby(0x02E6, 0xFFFF, 0x00B0)) {
+			if (!find_nearby(0x02E6, 0xFFFF, MASK_ALL_UNSEEN)) {
 				var0002 = 0xFF65->approach_avatar(0x008C, 0x0028);
 				var0002 = script var0000 {
 					actor frame standing;
@@ -78956,10 +78972,10 @@ void Func07E2 object#(0x7E2) () {
 		UI_error_message("egg quality not set");
 	}
 	if ((var0000 == 0x0001) || (var0000 == 0x0048)) {
-		var0001 = 0xFE9C->find_nearby(0x010E, 0x000A, 0x00B0);
-		var0001 &= 0xFE9C->find_nearby(0x0178, 0x000A, 0x00B0);
-		var0001 &= 0xFE9C->find_nearby(0x01B1, 0x000A, 0x00B0);
-		var0001 &= 0xFE9C->find_nearby(0x01B0, 0x000A, 0x00B0);
+		var0001 = 0xFE9C->find_nearby(0x010E, 0x000A, MASK_ALL_UNSEEN);
+		var0001 &= 0xFE9C->find_nearby(0x0178, 0x000A, MASK_ALL_UNSEEN);
+		var0001 &= 0xFE9C->find_nearby(0x01B1, 0x000A, MASK_ALL_UNSEEN);
+		var0001 &= 0xFE9C->find_nearby(0x01B0, 0x000A, MASK_ALL_UNSEEN);
 		for (var0004 in var0001 with var0002 to var0003) {
 			if (var0004->get_item_quality() == 0x0048) {
 				if (Func0906(var0004) == 0x0001) {
@@ -78987,14 +79003,14 @@ void Func07E2 object#(0x7E2) () {
 	}
 	if (var0000 == 0x0002) {
 		gflags[0x004A] = true;
-		var0001 = find_nearby(0x0178, 0x0014, 0x0000);
+		var0001 = find_nearby(0x0178, 0x0014, MASK_NONE);
 		for (var0004 in var0001 with var0006 to var0007) {
 			if (var0004->get_item_quality() == 0x003D) {
 				var0004->set_item_frame(0x000C);
 				UI_play_sound_effect(0x0004);
 			}
 		}
-		var0001 = find_nearby(0x010E, 0x0014, 0x0000);
+		var0001 = find_nearby(0x010E, 0x0014, MASK_NONE);
 		for (var0004 in var0001 with var0008 to var0009) {
 			if (var0004->get_item_quality() == 0x0048) {
 				var0004->set_item_frame(0x000C);
@@ -79058,7 +79074,7 @@ void Func07E4 object#(0x7E4) () {
 
 	var0000 = Func09A0(0x0002, 0x0001);
 	var0001 = var0000->get_item_quality();
-	var0002 = 0xFE9C->find_nearby(0x03C1, 0x0064, 0x0010);
+	var0002 = 0xFE9C->find_nearby(0x03C1, 0x0064, MASK_EGG);
 	if (var0001 == 0x0000) {
 		UI_play_music(0x0010, var0000);
 		0xFFD8->set_schedule_type(WANDER);
@@ -79232,9 +79248,9 @@ void Func07E6 object#(0x7E6) () {
 	var var0013;
 
 	0xFE9C->clear_item_flag(DONT_MOVE);
-	var0000 = find_nearby(0x00FB, 0x0019, 0x0000);
+	var0000 = find_nearby(0x00FB, 0x0019, MASK_NONE);
 	Func0917(var0000, 0x0000);
-	var0001 = find_nearby(0x030D, 0x0019, 0x0000);
+	var0001 = find_nearby(0x030D, 0x0019, MASK_NONE);
 	if (!Func0910(var0001)) {
 		UI_error_message("Cannot lower Plank's constant");
 	}
@@ -79476,7 +79492,7 @@ void Func07EA object#(0x7EA) () {
 		var0000 = false;
 		var0001 = false;
 		var0002 = 0xFE9C->get_object_position() & (0x0096 & 0x001F);
-		var0003 = var0002->find_nearby(0x025F, 0x0050, 0x0010);
+		var0003 = var0002->find_nearby(0x025F, 0x0050, MASK_EGG);
 		for (var0006 in var0003 with var0004 to var0005) {
 			if ((var0006->get_item_quality() == 0x0096) && (var0006->get_item_frame() == 0x001F)) {
 				var0000 = var0006;
@@ -79548,7 +79564,7 @@ void Func07EB object#(0x7EB) () {
 	UI_sprite_effect(0x0001, (var0000[0x0001] + var0001), (var0000[0x0002] + var0001), 0x0000, 0x0000, 0x0000, 0xFFFF);
 	UI_play_sound_effect(0x002A);
 	var0002 = UI_get_party_list2();
-	var0003 = find_nearby(SHAPE_ANY, 0x0005, 0x0008);
+	var0003 = find_nearby(SHAPE_ANY, 0x0005, MASK_NPC2);
 	for (var0006 in var0003 with var0004 to var0005) {
 		if (!(var0006 in var0002)) {
 			var0007 = UI_die_roll(0x0005, 0x000A);
@@ -79589,7 +79605,7 @@ void Func07EC object#(0x7EC) () {
 		var0000 = 0xFF31->get_object_position();
 		UI_sprite_effect(0x0015, (var0000[0x0001] - 0x0002), (var0000[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_play_sound_effect(0x0082);
-		var0001 = 0xFF2D->get_npc_object()->find_nearby(0x0113, 0x0002, 0x0010);
+		var0001 = 0xFF2D->get_npc_object()->find_nearby(0x0113, 0x0002, MASK_EGG);
 		var0002 = 0xFF31->set_to_attack(var0001, 0x0118);
 		var0003 = script 0xFF31 {
 			nohalt;
@@ -79656,7 +79672,7 @@ void Func07EC object#(0x7EC) () {
 			var0003->set_item_flag(TEMPORARY);
 			var0003 = UI_update_last_created(0xFF2D->get_object_position());
 		}
-		var0006 = 0xFF2D->get_npc_object()->find_nearby(0x025F, 0x0019, 0x0010);
+		var0006 = 0xFF2D->get_npc_object()->find_nearby(0x025F, 0x0019, MASK_EGG);
 		var0007 = 0x0001;
 		for (var000A in var0006 with var0008 to var0009) {
 			var0003 = script var000A after var0007 ticks {
@@ -79895,7 +79911,7 @@ void Func07EE object#(0x7EE) () {
 			var0001->set_item_flag(TEMPORARY);
 			var0001 = UI_update_last_created(0xFF2D->get_object_position());
 		}
-		var0005 = 0xFE9C->find_nearby(0x037F, 0x000A, 0x0000);
+		var0005 = 0xFE9C->find_nearby(0x037F, 0x000A, MASK_NONE);
 		for (var0008 in var0005 with var0006 to var0007) {
 			var0009 = UI_die_roll(0x0001, 0x000A);
 			if (var0009 < 0x000A) {
@@ -80142,7 +80158,7 @@ void Func07F6 object#(0x7F6) () {
 
 	if ((event == SCRIPTED) && (gflags[0x0007] == false)) {
 		var0000 = get_item_quality();
-		var0001 = find_nearby(0x025F, 0x001E, 0x0010);
+		var0001 = find_nearby(0x025F, 0x001E, MASK_EGG);
 		if (var0001) {
 			0xFE9C->set_item_flag(DONT_MOVE);
 			var0002 = get_distance(var0001);
@@ -80218,7 +80234,7 @@ void Func07F7 object#(0x7F7) () {
 			var0000 = script 0xFE9C {
 				face SOUTH;
 			};
-			var0001 = find_nearby(0x0320, 0x002D, 0x0000);
+			var0001 = find_nearby(0x0320, 0x002D, MASK_NONE);
 			var0002 = false;
 			for (var0005 in var0001 with var0003 to var0004) {
 				if (var0005->get_item_quality() == 0x003D) {
@@ -80395,7 +80411,7 @@ void Func07F8 object#(0x7F8) () {
 		UI_end_conversation();
 		UI_close_gumps();
 		var0001 = Func09A0(0x0001, 0x0001)->set_item_quality(0x00F8);
-		var0001 = find_nearby(0x01B0, 0x000A, 0x0000) & find_nearby(0x010E, 0x000A, 0x0000);
+		var0001 = find_nearby(0x01B0, 0x000A, MASK_NONE) & find_nearby(0x010E, 0x000A, MASK_NONE);
 		for (var0007 in var0001 with var0008 to var0009) {
 			if (var0007->get_item_quality() == 0x00B3) {
 				Func0907(var0007, 0x0000);
@@ -80533,7 +80549,7 @@ void Func07F9 object#(0x7F9) () {
 		Func092F(item, 0x0007);
 	}
 	if (event == PATH_SUCCESS) {
-		var0004 = 0xFE9C->find_nearby(0x00E4, 0x0023, 0x0000);
+		var0004 = 0xFE9C->find_nearby(0x00E4, 0x0023, MASK_NONE);
 		for (var0007 in var0004 with var0005 to var0006) {
 			if (var0007->get_npc_id() == 0x0009) {
 				break;
@@ -80589,7 +80605,7 @@ void Func07F9 object#(0x7F9) () {
 			Func0937(item, var0001, var0008, var0009, 0x0000, Func07F9, item, STARTED_TALKING);
 			return;
 		}
-		var000E = find_nearby(0x00E4, 0x001E, 0x0000);
+		var000E = find_nearby(0x00E4, 0x001E, MASK_NONE);
 		for (var0011 in var000E with var000F to var0010) {
 			if (var0011->get_npc_id() == 0x0009) {
 				break;
@@ -80699,7 +80715,7 @@ void Func07FA object#(0x7FA) () {
 	var var000A;
 
 	if (get_item_quality() == 0x00C8) {
-		var0000 = find_nearby(0x0314, 0x000F, 0x00B0);
+		var0000 = find_nearby(0x0314, 0x000F, MASK_ALL_UNSEEN);
 		var0001 = script item after 2 ticks {
 			frame 8;
 			finish;
@@ -80716,7 +80732,7 @@ void Func07FA object#(0x7FA) () {
 			}
 		}
 		if ((!var0005) && ((!var0006) && ((!var0007) && (!gflags[0x02C4])))) {
-			var0000 = find_nearby(0x0382, 0x0019, 0x0000);
+			var0000 = find_nearby(0x0382, 0x0019, MASK_NONE);
 			var0008 = var0000->get_object_position();
 			UI_sprite_effect(0x0012, var0008[0x0001], var0008[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 			UI_play_sound_effect(0x0055);
@@ -80728,7 +80744,7 @@ void Func07FA object#(0x7FA) () {
 			gflags[0x02C4] = true;
 		}
 		if (var0005 && ((!var0006) && ((!var0007) && (!gflags[0x02C5])))) {
-			var0000 = find_nearby(0x0382, 0x000F, 0x0000);
+			var0000 = find_nearby(0x0382, 0x000F, MASK_NONE);
 			var0004 = UI_create_new_object(0x032A);
 			if (var0004) {
 				var0004->set_item_frame(0x0003);
@@ -80748,7 +80764,7 @@ void Func07FA object#(0x7FA) () {
 			}
 		}
 		if ((!var0005) && (var0006 && ((!var0007) && (!gflags[0x02C6])))) {
-			var0000 = find_nearby(0x0382, 0x000F, 0x0000);
+			var0000 = find_nearby(0x0382, 0x000F, MASK_NONE);
 			var0004 = UI_create_new_object(0x02F8);
 			if (var0004) {
 				var0008 = var0000->get_object_position();
@@ -80767,7 +80783,7 @@ void Func07FA object#(0x7FA) () {
 			}
 		}
 		if (var0005 && (var0006 && ((!var0007) && (!gflags[0x02C7])))) {
-			var0000 = find_nearby(0x0382, 0x000F, 0x0000);
+			var0000 = find_nearby(0x0382, 0x000F, MASK_NONE);
 			var0004 = UI_create_new_object(0x0179);
 			if (var0004) {
 				var0008 = var0000->get_object_position();
@@ -80887,7 +80903,7 @@ void Func07FB object#(0x7FB) () {
 		UI_end_conversation();
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0005 = 0xFFD2->get_object_position() & (0x000F & 0x0006);
-		var0006 = var0005->find_nearby(0x0113, 0x0028, 0x0010);
+		var0006 = var0005->find_nearby(0x0113, 0x0028, MASK_EGG);
 		if (var0006) {
 			var0007 = var0006->get_object_position();
 			si_path_run_usecode(var0007, SI_PATH_SUCCESS, item, Func07F8, false);
@@ -80973,7 +80989,7 @@ void Func07FB object#(0x7FB) () {
 		};
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0005 = 0xFFD1->get_object_position() & (0x000E & 0x0006);
-		var0006 = var0005->find_nearby(0x0113, 0x0014, 0x0010);
+		var0006 = var0005->find_nearby(0x0113, 0x0014, MASK_EGG);
 		if (var0006) {
 			var0007 = var0006->get_object_position();
 			Func08C5();
@@ -81049,7 +81065,7 @@ void Func07FB object#(0x7FB) () {
 		UI_end_conversation();
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0005 = get_object_position() & (0x0012 & 0x0006);
-		var0006 = var0005->find_nearby(0x0113, 0x0014, 0x0010);
+		var0006 = var0005->find_nearby(0x0113, 0x0014, MASK_EGG);
 		if (var0006) {
 			var0007 = var0006->get_object_position();
 			si_path_run_usecode(var0007, SI_PATH_SUCCESS, item, Func07F8, false);
@@ -81096,7 +81112,7 @@ void Func07FB object#(0x7FB) () {
 		UI_end_conversation();
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0005 = 0xFFCC->get_object_position() & (0x0010 & 0x0006);
-		var0006 = var0005->find_nearby(0x0113, 0x0014, 0x0010);
+		var0006 = var0005->find_nearby(0x0113, 0x0014, MASK_EGG);
 		if (var0006) {
 			var0007 = var0006->get_object_position();
 			Func08C5();
@@ -81133,7 +81149,7 @@ void Func07FB object#(0x7FB) () {
 		Func097F(0xFFD0, "@How awful!@", 0x0003);
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0005 = 0xFFCB->get_object_position() & (0x0007 & 0x0006);
-		var0006 = var0005->find_nearby(0x0113, 0x0014, 0x0010);
+		var0006 = var0005->find_nearby(0x0113, 0x0014, MASK_EGG);
 		if (var0006) {
 			var0007 = var0006->get_object_position();
 			Func08C5();
@@ -81208,7 +81224,7 @@ void Func07FB object#(0x7FB) () {
 		UI_end_conversation();
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0005 = 0xFFCA->get_object_position() & (0x000D & 0x0006);
-		var0006 = var0005->find_nearby(0x0113, 0x001E, 0x0010);
+		var0006 = var0005->find_nearby(0x0113, 0x001E, MASK_EGG);
 		if (var0006) {
 			var0007 = var0006->get_object_position();
 			si_path_run_usecode(var0007, SI_PATH_SUCCESS, item, Func07F8, false);
@@ -81408,7 +81424,7 @@ void Func07FB object#(0x7FB) () {
 		Func094F(0xFFC8, var0004);
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0005 = 0xFFC3->get_object_position() & (0x000A & 0x0006);
-		var0006 = var0005->find_nearby(0x0113, 0x0028, 0x0010);
+		var0006 = var0005->find_nearby(0x0113, 0x0028, MASK_EGG);
 		if (var0006) {
 			var0007 = var0006->get_object_position();
 			si_path_run_usecode(var0007, SI_PATH_SUCCESS, item, Func07F8, false);
@@ -81567,7 +81583,7 @@ labelFunc07FC_0135:
 		gflags[0x017D] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0004 = 0xFFCE->get_object_position() & (0x0004 & 0x0006);
-		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
+		var0005 = var0004->find_nearby(0x0113, 0x0028, MASK_EGG);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
 			si_path_run_usecode(var0006, SI_PATH_SUCCESS, item, Func07F8, false);
@@ -81635,7 +81651,7 @@ labelFunc07FC_02C2:
 		gflags[0x017F] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0004 = 0xFFCF->get_object_position() & (0x0005 & 0x0006);
-		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
+		var0005 = var0004->find_nearby(0x0113, 0x0028, MASK_EGG);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
 			si_path_run_usecode(var0006, SI_PATH_SUCCESS, item, Func07F8, false);
@@ -81772,7 +81788,7 @@ labelFunc07FC_0595:
 		gflags[0x0179] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0004 = 0xFFCC->get_object_position() & (0x0010 & 0x0006);
-		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
+		var0005 = var0004->find_nearby(0x0113, 0x0028, MASK_EGG);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
 			si_path_run_usecode(var0006, SI_PATH_SUCCESS, item, Func07F8, false);
@@ -81855,7 +81871,7 @@ labelFunc07FC_074A:
 		gflags[0x0178] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0004 = 0xFFD0->get_object_position() & (0x0012 & 0x0006);
-		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
+		var0005 = var0004->find_nearby(0x0113, 0x0028, MASK_EGG);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
 			si_path_run_usecode(var0006, SI_PATH_SUCCESS, item, Func07F8, false);
@@ -81939,7 +81955,7 @@ labelFunc07FC_0904:
 		gflags[0x0177] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0004 = 0xFFD1->get_object_position() & (0x000E & 0x0006);
-		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
+		var0005 = var0004->find_nearby(0x0113, 0x0028, MASK_EGG);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
 			si_path_run_usecode(var0006, SI_PATH_SUCCESS, item, Func07F8, false);
@@ -82037,7 +82053,7 @@ labelFunc07FC_0B2E:
 		gflags[0x017E] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0004 = 0xFFC6->get_object_position() & (0x0011 & 0x0006);
-		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
+		var0005 = var0004->find_nearby(0x0113, 0x0028, MASK_EGG);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
 			si_path_run_usecode(var0006, SI_PATH_SUCCESS, item, Func07F8, false);
@@ -82112,7 +82128,7 @@ labelFunc07FC_0CC8:
 		gflags[0x0181] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0004 = 0xFFC9->get_object_position() & (0x0002 & 0x0006);
-		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
+		var0005 = var0004->find_nearby(0x0113, 0x0028, MASK_EGG);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
 			si_path_run_usecode(var0006, SI_PATH_SUCCESS, item, Func07F8, false);
@@ -82205,7 +82221,7 @@ labelFunc07FC_0EB4:
 		gflags[0x0182] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0004 = 0xFFC3->get_object_position() & (0x000A & 0x0006);
-		var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
+		var0005 = var0004->find_nearby(0x0113, 0x0028, MASK_EGG);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
 			si_path_run_usecode(var0006, SI_PATH_SUCCESS, item, Func07F8, false);
@@ -82258,7 +82274,7 @@ void Func07FD object#(0x7FD) () {
 		if (gflags[0x0007] && (!gflags[0x0009])) {
 			gflags[0x0007] = false;
 			set_camera();
-			var0001 = find_nearby(0x036F, 0x001E, 0x0000);
+			var0001 = find_nearby(0x036F, 0x001E, MASK_NONE);
 			for (var0004 in var0001 with var0002 to var0003) {
 				var0005 = var0004->get_object_position();
 				if ((var0005[0x0001] == 0x03F4) && ((var0005[0x0002] == 0x0A7F) && (var0005[0x0003] == 0x0006))) {
@@ -82292,7 +82308,7 @@ void Func07FD object#(0x7FD) () {
 			if (!var0008) {
 				Func092F(item, 0x0013);
 			}
-			var0009 = 0xFE9C->find_nearby(0x00E4, 0x0023, 0x0000);
+			var0009 = 0xFE9C->find_nearby(0x00E4, 0x0023, MASK_NONE);
 			for (var000C in var0009 with var000A to var000B) {
 				if (var000C->get_npc_id() == 0x0009) {
 					break;
@@ -82353,13 +82369,13 @@ void Func07FF object#(0x7FF) () {
 			Func0903();
 		}
 	}
-	var0001 = find_nearby(0x0320, 0x003C, 0x0000);
+	var0001 = find_nearby(0x0320, 0x003C, MASK_NONE);
 	for (var0004 in var0001 with var0002 to var0003) {
 		if (var0004->get_item_quality() == 0x00EB) {
 			var0004->set_item_shape(0x020A);
 		}
 	}
-	var0005 = 0xFE9C->find_nearby(0xFFFF, 0x002D, 0x0004);
+	var0005 = 0xFE9C->find_nearby(ANY_SHAPE, 0x002D, MASK_NPC);
 	for (var0000 in var0005 with var0006 to var0007) {
 		if (var0000->get_npc_id() == 0x000D) {
 			var0000->add_to_party();
@@ -82382,7 +82398,7 @@ void Func07FF object#(0x7FF) () {
 		0xFE9C->get_npc_object()->set_camera();
 		set_schedule_type(FOLLOW_AVATAR);
 	}
-	var0005 = find_nearby(0x00E4, 0x0023, 0x0000);
+	var0005 = find_nearby(0x00E4, 0x0023, MASK_NONE);
 	do {
 		for (var0000 in var0005 with var000A to var000B) {
 			if (var0000->get_npc_id() == 0x0009) {
@@ -82395,7 +82411,7 @@ void Func07FF object#(0x7FF) () {
 		var0000->si_path_run_usecode([0x03FB, 0x0A77, 0x0006], SI_PATH_SUCCESS, var0000, Func00E4, true);
 		break;
 	} while (false);
-	var0005 = find_nearby(0x020A, 0x002D, 0x0000);
+	var0005 = find_nearby(0x020A, 0x002D, MASK_NONE);
 	do {
 		for (var0000 in var0005 with var000C to var000D) {
 			if (var0000->get_item_quality() == 0x00EB) {
@@ -84921,7 +84937,7 @@ void Func080E 0x80E () {
 	var var0000;
 	var var0001;
 
-	var0000 = 0xFFC0->find_nearby(0x013E, 0x001E, 0x0000);
+	var0000 = 0xFFC0->find_nearby(0x013E, 0x001E, MASK_NONE);
 	UI_init_conversation();
 	0xFFC0->show_npc_face0(0x0000);
 	say("\"Leave me alone, mage. I am but a little girl.\"");
@@ -85616,7 +85632,7 @@ void Func0814 0x814 () {
 	var var0002;
 
 	0xFF4E->item_say("@Thy loss, Avatar.@");
-	var0000 = 0xFF4E->find_nearby(0x0360, 0x0019, 0x0000);
+	var0000 = 0xFF4E->find_nearby(0x0360, 0x0019, MASK_NONE);
 	if (var0000) {
 		var0001 = 0xFF4E->get_distance(var0000);
 		var0002 = var0000->get_object_position();
@@ -85650,10 +85666,10 @@ void Func0815 0x815 (var var0000) {
 	var var0010;
 
 	if (var0000 == 0x0001) {
-		var0001 = find_nearby(0x0331, 0x0014, 0x0000);
+		var0001 = find_nearby(0x0331, 0x0014, MASK_NONE);
 		var0001->halt_scheduled();
 		var0001->clear_item_say();
-		var0002 = find_nearby(0x037F, 0x001E, 0x0000);
+		var0002 = find_nearby(0x037F, 0x001E, MASK_NONE);
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0006 = script var0005 {
 				nohalt;
@@ -85687,7 +85703,7 @@ void Func0815 0x815 (var var0000) {
 		var0006 = script 0xFE9C {
 			call Func07DA;
 		};
-		var000D = find_nearby(0x00C8, 0x00A0, 0x0010);
+		var000D = find_nearby(0x00C8, 0x00A0, MASK_EGG);
 		for (var0010 in var000D with var000E to var000F) {
 			var0006 = script var0010 {
 				setegg external_criteria, 5;
@@ -88487,7 +88503,7 @@ void Func0826 0x826 (var var0000) {
 	var var0005;
 	var var0006;
 
-	var0001 = 0xFFF1->find_nearby(0x02E3, 0x0032, 0x0000);
+	var0001 = 0xFFF1->find_nearby(0x02E3, 0x0032, MASK_NONE);
 	var0002 = var0001->get_object_position();
 	if (var0000 == 0x0009) {
 		if (var0001) {
@@ -89777,7 +89793,7 @@ void Func082F 0x82F () {
 
 	var0000 = [0x03B4, 0x03B8, 0x03B7, 0x0284, 0x0285, 0x0286, 0x02F8];
 	for (var0003 in var0000 with var0001 to var0002) {
-		var0004 = 0xFE9C->find_nearby(var0003, 0x0014, 0x0000);
+		var0004 = 0xFE9C->find_nearby(var0003, 0x0014, MASK_NONE);
 		if (var0004) {
 			var0005 = var0004->set_last_created();
 			var0006 = 0xFE9C->get_npc_object();
@@ -89925,7 +89941,7 @@ void Func0833 0x833 (var var0000) {
 	var var0009;
 	var var000A;
 
-	var0001 = 0xFFB0->find_nearby(0x03B5, 0x0014, 0x0000);
+	var0001 = 0xFFB0->find_nearby(0x03B5, 0x0014, MASK_NONE);
 	if (var0000 == 0x0001) {
 		if (var0001) {
 			var0002 = var0001->get_object_position();
@@ -89962,7 +89978,7 @@ void Func0833 0x833 (var var0000) {
 	if (var0000 == 0x0002) {
 		0xFFB0->run_schedule();
 		0xFE9C->clear_item_flag(DONT_MOVE);
-		var0009 = 0xFFB0->find_nearby(0x010F, 0x0014, 0x0000);
+		var0009 = 0xFFB0->find_nearby(0x010F, 0x0014, MASK_NONE);
 		if (var0009) {
 			if (var0009->npc_nearby()) {
 				var0008 = script var0009 after 20 ticks {
@@ -94861,7 +94877,7 @@ void Func0855 0x855 (var var0000) {
 	var var000B;
 	var var000C;
 
-	var0001 = find_nearby(0x03B5, 0x0014, 0x0000);
+	var0001 = find_nearby(0x03B5, 0x0014, MASK_NONE);
 	if (var0000 == 0x0009) {
 		Func097F(item, "@Stand back...@", 0x0000);
 		if (var0001) {
@@ -94897,7 +94913,7 @@ void Func0855 0x855 (var var0000) {
 	}
 	if (var0000 == 0x0002) {
 		Func097F(item, "@Oooh, my back...@", 0x000C);
-		var0009 = find_nearby(0x010F, 0x0014, 0x0000);
+		var0009 = find_nearby(0x010F, 0x0014, MASK_NONE);
 		if (var0009) {
 			if (var0009->npc_nearby()) {
 				var0008 = script var0009 after 20 ticks {
@@ -94914,7 +94930,7 @@ void Func0855 0x855 (var var0000) {
 			}
 		}
 	}
-	var0009 = find_nearby(0x010F, 0x0014, 0x0000);
+	var0009 = find_nearby(0x010F, 0x0014, MASK_NONE);
 	for (var0008 in var0009 with var000B to var000C) {
 		var000A = var0009->get_object_position();
 		if ((var000A[0x0001] == 0x0469) && (var000A[0x0002] == 0x0998)) {
@@ -99440,7 +99456,7 @@ void Func087A 0x87A () {
 	var var0003;
 	var var0004;
 
-	var0000 = 0xFF56->find_nearby(0x0203, 0x000A, 0x0000);
+	var0000 = 0xFF56->find_nearby(0x0203, 0x000A, MASK_NONE);
 	if (var0000) {
 		var0001 = var0000->get_item_frame();
 		if (var0001 == 0x0005) {
@@ -99971,7 +99987,7 @@ void Func087C 0x87C () {
 	var var000F;
 	var var0010;
 
-	var0000 = find_nearby(0x00A0, 0x000F, 0x0000);
+	var0000 = find_nearby(0x00A0, 0x000F, MASK_NONE);
 	var0001 = false;
 	for (var0004 in var0000 with var0002 to var0003) {
 		var0005 = var0004->get_item_frame();
@@ -100015,7 +100031,7 @@ void Func087C 0x87C () {
 		abort;
 	}
 	UI_set_timer(0x0007);
-	var0009 = find_nearby(0x0113, 0x0014, 0x0010);
+	var0009 = find_nearby(0x0113, 0x0014, MASK_EGG);
 	for (var000C in var0009 with var000A to var000B) {
 		if (var000C->get_item_frame() == 0x0006) {
 			UI_close_gumps();
@@ -100061,7 +100077,7 @@ void Func087D 0x87D () {
 	} else {
 		var0000 = [0x03F9, 0x0617, 0x0002];
 	}
-	var0001 = 0xFE9C->find_nearby(0x0320, 0x0041, 0x0000);
+	var0001 = 0xFE9C->find_nearby(0x0320, 0x0041, MASK_NONE);
 	for (var0004 in var0001 with var0002 to var0003) {
 		if (var0004->get_item_quality() == 0x00EC) {
 			var0005 = true;
@@ -100145,7 +100161,7 @@ void Func087F 0x87F (var var0000) {
 		var0003 = var0000->get_item_shape();
 		if ((var0002 > 0x0003) && (!Func0880(var0000))) {
 			var0004 = var0000->get_object_position();
-			var0005 = var0000->find_nearby(var0003, 0x0002, 0x0000);
+			var0005 = var0000->find_nearby(var0003, 0x0002, MASK_NONE);
 			for (var0008 in var0005 with var0006 to var0007) {
 				if (var0008->get_item_frame() <= 0x0002) {
 					var0009 = var0008->get_object_position();
@@ -100187,8 +100203,8 @@ void Func0881 0x881 () {
 	var var0004;
 	var var0005;
 
-	var0000 = 0xFE9C->find_nearby(0x010E, 0x000C, 0x00B0);
-	var0000 &= 0xFE9C->find_nearby(0x0178, 0x000C, 0x00B0);
+	var0000 = 0xFE9C->find_nearby(0x010E, 0x000C, MASK_ALL_UNSEEN);
+	var0000 &= 0xFE9C->find_nearby(0x0178, 0x000C, MASK_ALL_UNSEEN);
 	for (var0003 in var0000 with var0001 to var0002) {
 		var0004 = var0003->get_item_quality();
 		if ((var0004 == 0x0001) || ((var0004 == 0x0002) || ((var0004 == 0x0003) || ((var0004 == 0x0004) || ((var0004 == 0x0005) || ((var0004 == 0x0006) || ((var0004 == 0x0007) || ((var0004 == 0x000B) || ((var0004 == 0x004A) || (var0004 == 0x00B8)))))))))) {
@@ -100229,13 +100245,13 @@ void Func0883 0x883 () {
 	var var0006;
 	var var0007;
 
-	var0000 = find_nearby(0x0113, 0x0028, 0x0010);
+	var0000 = find_nearby(0x0113, 0x0028, MASK_EGG);
 	for (var0003 in var0000 with var0001 to var0002) {
 		if (var0003->get_item_frame() == 0x0007) {
 			var0003->remove_item();
 		}
 	}
-	var0004 = find_nearby(0x02D8, 0x0032, 0x0000);
+	var0004 = find_nearby(0x02D8, 0x0032, MASK_NONE);
 	for (var0003 in var0004 with var0005 to var0006) {
 		var0007 = var0003->get_object_position();
 		UI_play_sound_effect(0x0021);
@@ -100262,7 +100278,7 @@ void Func0884 0x884 (var var0000) {
 	if (var0000 == 0x0003) {
 		var0001 = [0x0B79, 0x0ADE, 0x0000];
 	}
-	var0002 = find_nearby(0x010E, 0x000A, 0x0000) & find_nearby(0x0178, 0x000A, 0x0000);
+	var0002 = find_nearby(0x010E, 0x000A, MASK_NONE) & find_nearby(0x0178, 0x000A, MASK_NONE);
 	for (var0005 in var0002 with var0003 to var0004) {
 		var0001 = var0005->get_object_position();
 		var0006 = var0005->get_item_shape();
@@ -100301,7 +100317,7 @@ void Func0885 0x885 (var var0000) {
 	var var0005;
 	var var0006;
 
-	var0001 = find_nearby(0x0376, 0x0005, 0x0000);
+	var0001 = find_nearby(0x0376, 0x0005, MASK_NONE);
 	var0002 = var0001->get_item_frame();
 	if (var0000 == 0x0004) {
 		if (var0002 == 0x0001) {
@@ -100334,7 +100350,7 @@ void Func0885 0x885 (var var0000) {
 		}
 	}
 	if (gflags[0x02F1] && (gflags[0x02F2] && gflags[0x02F3])) {
-		var0003 = find_nearby(0x0386, 0x0078, 0x0000);
+		var0003 = find_nearby(0x0386, 0x0078, MASK_NONE);
 		for (var0006 in var0003 with var0004 to var0005) {
 			var0006->remove_item();
 		}
@@ -100404,7 +100420,7 @@ void Func0888 0x888 () {
 	var var0005;
 
 	if (gflags[0x02F5] && (gflags[0x02F6] && (gflags[0x02F7] && gflags[0x02F8]))) {
-		var0000 = find_nearby(0x010E, 0x0014, 0x0000);
+		var0000 = find_nearby(0x010E, 0x0014, MASK_NONE);
 		for (var0003 in var0000 with var0001 to var0002) {
 			if (var0003->get_item_quality() == 0x00F1) {
 				var0004 = var0003->get_object_position();
@@ -100524,7 +100540,7 @@ void Func0889 0x889 (var var0000) {
 	}
 	if (var0009 == 0x01D6) {
 		if (var0001->get_item_frame() != 0x0000) {
-			var000D = var0001->find_nearby(0x01D6, 0x0002, 0x0000);
+			var000D = var0001->find_nearby(0x01D6, 0x0002, MASK_NONE);
 			for (var0010 in var000D with var000E to var000F) {
 				if (var0010->get_item_frame() == 0x0000) {
 					var0001 = var0010;
@@ -100709,7 +100725,7 @@ void Func088C 0x88C () {
 	var var0001;
 	var var0002;
 
-	var0000 = 0xFE9C->find_nearby(0x032A, 0x0001, 0x0000);
+	var0000 = 0xFE9C->find_nearby(0x032A, 0x0001, MASK_NONE);
 	if (var0000) {
 		var0001 = var0000->get_object_position();
 		var0002 = var0000->set_last_created();
@@ -100749,7 +100765,7 @@ void Func088D 0x88D (var var0000, var var0001) {
 	var var0013;
 
 	var0002 = [];
-	var0003 = 0xFE9C->find_nearby(var0001, 0x000F, 0x0000);
+	var0003 = 0xFE9C->find_nearby(var0001, 0x000F, MASK_NONE);
 	for (var0006 in var0003 with var0004 to var0005) {
 		var0007 = 0x0000;
 		var0008 = 0x270F;
@@ -100810,7 +100826,7 @@ var Func088F 0x88F (var var0000) {
 	var var0005;
 	var var0006;
 
-	var0001 = var0000->find_nearby(SHAPE_ANY, 0x000A, 0x0000);
+	var0001 = var0000->find_nearby(SHAPE_ANY, 0x000A, MASK_NONE);
 	var0002 = [0x0316];
 	for (var0005 in var0001 with var0003 to var0004) {
 		var0006 = var0005->get_item_shape();
@@ -101287,7 +101303,7 @@ var Func089D 0x89D (var var0000) {
 			var0005 = var0004[0x0001];
 			var0006 = var0004[0x0002];
 			var0007 = var0004[0x0003];
-			var0008 = var0003->find_nearby(SHAPE_ANY, 0x000A, 0x0000);
+			var0008 = var0003->find_nearby(SHAPE_ANY, 0x000A, MASK_NONE);
 			for (var000B in var0008 with var0009 to var000A) {
 				var0004 = var000B->get_object_position();
 				if (var0004[0x0003] > var0007) {
@@ -101438,8 +101454,8 @@ void Func08A1 0x8A1 () {
 	var var0009;
 
 	var0000 = get_object_position();
-	var0001 = find_nearby(0x02D8, 0x000D, 0x00B0);
-	var0002 = find_nearby(SHAPE_ANY, 0x0008, 0x0004);
+	var0001 = find_nearby(0x02D8, 0x000D, MASK_ALL_UNSEEN);
+	var0002 = find_nearby(SHAPE_ANY, 0x0008, MASK_NPC);
 	UI_sprite_effect(0x0004, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 	var0003 = UI_create_new_object(0x00D1) & (UI_create_new_object(0x00C9) & (UI_create_new_object(0x00C9) & (UI_create_new_object(0x00C9) & (UI_create_new_object(0x00C9) & UI_create_new_object(0x00C9)))));
 	var0003[0x0001]->set_item_frame(0x000D);
@@ -101511,7 +101527,7 @@ void Func08A3 0x8A3 () {
 	var var0003;
 
 	if (gflags[0x02C4] && (gflags[0x02C5] && (gflags[0x02C6] && (gflags[0x02C7] && (gflags[0x02C8] && (gflags[0x02CA] && (gflags[0x02CB] && (!gflags[0x02CC])))))))) {
-		var0000 = find_nearby(0x0382, 0x0019, 0x0000);
+		var0000 = find_nearby(0x0382, 0x0019, MASK_NONE);
 		var0001 = var0000->get_object_position();
 		var0001[0x0003] = 0x0001;
 		var0002 = UI_create_new_object(0x00D1);
@@ -101524,7 +101540,7 @@ void Func08A3 0x8A3 () {
 			UI_play_sound_effect(0x006C);
 		}
 	} else {
-		var0000 = find_nearby(0x0382, 0x0019, 0x0000);
+		var0000 = find_nearby(0x0382, 0x0019, MASK_NONE);
 		var0001 = var0000->get_object_position();
 		UI_sprite_effect(0x0009, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_play_sound_effect(0x002B);
@@ -101589,9 +101605,9 @@ void Func08A6 0x8A6 () {
 	var var0007;
 	var var0008;
 
-	var0000 = 0xFE9C->find_nearby(0x01E9, 0x0002, 0x00B0);
-	var0001 = 0xFE9C->find_nearby(0x010E, 0x000A, 0x00B0);
-	var0001 &= 0xFE9C->find_nearby(0x0178, 0x000A, 0x00B0);
+	var0000 = 0xFE9C->find_nearby(0x01E9, 0x0002, MASK_ALL_UNSEEN);
+	var0001 = 0xFE9C->find_nearby(0x010E, 0x000A, MASK_ALL_UNSEEN);
+	var0001 &= 0xFE9C->find_nearby(0x0178, 0x000A, MASK_ALL_UNSEEN);
 	if (var0000) {
 		for (var0004 in var0001 with var0002 to var0003) {
 			var0005 = var0004->get_item_quality();
@@ -101865,7 +101881,7 @@ void Func08AE 0x8AE () {
 	var0001 = 0xFFFF;
 	var0002 = 0xFFFD;
 	var0003 = 0xFF57->get_object_position() & (QUALITY_ANY & 0x0006);
-	var0004 = var0003->find_nearby(0x0113, 0x0028, 0x0010);
+	var0004 = var0003->find_nearby(0x0113, 0x0028, MASK_EGG);
 	for (var0007 in var0004 with var0005 to var0006) {
 		if (var0007->get_item_quality() == 0x0064) {
 			var0008 = var0007->get_object_position();
@@ -102113,7 +102129,7 @@ void Func08B3 0x8B3 (var var0000) {
 
 	abort;
 	// Dead code
-	var0001 = 0xFFB5->find_nearby(0x0320, 0x0064, 0x0000);
+	var0001 = 0xFFB5->find_nearby(0x0320, 0x0064, MASK_NONE);
 	var0002 = 0x0000;
 	for (var0005 in var0001 with var0003 to var0004) {
 		if (var0005->get_item_quality() == 0x0000) {
@@ -102521,7 +102537,7 @@ void Func08BC 0x8BC () {
 
 	if (event == EGG) {
 		if (get_item_quality() == 0x0003) {
-			var0000 = 0xFE9C->find_nearby(0x00F3, 0x0028, 0x0000);
+			var0000 = 0xFE9C->find_nearby(0x00F3, 0x0028, MASK_NONE);
 			if (var0000) {
 				if (!gflags[0x0248]) {
 					var0001 = script var0000 {
@@ -102533,16 +102549,16 @@ void Func08BC 0x8BC () {
 		}
 		if (get_item_quality() == 0x0005) {
 			var0002 = get_object_position() & (0x0049 & 0x0016);
-			var0003 = var0002->find_nearby(0x0178, 0x0005, 0x0000);
+			var0003 = var0002->find_nearby(0x0178, 0x0005, MASK_NONE);
 			var0002[0x0005] = 0x000E;
-			var0004 = var0002->find_nearby(0x01B1, 0x0005, 0x0000);
+			var0004 = var0002->find_nearby(0x01B1, 0x0005, MASK_NONE);
 			if (var0003 && var0004) {
 				var0003->set_item_frame(0x0014);
 				var0004->set_item_frame(0x000C);
 				event = DOUBLECLICK;
 				var0003->Func0178();
 				var0002 = 0xFE9C->get_object_position() & (0x00DE & 0x0000);
-				var0000 = var0002->find_nearby(0x00F3, 0x0028, 0x0000);
+				var0000 = var0002->find_nearby(0x00F3, 0x0028, MASK_NONE);
 				if (var0000) {
 					var0001 = script var0000 {
 						wait 5;
@@ -102652,7 +102668,7 @@ void Func08BF 0x8BF () {
 	if (event == EGG) {
 		if ((get_item_quality() == 0x0007) && (gflags[0x023E] && (gflags[0x0241] && (gflags[0x0240] && gflags[0x023F])))) {
 			gflags[0x0242] = false;
-			var0000 = find_nearby(0x0392, 0x0001, 0x0000);
+			var0000 = find_nearby(0x0392, 0x0001, MASK_NONE);
 			for (var0003 in var0000 with var0001 to var0002) {
 				var0004 = var0003->get_object_position();
 				var0005 = get_object_position();
@@ -102664,7 +102680,7 @@ void Func08BF 0x8BF () {
 					UI_play_sound_effect(0x0008);
 					gflags[0x0242] = true;
 					var0003->remove_item();
-					var0006 = find_nearby(0x037F, 0x0032, 0x0000) & find_nearby(0x0113, 0x001E, 0x0010);
+					var0006 = find_nearby(0x037F, 0x0032, MASK_NONE) & find_nearby(0x0113, 0x001E, MASK_EGG);
 					for (var0009 in var0006 with var0007 to var0008) {
 						var000A = var0009->get_object_position();
 						UI_sprite_effect(0x0004, var000A[0x0001], var000A[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -102684,7 +102700,7 @@ void Func08BF 0x8BF () {
 		}
 		if (get_item_quality() == 0x0008) {
 			gflags[0x023E] = false;
-			var000D = find_nearby(0x0106, 0x0002, 0x0000);
+			var000D = find_nearby(0x0106, 0x0002, MASK_NONE);
 			for (var0010 in var000D with var000E to var000F) {
 				var0011 = var0010->get_object_position();
 				var0005 = get_object_position();
@@ -102706,7 +102722,7 @@ void Func08BF 0x8BF () {
 		}
 		if ((get_item_quality() == 0x0009) && gflags[0x023E]) {
 			gflags[0x0241] = false;
-			var0012 = find_nearby(0x01BD, 0x0001, 0x0000);
+			var0012 = find_nearby(0x01BD, 0x0001, MASK_NONE);
 			for (var0015 in var0012 with var0013 to var0014) {
 				if (var0015->get_item_frame() == 0x0005) {
 					gflags[0x0241] = true;
@@ -102724,7 +102740,7 @@ void Func08BF 0x8BF () {
 		}
 		if ((get_item_quality() == 0x000A) && gflags[0x023E]) {
 			gflags[0x0240] = false;
-			var0012 = find_nearby(0x01BD, 0x0001, 0x0000);
+			var0012 = find_nearby(0x01BD, 0x0001, MASK_NONE);
 			for (var0015 in var0012 with var0017 to var0018) {
 				if (var0015->get_item_frame() == 0x0006) {
 					gflags[0x0240] = true;
@@ -102742,7 +102758,7 @@ void Func08BF 0x8BF () {
 		}
 		if ((get_item_quality() == 0x000B) && gflags[0x023E]) {
 			gflags[0x023F] = false;
-			var0012 = find_nearby(0x01BD, 0x0001, 0x0000);
+			var0012 = find_nearby(0x01BD, 0x0001, MASK_NONE);
 			for (var0015 in var0012 with var0019 to var001A) {
 				if (var0015->get_item_frame() == 0x0007) {
 					gflags[0x023F] = true;
@@ -102825,9 +102841,9 @@ void Func08C0 0x8C0 (var var0000) {
 	var var0007;
 	var var0008;
 
-	var0001 = 0xFE9C->find_nearby(0x0267, 0x0028, 0x0000);
-	var0001 &= 0xFE9C->find_nearby(0x017C, 0x0028, 0x0000);
-	var0001 &= 0xFE9C->find_nearby(0x01D9, 0x0028, 0x0000);
+	var0001 = 0xFE9C->find_nearby(0x0267, 0x0028, MASK_NONE);
+	var0001 &= 0xFE9C->find_nearby(0x017C, 0x0028, MASK_NONE);
+	var0001 &= 0xFE9C->find_nearby(0x01D9, 0x0028, MASK_NONE);
 	if (var0000) {
 		var0002 = Func09A0(0x0007, 0x0001);
 		if (var0002) {
@@ -102877,7 +102893,7 @@ void Func08C2 0x8C2 () {
 	var var0009;
 
 	var0000 = 0xFE9C->get_object_position() & (QUALITY_ANY & 0x0006);
-	var0001 = var0000->find_nearby(0x0113, 0x0050, 0x0010);
+	var0001 = var0000->find_nearby(0x0113, 0x0050, MASK_EGG);
 	for (var0004 in var0001 with var0002 to var0003) {
 		var0005 = var0004->get_object_position();
 		var0006 = var0004->get_item_quality();
@@ -102984,7 +103000,7 @@ void Func08C3 0x8C3 () {
 	var var0002;
 
 	if ((gflags[0x0170] || (gflags[0x0172] && (!gflags[0x0171]))) && (!(gflags[0x0170] && gflags[0x0172]))) {
-		var0000 = find_nearby(0x017D, 0x0001, 0x0008);
+		var0000 = find_nearby(0x017D, 0x0001, MASK_NPC2);
 		if (!var0000) {
 			var0001 = get_object_position();
 			var0000 = UI_create_new_object2(0x017D, var0001);
@@ -103024,7 +103040,7 @@ void Func08C4 0x8C4 () {
 		var0003 = UI_part_of_day();
 		if ((var0003 == 0x0000) || (var0003 == 0x0001)) {
 			var0004 = get_object_position() & (0x0032 & 0x0004);
-			var0005 = var0004->find_nearby(0x036C, 0x0014, 0x0000);
+			var0005 = var0004->find_nearby(0x036C, 0x0014, MASK_NONE);
 			if (var0005) {
 				var0002 = var0005->get_object_position();
 				var0005->remove_item();
@@ -103303,7 +103319,7 @@ void Func08CA 0x8CA () {
 
 	if (event == EGG) {
 		if (get_item_quality() == 0x0001) {
-			var0000 = find_nearby(0x0103, 0x0003, 0x0008);
+			var0000 = find_nearby(0x0103, 0x0003, MASK_NPC2);
 			if (var0000) {
 				var0000->set_schedule_type(WAIT);
 				var0000->set_alignment(0x0000);
@@ -103316,11 +103332,11 @@ void Func08CA 0x8CA () {
 			}
 		}
 		if (get_item_quality() == 0x000D) {
-			var0000 = find_nearby(0x0103, 0x0005, 0x0008);
+			var0000 = find_nearby(0x0103, 0x0005, MASK_NPC2);
 			if (var0000) {
 				remove_item();
 				var0002 = var0000->get_object_position() & [QUALITY_ANY, 0x0015];
-				var0003 = var0002->find_nearby(0x0190, 0x0005, 0x0000);
+				var0003 = var0002->find_nearby(0x0190, 0x0005, MASK_NONE);
 				if (var0003) {
 					var0000->clear_item_say();
 					var0000->item_say("@She loved flowers so...@");
@@ -103331,11 +103347,11 @@ void Func08CA 0x8CA () {
 			}
 		}
 		if (get_item_quality() == 0x0011) {
-			var0000 = find_nearby(0x0103, 0x0014, 0x0008);
+			var0000 = find_nearby(0x0103, 0x0014, MASK_NPC2);
 			if (var0000) {
-				var0003 = find_nearby(0x0190, 0x000A, 0x0000);
+				var0003 = find_nearby(0x0190, 0x000A, MASK_NONE);
 				if (var0003) {
-					var0004 = find_nearby(0x03E7, 0x000A, 0x0000);
+					var0004 = find_nearby(0x03E7, 0x000A, MASK_NONE);
 					if (var0004) {
 						var0000->clear_item_say();
 						var0000->halt_scheduled();
@@ -103387,7 +103403,7 @@ void Func08CA 0x8CA () {
 			};
 		}
 		if (get_item_shape() == 0x0190) {
-			var0000 = find_nearby(0x0103, 0x0014, 0x0008);
+			var0000 = find_nearby(0x0103, 0x0014, MASK_NPC2);
 			if (var0000) {
 				var0005 = UI_direction_from(0xFE9C, var0000);
 				var0001 = script 0xFE9C {
@@ -103401,7 +103417,7 @@ void Func08CA 0x8CA () {
 		}
 		if (get_item_shape() == 0x0313) {
 			if (get_item_quality() == 0x00A3) {
-				var0000 = find_nearby(0x0103, 0x0005, 0x0008);
+				var0000 = find_nearby(0x0103, 0x0005, MASK_NPC2);
 				if (var0000) {
 					UI_play_sound_effect(0x0046);
 					var0001 = set_item_quality(0x009D);
@@ -103420,7 +103436,7 @@ void Func08CA 0x8CA () {
 					};
 				}
 			} else {
-				var0000 = find_nearby(0x0103, 0x000F, 0x0008);
+				var0000 = find_nearby(0x0103, 0x000F, MASK_NPC2);
 				if (var0000) {
 					var0008 = var0000->get_object_position();
 					var0009 = var0000->get_item_frame_rot();
@@ -103453,11 +103469,11 @@ void Func08CA 0x8CA () {
 	}
 	if (event == PATH_SUCCESS) {
 		if (get_item_shape() == 0x0103) {
-			var0000 = find_nearby(0x0103, 0x001E, 0x0008);
+			var0000 = find_nearby(0x0103, 0x001E, MASK_NPC2);
 			var0002 = get_object_position() & (0x00A3 & FRAME_ANY);
-			var000B = var0002->find_nearby(0x0313, 0x001E, 0x0000);
+			var000B = var0002->find_nearby(0x0313, 0x001E, MASK_NONE);
 			var0002 = get_object_position() & (0x0098 & FRAME_ANY);
-			var000C = var0002->find_nearby(0x0313, 0x001E, 0x0000);
+			var000C = var0002->find_nearby(0x0313, 0x001E, MASK_NONE);
 			if (var0000 && (var000B && var000C)) {
 				var0000->clear_item_say();
 				var0005 = UI_direction_from(var0000, var000B);
@@ -103517,7 +103533,7 @@ void Func08CC 0x8CC () {
 
 	if (event == EGG) {
 		if (get_item_quality() == 0x0003) {
-			var0000 = find_nearby(0x037F, 0x000A, 0x0000);
+			var0000 = find_nearby(0x037F, 0x000A, MASK_NONE);
 			for (var0003 in var0000 with var0001 to var0002) {
 				var0004 = script var0003 after UI_die_roll(0x0005, 0x000A) ticks {
 					nohalt;
@@ -103528,7 +103544,7 @@ void Func08CC 0x8CC () {
 			}
 		}
 		if (get_item_quality() == 0x00CB) {
-			var0000 = find_nearby(0x037F, 0x000A, 0x0000);
+			var0000 = find_nearby(0x037F, 0x000A, MASK_NONE);
 			if (!var0000) {
 				var0005 = find_nearest(0x00E0, 0x000A);
 				if (var0005) {
@@ -103591,9 +103607,9 @@ void Func08CD 0x8CD () {
 		0xFF5D->move_object(var0000);
 		0xFF5D->set_schedule_type(WAIT);
 		set_schedule_type(WAIT);
-		var0001 = find_nearby(0x017D, 0x0000, 0x0008);
+		var0001 = find_nearby(0x017D, 0x0000, MASK_NPC2);
 		var0002 = var0001->get_object_position() & (QUALITY_ANY & 0x0000);
-		var0003 = var0002->find_nearby(0x0113, 0x0000, 0x0000);
+		var0003 = var0002->find_nearby(0x0113, 0x0000, MASK_NONE);
 		if (var0001) {
 			var0004 = script var0001 {
 				face west;
@@ -103619,7 +103635,7 @@ void Func08CD 0x8CD () {
 	if (event == SCRIPTED) {
 		if ((get_item_shape() == 0x02D1) || (get_item_shape() == 0x03DD)) {
 			var0002 = 0xFE9C->get_object_position() & (0x0004 & 0x0007);
-			var0005 = var0002->find_nearby(0x0113, 0x0028, 0x0010);
+			var0005 = var0002->find_nearby(0x0113, 0x0028, MASK_EGG);
 			if (var0005) {
 				0xFE9C->set_item_flag(DONT_MOVE);
 				var0006 = 0x0006;
@@ -103630,7 +103646,7 @@ void Func08CD 0x8CD () {
 			}
 		}
 		if (get_item_shape() == 0x0331) {
-			var0001 = find_nearby(0x017D, 0x000A, 0x0008);
+			var0001 = find_nearby(0x017D, 0x000A, MASK_NPC2);
 			var0004 = script var0001 {
 				wait 1;
 				wait 4;
@@ -103702,7 +103718,7 @@ void Func08CE 0x8CE () {
 		continue;
 		actor frame sleeping;
 	};
-	var0002 = find_nearby(0x0375, 0x0019, 0x0000);
+	var0002 = find_nearby(0x0375, 0x0019, MASK_NONE);
 	if (var0002) {
 		var0002->set_item_flag(SI_TOURNAMENT);
 	}
@@ -103746,7 +103762,7 @@ void Func08D0 0x8D0 () {
 		abort;
 	}
 	var0001 = get_object_position() & [QUALITY_ANY, 0x0006];
-	var0002 = var0001->find_nearby(0x0113, 0x001E, 0x0010);
+	var0002 = var0001->find_nearby(0x0113, 0x001E, MASK_EGG);
 	for (var0005 in var0002 with var0003 to var0004) {
 		var0000 = var0005->get_object_position();
 		var0006 = false;
@@ -103816,7 +103832,7 @@ void Func08D1 0x8D1 () {
 	var var0006;
 	var var0007;
 
-	var0000 = find_nearby(0x020B, 0x000A, 0x0008);
+	var0000 = find_nearby(0x020B, 0x000A, MASK_NPC2);
 	var0001 = 0x0000;
 	for (var0004 in var0000 with var0002 to var0003) {
 		var0001 += 0x0009;
@@ -103845,8 +103861,8 @@ void Func08D2 0x8D2 () {
 	var var0007;
 
 	var0000 = 0xFF27->get_object_position() & (QUALITY_ANY & 0x0007);
-	var0001 = var0000->find_nearby(0x0113, 0x0005, 0x0010);
-	var0001 &= 0xFF27->find_nearby(0x01B8, 0x0005, 0x0080);
+	var0001 = var0000->find_nearby(0x0113, 0x0005, MASK_EGG);
+	var0001 &= 0xFF27->find_nearby(0x01B8, 0x0005, MASK_TRANSLUCENT);
 	for (var0004 in var0001 with var0002 to var0003) {
 		var0004->remove_item();
 	}
@@ -103905,7 +103921,7 @@ void Func08D4 0x8D4 () {
 	var var0007;
 
 	if (event == EGG) {
-		var0000 = find_nearby(0x0375, 0x000C, 0x0000);
+		var0000 = find_nearby(0x0375, 0x000C, MASK_NONE);
 		if (var0000) {
 			0xFF27->set_schedule_type(WAIT);
 			var0001 = 0xFFFF;
@@ -103918,7 +103934,7 @@ void Func08D4 0x8D4 () {
 	}
 	if (event == PATH_SUCCESS) {
 		set_schedule_type(STANDTHERE);
-		var0000 = find_nearby(0x0375, 0x000A, 0x0000);
+		var0000 = find_nearby(0x0375, 0x000A, MASK_NONE);
 		if (var0000) {
 			0xFE9C->set_item_flag(DONT_MOVE);
 			var0004 = direction_from(var0000);
@@ -103962,7 +103978,7 @@ void Func08D4 0x8D4 () {
 			}
 		}
 		if (get_item_shape() == 0x0179) {
-			var0000 = find_nearby(0x0375, 0x000A, 0x0000);
+			var0000 = find_nearby(0x0375, 0x000A, MASK_NONE);
 			if (var0000) {
 				0xFF27->kill_npc();
 				var0000->clear_item_flag(DEAD);
@@ -103989,8 +104005,8 @@ var Func08D5 0x8D5 () {
 	var var0008;
 
 	var0000 = get_object_position() & [0x009B, 0x0000];
-	if (var0000->find_nearby(0x03A8, 0x000A, 0x0000)) {
-		var0001 = find_nearby(0x0210, 0x001E, 0x0008);
+	if (var0000->find_nearby(0x03A8, 0x000A, MASK_NONE)) {
+		var0001 = find_nearby(0x0210, 0x001E, MASK_NPC2);
 		var0002 = 0x0000;
 		for (var0005 in var0001 with var0003 to var0004) {
 			var0002 += 0x0006;
@@ -104021,8 +104037,8 @@ var Func08D6 0x8D6 () {
 
 	var0000 = 0x0000;
 	var0001 = get_object_position() & [0x009F, 0x0000];
-	if (var0001->find_nearby(0x03A7, 0x000A, 0x0000)) {
-		var0002 = find_nearby(0x0174, 0x001E, 0x0008);
+	if (var0001->find_nearby(0x03A7, 0x000A, MASK_NONE)) {
+		var0002 = find_nearby(0x0174, 0x001E, MASK_NPC2);
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0000 += 0x0007;
 			var0005->set_alignment(0x0002);
@@ -104051,9 +104067,9 @@ void Func08D7 0x8D7 () {
 
 	if (event == EGG) {
 		var0000 = get_object_position() & (QUALITY_ANY & 0x0012);
-		var0001 = var0000->find_nearby(0x0179, 0x0006, 0x0000);
+		var0001 = var0000->find_nearby(0x0179, 0x0006, MASK_NONE);
 		if (var0001) {
-			var0002 = find_nearby(0x032B, 0x000A, 0x0008);
+			var0002 = find_nearby(0x032B, 0x000A, MASK_NPC2);
 			if (var0002) {
 				remove_item();
 				var0003 = var0001->get_object_position();
@@ -104078,7 +104094,7 @@ void Func08D7 0x8D7 () {
 						say "@...and here is thy reward.@";
 					};
 				}
-				var0006 = var0002->find_nearby(0x0113, 0x0000, 0x0010);
+				var0006 = var0002->find_nearby(0x0113, 0x0000, MASK_EGG);
 				if (var0006) {
 					var0006->remove_item();
 				}
@@ -104099,7 +104115,7 @@ void Func08D7 0x8D7 () {
 		}
 		UI_sprite_effect(0x000D, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 		UI_play_sound_effect(0x0082);
-		var0005 = find_nearby(0x0349, 0x000A, 0x0000);
+		var0005 = find_nearby(0x0349, 0x000A, MASK_NONE);
 		if (var0005) {
 			var0005->remove_item();
 		}
@@ -104190,7 +104206,7 @@ void Func08DA 0x8DA (var var0000) {
 		var0003 = UI_find_nearby_avatar(0x020E);
 		for (var0006 in var0003 with var0004 to var0005) {
 			var0006->set_item_shape(0x0379);
-			var0007 = var0006->find_nearby(0x01B8, 0x000A, 0x0080);
+			var0007 = var0006->find_nearby(0x01B8, 0x000A, MASK_TRANSLUCENT);
 			var0008 = var0006->get_object_position();
 			var0008 = [(var0008[0x0001] + 0x0003), (var0008[0x0002] + 0x0003), var0008[0x0003]];
 			for (var000B in var0007 with var0009 to var000A) {
@@ -104244,7 +104260,7 @@ void Func08DA 0x8DA (var var0000) {
 				} else {
 					set_item_frame(0x0000);
 				}
-				var000F = find_nearby(0x0313, 0x0014, 0x0000);
+				var000F = find_nearby(0x0313, 0x0014, MASK_NONE);
 				for (var0012 in var000F with var0010 to var0011) {
 					var0002 = var0012->get_item_quality();
 					if (var0002 == 0x009F) {
@@ -104318,7 +104334,7 @@ void Func08DA 0x8DA (var var0000) {
 			var0001 = true;
 		}
 		if (((var0002 >= 0x0001) && (var0002 <= 0x0005)) || (var0002 == 0x0012)) {
-			var0016 = var0000->find_nearby(0x034D, 0x0050, 0x0000) & var0000->find_nearby(0x033C, 0x0050, 0x0000);
+			var0016 = var0000->find_nearby(0x034D, 0x0050, MASK_NONE) & var0000->find_nearby(0x033C, 0x0050, MASK_NONE);
 			for (var0019 in var0016 with var0017 to var0018) {
 				if (var0002 == var0019->get_item_quality()) {
 					if (var0019->get_item_shape() == 0x034D) {
@@ -104330,7 +104346,7 @@ void Func08DA 0x8DA (var var0000) {
 			}
 		}
 		if ((var0002 >= 0x00F0) && (var0002 <= 0x00FA)) {
-			var0016 = var0000->find_nearby(0x034D, 0x0064, 0x0000) & var0000->find_nearby(0x033C, 0x0064, 0x0000);
+			var0016 = var0000->find_nearby(0x034D, 0x0064, MASK_NONE) & var0000->find_nearby(0x033C, 0x0064, MASK_NONE);
 			for (var0019 in var0016 with var001A to var001B) {
 				if (var0002 == var0019->get_item_quality()) {
 					if (var0019->get_item_shape() == 0x034D) {
@@ -104403,7 +104419,7 @@ void Func08DB 0x8DB (var var0000) {
 			UI_play_music(0x0036, 0x0000);
 		}
 	}
-	var0003 = var0000->find_nearby(0x03ED, 0x000F, 0x0000);
+	var0003 = var0000->find_nearby(0x03ED, 0x000F, MASK_NONE);
 	for (var0006 in var0003 with var0004 to var0005) {
 		var0002 = var0006->get_item_frame();
 		if (var0002 < 0x0003) {
@@ -104426,7 +104442,7 @@ void Func08DB 0x8DB (var var0000) {
 			};
 		}
 	}
-	var0003 = var0000->find_nearby(0x03F2, 0x000F, 0x0000);
+	var0003 = var0000->find_nearby(0x03F2, 0x000F, MASK_NONE);
 	for (var0009 in var0003 with var0007 to var0008) {
 		var0002 = var0009->get_item_frame();
 		if (var0002 < 0x0007) {
@@ -104445,7 +104461,7 @@ void Func08DB 0x8DB (var var0000) {
 			if (!gflags[0x0007]) {
 				var000A = [];
 				var000B = [0x03ED, 0x03EF, 0x03F2, 0x02D1, 0x0313];
-				var000C = var0009->find_nearby(SHAPE_ANY, 0x0003, 0x0000);
+				var000C = var0009->find_nearby(SHAPE_ANY, 0x0003, MASK_NONE);
 				for (var000F in var000C with var000D to var000E) {
 					var0001 = var000F->get_object_position();
 					if (var0001[0x0003] < 0x000B) {
@@ -104551,7 +104567,7 @@ var Func08E0 0x8E0 (var var0000) {
 	var var0003;
 	var var0004;
 
-	var0001 = var0000->find_nearby(0x03B5, 0x0014, 0x0000);
+	var0001 = var0000->find_nearby(0x03B5, 0x0014, MASK_NONE);
 	for (var0004 in var0001 with var0002 to var0003) {
 		return var0004->get_item_quality();
 	}
@@ -104567,7 +104583,7 @@ var Func08E1 0x8E1 (var var0000) {
 	var var0006;
 	var var0007;
 
-	var0001 = var0000->find_nearby(0x01B9, 0x0004, 0x0000);
+	var0001 = var0000->find_nearby(0x01B9, 0x0004, MASK_NONE);
 	var0002 = 0x0000;
 	var0003 = var0000->get_object_position();
 	for (var0006 in var0001 with var0004 to var0005) {
@@ -104622,7 +104638,7 @@ var Func08E2 0x8E2 (var var0000) {
 		var0004 = var0003->get_object_position();
 		var0005 = 0x0000;
 		var0006 = 0x0000;
-		var0007 = var0003->find_nearby(SHAPE_ANY, 0x0001, 0x0000);
+		var0007 = var0003->find_nearby(SHAPE_ANY, 0x0001, MASK_NONE);
 		if (var0007) {
 			for (var000A in var0007 with var0008 to var0009) {
 				var000B = false;
@@ -104802,7 +104818,7 @@ void Func08E4 0x8E4 (var var0000) {
 	var0001 = [0x0178, 0x010E, 0x01B0, 0x01B1];
 	var0002 = [];
 	for (var0005 in var0001 with var0003 to var0004) {
-		var0002 &= find_nearby(var0005, 0x006E, 0x0000);
+		var0002 &= find_nearby(var0005, 0x006E, MASK_NONE);
 	}
 	var0006 = false;
 	for (var0005 in var0002 with var0007 to var0008) {
@@ -104907,7 +104923,7 @@ var Func08E7 0x8E7 (var var0000) {
 	var0003 = false;
 	var0004 = UI_get_party_list();
 	var0005 = var0000->get_barge();
-	var0006 = var0000->find_nearby(0x0124, 0x001E, 0x0000);
+	var0006 = var0000->find_nearby(0x0124, 0x001E, MASK_NONE);
 	var0007 = [];
 	var0008 = [];
 	for (var000B in var0006 with var0009 to var000A) {
@@ -105494,9 +105510,9 @@ var Func08FB 0x8FB () {
 	var0000 &= var0001;
 	var0001 = Func099F(0x019E, QUALITY_ANY, FRAME_ANY);
 	var0000 &= var0001;
-	var0001 = 0xFE9C->find_nearby(0x0190, 0x0050, 0x0000);
+	var0001 = 0xFE9C->find_nearby(0x0190, 0x0050, MASK_NONE);
 	var0000 &= var0001;
-	var0001 = 0xFE9C->find_nearby(0x019E, 0x0050, 0x0000);
+	var0001 = 0xFE9C->find_nearby(0x019E, 0x0050, MASK_NONE);
 	var0000 &= var0001;
 	var0001 = [];
 	var0002 = Func098D();
@@ -105799,7 +105815,7 @@ void Func0902 0x902 (var var0000, var var0001) {
 	var var0006;
 	var var0007;
 
-	var0002 = var0000->find_nearby(var0001, 0x0005, 0x0000);
+	var0002 = var0000->find_nearby(var0001, 0x0005, MASK_NONE);
 	var0003 = var0000->get_item_frame();
 	for (var0006 in var0002 with var0004 to var0005) {
 		var0007 = var0006->get_item_frame();
@@ -105888,7 +105904,7 @@ void Func0909 0x909 (var var0000, var var0001, var var0002, var var0003, var var
 
 	var0009 = var0000->get_object_position();
 	var000A = var0009[var0003];
-	var000B = var0000->find_nearby(var0001, 0x0007, 0x0000);
+	var000B = var0000->find_nearby(var0001, 0x0007, MASK_NONE);
 	var000C = false;
 	for (var000F in var000B with var000D to var000E) {
 		var0010 = var000F->get_object_position();
@@ -106182,7 +106198,7 @@ var Func0913 0x913 (var var0000, var var0001, var var0002, var var0003) {
 	var var0007;
 	var var0008;
 
-	var0004 = var0000->find_nearby(SHAPE_ANY, Func097E(var0002), 0x0020);
+	var0004 = var0000->find_nearby(SHAPE_ANY, Func097E(var0002), MASK_INVISIBLE);
 	for (var0007 in var0004 with var0005 to var0006) {
 		var0008 = var0007->get_object_position();
 		if ((var0008[0x0001] <= var0001[0x0001]) && ((var0008[0x0001] >= (var0001[0x0001] + var0002)) && ((var0008[0x0002] <= var0001[0x0002]) && ((var0008[0x0002] >= (var0001[0x0002] + var0002)) && ((var0008[0x0003] <= 0x0002) && ((!(var0007 == var0000)) && ((!(var0007->get_item_shape() in var0003)) && var0000->get_item_flag(IS_SOLID)))))))) {
@@ -106307,7 +106323,7 @@ void Func0917 0x917 (var var0000, var var0001) {
 	if (var0001 == 0x0001) {
 		var0002 = 0xFFFC;
 		var0003 = 0x007C;
-		var0004 = var0000[0x0001]->find_nearby(0x00C7, 0x0019, 0x0000);
+		var0004 = var0000[0x0001]->find_nearby(0x00C7, 0x0019, MASK_NONE);
 		var0005 = script var0004 {
 			music 12;
 		};
@@ -106339,14 +106355,14 @@ void Func0918 0x918 (var var0000) {
 	var0001 = var0000->get_object_position();
 	var0001 &= var0000->get_item_quality();
 	var0001 &= FRAME_ANY;
-	var0002 = var0001->find_nearby(0x0096, 0x000C, 0x0000);
+	var0002 = var0001->find_nearby(0x0096, 0x000C, MASK_NONE);
 	for (var0005 in var0002 with var0003 to var0004) {
 		if (!Func0910(var0005)) {
 			Func094A("@One of the gangplanks seems to be blocked. It must be lowered to sail.@");
 			return;
 		}
 	}
-	var0006 = var0001->find_nearby(0x00FB, 0x0012, 0x0000);
+	var0006 = var0001->find_nearby(0x00FB, 0x0012, MASK_NONE);
 	Func0917(var0006, 0x0001);
 	0xFE9C->clear_item_flag(ACTIVE_SAILOR);
 	var0000->set_item_flag(ON_MOVING_BARGE);
@@ -106446,7 +106462,7 @@ void Func091D 0x91D () {
 	var var0002;
 	var var0003;
 
-	var0000 = 0xFE9C->find_nearby(0x0210, 0x0028, 0x0008);
+	var0000 = 0xFE9C->find_nearby(0x0210, 0x0028, MASK_NPC2);
 	if (var0000) {
 		var0001 = var0000->get_object_position();
 		if ((var0001[0x0001] >= 0x0432) && ((var0001[0x0001] <= 0x0439) && ((var0001[0x0002] >= 0x03E4) && ((var0001[0x0002] <= 0x03EB) && (var0001[0x0003] == 0x0000))))) {
@@ -106463,7 +106479,7 @@ void Func091D 0x91D () {
 				wait 10;
 				say "@Now I feed!!@";
 			};
-			var0002 = var0000->find_nearby(0x0113, 0x0000, 0x0010);
+			var0002 = var0000->find_nearby(0x0113, 0x0000, MASK_EGG);
 			if (var0002) {
 				var0002->remove_item();
 			}
@@ -106531,8 +106547,8 @@ var Func0920 0x920 () {
 	var var0010;
 	var var0011;
 
-	var0000 = 0xFE9C->find_nearby(0x0114, 0x0019, 0x0000) & 0xFE9C->find_nearby(0x0115, 0x0019, 0x0000);
-	var0001 = 0xFE9C->find_nearby(0x010F, 0x0019, 0x0000) & 0xFE9C->find_nearby(0x0110, 0x0019, 0x0000);
+	var0000 = 0xFE9C->find_nearby(0x0114, 0x0019, MASK_NONE) & 0xFE9C->find_nearby(0x0115, 0x0019, MASK_NONE);
+	var0001 = 0xFE9C->find_nearby(0x010F, 0x0019, MASK_NONE) & 0xFE9C->find_nearby(0x0110, 0x0019, MASK_NONE);
 	for (var0004 in var0001 with var0002 to var0003) {
 		var0005 = var0004->get_lift();
 		if (var0005 == 0x0000) {
@@ -106721,7 +106737,7 @@ void Func0924 0x924 (var var0000, var var0001) {
 			}
 		}
 		if (var0002 == 0x007B) {
-			var0009 = 0xFE9C->find_nearby(0x037C, 0x0019, 0x0000);
+			var0009 = 0xFE9C->find_nearby(0x037C, 0x0019, MASK_NONE);
 			if (var0009) {
 				0xFE9C->set_item_flag(DONT_MOVE);
 				var000A = var0009->set_item_quality(0x0001);
@@ -106750,8 +106766,8 @@ void Func0925 0x925 () {
 	var var000C;
 	var var000D;
 
-	var0000 = find_nearby(0x02CE, 0x000A, 0x0000);
-	var0001 = var0000->find_nearby(0x034A, 0x0003, 0x0000);
+	var0000 = find_nearby(0x02CE, 0x000A, MASK_NONE);
+	var0001 = var0000->find_nearby(0x034A, 0x0003, MASK_NONE);
 	var0002 = [0x0000, 0x0000, 0x0000];
 	for (var0005 in var0001 with var0003 to var0004) {
 		if (var0005->get_item_frame() == 0x000B) {
@@ -106852,7 +106868,7 @@ void Func0926 0x926 (var var0000) {
 		}
 	}
 	if ((var0000 == 0x0055) || (var0000 == 0x0059)) {
-		var0008 = find_nearby(0x0178, 0x001E, 0x0000);
+		var0008 = find_nearby(0x0178, 0x001E, MASK_NONE);
 		for (var000B in var0008 with var0009 to var000A) {
 			if (var000B->get_item_quality() == var0000) {
 				if (Func0908(var000B, 0x010E, 0x0001, 0x0000, 0x0000, 0x0007)) {
@@ -106894,7 +106910,7 @@ void Func0927 0x927 () {
 	} else if (UI_is_pc_female()) {
 		0xFF51->clear_item_say();
 		Func097F(0xFF51, "@I can't resist...@", 0x0000);
-		var0007 = find_nearby(0x0178, 0x000A, 0x0000);
+		var0007 = find_nearby(0x0178, 0x000A, MASK_NONE);
 		if (var0007) {
 			var0008 = var0007->get_object_position();
 			// BUG: This should use PATH_SUCCESS instead of BG_PATH_SUCCESS.
@@ -106903,7 +106919,7 @@ void Func0927 0x927 () {
 	} else {
 		0xFF53->clear_item_say();
 		Func097F(0xFF53, "@I can't resist...@", 0x0000);
-		var0007 = find_nearby(0x0178, 0x000A, 0x0000);
+		var0007 = find_nearby(0x0178, 0x000A, MASK_NONE);
 		if (var0007) {
 			var0008 = var0007->get_object_position();
 			// BUG: This should use PATH_SUCCESS instead of BG_PATH_SUCCESS.
@@ -106931,7 +106947,7 @@ void Func0928 0x928 (var var0000) {
 	var var000A;
 
 	if (var0000 == 0x0065) {
-		var0001 = find_nearby(0x034D, 0x000A, 0x0000);
+		var0001 = find_nearby(0x034D, 0x000A, MASK_NONE);
 		if (var0001) {
 			Func0907(var0001[0x0001], 0x0000);
 			var0001 = Func090B(var0001[0x0001]);
@@ -106941,7 +106957,7 @@ void Func0928 0x928 (var var0000) {
 		Func0929();
 	}
 	if (var0000 == 0x006F) {
-		var0002 = find_nearby(0x0300, 0x001E, 0x0000);
+		var0002 = find_nearby(0x0300, 0x001E, MASK_NONE);
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0006 = var0005->get_object_position();
 			UI_sprite_effect(0x000C, var0006[0x0001], var0006[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
@@ -106949,12 +106965,12 @@ void Func0928 0x928 (var var0000) {
 		}
 	}
 	if (var0000 == 0x0070) {
-		var0002 = 0xFE9C->find_nearby(0x010E, 0x000A, 0x00B0);
-		var0002 &= 0xFE9C->find_nearby(0x0178, 0x000A, 0x00B0);
-		var0002 &= 0xFE9C->find_nearby(0x01B1, 0x000A, 0x00B0);
-		var0002 &= 0xFE9C->find_nearby(0x01B0, 0x000A, 0x00B0);
-		var0002 &= 0xFE9C->find_nearby(0x033C, 0x000A, 0x00B0);
-		var0002 &= 0xFE9C->find_nearby(0x034D, 0x000A, 0x00B0);
+		var0002 = 0xFE9C->find_nearby(0x010E, 0x000A, MASK_ALL_UNSEEN);
+		var0002 &= 0xFE9C->find_nearby(0x0178, 0x000A, MASK_ALL_UNSEEN);
+		var0002 &= 0xFE9C->find_nearby(0x01B1, 0x000A, MASK_ALL_UNSEEN);
+		var0002 &= 0xFE9C->find_nearby(0x01B0, 0x000A, MASK_ALL_UNSEEN);
+		var0002 &= 0xFE9C->find_nearby(0x033C, 0x000A, MASK_ALL_UNSEEN);
+		var0002 &= 0xFE9C->find_nearby(0x034D, 0x000A, MASK_ALL_UNSEEN);
 		var0007 = var0002[0x0001];
 		for (var0005 in var0002 with var0008 to var0009) {
 			if (get_distance(var0005) < get_distance(var0007)) {
@@ -106983,8 +106999,8 @@ void Func0929 0x929 () {
 	var var0005;
 	var var0006;
 
-	var0000 = find_nearby(0x0366, 0x000F, 0x0000);
-	var0001 = find_nearby(0x0203, 0x000F, 0x0000);
+	var0000 = find_nearby(0x0366, 0x000F, MASK_NONE);
+	var0001 = find_nearby(0x0203, 0x000F, MASK_NONE);
 	var0000 &= var0001;
 	var0001 = [];
 	var0002 = get_item_quality();
@@ -107304,7 +107320,7 @@ var Func0930 0x930 (var var0000, var var0001, var var0002) {
 	var var0005;
 	var var0006;
 
-	var0003 = var0000->find_nearby(var0001, var0002, 0x0000);
+	var0003 = var0000->find_nearby(var0001, var0002, MASK_NONE);
 	for (var0006 in var0003 with var0004 to var0005) {
 		if (var0006->get_item_quality() == 0x006C) {
 			return var0006;
@@ -107417,7 +107433,7 @@ void Func0931 0x931 (var var0000) {
 	0xFEED->show_npc_face0(0x0000);
 	say("\"Very good, very good,\" he says as he returns your equipment.");
 	var0000->set_alignment(0x0001);
-	var0006 = var0000->find_nearby(0x020A, 0x002D, 0x0000);
+	var0006 = var0000->find_nearby(0x020A, 0x002D, MASK_NONE);
 	do {
 		for (var0009 in var0006 with var0007 to var0008) {
 			if (var0009->get_item_quality() == 0x00EB) {
@@ -107457,7 +107473,7 @@ void Func0931 0x931 (var var0000) {
 		var0014 = var0012->get_item_quality() - 0xFE9C->get_npc_prop(HEALTH);
 		var0001 = 0xFE9C->set_npc_prop(HEALTH, var0014);
 		var0001 = var0012->set_item_quality(0x0000);
-		var0002 = 0xFE9C->find_nearby(0xFFFF, 0x002D, 0x0004);
+		var0002 = 0xFE9C->find_nearby(ANY_SHAPE, 0x002D, MASK_NPC);
 		for (var0005 in var0002 with var0015 to var0016) {
 			if (var0005->get_npc_id() == 0x000D) {
 				var0005->add_to_party();
@@ -107474,7 +107490,7 @@ void Func0931 0x931 (var var0000) {
 		0xFE9C->get_npc_object()->set_camera();
 		var0000->set_schedule_type(FOLLOW_AVATAR);
 	}
-	var0017 = var0000->find_nearby(0x00E4, 0x0023, 0x0000);
+	var0017 = var0000->find_nearby(0x00E4, 0x0023, MASK_NONE);
 	for (var001A in var0017 with var0018 to var0019) {
 		if (var001A->get_npc_id() == 0x0009) {
 			break;
@@ -107621,7 +107637,7 @@ void Func0934 0x934 (var var0000) {
 		var0000->set_alignment(0x0001);
 	}
 	var0000->set_item_flag(SI_TOURNAMENT);
-	var0003 = var0000->find_nearby(0x020A, 0x000F, 0x0000);
+	var0003 = var0000->find_nearby(0x020A, 0x000F, MASK_NONE);
 	for (var0002 in var0003 with var0006 to var0007) {
 		if (var0002->get_item_quality() == 0x00EB) {
 			var0008 = var0002;
@@ -107745,7 +107761,7 @@ void Func0935 0x935 (var var0000) {
 	UI_play_music(0x0022, 0x0000);
 	0xFE9C->set_item_flag(DONT_MOVE);
 	UI_end_conversation();
-	var0004 = 0xFE9C->find_nearby(0x00E4, 0x0023, 0x0000);
+	var0004 = 0xFE9C->find_nearby(0x00E4, 0x0023, MASK_NONE);
 	for (var0007 in var0004 with var0005 to var0006) {
 		if (var0007->get_npc_id() == 0x0009) {
 			break;
@@ -107755,7 +107771,7 @@ void Func0935 0x935 (var var0000) {
 	}
 	var0007->clear_item_say();
 	Func097F(var0007, "@Follow me...@", 0x000F);
-	var0008 = var0000->find_nearby(0x036F, 0x001E, 0x0000);
+	var0008 = var0000->find_nearby(0x036F, 0x001E, MASK_NONE);
 	for (var000B in var0008 with var0009 to var000A) {
 		var000C = var000B->get_object_position();
 		if ((var000C[0x0001] == 0x03F4) && ((var000C[0x0002] == 0x0A7F) && (var000C[0x0003] == 0x0006))) {
@@ -107814,7 +107830,7 @@ void Func0936 0x936 (var var0000, var var0001) {
 						var0002,
 						", thou hast beaten us all! Where didst thou learn to fight like that?\"");
 					var0002 = ("@Hail, " + var0002) + "!@";
-					var0007 = var0000->find_nearby(0xFFFF, 0x001E, 0x0008);
+					var0007 = var0000->find_nearby(ANY_SHAPE, 0x001E, MASK_NPC2);
 					for (var0001 in var0007 with var0008 to var0009) {
 						var0001->clear_item_say();
 						var0001->item_say(var0002);
@@ -107972,7 +107988,7 @@ labelFunc0936_0460:
 	var0002 = 0xFFB9->set_npc_prop(DEXTERITY, 8);
 	0xFFB9->clear_item_say();
 	Func097F(0xFFB9, "@Hail the Avatar!@", 0x0000);
-	var0001 = 0xFE9C->find_nearby(0xFFFF, 0x0032, 8);
+	var0001 = 0xFE9C->find_nearby(ANY_SHAPE, 0x0032, MASK_NPC2);
 	var0001 = Func0988(0xFFB9->get_npc_object(), var0001);
 	for (var0002 in var0001 with var000A to var000B) {
 		var0002->clear_item_say();
@@ -108211,7 +108227,7 @@ void Func093A 0x93A (var var0000) {
 				var0001,
 				" shall be thy champion. Guard, please take the defendant to his cell.\"");
 			UI_end_conversation();
-			var0004 = 0xFE9C->find_nearby(0x017D, 0x000A, 0x0008);
+			var0004 = 0xFE9C->find_nearby(0x017D, 0x000A, MASK_NPC2);
 			if (var0004) {
 				var0003 = script var0004 {
 					nohalt;
@@ -108233,7 +108249,7 @@ void Func093A 0x93A (var var0000) {
 			abort;
 		}
 		if (var0000 == 0x0059) {
-			var0003 = find_nearby(0x017A, 0x0005, 0x0000);
+			var0003 = find_nearby(0x017A, 0x0005, MASK_NONE);
 			if (var0003) {
 				var0003->remove_item();
 				UI_play_sound_effect(0x0075);
@@ -108295,7 +108311,7 @@ void Func093A 0x93A (var var0000) {
 			}
 			0xFE9C->clear_item_flag(DONT_MOVE);
 			UI_init_conversation();
-			var0003 = find_nearby(0x01B0, 0x000A, 0x0000) & find_nearby(0x010E, 0x000A, 0x0000);
+			var0003 = find_nearby(0x01B0, 0x000A, MASK_NONE) & find_nearby(0x010E, 0x000A, MASK_NONE);
 			for (var0008 in var0003 with var0009 to var000A) {
 				if (var0008->get_item_quality() == 0x00B3) {
 					Func0907(var0008, 0x0002);
@@ -108399,7 +108415,7 @@ void Func093A 0x93A (var var0000) {
 				Func097F(0xFFC9, "@Oh, my...@", 0x0005);
 				UI_end_conversation();
 				var0003 = 0xFE9C->get_object_position() & (0x0001 & 0x0006);
-				var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
+				var0003 = var0003->find_nearby(0x0113, 0x000A, MASK_EGG);
 				if (var0003) {
 					var0005 = var0003->get_object_position();
 					var0005[0x0002] += 0x000A;
@@ -108450,7 +108466,7 @@ void Func093A 0x93A (var var0000) {
 				};
 			}
 			var0003 = 0xFE9C->get_object_position() & (0x0001 & 0x0006);
-			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
+			var0003 = var0003->find_nearby(0x0113, 0x000A, MASK_EGG);
 			if (var0003) {
 				var0005 = var0003->get_object_position();
 				var0005[0x0002] += 0x000A;
@@ -108488,7 +108504,7 @@ void Func093A 0x93A (var var0000) {
 				face north;
 			};
 			var0003 = 0xFE9C->get_object_position() & (0x0001 & 0x0006);
-			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
+			var0003 = var0003->find_nearby(0x0113, 0x000A, MASK_EGG);
 			if (var0003) {
 				var0005 = var0003->get_object_position();
 				var0005[0x0002] += 0x000A;
@@ -108503,7 +108519,7 @@ void Func093A 0x93A (var var0000) {
 		}
 		if (var0000 == 0x005B) {
 			var0003 = 0xFE9C->get_object_position() & (0x0001 & 0x0006);
-			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
+			var0003 = var0003->find_nearby(0x0113, 0x000A, MASK_EGG);
 			if (var0003) {
 				var0005 = var0003->get_object_position();
 				var0005[0x0002] += 0x000A;
@@ -108617,7 +108633,7 @@ void Func093A 0x93A (var var0000) {
 			UI_end_conversation();
 			Func097F(0xFFCB, "@Come with me...@", 0x0000);
 			var0003 = 0xFE9C->get_object_position() & (0x0001 & 0x0006);
-			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
+			var0003 = var0003->find_nearby(0x0113, 0x000A, MASK_EGG);
 			if (var0003) {
 				var0005 = var0003->get_object_position();
 				var0005[0x0002] += 0x000A;
@@ -108629,7 +108645,7 @@ void Func093A 0x93A (var var0000) {
 			0xFFCB->move_object([0x0000, 0x0000, 0x0000]);
 			0xFFCB->set_schedule_type(WAIT);
 			var0003 = 0xFE9C->get_object_position() & (0x0001 & 0x0006);
-			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
+			var0003 = var0003->find_nearby(0x0113, 0x000A, MASK_EGG);
 			if (var0003) {
 				var0005 = var0003->get_object_position();
 				var0005[0x0002] += 0x000B;
@@ -108649,7 +108665,7 @@ void Func093A 0x93A (var var0000) {
 				};
 			} else {
 				var0003 = 0xFE9C->get_object_position() & (0x0001 & 0x0006);
-				var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
+				var0003 = var0003->find_nearby(0x0113, 0x000A, MASK_EGG);
 				if (var0003) {
 					var0005 = var0003->get_object_position();
 					var0005[0x0002] += 0x000A;
@@ -108679,7 +108695,7 @@ void Func093A 0x93A (var var0000) {
 			Func095D(0x0190);
 			if (gflags[0x016F]) {
 				var0003 = 0xFE9C->get_object_position() & (0x0001 & 0x0006);
-				var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
+				var0003 = var0003->find_nearby(0x0113, 0x000A, MASK_EGG);
 				if (var0003) {
 					var0005 = var0003->get_object_position();
 					var0005[0x0002] += 0x000A;
@@ -108727,7 +108743,7 @@ void Func093A 0x93A (var var0000) {
 				};
 			}
 			var0003 = 0xFE9C->get_object_position() & (0x0001 & 0x0006);
-			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
+			var0003 = var0003->find_nearby(0x0113, 0x000A, MASK_EGG);
 			if (var0003) {
 				var0005 = var0003->get_object_position();
 				var0005[0x0002] += 0x000A;
@@ -108787,9 +108803,9 @@ void Func093A 0x93A (var var0000) {
 				".\"");
 			UI_end_conversation();
 			var0003 = 0xFE9C->get_object_position() & (0x0001 & 0x0006);
-			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
+			var0003 = var0003->find_nearby(0x0113, 0x000A, MASK_EGG);
 			if (var0003) {
-				var0004 = var0003->find_nearby(0x017D, 0x0003, 0x0008);
+				var0004 = var0003->find_nearby(0x017D, 0x0003, MASK_NPC2);
 				if (var0004) {
 					var0005 = var0003->get_object_position();
 					var0005[0x0002] += 0x0001;
@@ -108808,20 +108824,20 @@ void Func093A 0x93A (var var0000) {
 			abort;
 		}
 		if (var0000 == 0x0067) {
-			var0003 = find_nearby(0x017A, 0x0005, 0x0000);
+			var0003 = find_nearby(0x017A, 0x0005, MASK_NONE);
 			for (var0008 in var0003 with var0023 to var0024) {
 				if (var0008->get_item_frame() == 0x0005) {
 					UI_play_sound_effect(0x0075);
 					var0008->remove_item();
 				}
 			}
-			var0003 = find_nearby(0x017A, 0x0032, 0x0000);
+			var0003 = find_nearby(0x017A, 0x0032, MASK_NONE);
 			for (var0008 in var0003 with var0025 to var0026) {
 				if (var0008->get_item_frame() == 0x0006) {
 					var0008->remove_item();
 				}
 			}
-			var0003 = find_nearby(0x01B1, 0x0032, 0x0000) & find_nearby(0x0178, 0x0032, 0x0000);
+			var0003 = find_nearby(0x01B1, 0x0032, MASK_NONE) & find_nearby(0x0178, 0x0032, MASK_NONE);
 			for (var0008 in var0003 with var0027 to var0028) {
 				if (var0008->get_item_quality() == 0x0028) {
 					Func0907(var0008, 0x0000);
@@ -108837,7 +108853,7 @@ void Func093A 0x93A (var var0000) {
 		}
 		if (var0000 == 0x0068) {
 			var0003 = 0xFE9C->get_object_position() & (0x0001 & 0x0006);
-			var0003 = var0003->find_nearby(0x0113, 0x000A, 0x0010);
+			var0003 = var0003->find_nearby(0x0113, 0x000A, MASK_EGG);
 			if (var0003) {
 				var0005 = var0003->get_object_position();
 				var0005[0x0001] += 0x0003;
@@ -109114,7 +109130,7 @@ void Func093B 0x93B (var var0000) {
 				actor frame sitting;
 			};
 			var0004 = 0xFFCD->get_object_position() & (0x0003 & 0x0006);
-			var0005 = var0004->find_nearby(0x0113, 0x001E, 0x0010);
+			var0005 = var0004->find_nearby(0x0113, 0x001E, MASK_EGG);
 			if (var0005) {
 				var0006 = var0005->get_object_position();
 				0xFFCD->si_path_run_usecode(var0006, SI_PATH_SUCCESS, 0xFFCD->get_npc_object(), Func07F8, false);
@@ -109351,7 +109367,7 @@ void Func093B 0x93B (var var0000) {
 			};
 			var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x0057);
 			var0004 = 0xFFCD->get_object_position() & (0x0006 & 0x0006);
-			var0005 = var0004->find_nearby(0x0113, 0x0028, 0x0010);
+			var0005 = var0004->find_nearby(0x0113, 0x0028, MASK_EGG);
 			if (var0005) {
 				var0006 = var0005->get_object_position();
 				0xFFCD->si_path_run_usecode(var0006, SI_PATH_SUCCESS, 0xFFCD->get_npc_object(), Func07F8, false);
@@ -109406,7 +109422,7 @@ void Func093B 0x93B (var var0000) {
 	}
 	if (var0000 == 0x001B) {
 		var0004 = get_object_position() & (0x0001 & 0x0006);
-		var0005 = var0004->find_nearby(0x0113, 0x0014, 0x0010);
+		var0005 = var0004->find_nearby(0x0113, 0x0014, MASK_EGG);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
 			var0006[0x0002] += 0x0005;
@@ -109548,7 +109564,7 @@ var Func093D 0x93D (var var0000, var var0001) {
 
 	var0002 = [0x0108, 0x0116, 0x029F, 0x00C9, 0x00CB, 0x019F];
 	var0003 = [0x0004, 0x0006, 0x0012, 0x0013, 0x0015, 0x0020];
-	var0004 = find_nearby(SHAPE_ANY, var0001, 0x0000);
+	var0004 = find_nearby(SHAPE_ANY, var0001, MASK_NONE);
 	for (var0007 in var0004 with var0005 to var0006) {
 		var0008 = var0007->get_item_shape();
 		for (var000B in var0002 with var0009 to var000A) {
@@ -110785,7 +110801,7 @@ var Func0980 0x980 (var var0000) {
 	var var0005;
 	var var0006;
 
-	var0001 = find_nearby(SHAPE_ANY, var0000, 0x0008);
+	var0001 = find_nearby(SHAPE_ANY, var0000, MASK_NPC2);
 	var0002 = UI_get_party_list();
 	var0003 = [];
 	if (get_item_flag(IN_PARTY)) {
@@ -110880,8 +110896,8 @@ void Func0986 0x986 (var var0000, var var0001) {
 			var0006 = var0005->set_npc_prop(FOODLEVEL, var0000 * -1);
 		}
 	}
-	var0007 = var0001->find_nearby(0x02BD, 0x001E, 0x0000);
-	var0007 &= var0001->find_nearby(0x0152, 0x001E, 0x0000);
+	var0007 = var0001->find_nearby(0x02BD, 0x001E, MASK_NONE);
+	var0007 &= var0001->find_nearby(0x0152, 0x001E, MASK_NONE);
 	for (var000A in var0007 with var0008 to var0009) {
 		var000B = var000A->get_item_quality();
 		if (var000B < (var0000 * 0x001E)) {
@@ -111965,7 +111981,7 @@ void Func09A5 0x9A5 () {
 	var var0006;
 	var var0007;
 
-	var0000 = 0xFE9C->find_nearby(0x01E9, 0x0050, 0x00B0);
+	var0000 = 0xFE9C->find_nearby(0x01E9, 0x0050, MASK_ALL_UNSEEN);
 	for (var0003 in var0000 with var0001 to var0002) {
 		var0003->Func060F();
 	}
@@ -112668,8 +112684,8 @@ void Func09BB 0x9BB (var var0000, var var0001) {
 	}
 	if (var0001 == 0x0002) {
 		var0002 = get_item_quality();
-		var0003 = find_nearby(0x0366, 0x000F, 0x0000);
-		var0004 = find_nearby(0x0203, 0x000F, 0x0000);
+		var0003 = find_nearby(0x0366, 0x000F, MASK_NONE);
+		var0004 = find_nearby(0x0203, 0x000F, MASK_NONE);
 		var0003 &= var0004;
 		var0004 = [];
 		for (var0007 in var0003 with var0005 to var0006) {
@@ -112699,7 +112715,7 @@ void Func09BC 0x9BC (var var0000) {
 	var var0004;
 	var var0005;
 
-	var0001 = var0000->find_nearby(0x0178, 0x0014, 0x0000);
+	var0001 = var0000->find_nearby(0x0178, 0x0014, MASK_NONE);
 	for (var0004 in var0001 with var0002 to var0003) {
 		var0005 = Func0908(var0004, 0x010E, 0x0002, 0x0000, 0x0000, 0x0007);
 	}
@@ -112714,7 +112730,7 @@ void Func09BD 0x9BD (var var0000) {
 	var var0004;
 	var var0005;
 
-	var0001 = var0000->find_nearby(0x010E, 0x0014, 0x0000);
+	var0001 = var0000->find_nearby(0x010E, 0x0014, MASK_NONE);
 	for (var0004 in var0001 with var0002 to var0003) {
 		var0005 = Func0908(var0004, 0x0178, 0x0001, 0x0000, 0x0000, 0x0007);
 	}
@@ -112797,7 +112813,7 @@ void Func09BE 0x9BE (var var0000, var var0001) {
 			}
 			if (var0008 == 0x00CA) {
 				if (gflags[0x0121] && (gflags[0x0122] && gflags[0x0123])) {
-					var000B = var0000->find_nearby(0x01C2, 0x0014, 0x0000);
+					var000B = var0000->find_nearby(0x01C2, 0x0014, MASK_NONE);
 					for (var000E in var000B with var000C to var000D) {
 						if (var000E->get_item_frame() == 0x0002) {
 							var000F = var000E->get_object_position();
@@ -112959,7 +112975,7 @@ void Func09C1 0x9C1 () {
 	var var0009;
 	var var000A;
 
-	var0000 = find_nearby(0x020A, 0x0028, 0x00B0);
+	var0000 = find_nearby(0x020A, 0x0028, MASK_ALL_UNSEEN);
 	var0001 = UI_get_array_size(var0000);
 	if (var0001 > 0x0000) {
 		var0002 = [0x02C7, 0x025C, 0x03B7, 0x03B8, 0x03A9, 0x025D, 0x025E, 0x022C, 0x022A, 0x0225, 0x0228, 0x0275, 0x0276, 0x0288];
