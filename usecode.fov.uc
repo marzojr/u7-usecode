@@ -1,6 +1,346 @@
 #game "blackgate"
 #strictbraces "true"
 
+//Party members (you know em, you love em)
+enum party_members {
+	PARTY		= -357,	//Used by several intrinsics (e.g. UI_count_objects) that would otherwise take a single NPC
+						//Not supported by several other intrinsics that you'd really like it to (e.g. UI_get_cont_items)
+	AVATAR		= -356,
+	IOLO		= -1,
+	SPARK		= -2,
+	SHAMINO		= -3,
+	DUPRE		= -4,
+	JAANA		= -5,
+	SENTRI		= -7,
+	JULIA		= -8,
+	KATRINA		= -9,
+	TSERAMED	= -10
+};
+
+//Trinsic residents
+enum trinsic_npcs {
+	PETRE		= -11,	//stablekeeper
+	FINNIGAN	= -12,	//mayor
+	GILBERTO	= -13,	//injured guard
+	JOHNSON		= -14,	//guard on east gate
+	KLOG		= -16,	//fellowship leader and husband of Ellen
+	CHANTU		= -17,	//healer
+	DELL		= -18,	//provisioner and grouch
+	APOLLONIA	= -19,	//barmaid
+	MARKUS		= -20,	//trainer
+	GARGAN		= -21,	//shipwright
+	CAROLINE	= -22,	//fellowship recruiter
+
+	PAUL		= -233,	//Passion Play actor
+	MERYL		= -234,	//Passion Play actress
+	DUSTIN		= -235,	//Passion Play actor
+
+	ELLEN		= -236	//wife of Klog
+};
+
+//Britain residents
+enum britain_npcs {
+	LORD_BRITISH	= -23,	//Castle British, ineffectual monarch
+	NYSTUL		= -24,	//Castle British, royal sage
+	CHUCKLES	= -25,	//Castle British, royal jester
+	BATLIN		= -26,	//arch-villain
+	RAYMUNDO	= -27,	//playwright
+	JESSE		= -28,	//actor
+	STUART		= -29,	//actor
+	AMBER		= -30,	//actress and Shamino's main squeeze
+	KRISTY		= -31,	//Castle British, creche child
+	MAX			= -32,	//Castle British, creche child
+	NICHOLAS	= -33,	//Castle British, creche child
+	NANNA		= -34,	//Castle British, childcare professional and champion of the working class
+	CSIL		= -35,	//healer and molecular biologist
+	ZELLA		= -36,	//trainer
+	LUCY		= -37,	//barmaid and owner of the Blue Boar
+	GREG		= -38,	//provisioner
+	NENO		= -39,	//musician
+	JUDITH		= -40,	//musician and wife of Patterson
+	CANDICE		= -41,	//museum curator and mistress of Patterson
+	CYNTHIA		= -42,	//treasurer and wife of James
+	PATTERSON	= -43,	//mayor and philanderer
+	CARROCIO	= -44,	//puppetmaster and secret lover of Nell
+	FIGG		= -45,	//orchard owner
+	JAMES		= -46,	//innkeeper
+	JEANETTE	= -47,	//barmaid at the Blue Boar and courter of Charles and Willy (make up your mind you silly woman)
+	DENBY		= -49,	//trainer
+	FRED		= -50,	//merchant at Farmer's Market and husband of Kelly
+	KELLY		= -51,	//merchant at Farmer's Market and wife of Fred
+	WILLY		= -52,	//baker and total knob
+	GAYE		= -53,	//seamstress
+	COOP		= -54,	//arms dealer at Iolo's Bows
+	GRAYSON		= -55,	//arms dealer
+	DIANE		= -56,	//stablekeeper
+	CLINT		= -57,	//shipwright
+	GORDON		= -58,	//fish and chipper
+	SEAN		= -59,	//jeweller
+	BROWNIE		= -60,	//farmer and mayoral incumbent
+	MACK		= -61,	//farmer and Kilrathi witness
+	SNAZ		= -62,	//beggar and irritant
+	MILLIE		= -63,	//fellowship recruiter and sister of Thad
+
+	GEOFFREY	= -64,	//Castle British, captain of the guard and useless ex-follower
+	WISLEM		= -65,	//Castle British, council member and gargoyle representative
+	SHERRY		= -66,	//Castle British, mouse
+	BOOTS		= -67,	//Castle British, cook and wife of Bennie
+	BENNIE		= -68,	//Castle British, head servant and husband of Boots
+	WESTON		= -69,	//Castle British, prisoner and husband of Alina
+	MIRANDA		= -70,	//Castle British, council leader
+	INWISLOKLEM	= -71,	//Castle British, council member and gargoyle representative
+	NELL		= -72,	//Castle British, servant, sister of Charles, and secret lover of at least Carrocio and Lord British (slut)
+	CHARLES		= -73,	//Castle British, servant, brother of Nell and courter of Jeanette
+
+	KESSLER		= -237	//apothecary
+};
+
+//Cove residents
+enum cove_npcs {
+	RUDYOM			= -74,	//mad mage
+	NASTASSIA		= -75,	//caretaker of shrine of Compassion and feeble love-interest
+	RAYBURT			= -76,	//trainer and Pamela's main squeeze
+	LORD_HEATHER	= -77,	//mayor and Jaana's main squeeze
+	PAMELA			= -78,	//inkeeper and Rayburt's main squeeze
+	ZINAIDA			= -79,	//tavernkeeper and de Maria's main squeeze
+	DE_MARIA		= -80,	//tavernkeeper and Zinaida's main squeeze
+	REGAL			= -271	//Rayburt's dog (not sure why he gets an NPC number, it's not like he does anything - maybe for schedules?)
+};
+
+//Minoc residents
+enum minoc_npcs {
+	ELYNOR		= -81,	//fellowship leader and secret lover of Gregor
+	GREGOR		= -82,	//mine owner and secret lover of Elynor
+	MARGARETA	= -83,	//gypsy, wife of Jergi and fortune-teller
+	SASHA		= -84,	//clockmaker
+	GLADSTONE	= -85,	//glassblower
+	XANTHIA		= -86,	//candlemaker
+	ZORN		= -87,	//blacksmith
+	SEARA		= -88,	//artisan
+	KARL		= -89,	//alienated woodsman and enemy of Owen
+	OWEN		= -90,	//shipwright and tosser
+	BURNSIDE	= -91,	//mayor
+	RUTHERFORD	= -92,	//barkeep
+	WILLIAM		= -93,	//sawmill operator
+	KARENNA		= -94,	//trainer
+	JAKHER		= -95,	//trainer
+	JERGI		= -96,	//gypsy and husband of Margareta
+
+	MIKOS		= -97,	//mine foreman
+	FODUS		= -99,	//miner and drug addict
+	OWINGS		= -239,	//miner and moron
+	MALLOY		= -243	//miner and moron
+};
+
+//Yew/great forest residents
+enum yew_npcs {
+	TRELLEK		= -6,	//emp (Fun fact: his low ID is because he was originally meant to join the party)
+	SARALEK		= -98,	//emp
+	TAVENOR		= -100,	//emp
+	SALAMON		= -101,	//emp
+	NICODEMUS	= -102,	//mad mage
+	THAD		= -103,	//highwayman and brother of Millie
+	BRADMAN		= -104,	//trainer
+	SIR_JEFF	= -105,	//judge
+	TIERY		= -106,	//gravedigger and creep
+	REYNA		= -108,	//healer
+	GHARL		= -111,	//troll prisoner
+	D_REL		= -112,	//pirate and prisoner
+	SMITH		= -113,	//horse and hintbook
+	AIMI		= -114,	//monk, gardener and crap painter
+	PENNI		= -115,	//trainer and wife of Addom
+	BEN			= -116,	//woodcutter
+	GOTH		= -117,	//prison warden
+	PERRIN		= -238,	//scholar and trainer
+	TAYLOR		= -242,	//monk
+	KREG		= -245,	//fugitive and false monk
+
+	PAPA		= -241,	//Bee Caves, nudist
+	MAMA		= -255,	//Bee Caves, nudist
+
+	XORINIA		= -256	//will-o-wisp
+};
+
+//Jhelom residents
+enum jhelom_npcs {
+	DE_SNEL		= -119,	//trainer
+	JOSEPH		= -120,	//mayor
+	KLIFTIN		= -121,	//armourer
+	OPHELIA		= -122,	//barmaid
+	DAPHNE		= -123,	//barmaid
+	SPRELLIC	= -124,	//tavern owner and wimp
+	VOKES		= -125,	//big dumb fighter
+	SYRIA		= -126,	//fighter
+	TIMMONS		= -127	//fighter
+};
+
+//New Magincia residents
+enum new_magincia_npcs {
+	RUSSELL		= -129,	//shipwright
+	BORIS		= -130,	//tavernkeeper and husband of Magenta
+	MAGENTA		= -131,	//mayor and wife of Boris
+	HENRY		= -132,	//courter of Constance and pathetic sap
+	CONSTANCE	= -133,	//water-bearer and silly cow
+	ROBIN		= -134,	//professional gambler and greaseball
+	BATTLES		= -135,	//thug for Robin
+	LEAVELL		= -136,	//thug for Robin
+	SAM			= -137,	//flower man and total hippie
+	ALAGNER		= -146	//scholar and plot device
+};
+
+//Skara Brae residents
+enum skara_brae_npcs {
+	MARKHAM		= -140,	//barkeep
+	HORANCE		= -141,	//lich
+	TRENT		= -142,	//blacksmith and husband of Rowena
+	MORDRA		= -143,	//witch
+	ROWENA		= -144,	//ensorcelled servant of Horance and wife of Trent
+	PAULETTE	= -145,	//barmaid
+	QUENTON		= -146,	//persistent murder victim from Ultima VI
+	FORSYTHE	= -147,	//mayor and coward
+	CAINE		= -247	//alchemist and The Tortured One
+};
+
+//Moonglow residents
+enum moonglow_npcs {
+	CARLYN		= -118,	//seamstress
+	PENUMBRA	= -150,	//sleeping seeress
+	ZELDA		= -152,	//Lycaeum, advisor and courter of Brion
+	MARIAH		= -153,	//Lycaeum, mad mage and former companion
+	CUBOLT		= -155,	//farmer
+	BALAYNA		= -156,	//soon-to-be-murdered fellowship assistant
+	TOLEMAC		= -157,	//farmer
+	MORZ		= -158,	//f-f-f-farmer
+	JILLIAN		= -159,	//Lycaeum, scholar, trainer and husband of Effrem
+	EFFREM		= -160,	//househusband of Jillian
+	CHAD		= -161,	//trainer
+	ELAD		= -162,	//healer
+	PHEARCY		= -163,	//tavernkeeper
+	ADDOM		= -164,	//explorer and husband of Penni
+	FRANK		= -165,	//Lycaeum, smartarse fox
+	BRION		= -248,	//Lycaeum, astronomer
+	NELSON		= -249,	//Lycaeum, curator
+	RANKIN		= -250	//fellowship leader and murderer of Balayna
+};
+
+//Paws residents
+enum paws_npcs {
+	THURSTON	= -166,	//miller and courter of Polly
+	FERIDWYN	= -167,	//fellowship shelter manager, father of Garritt and husband of Brita
+	BRITA		= -168,	//snotty narrowminded bitch, mother of Garritt and wife of Feridwyn
+	ALINA		= -169,	//useless poor person and wife of Weston
+	MERRICK		= -170,	//sycophant and Fellowship shill
+	GARRITT		= -171,	//drug abuser and insufferable offspring of Feridwyn and Brita
+	MORFIN		= -172,	//slaughterhouse owner and drug dealer
+	BEVERLEA	= -173,	//curio shop owner and blind old bat
+	KOMOR		= -174,	//embittered beggar with one leg
+	FENN		= -175,	//embittered cart-bound beggar with no legs
+	ANDREW		= -176,	//dairy owner
+	CAMILLE		= -177,	//farmer, widow and mother of Tobias
+	TOBIAS		= -178,	//obnoxious son of Camille
+	POLLY		= -179	//tavernkeeper and courter of Thurston
+};
+
+//Terfin residents
+enum terfin_npcs {
+	DRAXINUSOM	= -180,	//king of the Gargoyles
+	INFORLEM	= -181,	//trainer and arms dealer
+	INMANILEM	= -182,	//healer
+	TEREGUS		= -183,	//keeper of altars
+	RUNEB		= -184,	//fellowship thug
+	QUAN		= -185,	//fellowship leader
+	QUAEVEN		= -186,	//Rec Center master and fellowship follower
+	SILAMO		= -187,	//gardener
+	SARPLING	= -188,	//jeweller and magic provisioner
+	FORBRAK		= -189,	//tavernkeeper
+	BETRA		= -190	//provisioner
+};
+
+//residents of the U.S.S. Serpent's Hold
+enum serpents_hold_npcs {
+	MENION		= -192, //trainer and weaponsmith
+	PENDARAN	= -193, //knight, saboteur and husband of Jehanne
+	JEHANNE		= -194, //provisioner and wife of Pendaran
+	JOHN_PAUL	= -195, //lord and leader
+	RICHTER		= -196, //armourer and fellowship member
+	HORFFE		= -197, //gargoyle and Captain of the Guard
+	JORDAN		= -198, //blind arms dealer for Iolo's South who can't even recognise his own boss
+	DENTON		= -199, //bartender, logician, and particularly lame Star Trek reference
+	TORY		= -200, //empath and unconvincingly distraught mother of baby Riky, stolen by dingos (er, harpies)
+	LEIGH		= -201	//healer
+};
+
+//Vesper residents
+enum vesper_npcs {
+	CADOR		= -203,	//mine overseer
+	MARA		= -204,	//miner
+	ZAKSAM		= -205,	//trainer
+	ELDROTH		= -206,	//provisioner
+	YONGI		= -207,	//tavernkeeper
+	BLORN		= -208,	//criminal
+	AUSTON		= -209,	//mayor
+	LIANA		= -210,	//mayor's clerk and total bigot
+	LAP_LEM		= -211,	//gargoyle miner
+	YVELLA		= -212,	//mother of Catherine and wife of Cador
+	CATHERINE	= -213,	//daughter of Yvella and Cador, student of For-Lem
+	FOR_LEM		= -214,	//gargoyle handyman and teacher of Catherine
+	ANSIKART	= -215,	//gargoyle tavernkeeper
+	WIS_SUR		= -216,	//gargoyle magic provisioner
+	ANMANIVAS	= -217,	//gargoyle ex-miner
+	FORANAMO	= -218,	//gargoyle ex-miner
+	AURVIDLEM	= -219	//provisioner
+};
+
+//Buccaneer's Den residents
+enum buccaneers_den_npcs {
+	SULLIVAN	= -220,	//fellowship prisoner and conman
+	WENCH		= -221,	//whore
+	GLENNO		= -222,	//manager of the Baths
+	MARTINE		= -223,	//whore
+	ROBERTO		= -224,	//gigolo
+	SINTAG		= -225,	//House of Games guard
+	BLACKTOOTH	= -226,	//ex-pirate
+	MOLE		= -227,	//ex-pirate
+	LUCKY		= -228,	//trainer
+	BUDO		= -229,	//provisioner
+	GORDY		= -230,	//House of Games owner
+	MANDY		= -231,	//innkeeper
+	SMITHY		= -232,	//House of Games croupier
+	DANAG		= -251,	//fellowship leader
+
+	GROD		= -154,	//troll and fellowship torturer
+	ANTON		= -240	//fellowship prisoner
+};
+
+//Miscellaneous NPCs (dungeons and other minor locations)
+enum misc_npcs {
+	MARTINGO	= -191, //Sultan of Spektran
+
+	IRIALE		= -128,	//Fellowship Retreat, guardian of the Cube
+	IAN			= -202,	//Fellowship Retreat, director
+	GORN		= -138,	//Fellowship Retreat, recurring cameo from long-forgotten Origin game
+
+	WAYNE		= -109,	//Dungeon Despise, lost monk
+	GAROK		= -110,	//Dungeon Despise, mad mage and tax fugitive
+
+	EIKO		= -15,	//Dagger Isle, vengeful half-sister of Amanda
+	AMANDA		= -48,	//Dagger Isle, vengeful half-sister of Eiko
+	ISKANDER	= -107,	//Dagger Isle, cyclops and target of Eiko and Amanda's vengeance
+
+	HYDRA		= -149,	//Ambrosia, three-headed hydra, guardian of meteor
+	KISSME		= -151,	//Ambrosia, horny faerie
+
+	CAIRBRE		= -244,	//Dungeon Destard, friend of Cosmo
+	KALLIBRUS	= -252,	//Dungeon Destard, friend of Cosmo
+	COSMO		= -253,	//Dungeon Destard, virgin
+	LASHER		= -254,	//Dungeon Destard, unicorn and virgin-detector
+
+	HOOK		= -291,	//Isle of the Avatar, arch-villain
+	FORSKIS		= -298,	//Isle of the Avatar, arch-villain
+	ABRAHAM		= -299,	//Isle of the Avatar, arch-villain
+	ELIZABETH	= -300	//Isle of the Avatar, arch-villain
+};
+
 enum sprite_repeats {
 	LOOP_ONCE = -1,
 	LOOP_ONCE2 = -3	// Not sure about this
@@ -669,7 +1009,7 @@ void Func009A shape#(0x9A) () {
 					gflags[0x030F] = true;
 					say("\"Ah, yes. I once had a scroll that told of a talisman by that name. If only I could remember where I put it. Dost thou by chance have the parchment entitled Scroll of Infinity with thee?");
 					if (Func090A()) {
-						if (!0xFE9B->count_objects(0x031D, 0x0032, 0x0001)) {
+						if (!PARTY->count_objects(0x031D, 0x0032, 0x0001)) {
 							say("\"If thou dost not have the scroll, I cannot help thee in this matter.\"");
 						} else {
 							say("\"Here we are. Now then, it appears to be written in a strange format. One might even say a code of sorts... I have it! Apparently, the Talisman currently resides in the Great Void. A plane somewhat removed from ours. If thou wishest to gain access to this void, thou shalt need to craft two lenses: one concave, the other convex. Light focused through the properly enchanted lenses will open a conduit between our realm and the void. I believe this treatise speaks of three Talismans of Principle that send out a call to the Infinity Talisman and bring it here. Once here, it would seem that its sole purpose is to coerce a powerful force into the void.\" A thought hits the mage like lightning strikes a tree. \"Oh no, Avatar... Thou shan't gain any more aid from me. I may be blind, but I see through thy sham. I'll not help thee send the Core into the void.\" Erethian falls silent, and it would appear that he'll speak no more.");
@@ -684,7 +1024,7 @@ void Func009A shape#(0x9A) () {
 				} else {
 					say("\"Dost thou have the Scroll of Infinity amongst thy possessions?\"");
 					if (Func090A()) {
-						if (!0xFE9B->count_objects(0x031D, 0x0032, 0x0001)) {
+						if (!PARTY->count_objects(0x031D, 0x0032, 0x0001)) {
 							say("\"I needs must touch the scroll to glean its meaning. Else I'll not be able to help thee in this matter.\"");
 						} else {
 							say("\"Here we are. Now then, it appears to be written in a strange format. One might even say a code of sorts... I have it! Apparently, the Talisman currently resides in the Great Void. A plane somewhat removed from ours. If thou wishest to gain access to this void, thou shalt need to craft two lenses: one concave, the other convex. Light focused through the properly enchanted lenses will open a conduit between our realm and the void. I believe this treatise speaks of three Talismans of Principle that send out a call to the Infinity Talisman and bring it here. Once here, it would seem that its sole purpose is to coerce a powerful force into the void.\" A thought hits the mage like lightning strikes a tree. \"Oh no, Avatar... Thou shan't gain any more aid from me. I may be blind, but I see through thy sham. I'll not help thee send the Core into the void.\" Erethian falls silent, and it would appear that he'll speak no more.");
@@ -708,7 +1048,7 @@ void Func009A shape#(0x9A) () {
 			case "black sword":
 				0xFEE2->show_npc_face(0x0001);
 				say("Erethian nods his head when you tell him of your dilemma with the black sword. \"Yes, I can see how the blade would be too clumsy to swing in combat. However, if thou were to bind a magical source of power into the hilt of the blade, thou mightest be able to counteract the unwieldy nature of the sword.\"");
-				if (0xFE9C->get_npc_object()->get_cont_items(0x02F8, QUALITY_ANY, 0x000D)) {
+				if (AVATAR->get_npc_object()->get_cont_items(0x02F8, QUALITY_ANY, 0x000D)) {
 					0xFEDD->say("The little gem sparks up at this turn of the conversation. \"I believe that in my current form, I could serve perfectly well as the blade's stabilizing force. In truth, this would allow me to give thee access to some of my more dramatic powers.\" The daemon sounds excited at this prospect, perhaps a little too excited.");
 					0xFEDD->hide();
 					0xFEE2->show_npc_face(0x0001);
@@ -828,7 +1168,7 @@ void Func009A shape#(0x9A) () {
 				fallthrough;
 
 			case "Dark Core":
-				if (0xFE9C->get_npc_object()->find_nearest(0x03DE, 0x0007)) {
+				if (AVATAR->get_npc_object()->find_nearest(0x03DE, 0x0007)) {
 					say("\"Yes, here it is. It is the cylinder sitting upon yon pedastal.\" He motions in the direction of the Dark Core.");
 				}
 				say("\"I have found it to be quite a treasure trove of useful facts. Its sole purpose seems to be the storage of information.");
@@ -923,7 +1263,7 @@ void Func009A shape#(0x9A) () {
 
 			case "daemon gem":
 				say("\"So... thou hast made a servant of Arcadion. 'Tis good to be rid of his incessant whining. I hope that thou findest him to be as useful as I didst.\" You're not sure, but his words might be construed as a curse.");
-				if (0xFE9C->get_npc_object()->get_cont_items(0x02F8, QUALITY_ANY, 0x000D)) {
+				if (AVATAR->get_npc_object()->get_cont_items(0x02F8, QUALITY_ANY, 0x000D)) {
 					0xFEDD->say("The gem glows brighter, \"'Tis good to see the last of thee, also, old man. Perhaps in another life, I shall be thy master, and thou the slave.\" The daemon lets out a chilling little laugh.");
 					0xFEDD->hide();
 					0xFEE2->show_npc_face(0x0001);
@@ -1313,9 +1653,9 @@ void Func00FB shape#(0xFB) () {
 		if (!(item in var0001)) {
 			var0001 &= item;
 		}
-		if (!0xFE9C->get_item_flag(ON_MOVING_BARGE)) {
+		if (!AVATAR->get_item_flag(ON_MOVING_BARGE)) {
 			var0002 = get_item_quality();
-			var0003 = 0xFE9B->count_objects(0x031D, var0002, FRAME_ANY);
+			var0003 = PARTY->count_objects(0x031D, var0002, FRAME_ANY);
 			if (!var0003) {
 				if (UI_get_array_size(UI_get_party_list()) == 0x0001) {
 					Func08FF("@The deed for this vessel must first be purchased.@");
@@ -1382,7 +1722,7 @@ void Func0102 shape#(0x102) () {
 		var0000 = get_object_position();
 		var0000[0x0001] -= 0x0002;
 		var0000[0x0002] += 0x0001;
-		var0001 = 0xFE9C->get_cont_items(0x032A, QUALITY_ANY, FRAME_ANY);
+		var0001 = AVATAR->get_cont_items(0x032A, QUALITY_ANY, FRAME_ANY);
 		if (var0001) {
 			var0002 = var0001->set_last_created();
 			if (var0002) {
@@ -1390,7 +1730,7 @@ void Func0102 shape#(0x102) () {
 				var0002 = UI_update_last_created(var0000);
 			}
 		}
-		var0002 = script 0xFE9C {
+		var0002 = script AVATAR {
 			face north;
 			continue;
 			actor frame bowing;
@@ -1419,8 +1759,8 @@ void Func0105 shape#(0x105) () {
 			};
 			call Func0105;
 		};
-		var0001 = Func0827(0xFE9C, item);
-		var0000 = script 0xFE9C {
+		var0001 = Func0827(AVATAR, item);
+		var0000 = script AVATAR {
 			face var0001;
 			repeat 9 {
 				continue;
@@ -1431,7 +1771,7 @@ void Func0105 shape#(0x105) () {
 		};
 	}
 	if (event == SCRIPTED) {
-		var0002 = 0xFE9C->get_cont_items(0x028E, QUALITY_ANY, FRAME_ANY);
+		var0002 = AVATAR->get_cont_items(0x028E, QUALITY_ANY, FRAME_ANY);
 		if (var0002) {
 			var0002->remove_item();
 		}
@@ -1583,7 +1923,7 @@ void Func0124 shape#(0x124) () {
 			}
 		} else {
 			Func080A(item, 0x0124);
-			var0002 = get_distance(0xFE9C) + 0x000F;
+			var0002 = get_distance(AVATAR) + 0x000F;
 			var0001 = script item after var0002 ticks {
 				nohalt;
 				call Func0124;
@@ -1591,7 +1931,7 @@ void Func0124 shape#(0x124) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		var0003 = 0xFE9C->get_object_position();
+		var0003 = AVATAR->get_object_position();
 		var0004 = [0x0AE7, 0x09D5, 0x0A37, 0x09D5, 0x0AA7, 0x08E5, 0x0A37, 0x09A5];
 		var0005 = [0x0AD7, 0x0885];
 		var0006 = 0x0000;
@@ -1623,7 +1963,7 @@ void Func0124 shape#(0x124) () {
 			var000A = [];
 			var000B = [];
 			var000C = [];
-			var000D = 0xFE9C->get_object_position();
+			var000D = AVATAR->get_object_position();
 			var000E = 0x0001;
 			for (var0011 in var0009 with var000F to var0010) {
 				var0012 = var0011->get_object_position();
@@ -1632,8 +1972,8 @@ void Func0124 shape#(0x124) () {
 				var000C[var000E] = var0011->get_item_frame_rot();
 				var000E += 0x0001;
 			}
-			0xFE9B->move_object(var0006);
-			var000D = 0xFE9C->get_object_position();
+			PARTY->move_object(var0006);
+			var000D = AVATAR->get_object_position();
 			var000E = 0x0001;
 			for (var0011 in var0009 with var0013 to var0014) {
 				var0011->move_object([(var000D[0x0001] - var000A[var000E]), (var000D[0x0002] - var000B[var000E]), var000D[0x0003]]);
@@ -1861,7 +2201,7 @@ void Func0149 shape#(0x149) () {
 	if (event == DOUBLECLICK) {
 		var0000 = get_container();
 		if (var0000) {
-			var0001 = 0xFE9C->get_object_position();
+			var0001 = AVATAR->get_object_position();
 			var0001[0x0001] += 0x0001;
 			var0002 = set_last_created();
 			if (var0002) {
@@ -1898,7 +2238,7 @@ void Func0149 shape#(0x149) () {
 				};
 				frame 0;
 			};
-			var0002 = script 0xFE9C {
+			var0002 = script AVATAR {
 				actor frame bowing;
 				actor frame standing;
 				face west;
@@ -1936,8 +2276,8 @@ void Func0152 shape#(0x152) () {
 	}
 	if (event == BG_PATH_SUCCESS) {
 		set_item_shape(0x0150);
-		var0000 = Func0827(0xFE9C, item);
-		var0001 = script 0xFE9C {
+		var0000 = Func0827(AVATAR, item);
+		var0001 = script AVATAR {
 			face var0000;
 			continue;
 			actor frame strike_2h;
@@ -2572,7 +2912,7 @@ void Func01AF shape#(0x1AF) () {
 				frame 3;
 			};
 			var0002 = Func092D(item);
-			var0001 = script 0xFE9C->get_npc_object() {
+			var0001 = script AVATAR->get_npc_object() {
 				face var0002;
 				actor frame bowing;
 				wait 3;
@@ -2730,9 +3070,9 @@ void Func01AF shape#(0x1AF) () {
 				wait 1;
 				frame 0;
 			};
-			var0002 = Func0827(0xFE9C, item);
-			0xFE9C->halt_scheduled();
-			var000A = script 0xFE9C {
+			var0002 = Func0827(AVATAR, item);
+			AVATAR->halt_scheduled();
+			var000A = script AVATAR {
 				face var0002;
 				actor frame standing;
 				actor frame bowing;
@@ -2913,7 +3253,7 @@ void Func01B2 shape#(0x1B2) () {
 		var0000 = get_object_position();
 		var0000[0x0001] += 0x0001;
 		var0000[0x0002] -= 0x0001;
-		var0001 = 0xFE9C->get_cont_items(0x032A, QUALITY_ANY, FRAME_ANY);
+		var0001 = AVATAR->get_cont_items(0x032A, QUALITY_ANY, FRAME_ANY);
 		if (var0001) {
 			var0002 = var0001->set_last_created();
 			if (var0002) {
@@ -2921,7 +3261,7 @@ void Func01B2 shape#(0x1B2) () {
 				var0002 = UI_update_last_created(var0000);
 			}
 		}
-		var0002 = script 0xFE9C {
+		var0002 = script AVATAR {
 			face north;
 			continue;
 			actor frame bowing;
@@ -2941,8 +3281,8 @@ void Func01B3 shape#(0x1B3) () {
 	}
 	if (event == BG_PATH_SUCCESS) {
 		set_item_shape(0x01E1);
-		var0000 = Func0827(0xFE9C, item);
-		var0001 = script 0xFE9C {
+		var0000 = Func0827(AVATAR, item);
+		var0001 = script AVATAR {
 			face var0000;
 			continue;
 			actor frame strike_2h;
@@ -2965,7 +3305,7 @@ void Func01D6 shape#(0x1D6) () {
 	var var0001;
 	var var0002;
 
-	var0000 = 0xFE9C->get_npc_object()->get_cont_items(0x032A, QUALITY_ANY, 0x0000);
+	var0000 = AVATAR->get_npc_object()->get_cont_items(0x032A, QUALITY_ANY, 0x0000);
 	if (var0000) {
 		var0001 = [0xFFFB, 0xFFFB];
 		var0002 = [0xFFFF, 0xFFFF];
@@ -2991,7 +3331,7 @@ void Func01DF shape#(0x1DF) () {
 	var var0009;
 
 	if (event == DOUBLECLICK) {
-		var0000 = Func0931(0xFE9B, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
+		var0000 = Func0931(PARTY, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
 		0xFEE5->show_npc_face(0x0000);
 		if (!gflags[0x0154]) {
 			if (!var0000) {
@@ -3022,7 +3362,7 @@ void Func01DF shape#(0x1DF) () {
 				var0002 = get_npc_prop(MANA);
 				var0003 = [1, 2, 3, 4];
 				if (!(var0002 in var0003)) {
-					var0004 = 0xFE9C->find_nearby(0x01DF, 0x0050, MASK_NPC);
+					var0004 = AVATAR->find_nearby(0x01DF, 0x0050, MASK_NPC);
 					for (var0007 in var0004 with var0005 to var0006) {
 						var0008 = get_npc_prop(MANA);
 						if (var0008 in var0003) {
@@ -3101,10 +3441,10 @@ void Func01EF shape#(0x1EF) () {
 	var var0000;
 
 	if (event == DOUBLECLICK) {
-		0xFE9C->item_say("@Here kitty, kitty@");
+		AVATAR->item_say("@Here kitty, kitty@");
 		set_schedule_type(IN_COMBAT);
 		set_attack_mode(FLEE);
-		set_oppressor(0xFE9C);
+		set_oppressor(AVATAR);
 		if (0xFFFD->npc_nearby()) {
 			var0000 = script 0xFFFD after 4 ticks {
 				nohalt;
@@ -3121,7 +3461,7 @@ void Func01F0 shape#(0x1F0) () {
 	var var0000;
 
 	if (event == DOUBLECLICK) {
-		0xFE9C->item_say("@Good doggy.@");
+		AVATAR->item_say("@Good doggy.@");
 		set_schedule_type(HOUND);
 	}
 	if (event == PROXIMITY) {
@@ -3246,7 +3586,7 @@ void Func01F8 shape#(0x1F8) () {
 			0xFEDB->hide();
 			gflags[0x0311] = true;
 			var0000->set_schedule_type(IN_COMBAT);
-		} else if (0xFE9B->count_objects(0x02C3, QUALITY_ANY, FRAME_ANY)) {
+		} else if (PARTY->count_objects(0x02C3, QUALITY_ANY, FRAME_ANY)) {
 			say("Dracothraxus sniffs the air distastefully, \"I sense my doom nearby. Perhaps I am to be released at long last. I wish thee good luck mortal. Defend thyself!\"  With that, the dragon leaps at you.");
 			0xFEDB->hide();
 			var0000->set_schedule_type(IN_COMBAT);
@@ -3266,7 +3606,7 @@ void Func01F8 shape#(0x1F8) () {
 			say("The dragon lets out a searing sigh, \"Released at last. I go now to seek my reward, for this has been a test of my courage as well as thine. Thy reward lies beyond the door to the north. Enter the blue gate and the Amulet of Courage will be thine.\"*");
 			remove_item();
 			0xFEDB->hide();
-			var0006 = 0xFE9C->get_npc_object()->find_nearby(0x036C, 0x0028, MASK_NONE);
+			var0006 = AVATAR->get_npc_object()->find_nearby(0x036C, 0x0028, MASK_NONE);
 			for (var0009 in var0006 with var0007 to var0008) {
 				if (var0009->get_item_quality() == 0x000A) {
 					var000A = script var0009 {
@@ -3287,12 +3627,12 @@ void Func01F8 shape#(0x1F8) () {
 				say("As you place your hand in the furnace that is the dragon's maw, you can't help but wonder if a small gem is worth the risk.");
 				var000B = UI_create_new_object(0x02F8);
 				var000B->set_item_frame(0x000C);
-				var000C = 0xFE9C->get_npc_object()->give_last_created();
+				var000C = AVATAR->get_npc_object()->give_last_created();
 				if (var000C) {
 					say("Nevertheless, you persevere and retrieve the lovely little gem.");
 				} else {
 					say("Just as you are about to pluck the gem literally from the jaws of death, the dragon gently places it within her nest. Dracothraxus closes her mouth and winks at you. \"'Twas merely a test of thy courage, little one.\"");
-					var000D = 0xFE9C->get_object_position() & (QUALITY_ANY & 0x0003);
+					var000D = AVATAR->get_object_position() & (QUALITY_ANY & 0x0003);
 					var000E = var000D->find_nearby(0x0113, 0x001E, MASK_EGG);
 					if (var000E) {
 						var000A = UI_update_last_created(var000E->get_object_position());
@@ -3302,7 +3642,7 @@ void Func01F8 shape#(0x1F8) () {
 				say("\"Tis a pity thy courage goes only so far as bravery in battle, and not to trust of an honorable opponent. However, thou hast earned thy reward, and here it is.\" The dragon pushes the gem forward with her tongue, and removes it from her mouth. She then places it gently within her nest.");
 				var000B = UI_create_new_object(0x02F8);
 				var000B->set_item_frame(0x000C);
-				var000D = 0xFE9C->get_object_position() & (QUALITY_ANY & 0x0003);
+				var000D = AVATAR->get_object_position() & (QUALITY_ANY & 0x0003);
 				var000E = var000D->find_nearby(0x0113, 0x001E, MASK_EGG);
 				if (var000E) {
 					var000A = UI_update_last_created(var000E->get_object_position());
@@ -3325,7 +3665,7 @@ void Func01FA shape#(0x1FA) () {
 		0xFFE6->say("Batlin watches Hook's death with icy resignation. Time seems to slow as he turns to you. \"This battle is not done, Avatar. Dost thou imagine thyself an immortal? The Guardian is far more. Return to your precious Earth and rest.~Sleep, that he may visit your dreams with countless visions of death in the belly of the Great Sea Serpent.\"");
 		say("\"As for me, I shall begone! Thou shalt never find me! Farewell, Avatar!\"");
 		0xFFE6->hide();
-		var0000 = 0xFE9C->find_nearby(0x0193, 0x0028, MASK_NONE);
+		var0000 = AVATAR->find_nearby(0x0193, 0x0028, MASK_NONE);
 		event = DOUBLECLICK;
 		var0000[0x0001]->Func0639();
 	}
@@ -3388,7 +3728,7 @@ void Func0247 shape#(0x247) () {
 					UI_close_gumps();
 					var0003 = [0xFFFF, 0xFFFF, 0xFFFF, 0x0000, 0x0000, 0x0000, 0x0001, 0x0001, 0x0001];
 					var0004 = [0x0001, 0x0000, 0xFFFF, 0x0001, 0x0000, 0xFFFF, 0x0001, 0x0000, 0xFFFF];
-					0xFE9C->halt_scheduled();
+					AVATAR->halt_scheduled();
 					Func0828(item, var0003, var0004, 0xFFFF, Func0247, item, BG_PATH_SUCCESS);
 				} else {
 					var0000[0x0002] -= 0x0005;
@@ -3398,7 +3738,7 @@ void Func0247 shape#(0x247) () {
 		}
 	}
 	if (event == BG_PATH_SUCCESS) {
-		var0001 = script 0xFE9C {
+		var0001 = script AVATAR {
 			face FACE_NORTH;
 			actor frame bowing;
 			actor frame standing;
@@ -3441,7 +3781,7 @@ void Func0269 shape#(0x269) () {
 		abort;
 	}
 	0xFEE4->show_npc_face(0x0000);
-	var0000 = Func0931(0xFE9B, 0x0001, 0x0347, QUALITY_ANY, 0x0000);
+	var0000 = Func0931(PARTY, 0x0001, 0x0347, QUALITY_ANY, 0x0000);
 	if (gflags[0x0004] && (!gflags[0x0012])) {
 		say("\"Congratulations, Avatar, on destroying the Sphere. I am free from my celestial prison. I thank thee. But I regret to inform thee that The Guardian engineered the Sphere such that its destruction has permanently disabled the Moongates, and thine Orb of the Moons as well. Thou canst not return to thine home by way of a red Moongate.~~");
 		say("\"Thine only hope of leaving Britannia at the conclusion of thy quest is to use The Guardian's own vehicle for entering the land -- The Black Gate.");
@@ -3670,7 +4010,7 @@ void Func026F shape#(0x26F) () {
 	var var0009;
 
 	if (event == DOUBLECLICK) {
-		if (!0xFE9C->is_readied(BG_WEAPON_HAND, 0x026F, FRAME_ANY)) {
+		if (!AVATAR->is_readied(BG_WEAPON_HAND, 0x026F, FRAME_ANY)) {
 			UI_flash_mouse(CURSOR_OUT_OF_RANGE);
 			return;
 		}
@@ -3705,9 +4045,9 @@ void Func026F shape#(0x26F) () {
 		}
 	}
 	if (event == BG_PATH_SUCCESS) {
-		var0006 = 0xFE9C->get_npc_object()->find_nearest(0x029C, 0x0003);
+		var0006 = AVATAR->get_npc_object()->find_nearest(0x029C, 0x0003);
 		var0005 = var0006->get_item_frame();
-		var0007 = 0xFE9C->get_npc_object();
+		var0007 = AVATAR->get_npc_object();
 		var0008 = Func092D(item);
 		if ((var0005 >= 0x000D) && (var0005 <= 0x000F)) {
 			var0007->item_say("@The sword is not heated.@");
@@ -3730,7 +4070,7 @@ void Func026F shape#(0x26F) () {
 				actor frame ready;
 				actor frame standing;
 			};
-			var0002 = 0xFE9C->get_npc_object()->find_nearest(0x03DF, 0x0003);
+			var0002 = AVATAR->get_npc_object()->find_nearest(0x03DF, 0x0003);
 			var0009 = script var0002 {
 				wait 4;
 				call Func0691;
@@ -3769,7 +4109,7 @@ void Func0270 shape#(0x270) () {
 	var var0016;
 
 	if (event == DOUBLECLICK) {
-		if (!0xFE9C->is_readied(BG_WEAPON_HAND, 0x0270, FRAME_ANY)) {
+		if (!AVATAR->is_readied(BG_WEAPON_HAND, 0x0270, FRAME_ANY)) {
 			Func08FF("@Thou must hold that in thine hand.@");
 			return;
 		}
@@ -3790,14 +4130,14 @@ void Func0270 shape#(0x270) () {
 		}
 	}
 	if (event == BG_PATH_SUCCESS) {
-		var0005 = 0xFE9C->find_nearby(0x03A4, 0x0003, MASK_NONE);
+		var0005 = AVATAR->find_nearby(0x03A4, 0x0003, MASK_NONE);
 		for (var0008 in var0005 with var0006 to var0007) {
 			var0009 = var0008->get_item_frame();
 			if ((var0009 == 0x0002) || (var0009 == 0x0003)) {
 				var000A = Func092D(var0008);
 			}
 		}
-		var000B = script 0xFE9C {
+		var000B = script AVATAR {
 			face var000A;
 			actor frame raise_1h;
 			wait 2;
@@ -3815,10 +4155,10 @@ void Func0270 shape#(0x270) () {
 			var000C = UI_create_new_object(0x00CB);
 			var000C->set_item_frame(0x000A);
 			var000D = UI_update_last_created([0x097A, 0x0619, 0x0004]);
-			0xFE9C->find_nearby(0x03A4, 0x0003, MASK_NONE)->set_item_frame(0x0003);
+			AVATAR->find_nearby(0x03A4, 0x0003, MASK_NONE)->set_item_frame(0x0003);
 			gflags[0x0321] = false;
 		} else {
-			var000E = 0xFE9C->find_nearby(0x03A4, 0x0003, MASK_NONE);
+			var000E = AVATAR->find_nearby(0x03A4, 0x0003, MASK_NONE);
 			for (var0008 in var000E with var000F to var0010) {
 				var0009 = var000E->get_item_frame();
 				if ((var0009 == 0x0003) || (var0009 == 0x0002)) {
@@ -3867,7 +4207,7 @@ void Func0273 shape#(0x273) () {
 		UI_play_sound_effect2(0x001B, item);
 		var0001 = var0000->get_item_shape();
 		var0002 = var0000->get_item_quality();
-		if (UI_die_roll(0x0001, 0x001E) < 0xFE9C->get_npc_prop(DEXTERITY)) {
+		if (UI_die_roll(0x0001, 0x001E) < AVATAR->get_npc_prop(DEXTERITY)) {
 			var0003 = true;
 		} else {
 			var0003 = false;
@@ -3928,7 +4268,7 @@ void Func0275 shape#(0x275) () {
 	} else {
 		var0000 = item;
 	}
-	var0001 = script 0xFE9C {
+	var0001 = script AVATAR {
 		nohalt;
 		actor frame ready;
 		actor frame raise_2h;
@@ -3936,7 +4276,7 @@ void Func0275 shape#(0x275) () {
 		attack;
 		actor frame ready;
 	};
-	var0001 = 0xFE9C->set_to_attack(var0000, 0x0275);
+	var0001 = AVATAR->set_to_attack(var0000, 0x0275);
 }
 
 void Func0276 shape#(0x276) () {
@@ -3948,8 +4288,8 @@ void Func0276 shape#(0x276) () {
 	} else {
 		var0000 = item;
 	}
-	0xFE9C->halt_scheduled();
-	var0001 = script 0xFE9C {
+	AVATAR->halt_scheduled();
+	var0001 = script AVATAR {
 		nohalt;
 		actor frame ready;
 		actor frame raise_2h;
@@ -3957,7 +4297,7 @@ void Func0276 shape#(0x276) () {
 		attack;
 		actor frame ready;
 	};
-	var0001 = 0xFE9C->set_to_attack(var0000, 0x0276);
+	var0001 = AVATAR->set_to_attack(var0000, 0x0276);
 }
 
 extern void Func0815 0x815 (var var0000);
@@ -4002,7 +4342,7 @@ void Func0281 shape#(0x281) () {
 					var0004 = var0004->get_container();
 				}
 				if (var0005) {
-					0xFE9C->item_say("Key inside");
+					AVATAR->item_say("Key inside");
 					return;
 				}
 				var0000->close_gump();
@@ -4533,18 +4873,18 @@ void Func0284 shape#(0x284) () {
 	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		UI_play_sound_effect2(0x0017, item);
-		if (!(Func0937(0xFE9C) || (!Func0937(0xFFFF)))) {
+		if (!(Func0937(AVATAR) || (!Func0937(0xFFFF)))) {
 			return;
 		}
 		if (Func08F7(0xFFFF)) {
-			Func0933(0xFE9C, "@Call it.@", 0x0000);
+			Func0933(AVATAR, "@Call it.@", 0x0000);
 			var0000 = UI_die_roll(0x0001, 0x0002);
 			if (var0000 == 0x0001) {
 				Func0933(0xFFFF, "@Tails.@", 0x0010);
-				Func0933(0xFE9C, "@It is heads.@", 0x0020);
+				Func0933(AVATAR, "@It is heads.@", 0x0020);
 			} else {
 				Func0933(0xFFFF, "@Heads.@", 0x0010);
-				Func0933(0xFE9C, "@It is tails.@", 0x0020);
+				Func0933(AVATAR, "@It is tails.@", 0x0020);
 			}
 			if (UI_die_roll(0x0001, 0x0003) == 0x0001) {
 				Func0933(0xFFFF, "@Again!@", 0x0030);
@@ -4652,7 +4992,7 @@ void Func028A shape#(0x28A) () {
 	var var0004;
 
 	if (event == DOUBLECLICK) {
-		var0000 = 0xFE9C->get_object_position();
+		var0000 = AVATAR->get_object_position();
 		var0001 = (var0000[0x0001] - 0x03A5) / 0x000A;
 		var0002 = (var0000[0x0002] - 0x046E) / 0x000A;
 		if (var0001 < 0x0000) {
@@ -4685,10 +5025,10 @@ void Func028B shape#(0x28B) () {
 	var var0006;
 
 	if (event == BG_PATH_SUCCESS) {
-		var0000 = 0xFE9C->find_nearby(0x0369, 0x0001, MASK_NONE);
+		var0000 = AVATAR->find_nearby(0x0369, 0x0001, MASK_NONE);
 		var0001 = 0x0000;
 		if (UI_get_array_size(var0000) > 0x0000) {
-			var0002 = script 0xFE9C {
+			var0002 = script AVATAR {
 				face west;
 				actor frame bowing;
 				repeat 12 {
@@ -4710,7 +5050,7 @@ void Func028B shape#(0x28B) () {
 		return;
 	}
 	if (event == SCRIPTED) {
-		var0003 = 0xFE9C->get_cont_items(0x028D, QUALITY_ANY, FRAME_ANY);
+		var0003 = AVATAR->get_cont_items(0x028D, QUALITY_ANY, FRAME_ANY);
 		if (var0003) {
 			var0003->remove_item();
 		}
@@ -4752,7 +5092,7 @@ void Func028D shape#(0x28D) () {
 
 	if (event == DOUBLECLICK) {
 		var0000 = get_container();
-		if (var0000 == 0xFE9C->get_npc_object()) {
+		if (var0000 == AVATAR->get_npc_object()) {
 			event = BG_PATH_SUCCESS;
 			item->Func062D();
 			return;
@@ -4760,7 +5100,7 @@ void Func028D shape#(0x28D) () {
 		if (var0000) {
 			var0001 = set_last_created();
 			if (var0001) {
-				var0001 = 0xFE9C->give_last_created();
+				var0001 = AVATAR->give_last_created();
 				if (!var0001) {
 					var0001 = var0000->give_last_created();
 					UI_flash_mouse(CURSOR_TOO_HEAVY);
@@ -4792,7 +5132,7 @@ void Func028E shape#(0x28E) () {
 
 	if (event == DOUBLECLICK) {
 		var0000 = get_container();
-		if (var0000 == 0xFE9C->get_npc_object()) {
+		if (var0000 == AVATAR->get_npc_object()) {
 			event = BG_PATH_SUCCESS;
 			item->Func062E();
 			return;
@@ -4800,7 +5140,7 @@ void Func028E shape#(0x28E) () {
 		if (var0000) {
 			var0001 = set_last_created();
 			if (var0001) {
-				var0001 = 0xFE9C->give_last_created();
+				var0001 = AVATAR->give_last_created();
 				if (!var0001) {
 					var0001 = var0000->give_last_created();
 					UI_flash_mouse(CURSOR_TOO_HEAVY);
@@ -4921,7 +5261,7 @@ void Func0296 shape#(0x296) () {
 	if ((event == DOUBLECLICK) || (event == WEAPON)) {
 		UI_close_gumps();
 		var0000 = UI_click_on_item();
-		var0001 = script 0xFE9C {
+		var0001 = script AVATAR {
 			actor frame strike_1h;
 			actor frame standing;
 		};
@@ -4929,11 +5269,11 @@ void Func0296 shape#(0x296) () {
 			UI_flash_mouse(CURSOR_HAND);
 			return;
 		}
-		var0002 = 0xFE9C->get_object_position();
+		var0002 = AVATAR->get_object_position();
 		var0002[0x0001] += 0x0001;
 		var0003 = false;
 		var0004 = 0x0000;
-		var0005 = 0xFE9C->find_nearby(0x01FD, 0x000F, MASK_NONE);
+		var0005 = AVATAR->find_nearby(0x01FD, 0x000F, MASK_NONE);
 		for (var0008 in var0005 with var0006 to var0007) {
 			var0004 += 0x0001;
 		}
@@ -4965,19 +5305,19 @@ void Func0296 shape#(0x296) () {
 		} else {
 			var0009 = UI_die_roll(0x0001, 0x0004);
 			if (var0009 == 0x0001) {
-				Func0933(0xFE9C, "@Not even a bite!@", 0x0000);
+				Func0933(AVATAR, "@Not even a bite!@", 0x0000);
 			}
 			if (var0009 == 0x0002) {
-				Func0933(0xFE9C, "@It got away!@", 0x0000);
+				Func0933(AVATAR, "@It got away!@", 0x0000);
 				if (0xFFFF->npc_nearby()) {
 					Func0933(0xFFFF, "@It was the Big One!@", 0x0010);
 				}
 			}
 			if (var0009 == 0x0003) {
-				Func0933(0xFE9C, "@I've lost my bait.@", 0x0000);
+				Func0933(AVATAR, "@I've lost my bait.@", 0x0000);
 			}
 			if (var0009 == 0x0004) {
-				Func0933(0xFE9C, "@I felt a nibble.@", 0x0000);
+				Func0933(AVATAR, "@I felt a nibble.@", 0x0000);
 			}
 		}
 	}
@@ -5009,7 +5349,7 @@ void Func029C shape#(0x29C) () {
 	var var000C;
 
 	if (event == DOUBLECLICK) {
-		if (0xFE9C->is_readied(BG_WEAPON_HAND, 0x026F, FRAME_ANY)) {
+		if (AVATAR->is_readied(BG_WEAPON_HAND, 0x026F, FRAME_ANY)) {
 			var0000 = find_nearest(0x03DF, 0x0003);
 			if (var0000) {
 				var0001 = get_object_position();
@@ -5049,7 +5389,7 @@ void Func029C shape#(0x29C) () {
 	}
 	if (event == BG_PATH_SUCCESS) {
 		var0009 = Func092D(item);
-		var0008 = script 0xFE9C->get_npc_object() {
+		var0008 = script AVATAR->get_npc_object() {
 			face var0009;
 			actor frame bowing;
 			wait 3;
@@ -5062,7 +5402,7 @@ void Func029C shape#(0x29C) () {
 		};
 	}
 	if (event == SCRIPTED) {
-		var000A = 0xFE9C->get_npc_object()->get_cont_items(0x029C, QUALITY_ANY, FRAME_ANY);
+		var000A = AVATAR->get_npc_object()->get_cont_items(0x029C, QUALITY_ANY, FRAME_ANY);
 		if (var000A) {
 			var000B = UI_click_on_item();
 			var000C = var000B->get_item_shape();
@@ -5081,23 +5421,23 @@ void Func029C shape#(0x29C) () {
 				if ((var0003 >= 0x0008) && (var0003 <= 0x000C)) {
 					Func0828(var000B, 0x0000, 0x0001, 0x0000, Func029C, var000B, PATH_SUCCESS);
 				} else {
-					0xFE9C->get_npc_object()->item_say("@The sword's not hot.@");
+					AVATAR->get_npc_object()->item_say("@The sword's not hot.@");
 				}
 			}
 		} else {
-			0xFE9C->get_npc_object()->item_say("@I can't pick it up.@");
+			AVATAR->get_npc_object()->item_say("@I can't pick it up.@");
 			return;
 		}
 	}
 	if (event == BG_PATH_FAILURE) {
 		var0009 = Func092D(item);
-		var0008 = script 0xFE9C->get_npc_object() {
+		var0008 = script AVATAR->get_npc_object() {
 			face var0009;
 			actor frame bowing;
 			wait 3;
 			actor frame standing;
 		};
-		var000A = 0xFE9C->get_npc_object()->get_cont_items(0x029C, QUALITY_ANY, FRAME_ANY);
+		var000A = AVATAR->get_npc_object()->get_cont_items(0x029C, QUALITY_ANY, FRAME_ANY);
 		var0008 = script var000A {
 			wait 3;
 			call Func068B;
@@ -5105,13 +5445,13 @@ void Func029C shape#(0x29C) () {
 	}
 	if (event == STARTED_TALKING) {
 		var0009 = Func092D(item);
-		var0008 = script 0xFE9C->get_npc_object() {
+		var0008 = script AVATAR->get_npc_object() {
 			face var0009;
 			actor frame bowing;
 			wait 3;
 			actor frame standing;
 		};
-		var000A = 0xFE9C->get_npc_object()->get_cont_items(0x029C, QUALITY_ANY, FRAME_ANY);
+		var000A = AVATAR->get_npc_object()->get_cont_items(0x029C, QUALITY_ANY, FRAME_ANY);
 		var0008 = script var000A {
 			wait 3;
 			call Func068C;
@@ -5119,7 +5459,7 @@ void Func029C shape#(0x29C) () {
 	}
 	if (event == PATH_SUCCESS) {
 		var0009 = Func092D(item);
-		var0008 = script 0xFE9C->get_npc_object() {
+		var0008 = script AVATAR->get_npc_object() {
 			face var0009;
 			actor frame bowing;
 		};
@@ -5238,7 +5578,7 @@ void Func02A3 shape#(0x2A3) () {
 			}
 		}
 		if (var0000 == 0x000B) {
-			var0004 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+			var0004 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 			var0005 = "Party gold: " + var0004;
 			item_say(var0005);
 		}
@@ -5356,8 +5696,8 @@ void Func02BD shape#(0x2BD) () {
 		Func0839(item, 0x0253, event);
 	}
 	if (event == BG_PATH_SUCCESS) {
-		var0000 = Func0827(0xFE9C, item);
-		var0001 = script 0xFE9C {
+		var0000 = Func0827(AVATAR, item);
+		var0001 = script AVATAR {
 			face var0000;
 			continue;
 			actor frame strike_2h;
@@ -5864,13 +6204,13 @@ void Func02CF shape#(0x2CF) () {
 	var var0001;
 	var var0002;
 
-	var0000 = 0xFE9C->get_npc_object()->get_cont_items(0x032A, QUALITY_ANY, 0x0001);
+	var0000 = AVATAR->get_npc_object()->get_cont_items(0x032A, QUALITY_ANY, 0x0001);
 	if (var0000) {
 		var0001 = [0x0001, 0x0001, 0xFFFE, 0xFFFE, 0x0000, 0xFFFF, 0x0000, 0xFFFF];
 		var0002 = [0xFFFF, 0xFFFE, 0xFFFF, 0xFFFE, 0x0001, 0x0001, 0xFFFC, 0xFFFC];
 		Func0828(item, var0001, var0002, 0x0000, Func032A, var0000, BG_PATH_SUCCESS);
 	} else {
-		var0000 = 0xFE9C->get_npc_object()->get_cont_items(0x032A, QUALITY_ANY, 0x0000);
+		var0000 = AVATAR->get_npc_object()->get_cont_items(0x032A, QUALITY_ANY, 0x0000);
 		if (var0000) {
 			var0001 = [0x0001, 0x0001, 0xFFFE, 0xFFFE, 0x0000, 0xFFFF, 0x0000, 0xFFFF];
 			var0002 = [0xFFFF, 0xFFFE, 0xFFFF, 0xFFFE, 0x0001, 0x0001, 0xFFFC, 0xFFFC];
@@ -6106,7 +6446,7 @@ void Func02E4 shape#(0x2E4) () {
 	var var0002;
 	var var0003;
 
-	var0000 = 0xFE9C->get_npc_object()->get_cont_items(0x032A, QUALITY_ANY, 0x0000);
+	var0000 = AVATAR->get_npc_object()->get_cont_items(0x032A, QUALITY_ANY, 0x0000);
 	if (var0000) {
 		var0001 = [0xFFFB, 0xFFFB];
 		var0002 = [0xFFFF, 0xFFFF];
@@ -6125,13 +6465,13 @@ void Func02E5 shape#(0x2E5) () {
 	var var0001;
 	var var0002;
 
-	var0000 = 0xFE9C->get_npc_object()->get_cont_items(0x032A, QUALITY_ANY, 0x0001);
+	var0000 = AVATAR->get_npc_object()->get_cont_items(0x032A, QUALITY_ANY, 0x0001);
 	if (var0000) {
 		var0001 = [0xFFFF, 0xFFFE, 0xFFFF, 0xFFFE, 0x0001, 0x0001, 0xFFFC, 0xFFFC];
 		var0002 = [0x0001, 0x0001, 0xFFFE, 0xFFFE, 0x0000, 0xFFFF, 0x0000, 0xFFFF];
 		Func0828(item, var0001, var0002, 0x0000, Func032A, var0000, BG_PATH_SUCCESS);
 	} else {
-		var0000 = 0xFE9C->get_npc_object()->get_cont_items(0x032A, QUALITY_ANY, 0x0000);
+		var0000 = AVATAR->get_npc_object()->get_cont_items(0x032A, QUALITY_ANY, 0x0000);
 		if (var0000) {
 			var0001 = [0xFFFF, 0xFFFE, 0xFFFF, 0xFFFE, 0x0001, 0x0001, 0xFFFC, 0xFFFC];
 			var0002 = [0x0001, 0x0001, 0xFFFE, 0xFFFE, 0x0000, 0xFFFF, 0x0000, 0xFFFF];
@@ -6170,14 +6510,14 @@ void Func02E7 shape#(0x2E7) () {
 		Func0828(item, var0000, var0001, var0002, Func02E7, item, BG_PATH_SUCCESS);
 	}
 	if (event == BG_PATH_SUCCESS) {
-		var0003 = Func0827(0xFE9C, item);
-		var0004 = script 0xFE9C {
+		var0003 = Func0827(AVATAR, item);
+		var0004 = script AVATAR {
 			face var0003;
 			continue;
 			actor frame bowing;
 			actor frame standing;
 		};
-		var0005 = 0xFE9C->get_npc_prop(STRENGTH);
+		var0005 = AVATAR->get_npc_prop(STRENGTH);
 		if ((var0005 >= 0) && (var0005 < 4)) {
 			var0005 = 0;
 		}
@@ -6338,7 +6678,7 @@ void Func02F2 shape#(0x2F2) () {
 						UI_sprite_effect(ANIMATION_FIREWORKS, (var0004[0x0001] - 0x0002), (var0004[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 						remove_item();
 					}
-					var0003 = script 0xFE9C {
+					var0003 = script AVATAR {
 						wait 28;
 						call Func02F2;
 					};
@@ -6412,7 +6752,7 @@ void Func02F8 shape#(0x2F8) () {
 					return;
 				}
 				if (var0000 == 0x000C) {
-					if (!0xFE9C->is_readied(BG_WEAPON_HAND, 0x02F8, 0x000C)) {
+					if (!AVATAR->is_readied(BG_WEAPON_HAND, 0x02F8, 0x000C)) {
 						Func08FF("@I believe the gem must be held in the weapon hand to break the mirror.@");
 						return;
 					}
@@ -6437,7 +6777,7 @@ void Func02F8 shape#(0x2F8) () {
 	}
 	if (event == BG_PATH_SUCCESS) {
 		var0007 = Func092D(item);
-		var0003 = script 0xFE9C->get_npc_object() {
+		var0003 = script AVATAR->get_npc_object() {
 			face var0007;
 			wait 2;
 			actor frame raise_1h;
@@ -6451,7 +6791,7 @@ void Func02F8 shape#(0x2F8) () {
 			wait 10;
 			frame 9;
 		};
-		var0008 = 0xFE9C->get_npc_object()->get_cont_items(0x02F8, QUALITY_ANY, 0x000C);
+		var0008 = AVATAR->get_npc_object()->get_cont_items(0x02F8, QUALITY_ANY, 0x000C);
 		var0003 = script var0008 {
 			wait 10;
 			frame 13;
@@ -6487,7 +6827,7 @@ void Func0301 shape#(0x301) () {
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0003->set_schedule_type(IN_COMBAT);
 			var0003->set_attack_mode(FLEE);
-			var0003->set_oppressor(0xFE9C);
+			var0003->set_oppressor(AVATAR);
 		}
 		var0004 = get_object_position();
 		halt_scheduled();
@@ -6541,8 +6881,8 @@ void Func0303 shape#(0x303) () {
 				wait 5;
 				remove;
 			};
-			var0003 = 0xFE9C->set_to_attack(var0000, 0x02C0);
-			var0003 = script 0xFE9C {
+			var0003 = AVATAR->set_to_attack(var0000, 0x02C0);
+			var0003 = script AVATAR {
 				face var0002;
 				continue;
 				actor frame strike_1h;
@@ -6552,7 +6892,7 @@ void Func0303 shape#(0x303) () {
 		}
 		if (var0001 == 0x0131) {
 			var0004 = find_nearby(0x00A8, 0x000C, MASK_ALL_UNSEEN);
-			var0005 = 0xFE9C->find_nearby(0x0193, 0x0050, MASK_NONE);
+			var0005 = AVATAR->find_nearby(0x0193, 0x0050, MASK_NONE);
 			if (!var0005) {
 				if (!var0004) {
 					UI_run_endgame(true);
@@ -6674,7 +7014,7 @@ void Func0311 shape#(0x311) () {
 		if (gflags[0x0057] || (!Func093E())) {
 			var0000 = UI_click_on_item();
 			var0001 = Func0822(var0000);
-			var0002 = 0xFE9C->find_direction(var0001);
+			var0002 = AVATAR->find_direction(var0001);
 			if ((var0002 == NORTH) || (var0002 == SOUTH)) {
 				var0003 = 0x0001;
 				var0004 = 0x030B;
@@ -6721,7 +7061,7 @@ void Func0311 shape#(0x311) () {
 					};
 					remove;
 				};
-				var000B = 0x0005 - 0xFE9C->get_distance(var0009);
+				var000B = 0x0005 - AVATAR->get_distance(var0009);
 				var000C = new script {
 					face (FACE_NORTH + var0002);
 				};
@@ -6730,8 +7070,8 @@ void Func0311 shape#(0x311) () {
 						wait var000B;
 					};
 				}
-				var000A = 0xFE9C->run_script(var000C);
-				var000D = 0xFE9C->get_object_position();
+				var000A = AVATAR->run_script(var000C);
+				var000D = AVATAR->get_object_position();
 				if (var0003 == 0x0001) {
 					var0003 = 0x0002;
 				} else {
@@ -6799,8 +7139,8 @@ void Func0313 shape#(0x313) () {
 		Func0828(item, var0000, var0001, var0002, Func0313, item, BG_PATH_SUCCESS);
 	}
 	if (event == BG_PATH_SUCCESS) {
-		var0003 = Func0827(0xFE9C, item);
-		var0004 = script 0xFE9C {
+		var0003 = Func0827(AVATAR, item);
+		var0004 = script AVATAR {
 			face var0003;
 			continue;
 			actor frame bowing;
@@ -6841,8 +7181,8 @@ void Func0314 shape#(0x314) () {
 	}
 	if ((event == BG_PATH_SUCCESS) || (event == SCRIPTED)) {
 		if (event != SCRIPTED) {
-			var0003 = Func0827(0xFE9C, item);
-			var0004 = script 0xFE9C {
+			var0003 = Func0827(AVATAR, item);
+			var0004 = script AVATAR {
 				face var0003;
 				continue;
 				actor frame strike_1h;
@@ -7284,7 +7624,7 @@ void Func0329 shape#(0x329) () {
 					gflags[0x001F] = false;
 					gflags[0x0020] = false;
 					gflags[0x0021] = false;
-					Func0933(0xFE9C, "@Spin baby!@", 0x0000);
+					Func0933(AVATAR, "@Spin baby!@", 0x0000);
 					for (var0009 in var0005 with var0007 to var0008) {
 						var000A = UI_die_roll(0x0000, 0x0002) * 0x0008;
 						var0009->halt_scheduled();
@@ -7381,7 +7721,7 @@ void Func032A shape#(0x32A) () {
 		var0003 = Func0945(item);
 		var0005 = Func092D(var0003);
 		if (var0003->is_npc()) {
-			var0004 = script 0xFE9C->get_npc_object() {
+			var0004 = script AVATAR->get_npc_object() {
 				face var0005;
 				actor frame ready;
 				wait 3;
@@ -7394,7 +7734,7 @@ void Func032A shape#(0x32A) () {
 				call Func032A;
 			};
 		} else {
-			var0004 = script 0xFE9C->get_npc_object() {
+			var0004 = script AVATAR->get_npc_object() {
 				face var0005;
 				actor frame bowing;
 				wait 3;
@@ -7414,11 +7754,11 @@ void Func032A shape#(0x32A) () {
 		var0007 = var0006->get_item_shape();
 		if ((var0007 == 0x02D1) || (var0007 == 0x03DD)) {
 			if (var0000 == 0x0002) {
-				0xFE9C->get_npc_object()->item_say("@No, thank thee.@");
+				AVATAR->get_npc_object()->item_say("@No, thank thee.@");
 			} else if (var0000 == 0x0000) {
-				0xFE9C->get_npc_object()->item_say("@The bucket is empty.@");
+				AVATAR->get_npc_object()->item_say("@The bucket is empty.@");
 			} else {
-				0xFE9C->get_npc_object()->item_say("@Ahhh, how refreshing.@");
+				AVATAR->get_npc_object()->item_say("@Ahhh, how refreshing.@");
 				var0004 = script item {
 					frame 0;
 				};
@@ -7429,7 +7769,7 @@ void Func032A shape#(0x32A) () {
 			var0001 = [0x0000, 0x0002, 0x0000, 0xFFFE];
 			var0002 = [0x0002, 0x0000, 0xFFFE, 0x0000];
 			if (var0000 == 0x0000) {
-				0xFE9C->get_npc_object()->item_say("@The bucket is empty.@");
+				AVATAR->get_npc_object()->item_say("@The bucket is empty.@");
 			} else {
 				var0004 = script var0006 {
 					repeat 50 {
@@ -7454,7 +7794,7 @@ void Func032A shape#(0x32A) () {
 				var0001 = [0xFFFF, 0xFFFE, 0x0001, 0x0001, 0xFFFF, 0xFFFE, 0xFFFC, 0xFFFC];
 				var0002 = [0x0001, 0x0001, 0xFFFF, 0xFFFE, 0xFFFC, 0xFFFC, 0xFFFF, 0xFFFE];
 				if (var0000 == 0x0000) {
-					0xFE9C->get_npc_object()->item_say("@The bucket is empty.@");
+					AVATAR->get_npc_object()->item_say("@The bucket is empty.@");
 				}
 				if (var0000 > 0x0001) {
 					return;
@@ -7470,7 +7810,7 @@ void Func032A shape#(0x32A) () {
 			var0001 = [0x0002, 0x0000, 0xFFFE, 0x0000];
 			var0002 = [0x0000, 0x0002, 0x0000, 0xFFFE];
 			if (var0000 == 0x0000) {
-				0xFE9C->get_npc_object()->item_say("@The bucket is empty.@");
+				AVATAR->get_npc_object()->item_say("@The bucket is empty.@");
 			}
 			if (var0000 > 0x0001) {
 				return;
@@ -7488,7 +7828,7 @@ void Func032A shape#(0x32A) () {
 					Func0828(var0008, var0001, var0002, 0x0000, Func032A, item, PATH_SUCCESS_9);
 				}
 			} else {
-				0xFE9C->get_npc_object()->item_say("@The bucket is full.@");
+				AVATAR->get_npc_object()->item_say("@The bucket is full.@");
 			}
 		}
 		if (var0007 == 0x01D6) {
@@ -7497,12 +7837,12 @@ void Func032A shape#(0x32A) () {
 				var0002 = [0xFFFF, 0xFFFF];
 				Func0828(var0006, var0001, var0002, 0x0000, Func032A, item, PATH_SUCCESS_9);
 			} else {
-				0xFE9C->get_npc_object()->item_say("@The bucket is full.@");
+				AVATAR->get_npc_object()->item_say("@The bucket is full.@");
 			}
 		}
 		if (var0007 == 0x014B) {
 			if (var0000 == 0x0000) {
-				0xFE9C->get_npc_object()->item_say("@The bucket is empty.@");
+				AVATAR->get_npc_object()->item_say("@The bucket is empty.@");
 				return;
 			}
 			var0006 = Func093C(var0006[0x0001], var0006);
@@ -7512,7 +7852,7 @@ void Func032A shape#(0x32A) () {
 		}
 		if (var0006[0x0001] == 0x0000) {
 			if (var0000 == 0x0000) {
-				0xFE9C->get_npc_object()->item_say("@The bucket is empty.@");
+				AVATAR->get_npc_object()->item_say("@The bucket is empty.@");
 				return;
 			}
 			var0006 = Func093C(var0006[0x0001], var0006);
@@ -7521,7 +7861,7 @@ void Func032A shape#(0x32A) () {
 		}
 	}
 	if (event == WEAPON) {
-		var000A = 0xFE9C->get_npc_object()->get_cont_items(0x032A, QUALITY_ANY, FRAME_ANY);
+		var000A = AVATAR->get_npc_object()->get_cont_items(0x032A, QUALITY_ANY, FRAME_ANY);
 		var0000 = var000A->get_item_frame();
 		var000B = Func092D(item);
 		var000C = (var000B + 0x0004) % 0x0008;
@@ -7540,7 +7880,7 @@ void Func032A shape#(0x32A) () {
 				wait 5;
 			};
 		}
-		var000E = script 0xFE9C->get_npc_object() {
+		var000E = script AVATAR->get_npc_object() {
 			face var000B;
 			actor frame strike_1h;
 			actor frame ready;
@@ -7553,9 +7893,9 @@ void Func032A shape#(0x32A) () {
 	}
 	if (event == BG_PATH_SUCCESS) {
 		var0010 = false;
-		var0010 = 0xFE9C->get_npc_object()->find_nearest(0x02E5, 0x0005);
+		var0010 = AVATAR->get_npc_object()->find_nearest(0x02E5, 0x0005);
 		if (!var0010) {
-			var0010 = 0xFE9C->get_npc_object()->find_nearest(0x02CF, 0x0005);
+			var0010 = AVATAR->get_npc_object()->find_nearest(0x02CF, 0x0005);
 		}
 		if (var0010) {
 			var0000 = get_item_frame();
@@ -7565,20 +7905,20 @@ void Func032A shape#(0x32A) () {
 			}
 			if (var0000 == 0x0001) {
 				if ((var0011 == 0x0003) || (var0011 == 0x0007)) {
-					0xFE9C->get_npc_object()->item_say("@The trough is full.@");
+					AVATAR->get_npc_object()->item_say("@The trough is full.@");
 					return;
 				}
 				var0012 = var0011 + 0x0001;
 				var0013 = 0x0000;
 			} else if ((var0011 == 0x0000) || (var0011 == 0x0004)) {
-				0xFE9C->get_npc_object()->item_say("@The trough is empty.@");
+				AVATAR->get_npc_object()->item_say("@The trough is empty.@");
 				return;
 			} else {
 				var0012 = var0011 - 0x0001;
 				var0013 = 0x0001;
 			}
 			var0005 = Func092D(var0010);
-			var000E = script 0xFE9C->get_npc_object() {
+			var000E = script AVATAR->get_npc_object() {
 				face var0005;
 				actor frame bowing;
 				wait 2;
@@ -7597,13 +7937,13 @@ void Func032A shape#(0x32A) () {
 		}
 	}
 	if (event == BG_PATH_FAILURE) {
-		var000A = 0xFE9C->get_npc_object()->get_cont_items(0x032A, QUALITY_ANY, 0x0001);
+		var000A = AVATAR->get_npc_object()->get_cont_items(0x032A, QUALITY_ANY, 0x0001);
 		var0000 = var000A->get_item_frame();
 		var0007 = get_item_shape();
 		var0015 = get_item_frame();
 		if (var0007 == 0x02E3) {
 			if (var0015 == 0x0004) {
-				0xFE9C->get_npc_object()->item_say("@There are only coals.@");
+				AVATAR->get_npc_object()->item_say("@There are only coals.@");
 				return;
 			}
 			if (var0015 == 0x0007) {
@@ -7631,7 +7971,7 @@ void Func032A shape#(0x32A) () {
 				};
 			}
 			var0005 = Func092D(item);
-			var000E = script 0xFE9C->get_npc_object() {
+			var000E = script AVATAR->get_npc_object() {
 				face var0005;
 				actor frame bowing;
 				wait 2;
@@ -7643,7 +7983,7 @@ void Func032A shape#(0x32A) () {
 			if (var0015 == 0x0010) {
 				var0018 = 0x0002;
 				var0005 = Func092D(item);
-				var000E = script 0xFE9C->get_npc_object() {
+				var000E = script AVATAR->get_npc_object() {
 					face var0005;
 					actor frame strike_1h;
 					actor frame ready;
@@ -7669,7 +8009,7 @@ void Func032A shape#(0x32A) () {
 				var001B->set_item_frame(var0015);
 				var001C = UI_update_last_created(var0017);
 				var0005 = Func092D(item);
-				var000E = script 0xFE9C->get_npc_object() {
+				var000E = script AVATAR->get_npc_object() {
 					face var0005;
 					actor frame strike_1h;
 					actor frame ready;
@@ -7701,14 +8041,14 @@ void Func032A shape#(0x32A) () {
 		}
 		if (var0007 == 0x0339) {
 			if (var0015 == 0x0000) {
-				0xFE9C->get_npc_object()->item_say("@There are only coals.@");
+				AVATAR->get_npc_object()->item_say("@There are only coals.@");
 				return;
 			}
 			var001E = script item {
 				frame 0;
 			};
 			var0005 = Func092D(item);
-			var000E = script 0xFE9C->get_npc_object() {
+			var000E = script AVATAR->get_npc_object() {
 				face var0005;
 				actor frame bowing;
 				wait 2;
@@ -7721,7 +8061,7 @@ void Func032A shape#(0x32A) () {
 		if (var0007 == 0x0292) {
 			if (var0015 == 0x0000) {
 				var0005 = Func092D(item);
-				var000E = script 0xFE9C->get_npc_object() {
+				var000E = script AVATAR->get_npc_object() {
 					face var0005;
 					actor frame bowing;
 					wait 2;
@@ -7732,7 +8072,7 @@ void Func032A shape#(0x32A) () {
 		}
 	}
 	if (event == STARTED_TALKING) {
-		var0020 = 0xFE9C->get_npc_object()->find_nearest(0x02E4, 0x000A);
+		var0020 = AVATAR->get_npc_object()->find_nearest(0x02E4, 0x000A);
 		var0021 = var0020->get_item_frame();
 		if ((var0021 >= 0x0000) && (var0021 <= 0x000B)) {
 			var0021 = 0x0001;
@@ -7754,7 +8094,7 @@ void Func032A shape#(0x32A) () {
 			wait 1;
 			next frame cycle;
 		};
-		var000E = script 0xFE9C->get_npc_object() {
+		var000E = script AVATAR->get_npc_object() {
 			face east;
 			actor frame strike_1h;
 			wait 2;
@@ -7775,7 +8115,7 @@ void Func032A shape#(0x32A) () {
 		};
 	}
 	if (event == PATH_SUCCESS) {
-		var000E = script 0xFE9C->get_npc_object() {
+		var000E = script AVATAR->get_npc_object() {
 			face north;
 			actor frame bowing;
 			wait 3;
@@ -7985,7 +8325,7 @@ void Func0334 shape#(0x334) () {
 				call Func0334;
 			};
 			Func08FE(["", "@He's dead, Avatar!@", "@Yancey-Hausman will pay!@"]);
-			var0007 = script 0xFE9C {
+			var0007 = script AVATAR {
 				nohalt;
 				speech 26;
 			};
@@ -8058,7 +8398,7 @@ void Func0336 shape#(0x336) () {
 			if (var0001->is_npc()) {
 				var0001->set_schedule_type(IN_COMBAT);
 				var0001->set_attack_mode(FLEE);
-				var0001->set_oppressor(0xFE9C);
+				var0001->set_oppressor(AVATAR);
 				Func0925(item);
 			} else if (var0001->get_item_shape() == 0x0336) {
 				if (var0001->get_item_frame() == 0x0002) {
@@ -8146,7 +8486,7 @@ void Func033B shape#(0x33B) () {
 			if (var0002 == var0001) {
 				Func08FF("@It does not appear as though a bandage is needed.@");
 			} else {
-				if (var0000->get_npc_number() == 0xFE9C) {
+				if (var0000->get_npc_number() == AVATAR) {
 					Func08FE("@Much better.@");
 				} else if (Func0937(var0000)) {
 					var0003 = UI_die_roll(0x0001, 0x0003);
@@ -8401,7 +8741,7 @@ void Func0356 shape#(0x356) () {
 			say("\"Well done, mighty warrior! The unsurpassed Courage which flows through thy veins could be none other than that of the Avatar. Thou hast proven thyself worthy of the reward of Courage with Valor, Sacrifice, Honor, and Spirituality... Receive it now\tin Humility.\"*");
 		}
 		0xFEE1->hide();
-		var0002 = script 0xFE9C->get_npc_object() {
+		var0002 = script AVATAR->get_npc_object() {
 			wait 2;
 			actor frame bowing;
 			wait 2;
@@ -8420,18 +8760,18 @@ void Func0356 shape#(0x356) () {
 		var0000 = get_item_frame();
 		if (var0000 == 0x0010) {
 			if (!gflags[0x0318]) {
-				var0003 = 0xFE9C->get_npc_object()->get_object_position();
+				var0003 = AVATAR->get_npc_object()->get_object_position();
 				UI_sprite_effect(ANIMATION_TELEPORT, (var0003[0x0001] - 0x0001), (var0003[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 				UI_play_sound_effect(0x0043);
-				var0004 = 0xFE9C->get_npc_object()->get_npc_prop(INTELLIGENCE);
-				var0004 &= 0xFE9C->get_npc_object()->get_npc_prop(MAX_MANA);
-				var0004 &= 0xFE9C->get_npc_object()->get_npc_prop(MANA);
+				var0004 = AVATAR->get_npc_object()->get_npc_prop(INTELLIGENCE);
+				var0004 &= AVATAR->get_npc_object()->get_npc_prop(MAX_MANA);
+				var0004 &= AVATAR->get_npc_object()->get_npc_prop(MANA);
 				if (!(var0004[0x0001] >= 30)) {
-					var0005 = 0xFE9C->get_npc_object()->set_npc_prop(INTELLIGENCE, 30 - var0004[0x0001]);
+					var0005 = AVATAR->get_npc_object()->set_npc_prop(INTELLIGENCE, 30 - var0004[0x0001]);
 				}
 				if (!(var0004[0x0002] >= 30)) {
-					var0005 = 0xFE9C->get_npc_object()->set_npc_prop(MAX_MANA, 30 - var0004[0x0002]);
-					var0005 = 0xFE9C->get_npc_object()->set_npc_prop(MANA, 30 - var0004[0x0003]);
+					var0005 = AVATAR->get_npc_object()->set_npc_prop(MAX_MANA, 30 - var0004[0x0002]);
+					var0005 = AVATAR->get_npc_object()->set_npc_prop(MANA, 30 - var0004[0x0003]);
 				}
 				gflags[0x0318] = true;
 				var0006 = script item {
@@ -8447,16 +8787,16 @@ void Func0356 shape#(0x356) () {
 		}
 		if (var0000 == 0x000E) {
 			if (!gflags[0x0327]) {
-				var0003 = 0xFE9C->get_npc_object()->get_object_position();
+				var0003 = AVATAR->get_npc_object()->get_object_position();
 				UI_sprite_effect(ANIMATION_TELEPORT, (var0003[0x0001] - 0x0001), (var0003[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 				UI_play_sound_effect(0x0043);
-				var0004 = 0xFE9C->get_npc_object()->get_npc_prop(DEXTERITY);
-				var0004 &= 0xFE9C->get_npc_object()->get_npc_prop(COMBAT);
+				var0004 = AVATAR->get_npc_object()->get_npc_prop(DEXTERITY);
+				var0004 &= AVATAR->get_npc_object()->get_npc_prop(COMBAT);
 				if (!(var0004[0x0001] >= 30)) {
-					var0005 = 0xFE9C->get_npc_object()->set_npc_prop(DEXTERITY, 30 - var0004[0x0001]);
+					var0005 = AVATAR->get_npc_object()->set_npc_prop(DEXTERITY, 30 - var0004[0x0001]);
 				}
 				if (!(var0004[0x0002] >= 30)) {
-					var0005 = 0xFE9C->get_npc_object()->set_npc_prop(COMBAT, 30 - var0004[0x0002]);
+					var0005 = AVATAR->get_npc_object()->set_npc_prop(COMBAT, 30 - var0004[0x0002]);
 				}
 				gflags[0x0327] = true;
 				var0006 = script item {
@@ -8473,16 +8813,16 @@ void Func0356 shape#(0x356) () {
 		}
 		if (var0000 == 0x000F) {
 			if (!gflags[0x0341]) {
-				var0003 = 0xFE9C->get_npc_object()->get_object_position();
+				var0003 = AVATAR->get_npc_object()->get_object_position();
 				UI_sprite_effect(ANIMATION_TELEPORT, (var0003[0x0001] - 0x0001), (var0003[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 				UI_play_sound_effect(0x0043);
-				var0004 = 0xFE9C->get_npc_object()->get_npc_prop(STRENGTH);
-				var0004 &= 0xFE9C->get_npc_object()->get_npc_prop(HEALTH);
+				var0004 = AVATAR->get_npc_object()->get_npc_prop(STRENGTH);
+				var0004 &= AVATAR->get_npc_object()->get_npc_prop(HEALTH);
 				if (!(var0004[0x0001] >= 30)) {
-					var0005 = 0xFE9C->get_npc_object()->set_npc_prop(STRENGTH, 30 - var0004[0x0001]);
+					var0005 = AVATAR->get_npc_object()->set_npc_prop(STRENGTH, 30 - var0004[0x0001]);
 				}
 				if (!(var0004[0x0002] >= 30)) {
-					var0005 = 0xFE9C->get_npc_object()->set_npc_prop(HEALTH, 30 - var0004[0x0002]);
+					var0005 = AVATAR->get_npc_object()->set_npc_prop(HEALTH, 30 - var0004[0x0002]);
 				}
 				gflags[0x0341] = true;
 				var0006 = script item {
@@ -8614,7 +8954,7 @@ void Func0378 shape#(0x378) () {
 					var0004 = true;
 				}
 				if (var0003 == var0004) {
-					var0005 = 0xFE9C->find_nearby(0x009B, 0x0064, MASK_NONE);
+					var0005 = AVATAR->find_nearby(0x009B, 0x0064, MASK_NONE);
 					if (var0005) {
 						var0005->set_camera();
 						var0005->get_barge()->Func061C();
@@ -8728,8 +9068,8 @@ void Func03B0 shape#(0x3B0) () {
 
 	if (event == DOUBLECLICK) {
 		if (get_item_frame()) {
-			if (Func0937(0xFE9C)) {
-				0xFE9C->item_say("ptui!");
+			if (Func0937(AVATAR)) {
+				AVATAR->item_say("ptui!");
 				if (!UI_in_gump_mode()) {
 					var0000 = script item after 3 ticks {
 						sfx 24;
@@ -8899,10 +9239,10 @@ void Func03DE shape#(0x3DE) () {
 	if (event == DOUBLECLICK) {
 		if (!gflags[0x0301]) {
 			gflags[0x0301] = true;
-			0xFE9C->show_npc_face(UI_is_pc_female());
+			AVATAR->show_npc_face(UI_is_pc_female());
 			say("You feel as if your mind is being probed, delicately at first, then with more insistance. Images of long past memories flit before your eyes and old emotions resurface. At one point, the images pause as you remember the words Love, Sol, Moons, and Death then a strange sense of deja vu comes over you as the vision comes up to the current time. The images cease and a vast wave of power overwhelms you. A wall of darkness falls...");
-			0xFE9C->hide();
-			var0000 = script 0xFE9C->get_npc_object() {
+			AVATAR->hide();
+			var0000 = script AVATAR->get_npc_object() {
 				actor frame bowing;
 				wait 1;
 				actor frame kneeling;
@@ -8917,13 +9257,13 @@ void Func03DE shape#(0x3DE) () {
 				call Func02C3;
 			};
 		} else {
-			0xFE9C->show_npc_face(UI_is_pc_female());
+			AVATAR->show_npc_face(UI_is_pc_female());
 			say("Your mind is quickly probed, then cast aside, leaving you feeling slightly ill and filled with an irrational sense of forboding.");
 		}
 	}
 	if (event == SCRIPTED) {
 		UI_fade_palette(0x000C, 0x0001, 0x0001);
-		var0000 = script 0xFE9C->get_npc_object() {
+		var0000 = script AVATAR->get_npc_object() {
 			wait 3;
 			actor frame kneeling;
 			wait 2;
@@ -8943,7 +9283,7 @@ void Func03DF shape#(0x3DF) () {
 	var var0003;
 
 	if (event == DOUBLECLICK) {
-		if (0xFE9C->is_readied(BG_WEAPON_HAND, 0x026F, FRAME_ANY)) {
+		if (AVATAR->is_readied(BG_WEAPON_HAND, 0x026F, FRAME_ANY)) {
 			var0000 = find_nearest(0x029C, 0x0003);
 			if (var0000) {
 				var0001 = var0000->get_object_position();
@@ -9094,7 +9434,7 @@ void Func03F7 shape#(0x3F7) () {
 			}
 			if (gflags[0x031F]) {
 				if (!gflags[0x0322]) {
-					var0000 = Func0931(0xFE9B, 0x0001, 0x0282, 0x0090, FRAME_ANY);
+					var0000 = Func0931(PARTY, 0x0001, 0x0282, 0x0090, FRAME_ANY);
 					if (var0000) {
 						say("\"Hast thou in thy possesion the book on the Stone of Castambre?\"");
 						if (Func090A()) {
@@ -9109,7 +9449,7 @@ void Func03F7 shape#(0x3F7) () {
 			if (!gflags[0x0314]) {
 				say("\"Greetings to thee, honorable one. I can but assume that my presence here was thy doing.\" It becomes quickly apparent that this creature possesses a greater\tcapability for speech than his fallen companion.");
 				if (gflags[0x031C]) {
-					var0001 = 0xFE9C->find_nearby(0x019E, 0x0028, MASK_NONE);
+					var0001 = AVATAR->find_nearby(0x019E, 0x0028, MASK_NONE);
 					for (var0004 in var0001 with var0002 to var0003) {
 						var0005 = var0004->get_item_frame();
 						if ((var0005 == 0x0004) || (var0005 == 0x0005)) {
@@ -9187,9 +9527,9 @@ void Func0401 object#(0x401) () {
 	var0003 = Func0909();
 	var0004 = UI_is_pc_female();
 	if (event == EGG) {
-		if ((!gflags[0x003B]) && ((!gflags[0x005C]) && 0xFE9C->get_item_flag(DONT_RENDER))) {
+		if ((!gflags[0x003B]) && ((!gflags[0x005C]) && AVATAR->get_item_flag(DONT_RENDER))) {
 			UI_play_music(0x0023, 0x0000);
-			var0005 = script 0xFE9C->get_npc_object() after 125 ticks {
+			var0005 = script AVATAR->get_npc_object() after 125 ticks {
 				nohalt;
 				call Func06AA;
 			};
@@ -9256,7 +9596,7 @@ void Func0401 object#(0x401) () {
 		if (!UI_mouse_exists()) {
 			say("Iolo takes you aside and whispers, \"Avatar, for the sake of our mutual sanity, I strongly suggest that thou shouldst purchase a mouse.\"");
 		}
-		var0007 = script 0xFE9C->get_npc_object() after 5 ticks {
+		var0007 = script AVATAR->get_npc_object() after 5 ticks {
 			nohalt;
 			finish;
 			wait 20;
@@ -9852,7 +10192,7 @@ void Func0402 object#(0x402) () {
 				if (gflags[0x003E]) {
 					say("\"That key opened my Father's chest, did it not?\"");
 				} else {
-					var0012 = Func0931(0xFE9B, 0x0001, 0x0281, 0x00FD, FRAME_ANY);
+					var0012 = Func0931(PARTY, 0x0001, 0x0281, 0x00FD, FRAME_ANY);
 					if (var0012) {
 						say("\"That looks like the key to Father's chest. I wondered where it was!\"");
 					} else {
@@ -10679,7 +11019,7 @@ void Func0406 object#(0x406) () {
 		var0003 = false;
 		var0004 = 0xFFFA->get_npc_object();
 		var0005 = 0xFFF6->get_npc_object();
-		var0006 = Func0931(0xFE9B, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
+		var0006 = Func0931(PARTY, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
 		0xFFFA->show_npc_face(0x0000);
 		if (!gflags[0x0154]) {
 			if (!var0006) {
@@ -10880,7 +11220,7 @@ void Func0406 object#(0x406) () {
 		var000C = UI_part_of_day();
 		var000D = 0xFFFA->get_npc_object()->get_schedule_type();
 		var000E = UI_die_roll(0x0001, 0x0004);
-		var0006 = Func0931(0xFE9B, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
+		var0006 = Func0931(PARTY, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
 		if (var000D == LOITER) {
 			if (var0006) {
 				if (var000E == 0x0001) {
@@ -11285,7 +11625,7 @@ void Func0408 object#(0x408) () {
 				fallthrough;
 
 			case "plans":
-				var000A = Func0931(0xFE9B, 0x0001, 0x031D, 0x000B, FRAME_ANY);
+				var000A = Func0931(PARTY, 0x0001, 0x031D, 0x000B, FRAME_ANY);
 				if (var000A) {
 					say("\"May I see them?\" She examines every line of the plans carefully. \"These designs are unsound. Ships built to these specifications will easily capsize and sink. Thou shouldst show these plans to the Mayor.\"");
 					gflags[0x00FD] = true;
@@ -11654,7 +11994,7 @@ void Func040A object#(0x40A) () {
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = UI_get_party_list();
-		var0003 = Func093C(0xFE9C->get_npc_object(), var0002);
+		var0003 = Func093C(AVATAR->get_npc_object(), var0002);
 		var0004 = 0xFFF6->get_npc_object();
 		var0005 = 0xFFFA->get_npc_object();
 		if (UI_is_pc_female() == 0x0000) {
@@ -12010,11 +12350,11 @@ void Func040A object#(0x40A) () {
 				var0022 = "";
 				var0023 = 0x0000;
 				if (gflags[0x0153]) {
-					var0023 = 0xFE9B->count_objects(0x03B3, QUALITY_ANY, FRAME_ANY);
+					var0023 = PARTY->count_objects(0x03B3, QUALITY_ANY, FRAME_ANY);
 					if (var0023 > 0x0006) {
 						var0023 = 0x0006;
 					}
-					var0024 = 0xFE9B->count_objects(0x0238, QUALITY_ANY, FRAME_ANY);
+					var0024 = PARTY->count_objects(0x0238, QUALITY_ANY, FRAME_ANY);
 					if ((var0004 in var0002) && ((var0024 < 0x0006) && (var0023 > 0x0000))) {
 						var0022 = "Shall I fashion these stingers into arrows?";
 					}
@@ -12301,7 +12641,7 @@ void Func040B object#(0x40B) () {
 				say("\"The horse and carriage combination sells for 60 gold. Dost thou want a title?\"");
 				var0005 = Func090A();
 				if (var0005) {
-					var0006 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+					var0006 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 					if (var0006 >= 0x003C) {
 						var0007 = UI_add_party_items(0x0001, 0x031D, 0x001C, FRAME_ANY, false);
 						if (var0007) {
@@ -13049,7 +13389,7 @@ void Func0410 object#(0x410) () {
 		var0000 = Func0908();
 		var0001 = UI_part_of_day();
 		var0002 = false;
-		var0003 = Func0931(0xFE9B, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+		var0003 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
 		if (var0001 == NIGHT) {
 			Func08AB();
 		}
@@ -13545,7 +13885,7 @@ void Func0413 object#(0x413) () {
 						var0007 += 0x0001;
 					}
 					var000B = var0007 * 0x0006;
-					var000C = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+					var000C = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 					if (var000C >= var000B) {
 						var000D = UI_add_party_items(0x0001, 0x0281, 0x00FF, FRAME_ANY, true);
 						if (!var000D) {
@@ -13734,7 +14074,7 @@ void Func0415 object#(0x415) () {
 				} else {
 					say("\"I sell sextants for 80 gold. Want one?\"~Gargan clears his throat.");
 					if (Func090A()) {
-						var0003 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+						var0003 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 						if (var0003 >= 0x0050) {
 							var0004 = UI_add_party_items(0x0001, 0x028A, QUALITY_ANY, FRAME_ANY, true);
 							say("\"Here ye are!\"");
@@ -13775,7 +14115,7 @@ void Func0415 object#(0x415) () {
 						say("\"The deed I can sell thee is for the ship 'The Scaly Eel.' It goes for 600 gold. Interested?\"");
 						var0005 = Func090A();
 						if (var0005) {
-							var0003 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+							var0003 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 							if (var0003 >= 0x0258) {
 								var0006 = UI_add_party_items(0x0001, 0x031D, 0x000E, FRAME_ANY, true);
 								if (var0006) {
@@ -14397,7 +14737,7 @@ labelFunc0417_0743:
 			wait 11;
 			call Func0417;
 		};
-		var000E = script 0xFE9C->get_npc_object() {
+		var000E = script AVATAR->get_npc_object() {
 			face var000B;
 			wait 1;
 			actor frame bowing;
@@ -14419,16 +14759,16 @@ labelFunc0417_0743:
 		}
 		if (!gflags[0x030D]) {
 			gflags[0x030D] = true;
-			var000F = 0xFE9C->get_npc_object()->get_object_position();
+			var000F = AVATAR->get_npc_object()->get_object_position();
 			UI_sprite_effect(ANIMATION_TELEPORT, (var000F[0x0001] - 0x0001), (var000F[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			UI_play_sound_effect(0x0043);
-			var0010 = 0xFE9C->get_npc_object()->get_npc_prop(STRENGTH);
-			var0010 &= 0xFE9C->get_npc_object()->get_npc_prop(HEALTH);
+			var0010 = AVATAR->get_npc_object()->get_npc_prop(STRENGTH);
+			var0010 &= AVATAR->get_npc_object()->get_npc_prop(HEALTH);
 			if (!(var0010[0x0001] >= 60)) {
-				var0011 = 0xFE9C->get_npc_object()->set_npc_prop(STRENGTH, 60 - var0010[0x0001]);
+				var0011 = AVATAR->get_npc_object()->set_npc_prop(STRENGTH, 60 - var0010[0x0001]);
 			}
 			if (!(var0010[0x0002] >= 60)) {
-				var0011 = 0xFE9C->get_npc_object()->set_npc_prop(HEALTH, 60 - var0010[0x0002]);
+				var0011 = AVATAR->get_npc_object()->set_npc_prop(HEALTH, 60 - var0010[0x0002]);
 			}
 		} else {
 			0xFFE9->show_npc_face(0x0000);
@@ -14736,7 +15076,7 @@ void Func041A object#(0x41A) () {
 	if (event == DOUBLECLICK) {
 		0xFFE6->show_npc_face(0x0000);
 		var0000 = 0xFFE6->get_npc_object()->get_schedule_type();
-		var0001 = Func0931(0xFE9B, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+		var0001 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
 		if (var0001) {
 			say("Batlin's eyes narrow to red slits as he peers practically through you.");
 			say("\"Thou hast the Cube! Thou cannot use it against -me-!\"");
@@ -14960,7 +15300,7 @@ void Func041A object#(0x41A) () {
 					say("\"Ah! I do hope thine hands are not too full to take the package.\"");
 					var0008 = 0xFFE6->find_object(0x031E, QUALITY_ANY, FRAME_ANY);
 					var0009 = var0008->set_last_created();
-					var000A = 0xFE9C->give_last_created();
+					var000A = AVATAR->give_last_created();
 					if (var000A) {
 						say("\"Excellent! Here it is. Thou must now be on thy way!\"*");
 						gflags[0x008F] = true;
@@ -15202,7 +15542,7 @@ void Func041B object#(0x41B) () {
 
 			case "audition":
 				if (var0001 == TEND_SHOP) {
-					var0007 = Func0931(0xFE9C, 0x0001, 0x0346, QUALITY_ANY, FRAME_ANY);
+					var0007 = Func0931(AVATAR, 0x0001, 0x0346, QUALITY_ANY, FRAME_ANY);
 					if (var0007) {
 						say("\"I see thou art ready? Very well. Take center stage, wouldst thou?\"");
 						Func08D1();
@@ -16449,7 +16789,7 @@ void Func0426 object#(0x426) () {
 
 			case "Lord British":
 				say("\"This is Lord British's favorite provisionary shop. He told me so himself. All sorts of famous adventurers pass through these doors. Why, just last week, we had the Avatar himself in this, my very own store!\"");
-				var0004 = Func0931(0xFE9C, 0x0001, 0x0346, QUALITY_ANY, FRAME_ANY);
+				var0004 = Func0931(AVATAR, 0x0001, 0x0346, QUALITY_ANY, FRAME_ANY);
 				if (var0004) {
 					say("\"Why, now that I mention it, he was dressed a lot like thou art. Yes, he was.\"");
 					add("dressed like Avatar");
@@ -16943,8 +17283,8 @@ void Func042A object#(0x42A) () {
 					say("\"Dost thou have some gold that thou wouldst like to exchange?\"");
 					var0004 = Func090A();
 					if (var0004) {
-						var0005 = Func0931(0xFE9B, 0x0001, 0x0285, QUALITY_ANY, FRAME_ANY);
-						var0006 = Func0931(0xFE9B, 0x0001, 0x0286, QUALITY_ANY, FRAME_ANY);
+						var0005 = Func0931(PARTY, 0x0001, 0x0285, QUALITY_ANY, FRAME_ANY);
+						var0006 = Func0931(PARTY, 0x0001, 0x0286, QUALITY_ANY, FRAME_ANY);
 						if (var0005 || var0006) {
 							var0007 = true;
 						} else {
@@ -16954,8 +17294,8 @@ void Func042A object#(0x42A) () {
 							say("\"I can see thou hast no nuggets or bars of gold. Whatever gold thou mayest possess is already the coin of the realm. I cannot help thee anymore than that.\"");
 						} else {
 							say("\"We can exchange thy gold nuggets and bars into spendable coin for thee. I will give thee ten gold coins for each gold nugget and one-hundred gold coins for each gold bar.\"");
-							var0008 = 0xFE9B->count_objects(0x0285, QUALITY_ANY, FRAME_ANY);
-							var0009 = 0xFE9B->count_objects(0x0286, QUALITY_ANY, FRAME_ANY);
+							var0008 = PARTY->count_objects(0x0285, QUALITY_ANY, FRAME_ANY);
+							var0009 = PARTY->count_objects(0x0286, QUALITY_ANY, FRAME_ANY);
 							var000A = 0x000A * var0008;
 							var000B = 0x0064 * var0009;
 							var000C = var000A + var000B;
@@ -17683,7 +18023,7 @@ void Func042E object#(0x42E) () {
 							var0004 += 0x0001;
 						}
 						var0008 = var0004 * 0x000A;
-						var0009 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+						var0009 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 						if (var0009 >= var0008) {
 							var000A = UI_add_party_items(0x0001, 0x0281, 0x00FF, FRAME_ANY, true);
 							if (!var000A) {
@@ -18308,8 +18648,8 @@ void Func0434 object#(0x434) () {
 		if (gflags[0x00CB]) {
 			add("made bread");
 		}
-		var0005 = Func0931(0xFE9B, 0x0001, 0x035F, QUALITY_ANY, 0x000E);
-		var0006 = Func0931(0xFE9B, 0x0001, 0x035F, QUALITY_ANY, 0x000F);
+		var0005 = Func0931(PARTY, 0x0001, 0x035F, QUALITY_ANY, 0x000E);
+		var0006 = Func0931(PARTY, 0x0001, 0x035F, QUALITY_ANY, 0x000F);
 		if (var0005 || var0006) {
 			add("sell flour");
 		}
@@ -18579,7 +18919,7 @@ void Func0435 object#(0x435) () {
 					var0005 = Func090A();
 					if (var0005) {
 						say("She looks you up and down. \"Yes, I think we might be able to find something for thee.\"~~After several minutes of rummaging through the store, Gaye returns. \"Here it is! Not many left-- we have had a run on them recently!\"");
-						var0006 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+						var0006 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 						if (var0006 < 0x001E) {
 							say("\"Um. Perhaps thou couldst return when thou dost have enough gold.\" She lays the costume down and smiles.");
 						} else {
@@ -19019,7 +19359,7 @@ void Func0438 object#(0x438) () {
 				say("\"The horse and carriage combination sells for 120 gold. Thou shalt find it in a small shelter just south of the stables, across the street. Dost thou want a title?\"");
 				var0003 = Func090A();
 				if (var0003) {
-					var0004 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+					var0004 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 					if (var0004 >= 0x0078) {
 						var0005 = UI_add_party_items(0x0001, 0x031D, 0x001D, FRAME_ANY, false);
 						if (var0005) {
@@ -19520,7 +19860,7 @@ void Func043B object#(0x43B) () {
 						if (var0006) {
 							var0007 = [0x000C, 0x000D];
 							for (var000A in var0007 with var0008 to var0009) {
-								if (0xFE9B->count_objects(0x02F8, QUALITY_ANY, var000A)) {
+								if (PARTY->count_objects(0x02F8, QUALITY_ANY, var000A)) {
 									if (var000A == 0x000C) {
 										say("\"Dost thou think me a fool?! This little blue bauble is worthless!\"");
 									}
@@ -19530,7 +19870,7 @@ void Func043B object#(0x43B) () {
 									abort;
 								}
 							}
-							var000B = 0xFE9B->count_objects(0x02F8, QUALITY_ANY, FRAME_ANY);
+							var000B = PARTY->count_objects(0x02F8, QUALITY_ANY, FRAME_ANY);
 							var000C = var000B * 0x001E;
 							var000D = UI_remove_party_items(var000B, 0x02F8, QUALITY_ANY, FRAME_ANY, true);
 							if (var000B == 0x0000) {
@@ -20561,8 +20901,8 @@ void Func0442 object#(0x442) () {
 			case "mouse food":
 				say("\"Well, cheese is my favorite. If thou dost ever have cheese to give away, I will gladly eat it. But I will generally eat most anything. Dost thou have any cheese for me?\"");
 				if (Func090A()) {
-					var0003 = Func0931(0xFE9B, 0x0001, 0x0179, QUALITY_ANY, 0x001A);
-					var0004 = Func0931(0xFE9B, 0x0001, 0x0179, QUALITY_ANY, 0x001B);
+					var0003 = Func0931(PARTY, 0x0001, 0x0179, QUALITY_ANY, 0x001A);
+					var0004 = Func0931(PARTY, 0x0001, 0x0179, QUALITY_ANY, 0x001B);
 					if (var0003 || var0004) {
 						say("\"Want to give me some?\"");
 						if (Func090A()) {
@@ -20834,7 +21174,7 @@ void Func0445 object#(0x445) () {
 	0xFFBB->show_npc_face(0x0000);
 	var0000 = Func0909();
 	add(["name", "job", "bye"]);
-	var0001 = 0xFE9C->find_nearest(0x018A, 0xFFFF);
+	var0001 = AVATAR->find_nearest(0x018A, 0xFFFF);
 	if (!gflags[0x00C6]) {
 		say("You see a thoroughly disheartened young man who is miserably languishing behind bars.");
 		gflags[0x00C6] = true;
@@ -21105,7 +21445,7 @@ void Func0446 object#(0x446) () {
 				if (var0006) {
 					say("\"Excellent! Let me see it.\"");
 					if (gflags[0x00DE]) {
-						var0007 = Func0931(0xFE9B, 0x0001, 0x031D, 0x0004, FRAME_ANY);
+						var0007 = Func0931(PARTY, 0x0001, 0x031D, 0x0004, FRAME_ANY);
 						if (var0007) {
 							var0005 = UI_remove_party_items(0x0001, 0x031D, 0x0004, FRAME_ANY, true);
 							if (var0005) {
@@ -22011,7 +22351,7 @@ void Func044D object#(0x44D) () {
 
 			case "bill":
 				if (!gflags[0x00DE]) {
-					var0005 = Func0931(0xFE9B, 0x0001, 0x031D, 0x0004, FRAME_ANY);
+					var0005 = Func0931(PARTY, 0x0001, 0x031D, 0x0004, FRAME_ANY);
 					if (var0005) {
 						say("\"'Tis about time that the government did something about the awful stench coming from that lake! I shall be happy to sign thy bill of law! Take it back to the Great Council post haste!\" Lord Heather signs the bill and hands it back to you.");
 						gflags[0x00DE] = true;
@@ -22102,7 +22442,7 @@ void Func044E object#(0x44E) () {
 						var0002 += 0x0001;
 					}
 					var0006 = var0002 * 0x0008;
-					var0007 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+					var0007 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 					if (var0007 >= var0006) {
 						var0008 = UI_add_party_items(0x0001, 0x0281, 0x00FF, FRAME_ANY, true);
 						if (!var0008) {
@@ -22347,7 +22687,7 @@ void Func0451 object#(0x451) () {
 	if (event == DOUBLECLICK) {
 		0xFFAF->show_npc_face(0x0000);
 		var0000 = UI_wearing_fellowship();
-		var0001 = Func0931(0xFE9B, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+		var0001 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
 		var0002 = Func0909();
 		var0003 = UI_part_of_day();
 		var0004 = 0xFFAF->get_npc_object()->get_schedule_type();
@@ -22437,8 +22777,8 @@ void Func0451 object#(0x451) () {
 
 			case "deliver":
 				var0006 = false;
-				var0007 = 0xFE9B->find_object(0x031E, 0x0001, FRAME_ANY);
-				var0008 = 0xFE9B->find_object(0x031F, 0x0001, FRAME_ANY);
+				var0007 = PARTY->find_object(0x031E, 0x0001, FRAME_ANY);
+				var0008 = PARTY->find_object(0x031F, 0x0001, FRAME_ANY);
 				var0009 = 0x0000;
 				if (var0008) {
 					var0009 = var0008->find_object(0x031D, 0x0008, FRAME_ANY);
@@ -23175,7 +23515,7 @@ void Func0457 object#(0x457) () {
 		var0001 = UI_part_of_day();
 		var0002 = 0xFFA9->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
-		var0003 = Func0931(0xFE9B, 0x0001, 0x02D8, QUALITY_ANY, FRAME_ANY);
+		var0003 = Func0931(PARTY, 0x0001, 0x02D8, QUALITY_ANY, FRAME_ANY);
 		if (var0003) {
 			add("Caddellite");
 		}
@@ -23272,7 +23612,7 @@ void Func0457 object#(0x457) () {
 			case "helmet":
 				say("You describe the sort of helmet that you require, one that can block out the dangerous sound from the cube generator. Zorn nods. \"Yes, I can make some for thee. I shall start work immediately.\"");
 				var0004 = UI_get_array_size(UI_get_party_list());
-				var0005 = 0xFE9B->count_objects(0x02D8, QUALITY_ANY, FRAME_ANY);
+				var0005 = PARTY->count_objects(0x02D8, QUALITY_ANY, FRAME_ANY);
 				if (var0005 == 0x0000) {
 					say("\"But thou dost not have any Caddellite chunks with which to make helmets!\"");
 				}
@@ -24201,7 +24541,7 @@ void Func045C object#(0x45C) () {
 							var0005 += 0x0001;
 						}
 						var0009 = var0005 * 0x0008;
-						var000A = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+						var000A = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 						if (var000A >= var0009) {
 							var000B = UI_add_party_items(0x0001, 0x0281, 0x00FF, FRAME_ANY, true);
 							if (!var000B) {
@@ -24881,7 +25221,7 @@ void Func0462 object#(0x462) () {
 	var var0003;
 
 	if (event == DOUBLECLICK) {
-		var0000 = Func0931(0xFE9B, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
+		var0000 = Func0931(PARTY, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
 		0xFF9E->show_npc_face(0x0000);
 		if (!gflags[0x0154]) {
 			if (!var0000) {
@@ -25084,7 +25424,7 @@ void Func0464 object#(0x464) () {
 	var var0003;
 
 	if (event == DOUBLECLICK) {
-		var0000 = Func0931(0xFE9B, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
+		var0000 = Func0931(PARTY, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
 		0xFF9C->show_npc_face(0x0000);
 		if (!gflags[0x0154]) {
 			if (!var0000) {
@@ -25211,7 +25551,7 @@ void Func0465 object#(0x465) () {
 	var var0009;
 
 	if (event == DOUBLECLICK) {
-		var0000 = Func0931(0xFE9B, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
+		var0000 = Func0931(PARTY, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
 		0xFF9B->show_npc_face(0x0000);
 		if (!gflags[0x0154]) {
 			if (!var0000) {
@@ -25285,7 +25625,7 @@ void Func0465 object#(0x465) () {
 					say("Her eyes widen and her lips part around a very large and hopeful smile.~~\"More honey will be given by you?\"");
 					var0002 = Func090A();
 					if (var0002) {
-						var0003 = Func0931(0xFE9B, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
+						var0003 = Func0931(PARTY, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
 						if (var0003) {
 							say("\"You are thanked,\" she says, taking the honey.");
 						} else {
@@ -25320,7 +25660,7 @@ void Func0465 object#(0x465) () {
 			case "Trellek":
 				if (gflags[0x0130]) {
 					if (gflags[0x012B]) {
-						var0004 = Func0931(0xFE9B, 0x0001, 0x031D, 0x0003, FRAME_ANY);
+						var0004 = Func0931(PARTY, 0x0001, 0x031D, 0x0003, FRAME_ANY);
 						if (var0004) {
 							say("She takes the document from you, smiling when she sees Ben's signature. \"Trellek is permitted to join you. You are wished luck and speed.\"");
 							var0005 = UI_remove_party_items(0x0001, 0x031D, 0x0003, FRAME_ANY, false);
@@ -25355,7 +25695,7 @@ void Func0465 object#(0x465) () {
 	if (event == PROXIMITY) {
 		var0007 = 0xFF9B->get_npc_object()->get_schedule_type();
 		var0008 = UI_die_roll(0x0001, 0x0004);
-		var0000 = Func0931(0xFE9B, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
+		var0000 = Func0931(PARTY, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
 		if (var0007 == LOITER) {
 			if (var0000) {
 				if (var0008 == 0x0001) {
@@ -25403,7 +25743,7 @@ void Func0466 object#(0x466) () {
 	var0000 = Func0908();
 	add(["name", "job", "bye"]);
 	var0001 = UI_get_party_list();
-	var0002 = 0xFE9B->count_objects(0x0347, QUALITY_ANY, 0x0000);
+	var0002 = PARTY->count_objects(0x0347, QUALITY_ANY, 0x0000);
 	if (gflags[0x01D2]) {
 		add(["hourglass", "Time Lord"]);
 	}
@@ -25478,7 +25818,7 @@ void Func0466 object#(0x466) () {
 			say("\"Dost thou want it for, say, 75 gold?\"");
 			var0005 = Func090A();
 			if (var0005) {
-				var0006 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+				var0006 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 				if (var0006 >= 0x004B) {
 					var0007 = UI_add_party_items(0x0001, 0x0154, QUALITY_ANY, 0x0007, true);
 					if (var0007) {
@@ -26183,7 +26523,7 @@ void Func046C object#(0x46C) () {
 		var0002 = 0xFF94;
 		var0003 = false;
 		var0004 = false;
-		var0005 = Func0931(0xFE9B, 0x0001, 0x03E7, QUALITY_ANY, 0x0004);
+		var0005 = Func0931(PARTY, 0x0001, 0x03E7, QUALITY_ANY, 0x0004);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x0146]) {
 			say("The woman greets you with shining eyes.");
@@ -26193,7 +26533,7 @@ void Func046C object#(0x46C) () {
 				var0000,
 				",\" says Reyna.");
 		}
-		var0006 = 0xFE9C->find_nearest(0x02CB, 0xFFFF);
+		var0006 = AVATAR->find_nearest(0x02CB, 0xFFFF);
 		if (var0006) {
 			if (!gflags[0x0128]) {
 				add("cemetery");
@@ -27146,7 +27486,7 @@ void Func0472 object#(0x472) () {
 							say("\"Good. 'Tis always best to have someone to receive flowers. The flowers will cost 10 gold. Dost thou still want them?\"");
 							var0005 = Func090A();
 							if (var0005) {
-								var0006 = Func0931(0xFE9B, 0x000A, 0x0284, QUALITY_ANY, FRAME_ANY);
+								var0006 = Func0931(PARTY, 0x000A, 0x0284, QUALITY_ANY, FRAME_ANY);
 								var0007 = UI_add_party_items(0x0001, 0x03E7, QUALITY_ANY, 0x0004, true);
 								if (var0006) {
 									if (var0007) {
@@ -27442,7 +27782,7 @@ void Func0474 object#(0x474) () {
 
 			case "sign contract":
 				say("\"Why, o' course I'll sign. No more Silverleaf trees for me.\"");
-				var0003 = Func0931(0xFE9B, 0x0001, 0x031D, 0x0003, FRAME_ANY);
+				var0003 = Func0931(PARTY, 0x0001, 0x031D, 0x0003, FRAME_ANY);
 				if (var0003) {
 					say("He takes the contract from you and signs it.");
 					var0004 = Func08F7(0xFFFA);
@@ -27546,7 +27886,7 @@ void Func0475 object#(0x475) () {
 
 			case "5":
 				UI_pop_answers();
-				var0001 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+				var0001 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 				if (var0001 > 0x0004) {
 					var0002 = UI_remove_party_items(0x0005, 0x0284, QUALITY_ANY, 0x0000, 0x0000);
 					say("\"I will tell thee what I know: Sir Jeff is in charge of the High Court. 'E's a real mean bastard, so I would stay away from 'im. The monks nearby make excellent wine, and Aimi doth warm a man's... heart. And whatever thou dost, do not waste time talking to the undertaker -- 'e's daft in the head.\"");
@@ -27566,7 +27906,7 @@ void Func0475 object#(0x475) () {
 				say("\"I will tell thee for 5 gold. Interested?\"");
 				var0003 = Func090A();
 				if (var0003) {
-					var0004 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+					var0004 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 					if (var0004 > 0x0004) {
 						var0005 = UI_remove_party_items(0x0005, 0x0284, QUALITY_ANY, FRAME_ANY, true);
 						say("\"One of them is named D'Rel. E's a pirate, from Buccaneer's Den.\"");
@@ -27585,7 +27925,7 @@ void Func0475 object#(0x475) () {
 				say("\"Another, eh. Hast thou 5 more gold for me?\"");
 				var0006 = Func090A();
 				if (var0006) {
-					var0007 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+					var0007 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 					if (var0007 > 0x0004) {
 						say("\"The other one is a troll. 'E don't talk much, but\t'e's the first troll prisoner I have ever seen.\"");
 						var0008 = UI_remove_party_items(0x0005, 0x0284, QUALITY_ANY, FRAME_ANY, true);
@@ -27604,7 +27944,7 @@ void Func0475 object#(0x475) () {
 				say("\"Thou dost want these, eh?\" he asks, holding up keys. \"'Twill cost thee... 20 gold. Still want them?\"");
 				var0009 = Func090A();
 				if (var0009) {
-					var000A = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+					var000A = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 					if (var000A > 0x0013) {
 						say("\"Done!\"");
 						var000B = UI_remove_party_items(0x0014, 0x0284, QUALITY_ANY, FRAME_ANY, false);
@@ -27860,7 +28200,7 @@ void Func0477 object#(0x477) () {
 			case "weaponry":
 				say("He unsheathes his own sword and shows it to you. The sword has an elaborate serpentine pattern engraved in it. \"Thou mayest recognize a weapon of the Library of Scars by its engraving. It is the sign of the snake. Striking quick, silent, deadly, as are we!\"");
 				remove("weaponry");
-				var0008 = Func0931(0xFE9B, 0x0001, 0x027C, QUALITY_ANY, FRAME_ANY);
+				var0008 = Func0931(PARTY, 0x0001, 0x027C, QUALITY_ANY, FRAME_ANY);
 				if (var0008) {
 					add("dagger");
 				}
@@ -28435,7 +28775,7 @@ void Func047A object#(0x47A) () {
 							var000A += 0x0001;
 						}
 						var000E = var000A * 0x0005;
-						var000F = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+						var000F = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 						if (var000F >= var000E) {
 							var0010 = UI_add_party_items(0x0001, 0x0281, 0x00FF, FRAME_ANY, true);
 							if (var0010) {
@@ -28516,7 +28856,7 @@ void Func047A object#(0x47A) () {
 							}
 							say("\"Very well. How much wouldst thou like to bet?\"");
 						} while (true);
-						var000F = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+						var000F = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 						if (var000F >= var0012) {
 							say("\"Very well. Let me give thee markers for thy gold. Each one is worth 10 gold coins. If Sprellic wins, thou mayest come collect twice that amount of gold from me.~~\"Should he lose, ",
 								var0000,
@@ -28544,7 +28884,7 @@ labelFunc047A_0447:
 
 			case "winnings":
 				if (!gflags[0x016F]) {
-					var0016 = 0xFE9B->count_objects(0x0399, QUALITY_ANY, 0x0000);
+					var0016 = PARTY->count_objects(0x0399, QUALITY_ANY, 0x0000);
 					var0017 = var0016 * 0x0014;
 					var0018 = UI_add_party_items(var0017, 0x0284, QUALITY_ANY, FRAME_ANY, true);
 					if (var0018) {
@@ -28749,7 +29089,7 @@ void Func047B object#(0x47B) () {
 							}
 							say("\"Very well. How much wouldst thou like to bet?\"");
 						} while (true);
-						var000D = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+						var000D = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 						if (var000D >= var000B) {
 							var000E = UI_add_party_items(var000B / 0x000A, 0x0399, QUALITY_ANY, 0x0001, false);
 							if (var000E) {
@@ -28774,7 +29114,7 @@ labelFunc047B_0352:
 				fallthrough;
 
 			case "winnings":
-				var0011 = 0xFE9B->count_objects(0x0399, QUALITY_ANY, 0x0001);
+				var0011 = PARTY->count_objects(0x0399, QUALITY_ANY, 0x0001);
 				var0012 = var0011 * 0x0014;
 				var0013 = UI_add_party_items(var0012, 0x0284, QUALITY_ANY, FRAME_ANY, true);
 				if (var0013) {
@@ -29601,7 +29941,7 @@ void Func0481 object#(0x481) () {
 						say("\"Thou wishest to purchase my ship 'The Nymphet'? The deed will cost thee 600 gold.\"");
 						var0004 = Func090A();
 						if (var0004) {
-							var0005 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+							var0005 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 							if (var0005 >= 0x0258) {
 								var0006 = UI_add_party_items(0x0001, 0x031D, 0x0011, FRAME_ANY, false);
 								if (var0006) {
@@ -29635,7 +29975,7 @@ void Func0481 object#(0x481) () {
 					say("\"Thou wishest to purchase one of my fine sextants? 'Twill cost thee 40 gold.\"");
 					var0008 = Func090A();
 					if (var0008) {
-						var0009 = Func0931(0xFE9B, 0x0028, 0x0284, QUALITY_ANY, FRAME_ANY);
+						var0009 = Func0931(PARTY, 0x0028, 0x0284, QUALITY_ANY, FRAME_ANY);
 						if (var0009) {
 							say("\"'Tis thine, ",
 								var0000,
@@ -29804,7 +30144,7 @@ void Func0482 object#(0x482) () {
 					0xFFFC->say("Dupre looks embarrassed. He turns to you. \"My friend, wilt thou help me out?\"");
 					if (Func090A()) {
 labelFunc0482_00E5:
-						var0004 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+						var0004 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 						if (var0004 >= 0x004A) {
 							var0005 = UI_remove_party_items(0x004A, 0x0284, QUALITY_ANY, FRAME_ANY, true);
 							if (var0005) {
@@ -29874,7 +30214,7 @@ labelFunc0482_00E5:
 						var0007 += 0x0001;
 					}
 					var000B = var0007 * 0x0003;
-					var000C = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+					var000C = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 					if (var000C >= var000B) {
 						var000D = UI_add_party_items(0x0001, 0x0281, 0x00FF, FRAME_ANY, true);
 						if (var000D) {
@@ -30516,7 +30856,7 @@ void Func0486 object#(0x486) () {
 		var0001 = 0xFF7A->get_npc_object();
 		var0002 = 0xFF78->get_npc_object();
 		var0003 = 0xFF79->get_npc_object();
-		var0004 = Func0931(0xFE9C, 0x0001, 0x03BB, QUALITY_ANY, 0x0002);
+		var0004 = Func0931(AVATAR, 0x0001, 0x03BB, QUALITY_ANY, 0x0002);
 		var0005 = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
 		if (gflags[0x017D]) {
@@ -31157,7 +31497,7 @@ void Func0489 object#(0x489) () {
 						say("\"A bouquet costs 12 gold. Art thou still interested?\"");
 						var000A = Func090A();
 						if (var000A) {
-							var000B = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+							var000B = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 							if (var000B >= 0x000C) {
 								var000C = UI_add_party_items(0x0001, 0x03E7, QUALITY_ANY, 0x0004, true);
 								if (var000C) {
@@ -31793,7 +32133,7 @@ void Func048E object#(0x48E) () {
 
 	if (event == DOUBLECLICK) {
 		0xFF72->show_npc_face(0x0000);
-		var0000 = Func0931(0xFE9B, 0x0001, 0x0127, 0x0000, FRAME_ANY);
+		var0000 = Func0931(PARTY, 0x0001, 0x0127, 0x0000, FRAME_ANY);
 		var0001 = Func0909();
 		var0002 = 0xFF72->find_nearest(0x02EB, 0xFFFF);
 		var0003 = false;
@@ -31885,7 +32225,7 @@ void Func048E object#(0x48E) () {
 
 			case "Rowena":
 				say("He holds up one hand as you say the name of his late wife. \"Please, do not say that name. It takes from me\ta little of mine Hatred, which is all I have now. Wouldst thou rob me of the one thing that keeps me alive?\" It would seem that he is unaware of the fact that he is, indeed, no longer alive. An odd expression crosses his face.~~\"I gave her a music box for our wedding, and now it is all I have left to remember her by.\" His tone changes.~~\"Do thou see what thou hast done?! I cannot work when I think of her!\" He returns to his work with renewed passion.");
-				var0004 = 0xFE9C->find_nearest(0x02F0, 0xFFFF);
+				var0004 = AVATAR->find_nearest(0x02F0, 0xFFFF);
 				if (var0004) {
 					say("You notice the music box he spoke of sitting nearby.");
 				}
@@ -32721,7 +33061,7 @@ void Func0493 object#(0x493) () {
 		var0003 = UI_get_party_list();
 		if (0xFF6D->get_npc_object() in var0003) {
 			add("leave");
-			var0004 = 0xFE9C->find_nearby(0x02EC, 0x001E, MASK_NONE);
+			var0004 = AVATAR->find_nearby(0x02EC, 0x001E, MASK_NONE);
 			if (var0004) {
 				say("He looks into the well, at the swirling pool of trapped souls and his newfound resolve seems to diminish. \"Perhaps this was not such a good idea. Art thou sure that I must go through with this?\"~~You nod. His resolve firms once again.~~\"Yes, thou art quite right. No time for speeches. No time for a wavering will. No time for...\" He sees that you're not buying his attempt to stall.~~\"Well then, this is it.\" He moves toward the well. \"I suppose I didn't make a very good Mayor in life.\" Forsythe's jowls droop.~~\"Well, at least in death, I'll make a name for myself and do the job right.\" With that, he's gone.~~The souls of the well rush out of their confinement, leaving the blackened remains of the powerful artifact.*");
 				Func088B();
@@ -33137,7 +33477,7 @@ void Func0496 object#(0x496) () {
 	0xFF6A->show_npc_face(0x0000);
 	gflags[0x01E2] = Func08C9();
 	var0000 = Func0908();
-	var0001 = Func0931(0xFE9B, 0x0001, 0x02F7, QUALITY_ANY, FRAME_ANY);
+	var0001 = Func0931(PARTY, 0x0001, 0x02F7, QUALITY_ANY, FRAME_ANY);
 	var0002 = Func0909();
 	add(["name", "job", "bye"]);
 	if (gflags[0x01DF]) {
@@ -33263,7 +33603,7 @@ void Func0496 object#(0x496) () {
 		case "blackrock":
 			if (!gflags[0x0003]) {
 				if (!gflags[0x01E2]) {
-					var0005 = Func0931(0xFE9B, 0x0004, 0x0392, QUALITY_ANY, FRAME_ANY);
+					var0005 = Func0931(PARTY, 0x0004, 0x0392, QUALITY_ANY, FRAME_ANY);
 					if (var0005) {
 						say("\"Thou hast brought the blackrock! I did not think I could manage much longer! Hurry! Place the pieces on the pedestals at the north, south, east, and west ends of the room! I shall wait here!\"*");
 						abort;
@@ -33282,7 +33622,7 @@ void Func0496 object#(0x496) () {
 		case "ring":
 			if (!gflags[0x0003]) {
 				if (!gflags[0x01E1]) {
-					var0001 = Func0931(0xFE9B, 0x0001, 0x02F7, QUALITY_ANY, 0x0000);
+					var0001 = Func0931(PARTY, 0x0001, 0x02F7, QUALITY_ANY, 0x0000);
 					if (var0001) {
 						say("\"Thou hast the ethereal ring? Good! I must enchant it! Quickly!\"~~Penumbra takes the ring from you and intones a few magical words upon it. After a moment, she hands it back to you.");
 						var0006 = UI_remove_party_items(0x0001, 0x02F7, QUALITY_ANY, 0x0000, false);
@@ -35651,7 +35991,7 @@ void Func04A6 object#(0x4A6) () {
 					say("\"A sack will cost thee 12 gold. Art thou interested in purchasing some?\"");
 					if (Func090A()) {
 						while (true) {
-							var0004 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+							var0004 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 							if (var0004 >= 0x000C) {
 								var0005 = UI_add_party_items(0x0001, 0x035F, QUALITY_ANY, 0x000E, true);
 								if (var0005) {
@@ -35798,7 +36138,7 @@ void Func04A7 object#(0x4A7) () {
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
 		var0002 = false;
-		var0003 = Func0931(0xFE9B, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+		var0003 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
 		if (gflags[0x0236] && (!gflags[0x0213])) {
 			if (!gflags[0x0212]) {
 				say("\"Avatar! Didst thou know that the merchant Morfin had a quantity of silver serpent venom stolen? This theft has caused the community no small amount of distress.\"");
@@ -35824,7 +36164,7 @@ void Func04A7 object#(0x4A7) () {
 		if (gflags[0x0105]) {
 			add("Elizabeth and Abraham");
 		}
-		var0005 = Func0931(0xFE9B, 0x0001, 0x0289, QUALITY_ANY, 0x0001);
+		var0005 = Func0931(PARTY, 0x0001, 0x0289, QUALITY_ANY, 0x0001);
 		if (var0005) {
 			var0002 = true;
 			add(["found venom", "case solved"]);
@@ -36060,7 +36400,7 @@ void Func04A8 object#(0x4A8) () {
 		if (gflags[0x0218]) {
 			add("venom found");
 		}
-		var0001 = Func0931(0xFE9B, 0x0001, 0x0289, QUALITY_ANY, 0x0001);
+		var0001 = Func0931(PARTY, 0x0001, 0x0289, QUALITY_ANY, 0x0001);
 		if (var0001) {
 			add("venom found");
 		}
@@ -36487,7 +36827,7 @@ void Func04AB object#(0x4AB) () {
 		if (gflags[0x021C]) {
 			add("Tobias");
 		}
-		var0002 = Func0931(0xFE9B, 0x0001, 0x0289, QUALITY_ANY, 0x0001);
+		var0002 = Func0931(PARTY, 0x0001, 0x0289, QUALITY_ANY, 0x0001);
 		if (var0002) {
 			add("found venom");
 		}
@@ -36750,7 +37090,7 @@ void Func04AC object#(0x4AC) () {
 		if (gflags[0x0233]) {
 			add("ledger");
 		}
-		var0007 = Func0931(0xFE9B, 0x0001, 0x0289, QUALITY_ANY, 0x0001);
+		var0007 = Func0931(PARTY, 0x0001, 0x0289, QUALITY_ANY, 0x0001);
 		if (var0007) {
 			add("return venom");
 		}
@@ -37067,7 +37407,7 @@ void Func04AD object#(0x4AD) () {
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
 		var0002 = 0xFF53->get_npc_object()->get_schedule_type();
-		var0003 = 0xFE9C->find_nearest(0x0347, 0xFFFF);
+		var0003 = AVATAR->find_nearest(0x0347, 0xFFFF);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x0226]) {
 			say("You see an old woman who gives you a smile of grandmotherly sweetness. You can see immediately that her vision is poor.");
@@ -37385,7 +37725,7 @@ void Func04AE object#(0x4AE) () {
 					say("How much?");
 					UI_push_answers();
 					var0002 = Func090B(["0", "1", "2", "3", "4", "5"]);
-					var0003 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+					var0003 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 					if (var0003 >= var0002) {
 						var0004 = UI_remove_party_items(var0002, 0x0284, QUALITY_ANY, FRAME_ANY, true);
 						if (var0004) {
@@ -37597,7 +37937,7 @@ void Func04AF object#(0x4AF) () {
 					say("How much?");
 					UI_push_answers();
 					var0002 = Func090B(["O", "1", "2", "3", "4", "5"]);
-					var0003 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+					var0003 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 					if ((var0003 >= var0002) && (var0002 != "0")) {
 						var0004 = UI_remove_party_items(var0002, 0x0284, QUALITY_ANY, FRAME_ANY, true);
 						say("\"Thank thee, ",
@@ -37753,7 +38093,7 @@ void Func04B0 object#(0x4B0) () {
 						say("\"How many dost thou want?\"");
 						var0008 = UI_input_numeric_value(0x0001, 0x0014, 0x0001, 0x0001);
 						var0009 = var0008 * 0x0002;
-						var000A = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+						var000A = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 						if (var000A >= var0009) {
 							var000B = UI_add_party_items(var0008, 0x0179, QUALITY_ANY, 0x001B, true);
 							if (var000B) {
@@ -38273,7 +38613,7 @@ void Func04B3 object#(0x4B3) () {
 						var0004 += 0x0001;
 					}
 					var0008 = var0004 * 0x0005;
-					var0009 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+					var0009 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 					if (var0009 >= var0008) {
 						var000A = UI_add_party_items(0x0001, 0x0281, 0x00FF, FRAME_ANY, true);
 						if (var000A) {
@@ -38990,7 +39330,7 @@ void Func04B9 object#(0x4B9) () {
 		0xFF47->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = UI_part_of_day();
-		var0002 = Func0931(0xFE9B, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+		var0002 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
 		if (var0001 == NIGHT) {
 			say("The gargoyle seems to be too busy conducting the Fellowship meeting to speak with you now.");
 			Func08CE();
@@ -39913,7 +40253,7 @@ void Func04BF object#(0x4BF) () {
 						say("\"Well, it shall cost thee 3 gold coins. Still want one?\"");
 						var0007 = Func090A();
 						if (var0007) {
-							var0008 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+							var0008 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 							if (var0008 >= 0x0003) {
 								var0009 = UI_add_party_items(0x0001, 0x0179, QUALITY_ANY, 0x0011, true);
 								if (var0009) {
@@ -40262,7 +40602,7 @@ void Func04C2 object#(0x4C2) () {
 				say("\"Well, it was once the magnificent `Constellation.' However, 'twas destroyed by the ship's captain, himself, to prevent it from falling into the hands of attacking pirates. What little remained was rebuilt into an even finer ship, `The Dragon's Breath?' Art thou interested in purchasing it for 600 gold?\"");
 				var0003 = Func090A();
 				if (var0003) {
-					var0004 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+					var0004 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 					if (var0004 >= 0x0258) {
 						var0005 = UI_add_party_items(0x0001, 0x031D, 0x0013, FRAME_ANY, false);
 						if (var0005) {
@@ -41437,7 +41777,7 @@ void Func04C8 object#(0x4C8) () {
 					say("\"Hast thou found my child?\"");
 					var0003 = Func090A();
 					if (var0003) {
-						var0004 = Func0931(0xFE9B, 0x0001, 0x02DA, QUALITY_ANY, 0x0002);
+						var0004 = Func0931(PARTY, 0x0001, 0x02DA, QUALITY_ANY, 0x0002);
 						if (var0004) {
 							Func0911(0x0064);
 							say("\"I cannot begin to express my gratitude, ",
@@ -41445,7 +41785,7 @@ void Func04C8 object#(0x4C8) () {
 								". Thank thee ever so much!\"~She begins sobbing for joy. \"Pl-please set him back gently in the cradle.\"");
 							gflags[0x0278] = true;
 						} else {
-							var0005 = Func0931(0xFE9B, 0x0001, 0x02DA, QUALITY_ANY, FRAME_ANY);
+							var0005 = Func0931(PARTY, 0x0001, 0x02DA, QUALITY_ANY, FRAME_ANY);
 							if (var0005) {
 								say("\"Why, that's not my little Riky, ",
 									var0001,
@@ -41660,7 +42000,7 @@ void Func04C9 object#(0x4C9) () {
 				fallthrough;
 
 			case "examine chips":
-				var0002 = Func0931(0xFE9B, 0x0001, 0x032F, QUALITY_ANY, 0x0004);
+				var0002 = Func0931(PARTY, 0x0001, 0x032F, QUALITY_ANY, 0x0004);
 				if (var0002) {
 					if (gflags[0x0268]) {
 						say("She looks at you, puzzled. \"Did I not do that already?\"");
@@ -42925,7 +43265,7 @@ void Func04D3 object#(0x4D3) () {
 		} else {
 			say("\"To be pleased to again see you, human.\" Lap-Lem smiles.");
 		}
-		var0000 = Func0931(0xFE9B, 0x0001, 0x03BB, QUALITY_ANY, 0x0003);
+		var0000 = Func0931(PARTY, 0x0001, 0x03BB, QUALITY_ANY, 0x0003);
 		if (gflags[0x0281] || var0000) {
 			if (!gflags[0x02DF]) {
 				add("give amulet");
@@ -43892,9 +44232,9 @@ void Func04DB object#(0x4DB) () {
 				if (!(var0000 == TEND_SHOP)) {
 					say("\"To be not selling at this time. To come back tomorrow to buy provisions.\"");
 				} else {
-					var0001 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+					var0001 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 					Func084C();
-					var0002 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+					var0002 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 					if ((var0001 - var0002) > 0x001D) {
 						gflags[0x027F] = true;
 					}
@@ -44313,7 +44653,7 @@ void Func04DE object#(0x4DE) () {
 				if ((var0000 == EVENING) || ((var0000 == NIGHT) || (var0000 == MIDNIGHT))) {
 					say("\"The entrance fee is 300 gold. Everything is included in this fixed price. No tips are necessary. Dost thou want to enter?\"");
 					if (Func090A()) {
-						var0002 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+						var0002 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 						if (var0002 >= 0x012C) {
 							var0003 = UI_add_party_items(0x0001, 0x0281, 0x00FB, 0x0004, false);
 							if (var0003) {
@@ -44759,7 +45099,7 @@ void Func04E1 object#(0x4E1) () {
 		0xFF1F->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = 0xFF1F->get_npc_object()->get_schedule_type();
-		var0002 = Func0931(0xFE9B, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+		var0002 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
 		add(["name", "job", "bye"]);
 		if (gflags[0x0104] || gflags[0x0135]) {
 			add("Hook");
@@ -45326,7 +45666,7 @@ void Func04E5 object#(0x4E5) () {
 		0xFF1B->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = 0xFF1B->get_npc_object()->get_schedule_type();
-		var0002 = Func0931(0xFE9B, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+		var0002 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
 		add(["name", "job", "bye"]);
 		if (gflags[0x0135] || gflags[0x0104]) {
 			add("Crown Jewel");
@@ -45401,7 +45741,7 @@ void Func04E5 object#(0x4E5) () {
 				} else {
 					say("\"I can sell thee the deed to my ship 'The Lusty Wench.' She is beautiful, my friend. She is guaranteed to last and is the sleekest vessel on the seas! She goes for 800 gold. Want her?\"");
 					if (Func090A()) {
-						var0008 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+						var0008 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 						if (var0008 >= 0x0320) {
 							var0009 = UI_add_party_items(0x0001, 0x031D, 0x0012, 0x0002, false);
 							if (var0009) {
@@ -45602,7 +45942,7 @@ void Func04E6 object#(0x4E6) () {
 				fallthrough;
 
 			case "Hook":
-				var0008 = Func0931(0xFE9B, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+				var0008 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
 				if (var0008) {
 					say("The Cube vibrates a moment. \"Yes, I know Hook very well. He lives beneath the House of Games. Talk to Sintag. He can direct thee.\"");
 				} else {
@@ -45612,7 +45952,7 @@ void Func04E6 object#(0x4E6) () {
 				fallthrough;
 
 			case "party":
-				var0008 = Func0931(0xFE9B, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+				var0008 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
 				if (var0008) {
 					say("The Cube vibrates a moment. \"That would be The Fellowship, of course.\"");
 				} else {
@@ -45725,7 +46065,7 @@ void Func04E7 object#(0x4E7) () {
 						var0006 += 0x0001;
 					}
 					var000A = var0006 * 0x000A;
-					var000B = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+					var000B = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 					if (var000B >= var000A) {
 						var000C = UI_add_party_items(0x0001, 0x0281, 0x00FF, FRAME_ANY, true);
 						if (!var000C) {
@@ -45859,7 +46199,7 @@ void Func04E7 object#(0x4E7) () {
 				fallthrough;
 
 			case "Hook":
-				var000E = Func0931(0xFE9B, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+				var000E = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
 				if (var000E) {
 					say("You feel your Cube vibrate, but somehow you know that Mandy would have told you the truth without it.");
 				}
@@ -46063,7 +46403,7 @@ void Func04E9 object#(0x4E9) () {
 						if (var0001 && var0002) {
 							var0003 = UI_get_party_list();
 							var0004 = 0x0000;
-							var0005 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+							var0005 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 							for (var0008 in var0003 with var0006 to var0007) {
 								var0004 += 0x0001;
 							}
@@ -46282,7 +46622,7 @@ void Func04ED object#(0x4ED) () {
 		var0001 = 0xFF13->get_npc_object()->get_schedule_type();
 		var0002 = Func0909();
 		add(["name", "job", "bye"]);
-		var0003 = Func0931(0xFE9B, 0x0001, 0x0289, QUALITY_ANY, FRAME_ANY);
+		var0003 = Func0931(PARTY, 0x0001, 0x0289, QUALITY_ANY, FRAME_ANY);
 		if (var0003) {
 			add("venom");
 		}
@@ -46384,7 +46724,7 @@ void Func04ED object#(0x4ED) () {
 				fallthrough;
 
 			case "venom":
-				var0005 = 0xFE9B->count_objects(0x0289, QUALITY_ANY, FRAME_ANY);
+				var0005 = PARTY->count_objects(0x0289, QUALITY_ANY, FRAME_ANY);
 				var0006 = 0x0032 * var0005;
 				if (var0005 == 0x0000) {
 					say("\"Thou dost not have any vials of venom!\"");
@@ -47144,7 +47484,7 @@ void Func04F2 object#(0x4F2) () {
 
 			case "Bee Cave":
 				say("\"Bee Cave is located to the southwest of the Abbey. But if thou art planning a trip there, beware the giant bees that live in the caves. Their venom is very poisonous.~~");
-				var0003 = Func0931(0xFE9B, 0x0001, 0x0301, QUALITY_ANY, FRAME_ANY);
+				var0003 = Func0931(PARTY, 0x0001, 0x0301, QUALITY_ANY, FRAME_ANY);
 				if (!var0003) {
 					say("\"If thou wishest, I can give thee a smoke bomb that will repel the bees for a short time. Dost thou want it?\"");
 					var0004 = Func090A();
@@ -48151,7 +48491,7 @@ void Func04F8 object#(0x4F8) () {
 
 			case "sextant":
 				var0009 = false;
-				var000A = 0xFE9C->find_nearby(0x028A, 0x0028, MASK_NONE);
+				var000A = AVATAR->find_nearby(0x028A, 0x0028, MASK_NONE);
 				for (var0008 in var000A with var000B to var000C) {
 					if (var0008->get_item_frame() == 0x0001) {
 						var0009 = true;
@@ -48167,7 +48507,7 @@ void Func04F8 object#(0x4F8) () {
 				fallthrough;
 
 			case "kite":
-				var000D = 0xFE9C->find_nearest(0x0149, 0xFFFF);
+				var000D = AVATAR->find_nearest(0x0149, 0xFFFF);
 				if (var000D) {
 					say("He shows you a kite. \"I made this myself by reading one of the books in my brother's library.\"");
 				} else {
@@ -48196,7 +48536,7 @@ void Func04F8 object#(0x4F8) () {
 				fallthrough;
 
 			case "have crystal":
-				var000F = Func0931(0xFE9B, 0x0001, 0x02EA, QUALITY_ANY, FRAME_ANY);
+				var000F = Func0931(PARTY, 0x0001, 0x02EA, QUALITY_ANY, FRAME_ANY);
 				if (var000F) {
 					say("\"Thou hast the crystal? Excellent.\" He takes the crystal that you got from the adventurer and begins attaching it to his orrery viewer. Shortly he is finished.");
 					gflags[0x01ED] = false;
@@ -48381,7 +48721,7 @@ void Func04F9 object#(0x4F9) () {
 				fallthrough;
 
 			case "bookstand":
-				var0002 = 0xFE9C->find_nearest(0x02B9, 0xFFFF);
+				var0002 = AVATAR->find_nearest(0x02B9, 0xFFFF);
 				if (var0002) {
 					say("\"This solid brass bookstand has matching, overhanging candleholder for late-night exploration in literature. I invented it myself.\"");
 				} else {
@@ -48493,7 +48833,7 @@ void Func04FA object#(0x4FA) () {
 		var0001 = false;
 		var0002 = Func08F7(0xFF64);
 		var0003 = UI_part_of_day();
-		var0004 = Func0931(0xFE9B, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+		var0004 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
 		if (var0003 == NIGHT) {
 			if (gflags[0x01FC]) {
 				say("Rankin is unable to speak with you now, for he is conducting the Fellowship meeting.*");
@@ -48786,7 +49126,7 @@ void Func04FB object#(0x4FB) () {
 		0xFF05->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = UI_wearing_fellowship();
-		var0002 = Func0931(0xFE9B, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
+		var0002 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
 		if (var0000 == NIGHT) {
 			say("Danag nods his head at you. \"I do not mean to be impolite, but I am concentrating on the games. I wish to win a bundle tonight!\"");
 			say("He rubs his hand with glee.*");
@@ -49548,7 +49888,7 @@ void Func0500 object#(0x500) () {
 		abort;
 	}
 	add(["name", "job", "bye"]);
-	var0002 = Func0931(0xFE9B, 0x0001, 0x0282, 0x0002, FRAME_ANY);
+	var0002 = Func0931(PARTY, 0x0001, 0x0282, 0x0002, FRAME_ANY);
 	if (var0002) {
 		add("notebook");
 	}
@@ -50030,7 +50370,7 @@ void Func060C object#(0x60C) () {
 		0xFF18->set_schedule_type(STANDTHERE);
 	}
 	if (!0xFF18->npc_nearby()) {
-		var0000 = 0xFE9C->find_nearby(0x02FC, 0x0032, MASK_NONE);
+		var0000 = AVATAR->find_nearby(0x02FC, 0x0032, MASK_NONE);
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0003->set_item_frame(0x0000);
 			var0003->halt_scheduled();
@@ -50224,10 +50564,10 @@ void Func060E object#(0x60E) () {
 		var0006 = get_object_position();
 		gflags[0x0039] = false;
 		if (gflags[0x0057]) {
-			gflags[0x003A] = Func08F9(0xFE9C->get_object_position(), [0x02F1, 0x063B, 0x0000], [0x0383, 0x06FF, 0x0000]);
+			gflags[0x003A] = Func08F9(AVATAR->get_object_position(), [0x02F1, 0x063B, 0x0000], [0x0383, 0x06FF, 0x0000]);
 			if (gflags[0x003A]) {
-				var0007 = 0xFE9C->find_nearby(SHAPE_ANY, 0x005A, MASK_NPC);
-				var0007 = Func093C(0xFE9C->get_npc_object(), var0007);
+				var0007 = AVATAR->find_nearby(SHAPE_ANY, 0x005A, MASK_NPC);
+				var0007 = Func093C(AVATAR->get_npc_object(), var0007);
 				for (var000A in var0007 with var0008 to var0009) {
 					if (var000A->get_schedule_type() == IN_COMBAT) {
 						var000B = var000A->get_alignment();
@@ -50245,8 +50585,8 @@ void Func060E object#(0x60E) () {
 				}
 			}
 			var0010 = [0x0344, 0x06C5, 0x0001];
-			0xFE9C->set_item_frame(0x000D);
-			0xFE9C->set_item_flag(ASLEEP);
+			AVATAR->set_item_frame(0x000D);
+			AVATAR->set_item_flag(ASLEEP);
 			var0011 = [0xFFFC, 0x0000, 0x0004, 0x0000, 0x0000, 0x0004, 0xFFFC, 0x0001, 0x0004, 0x0001, 0xFFFC, 0xFFFF, 0x0004, 0xFFFF, 0x0001, 0x0002, 0xFFFF, 0x0002];
 			var0012 = 0x0000;
 			var0013 = [FACE_EAST, var0012, FACE_WEST, var0012, FACE_NORTH, var0012, FACE_EAST, var0012, FACE_WEST, var0012, FACE_EAST, var0012, FACE_WEST, var0012, FACE_NORTH, var0012, FACE_NORTH];
@@ -50276,9 +50616,9 @@ void Func060E object#(0x60E) () {
 					0xFF58->set_schedule_type(LOITER);
 				}
 			}
-			0xFE9B->move_object(var0010);
+			PARTY->move_object(var0010);
 			for (var0003 in var001A with var001B to var001C) {
-				if (!(var0003 == 0xFE9C->get_npc_object())) {
+				if (!(var0003 == AVATAR->get_npc_object())) {
 					var0003->halt_scheduled();
 					if (!var0003->get_item_flag(ASLEEP)) {
 						var0004 = script var0003 {
@@ -50299,8 +50639,8 @@ void Func060E object#(0x60E) () {
 					var0016 += 0x0002;
 				}
 			}
-			0xFE9C->clear_item_flag(DEAD);
-			var0004 = script 0xFE9C {
+			AVATAR->clear_item_flag(DEAD);
+			var0004 = script AVATAR {
 				wait 2;
 				call Func0610;
 			};
@@ -50385,8 +50725,8 @@ void Func0610 object#(0x610) () {
 	}
 	gflags[0x0026] = true;
 	gflags[0x003A] = false;
-	0xFE9C->clear_item_flag(ASLEEP);
-	0xFE9C->set_schedule_type(FOLLOW_AVATAR);
+	AVATAR->clear_item_flag(ASLEEP);
+	AVATAR->set_schedule_type(FOLLOW_AVATAR);
 }
 
 void Func0611 object#(0x611) () {
@@ -50598,9 +50938,9 @@ extern void Func061A object#(0x61A) ();
 void Func0618 object#(0x618) () {
 	var var0000;
 
-	if (0xFE9C->get_item_flag(DONT_RENDER)) {
-		0xFE9C->clear_item_flag(DONT_RENDER);
-		var0000 = script 0xFE9C {
+	if (AVATAR->get_item_flag(DONT_RENDER)) {
+		AVATAR->clear_item_flag(DONT_RENDER);
+		var0000 = script AVATAR {
 			step FACE_WEST, 0;
 			step FACE_WEST, 0;
 			step FACE_WEST, 0;
@@ -50735,7 +51075,7 @@ void Func0621 object#(0x621) () {
 		if (var0001 == 0x0001) {
 			if (gflags[0x0157]) {
 				var0000 = "Perhaps thou shouldst use the crystal ball.";
-				var0002 = 0xFE9B;
+				var0002 = PARTY;
 				var0003 = 0x0001;
 			} else {
 				abort;
@@ -50758,7 +51098,7 @@ void Func0621 object#(0x621) () {
 		}
 		if (var0001 == 0x0005) {
 			var0000 = "I heard something!";
-			var0002 = 0xFE9B;
+			var0002 = PARTY;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x0006) {
@@ -50813,12 +51153,12 @@ void Func0621 object#(0x621) () {
 		}
 		if (var0001 == 0x0010) {
 			var0000 = "This place is creepy.";
-			var0002 = 0xFE9B;
+			var0002 = PARTY;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x0011) {
 			var0000 = "Wow...!";
-			var0002 = 0xFE9B;
+			var0002 = PARTY;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x0012) {
@@ -50843,12 +51183,12 @@ void Func0621 object#(0x621) () {
 		}
 		if (var0001 == 0x0016) {
 			var0000 = "Be most careful. Who knows what may be lurking amongst the trees...";
-			var0002 = 0xFE9B;
+			var0002 = PARTY;
 			var0003 = 0x0001;
 		}
 		if (var0001 == 0x0017) {
 			var0000 = "Brushed up on thy Gargish?";
-			var0002 = 0xFE9B;
+			var0002 = PARTY;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x0018) {
@@ -50923,7 +51263,7 @@ void Func0621 object#(0x621) () {
 		}
 		if (var0001 == 0x0026) {
 			var0000 = "Watch for bridge trolls.";
-			var0002 = 0xFE9B;
+			var0002 = PARTY;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x0027) {
@@ -50933,39 +51273,39 @@ void Func0621 object#(0x621) () {
 		}
 		if (var0001 == 0x0028) {
 			var0000 = "The noise! Agh! It hurts!";
-			var0002 = 0xFE9B;
+			var0002 = PARTY;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x0029) {
-			if ((!Func0931(0xFE9B, 0x0001, 0x03D5, QUALITY_ANY, 0x0000)) && gflags[0x0004]) {
+			if ((!Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0000)) && gflags[0x0004]) {
 				var0000 = "You left the small sphere!";
-				var0002 = 0xFE9B;
+				var0002 = PARTY;
 				var0003 = 0x0001;
 			} else {
 				abort;
 			}
 		}
 		if (var0001 == 0x002A) {
-			if ((!Func0931(0xFE9B, 0x0001, 0x03D5, QUALITY_ANY, 0x0001)) && gflags[0x0005]) {
+			if ((!Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001)) && gflags[0x0005]) {
 				var0000 = "You left the small cube!";
-				var0002 = 0xFE9B;
+				var0002 = PARTY;
 				var0003 = 0x0001;
 			} else {
 				abort;
 			}
 		}
 		if (var0001 == 0x002B) {
-			if ((!Func0931(0xFE9B, 0x0001, 0x03D5, QUALITY_ANY, 0x0002)) && gflags[0x0003]) {
+			if ((!Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0002)) && gflags[0x0003]) {
 				var0000 = "You left the small tetrahedron!";
-				var0002 = 0xFE9B;
+				var0002 = PARTY;
 				var0003 = 0x0001;
 			} else {
 				abort;
 			}
 		}
-		if (var0002 == 0xFE9B) {
+		if (var0002 == PARTY) {
 			var0002 = Func0900();
-			if (var0002 == 0xFE9C) {
+			if (var0002 == AVATAR) {
 				abort;
 			}
 		}
@@ -51015,11 +51355,11 @@ void Func0622 object#(0x622) () {
 	if (event == DOUBLECLICK) {
 		var0000 = UI_get_party_list();
 		var0001 = Func0900();
-		if (var0001 == 0xFE9C) {
+		if (var0001 == AVATAR) {
 			var0002 = 0x0006 + UI_die_roll(0x0000, 0x0009);
 		} else {
 			var0001->show_npc_face(0x0000);
-			var0003 = 0xFE9C->get_npc_name();
+			var0003 = AVATAR->get_npc_name();
 			var0004 = UI_get_array_size(UI_get_party_list());
 			if (var0004 > 0x0002) {
 				var0005 = "we";
@@ -51043,7 +51383,7 @@ void Func0622 object#(0x622) () {
 					Func093F(var0008, FOLLOW_AVATAR);
 				}
 				var0001->hide();
-				0xFE9C->clear_item_flag(ASLEEP);
+				AVATAR->clear_item_flag(ASLEEP);
 				return;
 			}
 			say("\"Pleasant dreams.\"");
@@ -51055,11 +51395,11 @@ void Func0622 object#(0x622) () {
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		var0009 = var0002 * 0x05DC;
 		Func093A(var0002, item);
-		var0000 = Func093C(0xFE9C->get_npc_object(), var0000);
+		var0000 = Func093C(AVATAR->get_npc_object(), var0000);
 		for (var0008 in var0000 with var000A to var000B) {
 			Func093F(var0008, LOITER);
 		}
-		var000C = script 0xFE9C {
+		var000C = script AVATAR {
 			wait 35;
 		};
 		var000C = script item after 33 ticks {
@@ -51085,9 +51425,9 @@ void Func0623 object#(0x623) () {
 
 	if (event == SCRIPTED) {
 		var0000 = Func0900();
-		if (!(var0000 == 0xFE9C)) {
+		if (!(var0000 == AVATAR)) {
 			var0000->show_npc_face(0x0000);
-			var0001 = 0xFE9C->get_npc_name();
+			var0001 = AVATAR->get_npc_name();
 			say("\"Arise, ",
 				var0001,
 				". Time to continue the quest.\"");
@@ -51097,8 +51437,8 @@ void Func0623 object#(0x623) () {
 		for (var0005 in var0002 with var0003 to var0004) {
 			Func093F(var0005, FOLLOW_AVATAR);
 		}
-		0xFE9C->set_item_flag(ASLEEP);
-		0xFE9C->clear_item_flag(ASLEEP);
+		AVATAR->set_item_flag(ASLEEP);
+		AVATAR->clear_item_flag(ASLEEP);
 		if ((get_item_shape() == 0x03F3) && (get_item_frame() == 0x0011)) {
 			event = DOUBLECLICK;
 			item->Func0624();
@@ -51117,7 +51457,7 @@ void Func0624 object#(0x624) () {
 		UI_close_gumps();
 		var0000 = [0xFFFF, 0xFFFF, 0xFFFF, 0x0000, 0x0000, 0x0000, 0x0001, 0x0001, 0x0001];
 		var0001 = [0x0001, 0x0000, 0xFFFF, 0x0001, 0x0000, 0xFFFF, 0x0001, 0x0000, 0xFFFF];
-		0xFE9C->halt_scheduled();
+		AVATAR->halt_scheduled();
 		Func0828(item, var0000, var0001, 0xFFFF, Func0624, item, BG_PATH_SUCCESS);
 		UI_set_path_failure(Func0624, item, SCRIPTED);
 	}
@@ -51127,7 +51467,7 @@ void Func0624 object#(0x624) () {
 	}
 	if (event == BG_PATH_SUCCESS) {
 		UI_close_gumps();
-		var0002 = script 0xFE9C {
+		var0002 = script AVATAR {
 			face FACE_NORTH;
 			actor frame bowing;
 			wait 1;
@@ -51184,7 +51524,7 @@ void Func0625 object#(0x625) () {
 		var0000 = get_item_shape();
 		var0001 = [0x017B, 0x0111];
 		var0002 = [0x01B8, 0x0133];
-		var0003 = 0xFE9C->get_object_position();
+		var0003 = AVATAR->get_object_position();
 		if (Func093E()) {
 			0xFEFD->say("You see an irate guard.~~Years of indoctrination have instilled in him an overly developed sense of discipline~~and a zealous devotion to the maintainance of order. All of this zeal is now directed against you.~~ \"Such behavior will never be tolerated inside the sanctuary of Trinsic's walls.~~Thy red cloak and blonde curls show only that thou art a vile imposter and not a true Avatar.~~To the Death!\"");
 			0xFEFD->hide();
@@ -51198,7 +51538,7 @@ void Func0625 object#(0x625) () {
 			return;
 		}
 		0xFEFE->show_npc_face(0x0000);
-		var0004 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+		var0004 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 		if ((UI_die_roll(0x0001, 0x0002) == 0x0001) && var0004) {
 			say("You see an angry guard. \"Cease and desist immediately!.~~Dost thou wish to avoid the unpleasantries of a lengthy trial?\"");
 			var0005 = Func090A();
@@ -51242,8 +51582,8 @@ void Func0625 object#(0x625) () {
 			if (Func090A()) {
 				say("\"Very well. Thou shalt remain in prison until we see fit to release thee.\"");
 				0xFEFE->hide();
-				0xFE9C->halt_scheduled();
-				var0013 = script 0xFE9C after 2 ticks {
+				AVATAR->halt_scheduled();
+				var0013 = script AVATAR after 2 ticks {
 					call Func0625;
 					actor frame sleeping;
 					wait 5;
@@ -51265,13 +51605,13 @@ labelFunc0625_01DB:
 		var0018 = [0x01A4, 0x0127, 0x0000];
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		UI_play_music(0x00FF, item);
-		0xFE9B->move_object(var0018);
-		var0019 = 0xFE9C->find_nearby(0x033C, 0x000A, MASK_NONE);
+		PARTY->move_object(var0018);
+		var0019 = AVATAR->find_nearby(0x033C, 0x000A, MASK_NONE);
 		if (var0019 && (Func081B(var0019) == 0x0001)) {
 			var0013 = Func081F(var0019);
 		}
 		Func084A();
-		var0013 = script 0xFE9C {
+		var0013 = script AVATAR {
 			wait 1;
 			call Func063C;
 		};
@@ -51570,17 +51910,17 @@ void Func062D object#(0x62D) () {
 	if (event == BG_PATH_SUCCESS) {
 		var0000 = get_container();
 		if (!var0000) {
-			var0001 = Func0827(0xFE9C, item);
+			var0001 = Func0827(AVATAR, item);
 			var0002 = get_object_position();
 			var0003 = set_last_created();
 			if (var0003) {
-				var0003 = 0xFE9C->give_last_created();
+				var0003 = AVATAR->give_last_created();
 				if (!var0003) {
 					var0003 = UI_update_last_created(var0002);
 					UI_flash_mouse(CURSOR_TOO_HEAVY);
 					abort;
 				}
-				var0003 = script 0xFE9C {
+				var0003 = script AVATAR {
 					face var0001;
 					continue;
 					actor frame bowing;
@@ -51629,17 +51969,17 @@ void Func062E object#(0x62E) () {
 	if (event == BG_PATH_SUCCESS) {
 		var0000 = get_container();
 		if (!var0000) {
-			var0001 = Func0827(0xFE9C, item);
+			var0001 = Func0827(AVATAR, item);
 			var0002 = get_object_position();
 			var0003 = set_last_created();
 			if (var0003) {
-				var0003 = 0xFE9C->give_last_created();
+				var0003 = AVATAR->give_last_created();
 				if (!var0003) {
 					var0003 = UI_update_last_created(var0002);
 					UI_flash_mouse(CURSOR_TOO_HEAVY);
 					abort;
 				}
-				var0003 = script 0xFE9C {
+				var0003 = script AVATAR {
 					face var0001;
 					continue;
 					actor frame bowing;
@@ -51701,7 +52041,7 @@ void Func0631 object#(0x631) () {
 					next frame cycle;
 				};
 			};
-			var0006 = script 0xFE9C {
+			var0006 = script AVATAR {
 				face west;
 				continue;
 				repeat 2 {
@@ -51713,7 +52053,7 @@ void Func0631 object#(0x631) () {
 		}
 		if (gflags[0x003D]) {
 			if (Func08F7(0xFFF2) && (!gflags[0x0057])) {
-				if (Func0937(0xFFF2) && Func0937(0xFE9C)) {
+				if (Func0937(0xFFF2) && Func0937(AVATAR)) {
 					var0006 = script 0xFFF2->get_npc_object() after 1 ticks {
 						nohalt;
 						say "@What's the password?@";
@@ -51734,7 +52074,7 @@ void Func0631 object#(0x631) () {
 				return;
 			}
 			if (Func08F7(0xFFE5) && (!gflags[0x0057])) {
-				if (Func0937(0xFFE5) && Func0937(0xFE9C)) {
+				if (Func0937(0xFFE5) && Func0937(AVATAR)) {
 					var0006 = script 0xFFE5->get_npc_object() after 1 ticks {
 						nohalt;
 						say "@What's the password?@";
@@ -51754,9 +52094,9 @@ void Func0631 object#(0x631) () {
 				};
 				return;
 			}
-			if (0xFE9C->find_nearest(0x0326, 0xFFFF) && (!gflags[0x0057])) {
+			if (AVATAR->find_nearest(0x0326, 0xFFFF) && (!gflags[0x0057])) {
 				var0007 = find_nearest(0x0326, 0x0014);
-				if (Func0937(var0007) && Func0937(0xFE9C)) {
+				if (Func0937(var0007) && Func0937(AVATAR)) {
 					var0006 = script var0007 after 1 ticks {
 						nohalt;
 						say "@What's the password?@";
@@ -51794,7 +52134,7 @@ void Func0631 object#(0x631) () {
 					};
 				}
 			}
-			if (0xFE9C->find_nearest(0x0326, 0xFFFF) && (!gflags[0x0057])) {
+			if (AVATAR->find_nearest(0x0326, 0xFFFF) && (!gflags[0x0057])) {
 				var0007 = find_nearest(0x0326, 0x0014);
 				if (Func0937(var0007)) {
 					var0006 = script var0007 after 1 ticks {
@@ -51888,16 +52228,16 @@ void Func0634 object#(0x634) () {
 			item->Func028C();
 		}
 		if (var0001 == 0x00C7) {
-			var0002 = 0xFE9C->find_nearby(0x009B, 0x0019, MASK_NONE);
+			var0002 = AVATAR->find_nearby(0x009B, 0x0019, MASK_NONE);
 			if (var0002) {
 				if (var0002->get_barge() == var0000) {
-					if (0xFE9C->get_item_flag(ACTIVE_SAILOR) == var0002) {
+					if (AVATAR->get_item_flag(ACTIVE_SAILOR) == var0002) {
 						var0000->Func061C();
-						0xFE9C->clear_item_flag(ACTIVE_SAILOR);
+						AVATAR->clear_item_flag(ACTIVE_SAILOR);
 					}
 				}
 			} else {
-				var0003 = 0xFE9C->get_item_flag(ACTIVE_SAILOR);
+				var0003 = AVATAR->get_item_flag(ACTIVE_SAILOR);
 				if (var0003) {
 					Func0831(var0003);
 				}
@@ -51956,7 +52296,7 @@ void Func0636 object#(0x636) () {
 	var var0000;
 
 	UI_fade_palette(0x000C, 0x0001, 0x0001);
-	if (item == 0xFE9C->get_npc_object()) {
+	if (item == AVATAR->get_npc_object()) {
 		var0000 = get_object_position();
 		UI_sprite_effect(ANIMATION_TELEPORT, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 	}
@@ -51964,7 +52304,7 @@ void Func0636 object#(0x636) () {
 
 void Func0637 object#(0x637) () {
 	clear_item_flag(ACTIVE_BARGE);
-	0xFE9C->set_camera();
+	AVATAR->set_camera();
 }
 
 extern void Func08FF 0x8FF (var var0000);
@@ -51991,7 +52331,7 @@ void Func0638 object#(0x638) () {
 			};
 			return;
 		}
-		if (item == 0xFE9C->get_npc_object()) {
+		if (item == AVATAR->get_npc_object()) {
 			if (!gflags[0x0325]) {
 				gflags[0x0325] = true;
 				Func08FF("@Why, a page has fallen out of the book!@");
@@ -52303,9 +52643,9 @@ void Func0638 object#(0x638) () {
 		if (!gflags[0x0325]) {
 			var0003 = UI_create_new_object(0x031D);
 			var0004 = var0003->set_item_quality(0x002D);
-			var0005 = UI_update_last_created(0xFE9C->get_object_position());
+			var0005 = UI_update_last_created(AVATAR->get_object_position());
 		}
-		var0006 = script 0xFE9C {
+		var0006 = script AVATAR {
 			nohalt;
 			call Func0638;
 		};
@@ -52391,7 +52731,7 @@ void Func063C object#(0x63C) () {
 	var var0001;
 
 	UI_fade_palette(0x000C, 0x0001, 0x0001);
-	var0000 = 0xFE9C->find_nearby(0x0178, 0x0006, MASK_NONE);
+	var0000 = AVATAR->find_nearby(0x0178, 0x0006, MASK_NONE);
 	if (var0000) {
 		var0001 = script var0000 after 1 ticks {
 			call Func010E;
@@ -52437,24 +52777,24 @@ void Func063E object#(0x63E) () {
 	if (event == EGG) {
 		var0000 = 0xFFE9->set_last_created();
 		if (var0000) {
-			var0001 = 0xFE9C->get_object_position();
+			var0001 = AVATAR->get_object_position();
 			var0001[0x0002] -= 0x0004;
 			var0000 = UI_update_last_created(var0001);
 			0xFFE9->set_item_frame(0x0010);
 		}
-		var0000 = script 0xFE9C after 1 ticks {
+		var0000 = script AVATAR after 1 ticks {
 			nohalt;
 			call Func063E;
 		};
-		var0000 = 0xFE9C->set_npc_prop(INTELLIGENCE, 0);
-		var0000 = 0xFE9C->set_npc_prop(DEXTERITY, 0);
-		var0000 = 0xFE9C->set_npc_prop(STRENGTH, 15);
-		var0000 = 0xFE9C->set_npc_prop(HEALTH, 15);
-		var0000 = 0xFE9C->set_npc_prop(COMBAT, 0);
-		var0000 = 0xFE9C->set_npc_prop(MANA, 0);
-		var0000 = 0xFE9C->set_npc_prop(MAX_MANA, 0);
-		var0000 = 0xFE9C->set_npc_prop(TRAINING, 0);
-		var0000 = 0xFE9C->set_npc_prop(EXPERIENCE, 0);
+		var0000 = AVATAR->set_npc_prop(INTELLIGENCE, 0);
+		var0000 = AVATAR->set_npc_prop(DEXTERITY, 0);
+		var0000 = AVATAR->set_npc_prop(STRENGTH, 15);
+		var0000 = AVATAR->set_npc_prop(HEALTH, 15);
+		var0000 = AVATAR->set_npc_prop(COMBAT, 0);
+		var0000 = AVATAR->set_npc_prop(MANA, 0);
+		var0000 = AVATAR->set_npc_prop(MAX_MANA, 0);
+		var0000 = AVATAR->set_npc_prop(TRAINING, 0);
+		var0000 = AVATAR->set_npc_prop(EXPERIENCE, 0);
 	}
 	if (event == SCRIPTED) {
 		0xFFE9->say("Busted, you thieving scoundrel bastard! Perhaps the only thing more ridiculous than your pathetic attempt to destroy the black gate without paying proper dues is your inevitably embarassing explanation\tto the friend to whom you are, no doubt, showing this!");
@@ -52487,8 +52827,8 @@ void Func063F object#(0x63F) () {
 	var var0000;
 
 	gflags[0x0326] = true;
-	0xFE9C->set_camera();
-	var0000 = script 0xFE9C->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY) {
+	AVATAR->set_camera();
+	var0000 = script AVATAR->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY) {
 		wait 2;
 		nohalt;
 		call Func0716;
@@ -52730,7 +53070,7 @@ void Func0645 object#(0x645) () {
 	}
 	if (event == SCRIPTED) {
 		var0005 = [0x03A8, 0x047A, 0x0000];
-		0xFE9B->move_object(var0005);
+		PARTY->move_object(var0005);
 	}
 }
 
@@ -52931,7 +53271,7 @@ void Func064A object#(0x64A) () {
 				actor frame raise_1h;
 				actor frame strike_1h;
 			};
-			var0001 = Func08F6(0xFE9C);
+			var0001 = Func08F6(AVATAR);
 			var0002 = 0x0015 + var0001;
 			var0003 = find_nearby(0x00C8, var0002, MASK_ALL_UNSEEN);
 			for (var0006 in var0003 with var0004 to var0005) {
@@ -53126,7 +53466,7 @@ void Func064E object#(0x64E) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		var0001 = 0xFE9C->get_object_position();
+		var0001 = AVATAR->get_object_position();
 		var0002 = (var0001[0x0001] - 0x03A5) / 0x000A;
 		var0003 = (var0001[0x0002] - 0x046E) / 0x000A;
 		if (var0002 < 0x0000) {
@@ -53401,7 +53741,7 @@ void Func0654 object#(0x654) () {
 	}
 	if (event == SCRIPTED) {
 		var0002 = UI_get_party_list();
-		var0002 &= 0xFE9C;
+		var0002 &= AVATAR;
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0005->clear_item_flag(POISONED);
 			var0005->clear_item_flag(PARALYZED);
@@ -53704,7 +54044,7 @@ void Func065B object#(0x65B) () {
 		var0001 = get_object_position();
 		UI_sprite_effect(ANIMATION_TELEPORT, (var0001[0x0001] - 0x0002), (var0001[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		var0002 = UI_get_party_list();
-		var0002 &= 0xFE9C;
+		var0002 &= AVATAR;
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0005->set_item_flag(PROTECTION);
 		}
@@ -53883,7 +54223,7 @@ void Func0660 object#(0x660) () {
 	if (event == SCRIPTED) {
 		var0001 = [0x02CC, 0x032B, 0x020B, 0x01FE, 0x0212, 0x01F6, 0x0219];
 		var0002 = UI_get_array_size(var0001);
-		var0003 = Func08F6(0xFE9C);
+		var0003 = Func08F6(AVATAR);
 		if (var0003 > var0002) {
 			var0003 = var0002;
 		}
@@ -53954,7 +54294,7 @@ void Func0662 object#(0x662) () {
 		halt_scheduled();
 		var0000 = UI_click_on_item();
 		if (var0000->get_item_shape() == 0x014A) {
-			if (!0xFE9C->get_barge()) {
+			if (!AVATAR->get_barge()) {
 				item_say("@Kal Por Ylem@");
 				if (Func0906() && (!gflags[0x0039])) {
 					var0001 = script var0000 {
@@ -54011,7 +54351,7 @@ void Func0663 object#(0x663) () {
 			var0002 = 0x001E;
 			var0003 = Func0934(var0002);
 			var0004 = UI_get_party_list();
-			var0004 &= 0xFE9C;
+			var0004 &= AVATAR;
 			for (var0007 in var0003 with var0005 to var0006) {
 				if (!(var0007 in var0004)) {
 					if (!(UI_die_roll(0x0001, 0x0003) == 0x0001)) {
@@ -54096,7 +54436,7 @@ void Func0665 object#(0x665) () {
 
 	if (event == DOUBLECLICK) {
 		halt_scheduled();
-		var0000 = 0xFE9C->get_object_position();
+		var0000 = AVATAR->get_object_position();
 		var0001 = [];
 		item_say("@Wis Quas@");
 		if (Func0906()) {
@@ -55240,7 +55580,7 @@ void Func0679 object#(0x679) () {
 	var var0004;
 	var var0005;
 
-	if ((event == DOUBLECLICK) || ((event == WEAPON) && (get_npc_number() == 0xFE9C))) {
+	if ((event == DOUBLECLICK) || ((event == WEAPON) && (get_npc_number() == AVATAR))) {
 		halt_scheduled();
 		var0000 = UI_click_on_item();
 		var0001 = Func092D(var0000);
@@ -55267,9 +55607,9 @@ void Func0679 object#(0x679) () {
 			};
 		}
 	}
-	if ((event == WEAPON) && (item != 0xFE9C)) {
+	if ((event == WEAPON) && (item != AVATAR)) {
 		if (is_npc()) {
-			var0003 = 0xFE9C->get_npc_prop(INTELLIGENCE);
+			var0003 = AVATAR->get_npc_prop(INTELLIGENCE);
 			var0004 = get_npc_prop(INTELLIGENCE);
 		} else {
 			var0003 = 0;
@@ -55496,8 +55836,8 @@ void Func067D object#(0x67D) () {
 	}
 	if (event == SCRIPTED) {
 		var0007 = get_npc_number();
-		if (!(var0007 in [0xFF27, 0xFF26, 0xFE9C])) {
-			var0008 = 0xFE9C->get_alignment();
+		if (!(var0007 in [0xFF27, 0xFF26, AVATAR])) {
+			var0008 = AVATAR->get_alignment();
 			if (var0008) {
 				set_item_flag(CHARMED);
 			} else {
@@ -55584,7 +55924,7 @@ void Func067F object#(0x67F) () {
 				var0005 = var0004->get_npc_prop(STRENGTH);
 				var0006 = var0004->get_npc_prop(HEALTH);
 				var0000 = var0004->set_npc_prop(HEALTH, var0005 - var0006);
-				0xFE9C->obj_sprite_effect(ANIMATION_GREEN_BUBBLES, 0xFFFF, 0xFFFF, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
+				AVATAR->obj_sprite_effect(ANIMATION_GREEN_BUBBLES, 0xFFFF, 0xFFFF, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			}
 		} else {
 			var0000 = script item {
@@ -56041,7 +56381,7 @@ void Func068B object#(0x68B) () {
 	var var0000;
 	var var0001;
 
-	var0000 = 0xFE9C->get_npc_object()->find_nearest(0x03DF, 0x0005);
+	var0000 = AVATAR->get_npc_object()->find_nearest(0x03DF, 0x0005);
 	if (var0000) {
 		var0001 = Func0837(item, var0000, 0x0000, 0x0000, 0x0001);
 		Func0838(item);
@@ -56055,7 +56395,7 @@ void Func068C object#(0x68C) () {
 	var var0000;
 	var var0001;
 
-	var0000 = 0xFE9C->get_npc_object()->find_nearest(0x02E3, 0x0005);
+	var0000 = AVATAR->get_npc_object()->find_nearest(0x02E3, 0x0005);
 	if (var0000) {
 		var0001 = Func0837(item, var0000, 0x0000, 0xFFFF, 0x0002);
 		Func0838(item);
@@ -56070,9 +56410,9 @@ void Func068D object#(0x68D) () {
 	var var0002;
 
 	var0000 = get_item_frame();
-	var0001 = 0xFE9C->get_npc_object()->get_cont_items(0x029C, QUALITY_ANY, FRAME_ANY);
+	var0001 = AVATAR->get_npc_object()->get_cont_items(0x029C, QUALITY_ANY, FRAME_ANY);
 	if ((var0000 == 0x0003) || (var0000 == 0x0007)) {
-		var0002 = script 0xFE9C->get_npc_object() {
+		var0002 = script AVATAR->get_npc_object() {
 			wait 10;
 			actor frame standing;
 		};
@@ -56081,7 +56421,7 @@ void Func068D object#(0x68D) () {
 			call Func068E;
 		};
 	} else {
-		0xFE9C->get_npc_object()->item_say("@There's not enough water.@");
+		AVATAR->get_npc_object()->item_say("@There's not enough water.@");
 	}
 }
 
@@ -56093,7 +56433,7 @@ void Func068E object#(0x68E) () {
 	var var0001;
 	var var0002;
 
-	var0000 = 0xFE9C->get_npc_object()->find_nearest(0x02E5, 0x0005);
+	var0000 = AVATAR->get_npc_object()->find_nearest(0x02E5, 0x0005);
 	if (Func0837(item, var0000, 0x0000, 0x0000, 0x0002)) {
 		var0001 = get_object_position();
 		UI_sprite_effect(ANIMATION_POOF, (var0001[0x0001] - 0x0003), (var0001[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
@@ -56166,7 +56506,7 @@ void Func0691 object#(0x691) () {
 	var var0003;
 
 	if (event == SCRIPTED) {
-		var0000 = 0xFE9C->get_npc_object()->find_nearest(0x029C, 0x0002);
+		var0000 = AVATAR->get_npc_object()->find_nearest(0x029C, 0x0002);
 		var0001 = var0000->get_object_position();
 		var0002 = script item {
 			sfx 45;
@@ -56182,27 +56522,27 @@ void Func0691 object#(0x691) () {
 		if (!gflags[0x032D]) {
 			if (var0003 > 0x0042) {
 				gflags[0x032D] = true;
-				0xFE9C->show_npc_face(UI_is_pc_female());
+				AVATAR->show_npc_face(UI_is_pc_female());
 				say("After a short while you notice that the edge has definitely improved.");
-				0xFE9C->hide();
+				AVATAR->hide();
 			}
 		} else if (!gflags[0x032E]) {
 			if (var0003 > 0x0042) {
 				gflags[0x032E] = true;
-				0xFE9C->show_npc_face(UI_is_pc_female());
+				AVATAR->show_npc_face(UI_is_pc_female());
 				say("You feel that you've done the best job that you can, but the sword doesn't feel quite right. It's much too heavy and cumbersome to wield as a weapon.");
 				gflags[0x0337] = true;
-				0xFE9C->hide();
+				AVATAR->hide();
 			} else if (var0003 < 0x0014) {
 				gflags[0x032D] = false;
-				0xFE9C->show_npc_face(UI_is_pc_female());
+				AVATAR->show_npc_face(UI_is_pc_female());
 				say("That last blow was perhaps a bit too hard, It'll take a while to hammer out the flaws.");
-				0xFE9C->hide();
+				AVATAR->hide();
 			}
 		} else {
-			0xFE9C->show_npc_face(UI_is_pc_female());
+			AVATAR->show_npc_face(UI_is_pc_female());
 			say("The blade has been worked as well as it can be. It will take some form of magic to make this sword blank into a usable weapon.");
-			0xFE9C->hide();
+			AVATAR->hide();
 		}
 	}
 }
@@ -56216,13 +56556,13 @@ void Func0692 object#(0x692) () {
 	if (!var0000) {
 		var0001 = get_object_position();
 		var0002 = set_last_created();
-		if (!0xFE9C->get_npc_object()->give_last_created()) {
+		if (!AVATAR->get_npc_object()->give_last_created()) {
 			var0002 = UI_update_last_created(var0001);
 			UI_flash_mouse(CURSOR_WONT_FIT);
 		}
 	} else {
 		var0002 = set_last_created();
-		if (!0xFE9C->get_npc_object()->give_last_created()) {
+		if (!AVATAR->get_npc_object()->give_last_created()) {
 			var0002 = var0000->give_last_created();
 			UI_flash_mouse(CURSOR_WONT_FIT);
 		}
@@ -56274,7 +56614,7 @@ void Func0694 object#(0x694) () {
 	if (var0000 == 0x0006) {
 		return;
 	}
-	var0003 = 0xFE9C->get_npc_object()->get_object_position();
+	var0003 = AVATAR->get_npc_object()->get_object_position();
 	var0004[0x0001] = var0003[0x0001];
 	var0004[0x0002] = var0003[0x0002] - 0x0001;
 	var0004[0x0003] = 0x0000;
@@ -56301,7 +56641,7 @@ void Func0695 object#(0x695) () {
 	var var0003;
 	var var0004;
 
-	var0000 = 0xFE9C->get_npc_object()->find_nearest(0x02E4, 0x000A);
+	var0000 = AVATAR->get_npc_object()->find_nearest(0x02E4, 0x000A);
 	if (var0000) {
 		var0001 = var0000->get_item_frame();
 		var0001 -= 0x0006;
@@ -56318,7 +56658,7 @@ void Func0695 object#(0x695) () {
 			wait 2;
 			frame var0001;
 		};
-		var0003 = script 0xFE9C->get_npc_object() {
+		var0003 = script AVATAR->get_npc_object() {
 			actor frame ready;
 			wait 1;
 			actor frame reach_1h;
@@ -56426,13 +56766,13 @@ void Func0696 object#(0x696) () {
 		} else {
 			say("The elderly mage looks quite embarrassed, \"Enough of these silly charades, I really am quite busy with my studies.\" He turns away, his face blushing furiously.*");
 			set_schedule_type(PATROL);
-			0xFE9C->get_npc_object()->clear_item_flag(DONT_RENDER);
+			AVATAR->get_npc_object()->clear_item_flag(DONT_RENDER);
 			var0008 = Func0881();
 			var0009 = script var0008 after 14 ticks {
 				finish;
 				remove;
 			};
-			var000A = script 0xFE9C->get_npc_object() {
+			var000A = script AVATAR->get_npc_object() {
 				wait 12;
 				call Func069D;
 			};
@@ -56612,13 +56952,13 @@ void Func0697 object#(0x697) () {
 				actor frame standing;
 			};
 			var0006->set_schedule_type(PATROL);
-			0xFE9C->get_npc_object()->clear_item_flag(DONT_RENDER);
+			AVATAR->get_npc_object()->clear_item_flag(DONT_RENDER);
 			var0008 = Func0881();
 			var0009 = script var0008 after 13 ticks {
 				finish;
 				remove;
 			};
-			var000A = script 0xFE9C->get_npc_object() {
+			var000A = script AVATAR->get_npc_object() {
 				wait 11;
 				call Func069D;
 			};
@@ -56762,7 +57102,7 @@ void Func0699 object#(0x699) () {
 		var0005 = var0003[0x0001]->get_object_position();
 		var0006 = Func0881();
 		move_object(var0004);
-		0xFE9C->get_npc_object()->move_object(var0005);
+		AVATAR->get_npc_object()->move_object(var0005);
 		if (var0006) {
 			var0006->move_object(var0005);
 		}
@@ -56798,7 +57138,7 @@ void Func0699 object#(0x699) () {
 				var0009[0x0001] = var0005[0x0001] + 0x0002;
 				var0009[0x0002] = var0005[0x0002] + 0x0006;
 			}
-			if (!(var000C == 0xFE9C->get_npc_object())) {
+			if (!(var000C == AVATAR->get_npc_object())) {
 				var000C->move_object(var0009);
 				var000D = script var000C {
 					face north;
@@ -56811,7 +57151,7 @@ void Func0699 object#(0x699) () {
 			wait 2;
 			call Func069C;
 		};
-		var000F = script 0xFE9C->get_npc_object() {
+		var000F = script AVATAR->get_npc_object() {
 			face north;
 		};
 		if (UI_is_pc_female()) {
@@ -56841,7 +57181,7 @@ void Func069A object#(0x69A) () {
 	Func087D();
 	var0000 = get_object_position();
 	UI_sprite_effect(ANIMATION_GREEN_BUBBLES, (var0000[0x0001] - 0x0002), (var0000[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-	var0001 = 0xFE9C->get_npc_object()->get_object_position();
+	var0001 = AVATAR->get_npc_object()->get_object_position();
 	UI_sprite_effect(ANIMATION_TELEPORT, (var0001[0x0001] - 0x0002), (var0001[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 	UI_play_sound_effect(0x0044);
 	var0002 = Func092D(item);
@@ -56885,7 +57225,7 @@ void Func069C object#(0x69C) () {
 	UI_fade_palette(0x000C, 0x0001, 0x0001);
 	var0000 = get_object_position();
 	UI_sprite_effect(ANIMATION_GREEN_BUBBLES, (var0000[0x0001] - 0x0002), (var0000[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-	var0001 = 0xFE9C->get_npc_object()->get_object_position();
+	var0001 = AVATAR->get_npc_object()->get_object_position();
 	UI_sprite_effect(ANIMATION_TELEPORT, (var0001[0x0001] - 0x0002), (var0001[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 	UI_play_sound_effect(0x0044);
 	var0002 = script item {
@@ -56932,7 +57272,7 @@ void Func069D object#(0x69D) () {
 	}
 	var0001 = false;
 	var0002 = false;
-	var0003 = 0xFE9C->get_npc_object()->find_nearest(0x02CE, 0x000A);
+	var0003 = AVATAR->get_npc_object()->find_nearest(0x02CE, 0x000A);
 	if (var0003) {
 		var0004 = Func092D(var0003);
 		if ((var0004 == 0x0000) || ((var0004 == 0x0001) || (var0004 == 0x0007))) {
@@ -56955,7 +57295,7 @@ void Func069D object#(0x69D) () {
 		var0001 = [0x0000, 0x0001, 0x0000, 0xFFFF];
 		var0002 = [0xFFFF, 0x0000, 0x0001, 0x0000];
 	}
-	var0005 = 0xFE9C->get_npc_object();
+	var0005 = AVATAR->get_npc_object();
 	Func0828(var0005, var0001, var0002, 0x0000, Func069D, var0005, BG_PATH_SUCCESS);
 }
 
@@ -57727,8 +58067,8 @@ void Func06AA object#(0x6AA) () {
 	if (event == SCRIPTED) {
 		var0000 = UI_create_new_object(0x009D);
 		if (var0000) {
-			0xFE9C->set_item_frame_rot(0x0020);
-			var0001 = 0xFE9C->get_object_position();
+			AVATAR->set_item_frame_rot(0x0020);
+			var0001 = AVATAR->get_object_position();
 			var0001[0x0001] += 0x0001;
 			var0001[0x0002] += 0x0001;
 			var0002 = UI_update_last_created(var0001);
@@ -58196,12 +58536,12 @@ void Func06BB object#(0x6BB) () {
 		var0000 = get_item_quality();
 		var0001 = UI_get_party_list();
 		for (var0004 in var0001 with var0002 to var0003) {
-			if (var0004 != 0xFE9C->get_npc_object()) {
+			if (var0004 != AVATAR->get_npc_object()) {
 				if (!UI_roll_to_win(var0004->get_npc_prop(INTELLIGENCE), 15)) {
 					var0004->halt_scheduled();
 					Func093F(var0004, IN_COMBAT);
 					var0004->set_attack_mode(FLEE);
-					var0004->set_oppressor(0xFE9C);
+					var0004->set_oppressor(AVATAR);
 					var0005 = script var0004 after var0000 ticks {
 						nohalt;
 						call Func06BB;
@@ -58649,10 +58989,10 @@ void Func06CF object#(0x6CF) () {
 	var var0001;
 
 	if (gflags[0x0004] == 0x0000) {
-		var0000 = 0xFE9B->count_objects(0x0347, QUALITY_ANY, 0x0001);
+		var0000 = PARTY->count_objects(0x0347, QUALITY_ANY, 0x0001);
 		if (var0000 == 0x0000) {
 			var0001 = [0x0217, 0x0489, 0x0000];
-			0xFE9B->move_object(var0001);
+			PARTY->move_object(var0001);
 		}
 	}
 }
@@ -58718,7 +59058,7 @@ void Func06D4 object#(0x6D4) () {
 		if (gflags[0x0004] == 0x0000) {
 			var0000 = [0x0258, 0x0508, 0x0001];
 			Func0811();
-			0xFE9C->move_object(var0000);
+			AVATAR->move_object(var0000);
 		}
 	}
 }
@@ -58732,7 +59072,7 @@ void Func06D5 object#(0x6D5) () {
 		if (gflags[0x0005] == 0x0000) {
 			var0000 = [0x073F, 0x0B1E, 0x0001];
 			Func0811();
-			0xFE9C->move_object(var0000);
+			AVATAR->move_object(var0000);
 		}
 	}
 }
@@ -58846,10 +59186,10 @@ void Func06DF object#(0x6DF) () {
 	var var0000;
 
 	if (event == EGG) {
-		if ((!gflags[0x0003]) && (0xFE9C->is_readied(BG_LEFT_RING, 0x02F7, 0x0001) || 0xFE9C->is_readied(BG_RIGHT_RING, 0x02F7, 0x0001))) {
+		if ((!gflags[0x0003]) && (AVATAR->is_readied(BG_LEFT_RING, 0x02F7, 0x0001) || AVATAR->is_readied(BG_RIGHT_RING, 0x02F7, 0x0001))) {
 			var0000 = [0x0A67, 0x034D, 0x0000];
 			Func0811();
-			0xFE9C->move_object(var0000);
+			AVATAR->move_object(var0000);
 		}
 	}
 }
@@ -58940,7 +59280,7 @@ void Func06F5 object#(0x6F5) () {
 	say("Erethian's face begins to take on an ashen palor, but he looks contented with a job well done. \"As I have said, I myself once attempted to create an artifact of great power. I crafted the hilt from a dark substance that is immutable, save by magical means. The blade, however, is cast of an alloy of this substance and the purest metals known to Britannia. My artistic skills served me well enough to fashion the hilt but, alas, the strength was not in my arm to beat a good temper into the blade. Perhaps, thou canst finish this great artifact for me...\" He pulls a poorly worked blade with a fine hilt out of thin air. \"Fear not to touch the hilt when the blade is hot, for heat apparently does not travel well across the medium of the pure, black substance. I wish thee good luck.\"");
 	var0000 = UI_create_new_object(0x029C);
 	var0000->set_item_frame(0x000D);
-	var0001 = 0xFE9C->get_npc_object()->give_last_created();
+	var0001 = AVATAR->get_npc_object()->give_last_created();
 	if (var0001) {
 		say("He hands the sword to you and wearily turns away.*");
 	} else {
@@ -58953,7 +59293,7 @@ void Func06F5 object#(0x6F5) () {
 	}
 	0xFEE2->hide();
 	set_schedule_type(PATROL);
-	0xFE9C->get_npc_object()->clear_item_flag(DONT_RENDER);
+	AVATAR->get_npc_object()->clear_item_flag(DONT_RENDER);
 	var0005 = script item {
 		wait 13;
 	};
@@ -58962,7 +59302,7 @@ void Func06F5 object#(0x6F5) () {
 		finish;
 		remove;
 	};
-	var0008 = script 0xFE9C->get_npc_object() {
+	var0008 = script AVATAR->get_npc_object() {
 		wait 11;
 		call Func069D;
 	};
@@ -59056,7 +59396,7 @@ void Func06F6 object#(0x6F6) () {
 						say("\"Can I be of some small assistance in thy quest to release me. If so, thou hast but to ask.\" Arcadion's smile stretches from ear to ear.");
 						add(["name", "job", "release", "bye"]);
 					}
-				} else if (0xFE9B->count_objects(0x02F8, QUALITY_ANY, 0x000C)) {
+				} else if (PARTY->count_objects(0x02F8, QUALITY_ANY, 0x000C)) {
 					say("\"Thou hast within thy possessions a small blue gem. It can be used to free me! Crack this accursed mirror with it! I'll enter it as I am freed!\"\tArcadion looks prepared to burst from the mirror.*");
 					gflags[0x0333] = true;
 					Func0843();
@@ -59159,7 +59499,7 @@ void Func06F6 object#(0x6F6) () {
 					} else {
 						say("\"There was one on this island, that much I know. Find it. Bring it to me and together, we shall break this mirror which binds me to that blasted mage.*");
 					}
-				} else if (0xFE9B->count_objects(0x02F8, QUALITY_ANY, 0x000C)) {
+				} else if (PARTY->count_objects(0x02F8, QUALITY_ANY, 0x000C)) {
 					say("\"Thou hast the gem! I feel it! Use it now to crack the mirror! I'll enter it as I'm freed!\" The daemon hardly restains his enthusiasm.*");
 					gflags[0x0333] = true;
 				} else {
@@ -59215,19 +59555,19 @@ void Func06F6 object#(0x6F6) () {
 
 			case "bond":
 				if (Func0846()) {
-					var000A = 0xFE9C->get_npc_object()->get_cont_items(0x029C, QUALITY_ANY, 0x000F);
-					var000B = 0xFE9C->get_npc_object()->get_cont_items(0x02F8, QUALITY_ANY, 0x000D);
+					var000A = AVATAR->get_npc_object()->get_cont_items(0x029C, QUALITY_ANY, 0x000F);
+					var000B = AVATAR->get_npc_object()->get_cont_items(0x02F8, QUALITY_ANY, 0x000D);
 					var000A->remove_item();
 					var000B->remove_item();
 					var000C = UI_create_new_object(0x02C3);
 					var000C->set_item_frame(0x0000);
 					say("\"It will be done!\"");
 					say("As the gem touches the crosspiece of the sword, the sound of tearing metal screeches through the air. The blade shifts and shimmers almost as if alive.");
-					if (0xFE9C->get_npc_object()->give_last_created()) {
+					if (AVATAR->get_npc_object()->give_last_created()) {
 						say("Slowly, the sword settles into its original shape, except for the blue gem glowing in the hilt.");
 					} else {
 						say("There is a flash of what can only be described as black light and the sword is wrenched out of your grasp and falls to the ground.");
-						var000D = 0xFE9C->get_npc_object()->get_object_position();
+						var000D = AVATAR->get_npc_object()->get_object_position();
 						var000E = UI_update_last_created(var000D);
 					}
 					gflags[0x0330] = true;
@@ -59348,7 +59688,7 @@ void Func06F6 object#(0x6F6) () {
 	if (event == SCRIPTED) {
 		if (!gflags[0x0313]) {
 			if (!gflags[0x0343]) {
-				var0010 = script 0xFE9C->get_npc_object() {
+				var0010 = script AVATAR->get_npc_object() {
 					face south;
 					actor frame strike_2h;
 					wait 1;
@@ -59365,7 +59705,7 @@ void Func06F6 object#(0x6F6) () {
 				return;
 			}
 			if (!gflags[0x0344]) {
-				var000D = 0xFE9C->get_object_position();
+				var000D = AVATAR->get_object_position();
 				UI_sprite_effect(ANIMATION_LIGHTNING, var000D[0x0001], var000D[0x0002], 0x0000, 0x0000, 0x0000, 0x0003);
 				UI_sprite_effect(ANIMATION_LIGHTNING, var000D[0x0001], var000D[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 				UI_play_sound_effect(0x003E);
@@ -59402,7 +59742,7 @@ void Func06F6 object#(0x6F6) () {
 				fallthrough;
 
 			case "powers":
-				if (!0xFE9C->get_npc_object()->is_readied(BG_WEAPON_HAND, 0x02C3, FRAME_ANY)) {
+				if (!AVATAR->get_npc_object()->is_readied(BG_WEAPON_HAND, 0x02C3, FRAME_ANY)) {
 					say("\"I needs must be in thy hand, master, if thou wishest to use my powers.\"");
 				} else {
 					say("\"Which of my powers dost thou seek to use?\"");
@@ -59455,16 +59795,16 @@ void Func06F6 object#(0x6F6) () {
 							break;
 						}
 						if (var0017 == 0x01D2) {
-							if (0xFE9C->get_npc_object()->get_distance(var0011) < 0x0005) {
+							if (AVATAR->get_npc_object()->get_distance(var0011) < 0x0005) {
 								say("\"Yes! I have long sought the end of Lord British, my traitorous master.\"");
 								var0019 = Func0908();
 								0xFFE9->say("\"",
 									var0019,
 									", for what reason art thou brandishing that black sword in my presence?\"");
 								0xFEDC->hide();
-								0xFE9C->say("The daemon responds, using your mouth. \"This blade is thy doom,...\" You spit the words, \"Lord British!\"");
+								AVATAR->say("The daemon responds, using your mouth. \"This blade is thy doom,...\" You spit the words, \"Lord British!\"");
 								0xFFE9->say("Lord British looks truly taken aback, his eyes narrow calculatingly. \"What foul treachery is this?\"");
-								0xFE9C->say("You find yourself unable to respond, and your muscles are clenching as if to lash out with the wicked blade in your hand.");
+								AVATAR->say("You find yourself unable to respond, and your muscles are clenching as if to lash out with the wicked blade in your hand.");
 								0xFFE9->say("\"Perhaps when thou art sitting in a dungeon, thy tongue will loosen.");
 								say("\"Guards!\"*");
 								var0014 = true;
@@ -59482,7 +59822,7 @@ void Func06F6 object#(0x6F6) () {
 							break;
 						}
 						if (var0017 == 0x01F8) {
-							if (0xFE9C->get_npc_object()->get_distance(var0011) < 0x0005) {
+							if (AVATAR->get_npc_object()->get_distance(var0011) < 0x0005) {
 								if (var0011->get_cont_items(0x031D, 0x00F1, 0x0004)) {
 									say("\"Ah, Dracothraxus. We meet once again. 'Tis a pity thou shan't survive our meeting this time. Perhaps if thou hadst given the gem to me when first I asked, none of this unpleasantness would be necessary.\"");
 									0xFEDB->say("The dragon responds with great resignation. \"My will is not mine own in this matter, Arcadion. Mayhap thou art finding too, that thy will is not thine own.\"");
@@ -59496,7 +59836,7 @@ void Func06F6 object#(0x6F6) () {
 								break;
 							}
 						} else if (var0017 == 0x009A) {
-							if (0xFE9C->get_npc_object()->get_distance(var0011) < 0x0005) {
+							if (AVATAR->get_npc_object()->get_distance(var0011) < 0x0005) {
 								if (var0011->get_cont_items(0x031D, 0x00F0, 0x0004)) {
 									say("\"I owe thee quite a favor for this, master. I thank thee for allowing me this, my revenge!\"*");
 									var0015 = true;
@@ -59511,7 +59851,7 @@ void Func06F6 object#(0x6F6) () {
 							break;
 						}
 						if (Func0848(var0017)) {
-							if (0xFE9C->get_npc_object()->get_distance(var0011) < 0x0005) {
+							if (AVATAR->get_npc_object()->get_distance(var0011) < 0x0005) {
 								say("\"Very well, master. If thou cannot dispatch this foe thyself, I shall do it for thee.\"");
 								var0015 = true;
 								goto labelFunc06F6_0B89;
@@ -59576,7 +59916,7 @@ labelFunc06F6_0B89:
 		}
 		if (var0014) {
 			var001B = Func092D(var0011);
-			var0010 = script 0xFE9C->get_npc_object() {
+			var0010 = script AVATAR->get_npc_object() {
 				face var001B;
 				actor frame ready;
 				wait 2;
@@ -59606,7 +59946,7 @@ labelFunc06F6_0B89:
 		}
 		if (var0015) {
 			var001B = Func092D(var0011);
-			var0010 = script 0xFE9C->get_npc_object() {
+			var0010 = script AVATAR->get_npc_object() {
 				face var001B;
 				actor frame ready;
 				wait 1;
@@ -59693,7 +60033,7 @@ void Func06F7 object#(0x6F7) () {
 	var0000 = get_item_quality();
 	if (var0000 == 0x00F0) {
 		var0001 = false;
-		var0002 = 0xFE9C->get_npc_object()->find_nearby(0x02FA, 0x0050, MASK_NONE);
+		var0002 = AVATAR->get_npc_object()->find_nearby(0x02FA, 0x0050, MASK_NONE);
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0006 = var0005->get_item_frame();
 			if (var0006 == 0x0016) {
@@ -59715,7 +60055,7 @@ void Func06F7 object#(0x6F7) () {
 	}
 	if (var0000 == 0x00F1) {
 		var0009 = false;
-		var0002 = 0xFE9C->get_npc_object()->find_nearby(0x030A, 0x0050, MASK_NONE);
+		var0002 = AVATAR->get_npc_object()->find_nearby(0x030A, 0x0050, MASK_NONE);
 		for (var0005 in var0002 with var000A to var000B) {
 			var0006 = var0005->get_item_frame();
 			if (var0006 == 0x0007) {
@@ -59744,7 +60084,7 @@ void Func06F7 object#(0x6F7) () {
 	}
 	if (var0000 == 0x00F3) {
 		var000F = false;
-		var0002 = 0xFE9C->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
+		var0002 = AVATAR->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
 		for (var0005 in var0002 with var0010 to var0011) {
 			var0006 = var0005->get_item_frame();
 			if (var0006 == 0x0000) {
@@ -59766,7 +60106,7 @@ void Func06F7 object#(0x6F7) () {
 	}
 	if (var0000 == 0x00F4) {
 		var0013 = false;
-		var0002 = 0xFE9C->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
+		var0002 = AVATAR->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
 		for (var0005 in var0002 with var0014 to var0015) {
 			var0006 = var0005->get_item_frame();
 			if (var0006 == 0x0000) {
@@ -59788,7 +60128,7 @@ void Func06F7 object#(0x6F7) () {
 	}
 	if (var0000 == 0x00F5) {
 		var0016 = false;
-		var0002 = 0xFE9C->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
+		var0002 = AVATAR->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
 		for (var0005 in var0002 with var0017 to var0018) {
 			var0006 = var0005->get_item_frame();
 			if (var0006 == 0x0000) {
@@ -59808,7 +60148,7 @@ void Func06F7 object#(0x6F7) () {
 	}
 	if (var0000 == 0x00F6) {
 		var0016 = false;
-		var0002 = 0xFE9C->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
+		var0002 = AVATAR->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
 		for (var0005 in var0002 with var0019 to var001A) {
 			var0006 = var0005->get_item_frame();
 			if (var0006 == 0x0000) {
@@ -59828,7 +60168,7 @@ void Func06F7 object#(0x6F7) () {
 	}
 	if (var0000 == 0x00F7) {
 		var0016 = false;
-		var0002 = 0xFE9C->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
+		var0002 = AVATAR->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
 		for (var0005 in var0002 with var001B to var001C) {
 			var0006 = var0005->get_item_frame();
 			if (var0006 == 0x0000) {
@@ -59848,7 +60188,7 @@ void Func06F7 object#(0x6F7) () {
 	}
 	if (var0000 == 0x00F8) {
 		var0016 = false;
-		var0002 = 0xFE9C->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
+		var0002 = AVATAR->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
 		for (var0005 in var0002 with var001D to var001E) {
 			var0006 = var0005->get_item_frame();
 			if (var0006 == 0x0000) {
@@ -59868,7 +60208,7 @@ void Func06F7 object#(0x6F7) () {
 	}
 	if (var0000 == 0x00F9) {
 		var0016 = false;
-		var0002 = 0xFE9C->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
+		var0002 = AVATAR->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
 		for (var0005 in var0002 with var001F to var0020) {
 			var0006 = var0005->get_item_frame();
 			if (var0006 == 0x0000) {
@@ -59888,7 +60228,7 @@ void Func06F7 object#(0x6F7) () {
 	}
 	if (var0000 == 0x00FA) {
 		var0016 = false;
-		var0002 = 0xFE9C->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
+		var0002 = AVATAR->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
 		for (var0005 in var0002 with var0021 to var0022) {
 			var0006 = var0005->get_item_frame();
 			if (var0006 == 0x0000) {
@@ -59908,7 +60248,7 @@ void Func06F7 object#(0x6F7) () {
 	}
 	if (var0000 == 0x00FB) {
 		var0016 = false;
-		var0002 = 0xFE9C->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
+		var0002 = AVATAR->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
 		for (var0005 in var0002 with var0023 to var0024) {
 			var0006 = var0005->get_item_frame();
 			if (var0006 == 0x0000) {
@@ -59928,7 +60268,7 @@ void Func06F7 object#(0x6F7) () {
 	}
 	if (var0000 == 0x00FC) {
 		var0016 = false;
-		var0002 = 0xFE9C->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
+		var0002 = AVATAR->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
 		for (var0005 in var0002 with var0025 to var0026) {
 			var0006 = var0005->get_item_frame();
 			if (var0006 == 0x0000) {
@@ -59948,7 +60288,7 @@ void Func06F7 object#(0x6F7) () {
 	}
 	if (var0000 == 0x00FD) {
 		var0016 = false;
-		var0002 = 0xFE9C->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
+		var0002 = AVATAR->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
 		for (var0005 in var0002 with var0027 to var0028) {
 			var0006 = var0005->get_item_frame();
 			if (var0006 == 0x0000) {
@@ -59968,7 +60308,7 @@ void Func06F7 object#(0x6F7) () {
 	}
 	if (var0000 == 0x00FE) {
 		var0016 = false;
-		var0002 = 0xFE9C->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
+		var0002 = AVATAR->get_npc_object()->find_nearby(0x0190, 0x0050, MASK_NONE);
 		for (var0005 in var0002 with var0029 to var002A) {
 			var0006 = var0005->get_item_frame();
 			if (var0006 == 0x0000) {
@@ -60127,7 +60467,7 @@ void Func06F8 object#(0x6F8) () {
 			}
 			if (var0007 == 0x0003) {
 				var000D = false;
-				var000E = 0xFE9C->get_npc_object()->find_nearby(0x01B3, 0x0028, MASK_NONE);
+				var000E = AVATAR->get_npc_object()->find_nearby(0x01B3, 0x0028, MASK_NONE);
 				for (var0011 in var000E with var000F to var0010) {
 					var0012 = var0011->get_object_position();
 					if ((var0012[0x0001] == 0x08A0) || (var0012[0x0001] == 0x08AD)) {
@@ -60140,7 +60480,7 @@ void Func06F8 object#(0x6F8) () {
 				}
 				if (var000D == 0x0002) {
 					Func087D();
-					var0013 = 0xFE9C->get_npc_object()->get_object_position();
+					var0013 = AVATAR->get_npc_object()->get_object_position();
 					if (var0013[0x0002] > var0005[0x0002]) {
 						if (UI_is_pc_female()) {
 							Func0881()->set_item_frame(0x0014);
@@ -60187,7 +60527,7 @@ void Func06F8 object#(0x6F8) () {
 			abort;
 		}
 		var0005 = get_object_position();
-		var0013 = 0xFE9C->get_npc_object()->get_object_position();
+		var0013 = AVATAR->get_npc_object()->get_object_position();
 		if (gflags[0x033F] && gflags[0x033C]) {
 			if (!gflags[0x02EE]) {
 				var0017 = false;
@@ -60207,7 +60547,7 @@ void Func06F8 object#(0x6F8) () {
 				if (!var0017) {
 					var0017 = UI_create_new_object(0x009A);
 					var0017->set_item_flag(TEMPORARY);
-					var001E = 0xFE9C->get_npc_object()->get_object_position();
+					var001E = AVATAR->get_npc_object()->get_object_position();
 					var001F = get_object_position();
 					var001D = [0x08A8, 0x0000, 0x0000];
 					if (var001E[0x0002] > var001F[0x0002]) {
@@ -60337,13 +60677,13 @@ void Func06F8 object#(0x6F8) () {
 				var000A->remove_item();
 			}
 		}
-		0xFE9C->get_npc_object()->clear_item_flag(DONT_RENDER);
+		AVATAR->get_npc_object()->clear_item_flag(DONT_RENDER);
 		var002E = Func0881();
 		var002F = script var002E after 14 ticks {
 			finish;
 			remove;
 		};
-		var0016 = script 0xFE9C->get_npc_object() {
+		var0016 = script AVATAR->get_npc_object() {
 			wait 12;
 			call Func069D;
 		};
@@ -60426,7 +60766,7 @@ void Func06F9 object#(0x6F9) () {
 		UI_fade_palette(0x000C, 0x0001, 0x0001);
 		if (var0002 == 0x03BB) {
 			var0003 = false;
-			var0004 = 0xFE9C->get_npc_object()->find_nearby(0x0356, 0x0014, MASK_NONE);
+			var0004 = AVATAR->get_npc_object()->find_nearby(0x0356, 0x0014, MASK_NONE);
 			if (var0004) {
 				for (var0007 in var0004 with var0005 to var0006) {
 					if (get_item_frame() == 0x0008) {
@@ -60543,7 +60883,7 @@ labelFunc06F9_0032:
 				UI_sprite_effect(ANIMATION_TELEPORT, (var0014[0x0001] - 0x0002), (var0014[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 				UI_play_sound_effect(0x0043);
 			}
-			var0009 = 0xFE9C->get_npc_object()->find_nearby(0x03BB, 0x0019, MASK_NONE);
+			var0009 = AVATAR->get_npc_object()->find_nearby(0x03BB, 0x0019, MASK_NONE);
 			if (var0009) {
 				for (var0013 in var0009 with var0015 to var0016) {
 					var000D = var0013->get_item_frame();
@@ -60607,7 +60947,7 @@ labelFunc06F9_0032:
 				UI_sprite_effect(ANIMATION_TELEPORT, (var0014[0x0001] - 0x0002), (var0014[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 				UI_play_sound_effect(0x0043);
 			}
-			var0009 = 0xFE9C->get_npc_object()->find_nearby(0x03BB, 0x0019, MASK_NONE);
+			var0009 = AVATAR->get_npc_object()->find_nearby(0x03BB, 0x0019, MASK_NONE);
 			if (var0009) {
 				for (var0013 in var0009 with var002A to var002B) {
 					var000D = var0013->get_item_frame();
@@ -60673,9 +61013,9 @@ labelFunc06F9_0032:
 			}
 		}
 	}
-	if (var0000 && (!0xFE9C->get_item_flag(ON_MOVING_BARGE))) {
+	if (var0000 && (!AVATAR->get_item_flag(ON_MOVING_BARGE))) {
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
-		0xFE9B->move_object(var0000);
+		PARTY->move_object(var0000);
 		if (gflags[0x0319] && (!gflags[0x0318])) {
 			var000C = Func08E8(0x0008);
 			if (var000C) {
@@ -60684,7 +61024,7 @@ labelFunc06F9_0032:
 					wait 2;
 					call Func06F9;
 				};
-				var0030 = script 0xFE9C->get_npc_object() {
+				var0030 = script AVATAR->get_npc_object() {
 					face var0001;
 					wait 2;
 				};
@@ -60699,7 +61039,7 @@ labelFunc06F9_0032:
 					wait 2;
 					call Func06F9;
 				};
-				var0030 = script 0xFE9C->get_npc_object() {
+				var0030 = script AVATAR->get_npc_object() {
 					face var0001;
 					wait 2;
 				};
@@ -60714,14 +61054,14 @@ labelFunc06F9_0032:
 					wait 2;
 					call Func06F9;
 				};
-				var0030 = script 0xFE9C->get_npc_object() {
+				var0030 = script AVATAR->get_npc_object() {
 					face var0001;
 					wait 2;
 				};
 				return;
 			}
 		}
-		var0030 = script 0xFE9C->get_npc_object() {
+		var0030 = script AVATAR->get_npc_object() {
 			face var0001;
 			wait 1;
 			call Func06F9;
@@ -60765,7 +61105,7 @@ void Func06FB object#(0x6FB) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		var0000 = script 0xFE9C->get_npc_object() {
+		var0000 = script AVATAR->get_npc_object() {
 			nohalt;
 			finish;
 			wait 20;
@@ -60804,7 +61144,7 @@ void Func06FC object#(0x6FC) () {
 		var0000 = UI_click_on_item();
 		var0001 = var0000->get_item_shape();
 		var0002 = false;
-		var0003 = 0xFE9C->get_npc_object()->get_object_position();
+		var0003 = AVATAR->get_npc_object()->get_object_position();
 		if ((var0001 == 0x02D1) || (var0001 == 0x03DD)) {
 			return;
 		}
@@ -60824,7 +61164,7 @@ void Func06FC object#(0x6FC) () {
 		var0005 = var0004->set_item_quality(0x0096);
 		var0005 = UI_update_last_created(var0002);
 		var0006 = Func092D(var0004);
-		var0007 = script 0xFE9C->get_npc_object() {
+		var0007 = script AVATAR->get_npc_object() {
 			face var0006;
 		};
 		if (!(var0002[0x0001] == var0003[0x0001])) {
@@ -60872,14 +61212,14 @@ void Func06FC object#(0x6FC) () {
 		};
 	}
 	if (event == DOUBLECLICK) {
-		var000B = 0xFE9C->get_npc_object()->find_nearby(0x031D, 0x0050, MASK_NONE);
+		var000B = AVATAR->get_npc_object()->find_nearby(0x031D, 0x0050, MASK_NONE);
 		for (var000E in var000B with var000C to var000D) {
 			var000F = var000E->get_item_quality();
 			var0010 = var000E->get_item_frame();
 			if (var000F == 0x0096) {
 				if (var0010 == 0x0004) {
 					UI_close_gumps();
-					var0011 = 0xFE9C->get_npc_object()->get_object_position();
+					var0011 = AVATAR->get_npc_object()->get_object_position();
 					UI_sprite_effect(ANIMATION_POOF, (var0011[0x0001] - 0x0001), (var0011[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 					UI_play_sound_effect(0x002E);
 					return;
@@ -60919,7 +61259,7 @@ void Func06FD object#(0x6FD) () {
 	if (event == SCRIPTED) {
 		var0000 = false;
 		var0001 = false;
-		var0002 = 0xFE9C->get_npc_object()->find_nearby(0x031D, 0x0050, MASK_NONE);
+		var0002 = AVATAR->get_npc_object()->find_nearby(0x031D, 0x0050, MASK_NONE);
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0006 = var0005->get_item_quality();
 			var0007 = var0005->get_item_frame();
@@ -61084,7 +61424,7 @@ void Func070A object#(0x70A) () {
 					var0002 = var0001->set_item_quality(0x0041);
 					var0002 = var0000->give_last_created();
 					var0000->item_say("@I summon thee!@");
-					var0002 = script 0xFE9C->get_npc_object() {
+					var0002 = script AVATAR->get_npc_object() {
 						wait 22;
 					};
 					var0002 = script var0000 {
@@ -61178,7 +61518,7 @@ void Func070A object#(0x70A) () {
 							finish;
 							hatch;
 						};
-						var0002 = script 0xFE9C {
+						var0002 = script AVATAR {
 							nohalt;
 							finish;
 							call Func070A;
@@ -61188,7 +61528,7 @@ void Func070A object#(0x70A) () {
 			}
 		}
 		if ((get_item_shape() == 0x02D1) || (get_item_shape() == 0x03DD)) {
-			var0001 = 0xFE9C->find_nearby(0x0162, 0x001E, MASK_NPC2);
+			var0001 = AVATAR->find_nearby(0x0162, 0x001E, MASK_NPC2);
 			if (var0001) {
 				var0021 = var0001->get_object_position();
 				UI_sprite_effect(ANIMATION_DEATH_VORTEX, (var0021[0x0001] - 0x0002), (var0021[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
@@ -61208,7 +61548,7 @@ void Func070A object#(0x70A) () {
 						finish;
 						hatch;
 					};
-					var0002 = script 0xFE9C {
+					var0002 = script AVATAR {
 						nohalt;
 						finish;
 						call Func070A;
@@ -61216,12 +61556,12 @@ void Func070A object#(0x70A) () {
 				}
 			}
 		}
-		if (0xFE9C->get_item_flag(DEAD)) {
+		if (AVATAR->get_item_flag(DEAD)) {
 			abort;
 		}
 		if (get_item_shape() == 0x0162) {
-			var0024 = get_distance(0xFE9C->get_npc_object());
-			if ((var0024 < 0x0014) && 0xFE9C->get_npc_object()->get_item_flag(IN_DUNGEON)) {
+			var0024 = get_distance(AVATAR->get_npc_object());
+			if ((var0024 < 0x0014) && AVATAR->get_npc_object()->get_item_flag(IN_DUNGEON)) {
 				var0021 = get_object_position();
 				UI_sprite_effect(ANIMATION_LIGHTNING, (var0021[0x0001] + 0x0003), (var0021[0x0002] + 0x0003), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 				var0025 = UI_get_party_list();
@@ -61353,28 +61693,28 @@ void Func070B object#(0x70B) () {
 		var0000 = get_object_position();
 		var0001 = false;
 		var0002 = set_last_created();
-		while (!0xFE9C->get_npc_object()->give_last_created()) {
+		while (!AVATAR->get_npc_object()->give_last_created()) {
 			var0002 = UI_update_last_created(var0000);
-			var0003 = 0xFE9C->get_npc_object()->get_cont_items(0xFFFF, QUALITY_ANY, FRAME_ANY);
+			var0003 = AVATAR->get_npc_object()->get_cont_items(0xFFFF, QUALITY_ANY, FRAME_ANY);
 			for (var0006 in var0003 with var0004 to var0005) {
 				if (var0001 == 0x0000) {
 					if (Func08E9(var0006)) {
 						var0002 = var0006->set_last_created();
-						var0007 = 0xFE9C->get_npc_object()->get_object_position();
+						var0007 = AVATAR->get_npc_object()->get_object_position();
 						var0002 = UI_update_last_created(var0007);
 					}
 				}
 				if (var0001 == 0x0001) {
 					if (Func08EA(var0006)) {
 						var0002 = var0006->set_last_created();
-						var0007 = 0xFE9C->get_npc_object()->get_object_position();
+						var0007 = AVATAR->get_npc_object()->get_object_position();
 						var0002 = UI_update_last_created(var0007);
 					}
 				}
 				if (var0001 == 0x0002) {
-					if (var0006->get_container() == 0xFE9C->get_npc_object()) {
+					if (var0006->get_container() == AVATAR->get_npc_object()) {
 						var0002 = var0006->set_last_created();
-						var0007 = 0xFE9C->get_npc_object()->get_object_position();
+						var0007 = AVATAR->get_npc_object()->get_object_position();
 						var0002 = UI_update_last_created(var0007);
 					}
 				}
@@ -61645,10 +61985,10 @@ void Func070F object#(0x70F) () {
 
 	var0000 = get_item_shape();
 	if (var0000 == 0x01D2) {
-		var0001 = 0xFE9C->get_npc_object()->get_object_position();
+		var0001 = AVATAR->get_npc_object()->get_object_position();
 		UI_sprite_effect(ANIMATION_LIGHTNING, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		UI_play_sound_effect(0x003E);
-		var0002 = 0xFE9C->get_npc_object()->find_nearby(ANY_SHAPE, 0x0050, MASK_NPC2);
+		var0002 = AVATAR->get_npc_object()->find_nearby(ANY_SHAPE, 0x0050, MASK_NPC2);
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0006 = var0005->get_item_shape();
 			if (!((var0006 == 0x02D1) || (var0006 == 0x03DD))) {
@@ -61680,7 +62020,7 @@ void Func070F object#(0x70F) () {
 		if (!get_item_flag(TEMPORARY)) {
 			kill_npc();
 			remove_npc();
-			var0002 = 0xFE9C->get_npc_object()->find_nearby(ANY_SHAPE, 0x0050, MASK_NPC2);
+			var0002 = AVATAR->get_npc_object()->find_nearby(ANY_SHAPE, 0x0050, MASK_NPC2);
 			for (var0005 in var0002 with var000D to var000E) {
 				var0006 = var0005->get_item_shape();
 				if (!((var0006 == 0x02D1) || (var0006 == 0x03DD))) {
@@ -61723,7 +62063,7 @@ void Func070F object#(0x70F) () {
 					nohalt;
 					call Func06F7;
 				};
-				var0002 = 0xFE9C->get_npc_object()->find_nearby(ANY_SHAPE, 0x0050, MASK_NPC2);
+				var0002 = AVATAR->get_npc_object()->find_nearby(ANY_SHAPE, 0x0050, MASK_NPC2);
 				for (var0005 in var0002 with var0015 to var0016) {
 					var0006 = var0005->get_item_shape();
 					if (!((var0006 == 0x02D1) || (var0006 == 0x03DD))) {
@@ -61735,7 +62075,7 @@ void Func070F object#(0x70F) () {
 				}
 			} else {
 				kill_npc();
-				var0002 = 0xFE9C->get_npc_object()->find_nearby(ANY_SHAPE, 0x0050, MASK_NPC2);
+				var0002 = AVATAR->get_npc_object()->find_nearby(ANY_SHAPE, 0x0050, MASK_NPC2);
 				for (var0005 in var0002 with var0017 to var0018) {
 					var0006 = var0005->get_item_shape();
 					if (!((var0006 == 0x02D1) || (var0006 == 0x03DD))) {
@@ -61831,7 +62171,7 @@ void Func0710 object#(0x710) () {
 		say("     Vas Flam Uus~~");
 		say("This scroll will permit thee to perform the ritual necessary to either create, or reconstruct, stone creatures and instill within them the power of thought. First, gather the materials discussed in the previous chapters. After thou hast performed said task, thou shouldst refer back to this scroll and begin...");
 		if (var0006 && var0007) {
-			var000F = script 0xFE9C {
+			var000F = script AVATAR {
 				nohalt;
 				call Func0714;
 				nop2;
@@ -61856,7 +62196,7 @@ void Func0710 object#(0x710) () {
 		var0010[0x0003] += 0x0002;
 		var0012 = UI_update_last_created(var0010);
 		Func08FF("@He gave up his heart... so that Adjhar may live!* Well, not to be morbid, but I suppose the incantation should work now.@");
-		0xFE9C->halt_scheduled();
+		AVATAR->halt_scheduled();
 	}
 }
 
@@ -61955,9 +62295,9 @@ void Func0714 object#(0x714) () {
 			}
 		}
 		if (!var0007) {
-			var000C = 0xFE9C->get_object_position() & (QUALITY_ANY & 0x000A);
+			var000C = AVATAR->get_object_position() & (QUALITY_ANY & 0x000A);
 			var0000 = var000C->find_nearby(0x00CB, 0x001E, MASK_NONE);
-			if (var0000 || Func0931(0xFE9B, 0x0001, 0x00CB, QUALITY_ANY, 0x000A)) {
+			if (var0000 || Func0931(PARTY, 0x0001, 0x00CB, QUALITY_ANY, 0x000A)) {
 				Func08FF("@The heart must be placed in the body.@");
 				abort;
 			}
@@ -61965,7 +62305,7 @@ void Func0714 object#(0x714) () {
 			if (!gflags[0x031C]) {
 				0xFEDF->say("\"I will give him mine!\"");
 				0xFEDF->hide();
-				var000D = script 0xFE9C {
+				var000D = script AVATAR {
 					wait 500;
 				};
 				var0000 = find_nearby(0x019E, 0x0050, MASK_NONE);
@@ -61973,7 +62313,7 @@ void Func0714 object#(0x714) () {
 					if (var0005->get_cont_items(0x031D, 0x00F3, 0x0004)) {
 						0xFEDF->say("You watch in stunned horror as Bollux pierces his chest open with his fingers.");
 						0xFEDF->hide();
-						var0010 = UI_direction_from(var0002, var0005);
+						var0010 = var0002->direction_from(var0005);
 						0xFEDF->say("He pulls forth a heart-shape stone and, with a final flurry of action, drops the stone upon Adjhar's chest as he falls dead to the ground.");
 						0xFEDF->hide();
 						var0011 = script var0002 {
@@ -61993,9 +62333,9 @@ void Func0714 object#(0x714) () {
 			}
 			abort;
 		}
-		Func0904(0xFE9C, ["@In Ylem...@", "@In Grav...@", "@In Mani...@", "@Kal Por...@", "@Vas Flam Uus...@"]);
+		Func0904(AVATAR, ["@In Ylem...@", "@In Grav...@", "@In Mani...@", "@Kal Por...@", "@Vas Flam Uus...@"]);
 		var0010 = Func092D(var0007);
-		var0012 = script 0xFE9C {
+		var0012 = script AVATAR {
 			face var0010;
 			wait 1;
 			repeat 1 {
@@ -62046,7 +62386,7 @@ void Func0715 object#(0x715) () {
 	var var000B;
 	var var000C;
 
-	var0000 = 0xFE9C->find_nearby(0x03F7, 0x0028, MASK_NPC2);
+	var0000 = AVATAR->find_nearby(0x03F7, 0x0028, MASK_NPC2);
 	var0001 = false;
 	for (var0004 in var0000 with var0002 to var0003) {
 		if (var0004->get_cont_items(0x031D, 0x00F3, 0x0004)) {
@@ -62069,7 +62409,7 @@ void Func0715 object#(0x715) () {
 		UI_play_sound_effect(0x003E);
 		UI_lightning();
 	}
-	var0000 = 0xFE9C->find_nearby(0x0390, 0x0028, MASK_ALL_UNSEEN);
+	var0000 = AVATAR->find_nearby(0x0390, 0x0028, MASK_ALL_UNSEEN);
 	for (var0009 in var0000 with var0007 to var0008) {
 		var000A = var0009->get_object_position();
 		var000B = UI_create_new_object(0x037F);
@@ -62093,7 +62433,7 @@ void Func0716 object#(0x716) () {
 	var var0005;
 
 	gflags[0x0326] = false;
-	var0000 = 0xFE9C->find_nearby(0x03F7, 0x0028, MASK_NPC2);
+	var0000 = AVATAR->find_nearby(0x03F7, 0x0028, MASK_NPC2);
 	var0001 = false;
 	for (var0004 in var0000 with var0002 to var0003) {
 		if (var0004->get_cont_items(0x031D, 0x00F3, 0x0004)) {
@@ -62106,7 +62446,7 @@ void Func0716 object#(0x716) () {
 	if (var0001) {
 		var0001->set_item_frame(0x001D);
 	}
-	var0005 = script 0xFE9C after 10 ticks {
+	var0005 = script AVATAR after 10 ticks {
 		nohalt;
 		call Func0715;
 	};
@@ -62123,7 +62463,7 @@ void Func0717 object#(0x717) () {
 	if (get_item_shape() == 0x029C) {
 		var0000 = get_object_position();
 		var0001 = set_last_created();
-		if (!0xFE9C->get_npc_object()->give_last_created()) {
+		if (!AVATAR->get_npc_object()->give_last_created()) {
 			if (UI_update_last_created(var0000)) {
 				UI_flash_mouse(CURSOR_WONT_FIT);
 			}
@@ -62132,7 +62472,7 @@ void Func0717 object#(0x717) () {
 		var0002 = get_cont_items(0x029C, QUALITY_ANY, FRAME_ANY);
 		var0003 = var0002->get_container();
 		var0001 = var0002->set_last_created();
-		if (!0xFE9C->get_npc_object()->give_last_created()) {
+		if (!AVATAR->get_npc_object()->give_last_created()) {
 			if (var0003->give_last_created()) {
 				UI_flash_mouse(CURSOR_WONT_FIT);
 			}
@@ -62166,7 +62506,7 @@ void Func0800 0x800 (var var0000) {
 	if (UI_in_combat()) {
 		var0001->show_npc_face(0x0000);
 		var0002 = var0001->get_npc_name();
-		if (var0001 == 0xFE9C) {
+		if (var0001 == AVATAR) {
 			say("\"This is no time to sleep! Look alive!\"");
 		} else {
 			say(var0002,
@@ -62192,13 +62532,13 @@ void Func0800 0x800 (var var0000) {
 			}
 		}
 		if (Func0801(item)) {
-			var000B = script 0xFE9C {
+			var000B = script AVATAR {
 				nohalt;
 				music 30, 0;
 			};
 		}
-		var000C = Func093C(0xFE9C->get_npc_object(), UI_get_party_list());
-		0xFE9C->set_schedule_type(SLEEP);
+		var000C = Func093C(AVATAR->get_npc_object(), UI_get_party_list());
+		AVATAR->set_schedule_type(SLEEP);
 		var0000->nap_time();
 	}
 }
@@ -62251,13 +62591,13 @@ void Func0803 0x803 (var var0000) {
 		var0002 = [0x0AB7, 0x0375, 0x0000];
 		var0000->move_object(var0002);
 		var0002[0x0002] += 0x0002;
-		0xFE9C->move_object(var0002);
+		AVATAR->move_object(var0002);
 		Func0808();
 		var0003 = 0x00C8;
 		var0004 = 0x0001;
 		var0005 = QUALITY_ANY;
 		Func0804(var0003, var0004, var0005);
-		var0006 = script 0xFE9C after 8 ticks {
+		var0006 = script AVATAR after 8 ticks {
 			nohalt;
 			call Func061E;
 		};
@@ -62273,7 +62613,7 @@ void Func0804 0x804 (var var0000, var var0001, var var0002) {
 	var var0008;
 	var var0009;
 
-	var0003 = 0xFE9C->find_nearby(var0000, 0x001E, MASK_EGG);
+	var0003 = AVATAR->find_nearby(var0000, 0x001E, MASK_EGG);
 	var0004 = 0x0000;
 	for (var0007 in var0003 with var0005 to var0006) {
 		var0008 = var0007->get_item_frame();
@@ -62302,13 +62642,13 @@ void Func0805 0x805 (var var0000) {
 		var0001 = [0x0217, 0x0460, 0x0000];
 		var0000->move_object(var0001);
 		var0001[0x0002] += 0x0002;
-		0xFE9C->move_object(var0001);
+		AVATAR->move_object(var0001);
 		Func0808();
-		var0002 = 0xFE9C->find_nearby(0x0308, 0x000A, MASK_EGG);
+		var0002 = AVATAR->find_nearby(0x0308, 0x000A, MASK_EGG);
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0005->remove_item();
 		}
-		var0006 = script 0xFE9C after 8 ticks {
+		var0006 = script AVATAR after 8 ticks {
 			nohalt;
 			call Func061B;
 		};
@@ -62351,9 +62691,9 @@ void Func0807 0x807 (var var0000) {
 		var0001 = [0x06E7, 0x0AE0, 0x0000];
 		var0000->move_object(var0001);
 		var0001[0x0002] += 0x0002;
-		0xFE9C->move_object(var0001);
+		AVATAR->move_object(var0001);
 		Func0808();
-		var0002 = script 0xFE9C after 8 ticks {
+		var0002 = script AVATAR after 8 ticks {
 			nohalt;
 			call Func061D;
 		};
@@ -62370,8 +62710,8 @@ void Func0808 0x808 () {
 	var var0003;
 	var var0004;
 
-	var0000 = Func093C(0xFE9C->get_npc_object(), UI_get_party_list());
-	var0001 = 0xFE9C->get_npc_object()->get_schedule_type();
+	var0000 = Func093C(AVATAR->get_npc_object(), UI_get_party_list());
+	var0001 = AVATAR->get_npc_object()->get_schedule_type();
 	for (var0004 in var0000 with var0002 to var0003) {
 		gflags[0x0039] = false;
 		var0004->set_schedule_type(var0001);
@@ -62394,16 +62734,16 @@ void Func0809 0x809 (var var0000) {
 		if (var0000->get_item_flag(ON_MOVING_BARGE)) {
 			var0000->clear_item_flag(ON_MOVING_BARGE);
 			var0000->clear_item_flag(ACTIVE_BARGE);
-			Func0904(0xFE9C, "@Whoa!@");
+			Func0904(AVATAR, "@Whoa!@");
 		} else {
 			var0002 = var0000->find_nearby(0x031C, 0x0010, MASK_NONE);
 			if (var0002) {
-				var0003 = 0xFE9B->count_objects(0x031D, var0002->get_item_quality(), FRAME_ANY);
+				var0003 = PARTY->count_objects(0x031D, var0002->get_item_quality(), FRAME_ANY);
 				if (var0003) {
 					if (Func080D()) {
 						var0000->set_item_flag(ON_MOVING_BARGE);
 						var0001->set_item_flag(ACTIVE_BARGE);
-						Func0904(0xFE9C, "@Giddy-up!@");
+						Func0904(AVATAR, "@Giddy-up!@");
 					} else {
 						var0004 = Func08B3(var0000);
 					}
@@ -62438,7 +62778,7 @@ void Func080A 0x80A (var var0000, var var0001) {
 	var var0013;
 
 	var0002 = [];
-	var0003 = 0xFE9C->find_nearby(var0001, 0x000F, MASK_NONE);
+	var0003 = AVATAR->find_nearby(var0001, 0x000F, MASK_NONE);
 	for (var0006 in var0003 with var0004 to var0005) {
 		var0007 = 0x0000;
 		var0008 = 0x270F;
@@ -62455,7 +62795,7 @@ void Func080A 0x80A (var var0000, var var0001) {
 		var0002 &= var0003[var000D];
 		var0003[var000D] = 0x0000;
 	}
-	0xFE9C->sit_down(var0000);
+	AVATAR->sit_down(var0000);
 	var000E = UI_get_array_size(var0002);
 	var000F = UI_get_party_list();
 	var0007 = 0x0002;
@@ -62687,7 +63027,7 @@ void Func0811 0x811 () {
 	var var0002;
 	var var0003;
 
-	var0000 = Func093C(0xFE9C->get_npc_object(), UI_get_party_list());
+	var0000 = Func093C(AVATAR->get_npc_object(), UI_get_party_list());
 	for (var0003 in var0000 with var0001 to var0002) {
 		gflags[0x0039] = true;
 		var0003->set_schedule_type(WAIT);
@@ -62699,7 +63039,7 @@ void Func0812 0x812 (var var0000) {
 	var var0002;
 	var var0003;
 
-	var0001 = 0xFE9C->get_barge();
+	var0001 = AVATAR->get_barge();
 	if (UI_on_barge()) {
 		var0002 = var0000->get_object_position();
 		var0003 = script var0000 {
@@ -62748,7 +63088,7 @@ void Func0813 0x813 (var var0000, var var0001, var var0002) {
 				} else if (var0006 < 0x000A) {
 					var0007 = "@I am still hungry.@";
 					if (var0008 < 0x0006) {
-						if (!(var0003 == 0xFE9C->get_npc_object())) {
+						if (!(var0003 == AVATAR->get_npc_object())) {
 							var0007 = "@May I have some more?@";
 						}
 					}
@@ -62796,7 +63136,7 @@ var Func0814 0x814 () {
 	var var0005;
 
 	var0000 = [];
-	var0001 = 0xFE9C->find_nearby(0x019E, 0x0028, MASK_NONE);
+	var0001 = AVATAR->find_nearby(0x019E, 0x0028, MASK_NONE);
 	for (var0004 in var0001 with var0002 to var0003) {
 		var0005 = var0004->get_object_position();
 		if ((var0005[0x0001] >= (0x09B7 - 0x0008)) && (var0005[0x0001] <= (0x09B7 + 0x0008))) {
@@ -63035,7 +63375,7 @@ void Func0817 0x817 (var var0000) {
 	gflags[0x02E4] = var0000[0x0001];
 	gflags[0x02E5] = var0000[0x0002];
 	gflags[0x02E6] = var0000[0x0003];
-	var0001 = 0xFE9C->find_nearby(0x03B5, 0x000F, MASK_NONE);
+	var0001 = AVATAR->find_nearby(0x03B5, 0x000F, MASK_NONE);
 	if (gflags[0x02E4]) {
 		var0002 = 0x00E6;
 	}
@@ -63236,9 +63576,9 @@ void Func0824 0x824 (var var0000) {
 	var var0004;
 
 	if ((UI_die_roll(0x0001, 0x0003) == 0x0001) && (!(var0000->get_item_quality() == 0x0008))) {
-		0xFE9C->reduce_health(0x0003, ETHEREAL_DAMAGE);
+		AVATAR->reduce_health(0x0003, ETHEREAL_DAMAGE);
 		UI_play_sound_effect2(0x003E, item);
-		var0001 = 0xFE9C->get_object_position();
+		var0001 = AVATAR->get_object_position();
 		var0002 = var0000->get_object_position();
 		var0003 = var0000->get_item_shape();
 		if ((var0003 == 0x0308) || ((var0003 == 0x0309) || (var0003 == 0x030B))) {
@@ -63247,12 +63587,12 @@ void Func0824 0x824 (var var0000) {
 		if (var0003 == 0x009D) {
 			var0001 = Func0825(var0001, var0002, 0x0001);
 		}
-		0xFE9C->move_object(var0001);
+		AVATAR->move_object(var0001);
 	} else {
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		UI_play_sound_effect2(0x000B, item);
-		0xFE9B->move_object(Func0823(var0000));
-		var0004 = script 0xFE9C {
+		PARTY->move_object(Func0823(var0000));
+		var0004 = script AVATAR {
 			nohalt;
 			call Func0636;
 		};
@@ -63291,8 +63631,8 @@ var Func0825 0x825 (var var0000, var var0001, var var0002) {
 		var0005 = 0xFFFD;
 	}
 	var0000[var0002] += var0005;
-	if (0xFE9C->get_npc_prop(HEALTH) > 0) {
-		var0006 = script 0xFE9C {
+	if (AVATAR->get_npc_prop(HEALTH) > 0) {
+		var0006 = script AVATAR {
 			face var0004;
 			actor frame sleeping;
 			wait 3;
@@ -63331,7 +63671,7 @@ void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var
 		UI_flash_mouse(CURSOR_HAND);
 		abort;
 	}
-	0xFE9C->halt_scheduled();
+	AVATAR->halt_scheduled();
 	var0007 = var0000->get_object_position();
 	if ((var0001 < 0x0000) && (UI_get_array_size(var0001) == 0x0001)) {
 		var0008 = var0003;
@@ -63802,9 +64142,9 @@ void Func0831 0x831 (var var0000) {
 	}
 	var0006 = var0001->find_nearby(0x00FB, 0x0012, MASK_NONE);
 	Func0830(var0006, 0x0001);
-	0xFE9C->clear_item_flag(ACTIVE_SAILOR);
+	AVATAR->clear_item_flag(ACTIVE_SAILOR);
 	var0000->set_item_flag(ON_MOVING_BARGE);
-	0xFE9C->get_barge()->set_item_flag(ACTIVE_BARGE);
+	AVATAR->get_barge()->set_item_flag(ACTIVE_BARGE);
 }
 
 void Func0832 0x832 (var var0000, var var0001) {
@@ -63857,8 +64197,8 @@ var Func0834 0x834 () {
 	if (gflags[0x0057] == false) {
 		gflags[0x0057] = true;
 	}
-	var0000 = 0xFE9C->find_nearby(0x0114, 0x0019, MASK_NONE) & 0xFE9C->find_nearby(0x0115, 0x0019, MASK_NONE);
-	var0001 = 0xFE9C->find_nearby(0x010F, 0x0019, MASK_NONE) & 0xFE9C->find_nearby(0x0110, 0x0019, MASK_NONE);
+	var0000 = AVATAR->find_nearby(0x0114, 0x0019, MASK_NONE) & AVATAR->find_nearby(0x0115, 0x0019, MASK_NONE);
+	var0001 = AVATAR->find_nearby(0x010F, 0x0019, MASK_NONE) & AVATAR->find_nearby(0x0110, 0x0019, MASK_NONE);
 	for (var0004 in var0001 with var0002 to var0003) {
 		var0005 = var0004->get_lift();
 		if (var0005 == 0x0000) {
@@ -64392,7 +64732,7 @@ void Func083F 0x83F (var var0000, var var0001) {
 		}
 	}
 	if (var0003 && var0001) {
-		var0007 = script 0xFE9C {
+		var0007 = script AVATAR {
 			face west;
 			continue;
 			repeat 4 {
@@ -64421,7 +64761,7 @@ void Func0840 0x840 () {
 			say("\"Very well. Dost thou promise to return my notebook?\"");
 			var0002 = Func090A();
 			if (var0002) {
-				if (0xFE9B->count_objects(0x0281, 0x00FE, FRAME_ANY)) {
+				if (PARTY->count_objects(0x0281, 0x00FE, FRAME_ANY)) {
 					say("\"Then go find it! Thou hast the key!\"");
 				} else {
 					var0003 = UI_add_party_items(0x0001, 0x0281, 0x00FE, FRAME_ANY, false);
@@ -64632,8 +64972,8 @@ void Func0845 0x845 (var var0000) {
 	var var0003;
 	var var0004;
 
-	var0001 = 0xFE9C->get_npc_object()->get_npc_prop(MANA);
-	var0002 = 0xFE9C->get_npc_object()->get_npc_prop(MAX_MANA);
+	var0001 = AVATAR->get_npc_object()->get_npc_prop(MANA);
+	var0002 = AVATAR->get_npc_object()->get_npc_prop(MAX_MANA);
 	if (!var0000) {
 		var0003 = "the gem";
 	} else {
@@ -64642,7 +64982,7 @@ void Func0845 0x845 (var var0000) {
 	if (var0001 == var0002) {
 		say("\"Thy power needs no replenishing, master.\" The daemon sounds a bit put out.");
 	} else {
-		var0004 = 0xFE9C->get_npc_object()->set_npc_prop(MANA, var0002);
+		var0004 = AVATAR->get_npc_object()->set_npc_prop(MANA, var0002);
 		if (var0004) {
 			say("Energy courses from ",
 				var0003,
@@ -64654,13 +64994,13 @@ void Func0845 0x845 (var var0000) {
 }
 
 var Func0846 0x846 () {
-	if (!0xFE9C->get_npc_object()->is_readied(BG_WEAPON_HAND, 0x029C, 0x000F)) {
-		if (!0xFE9C->get_npc_object()->is_readied(BG_SHIELD_HAND, 0x029C, 0x000F)) {
+	if (!AVATAR->get_npc_object()->is_readied(BG_WEAPON_HAND, 0x029C, 0x000F)) {
+		if (!AVATAR->get_npc_object()->is_readied(BG_SHIELD_HAND, 0x029C, 0x000F)) {
 			return 0x0000;
 		}
 	}
-	if (!0xFE9C->get_npc_object()->is_readied(BG_WEAPON_HAND, 0x02F8, 0x000D)) {
-		if (!0xFE9C->get_npc_object()->is_readied(BG_SHIELD_HAND, 0x02F8, 0x000D)) {
+	if (!AVATAR->get_npc_object()->is_readied(BG_WEAPON_HAND, 0x02F8, 0x000D)) {
+		if (!AVATAR->get_npc_object()->is_readied(BG_SHIELD_HAND, 0x02F8, 0x000D)) {
 			return 0x0000;
 		}
 	}
@@ -65299,7 +65639,7 @@ void Func0851 0x851 () {
 	if (var0000) {
 		var0001 = 0xFFE6->find_object(0x031E, QUALITY_ANY, FRAME_ANY);
 		var0002 = var0001->set_last_created();
-		var0003 = 0xFE9C->give_last_created();
+		var0003 = AVATAR->give_last_created();
 		if (var0003) {
 			say("\"Excellent! Here it is. Thou must now be on thy way!\"*");
 			gflags[0x008F] = true;
@@ -65517,7 +65857,7 @@ void Func0854 0x854 () {
 			say("\"Oh, my. We truly do need the meat. Well, perhaps next time.\"");
 			return;
 		}
-		var0002 = 0xFE9B->count_objects(0x0179, QUALITY_ANY, 0x0008);
+		var0002 = PARTY->count_objects(0x0179, QUALITY_ANY, 0x0008);
 		if (var0002 >= var0001) {
 			break;
 		}
@@ -65631,7 +65971,7 @@ void Func0856 0x856 (var var0000, var var0001) {
 
 	var0002 = Func0920();
 	var0003 = var0002->get_npc_name();
-	if (var0002 == 0xFE9C) {
+	if (var0002 == AVATAR) {
 		var0003 = "you";
 	}
 	if (var0002 != 0x0000) {
@@ -65646,7 +65986,7 @@ void Func0856 0x856 (var var0000, var var0001) {
 			return;
 		}
 		if (var0005 == 0x0001) {
-			var0006 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+			var0006 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 			say("You gather your gold and count it, finding that you have ",
 				var0006,
 				" gold altogether.");
@@ -65663,17 +66003,17 @@ void Func0856 0x856 (var var0000, var var0001) {
 		say("You pay ",
 			var0001,
 			" gold, and the training session begins.");
-		if (var0002 == 0xFE9C) {
+		if (var0002 == AVATAR) {
 			var0008 = "You";
 		} else {
 			var0008 = var0003;
 		}
-		if (var0002 == 0xFE9C) {
+		if (var0002 == AVATAR) {
 			var0009 = "you";
 		} else {
 			var0009 = var0003;
 		}
-		if (var0002 == 0xFE9C) {
+		if (var0002 == AVATAR) {
 			var000A = "";
 		} else {
 			var000A = "s";
@@ -65711,8 +66051,8 @@ void Func0857 0x857 () {
 	var0002 = Func090A();
 	if (var0002) {
 		say("\"Very good! Let me see how many thou dost have...\"");
-		var0003 = 0xFE9B->count_objects(0x0179, QUALITY_ANY, 0x0014);
-		var0004 = 0xFE9B->count_objects(0x0179, QUALITY_ANY, 0x0015);
+		var0003 = PARTY->count_objects(0x0179, QUALITY_ANY, 0x0014);
+		var0004 = PARTY->count_objects(0x0179, QUALITY_ANY, 0x0015);
 		var0005 = var0003 + var0004;
 		if (var0005 == 0x0000) {
 			say("\"But thou dost not have a single one in thy possession! Thou art as looney as Mack!\"*");
@@ -66218,7 +66558,7 @@ void Func085F 0x85F (var var0000, var var0001) {
 			return;
 		}
 		if (var0009 == 0x0001) {
-			var000A = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+			var000A = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 			say("You gather your gold and count it, finding that you have ",
 				var000A,
 				" gold altogether.");
@@ -66236,12 +66576,12 @@ void Func085F 0x85F (var var0000, var var0001) {
 			say("You pay ",
 				var0001,
 				" gold, and the training session begins.");
-			if (var0006 == 0xFE9C) {
+			if (var0006 == AVATAR) {
 				var000C = "You";
 			} else {
 				var000C = var0007;
 			}
-			if (var0006 == 0xFE9C) {
+			if (var0006 == AVATAR) {
 				var000D = "you";
 			} else {
 				var000D = var0007;
@@ -66330,7 +66670,7 @@ void Func0860 0x860 (var var0000, var var0001, var var0002) {
 				" gold. Is this satisfactory?\"");
 			var000C = Func090A();
 			if (var000C) {
-				var000D = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+				var000D = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 				if (var000D >= var0008) {
 					if (var0006 == "heal") {
 						Func091D(var0009, var0008);
@@ -67031,7 +67371,7 @@ void Func0870 0x870 (var var0000, var var0001, var var0002) {
 				" gold. Is this price agreeable?\"");
 			var000B = Func090A();
 			if (var000B) {
-				var000C = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+				var000C = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 				if (var000C >= var0007) {
 					if (var0005 == "heal") {
 						Func091D(var0008, var0007);
@@ -67381,7 +67721,7 @@ void Func0875 0x875 (var var0000, var var0001) {
 			return;
 		}
 		if (var0006 == 0x0001) {
-			var0007 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+			var0007 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 			say("You gather your gold and count it, finding that you have ",
 				var0007,
 				" gold altogether.");
@@ -67569,7 +67909,7 @@ void Func0878 0x878 (var var0000, var var0001) {
 			return;
 		}
 		if (var0004 == 0x0001) {
-			var0005 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+			var0005 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 			say("You gather your gold and count it, finding that you have ",
 				var0005,
 				" gold altogether.");
@@ -67663,7 +68003,7 @@ void Func0879 0x879 (var var0000, var var0001, var var0002) {
 				" gold. Dost thou agree?\"");
 			var000B = Func090A();
 			if (var000B) {
-				var000C = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+				var000C = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 				if (var000C >= var0007) {
 					if (var0005 == "heal") {
 						Func091D(var0008, var0007);
@@ -67866,20 +68206,20 @@ void Func087D 0x87D () {
 	var var0001;
 	var var0002;
 
-	0xFE9C->get_npc_object()->set_item_flag(DONT_RENDER);
+	AVATAR->get_npc_object()->set_item_flag(DONT_RENDER);
 	var0000 = UI_create_new_object(0x0356);
 	if (!UI_is_pc_female()) {
-		if (0xFE9C->get_npc_object()->get_item_frame() < 0x0010) {
+		if (AVATAR->get_npc_object()->get_item_frame() < 0x0010) {
 			var0000->set_item_frame(0x0012);
 		} else {
 			var0000->set_item_frame(0x0013);
 		}
-	} else if (0xFE9C->get_npc_object()->get_item_frame() < 0x0010) {
+	} else if (AVATAR->get_npc_object()->get_item_frame() < 0x0010) {
 		var0000->set_item_frame(0x0014);
 	} else {
 		var0000->set_item_frame(0x0015);
 	}
-	var0001 = 0xFE9C->get_npc_object()->get_object_position();
+	var0001 = AVATAR->get_npc_object()->get_object_position();
 	var0002 = UI_update_last_created(var0001);
 }
 
@@ -68070,7 +68410,7 @@ var Func0881 0x881 () {
 	var var0002;
 	var var0003;
 
-	var0000 = 0xFE9C->get_npc_object()->find_nearby(0x0356, 0x0000, MASK_NONE);
+	var0000 = AVATAR->get_npc_object()->find_nearby(0x0356, 0x0000, MASK_NONE);
 	for (var0003 in var0000 with var0001 to var0002) {
 		if ((var0003->get_item_frame() >= 0x0012) && (var0003->get_item_frame() <= 0x0015)) {
 			return var0003;
@@ -68091,12 +68431,12 @@ void Func0882 0x882 (var var0000) {
 	if (var0000->get_barge()) {
 		var0001 = var0000->find_nearby(0x03C1, 0x000A, MASK_EGG);
 		if (var0001) {
-			if (Func080D() && 0xFE9C->get_barge()) {
+			if (Func080D() && AVATAR->get_barge()) {
 				var0001->Func061C();
 			} else {
 				var0002 = Func08B3(var0000);
-				0xFE9C->clear_item_flag(ON_MOVING_BARGE);
-				var0003 = 0xFE9C->find_nearby(0x009B, 0x0019, MASK_NONE);
+				AVATAR->clear_item_flag(ON_MOVING_BARGE);
+				var0003 = AVATAR->find_nearby(0x009B, 0x0019, MASK_NONE);
 				if (var0003) {
 					var0003->set_item_flag(ACTIVE_SAILOR);
 				}
@@ -68755,7 +69095,7 @@ void Func088B 0x88B () {
 	var var0008;
 	var var0009;
 
-	var0000 = 0xFE9C->find_nearby(0x02EC, 0x000A, MASK_NONE);
+	var0000 = AVATAR->find_nearby(0x02EC, 0x000A, MASK_NONE);
 	var0001 = 0x000F;
 	var0002 = 0xFFFD;
 	var0003 = 0xFFFD;
@@ -69065,7 +69405,7 @@ void Func0890 0x890 () {
 		case "what next" (remove):
 			say("\"Dost thou have the book entitled, `The Stone of Castambre?'\"");
 			if (Func090A()) {
-				var0000 = Func0931(0xFE9B, 0x0001, 0x0282, 0x0090, FRAME_ANY);
+				var0000 = Func0931(PARTY, 0x0001, 0x0282, 0x0090, FRAME_ANY);
 				if (var0000) {
 					say("His eyes reveal his hope. As he takes the book from you, it almost appears as if he is smiling.\"");
 					Func0891();
@@ -69084,7 +69424,7 @@ void Func0890 0x890 () {
 			if (Func090A()) {
 				say("\"Dost thou have it with thee?\"");
 				if (Func090A()) {
-					var0000 = Func0931(0xFE9B, 0x0001, 0x0282, 0x0090, FRAME_ANY);
+					var0000 = Func0931(PARTY, 0x0001, 0x0282, 0x0090, FRAME_ANY);
 					if (var0000) {
 						say("His eyes reveal his hope. As he takes the book from you, it almost appears as if he is smiling.\"");
 						Func0891();
@@ -69148,7 +69488,7 @@ void Func0892 0x892 () {
 				say("\"I was put here to protect the Shrines and prevent any from acquiring the Talisman. Any except the Avatar who demonstrated knowledge and understanding of Love. The Talisman is thine, Avatar.\"~He brings his stone hand to his heart and opens a panel on the front of his chest. Reaching inside with his other hand, he brings forth a beautiful yellow talisman.");
 				var0000 = UI_create_new_object(0x03BB);
 				var0000->set_item_frame(0x000A);
-				var0001 = Func0907(0xFE9C->get_npc_object());
+				var0001 = Func0907(AVATAR->get_npc_object());
 				if (var0001) {
 					say("He places the Talisman in your palm. ~\"Thou hast earned this and the honors and powers associated with it. Thou art truly an Avatar.\"");
 					gflags[0x0328] = true;
@@ -69225,7 +69565,7 @@ void Func0894 0x894 (var var0000) {
 			Func08FF("@Why, by the stars, I believe it \r\n\t\t\t\tis a creature!@");
 			say("Slowly, as if with great effort, it raises it head.");
 			0xFEDF->show_npc_face(0x0000);
-			var0001 = 0xFE9C->find_nearest(0x019E, 0x0028)->get_item_frame();
+			var0001 = AVATAR->find_nearest(0x019E, 0x0028)->get_item_frame();
 			if (!((var0001 == 0x0004) || (var0001 == 0x0005))) {
 				say("\"What dost thou... want?\" it asks slowly.");
 			} else {
@@ -69633,7 +69973,7 @@ void Func089A 0x89A (var var0000, var var0001) {
 			return;
 		}
 		if (var0005 == 0x0001) {
-			var0006 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+			var0006 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 			say("You gather your gold and count it, finding that you have ",
 				var0006,
 				" gold altogether.");
@@ -69649,7 +69989,7 @@ void Func089A 0x89A (var var0000, var var0001) {
 			say("You pay ",
 				var0001,
 				" gold, and the training session begins.");
-			if (var0002 == 0xFE9C) {
+			if (var0002 == AVATAR) {
 				var0008 = "you begin";
 			} else {
 				var0008 = var0003 + "begins";
@@ -69691,7 +70031,7 @@ void Func089B 0x89B (var var0000, var var0001) {
 
 	var0002 = Func0920();
 	var0003 = var0002->get_npc_name();
-	if (var0002 == 0xFE9C) {
+	if (var0002 == AVATAR) {
 		var0004 = "your";
 	} else {
 		var0004 = "their";
@@ -69704,7 +70044,7 @@ void Func089B 0x89B (var var0000, var var0001) {
 			return;
 		}
 		if (var0006 == 0x0001) {
-			var0007 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+			var0007 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 			say("You gather your gold and count it, finding that you have ",
 				var0007,
 				" gold altogether.");
@@ -69722,7 +70062,7 @@ void Func089B 0x89B (var var0000, var var0001) {
 			say("You pay ",
 				var0001,
 				" gold, and the training session begins.");
-			if (var0002 == 0xFE9C) {
+			if (var0002 == AVATAR) {
 				var0009 = "you begin";
 			} else {
 				var0009 = var0003 + "begins";
@@ -69874,7 +70214,7 @@ void Func089D 0x89D (var var0000, var var0001, var var0002) {
 				" gold. To still want my services?\"");
 			var000B = Func090A();
 			if (var000B) {
-				var000C = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+				var000C = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 				if (var000C >= var0007) {
 					if (var0005 == "heal") {
 						var000D = Func0910(var0008, STRENGTH);
@@ -69884,7 +70224,7 @@ void Func089D 0x89D (var var0000, var var0001, var var0002) {
 							Func0912(var0008, HEALTH, var000F);
 							var0010 = UI_remove_party_items(var0007, 0x0284, QUALITY_ANY, FRAME_ANY, true);
 							say("\"To have healed the wounds.\"");
-						} else if (var0008 == 0xFE9C) {
+						} else if (var0008 == AVATAR) {
 							say("\"To seem quite healthy!\"");
 						} else {
 							say("\"To be already healthy!\"");
@@ -70034,7 +70374,7 @@ void Func089E 0x89E (var var0000, var var0001, var var0002) {
 					" gold. Is this price agreeable?\"");
 				var0005 = Func090A();
 				if (var0005) {
-					var0017 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+					var0017 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 					if (var0017 >= var0009) {
 						if (var0007 == "heal") {
 							Func091D(var0014, var0009);
@@ -70091,7 +70431,7 @@ void Func089F 0x89F (var var0000, var var0001) {
 				break;
 			}
 			if (var0006 == 0x0001) {
-				var0007 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+				var0007 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 				say("You gather your gold and count it, finding that you have ",
 					var0007,
 					" gold altogether.");
@@ -70318,7 +70658,7 @@ void Func08A2 0x8A2 (var var0000, var var0001) {
 			return;
 		}
 		if (var0005 == 0x0001) {
-			var0006 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+			var0006 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 			say("You gather your gold and count it, finding that you have ",
 				var0006,
 				" gold altogether.");
@@ -70334,7 +70674,7 @@ void Func08A2 0x8A2 (var var0000, var var0001) {
 			say("You pay ",
 				var0001,
 				" gold, and the training session begins.");
-			if (var0002 == 0xFE9C) {
+			if (var0002 == AVATAR) {
 				var0008 = "You";
 				var0009 = "you";
 				var000A = "";
@@ -70571,7 +70911,7 @@ void Func08A6 0x8A6 (var var0000, var var0001) {
 			return;
 		}
 		if (var0009 == 0x0001) {
-			var000A = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+			var000A = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 			say("You gather your gold and count it, finding that you have ",
 				var000A,
 				" gold altogether.");
@@ -70983,7 +71323,7 @@ void Func08AC 0x8AC (var var0000, var var0001, var var0002) {
 				" gold. Art thou interested?\"");
 			var000B = Func090A();
 			if (var000B) {
-				var000C = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+				var000C = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 				if (var000C >= var0007) {
 					if (var0005 == "heal") {
 						Func091D(var0008, var0007);
@@ -71156,10 +71496,10 @@ void Func08B1 0x8B1 () {
 	var0001 = UI_create_new_object(0x0229);
 	if (var0001) {
 		var0002 = var0001->set_item_quality(0x0064);
-		if (Func0907(0xFE9C->get_npc_object())) {
+		if (Func0907(AVATAR->get_npc_object())) {
 			say("He hands you his personal staff. It appears to be magical.");
 		} else {
-			var0003 = UI_update_last_created(0xFE9C->get_object_position());
+			var0003 = UI_update_last_created(AVATAR->get_object_position());
 			say("He places his personal staff on the ground. It appears to be magical.~\"I have something for thee, Avatar, but I see that thou canst not carry it now. I will set it here upon the floor for thee.\"");
 		}
 		gflags[0x01AB] = true;
@@ -71238,11 +71578,11 @@ var Func08B3 0x8B3 (var var0000) {
 	for (var000B in var0006 with var0009 to var000A) {
 		if (var000B->get_barge() == var0005) {
 			if ((!var0003) && (var000B->get_item_quality() == 0x00FF)) {
-				0xFE9C->sit_down(var000B);
-				var0004 = Func093C(0xFE9C->get_npc_object(), var0004);
+				AVATAR->sit_down(var000B);
+				var0004 = Func093C(AVATAR->get_npc_object(), var0004);
 				var0003 = true;
 			} else {
-				var0008 &= var000B->get_distance(0xFE9C);
+				var0008 &= var000B->get_distance(AVATAR);
 				var0007 &= var000B;
 			}
 		}
@@ -71352,23 +71692,23 @@ void Func08B5 0x8B5 () {
 	var0000 = UI_create_new_object(0x031D);
 	var0000->set_item_frame(0x0001);
 	var0001 = var0000->set_item_quality(0x002C);
-	var0002 = 0xFE9C->get_npc_object()->give_last_created();
+	var0002 = AVATAR->get_npc_object()->give_last_created();
 	var0003 = false;
 	if (var0002) {
 		say("Lord British hands you the deed to the ship.");
 	} else {
-		var0002 = UI_update_last_created(0xFE9C->get_object_position());
+		var0002 = UI_update_last_created(AVATAR->get_object_position());
 		say("Lord British hands you the deed to the ship, but it slips from your hands and falls to the floor.");
 		var0003 = true;
 	}
 	say("\"I have also focused a magical crystal to the entrance of the Castle of Fire which I refurbished after thy battle with Exodus. Here, take it. Perhaps it will give thee some insight. Although, be warned, it is not at all stable and might be prone to shatter the nearer thou findest thyself to the location to which it is tuned.\"");
 	var0004 = UI_create_new_object(0x02F8);
 	var0004->set_item_frame(0x000E);
-	var0005 = 0xFE9C->get_npc_object()->give_last_created();
+	var0005 = AVATAR->get_npc_object()->give_last_created();
 	if (var0005) {
 		say("Lord British gives you the crystal.");
 	} else {
-		var0005 = UI_update_last_created(0xFE9C->get_object_position());
+		var0005 = UI_update_last_created(AVATAR->get_object_position());
 		if (!var0003) {
 			say("Lord British gives you the crystal, but it slips from your hands and falls to the floor. Luckily, it remains intact.");
 		} else {
@@ -71405,7 +71745,7 @@ void Func08B6 0x8B6 (var var0000, var var0001) {
 			return;
 		}
 		if (var0004 == 0x0001) {
-			var0005 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+			var0005 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 			say("You gather your gold and count it, finding that you have ",
 				var0005,
 				" gold altogether.");
@@ -71423,8 +71763,8 @@ void Func08B6 0x8B6 (var var0000, var var0001) {
 			var0001,
 			" gold, and the training session begins.");
 		say("Lucky produces a deck of cards, three sea shells and a rock, and a pair of dice. In turn, the pirate takes each item and begins to show various methods of utilizing them. He shows how to deal cards from the bottom of the deck, and how to do a false shuffle. With the shells and rock, he shows lightning-fast maneuvers which hide the rock under one of the shells, the one it couldn't possibly be under. Finally, he shows how to use saliva to weight the dice so that they always turn up lucky.");
-		if (var0002 == 0xFE9C) {
-			var0007 = Func0931(0xFE9B, 0x0001, 0x03BB, QUALITY_ANY, 0x0000);
+		if (var0002 == AVATAR) {
+			var0007 = Func0931(PARTY, 0x0001, 0x03BB, QUALITY_ANY, 0x0000);
 			if (var0007) {
 				var0008 = "happily hands you back your Ankh, which had ";
 				var0009 = "managed to slip from around your neck during ";
@@ -71547,7 +71887,7 @@ void Func08B8 0x8B8 () {
 	var0002 = Func090A();
 	if (var0002) {
 		say("\"Very good! Let me see how many thou dost have...\"");
-		var0003 = 0xFE9B->count_objects(0x0179, QUALITY_ANY, 0x0018);
+		var0003 = PARTY->count_objects(0x0179, QUALITY_ANY, 0x0018);
 		if (var0003 == 0x0000) {
 			say("\"But thou dost not have a single one in thy possession! Thou dost waste my time!\"*");
 			abort;
@@ -71881,7 +72221,7 @@ void Func08BD 0x8BD (var var0000, var var0001) {
 	var0003 = var0002->get_npc_name();
 	do {
 		if (var0002 != 0x0000) {
-			if (var0002 == 0xFE9C) {
+			if (var0002 == AVATAR) {
 				var0004 = "you";
 			} else {
 				var0004 = var0003;
@@ -71893,7 +72233,7 @@ void Func08BD 0x8BD (var var0000, var var0001) {
 				break;
 			}
 			if (var0006 == 0x0001) {
-				var0007 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+				var0007 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 				say("You gather your gold and count it. You have ",
 					var0007,
 					" altogether.");
@@ -71957,7 +72297,7 @@ void Func08BE 0x8BE (var var0000, var var0001) {
 				break;
 			}
 			if (var0004 == 0x0001) {
-				var0005 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+				var0005 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 				say("You gather your gold and count it, finding that you have ",
 					var0005,
 					" gold altogether.");
@@ -71967,7 +72307,7 @@ void Func08BE 0x8BE (var var0000, var var0001) {
 				}
 			}
 			var0006 = var0002->get_npc_name();
-			if (var0002 == 0xFE9C) {
+			if (var0002 == AVATAR) {
 				var0007 = "you begin";
 				var0008 = "your";
 			} else {
@@ -72644,7 +72984,7 @@ void Func08C8 0x8C8 (var var0000, var var0001) {
 				return;
 			}
 			if (var0005 == 0x0001) {
-				var0006 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+				var0006 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 				say("You gather your gold and count it, finding that you have ",
 					var0006,
 					" gold altogether.");
@@ -72660,17 +73000,17 @@ void Func08C8 0x8C8 (var var0000, var var0001) {
 			say("You pay ",
 				var0001,
 				" gold, and the training session begins.");
-			if (var0002 == 0xFE9C) {
+			if (var0002 == AVATAR) {
 				var0008 = "You";
 			} else {
 				var0008 = var0003;
 			}
-			if (var0002 == 0xFE9C) {
+			if (var0002 == AVATAR) {
 				var0009 = "you";
 			} else {
 				var0009 = var0003;
 			}
-			if (var0002 == 0xFE9C) {
+			if (var0002 == AVATAR) {
 				var000A = "";
 			} else {
 				var000A = "s";
@@ -72768,7 +73108,7 @@ void Func08CA 0x8CA (var var0000, var var0001) {
 				return;
 			}
 			if (var0004 == 0x0001) {
-				var0005 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+				var0005 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 				say("You gather your gold and count it, finding that you have ",
 					var0005,
 					" gold altogether.");
@@ -72786,7 +73126,7 @@ void Func08CA 0x8CA (var var0000, var var0001) {
 				var0001,
 				" gold, and the training session begins.");
 			var0007 = var0002->get_npc_name();
-			if (var0002 == 0xFE9C) {
+			if (var0002 == AVATAR) {
 				var0008 = "You";
 				var0009 = "you";
 				var000A = "";
@@ -73172,7 +73512,7 @@ void Func08D0 0x8D0 (var var0000, var var0001) {
 				return;
 			}
 			if (var0008 == 0x0001) {
-				var0009 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+				var0009 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 				if (var0009 < var0001) {
 					say("\"It seems that thou hast not enough gold. Do return when thou art a bit wealthier.\"");
 					return;
@@ -73324,7 +73664,7 @@ void Func08D2 0x8D2 (var var0000, var var0001, var var0002) {
 				" gold. Is this price agreeable?\"");
 			var000C = Func090A();
 			if (var000C) {
-				var000D = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+				var000D = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 				if (var000D >= var0008) {
 					if (var0006 == "healing") {
 						Func091D(var0009, var0008);
@@ -73681,10 +74021,10 @@ void Func08D8 0x8D8 () {
 			var0001,
 			", wouldst thou take this ring to him and tell him that I still love him. Mayhaps it will restore him to the beloved Trent I knew.\"");
 		var0003 = UI_create_new_object(0x0127);
-		if (Func0907(0xFE9C->get_npc_object())) {
+		if (Func0907(AVATAR->get_npc_object())) {
 			say("She takes a ring from her slender finger and places it in your hand. You expect it to pass right through, but it rests neatly in your palm.");
 		} else {
-			var0004 = UI_update_last_created(0xFE9C->get_object_position());
+			var0004 = UI_update_last_created(AVATAR->get_object_position());
 			say("She takes a ring from her slender finger and places it in your hand. You expect it to pass right through, and it does. Fortunately, it falls to the floor, softly ringing as it striks the stones.");
 		}
 		if (var0000) {
@@ -73880,7 +74220,7 @@ void Func08DD 0x8DD () {
 	halt_scheduled();
 	var0000 = find_nearby(SHAPE_ANY, 0x0028, MASK_NPC2);
 	var0001 = 0x0006;
-	if (!0xFE9C->get_item_flag(ON_MOVING_BARGE)) {
+	if (!AVATAR->get_item_flag(ON_MOVING_BARGE)) {
 		for (var0004 in var0000 with var0002 to var0003) {
 			var0005 = 0x0000;
 			var0006 = "";
@@ -74329,7 +74669,7 @@ void Func08E5 0x8E5 (var var0000, var var0001) {
 				return;
 			}
 			if (var0005 == 0x0001) {
-				var0006 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+				var0006 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 				if (var0006 < var0001) {
 					say("\"I regret that thou dost not seem to have enough gold to train here. Mayhaps at another time, when thy fortunes are more prosperous.\"");
 					return;
@@ -74341,7 +74681,7 @@ void Func08E5 0x8E5 (var var0000, var var0001) {
 			}
 			var0007 = UI_remove_party_items(var0001, 0x0284, QUALITY_ANY, FRAME_ANY, true);
 			var0008 = var0002->get_npc_name();
-			if (var0002 == 0xFE9C) {
+			if (var0002 == AVATAR) {
 				var0008 = "you";
 				var0009 = "are";
 				var000A = "have";
@@ -74423,7 +74763,7 @@ var Func08E7 0x8E7 () {
 	var var0001;
 	var var0002;
 
-	var0000 = 0xFE9C->get_npc_object()->get_object_position();
+	var0000 = AVATAR->get_npc_object()->get_object_position();
 	var0001 = [0x0790, 0x0570];
 	var0002 = [0x09BF, 0x06CF];
 	if (var0000[0x0001] >= var0001[0x0001]) {
@@ -74461,13 +74801,13 @@ var Func08E9 0x8E9 (var var0000) {
 
 	var0001 = var0000->get_item_shape();
 	var0002 = var0000->get_item_frame();
-	if (0xFE9C->is_readied(BG_WEAPON_HAND, var0001, var0002)) {
+	if (AVATAR->is_readied(BG_WEAPON_HAND, var0001, var0002)) {
 		return 0x0001;
 	}
-	if (0xFE9C->is_readied(BG_SHIELD_HAND, var0001, var0002)) {
+	if (AVATAR->is_readied(BG_SHIELD_HAND, var0001, var0002)) {
 		return 0x0001;
 	}
-	if (0xFE9C->is_readied(BG_BOTH_HANDS, var0001, var0002)) {
+	if (AVATAR->is_readied(BG_BOTH_HANDS, var0001, var0002)) {
 		return 0x0001;
 	}
 	return 0x0000;
@@ -74479,7 +74819,7 @@ var Func08EA 0x8EA (var var0000) {
 
 	var0001 = var0000->get_item_shape();
 	var0002 = var0000->get_item_frame();
-	if (0xFE9C->is_readied(BG_BACKPACK, var0001, var0002)) {
+	if (AVATAR->is_readied(BG_BACKPACK, var0001, var0002)) {
 		return 0x0001;
 	}
 	return 0x0000;
@@ -74735,7 +75075,7 @@ void Func08EF 0x8EF () {
 			fallthrough;
 
 		case "What next?":
-			var0004 = Func0931(0xFE9B, 0x0001, 0x0108, QUALITY_ANY, FRAME_ANY);
+			var0004 = Func0931(PARTY, 0x0001, 0x0108, QUALITY_ANY, FRAME_ANY);
 			if (gflags[0x01A8]) {
 				say("\"Why, I beg thee to please help in the return my lovely Rowena to me,\" he pleads.");
 			} else if (!var0004) {
@@ -75054,7 +75394,7 @@ void Func08F4 0x8F4 (var var0000, var var0001) {
 			var0002,
 			".\"");
 	}
-	if (0xFE9C->get_npc_object()->get_item_flag(INVISIBLE)) {
+	if (AVATAR->get_npc_object()->get_item_flag(INVISIBLE)) {
 		say("\"Avatar! 'Tis strange to converse yet not see the speaker. Invisibility is queer magic.\"");
 	}
 	say("\"How may I assist ",
@@ -75214,7 +75554,7 @@ var Func08F8 0x8F8 (var var0000, var var0001, var var0002, var var0003, var var0
 	var var0011;
 	var var0012;
 
-	var0007 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+	var0007 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 	if (var0004 == 0x0000) {
 		var0008 = 0x0001;
 	} else {
@@ -75236,7 +75576,7 @@ var Func08F8 0x8F8 (var var0000, var var0001, var var0002, var var0003, var var0
 			var000E = false;
 			for (var0011 in var000B with var000F to var0010) {
 				var0012 = var0011->get_npc_number();
-				if (!(var0012 == 0xFE9C)) {
+				if (!(var0012 == AVATAR)) {
 					var000D += 0x0001;
 					var0012->show_npc_face(0x0000);
 					var000E = true;
@@ -75346,7 +75686,7 @@ var Func0901 0x901 () {
 	var var0002;
 
 	var0000 = UI_get_party_list();
-	var0000 = Func093C(0xFE9C->get_npc_object(), var0000);
+	var0000 = Func093C(AVATAR->get_npc_object(), var0000);
 	var0001 = UI_get_array_size(var0000);
 	if (var0001 != 0x0000) {
 		var0002 = var0000[UI_get_random(var0001)]->get_npc_number();
@@ -75354,7 +75694,7 @@ var Func0901 0x901 () {
 			return var0002;
 		}
 	}
-	return 0xFE9C;
+	return AVATAR;
 }
 
 var Func0902 0x902 () {
@@ -75373,7 +75713,7 @@ var Func0902 0x902 () {
 			}
 		}
 	}
-	return 0xFE9C;
+	return AVATAR;
 }
 
 void Func0903 0x903 (var var0000, var var0001) {
@@ -75383,7 +75723,7 @@ void Func0903 0x903 (var var0000, var var0001) {
 	var var0005;
 
 	if (var0000->npc_nearby()) {
-		if (var0000 == 0xFE9C) {
+		if (var0000 == AVATAR) {
 			var0002 = UI_is_pc_female();
 		} else {
 			var0002 = 0x0000;
@@ -75760,7 +76100,7 @@ void Func091D 0x91D (var var0000, var var0001) {
 		Func0912(var0000, HEALTH, var0005);
 		var0006 = UI_remove_party_items(var0001, 0x0284, QUALITY_ANY, FRAME_ANY, true);
 		say("\"The wounds have been healed.\"");
-	} else if (var0000 == 0xFE9C) {
+	} else if (var0000 == AVATAR) {
 		say("\"Thou seemest quite healthy!\"");
 	} else {
 		say("\"",
@@ -75868,7 +76208,7 @@ var Func0922 0x922 (var var0000, var var0001, var var0002, var var0003) {
 
 	var0004 = false;
 	var0005 = Func0910(var0002, TRAINING);
-	var0006 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+	var0006 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 	if (!(var0006 > var0001)) {
 		return 0x0001;
 	}
@@ -75895,12 +76235,12 @@ var Func0923 0x923 (var var0000, var var0001) {
 	var var0004;
 	var var0005;
 
-	var0002 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+	var0002 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 	say("\"Agreeable?\"");
 	if (!Func090A()) {
 		var0003 = 0x0000;
 	} else if (var0002 >= var0001) {
-		var0004 = 0xFE9B->find_object(0x02F9, QUALITY_ANY, FRAME_ANY);
+		var0004 = PARTY->find_object(0x02F9, QUALITY_ANY, FRAME_ANY);
 		if (var0004) {
 			if (UI_add_spell(var0000, 0x0000, var0004)) {
 				var0003 = 0x0001;
@@ -75925,12 +76265,12 @@ var Func0924 0x924 (var var0000, var var0001) {
 	var var0004;
 	var var0005;
 
-	var0002 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+	var0002 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 	say("\"To be agreeable?\"");
 	if (!Func090A()) {
 		var0003 = 0x0000;
 	} else if (var0002 >= var0001) {
-		var0004 = 0xFE9B->find_object(0x02F9, QUALITY_ANY, FRAME_ANY);
+		var0004 = PARTY->find_object(0x02F9, QUALITY_ANY, FRAME_ANY);
 		if (var0004) {
 			if (UI_add_spell(var0000, 0x0000, var0004)) {
 				var0003 = 0x0001;
@@ -75951,7 +76291,7 @@ void Func0925 0x925 (var var0000) {
 	var var0001;
 	var var0002;
 
-	var0001 = var0000->get_item_quantity(0xFE9C);
+	var0001 = var0000->get_item_quantity(AVATAR);
 	if (var0001 <= 0x0001) {
 		var0000->remove_item();
 	} else {
@@ -76138,7 +76478,7 @@ void Func092C 0x92C (var var0000) {
 }
 
 var Func092D 0x92D (var var0000) {
-	return UI_direction_from(0xFE9C, var0000);
+	return AVATAR->direction_from(var0000);
 }
 
 extern var Func0937 0x937 (var var0000);
@@ -76421,7 +76761,7 @@ var Func0938 0x938 (var var0000) {
 var Func0939 0x939 (var var0000) {
 	var var0001;
 
-	if ((var0000 < 0x0000) && (var0000 >= 0xFE9C)) {
+	if ((var0000 < 0x0000) && (var0000 >= AVATAR)) {
 		var0001 = var0000->get_npc_object();
 	} else {
 		var0001 = var0000;
@@ -76447,7 +76787,7 @@ void Func093A 0x93A (var var0000, var var0001) {
 	var0002 = UI_get_party_list2();
 	for (var0005 in var0002 with var0003 to var0004) {
 		if (var0005->get_npc_prop(FOODLEVEL) >= 10) {
-			if (!(var0005 == 0xFE9C->get_npc_object())) {
+			if (!(var0005 == AVATAR->get_npc_object())) {
 				var0005->clear_item_flag(ASLEEP);
 			}
 			var0005->clear_item_flag(POISONED);
@@ -76546,7 +76886,7 @@ var Func093E 0x93E () {
 
 	var0000 = [0x0390, 0x0810, 0x0000];
 	var0001 = [0x0450, 0x0930, 0x000F];
-	return Func08F9(0xFE9C->get_object_position(), var0000, var0001);
+	return Func08F9(AVATAR->get_object_position(), var0000, var0001);
 }
 
 extern var Func0939 0x939 (var var0000);
@@ -76624,7 +76964,7 @@ var Func0944 0x944 (var var0000) {
 	var var0001;
 
 	var0001 = get_container();
-	while (!(var0001 == 0xFE9C->get_npc_object())) {
+	while (!(var0001 == AVATAR->get_npc_object())) {
 		var0001 = var0001->get_container();
 		if (!var0001) {
 			return 0x0000;
@@ -76731,7 +77071,7 @@ void Func0947 0x947 () {
 	var0000 = Func090A();
 	if (var0000) {
 		say("\"Very good! Let me see how many thou dost have...\"");
-		var0001 = 0xFE9C->find_nearby(0x0179, 0x0019, MASK_NONE);
+		var0001 = AVATAR->find_nearby(0x0179, 0x0019, MASK_NONE);
 		var0002 = UI_get_party_list();
 		for (var0005 in var0002 with var0003 to var0004) {
 			var0001 &= var0005->get_cont_items(0x0179, QUALITY_ANY, 0x0000);
@@ -76795,8 +77135,8 @@ void Func0948 0x948 () {
 	var0002 = Func090A();
 	if (var0002) {
 		say("\"Very good! Let me see how many sacks thou dost have...\"");
-		var0003 = 0xFE9B->count_objects(0x035F, QUALITY_ANY, 0x000E);
-		var0004 = 0xFE9B->count_objects(0x035F, QUALITY_ANY, 0x000F);
+		var0003 = PARTY->count_objects(0x035F, QUALITY_ANY, 0x000E);
+		var0004 = PARTY->count_objects(0x035F, QUALITY_ANY, 0x000F);
 		if ((var0003 == 0x0000) || (var0004 == 0x0000)) {
 			say("\"But thou dost not have a single one in thy possession! Art thou trying to trick me? Get out of my shoppe!\"*");
 			abort;
@@ -77338,7 +77678,7 @@ void Func094F 0x94F (var var0000, var var0001) {
 				break;
 			}
 			if (var0005 == 0x0001) {
-				var0006 = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+				var0006 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 				say("You gather your gold and count it, finding that you have ",
 					var0006,
 					" gold altogether.");
@@ -77355,12 +77695,12 @@ void Func094F 0x94F (var var0000, var var0001) {
 			say("You pay ",
 				var0001,
 				" gold, and the training session begins.");
-			if (var0002 == 0xFE9C) {
+			if (var0002 == AVATAR) {
 				var0008 = "you feel ";
 			} else {
 				var0008 = var0003 + " feels ";
 			}
-			if (var0002 == 0xFE9C) {
+			if (var0002 == AVATAR) {
 				var0009 = "you have ";
 			} else {
 				var000A = UI_is_pc_female();
@@ -77416,7 +77756,7 @@ void Func0950 0x950 (var var0000, var var0001) {
 	var0002 = Func0920();
 	var0003 = var0002->get_npc_name();
 	var0004 = UI_is_pc_female();
-	if (var0002 == 0xFE9C) {
+	if (var0002 == AVATAR) {
 		var0003 = "you";
 		var0005 = "You";
 		var0006 = "mimic";
@@ -77450,7 +77790,7 @@ void Func0950 0x950 (var var0000, var var0001) {
 				break;
 			}
 			if (var000E == 0x0001) {
-				var000F = 0xFE9B->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
+				var000F = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 				say("You gather your gold and count it, finding that you have ",
 					var000F,
 					" gold altogether.");
