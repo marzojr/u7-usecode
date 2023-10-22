@@ -1317,7 +1317,7 @@ void Func009B shape#(0x9B) () {
 	if (event == DOUBLECLICK) {
 		0xFEE3->show_npc_face(0x0000);
 		var0000 = Func08F7(SPARK);
-		var0001 = Func08F7(0xFFFD);
+		var0001 = Func08F7(SHAMINO);
 		var0002 = Func0908();
 		if (!gflags[0x01B3]) {
 			say("The hooded figure in the boat ignores you completely.*");
@@ -1368,14 +1368,14 @@ void Func009B shape#(0x9B) () {
 				if (!gflags[0x0197]) {
 					say("He turns all the way around and points across the water to the west. \"There... \"");
 					if (var0001 && var0000) {
-						0xFFFD->say("\"Er... ",
+						SHAMINO->say("\"Er... ",
 							var0002,
 							", art thou sure we need to go over there?\"*");
-						0xFFFD->hide();
+						SHAMINO->hide();
 						SPARK->say("\"What's the matter, Shamino? Art thou -afraid-?\"*");
 						SPARK->hide();
-						0xFFFD->say("\"Of course not! I just... well, I... oh, never mind! Let's go!\"*");
-						0xFFFD->hide();
+						SHAMINO->say("\"Of course not! I just... well, I... oh, never mind! Let's go!\"*");
+						SHAMINO->hide();
 						var0003 = Func08F7(IOLO);
 						if (var0003) {
 							IOLO->say("Iolo's eyes narrow as he adopts a patronizing look on his face.~~\"And I suppose thou art without fear?\" he says to Spark.*");
@@ -1540,7 +1540,7 @@ void Func00E1 shape#(0xE1) () {
 	}
 	if (var0000 == 0x0000) {
 		if (Func081D(item, 0x0188, 0x0001, 0x0000, 0x0000, 0x0007)) {
-			Func081E(item, 0x00F6, 0x0000, 0x0002, 0x00FA, 0x0001, 0xFFFD, 0x0000, 0x0007);
+			Func081E(item, 0x00F6, 0x0000, 0x0002, 0x00FA, 0x0001, -3, 0, 0x0007);
 			UI_play_sound_effect2(0x001E, item);
 		} else {
 			Func0818();
@@ -1577,8 +1577,8 @@ void Func00F6 shape#(0xF6) () {
 		}
 	}
 	if (var0000 == 0x0000) {
-		if (Func081D(item, 0x00FA, 0x0001, 0xFFFD, 0x0000, 0x0007)) {
-			Func081E(item, 0x00E1, 0x0000, 0x0002, 0x0188, 0x0001, 0x0000, 0x0000, 0x0007);
+		if (Func081D(item, 0x00FA, 0x0001, -3, 0, 0x0007)) {
+			Func081E(item, 0x00E1, 0x0000, 0x0002, 0x0188, 0x0001, 0, 0, 0x0007);
 			UI_play_sound_effect2(0x001E, item);
 		} else {
 			Func0818();
@@ -1615,8 +1615,8 @@ void Func00FA shape#(0xFA) () {
 		}
 	}
 	if (var0000 == 0x0000) {
-		if (Func081D(item, 0x00F6, 0x0001, 0x0000, 0xFFFD, 0x0007)) {
-			Func081E(item, 0x0188, 0x0000, 0x0001, 0x00E1, 0x0001, 0x0000, 0x0000, 0x0007);
+		if (Func081D(item, 0x00F6, 0x0001, 0, -3, 0x0007)) {
+			Func081E(item, 0x0188, 0x0000, 0x0001, 0x00E1, 0x0001, 0, 0, 0x0007);
 			UI_play_sound_effect2(0x001E, item);
 		} else {
 			Func0818();
@@ -1814,16 +1814,16 @@ void Func010E shape#(0x10E) () {
 	}
 	var0000 = Func081B(item);
 	if (var0000 == 0x0001) {
-		if (Func081D(item, 0x0178, 0x0000, 0x0000, 0x0000, 0x0007)) {
-			Func081E(item, 0x01B0, 0x0001, 0x0001, 0x01B1, 0x0000, 0x0000, 0x0003, 0x0005);
+		if (Func081D(item, 0x0178, 0x0000, 0, 0, 0x0007)) {
+			Func081E(item, 0x01B0, 0x0001, 0x0001, 0x01B1, 0x0000,  0, 3, 0x0005);
 			UI_play_sound_effect2(0x001F, item);
 		} else {
 			Func0818();
 		}
 	}
 	if (var0000 == 0x0000) {
-		if (Func081D(item, 0x0178, 0x0001, 0x0000, 0x0000, 0x0007)) {
-			Func081E(item, 0x01B0, 0x0000, 0x0002, 0x01B1, 0x0001, 0xFFFD, 0x0000, 0x0007);
+		if (Func081D(item, 0x0178, 0x0001, 0, 0, 0x0007)) {
+			Func081E(item, 0x01B0, 0x0000, 0x0002, 0x01B1, 0x0001, -3, 0, 0x0007);
 			UI_play_sound_effect2(0x001E, item);
 		} else {
 			Func0818();
@@ -2387,16 +2387,16 @@ void Func0178 shape#(0x178) () {
 	}
 	var0000 = Func081B(item);
 	if (var0000 == 0x0001) {
-		if (Func081D(item, 0x010E, 0x0000, 0x0000, 0x0000, 0x0007)) {
-			Func081E(item, 0x01B1, 0x0001, 0x0002, 0x01B0, 0x0000, 0x0003, 0x0000, 0x0001);
+		if (Func081D(item, 0x010E, 0x0000, 0, 0, 0x0007)) {
+			Func081E(item, 0x01B1, 0x0001, 0x0002, 0x01B0, 0x0000,  3,  0, 0x0001);
 			UI_play_sound_effect2(0x001F, item);
 		} else {
 			Func0818();
 		}
 	}
 	if (var0000 == 0x0000) {
-		if (Func081D(item, 0x010E, 0x0001, 0x0000, 0x0000, 0x0007)) {
-			Func081E(item, 0x01B1, 0x0000, 0x0001, 0x01B0, 0x0001, 0x0000, 0xFFFD, 0x0007);
+		if (Func081D(item, 0x010E, 0x0001, 0, 0, 0x0007)) {
+			Func081E(item, 0x01B1, 0x0000, 0x0001, 0x01B0, 0x0001,  0, -3, 0x0007);
 			UI_play_sound_effect2(0x001E, item);
 		} else {
 			Func0818();
@@ -2728,16 +2728,16 @@ void Func0188 shape#(0x188) () {
 	}
 	var0000 = Func081B(item);
 	if (var0000 == 0x0001) {
-		if (Func081D(item, 0x00E1, 0x0000, 0x0000, 0x0000, 0x0007)) {
-			Func081E(item, 0x00FA, 0x0001, 0x0002, 0x00F6, 0x0000, 0x0003, 0x0000, 0x0001);
+		if (Func081D(item, 0x00E1, 0x0000,  0,  0, 0x0007)) {
+			Func081E(item, 0x00FA, 0x0001, 0x0002, 0x00F6, 0x0000,  3,  0, 0x0001);
 			UI_play_sound_effect2(0x001F, item);
 		} else {
 			Func0818();
 		}
 	}
 	if (var0000 == 0x0000) {
-		if (Func081D(item, 0x00E1, 0x0001, 0x0000, 0x0000, 0x0007)) {
-			Func081E(item, 0x00FA, 0x0000, 0x0001, 0x00F6, 0x0001, 0x0000, 0xFFFD, 0x0007);
+		if (Func081D(item, 0x00E1, 0x0001,  0,  0, 0x0007)) {
+			Func081E(item, 0x00FA, 0x0000, 0x0001, 0x00F6, 0x0001,  0, -3, 0x0007);
 			UI_play_sound_effect2(0x001E, item);
 		} else {
 			Func0818();
@@ -3174,16 +3174,16 @@ void Func01B0 shape#(0x1B0) () {
 	}
 	var0000 = Func081B(item);
 	if (var0000 == 0x0001) {
-		if (Func081D(item, 0x01B1, 0x0000, 0x0000, 0x0003, 0x0005)) {
-			Func081E(item, 0x010E, 0x0001, 0x0001, 0x0178, 0x0000, 0x0000, 0x0000, 0x0007);
+		if (Func081D(item, 0x01B1, 0x0000,  0,  3, 0x0005)) {
+			Func081E(item, 0x010E, 0x0001, 0x0001, 0x0178, 0x0000,  0,  0, 0x0007);
 			UI_play_sound_effect2(0x001F, item);
 		} else {
 			Func0818();
 		}
 	}
 	if (var0000 == 0x0000) {
-		if (Func081D(item, 0x01B1, 0x0001, 0xFFFD, 0x0000, 0x0007)) {
-			Func081E(item, 0x010E, 0x0000, 0x0002, 0x0178, 0x0001, 0x0000, 0x0000, 0x0007);
+		if (Func081D(item, 0x01B1, 0x0001, -3,  0, 0x0007)) {
+			Func081E(item, 0x010E, 0x0000, 0x0002, 0x0178, 0x0001,  0,  0, 0x0007);
 			UI_play_sound_effect2(0x001E, item);
 		} else {
 			Func0818();
@@ -3212,16 +3212,16 @@ void Func01B1 shape#(0x1B1) () {
 	}
 	var0000 = Func081B(item);
 	if (var0000 == 0x0001) {
-		if (Func081D(item, 0x01B0, 0x0000, 0x0003, 0x0000, 0x0001)) {
-			Func081E(item, 0x0178, 0x0001, 0x0002, 0x010E, 0x0000, 0x0000, 0x0000, 0x0007);
+		if (Func081D(item, 0x01B0, 0x0000,  3,  0, 0x0001)) {
+			Func081E(item, 0x0178, 0x0001, 0x0002, 0x010E, 0x0000,  0,  0, 0x0007);
 			UI_play_sound_effect2(0x001F, item);
 		} else {
 			Func0818();
 		}
 	}
 	if (var0000 == 0x0000) {
-		if (Func081D(item, 0x01B0, 0x0001, 0x0000, 0xFFFD, 0x0007)) {
-			Func081E(item, 0x0178, 0x0000, 0x0001, 0x010E, 0x0001, 0x0000, 0x0000, 0x0007);
+		if (Func081D(item, 0x01B0, 0x0001,  0, -3, 0x0007)) {
+			Func081E(item, 0x0178, 0x0000, 0x0001, 0x010E, 0x0001,  0,  0, 0x0007);
 			UI_play_sound_effect2(0x001E, item);
 		} else {
 			Func0818();
@@ -3447,8 +3447,8 @@ void Func01EF shape#(0x1EF) () {
 		set_schedule_type(IN_COMBAT);
 		set_attack_mode(FLEE);
 		set_oppressor(AVATAR);
-		if (0xFFFD->npc_nearby()) {
-			var0000 = script 0xFFFD after 4 ticks {
+		if (SHAMINO->npc_nearby()) {
+			var0000 = script SHAMINO after 4 ticks {
 				nohalt;
 				say "@I hate cats.@";
 			};
@@ -5375,12 +5375,12 @@ void Func029C shape#(0x29C) () {
 			if (!get_container()) {
 				var0005 = [ 0,  1, -1,  1];
 				var0006 = [ 2,  1,  2,  0];
-				Func0828(item, var0005, var0006, 0xFFFD, Func029C, item, BG_PATH_SUCCESS);
+				Func0828(item, var0005, var0006, -3, Func029C, item, BG_PATH_SUCCESS);
 			} else if (!Func0944(item)) {
 				var0007 = Func0945(item);
 				var0005 = [ 0,  1, -1,  1];
 				var0006 = [ 2,  1,  2,  0];
-				Func0828(var0007, var0005, var0006, 0xFFFD, Func029C, var0007, BG_PATH_SUCCESS);
+				Func0828(var0007, var0005, var0006, -3, Func029C, var0007, BG_PATH_SUCCESS);
 			} else {
 				var0008 = script item {
 					wait 2;
@@ -7137,7 +7137,7 @@ void Func0313 shape#(0x313) () {
 		UI_close_gumps();
 		var0000 = -1;
 		var0001 = -1;
-		var0002 = 0xFFFD;
+		var0002 = -3;
 		Func0828(item, var0000, var0001, var0002, Func0313, item, BG_PATH_SUCCESS);
 	}
 	if (event == BG_PATH_SUCCESS) {
@@ -7178,7 +7178,7 @@ void Func0314 shape#(0x314) () {
 		UI_close_gumps();
 		var0000 = -1;
 		var0001 = -1;
-		var0002 = 0xFFFD;
+		var0002 = -3;
 		Func0828(item, var0000, var0001, var0002, Func0314, item, BG_PATH_SUCCESS);
 	}
 	if ((event == BG_PATH_SUCCESS) || (event == SCRIPTED)) {
@@ -7704,13 +7704,13 @@ void Func032A shape#(0x32A) () {
 		if (!get_container()) {
 			var0001 = [ 0,  1,  1,  1, -1, -1,  0, -1];
 			var0002 = [ 1,  1,  0, -1,  1,  0, -1, -1];
-			Func0828(item, var0001, var0002, 0xFFFD, Func032A, item, EGG);
+			Func0828(item, var0001, var0002, -3, Func032A, item, EGG);
 		} else if (!Func0944(item)) {
 			UI_close_gumps();
 			var0003 = Func0945(item);
 			var0001 = [ 0,  1, -1,  1];
 			var0002 = [ 2,  1,  2,  0];
-			Func0828(var0003, var0001, var0002, 0xFFFD, Func032A, item, EGG);
+			Func0828(var0003, var0001, var0002, -3, Func032A, item, EGG);
 		} else {
 			UI_close_gumps();
 			var0004 = script item {
@@ -9626,7 +9626,7 @@ void Func0401 object#(0x401) () {
 		var0003 = Func0909();
 		IOLO->show_npc_face(0x0000);
 		var0008 = Func08F7(0xFFF5);
-		var0009 = Func08F7(0xFFFD);
+		var0009 = Func08F7(SHAMINO);
 		var000A = false;
 		var000B = false;
 		add(["name", "job", "bye"]);
@@ -9767,10 +9767,10 @@ void Func0401 object#(0x401) () {
 					say("\"Why, he is right there, ",
 						var0003,
 						".\"*");
-					0xFFFD->say("\"I am right here, ",
+					SHAMINO->say("\"I am right here, ",
 						var0003,
 						".\"*");
-					0xFFFD->hide();
+					SHAMINO->hide();
 					IOLO->say("\"See? I told thee!\"");
 				} else {
 					say("\"Thy best bet in finding that rascal is to look in Britain. He has a girlfriend employed as an actress at the Royal Theatre.\"");
@@ -10267,10 +10267,10 @@ void Func0403 object#(0x403) () {
 	var var000B;
 
 	if (event == DOUBLECLICK) {
-		0xFFFD->show_npc_face(0x0000);
+		SHAMINO->show_npc_face(0x0000);
 		var0000 = UI_is_pc_female();
 		var0001 = UI_get_party_list();
-		var0002 = 0xFFFD->get_npc_object();
+		var0002 = SHAMINO->get_npc_object();
 		var0003 = Func0908();
 		add(["name", "job", "bye"]);
 		if (gflags[0x02EC]) {
@@ -10279,7 +10279,7 @@ void Func0403 object#(0x403) () {
 				abort;
 			}
 			say("\"All right, I suppose thou hast learned thy lesson. I shall rejoin.\"");
-			0xFFFD->add_to_party();
+			SHAMINO->add_to_party();
 			gflags[0x02EC] = false;
 			abort;
 		}
@@ -10355,12 +10355,12 @@ void Func0403 object#(0x403) () {
 				if (var0005) {
 					IOLO->say("\"Ahem, I have heard something about an actress, no?\"*");
 					IOLO->hide();
-					0xFFFD->say("\"What dost thou know of it?\"*");
+					SHAMINO->say("\"What dost thou know of it?\"*");
 					IOLO->say("\"",
 						var0003,
 						", ask him about 'Amber'.\"*");
 					IOLO->hide();
-					0xFFFD->say("\"Thou art a swine, Iolo.\"");
+					SHAMINO->say("\"Thou art a swine, Iolo.\"");
 					add(["Amber", "friends", "Lord British"]);
 				}
 				fallthrough;
@@ -10386,7 +10386,7 @@ void Func0403 object#(0x403) () {
 					say("\"Dost thou mean that miserable excuse for an archer?\"*");
 					IOLO->say("\"Watch what thou dost say, scoundrel!\"*");
 					IOLO->hide();
-					0xFFFD->say("\"Yes, that's Iolo!\"");
+					SHAMINO->say("\"Yes, that's Iolo!\"");
 				} else {
 					say("\"Surely he is around somewhere. Where didst thou last leave him?\"");
 				}
@@ -10398,14 +10398,14 @@ void Func0403 object#(0x403) () {
 				if (var0006) {
 					say("\"Dost thou mean that incorrigible wencher and drunkard?\"*");
 					0xFFFC->say("\"Do not forget that my mere thumb can squash in thy face like a marshmallow.\"*");
-					0xFFFD->say("\"Yes, that's Dupre!\"*");
+					SHAMINO->say("\"Yes, that's Dupre!\"*");
 					0xFFFC->say("\"That's -Sir- Dupre to thee!\"*");
-					0xFFFD->say("\"Sir Dupuke? Didst thou say Sir Dupuke?\"*");
+					SHAMINO->say("\"Sir Dupuke? Didst thou say Sir Dupuke?\"*");
 					0xFFFC->say("\"Du-pre-!\"*");
-					0xFFFD->say("\"Pardon -me-, Sir Dupuke!\"*");
+					SHAMINO->say("\"Pardon -me-, Sir Dupuke!\"*");
 					0xFFFC->say("\"I'm not going to listen to this anymore.\"*");
 					0xFFFC->hide();
-					0xFFFD->show_npc_face(0x0000);
+					SHAMINO->show_npc_face(0x0000);
 				} else if (!gflags[0x0017]) {
 					say("\"I believe he is in Jhelom.\"");
 				} else {
@@ -10422,7 +10422,7 @@ void Func0403 object#(0x403) () {
 				}
 				if (var0007 < 0x0008) {
 					say("Shamino looks relieved. \"I am -so- glad thou didst ask me that.\" He gathers his gear and prepares to follow you.");
-					0xFFFD->add_to_party();
+					SHAMINO->add_to_party();
 				} else {
 					say("\"Hmmm. I do not like big crowds. I shall wait until thy group is smaller before joining.\"");
 				}
@@ -10436,13 +10436,13 @@ void Func0403 object#(0x403) () {
 				var000B = Func090B(["wait here", "go home"]);
 				if (var000B == "wait here") {
 					say("\"Very well. I shall await thy return.\"*");
-					0xFFFD->remove_from_party();
-					0xFFFD->get_npc_object()->set_schedule_type(WAIT);
+					SHAMINO->remove_from_party();
+					SHAMINO->get_npc_object()->set_schedule_type(WAIT);
 					abort;
 				}
 				say("\"I really hate to, but if thou dost insist.\" Shamino\tgrudgingly gathers his belongings.*");
-				0xFFFD->remove_from_party();
-				0xFFFD->get_npc_object()->set_schedule_type(LOITER);
+				SHAMINO->remove_from_party();
+				SHAMINO->get_npc_object()->set_schedule_type(LOITER);
 				abort;
 
 			case "murder in Trinsic":
@@ -10493,7 +10493,7 @@ void Func0403 object#(0x403) () {
 		say("Shamino bows slightly.*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFFD);
+		Func092E(SHAMINO);
 	}
 }
 
@@ -10542,10 +10542,10 @@ void Func0404 object#(0x404) () {
 		var0002 = 0xFFFC->get_npc_object();
 		var0003 = Func0908();
 		var0004 = Func08F7(IOLO);
-		var0005 = Func08F7(0xFFFD);
+		var0005 = Func08F7(SHAMINO);
 		var0006 = Func08F7(SPARK);
 		var0007 = IOLO->get_npc_object()->is_dead();
-		var0008 = 0xFFFD->get_npc_object()->is_dead();
+		var0008 = SHAMINO->get_npc_object()->is_dead();
 		var0009 = SPARK->get_npc_object()->is_dead();
 		var000A = 0xFF84->get_npc_object()->is_dead();
 		var000B = 0xFF83->get_npc_object()->is_dead();
@@ -10576,8 +10576,8 @@ void Func0404 object#(0x404) () {
 					var0003,
 					"?\"");
 				if (var0005) {
-					0xFFFD->say("\"Do not be so modest, Sir Dupre. Thou shouldst tell the Avatar that thou hast been knighted since last you met.\"*");
-					0xFFFD->hide();
+					SHAMINO->say("\"Do not be so modest, Sir Dupre. Thou shouldst tell the Avatar that thou hast been knighted since last you met.\"*");
+					SHAMINO->hide();
 					0xFFFC->say("Sir Dupre looks quite embarrassed. \"Well, yes, I would have gotten around to that.\"");
 				} else if (var0004) {
 					IOLO->say("\"Do not be so modest, Sir Dupre. Thou shouldst tell the Avatar that thou hast been knighted since last you met.\"*");
@@ -10731,9 +10731,9 @@ void Func0404 object#(0x404) () {
 					say("\"A sad fate to befall our fine comrade Shamino. He will be sorely missed. We must try and get his remains to a healer. Perhaps he may still be revived.\"");
 				} else if (var0005) {
 					say("Sir Dupre snorts, \"From what I had heard Shamino was all but settled down and retired from the adventuring life.\"*");
-					0xFFFD->say("\"I still have a few wild oats left to sow, thank thee very much.\"*");
+					SHAMINO->say("\"I still have a few wild oats left to sow, thank thee very much.\"*");
 					0xFFFC->say("\"Then it is good to see another member of our old sowing circle once again!\"");
-					0xFFFD->hide();
+					SHAMINO->hide();
 					0xFFFC->show_npc_face(0x0000);
 				} else {
 					say("\"Let us go and find Shamino and make this a proper reunion!\"");
@@ -10936,13 +10936,13 @@ void Func0405 object#(0x405) () {
 				fallthrough;
 
 			case "Shamino":
-				var000C = Func08F7(0xFFFD);
+				var000C = Func08F7(SHAMINO);
 				if (!var000C) {
 					say("\"Oh, I would love to see him. I wonder where he might be.\"");
 				} else {
 					say("\"Shamino, thou dost not look like a 'kid' anymore! What didst happen? Didst thou reach the venerable age of thirty?\"*");
-					0xFFFD->say("\"Hmph. I am still a kid at heart.\"*");
-					0xFFFD->hide();
+					SHAMINO->say("\"Hmph. I am still a kid at heart.\"*");
+					SHAMINO->hide();
 					0xFFFB->say("\"That is a relief.\" She grins cheekily.");
 				}
 				remove("Shamino");
@@ -11400,14 +11400,14 @@ void Func0407 object#(0x407) () {
 				fallthrough;
 
 			case "Shamino":
-				var000C = Func08F7(0xFFFD);
+				var000C = Func08F7(SHAMINO);
 				if (var000C) {
 					say("\"Say, Shamino, art thou still spending thy time dressing in women's clothes?\"*");
-					0xFFFD->say("\"-What-?!?!\"*");
+					SHAMINO->say("\"-What-?!?!\"*");
 					0xFFF9->say("\"Or art thou wasting away thy life in a healer's den, now that thou art in thy middle ages?\"*");
-					0xFFFD->say("\"Careful, friend. Those are fighting words!\"*");
+					SHAMINO->say("\"Careful, friend. Those are fighting words!\"*");
 					0xFFF9->say("Sentri punches Shamino good-naturedly. \"And that is all they are, my dear friend. Words! 'Tis good to see thee!\"");
-					0xFFFD->hide();
+					SHAMINO->hide();
 					0xFFF9->show_npc_face(0x0000);
 				} else {
 					say("\"'Twould be good to share a joke or two with him!\"");
@@ -11651,13 +11651,13 @@ void Func0408 object#(0x408) () {
 				fallthrough;
 
 			case "Shamino":
-				var000C = Func08F7(0xFFFD);
+				var000C = Func08F7(SHAMINO);
 				if (!var000C) {
 					say("\"Perhaps we should go find Shamino and have him join us as well.\"");
 				} else {
 					say("\"Hello, Shamino!\"*");
-					0xFFFD->say("\"Oh, Julia! Good of thee to be joining us again!\"*");
-					0xFFFD->hide();
+					SHAMINO->say("\"Oh, Julia! Good of thee to be joining us again!\"*");
+					SHAMINO->hide();
 					0xFFF8->show_npc_face(0x0000);
 				}
 				remove("Shamino");
@@ -11731,7 +11731,7 @@ void Func0409 object#(0x409) () {
 		var0001 = UI_get_party_list();
 		var0002 = 0xFFF7->get_npc_object();
 		var0003 = Func0908();
-		var0004 = Func08F7(0xFFFD);
+		var0004 = Func08F7(SHAMINO);
 		var0005 = Func08F7(IOLO);
 		var0006 = Func08F7(0xFFFC);
 		add(["name", "job", "bye"]);
@@ -11901,9 +11901,9 @@ void Func0409 object#(0x409) () {
 					say("\"Shamino should be here with us.\"");
 				} else {
 					say("\"Is that a gray hair I see in thine hair, Shamino?\"*");
-					0xFFFD->say("\"It is not! Where?\"*");
+					SHAMINO->say("\"It is not! Where?\"*");
 					0xFFF7->say("\"Perhaps it is but a trick of the light.\"*");
-					0xFFFD->hide();
+					SHAMINO->hide();
 					0xFFF7->show_npc_face(0x0000);
 				}
 				remove("Shamino");
@@ -14350,7 +14350,7 @@ labelFunc0417_000C:
 		var0002 = UI_get_party_list();
 		var0003 = Func08F7(IOLO);
 		var0004 = Func08F7(0xFFFC);
-		var0005 = Func08F7(0xFFFD);
+		var0005 = Func08F7(SHAMINO);
 		0xFFE9->show_npc_face(0x0000);
 		var0006 = false;
 		var0007 = false;
@@ -14561,11 +14561,11 @@ labelFunc0417_000C:
 				say("\"That rascal does not come around very often, though I understand he spends most of his time in Britain these days!\"");
 				if (var0005) {
 					say("\"What dost thou have to say for thyself, Shamino?\"*");
-					0xFFFD->say("\"Mine apologies, milord,\" Shamino says.*");
+					SHAMINO->say("\"Mine apologies, milord,\" Shamino says.*");
 					0xFFE9->say("\"What's this I hear of a woman? An actress? Hmmmm?\"*");
-					0xFFFD->say("Shamino blushes and shuffles his feet.*");
+					SHAMINO->say("Shamino blushes and shuffles his feet.*");
 					0xFFE9->say("\"I suspected as much!\" the ruler says, laughing.");
-					0xFFFD->hide();
+					SHAMINO->hide();
 					0xFFE9->show_npc_face(0x0000);
 				}
 				remove("Shamino");
@@ -15839,7 +15839,7 @@ void Func041E object#(0x41E) () {
 		0xFFE2->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		add(["name", "job", "bye"]);
-		var0001 = Func08F7(0xFFFD);
+		var0001 = Func08F7(SHAMINO);
 		if (gflags[0x006B] || var0001) {
 			add("Shamino");
 		}
@@ -15898,11 +15898,11 @@ void Func041E object#(0x41E) () {
 				fallthrough;
 
 			case "Shamino":
-				var0001 = Func08F7(0xFFFD);
+				var0001 = Func08F7(SHAMINO);
 				if (var0001) {
 					say("\"Poo Poo Head!\" she cries. She then rushes to him and kisses him full on the mouth. Shamino turns red and shuffles his feet.*");
-					0xFFFD->say("\"Not in front of the Avatar, Poo!\"*");
-					0xFFFD->hide();
+					SHAMINO->say("\"Not in front of the Avatar, Poo!\"*");
+					SHAMINO->hide();
 					0xFFE2->say("\"To blazes with the Avatar!\" She kisses him again. \"The Avatar is the last one who will convince thee to settle down.\"");
 				} else {
 					say("\"Dost thou know my beau? He is probably drowning his sorrows at the Blue Boar. The lazy knave! I will not let him go about adventuring. It is time for him to settle down. Thou canst tell him I said so!\"");
@@ -16402,17 +16402,17 @@ void Func0423 object#(0x423) () {
 			case "practice":
 				say("\"My practice grew swiftly. I am a modest man, but I do not mind saying that I was a popular healer.\"");
 				remove("practice");
-				var0001 = Func08F7(0xFFFD);
+				var0001 = Func08F7(SHAMINO);
 				if (var0001) {
-					0xFFFD->say("\"He is probably the best healer in all Britannia. Why, he cured a, er, particular problem I had in no time at all.\"*");
+					SHAMINO->say("\"He is probably the best healer in all Britannia. Why, he cured a, er, particular problem I had in no time at all.\"*");
 					var0002 = Func08F7(IOLO);
 					if (var0002) {
-						0xFFFD->hide();
+						SHAMINO->hide();
 						IOLO->say("\"Oh? What problem was that?\"*");
 						IOLO->hide();
-						0xFFFD->say("\"Never mind. The whole world does not need to know about it.\"*");
+						SHAMINO->say("\"Never mind. The whole world does not need to know about it.\"*");
 					}
-					0xFFFD->hide();
+					SHAMINO->hide();
 					0xFFDD->show_npc_face(0x0000);
 				}
 				fallthrough;
@@ -30667,7 +30667,7 @@ void Func0485 object#(0x485) () {
 	if (event == DOUBLECLICK) {
 		0xFF7B->show_npc_face(0x0000);
 		var0000 = Func0909();
-		var0001 = Func08F7(0xFFFD);
+		var0001 = Func08F7(SHAMINO);
 		var0002 = Func08F7(IOLO);
 		var0003 = Func08F7(0xFFFC);
 		var0004 = Func08F7(SPARK);
@@ -30714,14 +30714,14 @@ void Func0485 object#(0x485) () {
 						0xFF7B->show_npc_face(0x0000);
 					}
 					if (var0001) {
-						0xFFFD->say("\"I, too, am feeling dry. Wouldst thou share thy water with me, milady?\" Constance fills the dipper with water for Shamino and he drinks until water runs down his chin.*");
-						0xFFFD->hide();
+						SHAMINO->say("\"I, too, am feeling dry. Wouldst thou share thy water with me, milady?\" Constance fills the dipper with water for Shamino and he drinks until water runs down his chin.*");
+						SHAMINO->hide();
 						0xFF7B->show_npc_face(0x0000);
 					}
 					if (var0003) {
 						if (var0001) {
-							0xFFFD->say("You see Shamino nudge Dupre. \"Art thou not going to have a drink?\"");
-							0xFFFD->hide();
+							SHAMINO->say("You see Shamino nudge Dupre. \"Art thou not going to have a drink?\"");
+							SHAMINO->hide();
 							0xFFFC->say("\"I shall wait until we find something a bit stronger than water to quench my thirst.\"*");
 							0xFFFC->hide();
 							0xFF7B->show_npc_face(0x0000);
@@ -31606,7 +31606,7 @@ void Func048A object#(0x48A) () {
 	var0000 = Func0908();
 	var0001 = Func0909();
 	var0002 = Func08F7(IOLO);
-	var0003 = Func08F7(0xFFFD);
+	var0003 = Func08F7(SHAMINO);
 	var0004 = Func08F7(0xFFFC);
 	var0005 = UI_wearing_fellowship();
 	if (gflags[0x02CC]) {
@@ -31696,10 +31696,10 @@ void Func048A object#(0x48A) () {
 		case "danger":
 			say("\"Zo far de only danger I haf found down here has been a female fighter. She vas beautiful. Vhen I vent to talk to her she hit me over de head mit her svord. Vhen I voke up she vas gone. I bet she tought she had killed me but mine head is harder dan dat. I vas not even vounded.\"");
 			if (var0003) {
-				0xFFFD->say("Shamino whispers to you. \"Luckily, Gorn was hit in the one spot where he has no feeling whatsoever -- his head!\"*");
+				SHAMINO->say("Shamino whispers to you. \"Luckily, Gorn was hit in the one spot where he has no feeling whatsoever -- his head!\"*");
 				0xFF76->say("\"Hey, vhat are you vhispering about over dere?\"*");
-				0xFFFD->say("\"Oh, nothing. Nothing at all.\"*");
-				0xFFFD->hide();
+				SHAMINO->say("\"Oh, nothing. Nothing at all.\"*");
+				SHAMINO->hide();
 				0xFF76->show_npc_face(0x0000);
 			}
 			remove("danger");
@@ -31996,13 +31996,13 @@ void Func048D object#(0x48D) () {
 			say("You step forward to confront this vile-looking creature and he slowly turns to face you. As his intense gaze locks onto your form, you almost wish you hadn't been so bold.~~ \"",
 				var0000,
 				".\" A sardonic expression comes to his undead features. \"How may I help thee?\" You get the distinct impression that help is the last thing you'll get from the Liche.");
-			var0006 = Func08F7(0xFFFD);
+			var0006 = Func08F7(SHAMINO);
 			var0007 = Func08F7(IOLO);
 			if (var0006) {
-				0xFFFD->say("Shamino steps near you and speaks in a whispered tone.~~\"Do not trust this one, ",
+				SHAMINO->say("Shamino steps near you and speaks in a whispered tone.~~\"Do not trust this one, ",
 					var0001,
 					". Methinks he'll cause naught but evil.\"");
-				0xFFFD->hide();
+				SHAMINO->hide();
 				0xFF73->show_npc_face(0x0000);
 			} else if (var0007) {
 				IOLO->say("Iolo steps near you and speaks in a whispered tone.~~\"Do not trust this one, ",
@@ -33684,7 +33684,7 @@ void Func0497 object#(0x497) () {
 		var0000 = Func08F7(IOLO);
 		var0001 = Func08F7(SPARK);
 		var0002 = Func08F7(0xFFFC);
-		var0003 = Func08F7(0xFFFD);
+		var0003 = Func08F7(SHAMINO);
 		var0004 = Func0909();
 		var0005 = 0xFF69->get_npc_object()->get_schedule_type();
 		var0006 = UI_is_pc_female();
@@ -33709,8 +33709,8 @@ void Func0497 object#(0x497) () {
 					SPARK->hide();
 				}
 				if (var0003) {
-					0xFFFD->say("\"She -doth- look rather inviting, doth she not?\"*");
-					0xFFFD->hide();
+					SHAMINO->say("\"She -doth- look rather inviting, doth she not?\"*");
+					SHAMINO->hide();
 				}
 				if (var0002) {
 					0xFFFC->say("\"My liege has asked thee thy -name-, foul creature!\"*");
@@ -33724,8 +33724,8 @@ void Func0497 object#(0x497) () {
 				say("\"My purpose is to spread love dust all around and welcome thee to Ambrosia! I love thee! Yes, I do!\"");
 				if (var0003) {
 					say("She flutters over Shamino's head.~~\"I love -thee-, as well!\"*");
-					0xFFFD->say("\"If only thou wert a little larger...\"*");
-					0xFFFD->hide();
+					SHAMINO->say("\"If only thou wert a little larger...\"*");
+					SHAMINO->hide();
 					0xFF69->show_npc_face(0x0000);
 				}
 				if (var0001) {
@@ -33810,8 +33810,8 @@ void Func0497 object#(0x497) () {
 					SPARK->hide();
 				}
 				if (var0003) {
-					0xFFFD->say("\"Hey, I think she's cute!\"*");
-					0xFFFD->hide();
+					SHAMINO->say("\"Hey, I think she's cute!\"*");
+					SHAMINO->hide();
 				}
 				if (var0002) {
 					0xFFFC->say("\"If thou wouldst do it, ",
@@ -35200,19 +35200,19 @@ void Func04A1 object#(0x4A1) () {
 				}
 				if (var0004 == var0002) {
 					say("\"Of course, of course,\" he smiles. \"I should have realized that thou wert the Avatar. Why, it must have been, oh, at least, two weeks since thy last visit!\" He winks.*");
-					var0005 = Func08F7(0xFFFD);
+					var0005 = Func08F7(SHAMINO);
 					if (var0005) {
-						0xFFFD->say("\"Thou art a fool! Cannot thy feeble eyes see this is the Avatar?\"*");
-						0xFFFD->hide();
+						SHAMINO->say("\"Thou art a fool! Cannot thy feeble eyes see this is the Avatar?\"*");
+						SHAMINO->hide();
 						0xFF5F->say("\"Yes, yes! I can see that,\" he laughs. \"Then I must be Iolo!\"*");
 						var0006 = Func08F7(IOLO);
-						0xFFFD->show_npc_face(0x0000);
+						SHAMINO->show_npc_face(0x0000);
 						if (var0006) {
 							say("\"No, rogue! He is Iolo!\" He nods to Iolo. \"Thou... art a blind idiot!\"*");
 						} else {
 							say("\"No, rogue, thou art a blind idiot!\"*");
 						}
-						0xFFFD->hide();
+						SHAMINO->hide();
 						0xFF5F->show_npc_face(0x0000);
 					}
 					gflags[0x01F3] = true;
@@ -35882,10 +35882,10 @@ void Func04A5 object#(0x4A5) () {
 
 			case "teeth":
 				say("\"That is the reason for thine offensive mouth odor. I have not seen anything that yellow since the time thy fellow Shamino ran away from a battle in fear.\"");
-				var0005 = Func08F7(0xFFFD);
+				var0005 = Func08F7(SHAMINO);
 				if (var0005) {
-					0xFFFD->say("\"Thou must be mad!\" Shamino turns to you. \"This rogue needs to be taught a lesson.\"*");
-					0xFFFD->hide();
+					SHAMINO->say("\"Thou must be mad!\" Shamino turns to you. \"This rogue needs to be taught a lesson.\"*");
+					SHAMINO->hide();
 					0xFF5B->say("\"And thy friend, Shamino, ",
 						var0000,
 						", has quite a bellicose temper.\"");
@@ -39856,15 +39856,15 @@ void Func04BD object#(0x4BD) () {
 		if (var0002) {
 			say("\"To greet you, human,\" the gargoyle says to Dupre. \"To ask how well the study is progressing?\"");
 			0xFFFC->say("\"Why 'tis progressing nicely, friend Forbrak.\"");
-			var0003 = Func08F7(0xFFFD);
+			var0003 = Func08F7(SHAMINO);
 			if (var0003 && (!gflags[0x024E])) {
 				0xFF43->hide();
-				0xFFFD->say("\"-What- study?\"");
+				SHAMINO->say("\"-What- study?\"");
 				0xFFFC->say("\"Why, er, surely thou hast heard of the famous guides compiled for Brommer!\"");
-				0xFFFD->say("\"Aye, I have. But I'll be tarred if there is one detailing various drinking establishments!\"");
+				SHAMINO->say("\"Aye, I have. But I'll be tarred if there is one detailing various drinking establishments!\"");
 				0xFFFC->say("\"Well, yes, er, 'tis, ah, something new. Now, how about a drink!\"");
-				0xFFFD->say("\"New? 'Tis about as new as my backside...,\" mutters Shamino.");
-				0xFFFD->hide();
+				SHAMINO->say("\"New? 'Tis about as new as my backside...,\" mutters Shamino.");
+				SHAMINO->hide();
 			}
 			0xFFFC->hide();
 			0xFF43->show_npc_face(0x0000);
@@ -41321,7 +41321,7 @@ void Func04C6 object#(0x4C6) () {
 		var0001 = Func0908();
 		var0002 = "Avatar";
 		var0003 = Func08F7(IOLO);
-		var0004 = Func08F7(0xFFFD);
+		var0004 = Func08F7(SHAMINO);
 		add(["name", "job", "bye"]);
 		if (gflags[0x025A]) {
 			var0005 = var0001;
@@ -45677,10 +45677,10 @@ void Func04E5 object#(0x4E5) () {
 			say("You see a fat, cheerful-looking merchant.");
 			if (var0001 == TEND_SHOP) {
 				say("\"Hello, hello my friend! Thou dost look like thou needest to spend money!\"*");
-				var0003 = Func08F7(0xFFFD);
+				var0003 = Func08F7(SHAMINO);
 				if (var0003) {
-					0xFFFD->say("\"This place looks quite well-off.\"*");
-					0xFFFD->hide();
+					SHAMINO->say("\"This place looks quite well-off.\"*");
+					SHAMINO->hide();
 					var0004 = Func08F7(IOLO);
 					if (var0004) {
 						IOLO->say("\"The entire island is very opulent. It is not the same island we once knew.\"*");
@@ -46905,7 +46905,7 @@ void Func04EF object#(0x4EF) () {
 	var0000 = Func0909();
 	var0001 = Func08F7(0xFF0D);
 	var0002 = Func08F7(IOLO);
-	var0003 = Func08F7(0xFFFD);
+	var0003 = Func08F7(SHAMINO);
 	var0004 = Func08F7(0xFFFC);
 	if (!gflags[0x02BC]) {
 		say("Before you is a skinny man with a silly smile on his face. He is holding a lantern in one hand and a dirty spoon in the other.");
@@ -47535,7 +47535,7 @@ void Func04F3 object#(0x4F3) () {
 	var0000 = Func0909();
 	var0001 = Func08F7(0xFF11);
 	var0002 = Func08F7(IOLO);
-	var0003 = Func08F7(0xFFFD);
+	var0003 = Func08F7(SHAMINO);
 	var0004 = Func08F7(0xFFFC);
 	if (!gflags[0x02BD]) {
 		say("You see before you a short, roly-poly man with a pompous smirk on his face. He is holding a lantern in one hand and a dirty spoon in the other.");
@@ -49644,7 +49644,7 @@ void Func04FE object#(0x4FE) () {
 					say("Lasher slowly shakes his head. \"Thou dost not have to brag in order to impress me, or fear any sort of verbal chastisements, honestly. By the way, I have an itch right betwixt my shoulder blades. Wouldst thou mind scratching it for me?\" Lasher stretches out toward you. \"Thank thee so much.\"");
 					var0003 = UI_is_pc_female();
 					var0004 = Func08F7(IOLO);
-					var0005 = Func08F7(0xFFFD);
+					var0005 = Func08F7(SHAMINO);
 					var0006 = Func08F7(0xFFFC);
 					if (!var0003) {
 						if (var0004) {
@@ -49653,8 +49653,8 @@ void Func04FE object#(0x4FE) () {
 							0xFF02->show_npc_face(0x0000);
 						}
 						if (var0005) {
-							0xFFFD->say("\"No, it is perfectly understandable. Thou hast been so busy lately,\" says Shamino. You sense he is struggling to maintain a straight face.*");
-							0xFFFD->hide();
+							SHAMINO->say("\"No, it is perfectly understandable. Thou hast been so busy lately,\" says Shamino. You sense he is struggling to maintain a straight face.*");
+							SHAMINO->hide();
 							0xFF02->show_npc_face(0x0000);
 						}
 						if (var0006) {
@@ -50696,8 +50696,8 @@ void Func0610 object#(0x610) () {
 	if (IOLO->get_item_flag(ASLEEP)) {
 		var0008 = 0x0000;
 	}
-	var0009 = Func08F7(0xFFFD);
-	if (0xFFFD->get_item_flag(ASLEEP)) {
+	var0009 = Func08F7(SHAMINO);
+	if (SHAMINO->get_item_flag(ASLEEP)) {
 		var0009 = 0x0000;
 	}
 	var000A = Func08F7(0xFFFC);
@@ -50718,8 +50718,8 @@ void Func0610 object#(0x610) () {
 		IOLO->hide();
 	}
 	if (var0009) {
-		0xFFFD->say("\"Thy recovery is a miracle! 'Twould have been a severe blow for this world to lose its Avatar.~~\"When at last thou wert found, thy body was being taken to this place in a wagon driven by two hooded Fellowship members.~~\"Thou hast suffered through a terrible ordeal and travelled far. Perhaps thou shouldst rest...\"*");
-		0xFFFD->hide();
+		SHAMINO->say("\"Thy recovery is a miracle! 'Twould have been a severe blow for this world to lose its Avatar.~~\"When at last thou wert found, thy body was being taken to this place in a wagon driven by two hooded Fellowship members.~~\"Thou hast suffered through a terrible ordeal and travelled far. Perhaps thou shouldst rest...\"*");
+		SHAMINO->hide();
 	}
 	if (var000A) {
 		0xFFFC->say("\"The Fellowship members who brought thee to this place did not speak once during the entire journey.~~\"But it seems they did the right thing in bringing thee here for thou hast been revived!~~\"Let us all have a drink in celebration! We will be ready to leave whenever thou dost wish it.\"*");
@@ -51120,37 +51120,37 @@ void Func0621 object#(0x621) () {
 		}
 		if (var0001 == 0x0009) {
 			var0000 = "This is Dungeon Destard.";
-			var0002 = 0xFFFD;
+			var0002 = SHAMINO;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x000A) {
 			var0000 = "This is Dungeon Despise.";
-			var0002 = 0xFFFD;
+			var0002 = SHAMINO;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x000B) {
 			var0000 = "This is Dungeon Deceit.";
-			var0002 = 0xFFFD;
+			var0002 = SHAMINO;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x000C) {
 			var0000 = "This is Bee Cave.";
-			var0002 = 0xFFFD;
+			var0002 = SHAMINO;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x000D) {
 			var0000 = "This is the Minoc Mine.";
-			var0002 = 0xFFFD;
+			var0002 = SHAMINO;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x000E) {
 			var0000 = "This is the Vesper Mine.";
-			var0002 = 0xFFFD;
+			var0002 = SHAMINO;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x000F) {
 			var0000 = "This looks interesting.";
-			var0002 = 0xFFFD;
+			var0002 = SHAMINO;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x0010) {
@@ -51225,42 +51225,42 @@ void Func0621 object#(0x621) () {
 		}
 		if (var0001 == 0x001E) {
 			var0000 = "The Shrine of Compassion!";
-			var0002 = 0xFFFD;
+			var0002 = SHAMINO;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x001F) {
 			var0000 = "The Shrine of Honesty!";
-			var0002 = 0xFFFD;
+			var0002 = SHAMINO;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x0020) {
 			var0000 = "The Shrine of Justice!";
-			var0002 = 0xFFFD;
+			var0002 = SHAMINO;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x0021) {
 			var0000 = "The Shrine of Spirituality!";
-			var0002 = 0xFFFD;
+			var0002 = SHAMINO;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x0022) {
 			var0000 = "The Shrine of Honor!";
-			var0002 = 0xFFFD;
+			var0002 = SHAMINO;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x0023) {
 			var0000 = "The Shrine of Valor!";
-			var0002 = 0xFFFD;
+			var0002 = SHAMINO;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x0024) {
 			var0000 = "The Shrine of Sacrifice!";
-			var0002 = 0xFFFD;
+			var0002 = SHAMINO;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x0025) {
 			var0000 = "The Shrine of Humility!";
-			var0002 = 0xFFFD;
+			var0002 = SHAMINO;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x0026) {
@@ -52191,11 +52191,11 @@ void Func0633 object#(0x633) () {
 				gflags[0x02EB] = true;
 				return;
 			}
-			if (0xFFFD->get_item_flag(IN_PARTY) && Func0937(0xFFFD)) {
-				0xFFFD->item_say("@I am leaving!@");
+			if (SHAMINO->get_item_flag(IN_PARTY) && Func0937(SHAMINO)) {
+				SHAMINO->item_say("@I am leaving!@");
 				gflags[0x02EC] = true;
-				0xFFFD->remove_from_party();
-				Func093F(0xFFFD, WANDER);
+				SHAMINO->remove_from_party();
+				Func093F(SHAMINO, WANDER);
 				return;
 			}
 			if (IOLO->get_item_flag(IN_PARTY) && Func0937(IOLO)) {
@@ -63617,9 +63617,9 @@ var Func0825 0x825 (var var0000, var var0001, var var0002) {
 			var0004 = FACE_SOUTH;
 		}
 		if (var0000[var0002] == var0001[var0002]) {
-			var0005 = 0x0004;
+			var0005 = 4;
 		} else {
-			var0005 = 0x0003;
+			var0005 = 3;
 		}
 	} else {
 		if (var0002 == 0x0001) {
@@ -63630,7 +63630,7 @@ var Func0825 0x825 (var var0000, var var0001, var var0002) {
 			var0003 = FACE_SOUTH;
 			var0004 = FACE_NORTH;
 		}
-		var0005 = 0xFFFD;
+		var0005 = -3;
 	}
 	var0000[var0002] += var0005;
 	if (AVATAR->get_npc_prop(HEALTH) > 0) {
@@ -63742,8 +63742,8 @@ var Func0829 0x829 (var var0000) {
 	var var0009;
 	var var000A;
 
-	var0001 = [0xFFFD, 0x0000, 0x0001, 0x0000];
-	var0002 = [0x0000, 0xFFFD, 0x0000, 0x0001];
+	var0001 = [-3,  0,  1,  0];
+	var0002 = [ 0, -3,  0,  1];
 	var0003 = [0x0096, 0x0096, 0x030D, 0x030D];
 	var0004 = [0x02A8];
 	var0005 = var0000->get_item_shape();
@@ -63754,13 +63754,13 @@ var Func0829 0x829 (var var0000) {
 	var0009[0x0002] = var0002[(var0006 + 0x0001)];
 	var0009[0x0003] = 0x0001;
 	if (var0005 == var0008) {
-		if (Func082C(var0000, var0007, 0xFFFD, var0004)) {
+		if (Func082C(var0000, var0007, -3, var0004)) {
 			return false;
 		}
 		var0007 = Func082D(var0007, var0009, var0005);
 	} else {
 		var0007 = Func082D(var0007, var0009, var0005);
-		if (Func082C(var0000, var0007, 0xFFFD, var0004)) {
+		if (Func082C(var0000, var0007, -3, var0004)) {
 			return false;
 		}
 	}
@@ -65458,7 +65458,7 @@ void Func084F 0x84F () {
 		0xFFDE->hide();
 	}
 	var0002 = Func08F7(IOLO);
-	var000D = Func08F7(0xFFFD);
+	var000D = Func08F7(SHAMINO);
 	if (var000D && var0002) {
 		IOLO->say("You notice Iolo is whispering to Shamino. \"I do not think that ",
 			var0000,
@@ -65466,7 +65466,7 @@ void Func084F 0x84F () {
 			var0001,
 			" cannot be dissuaded. Perhaps thou shouldst give it a try.\"");
 		IOLO->hide();
-		0xFFFD->say("\"All right, I shall give it a try.\" He nudges you and whispers. \"Perhaps we should get out of here, ",
+		SHAMINO->say("\"All right, I shall give it a try.\" He nudges you and whispers. \"Perhaps we should get out of here, ",
 			var0001,
 			", before one of us does something they may later regret? Let us leave these premises, all right?\"");
 		var000E = Func090A();
@@ -65475,7 +65475,7 @@ void Func084F 0x84F () {
 			abort;
 		}
 		say("\"Then I guess it is too late for I already regret coming here.\"*");
-		0xFFFD->hide();
+		SHAMINO->hide();
 	}
 	0xFFE6->say("\"Now is the time to welcome the newest member of The Fellowship to sit at our table.\" Batlin beckons you to join him at the podium.");
 	say("He pours a glass of wine into a crystal goblet and takes a sip.");
@@ -65489,10 +65489,10 @@ void Func084F 0x84F () {
 			var0011 = "he";
 		}
 		if (var000F) {
-			0xFFFD->say("You hear Shamino desperately whispering to Dupre as they stand behind you. \"Dupre, we are having no success in showing the Avatar the mistake ",
+			SHAMINO->say("You hear Shamino desperately whispering to Dupre as they stand behind you. \"Dupre, we are having no success in showing the Avatar the mistake ",
 				var0011,
 				" must surely be making. Thou art our last hope.\"");
-			0xFFFD->hide();
+			SHAMINO->hide();
 			0xFFFC->say("You feel a tapping on your shoulder and you turn to see Dupre as he whispers in your ear. \"I know a much better place to get a drink than this one. Perhaps thou wouldst like to join thy comrades there?\"");
 			var0012 = Func090A();
 			if (var0012) {
@@ -65609,10 +65609,10 @@ void Func0850 0x850 () {
 		IOLO->say("\"'Tis a sad thing to see so many people who have nothing else better in their lives than blindly following this dubious spiritual leader.\"*");
 		IOLO->hide();
 	}
-	var000C = Func08F7(0xFFFD);
+	var000C = Func08F7(SHAMINO);
 	if (var000C) {
-		0xFFFD->say("\"'Tis a sad thing that Britannia has fallen so far as to leave itself open to a group like this Fellowship.\"*");
-		0xFFFD->hide();
+		SHAMINO->say("\"'Tis a sad thing that Britannia has fallen so far as to leave itself open to a group like this Fellowship.\"*");
+		SHAMINO->hide();
 	}
 	var000D = Func08F7(0xFFFC);
 	if (var000D) {
@@ -68150,10 +68150,10 @@ void Func087B 0x87B () {
 		IOLO->say("\"Elynor is certainly going out of her way to make them feel like they are persecuted,\" says Iolo.*");
 		IOLO->hide();
 	}
-	var0007 = Func08F7(0xFFFD);
+	var0007 = Func08F7(SHAMINO);
 	if (var0007) {
-		0xFFFD->say("\"These Fellowship members seem fixated upon their own personal gain and very little else,\" says Shamino.*");
-		0xFFFD->hide();
+		SHAMINO->say("\"These Fellowship members seem fixated upon their own personal gain and very little else,\" says Shamino.*");
+		SHAMINO->hide();
 	}
 	var0008 = Func08F7(0xFFFC);
 	if (var0008) {
@@ -69099,8 +69099,8 @@ void Func088B 0x88B () {
 
 	var0000 = AVATAR->find_nearby(0x02EC, 0x000A, MASK_NONE);
 	var0001 = 0x000F;
-	var0002 = 0xFFFD;
-	var0003 = 0xFFFD;
+	var0002 = -3;
+	var0003 = -3;
 	UI_earthquake(var0001);
 	var0004 = var0000->get_object_position();
 	UI_sprite_effect(ANIMATION_BIG_BLAST, (var0004[0x0001] + var0002), (var0004[0x0002] + var0003), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
@@ -74947,7 +74947,7 @@ void Func08EC 0x8EC () {
 
 	var0000 = Func08F7(SPARK);
 	var0001 = Func08F7(IOLO);
-	var0002 = Func08F7(0xFFFD);
+	var0002 = Func08F7(SHAMINO);
 	say("\"Hubert the Lion was haughty and vain ~And especially proud of his elegant mane. ~But conceit of this sort isn't proper at all ~And Hubert the Lion was due for a fall.");
 	say("One day as he sharpened his claws on a rock ~He received a most horrible, terrible shock. ~A flaming hot spark flew up into the air, ~Came down on his head and ignited his hair.");
 	say("With a roar of surprise he took off like a streak, ~Away through the jungle to Zamboozi Creek. ~He leaped in kersplash! with a shower of bubbles, ~And came bobbing up with a head full of stubbles.");
@@ -75452,8 +75452,8 @@ var Func08F5 0x8F5 (var var0000, var var0001) {
 			say("\"Thy good health, sir. Many campaigns sit upon thy brow. It is an honor.\"");
 			IOLO->say("\"Avatar, this stranger grows upon me by the moment. Surely he would be a boon travelling companion.\"");
 			var000D = 0x0000;
-			if (Func08F7(0xFFFD)) {
-				var000D = 0xFFFD;
+			if (Func08F7(SHAMINO)) {
+				var000D = SHAMINO;
 			}
 			if (Func08F7(0xFFFC)) {
 				var000D = 0xFFFC;
@@ -75470,9 +75470,9 @@ var Func08F5 0x8F5 (var var0000, var var0001) {
 			var000C = true;
 			var0007 = true;
 		}
-		if (var000B == 0xFFFD) {
+		if (var000B == SHAMINO) {
 			say("\"How art thou, Shamino? Thy woodcraft is renowned in Britannia.\"");
-			0xFFFD->say("\"Renown follows those who travel with the Avatar. I thank thee.\"");
+			SHAMINO->say("\"Renown follows those who travel with the Avatar. I thank thee.\"");
 			0xFFF6->show_npc_face(0x0000);
 			var000C = true;
 			var0007 = true;
@@ -75706,7 +75706,7 @@ var Func0902 0x902 () {
 	var var0003;
 	var var0004;
 
-	var0000 = [IOLO, 0xFFFD, 0xFFFC, 0xFFFB, 0xFFF9, 0xFFF8, 0xFFF7, SPARK, 0xFFF6];
+	var0000 = [IOLO, SHAMINO, 0xFFFC, 0xFFFB, 0xFFF9, 0xFFF8, 0xFFF7, SPARK, 0xFFF6];
 	var0001 = UI_get_party_list();
 	for (var0004 in var0000 with var0002 to var0003) {
 		if (var0004->get_npc_object() in var0001) {
@@ -76358,7 +76358,7 @@ void Func0927 0x927 (var var0000) {
 	if (var0001 == 0x0000) {
 		Func08FF(["I bet that would work much better if thou wouldst put some liquid in it..."]);
 		Func0903(0xFFFC, "Perhaps some BEER for instance.");
-		Func0903(0xFFFD, "Or maybe some WINE>>>");
+		Func0903(SHAMINO, "Or maybe some WINE>>>");
 	} else {
 		var0000->set_item_frame(0x0000);
 		var0002 = ["water", "blood", "wine", "beer", "ale", "stuff", "stuff", "stuff", "stuff", "stuff", "last stuff"];
@@ -76400,7 +76400,7 @@ void Func0928 0x928 (var var0000) {
 	if (var0001 == 0x0000) {
 		Func08FF(["I bet that would work much better if thou wouldst put some liquid in it..."]);
 		Func0903(0xFFFC, "Perhaps some BEER for instance.");
-		Func0903(0xFFFD, "Or maybe some WINE>>>");
+		Func0903(SHAMINO, "Or maybe some WINE>>>");
 	} else {
 		var0002 = ["water", "blood", "wine", "beer", "ale", "stuff", "stuff", "stuff", "stuff", "stuff", "laststuff"];
 		var0003 = 0x0000;

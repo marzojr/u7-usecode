@@ -1125,18 +1125,18 @@ void Func00E1 shape#(0xE1) () {
 	}
 	var0000 = Func0906(item);
 	if (var0000 == 0x0001) {
-		if (Func0908(item, 0x0204, 0x0000, 0x0003, 0x0000, 0x0005)) {
+		if (Func0908(item, 0x0204, 0x0000, 3, 0, 0x0005)) {
 			Func0902(item, 0x00E1);
-			Func0909(item, 0x01D7, 0x0001, 0x0001, 0x00F6, 0x0000, 0x0000, 0x0000, 0x0007);
+			Func0909(item, 0x01D7, 0x0001, 0x0001, 0x00F6, 0x0000, 0, 0, 0x0007);
 			UI_play_sound_effect2(0x0069, item);
 		} else {
 			Func0903();
 		}
 	}
 	if (var0000 == 0x0000) {
-		if (Func0908(item, 0x0204, 0x0001, 0x0000, 0xFFFD, 0x0007)) {
+		if (Func0908(item, 0x0204, 0x0001, 0, -3, 0x0007)) {
 			Func0902(item, 0x00E1);
-			Func0909(item, 0x01D7, 0x0000, 0x0002, 0x00F6, 0x0001, 0x0000, 0x0000, 0x0007);
+			Func0909(item, 0x01D7, 0x0000, 0x0002, 0x00F6, 0x0001, 0, 0, 0x0007);
 			UI_play_sound_effect2(0x006A, item);
 		} else {
 			Func0903();
@@ -2334,7 +2334,7 @@ void Func00E6 shape#(0xE6) () {
 		0xFFEB->run_schedule();
 		0xFFEB->clear_item_flag(ASLEEP);
 		Func097F(0xFFEB, "@Tar gorlfog!@", 0x0003);
-		if ((var000C < 0x000F) && ((!0xFFFD->npc_nearby()) && ((!DUPRE->npc_nearby()) && ((!SHAMINO->npc_nearby()) && (!0xFFDE->npc_nearby()))))) {
+		if ((var000C < 0x000F) && ((!IOLO->npc_nearby()) && ((!DUPRE->npc_nearby()) && ((!SHAMINO->npc_nearby()) && (!0xFFDE->npc_nearby()))))) {
 			say("\"I am so glad that thou hast agreed to meet me here.\"");
 			UI_play_music(0x001F, Func09A0(0x0005, 0x0001));
 			0xFFEC->set_npc_id(0x0001);
@@ -2663,18 +2663,18 @@ void Func00F6 shape#(0xF6) () {
 	}
 	var0000 = Func0906(item);
 	if (var0000 == 0x0001) {
-		if (Func0908(item, 0x01D7, 0x0000, 0x0000, 0x0000, 0x0007)) {
+		if (Func0908(item, 0x01D7, 0x0000,  0,  0, 0x0007)) {
 			Func0902(item, 0x00F6);
-			Func0909(item, 0x0204, 0x0001, 0x0002, 0x00E1, 0x0000, 0x0000, 0x0003, 0x0001);
+			Func0909(item, 0x0204, 0x0001, 0x0002, 0x00E1, 0x0000,  0,  3, 0x0001);
 			UI_play_sound_effect2(0x0069, item);
 		} else {
 			Func0903();
 		}
 	}
 	if (var0000 == 0x0000) {
-		if (Func0908(item, 0x01D7, 0x0001, 0x0000, 0x0000, 0x0007)) {
+		if (Func0908(item, 0x01D7, 0x0001,  0,  0, 0x0007)) {
 			Func0902(item, 0x00F6);
-			Func0909(item, 0x0204, 0x0000, 0x0001, 0x00E1, 0x0001, 0xFFFD, 0x0000, 0x0007);
+			Func0909(item, 0x0204, 0x0000, 0x0001, 0x00E1, 0x0001, -3,  0, 0x0007);
 			UI_play_sound_effect2(0x006A, item);
 		} else {
 			Func0903();
@@ -2856,7 +2856,7 @@ void Func00FA shape#(0xFA) () {
 			while (var0004 == get_item_quality()) {
 				var0004 = UI_get_random(0x0009);
 			}
-			if (gflags[0x00D4] && (gflags[0x00D5] && (gflags[0x00D3] && ((!SHAMINO->get_item_flag(SI_ZOMBIE)) && ((!0xFFFD->get_item_flag(SI_ZOMBIE)) && ((!DUPRE->get_item_flag(SI_ZOMBIE)) && (!0xFF29->get_item_flag(MET)))))))) {
+			if (gflags[0x00D4] && (gflags[0x00D5] && (gflags[0x00D3] && ((!SHAMINO->get_item_flag(SI_ZOMBIE)) && ((!IOLO->get_item_flag(SI_ZOMBIE)) && ((!DUPRE->get_item_flag(SI_ZOMBIE)) && (!0xFF29->get_item_flag(MET)))))))) {
 				var0004 = 0x000A;
 			}
 			var0005 = set_item_quality(var0004);
@@ -3691,16 +3691,16 @@ void Func010E shape#(0x10E) () {
 	}
 	var0002 = Func0906(item);
 	if (var0002 == 0x0001) {
-		if (Func0908(item, 0x0178, 0x0000, 0x0000, 0x0000, 0x0007)) {
-			Func0909(item, 0x01B0, 0x0001, 0x0001, 0x01B1, 0x0000, 0x0000, 0x0003, 0x0005);
+		if (Func0908(item, 0x0178, 0x0000,  0,  0, 0x0007)) {
+			Func0909(item, 0x01B0, 0x0001, 0x0001, 0x01B1, 0x0000,  0,  3, 0x0005);
 			UI_play_sound_effect2(0x001F, item);
 		} else {
 			Func0903();
 		}
 	}
 	if (var0002 == 0x0000) {
-		if (Func0908(item, 0x0178, 0x0001, 0x0000, 0x0000, 0x0007)) {
-			Func0909(item, 0x01B0, 0x0000, 0x0002, 0x01B1, 0x0001, 0xFFFD, 0x0000, 0x0007);
+		if (Func0908(item, 0x0178, 0x0001,  0,  0, 0x0007)) {
+			Func0909(item, 0x01B0, 0x0000, 0x0002, 0x01B1, 0x0001, -3,  0, 0x0007);
 			UI_play_sound_effect2(0x0020, item);
 		} else {
 			Func0903();
@@ -5471,16 +5471,16 @@ void Func0178 shape#(0x178) () {
 	var0000 = get_item_quality();
 	var0001 = Func0906(item);
 	if (var0001 == 0x0001) {
-		if (Func0908(item, 0x010E, 0x0000, 0x0000, 0x0000, 0x0007)) {
-			Func0909(item, 0x01B1, 0x0001, 0x0002, 0x01B0, 0x0000, 0x0003, 0x0000, 0x0001);
+		if (Func0908(item, 0x010E, 0x0000,  0,  0, 0x0007)) {
+			Func0909(item, 0x01B1, 0x0001, 0x0002, 0x01B0, 0x0000,  3,  0, 0x0001);
 			UI_play_sound_effect2(0x001F, item);
 		} else {
 			Func0903();
 		}
 	}
 	if (var0001 == 0x0000) {
-		if (Func0908(item, 0x010E, 0x0001, 0x0000, 0x0000, 0x0007)) {
-			Func0909(item, 0x01B1, 0x0000, 0x0001, 0x01B0, 0x0001, 0x0000, 0xFFFD, 0x0007);
+		if (Func0908(item, 0x010E, 0x0001,  0,  0, 0x0007)) {
+			Func0909(item, 0x01B1, 0x0000, 0x0001, 0x01B0, 0x0001,  0, -3, 0x0007);
 			UI_play_sound_effect2(0x0020, item);
 		} else {
 			Func0903();
@@ -5518,15 +5518,15 @@ void Func0178 shape#(0x178) () {
 	}
 	if ((var0000 == 0x0006) || (var0000 == 0x0007)) {
 		if (var0000 == 0x0006) {
-			var0006 = 0x0003;
+			var0006 =  3;
 		} else {
-			var0006 = 0xFFFD;
+			var0006 = -3;
 			UI_play_music(0x0018, Func09A0(0x0005, 0x0001));
 		}
 		var0007 = get_distance(AVATAR);
 		AVATAR->set_item_flag(DONT_MOVE);
 		var0004[0x0001] += var0006;
-		var0004[0x0002] -= 0x0003;
+		var0004[0x0002] -= 3;
 		AVATAR->si_path_run_usecode(var0004, PATH_SUCCESS, item, Func07F6, true);
 		UI_play_sound_effect(0x0039);
 		var0003 = script item after (var0007 + 0x0002) ticks {
@@ -6346,16 +6346,16 @@ void Func01B0 shape#(0x1B0) () {
 	}
 	var0002 = Func0906(item);
 	if (var0002 == 0x0001) {
-		if (Func0908(item, 0x01B1, 0x0000, 0x0000, 0x0003, 0x0005)) {
-			Func0909(item, 0x010E, 0x0001, 0x0001, 0x0178, 0x0000, 0x0000, 0x0000, 0x0007);
+		if (Func0908(item, 0x01B1, 0x0000,  0,  3, 0x0005)) {
+			Func0909(item, 0x010E, 0x0001, 0x0001, 0x0178, 0x0000,  0,  0, 0x0007);
 			UI_play_sound_effect2(0x001F, item);
 		} else {
 			Func0903();
 		}
 	}
 	if (var0002 == 0x0000) {
-		if (Func0908(item, 0x01B1, 0x0001, 0xFFFD, 0x0000, 0x0007)) {
-			Func0909(item, 0x010E, 0x0000, 0x0002, 0x0178, 0x0001, 0x0000, 0x0000, 0x0007);
+		if (Func0908(item, 0x01B1, 0x0001, -3,  0, 0x0007)) {
+			Func0909(item, 0x010E, 0x0000, 0x0002, 0x0178, 0x0001,  0,  0, 0x0007);
 			UI_play_sound_effect2(0x0020, item);
 		} else {
 			Func0903();
@@ -6384,16 +6384,16 @@ void Func01B1 shape#(0x1B1) () {
 	}
 	var0000 = Func0906(item);
 	if (var0000 == 0x0001) {
-		if (Func0908(item, 0x01B0, 0x0000, 0x0003, 0x0000, 0x0001)) {
-			Func0909(item, 0x0178, 0x0001, 0x0002, 0x010E, 0x0000, 0x0000, 0x0000, 0x0007);
+		if (Func0908(item, 0x01B0, 0x0000,  3,  0, 0x0001)) {
+			Func0909(item, 0x0178, 0x0001, 0x0002, 0x010E, 0x0000,  0,  0, 0x0007);
 			UI_play_sound_effect2(0x001F, item);
 		} else {
 			Func0903();
 		}
 	}
 	if (var0000 == 0x0000) {
-		if (Func0908(item, 0x01B0, 0x0001, 0x0000, 0xFFFD, 0x0007)) {
-			Func0909(item, 0x0178, 0x0000, 0x0001, 0x010E, 0x0001, 0x0000, 0x0000, 0x0007);
+		if (Func0908(item, 0x01B0, 0x0001,  0, -3, 0x0007)) {
+			Func0909(item, 0x0178, 0x0000, 0x0001, 0x010E, 0x0001,  0,  0, 0x0007);
 			UI_play_sound_effect2(0x0020, item);
 		} else {
 			Func0903();
@@ -7543,7 +7543,7 @@ void Func01C7 shape#(0x1C7) () {
 			};
 			Func097F(0xFFEA, "@Poor fool...@", 0x0014);
 			Func097F(DUPRE, "@Keep thy wits, Avatar!@", 0x0019);
-			Func097F(0xFFFD, "@Do not despair!@", 0x0014);
+			Func097F(IOLO, "@Do not despair!@", 0x0014);
 			Func097F(SHAMINO, "@We shall wait for thee!@", 0x000C);
 			Func097F(0xFFDE, (((("@" + var0004) + " is a dead ") + var0005) + "!@"), 0x0000);
 			Func097F(0xFFD6, "@He made me do it...@", 0x000C);
@@ -7835,8 +7835,8 @@ void Func01C7 shape#(0x1C7) () {
 			say("\"We have convened this day to hear the case of ",
 				var0006,
 				", who hath committed treason. This criminal is charged with lusting after the mistress of the MageLord.\"");
-			if (0xFFFD->npc_nearby()) {
-				0xFFFD->show_npc_face1(0x0000);
+			if (IOLO->npc_nearby()) {
+				IOLO->show_npc_face1(0x0000);
 				say("\"Since when is this a crime? What doth the lady say?\"");
 				UI_remove_npc_face1();
 				0x0000->set_conversation_slot();
@@ -7883,9 +7883,9 @@ void Func01C7 shape#(0x1C7) () {
 			if (((var000A[0x0001] > 0x0859) && ((var000A[0x0001] < 0x0AB4) && ((var000A[0x0002] > 0x0500) && (var000A[0x0002] < 0x0994)))) || (((var000A[0x0001] > 0x0762) && ((var000A[0x0001] < 0x085B) && ((var000A[0x0002] > 0x0585) && (var000A[0x0002] < 0x0957)))) || (((var000A[0x0001] > 0x0744) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x06F9) && (var000A[0x0002] < 0x073D)))) || (((var000A[0x0001] > 0x071E) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x0828) && (var000A[0x0002] < 0x088D)))) || (((var000A[0x0001] > 0x06FC) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x07A6) && (var000A[0x0002] < 0x082A)))) || ((var000A[0x0001] > 0x074C) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x0719) && (var000A[0x0002] < 0x07A8))))))))) {
 				0xFFDE->set_npc_id(0x001E);
 			}
-			var000A = 0xFFFD->get_object_position();
+			var000A = IOLO->get_object_position();
 			if (((var000A[0x0001] > 0x0859) && ((var000A[0x0001] < 0x0AB4) && ((var000A[0x0002] > 0x0500) && (var000A[0x0002] < 0x0994)))) || (((var000A[0x0001] > 0x0762) && ((var000A[0x0001] < 0x085B) && ((var000A[0x0002] > 0x0585) && (var000A[0x0002] < 0x0957)))) || (((var000A[0x0001] > 0x0744) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x06F9) && (var000A[0x0002] < 0x073D)))) || (((var000A[0x0001] > 0x071E) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x0828) && (var000A[0x0002] < 0x088D)))) || (((var000A[0x0001] > 0x06FC) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x07A6) && (var000A[0x0002] < 0x082A)))) || ((var000A[0x0001] > 0x074C) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x0719) && (var000A[0x0002] < 0x07A8))))))))) {
-				0xFFFD->set_npc_id(0x001E);
+				IOLO->set_npc_id(0x001E);
 			}
 			var000A = DUPRE->get_object_position();
 			if (((var000A[0x0001] > 0x0859) && ((var000A[0x0001] < 0x0AB4) && ((var000A[0x0002] > 0x0500) && (var000A[0x0002] < 0x0994)))) || (((var000A[0x0001] > 0x0762) && ((var000A[0x0001] < 0x085B) && ((var000A[0x0002] > 0x0585) && (var000A[0x0002] < 0x0957)))) || (((var000A[0x0001] > 0x0744) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x06F9) && (var000A[0x0002] < 0x073D)))) || (((var000A[0x0001] > 0x071E) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x0828) && (var000A[0x0002] < 0x088D)))) || (((var000A[0x0001] > 0x06FC) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x07A6) && (var000A[0x0002] < 0x082A)))) || ((var000A[0x0001] > 0x074C) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x0719) && (var000A[0x0002] < 0x07A8))))))))) {
@@ -8166,7 +8166,7 @@ void Func01D1 shape#(0x1D1) () {
 		if (gflags[0x0006]) {
 			if (gflags[0x0078]) {
 				if (gflags[0x018B] && (!gflags[0x0190])) {
-					0xFFFD->show_npc_face0(0x0000);
+					IOLO->show_npc_face0(0x0000);
 					var0001 = UI_get_music_track();
 					gflags[0x0190] = true;
 					say("\"Wait, sailor! I shall sing thee mine heart's one song... I fear that it is a sad one --\"");
@@ -8194,7 +8194,7 @@ void Func01D1 shape#(0x1D1) () {
 					abort;
 				}
 			} else {
-				0xFFFD->show_npc_face0(0x0000);
+				IOLO->show_npc_face0(0x0000);
 				if (!gflags[0x0038]) {
 					say("\"Please free thine old friend! There hath been a terrible mistake, ",
 						var0000,
@@ -8204,13 +8204,13 @@ void Func01D1 shape#(0x1D1) () {
 				} else {
 					say("\"Avatar! Please free thine old friend! Now that Marsten is jailed, please speak to Brendann and win my freedom!\"");
 				}
-				Func097F(0xFFFD, "@Return soon...@", 0x0000);
-				0xFFFD->run_schedule();
+				Func097F(IOLO, "@Return soon...@", 0x0000);
+				IOLO->run_schedule();
 				gflags[0x00AA] = true;
 				abort;
 			}
 		} else {
-			var0002 = 0xFFFD->get_npc_id();
+			var0002 = IOLO->get_npc_id();
 			if (var0002 < 0x000A) {
 				UI_lightning();
 				if (var0002 == 0x0000) {
@@ -8235,21 +8235,21 @@ void Func01D1 shape#(0x1D1) () {
 					SHAMINO->set_schedule_type(WAIT);
 					DUPRE->Func07D2();
 					SHAMINO->Func07D2();
-					var0005 = script 0xFFFD after 15 ticks {
+					var0005 = script IOLO after 15 ticks {
 						nohalt;
 						call Func01D1;
 					};
 				} else {
-					var0005 = script 0xFFFD after 0 ticks {
+					var0005 = script IOLO after 0 ticks {
 						nohalt;
 						call Func01D1;
 					};
 				}
-				0xFFFD->set_npc_id(var0002 + 0x0001);
+				IOLO->set_npc_id(var0002 + 0x0001);
 				abort;
 			}
-			0xFFFD->set_schedule_type(TALK);
-			Func097F(0xFFFD, "@Avatar!@", 0x0000);
+			IOLO->set_schedule_type(TALK);
+			Func097F(IOLO, "@Avatar!@", 0x0000);
 		}
 	}
 }
@@ -8369,18 +8369,18 @@ void Func01D7 shape#(0x1D7) () {
 	}
 	var0000 = Func0906(item);
 	if (var0000 == 0x0001) {
-		if (Func0908(item, 0x00F6, 0x0000, 0x0000, 0x0000, 0x0007)) {
+		if (Func0908(item, 0x00F6, 0x0000,  0,  0, 0x0007)) {
 			Func0902(item, 0x01D7);
-			Func0909(item, 0x00E1, 0x0001, 0x0001, 0x0204, 0x0000, 0x0003, 0x0000, 0x0005);
+			Func0909(item, 0x00E1, 0x0001, 0x0001, 0x0204, 0x0000,  3,  0, 0x0005);
 			UI_play_sound_effect2(0x0069, item);
 		} else {
 			Func0903();
 		}
 	}
 	if (var0000 == 0x0000) {
-		if (Func0908(item, 0x00F6, 0x0001, 0x0000, 0x0000, 0x0007)) {
+		if (Func0908(item, 0x00F6, 0x0001,  0,  0, 0x0007)) {
 			Func0902(item, 0x01D7);
-			Func0909(item, 0x00E1, 0x0000, 0x0002, 0x0204, 0x0001, 0x0000, 0xFFFD, 0x0007);
+			Func0909(item, 0x00E1, 0x0000, 0x0002, 0x0204, 0x0001,  0, -3, 0x0007);
 			UI_play_sound_effect2(0x006A, item);
 		} else {
 			Func0903();
@@ -9028,18 +9028,18 @@ void Func0204 shape#(0x204) () {
 	}
 	var0000 = Func0906(item);
 	if (var0000 == 0x0001) {
-		if (Func0908(item, 0x00E1, 0x0000, 0x0000, 0x0003, 0x0001)) {
+		if (Func0908(item, 0x00E1, 0x0000,  0,  3, 0x0001)) {
 			Func0902(item, 0x0204);
-			Func0909(item, 0x00F6, 0x0001, 0x0002, 0x01D7, 0x0000, 0x0000, 0x0000, 0x0007);
+			Func0909(item, 0x00F6, 0x0001, 0x0002, 0x01D7, 0x0000,  0,  0, 0x0007);
 			UI_play_sound_effect2(0x0069, item);
 		} else {
 			Func0903();
 		}
 	}
 	if (var0000 == 0x0000) {
-		if (Func0908(item, 0x00E1, 0x0001, 0xFFFD, 0x0000, 0x0007)) {
+		if (Func0908(item, 0x00E1, 0x0001, -3,  0, 0x0007)) {
 			Func0902(item, 0x0204);
-			Func0909(item, 0x00F6, 0x0000, 0x0001, 0x01D7, 0x0001, 0x0000, 0x0000, 0x0007);
+			Func0909(item, 0x00F6, 0x0000, 0x0001, 0x01D7, 0x0001,  0,  0, 0x0007);
 			UI_play_sound_effect2(0x006A, item);
 		} else {
 			Func0903();
@@ -9728,7 +9728,7 @@ void Func0266 shape#(0x266) () {
 		}
 	}
 	if (var0004 == 0x0001) {
-		Func097F(0xFFFD, "@Ahhh, Stones!@", 0x0002);
+		Func097F(IOLO, "@Ahhh, Stones!@", 0x0002);
 		Func097F(SHAMINO, "@Not Stones again...@", 0x000A);
 		UI_play_music(0x000D, item);
 		var0000 = find_nearby(SHAPE_ANY, 0x0028, MASK_NPC2);
@@ -9750,7 +9750,7 @@ void Func0266 shape#(0x266) () {
 	}
 	if (var0004 == 0x0004) {
 		Func097F(AVATAR, "@Ahhh, pretty.@", 0x0002);
-		Func097F(0xFFFD, "@I do think I am sleepy...@", 0x0011);
+		Func097F(IOLO, "@I do think I am sleepy...@", 0x0011);
 		UI_play_music(0x001F, item);
 		var0000 = find_nearby(SHAPE_ANY, 0x0028, MASK_NPC2);
 		for (var0003 in var0000 with var0009 to var000A) {
@@ -9763,7 +9763,7 @@ void Func0266 shape#(0x266) () {
 	if (var0004 == 0x0005) {
 		UI_play_music(0x0017, item);
 		Func097F(0xFF2F, "@Another tune!@", 0x0002);
-		Func097F(0xFFFD, "@This tune is most dark...@", 0x000A);
+		Func097F(IOLO, "@This tune is most dark...@", 0x000A);
 	}
 	if (var0004 == 0x0006) {
 		Func097F(SHAMINO, "@Perchance a game of darts?@", 0x0003);
@@ -9781,7 +9781,7 @@ void Func0266 shape#(0x266) () {
 	if (var0004 == 0x0007) {
 		UI_play_music(0x000C, item);
 		Func097F(AVATAR, "@Not 'Sea Shanty!'@", 0x0003);
-		Func097F(0xFFFD, "@Cease!@", 0x000A);
+		Func097F(IOLO, "@Cease!@", 0x000A);
 		var0000 = find_nearby(SHAPE_ANY, 0x0028, MASK_NPC2);
 		for (var0003 in var0000 with var000D to var000E) {
 			if (!var0003->get_item_flag(IN_PARTY)) {
@@ -10531,21 +10531,21 @@ void Func0284 shape#(0x284) () {
 	if (event == DOUBLECLICK) {
 		UI_close_gumps();
 		UI_play_sound_effect2(0x001C, item);
-		if (!(Func0983(AVATAR) || (!Func0983(0xFFFD)))) {
+		if (!(Func0983(AVATAR) || (!Func0983(IOLO)))) {
 			return;
 		}
-		if (Func0942(0xFFFD)) {
+		if (Func0942(IOLO)) {
 			Func097F(AVATAR, "@Call it.@", 0x0000);
 			var0000 = UI_die_roll(0x0001, 0x0002);
 			if (var0000 == 0x0001) {
-				Func097F(0xFFFD, "@Tails.@", 0x0010);
+				Func097F(IOLO, "@Tails.@", 0x0010);
 				Func097F(AVATAR, "@'Tis heads.@", 0x0020);
 			} else {
-				Func097F(0xFFFD, "@Heads.@", 0x0010);
+				Func097F(IOLO, "@Heads.@", 0x0010);
 				Func097F(AVATAR, "@'Tis tails.@", 0x0020);
 			}
 			if (UI_die_roll(0x0001, 0x0003) == 0x0001) {
-				Func097F(0xFFFD, "@Again!@", 0x0030);
+				Func097F(IOLO, "@Again!@", 0x0030);
 			}
 		}
 	}
@@ -10832,7 +10832,7 @@ void Func0289 shape#(0x289) () {
 			}
 			abort;
 		}
-		var001C = Func0992(0xFFFD, "@The spellbook! It disintegrated!@", 0x0000, false);
+		var001C = Func0992(IOLO, "@The spellbook! It disintegrated!@", 0x0000, false);
 	}
 }
 
@@ -10862,8 +10862,8 @@ void Func028A shape#(0x28A) () {
 		}
 		if (!UI_is_pc_inside()) {
 			item_say(var0004 + var0003);
-		} else if (Func0983(0xFFFD)) {
-			0xFFFD->item_say("@'Twill not function under a roof!@");
+		} else if (Func0983(IOLO)) {
+			IOLO->item_say("@'Twill not function under a roof!@");
 		}
 	}
 }
@@ -11066,7 +11066,7 @@ void Func028C shape#(0x28C) () {
 			nohalt;
 			call Func0448;
 		};
-		var0009 = Func0992(0xFFFD, "@Thou dost look magnificent, Avatar!@", 0x0000, false);
+		var0009 = Func0992(IOLO, "@Thou dost look magnificent, Avatar!@", 0x0000, false);
 		if (var0009 != AVATAR) {
 			if (UI_get_array_size(var0002) > 0x0002) {
 				var000A = var0009;
@@ -11389,8 +11389,8 @@ void Func0296 shape#(0x296) () {
 			}
 			if (var0004 == 0x0002) {
 				Func097F(AVATAR, "@It did escape!@", 0x0000);
-				if (0xFFFD->npc_nearby()) {
-					Func097F(0xFFFD, "@I'm certain thou hadst one!@", 0x0010);
+				if (IOLO->npc_nearby()) {
+					Func097F(IOLO, "@I'm certain thou hadst one!@", 0x0010);
 				}
 			}
 			if (var0004 == 0x0003) {
@@ -11740,7 +11740,7 @@ void Func02A3 shape#(0x2A3) () {
 		}
 		if (var0000 == 0x0010) {
 			var0014 = SHAMINO->get_item_flag(IN_PARTY);
-			var0015 = 0xFFFD->get_item_flag(IN_PARTY);
+			var0015 = IOLO->get_item_flag(IN_PARTY);
 			var0016 = DUPRE->get_item_flag(IN_PARTY);
 			var0017 = "him";
 			var0018 = "he";
@@ -11770,7 +11770,7 @@ void Func02A3 shape#(0x2A3) () {
 				UI_remove_npc_face0();
 			}
 			if (var0015) {
-				0xFFFD->show_npc_face0(0x0000);
+				IOLO->show_npc_face0(0x0000);
 				say("\"Avatar, let us proceed. Cease this dallying!\"");
 				if (var0014) {
 					SHAMINO->show_npc_face1(0x0000);
@@ -13199,11 +13199,11 @@ void Func02D3 shape#(0x2D3) () {
 
 	if (event == DOUBLECLICK) {
 		var0000 = Func0953();
-		if (0xFFFD->npc_nearby()) {
-			0xFFFD->say("\"",
+		if (IOLO->npc_nearby()) {
+			IOLO->say("\"",
 				var0000,
 				" dost thou notice the unique Iolo trademark on these bolts?  They are designed for maximum performance with genuine IOLO crossbows, available at a location near Yew.\"");
-			0xFFFD->hide();
+			IOLO->hide();
 		}
 	}
 }
@@ -15574,8 +15574,8 @@ void Func032B shape#(0x32B) () {
 		AVATAR->set_polymorph(0x02D1);
 		SHAMINO->set_schedule_type(WANDER);
 		DUPRE->set_schedule_type(WANDER);
-		0xFFFD->set_schedule_type(WANDER);
-		var0005 = script 0xFFFD after 0 ticks {
+		IOLO->set_schedule_type(WANDER);
+		var0005 = script IOLO after 0 ticks {
 			nohalt;
 			call Func01D1;
 		};
@@ -15606,7 +15606,7 @@ void Func032B shape#(0x32B) () {
 		}
 		DUPRE->set_item_flag(MET);
 		SHAMINO->set_item_flag(MET);
-		0xFFFD->set_item_flag(MET);
+		IOLO->set_item_flag(MET);
 		0xFEFC->set_item_flag(MET);
 		0xFEFB->set_item_flag(MET);
 		0xFF6D->set_item_flag(SI_ZOMBIE);
@@ -15744,8 +15744,8 @@ void Func032D shape#(0x32D) () {
 	var var0000;
 
 	var0000 = Func0992(AVATAR, "@Who wants this?@", 0x0000, true);
-	if (0xFFFD->npc_nearby()) {
-		Func097F(0xFFFD, "@I do!@", 0x0008);
+	if (IOLO->npc_nearby()) {
+		Func097F(IOLO, "@I do!@", 0x0008);
 	}
 	if (SHAMINO->npc_nearby()) {
 		Func097F(SHAMINO, "@I shall do it!@", 0x000C);
@@ -16499,7 +16499,7 @@ void Func0337 shape#(0x337) () {
 	if (event == DOUBLECLICK) {
 		var0000 = get_item_frame();
 		if (var0000 < 0x0002) {
-			var0001 = Func0992(0xFFFD, "@Thou art painting with thy fingers again?@", 0x0000, false);
+			var0001 = Func0992(IOLO, "@Thou art painting with thy fingers again?@", 0x0000, false);
 		} else {
 			var0002 = UI_click_on_item();
 			var0003 = var0002->get_item_shape();
@@ -16524,14 +16524,14 @@ void Func0337 shape#(0x337) () {
 						if (var0005 == 0x0005) {
 							var0006 = "@What is it?@";
 						}
-						var0001 = Func0992(0xFFFD, var0006, 0x0000, false);
+						var0001 = Func0992(IOLO, var0006, 0x0000, false);
 						if (var0004 < 0x0007) {
 							var0002->set_item_frame(var0002->get_item_frame() + 0x0001);
 						}
 					} else if (var0002->is_npc()) {
-						var0001 = Func0992(0xFFFD, "@Tattooing?@", 0x0000, true);
+						var0001 = Func0992(IOLO, "@Tattooing?@", 0x0000, true);
 					} else {
-						var0001 = Func0992(0xFFFD, "@The stain will never come out.@", 0x0000, false);
+						var0001 = Func0992(IOLO, "@The stain will never come out.@", 0x0000, false);
 					}
 				}
 			} else {
@@ -16887,7 +16887,7 @@ void Func0345 shape#(0x345) () {
 
 	if (event == DOUBLECLICK) {
 		var0000 = ("@Thou shouldst use the brush and pigments, " + Func0953()) + ".@";
-		var0001 = Func0992(0xFFFD, var0000, 0x0000, true);
+		var0001 = Func0992(IOLO, var0000, 0x0000, true);
 	}
 }
 
@@ -17449,10 +17449,10 @@ void Func035F shape#(0x35F) () {
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
 void Func0362 shape#(0x362) () {
-	if (0xFFFD->npc_nearby()) {
+	if (IOLO->npc_nearby()) {
 		Func097F(AVATAR, "@Iolo, about that gold...@", 0x0000);
 		Func097F(AVATAR, "@thou dost owe me...@", 0x0010);
-		Func097F(0xFFFD, "@Avatar, what gold?@", 0x0020);
+		Func097F(IOLO, "@Avatar, what gold?@", 0x0020);
 		Func097F(AVATAR, "@Just kidding...@", 0x0030);
 	}
 }
@@ -17511,7 +17511,7 @@ void Func0363 shape#(0x363) () {
 			0xFF2D->remove_npc();
 			DUPRE->clear_item_flag(ASLEEP);
 			SHAMINO->clear_item_flag(ASLEEP);
-			0xFFFD->clear_item_flag(ASLEEP);
+			IOLO->clear_item_flag(ASLEEP);
 			abort;
 		}
 		if (var0001 == 0x001B) {
@@ -17932,11 +17932,11 @@ void Func0370 shape#(0x370) () {
 				set_schedule_type(WAIT);
 				AVATAR->set_opponent(0x0001);
 				move_object([0x008E, 0x002E, 0x0000]);
-				0xFFFD->clear_item_flag(DEAD);
-				0xFFFD->set_item_flag(SI_ZOMBIE);
-				0xFFFD->clear_item_flag(SI_TOURNAMENT);
-				0xFFFD->move_object(var0001);
-				0xFFFD->reduce_health(0x0037, NORMAL_DAMAGE);
+				IOLO->clear_item_flag(DEAD);
+				IOLO->set_item_flag(SI_ZOMBIE);
+				IOLO->clear_item_flag(SI_TOURNAMENT);
+				IOLO->move_object(var0001);
+				IOLO->reduce_health(0x0037, NORMAL_DAMAGE);
 				gflags[0x00D2] = true;
 				gflags[0x00D5] = true;
 			}
@@ -19864,7 +19864,7 @@ void Func03D0 shape#(0x3D0) () {
 	}
 	if (var0000 == 0x0002) {
 		set_item_frame(0x0003);
-		Func097F(0xFFFD, "@Excellent shot!@", 0x0003);
+		Func097F(IOLO, "@Excellent shot!@", 0x0003);
 		UI_play_sound_effect(0x000C);
 	}
 	if (var0000 == 0x0003) {
@@ -19909,7 +19909,7 @@ void Func03D2 shape#(0x3D2) () {
 	var0001 = Func0954();
 	var0002 = Func0953();
 	var0003 = Func0954();
-	var0004 = Func0942(0xFFFD);
+	var0004 = Func0942(IOLO);
 	var0005 = Func0942(DUPRE);
 	var0006 = Func0942(SHAMINO);
 	var0007 = false;
@@ -20048,7 +20048,7 @@ void Func03D2 shape#(0x3D2) () {
 				if (var0008 == true) {
 					say("\"As thou hast probably guessed by now, my friends started calling me 'Stumpy' because I loved to stump them with my riddles.\"");
 					var000E = Func0992(0x0001, 0x0000, 0x0000, false);
-					if ((var000E == 0xFFFD) || ((var000E == SHAMINO) || (var000E == DUPRE))) {
+					if ((var000E == IOLO) || ((var000E == SHAMINO) || (var000E == DUPRE))) {
 						var000F = "@That is one of the worst nicknames I have ever\r\n\t\t\t\t\t\theard!@";
 						var000E = Func0992(var000E, var000F, 0x0000, false);
 						0x0000->set_conversation_slot();
@@ -20095,7 +20095,7 @@ void Func03D2 shape#(0x3D2) () {
 				say("\"I have heard a tale about a mad human who is known as 'The Fiend'. Apparently he is very dangerous.\"");
 				say("\"Doesn't it strike\tthee as odd that the most evil creatures in these caverns are humans?\"");
 				var000E = Func0992(0x0001, 0x0000, 0x0000, false);
-				if ((var000E == 0xFFFD) || ((var000E == SHAMINO) || (var000E == DUPRE))) {
+				if ((var000E == IOLO) || ((var000E == SHAMINO) || (var000E == DUPRE))) {
 					var000F = "@I suppose there has never been a dragon that was evil, eh?!@";
 					var000E = Func0992(var000E, var000F, 0x0000, false);
 					0x0000->set_conversation_slot();
@@ -20124,7 +20124,7 @@ void Func03D2 shape#(0x3D2) () {
 						say("\"A more evil or cunning creature thou wilt not find! Fortunately, the liche rarely ventures from its lair.");
 						say("\"If thou art fond of thy life I would advise against venturing into Aram-Dol's domain.\"");
 						var000E = Func0992(0x0001, 0x0000, 0x0000, false);
-						if ((var000E == 0xFFFD) || ((var000E == SHAMINO) || (var000E == DUPRE))) {
+						if ((var000E == IOLO) || ((var000E == SHAMINO) || (var000E == DUPRE))) {
 							var000F = "@The Avatar has fought the undead before and triumphed!@";
 							var000E = Func0992(var000E, var000F, 0x0000, false);
 							0x0000->set_conversation_slot();
@@ -20140,7 +20140,7 @@ void Func03D2 shape#(0x3D2) () {
 					say("\"A more evil or cunning creature thou wilt not find! Fortunately, the liche rarely ventures from its lair.");
 					say("\"If thou art fond of thy life I would advise against venturing into Aram-Dol's domain.\"");
 					var000E = Func0992(0x0001, 0x0000, 0x0000, false);
-					if ((var000E == 0xFFFD) || ((var000E == SHAMINO) || (var000E == DUPRE))) {
+					if ((var000E == IOLO) || ((var000E == SHAMINO) || (var000E == DUPRE))) {
 						var000F = "@The Avatar has fought the undead before and triumphed!@";
 						var000E = Func0992(var000E, var000F, 0x0000, false);
 						0x0000->set_conversation_slot();
@@ -20179,7 +20179,7 @@ void Func03D2 shape#(0x3D2) () {
 				say("\"In years past, Aram-Dol took many humans as prisoners. By means of the blackest sorcery, Aram-Dol fused the torsos of men with the bulbous bodies of giant spiders.\"");
 				say("\"These creatures are fiercesome fighters. They are cunning and evil. Pray to whatever gods thou doth worship if thou art caught by the Arachnians. They eat their prey alive...\"");
 				var000E = Func0992(0x0001, 0x0000, 0x0000, false);
-				if ((var000E == 0xFFFD) || ((var000E == SHAMINO) || (var000E == DUPRE))) {
+				if ((var000E == IOLO) || ((var000E == SHAMINO) || (var000E == DUPRE))) {
 					var000F = "@By the virtues! Such foul creatures should be exterminated!@";
 					var000E = Func0992(var000E, var000F, 0x0000, false);
 					0x0000->set_conversation_slot();
@@ -20198,7 +20198,7 @@ void Func03D2 shape#(0x3D2) () {
 			case "people" (remove):
 				say("\"People! Hrrmphh. Thou dost realize, I hope, that not every sentient creature likes to be characterized in human terminology.\"");
 				var000E = Func0992(0x0001, 0x0000, 0x0000, false);
-				if ((var000E == 0xFFFD) || ((var000E == SHAMINO) || (var000E == DUPRE))) {
+				if ((var000E == IOLO) || ((var000E == SHAMINO) || (var000E == DUPRE))) {
 					var000F = "@Thou art an insufferable wyrm!@";
 					var000E = Func0992(var000E, var000F, 0x0000, false);
 					0x0000->set_conversation_slot();
@@ -20212,7 +20212,7 @@ void Func03D2 shape#(0x3D2) () {
 				say("\"Aye. This new commander is some sort of magical construct. I believe the Ophidians call these creatures 'automatons'. I daresay that it is probably an improvement...\"");
 				add("automatons");
 				var000E = Func0992(0x0001, 0x0000, 0x0000, false);
-				if ((var000E == 0xFFFD) || ((var000E == SHAMINO) || (var000E == DUPRE))) {
+				if ((var000E == IOLO) || ((var000E == SHAMINO) || (var000E == DUPRE))) {
 					var000F = "@Now see here! There is no cause to be insulting!@";
 					var000E = Func0992(var000E, var000F, 0x0000, false);
 					0x0000->set_conversation_slot();
@@ -20760,23 +20760,23 @@ void Func03F7 shape#(0x3F7) () {
 
 			case "assurances" (remove):
 				say("\"Thou must have some proof of thy identity...\"");
-				if ((!Func0942(0xFFFD)) || ((!Func0942(SHAMINO)) || (!Func0942(DUPRE)))) {
+				if ((!Func0942(IOLO)) || ((!Func0942(SHAMINO)) || (!Func0942(DUPRE)))) {
 					add(["I need no proof!", "I am the Avatar!", "Amulet"]);
 				} else {
-					if (Func0942(0xFFFD)) {
-						0xFFFD->show_npc_face1(0x0000);
+					if (Func0942(IOLO)) {
+						IOLO->show_npc_face1(0x0000);
 						say("\"",
 							var0001,
 							" is the Avatar! Thou dost not need any further proof than the fact that the Amulet didst bring us here!\"");
 						UI_remove_npc_face1();
-						0xFFFD->item_say("@Nosey biddy!@");
+						IOLO->item_say("@Nosey biddy!@");
 						0x0000->set_conversation_slot();
 					}
 					if (Func0942(SHAMINO)) {
 						SHAMINO->show_npc_face1(0x0000);
 						say("\"What about the Amulet that Karnax didst give thee, Avatar? It brought us here. Perhaps this Mage would recognize it.\"");
 						UI_remove_npc_face1();
-						if (Func0942(0xFFFD)) {
+						if (Func0942(IOLO)) {
 							SHAMINO->item_say("@Mind thy manners, Iolo!@");
 						} else {
 							SHAMINO->item_say("@I am sick of these rules!@");
@@ -20840,8 +20840,8 @@ void Func03F7 shape#(0x3F7) () {
 
 			case "questioning" (remove):
 				say("\"If thou wilt not answer to me, I shall be forced to bespell thee and take thee to the Commander of the keep.");
-				if (Func0942(0xFFFD)) {
-					0xFFFD->show_npc_face1(0x0000);
+				if (Func0942(IOLO)) {
+					IOLO->show_npc_face1(0x0000);
 					say("\"Thou dost take too much upon thyself, woman!\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -20860,11 +20860,11 @@ void Func03F7 shape#(0x3F7) () {
 					0x0000->set_conversation_slot();
 				}
 				say("\"This is a time of war! Thou canst not think to wander about unchallenged. 'Twould be a breach of duty if I did not stop and question thee.\"");
-				if (Func0942(0xFFFD)) {
-					0xFFFD->show_npc_face1(0x0000);
+				if (Func0942(IOLO)) {
+					IOLO->show_npc_face1(0x0000);
 					say("\"I am sorry, good Mage. Thou art quite right.\"");
 					UI_remove_npc_face1();
-					0xFFFD->item_say("@My apologies.@");
+					IOLO->item_say("@My apologies.@");
 					0x0000->set_conversation_slot();
 				}
 				if (Func0942(SHAMINO)) {
@@ -21546,7 +21546,7 @@ void Func0401 object#(0x401) () {
 		if (SHAMINO->get_npc_id() == 0x001E) {
 			add("Shamino's whereabouts");
 		}
-		if (0xFFFD->get_npc_id() == 0x001E) {
+		if (IOLO->get_npc_id() == 0x001E) {
 			add("Iolo's whereabouts");
 		}
 		if (0xFFDE->get_npc_id() == 0x001E) {
@@ -21561,7 +21561,7 @@ void Func0401 object#(0x401) () {
 				fallthrough;
 
 			case "good news" (remove):
-				if (0xFFFD->get_item_flag(IN_PARTY) || (0xFFFD->get_npc_id() == 0x001E)) {
+				if (IOLO->get_item_flag(IN_PARTY) || (IOLO->get_npc_id() == 0x001E)) {
 					say("\"But I should let Iolo tell thee...\"");
 				} else {
 					say("\"The wizard Gustacio hath agreed to aid us, if we will but assist him in his experiments.\"");
@@ -21820,7 +21820,7 @@ labelFunc0402_02F8:
 			if (DUPRE->get_npc_id() == 0x001E) {
 				add("Dupre's whereabouts");
 			}
-			if (0xFFFD->get_npc_id() == 0x001E) {
+			if (IOLO->get_npc_id() == 0x001E) {
 				add("Iolo's whereabouts");
 			}
 			if (0xFFDE->get_npc_id() == 0x001E) {
@@ -21854,9 +21854,9 @@ labelFunc0402_02F8:
 				fallthrough;
 
 			case "news" (remove):
-				if (0xFFFD->get_item_flag(IN_PARTY)) {
+				if (IOLO->get_item_flag(IN_PARTY)) {
 					say("\"To be honest, this is not my news -- it belongs to our good friend, the Bard. Thou shouldst ask Iolo.\"");
-				} else if (0xFFFD->get_npc_id() == 0x001E) {
+				} else if (IOLO->get_npc_id() == 0x001E) {
 					say("\"Quickly, let us find Iolo. He can tell thee all about the discovery!\"");
 				} else {
 					say("\"The Mages of this place are not friendly toward outsiders, but thy survival shall surely impress them.\"");
@@ -21968,7 +21968,7 @@ labelFunc0402_02F8:
 	if (event == EGG) {
 		var000D = Func0994();
 		if (var000D == 0x0016) {
-			0xFFFD->show_npc_face0(0x0000);
+			IOLO->show_npc_face0(0x0000);
 			say("\"We are beset by dragons, Avatar! We must slay them quickly!\"");
 			UI_remove_npc_face0();
 			Func097F(SHAMINO, "@I hate dragons!@", 0x0002);
@@ -22032,16 +22032,16 @@ void Func0403 object#(0x403) () {
 	var var001A;
 	var var001B;
 
-	var0000 = 0xFFFD->get_npc_id();
+	var0000 = IOLO->get_npc_id();
 	var0001 = Func0954();
 	var0002 = Func0953();
 	if (event == DEATH) {
 		if (gflags[0x0083]) {
-			var0003 = 0xFFFD->get_oppressor();
+			var0003 = IOLO->get_oppressor();
 			var0003 = 0x0000 - var0003;
 			if (!gflags[0x0007]) {
 				gflags[0x0007] = true;
-				Func0936(var0003->get_npc_object(), 0xFFFD->get_npc_object());
+				Func0936(var0003->get_npc_object(), IOLO->get_npc_object());
 				return;
 			}
 			Func092E(item);
@@ -22050,60 +22050,60 @@ void Func0403 object#(0x403) () {
 	}
 	if (event == DOUBLECLICK) {
 		Func097F(AVATAR, "@Dear friend...@", 0x0000);
-		0xFFFD->Func07D1();
-		if (!0xFFFD->get_item_flag(SI_ZOMBIE)) {
+		IOLO->Func07D1();
+		if (!IOLO->get_item_flag(SI_ZOMBIE)) {
 			if (gflags[0x0006] && (!gflags[0x0078])) {
 				var0004 = false;
-				var0005 = 0xFFFD->find_nearby(0x0178, 0x000F, MASK_NONE);
+				var0005 = IOLO->find_nearby(0x0178, 0x000F, MASK_NONE);
 				for (var0008 in var0005 with var0006 to var0007) {
 					if ((var0008->get_item_quality() == 0x0068) && (Func0906(var0008) != 0x0002)) {
 						var0004 = true;
 					}
 				}
-				var0005 = 0xFFFD->find_nearby(0x010E, 0x000F, MASK_NONE);
+				var0005 = IOLO->find_nearby(0x010E, 0x000F, MASK_NONE);
 				for (var0008 in var0005 with var0009 to var000A) {
 					if (var0008->get_item_quality() == 0x0068) {
 						var0004 = true;
 					}
 				}
 				if (var0004) {
-					Func097F(0xFFFD, "@I am free!@", 0x0002);
-					0xFFFD->set_schedule_type(TALK);
+					Func097F(IOLO, "@I am free!@", 0x0002);
+					IOLO->set_schedule_type(TALK);
 				} else {
-					0xFFFD->Func07D2();
-					Func097F(0xFFFD, "@Help me, Avatar!@", 0x0002);
-					var000B = script 0xFFFD after 7 ticks {
+					IOLO->Func07D2();
+					Func097F(IOLO, "@Help me, Avatar!@", 0x0002);
+					var000B = script IOLO after 7 ticks {
 						nohalt;
 						call Func01D1;
 					};
-					0xFFFD->set_schedule_type(WAIT);
+					IOLO->set_schedule_type(WAIT);
 				}
 			} else {
-				Func097F(0xFFFD, "@Yes?@", 0x0002);
-				0xFFFD->set_schedule_type(TALK);
+				Func097F(IOLO, "@Yes?@", 0x0002);
+				IOLO->set_schedule_type(TALK);
 			}
 		} else {
 			var000C = UI_get_random(0x0004);
 			if (var000C == 0x0001) {
-				Func097F(0xFFFD, "@Wrong is right!@", 0x0002);
+				Func097F(IOLO, "@Wrong is right!@", 0x0002);
 			}
 			if (var000C == 0x0002) {
-				Func097F(0xFFFD, "@Life is a farce!@", 0x0002);
+				Func097F(IOLO, "@Life is a farce!@", 0x0002);
 			}
 			if (var000C == 0x0003) {
-				Func097F(0xFFFD, "@Sing the dirge of love...@", 0x0002);
+				Func097F(IOLO, "@Sing the dirge of love...@", 0x0002);
 			}
 			if (var000C == 0x0004) {
-				Func097F(0xFFFD, "@Futility is the answer!@", 0x0002);
+				Func097F(IOLO, "@Futility is the answer!@", 0x0002);
 			}
 		}
 	}
 	if (event == STARTED_TALKING) {
-		0xFFFD->clear_item_say();
+		IOLO->clear_item_say();
 		AVATAR->clear_item_say();
 		if (!gflags[0x0003]) {
 			UI_init_conversation();
-			0xFFFD->show_npc_face0(0x0000);
+			IOLO->show_npc_face0(0x0000);
 			say("\"'Twas a fearsome passage, ",
 				var0002,
 				". After we sailed between the Serpent Pillars, I could have sworn that we were flying...\"");
@@ -22127,8 +22127,8 @@ void Func0403 object#(0x403) () {
 			UI_remove_npc_face0();
 			Func097F(SHAMINO, "@Where are we?@", 0x0005);
 			Func097F(DUPRE, "@Let us find Batlin!@", 0x000F);
-			Func097F(0xFFFD, "@Do not forget about Gwenno...@", 0x0023);
-			0xFFFD->add_to_party();
+			Func097F(IOLO, "@Do not forget about Gwenno...@", 0x0023);
+			IOLO->add_to_party();
 			DUPRE->add_to_party();
 			SHAMINO->add_to_party();
 			gflags[0x0003] = true;
@@ -22136,7 +22136,7 @@ void Func0403 object#(0x403) () {
 			abort;
 		}
 		if (gflags[0x0006] && (!gflags[0x0078])) {
-			0xFFFD->show_npc_face0(0x0000);
+			IOLO->show_npc_face0(0x0000);
 			say("\"I thank thee for freeing me from this hellhole! The natives of this place are ignorant sots. Imagine, thinking me to be a sorcerer!\"");
 			say("\"Hast thou looked in thy packs since the storm, ",
 				var0001,
@@ -22156,19 +22156,19 @@ void Func0403 object#(0x403) () {
 			} else {
 				say("\"I shall make a list of the strange things I have found in my packs. Perhaps these are clues to where our real belongings have gone.\"");
 			}
-			0xFFFD->add_to_party();
-			0xFFFD->set_new_schedules(MIDNIGHT, EAT_AT_INN, [0x097C, 0x0464]);
+			IOLO->add_to_party();
+			IOLO->set_new_schedules(MIDNIGHT, EAT_AT_INN, [0x097C, 0x0464]);
 			gflags[0x0019] = true;
 			Func092B();
 			gflags[0x0078] = true;
 			abort;
 		}
-		0xFFFD->show_npc_face0(0x0000);
-		if (0xFFFD->get_item_flag(IN_PARTY)) {
-			0xFFFD->set_schedule_type(FOLLOW_AVATAR);
+		IOLO->show_npc_face0(0x0000);
+		if (IOLO->get_item_flag(IN_PARTY)) {
+			IOLO->set_schedule_type(FOLLOW_AVATAR);
 			add("leave");
 		} else {
-			0xFFFD->run_schedule();
+			IOLO->run_schedule();
 			add("join");
 		}
 		if (var0000 == 0x001E) {
@@ -22187,8 +22187,8 @@ void Func0403 object#(0x403) () {
 				var0001,
 				". I think that he doth have information that shall interest thee.\"");
 			gflags[0x0135] = true;
-			0xFFFD->set_npc_id(0x0000);
-			0xFFFD->add_to_party();
+			IOLO->set_npc_id(0x0000);
+			IOLO->add_to_party();
 			gflags[0x0019] = true;
 			add("leave");
 		} else {
@@ -22206,19 +22206,19 @@ void Func0403 object#(0x403) () {
 		if (0xFFDE->get_npc_id() == 0x001E) {
 			add("Boydon's whereabouts");
 		}
-		if (gflags[0x0019] && (0xFFFD->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY) && (!0xFFFD->get_item_flag(IN_PARTY)))) {
+		if (gflags[0x0019] && (IOLO->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY) && (!IOLO->get_item_flag(IN_PARTY)))) {
 			add("belongings");
 		}
-		0xFFFD->show_npc_face0(0x0000);
+		IOLO->show_npc_face0(0x0000);
 		converse (["Gwenno", "bye"]) {
 			case "belongings" (remove):
-				if (0xFFFD->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY)) {
+				if (IOLO->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY)) {
 					say("\"I am carrying many items, some of which may be of use to thee. Wouldst thou care to have these?\"");
 					if (Func0955()) {
 						say("\"Here they are.\"");
 						gflags[0x0019] = false;
 						var000D = [false, 0x0000];
-						var000E = 0xFFFD->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
+						var000E = IOLO->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
 						for (var0011 in var000E with var000F to var0010) {
 							if (!((var0011->get_item_shape() == 0x0128) && (var0011->get_item_frame() == 0x0002))) {
 								var000B = Func099B(AVATAR, var0011->get_item_quantity(0x0000), var0011->get_item_shape(), var0011->get_item_quality(), var0011->get_item_frame(), var0011->get_item_flag(TEMPORARY), false);
@@ -22263,7 +22263,7 @@ void Func0403 object#(0x403) () {
 					} else {
 						say("\"I cannot join thee, friend. Even if thou wouldst cheat at the Test, I cannot aid thee in so doing. I am thy true friend.\"");
 					}
-					Func097F(0xFFFD, "@Sorry...@", 0x0000);
+					Func097F(IOLO, "@Sorry...@", 0x0000);
 					abort;
 				}
 				remove("join");
@@ -22272,7 +22272,7 @@ void Func0403 object#(0x403) () {
 					say("\"'Tis always an adventure to travel with thee, ",
 						var0002,
 						"! I shall be proud to accompany thee.\"");
-					0xFFFD->add_to_party();
+					IOLO->add_to_party();
 					gflags[0x0019] = true;
 				} else {
 					say("\"I would be glad to accompany thee, ",
@@ -22288,14 +22288,14 @@ void Func0403 object#(0x403) () {
 				} else {
 					add("join");
 					say("\"Whatever thou dost wish, Avatar.\"");
-					0xFFFD->remove_from_party();
-					if (0xFFFD->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY)) {
+					IOLO->remove_from_party();
+					if (IOLO->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY)) {
 						say("\"I am carrying many items, some of which may be of use to thee. Wouldst thou care to have these before I depart?\"");
 						if (Func0955()) {
 							say("\"Here they are.\"");
 							gflags[0x0019] = false;
 							var000D = [false, 0x0000];
-							var000E = 0xFFFD->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
+							var000E = IOLO->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
 							for (var0011 in var000E with var0012 to var0013) {
 								if (!((var0011->get_item_shape() == 0x0128) && (var0011->get_item_frame() == 0x0002))) {
 									var000B = Func099B(AVATAR, var0011->get_item_quantity(0x0000), var0011->get_item_shape(), var0011->get_item_quality(), var0011->get_item_frame(), var0011->get_item_flag(TEMPORARY), false);
@@ -22325,7 +22325,7 @@ void Func0403 object#(0x403) () {
 							say("\"If thou changest thy mind, thou hast but to return and ask again.\"");
 						}
 					}
-					Func09B4(0xFFFD);
+					Func09B4(IOLO);
 				}
 				fallthrough;
 
@@ -22428,7 +22428,7 @@ void Func0403 object#(0x403) () {
 
 			case "bye":
 				Func097F(AVATAR, "@Thanks!@", 0x0000);
-				Func097F(0xFFFD, "@A pleasure!@", 0x0002);
+				Func097F(IOLO, "@A pleasure!@", 0x0002);
 				UI_remove_npc_face0();
 				break;
 		}
@@ -22437,12 +22437,12 @@ void Func0403 object#(0x403) () {
 		var0018 = Func0994();
 		var0019 = get_item_quality();
 		if (var0018 == 0x001F) {
-			0xFFFD->show_npc_face0(0x0000);
+			IOLO->show_npc_face0(0x0000);
 			say("\"Avatar! Why art thou in my dream? I was looking for Gwenno...\"");
 			say("\"Oh. Perhaps I have intruded upon thy dream.\"");
 			say("\"Forgive me. I shall go seeking my wife and leave thee to thy dream.\"");
 			UI_remove_npc_face0();
-			Func097F(0xFFFD, "@Pleasant dreams!@", 0x0002);
+			Func097F(IOLO, "@Pleasant dreams!@", 0x0002);
 			var001A = 0xFF4E->get_object_position();
 			UI_sprite_effect(ANIMATION_TELEPORT2, var001A[0x0001], var001A[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			UI_play_sound_effect(0x0051);
@@ -22454,25 +22454,25 @@ void Func0403 object#(0x403) () {
 			abort;
 		}
 		if (var0018 == 0x0016) {
-			0xFFFD->show_npc_face0(0x0000);
+			IOLO->show_npc_face0(0x0000);
 			say("\"More snakes! Destroy the vile creatures, Avatar!\"");
 			UI_remove_npc_face0();
-			Func097F(0xFFFD, "@I hate snakes!@", 0x0002);
+			Func097F(IOLO, "@I hate snakes!@", 0x0002);
 			abort;
 		}
 		if (var0018 == 0x0008) {
-			0xFFFD->show_npc_face0(0x0000);
+			IOLO->show_npc_face0(0x0000);
 			say("\"Oh, my poor Gwenno!\" *\"Now she is truly frigid.\"");
 			UI_remove_npc_face0();
-			Func097F(0xFFFD, "@My love hath now departed!@", 0x0002);
+			Func097F(IOLO, "@My love hath now departed!@", 0x0002);
 			abort;
 		}
 	}
 	if (event == PROXIMITY) {
-		if (0xFFFD->get_schedule_type() == PATROL) {
+		if (IOLO->get_schedule_type() == PATROL) {
 			if (gflags[0x0006] && (!gflags[0x0078])) {
 				var001B = ["@Woe is me!@", "@I feel cold.@", "@I am hungry.@", "@Release me!@", "@I'm innocent!@", "@Pity an old man...@"];
-				Func097F(0xFFFD, var001B[UI_get_random(UI_get_array_size(var001B))], 0x0000);
+				Func097F(IOLO, var001B[UI_get_random(UI_get_array_size(var001B))], 0x0000);
 			}
 		}
 	}
@@ -23132,7 +23132,7 @@ void Func040D object#(0x40D) () {
 			case "visitors" (remove):
 				say("\"Perhaps thou shouldst speak to Rocco at the Blue Boar Inn. All of the town's visitors stay at his fine inn, even that travelling scholar.\"");
 				say("\"Also, Julia keeps an eye on all undesirables.\"");
-				var000C = Func0992(0xFFFD, "@Then she must have spotted Batlin!@", 0x0000, false);
+				var000C = Func0992(IOLO, "@Then she must have spotted Batlin!@", 0x0000, false);
 				if (var000C != AVATAR) {
 					if (UI_get_array_size(UI_get_party_list()) > 0x0002) {
 						var000D = var000C;
@@ -26239,8 +26239,8 @@ void Func0417 object#(0x417) () {
 					var000A = Func0992(DUPRE, "@She doth refer to Lord\r\n\t\t\t\t\t\t\t\t\t\tBritish!@", 0x0000, false);
 				} else if (Func0942(SHAMINO)) {
 					var000A = Func0992(SHAMINO, "@She doth refer to Lord\r\n\t\t\t\t\t\t\t\t\t\t\tBritish!@", 0x0000, false);
-				} else if (Func0942(0xFFFD)) {
-					var000A = Func0992(0xFFFD, "@She doth refer to\r\n\t\t\t\t\t\t\t\t\t\t\t\tLord British!@", 0x0000, false);
+				} else if (Func0942(IOLO)) {
+					var000A = Func0992(IOLO, "@She doth refer to\r\n\t\t\t\t\t\t\t\t\t\t\t\tLord British!@", 0x0000, false);
 				}
 				var000B &= ["@I serve Lord British!@", "say nothing"];
 				if (var000A != 0x0000) {
@@ -27246,16 +27246,16 @@ void Func041A object#(0x41A) () {
 							0x0000->set_conversation_slot();
 							say("\"Oh! I have lost contact with the spirit! Forgive me, but with a contact that intense, the length of time that I can maintain is always shorter.\"");
 							gflags[0x0129] = true;
-						} else if (0xFFFD->npc_nearby() && (!gflags[0x0131])) {
+						} else if (IOLO->npc_nearby() && (!gflags[0x0131])) {
 							0xFEEB->show_npc_face1(0x0001);
 							say("\"My darling husband, Iolo, although I am dead I must tell thee that my love for thee shall never die. Always remember me. Farewell.\"");
 							UI_remove_npc_face1();
 							0x0000->set_conversation_slot();
 							say("\"I have lost the contact -- there are strange forces connected with this spirit!\"");
-							0xFFFD->show_npc_face1(0x0000);
+							IOLO->show_npc_face1(0x0000);
 							say("\"No! It cannot be true! She cannot be dead! I refuse to believe it!\"");
 							var0006 = "@Gwenno!@" & "@Come back to me!@";
-							Func094F(0xFFFD, var0006);
+							Func094F(IOLO, var0006);
 							Func097F(0xFFE6, "@Spirits do not lie.@", 0x0005);
 							gflags[0x0131] = true;
 							abort;
@@ -27576,7 +27576,7 @@ void Func041B object#(0x41B) () {
 
 			case "Trulacci" (remove):
 				say("\"Where hath he gone? Bah, I know not. Nor, for that matter, do I care!\"");
-				var000C = Func0992(0xFFFD, "@Ah, but I can see that thou dost still care, madam.@", 0x0000, false);
+				var000C = Func0992(IOLO, "@Ah, but I can see that thou dost still care, madam.@", 0x0000, false);
 				if (var000C != AVATAR) {
 					0x0000->set_conversation_slot();
 					say("\"Rubbish! 'Tis long gone, and I am an old woman now.\"");
@@ -28463,7 +28463,7 @@ void Func041D object#(0x41D) () {
 					say("\"I Re-Ten Bentas Juxark I! Praetimde Mir-Wis Re-Por I.\"");
 					say("\"To learn its meaning, translate it from the language of Magic.\"");
 					say("\"Alas -- as is often the case, 'tis not required to understand power to use it.\"");
-					var0006 = Func0992(0xFFFD, (((("@" + var0003) + " learned ") + var0002) + " lessons well in the days of the False Prophet.@"), "@I was taught well in the days of the False Prophet...@", false);
+					var0006 = Func0992(IOLO, (((("@" + var0003) + " learned ") + var0002) + " lessons well in the days of the False Prophet.@"), "@I was taught well in the days of the False Prophet...@", false);
 					0x0000->set_conversation_slot();
 					say("\"Whom?\"");
 					var0006 = Func0992(0x0001, "@Never mind...@", "@Never mind...@", false);
@@ -28854,7 +28854,7 @@ void Func041E object#(0x41E) () {
 
 			case "the scholar Gwenno" (remove):
 				say("\"Thou dost know her! She and I are the closest of friends. She stayed here for many weeks.\"");
-				var0008 = Func0992(0xFFFD, "@Just how well dost thou know Gwenno?@", "@Gwenno is my friend's missing wife.@", false);
+				var0008 = Func0992(IOLO, "@Just how well dost thou know Gwenno?@", "@Gwenno is my friend's missing wife.@", false);
 				0xFFE2->show_npc_face0(0x0000);
 				say("\"I swear I am innocent! We were only friends, ",
 					var0000,
@@ -29358,8 +29358,8 @@ void Func041F object#(0x41F) () {
 				if (!SHAMINO->get_item_flag(DEAD)) {
 					var0004 &= SHAMINO;
 				}
-				if (gflags[0x0078] && (!0xFFFD->get_item_flag(DEAD))) {
-					var0004 &= 0xFFFD;
+				if (gflags[0x0078] && (!IOLO->get_item_flag(DEAD))) {
+					var0004 &= IOLO;
 				}
 				if (gflags[0x00B7] && (!DUPRE->get_item_flag(DEAD))) {
 					var0004 &= DUPRE;
@@ -29714,7 +29714,7 @@ void Func0420 object#(0x420) () {
 					0x0000->set_conversation_slot();
 					add("Monitor");
 				} else {
-					var0006 = Func0992(0xFFFD, "@But we don't have it with\r\n\t\t\t\t\t\t\t\tus...@", "@I've not brought it with me.@", false);
+					var0006 = Func0992(IOLO, "@But we don't have it with\r\n\t\t\t\t\t\t\t\tus...@", "@I've not brought it with me.@", false);
 					0x0000->set_conversation_slot();
 					say("\"Bring it by, and I shall give thee thine answer.\"");
 				}
@@ -29771,7 +29771,7 @@ void Func0420 object#(0x420) () {
 						", I'd say that it was made of bone. Thou couldst ask Mortegro, to be sure though.\"");
 					add("Mortegro");
 				} else {
-					var0006 = Func0992(0xFFFD, "@But it's not here...@", "@I've not brought it with me.@", false);
+					var0006 = Func0992(IOLO, "@But it's not here...@", "@I've not brought it with me.@", false);
 					0x0000->set_conversation_slot();
 					say("\"Bring it with thee some time and I shall tell thee what it is made of.\"");
 				}
@@ -30291,7 +30291,7 @@ void Func0422 object#(0x422) () {
 	var0000 = Func0954();
 	var0001 = Func0953();
 	var0002 = SHAMINO->get_item_flag(IN_PARTY);
-	var0003 = 0xFFFD->get_item_flag(IN_PARTY);
+	var0003 = IOLO->get_item_flag(IN_PARTY);
 	var0004 = DUPRE->get_item_flag(IN_PARTY);
 	var0005 = 0xFFDE->get_item_flag(IN_PARTY);
 	var0006 = 0xFFDE->get_item_flag(MET);
@@ -30395,7 +30395,7 @@ void Func0422 object#(0x422) () {
 			0xFED3->show_npc_face0(0x0000);
 			say("\"Now I see thee. Greetings! I am Boydon, the Living Head.\"");
 			if (!gflags[0x01C0]) {
-				var0012 = Func0992(0xFFFD, "The severed head speaks!", 0x0000, false);
+				var0012 = Func0992(IOLO, "The severed head speaks!", 0x0000, false);
 				if (var0012 != AVATAR) {
 					0x0000->set_conversation_slot();
 					say("\"Yes, I do. Strange, is it not?\"");
@@ -30471,7 +30471,7 @@ void Func0422 object#(0x422) () {
 			case "observed" (remove):
 				say("\"Certainly someone should keep an eye on me. To make sure my new body will not start to fall apart. Not to worry, I feel strange, but very well indeed.\"");
 				if (!var0005) {
-					var0012 = Func0992(0xFFFD, (("@Thou dost not need to observe. " + "Not when the smell reaches one ") + "first! Phew!@"), 0x0000, false);
+					var0012 = Func0992(IOLO, (("@Thou dost not need to observe. " + "Not when the smell reaches one ") + "first! Phew!@"), 0x0000, false);
 					if (var0012 != AVATAR) {
 						0x0000->set_conversation_slot();
 					}
@@ -30498,7 +30498,7 @@ void Func0422 object#(0x422) () {
 						}
 					} else {
 						say("\"If thou wouldst ever change thy mind, or find thyself in need of a companion, I would be most honored if thou wouldst consider me.\"");
-						var0012 = Func0992(0xFFFD, 0x0000, 0x0000, false);
+						var0012 = Func0992(IOLO, 0x0000, 0x0000, false);
 						if (var0012 != AVATAR) {
 							var0012->show_npc_face1(0x0000);
 							say("\"That was a near escape. I could not believe thou wouldst consider having that fellow join us. Just the smell of him is near enough to kill a dragon! He is otherwise a most pleasant fellow, I will concede.\"");
@@ -30654,7 +30654,7 @@ void Func0423 object#(0x423) () {
 			say("\"Begone from my sight! Thy meddling in my business is unwelcome, stranger!\"");
 			say("\"Thou dost have the distinct bearing of a Britannian about thee! No doubt thou art some fiend in league with that evil Beast British!\"");
 			say("\"Why, I ought to cast a spell on thee! I could tear thee limb from limb but still leave thee alive! In fact I may do it yet! Now, out with it! Why hast thou come to disturb me here?! Bah! In truth I care not! Begone!\"");
-			var0010 = Func0992(0xFFFD, "@The password! Avatar, tell him the password!@", 0x0000, false);
+			var0010 = Func0992(IOLO, "@The password! Avatar, tell him the password!@", 0x0000, false);
 			0x0000->set_conversation_slot();
 			say("\"What is this I hear?\"");
 			Func094E(AVATAR, "@A mutual friend told me to mention Iskatradeeth to thee.@");
@@ -31068,7 +31068,7 @@ void Func0424 object#(0x424) () {
 	var0000 = Func0954();
 	var0001 = Func0953();
 	var0002 = Func0942(0xFFDD);
-	var0003 = 0xFFFD->get_item_flag(IN_PARTY);
+	var0003 = IOLO->get_item_flag(IN_PARTY);
 	var0004 = 0xFFDC->get_item_flag(MET);
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@A moment, good fellow.@");
@@ -31110,7 +31110,7 @@ void Func0424 object#(0x424) () {
 
 			case "What art thou called?" (remove):
 				say("\"As a child, I was called a freak because I collected bugs! But when I went to dispose of my collection, I was called grotesque! I was so upset I could barely finish eating! But now I am called by an honorable gentleman's name, given to me by the Master.\"");
-				var0006 = Func0992(0xFFFD, "@Avatar, talking to this little fellow doth turn my stomach.@", 0x0000, false);
+				var0006 = Func0992(IOLO, "@Avatar, talking to this little fellow doth turn my stomach.@", 0x0000, false);
 				if (var0006 != AVATAR) {
 					0x0000->set_conversation_slot();
 				}
@@ -31776,7 +31776,7 @@ void Func0427 object#(0x427) () {
 	var0002 = Func0953();
 	var0003 = 0xFFD9->get_item_flag(MET);
 	var0004 = Func0994();
-	var0005 = Func0942(0xFFFD);
+	var0005 = Func0942(IOLO);
 	var0006 = Func0942(DUPRE);
 	var0007 = Func0942(SHAMINO);
 	if (event == DOUBLECLICK) {
@@ -31963,7 +31963,7 @@ void Func0427 object#(0x427) () {
 					0x0000->set_conversation_slot();
 				}
 				if (var0005 == true) {
-					0xFFFD->show_npc_face1(0x0000);
+					IOLO->show_npc_face1(0x0000);
 					say("\"There must be some mistake!\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -34376,7 +34376,7 @@ void Func042D object#(0x42D) () {
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
 	var0003 = Func0994();
-	var0004 = Func0942(0xFFFD);
+	var0004 = Func0942(IOLO);
 	var0005 = Func0942(DUPRE);
 	var0006 = Func0942(SHAMINO);
 	if (event == PROXIMITY) {
@@ -34593,7 +34593,7 @@ void Func042D object#(0x42D) () {
 					0x0000->set_conversation_slot();
 				}
 				if (var0004 == true) {
-					0xFFFD->show_npc_face1(0x0000);
+					IOLO->show_npc_face1(0x0000);
 					say("\"Take the wind out of this egotistical dog's sails, Avatar!\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -34677,7 +34677,7 @@ void Func042D object#(0x42D) () {
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Goodbye.@", 0x0000);
 				Func097F(0xFFD3, "@Indeed.@", 0x0005);
-				Func097F(0xFFFD, "@What a butthead!@", 0x0007);
+				Func097F(IOLO, "@What a butthead!@", 0x0007);
 				break;
 		}
 	}
@@ -34729,7 +34729,7 @@ void Func042E object#(0x42E) () {
 	var0001 = Func0954();
 	var0002 = UI_is_pc_female();
 	var0003 = Func0953();
-	var0004 = Func0942(0xFFFD);
+	var0004 = Func0942(IOLO);
 	var0005 = Func0942(SHAMINO);
 	var0006 = Func0942(DUPRE);
 	var0007 = Func0942(0xFFD1);
@@ -35143,7 +35143,7 @@ void Func042E object#(0x42E) () {
 				say("\"He doth tell of something wonderful, wherein all people are equal and capable of independent thought. Something called The Fellowship.\"");
 				say("\"Thou canst find him at the camp outside the city gates.\"");
 				var000E = Func0992(0x0001, 0x0000, 0x0000, false);
-				if ((var000E == 0xFFFD) || ((var000E == DUPRE) || (var000E == SHAMINO))) {
+				if ((var000E == IOLO) || ((var000E == DUPRE) || (var000E == SHAMINO))) {
 					var000B = "@I had thought we had rid ourselves of that blight." & "@But it seems that it is following in Batlin's footsteps.@";
 					var000E = Func0992(var000E, var000B, 0x0000, false);
 					0x0000->set_conversation_slot();
@@ -35157,7 +35157,7 @@ void Func042E object#(0x42E) () {
 					var0001,
 					"! Imagine what the world would be like if only we trusted one another, worked together, and sought to earn that which we strived for!\"");
 				say("\"Imagine if women were not coddled or thought of as inferior! What would the world be like if we all listened to our Inner Voice?\"");
-				var000E = Func0992(0xFFFD, ("@The world would be full of frustrated fools, " + "I am sure.@"), 0x0000, false);
+				var000E = Func0992(IOLO, ("@The world would be full of frustrated fools, " + "I am sure.@"), 0x0000, false);
 				if (var000E != AVATAR) {
 					if (UI_get_array_size(UI_get_party_list()) > 0x0002) {
 						var000F = var000E;
@@ -35587,7 +35587,7 @@ void Func042F object#(0x42F) () {
 				say("\"But sometimes 'tis FLASH!, and something thou wert watching is a big, orange pumpkin.\"");
 				say("\"I like the last one best... 'Tis fun to guess what will be there after the flash.\"");
 				var0003 = Func0992(DUPRE, 0x0000, 0x0000, false);
-				if ((var0003 != 0xFFFD) && 0xFFFD->npc_nearby()) {
+				if ((var0003 != IOLO) && IOLO->npc_nearby()) {
 					var0003 = Func0992(var0003, "@Sounds like he doth have a sense of humor like thine, Iolo!@", 0x0000, false);
 					0x0000->set_conversation_slot();
 				} else if (var0003 != AVATAR) {
@@ -35630,7 +35630,7 @@ void Func042F object#(0x42F) () {
 				if (UI_get_array_size(UI_get_party_list()) < 0x0003) {
 					var0003 = "friend is";
 				}
-				var0003 = Func0992(0xFFFD, ("@If thou couldst return to the subject at hand, " + ("Delin, we would be most grateful.@" & "@I fear that my <Check> becoming a bit impatient.@")), 0x0000, false);
+				var0003 = Func0992(IOLO, ("@If thou couldst return to the subject at hand, " + ("Delin, we would be most grateful.@" & "@I fear that my <Check> becoming a bit impatient.@")), 0x0000, false);
 				if (var0003 != AVATAR) {
 					0x0000->set_conversation_slot();
 				}
@@ -35648,9 +35648,9 @@ void Func042F object#(0x42F) () {
 				var0001 = true;
 				say("\"Oh, she was a true beauty, I tell thee! Soft golden hair and the brightest eyes that thou hast seen.\" *\"Though she came from Moonshade, no one had cause to fear her. She had not a drop of magic...\"");
 				say("\"Other than her smile.\"");
-				if (0xFFFD->npc_nearby() && (UI_get_array_size(UI_get_party_list()) > 0x0002)) {
-					var0003 = 0xFFFD;
-					while (var0003 == 0xFFFD) {
+				if (IOLO->npc_nearby() && (UI_get_array_size(UI_get_party_list()) > 0x0002)) {
+					var0003 = IOLO;
+					while (var0003 == IOLO) {
 						var0003 = Func0992(0x0001, 0x0000, 0x0000, false);
 					}
 					var0003->show_npc_face1(0x0000);
@@ -35658,7 +35658,7 @@ void Func042F object#(0x42F) () {
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
 					say("\"For thy sake, I hope that she doth live, stranger Iolo.\"");
-					0xFFFD->show_npc_face1(0x0000);
+					IOLO->show_npc_face1(0x0000);
 					say("\"If Gwenno were lost from me forever, perhaps I too would be a little confused.\"");
 					say("\"Condolences to thee, Delin, and apologies if we have been unfeeling.\"");
 					UI_remove_npc_face1();
@@ -38284,7 +38284,7 @@ void Func0436 object#(0x436) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	var0003 = Func0942(0xFFFD);
+	var0003 = Func0942(IOLO);
 	var0004 = find_nearby(0x00F9, 0x0028, MASK_NONE);
 	if (event == DEATH) {
 		var0005 = script item {
@@ -38450,7 +38450,7 @@ void Func0436 object#(0x436) () {
 			say("\"The one they call Leon denounced Beauty as a mere shadow of The Fellowship's truth! And then -- then -- did the storms come! To smite those who would utter such blasphemy!\"");
 			say("\"The storms will not end until the blight of the blasphemers' existence hath been wiped from Beauty's face!\"");
 			if (var0003 == true) {
-				0xFFFD->show_npc_face1(0x0000);
+				IOLO->show_npc_face1(0x0000);
 				say("\"I would say that she feels rather strongly about this, Avatar.\tBut what she is proposing to stop the storms seems a bit extreme.\"");
 				UI_remove_npc_face1();
 				0x0000->set_conversation_slot();
@@ -38654,7 +38654,7 @@ void Func0437 object#(0x437) () {
 				var0008 = SHAMINO;
 			}
 			if (gflags[0x0174]) {
-				var0008 = 0xFFFD;
+				var0008 = IOLO;
 			}
 			var0008->remove_from_party();
 			var0008->remove_npc();
@@ -38788,15 +38788,15 @@ void Func0437 object#(0x437) () {
 		} else {
 			var0014 = 0xFFC9->get_item_flag(MET);
 			if (gflags[0x015C] && (!gflags[0x01B5])) {
-				if (0xFFFD->npc_nearby() && 0xFFFD->get_item_flag(IN_PARTY)) {
+				if (IOLO->npc_nearby() && IOLO->get_item_flag(IN_PARTY)) {
 					gflags[0x0170] = true;
 					gflags[0x01B5] = true;
 					UI_play_music(0x001F, Func09A0(0x0005, 0x0001));
 					say("\"I am so glad that thou hast come -- and thou hast brought the Good Bard Iolo!\"");
 					say("\"Dear Iolo, our subjects have spoken of that fine ballad which thou didst sing, and thy devotion to thy lost wife hath touched our heart.\"");
 					say("\"I give thee this White Diamond Necklace, which thou mayest give to thy beloved when thou dost at last find her. It is a twin to mine own, except that mine is of a more subtle hue.\"");
-					var0000 = Func099B(0xFFFD, 0x0001, 0x03BB, 0x0000, 0x0008, 0x0000, true);
-					0xFFFD->show_npc_face1(0x0000);
+					var0000 = Func099B(IOLO, 0x0001, 0x03BB, 0x0000, 0x0008, 0x0000, true);
+					IOLO->show_npc_face1(0x0000);
 					say("\"Thou art too kind, Lady! I thank thee, and shall give it to Gwenno upon our reunion!\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -38815,8 +38815,8 @@ void Func0437 object#(0x437) () {
 					} else if (SHAMINO->get_npc_object() in var0016) {
 						var0015 = SHAMINO;
 						gflags[0x0175] = true;
-					} else if (0xFFFD->get_npc_object() in var0016) {
-						var0015 = 0xFFFD;
+					} else if (IOLO->get_npc_object() in var0016) {
+						var0015 = IOLO;
 						gflags[0x0174] = true;
 					}
 					var0015->show_npc_face1(0x0000);
@@ -39461,24 +39461,24 @@ void Func043A object#(0x43A) () {
 		0xFFC6->show_npc_face0(0x0000);
 		if (gflags[0x018C] && ((!gflags[0x018B]) && (!gflags[0x0190]))) {
 			say("\"Say there, thou with the lute! Art thou a bard?\"");
-			0xFFFD->show_npc_face1(0x0000);
+			IOLO->show_npc_face1(0x0000);
 			say("\"Yes, I am, though as of late I do not feel the music within me.\"");
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
 			say("\"I beg of thee, canst thou indulge me for but one song? The sinister thunder doth linger in mine ears.\"");
 			say("\"A few strums from thy strings may bring comfort to this sorrowful town...\"");
-			0xFFFD->show_npc_face1(0x0000);
+			IOLO->show_npc_face1(0x0000);
 			say("\"I am truly sorry, but I do not think that I can help thee...\"");
 			UI_remove_npc_face0();
 			UI_remove_npc_face1();
 			gflags[0x018B] = true;
 			0xFFC6->set_schedule_type(WAIT);
-			Func097F(0xFFFD, "@Hmmmm...@", 0x0000);
+			Func097F(IOLO, "@Hmmmm...@", 0x0000);
 			Func097F(0xFFD0, "@Please sing...@", 0x0002);
 			Func097F(0xFFCA, "@Sing of Beauty!@", 0x0004);
 			Func097F(0xFFCB, "@Disperse!@", 0x0008);
 			Func097F(0xFFC6, "@Now I need me a drink!@", 0x000C);
-			var0007 = script 0xFFFD {
+			var0007 = script IOLO {
 				nohalt;
 				wait 10;
 				call Func01D1;
@@ -40233,7 +40233,7 @@ void Func043B object#(0x43B) () {
 	var0000 = Func0954();
 	var0001 = Func0953();
 	var0002 = UI_is_pc_female();
-	var0003 = Func0942(0xFFFD);
+	var0003 = Func0942(IOLO);
 	var0004 = Func0942(DUPRE);
 	var0005 = Func0942(SHAMINO);
 	var0006 = 0xFFC5->find_nearby(0x017D, 0x0014, MASK_NONE);
@@ -40296,7 +40296,7 @@ void Func043B object#(0x43B) () {
 			}
 			say("\"I have searched all my life for a woman who would overlook my deformity and learn to love me. Somehow I will find a way to tell Delphynia of my love...\"");
 			if (var0003 == true) {
-				0xFFFD->show_npc_face1(0x0000);
+				IOLO->show_npc_face1(0x0000);
 				say("\"How can thine heart be so hard, Avatar? Thou wouldst search every corner of the land and sea to help me find Gwenno.\"");
 				say("\"Wilt thou reconsider and aid this poor soul's search for love?\"");
 				if (Func0955() == true) {
@@ -40344,7 +40344,7 @@ void Func043B object#(0x43B) () {
 				0x0000->set_conversation_slot();
 				say("\"Why... I...\"");
 				if (var0003 == true) {
-					0xFFFD->show_npc_face1(0x0000);
+					IOLO->show_npc_face1(0x0000);
 					say("\"Thou wouldst not be so hard, Shamino, if thou hadst lost thy love!\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -41700,7 +41700,7 @@ void Func043F object#(0x43F) () {
 				gflags[0x028E] = true;
 				var0007 = true;
 				say("\"Thou dost? An Urn of the Dead? How didst thou chance upon it? Perhaps thou hast slain the thieves who insulted mine ancestor's soul!\"");
-				var0010 = Func0992(0xFFFD, "@Why... um... we found it, milord.@", "@I found it.@", false);
+				var0010 = Func0992(IOLO, "@Why... um... we found it, milord.@", "@I found it.@", false);
 				0x0000->set_conversation_slot();
 				say("\"Might I examine it, please?\"");
 				if (Func0955()) {
@@ -41940,9 +41940,9 @@ void Func043F object#(0x43F) () {
 				say("\"May I see this evidence?\"");
 				if (Func097D(PARTY, 0x0001, 0x031D, 0x0078, FRAME_ANY) || (Func097D(PARTY, 0x0001, 0x031D, 0x0079, FRAME_ANY) || Func097D(PARTY, 0x0001, 0x031D, 0x007A, FRAME_ANY))) {
 					if (((Func097D(PARTY, 0x0001, 0x031D, 0x0078, FRAME_ANY) + Func097D(PARTY, 0x0001, 0x031D, 0x0079, FRAME_ANY)) + Func097D(PARTY, 0x0001, 0x031D, 0x007A, FRAME_ANY)) > 0x0001) {
-						var0010 = Func0992(0xFFFD, "@Here are the scrolls.@", "@Here are the scrolls.@", false);
+						var0010 = Func0992(IOLO, "@Here are the scrolls.@", "@Here are the scrolls.@", false);
 					} else {
-						var0010 = Func0992(0xFFFD, "@Here it is.@", "@Here it is.@", false);
+						var0010 = Func0992(IOLO, "@Here it is.@", "@Here it is.@", false);
 					}
 					0x0000->set_conversation_slot();
 					say("\"What is this scroll? By the blazes of Furnace! This is proof!\"");
@@ -42391,7 +42391,7 @@ void Func0441 object#(0x441) () {
 								var0004 = Func0813();
 							}
 						}
-						var000B = Func0992(0xFFFD, "@The Avatar is quite skilled at killing large animals.@", 0x0000, false);
+						var000B = Func0992(IOLO, "@The Avatar is quite skilled at killing large animals.@", 0x0000, false);
 						if (var000B != AVATAR) {
 							0x0000->set_conversation_slot();
 							UI_remove_npc_face1();
@@ -42424,7 +42424,7 @@ void Func0441 object#(0x441) () {
 					abort;
 				}
 				say("\"It is ready.\"");
-				var000B = Func0992(0xFFFD, (("@'Tis beautiful, " + var0003) + "!@"), 0x0000, false);
+				var000B = Func0992(IOLO, (("@'Tis beautiful, " + var0003) + "!@"), 0x0000, false);
 				if (var000B != AVATAR) {
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -42822,7 +42822,7 @@ void Func0443 object#(0x443) () {
 			case "healing":
 				say("\"I am not a magical healer. Monitorians are quite suspicious of magic. I use a natural healing method, which uses herbs. Art thou in need of a healer?\"");
 				if (gflags[0x0098] && (gflags[0x00C2] && (!gflags[0x005A]))) {
-					var000A = Func0992(0xFFFD, "@The Avatar is burning with fever!@", "@Oh... yes... mine head...@", false);
+					var000A = Func0992(IOLO, "@The Avatar is burning with fever!@", "@Oh... yes... mine head...@", false);
 					0x0000->set_conversation_slot();
 					do {
 						if (gflags[0x0076] == false) {
@@ -44071,7 +44071,7 @@ void Func0445 object#(0x445) () {
 	var0006 = false;
 	var0007 = "He is my friend";
 	var0008 = false;
-	var0009 = 0xFFFD->get_item_flag(IN_PARTY);
+	var0009 = IOLO->get_item_flag(IN_PARTY);
 	var000A = SHAMINO->get_item_flag(IN_PARTY);
 	var000B = DUPRE->get_item_flag(IN_PARTY);
 	var000C = 0xFFB4->is_dead();
@@ -44223,7 +44223,7 @@ labelFunc0445_0257:
 				say("\"I renounce Lord British and everything for which he stands. From this moment forward, I am his friend and servant no longer.\"");
 				UI_remove_npc_face1();
 				if (var0009) {
-					0xFFFD->show_npc_face1(0x0000);
+					IOLO->show_npc_face1(0x0000);
 					0x0001->set_conversation_slot();
 					say("\"Avatar! I cannot believe thy words!\"");
 					UI_remove_npc_face1();
@@ -44578,7 +44578,7 @@ labelFunc0445_0257:
 			case "museum" (remove):
 				say("\"There are many fine exhibits in our museum. Thou shouldst especially note the artifacts captured from the Goblins...\"");
 				say("\"Many of the artifacts are crafted from the bones of defeated Knights, I am certain. And the drum -- I think the skin across the top is human!\"");
-				var0015 = Func0992(0xFFFD, "@I find this discussion disgusting.@", 0x0000, false);
+				var0015 = Func0992(IOLO, "@I find this discussion disgusting.@", 0x0000, false);
 				0x0000->set_conversation_slot();
 				say("\"Oh, show courage! Thou dost look like thou mightest lose thy last meal!\"");
 				fallthrough;
@@ -45748,7 +45748,7 @@ void Func0448 object#(0x448) () {
 				gflags[0x00CA] = true;
 				0xFFB8->clear_item_say();
 				Func097F(0xFFB8, "@En garde!@", 0x0000);
-				Func097F(0xFFFD, "@Stop her!@", 0x0002);
+				Func097F(IOLO, "@Stop her!@", 0x0002);
 				Func09AC(0xFFB8, -1, 0, IN_COMBAT);
 				Func09AD(0xFFB8);
 				abort;
@@ -45818,7 +45818,7 @@ void Func0449 object#(0x449) () {
 			add("severed hand");
 		}
 		add("bye");
-		var0002 = Func0942(0xFFFD);
+		var0002 = Func0942(IOLO);
 		var0003 = Func0942(SHAMINO);
 		var0004 = Func0942(DUPRE);
 		converse (0) {
@@ -46201,11 +46201,11 @@ void Func044A object#(0x44A) () {
 				say("\"I teach the art of combat. My technique is based on swiftness and accuracy of movement. If thou wert to be at the List Field at noon, I could spar with thee.\"");
 				if (UI_get_array_size(UI_get_party_list()) > 0x0001) {
 					say("\"I am certain I could also teach thy friend a thing or two...\"");
-					var0012 = 0xFFFD->get_item_flag(IN_PARTY);
+					var0012 = IOLO->get_item_flag(IN_PARTY);
 					var0013 = SHAMINO->get_item_flag(IN_PARTY);
 					var0014 = DUPRE->get_item_flag(IN_PARTY);
 					if (var0012) {
-						0xFFFD->show_npc_face1(0x0000);
+						IOLO->show_npc_face1(0x0000);
 						say("\"Art thou referring to me?\"");
 						UI_remove_npc_face1();
 					}
@@ -46848,14 +46848,14 @@ void Func044C object#(0x44C) () {
 			case "scholar" (remove):
 				say("\"She said she was researching the land and seemed anxious to learn all about Serpent Isle. Spektor dealt with her, mostly.\"");
 				gflags[0x00A7] = true;
-				if (0xFFFD->npc_nearby()) {
-					0xFFFD->show_npc_face1(0x0000);
+				if (IOLO->npc_nearby()) {
+					IOLO->show_npc_face1(0x0000);
 					0x0001->set_conversation_slot();
 					say("\"Gwenno! It must have been Gwenno!\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
 					say("\"Yes, I believe that was her name...\"");
-					0xFFFD->show_npc_face1(0x0000);
+					IOLO->show_npc_face1(0x0000);
 					say("\"",
 						var0002,
 						"! What luck! We have found a trail to follow! Oh, Gwenno! Dost thou know where she went from here, milord?\"");
@@ -46863,7 +46863,7 @@ void Func044C object#(0x44C) () {
 					0x0000->set_conversation_slot();
 					say("\"I believe she went east, anxious to learn the wisdom of the Xenkan Monks. She set sail with Captain Hawk, bound for Moonshade and points beyond.\"");
 					say("\"Of course, this was before the Storms. No sailor will brave these dangerous waters now.\"");
-					0xFFFD->show_npc_face1(0x0000);
+					IOLO->show_npc_face1(0x0000);
 					say("\"Praise Virtue! This means she is alive and well! I thank thee, sir, for this woman is my wife!\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -47215,13 +47215,13 @@ void Func044D object#(0x44D) () {
 
 		case "Gwenno" (remove):
 			say("\"There was a woman here a while ago who spent much time in the Hall of Monitor, examining our museum display. Very friendly.\"");
-			var0007 = Func0992(0xFFFD, "@Where did she go from here? Dost thou know?@", 0x0000, false);
+			var0007 = Func0992(IOLO, "@Where did she go from here? Dost thou know?@", 0x0000, false);
 			if (var0007 != AVATAR) {
 				0x0000->set_conversation_slot();
 			}
 			say("\"She left here for the east. To study at the library on Monk Isle, as I recall.\"");
 			add("Monk Isle");
-			var0007 = Func0992(0xFFFD, "@Avatar! We must journey onward and find her!@", 0x0000, false);
+			var0007 = Func0992(IOLO, "@Avatar! We must journey onward and find her!@", 0x0000, false);
 			if (var0007 != AVATAR) {
 				0x0000->set_conversation_slot();
 			}
@@ -47248,7 +47248,7 @@ void Func044D object#(0x44D) () {
 			say("\"A place where I shall never be seen! I distrust magic in all its forms.\"");
 			say("\"Moonshade is on the Isle of Beyond, which is across the channel from Sleeping Bull. Thou wouldst need a boat to journey there.\"");
 			if (!gflags[0x00DB]) {
-				var0007 = Func0992(0xFFFD, "@Perhaps thou couldst obtain a new spellbook there...@", 0x0000, false);
+				var0007 = Func0992(IOLO, "@Perhaps thou couldst obtain a new spellbook there...@", 0x0000, false);
 				if (var0007 != AVATAR) {
 					0x0000->set_conversation_slot();
 				}
@@ -47272,7 +47272,7 @@ void Func044D object#(0x44D) () {
 			if (Func0955()) {
 				say("\"I must see this. Might I see the evidence?\"");
 				if (!(Func097D(PARTY, 0x0001, 0x031D, 0x0078, FRAME_ANY) || (Func097D(PARTY, 0x0001, 0x031D, 0x0079, FRAME_ANY) || Func097D(PARTY, 0x0001, 0x031D, 0x007A, FRAME_ANY)))) {
-					var0007 = Func0992(0xFFFD, "@We did not bring it with us...@", "@I did not bring it.@", false);
+					var0007 = Func0992(IOLO, "@We did not bring it with us...@", "@I did not bring it.@", false);
 					0x0000->set_conversation_slot();
 					say("\"Then I can do nothing for thee. Unseen evidence is useless evidence.\"");
 				} else if (Func0955()) {
@@ -48144,7 +48144,7 @@ void Func0451 object#(0x451) () {
 	var0004 = Func0994();
 	var0005 = Func0942(DUPRE);
 	var0006 = Func0942(SHAMINO);
-	var0007 = Func0942(0xFFFD);
+	var0007 = Func0942(IOLO);
 	var0008 = false;
 	var0009 = false;
 	var000A = false;
@@ -48246,7 +48246,7 @@ void Func0451 object#(0x451) () {
 					0x0000->set_conversation_slot();
 				}
 				if (var0007 == true) {
-					0xFFFD->show_npc_face1(0x0000);
+					IOLO->show_npc_face1(0x0000);
 					say("\"Do not let him say such things about thee, Avatar!\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -48269,7 +48269,7 @@ void Func0451 object#(0x451) () {
 			case "Wilfred":
 				say("\"Wilfred is Devra's youngest whelp. And I'll wager that thou wilt never find a better example of the attitude of which I speak.\"");
 				if (var0007 == true) {
-					0xFFFD->show_npc_face1(0x0000);
+					IOLO->show_npc_face1(0x0000);
 					say("\"He's a fine one to talk of attitude...\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -48514,7 +48514,7 @@ void Func0451 object#(0x451) () {
 					0x0000->set_conversation_slot();
 				}
 				if (var0007 == true) {
-					0xFFFD->show_npc_face1(0x0000);
+					IOLO->show_npc_face1(0x0000);
 					say("\"Do not let him say such things about thee, Avatar!\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -50339,7 +50339,7 @@ void Func0490 object#(0x490) () {
 				say("\"Umgabar fotuba na Gwani!\" *This one looks at you with eyes that are cold and feral.");
 				UI_remove_npc_face1();
 			}
-			var0004 = Func0992(0xFFFD, "@Avatar, they smell the Gwani pelts!@", "@They smell the Gwani pelts!@", false);
+			var0004 = Func0992(IOLO, "@Avatar, they smell the Gwani pelts!@", "@They smell the Gwani pelts!@", false);
 			return;
 		} else if (var0003) {
 			say("\"Be good very much to meet again.\"");
@@ -50390,7 +50390,7 @@ void Func0491 object#(0x491) () {
 		0xFF6F->clear_item_say();
 		0xFF6F->show_npc_face0(0x0000);
 		var0000 = Func0942(0xFF70);
-		var0001 = 0xFFFD->get_item_flag(IN_PARTY);
+		var0001 = IOLO->get_item_flag(IN_PARTY);
 		var0002 = SHAMINO->get_item_flag(IN_PARTY);
 		var0003 = DUPRE->get_item_flag(IN_PARTY);
 		var0004 = Func097D(PARTY, 0x0001, 0x00E3, QUALITY_ANY, 0x0008);
@@ -50404,7 +50404,7 @@ void Func0491 object#(0x491) () {
 				UI_remove_npc_face1();
 			}
 			if (var0001) {
-				0xFFFD->show_npc_face1(0x0000);
+				IOLO->show_npc_face1(0x0000);
 				0x0001->set_conversation_slot();
 				say("\"Avatar, 'tis the pelts! They can smell that we have Gwani pelts on us! I suggest we throw them away!\"");
 				UI_remove_npc_face1();
@@ -50891,10 +50891,10 @@ void Func0495 object#(0x495) () {
 		0xFF6B->clear_item_say();
 		0xFF6B->show_npc_face0(0x0000);
 		var0006 = 0xFF6B->get_item_flag(MET);
-		if (((!0xFFFD->get_item_flag(SI_ZOMBIE)) && gflags[0x00D5]) && (!gflags[0x0275])) {
+		if (((!IOLO->get_item_flag(SI_ZOMBIE)) && gflags[0x00D5]) && (!gflags[0x0275])) {
 			say("\"Iolo! My beloved Iolo!\"");
 			say("\"Oh, I had feared that I would never see thee again!\"");
-			0xFFFD->show_npc_face1(0x0000);
+			IOLO->show_npc_face1(0x0000);
 			say("\"My lovely Gwenno!\"");
 			say("\"Now mine heart can sing, at the sight of thee!\"");
 			0x0000->set_conversation_slot();
@@ -50904,7 +50904,7 @@ void Func0495 object#(0x495) () {
 			if (Func097D(PARTY, 0x0001, 0x03BB, QUALITY_ANY, 0x0005)) {
 				say("\"The Lady of Fawn gave me this necklace to give to thee, when at last I found thee, my love.\"");
 				say("\"Take it as a token of my love.\"");
-				var0007 = Func0996(0xFFFD, 0xFF6B, 0x0001, 0x03BB, QUALITY_ANY, 0x0005, true);
+				var0007 = Func0996(IOLO, 0xFF6B, 0x0001, 0x03BB, QUALITY_ANY, 0x0005, true);
 			} else {
 				say("\"The Lady of Fawn gave me a necklace to give to thee, my love. But in all my trials to find thee, I seem to have lost it.\"");
 				say("\"I had thought to give it to thee as a token of my love.\"");
@@ -50920,7 +50920,7 @@ void Func0495 object#(0x495) () {
 			}
 			gflags[0x0275] = true;
 		}
-		if (0xFFFD->get_item_flag(SI_ZOMBIE) && gflags[0x00D5]) {
+		if (IOLO->get_item_flag(SI_ZOMBIE) && gflags[0x00D5]) {
 			say("\"A thousand thanks for bringing back mine husband, ",
 				var0002,
 				".\"");
@@ -50970,7 +50970,7 @@ void Func0495 object#(0x495) () {
 						say("\"I hardly think that thou hast need of me, Avatar. Look at all thy fine companions!\"");
 						say("\"Instead, I shall remain here. After all, what can one old woman do for thee?\"");
 					}
-				} else if (0xFFFD->get_item_flag(SI_ZOMBIE)) {
+				} else if (IOLO->get_item_flag(SI_ZOMBIE)) {
 					say("\"But I must remain here and study! I must help thee find a way to restore my dear Iolo!\"");
 				} else {
 					say("\"I will be of more use to thee if I remain here. I seem to have a talent for finding the information thou dost need.\"");
@@ -51219,7 +51219,7 @@ void Func0496 object#(0x496) () {
 	var0004 = 0xFFB8->get_item_flag(DEAD);
 	if (gflags[0x003D] && ((0xFF6A->get_schedule_type() == SLEEP) && (Func08F1() < 0x000F))) {
 		var0005 = true;
-		if ((!0xFFFD->npc_nearby()) && ((!DUPRE->npc_nearby()) && ((!SHAMINO->npc_nearby()) && (!0xFFDE->npc_nearby())))) {
+		if ((!IOLO->npc_nearby()) && ((!DUPRE->npc_nearby()) && ((!SHAMINO->npc_nearby()) && (!0xFFDE->npc_nearby())))) {
 			var0006 = true;
 		}
 	}
@@ -51654,9 +51654,9 @@ void Func0496 object#(0x496) () {
 				say("\"May I see?\"");
 				if (Func097D(PARTY, 0x0001, 0x031D, 0x0078, FRAME_ANY) || (Func097D(PARTY, 0x0001, 0x031D, 0x0079, FRAME_ANY) || Func097D(PARTY, 0x0001, 0x031D, 0x007A, FRAME_ANY))) {
 					if (((Func097D(PARTY, 0x0001, 0x031D, 0x0078, FRAME_ANY) + Func097D(PARTY, 0x0001, 0x031D, 0x0079, FRAME_ANY)) + Func097D(PARTY, 0x0001, 0x031D, 0x007A, FRAME_ANY)) > 0x0001) {
-						var0010 = Func0992(0xFFFD, "@Here are the scrolls.@", "@Here are the scrolls.@", false);
+						var0010 = Func0992(IOLO, "@Here are the scrolls.@", "@Here are the scrolls.@", false);
 					} else {
-						var0010 = Func0992(0xFFFD, "@Here it is.@", "@Here it is.@", false);
+						var0010 = Func0992(IOLO, "@Here it is.@", "@Here it is.@", false);
 					}
 					0x0000->set_conversation_slot();
 					say("\"But this is not what I expected...\"");
@@ -54280,7 +54280,7 @@ void Func04AA object#(0x4AA) () {
 	var var0019;
 
 	var0000 = Func0942(SHAMINO);
-	var0001 = Func0942(0xFFFD);
+	var0001 = Func0942(IOLO);
 	var0002 = Func0942(DUPRE);
 	var0003 = Func0954();
 	var0004 = UI_is_pc_female();
@@ -54575,7 +54575,7 @@ void Func04AA object#(0x4AA) () {
 				remove([var0008, "I am the Avatar.", "I am lost..."]);
 				say("\"To not have heard of any Avatar...\"");
 				say("\"To be wary that you are not like other Men, and to hope that you are not here to steal our treasures.\"");
-				var0016 = Func0992(0xFFFD, "@The Avatar is the Champion of Virtue, dear gargoyle.@", 0x0000, false);
+				var0016 = Func0992(IOLO, "@The Avatar is the Champion of Virtue, dear gargoyle.@", 0x0000, false);
 				if (var0016 != AVATAR) {
 					0x0000->set_conversation_slot();
 					say("\"To be possible? To be the Hero that we have dreamed of?\"");
@@ -57741,7 +57741,7 @@ void Func04D3 object#(0x4D3) () {
 			UI_remove_npc_face0();
 			Func097F(0xFF2D, "@I shall pray for thee!@", 0x0000);
 			0xFF2D->move_object([0x05FA, 0x078F, 0x0000]);
-			var0008 = [0xFFFD, SHAMINO, DUPRE];
+			var0008 = [IOLO, SHAMINO, DUPRE];
 			for (var000B in var0008 with var0009 to var000A) {
 				if (!var000B->npc_nearby()) {
 					var000C = var000B->approach_avatar(0x0050, 0x0028);
@@ -58034,7 +58034,7 @@ void Func04D4 object#(0x4D4) () {
 
 			case "name" (remove):
 				say("\"I no longer believe in names. Doth the corn in the field have a name? Canst thou hear the cry of the corn?\"");
-				var000E = Func0992(0xFFFD, (("@" + var0000) + ", this monk is a mystical man indeed...@"), 0x0000, false);
+				var000E = Func0992(IOLO, (("@" + var0000) + ", this monk is a mystical man indeed...@"), 0x0000, false);
 				0x0000->set_conversation_slot();
 				add(["beliefs", "corn"]);
 				fallthrough;
@@ -58069,7 +58069,7 @@ void Func04D4 object#(0x4D4) () {
 				say("\"Corn is at the center of the kingdom of vegetables.\"");
 				say("\"Corn is tall and green, king of the grasses, and its fruit is sweet when roasted.\"");
 				say("\"I seek to find union with the corn. I am a Child of the Corn.\"");
-				var000E = Func0992(0xFFFD, (("@As I said, " + var0000) + "...@"), 0x0000, false);
+				var000E = Func0992(IOLO, (("@As I said, " + var0000) + "...@"), 0x0000, false);
 				0x0000->set_conversation_slot();
 				fallthrough;
 
@@ -59222,7 +59222,7 @@ labelFunc0526_0008:
 		say("\"Why hast thou disturbed my slumber?\"");
 		AVATAR->show_npc_face1(0x0000);
 		say("\"Back, creature of the undead! Thou art a thing of evil!\"");
-		var0000 = 0xFFFD->get_item_flag(IN_PARTY);
+		var0000 = IOLO->get_item_flag(IN_PARTY);
 		var0001 = SHAMINO->get_item_flag(IN_PARTY);
 		var0002 = DUPRE->get_item_flag(IN_PARTY);
 		var0003 = Func097D(PARTY, 0x0001, 0x00E7, QUALITY_ANY, FRAME_ANY);
@@ -59291,7 +59291,7 @@ labelFunc0526_0008:
 					0xFEF8->show_npc_face0(0x0000);
 					say("\"Ah! But thou dost have the Magebane! I will make thee a deal then, Avatar. In exchange for thy blue sword I shall teach thee my greatest spell, one that can dispatch any foe. Dost thou agree?\"");
 					if (var0000) {
-						0xFFFD->show_npc_face1(0x0000);
+						IOLO->show_npc_face1(0x0000);
 						say("\"Avatar, do not trust him!\"");
 						UI_remove_npc_face1();
 					}
@@ -59331,7 +59331,7 @@ labelFunc0526_0008:
 					0xFEF8->show_npc_face0(0x0000);
 					say("\"But I can be merciful. I will spare thee, Avatar, if thou wilt give me one of thy companions. I hunger for fresh blood. Dost thou accept mine offer?\"");
 					if (var0000) {
-						0xFFFD->show_npc_face1(0x0000);
+						IOLO->show_npc_face1(0x0000);
 						say("\"The Avatar will not accept thine offer, foul fiend!\"");
 						UI_remove_npc_face1();
 					}
@@ -59351,7 +59351,7 @@ labelFunc0526_0008:
 					var000A = Func0955();
 					if (var000A) {
 						if (var0000) {
-							0xFFFD->show_npc_face1(0x0000);
+							IOLO->show_npc_face1(0x0000);
 							say("\"Well, I certainly do not intend to go along with this at all!\"");
 							UI_remove_npc_face1();
 						}
@@ -60990,9 +60990,9 @@ void Func061D object#(0x61D) () {
 				};
 			}
 			if (var0006 == 0x0015) {
-				var0007 = 0xFFFD->get_distance(var0005);
-				0xFFFD->si_path_run_usecode(var0005->get_object_position(), PATH_SUCCESS, var0005, Func061D, true);
-				var0008 = script 0xFFFD after (var0007 + 0x0002) ticks {
+				var0007 = IOLO->get_distance(var0005);
+				IOLO->si_path_run_usecode(var0005->get_object_position(), PATH_SUCCESS, var0005, Func061D, true);
+				var0008 = script IOLO after (var0007 + 0x0002) ticks {
 					nohalt;
 					face FACE_NORTH;
 				};
@@ -62249,13 +62249,13 @@ void Func0633 object#(0x633) () {
 			Func09AC(SHAMINO, var0000[0x0001], var0000[0x0002], WANDER);
 			return;
 		}
-		if (0xFFFD->get_item_flag(IN_PARTY) && Func0983(0xFFFD)) {
-			0xFFFD->clear_item_say();
-			Func097F(0xFFFD, "@I am leaving!@", 0x0000);
+		if (IOLO->get_item_flag(IN_PARTY) && Func0983(IOLO)) {
+			IOLO->clear_item_say();
+			Func097F(IOLO, "@I am leaving!@", 0x0000);
 			gflags[0x02D3] = true;
-			0xFFFD->remove_from_party();
-			var0000 = 0xFFFD->get_object_position();
-			Func09AC(0xFFFD, var0000[0x0001], var0000[0x0002], WANDER);
+			IOLO->remove_from_party();
+			var0000 = IOLO->get_object_position();
+			Func09AC(IOLO, var0000[0x0001], var0000[0x0002], WANDER);
 		}
 	}
 labelFunc0633_0128:
@@ -65196,14 +65196,14 @@ void Func0667 object#(0x667) () {
 	}
 	if (event == SCRIPTED) {
 		if (item == AVATAR->get_npc_object()) {
-			obj_sprite_effect(ANIMATION_CLOUDS, 0x0000, 0x0000, 0xFFFD, 0xFFFD, 0x0004, 0x0019);
-			obj_sprite_effect(ANIMATION_CLOUDS, 0x0000, 0x0000, 0x0000, 0xFFFC, 0x0004, 0x0019);
-			obj_sprite_effect(ANIMATION_CLOUDS, 0x0000, 0x0000, 0x0003, 0xFFFD, 0x0003, 0x0019);
-			obj_sprite_effect(ANIMATION_CLOUDS, 0x0000, 0x0000, 0xFFFC, 0x0000, 0x0002, 0x0019);
-			obj_sprite_effect(ANIMATION_CLOUDS, 0x0000, 0x0000, 0x0004, 0x0000, 0x0001, 0x0019);
-			obj_sprite_effect(ANIMATION_CLOUDS, 0x0000, 0x0000, 0xFFFD, 0x0003, 0x0003, 0x0019);
-			obj_sprite_effect(ANIMATION_CLOUDS, 0x0000, 0x0000, 0x0000, 0x0004, 0x0001, 0x0019);
-			obj_sprite_effect(ANIMATION_CLOUDS, 0x0000, 0x0000, 0x0003, 0x0003, 0x0001, 0x0019);
+			obj_sprite_effect(ANIMATION_CLOUDS,  0,  0, -3, -3,  4, 0x0019);
+			obj_sprite_effect(ANIMATION_CLOUDS,  0,  0,  0, -4,  4, 0x0019);
+			obj_sprite_effect(ANIMATION_CLOUDS,  0,  0,  3, -3,  3, 0x0019);
+			obj_sprite_effect(ANIMATION_CLOUDS,  0,  0, -4,  0,  2, 0x0019);
+			obj_sprite_effect(ANIMATION_CLOUDS,  0,  0,  4,  0,  1, 0x0019);
+			obj_sprite_effect(ANIMATION_CLOUDS,  0,  0, -3,  3,  3, 0x0019);
+			obj_sprite_effect(ANIMATION_CLOUDS,  0,  0,  0,  4,  1, 0x0019);
+			obj_sprite_effect(ANIMATION_CLOUDS,  0,  0,  3,  3,  1, 0x0019);
 		} else {
 			var0007 = UI_die_roll(0x0001, 0x0003);
 			if (var0007 == 0x0001) {
@@ -67139,7 +67139,7 @@ void Func0688 object#(0x688) () {
 }
 
 void Func068A object#(0x68A) () {
-	obj_sprite_effect(ANIMATION_TELEPORT2, 0xFFFD, 0xFFFC, 0x0000, 0x0000, 0x0000, LOOP_ONCE2);
+	obj_sprite_effect(ANIMATION_TELEPORT2, -3, -4, 0, 0, 0, LOOP_ONCE2);
 	gflags[0x01FC] = false;
 }
 
@@ -67582,7 +67582,7 @@ void Func06AE object#(0x6AE) () {
 	var0002 = find_nearby(0x01FB, 0x0014, MASK_NONE);
 	if (event == EGG) {
 		if (var0000) {
-			var0003 = Func0992(0xFFFD, 0x0000, 0x0000, false);
+			var0003 = Func0992(IOLO, 0x0000, 0x0000, false);
 			var0003->item_say("@Snakes!@");
 		} else if (var0001) {
 			var0003 = Func0992(SHAMINO, 0x0000, 0x0000, false);
@@ -67643,7 +67643,7 @@ void Func06AE object#(0x6AE) () {
 			UI_remove_npc_face1();
 		}
 		if (var0001) {
-			var000D = [0xFFFD, SHAMINO, DUPRE, 0xFF6B];
+			var000D = [IOLO, SHAMINO, DUPRE, 0xFF6B];
 			if (get_npc_number() in var000D) {
 				say("\"A hall of sleeping gargoyles...\"");
 				say("\"'Tis reminiscent of the problems that are occurring in Britannia this very instant!\"");
@@ -68292,7 +68292,7 @@ void Func06BC object#(0x6BC) () {
 			remove_item();
 		}
 		var0002 = get_item_quality();
-		if ((!gflags[0x018C]) && Func0942(0xFFFD)) {
+		if ((!gflags[0x018C]) && Func0942(IOLO)) {
 			UI_play_music(0x0017, Func09A0(0x0005, 0x0001));
 			var0003 = var0000->set_item_quality(0x0000);
 			gflags[0x018C] = true;
@@ -68326,15 +68326,15 @@ void Func06BC object#(0x6BC) () {
 			var0007 = UI_create_new_object(0x02B4);
 			if (var0007) {
 				var0007->set_item_frame(0x0002);
-				var0008 = 0xFFFD->get_object_position();
+				var0008 = IOLO->get_object_position();
 				var0008[0x0002] += 0x0001;
 				var0003 = UI_update_last_created(var0008);
 				if (var0003) {
 					var0008[0x0001] -= var0008[0x0003] / 0x0002;
 					var0008[0x0002] -= var0008[0x0003] / 0x0002;
 					UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, var0008[0x0001], var0008[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-					var0009 = 0xFFFD->find_direction(var0007);
-					var0003 = script 0xFFFD {
+					var0009 = IOLO->find_direction(var0007);
+					var0003 = script IOLO {
 						nohalt;
 						wait 1;
 						face var0009;
@@ -68361,12 +68361,12 @@ void Func06BC object#(0x6BC) () {
 			abort;
 		}
 		if (var0002 == (var0001 + 0x0001)) {
-			var0007 = 0xFFFD->find_nearby(0x02B4, 0x0019, MASK_NONE);
+			var0007 = IOLO->find_nearby(0x02B4, 0x0019, MASK_NONE);
 			if (var0007) {
 				var0007->remove_item();
-				var0003 = Func099B(0xFFFD, 0x0001, 0x02B4, 0x0000, 0x0002, 0x0000, false);
+				var0003 = Func099B(IOLO, 0x0001, 0x02B4, 0x0000, 0x0002, 0x0000, false);
 			}
-			var0003 = script 0xFFFD {
+			var0003 = script IOLO {
 				nohalt;
 				actor frame standing;
 			};
@@ -68376,7 +68376,7 @@ void Func06BC object#(0x6BC) () {
 			};
 			var0003 = var0000->set_item_quality(var0002 + 0x0001);
 			AVATAR->clear_item_flag(DONT_MOVE);
-			Func097F(0xFFFD, "@A lute!@", 0x0000);
+			Func097F(IOLO, "@A lute!@", 0x0000);
 		}
 		if (var0002 == (var0001 + 0x0002)) {
 			var0003 = var0000->set_item_quality(var0002 + 0x0001);
@@ -69814,7 +69814,7 @@ void Func06D7 object#(0x6D7) () {
 		if (var0001 == 0x0001) {
 			UI_sprite_effect(ANIMATION_MEDIUM_BLAST, var0002[0x0001], var0002[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			UI_play_sound_effect(0x002A);
-			var0003 = 0xFFFD;
+			var0003 = -3;
 			while (var0003 < 0x0002) {
 				var0004 = [(var0002[0x0001] + var0003), var0002[0x0002], 0x0000];
 				var0005 = UI_create_new_object2(0x0373, var0004);
@@ -70078,8 +70078,8 @@ void Func06DA object#(0x6DA) () {
 		var0000 = get_item_quality();
 		if (var0000 == 0x0001) {
 			var0001 = Func0992(AVATAR, "@A Software Pirate!@", 0x0000, true);
-			if (0xFFFD->npc_nearby()) {
-				Func097F(0xFFFD, "@Kill him quickly!@", 0x0010);
+			if (IOLO->npc_nearby()) {
+				Func097F(IOLO, "@Kill him quickly!@", 0x0010);
 			}
 			if (SHAMINO->npc_nearby()) {
 				Func097F(SHAMINO, "@Format his hard drive!@", 0x0020);
@@ -71656,7 +71656,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 void Func06F5 object#(0x6F5) () {
 	var var0000;
 
-	if ((!gflags[0x0060]) || (gflags[0x0061] || (SHAMINO->npc_nearby() && (DUPRE->npc_nearby() && 0xFFFD->npc_nearby())))) {
+	if ((!gflags[0x0060]) || (gflags[0x0061] || (SHAMINO->npc_nearby() && (DUPRE->npc_nearby() && IOLO->npc_nearby())))) {
 		abort;
 	}
 	var0000 = 0xFF2D->approach_avatar(0x0050, 0x0028);
@@ -72539,8 +72539,8 @@ void Func070D object#(0x70D) () {
 			var0001 = find_nearby(0x010E, 0x0014, MASK_NONE);
 			for (var0004 in var0001 with var0002 to var0003) {
 				if (var0004->get_item_quality() == 0x0056) {
-					if (Func0908(var0004, 0x0178, 0x0001, 0x0000, 0x0000, 0x0007)) {
-						Func0909(var0004, 0x01B0, 0x0000, 0x0002, 0x01B1, 0x0001, 0xFFFD, 0x0000, 0x0007);
+					if (Func0908(var0004, 0x0178, 0x0001, 0, 0, 0x0007)) {
+						Func0909(var0004, 0x01B0, 0x0000, 0x0002, 0x01B1, 0x0001, -3, 0, 0x0007);
 						UI_play_sound_effect2(0x0020, var0004);
 					} else {
 						Func0903();
@@ -72687,7 +72687,7 @@ void Func0714 object#(0x714) () {
 	var0000 = get_item_quality();
 	if (var0000 != 0x00DE) {
 		if (AVATAR->find_nearby(0x01D1, ON_SCREEN, MASK_ALL_UNSEEN)) {
-			0xFFFD->get_npc_object()->Func01D1();
+			IOLO->get_npc_object()->Func01D1();
 		}
 	}
 	if (var0000 == 0x00DE) {
@@ -72796,7 +72796,7 @@ void Func0718 object#(0x718) () {
 				}
 				if (var0001->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY)) {
 					AVATAR->clear_item_say();
-					var0007 = Func0992(0xFFFD, "@Something in the ashes?@", "@Something in the ashes?@", true);
+					var0007 = Func0992(IOLO, "@Something in the ashes?@", "@Something in the ashes?@", true);
 				}
 			} else {
 				var0001->remove_item();
@@ -73550,8 +73550,8 @@ void Func0720 object#(0x720) () {
 	}
 	if (event == SCRIPTED) {
 		var0000 = get_object_position();
-		var0001 = UI_die_roll(0xFFFD, 0x0003);
-		var0002 = UI_die_roll(0xFFFD, 0x0003);
+		var0001 = UI_die_roll(-3, 3);
+		var0002 = UI_die_roll(-3, 3);
 		UI_sprite_effect(ANIMATION_LIGHTNING, (var0000[0x0001] + var0001), (var0000[0x0002] + var0002), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		UI_play_sound_effect(0x002A);
 		UI_sprite_effect(ANIMATION_TELEPORT, (var0000[0x0001] - 0x0003), (var0000[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
@@ -74261,7 +74261,7 @@ void Func0726 object#(0x726) () {
 	if ((event == SCRIPTED) && gflags[0x000A]) {
 		gflags[0x000A] = false;
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
-		Func097F(0xFFFD, "@Where didst thou go?@", 0x001B);
+		Func097F(IOLO, "@Where didst thou go?@", 0x001B);
 	}
 	if (event == SCRIPTED) {
 		AVATAR->move_object([0x0684, 0x007B, 0x0000]);
@@ -74563,10 +74563,10 @@ void Func072B object#(0x72B) () {
 					var000E = var000D;
 					var000F = var000D->get_object_position();
 					UI_play_sound_effect(0x0059);
-					UI_sprite_effect(ANIMATION_GREEN_BUBBLES, (var000F[0x0001] - 0x0002), (var000F[0x0002] - 0x0002), 0x0003, 0x0003, 0x0000, LOOP_ONCE);
-					UI_sprite_effect(ANIMATION_GREEN_BUBBLES, (var000F[0x0001] - 0x0003), (var000F[0x0002] - 0x0003), 0xFFFD, 0x0003, 0x0000, LOOP_ONCE);
-					UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, (var000F[0x0001] - 0x0002), (var000F[0x0002] - 0x0002), 0xFFFD, 0xFFFD, 0x0000, LOOP_ONCE);
-					UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, (var000F[0x0001] - 0x0003), (var000F[0x0002] - 0x0003), 0x0003, 0xFFFD, 0x0000, LOOP_ONCE);
+					UI_sprite_effect(ANIMATION_GREEN_BUBBLES , (var000F[0x0001] - 2), (var000F[0x0002] - 2),  3,  3,  0, LOOP_ONCE);
+					UI_sprite_effect(ANIMATION_GREEN_BUBBLES , (var000F[0x0001] - 3), (var000F[0x0002] - 3), -3,  3,  0, LOOP_ONCE);
+					UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, (var000F[0x0001] - 2), (var000F[0x0002] - 2), -3, -3,  0, LOOP_ONCE);
+					UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, (var000F[0x0001] - 3), (var000F[0x0002] - 3),  3, -3,  0, LOOP_ONCE);
 				}
 			}
 			var0010 = var000E->get_item_shape();
@@ -75176,9 +75176,9 @@ void Func073B object#(0x73B) () {
 		var0001->set_alignment(GOOD);
 		var0001->set_item_flag(SI_TOURNAMENT);
 		var0002 = Func0992(0x0001, "@We must hurry!@", "@I must hurry!@", true);
-		if (!0xFFFD->get_item_flag(IN_PARTY)) {
-			0xFFFD->add_to_party();
-			Func097F(0xFFFD, "@Wait, Avatar!@", 0x0000);
+		if (!IOLO->get_item_flag(IN_PARTY)) {
+			IOLO->add_to_party();
+			Func097F(IOLO, "@Wait, Avatar!@", 0x0000);
 		}
 		if (!SHAMINO->get_item_flag(IN_PARTY)) {
 			SHAMINO->add_to_party();
@@ -75400,7 +75400,7 @@ void Func073B object#(0x73B) () {
 			};
 		}
 		if ((var0004 > 0x0003) && (var0004 < 0x0007)) {
-			var0005 = [SHAMINO, DUPRE, 0xFFFD];
+			var0005 = [SHAMINO, DUPRE, IOLO];
 			var0008 = var0005[(var0004 - 0x0003)];
 			UI_play_sound_effect(0x0077);
 			if (var0004 > 0x0004) {
@@ -75479,17 +75479,17 @@ void Func073B object#(0x73B) () {
 			}
 		}
 		if (var0004 == 0x0006) {
-			if (0xFFFD->get_item_flag(IN_PARTY)) {
-				var0000 = 0xFFFD->get_object_position();
-				var000D = 0xFFFD->get_item_frame();
-				0xFFFD->remove_from_party();
-				0xFFFD->move_object([0x0062, 0x0036, 0x0000]);
-				Func09AC(0xFFFD, 0x0062, 0x0036, WAIT);
+			if (IOLO->get_item_flag(IN_PARTY)) {
+				var0000 = IOLO->get_object_position();
+				var000D = IOLO->get_item_frame();
+				IOLO->remove_from_party();
+				IOLO->move_object([0x0062, 0x0036, 0x0000]);
+				Func09AC(IOLO, 0x0062, 0x0036, WAIT);
 				var000E = UI_create_new_object2(0x0370, var0000);
 				var000E->set_item_frame(var000D);
 				var000E->set_schedule_type(WAIT);
 				UI_sprite_effect(ANIMATION_TELEPORT, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-				0xFFFD->set_item_flag(DEAD);
+				IOLO->set_item_flag(DEAD);
 			}
 		}
 		if (var0004 == 0x0007) {
@@ -75511,7 +75511,7 @@ void Func073B object#(0x73B) () {
 			if (var000F) {
 				var0000 = var000F->get_object_position();
 				var000F->remove_item();
-				var0010 = 0xFFFD->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
+				var0010 = IOLO->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
 				if (var0010) {
 					for (var0013 in var0010 with var0011 to var0012) {
 						var0014 = var0013->set_last_created();
@@ -75619,14 +75619,14 @@ void Func073C object#(0x73C) () {
 
 	if ((event == EGG) && (!Func0923())) {
 		var0000 = AVATAR->get_object_position();
-		var0001 = UI_die_roll(0xFFFD, 0x0003);
-		var0002 = UI_die_roll(0xFFFD, 0x0003);
+		var0001 = UI_die_roll(-3, 3);
+		var0002 = UI_die_roll(-3, 3);
 		var0000[0x0001] += var0001;
 		var0000[0x0002] += var0002;
 		0xFF2D->move_object(var0000);
 		var0000[0x0001] -= var0000[0x0003] / 0x0002;
 		var0000[0x0002] -= var0000[0x0003] / 0x0002;
-		UI_sprite_effect(ANIMATION_TELEPORT, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
+		UI_sprite_effect(ANIMATION_TELEPORT, var0000[0x0001], var0000[0x0002], 0, 0, 0, LOOP_ONCE);
 		0xFF2D->set_schedule_type(TALK);
 		0xFF2D->set_alignment(NEUTRAL);
 	}
@@ -75774,7 +75774,7 @@ void Func0759 object#(0x759) () {
 	var var0016;
 	var var0017;
 
-	var0000 = [AVATAR, 0xFFFD, SHAMINO, DUPRE];
+	var0000 = [AVATAR, IOLO, SHAMINO, DUPRE];
 	var0001 = AVATAR->find_nearby(ANY_SHAPE, 0x001E, MASK_NPC);
 	if (UI_get_array_size(var0001) > 0x0001) {
 		var0001 = Func0988(AVATAR->get_npc_object(), var0001);
@@ -75827,16 +75827,16 @@ void Func0759 object#(0x759) () {
 	if (SHAMINO->get_npc_object() in var0007) {
 		SHAMINO->remove_from_party();
 	}
-	if (0xFFFD->get_npc_object() in var0007) {
-		0xFFFD->remove_from_party();
+	if (IOLO->get_npc_object() in var0007) {
+		IOLO->remove_from_party();
 	}
 	DUPRE->set_schedule_type(WAIT);
 	DUPRE->remove_npc();
 	SHAMINO->set_new_schedules(MIDNIGHT, STANDTHERE, [0x025F, 0x0A33]);
 	SHAMINO->run_schedule();
-	0xFFFD->set_new_schedules(MIDNIGHT, PATROL, [0x0428, 0x09C7]);
-	0xFFFD->move_object([0x0428, 0x09C7, 0x0000]);
-	0xFFFD->run_schedule();
+	IOLO->set_new_schedules(MIDNIGHT, PATROL, [0x0428, 0x09C7]);
+	IOLO->move_object([0x0428, 0x09C7, 0x0000]);
+	IOLO->run_schedule();
 	Func092B();
 	var0008 = AVATAR->get_object_position();
 	var0009 = [(var0008[0x0001] + 0x00B0), var0008[0x0002], var0008[0x0003]];
@@ -78668,7 +78668,7 @@ void Func07D5 object#(0x7D5) () {
 			var000C = var000B->get_item_shape();
 			var000B->set_polymorph(var000C);
 		}
-		var000D = Func0992(0xFFFD, "@By Lord British's throne...@", "@By Lord British's throne...@", true);
+		var000D = Func0992(IOLO, "@By Lord British's throne...@", "@By Lord British's throne...@", true);
 		if (var000D == AVATAR->get_npc_number()) {
 			Func097F(var000D, "@...where am I?@", 0x000F);
 		} else {
@@ -81117,8 +81117,8 @@ void Func07F9 object#(0x7F9) () {
 			if (!UI_update_last_created([(var0002[0x0001] + 0x0003), (var0002[0x0002] - 0x0001), var0002[0x0003]])) {
 				Func092F(item, 0x0005);
 			}
-			if (Func0908(var0000, 0x010E, 0x0001, 0x0000, 0x0000, 0x0007)) {
-				Func0909(var0000, 0x01B1, 0x0000, 0x0001, 0x01B0, 0x0001, 0x0000, 0xFFFD, 0x0007);
+			if (Func0908(var0000, 0x010E, 0x0001, 0, 0, 0x0007)) {
+				Func0909(var0000, 0x01B1, 0x0000, 0x0001, 0x01B0, 0x0001, 0, -3, 0x0007);
 				UI_play_sound_effect2(0x0020, var0000);
 			} else {
 				Func0903();
@@ -81172,8 +81172,8 @@ void Func07F9 object#(0x7F9) () {
 		if (!var0000) {
 			Func092F(item, 0x0009);
 		}
-		if (Func0908(var0000, 0x010E, 0x0001, 0x0000, 0x0000, 0x0007)) {
-			Func0909(var0000, 0x01B1, 0x0000, 0x0001, 0x01B0, 0x0001, 0x0000, 0xFFFD, 0x0007);
+		if (Func0908(var0000, 0x010E, 0x0001, 0, 0, 0x0007)) {
+			Func0909(var0000, 0x01B1, 0x0000, 0x0001, 0x01B0, 0x0001, 0, -3, 0x0007);
 			UI_play_sound_effect2(0x0020, var0000);
 		} else {
 			Func0903();
@@ -81776,7 +81776,7 @@ void Func07FB object#(0x7FB) () {
 		UI_remove_npc_face1();
 		0x0000->set_conversation_slot();
 		say("\"So they did not seem to have a true appreciation of Beauty?\"");
-		var0008 = Func0992(0xFFFD, "@Beauty lies in the eye of the beholder...@", 0x0000, false);
+		var0008 = Func0992(IOLO, "@Beauty lies in the eye of the beholder...@", 0x0000, false);
 		if (var0008 == AVATAR) {
 			0xFFD2->show_npc_face1(0x0000);
 			say("\"Beauty lies in the eye of the beholder...\"");
@@ -82499,7 +82499,7 @@ labelFunc07FC_074A:
 				say("\"That is what Alyssand said in her testimony -- that thy friend did return her engagement ring to her.\"");
 				say("\"Mighty nice of him, I say. He looks to be a good lad. Doth he need a wife?\"");
 				if (gflags[0x0174]) {
-					0xFFFD->show_npc_face1(0x0000);
+					IOLO->show_npc_face1(0x0000);
 					say("\"I already have a wife, thank thee!\"");
 				}
 				if (gflags[0x0173]) {
@@ -84201,7 +84201,7 @@ void Func0808 0x808 (var var0000, var var0001) {
 				}
 				if (var0001 == 0x0005) {
 					say("\"As I have said, I serve and protect my master's household. This have I done for a great many years.\"");
-					var0007 = Func0992(0xFFFD, "@Why, this being doth move so silently!@", 0x0000, false);
+					var0007 = Func0992(IOLO, "@Why, this being doth move so silently!@", 0x0000, false);
 					if (var0007 != AVATAR) {
 						0x0000->set_conversation_slot();
 						say("\"Master Filbercio hath enchanted my feet to prevent them from clattering as I walk. He was greatly disturbed by the noise.\"");
@@ -90514,7 +90514,7 @@ var Func0832 0x832 (var var0000) {
 		return -2;
 	}
 	if ((var0000 == 0x0006) || (var0000 == 0x0007)) {
-		return 0xFFFD;
+		return -3;
 	}
 	if ((var0000 == 0x0008) || (var0000 == 0x0009)) {
 		return 0xFFFB;
@@ -91385,12 +91385,12 @@ extern var Func09B3 0x9B3 (var var0000);
 void Func083C 0x83C () {
 	var var0000;
 
-	if (0xFFFD->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY)) {
+	if (IOLO->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY)) {
 		say("\"I am carrying many items, some of which may be of use to thee. Wouldst thou care to have these before I depart?\"");
 		if (Func0955()) {
 			say("\"Here they are.\"");
 			gflags[0x0019] = false;
-			var0000 = Func09B3(0xFFFD);
+			var0000 = Func09B3(IOLO);
 			if (var0000[0x0001] != 0x0000) {
 				say("\"Thy friends will have to help carry these things.\"");
 			}
@@ -98783,7 +98783,7 @@ void Func086D 0x86D () {
 	for (var0003 in var0000 with var0001 to var0002) {
 		if (var0003 != AVATAR->get_npc_object()) {
 			var0004 = var0003->get_body_npc();
-			if ((var0004 == 0xFFFD) || ((var0004 == SHAMINO) || (var0004 == DUPRE))) {
+			if ((var0004 == IOLO) || ((var0004 == SHAMINO) || (var0004 == DUPRE))) {
 				var0005 = var0003->resurrect();
 				var0004->add_to_party();
 			}
@@ -98791,7 +98791,7 @@ void Func086D 0x86D () {
 	}
 	Func086C(DUPRE);
 	Func086C(SHAMINO);
-	Func086C(0xFFFD);
+	Func086C(IOLO);
 }
 
 extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
@@ -101196,10 +101196,10 @@ void Func088A 0x88A (var var0000) {
 				var0004 = var0000->set_item_quality(0x0000);
 			}
 			if (var0002) {
-				if ((var0002 == 0x000D) && (var0003 == 0xFFFD)) {
-					0xFFFD->clear_item_flag(SI_ZOMBIE);
-					if (!0xFFFD->get_item_flag(IN_PARTY)) {
-						0xFFFD->set_schedule_type(TALK);
+				if ((var0002 == 0x000D) && (var0003 == IOLO)) {
+					IOLO->clear_item_flag(SI_ZOMBIE);
+					if (!IOLO->get_item_flag(IN_PARTY)) {
+						IOLO->set_schedule_type(TALK);
 					}
 					Func08F4();
 				}
@@ -102289,7 +102289,7 @@ void Func08AA 0x8AA () {
 	if (gflags[0x01B6]) {
 		abort;
 	}
-	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((0xFFD2->get_item_flag(MET) + 0xFFD1->get_item_flag(MET)) + 0xFFD0->get_item_flag(MET)) + 0xFFCD->get_item_flag(MET)) + 0xFFCC->get_item_flag(MET)) + 0xFFCB->get_item_flag(MET)) + 0xFFCA->get_item_flag(MET)) + 0xFFC6->get_item_flag(MET)) + 0xFFCF->get_item_flag(MET)) + 0xFFCE->get_item_flag(MET)) + 0xFFC3->get_item_flag(MET)) > 0x0004) && 0xFFFD->npc_nearby())))) {
+	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((0xFFD2->get_item_flag(MET) + 0xFFD1->get_item_flag(MET)) + 0xFFD0->get_item_flag(MET)) + 0xFFCD->get_item_flag(MET)) + 0xFFCC->get_item_flag(MET)) + 0xFFCB->get_item_flag(MET)) + 0xFFCA->get_item_flag(MET)) + 0xFFC6->get_item_flag(MET)) + 0xFFCF->get_item_flag(MET)) + 0xFFCE->get_item_flag(MET)) + 0xFFC3->get_item_flag(MET)) > 0x0004) && IOLO->npc_nearby())))) {
 		var0000 = script Func09A0(0x0005, 0x0001) after 200 ticks {
 			nohalt;
 			call Func0435;
@@ -102332,7 +102332,7 @@ var Func08AC 0x8AC (var var0000) {
 	}
 	if (gflags[0x0174] == true) {
 		if (var0000) {
-			return 0xFFFD;
+			return IOLO;
 		}
 		return "Iolo";
 	}
@@ -104097,9 +104097,9 @@ void Func08CA 0x8CA () {
 					wait 20;
 					call Func07DF;
 				};
-				var000D = 0x0001;
-				var000E = 0xFFFD;
-				var000F = 0x0000;
+				var000D =  1;
+				var000E = -3;
+				var000F =  0;
 				Func090D(var000C, var000D, var000E, var000F, Func07DF, var0000, PATH_FAILURE);
 				UI_set_path_failure(Func07DF, var0000, PATH_FAILURE);
 			}
@@ -105815,7 +105815,7 @@ void Func08F2 0x8F2 (var var0000) {
 }
 
 var Func08F3 0x8F3 () {
-	if ((gflags[0x00D4] && (!SHAMINO->get_item_flag(SI_ZOMBIE))) && ((gflags[0x00D3] && (!DUPRE->get_item_flag(SI_ZOMBIE))) && (gflags[0x00D5] && (!0xFFFD->get_item_flag(SI_ZOMBIE))))) {
+	if ((gflags[0x00D4] && (!SHAMINO->get_item_flag(SI_ZOMBIE))) && ((gflags[0x00D3] && (!DUPRE->get_item_flag(SI_ZOMBIE))) && (gflags[0x00D5] && (!IOLO->get_item_flag(SI_ZOMBIE))))) {
 		return true;
 	}
 	return false;
@@ -106371,7 +106371,7 @@ void Func0901 0x901 () {
 		gflags[0x012B] = true;
 		var0001 = AVATAR->remove_cont_items(QUANTITY_ANY, 0x019E, QUALITY_ANY, 0x0013, 0x0012);
 		var0001 = DUPRE->remove_cont_items(QUANTITY_ANY, 0x019E, QUALITY_ANY, 0x0013, 0x0012);
-		var0001 = 0xFFFD->remove_cont_items(QUANTITY_ANY, 0x019E, QUALITY_ANY, 0x0013, 0x0012);
+		var0001 = IOLO->remove_cont_items(QUANTITY_ANY, 0x019E, QUALITY_ANY, 0x0013, 0x0012);
 		var0001 = 0xFFDE->remove_cont_items(QUANTITY_ANY, 0x019E, QUALITY_ANY, 0x0013, 0x0012);
 	}
 	UI_init_conversation();
@@ -106396,8 +106396,8 @@ void Func0901 0x901 () {
 	if (DUPRE->get_npc_id() == 0x001E) {
 		Func09AC(DUPRE, 0x08BC, 0x0705, EAT_AT_INN);
 	}
-	if (0xFFFD->get_npc_id() == 0x001E) {
-		Func09AC(0xFFFD, 0x099E, 0x07F9, MAJOR_SIT);
+	if (IOLO->get_npc_id() == 0x001E) {
+		Func09AC(IOLO, 0x099E, 0x07F9, MAJOR_SIT);
 	}
 	if (SHAMINO->get_npc_id() == 0x001E) {
 		Func09AC(SHAMINO, 0x07F8, 0x0799, WANDER);
@@ -106739,8 +106739,8 @@ var Func0910 0x910 (var var0000) {
 	var var0009;
 	var var000A;
 
-	var0001 = [0xFFFD, 0x0000, 0x0001, 0x0000];
-	var0002 = [0x0000, 0xFFFD, 0x0000, 0x0001];
+	var0001 = [-3,  0,  1,  0];
+	var0002 = [ 0, -3,  0,  1];
 	var0003 = [0x0096, 0x0096, 0x030D, 0x030D];
 	var0004 = [0x02A8];
 	var0005 = var0000->get_item_shape();
@@ -106751,13 +106751,13 @@ var Func0910 0x910 (var var0000) {
 	var0009[0x0002] = var0002[(var0006 + 0x0001)];
 	var0009[0x0003] = 0x0001;
 	if (var0005 == var0008) {
-		if (Func0913(var0000, var0007, 0xFFFD, var0004)) {
+		if (Func0913(var0000, var0007, -3, var0004)) {
 			return false;
 		}
 		var0007 = Func0914(var0007, var0009, var0005);
 	} else {
 		var0007 = Func0914(var0007, var0009, var0005);
-		if (Func0913(var0000, var0007, 0xFFFD, var0004)) {
+		if (Func0913(var0000, var0007, -3, var0004)) {
 			return false;
 		}
 	}
@@ -107265,7 +107265,7 @@ void Func0922 0x922 (var var0000) {
 extern var Func0942 0x942 (var var0000);
 
 var Func0923 0x923 () {
-	if (!Func0942(0xFFFD)) {
+	if (!Func0942(IOLO)) {
 		return false;
 	}
 	if (!Func0942(SHAMINO)) {
@@ -107274,7 +107274,7 @@ var Func0923 0x923 () {
 	if (!Func0942(DUPRE)) {
 		return false;
 	}
-	if (!0xFFFD->get_item_flag(IN_PARTY)) {
+	if (!IOLO->get_item_flag(IN_PARTY)) {
 		return false;
 	}
 	if (!SHAMINO->get_item_flag(IN_PARTY)) {
@@ -107283,7 +107283,7 @@ var Func0923 0x923 () {
 	if (!DUPRE->get_item_flag(IN_PARTY)) {
 		return false;
 	}
-	if (0xFFFD->get_item_flag(DEAD)) {
+	if (IOLO->get_item_flag(DEAD)) {
 		return false;
 	}
 	if (SHAMINO->get_item_flag(DEAD)) {
@@ -107478,8 +107478,8 @@ void Func0926 0x926 (var var0000) {
 		var0008 = find_nearby(0x0178, 0x001E, MASK_NONE);
 		for (var000B in var0008 with var0009 to var000A) {
 			if (var000B->get_item_quality() == var0000) {
-				if (Func0908(var000B, 0x010E, 0x0001, 0x0000, 0x0000, 0x0007)) {
-					Func0909(var000B, 0x01B1, 0x0000, 0x0002, 0x01B0, 0x0001, 0xFFFD, 0x0000, 0x0007);
+				if (Func0908(var000B, 0x010E, 0x0001, 0, 0, 0x0007)) {
+					Func0909(var000B, 0x01B1, 0x0000, 0x0002, 0x01B0, 0x0001, -3, 0, 0x0007);
 					UI_play_sound_effect2(0x0020, var000B);
 				} else {
 					Func0903();
@@ -108387,7 +108387,7 @@ void Func0935 0x935 (var var0000) {
 	} nobreak {
 		Func092F(var0000, 0x0002);
 	}
-	var000D = [SHAMINO, 0xFFFD, DUPRE];
+	var000D = [SHAMINO, IOLO, DUPRE];
 	var000E = [0, 0, 0];
 	var0007->si_path_run_usecode([(var000C[0x0001] - 0x0002), (var000C[0x0002] - 0x0000), var000C[0x0003]], PATH_FAILURE, var0000, Func07FD, true);
 }
@@ -111797,7 +111797,7 @@ var Func098C 0x98C () {
 var Func098D 0x98D () {
 	var var0000;
 
-	var0000 = [DUPRE, SHAMINO, 0xFFFD, 0xFF6B, 0xFFE4, 0xFFE6, 0xFFD3, 0xFFDE, 0xFFD4, 0xFF68, 0xFF58];
+	var0000 = [DUPRE, SHAMINO, IOLO, 0xFF6B, 0xFFE4, 0xFFE6, 0xFFD3, 0xFFDE, 0xFFD4, 0xFF68, 0xFF58];
 	return var0000;
 }
 
@@ -112856,7 +112856,7 @@ void Func09B0 0x9B0 (var var0000) {
 		say("\"Her heart did break and fade away Into the icy northern wind.\"");
 		UI_play_music(0x003D, 0x0000);
 		gflags[0x01D3] = true;
-		if ((!(item == 0xFFFD->get_npc_object())) && (var0001 != 0x001F)) {
+		if ((!(item == IOLO->get_npc_object())) && (var0001 != 0x001F)) {
 			Func09B1();
 		}
 	}
@@ -112872,7 +112872,7 @@ void Func09B0 0x9B0 (var var0000) {
 		say("\"And now that mountain, tried by fire and ice, lies crushed beneath another's dream.\"");
 		UI_play_music(0x003E, 0x0000);
 		gflags[0x01D4] = true;
-		if ((!(item == 0xFFFD->get_npc_object())) && (var0001 != 0x001F)) {
+		if ((!(item == IOLO->get_npc_object())) && (var0001 != 0x001F)) {
 			Func09B1();
 		}
 	}
@@ -112888,7 +112888,7 @@ void Func09B0 0x9B0 (var var0000) {
 		say("\"For if thou dost go a-hunting them, Thou shalt never return home again.\"");
 		UI_play_music(0x003C, 0x0000);
 		gflags[0x01D5] = true;
-		if ((!(item == 0xFFFD->get_npc_object())) && (var0001 != 0x001F)) {
+		if ((!(item == IOLO->get_npc_object())) && (var0001 != 0x001F)) {
 			Func09B1();
 		}
 	}
@@ -112902,7 +112902,7 @@ void Func09B0 0x9B0 (var var0000) {
 		say("\"So if thou dost seek favors, From the Forest Master fierce, Thou shouldst be prepared to return to him The Orb of Elerion.\"");
 		UI_play_music(0x003C, 0x0000);
 		gflags[0x01D6] = true;
-		if ((!(item == 0xFFFD->get_npc_object())) && (var0001 != 0x001F)) {
+		if ((!(item == IOLO->get_npc_object())) && (var0001 != 0x001F)) {
 			Func09B1();
 		}
 	}
@@ -112914,7 +112914,7 @@ void Func09B0 0x9B0 (var var0000) {
 		say("\"See the balance slipping In the fight between ill and good. Thou shalt walk the beam To find the treasure thou seekest.\"");
 		UI_play_music(0x003B, 0x0000);
 		gflags[0x01D7] = true;
-		if ((!(item == 0xFFFD->get_npc_object())) && (var0001 != 0x001F)) {
+		if ((!(item == IOLO->get_npc_object())) && (var0001 != 0x001F)) {
 			Func09B1();
 		}
 	}
@@ -112930,7 +112930,7 @@ void Func09B0 0x9B0 (var var0000) {
 		say("\"He killed those he would protect, And threw himself from the White Dragon tower.\"");
 		UI_play_music(0x003E, 0x0000);
 		gflags[0x01D8] = true;
-		if ((!(item == 0xFFFD->get_npc_object())) && (var0001 != 0x001F)) {
+		if ((!(item == IOLO->get_npc_object())) && (var0001 != 0x001F)) {
 			Func09B1();
 		}
 	}
@@ -113444,8 +113444,8 @@ void Func09BE 0x9BE (var var0000, var var0001) {
 			if (var0008 == 0x00CB) {
 				var0009 = var0000->set_item_quality(0x00CC);
 				UI_set_weather(RAIN);
-				if (Func0942(0xFFFD)) {
-					var0009 = script 0xFFFD after 10 ticks {
+				if (Func0942(IOLO)) {
+					var0009 = script IOLO after 10 ticks {
 						nohalt;
 						say "It doth storm again!";
 					};
