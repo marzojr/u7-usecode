@@ -11020,7 +11020,7 @@ void Func0406 object#(0x406) () {
 		var0002 = UI_get_party_list();
 		var0003 = false;
 		var0004 = TRELLEK->get_npc_object();
-		var0005 = 0xFFF6->get_npc_object();
+		var0005 = TSERAMED->get_npc_object();
 		var0006 = Func0931(PARTY, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
 		TRELLEK->show_npc_face(0x0000);
 		if (!gflags[0x0154]) {
@@ -11992,12 +11992,12 @@ void Func040A object#(0x40A) () {
 	var var002A;
 
 	if (event == DOUBLECLICK) {
-		0xFFF6->show_npc_face(0x0000);
+		TSERAMED->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = UI_get_party_list();
 		var0003 = Func093C(AVATAR->get_npc_object(), var0002);
-		var0004 = 0xFFF6->get_npc_object();
+		var0004 = TSERAMED->get_npc_object();
 		var0005 = TRELLEK->get_npc_object();
 		if (UI_is_pc_female() == 0x0000) {
 			var0006 = "Abraham";
@@ -12396,7 +12396,7 @@ void Func040A object#(0x40A) () {
 
 			case "join" (remove):
 				if (var0007 < 0x0008) {
-					0xFFF6->add_to_party();
+					TSERAMED->add_to_party();
 					say("\"I would be honored, ",
 						var0001,
 						".\"");
@@ -12415,15 +12415,15 @@ void Func040A object#(0x40A) () {
 				var0028 = Func090B(["wait here", "go home"]);
 				if (var0028 == "wait here") {
 					say("\"Very well! I shall wait for thee!\"*");
-					0xFFF6->remove_from_party();
-					0xFFF6->get_npc_object()->set_schedule_type(WAIT);
+					TSERAMED->remove_from_party();
+					TSERAMED->get_npc_object()->set_schedule_type(WAIT);
 					abort;
 				}
 				say("\"Very well, ",
 					var0001,
 					". Fare thee well.\"*");
-				0xFFF6->remove_from_party();
-				0xFFF6->get_npc_object()->set_schedule_type(LOITER);
+				TSERAMED->remove_from_party();
+				TSERAMED->get_npc_object()->set_schedule_type(LOITER);
 				abort;
 
 			always:
@@ -26068,15 +26068,15 @@ void Func0468 object#(0x468) () {
 			case "Yew":
 				say("\"I love the forest. It is very beautiful. Also,\" he raises his bow, \"I moved out here to be near the two great archers, Iolo and Tseramed.\"*");
 				var0001 = Func08F7(IOLO);
-				var0002 = Func08F7(0xFFF6);
+				var0002 = Func08F7(TSERAMED);
 				if (var0001) {
 					IOLO->say("Iolo blushes. \"I am honored, my friend. I was not aware I had an admirer in this part of the land.\" He bows to Bradman, who returns the gesture.*");
 					IOLO->hide();
 					0xFF98->show_npc_face(0x0000);
 				}
 				if (var0002) {
-					0xFFF6->say("\"Thank you for thy kind words, good sir. Perhaps we may practice sometime in the future.\"*");
-					0xFFF6->hide();
+					TSERAMED->say("\"Thank you for thy kind words, good sir. Perhaps we may practice sometime in the future.\"*");
+					TSERAMED->hide();
 					0xFF98->say("\"I would be greatly honored, milord!\"");
 				} else {
 					add("Tseramed");
@@ -47194,7 +47194,7 @@ void Func04F1 object#(0x4F1) () {
 		abort;
 	}
 	var0000 = false;
-	var0001 = Func08F7(0xFFF6);
+	var0001 = Func08F7(TSERAMED);
 	var0002 = Func08F7(IOLO);
 	if (gflags[0x02D4]) {
 		var0000 = true;
@@ -47273,8 +47273,8 @@ void Func04F1 object#(0x4F1) () {
 						abort;
 					}
 					say("He points at Tseramed. \"Him bee hunter! Go away!\" The man spits at you and turns away.*");
-					0xFFF6->say("\"This is an act, I tell thee! These people are not savages! They are Britannians!\"*");
-					0xFFF6->hide();
+					TSERAMED->say("\"This is an act, I tell thee! These people are not savages! They are Britannians!\"*");
+					TSERAMED->hide();
 					if (var0002) {
 						IOLO->say("\"He seems quite savage to me!\"*");
 						IOLO->hide();
@@ -65977,7 +65977,7 @@ void Func0856 0x856 (var var0000, var var0001) {
 		var0003 = "you";
 	}
 	if (var0002 != 0x0000) {
-		if ((var0002 == IOLO) || (var0002 == 0xFFF6)) {
+		if ((var0002 == IOLO) || (var0002 == TSERAMED)) {
 			var0001 /= 0x0002;
 			say("\"I cannot charge a master such as thyself full price.\"");
 		}
@@ -75255,21 +75255,21 @@ void Func08F2 0x8F2 (var var0000, var var0001) {
 				"! ^",
 				var0009,
 				"! Thy soul shall wail in the catacombs of the netherworld!\"");
-			0xFFF6->set_schedule_type(IN_COMBAT);
-			0xFFF6->set_alignment(EVIL);
+			TSERAMED->set_schedule_type(IN_COMBAT);
+			TSERAMED->set_alignment(EVIL);
 		} else {
 			say("\"^",
 				var0004,
 				"! Fly from this place at once! I shall provide escort for thee with my bow. Return at thy peril, ",
 				var0009,
 				".\"");
-			0xFFF6->set_schedule_type(HOUND);
-			0xFFF6->set_alignment(NEUTRAL);
+			TSERAMED->set_schedule_type(HOUND);
+			TSERAMED->set_alignment(NEUTRAL);
 		}
 	} else {
 		say("\"I shall not take this deception lightly.\"");
 		gflags[0x001D] = true;
-		0xFFF6->set_alignment(NEUTRAL);
+		TSERAMED->set_alignment(NEUTRAL);
 	}
 	abort;
 }
@@ -75352,7 +75352,7 @@ void Func08F3 0x8F3 (var var0000) {
 				// Dead code
 				if (var0005) {
 					var0008->say("\"Take care with thy words, master woodsman.\"");
-					0xFFF6->say("\"I do not mean this gracious company! Surely thou art among the elite of Britannia and a rare figure of a woman.\"");
+					TSERAMED->say("\"I do not mean this gracious company! Surely thou art among the elite of Britannia and a rare figure of a woman.\"");
 					var0008->say("\"Thy speech does me service. Alas! Too few are the women who learn skill in arms.\"");
 					var0008->hide();
 				}
@@ -75466,23 +75466,23 @@ var Func08F5 0x8F5 (var var0000, var var0001) {
 					var000E,
 					".\"");
 			}
-			0xFFF6->show_npc_face(0x0000);
+			TSERAMED->show_npc_face(0x0000);
 			var000C = true;
 			var0007 = true;
 		}
 		if (var000B == SHAMINO) {
 			say("\"How art thou, Shamino? Thy woodcraft is renowned in Britannia.\"");
 			SHAMINO->say("\"Renown follows those who travel with the Avatar. I thank thee.\"");
-			0xFFF6->show_npc_face(0x0000);
+			TSERAMED->show_npc_face(0x0000);
 			var000C = true;
 			var0007 = true;
 		}
 		if (var000B == SPARK) {
 			say("\"Greetings young man. How comes one so young into such company?\"");
 			SPARK->say("\"I am an orphan! My father has been most cruelly murdered, mutilated in the stables of Trinsic.\"");
-			0xFFF6->say("\"That is a grievous tale! But surely the time for grief is past. Thou art in the company of great companions.\"");
+			TSERAMED->say("\"That is a grievous tale! But surely the time for grief is past. Thou art in the company of great companions.\"");
 			SPARK->say("\"Thou speakest rightly. I shall bring my father's murderer to justice or die in the attempt.\"");
-			0xFFF6->show_npc_face(0x0000);
+			TSERAMED->show_npc_face(0x0000);
 			var000C = true;
 		}
 		if (!var000C) {
@@ -75496,13 +75496,13 @@ var Func08F5 0x8F5 (var var0000, var var0001) {
 				var0010,
 				"\"");
 			var000B->say("\"Glad to make thine aquaintance.\"");
-			0xFFF6->show_npc_face(0x0000);
+			TSERAMED->show_npc_face(0x0000);
 			var000C = true;
 		}
 		if (var0007 && (!gflags[0x0161])) {
 			say("\"But did I hear thee say 'Avatar?' Say not that thy leader is the one -true- Avatar!\"");
 			var000B->say("\"It is indeed true.\"");
-			0xFFF6->say("\"'Tis an honor to meet thee, Avatar.\"");
+			TSERAMED->say("\"'Tis an honor to meet thee, Avatar.\"");
 			gflags[0x0161] = true;
 		}
 		var000B->hide();
@@ -75706,7 +75706,7 @@ var Func0902 0x902 () {
 	var var0003;
 	var var0004;
 
-	var0000 = [IOLO, SHAMINO, DUPRE, JAANA, SENTRI, JULIA, KATRINA, SPARK, 0xFFF6];
+	var0000 = [IOLO, SHAMINO, DUPRE, JAANA, SENTRI, JULIA, KATRINA, SPARK, TSERAMED];
 	var0001 = UI_get_party_list();
 	for (var0004 in var0000 with var0002 to var0003) {
 		if (var0004->get_npc_object() in var0001) {

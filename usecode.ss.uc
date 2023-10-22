@@ -16014,8 +16014,8 @@ void Func032E shape#(0x32E) () {
 				wait 2;
 				call Func032E;
 			};
-			Func097F(0xFFF6, "@Help!@", 0x0000);
-			0xFFF6->si_path_run_usecode([0x0916, 0x0742, 0x0000], EGG, item, Func032E, false);
+			Func097F(SERV_06, "@Help!@", 0x0000);
+			SERV_06->si_path_run_usecode([0x0916, 0x0742, 0x0000], EGG, item, Func032E, false);
 			Func097F(0xFFEC, "@How rude...@", 0x0006);
 			Func097F(SHAMINO, "@Stop that!@", 0x0002);
 			Func097F(DUPRE, "@No!@", 0x000A);
@@ -16152,7 +16152,7 @@ void Func032E shape#(0x32E) () {
 			var000B->remove_npc();
 		}
 		0xFFEA->set_schedule_type(EAT_AT_INN);
-		0xFFF6->set_schedule_type(WAITER);
+		SERV_06->set_schedule_type(WAITER);
 		UI_play_sound_effect(0x0082);
 		0xFFEE->set_new_schedules([MIDNIGHT, EARLY, MORNING, NOON, EVENING, NIGHT], [MAJOR_SIT, SLEEP, EAT_AT_INN, MAJOR_SIT, EAT_AT_INN, WANDER], [0x0926, 0x0726, 0x08F7, 0x071C, 0x090A, 0x0717, 0x08F7, 0x0737, 0x090A, 0x0717, 0x0918, 0x072F]);
 		var001E = [0x08F3, 0x0779];
@@ -25243,7 +25243,7 @@ void Func0412 object#(0x412) () {
 			case "apparatus" (remove):
 				if (Func097D(PARTY, 0x0001, 0x02ED, QUALITY_ANY, 0x0001)) {
 					say("\"Allow me to see what thou hast -- it had better not be one of mine own!\"");
-					if (0xFFF6->npc_nearby()) {
+					if (SERV_06->npc_nearby()) {
 						0xFED6->show_npc_face1(0x0000);
 						say("\"Thieves could not take thy goods, MageLord. I protect them well.\"");
 						UI_remove_npc_face1();
@@ -90414,7 +90414,7 @@ void Func0830 0x830 () {
 	var var0002;
 	var var0003;
 
-	if ((UI_get_random(0x0003) == 0x0001) && 0xFFF6->npc_nearby()) {
+	if ((UI_get_random(0x0003) == 0x0001) && SERV_06->npc_nearby()) {
 		0xFED6->show_npc_face1(0x0000);
 		var0000 = ["MageLord, the documents are ready for thy signature.", "The sorceress Frigidazzi hath arrived, honor.", "Thou art needed in the treasury, MageLord.", "It is time for thine appointment, MageLord.", "MageLord, thou art needed to handle a tax matter.", "Thou art urgently needed, MageLord."];
 		var0001 = var0000[UI_get_random(UI_get_array_size(var0000))];
@@ -90431,9 +90431,9 @@ void Func0830 0x830 () {
 			var0003 = 0xFFEE->get_object_position();
 			UI_sprite_effect(ANIMATION_TELEPORT, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			0xFFEE->move_object([0x05F4, 0x078F, 0x0000]);
-			var0003 = 0xFFF6->get_object_position();
+			var0003 = SERV_06->get_object_position();
 			UI_sprite_effect(ANIMATION_TELEPORT, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			0xFFF6->move_object([0x05F6, 0x078F, 0x0000]);
+			SERV_06->move_object([0x05F6, 0x078F, 0x0000]);
 			abort;
 		}
 		if (var0001 == 0x0002) {
