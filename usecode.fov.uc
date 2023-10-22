@@ -153,7 +153,9 @@ enum wildcards {
 	SHAPE_ANY		= -359,
 	ANY_SHAPE		= -1,	// For find_nearby
 	QUALITY_ANY		= -359,
-	FRAME_ANY		= -359
+	FRAME_ANY		= -359,
+	TEMPORARY_ANY	= -359,
+	FLAG_DESTROY	= -358	// Used in UI_update_last_created to indicate it will be deleting
 };
 
 enum directions {
@@ -3165,7 +3167,7 @@ void Func01F7 shape#(0x1F7) () {
 		if (0xFFD4->npc_nearby()) {
 			0xFFD4->say("\"Now is the time for the young and the old to dig in their pockets and give up the gold. * Dost thou wish to donate a gold piece?\"");
 			if (Func090A()) {
-				var0000 = UI_remove_party_items(0x0001, 0x0284, QUALITY_ANY, FRAME_ANY, 0xFE99);
+				var0000 = UI_remove_party_items(0x0001, 0x0284, QUALITY_ANY, FRAME_ANY, TEMPORARY_ANY);
 				var0000 = script item {
 					nohalt;
 					frame 0;
@@ -6860,7 +6862,7 @@ void Func0314 shape#(0x314) () {
 			}
 		}
 		var0004 = Func080E(var0008);
-		Func0836(item, 0xFE99);
+		Func0836(item, SHAPE_ANY);
 	}
 }
 
@@ -17498,7 +17500,7 @@ void Func042D object#(0x42D) () {
 				say("\"I can do thee a favor as well. Wouldst thou like to buy one of these beautiful apples for the merest pittance of five gold coins?\"");
 				var0006 = Func090A();
 				if (var0006) {
-					var0007 = UI_remove_party_items(0x0005, 0x0284, QUALITY_ANY, FRAME_ANY, 0xFE99);
+					var0007 = UI_remove_party_items(0x0005, 0x0284, QUALITY_ANY, FRAME_ANY, TEMPORARY_ANY);
 					if (var0007) {
 						var0008 = UI_add_party_items(0x0001, 0x0179, QUALITY_ANY, 0x0010, true);
 						if (var0008) {
@@ -29213,7 +29215,7 @@ void Func047E object#(0x47E) () {
 			if (gflags[0x0168]) {
 				if (!gflags[0x016A]) {
 					say("\"I see that coward Sprellic has given thee the flag so that it may be returned to us. Thou hadst better hand it over.\"");
-					var0006 = UI_remove_party_items(0x0001, 0x011E, QUALITY_ANY, FRAME_ANY, 0xFE99);
+					var0006 = UI_remove_party_items(0x0001, 0x011E, QUALITY_ANY, FRAME_ANY, TEMPORARY_ANY);
 					if (var0006) {
 						say("She takes the banner from you.");
 						say("\"This matter is now settled. But tell that worm Sprellic from me that he had better keep his hands off of other people's property in the future.\"*");
@@ -29315,7 +29317,7 @@ void Func047E object#(0x47E) () {
 
 			case "return flag":
 				say("\"I understand that coward Sprellic has given thee the flag so that it may be returned to us. Thou hadst better hand it over.\"");
-				var0006 = UI_remove_party_items(0x0001, 0x011E, QUALITY_ANY, FRAME_ANY, 0xFE99);
+				var0006 = UI_remove_party_items(0x0001, 0x011E, QUALITY_ANY, FRAME_ANY, TEMPORARY_ANY);
 				if (var0006) {
 					say("She takes the banner from you.");
 					say("\"This matter is now settled. But tell that worm Sprellic from me that he had better keep his hands off of other people's property in the future.\"");
@@ -53211,7 +53213,7 @@ void Func0650 object#(0x650) () {
 				var0000 = var0006->get_object_position();
 				var0002 = var0006->set_last_created();
 				if (var0002) {
-					var0002 = UI_update_last_created(0xFE9A);
+					var0002 = UI_update_last_created(FLAG_DESTROY);
 					var0006->halt_scheduled();
 					UI_sprite_effect(ANIMATION_GREEN_BUBBLES, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, 0xFFFF);
 					UI_play_sound_effect(0x0042);
@@ -54404,7 +54406,7 @@ void Func066A object#(0x66A) () {
 				if (var0006 == var0000->get_item_shape()) {
 					var0003 = var0000->set_last_created();
 					if (var0003) {
-						var0003 = UI_update_last_created(0xFE9A);
+						var0003 = UI_update_last_created(FLAG_DESTROY);
 						var0000->halt_scheduled();
 					}
 				}
@@ -54801,7 +54803,7 @@ void Func0672 object#(0x672) () {
 		var0009 = get_object_position();
 		var0002 = set_last_created();
 		if (var0002) {
-			var0002 = UI_update_last_created(0xFE9A);
+			var0002 = UI_update_last_created(FLAG_DESTROY);
 		}
 		var000B = UI_create_new_object(0x037F);
 		if (var000B) {
@@ -58474,7 +58476,7 @@ void Func06C2 object#(0x6C2) () {
 			for (var0003 in var0000 with var0001 to var0002) {
 				var0004 = var0003->set_last_created();
 				if (var0004) {
-					var0004 = UI_update_last_created(0xFE9A);
+					var0004 = UI_update_last_created(FLAG_DESTROY);
 				}
 			}
 			var0005 = find_nearby(0x019E, 0x0050, MASK_NONE);
@@ -58483,7 +58485,7 @@ void Func06C2 object#(0x6C2) () {
 				if (var0009 > 0x0014) {
 					var0004 = var0008->set_last_created();
 					if (var0004) {
-						var0004 = UI_update_last_created(0xFE9A);
+						var0004 = UI_update_last_created(FLAG_DESTROY);
 					}
 				}
 			}
@@ -58799,7 +58801,7 @@ extern void Func0836 0x836 (var var0000, var var0001);
 
 void Func06DA object#(0x6DA) () {
 	if (event == EGG) {
-		Func0836(item, 0xFE99);
+		Func0836(item, SHAPE_ANY);
 	}
 }
 
@@ -62658,7 +62660,7 @@ void Func0810 0x810 (var var0000, var var0001) {
 		if (var0001 == 0x0001) {
 			if (var0009) {
 				var000A = var0009->set_last_created();
-				var000A = UI_update_last_created(0xFE9A);
+				var000A = UI_update_last_created(FLAG_DESTROY);
 				UI_play_sound_effect(0x000A);
 			}
 		} else if (var0009 == 0x0000) {
@@ -62666,7 +62668,7 @@ void Func0810 0x810 (var var0000, var var0001) {
 			var000B->set_item_frame(var0002);
 			var000A = UI_update_last_created(var0003);
 			var000A = var0009->set_last_created();
-			var000A = UI_update_last_created(0xFE9A);
+			var000A = UI_update_last_created(FLAG_DESTROY);
 			UI_play_sound_effect(0x0053);
 		}
 	}
@@ -63785,7 +63787,7 @@ void Func0831 0x831 (var var0000) {
 
 	var0001 = var0000->get_object_position();
 	var0001 &= var0000->get_item_quality();
-	var0001 &= 0xFE99;
+	var0001 &= FRAME_ANY;
 	var0002 = var0001->find_nearby(0x0096, 0x000C, MASK_NONE);
 	for (var0005 in var0002 with var0003 to var0004) {
 		if (!Func0829(var0005)) {
@@ -63957,11 +63959,11 @@ void Func0836 0x836 (var var0000, var var0001) {
 
 	var0002 = var0000->get_item_quality();
 	var0003 = [];
-	if ((var0001 == 0x0001) || (var0001 == 0xFE99)) {
+	if ((var0001 == 0x0001) || (var0001 == SHAPE_ANY)) {
 		var0003 &= UI_find_nearby_avatar(0x012F);
 		var0003 &= UI_find_nearby_avatar(0x036C);
 	}
-	if ((var0001 == 0x0000) || (var0001 == 0xFE99)) {
+	if ((var0001 == 0x0000) || (var0001 == SHAPE_ANY)) {
 		var0003 &= UI_find_nearby_avatar(0x03A8);
 		var0003 &= UI_find_nearby_avatar(0x03A7);
 	}
@@ -64462,7 +64464,7 @@ void Func0841 0x841 () {
 	var0000 = true;
 	var0001 = ["nothing", "mutton rations", "cake", "ham", "wine", "ale"];
 	var0002 = [0x0000, 0x0179, 0x0179, 0x0179, 0x0268, 0x0268];
-	var0003 = [0xFE99, 0x000F, 0x0005, 0x000B, 0x0005, 0x0003];
+	var0003 = [FRAME_ANY, 0x000F, 0x0005, 0x000B, 0x0005, 0x0003];
 	var0004 = [0x0000, 0x000E, 0x0005, 0x000A, 0x0009, 0x0002, 0x0001];
 	var0005 = "";
 	var0006 = [0x0000, 0x0001, 0x0000, 0x0000, 0x0000, 0x0000];
@@ -64532,7 +64534,7 @@ void Func0842 0x842 () {
 	var0002 = true;
 	var0003 = ["nothing", "mutton", "bread", "mead", "flounder", "Silverleaf", "cake", "wine", "ale"];
 	var0004 = [0x0000, 0x0179, 0x0179, 0x0268, 0x0179, 0x0179, 0x0179, 0x0268, 0x0268];
-	var0005 = [0xFE99, 0x0008, 0x0000, 0x0000, 0x000D, 0x001F, 0x0004, 0x0005, 0x0003];
+	var0005 = [FRAME_ANY, 0x0008, 0x0000, 0x0000, 0x000D, 0x001F, 0x0004, 0x0005, 0x0003];
 	var0006 = [0x0000, 0x0003, 0x0002, 0x0007, 0x0003, 0x001E, 0x0002, 0x0003, 0x0002];
 	var0007 = "";
 	var0008 = 0x0000;
@@ -64835,7 +64837,7 @@ void Func084C 0x84C () {
 	var0000 = true;
 	var0001 = ["nothing", "torch", "oil flasks", "shovel", "powder keg", "bucket", "jar", "cloth"];
 	var0002 = [0x0000, 0x0253, 0x030E, 0x0271, 0x02C0, 0x032A, 0x0338, 0x0353];
-	var0003 = [0xFE99, 0xFE99, 0xFE99, 0xFE99, 0xFE99, 0x0000, 0x0000, 0xFE99];
+	var0003 = [FRAME_ANY, FRAME_ANY, FRAME_ANY, FRAME_ANY, FRAME_ANY, 0x0000, 0x0000, FRAME_ANY];
 	var0004 = [0x0000, 0x0004, 0x003C, 0x000C, 0x0019, 0x0004, 0x0002, 0x0003];
 	var0005 = ["", "a ", "an ", "a ", "a ", "a ", "a ", ""];
 	var0006 = ["", "", " for a dozen", "", "", "", "", " per bolt"];
@@ -64862,8 +64864,10 @@ void Func084C 0x84C () {
 					} else {
 						say("\"To want to buy how many?\"");
 					}
+					// BUG: This should be var0003[var0008] instead of var0003
 					var000C = Func08F8(var0002[var0008], var0003, var0007[var0008], var0004[var0008], 0x0014, 0x0001, true);
 				} else {
+					// BUG: This should be var0003[var0008] instead of var0003
 					var000C = Func08F8(var0002[var0008], var0003, var0007[var0008], var0004[var0008], 0x0000, 0x0001, false);
 				}
 			}
@@ -65447,7 +65451,7 @@ void Func0853 0x853 () {
 	var0004 = ["", "a ", "", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", ""];
 	var0005 = 0x0001;
 	var0006 = ["", "", " per dozen", "", "", "", "", "", "", "", "", " per application"];
-	var0007 = [0x0000, 0xFE99, 0xFE99, 0xFE99, 0xFE99, 0xFE99, 0xFE99, 0xFE99, 0xFE99, 0x0000, 0x0001, 0x0003];
+	var0007 = [0x0000, FRAME_ANY, FRAME_ANY, FRAME_ANY, FRAME_ANY, FRAME_ANY, FRAME_ANY, FRAME_ANY, FRAME_ANY, 0x0000, 0x0001, 0x0003];
 	var0008 = [0x0000, 0x0001, 0x000C, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001];
 	say("\"To make what purchase?\"");
 	while (var0000) {
@@ -65469,8 +65473,10 @@ void Func0853 0x853 () {
 					} else {
 						say("\"To want how many?\"");
 					}
+					// BUG: This should be var0007[var0009] instead of var0007
 					var000B = Func08F8(var0002[var0009], var0007, var0008[var0009], var0003[var0009], 0x0014, 0x0001, false);
 				} else {
+					// BUG: This should be var0007[var0009] instead of var0007
 					var000B = Func08F8(var0002[var0009], var0007, var0008[var0009], var0003[var0009], 0x0000, 0x0001, false);
 				}
 			}
@@ -65551,7 +65557,7 @@ void Func0855 0x855 () {
 	var0001 = true;
 	var0002 = ["nothing", "jerky", "mead", "fish", "ale", "wine"];
 	var0003 = [0x0000, 0x0179, 0x0268, 0x0179, 0x0268, 0x0268];
-	var0004 = [0xFE99, 0x000F, 0x0000, 0x000C, 0x0003, 0x0005];
+	var0004 = [FRAME_ANY, 0x000F, 0x0000, 0x000C, 0x0003, 0x0005];
 	var0005 = [0x0000, 0x000C, 0x0005, 0x0005, 0x0002, 0x0001];
 	var0006 = "";
 	var0007 = 0x0000;
@@ -65751,7 +65757,7 @@ void Func0858 0x858 () {
 	var0000 = true;
 	var0001 = ["nothing", "club", "dagger", "bow", "sword", "halberd", "arrows", "bolts"];
 	var0002 = [0x0000, 0x024E, 0x0252, 0x0255, 0x0257, 0x025B, 0x02D2, 0x02D3];
-	var0003 = 0xFE99;
+	var0003 = FRAME_ANY;
 	var0004 = [0x0000, 0x0014, 0x0014, 0x0028, 0x0064, 0x00FA, 0x0019, 0x001E];
 	var0005 = ["", "a ", "a ", "a ", "a ", "a ", "", ""];
 	var0006 = [0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001, 0x0001];
@@ -65816,7 +65822,7 @@ void Func0859 0x859 () {
 	var0000 = true;
 	var0001 = ["nothing", "great helm", "plate armour", "plate leggings", "gorget", "scale armour", "gauntlets"];
 	var0002 = [0x0000, 0x021D, 0x023D, 0x0240, 0x024A, 0x023A, 0x0244];
-	var0003 = 0xFE99;
+	var0003 = FRAME_ANY;
 	var0004 = [0x0000, 0x00C8, 0x0145, 0x00C8, 0x0028, 0x0064, 0x0019];
 	var0005 = ["", "a ", "", "", "a ", "", ""];
 	var0006 = [0x0000, 0x0000, 0x0000, 0x0001, 0x0000, 0x0000, 0x0001];
@@ -65877,7 +65883,7 @@ void Func085A 0x85A () {
 	if (gflags[0x02B6]) {
 		var0001 = ["nothing", "torch", "lockpick"];
 		var0002 = [0x0000, 0x0253, 0x0273];
-		var0003 = [0xFE99, 0xFE99, 0xFE99];
+		var0003 = [FRAME_ANY, FRAME_ANY, FRAME_ANY];
 		var0004 = [0x0000, 0x0005, 0x0001];
 		var0005 = ["", "a ", "a "];
 		var0006 = 0x0000;
@@ -65886,7 +65892,7 @@ void Func085A 0x85A () {
 	} else {
 		var0001 = ["Nothing", "Torch", "Lockpick"];
 		var0002 = [0x0000, 0x0253, 0x0273];
-		var0003 = [0xFE99, 0xFE99, 0xFE99];
+		var0003 = [FRAME_ANY, FRAME_ANY, FRAME_ANY];
 		var0004 = [0x0000, 0x0005, 0x000A];
 		var0005 = ["", "a ", "a "];
 		var0006 = 0x0000;
@@ -65983,7 +65989,7 @@ void Func085C 0x85C () {
 	var0004 = ["", "a ", "a ", "", "a ", "a "];
 	var0005 = [0x0000, 0x0000, 0x0000, 0x0001, 0x0000, 0x0000];
 	var0006 = ["", "", "", " per pair", "", ""];
-	var0007 = [0xFE99, 0x0001, 0x0000, 0x0001, 0x0001, 0x0001];
+	var0007 = [FRAME_ANY, 0x0001, 0x0000, 0x0001, 0x0001, 0x0001];
 	var0008 = 0x0001;
 	say("\"What article wouldst thou like to buy?\"");
 	while (var0000) {
@@ -66042,7 +66048,7 @@ void Func085D 0x85D () {
 	var0001 = true;
 	var0002 = ["nothing", "mutton rations", "trout", "Silverleaf", "cake", "ham"];
 	var0003 = [0x0000, 0x0179, 0x0179, 0x0179, 0x0179, 0x0179];
-	var0004 = [0xFE99, 0x000F, 0x000C, 0x001F, 0x0005, 0x000B];
+	var0004 = [FRAME_ANY, 0x000F, 0x000C, 0x001F, 0x0005, 0x000B];
 	var0005 = [0x0000, 0x000C, 0x0002, 0x0019, 0x0002, 0x000A];
 	var0006 = "";
 	var0007 = [0x0000, 0x0001, 0x0000, 0x0000, 0x0000, 0x0000];
@@ -66123,7 +66129,7 @@ void Func085E 0x85E () {
 	var0001 = true;
 	var0002 = ["nothing", "wine", "ale"];
 	var0003 = [0x0000, 0x0268, 0x0268];
-	var0004 = [0xFE99, 0x0005, 0x0003];
+	var0004 = [FRAME_ANY, 0x0005, 0x0003];
 	var0005 = [0x0000, 0x0004, 0x0003];
 	var0006 = "";
 	var0007 = 0x0000;
@@ -66468,7 +66474,7 @@ void Func0863 0x863 () {
 	var0000 = true;
 	var0001 = ["nothing", "bow", "crossbow", "triple crossbow", "arrows", "bolts"];
 	var0002 = [0x0000, 0x0255, 0x0256, 0x0287, 0x02D2, 0x02D3];
-	var0003 = 0xFE99;
+	var0003 = FRAME_ANY;
 	var0004 = [0x0000, 0x0028, 0x007D, 0x0190, 0x0019, 0x001E];
 	var0005 = ["", "a ", "a ", "a ", "", ""];
 	var0006 = [0x0000, 0x0000, 0x0000, 0x0000, 0x0001, 0x0001];
@@ -67069,7 +67075,7 @@ void Func0871 0x871 () {
 	var0001 = true;
 	var0002 = ["nothing", "jerky", "mead", "fish", "ham", "silverleaf", "ale", "wine"];
 	var0003 = [0x0000, 0x0179, 0x0268, 0x0179, 0x0179, 0x0179, 0x0268, 0x0268];
-	var0004 = [0xFE99, 0x000F, 0x0000, 0x000D, 0x000B, 0x001F, 0x0003, 0x0005];
+	var0004 = [FRAME_ANY, 0x000F, 0x0000, 0x000D, 0x000B, 0x001F, 0x0003, 0x0005];
 	var0005 = [0x0000, 0x0019, 0x0005, 0x0003, 0x000A, 0x0014, 0x0002, 0x0002];
 	var0006 = "";
 	var0007 = 0x0000;
@@ -67154,7 +67160,7 @@ void Func0872 0x872 () {
 	var0000 = true;
 	var0001 = ["nothing", "dagger", "mace", "sword", "2-handed hammer", "2-handed sword", "club", "sling", "bow", "arrows", "bolts"];
 	var0002 = [0x0000, 0x0252, 0x0293, 0x0257, 0x0258, 0x025A, 0x024E, 0x01DA, 0x0255, 0x02D2, 0x02D3];
-	var0003 = 0xFE99;
+	var0003 = FRAME_ANY;
 	var0004 = [0x0000, 0x000A, 0x000F, 0x0032, 0x003C, 0x0050, 0x000F, 0x000A, 0x001E, 0x000A, 0x000F];
 	var0005 = ["", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "", ""];
 	var0006 = [0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001, 0x0001];
@@ -67223,7 +67229,7 @@ void Func0873 0x873 () {
 	var0000 = true;
 	var0001 = ["nothing", "leather helm", "wooden shield", "leather leggings", "chain leggings", "leather armour"];
 	var0002 = [0x0000, 0x03EC, 0x023C, 0x023E, 0x023F, 0x0239];
-	var0003 = 0xFE99;
+	var0003 = FRAME_ANY;
 	var0004 = [0x0000, 0x0019, 0x000F, 0x0019, 0x0046, 0x0028];
 	var0005 = ["", "a ", "a ", "", "", ""];
 	var0006 = [0x0000, 0x0000, 0x0000, 0x0001, 0x0001, 0x0000];
@@ -67285,7 +67291,7 @@ void Func0874 0x874 () {
 	var0000 = true;
 	var0001 = ["nothing", "torch", "backpack", "lockpicks", "bucket", "swamp boots", "bedroll"];
 	var0002 = [0x0000, 0x0253, 0x0321, 0x0273, 0x032A, 0x024C, 0x0247];
-	var0003 = 0xFE99;
+	var0003 = FRAME_ANY;
 	var0004 = [0x0000, 0x0004, 0x000C, 0x0008, 0x0002, 0x0028, 0x000F];
 	var0005 = ["a ", "a ", "a ", "some ", "a ", "a pair of ", "a "];
 	var0006 = [0x0000, 0x0000, 0x0000, 0x0001, 0x0000, 0x0001, 0x0000];
@@ -67469,7 +67475,7 @@ void Func0876 0x876 () {
 	var0001 = true;
 	var0002 = ["nothing", "mutton rations", "bread", "trout", "ham", "cake", "grapes", "cheese", "mead", "wine", "ale", "milk"];
 	var0003 = [0x0000, 0x0179, 0x0179, 0x0179, 0x0179, 0x0179, 0x0179, 0x0179, 0x0268, 0x0268, 0x0268, 0x0268];
-	var0004 = [0xFE99, 0x000F, 0x0000, 0x000C, 0x000B, 0x0005, 0x0013, 0x001A, 0x0000, 0x0005, 0x0003, 0x0007];
+	var0004 = [FRAME_ANY, 0x000F, 0x0000, 0x000C, 0x000B, 0x0005, 0x0013, 0x001A, 0x0000, 0x0005, 0x0003, 0x0007];
 	var0005 = [0x0000, 0x0010, 0x0006, 0x0003, 0x000F, 0x0001, 0x0003, 0x0003, 0x000A, 0x0005, 0x0002, 0x0004];
 	var0006 = [0x0000, 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000];
 	var0007 = ["", " for 10 pieces", " for one loaf", " for one portion", " for one slice", " for one piece", " for a bunch", " for a hunk", " for a bottle", " for a bottle", " for a bottle", " for a bottle"];
@@ -67702,7 +67708,7 @@ void Func087A 0x87A () {
 	var0004 = ["", "a ", "", "a ", "a ", "a ", "a ", "a ", "a ", "a "];
 	var0005 = 0x0000;
 	var0006 = ["", "", " for a dozen", "", "", "", "", "", "", ""];
-	var0007 = 0xFE99;
+	var0007 = FRAME_ANY;
 	var0008 = [0x0000, 0x0001, 0x000C, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001];
 	say("\"What can I sell to thee?\"");
 	while (var0000) {
@@ -68657,7 +68663,7 @@ void Func0889 0x889 () {
 	var0000 = true;
 	var0001 = ["nothing", "jerky", "flounder", "ham", "bread", "cheese", "grapes", "milk", "mead", "ale", "wine"];
 	var0002 = [0x0000, 0x0179, 0x0179, 0x0179, 0x0179, 0x0179, 0x0179, 0x0268, 0x0268, 0x0268, 0x0268];
-	var0003 = [0xFE99, 0x000F, 0x000D, 0x000B, 0x0000, 0x001B, 0x0013, 0x0007, 0x0000, 0x0003, 0x0005];
+	var0003 = [FRAME_ANY, 0x000F, 0x000D, 0x000B, 0x0000, 0x001B, 0x0013, 0x0007, 0x0000, 0x0003, 0x0005];
 	var0004 = [0x0000, 0x000C, 0x0002, 0x0009, 0x0001, 0x0003, 0x0001, 0x0003, 0x0007, 0x0001, 0x0002];
 	var0005 = ["", "", "", "", "", "", "", "", "", "", ""];
 	var0006 = [0x0000, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001];
@@ -68788,7 +68794,7 @@ void Func088C 0x88C () {
 	var0000 = true;
 	var0001 = ["nothing", "mutton", "beef", "fowl", "ham", "trout", "flounder", "meat on a spit", "dried meat"];
 	var0002 = 0x0179;
-	var0003 = [0xFE99, 0x0008, 0x0009, 0x000A, 0x000B, 0x000C, 0x000D, 0x000E, 0x000F];
+	var0003 = [FRAME_ANY, 0x0008, 0x0009, 0x000A, 0x000B, 0x000C, 0x000D, 0x000E, 0x000F];
 	var0004 = [0x0000, 0x0003, 0x0014, 0x0003, 0x0014, 0x0005, 0x0007, 0x0003, 0x0002];
 	var0005 = "";
 	var0006 = 0x0000;
@@ -68873,7 +68879,7 @@ void Func088E 0x88E () {
 	var0000 = true;
 	var0001 = ["nothing", "shoes", "kidney belt", "leather boots", "tunic", "dress", "pants", "swamp boots"];
 	var0002 = [0x0000, 0x0249, 0x0248, 0x024B, 0x00F9, 0x00F9, 0x02E2, 0x024C];
-	var0003 = [0xFE99, 0xFE99, 0xFE99, 0xFE99, 0x0000, 0x0001, 0x0000, 0xFE99];
+	var0003 = [FRAME_ANY, FRAME_ANY, FRAME_ANY, FRAME_ANY, 0x0000, 0x0001, 0x0000, FRAME_ANY];
 	var0004 = [0x0000, 0x0014, 0x0014, 0x0028, 0x001E, 0x001E, 0x001E, 0x0032];
 	var0005 = ["", "", "a ", "", "a ", "a ", "", ""];
 	var0006 = [0x0000, 0x0001, 0x0000, 0x0001, 0x0000, 0x0000, 0x0001, 0x0001];
@@ -68933,7 +68939,7 @@ void Func088F 0x88F () {
 	var0000 = true;
 	var0001 = ["nothing", "wine", "ale"];
 	var0002 = [0x0000, 0x0268, 0x0268];
-	var0003 = [0xFE99, 0x0005, 0x0003];
+	var0003 = [FRAME_ANY, 0x0005, 0x0003];
 	var0004 = [0x0000, 0x0005, 0x0005];
 	var0005 = "";
 	var0006 = 0x0000;
@@ -69423,7 +69429,7 @@ void Func0897 0x897 () {
 	var0000 = true;
 	var0001 = ["nothing", "crested helm", "spiked shield", "leather armour", "chain armour", "plate armour", "leather gloves"];
 	var0002 = [0x0000, 0x021E, 0x0242, 0x0239, 0x023B, 0x023D, 0x0243];
-	var0003 = 0xFE99;
+	var0003 = FRAME_ANY;
 	var0004 = [0x0000, 0x004B, 0x003C, 0x0032, 0x0096, 0x012C, 0x0014];
 	var0005 = ["", "a ", "a ", "", "", "", ""];
 	var0006 = [0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001];
@@ -69484,7 +69490,7 @@ void Func0898 0x898 () {
 	var0000 = true;
 	var0001 = ["nothing", "sling", "dagger", "spear", "mace", "sword", "throwing axe", "2-handed axe", "2-handed sword"];
 	var0002 = [0x0000, 0x01DA, 0x0252, 0x0250, 0x0293, 0x0257, 0x0251, 0x0259, 0x025A];
-	var0003 = 0xFE99;
+	var0003 = FRAME_ANY;
 	var0004 = [0x0000, 0x0014, 0x0014, 0x0019, 0x0014, 0x0064, 0x0019, 0x0064, 0x00FA];
 	var0005 = ["", "a ", "a ", "a ", "a ", "a ", "a ", "a ", "a "];
 	var0006 = [0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001, 0x0001];
@@ -69550,7 +69556,7 @@ void Func0899 0x899 () {
 	var0000 = true;
 	var0001 = ["nothing", "torch", "oil flasks", "backpack", "bag", "shovel", "powder keg", "lockpick", "hoe", "bucket"];
 	var0002 = [0x0000, 0x0253, 0x030E, 0x0321, 0x0322, 0x0271, 0x02C0, 0x0273, 0x0272, 0x032A];
-	var0003 = 0xFE99;
+	var0003 = FRAME_ANY;
 	var0004 = [0x0000, 0x0005, 0x0048, 0x000F, 0x0008, 0x0014, 0x0023, 0x000A, 0x0014, 0x0008];
 	var0005 = ["", "a ", "", "a ", "a ", "a ", "a ", "a ", "a ", "a "];
 	var0006 = [0x0000, 0x0000, 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000];
@@ -69759,7 +69765,7 @@ void Func089C 0x89C () {
 	var0000 = true;
 	var0001 = ["nothing", "throwing axe", "two-handed axe", "boomerang"];
 	var0002 = [0x0000, 0x0251, 0x0259, 0x025D];
-	var0003 = 0xFE99;
+	var0003 = FRAME_ANY;
 	var0004 = [0x0000, 0x0012, 0x0032, 0x000C];
 	var0005 = "a ";
 	var0006 = 0x0001;
@@ -70142,7 +70148,7 @@ void Func08A0 0x8A0 () {
 	var0001 = true;
 	var0002 = ["nothing", "mutton", "beef", "mead", "trout", "ham", "Silverleaf", "bread", "cake", "ale", "wine"];
 	var0003 = [0x0000, 0x0179, 0x0179, 0x0268, 0x0179, 0x0179, 0x0179, 0x0179, 0x0179, 0x0268, 0x0268];
-	var0004 = [0xFE99, 0x0008, 0x0009, 0x0000, 0x000C, 0x000B, 0x001F, 0x0000, 0x0004, 0x0003, 0x0005];
+	var0004 = [FRAME_ANY, 0x0008, 0x0009, 0x0000, 0x000C, 0x000B, 0x001F, 0x0000, 0x0004, 0x0003, 0x0005];
 	var0005 = [0x0000, 0x0005, 0x0012, 0x000C, 0x0004, 0x0012, 0x002D, 0x0003, 0x0002, 0x0004, 0x0004];
 	var0006 = "";
 	var0007 = 0x0000;
@@ -70225,7 +70231,7 @@ void Func08A1 0x8A1 () {
 	var0005 = ["", "a ", "", "a ", "a ", "a ", "a ", ""];
 	var0006 = [0x0000, 0x0000, 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001];
 	var0007 = ["", "", " for a dozen", "", "", "", "", " each"];
-	var0008 = 0xFE99;
+	var0008 = FRAME_ANY;
 	var0009 = 0x0001;
 	say("\"What dost thou want to buy?\"");
 	while (var0001) {
@@ -70377,7 +70383,7 @@ void Func08A3 0x8A3 () {
 	var0001 = true;
 	var0002 = ["nothing", "arrows", "bolts"];
 	var0003 = [0x0000, 0x02D2, 0x02D3];
-	var0004 = 0xFE99;
+	var0004 = FRAME_ANY;
 	var0005 = 0x0014;
 	var0006 = "";
 	var0007 = 0x0001;
@@ -70444,7 +70450,7 @@ void Func08A4 0x8A4 () {
 	var0001 = true;
 	var0002 = ["nothing", "bow", "crossbow", "triple crossbow", "magic bow"];
 	var0003 = [0x0000, 0x0255, 0x0256, 0x0287, 0x025E];
-	var0004 = 0xFE99;
+	var0004 = FRAME_ANY;
 	var0005 = [0x0000, 0x0023, 0x006E, 0x015E, 0x0190];
 	var0006 = "a ";
 	var0007 = 0x0000;
@@ -70624,7 +70630,7 @@ void Func08A7 0x8A7 () {
 	var0000 = true;
 	var0001 = ["nothing", "eggs", "apple", "banana", "carrot", "pumpkin", "grapes"];
 	var0002 = [0x0000, 0x0179, 0x0179, 0x0179, 0x0179, 0x0179, 0x0179];
-	var0003 = [0xFE99, 0x0018, 0x0010, 0x0011, 0x0012, 0x0015, 0x0013];
+	var0003 = [FRAME_ANY, 0x0018, 0x0010, 0x0011, 0x0012, 0x0015, 0x0013];
 	var0004 = [0x0000, 0x000C, 0x0003, 0x0003, 0x0003, 0x0004, 0x0003];
 	var0005 = ["", "", "an ", "a ", "a ", "a ", ""];
 	var0006 = [0x0000, 0x000C, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001];
@@ -70692,7 +70698,7 @@ void Func08A8 0x8A8 () {
 	var0000 = true;
 	var0001 = ["nothing", "poison", "curative", "illumination", "sleep", "protection", "invisibility", "healing", "awakening"];
 	var0002 = 0x0154;
-	var0003 = [0xFE99, 0x0003, 0x0002, 0x0006, 0x0000, 0x0005, 0x0007, 0x0001, 0x0004];
+	var0003 = [FRAME_ANY, 0x0003, 0x0002, 0x0006, 0x0000, 0x0005, 0x0007, 0x0001, 0x0004];
 	var0004 = [0x0000, 0x000F, 0x0096, 0x0032, 0x000F, 0x0096, 0x0064, 0x0096, 0x001E];
 	var0005 = ["", "a ", "a ", "an ", "a ", "a ", "an ", "a ", "an "];
 	var0006 = 0x0000;
@@ -70758,7 +70764,7 @@ void Func08A9 0x8A9 () {
 	var0005 = [0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000];
 	var0006 = ["", "", "", "", "", "", "", ""];
 	var0007 = [0x0000, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001];
-	var0008 = 0xFE99;
+	var0008 = FRAME_ANY;
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
 		var0009 = Func090C(var0001);
@@ -70824,7 +70830,7 @@ void Func08AA 0x8AA () {
 	var0005 = 0x0000;
 	var0006 = "";
 	var0007 = 0x0001;
-	var0008 = 0xFE99;
+	var0008 = FRAME_ANY;
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
 		var0009 = Func090C(var0001);
@@ -71466,7 +71472,7 @@ void Func08B7 0x8B7 () {
 	var0001 = true;
 	var0002 = ["nothing", "mutton", "beef", "mead", "trout", "ham", "Silverleaf", "bread", "cake", "ale", "wine"];
 	var0003 = [0x0000, 0x0179, 0x0179, 0x0268, 0x0179, 0x0179, 0x0179, 0x0179, 0x0179, 0x0268, 0x0268];
-	var0004 = [0xFE99, 0x0008, 0x0009, 0x0000, 0x000C, 0x000B, 0x001F, 0x0000, 0x0004, 0x0003, 0x0005];
+	var0004 = [FRAME_ANY, 0x0008, 0x0009, 0x0000, 0x000C, 0x000B, 0x001F, 0x0000, 0x0004, 0x0003, 0x0005];
 	var0005 = [0x0000, 0x0006, 0x0014, 0x000F, 0x0005, 0x0014, 0x0032, 0x0004, 0x0003, 0x0005, 0x0005];
 	var0006 = "";
 	var0007 = 0x0000;
@@ -71587,7 +71593,7 @@ void Func08B9 0x8B9 () {
 	var0001 = true;
 	var0002 = ["nothing", "mutton", "bread", "flounder", "Silverleaf", "wine", "ale"];
 	var0003 = [0x0000, 0x0179, 0x0179, 0x0179, 0x0179, 0x0268, 0x0268];
-	var0004 = [0xFE99, 0x0008, 0x0001, 0x000D, 0x001F, 0x0005, 0x0003];
+	var0004 = [FRAME_ANY, 0x0008, 0x0001, 0x000D, 0x001F, 0x0005, 0x0003];
 	var0005 = [0x0000, 0x0006, 0x0005, 0x0005, 0x0032, 0x0005, 0x0005];
 	var0006 = "";
 	var0007 = 0x0000;
@@ -71800,14 +71806,14 @@ void Func08BC 0x8BC (var var0000) {
 	if (var0000 == "Reagents") {
 		var0002 = ["Nothing", "Garlic", "Ginseng", "Mandrake Root", "Nightshade", "Black Pearl"];
 		var0003 = [0x0000, 0x034A, 0x034A, 0x034A, 0x034A, 0x034A];
-		var0004 = [0xFE99, 0x0004, 0x0005, 0x0003, 0x0002, 0x0000];
+		var0004 = [FRAME_ANY, 0x0004, 0x0005, 0x0003, 0x0002, 0x0000];
 		var0005 = [0x0000, 0x0001, 0x0002, 0x0007, 0x0006, 0x0008];
 		var0006 = "";
 		var0007 = ["", " for one clove", " for one portion", " each", " for one button", " each"];
 	} else {
 		var0002 = ["nothing", "orange potion", "black potion"];
 		var0003 = [0x0000, 0x0154, 0x0154];
-		var0004 = [0xFE99, 0x0004, 0x0007];
+		var0004 = [FRAME_ANY, 0x0004, 0x0007];
 		var0005 = [0x0000, 0x000F, 0x005A];
 		var0008 = ["", "a ", "a "];
 		var0007 = ["", " for one vial", " for one vial"];
@@ -72360,7 +72366,7 @@ void Func08C4 0x8C4 () {
 	var0000 = true;
 	var0001 = ["nothing", "Garlic", "Blood Moss", "Spider Silk", "Mandrake Root", "Nightshade"];
 	var0002 = [0x0000, 0x034A, 0x034A, 0x034A, 0x034A, 0x034A];
-	var0003 = [0xFE99, 0x0004, 0x0001, 0x0006, 0x0003, 0x0002];
+	var0003 = [FRAME_ANY, 0x0004, 0x0001, 0x0006, 0x0003, 0x0002];
 	var0004 = [0x0000, 0x0002, 0x0003, 0x0003, 0x0005, 0x0005];
 	say("\"What wouldst thou like to buy?\"");
 	while (var0000) {
@@ -72504,7 +72510,7 @@ void Func08C6 0x8C6 () {
 	var0000 = true;
 	var0001 = ["nothing", "Ginseng", "Blood Moss", "Sulfurous Ash", "Mandrake Root", "Black Pearl"];
 	var0002 = [0x0000, 0x034A, 0x034A, 0x034A, 0x034A, 0x034A];
-	var0003 = [0xFE99, 0x0005, 0x0001, 0x0007, 0x0003, 0x0000];
+	var0003 = [FRAME_ANY, 0x0005, 0x0001, 0x0007, 0x0003, 0x0000];
 	var0004 = [0x0000, 0x0004, 0x0006, 0x0008, 0x000A, 0x000A];
 	var0005 = "";
 	var0006 = 0x0000;
@@ -72836,7 +72842,7 @@ void Func08CB 0x8CB () {
 	var0001 = true;
 	var0002 = ["nothing", "mutton rations", "trout", "Silverleaf", "cake", "ham"];
 	var0003 = [0x0000, 0x0179, 0x0179, 0x0179, 0x0179, 0x0179];
-	var0004 = [0xFE99, 0x000F, 0x000C, 0x001F, 0x0005, 0x000B];
+	var0004 = [FRAME_ANY, 0x000F, 0x000C, 0x001F, 0x0005, 0x000B];
 	var0005 = [0x0000, 0x000C, 0x0002, 0x0019, 0x0002, 0x000A];
 	var0006 = ["", "", "", "", "", ""];
 	var0007 = [0x0000, 0x0001, 0x0000, 0x0000, 0x0000, 0x0000];
@@ -72912,7 +72918,7 @@ void Func08CC 0x8CC () {
 	var0001 = true;
 	var0002 = ["nothing", "wine", "ale"];
 	var0003 = [0x0000, 0x0268, 0x0268];
-	var0004 = [0xFE99, 0x0005, 0x0003];
+	var0004 = [FRAME_ANY, 0x0005, 0x0003];
 	var0005 = [0x0000, 0x0004, 0x0003];
 	var0006 = ["", "", ""];
 	var0007 = [0x0000, 0x0000, 0x0000];
@@ -72974,7 +72980,7 @@ void Func08CD 0x8CD () {
 	var0000 = true;
 	var0001 = ["nothing", "jerky", "mead", "grapes", "cheese", "bread", "ale", "wine"];
 	var0002 = [0x0000, 0x0179, 0x0268, 0x0179, 0x0179, 0x0179, 0x0268, 0x0268];
-	var0003 = [0xFE99, 0x000F, 0x0000, 0x0013, 0x001B, 0x0000, 0x0003, 0x0005];
+	var0003 = [FRAME_ANY, 0x000F, 0x0000, 0x0013, 0x001B, 0x0000, 0x0003, 0x0005];
 	var0004 = [0x0000, 0x000C, 0x0004, 0x0001, 0x0004, 0x0002, 0x0001, 0x0002];
 	var0005 = "";
 	var0006 = [0x0000, 0x0000, 0x0000, 0x0001, 0x0000, 0x0000, 0x0000];
@@ -73373,7 +73379,7 @@ void Func08D3 0x8D3 () {
 	var0006 = 0x0000;
 	var0007 = "";
 	var0008 = 0x0001;
-	var0009 = 0xFE99;
+	var0009 = FRAME_ANY;
 	say("\"What weapon wouldst thou like to buy?\"");
 	while (var0001) {
 		var000A = Func090C(var0002);
@@ -73439,7 +73445,7 @@ void Func08D4 0x8D4 () {
 	var0005 = ["", "", "", "a ", "a ", "a ", "a ", "", "a "];
 	var0006 = [0x0000, 0x0001, 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001, 0x0000];
 	var0007 = ["", " per pair", " per pair", "", "", "", "", " per pair", ""];
-	var0008 = 0xFE99;
+	var0008 = FRAME_ANY;
 	var0009 = 0x0001;
 	say("\"What form of protection wouldst thou like to buy?\"");
 	while (var0001) {
@@ -73816,7 +73822,7 @@ void Func08DC 0x8DC () {
 	var0000 = true;
 	var0001 = ["nothing", "Ginseng", "Blood Moss", "Sulfurous Ash", "Mandrake Root", "Black Pearl"];
 	var0002 = [0x0000, 0x034A, 0x034A, 0x034A, 0x034A, 0x034A];
-	var0003 = [0xFE99, 0x0005, 0x0001, 0x0007, 0x0003, 0x0000];
+	var0003 = [FRAME_ANY, 0x0005, 0x0001, 0x0007, 0x0003, 0x0000];
 	var0004 = [0x0000, 0x0002, 0x0003, 0x0004, 0x0005, 0x0005];
 	var0005 = "";
 	var0006 = 0x0000;
@@ -73986,7 +73992,7 @@ void Func08DE 0x8DE () {
 	var0001 = true;
 	var0002 = ["nothing", "cheese", "mead", "grapes", "silverleaf", "bread", "ale", "wine"];
 	var0003 = [0x0000, 0x0179, 0x0268, 0x0179, 0x0179, 0x0179, 0x0268, 0x0268];
-	var0004 = [0xFE99, 0x001A, 0x0000, 0x0013, 0x001F, 0x0001, 0x0003, 0x0005];
+	var0004 = [FRAME_ANY, 0x001A, 0x0000, 0x0013, 0x001F, 0x0001, 0x0003, 0x0005];
 	var0005 = [0x0000, 0x0007, 0x000A, 0x0002, 0x0023, 0x0003, 0x0003, 0x0005];
 	var0006 = "";
 	var0007 = [0x0000, 0x0000, 0x0000, 0x0001, 0x0000, 0x0000, 0x0000, 0x0000];
@@ -74121,7 +74127,7 @@ void Func08E1 0x8E1 () {
 	var0000 = true;
 	var0001 = ["nothing", "gold horncaps", "gold chain", "gold earring", "gold clawring", "black potion", "white potion"];
 	var0002 = [0x0000, 0x03A9, 0x03A9, 0x03A9, 0x03A9, 0x0154, 0x0154];
-	var0003 = [0xFE99, 0x0002, 0x0004, 0x0005, 0x0006, 0x0007, 0x0006];
+	var0003 = [FRAME_ANY, 0x0002, 0x0004, 0x0005, 0x0006, 0x0007, 0x0006];
 	var0004 = [0x0000, 0x001E, 0x0014, 0x0005, 0x000A, 0x003C, 0x006E];
 	var0005 = ["", "", "a ", "a ", "a ", "a ", "a "];
 	var0006 = [0x0000, 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000];
@@ -74181,7 +74187,7 @@ void Func08E2 0x8E2 () {
 	var0000 = true;
 	var0001 = ["nothing", "blood moss", "garlic", "ginseng", "sulfurous ash"];
 	var0002 = [0x0000, 0x034A, 0x034A, 0x034A, 0x034A];
-	var0003 = [0xFE99, 0x0001, 0x0004, 0x0005, 0x0007];
+	var0003 = [FRAME_ANY, 0x0001, 0x0004, 0x0005, 0x0007];
 	var0004 = [0x0000, 0x0002, 0x0001, 0x0001, 0x0003];
 	var0005 = "";
 	var0006 = 0x0000;
@@ -74241,7 +74247,7 @@ void Func08E3 0x8E3 () {
 	var0000 = true;
 	var0001 = ["nothing", "gem", "gold ring", "wedding ring", "ankh"];
 	var0002 = [0x0000, 0x02F8, 0x0280, 0x0280, 0x03BB];
-	var0003 = [0xFE99, 0xFE99, 0x0000, 0x0001, 0x0000];
+	var0003 = [FRAME_ANY, FRAME_ANY, 0x0000, 0x0001, 0x0000];
 	var0004 = [0x0000, 0x004B, 0x0064, 0x0096, 0x00C8];
 	var0005 = "a ";
 	var0006 = 0x0000;
@@ -76658,7 +76664,7 @@ void Func0946 0x946 () {
 	var0000 = true;
 	var0001 = ["nothing", "bread", "cake", "rolls", "pastry"];
 	var0002 = [0x0000, 0x0179, 0x0179, 0x0179, 0x0179];
-	var0003 = [0xFE99, 0x0001, 0x0005, 0x0002, 0x0006];
+	var0003 = [FRAME_ANY, 0x0001, 0x0005, 0x0002, 0x0006];
 	var0004 = [0x0000, 0x0004, 0x0003, 0x0004, 0x0003];
 	var0005 = "";
 	var0006 = [0x0000, 0x0000, 0x0000, 0x0001, 0x0000];
@@ -76837,7 +76843,7 @@ void Func0949 0x949 () {
 	var0000 = true;
 	var0001 = ["nothing", "blue potion", "purple potion", "red potion", "orange potion"];
 	var0002 = [0x0000, 0x0154, 0x0154, 0x0154, 0x0154];
-	var0003 = [0xFE99, 0x0000, 0x0005, 0x0002, 0x0004];
+	var0003 = [FRAME_ANY, 0x0000, 0x0005, 0x0002, 0x0004];
 	var0004 = [0x0000, 0x001E, 0x0096, 0x0096, 0x000A];
 	var0005 = [0x0000, 0x0078, 0x0258, 0x0258, 0x002D];
 	var0006 = ["", "a ", "a ", "a ", "a "];
@@ -76917,7 +76923,7 @@ void Func094A 0x94A () {
 	var0000 = true;
 	var0001 = ["nothing", "blood moss", "spider silk", "sulfurous ash", "mandrake root", "black pearl"];
 	var0002 = [0x0000, 0x034A, 0x034A, 0x034A, 0x034A, 0x034A];
-	var0003 = [0xFE99, 0x0001, 0x0006, 0x0007, 0x0003, 0x0000];
+	var0003 = [FRAME_ANY, 0x0001, 0x0006, 0x0007, 0x0003, 0x0000];
 	var0004 = [0x0000, 0x0004, 0x0005, 0x0006, 0x0008, 0x0008];
 	var0005 = [0x0000, 0x0010, 0x0014, 0x0019, 0x0020, 0x0022];
 	var0006 = "";
@@ -77200,7 +77206,7 @@ void Func094D 0x94D () {
 	var0001 = ["nothing", "mutton rations", "bread", "flounder"];
 	var0002 = [0x0000, 0x0014, 0x0004, 0x0004];
 	var0003 = 0x0179;
-	var0004 = [0xFE99, 0x000F, 0x0000, 0x000D];
+	var0004 = [FRAME_ANY, 0x000F, 0x0000, 0x000D];
 	var0005 = "";
 	var0006 = [0x0000, 0x0001, 0x0000, 0x0000];
 	var0007 = ["", " for 10 portions", " for one loaf", " for one portion"];
@@ -77261,7 +77267,7 @@ void Func094E 0x94E () {
 	var0001 = ["nothing", "mead", "wine", "ale"];
 	var0002 = [0x0000, 0x0005, 0x0001, 0x0001];
 	var0003 = 0x0268;
-	var0004 = [0xFE99, 0x0000, 0x0005, 0x0003];
+	var0004 = [FRAME_ANY, 0x0000, 0x0005, 0x0003];
 	var0005 = "";
 	var0006 = 0x0000;
 	var0007 = " per bottle";
@@ -77520,7 +77526,7 @@ void Func0951 0x951 () {
 	var0001 = true;
 	var0002 = ["nothing", "mutton", "bread", "mead", "trout", "Silverleaf", "cake", "wine", "ale"];
 	var0003 = [0x0000, 0x0179, 0x0179, 0x0268, 0x0179, 0x0179, 0x0179, 0x0268, 0x0268];
-	var0004 = [0xFE99, 0x0008, 0x0001, 0x0000, 0x000C, 0x001F, 0x0005, 0x0005, 0x0003];
+	var0004 = [FRAME_ANY, 0x0008, 0x0001, 0x0000, 0x000C, 0x001F, 0x0005, 0x0005, 0x0003];
 	var0005 = [0x0000, 0x0003, 0x0002, 0x0007, 0x0003, 0x001E, 0x0002, 0x0003, 0x0002];
 	var0006 = "";
 	var0007 = 0x0000;
@@ -77604,7 +77610,7 @@ void Func0952 0x952 () {
 			var0000 = false;
 		} else {
 			var0005 = "a ";
-			var0006 = 0xFE99;
+			var0006 = FRAME_ANY;
 			var0007 = 0x0000;
 			var0008 = "";
 			var0009 = 0x0001;
@@ -77656,7 +77662,7 @@ void Func0953 0x953 () {
 	var0001 = ["nothing", "chain coif", "chain armour", "chain leggings", "gauntlets", "great helm", "plate armour", "plate leggings", "crested helm"];
 	var0002 = [0x0000, 0x021B, 0x023B, 0x023F, 0x0244, 0x021D, 0x023D, 0x0240, 0x021E];
 	var0003 = [0x0000, 0x0050, 0x0064, 0x0032, 0x0014, 0x0096, 0x012C, 0x0078, 0x003C];
-	var0004 = 0xFE99;
+	var0004 = FRAME_ANY;
 	var0005 = ["", "a ", "", "", "", "a ", "", "", "a "];
 	var0006 = [0x0000, 0x0000, 0x0000, 0x0001, 0x0001, 0x0000, 0x0000, 0x0001, 0x0000];
 	var0007 = ["", "", "", " for a pair", " for a pair", "", "", " for a pair", ""];
