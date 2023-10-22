@@ -3309,7 +3309,7 @@ void Func01D6 shape#(0x1D6) () {
 
 	var0000 = AVATAR->get_npc_object()->get_cont_items(0x032A, QUALITY_ANY, 0x0000);
 	if (var0000) {
-		var0001 = [0xFFFB, 0xFFFB];
+		var0001 = [-5, -5];
 		var0002 = [-1, -1];
 		Func0828(item, var0001, var0002, 0x0000, Func032A, var0000, PATH_SUCCESS_9);
 	}
@@ -4119,9 +4119,9 @@ void Func0270 shape#(0x270) () {
 		var0001 = var0000->get_item_shape();
 		if (var0001 == 0x03A4) {
 			if ((var0000->get_item_frame() == 0x0002) || (var0000->get_item_frame() == 0x0003)) {
-				var0002 = [0x0002, 0x0001, 0x0000];
-				var0003 = [0x0002, 0x0002, 0x0002];
-				var0004 = [0xFFFB];
+				var0002 = [2, 1, 0];
+				var0003 = [2, 2, 2];
+				var0004 = [-5];
 				Func0828(var0000, var0002, var0003, var0004, 0x0270, item, BG_PATH_SUCCESS);
 				UI_close_gumps();
 			} else {
@@ -6450,7 +6450,7 @@ void Func02E4 shape#(0x2E4) () {
 
 	var0000 = AVATAR->get_npc_object()->get_cont_items(0x032A, QUALITY_ANY, 0x0000);
 	if (var0000) {
-		var0001 = [0xFFFB, 0xFFFB];
+		var0001 = [-5, -5];
 		var0002 = [-1, -1];
 		var0003 = find_nearest(0x01D6, 0x0005);
 		if (var0003) {
@@ -7818,14 +7818,14 @@ void Func032A shape#(0x32A) () {
 				return;
 			}
 			if (var0000 == 0x0001) {
-				Func0828(var0006, var0001, var0002, 0xFFFB, Func032A, var0006, BG_PATH_FAILURE);
+				Func0828(var0006, var0001, var0002, -5, Func032A, var0006, BG_PATH_FAILURE);
 			}
 		}
 		if (var0007 == 0x02E4) {
 			if (var0000 == 0x0000) {
 				var0008 = var0006->find_nearest(0x01D6, 0x0003);
 				if (var0008) {
-					var0001 = [0xFFFB, 0xFFFB];
+					var0001 = [-5, -5];
 					var0002 = [-1, -1];
 					Func0828(var0008, var0001, var0002, 0, Func032A, item, PATH_SUCCESS_9);
 				}
@@ -7835,7 +7835,7 @@ void Func032A shape#(0x32A) () {
 		}
 		if (var0007 == 0x01D6) {
 			if (var0000 == 0x0000) {
-				var0001 = [0xFFFB, 0xFFFB];
+				var0001 = [-5, -5];
 				var0002 = [-1, -1];
 				Func0828(var0006, var0001, var0002, 0, Func032A, item, PATH_SUCCESS_9);
 			} else {
@@ -10796,9 +10796,9 @@ void Func0405 object#(0x405) () {
 	var var000E;
 
 	if (event == DOUBLECLICK) {
-		0xFFFB->show_npc_face(0x0000);
+		JAANA->show_npc_face(0x0000);
 		var0000 = Func0909();
-		var0001 = 0xFFFB->get_npc_object();
+		var0001 = JAANA->get_npc_object();
 		var0002 = Func0908();
 		add(["name", "job", "bye"]);
 		if (var0001 in UI_get_party_list()) {
@@ -10875,7 +10875,7 @@ void Func0405 object#(0x405) () {
 					say("\"I would be honored to join thee, ",
 						var0000,
 						"!\"");
-					0xFFFB->add_to_party();
+					JAANA->add_to_party();
 					add("leave");
 					remove("join");
 				} else {
@@ -10889,13 +10889,13 @@ void Func0405 object#(0x405) () {
 				var0009 = Func090B(["wait here", "go home"]);
 				if (var0009 == "wait here") {
 					say("\"Very well. I shall wait until thou dost return.\"*");
-					0xFFFB->remove_from_party();
-					0xFFFB->get_npc_object()->set_schedule_type(WAIT);
+					JAANA->remove_from_party();
+					JAANA->get_npc_object()->set_schedule_type(WAIT);
 					abort;
 				}
 				say("\"I shall obey thy wish. I would be happy to re-join if thou shouldst ask. Goodbye.\"*");
-				0xFFFB->remove_from_party();
-				0xFFFB->get_npc_object()->set_schedule_type(LOITER);
+				JAANA->remove_from_party();
+				JAANA->get_npc_object()->set_schedule_type(LOITER);
 				abort;
 
 			case "magic":
@@ -10913,12 +10913,12 @@ void Func0405 object#(0x405) () {
 				var000A = Func08F7(0xFFB3);
 				if (var000A) {
 					0xFFB3->say("\"I see that thou art leaving Cove for a while, my dear?\"*");
-					0xFFFB->say("\"Yes, milord. But I shall return. I promise thee.\"*");
+					JAANA->say("\"Yes, milord. But I shall return. I promise thee.\"*");
 					0xFFB3->say("\"I shall try not to worry about thee, but it will be difficult.\"*");
-					0xFFFB->say("\"Do not worry. I shall be safe with the Avatar.\"*");
+					JAANA->say("\"Do not worry. I shall be safe with the Avatar.\"*");
 					0xFFB3->say("\"I do hope so.\" The Mayor embraces Jaana.*");
 					0xFFB3->hide();
-					0xFFFB->show_npc_face(0x0000);
+					JAANA->show_npc_face(0x0000);
 				}
 				fallthrough;
 
@@ -10930,7 +10930,7 @@ void Func0405 object#(0x405) () {
 					say("\"He looks the same to me! Perhaps he has a little more waistline than before... but that is to be expected if one stays away from adventuring for too long!\"*");
 					IOLO->say("\"What dost thou mean? 'Little more waistline' indeed!\"*");
 					IOLO->hide();
-					0xFFFB->say("\"No offense intended, Iolo!\"");
+					JAANA->say("\"No offense intended, Iolo!\"");
 				}
 				remove("Iolo");
 				fallthrough;
@@ -10943,7 +10943,7 @@ void Func0405 object#(0x405) () {
 					say("\"Shamino, thou dost not look like a 'kid' anymore! What didst happen? Didst thou reach the venerable age of thirty?\"*");
 					SHAMINO->say("\"Hmph. I am still a kid at heart.\"*");
 					SHAMINO->hide();
-					0xFFFB->say("\"That is a relief.\" She grins cheekily.");
+					JAANA->say("\"That is a relief.\" She grins cheekily.");
 				}
 				remove("Shamino");
 				fallthrough;
@@ -10955,7 +10955,7 @@ void Func0405 object#(0x405) () {
 				} else {
 					say("\"For someone recently knighted, he has retained his good looks and boyish charm, hasn't he?\"*");
 					DUPRE->say("\"Thou dost mean 'mannish' charm, dost thou not?\"*");
-					0xFFFB->say("\"Oh, pardon -me-, sir. Thine immaturity confused me for a moment.\"*");
+					JAANA->say("\"Oh, pardon -me-, sir. Thine immaturity confused me for a moment.\"*");
 					DUPRE->say("\"Art thou going to let her get away with that, ",
 						var0002,
 						"?\"");
@@ -10969,7 +10969,7 @@ void Func0405 object#(0x405) () {
 					}
 				}
 				remove("Dupre");
-				0xFFFB->show_npc_face(0x0000);
+				JAANA->show_npc_face(0x0000);
 				fallthrough;
 
 			case "Lord British":
@@ -10985,7 +10985,7 @@ void Func0405 object#(0x405) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFFB);
+		Func092E(JAANA);
 	}
 }
 
@@ -22316,14 +22316,14 @@ void Func044D object#(0x44D) () {
 				}
 				gflags[0x00E4] = true;
 				remove("everyone");
-				var0003 = Func08F7(0xFFFB);
+				var0003 = Func08F7(JAANA);
 				if (var0003) {
 					say("\"I see that thou art leaving Cove for a while, my dear?\"*");
-					0xFFFB->say("\"Yes, milord. But I shall return. I promise thee.\"*");
+					JAANA->say("\"Yes, milord. But I shall return. I promise thee.\"*");
 					0xFFB3->say("\"I shall try not to worry about thee, but it will be difficult.\"*");
-					0xFFFB->say("\"Do not worry. I shall be safe with the Avatar.\"*");
+					JAANA->say("\"Do not worry. I shall be safe with the Avatar.\"*");
 					0xFFB3->say("\"I do hope so.\" The Mayor embraces Jaana.*");
-					0xFFFB->hide();
+					JAANA->hide();
 					0xFFB3->show_npc_face(0x0000);
 				}
 				fallthrough;
@@ -54449,9 +54449,9 @@ void Func0665 object#(0x665) () {
 				actor frame strike_1h;
 			};
 			var0003 = get_object_position();
-			var0004 = [0xFFF1, 0xFFF1, 0xFFF1, 0xFFFB, 0xFFFB, 0xFFFB, 0x0005, 0x0005, 0x0005, 0x000F, 0x000F, 0x000F];
-			var0005 = [0xFFF9, 0x0002, 0x000B, 0xFFF9, 0x0002, 0x000B, 0xFFF9, 0x0002, 0x000B, 0xFFF9, 0x0002, 0x000B];
-			var0006 = 0x0007;
+			var0004 = [-15, -15, -15, -5, -5, -5,  5,  5,  5, 15, 15, 15];
+			var0005 = [ -7,   2,  11, -7,  2, 11, -7,  2, 11, -7,  2, 11];
+			var0006 = 7;
 			var0007 = 0x0000;
 			while (var0007 != 0x000C) {
 				var0007 += 0x0001;
@@ -70292,7 +70292,7 @@ void Func089E 0x89E (var var0000, var var0001, var var0002) {
 	var var0016;
 	var var0017;
 
-	var0003 = 0xFFFB->get_npc_object();
+	var0003 = JAANA->get_npc_object();
 	var0004 = UI_get_party_list();
 	say("\"I am able to heal, cure poison, and resurrect. Art thou interested in one of these services?\"");
 	UI_push_answers();
@@ -70319,7 +70319,7 @@ void Func089E 0x89E (var var0000, var var0001, var var0002) {
 				var000C = [];
 				var000D = [];
 				for (var0010 in var000B with var000E to var000F) {
-					if (var0010 != 0xFFFB->get_npc_object()) {
+					if (var0010 != JAANA->get_npc_object()) {
 						var000C &= var0010->get_npc_name();
 						var000D &= var0010;
 					}
@@ -70896,7 +70896,7 @@ void Func08A6 0x8A6 (var var0000, var var0001) {
 			var0007 = "find";
 		} else {
 			var0007 = "finds";
-			if ((var0002 == 0xFFFB) || ((var0002 == 0xFFF8) || (var0002 == 0xFFF7))) {
+			if ((var0002 == JAANA) || ((var0002 == 0xFFF8) || (var0002 == 0xFFF7))) {
 				var0005 = "she";
 				var0006 = "her";
 			} else {
@@ -73500,7 +73500,7 @@ void Func08D0 0x8D0 (var var0000, var var0001) {
 		var0003 = "you";
 		var0006 = "you";
 		var0004 = "feel";
-	} else if ((var0002 == 0xFFF8) || ((var0002 == 0xFFFB) || (var0002 == 0xFFF7))) {
+	} else if ((var0002 == 0xFFF8) || ((var0002 == JAANA) || (var0002 == 0xFFF7))) {
 		var0006 = "her";
 	} else {
 		var0006 = "him";
@@ -74657,7 +74657,7 @@ void Func08E5 0x8E5 (var var0000, var var0001) {
 	var var000E;
 
 	var0002 = Func0921(0xFFF9->get_npc_object());
-	if ((var0002 == 0xFFF8) || ((var0002 == 0xFFFB) || (var0002 == 0xFFF7))) {
+	if ((var0002 == 0xFFF8) || ((var0002 == JAANA) || (var0002 == 0xFFF7))) {
 		var0003 = true;
 	} else {
 		var0003 = false;
@@ -75706,7 +75706,7 @@ var Func0902 0x902 () {
 	var var0003;
 	var var0004;
 
-	var0000 = [IOLO, SHAMINO, DUPRE, 0xFFFB, 0xFFF9, 0xFFF8, 0xFFF7, SPARK, 0xFFF6];
+	var0000 = [IOLO, SHAMINO, DUPRE, JAANA, 0xFFF9, 0xFFF8, 0xFFF7, SPARK, 0xFFF6];
 	var0001 = UI_get_party_list();
 	for (var0004 in var0000 with var0002 to var0003) {
 		if (var0004->get_npc_object() in var0001) {

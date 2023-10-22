@@ -8216,15 +8216,15 @@ void Func01D1 shape#(0x1D1) () {
 				if (var0002 == 0x0000) {
 					var0003 = AVATAR->get_object_position();
 					var0004 = 0x0007;
-					UI_sprite_effect(var0004, (var0003[0x0001] - 0x0002), (var0003[0x0002] - 0x0002), 0x0008, 0x0008, 0x0000, LOOP_ONCE);
-					UI_sprite_effect(var0004, (var0003[0x0001] - 0x0002), (var0003[0x0002] - 0x0002), 0xFFF8, 0xFFF8, 0x0000, LOOP_ONCE);
-					UI_sprite_effect(var0004, (var0003[0x0001] - 0x0002), (var0003[0x0002] - 0x0002), 0x0008, 0xFFF8, 0x0000, LOOP_ONCE);
-					UI_sprite_effect(var0004, (var0003[0x0001] - 0x0002), (var0003[0x0002] - 0x0002), 0xFFF8, 0x0008, 0x0000, LOOP_ONCE);
-					UI_sprite_effect(var0004, (var0003[0x0001] - 0x0002), (var0003[0x0002] - 0x0002), 0x0000, 0xFFFB, 0x0000, LOOP_ONCE);
-					UI_sprite_effect(var0004, (var0003[0x0001] - 0x0002), (var0003[0x0002] - 0x0002), 0xFFFB, 0x0000, 0x0000, LOOP_ONCE);
-					UI_sprite_effect(var0004, (var0003[0x0001] - 0x0002), (var0003[0x0002] - 0x0002), 0x0000, 0x0005, 0x0000, LOOP_ONCE);
-					UI_sprite_effect(var0004, (var0003[0x0001] - 0x0002), (var0003[0x0002] - 0x0002), 0x0005, 0x0000, 0x0000, LOOP_ONCE);
-					UI_sprite_effect(var0004, (var0003[0x0001] - 0x0002), (var0003[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
+					UI_sprite_effect(var0004, (var0003[0x0001] - 2), (var0003[0x0002] - 2),  8,  8, 0, LOOP_ONCE);
+					UI_sprite_effect(var0004, (var0003[0x0001] - 2), (var0003[0x0002] - 2), -8, -8, 0, LOOP_ONCE);
+					UI_sprite_effect(var0004, (var0003[0x0001] - 2), (var0003[0x0002] - 2),  8, -8, 0, LOOP_ONCE);
+					UI_sprite_effect(var0004, (var0003[0x0001] - 2), (var0003[0x0002] - 2), -8,  8, 0, LOOP_ONCE);
+					UI_sprite_effect(var0004, (var0003[0x0001] - 2), (var0003[0x0002] - 2),  0, -5, 0, LOOP_ONCE);
+					UI_sprite_effect(var0004, (var0003[0x0001] - 2), (var0003[0x0002] - 2), -5,  0, 0, LOOP_ONCE);
+					UI_sprite_effect(var0004, (var0003[0x0001] - 2), (var0003[0x0002] - 2),  0,  5, 0, LOOP_ONCE);
+					UI_sprite_effect(var0004, (var0003[0x0001] - 2), (var0003[0x0002] - 2),  5,  0, 0, LOOP_ONCE);
+					UI_sprite_effect(var0004, (var0003[0x0001] - 2), (var0003[0x0002] - 2),  0,  0, 0, LOOP_ONCE);
 				}
 				if (var0002 == 0x0007) {
 					Func097F(DUPRE, "@Is everyone all right?@", 0x0005);
@@ -64608,8 +64608,8 @@ void Func065D object#(0x65D) () {
 				actor frame strike_1h;
 			};
 			var0003 = get_object_position();
-			var0004 = [0xFFF1, 0xFFF1, 0xFFF1, 0xFFFB, 0xFFFB, 0xFFFB, 0x0005, 0x0005, 0x0005, 0x000F, 0x000F, 0x000F];
-			var0005 = [0xFFF9, 0x0002, 0x000B, 0xFFF9, 0x0002, 0x000B, 0xFFF9, 0x0002, 0x000B, 0xFFF9, 0x0002, 0x000B];
+			var0004 = [-15, -15, -15, -5, -5, -5,  5,  5,  5, 15, 15, 15];
+			var0005 = [ -7,   2,  11, -7,  2, 11, -7,  2, 11, -7,  2, 11];
 			var0006 = 0x0007;
 			var0007 = 0x0000;
 			while (var0007 != 0x000C) {
@@ -68884,19 +68884,19 @@ void Func06CA object#(0x6CA) () {
 		var000B = var0009[0x0002];
 		var000C = var000A - var0001;
 		var000D = var000B - var0002;
-		if (var000D < 0xFFFB) {
+		if (var000D < -5) {
 			var0004[0x0001] = 0x0001;
 			var0005[0x0001] = var0008;
 		}
-		if (var000C > 0x0005) {
+		if (var000C >  5) {
 			var0004[0x0002] = 0x0001;
 			var0005[0x0002] = var0008;
 		}
-		if (var000D > 0x0005) {
+		if (var000D >  5) {
 			var0004[0x0003] = 0x0001;
 			var0005[0x0003] = var0008;
 		}
-		if (var000C < 0xFFFB) {
+		if (var000C < -5) {
 			var0004[0x0004] = 0x0001;
 			var0005[0x0004] = var0008;
 		}
@@ -68910,19 +68910,19 @@ void Func06CA object#(0x6CA) () {
 		var000B = var0014[0x0002];
 		var000C = var000A - var0001;
 		var000D = var000B - var0002;
-		if (var000D < 0xFFFB) {
+		if (var000D < -5) {
 			var000F[0x0001] = 0x0001;
 			var0010[0x0001] = var0013;
 		}
-		if (var000C > 0x0005) {
+		if (var000C >  5) {
 			var000F[0x0002] = 0x0001;
 			var0010[0x0002] = var0013;
 		}
-		if (var000D > 0x0005) {
+		if (var000D >  5) {
 			var000F[0x0003] = 0x0001;
 			var0010[0x0003] = var0013;
 		}
-		if (var000C < 0xFFFB) {
+		if (var000C < -5) {
 			var000F[0x0004] = 0x0001;
 			var0010[0x0004] = var0013;
 		}
@@ -69011,16 +69011,16 @@ void Func06CA object#(0x6CA) () {
 		var000B = var0009[0x0002];
 		var000C = var000A - var0001;
 		var000D = var000B - var0002;
-		if (var000D < 0xFFFB) {
+		if (var000D < -5) {
 			var0004[0x0001] = 0x0001;
 		}
-		if (var000C > 0x0005) {
+		if (var000C >  5) {
 			var0004[0x0002] = 0x0001;
 		}
-		if (var000D > 0x0005) {
+		if (var000D >  5) {
 			var0004[0x0003] = 0x0001;
 		}
-		if (var000C < 0xFFFB) {
+		if (var000C < -5) {
 			var0004[0x0004] = 0x0001;
 		}
 	}
@@ -73502,10 +73502,10 @@ void Func071F object#(0x71F) () {
 		AVATAR->set_item_flag(DONT_MOVE);
 		gflags[0x02B8] = true;
 		var0018 = [0x0687, 0x001C, 0x0000];
-		UI_sprite_effect(ANIMATION_TELEPORT2, var0018[0x0001], var0018[0x0002], 0x0005, 0x0005, 0x0000, LOOP_ONCE);
-		UI_sprite_effect(ANIMATION_TELEPORT, var0018[0x0001], var0018[0x0002], 0xFFFB, 0xFFFB, 0x0000, LOOP_ONCE);
-		UI_sprite_effect(ANIMATION_TELEPORT, var0018[0x0001], var0018[0x0002], 0xFFFB, 0x0005, 0x0000, LOOP_ONCE);
-		UI_sprite_effect(ANIMATION_TELEPORT2, var0018[0x0001], var0018[0x0002], 0x0005, 0xFFFB, 0x0000, LOOP_ONCE);
+		UI_sprite_effect(ANIMATION_TELEPORT2, var0018[0x0001], var0018[0x0002],  5,  5, 0, LOOP_ONCE);
+		UI_sprite_effect(ANIMATION_TELEPORT , var0018[0x0001], var0018[0x0002], -5, -5, 0, LOOP_ONCE);
+		UI_sprite_effect(ANIMATION_TELEPORT , var0018[0x0001], var0018[0x0002], -5,  5, 0, LOOP_ONCE);
+		UI_sprite_effect(ANIMATION_TELEPORT2, var0018[0x0001], var0018[0x0002],  5, -5, 0, LOOP_ONCE);
 		var0019 = [0x068B, 0x0015, 0x0002];
 		AVATAR->si_path_run_usecode(var0019, PATH_SUCCESS, item, Func071F, true);
 		// BUG: This should use SI_PATH_FAILURE instead of PATH_SUCCESS.
@@ -74518,14 +74518,14 @@ void Func072B object#(0x72B) () {
 		var0001 = find_nearby(0x027E, 0x0019, MASK_NONE);
 		var0002 = find_nearby(0x03EC, 0x0019, MASK_NONE);
 		var0003 = var0000->get_object_position();
-		UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, (var0003[0x0001] - 0x0003), (var0003[0x0002] - 0x0003), 0xFFFB, 0x0000, 0x0000, LOOP_ONCE);
+		UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, (var0003[0x0001] - 3), (var0003[0x0002] - 3), -5,  0,  0, LOOP_ONCE);
 		var0000->remove_item();
 		var0003 = var0001->get_object_position();
-		UI_sprite_effect(ANIMATION_GREEN_BUBBLES, (var0003[0x0001] - 0x0003), (var0003[0x0002] - 0x0003), 0x0000, 0xFFFB, 0x0000, LOOP_ONCE);
+		UI_sprite_effect(ANIMATION_GREEN_BUBBLES , (var0003[0x0001] - 3), (var0003[0x0002] - 3),  0, -5,  0, LOOP_ONCE);
 		var0001->remove_item();
 		var0003 = var0002->get_object_position();
-		UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, (var0003[0x0001] - 0x0003), (var0003[0x0002] - 0x0003), 0x0005, 0x0000, 0x0000, LOOP_ONCE);
-		UI_sprite_effect(ANIMATION_GREEN_BUBBLES, (var0003[0x0001] - 0x0003), (var0003[0x0002] - 0x0003), 0x0000, 0x0005, 0x0000, LOOP_ONCE);
+		UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, (var0003[0x0001] - 3), (var0003[0x0002] - 3),  5,  0,  0, LOOP_ONCE);
+		UI_sprite_effect(ANIMATION_GREEN_BUBBLES , (var0003[0x0001] - 3), (var0003[0x0002] - 3),  0,  5,  0, LOOP_ONCE);
 		var0002->remove_item();
 		UI_play_sound_effect(0x0077);
 		var0004 = script AVATAR after 27 ticks {
@@ -90517,7 +90517,7 @@ var Func0832 0x832 (var var0000) {
 		return -3;
 	}
 	if ((var0000 == 0x0008) || (var0000 == 0x0009)) {
-		return 0xFFFB;
+		return -5;
 	}
 	if ((var0000 == 0x000A) || (var0000 == 0x000B)) {
 		return 0xFFFA;
@@ -112534,7 +112534,7 @@ void Func09A2 0x9A2 (var var0000, var var0001) {
 	var var0003;
 
 	var0002 = var0001->get_object_position();
-	var0003 = [(var0002[0x0001] + UI_die_roll(0xFFFB, 0x0005)), (var0002[0x0002] + UI_die_roll(0xFFFB, 0x0005)), var0002[0x0003]];
+	var0003 = [(var0002[0x0001] + UI_die_roll(-5, 5)), (var0002[0x0002] + UI_die_roll(-5, 5)), var0002[0x0003]];
 	var0000->move_object(var0003);
 }
 
