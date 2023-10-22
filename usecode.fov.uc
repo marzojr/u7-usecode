@@ -1,6 +1,91 @@
 #game "blackgate"
 #strictbraces "true"
 
+enum spells_bg {
+	SPELL_NONE = 0,
+
+	SPELL_AWAKEN = 0,
+	SPELL_WEATHER,
+	SPELL_DOUSE,
+	SPELL_FIREWORKS,
+	SPELL_GLIMMER,
+	SPELL_HELP,
+	SPELL_IGNITE,
+	SPELL_THUNDER,
+
+	SPELL_CREATE_FOOD,
+	SPELL_CURE,
+	SPELL_DETECT_TRAP,
+	SPELL_GREAT_DOUSE,
+	SPELL_GREAT_IGNITE,
+	SPELL_LIGHT,
+	SPELL_LOCATE,
+	SPELL_AWAKEN_ALL,
+
+	SPELL_DESTROY_TRAP,
+	SPELL_ENCHANT,
+	SPELL_FIRE_BLAST,
+	SPELL_GREAT_LIGHT,
+	SPELL_MASS_CURE,
+	SPELL_PROTECTION,
+	SPELL_TELEKINESIS,
+	SPELL_WIZARD_EYE,
+
+	SPELL_CURSE,
+	SPELL_HEAL,
+	SPELL_SWARM,
+	SPELL_PROTECT_ALL,
+	SPELL_PARALYZE,
+	SPELL_PEER,
+	SPELL_POISON,
+	SPELL_SLEEP,
+
+	SPELL_CONJURE,
+	SPELL_LIGHTNING,
+	SPELL_MARK,
+	SPELL_MASS_CURSE,
+	SPELL_RECALL,
+	SPELL_REVEAL,
+	SPELL_SEANCE,
+	SPELL_UNLOCK_MAGIC,
+
+	SPELL_CHARM,
+	SPELL_DANCE,
+	SPELL_DISPEL_FIELD,
+	SPELL_EXPLOSION,
+	SPELL_GREAT_HEAL,
+	SPELL_INVISIBILITY,
+	SPELL_FIRE_FIELD,
+	SPELL_MASS_SLEEP,
+
+	SPELL_CAUSE_FEAR,
+	SPELL_CLONE,
+	SPELL_FIRE_RING,
+	SPELL_FLAME_STRIKE,
+	SPELL_MAGIC_STORM,
+	SPELL_POISON_FIELD,
+	SPELL_SLEEP_FIELD,
+	SPELL_TREMOR,
+
+	SPELL_CREATE_GOLD,
+	SPELL_DEATH_BOLT,
+	SPELL_DELAYED_BLAST,
+	SPELL_ENERGY_FIELD,
+	SPELL_ENERGY_MIST,
+	SPELL_MASS_CHARM,
+	SPELL_MASS_MIGHT,
+	SPELL_RESTORATION,
+
+	SPELL_ARMAGEDDON,
+	SPELL_DEATH_VORTEX,
+	SPELL_MASS_DEATH,
+	SPELL_INVISIBILITY_ALL,
+	SPELL_RESURRECT,
+	SPELL_SUMMON,
+	SPELL_SWORD_STRIKE,
+	SPELL_TIME_STOP
+};
+
 enum sprite_effects {
 	ANIMATION_BIG_BLAST			= 1,
 	ANIMATION_BIG_CLOUDS		= 2,
@@ -71633,28 +71718,28 @@ void Func08BB 0x8BB (var var0000) {
 		}
 		if (var0003 == 0x0001) {
 			var0004 = ["nothing", "Light", "Create Food", "Cure", "Detect Trap"];
-			var0005 = [0x0000, 0x000D, 0x0008, 0x0009, 0x000A];
+			var0005 = [SPELL_NONE, SPELL_LIGHT, SPELL_CREATE_FOOD, SPELL_CURE, SPELL_DETECT_TRAP];
 		} else if (var0003 == 0x0002) {
 			var0004 = ["nothing", "Wizard Eye", "Telekinesis", "Protection", "Destroy Trap"];
-			var0005 = [0x0000, 0x0017, 0x0016, 0x0015, 0x0010];
+			var0005 = [SPELL_NONE, SPELL_WIZARD_EYE, SPELL_TELEKINESIS, SPELL_PROTECTION, SPELL_DESTROY_TRAP];
 		} else if (var0003 == 0x0003) {
 			var0004 = ["nothing", "Heal", "Peer", "Sleep", "Protect All"];
-			var0005 = [0x0000, 0x0019, 0x001D, 0x001F, 0x001B];
+			var0005 = [SPELL_NONE, SPELL_HEAL, SPELL_PEER, SPELL_SLEEP, SPELL_PROTECT_ALL];
 		} else if (var0003 == 0x0004) {
 			var0004 = ["nothing", "Mark", "Recall", "Seance", "Unlock Magic"];
-			var0005 = [0x0000, 0x0022, 0x0024, 0x0026, 0x0027];
+			var0005 = [SPELL_NONE, SPELL_MARK, SPELL_RECALL, SPELL_SEANCE, SPELL_UNLOCK_MAGIC];
 		} else if (var0003 == 0x0005) {
 			var0004 = ["nothing", "Invisibility", "Charm", "Fire Field", "Dance"];
-			var0005 = [0x0000, 0x002D, 0x0028, 0x002E, 0x0029];
+			var0005 = [SPELL_NONE, SPELL_INVISIBILITY, SPELL_CHARM, SPELL_FIRE_FIELD, SPELL_DANCE];
 		} else if (var0003 == 0x0006) {
 			var0004 = ["nothing", "Clone", "Sleep Field", "Cause Fear", "Magic Storm"];
-			var0005 = [0x0000, 0x0031, 0x0036, 0x0030, 0x0034];
+			var0005 = [SPELL_NONE, SPELL_CLONE, SPELL_SLEEP_FIELD, SPELL_CAUSE_FEAR, SPELL_MAGIC_STORM];
 		} else if (var0003 == 0x0007) {
 			var0004 = ["nothing", "Mass Might", "Energy Mist", "Restoration", "Energy Field"];
-			var0005 = [0x0000, 0x003E, 0x003C, 0x003F, 0x003B];
+			var0005 = [SPELL_NONE, SPELL_MASS_MIGHT, SPELL_ENERGY_MIST, SPELL_RESTORATION, SPELL_ENERGY_FIELD];
 		} else {
 			var0004 = ["nothing", "Resurrect", "Time Stop", "Sword Strike", "Invisible All"];
-			var0005 = [0x0000, 0x0044, 0x0047, 0x0046, 0x0043];
+			var0005 = [SPELL_NONE, SPELL_RESURRECT, SPELL_TIME_STOP, SPELL_SWORD_STRIKE, SPELL_INVISIBILITY_ALL];
 		}
 		say("\"What spell wouldst thou like to buy?\"");
 		var0006 = Func090C(var0004);
@@ -72196,28 +72281,28 @@ void Func08C3 0x8C3 () {
 		}
 		if (var0002 == 0x0001) {
 			var0003 = ["nothing", "Cure", "Detect Trap", "Great Ignite", "Locate"];
-			var0004 = [0x0000, 0x0009, 0x000A, 0x000C, 0x000E];
+			var0004 = [SPELL_NONE, SPELL_CURE, SPELL_DETECT_TRAP, SPELL_GREAT_IGNITE, SPELL_LOCATE];
 		} else if (var0002 == 0x0002) {
 			var0003 = ["nothing", "Destroy Trap", "Enchant", "Protection", "Wizard Eye"];
-			var0004 = [0x0000, 0x0010, 0x0011, 0x0015, 0x0017];
+			var0004 = [SPELL_NONE, SPELL_DESTROY_TRAP, SPELL_ENCHANT, SPELL_PROTECTION, SPELL_WIZARD_EYE];
 		} else if (var0002 == 0x0003) {
 			var0003 = ["nothing", "Swarm", "Paralyze", "Peer", "Poison"];
-			var0004 = [0x0000, 0x001A, 0x001C, 0x001D, 0x001E];
+			var0004 = [SPELL_NONE, SPELL_SWARM, SPELL_PARALYZE, SPELL_PEER, SPELL_POISON];
 		} else if (var0002 == 0x0004) {
 			var0003 = ["nothing", "Mark", "Recall", "Seance", "Unlock Magic"];
-			var0004 = [0x0000, 0x0022, 0x0024, 0x0026, 0x0027];
+			var0004 = [SPELL_NONE, SPELL_MARK, SPELL_RECALL, SPELL_SEANCE, SPELL_UNLOCK_MAGIC];
 		} else if (var0002 == 0x0005) {
 			var0003 = ["nothing", "Dispel Field", "Explosion", "Invisibility", "Mass Sleep"];
-			var0004 = [0x0000, 0x002A, 0x002B, 0x002D, 0x002F];
+			var0004 = [SPELL_NONE, SPELL_DISPEL_FIELD, SPELL_EXPLOSION, SPELL_INVISIBILITY, SPELL_MASS_SLEEP];
 		} else if (var0002 == 0x0006) {
 			var0003 = ["nothing", "Fire Ring", "Magic Storm", "Poison Field", "Tremor"];
-			var0004 = [0x0000, 0x0032, 0x0034, 0x0035, 0x0037];
+			var0004 = [SPELL_NONE, SPELL_FIRE_RING, SPELL_MAGIC_STORM, SPELL_POISON_FIELD, SPELL_TREMOR];
 		} else if (var0002 == 0x0007) {
 			var0003 = ["nothing", "Death Bolt", "Delayed Blast", "Energy Field", "Energy Mist"];
-			var0004 = [0x0000, 0x0039, 0x003A, 0x003B, 0x003C];
+			var0004 = [SPELL_NONE, SPELL_DEATH_BOLT, SPELL_DELAYED_BLAST, SPELL_ENERGY_FIELD, SPELL_ENERGY_MIST];
 		} else {
 			var0003 = ["nothing", "Death Vortex", "Mass Death", "Summon", "Swordstrike"];
-			var0004 = [0x0000, 0x0041, 0x0042, 0x0045, 0x0046];
+			var0004 = [SPELL_NONE, SPELL_DEATH_VORTEX, SPELL_MASS_DEATH, SPELL_SUMMON, SPELL_SWORD_STRIKE];
 		}
 		say("\"What spell wouldst thou like to buy?\"");
 		var0005 = Func090C(var0003);
@@ -72340,28 +72425,28 @@ void Func08C5 0x8C5 () {
 		}
 		if (var0002 == 0x0001) {
 			var0003 = ["nothing", "Create Food", "Great Douse", "Light", "Locate"];
-			var0004 = [0x0000, 0x0008, 0x000B, 0x000D, 0x000E];
+			var0004 = [SPELL_NONE, SPELL_CREATE_FOOD, SPELL_GREAT_DOUSE, SPELL_LIGHT, SPELL_LOCATE];
 		} else if (var0002 == 0x0002) {
 			var0003 = ["nothing", "Enchant", "Mass Cure", "Protection", "Telekinesis"];
-			var0004 = [0x0000, 0x0011, 0x0014, 0x0015, 0x0016];
+			var0004 = [SPELL_NONE, SPELL_ENCHANT, SPELL_MASS_CURE, SPELL_PROTECTION, SPELL_TELEKINESIS];
 		} else if (var0002 == 0x0003) {
 			var0003 = ["nothing", "Heal", "Swarm", "Protect All", "Sleep"];
-			var0004 = [0x0000, 0x0019, 0x001A, 0x001B, 0x001F];
+			var0004 = [SPELL_NONE, SPELL_HEAL, SPELL_SWARM, SPELL_PROTECT_ALL, SPELL_SLEEP];
 		} else if (var0002 == 0x0004) {
 			var0003 = ["nothing", "Conjure", "Mass Curse", "Reveal", "Unlock Magic"];
-			var0004 = [0x0000, 0x0020, 0x0023, 0x0025, 0x0027];
+			var0004 = [SPELL_NONE, SPELL_CONJURE, SPELL_MASS_CURSE, SPELL_REVEAL, SPELL_UNLOCK_MAGIC];
 		} else if (var0002 == 0x0005) {
 			var0003 = ["nothing", "Dispel Field", "Great Heal", "Invisibility", "Fire Field"];
-			var0004 = [0x0000, 0x002A, 0x002C, 0x002D, 0x002E];
+			var0004 = [SPELL_NONE, SPELL_DISPEL_FIELD, SPELL_GREAT_HEAL, SPELL_INVISIBILITY, SPELL_FIRE_FIELD];
 		} else if (var0002 == 0x0006) {
 			var0003 = ["nothing", "Cause Fear", "Fire Ring", "Flame Strike", "Sleep Field"];
-			var0004 = [0x0000, 0x0030, 0x0032, 0x0033, 0x0036];
+			var0004 = [SPELL_NONE, SPELL_CAUSE_FEAR, SPELL_FIRE_RING, SPELL_FLAME_STRIKE, SPELL_SLEEP_FIELD];
 		} else if (var0002 == 0x0007) {
 			var0003 = ["nothing", "Death Bolt", "Energy Field", "Energy Mist", "Mass Might"];
-			var0004 = [0x0000, 0x0039, 0x003B, 0x003C, 0x003E];
+			var0004 = [SPELL_NONE, SPELL_DEATH_BOLT, SPELL_ENERGY_FIELD, SPELL_ENERGY_MIST, SPELL_MASS_MIGHT];
 		} else {
 			var0003 = ["nothing", "Death Vortex", "Mass Death", "Invisible All", "Time Stop"];
-			var0004 = [0x0000, 0x0041, 0x0042, 0x0043, 0x0047];
+			var0004 = [SPELL_NONE, SPELL_DEATH_VORTEX, SPELL_MASS_DEATH, SPELL_INVISIBILITY_ALL, SPELL_TIME_STOP];
 		}
 		say("\"What spell wouldst thou like to buy?\"");
 		var0005 = Func090C(var0003);
@@ -73652,28 +73737,28 @@ void Func08DB 0x8DB () {
 		}
 		if (var0002 == 0x0001) {
 			var0003 = ["nothing", "Cure", "Detect Trap", "Light", "Awaken All"];
-			var0004 = [0x0000, 0x0009, 0x000A, 0x000D, 0x000F];
+			var0004 = [SPELL_NONE, SPELL_CURE, SPELL_DETECT_TRAP, SPELL_LIGHT, SPELL_AWAKEN_ALL];
 		} else if (var0002 == 0x0002) {
 			var0003 = ["nothing", "Destroy Trap", "Fire Blast", "Great Light", "Telekinesis"];
-			var0004 = [0x0000, 0x0010, 0x0012, 0x0013, 0x0016];
+			var0004 = [SPELL_NONE, SPELL_DESTROY_TRAP, SPELL_FIRE_BLAST, SPELL_GREAT_LIGHT, SPELL_TELEKINESIS];
 		} else if (var0002 == 0x0003) {
 			var0003 = ["nothing", "Curse", "Heal", "Paralyze", "Poison"];
-			var0004 = [0x0000, 0x0018, 0x0019, 0x001C, 0x001E];
+			var0004 = [SPELL_NONE, SPELL_CURSE, SPELL_HEAL, SPELL_PARALYZE, SPELL_POISON];
 		} else if (var0002 == 0x0004) {
 			var0003 = ["nothing", "Lightning", "Mark", "Recall", "Seance"];
-			var0004 = [0x0000, 0x0021, 0x0022, 0x0024, 0x0026];
+			var0004 = [SPELL_NONE, SPELL_LIGHTNING, SPELL_MARK, SPELL_RECALL, SPELL_SEANCE];
 		} else if (var0002 == 0x0005) {
 			var0003 = ["nothing", "Charm", "Dance", "Explosion", "Great Heal"];
-			var0004 = [0x0000, 0x0028, 0x0029, 0x002B, 0x002C];
+			var0004 = [SPELL_NONE, SPELL_CHARM, SPELL_DANCE, SPELL_EXPLOSION, SPELL_GREAT_HEAL];
 		} else if (var0002 == 0x0006) {
 			var0003 = ["nothing", "Clone", "Magic Storm", "Poison Field", "Sleep Field"];
-			var0004 = [0x0000, 0x0031, 0x0034, 0x0035, 0x0036];
+			var0004 = [SPELL_NONE, SPELL_CLONE, SPELL_MAGIC_STORM, SPELL_POISON_FIELD, SPELL_SLEEP_FIELD];
 		} else if (var0002 == 0x0007) {
 			var0003 = ["nothing", "Create Gold", "Delayed Blast", "Mass Charm", "Restoration"];
-			var0004 = [0x0000, 0x0038, 0x003A, 0x003D, 0x003F];
+			var0004 = [SPELL_NONE, SPELL_CREATE_GOLD, SPELL_DELAYED_BLAST, SPELL_MASS_CHARM, SPELL_RESTORATION];
 		} else {
 			var0003 = ["nothing", "Armageddon", "Resurrect", "Summon", "Swordstrike"];
-			var0004 = [0x0000, 0x0040, 0x0044, 0x0045, 0x0046];
+			var0004 = [SPELL_NONE, SPELL_ARMAGEDDON, SPELL_RESURRECT, SPELL_SUMMON, SPELL_SWORD_STRIKE];
 		}
 		say("\"What spell wouldst thou like to buy?\"");
 		var0005 = Func090C(var0003);
@@ -77041,22 +77126,22 @@ void Func094C 0x94C () {
 			break;
 		} else if (var0002 == 0x0001) {
 			var0003 = ["nothing", "Great Ignite", "Great Douse", "Locate", "Light"];
-			var0004 = [0x0000, 0x000C, 0x000B, 0x000E, 0x000D];
+			var0004 = [SPELL_NONE, SPELL_GREAT_IGNITE, SPELL_GREAT_DOUSE, SPELL_LOCATE, SPELL_LIGHT];
 		} else if (var0002 == 0x0002) {
 			var0003 = ["nothing", "Fire Blast", "Enchant", "Destroy Trap", "Great Light"];
-			var0004 = [0x0000, 0x0012, 0x0011, 0x0010, 0x0013];
+			var0004 = [SPELL_NONE, SPELL_FIRE_BLAST, SPELL_ENCHANT, SPELL_DESTROY_TRAP, SPELL_GREAT_LIGHT];
 		} else if (var0002 == 0x0003) {
 			var0003 = ["nothing", "Paralyze", "Poison", "Curse", "Swarm"];
-			var0004 = [0x0000, 0x001C, 0x001E, 0x0018, 0x001A];
+			var0004 = [SPELL_NONE, SPELL_PARALYZE, SPELL_POISON, SPELL_CURSE, SPELL_SWARM];
 		} else if (var0002 == 0x0004) {
 			var0003 = ["nothing", "Lightning", "Mass Curse", "Reveal", "Conjure"];
-			var0004 = [0x0000, 0x0021, 0x0023, 0x0025, 0x0020];
+			var0004 = [SPELL_NONE, SPELL_LIGHTNING, SPELL_MASS_CURSE, SPELL_REVEAL, SPELL_CONJURE];
 		} else if (var0002 == 0x0005) {
 			var0003 = ["nothing", "Mass Sleep", "Explosion", "Dispel Field", "Fire Field"];
-			var0004 = [0x0000, 0x002F, 0x002B, 0x002A, 0x002E];
+			var0004 = [SPELL_NONE, SPELL_MASS_SLEEP, SPELL_EXPLOSION, SPELL_DISPEL_FIELD, SPELL_FIRE_FIELD];
 		} else {
 			var0003 = ["nothing", "Fire Ring", "Clone", "Flame Strike", "Tremor"];
-			var0004 = [0x0000, 0x0032, 0x0031, 0x0033, 0x0037];
+			var0004 = [SPELL_NONE, SPELL_FIRE_RING, SPELL_CLONE, SPELL_FLAME_STRIKE, SPELL_TREMOR];
 		}
 		say("\"To buy which spell?\"");
 		var0005 = Func090C(var0003);

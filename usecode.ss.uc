@@ -1,6 +1,91 @@
 #game "serpentisle"
 #strictbraces "true"
 
+enum spells_si {
+	SPELL_NONE = 0,
+
+	SPELL_CREATE_FOOD = 0,
+	SPELL_CURE,
+	SPELL_DETECT_TRAP,
+	SPELL_GREAT_DOUSE,
+	SPELL_GREAT_IGNITE,
+	SPELL_LIGHT,
+	SPELL_LOCATE,
+	SPELL_TELEKINESIS,
+
+	SPELL_AWAKEN,
+	SPELL_DESTROY_TRAP,
+	SPELL_FALSE_COIN,
+	SPELL_COLD_BLAST,
+	SPELL_GREAT_LIGHT,
+	SPELL_HEAL,
+	SPELL_MASS_CURE,
+	SPELL_PROTECTION,
+
+	SPELL_CHILL,
+	SPELL_CURSE,
+	SPELL_ENCHANT_MISSILES,
+	SPELL_COLUMNAS_INTUITION,
+	SPELL_PROTECT_ALL,
+	SPELL_PARALYZE,
+	SPELL_SLEEP,
+	SPELL_TRANSLATION,
+
+	SPELL_BLINK,
+	SPELL_DETER,
+	SPELL_FLASH,
+	SPELL_CREATE_SOUL_PRISM,
+	SPELL_MASS_CURSE,
+	SPELL_REVEAL,
+	SPELL_TRANSCRIBE,
+	SPELL_UNLOCK_MAGIC,
+
+	SPELL_CONJURE,
+	SPELL_DISPEL_FIELD,
+	SPELL_EXPLOSION,
+	SPELL_GREAT_HEAL,
+	SPELL_INVISIBILITY,
+	SPELL_MASS_SLEEP,
+	SPELL_SUMMON_SHADE,
+	SPELL_ERSTAMS_SURPRISE,
+
+	SPELL_BETRAY,
+	SPELL_DISPEL_ILLUSION,
+	SPELL_CAUSE_FEAR,
+	SPELL_FIRE_FIELD,
+	SPELL_FIRE_RING,
+	SPELL_COLD_STRIKE,
+	SPELL_CREATE_AMMO,
+	SPELL_CREATE_AUTOMATON,
+
+	SPELL_ENERGY_FIELD,
+	SPELL_ENERGY_MIST,
+	SPELL_MASS_AWAKEN,
+	SPELL_MASS_MIGHT,
+	SPELL_POISON_MIST,
+	SPELL_RESTORATION,
+	SPELL_VIBRATE,
+	SPELL_LIGHTNING,
+
+	SPELL_CREATE_ICE,
+	SPELL_MIND_BLAST,
+	SPELL_DELAYED_BLAST,
+	SPELL_FETCH,
+	SPELL_INVOKE_SNOW_SERPENT,
+	SPELL_SERPENT_BOND,
+	SPELL_FIRE_SNAKE,
+	SPELL_SWORD_STRIKE,
+
+	SPELL_DEATH_VORTEX,
+	SPELL_MASS_DEATH,
+	SPELL_INVISIBLE_ALL,
+	SPELL_SPIRAL_MISSILE,
+	SPELL_STOP_STORM,
+	SPELL_SUMMON,
+	SPELL_TIME_STOP,
+	SPELL_IMBALANCE,
+};
+
 enum sprite_effects {
 	ANIMATION_BIG_BLAST			= 1,
 	ANIMATION_BIG_CLOUDS		= 2,
@@ -15057,7 +15142,15 @@ void Func032B shape#(0x32B) () {
 		if (var0000) {
 			var0000->set_item_frame(0x0005);
 			var0000->remove_all_spells();
-			var0001 = [0x0000, 0x0001, 0x0002, 0x0003, 0x0004, 0x0005, 0x0006, 0x0008, 0x0009, 0x000C, 0x000D, 0x000E, 0x000F, 0x0011, 0x0012, 0x0014, 0x0015, 0x0016, 0x0018, 0x0019, 0x001A, 0x001C, 0x001D, 0x001E, 0x001F, 0x0020, 0x0021, 0x0022, 0x0023, 0x0024, 0x0025, 0x0028, 0x002A, 0x002B, 0x002C, 0x002E, 0x0030, 0x0031, 0x0032, 0x0033, 0x0034, 0x0035, 0x0037, 0x0039, 0x003A, 0x003E, 0x003F, 0x0040, 0x0041, 0x0042, 0x0044, 0x0045, 0x0046];
+			var0001 = [SPELL_CREATE_FOOD, SPELL_CURE, SPELL_DETECT_TRAP, SPELL_GREAT_DOUSE, SPELL_GREAT_IGNITE, SPELL_LIGHT, SPELL_LOCATE,
+			           SPELL_AWAKEN, SPELL_DESTROY_TRAP, SPELL_GREAT_LIGHT, SPELL_HEAL, SPELL_MASS_CURE, SPELL_PROTECTION,
+			           SPELL_CURSE, SPELL_ENCHANT_MISSILES, SPELL_PROTECT_ALL, SPELL_PARALYZE, SPELL_SLEEP,
+			           SPELL_BLINK, SPELL_DETER, SPELL_FLASH, SPELL_MASS_CURSE, SPELL_REVEAL, SPELL_TRANSCRIBE, SPELL_UNLOCK_MAGIC,
+			           SPELL_CONJURE, SPELL_DISPEL_FIELD, SPELL_EXPLOSION, SPELL_GREAT_HEAL, SPELL_INVISIBILITY, SPELL_MASS_SLEEP,
+			           SPELL_BETRAY, SPELL_CAUSE_FEAR, SPELL_FIRE_FIELD, SPELL_FIRE_RING, SPELL_CREATE_AMMO,
+			           SPELL_ENERGY_FIELD, SPELL_ENERGY_MIST, SPELL_MASS_AWAKEN, SPELL_MASS_MIGHT, SPELL_POISON_MIST, SPELL_RESTORATION, SPELL_LIGHTNING,
+			           SPELL_MIND_BLAST, SPELL_DELAYED_BLAST, SPELL_FIRE_SNAKE, SPELL_SWORD_STRIKE,
+			           SPELL_DEATH_VORTEX, SPELL_MASS_DEATH, SPELL_INVISIBLE_ALL, SPELL_STOP_STORM, SPELL_SUMMON, SPELL_TIME_STOP];
 			for (var0004 in var0001 with var0002 to var0003) {
 				var0005 = UI_add_spell(var0004, 0x0000, var0000);
 			}
@@ -24524,7 +24617,7 @@ void Func0411 object#(0x411) () {
 								var0009 = var0004[0x0001];
 							}
 							var0009->remove_all_spells();
-							var000A = [0x0001, 0x0008, 0x000D, 0x0017, 0x001E];
+							var000A = [SPELL_CURE, SPELL_AWAKEN, SPELL_HEAL, SPELL_TRANSLATION, SPELL_TRANSCRIBE];
 							for (var000D in var000A with var000B to var000C) {
 								var0004 = UI_add_spell(var000D, 0x0000, var0009);
 							}
@@ -85869,37 +85962,37 @@ void Func0816 0x816 () {
 		}
 		if (var0004 == 0x0001) {
 			var0005 = ["nothing", "Great Ignite", "Locate"];
-			var0006 = [0x0000, 0x0004, 0x0006];
+			var0006 = [SPELL_NONE, SPELL_GREAT_IGNITE, SPELL_LOCATE];
 			var0007 = [0x0000, 0x001E, 0x0023];
 			var0008 = [0x0000, 0x0012, 0x0014];
 		} else if (var0004 == 0x0002) {
 			var0005 = ["nothing", "Destroy Trap", "Great Light", "Protection"];
-			var0006 = [0x0000, 0x0009, 0x000C, 0x000F];
+			var0006 = [SPELL_NONE, SPELL_DESTROY_TRAP, SPELL_GREAT_LIGHT, SPELL_PROTECTION];
 			var0007 = [0x0000, 0x0032, 0x003C, 0x0050];
 			var0008 = [0x0000, 0x001E, 0x001E, 0x0032];
 		} else if (var0004 == 0x0003) {
 			var0005 = ["nothing", "Curse", "Columna's Intuition", "Mass Protect"];
-			var0006 = [0x0000, 0x0011, 0x0013, 0x0014];
+			var0006 = [SPELL_NONE, SPELL_CURSE, SPELL_COLUMNAS_INTUITION, SPELL_PROTECT_ALL];
 			var0007 = [0x0000, 0x004B, 0x0078, 0x0064];
 			var0008 = [0x0000, 0x0028, 0x0050, 0x003C];
 		} else if (var0004 == 0x0004) {
 			var0005 = ["nothing", "Mass Curse", "Unlock Magic"];
-			var0006 = [0x0000, 0x001C, 0x001F];
+			var0006 = [SPELL_NONE, SPELL_MASS_CURSE, SPELL_UNLOCK_MAGIC];
 			var0007 = [0x0000, 0x006E, 0x0078];
 			var0008 = [0x0000, 0x003C, 0x0046];
 		} else if (var0004 == 0x0005) {
 			var0005 = ["nothing", "Invisibility"];
-			var0006 = [0x0000, 0x0024];
+			var0006 = [SPELL_NONE, SPELL_INVISIBILITY];
 			var0007 = [0x0000, 0x009B];
 			var0008 = [0x0000, 0x005A];
 		} else if (var0004 == 0x0006) {
 			var0005 = ["nothing", "Dispel Illusion", "Create Ammunition"];
-			var0006 = [0x0000, 0x0029, 0x002E];
+			var0006 = [SPELL_NONE, SPELL_DISPEL_ILLUSION, SPELL_CREATE_AMMO];
 			var0007 = [0x0000, 0x00A5, 0x00AF];
 			var0008 = [0x0000, 0x006E, 0x0078];
 		} else if (var0004 == 0x0007) {
 			var0005 = ["nothing", "Energy Mist", "Poison Mist"];
-			var0006 = [0x0000, 0x0031, 0x0034];
+			var0006 = [SPELL_NONE, SPELL_ENERGY_MIST, SPELL_POISON_MIST];
 			var0007 = [0x0000, 0x00FA, 0x0118];
 			var0008 = [0x0000, 0x00B4, 0x00BE];
 		}
@@ -89178,27 +89271,27 @@ void Func082A 0x82A () {
 		}
 		if (var0002 == 0x0001) {
 			var0003 = ["nothing", "Mass Sleep"];
-			var0004 = [0x0000, 0x0025];
+			var0004 = [SPELL_NONE, SPELL_MASS_SLEEP];
 			var0005 = [0x0000, 0x00FA];
 			var0006 = [0x0000, 0x0082];
 		} else if (var0002 == 0x0002) {
 			var0003 = ["nothing", "Create Ammunition"];
-			var0004 = [0x0000, 0x002E];
+			var0004 = [SPELL_NONE, SPELL_CREATE_AMMO];
 			var0005 = [0x0000, 0x012C];
 			var0006 = [0x0000, 0x00B4];
 		} else if (var0002 == 0x0003) {
 			var0003 = ["nothing", "Vibrate"];
-			var0004 = [0x0000, 0x0036];
+			var0004 = [SPELL_NONE, SPELL_VIBRATE];
 			var0005 = [0x0000, 0x015E];
 			var0006 = [0x0000, 0x00FA];
 		} else if (var0002 == 0x0004) {
 			var0003 = ["nothing", "Invoke Serpent", "Serpent Bond"];
-			var0004 = [0x0000, 0x003C, 0x003D];
+			var0004 = [SPELL_NONE, SPELL_INVOKE_SNOW_SERPENT, SPELL_SERPENT_BOND];
 			var0005 = [0x0000, 0x017C, 0x01C2];
 			var0006 = [0x0000, 0x00A0, 0x0113];
 		} else if (var0002 == 0x0005) {
 			var0003 = ["nothing", "Imbalance"];
-			var0004 = [0x0000, 0x0047];
+			var0004 = [SPELL_NONE, SPELL_IMBALANCE];
 			var0005 = [0x0000, 0x0320];
 			var0006 = [0x0000, 0x0320];
 		}
@@ -89568,47 +89661,47 @@ void Func082D 0x82D () {
 		}
 		if (var0004 == 0x0001) {
 			var0005 = ["nothing", "Create Food", "Great Douse", "Locate"];
-			var0006 = [0x0000, 0x0000, 0x0003, 0x0006];
+			var0006 = [SPELL_NONE, SPELL_CREATE_FOOD, SPELL_GREAT_DOUSE, SPELL_LOCATE];
 			var0007 = [0x0000, 0x0014, 0x0012, 0x001A];
 			var0008 = [0x0000, 0x000C, 0x0009, 0x000D];
 		} else if (var0004 == 0x0002) {
 			var0005 = ["nothing", "False Coin"];
-			var0006 = [0x0000, 0x000A];
+			var0006 = [SPELL_NONE, SPELL_FALSE_COIN];
 			var0007 = [0x0000, 0x0050];
 			var0008 = [0x0000, 0x0032];
 		} else if (var0004 == 0x0003) {
 			var0005 = ["nothing", "Paralyze", "Sleep"];
-			var0006 = [0x0000, 0x0015, 0x0016];
+			var0006 = [SPELL_NONE, SPELL_PARALYZE, SPELL_SLEEP];
 			var0007 = [0x0000, 0x0046, 0x003C];
 			var0008 = [0x0000, 0x0023, 0x0022];
 		} else if (var0004 == 0x0004) {
 			var0005 = ["nothing", "Deter"];
-			var0006 = [0x0000, 0x0019];
+			var0006 = [SPELL_NONE, SPELL_DETER];
 			var0007 = [0x0000, 0x005A];
 			var0008 = [0x0000, 0x0032];
 		} else if (var0004 == 0x0005) {
 			var0005 = ["nothing", "Mass Sleep", "Erstam's Surprise"];
-			var0006 = [0x0000, 0x0025, 0x0027];
+			var0006 = [SPELL_NONE, SPELL_MASS_SLEEP, SPELL_ERSTAMS_SURPRISE];
 			var0007 = [0x0000, 0x0091, 0x00A0];
 			var0008 = [0x0000, 0x0050, 0x0064];
 		} else if (var0004 == 0x0006) {
 			var0005 = ["nothing", "Fire Ring"];
-			var0006 = [0x0000, 0x002C];
+			var0006 = [SPELL_NONE, SPELL_FIRE_RING];
 			var0007 = [0x0000, 0x00B4];
 			var0008 = [0x0000, 0x006E];
 		} else if (var0004 == 0x0007) {
 			var0005 = ["nothing", "Vibrate"];
-			var0006 = [0x0000, 0x0036];
+			var0006 = [SPELL_NONE, SPELL_VIBRATE];
 			var0007 = [0x0000, 0x00DC];
 			var0008 = [0x0000, 0x006E];
 		} else if (var0004 == 0x0008) {
 			var0005 = ["nothing", "Mind Blast", "Swordstrike"];
-			var0006 = [0x0000, 0x0039, 0x003F];
+			var0006 = [SPELL_NONE, SPELL_MIND_BLAST, SPELL_SWORD_STRIKE];
 			var0007 = [0x0000, 0x012C, 0x011D];
 			var0008 = [0x0000, 0x00B9, 0x00A5];
 		} else if (var0004 == 0x0009) {
 			var0005 = ["nothing", "Death Vortex", "Mass Death", "Spiral Missiles"];
-			var0006 = [0x0000, 0x0040, 0x0041, 0x0043];
+			var0006 = [SPELL_NONE, SPELL_DEATH_VORTEX, SPELL_MASS_DEATH, SPELL_SPIRAL_MISSILE];
 			var0007 = [0x0000, 0x015E, 0x0190, 0x01A9];
 			var0008 = [0x0000, 0x00DC, 0x00FA, 0x0104];
 		}
@@ -90123,31 +90216,31 @@ void Func0834 0x834 () {
 		}
 		if (var0001 == 0x0001) {
 			var0002 = ["nothing", "Detect Trap", "Create Food"];
-			var0003 = [0x0000, 0x0002, 0x0000];
+			var0003 = [SPELL_NONE, SPELL_DETECT_TRAP, SPELL_CREATE_FOOD];
 		} else if (var0001 == 0x0002) {
 			var0002 = ["nothing", "Cold Blast", "Mass Cure"];
-			var0003 = [0x0000, 0x000B, 0x000E];
+			var0003 = [SPELL_NONE, SPELL_COLD_BLAST, SPELL_MASS_CURE];
 		} else if (var0001 == 0x0003) {
 			var0002 = ["nothing", "Enchant Missiles"];
-			var0003 = [0x0000, 0x0012];
+			var0003 = [SPELL_NONE, SPELL_ENCHANT_MISSILES];
 		} else if (var0001 == 0x0004) {
 			var0002 = ["nothing", "Unlock Magic"];
-			var0003 = [0x0000, 0x001F];
+			var0003 = [SPELL_NONE, SPELL_UNLOCK_MAGIC];
 		} else if (var0001 == 0x0005) {
 			var0002 = ["nothing", "Conjure", "Great Heal"];
-			var0003 = [0x0000, 0x0020, 0x0023];
+			var0003 = [SPELL_NONE, SPELL_CONJURE, SPELL_GREAT_HEAL];
 		} else if (var0001 == 0x0006) {
 			var0002 = ["nothing", "Fire Field"];
-			var0003 = [0x0000, 0x002B];
+			var0003 = [SPELL_NONE, SPELL_FIRE_FIELD];
 		} else if (var0001 == 0x0007) {
 			var0002 = ["nothing", "Restoration"];
-			var0003 = [0x0000, 0x0035];
+			var0003 = [SPELL_NONE, SPELL_RESTORATION];
 		} else if (var0001 == 0x0008) {
 			var0002 = ["nothing", "Delayed Blast"];
-			var0003 = [0x0000, 0x003A];
+			var0003 = [SPELL_NONE, SPELL_DELAYED_BLAST];
 		} else if (var0001 == 0x0009) {
 			var0002 = ["nothing", "Spiral Missiles", "Stop Storm"];
-			var0003 = [0x0000, 0x0043, 0x0044];
+			var0003 = [SPELL_NONE, SPELL_SPIRAL_MISSILE, SPELL_STOP_STORM];
 		}
 		say("\"What spell dost thou wish to learn?\"");
 		var0004 = Func0957(var0002);
@@ -93483,42 +93576,42 @@ void Func084B 0x84B () {
 		}
 		if (var0004 == 0x0001) {
 			var0005 = ["nothing", "Telekinesis", "Cure"];
-			var0006 = [0x0000, 0x0007, 0x0001];
+			var0006 = [SPELL_NONE, SPELL_TELEKINESIS, SPELL_CURE];
 			var0007 = [0x0000, 0x001E, 0x0016];
 			var0008 = [0x0000, 0x0012, 0x000E];
 		} else if (var0004 == 0x0002) {
 			var0005 = ["nothing", "Great Light", "Mass Cure"];
-			var0006 = [0x0000, 0x000C, 0x000E];
+			var0006 = [SPELL_NONE, SPELL_GREAT_LIGHT, SPELL_MASS_CURE];
 			var0007 = [0x0000, 0x003C, 0x004B];
 			var0008 = [0x0000, 0x0028, 0x0032];
 		} else if (var0004 == 0x0003) {
 			var0005 = ["nothing", "Enchant Missiles"];
-			var0006 = [0x0000, 0x0012];
+			var0006 = [SPELL_NONE, SPELL_ENCHANT_MISSILES];
 			var0007 = [0x0000, 0x0046];
 			var0008 = [0x0000, 0x0023];
 		} else if (var0004 == 0x0004) {
 			var0005 = ["nothing", "Reveal", "Flash"];
-			var0006 = [0x0000, 0x001D, 0x001A];
+			var0006 = [SPELL_NONE, SPELL_REVEAL, SPELL_FLASH];
 			var0007 = [0x0000, 0x0064, 0x005A];
 			var0008 = [0x0000, 0x003C, 0x0032];
 		} else if (var0004 == 0x0005) {
 			var0005 = ["nothing", "Explosion"];
-			var0006 = [0x0000, 0x0022];
+			var0006 = [SPELL_NONE, SPELL_EXPLOSION];
 			var0007 = [0x0000, 0x0087];
 			var0008 = [0x0000, 0x0050];
 		} else if (var0004 == 0x0006) {
 			var0005 = ["nothing", "Dispel Illusion", "Betray"];
-			var0006 = [0x0000, 0x0029, 0x0028];
+			var0006 = [SPELL_NONE, SPELL_DISPEL_ILLUSION, SPELL_BETRAY];
 			var0007 = [0x0000, 0x00A0, 0x0091];
 			var0008 = [0x0000, 0x006E, 0x0050];
 		} else if (var0004 == 0x0007) {
 			var0005 = ["nothing", "Energy Field", "Mass Awaken"];
-			var0006 = [0x0000, 0x0030, 0x0032];
+			var0006 = [SPELL_NONE, SPELL_ENERGY_FIELD, SPELL_MASS_AWAKEN];
 			var0007 = [0x0000, 0x00E6, 0x00FA];
 			var0008 = [0x0000, 0x006E, 0x008C];
 		} else if (var0004 == 0x0008) {
 			var0005 = ["nothing", "Fetch"];
-			var0006 = [0x0000, 0x003B];
+			var0006 = [SPELL_NONE, SPELL_FETCH];
 			var0007 = [0x0000, 0x011D];
 			var0008 = [0x0000, 0x00A5];
 		}
@@ -94142,47 +94235,47 @@ void Func084F 0x84F () {
 		}
 		if (var0001 == 0x0001) {
 			var0002 = ["nothing", "Telekinesis"];
-			var0003 = [0x0000, 0x0007];
+			var0003 = [SPELL_NONE, SPELL_TELEKINESIS];
 			var0004 = [0x0000, 0x0028];
 			var0005 = [0x0000, 0x0019];
 		} else if (var0001 == 0x0002) {
 			var0002 = ["nothing", "Cold Blast"];
-			var0003 = [0x0000, 0x000B];
+			var0003 = [SPELL_NONE, SPELL_COLD_BLAST];
 			var0004 = [0x0000, 0x0096];
 			var0005 = [0x0000, 0x0064];
 		} else if (var0001 == 0x0003) {
 			var0002 = ["nothing", "Curse", "Paralyze"];
-			var0003 = [0x0000, 0x0011, 0x0015];
+			var0003 = [SPELL_NONE, SPELL_CURSE, SPELL_PARALYZE];
 			var0004 = [0x0000, 0x0078, 0x008C];
 			var0005 = [0x0000, 0x0046, 0x0055];
 		} else if (var0001 == 0x0004) {
 			var0002 = ["nothing", "Blink", "Mass Curse"];
-			var0003 = [0x0000, 0x0018, 0x001C];
+			var0003 = [SPELL_NONE, SPELL_BLINK, SPELL_MASS_CURSE];
 			var0004 = [0x0000, 0x00C8, 0x00AF];
 			var0005 = [0x0000, 0x0082, 0x0064];
 		} else if (var0001 == 0x0005) {
 			var0002 = ["nothing", "Erstam's Surprise"];
-			var0003 = [0x0000, 0x0027];
+			var0003 = [SPELL_NONE, SPELL_ERSTAMS_SURPRISE];
 			var0004 = [0x0000, 0x00F0];
 			var0005 = [0x0000, 0x00AA];
 		} else if (var0001 == 0x0006) {
 			var0002 = ["nothing", "Cause Fear"];
-			var0003 = [0x0000, 0x002A];
+			var0003 = [SPELL_NONE, SPELL_CAUSE_FEAR];
 			var0004 = [0x0000, 0x012C];
 			var0005 = [0x0000, 0x00D2];
 		} else if (var0001 == 0x0007) {
 			var0002 = ["nothing", "Mass Might"];
-			var0003 = [0x0000, 0x0033];
+			var0003 = [SPELL_NONE, SPELL_MASS_MIGHT];
 			var0004 = [0x0000, 0x015E];
 			var0005 = [0x0000, 0x00F0];
 		} else if (var0001 == 0x0008) {
 			var0002 = ["nothing", "Mind Blast", "Invoke Serpent", "Serpent Bond"];
-			var0003 = [0x0000, 0x0039, 0x003C, 0x003D];
+			var0003 = [SPELL_NONE, SPELL_MIND_BLAST, SPELL_INVOKE_SNOW_SERPENT, SPELL_SERPENT_BOND];
 			var0004 = [0x0000, 0x0190, 0x01A9, 0x01C2];
 			var0005 = [0x0000, 0x011D, 0x0145, 0x015E];
 		} else if (var0001 == 0x0009) {
 			var0002 = ["nothing", "Death Vortex", "Mass Death", "Imbalance"];
-			var0003 = [0x0000, 0x0040, 0x0041, 0x0047];
+			var0003 = [SPELL_NONE, SPELL_DEATH_VORTEX, SPELL_MASS_DEATH, SPELL_IMBALANCE];
 			var0004 = [0x0000, 0x01F4, 0x0258, 0x04B0];
 			var0005 = [0x0000, 0x01F4, 0x0258, 0x04B0];
 		}
@@ -98873,44 +98966,44 @@ void Func0871 0x871 () {
 		}
 		if (var0003 == 0x0001) {
 			var0004 = ["nothing", "Detect Trap", "Light"];
-			var0005 = [0x0000, 0x0002, 0x0005];
+			var0005 = [SPELL_NONE, SPELL_DETECT_TRAP, SPELL_LIGHT];
 			var0006 = [0x0000, 0x0028, 0x0023];
 			var0007 = [0x0000, 0x0014, 0x0014];
 		} else if (var0003 == 0x0002) {
 			var0004 = ["nothing", "Awaken", "Heal"];
-			var0005 = [0x0000, 0x0008, 0x000D];
+			var0005 = [SPELL_NONE, SPELL_AWAKEN, SPELL_HEAL];
 			var0006 = [0x0000, 0x0041, 0x004B];
 			var0007 = [0x0000, 0x001E, 0x0026];
 		} else if (var0003 == 0x0003) {
 			var0004 = ["nothing", "Enchant Missiles", "Translate"];
-			var0005 = [0x0000, 0x0012, 0x0017];
+			var0005 = [SPELL_NONE, SPELL_ENCHANT_MISSILES, SPELL_TRANSLATION];
 			var0006 = [0x0000, 0x0096, 0x00AF];
 			var0007 = [0x0000, 0x0050, 0x0055];
 		} else if (var0003 == 0x0004) {
 			if (gflags[0x00FF]) {
 				var0004 = ["nothing", "Create Soul Prism", "Transcribe"];
-				var0005 = [0x0000, 0x001B, 0x001E];
+				var0005 = [SPELL_NONE, SPELL_CREATE_SOUL_PRISM, SPELL_TRANSCRIBE];
 				var0006 = [0x0000, 0x012C, 0x00DC];
 				var0007 = [0x0000, 0x00C8, 0x0082];
 			} else {
 				var0004 = ["nothing", "Transcribe"];
-				var0005 = [0x0000, 0x001E];
+				var0005 = [SPELL_NONE, SPELL_TRANSCRIBE];
 				var0006 = [0x0000, 0x00DC];
 				var0007 = [0x0000, 0x0082];
 			}
 		} else if (var0003 == 0x0005) {
 			var0004 = ["nothing", "Great Heal"];
-			var0005 = [0x0000, 0x0023];
+			var0005 = [SPELL_NONE, SPELL_GREAT_HEAL];
 			var0006 = [0x0000, 0x00FA];
 			var0007 = [0x0000, 0x0082];
 		} else if (var0003 == 0x0006) {
 			var0004 = ["nothing", "Betray", "Cause Fear", "Create Automata"];
-			var0005 = [0x0000, 0x0028, 0x002A, 0x002F];
+			var0005 = [SPELL_NONE, SPELL_BETRAY, SPELL_CAUSE_FEAR, SPELL_CREATE_AUTOMATON];
 			var0006 = [0x0000, 0x011D, 0x012C, 0x02EE];
 			var0007 = [0x0000, 0x0096, 0x00AF, 0x0226];
 		} else if (var0003 == 0x0007) {
 			var0004 = ["nothing", "Mass Might", "Lightning"];
-			var0005 = [0x0000, 0x0033, 0x0037];
+			var0005 = [SPELL_NONE, SPELL_MASS_MIGHT, SPELL_LIGHTNING];
 			var0006 = [0x0000, 0x0190, 0x015E];
 			var0007 = [0x0000, 0x00C8, 0x00C8];
 		}
