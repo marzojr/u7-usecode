@@ -11803,7 +11803,7 @@ void Func02A3 shape#(0x2A3) () {
 		if (var0000 == 0x0014) {
 			var001B = [ 1,  1,  1,  0,  0, -1, -1, -1];
 			var001C = [ 1,  0, -1,  1, -1,  1,  9, -1];
-			var001D = 0xFFFA;
+			var001D = -6;
 			if (!Func090F(item, var001B, var001C, var001D)) {
 				UI_flash_mouse(CURSOR_HAND);
 			} else {
@@ -90520,7 +90520,7 @@ var Func0832 0x832 (var var0000) {
 		return -5;
 	}
 	if ((var0000 == 0x000A) || (var0000 == 0x000B)) {
-		return 0xFFFA;
+		return -6;
 	}
 	if ((var0000 == 0x000C) || (var0000 == 0x000D)) {
 		return 0xFFF9;

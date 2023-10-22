@@ -11019,10 +11019,10 @@ void Func0406 object#(0x406) () {
 		var0001 = "Avatar";
 		var0002 = UI_get_party_list();
 		var0003 = false;
-		var0004 = 0xFFFA->get_npc_object();
+		var0004 = TRELLEK->get_npc_object();
 		var0005 = 0xFFF6->get_npc_object();
 		var0006 = Func0931(PARTY, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
-		0xFFFA->show_npc_face(0x0000);
+		TRELLEK->show_npc_face(0x0000);
 		if (!gflags[0x0154]) {
 			if (!var0006) {
 				say("The creature ignores you.*");
@@ -11220,7 +11220,7 @@ void Func0406 object#(0x406) () {
 	}
 	if (event == PROXIMITY) {
 		var000C = UI_part_of_day();
-		var000D = 0xFFFA->get_npc_object()->get_schedule_type();
+		var000D = TRELLEK->get_npc_object()->get_schedule_type();
 		var000E = UI_die_roll(0x0001, 0x0004);
 		var0006 = Func0931(PARTY, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
 		if (var000D == LOITER) {
@@ -11242,7 +11242,7 @@ void Func0406 object#(0x406) () {
 		if (var000D == SLEEP) {
 			var000F = "@Zzzzz...@";
 		}
-		0xFFFA->item_say(var000F);
+		TRELLEK->item_say(var000F);
 	}
 }
 
@@ -11998,7 +11998,7 @@ void Func040A object#(0x40A) () {
 		var0002 = UI_get_party_list();
 		var0003 = Func093C(AVATAR->get_npc_object(), var0002);
 		var0004 = 0xFFF6->get_npc_object();
-		var0005 = 0xFFFA->get_npc_object();
+		var0005 = TRELLEK->get_npc_object();
 		if (UI_is_pc_female() == 0x0000) {
 			var0006 = "Abraham";
 		} else {
@@ -25474,11 +25474,11 @@ void Func0464 object#(0x464) () {
 					abort;
 				}
 				say("\"The truth is known to me, but, belief is hard for me.\"");
-				var0003 = Func08F7(0xFFFA);
+				var0003 = Func08F7(TRELLEK);
 				if (var0003) {
 					say("*");
-					0xFFFA->say("\"The truth is spoken by the human,\" Trellek says to the other Emp. \"He is to be trusted. His good will was felt by me.\"*");
-					0xFFFA->hide();
+					TRELLEK->say("\"The truth is spoken by the human,\" Trellek says to the other Emp. \"He is to be trusted. His good will was felt by me.\"*");
+					TRELLEK->hide();
 					0xFF9C->say("The Emp nods at Trellek, and then turns to you. \"The truth is now clear to me. You are wished good luck.\"");
 				} else {
 					say("The Emp eyes you a little longer. \"Your good intentions are known to    me. You are asked to be the messenger. Humans will not be destroyers, please.\"");
@@ -27787,7 +27787,7 @@ void Func0474 object#(0x474) () {
 				var0003 = Func0931(PARTY, 0x0001, 0x031D, 0x0003, FRAME_ANY);
 				if (var0003) {
 					say("He takes the contract from you and signs it.");
-					var0004 = Func08F7(0xFFFA);
+					var0004 = Func08F7(TRELLEK);
 					if (var0004) {
 						say("He turns to Trellek. \"Please apologize to thy kindred for me. I never meant to destroy thine 'omes. Friends, ay?\"~~ Trellek smiles and nods.");
 					} else {
@@ -74995,7 +74995,7 @@ void Func08EE 0x8EE () {
 	var var0000;
 	var var0001;
 
-	0xFFFA->say("The ape-like creature slowly and cautiously walks up to you. He, or she, sniffs for a moment, and then points to the honey you are carrying.");
+	TRELLEK->say("The ape-like creature slowly and cautiously walks up to you. He, or she, sniffs for a moment, and then points to the honey you are carrying.");
 	converse (["Want honey?", "Go away!"]) {
 		case "Want honey?":
 			say("\"Honey will be given by you to me?\"");
