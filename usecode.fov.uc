@@ -1316,7 +1316,7 @@ void Func009B shape#(0x9B) () {
 
 	if (event == DOUBLECLICK) {
 		0xFEE3->show_npc_face(0x0000);
-		var0000 = Func08F7(0xFFFE);
+		var0000 = Func08F7(SPARK);
 		var0001 = Func08F7(0xFFFD);
 		var0002 = Func0908();
 		if (!gflags[0x01B3]) {
@@ -1372,16 +1372,16 @@ void Func009B shape#(0x9B) () {
 							var0002,
 							", art thou sure we need to go over there?\"*");
 						0xFFFD->hide();
-						0xFFFE->say("\"What's the matter, Shamino? Art thou -afraid-?\"*");
-						0xFFFE->hide();
+						SPARK->say("\"What's the matter, Shamino? Art thou -afraid-?\"*");
+						SPARK->hide();
 						0xFFFD->say("\"Of course not! I just... well, I... oh, never mind! Let's go!\"*");
 						0xFFFD->hide();
 						var0003 = Func08F7(IOLO);
 						if (var0003) {
 							IOLO->say("Iolo's eyes narrow as he adopts a patronizing look on his face.~~\"And I suppose thou art without fear?\" he says to Spark.*");
 							IOLO->hide();
-							0xFFFE->say("\"No, sir. I am not afraid of a skeleton,\" he says. As he looks at the ferryman, however, he\tgulps.*");
-							0xFFFE->hide();
+							SPARK->say("\"No, sir. I am not afraid of a skeleton,\" he says. As he looks at the ferryman, however, he\tgulps.*");
+							SPARK->hide();
 						}
 						0xFEE3->show_npc_face(0x0000);
 					}
@@ -2217,7 +2217,7 @@ void Func0149 shape#(0x149) () {
 		}
 		var0003 = -1;
 		var0004 = -1;
-		var0005 = 0xFFFE;
+		var0005 = -2;
 		Func0828(item, var0003, var0004, var0005, Func0149, item, BG_PATH_SUCCESS);
 	}
 	if (event == BG_PATH_SUCCESS) {
@@ -5293,8 +5293,8 @@ void Func0296 shape#(0x296) () {
 				var0009 = UI_die_roll(0x0001, 0x0003);
 				if (var0009 == 0x0001) {
 					Func08FE("@Indded, a whopper!@");
-					if (0xFFFE->npc_nearby()) {
-						Func0933(0xFFFE, "@I have seen bigger.@", 0x0010);
+					if (SPARK->npc_nearby()) {
+						Func0933(SPARK, "@I have seen bigger.@", 0x0010);
 					}
 				}
 				if (var0009 == 0x0002) {
@@ -5545,8 +5545,8 @@ void Func02A3 shape#(0x2A3) () {
 					nohalt;
 					say "@Pretty bird!@";
 				};
-				if (0xFFFE->npc_nearby()) {
-					var0002 = script 0xFFFE->get_npc_object() after 16 ticks {
+				if (SPARK->npc_nearby()) {
+					var0002 = script SPARK->get_npc_object() after 16 ticks {
 						nohalt;
 						say "@Ugly Bird!@";
 					};
@@ -5554,7 +5554,7 @@ void Func02A3 shape#(0x2A3) () {
 						nohalt;
 						say "@Ugly Boy!@";
 					};
-					var0002 = script 0xFFFE->get_npc_object() after 48 ticks {
+					var0002 = script SPARK->get_npc_object() after 48 ticks {
 						nohalt;
 						say "@Hey!!@";
 					};
@@ -5572,8 +5572,8 @@ void Func02A3 shape#(0x2A3) () {
 					};
 					frame 18;
 				};
-				if (0xFFFE->npc_nearby()) {
-					var0002 = script 0xFFFE->get_npc_object() after 4 ticks {
+				if (SPARK->npc_nearby()) {
+					var0002 = script SPARK->get_npc_object() after 4 ticks {
 						say "@That is really weird.@";
 					};
 				}
@@ -6302,9 +6302,9 @@ void Func02D5 shape#(0x2D5) () {
 
 void Func02D8 shape#(0x2D8) () {
 	if (event == DOUBLECLICK) {
-		if (0xFFFE->npc_nearby()) {
-			0xFFFE->say("\"Thou dost need a blacksmith to do that. I wager my dad could do it... I mean, could have... if he were still alive...\"");
-			0xFFFE->hide();
+		if (SPARK->npc_nearby()) {
+			SPARK->say("\"Thou dost need a blacksmith to do that. I wager my dad could do it... I mean, could have... if he were still alive...\"");
+			SPARK->hide();
 		}
 	}
 }
@@ -6486,8 +6486,8 @@ extern var Func0937 0x937 (var var0000);
 
 void Func02E6 shape#(0x2E6) () {
 	if (event == DOUBLECLICK) {
-		if (0xFFFE->npc_nearby() && Func0937(0xFFFE)) {
-			0xFFFE->item_say("@Gee, is that neat.@");
+		if (SPARK->npc_nearby() && Func0937(SPARK)) {
+			SPARK->item_say("@Gee, is that neat.@");
 		}
 	}
 }
@@ -6773,7 +6773,7 @@ void Func02F8 shape#(0x2F8) () {
 		var0006 = var0004->get_item_frame();
 		if (var0005 == 0x0350) {
 			if (var0006 == 0x0003) {
-				Func0828(var0004, 0x0000, 0x0002, 0xFFFE, Func02F8, var0004, BG_PATH_SUCCESS);
+				Func0828(var0004, 0, 2, -2, Func02F8, var0004, BG_PATH_SUCCESS);
 			}
 		}
 	}
@@ -6833,15 +6833,15 @@ void Func0301 shape#(0x301) () {
 		}
 		var0004 = get_object_position();
 		halt_scheduled();
-		UI_sprite_effect(ANIMATION_CLOUDS, var0004[0x0001], var0004[0x0002], 0x0000, 0x0000, 0x0000, 0x0019);
-		UI_sprite_effect(ANIMATION_CLOUDS, var0004[0x0001], var0004[0x0002], 0x0002, 0x0000, 0x0001, 0x0019);
-		UI_sprite_effect(ANIMATION_CLOUDS, var0004[0x0001], var0004[0x0002], 0xFFFE, 0x0000, 0x0002, 0x0019);
-		UI_sprite_effect(ANIMATION_CLOUDS, var0004[0x0001], var0004[0x0002], 0x0000, 0x0002, 0x0003, 0x0019);
-		UI_sprite_effect(ANIMATION_CLOUDS, var0004[0x0001], var0004[0x0002], 0x0000, 0xFFFE, 0x0004, 0x0019);
-		UI_sprite_effect(ANIMATION_CLOUDS, var0004[0x0001], var0004[0x0002], 0x0002, 0x0002, 0x0001, 0x0019);
-		UI_sprite_effect(ANIMATION_CLOUDS, var0004[0x0001], var0004[0x0002], 0x0002, 0xFFFE, 0x0002, 0x0019);
-		UI_sprite_effect(ANIMATION_CLOUDS, var0004[0x0001], var0004[0x0002], 0xFFFE, 0x0002, 0x0003, 0x0019);
-		UI_sprite_effect(ANIMATION_CLOUDS, var0004[0x0001], var0004[0x0002], 0xFFFE, 0xFFFE, 0x0004, 0x0019);
+		UI_sprite_effect(ANIMATION_CLOUDS, var0004[0x0001], var0004[0x0002],  0,  0,  0, 0x0019);
+		UI_sprite_effect(ANIMATION_CLOUDS, var0004[0x0001], var0004[0x0002],  2,  0,  1, 0x0019);
+		UI_sprite_effect(ANIMATION_CLOUDS, var0004[0x0001], var0004[0x0002], -2,  0,  2, 0x0019);
+		UI_sprite_effect(ANIMATION_CLOUDS, var0004[0x0001], var0004[0x0002],  0,  2,  3, 0x0019);
+		UI_sprite_effect(ANIMATION_CLOUDS, var0004[0x0001], var0004[0x0002],  0, -2,  4, 0x0019);
+		UI_sprite_effect(ANIMATION_CLOUDS, var0004[0x0001], var0004[0x0002],  2,  2,  1, 0x0019);
+		UI_sprite_effect(ANIMATION_CLOUDS, var0004[0x0001], var0004[0x0002],  2, -2,  2, 0x0019);
+		UI_sprite_effect(ANIMATION_CLOUDS, var0004[0x0001], var0004[0x0002], -2,  2,  3, 0x0019);
+		UI_sprite_effect(ANIMATION_CLOUDS, var0004[0x0001], var0004[0x0002], -2, -2,  4, 0x0019);
 		remove_item();
 	}
 }
@@ -7768,8 +7768,8 @@ void Func032A shape#(0x32A) () {
 			return;
 		}
 		if (var0006->is_npc()) {
-			var0001 = [0x0000, 0x0002, 0x0000, 0xFFFE];
-			var0002 = [0x0002, 0x0000, 0xFFFE, 0x0000];
+			var0001 = [ 0,  2,  0, -2];
+			var0002 = [ 2,  0, -2,  0];
 			if (var0000 == 0x0000) {
 				AVATAR->get_npc_object()->item_say("@The bucket is empty.@");
 			} else {
@@ -9919,16 +9919,16 @@ void Func0402 object#(0x402) () {
 		var0001 = "Avatar";
 		var0002 = UI_get_party_list();
 		var0003 = UI_is_pc_female();
-		var0004 = 0xFFFE->get_npc_object();
+		var0004 = SPARK->get_npc_object();
 		var0005 = false;
 		var0006 = false;
 		var0007 = false;
 		if (!gflags[0x0015]) {
-			0xFFFE->show_npc_face(0x0001);
+			SPARK->show_npc_face(0x0001);
 		} else if (var0004 in var0002) {
-			0xFFFE->show_npc_face(0x0000);
+			SPARK->show_npc_face(0x0000);
 		} else {
-			0xFFFE->show_npc_face(0x0001);
+			SPARK->show_npc_face(0x0001);
 		}
 		if (gflags[0x0046]) {
 			var0008 = var0000;
@@ -9960,7 +9960,7 @@ void Func0402 object#(0x402) () {
 					say("Upon my word she is! She has come to help thee!\"*");
 				}
 				IOLO->hide();
-				0xFFFE->show_npc_face(0x0001);
+				SPARK->show_npc_face(0x0001);
 			}
 			say("Then the boy narrows his eyes, studying you. He slowly lowers his weapon, ready to act in case it's a trap. You admire the boy's obvious experience in dealing with strangers.");
 			say("You and Spark stare at each other. He is not sure what to do. Finally, he nods his head. \"All right. I believe thee. Thou dost look like paintings I have seen. I am sorry, ",
@@ -10082,7 +10082,7 @@ void Func0402 object#(0x402) () {
 								var0009,
 								".\"*");
 							IOLO->hide();
-							0xFFFE->show_npc_face(0x0001);
+							SPARK->show_npc_face(0x0001);
 							say("Suddenly, Spark lets his sling fly. His target, a small fly hovering above Iolo's head, is smacked out of the air. You laugh as Iolo\tyelps, jumps away, curses and runs his fingers through his hair. ");
 							UI_play_sound_effect(0x0001);
 						} else {
@@ -10091,13 +10091,13 @@ void Func0402 object#(0x402) () {
 						say("\"I told thee I am good! May I join?\"");
 						var000C = Func090A();
 						if (var000C) {
-							0xFFFE->hide();
-							0xFFFE->say("\"Hooray!\" the boy leaps with delight.");
+							SPARK->hide();
+							SPARK->say("\"Hooray!\" the boy leaps with delight.");
 							add("leave");
-							0xFFFE->add_to_party();
+							SPARK->add_to_party();
 						} else {
 							say("\"Fine.\" The boy looks angry. \"But I'll follow thee anyway.\"");
-							0xFFFE->add_to_party();
+							SPARK->add_to_party();
 							add("leave");
 						}
 						gflags[0x0049] = true;
@@ -10117,9 +10117,9 @@ void Func0402 object#(0x402) () {
 					var000D += 0x0001;
 				}
 				if (var000D < 0x0008) {
-					0xFFFE->add_to_party();
-					0xFFFE->hide();
-					0xFFFE->say("\"Hooray!\"");
+					SPARK->add_to_party();
+					SPARK->hide();
+					SPARK->say("\"Hooray!\"");
 				} else {
 					say("\"Well, on second thought, it looks like too big of a crowd. I do not like crowds.\"");
 				}
@@ -10131,20 +10131,20 @@ void Func0402 object#(0x402) () {
 				say("\"Don't make me go!\" Spark cries. \"Dost thou really want me to go?\" He looks at you with puppy-dog eyes.");
 				var0011 = Func090A();
 				if (var0011) {
-					0xFFFE->hide();
-					0xFFFE->show_npc_face(0x0001);
+					SPARK->hide();
+					SPARK->show_npc_face(0x0001);
 					say("\"Well, should I just wait here or dost thou want me to go home to Trinsic?\"");
 					UI_clear_answers();
 					var000A = Func090B(["wait here", "go home"]);
 					if (var000A == "wait here") {
 						say("\"All right. I shall wait here until thou dost return and ask me to rejoin.\"*");
-						0xFFFE->remove_from_party();
-						0xFFFE->get_npc_object()->set_schedule_type(WAIT);
+						SPARK->remove_from_party();
+						SPARK->get_npc_object()->set_schedule_type(WAIT);
 						abort;
 					}
 					say("Spark bows his head and murmurs, \"Goodbye, then.\"*");
-					0xFFFE->remove_from_party();
-					0xFFFE->get_npc_object()->set_schedule_type(LOITER);
+					SPARK->remove_from_party();
+					SPARK->get_npc_object()->set_schedule_type(LOITER);
 					abort;
 				}
 				say("\"Thou wilt not be sorry!\"");
@@ -10543,10 +10543,10 @@ void Func0404 object#(0x404) () {
 		var0003 = Func0908();
 		var0004 = Func08F7(IOLO);
 		var0005 = Func08F7(0xFFFD);
-		var0006 = Func08F7(0xFFFE);
+		var0006 = Func08F7(SPARK);
 		var0007 = IOLO->get_npc_object()->is_dead();
 		var0008 = 0xFFFD->get_npc_object()->is_dead();
-		var0009 = 0xFFFE->get_npc_object()->is_dead();
+		var0009 = SPARK->get_npc_object()->is_dead();
 		var000A = 0xFF84->get_npc_object()->is_dead();
 		var000B = 0xFF83->get_npc_object()->is_dead();
 		var000C = 0xFF82->get_npc_object()->is_dead();
@@ -11485,7 +11485,7 @@ void Func0408 object#(0x408) () {
 		var0001 = UI_get_party_list();
 		var0002 = 0xFFF8->get_npc_object();
 		var0003 = Func0908();
-		var0004 = Func08F7(0xFFFE);
+		var0004 = Func08F7(SPARK);
 		add(["name", "job", "bye"]);
 		if (gflags[0x010B]) {
 			add("plans");
@@ -11683,10 +11683,10 @@ void Func0408 object#(0x408) () {
 			case "Spark":
 				say("\"And who is this fine young lad?\"");
 				if (var0004) {
-					0xFFFE->say("\"My name is Spark, milady.\"*");
+					SPARK->say("\"My name is Spark, milady.\"*");
 					0xFFF8->say("\"He is a cute one! And so well-mannered!\"");
-					0xFFFE->say("Spark turns beet red.");
-					0xFFFE->hide();
+					SPARK->say("Spark turns beet red.");
+					SPARK->hide();
 					0xFFF8->show_npc_face(0x0000);
 					gflags[0x0121] = true;
 				}
@@ -12677,7 +12677,7 @@ void Func040B object#(0x40B) () {
 				fallthrough;
 
 			case "Spark":
-				if (!(0xFFFE in var0001)) {
+				if (!(SPARK in var0001)) {
 					say("\"That be Christopher's son. Nice lad.\"");
 				} else {
 					say("Petre ruffles the boy's hair.~~\"This here is Christopher's son. He's a good lad, is Spark, when he's not pilfering things from honest shopkeepers.\"");
@@ -12728,7 +12728,7 @@ void Func040C object#(0x40C) () {
 		0xFFF4->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func0908();
-		var0002 = Func08F7(0xFFFE);
+		var0002 = Func08F7(SPARK);
 		var0003 = UI_is_pc_female();
 		do {
 			if ((gflags[0x005A] == true) && (gflags[0x0048] == false)) {
@@ -14146,10 +14146,10 @@ void Func0415 object#(0x415) () {
 
 			case "murder":
 				say("\"I heard about that. Terrible thing to happen. Can't say I saw or heard anything, though.\"~Gargan coughs, clears his throat loudly, then spits.");
-				var0008 = Func08F7(0xFFFE);
+				var0008 = Func08F7(SPARK);
 				if (var0008) {
-					0xFFFE->say("\"Ooooh, yuck!\"");
-					0xFFFE->hide();
+					SPARK->say("\"Ooooh, yuck!\"");
+					SPARK->hide();
 					0xFFEB->show_npc_face(0x0000);
 				}
 				remove("murder");
@@ -14171,10 +14171,10 @@ void Func0415 object#(0x415) () {
 			case "Hook":
 				say("\"Matey, I have always seen pirates and sailors with peglegs and hooks. If thou hast seen one, thou hast seen another.\" But the man suddenly frowns. \"Hmm. Now that thou dost mention it, I -did- see a man with a hook late last night after sundown. I was leaving the shop and saw him outside. There was a wingless gargoyle with him. They were walking east.\"");
 				say("Gargan sneezes, then coughs a couple of times.");
-				var0008 = Func08F7(0xFFFE);
+				var0008 = Func08F7(SPARK);
 				if (var0008) {
-					0xFFFE->say("\"I told thee! It was him!\"");
-					0xFFFE->hide();
+					SPARK->say("\"I told thee! It was him!\"");
+					SPARK->hide();
 					0xFFEB->show_npc_face(0x0000);
 				}
 				remove("Hook");
@@ -14828,10 +14828,10 @@ void Func0418 object#(0x418) () {
 		case "magic":
 			if (!gflags[0x0003]) {
 				say("\"Sometimes the magic works, sometimes it doth not.\" He waves his hand, and drops his wand. \"Oops!\" he cries, as he bends to pick it up.");
-				var0000 = Func08F7(0xFFFE);
+				var0000 = Func08F7(SPARK);
 				if (var0000) {
-					0xFFFE->say("\"Art thou sure this man is not really the jester?\"");
-					0xFFFE->hide();
+					SPARK->say("\"Art thou sure this man is not really the jester?\"");
+					SPARK->hide();
 					0xFFE8->say("\"Anyway, as I was saying, uhm, what was I saying? Oh yes. Magic. I can still sell thee some spells or reagents if thou wouldst like.\"");
 				}
 			} else {
@@ -16262,11 +16262,11 @@ void Func0422 object#(0x422) () {
 				say("\"There have been a great number of babies born in Britannia in recent years, so Lord British established this nursery. It is nice that the noblemen and noblewomen have this luxury so that they may attend to their daily duties.\"");
 				remove("Royal Nursery");
 				add("luxury");
-				var0004 = Func08F7(0xFFFE);
+				var0004 = Func08F7(SPARK);
 				if (var0001 == TEND_SHOP) {
 					if (var0004) {
-						0xFFFE->say("\"Whew! Dost thou smell what I smell, Avatar?\"*");
-						0xFFFE->hide();
+						SPARK->say("\"Whew! Dost thou smell what I smell, Avatar?\"*");
+						SPARK->hide();
 					}
 					var0005 = Func08F7(IOLO);
 					if (var0005) {
@@ -17537,7 +17537,7 @@ void Func042C object#(0x42C) () {
 		var0001 = UI_part_of_day();
 		var0002 = 0xFFD4->get_npc_object()->get_schedule_type();
 		var0003 = UI_is_pc_female();
-		var0004 = Func08F7(0xFFFE);
+		var0004 = Func08F7(SPARK);
 		add(["name", "job", "bye"]);
 		if (gflags[0x007A]) {
 			add("Nell with child");
@@ -18642,7 +18642,7 @@ void Func0434 object#(0x434) () {
 		var0001 = Func0908();
 		var0002 = 0xFFCC->get_npc_object()->get_schedule_type();
 		var0003 = UI_part_of_day();
-		var0004 = Func08F7(0xFFFE);
+		var0004 = Func08F7(SPARK);
 		add(["name", "job", "bye"]);
 		if (gflags[0x0085]) {
 			add("Jeanette");
@@ -18677,14 +18677,14 @@ void Func0434 object#(0x434) () {
 						var0008 = Func090A();
 						if (var0008) {
 							say("\"Ha! Thou dost see, then? Everyone agrees! That should be proof enough!\"");
-							var0004 = Func08F7(0xFFFE);
+							var0004 = Func08F7(SPARK);
 							if (var0004) {
-								0xFFFE->say("\"I want some!\"*");
+								SPARK->say("\"I want some!\"*");
 								0xFFCC->say("\"Here thou art, laddie.\" Willy hands Spark a pastry and the boy devours it in one gulp.*");
-								0xFFFE->say("\"Mmmmm! I say, ",
+								SPARK->say("\"Mmmmm! I say, ",
 									var0001,
 									", I think we need a lot of this for the road. We had best buy some, all right?\"*");
-								0xFFFE->hide();
+								SPARK->hide();
 								0xFFCC->show_npc_face(0x0000);
 							}
 						} else {
@@ -22308,10 +22308,10 @@ void Func044D object#(0x44D) () {
 					IOLO->hide();
 					0xFFB3->show_npc_face(0x0000);
 				}
-				var0002 = Func08F7(0xFFFE);
+				var0002 = Func08F7(SPARK);
 				if (var0002) {
-					0xFFFE->say("\"Any wenches mine own age around here?\"*");
-					0xFFFE->hide();
+					SPARK->say("\"Any wenches mine own age around here?\"*");
+					SPARK->hide();
 					0xFFB3->show_npc_face(0x0000);
 				}
 				gflags[0x00E4] = true;
@@ -30670,7 +30670,7 @@ void Func0485 object#(0x485) () {
 		var0001 = Func08F7(0xFFFD);
 		var0002 = Func08F7(IOLO);
 		var0003 = Func08F7(0xFFFC);
-		var0004 = Func08F7(0xFFFE);
+		var0004 = Func08F7(SPARK);
 		var0005 = Func08F7(0xFF7C);
 		add(["name", "job", "bye"]);
 		if (gflags[0x0180]) {
@@ -30728,8 +30728,8 @@ void Func0485 object#(0x485) () {
 						}
 					}
 					if (var0004) {
-						0xFFFE->say("Constance hands Spark a dipper full of water. He drinks it down in one long slurp. Upon finishing it, he burps. With an\tembarrassed grin he bows\tapologetically to Constance\tas he hands her back the dipper.");
-						0xFFFE->hide();
+						SPARK->say("Constance hands Spark a dipper full of water. He drinks it down in one long slurp. Upon finishing it, he burps. With an\tembarrassed grin he bows\tapologetically to Constance\tas he hands her back the dipper.");
+						SPARK->hide();
 						0xFF7B->show_npc_face(0x0000);
 					}
 				} else {
@@ -32011,12 +32011,12 @@ void Func048D object#(0x48D) () {
 				IOLO->hide();
 				0xFF73->show_npc_face(0x0000);
 			}
-			var0008 = Func08F7(0xFFFE);
+			var0008 = Func08F7(SPARK);
 			if (var0008) {
-				0xFFFE->say("\"Uh, ",
+				SPARK->say("\"Uh, ",
 					var0001,
 					"? I am ready to go now,\" he says to you, cowering from the undead creature.*");
-				0xFFFE->hide();
+				SPARK->hide();
 				0xFF73->show_npc_face(0x0000);
 			}
 			gflags[0x01C5] = true;
@@ -33682,7 +33682,7 @@ void Func0497 object#(0x497) () {
 	if (event == DOUBLECLICK) {
 		0xFF69->show_npc_face(0x0000);
 		var0000 = Func08F7(IOLO);
-		var0001 = Func08F7(0xFFFE);
+		var0001 = Func08F7(SPARK);
 		var0002 = Func08F7(0xFFFC);
 		var0003 = Func08F7(0xFFFD);
 		var0004 = Func0909();
@@ -33705,8 +33705,8 @@ void Func0497 object#(0x497) () {
 					IOLO->hide();
 				}
 				if (var0001) {
-					0xFFFE->say("\"Hey, -I'll- kiss her! She doesn't scare me!\"*");
-					0xFFFE->hide();
+					SPARK->say("\"Hey, -I'll- kiss her! She doesn't scare me!\"*");
+					SPARK->hide();
 				}
 				if (var0003) {
 					0xFFFD->say("\"She -doth- look rather inviting, doth she not?\"*");
@@ -33730,8 +33730,8 @@ void Func0497 object#(0x497) () {
 				}
 				if (var0001) {
 					say("Then she flies around Spark.~~\"Oooh, and I love -thee-, too!\"*");
-					0xFFFE->say("Spark blushes. \"Aww, cut it out!\"*");
-					0xFFFE->hide();
+					SPARK->say("Spark blushes. \"Aww, cut it out!\"*");
+					SPARK->hide();
 					0xFF69->show_npc_face(0x0000);
 				}
 				if (var0002) {
@@ -33806,8 +33806,8 @@ void Func0497 object#(0x497) () {
 					IOLO->hide();
 				}
 				if (var0001) {
-					0xFFFE->say("\"Sheesh, here we go again!\"*");
-					0xFFFE->hide();
+					SPARK->say("\"Sheesh, here we go again!\"*");
+					SPARK->hide();
 				}
 				if (var0003) {
 					0xFFFD->say("\"Hey, I think she's cute!\"*");
@@ -34249,7 +34249,7 @@ void Func049A object#(0x49A) () {
 		0xFF66->show_npc_face(0x0000);
 		add(["name", "job", "Fellowship", "bye"]);
 		var0000 = Func08F7(IOLO);
-		var0001 = Func08F7(0xFFFE);
+		var0001 = Func08F7(SPARK);
 		var0002 = Func08F7(0xFF10);
 		var0003 = Func08F7(0xFF24);
 		var0004 = Func0909();
@@ -34314,8 +34314,8 @@ void Func049A object#(0x49A) () {
 			case "job":
 				say("\"I torture prisoners,\" he says, thumping his chest proudly.*");
 				if (var0001) {
-					0xFFFE->say("Spark's eyes light up.~\"Torture? Wow! He quickly looks at you and changes expressions.~~ \"I, er, mean, that is very awful.\"*");
-					0xFFFE->hide();
+					SPARK->say("Spark's eyes light up.~\"Torture? Wow! He quickly looks at you and changes expressions.~~ \"I, er, mean, that is very awful.\"*");
+					SPARK->hide();
 					0xFF66->show_npc_face(0x0000);
 				}
 				var000B = UI_wearing_fellowship();
@@ -41622,10 +41622,10 @@ void Func04C7 object#(0x4C7) () {
 				if (var0003) {
 					say("\"Why did the chicken cross the road?\"");
 					var0004 = Func08F7(IOLO);
-					var0005 = Func08F7(0xFFFE);
+					var0005 = Func08F7(SPARK);
 					if (var0005) {
-						0xFFFE->say("\"To get to the other side! Oh, that joke is new,\" he says sarcastically.\"*");
-						0xFFFE->hide();
+						SPARK->say("\"To get to the other side! Oh, that joke is new,\" he says sarcastically.\"*");
+						SPARK->hide();
 					}
 					if (var0004) {
 						IOLO->say("Iolo whispers in your ear.~~\"",
@@ -41666,10 +41666,10 @@ void Func04C7 object#(0x4C7) () {
 
 			case "Fellowship":
 				say("\"The Fellowship is a twenty-year-old organization that holds many festivals, parades, and celebrations. In addition, they maintain a shelter in the town of Paws. They have an underlying philosophy called the Triad of Inner Strength. This triad is broken into the three principles known as `strive for unity,' `trust thy brother,' and `worthiness precedes reward.'I will now explain the meaning of each principple.\"");
-				var0005 = Func08F7(0xFFFE);
+				var0005 = Func08F7(SPARK);
 				if (var0005) {
-					0xFFFE->say("\"This Denton fellow is really long-winded.\"*");
-					0xFFFE->hide();
+					SPARK->say("\"This Denton fellow is really long-winded.\"*");
+					SPARK->hide();
 					0xFF39->show_npc_face(0x0000);
 				}
 				say("\"Strive for unity seems to mean that The Fellowship wants others to work together for the weal of society. Trust thy brother implies that each person should not question the actions of others. Worthiness precedes reward indicates that The Fellowship's attitude towards reward is that one must do well to be rewarded.\"");
@@ -44679,15 +44679,15 @@ void Func04DE object#(0x4DE) () {
 						add("Fellowship");
 					}
 					say("\"Please! Make thyself at home. If thou dost want a drink, let me know.\"");
-					var0005 = Func08F7(0xFFFE);
+					var0005 = Func08F7(SPARK);
 					if (var0005) {
 						say("\"Uhm, wait a minute. How old art thou, boy?\"*");
-						0xFFFE->say("\"Uhm, eighteen.\"*");
+						SPARK->say("\"Uhm, eighteen.\"*");
 						0xFF22->say("\"Thou dost not look eighteen.\"*");
-						0xFFFE->say("\"All right, I am sixteen.\"*");
+						SPARK->say("\"All right, I am sixteen.\"*");
 						0xFF22->say("\"Thou dost not look sixteen either. Well, never mind. Thou canst enter. But make sure the management doth not see thee.\" Glenno scratches his head. \"Yes, but... no! I am the management! All right, come on. Just don't cause any trouble.\"*");
-						0xFFFE->say("\"All right! Wenches!\"*");
-						0xFFFE->hide();
+						SPARK->say("\"All right! Wenches!\"*");
+						SPARK->hide();
 						var0006 = Func08F7(IOLO);
 						if (var0006) {
 							IOLO->say("Iolo whispers to you, \"Methinks young Spark hath learned a lot whilst adventuring with thee!\"*");
@@ -45332,10 +45332,10 @@ void Func04E2 object#(0x4E2) () {
 
 			case "changed":
 				say("\"He has abandoned all of his pirate ways! He is a bloody saint now, and whenever he sees me he tries to convince me to join The Fellowship. I avoid him at all costs now. I cannot stand to see him this way. It burns my blood!\"~~Then, in a moment of weakness, the tough pirate says in a small voice, \"I miss him, too. We were best mates.\" You could swear there are tears in his eyes.*");
-				var0007 = Func08F7(0xFFFE);
+				var0007 = Func08F7(SPARK);
 				if (var0007) {
-					0xFFFE->say("Spark whispers, \"Oh, come on, be a man!\"*");
-					0xFFFE->hide();
+					SPARK->say("Spark whispers, \"Oh, come on, be a man!\"*");
+					SPARK->hide();
 					var0008 = Func08F7(0xFFFC);
 					if (var0008) {
 						0xFFFC->say("Dupre turns away to suppress a smirk.*");
@@ -49776,7 +49776,7 @@ void Func04FF object#(0x4FF) () {
 	}
 	0xFF01->show_npc_face(0x0000);
 	var0000 = Func08F7(0xFF0F);
-	var0001 = Func08F7(0xFFFE);
+	var0001 = Func08F7(SPARK);
 	var0002 = Func08F7(IOLO);
 	var0003 = Func08F7(0xFFFC);
 	var0004 = false;
@@ -49784,8 +49784,8 @@ void Func04FF object#(0x4FF) () {
 	if (!gflags[0x02C0]) {
 		say("You see a lovely naked woman. She is not in the least concerned that she is wearing no clothes.*");
 		if (var0001 && var0002) {
-			0xFFFE->say("Spark's eyes widen and his jaw drops.*");
-			0xFFFE->hide();
+			SPARK->say("Spark's eyes widen and his jaw drops.*");
+			SPARK->hide();
 			IOLO->say("\"Close thy mouth, boy. An insect may fly in. And put thine eyes back in thine head. They shall look strange dangling out of their sockets.\"*");
 			IOLO->hide();
 			0xFF01->show_npc_face(0x0000);
@@ -51085,7 +51085,7 @@ void Func0621 object#(0x621) () {
 		}
 		if (var0001 == 0x0002) {
 			var0000 = "Are we there yet?";
-			var0002 = 0xFFFE;
+			var0002 = SPARK;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x0003) {
@@ -51115,7 +51115,7 @@ void Func0621 object#(0x621) () {
 		}
 		if (var0001 == 0x0008) {
 			var0000 = "When can we rest?";
-			var0002 = 0xFFFE;
+			var0002 = SPARK;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x0009) {
@@ -51180,7 +51180,7 @@ void Func0621 object#(0x621) () {
 		}
 		if (var0001 == 0x0015) {
 			var0000 = "Britain sure is big!";
-			var0002 = 0xFFFE;
+			var0002 = SPARK;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x0016) {
@@ -51205,22 +51205,22 @@ void Func0621 object#(0x621) () {
 		}
 		if (var0001 == 0x001A) {
 			var0000 = "That bread smells good...";
-			var0002 = 0xFFFE;
+			var0002 = SPARK;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x001B) {
 			var0000 = "That food smells good...";
-			var0002 = 0xFFFE;
+			var0002 = SPARK;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x001C) {
 			var0000 = "That fruit looks good...";
-			var0002 = 0xFFFE;
+			var0002 = SPARK;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x001D) {
 			var0000 = "I am getting sleepy...";
-			var0002 = 0xFFFE;
+			var0002 = SPARK;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x001E) {
@@ -53779,7 +53779,7 @@ void Func0655 object#(0x655) () {
 				call Func0655;
 			};
 			var0004 = var0000->get_object_position();
-			obj_sprite_effect(ANIMATION_GREEN_BUBBLES, 0xFFFE, 0xFFFE, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
+			obj_sprite_effect(ANIMATION_GREEN_BUBBLES, -2, -2, 0, 0, 0, LOOP_ONCE);
 		} else {
 			var0002 = script item {
 				face var0001;
@@ -54404,7 +54404,7 @@ void Func0664 object#(0x664) () {
 				call Func0613;
 			};
 			UI_sprite_effect(ANIMATION_TELEPORT, var0000[0x0002], var0000[0x0003], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			obj_sprite_effect(ANIMATION_TELEPORT, 0xFFFE, 0xFFFE, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
+			obj_sprite_effect(ANIMATION_TELEPORT, -2, -2, 0, 0, 0, LOOP_ONCE);
 		} else {
 			var0002 = script item {
 				actor frame cast_up;
@@ -65599,10 +65599,10 @@ void Func0850 0x850 () {
 		0xFFC1->say("\"In The Fellowship I am learning that I need to devote my life to a special purpose,\" says Millie.*");
 		0xFFC1->hide();
 	}
-	var000A = Func08F7(0xFFFE);
+	var000A = Func08F7(SPARK);
 	if (var000A) {
-		0xFFFE->say("\"This whole ceremony and everyone in it doth give me the willies!\"*");
-		0xFFFE->hide();
+		SPARK->say("\"This whole ceremony and everyone in it doth give me the willies!\"*");
+		SPARK->hide();
 	}
 	var000B = Func08F7(IOLO);
 	if (var000B) {
@@ -68140,10 +68140,10 @@ void Func087B 0x87B () {
 		0xFF9F->say("\"The Fellowship has helped me to have the firm hand that is necessary as the supervisor of the mine,\" says Mikos.*");
 		0xFF9F->hide();
 	}
-	var0005 = Func08F7(0xFFFE);
+	var0005 = Func08F7(SPARK);
 	if (var0005) {
-		0xFFFE->say("\"Everything about this Fellowship gives me the creeps!\" says Spark.*");
-		0xFFFE->hide();
+		SPARK->say("\"Everything about this Fellowship gives me the creeps!\" says Spark.*");
+		SPARK->hide();
 	}
 	var0006 = Func08F7(IOLO);
 	if (var0006) {
@@ -71224,7 +71224,7 @@ void Func08AB 0x8AB () {
 	var0002 = Func08F7(0xFFEE);
 	var0003 = Func08F7(0xFFEA);
 	var0004 = Func08F7(IOLO);
-	var0005 = Func08F7(0xFFFE);
+	var0005 = Func08F7(SPARK);
 	0xFFF0->say("Klog is leading the town members in a Fellowship meeting.");
 	say("\"Thank you, Fellowship members of Trinsic, for attending our meeting this evening.~~\"I am certain you are all sorely aware of the crimes that have been committed in our city. Now is a time to mourn those whom we have lost. We will always remember Christopher, our blacksmith, as a valuable citizen of our town as well as a dear friend. Inamo was an amiable and hard-working gargoyle. As their deaths show us, Britannia needs The Fellowship now more than ever.");
 	say("\"The Fellowship was created to advance a philosophy, a method of applying an optimistic order of thought to one's life. How dost thou follow this method? By applying the Triad of Inner Strength to thy life. The Triad is composed of three principles that, when applied in unison to thy life, can soothe the fever of a society that teaches thee to accept failure and banishes the destructive illusory thoughts and feelings from thy spirit.");
@@ -71251,8 +71251,8 @@ void Func08AB 0x8AB () {
 		0xFFEA->hide();
 	}
 	if (var0005) {
-		0xFFFE->say("Spark whispers to no one in particular, \"This is the most boring pile of horse manure in which I have ever had the pleasure to wallow!\"*");
-		0xFFFE->hide();
+		SPARK->say("Spark whispers to no one in particular, \"This is the most boring pile of horse manure in which I have ever had the pleasure to wallow!\"*");
+		SPARK->hide();
 	}
 	if (var0004) {
 		IOLO->say("Iolo slaps his own cheek to keep himself from dozing off. ~~\"Avatar, I do believe that we have heard enough of this.\"*");
@@ -72902,11 +72902,11 @@ void Func08C7 0x8C7 () {
 
 	0xFF17->show_npc_face(0x0000);
 	var0000 = Func08F7(IOLO);
-	var0001 = Func08F7(0xFFFE);
+	var0001 = Func08F7(SPARK);
 	say("As the actors take their places and don masks, you settle down to watch the action.*");
 	if (var0001) {
-		0xFFFE->say("Spark whispers to you, \"I wish there was a confectioner that sold candied apples!\"*");
-		0xFFFE->hide();
+		SPARK->say("Spark whispers to you, \"I wish there was a confectioner that sold candied apples!\"*");
+		SPARK->hide();
 		0xFF17->show_npc_face(0x0000);
 	}
 	say("The music starts the play, as Paul takes center stage and addresses the audience.");
@@ -72940,8 +72940,8 @@ void Func08C7 0x8C7 () {
 	say("\"The voice came to me in a dream ~'Twas mine 'inner' voice, so fair. ~I now have a companion and provider, ~And a master about whom I care.\"");
 	say("You are jarred by the actor's choice of words -- 'companion', 'provider', and 'master'. You realize you have heard them before.*");
 	if (var0001) {
-		0xFFFE->say("\"This is really awful.\"*");
-		0xFFFE->hide();
+		SPARK->say("\"This is really awful.\"*");
+		SPARK->hide();
 		0xFF15->show_npc_face(0x0000);
 	}
 	say("Paul and Meryl join Dustin on stage and they all hold hands.*");
@@ -73389,7 +73389,7 @@ void Func08CE 0x8CE () {
 	var0000 = Func08F7(0xFF48);
 	var0001 = Func08F7(0xFF44);
 	var0002 = Func08F7(0xFF46);
-	var0003 = Func08F7(0xFFFE);
+	var0003 = Func08F7(SPARK);
 	var0004 = Func0908();
 	say("The winged gargoyle begins his sermon.");
 	if (var0000) {
@@ -73403,8 +73403,8 @@ void Func08CE 0x8CE () {
 	}
 	say("\"To know that others who are not members have given up their dreams. To see that they succumb to the mediocrity of their lives to find stability.\"*");
 	if (var0003) {
-		0xFFFE->say("\"This is truly boring. Let us get some food -- I am hungry!\"*");
-		0xFFFE->hide();
+		SPARK->say("\"This is truly boring. Let us get some food -- I am hungry!\"*");
+		SPARK->hide();
 		0xFF47->show_npc_face(0x0000);
 	}
 	say("\"To see them begin to produce unreal ideas and become misaligned. To stray from the true path to what they seek. To lose contact with reality.\" He sighs. \"To find failure, not success in what they do.\"*");
@@ -74945,7 +74945,7 @@ void Func08EC 0x8EC () {
 	var var0001;
 	var var0002;
 
-	var0000 = Func08F7(0xFFFE);
+	var0000 = Func08F7(SPARK);
 	var0001 = Func08F7(IOLO);
 	var0002 = Func08F7(0xFFFD);
 	say("\"Hubert the Lion was haughty and vain ~And especially proud of his elegant mane. ~But conceit of this sort isn't proper at all ~And Hubert the Lion was due for a fall.");
@@ -75477,11 +75477,11 @@ var Func08F5 0x8F5 (var var0000, var var0001) {
 			var000C = true;
 			var0007 = true;
 		}
-		if (var000B == 0xFFFE) {
+		if (var000B == SPARK) {
 			say("\"Greetings young man. How comes one so young into such company?\"");
-			0xFFFE->say("\"I am an orphan! My father has been most cruelly murdered, mutilated in the stables of Trinsic.\"");
+			SPARK->say("\"I am an orphan! My father has been most cruelly murdered, mutilated in the stables of Trinsic.\"");
 			0xFFF6->say("\"That is a grievous tale! But surely the time for grief is past. Thou art in the company of great companions.\"");
-			0xFFFE->say("\"Thou speakest rightly. I shall bring my father's murderer to justice or die in the attempt.\"");
+			SPARK->say("\"Thou speakest rightly. I shall bring my father's murderer to justice or die in the attempt.\"");
 			0xFFF6->show_npc_face(0x0000);
 			var000C = true;
 		}
@@ -75706,7 +75706,7 @@ var Func0902 0x902 () {
 	var var0003;
 	var var0004;
 
-	var0000 = [IOLO, 0xFFFD, 0xFFFC, 0xFFFB, 0xFFF9, 0xFFF8, 0xFFF7, 0xFFFE, 0xFFF6];
+	var0000 = [IOLO, 0xFFFD, 0xFFFC, 0xFFFB, 0xFFF9, 0xFFF8, 0xFFF7, SPARK, 0xFFF6];
 	var0001 = UI_get_party_list();
 	for (var0004 in var0000 with var0002 to var0003) {
 		if (var0004->get_npc_object() in var0001) {
@@ -76959,7 +76959,7 @@ void Func0943 0x943 (var var0000) {
 	var var0001;
 
 	var0001 = var0000->get_object_position();
-	UI_sprite_effect(ANIMATION_MUSIC, var0001[0x0001], var0001[0x0002], 0xFFFE, 0xFFFE, 0x0000, LOOP_ONCE);
+	UI_sprite_effect(ANIMATION_MUSIC, var0001[0x0001], var0001[0x0002], -2, -2, 0, LOOP_ONCE);
 }
 
 var Func0944 0x944 (var var0000) {
