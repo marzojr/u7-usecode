@@ -29917,7 +29917,7 @@ void Func0421 object#(0x421) () {
 						var0002,
 						"? And thou dost dare to confront me -- a Mage!\"");
 					say("\"I am flattered by the suspicions, but alas... I am innocent in this case.\"");
-					if (0xFFF9->npc_nearby()) {
+					if (SERV_03->npc_nearby()) {
 						say("\"As thou canst surely see, thy companion is not being held prisoner in my manor. Look around at thy pleasure.\"");
 					} else {
 						say("\"Search my manor! I have no prisoners there...\"");
@@ -60157,10 +60157,10 @@ void Func0611 object#(0x611) () {
 	var0000 = get_item_shape();
 	if (var0000 == 0x0203) {
 		var0001 = 0x0366;
-		var0002 = 0x0007;
+		var0002 =  7;
 	} else {
 		var0001 = 0x0203;
-		var0002 = 0xFFF9;
+		var0002 = -7;
 	}
 	var0003 = get_object_position();
 	var0003[0x0002] += var0002;
@@ -68937,8 +68937,8 @@ void Func06CA object#(0x6CA) () {
 			var0018 = UI_create_new_object(0x02D8);
 			var0018->set_item_frame(0x0004);
 			var0018->clear_item_flag(TEMPORARY);
-			var0016 = 0x0002;
-			var0017 = 0xFFF8;
+			var0016 =  2;
+			var0017 = -8;
 			var0019 = UI_update_last_created([(var0001 + var0016), (var0002 + var0017), 0x0000]);
 		} else {
 			var0005[0x0001]->remove_item();
@@ -68991,8 +68991,8 @@ void Func06CA object#(0x6CA) () {
 			var0018 = UI_create_new_object(0x01DB);
 			var0018->set_item_frame(0x000A);
 			var0018->clear_item_flag(TEMPORARY);
-			var0016 = 0xFFF8;
-			var0017 = 0x0002;
+			var0016 = -8;
+			var0017 =  2;
 			var0019 = UI_update_last_created([(var0001 + var0016), (var0002 + var0017), 0x0000]);
 		} else {
 			var0005[0x0004]->remove_item();
@@ -90523,7 +90523,7 @@ var Func0832 0x832 (var var0000) {
 		return -6;
 	}
 	if ((var0000 == 0x000C) || (var0000 == 0x000D)) {
-		return 0xFFF9;
+		return -7;
 	}
 	if ((var0000 == 0x000E) || (var0000 == 0x000F)) {
 		return 0xFFF7;

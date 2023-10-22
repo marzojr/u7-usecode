@@ -11272,13 +11272,13 @@ void Func0407 object#(0x407) () {
 	var var000E;
 
 	if (event == DOUBLECLICK) {
-		0xFFF9->show_npc_face(0x0000);
+		SENTRI->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = UI_is_pc_female();
 		var0002 = UI_get_party_list();
-		var0003 = 0xFFF9->get_npc_object();
+		var0003 = SENTRI->get_npc_object();
 		var0004 = Func0908();
-		var0005 = 0xFFF9->get_npc_object()->get_schedule_type();
+		var0005 = SENTRI->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (var0003 in var0002) {
 			add("leave");
@@ -11327,7 +11327,7 @@ void Func0407 object#(0x407) () {
 				if (var0006 < 0x0006) {
 					say("Sentri bows. \"I am very pleased to join thy group.\"");
 					gflags[0x00DB] = true;
-					0xFFF9->add_to_party();
+					SENTRI->add_to_party();
 					add("leave");
 				} else {
 					say("\"I like small crowds, Avatar. Thou art travelling with a group too large for my tastes. If thou shouldst lose someone along the way, return and I shall be happy to join thee.\"");
@@ -11342,16 +11342,16 @@ void Func0407 object#(0x407) () {
 				if (var000A == "wait here") {
 					say("\"Very good. I shall wait here until thou dost return.\"*");
 					gflags[0x00DB] = false;
-					0xFFF9->remove_from_party();
-					0xFFF9->get_npc_object()->set_schedule_type(WAIT);
+					SENTRI->remove_from_party();
+					SENTRI->get_npc_object()->set_schedule_type(WAIT);
 					abort;
 				}
 				say("\"Farewell, ",
 					var0004,
 					". If thou dost need my services again, I shall be only too happy to comply.\"*");
 				gflags[0x00DB] = false;
-				0xFFF9->remove_from_party();
-				0xFFF9->get_npc_object()->set_schedule_type(LOITER);
+				SENTRI->remove_from_party();
+				SENTRI->get_npc_object()->set_schedule_type(LOITER);
 				abort;
 
 			case "Britain":
@@ -11368,7 +11368,7 @@ void Func0407 object#(0x407) () {
 
 			case "train":
 				if (!gflags[0x00DB]) {
-					var0005 = 0xFFF9->get_npc_object()->get_schedule_type();
+					var0005 = SENTRI->get_npc_object()->get_schedule_type();
 					if ((var0005 == DUEL) || ((var0005 == LOITER) || (var0005 == WAIT))) {
 						say("\"My fee is 30 gold for a training session. Is this all right?\"");
 						if (Func090A()) {
@@ -11392,7 +11392,7 @@ void Func0407 object#(0x407) () {
 					say("\"How art thou, friend? Thou dost look like thou couldst use a little training thyself!\"*");
 					IOLO->say("\"What is this? Everyone doth make fun of my physique!\"*");
 					IOLO->hide();
-					0xFFF9->say("\"I am not making fun, Iolo. I am serious!\" Sentri laughs.");
+					SENTRI->say("\"I am not making fun, Iolo. I am serious!\" Sentri laughs.");
 				} else {
 					say("\"I miss that fellow!\"");
 				}
@@ -11404,11 +11404,11 @@ void Func0407 object#(0x407) () {
 				if (var000C) {
 					say("\"Say, Shamino, art thou still spending thy time dressing in women's clothes?\"*");
 					SHAMINO->say("\"-What-?!?!\"*");
-					0xFFF9->say("\"Or art thou wasting away thy life in a healer's den, now that thou art in thy middle ages?\"*");
+					SENTRI->say("\"Or art thou wasting away thy life in a healer's den, now that thou art in thy middle ages?\"*");
 					SHAMINO->say("\"Careful, friend. Those are fighting words!\"*");
-					0xFFF9->say("Sentri punches Shamino good-naturedly. \"And that is all they are, my dear friend. Words! 'Tis good to see thee!\"");
+					SENTRI->say("Sentri punches Shamino good-naturedly. \"And that is all they are, my dear friend. Words! 'Tis good to see thee!\"");
 					SHAMINO->hide();
-					0xFFF9->show_npc_face(0x0000);
+					SENTRI->show_npc_face(0x0000);
 				} else {
 					say("\"'Twould be good to share a joke or two with him!\"");
 				}
@@ -11423,16 +11423,16 @@ void Func0407 object#(0x407) () {
 					var000E = Func0931(DUPRE, 0x0001, 0x0268, QUALITY_ANY, 0x0003);
 					if (var000E) {
 						say("\"Art thou joking? I -always- have ale!\"*");
-						0xFFF9->say("\"Then we should have some before someone else does!\"");
+						SENTRI->say("\"Then we should have some before someone else does!\"");
 						DUPRE->say("\"'Twould be a pleasure. However, I must be prudent and save the ale for when we need it.\"*");
-						0xFFF9->say("Sentri feels of Dupre's head. \"Art thou feeling all right, Dupre? Or has knighthood done something to thy brain?\"");
+						SENTRI->say("Sentri feels of Dupre's head. \"Art thou feeling all right, Dupre? Or has knighthood done something to thy brain?\"");
 						DUPRE->hide();
-						0xFFF9->show_npc_face(0x0000);
+						SENTRI->show_npc_face(0x0000);
 					} else {
 						say("\"No, but I would be glad to stop in a pub and share a few pints with thee!\"*");
-						0xFFF9->say("\"Mmmm! Sounds good to me! Next time we pass a place, let us stop!\"");
+						SENTRI->say("\"Mmmm! Sounds good to me! Next time we pass a place, let us stop!\"");
 						DUPRE->hide();
-						0xFFF9->show_npc_face(0x0000);
+						SENTRI->show_npc_face(0x0000);
 					}
 				} else {
 					say("\"I want to see that no-good trouble-maker! He is a knight now, I hear! Sir Dupre indeed!\"");
@@ -11451,7 +11451,7 @@ void Func0407 object#(0x407) () {
 		say("\"Until later.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFF9);
+		Func092E(SENTRI);
 	}
 }
 
@@ -11480,10 +11480,10 @@ void Func0408 object#(0x408) () {
 	var var000D;
 
 	if (event == DOUBLECLICK) {
-		0xFFF8->show_npc_face(0x0000);
+		JULIA->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_get_party_list();
-		var0002 = 0xFFF8->get_npc_object();
+		var0002 = JULIA->get_npc_object();
 		var0003 = Func0908();
 		var0004 = Func08F7(SPARK);
 		add(["name", "job", "bye"]);
@@ -11551,7 +11551,7 @@ void Func0408 object#(0x408) () {
 						say("\"Aye! It would be my pleasure!\"");
 					}
 					gflags[0x0108] = true;
-					0xFFF8->add_to_party();
+					JULIA->add_to_party();
 					add(["Iolo", "Shamino", "Dupre", "leave"]);
 					remove("join");
 				} else {
@@ -11570,15 +11570,15 @@ void Func0408 object#(0x408) () {
 						say("\"Very well. I shall wait here until thou dost return.\"*");
 						gflags[0x0101] = true;
 						gflags[0x0108] = false;
-						0xFFF8->remove_from_party();
-						0xFFF8->get_npc_object()->set_schedule_type(WAIT);
+						JULIA->remove_from_party();
+						JULIA->get_npc_object()->set_schedule_type(WAIT);
 						abort;
 					}
 					say("\"Well! Fine, if that is thy wish, I shall leave!\"*");
 					gflags[0x0101] = true;
 					gflags[0x0108] = false;
-					0xFFF8->remove_from_party();
-					0xFFF8->get_npc_object()->set_schedule_type(LOITER);
+					JULIA->remove_from_party();
+					JULIA->get_npc_object()->set_schedule_type(LOITER);
 					abort;
 				}
 				say("\"Then I shall stay.\"");
@@ -11645,7 +11645,7 @@ void Func0408 object#(0x408) () {
 					say("\"Hello, Iolo.\"*");
 					IOLO->say("\"'Tis a pleasure to see thee again, Julia.\"*");
 					IOLO->hide();
-					0xFFF8->show_npc_face(0x0000);
+					JULIA->show_npc_face(0x0000);
 				}
 				remove("Iolo");
 				fallthrough;
@@ -11658,7 +11658,7 @@ void Func0408 object#(0x408) () {
 					say("\"Hello, Shamino!\"*");
 					SHAMINO->say("\"Oh, Julia! Good of thee to be joining us again!\"*");
 					SHAMINO->hide();
-					0xFFF8->show_npc_face(0x0000);
+					JULIA->show_npc_face(0x0000);
 				}
 				remove("Shamino");
 				fallthrough;
@@ -11670,12 +11670,12 @@ void Func0408 object#(0x408) () {
 				} else {
 					say("\"Once again our paths cross, Sir Dupre!\"*");
 					DUPRE->say("\"Julia! I was just wondering if we would ever see thee again!\"*");
-					0xFFF8->say("\"Well, thou canst wonder no more, Dupre.\"*");
+					JULIA->say("\"Well, thou canst wonder no more, Dupre.\"*");
 					DUPRE->say("\"",
 						var0003,
 						", just between thou, myself and the lamppost, thou hadst better watch Julia. She hath a temper.\"*");
 					DUPRE->hide();
-					0xFFF8->show_npc_face(0x0000);
+					JULIA->show_npc_face(0x0000);
 				}
 				remove("Dupre");
 				fallthrough;
@@ -11684,10 +11684,10 @@ void Func0408 object#(0x408) () {
 				say("\"And who is this fine young lad?\"");
 				if (var0004) {
 					SPARK->say("\"My name is Spark, milady.\"*");
-					0xFFF8->say("\"He is a cute one! And so well-mannered!\"");
+					JULIA->say("\"He is a cute one! And so well-mannered!\"");
 					SPARK->say("Spark turns beet red.");
 					SPARK->hide();
-					0xFFF8->show_npc_face(0x0000);
+					JULIA->show_npc_face(0x0000);
 					gflags[0x0121] = true;
 				}
 				remove("Spark");
@@ -11701,7 +11701,7 @@ void Func0408 object#(0x408) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFF8);
+		Func092E(JULIA);
 	}
 }
 
@@ -23908,10 +23908,10 @@ void Func0459 object#(0x459) () {
 
 		case "plans":
 			say("\"I still have those plans up in my cabin. Every once in a while I try to figure them out. I suspect no one in town, save for Owen himself, could understand them. Maybe Julia, the tinker, would be able to shed some light on them. But she would never listen to an old mountain man like me.\"");
-			var0003 = Func08F7(0xFFF8);
+			var0003 = Func08F7(JULIA);
 			if (var0003) {
-				0xFFF8->say("\"Yes I would, Karl! Thou dost have too low opinion of thyself! Raise thy spirits, please!\"");
-				0xFFF8->hide();
+				JULIA->say("\"Yes I would, Karl! Thou dost have too low opinion of thyself! Raise thy spirits, please!\"");
+				JULIA->hide();
 				0xFFA7->show_npc_face(0x0000);
 			}
 			gflags[0x010B] = true;
@@ -50592,7 +50592,7 @@ void Func060E object#(0x60E) () {
 			var0011 = [-4, 0, 4, 0, 0, 4, -4, 1, 4, 1, -4, -1, 4, -1, 1, 2, -1, 2];
 			var0012 = 0x0000;
 			var0013 = [FACE_EAST, var0012, FACE_WEST, var0012, FACE_NORTH, var0012, FACE_EAST, var0012, FACE_WEST, var0012, FACE_EAST, var0012, FACE_WEST, var0012, FACE_NORTH, var0012, FACE_NORTH];
-			var0014 = [0xFFF9, 0x0000, 0x0008, 0x0000, 0x0000, 0x0008, 0xFFF9, 0x0008, 0x0008, 0x0008, 0xFFEF, 0x0000, 0xFFEF, 0x0008];
+			var0014 = [-7, 0, 8, 0, 0, 8, -7, 8, 8, 8, -17, 0, -17, 8];
 			var0015 = [0x000D, var0012, 0x000D, var0012, 0x001D, var0012, 0x001D, var0012, 0x001D, var0012, 0x000D, var0012, 0x000D];
 			var0016 = 0x0001;
 			var0017 = UI_get_party_list2();
@@ -50741,10 +50741,10 @@ void Func0611 object#(0x611) () {
 	var0000 = get_item_shape();
 	if (var0000 == 0x0203) {
 		var0001 = 0x0366;
-		var0002 = 0x0007;
+		var0002 =  7;
 	} else {
 		var0001 = 0x0203;
-		var0002 = 0xFFF9;
+		var0002 = -7;
 	}
 	var0003 = get_object_position();
 	var0003[0x0002] += var0002;
@@ -58913,7 +58913,7 @@ void Func06C8 object#(0x6C8) () {
 	var var0003;
 
 	if (event == EGG) {
-		var0000 = [0xFFA8, 0xFFF8, 0xFFAB];
+		var0000 = [0xFFA8, JULIA, 0xFFAB];
 		for (var0003 in var0000 with var0001 to var0002) {
 			Func093F(var0003, LOITER);
 		}
@@ -69070,7 +69070,7 @@ void Func088A 0x88A () {
 	remove("sacrifice");
 	var0001 = 0x0000;
 	var0002 = UI_get_party_list();
-	var0003 = 0xFFF8->get_npc_object();
+	var0003 = JULIA->get_npc_object();
 	var0004 = 0xFFF7->get_npc_object();
 	for (var0007 in var0002 with var0005 to var0006) {
 		var0001 += 0x0001;
@@ -70896,7 +70896,7 @@ void Func08A6 0x8A6 (var var0000, var var0001) {
 			var0007 = "find";
 		} else {
 			var0007 = "finds";
-			if ((var0002 == JAANA) || ((var0002 == 0xFFF8) || (var0002 == 0xFFF7))) {
+			if ((var0002 == JAANA) || ((var0002 == JULIA) || (var0002 == 0xFFF7))) {
 				var0005 = "she";
 				var0006 = "her";
 			} else {
@@ -73500,7 +73500,7 @@ void Func08D0 0x8D0 (var var0000, var var0001) {
 		var0003 = "you";
 		var0006 = "you";
 		var0004 = "feel";
-	} else if ((var0002 == 0xFFF8) || ((var0002 == JAANA) || (var0002 == 0xFFF7))) {
+	} else if ((var0002 == JULIA) || ((var0002 == JAANA) || (var0002 == 0xFFF7))) {
 		var0006 = "her";
 	} else {
 		var0006 = "him";
@@ -74656,8 +74656,8 @@ void Func08E5 0x8E5 (var var0000, var var0001) {
 	var var000D;
 	var var000E;
 
-	var0002 = Func0921(0xFFF9->get_npc_object());
-	if ((var0002 == 0xFFF8) || ((var0002 == JAANA) || (var0002 == 0xFFF7))) {
+	var0002 = Func0921(SENTRI->get_npc_object());
+	if ((var0002 == JULIA) || ((var0002 == JAANA) || (var0002 == 0xFFF7))) {
 		var0003 = true;
 	} else {
 		var0003 = false;
@@ -75706,7 +75706,7 @@ var Func0902 0x902 () {
 	var var0003;
 	var var0004;
 
-	var0000 = [IOLO, SHAMINO, DUPRE, JAANA, 0xFFF9, 0xFFF8, 0xFFF7, SPARK, 0xFFF6];
+	var0000 = [IOLO, SHAMINO, DUPRE, JAANA, SENTRI, JULIA, 0xFFF7, SPARK, 0xFFF6];
 	var0001 = UI_get_party_list();
 	for (var0004 in var0000 with var0002 to var0003) {
 		if (var0004->get_npc_object() in var0001) {
