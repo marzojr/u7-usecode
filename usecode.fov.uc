@@ -9738,15 +9738,15 @@ void Func0401 object#(0x401) () {
 				fallthrough;
 
 			case "Dupre":
-				var000C = Func08F7(0xFFFC);
+				var000C = Func08F7(DUPRE);
 				if (var000C) {
 					say("\"Why, he is right there, ",
 						var0003,
 						".\"*");
-					0xFFFC->say("\"I am right here, ",
+					DUPRE->say("\"I am right here, ",
 						var0003,
 						".\"*");
-					0xFFFC->hide();
+					DUPRE->hide();
 					IOLO->say("\"See? I told thee!\"");
 				} else {
 					say("\"I am sure we shall find him somewhere. Last I heard, he was in Jhelom. Didst thou know he was knighted?\"");
@@ -10394,17 +10394,17 @@ void Func0403 object#(0x403) () {
 				fallthrough;
 
 			case "Dupre":
-				var0006 = Func08F7(0xFFFC);
+				var0006 = Func08F7(DUPRE);
 				if (var0006) {
 					say("\"Dost thou mean that incorrigible wencher and drunkard?\"*");
-					0xFFFC->say("\"Do not forget that my mere thumb can squash in thy face like a marshmallow.\"*");
+					DUPRE->say("\"Do not forget that my mere thumb can squash in thy face like a marshmallow.\"*");
 					SHAMINO->say("\"Yes, that's Dupre!\"*");
-					0xFFFC->say("\"That's -Sir- Dupre to thee!\"*");
+					DUPRE->say("\"That's -Sir- Dupre to thee!\"*");
 					SHAMINO->say("\"Sir Dupuke? Didst thou say Sir Dupuke?\"*");
-					0xFFFC->say("\"Du-pre-!\"*");
+					DUPRE->say("\"Du-pre-!\"*");
 					SHAMINO->say("\"Pardon -me-, Sir Dupuke!\"*");
-					0xFFFC->say("\"I'm not going to listen to this anymore.\"*");
-					0xFFFC->hide();
+					DUPRE->say("\"I'm not going to listen to this anymore.\"*");
+					DUPRE->hide();
 					SHAMINO->show_npc_face(0x0000);
 				} else if (!gflags[0x0017]) {
 					say("\"I believe he is in Jhelom.\"");
@@ -10526,20 +10526,20 @@ void Func0404 object#(0x404) () {
 	var var0013;
 
 	if (event == DOUBLECLICK) {
-		0xFFFC->show_npc_face(0x0000);
+		DUPRE->show_npc_face(0x0000);
 		if (gflags[0x02EB]) {
 			if (UI_get_timer(0x000B) < 0x0001) {
 				say("\"I am sorry, I do not join thieves.\"");
 				abort;
 			}
 			say("\"All right, I suppose thou hast learned thy lesson. I shall rejoin.\"");
-			0xFFFC->add_to_party();
+			DUPRE->add_to_party();
 			gflags[0x02EB] = false;
 			abort;
 		}
 		var0000 = Func0909();
 		var0001 = UI_get_party_list();
-		var0002 = 0xFFFC->get_npc_object();
+		var0002 = DUPRE->get_npc_object();
 		var0003 = Func0908();
 		var0004 = Func08F7(IOLO);
 		var0005 = Func08F7(SHAMINO);
@@ -10578,11 +10578,11 @@ void Func0404 object#(0x404) () {
 				if (var0005) {
 					SHAMINO->say("\"Do not be so modest, Sir Dupre. Thou shouldst tell the Avatar that thou hast been knighted since last you met.\"*");
 					SHAMINO->hide();
-					0xFFFC->say("Sir Dupre looks quite embarrassed. \"Well, yes, I would have gotten around to that.\"");
+					DUPRE->say("Sir Dupre looks quite embarrassed. \"Well, yes, I would have gotten around to that.\"");
 				} else if (var0004) {
 					IOLO->say("\"Do not be so modest, Sir Dupre. Thou shouldst tell the Avatar that thou hast been knighted since last you met.\"*");
 					IOLO->hide();
-					0xFFFC->say("Sir Dupre looks quite embarrassed. \"Well, yes, I would have gotten around to that.\"");
+					DUPRE->say("Sir Dupre looks quite embarrassed. \"Well, yes, I would have gotten around to that.\"");
 				}
 				remove("name");
 				fallthrough;
@@ -10614,7 +10614,7 @@ void Func0404 object#(0x404) () {
 				if (var000F < 0x0008) {
 					say("\"It would be both an honor and a pleasure to join thee on thine adventures once again.\"");
 					gflags[0x016D] = true;
-					0xFFFC->add_to_party();
+					DUPRE->add_to_party();
 					add("leave");
 				} else {
 					say("\"Hmm. Too crowded for my liking. Come back if thou shouldst diminish thy group by a member or two.\"");
@@ -10628,15 +10628,15 @@ void Func0404 object#(0x404) () {
 				var0013 = Func090B(["wait here", "go home"]);
 				if (var0013 == "wait here") {
 					say("\"Very well. I shall await thy return.\"*");
-					0xFFFC->remove_from_party();
-					0xFFFC->get_npc_object()->set_schedule_type(WAIT);
+					DUPRE->remove_from_party();
+					DUPRE->get_npc_object()->set_schedule_type(WAIT);
 					gflags[0x016D] = false;
 					abort;
 				}
 				say("\"I shall depart thy company if that is truly thy wish. If thou shouldst ever need me again, thou hast only to ask.\" He turns away from you, obviously disappointed.*");
-				0xFFFC->remove_from_party();
+				DUPRE->remove_from_party();
 				gflags[0x016D] = false;
-				0xFFFC->get_npc_object()->set_schedule_type(LOITER);
+				DUPRE->get_npc_object()->set_schedule_type(LOITER);
 				abort;
 				// Dead code
 				add("join");
@@ -10712,9 +10712,9 @@ void Func0404 object#(0x404) () {
 						var0003,
 						", there is a strange old man following thee, and he bears a vague resemblance to Iolo! It is most odd.\"*");
 					IOLO->say("\"Thy drinking must have blurred thy vision, Sir Dupre.\"*");
-					0xFFFC->say("\"Then thou hadst better join me for one later. It will give thee the chance to catch up to me.\"");
+					DUPRE->say("\"Then thou hadst better join me for one later. It will give thee the chance to catch up to me.\"");
 					IOLO->hide();
-					0xFFFC->show_npc_face(0x0000);
+					DUPRE->show_npc_face(0x0000);
 				} else {
 					say("\"We should find that rascal Iolo and have him join us as well.\"");
 				}
@@ -10732,9 +10732,9 @@ void Func0404 object#(0x404) () {
 				} else if (var0005) {
 					say("Sir Dupre snorts, \"From what I had heard Shamino was all but settled down and retired from the adventuring life.\"*");
 					SHAMINO->say("\"I still have a few wild oats left to sow, thank thee very much.\"*");
-					0xFFFC->say("\"Then it is good to see another member of our old sowing circle once again!\"");
+					DUPRE->say("\"Then it is good to see another member of our old sowing circle once again!\"");
 					SHAMINO->hide();
-					0xFFFC->show_npc_face(0x0000);
+					DUPRE->show_npc_face(0x0000);
 				} else {
 					say("\"Let us go and find Shamino and make this a proper reunion!\"");
 				}
@@ -10766,7 +10766,7 @@ void Func0404 object#(0x404) () {
 		say("\"I shall speak with thee later, then.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFFC);
+		Func092E(DUPRE);
 	}
 }
 
@@ -10949,23 +10949,23 @@ void Func0405 object#(0x405) () {
 				fallthrough;
 
 			case "Dupre":
-				var000D = Func08F7(0xFFFC);
+				var000D = Func08F7(DUPRE);
 				if (!var000D) {
 					say("\"I miss having a drink or two with that rogue! Let's go find that knight!\"");
 				} else {
 					say("\"For someone recently knighted, he has retained his good looks and boyish charm, hasn't he?\"*");
-					0xFFFC->say("\"Thou dost mean 'mannish' charm, dost thou not?\"*");
+					DUPRE->say("\"Thou dost mean 'mannish' charm, dost thou not?\"*");
 					0xFFFB->say("\"Oh, pardon -me-, sir. Thine immaturity confused me for a moment.\"*");
-					0xFFFC->say("\"Art thou going to let her get away with that, ",
+					DUPRE->say("\"Art thou going to let her get away with that, ",
 						var0002,
 						"?\"");
 					var000E = Func090A();
 					if (var000E) {
 						say("Dupre is speechless and turns away in a huff.*");
-						0xFFFC->hide();
+						DUPRE->hide();
 					} else {
 						say("\"Good!\" Jaana winks at you from behind his back.*");
-						0xFFFC->hide();
+						DUPRE->hide();
 					}
 				}
 				remove("Dupre");
@@ -11416,22 +11416,22 @@ void Func0407 object#(0x407) () {
 				fallthrough;
 
 			case "Dupre":
-				var000D = Func08F7(0xFFFC);
+				var000D = Func08F7(DUPRE);
 				if (var000D) {
 					say("\"Ah, my good friend Dupre! Hast thou some good ale on thee?\"*");
-					0xFFFC->show_npc_face(0x0000);
-					var000E = Func0931(0xFFFC, 0x0001, 0x0268, QUALITY_ANY, 0x0003);
+					DUPRE->show_npc_face(0x0000);
+					var000E = Func0931(DUPRE, 0x0001, 0x0268, QUALITY_ANY, 0x0003);
 					if (var000E) {
 						say("\"Art thou joking? I -always- have ale!\"*");
 						0xFFF9->say("\"Then we should have some before someone else does!\"");
-						0xFFFC->say("\"'Twould be a pleasure. However, I must be prudent and save the ale for when we need it.\"*");
+						DUPRE->say("\"'Twould be a pleasure. However, I must be prudent and save the ale for when we need it.\"*");
 						0xFFF9->say("Sentri feels of Dupre's head. \"Art thou feeling all right, Dupre? Or has knighthood done something to thy brain?\"");
-						0xFFFC->hide();
+						DUPRE->hide();
 						0xFFF9->show_npc_face(0x0000);
 					} else {
 						say("\"No, but I would be glad to stop in a pub and share a few pints with thee!\"*");
 						0xFFF9->say("\"Mmmm! Sounds good to me! Next time we pass a place, let us stop!\"");
-						0xFFFC->hide();
+						DUPRE->hide();
 						0xFFF9->show_npc_face(0x0000);
 					}
 				} else {
@@ -11664,17 +11664,17 @@ void Func0408 object#(0x408) () {
 				fallthrough;
 
 			case "Dupre":
-				var000D = Func08F7(0xFFFC);
+				var000D = Func08F7(DUPRE);
 				if (!var000D) {
 					say("\"Perhaps we should go find Sir Dupre and have him join us as well.\"");
 				} else {
 					say("\"Once again our paths cross, Sir Dupre!\"*");
-					0xFFFC->say("\"Julia! I was just wondering if we would ever see thee again!\"*");
+					DUPRE->say("\"Julia! I was just wondering if we would ever see thee again!\"*");
 					0xFFF8->say("\"Well, thou canst wonder no more, Dupre.\"*");
-					0xFFFC->say("\"",
+					DUPRE->say("\"",
 						var0003,
 						", just between thou, myself and the lamppost, thou hadst better watch Julia. She hath a temper.\"*");
-					0xFFFC->hide();
+					DUPRE->hide();
 					0xFFF8->show_npc_face(0x0000);
 				}
 				remove("Dupre");
@@ -11733,7 +11733,7 @@ void Func0409 object#(0x409) () {
 		var0003 = Func0908();
 		var0004 = Func08F7(SHAMINO);
 		var0005 = Func08F7(IOLO);
-		var0006 = Func08F7(0xFFFC);
+		var0006 = Func08F7(DUPRE);
 		add(["name", "job", "bye"]);
 		if (var0002 in var0001) {
 			add("leave");
@@ -11914,10 +11914,10 @@ void Func0409 object#(0x409) () {
 					say("\"I cannot help but miss Dupre a little. I have not seen him since he was knighted.\"");
 				} else {
 					say("\"Sir Dupre, hast thou finished thy studies yet?\"*");
-					0xFFFC->say("Dupre looks confounded. \"My studies, milady?\"*");
+					DUPRE->say("Dupre looks confounded. \"My studies, milady?\"*");
 					0xFFF7->say("\"Of all the various drinking establishments in Britannia!\"*");
-					0xFFFC->say("\"Oh, yes, of course, my studies! Continuing mine education has always been of the utmost importance to me.\"*");
-					0xFFFC->hide();
+					DUPRE->say("\"Oh, yes, of course, my studies! Continuing mine education has always been of the utmost importance to me.\"*");
+					DUPRE->hide();
 					0xFFF7->show_npc_face(0x0000);
 				}
 				remove("Dupre");
@@ -14349,7 +14349,7 @@ labelFunc0417_000C:
 		}
 		var0002 = UI_get_party_list();
 		var0003 = Func08F7(IOLO);
-		var0004 = Func08F7(0xFFFC);
+		var0004 = Func08F7(DUPRE);
 		var0005 = Func08F7(SHAMINO);
 		0xFFE9->show_npc_face(0x0000);
 		var0006 = false;
@@ -14575,10 +14575,10 @@ labelFunc0417_000C:
 				say("\"I have not seen that one since I knighted him. Typical -- I do the man a favor and he disappears! I heard he might be in Jhelom.\"");
 				if (var0004) {
 					say("\"Where hast thou been, Sir Dupre?\"*");
-					0xFFFC->say("\"Oh, here and there, milord,\" the fighter replies.*");
+					DUPRE->say("\"Oh, here and there, milord,\" the fighter replies.*");
 					0xFFE9->say("\"I have very few friends from our homeland here in Britannia. Thou must make a point to visit more often! Especially since thou art a knight!\"*");
-					0xFFFC->say("\"If thou dost wish it, milord,\" Dupre says, bowing.*");
-					0xFFFC->hide();
+					DUPRE->say("\"If thou dost wish it, milord,\" Dupre says, bowing.*");
+					DUPRE->hide();
 					0xFFE9->show_npc_face(0x0000);
 				}
 				remove("Dupre");
@@ -16596,10 +16596,10 @@ void Func0425 object#(0x425) () {
 					say("Everyone in the Blue Boar laughs.");
 					say("\"And I'd bet thou dost need a drink, right?\"");
 					gflags[0x0084] = true;
-					var0007 = Func08F7(0xFFFC);
+					var0007 = Func08F7(DUPRE);
 					if (var0007) {
-						0xFFFC->say("\"Damn! How did she know?\"");
-						0xFFFC->hide();
+						DUPRE->say("\"Damn! How did she know?\"");
+						DUPRE->hide();
 						0xFFDB->show_npc_face(0x0000);
 					}
 				} else {
@@ -16629,11 +16629,11 @@ void Func0425 object#(0x425) () {
 				if (var0003 == WAITER) {
 					say("\"If thou dost want anything to eat or drink, just say so!\"");
 					add("Blue Boar");
-					var0007 = Func08F7(0xFFFC);
+					var0007 = Func08F7(DUPRE);
 					if (var0007) {
 						say("She addresses Dupre. \"How about thou, handsome? Want something to eat?\" She bats her eyelashes.*");
-						0xFFFC->say("\"My dear, thou wouldst make any man hungry!\"*");
-						0xFFFC->hide();
+						DUPRE->say("\"My dear, thou wouldst make any man hungry!\"*");
+						DUPRE->hide();
 						0xFFDB->say("\"I like thy friends, ",
 							var0005,
 							".\"");
@@ -18098,12 +18098,12 @@ void Func042F object#(0x42F) () {
 				say("\"I work for Lucy at the Blue Boar. I serve food and drinks.");
 				if (var0001 == WAITER) {
 					say("\"If there is anything thou wouldst like, please say so! And, er, I shall give thee a discount if thou dost buy from me!\"");
-					var0002 = Func08F7(0xFFFC);
+					var0002 = Func08F7(DUPRE);
 					if (var0002) {
 						say("\"Why, Sir Dupre! How good to see thee again!\"*");
-						0xFFFC->say("\"Hello milady! I thought I might re-sample The Blue Boar's fine beverages!\"*");
+						DUPRE->say("\"Hello milady! I thought I might re-sample The Blue Boar's fine beverages!\"*");
 						0xFFD1->say("\"Any time, milord! Any time!\"*");
-						0xFFFC->hide();
+						DUPRE->hide();
 						0xFFD1->show_npc_face(0x0000);
 					}
 					add(["food", "drink", "buy"]);
@@ -24508,11 +24508,11 @@ void Func045C object#(0x45C) () {
 					say("\"Why I be the barkeep of The Checquered Cork. No better place in Minoc to discuss the events of the day.\"");
 					if (var0002 == WAITER) {
 						say("He coughs into the rag he had just been using to polish the bar.");
-						var0003 = Func08F7(0xFFFC);
+						var0003 = Func08F7(DUPRE);
 						if (var0003) {
 							say("\"Hello again, Sir Dupre! Didst thou enjoy mine establishment so much that thou hast returned?\"*");
-							0xFFFC->say("\"My dear Rutherford, this is not a reflection on The Checquered Cork, but I simply like a good drink!\"*");
-							0xFFFC->hide();
+							DUPRE->say("\"My dear Rutherford, this is not a reflection on The Checquered Cork, but I simply like a good drink!\"*");
+							DUPRE->hide();
 							0xFFA4->show_npc_face(0x0000);
 						}
 					}
@@ -28982,13 +28982,13 @@ void Func047B object#(0x47B) () {
 		if (!gflags[0x0175]) {
 			say("You see a disgruntled, obviously overworked barmaid. She gives you a perfunctory grunt of a hello.");
 			gflags[0x0175] = true;
-			var0009 = Func08F7(0xFFFC);
+			var0009 = Func08F7(DUPRE);
 			if (var0009) {
 				say("\"Art thou still here?\" she asks Dupre.");
-				0xFFFC->say("\"I have not finished making mine assessment of thy fine drinking establishment!\"*");
+				DUPRE->say("\"I have not finished making mine assessment of thy fine drinking establishment!\"*");
 				0xFF85->say("\"What? Art thou working for Brommer's Britannia travel guides?\"*");
-				0xFFFC->say("\"No, my dear. This research is strictly for mine own digestion!\"*");
-				0xFFFC->hide();
+				DUPRE->say("\"No, my dear. This research is strictly for mine own digestion!\"*");
+				DUPRE->hide();
 				0xFF85->show_npc_face(0x0000);
 			}
 		} else {
@@ -30136,25 +30136,25 @@ void Func0482 object#(0x482) () {
 			say("You see a leering, ill-postured man who chortles to himself.");
 			gflags[0x018B] = true;
 			if (var0002 == WAITER) {
-				var0003 = Func08F7(0xFFFC);
+				var0003 = Func08F7(DUPRE);
 				if (var0003) {
 					say("\"Well if it isn't Dupre! -Sir- Dupre now, is it?\"");
-					0xFFFC->say("\"That it is, Boris.\"");
+					DUPRE->say("\"That it is, Boris.\"");
 					0xFF7E->say("\"Hmmm-- it seems to me thou dost have a tab still going here? Yes?\"");
-					0xFFFC->say("\"Oh? Do I?\"");
+					DUPRE->say("\"Oh? Do I?\"");
 					0xFF7E->say("\"Yes indeed! Let me see... I believe the total that thou dost owe is 74 gold pieces. I am afraid that thou must pay up before I can speak with thee or anyone else with thee.\"");
-					0xFFFC->say("Dupre looks embarrassed. He turns to you. \"My friend, wilt thou help me out?\"");
+					DUPRE->say("Dupre looks embarrassed. He turns to you. \"My friend, wilt thou help me out?\"");
 					if (Func090A()) {
 labelFunc0482_00E5:
 						var0004 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 						if (var0004 >= 0x004A) {
 							var0005 = UI_remove_party_items(0x004A, 0x0284, QUALITY_ANY, FRAME_ANY, true);
 							if (var0005) {
-								0xFFFC->say("\"I thank thee, Avatar.\"");
+								DUPRE->say("\"I thank thee, Avatar.\"");
 								say("You hand the gold over to Boris.");
 								gflags[0x0195] = false;
 								0xFF7E->say("\"'Tis a pleasure to do business with thee, Sir Dupre! And welcome to my pub!\"");
-								0xFFFC->hide();
+								DUPRE->hide();
 								0xFF7E->show_npc_face(0x0000);
 							} else {
 								say("\"Hmmm, where did our gold go?\"*");
@@ -30669,7 +30669,7 @@ void Func0485 object#(0x485) () {
 		var0000 = Func0909();
 		var0001 = Func08F7(SHAMINO);
 		var0002 = Func08F7(IOLO);
-		var0003 = Func08F7(0xFFFC);
+		var0003 = Func08F7(DUPRE);
 		var0004 = Func08F7(SPARK);
 		var0005 = Func08F7(0xFF7C);
 		add(["name", "job", "bye"]);
@@ -30722,8 +30722,8 @@ void Func0485 object#(0x485) () {
 						if (var0001) {
 							SHAMINO->say("You see Shamino nudge Dupre. \"Art thou not going to have a drink?\"");
 							SHAMINO->hide();
-							0xFFFC->say("\"I shall wait until we find something a bit stronger than water to quench my thirst.\"*");
-							0xFFFC->hide();
+							DUPRE->say("\"I shall wait until we find something a bit stronger than water to quench my thirst.\"*");
+							DUPRE->hide();
 							0xFF7B->show_npc_face(0x0000);
 						}
 					}
@@ -31607,7 +31607,7 @@ void Func048A object#(0x48A) () {
 	var0001 = Func0909();
 	var0002 = Func08F7(IOLO);
 	var0003 = Func08F7(SHAMINO);
-	var0004 = Func08F7(0xFFFC);
+	var0004 = Func08F7(DUPRE);
 	var0005 = UI_wearing_fellowship();
 	if (gflags[0x02CC]) {
 		add("Iriale");
@@ -31732,10 +31732,10 @@ void Func048A object#(0x48A) () {
 		case "next strange thing":
 			say("\"De voice ov Brom tells me dat \"Worldliness Receives Avard\". I haf been tinking about dat von for a long time und I still haf not figured it out. But I vill not give up until I find Brom.\"");
 			if (var0004) {
-				0xFFFC->say("\"A mysterious voice speaking inside someone's head, suggesting the philosophy of The Fellowship. Does this sound familiar, ",
+				DUPRE->say("\"A mysterious voice speaking inside someone's head, suggesting the philosophy of The Fellowship. Does this sound familiar, ",
 					var0000,
 					"?\"*");
-				0xFFFC->hide();
+				DUPRE->hide();
 				0xFF76->show_npc_face(0x0000);
 			}
 			remove("next strange thing");
@@ -32103,11 +32103,11 @@ void Func048D object#(0x48D) () {
 
 			case "bye":
 				say("\"It is truly sad to see thee go.\" He says with a sardonic smile.*");
-				var0009 = Func08F7(0xFFFC);
+				var0009 = Func08F7(DUPRE);
 				var0007 = Func08F7(IOLO);
 				if (var0009) {
-					0xFFFC->say("\"Yeah, right.\"*");
-					0xFFFC->hide();
+					DUPRE->say("\"Yeah, right.\"*");
+					DUPRE->hide();
 					0xFF73->show_npc_face(0x0000);
 				} else if (var0007) {
 					IOLO->say("\"Yeah, right.\"*");
@@ -33683,7 +33683,7 @@ void Func0497 object#(0x497) () {
 		0xFF69->show_npc_face(0x0000);
 		var0000 = Func08F7(IOLO);
 		var0001 = Func08F7(SPARK);
-		var0002 = Func08F7(0xFFFC);
+		var0002 = Func08F7(DUPRE);
 		var0003 = Func08F7(SHAMINO);
 		var0004 = Func0909();
 		var0005 = 0xFF69->get_npc_object()->get_schedule_type();
@@ -33713,8 +33713,8 @@ void Func0497 object#(0x497) () {
 					SHAMINO->hide();
 				}
 				if (var0002) {
-					0xFFFC->say("\"My liege has asked thee thy -name-, foul creature!\"*");
-					0xFFFC->hide();
+					DUPRE->say("\"My liege has asked thee thy -name-, foul creature!\"*");
+					DUPRE->hide();
 				}
 				0xFF69->say("\"But that -is- my name! Kissme! Kissme! It is true!\"");
 				remove("name");
@@ -33736,8 +33736,8 @@ void Func0497 object#(0x497) () {
 				}
 				if (var0002) {
 					say("Kissme then flies near Dupre.~~\"Handsome man! Handsome man! I love thee! It's true! It's true!\"*");
-					0xFFFC->say("Dupre swats at the fairy. \"Away with thee! Thou dost not love me! Thou dost not even -know- me!\"*");
-					0xFFFC->hide();
+					DUPRE->say("Dupre swats at the fairy. \"Away with thee! Thou dost not love me! Thou dost not even -know- me!\"*");
+					DUPRE->hide();
 					0xFF69->show_npc_face(0x0000);
 				}
 				if (var0000) {
@@ -33814,10 +33814,10 @@ void Func0497 object#(0x497) () {
 					SHAMINO->hide();
 				}
 				if (var0002) {
-					0xFFFC->say("\"If thou wouldst do it, ",
+					DUPRE->say("\"If thou wouldst do it, ",
 						var0004,
 						", do it quickly. We have not time to waste with such foolishness.\" Dupre looks distinctly disgusted with the whole affair.*");
-					0xFFFC->hide();
+					DUPRE->hide();
 				}
 				0xFF69->say("Do you allow Kissme to kiss you?");
 				if (Func090A()) {
@@ -35409,7 +35409,7 @@ void Func04A3 object#(0x4A3) () {
 		0xFF5D->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
-		var0002 = Func08F7(0xFFFC);
+		var0002 = Func08F7(DUPRE);
 		var0003 = UI_part_of_day();
 		var0004 = false;
 		if (var0003 == NIGHT) {
@@ -35428,8 +35428,8 @@ void Func04A3 object#(0x4A3) () {
 		add(["name", "job", "Fellowship", "bye"]);
 		if (var0002) {
 			say("\"Why, Hello, Sir Dupre. Things fare well I trust?\"");
-			0xFFFC->say("\"Greetings, fair Phearcy. Yes, thank thee, things are well.\"");
-			0xFFFC->hide();
+			DUPRE->say("\"Greetings, fair Phearcy. Yes, thank thee, things are well.\"");
+			DUPRE->hide();
 			0xFF5D->show_npc_face(0x0000);
 		}
 		if (!gflags[0x0205]) {
@@ -35854,10 +35854,10 @@ void Func04A5 object#(0x4A5) () {
 
 			case "friends":
 				say("\"Speaking of thy friends, I have heard that thy companion, Dupre, is a drunken sot.\"");
-				var0003 = Func08F7(0xFFFC);
+				var0003 = Func08F7(DUPRE);
 				if (var0003) {
-					0xFFFC->say("\"Hey, I don't think --\"*");
-					0xFFFC->hide();
+					DUPRE->say("\"Hey, I don't think --\"*");
+					DUPRE->hide();
 					0xFF5B->show_npc_face(0x0000);
 				}
 				say("\"Yes, from what I have been told, that Dupre has no will when confronted by a tankard of, well, anything.~~\"As a matter of fact, thou hast fairly poor taste in companions overall.\"");
@@ -35907,8 +35907,8 @@ void Func04A5 object#(0x4A5) () {
 					var0001,
 					", thou art too ignorant to argue with me.\"");
 				if (var0003) {
-					0xFFFC->say("\"Oh, this is too much!\"*");
-					0xFFFC->hide();
+					DUPRE->say("\"Oh, this is too much!\"*");
+					DUPRE->hide();
 					0xFF5B->show_npc_face(0x0000);
 				}
 				remove("unschooled");
@@ -39851,22 +39851,22 @@ void Func04BD object#(0x4BD) () {
 		0xFF43->show_npc_face(0x0000);
 		var0000 = false;
 		var0001 = false;
-		var0002 = Func08F7(0xFFFC);
+		var0002 = Func08F7(DUPRE);
 		add(["name", "job", "bye"]);
 		if (var0002) {
 			say("\"To greet you, human,\" the gargoyle says to Dupre. \"To ask how well the study is progressing?\"");
-			0xFFFC->say("\"Why 'tis progressing nicely, friend Forbrak.\"");
+			DUPRE->say("\"Why 'tis progressing nicely, friend Forbrak.\"");
 			var0003 = Func08F7(SHAMINO);
 			if (var0003 && (!gflags[0x024E])) {
 				0xFF43->hide();
 				SHAMINO->say("\"-What- study?\"");
-				0xFFFC->say("\"Why, er, surely thou hast heard of the famous guides compiled for Brommer!\"");
+				DUPRE->say("\"Why, er, surely thou hast heard of the famous guides compiled for Brommer!\"");
 				SHAMINO->say("\"Aye, I have. But I'll be tarred if there is one detailing various drinking establishments!\"");
-				0xFFFC->say("\"Well, yes, er, 'tis, ah, something new. Now, how about a drink!\"");
+				DUPRE->say("\"Well, yes, er, 'tis, ah, something new. Now, how about a drink!\"");
 				SHAMINO->say("\"New? 'Tis about as new as my backside...,\" mutters Shamino.");
 				SHAMINO->hide();
 			}
-			0xFFFC->hide();
+			DUPRE->hide();
 			0xFF43->show_npc_face(0x0000);
 		}
 		if (!gflags[0x024E]) {
@@ -41485,7 +41485,7 @@ void Func04C7 object#(0x4C7) () {
 		0xFF39->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
-		var0002 = Func08F7(0xFFFC);
+		var0002 = Func08F7(DUPRE);
 		add(["name", "job", "bye"]);
 		if (gflags[0x025E] && (!gflags[0x0261])) {
 			if (gflags[0x0275]) {
@@ -41500,8 +41500,8 @@ void Func04C7 object#(0x4C7) () {
 		}
 		if (var0002) {
 			say("\"Greetings to thee, Sir Dupre. Art thou back again for thy study of wines for Brommer?\"");
-			0xFFFC->say("\"Why, ah, yes, my good friend, Denton. I am, uh, still conducting that study.\" He turns to you and shrugs, grinning sheepishly.");
-			0xFFFC->hide();
+			DUPRE->say("\"Why, ah, yes, my good friend, Denton. I am, uh, still conducting that study.\" He turns to you and shrugs, grinning sheepishly.");
+			DUPRE->hide();
 			0xFF39->show_npc_face(0x0000);
 		}
 		if (!gflags[0x0270]) {
@@ -42710,15 +42710,15 @@ void Func04CF object#(0x4CF) () {
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = "the Avatar";
-		var0003 = Func08F7(0xFFFC);
+		var0003 = Func08F7(DUPRE);
 		var0004 = false;
 		var0005 = false;
 		var0006 = false;
 		add(["name", "job", "bye"]);
 		if (var0003) {
 			say("\"Ah, me good friend, Dupre. What kinna do fer ye this fine day?\"");
-			0xFFFC->say("\"Ah, master Yongi, always ready to offer a tankard of thy finest.\"");
-			0xFFFC->hide();
+			DUPRE->say("\"Ah, master Yongi, always ready to offer a tankard of thy finest.\"");
+			DUPRE->hide();
 			0xFF31->show_npc_face(0x0000);
 		}
 		if (!gflags[0x028C]) {
@@ -45336,10 +45336,10 @@ void Func04E2 object#(0x4E2) () {
 				if (var0007) {
 					SPARK->say("Spark whispers, \"Oh, come on, be a man!\"*");
 					SPARK->hide();
-					var0008 = Func08F7(0xFFFC);
+					var0008 = Func08F7(DUPRE);
 					if (var0008) {
-						0xFFFC->say("Dupre turns away to suppress a smirk.*");
-						0xFFFC->hide();
+						DUPRE->say("Dupre turns away to suppress a smirk.*");
+						DUPRE->hide();
 					}
 					0xFF1E->show_npc_face(0x0000);
 				}
@@ -46023,15 +46023,15 @@ void Func04E7 object#(0x4E7) () {
 				say("\"I run the Fallen Virgin Inn and Tavern. We are open for breakfast, dinner, and late night hours.");
 				if (var0001 == WAITER) {
 					say("\"If thou dost want food or drink, or perhaps a room, please say so.\"");
-					var0003 = Func08F7(0xFFFC);
+					var0003 = Func08F7(DUPRE);
 					if (var0003) {
 						say("Mandy looks at Dupre and says, \"Don't I know thee?\"*");
-						0xFFFC->say("\"Yes, milady. I was here a few months ago.\"*");
+						DUPRE->say("\"Yes, milady. I was here a few months ago.\"*");
 						0xFF19->say("\"I remember! Thou art working for Brommer's Britannian travel guides! Thou art a pub critic!\"*");
-						0xFFFC->say("\"That is right, milady.\"*");
+						DUPRE->say("\"That is right, milady.\"*");
 						0xFF19->say("\"Welcome back! Please try anything on the menu. It is all still very good.\"*");
-						0xFFFC->say("\"I thank thee, milady.\"*");
-						0xFFFC->hide();
+						DUPRE->say("\"I thank thee, milady.\"*");
+						DUPRE->hide();
 						0xFF19->show_npc_face(0x0000);
 						var0004 = Func08F7(IOLO);
 						if (var0004) {
@@ -46906,7 +46906,7 @@ void Func04EF object#(0x4EF) () {
 	var0001 = Func08F7(0xFF0D);
 	var0002 = Func08F7(IOLO);
 	var0003 = Func08F7(SHAMINO);
-	var0004 = Func08F7(0xFFFC);
+	var0004 = Func08F7(DUPRE);
 	if (!gflags[0x02BC]) {
 		say("Before you is a skinny man with a silly smile on his face. He is holding a lantern in one hand and a dirty spoon in the other.");
 		gflags[0x02BC] = true;
@@ -47536,7 +47536,7 @@ void Func04F3 object#(0x4F3) () {
 	var0001 = Func08F7(0xFF11);
 	var0002 = Func08F7(IOLO);
 	var0003 = Func08F7(SHAMINO);
-	var0004 = Func08F7(0xFFFC);
+	var0004 = Func08F7(DUPRE);
 	if (!gflags[0x02BD]) {
 		say("You see before you a short, roly-poly man with a pompous smirk on his face. He is holding a lantern in one hand and a dirty spoon in the other.");
 		gflags[0x02BD] = true;
@@ -49645,7 +49645,7 @@ void Func04FE object#(0x4FE) () {
 					var0003 = UI_is_pc_female();
 					var0004 = Func08F7(IOLO);
 					var0005 = Func08F7(SHAMINO);
-					var0006 = Func08F7(0xFFFC);
+					var0006 = Func08F7(DUPRE);
 					if (!var0003) {
 						if (var0004) {
 							IOLO->say("\"There's no shame in it, milord,\" says Iolo, looking very serious.*");
@@ -49658,8 +49658,8 @@ void Func04FE object#(0x4FE) () {
 							0xFF02->show_npc_face(0x0000);
 						}
 						if (var0006) {
-							0xFFFC->say("\"Why dost thou not go and pet the nice horsey. We would do it, but I think he prefers thee.\" With that, you hear an explosion of snorts and giggles.*");
-							0xFFFC->hide();
+							DUPRE->say("\"Why dost thou not go and pet the nice horsey. We would do it, but I think he prefers thee.\" With that, you hear an explosion of snorts and giggles.*");
+							DUPRE->hide();
 							0xFF02->show_npc_face(0x0000);
 						}
 						add("virginity");
@@ -49778,7 +49778,7 @@ void Func04FF object#(0x4FF) () {
 	var0000 = Func08F7(0xFF0F);
 	var0001 = Func08F7(SPARK);
 	var0002 = Func08F7(IOLO);
-	var0003 = Func08F7(0xFFFC);
+	var0003 = Func08F7(DUPRE);
 	var0004 = false;
 	add(["name", "job", "bye"]);
 	if (!gflags[0x02C0]) {
@@ -49834,8 +49834,8 @@ void Func04FF object#(0x4FF) () {
 			if (!var0004) {
 				say("Mama explains. \"Eat. Sleep. Love.\"*");
 				if (var0003) {
-					0xFFFC->say("\"What else is there?\"*");
-					0xFFFC->hide();
+					DUPRE->say("\"What else is there?\"*");
+					DUPRE->hide();
 					0xFF01->show_npc_face(0x0000);
 				}
 			} else {
@@ -50700,8 +50700,8 @@ void Func0610 object#(0x610) () {
 	if (SHAMINO->get_item_flag(ASLEEP)) {
 		var0009 = 0x0000;
 	}
-	var000A = Func08F7(0xFFFC);
-	if (0xFFFC->get_item_flag(ASLEEP)) {
+	var000A = Func08F7(DUPRE);
+	if (DUPRE->get_item_flag(ASLEEP)) {
 		var000A = 0x0000;
 	}
 	if (var0006) {
@@ -50722,8 +50722,8 @@ void Func0610 object#(0x610) () {
 		SHAMINO->hide();
 	}
 	if (var000A) {
-		0xFFFC->say("\"The Fellowship members who brought thee to this place did not speak once during the entire journey.~~\"But it seems they did the right thing in bringing thee here for thou hast been revived!~~\"Let us all have a drink in celebration! We will be ready to leave whenever thou dost wish it.\"*");
-		0xFFFC->hide();
+		DUPRE->say("\"The Fellowship members who brought thee to this place did not speak once during the entire journey.~~\"But it seems they did the right thing in bringing thee here for thou hast been revived!~~\"Let us all have a drink in celebration! We will be ready to leave whenever thou dost wish it.\"*");
+		DUPRE->hide();
 	}
 	gflags[0x0026] = true;
 	gflags[0x003A] = false;
@@ -51090,7 +51090,7 @@ void Func0621 object#(0x621) () {
 		}
 		if (var0001 == 0x0003) {
 			var0000 = "I could use a drink.";
-			var0002 = 0xFFFC;
+			var0002 = DUPRE;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x0004) {
@@ -51170,7 +51170,7 @@ void Func0621 object#(0x621) () {
 		}
 		if (var0001 == 0x0013) {
 			var0000 = "Let us win some gold!";
-			var0002 = 0xFFFC;
+			var0002 = DUPRE;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x0014) {
@@ -51195,7 +51195,7 @@ void Func0621 object#(0x621) () {
 		}
 		if (var0001 == 0x0018) {
 			var0000 = "Real fighters live here!";
-			var0002 = 0xFFFC;
+			var0002 = DUPRE;
 			var0003 = 0x0000;
 		}
 		if (var0001 == 0x0019) {
@@ -51754,8 +51754,8 @@ void Func0628 object#(0x628) () {
 		if (var0008 == 0x0002) {
 			Func08FE("@Thou art wasting it!@");
 		}
-		if (0xFFFC->npc_nearby()) {
-			0xFFFC->item_say("@That is perfectly good beer!@");
+		if (DUPRE->npc_nearby()) {
+			DUPRE->item_say("@That is perfectly good beer!@");
 		}
 		halt_scheduled();
 		var0007 = script item after 16 ticks {
@@ -52184,10 +52184,10 @@ void Func0633 object#(0x633) () {
 	if (event == DOUBLECLICK) {
 		item->Func063A();
 		if (UI_die_roll(0x0001, 0x0008) == 0x0001) {
-			if (0xFFFC->get_item_flag(IN_PARTY) && Func0937(0xFFFC)) {
-				0xFFFC->item_say("@I am leaving!@");
-				0xFFFC->remove_from_party();
-				Func093F(0xFFFC, WANDER);
+			if (DUPRE->get_item_flag(IN_PARTY) && Func0937(DUPRE)) {
+				DUPRE->item_say("@I am leaving!@");
+				DUPRE->remove_from_party();
+				Func093F(DUPRE, WANDER);
 				gflags[0x02EB] = true;
 				return;
 			}
@@ -64102,7 +64102,7 @@ void Func0830 0x830 (var var0000, var var0001) {
 	var var0009;
 
 	if (var0001 == 0x0001) {
-		var0002 = 0xFFFC;
+		var0002 = -4;
 		var0003 = 0x0058;
 		var0004 = var0000[0x0001]->find_nearby(0x00C7, 0x0019, MASK_NONE);
 		var0005 = script var0004 {
@@ -64110,7 +64110,7 @@ void Func0830 0x830 (var var0000, var var0001) {
 		};
 	}
 	if (var0001 == 0x0000) {
-		var0002 = 0x0004;
+		var0002 =  4;
 		var0003 = 0x0057;
 	}
 	for (var0008 in var0000 with var0006 to var0007) {
@@ -65481,7 +65481,7 @@ void Func084F 0x84F () {
 	say("He pours a glass of wine into a crystal goblet and takes a sip.");
 	say("The goblet is passed around the hall, each member respectively taking a sip. Finally, the goblet is handed to you. You look at it thoughtfully as you feel all eyes in the room upon you.");
 	if (var000D) {
-		var000F = Func08F7(0xFFFC);
+		var000F = Func08F7(DUPRE);
 		var0010 = UI_is_pc_female();
 		if (var0010) {
 			var0011 = "she";
@@ -65493,14 +65493,14 @@ void Func084F 0x84F () {
 				var0011,
 				" must surely be making. Thou art our last hope.\"");
 			SHAMINO->hide();
-			0xFFFC->say("You feel a tapping on your shoulder and you turn to see Dupre as he whispers in your ear. \"I know a much better place to get a drink than this one. Perhaps thou wouldst like to join thy comrades there?\"");
+			DUPRE->say("You feel a tapping on your shoulder and you turn to see Dupre as he whispers in your ear. \"I know a much better place to get a drink than this one. Perhaps thou wouldst like to join thy comrades there?\"");
 			var0012 = Func090A();
 			if (var0012) {
 				say("\"Then let us be off. Now!\"*");
 				abort;
 			}
 			say("\"Then I hope this game amuses thee, for it makes thy comrades sorely worried.\"*");
-			0xFFFC->hide();
+			DUPRE->hide();
 		}
 	}
 	0xFFE6->say("\"Now there remains but one more test of thy loyalty to The Fellowship. I presume thou hast read the Book of Fellowship by now. I must ask you two questions. The answers may be found within the book.\" Batlin smiles modestly. \"I am the author, didst thou know? Well, never mind. Here we go.\"");
@@ -65614,10 +65614,10 @@ void Func0850 0x850 () {
 		SHAMINO->say("\"'Tis a sad thing that Britannia has fallen so far as to leave itself open to a group like this Fellowship.\"*");
 		SHAMINO->hide();
 	}
-	var000D = Func08F7(0xFFFC);
+	var000D = Func08F7(DUPRE);
 	if (var000D) {
-		0xFFFC->say("\"'Tis a sad thing when I cannot even keep my eyes open from the boredom of this Fellowship ceremony!\"*");
-		0xFFFC->hide();
+		DUPRE->say("\"'Tis a sad thing when I cannot even keep my eyes open from the boredom of this Fellowship ceremony!\"*");
+		DUPRE->hide();
 	}
 	0xFFE6->say("From watching Batlin and the others you get the feeling that the Fellowship ceremony is going to last long into the night. Now would be a good moment to slip away without drawing much attention to yourself...*");
 	abort;
@@ -68155,10 +68155,10 @@ void Func087B 0x87B () {
 		SHAMINO->say("\"These Fellowship members seem fixated upon their own personal gain and very little else,\" says Shamino.*");
 		SHAMINO->hide();
 	}
-	var0008 = Func08F7(0xFFFC);
+	var0008 = Func08F7(DUPRE);
 	if (var0008) {
-		0xFFFC->say("\"Why are these people so fascinated by The Fellowship anyway? I do not understand it.\"*");
-		0xFFFC->hide();
+		DUPRE->say("\"Why are these people so fascinated by The Fellowship anyway? I do not understand it.\"*");
+		DUPRE->hide();
 	}
 	0xFFAF->say("With that Elynor is once again the center of attention of the meeting. \"Let us now begin our evening's meditations.\" After a few minutes of silence you begin to realize\tthat this meditation is going to continue for quite some time and that now might be a good time to leave inconspicuously.*");
 	abort;
@@ -73437,7 +73437,7 @@ void Func08CF 0x8CF () {
 	var0000 = Func08F7(0xFF64);
 	var0001 = Func08F7(0xFF63);
 	var0002 = Func08F7(IOLO);
-	var0003 = Func08F7(0xFFFC);
+	var0003 = Func08F7(DUPRE);
 	say("\"Fellow members, each of thee has faced -- and doubtless shall face again -- a moment in which thou dost feel the heat of the fever. A moment when thy mind has been clouded with illusory thoughts and visions. A moment when thy recognition has simply vanished, without rhyme or reason. A moment when, perhaps, thou hast even doubted the very words of The Fellowship itself!\"*");
 	if (var0000) {
 		0xFF64->say("You see the clerk gasp, her eyes widening in disbelief.*");
@@ -73464,7 +73464,7 @@ void Func08CF 0x8CF () {
 	}
 	say("\"But as long as one remains aware, this problem will not plague thee.\"*");
 	if (var0003) {
-		0xFFFC->say("\"Come, friend. That is enough of this. Drinks are on me.\"~~ As you make your way out of the Hall, the leader's voice continues to drone on and on.*");
+		DUPRE->say("\"Come, friend. That is enough of this. Drinks are on me.\"~~ As you make your way out of the Hall, the leader's voice continues to drone on and on.*");
 		abort;
 	}
 }
@@ -75455,8 +75455,8 @@ var Func08F5 0x8F5 (var var0000, var var0001) {
 			if (Func08F7(SHAMINO)) {
 				var000D = SHAMINO;
 			}
-			if (Func08F7(0xFFFC)) {
-				var000D = 0xFFFC;
+			if (Func08F7(DUPRE)) {
+				var000D = DUPRE;
 			}
 			if (var000D != 0x0000) {
 				var000D->say("\"Oh, please.\"");
@@ -75706,7 +75706,7 @@ var Func0902 0x902 () {
 	var var0003;
 	var var0004;
 
-	var0000 = [IOLO, SHAMINO, 0xFFFC, 0xFFFB, 0xFFF9, 0xFFF8, 0xFFF7, SPARK, 0xFFF6];
+	var0000 = [IOLO, SHAMINO, DUPRE, 0xFFFB, 0xFFF9, 0xFFF8, 0xFFF7, SPARK, 0xFFF6];
 	var0001 = UI_get_party_list();
 	for (var0004 in var0000 with var0002 to var0003) {
 		if (var0004->get_npc_object() in var0001) {
@@ -76357,7 +76357,7 @@ void Func0927 0x927 (var var0000) {
 	var0001 = var0000->get_item_frame();
 	if (var0001 == 0x0000) {
 		Func08FF(["I bet that would work much better if thou wouldst put some liquid in it..."]);
-		Func0903(0xFFFC, "Perhaps some BEER for instance.");
+		Func0903(DUPRE, "Perhaps some BEER for instance.");
 		Func0903(SHAMINO, "Or maybe some WINE>>>");
 	} else {
 		var0000->set_item_frame(0x0000);
@@ -76399,7 +76399,7 @@ void Func0928 0x928 (var var0000) {
 	var0001 = var0000->get_item_frame() % 0x0002;
 	if (var0001 == 0x0000) {
 		Func08FF(["I bet that would work much better if thou wouldst put some liquid in it..."]);
-		Func0903(0xFFFC, "Perhaps some BEER for instance.");
+		Func0903(DUPRE, "Perhaps some BEER for instance.");
 		Func0903(SHAMINO, "Or maybe some WINE>>>");
 	} else {
 		var0002 = ["water", "blood", "wine", "beer", "ale", "stuff", "stuff", "stuff", "stuff", "stuff", "laststuff"];

@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, 0xFFD2, 0xFFD1, 0xFFD0, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, 0xFFDE, 0xFF64, 0xFFBB, 0xFFB3, 0xFFEE, 0xFFDF, 0xFFE6, 0xFFEC, 0xFFEF, 0xFFFC, 0xFFED, 0xFFF2, 0xFFE8, 0xFFEA, 0xFFE5, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, 0xFFD2, 0xFFD1, 0xFFD0, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, 0xFFDE, 0xFF64, 0xFFBB, 0xFFB3, 0xFFEE, 0xFFDF, 0xFFE6, 0xFFEC, 0xFFEF, ANDRIO, 0xFFED, 0xFFF2, 0xFFE8, 0xFFEA, 0xFFE5, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -22512,30 +22512,30 @@ void Func0404 object#(0x404) () {
 			call Func0329;
 		};
 	}
-	if ((event == PROXIMITY) && (0xFFFC->get_schedule_type() == HOUND)) {
+	if ((event == PROXIMITY) && (ANDRIO->get_schedule_type() == HOUND)) {
 		if (UI_get_random(0x000A) < 0x0006) {
 			abort;
 		}
 		var0005 = ["@How fascinating!@", "@Pay me no mind.@", "@I am simply watching...@", "@What art thou doing?@", "@I do hope I'm not in the way...@", "@May I see?@"];
-		Func097F(0xFFFC, var0005[UI_get_random(UI_get_array_size(var0005))], 0x0000);
+		Func097F(ANDRIO, var0005[UI_get_random(UI_get_array_size(var0005))], 0x0000);
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say(("@Good " + var0003) + "!@");
-		0xFFFC->Func07D1();
-		Func097F(0xFFFC, (("@Greetings, " + var0000) + "."), 0x0002);
-		0xFFFC->set_schedule_type(TALK);
+		ANDRIO->Func07D1();
+		Func097F(ANDRIO, (("@Greetings, " + var0000) + "."), 0x0002);
+		ANDRIO->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFFC->run_schedule();
-		0xFFFC->clear_item_say();
-		0xFFFC->show_npc_face0(0x0000);
-		var0006 = 0xFFFC->get_item_flag(MET);
+		ANDRIO->run_schedule();
+		ANDRIO->clear_item_say();
+		ANDRIO->show_npc_face0(0x0000);
+		var0006 = ANDRIO->get_item_flag(MET);
 		if (gflags[0x0004]) {
 			say("\"Oh, am I glad to see thee! I have been very scared.\"");
 			add("scared");
 			gflags[0x00F4] = true;
 		} else if (var0006 == false) {
-			0xFFFC->set_item_flag(MET);
+			ANDRIO->set_item_flag(MET);
 			say("\"Hello, I am Andrio. I never meet outsiders. Couldst thou tell me all about thy travels and adventures?\"");
 			add("adventures");
 		} else {
@@ -22704,7 +22704,7 @@ void Func0404 object#(0x404) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Must be going...@", 0x0000);
-				Func097F(0xFFFC, "@I thank thee.@", 0x0002);
+				Func097F(ANDRIO, "@I thank thee.@", 0x0002);
 				Func08FF();
 				break;
 		}
@@ -25455,9 +25455,9 @@ void Func0413 object#(0x413) () {
 		converse (["bye"]) {
 			case "kidnap" (remove):
 				say("\"Thou shouldst ask Andrio -- I am certain that he could help thee! He is very bright.\"");
-				if (0xFFFC->npc_nearby()) {
-					0xFFFC->set_schedule_type(TALK);
-					Func097F(0xFFFC, "@I can help!@", 0x0002);
+				if (ANDRIO->npc_nearby()) {
+					ANDRIO->set_schedule_type(TALK);
+					Func097F(ANDRIO, "@I can help!@", 0x0002);
 				}
 				fallthrough;
 
@@ -25504,8 +25504,8 @@ void Func0413 object#(0x413) () {
 
 			case "Torrissio" (remove):
 				say("\"Torrissio can be quite mean, I have heard. Andrio is afraid of him, I know that.\"");
-				if (Func0942(0xFFFC)) {
-					0xFFFC->show_npc_face1(0x0000);
+				if (Func0942(ANDRIO)) {
+					ANDRIO->show_npc_face1(0x0000);
 					say("\"I am not!\"");
 					0x0000->set_conversation_slot();
 					say("\"Yes, thou art!\"");
@@ -73930,8 +73930,8 @@ void Func0723 object#(0x723) () {
 						var000C = UI_create_new_object(0x0289);
 						if (var000C) {
 							var000C->set_item_frame(0x0005);
-							var000D = UI_die_roll(0xFFFC, 0x0004);
-							var000E = UI_die_roll(0xFFFC, 0x0004);
+							var000D = UI_die_roll(-4, 4);
+							var000E = UI_die_roll(-4, 4);
 							var0006 = UI_update_last_created([(var0005[0x0001] + var000D), (var0005[0x0002] + var000E), 0x0000]);
 						}
 						var000B -= 0x0001;
@@ -78784,11 +78784,11 @@ void Func07D8 object#(0x7D8) () {
 		0xFFDF->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, EVENING], [SLEEP, EAT, MAJOR_SIT, WANDER, EAT], [0x08F8, 0x071C, 0x090A, 0x0718, 0x08F7, 0x0737, 0x0915, 0x0722, 0x090A, 0x0718]);
 		0xFFF1->set_new_schedules([MIDNIGHT, DAWN, MORNING], [SLEEP, EAT, TEND_SHOP], [0x0914, 0x06E7, 0x0919, 0x06E7, 0x093C, 0x0782]);
 		0xFFED->set_new_schedules([MIDNIGHT, DAWN, AFTERNOON, EVENING], [SLEEP, WANDER, WANDER, WANDER], [0x0937, 0x07C5, 0x08E3, 0x0743, 0x0983, 0x07A6, 0x09A3, 0x0823]);
-		0xFFFC->set_new_schedules([MIDNIGHT, DAWN, AFTERNOON, EVENING], [SLEEP, WANDER, WANDER, WANDER], [0x0937, 0x07C5, 0x08E3, 0x0743, 0x0983, 0x07A6, 0x09A3, 0x0823]);
+		ANDRIO->set_new_schedules([MIDNIGHT, DAWN, AFTERNOON, EVENING], [SLEEP, WANDER, WANDER, WANDER], [0x0937, 0x07C5, 0x08E3, 0x0743, 0x0983, 0x07A6, 0x09A3, 0x0823]);
 		0xFFDF->run_schedule();
 		0xFFF1->run_schedule();
 		0xFFED->run_schedule();
-		0xFFFC->run_schedule();
+		ANDRIO->run_schedule();
 		if (0xFF58->get_item_flag(DEAD)) {
 			0xFF58->resurrect_npc();
 			gflags[0x0149] = true;
@@ -80343,8 +80343,8 @@ void Func07ED object#(0x7ED) () {
 		};
 		var0002 = 0x0000;
 		while (var0002 < 0x0008) {
-			var0003 = UI_die_roll(0xFFFC, 0x0004);
-			var0004 = UI_die_roll(0xFFFC, 0x0004);
+			var0003 = UI_die_roll(-4, 4);
+			var0004 = UI_die_roll(-4, 4);
 			var0005 = UI_create_new_object(0x0121);
 			if (var0005) {
 				var0006 = UI_die_roll(0x0000, 0x0005);
@@ -89130,7 +89130,7 @@ void Func0826 0x826 (var var0000) {
 				wait 1;
 			};
 		};
-		0xFFF1->obj_sprite_effect(ANIMATION_PURPLE_BUBBLES, 0xFFFC, 0xFFFC, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
+		0xFFF1->obj_sprite_effect(ANIMATION_PURPLE_BUBBLES, -4, -4, 0, 0, 0, LOOP_ONCE);
 		var0005 = AVATAR->get_object_position();
 		0xFFF1->show_npc_face0(0x0000);
 		say("\"Take thy gem!\"");
@@ -106252,7 +106252,7 @@ void Func08FF 0x8FF () {
 	if (gflags[0x00D7]) {
 		abort;
 	}
-	var0000 = ((((((((((((((0xFFEA->get_item_flag(MET) + 0xFFE6->get_item_flag(MET)) + 0xFFEF->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + 0xFFF2->get_item_flag(MET)) + 0xFFE8->get_item_flag(MET)) + 0xFFF1->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + 0xFFE9->get_item_flag(MET)) + 0xFFE2->get_item_flag(MET)) + 0xFFE4->get_item_flag(MET)) + 0xFFF3->get_item_flag(MET)) + 0xFFE5->get_item_flag(MET)) + 0xFFFC->get_item_flag(MET)) + 0xFFED->get_item_flag(MET)) + gflags[0x00D6];
+	var0000 = ((((((((((((((0xFFEA->get_item_flag(MET) + 0xFFE6->get_item_flag(MET)) + 0xFFEF->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + 0xFFF2->get_item_flag(MET)) + 0xFFE8->get_item_flag(MET)) + 0xFFF1->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + 0xFFE9->get_item_flag(MET)) + 0xFFE2->get_item_flag(MET)) + 0xFFE4->get_item_flag(MET)) + 0xFFF3->get_item_flag(MET)) + 0xFFE5->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + 0xFFED->get_item_flag(MET)) + gflags[0x00D6];
 	if ((var0000 >= 0x0003) && (!gflags[0x00D7])) {
 		var0001 = 0xFFE7->approach_avatar(0x005A, 0x0028);
 		if (var0001) {
@@ -106928,7 +106928,7 @@ void Func0917 0x917 (var var0000, var var0001) {
 	var var0009;
 
 	if (var0001 == 0x0001) {
-		var0002 = 0xFFFC;
+		var0002 = -4;
 		var0003 = 0x007C;
 		var0004 = var0000[0x0001]->find_nearby(0x00C7, 0x0019, MASK_NONE);
 		var0005 = script var0004 {
@@ -106936,7 +106936,7 @@ void Func0917 0x917 (var var0000, var var0001) {
 		};
 	}
 	if (var0001 == 0x0000) {
-		var0002 = 0x0004;
+		var0002 =  4;
 		var0003 = 0x0034;
 	}
 	for (var0008 in var0000 with var0006 to var0007) {
