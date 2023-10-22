@@ -76126,8 +76126,8 @@ void Func0761 object#(0x761) () {
 	var0001 = 0x000F + Func0941(AVATAR);
 	while (var0001 != 0x0000) {
 		var0001 -= 0x0001;
-		var0002 = var0000[0x0001] + UI_die_roll(0xFFF7, 0x000A);
-		var0003 = var0000[0x0002] + UI_die_roll(0xFFEE, 0x000F);
+		var0002 = var0000[0x0001] + UI_die_roll( -9, 10);
+		var0003 = var0000[0x0002] + UI_die_roll(-18, 15);
 		var0004 = var0000[0x0003];
 		var0005 = [var0002, var0003, 0x0000];
 		var0006 = UI_die_roll(0x0001, 0x0004);
@@ -90526,7 +90526,7 @@ var Func0832 0x832 (var var0000) {
 		return -7;
 	}
 	if ((var0000 == 0x000E) || (var0000 == 0x000F)) {
-		return 0xFFF7;
+		return -9;
 	}
 	return 0;
 }

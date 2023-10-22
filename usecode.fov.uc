@@ -11726,10 +11726,10 @@ void Func0409 object#(0x409) () {
 	var var000B;
 
 	if (event == DOUBLECLICK) {
-		0xFFF7->show_npc_face(0x0000);
+		KATRINA->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_get_party_list();
-		var0002 = 0xFFF7->get_npc_object();
+		var0002 = KATRINA->get_npc_object();
 		var0003 = Func0908();
 		var0004 = Func08F7(SHAMINO);
 		var0005 = Func08F7(IOLO);
@@ -11805,7 +11805,7 @@ void Func0409 object#(0x409) () {
 					say("\"It would be an honor, ",
 						var0000,
 						"!\"");
-					0xFFF7->add_to_party();
+					KATRINA->add_to_party();
 					add("leave");
 					remove("join");
 				} else {
@@ -11820,13 +11820,13 @@ void Func0409 object#(0x409) () {
 				var000B = Func090B(["wait here", "go home"]);
 				if (var000B == "wait here") {
 					say("\"I shall be happy to wait here until thou dost return.\"*");
-					0xFFF7->remove_from_party();
-					0xFFF7->get_npc_object()->set_schedule_type(WAIT);
+					KATRINA->remove_from_party();
+					KATRINA->get_npc_object()->set_schedule_type(WAIT);
 					abort;
 				}
 				say("\"If thou dost think it best, I shall. If thou dost need me again thou dost have but to ask.\"*");
-				0xFFF7->remove_from_party();
-				0xFFF7->get_npc_object()->set_schedule_type(LOITER);
+				KATRINA->remove_from_party();
+				KATRINA->get_npc_object()->set_schedule_type(LOITER);
 				abort;
 
 			case "New Magincia":
@@ -11889,9 +11889,9 @@ void Func0409 object#(0x409) () {
 				} else {
 					say("\"How hast thou been keeping thyself all these years, Iolo?\"*");
 					IOLO->say("\"The years have not been as kind to me as they obviously have been to thee, milady.\"*");
-					0xFFF7->say("\"Ha! I see thou art still a scallywag, Iolo.\"*");
+					KATRINA->say("\"Ha! I see thou art still a scallywag, Iolo.\"*");
 					IOLO->hide();
-					0xFFF7->show_npc_face(0x0000);
+					KATRINA->show_npc_face(0x0000);
 				}
 				remove("Iolo");
 				fallthrough;
@@ -11902,9 +11902,9 @@ void Func0409 object#(0x409) () {
 				} else {
 					say("\"Is that a gray hair I see in thine hair, Shamino?\"*");
 					SHAMINO->say("\"It is not! Where?\"*");
-					0xFFF7->say("\"Perhaps it is but a trick of the light.\"*");
+					KATRINA->say("\"Perhaps it is but a trick of the light.\"*");
 					SHAMINO->hide();
-					0xFFF7->show_npc_face(0x0000);
+					KATRINA->show_npc_face(0x0000);
 				}
 				remove("Shamino");
 				fallthrough;
@@ -11915,10 +11915,10 @@ void Func0409 object#(0x409) () {
 				} else {
 					say("\"Sir Dupre, hast thou finished thy studies yet?\"*");
 					DUPRE->say("Dupre looks confounded. \"My studies, milady?\"*");
-					0xFFF7->say("\"Of all the various drinking establishments in Britannia!\"*");
+					KATRINA->say("\"Of all the various drinking establishments in Britannia!\"*");
 					DUPRE->say("\"Oh, yes, of course, my studies! Continuing mine education has always been of the utmost importance to me.\"*");
 					DUPRE->hide();
-					0xFFF7->show_npc_face(0x0000);
+					KATRINA->show_npc_face(0x0000);
 				}
 				remove("Dupre");
 				fallthrough;
@@ -11931,7 +11931,7 @@ void Func0409 object#(0x409) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFF7);
+		Func092E(KATRINA);
 	}
 }
 
@@ -30278,13 +30278,13 @@ labelFunc0482_00E5:
 
 			case "Katrina":
 				say("\"Katrina has come to the aid of the people of this town on more than one occasion. She gets an interesting smile on her face whenever thy name is mentioned.\"");
-				var000F = Func08F7(0xFFF7);
+				var000F = Func08F7(KATRINA);
 				if (var000F) {
-					0xFFF7->say("\"That is because the Avatar is one my dearest friends.\"");
+					KATRINA->say("\"That is because the Avatar is one my dearest friends.\"");
 					0xFF7E->say("\"Am I not one of thy dearest friends, Katrina?\"");
-					0xFFF7->say("\"Thou art a flirt, Boris! Dost Magenta know how thou dost want to be dearest friends with the other women living on the island?\"");
+					KATRINA->say("\"Thou art a flirt, Boris! Dost Magenta know how thou dost want to be dearest friends with the other women living on the island?\"");
 					0xFF7E->say("\"Thou dost torture me, Katrina!\" He laughs.");
-					0xFFF7->hide();
+					KATRINA->hide();
 					0xFF7E->show_npc_face(0x0000);
 				}
 				remove("Katrina");
@@ -30587,12 +30587,12 @@ void Func0484 object#(0x484) () {
 
 			case "Katrina":
 				say("\"Katrina is a shepherd here on New Magincia. She has been a friend of mine since I was a boy.\"");
-				var0001 = Func08F7(0xFFF7);
+				var0001 = Func08F7(KATRINA);
 				if (var0001) {
-					0xFFF7->say("\"We have had some good memories, have we not, Henry?\"");
+					KATRINA->say("\"We have had some good memories, have we not, Henry?\"");
 					0xFF7C->say("\"Oh that we have! But thou wouldst not be my sweetheart, so we resigned ourselves to being 'just friends' a long time ago, is that not true?\"");
-					0xFFF7->say("\"Whatever thou dost say, dear Henry.\"");
-					0xFFF7->hide();
+					KATRINA->say("\"Whatever thou dost say, dear Henry.\"");
+					KATRINA->hide();
 					0xFF7C->show_npc_face(0x0000);
 				}
 				remove("Katrina");
@@ -30627,11 +30627,11 @@ void Func0484 object#(0x484) () {
 					Func0911(0x0032);
 					say("You hand the locket to Henry. \"Now I may give it to Constance and keep my promise to her! I cannot thank thee enough, Avatar!\"");
 					gflags[0x01CD] = true;
-					var0004 = Func08F7(0xFFF7);
+					var0004 = Func08F7(KATRINA);
 					if (var0004) {
-						0xFFF7->say("\"I am glad that this situation has concluded in thy favor, dear Henry.\"");
+						KATRINA->say("\"I am glad that this situation has concluded in thy favor, dear Henry.\"");
 						0xFF7C->say("\"My thanks to thee, Katrina.\"");
-						0xFFF7->hide();
+						KATRINA->hide();
 						0xFF7C->show_npc_face(0x0000);
 					}
 				} else {
@@ -69071,7 +69071,7 @@ void Func088A 0x88A () {
 	var0001 = 0x0000;
 	var0002 = UI_get_party_list();
 	var0003 = JULIA->get_npc_object();
-	var0004 = 0xFFF7->get_npc_object();
+	var0004 = KATRINA->get_npc_object();
 	for (var0007 in var0002 with var0005 to var0006) {
 		var0001 += 0x0001;
 	}
@@ -70896,7 +70896,7 @@ void Func08A6 0x8A6 (var var0000, var var0001) {
 			var0007 = "find";
 		} else {
 			var0007 = "finds";
-			if ((var0002 == JAANA) || ((var0002 == JULIA) || (var0002 == 0xFFF7))) {
+			if ((var0002 == JAANA) || ((var0002 == JULIA) || (var0002 == KATRINA))) {
 				var0005 = "she";
 				var0006 = "her";
 			} else {
@@ -73500,7 +73500,7 @@ void Func08D0 0x8D0 (var var0000, var var0001) {
 		var0003 = "you";
 		var0006 = "you";
 		var0004 = "feel";
-	} else if ((var0002 == JULIA) || ((var0002 == JAANA) || (var0002 == 0xFFF7))) {
+	} else if ((var0002 == JULIA) || ((var0002 == JAANA) || (var0002 == KATRINA))) {
 		var0006 = "her";
 	} else {
 		var0006 = "him";
@@ -74657,7 +74657,7 @@ void Func08E5 0x8E5 (var var0000, var var0001) {
 	var var000E;
 
 	var0002 = Func0921(SENTRI->get_npc_object());
-	if ((var0002 == JULIA) || ((var0002 == JAANA) || (var0002 == 0xFFF7))) {
+	if ((var0002 == JULIA) || ((var0002 == JAANA) || (var0002 == KATRINA))) {
 		var0003 = true;
 	} else {
 		var0003 = false;
@@ -75706,7 +75706,7 @@ var Func0902 0x902 () {
 	var var0003;
 	var var0004;
 
-	var0000 = [IOLO, SHAMINO, DUPRE, JAANA, SENTRI, JULIA, 0xFFF7, SPARK, 0xFFF6];
+	var0000 = [IOLO, SHAMINO, DUPRE, JAANA, SENTRI, JULIA, KATRINA, SPARK, 0xFFF6];
 	var0001 = UI_get_party_list();
 	for (var0004 in var0000 with var0002 to var0003) {
 		if (var0004->get_npc_object() in var0001) {
