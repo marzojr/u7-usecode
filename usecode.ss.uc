@@ -2367,7 +2367,7 @@ void Func00E6 shape#(0xE6) () {
 				var0017 &= UI_get_party_list2();
 				var0017 = Func0988(AVATAR->get_npc_object(), var0017);
 				var0017 = Func0988(0xFFE4, var0017);
-				var0017 = Func0988(0xFFE6, var0017);
+				var0017 = Func0988(MORTEGRO, var0017);
 				var0017 = Func0988(0xFF58, var0017);
 				for (var000F in var0017 with var001A to var001B) {
 					if (var000F->get_item_flag(IN_PARTY)) {
@@ -2403,7 +2403,7 @@ void Func00E6 shape#(0xE6) () {
 		var0017 &= UI_get_party_list2();
 		var0017 = Func0988(AVATAR->get_npc_object(), var0017);
 		var0017 = Func0988(0xFFE4, var0017);
-		var0017 = Func0988(0xFFE6, var0017);
+		var0017 = Func0988(MORTEGRO, var0017);
 		var0017 = Func0988(0xFF58, var0017);
 		for (var000F in var0017 with var001E to var001F) {
 			if (var000F->get_item_flag(IN_PARTY)) {
@@ -7561,7 +7561,7 @@ void Func01C7 shape#(0x1C7) () {
 				actor frame sitting;
 				say (("@" + var0004) + " is doomed...@");
 			};
-			var000A = script 0xFFE6 {
+			var000A = script MORTEGRO {
 				nohalt;
 				face north;
 				actor frame bowing;
@@ -7583,7 +7583,7 @@ void Func01C7 shape#(0x1C7) () {
 		if (FILBERCIO->get_npc_id() == 0x0009) {
 			FILBERCIO->set_npc_id(0x000A);
 			UI_init_conversation();
-			0xFFE6->show_npc_face0(0x0000);
+			MORTEGRO->show_npc_face0(0x0000);
 			say("\"As with all who offend the MageLord, this criminal must be sent to the hellhole known as Dungeon Freedom.\"");
 			UI_play_music(0x0017, Func09A0(0x0005, 0x0001));
 			UI_end_conversation();
@@ -7598,7 +7598,7 @@ void Func01C7 shape#(0x1C7) () {
 				wait 4;
 				call Func01C7;
 			};
-			var000A = script 0xFFE6 {
+			var000A = script MORTEGRO {
 				nohalt;
 				wait 2;
 				face east;
@@ -7626,7 +7626,7 @@ void Func01C7 shape#(0x1C7) () {
 			say("\"Guilty!\"");
 			UI_end_conversation();
 			Func097F(FILBERCIO, "@And the sentence?@", 0x0000);
-			Func09AF(GUSTACIO, 0xFFE6, 0x0004, Func01C7);
+			Func09AF(GUSTACIO, MORTEGRO, 0x0004, Func01C7);
 			var000A = script AVATAR {
 				nohalt;
 				wait 2;
@@ -7863,7 +7863,7 @@ void Func01C7 shape#(0x1C7) () {
 			UI_play_music(0x0027, Func09A0(0x0005, 0x0001));
 			var0017 = Func098D();
 			var0017 = Func0988(0xFFE4, var0017);
-			var0017 = Func0988(0xFFE6, var0017);
+			var0017 = Func0988(MORTEGRO, var0017);
 			var0017 = Func0988(0xFF58, var0017);
 			var0018 = 0x0000;
 			for (var0016 in var0017 with var0019 to var001A) {
@@ -7933,9 +7933,9 @@ void Func01C7 shape#(0x1C7) () {
 				actor frame bowing;
 				actor frame sitting;
 			};
-			0xFFE6->set_schedule_type(WAIT);
-			0xFFE6->move_object([0x092F, 0x0758, 0x0001]);
-			var000A = script 0xFFE6 after 12 ticks {
+			MORTEGRO->set_schedule_type(WAIT);
+			MORTEGRO->move_object([0x092F, 0x0758, 0x0001]);
+			var000A = script MORTEGRO after 12 ticks {
 				nohalt;
 				face north;
 				actor frame bowing;
@@ -8035,7 +8035,7 @@ void Func01C7 shape#(0x1C7) () {
 			UI_end_conversation();
 			var0017 = [AVATAR, FRIGIDAZZI, FILBERCIO] & Func098D();
 			var0017 = Func0988(0xFFE4, var0017);
-			var0017 = Func0988(0xFFE6, var0017);
+			var0017 = Func0988(MORTEGRO, var0017);
 			var0017 = Func0988(0xFF58, var0017);
 			for (var0016 in var0017 with var001B to var001C) {
 				var000A = var0016->get_npc_name();
@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, 0xFFD2, 0xFFD1, 0xFFD0, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, 0xFFDE, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, 0xFFDF, 0xFFE6, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, 0xFFE5, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, 0xFFD2, 0xFFD1, 0xFFD0, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, 0xFFDE, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, 0xFFDF, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, 0xFFE5, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -20356,7 +20356,7 @@ void Func03DB shape#(0x3DB) () {
 					frame 10;
 				};
 				halt_scheduled();
-				var0002 = item->run_script(var0001 & [(byte)0x0B, 0xFFE6, 0x0002]);
+				var0002 = item->run_script(var0001 & [(byte)0x0B, -26, 2]);
 			}
 			abort;
 		}
@@ -20394,7 +20394,7 @@ void Func03DB shape#(0x3DB) () {
 				frame 5;
 			};
 		}
-		var0002 = item->run_script(var0001 & [(byte)0x0B, 0xFFE6, 0x0002]);
+		var0002 = item->run_script(var0001 & [(byte)0x0B, -26, 2]);
 	}
 }
 
@@ -27014,7 +27014,7 @@ void Func041A object#(0x41A) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Ho, mage!@");
-		0xFFE6->Func07D1();
+		MORTEGRO->Func07D1();
 		var0006 = find_nearby(0x0366, 0x0014, MASK_NONE);
 		for (var0009 in var0006 with var0007 to var0008) {
 			if (var0009->get_item_quality() == 0x00B5) {
@@ -27023,71 +27023,71 @@ void Func041A object#(0x41A) () {
 		}
 		if ((var0003 == 0x0016) && (!gflags[0x0215])) {
 			item->Func07D2();
-			Func097F(0xFFE6, "@Help!", 0x0002);
-			var0006 = script 0xFFE6 after 7 ticks {
+			Func097F(MORTEGRO, "@Help!", 0x0002);
+			var0006 = script MORTEGRO after 7 ticks {
 				nohalt;
 				call Func041A;
 			};
 		} else {
-			Func097F(0xFFE6, "@What dost thou wish?@", 0x0005);
-			0xFFE6->set_schedule_type(TALK);
+			Func097F(MORTEGRO, "@What dost thou wish?@", 0x0005);
+			MORTEGRO->set_schedule_type(TALK);
 		}
 	}
 	if (event == PROXIMITY) {
 		if ((var0003 == 0x0016) && (!gflags[0x0215])) {
 			var000A = UI_get_random(0x0006);
 			if (var000A == 0x0001) {
-				0xFFE6->item_say("@Another spell failed!@");
+				MORTEGRO->item_say("@Another spell failed!@");
 			}
 			if (var000A == 0x0002) {
-				0xFFE6->item_say("@Help! Someone help me!@");
+				MORTEGRO->item_say("@Help! Someone help me!@");
 			}
 			if (var000A == 0x0003) {
-				0xFFE6->item_say("@Lower the drawbridge!@");
+				MORTEGRO->item_say("@Lower the drawbridge!@");
 			}
 			if (var000A == 0x0004) {
-				0xFFE6->item_say("@Release me, please!@");
+				MORTEGRO->item_say("@Release me, please!@");
 			}
 			if (var000A == 0x0005) {
-				0xFFE6->item_say("@Why will my spells not work?@");
+				MORTEGRO->item_say("@Why will my spells not work?@");
 			}
 			if (var000A == 0x0006) {
-				0xFFE6->item_say("@How did I arrive here?@");
+				MORTEGRO->item_say("@How did I arrive here?@");
 			}
 		} else {
 			var000A = UI_get_random(0x0006);
 			if (var000A == 0x0001) {
-				0xFFE6->item_say("@How shall I return home?@");
+				MORTEGRO->item_say("@How shall I return home?@");
 			}
 			if (var000A == 0x0002) {
-				0xFFE6->item_say("@I am so lost...@");
+				MORTEGRO->item_say("@I am so lost...@");
 			}
 			if (var000A == 0x0003) {
-				0xFFE6->item_say("@Where am I?@");
+				MORTEGRO->item_say("@Where am I?@");
 			}
 			if (var000A == 0x0004) {
-				0xFFE6->item_say("@How did I arrive here?@");
+				MORTEGRO->item_say("@How did I arrive here?@");
 			}
 			if (var000A == 0x0005) {
-				0xFFE6->item_say("@I am so cold...@");
-				0xFFE6->set_schedule_type(DANCE);
+				MORTEGRO->item_say("@I am so cold...@");
+				MORTEGRO->set_schedule_type(DANCE);
 			}
 			if (var000A == 0x0006) {
-				0xFFE6->item_say("@Perhaps this direction...@");
-				0xFFE6->set_schedule_type(PACE_HORIZONTAL);
+				MORTEGRO->item_say("@Perhaps this direction...@");
+				MORTEGRO->set_schedule_type(PACE_HORIZONTAL);
 			}
 		}
 	}
 	if (event == STARTED_TALKING) {
-		0xFFE6->clear_item_say();
-		if (0xFFE6->get_item_flag(IN_PARTY)) {
-			0xFFE6->set_schedule_type(FOLLOW_AVATAR);
+		MORTEGRO->clear_item_say();
+		if (MORTEGRO->get_item_flag(IN_PARTY)) {
+			MORTEGRO->set_schedule_type(FOLLOW_AVATAR);
 			add("leave");
 		} else {
-			0xFFE6->run_schedule();
+			MORTEGRO->run_schedule();
 		}
-		0xFFE6->show_npc_face0(0x0000);
-		var000B = 0xFFE6->get_item_flag(MET);
+		MORTEGRO->show_npc_face0(0x0000);
+		var000B = MORTEGRO->get_item_flag(MET);
 		if ((gflags[0x0215] == true) && (!gflags[0x0216])) {
 			gflags[0x0216] = true;
 			say("\"Many thanks, ",
@@ -27106,8 +27106,8 @@ void Func041A object#(0x41A) () {
 					say("\"Suit thyself...\"");
 					say("\"Perhaps I can find another way to escape before I starve to death.\"");
 					gflags[0x0214] = true;
-					0xFFE6->set_schedule_type(SHY);
-					Func097F(0xFFE6, "@So cold...@", 0x0000);
+					MORTEGRO->set_schedule_type(SHY);
+					Func097F(MORTEGRO, "@So cold...@", 0x0000);
 					abort;
 				}
 			} else {
@@ -27115,7 +27115,7 @@ void Func041A object#(0x41A) () {
 					say("\"Excuse me, ",
 						var0000,
 						"! My name is Mortegro, mage of Moonshade.\"");
-					0xFFE6->set_item_flag(MET);
+					MORTEGRO->set_item_flag(MET);
 				} else {
 					say("\"Avatar! I am glad to see thee!\"");
 				}
@@ -27124,7 +27124,7 @@ void Func041A object#(0x41A) () {
 			add(["trapped", "spell"]);
 		} else if (var000B == false) {
 			say("\"Hello, there! I am Mortegro, the Necromage of Moonshade.\"");
-			0xFFE6->set_item_flag(MET);
+			MORTEGRO->set_item_flag(MET);
 		} else {
 			say("\"Hello once again, ",
 				var0002,
@@ -27182,10 +27182,10 @@ void Func041A object#(0x41A) () {
 				say("\"So! Thou dost suspect me of kidnapping thy friend!\"");
 				say("\"Mine interest lies with dead beings, not with living persons. I do not have thy friend, nor do I know who doth have him.\"");
 				say("\"Thine impudence is beyond belief! Always, 'tis the superstitious and the jealous who persecute the Necromancer...\"");
-				var000C = 0xFFE6->get_object_position();
+				var000C = MORTEGRO->get_object_position();
 				UI_sprite_effect(ANIMATION_TELEPORT2, var000C[0x0001], var000C[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 				UI_play_sound_effect(0x0082);
-				0xFFE6->move_object([0x046E, 0x0985, 0x0000]);
+				MORTEGRO->move_object([0x046E, 0x0985, 0x0000]);
 				var0006 = Func0992(0x0001, "@Where did he go?@", "@Shazzam!@", true);
 				abort;
 
@@ -27230,7 +27230,7 @@ void Func041A object#(0x41A) () {
 				fallthrough;
 
 			case "seance" (remove):
-				if (0xFFE6->get_schedule_type() == LAB) {
+				if (MORTEGRO->get_schedule_type() == LAB) {
 					if ((UI_get_timer(0x0006) < 0x000C) && gflags[0x0129]) {
 						say("\"Speaking with the spirits of the dead doth fatigue me. We must wait another day before I can muster the energies required.\"");
 					} else {
@@ -27256,11 +27256,11 @@ void Func041A object#(0x41A) () {
 							say("\"No! It cannot be true! She cannot be dead! I refuse to believe it!\"");
 							var0006 = "@Gwenno!@" & "@Come back to me!@";
 							Func094F(IOLO, var0006);
-							Func097F(0xFFE6, "@Spirits do not lie.@", 0x0005);
+							Func097F(MORTEGRO, "@Spirits do not lie.@", 0x0005);
 							gflags[0x0131] = true;
 							abort;
 						} else {
-							0xFFE6->show_npc_face0(0x0000);
+							MORTEGRO->show_npc_face0(0x0000);
 							say("\"Once again I call out to the spirit of Edrin, brother of Kane. If thou canst hear me, Edrin, please contact us. Thy brother Kane dost need to know if thou hast perished. Thou hast been missing for so long that even thy brother dost think that he shall never see thee again. If thou canst hear my words, please contact us.\"");
 							var000D = Func0992(0x0001, "@There seems to be no reply.@", "@There is no reply.@", false);
 							0x0000->set_conversation_slot();
@@ -27342,7 +27342,7 @@ void Func041A object#(0x41A) () {
 				fallthrough;
 
 			case "bye":
-				if (gflags[0x0216] && (!0xFFE6->get_item_flag(IN_PARTY))) {
+				if (gflags[0x0216] && (!MORTEGRO->get_item_flag(IN_PARTY))) {
 					say("\"Wouldst thou allow me to accompany thee back to Moonshade? I am afraid that I do not know where I am.\"");
 					do {
 						if (UI_get_array_size(UI_get_party_list2()) > 0x0004) {
@@ -27351,25 +27351,25 @@ void Func041A object#(0x41A) () {
 						}
 						if (Func0955() == true) {
 							say("\"I do not believe I could return home without thy guidance... For all that I am an Adept.\"");
-							0xFFE6->add_to_party();
-							Func097F(0xFFE6, "@Thank thee!@", 0x0000);
+							MORTEGRO->add_to_party();
+							Func097F(MORTEGRO, "@Thank thee!@", 0x0000);
 							abort;
 						}
 					} while (false)
 					nobreak {
 						say("\"Well, perhaps I can find my way home on mine own... I am an Adept, after all.\"");
-						Func097F(0xFFE6, "@What lies this way?@", 0x0000);
-						0xFFE6->set_schedule_type(WANDER);
+						Func097F(MORTEGRO, "@What lies this way?@", 0x0000);
+						MORTEGRO->set_schedule_type(WANDER);
 						abort;
 					}
 				}
 				UI_remove_npc_face0();
 				if ((var0003 == 0x0016) && (!gflags[0x0215])) {
 					Func097F(AVATAR, "@Stay calm.@", 0x0000);
-					Func097F(0xFFE6, "@Please help me!@", 0x0005);
+					Func097F(MORTEGRO, "@Please help me!@", 0x0005);
 				} else {
 					Func097F(AVATAR, "@Thanks for thine help.@", 0x0000);
-					Func097F(0xFFE6, (("@Fare thee well, " + var0000) + ".@"), 0x0005);
+					Func097F(MORTEGRO, (("@Fare thee well, " + var0000) + ".@"), 0x0005);
 				}
 				if (Func0994() == 0x000E) {
 					Func08FF();
@@ -72363,11 +72363,11 @@ void Func0706 object#(0x706) () {
 	var var0001;
 
 	var0000 = UI_get_party_list();
-	if (0xFFE6 in var0000) {
-		var0001 = 0xFFE6->get_object_position();
+	if (MORTEGRO in var0000) {
+		var0001 = MORTEGRO->get_object_position();
 		var0001[0x0001] -= var0001[0x0003] / 0x0002;
 		var0001[0x0002] -= var0001[0x0003] / 0x0002;
-		0xFFE6->remove_npc();
+		MORTEGRO->remove_npc();
 		UI_sprite_effect(ANIMATION_LIGHTNING, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 	}
 }
@@ -78014,18 +78014,18 @@ void Func07AF object#(0x7AF) () {
 	var var0006;
 	var var0007;
 
-	if (0xFFE6->get_npc_object() in UI_get_party_list()) {
+	if (MORTEGRO->get_npc_object() in UI_get_party_list()) {
 		if (event == SCRIPTED) {
-			var0000 = 0xFFE6->get_object_position();
+			var0000 = MORTEGRO->get_object_position();
 			var0000[0x0001] -= var0000[0x0003] / 0x0002;
 			var0000[0x0002] -= var0000[0x0003] / 0x0002;
 			UI_play_sound_effect(0x0074);
 			UI_lightning();
 			UI_sprite_effect(ANIMATION_LIGHTNING_RED, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			UI_sprite_effect(ANIMATION_POOF, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			var0000 = 0xFFE6->get_object_position();
-			0xFFE6->remove_from_party();
-			var0001 = 0xFFE6->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
+			var0000 = MORTEGRO->get_object_position();
+			MORTEGRO->remove_from_party();
+			var0001 = MORTEGRO->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
 			for (var0004 in var0001 with var0002 to var0003) {
 				var0005 = var0004->get_item_shape();
 				if ((var0005 == 0x0118) || ((var0005 == 0x0119) || ((var0005 == 0x011F) || ((var0005 == 0x0198) || ((var0005 == 0x01A8) || ((var0005 == 0x020F) || (var0005 == 0x0327))))))) {
@@ -78047,7 +78047,7 @@ void Func07AF object#(0x7AF) () {
 					}
 				}
 			}
-			0xFFE6->remove_npc();
+			MORTEGRO->remove_npc();
 		} else {
 			var0007 = script Func09A0(0x0000, 0x0001) after 10 ticks {
 				call Func07AF;
@@ -106252,7 +106252,7 @@ void Func08FF 0x8FF () {
 	if (gflags[0x00D7]) {
 		abort;
 	}
-	var0000 = ((((((((((((((GUSTACIO->get_item_flag(MET) + 0xFFE6->get_item_flag(MET)) + FEDABIBLIO->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + COLUMNA->get_item_flag(MET)) + MELINO->get_item_flag(MET)) + DUCIO->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + JULIA->get_item_flag(MET)) + 0xFFE2->get_item_flag(MET)) + 0xFFE4->get_item_flag(MET)) + BUCIA->get_item_flag(MET)) + 0xFFE5->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + FRELI->get_item_flag(MET)) + gflags[0x00D6];
+	var0000 = ((((((((((((((GUSTACIO->get_item_flag(MET) + MORTEGRO->get_item_flag(MET)) + FEDABIBLIO->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + COLUMNA->get_item_flag(MET)) + MELINO->get_item_flag(MET)) + DUCIO->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + JULIA->get_item_flag(MET)) + 0xFFE2->get_item_flag(MET)) + 0xFFE4->get_item_flag(MET)) + BUCIA->get_item_flag(MET)) + 0xFFE5->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + FRELI->get_item_flag(MET)) + gflags[0x00D6];
 	if ((var0000 >= 0x0003) && (!gflags[0x00D7])) {
 		var0001 = AUTO_MESSENGER->approach_avatar(0x005A, 0x0028);
 		if (var0001) {
@@ -106392,7 +106392,7 @@ void Func0901 0x901 () {
 	0xFFD5->run_schedule();
 	0xFFDB->set_new_schedules(MIDNIGHT, WANDER, [0x09A7, 0x07F7]);
 	0xFFDB->run_schedule();
-	Func09AC(0xFFE6, 0x060E, 0x020F, TEND_SHOP);
+	Func09AC(MORTEGRO, 0x060E, 0x020F, TEND_SHOP);
 	if (DUPRE->get_npc_id() == 0x001E) {
 		Func09AC(DUPRE, 0x08BC, 0x0705, EAT_AT_INN);
 	}
@@ -111797,7 +111797,7 @@ var Func098C 0x98C () {
 var Func098D 0x98D () {
 	var var0000;
 
-	var0000 = [DUPRE, SHAMINO, IOLO, 0xFF6B, 0xFFE4, 0xFFE6, 0xFFD3, 0xFFDE, 0xFFD4, 0xFF68, 0xFF58];
+	var0000 = [DUPRE, SHAMINO, IOLO, 0xFF6B, 0xFFE4, MORTEGRO, 0xFFD3, 0xFFDE, 0xFFD4, 0xFF68, 0xFF58];
 	return var0000;
 }
 

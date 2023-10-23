@@ -3664,9 +3664,9 @@ void Func01FA shape#(0x1FA) () {
 	var var0000;
 
 	if (event == SCRIPTED) {
-		0xFFE6->say("Batlin watches Hook's death with icy resignation. Time seems to slow as he turns to you. \"This battle is not done, Avatar. Dost thou imagine thyself an immortal? The Guardian is far more. Return to your precious Earth and rest.~Sleep, that he may visit your dreams with countless visions of death in the belly of the Great Sea Serpent.\"");
+		BATLIN->say("Batlin watches Hook's death with icy resignation. Time seems to slow as he turns to you. \"This battle is not done, Avatar. Dost thou imagine thyself an immortal? The Guardian is far more. Return to your precious Earth and rest.~Sleep, that he may visit your dreams with countless visions of death in the belly of the Great Sea Serpent.\"");
 		say("\"As for me, I shall begone! Thou shalt never find me! Farewell, Avatar!\"");
-		0xFFE6->hide();
+		BATLIN->hide();
 		var0000 = AVATAR->find_nearby(0x0193, 0x0028, MASK_NONE);
 		event = DOUBLECLICK;
 		var0000[0x0001]->Func0639();
@@ -6900,8 +6900,8 @@ void Func0303 shape#(0x303) () {
 					UI_run_endgame(true);
 				}
 			} else {
-				0xFFE6->say("The wand glows faintly. Batlin smirks. \"Not yet, Avatar.\"");
-				0xFFE6->hide();
+				BATLIN->say("The wand glows faintly. Batlin smirks. \"Not yet, Avatar.\"");
+				BATLIN->hide();
 				abort;
 			}
 		}
@@ -9218,7 +9218,7 @@ void Func03DB shape#(0x3DB) () {
 		// Note: need to add a way to do this in UCC without hard-coding the
 		// opcodes like this. Specifically, data flow so that the repeat
 		// can detect the number of bytes needed from the given array.
-		var0001 = item->run_script(var0000 & [(byte)0x0B, 0xFFE6, 0x0002]);
+		var0001 = item->run_script(var0000 & [(byte)0x0B, -26, 2]);
 		if (UI_die_roll(0x0001, 0x000A) == 0x0001) {
 			var0002 = get_object_position();
 			set_item_shape(0x03E0);
@@ -9348,7 +9348,7 @@ void Func03E0 shape#(0x3E0) () {
 		// Note: need to add a way to do this in UCC without hard-coding the
 		// opcodes like this. Specifically, data flow so that the repeat
 		// can detect the number of bytes needed from the given array.
-		var0001 = item->run_script(var0000 & [(byte)0x0B, 0xFFE6, 0x0002]);
+		var0001 = item->run_script(var0000 & [(byte)0x0B, -26, 2]);
 	}
 }
 
@@ -9404,7 +9404,7 @@ void Func03F5 shape#(0x3F5) () {
 			// Note: need to add a way to do this in UCC without hard-coding the
 			// opcodes like this. Specifically, data flow so that the repeat
 			// can detect the number of bytes needed from the given array.
-			var0001 = item->run_script(var0000 & [(byte)0x0B, 0xFFE6, 0x0002]);
+			var0001 = item->run_script(var0000 & [(byte)0x0B, -26, 2]);
 		}
 	}
 }
@@ -15076,15 +15076,15 @@ void Func041A object#(0x41A) () {
 	var var000D;
 
 	if (event == DOUBLECLICK) {
-		0xFFE6->show_npc_face(0x0000);
-		var0000 = 0xFFE6->get_npc_object()->get_schedule_type();
+		BATLIN->show_npc_face(0x0000);
+		var0000 = BATLIN->get_npc_object()->get_schedule_type();
 		var0001 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
 		if (var0001) {
 			say("Batlin's eyes narrow to red slits as he peers practically through you.");
 			say("\"Thou hast the Cube! Thou cannot use it against -me-!\"");
 			say("With that, Batlin turns with a flourish, and vanishes before your eyes!*");
 			gflags[0x00DA] = true;
-			0xFFE6->get_npc_object()->remove_npc();
+			BATLIN->get_npc_object()->remove_npc();
 			abort;
 		}
 		if (gflags[0x001E]) {
@@ -15131,7 +15131,7 @@ void Func041A object#(0x41A) () {
 		var0004 = Func0909();
 		var0005 = UI_wearing_fellowship();
 		var0006 = UI_part_of_day();
-		var0000 = 0xFFE6->get_npc_object()->get_schedule_type();
+		var0000 = BATLIN->get_npc_object()->get_schedule_type();
 		var0007 = Func0908();
 		if (var0000 == PREACH) {
 			if (gflags[0x008D] && (!gflags[0x0091])) {
@@ -15300,7 +15300,7 @@ void Func041A object#(0x41A) () {
 			case "package":
 				if (gflags[0x00D7] && (!gflags[0x008F])) {
 					say("\"Ah! I do hope thine hands are not too full to take the package.\"");
-					var0008 = 0xFFE6->find_object(0x031E, QUALITY_ANY, FRAME_ANY);
+					var0008 = BATLIN->find_object(0x031E, QUALITY_ANY, FRAME_ANY);
 					var0009 = var0008->set_last_created();
 					var000A = AVATAR->give_last_created();
 					if (var000A) {
@@ -15308,7 +15308,7 @@ void Func041A object#(0x41A) () {
 						gflags[0x008F] = true;
 						abort;
 					}
-					var000A = 0xFFE6->give_last_created();
+					var000A = BATLIN->give_last_created();
 					say("\"Avatar! I am tired of this! Please make room in thine inventory for the package!\"*");
 					abort;
 				}
@@ -15440,7 +15440,7 @@ void Func041A object#(0x41A) () {
 		say("\"Until we meet again, Avatar.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFE6);
+		Func092E(BATLIN);
 	}
 }
 
@@ -16228,7 +16228,7 @@ void Func0422 object#(0x422) () {
 		var0001 = 0xFFDE->get_npc_object()->get_schedule_type();
 		var0002 = UI_wearing_fellowship();
 		if (var0000 == NIGHT) {
-			var0003 = Func08FC(0xFFDE, 0xFFE6);
+			var0003 = Func08FC(0xFFDE, BATLIN);
 			if (var0003) {
 				say("Nanna gives you a stern look for bothering her during The Fellowship meeting, much like the look of an elementary school teacher you once had.*");
 				abort;
@@ -17050,7 +17050,7 @@ void Func0429 object#(0x429) () {
 		var0001 = UI_wearing_fellowship();
 		var0002 = UI_part_of_day();
 		if (var0002 == NIGHT) {
-			var0003 = Func08FC(0xFFD7, 0xFFE6);
+			var0003 = Func08FC(0xFFD7, BATLIN);
 			if (var0003) {
 				say("Candice is listening intently to the Fellowship meeting.*");
 				abort;
@@ -17356,7 +17356,7 @@ void Func042B object#(0x42B) () {
 		0xFFD5->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		if (var0000 == NIGHT) {
-			var0001 = Func08FC(0xFFD5, 0xFFE6);
+			var0001 = Func08FC(0xFFD5, BATLIN);
 			if (var0001) {
 				say("Patterson is concentrating on the Fellowship meeting and does not wish to speak.*");
 				abort;
@@ -17718,7 +17718,7 @@ void Func042D object#(0x42D) () {
 		var0000 = UI_part_of_day();
 		var0001 = Func0909();
 		var0002 = UI_wearing_fellowship();
-		var0003 = Func08FC(0xFFD3, 0xFFE6);
+		var0003 = Func08FC(0xFFD3, BATLIN);
 		if (var0000 == NIGHT) {
 			if (var0003) {
 				say("Figg is too intent on listening to the Fellowship meeting to acknowledge your attempts to converse with him.*");
@@ -18875,7 +18875,7 @@ void Func0435 object#(0x435) () {
 		var0002 = UI_part_of_day();
 		var0003 = 0xFFCB->get_npc_object()->get_schedule_type();
 		if (var0002 == NIGHT) {
-			var0004 = Func08FC(0xFFCB, 0xFFE6);
+			var0004 = Func08FC(0xFFCB, BATLIN);
 			if (var0004) {
 				say("Gaye is watching the Fellowship meeting. She turns to you brusquely and puts a finger to her lips, gesturing for you to be silent.*");
 				abort;
@@ -19182,7 +19182,7 @@ void Func0437 object#(0x437) () {
 		var0001 = UI_part_of_day();
 		var0002 = 0xFFC9->get_npc_object()->get_schedule_type();
 		if (var0001 == NIGHT) {
-			var0003 = Func08FC(0xFFC9, 0xFFE6);
+			var0003 = Func08FC(0xFFC9, BATLIN);
 			if (var0003) {
 				say("Grayson shushes you, as you are disturbing the Fellowship meeting.*");
 				abort;
@@ -19617,7 +19617,7 @@ void Func043A object#(0x43A) () {
 		var0002 = UI_part_of_day();
 		var0003 = 0xFFC6->get_npc_object()->get_schedule_type();
 		if (var0002 == NIGHT) {
-			var0004 = Func08FC(0xFFC6, 0xFFE6);
+			var0004 = Func08FC(0xFFC6, BATLIN);
 			if (var0004) {
 				say("Gordon is too involved in listening to the Fellowship meeting to hear you.*");
 				abort;
@@ -19801,7 +19801,7 @@ void Func043B object#(0x43B) () {
 		var0003 = UI_wearing_fellowship();
 		var0001 = UI_part_of_day();
 		if (var0001 == NIGHT) {
-			var0004 = Func08FC(0xFFC5, 0xFFE6);
+			var0004 = Func08FC(0xFFC5, BATLIN);
 			if (var0004) {
 				say("Sean is deep in concentration, listening to the Fellowship meeting.*");
 				abort;
@@ -20576,7 +20576,7 @@ void Func043F object#(0x43F) () {
 		var0001 = UI_wearing_fellowship();
 		var0002 = UI_part_of_day();
 		if (var0002 == NIGHT) {
-			var0003 = Func08FC(0xFFC1, 0xFFE6);
+			var0003 = Func08FC(0xFFC1, BATLIN);
 			if (var0003) {
 				say("Millie ignores your attempts to get her attention and goes back to intently watching the Fellowship ceremony.*");
 				abort;
@@ -50150,8 +50150,8 @@ void Func0608 object#(0x608) () {
 	if (event == EGG) {
 		Func0941(0x000D);
 		var0000 = UI_is_pc_female();
-		0xFFE6->say("\"Avatar! Stop where thou art! Thou shalt not succeed in thy quest to destroy the Black Gate! Art thou mad??! The Guardian is much too powerful for thee! He shall crush thee like an insect! The fate of Britannia now belongs to him and to The Fellowship! The Guardian is the land's true ruler! Bow down to him, Avatar, and perhaps he shall give thee a place at his side. Bow down to him -now-!\"*");
-		0xFFE6->hide();
+		BATLIN->say("\"Avatar! Stop where thou art! Thou shalt not succeed in thy quest to destroy the Black Gate! Art thou mad??! The Guardian is much too powerful for thee! He shall crush thee like an insect! The fate of Britannia now belongs to him and to The Fellowship! The Guardian is the land's true ruler! Bow down to him, Avatar, and perhaps he shall give thee a place at his side. Bow down to him -now-!\"*");
+		BATLIN->hide();
 		0xFEEF->show_npc_face(0x0000);
 		if (var0000) {
 			var0001 = "She";
@@ -50177,10 +50177,10 @@ void Func0608 object#(0x608) () {
 		0xFEED->hide();
 		0xFEEC->say("\"Death to the Avatar! Long live The Guardian!\" screams Elizabeth.*");
 		0xFEEC->hide();
-		0xFFE6->say("\"So be it! The Fellowship hereby sentences the Avatar to immediate death! Kill ",
+		BATLIN->say("\"So be it! The Fellowship hereby sentences the Avatar to immediate death! Kill ",
 			var0003,
 			" now!\"*");
-		0xFFE6->hide();
+		BATLIN->hide();
 		var0004 = [0x0193, 0x01FA, 0x0325, 0x0372, 0x0371];
 		for (var0007 in var0004 with var0005 to var0006) {
 			var0008 = find_nearby(var0007, 0x001E, MASK_NONE);
@@ -56063,7 +56063,7 @@ void Func0682 object#(0x682) () {
 			var0003 = find_nearby(ANY_SHAPE, var0002, MASK_NPC);
 			var0004 = UI_get_party_list2();
 			var0004 &= LORD_BRITISH->get_npc_object();
-			var0004 &= 0xFFE6->get_npc_object();
+			var0004 &= BATLIN->get_npc_object();
 			var0005 = false;
 			for (var0008 in var0003 with var0006 to var0007) {
 				if (!(var0008 in var0004)) {
@@ -65289,7 +65289,7 @@ void Func084E 0x84E () {
 	var var0007;
 	var var0008;
 
-	0xFFE6->show_npc_face(0x0000);
+	BATLIN->show_npc_face(0x0000);
 	var0000 = Func0908();
 	say("\"These questions are all hypothetical. Do not let them confuse or upset thee.~~\"Question One: Thou art feeling depressed right now. Is it more likely because -~A: Thou hast disappointed a friend, or~B: A friend has disappointed thee?\"");
 	var0001 = Func090B(["A: I disappointed a friend", "B: Friend has disappointed me"]);
@@ -65391,7 +65391,7 @@ void Func084F 0x84F () {
 	var var0012;
 	var var0013;
 
-	0xFFE6->show_npc_face(0x0000);
+	BATLIN->show_npc_face(0x0000);
 	var0000 = Func0908();
 	var0001 = Func0909();
 	say("The ceremony begins as Batlin stands before the gathered members of The Fellowship in Britain. He begins his sermon. \"My friends, I originally created The Fellowship to help ready Britannia and its people for the future. Today one of the greatest symbols of its past has come here to join our Fellowship. This is a great day, for as our past and present intertwine we shall send a message which shall be heard throughout Britannia. Soon all of its peoples will strive together for unity.\" The gathering breaks into loud cheers. \"When they hear that the Avatar has become a member of The Fellowship those who were at first distrustful of us will come to see the truth of what we stand for. Then we may bring about a day when all of Britannia is worthy of the ample rewards it shall receive.\"");
@@ -65409,7 +65409,7 @@ void Func084F 0x84F () {
 		}
 		IOLO->hide();
 	}
-	0xFFE6->say("\"Now is the time when our members give their testimonials of how they have been applying the Triad of Inner Strength to their lives. Who shall be the first?\"");
+	BATLIN->say("\"Now is the time when our members give their testimonials of how they have been applying the Triad of Inner Strength to their lives. Who shall be the first?\"");
 	var0004 = Func08F7(0xFFCB);
 	if (var0004) {
 		0xFFCB->say("\"The Fellowship has taught me to live with the shortcomings of others,\" says Gaye.");
@@ -65418,7 +65418,7 @@ void Func084F 0x84F () {
 	var0005 = Func08F7(0xFFD7);
 	if (var0005) {
 		0xFFD7->say("\"I had lost all enthusiasm for life before I joined The Fellowship,\" says Candice.*");
-		0xFFE6->say("\"Thank thee for sharing, Candice.\"*");
+		BATLIN->say("\"Thank thee for sharing, Candice.\"*");
 		0xFFD7->hide();
 	}
 	var0006 = Func08F7(0xFFD5);
@@ -65439,7 +65439,7 @@ void Func084F 0x84F () {
 	var0009 = Func08F7(0xFFC6);
 	if (var0009) {
 		0xFFC6->say("\"The Fellowship has put me back on the path to prosperity,\" says Gordon.*");
-		0xFFE6->say("\"Yes! Thank thee for sharing, brother!\"*");
+		BATLIN->say("\"Yes! Thank thee for sharing, brother!\"*");
 		0xFFC6->hide();
 	}
 	var000A = Func08F7(0xFFC5);
@@ -65477,7 +65477,7 @@ void Func084F 0x84F () {
 		say("\"Then I guess it is too late for I already regret coming here.\"*");
 		SHAMINO->hide();
 	}
-	0xFFE6->say("\"Now is the time to welcome the newest member of The Fellowship to sit at our table.\" Batlin beckons you to join him at the podium.");
+	BATLIN->say("\"Now is the time to welcome the newest member of The Fellowship to sit at our table.\" Batlin beckons you to join him at the podium.");
 	say("He pours a glass of wine into a crystal goblet and takes a sip.");
 	say("The goblet is passed around the hall, each member respectively taking a sip. Finally, the goblet is handed to you. You look at it thoughtfully as you feel all eyes in the room upon you.");
 	if (var000D) {
@@ -65503,7 +65503,7 @@ void Func084F 0x84F () {
 			DUPRE->hide();
 		}
 	}
-	0xFFE6->say("\"Now there remains but one more test of thy loyalty to The Fellowship. I presume thou hast read the Book of Fellowship by now. I must ask you two questions. The answers may be found within the book.\" Batlin smiles modestly. \"I am the author, didst thou know? Well, never mind. Here we go.\"");
+	BATLIN->say("\"Now there remains but one more test of thy loyalty to The Fellowship. I presume thou hast read the Book of Fellowship by now. I must ask you two questions. The answers may be found within the book.\" Batlin smiles modestly. \"I am the author, didst thou know? Well, never mind. Here we go.\"");
 	Func0852();
 	if (!gflags[0x0038]) {
 		say("\"Excellent, Avatar!\"");
@@ -65546,7 +65546,7 @@ void Func0850 0x850 () {
 	var var000C;
 	var var000D;
 
-	0xFFE6->show_npc_face(0x0000);
+	BATLIN->show_npc_face(0x0000);
 	var0000 = Func0908();
 	var0001 = Func0909();
 	say("The ceremony begins as Batlin stands before the gathered Fellowship members. The hall fills with thunderous cheers. They look at him with a mixture of awe and sheer adoration. Batlin stands and basks in the warm reception for a moment, a triumphant smile on his face. With a slight gesture of his hand the crowd becomes quiet.");
@@ -65565,7 +65565,7 @@ void Func0850 0x850 () {
 	var0003 = Func08F7(0xFFD5);
 	if (var0003) {
 		0xFFD5->say("\"The Fellowship helps me be more honest with people,\" says Patterson.*");
-		0xFFE6->say("\"Thank thee for sharing, Patterson.\"*");
+		BATLIN->say("\"Thank thee for sharing, Patterson.\"*");
 		0xFFD5->hide();
 	}
 	var0004 = Func08F7(0xFFD3);
@@ -65586,7 +65586,7 @@ void Func0850 0x850 () {
 	var0007 = Func08F7(0xFFC6);
 	if (var0007) {
 		0xFFC6->say("\"The Fellowship is helping me back from the brink of personal and financial oblivion,\" says Gordon.*");
-		0xFFE6->say("\"Right thou art, brother!\"*");
+		BATLIN->say("\"Right thou art, brother!\"*");
 		0xFFC6->hide();
 	}
 	var0008 = Func08F7(0xFFC5);
@@ -65619,7 +65619,7 @@ void Func0850 0x850 () {
 		DUPRE->say("\"'Tis a sad thing when I cannot even keep my eyes open from the boredom of this Fellowship ceremony!\"*");
 		DUPRE->hide();
 	}
-	0xFFE6->say("From watching Batlin and the others you get the feeling that the Fellowship ceremony is going to last long into the night. Now would be a good moment to slip away without drawing much attention to yourself...*");
+	BATLIN->say("From watching Batlin and the others you get the feeling that the Fellowship ceremony is going to last long into the night. Now would be a good moment to slip away without drawing much attention to yourself...*");
 	abort;
 }
 
@@ -65639,7 +65639,7 @@ void Func0851 0x851 () {
 	}
 	var0000 = Func090A();
 	if (var0000) {
-		var0001 = 0xFFE6->find_object(0x031E, QUALITY_ANY, FRAME_ANY);
+		var0001 = BATLIN->find_object(0x031E, QUALITY_ANY, FRAME_ANY);
 		var0002 = var0001->set_last_created();
 		var0003 = AVATAR->give_last_created();
 		if (var0003) {
@@ -65648,7 +65648,7 @@ void Func0851 0x851 () {
 			Func0911(0x00C8);
 			abort;
 		}
-		var0003 = 0xFFE6->give_last_created();
+		var0003 = BATLIN->give_last_created();
 		say("\"Zounds! Thine hands are too full to take the box. Please divest thyself of some of thy belongings.\"*");
 		gflags[0x00D7] = true;
 		abort;
