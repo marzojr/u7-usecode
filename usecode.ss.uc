@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, 0xFFEA, 0xFFE8, 0xFFE9, 0xFFE2, 0xFFE0, 0xFFE3, 0xFFE5, 0xFFEE, 0xFFEC, 0xFFD6, 0xFFD5, 0xFFEB, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, 0xFFEA, 0xFFE8, 0xFFE9, 0xFFE2, 0xFFE0, 0xFFE3, 0xFFE5, FILBERCIO, 0xFFEC, 0xFFD6, 0xFFD5, 0xFFEB, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -7427,7 +7427,7 @@ void Func01C7 shape#(0x1C7) () {
 		var0007 = "evening";
 	}
 	if (event == SI_PATH_FAILURE) {
-		if ((0xFFEE->get_npc_id() == 0x000D) && (item == AVATAR->get_npc_object())) {
+		if ((FILBERCIO->get_npc_id() == 0x000D) && (item == AVATAR->get_npc_object())) {
 			var0009 = AVATAR->get_object_position();
 			var0009[0x0001] -= var0009[0x0003] / 0x0002;
 			var0009[0x0002] -= var0009[0x0003] / 0x0002;
@@ -7437,7 +7437,7 @@ void Func01C7 shape#(0x1C7) () {
 			UI_play_sound_effect(0x0082);
 			event = SI_PATH_SUCCESS;
 		}
-		if ((0xFFEE->get_npc_id() == 0x000C) && (item == AVATAR->get_npc_object())) {
+		if ((FILBERCIO->get_npc_id() == 0x000C) && (item == AVATAR->get_npc_object())) {
 			var0009 = AVATAR->get_object_position();
 			var0009[0x0001] -= var0009[0x0003] / 0x0002;
 			var0009[0x0002] -= var0009[0x0003] / 0x0002;
@@ -7447,10 +7447,10 @@ void Func01C7 shape#(0x1C7) () {
 			UI_play_sound_effect(0x0082);
 			event = SI_PATH_SUCCESS;
 		}
-		if ((0xFFEE->get_npc_id() == 0x0001) && (item == 0xFFEE->get_npc_object())) {
-			if (0xFFEE->get_distance(AVATAR) > 0x0002) {
-				0xFFEE->Func07D2();
-				var000A = script 0xFFEE after 8 ticks {
+		if ((FILBERCIO->get_npc_id() == 0x0001) && (item == FILBERCIO->get_npc_object())) {
+			if (FILBERCIO->get_distance(AVATAR) > 0x0002) {
+				FILBERCIO->Func07D2();
+				var000A = script FILBERCIO after 8 ticks {
 					nohalt;
 					call Func01C7;
 				};
@@ -7459,11 +7459,11 @@ void Func01C7 shape#(0x1C7) () {
 		}
 	}
 	if ((event == SI_PATH_SUCCESS) && gflags[0x00E2]) {
-		if ((0xFFEE->get_npc_id() == 0x000D) && (item == AVATAR->get_npc_object())) {
+		if ((FILBERCIO->get_npc_id() == 0x000D) && (item == AVATAR->get_npc_object())) {
 			Func0901();
 			abort;
 		}
-		if ((0xFFEE->get_npc_id() == 0x000C) && (get_npc_number() == AVATAR)) {
+		if ((FILBERCIO->get_npc_id() == 0x000C) && (get_npc_number() == AVATAR)) {
 			var000B = [0x0178, 0x010E, 0x01B0, 0x01B1];
 			var000C = [];
 			for (var000F in var000B with var000D to var000E) {
@@ -7488,20 +7488,20 @@ void Func01C7 shape#(0x1C7) () {
 					var000F->set_item_frame(var000F->get_item_frame() - 0x0002);
 				}
 			}
-			var000A = script 0xFFEE after 1 ticks {
+			var000A = script FILBERCIO after 1 ticks {
 				nohalt;
 				call Func01C7;
 			};
 		}
 	}
 	if ((event == SCRIPTED) && gflags[0x00E2]) {
-		if (0xFFEE->get_npc_id() == 0x000C) {
-			0xFFEE->set_npc_id(0x000D);
+		if (FILBERCIO->get_npc_id() == 0x000C) {
+			FILBERCIO->set_npc_id(0x000D);
 			AVATAR->si_path_run_usecode([0x0937, 0x0733, 0x0001], SI_PATH_SUCCESS, AVATAR->get_npc_object(), Func01C7, false);
 			abort;
 		}
-		if (0xFFEE->get_npc_id() == 0x000B) {
-			0xFFEE->set_npc_id(0x000C);
+		if (FILBERCIO->get_npc_id() == 0x000B) {
+			FILBERCIO->set_npc_id(0x000C);
 			UI_play_sound_effect(0x0040);
 			var0009 = AVATAR->get_object_position();
 			UI_sprite_effect(ANIMATION_GREEN_BUBBLES, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
@@ -7511,8 +7511,8 @@ void Func01C7 shape#(0x1C7) () {
 			0xFFEC->set_npc_id(0x0000);
 			abort;
 		}
-		if (0xFFEE->get_npc_id() == 0x000A) {
-			0xFFEE->set_npc_id(0x000B);
+		if (FILBERCIO->get_npc_id() == 0x000A) {
+			FILBERCIO->set_npc_id(0x000B);
 			UI_init_conversation();
 			BUCIA->show_npc_face0(0x0000);
 			say("\"Not that place! ",
@@ -7530,7 +7530,7 @@ void Func01C7 shape#(0x1C7) () {
 				".\"");
 			UI_remove_npc_face1();
 			UI_remove_npc_face0();
-			0xFFEE->show_npc_face0(0x0000);
+			FILBERCIO->show_npc_face0(0x0000);
 			say("\"Enough of this jabbering. Let justice be done!\"");
 			UI_end_conversation();
 			var000A = script 0xFFEC {
@@ -7567,8 +7567,8 @@ void Func01C7 shape#(0x1C7) () {
 				actor frame bowing;
 				actor frame sitting;
 			};
-			var000A = 0xFFEE->set_to_attack(AVATAR, 0x0118);
-			var000A = script 0xFFEE {
+			var000A = FILBERCIO->set_to_attack(AVATAR, 0x0118);
+			var000A = script FILBERCIO {
 				nohalt;
 				actor frame reach_2h;
 				actor frame strike_2h;
@@ -7580,8 +7580,8 @@ void Func01C7 shape#(0x1C7) () {
 			};
 			abort;
 		}
-		if (0xFFEE->get_npc_id() == 0x0009) {
-			0xFFEE->set_npc_id(0x000A);
+		if (FILBERCIO->get_npc_id() == 0x0009) {
+			FILBERCIO->set_npc_id(0x000A);
 			UI_init_conversation();
 			0xFFE6->show_npc_face0(0x0000);
 			say("\"As with all who offend the MageLord, this criminal must be sent to the hellhole known as Dungeon Freedom.\"");
@@ -7608,31 +7608,31 @@ void Func01C7 shape#(0x1C7) () {
 				wait 4;
 				face east;
 			};
-			var000A = script 0xFFEE {
+			var000A = script FILBERCIO {
 				nohalt;
 				wait 2;
 				face east;
 			};
 			abort;
 		}
-		if (0xFFEE->get_npc_id() == 0x0008) {
-			0xFFEE->set_npc_id(0x0009);
+		if (FILBERCIO->get_npc_id() == 0x0008) {
+			FILBERCIO->set_npc_id(0x0009);
 			UI_init_conversation();
 			0xFFEA->show_npc_face0(0x0000);
 			say("\"For the crime of entering the bedchamber of the MageLord's mistress, we must find ",
 				var0003,
 				" guilty, MageLord.\"");
-			0xFFEE->show_npc_face1(0x0000);
+			FILBERCIO->show_npc_face1(0x0000);
 			say("\"Guilty!\"");
 			UI_end_conversation();
-			Func097F(0xFFEE, "@And the sentence?@", 0x0000);
+			Func097F(FILBERCIO, "@And the sentence?@", 0x0000);
 			Func09AF(0xFFEA, 0xFFE6, 0x0004, Func01C7);
 			var000A = script AVATAR {
 				nohalt;
 				wait 2;
 				face south;
 			};
-			var000A = script 0xFFEE {
+			var000A = script FILBERCIO {
 				nohalt;
 				face east;
 				wait 1;
@@ -7640,10 +7640,10 @@ void Func01C7 shape#(0x1C7) () {
 			};
 			abort;
 		}
-		if (0xFFEE->get_npc_id() == 0x0007) {
-			0xFFEE->set_npc_id(0x0008);
+		if (FILBERCIO->get_npc_id() == 0x0007) {
+			FILBERCIO->set_npc_id(0x0008);
 			UI_init_conversation();
-			0xFFEE->show_npc_face0(0x0000);
+			FILBERCIO->show_npc_face0(0x0000);
 			say("\"Lords and Adepts, you have heard the evidence! ",
 				var0006,
 				" did come amongst us like a disease, to bring destruction upon us all.\"");
@@ -7667,14 +7667,14 @@ void Func01C7 shape#(0x1C7) () {
 				wait 4;
 				call Func01C7;
 			};
-			var000A = script 0xFFEE {
+			var000A = script FILBERCIO {
 				nohalt;
 				face north;
 			};
 			abort;
 		}
-		if (0xFFEE->get_npc_id() == 0x0006) {
-			0xFFEE->set_npc_id(0x0007);
+		if (FILBERCIO->get_npc_id() == 0x0006) {
+			FILBERCIO->set_npc_id(0x0007);
 			UI_init_conversation();
 			0xFFD6->show_npc_face0(0x0000);
 			say("\"I did travel with this person upon my recent voyage from the Inn of the Sleeping Bull, and I had many long talks with ",
@@ -7707,10 +7707,10 @@ void Func01C7 shape#(0x1C7) () {
 					var0004,
 					" was a good travelling companion, able with sword and bow -- so I ask for thy leniency, MageLord.\"");
 			}
-			0xFFEE->show_npc_face1(0x0000);
+			FILBERCIO->show_npc_face1(0x0000);
 			say("\"Thanks for thy witness, good merchant.\"");
 			UI_end_conversation();
-			Func097F(0xFFEE, "@Thou mayest be seated.@", 0x0000);
+			Func097F(FILBERCIO, "@Thou mayest be seated.@", 0x0000);
 			var000A = script 0xFFD6 {
 				nohalt;
 				actor frame bowing;
@@ -7725,14 +7725,14 @@ void Func01C7 shape#(0x1C7) () {
 			};
 			abort;
 		}
-		if (0xFFEE->get_npc_id() == 0x0005) {
-			0xFFEE->set_npc_id(0x0006);
+		if (FILBERCIO->get_npc_id() == 0x0005) {
+			FILBERCIO->set_npc_id(0x0006);
 			UI_init_conversation();
 			BUCIA->show_npc_face0(0x0000);
 			say("\"This stranger came into my shop and asked many strange and personal questions concerning the Sorceress Frigidazzi.\"");
 			var0016 = Func0956(["That's a lie", "I was only curious", "say nothing"]);
 			if (var0016 == "That's a lie") {
-				0xFFEE->show_npc_face1(0x0000);
+				FILBERCIO->show_npc_face1(0x0000);
 				say("\"How darest thou defame the good lady Bucia, my good and dear friend!\"");
 				say("\"Adepts, be sure to remember this offensive behavior when it comes time to render your verdict.\"");
 			} else if (var0016 == "I was only curious") {
@@ -7743,12 +7743,12 @@ void Func01C7 shape#(0x1C7) () {
 				say("\"And ",
 					var0004,
 					" did ask many questions about many other people, and about strange objects which I was not familiar with...\"");
-				0xFFEE->show_npc_face1(0x0000);
+				FILBERCIO->show_npc_face1(0x0000);
 				say("\"Hardly the act of the casual adventurer ",
 					var0004,
 					" pretends to be...\"");
 			} else {
-				0xFFEE->show_npc_face1(0x0000);
+				FILBERCIO->show_npc_face1(0x0000);
 				say("\"Aha! The cad doth not even rise in ",
 					var0002,
 					" own defense -- ",
@@ -7757,7 +7757,7 @@ void Func01C7 shape#(0x1C7) () {
 			}
 			say("\"Let us hear from the next witness.\"");
 			UI_end_conversation();
-			Func097F(0xFFEE, "@Merchant Flindo!@", 0x0000);
+			Func097F(FILBERCIO, "@Merchant Flindo!@", 0x0000);
 			var000A = script BUCIA {
 				nohalt;
 				actor frame bowing;
@@ -7780,8 +7780,8 @@ void Func01C7 shape#(0x1C7) () {
 			};
 			abort;
 		}
-		if (0xFFEE->get_npc_id() == 0x0004) {
-			0xFFEE->set_npc_id(0x0005);
+		if (FILBERCIO->get_npc_id() == 0x0004) {
+			FILBERCIO->set_npc_id(0x0005);
 			UI_init_conversation();
 			0xFFEC->show_npc_face0(0x0000);
 			say("\"I beg of thee, MageLord Filbercio, to spare this person's life. It was all my fault.\"");
@@ -7789,7 +7789,7 @@ void Func01C7 shape#(0x1C7) () {
 				say("\"After all, no mortal can resist the Dance of Passion.\"");
 			}
 			var0016 = Func0956(["It's her fault", "It's my fault", "Nothing happened", "say nothing"]);
-			0xFFEE->show_npc_face1(0x0000);
+			FILBERCIO->show_npc_face1(0x0000);
 			if (var0016 == "It's her fault") {
 				say("\"What a cad! This whoreson thinks to escape punishment for the crime by blaming it all on dear Frigidazzi.\"");
 			} else if (var0016 == "It's my fault") {
@@ -7824,13 +7824,13 @@ void Func01C7 shape#(0x1C7) () {
 				wait 2;
 				call Func01C7;
 			};
-			Func097F(0xFFEE, "@The good lady Bucia...@", 0x0000);
+			Func097F(FILBERCIO, "@The good lady Bucia...@", 0x0000);
 			abort;
 		}
-		if (0xFFEE->get_npc_id() == 0x0003) {
-			0xFFEE->set_npc_id(0x0004);
+		if (FILBERCIO->get_npc_id() == 0x0003) {
+			FILBERCIO->set_npc_id(0x0004);
 			UI_init_conversation();
-			0xFFEE->show_npc_face0(0x0000);
+			FILBERCIO->show_npc_face0(0x0000);
 			say("\"Order in the court!\"");
 			say("\"We have convened this day to hear the case of ",
 				var0006,
@@ -7857,8 +7857,8 @@ void Func01C7 shape#(0x1C7) () {
 			};
 			abort;
 		}
-		if (0xFFEE->get_npc_id() == 0x0002) {
-			0xFFEE->set_npc_id(0x0003);
+		if (FILBERCIO->get_npc_id() == 0x0002) {
+			FILBERCIO->set_npc_id(0x0003);
 			UI_fade_palette(0x000C, 0x0001, 0x0000);
 			UI_play_music(0x0027, Func09A0(0x0005, 0x0001));
 			var0017 = Func098D();
@@ -7909,8 +7909,8 @@ void Func01C7 shape#(0x1C7) () {
 				// after the end of the script.
 				raw((byte)0x54); raw(0x0020);
 			};
-			0xFFEE->move_object([0x0925, 0x074F, 0x0001]);
-			var000A = script 0xFFEE after 12 ticks {
+			FILBERCIO->move_object([0x0925, 0x074F, 0x0001]);
+			var000A = script FILBERCIO after 12 ticks {
 				nohalt;
 				face east;
 				actor frame bowing;
@@ -7974,14 +7974,14 @@ void Func01C7 shape#(0x1C7) () {
 			AVATAR->set_polymorph(0x02D1);
 			abort;
 		}
-		if (0xFFEE->get_npc_id() == 0x0001) {
-			0xFFEE->set_npc_id(0x0002);
+		if (FILBERCIO->get_npc_id() == 0x0001) {
+			FILBERCIO->set_npc_id(0x0002);
 			var000A = find_nearby(0x01FD, 0x0014, MASK_NONE);
 			if (var000A) {
 				var000A->set_schedule_type(SHY);
 			}
 			UI_init_conversation();
-			0xFFEE->show_npc_face0(0x0000);
+			FILBERCIO->show_npc_face0(0x0000);
 			say("\"What!? Frigidazzi, why is this stranger in thy chambers?!\"");
 			if ((0xFFEC->get_npc_id() > 0x0006) && (0xFFEC->get_npc_id() != 0x0011)) {
 				say("\"And where are thy clothes?\"");
@@ -8033,7 +8033,7 @@ void Func01C7 shape#(0x1C7) () {
 			say("\"I demand that this criminal be punished by the Council of Mages. Let the quorum of Mages be convened instantly!\"");
 			UI_play_sound_effect(0x0082);
 			UI_end_conversation();
-			var0017 = [AVATAR, 0xFFEC, 0xFFEE] & Func098D();
+			var0017 = [AVATAR, 0xFFEC, FILBERCIO] & Func098D();
 			var0017 = Func0988(0xFFE4, var0017);
 			var0017 = Func0988(0xFFE6, var0017);
 			var0017 = Func0988(0xFF58, var0017);
@@ -8044,8 +8044,8 @@ void Func01C7 shape#(0x1C7) () {
 					UI_sprite_effect(ANIMATION_TELEPORT, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 				}
 			}
-			Func097F(0xFFEE, "@Vas Ibex Ort!@", 0x0000);
-			0xFFEE->set_schedule_type(WAIT);
+			Func097F(FILBERCIO, "@Vas Ibex Ort!@", 0x0000);
+			FILBERCIO->set_schedule_type(WAIT);
 			Func097F(AVATAR, "@Hey!@", 0x0009);
 			Func097F(0xFFEC, (("@Do not hurt " + var0003) + "!@"), 0x000B);
 			if (0xFFEC->get_npc_id() == 0x0010) {
@@ -8055,17 +8055,17 @@ void Func01C7 shape#(0x1C7) () {
 					actor frame standing;
 				};
 			}
-			var000A = script 0xFFEE after 15 ticks {
+			var000A = script FILBERCIO after 15 ticks {
 				nohalt;
 				call Func01C7;
 			};
 			abort;
 		}
-		0xFFEE->set_npc_id(0x0001);
-		Func097F(0xFFEE, "@What is happening?!@", 0x0000);
+		FILBERCIO->set_npc_id(0x0001);
+		Func097F(FILBERCIO, "@What is happening?!@", 0x0000);
 		var0009 = AVATAR->get_object_position();
-		0xFFEE->si_path_run_usecode(var0009, EGG, 0xFFEE->get_npc_object(), Func01C7, true);
-		0xFFEE->Func07D1();
+		FILBERCIO->si_path_run_usecode(var0009, EGG, FILBERCIO->get_npc_object(), Func01C7, true);
+		FILBERCIO->Func07D1();
 		var000A = script AVATAR {
 			nohalt;
 			wait while far 2;
@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, 0xFFD2, 0xFFD1, 0xFFD0, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, 0xFFDE, 0xFF64, 0xFFBB, 0xFFB3, 0xFFEE, 0xFFDF, 0xFFE6, 0xFFEC, FEDABIBLIO, ANDRIO, 0xFFED, COLUMNA, 0xFFE8, 0xFFEA, 0xFFE5, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, 0xFFD2, 0xFFD1, 0xFFD0, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, 0xFFDE, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, 0xFFDF, 0xFFE6, 0xFFEC, FEDABIBLIO, ANDRIO, 0xFFED, COLUMNA, 0xFFE8, 0xFFEA, 0xFFE5, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -15833,8 +15833,8 @@ void Func032E shape#(0x32E) () {
 		event = SCRIPTED;
 	}
 	if ((event == SCRIPTED) && (!gflags[0x00D9])) {
-		if (0xFFEE->get_npc_id() == 0x000C) {
-			0xFFEE->set_npc_id(0x000D);
+		if (FILBERCIO->get_npc_id() == 0x000C) {
+			FILBERCIO->set_npc_id(0x000D);
 			var0009 = script 0xFFE3 {
 				nohalt;
 				face north;
@@ -15845,10 +15845,10 @@ void Func032E shape#(0x32E) () {
 			};
 			abort;
 		}
-		if (0xFFEE->get_npc_id() == 0x000B) {
-			0xFFEE->set_npc_id(0x000C);
+		if (FILBERCIO->get_npc_id() == 0x000B) {
+			FILBERCIO->set_npc_id(0x000C);
 			UI_init_conversation();
-			0xFFEE->show_npc_face0(0x0000);
+			FILBERCIO->show_npc_face0(0x0000);
 			say("\"And to think she was once a young and beautiful sorceress, before her ambitions turned her cold and heartless...\"");
 			UI_end_conversation();
 			0xFFE3->si_path_run_usecode([0x090A, 0x071A, 0x0000], SCRIPTED, item, Func032E, false);
@@ -15856,8 +15856,8 @@ void Func032E shape#(0x32E) () {
 			UI_play_music(0x0012, Func09A0(0x0005, 0x0001));
 			abort;
 		}
-		if (0xFFEE->get_npc_id() == 0x000A) {
-			0xFFEE->set_npc_id(0x000B);
+		if (FILBERCIO->get_npc_id() == 0x000A) {
+			FILBERCIO->set_npc_id(0x000B);
 			UI_init_conversation();
 			0xFFEA->show_npc_face0(0x0000);
 			say("\"See here, Rotoluncia! This stranger may have secrets -- as do we all! But I will not condone treating a guest of the Council like a criminal!\"");
@@ -15865,7 +15865,7 @@ void Func032E shape#(0x32E) () {
 			say("\"Thou dost dare to interfere with my spells! MageLord, I demand that thou reprimandest this sorcerer.\"");
 			UI_remove_npc_face1();
 			UI_remove_npc_face0();
-			0xFFEE->show_npc_face0(0x0000);
+			FILBERCIO->show_npc_face0(0x0000);
 			say("\"My dear, calm thyself. Perhaps our visitor shall tell us all, without the use of force...\"");
 			0xFFE1->show_npc_face1(0x0000);
 			say("\"If there is one thing I cannot stand, it is being hamstrung by petty politics. Thou art not half the man thou once wert, Filbercio...\"");
@@ -15886,7 +15886,7 @@ void Func032E shape#(0x32E) () {
 				actor frame sitting;
 				wait 2;
 			};
-			var0009 = script 0xFFEE after 8 ticks {
+			var0009 = script FILBERCIO after 8 ticks {
 				nohalt;
 				wait 8;
 				say "@Good riddance!@";
@@ -15895,8 +15895,8 @@ void Func032E shape#(0x32E) () {
 			};
 			abort;
 		}
-		if (0xFFEE->get_npc_id() == 0x0009) {
-			0xFFEE->set_npc_id(0x000A);
+		if (FILBERCIO->get_npc_id() == 0x0009) {
+			FILBERCIO->set_npc_id(0x000A);
 			var000B = find_nearby(0x0121, 0x0014, MASK_NONE);
 			for (var000E in var000B with var000C to var000D) {
 				var000A = var000E->get_object_position();
@@ -15916,8 +15916,8 @@ void Func032E shape#(0x32E) () {
 			};
 			abort;
 		}
-		if (0xFFEE->get_npc_id() == 0x0008) {
-			0xFFEE->set_npc_id(0x0009);
+		if (FILBERCIO->get_npc_id() == 0x0008) {
+			FILBERCIO->set_npc_id(0x0009);
 			var000A = 0xFFEA->get_object_position();
 			UI_sprite_effect(ANIMATION_FROST_RING, (var000A[0x0001] - 0x0003), (var000A[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			UI_play_sound_effect(0x0083);
@@ -15928,8 +15928,8 @@ void Func032E shape#(0x32E) () {
 			Func097F(0xFFE1, "@How darest thou!@", 0x000A);
 			abort;
 		}
-		if (0xFFEE->get_npc_id() == 0x0007) {
-			0xFFEE->set_npc_id(0x0008);
+		if (FILBERCIO->get_npc_id() == 0x0007) {
+			FILBERCIO->set_npc_id(0x0008);
 			var000B = find_nearby(0x025F, 0x0014, MASK_EGG);
 			var000A = var000B->get_object_position();
 			var000B->remove_item();
@@ -15951,8 +15951,8 @@ void Func032E shape#(0x32E) () {
 			};
 			abort;
 		}
-		if (0xFFEE->get_npc_id() == 0x0006) {
-			0xFFEE->set_npc_id(0x0007);
+		if (FILBERCIO->get_npc_id() == 0x0006) {
+			FILBERCIO->set_npc_id(0x0007);
 			var000B = find_nearby(0x025F, 0x0014, MASK_EGG);
 			var000A = var000B->get_object_position();
 			var000B->remove_item();
@@ -15981,11 +15981,11 @@ void Func032E shape#(0x32E) () {
 				wait 2;
 				call Func032E;
 			};
-			Func097F(0xFFEE, "@Must thou?@", 0x0005);
+			Func097F(FILBERCIO, "@Must thou?@", 0x0005);
 			abort;
 		}
-		if (0xFFEE->get_npc_id() == 0x0005) {
-			0xFFEE->set_npc_id(0x0006);
+		if (FILBERCIO->get_npc_id() == 0x0005) {
+			FILBERCIO->set_npc_id(0x0006);
 			var000B = find_nearby(0x025F, 0x0014, MASK_EGG);
 			var000A = var000B->get_object_position();
 			var000B->remove_item();
@@ -16021,10 +16021,10 @@ void Func032E shape#(0x32E) () {
 			Func097F(DUPRE, "@No!@", 0x000A);
 			abort;
 		}
-		if (0xFFEE->get_npc_id() == 0x0004) {
-			0xFFEE->set_npc_id(0x0005);
+		if (FILBERCIO->get_npc_id() == 0x0004) {
+			FILBERCIO->set_npc_id(0x0005);
 			UI_init_conversation();
-			0xFFEE->show_npc_face0(0x0000);
+			FILBERCIO->show_npc_face0(0x0000);
 			say("\"Good Mages, this is the adventurer from a distant land whose arrival was foretold in our conjurings!\"");
 			0xFFEC->show_npc_face1(0x0000);
 			say("\"Could ",
@@ -16063,8 +16063,8 @@ void Func032E shape#(0x32E) () {
 			};
 			abort;
 		}
-		if (0xFFEE->get_npc_id() == 0x0003) {
-			0xFFEE->set_npc_id(0x0004);
+		if (FILBERCIO->get_npc_id() == 0x0003) {
+			FILBERCIO->set_npc_id(0x0004);
 			UI_init_conversation();
 			0xFFEC->show_npc_face0(0x0000);
 			say("\"Welcome to thee. These cursed teleportation storms have made travel so difficult that we are becoming isolated! It hath disturbed everyone, but it is good to see a new face.\"");
@@ -16078,36 +16078,36 @@ void Func032E shape#(0x32E) () {
 			};
 			abort;
 		}
-		if (0xFFEE->get_npc_id() == 0x0002) {
-			0xFFEE->set_npc_id(0x0003);
+		if (FILBERCIO->get_npc_id() == 0x0002) {
+			FILBERCIO->set_npc_id(0x0003);
 			UI_init_conversation();
 			0xFFE1->show_npc_face0(0x0000);
 			say("\"Filbercio is never lacking in social graces, ",
 				var0000,
 				". Now if he only attended to the problems of Moonshade as he doth attend to his mistresses. Speaking of which...\"");
-			0xFFEE->show_npc_face1(0x0000);
+			FILBERCIO->show_npc_face1(0x0000);
 			say("\"Ahem--! Also present, as my dinner companion, is the most charming Frigidazzi. She, too, is a Mage.\"");
 			UI_end_conversation();
 			Func09AF(0xFFE1, 0xFFEC, 0x0004, Func032E);
 			abort;
 		}
-		if (0xFFEE->get_npc_id() == 0x0001) {
-			0xFFEE->set_npc_id(0x0002);
+		if (FILBERCIO->get_npc_id() == 0x0001) {
+			FILBERCIO->set_npc_id(0x0002);
 			UI_init_conversation();
 			0xFFEA->show_npc_face0(0x0000);
 			say("\"Thou needest not worry, ",
 				var0000,
 				". We have brought thee here against thy will, but only that we may get to know thee. Thou art free to leave, once this dinner is concluded.\"");
-			0xFFEE->show_npc_face1(0x0000);
+			FILBERCIO->show_npc_face1(0x0000);
 			say("\"Quite right, Gustacio... and here is Adept Rotoluncia, whom I believe thou hast met.\"");
 			UI_end_conversation();
 			Func09AF(0xFFEA, 0xFFE1, 0x0004, Func032E);
 			abort;
 		}
-		if (0xFFEE->get_npc_id() == 0x0000) {
+		if (FILBERCIO->get_npc_id() == 0x0000) {
 			UI_play_music(0x001B, Func09A0(0x0005, 0x0001));
-			0xFFEE->set_npc_id(0x0001);
-			0xFFEE->set_item_flag(MET);
+			FILBERCIO->set_npc_id(0x0001);
+			FILBERCIO->set_item_flag(MET);
 			var000F = AVATAR->find_nearby(0x010E, 0x002D, MASK_NONE);
 			var0010 = AVATAR->find_nearby(0x01B0, 0x002D, MASK_NONE);
 			for (var0013 in var000F with var0011 to var0012) {
@@ -16125,23 +16125,23 @@ void Func032E shape#(0x32E) () {
 				var000B->set_schedule_type(FOLLOW_AVATAR);
 			}
 			UI_init_conversation();
-			0xFFEE->show_npc_face0(0x0000);
+			FILBERCIO->show_npc_face0(0x0000);
 			say("\"Please be seated. We have been waiting for thee. I am the MageLord Filbercio.\"");
 			say("\"Allow me to introduce the others. First, my fellow members on the Council of Mages. Adept Gustacio...\"");
 			UI_end_conversation();
-			Func09AF(0xFFEE, 0xFFEA, 0x0002, Func032E);
+			Func09AF(FILBERCIO, 0xFFEA, 0x0002, Func032E);
 			abort;
 		}
 		UI_init_conversation();
 		0xFFE3->show_npc_face0(0x0000);
 		say("\"I beg thy pardon, MageLord Filbercio, but I have an urgent message for thee.\"");
 		say("\"I regret to report that mine attempts to locate any significant quantity of the reagent Blood Moss have met with failure.\"");
-		0xFFEE->show_npc_face1(0x0000);
+		FILBERCIO->show_npc_face1(0x0000);
 		say("\"Pothos! I should send thee to the dungeons and have the rats feed on thy carcass!\"");
 		say("\"Dear guests, I am afraid that I shall have to adjourn this pleasant repast.\"");
 		say("\"Pothos and I must speak privately concerning important matters of state. I thank thee all for coming!\"");
 		gflags[0x00D9] = true;
-		var0019 = [0xFFEE, 0xFFEC, 0xFFEA, 0xFFE3];
+		var0019 = [FILBERCIO, 0xFFEC, 0xFFEA, 0xFFE3];
 		for (var000B in var0019 with var001A to var001B) {
 			var000B->revert_schedule();
 		}
@@ -16154,7 +16154,7 @@ void Func032E shape#(0x32E) () {
 		0xFFEA->set_schedule_type(EAT_AT_INN);
 		SERV_06->set_schedule_type(WAITER);
 		UI_play_sound_effect(0x0082);
-		0xFFEE->set_new_schedules([MIDNIGHT, EARLY, MORNING, NOON, EVENING, NIGHT], [MAJOR_SIT, SLEEP, EAT_AT_INN, MAJOR_SIT, EAT_AT_INN, WANDER], [0x0926, 0x0726, 0x08F7, 0x071C, 0x090A, 0x0717, 0x08F7, 0x0737, 0x090A, 0x0717, 0x0918, 0x072F]);
+		FILBERCIO->set_new_schedules([MIDNIGHT, EARLY, MORNING, NOON, EVENING, NIGHT], [MAJOR_SIT, SLEEP, EAT_AT_INN, MAJOR_SIT, EAT_AT_INN, WANDER], [0x0926, 0x0726, 0x08F7, 0x071C, 0x090A, 0x0717, 0x08F7, 0x0737, 0x090A, 0x0717, 0x0918, 0x072F]);
 		var001E = [0x08F3, 0x0779];
 		var001F = [0x08E6, 0x0776];
 		var0020 = [0x08C8, 0x0716];
@@ -16170,7 +16170,7 @@ void Func032E shape#(0x32E) () {
 		}
 		AVATAR->clear_item_flag(DONT_MOVE);
 		gflags[0x00DA] = false;
-		0xFFEE->set_npc_id(0x0000);
+		FILBERCIO->set_npc_id(0x0000);
 		abort;
 	}
 }
@@ -25129,15 +25129,15 @@ void Func0412 object#(0x412) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Greetings!@");
-		0xFFEE->Func07D1();
-		Func097F(0xFFEE, "@Ah, yes...@", 0x0002);
-		0xFFEE->set_schedule_type(TALK);
+		FILBERCIO->Func07D1();
+		Func097F(FILBERCIO, "@Ah, yes...@", 0x0002);
+		FILBERCIO->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFEE->run_schedule();
-		0xFFEE->halt_scheduled();
-		0xFFEE->show_npc_face0(0x0000);
-		var000A = 0xFFEE->get_item_flag(MET);
+		FILBERCIO->run_schedule();
+		FILBERCIO->halt_scheduled();
+		FILBERCIO->show_npc_face0(0x0000);
+		var000A = FILBERCIO->get_item_flag(MET);
 		say("\"'Tis thee again. Hast thou good news?\"");
 		add(["duties", "politics"]);
 		if (gflags[0x00EA] && ((!gflags[0x00EB]) && (!0xFFE1->get_item_flag(DEAD)))) {
@@ -25266,9 +25266,9 @@ void Func0412 object#(0x412) () {
 			case "slippers" (remove):
 				say("\"Slippers! What business is my footwear to thee! Dost thou think to have a laugh at mine expense?\"");
 				say("\"Begone with thee, fool...\"");
-				var000C = 0xFFEE->get_object_position();
+				var000C = FILBERCIO->get_object_position();
 				UI_sprite_effect(ANIMATION_TELEPORT2, var000C[0x0001], var000C[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-				0xFFEE->move_object([0x05F2, 0x078F, 0x0000]);
+				FILBERCIO->move_object([0x05F2, 0x078F, 0x0000]);
 				abort;
 
 			case "kidnap" (remove):
@@ -25311,7 +25311,7 @@ void Func0412 object#(0x412) () {
 					say("\"Thou shouldst search her manor for clues. Open every door, for thy friend might be hidden anywhere.\"");
 					say("\"Thou canst find her mansion in the northeast part of town, built into the face of the southern mountains.\"");
 					say("\"Be careful -- the Red Witch is most powerful, and I cannot protect thee from her enchantments!\"");
-					Func097F(0xFFEE, "@Report thy findings.@", 0x0000);
+					Func097F(FILBERCIO, "@Report thy findings.@", 0x0000);
 					abort;
 				}
 				fallthrough;
@@ -25365,10 +25365,10 @@ void Func0412 object#(0x412) () {
 					say("\"Women are fickle! Never give thine heart to one of their kind, stranger. Better to love them and then leave them...\"");
 				}
 				say("\"I am undone! Mine heart grieves. I must go away to be with my thoughts...\"");
-				var000C = 0xFFEE->get_object_position();
+				var000C = FILBERCIO->get_object_position();
 				UI_sprite_effect(ANIMATION_TELEPORT, var000C[0x0001], var000C[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-				0xFFEE->remove_npc();
-				0xFFEE->set_schedule_type(DANCE);
+				FILBERCIO->remove_npc();
+				FILBERCIO->set_schedule_type(DANCE);
 				Func097F(AVATAR, "@Gosh!@", 0x0003);
 				abort;
 
@@ -25380,7 +25380,7 @@ void Func0412 object#(0x412) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Must be going...@", 0x0000);
-				Func097F(0xFFEE, "@Good fortune!@", 0x0002);
+				Func097F(FILBERCIO, "@Good fortune!@", 0x0002);
 				break;
 		}
 	}
@@ -48613,7 +48613,7 @@ void Func0451 object#(0x451) () {
 	}
 	if (event == EGG) {
 		if (var0004 == 0x001F) {
-			0xFFEE->item_say("@Save me from this madman!@");
+			FILBERCIO->item_say("@Save me from this madman!@");
 			0xFFAF->show_npc_face0(0x0000);
 			if (var0003 == true) {
 				say("\"Do not interfere with me, Avatar!\" ~\"I am the MageLord now...\"");
@@ -59033,13 +59033,13 @@ void Func04DB object#(0x4DB) () {
 		if (var0000 == true) {
 			say("\"Do not interfere with me, Avatar!\" ~\"I am the MageLord now...");
 			say("\"Thou dost know that Filbercio is lower than swine...\" ~\"He doth deserve to be tortured for all the ill that he hath done.\"");
-			0xFFEE->show_npc_face1(0x0000);
+			FILBERCIO->show_npc_face1(0x0000);
 			say("\"Help me, Please! I beseech thee...\" *\"I cannot survive much more of this...\" *\"Uunnggghhh!\"");
 			UI_remove_npc_face1();
 		} else {
 			say("\"Do not meddle in that which thou dost not understand, hero!\" ~\"I am the MageLord, and this man is evil.\"");
 			say("\"He hath destroyed the lives of many.\" ~\"He doth deserve to be tortured for all the ill that he hath done.\"");
-			0xFFEE->show_npc_face1(0x0000);
+			FILBERCIO->show_npc_face1(0x0000);
 			say("\"Help me, Please! I beseech thee... It is he who is evil, not I.\" *\"I cannot survive much more of this torture...\"");
 			UI_remove_npc_face1();
 		}
@@ -78774,7 +78774,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(0xFFE0, 0x0999, 0x07A2, WAIT);
 		Func09AC(0xFFE3, 0x0958, 0x0793, WAIT);
 		Func09AC(0xFFE5, 0x0948, 0x0784, WAIT);
-		Func09AC(0xFFEE, 0x0972, 0x0744, WAIT);
+		Func09AC(FILBERCIO, 0x0972, 0x0744, WAIT);
 		Func09AC(0xFFEC, 0x0977, 0x0743, WAIT);
 		Func09AC(0xFFD6, 0x0994, 0x0754, WAIT);
 		Func09AC(0xFFD5, 0x0902, 0x0746, WAIT);
@@ -79006,12 +79006,12 @@ void Func07DC object#(0x7DC) () {
 			var0003->set_schedule_type(WAIT);
 			var0009 += 0x0001;
 		}
-		0xFFEE->move_object([0x090A, 0x0717, 0x0000]);
+		FILBERCIO->move_object([0x090A, 0x0717, 0x0000]);
 		0xFFEC->move_object([0x090C, 0x071A, 0x0000]);
 		0xFFE1->move_object([0x090C, 0x0714, 0x0000]);
 		0xFFEA->move_object([0x090F, 0x0714, 0x0000]);
 		0xFFE3->move_object([0x0916, 0x072E, 0x0000]);
-		var0004 = [0xFFEE, 0xFFEC, 0xFFE1, 0xFFEA, 0xFFE3];
+		var0004 = [FILBERCIO, 0xFFEC, 0xFFE1, 0xFFEA, 0xFFE3];
 		var0007 = [0x0002, 0x0000, 0x0004, 0x0004, 0x0000];
 		var0009 = 0x0001;
 		for (var0003 in var0004 with var000D to var000E) {
@@ -79023,7 +79023,7 @@ void Func07DC object#(0x7DC) () {
 			};
 			var0009 += 0x0001;
 		}
-		var000C = script 0xFFEE after 15 ticks {
+		var000C = script FILBERCIO after 15 ticks {
 			nohalt;
 			call Func0636;
 			actor frame standing;
@@ -90428,9 +90428,9 @@ void Func0830 0x830 () {
 			say("\"Then I must go immediately. Please excuse me, ",
 				var0002,
 				".\"");
-			var0003 = 0xFFEE->get_object_position();
+			var0003 = FILBERCIO->get_object_position();
 			UI_sprite_effect(ANIMATION_TELEPORT, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			0xFFEE->move_object([0x05F4, 0x078F, 0x0000]);
+			FILBERCIO->move_object([0x05F4, 0x078F, 0x0000]);
 			var0003 = SERV_06->get_object_position();
 			UI_sprite_effect(ANIMATION_TELEPORT, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			SERV_06->move_object([0x05F6, 0x078F, 0x0000]);
@@ -105619,13 +105619,13 @@ void Func08EC 0x8EC () {
 	if (var0000) {
 		UI_play_music(0x001B, var0000);
 	}
-	Func09AC(0xFFEE, -1, 0, WAIT);
-	0xFFEE->move_object([0x097A, 0x074C, 0x0000]);
+	Func09AC(FILBERCIO, -1, 0, WAIT);
+	FILBERCIO->move_object([0x097A, 0x074C, 0x0000]);
 	UI_sprite_effect(ANIMATION_TELEPORT, 0x097A, 0x074C, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-	Func097F(0xFFEE, "@Darling, I'm here...!@", 0x0002);
-	0xFFEE->Func07D1();
+	Func097F(FILBERCIO, "@Darling, I'm here...!@", 0x0002);
+	FILBERCIO->Func07D1();
 	gflags[0x00E2] = true;
-	var0001 = script 0xFFEE after 15 ticks {
+	var0001 = script FILBERCIO after 15 ticks {
 		nohalt;
 		call Func01C7;
 	};
@@ -106246,7 +106246,7 @@ void Func08FF 0x8FF () {
 		abort;
 	}
 	if (gflags[0x00D9]) {
-		0xFFEE->set_schedule_type(DANCE);
+		FILBERCIO->set_schedule_type(DANCE);
 		gflags[0x0146] = true;
 	}
 	if (gflags[0x00D7]) {
@@ -106375,7 +106375,7 @@ void Func0901 0x901 () {
 		var0001 = 0xFFDE->remove_cont_items(QUANTITY_ANY, 0x019E, QUALITY_ANY, 0x0013, 0x0012);
 	}
 	UI_init_conversation();
-	0xFFEE->remove_npc();
+	FILBERCIO->remove_npc();
 	0xFFEC->remove_npc();
 	BUCIA->revert_schedule();
 	BUCIA->set_schedule_type(MAJOR_SIT);

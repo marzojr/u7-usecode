@@ -13662,14 +13662,14 @@ void Func0412 object#(0x412) () {
 	var var0009;
 
 	if (event == DOUBLECLICK) {
-		0xFFEE->show_npc_face(0x0000);
+		DELL->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = Func0909();
 		var0002 = Func0908();
-		var0003 = 0xFFEE->get_npc_object()->get_schedule_type();
+		var0003 = DELL->get_npc_object()->get_schedule_type();
 		var0004 = "Avatar";
 		if (var0000 == NIGHT) {
-			var0005 = Func08FC(0xFFEE, KLOG);
+			var0005 = Func08FC(DELL, KLOG);
 			if (var0005) {
 				say("Dell frowns at you for distracting him during the Fellowship meeting.*");
 			} else {
@@ -13716,7 +13716,7 @@ void Func0412 object#(0x412) () {
 				if (var0007) {
 					IOLO->say("Iolo whispers to you, \"Pleasant chap, is he not?\"");
 					IOLO->hide();
-					0xFFEE->show_npc_face(0x0000);
+					DELL->show_npc_face(0x0000);
 				}
 				fallthrough;
 
@@ -13768,7 +13768,7 @@ void Func0412 object#(0x412) () {
 	}
 	if (event == PROXIMITY) {
 		var0000 = UI_part_of_day();
-		var0003 = 0xFFEE->get_npc_object()->get_schedule_type();
+		var0003 = DELL->get_npc_object()->get_schedule_type();
 		var0008 = UI_die_roll(0x0001, 0x0004);
 		if (var0003 == TEND_SHOP) {
 			if (var0008 == 0x0001) {
@@ -13783,9 +13783,9 @@ void Func0412 object#(0x412) () {
 			if (var0008 == 0x0004) {
 				var0009 = "@Finest goods here!@";
 			}
-			0xFFEE->item_say(var0009);
+			DELL->item_say(var0009);
 		} else {
-			Func092E(0xFFEE);
+			Func092E(DELL);
 		}
 	}
 }
@@ -71221,7 +71221,7 @@ void Func08AB 0x8AB () {
 
 	var0000 = Func08F7(JOHNSON);
 	var0001 = Func08F7(0xFF14);
-	var0002 = Func08F7(0xFFEE);
+	var0002 = Func08F7(DELL);
 	var0003 = Func08F7(0xFFEA);
 	var0004 = Func08F7(IOLO);
 	var0005 = Func08F7(SPARK);
@@ -71242,9 +71242,9 @@ void Func08AB 0x8AB () {
 		JOHNSON->hide();
 	}
 	if (var0002) {
-		0xFFEE->say("\"The Fellowship has made me a happier, more agreeable person.\"*");
+		DELL->say("\"The Fellowship has made me a happier, more agreeable person.\"*");
 		KLOG->say("\"Thank thee for sharing, brother!\"*");
-		0xFFEE->hide();
+		DELL->hide();
 	}
 	if (var0003) {
 		0xFFEA->say("\"As a Fellowship member, I feel as if I am doing some good for Britannia.\"*");
