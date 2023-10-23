@@ -16876,7 +16876,7 @@ void Func0427 object#(0x427) () {
 		NENO->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		if (var0000 == NIGHT) {
-			var0001 = Func08F7(0xFFCA);
+			var0001 = Func08F7(COOP);
 			if (var0001) {
 				say("Neno is busy performing with The Avatars and cannot speak at the moment.*");
 				abort;
@@ -16945,7 +16945,7 @@ void Func0428 object#(0x428) () {
 		JUDITH->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		if (var0000 == NIGHT) {
-			var0001 = Func08F7(0xFFCA);
+			var0001 = Func08F7(COOP);
 			if (var0001) {
 				say("Judith is busy performing with The Avatars and cannot speak at the moment.*");
 				abort;
@@ -19014,11 +19014,11 @@ void Func0436 object#(0x436) () {
 	var var0008;
 
 	if (event == DOUBLECLICK) {
-		0xFFCA->show_npc_face(0x0000);
+		COOP->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = UI_part_of_day();
-		var0003 = 0xFFCA->get_npc_object()->get_schedule_type();
+		var0003 = COOP->get_npc_object()->get_schedule_type();
 		if (var0002 == NIGHT) {
 			var0004 = Func08F7(NENO);
 			var0005 = Func08F7(JUDITH);
@@ -19040,7 +19040,7 @@ void Func0436 object#(0x436) () {
 						var0001,
 						".\"*");
 					IOLO->hide();
-					0xFFCA->show_npc_face(0x0000);
+					COOP->show_npc_face(0x0000);
 					abort;
 				}
 			} else {
@@ -19059,10 +19059,10 @@ void Func0436 object#(0x436) () {
 				IOLO->say("\"Hello, lad! This is ",
 					var0000,
 					", the Avatar! This is my young apprentice, Coop. How go things, Coop?\"*");
-				0xFFCA->say("\"Not too badly, milord. I sold a triple crossbow this morning.\"*");
+				COOP->say("\"Not too badly, milord. I sold a triple crossbow this morning.\"*");
 				IOLO->say("\"Lovely! Lovely! Keep that gold coming in, that's what I always say!\"*");
 				IOLO->hide();
-				0xFFCA->show_npc_face(0x0000);
+				COOP->show_npc_face(0x0000);
 			}
 			gflags[0x00B7] = true;
 		} else {
@@ -19096,7 +19096,7 @@ void Func0436 object#(0x436) () {
 				if (var0006) {
 					IOLO->say("\"Yes, the lad is good! He was good before I taught him the first lesson.\"*");
 					IOLO->hide();
-					0xFFCA->show_npc_face(0x0000);
+					COOP->show_npc_face(0x0000);
 				}
 				say("\"What I would not give to join thy group and go adventuring! But, then there would be no one to run the shoppe. So I cannot go. But someday... Anyway, I please myself in the evenings by singing with a musical group.\"");
 				remove("responsibility");
@@ -19107,7 +19107,7 @@ void Func0436 object#(0x436) () {
 				say("\"Hello, boss!\"*");
 				IOLO->say("\"Greetings, lad. Thou art looking well.\"*");
 				IOLO->hide();
-				0xFFCA->say("\"The same to thee, milord!\"*");
+				COOP->say("\"The same to thee, milord!\"*");
 				remove("Iolo");
 				fallthrough;
 
@@ -19138,7 +19138,7 @@ void Func0436 object#(0x436) () {
 	}
 	if (event == PROXIMITY) {
 		var0002 = UI_part_of_day();
-		var0003 = 0xFFCA->get_npc_object()->get_schedule_type();
+		var0003 = COOP->get_npc_object()->get_schedule_type();
 		var0007 = UI_die_roll(0x0001, 0x0004);
 		if (var0003 == TEND_SHOP) {
 			if (var0007 == 0x0001) {
@@ -19153,9 +19153,9 @@ void Func0436 object#(0x436) () {
 			if (var0007 == 0x0004) {
 				var0008 = "@Archery equipment!@";
 			}
-			0xFFCA->item_say(var0008);
+			COOP->item_say(var0008);
 		} else {
-			Func092E(0xFFCA);
+			Func092E(COOP);
 		}
 	}
 }

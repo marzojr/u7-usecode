@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, 0xFFCA, DELPHYNIA, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -36612,7 +36612,7 @@ void Func0433 object#(0x433) () {
 	}
 	if ((event == PROXIMITY) && (VOLDIN->get_schedule_type() == TEND_SHOP)) {
 		var0004 = ["@Garth will save me...@", (("@Damn " + var0002) + "!@"), "@I need more food!@", "@Jailer!@", "@Be patient.@", "@Curse that weaver!@"];
-		if (0xFFCA->npc_nearby()) {
+		if (KYLISTA->npc_nearby()) {
 			var0004 &= "@Be silent, Priestess!@" & ("@Pleasure me, Kylista!@" & "@Our time shall come...@");
 		}
 		Func097F(VOLDIN, var0004[UI_get_random(UI_get_array_size(var0004))], 0x0000);
@@ -36704,8 +36704,8 @@ void Func0433 object#(0x433) () {
 
 		case "Kylista" (remove):
 			say("\"She was merely our pawn -- a pretty thing, clever in a limited way, but always our tool.\"");
-			if (0xFFCA->npc_nearby()) {
-				0xFFCA->show_npc_face1(0x0000);
+			if (KYLISTA->npc_nearby()) {
+				KYLISTA->show_npc_face1(0x0000);
 				say("\"Close thy trap, Voldin, or I'll scratch thine eyes out!\"");
 				UI_remove_npc_face1();
 				0x0000->set_conversation_slot();
@@ -38292,37 +38292,37 @@ void Func0436 object#(0x436) () {
 			call Func0112;
 		};
 	}
-	if ((event == PROXIMITY) && (0xFFCA->get_schedule_type() == TEND_SHOP)) {
+	if ((event == PROXIMITY) && (KYLISTA->get_schedule_type() == TEND_SHOP)) {
 		if ((gflags[0x0170] && gflags[0x0172]) && (!gflags[0x016E])) {
 			var0006 = ["@I do not deserve this!@", "@Save me, please!@", "@Such filth!@", "@I wish I had a pillow...@", "@Damn Alyssand!@", "@Curse The Fellowship!@"];
 			if (VOLDIN->npc_nearby()) {
 				var0006 &= "@Be still, Voldin.@" & ("@Get away from me...@" & "@Thy dreams are dust.@");
 			}
-			Func097F(0xFFCA, var0006[UI_get_random(UI_get_array_size(var0006))], 0x0000);
+			Func097F(KYLISTA, var0006[UI_get_random(UI_get_array_size(var0006))], 0x0000);
 		}
 	}
-	if ((event == DOUBLECLICK) && (0xFFCA->get_schedule_type() != WAIT)) {
-		0xFFCA->Func07D1();
+	if ((event == DOUBLECLICK) && (KYLISTA->get_schedule_type() != WAIT)) {
+		KYLISTA->Func07D1();
 		if ((gflags[0x0170] && gflags[0x0172]) && (!gflags[0x016E])) {
 			AVATAR->item_say("@Surprise!@");
-			0xFFCA->set_schedule_type(WAIT);
-			Func097F(0xFFCA, "@Hello, there...!@", 0x0002);
-			0xFFCA->Func07D2();
-			var0005 = script 0xFFCA after 7 ticks {
+			KYLISTA->set_schedule_type(WAIT);
+			Func097F(KYLISTA, "@Hello, there...!@", 0x0002);
+			KYLISTA->Func07D2();
+			var0005 = script KYLISTA after 7 ticks {
 				nohalt;
 				call Func0436;
 			};
 		} else {
 			AVATAR->item_say("@Greetings, noble lady!@");
-			0xFFCA->Func07D1();
-			Func097F(0xFFCA, (("@At thy service, " + var0000) + ".@"), 0x0005);
-			0xFFCA->set_schedule_type(TALK);
+			KYLISTA->Func07D1();
+			Func097F(KYLISTA, (("@At thy service, " + var0000) + ".@"), 0x0005);
+			KYLISTA->set_schedule_type(TALK);
 		}
 	}
 	if (event == SCRIPTED) {
-		0xFFCA->run_schedule();
-		0xFFCA->clear_item_say();
-		0xFFCA->show_npc_face0(0x0000);
+		KYLISTA->run_schedule();
+		KYLISTA->clear_item_say();
+		KYLISTA->show_npc_face0(0x0000);
 		say("\"I am so grateful that thou hast come to visit me, ",
 			var0002,
 			"! Everyone else hath forgotten me. I am so lonely here...\"");
@@ -38331,15 +38331,15 @@ void Func0436 object#(0x436) () {
 		// Need to make UCC optimize this
 		goto labelFunc0436_0679;
 	} else {
-		0xFFCA->run_schedule();
-		0xFFCA->clear_item_say();
-		0xFFCA->show_npc_face0(0x0000);
-		var0007 = 0xFFCA->get_item_flag(MET);
+		KYLISTA->run_schedule();
+		KYLISTA->clear_item_say();
+		KYLISTA->show_npc_face0(0x0000);
+		var0007 = KYLISTA->get_item_flag(MET);
 		if (gflags[0x0171] || (gflags[0x0170] && (!gflags[0x0172]))) {
 			say("\"Thou dost make my spine shiver, thou who dost associate with the enemies of Beauty!");
 			say("\"I beg thee to depart...\"");
 			UI_remove_npc_face0();
-			Func097F(0xFFCA, "@Depart from me!@", 0x0000);
+			Func097F(KYLISTA, "@Depart from me!@", 0x0000);
 			abort;
 		}
 		if (var0007 == false) {
@@ -38370,10 +38370,10 @@ void Func0436 object#(0x436) () {
 					say("\"A pity. Private instruction is available.\"");
 				}
 			}
-			0xFFCA->set_item_flag(MET);
+			KYLISTA->set_item_flag(MET);
 		} else if (gflags[0x015E] == true) {
-			0xFFCA->set_schedule_type(IN_COMBAT);
-			0xFFCA->set_attack_mode(FLEE);
+			KYLISTA->set_schedule_type(IN_COMBAT);
+			KYLISTA->set_attack_mode(FLEE);
 			say("\"Thou hast found me out! The Oracle is a fraud!\"");
 			abort;
 		} else {
@@ -38545,7 +38545,7 @@ void Func0436 object#(0x436) () {
 					}
 					say("\"Oh, was that strange armour that appeared in my bedchamber thine?\"");
 					say("\"I cannot recall what I did with it. Perhaps I still have it... Perhaps thou wilt come by some evening and I will look for it.\"");
-					var000B = Func0996(PARTY, 0xFFCA, 0x0001, 0x01A3, QUALITY_ANY, 0x0000, false);
+					var000B = Func0996(PARTY, KYLISTA, 0x0001, 0x01A3, QUALITY_ANY, 0x0000, false);
 					say("\"I thank thee, ",
 						var0000,
 						"!\"");
@@ -38567,7 +38567,7 @@ void Func0436 object#(0x436) () {
 			Func08AB();
 			UI_remove_npc_face0();
 			Func097F(AVATAR, "@Farewell.@", 0x0000);
-			Func097F(0xFFCA, (("@Walk in Beauty, " + var0002) + ".@"), 0x0002);
+			Func097F(KYLISTA, (("@Walk in Beauty, " + var0002) + ".@"), 0x0002);
 			Func08AA();
 			break;
 	}
@@ -39475,7 +39475,7 @@ void Func043A object#(0x43A) () {
 			0xFFC6->set_schedule_type(WAIT);
 			Func097F(IOLO, "@Hmmmm...@", 0x0000);
 			Func097F(DELPHYNIA, "@Please sing...@", 0x0002);
-			Func097F(0xFFCA, "@Sing of Beauty!@", 0x0004);
+			Func097F(KYLISTA, "@Sing of Beauty!@", 0x0004);
 			Func097F(JORVIN, "@Disperse!@", 0x0008);
 			Func097F(0xFFC6, "@Now I need me a drink!@", 0x000C);
 			var0007 = script IOLO {
@@ -68407,10 +68407,10 @@ void Func06BC object#(0x6BC) () {
 			};
 		}
 		if (var0002 == (var0001 + 0x0004)) {
-			var0003 = 0xFFCA->approach_avatar(0x0078, 0x0028);
+			var0003 = KYLISTA->approach_avatar(0x0078, 0x0028);
 			if (var0003) {
-				0xFFCA->set_schedule_type(HOUND);
-				Func097F(0xFFCA, "@Praise Beauty!@", 0x0000);
+				KYLISTA->set_schedule_type(HOUND);
+				Func097F(KYLISTA, "@Praise Beauty!@", 0x0000);
 			}
 		}
 	}
@@ -68483,7 +68483,7 @@ void Func06C0 object#(0x6C0) () {
 		if (!0xFFC4->is_dead()) {
 			0xFFC4->move_object([0x049B, 0x0769, 0x0000]);
 			0xFFC4->set_schedule_type(LOITER);
-			var0001 = script 0xFFCA {
+			var0001 = script KYLISTA {
 				nohalt;
 				wait 64;
 				say "@Good sermon, Leon...@";
@@ -78800,7 +78800,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(VOLDIN, 0x0447, 0x0722, WAIT);
 		Func09AC(JENDON, 0x0415, 0x0718, WAIT);
 		Func09AC(JORVIN, 0x03F2, 0x06D8, WAIT);
-		Func09AC(0xFFCA, 0x0406, 0x0795, WAIT);
+		Func09AC(KYLISTA, 0x0406, 0x0795, WAIT);
 		Func09AC(DELPHYNIA, 0x0460, 0x06F6, WAIT);
 		Func09AC(0xFFC8, 0x03B5, 0x0697, WAIT);
 		Func09AC(0xFFC7, 0x0407, 0x066E, WAIT);
@@ -80953,13 +80953,13 @@ void Func07F8 object#(0x7F8) () {
 				nohalt;
 				call Func07F8;
 			};
-			var0001 = [0xFFC9, 0xFFCA, VOLDIN, 0xFFC3, JOTH, GARTH, 0xFFC7, 0xFFC8, JENDON, DELPHYNIA, DELIN, JORVIN, 0xFFC4, 0xFFC5, ALYSSAND, 0xFFC6];
+			var0001 = [0xFFC9, KYLISTA, VOLDIN, 0xFFC3, JOTH, GARTH, 0xFFC7, 0xFFC8, JENDON, DELPHYNIA, DELIN, JORVIN, 0xFFC4, 0xFFC5, ALYSSAND, 0xFFC6];
 			for (var0004 in var0001 with var0002 to var0003) {
 				var0004->remove_npc();
 				var0004->run_schedule();
 			}
 			Func09AC(VOLDIN, 0x03F4, 0x0663, WAIT);
-			0xFFCA->remove_npc();
+			KYLISTA->remove_npc();
 			UI_set_timer(0x0000);
 		}
 		abort;
@@ -81492,7 +81492,7 @@ void Func07FB object#(0x7FB) () {
 		UI_remove_npc_face1();
 		0x0000->set_conversation_slot();
 		say("\"Thou art holding back something...\"");
-		0xFFCA->show_npc_face1(0x0000);
+		KYLISTA->show_npc_face1(0x0000);
 		say("\"Alyssand, beware! The Oracle is the instrument of divine Truth, and it shall not be mocked!\"");
 		UI_remove_npc_face1();
 		0x0000->set_conversation_slot();
@@ -81767,7 +81767,7 @@ void Func07FB object#(0x7FB) () {
 		VOLDIN->show_npc_face0(0x0000);
 		say("\"Forgive my presumption, Kylista. As the Priestess of Beauty, thy powers are absolute within this Temple.\"");
 		say("\"However, thy certain knowledge concerning this traitor is vital if the Oracle is to hear a complete accounting.\"");
-		0xFFCA->show_npc_face1(0x0000);
+		KYLISTA->show_npc_face1(0x0000);
 		say("\"I understand. Let me state that I have met ",
 			var0003,
 			", as well as ",
@@ -81819,7 +81819,7 @@ void Func07FB object#(0x7FB) () {
 		UI_init_conversation();
 		VOLDIN->show_npc_face0(0x0000);
 		say("\"And now, Priestess, please continue thy witness.\"");
-		0xFFCA->show_npc_face1(0x0000);
+		KYLISTA->show_npc_face1(0x0000);
 		say("\"As the Priestess of Beauty, I must warn all of thee to remain wary of these strangers! They preach doctrines which deny the primacy of Beauty. The Fellowship is an insidious philosophy which threatens to undermine our common society.\"");
 		say("\"I believe that The Fellowship is an invention of Beast British, by which he means to destroy us!\"");
 		UI_remove_npc_face1();
@@ -81827,7 +81827,7 @@ void Func07FB object#(0x7FB) () {
 		say("\"Thy vigilance will be our salvation, Priestess. Many thanks for responding to mine unusual summons.\"");
 		UI_end_conversation();
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
-		var0005 = 0xFFCA->get_object_position() & (0x000D & 0x0006);
+		var0005 = KYLISTA->get_object_position() & (0x000D & 0x0006);
 		var0006 = var0005->find_nearby(0x0113, 0x001E, MASK_EGG);
 		if (var0006) {
 			var0007 = var0006->get_object_position();
@@ -81861,7 +81861,7 @@ void Func07FB object#(0x7FB) () {
 		UI_end_conversation();
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(var0000 + 0x0001);
 		Func097F(VOLDIN, "@Exile the blasphemer!@", 0x0000);
-		Func097F(0xFFCA, "@Stone him!@", 0x0001);
+		Func097F(KYLISTA, "@Stone him!@", 0x0001);
 		Func097F(0xFFC3, "@Beware of Leon!@", 0x0003);
 		Func097F(ALYSSAND, "@Shame on us...@", 0x0007);
 		Func097F(0xFFC8, "@I forgive thee...@", 0x0003);
@@ -81885,7 +81885,7 @@ void Func07FB object#(0x7FB) () {
 			nohalt;
 			actor frame standing;
 		};
-		Func097F(0xFFCA, "@How rude!@", 0x0000);
+		Func097F(KYLISTA, "@How rude!@", 0x0000);
 		Func097F(0xFFC3, "@Get back here!@", 0x0002);
 		Func097F(VOLDIN, "@Let him go...@", 0x0005);
 		Func08C5();
@@ -102289,7 +102289,7 @@ void Func08AA 0x8AA () {
 	if (gflags[0x01B6]) {
 		abort;
 	}
-	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((ALYSSAND->get_item_flag(MET) + DELIN->get_item_flag(MET)) + DELPHYNIA->get_item_flag(MET)) + VOLDIN->get_item_flag(MET)) + JENDON->get_item_flag(MET)) + JORVIN->get_item_flag(MET)) + 0xFFCA->get_item_flag(MET)) + 0xFFC6->get_item_flag(MET)) + GARTH->get_item_flag(MET)) + JOTH->get_item_flag(MET)) + 0xFFC3->get_item_flag(MET)) > 0x0004) && IOLO->npc_nearby())))) {
+	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((ALYSSAND->get_item_flag(MET) + DELIN->get_item_flag(MET)) + DELPHYNIA->get_item_flag(MET)) + VOLDIN->get_item_flag(MET)) + JENDON->get_item_flag(MET)) + JORVIN->get_item_flag(MET)) + KYLISTA->get_item_flag(MET)) + 0xFFC6->get_item_flag(MET)) + GARTH->get_item_flag(MET)) + JOTH->get_item_flag(MET)) + 0xFFC3->get_item_flag(MET)) > 0x0004) && IOLO->npc_nearby())))) {
 		var0000 = script Func09A0(0x0005, 0x0001) after 200 ticks {
 			nohalt;
 			call Func0435;
@@ -102317,7 +102317,7 @@ void Func08AB 0x8AB () {
 			abort;
 		}
 	}
-	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((ALYSSAND->get_item_flag(MET) + DELIN->get_item_flag(MET)) + DELPHYNIA->get_item_flag(MET)) + GARTH->get_item_flag(MET)) + JOTH->get_item_flag(MET)) + VOLDIN->get_item_flag(MET)) + JENDON->get_item_flag(MET)) + JORVIN->get_item_flag(MET)) + 0xFFC7->get_item_flag(MET)) + 0xFFCA->get_item_flag(MET)) + 0xFFC6->get_item_flag(MET)) + 0xFFC3->get_item_flag(MET)) > 0x0004)))) {
+	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((ALYSSAND->get_item_flag(MET) + DELIN->get_item_flag(MET)) + DELPHYNIA->get_item_flag(MET)) + GARTH->get_item_flag(MET)) + JOTH->get_item_flag(MET)) + VOLDIN->get_item_flag(MET)) + JENDON->get_item_flag(MET)) + JORVIN->get_item_flag(MET)) + 0xFFC7->get_item_flag(MET)) + KYLISTA->get_item_flag(MET)) + 0xFFC6->get_item_flag(MET)) + 0xFFC3->get_item_flag(MET)) > 0x0004)))) {
 		JORVIN->modify_schedule(NOON, STANDTHERE, [0x040E, 0x06BF]);
 		JORVIN->modify_schedule(AFTERNOON, STANDTHERE, [0x040E, 0x06BF]);
 	}
@@ -103559,10 +103559,10 @@ void Func08C2 0x8C2 () {
 		}
 		if (var0006 == 0x000D) {
 			if (gflags[0x0170] == true) {
-				var0007 = 0xFFCA;
+				var0007 = KYLISTA;
 				var0008 = 0x0006;
 			} else {
-				0xFFCA->remove_npc();
+				KYLISTA->remove_npc();
 			}
 		}
 		if (var0006 == 0x000E) {
@@ -108707,7 +108707,7 @@ void Func0939 0x939 (var var0000) {
 			actor frame standing;
 		};
 		if (gflags[0x0170]) {
-			var0001 = script 0xFFCA {
+			var0001 = script KYLISTA {
 				nohalt;
 				actor frame bowing;
 				wait 3;
@@ -108811,7 +108811,7 @@ void Func093A 0x93A (var var0000) {
 				actor frame sitting;
 			};
 			UI_init_conversation();
-			0xFFCA->show_npc_face0(0x0000);
+			KYLISTA->show_npc_face0(0x0000);
 			say("\"I thank thee, Captain Voldin.\"");
 			var0003 = Func08AC(false);
 			say("\"We shall recess until tomorrow, and then return to hear ",
@@ -109115,9 +109115,9 @@ void Func093A 0x93A (var var0000) {
 			if (var0003) {
 				var0005 = var0003->get_object_position();
 				var0005[0x0002] += 0x000A;
-				0xFFCA->move_object(var0005);
-				0xFFCA->si_path_run_usecode([0x0408, 0x0672, 0x0000], SI_PATH_SUCCESS, 0xFFCA->get_npc_object(), Func07F8, false);
-				Func097F(0xFFCA, "@Don't shove me!@", 0x0007);
+				KYLISTA->move_object(var0005);
+				KYLISTA->si_path_run_usecode([0x0408, 0x0672, 0x0000], SI_PATH_SUCCESS, KYLISTA->get_npc_object(), Func07F8, false);
+				Func097F(KYLISTA, "@Don't shove me!@", 0x0007);
 			}
 			if (VOLDIN->get_item_flag(DEAD)) {
 				var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x005C);
@@ -109141,7 +109141,7 @@ void Func093A 0x93A (var var0000) {
 			ALYSSAND->show_npc_face0(0x0000);
 			say("\"Voldin and Kylista have played us all for fools! And we have followed blindly along...\"");
 			if (VOLDIN->get_item_flag(DEAD)) {
-				0xFFCA->show_npc_face1(0x0000);
+				KYLISTA->show_npc_face1(0x0000);
 			} else {
 				VOLDIN->show_npc_face1(0x0000);
 			}
@@ -109149,7 +109149,7 @@ void Func093A 0x93A (var var0000) {
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
 			say("\"I am certain that heaven built the levers in the secret room! Kylista, hath it been a great boon to thee, being a mouthpiece of the heavens?\"");
-			0xFFCA->show_npc_face1(0x0000);
+			KYLISTA->show_npc_face1(0x0000);
 			say("\"Delin, take thy daughter in hand! She speaks out of turn.\"");
 			say("\"As for the levers -- why, they are prayer levers, by which I commune with Beauty! They are sacred, not to be profaned by doubters such as Alyssand.\"");
 			UI_remove_npc_face1();
@@ -109157,8 +109157,8 @@ void Func093A 0x93A (var var0000) {
 			say("\"Then the outcome of the trial would not change, say, if I moved those prayer levers...?\"");
 			say("\"Lady Yelinda, wouldst thou please call once again upon the Oracle, for its decision?\"");
 			UI_end_conversation();
-			0xFFCA->clear_item_say();
-			Func097F(0xFFCA, "@It hath already spoken!@", 0x0000);
+			KYLISTA->clear_item_say();
+			Func097F(KYLISTA, "@It hath already spoken!@", 0x0000);
 			Func097F(ALYSSAND, "@See what it says now!@", 0x0002);
 			var0003 = script 0xFFC9 after 10 ticks {
 				nohalt;
@@ -109188,7 +109188,7 @@ void Func093A 0x93A (var var0000) {
 					face north;
 				};
 			}
-			var0008 = [0xFFC6, DELIN, DELPHYNIA, JENDON, VOLDIN, 0xFFCA, ALYSSAND, JORVIN];
+			var0008 = [0xFFC6, DELIN, DELPHYNIA, JENDON, VOLDIN, KYLISTA, ALYSSAND, JORVIN];
 			for (var0004 in var0008 with var0019 to var001A) {
 				var0003 = script var0004 after (0x0007 + UI_get_random(0x0005)) ticks {
 					face north;
@@ -109256,14 +109256,14 @@ void Func093A 0x93A (var var0000) {
 			if (var0003) {
 				var0005 = var0003->get_object_position();
 				var0005[0x0002] += 0x000B;
-				0xFFCA->si_path_run_usecode(var0005, SI_PATH_SUCCESS, 0xFFCA->get_npc_object(), Func07F8, false);
-				Func097F(0xFFCA, "@Vengeance shall be mine!@", 0x0000);
+				KYLISTA->si_path_run_usecode(var0005, SI_PATH_SUCCESS, KYLISTA->get_npc_object(), Func07F8, false);
+				Func097F(KYLISTA, "@Vengeance shall be mine!@", 0x0000);
 				Func097F(ALYSSAND, "@Truth shall prevail!@", 0x0004);
 			}
 			abort;
 		}
 		if (var0000 == 0x0060) {
-			Func09AC(0xFFCA, 0x03DC, 0x0616, TEND_SHOP);
+			Func09AC(KYLISTA, 0x03DC, 0x0616, TEND_SHOP);
 			if (VOLDIN->get_item_flag(DEAD)) {
 				var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x0062);
 				var0003 = script AVATAR {
@@ -109394,7 +109394,7 @@ void Func093A 0x93A (var var0000) {
 				call Func07F8;
 			};
 			UI_end_conversation();
-			Func09AC(0xFFCA, 0x03DC, 0x0616, TEND_SHOP);
+			Func09AC(KYLISTA, 0x03DC, 0x0616, TEND_SHOP);
 			abort;
 		}
 		if (var0000 == 0x0065) {
@@ -109494,7 +109494,7 @@ void Func093A 0x93A (var var0000) {
 			gflags[0x0175] = false;
 			gflags[0x0170] = true;
 			if (gflags[0x016E]) {
-				0xFFCA->run_schedule();
+				KYLISTA->run_schedule();
 				VOLDIN->run_schedule();
 			}
 		}
@@ -109532,7 +109532,7 @@ void Func093B 0x93B (var var0000) {
 	if (var0000 == 0x0014) {
 		if (gflags[0x0170]) {
 			UI_init_conversation();
-			0xFFCA->show_npc_face0(0x0000);
+			KYLISTA->show_npc_face0(0x0000);
 			say("\"Let it be known that ",
 				var0002,
 				", companion of ",
@@ -109543,7 +109543,7 @@ void Func093B 0x93B (var var0000) {
 				" hath sought to incite rebellion against Lady Yelinda.\"");
 			say("\"Worse yet, he doth admit allegiance to that archfiend, Beast British!\"");
 			UI_end_conversation();
-			var0003 = script 0xFFCA {
+			var0003 = script KYLISTA {
 				wait 2;
 				face west;
 			};
@@ -109573,7 +109573,7 @@ void Func093B 0x93B (var var0000) {
 	if (var0000 == 0x0015) {
 		if (gflags[0x0170]) {
 			UI_init_conversation();
-			0xFFCA->show_npc_face0(0x0000);
+			KYLISTA->show_npc_face0(0x0000);
 			say("\"Lady Yelinda, as thou dost rule this city, dost thou wish to conduct the questioning?\"");
 			UI_end_conversation();
 			var0003 = script 0xFFC9 after 2 ticks {
@@ -109604,7 +109604,7 @@ void Func093B 0x93B (var var0000) {
 			UI_init_conversation();
 			0xFFC9->show_npc_face0(0x0000);
 			say("\"I fear that the witnesses might be tempted to spare my sensibilities, instead of reciting the bare facts.\"");
-			0xFFCA->show_npc_face1(0x0000);
+			KYLISTA->show_npc_face1(0x0000);
 			say("\"Wouldst thou wish one of thy Councillors to act in thy stead?\"");
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
@@ -109615,7 +109615,7 @@ void Func093B 0x93B (var var0000) {
 				actor frame bowing;
 				actor frame sitting;
 			};
-			var0003 = script 0xFFCA {
+			var0003 = script KYLISTA {
 				wait 2;
 				face north;
 				continue;
@@ -109625,7 +109625,7 @@ void Func093B 0x93B (var var0000) {
 				actor frame standing;
 			};
 			Func08C6();
-			Func097F(0xFFCA, "@Dost thou accept?@", 0x0000);
+			Func097F(KYLISTA, "@Dost thou accept?@", 0x0000);
 			var0003 = script VOLDIN after 10 ticks {
 				nohalt;
 				actor frame bowing;
@@ -109670,10 +109670,10 @@ void Func093B 0x93B (var var0000) {
 			UI_init_conversation();
 			VOLDIN->show_npc_face0(0x0000);
 			say("\"It would be my pleasure to act on the Lady's behalf.\"");
-			0xFFCA->show_npc_face1(0x0000);
+			KYLISTA->show_npc_face1(0x0000);
 			say("\"We shall now hear the evidence against the traitor.\"");
 			UI_end_conversation();
-			var0003 = script 0xFFCA {
+			var0003 = script KYLISTA {
 				wait 2;
 				face west;
 				wait 2;
@@ -109860,8 +109860,8 @@ void Func093B 0x93B (var var0000) {
 		if ((!gflags[0x017A]) && (gflags[0x0170] && JORVIN->get_item_flag(MET))) {
 			var0007 = JORVIN;
 		}
-		if ((!gflags[0x017C]) && (0xFFCA->get_item_flag(MET) && gflags[0x0170])) {
-			var0007 = 0xFFCA;
+		if ((!gflags[0x017C]) && (KYLISTA->get_item_flag(MET) && gflags[0x0170])) {
+			var0007 = KYLISTA;
 		}
 		if (!gflags[0x017F]) {
 			if (gflags[0x0170] && (0xFFC5->get_item_flag(MET) && (!0xFFC5->get_item_flag(DEAD)))) {
@@ -109935,8 +109935,8 @@ void Func093B 0x93B (var var0000) {
 			if (var0007 == JORVIN) {
 				Func097F(JORVIN, "@Yes, yes...@", 0x000A);
 			}
-			if (var0007 == 0xFFCA) {
-				Func097F(0xFFCA, "@Really, Voldin!@", 0x000E);
+			if (var0007 == KYLISTA) {
+				Func097F(KYLISTA, "@Really, Voldin!@", 0x000E);
 			}
 			if (var0007 == 0xFFC5) {
 				Func097F(0xFFC9, "@He is so ugly...@", 0x000A);
@@ -109957,7 +109957,7 @@ void Func093B 0x93B (var var0000) {
 				" is guilty of the crimes with which he is charged.\"");
 			say("\"I yield the floor to Priestess Kylista...\"");
 			UI_end_conversation();
-			var0003 = script 0xFFCA {
+			var0003 = script KYLISTA {
 				nohalt;
 				say "@Hear ye!@";
 				actor frame bowing;
@@ -110065,7 +110065,7 @@ void Func093B 0x93B (var var0000) {
 		if (item == JORVIN->get_npc_object()) {
 			var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x0028);
 		}
-		if (item == 0xFFCA->get_npc_object()) {
+		if (item == KYLISTA->get_npc_object()) {
 			var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x0029);
 		}
 		if ((item == 0xFFC8->get_npc_object()) || (item == JOTH->get_npc_object())) {
@@ -112757,8 +112757,8 @@ var Func09AE 0x9AE (var var0000) {
 				Func097F(JENDON, "@What'll ye have?@", 0x0000);
 			}
 			if (JENDON->get_schedule_type() == MAJOR_SIT) {
-				if (0xFFCA->npc_nearby()) {
-					Func094E(0xFFCA, "@Be still! Beauty is not irreverent.@");
+				if (KYLISTA->npc_nearby()) {
+					Func094E(KYLISTA, "@Be still! Beauty is not irreverent.@");
 					0x0000->set_conversation_slot();
 				}
 				say("\"This isn't the place for a long talk, mate. Meet me later, back at the tavern, and we'll talk more.\"");
