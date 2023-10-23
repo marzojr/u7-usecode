@@ -16474,9 +16474,9 @@ void Func0424 object#(0x424) () {
 	var var0001;
 
 	if (event == DOUBLECLICK) {
-		0xFFDC->show_npc_face(0x0000);
+		ZELLA->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
-		var0001 = 0xFFDC->get_npc_object()->get_schedule_type();
+		var0001 = ZELLA->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (!gflags[0x00A5]) {
 			say("You see a lean, young fighter with a rather dashing flair.");
@@ -16542,7 +16542,7 @@ void Func0424 object#(0x424) () {
 		say("\"Good day to thee.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFDC);
+		Func092E(ZELLA);
 	}
 }
 

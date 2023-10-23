@@ -30603,7 +30603,7 @@ void Func0423 object#(0x423) () {
 
 	var0000 = Func0954();
 	var0001 = Func0953();
-	var0002 = Func0942(0xFFDC);
+	var0002 = Func0942(VASEL);
 	var0003 = Func0942(BOYDON);
 	var0004 = ERSTAM->get_item_flag(MET);
 	var0005 = Func097D(PARTY, 0x0001, 0x0268, QUALITY_ANY, 0x0010);
@@ -30789,7 +30789,7 @@ void Func0423 object#(0x423) () {
 				say("\"Hrmpph... I know nothing of this foolish, dangerous power they call teleportation, dost thou hear me? Nothing! Do not ask me of this again! And do not harry my servant about it either, I warn thee!\"");
 				gflags[0x01BE] = true;
 				if (var0002) {
-					0xFFDC->show_npc_face1(0x0000);
+					VASEL->show_npc_face1(0x0000);
 					say("\"But Master, thou dost know something of teleportation! What about the...?\"");
 					0x0000->set_conversation_slot();
 					say("\"Silence thine imbecilic rantings, Vasel! Not another word from thee! Pay my silly servant no mind. He is daft in the head. I know nothing about this teleportation business. I have no secrets to share with thee!\"");
@@ -31069,18 +31069,18 @@ void Func0424 object#(0x424) () {
 	var0001 = Func0953();
 	var0002 = Func0942(ERSTAM);
 	var0003 = IOLO->get_item_flag(IN_PARTY);
-	var0004 = 0xFFDC->get_item_flag(MET);
+	var0004 = VASEL->get_item_flag(MET);
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@A moment, good fellow.@");
-		0xFFDC->Func07D1();
+		VASEL->Func07D1();
 		var0005 = "@Do not hit me...@" & "@I beg thee!@";
-		Func094F(0xFFDC, var0005);
-		0xFFDC->set_schedule_type(TALK);
+		Func094F(VASEL, var0005);
+		VASEL->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFDC->run_schedule();
-		0xFFDC->clear_item_say();
-		0xFFDC->show_npc_face0(0x0000);
+		VASEL->run_schedule();
+		VASEL->clear_item_say();
+		VASEL->show_npc_face0(0x0000);
 		if (!var0004) {
 			say("\"What dost thou want, if thou dost not want to beat me?\"");
 		} else {
@@ -31127,7 +31127,7 @@ void Func0424 object#(0x424) () {
 
 			case "master" (remove):
 				say("\"'Tis my master who calls me Vasel. Thou mayest address me by that name as well.\"");
-				0xFFDC->set_item_flag(MET);
+				VASEL->set_item_flag(MET);
 				if (var0002) {
 					ERSTAM->show_npc_face1(0x0000);
 					say("\"They shall be carving that name on thy tombstone if thou dost not return to work!\"");
@@ -31273,7 +31273,7 @@ void Func0424 object#(0x424) () {
 				UI_remove_npc_face0();
 				UI_remove_npc_face1();
 				Func097F(AVATAR, "@Good day to thee.@", 0x0000);
-				Func097F(0xFFDC, "@Please do not hit me!@", 0x0003);
+				Func097F(VASEL, "@Please do not hit me!@", 0x0003);
 				break;
 		}
 	}
@@ -61333,7 +61333,7 @@ void Func0625 object#(0x625) () {
 				var0003->show_npc_face(0x0000);
 			}
 		}
-		if (var0003 == 0xFFDC) {
+		if (var0003 == VASEL) {
 			say("\"Please, I beg thee to stop this or thou wilt anger my master....\"");
 			return;
 		}
