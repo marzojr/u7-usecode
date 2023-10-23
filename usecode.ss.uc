@@ -30605,7 +30605,7 @@ void Func0423 object#(0x423) () {
 	var0001 = Func0953();
 	var0002 = Func0942(0xFFDC);
 	var0003 = Func0942(BOYDON);
-	var0004 = 0xFFDD->get_item_flag(MET);
+	var0004 = ERSTAM->get_item_flag(MET);
 	var0005 = Func097D(PARTY, 0x0001, 0x0268, QUALITY_ANY, 0x0010);
 	var0006 = Func097D(PARTY, 0x0001, 0x0252, QUALITY_ANY, FRAME_ANY);
 	var0007 = Func097D(PARTY, 0x0001, 0x0289, QUALITY_ANY, 0x0001);
@@ -30619,7 +30619,7 @@ void Func0423 object#(0x423) () {
 	if ((event == SCRIPTED) || (event == SI_PATH_FAILURE)) {
 		if (gflags[0x0007]) {
 			gflags[0x0007] = false;
-			0xFFDD->show_npc_face0(0x0000);
+			ERSTAM->show_npc_face0(0x0000);
 			say("\"At last, the labor of a lifetime hath come to consummation! I think Boydon hath been created rather well. Thou hast done an excellent job in assisting me in his creation.\"");
 			say("\"For thine excellent work I shall reward thee. Here is the key to my storeroom. There thou wilt find the secret of teleportation. It is an old serpent jawbone.\"");
 			gflags[0x01C9] = true;
@@ -30627,9 +30627,9 @@ void Func0423 object#(0x423) () {
 			var000F = Func099B(AVATAR, 0x0001, 0x0281, 0x00CA, 0x000C, 0x0000, true);
 			var000F = Func099B(AVATAR, 0x0001, 0x022F, QUALITY_ANY, 0x000B, false, true);
 			gflags[0x01C3] = true;
-			0xFFDD->show_npc_face0(0x0000);
+			ERSTAM->show_npc_face0(0x0000);
 			say("\"Once thou hast found the jawbone, return to me -- for I have something else to give thee as well.\"");
-			Func097F(0xFFDD, "@See thee soon...@", 0x0000);
+			Func097F(ERSTAM, "@See thee soon...@", 0x0000);
 			Func097F(AVATAR, "@I shall return!@", 0x0008);
 			abort;
 		}
@@ -30642,14 +30642,14 @@ void Func0423 object#(0x423) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Might we speak?@");
-		0xFFDD->Func07D1();
-		Func097F(0xFFDD, "@No!@", 0x0002);
-		0xFFDD->set_schedule_type(TALK);
+		ERSTAM->Func07D1();
+		Func097F(ERSTAM, "@No!@", 0x0002);
+		ERSTAM->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFDD->run_schedule();
-		0xFFDD->clear_item_say();
-		0xFFDD->show_npc_face0(0x0000);
+		ERSTAM->run_schedule();
+		ERSTAM->clear_item_say();
+		ERSTAM->show_npc_face0(0x0000);
 		if (!gflags[0x01BF]) {
 			say("\"Begone from my sight! Thy meddling in my business is unwelcome, stranger!\"");
 			say("\"Thou dost have the distinct bearing of a Britannian about thee! No doubt thou art some fiend in league with that evil Beast British!\"");
@@ -30713,7 +30713,7 @@ void Func0423 object#(0x423) () {
 		converse ("bye") {
 			case "Introduce thyself" (remove):
 				say("\"I do not care to know thy name! As for myself, my fame hath grown with each passing century. I am Erstam, he whom some dare call the Mad Mage!\"");
-				0xFFDD->set_item_flag(MET);
+				ERSTAM->set_item_flag(MET);
 				add("Mad Mage");
 				fallthrough;
 
@@ -30730,7 +30730,7 @@ void Func0423 object#(0x423) () {
 				if (!gflags[0x01B8]) {
 					if (gflags[0x01BB]) {
 						say("\"Now that mine initial experiment of Boydon hath been completed, my true work hath only begun. I shall now rest until I have learned all of the secrets of the universe. What? Thou art still here! I have no time to speak with thee! I have work to do!\"");
-						Func097F(0xFFDD, "@Away with thee!@", 0x0003);
+						Func097F(ERSTAM, "@Away with thee!@", 0x0003);
 						gflags[0x01C5] = true;
 						abort;
 					}
@@ -30870,7 +30870,7 @@ void Func0423 object#(0x423) () {
 					UI_sprite_effect(ANIMATION_FIREWORKS, (var0012[0x0001] - 0x0002), (var0012[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 					UI_sprite_effect(ANIMATION_FIREWORKS, var0012[0x0001], var0012[0x0002], 0x0000, 0x0000, 0x000A, LOOP_ONCE2);
 					UI_play_sound_effect(0x0077);
-					var000F = script 0xFFDD after 7 ticks {
+					var000F = script ERSTAM after 7 ticks {
 						nohalt;
 						call Func0423;
 					};
@@ -30887,7 +30887,7 @@ void Func0423 object#(0x423) () {
 						var000F = Func0956(["I have the egg", "I do not have the egg"]);
 						if (var000F == "I have the egg") {
 							say("\"Then bring it to me!\"");
-							Func097F(0xFFDD, "@Fool!@", 0x0000);
+							Func097F(ERSTAM, "@Fool!@", 0x0000);
 							abort;
 						}
 						say("\"Then thou must go back to the Isle of the Phoenix!\"");
@@ -30895,7 +30895,7 @@ void Func0423 object#(0x423) () {
 						UI_sprite_effect(ANIMATION_FIREWORKS, (var0012[0x0001] - 0x0002), (var0012[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 						UI_sprite_effect(ANIMATION_FIREWORKS, var0012[0x0001], var0012[0x0002], 0x0000, 0x0000, 0x000A, LOOP_ONCE2);
 						UI_play_sound_effect(0x0077);
-						var000F = script 0xFFDD after 7 ticks {
+						var000F = script ERSTAM after 7 ticks {
 							nohalt;
 							call Func0423;
 						};
@@ -30906,14 +30906,14 @@ void Func0423 object#(0x423) () {
 					UI_sprite_effect(ANIMATION_FIREWORKS, (var0012[0x0001] - 0x0002), (var0012[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 					UI_sprite_effect(ANIMATION_FIREWORKS, var0012[0x0001], var0012[0x0002], 0x0000, 0x0000, 0x000A, LOOP_ONCE2);
 					UI_play_sound_effect(0x0077);
-					var000F = script 0xFFDD after 7 ticks {
+					var000F = script ERSTAM after 7 ticks {
 						nohalt;
 						call Func0423;
 					};
 					abort;
 				}
 				say("\"Thou canst begin by gathering all the various body parts scattered throughout the Manor. That includes a torso, arms, legs, and oh, yes, make extra certain that thou dost not forget the head. Place them one by one on top of the assimilation machine. Once thou hast put all the parts and phoenix egg into the machine, Boydon shall at last become complete.");
-				Func097F(0xFFDD, "@Don't forget the torso!@", 0x0000);
+				Func097F(ERSTAM, "@Don't forget the torso!@", 0x0000);
 				abort;
 
 			case "phoenix egg" (remove):
@@ -30926,7 +30926,7 @@ void Func0423 object#(0x423) () {
 						say("\"Thou canst begin by gathering all the various body parts scattered throughout the Manor. That includes a torso, arms, legs, and oh, yes, make extra certain that thou dost not forget the head. Place them within the hopper, on top of the life creation machine in the center of my laboratory. Once thou hast finished that, we shall speak again.");
 						say("\"Quickly, put the egg into the machine!\"");
 						gflags[0x01B8] = true;
-						Func097F(0xFFDD, "@Into the machine!@", 0x0000);
+						Func097F(ERSTAM, "@Into the machine!@", 0x0000);
 						abort;
 					}
 					say("\"If thou dost have my phoenix egg, why dost thou not give it to me?\"");
@@ -30950,7 +30950,7 @@ void Func0423 object#(0x423) () {
 					}
 				} else {
 					say("\"Thou art a leadpate even worse than Vasel! Go and finish thy task and return to me!\"");
-					Func097F(0xFFDD, "@Leadpate!@", 0x0000);
+					Func097F(ERSTAM, "@Leadpate!@", 0x0000);
 					abort;
 				}
 				fallthrough;
@@ -30972,7 +30972,7 @@ void Func0423 object#(0x423) () {
 			case "I have the jawbone." (remove):
 				if (gflags[0x01C2] && (gflags[0x01C3] && gflags[0x01C4])) {
 					say("\"Yes. Very nice. I have already given thee my serpent teeth. I have no more of them. Good luck to thee.\"");
-					Func097F(0xFFDD, "@Good fortune!@", 0x0000);
+					Func097F(ERSTAM, "@Good fortune!@", 0x0000);
 					abort;
 				}
 				if (!gflags[0x01C2]) {
@@ -31042,7 +31042,7 @@ void Func0423 object#(0x423) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Most interesting...@", 0x0000);
-				Func097F(0xFFDD, "@On thy way!@", 0x0002);
+				Func097F(ERSTAM, "@On thy way!@", 0x0002);
 				abort;
 		}
 	}
@@ -31067,7 +31067,7 @@ void Func0424 object#(0x424) () {
 
 	var0000 = Func0954();
 	var0001 = Func0953();
-	var0002 = Func0942(0xFFDD);
+	var0002 = Func0942(ERSTAM);
 	var0003 = IOLO->get_item_flag(IN_PARTY);
 	var0004 = 0xFFDC->get_item_flag(MET);
 	if (event == DOUBLECLICK) {
@@ -31129,7 +31129,7 @@ void Func0424 object#(0x424) () {
 				say("\"'Tis my master who calls me Vasel. Thou mayest address me by that name as well.\"");
 				0xFFDC->set_item_flag(MET);
 				if (var0002) {
-					0xFFDD->show_npc_face1(0x0000);
+					ERSTAM->show_npc_face1(0x0000);
 					say("\"They shall be carving that name on thy tombstone if thou dost not return to work!\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -31149,7 +31149,7 @@ void Func0424 object#(0x424) () {
 			case "Erstam" (remove):
 				say("\"He is the one who is called the Mad Mage!\"");
 				if (var0002) {
-					0xFFDD->show_npc_face1(0x0000);
+					ERSTAM->show_npc_face1(0x0000);
 					say("\"Thou dost dare to speak that name in my presence, thou cretin?! I said I do not want to hear that name come from thy lips ever again!\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -31170,7 +31170,7 @@ void Func0424 object#(0x424) () {
 			case "Manor" (remove):
 				say("\"The Master's house is very old, and constantly in need of repair.\"");
 				if (var0002) {
-					0xFFDD->show_npc_face1(0x0000);
+					ERSTAM->show_npc_face1(0x0000);
 					say("\"That is correct, Vasel! Thou shouldst be returning to thine appointed chores!\"");
 					0x0000->set_conversation_slot();
 					UI_remove_npc_face1();
@@ -31185,7 +31185,7 @@ void Func0424 object#(0x424) () {
 			case "secret" (remove):
 				say("\"Like any mage, the Master's work involves rare artifacts and arcane spells. Thou canst look as much as thou dost want for them. But thou shalt never be able to find them! Ha! Ha!\"");
 				if (var0002) {
-					0xFFDD->show_npc_face1(0x0000);
+					ERSTAM->show_npc_face1(0x0000);
 					say("\"Vasel, thou art a fool! I will not tolerate thee giving away my precious secrets! Stop it at once!\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -31201,7 +31201,7 @@ void Func0424 object#(0x424) () {
 			case "first assistant" (remove):
 				say("\"I do not know the name of the Master's first assistant. His partial remains are around here somewhere. I do not know where. They are not where I last left them.\"");
 				if (var0002) {
-					0xFFDD->show_npc_face1(0x0000);
+					ERSTAM->show_npc_face1(0x0000);
 					say("\"Hmph!  A lazy lout he was, as well. We shall not miss him!\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -31211,12 +31211,12 @@ void Func0424 object#(0x424) () {
 			case "last assistant" (remove):
 				say("\"The last assistant to the Master -- before myself, that is -- was named Boydon. In fact, thou canst say he is still the head assistant. Heh-heh-heh-heh...\"");
 				if (var0002) {
-					0xFFDD->show_npc_face1(0x0000);
+					ERSTAM->show_npc_face1(0x0000);
 					say("\"He was another one who was dead from the neck up!\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
 					say("\"Dost thou not actually mean dead from the neck down?\"");
-					0xFFDD->show_npc_face1(0x0000);
+					ERSTAM->show_npc_face1(0x0000);
 					say("\"Yes, very well, Vasel. I shall concede that point.\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -31226,7 +31226,7 @@ void Func0424 object#(0x424) () {
 			case "other assistants" (remove):
 				say("\"Oh, little by little and bit by bit, they pop up now and again. I was never very good with names or faces... or arms or legs, or any of those other parts.\"");
 				if (var0002) {
-					0xFFDD->show_npc_face1(0x0000);
+					ERSTAM->show_npc_face1(0x0000);
 					say("\"Enough with this maudlin waste of time! Back to work with thee, Vasel!\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -31236,7 +31236,7 @@ void Func0424 object#(0x424) () {
 			case "housekeeping" (remove):
 				say("\"This place becomes quite... unkempt, and requires constant cleaning. 'Tis a dreadful thing to do! I hate the cleanings! I hate them!\"");
 				if (var0002) {
-					0xFFDD->show_npc_face1(0x0000);
+					ERSTAM->show_npc_face1(0x0000);
 					say("\"Stop thy whining, Vasel! Back to work with thee!\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -76908,7 +76908,7 @@ void Func077E object#(0x77E) () {
 			BOYDON->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, EVENING, NIGHT], [SLEEP, EAT, WANDER, EAT, LOITER, EAT], [0x0813, 0x0525, 0x0817, 0x0540, 0x0802, 0x0550, 0x0817, 0x0540, 0x081A, 0x0534, 0x0817, 0x0540]);
 			BOYDON->run_schedule();
 			UI_play_sound_effect(0x0077);
-			var0002 = script 0xFFDD after 1 ticks {
+			var0002 = script ERSTAM after 1 ticks {
 				nohalt;
 				say "It worked!";
 			};
@@ -76920,11 +76920,11 @@ void Func077E object#(0x77E) () {
 				nohalt;
 				say "I live!";
 			};
-			if (!0xFFDD->get_item_flag(DEAD)) {
+			if (!ERSTAM->get_item_flag(DEAD)) {
 				gflags[0x0007] = true;
-				0xFFDD->move_object([0x0813, 0x053A, 0x0000]);
+				ERSTAM->move_object([0x0813, 0x053A, 0x0000]);
 				UI_sprite_effect(ANIMATION_TELEPORT, (var0000[0x0001] - 0x0002), (var0000[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-				0xFFDD->si_path_run_usecode([0x081A, 0x052A, 0x0000], SCRIPTED, 0xFFDD, Func0423, true);
+				ERSTAM->si_path_run_usecode([0x081A, 0x052A, 0x0000], SCRIPTED, ERSTAM, Func0423, true);
 				abort;
 			}
 		}

@@ -16366,8 +16366,8 @@ void Func0423 object#(0x423) () {
 	var var0004;
 
 	if (event == DOUBLECLICK) {
-		0xFFDD->show_npc_face(0x0000);
-		var0000 = 0xFFDD->get_npc_object()->get_schedule_type();
+		CSIL->show_npc_face(0x0000);
+		var0000 = CSIL->get_npc_object()->get_schedule_type();
 		add(["name", "job", "services", "bye"]);
 		if (!gflags[0x00A4]) {
 			say("You see a healer who looks wise and honest.");
@@ -16413,7 +16413,7 @@ void Func0423 object#(0x423) () {
 						SHAMINO->say("\"Never mind. The whole world does not need to know about it.\"*");
 					}
 					SHAMINO->hide();
-					0xFFDD->show_npc_face(0x0000);
+					CSIL->show_npc_face(0x0000);
 				}
 				fallthrough;
 
@@ -16461,7 +16461,7 @@ void Func0423 object#(0x423) () {
 		say("\"Goodbye, Avatar.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFDD);
+		Func092E(CSIL);
 	}
 }
 
