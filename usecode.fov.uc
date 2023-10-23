@@ -15462,9 +15462,9 @@ void Func041B object#(0x41B) () {
 	var var0009;
 
 	if (event == DOUBLECLICK) {
-		0xFFE5->show_npc_face(0x0000);
+		RAYMUNDO->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
-		var0001 = 0xFFE5->get_npc_object()->get_schedule_type();
+		var0001 = RAYMUNDO->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (gflags[0x0068]) {
 			add("audition");
@@ -15594,7 +15594,7 @@ void Func041B object#(0x41B) () {
 	}
 	if (event == PROXIMITY) {
 		var0000 = UI_part_of_day();
-		var0001 = 0xFFE5->get_npc_object()->get_schedule_type();
+		var0001 = RAYMUNDO->get_npc_object()->get_schedule_type();
 		var0008 = UI_die_roll(0x0001, 0x0004);
 		if (var0001 == TEND_SHOP) {
 			if (var0008 == 0x0001) {
@@ -15609,9 +15609,9 @@ void Func041B object#(0x41B) () {
 			if (var0008 == 0x0004) {
 				var0009 = "@From the top, please.@";
 			}
-			0xFFE5->item_say(var0009);
+			RAYMUNDO->item_say(var0009);
 		} else {
-			Func092E(0xFFE5);
+			Func092E(RAYMUNDO);
 		}
 	}
 }
@@ -52075,9 +52075,9 @@ void Func0631 object#(0x631) () {
 				};
 				return;
 			}
-			if (Func08F7(0xFFE5) && (!gflags[0x0057])) {
-				if (Func0937(0xFFE5) && Func0937(AVATAR)) {
-					var0006 = script 0xFFE5->get_npc_object() after 1 ticks {
+			if (Func08F7(RAYMUNDO) && (!gflags[0x0057])) {
+				if (Func0937(RAYMUNDO) && Func0937(AVATAR)) {
+					var0006 = script RAYMUNDO->get_npc_object() after 1 ticks {
 						nohalt;
 						say "@What's the password?@";
 					};
@@ -52085,7 +52085,7 @@ void Func0631 object#(0x631) () {
 						nohalt;
 						say "@Blackbird@";
 					};
-					var0006 = script 0xFFE5->get_npc_object() after 11 ticks {
+					var0006 = script RAYMUNDO->get_npc_object() after 11 ticks {
 						nohalt;
 						say "@Pass.@";
 					};
@@ -52128,8 +52128,8 @@ void Func0631 object#(0x631) () {
 					};
 				}
 			}
-			if (Func08F7(0xFFE5) && (!gflags[0x0057])) {
-				if (Func0937(0xFFE5)) {
+			if (Func08F7(RAYMUNDO) && (!gflags[0x0057])) {
+				if (Func0937(RAYMUNDO)) {
 					var0006 = script JOHNSON->get_npc_object() after 1 ticks {
 						nohalt;
 						say "@What's the password?@";
@@ -73564,7 +73564,7 @@ void Func08D1 0x8D1 () {
 
 	UI_clear_answers();
 	var0000 = UI_is_pc_female();
-	0xFFE5->say("Raymundo hands you a script and you take center stage. The lights feel hot on your face. Although you are a little nervous, you clear your throat and begin to read the lines on the page.");
+	RAYMUNDO->say("Raymundo hands you a script and you take center stage. The lights feel hot on your face. Although you are a little nervous, you clear your throat and begin to read the lines on the page.");
 	converse (["-I- am the Avatar!", "I -am- the Avatar!", "I am -the- Avatar!", "I am the -Avatar-!"]) {
 		default:
 			say("\"No, no, no! That is all wrong! Thou art the 'Avatar'! Thou must feel like the Avatar! Thou must sound like the Avatar! Thou must -be- the Avatar! Try it again.\"");
@@ -73594,7 +73594,7 @@ void Func08D1 0x8D1 () {
 			} else {
 				say("Raymundo hands you a staff.");
 			}
-			0xFFE5->say("With the staff in hand, you try the lines once more. This time you feel like a true actor. The lines flow from your lips as if the Avatar were really saying them. You feel an excitement you have never before felt. You like this 'acting' thing. You crave more! You anxiously await Raymundo's critique...");
+			RAYMUNDO->say("With the staff in hand, you try the lines once more. This time you feel like a true actor. The lines flow from your lips as if the Avatar were really saying them. You feel an excitement you have never before felt. You like this 'acting' thing. You crave more! You anxiously await Raymundo's critique...");
 			say("Raymundo takes the staff and says, \"Hmmmm. Yes, that's fine. I thank thee. Fine. We shall be in touch, yes? Thank thee for coming in. If thou hast a resume, just leave it by the door, yes? Thank thee.\"*");
 			Func0911(0x0014);
 			abort;
