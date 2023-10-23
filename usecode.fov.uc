@@ -19994,7 +19994,7 @@ void Func043C object#(0x43C) () {
 	var var0009;
 
 	if (event == DOUBLECLICK) {
-		0xFFC4->show_npc_face(0x0000);
+		BROWNIE->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
@@ -20122,7 +20122,7 @@ void Func043C object#(0x43C) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFC4);
+		Func092E(BROWNIE);
 	}
 }
 

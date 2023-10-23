@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, 0xFFC3, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, 0xFFC4, 0xFFC3, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, 0xFFC3, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -40676,18 +40676,18 @@ void Func043C object#(0x43C) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Greetings, sir.@");
-		0xFFC4->Func07D1();
-		Func097F(0xFFC4, (("@Hello, " + var0000) + ".@"), 0x0005);
-		0xFFC4->set_schedule_type(TALK);
+		SCOTS->Func07D1();
+		Func097F(SCOTS, (("@Hello, " + var0000) + ".@"), 0x0005);
+		SCOTS->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFC4->run_schedule();
-		0xFFC4->clear_item_say();
-		0xFFC4->show_npc_face0(0x0000);
-		var0004 = 0xFFC4->get_item_flag(MET);
+		SCOTS->run_schedule();
+		SCOTS->clear_item_say();
+		SCOTS->show_npc_face0(0x0000);
+		var0004 = SCOTS->get_item_flag(MET);
 		if (var0004 == false) {
 			say("\"Good, a new face! I am Scots, a geographer. Perhaps thou wouldst share tales of other places with me, so I might add detail to my maps.\"");
-			0xFFC4->set_item_flag(MET);
+			SCOTS->set_item_flag(MET);
 		} else {
 			say("\"Welcome back, ",
 				var0002,
@@ -40847,7 +40847,7 @@ void Func043C object#(0x43C) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Thanks for thine assistance.@", 0x0000);
-				Func097F(0xFFC4, "@A pleasure...@", 0x0005);
+				Func097F(SCOTS, "@A pleasure...@", 0x0005);
 				break;
 		}
 	}
@@ -68480,9 +68480,9 @@ void Func06C0 object#(0x6C0) () {
 				say "@The Fellowship is the way...@";
 			};
 		}
-		if (!0xFFC4->is_dead()) {
-			0xFFC4->move_object([0x049B, 0x0769, 0x0000]);
-			0xFFC4->set_schedule_type(LOITER);
+		if (!SCOTS->is_dead()) {
+			SCOTS->move_object([0x049B, 0x0769, 0x0000]);
+			SCOTS->set_schedule_type(LOITER);
 			var0001 = script KYLISTA {
 				nohalt;
 				wait 64;
@@ -78805,7 +78805,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(LEON, 0x03B5, 0x0697, WAIT);
 		Func09AC(KALEN, 0x0407, 0x066E, WAIT);
 		Func09AC(OLON, 0x0467, 0x06C9, WAIT);
-		Func09AC(0xFFC4, 0x0407, 0x0780, WAIT);
+		Func09AC(SCOTS, 0x0407, 0x0780, WAIT);
 		Func09AC(0xFFC3, 0x03F7, 0x0796, WAIT);
 		RUGGS->set_new_schedules([DAWN, MORNING, NOON, AFTERNOON, EVENING, NIGHT], [LOITER, WANDER, WANDER, LOITER, EAT_AT_INN, SLEEP], [0x0406, 0x0777, 0x0409, 0x074E, 0x0406, 0x0718, 0x0466, 0x06ED, 0x03AF, 0x06E0, 0x03D6, 0x06C6]);
 		RUGGS->run_schedule();
@@ -80953,7 +80953,7 @@ void Func07F8 object#(0x7F8) () {
 				nohalt;
 				call Func07F8;
 			};
-			var0001 = [YELINDA, KYLISTA, VOLDIN, 0xFFC3, JOTH, GARTH, KALEN, LEON, JENDON, DELPHYNIA, DELIN, JORVIN, 0xFFC4, RUGGS, ALYSSAND, OLON];
+			var0001 = [YELINDA, KYLISTA, VOLDIN, 0xFFC3, JOTH, GARTH, KALEN, LEON, JENDON, DELPHYNIA, DELIN, JORVIN, SCOTS, RUGGS, ALYSSAND, OLON];
 			for (var0004 in var0001 with var0002 to var0003) {
 				var0004->remove_npc();
 				var0004->run_schedule();
@@ -81928,19 +81928,19 @@ void Func07FB object#(0x7FB) () {
 		UI_init_conversation();
 		VOLDIN->show_npc_face0(0x0000);
 		say("\"Art thou a follower of this Fellowship, Scots?\"");
-		0xFFC4->show_npc_face1(0x0000);
+		SCOTS->show_npc_face1(0x0000);
 		say("\"I'm a geographer, sir. And a sailor. Though I was brought here by The Fellowship to study this land, I do not practice their beliefs.\"");
 		say("\"However, I see nothing wrong with The Fellowship. If anything, it seems that Leon speaks more of the truth than thine own Priestess.\"");
 		UI_remove_npc_face1();
 		0x0000->set_conversation_slot();
 		say("\"Heresy! Leave this Temple and never return to our fair city, upon pain of death!\"");
-		0xFFC4->show_npc_face1(0x0000);
+		SCOTS->show_npc_face1(0x0000);
 		say("\"And Lord British is no Daemon! He's a good man, and hath often commissioned me to create new maps for him...\"");
 		UI_remove_npc_face1();
 		0x0000->set_conversation_slot();
 		say("\"Jorvin, if that man speaks another word, blast him with thy wand!\"");
 		UI_end_conversation();
-		Func097F(0xFFC4, "@Not the wand!@", 0x0000);
+		Func097F(SCOTS, "@Not the wand!@", 0x0000);
 		Func097F(VOLDIN, "@Jorvin...@", 0x0003);
 		si_path_run_usecode([0x0407, 0x0679, 0x0000], SI_PATH_SUCCESS, item, Func07FB, false);
 		var0004 = script JORVIN after 4 ticks {
@@ -81953,7 +81953,7 @@ void Func07FB object#(0x7FB) () {
 	}
 	if (var0000 == 0x0031) {
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(var0000 + 0x0001);
-		var0004 = JORVIN->set_to_attack(0xFFC4, 0x0118);
+		var0004 = JORVIN->set_to_attack(SCOTS, 0x0118);
 		var0004 = script JORVIN {
 			actor frame strike_1h;
 			attack;
@@ -81975,8 +81975,8 @@ void Func07FB object#(0x7FB) () {
 			actor frame bowing;
 			actor frame sitting;
 		};
-		0xFFC4->move_object([0x05F0, 0x078F, 0x0000]);
-		0xFFC4->run_schedule();
+		SCOTS->move_object([0x05F0, 0x078F, 0x0000]);
+		SCOTS->run_schedule();
 		Func08C6();
 		var0004 = script VOLDIN after 3 ticks {
 			nohalt;
@@ -103535,10 +103535,10 @@ void Func08C2 0x8C2 () {
 		}
 		if (var0006 == 0x0008) {
 			if (gflags[0x0170]) {
-				var0007 = 0xFFC4;
+				var0007 = SCOTS;
 				var0008 = 0x0002;
 			} else {
-				0xFFC4->remove_npc();
+				SCOTS->remove_npc();
 			}
 		}
 		if (var0006 == 0x000A) {
@@ -109841,8 +109841,8 @@ void Func093B 0x93B (var var0000) {
 				var0007 &= 0xFFC3;
 			}
 		}
-		if ((!gflags[0x0180]) && (0xFFC4->get_item_flag(MET) && ((!0xFFC4->get_item_flag(DEAD)) && gflags[0x0170]))) {
-			var0007 = 0xFFC4;
+		if ((!gflags[0x0180]) && (SCOTS->get_item_flag(MET) && ((!SCOTS->get_item_flag(DEAD)) && gflags[0x0170]))) {
+			var0007 = SCOTS;
 		}
 		if ((!gflags[0x0176]) && ALYSSAND->get_item_flag(MET)) {
 			if (gflags[0x0170]) {
@@ -110074,7 +110074,7 @@ void Func093B 0x93B (var var0000) {
 		if ((item == RUGGS->get_npc_object()) || (item == GARTH->get_npc_object())) {
 			var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x002F);
 		}
-		if (item == 0xFFC4->get_npc_object()) {
+		if (item == SCOTS->get_npc_object()) {
 			var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x0030);
 		}
 		if (item == OLON->get_npc_object()) {
