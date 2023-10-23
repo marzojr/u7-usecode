@@ -8201,9 +8201,9 @@ void Func0334 shape#(0x334) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		0xFFE9->kill_npc();
-		0xFFE9->halt_scheduled();
-		0xFFE9->remove_npc();
+		LORD_BRITISH->kill_npc();
+		LORD_BRITISH->halt_scheduled();
+		LORD_BRITISH->remove_npc();
 		return;
 	}
 	var0009 = Func0908();
@@ -8308,7 +8308,7 @@ void Func0334 shape#(0x334) () {
 		var000A = ["blow", "horn", "to", "summon", "ferry"];
 	} else if (var0001 == 0x0030) {
 		var0008 = get_object_position();
-		var000B = 0xFFE9->get_object_position();
+		var000B = LORD_BRITISH->get_object_position();
 		if ((Func0932(var0008[0x0001] - var000B[0x0001]) <= 0x0002) && (Func0932(var0008[0x0002] - var000B[0x0002]) <= 0x0002)) {
 			var0007 = script item {
 				call Func0609;
@@ -8316,7 +8316,7 @@ void Func0334 shape#(0x334) () {
 				call Func0609;
 				remove;
 			};
-			var0007 = script 0xFFE9 {
+			var0007 = script LORD_BRITISH {
 				wait 3;
 				sfx 19;
 				actor frame standing;
@@ -14334,13 +14334,13 @@ void Func0417 object#(0x417) () {
 labelFunc0417_000C:
 		var0001 = Func0908();
 		if (gflags[0x001E]) {
-			0xFFE9->say("\"Fool!! What possessed thee to cast that damned Armageddon Spell? I knew it was dangerous! Thou didst know it was dangerous!! Now look at us! We are all alone on the entire planet! Britannia is ruined! What kind of Avatar art thou!?! Now, with no Moongates working, we are both forced to spend eternity in this blasted wasteland!~~\"Of course, it could be viewed as a clever solution to all of our problems. After all, not even this so-called Guardian would want Britannia now!\"*");
+			LORD_BRITISH->say("\"Fool!! What possessed thee to cast that damned Armageddon Spell? I knew it was dangerous! Thou didst know it was dangerous!! Now look at us! We are all alone on the entire planet! Britannia is ruined! What kind of Avatar art thou!?! Now, with no Moongates working, we are both forced to spend eternity in this blasted wasteland!~~\"Of course, it could be viewed as a clever solution to all of our problems. After all, not even this so-called Guardian would want Britannia now!\"*");
 			abort;
 		}
 		if (gflags[0x030C]) {
 			if (!gflags[0x030D]) {
 				var0000 = true;
-				0xFFE9->say("\"I felt the passing of the remains of Exodus from this realm. It has lifted a great weight from my shoulders. And so Avatar, I cannot let this accomplishment go unrewarded. Please kneel, my friend.\" Lord British holds out his hands as you obey his command.");
+				LORD_BRITISH->say("\"I felt the passing of the remains of Exodus from this realm. It has lifted a great weight from my shoulders. And so Avatar, I cannot let this accomplishment go unrewarded. Please kneel, my friend.\" Lord British holds out his hands as you obey his command.");
 				// I see no way other than this
 				goto labelFunc0417_0743;
 			}
@@ -14351,7 +14351,7 @@ labelFunc0417_000C:
 		var0003 = Func08F7(IOLO);
 		var0004 = Func08F7(DUPRE);
 		var0005 = Func08F7(SHAMINO);
-		0xFFE9->show_npc_face(0x0000);
+		LORD_BRITISH->show_npc_face(0x0000);
 		var0006 = false;
 		var0007 = false;
 		var0008 = false;
@@ -14551,7 +14551,7 @@ labelFunc0417_000C:
 					say("\"Hello, Iolo! How art thou?\"*");
 					IOLO->say("\"I am well, my liege! 'Tis good to see thee!\"*");
 					IOLO->hide();
-					0xFFE9->show_npc_face(0x0000);
+					LORD_BRITISH->show_npc_face(0x0000);
 				}
 				remove("Iolo");
 				add("Trinsic");
@@ -14562,11 +14562,11 @@ labelFunc0417_000C:
 				if (var0005) {
 					say("\"What dost thou have to say for thyself, Shamino?\"*");
 					SHAMINO->say("\"Mine apologies, milord,\" Shamino says.*");
-					0xFFE9->say("\"What's this I hear of a woman? An actress? Hmmmm?\"*");
+					LORD_BRITISH->say("\"What's this I hear of a woman? An actress? Hmmmm?\"*");
 					SHAMINO->say("Shamino blushes and shuffles his feet.*");
-					0xFFE9->say("\"I suspected as much!\" the ruler says, laughing.");
+					LORD_BRITISH->say("\"I suspected as much!\" the ruler says, laughing.");
 					SHAMINO->hide();
-					0xFFE9->show_npc_face(0x0000);
+					LORD_BRITISH->show_npc_face(0x0000);
 				}
 				remove("Shamino");
 				fallthrough;
@@ -14576,10 +14576,10 @@ labelFunc0417_000C:
 				if (var0004) {
 					say("\"Where hast thou been, Sir Dupre?\"*");
 					DUPRE->say("\"Oh, here and there, milord,\" the fighter replies.*");
-					0xFFE9->say("\"I have very few friends from our homeland here in Britannia. Thou must make a point to visit more often! Especially since thou art a knight!\"*");
+					LORD_BRITISH->say("\"I have very few friends from our homeland here in Britannia. Thou must make a point to visit more often! Especially since thou art a knight!\"*");
 					DUPRE->say("\"If thou dost wish it, milord,\" Dupre says, bowing.*");
 					DUPRE->hide();
-					0xFFE9->show_npc_face(0x0000);
+					LORD_BRITISH->show_npc_face(0x0000);
 				}
 				remove("Dupre");
 				add("Jhelom");
@@ -14722,7 +14722,7 @@ labelFunc0417_000C:
 			". Do come back soon.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFE9);
+		Func092E(LORD_BRITISH);
 	}
 labelFunc0417_0743:
 	if (var0000 == true) {
@@ -14773,7 +14773,7 @@ labelFunc0417_0743:
 				var0011 = AVATAR->get_npc_object()->set_npc_prop(HEALTH, 60 - var0010[0x0002]);
 			}
 		} else {
-			0xFFE9->show_npc_face(0x0000);
+			LORD_BRITISH->show_npc_face(0x0000);
 			var0001 = Func0908();
 			say("\"I congratulate and thank thee, ",
 				var0001,
@@ -52777,12 +52777,12 @@ void Func063E object#(0x63E) () {
 	var var0005;
 
 	if (event == EGG) {
-		var0000 = 0xFFE9->set_last_created();
+		var0000 = LORD_BRITISH->set_last_created();
 		if (var0000) {
 			var0001 = AVATAR->get_object_position();
 			var0001[0x0002] -= 0x0004;
 			var0000 = UI_update_last_created(var0001);
-			0xFFE9->set_item_frame(0x0010);
+			LORD_BRITISH->set_item_frame(0x0010);
 		}
 		var0000 = script AVATAR after 1 ticks {
 			nohalt;
@@ -52799,7 +52799,7 @@ void Func063E object#(0x63E) () {
 		var0000 = AVATAR->set_npc_prop(EXPERIENCE, 0);
 	}
 	if (event == SCRIPTED) {
-		0xFFE9->say("Busted, you thieving scoundrel bastard! Perhaps the only thing more ridiculous than your pathetic attempt to destroy the black gate without paying proper dues is your inevitably embarassing explanation\tto the friend to whom you are, no doubt, showing this!");
+		LORD_BRITISH->say("Busted, you thieving scoundrel bastard! Perhaps the only thing more ridiculous than your pathetic attempt to destroy the black gate without paying proper dues is your inevitably embarassing explanation\tto the friend to whom you are, no doubt, showing this!");
 		say("For the atrocious crime of cheating against the virtues of Britannia, I find you guilty.*");
 		UI_play_sound_effect(0x000F);
 		say("Judgement rendered.* Sentence selected:* Death.*");
@@ -52816,9 +52816,9 @@ void Func063E object#(0x63E) () {
 		UI_set_weather(RAIN);
 		UI_armageddon();
 		gflags[0x001E] = true;
-		0xFFE9->set_alignment(EVIL);
-		0xFFE9->set_attack_mode(NEAREST);
-		0xFFE9->set_schedule_type(IN_COMBAT);
+		LORD_BRITISH->set_alignment(EVIL);
+		LORD_BRITISH->set_attack_mode(NEAREST);
+		LORD_BRITISH->set_schedule_type(IN_COMBAT);
 		set_item_flag(CONFUSED);
 	}
 }
@@ -56062,7 +56062,7 @@ void Func0682 object#(0x682) () {
 			var0002 = 0x0019;
 			var0003 = find_nearby(ANY_SHAPE, var0002, MASK_NPC);
 			var0004 = UI_get_party_list2();
-			var0004 &= 0xFFE9->get_npc_object();
+			var0004 &= LORD_BRITISH->get_npc_object();
 			var0004 &= 0xFFE6->get_npc_object();
 			var0005 = false;
 			for (var0008 in var0003 with var0006 to var0007) {
@@ -59800,14 +59800,14 @@ void Func06F6 object#(0x6F6) () {
 							if (AVATAR->get_npc_object()->get_distance(var0011) < 0x0005) {
 								say("\"Yes! I have long sought the end of Lord British, my traitorous master.\"");
 								var0019 = Func0908();
-								0xFFE9->say("\"",
+								LORD_BRITISH->say("\"",
 									var0019,
 									", for what reason art thou brandishing that black sword in my presence?\"");
 								0xFEDC->hide();
 								AVATAR->say("The daemon responds, using your mouth. \"This blade is thy doom,...\" You spit the words, \"Lord British!\"");
-								0xFFE9->say("Lord British looks truly taken aback, his eyes narrow calculatingly. \"What foul treachery is this?\"");
+								LORD_BRITISH->say("Lord British looks truly taken aback, his eyes narrow calculatingly. \"What foul treachery is this?\"");
 								AVATAR->say("You find yourself unable to respond, and your muscles are clenching as if to lash out with the wicked blade in your hand.");
-								0xFFE9->say("\"Perhaps when thou art sitting in a dungeon, thy tongue will loosen.");
+								LORD_BRITISH->say("\"Perhaps when thou art sitting in a dungeon, thy tongue will loosen.");
 								say("\"Guards!\"*");
 								var0014 = true;
 								goto labelFunc06F6_0B89;
@@ -60522,7 +60522,7 @@ void Func06F8 object#(0x6F8) () {
 				Func08FF("@'Tis sad that Erethian's lust for power has brought him to this evil pass.@");
 				Func08FF("@Perhaps, at last, he is at rest.@");
 			}
-			if (!0xFFE9->is_dead()) {
+			if (!LORD_BRITISH->is_dead()) {
 				Func08FF("@I am sure that Lord British even now awaits news of Exodus' exile.@");
 			}
 			Func08FF("@It is time to leave this barren island behind.@");
@@ -62004,7 +62004,7 @@ void Func070F object#(0x70F) () {
 		var0008 = UI_create_new_object(0x019E);
 		var0008->set_item_frame_rot(get_item_frame_rot());
 		var0008->set_item_frame(0x001E);
-		0xFFE9->remove_npc();
+		LORD_BRITISH->remove_npc();
 		var0009 = UI_update_last_created(var0007);
 		var000A = UI_create_new_object(0x031D);
 		var000A->set_item_frame(0x0000);

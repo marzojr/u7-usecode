@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, GUSTACIO, 0xFFE8, 0xFFE9, 0xFFE2, 0xFFE0, 0xFFE3, 0xFFE5, FILBERCIO, FRIGIDAZZI, 0xFFD6, 0xFFD5, GOBLIN_MESSENGER, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, GUSTACIO, 0xFFE8, JULIA, 0xFFE2, 0xFFE0, 0xFFE3, 0xFFE5, FILBERCIO, FRIGIDAZZI, 0xFFD6, 0xFFD5, GOBLIN_MESSENGER, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -3084,9 +3084,9 @@ void Func0103 shape#(0x103) () {
 			converse (["Ranger", "bye"]) {
 				case "kidnap" (remove):
 					say("\"Thou shouldst report such a crime as this to Julia. She can aid thee.\"");
-					if (0xFFE9->npc_nearby()) {
-						0xFFE9->set_schedule_type(TALK);
-						Func097F(0xFFE9, "@Yes?@", 0x0000);
+					if (JULIA->npc_nearby()) {
+						JULIA->set_schedule_type(TALK);
+						Func097F(JULIA, "@Yes?@", 0x0000);
 					}
 					fallthrough;
 
@@ -3235,10 +3235,10 @@ void Func0103 shape#(0x103) () {
 			converse (["Ranger", "bye"]) {
 				case "kidnap" (remove):
 					say("\"This is such a terrible crime. And it involves magic!");
-					if (0xFFE9->npc_nearby()) {
+					if (JULIA->npc_nearby()) {
 						say("\"Thou shouldst report such a crime as this to Julia. She can aid thee.\"");
-						0xFFE9->set_schedule_type(TALK);
-						Func097F(0xFFE9, "@Yes?@", 0x0000);
+						JULIA->set_schedule_type(TALK);
+						Func097F(JULIA, "@Yes?@", 0x0000);
 					} else {
 						say("\"Do not tell that I told thee this, but do not take such a matter to Julia -- \"");
 						say("\"She shall only extort a bribe, then send thee elsewhere.\"");
@@ -26095,49 +26095,49 @@ void Func0417 object#(0x417) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say(("@Good " + var0003) + ", miss.@");
-		0xFFE9->Func07D1();
-		Func097F(0xFFE9, "@So?@", 0x0002);
-		0xFFE9->set_schedule_type(TALK);
+		JULIA->Func07D1();
+		Func097F(JULIA, "@So?@", 0x0002);
+		JULIA->set_schedule_type(TALK);
 	}
 	if (event == PROXIMITY) {
 		var0004 = UI_get_random(0x0006);
 		if (var0004 == 0x0001) {
-			0xFFE9->item_say("@Do not go there!@");
+			JULIA->item_say("@Do not go there!@");
 		}
 		if (var0004 == 0x0002) {
-			0xFFE9->item_say("@Wine for sale!@");
+			JULIA->item_say("@Wine for sale!@");
 		}
 		if (var0004 == 0x0003) {
-			0xFFE9->item_say("@Very suspicious...@");
+			JULIA->item_say("@Very suspicious...@");
 		}
 		if (var0004 == 0x0004) {
-			0xFFE9->item_say("@Magical wine!@");
+			JULIA->item_say("@Magical wine!@");
 		}
 		if (var0004 == 0x0005) {
 			// BUG: Invalid mask. Instead of FIND_ON_SCREEN, it should have
 			// been MASK_NPC2 instead.
-			var0005 = 0xFFE9->find_nearby(0x0103, 0x000A, FIND_ON_SCREEN);
+			var0005 = JULIA->find_nearby(0x0103, 0x000A, FIND_ON_SCREEN);
 			if (var0005 != []) {
-				0xFFE9->item_say("@Clean this!@");
+				JULIA->item_say("@Clean this!@");
 				for (var0008 in var0005 with var0006 to var0007) {
 					Func097F(var0008, "@Yes, ma'am@", 0x0002);
 				}
 			} else {
-				0xFFE9->item_say("@Where is Ernesto?@");
+				JULIA->item_say("@Where is Ernesto?@");
 			}
 		}
 		if (var0004 == 0x0006) {
-			0xFFE9->item_say("@Taste the wine!@");
+			JULIA->item_say("@Taste the wine!@");
 		}
 	}
 	if (event == STARTED_TALKING) {
-		0xFFE9->run_schedule();
-		0xFFE9->clear_item_say();
-		0xFFE9->show_npc_face0(0x0000);
-		var0009 = 0xFFE9->get_item_flag(MET);
+		JULIA->run_schedule();
+		JULIA->clear_item_say();
+		JULIA->show_npc_face0(0x0000);
+		var0009 = JULIA->get_item_flag(MET);
 		if (var0009 == false) {
 			say("\"In what way can I help thee, stranger?\"");
-			0xFFE9->set_item_flag(MET);
+			JULIA->set_item_flag(MET);
 		} else {
 			say("\"We meet again.\"");
 		}
@@ -26368,7 +26368,7 @@ void Func0417 object#(0x417) () {
 				fallthrough;
 
 			case "wine" (remove):
-				if (0xFFE9->get_schedule_type() == TEND_SHOP) {
+				if (JULIA->get_schedule_type() == TEND_SHOP) {
 					say("\"We make the finest wine that thou wilt find anywhere. Wouldst thou care to try some?\"");
 					if (Func0955() == true) {
 						say("\"Good...\"");
@@ -26420,7 +26420,7 @@ void Func0417 object#(0x417) () {
 						say("\"Art thou trying to jest with me? Thou dost not have 40 guilders!\"");
 						say("\"Return when thou hast learned how to count!\"");
 						UI_remove_npc_face0();
-						Func097F(0xFFE9, "@Oaf!@", 0x0000);
+						Func097F(JULIA, "@Oaf!@", 0x0000);
 						abort;
 					}
 				} else {
@@ -26513,7 +26513,7 @@ void Func0417 object#(0x417) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Goodbye!@", 0x0000);
-				Func097F(0xFFE9, "@Do not make trouble!@", 0x0002);
+				Func097F(JULIA, "@Do not make trouble!@", 0x0002);
 				Func08FF();
 				break;
 		}
@@ -78769,7 +78769,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(0xFFD8, 0x08C2, 0x0715, WAIT);
 		Func09AC(GUSTACIO, 0x0978, 0x0819, WAIT);
 		Func09AC(0xFFE8, 0x09B7, 0x07E5, WAIT);
-		Func09AC(0xFFE9, 0x096B, 0x07C2, WAIT);
+		Func09AC(JULIA, 0x096B, 0x07C2, WAIT);
 		Func09AC(0xFFE2, 0x098B, 0x07A6, WAIT);
 		Func09AC(0xFFE0, 0x0999, 0x07A2, WAIT);
 		Func09AC(0xFFE3, 0x0958, 0x0793, WAIT);
@@ -92013,15 +92013,15 @@ void Func0840 0x840 () {
 		} else if (var000D == 0x0003) {
 			var0010 = Func0992(0x0001, (("@But " + var0001) + ", we lack adequate funds!@"), 0x0000, false);
 			if (var0010 != AVATAR) {
-				0xFFE9->show_npc_face0(0x0000);
+				JULIA->show_npc_face0(0x0000);
 				say("\"Thou dost not have the guilders to buy that!\"");
 			} else {
 				say("\"Thou dost not have the guilders to buy that!\"");
 			}
-			if (0x001F < (0xFFE9->get_npc_id() + 0x0006)) {
-				0xFFE9->set_npc_id(0x001F);
+			if (0x001F < (JULIA->get_npc_id() + 0x0006)) {
+				JULIA->set_npc_id(0x001F);
 			} else {
-				0xFFE9->set_npc_id(0xFFE9->get_npc_id() + 0x0006);
+				JULIA->set_npc_id(JULIA->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Wouldst thou care for more?\"");
@@ -92056,12 +92056,12 @@ var Func0841 0x841 (var var0000, var var0001) {
 	var0003 = UI_is_pc_female();
 	var0004 = var0000;
 	var0005 = (var0001 / 0x0003) * 0x0002;
-	var0006 = 0x000F - (0xFFE9->get_npc_id() / 0x0002);
+	var0006 = 0x000F - (JULIA->get_npc_id() / 0x0002);
 	var0007 = 0x0000;
 	var0008 = 0x0001;
 	var0009 = 0x0000;
 	var000A = 0x0002;
-	var000B = 0xFFE9->get_npc_id();
+	var000B = JULIA->get_npc_id();
 	while (var0008) {
 		var000C = Func0956(["yes", "no", "haggle"]);
 		if (var000C == "no") {
@@ -92136,7 +92136,7 @@ var Func0841 0x841 (var var0000, var var0001) {
 				"?\"");
 			if (Func0955()) {
 				if (var000B > 0x0001) {
-					0xFFE9->set_npc_id(var000B - 0x0002);
+					JULIA->set_npc_id(var000B - 0x0002);
 				}
 				return var0004;
 			}
@@ -92155,9 +92155,9 @@ var Func0841 0x841 (var var0000, var var0001) {
 				abort;
 			}
 			if (0x001F < (var000B + 0x000A)) {
-				0xFFE9->set_npc_id(0x001F);
+				JULIA->set_npc_id(0x001F);
 			} else {
-				0xFFE9->set_npc_id(var000B + 0x000A);
+				JULIA->set_npc_id(var000B + 0x000A);
 			}
 			return 0x0000;
 		}
@@ -92167,7 +92167,7 @@ var Func0841 0x841 (var var0000, var var0001) {
 					var0004,
 					" was my final offer. I have no more time to deal with thee. Dost thou accept?\"");
 				if (var000B < 0x001C) {
-					0xFFE9->set_npc_id(var000B + 0x0004);
+					JULIA->set_npc_id(var000B + 0x0004);
 				}
 				if (Func0955()) {
 					return var0004;
@@ -92178,7 +92178,7 @@ var Func0841 0x841 (var var0000, var var0001) {
 					var0004,
 					" guilders... Or take thy business elsewhere.\"");
 				if (var000B < 0x001E) {
-					0xFFE9->set_npc_id(var000B + 0x0002);
+					JULIA->set_npc_id(var000B + 0x0002);
 				}
 			}
 		} else {
@@ -92255,7 +92255,7 @@ var Func0841 0x841 (var var0000, var var0001) {
 						" guilders is where I stand.\"");
 				}
 				if (var000B < 0x001F) {
-					0xFFE9->set_npc_id(var000B + 0x0001);
+					JULIA->set_npc_id(var000B + 0x0001);
 				}
 			}
 		}
@@ -106252,7 +106252,7 @@ void Func08FF 0x8FF () {
 	if (gflags[0x00D7]) {
 		abort;
 	}
-	var0000 = ((((((((((((((GUSTACIO->get_item_flag(MET) + 0xFFE6->get_item_flag(MET)) + FEDABIBLIO->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + COLUMNA->get_item_flag(MET)) + 0xFFE8->get_item_flag(MET)) + DUCIO->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + 0xFFE9->get_item_flag(MET)) + 0xFFE2->get_item_flag(MET)) + 0xFFE4->get_item_flag(MET)) + BUCIA->get_item_flag(MET)) + 0xFFE5->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + FRELI->get_item_flag(MET)) + gflags[0x00D6];
+	var0000 = ((((((((((((((GUSTACIO->get_item_flag(MET) + 0xFFE6->get_item_flag(MET)) + FEDABIBLIO->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + COLUMNA->get_item_flag(MET)) + 0xFFE8->get_item_flag(MET)) + DUCIO->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + JULIA->get_item_flag(MET)) + 0xFFE2->get_item_flag(MET)) + 0xFFE4->get_item_flag(MET)) + BUCIA->get_item_flag(MET)) + 0xFFE5->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + FRELI->get_item_flag(MET)) + gflags[0x00D6];
 	if ((var0000 >= 0x0003) && (!gflags[0x00D7])) {
 		var0001 = 0xFFE7->approach_avatar(0x005A, 0x0028);
 		if (var0001) {
