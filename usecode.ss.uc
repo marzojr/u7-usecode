@@ -4395,7 +4395,7 @@ void Func013E shape#(0x13E) () {
 		}
 	}
 	var0007 = get_npc_id();
-	if ((get_schedule_type() == PATROL) && (0xFFC0->get_npc_id() != 0x0000)) {
+	if ((get_schedule_type() == PATROL) && (CANTRA->get_npc_id() != 0x0000)) {
 		abort;
 	}
 	if (Func0994() == 0x0010) {
@@ -4433,7 +4433,7 @@ void Func013E shape#(0x13E) () {
 		}
 		if (event == PROXIMITY) {
 			if (var0007 == 0x0000) {
-				0xFFC0->set_item_flag(DEAD);
+				CANTRA->set_item_flag(DEAD);
 				var0009 = find_nearby(0x0178, 0x0005, MASK_NONE);
 				if (var0009) {
 					var000A = var0009->get_item_frame() - 0x0001;
@@ -8509,8 +8509,8 @@ void Func01DF shape#(0x1DF) () {
 				var0003->set_alignment(EVIL);
 				var0004 = var0003->add_cont_items(0x0001, 0x0281, 0x003D, 0x0004, false);
 				var0004 = var0003->add_cont_items(0x0003, 0x0194, QUALITY_ANY, 0x0003, false);
-				Func09AC(0xFFC0, 0x00A0, 0x002E, WAIT);
-				0xFFC0->remove_npc();
+				Func09AC(CANTRA, 0x00A0, 0x002E, WAIT);
+				CANTRA->remove_npc();
 				gflags[0x004A] = true;
 				0xFFB5->set_alignment(CHAOTIC);
 				0xFFB5->set_item_flag(SI_TOURNAMENT);
@@ -9082,7 +9082,7 @@ void Func0207 shape#(0x207) () {
 			if ((Func0994() == 0x000D) && (gflags[0x0095] && (!gflags[0x02E2]))) {
 				gflags[0x008B] = true;
 				gflags[0x008C] = true;
-				var0001 = 0xFFC0;
+				var0001 = CANTRA;
 				var0002 = [0x00CB, 0x0097, 0x0006];
 				if (!gflags[0x002A]) {
 					var0003 = [0x00C8, 0x0097, 0x0006];
@@ -15611,7 +15611,7 @@ void Func032B shape#(0x32B) () {
 		0xFEFB->set_item_flag(MET);
 		0xFF6D->set_item_flag(SI_ZOMBIE);
 		0xFF6B->set_item_flag(SI_ZOMBIE);
-		var0008 = [AVATAR, SELINA, KALEN, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, 0xFF33, 0xFF35, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, 0xFF4B, 0xFF4A, 0xFFC0, 0xFF6A, 0xFFB6, CALADIN, 0xFFB1, 0xFFB9, 0xFEF7, 0xFF89, 0xFF88, 0xFF87, 0xFF86, 0xFF85, 0xFF58];
+		var0008 = [AVATAR, SELINA, KALEN, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, 0xFF33, 0xFF35, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, 0xFF4B, 0xFF4A, CANTRA, 0xFF6A, 0xFFB6, CALADIN, 0xFFB1, 0xFFB9, 0xFEF7, 0xFF89, 0xFF88, 0xFF87, 0xFF86, 0xFF85, 0xFF58];
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -42054,29 +42054,29 @@ void Func0440 object#(0x440) () {
 	var var0006;
 	var var0007;
 
-	var0000 = 0xFFC0->find_nearby(0x013E, 0x001E, MASK_NONE);
-	var0001 = 0xFFC0->get_item_flag(MET);
+	var0000 = CANTRA->find_nearby(0x013E, 0x001E, MASK_NONE);
+	var0001 = CANTRA->get_item_flag(MET);
 	var0002 = Func0954();
 	if (gflags[0x008B] && ((event == PROXIMITY) && (!gflags[0x02E2]))) {
-		0xFFC0->set_npc_id(0xFFC0->get_npc_id() + 0x0001);
-		if (0xFFC0->get_npc_id() == 0x0005) {
+		CANTRA->set_npc_id(CANTRA->get_npc_id() + 0x0001);
+		if (CANTRA->get_npc_id() == 0x0005) {
 			Func080E();
 		}
-		if (0xFFC0->get_npc_id() == 0x0004) {
-			Func097F(0xFFC0, "@Never!@", 0x0002);
+		if (CANTRA->get_npc_id() == 0x0004) {
+			Func097F(CANTRA, "@Never!@", 0x0002);
 			Func097F(var0000, "@Give me thy powers!@", 0x0000);
 		}
-		if (0xFFC0->get_npc_id() == 0x0003) {
-			Func097F(0xFFC0, "@I am only a little girl...@", 0x0002);
+		if (CANTRA->get_npc_id() == 0x0003) {
+			Func097F(CANTRA, "@I am only a little girl...@", 0x0002);
 			Func097F(var0000, "@I know thee!@", 0x0000);
 		}
-		if (0xFFC0->get_npc_id() == 0x0002) {
-			Func097F(0xFFC0, "@Leave me alone!@", 0x0000);
+		if (CANTRA->get_npc_id() == 0x0002) {
+			Func097F(CANTRA, "@Leave me alone!@", 0x0000);
 			Func097F(var0000, "@Stop, fiend!@", 0x0002);
 		}
-		if (0xFFC0->get_npc_id() == 0x0001) {
+		if (CANTRA->get_npc_id() == 0x0001) {
 			UI_fade_palette(0x000C, 0x0001, 0x0001);
-			Func097F(0xFFC0, "@Help!@", 0x0000);
+			Func097F(CANTRA, "@Help!@", 0x0000);
 			UI_play_music(0x0034, Func09A0(0x0005, 0x0001));
 			if (var0000) {
 				var0000->set_schedule_type(PATROL);
@@ -42095,7 +42095,7 @@ void Func0440 object#(0x440) () {
 		0xFF35->run_schedule();
 		0xFF34->run_schedule();
 		0xFEDB->run_schedule();
-		0xFFC0->remove_npc();
+		CANTRA->remove_npc();
 		if (gflags[0x0095] && (!gflags[0x005B])) {
 			0xFFBD->move_object([0x0345, 0x0A8B, 0x0000]);
 			Func09AC(0xFFBD, -1, -1, WAIT);
@@ -42115,18 +42115,18 @@ void Func0440 object#(0x440) () {
 		};
 		AVATAR->clear_item_flag(DONT_MOVE);
 		UI_init_conversation();
-		0xFFC0->set_npc_id(0x0000);
+		CANTRA->set_npc_id(0x0000);
 		gflags[0x002A] = false;
 	}
-	if ((event == PROXIMITY) && (0xFFC0->get_schedule_type() == HOUND)) {
+	if ((event == PROXIMITY) && (CANTRA->get_schedule_type() == HOUND)) {
 		if (UI_get_random(0x000A) < 0x0007) {
 			abort;
 		}
 		var0004 = ["@Hello, there!@", "@May I watch?@", "@Art thou a hero?@", "@Where are we going?@", "@May I come?@", "@I'm a warrior, too.@"];
-		Func097F(0xFFC0, var0004[UI_get_random(0x0006)], 0x0000);
+		Func097F(CANTRA, var0004[UI_get_random(0x0006)], 0x0000);
 	}
 	if (event == DOUBLECLICK) {
-		if (0xFFC0->get_item_flag(SI_ZOMBIE)) {
+		if (CANTRA->get_item_flag(SI_ZOMBIE)) {
 			Func097F(AVATAR, "Hello, Cantra.", 0x0000);
 			var0005 = UI_get_random(0x0006);
 			if (var0005 == 0x0001) {
@@ -42147,27 +42147,27 @@ void Func0440 object#(0x440) () {
 			if (var0005 == 0x0006) {
 				var0006 = "@I desire thee!@";
 			}
-			Func097F(0xFFC0, var0006, 0x0002);
+			Func097F(CANTRA, var0006, 0x0002);
 			abort;
 		}
 		if (!var0001) {
 			Func097F(AVATAR, "Hello, little girl.", 0x0000);
-			Func097F(0xFFC0, "@Zounds!@", 0x0002);
+			Func097F(CANTRA, "@Zounds!@", 0x0002);
 		} else {
 			Func097F(AVATAR, "Hello, Cantra.", 0x0000);
-			Func097F(0xFFC0, "@Glad to see thee!@", 0x0002);
+			Func097F(CANTRA, "@Glad to see thee!@", 0x0002);
 		}
-		0xFFC0->Func07D1();
-		0xFFC0->set_schedule_type(TALK);
+		CANTRA->Func07D1();
+		CANTRA->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFC0->run_schedule();
-		0xFFC0->clear_item_say();
-		0xFFC0->show_npc_face0(0x0000);
+		CANTRA->run_schedule();
+		CANTRA->clear_item_say();
+		CANTRA->show_npc_face0(0x0000);
 		if (!var0001) {
 			say("\"I am not as young as I look! Dost thou know how hard it is to be small for one's age? I am fourteen years old, nearly old enough to be a Knight of Monitor. But everyone thinks that I'm a little girl...\"");
 			say("\"Um, sorry. I mean, welcome to Monitor! My name is Cantra.\"");
-			0xFFC0->set_item_flag(MET);
+			CANTRA->set_item_flag(MET);
 		} else if (gflags[0x0047]) {
 			say("\"I feel tired, but I am all right! My mind was full of awful dreams. Thou hast saved me! I shall remember thee always!\"");
 		} else {
@@ -42255,32 +42255,32 @@ void Func0440 object#(0x440) () {
 			case "bye":
 				Func097F(AVATAR, "@Farewell!@", 0x0000);
 				if (gflags[0x0047]) {
-					Func097F(0xFFC0, "@Bless thee!@", 0x0002);
+					Func097F(CANTRA, "@Bless thee!@", 0x0002);
 				} else {
 					say("\"Oh, I hope that thou dost attempt the Knight's Test! And when thou dost, please come back to tell me about it!\"");
-					Func097F(0xFFC0, "@Slay a Goblin!@", 0x0002);
+					Func097F(CANTRA, "@Slay a Goblin!@", 0x0002);
 				}
-				if (0xFFC0->get_schedule_type() == HOUND) {
-					0xFFC0->set_schedule_type(SHY);
+				if (CANTRA->get_schedule_type() == HOUND) {
+					CANTRA->set_schedule_type(SHY);
 				}
 				break;
 		}
 	}
 	if (event == DEATH) {
 		if (gflags[0x0047]) {
-			0xFFC0->clear_item_flag(SI_TOURNAMENT);
+			CANTRA->clear_item_flag(SI_TOURNAMENT);
 			abort;
 		}
 		if (gflags[0x0079]) {
 			var0003 = 0x0000;
 		} else {
-			0xFFC0->set_attack_mode(FLEE);
+			CANTRA->set_attack_mode(FLEE);
 		}
 	}
 	if (event == EGG) {
 		var0007 = Func0994();
 		if ((var0007 == 0x001F) && (gflags[0x004A] == true)) {
-			0xFFC0->show_npc_face0(0x0000);
+			CANTRA->show_npc_face0(0x0000);
 			say("\"Iieeeee.... Help me, Avatar! Help me! I can't escape... It will catch me and devour me!\" *\"Heelllp!\"");
 			UI_remove_npc_face0();
 			abort;
@@ -42807,7 +42807,7 @@ void Func0443 object#(0x443) () {
 					abort;
 				} else if (!gflags[0x0047]) {
 					say("\"I am so grateful that thou hast taken on the quest of saving my daughter. If I can help thee, ask.\"");
-				} else if (0xFFC0->get_item_flag(SI_ZOMBIE)) {
+				} else if (CANTRA->get_item_flag(SI_ZOMBIE)) {
 					say("\"I am glad that my daughter is alive, but I have a strange foreboding that all is not as it should be with her. A small private part of her is still awash in madness and death.\"");
 				} else {
 					say("\"I am so happy my daughter hath been found, resurrected by the monks, and that thou hast restored her mind.\"");
@@ -56526,7 +56526,7 @@ void Func04C9 object#(0x4C9) () {
 
 	var0000 = 0xFF37->get_item_flag(MET);
 	if (event == DEATH) {
-		0xFFC0->show_npc_face0(0x0000);
+		CANTRA->show_npc_face0(0x0000);
 		say("\"Why dost thou attack me? Do thine eyes deceive thee so?\" *\"Slay the foul bane that wishes to devour me instead! If it is not stopped, it will destroy us all!\" *\"I can stand this nightmare no more...\"");
 		UI_remove_npc_face0();
 		var0001 = get_object_position();
@@ -56551,14 +56551,14 @@ void Func04C9 object#(0x4C9) () {
 	}
 	if (event == DOUBLECLICK) {
 		if (var0000 != true) {
-			0xFFC0->show_npc_face0(0x0000);
+			CANTRA->show_npc_face0(0x0000);
 			say("\"Iieeeee.... Help me!\" ~\"I cannot escape...\" ~\"It will catch and devour me!\" *\"Canst thou not see it? Please, help me!\"");
 			0xFF37->set_item_flag(MET);
 			UI_remove_npc_face0();
 			0xFF37->set_schedule_type(PATROL);
 			abort;
 		}
-		0xFFC0->show_npc_face0(0x0000);
+		CANTRA->show_npc_face0(0x0000);
 		say("\"Art thou blind! Canst thou not see the foul beast?\" *\"Have mercy! I beg thee to slay such an horror! Please, thou must kill it before it takes me!\"");
 		UI_remove_npc_face0();
 		0xFF37->set_schedule_type(PATROL);
@@ -57989,9 +57989,9 @@ void Func04D4 object#(0x4D4) () {
 			var0005 = 0xFF2C->get_object_position();
 			UI_sprite_effect(ANIMATION_TELEPORT, (var0005[0x0001] - 0x0003), (var0005[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			0xFF2C->remove_npc();
-			0xFFC0->clear_item_flag(DEAD);
-			Func09AC(0xFFC0, 0x097D, 0x0469, WANDER);
-			0xFFC0->set_item_flag(SI_ZOMBIE);
+			CANTRA->clear_item_flag(DEAD);
+			Func09AC(CANTRA, 0x097D, 0x0469, WANDER);
+			CANTRA->set_item_flag(SI_ZOMBIE);
 			UI_play_sound_effect(0x0051);
 		}
 		abort;
@@ -85541,9 +85541,9 @@ void Func080E 0x80E () {
 	var var0000;
 	var var0001;
 
-	var0000 = 0xFFC0->find_nearby(0x013E, 0x001E, MASK_NONE);
+	var0000 = CANTRA->find_nearby(0x013E, 0x001E, MASK_NONE);
 	UI_init_conversation();
-	0xFFC0->show_npc_face0(0x0000);
+	CANTRA->show_npc_face0(0x0000);
 	say("\"Leave me alone, mage. I am but a little girl.\"");
 	0xFEE1->show_npc_face1(0x0000);
 	say("\"I know what thou art, Bane of Chaos. That body is but a shell that thou dost wear.\"");
@@ -85554,7 +85554,7 @@ void Func080E 0x80E () {
 	say("\"Thy powers have dwindled due to thine imprisonment. Thou art no match for me, now...\"");
 	UI_remove_npc_face1();
 	UI_remove_npc_face0();
-	var0001 = script 0xFFC0 after 60 ticks {
+	var0001 = script CANTRA after 60 ticks {
 		nohalt;
 		call Func0440;
 	};
@@ -85566,17 +85566,17 @@ void Func080E 0x80E () {
 		var0001 = var0000->add_cont_items(0x0001, 0x011F, 0x0001, FRAME_ANY, 0x0012);
 		var0001 = var0000->add_cont_items(0x0001, 0x02DB, 0x0006, FRAME_ANY, 0x0012);
 		var0000->set_schedule_type(IN_COMBAT);
-		var0000->set_oppressor(0xFFC0);
-		var0000->set_opponent(0xFFC0);
+		var0000->set_oppressor(CANTRA);
+		var0000->set_opponent(CANTRA);
 	}
-	0xFFC0->set_alignment(GOOD);
-	var0001 = 0xFFC0->add_cont_items(0x0001, 0x01A8, 0x0005, FRAME_ANY, 0x0012);
-	var0001 = 0xFFC0->add_cont_items(0x0001, 0x0359, 0x0002, FRAME_ANY, 0x0012);
-	var0001 = 0xFFC0->add_cont_items(0x0001, 0x02A4, 0x0005, FRAME_ANY, 0x0012);
-	var0001 = 0xFFC0->add_cont_items(0x0001, 0x020F, 0x0001, FRAME_ANY, 0x0012);
-	0xFFC0->set_schedule_type(IN_COMBAT);
-	0xFFC0->set_oppressor(var0000);
-	0xFFC0->set_opponent(var0000);
+	CANTRA->set_alignment(GOOD);
+	var0001 = CANTRA->add_cont_items(0x0001, 0x01A8, 0x0005, FRAME_ANY, 0x0012);
+	var0001 = CANTRA->add_cont_items(0x0001, 0x0359, 0x0002, FRAME_ANY, 0x0012);
+	var0001 = CANTRA->add_cont_items(0x0001, 0x02A4, 0x0005, FRAME_ANY, 0x0012);
+	var0001 = CANTRA->add_cont_items(0x0001, 0x020F, 0x0001, FRAME_ANY, 0x0012);
+	CANTRA->set_schedule_type(IN_COMBAT);
+	CANTRA->set_oppressor(var0000);
+	CANTRA->set_opponent(var0000);
 	UI_end_conversation();
 	abort;
 }
@@ -106123,7 +106123,7 @@ var Func08FB 0x8FB () {
 	var0000 &= var0001;
 	var0001 = [];
 	var0002 = Func098D();
-	var0002 &= 0xFFC0;
+	var0002 &= CANTRA;
 	for (var0005 in var0000 with var0003 to var0004) {
 		var0006 = var0005->get_item_quality();
 		var0007 = var0005->get_item_quantity(0x0000);
@@ -106191,7 +106191,7 @@ void Func08FE 0x8FE () {
 
 	var0000 = Func08FB();
 	var0001 = Func098D();
-	var0001 &= 0xFFC0;
+	var0001 &= CANTRA;
 	var0002 = Func08FD();
 	var0002 &= "Cantra";
 	for (var0005 in var0000 with var0003 to var0004) {
@@ -106214,7 +106214,7 @@ void Func08FE 0x8FE () {
 				var000B = Func095C(var0006, FOODLEVEL);
 				var000C = 31 - var000B;
 				Func095E(var0006, FOODLEVEL, var000C);
-				if (var0006 == 0xFFC0) {
+				if (var0006 == CANTRA) {
 					gflags[0x0047] = true;
 				}
 				if (var0006 == 0xFF6B) {

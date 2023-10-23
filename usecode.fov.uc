@@ -20694,7 +20694,7 @@ void Func0440 object#(0x440) () {
 	var var0000;
 
 	if (event == DOUBLECLICK) {
-		0xFFC0->show_npc_face(0x0000);
+		GEOFFREY->show_npc_face(0x0000);
 		var0000 = Func0908();
 		add(["name", "job", "bye"]);
 		if (gflags[0x0099]) {
@@ -20761,7 +20761,7 @@ void Func0440 object#(0x440) () {
 		say("\"Have courage. Have faith. Be strong. Be wise.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFC0);
+		Func092E(GEOFFREY);
 	}
 }
 
