@@ -17714,11 +17714,11 @@ void Func042D object#(0x42D) () {
 	var var0009;
 
 	if (event == DOUBLECLICK) {
-		0xFFD3->show_npc_face(0x0000);
+		FIGG->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = Func0909();
 		var0002 = UI_wearing_fellowship();
-		var0003 = Func08FC(0xFFD3, BATLIN);
+		var0003 = Func08FC(FIGG, BATLIN);
 		if (var0000 == NIGHT) {
 			if (var0003) {
 				say("Figg is too intent on listening to the Fellowship meeting to acknowledge your attempts to converse with him.*");
@@ -17878,7 +17878,7 @@ void Func042D object#(0x42D) () {
 		say("\"I can see that thou shouldst be on thy way.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFD3);
+		Func092E(FIGG);
 	}
 }
 
@@ -65426,10 +65426,10 @@ void Func084F 0x84F () {
 		PATTERSON->say("\"The Fellowship helps me to be more honest with people,\" says Patterson.*");
 		PATTERSON->hide();
 	}
-	var0007 = Func08F7(0xFFD3);
+	var0007 = Func08F7(FIGG);
 	if (var0007) {
-		0xFFD3->say("\"The Fellowship has taught me not to let others push me around,\" says Figg.*");
-		0xFFD3->hide();
+		FIGG->say("\"The Fellowship has taught me not to let others push me around,\" says Figg.*");
+		FIGG->hide();
 	}
 	var0008 = Func08F7(0xFFC9);
 	if (var0008) {
@@ -65568,10 +65568,10 @@ void Func0850 0x850 () {
 		BATLIN->say("\"Thank thee for sharing, Patterson.\"*");
 		PATTERSON->hide();
 	}
-	var0004 = Func08F7(0xFFD3);
+	var0004 = Func08F7(FIGG);
 	if (var0004) {
-		0xFFD3->say("\"The Fellowship has taught me how to better perform my duties as the Caretaker of the Royal Orchards,\" says Figg.*");
-		0xFFD3->hide();
+		FIGG->say("\"The Fellowship has taught me how to better perform my duties as the Caretaker of the Royal Orchards,\" says Figg.*");
+		FIGG->hide();
 	}
 	var0005 = Func08F7(0xFFCB);
 	if (var0005) {

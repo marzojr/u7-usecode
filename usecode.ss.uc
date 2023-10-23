@@ -34382,49 +34382,49 @@ void Func042D object#(0x42D) () {
 	if (event == PROXIMITY) {
 		var0007 = UI_get_random(0x0006);
 		if (var0007 == 0x0001) {
-			0xFFD3->item_say("@Care to fight?@");
+			WILFRED->item_say("@Care to fight?@");
 		}
 		if (var0007 == 0x0002) {
-			0xFFD3->item_say("@Move aside!@");
+			WILFRED->item_say("@Move aside!@");
 		}
 		if (var0007 == 0x0003) {
-			0xFFD3->item_say("@I need a drink!@");
+			WILFRED->item_say("@I need a drink!@");
 		}
 		if (var0007 == 0x0004) {
-			0xFFD3->item_say("@Where are the women?@");
+			WILFRED->item_say("@Where are the women?@");
 		}
 		if (var0007 == 0x0005) {
 			if (Func0942(ARGUS)) {
-				0xFFD3->item_say("@Argus, thou art a coward!@");
+				WILFRED->item_say("@Argus, thou art a coward!@");
 			} else {
-				0xFFD3->item_say("@I'm bored!@");
+				WILFRED->item_say("@I'm bored!@");
 			}
 		}
 		if (var0007 == 0x0006) {
-			0xFFD3->item_say("@My sword wants blood!@");
+			WILFRED->item_say("@My sword wants blood!@");
 		}
 	}
-	if ((event == SCRIPTED) && (!0xFFD3->get_item_flag(DEAD))) {
-		var0008 = 0xFFD3->set_npc_prop(HEALTH, 10);
-		0xFFD3->show_npc_face0(0x0000);
+	if ((event == SCRIPTED) && (!WILFRED->get_item_flag(DEAD))) {
+		var0008 = WILFRED->set_npc_prop(HEALTH, 10);
+		WILFRED->show_npc_face0(0x0000);
 		say("\"I was a fool to join with thee, Avatar! Now I am to lose my life in this foolish quest.\"");
-		0xFFD3->remove_from_party();
+		WILFRED->remove_from_party();
 		gflags[0x01E2] = true;
 		Func0874();
 		say("\"I am leaving -- do not try to stop me!\"");
-		Func097F(0xFFD3, "@Farewell!@", 0x0000);
-		0xFFD3->set_attack_mode(FLEE);
-		0xFFD3->set_schedule_type(SHY);
-		Func09AC(0xFFD3, -1, 0, WANDER);
+		Func097F(WILFRED, "@Farewell!@", 0x0000);
+		WILFRED->set_attack_mode(FLEE);
+		WILFRED->set_schedule_type(SHY);
+		Func09AC(WILFRED, -1, 0, WANDER);
 		abort;
 	}
 	if (event == DEATH) {
-		if (0xFFD3->get_item_flag(SI_TOURNAMENT)) {
-			0xFFD3->clear_item_flag(SI_TOURNAMENT);
-			var0008 = 0xFFD3->set_npc_prop(HEALTH, 10);
-			0xFFD3->set_attack_mode(FLEE);
-			Func097F(0xFFD3, "@I am dying!@", 0x0000);
-			var0008 = script 0xFFD3 after 7 ticks {
+		if (WILFRED->get_item_flag(SI_TOURNAMENT)) {
+			WILFRED->clear_item_flag(SI_TOURNAMENT);
+			var0008 = WILFRED->set_npc_prop(HEALTH, 10);
+			WILFRED->set_attack_mode(FLEE);
+			Func097F(WILFRED, "@I am dying!@", 0x0000);
+			var0008 = script WILFRED after 7 ticks {
 				nohalt;
 				call Func042D;
 			};
@@ -34432,33 +34432,33 @@ void Func042D object#(0x42D) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Well met, Knight!@");
-		0xFFD3->Func07D1();
-		Func097F(0xFFD3, "@Greetings!@", 0x0005);
-		0xFFD3->set_schedule_type(TALK);
+		WILFRED->Func07D1();
+		Func097F(WILFRED, "@Greetings!@", 0x0005);
+		WILFRED->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFD3->run_schedule();
-		0xFFD3->clear_item_say();
-		0xFFD3->show_npc_face0(0x0000);
-		if (0xFFD3->get_item_flag(IN_PARTY)) {
-			0xFFD3->set_schedule_type(FOLLOW_AVATAR);
+		WILFRED->run_schedule();
+		WILFRED->clear_item_say();
+		WILFRED->show_npc_face0(0x0000);
+		if (WILFRED->get_item_flag(IN_PARTY)) {
+			WILFRED->set_schedule_type(FOLLOW_AVATAR);
 			add("leave");
 		} else {
-			0xFFD3->run_schedule();
+			WILFRED->run_schedule();
 		}
-		var0009 = 0xFFD3->get_item_flag(MET);
-		if (!0xFFD3->get_item_flag(IN_PARTY)) {
-			0xFFD3->run_schedule();
+		var0009 = WILFRED->get_item_flag(MET);
+		if (!WILFRED->get_item_flag(IN_PARTY)) {
+			WILFRED->run_schedule();
 		} else {
-			0xFFD3->set_schedule_type(FOLLOW_AVATAR);
+			WILFRED->set_schedule_type(FOLLOW_AVATAR);
 			add("leave");
 		}
-		if ((gflags[0x01E2] || gflags[0x01E3]) && (gflags[0x0016] && 0xFFD3->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY))) {
+		if ((gflags[0x01E2] || gflags[0x01E3]) && (gflags[0x0016] && WILFRED->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY))) {
 			add("return my belongings");
 		}
 		if (gflags[0x0004] == true) {
 			if (gflags[0x01E1]) {
-				if (0xFFD3->get_item_flag(IN_PARTY)) {
+				if (WILFRED->get_item_flag(IN_PARTY)) {
 					say("\"I am ready to aid thee. Thou couldst have chosen no better companion than myself!\"");
 				} else {
 					say("\"Why dost thou trouble me now? Canst thou not see that I am very busy...\"");
@@ -34476,17 +34476,17 @@ void Func042D object#(0x42D) () {
 					}
 				} else {
 					say("\"Then I must continue to seek him.\"");
-					Func097F(0xFFD3, "@Batlin must die!@", 0x0000);
-					0xFFD3->set_schedule_type(SHY);
+					Func097F(WILFRED, "@Batlin must die!@", 0x0000);
+					WILFRED->set_schedule_type(SHY);
 					abort;
 				}
 				if (UI_get_array_size(UI_get_party_list()) < 0x0005) {
 					say("\"I am now without a cause to champion. I see that thou art without thy companions. If thou wishest, I will join thee.\"");
 					if (Func0955() == true) {
 						say("\"Together, none can stand in our way!\"");
-						0xFFD3->add_to_party();
+						WILFRED->add_to_party();
 						gflags[0x0016] = true;
-						0xFFD3->set_item_flag(SI_TOURNAMENT);
+						WILFRED->set_item_flag(SI_TOURNAMENT);
 						add("leave");
 						gflags[0x01E1] = true;
 					} else {
@@ -34515,9 +34515,9 @@ void Func042D object#(0x42D) () {
 		converse (0) {
 			case "return my belongings" (remove):
 				say("\"Art thou jesting? They belong to me now! I gave thee thy chance when I left. If thou still wantest them, thou wilt have to take them from me!!\"");
-				0xFFD3->set_alignment(CHAOTIC);
-				0xFFD3->clear_item_say();
-				Func097F(0xFFD3, "@They are mine!@", 0x0000);
+				WILFRED->set_alignment(CHAOTIC);
+				WILFRED->clear_item_say();
+				Func097F(WILFRED, "@They are mine!@", 0x0000);
 				abort;
 
 			case "join" (remove):
@@ -34533,9 +34533,9 @@ void Func042D object#(0x42D) () {
 					say("\"But thou hast all of these other companions! Knight Wilfred is not one to join a crowd...\"");
 				} else {
 					say("\"I can see that thou dost need a strong arm like myself. Since it is thy wish, I shall come with thee.\"");
-					0xFFD3->add_to_party();
+					WILFRED->add_to_party();
 					gflags[0x0016] = true;
-					0xFFD3->set_item_flag(SI_TOURNAMENT);
+					WILFRED->set_item_flag(SI_TOURNAMENT);
 					add("leave");
 				}
 				fallthrough;
@@ -34545,13 +34545,13 @@ void Func042D object#(0x42D) () {
 				var000A = Func0956(["insist", "give in"]);
 				if (var000A == "insist") {
 					say("\"Damn thee, Avatar!\"");
-					0xFFD3->remove_from_party();
+					WILFRED->remove_from_party();
 					Func0874();
 					gflags[0x01E3] = true;
-					0xFFD3->clear_item_flag(SI_TOURNAMENT);
-					Func097F(0xFFD3, "@Damn thee!@", 0x0000);
-					0xFFD3->set_schedule_type(SHY);
-					0xFFD3->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, NIGHT], [SLEEP, EAT, TALK, LOITER, EAT], [0x0516, 0x08F7, 0x04F7, 0x08CC, 0x050D, 0x08B6, 0x0516, 0x08A2, 0x04F7, 0x08CC]);
+					WILFRED->clear_item_flag(SI_TOURNAMENT);
+					Func097F(WILFRED, "@Damn thee!@", 0x0000);
+					WILFRED->set_schedule_type(SHY);
+					WILFRED->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, NIGHT], [SLEEP, EAT, TALK, LOITER, EAT], [0x0516, 0x08F7, 0x04F7, 0x08CC, 0x050D, 0x08B6, 0x0516, 0x08A2, 0x04F7, 0x08CC]);
 					abort;
 				}
 				say("\"Thou couldst not succeed without me!\"");
@@ -34561,7 +34561,7 @@ void Func042D object#(0x42D) () {
 				say("\"What! Thou hast not heard of me?\"");
 				say("\"Where hast thou been all thy life, the frozen north?\"");
 				say("\"I am Wilfred, Knight of the Bear Command -- formerly of Sleeping Bull Inn.\"");
-				0xFFD3->set_item_flag(MET);
+				WILFRED->set_item_flag(MET);
 				add("Sleeping Bull");
 				fallthrough;
 
@@ -34676,7 +34676,7 @@ void Func042D object#(0x42D) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Goodbye.@", 0x0000);
-				Func097F(0xFFD3, "@Indeed.@", 0x0005);
+				Func097F(WILFRED, "@Indeed.@", 0x0005);
 				Func097F(IOLO, "@What a butthead!@", 0x0007);
 				break;
 		}
@@ -68619,8 +68619,8 @@ void Func06C4 object#(0x6C4) () {
 			Func0862();
 			SELINA->remove_npc();
 		}
-		0xFFD3->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, NIGHT], [SLEEP, EAT_AT_INN, TEND_SHOP, WANDER, EAT_AT_INN], [0x0516, 0x08F7, 0x04F7, 0x08CC, 0x050D, 0x08B6, 0x0516, 0x08A2, 0x04F7, 0x08CC]);
-		0xFFD3->run_schedule();
+		WILFRED->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, NIGHT], [SLEEP, EAT_AT_INN, TEND_SHOP, WANDER, EAT_AT_INN], [0x0516, 0x08F7, 0x04F7, 0x08CC, 0x050D, 0x08B6, 0x0516, 0x08A2, 0x04F7, 0x08CC]);
+		WILFRED->run_schedule();
 		abort;
 	}
 	var0002 = Func097D(PARTY, 0x0001, 0x0286, QUALITY_ANY, 0x0002);
@@ -78824,8 +78824,8 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(ARGUS, 0x04E8, 0x08B9, WAIT);
 		Func09AC(BYRIN, 0x0517, 0x0893, WAIT);
 		Func09AC(DEVRA, 0x04F8, 0x08A6, WAIT);
-		0xFFD3->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, NIGHT], [SLEEP, EAT, TALK, LOITER, EAT], [0x0516, 0x08F7, 0x04F7, 0x08CC, 0x050D, 0x08B6, 0x0516, 0x08A2, 0x04F7, 0x08CC]);
-		0xFFD3->run_schedule();
+		WILFRED->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, NIGHT], [SLEEP, EAT, TALK, LOITER, EAT], [0x0516, 0x08F7, 0x04F7, 0x08CC, 0x050D, 0x08B6, 0x0516, 0x08A2, 0x04F7, 0x08CC]);
+		WILFRED->run_schedule();
 		Func09AC(0xFF71, 0x0436, 0x036B, WAIT);
 		Func09AC(0xFF70, 0x0440, 0x0348, WAIT);
 		Func09AC(0xFF6F, 0x0479, 0x0354, WAIT);
@@ -99801,13 +99801,13 @@ extern var Func09B3 0x9B3 (var var0000);
 void Func0874 0x874 () {
 	var var0000;
 
-	if (0xFFD3->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY)) {
+	if (WILFRED->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY)) {
 		say("\"I still have some of thy worthless belongings. If thou wantest them, thou hadst best take them now.\"");
 		say("\"Dost thou want such items returned?\"");
 		if (Func0955()) {
 			say("\"Here they are.\"");
 			gflags[0x0016] = false;
-			var0000 = Func09B3(0xFFD3);
+			var0000 = Func09B3(WILFRED);
 			if (var0000[0x0001] != 0x0000) {
 				say("\"Thy companions will have to carry some of these useless things.\"");
 			}
@@ -99890,7 +99890,7 @@ void Func0875 0x875 () {
 	var000B = var0009->get_npc_name();
 	if (var0009 == 0x0000) {
 		say("\"Very well, but thou shouldst make up thy mind!\"");
-	} else if (var000A == 0xFFD3) {
+	} else if (var000A == WILFRED) {
 		say("\"I do not train myself!\"");
 	} else {
 		var000C = Func096E(var0001, var0000, var0002, var000A, 0x0002);
@@ -111797,7 +111797,7 @@ var Func098C 0x98C () {
 var Func098D 0x98D () {
 	var var0000;
 
-	var0000 = [DUPRE, SHAMINO, IOLO, 0xFF6B, PETRA, MORTEGRO, 0xFFD3, BOYDON, SELINA, 0xFF68, 0xFF58];
+	var0000 = [DUPRE, SHAMINO, IOLO, 0xFF6B, PETRA, MORTEGRO, WILFRED, BOYDON, SELINA, 0xFF68, 0xFF58];
 	return var0000;
 }
 
