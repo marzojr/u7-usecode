@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, GUSTACIO, MELINO, JULIA, 0xFFE2, 0xFFE0, 0xFFE3, MOSH, FILBERCIO, FRIGIDAZZI, 0xFFD6, 0xFFD5, GOBLIN_MESSENGER, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, GUSTACIO, MELINO, JULIA, 0xFFE2, 0xFFE0, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, 0xFFD6, 0xFFD5, GOBLIN_MESSENGER, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -15835,7 +15835,7 @@ void Func032E shape#(0x32E) () {
 	if ((event == SCRIPTED) && (!gflags[0x00D9])) {
 		if (FILBERCIO->get_npc_id() == 0x000C) {
 			FILBERCIO->set_npc_id(0x000D);
-			var0009 = script 0xFFE3 {
+			var0009 = script POTHOS {
 				nohalt;
 				face north;
 				actor frame bowing;
@@ -15851,8 +15851,8 @@ void Func032E shape#(0x32E) () {
 			FILBERCIO->show_npc_face0(0x0000);
 			say("\"And to think she was once a young and beautiful sorceress, before her ambitions turned her cold and heartless...\"");
 			UI_end_conversation();
-			0xFFE3->si_path_run_usecode([0x090A, 0x071A, 0x0000], SCRIPTED, item, Func032E, false);
-			Func097F(0xFFE3, "@Pardon me...@", 0x0005);
+			POTHOS->si_path_run_usecode([0x090A, 0x071A, 0x0000], SCRIPTED, item, Func032E, false);
+			Func097F(POTHOS, "@Pardon me...@", 0x0005);
 			UI_play_music(0x0012, Func09A0(0x0005, 0x0001));
 			abort;
 		}
@@ -16133,7 +16133,7 @@ void Func032E shape#(0x32E) () {
 			abort;
 		}
 		UI_init_conversation();
-		0xFFE3->show_npc_face0(0x0000);
+		POTHOS->show_npc_face0(0x0000);
 		say("\"I beg thy pardon, MageLord Filbercio, but I have an urgent message for thee.\"");
 		say("\"I regret to report that mine attempts to locate any significant quantity of the reagent Blood Moss have met with failure.\"");
 		FILBERCIO->show_npc_face1(0x0000);
@@ -16141,7 +16141,7 @@ void Func032E shape#(0x32E) () {
 		say("\"Dear guests, I am afraid that I shall have to adjourn this pleasant repast.\"");
 		say("\"Pothos and I must speak privately concerning important matters of state. I thank thee all for coming!\"");
 		gflags[0x00D9] = true;
-		var0019 = [FILBERCIO, FRIGIDAZZI, GUSTACIO, 0xFFE3];
+		var0019 = [FILBERCIO, FRIGIDAZZI, GUSTACIO, POTHOS];
 		for (var000B in var0019 with var001A to var001B) {
 			var000B->revert_schedule();
 		}
@@ -16158,9 +16158,9 @@ void Func032E shape#(0x32E) () {
 		var001E = [0x08F3, 0x0779];
 		var001F = [0x08E6, 0x0776];
 		var0020 = [0x08C8, 0x0716];
-		0xFFE3->set_new_schedules([DAWN, MORNING, NIGHT], [EAT_AT_INN, PATROL, SLEEP], [var0020, var001E, var001F]);
-		0xFFE3->move_object([0x08F9, 0x0778, 0x0000]);
-		0xFFE3->run_schedule();
+		POTHOS->set_new_schedules([DAWN, MORNING, NIGHT], [EAT_AT_INN, PATROL, SLEEP], [var0020, var001E, var001F]);
+		POTHOS->move_object([0x08F9, 0x0778, 0x0000]);
+		POTHOS->run_schedule();
 		var0016 = AVATAR->find_nearby(ANY_SHAPE, 0x002D, MASK_NPC);
 		var0009 = Func098D();
 		for (var000B in var0016 with var0021 to var0022) {
@@ -28138,43 +28138,43 @@ void Func041D object#(0x41D) () {
 	var0003 = Func0953();
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Excuse me...@");
-		0xFFE3->Func07D1();
-		Func097F(0xFFE3, (("@Yes, " + var0000) + "?@"), 0x0002);
-		0xFFE3->set_schedule_type(TALK);
+		POTHOS->Func07D1();
+		Func097F(POTHOS, (("@Yes, " + var0000) + "?@"), 0x0002);
+		POTHOS->set_schedule_type(TALK);
 	}
 	if (event == PROXIMITY) {
 		var0004 = UI_get_random(0x0006);
 		if (var0004 == 0x0001) {
-			0xFFE3->item_say("@Wares for sale!@");
+			POTHOS->item_say("@Wares for sale!@");
 		}
 		if (var0004 == 0x0002) {
-			0xFFE3->item_say("@Reagents!@");
+			POTHOS->item_say("@Reagents!@");
 		}
 		if (var0004 == 0x0003) {
-			0xFFE3->item_say("@Potions! Scrolls!@");
+			POTHOS->item_say("@Potions! Scrolls!@");
 		}
 		if (var0004 == 0x0004) {
-			0xFFE3->item_say("@Do not touch that!@");
+			POTHOS->item_say("@Do not touch that!@");
 		}
 		if (var0004 == 0x0005) {
-			0xFFE3->item_say("@Please come in.@");
+			POTHOS->item_say("@Please come in.@");
 		}
 		if (var0004 == 0x0006) {
 			if (!gflags[0x00DD]) {
-				0xFFE3->item_say("@What shall I do?@");
+				POTHOS->item_say("@What shall I do?@");
 			} else {
-				0xFFE3->item_say(("@Hello, " + var0003) + "!@");
+				POTHOS->item_say(("@Hello, " + var0003) + "!@");
 			}
 		}
 	}
 	if (event == STARTED_TALKING) {
-		0xFFE3->run_schedule();
-		0xFFE3->clear_item_say();
-		0xFFE3->show_npc_face0(0x0000);
-		if (!0xFFE3->get_item_flag(MET)) {
+		POTHOS->run_schedule();
+		POTHOS->clear_item_say();
+		POTHOS->show_npc_face0(0x0000);
+		if (!POTHOS->get_item_flag(MET)) {
 			say("\"Yes, I remember thee from the banquet -- Rotoluncia wanted to kill thee!\"");
-			0xFFE3->set_item_flag(MET);
-			if (0xFFE3->get_schedule_type() == PATROL) {
+			POTHOS->set_item_flag(MET);
+			if (POTHOS->get_schedule_type() == PATROL) {
 				say("\"Welcome to the Apothecary Shop. I am Pothos, the proprietor.\"");
 			} else {
 				say("\"I am Pothos, the Apothecary in this city.\"");
@@ -28198,7 +28198,7 @@ void Func041D object#(0x41D) () {
 					var0000,
 					".\"");
 			}
-		} else if (0xFFE3->get_schedule_type() == PATROL) {
+		} else if (POTHOS->get_schedule_type() == PATROL) {
 			say("\"Shopping for something, ",
 				var0000,
 				"?\"");
@@ -28208,7 +28208,7 @@ void Func041D object#(0x41D) () {
 		if (gflags[0x00DD] && (!gflags[0x01B7])) {
 			add("tell me about Erstam");
 		}
-		if (0xFFE3->get_schedule_type() == PATROL) {
+		if (POTHOS->get_schedule_type() == PATROL) {
 			add("buy");
 		}
 		if (gflags[0x0285] && (!gflags[0x0297])) {
@@ -28322,7 +28322,7 @@ void Func041D object#(0x41D) () {
 						say("\"My fate is certain!\"");
 						gflags[0x011F] = true;
 						UI_remove_npc_face0();
-						Func097F(0xFFE3, "@I am lost!@", 0x0000);
+						Func097F(POTHOS, "@I am lost!@", 0x0000);
 						abort;
 					}
 				} else {
@@ -28336,7 +28336,7 @@ void Func041D object#(0x41D) () {
 						say("\"Then I have nothing to bargain with. I shall certainly end my life in the Mountains of Freedom now!\"");
 						gflags[0x011F] = true;
 						UI_remove_npc_face0();
-						Func097F(0xFFE3, "@I am lost!@", 0x0000);
+						Func097F(POTHOS, "@I am lost!@", 0x0000);
 						abort;
 					}
 				}
@@ -28642,12 +28642,12 @@ void Func041D object#(0x41D) () {
 
 			case "bye":
 				UI_remove_npc_face0();
-				if (0xFFE3->get_schedule_type() == PATROL) {
+				if (POTHOS->get_schedule_type() == PATROL) {
 					Func097F(AVATAR, "@Nice shop.@", 0x0000);
-					Func097F(0xFFE3, "@Come again!@", 0x0002);
+					Func097F(POTHOS, "@Come again!@", 0x0002);
 				} else {
 					Func097F(AVATAR, "@Until later...@", 0x0000);
-					Func097F(0xFFE3, "@Take care!@", 0x0002);
+					Func097F(POTHOS, "@Take care!@", 0x0002);
 				}
 				Func08FF();
 				break;
@@ -78772,7 +78772,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(JULIA, 0x096B, 0x07C2, WAIT);
 		Func09AC(0xFFE2, 0x098B, 0x07A6, WAIT);
 		Func09AC(0xFFE0, 0x0999, 0x07A2, WAIT);
-		Func09AC(0xFFE3, 0x0958, 0x0793, WAIT);
+		Func09AC(POTHOS, 0x0958, 0x0793, WAIT);
 		Func09AC(MOSH, 0x0948, 0x0784, WAIT);
 		Func09AC(FILBERCIO, 0x0972, 0x0744, WAIT);
 		Func09AC(FRIGIDAZZI, 0x0977, 0x0743, WAIT);
@@ -79010,8 +79010,8 @@ void Func07DC object#(0x7DC) () {
 		FRIGIDAZZI->move_object([0x090C, 0x071A, 0x0000]);
 		0xFFE1->move_object([0x090C, 0x0714, 0x0000]);
 		GUSTACIO->move_object([0x090F, 0x0714, 0x0000]);
-		0xFFE3->move_object([0x0916, 0x072E, 0x0000]);
-		var0004 = [FILBERCIO, FRIGIDAZZI, 0xFFE1, GUSTACIO, 0xFFE3];
+		POTHOS->move_object([0x0916, 0x072E, 0x0000]);
+		var0004 = [FILBERCIO, FRIGIDAZZI, 0xFFE1, GUSTACIO, POTHOS];
 		var0007 = [0x0002, 0x0000, 0x0004, 0x0004, 0x0000];
 		var0009 = 0x0001;
 		for (var0003 in var0004 with var000D to var000E) {
@@ -95746,15 +95746,15 @@ void Func0858 0x858 () {
 		} else if (var000C == 0x0003) {
 			var000A = Func0992(0x0001, (("@But " + var0000) + ", we have not the guilders to purchase this.@"), 0x0000, false);
 			if (var000A != AVATAR) {
-				0xFFE3->show_npc_face0(0x0000);
+				POTHOS->show_npc_face0(0x0000);
 				say("\"I do not give my merchandise away!\"");
 			} else {
 				say("\"I am sorry, but thou dost not have enough guilders to purchase this!\"");
 			}
-			if (0x001F < (0xFFE3->get_npc_id() + 0x0006)) {
-				0xFFE3->set_npc_id(0x001F);
+			if (0x001F < (POTHOS->get_npc_id() + 0x0006)) {
+				POTHOS->set_npc_id(0x001F);
 			} else {
-				0xFFE3->set_npc_id(0xFFE3->get_npc_id() + 0x0006);
+				POTHOS->set_npc_id(POTHOS->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Dost thou desire another purchase?\"");
@@ -95878,17 +95878,17 @@ void Func0859 0x859 () {
 		} else if (var000C == 0x0003) {
 			var000A = Func0992(0x0001, (("@But " + var0000) + ", we have not the guilders to purchase this.@"), 0x0000, false);
 			if (var000A != AVATAR) {
-				0xFFE3->show_npc_face0(0x0000);
+				POTHOS->show_npc_face0(0x0000);
 				say("\"Ah... it dost appear that thy purse is empty, ",
 					var0000,
 					".\"");
 			} else {
 				say("\"I do not give my merchandise away! Thou dost not have the guilders to purchase this!\"");
 			}
-			if (0x001F < (0xFFE3->get_npc_id() + 0x0006)) {
-				0xFFE3->set_npc_id(0x001F);
+			if (0x001F < (POTHOS->get_npc_id() + 0x0006)) {
+				POTHOS->set_npc_id(0x001F);
 			} else {
-				0xFFE3->set_npc_id(0xFFE3->get_npc_id() + 0x0006);
+				POTHOS->set_npc_id(POTHOS->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Dost thou desire another purchase?\"");
@@ -96013,15 +96013,15 @@ void Func085A 0x85A () {
 		} else if (var000C == 0x0003) {
 			var000A = Func0992(0x0001, (("@But " + var0000) + ", we have not the guilders to purchase this.@"), 0x0000, false);
 			if (var000A != AVATAR) {
-				0xFFE3->show_npc_face0(0x0000);
+				POTHOS->show_npc_face0(0x0000);
 				say("\"I do not give my merchandise away!\"");
 			} else {
 				say("\"I am sorry, but thou dost not have enough guilders to purchase this!\"");
 			}
-			if (0x001F < (0xFFE3->get_npc_id() + 0x0006)) {
-				0xFFE3->set_npc_id(0x001F);
+			if (0x001F < (POTHOS->get_npc_id() + 0x0006)) {
+				POTHOS->set_npc_id(0x001F);
 			} else {
-				0xFFE3->set_npc_id(0xFFE3->get_npc_id() + 0x0006);
+				POTHOS->set_npc_id(POTHOS->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Dost thou wish something else?\"");
@@ -96054,12 +96054,12 @@ var Func085B 0x85B (var var0000, var var0001) {
 	var0002 = Func0954();
 	var0003 = var0000;
 	var0004 = (var0001 / 0x0003) * 0x0002;
-	var0005 = 0x000F - (0xFFE3->get_npc_id() / 0x0002);
+	var0005 = 0x000F - (POTHOS->get_npc_id() / 0x0002);
 	var0006 = 0x0000;
 	var0007 = 0x0001;
 	var0008 = 0x0000;
 	var0009 = 0x0002;
-	var000A = 0xFFE3->get_npc_id();
+	var000A = POTHOS->get_npc_id();
 	while (var0007) {
 		var000B = Func0956(["yes", "no", "haggle"]);
 		if (var000B == "no") {
@@ -96136,7 +96136,7 @@ var Func085B 0x85B (var var0000, var var0001) {
 				"?\"");
 			if (Func0955()) {
 				if (var000A > 0x0001) {
-					0xFFE3->set_npc_id(var000A - 0x0002);
+					POTHOS->set_npc_id(var000A - 0x0002);
 				}
 				return var0003;
 			}
@@ -96152,9 +96152,9 @@ var Func085B 0x85B (var var0000, var var0001) {
 					"!\"");
 			}
 			if (0x001F < (var000A + 0x000A)) {
-				0xFFE3->set_npc_id(0x001F);
+				POTHOS->set_npc_id(0x001F);
 			} else {
-				0xFFE3->set_npc_id(var000A + 0x000A);
+				POTHOS->set_npc_id(var000A + 0x000A);
 			}
 			return 0x0000;
 		}
@@ -96164,7 +96164,7 @@ var Func085B 0x85B (var var0000, var var0001) {
 					var0003,
 					" was my final offer. Dost thou accept?\"");
 				if (var000A < 0x001C) {
-					0xFFE3->set_npc_id(var000A + 0x0004);
+					POTHOS->set_npc_id(var000A + 0x0004);
 				}
 				if (Func0955()) {
 					return var0003;
@@ -96175,7 +96175,7 @@ var Func085B 0x85B (var var0000, var var0001) {
 					var0003,
 					" guilders is my final offer. Take it or leave it...\"");
 				if (var000A < 0x001E) {
-					0xFFE3->set_npc_id(var000A + 0x0002);
+					POTHOS->set_npc_id(var000A + 0x0002);
 				}
 			}
 		} else {
@@ -96250,7 +96250,7 @@ var Func085B 0x85B (var var0000, var var0001) {
 						" guilders is where I stand.\"");
 				}
 				if (var000A < 0x001F) {
-					0xFFE3->set_npc_id(var000A + 0x0001);
+					POTHOS->set_npc_id(var000A + 0x0001);
 				}
 			}
 		}

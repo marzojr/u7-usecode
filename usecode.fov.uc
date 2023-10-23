@@ -15739,7 +15739,7 @@ void Func041D object#(0x41D) () {
 	var var0004;
 
 	if (event == DOUBLECLICK) {
-		0xFFE3->show_npc_face(0x0000);
+		STUART->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x009E]) {
 			say("This actor has much stage presence and a booming voice.");
@@ -15769,12 +15769,12 @@ void Func041D object#(0x41D) () {
 				var0000 = Func08F7(IOLO);
 				if (var0000) {
 					IOLO->say("\"But thou art nothing like me!\"*");
-					0xFFE3->say("\"And who art thou, pray tell?\"*");
+					STUART->say("\"And who art thou, pray tell?\"*");
 					IOLO->say("\"Why, I am the -real- Iolo!\"*");
-					0xFFE3->say("\"Of course thou art. And I am really Lord British. Thou must take me for an ass to think I would believe that.\"*");
+					STUART->say("\"Of course thou art. And I am really Lord British. Thou must take me for an ass to think I would believe that.\"*");
 					IOLO->say("Your friend whispers to you. \"These actor types. A touchy bunch, eh?\"*");
 					IOLO->hide();
-					0xFFE3->show_npc_face(0x0000);
+					STUART->show_npc_face(0x0000);
 				}
 				add(["Raymundo", "Avatar"]);
 				remove("Iolo");
@@ -15803,7 +15803,7 @@ void Func041D object#(0x41D) () {
 	}
 	if (event == PROXIMITY) {
 		var0001 = UI_part_of_day();
-		var0002 = 0xFFE3->get_npc_object()->get_schedule_type();
+		var0002 = STUART->get_npc_object()->get_schedule_type();
 		var0003 = UI_die_roll(0x0001, 0x0004);
 		if (var0002 == PATROL) {
 			if (var0003 == 0x0001) {
@@ -15818,9 +15818,9 @@ void Func041D object#(0x41D) () {
 			if (var0003 == 0x0004) {
 				var0004 = "@Ready the bow to use it!@";
 			}
-			0xFFE3->item_say(var0004);
+			STUART->item_say(var0004);
 		} else {
-			Func092E(0xFFE3);
+			Func092E(STUART);
 		}
 	}
 }
