@@ -9607,7 +9607,7 @@ void Func0401 object#(0x401) () {
 		Func08DD();
 		IOLO->add_to_party();
 		PETRE->get_npc_object()->set_schedule_type(TEND_SHOP);
-		0xFFF4->get_npc_object()->set_schedule_type(TALK);
+		FINNIGAN->get_npc_object()->set_schedule_type(TALK);
 		IOLO->get_npc_object()->halt_scheduled();
 		PETRE->get_npc_object()->halt_scheduled();
 		if (!gflags[0x003B]) {
@@ -12725,7 +12725,7 @@ void Func040C object#(0x40C) () {
 	var var000E;
 
 	if (event == DOUBLECLICK) {
-		0xFFF4->show_npc_face(0x0000);
+		FINNIGAN->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func0908();
 		var0002 = Func08F7(SPARK);
@@ -12775,7 +12775,7 @@ void Func040C object#(0x40C) () {
 					Func0883();
 				} else {
 					say("\"Then leave our people to work it out for themselves.\"*");
-					0xFFF4->hide();
+					FINNIGAN->hide();
 					var0006 = Func08F7(IOLO);
 					if (var0006) {
 						IOLO->say("\"Avatar! I am ashamed of thee! Thou shouldst reconsider!\"*");
@@ -12785,7 +12785,7 @@ void Func040C object#(0x40C) () {
 				}
 			} else if (!gflags[0x004C]) {
 				halt_scheduled();
-				0xFFF4->get_npc_object()->set_schedule_type(LOITER);
+				FINNIGAN->get_npc_object()->set_schedule_type(LOITER);
 				say("You see a middle-aged nobleman.");
 				gflags[0x004C] = true;
 				var0006 = Func08F7(IOLO);
@@ -12799,10 +12799,10 @@ void Func040C object#(0x40C) () {
 					} else {
 						say("\"I simply cannot believe he is here!\"*");
 					}
-					0xFFF4->say("The Mayor looks you up and down, not sure if he believes Iolo or not. He looks at Iolo skeptically.");
+					FINNIGAN->say("The Mayor looks you up and down, not sure if he believes Iolo or not. He looks at Iolo skeptically.");
 					IOLO->say("\"I swear to thee, it is the Avatar!\"");
 					IOLO->hide();
-					0xFFF4->show_npc_face(0x0000);
+					FINNIGAN->show_npc_face(0x0000);
 				} else {
 					say("\"I have heard that thou art the Avatar. I am not certain that I believe it.");
 				}
@@ -12818,9 +12818,9 @@ void Func040C object#(0x40C) () {
 						PETRE->say("The peasant interjects. \"I discovered poor Christopher and the Gargoyle Inamo early this morning.\"*");
 						PETRE->hide();
 					} else {
-						0xFFF4->say("\"Petre, the stables caretaker, discovered poor Christopher and Inamo early this morning.\"");
+						FINNIGAN->say("\"Petre, the stables caretaker, discovered poor Christopher and Inamo early this morning.\"");
 					}
-					0xFFF4->say("The Mayor continues. \"Hast thou searched the stables?\"");
+					FINNIGAN->say("The Mayor continues. \"Hast thou searched the stables?\"");
 					Func0885();
 				} else {
 					say("\"Well, thou could not be the real Avatar then!\"*");
@@ -12999,7 +12999,7 @@ void Func040C object#(0x40C) () {
 		say("The Mayor nods his head at you and goes on about his business.*");
 	}
 	if (event == PROXIMITY) {
-		var000C = 0xFFF4->get_npc_object()->get_schedule_type();
+		var000C = FINNIGAN->get_npc_object()->get_schedule_type();
 		var000D = UI_die_roll(0x0001, 0x0004);
 		if (var000C == LOITER) {
 			if (var000D == 0x0001) {
@@ -13014,9 +13014,9 @@ void Func040C object#(0x40C) () {
 			if (var000D == 0x0004) {
 				var000E = "@I am too old for this...@";
 			}
-			0xFFF4->item_say(var000E);
+			FINNIGAN->item_say(var000E);
 		} else {
-			Func092E(0xFFF4);
+			Func092E(FINNIGAN);
 		}
 	}
 }
@@ -68454,16 +68454,16 @@ extern void Func0885 0x885 ();
 void Func0883 0x883 () {
 	var var0000;
 
-	0xFFF4->show_npc_face(0x0000);
+	FINNIGAN->show_npc_face(0x0000);
 	var0000 = Func08F7(PETRE);
 	if (var0000) {
 		say("\"Petre here knows something about all of this.\"*");
 		PETRE->say("The peasant interjects. \"I discovered poor Christopher and the Gargoyle Inamo early this morning.\"*");
 		PETRE->hide();
 	} else {
-		0xFFF4->say("\"Petre the stables caretaker discovered poor Christopher and Inamo early this morning.\"");
+		FINNIGAN->say("\"Petre the stables caretaker discovered poor Christopher and Inamo early this morning.\"");
 	}
-	0xFFF4->say("The Mayor continues. \"Hast thou searched the stables?\"");
+	FINNIGAN->say("The Mayor continues. \"Hast thou searched the stables?\"");
 	Func0885();
 }
 

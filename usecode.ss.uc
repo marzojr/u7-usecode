@@ -67101,8 +67101,8 @@ void Func0688 object#(0x688) () {
 	var0009 = UI_die_roll(0x0001, 0x0003);
 	if (var0009 == 0x0001) {
 		var000A = AVATAR->get_object_position();
-		var000B = var000A[0x0001] + UI_die_roll(0xFFF4, 0x000C);
-		var000C = var000A[0x0002] + UI_die_roll(0xFFF4, 0x000C);
+		var000B = var000A[0x0001] + UI_die_roll(-12, 12);
+		var000C = var000A[0x0002] + UI_die_roll(-12, 12);
 		var000D = var000A[0x0003];
 		var0000 = [var000B, var000C, 0x0000];
 	} else if (var0008 != 0x0000) {
