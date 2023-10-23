@@ -17901,10 +17901,10 @@ void Func042E object#(0x42E) () {
 	var var000B;
 
 	if (event == DOUBLECLICK) {
-		0xFFD2->show_npc_face(0x0000);
+		JAMES->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFFD2->get_npc_object()->get_schedule_type();
+		var0002 = JAMES->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (gflags[0x0092]) {
 			add("Cynthia said");
@@ -18059,7 +18059,7 @@ void Func042E object#(0x42E) () {
 		say("\"Oh, thou shalt just come back again wanting something else from me! I just know it!\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFD2);
+		Func092E(JAMES);
 	}
 }
 
