@@ -16564,11 +16564,11 @@ void Func0425 object#(0x425) () {
 	var var0007;
 
 	if (event == DOUBLECLICK) {
-		0xFFDB->show_npc_face(0x0000);
+		LUCY->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = "Avatar";
 		var0002 = UI_part_of_day();
-		var0003 = 0xFFDB->get_npc_object()->get_schedule_type();
+		var0003 = LUCY->get_npc_object()->get_schedule_type();
 		var0004 = Func0909();
 		if (gflags[0x0083]) {
 			var0005 = var0000;
@@ -16600,7 +16600,7 @@ void Func0425 object#(0x425) () {
 					if (var0007) {
 						DUPRE->say("\"Damn! How did she know?\"");
 						DUPRE->hide();
-						0xFFDB->show_npc_face(0x0000);
+						LUCY->show_npc_face(0x0000);
 					}
 				} else {
 					say("\"Oh, really?\" she says in mock surprise. \"Why, I have always wanted to meet the Avatar!\"");
@@ -16634,7 +16634,7 @@ void Func0425 object#(0x425) () {
 						say("She addresses Dupre. \"How about thou, handsome? Want something to eat?\" She bats her eyelashes.*");
 						DUPRE->say("\"My dear, thou wouldst make any man hungry!\"*");
 						DUPRE->hide();
-						0xFFDB->say("\"I like thy friends, ",
+						LUCY->say("\"I like thy friends, ",
 							var0005,
 							".\"");
 					}
@@ -16706,7 +16706,7 @@ void Func0425 object#(0x425) () {
 		say("\"Talk to thee later!\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFDB);
+		Func092E(LUCY);
 	}
 }
 
@@ -18147,10 +18147,10 @@ void Func042F object#(0x42F) () {
 			case "another":
 				say("\"'Tis Willy the Baker! But he does not know it yet!\" she giggles.");
 				gflags[0x0085] = true;
-				var0003 = Func08F7(0xFFDB);
+				var0003 = Func08F7(LUCY);
 				if (var0003) {
-					0xFFDB->say("\"A moment, Jeanette! Thou hast it all wrong! Charles is a -servant-! Thou art an ignoramus! Charles is not 'upper class'! He is as working class as thee! 'Tis Willy who is the rich merchant! If thou dost ask me, 'tis Willy who is obnoxious and egotistical. Charles is a dream!\"");
-					0xFFDB->hide();
+					LUCY->say("\"A moment, Jeanette! Thou hast it all wrong! Charles is a -servant-! Thou art an ignoramus! Charles is not 'upper class'! He is as working class as thee! 'Tis Willy who is the rich merchant! If thou dost ask me, 'tis Willy who is obnoxious and egotistical. Charles is a dream!\"");
+					LUCY->hide();
 					0xFFD1->show_npc_face(0x0000);
 				} else {
 					say("You point out to Jeanette that Charles is a servant.");
@@ -71825,7 +71825,7 @@ void Func08B7 0x8B7 () {
 	var0007 = 0x0000;
 	var0008 = ["", " for one portion", " for a rack", " for a bottle", " for one portion", " for one slice", " for one portion", " for a loaf", " for one piece", " for a bottle", " for a bottle"];
 	var0009 = 0x0001;
-	var000A = 0xFFDB;
+	var000A = LUCY;
 	say("\"What wouldst thou like to buy?\"");
 	while (var0001) {
 		var000B = Func090C(var0002);

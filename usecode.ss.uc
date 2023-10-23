@@ -9103,11 +9103,11 @@ void Func0207 shape#(0x207) () {
 				gflags[0x0128] = true;
 				var0001 = EDRIN;
 				var0002 = [0x036C, 0x094B, 0x0000];
-				0xFFDB->set_polymorph(0x00EF);
+				ALE->set_polymorph(0x00EF);
 				var0006 = [0x037D, 0x095A, 0x0000];
-				0xFFDB->move_object(var0006);
-				0xFFDB->set_new_schedules(MIDNIGHT, WAIT, [var0006[0x0001], var0006[0x0002]]);
-				0xFFDB->run_schedule();
+				ALE->move_object(var0006);
+				ALE->set_new_schedules(MIDNIGHT, WAIT, [var0006[0x0001], var0006[0x0002]]);
+				ALE->run_schedule();
 			}
 			Func09B6(var0001, var0002);
 		}
@@ -9801,7 +9801,7 @@ void Func0266 shape#(0x266) () {
 			}
 		}
 	}
-	0xFFDB->run_schedule();
+	ALE->run_schedule();
 	var0011 = script item after 32 ticks {
 		nohalt;
 		call Func0266;
@@ -15611,7 +15611,7 @@ void Func032B shape#(0x32B) () {
 		0xFEFB->set_item_flag(MET);
 		0xFF6D->set_item_flag(SI_ZOMBIE);
 		0xFF6B->set_item_flag(SI_ZOMBIE);
-		var0008 = [AVATAR, 0xFFD4, 0xFFC7, 0xFFDB, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, 0xFFCB, 0xFF33, 0xFF35, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, 0xFF4B, 0xFF4A, 0xFFC0, 0xFF6A, 0xFFB6, 0xFFC1, 0xFFB1, 0xFFB9, 0xFEF7, 0xFF89, 0xFF88, 0xFF87, 0xFF86, 0xFF85, 0xFF58];
+		var0008 = [AVATAR, 0xFFD4, 0xFFC7, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, 0xFFCB, 0xFF33, 0xFF35, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, 0xFF4B, 0xFF4A, 0xFFC0, 0xFF6A, 0xFFB6, 0xFFC1, 0xFFB1, 0xFFB9, 0xFEF7, 0xFF89, 0xFF88, 0xFF87, 0xFF86, 0xFF85, 0xFF58];
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -16901,18 +16901,18 @@ void Func0346 shape#(0x346) () {
 
 	UI_close_gumps();
 	if (get_item_frame() == 0x0000) {
-		if (Func0942(0xFFDB)) {
-			if (AVATAR->get_distance(0xFFDB) < 0x0003) {
+		if (Func0942(ALE)) {
+			if (AVATAR->get_distance(ALE) < 0x0003) {
 				var0000 = set_last_created();
-				var0001 = 0xFFDB->get_object_position();
+				var0001 = ALE->get_object_position();
 				var0000 = UI_update_last_created(var0001);
 				set_item_frame(0x0001);
-				0xFFDB->remove_npc();
+				ALE->remove_npc();
 			} else {
 				var0000 = set_last_created();
 				var0000 = AVATAR->give_last_created();
-				0xFFDB->set_schedule_type(STANDTHERE);
-				Func090D(0xFFDB, -1, -1, -3, Func0346, item, DOUBLECLICK);
+				ALE->set_schedule_type(STANDTHERE);
+				Func090D(ALE, -1, -1, -3, Func0346, item, DOUBLECLICK);
 			}
 		} else {
 			Func097F(AVATAR, "@Ale? Where art thou?@", 0x0000);
@@ -16922,9 +16922,9 @@ void Func0346 shape#(0x346) () {
 		var0001 = get_object_position();
 		var0001[0x0001] -= 0x0001;
 		var0001[0x0002] -= 0x0001;
-		0xFFDB->move_object([var0001[0x0001], var0001[0x0002], 0x0000]);
-		0xFFDB->set_new_schedules(MIDNIGHT, GRAZE, [var0001[0x0001], var0001[0x0002]]);
-		0xFFDB->run_schedule();
+		ALE->move_object([var0001[0x0001], var0001[0x0002], 0x0000]);
+		ALE->set_new_schedules(MIDNIGHT, GRAZE, [var0001[0x0001], var0001[0x0002]]);
+		ALE->run_schedule();
 	}
 }
 
@@ -19859,7 +19859,7 @@ void Func03D0 shape#(0x3D0) () {
 	if (var0000 == 0x0001) {
 		set_item_frame(0x0002);
 		UI_play_sound_effect(0x000C);
-		Func097F(0xFFDB, "@Squawk!@", 0x0003);
+		Func097F(ALE, "@Squawk!@", 0x0003);
 		Func097F(SHAMINO, "@'Twas a wild throw.@", 0x0001);
 	}
 	if (var0000 == 0x0002) {
@@ -24381,12 +24381,12 @@ void Func0410 object#(0x410) () {
 		abort;
 	}
 	if (gflags[0x0128] && ((event == SCRIPTED) && (!gflags[0x00E6]))) {
-		0xFFDB->set_schedule_type(WANDER);
-		Func097F(0xFFDB, "@Awk!@", 0x0002);
-		0xFFDB->set_camera();
+		ALE->set_schedule_type(WANDER);
+		Func097F(ALE, "@Awk!@", 0x0002);
+		ALE->set_camera();
 		EDRIN->remove_npc();
-		0xFFDB->set_polymorph(0x0304);
-		var0005 = script 0xFFDB after 5 ticks {
+		ALE->set_polymorph(0x0304);
+		var0005 = script ALE after 5 ticks {
 			nohalt;
 			call Func0425;
 		};
@@ -31294,7 +31294,7 @@ void Func0425 object#(0x425) () {
 	var var0005;
 	var var0006;
 
-	var0000 = 0xFFDB->get_schedule_type();
+	var0000 = ALE->get_schedule_type();
 	if (event == SCRIPTED) {
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		UI_set_weather(CLEAR_WEATHER);
@@ -31306,16 +31306,16 @@ void Func0425 object#(0x425) () {
 		AVATAR->clear_item_flag(DONT_MOVE);
 		UI_init_conversation();
 		EDRIN->set_npc_id(0x0000);
-		0xFFDB->set_new_schedules(MIDNIGHT, WANDER, [0x09A7, 0x07F7]);
-		0xFFDB->run_schedule();
+		ALE->set_new_schedules(MIDNIGHT, WANDER, [0x09A7, 0x07F7]);
+		ALE->run_schedule();
 		gflags[0x002A] = false;
 	}
 	if (event == PROXIMITY) {
 		if (var0000 == PATROL) {
-			var0002 = 0xFFDB->find_nearby(0x025F, 0x0002, MASK_EGG);
+			var0002 = ALE->find_nearby(0x025F, 0x0002, MASK_EGG);
 			var0003 = var0002->get_item_quality();
 			if (var0003 == 0x000F) {
-				0xFFDB->set_schedule_type(WAIT);
+				ALE->set_schedule_type(WAIT);
 				var0001 = script item {
 					nohalt;
 					step south;
@@ -31332,16 +31332,16 @@ void Func0425 object#(0x425) () {
 	if ((event == DOUBLECLICK) || ((event == PROXIMITY) && (get_schedule_type() == HOUND))) {
 		var0005 = UI_get_random(0x0006);
 		if (var0005 == 0x0001) {
-			0xFFDB->item_say("@Awk!@");
+			ALE->item_say("@Awk!@");
 		}
 		if (var0005 == 0x0002) {
-			0xFFDB->item_say("@See nor hear. See nor hear. Squawk!@");
+			ALE->item_say("@See nor hear. See nor hear. Squawk!@");
 		}
 		if (var0005 == 0x0003) {
-			0xFFDB->item_say("@Cracker!@");
+			ALE->item_say("@Cracker!@");
 		}
 		if (var0005 == 0x0004) {
-			0xFFDB->item_say("@Walla Walla!@");
+			ALE->item_say("@Walla Walla!@");
 		}
 		if (var0005 == 0x0005) {
 			if (Func0942(0xFFD5)) {
@@ -31351,13 +31351,13 @@ void Func0425 object#(0x425) () {
 			}
 		}
 		if (var0005 == 0x0006) {
-			0xFFDB->item_say("@Squawk!@");
+			ALE->item_say("@Squawk!@");
 		}
 	}
 	if (event == DEATH) {
-		Func097F(0xFFDB, "@Skreee!@", 0x0000);
-		AVATAR->set_oppressor(0xFFDB);
-		0xFFDB->set_attack_mode(FLEE);
+		Func097F(ALE, "@Skreee!@", 0x0000);
+		AVATAR->set_oppressor(ALE);
+		ALE->set_attack_mode(FLEE);
 	}
 }
 
@@ -78303,13 +78303,13 @@ void Func07B3 object#(0x7B3) () {
 				var0003 = UI_update_last_created([0x056E, 0x08A4, 0x0001]);
 			}
 			var0005 = [0x0551, 0x08A7, 0x0002];
-			var0006 = [0xFFD8, 0xFFD6, 0xFFDB, 0xFFD5];
+			var0006 = [0xFFD8, 0xFFD6, ALE, 0xFFD5];
 			for (var0009 in var0006 with var0007 to var0008) {
 				var0009->move_object(var0005);
 				var0009->set_new_schedules([MIDNIGHT], [PATROL], [0x055B, 0x08A7]);
 				var0009->set_schedule_type(PATROL);
 			}
-			0xFFDB->clear_item_flag(CAN_FLY);
+			ALE->clear_item_flag(CAN_FLY);
 			0xFFD8->set_npc_id(0x0004);
 			var0000 = 0x0004;
 			var0003 = script item after var0001 ticks {
@@ -79683,7 +79683,7 @@ void Func07E4 object#(0x7E4) () {
 		UI_play_music(0x0010, var0000);
 		0xFFD8->set_schedule_type(WANDER);
 		0xFFD5->set_schedule_type(WANDER);
-		0xFFDB->set_schedule_type(WANDER);
+		ALE->set_schedule_type(WANDER);
 		0xFFD6->set_schedule_type(WANDER);
 		var0002->set_barge_dir(EAST);
 		var0003 = new script {
@@ -79818,7 +79818,7 @@ void Func07E5 object#(0x7E5) () {
 		var0008 = ["@Oh!@", "@Whee!@", "@Ouch!@", "@Whoa!@"];
 		var0009 = UI_die_roll(0x0001, UI_get_array_size(var0008));
 		var000A = var0008[var0009];
-		var000B = [0xFFD5, 0xFFDB, 0xFFD8, 0xFFD6];
+		var000B = [0xFFD5, ALE, 0xFFD8, 0xFFD6];
 		var000C = UI_die_roll(0x0001, UI_get_array_size(var000B));
 		var000D = var000B[var000C];
 		var000D->item_say(var000A);
@@ -79874,9 +79874,9 @@ void Func07E6 object#(0x7E6) () {
 	UI_set_weather(CLEAR_WEATHER);
 	AVATAR->clear_item_flag(UNKNOWN_FLAG_17);
 	0xFFD8->clear_item_flag(DONT_MOVE);
-	0xFFDB->set_item_flag(CAN_FLY);
+	ALE->set_item_flag(CAN_FLY);
 	AUTO_MESSENGER->set_item_flag(SI_TOURNAMENT);
-	var0004 = [0xFFD8, 0xFFD6, 0xFFDB, 0xFFD5];
+	var0004 = [0xFFD8, 0xFFD6, ALE, 0xFFD5];
 	var0005 = [0x08AC, 0x0718];
 	var0006 = [0x07BA, 0x08D3];
 	var0007 = [0x08C8, 0x0716];
@@ -79889,7 +79889,7 @@ void Func07E6 object#(0x7E6) () {
 	0xFFD6->set_new_schedules([MIDNIGHT, MORNING, AFTERNOON, EVENING, NIGHT], [SLEEP, EAT_AT_INN, TEND_SHOP, TEND_SHOP, TEND_SHOP], [var0008, var0009, var000A, var000B, var000C]);
 	var000D = [0x08BD, 0x0713];
 	var000E = [0x0893, 0x0718];
-	0xFFDB->set_new_schedules([DAWN, MORNING, NIGHT], [WANDER, HOUND, STANDTHERE], [var000D, var000D, var000E]);
+	ALE->set_new_schedules([DAWN, MORNING, NIGHT], [WANDER, HOUND, STANDTHERE], [var000D, var000D, var000E]);
 	var000F = [0x08B9, 0x0710];
 	var0010 = [0x0895, 0x0719];
 	0xFFD5->set_new_schedules([DAWN, MORNING, NIGHT], [EAT_AT_INN, TEND_SHOP, SLEEP], [var000F, var000F, var0010]);
@@ -106390,8 +106390,8 @@ void Func0901 0x901 () {
 	0xFFD6->set_schedule_type(MAJOR_SIT);
 	0xFFD5->set_new_schedules(MIDNIGHT, MAJOR_SIT, [0x09A6, 0x07F8]);
 	0xFFD5->run_schedule();
-	0xFFDB->set_new_schedules(MIDNIGHT, WANDER, [0x09A7, 0x07F7]);
-	0xFFDB->run_schedule();
+	ALE->set_new_schedules(MIDNIGHT, WANDER, [0x09A7, 0x07F7]);
+	ALE->run_schedule();
 	Func09AC(MORTEGRO, 0x060E, 0x020F, TEND_SHOP);
 	if (DUPRE->get_npc_id() == 0x001E) {
 		Func09AC(DUPRE, 0x08BC, 0x0705, EAT_AT_INN);
