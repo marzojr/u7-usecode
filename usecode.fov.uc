@@ -20137,7 +20137,7 @@ void Func043D object#(0x43D) () {
 	var var0002;
 
 	if (event == DOUBLECLICK) {
-		0xFFC3->show_npc_face(0x0000);
+		MACK->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
 		if (gflags[0x0093]) {
@@ -20305,7 +20305,7 @@ void Func043D object#(0x43D) () {
 		say("\"I thank thee for thy decency and consideration.\"");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFC3);
+		Func092E(MACK);
 	}
 }
 
