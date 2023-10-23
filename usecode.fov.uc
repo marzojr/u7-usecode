@@ -15629,9 +15629,9 @@ void Func041C object#(0x41C) () {
 	if (event == DOUBLECLICK) {
 		var0000 = UI_is_pc_female();
 		if (var0000) {
-			0xFFE4->show_npc_face(0x0001);
+			JESSE->show_npc_face(0x0001);
 		} else {
-			0xFFE4->show_npc_face(0x0000);
+			JESSE->show_npc_face(0x0000);
 		}
 		add(["name", "job", "bye"]);
 		if (!gflags[0x009D]) {
@@ -15706,7 +15706,7 @@ void Func041C object#(0x41C) () {
 	}
 	if (event == PROXIMITY) {
 		var0002 = UI_part_of_day();
-		var0003 = 0xFFE4->get_npc_object()->get_schedule_type();
+		var0003 = JESSE->get_npc_object()->get_schedule_type();
 		var0004 = UI_die_roll(0x0001, 0x0004);
 		if (var0003 == PATROL) {
 			if (var0004 == 0x0001) {
@@ -15721,9 +15721,9 @@ void Func041C object#(0x41C) () {
 			if (var0004 == 0x0004) {
 				var0005 = "@Bye!@";
 			}
-			0xFFE4->item_say(var0005);
+			JESSE->item_say(var0005);
 		} else {
-			Func092E(0xFFE4);
+			Func092E(JESSE);
 		}
 	}
 }
@@ -73580,16 +73580,16 @@ void Func08D1 0x8D1 () {
 
 		always:
 			UI_clear_answers();
-			var0001 = Func08F7(0xFFE4);
+			var0001 = Func08F7(JESSE);
 			if (var0001) {
 				say("\"Jesse, hand our friend thy staff.\"*");
 				if (var0000) {
-					0xFFE4->show_npc_face(0x0001);
+					JESSE->show_npc_face(0x0001);
 					say("\"Here it is, milady.\"*");
-					0xFFE4->hide();
+					JESSE->hide();
 				} else {
-					0xFFE4->say("\"Here it is, milord.\"*");
-					0xFFE4->hide();
+					JESSE->say("\"Here it is, milord.\"*");
+					JESSE->hide();
 				}
 			} else {
 				say("Raymundo hands you a staff.");

@@ -2366,7 +2366,7 @@ void Func00E6 shape#(0xE6) () {
 				}
 				var0017 &= UI_get_party_list2();
 				var0017 = Func0988(AVATAR->get_npc_object(), var0017);
-				var0017 = Func0988(0xFFE4, var0017);
+				var0017 = Func0988(PETRA, var0017);
 				var0017 = Func0988(MORTEGRO, var0017);
 				var0017 = Func0988(0xFF58, var0017);
 				for (var000F in var0017 with var001A to var001B) {
@@ -2402,7 +2402,7 @@ void Func00E6 shape#(0xE6) () {
 		}
 		var0017 &= UI_get_party_list2();
 		var0017 = Func0988(AVATAR->get_npc_object(), var0017);
-		var0017 = Func0988(0xFFE4, var0017);
+		var0017 = Func0988(PETRA, var0017);
 		var0017 = Func0988(MORTEGRO, var0017);
 		var0017 = Func0988(0xFF58, var0017);
 		for (var000F in var0017 with var001E to var001F) {
@@ -7862,7 +7862,7 @@ void Func01C7 shape#(0x1C7) () {
 			UI_fade_palette(0x000C, 0x0001, 0x0000);
 			UI_play_music(0x0027, Func09A0(0x0005, 0x0001));
 			var0017 = Func098D();
-			var0017 = Func0988(0xFFE4, var0017);
+			var0017 = Func0988(PETRA, var0017);
 			var0017 = Func0988(MORTEGRO, var0017);
 			var0017 = Func0988(0xFF58, var0017);
 			var0018 = 0x0000;
@@ -8034,7 +8034,7 @@ void Func01C7 shape#(0x1C7) () {
 			UI_play_sound_effect(0x0082);
 			UI_end_conversation();
 			var0017 = [AVATAR, FRIGIDAZZI, FILBERCIO] & Func098D();
-			var0017 = Func0988(0xFFE4, var0017);
+			var0017 = Func0988(PETRA, var0017);
 			var0017 = Func0988(MORTEGRO, var0017);
 			var0017 = Func0988(0xFF58, var0017);
 			for (var0016 in var0017 with var001B to var001C) {
@@ -16650,9 +16650,9 @@ void Func033D shape#(0x33D) () {
 			AVATAR->set_item_flag(DONT_MOVE);
 			UI_end_conversation();
 			var0001 = ("@" + var0000) + ", I am afraid.@";
-			0xFFE4->item_say(var0001);
-			var0002 = AVATAR->direction_from(0xFFE4);
-			var0003 = 0xFFE4->direction_from(AVATAR);
+			PETRA->item_say(var0001);
+			var0002 = AVATAR->direction_from(PETRA);
+			var0003 = PETRA->direction_from(AVATAR);
 			AVATAR->halt_scheduled();
 			var0004 = script AVATAR after 14 ticks {
 				nohalt;
@@ -16678,24 +16678,24 @@ void Func033D shape#(0x33D) () {
 		}
 		if (gflags[0x0009]) {
 			AVATAR->halt_scheduled();
-			0xFFE4->halt_scheduled();
-			0xFFE4->set_polymorph(0x014E);
-			0xFFE4->set_schedule_type(WAIT);
+			PETRA->halt_scheduled();
+			PETRA->set_polymorph(0x014E);
+			PETRA->set_schedule_type(WAIT);
 			AVATAR->set_item_flag(ISPETRA);
-			var0005 = 0xFFE4->get_object_position();
+			var0005 = PETRA->get_object_position();
 			var0006 = AVATAR->get_object_position();
-			var0002 = AVATAR->direction_from(0xFFE4);
-			var0003 = 0xFFE4->direction_from(AVATAR);
+			var0002 = AVATAR->direction_from(PETRA);
+			var0003 = PETRA->direction_from(AVATAR);
 			var0004 = script AVATAR {
 				nohalt;
 				say "@...be fine...@";
 			};
-			var0004 = script 0xFFE4 {
+			var0004 = script PETRA {
 				nohalt;
 				wait 4;
 				call Func033D;
 			};
-			var0007 = 0xFFE4->get_object_position();
+			var0007 = PETRA->get_object_position();
 			UI_sprite_effect(ANIMATION_LIGHTNING_GREEN, var0007[0x0001], var0007[0x0002], 0x0000, 0x0000, 0x0001, LOOP_ONCE);
 			UI_play_sound_effect(0x0074);
 			UI_lightning();
@@ -16708,7 +16708,7 @@ void Func033D shape#(0x33D) () {
 		}
 		if (gflags[0x000A]) {
 			AVATAR->halt_scheduled();
-			0xFFE4->halt_scheduled();
+			PETRA->halt_scheduled();
 			var0008 = Func09A0(0x0001, 0x0001);
 			var0009 = var0008->get_item_quality();
 			var000A = UI_is_pc_female();
@@ -16735,13 +16735,13 @@ void Func033D shape#(0x33D) () {
 				} else {
 					AVATAR->set_polymorph(Func089C(BLONDE_AVATAR, 0x0000));
 				}
-				var0004 = script 0xFFE4 after 5 ticks {
+				var0004 = script PETRA after 5 ticks {
 					nohalt;
 					call Func033D;
 				};
 			}
 			if (var0009 == 0x0003) {
-				0xFFE4->set_polymorph(0x0292);
+				PETRA->set_polymorph(0x0292);
 				var0004 = script AVATAR after 4 ticks {
 					nohalt;
 					call Func033D;
@@ -16749,34 +16749,34 @@ void Func033D shape#(0x33D) () {
 			}
 			if (var0009 == 0x0004) {
 				AVATAR->set_polymorph(Func089C(var000B, var000A));
-				var0004 = script 0xFFE4 after 4 ticks {
+				var0004 = script PETRA after 4 ticks {
 					nohalt;
 					call Func033D;
 				};
 			}
 			if (var0009 == 0x0005) {
-				0xFFE4->set_polymorph(Func089C(var000B, var000A));
-				var0004 = script 0xFFE4 after 4 ticks {
+				PETRA->set_polymorph(Func089C(var000B, var000A));
+				var0004 = script PETRA after 4 ticks {
 					nohalt;
 					call Func033D;
 				};
 			}
 			if (var0009 == 0x0006) {
 				if (var000B == BLONDE_AVATAR) {
-					0xFFE4->set_polymorph(Func089C(BLACK_AVATAR, 0x0001));
+					PETRA->set_polymorph(Func089C(BLACK_AVATAR, 0x0001));
 				} else {
-					0xFFE4->set_polymorph(Func089C(BLONDE_AVATAR, 0x0001));
+					PETRA->set_polymorph(Func089C(BLONDE_AVATAR, 0x0001));
 				}
-				var0004 = script 0xFFE4 after 4 ticks {
+				var0004 = script PETRA after 4 ticks {
 					nohalt;
 					call Func033D;
 				};
 			}
 			if (var0009 == 0x0007) {
 				if (var000B == LATINO_AVATAR) {
-					0xFFE4->set_polymorph(Func089C(BLACK_AVATAR, 0x0001));
+					PETRA->set_polymorph(Func089C(BLACK_AVATAR, 0x0001));
 				} else {
-					0xFFE4->set_polymorph(Func089C(LATINO_AVATAR, 0x0001));
+					PETRA->set_polymorph(Func089C(LATINO_AVATAR, 0x0001));
 				}
 				var0004 = script AVATAR after 3 ticks {
 					nohalt;
@@ -16793,21 +16793,21 @@ void Func033D shape#(0x33D) () {
 			}
 			if (var0009 == 0x0008) {
 				AVATAR->set_polymorph(Func089C(var000B, var000A));
-				var0004 = script 0xFFE4 after 2 ticks {
+				var0004 = script PETRA after 2 ticks {
 					nohalt;
 					call Func033D;
 				};
 			}
 			if (var0009 == 0x0009) {
-				0xFFE4->set_polymorph(0x014E);
-				var0004 = script 0xFFE4 after 2 ticks {
+				PETRA->set_polymorph(0x014E);
+				var0004 = script PETRA after 2 ticks {
 					nohalt;
 					call Func033D;
 				};
 			}
 			if (var0009 == 0x000A) {
-				0xFFE4->set_polymorph(Func089C(var000B, 0x0001));
-				var0004 = script 0xFFE4 after 2 ticks {
+				PETRA->set_polymorph(Func089C(var000B, 0x0001));
+				var0004 = script PETRA after 2 ticks {
 					nohalt;
 					call Func033D;
 				};
@@ -16817,7 +16817,7 @@ void Func033D shape#(0x33D) () {
 				UI_sprite_effect(ANIMATION_LIGHTNING_GREEN, var0007[0x0001], var0007[0x0002], 0x0000, 0x0000, var000C, 0x0001);
 			}
 			if (var0009 == 0x000B) {
-				0xFFE4->set_polymorph(0x0292);
+				PETRA->set_polymorph(0x0292);
 				var0004 = script AVATAR after 1 ticks {
 					nohalt;
 					call Func033D;
@@ -16832,13 +16832,13 @@ void Func033D shape#(0x33D) () {
 			}
 			if (var0009 == 0x000D) {
 				AVATAR->set_polymorph(Func089C(var000B, var000A));
-				var0004 = script 0xFFE4 {
+				var0004 = script PETRA {
 					nohalt;
 					call Func033D;
 				};
 			}
 			if (var0009 == 0x000E) {
-				0xFFE4->set_polymorph(0x02D1);
+				PETRA->set_polymorph(0x02D1);
 				var0004 = script AVATAR {
 					nohalt;
 					call Func033D;
@@ -16851,11 +16851,11 @@ void Func033D shape#(0x33D) () {
 				AVATAR->set_polymorph(0x0292);
 				AVATAR->clear_item_flag(DONT_MOVE);
 				UI_init_conversation();
-				0xFFE4->set_item_flag(SI_TOURNAMENT);
+				PETRA->set_item_flag(SI_TOURNAMENT);
 				gflags[0x000A] = false;
 				if (!var000A) {
 					gflags[0x0228] = true;
-					var0004 = 0xFFE4->set_npc_prop(SEX_FLAG, 0);
+					var0004 = PETRA->set_npc_prop(SEX_FLAG, 0);
 					var0004 = AVATAR->set_npc_prop(SEX_FLAG, 1);
 				}
 				UI_play_music(0x0040, 0x0000);
@@ -16865,14 +16865,14 @@ void Func033D shape#(0x33D) () {
 		}
 	}
 	if (event == PATH_SUCCESS) {
-		var000D = AVATAR->direction_from(0xFFE4);
-		var000E = 0xFFE4->direction_from(AVATAR);
+		var000D = AVATAR->direction_from(PETRA);
+		var000E = PETRA->direction_from(AVATAR);
 		gflags[0x0007] = true;
 		var0004 = script AVATAR {
 			face var000D;
 			call Func033D;
 		};
-		var0004 = script 0xFFE4 {
+		var0004 = script PETRA {
 			face var000E;
 		};
 	}
@@ -20218,7 +20218,7 @@ void Func03D2 shape#(0x3D2) () {
 					0x0000->set_conversation_slot();
 					Func097F(var000E, "@Insolent dragon!@", 0x0000);
 				}
-				if (var000E == 0xFFE4) {
+				if (var000E == PETRA) {
 					var000F = "@I'll take that as a compliment!@";
 					var000E = Func0992(var000E, var000F, 0x0000, false);
 					0x0000->set_conversation_slot();
@@ -22964,7 +22964,7 @@ void Func040D object#(0x40D) () {
 				abort;
 
 			case "information" (remove):
-				if ((0xFF3A->npc_nearby() || (0xFFE4->npc_nearby() || 0xFFE2->npc_nearby())) && gflags[0x013E]) {
+				if ((0xFF3A->npc_nearby() || (PETRA->npc_nearby() || 0xFFE2->npc_nearby())) && gflags[0x013E]) {
 					var0009 = 0x0064;
 					gflags[0x013E] = false;
 					say("\"'Tis so flattering to be asked so many questions by thee, ",
@@ -27716,7 +27716,7 @@ void Func041C object#(0x41C) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	var0003 = 0xFFE4->get_object_position();
+	var0003 = PETRA->get_object_position();
 	if ((var0003[0x0001] < 0x08DF) && ((var0003[0x0001] > 0x0890) && ((var0003[0x0002] < 0x072F) && (var0003[0x0002] > 0x0700)))) {
 		var0004 = true;
 	}
@@ -27728,73 +27728,73 @@ void Func041C object#(0x41C) () {
 		var0006 = "evening";
 	}
 	if (event == DEATH) {
-		if (0xFFE4->get_item_flag(SI_TOURNAMENT)) {
-			Func0976(0xFFE4, 0x0005);
-			0xFFE4->clear_item_flag(SI_TOURNAMENT);
-			var0003 = script 0xFFE4 {
+		if (PETRA->get_item_flag(SI_TOURNAMENT)) {
+			Func0976(PETRA, 0x0005);
+			PETRA->clear_item_flag(SI_TOURNAMENT);
+			var0003 = script PETRA {
 				call Func070A;
 			};
 		}
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Hello, there.@");
-		0xFFE4->Func07D1();
-		Func097F(0xFFE4, (("@Greetings, " + var0000) + ".@"), 0x0002);
-		0xFFE4->set_schedule_type(TALK);
+		PETRA->Func07D1();
+		Func097F(PETRA, (("@Greetings, " + var0000) + ".@"), 0x0002);
+		PETRA->set_schedule_type(TALK);
 	}
 	if (event == PROXIMITY) {
 		var0007 = UI_get_random(0x0006);
 		if (var0007 == 0x0001) {
-			0xFFE4->item_say("@Art thou thirsty?@");
+			PETRA->item_say("@Art thou thirsty?@");
 		}
 		if (var0007 == 0x0002) {
-			0xFFE4->item_say("@Ale! Wine!@");
+			PETRA->item_say("@Ale! Wine!@");
 		}
 		if (var0007 == 0x0003) {
-			0xFFE4->item_say("@Welcome!@");
+			PETRA->item_say("@Welcome!@");
 		}
 		if (var0007 == 0x0004) {
-			0xFFE4->item_say("@Want a room?@");
+			PETRA->item_say("@Want a room?@");
 		}
 		if (var0007 == 0x0005) {
 			if (Func0942(0xFFE2)) {
-				0xFFE4->item_say("@Rocco!@");
+				PETRA->item_say("@Rocco!@");
 				Func097F(0xFFE2, "@In a minute...@", 0x0002);
 			} else {
-				0xFFE4->item_say("@Work, work, work...@");
+				PETRA->item_say("@Work, work, work...@");
 			}
 		}
 		if (var0007 == 0x0006) {
-			0xFFE4->item_say("@Baked fish!@");
+			PETRA->item_say("@Baked fish!@");
 		}
 	}
 	if (event == BG_PATH_FAILURE) {
 		if (gflags[0x0228]) {
 			var0003 = AVATAR->set_npc_prop(SEX_FLAG, 0);
-			0xFFE4->set_polymorph(0x02D1);
+			PETRA->set_polymorph(0x02D1);
 			var0003 = AVATAR->set_npc_prop(SEX_FLAG, 1);
 		} else {
-			0xFFE4->set_polymorph(0x02D1);
+			PETRA->set_polymorph(0x02D1);
 		}
 	}
 	if (event == PATH_SUCCESS) {
-		0xFFE4->item_say("@I'm ready.@");
+		PETRA->item_say("@I'm ready.@");
 	}
 	if (event == STARTED_TALKING) {
-		if (0xFFE4->get_item_flag(IN_PARTY)) {
-			0xFFE4->set_schedule_type(FOLLOW_AVATAR);
+		if (PETRA->get_item_flag(IN_PARTY)) {
+			PETRA->set_schedule_type(FOLLOW_AVATAR);
 			add("leave");
 		} else {
-			0xFFE4->run_schedule();
-			0xFFE4->clear_item_say();
+			PETRA->run_schedule();
+			PETRA->clear_item_say();
 			if (gflags[0x0015]) {
 				add("belongings");
 			}
 		}
-		0xFFE4->show_npc_face0(0x0000);
-		var0008 = 0xFFE4->get_item_flag(MET);
+		PETRA->show_npc_face0(0x0000);
+		var0008 = PETRA->get_item_flag(MET);
 		if ((var0008 == false) && (!gflags[0x0004])) {
-			0xFFE4->set_item_flag(MET);
+			PETRA->set_item_flag(MET);
 			say("\"This is the Blue Boar Inn, and I am the barmaid. My name is Petra.\"");
 			add(["Blue Boar Inn", "barmaid"]);
 		} else if (gflags[0x0004]) {
@@ -27804,7 +27804,7 @@ void Func041C object#(0x41C) () {
 					". Rocco -- my love -- is dead, and the Blue Boar destroyed.\"");
 				say("\"I am only an automaton, with no hope that any soul I may have will join Rocco in the world beyond this one. There is nothing left for me.\"");
 				gflags[0x0139] = true;
-			} else if (0xFFE4->get_item_flag(IN_PARTY) || (!(Func0994() == 0x000E))) {
+			} else if (PETRA->get_item_flag(IN_PARTY) || (!(Func0994() == 0x000E))) {
 				say("\"Glad to talk to thee again, ",
 					var0002,
 					". I only wish I could be of more help to thee. I am merely an automaton...\"");
@@ -27820,7 +27820,7 @@ void Func041C object#(0x41C) () {
 		} else {
 			say("\"Is this not a nice day?\"");
 		}
-		if (gflags[0x0226] && (!0xFFE4->get_item_flag(IN_PARTY))) {
+		if (gflags[0x0226] && (!PETRA->get_item_flag(IN_PARTY))) {
 			add("acid");
 		}
 		if (gflags[0x0227] && ((Func0994() == 0x0011) && (!AVATAR->get_item_flag(ISPETRA)))) {
@@ -27835,7 +27835,7 @@ void Func041C object#(0x41C) () {
 		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
-		if (var0004 && (!0xFFE4->get_item_flag(IN_PARTY))) {
+		if (var0004 && (!PETRA->get_item_flag(IN_PARTY))) {
 			add(["food", "drink", "room"]);
 		}
 		converse (["bye"]) {
@@ -27882,13 +27882,13 @@ void Func041C object#(0x41C) () {
 						var0000,
 						"... If thou hast further need of me, thou hast but to ask.\"");
 				}
-				0xFFE4->remove_from_party();
-				if (0xFFE4->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY)) {
+				PETRA->remove_from_party();
+				if (PETRA->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY)) {
 					say("\"Dost thou wish thy belongings returned to thee?\"");
 					if (Func0955()) {
 						say("\"Here they are.\"");
 						gflags[0x0015] = false;
-						var0003 = Func09B3(0xFFE4);
+						var0003 = Func09B3(PETRA);
 						if (var0003[0x0001] != 0x0000) {
 							say("\"Thy companions carry some of thine inventory.\"");
 							if (var0003[0x0002] > 0x0000) {
@@ -27908,7 +27908,7 @@ void Func041C object#(0x41C) () {
 						say("\"Then I will keep thine inventory for thee. Find me if thou changest thy mind.\"");
 					}
 				}
-				Func09B4(0xFFE4);
+				Func09B4(PETRA);
 				fallthrough;
 
 			case "belongings" (remove):
@@ -27916,7 +27916,7 @@ void Func041C object#(0x41C) () {
 				if (Func0955()) {
 					say("\"Here they are.\"");
 					gflags[0x0015] = false;
-					var0003 = Func09B3(0xFFE4);
+					var0003 = Func09B3(PETRA);
 					if (var0003[0x0001] != 0x0000) {
 						say("\"Thy companions carry some of thine inventory.\"");
 						if (var0003[0x0002] > 0x0000) {
@@ -28040,7 +28040,7 @@ void Func041C object#(0x41C) () {
 							add("leave");
 							gflags[0x0015] = true;
 							say("\"If thou dost wish it, then I shall accompany thee. Perhaps the danger shall cause me to forget my grief.\"");
-							0xFFE4->add_to_party();
+							PETRA->add_to_party();
 						} else {
 							say("\"Thou art not serious, ",
 								var0002,
@@ -28075,8 +28075,8 @@ void Func041C object#(0x41C) () {
 							var000F->set_item_frame(0x0007);
 							var0003 = UI_update_last_created([(var000E[0x0001] - 0x0001), (var000E[0x0002] - 0x0001), (var000E[0x0003] + 0x0001)]);
 							if (var0003) {
-								0xFFE4->set_schedule_type(WAIT);
-								Func090E(0xFFE4, var000F, 0, 0, -1, Func041C, 0xFFE4->get_npc_object(), PATH_SUCCESS, false);
+								PETRA->set_schedule_type(WAIT);
+								Func090E(PETRA, var000F, 0, 0, -1, Func041C, PETRA->get_npc_object(), PATH_SUCCESS, false);
 							}
 						}
 						return;
@@ -28087,15 +28087,15 @@ void Func041C object#(0x41C) () {
 
 			case "bye":
 				UI_remove_npc_face0();
-				if (0xFFE4->get_item_flag(IN_PARTY) || (!(Func0994() == 0x000E))) {
+				if (PETRA->get_item_flag(IN_PARTY) || (!(Func0994() == 0x000E))) {
 					Func097F(AVATAR, "@Thanks.@", 0x0000);
-					Func097F(0xFFE4, "@Glad to be of help.@", 0x0002);
+					Func097F(PETRA, "@Glad to be of help.@", 0x0002);
 				} else {
 					Func097F(AVATAR, "@So long!@", 0x0000);
 					if (gflags[0x0004]) {
-						Func097F(0xFFE4, "@Farewell...@", 0x0002);
+						Func097F(PETRA, "@Farewell...@", 0x0002);
 					} else {
-						Func097F(0xFFE4, "@Please come again!@", 0x0002);
+						Func097F(PETRA, "@Please come again!@", 0x0002);
 					}
 				}
 				Func08FF();
@@ -28696,7 +28696,7 @@ void Func041E object#(0x41E) () {
 		var0006 = UI_get_random(0x0006);
 		if (var0006 == 0x0001) {
 			0xFFE2->item_say("@Petra, bring wine!@");
-			Func097F(0xFFE4, "@In a minute...@", 0x0002);
+			Func097F(PETRA, "@In a minute...@", 0x0002);
 		}
 		if (var0006 == 0x0002) {
 			0xFFE2->item_say("@These are hard times...@");
@@ -28758,8 +28758,8 @@ void Func041E object#(0x41E) () {
 				gflags[0x0142] = true;
 				gflags[0x013F] = true;
 				say("\"'Tis that she-witch, Rotoluncia! Everyone knows that she doth work against thee.\"");
-				if (0xFFE4->npc_nearby()) {
-					0xFFE4->show_npc_face1(0x0000);
+				if (PETRA->npc_nearby()) {
+					PETRA->show_npc_face1(0x0000);
 					say("\"Perhaps ",
 						var0002,
 						" should go to Julia, dear. The Rangers must investigate this crime.\"");
@@ -28843,8 +28843,8 @@ void Func041E object#(0x41E) () {
 
 			case "the sage Batlin" (remove):
 				say("\"Such a one did come through here, perhaps two\tmonths ago.\"");
-				if (Func0942(0xFFE4)) {
-					Func094E(0xFFE4, "@'Twas three months ago, Rocco.@");
+				if (Func0942(PETRA)) {
+					Func094E(PETRA, "@'Twas three months ago, Rocco.@");
 					0xFFE2->show_npc_face0(0x0000);
 					say("\"Yes, she's right... it was three months ago.\"");
 				}
@@ -28878,8 +28878,8 @@ void Func041E object#(0x41E) () {
 
 			case "How long ago?" (remove):
 				say("\"It hath been a long time since we last saw Gwenno. Many months.\"");
-				if (Func0942(0xFFE4)) {
-					Func094E(0xFFE4, "@Eight months, dear Rocco.@");
+				if (Func0942(PETRA)) {
+					Func094E(PETRA, "@Eight months, dear Rocco.@");
 					0xFFE2->show_npc_face0(0x0000);
 				}
 				fallthrough;
@@ -28906,8 +28906,8 @@ void Func041E object#(0x41E) () {
 
 			case "automaton" (remove):
 				say("\"We have a lot of them around here -- magical creations, scavenged from the Serpent ruins and restored to service by our Mages. But Petra is unique, being an experiment by Torrissio the Sly. While all the others are mere machines, my Petra is a warm, caring person.\"");
-				if (Func0942(0xFFE4)) {
-					0xFFE4->show_npc_face1(0x0000);
+				if (Func0942(PETRA)) {
+					PETRA->show_npc_face1(0x0000);
 					say("\"Do not mention that name again, Rocco! Why summon more trouble than we already have?\"");
 					UI_remove_npc_face1();
 					0xFFE2->show_npc_face0(0x0000);
@@ -28975,8 +28975,8 @@ void Func041E object#(0x41E) () {
 
 			case "Fawn" (remove):
 				say("\"'Tis somewhere on the western portion of the mainland. I never went there. Though I heard tell that it is a city built on great piers out in the water.\"");
-				if (Func0942(0xFFE4)) {
-					0xFFE4->show_npc_face1(0x0000);
+				if (Func0942(PETRA)) {
+					PETRA->show_npc_face1(0x0000);
 					say("\"Sounds dangerous to me...\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -28988,8 +28988,8 @@ void Func041E object#(0x41E) () {
 				say("\"He looked as pale as a corpse, ",
 					var0000,
 					". He babbled something about a Death Knight and ran out as though his pants were on fire. Sounds like he's in trouble again.\"");
-				if (Func0942(0xFFE4)) {
-					0xFFE4->show_npc_face1(0x0000);
+				if (Func0942(PETRA)) {
+					PETRA->show_npc_face1(0x0000);
 					say("\"Again?! When is Stefano not in trouble?\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -28999,8 +28999,8 @@ void Func041E object#(0x41E) () {
 
 			case "Death Knight" (remove):
 				say("\"I would thank thee not to repeat that in here. As Petra says, no use borrowing trouble...\"");
-				if (Func0942(0xFFE4)) {
-					0xFFE4->show_npc_face1(0x0000);
+				if (Func0942(PETRA)) {
+					PETRA->show_npc_face1(0x0000);
 					say("\"I knew thou wert learning, Rocco.\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -29011,8 +29011,8 @@ void Func041E object#(0x41E) () {
 
 			case "slippers" (remove):
 				say("\"They are not anything that I would wear, and Petra's metal feet are never cold... least not as she would notice.\"");
-				if (Func0942(0xFFE4)) {
-					0xFFE4->show_npc_face1(0x0000);
+				if (Func0942(PETRA)) {
+					PETRA->show_npc_face1(0x0000);
 					say("\"I would know that it was cold, dear Rocco, but it would not trouble me.\"");
 					0x0000->set_conversation_slot();
 					say("\"See there?\"");
@@ -29027,8 +29027,8 @@ void Func041E object#(0x41E) () {
 
 			case "Bucia" (remove):
 				say("\"Bucia is the proprietor of the Capessi Canton in the bazaar. She is Moonshade's only provisioner.\"");
-				if (Func0942(0xFFE4)) {
-					0xFFE4->show_npc_face1(0x0000);
+				if (Func0942(PETRA)) {
+					PETRA->show_npc_face1(0x0000);
 					say("\"And its greatest gossip, as well!\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -32450,7 +32450,7 @@ void Func0428 object#(0x428) () {
 						say("\"Take that thing out of here!\" ~\"My patrons are trying to eat!\"");
 						UI_remove_npc_face1();
 						0x0000->set_conversation_slot();
-						Func097F(0xFFE4, "@Phew!@", 0x0005);
+						Func097F(PETRA, "@Phew!@", 0x0005);
 						abort;
 					}
 				} else {
@@ -72480,10 +72480,10 @@ void Func070A object#(0x70A) () {
 
 	if (AVATAR->get_item_flag(ISPETRA)) {
 		if (gflags[0x0228]) {
-			var0000 = 0xFFE4->set_npc_prop(SEX_FLAG, 1);
+			var0000 = PETRA->set_npc_prop(SEX_FLAG, 1);
 			var0000 = AVATAR->set_npc_prop(SEX_FLAG, 0);
 		}
-		0xFFE4->set_polymorph(0x0292);
+		PETRA->set_polymorph(0x0292);
 		AVATAR->set_polymorph(0x02D1);
 		var0001 = AVATAR->get_object_position();
 		var0001[0x0001] -= var0001[0x0003] / 0x0002;
@@ -72491,15 +72491,15 @@ void Func070A object#(0x70A) () {
 		var0002 = UI_die_roll(0x0000, 0x0003);
 		UI_lightning();
 		UI_sprite_effect(ANIMATION_LIGHTNING_GREEN, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, var0002, 0x0001);
-		if (0xFFE4->npc_nearby()) {
-			var0001 = 0xFFE4->get_object_position();
+		if (PETRA->npc_nearby()) {
+			var0001 = PETRA->get_object_position();
 			var0001[0x0001] -= var0001[0x0003] / 0x0002;
 			var0001[0x0002] -= var0001[0x0003] / 0x0002;
 			var0002 = UI_die_roll(0x0000, 0x0003);
 			UI_sprite_effect(ANIMATION_LIGHTNING_GREEN, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, var0002, 0x0001);
 		}
 		AVATAR->clear_item_flag(ISPETRA);
-		0xFFE4->clear_item_flag(SI_TOURNAMENT);
+		PETRA->clear_item_flag(SI_TOURNAMENT);
 	}
 }
 
@@ -72615,7 +72615,7 @@ void Func0710 object#(0x710) () {
 					var0001 = var0006;
 					var0002 = var0005;
 				}
-			} else if ((var0005 != 0xFFE4) && ((var0005 != 0xFFE4->get_npc_object()) && (var0005->get_item_shape() != 0x02EB))) {
+			} else if ((var0005 != PETRA) && ((var0005 != PETRA->get_npc_object()) && (var0005->get_item_shape() != 0x02EB))) {
 				var0001 = var0006;
 				var0002 = var0005;
 			}
@@ -72626,7 +72626,7 @@ void Func0710 object#(0x710) () {
 	}
 	gflags[0x0226] = true;
 	if (UI_die_roll(0x0001, 0x0003) == 0x0002) {
-		var0007 = Func0992(0xFFE4, "@Acid!@", "@Acid!@", true);
+		var0007 = Func0992(PETRA, "@Acid!@", "@Acid!@", true);
 	}
 	var0008 = var0002->get_object_position();
 	var0009 = UI_create_new_object(0x0390);
@@ -84240,13 +84240,13 @@ void Func0808 0x808 (var var0000, var var0001) {
 						say("\"And thou art indeed a master, musician automaton.\"");
 						UI_remove_npc_face1();
 						0x0000->set_conversation_slot();
-					} else if (0xFFE4->npc_nearby()) {
-						0xFFE4->show_npc_face1(0x0000);
+					} else if (PETRA->npc_nearby()) {
+						PETRA->show_npc_face1(0x0000);
 						say("\"There are some who say that when it comes to music, we automatons have a tin ear.\"");
 						UI_remove_npc_face1();
 						0x0000->set_conversation_slot();
 						say("\"That is patently untrue.\"");
-						0xFFE4->show_npc_face1(0x0000);
+						PETRA->show_npc_face1(0x0000);
 						say("\"I was making a humorous remark, musician.\"");
 						UI_remove_npc_face1();
 						0x0000->set_conversation_slot();
@@ -95124,7 +95124,7 @@ void Func0852 0x852 () {
 		} else if (var000D == 0x0003) {
 			var0012 = Func0992(0x0001, (("@But " + var0000) + ", we have not the guilders to pay for this.@"), 0x0000, false);
 			if (var0012 != AVATAR) {
-				0xFFE4->show_npc_face0(0x0000);
+				PETRA->show_npc_face0(0x0000);
 				say("\"I am sorry, but Rocco cannot afford to feed thee for free, ",
 					var0000,
 					".\"");
@@ -95236,7 +95236,7 @@ void Func0853 0x853 () {
 		} else if (var000D == 0x0003) {
 			var0010 = Func0992(0x0001, (("@But " + var0001) + ", we lack adequate funds!@"), 0x0000, false);
 			if (var0010 != AVATAR) {
-				0xFFE4->show_npc_face0(0x0000);
+				PETRA->show_npc_face0(0x0000);
 				say("\"Then thy thirst must be quenched by well water, I'm afraid.\"");
 			} else {
 				say("\"It seems thou dost not have the funds to pay me... Hast thou considered drinking from the public well?\"");
@@ -95452,7 +95452,7 @@ var Func0854 0x854 (var var0000, var var0001) {
 							var0010,
 							" skull for thee.\"");
 						UI_remove_npc_face1();
-						0xFFE4->show_npc_face0(0x0000);
+						PETRA->show_npc_face0(0x0000);
 					}
 					say("\"",
 						var0004,
@@ -96642,8 +96642,8 @@ var Func0860 0x860 (var var0000, var var0001) {
 				}
 				if (var0010 == 0x0003) {
 					say("\"I cannot believe that thou hast out-bargained me so...\"");
-					if (Func0942(0xFFE4)) {
-						0xFFE4->show_npc_face1(0x0000);
+					if (Func0942(PETRA)) {
+						PETRA->show_npc_face1(0x0000);
 						say("\"Thou art too old to be an innkeeper, Rocco! Thy mind grows soft, like an over-ripe fruit.\"");
 						UI_remove_npc_face1();
 						0xFFE2->show_npc_face0(0x0000);
@@ -96784,8 +96784,8 @@ var Func0860 0x860 (var var0000, var var0001) {
 			if (var000D == 0x0004) {
 				if (var0010 == 0x0001) {
 					say("\"Petra, come and hear this! The customer jests with me!\"");
-					if (Func0942(0xFFE4)) {
-						Func094E(0xFFE4, (("@We cannot possibly accept less than " + var0004) + " guilders.@"));
+					if (Func0942(PETRA)) {
+						Func094E(PETRA, (("@We cannot possibly accept less than " + var0004) + " guilders.@"));
 						0xFFE2->show_npc_face0(0x0000);
 					} else {
 						say("\"",
@@ -96821,8 +96821,8 @@ var Func0860 0x860 (var var0000, var var0001) {
 				}
 				if (var0010 == 0x0003) {
 					say("\"Why, if I accepted such a price as this, I should have to break Petra into scrap metal and sell her to make ends meet!\"");
-					if (Func0942(0xFFE4)) {
-						0xFFE4->show_npc_face1(0x0000);
+					if (Func0942(PETRA)) {
+						PETRA->show_npc_face1(0x0000);
 						say("\"This person is a lout, my dear. Cast the fool out the door.\"");
 						UI_remove_npc_face1();
 						0xFFE2->show_npc_face0(0x0000);
@@ -106252,7 +106252,7 @@ void Func08FF 0x8FF () {
 	if (gflags[0x00D7]) {
 		abort;
 	}
-	var0000 = ((((((((((((((GUSTACIO->get_item_flag(MET) + MORTEGRO->get_item_flag(MET)) + FEDABIBLIO->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + COLUMNA->get_item_flag(MET)) + MELINO->get_item_flag(MET)) + DUCIO->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + JULIA->get_item_flag(MET)) + 0xFFE2->get_item_flag(MET)) + 0xFFE4->get_item_flag(MET)) + BUCIA->get_item_flag(MET)) + MOSH->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + FRELI->get_item_flag(MET)) + gflags[0x00D6];
+	var0000 = ((((((((((((((GUSTACIO->get_item_flag(MET) + MORTEGRO->get_item_flag(MET)) + FEDABIBLIO->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + COLUMNA->get_item_flag(MET)) + MELINO->get_item_flag(MET)) + DUCIO->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + JULIA->get_item_flag(MET)) + 0xFFE2->get_item_flag(MET)) + PETRA->get_item_flag(MET)) + BUCIA->get_item_flag(MET)) + MOSH->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + FRELI->get_item_flag(MET)) + gflags[0x00D6];
 	if ((var0000 >= 0x0003) && (!gflags[0x00D7])) {
 		var0001 = AUTO_MESSENGER->approach_avatar(0x005A, 0x0028);
 		if (var0001) {
@@ -107462,7 +107462,7 @@ void Func0926 0x926 (var var0000) {
 		abort;
 	}
 	if ((var0000 == 0x003D) && (gflags[0x0227] && (!AVATAR->get_item_flag(POLYMORPH)))) {
-		var0006 = 0xFFE4->get_object_position();
+		var0006 = PETRA->get_object_position();
 		if ((var0006[0x0001] == 0x06E3) && ((var0006[0x0002] == 0x0273) && (var0006[0x0003] == 0x0001))) {
 			var0007 = UI_create_new_object(0x025F);
 			if (var0007) {
@@ -111797,7 +111797,7 @@ var Func098C 0x98C () {
 var Func098D 0x98D () {
 	var var0000;
 
-	var0000 = [DUPRE, SHAMINO, IOLO, 0xFF6B, 0xFFE4, MORTEGRO, 0xFFD3, 0xFFDE, 0xFFD4, 0xFF68, 0xFF58];
+	var0000 = [DUPRE, SHAMINO, IOLO, 0xFF6B, PETRA, MORTEGRO, 0xFFD3, 0xFFDE, 0xFFD4, 0xFF68, 0xFF58];
 	return var0000;
 }
 
@@ -113044,10 +113044,10 @@ void Func09B4 0x9B4 (var var0000) {
 			var0000->set_new_schedules(MIDNIGHT, DESK_WORK, [0x0977, 0x048C]);
 			abort;
 		}
-		if (var0000 == 0xFFE4) {
+		if (var0000 == PETRA) {
 			var0000->set_schedule_type(WAIT);
 			say("\"If I cannot remain here, I shall go home to the inn. Thou canst always find me there.\"");
-			0xFFE4->revert_schedule();
+			PETRA->revert_schedule();
 			abort;
 		}
 		var0000->set_schedule_type(WAIT);
