@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, 0xFFEA, 0xFFE8, 0xFFE9, 0xFFE2, 0xFFE0, 0xFFE3, 0xFFE5, 0xFFEE, 0xFFEC, 0xFFD6, 0xFFD5, 0xFFEB, 0xFFF0, 0xFFF2, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, 0xFFEA, 0xFFE8, 0xFFE9, 0xFFE2, 0xFFE0, 0xFFE3, 0xFFE5, 0xFFEE, 0xFFEC, 0xFFD6, 0xFFD5, 0xFFEB, 0xFFF0, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, 0xFFD2, 0xFFD1, 0xFFD0, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, 0xFFDE, 0xFF64, 0xFFBB, 0xFFB3, 0xFFEE, 0xFFDF, 0xFFE6, 0xFFEC, 0xFFEF, ANDRIO, 0xFFED, 0xFFF2, 0xFFE8, 0xFFEA, 0xFFE5, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, 0xFFD2, 0xFFD1, 0xFFD0, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, 0xFFDE, 0xFF64, 0xFFBB, 0xFFB3, 0xFFEE, 0xFFDF, 0xFFE6, 0xFFEC, 0xFFEF, ANDRIO, 0xFFED, COLUMNA, 0xFFE8, 0xFFEA, 0xFFE5, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -23751,9 +23751,9 @@ void Func040E object#(0x40E) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("Hello, there.");
-		0xFFF2->Func07D1();
-		Func097F(0xFFF2, (("@Greetings, " + var0000) + "."), 0x0002);
-		0xFFF2->set_schedule_type(TALK);
+		COLUMNA->Func07D1();
+		Func097F(COLUMNA, (("@Greetings, " + var0000) + "."), 0x0002);
+		COLUMNA->set_schedule_type(TALK);
 	}
 	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		var0004 = script item {
@@ -23765,9 +23765,9 @@ void Func040E object#(0x40E) () {
 		set_schedule_type(LAB);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFF2->run_schedule();
-		0xFFF2->clear_item_say();
-		0xFFF2->halt_scheduled();
+		COLUMNA->run_schedule();
+		COLUMNA->clear_item_say();
+		COLUMNA->halt_scheduled();
 		AVATAR->halt_scheduled();
 		var0005 = 0xFF58->get_item_flag(DEAD);
 		if (gflags[0x00E2]) {
@@ -23780,18 +23780,18 @@ void Func040E object#(0x40E) () {
 			add("stockings");
 		}
 		if (gflags[0x00FD]) {
-			0xFFF2->show_npc_face0(0x0001);
+			COLUMNA->show_npc_face0(0x0001);
 		} else {
-			0xFFF2->show_npc_face0(0x0000);
+			COLUMNA->show_npc_face0(0x0000);
 		}
 		if (!gflags[0x00DB]) {
 			say("\"I am sorry, but thou hast mistaken me for someone else. Thou couldst not possibly be speaking to me, as I am a Mage... and thou art merely Mundane.\"");
-			Func097F(0xFFF2, "@Honestly!@", 0x0000);
+			Func097F(COLUMNA, "@Honestly!@", 0x0000);
 			abort;
 		}
-		var0007 = 0xFFF2->get_item_flag(MET);
+		var0007 = COLUMNA->get_item_flag(MET);
 		if (var0007 == false) {
-			0xFFF2->set_item_flag(MET);
+			COLUMNA->set_item_flag(MET);
 			say("\"I do not believe that we've met. It is so nice to make the acquaintance of a new, young Mage.\"");
 			say("\"I am Columna, the Green Enchantress.\"");
 		} else {
@@ -23894,8 +23894,8 @@ void Func040E object#(0x40E) () {
 					if (var0009) {
 						var000A = UI_remove_party_items(0x0001, 0x02A5, QUALITY_ANY, 0x0000, true);
 						say("\"Ha! There was thy spell, foolish woman! Now the stockings are destroyed and they shall trouble me no more!\"");
-						Func097F(0xFFF2, "@Fool!@", 0x0000);
-						0xFFF2->set_schedule_type(WANDER);
+						Func097F(COLUMNA, "@Fool!@", 0x0000);
+						COLUMNA->set_schedule_type(WANDER);
 						abort;
 					}
 					say("\"Please, I beg of thee to reconsider.\"");
@@ -23929,7 +23929,7 @@ void Func040E object#(0x40E) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@I must be going...@", 0x0000);
-				Func097F(0xFFF2, "@Farewell!@", 0x0002);
+				Func097F(COLUMNA, "@Farewell!@", 0x0002);
 				Func08FF();
 				break;
 		}
@@ -78780,7 +78780,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(0xFFD5, 0x0902, 0x0746, WAIT);
 		Func09AC(0xFFEB, 0x08B6, 0x0736, WAIT);
 		Func09AC(0xFFF0, 0x08C2, 0x0705, WAIT);
-		Func09AC(0xFFF2, 0x0953, 0x07B5, WAIT);
+		Func09AC(COLUMNA, 0x0953, 0x07B5, WAIT);
 		0xFFDF->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, EVENING], [SLEEP, EAT, MAJOR_SIT, WANDER, EAT], [0x08F8, 0x071C, 0x090A, 0x0718, 0x08F7, 0x0737, 0x0915, 0x0722, 0x090A, 0x0718]);
 		0xFFF1->set_new_schedules([MIDNIGHT, DAWN, MORNING], [SLEEP, EAT, TEND_SHOP], [0x0914, 0x06E7, 0x0919, 0x06E7, 0x093C, 0x0782]);
 		0xFFED->set_new_schedules([MIDNIGHT, DAWN, AFTERNOON, EVENING], [SLEEP, WANDER, WANDER, WANDER], [0x0937, 0x07C5, 0x08E3, 0x0743, 0x0983, 0x07A6, 0x09A3, 0x0823]);
@@ -86487,12 +86487,12 @@ var Func0817 0x817 (var var0000, var var0001) {
 
 	var0002 = var0000;
 	var0003 = (var0001 / 0x0003) * 0x0002;
-	var0004 = 0x000F - (0xFFF2->get_npc_id() / 0x0002);
+	var0004 = 0x000F - (COLUMNA->get_npc_id() / 0x0002);
 	var0005 = 0x0000;
 	var0006 = 0x0001;
 	var0007 = 0x0000;
 	var0008 = 0x0002;
-	var0009 = 0xFFF2->get_npc_id();
+	var0009 = COLUMNA->get_npc_id();
 	while (var0006) {
 		var000A = Func0956(["yes", "no", "haggle"]);
 		if (var000A == "no") {
@@ -86557,7 +86557,7 @@ var Func0817 0x817 (var var0000, var var0001) {
 				"?\"");
 			if (Func0955() == true) {
 				if (var0009 > 0x0001) {
-					0xFFF2->set_npc_id(var0009 - 0x0002);
+					COLUMNA->set_npc_id(var0009 - 0x0002);
 				}
 				return var0002;
 			}
@@ -86571,9 +86571,9 @@ var Func0817 0x817 (var var0000, var var0001) {
 				say("\"Thou art most rude to renege on an offer!\"");
 			}
 			if (0x001F < (var0009 + 0x000A)) {
-				0xFFF2->set_npc_id(0x001F);
+				COLUMNA->set_npc_id(0x001F);
 			} else {
-				0xFFF2->set_npc_id(var0009 + 0x000A);
+				COLUMNA->set_npc_id(var0009 + 0x000A);
 			}
 			return 0x0000;
 		}
@@ -86583,7 +86583,7 @@ var Func0817 0x817 (var var0000, var var0001) {
 					var0002,
 					" is my final offer. Dost thou want it at this price?\"");
 				if (var0009 < 0x001C) {
-					0xFFF2->set_npc_id(var0009 + 0x0004);
+					COLUMNA->set_npc_id(var0009 + 0x0004);
 				}
 				if (Func0955() == true) {
 					return var0002;
@@ -86594,7 +86594,7 @@ var Func0817 0x817 (var var0000, var var0001) {
 					var0002,
 					" is my final offer.  I will go no lower.\"");
 				if (var0009 < 0x001E) {
-					0xFFF2->set_npc_id(var0009 + 0x0002);
+					COLUMNA->set_npc_id(var0009 + 0x0002);
 				}
 			}
 		} else {
@@ -86667,7 +86667,7 @@ var Func0817 0x817 (var var0000, var var0001) {
 						".\"");
 				}
 				if (var0009 < 0x001F) {
-					0xFFF2->set_npc_id(var0009 + 0x0001);
+					COLUMNA->set_npc_id(var0009 + 0x0001);
 				}
 			}
 		}
@@ -106252,7 +106252,7 @@ void Func08FF 0x8FF () {
 	if (gflags[0x00D7]) {
 		abort;
 	}
-	var0000 = ((((((((((((((0xFFEA->get_item_flag(MET) + 0xFFE6->get_item_flag(MET)) + 0xFFEF->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + 0xFFF2->get_item_flag(MET)) + 0xFFE8->get_item_flag(MET)) + 0xFFF1->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + 0xFFE9->get_item_flag(MET)) + 0xFFE2->get_item_flag(MET)) + 0xFFE4->get_item_flag(MET)) + BUCIA->get_item_flag(MET)) + 0xFFE5->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + 0xFFED->get_item_flag(MET)) + gflags[0x00D6];
+	var0000 = ((((((((((((((0xFFEA->get_item_flag(MET) + 0xFFE6->get_item_flag(MET)) + 0xFFEF->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + COLUMNA->get_item_flag(MET)) + 0xFFE8->get_item_flag(MET)) + 0xFFF1->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + 0xFFE9->get_item_flag(MET)) + 0xFFE2->get_item_flag(MET)) + 0xFFE4->get_item_flag(MET)) + BUCIA->get_item_flag(MET)) + 0xFFE5->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + 0xFFED->get_item_flag(MET)) + gflags[0x00D6];
 	if ((var0000 >= 0x0003) && (!gflags[0x00D7])) {
 		var0001 = 0xFFE7->approach_avatar(0x005A, 0x0028);
 		if (var0001) {

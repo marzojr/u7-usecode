@@ -13171,10 +13171,10 @@ void Func040E object#(0x40E) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFFF2->show_npc_face(0x0000);
+	JOHNSON->show_npc_face(0x0000);
 	var0000 = UI_part_of_day();
 	if (var0000 == NIGHT) {
-		var0001 = Func08FC(0xFFF2, 0xFFF0);
+		var0001 = Func08FC(JOHNSON, 0xFFF0);
 		if (var0001) {
 			say("\"I will speak with thee after the Fellowship meeting.\"*");
 		} else {
@@ -52054,9 +52054,9 @@ void Func0631 object#(0x631) () {
 			return;
 		}
 		if (gflags[0x003D]) {
-			if (Func08F7(0xFFF2) && (!gflags[0x0057])) {
-				if (Func0937(0xFFF2) && Func0937(AVATAR)) {
-					var0006 = script 0xFFF2->get_npc_object() after 1 ticks {
+			if (Func08F7(JOHNSON) && (!gflags[0x0057])) {
+				if (Func0937(JOHNSON) && Func0937(AVATAR)) {
+					var0006 = script JOHNSON->get_npc_object() after 1 ticks {
 						nohalt;
 						say "@What's the password?@";
 					};
@@ -52064,7 +52064,7 @@ void Func0631 object#(0x631) () {
 						nohalt;
 						say "@Blackbird@";
 					};
-					var0006 = script 0xFFF2->get_npc_object() after 11 ticks {
+					var0006 = script JOHNSON->get_npc_object() after 11 ticks {
 						nohalt;
 						say "@Pass.@";
 					};
@@ -52120,9 +52120,9 @@ void Func0631 object#(0x631) () {
 			}
 			Func083F(item, true);
 		} else {
-			if (Func0937(0xFFF2)) {
-				if (Func08F7(0xFFF2) && (!gflags[0x0057])) {
-					var0006 = script 0xFFF2->get_npc_object() after 1 ticks {
+			if (Func0937(JOHNSON)) {
+				if (Func08F7(JOHNSON) && (!gflags[0x0057])) {
+					var0006 = script JOHNSON->get_npc_object() after 1 ticks {
 						nohalt;
 						say "@What's the password?@";
 					};
@@ -52130,7 +52130,7 @@ void Func0631 object#(0x631) () {
 			}
 			if (Func08F7(0xFFE5) && (!gflags[0x0057])) {
 				if (Func0937(0xFFE5)) {
-					var0006 = script 0xFFF2->get_npc_object() after 1 ticks {
+					var0006 = script JOHNSON->get_npc_object() after 1 ticks {
 						nohalt;
 						say "@What's the password?@";
 					};
@@ -71219,7 +71219,7 @@ void Func08AB 0x8AB () {
 	var var0004;
 	var var0005;
 
-	var0000 = Func08F7(0xFFF2);
+	var0000 = Func08F7(JOHNSON);
 	var0001 = Func08F7(0xFF14);
 	var0002 = Func08F7(0xFFEE);
 	var0003 = Func08F7(0xFFEA);
@@ -71238,8 +71238,8 @@ void Func08AB 0x8AB () {
 		0xFF14->hide();
 	}
 	if (var0000) {
-		0xFFF2->say("\"The Fellowship has made me more alert and thorough in the execution of my job as a Trinsic guard.\"*");
-		0xFFF2->hide();
+		JOHNSON->say("\"The Fellowship has made me more alert and thorough in the execution of my job as a Trinsic guard.\"*");
+		JOHNSON->hide();
 	}
 	if (var0002) {
 		0xFFEE->say("\"The Fellowship has made me a happier, more agreeable person.\"*");
