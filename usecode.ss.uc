@@ -5828,16 +5828,16 @@ void Func017D shape#(0x17D) () {
 			0xFEF3->show_npc_face0(0x0000);
 			if (gflags[0x014F] == true) {
 				if (gflags[0x0168] == false) {
-					var0008 = 0xFFC5->get_schedule_type();
+					var0008 = RUGGS->get_schedule_type();
 					if (var0008 != TALK) {
 						say("\"There hath been trouble of late here in Fawn...\"");
 						say("\"...And here comes part of it now.\"");
 						var0009 = get_object_position();
 						var0009[0x0002] += 0x0014;
-						0xFFC5->move_object([var0009[0x0001], var0009[0x0002], 0x0000]);
+						RUGGS->move_object([var0009[0x0001], var0009[0x0002], 0x0000]);
 						AVATAR->set_item_flag(DONT_MOVE);
-						0xFFC5->set_schedule_type(TALK);
-						0xFFC5->set_new_schedules([MIDNIGHT], [TALK], [var0009[0x0001], var0009[0x0002]]);
+						RUGGS->set_schedule_type(TALK);
+						RUGGS->set_new_schedules([MIDNIGHT], [TALK], [var0009[0x0001], var0009[0x0002]]);
 						abort;
 					}
 				} else {
@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, 0xFFC5, 0xFFC4, 0xFFC3, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, 0xFFC4, 0xFFC3, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -40236,7 +40236,7 @@ void Func043B object#(0x43B) () {
 	var0003 = Func0942(IOLO);
 	var0004 = Func0942(DUPRE);
 	var0005 = Func0942(SHAMINO);
-	var0006 = 0xFFC5->find_nearby(0x017D, 0x0014, MASK_NONE);
+	var0006 = RUGGS->find_nearby(0x017D, 0x0014, MASK_NONE);
 	var0007 = [0x040A, 0x07E9, 0x0000];
 	if (event == DEATH) {
 		var0008 = script item {
@@ -40245,27 +40245,27 @@ void Func043B object#(0x43B) () {
 		};
 	}
 	if ((event == PROXIMITY) || (event == SI_PATH_FAILURE)) {
-		0xFFC5->run_schedule();
-		Func097F(0xFFC5, "@I must work...@", 0x0002);
+		RUGGS->run_schedule();
+		Func097F(RUGGS, "@I must work...@", 0x0002);
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Excuse me, friend.@");
-		0xFFC5->Func07D1();
-		Func097F(0xFFC5, "@How may I be of service?@", 0x0002);
-		0xFFC5->set_schedule_type(TALK);
+		RUGGS->Func07D1();
+		Func097F(RUGGS, "@How may I be of service?@", 0x0002);
+		RUGGS->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFC5->clear_item_say();
-		0xFFC5->run_schedule();
-		0xFFC5->show_npc_face0(0x0000);
-		var0009 = 0xFFC5->get_item_flag(MET);
+		RUGGS->clear_item_say();
+		RUGGS->run_schedule();
+		RUGGS->show_npc_face0(0x0000);
+		var0009 = RUGGS->get_item_flag(MET);
 		var000A = DELPHYNIA->get_item_flag(MET);
 		if ((gflags[0x0168] == false) && var0006) {
-			0xFFC5->set_item_flag(MET);
+			RUGGS->set_item_flag(MET);
 			gflags[0x0168] = true;
 			AVATAR->clear_item_flag(DONT_MOVE);
-			0xFFC5->set_new_schedules([DAWN, AFTERNOON, EVENING, NIGHT], [EAT_AT_INN, FARM, EAT_AT_INN, SLEEP], [0x0479, 0x076B, 0x04BC, 0x0741, 0x0479, 0x076B, 0x049D, 0x0752]);
-			0xFFC5->run_schedule();
+			RUGGS->set_new_schedules([DAWN, AFTERNOON, EVENING, NIGHT], [EAT_AT_INN, FARM, EAT_AT_INN, SLEEP], [0x0479, 0x076B, 0x04BC, 0x0741, 0x0479, 0x076B, 0x049D, 0x0752]);
+			RUGGS->run_schedule();
 			say("\"Oh, please, ",
 				var0000,
 				", a favor!\"");
@@ -40291,7 +40291,7 @@ void Func043B object#(0x43B) () {
 						var000E->set_schedule_type(TALK);
 					}
 				}
-				0xFFC5->si_path_run_usecode(var0007, PROXIMITY, item, Func043B, false);
+				RUGGS->si_path_run_usecode(var0007, PROXIMITY, item, Func043B, false);
 				abort;
 			}
 			say("\"I have searched all my life for a woman who would overlook my deformity and learn to love me. Somehow I will find a way to tell Delphynia of my love...\"");
@@ -40313,7 +40313,7 @@ void Func043B object#(0x43B) () {
 							var000E->set_schedule_type(TALK);
 						}
 					}
-					0xFFC5->si_path_run_usecode(var0007, PROXIMITY, item, Func043B, false);
+					RUGGS->si_path_run_usecode(var0007, PROXIMITY, item, Func043B, false);
 					abort;
 				}
 				say("\"I am sure that thou hast thy reasons, Avatar. But I am sorely disappointed.\"");
@@ -40328,7 +40328,7 @@ void Func043B object#(0x43B) () {
 						var000E->set_schedule_type(TALK);
 					}
 				}
-				0xFFC5->si_path_run_usecode(var0007, PROXIMITY, item, Func043B, false);
+				RUGGS->si_path_run_usecode(var0007, PROXIMITY, item, Func043B, false);
 				abort;
 			}
 			if (var0004 == true) {
@@ -40351,7 +40351,7 @@ void Func043B object#(0x43B) () {
 				}
 			}
 			gflags[0x0167] = true;
-			0xFFC5->si_path_run_usecode(var0007, PROXIMITY, item, Func043B, false);
+			RUGGS->si_path_run_usecode(var0007, PROXIMITY, item, Func043B, false);
 			var000B = AVATAR->find_nearby(0x017D, 0x0014, MASK_NONE);
 			for (var000E in var000B with var0013 to var0014) {
 				if (var000E->get_npc_id() == 0x0001) {
@@ -40360,7 +40360,7 @@ void Func043B object#(0x43B) () {
 			}
 			abort;
 			// Dead code
-			0xFFC5->set_item_flag(MET);
+			RUGGS->set_item_flag(MET);
 			gflags[0x0168] = true;
 			AVATAR->clear_item_flag(DONT_MOVE);
 		} else {
@@ -40371,7 +40371,7 @@ void Func043B object#(0x43B) () {
 				} else {
 					say("\"I am Ruggs, a poor sailor exiled from Britannia and from Fawn. How may I serve thee today?\"");
 				}
-				0xFFC5->set_item_flag(MET);
+				RUGGS->set_item_flag(MET);
 			} else if (gflags[0x0004]) {
 				say("\"All is lost, Avatar! All is lost!\"");
 			} else {
@@ -40642,9 +40642,9 @@ void Func043B object#(0x43B) () {
 				Func097F(AVATAR, "@Goodbye, Ruggs.@", 0x0000);
 				if (gflags[0x0004]) {
 					var0008 = "" & ("@Woe is me...@" & "@My love is slain!@");
-					Func094F(0xFFC5, var0008);
+					Func094F(RUGGS, var0008);
 				} else {
-					Func097F(0xFFC5, "@Fair weather to thee.@", 0x0005);
+					Func097F(RUGGS, "@Fair weather to thee.@", 0x0005);
 				}
 				break;
 		}
@@ -68471,10 +68471,10 @@ void Func06C0 object#(0x6C0) () {
 				say "@Very uplifting...@";
 			};
 		}
-		if (!0xFFC5->is_dead()) {
-			0xFFC5->move_object([0x0496, 0x076B, 0x0000]);
-			0xFFC5->set_schedule_type(LOITER);
-			var0001 = script 0xFFC5 {
+		if (!RUGGS->is_dead()) {
+			RUGGS->move_object([0x0496, 0x076B, 0x0000]);
+			RUGGS->set_schedule_type(LOITER);
+			var0001 = script RUGGS {
 				nohalt;
 				wait 32;
 				say "@The Fellowship is the way...@";
@@ -78807,8 +78807,8 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(OLON, 0x0467, 0x06C9, WAIT);
 		Func09AC(0xFFC4, 0x0407, 0x0780, WAIT);
 		Func09AC(0xFFC3, 0x03F7, 0x0796, WAIT);
-		0xFFC5->set_new_schedules([DAWN, MORNING, NOON, AFTERNOON, EVENING, NIGHT], [LOITER, WANDER, WANDER, LOITER, EAT_AT_INN, SLEEP], [0x0406, 0x0777, 0x0409, 0x074E, 0x0406, 0x0718, 0x0466, 0x06ED, 0x03AF, 0x06E0, 0x03D6, 0x06C6]);
-		0xFFC5->run_schedule();
+		RUGGS->set_new_schedules([DAWN, MORNING, NOON, AFTERNOON, EVENING, NIGHT], [LOITER, WANDER, WANDER, LOITER, EAT_AT_INN, SLEEP], [0x0406, 0x0777, 0x0409, 0x074E, 0x0406, 0x0718, 0x0466, 0x06ED, 0x03AF, 0x06E0, 0x03D6, 0x06C6]);
+		RUGGS->run_schedule();
 		var0001 = LEON->add_cont_items(0x0001, 0x031D, 0x000A, 0x0000, 0x0000);
 		var0001 = 0xFFC3->add_cont_items(0x0001, 0x031D, 0x0007, 0x0000, 0x0000);
 		YELINDA->set_polymorph(0x0294);
@@ -80953,7 +80953,7 @@ void Func07F8 object#(0x7F8) () {
 				nohalt;
 				call Func07F8;
 			};
-			var0001 = [YELINDA, KYLISTA, VOLDIN, 0xFFC3, JOTH, GARTH, KALEN, LEON, JENDON, DELPHYNIA, DELIN, JORVIN, 0xFFC4, 0xFFC5, ALYSSAND, OLON];
+			var0001 = [YELINDA, KYLISTA, VOLDIN, 0xFFC3, JOTH, GARTH, KALEN, LEON, JENDON, DELPHYNIA, DELIN, JORVIN, 0xFFC4, RUGGS, ALYSSAND, OLON];
 			for (var0004 in var0001 with var0002 to var0003) {
 				var0004->remove_npc();
 				var0004->run_schedule();
@@ -81898,25 +81898,25 @@ void Func07FB object#(0x7FB) () {
 		UI_init_conversation();
 		VOLDIN->show_npc_face0(0x0000);
 		say("\"Take no hope that thou wilt remain any longer than necessary for thee to speak before the Oracle.\"");
-		0xFFC5->show_npc_face1(0x0000);
+		RUGGS->show_npc_face1(0x0000);
 		say("\"I have hope for only one thing, Captain. And that dwells deep within mine heart, as Delphynia knows...\"");
 		UI_remove_npc_face1();
 		0x0000->set_conversation_slot();
 		say("\"Do not digress! Now, I am told that thou hast been seen speaking with the accused traitor...\"");
-		0xFFC5->show_npc_face1(0x0000);
+		RUGGS->show_npc_face1(0x0000);
 		say("\"Yes, Captain. I asked a favor of him, to deliver a document for me.\"");
 		UI_remove_npc_face1();
 		0x0000->set_conversation_slot();
 		say("\"No doubt a document containing instructions from Leon, to his secret ally, ",
 			var0003,
 			"! No further questions...\"");
-		0xFFC5->show_npc_face1(0x0000);
+		RUGGS->show_npc_face1(0x0000);
 		say("\"No! 'Twas a letter to my beloved Delphynia...\"");
 		UI_remove_npc_face1();
 		0x0000->set_conversation_slot();
 		say("\"Return to thy camp.\"");
 		UI_end_conversation();
-		Func097F(0xFFC5, "@I love thee, Delphynia!@", 0x0000);
+		Func097F(RUGGS, "@I love thee, Delphynia!@", 0x0000);
 		Func097F(DELPHYNIA, "@I cannot...@", 0x0002);
 		Func097F(0xFFC3, "@Ruggs, be silent!@", 0x0003);
 		si_path_run_usecode([0x0407, 0x0679, 0x0000], SI_PATH_SUCCESS, item, Func07FB, false);
@@ -103553,7 +103553,7 @@ void Func08C2 0x8C2 () {
 		}
 		if (var0006 == 0x000C) {
 			if (gflags[0x0170] == true) {
-				var0007 = 0xFFC5;
+				var0007 = RUGGS;
 				var0008 = 0x0002;
 			}
 		}
@@ -109864,8 +109864,8 @@ void Func093B 0x93B (var var0000) {
 			var0007 = KYLISTA;
 		}
 		if (!gflags[0x017F]) {
-			if (gflags[0x0170] && (0xFFC5->get_item_flag(MET) && (!0xFFC5->get_item_flag(DEAD)))) {
-				var0007 = 0xFFC5;
+			if (gflags[0x0170] && (RUGGS->get_item_flag(MET) && (!RUGGS->get_item_flag(DEAD)))) {
+				var0007 = RUGGS;
 			}
 			if (gflags[0x0172]) {
 				var0007 &= GARTH;
@@ -109938,7 +109938,7 @@ void Func093B 0x93B (var var0000) {
 			if (var0007 == KYLISTA) {
 				Func097F(KYLISTA, "@Really, Voldin!@", 0x000E);
 			}
-			if (var0007 == 0xFFC5) {
+			if (var0007 == RUGGS) {
 				Func097F(YELINDA, "@He is so ugly...@", 0x000A);
 				Func097F(ALYSSAND, "@Oh, my...@", 0x000E);
 				UI_play_music(0x000A, Func09A0(0x0005, 0x0001));
@@ -110071,7 +110071,7 @@ void Func093B 0x93B (var var0000) {
 		if ((item == LEON->get_npc_object()) || (item == JOTH->get_npc_object())) {
 			var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x002C);
 		}
-		if ((item == 0xFFC5->get_npc_object()) || (item == GARTH->get_npc_object())) {
+		if ((item == RUGGS->get_npc_object()) || (item == GARTH->get_npc_object())) {
 			var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x002F);
 		}
 		if (item == 0xFFC4->get_npc_object()) {
@@ -113063,7 +113063,7 @@ void Func09B4 0x9B4 (var var0000) {
 			if (gflags[0x02C3]) {
 				var0002 &= "Monitor";
 			}
-			if (0xFFC5->get_item_flag(MET)) {
+			if (RUGGS->get_item_flag(MET)) {
 				var0002 &= "Fawn";
 			}
 		}

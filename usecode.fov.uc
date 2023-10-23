@@ -19794,14 +19794,14 @@ void Func043B object#(0x43B) () {
 	var var0012;
 
 	if (event == DOUBLECLICK) {
-		0xFFC5->show_npc_face(0x0000);
+		SEAN->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFFC5->get_npc_object()->get_schedule_type();
+		var0002 = SEAN->get_npc_object()->get_schedule_type();
 		var0003 = UI_wearing_fellowship();
 		var0001 = UI_part_of_day();
 		if (var0001 == NIGHT) {
-			var0004 = Func08FC(0xFFC5, BATLIN);
+			var0004 = Func08FC(SEAN, BATLIN);
 			if (var0004) {
 				say("Sean is deep in concentration, listening to the Fellowship meeting.*");
 				abort;
@@ -19954,7 +19954,7 @@ void Func043B object#(0x43B) () {
 	}
 	if (event == PROXIMITY) {
 		var0001 = UI_part_of_day();
-		var0002 = 0xFFC5->get_npc_object()->get_schedule_type();
+		var0002 = SEAN->get_npc_object()->get_schedule_type();
 		var0011 = UI_die_roll(0x0001, 0x0004);
 		if (var0002 == TEND_SHOP) {
 			if (var0011 == 0x0001) {
@@ -19969,9 +19969,9 @@ void Func043B object#(0x43B) () {
 			if (var0011 == 0x0004) {
 				var0012 = "@Fine crafted jewelry!@";
 			}
-			0xFFC5->item_say(var0012);
+			SEAN->item_say(var0012);
 		} else {
-			Func092E(0xFFC5);
+			Func092E(SEAN);
 		}
 	}
 }
@@ -65442,10 +65442,10 @@ void Func084F 0x84F () {
 		BATLIN->say("\"Yes! Thank thee for sharing, brother!\"*");
 		GORDON->hide();
 	}
-	var000A = Func08F7(0xFFC5);
+	var000A = Func08F7(SEAN);
 	if (var000A) {
-		0xFFC5->say("\"The Fellowship has taught me not to be afraid of success,\" says Sean.*");
-		0xFFC5->hide();
+		SEAN->say("\"The Fellowship has taught me not to be afraid of success,\" says Sean.*");
+		SEAN->hide();
 	}
 	var000B = Func08F7(0xFFC1);
 	if (var000B) {
@@ -65589,10 +65589,10 @@ void Func0850 0x850 () {
 		BATLIN->say("\"Right thou art, brother!\"*");
 		GORDON->hide();
 	}
-	var0008 = Func08F7(0xFFC5);
+	var0008 = Func08F7(SEAN);
 	if (var0008) {
-		0xFFC5->say("\"The Fellowship has freed me from the illusory appeals of mediocrity,\" says Sean.*");
-		0xFFC5->hide();
+		SEAN->say("\"The Fellowship has freed me from the illusory appeals of mediocrity,\" says Sean.*");
+		SEAN->hide();
 	}
 	var0009 = Func08F7(0xFFC1);
 	if (var0009) {
