@@ -14019,9 +14019,9 @@ void Func0415 object#(0x415) () {
 	var var0008;
 
 	if (event == DOUBLECLICK) {
-		0xFFEB->show_npc_face(0x0000);
+		GARGAN->show_npc_face(0x0000);
 		var0000 = Func0909();
-		var0001 = 0xFFEB->get_npc_object()->get_schedule_type();
+		var0001 = GARGAN->get_npc_object()->get_schedule_type();
 		add(["name", "job", "murder", "bye"]);
 		if (gflags[0x0040]) {
 			add("Crown Jewel");
@@ -14150,7 +14150,7 @@ void Func0415 object#(0x415) () {
 				if (var0008) {
 					SPARK->say("\"Ooooh, yuck!\"");
 					SPARK->hide();
-					0xFFEB->show_npc_face(0x0000);
+					GARGAN->show_npc_face(0x0000);
 				}
 				remove("murder");
 				var0002 += 0x0001;
@@ -14175,7 +14175,7 @@ void Func0415 object#(0x415) () {
 				if (var0008) {
 					SPARK->say("\"I told thee! It was him!\"");
 					SPARK->hide();
-					0xFFEB->show_npc_face(0x0000);
+					GARGAN->show_npc_face(0x0000);
 				}
 				remove("Hook");
 				var0002 += 0x0001;
@@ -14199,7 +14199,7 @@ void Func0415 object#(0x415) () {
 		say("\"May thy day have smooth sailing,\" the sailor starts to say, but a coughing spasm interrupts him.*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFEB);
+		Func092E(GARGAN);
 	}
 }
 
@@ -69194,10 +69194,10 @@ void Func088D 0x88D () {
 	var0000 = Func08F7(IOLO);
 	if (var0000) {
 		IOLO->say("\"Feeling all right, man?\"*");
-		0xFFEB->say("Gargan coughs, wheezes, and then lights his pipe. On inhaling, he has a coughing spasm until he finally catches his breath.");
+		GARGAN->say("Gargan coughs, wheezes, and then lights his pipe. On inhaling, he has a coughing spasm until he finally catches his breath.");
 		say("\"Never felt better.\"*");
 		IOLO->hide();
-		0xFFEB->show_npc_face(0x0000);
+		GARGAN->show_npc_face(0x0000);
 		var0001 = 0x0000;
 	}
 }

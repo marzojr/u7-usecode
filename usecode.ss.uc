@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, 0xFFEA, 0xFFE8, 0xFFE9, 0xFFE2, 0xFFE0, 0xFFE3, 0xFFE5, FILBERCIO, FRIGIDAZZI, 0xFFD6, 0xFFD5, 0xFFEB, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, 0xFFEA, 0xFFE8, 0xFFE9, 0xFFE2, 0xFFE0, 0xFFE3, 0xFFE5, FILBERCIO, FRIGIDAZZI, 0xFFD6, 0xFFD5, GOBLIN_MESSENGER, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -2330,10 +2330,10 @@ void Func00E6 shape#(0xE6) () {
 		}
 		FRIGIDAZZI->show_npc_face0(0x0000);
 		Func09AC(FRIGIDAZZI, -1, 0, STANDTHERE);
-		0xFFEB->set_new_schedules(MIDNIGHT, STANDTHERE, [0x0986, 0x0766]);
-		0xFFEB->run_schedule();
-		0xFFEB->clear_item_flag(ASLEEP);
-		Func097F(0xFFEB, "@Tar gorlfog!@", 0x0003);
+		GOBLIN_MESSENGER->set_new_schedules(MIDNIGHT, STANDTHERE, [0x0986, 0x0766]);
+		GOBLIN_MESSENGER->run_schedule();
+		GOBLIN_MESSENGER->clear_item_flag(ASLEEP);
+		Func097F(GOBLIN_MESSENGER, "@Tar gorlfog!@", 0x0003);
 		if ((var000C < 0x000F) && ((!IOLO->npc_nearby()) && ((!DUPRE->npc_nearby()) && ((!SHAMINO->npc_nearby()) && (!0xFFDE->npc_nearby()))))) {
 			say("\"I am so glad that thou hast agreed to meet me here.\"");
 			UI_play_music(0x001F, Func09A0(0x0005, 0x0001));
@@ -25044,9 +25044,9 @@ void Func0411 object#(0x411) () {
 							var000E = [0x0988, 0x0742];
 							var000F = [0x0969, 0x0768];
 							var0010 = [0x0961, 0x0764];
-							0xFFEB->set_new_schedules([MIDNIGHT, MORNING, NOON], [SLEEP, WAITER, WANDER], [var000E, var000F, var0010]);
-							0xFFEB->move_object([0x096F, 0x075E, 0x0000]);
-							0xFFEB->run_schedule();
+							GOBLIN_MESSENGER->set_new_schedules([MIDNIGHT, MORNING, NOON], [SLEEP, WAITER, WANDER], [var000E, var000F, var0010]);
+							GOBLIN_MESSENGER->move_object([0x096F, 0x075E, 0x0000]);
+							GOBLIN_MESSENGER->run_schedule();
 						} else {
 							FEDABIBLIO->set_schedule_type(SHY);
 							FEDABIBLIO->clear_item_say();
@@ -78778,7 +78778,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(FRIGIDAZZI, 0x0977, 0x0743, WAIT);
 		Func09AC(0xFFD6, 0x0994, 0x0754, WAIT);
 		Func09AC(0xFFD5, 0x0902, 0x0746, WAIT);
-		Func09AC(0xFFEB, 0x08B6, 0x0736, WAIT);
+		Func09AC(GOBLIN_MESSENGER, 0x08B6, 0x0736, WAIT);
 		Func09AC(EDRIN, 0x08C2, 0x0705, WAIT);
 		Func09AC(COLUMNA, 0x0953, 0x07B5, WAIT);
 		0xFFDF->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, EVENING], [SLEEP, EAT, MAJOR_SIT, WANDER, EAT], [0x08F8, 0x071C, 0x090A, 0x0718, 0x08F7, 0x0737, 0x0915, 0x0722, 0x090A, 0x0718]);
