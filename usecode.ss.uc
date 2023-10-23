@@ -23963,7 +23963,7 @@ void Func040F object#(0x40F) () {
 	var0002 = Func0953();
 	var0003 = UI_part_of_day();
 	var0004 = false;
-	var0005 = 0xFFF1->find_nearby(0x02E3, 0x001E, MASK_NONE);
+	var0005 = DUCIO->find_nearby(0x02E3, 0x001E, MASK_NONE);
 	if ((var0003 > EARLY) || (var0003 < EVENING)) {
 		var0003 = "day";
 	} else {
@@ -23974,18 +23974,18 @@ void Func040F object#(0x40F) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Hello!@");
-		0xFFF1->Func07D1();
-		Func097F(0xFFF1, (("@Good " + var0003) + ".@"), 0x0002);
-		0xFFF1->set_schedule_type(TALK);
+		DUCIO->Func07D1();
+		Func097F(DUCIO, (("@Good " + var0003) + ".@"), 0x0002);
+		DUCIO->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFF1->run_schedule();
-		0xFFF1->clear_item_say();
-		0xFFF1->show_npc_face0(0x0000);
-		var0006 = 0xFFF1->get_item_flag(MET);
+		DUCIO->run_schedule();
+		DUCIO->clear_item_say();
+		DUCIO->show_npc_face0(0x0000);
+		var0006 = DUCIO->get_item_flag(MET);
 		if (var0006 == false) {
 			say("\"I am Ducio, the Master Artisan.\"");
-			0xFFF1->set_item_flag(MET);
+			DUCIO->set_item_flag(MET);
 			add("Master Artisan");
 		} else if (gflags[0x0004]) {
 			say("\"Thou art alive! Thou hast survived the holocaust! So many are dead...\"");
@@ -24019,7 +24019,7 @@ void Func040F object#(0x40F) () {
 			case "kidnap" (remove):
 				say("\"Do not involve me in such matters, stranger! Canst thou not see that I am a Mundane?\"");
 				say("\"This matter smacks of wizardry, and I want no part of it!\"");
-				Func097F(0xFFF1, "@No part!@", 0x0000);
+				Func097F(DUCIO, "@No part!@", 0x0000);
 				abort;
 
 			case "holocaust" (remove):
@@ -24108,8 +24108,8 @@ labelFunc040F_032A:
 						add("Vasculio");
 					} else {
 						say("\"Thou hast no such object! Do not waste my time, for I am a busy man...\"");
-						Func097F(0xFFF1, "@Must work...@", 0x0000);
-						0xFFF1->set_schedule_type(SHY);
+						Func097F(DUCIO, "@Must work...@", 0x0000);
+						DUCIO->set_schedule_type(SHY);
 						abort;
 					}
 				} else {
@@ -24252,7 +24252,7 @@ labelFunc040F_046D:
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Farewell!@", 0x0000);
-				Func097F(0xFFF1, "@Come again!@", 0x0002);
+				Func097F(DUCIO, "@Come again!@", 0x0002);
 				Func08FF();
 				break;
 		}
@@ -29479,18 +29479,18 @@ void Func0420 object#(0x420) () {
 		if (var0005 == false) {
 			say("\"Allow me to introduce myself. I'm Topo the Artisan, apprenticed to Master Ducio.\"");
 			0xFFE0->set_item_flag(MET);
-			if (Func0942(0xFFF1)) {
+			if (Func0942(DUCIO)) {
 				say("\"I'm a lucky man, to serve such a talented craftsman.\"");
-				Func094E(0xFFF1, "@He's a good boy.@");
+				Func094E(DUCIO, "@He's a good boy.@");
 				0x0000->set_conversation_slot();
 			} else {
 				say("\"Someday I hope to be as rich and lazy as my master!\"");
 				say("\"He spends all his time asleep or at the inn, except when he comes here to make me crazy with his nagging.\"");
 			}
 			add(["Artisan", "Ducio"]);
-		} else if (Func0942(0xFFF1)) {
+		} else if (Func0942(DUCIO)) {
 			say("\"Again, welcome! Might I be able to help thee today?\"");
-			Func094E(0xFFF1, "@Do not be so wordy.@");
+			Func094E(DUCIO, "@Do not be so wordy.@");
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
 			say("\"Yes, master...\"");
@@ -29530,8 +29530,8 @@ void Func0420 object#(0x420) () {
 
 			case "Artisan" (remove):
 				say("\"I have worked with Master Ducio for several years now. Soon I'll be able to open a shop of mine own... Topo's Treasures, I'll call it.\"");
-				if (Func0942(0xFFF1)) {
-					0xFFF1->show_npc_face1(0x0000);
+				if (Func0942(DUCIO)) {
+					DUCIO->show_npc_face1(0x0000);
 					say("\"Thou art an apprentice, boy! Thou dost not work with me. Thou dost work for me! Understand?\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -29543,7 +29543,7 @@ void Func0420 object#(0x420) () {
 
 			case "automatons" (remove):
 				say("\"My Master is one of the wealthiest Mundanes in Moonshade. There is no comparison to the Mages, of course. We have three automatons -- one for sewing, one for blacksmith work, and one for baking.\"");
-				if (!Func0942(0xFFF1)) {
+				if (!Func0942(DUCIO)) {
 					say("\"That is what my Master actually specializes in... making everyone else do his work!\"");
 				}
 				add(["Mages", "Mundanes"]);
@@ -29553,7 +29553,7 @@ void Func0420 object#(0x420) () {
 				say("\"That is where the true money lies in Moonshade, ",
 					var0000,
 					". But if thou dost not possess magic, thou must work for a living...\"");
-				if (!Func0942(0xFFF1)) {
+				if (!Func0942(DUCIO)) {
 					say("\"Unless thou art my Master, that is!\"");
 				}
 				say("\"The only thing a lowly Mundane can hope for is to be able to afford an automaton from Torrissio, to help with the work load.\"");
@@ -29562,8 +29562,8 @@ void Func0420 object#(0x420) () {
 
 			case "Torrissio" (remove):
 				say("\"Torrissio is the Adept that makes the automatons. No one knows how he does it...\"");
-				if (Func0942(0xFFF1)) {
-					0xFFF1->show_npc_face1(0x0000);
+				if (Func0942(DUCIO)) {
+					DUCIO->show_npc_face1(0x0000);
 					say("\"Art thou a Mage, Topo?\"");
 					0x0000->set_conversation_slot();
 					say("\"No, master... I am a Mundane apprentice.\"");
@@ -29586,8 +29586,8 @@ void Func0420 object#(0x420) () {
 
 			case "Andrio" (remove):
 				say("\"Andrio is my friend... which is surprising since he is also a novice Mage. Perhaps the outrageous arrogance hath not developed in him yet.\"");
-				if (Func0942(0xFFF1)) {
-					0xFFF1->show_npc_face1(0x0000);
+				if (Func0942(DUCIO)) {
+					DUCIO->show_npc_face1(0x0000);
 					say("\"Enough talk! Back to work!\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -29598,8 +29598,8 @@ void Func0420 object#(0x420) () {
 			case "Stefano" (remove):
 				say("\"Thou wouldst like Stefano, I'm certain! Although he can cast a spell or two, he is not very good at it. So he makes his living by stealing things from one Mage for another.\"");
 				say("\"'Tis actually very amusing. He shuns his magic and those who would look down on him must deal with him to acquire things they want... Perhaps there is some justice in the world, after all.\"");
-				if (Func0942(0xFFF1)) {
-					0xFFF1->show_npc_face1(0x0000);
+				if (Func0942(DUCIO)) {
+					DUCIO->show_npc_face1(0x0000);
 					say("\"How many times have I told thee to stay away from that thief, boy?! Dost thou think stealing is funny?\"");
 					0x0000->set_conversation_slot();
 					say("\"Nooo, master...\"");
@@ -29618,8 +29618,8 @@ void Func0420 object#(0x420) () {
 					var0000,
 					". They assume that there is little to note of a person's life if it is not spent in pursuit of magic and pomposity.\"");
 				say("\"Yet they will never know the thrill of having a fine pot shape itself under their hand from a formless piece of mud...\"");
-				if (Func0942(0xFFF1)) {
-					0xFFF1->show_npc_face1(0x0000);
+				if (Func0942(DUCIO)) {
+					DUCIO->show_npc_face1(0x0000);
 					say("\"Mud?! Mud! Back to work! Thou must lack for things to do...\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -29629,7 +29629,7 @@ void Func0420 object#(0x420) () {
 
 			case "slip" (remove):
 				say("\"Slip is the wet clay that is formed into cups, or plates, or jugs... Almost anything! If thou hast a patient enough hand, thou canst create a world of goods from mere clay.\"");
-				if (!Func0942(0xFFF1)) {
+				if (!Func0942(DUCIO)) {
 					say("\"And heavens know that I'm patient enough... dealing with my slug of a Master!\"");
 				}
 				fallthrough;
@@ -29637,8 +29637,8 @@ void Func0420 object#(0x420) () {
 			case "firing" (remove):
 				say("\"Firing is where a piece of shaped clay is turned into the ceramic utensils thou art familiar with. By heating the clay to a great temperature, the water dries from the piece and it becomes tough and resilient.\"");
 				say("\"But if the piece is heated or cooled too quickly, it becomes brittle and fragile. 'Tis a very exacting task.\"");
-				if (Func0942(0xFFF1)) {
-					0xFFF1->show_npc_face1(0x0000);
+				if (Func0942(DUCIO)) {
+					DUCIO->show_npc_face1(0x0000);
 					say("\"Who made thee a teacher, apprentice?! Back to work!\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -29647,9 +29647,9 @@ void Func0420 object#(0x420) () {
 				fallthrough;
 
 			case "Ducio" (remove):
-				if (Func0942(0xFFF1)) {
+				if (Func0942(DUCIO)) {
 					say("\"Ducio is my Master. He produces the finest goods in all the city! His pottery is famed throughout the other islands as well...\"");
-					0xFFF1->show_npc_face1(0x0000);
+					DUCIO->show_npc_face1(0x0000);
 					say("\"Enough bragging. Humility. Thou must learn humility.@\"");
 					0x0000->set_conversation_slot();
 				} else {
@@ -29700,8 +29700,8 @@ void Func0420 object#(0x420) () {
 			case "urn" (remove):
 				say("\"As thou hast probably deduced, I am an expert\tcraftsman -- particularly with pots and urns.\"");
 				say("\"Show me thine urn, and I shall unlock its secrets for thee.\"");
-				if (Func0942(0xFFF1)) {
-					Func094E(0xFFF1, "@Don't be so boastful. Thou art making a\r\n\t\t\t\t\t\tfool of thyself!@");
+				if (Func0942(DUCIO)) {
+					Func094E(DUCIO, "@Don't be so boastful. Thou art making a\r\n\t\t\t\t\t\tfool of thyself!@");
 					0x0000->set_conversation_slot();
 					say("\"Yes, master.\"");
 				}
@@ -29710,7 +29710,7 @@ void Func0420 object#(0x420) () {
 					say("\"Now look within. Dost thou see the ashes which fill this urn?\"");
 					say("\"Thou dost carry the funeral remains of one of\tthe good citizens of Monitor, the warrior city.\"");
 					gflags[0x028E] = true;
-					Func094E(0xFFF1, "@They'll want it back. Monitorians revere\r\n\t\t\t\t\t\ttheir dead.@");
+					Func094E(DUCIO, "@They'll want it back. Monitorians revere\r\n\t\t\t\t\t\ttheir dead.@");
 					0x0000->set_conversation_slot();
 					add("Monitor");
 				} else {
@@ -29726,8 +29726,8 @@ void Func0420 object#(0x420) () {
 					", so I don't know much about it. I'm told that all the citizens of Monitor are mighty warriors. Though that sounds a bit odd, to me.\"");
 				say("\"Couldst thou imagine what would happen if thou wert to disagree with a shopkeeper over the prices of his wares? Why, thou couldst find thyself very dead! Or badly hurt at the least...\"");
 				say("\"Thou couldst see if Hawk is at the Blue Boar. He's a sailor and might know more than a man who's never left this island.\"");
-				if (Func0942(0xFFF1)) {
-					0xFFF1->show_npc_face1(0x0000);
+				if (Func0942(DUCIO)) {
+					DUCIO->show_npc_face1(0x0000);
 					say("\"Since when art thou a guide? Back to work!\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -29747,8 +29747,8 @@ void Func0420 object#(0x420) () {
 
 			case "Bucia" (remove):
 				say("\"Bucia runs the Capessi Canton for Flindo. She is the provisioner here in Moonshade. She will be able to tell thee who buys what, I'm sure. Bucia adores gossip...\"");
-				if (Func0942(0xFFF1)) {
-					0xFFF1->show_npc_face1(0x0000);
+				if (Func0942(DUCIO)) {
+					DUCIO->show_npc_face1(0x0000);
 					say("\"Thou art a fine one to talk! Work! Or I shall rip out thy tongue!\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -29758,8 +29758,8 @@ void Func0420 object#(0x420) () {
 
 			case "strange brush" (remove):
 				say("\"As an expert craftsman, I can tell thee what most materials are, if I can examine the item.\"");
-				if (Func0942(0xFFF1)) {
-					Func094E(0xFFF1, "@Thou art a braggart. Thou art trying my\r\n\t\t\t\t\t\tpatience!@");
+				if (Func0942(DUCIO)) {
+					Func094E(DUCIO, "@Thou art a braggart. Thou art trying my\r\n\t\t\t\t\t\tpatience!@");
 					0x0000->set_conversation_slot();
 					say("\"Yes, master.\"");
 				}
@@ -73623,8 +73623,8 @@ void Func0720 object#(0x720) () {
 				call Func0798;
 			};
 		}
-		var0001 = UI_die_roll(0xFFF1, 0x000F);
-		var0002 = UI_die_roll(0x0008, 0x000F);
+		var0001 = UI_die_roll(-15, 15);
+		var0002 = UI_die_roll(8, 15);
 		var0000 = get_object_position();
 		var0006 = var0011->set_last_created();
 		if (var0006) {
@@ -78782,11 +78782,11 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(0xFFF0, 0x08C2, 0x0705, WAIT);
 		Func09AC(COLUMNA, 0x0953, 0x07B5, WAIT);
 		0xFFDF->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, EVENING], [SLEEP, EAT, MAJOR_SIT, WANDER, EAT], [0x08F8, 0x071C, 0x090A, 0x0718, 0x08F7, 0x0737, 0x0915, 0x0722, 0x090A, 0x0718]);
-		0xFFF1->set_new_schedules([MIDNIGHT, DAWN, MORNING], [SLEEP, EAT, TEND_SHOP], [0x0914, 0x06E7, 0x0919, 0x06E7, 0x093C, 0x0782]);
+		DUCIO->set_new_schedules([MIDNIGHT, DAWN, MORNING], [SLEEP, EAT, TEND_SHOP], [0x0914, 0x06E7, 0x0919, 0x06E7, 0x093C, 0x0782]);
 		0xFFED->set_new_schedules([MIDNIGHT, DAWN, AFTERNOON, EVENING], [SLEEP, WANDER, WANDER, WANDER], [0x0937, 0x07C5, 0x08E3, 0x0743, 0x0983, 0x07A6, 0x09A3, 0x0823]);
 		ANDRIO->set_new_schedules([MIDNIGHT, DAWN, AFTERNOON, EVENING], [SLEEP, WANDER, WANDER, WANDER], [0x0937, 0x07C5, 0x08E3, 0x0743, 0x0983, 0x07A6, 0x09A3, 0x0823]);
 		0xFFDF->run_schedule();
-		0xFFF1->run_schedule();
+		DUCIO->run_schedule();
 		0xFFED->run_schedule();
 		ANDRIO->run_schedule();
 		if (0xFF58->get_item_flag(DEAD)) {
@@ -79805,8 +79805,8 @@ void Func07E5 object#(0x7E5) () {
 		var0001 = [0x0000, 0x0003, 0x000C, 0x0028, 0x002B];
 		var0002 = UI_die_roll(0x0001, UI_get_array_size(var0001));
 		var0003 = var0001[var0002];
-		var0004 = 0x0004 * UI_die_roll(0xFFF1, 0x000F);
-		var0005 = 0x0004 * UI_die_roll(0xFFF1, 0x000F);
+		var0004 = 0x0004 * UI_die_roll(-15, 15);
+		var0005 = 0x0004 * UI_die_roll(-15, 15);
 		AVATAR->obj_sprite_effect(var0003, var0004, var0005, 0x0000, 0x0001, 0x0000, LOOP_ONCE);
 	}
 	if (var0000 == 0x0002) {
@@ -89107,17 +89107,17 @@ void Func0826 0x826 (var var0000) {
 	var var0005;
 	var var0006;
 
-	var0001 = 0xFFF1->find_nearby(0x02E3, 0x0032, MASK_NONE);
+	var0001 = DUCIO->find_nearby(0x02E3, 0x0032, MASK_NONE);
 	var0002 = var0001->get_object_position();
 	if (var0000 == 0x0009) {
 		if (var0001) {
-			0xFFF1->si_path_run_usecode(var0002, PATH_SUCCESS, 0xFFF1->get_npc_object(), Func040F, true);
+			DUCIO->si_path_run_usecode(var0002, PATH_SUCCESS, DUCIO->get_npc_object(), Func040F, true);
 			UI_set_path_failure([Func040F], item, SI_PATH_FAILURE);
 		}
 	}
 	if (var0000 == 0x000A) {
-		var0003 = Func090C(0xFFF1, var0002);
-		var0004 = script 0xFFF1 {
+		var0003 = Func090C(DUCIO, var0002);
+		var0004 = script DUCIO {
 			nohalt;
 			face var0003;
 			continue;
@@ -89130,14 +89130,14 @@ void Func0826 0x826 (var var0000) {
 				wait 1;
 			};
 		};
-		0xFFF1->obj_sprite_effect(ANIMATION_PURPLE_BUBBLES, -4, -4, 0, 0, 0, LOOP_ONCE);
+		DUCIO->obj_sprite_effect(ANIMATION_PURPLE_BUBBLES, -4, -4, 0, 0, 0, LOOP_ONCE);
 		var0005 = AVATAR->get_object_position();
-		0xFFF1->show_npc_face0(0x0000);
+		DUCIO->show_npc_face0(0x0000);
 		say("\"Take thy gem!\"");
 		var0004 = UI_remove_party_items(0x0003, 0x034A, QUALITY_ANY, 0x000A, 0x0000);
 		var0006 = Func099B(AVATAR, 0x0001, 0x01BD, QUALITY_ANY, 0x0000, 0x0000, true);
 		UI_remove_npc_face0();
-		0xFFF1->run_schedule();
+		DUCIO->run_schedule();
 	}
 }
 
@@ -89348,15 +89348,15 @@ void Func0827 0x827 () {
 		} else if (var000E == 0x0003) {
 			var0013 = Func0992(0x0001, (("@But " + var0000) + ", we do not have the guilders to purchase this.@"), 0x0000, false);
 			if (var0013 != AVATAR) {
-				0xFFF1->show_npc_face0(0x0000);
+				DUCIO->show_npc_face0(0x0000);
 				say("\"Please leave if thou canst not pay.\"");
 			} else {
 				say("\"Thou dost not have enough guilders to purchase this...\"");
 			}
-			if (0x001F < (0xFFF1->get_npc_id() + 0x0006)) {
-				0xFFF1->set_npc_id(0x001F);
+			if (0x001F < (DUCIO->get_npc_id() + 0x0006)) {
+				DUCIO->set_npc_id(0x001F);
 			} else {
-				0xFFF1->set_npc_id(0xFFF1->get_npc_id() + 0x0006);
+				DUCIO->set_npc_id(DUCIO->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Dost thou care for something else?\"");
@@ -89397,12 +89397,12 @@ var Func0828 0x828 (var var0000, var var0001) {
 	}
 	var0005 = var0000;
 	var0006 = (var0001 / 0x0003) * 0x0002;
-	var0007 = 0x000F - (0xFFF1->get_npc_id() / 0x0002);
+	var0007 = 0x000F - (DUCIO->get_npc_id() / 0x0002);
 	var0008 = 0x0000;
 	var0009 = 0x0001;
 	var000A = 0x0000;
 	var000B = 0x0002;
-	var000C = 0xFFF1->get_npc_id();
+	var000C = DUCIO->get_npc_id();
 	while (var0009) {
 		var000D = Func0956(["yes", "no", "haggle"]);
 		if (var000D == "no") {
@@ -89489,7 +89489,7 @@ var Func0828 0x828 (var var0000, var var0001) {
 				"?\"");
 			if (Func0955()) {
 				if (var000C > 0x0001) {
-					0xFFF1->set_npc_id(var000C - 0x0002);
+					DUCIO->set_npc_id(var000C - 0x0002);
 				}
 				return var0005;
 			}
@@ -89504,9 +89504,9 @@ var Func0828 0x828 (var var0000, var var0001) {
 				abort;
 			}
 			if (0x001F < (var000C + 0x000A)) {
-				0xFFF1->set_npc_id(0x001F);
+				DUCIO->set_npc_id(0x001F);
 			} else {
-				0xFFF1->set_npc_id(var000C + 0x000A);
+				DUCIO->set_npc_id(var000C + 0x000A);
 			}
 			return 0x0000;
 		}
@@ -89516,7 +89516,7 @@ var Func0828 0x828 (var var0000, var var0001) {
 					var0005,
 					" was my final offer. Dost thou accept?\"");
 				if (var000C < 0x001C) {
-					0xFFF1->set_npc_id(var000C + 0x0004);
+					DUCIO->set_npc_id(var000C + 0x0004);
 				}
 				if (Func0955()) {
 					return var0005;
@@ -89527,7 +89527,7 @@ var Func0828 0x828 (var var0000, var var0001) {
 					var0005,
 					" guilders is my final offer.\"");
 				if (var000C < 0x001E) {
-					0xFFF1->set_npc_id(var000C + 0x0002);
+					DUCIO->set_npc_id(var000C + 0x0002);
 				}
 			}
 		} else {
@@ -89608,7 +89608,7 @@ var Func0828 0x828 (var var0000, var var0001) {
 						" guilders is as low as I will go!\"");
 				}
 				if (var000C < 0x001F) {
-					0xFFF1->set_npc_id(var000C + 0x0001);
+					DUCIO->set_npc_id(var000C + 0x0001);
 				}
 			}
 		}
@@ -98885,9 +98885,9 @@ void Func086F 0x86F () {
 		var000C = "Milord";
 	}
 	if (var0001 == false) {
-		if (Func0942(0xFFF1)) {
+		if (Func0942(DUCIO)) {
 			say("\"Oh, we sell all manner of things. Cloaks, swords...\"");
-			Func094E(0xFFF1, "@Shovels, too...@");
+			Func094E(DUCIO, "@Shovels, too...@");
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
 			say("\"Yes, Master, shovels too. Pitchers and other containers. Cloth and a few weapons. We also sell baked goods.\"");
@@ -106252,7 +106252,7 @@ void Func08FF 0x8FF () {
 	if (gflags[0x00D7]) {
 		abort;
 	}
-	var0000 = ((((((((((((((0xFFEA->get_item_flag(MET) + 0xFFE6->get_item_flag(MET)) + 0xFFEF->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + COLUMNA->get_item_flag(MET)) + 0xFFE8->get_item_flag(MET)) + 0xFFF1->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + 0xFFE9->get_item_flag(MET)) + 0xFFE2->get_item_flag(MET)) + 0xFFE4->get_item_flag(MET)) + BUCIA->get_item_flag(MET)) + 0xFFE5->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + 0xFFED->get_item_flag(MET)) + gflags[0x00D6];
+	var0000 = ((((((((((((((0xFFEA->get_item_flag(MET) + 0xFFE6->get_item_flag(MET)) + 0xFFEF->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + COLUMNA->get_item_flag(MET)) + 0xFFE8->get_item_flag(MET)) + DUCIO->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + 0xFFE9->get_item_flag(MET)) + 0xFFE2->get_item_flag(MET)) + 0xFFE4->get_item_flag(MET)) + BUCIA->get_item_flag(MET)) + 0xFFE5->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + 0xFFED->get_item_flag(MET)) + gflags[0x00D6];
 	if ((var0000 >= 0x0003) && (!gflags[0x00D7])) {
 		var0001 = 0xFFE7->approach_avatar(0x005A, 0x0028);
 		if (var0001) {

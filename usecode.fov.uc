@@ -13290,7 +13290,7 @@ void Func040F object#(0x40F) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFFF1->show_npc_face(0x0000);
+	EIKO->show_npc_face(0x0000);
 	var0000 = Func0909();
 	var0001 = Func08F7(0xFFD0);
 	if (!gflags[0x02C4]) {
@@ -13333,7 +13333,7 @@ void Func040F object#(0x40F) () {
 					say("\"His killer deserves to die.\"");
 				}
 				0xFFD0->hide();
-				0xFFF1->show_npc_face(0x0000);
+				EIKO->show_npc_face(0x0000);
 			}
 			remove("father");
 			fallthrough;
@@ -13343,7 +13343,7 @@ void Func040F object#(0x40F) () {
 			if (var0001) {
 				0xFFD0->say("\"I had always felt like I had a sister somewhere. But I attributed those feelings to the natural loneliness a child feels upon losing a father. Learning about each other has been the only good thing that has happened to me since father's death.\"");
 				0xFFD0->hide();
-				0xFFF1->show_npc_face(0x0000);
+				EIKO->show_npc_face(0x0000);
 			}
 			remove("Amanda");
 			fallthrough;
@@ -13361,7 +13361,7 @@ void Func040F object#(0x40F) () {
 				if (!gflags[0x02DE]) {
 					say("\"How canst thou say that? I thought that thou wert my sister? Thou art a traitor!\"");
 					0xFFD0->hide();
-					0xFFF1->show_npc_face(0x0000);
+					EIKO->show_npc_face(0x0000);
 					gflags[0x02DD] = true;
 				}
 			}
@@ -18184,7 +18184,7 @@ void Func0430 object#(0x430) () {
 	}
 	0xFFD0->show_npc_face(0x0000);
 	var0000 = Func0909();
-	var0001 = Func08F7(0xFFF1);
+	var0001 = Func08F7(EIKO);
 	if (!gflags[0x02C5]) {
 		say("You see an attractive woman dressed in armour and carrying a small arsenal of weapons with her.");
 		gflags[0x02C5] = true;
@@ -18223,8 +18223,8 @@ void Func0430 object#(0x430) () {
 				var0002,
 				" required to achieve our vengeance.\"");
 			if (var0001) {
-				0xFFF1->say("\"The two of us had not even met before our father's death. But we bonded like sisters in the rigorous disciplines we learned from our trainer, Karenna of Minoc.\"*");
-				0xFFF1->hide();
+				EIKO->say("\"The two of us had not even met before our father's death. But we bonded like sisters in the rigorous disciplines we learned from our trainer, Karenna of Minoc.\"*");
+				EIKO->hide();
 				0xFFD0->show_npc_face(0x0000);
 			}
 			remove("half-sister");
@@ -18251,8 +18251,8 @@ void Func0430 object#(0x430) () {
 		case "cyclops":
 			say("\"We have been tracking this creature for years, ever since we completed our training. We have followed him from one end of Britannia to another. Sometimes he was just one step ahead of us. But now we know that we are nearer to him than we have ever been before.\"");
 			if (var0001) {
-				0xFFF1->say("\"When we find him there shall be no escape. We want vengeance and we mean to have it!\"*");
-				0xFFF1->hide();
+				EIKO->say("\"When we find him there shall be no escape. We want vengeance and we mean to have it!\"*");
+				EIKO->hide();
 				0xFFD0->show_npc_face(0x0000);
 			}
 			remove("cyclops");
@@ -18261,8 +18261,8 @@ void Func0430 object#(0x430) () {
 		case "impaled":
 			say("\"Our father fought bravely for his life. He did not die easily. He died a hero's death. Although we may both die in the effort, we intend to give his murderer a death fit for a true villain.\"");
 			if (var0001) {
-				0xFFF1->say("Eiko smiles wickedly.*");
-				0xFFF1->hide();
+				EIKO->say("Eiko smiles wickedly.*");
+				EIKO->hide();
 				0xFFD0->show_npc_face(0x0000);
 			}
 			remove("impaled");
@@ -18271,9 +18271,9 @@ void Func0430 object#(0x430) () {
 		case "Stay thine hand!":
 			say("You explain to Amanda what you have learned. Kalideth had gone mad when he fought with Iskander and the source of what is causing the problems with magic and the mage's minds - the thing that really killed Kalideth - has been destroyed.~~\"Thou hast robbed me of my rightful vengeance! How dare thee!\"");
 			if (var0001) {
-				0xFFF1->say("Eiko sighs, and her shoulders slump. \"Come now, sister. With the matter of our father's untimely death now settled we can at last let it go. Now we can devote our lives to ourselves rather than remain trapped in the past. It is for the best, thou must trust me.\"*");
+				EIKO->say("Eiko sighs, and her shoulders slump. \"Come now, sister. With the matter of our father's untimely death now settled we can at last let it go. Now we can devote our lives to ourselves rather than remain trapped in the past. It is for the best, thou must trust me.\"*");
 				0xFFD0->say("Amanda shakes her head, dazed and confused. \"Perhaps thou art correct, Eiko. I must think.\"*");
-				0xFFF1->hide();
+				EIKO->hide();
 				0xFFD0->show_npc_face(0x0000);
 				gflags[0x02DE] = true;
 			} else {
