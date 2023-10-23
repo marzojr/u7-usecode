@@ -13817,9 +13817,9 @@ void Func0413 object#(0x413) () {
 		var0000 = UI_part_of_day();
 		var0001 = Func0908();
 		var0002 = Func0909();
-		var0003 = 0xFFED->get_npc_object()->get_schedule_type();
+		var0003 = APOLLONIA->get_npc_object()->get_schedule_type();
 		var0004 = UI_is_pc_female();
-		0xFFED->show_npc_face(0x0000);
+		APOLLONIA->show_npc_face(0x0000);
 		add(["name", "job", "murder", "bye"]);
 		if (var0003 == WAITER) {
 			add(["food", "drink", "room", "buy"]);
@@ -13933,7 +13933,7 @@ void Func0413 object#(0x413) () {
 		}
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFED);
+		Func092E(APOLLONIA);
 	}
 }
 

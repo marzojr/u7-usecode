@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, 0xFFD2, 0xFFD1, 0xFFD0, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, 0xFFDE, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, 0xFFDF, 0xFFE6, 0xFFEC, FEDABIBLIO, ANDRIO, 0xFFED, COLUMNA, 0xFFE8, 0xFFEA, 0xFFE5, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, 0xFFD2, 0xFFD1, 0xFFD0, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, 0xFFDE, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, 0xFFDF, 0xFFE6, 0xFFEC, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, 0xFFE8, 0xFFEA, 0xFFE5, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -22635,8 +22635,8 @@ void Func0404 object#(0x404) () {
 
 			case "Freli" (remove):
 				say("\"He is my companion and fellow student. We have been friends for a very long time. And his mastery of magic is almost as great as mine own.\"");
-				if (Func0942(0xFFED)) {
-					0xFFED->show_npc_face1(0x0000);
+				if (Func0942(FRELI)) {
+					FRELI->show_npc_face1(0x0000);
 					say("\"Almost!\"");
 					0x0000->set_conversation_slot();
 					say("\"Well...\"");
@@ -22651,7 +22651,7 @@ void Func0404 object#(0x404) () {
 
 			case "Stop this bickering!" (remove):
 				UI_pop_answers();
-				0xFFED->show_npc_face1(0x0000);
+				FRELI->show_npc_face1(0x0000);
 				say("\"Quite right, ",
 					var0000,
 					". I am sorry.\"");
@@ -24956,8 +24956,8 @@ void Func0411 object#(0x411) () {
 					say("\"A blue egg... have I ever read of such a thing? Blue hens, blue frogs -- but eggs?\"");
 				}
 				say("\"I do not know what it is! And if I do not know, then no one shall.\"");
-				if (!(0xFFD8->get_item_flag(DEAD) && Func0942(0xFFED))) {
-					0xFFED->show_npc_face1(0x0000);
+				if (!(0xFFD8->get_item_flag(DEAD) && Func0942(FRELI))) {
+					FRELI->show_npc_face1(0x0000);
 					say("\"Cap'n Hawk might know! He hath been everywhere in the world!\"");
 					gflags[0x010A] = true;
 					0x0000->set_conversation_slot();
@@ -25408,24 +25408,24 @@ void Func0413 object#(0x413) () {
 			call Func0329;
 		};
 	}
-	if ((event == PROXIMITY) && (0xFFED->get_schedule_type() == HOUND)) {
+	if ((event == PROXIMITY) && (FRELI->get_schedule_type() == HOUND)) {
 		if (UI_get_random(0x000A) < 0x0006) {
 			abort;
 		}
 		var0003 = ["@Zounds!@", "@A true warrior!@", "@Tell me a story!@", "@Look! A stranger!@", "@May I be thy friend?@", "@Beware the mages...@"];
-		Func097F(0xFFED, var0003[UI_get_random(0x0006)], 0x0000);
+		Func097F(FRELI, var0003[UI_get_random(0x0006)], 0x0000);
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Little boy!@");
-		0xFFED->Func07D1();
-		Func097F(0xFFED, "@Hi!@", 0x0002);
-		0xFFED->set_schedule_type(TALK);
+		FRELI->Func07D1();
+		Func097F(FRELI, "@Hi!@", 0x0002);
+		FRELI->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFED->run_schedule();
-		0xFFED->clear_item_say();
-		0xFFED->show_npc_face0(0x0000);
-		var0004 = 0xFFED->get_item_flag(MET);
+		FRELI->run_schedule();
+		FRELI->clear_item_say();
+		FRELI->show_npc_face0(0x0000);
+		var0004 = FRELI->get_item_flag(MET);
 		if (gflags[0x0004]) {
 			if (gflags[0x00F1]) {
 				say("\"I am so glad to see thee, ",
@@ -25436,7 +25436,7 @@ void Func0413 object#(0x413) () {
 			}
 			add("trouble");
 		} else if (var0004 == false) {
-			0xFFED->set_item_flag(MET);
+			FRELI->set_item_flag(MET);
 			say("\"Art thou the great hero from a distant land?! Oh, my name is Freli. I am glad to meet thee!\"");
 			add(["hero", "distant land"]);
 		} else {
@@ -25577,7 +25577,7 @@ void Func0413 object#(0x413) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@So long!@", 0x0000);
-				Func097F(0xFFED, "@Please come again!@", 0x0002);
+				Func097F(FRELI, "@Please come again!@", 0x0002);
 				Func08FF();
 				break;
 		}
@@ -78783,11 +78783,11 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(COLUMNA, 0x0953, 0x07B5, WAIT);
 		0xFFDF->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, EVENING], [SLEEP, EAT, MAJOR_SIT, WANDER, EAT], [0x08F8, 0x071C, 0x090A, 0x0718, 0x08F7, 0x0737, 0x0915, 0x0722, 0x090A, 0x0718]);
 		DUCIO->set_new_schedules([MIDNIGHT, DAWN, MORNING], [SLEEP, EAT, TEND_SHOP], [0x0914, 0x06E7, 0x0919, 0x06E7, 0x093C, 0x0782]);
-		0xFFED->set_new_schedules([MIDNIGHT, DAWN, AFTERNOON, EVENING], [SLEEP, WANDER, WANDER, WANDER], [0x0937, 0x07C5, 0x08E3, 0x0743, 0x0983, 0x07A6, 0x09A3, 0x0823]);
+		FRELI->set_new_schedules([MIDNIGHT, DAWN, AFTERNOON, EVENING], [SLEEP, WANDER, WANDER, WANDER], [0x0937, 0x07C5, 0x08E3, 0x0743, 0x0983, 0x07A6, 0x09A3, 0x0823]);
 		ANDRIO->set_new_schedules([MIDNIGHT, DAWN, AFTERNOON, EVENING], [SLEEP, WANDER, WANDER, WANDER], [0x0937, 0x07C5, 0x08E3, 0x0743, 0x0983, 0x07A6, 0x09A3, 0x0823]);
 		0xFFDF->run_schedule();
 		DUCIO->run_schedule();
-		0xFFED->run_schedule();
+		FRELI->run_schedule();
 		ANDRIO->run_schedule();
 		if (0xFF58->get_item_flag(DEAD)) {
 			0xFF58->resurrect_npc();
@@ -106252,7 +106252,7 @@ void Func08FF 0x8FF () {
 	if (gflags[0x00D7]) {
 		abort;
 	}
-	var0000 = ((((((((((((((0xFFEA->get_item_flag(MET) + 0xFFE6->get_item_flag(MET)) + FEDABIBLIO->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + COLUMNA->get_item_flag(MET)) + 0xFFE8->get_item_flag(MET)) + DUCIO->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + 0xFFE9->get_item_flag(MET)) + 0xFFE2->get_item_flag(MET)) + 0xFFE4->get_item_flag(MET)) + BUCIA->get_item_flag(MET)) + 0xFFE5->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + 0xFFED->get_item_flag(MET)) + gflags[0x00D6];
+	var0000 = ((((((((((((((0xFFEA->get_item_flag(MET) + 0xFFE6->get_item_flag(MET)) + FEDABIBLIO->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + COLUMNA->get_item_flag(MET)) + 0xFFE8->get_item_flag(MET)) + DUCIO->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + 0xFFE9->get_item_flag(MET)) + 0xFFE2->get_item_flag(MET)) + 0xFFE4->get_item_flag(MET)) + BUCIA->get_item_flag(MET)) + 0xFFE5->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + FRELI->get_item_flag(MET)) + gflags[0x00D6];
 	if ((var0000 >= 0x0003) && (!gflags[0x00D7])) {
 		var0001 = 0xFFE7->approach_avatar(0x005A, 0x0028);
 		if (var0001) {
