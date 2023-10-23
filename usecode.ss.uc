@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, 0xFFD6, 0xFFD5, GOBLIN_MESSENGER, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, BYRIN, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, 0xFFD6, 0xFFD5, GOBLIN_MESSENGER, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -31394,7 +31394,7 @@ void Func0426 object#(0x426) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	var0003 = Func0942(0xFFD7);
+	var0003 = Func0942(DEVRA);
 	var0004 = false;
 	var0005 = false;
 	if (event == DOUBLECLICK) {
@@ -31464,7 +31464,7 @@ void Func0426 object#(0x426) () {
 						var0000,
 						". I did not realize that thou wert not from hereabouts.\"");
 					if (var0003 == true) {
-						0xFFD7->show_npc_face1(0x0000);
+						DEVRA->show_npc_face1(0x0000);
 						say("\"Ha! Thou wert fishin' for a way to tell thy tales!\" *\"I thought I broke thee of lying when thou wert a lad...\" *\"Mind thee... Captain... I can still warm thy backside if I've a mind to.\"");
 						UI_remove_npc_face1();
 						0x0000->set_conversation_slot();
@@ -31517,7 +31517,7 @@ void Func0426 object#(0x426) () {
 			case "treasure":
 				say("\"Family legend doth say that Silverpate used part of his treasure to build the inn. Everyone seems to think that he hid whatever was left somewhere around here before he disappeared.\" *\"But I'll tell thee, there ain't no treasure. And I should know...\"");
 				if (var0003 == true) {
-					0xFFD7->show_npc_face1(0x0000);
+					DEVRA->show_npc_face1(0x0000);
 					say("\"Aye, indeed! Thou and thy friends didst pry into everything and dug holes from here to Monitor when thou wert young! I never stopped thee... I thought thy father had done the same when he was young.\" *\"But I whaled thee good when I caught thee digging in me garden!\"");
 					0x0000->set_conversation_slot();
 					say("\"Aye... I stood up to dinner that night. I remember.\"");
@@ -31593,7 +31593,7 @@ void Func0426 object#(0x426) () {
 			case "Captain Hawk":
 				say("\"'Tis no use to think of hiring him. He was in a fracas here, broke things up a bit.\" *\"The Pikemen dragged Hawk away when he took a swing at their commander. He's being held at Bull Tower until he pays their fine.\"");
 				if (var0003 == true) {
-					0xFFD7->show_npc_face1(0x0000);
+					DEVRA->show_npc_face1(0x0000);
 					say("\"Fine! More like ransom, I'd call it! Thou knowest as well as I, Argus, that Hawk can't pay...\" *\"Not if he doesn't put out from here. And he swore he wouldn't until these storms stop.\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -31632,7 +31632,7 @@ void Func0426 object#(0x426) () {
 			case "guests":
 				say("\"Yes... There be Ensorcio. He's an exiled mage from Moonshade.\" *\"There be Selina, who hath not been here very long. She is very afraid of these storms...\"");
 				if (var0003 == true) {
-					0xFFD7->show_npc_face1(0x0000);
+					DEVRA->show_npc_face1(0x0000);
 					say("\"Bah! She's no more afraid of those storms than thou art! She follows thee about right well enough, storm or no!\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -31688,7 +31688,7 @@ void Func0426 object#(0x426) () {
 					if (!var0005) {
 						say("\"Mother doth do all the cooking here... and she is very good.\"");
 						if (var0003 == true) {
-							0xFFD7->show_npc_face1(0x0000);
+							DEVRA->show_npc_face1(0x0000);
 							say("\"What a nice son! He compliments me so!\"");
 							UI_remove_npc_face1();
 							0x0000->set_conversation_slot();
@@ -32537,46 +32537,46 @@ void Func0429 object#(0x429) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Pardon me...@");
-		0xFFD7->Func07D1();
-		Func097F(0xFFD7, (((("Good " + var0006) + ", ") + var0000) + "."), 0x0002);
-		0xFFD7->set_schedule_type(TALK);
+		DEVRA->Func07D1();
+		Func097F(DEVRA, (((("Good " + var0006) + ", ") + var0000) + "."), 0x0002);
+		DEVRA->set_schedule_type(TALK);
 	}
 	if (event == PROXIMITY) {
 		var0007 = UI_get_random(0x0006);
 		if (var0007 == 0x0001) {
-			0xFFD7->item_say("@Wouldst thou like another?@");
+			DEVRA->item_say("@Wouldst thou like another?@");
 		}
 		if (var0007 == 0x0002) {
-			0xFFD7->item_say("@Refill?@");
+			DEVRA->item_say("@Refill?@");
 		}
 		if (var0007 == 0x0003) {
-			0xFFD7->item_say("@Lodgings available!@");
+			DEVRA->item_say("@Lodgings available!@");
 		}
 		if (var0007 == 0x0004) {
-			0xFFD7->item_say("@Good, clean rooms!@");
+			DEVRA->item_say("@Good, clean rooms!@");
 		}
 		if (var0007 == 0x0005) {
 			if (Func0942(ARGUS)) {
-				0xFFD7->item_say("@We need more clean mugs, son!@");
+				DEVRA->item_say("@We need more clean mugs, son!@");
 				Func097F(ARGUS, "@Aye, mother!@", 0x0002);
 			} else {
-				0xFFD7->item_say("@Mine aching back!@");
+				DEVRA->item_say("@Mine aching back!@");
 			}
 		}
 		if (var0007 == 0x0006) {
-			0xFFD7->item_say("@Sigh...@");
+			DEVRA->item_say("@Sigh...@");
 		}
 	}
 	if (event == STARTED_TALKING) {
-		0xFFD7->run_schedule();
-		0xFFD7->clear_item_say();
-		0xFFD7->show_npc_face0(0x0000);
-		var0008 = 0xFFD7->get_item_flag(MET);
+		DEVRA->run_schedule();
+		DEVRA->clear_item_say();
+		DEVRA->show_npc_face0(0x0000);
+		var0008 = DEVRA->get_item_flag(MET);
 		if (var0008 == false) {
 			say("\"Welcome to the Sleeping Bull, ",
 				var0000,
 				"! Enter before we suffer another storm.\" *\"I am Devra... My son, Argus, and I are running the inn since Angus disappeared.\"");
-			0xFFD7->set_item_flag(MET);
+			DEVRA->set_item_flag(MET);
 			add(["storm", "Argus", "disappeared"]);
 		} else {
 			say("\"Welcome back, ",
@@ -32743,7 +32743,7 @@ void Func0429 object#(0x429) () {
 				fallthrough;
 
 			case "food":
-				if ((0xFFD7->get_schedule_type() == TEND_SHOP) || (0xFFD7->get_schedule_type() == WAITER)) {
+				if ((DEVRA->get_schedule_type() == TEND_SHOP) || (DEVRA->get_schedule_type() == WAITER)) {
 					say("\"Thou wilt not find our cooking fancy as in Moonshade. But 'tis hardy fare and thou wilt find the portions ample.\"");
 					if (!var0004) {
 						say("\"I've done all the cooking here since Donal hired me, before I married Angus. I've had my share of compliments, if I do say so myself.\"");
@@ -32782,7 +32782,7 @@ void Func0429 object#(0x429) () {
 				fallthrough;
 
 			case "drink":
-				if ((0xFFD7->get_schedule_type() == TEND_SHOP) || (0xFFD7->get_schedule_type() == WAITER)) {
+				if ((DEVRA->get_schedule_type() == TEND_SHOP) || (DEVRA->get_schedule_type() == WAITER)) {
 					say("\"Thou wilt like our selection, I'm certain.\"");
 					Func081F();
 				} else {
@@ -32804,7 +32804,7 @@ void Func0429 object#(0x429) () {
 					} else {
 						var0009 = Func0992(0x0001, "@But we do not have enough money...@", 0x0000, false);
 						if (var0009 != AVATAR) {
-							0xFFD7->show_npc_face0(0x0000);
+							DEVRA->show_npc_face0(0x0000);
 							say("\"I have no heart to turn any of thee out in these storms. With all of our help run away, I'm in sore need of help.\" *\"But I cannot allow thee to stay for free. Thou wilt have to take thy chances outside.\"");
 						} else {
 							say("\"I'm afraid that thou cannot afford my rooms.\" *\"With the help all run away, I'd allow thee to stay for free, but I'd soon be out of business.\"");
@@ -32823,7 +32823,7 @@ void Func0429 object#(0x429) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Be seeing thee!@", 0x0000);
-				Func097F(0xFFD7, "@Come again soon!@", 0x0002);
+				Func097F(DEVRA, "@Come again soon!@", 0x0002);
 				break;
 		}
 	}
@@ -78823,7 +78823,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(0xFFAF, 0x0521, 0x08B8, WAIT);
 		Func09AC(ARGUS, 0x04E8, 0x08B9, WAIT);
 		Func09AC(BYRIN, 0x0517, 0x0893, WAIT);
-		Func09AC(0xFFD7, 0x04F8, 0x08A6, WAIT);
+		Func09AC(DEVRA, 0x04F8, 0x08A6, WAIT);
 		0xFFD3->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, NIGHT], [SLEEP, EAT, TALK, LOITER, EAT], [0x0516, 0x08F7, 0x04F7, 0x08CC, 0x050D, 0x08B6, 0x0516, 0x08A2, 0x04F7, 0x08CC]);
 		0xFFD3->run_schedule();
 		Func09AC(0xFF71, 0x0436, 0x036B, WAIT);
@@ -83925,8 +83925,8 @@ var Func0807 0x807 (var var0000, var var0001) {
 			if (var0004 < (var0001 + ((var0000 - var0001) / 0x0004))) {
 				if (var0010 == 0x0001) {
 					say("\"Do not tell Devra... She will think her son hath gone soft in the head for giving thee a price like this.\"");
-					if (Func0942(0xFFD7)) {
-						0xFFD7->show_npc_face1(0x0000);
+					if (Func0942(DEVRA)) {
+						DEVRA->show_npc_face1(0x0000);
 						say("\"Thou woolly-headed wolf! Thine head is fine. 'Tis thine heart that is soft...\"");
 						UI_remove_npc_face1();
 						0x0000->set_conversation_slot();
@@ -84088,8 +84088,8 @@ var Func0807 0x807 (var var0000, var var0001) {
 				var0004 = var000F;
 				if (var0010 == 0x0001) {
 					say("\"Mother, come and hear this! The customer jests with me!\"");
-					if (Func0942(0xFFD7)) {
-						Func094E(0xFFD7, (((("@" + var0002) + " we cannot possibly accept less than ") + var0004) + " gold coins.@"));
+					if (Func0942(DEVRA)) {
+						Func094E(DEVRA, (((("@" + var0002) + " we cannot possibly accept less than ") + var0004) + " gold coins.@"));
 						ARGUS->show_npc_face0(0x0000);
 					} else {
 						say("\"",
@@ -88593,7 +88593,7 @@ void Func081E 0x81E () {
 			} else if (var000C == 0x0003) {
 				var000F = Func0992(0x0001, (("@But " + var0000) + ", we haven't the coins to pay for this.@"), 0x0000, false);
 				if (var000F != AVATAR) {
-					0xFFD7->show_npc_face0(0x0000);
+					DEVRA->show_npc_face0(0x0000);
 					say("\"I'd hate to see any of thee go hungry, ",
 						var0000,
 						".\" *\"I would feed thee for free, if I did not have a business to worry about.\"");
@@ -88610,10 +88610,10 @@ void Func081E 0x81E () {
 					".\"");
 				break;
 				// Dead code
-				if (0x001F < (0xFFD7->get_npc_id() + 0x0006)) {
-					0xFFD7->set_npc_id(0x001F);
+				if (0x001F < (DEVRA->get_npc_id() + 0x0006)) {
+					DEVRA->set_npc_id(0x001F);
 				} else {
-					0xFFD7->set_npc_id(0xFFD7->get_npc_id() + 0x0006);
+					DEVRA->set_npc_id(DEVRA->get_npc_id() + 0x0006);
 				}
 			}
 			say("\"Wouldst thou care for more?\"");
@@ -88723,7 +88723,7 @@ void Func081F 0x81F () {
 			} else if (var000D == 0x0003) {
 				var0010 = Func0992(0x0001, (("@But " + var0001) + ", we lack adequate funds!@"), 0x0000, false);
 				if (var0010 != AVATAR) {
-					0xFFD7->show_npc_face0(0x0000);
+					DEVRA->show_npc_face0(0x0000);
 					say("\"I like a cup or two myself, from time to time.\" *\"I would let thee drink for free, but I have little enough for the paying customers these days.\"");
 					say("\"I fear thou shalt have to do with water, ",
 						var0000,
@@ -88738,10 +88738,10 @@ void Func081F 0x81F () {
 					". That I have in plenty.\"");
 				break;
 				// Dead code
-				if (0x001F < (0xFFD7->get_npc_id() + 0x0006)) {
-					0xFFD7->set_npc_id(0x001F);
+				if (0x001F < (DEVRA->get_npc_id() + 0x0006)) {
+					DEVRA->set_npc_id(0x001F);
 				} else {
-					0xFFD7->set_npc_id(0xFFD7->get_npc_id() + 0x0006);
+					DEVRA->set_npc_id(DEVRA->get_npc_id() + 0x0006);
 				}
 			}
 			say("\"Wouldst thou care for more?\"");
@@ -88778,12 +88778,12 @@ var Func0820 0x820 (var var0000, var var0001) {
 	var0003 = UI_is_pc_female();
 	var0004 = var0000;
 	var0005 = (var0001 / 0x0003) * 0x0002;
-	var0006 = 0x000F - (0xFFD7->get_npc_id() / 0x0002);
+	var0006 = 0x000F - (DEVRA->get_npc_id() / 0x0002);
 	var0007 = 0x0000;
 	var0008 = 0x0001;
 	var0009 = 0x0000;
 	var000A = 0x0002;
-	var000B = 0xFFD7->get_npc_id();
+	var000B = DEVRA->get_npc_id();
 	while (var0008) {
 		var000C = Func0956(["yes", "no", "haggle"]);
 		if (var000C == "no") {
@@ -88864,7 +88864,7 @@ var Func0820 0x820 (var var0000, var var0001) {
 				"?\"");
 			if (Func0955()) {
 				if (var000B > 0x0001) {
-					0xFFD7->set_npc_id(var000B - 0x0002);
+					DEVRA->set_npc_id(var000B - 0x0002);
 				}
 				return var0004;
 			}
@@ -88880,9 +88880,9 @@ var Func0820 0x820 (var var0000, var var0001) {
 					"! I do not have all day to stand and argue!\"");
 			}
 			if (0x001F < (var000B + 0x000A)) {
-				0xFFD7->set_npc_id(0x001F);
+				DEVRA->set_npc_id(0x001F);
 			} else {
-				0xFFD7->set_npc_id(var000B + 0x000A);
+				DEVRA->set_npc_id(var000B + 0x000A);
 			}
 			return 0x0000;
 		}
@@ -88892,7 +88892,7 @@ var Func0820 0x820 (var var0000, var var0001) {
 					var0004,
 					" is my final offer. Dost thou accept?\"");
 				if (var000B < 0x001C) {
-					0xFFD7->set_npc_id(var000B + 0x0004);
+					DEVRA->set_npc_id(var000B + 0x0004);
 				}
 				if (Func0955()) {
 					return var0004;
@@ -88903,7 +88903,7 @@ var Func0820 0x820 (var var0000, var var0001) {
 					var0004,
 					" is my final offer.\"");
 				if (var000B < 0x001E) {
-					0xFFD7->set_npc_id(var000B + 0x0002);
+					DEVRA->set_npc_id(var000B + 0x0002);
 				}
 			}
 		} else {
@@ -88976,7 +88976,7 @@ var Func0820 0x820 (var var0000, var var0001) {
 						" is where I stand!\"");
 				}
 				if (var000B < 0x001F) {
-					0xFFD7->set_npc_id(var000B + 0x0001);
+					DEVRA->set_npc_id(var000B + 0x0001);
 				}
 			}
 		}

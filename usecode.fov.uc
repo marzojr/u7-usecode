@@ -17045,12 +17045,12 @@ void Func0429 object#(0x429) () {
 	var var0005;
 
 	if (event == DOUBLECLICK) {
-		0xFFD7->show_npc_face(0x0000);
-		var0000 = 0xFFD7->get_npc_object()->get_schedule_type();
+		CANDICE->show_npc_face(0x0000);
+		var0000 = CANDICE->get_npc_object()->get_schedule_type();
 		var0001 = UI_wearing_fellowship();
 		var0002 = UI_part_of_day();
 		if (var0002 == NIGHT) {
-			var0003 = Func08FC(0xFFD7, BATLIN);
+			var0003 = Func08FC(CANDICE, BATLIN);
 			if (var0003) {
 				say("Candice is listening intently to the Fellowship meeting.*");
 				abort;
@@ -17121,7 +17121,7 @@ void Func0429 object#(0x429) () {
 				if (var0005) {
 					IOLO->say("Iolo whispers to you, \"Er, Avatar, thou dost know that I do not condone stealing. But, er, I do believe these stones may be useful to us. Perhaps we should come back later when the museum is closed, if thou dost know what I mean? After all, these items technically belong to thee!\"");
 					IOLO->hide();
-					0xFFD7->show_npc_face(0x0000);
+					CANDICE->show_npc_face(0x0000);
 				}
 				remove("Avatar artifacts");
 				fallthrough;
@@ -17165,7 +17165,7 @@ void Func0429 object#(0x429) () {
 		say("\"Good day, Avatar.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFD7);
+		Func092E(CANDICE);
 	}
 }
 
@@ -17380,7 +17380,7 @@ void Func042B object#(0x42B) () {
 			say("\"Avatar! I was just alerted of thy presence in our fair city! I have been expecting thee!\"");
 			gflags[0x00AC] = true;
 		} else if ((var0000 == MIDNIGHT) || ((var0000 == EARLY) || (var0000 == DAWN))) {
-			var0002 = Func08F7(0xFFD7);
+			var0002 = Func08F7(CANDICE);
 			var0003 = Func08F7(IOLO);
 			if (var0002) {
 				say("\"Avatar! Er, uhm, how art thee? Oh, dost thou know Candice, the curator at the Royal Museum? She is a 'brother' at The Fellowship. I was, er, just seeing her home!\"");
@@ -65415,11 +65415,11 @@ void Func084F 0x84F () {
 		0xFFCB->say("\"The Fellowship has taught me to live with the shortcomings of others,\" says Gaye.");
 		0xFFCB->hide();
 	}
-	var0005 = Func08F7(0xFFD7);
+	var0005 = Func08F7(CANDICE);
 	if (var0005) {
-		0xFFD7->say("\"I had lost all enthusiasm for life before I joined The Fellowship,\" says Candice.*");
+		CANDICE->say("\"I had lost all enthusiasm for life before I joined The Fellowship,\" says Candice.*");
 		BATLIN->say("\"Thank thee for sharing, Candice.\"*");
-		0xFFD7->hide();
+		CANDICE->hide();
 	}
 	var0006 = Func08F7(0xFFD5);
 	if (var0006) {
@@ -65557,10 +65557,10 @@ void Func0850 0x850 () {
 	say("\"The third value is Worthiness Precedes Reward. There is not one among us who is without desire. Much of the misery in the world can be traced to unfulfilled desires. But one moment! Why dost thou deserve what thou dost desire? Most people get what they are worthy of in this life. If thou art not worthy of thy desire then thou shouldst not be surprised if thy desires are unfulfilled. If thou dost become worthy only then hast thou become open to fulfilling thy desires. Desire is a strange thing. Many long for things they do not really want. What they really desire is worthiness itself!");
 	say("\"I have just told thee all that thou dost need to follow the Triad Of Inner Strength. The lessons are simple. The true measure of thine understanding comes in how absolutely thou wilt apply them to thy life. Thou now knowest all thou wilt ever need. Thou dost not need the arcane knowledge of the dying art of magic. Thou dost not need the unsure hand of the healer and his limited knowledge. All that thou wilt ever need is to continuously seek out the best in thyself and to live amongst those that would do the same. Only then art thou truly walking with The Fellowship.");
 	say("\"Now I think would be a good time to hear the words of our fellow members. To hear them share with us how The Fellowship has been bringing positive change to their lives.\"");
-	var0002 = Func08F7(0xFFD7);
+	var0002 = Func08F7(CANDICE);
 	if (var0002) {
-		0xFFD7->say("\"The Fellowship has shown me that I was afraid of myself and that I had to open myself up to life's experiences,\" says Candice.*");
-		0xFFD7->hide();
+		CANDICE->say("\"The Fellowship has shown me that I was afraid of myself and that I had to open myself up to life's experiences,\" says Candice.*");
+		CANDICE->hide();
 	}
 	var0003 = Func08F7(0xFFD5);
 	if (var0003) {
