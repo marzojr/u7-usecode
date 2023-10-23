@@ -17068,7 +17068,7 @@ void Func0429 object#(0x429) () {
 			say("\"Well! Thy reputation precedes thee! The Avatar in person! Word has spread that thou wert in Britain!\"");
 			gflags[0x00AA] = true;
 		} else if (var0002 == MIDNIGHT) {
-			var0004 = Func08F7(0xFFD5);
+			var0004 = Func08F7(PATTERSON);
 			if (var0004) {
 				say("Candice looks guilty about something. She gives you a little wave, but says nothing. She looks at Patterson, hoping that he will do the talking.*");
 				abort;
@@ -17353,10 +17353,10 @@ void Func042B object#(0x42B) () {
 	var var0003;
 
 	if (event == DOUBLECLICK) {
-		0xFFD5->show_npc_face(0x0000);
+		PATTERSON->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		if (var0000 == NIGHT) {
-			var0001 = Func08FC(0xFFD5, BATLIN);
+			var0001 = Func08FC(PATTERSON, BATLIN);
 			if (var0001) {
 				say("Patterson is concentrating on the Fellowship meeting and does not wish to speak.*");
 				abort;
@@ -17390,7 +17390,7 @@ void Func042B object#(0x42B) () {
 				} else {
 					say("You ask if Judith knows about this.");
 				}
-				0xFFD5->say("\"Why, she doth not need to know! It does not matter! 'Tis nothing, really!\"~~The Mayor is sweating profusely. He looks at you with beady eyes. He knows he has been found out. His body slumps. He is mortified and ashamed.~~\"Thou hast discovered my... our secret. Please do not tell Judith. I... will end this. I swear. Candice -- we must stop meeting. I... I'm sorry.\"~~You decide to leave Patterson and Candice to work out what has happened, and you hope that the Mayor has learned something about honesty.*");
+				PATTERSON->say("\"Why, she doth not need to know! It does not matter! 'Tis nothing, really!\"~~The Mayor is sweating profusely. He looks at you with beady eyes. He knows he has been found out. His body slumps. He is mortified and ashamed.~~\"Thou hast discovered my... our secret. Please do not tell Judith. I... will end this. I swear. Candice -- we must stop meeting. I... I'm sorry.\"~~You decide to leave Patterson and Candice to work out what has happened, and you hope that the Mayor has learned something about honesty.*");
 				Func0911(0x0014);
 				abort;
 			}
@@ -17476,7 +17476,7 @@ void Func042B object#(0x42B) () {
 				if (var0003) {
 					IOLO->say("Iolo whispers to you, \"This man seems very defensive, dost thou not think? I say we should observe him and see where he goes after The Fellowship meeting tonight.\"");
 					IOLO->hide();
-					0xFFD5->show_npc_face(0x0000);
+					PATTERSON->show_npc_face(0x0000);
 				}
 				remove("Judith suspicious");
 				fallthrough;
@@ -17510,7 +17510,7 @@ void Func042B object#(0x42B) () {
 		say("Patterson nods his head at you.*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFD5);
+		Func092E(PATTERSON);
 	}
 }
 
@@ -65421,10 +65421,10 @@ void Func084F 0x84F () {
 		BATLIN->say("\"Thank thee for sharing, Candice.\"*");
 		CANDICE->hide();
 	}
-	var0006 = Func08F7(0xFFD5);
+	var0006 = Func08F7(PATTERSON);
 	if (var0006) {
-		0xFFD5->say("\"The Fellowship helps me to be more honest with people,\" says Patterson.*");
-		0xFFD5->hide();
+		PATTERSON->say("\"The Fellowship helps me to be more honest with people,\" says Patterson.*");
+		PATTERSON->hide();
 	}
 	var0007 = Func08F7(0xFFD3);
 	if (var0007) {
@@ -65562,11 +65562,11 @@ void Func0850 0x850 () {
 		CANDICE->say("\"The Fellowship has shown me that I was afraid of myself and that I had to open myself up to life's experiences,\" says Candice.*");
 		CANDICE->hide();
 	}
-	var0003 = Func08F7(0xFFD5);
+	var0003 = Func08F7(PATTERSON);
 	if (var0003) {
-		0xFFD5->say("\"The Fellowship helps me be more honest with people,\" says Patterson.*");
+		PATTERSON->say("\"The Fellowship helps me be more honest with people,\" says Patterson.*");
 		BATLIN->say("\"Thank thee for sharing, Patterson.\"*");
-		0xFFD5->hide();
+		PATTERSON->hide();
 	}
 	var0004 = Func08F7(0xFFD3);
 	if (var0004) {

@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, 0xFFD5, GOBLIN_MESSENGER, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -24487,13 +24487,13 @@ void Func0410 object#(0x410) () {
 
 			case "Hawk" (remove):
 				say("\"He is the captain of the... the... what is the name of that ship?\"");
-				if (Func0942(0xFFD5)) {
-					0xFFD5->show_npc_face1(0x0000);
+				if (Func0942(KANE)) {
+					KANE->show_npc_face1(0x0000);
 					say("\"The Arabella.\"");
 					UI_remove_npc_face1();
 					EDRIN->show_npc_face0(0x0000);
 					say("\"Ah, yes, now I remember. I thank thee.\"");
-					0xFFD5->show_npc_face1(0x0000);
+					KANE->show_npc_face1(0x0000);
 					say("\"Thou art welcome.\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -24510,8 +24510,8 @@ void Func0410 object#(0x410) () {
 
 			case "killed":
 				say("\"I did not see anything...\"");
-				if (Func0942(0xFFD5)) {
-					0xFFD5->show_npc_face1(0x0000);
+				if (Func0942(KANE)) {
+					KANE->show_npc_face1(0x0000);
 					say("\"Nor did I!\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -31344,8 +31344,8 @@ void Func0425 object#(0x425) () {
 			ALE->item_say("@Walla Walla!@");
 		}
 		if (var0005 == 0x0005) {
-			if (Func0942(0xFFD5)) {
-				0xFFD5->item_say("@Leave the bird alone!@");
+			if (Func0942(KANE)) {
+				KANE->item_say("@Leave the bird alone!@");
 			} else {
 				var0006 = Func0992(0x0001, "@Cute bird.@", 0x0000, true);
 			}
@@ -33384,13 +33384,13 @@ void Func042B object#(0x42B) () {
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
 	var0003 = Func0994();
-	var0004 = 0xFFD5->get_schedule_type();
+	var0004 = KANE->get_schedule_type();
 	if (event == PROXIMITY) {
 		if (var0004 == PATROL) {
-			var0005 = 0xFFD5->find_nearby(0x025F, 0x0002, MASK_EGG);
+			var0005 = KANE->find_nearby(0x025F, 0x0002, MASK_EGG);
 			var0006 = var0005->get_item_quality();
 			if (var0006 == 0x000F) {
-				0xFFD5->set_schedule_type(WAIT);
+				KANE->set_schedule_type(WAIT);
 				var0007 = script item {
 					nohalt;
 					step south;
@@ -33403,15 +33403,15 @@ void Func042B object#(0x42B) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@A moment, young sir!@");
-		0xFFD5->Func07D1();
-		Func097F(0xFFD5, "@Who, me?@", 0x0002);
-		0xFFD5->set_schedule_type(TALK);
+		KANE->Func07D1();
+		Func097F(KANE, "@Who, me?@", 0x0002);
+		KANE->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFD5->run_schedule();
-		0xFFD5->clear_item_say();
-		var0009 = 0xFFD5->get_item_flag(MET);
-		0xFFD5->show_npc_face0(0x0000);
+		KANE->run_schedule();
+		KANE->clear_item_say();
+		var0009 = KANE->get_item_flag(MET);
+		KANE->show_npc_face0(0x0000);
 		if (var0009 == false) {
 			if (gflags[0x003E] == true) {
 				say("\"I am not in trouble, am I?\" ~\"I did not do anything!\"");
@@ -33447,7 +33447,7 @@ void Func042B object#(0x42B) () {
 					add("passage");
 				}
 			}
-			0xFFD5->set_item_flag(MET);
+			KANE->set_item_flag(MET);
 		} else {
 			say("\"Welcome back, ",
 				var0000,
@@ -33613,14 +33613,14 @@ void Func042B object#(0x42B) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Good luck, Kane!@", 0x0000);
-				Func097F(0xFFD5, "@Luck to thee, too!@", 0x0002);
+				Func097F(KANE, "@Luck to thee, too!@", 0x0002);
 				break;
 		}
 	}
 	if (event == DEATH) {
-		Func097F(0xFFD5, "@Yowie!@", 0x0000);
-		AVATAR->set_oppressor(0xFFD5);
-		0xFFD5->set_attack_mode(FLEE);
+		Func097F(KANE, "@Yowie!@", 0x0000);
+		AVATAR->set_oppressor(KANE);
+		KANE->set_attack_mode(FLEE);
 	}
 }
 
@@ -48165,9 +48165,9 @@ void Func0451 object#(0x451) () {
 			0xFFAF->item_say("@They shall see...@");
 		}
 		if (var000D == 0x0005) {
-			if (Func0942(0xFFD5)) {
+			if (Func0942(KANE)) {
 				0xFFAF->item_say("@Stay thou away from me!@");
-				Func097F(0xFFD5, "@Yes, m'lord.@", 0x0002);
+				Func097F(KANE, "@Yes, m'lord.@", 0x0002);
 			} else {
 				0xFFAF->item_say("@I shall prevail!@");
 			}
@@ -78303,7 +78303,7 @@ void Func07B3 object#(0x7B3) () {
 				var0003 = UI_update_last_created([0x056E, 0x08A4, 0x0001]);
 			}
 			var0005 = [0x0551, 0x08A7, 0x0002];
-			var0006 = [HAWK, FLINDO, ALE, 0xFFD5];
+			var0006 = [HAWK, FLINDO, ALE, KANE];
 			for (var0009 in var0006 with var0007 to var0008) {
 				var0009->move_object(var0005);
 				var0009->set_new_schedules([MIDNIGHT], [PATROL], [0x055B, 0x08A7]);
@@ -78777,7 +78777,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(FILBERCIO, 0x0972, 0x0744, WAIT);
 		Func09AC(FRIGIDAZZI, 0x0977, 0x0743, WAIT);
 		Func09AC(FLINDO, 0x0994, 0x0754, WAIT);
-		Func09AC(0xFFD5, 0x0902, 0x0746, WAIT);
+		Func09AC(KANE, 0x0902, 0x0746, WAIT);
 		Func09AC(GOBLIN_MESSENGER, 0x08B6, 0x0736, WAIT);
 		Func09AC(EDRIN, 0x08C2, 0x0705, WAIT);
 		Func09AC(COLUMNA, 0x0953, 0x07B5, WAIT);
@@ -79682,7 +79682,7 @@ void Func07E4 object#(0x7E4) () {
 	if (var0001 == 0x0000) {
 		UI_play_music(0x0010, var0000);
 		HAWK->set_schedule_type(WANDER);
-		0xFFD5->set_schedule_type(WANDER);
+		KANE->set_schedule_type(WANDER);
 		ALE->set_schedule_type(WANDER);
 		FLINDO->set_schedule_type(WANDER);
 		var0002->set_barge_dir(EAST);
@@ -79818,7 +79818,7 @@ void Func07E5 object#(0x7E5) () {
 		var0008 = ["@Oh!@", "@Whee!@", "@Ouch!@", "@Whoa!@"];
 		var0009 = UI_die_roll(0x0001, UI_get_array_size(var0008));
 		var000A = var0008[var0009];
-		var000B = [0xFFD5, ALE, HAWK, FLINDO];
+		var000B = [KANE, ALE, HAWK, FLINDO];
 		var000C = UI_die_roll(0x0001, UI_get_array_size(var000B));
 		var000D = var000B[var000C];
 		var000D->item_say(var000A);
@@ -79876,7 +79876,7 @@ void Func07E6 object#(0x7E6) () {
 	HAWK->clear_item_flag(DONT_MOVE);
 	ALE->set_item_flag(CAN_FLY);
 	AUTO_MESSENGER->set_item_flag(SI_TOURNAMENT);
-	var0004 = [HAWK, FLINDO, ALE, 0xFFD5];
+	var0004 = [HAWK, FLINDO, ALE, KANE];
 	var0005 = [0x08AC, 0x0718];
 	var0006 = [0x07BA, 0x08D3];
 	var0007 = [0x08C8, 0x0716];
@@ -79892,7 +79892,7 @@ void Func07E6 object#(0x7E6) () {
 	ALE->set_new_schedules([DAWN, MORNING, NIGHT], [WANDER, HOUND, STANDTHERE], [var000D, var000D, var000E]);
 	var000F = [0x08B9, 0x0710];
 	var0010 = [0x0895, 0x0719];
-	0xFFD5->set_new_schedules([DAWN, MORNING, NIGHT], [EAT_AT_INN, TEND_SHOP, SLEEP], [var000F, var000F, var0010]);
+	KANE->set_new_schedules([DAWN, MORNING, NIGHT], [EAT_AT_INN, TEND_SHOP, SLEEP], [var000F, var000F, var0010]);
 	for (var0013 in var0004 with var0011 to var0012) {
 		var0013->run_schedule();
 	}
@@ -106388,8 +106388,8 @@ void Func0901 0x901 () {
 	var000E = [0x0942, 0x077E];
 	FLINDO->set_new_schedules([MIDNIGHT, MORNING, AFTERNOON, EVENING, NIGHT], [SLEEP, EAT_AT_INN, TEND_SHOP, TEND_SHOP, TEND_SHOP], [var000A, var000B, var000C, var000D, var000E]);
 	FLINDO->set_schedule_type(MAJOR_SIT);
-	0xFFD5->set_new_schedules(MIDNIGHT, MAJOR_SIT, [0x09A6, 0x07F8]);
-	0xFFD5->run_schedule();
+	KANE->set_new_schedules(MIDNIGHT, MAJOR_SIT, [0x09A6, 0x07F8]);
+	KANE->run_schedule();
 	ALE->set_new_schedules(MIDNIGHT, WANDER, [0x09A7, 0x07F7]);
 	ALE->run_schedule();
 	Func09AC(MORTEGRO, 0x060E, 0x020F, TEND_SHOP);
