@@ -13292,7 +13292,7 @@ void Func040F object#(0x40F) () {
 	}
 	EIKO->show_npc_face(0x0000);
 	var0000 = Func0909();
-	var0001 = Func08F7(0xFFD0);
+	var0001 = Func08F7(AMANDA);
 	if (!gflags[0x02C4]) {
 		say("You see a stunningly attractive oriental woman. She is armed to the teeth.");
 		gflags[0x02C4] = true;
@@ -13328,11 +13328,11 @@ void Func040F object#(0x40F) () {
 		case "father":
 			say("\"Our father was a mage named Kalideth. He was working to find a cause of the disturbances of the ethereal waves that have been preventing magic from working for the past twenty years and more, as well as the madness that has afflicted all mages since then.\"");
 			if (var0001) {
-				0xFFD0->say("\"Our father was a wise and kind man. His death was a loss for all of Britannia.\" She sniffs.");
+				AMANDA->say("\"Our father was a wise and kind man. His death was a loss for all of Britannia.\" She sniffs.");
 				if (!gflags[0x02DD]) {
 					say("\"His killer deserves to die.\"");
 				}
-				0xFFD0->hide();
+				AMANDA->hide();
 				EIKO->show_npc_face(0x0000);
 			}
 			remove("father");
@@ -13341,8 +13341,8 @@ void Func040F object#(0x40F) () {
 		case "Amanda":
 			say("\"Neither one of us knew that the other existed until after the death of our father.\"");
 			if (var0001) {
-				0xFFD0->say("\"I had always felt like I had a sister somewhere. But I attributed those feelings to the natural loneliness a child feels upon losing a father. Learning about each other has been the only good thing that has happened to me since father's death.\"");
-				0xFFD0->hide();
+				AMANDA->say("\"I had always felt like I had a sister somewhere. But I attributed those feelings to the natural loneliness a child feels upon losing a father. Learning about each other has been the only good thing that has happened to me since father's death.\"");
+				AMANDA->hide();
 				EIKO->show_npc_face(0x0000);
 			}
 			remove("Amanda");
@@ -13357,10 +13357,10 @@ void Func040F object#(0x40F) () {
 			say("You explain to Eiko what you have learned. Kalideth had gone mad when he fought with Iskander and the source of what is causing the problems with magic and the mage's minds was the thing that really killed Kalideth!");
 			say("\"Then if thou hast discovered the true force that killed my father, my vengeance against Kalideth would be unjust.\"");
 			if (var0001) {
-				0xFFD0->show_npc_face(0x0000);
+				AMANDA->show_npc_face(0x0000);
 				if (!gflags[0x02DE]) {
 					say("\"How canst thou say that? I thought that thou wert my sister? Thou art a traitor!\"");
-					0xFFD0->hide();
+					AMANDA->hide();
 					EIKO->show_npc_face(0x0000);
 					gflags[0x02DD] = true;
 				}
@@ -18182,7 +18182,7 @@ void Func0430 object#(0x430) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFFD0->show_npc_face(0x0000);
+	AMANDA->show_npc_face(0x0000);
 	var0000 = Func0909();
 	var0001 = Func08F7(EIKO);
 	if (!gflags[0x02C5]) {
@@ -18225,7 +18225,7 @@ void Func0430 object#(0x430) () {
 			if (var0001) {
 				EIKO->say("\"The two of us had not even met before our father's death. But we bonded like sisters in the rigorous disciplines we learned from our trainer, Karenna of Minoc.\"*");
 				EIKO->hide();
-				0xFFD0->show_npc_face(0x0000);
+				AMANDA->show_npc_face(0x0000);
 			}
 			remove("half-sister");
 			fallthrough;
@@ -18253,7 +18253,7 @@ void Func0430 object#(0x430) () {
 			if (var0001) {
 				EIKO->say("\"When we find him there shall be no escape. We want vengeance and we mean to have it!\"*");
 				EIKO->hide();
-				0xFFD0->show_npc_face(0x0000);
+				AMANDA->show_npc_face(0x0000);
 			}
 			remove("cyclops");
 			fallthrough;
@@ -18263,7 +18263,7 @@ void Func0430 object#(0x430) () {
 			if (var0001) {
 				EIKO->say("Eiko smiles wickedly.*");
 				EIKO->hide();
-				0xFFD0->show_npc_face(0x0000);
+				AMANDA->show_npc_face(0x0000);
 			}
 			remove("impaled");
 			fallthrough;
@@ -18272,9 +18272,9 @@ void Func0430 object#(0x430) () {
 			say("You explain to Amanda what you have learned. Kalideth had gone mad when he fought with Iskander and the source of what is causing the problems with magic and the mage's minds - the thing that really killed Kalideth - has been destroyed.~~\"Thou hast robbed me of my rightful vengeance! How dare thee!\"");
 			if (var0001) {
 				EIKO->say("Eiko sighs, and her shoulders slump. \"Come now, sister. With the matter of our father's untimely death now settled we can at last let it go. Now we can devote our lives to ourselves rather than remain trapped in the past. It is for the best, thou must trust me.\"*");
-				0xFFD0->say("Amanda shakes her head, dazed and confused. \"Perhaps thou art correct, Eiko. I must think.\"*");
+				AMANDA->say("Amanda shakes her head, dazed and confused. \"Perhaps thou art correct, Eiko. I must think.\"*");
 				EIKO->hide();
-				0xFFD0->show_npc_face(0x0000);
+				AMANDA->show_npc_face(0x0000);
 				gflags[0x02DE] = true;
 			} else {
 				say("Amanda turns and slams her fist into the wall, then collapses onto it with a sob. After a moment, she straightens, but does not turn to face you.~~\"Have no fear that I will continue my vengeance against the cyclops. I am not so far gone that I would kill a creature for acting in self-defense.~\"But I must have some time to myself now. Please, go. I must think.\"");

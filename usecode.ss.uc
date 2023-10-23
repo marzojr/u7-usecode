@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, DELPHYNIA, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -8189,7 +8189,7 @@ void Func01D1 shape#(0x1D1) () {
 					0xFFC6->revert_schedule();
 					0xFFC6->run_schedule();
 					0xFFC6->set_schedule_type(WANDER);
-					Func097F(0xFFD0, "@How sad...@", 0x0000);
+					Func097F(DELPHYNIA, "@How sad...@", 0x0000);
 					Func097F(0xFFCB, "@Catchy tune...@", 0x000A);
 					abort;
 				}
@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, ALYSSAND, DELIN, 0xFFD0, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -35842,19 +35842,19 @@ void Func0430 object#(0x430) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@A moment, if thou wilt.@");
-		0xFFD0->Func07D1();
-		Func097F(0xFFD0, (("@At thy service, " + var0000) + ".@"), 0x0005);
-		0xFFD0->set_schedule_type(TALK);
+		DELPHYNIA->Func07D1();
+		Func097F(DELPHYNIA, (("@At thy service, " + var0000) + ".@"), 0x0005);
+		DELPHYNIA->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFD0->run_schedule();
-		0xFFD0->clear_item_say();
-		0xFFD0->show_npc_face0(0x0000);
-		var0002 = 0xFFD0->get_item_flag(MET);
+		DELPHYNIA->run_schedule();
+		DELPHYNIA->clear_item_say();
+		DELPHYNIA->show_npc_face0(0x0000);
+		var0002 = DELPHYNIA->get_item_flag(MET);
 		if (gflags[0x0171] || (gflags[0x0170] && (!gflags[0x0172]))) {
 			say("\"Leave! I have no wish to be seen with thee! Thou dost consort with criminals and blasphemers.\"");
 			UI_remove_npc_face0();
-			Func097F(0xFFD0, "@Leave me alone!@", 0x0000);
+			Func097F(DELPHYNIA, "@Leave me alone!@", 0x0000);
 			abort;
 		}
 		if (var0002 == false) {
@@ -35869,7 +35869,7 @@ void Func0430 object#(0x430) () {
 					var0000,
 					"?\"");
 			}
-			0xFFD0->set_item_flag(MET);
+			DELPHYNIA->set_item_flag(MET);
 		} else {
 			say("\"'Tis always a pleasure to see thee, Avatar. How may I be of service to thee?\"");
 		}
@@ -35977,7 +35977,7 @@ void Func0430 object#(0x430) () {
 				fallthrough;
 
 			case "buy":
-				if (0xFFD0->get_schedule_type() == TEND_SHOP) {
+				if (DELPHYNIA->get_schedule_type() == TEND_SHOP) {
 					say("\"What dost thou wish to purchase?\"");
 					Func081B();
 				} else {
@@ -36075,7 +36075,7 @@ void Func0430 object#(0x430) () {
 					say("\"What a putrid smell!\"");
 					say("\"Remove that immediately!\"");
 					UI_remove_npc_face0();
-					Func097F(0xFFD0, "@Take it away!@", 0x0000);
+					Func097F(DELPHYNIA, "@Take it away!@", 0x0000);
 					abort;
 				}
 				say("\"A blue egg? I have never heard of a blue egg.\"");
@@ -36116,8 +36116,8 @@ void Func0430 object#(0x430) () {
 					}
 				} else {
 					say("\"Thou dost lie! I see no letter!\"");
-					Func097F(0xFFD0, "@Liar!@", 0x0000);
-					0xFFD0->set_schedule_type(SHY);
+					Func097F(DELPHYNIA, "@Liar!@", 0x0000);
+					DELPHYNIA->set_schedule_type(SHY);
 					abort;
 				}
 				remove("letter");
@@ -36137,7 +36137,7 @@ void Func0430 object#(0x430) () {
 				Func08AB();
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Many thanks.@", 0x0000);
-				Func097F(0xFFD0, "@Walk in Beauty.@", 0x0005);
+				Func097F(DELPHYNIA, "@Walk in Beauty.@", 0x0005);
 				Func08AA();
 				break;
 		}
@@ -39474,7 +39474,7 @@ void Func043A object#(0x43A) () {
 			gflags[0x018B] = true;
 			0xFFC6->set_schedule_type(WAIT);
 			Func097F(IOLO, "@Hmmmm...@", 0x0000);
-			Func097F(0xFFD0, "@Please sing...@", 0x0002);
+			Func097F(DELPHYNIA, "@Please sing...@", 0x0002);
 			Func097F(0xFFCA, "@Sing of Beauty!@", 0x0004);
 			Func097F(0xFFCB, "@Disperse!@", 0x0008);
 			Func097F(0xFFC6, "@Now I need me a drink!@", 0x000C);
@@ -40259,7 +40259,7 @@ void Func043B object#(0x43B) () {
 		0xFFC5->run_schedule();
 		0xFFC5->show_npc_face0(0x0000);
 		var0009 = 0xFFC5->get_item_flag(MET);
-		var000A = 0xFFD0->get_item_flag(MET);
+		var000A = DELPHYNIA->get_item_flag(MET);
 		if ((gflags[0x0168] == false) && var0006) {
 			0xFFC5->set_item_flag(MET);
 			gflags[0x0168] = true;
@@ -68384,10 +68384,10 @@ void Func06BC object#(0x6BC) () {
 				nohalt;
 				call Func043A;
 			};
-			var0003 = 0xFFD0->approach_avatar(0x0078, 0x0028);
+			var0003 = DELPHYNIA->approach_avatar(0x0078, 0x0028);
 			if (var0003) {
-				0xFFD0->set_schedule_type(HOUND);
-				Func097F(0xFFD0, "@The storm is over!@", 0x0000);
+				DELPHYNIA->set_schedule_type(HOUND);
+				Func097F(DELPHYNIA, "@The storm is over!@", 0x0000);
 			}
 			var0003 = script var0000 after 10 ticks {
 				nohalt;
@@ -78801,7 +78801,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(0xFFCC, 0x0415, 0x0718, WAIT);
 		Func09AC(0xFFCB, 0x03F2, 0x06D8, WAIT);
 		Func09AC(0xFFCA, 0x0406, 0x0795, WAIT);
-		Func09AC(0xFFD0, 0x0460, 0x06F6, WAIT);
+		Func09AC(DELPHYNIA, 0x0460, 0x06F6, WAIT);
 		Func09AC(0xFFC8, 0x03B5, 0x0697, WAIT);
 		Func09AC(0xFFC7, 0x0407, 0x066E, WAIT);
 		Func09AC(0xFFC6, 0x0467, 0x06C9, WAIT);
@@ -80953,7 +80953,7 @@ void Func07F8 object#(0x7F8) () {
 				nohalt;
 				call Func07F8;
 			};
-			var0001 = [0xFFC9, 0xFFCA, 0xFFCD, 0xFFC3, 0xFFCE, 0xFFCF, 0xFFC7, 0xFFC8, 0xFFCC, 0xFFD0, DELIN, 0xFFCB, 0xFFC4, 0xFFC5, ALYSSAND, 0xFFC6];
+			var0001 = [0xFFC9, 0xFFCA, 0xFFCD, 0xFFC3, 0xFFCE, 0xFFCF, 0xFFC7, 0xFFC8, 0xFFCC, DELPHYNIA, DELIN, 0xFFCB, 0xFFC4, 0xFFC5, ALYSSAND, 0xFFC6];
 			for (var0004 in var0001 with var0002 to var0003) {
 				var0004->remove_npc();
 				var0004->run_schedule();
@@ -81655,12 +81655,12 @@ void Func07FB object#(0x7FB) () {
 		UI_init_conversation();
 		0xFFCD->show_npc_face0(0x0000);
 		say("\"Delphynia, did the accused meet with thee?\"");
-		0xFFD0->show_npc_face1(0x0000);
+		DELPHYNIA->show_npc_face1(0x0000);
 		say("\"Yes, Captain. He came with his accomplice, who was seeking a certain magical leaf...\"");
 		UI_remove_npc_face1();
 		0x0000->set_conversation_slot();
 		say("\"Aha! And what didst thou conclude from this?\"");
-		0xFFD0->show_npc_face1(0x0000);
+		DELPHYNIA->show_npc_face1(0x0000);
 		say("\"The leaf is known to counteract certain poisons and curses, milord. So I must conclude that the defendant suffers from some sort of malady.\"");
 		UI_remove_npc_face1();
 		0x0000->set_conversation_slot();
@@ -81750,7 +81750,7 @@ void Func07FB object#(0x7FB) () {
 		say("\"No more questions...\"");
 		UI_end_conversation();
 		Func097F(0xFFC9, "@Makes me shudder...@", 0x0002);
-		Func097F(0xFFD0, "@How awful!@", 0x0003);
+		Func097F(DELPHYNIA, "@How awful!@", 0x0003);
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0005 = 0xFFCB->get_object_position() & (0x0007 & 0x0006);
 		var0006 = var0005->find_nearby(0x0113, 0x0014, MASK_EGG);
@@ -81917,7 +81917,7 @@ void Func07FB object#(0x7FB) () {
 		say("\"Return to thy camp.\"");
 		UI_end_conversation();
 		Func097F(0xFFC5, "@I love thee, Delphynia!@", 0x0000);
-		Func097F(0xFFD0, "@I cannot...@", 0x0002);
+		Func097F(DELPHYNIA, "@I cannot...@", 0x0002);
 		Func097F(0xFFC3, "@Ruggs, be silent!@", 0x0003);
 		si_path_run_usecode([0x0407, 0x0679, 0x0000], SI_PATH_SUCCESS, item, Func07FB, false);
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x002D);
@@ -82402,7 +82402,7 @@ labelFunc07FC_0595:
 	}
 	if (var0000 == 0x0026) {
 		UI_init_conversation();
-		0xFFD0->show_npc_face0(0x0000);
+		DELPHYNIA->show_npc_face0(0x0000);
 		say("\"Hail to Beauty, and the omnipotence of the Oracle!\"");
 		say("\"I shall answer thy questions truthfully, Avatar. Of what can I tell thee?\"");
 		add(["the character of the accused", "Daemonism"]);
@@ -82474,7 +82474,7 @@ labelFunc07FC_0595:
 labelFunc07FC_074A:
 		gflags[0x0178] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
-		var0004 = 0xFFD0->get_object_position() & (0x0012 & 0x0006);
+		var0004 = DELPHYNIA->get_object_position() & (0x0012 & 0x0006);
 		var0005 = var0004->find_nearby(0x0113, 0x0028, MASK_EGG);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
@@ -82769,7 +82769,7 @@ labelFunc07FC_0CC8:
 					say("\"I followed ",
 						var0002,
 						" about this town, until he spotted me. No doubt I prevented him from great evil!\"");
-					0xFFD0->show_npc_face1(0x0000);
+					DELPHYNIA->show_npc_face1(0x0000);
 					say("\"But thou didst not see him actually perform any vile acts?\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -87584,17 +87584,17 @@ void Func081B 0x81B () {
 		} else if (var000E == 0x0003) {
 			var0012 = Func0992(0x0001, (("@But " + var0000) + ", we haven't the filari to purchase this.@"), 0x0000, false);
 			if (var0012 != AVATAR) {
-				0xFFD0->show_npc_face0(0x0000);
+				DELPHYNIA->show_npc_face0(0x0000);
 				say("\"Then I am afraid thou canst not purchase any of my goods, ",
 					var0000,
 					".\"");
 			} else {
 				say("\"I am afraid thou dost not have enough to pay for this...\"");
 			}
-			if (0x001F < (0xFFD0->get_npc_id() + 0x0006)) {
-				0xFFD0->set_npc_id(0x001F);
+			if (0x001F < (DELPHYNIA->get_npc_id() + 0x0006)) {
+				DELPHYNIA->set_npc_id(0x001F);
 			} else {
-				0xFFD0->set_npc_id(0xFFD0->get_npc_id() + 0x0006);
+				DELPHYNIA->set_npc_id(DELPHYNIA->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Dost thou desire another purchase?\"");
@@ -87627,12 +87627,12 @@ var Func081C 0x81C (var var0000, var var0001) {
 	var0002 = Func0954();
 	var0003 = var0000;
 	var0004 = (var0001 / 0x0003) * 0x0002;
-	var0005 = 0x000F - (0xFFD0->get_npc_id() / 0x0002);
+	var0005 = 0x000F - (DELPHYNIA->get_npc_id() / 0x0002);
 	var0006 = 0x0000;
 	var0007 = 0x0001;
 	var0008 = 0x0000;
 	var0009 = 0x0002;
-	var000A = 0xFFD0->get_npc_id();
+	var000A = DELPHYNIA->get_npc_id();
 	while (var0007) {
 		var000B = Func0956(["yes", "no", "haggle"]);
 		if (var000B == "no") {
@@ -87711,7 +87711,7 @@ var Func081C 0x81C (var var0000, var var0001) {
 				"?\"");
 			if (Func0955()) {
 				if (var000A > 0x0001) {
-					0xFFD0->set_npc_id(var000A - 0x0002);
+					DELPHYNIA->set_npc_id(var000A - 0x0002);
 				}
 				return var0003;
 			}
@@ -87725,9 +87725,9 @@ var Func081C 0x81C (var var0000, var var0001) {
 				say("\"Where is thine honor?  What of our agreement?\"");
 			}
 			if (0x001F < (var000A + 0x000A)) {
-				0xFFD0->set_npc_id(0x001F);
+				DELPHYNIA->set_npc_id(0x001F);
 			} else {
-				0xFFD0->set_npc_id(var000A + 0x000A);
+				DELPHYNIA->set_npc_id(var000A + 0x000A);
 			}
 			return 0x0000;
 		}
@@ -87737,7 +87737,7 @@ var Func081C 0x81C (var var0000, var var0001) {
 					var0003,
 					" was my final offer. Dost thou accept or not?\"");
 				if (var000A < 0x001C) {
-					0xFFD0->set_npc_id(var000A + 0x0004);
+					DELPHYNIA->set_npc_id(var000A + 0x0004);
 				}
 				if (Func0955()) {
 					return var0003;
@@ -87748,7 +87748,7 @@ var Func081C 0x81C (var var0000, var var0001) {
 					var0003,
 					" filari is my final offer.\"");
 				if (var000A < 0x001E) {
-					0xFFD0->set_npc_id(var000A + 0x0002);
+					DELPHYNIA->set_npc_id(var000A + 0x0002);
 				}
 			}
 		} else {
@@ -87822,7 +87822,7 @@ var Func081C 0x81C (var var0000, var var0001) {
 						" filari is where I stand. I know the value of my wares.\"");
 				}
 				if (var000A < 0x001F) {
-					0xFFD0->set_npc_id(var000A + 0x0001);
+					DELPHYNIA->set_npc_id(var000A + 0x0001);
 				}
 			}
 		}
@@ -102289,7 +102289,7 @@ void Func08AA 0x8AA () {
 	if (gflags[0x01B6]) {
 		abort;
 	}
-	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((ALYSSAND->get_item_flag(MET) + DELIN->get_item_flag(MET)) + 0xFFD0->get_item_flag(MET)) + 0xFFCD->get_item_flag(MET)) + 0xFFCC->get_item_flag(MET)) + 0xFFCB->get_item_flag(MET)) + 0xFFCA->get_item_flag(MET)) + 0xFFC6->get_item_flag(MET)) + 0xFFCF->get_item_flag(MET)) + 0xFFCE->get_item_flag(MET)) + 0xFFC3->get_item_flag(MET)) > 0x0004) && IOLO->npc_nearby())))) {
+	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((ALYSSAND->get_item_flag(MET) + DELIN->get_item_flag(MET)) + DELPHYNIA->get_item_flag(MET)) + 0xFFCD->get_item_flag(MET)) + 0xFFCC->get_item_flag(MET)) + 0xFFCB->get_item_flag(MET)) + 0xFFCA->get_item_flag(MET)) + 0xFFC6->get_item_flag(MET)) + 0xFFCF->get_item_flag(MET)) + 0xFFCE->get_item_flag(MET)) + 0xFFC3->get_item_flag(MET)) > 0x0004) && IOLO->npc_nearby())))) {
 		var0000 = script Func09A0(0x0005, 0x0001) after 200 ticks {
 			nohalt;
 			call Func0435;
@@ -102317,7 +102317,7 @@ void Func08AB 0x8AB () {
 			abort;
 		}
 	}
-	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((ALYSSAND->get_item_flag(MET) + DELIN->get_item_flag(MET)) + 0xFFD0->get_item_flag(MET)) + 0xFFCF->get_item_flag(MET)) + 0xFFCE->get_item_flag(MET)) + 0xFFCD->get_item_flag(MET)) + 0xFFCC->get_item_flag(MET)) + 0xFFCB->get_item_flag(MET)) + 0xFFC7->get_item_flag(MET)) + 0xFFCA->get_item_flag(MET)) + 0xFFC6->get_item_flag(MET)) + 0xFFC3->get_item_flag(MET)) > 0x0004)))) {
+	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((ALYSSAND->get_item_flag(MET) + DELIN->get_item_flag(MET)) + DELPHYNIA->get_item_flag(MET)) + 0xFFCF->get_item_flag(MET)) + 0xFFCE->get_item_flag(MET)) + 0xFFCD->get_item_flag(MET)) + 0xFFCC->get_item_flag(MET)) + 0xFFCB->get_item_flag(MET)) + 0xFFC7->get_item_flag(MET)) + 0xFFCA->get_item_flag(MET)) + 0xFFC6->get_item_flag(MET)) + 0xFFC3->get_item_flag(MET)) > 0x0004)))) {
 		0xFFCB->modify_schedule(NOON, STANDTHERE, [0x040E, 0x06BF]);
 		0xFFCB->modify_schedule(AFTERNOON, STANDTHERE, [0x040E, 0x06BF]);
 	}
@@ -103586,7 +103586,7 @@ void Func08C2 0x8C2 () {
 			var0008 = 0x0006;
 		}
 		if (var0006 == 0x0012) {
-			var0007 = 0xFFD0;
+			var0007 = DELPHYNIA;
 			var0008 = 0x0006;
 		}
 		if (var0007) {
@@ -108953,7 +108953,7 @@ void Func093A 0x93A (var var0000) {
 					face north;
 				};
 			}
-			var0008 = [0xFFC6, DELIN, 0xFFD0, 0xFFCC];
+			var0008 = [0xFFC6, DELIN, DELPHYNIA, 0xFFCC];
 			for (var0004 in var0008 with var000D to var000E) {
 				var0003 = script var0004 after (0x0007 + UI_get_random(0x0005)) ticks {
 					actor frame bowing;
@@ -109058,7 +109058,7 @@ void Func093A 0x93A (var var0000) {
 					face south;
 				};
 			}
-			var0008 = [0xFFC6, DELIN, 0xFFD0, 0xFFCF, 0xFFCE, 0xFFCC];
+			var0008 = [0xFFC6, DELIN, DELPHYNIA, 0xFFCF, 0xFFCE, 0xFFCC];
 			for (var0004 in var0008 with var0013 to var0014) {
 				var0003 = script var0004 after (0x0004 + UI_get_random(0x0004)) ticks {
 					actor frame bowing;
@@ -109188,7 +109188,7 @@ void Func093A 0x93A (var var0000) {
 					face north;
 				};
 			}
-			var0008 = [0xFFC6, DELIN, 0xFFD0, 0xFFCC, 0xFFCD, 0xFFCA, ALYSSAND, 0xFFCB];
+			var0008 = [0xFFC6, DELIN, DELPHYNIA, 0xFFCC, 0xFFCD, 0xFFCA, ALYSSAND, 0xFFCB];
 			for (var0004 in var0008 with var0019 to var001A) {
 				var0003 = script var0004 after (0x0007 + UI_get_random(0x0005)) ticks {
 					face north;
@@ -109335,7 +109335,7 @@ void Func093A 0x93A (var var0000) {
 					face south;
 				};
 			}
-			var0008 = [0xFFC6, DELIN, 0xFFD0, 0xFFCF, 0xFFCE, 0xFFCC];
+			var0008 = [0xFFC6, DELIN, DELPHYNIA, 0xFFCF, 0xFFCE, 0xFFCC];
 			for (var0004 in var0008 with var001F to var0020) {
 				var0003 = script var0004 after (0x0004 + UI_get_random(0x0004)) ticks {
 					actor frame bowing;
@@ -109476,7 +109476,7 @@ void Func093A 0x93A (var var0000) {
 			var0003 = script 0xFFC3 {
 				say "@This trial is now dismissed!@";
 			};
-			var0003 = [0xFFC6, DELIN, 0xFFD0, 0xFFCC, 0xFFCF, 0xFFCE, 0xFFC9, 0xFFC3, 0xFFCB, ALYSSAND];
+			var0003 = [0xFFC6, DELIN, DELPHYNIA, 0xFFCC, 0xFFCF, 0xFFCE, 0xFFC9, 0xFFC3, 0xFFCB, ALYSSAND];
 			for (var0004 in var0003 with var0029 to var002A) {
 				var0004->run_schedule();
 				var0008 = UI_get_random(0x0008);
@@ -109649,7 +109649,7 @@ void Func093B 0x93B (var var0000) {
 			Func097F(0xFFCF, "@To the Lady!@", 0x0002);
 			Func097F(0xFFCC, "@All hail!@", 0x0000);
 			Func097F(DELIN, "@Hail the Lady!@", 0x0005);
-			Func097F(0xFFD0, "@Oh great Lady!@", 0x0009);
+			Func097F(DELPHYNIA, "@Oh great Lady!@", 0x0009);
 			Func097F(0xFFC6, "@Whatever...!@", 0x000F);
 			var0003 = script 0xFFC9 after 20 ticks {
 				nohalt;
@@ -109888,11 +109888,11 @@ void Func093B 0x93B (var var0000) {
 			}
 		}
 		if (!gflags[0x0178]) {
-			if (gflags[0x0170] && 0xFFD0->get_item_flag(MET)) {
-				var0007 = 0xFFD0;
+			if (gflags[0x0170] && DELPHYNIA->get_item_flag(MET)) {
+				var0007 = DELPHYNIA;
 			}
 			if (gflags[0x0172]) {
-				var0007 &= 0xFFD0;
+				var0007 &= DELPHYNIA;
 			}
 		}
 		if ((!gflags[0x017B]) && var0007) {
@@ -110056,7 +110056,7 @@ void Func093B 0x93B (var var0000) {
 				abort;
 			}
 		}
-		if (item == 0xFFD0->get_npc_object()) {
+		if (item == DELPHYNIA->get_npc_object()) {
 			var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x0026);
 		}
 		if (item == 0xFFCC->get_npc_object()) {
