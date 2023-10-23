@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, 0xFFEA, 0xFFE8, 0xFFE9, 0xFFE2, 0xFFE0, 0xFFE3, 0xFFE5, FILBERCIO, 0xFFEC, 0xFFD6, 0xFFD5, 0xFFEB, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, 0xFFEA, 0xFFE8, 0xFFE9, 0xFFE2, 0xFFE0, 0xFFE3, 0xFFE5, FILBERCIO, FRIGIDAZZI, 0xFFD6, 0xFFD5, 0xFFEB, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -1757,7 +1757,7 @@ void Func00E6 shape#(0xE6) () {
 	var var001F;
 	var var0020;
 
-	var0000 = 0xFFEC->get_item_flag(MET);
+	var0000 = FRIGIDAZZI->get_item_flag(MET);
 	var0001 = Func0954();
 	var0002 = UI_is_pc_female();
 	var0003 = Func0953();
@@ -1771,9 +1771,9 @@ void Func00E6 shape#(0xE6) () {
 	if (var0002) {
 		var0005 = "her";
 	}
-	var0006 = 0xFFEC->get_distance(AVATAR);
+	var0006 = FRIGIDAZZI->get_distance(AVATAR);
 	var0007 = [0x0975, 0x0748, 0x0000];
-	var0008 = 0xFFEC->get_object_position();
+	var0008 = FRIGIDAZZI->get_object_position();
 	var0009 = [0x0986, 0x0766];
 	var000A = var0007[0x0001] - var0008[0x0001];
 	if (var000A < 0x0000) {
@@ -1786,42 +1786,42 @@ void Func00E6 shape#(0xE6) () {
 	var000C = var000A + var000B;
 	var000D = Func09A0(0x0005, 0x0003);
 	if (event == SCRIPTED) {
-		if (0xFFEC->get_npc_id() == 0x0011) {
+		if (FRIGIDAZZI->get_npc_id() == 0x0011) {
 			Func08EC();
 			abort;
 		}
-		if (0xFFEC->get_npc_id() == 0x0010) {
+		if (FRIGIDAZZI->get_npc_id() == 0x0010) {
 			Func08EC();
 			abort;
 		}
-		if (0xFFEC->get_npc_id() == 0x000F) {
-			0xFFEC->set_npc_id(0x0010);
+		if (FRIGIDAZZI->get_npc_id() == 0x000F) {
+			FRIGIDAZZI->set_npc_id(0x0010);
 			UI_init_conversation();
-			0xFFEC->show_npc_face0(0x0002);
+			FRIGIDAZZI->show_npc_face0(0x0002);
 			say("\"I think that I am falling in love with thee, ",
 				var0003,
 				"! How did I ever live without thee...\"");
 			UI_end_conversation();
 			Func097F(item, "@Kiss me again, love...@", 0x0000);
 			Func097F(AVATAR, "@I cannot resist!@", 0x0002);
-			var000E = script 0xFFEC after 8 ticks {
+			var000E = script FRIGIDAZZI after 8 ticks {
 				nohalt;
 				call Func00E6;
 			};
 			abort;
 		}
-		if (0xFFEC->get_npc_id() == 0x000E) {
-			0xFFEC->set_npc_id(0x000F);
+		if (FRIGIDAZZI->get_npc_id() == 0x000E) {
+			FRIGIDAZZI->set_npc_id(0x000F);
 			UI_fade_palette(0x000C, 0x0001, 0x0000);
 			UI_play_music(0x0027, Func09A0(0x0005, 0x0001));
 			AVATAR->move_object([0x0976, 0x0745, 0x0000]);
-			0xFFEC->move_object([0x0974, 0x0749, 0x0002]);
+			FRIGIDAZZI->move_object([0x0974, 0x0749, 0x0002]);
 			var000E = script AVATAR {
 				nohalt;
 				actor frame standing;
 				face south;
 			};
-			var000E = script 0xFFEC after 15 ticks {
+			var000E = script FRIGIDAZZI after 15 ticks {
 				nohalt;
 				face east;
 				call Func0636;
@@ -1837,11 +1837,11 @@ void Func00E6 shape#(0xE6) () {
 			};
 			abort;
 		}
-		if (0xFFEC->get_npc_id() == 0x000D) {
-			0xFFEC->set_npc_id(0x000E);
-			0xFFEC->clear_item_say();
+		if (FRIGIDAZZI->get_npc_id() == 0x000D) {
+			FRIGIDAZZI->set_npc_id(0x000E);
+			FRIGIDAZZI->clear_item_say();
 			UI_init_conversation();
-			0xFFEC->show_npc_face0(0x0002);
+			FRIGIDAZZI->show_npc_face0(0x0002);
 			say("\"We need not these blankets...\"");
 			UI_end_conversation();
 			var000F = find_nearby(0x02B8, 0x000A, MASK_NONE);
@@ -1853,7 +1853,7 @@ void Func00E6 shape#(0xE6) () {
 					UI_play_sound_effect(0x0014);
 				}
 			}
-			var000E = script 0xFFEC {
+			var000E = script FRIGIDAZZI {
 				nohalt;
 				actor frame bowing;
 				wait 2;
@@ -1874,8 +1874,8 @@ void Func00E6 shape#(0xE6) () {
 			};
 			abort;
 		}
-		if (0xFFEC->get_npc_id() == 0x000C) {
-			0xFFEC->set_npc_id(0x000D);
+		if (FRIGIDAZZI->get_npc_id() == 0x000C) {
+			FRIGIDAZZI->set_npc_id(0x000D);
 			var0009 = AVATAR->get_object_position();
 			UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			Func09B2();
@@ -1887,24 +1887,24 @@ void Func00E6 shape#(0xE6) () {
 			};
 			// Note: the function is passed in two words, possibly as a mistake
 			// caused by the need to do so in scripts.
-			0xFFEC->si_path_run_usecode([0x0975, 0x0747, 0x0000], SI_PATH_SUCCESS, item, [Func00E6, 0x0000], false);
+			FRIGIDAZZI->si_path_run_usecode([0x0975, 0x0747, 0x0000], SI_PATH_SUCCESS, item, [Func00E6, 0x0000], false);
 			abort;
 		}
-		if (0xFFEC->get_npc_id() == 0x000B) {
-			0xFFEC->set_npc_id(0x000C);
+		if (FRIGIDAZZI->get_npc_id() == 0x000B) {
+			FRIGIDAZZI->set_npc_id(0x000C);
 			AVATAR->clear_item_say();
-			0xFFEC->clear_item_say();
+			FRIGIDAZZI->clear_item_say();
 			UI_init_conversation();
-			0xFFEC->show_npc_face0(0x0002);
+			FRIGIDAZZI->show_npc_face0(0x0002);
 			say("\"No mortal can resist the Dance of Passion! Tell me that thy blood hath been stirred to a frenzy!\"");
 			if (Func0955()) {
 				UI_end_conversation();
-				Func097F(0xFFEC, "@Likewise...@", 0x0004);
+				Func097F(FRIGIDAZZI, "@Likewise...@", 0x0004);
 				Func097F(AVATAR, "@I cannot wait!@", 0x0000);
 				// Note: the function is passed in two words, possibly as a mistake
 				// caused by the need to do so in scripts.
 				AVATAR->si_path_run_usecode([0x0975, 0x0749, 0x0000], SI_PATH_SUCCESS, AVATAR->get_npc_object(), [Func00E6, 0x0000], false);
-				var000E = script 0xFFEC after 4 ticks {
+				var000E = script FRIGIDAZZI after 4 ticks {
 					nohalt;
 					face south;
 					wait 3;
@@ -1914,7 +1914,7 @@ void Func00E6 shape#(0xE6) () {
 			}
 			say("\"No, thou dost not understand. As I said, no mortal can resist the Dance of Passion...\"");
 			UI_end_conversation();
-			var000E = script 0xFFEC {
+			var000E = script FRIGIDAZZI {
 				nohalt;
 				face south;
 				say "@Uh-oh...@";
@@ -1922,12 +1922,12 @@ void Func00E6 shape#(0xE6) () {
 			Func08EC();
 			abort;
 		}
-		if (0xFFEC->get_npc_id() == 0x000A) {
-			0xFFEC->Func07D1();
-			var0009 = 0xFFEC->get_object_position();
+		if (FRIGIDAZZI->get_npc_id() == 0x000A) {
+			FRIGIDAZZI->Func07D1();
+			var0009 = FRIGIDAZZI->get_object_position();
 			UI_sprite_effect(ANIMATION_FIREWORKS, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			0xFFEC->set_npc_id(0x000B);
-			var000E = script 0xFFEC {
+			FRIGIDAZZI->set_npc_id(0x000B);
+			var000E = script FRIGIDAZZI {
 				nohalt;
 				repeat 2 {
 					actor frame reach_2h;
@@ -1948,12 +1948,12 @@ void Func00E6 shape#(0xE6) () {
 			};
 			abort;
 		}
-		if (0xFFEC->get_npc_id() == 0x0009) {
-			0xFFEC->set_npc_id(0x000A);
-			var0009 = 0xFFEC->get_object_position();
+		if (FRIGIDAZZI->get_npc_id() == 0x0009) {
+			FRIGIDAZZI->set_npc_id(0x000A);
+			var0009 = FRIGIDAZZI->get_object_position();
 			UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			0xFFEC->Func07D1();
-			var000E = script 0xFFEC {
+			FRIGIDAZZI->Func07D1();
+			var000E = script FRIGIDAZZI {
 				nohalt;
 				actor frame bowing;
 				actor frame kneeling;
@@ -1967,14 +1967,14 @@ void Func00E6 shape#(0xE6) () {
 			};
 			abort;
 		}
-		if (0xFFEC->get_npc_id() == 0x0008) {
-			0xFFEC->set_npc_id(0x0009);
-			var0009 = 0xFFEC->get_object_position();
+		if (FRIGIDAZZI->get_npc_id() == 0x0008) {
+			FRIGIDAZZI->set_npc_id(0x0009);
+			var0009 = FRIGIDAZZI->get_object_position();
 			UI_sprite_effect(ANIMATION_GREEN_BUBBLES, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			0xFFEC->Func07D1();
+			FRIGIDAZZI->Func07D1();
 			var000E = ["@Vox Erotis!@", "@Vex Nox Flam!@", "@Ort Vos!@", "@Ort Erotis!@"];
-			Func094F(0xFFEC, var000E);
-			var000E = script 0xFFEC {
+			Func094F(FRIGIDAZZI, var000E);
+			var000E = script FRIGIDAZZI {
 				nohalt;
 				actor frame cast_up;
 				actor frame cast_out;
@@ -1995,11 +1995,11 @@ void Func00E6 shape#(0xE6) () {
 			};
 			abort;
 		}
-		if (0xFFEC->get_npc_id() == 0x0007) {
-			0xFFEC->set_npc_id(0x0008);
-			0xFFEC->Func07D1();
+		if (FRIGIDAZZI->get_npc_id() == 0x0007) {
+			FRIGIDAZZI->set_npc_id(0x0008);
+			FRIGIDAZZI->Func07D1();
 			UI_init_conversation();
-			0xFFEC->show_npc_face0(0x0002);
+			FRIGIDAZZI->show_npc_face0(0x0002);
 			say("\"Beware, ",
 				var0003,
 				"! I shall now begin the Dance of Passion, which no mortal can resist!\"");
@@ -2008,10 +2008,10 @@ void Func00E6 shape#(0xE6) () {
 			if (var0013) {
 				UI_play_music(0x0010, var0013);
 			}
-			var0009 = 0xFFEC->get_object_position();
+			var0009 = FRIGIDAZZI->get_object_position();
 			UI_sprite_effect(ANIMATION_FIREWORKS, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			Func097F(0xFFEC, "@Vas Flam!@", 0x0008);
-			var000E = script 0xFFEC {
+			Func097F(FRIGIDAZZI, "@Vas Flam!@", 0x0008);
+			var000E = script FRIGIDAZZI {
 				nohalt;
 				repeat 3 {
 					actor frame cast_up;
@@ -2032,10 +2032,10 @@ void Func00E6 shape#(0xE6) () {
 			Func094F(AVATAR, var000E);
 			abort;
 		}
-		if (0xFFEC->get_npc_id() == 0x0006) {
-			0xFFEC->set_npc_id(0x0007);
-			0xFFEC->set_polymorph(0x00E6);
-			var000E = script 0xFFEC {
+		if (FRIGIDAZZI->get_npc_id() == 0x0006) {
+			FRIGIDAZZI->set_npc_id(0x0007);
+			FRIGIDAZZI->set_polymorph(0x00E6);
+			var000E = script FRIGIDAZZI {
 				nohalt;
 				actor frame cast_up;
 				wait 2;
@@ -2043,10 +2043,10 @@ void Func00E6 shape#(0xE6) () {
 			};
 			abort;
 		}
-		if (0xFFEC->get_npc_id() == 0x0005) {
-			0xFFEC->set_npc_id(0x0006);
+		if (FRIGIDAZZI->get_npc_id() == 0x0005) {
+			FRIGIDAZZI->set_npc_id(0x0006);
 			UI_init_conversation();
-			0xFFEC->show_npc_face0(0x0000);
+			FRIGIDAZZI->show_npc_face0(0x0000);
 			say("\"Now that I have tasted thy lips, I think that mine infatuation with thee doth grow!\"");
 			say("\"Strange -- 'twas so cold in here when thou didst enter, but now I feel suddenly warm...\"");
 			say("\"I have not felt so alive in many months! Perhaps... I am not sure how to say this, but...\"");
@@ -2062,8 +2062,8 @@ void Func00E6 shape#(0xE6) () {
 				UI_end_conversation();
 				// Note: the function is passed in two words, possibly as a mistake
 				// caused by the need to do so in scripts.
-				0xFFEC->si_path_run_usecode([0x097B, 0x0743, 0x0000], SI_PATH_SUCCESS, item, [Func00E6, 0x0000], false);
-				var000E = script 0xFFEC {
+				FRIGIDAZZI->si_path_run_usecode([0x097B, 0x0743, 0x0000], SI_PATH_SUCCESS, item, [Func00E6, 0x0000], false);
+				var000E = script FRIGIDAZZI {
 					wait 2;
 					actor frame cast_up;
 					say "@Est Nudi!@";
@@ -2075,8 +2075,8 @@ void Func00E6 shape#(0xE6) () {
 				UI_end_conversation();
 				// Note: the function is passed in two words, possibly as a mistake
 				// caused by the need to do so in scripts.
-				0xFFEC->si_path_run_usecode([0x097B, 0x0743, 0x0000], SI_PATH_SUCCESS, item, [Func00E6, 0x0000], false);
-				var000E = script 0xFFEC {
+				FRIGIDAZZI->si_path_run_usecode([0x097B, 0x0743, 0x0000], SI_PATH_SUCCESS, item, [Func00E6, 0x0000], false);
+				var000E = script FRIGIDAZZI {
 					wait 2;
 					actor frame cast_up;
 					say "@Est Nudi!@";
@@ -2086,7 +2086,7 @@ void Func00E6 shape#(0xE6) () {
 			if (var000F == "no") {
 				say("\"Oh... this is so embarrassing!\"");
 				UI_end_conversation();
-				var000E = script 0xFFEC {
+				var000E = script FRIGIDAZZI {
 					nohalt;
 					actor frame raise_2h;
 					wait 2;
@@ -2098,15 +2098,15 @@ void Func00E6 shape#(0xE6) () {
 					face east;
 					face south;
 				};
-				0xFFEC->set_npc_id(0x0011);
+				FRIGIDAZZI->set_npc_id(0x0011);
 				abort;
 			}
 			say("\"Do I detect a note of disapproval? Well, I don't have to take that from anyone!\"");
 			UI_end_conversation();
-			0xFFEC->Func07D1();
-			Func097F(0xFFEC, "@Pig!@", 0x0002);
+			FRIGIDAZZI->Func07D1();
+			Func097F(FRIGIDAZZI, "@Pig!@", 0x0002);
 			Func097F(AVATAR, "@Ouch!@", 0x0008);
-			var000E = script 0xFFEC {
+			var000E = script FRIGIDAZZI {
 				nohalt;
 				call Func07D2;
 				// Bug: the next line is interpreted as a 'step FACE_SOUTH, 0x27',
@@ -2124,13 +2124,13 @@ void Func00E6 shape#(0xE6) () {
 				wait 8;
 				call Func00E6;
 			};
-			0xFFEC->set_npc_id(0x0011);
+			FRIGIDAZZI->set_npc_id(0x0011);
 			abort;
 		}
-		if (0xFFEC->get_npc_id() == 0x0004) {
-			0xFFEC->set_npc_id(0x0005);
+		if (FRIGIDAZZI->get_npc_id() == 0x0004) {
+			FRIGIDAZZI->set_npc_id(0x0005);
 			UI_init_conversation();
-			0xFFEC->show_npc_face0(0x0000);
+			FRIGIDAZZI->show_npc_face0(0x0000);
 			if (UI_is_pc_female()) {
 				say("\"To be blunt, there is something uncommonly... erotic about thee. I am most attracted to thee, woman.\"");
 			} else {
@@ -2150,8 +2150,8 @@ void Func00E6 shape#(0xE6) () {
 			var000F = Func0956(var000E);
 			if (var000F == "yes") {
 				UI_end_conversation();
-				0xFFEC->Func07D1();
-				var000E = script 0xFFEC {
+				FRIGIDAZZI->Func07D1();
+				var000E = script FRIGIDAZZI {
 					nohalt;
 					call Func07D2;
 					// Bug: the next line is interpreted as a 'step FACE_SOUTH, 0x53',
@@ -2170,10 +2170,10 @@ void Func00E6 shape#(0xE6) () {
 				};
 			} else if (var000F == "no") {
 				UI_end_conversation();
-				0xFFEC->Func07D1();
-				Func097F(0xFFEC, "@Oh!@", 0x0002);
+				FRIGIDAZZI->Func07D1();
+				Func097F(FRIGIDAZZI, "@Oh!@", 0x0002);
 				Func097F(AVATAR, "@Ouch!@", 0x0008);
-				var000E = script 0xFFEC {
+				var000E = script FRIGIDAZZI {
 					nohalt;
 					call Func07D2;
 					// Bug: the next line is interpreted as a 'step FACE_SOUTH, 0x27',
@@ -2191,12 +2191,12 @@ void Func00E6 shape#(0xE6) () {
 					wait 8;
 					call Func00E6;
 				};
-				0xFFEC->set_npc_id(0x0011);
+				FRIGIDAZZI->set_npc_id(0x0011);
 			} else {
 				say("\"Thou dost disappoint me. I had hoped that thou wouldst be more receptive...\"");
 				UI_end_conversation();
-				0xFFEC->set_npc_id(0x0011);
-				var000E = script 0xFFEC {
+				FRIGIDAZZI->set_npc_id(0x0011);
+				var000E = script FRIGIDAZZI {
 					nohalt;
 					say "@Oh, well...@";
 					face east;
@@ -2207,8 +2207,8 @@ void Func00E6 shape#(0xE6) () {
 			}
 			abort;
 		}
-		if (0xFFEC->get_npc_id() == 0x0003) {
-			0xFFEC->set_npc_id(0x0004);
+		if (FRIGIDAZZI->get_npc_id() == 0x0003) {
+			FRIGIDAZZI->set_npc_id(0x0004);
 			var000E = UI_create_new_object(0x011D);
 			if (var000E) {
 				var000E->set_item_frame(0x0005);
@@ -2216,7 +2216,7 @@ void Func00E6 shape#(0xE6) () {
 				var000E = UI_update_last_created([0x097F, 0x0744, 0x0002]);
 			}
 			UI_init_conversation();
-			0xFFEC->show_npc_face0(0x0000);
+			FRIGIDAZZI->show_npc_face0(0x0000);
 			say("\"I feel so comfortable around thee. It is as though we have known each other before -- perhaps in some other existence?\"");
 			say("\"Do not be formal with me, ",
 				var0003,
@@ -2229,7 +2229,7 @@ void Func00E6 shape#(0xE6) () {
 				UI_end_conversation();
 				var0009 = AVATAR->get_object_position();
 				UI_sprite_effect(ANIMATION_POOF, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-				var0009 = 0xFFEC->get_object_position();
+				var0009 = FRIGIDAZZI->get_object_position();
 				UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, (var0009[0x0001] + 0x0004), (var0009[0x0002] + 0x0004), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 				Func097F(AVATAR, "@Yow!@", 0x0000);
 				UI_play_sound_effect(0x0039);
@@ -2237,7 +2237,7 @@ void Func00E6 shape#(0xE6) () {
 				// Note: the function is passed in two words, possibly as a mistake
 				// caused by the need to do so in scripts.
 				AVATAR->si_path_run_usecode([0x0980, 0x0748, 0x0000], SI_PATH_SUCCESS, AVATAR->get_npc_object(), [Func00E6, 0x0000], false);
-				var000E = script 0xFFEC {
+				var000E = script FRIGIDAZZI {
 					nohalt;
 					actor frame cast_up;
 					say "@Vex Veni Nox!@";
@@ -2252,11 +2252,11 @@ void Func00E6 shape#(0xE6) () {
 			}
 			if (var000F == "yes") {
 				UI_end_conversation();
-				Func097F(0xFFEC, "@Do not be shy with me...@", 0x0000);
+				Func097F(FRIGIDAZZI, "@Do not be shy with me...@", 0x0000);
 				// Note: the function is passed in two words, possibly as a mistake
 				// caused by the need to do so in scripts.
 				AVATAR->si_path_run_usecode([0x0980, 0x0748, 0x0000], SI_PATH_SUCCESS, AVATAR->get_npc_object(), [Func00E6, 0x0000], false);
-				var000E = script 0xFFEC {
+				var000E = script FRIGIDAZZI {
 					nohalt;
 					wait while far 2;
 					wait 4;
@@ -2269,7 +2269,7 @@ void Func00E6 shape#(0xE6) () {
 				UI_end_conversation();
 				var0009 = AVATAR->get_object_position();
 				UI_sprite_effect(ANIMATION_POOF, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-				var0009 = 0xFFEC->get_object_position();
+				var0009 = FRIGIDAZZI->get_object_position();
 				UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, (var0009[0x0001] + 0x0004), (var0009[0x0002] + 0x0004), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 				UI_play_sound_effect(0x0039);
 				UI_play_sound_effect(0x0028);
@@ -2277,7 +2277,7 @@ void Func00E6 shape#(0xE6) () {
 				// Note: the function is passed in two words, possibly as a mistake
 				// caused by the need to do so in scripts.
 				AVATAR->si_path_run_usecode([0x0980, 0x0748, 0x0000], SI_PATH_SUCCESS, AVATAR->get_npc_object(), [Func00E6, 0x0000], false);
-				var000E = script 0xFFEC {
+				var000E = script FRIGIDAZZI {
 					nohalt;
 					actor frame cast_up;
 					say "@Vex Veni Nox!@";
@@ -2292,10 +2292,10 @@ void Func00E6 shape#(0xE6) () {
 			}
 			abort;
 		}
-		if (0xFFEC->get_npc_id() == 0x0002) {
-			0xFFEC->set_npc_id(0x0003);
+		if (FRIGIDAZZI->get_npc_id() == 0x0002) {
+			FRIGIDAZZI->set_npc_id(0x0003);
 			UI_init_conversation();
-			0xFFEC->show_npc_face0(0x0000);
+			FRIGIDAZZI->show_npc_face0(0x0000);
 			say("\"I am so glad that thou hast met me here, sweet Avatar. I find strangers...\"");
 			UI_end_conversation();
 			var000E = find_nearby(0x011D, 0x0005, MASK_NONE);
@@ -2304,8 +2304,8 @@ void Func00E6 shape#(0xE6) () {
 					var000E->remove_item();
 				}
 			}
-			Func097F(0xFFEC, "@...appealing...@", 0x0000);
-			var000E = script 0xFFEC after 5 ticks {
+			Func097F(FRIGIDAZZI, "@...appealing...@", 0x0000);
+			var000E = script FRIGIDAZZI after 5 ticks {
 				nohalt;
 				repeat 3 {
 					actor frame raise_2h;
@@ -2320,16 +2320,16 @@ void Func00E6 shape#(0xE6) () {
 			};
 			abort;
 		}
-		if (0xFFEC->get_npc_id() == 0x0001) {
+		if (FRIGIDAZZI->get_npc_id() == 0x0001) {
 			var000E = ["@I love the night...@", "@so quiet...@", "@so dark...@"];
-			Func094F(0xFFEC, var000E);
+			Func094F(FRIGIDAZZI, var000E);
 			// Note: the function is passed in two words, possibly as a mistake
 			// caused by the need to do so in scripts.
-			0xFFEC->si_path_run_usecode([0x0980, 0x0746, 0x0000], SI_PATH_SUCCESS, item, [Func00E6, 0x0000], false);
+			FRIGIDAZZI->si_path_run_usecode([0x0980, 0x0746, 0x0000], SI_PATH_SUCCESS, item, [Func00E6, 0x0000], false);
 			abort;
 		}
-		0xFFEC->show_npc_face0(0x0000);
-		Func09AC(0xFFEC, -1, 0, STANDTHERE);
+		FRIGIDAZZI->show_npc_face0(0x0000);
+		Func09AC(FRIGIDAZZI, -1, 0, STANDTHERE);
 		0xFFEB->set_new_schedules(MIDNIGHT, STANDTHERE, [0x0986, 0x0766]);
 		0xFFEB->run_schedule();
 		0xFFEB->clear_item_flag(ASLEEP);
@@ -2337,10 +2337,10 @@ void Func00E6 shape#(0xE6) () {
 		if ((var000C < 0x000F) && ((!IOLO->npc_nearby()) && ((!DUPRE->npc_nearby()) && ((!SHAMINO->npc_nearby()) && (!0xFFDE->npc_nearby()))))) {
 			say("\"I am so glad that thou hast agreed to meet me here.\"");
 			UI_play_music(0x001F, Func09A0(0x0005, 0x0001));
-			0xFFEC->set_npc_id(0x0001);
+			FRIGIDAZZI->set_npc_id(0x0001);
 			UI_end_conversation();
 			AVATAR->set_item_flag(DONT_MOVE);
-			var000E = script 0xFFEC {
+			var000E = script FRIGIDAZZI {
 				nohalt;
 				call Func00E6;
 			};
@@ -2377,22 +2377,22 @@ void Func00E6 shape#(0xE6) () {
 					var000F->run_schedule();
 				}
 				Func097F(var000F, "@Have fun...@", 0x0000);
-				var000E = script 0xFFEC after 10 ticks {
+				var000E = script FRIGIDAZZI after 10 ticks {
 					nohalt;
 					call Func00E6;
 				};
-				var000E = Func09A0(0x0005, 0x0003)->set_item_quality(0xFFEC->get_npc_id());
-				0xFFEC->set_npc_id(0x0001);
+				var000E = Func09A0(0x0005, 0x0003)->set_item_quality(FRIGIDAZZI->get_npc_id());
+				FRIGIDAZZI->set_npc_id(0x0001);
 				abort;
 			}
 			say("\"Then I can be of no use to thee.\"");
-			Func097F(0xFFEC, "@Go!@", 0x0000);
+			Func097F(FRIGIDAZZI, "@Go!@", 0x0000);
 			abort;
 		}
 		say("\"But we must wait, darling, until we are alone...\"");
 		UI_end_conversation();
 		AVATAR->set_item_flag(DONT_MOVE);
-		Func097F(0xFFEC, "@Wait...@", 0x0000);
+		Func097F(FRIGIDAZZI, "@Wait...@", 0x0000);
 		var000E = Func098D();
 		var0017 = [];
 		for (var000F in var000E with var001C to var001D) {
@@ -2413,49 +2413,49 @@ void Func00E6 shape#(0xE6) () {
 			var000F->run_schedule();
 		}
 		Func097F(var000F, "@Have fun...@", 0x0000);
-		var000E = script 0xFFEC after 10 ticks {
+		var000E = script FRIGIDAZZI after 10 ticks {
 			nohalt;
 			call Func00E6;
 		};
-		var000E = Func09A0(0x0005, 0x0003)->set_item_quality(0xFFEC->get_npc_id());
-		0xFFEC->set_npc_id(0x0001);
+		var000E = Func09A0(0x0005, 0x0003)->set_item_quality(FRIGIDAZZI->get_npc_id());
+		FRIGIDAZZI->set_npc_id(0x0001);
 		abort;
 	}
 	if (event == SI_PATH_FAILURE) {
-		if ((0xFFEC->get_npc_id() == 0x000D) && (item == 0xFFEC->get_npc_object())) {
-			var0009 = 0xFFEC->get_object_position();
+		if ((FRIGIDAZZI->get_npc_id() == 0x000D) && (item == FRIGIDAZZI->get_npc_object())) {
+			var0009 = FRIGIDAZZI->get_object_position();
 			UI_sprite_effect(ANIMATION_TELEPORT, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			0xFFEC->move_object([0x0975, 0x0747, 0x0000]);
+			FRIGIDAZZI->move_object([0x0975, 0x0747, 0x0000]);
 			event = SI_PATH_SUCCESS;
 		}
-		if ((0xFFEC->get_npc_id() == 0x000C) && (item == AVATAR->get_npc_object())) {
+		if ((FRIGIDAZZI->get_npc_id() == 0x000C) && (item == AVATAR->get_npc_object())) {
 			var0009 = AVATAR->get_object_position();
 			UI_sprite_effect(ANIMATION_TELEPORT, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			AVATAR->move_object([0x0975, 0x0749, 0x0000]);
 			event = SI_PATH_SUCCESS;
 		}
-		if ((0xFFEC->get_npc_id() == 0x0006) && (item == 0xFFEC->get_npc_object())) {
-			var0009 = 0xFFEC->get_object_position();
+		if ((FRIGIDAZZI->get_npc_id() == 0x0006) && (item == FRIGIDAZZI->get_npc_object())) {
+			var0009 = FRIGIDAZZI->get_object_position();
 			UI_sprite_effect(ANIMATION_TELEPORT, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			0xFFEC->move_object([0x097B, 0x0743, 0x0000]);
+			FRIGIDAZZI->move_object([0x097B, 0x0743, 0x0000]);
 			event = SI_PATH_SUCCESS;
 		}
-		if ((0xFFEC->get_npc_id() == 0x0004) && (item == AVATAR->get_npc_object())) {
+		if ((FRIGIDAZZI->get_npc_id() == 0x0004) && (item == AVATAR->get_npc_object())) {
 			var0009 = AVATAR->get_object_position();
 			UI_sprite_effect(ANIMATION_TELEPORT, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			AVATAR->move_object([0x0980, 0x0748, 0x0000]);
 			event = SI_PATH_SUCCESS;
 		}
-		if ((0xFFEC->get_npc_id() == 0x0001) && (item == 0xFFEC->get_npc_object())) {
-			var0009 = 0xFFEC->get_object_position();
+		if ((FRIGIDAZZI->get_npc_id() == 0x0001) && (item == FRIGIDAZZI->get_npc_object())) {
+			var0009 = FRIGIDAZZI->get_object_position();
 			UI_sprite_effect(ANIMATION_TELEPORT, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			0xFFEC->move_object([0x0980, 0x0746, 0x0000]);
+			FRIGIDAZZI->move_object([0x0980, 0x0746, 0x0000]);
 			event = SI_PATH_SUCCESS;
 		}
 	}
 	if (event == SI_PATH_SUCCESS) {
-		if ((0xFFEC->get_npc_id() == 0x000D) && (item == 0xFFEC->get_npc_object())) {
-			var000E = script 0xFFEC {
+		if ((FRIGIDAZZI->get_npc_id() == 0x000D) && (item == FRIGIDAZZI->get_npc_object())) {
+			var000E = script FRIGIDAZZI {
 				nohalt;
 				wait 6;
 				say "@Kiss me again!@";
@@ -2486,14 +2486,14 @@ void Func00E6 shape#(0xE6) () {
 			};
 			abort;
 		}
-		if ((0xFFEC->get_npc_id() == 0x000C) && (item == AVATAR->get_npc_object())) {
+		if ((FRIGIDAZZI->get_npc_id() == 0x000C) && (item == AVATAR->get_npc_object())) {
 			UI_init_conversation();
-			0xFFEC->show_npc_face0(0x0002);
-			0xFFEC->Func07D1();
+			FRIGIDAZZI->show_npc_face0(0x0002);
+			FRIGIDAZZI->Func07D1();
 			say("\"But wait! Thou hast forgotten this...\"");
 			UI_end_conversation();
-			var000E = 0xFFEC->set_to_attack(AVATAR, 0x0118);
-			var000E = script 0xFFEC after 4 ticks {
+			var000E = FRIGIDAZZI->set_to_attack(AVATAR, 0x0118);
+			var000E = script FRIGIDAZZI after 4 ticks {
 				nohalt;
 				actor frame cast_out;
 				actor frame strike_2h;
@@ -2510,13 +2510,13 @@ void Func00E6 shape#(0xE6) () {
 			};
 			abort;
 		}
-		if ((0xFFEC->get_npc_id() == 0x0006) && (item == 0xFFEC->get_npc_object())) {
-			0xFFEC->Func07D1();
-			var0020 = 0xFFEC->get_object_position();
-			0xFFEC->set_polymorph(0x00EF);
+		if ((FRIGIDAZZI->get_npc_id() == 0x0006) && (item == FRIGIDAZZI->get_npc_object())) {
+			FRIGIDAZZI->Func07D1();
+			var0020 = FRIGIDAZZI->get_object_position();
+			FRIGIDAZZI->set_polymorph(0x00EF);
 			UI_sprite_effect(ANIMATION_EST_NUDI, var0020[0x0001], var0020[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			UI_play_sound_effect(0x0053);
-			var000E = script 0xFFEC after 18 ticks {
+			var000E = script FRIGIDAZZI after 18 ticks {
 				nohalt;
 				call Func07D2;
 				actor frame cast_up;
@@ -2525,12 +2525,12 @@ void Func00E6 shape#(0xE6) () {
 			};
 			abort;
 		}
-		if ((0xFFEC->get_npc_id() == 0x0004) && (item == AVATAR->get_npc_object())) {
-			0xFFEC->Func07D1();
+		if ((FRIGIDAZZI->get_npc_id() == 0x0004) && (item == AVATAR->get_npc_object())) {
+			FRIGIDAZZI->Func07D1();
 			abort;
 		}
-		if ((0xFFEC->get_npc_id() == 0x0001) && (item == 0xFFEC->get_npc_object())) {
-			var000E = script 0xFFEC {
+		if ((FRIGIDAZZI->get_npc_id() == 0x0001) && (item == FRIGIDAZZI->get_npc_object())) {
+			var000E = script FRIGIDAZZI {
 				nohalt;
 				face east;
 				actor frame strike_1h;
@@ -2549,8 +2549,8 @@ void Func00E6 shape#(0xE6) () {
 				wait 2;
 				call Func00E6;
 			};
-			0xFFEC->set_npc_id(0x0002);
-			0xFFEC->Func07D1();
+			FRIGIDAZZI->set_npc_id(0x0002);
+			FRIGIDAZZI->Func07D1();
 			var000E = UI_create_new_object2(0x01FD, [0x0982, 0x0746, 0x0000]);
 			UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, 0x0982, 0x0746, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			UI_play_sound_effect(0x0039);
@@ -2559,7 +2559,7 @@ void Func00E6 shape#(0xE6) () {
 				var000E->set_schedule_type(GRAZE);
 				var000E->clear_item_flag(TEMPORARY);
 			}
-			0xFFEC->set_schedule_type(WAIT);
+			FRIGIDAZZI->set_schedule_type(WAIT);
 			abort;
 		}
 	}
@@ -7418,7 +7418,7 @@ void Func01C7 shape#(0x1C7) () {
 	var0006 = Func0953();
 	var0007 = UI_part_of_day();
 	var0008 = 0x0000;
-	if ((0xFFEC->get_npc_id() > 0x0006) && (0xFFEC->get_npc_id() != 0x0011)) {
+	if ((FRIGIDAZZI->get_npc_id() > 0x0006) && (FRIGIDAZZI->get_npc_id() != 0x0011)) {
 		var0008 = 0x0002;
 	}
 	if ((var0007 > EARLY) || (var0007 < EVENING)) {
@@ -7508,7 +7508,7 @@ void Func01C7 shape#(0x1C7) () {
 			var000A = ["@What's going on?@", "@Cannot stop...@", "@Where am I going?@"];
 			Func094F(AVATAR, var000A);
 			AVATAR->si_path_run_usecode([0x093C, 0x0740, 0x0000], SI_PATH_SUCCESS, AVATAR->get_npc_object(), Func01C7, false);
-			0xFFEC->set_npc_id(0x0000);
+			FRIGIDAZZI->set_npc_id(0x0000);
 			abort;
 		}
 		if (FILBERCIO->get_npc_id() == 0x000A) {
@@ -7533,7 +7533,7 @@ void Func01C7 shape#(0x1C7) () {
 			FILBERCIO->show_npc_face0(0x0000);
 			say("\"Enough of this jabbering. Let justice be done!\"");
 			UI_end_conversation();
-			var000A = script 0xFFEC {
+			var000A = script FRIGIDAZZI {
 				nohalt;
 				wait 5;
 				actor frame bowing;
@@ -7783,9 +7783,9 @@ void Func01C7 shape#(0x1C7) () {
 		if (FILBERCIO->get_npc_id() == 0x0004) {
 			FILBERCIO->set_npc_id(0x0005);
 			UI_init_conversation();
-			0xFFEC->show_npc_face0(0x0000);
+			FRIGIDAZZI->show_npc_face0(0x0000);
 			say("\"I beg of thee, MageLord Filbercio, to spare this person's life. It was all my fault.\"");
-			if ((0xFFEC->get_npc_id() > 0x000B) && (0xFFEC->get_npc_id() != 0x0011)) {
+			if ((FRIGIDAZZI->get_npc_id() > 0x000B) && (FRIGIDAZZI->get_npc_id() != 0x0011)) {
 				say("\"After all, no mortal can resist the Dance of Passion.\"");
 			}
 			var0016 = Func0956(["It's her fault", "It's my fault", "Nothing happened", "say nothing"]);
@@ -7804,7 +7804,7 @@ void Func01C7 shape#(0x1C7) () {
 			}
 			say("\"Please be seated, Frigidazzi. We shall now hear from the character witnesses.\"");
 			UI_end_conversation();
-			var000A = script 0xFFEC {
+			var000A = script FRIGIDAZZI {
 				nohalt;
 				actor frame bowing;
 				actor frame sitting;
@@ -7847,7 +7847,7 @@ void Func01C7 shape#(0x1C7) () {
 				wait 4;
 				face east;
 			};
-			var000A = script 0xFFEC {
+			var000A = script FRIGIDAZZI {
 				wait 2;
 				actor frame bowing;
 				actor frame standing;
@@ -7943,8 +7943,8 @@ void Func01C7 shape#(0x1C7) () {
 				wait 10;
 				say "@Let us finish this matter...@";
 			};
-			0xFFEC->move_object([0x0938, 0x0751, 0x0000]);
-			var000A = script 0xFFEC after 12 ticks {
+			FRIGIDAZZI->move_object([0x0938, 0x0751, 0x0000]);
+			var000A = script FRIGIDAZZI after 12 ticks {
 				nohalt;
 				face west;
 				actor frame bowing;
@@ -7970,7 +7970,7 @@ void Func01C7 shape#(0x1C7) () {
 				wait 8;
 				say (("@" + var0004) + "'s guilty!@");
 			};
-			0xFFEC->set_polymorph(0x028C);
+			FRIGIDAZZI->set_polymorph(0x028C);
 			AVATAR->set_polymorph(0x02D1);
 			abort;
 		}
@@ -7983,10 +7983,10 @@ void Func01C7 shape#(0x1C7) () {
 			UI_init_conversation();
 			FILBERCIO->show_npc_face0(0x0000);
 			say("\"What!? Frigidazzi, why is this stranger in thy chambers?!\"");
-			if ((0xFFEC->get_npc_id() > 0x0006) && (0xFFEC->get_npc_id() != 0x0011)) {
+			if ((FRIGIDAZZI->get_npc_id() > 0x0006) && (FRIGIDAZZI->get_npc_id() != 0x0011)) {
 				say("\"And where are thy clothes?\"");
 			}
-			0xFFEC->show_npc_face1(var0008);
+			FRIGIDAZZI->show_npc_face1(var0008);
 			say("\"Darling! This is such a surprise... I have an explanation for everything...\"");
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
@@ -7997,24 +7997,24 @@ void Func01C7 shape#(0x1C7) () {
 			var0016 = Func0956(["I'm guilty", "I'm innocent", "I'm leaving"]);
 			if (var0016 == "I'm guilty") {
 				say("\"I knew it!\"");
-				0xFFEC->show_npc_face1(var0008);
+				FRIGIDAZZI->show_npc_face1(var0008);
 				say("\"Oh, ",
 					var0006,
 					"! Thou shouldst not have said such a thing -- the wrath of the MageLord is legendary!\"");
 				UI_remove_npc_face1();
 				0x0000->set_conversation_slot();
 			} else if (var0016 == "I'm innocent") {
-				if (0xFFEC->get_npc_id() == 0x000C) {
+				if (FRIGIDAZZI->get_npc_id() == 0x000C) {
 					say("\"Idiot! Dost thou not think that I recognize the after-effects of the Dance of Passion?!\"");
-					0xFFEC->show_npc_face1(var0008);
+					FRIGIDAZZI->show_npc_face1(var0008);
 					say("\"Oh, no...\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
-				} else if ((0xFFEC->get_npc_id() > 0x000C) && (0xFFEC->get_npc_id() != 0x0011)) {
+				} else if ((FRIGIDAZZI->get_npc_id() > 0x000C) && (FRIGIDAZZI->get_npc_id() != 0x0011)) {
 					say("\"Thou dost stand there without clothes, and claim to be innocent? Ha!\"");
 				} else {
 					say("\"A likely story! Listen here, swine -- thou art not the first to try to steal my favorite mistress...\"");
-					0xFFEC->show_npc_face1(var0008);
+					FRIGIDAZZI->show_npc_face1(var0008);
 					say("\"No! Do not do to ",
 						var0003,
 						" what thou didst to the others...\"");
@@ -8023,7 +8023,7 @@ void Func01C7 shape#(0x1C7) () {
 				}
 			} else {
 				say("\"Not so fast, peasant! I have a special punishment reserved for those who dare to play games with my mistresses...\"");
-				0xFFEC->show_npc_face1(var0008);
+				FRIGIDAZZI->show_npc_face1(var0008);
 				say("\"No! Do not, Filbercio! Spare this one from thy wrath! Do not send ",
 					var0003,
 					" into the Pit...\"");
@@ -8033,7 +8033,7 @@ void Func01C7 shape#(0x1C7) () {
 			say("\"I demand that this criminal be punished by the Council of Mages. Let the quorum of Mages be convened instantly!\"");
 			UI_play_sound_effect(0x0082);
 			UI_end_conversation();
-			var0017 = [AVATAR, 0xFFEC, FILBERCIO] & Func098D();
+			var0017 = [AVATAR, FRIGIDAZZI, FILBERCIO] & Func098D();
 			var0017 = Func0988(0xFFE4, var0017);
 			var0017 = Func0988(0xFFE6, var0017);
 			var0017 = Func0988(0xFF58, var0017);
@@ -8047,9 +8047,9 @@ void Func01C7 shape#(0x1C7) () {
 			Func097F(FILBERCIO, "@Vas Ibex Ort!@", 0x0000);
 			FILBERCIO->set_schedule_type(WAIT);
 			Func097F(AVATAR, "@Hey!@", 0x0009);
-			Func097F(0xFFEC, (("@Do not hurt " + var0003) + "!@"), 0x000B);
-			if (0xFFEC->get_npc_id() == 0x0010) {
-				var000A = script 0xFFEC {
+			Func097F(FRIGIDAZZI, (("@Do not hurt " + var0003) + "!@"), 0x000B);
+			if (FRIGIDAZZI->get_npc_id() == 0x0010) {
+				var000A = script FRIGIDAZZI {
 					nohalt;
 					actor frame bowing;
 					actor frame standing;
@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, 0xFFD2, 0xFFD1, 0xFFD0, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, 0xFFDE, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, 0xFFDF, 0xFFE6, 0xFFEC, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, 0xFFE8, 0xFFEA, 0xFFE5, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, 0xFFD2, 0xFFD1, 0xFFD0, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, 0xFFDE, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, 0xFFDF, 0xFFE6, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, 0xFFE8, 0xFFEA, 0xFFE5, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -15817,7 +15817,7 @@ void Func032E shape#(0x32E) () {
 	var0006 = Func0953();
 	var0007 = UI_part_of_day();
 	var0008 = 0x0000;
-	if (0xFFEC->get_npc_id() > 0x0001) {
+	if (FRIGIDAZZI->get_npc_id() > 0x0001) {
 		var0008 = 0x0002;
 	}
 	if ((var0007 > EARLY) || (var0007 < EVENING)) {
@@ -15878,7 +15878,7 @@ void Func032E shape#(0x32E) () {
 			0xFFE1->run_schedule();
 			0xFFE1->move_object([0x086D, 0x0837, 0x0000]);
 			0xFFE1->set_item_flag(SI_TOURNAMENT);
-			Func097F(0xFFEC, "@Goodbye, witch...@", 0x0004);
+			Func097F(FRIGIDAZZI, "@Goodbye, witch...@", 0x0004);
 			var0009 = script 0xFFEA {
 				nohalt;
 				face south;
@@ -16016,7 +16016,7 @@ void Func032E shape#(0x32E) () {
 			};
 			Func097F(SERV_06, "@Help!@", 0x0000);
 			SERV_06->si_path_run_usecode([0x0916, 0x0742, 0x0000], EGG, item, Func032E, false);
-			Func097F(0xFFEC, "@How rude...@", 0x0006);
+			Func097F(FRIGIDAZZI, "@How rude...@", 0x0006);
 			Func097F(SHAMINO, "@Stop that!@", 0x0002);
 			Func097F(DUPRE, "@No!@", 0x000A);
 			abort;
@@ -16026,7 +16026,7 @@ void Func032E shape#(0x32E) () {
 			UI_init_conversation();
 			FILBERCIO->show_npc_face0(0x0000);
 			say("\"Good Mages, this is the adventurer from a distant land whose arrival was foretold in our conjurings!\"");
-			0xFFEC->show_npc_face1(0x0000);
+			FRIGIDAZZI->show_npc_face1(0x0000);
 			say("\"Could ",
 				var0004,
 				" be responsible for the storms which plague the land? Or for the growing strangenesses which afflict our spellcasting?\"");
@@ -16066,10 +16066,10 @@ void Func032E shape#(0x32E) () {
 		if (FILBERCIO->get_npc_id() == 0x0003) {
 			FILBERCIO->set_npc_id(0x0004);
 			UI_init_conversation();
-			0xFFEC->show_npc_face0(0x0000);
+			FRIGIDAZZI->show_npc_face0(0x0000);
 			say("\"Welcome to thee. These cursed teleportation storms have made travel so difficult that we are becoming isolated! It hath disturbed everyone, but it is good to see a new face.\"");
 			UI_end_conversation();
-			var0009 = script 0xFFEC {
+			var0009 = script FRIGIDAZZI {
 				face north;
 				actor frame bowing;
 				actor frame sitting;
@@ -16088,7 +16088,7 @@ void Func032E shape#(0x32E) () {
 			FILBERCIO->show_npc_face1(0x0000);
 			say("\"Ahem--! Also present, as my dinner companion, is the most charming Frigidazzi. She, too, is a Mage.\"");
 			UI_end_conversation();
-			Func09AF(0xFFE1, 0xFFEC, 0x0004, Func032E);
+			Func09AF(0xFFE1, FRIGIDAZZI, 0x0004, Func032E);
 			abort;
 		}
 		if (FILBERCIO->get_npc_id() == 0x0001) {
@@ -16141,7 +16141,7 @@ void Func032E shape#(0x32E) () {
 		say("\"Dear guests, I am afraid that I shall have to adjourn this pleasant repast.\"");
 		say("\"Pothos and I must speak privately concerning important matters of state. I thank thee all for coming!\"");
 		gflags[0x00D9] = true;
-		var0019 = [FILBERCIO, 0xFFEC, 0xFFEA, 0xFFE3];
+		var0019 = [FILBERCIO, FRIGIDAZZI, 0xFFEA, 0xFFE3];
 		for (var000B in var0019 with var001A to var001B) {
 			var000B->revert_schedule();
 		}
@@ -25038,9 +25038,9 @@ void Func0411 object#(0x411) () {
 							var000E = [0x0975, 0x0748];
 							var000F = [0x0968, 0x0767];
 							var0010 = [0x096F, 0x075E];
-							0xFFEC->set_new_schedules([MIDNIGHT, MORNING, NOON], [SLEEP, EAT_AT_INN, LAB], [var000E, var000F, var0010]);
-							0xFFEC->move_object([0x0978, 0x0764, 0x0000]);
-							0xFFEC->run_schedule();
+							FRIGIDAZZI->set_new_schedules([MIDNIGHT, MORNING, NOON], [SLEEP, EAT_AT_INN, LAB], [var000E, var000F, var0010]);
+							FRIGIDAZZI->move_object([0x0978, 0x0764, 0x0000]);
+							FRIGIDAZZI->run_schedule();
 							var000E = [0x0988, 0x0742];
 							var000F = [0x0969, 0x0768];
 							var0010 = [0x0961, 0x0764];
@@ -25113,7 +25113,7 @@ void Func0412 object#(0x412) () {
 	var0006 = Func0953();
 	var0007 = UI_part_of_day();
 	var0008 = 0x0000;
-	if (0xFFEC->get_npc_id() > 0x0001) {
+	if (FRIGIDAZZI->get_npc_id() > 0x0001) {
 		var0008 = 0x0002;
 	}
 	if ((var0007 > EARLY) || (var0007 < EVENING)) {
@@ -25613,7 +25613,7 @@ void Func0414 object#(0x414) () {
 	var var000D;
 	var var000E;
 
-	var0000 = 0xFFEC->get_item_flag(MET);
+	var0000 = FRIGIDAZZI->get_item_flag(MET);
 	var0001 = Func0954();
 	var0002 = UI_is_pc_female();
 	var0003 = Func0953();
@@ -25627,9 +25627,9 @@ void Func0414 object#(0x414) () {
 	if (var0002) {
 		var0005 = "her";
 	}
-	var0006 = 0xFFEC->get_distance(AVATAR);
+	var0006 = FRIGIDAZZI->get_distance(AVATAR);
 	var0007 = [0x0975, 0x0748, 0x0000];
-	var0008 = 0xFFEC->get_object_position();
+	var0008 = FRIGIDAZZI->get_object_position();
 	var0009 = [0x0986, 0x0766];
 	var000A = Func09A0(0x0005, 0x0003);
 	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
@@ -25638,37 +25638,37 @@ void Func0414 object#(0x414) () {
 			call Func0329;
 		};
 	}
-	if ((event == DOUBLECLICK) && (0xFFEC->get_schedule_type() != WAIT)) {
-		if (0xFFEC->get_npc_id() != 0x0000) {
-			0xFFEC->set_npc_id(0x0000);
+	if ((event == DOUBLECLICK) && (FRIGIDAZZI->get_schedule_type() != WAIT)) {
+		if (FRIGIDAZZI->get_npc_id() != 0x0000) {
+			FRIGIDAZZI->set_npc_id(0x0000);
 		}
-		var0008 = 0xFFEC->get_object_position();
+		var0008 = FRIGIDAZZI->get_object_position();
 		if (gflags[0x0125] && ((var0008[0x0001] > 0x0587) && ((var0008[0x0001] < 0x098A) && ((var0008[0x0002] > 0x0740) && (var0008[0x0002] < 0x0750))))) {
-			0xFFEC->Func07D2();
-			0xFFEC->Func07D1();
-			0xFFEC->set_schedule_type(WAIT);
-			Func097F(0xFFEC, "@Oh, 'tis thee!@", 0x0002);
-			var000B = script 0xFFEC after 5 ticks {
+			FRIGIDAZZI->Func07D2();
+			FRIGIDAZZI->Func07D1();
+			FRIGIDAZZI->set_schedule_type(WAIT);
+			Func097F(FRIGIDAZZI, "@Oh, 'tis thee!@", 0x0002);
+			var000B = script FRIGIDAZZI after 5 ticks {
 				nohalt;
 				call Func00E6;
 			};
 		} else {
 			AVATAR->item_say("Pardon me...");
-			0xFFEC->Func07D1();
+			FRIGIDAZZI->Func07D1();
 			if (var0002) {
-				Func097F(0xFFEC, "@Yes, love?@", 0x0002);
+				Func097F(FRIGIDAZZI, "@Yes, love?@", 0x0002);
 			} else {
-				Func097F(0xFFEC, "@Yes, handsome?@", 0x0002);
+				Func097F(FRIGIDAZZI, "@Yes, handsome?@", 0x0002);
 			}
-			0xFFEC->set_schedule_type(TALK);
+			FRIGIDAZZI->set_schedule_type(TALK);
 		}
 	}
 	if (event == STARTED_TALKING) {
-		0xFFEC->run_schedule();
-		0xFFEC->clear_item_say();
-		0xFFEC->show_npc_face0(0x0000);
+		FRIGIDAZZI->run_schedule();
+		FRIGIDAZZI->clear_item_say();
+		FRIGIDAZZI->show_npc_face0(0x0000);
 		if (var0000 == false) {
-			0xFFEC->set_item_flag(MET);
+			FRIGIDAZZI->set_item_flag(MET);
 			say("\"Yes, we met at the MageLord's banquet. I am Frigidazzi, of course.\"");
 		} else {
 			say("\"Back so soon? But of course.\"");
@@ -25748,7 +25748,7 @@ void Func0414 object#(0x414) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@So long!@", 0x0000);
-				Func097F(0xFFEC, "@Until next time!@", 0x0002);
+				Func097F(FRIGIDAZZI, "@Until next time!@", 0x0002);
 				Func08FF();
 				break;
 		}
@@ -78775,7 +78775,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(0xFFE3, 0x0958, 0x0793, WAIT);
 		Func09AC(0xFFE5, 0x0948, 0x0784, WAIT);
 		Func09AC(FILBERCIO, 0x0972, 0x0744, WAIT);
-		Func09AC(0xFFEC, 0x0977, 0x0743, WAIT);
+		Func09AC(FRIGIDAZZI, 0x0977, 0x0743, WAIT);
 		Func09AC(0xFFD6, 0x0994, 0x0754, WAIT);
 		Func09AC(0xFFD5, 0x0902, 0x0746, WAIT);
 		Func09AC(0xFFEB, 0x08B6, 0x0736, WAIT);
@@ -79007,11 +79007,11 @@ void Func07DC object#(0x7DC) () {
 			var0009 += 0x0001;
 		}
 		FILBERCIO->move_object([0x090A, 0x0717, 0x0000]);
-		0xFFEC->move_object([0x090C, 0x071A, 0x0000]);
+		FRIGIDAZZI->move_object([0x090C, 0x071A, 0x0000]);
 		0xFFE1->move_object([0x090C, 0x0714, 0x0000]);
 		0xFFEA->move_object([0x090F, 0x0714, 0x0000]);
 		0xFFE3->move_object([0x0916, 0x072E, 0x0000]);
-		var0004 = [FILBERCIO, 0xFFEC, 0xFFE1, 0xFFEA, 0xFFE3];
+		var0004 = [FILBERCIO, FRIGIDAZZI, 0xFFE1, 0xFFEA, 0xFFE3];
 		var0007 = [0x0002, 0x0000, 0x0004, 0x0004, 0x0000];
 		var0009 = 0x0001;
 		for (var0003 in var0004 with var000D to var000E) {
@@ -106376,7 +106376,7 @@ void Func0901 0x901 () {
 	}
 	UI_init_conversation();
 	FILBERCIO->remove_npc();
-	0xFFEC->remove_npc();
+	FRIGIDAZZI->remove_npc();
 	BUCIA->revert_schedule();
 	BUCIA->set_schedule_type(MAJOR_SIT);
 	0xFFEA->revert_schedule();

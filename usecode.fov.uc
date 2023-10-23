@@ -13946,9 +13946,9 @@ void Func0414 object#(0x414) () {
 	var var0001;
 
 	if (event == DOUBLECLICK) {
-		0xFFEC->show_npc_face(0x0000);
+		MARKUS->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
-		var0001 = 0xFFEC->get_npc_object()->get_schedule_type();
+		var0001 = MARKUS->get_npc_object()->get_schedule_type();
 		add(["name", "job", "murder", "bye"]);
 		if (!gflags[0x0054]) {
 			say("You see a solid-looking but seemingly bored fighter.");
@@ -13997,7 +13997,7 @@ void Func0414 object#(0x414) () {
 		say("\"Goodbye,\" the fighter bows.*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFEC);
+		Func092E(MARKUS);
 	}
 }
 
