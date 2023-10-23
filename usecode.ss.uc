@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, GUSTACIO, MELINO, JULIA, ROCCO, 0xFFE0, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, 0xFFD6, 0xFFD5, GOBLIN_MESSENGER, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, 0xFFD6, 0xFFD5, GOBLIN_MESSENGER, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -29467,18 +29467,18 @@ void Func0420 object#(0x420) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Pardon me...@");
-		0xFFE0->Func07D1();
-		Func097F(0xFFE0, (("@Yes " + var0000) + "?@"), 0x0002);
-		0xFFE0->set_schedule_type(TALK);
+		TOPO->Func07D1();
+		Func097F(TOPO, (("@Yes " + var0000) + "?@"), 0x0002);
+		TOPO->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFE0->run_schedule();
-		0xFFE0->clear_item_say();
-		0xFFE0->show_npc_face0(0x0000);
-		var0005 = 0xFFE0->get_item_flag(MET);
+		TOPO->run_schedule();
+		TOPO->clear_item_say();
+		TOPO->show_npc_face0(0x0000);
+		var0005 = TOPO->get_item_flag(MET);
 		if (var0005 == false) {
 			say("\"Allow me to introduce myself. I'm Topo the Artisan, apprenticed to Master Ducio.\"");
-			0xFFE0->set_item_flag(MET);
+			TOPO->set_item_flag(MET);
 			if (Func0942(DUCIO)) {
 				say("\"I'm a lucky man, to serve such a talented craftsman.\"");
 				Func094E(DUCIO, "@He's a good boy.@");
@@ -29510,7 +29510,7 @@ void Func0420 object#(0x420) () {
 		if (gflags[0x0116] && (!gflags[0x0296])) {
 			add("strange brush");
 		}
-		if (0xFFE0->get_schedule_type() == WANDER) {
+		if (TOPO->get_schedule_type() == WANDER) {
 			add("buy");
 		}
 		if (gflags[0x00EA] && (!ROTOLUNCIA->get_item_flag(DEAD))) {
@@ -29783,7 +29783,7 @@ void Func0420 object#(0x420) () {
 				fallthrough;
 
 			case "buy":
-				if (0xFFE0->get_schedule_type() == WANDER) {
+				if (TOPO->get_schedule_type() == WANDER) {
 					Func086F();
 				} else {
 					say("\"If thou wouldst talk to me when I am at work, I would gladly sell thee something.\"");
@@ -29791,7 +29791,7 @@ void Func0420 object#(0x420) () {
 				fallthrough;
 
 			case "sell gems":
-				if (0xFFE0->get_schedule_type() == WANDER) {
+				if (TOPO->get_schedule_type() == WANDER) {
 					Func086E();
 				} else {
 					say("\"I can buy thy gems when I am at work, ",
@@ -29804,7 +29804,7 @@ void Func0420 object#(0x420) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@So long!@", 0x0000);
-				Func097F(0xFFE0, "@Come again!@", 0x0002);
+				Func097F(TOPO, "@Come again!@", 0x0002);
 				Func08FF();
 				break;
 		}
@@ -78771,7 +78771,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(MELINO, 0x09B7, 0x07E5, WAIT);
 		Func09AC(JULIA, 0x096B, 0x07C2, WAIT);
 		Func09AC(ROCCO, 0x098B, 0x07A6, WAIT);
-		Func09AC(0xFFE0, 0x0999, 0x07A2, WAIT);
+		Func09AC(TOPO, 0x0999, 0x07A2, WAIT);
 		Func09AC(POTHOS, 0x0958, 0x0793, WAIT);
 		Func09AC(MOSH, 0x0948, 0x0784, WAIT);
 		Func09AC(FILBERCIO, 0x0972, 0x0744, WAIT);
@@ -99067,15 +99067,15 @@ void Func086F 0x86F () {
 		} else if (var000F == 0x0003) {
 			var0014 = Func0992(0x0001, (("@But " + var0000) + ", we do not have the guilders to purchase this.@"), 0x0000, false);
 			if (var0014 != AVATAR) {
-				0xFFE0->show_npc_face0(0x0000);
+				TOPO->show_npc_face0(0x0000);
 				say("\"Please leave if thou canst not pay.\"");
 			} else {
 				say("\"Thou dost not have enough guilders to purchase this...\"");
 			}
-			if (0x001F < (0xFFE0->get_npc_id() + 0x0006)) {
-				0xFFE0->set_npc_id(0x001F);
+			if (0x001F < (TOPO->get_npc_id() + 0x0006)) {
+				TOPO->set_npc_id(0x001F);
 			} else {
-				0xFFE0->set_npc_id(0xFFE0->get_npc_id() + 0x0006);
+				TOPO->set_npc_id(TOPO->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Dost thou care for something else?\"");
@@ -99116,12 +99116,12 @@ var Func0870 0x870 (var var0000, var var0001) {
 	}
 	var0005 = var0000;
 	var0006 = (var0001 / 0x0003) * 0x0002;
-	var0007 = 0x000F - (0xFFE0->get_npc_id() / 0x0002);
+	var0007 = 0x000F - (TOPO->get_npc_id() / 0x0002);
 	var0008 = 0x0000;
 	var0009 = 0x0001;
 	var000A = 0x0000;
 	var000B = 0x0002;
-	var000C = 0xFFE0->get_npc_id();
+	var000C = TOPO->get_npc_id();
 	while (var0009) {
 		var000D = Func0956(["yes", "no", "haggle"]);
 		if (var000D == "no") {
@@ -99212,7 +99212,7 @@ var Func0870 0x870 (var var0000, var var0001) {
 				"?\"");
 			if (Func0955()) {
 				if (var000C > 0x0001) {
-					0xFFE0->set_npc_id(var000C - 0x0002);
+					TOPO->set_npc_id(var000C - 0x0002);
 				}
 				return var0005;
 			}
@@ -99229,9 +99229,9 @@ var Func0870 0x870 (var var0000, var var0001) {
 				abort;
 			}
 			if (0x001F < (var000C + 0x000A)) {
-				0xFFE0->set_npc_id(0x001F);
+				TOPO->set_npc_id(0x001F);
 			} else {
-				0xFFE0->set_npc_id(var000C + 0x000A);
+				TOPO->set_npc_id(var000C + 0x000A);
 			}
 			return 0x0000;
 		}
@@ -99241,7 +99241,7 @@ var Func0870 0x870 (var var0000, var var0001) {
 					var0005,
 					" was my final offer. Dost thou accept?\"");
 				if (var000C < 0x001C) {
-					0xFFE0->set_npc_id(var000C + 0x0004);
+					TOPO->set_npc_id(var000C + 0x0004);
 				}
 				if (Func0955()) {
 					return var0005;
@@ -99252,7 +99252,7 @@ var Func0870 0x870 (var var0000, var var0001) {
 					var0005,
 					" guilders is my final offer.\"");
 				if (var000C < 0x001E) {
-					0xFFE0->set_npc_id(var000C + 0x0002);
+					TOPO->set_npc_id(var000C + 0x0002);
 				}
 			}
 		} else {
@@ -99333,7 +99333,7 @@ var Func0870 0x870 (var var0000, var var0001) {
 						" guilders is as low as I will go!\"");
 				}
 				if (var000C < 0x001F) {
-					0xFFE0->set_npc_id(var000C + 0x0001);
+					TOPO->set_npc_id(var000C + 0x0001);
 				}
 			}
 		}
@@ -106252,7 +106252,7 @@ void Func08FF 0x8FF () {
 	if (gflags[0x00D7]) {
 		abort;
 	}
-	var0000 = ((((((((((((((GUSTACIO->get_item_flag(MET) + MORTEGRO->get_item_flag(MET)) + FEDABIBLIO->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + COLUMNA->get_item_flag(MET)) + MELINO->get_item_flag(MET)) + DUCIO->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + JULIA->get_item_flag(MET)) + ROCCO->get_item_flag(MET)) + PETRA->get_item_flag(MET)) + BUCIA->get_item_flag(MET)) + MOSH->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + FRELI->get_item_flag(MET)) + gflags[0x00D6];
+	var0000 = ((((((((((((((GUSTACIO->get_item_flag(MET) + MORTEGRO->get_item_flag(MET)) + FEDABIBLIO->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + COLUMNA->get_item_flag(MET)) + MELINO->get_item_flag(MET)) + DUCIO->get_item_flag(MET)) + TOPO->get_item_flag(MET)) + JULIA->get_item_flag(MET)) + ROCCO->get_item_flag(MET)) + PETRA->get_item_flag(MET)) + BUCIA->get_item_flag(MET)) + MOSH->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + FRELI->get_item_flag(MET)) + gflags[0x00D6];
 	if ((var0000 >= 0x0003) && (!gflags[0x00D7])) {
 		var0001 = AUTO_MESSENGER->approach_avatar(0x005A, 0x0028);
 		if (var0001) {

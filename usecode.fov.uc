@@ -16040,7 +16040,7 @@ void Func0420 object#(0x420) () {
 	var var0003;
 
 	if (event == DOUBLECLICK) {
-		0xFFE0->show_npc_face(0x0000);
+		MAX->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x00A1]) {
 			say("This toddler is full of energy and is playing hard when he sees you. He stops what he is doing.");
@@ -16055,13 +16055,13 @@ void Func0420 object#(0x420) () {
 				if (var0000) {
 					0xFFDE->say("\"He says his name is Max.\"");
 					0xFFDE->hide();
-					0xFFE0->show_npc_face(0x0000);
+					MAX->show_npc_face(0x0000);
 				}
 				remove("name");
 				fallthrough;
 
 			case "job":
-				var0001 = 0xFFE0->get_schedule_type();
+				var0001 = MAX->get_schedule_type();
 				if (var0001 == KID_GAMES) {
 					say("\"Playing tag!\"");
 					say("The boy runs away from you to catch another child.*");
@@ -16093,7 +16093,7 @@ void Func0420 object#(0x420) () {
 		say("\"Bye bye!\"*");
 	}
 	if (event == PROXIMITY) {
-		var0001 = 0xFFE0->get_npc_object()->get_schedule_type();
+		var0001 = MAX->get_npc_object()->get_schedule_type();
 		if (var0001 == KID_GAMES) {
 			var0002 = UI_die_roll(0x0001, 0x0004);
 			if (var0002 == 0x0001) {
@@ -16108,7 +16108,7 @@ void Func0420 object#(0x420) () {
 			if (var0002 == 0x0004) {
 				var0003 = "@Catch me if thou can!@";
 			}
-			0xFFE0->item_say(var0003);
+			MAX->item_say(var0003);
 		}
 	}
 }
@@ -16296,7 +16296,7 @@ void Func0422 object#(0x422) () {
 
 			case "children":
 				say("\"They are lovely, are they not? Every day they seem to learn more and more. Most of the time they are a joy.\" Nanna whispers to you conspiratorially, \"And other times I could happily throw them out with the bathwater!\"");
-				var0006 = 0xFFE0->get_npc_object()->get_schedule_type();
+				var0006 = MAX->get_npc_object()->get_schedule_type();
 				if (var0006 == KID_GAMES) {
 					say("\"The children must be outside playing with Sherry now.\"");
 					add("Sherry");
@@ -21393,11 +21393,11 @@ void Func0446 object#(0x446) () {
 				if ((var0001 == DAWN) || ((var0001 == MORNING) || ((var0001 == NOON) || (var0001 == AFTERNOON)))) {
 					say("\"He is probably in the Royal Nursery.");
 				} else {
-					var0002 = Func08F7(0xFFE0);
+					var0002 = Func08F7(MAX);
 					if (var0002) {
 						say("\"He's right here! Say hello to the Avatar, Max.\"*");
-						0xFFE0->say("\"Hi. I'm a funny boy!\"*");
-						0xFFE0->hide();
+						MAX->say("\"Hi. I'm a funny boy!\"*");
+						MAX->hide();
 						0xFFBA->say("\"He's quite precocious.");
 					} else {
 						say("\"I wonder where he could be...");
