@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, 0xFFD2, 0xFFD1, 0xFFD0, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, 0xFFDE, 0xFF64, 0xFFBB, 0xFFB3, 0xFFEE, 0xFFDF, 0xFFE6, 0xFFEC, 0xFFEF, ANDRIO, 0xFFED, COLUMNA, 0xFFE8, 0xFFEA, 0xFFE5, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, 0xFFD2, 0xFFD1, 0xFFD0, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, 0xFFDE, 0xFF64, 0xFFBB, 0xFFB3, 0xFFEE, 0xFFDF, 0xFFE6, 0xFFEC, FEDABIBLIO, ANDRIO, 0xFFED, COLUMNA, 0xFFE8, 0xFFEA, 0xFFE5, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -20552,12 +20552,12 @@ void Func03E6 shape#(0x3E6) () {
 		UI_play_music(0x002C, Func09A0(0x0005, 0x0001));
 		var0000 = get_object_position();
 		remove_item();
-		0xFFEF->move_object(var0000);
-		0xFFEF->set_new_schedules([MIDNIGHT, DAWN, NOON, AFTERNOON, EVENING], [SLEEP, LAB, LAB, EAT_AT_INN, LAB], [0x0939, 0x081A, 0x0950, 0x0823, 0x09A7, 0x07E5, 0x0943, 0x0835, 0x0950, 0x0823]);
+		FEDABIBLIO->move_object(var0000);
+		FEDABIBLIO->set_new_schedules([MIDNIGHT, DAWN, NOON, AFTERNOON, EVENING], [SLEEP, LAB, LAB, EAT_AT_INN, LAB], [0x0939, 0x081A, 0x0950, 0x0823, 0x09A7, 0x07E5, 0x0943, 0x0835, 0x0950, 0x0823]);
 		0xFF3F->set_new_schedules([MIDNIGHT, MORNING, AFTERNOON, EVENING], [PACE_HORIZONTAL, PACE_VERTICAL, WAITER, PACE_VERTICAL], [0x094F, 0x082D, 0x0970, 0x0813, 0x0943, 0x0834, 0x0961, 0x0812]);
 		0xFF3F->run_schedule();
-		0xFFEF->set_schedule_type(TALK);
-		Func097F(0xFFEF, "@Much better...@", 0x0000);
+		FEDABIBLIO->set_schedule_type(TALK);
+		Func097F(FEDABIBLIO, "@Much better...@", 0x0000);
 		gflags[0x00F1] = true;
 	}
 }
@@ -22552,7 +22552,7 @@ void Func0404 object#(0x404) () {
 				fallthrough;
 
 			case "Fedabiblio" (remove):
-				var0007 = 0xFFEF->get_schedule_type();
+				var0007 = FEDABIBLIO->get_schedule_type();
 				if (var0007 == WAIT) {
 					say("\"Fedabiblio fought a terrific battle, but when the Glowing Man was done with him, he had been turned into a statue. It remains beyond mine abilities to restore him.\"");
 					add("restore");
@@ -22679,7 +22679,7 @@ void Func0404 object#(0x404) () {
 
 			case "Torrissio" (remove):
 				if (gflags[0x0004]) {
-					var0007 = 0xFFEF->get_schedule_type();
+					var0007 = FEDABIBLIO->get_schedule_type();
 					if (var0007 == WAIT) {
 						say("\"I know not if the wand is in Torrissio's possession, but perhap thou wilt be able to\tconvince him to help thee. Be wary of him, however! He hath a reputation for being very tricky!\"");
 					} else {
@@ -24631,30 +24631,30 @@ void Func0411 object#(0x411) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say(("@Good " + var0003) + "!@");
-		Func097F(0xFFEF, "@Hush...@", 0x0002);
-		0xFFEF->set_schedule_type(TALK);
+		Func097F(FEDABIBLIO, "@Hush...@", 0x0002);
+		FEDABIBLIO->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFEF->run_schedule();
-		0xFFEF->clear_item_say();
-		0xFFEF->show_npc_face0(0x0000);
-		var0005 = 0xFFEF->get_item_flag(MET);
+		FEDABIBLIO->run_schedule();
+		FEDABIBLIO->clear_item_say();
+		FEDABIBLIO->show_npc_face0(0x0000);
+		var0005 = FEDABIBLIO->get_item_flag(MET);
 		if (gflags[0x00F0] && (!gflags[0x0128])) {
 			say("\"I cannot give thee what thou dost desire until thou hast gazed into my crystal ball, ",
 				var0000,
 				". Come back when thou hast done so.\"");
-			Func097F(0xFFEF, "@The crystal ball!@", 0x0000);
+			Func097F(FEDABIBLIO, "@The crystal ball!@", 0x0000);
 			abort;
 		}
 		if (gflags[0x00F0] && (gflags[0x0128] && (!gflags[0x011D]))) {
 			if (gflags[0x00F2]) {
 				say("\"Did I not tell thee to speak with Gustacio?\"");
-				Func097F(0xFFEF, "@Tell him the news.@", 0x0000);
+				Func097F(FEDABIBLIO, "@Tell him the news.@", 0x0000);
 				abort;
 			}
 			say("\"At last, all is made clear! Tell good Gustacio that Edrin the missing brother is actually Ale the Bird! He will know what to do from there...\"");
 			gflags[0x00F2] = true;
-			Func097F(0xFFEF, "@Speak to Gustacio...@", 0x0000);
+			Func097F(FEDABIBLIO, "@Speak to Gustacio...@", 0x0000);
 			abort;
 		}
 		if (gflags[0x0004]) {
@@ -24671,7 +24671,7 @@ void Func0411 object#(0x411) () {
 			}
 		} else {
 			if (var0005 == false) {
-				0xFFEF->set_item_flag(MET);
+				FEDABIBLIO->set_item_flag(MET);
 				say("\"Thou must be a seeker after knowledge. I am the Mage Fedabiblio, and I serve as the Magister of Moonshade.\"");
 			} else {
 				say("\"Thou hast a voracious appetite for knowledge. What dost thou desire to learn?\"");
@@ -24862,7 +24862,7 @@ void Func0411 object#(0x411) () {
 
 			case "people" (remove):
 				say("\"Thou hast mistaken me for a common gossip.\"");
-				Func097F(0xFFEF, "@Be gone with thee!@", 0x0000);
+				Func097F(FEDABIBLIO, "@Be gone with thee!@", 0x0000);
 				abort;
 
 			case "places" (remove):
@@ -24996,7 +24996,7 @@ void Func0411 object#(0x411) () {
 				say("\"Hmmm... I think that thou shouldst consult my crystal ball. Perhaps it can provide a clue into the matter of the missing brother.\"");
 				say("\"Once thou hast looked, come back and I shall divine what thou hast seen.\"");
 				gflags[0x00F0] = true;
-				Func097F(0xFFEF, "@The crystal ball!@", 0x0000);
+				Func097F(FEDABIBLIO, "@The crystal ball!@", 0x0000);
 				abort;
 
 			case "spellbook" (remove):
@@ -25007,7 +25007,7 @@ void Func0411 object#(0x411) () {
 				if (Func097D(PARTY, 0x0001, 0x034A, QUALITY_ANY, 0x0003)) {
 					if (!Func097D(PARTY, 0x0003, 0x034A, QUALITY_ANY, 0x0003)) {
 						say("\"This is not a sufficient number of roots with which to make a spellbook. Return to Monk Isle, and when thou again comest, bring three roots of the Mandrake.\"");
-						Func097F(0xFFEF, "@Go back!@", 0x0000);
+						Func097F(FEDABIBLIO, "@Go back!@", 0x0000);
 						abort;
 					}
 					if (gflags[0x026D]) {
@@ -25048,15 +25048,15 @@ void Func0411 object#(0x411) () {
 							0xFFEB->move_object([0x096F, 0x075E, 0x0000]);
 							0xFFEB->run_schedule();
 						} else {
-							0xFFEF->set_schedule_type(SHY);
-							0xFFEF->clear_item_say();
-							Func097F(0xFFEF, "@Be gone, rogue!@", 0x0000);
+							FEDABIBLIO->set_schedule_type(SHY);
+							FEDABIBLIO->clear_item_say();
+							Func097F(FEDABIBLIO, "@Be gone, rogue!@", 0x0000);
 							abort;
 						}
 					} else {
 						say("\"Thou didst not understand me. The Roots must be fresh, taken from the swamp precisely as the tides are receding. These roots are stale, and unsuitable for our purposes.\"");
 						say("\"Return to Monk Isle, and return with fresh roots of the Mandrake!\"");
-						Func097F(0xFFEF, "@Return!@", 0x0000);
+						Func097F(FEDABIBLIO, "@Return!@", 0x0000);
 						abort;
 					}
 				} else if (gflags[0x00DE]) {
@@ -25068,7 +25068,7 @@ void Func0411 object#(0x411) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Thank thee!@", 0x0000);
-				Func097F(0xFFEF, "@Seek truth always.@", 0x0002);
+				Func097F(FEDABIBLIO, "@Seek truth always.@", 0x0002);
 				Func08FF();
 				break;
 		}
@@ -30165,7 +30165,7 @@ labelFunc0421_06AC:
 
 			case "help Fedabiblio" (remove):
 				say("\"If thou dost think I will help thee, then the madness that hath seemingly infected the entire world hath also infected thy brain. I suggest thou dost have it removed.\"");
-				Func097F(0xFFEF, "@Be gone!@", 0x0000);
+				Func097F(FEDABIBLIO, "@Be gone!@", 0x0000);
 				abort;
 
 			case "soul trapping" (remove):
@@ -30224,7 +30224,7 @@ labelFunc0421_06AC:
 				fallthrough;
 
 			case "magic wand" (remove):
-				var0011 = 0xFFEF->get_schedule_type();
+				var0011 = FEDABIBLIO->get_schedule_type();
 				if (!gflags[0x023D]) {
 					if (var0011 == WAIT) {
 						say("\"I no longer have the Philanderer's Friend, else I would certainly aid thee in helping the good Fedabiblio. It was stolen from me. I do not know for sure, but I suspect mine old enemy Vasculio of the crime.\"");
@@ -78742,7 +78742,7 @@ void Func07D8 object#(0x7D8) () {
 				var0000->clear_item_flag(TEMPORARY);
 			}
 		}
-		0xFFEF->remove_npc();
+		FEDABIBLIO->remove_npc();
 		0xFFB7->remove_npc();
 		0xFFB7->set_item_flag(DEAD);
 		Func09AC(0xFFC2, 0x0366, 0x0AA9, WAIT);
@@ -106252,7 +106252,7 @@ void Func08FF 0x8FF () {
 	if (gflags[0x00D7]) {
 		abort;
 	}
-	var0000 = ((((((((((((((0xFFEA->get_item_flag(MET) + 0xFFE6->get_item_flag(MET)) + 0xFFEF->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + COLUMNA->get_item_flag(MET)) + 0xFFE8->get_item_flag(MET)) + DUCIO->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + 0xFFE9->get_item_flag(MET)) + 0xFFE2->get_item_flag(MET)) + 0xFFE4->get_item_flag(MET)) + BUCIA->get_item_flag(MET)) + 0xFFE5->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + 0xFFED->get_item_flag(MET)) + gflags[0x00D6];
+	var0000 = ((((((((((((((0xFFEA->get_item_flag(MET) + 0xFFE6->get_item_flag(MET)) + FEDABIBLIO->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + COLUMNA->get_item_flag(MET)) + 0xFFE8->get_item_flag(MET)) + DUCIO->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + 0xFFE9->get_item_flag(MET)) + 0xFFE2->get_item_flag(MET)) + 0xFFE4->get_item_flag(MET)) + BUCIA->get_item_flag(MET)) + 0xFFE5->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + 0xFFED->get_item_flag(MET)) + gflags[0x00D6];
 	if ((var0000 >= 0x0003) && (!gflags[0x00D7])) {
 		var0001 = 0xFFE7->approach_avatar(0x005A, 0x0028);
 		if (var0001) {

@@ -13561,7 +13561,7 @@ void Func0411 object#(0x411) () {
 	var var0004;
 
 	if (event == DOUBLECLICK) {
-		0xFFEF->show_npc_face(0x0000);
+		CHANTU->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
 		add(["name", "job", "murder", "services", "bye"]);
@@ -13615,7 +13615,7 @@ void Func0411 object#(0x411) () {
 		say("\"Goodbye.\"*");
 	}
 	if (event == PROXIMITY) {
-		var0002 = 0xFFEF->get_npc_object()->get_schedule_type();
+		var0002 = CHANTU->get_npc_object()->get_schedule_type();
 		var0003 = UI_die_roll(0x0001, 0x0004);
 		if (var0002 == PATROL) {
 			if (var0003 == 0x0001) {
@@ -13630,9 +13630,9 @@ void Func0411 object#(0x411) () {
 			if (var0003 == 0x0004) {
 				var0004 = "@Try to sleep...@";
 			}
-			0xFFEF->item_say(var0004);
+			CHANTU->item_say(var0004);
 		} else {
-			Func092E(0xFFEF);
+			Func092E(CHANTU);
 		}
 	}
 }
