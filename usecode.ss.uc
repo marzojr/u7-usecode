@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -38612,23 +38612,23 @@ void Func0437 object#(0x437) () {
 	var var0015;
 	var var0016;
 
-	if (0xFFC9->get_item_flag(POLYMORPH) && (event == STARTED_TALKING)) {
-		var0000 = script 0xFFC9->get_npc_object() {
+	if (YELINDA->get_item_flag(POLYMORPH) && (event == STARTED_TALKING)) {
+		var0000 = script YELINDA->get_npc_object() {
 			nohalt;
 			call Func0294;
 		};
-		0xFFC9->run_schedule();
+		YELINDA->run_schedule();
 		abort;
 	}
 	if (event == BG_PATH_FAILURE) {
 		if (gflags[0x0004] && (!gflags[0x0212])) {
-			0xFFC9->set_polymorph(0x0294);
+			YELINDA->set_polymorph(0x0294);
 		}
 	}
 	var0001 = Func0954();
 	var0002 = UI_is_pc_female();
 	var0003 = Func0953();
-	var0004 = 0xFFC9->get_npc_id();
+	var0004 = YELINDA->get_npc_id();
 	if (event == DEATH) {
 		var0000 = script item {
 			nohalt;
@@ -38675,7 +38675,7 @@ void Func0437 object#(0x437) () {
 				call Func0400;
 			};
 			gflags[0x0007] = false;
-			0xFFC9->revert_schedule();
+			YELINDA->revert_schedule();
 			JORVIN->revert_schedule();
 			JORVIN->run_schedule();
 			abort;
@@ -38751,30 +38751,30 @@ void Func0437 object#(0x437) () {
 		abort;
 	}
 	if (event == DOUBLECLICK) {
-		if (0xFFC9->get_item_flag(POLYMORPH)) {
+		if (YELINDA->get_item_flag(POLYMORPH)) {
 			AVATAR->item_say("@Lady!@");
 			item->Func07D1();
 			Func097F(item, "@Avert thine eyes!@", 0x0002);
 			set_schedule_type(TALK);
 		} else {
 			AVATAR->item_say("@Greetings, Lady.@");
-			0xFFC9->Func07D1();
-			Func097F(0xFFC9, (("@Greetings, " + var0001) + ".@"), 0x0002);
-			0xFFC9->set_schedule_type(TALK);
+			YELINDA->Func07D1();
+			Func097F(YELINDA, (("@Greetings, " + var0001) + ".@"), 0x0002);
+			YELINDA->set_schedule_type(TALK);
 			if (gflags[0x015C] && (!(gflags[0x0173] || (gflags[0x0175] || gflags[0x0174])))) {
-				JORVIN->si_path_run_usecode(0xFFC9->get_object_position(), SI_PATH_SUCCESS, JORVIN->get_npc_object(), Func0435, false);
+				JORVIN->si_path_run_usecode(YELINDA->get_object_position(), SI_PATH_SUCCESS, JORVIN->get_npc_object(), Func0435, false);
 			}
 		}
 	}
 	if (event == STARTED_TALKING) {
-		0xFFC9->run_schedule();
-		0xFFC9->clear_item_say();
-		0xFFC9->show_npc_face0(0x0000);
+		YELINDA->run_schedule();
+		YELINDA->clear_item_say();
+		YELINDA->show_npc_face0(0x0000);
 		if (gflags[0x0171] || (gflags[0x0170] && (!gflags[0x0172]))) {
 			say("\"It is not fitting that I be seen with thee until thou hast been judged by the Oracle.\"");
 			say("\"Please do not approach me again until the Oracle hath ruled!\"");
 			UI_remove_npc_face0();
-			Func097F(0xFFC9, "@'Tis unseemly!@", 0x0000);
+			Func097F(YELINDA, "@'Tis unseemly!@", 0x0000);
 			abort;
 		}
 		if (gflags[0x0004] == true) {
@@ -38786,7 +38786,7 @@ void Func0437 object#(0x437) () {
 					". I wish thee luck on thy quest!\"");
 			}
 		} else {
-			var0014 = 0xFFC9->get_item_flag(MET);
+			var0014 = YELINDA->get_item_flag(MET);
 			if (gflags[0x015C] && (!gflags[0x01B5])) {
 				if (IOLO->npc_nearby() && IOLO->get_item_flag(IN_PARTY)) {
 					gflags[0x0170] = true;
@@ -38838,9 +38838,9 @@ void Func0437 object#(0x437) () {
 						call Func0437;
 					};
 					Func097F(JORVIN, "@Take this!@", 0x0000);
-					0xFFC9->set_new_schedules(MIDNIGHT, SHY, [0x0000, 0x0000]);
-					0xFFC9->run_schedule();
-					Func097F(0xFFC9, "@Blasphemer!@", 0x0005);
+					YELINDA->set_new_schedules(MIDNIGHT, SHY, [0x0000, 0x0000]);
+					YELINDA->run_schedule();
+					Func097F(YELINDA, "@Blasphemer!@", 0x0005);
 					var0000 = 0x0003;
 					while (var0000 > 0x0000) {
 						var0008 = UI_create_new_object2(0x017D, [0x0000, 0x0000, 0x0000]);
@@ -38870,7 +38870,7 @@ void Func0437 object#(0x437) () {
 			} else if (gflags[0x0170] && (!gflags[0x0172])) {
 				say("\"Until thy friend's innocence or guilt hath been proven, Avatar, we may not speak together.\"");
 				UI_remove_npc_face0();
-				Func097F(0xFFC9, "@I am sorry...@", 0x0000);
+				Func097F(YELINDA, "@I am sorry...@", 0x0000);
 				abort;
 			} else {
 				say("\"Welcome back, ",
@@ -38878,7 +38878,7 @@ void Func0437 object#(0x437) () {
 					". Thy presence in Fawn adds greatly\tto its Beauty.\"");
 			}
 		}
-		0xFFC9->set_item_flag(MET);
+		YELINDA->set_item_flag(MET);
 		add(["Fawn", "Beauty", "goblins", "storms", "name"]);
 		converse ("bye") {
 			case "goblins":
@@ -39011,7 +39011,7 @@ void Func0437 object#(0x437) () {
 				Func08AB();
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Farewell, gracious Lady!@", 0x0000);
-				Func097F(0xFFC9, "@Do come again!@", 0x0002);
+				Func097F(YELINDA, "@Do come again!@", 0x0002);
 				break;
 		}
 	}
@@ -57952,7 +57952,7 @@ void Func04D4 object#(0x4D4) () {
 			say("\"Well done, my ",
 				var0003,
 				". I shall take Yelinda back to her rightful place.\"");
-			0xFFC9->show_npc_face1(0x0000);
+			YELINDA->show_npc_face1(0x0000);
 			say("\"Oh, thank thee, kind monk!\"");
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
@@ -57963,10 +57963,10 @@ void Func04D4 object#(0x4D4) () {
 			Func097F(item, "@Peace.@", 0x0002);
 			var0005 = 0xFF2C->get_object_position();
 			UI_sprite_effect(ANIMATION_TELEPORT, (var0005[0x0001] - 0x0003), (var0005[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			var0006 = 0xFFC9->get_object_position();
+			var0006 = YELINDA->get_object_position();
 			UI_sprite_effect(ANIMATION_TELEPORT, (var0006[0x0001] - 0x0003), (var0006[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			0xFF2C->remove_npc();
-			Func09AC(0xFFC9, 0x0404, 0x06B8, WANDER);
+			Func09AC(YELINDA, 0x0404, 0x06B8, WANDER);
 			UI_play_sound_effect(0x0051);
 		} else {
 			UI_init_conversation();
@@ -78811,9 +78811,9 @@ void Func07D8 object#(0x7D8) () {
 		0xFFC5->run_schedule();
 		var0001 = 0xFFC8->add_cont_items(0x0001, 0x031D, 0x000A, 0x0000, 0x0000);
 		var0001 = 0xFFC3->add_cont_items(0x0001, 0x031D, 0x0007, 0x0000, 0x0000);
-		0xFFC9->set_polymorph(0x0294);
-		0xFFC9->move_object([0x0619, 0x05B9]);
-		Func09AC(0xFFC9, 0x0619, 0x05B9, WANDER);
+		YELINDA->set_polymorph(0x0294);
+		YELINDA->move_object([0x0619, 0x05B9]);
+		Func09AC(YELINDA, 0x0619, 0x05B9, WANDER);
 		if (0xFFC6->get_item_flag(MET)) {
 			var0001 = 0xFFC6->add_cont_items(0x0001, 0x0268, 0x0005, 0x0009, 0x0000);
 			var0001 = 0xFFC6->add_cont_items(0x0001, 0x0268, 0x0005, 0x0009, 0x0000);
@@ -80953,7 +80953,7 @@ void Func07F8 object#(0x7F8) () {
 				nohalt;
 				call Func07F8;
 			};
-			var0001 = [0xFFC9, KYLISTA, VOLDIN, 0xFFC3, JOTH, GARTH, 0xFFC7, 0xFFC8, JENDON, DELPHYNIA, DELIN, JORVIN, 0xFFC4, 0xFFC5, ALYSSAND, 0xFFC6];
+			var0001 = [YELINDA, KYLISTA, VOLDIN, 0xFFC3, JOTH, GARTH, 0xFFC7, 0xFFC8, JENDON, DELPHYNIA, DELIN, JORVIN, 0xFFC4, 0xFFC5, ALYSSAND, 0xFFC6];
 			for (var0004 in var0001 with var0002 to var0003) {
 				var0004->remove_npc();
 				var0004->run_schedule();
@@ -81604,7 +81604,7 @@ void Func07FB object#(0x7FB) () {
 	}
 	if (var0000 == 0x0022) {
 		gflags[0x017B] = true;
-		0xFFC9->show_npc_face0(0x0000);
+		YELINDA->show_npc_face0(0x0000);
 		say("\"Given that the weight of evidence seems overwhelming, perhaps we should spare the defendant from further embarrassment.\"");
 		VOLDIN->show_npc_face1(0x0000);
 		say("\"If the Lady doth wish it, I would forebear calling for further testimony. The traitor will surely be convicted based on the facts already presented.\"");
@@ -81616,12 +81616,12 @@ void Func07FB object#(0x7FB) () {
 		if (var0004 == "continue the testimony") {
 			0x0000->set_conversation_slot();
 			say("\"I would hear the full weight of the testimony against me, Lady Yelinda.\"");
-			0xFFC9->show_npc_face1(0x0000);
+			YELINDA->show_npc_face1(0x0000);
 			say("\"Very well. Thou mayest resume, Captain Voldin.\"");
 		} else {
 			0x0000->set_conversation_slot();
 			say("\"I believe no purpose would be served by continuing this charade, Lady Yelinda.\"");
-			0xFFC9->show_npc_face1(0x0000);
+			YELINDA->show_npc_face1(0x0000);
 			say("\"Do not mock the Oracle, stranger.\"");
 			say("\"Captain Voldin, let us bring this session of the trial to an end.\"");
 			gflags[0x0176] = true;
@@ -81638,7 +81638,7 @@ void Func07FB object#(0x7FB) () {
 			gflags[0x0182] = true;
 		}
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x0019);
-		var0004 = script 0xFFC9 {
+		var0004 = script YELINDA {
 			nohalt;
 			actor frame bowing;
 			wait 1;
@@ -81749,7 +81749,7 @@ void Func07FB object#(0x7FB) () {
 		say("\"According to legend, there have been men who have sold their souls to Beast British. Such men then scour the world, hoping to find their lost spirits once again.\"");
 		say("\"No more questions...\"");
 		UI_end_conversation();
-		Func097F(0xFFC9, "@Makes me shudder...@", 0x0002);
+		Func097F(YELINDA, "@Makes me shudder...@", 0x0002);
 		Func097F(DELPHYNIA, "@How awful!@", 0x0003);
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0005 = JORVIN->get_object_position() & (0x0007 & 0x0006);
@@ -81996,7 +81996,7 @@ void Func07FB object#(0x7FB) () {
 		UI_remove_npc_face1();
 		0x0000->set_conversation_slot();
 		say("\"I must defer to the Lady...\"");
-		0xFFC9->show_npc_face1(0x0000);
+		YELINDA->show_npc_face1(0x0000);
 		say("\"I don't see why thou couldst not speak freely, Zulith.\"");
 		say("\"I know! If thou art about to reveal some important secret, I shall signal thee by clapping sharply. Then thou shouldst be silent.\"");
 		UI_remove_npc_face1();
@@ -82054,8 +82054,8 @@ void Func07FB object#(0x7FB) () {
 			wait 2;
 			actor frame sitting;
 		};
-		Func097F(0xFFC9, "@I will speak.@", 0x0002);
-		var0004 = script 0xFFC9 after 4 ticks {
+		Func097F(YELINDA, "@I will speak.@", 0x0002);
+		var0004 = script YELINDA after 4 ticks {
 			actor frame bowing;
 			wait 2;
 			actor frame standing;
@@ -82071,14 +82071,14 @@ void Func07FB object#(0x7FB) () {
 		say("\"For the benefit of the Oracle, couldst thou recount the scene at which ",
 			var0003,
 			" didst invoke the name of the Daemon British?\"");
-		0xFFC9->show_npc_face1(0x0000);
+		YELINDA->show_npc_face1(0x0000);
 		say("\"I seem to recall that we were having a civil conversation. And then, without forewarning, ",
 			var0003,
 			" suddenly burst out with a vile and blasphemous oath!\"");
 		UI_remove_npc_face1();
 		0x0000->set_conversation_slot();
 		say("\"Dost thou remember his precise words?\"");
-		0xFFC9->show_npc_face1(0x0000);
+		YELINDA->show_npc_face1(0x0000);
 		say("\"To be truthful, the discussion was so distasteful that I quickly put it from my mind.\"");
 		say("\"I believe he said -- Curse you all, and Beast British shall drink thy blood...\"");
 		UI_remove_npc_face1();
@@ -82086,7 +82086,7 @@ void Func07FB object#(0x7FB) () {
 		say("\"I thank thee for thy time, Lady Yelinda. Thou hast spoken fairly, as always.\"");
 		UI_end_conversation();
 		Func097F(Func08AC(true), "@I didn't say that!", 0x0000);
-		var0004 = script 0xFFC9 {
+		var0004 = script YELINDA {
 			nohalt;
 			wait 2;
 			actor frame bowing;
@@ -82338,7 +82338,7 @@ labelFunc07FC_02C2:
 				if (JENDON->get_item_flag(MET)) {
 					if (gflags[0x0174]) {
 						say("\"A prince of a man! Why, when he breaks into song, I can hardly keep the crowds out of mine inn!\"");
-						0xFFC9->show_npc_face1(0x0000);
+						YELINDA->show_npc_face1(0x0000);
 						say("\"Such a man hardly sounds like the servant of Daemons, innkeeper.\"");
 						UI_remove_npc_face1();
 						0x0000->set_conversation_slot();
@@ -82667,7 +82667,7 @@ labelFunc07FC_0B2E:
 	}
 	if (var0000 == 0x0034) {
 		UI_init_conversation();
-		0xFFC9->show_npc_face0(0x0000);
+		YELINDA->show_npc_face0(0x0000);
 		say("\"I shall answer thy questions, ",
 			var0001,
 			", for the sake of the Oracle. But do not try my patience.\"");
@@ -82683,7 +82683,7 @@ labelFunc07FC_0B2E:
 				UI_remove_npc_face1();
 				0x0000->set_conversation_slot();
 				say("\"Beauty forbid! Thou hast spouted the blasphemy again!\"");
-				Func097F(0xFFC9, "@I cannot bear this!@", 0x0000);
+				Func097F(YELINDA, "@I cannot bear this!@", 0x0000);
 				// This could be a break instead; the original
 				// skips the endconv from a break, which is why
 				// I did it this way
@@ -82731,7 +82731,7 @@ labelFunc07FC_0B2E:
 labelFunc07FC_0CC8:
 		gflags[0x0181] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
-		var0004 = 0xFFC9->get_object_position() & (0x0002 & 0x0006);
+		var0004 = YELINDA->get_object_position() & (0x0002 & 0x0006);
 		var0005 = var0004->find_nearby(0x0113, 0x0028, MASK_EGG);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
@@ -82757,7 +82757,7 @@ labelFunc07FC_0CC8:
 					var0003 = Func0956(["protest", "accept"]);
 					if (var0003 == "protest") {
 						say("\"I don't have to answer thy questions, traitor!\"");
-						0xFFC9->show_npc_face1(0x0000);
+						YELINDA->show_npc_face1(0x0000);
 						say("\"The Oracle must hear all of the facts, if it is to decide fairly. Chancellor, I give my permission to speak of thy secrets.\"");
 						UI_remove_npc_face1();
 						0x0000->set_conversation_slot();
@@ -96960,13 +96960,13 @@ void Func0864 0x864 () {
 	var0002[0x0001] -= var0002[0x0003] / 0x0002;
 	var0002[0x0002] -= var0002[0x0003] / 0x0002;
 	UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, var0002[0x0001], var0002[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-	var0003 = 0xFFC9->get_npc_object()->get_item_shape();
-	0xFFC9->set_polymorph(var0003);
-	0xFFC9->set_new_schedules([MIDNIGHT, MORNING, NOON], [SLEEP, EAT, WANDER], [0x0436, 0x06C9, 0x03AD, 0x06DD, 0x0407, 0x075B]);
+	var0003 = YELINDA->get_npc_object()->get_item_shape();
+	YELINDA->set_polymorph(var0003);
+	YELINDA->set_new_schedules([MIDNIGHT, MORNING, NOON], [SLEEP, EAT, WANDER], [0x0436, 0x06C9, 0x03AD, 0x06DD, 0x0407, 0x075B]);
 	UI_sprite_effect(ANIMATION_GREEN_BUBBLES, (var0002[0x0001] + 0x0002), (var0002[0x0002] + 0x0002), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 	0xFF2C->move_object([(var0002[0x0001] + 0x0002), (var0002[0x0002] + 0x0002), 0x0000]);
 	0xFF2C->set_schedule_type(WAIT);
-	0xFFC9->set_schedule_type(WAIT);
+	YELINDA->set_schedule_type(WAIT);
 	AVATAR->set_item_flag(DONT_MOVE);
 	UI_end_conversation();
 	var0001 = script 0xFF2C after 10 ticks {
@@ -96976,7 +96976,7 @@ void Func0864 0x864 () {
 	};
 	gflags[0x0212] = true;
 	UI_remove_npc_face0();
-	Func097F(0xFFC9, "@I am restored!@", 0x0002);
+	Func097F(YELINDA, "@I am restored!@", 0x0002);
 	UI_play_sound_effect(0x0051);
 	UI_play_music(0x003F, Func09A0(0x0005, 0x0001));
 	abort;
@@ -103506,7 +103506,7 @@ void Func08C2 0x8C2 () {
 		var0006 = var0004->get_item_quality();
 		var0007 = false;
 		if (var0006 == 0x0002) {
-			var0007 = 0xFFC9;
+			var0007 = YELINDA;
 			var0008 = 0x0002;
 		}
 		if (var0006 == 0x0004) {
@@ -108726,8 +108726,8 @@ void Func0939 0x939 (var var0000) {
 				call Func07F8;
 			};
 		} else {
-			Func097F(0xFFC9, "@Zulith...@", 0x000F);
-			var0001 = script 0xFFC9 after 10 ticks {
+			Func097F(YELINDA, "@Zulith...@", 0x000F);
+			var0001 = script YELINDA after 10 ticks {
 				nohalt;
 				actor frame bowing;
 				wait 3;
@@ -108817,7 +108817,7 @@ void Func093A 0x93A (var var0000) {
 			say("\"We shall recess until tomorrow, and then return to hear ",
 				var0003,
 				"'s defense. Dost thou agree with this course of action, Lady Yelinda?\"");
-			0xFFC9->show_npc_face1(0x0000);
+			YELINDA->show_npc_face1(0x0000);
 			say("\"Oh... why, yes... of course. Make it so.\"");
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
@@ -108929,7 +108929,7 @@ void Func093A 0x93A (var var0000) {
 	} else {
 		if (var0000 == 0x0057) {
 			UI_init_conversation();
-			0xFFC9->show_npc_face0(0x0000);
+			YELINDA->show_npc_face0(0x0000);
 			say("\"Both sides have stated their facts, and called their witnesses. Let it not be said that there is no justice in Fawn!\"");
 			var0003 = Func08AC(false);
 			say("\"Now, before the face of Beauty, I call for a verdict upon ",
@@ -108973,7 +108973,7 @@ void Func093A 0x93A (var var0000) {
 					face west;
 				};
 			}
-			var0003 = script 0xFFC9 after 5 ticks {
+			var0003 = script YELINDA after 5 ticks {
 				nohalt;
 				face east;
 				actor frame standing;
@@ -109019,7 +109019,7 @@ void Func093A 0x93A (var var0000) {
 				Func097F(GARTH, "@Stone them!@", 0x0003);
 				Func097F(JENDON, "@Behead the fiends!@", 0x0005);
 				Func097F(Func08AC(true), "@What shall we do?@", 0x0001);
-				Func097F(0xFFC9, "@Oh, my...@", 0x0005);
+				Func097F(YELINDA, "@Oh, my...@", 0x0005);
 				UI_end_conversation();
 				var0003 = AVATAR->get_object_position() & (0x0001 & 0x0006);
 				var0003 = var0003->find_nearby(0x0113, 0x000A, MASK_EGG);
@@ -109033,7 +109033,7 @@ void Func093A 0x93A (var var0000) {
 			} else {
 				UI_end_conversation();
 				var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x0062);
-				var0003 = script 0xFFC9 {
+				var0003 = script YELINDA {
 					nohalt;
 					call Func07F8;
 				};
@@ -109066,7 +109066,7 @@ void Func093A 0x93A (var var0000) {
 					face west;
 				};
 			}
-			var0008 = [0xFFC9, 0xFFC3];
+			var0008 = [YELINDA, 0xFFC3];
 			for (var0004 in var0008 with var0015 to var0016) {
 				var0003 = script var0004 after (0x0003 + UI_get_random(0x0003)) ticks {
 					face east;
@@ -109086,7 +109086,7 @@ void Func093A 0x93A (var var0000) {
 			UI_init_conversation();
 			ALYSSAND->show_npc_face0(0x0000);
 			say("\"We have found the real traitors!\"");
-			0xFFC9->show_npc_face1(0x0000);
+			YELINDA->show_npc_face1(0x0000);
 			say("\"What is this all about, Captain Jorvin?\"");
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
@@ -109160,7 +109160,7 @@ void Func093A 0x93A (var var0000) {
 			KYLISTA->clear_item_say();
 			Func097F(KYLISTA, "@It hath already spoken!@", 0x0000);
 			Func097F(ALYSSAND, "@See what it says now!@", 0x0002);
-			var0003 = script 0xFFC9 after 10 ticks {
+			var0003 = script YELINDA after 10 ticks {
 				nohalt;
 				call Func07F8;
 			};
@@ -109168,7 +109168,7 @@ void Func093A 0x93A (var var0000) {
 		}
 		if (var0000 == 0x005D) {
 			UI_init_conversation();
-			0xFFC9->show_npc_face0(0x0000);
+			YELINDA->show_npc_face0(0x0000);
 			say("\"What can it hurt, Kylista, to speak again to the great Oracle?\"");
 			var0003 = Func08AC(false);
 			say("\"Again, before the face of Beauty, I call for a verdict upon ",
@@ -109200,7 +109200,7 @@ void Func093A 0x93A (var var0000) {
 					face west;
 				};
 			}
-			var0003 = script 0xFFC9 after 5 ticks {
+			var0003 = script YELINDA after 5 ticks {
 				nohalt;
 				face east;
 				actor frame standing;
@@ -109225,13 +109225,13 @@ void Func093A 0x93A (var var0000) {
 				" is innocent! Set ",
 				var0003,
 				" and his companions free!\"");
-			0xFFC9->show_npc_face1(0x0000);
+			YELINDA->show_npc_face1(0x0000);
 			say("\"What doth this mean? The verdict hath changed...\"");
 			UI_remove_npc_face0();
 			UI_remove_npc_face1();
 			JORVIN->show_npc_face0(0x0000);
 			say("\"This means, dearest Lady, that the Oracle will proclaim any result which the secret levers request. I saw Alyssand instruct the Oracle to give this verdict, with my very own eyes!\"");
-			0xFFC9->show_npc_face1(0x0000);
+			YELINDA->show_npc_face1(0x0000);
 			if (VOLDIN->get_item_flag(DEAD)) {
 				say("\"We are betrayed! Take Kylista from my sight! I shall deal with her perfidy later...\"");
 			} else {
@@ -109291,7 +109291,7 @@ void Func093A 0x93A (var var0000) {
 		}
 		if (var0000 == 0x0062) {
 			UI_init_conversation();
-			0xFFC9->show_npc_face0(0x0000);
+			YELINDA->show_npc_face0(0x0000);
 			var0003 = Func08AC(false);
 			say("\"",
 				var0003,
@@ -109343,7 +109343,7 @@ void Func093A 0x93A (var var0000) {
 					face west;
 				};
 			}
-			var0008 = [0xFFC9, 0xFFC3];
+			var0008 = [YELINDA, 0xFFC3];
 			for (var0004 in var0008 with var0021 to var0022) {
 				var0003 = script var0004 after (0x0003 + UI_get_random(0x0003)) ticks {
 					face east;
@@ -109368,7 +109368,7 @@ void Func093A 0x93A (var var0000) {
 			} else {
 				say("\"We have captured the falsehearted traitors, Lady Yelinda! Kylista and Voldin are in chains.\"");
 			}
-			0xFFC9->show_npc_face1(0x0000);
+			YELINDA->show_npc_face1(0x0000);
 			say("\"Thou hast acted correctly, Jorvin -- the Oracle hath just denounced them...\"");
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
@@ -109381,7 +109381,7 @@ void Func093A 0x93A (var var0000) {
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
 			say("\"I did mistrust thy words previously, Alyssand, but now that Kylista hath confessed... I know not what to believe.\"");
-			0xFFC9->show_npc_face1(0x0000);
+			YELINDA->show_npc_face1(0x0000);
 			if (VOLDIN->get_item_flag(DEAD)) {
 				say("\"Such perfidy makes my blood run cold. Have the Priestess jailed until I decide what fate she deserves!\"");
 				say("\"As for Voldin's death -- that saves me the trouble of having him executed. Praise the deed!\"");
@@ -109389,7 +109389,7 @@ void Func093A 0x93A (var var0000) {
 				say("\"Such perfidy makes my blood run cold. Have the traitors jailed until I decide what fate they deserve!\"");
 				Func09AC(VOLDIN, 0x03DC, 0x0617, TEND_SHOP);
 			}
-			var0003 = script 0xFFC9 {
+			var0003 = script YELINDA {
 				nohalt;
 				call Func07F8;
 			};
@@ -109399,7 +109399,7 @@ void Func093A 0x93A (var var0000) {
 		}
 		if (var0000 == 0x0065) {
 			UI_init_conversation();
-			0xFFC9->show_npc_face0(0x0000);
+			YELINDA->show_npc_face0(0x0000);
 			var0003 = Func08AC(false);
 			say("\"I am sorry that we have delayed thee in thy quest, ",
 				var0003,
@@ -109476,7 +109476,7 @@ void Func093A 0x93A (var var0000) {
 			var0003 = script 0xFFC3 {
 				say "@This trial is now dismissed!@";
 			};
-			var0003 = [0xFFC6, DELIN, DELPHYNIA, JENDON, GARTH, JOTH, 0xFFC9, 0xFFC3, JORVIN, ALYSSAND];
+			var0003 = [0xFFC6, DELIN, DELPHYNIA, JENDON, GARTH, JOTH, YELINDA, 0xFFC3, JORVIN, ALYSSAND];
 			for (var0004 in var0003 with var0029 to var002A) {
 				var0004->run_schedule();
 				var0008 = UI_get_random(0x0008);
@@ -109557,7 +109557,7 @@ void Func093B 0x93B (var var0000) {
 			Func097F(0xFFC3, "@Cleanse the Temple!@", 0x0004);
 		} else {
 			UI_init_conversation();
-			0xFFC9->show_npc_face0(0x0000);
+			YELINDA->show_npc_face0(0x0000);
 			say("\"Where is the Priestess of Beauty? And where is Great Captain Voldin?\"");
 			0xFFC3->show_npc_face1(0x0000);
 			say("\"Um... I am not sure, thy Ladyship. Nor is Jorvin to be found.\"");
@@ -109566,7 +109566,7 @@ void Func093B 0x93B (var var0000) {
 			say("\"It is most improper that neither Voldin nor Kylista are here... But I shall not have justice detained.\"");
 			say("\"I shall continue in Kylista's place...\"");
 			UI_end_conversation();
-			0xFFC9->si_path_run_usecode([0x03FE, 0x0666, 0x0006], SI_PATH_SUCCESS, 0xFFC9->get_npc_object(), Func07F8, false);
+			YELINDA->si_path_run_usecode([0x03FE, 0x0666, 0x0006], SI_PATH_SUCCESS, YELINDA->get_npc_object(), Func07F8, false);
 		}
 		abort;
 	}
@@ -109576,7 +109576,7 @@ void Func093B 0x93B (var var0000) {
 			KYLISTA->show_npc_face0(0x0000);
 			say("\"Lady Yelinda, as thou dost rule this city, dost thou wish to conduct the questioning?\"");
 			UI_end_conversation();
-			var0003 = script 0xFFC9 after 2 ticks {
+			var0003 = script YELINDA after 2 ticks {
 				nohalt;
 				actor frame bowing;
 				wait 2;
@@ -109602,7 +109602,7 @@ void Func093B 0x93B (var var0000) {
 	if (var0000 == 0x0016) {
 		if (gflags[0x0170]) {
 			UI_init_conversation();
-			0xFFC9->show_npc_face0(0x0000);
+			YELINDA->show_npc_face0(0x0000);
 			say("\"I fear that the witnesses might be tempted to spare my sensibilities, instead of reciting the bare facts.\"");
 			KYLISTA->show_npc_face1(0x0000);
 			say("\"Wouldst thou wish one of thy Councillors to act in thy stead?\"");
@@ -109610,7 +109610,7 @@ void Func093B 0x93B (var var0000) {
 			0x0000->set_conversation_slot();
 			say("\"Let it be so! As most senior of my Councillors, Voldin always doth have my best interests at heart.\"");
 			UI_end_conversation();
-			var0003 = script 0xFFC9 {
+			var0003 = script YELINDA {
 				nohalt;
 				actor frame bowing;
 				actor frame sitting;
@@ -109651,7 +109651,7 @@ void Func093B 0x93B (var var0000) {
 			Func097F(DELIN, "@Hail the Lady!@", 0x0005);
 			Func097F(DELPHYNIA, "@Oh great Lady!@", 0x0009);
 			Func097F(0xFFC6, "@Whatever...!@", 0x000F);
-			var0003 = script 0xFFC9 after 20 ticks {
+			var0003 = script YELINDA after 20 ticks {
 				nohalt;
 				repeat 2 {
 					actor frame cast_up;
@@ -109693,7 +109693,7 @@ void Func093B 0x93B (var var0000) {
 			};
 		} else {
 			UI_init_conversation();
-			0xFFC9->show_npc_face0(0x0000);
+			YELINDA->show_npc_face0(0x0000);
 			say("\"",
 				var0002,
 				"'s representative, ",
@@ -109750,7 +109750,7 @@ void Func093B 0x93B (var var0000) {
 			say("\"Since The Fellowship troublemakers were so disagreeable in our earlier meeting, they have been excluded from this session of the trial.\"");
 			UI_end_conversation();
 			Func097F(0xFFC3, "@Avatar...@", 0x0002);
-			var0003 = script 0xFFC9 after 7 ticks {
+			var0003 = script YELINDA after 7 ticks {
 				nohalt;
 				call Func07F8;
 			};
@@ -109813,7 +109813,7 @@ void Func093B 0x93B (var var0000) {
 				abort;
 			}
 			if (gflags[0x0172]) {
-				var0007 &= 0xFFC9;
+				var0007 &= YELINDA;
 			}
 		}
 		if (!gflags[0x017E]) {
@@ -109902,7 +109902,7 @@ void Func093B 0x93B (var var0000) {
 					nohalt;
 					actor frame standing;
 				};
-				var0003 = script 0xFFC9 {
+				var0003 = script YELINDA {
 					nohalt;
 					say "@If I may...@";
 					actor frame bowing;
@@ -109939,7 +109939,7 @@ void Func093B 0x93B (var var0000) {
 				Func097F(KYLISTA, "@Really, Voldin!@", 0x000E);
 			}
 			if (var0007 == 0xFFC5) {
-				Func097F(0xFFC9, "@He is so ugly...@", 0x000A);
+				Func097F(YELINDA, "@He is so ugly...@", 0x000A);
 				Func097F(ALYSSAND, "@Oh, my...@", 0x000E);
 				UI_play_music(0x000A, Func09A0(0x0005, 0x0001));
 			}
@@ -110019,8 +110019,8 @@ void Func093B 0x93B (var var0000) {
 				actor frame bowing;
 				actor frame sitting;
 			};
-			Func097F(0xFFC9, "@Hear ye!@", 0x0003);
-			var0003 = script 0xFFC9 after 10 ticks {
+			Func097F(YELINDA, "@Hear ye!@", 0x0003);
+			var0003 = script YELINDA after 10 ticks {
 				nohalt;
 				call Func07F8;
 			};
@@ -110080,7 +110080,7 @@ void Func093B 0x93B (var var0000) {
 		if (item == 0xFFC6->get_npc_object()) {
 			var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x002E);
 		}
-		if (item == 0xFFC9->get_npc_object()) {
+		if (item == YELINDA->get_npc_object()) {
 			var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x0034);
 		}
 		if (item == 0xFFC3->get_npc_object()) {

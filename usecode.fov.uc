@@ -19177,12 +19177,12 @@ void Func0437 object#(0x437) () {
 	var var0006;
 
 	if (event == DOUBLECLICK) {
-		0xFFC9->show_npc_face(0x0000);
+		GRAYSON->show_npc_face(0x0000);
 		var0000 = UI_wearing_fellowship();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFFC9->get_npc_object()->get_schedule_type();
+		var0002 = GRAYSON->get_npc_object()->get_schedule_type();
 		if (var0001 == NIGHT) {
-			var0003 = Func08FC(0xFFC9, BATLIN);
+			var0003 = Func08FC(GRAYSON, BATLIN);
 			if (var0003) {
 				say("Grayson shushes you, as you are disturbing the Fellowship meeting.*");
 				abort;
@@ -19283,7 +19283,7 @@ void Func0437 object#(0x437) () {
 	}
 	if (event == PROXIMITY) {
 		var0001 = UI_part_of_day();
-		var0002 = 0xFFC9->get_npc_object()->get_schedule_type();
+		var0002 = GRAYSON->get_npc_object()->get_schedule_type();
 		var0005 = UI_die_roll(0x0001, 0x0004);
 		if (var0002 == TEND_SHOP) {
 			if (var0005 == 0x0001) {
@@ -19298,9 +19298,9 @@ void Func0437 object#(0x437) () {
 			if (var0005 == 0x0004) {
 				var0006 = "@Need a weapon?@";
 			}
-			0xFFC9->item_say(var0006);
+			GRAYSON->item_say(var0006);
 		} else {
-			Func092E(0xFFC9);
+			Func092E(GRAYSON);
 		}
 	}
 }
@@ -65431,10 +65431,10 @@ void Func084F 0x84F () {
 		FIGG->say("\"The Fellowship has taught me not to let others push me around,\" says Figg.*");
 		FIGG->hide();
 	}
-	var0008 = Func08F7(0xFFC9);
+	var0008 = Func08F7(GRAYSON);
 	if (var0008) {
-		0xFFC9->say("\"The Triad of Inner Strength has helped me to improve my skills and build better weapons,\" says Grayson.*");
-		0xFFC9->hide();
+		GRAYSON->say("\"The Triad of Inner Strength has helped me to improve my skills and build better weapons,\" says Grayson.*");
+		GRAYSON->hide();
 	}
 	var0009 = Func08F7(0xFFC6);
 	if (var0009) {
@@ -65578,10 +65578,10 @@ void Func0850 0x850 () {
 		GAYE->say("\"The Fellowship has taught me to, first and foremost, treat people with respect,\" says Gaye.*");
 		GAYE->hide();
 	}
-	var0006 = Func08F7(0xFFC9);
+	var0006 = Func08F7(GRAYSON);
 	if (var0006) {
-		0xFFC9->say("\"After joining The Fellowship I learned how to be a man's man,\" says Grayson.*");
-		0xFFC9->hide();
+		GRAYSON->say("\"After joining The Fellowship I learned how to be a man's man,\" says Grayson.*");
+		GRAYSON->hide();
 	}
 	var0007 = Func08F7(0xFFC6);
 	if (var0007) {
