@@ -18374,10 +18374,10 @@ void Func0432 object#(0x432) () {
 	var var0005;
 
 	if (event == DOUBLECLICK) {
-		0xFFCE->show_npc_face(0x0000);
+		FRED->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFFCE->get_npc_object()->get_schedule_type();
+		var0002 = FRED->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (!gflags[0x00B3]) {
 			say("You see a friendly-looking farmer who waves at you as you approach.");
@@ -18458,7 +18458,7 @@ void Func0432 object#(0x432) () {
 	}
 	if (event == PROXIMITY) {
 		var0001 = UI_part_of_day();
-		var0002 = 0xFFCE->get_npc_object()->get_schedule_type();
+		var0002 = FRED->get_npc_object()->get_schedule_type();
 		var0004 = UI_die_roll(0x0001, 0x0004);
 		if (var0002 == TEND_SHOP) {
 			if (var0004 == 0x0001) {
@@ -18473,9 +18473,9 @@ void Func0432 object#(0x432) () {
 			if (var0004 == 0x0004) {
 				var0005 = "@Best prices in Britannia!@";
 			}
-			0xFFCE->item_say(var0005);
+			FRED->item_say(var0005);
 		} else {
-			Func092E(0xFFCE);
+			Func092E(FRED);
 		}
 	}
 }

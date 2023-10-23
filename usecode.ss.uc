@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, DELPHYNIA, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, DELPHYNIA, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, GARTH, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -36394,7 +36394,7 @@ void Func0431 object#(0x431) () {
 				Func08AB();
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Thou hast been most kind.@", 0x0000);
-				Func097F(0xFFCE, "@A pleasure.@", 0x0005);
+				Func097F(JOTH, "@A pleasure.@", 0x0005);
 				Func08AA();
 				break;
 		}
@@ -36426,15 +36426,15 @@ void Func0432 object#(0x432) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Greetings, good sir.@");
-		0xFFCE->Func07D1();
-		Func097F(0xFFCE, (("@Greetings, " + var0000) + ".@"), 0x0005);
-		0xFFCE->set_schedule_type(TALK);
+		JOTH->Func07D1();
+		Func097F(JOTH, (("@Greetings, " + var0000) + ".@"), 0x0005);
+		JOTH->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFCE->run_schedule();
-		0xFFCE->clear_item_say();
-		0xFFCE->show_npc_face0(0x0000);
-		var0004 = 0xFFCE->get_item_flag(MET);
+		JOTH->run_schedule();
+		JOTH->clear_item_say();
+		JOTH->show_npc_face0(0x0000);
+		var0004 = JOTH->get_item_flag(MET);
 		if (var0004 == false) {
 			if (gflags[0x003E] == true) {
 				say("\"Welcome ta Fawn. I am Great Captain Joth. Thou canst call me Joth.\" *\"'Tis always a pleasure ta meet a Pikeman.\"");
@@ -36443,7 +36443,7 @@ void Func0432 object#(0x432) () {
 					var0000,
 					".\"");
 			}
-			0xFFCE->set_item_flag(MET);
+			JOTH->set_item_flag(MET);
 		} else {
 			say("\"Good ta see thee again.\"");
 		}
@@ -36575,7 +36575,7 @@ void Func0432 object#(0x432) () {
 				Func08AB();
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Goodbye!@", 0x0000);
-				Func097F(0xFFCE, "@Keep a weather eye!@", 0x0002);
+				Func097F(JOTH, "@Keep a weather eye!@", 0x0002);
 				Func08AA();
 				break;
 		}
@@ -78796,7 +78796,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(ALYSSAND, 0x03E6, 0x0756, WAIT);
 		Func09AC(DELIN, 0x0409, 0x06EE, WAIT);
 		Func09AC(GARTH, 0x0409, 0x0737, WAIT);
-		Func09AC(0xFFCE, 0x03C8, 0x070D, WAIT);
+		Func09AC(JOTH, 0x03C8, 0x070D, WAIT);
 		Func09AC(0xFFCD, 0x0447, 0x0722, WAIT);
 		Func09AC(0xFFCC, 0x0415, 0x0718, WAIT);
 		Func09AC(0xFFCB, 0x03F2, 0x06D8, WAIT);
@@ -80953,7 +80953,7 @@ void Func07F8 object#(0x7F8) () {
 				nohalt;
 				call Func07F8;
 			};
-			var0001 = [0xFFC9, 0xFFCA, 0xFFCD, 0xFFC3, 0xFFCE, GARTH, 0xFFC7, 0xFFC8, 0xFFCC, DELPHYNIA, DELIN, 0xFFCB, 0xFFC4, 0xFFC5, ALYSSAND, 0xFFC6];
+			var0001 = [0xFFC9, 0xFFCA, 0xFFCD, 0xFFC3, JOTH, GARTH, 0xFFC7, 0xFFC8, 0xFFCC, DELPHYNIA, DELIN, 0xFFCB, 0xFFC4, 0xFFC5, ALYSSAND, 0xFFC6];
 			for (var0004 in var0001 with var0002 to var0003) {
 				var0004->remove_npc();
 				var0004->run_schedule();
@@ -82125,8 +82125,8 @@ void Func07FC object#(0x7FC) () {
 	var0002 = Func08AC(false);
 	if (var0000 == 0x002C) {
 		UI_init_conversation();
-		0xFFCE->show_npc_face0(0x0000);
-		if (0xFFCE->get_item_flag(MET)) {
+		JOTH->show_npc_face0(0x0000);
+		if (JOTH->get_item_flag(MET)) {
 			say("\"I am prepared for thy questions, ",
 				var0001,
 				". What dost thou care to question me about?\"");
@@ -82139,7 +82139,7 @@ void Func07FC object#(0x7FC) () {
 			case "the character of the accused":
 				remove(["the character of the accused", "no questions"]);
 				add("no further questions");
-				if (0xFFCE->get_item_flag(MET)) {
+				if (JOTH->get_item_flag(MET)) {
 					var0003 = Func08AC(false);
 					if (gflags[0x0174]) {
 						say("\"To be honest, he did not strike me as an honest man. Never cared much for bards. Louts, every one of them!\"");
@@ -82186,7 +82186,7 @@ void Func07FC object#(0x7FC) () {
 labelFunc07FC_0135:
 		gflags[0x017D] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
-		var0004 = 0xFFCE->get_object_position() & (0x0004 & 0x0006);
+		var0004 = JOTH->get_object_position() & (0x0004 & 0x0006);
 		var0005 = var0004->find_nearby(0x0113, 0x0028, MASK_EGG);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
@@ -82715,7 +82715,7 @@ labelFunc07FC_0B2E:
 				AVATAR->show_npc_face1(0x0000);
 				say("\"Forgive me. I have no questions for thee.\"");
 				Func097F(0xFFC3, "@Such impudence!@", 0x0002);
-				Func097F(0xFFCE, "@For shame!@", 0x0000);
+				Func097F(JOTH, "@For shame!@", 0x0000);
 				// This could be a break instead; the original
 				// skips the endconv from a break, which is why
 				// I did it this way
@@ -83115,7 +83115,7 @@ void Func0801 0x801 () {
 	var var0005;
 
 	var0000 = false;
-	var0001 = [0xFFC3, 0xFFCB, GARTH, 0xFFCD, 0xFFCE];
+	var0001 = [0xFFC3, 0xFFCB, GARTH, 0xFFCD, JOTH];
 	for (var0004 in var0001 with var0002 to var0003) {
 		if (var0004->npc_nearby()) {
 			var0000 = true;
@@ -102289,7 +102289,7 @@ void Func08AA 0x8AA () {
 	if (gflags[0x01B6]) {
 		abort;
 	}
-	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((ALYSSAND->get_item_flag(MET) + DELIN->get_item_flag(MET)) + DELPHYNIA->get_item_flag(MET)) + 0xFFCD->get_item_flag(MET)) + 0xFFCC->get_item_flag(MET)) + 0xFFCB->get_item_flag(MET)) + 0xFFCA->get_item_flag(MET)) + 0xFFC6->get_item_flag(MET)) + GARTH->get_item_flag(MET)) + 0xFFCE->get_item_flag(MET)) + 0xFFC3->get_item_flag(MET)) > 0x0004) && IOLO->npc_nearby())))) {
+	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((ALYSSAND->get_item_flag(MET) + DELIN->get_item_flag(MET)) + DELPHYNIA->get_item_flag(MET)) + 0xFFCD->get_item_flag(MET)) + 0xFFCC->get_item_flag(MET)) + 0xFFCB->get_item_flag(MET)) + 0xFFCA->get_item_flag(MET)) + 0xFFC6->get_item_flag(MET)) + GARTH->get_item_flag(MET)) + JOTH->get_item_flag(MET)) + 0xFFC3->get_item_flag(MET)) > 0x0004) && IOLO->npc_nearby())))) {
 		var0000 = script Func09A0(0x0005, 0x0001) after 200 ticks {
 			nohalt;
 			call Func0435;
@@ -102317,7 +102317,7 @@ void Func08AB 0x8AB () {
 			abort;
 		}
 	}
-	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((ALYSSAND->get_item_flag(MET) + DELIN->get_item_flag(MET)) + DELPHYNIA->get_item_flag(MET)) + GARTH->get_item_flag(MET)) + 0xFFCE->get_item_flag(MET)) + 0xFFCD->get_item_flag(MET)) + 0xFFCC->get_item_flag(MET)) + 0xFFCB->get_item_flag(MET)) + 0xFFC7->get_item_flag(MET)) + 0xFFCA->get_item_flag(MET)) + 0xFFC6->get_item_flag(MET)) + 0xFFC3->get_item_flag(MET)) > 0x0004)))) {
+	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((ALYSSAND->get_item_flag(MET) + DELIN->get_item_flag(MET)) + DELPHYNIA->get_item_flag(MET)) + GARTH->get_item_flag(MET)) + JOTH->get_item_flag(MET)) + 0xFFCD->get_item_flag(MET)) + 0xFFCC->get_item_flag(MET)) + 0xFFCB->get_item_flag(MET)) + 0xFFC7->get_item_flag(MET)) + 0xFFCA->get_item_flag(MET)) + 0xFFC6->get_item_flag(MET)) + 0xFFC3->get_item_flag(MET)) > 0x0004)))) {
 		0xFFCB->modify_schedule(NOON, STANDTHERE, [0x040E, 0x06BF]);
 		0xFFCB->modify_schedule(AFTERNOON, STANDTHERE, [0x040E, 0x06BF]);
 	}
@@ -103510,7 +103510,7 @@ void Func08C2 0x8C2 () {
 			var0008 = 0x0002;
 		}
 		if (var0006 == 0x0004) {
-			var0007 = 0xFFCE;
+			var0007 = JOTH;
 			var0008 = 0x0006;
 		}
 		if (var0006 == 0x0005) {
@@ -108963,7 +108963,7 @@ void Func093A 0x93A (var var0000) {
 					face north;
 				};
 			}
-			var0008 = [GARTH, 0xFFCE];
+			var0008 = [GARTH, JOTH];
 			for (var0004 in var0008 with var000F to var0010) {
 				var0003 = script var0004 after (0x0007 + UI_get_random(0x0005)) ticks {
 					actor frame bowing;
@@ -109058,7 +109058,7 @@ void Func093A 0x93A (var var0000) {
 					face south;
 				};
 			}
-			var0008 = [0xFFC6, DELIN, DELPHYNIA, GARTH, 0xFFCE, 0xFFCC];
+			var0008 = [0xFFC6, DELIN, DELPHYNIA, GARTH, JOTH, 0xFFCC];
 			for (var0004 in var0008 with var0013 to var0014) {
 				var0003 = script var0004 after (0x0004 + UI_get_random(0x0004)) ticks {
 					actor frame bowing;
@@ -109194,7 +109194,7 @@ void Func093A 0x93A (var var0000) {
 					face north;
 				};
 			}
-			var0008 = [GARTH, 0xFFCE];
+			var0008 = [GARTH, JOTH];
 			for (var0004 in var0008 with var001B to var001C) {
 				var0003 = script var0004 after (0x0007 + UI_get_random(0x0005)) ticks {
 					face west;
@@ -109335,7 +109335,7 @@ void Func093A 0x93A (var var0000) {
 					face south;
 				};
 			}
-			var0008 = [0xFFC6, DELIN, DELPHYNIA, GARTH, 0xFFCE, 0xFFCC];
+			var0008 = [0xFFC6, DELIN, DELPHYNIA, GARTH, JOTH, 0xFFCC];
 			for (var0004 in var0008 with var001F to var0020) {
 				var0003 = script var0004 after (0x0004 + UI_get_random(0x0004)) ticks {
 					actor frame bowing;
@@ -109476,7 +109476,7 @@ void Func093A 0x93A (var var0000) {
 			var0003 = script 0xFFC3 {
 				say "@This trial is now dismissed!@";
 			};
-			var0003 = [0xFFC6, DELIN, DELPHYNIA, 0xFFCC, GARTH, 0xFFCE, 0xFFC9, 0xFFC3, 0xFFCB, ALYSSAND];
+			var0003 = [0xFFC6, DELIN, DELPHYNIA, 0xFFCC, GARTH, JOTH, 0xFFC9, 0xFFC3, 0xFFCB, ALYSSAND];
 			for (var0004 in var0003 with var0029 to var002A) {
 				var0004->run_schedule();
 				var0008 = UI_get_random(0x0008);
@@ -109884,7 +109884,7 @@ void Func093B 0x93B (var var0000) {
 				var0007 = 0xFFC8;
 			}
 			if (gflags[0x0172]) {
-				var0007 &= 0xFFCE;
+				var0007 &= JOTH;
 			}
 		}
 		if (!gflags[0x0178]) {
@@ -110068,7 +110068,7 @@ void Func093B 0x93B (var var0000) {
 		if (item == 0xFFCA->get_npc_object()) {
 			var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x0029);
 		}
-		if ((item == 0xFFC8->get_npc_object()) || (item == 0xFFCE->get_npc_object())) {
+		if ((item == 0xFFC8->get_npc_object()) || (item == JOTH->get_npc_object())) {
 			var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x002C);
 		}
 		if ((item == 0xFFC5->get_npc_object()) || (item == GARTH->get_npc_object())) {
