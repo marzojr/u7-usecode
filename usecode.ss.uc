@@ -26843,33 +26843,33 @@ void Func0419 object#(0x419) () {
 	var0002 = Func0953();
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Excuse me...@");
-		Func097F(0xFFE7, (("@At thy service, " + var0000) + "!@"), 0x0002);
-		0xFFE7->set_schedule_type(TALK);
+		Func097F(AUTO_MESSENGER, (("@At thy service, " + var0000) + "!@"), 0x0002);
+		AUTO_MESSENGER->set_schedule_type(TALK);
 	}
 	if (event == PROXIMITY) {
 		var0003 = UI_get_random(0x0006);
 		if (var0003 == 0x0001) {
-			0xFFE7->item_say("@Please leave...@");
+			AUTO_MESSENGER->item_say("@Please leave...@");
 		}
 		if (var0003 == 0x0002) {
-			0xFFE7->item_say("@Rangers!@");
+			AUTO_MESSENGER->item_say("@Rangers!@");
 		}
 		if (var0003 == 0x0003) {
-			0xFFE7->item_say("@Leave!@");
+			AUTO_MESSENGER->item_say("@Leave!@");
 		}
 		if (var0003 == 0x0004) {
-			0xFFE7->item_say("@Beware!@");
+			AUTO_MESSENGER->item_say("@Beware!@");
 		}
 		if (var0003 == 0x0005) {
-			0xFFE7->item_say("@Do not touch that!@");
+			AUTO_MESSENGER->item_say("@Do not touch that!@");
 		}
 		if (var0003 == 0x0006) {
-			0xFFE7->item_say("@Go quickly!@");
+			AUTO_MESSENGER->item_say("@Go quickly!@");
 		}
 	}
 	if (event == STARTED_TALKING) {
-		0xFFE7->run_schedule();
-		0xFFE7->clear_item_say();
+		AUTO_MESSENGER->run_schedule();
+		AUTO_MESSENGER->clear_item_say();
 		0xFED6->show_npc_face0(0x0000);
 		if (!gflags[0x00E9]) {
 			if (gflags[0x00D7]) {
@@ -26937,18 +26937,18 @@ void Func0419 object#(0x419) () {
 				if ((!gflags[0x00E9]) && (!gflags[0x00EA])) {
 					UI_remove_npc_face0();
 					Func097F(AVATAR, "@Good day.@", 0x0000);
-					Func097F(0xFFE7, "@Do not forget the scroll.@", 0x0002);
+					Func097F(AUTO_MESSENGER, "@Do not forget the scroll.@", 0x0002);
 				} else if (gflags[0x00EA] && var0006) {
 					say("\"Thou dost look at me oddly... I think I have said too much!\"");
 					say("\"Now I must kill thee...\"");
-					0xFFE7->set_alignment(CHAOTIC);
-					Func097F(0xFFE7, "@Must kill!@", 0x0000);
-					0xFFE7->set_schedule_type(IN_COMBAT);
-					AVATAR->set_oppressor(0xFFE7);
+					AUTO_MESSENGER->set_alignment(CHAOTIC);
+					Func097F(AUTO_MESSENGER, "@Must kill!@", 0x0000);
+					AUTO_MESSENGER->set_schedule_type(IN_COMBAT);
+					AVATAR->set_oppressor(AUTO_MESSENGER);
 					abort;
 				} else {
 					say("\"If thou dost not leave quickly, I must call the Rangers!\"");
-					0xFFE7->set_schedule_type(TEND_SHOP);
+					AUTO_MESSENGER->set_schedule_type(TEND_SHOP);
 				}
 				break;
 		}
@@ -26961,8 +26961,8 @@ void Func0419 object#(0x419) () {
 			0xFFE1->set_alignment(CHAOTIC);
 			UI_remove_npc_face0();
 		}
-		0xFFE7->clear_item_flag(SI_TOURNAMENT);
-		0xFFE7->reduce_health(0x0037, NORMAL_DAMAGE);
+		AUTO_MESSENGER->clear_item_flag(SI_TOURNAMENT);
+		AUTO_MESSENGER->reduce_health(0x0037, NORMAL_DAMAGE);
 	}
 }
 
@@ -29349,9 +29349,9 @@ void Func041F object#(0x41F) () {
 			}
 		}
 		if (gflags[0x00DD] && (!gflags[0x00EA])) {
-			0xFFE7->move_object([0x09B9, 0x0715, 0x0000]);
-			0xFFE7->set_schedule_type(WAIT);
-			0xFFE7->set_item_flag(SI_TOURNAMENT);
+			AUTO_MESSENGER->move_object([0x09B9, 0x0715, 0x0000]);
+			AUTO_MESSENGER->set_schedule_type(WAIT);
+			AUTO_MESSENGER->set_item_flag(SI_TOURNAMENT);
 			var0010 = 0x0000 - 0xFFE1->get_npc_id();
 			if ((var0010 == 0x0000) || var0010->get_item_flag(DEAD)) {
 				var0004 = [];
@@ -72146,11 +72146,11 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
 void Func0700 object#(0x700) () {
 	if (gflags[0x00EA] && (!gflags[0x00EB])) {
-		if (0xFFE7->get_item_flag(DEAD)) {
+		if (AUTO_MESSENGER->get_item_flag(DEAD)) {
 			gflags[0x00EB] = true;
 		} else {
-			Func09AC(0xFFE7, -1, 0, TALK);
-			Func097F(0xFFE7, "@Who doth approach?!@", 0x0003);
+			Func09AC(AUTO_MESSENGER, -1, 0, TALK);
+			Func097F(AUTO_MESSENGER, "@Who doth approach?!@", 0x0003);
 		}
 	}
 }
@@ -79875,7 +79875,7 @@ void Func07E6 object#(0x7E6) () {
 	AVATAR->clear_item_flag(UNKNOWN_FLAG_17);
 	0xFFD8->clear_item_flag(DONT_MOVE);
 	0xFFDB->set_item_flag(CAN_FLY);
-	0xFFE7->set_item_flag(SI_TOURNAMENT);
+	AUTO_MESSENGER->set_item_flag(SI_TOURNAMENT);
 	var0004 = [0xFFD8, 0xFFD6, 0xFFDB, 0xFFD5];
 	var0005 = [0x08AC, 0x0718];
 	var0006 = [0x07BA, 0x08D3];
@@ -106254,12 +106254,12 @@ void Func08FF 0x8FF () {
 	}
 	var0000 = ((((((((((((((GUSTACIO->get_item_flag(MET) + 0xFFE6->get_item_flag(MET)) + FEDABIBLIO->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + COLUMNA->get_item_flag(MET)) + MELINO->get_item_flag(MET)) + DUCIO->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + JULIA->get_item_flag(MET)) + 0xFFE2->get_item_flag(MET)) + 0xFFE4->get_item_flag(MET)) + BUCIA->get_item_flag(MET)) + 0xFFE5->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + FRELI->get_item_flag(MET)) + gflags[0x00D6];
 	if ((var0000 >= 0x0003) && (!gflags[0x00D7])) {
-		var0001 = 0xFFE7->approach_avatar(0x005A, 0x0028);
+		var0001 = AUTO_MESSENGER->approach_avatar(0x005A, 0x0028);
 		if (var0001) {
-			0xFFE7->set_schedule_type(TALK);
+			AUTO_MESSENGER->set_schedule_type(TALK);
 			var0002 = AVATAR->get_object_position();
 			var0003 = Func0954();
-			Func097F(0xFFE7, (("@One moment, " + var0003) + " .@"), 0x0002);
+			Func097F(AUTO_MESSENGER, (("@One moment, " + var0003) + " .@"), 0x0002);
 		}
 	}
 }

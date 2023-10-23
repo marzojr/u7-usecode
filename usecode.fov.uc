@@ -14894,7 +14894,7 @@ void Func0419 object#(0x419) () {
 	var var0005;
 
 	if (event == DOUBLECLICK) {
-		0xFFE7->show_npc_face(0x0000);
+		CHUCKLES->show_npc_face(0x0000);
 		if (!gflags[0x009A]) {
 			say("You are wary of conversing with that trickster Chuckles, but decide to anyway.");
 			gflags[0x009A] = true;
@@ -15027,7 +15027,7 @@ void Func0419 object#(0x419) () {
 		}
 	}
 	if (event == PROXIMITY) {
-		var0003 = 0xFFE7->get_npc_object()->get_schedule_type();
+		var0003 = CHUCKLES->get_npc_object()->get_schedule_type();
 		if (var0003 == DANCE) {
 			var0004 = UI_die_roll(0x0001, 0x0004);
 			if (var0004 == 0x0001) {
@@ -15042,7 +15042,7 @@ void Func0419 object#(0x419) () {
 			if (var0004 == 0x0004) {
 				var0005 = "Shall we dance?@";
 			}
-			0xFFE7->item_say(var0005);
+			CHUCKLES->item_say(var0005);
 		}
 	}
 }
@@ -66745,7 +66745,7 @@ void Func0862 0x862 () {
 			if (var0000) {
 				IOLO->say("\"I would like to give Chuckles a black eye!\"");
 				IOLO->hide();
-				0xFFE7->show_npc_face(0x0000);
+				CHUCKLES->show_npc_face(0x0000);
 			}
 			var0003 = true;
 			UI_clear_answers();
