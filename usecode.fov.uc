@@ -20335,7 +20335,7 @@ void Func043E object#(0x43E) () {
 	var var0012;
 
 	if (event == DOUBLECLICK) {
-		0xFFC2->show_npc_face(0x0000);
+		SNAZ->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
 		if (!gflags[0x00BF]) {
@@ -20531,7 +20531,7 @@ void Func043E object#(0x43E) () {
 	}
 	if (event == PROXIMITY) {
 		var000F = UI_part_of_day();
-		var0010 = 0xFFC2->get_npc_object()->get_schedule_type();
+		var0010 = SNAZ->get_npc_object()->get_schedule_type();
 		var0011 = UI_die_roll(0x0001, 0x0004);
 		if (var0010 == WANDER) {
 			if (var0011 == 0x0001) {
@@ -20546,9 +20546,9 @@ void Func043E object#(0x43E) () {
 			if (var0011 == 0x0004) {
 				var0012 = "@Handouts accepted!@";
 			}
-			0xFFC2->item_say(var0012);
+			SNAZ->item_say(var0012);
 		} else {
-			Func092E(0xFFC2);
+			Func092E(SNAZ);
 		}
 	}
 }

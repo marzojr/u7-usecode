@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [ANDRAL, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -41205,20 +41205,20 @@ void Func043E object#(0x43E) () {
 	var var0008;
 
 	var0000 = Func0953();
-	var0001 = 0xFFC2->get_item_flag(MET);
+	var0001 = ANDRAL->get_item_flag(MET);
 	if (event == DOUBLECLICK) {
 		Func097F(AVATAR, "Hello, sir.", 0x0000);
-		0xFFC2->Func07D1();
-		Func097F(0xFFC2, "Greetings.", 0x0002);
-		0xFFC2->set_schedule_type(TALK);
+		ANDRAL->Func07D1();
+		Func097F(ANDRAL, "Greetings.", 0x0002);
+		ANDRAL->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFC2->run_schedule();
-		0xFFC2->clear_item_say();
-		0xFFC2->show_npc_face0(0x0000);
+		ANDRAL->run_schedule();
+		ANDRAL->clear_item_say();
+		ANDRAL->show_npc_face0(0x0000);
 		if (!var0001) {
 			say("\"Hello, stranger. I am Andral of Monitor. Dost thou need the services of a master artist?\"");
-			0xFFC2->set_item_flag(MET);
+			ANDRAL->set_item_flag(MET);
 		} else {
 			say("\"Welcome, ",
 				var0000,
@@ -41374,59 +41374,59 @@ void Func043E object#(0x43E) () {
 
 			case "bye":
 				Func097F(AVATAR, "@Bye!@", 0x0000);
-				Func097F(0xFFC2, "@'Til next we meet...@", 0x0002);
+				Func097F(ANDRAL, "@'Til next we meet...@", 0x0002);
 				break;
 		}
 	}
 	if (event == PROXIMITY) {
-		0xFFC2->clear_item_say();
+		ANDRAL->clear_item_say();
 		if (0xFFB9->npc_nearby() && (0xFFB9->get_schedule_type() == MAJOR_SIT)) {
 			0xFFB9->clear_item_say();
-			var0004 = 0xFFC2->direction_from(0xFFB9);
-			var0004 = script 0xFFC2 {
+			var0004 = ANDRAL->direction_from(0xFFB9);
+			var0004 = script ANDRAL {
 				nohalt;
 				face var0004;
 			};
 			var0005 = UI_get_random(0x0006);
 			if (var0005 == 0x0001) {
-				Func097F(0xFFC2, "@Turn this way...@", 0x0000);
+				Func097F(ANDRAL, "@Turn this way...@", 0x0000);
 				Func097F(0xFFB9, "@Hurry!@", 0x0003);
 			}
 			if (var0005 == 0x0002) {
-				Func097F(0xFFC2, "@Don't move!@", 0x0000);
+				Func097F(ANDRAL, "@Don't move!@", 0x0000);
 				Func097F(0xFFB9, "@Sorry, Andral.@", 0x0003);
 			}
 			if (var0005 == 0x0003) {
 				Func097F(0xFFB9, "@Is it done yet?@", 0x0000);
-				Func097F(0xFFC2, "@Art doth take time.@", 0x0003);
+				Func097F(ANDRAL, "@Art doth take time.@", 0x0003);
 			}
 			if (var0005 > 0x0003) {
-				Func097F(0xFFC2, "@Aha!@", 0x0000);
-				var0006 = 0xFFC2->find_nearby(0x037E, 0x000A, MASK_NONE);
+				Func097F(ANDRAL, "@Aha!@", 0x0000);
+				var0006 = ANDRAL->find_nearby(0x037E, 0x000A, MASK_NONE);
 				if (var0006) {
-					0xFFC2->si_path_run_usecode(var0006->get_object_position(), SI_PATH_SUCCESS, item, Func043E, false);
+					ANDRAL->si_path_run_usecode(var0006->get_object_position(), SI_PATH_SUCCESS, item, Func043E, false);
 					UI_set_path_failure([Func043E], item, SI_PATH_FAILURE);
 				}
 			}
 		} else {
 			var0007 = ["@Piece by piece...@", "@Art is life!@", "@I have a vision...@", "@Take a chance!@", "@Patience!@", "@Art is not easy...@"];
-			Func097F(0xFFC2, var0007[UI_get_random(UI_get_array_size(var0007))], 0x0000);
+			Func097F(ANDRAL, var0007[UI_get_random(UI_get_array_size(var0007))], 0x0000);
 		}
 	}
 	if (event == SI_PATH_FAILURE) {
-		var0006 = 0xFFC2->find_nearby(0x037E, 0x0004, MASK_NONE);
+		var0006 = ANDRAL->find_nearby(0x037E, 0x0004, MASK_NONE);
 		if (var0006) {
 			event = SI_PATH_SUCCESS;
 		} else {
-			0xFFC2->run_schedule();
+			ANDRAL->run_schedule();
 			abort;
 		}
 	}
 	if (event == SI_PATH_SUCCESS) {
-		var0006 = 0xFFC2->find_nearby(0x037E, 0x0004, MASK_NONE);
+		var0006 = ANDRAL->find_nearby(0x037E, 0x0004, MASK_NONE);
 		if (var0006) {
-			var0008 = 0xFFC2->direction_from(var0006);
-			0xFFC2->set_schedule_type(WAIT);
+			var0008 = ANDRAL->direction_from(var0006);
+			ANDRAL->set_schedule_type(WAIT);
 			var0004 = script item {
 				nohalt;
 				face var0008;
@@ -41441,14 +41441,14 @@ void Func043E object#(0x43E) () {
 				call Func043E;
 			};
 		} else {
-			0xFFC2->run_schedule();
+			ANDRAL->run_schedule();
 		}
 		abort;
 	}
 	if (event == SCRIPTED) {
 		var0007 = ["@Much better!@", "@'Tis taking shape!@", "@Hmmm...@", "@Uh-oh...@", "@Ouch!@", "@A masterpiece!@"];
-		Func097F(0xFFC2, var0007[UI_get_random(UI_get_array_size(var0007))], 0x0000);
-		0xFFC2->run_schedule();
+		Func097F(ANDRAL, var0007[UI_get_random(UI_get_array_size(var0007))], 0x0000);
+		ANDRAL->run_schedule();
 	}
 }
 
@@ -45187,7 +45187,7 @@ void Func0447 object#(0x447) () {
 		if (gflags[0x0041]) {
 			say("\"I would love to converse with thee, friend Avatar. But this is the hour when Andral sculpts my likeness.\"");
 			Func097F(0xFFB9, "@Go on, Andral!@", 0x0000);
-			Func097F(0xFFC2, "@Yes, milord.@", 0x0003);
+			Func097F(ANDRAL, "@Yes, milord.@", 0x0003);
 			abort;
 		}
 		say("\"What art thou, a moron? Canst thou not see that the artist is at work? Andral is sculpting me.\"");
@@ -45199,7 +45199,7 @@ void Func0447 object#(0x447) () {
 		AVATAR->item_say("@Sir Knight!@");
 		0xFFB9->Func07D1();
 		Func097F(0xFFB9, "@Eh?@", 0x0000);
-		if ((0xFFB9->get_schedule_type() == MAJOR_SIT) && 0xFFC2->npc_nearby()) {
+		if ((0xFFB9->get_schedule_type() == MAJOR_SIT) && ANDRAL->npc_nearby()) {
 			var0008 = script 0xFFB9 after 5 ticks {
 				nohalt;
 				call Func0447;
@@ -78745,7 +78745,7 @@ void Func07D8 object#(0x7D8) () {
 		FEDABIBLIO->remove_npc();
 		0xFFB7->remove_npc();
 		0xFFB7->set_item_flag(DEAD);
-		Func09AC(0xFFC2, 0x0366, 0x0AA9, WAIT);
+		Func09AC(ANDRAL, 0x0366, 0x0AA9, WAIT);
 		Func09AC(0xFF6A, 0x03B6, 0x0A54, WAIT);
 		Func09AC(0xFFB0, 0x0323, 0x0ABC, WAIT);
 		Func09AC(0xFFC1, 0x03B4, 0x0A17, WAIT);
