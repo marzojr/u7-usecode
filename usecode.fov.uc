@@ -14216,10 +14216,10 @@ void Func0416 object#(0x416) () {
 	var var0004;
 
 	if (event == DOUBLECLICK) {
-		0xFFEA->show_npc_face(0x0000);
+		CAROLINE->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		if (var0000 == NIGHT) {
-			var0001 = Func08FC(0xFFEA, KLOG);
+			var0001 = Func08FC(CAROLINE, KLOG);
 			if (var0001) {
 				say("Caroline asks you to keep your voice down. The Fellowship meeting is in progress.*");
 			} else {
@@ -14278,7 +14278,7 @@ void Func0416 object#(0x416) () {
 		say("\"Goodbye!\"*");
 	}
 	if (event == PROXIMITY) {
-		var0002 = 0xFFEA->get_npc_object()->get_schedule_type();
+		var0002 = CAROLINE->get_npc_object()->get_schedule_type();
 		var0003 = UI_die_roll(0x0001, 0x0004);
 		if (var0002 == WANDER) {
 			if (var0003 == 0x0001) {
@@ -14293,9 +14293,9 @@ void Func0416 object#(0x416) () {
 			if (var0003 == 0x0004) {
 				var0004 = "@Worthiness Precedes Reward!@";
 			}
-			0xFFEA->item_say(var0004);
+			CAROLINE->item_say(var0004);
 		} else {
-			Func092E(0xFFEA);
+			Func092E(CAROLINE);
 		}
 	}
 }
@@ -71222,7 +71222,7 @@ void Func08AB 0x8AB () {
 	var0000 = Func08F7(JOHNSON);
 	var0001 = Func08F7(0xFF14);
 	var0002 = Func08F7(DELL);
-	var0003 = Func08F7(0xFFEA);
+	var0003 = Func08F7(CAROLINE);
 	var0004 = Func08F7(IOLO);
 	var0005 = Func08F7(SPARK);
 	KLOG->say("Klog is leading the town members in a Fellowship meeting.");
@@ -71247,8 +71247,8 @@ void Func08AB 0x8AB () {
 		DELL->hide();
 	}
 	if (var0003) {
-		0xFFEA->say("\"As a Fellowship member, I feel as if I am doing some good for Britannia.\"*");
-		0xFFEA->hide();
+		CAROLINE->say("\"As a Fellowship member, I feel as if I am doing some good for Britannia.\"*");
+		CAROLINE->hide();
 	}
 	if (var0005) {
 		SPARK->say("Spark whispers to no one in particular, \"This is the most boring pile of horse manure in which I have ever had the pleasure to wallow!\"*");
