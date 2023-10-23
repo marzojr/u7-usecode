@@ -18869,13 +18869,13 @@ void Func0435 object#(0x435) () {
 	var var000B;
 
 	if (event == DOUBLECLICK) {
-		0xFFCB->show_npc_face(0x0000);
+		GAYE->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
 		var0002 = UI_part_of_day();
-		var0003 = 0xFFCB->get_npc_object()->get_schedule_type();
+		var0003 = GAYE->get_npc_object()->get_schedule_type();
 		if (var0002 == NIGHT) {
-			var0004 = Func08FC(0xFFCB, BATLIN);
+			var0004 = Func08FC(GAYE, BATLIN);
 			if (var0004) {
 				say("Gaye is watching the Fellowship meeting. She turns to you brusquely and puts a finger to her lips, gesturing for you to be silent.*");
 				abort;
@@ -18974,7 +18974,7 @@ void Func0435 object#(0x435) () {
 	}
 	if (event == PROXIMITY) {
 		var0002 = UI_part_of_day();
-		var0003 = 0xFFCB->get_npc_object()->get_schedule_type();
+		var0003 = GAYE->get_npc_object()->get_schedule_type();
 		var000A = UI_die_roll(0x0001, 0x0004);
 		if (var0003 == SEW) {
 			if (var000A == 0x0001) {
@@ -18989,9 +18989,9 @@ void Func0435 object#(0x435) () {
 			if (var000A == 0x0004) {
 				var000B = "@Fine clothes here!@";
 			}
-			0xFFCB->item_say(var000B);
+			GAYE->item_say(var000B);
 		} else {
-			Func092E(0xFFCB);
+			Func092E(GAYE);
 		}
 	}
 }
@@ -65410,10 +65410,10 @@ void Func084F 0x84F () {
 		IOLO->hide();
 	}
 	BATLIN->say("\"Now is the time when our members give their testimonials of how they have been applying the Triad of Inner Strength to their lives. Who shall be the first?\"");
-	var0004 = Func08F7(0xFFCB);
+	var0004 = Func08F7(GAYE);
 	if (var0004) {
-		0xFFCB->say("\"The Fellowship has taught me to live with the shortcomings of others,\" says Gaye.");
-		0xFFCB->hide();
+		GAYE->say("\"The Fellowship has taught me to live with the shortcomings of others,\" says Gaye.");
+		GAYE->hide();
 	}
 	var0005 = Func08F7(CANDICE);
 	if (var0005) {
@@ -65573,10 +65573,10 @@ void Func0850 0x850 () {
 		FIGG->say("\"The Fellowship has taught me how to better perform my duties as the Caretaker of the Royal Orchards,\" says Figg.*");
 		FIGG->hide();
 	}
-	var0005 = Func08F7(0xFFCB);
+	var0005 = Func08F7(GAYE);
 	if (var0005) {
-		0xFFCB->say("\"The Fellowship has taught me to, first and foremost, treat people with respect,\" says Gaye.*");
-		0xFFCB->hide();
+		GAYE->say("\"The Fellowship has taught me to, first and foremost, treat people with respect,\" says Gaye.*");
+		GAYE->hide();
 	}
 	var0006 = Func08F7(0xFFC9);
 	if (var0006) {
