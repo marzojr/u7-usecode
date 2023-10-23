@@ -15836,7 +15836,7 @@ void Func041E object#(0x41E) () {
 	var var0004;
 
 	if (event == DOUBLECLICK) {
-		0xFFE2->show_npc_face(0x0000);
+		AMBER->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		add(["name", "job", "bye"]);
 		var0001 = Func08F7(SHAMINO);
@@ -15903,7 +15903,7 @@ void Func041E object#(0x41E) () {
 					say("\"Poo Poo Head!\" she cries. She then rushes to him and kisses him full on the mouth. Shamino turns red and shuffles his feet.*");
 					SHAMINO->say("\"Not in front of the Avatar, Poo!\"*");
 					SHAMINO->hide();
-					0xFFE2->say("\"To blazes with the Avatar!\" She kisses him again. \"The Avatar is the last one who will convince thee to settle down.\"");
+					AMBER->say("\"To blazes with the Avatar!\" She kisses him again. \"The Avatar is the last one who will convince thee to settle down.\"");
 				} else {
 					say("\"Dost thou know my beau? He is probably drowning his sorrows at the Blue Boar. The lazy knave! I will not let him go about adventuring. It is time for him to settle down. Thou canst tell him I said so!\"");
 				}
@@ -15918,7 +15918,7 @@ void Func041E object#(0x41E) () {
 		say("\"Adieu!\"*");
 	}
 	if (event == PROXIMITY) {
-		var0002 = 0xFFE2->get_npc_object()->get_schedule_type();
+		var0002 = AMBER->get_npc_object()->get_schedule_type();
 		var0003 = UI_die_roll(0x0001, 0x0004);
 		if (var0002 == PATROL) {
 			if (var0003 == 0x0001) {
@@ -15933,9 +15933,9 @@ void Func041E object#(0x41E) () {
 			if (var0003 == 0x0004) {
 				var0004 = "@I -hate- my lines!@";
 			}
-			0xFFE2->item_say(var0004);
+			AMBER->item_say(var0004);
 		} else {
-			Func092E(0xFFE2);
+			Func092E(AMBER);
 		}
 	}
 }

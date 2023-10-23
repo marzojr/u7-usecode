@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, GUSTACIO, MELINO, JULIA, 0xFFE2, 0xFFE0, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, 0xFFD6, 0xFFD5, GOBLIN_MESSENGER, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, GUSTACIO, MELINO, JULIA, ROCCO, 0xFFE0, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, 0xFFD6, 0xFFD5, GOBLIN_MESSENGER, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -21496,8 +21496,8 @@ void Func0401 object#(0x401) () {
 			say("\"How good to see thee again, ",
 				var0001,
 				"! Knowing that thou wouldst soon return, I have waited for thee at this establishment.\"");
-			if (Func0942(0xFFE2)) {
-				Func094E(0xFFE2, "@And he hath developed quite a bar tab!@");
+			if (Func0942(ROCCO)) {
+				Func094E(ROCCO, "@And he hath developed quite a bar tab!@");
 				0x0000->set_conversation_slot();
 				say("\"One that I shall pay, worry thou not!\"");
 			}
@@ -22964,7 +22964,7 @@ void Func040D object#(0x40D) () {
 				abort;
 
 			case "information" (remove):
-				if ((0xFF3A->npc_nearby() || (PETRA->npc_nearby() || 0xFFE2->npc_nearby())) && gflags[0x013E]) {
+				if ((0xFF3A->npc_nearby() || (PETRA->npc_nearby() || ROCCO->npc_nearby())) && gflags[0x013E]) {
 					var0009 = 0x0064;
 					gflags[0x013E] = false;
 					say("\"'Tis so flattering to be asked so many questions by thee, ",
@@ -27757,9 +27757,9 @@ void Func041C object#(0x41C) () {
 			PETRA->item_say("@Want a room?@");
 		}
 		if (var0007 == 0x0005) {
-			if (Func0942(0xFFE2)) {
+			if (Func0942(ROCCO)) {
 				PETRA->item_say("@Rocco!@");
-				Func097F(0xFFE2, "@In a minute...@", 0x0002);
+				Func097F(ROCCO, "@In a minute...@", 0x0002);
 			} else {
 				PETRA->item_say("@Work, work, work...@");
 			}
@@ -27939,8 +27939,8 @@ void Func041C object#(0x41C) () {
 
 			case "Blue Boar Inn" (remove):
 				say("\"The finest eating and drinking establishment in all Moonshade! Run by the finest man in all Moonshade...\"");
-				if (Func0942(0xFFE2) == true) {
-					0xFFE2->show_npc_face1(0x0000);
+				if (Func0942(ROCCO) == true) {
+					ROCCO->show_npc_face1(0x0000);
 					say("\"What madness art thou saying, Petra?\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -28695,44 +28695,44 @@ void Func041E object#(0x41E) () {
 	if (event == PROXIMITY) {
 		var0006 = UI_get_random(0x0006);
 		if (var0006 == 0x0001) {
-			0xFFE2->item_say("@Petra, bring wine!@");
+			ROCCO->item_say("@Petra, bring wine!@");
 			Func097F(PETRA, "@In a minute...@", 0x0002);
 		}
 		if (var0006 == 0x0002) {
-			0xFFE2->item_say("@These are hard times...@");
+			ROCCO->item_say("@These are hard times...@");
 		}
 		if (var0006 == 0x0003) {
-			0xFFE2->item_say("@Rooms for rent!@");
+			ROCCO->item_say("@Rooms for rent!@");
 		}
 		if (var0006 == 0x0004) {
-			0xFFE2->item_say("@Care for a drink?@");
+			ROCCO->item_say("@Care for a drink?@");
 		}
 		if (var0006 == 0x0005) {
-			0xFFE2->item_say("@Hungry?@");
+			ROCCO->item_say("@Hungry?@");
 		}
 		if (var0006 == 0x0006) {
-			0xFFE2->item_say("@Have a seat...@");
+			ROCCO->item_say("@Have a seat...@");
 		}
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Might I speak with thee?@");
-		0xFFE2->Func07D1();
-		Func097F(0xFFE2, (("@Certainly, " + var0000) + ".@"), 0x0005);
-		0xFFE2->set_schedule_type(TALK);
+		ROCCO->Func07D1();
+		Func097F(ROCCO, (("@Certainly, " + var0000) + ".@"), 0x0005);
+		ROCCO->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFE2->run_schedule();
-		0xFFE2->clear_item_say();
-		0xFFE2->show_npc_face0(0x0000);
-		var0007 = 0xFFE2->get_item_flag(MET);
+		ROCCO->run_schedule();
+		ROCCO->clear_item_say();
+		ROCCO->show_npc_face0(0x0000);
+		var0007 = ROCCO->get_item_flag(MET);
 		if (var0007 == false) {
-			if (0xFFE2->get_schedule_type() == TEND_SHOP) {
+			if (ROCCO->get_schedule_type() == TEND_SHOP) {
 				say("\"Welcome to the Blue Boar Inn. I am the innkeeper. My name is Rocco.\"");
 			} else {
 				say("\"I do not believe we've met. I'm Rocco, the innkeeper at the Blue Boar.\"");
 			}
 			say("\"'Tis good to have more visitors again. We had despaired, what with the storms and all.\"");
-			0xFFE2->set_item_flag(MET);
+			ROCCO->set_item_flag(MET);
 		} else {
 			say("\"So good to see thee again, ",
 				var0000,
@@ -28845,7 +28845,7 @@ void Func041E object#(0x41E) () {
 				say("\"Such a one did come through here, perhaps two\tmonths ago.\"");
 				if (Func0942(PETRA)) {
 					Func094E(PETRA, "@'Twas three months ago, Rocco.@");
-					0xFFE2->show_npc_face0(0x0000);
+					ROCCO->show_npc_face0(0x0000);
 					say("\"Yes, she's right... it was three months ago.\"");
 				}
 				say("\"There was some sort of a scandal, as I recall. It was said that this Batlin stole an ancient artifact of some kind. He fled by ship -- perhaps Captain Hawk could tell thee more.\"");
@@ -28855,7 +28855,7 @@ void Func041E object#(0x41E) () {
 			case "the scholar Gwenno" (remove):
 				say("\"Thou dost know her! She and I are the closest of friends. She stayed here for many weeks.\"");
 				var0008 = Func0992(IOLO, "@Just how well dost thou know Gwenno?@", "@Gwenno is my friend's missing wife.@", false);
-				0xFFE2->show_npc_face0(0x0000);
+				ROCCO->show_npc_face0(0x0000);
 				say("\"I swear I am innocent! We were only friends, ",
 					var0000,
 					".\"");
@@ -28880,7 +28880,7 @@ void Func041E object#(0x41E) () {
 				say("\"It hath been a long time since we last saw Gwenno. Many months.\"");
 				if (Func0942(PETRA)) {
 					Func094E(PETRA, "@Eight months, dear Rocco.@");
-					0xFFE2->show_npc_face0(0x0000);
+					ROCCO->show_npc_face0(0x0000);
 				}
 				fallthrough;
 
@@ -28890,7 +28890,7 @@ void Func041E object#(0x41E) () {
 				fallthrough;
 
 			case "food":
-				if ((0xFFE2->get_schedule_type() == TEND_SHOP) || (0xFFE2->get_schedule_type() == WAITER)) {
+				if ((ROCCO->get_schedule_type() == TEND_SHOP) || (ROCCO->get_schedule_type() == WAITER)) {
 					say("\"We serve nothing pretentious, but it fills the belly and warms the soul.\"");
 					if (!var0003) {
 						say("\"Petra is a surprisingly good cook, considering that she is an automaton.\"");
@@ -28910,7 +28910,7 @@ void Func041E object#(0x41E) () {
 					PETRA->show_npc_face1(0x0000);
 					say("\"Do not mention that name again, Rocco! Why summon more trouble than we already have?\"");
 					UI_remove_npc_face1();
-					0xFFE2->show_npc_face0(0x0000);
+					ROCCO->show_npc_face0(0x0000);
 					say("\"She doth not care much for Torrissio -- considering that he created her for vile and exploitive reasons. But Petra escaped, and now I care for her.\"");
 				}
 				add("Torrissio");
@@ -28925,7 +28925,7 @@ void Func041E object#(0x41E) () {
 				fallthrough;
 
 			case "drink":
-				if ((0xFFE2->get_schedule_type() == TEND_SHOP) || (0xFFE2->get_schedule_type() == WAITER)) {
+				if ((ROCCO->get_schedule_type() == TEND_SHOP) || (ROCCO->get_schedule_type() == WAITER)) {
 					say("\"We serve only the finest of beverages.\"");
 					Func085F();
 				} else {
@@ -28952,7 +28952,7 @@ void Func041E object#(0x41E) () {
 					} else {
 						var0008 = Func0992(0x0001, "@But Avatar, we do not have the guilders!@", 0x0000, false);
 						if (var0008 != AVATAR) {
-							0xFFE2->show_npc_face0(0x0000);
+							ROCCO->show_npc_face0(0x0000);
 							say("\"Then thou canst not stay at the inn. In these hard times, I cannot afford to keep thee and thy companions for free.\"");
 						} else {
 							say("\"Thou hast not enough guilders for my rooms.\"");
@@ -28966,7 +28966,7 @@ void Func041E object#(0x41E) () {
 			case "brown bottle" (remove):
 				say("\"I do indeed recognize the description. Such bottles are used to contain that foul brew which the sailor-folk of Fawn prefer. I cannot tolerate the swill myself, nor can any of my customers. That's why I do not stock it.\"");
 				var0008 = Func0992(0x0001, "@Perhaps we should investigate this place called Fawn.@", 0x0000, false);
-				0xFFE2->show_npc_face0(0x0000);
+				ROCCO->show_npc_face0(0x0000);
 				if (var0008 != AVATAR) {
 					say("\"Good luck to thee! With no ships sailing, there is no way to go to Fawn from here.\"");
 				}
@@ -29040,7 +29040,7 @@ void Func041E object#(0x41E) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Fare well@", 0x0000);
-				Func097F(0xFFE2, "@Come again!@", 0x0002);
+				Func097F(ROCCO, "@Come again!@", 0x0002);
 				Func08FF();
 				break;
 		}
@@ -32445,8 +32445,8 @@ void Func0428 object#(0x428) () {
 			case "blue egg":
 				if (Func097D(PARTY, 0x0001, 0x0241, QUALITY_ANY, 0x0003)) {
 					say("\"A rotten egg!\" ~\"Why art thou shoving such a thing at me?\"");
-					if (Func0942(0xFFE2)) {
-						0xFFE2->show_npc_face1(0x0000);
+					if (Func0942(ROCCO)) {
+						ROCCO->show_npc_face1(0x0000);
 						say("\"Take that thing out of here!\" ~\"My patrons are trying to eat!\"");
 						UI_remove_npc_face1();
 						0x0000->set_conversation_slot();
@@ -78770,7 +78770,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(GUSTACIO, 0x0978, 0x0819, WAIT);
 		Func09AC(MELINO, 0x09B7, 0x07E5, WAIT);
 		Func09AC(JULIA, 0x096B, 0x07C2, WAIT);
-		Func09AC(0xFFE2, 0x098B, 0x07A6, WAIT);
+		Func09AC(ROCCO, 0x098B, 0x07A6, WAIT);
 		Func09AC(0xFFE0, 0x0999, 0x07A2, WAIT);
 		Func09AC(POTHOS, 0x0958, 0x0793, WAIT);
 		Func09AC(MOSH, 0x0948, 0x0784, WAIT);
@@ -84235,8 +84235,8 @@ void Func0808 0x808 (var var0000, var var0001) {
 				}
 				if (var0001 == 0x0009) {
 					say("\"I perform music for those who would listen. Music is a difficult art.\"");
-					if (0xFFE2->npc_nearby()) {
-						0xFFE2->show_npc_face1(0x0000);
+					if (ROCCO->npc_nearby()) {
+						ROCCO->show_npc_face1(0x0000);
 						say("\"And thou art indeed a master, musician automaton.\"");
 						UI_remove_npc_face1();
 						0x0000->set_conversation_slot();
@@ -94963,7 +94963,7 @@ void Func0851 0x851 () {
 		} else {
 			var0004 = Func0992(0x0001, "@But Avatar, we do not have the guilders!@", 0x0000, false);
 			if (var0004 != AVATAR) {
-				0xFFE2->show_npc_face0(0x0000);
+				ROCCO->show_npc_face0(0x0000);
 				say("\"Then thou canst not stay at the inn. In these hard times, I cannot afford to keep thee and thy companions for free.\"");
 			} else {
 				say("\"Thou hast not enough guilders for my rooms.\"");
@@ -95442,12 +95442,12 @@ var Func0854 0x854 (var var0000, var var0001) {
 				}
 				if (var000F == 0x0003) {
 					say("\"Thou must think me witless!\"");
-					if (Func0942(0xFFE2)) {
+					if (Func0942(ROCCO)) {
 						var0010 = "his";
 						if (var0003) {
 							var0010 = "her";
 						}
-						0xFFE2->show_npc_face1(0x0000);
+						ROCCO->show_npc_face1(0x0000);
 						say("\"If this person is bothering thee, Petra, I shall be happy to soften ",
 							var0010,
 							" skull for thee.\"");
@@ -96441,17 +96441,17 @@ void Func085E 0x85E () {
 		} else if (var000D == 0x0003) {
 			var0012 = Func0992(0x0001, (("@But " + var0000) + ", we have not the guilders to pay for this.@"), 0x0000, false);
 			if (var0012 != AVATAR) {
-				0xFFE2->show_npc_face0(0x0000);
+				ROCCO->show_npc_face0(0x0000);
 				say("\"Well, I hate to see thee go hungry, but Petra and I can not afford to feed thee for free. I am sorry, ",
 					var0000,
 					".\"");
 			} else {
 				say("\"Thou dost not have enough guilders for that!\"");
 			}
-			if (0x001F < (0xFFE2->get_npc_id() + 0x0006)) {
-				0xFFE2->set_npc_id(0x001F);
+			if (0x001F < (ROCCO->get_npc_id() + 0x0006)) {
+				ROCCO->set_npc_id(0x001F);
 			} else {
-				0xFFE2->set_npc_id(0xFFE2->get_npc_id() + 0x0006);
+				ROCCO->set_npc_id(ROCCO->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Wouldst thou care for more?\"");
@@ -96558,15 +96558,15 @@ void Func085F 0x85F () {
 		} else if (var000D == 0x0003) {
 			var0010 = Func0992(0x0001, (("@But " + var0001) + ", we lack adequate funds!@"), 0x0000, false);
 			if (var0010 != AVATAR) {
-				0xFFE2->show_npc_face0(0x0000);
+				ROCCO->show_npc_face0(0x0000);
 				say("\"Then thou'rt not drinking here!\"");
 			} else {
 				say("\"Thou dost not have the guilders to pay me!\"");
 			}
-			if (0x001F < (0xFFE2->get_npc_id() + 0x0006)) {
-				0xFFE2->set_npc_id(0x001F);
+			if (0x001F < (ROCCO->get_npc_id() + 0x0006)) {
+				ROCCO->set_npc_id(0x001F);
 			} else {
-				0xFFE2->set_npc_id(0xFFE2->get_npc_id() + 0x0006);
+				ROCCO->set_npc_id(ROCCO->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Wouldst thou care for more?\"");
@@ -96607,12 +96607,12 @@ var Func0860 0x860 (var var0000, var var0001) {
 	var0003 = UI_is_pc_female();
 	var0004 = var0000;
 	var0005 = (var0001 / 0x0003) * 0x0002;
-	var0006 = 0x000F - (0xFFE2->get_npc_id() / 0x0002);
+	var0006 = 0x000F - (ROCCO->get_npc_id() / 0x0002);
 	var0007 = 0x0000;
 	var0008 = 0x0001;
 	var0009 = 0x0000;
 	var000A = 0x0002;
-	var000B = 0xFFE2->get_npc_id();
+	var000B = ROCCO->get_npc_id();
 	while (var0008) {
 		var000C = Func0956(["yes", "no", "haggle"]);
 		if (var000C == "no") {
@@ -96646,7 +96646,7 @@ var Func0860 0x860 (var var0000, var var0001) {
 						PETRA->show_npc_face1(0x0000);
 						say("\"Thou art too old to be an innkeeper, Rocco! Thy mind grows soft, like an over-ripe fruit.\"");
 						UI_remove_npc_face1();
-						0xFFE2->show_npc_face0(0x0000);
+						ROCCO->show_npc_face0(0x0000);
 						say("\"Isn't that the truth...\"");
 					}
 				}
@@ -96704,7 +96704,7 @@ var Func0860 0x860 (var var0000, var var0001) {
 				"?\"");
 			if (Func0955()) {
 				if (var000B > 0x0001) {
-					0xFFE2->set_npc_id(var000B - 0x0002);
+					ROCCO->set_npc_id(var000B - 0x0002);
 				}
 				return var0004;
 			}
@@ -96718,9 +96718,9 @@ var Func0860 0x860 (var var0000, var var0001) {
 				say("\"Dost thou think me a fool, to argue with me only to change thy mind? I shall spread the word about thee in this town, wait and see!\"");
 			}
 			if (0x001F < (var000B + 0x000A)) {
-				0xFFE2->set_npc_id(0x001F);
+				ROCCO->set_npc_id(0x001F);
 			} else {
-				0xFFE2->set_npc_id(var000B + 0x000A);
+				ROCCO->set_npc_id(var000B + 0x000A);
 			}
 			return 0x0000;
 		}
@@ -96732,7 +96732,7 @@ var Func0860 0x860 (var var0000, var var0001) {
 					var0004,
 					" was my final offer. Dost thou accept?\"");
 				if (var000B < 0x001C) {
-					0xFFE2->set_npc_id(var000B + 0x0004);
+					ROCCO->set_npc_id(var000B + 0x0004);
 				}
 				if (Func0955()) {
 					return var0004;
@@ -96743,7 +96743,7 @@ var Func0860 0x860 (var var0000, var var0001) {
 					var0004,
 					" guilders is my final offer.\"");
 				if (var000B < 0x001E) {
-					0xFFE2->set_npc_id(var000B + 0x0002);
+					ROCCO->set_npc_id(var000B + 0x0002);
 				}
 			}
 		} else {
@@ -96786,7 +96786,7 @@ var Func0860 0x860 (var var0000, var var0001) {
 					say("\"Petra, come and hear this! The customer jests with me!\"");
 					if (Func0942(PETRA)) {
 						Func094E(PETRA, (("@We cannot possibly accept less than " + var0004) + " guilders.@"));
-						0xFFE2->show_npc_face0(0x0000);
+						ROCCO->show_npc_face0(0x0000);
 					} else {
 						say("\"",
 							var0004,
@@ -96825,14 +96825,14 @@ var Func0860 0x860 (var var0000, var var0001) {
 						PETRA->show_npc_face1(0x0000);
 						say("\"This person is a lout, my dear. Cast the fool out the door.\"");
 						UI_remove_npc_face1();
-						0xFFE2->show_npc_face0(0x0000);
+						ROCCO->show_npc_face0(0x0000);
 					}
 					say("\"",
 						var0004,
 						" guilders is where I stand.\"");
 				}
 				if (var000B < 0x001F) {
-					0xFFE2->set_npc_id(var000B + 0x0001);
+					ROCCO->set_npc_id(var000B + 0x0001);
 				}
 			}
 		}
@@ -106252,7 +106252,7 @@ void Func08FF 0x8FF () {
 	if (gflags[0x00D7]) {
 		abort;
 	}
-	var0000 = ((((((((((((((GUSTACIO->get_item_flag(MET) + MORTEGRO->get_item_flag(MET)) + FEDABIBLIO->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + COLUMNA->get_item_flag(MET)) + MELINO->get_item_flag(MET)) + DUCIO->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + JULIA->get_item_flag(MET)) + 0xFFE2->get_item_flag(MET)) + PETRA->get_item_flag(MET)) + BUCIA->get_item_flag(MET)) + MOSH->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + FRELI->get_item_flag(MET)) + gflags[0x00D6];
+	var0000 = ((((((((((((((GUSTACIO->get_item_flag(MET) + MORTEGRO->get_item_flag(MET)) + FEDABIBLIO->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + COLUMNA->get_item_flag(MET)) + MELINO->get_item_flag(MET)) + DUCIO->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + JULIA->get_item_flag(MET)) + ROCCO->get_item_flag(MET)) + PETRA->get_item_flag(MET)) + BUCIA->get_item_flag(MET)) + MOSH->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + FRELI->get_item_flag(MET)) + gflags[0x00D6];
 	if ((var0000 >= 0x0003) && (!gflags[0x00D7])) {
 		var0001 = AUTO_MESSENGER->approach_avatar(0x005A, 0x0028);
 		if (var0001) {
