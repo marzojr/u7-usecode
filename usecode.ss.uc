@@ -3078,7 +3078,7 @@ void Func0103 shape#(0x103) () {
 			if (gflags[0x0118] && (!gflags[0x029C])) {
 				add("mystery shield");
 			}
-			if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
+			if (gflags[0x00EA] && (!ROTOLUNCIA->get_item_flag(DEAD))) {
 				add("kidnap");
 			}
 			converse (["Ranger", "bye"]) {
@@ -3229,7 +3229,7 @@ void Func0103 shape#(0x103) () {
 			if (gflags[0x0118] && (!gflags[0x029C])) {
 				add("mystery shield");
 			}
-			if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
+			if (gflags[0x00EA] && (!ROTOLUNCIA->get_item_flag(DEAD))) {
 				add("kidnap");
 			}
 			converse (["Ranger", "bye"]) {
@@ -10078,10 +10078,10 @@ void Func0281 shape#(0x281) () {
 			abort;
 		}
 		if (get_item_quality() == 0x00BA) {
-			if ((!0xFFE1->get_item_flag(DEAD)) && ((var0000->get_item_quality() == 0x00BA) && ((var0001 == 0x0178) && (!gflags[0x0148])))) {
-				0xFFE1->set_schedule_type(TALK);
-				0xFFE1->set_item_flag(SI_TOURNAMENT);
-				Func097F(0xFFE1, "@Aha!@", 0x0000);
+			if ((!ROTOLUNCIA->get_item_flag(DEAD)) && ((var0000->get_item_quality() == 0x00BA) && ((var0001 == 0x0178) && (!gflags[0x0148])))) {
+				ROTOLUNCIA->set_schedule_type(TALK);
+				ROTOLUNCIA->set_item_flag(SI_TOURNAMENT);
+				Func097F(ROTOLUNCIA, "@Aha!@", 0x0000);
 				var0005 = find_nearby(0x016B, 0x001E, MASK_NONE);
 				for (var0008 in var0005 with var0006 to var0007) {
 					var0008->set_schedule_type(HOUND);
@@ -14031,7 +14031,7 @@ void Func02F7 shape#(0x2F7) () {
 			say("\"I Re-Ten Bentas Juxark I!\"");
 			say("\"Praetimde Mir-Wis Re-Por I.\"");
 			UI_remove_npc_face0();
-			if (0xFFE1->get_item_flag(DEAD)) {
+			if (ROTOLUNCIA->get_item_flag(DEAD)) {
 				if (var0001 == 0x0000) {
 					gflags[0x013D] = false;
 					AVATAR->set_item_flag(DONT_MOVE);
@@ -15861,23 +15861,23 @@ void Func032E shape#(0x32E) () {
 			UI_init_conversation();
 			GUSTACIO->show_npc_face0(0x0000);
 			say("\"See here, Rotoluncia! This stranger may have secrets -- as do we all! But I will not condone treating a guest of the Council like a criminal!\"");
-			0xFFE1->show_npc_face1(0x0000);
+			ROTOLUNCIA->show_npc_face1(0x0000);
 			say("\"Thou dost dare to interfere with my spells! MageLord, I demand that thou reprimandest this sorcerer.\"");
 			UI_remove_npc_face1();
 			UI_remove_npc_face0();
 			FILBERCIO->show_npc_face0(0x0000);
 			say("\"My dear, calm thyself. Perhaps our visitor shall tell us all, without the use of force...\"");
-			0xFFE1->show_npc_face1(0x0000);
+			ROTOLUNCIA->show_npc_face1(0x0000);
 			say("\"If there is one thing I cannot stand, it is being hamstrung by petty politics. Thou art not half the man thou once wert, Filbercio...\"");
 			say("\"I bid you all a pleasant dinner. I have lost mine appetite and am leaving. But mark my words -- I shall have my way!\"");
 			UI_end_conversation();
-			var000A = 0xFFE1->get_object_position();
+			var000A = ROTOLUNCIA->get_object_position();
 			UI_sprite_effect(ANIMATION_TELEPORT2, var000A[0x0001], var000A[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			UI_play_sound_effect(0x0082);
-			0xFFE1->set_new_schedules(MIDNIGHT, WANDER, [0x086D, 0x0837]);
-			0xFFE1->run_schedule();
-			0xFFE1->move_object([0x086D, 0x0837, 0x0000]);
-			0xFFE1->set_item_flag(SI_TOURNAMENT);
+			ROTOLUNCIA->set_new_schedules(MIDNIGHT, WANDER, [0x086D, 0x0837]);
+			ROTOLUNCIA->run_schedule();
+			ROTOLUNCIA->move_object([0x086D, 0x0837, 0x0000]);
+			ROTOLUNCIA->set_item_flag(SI_TOURNAMENT);
 			Func097F(FRIGIDAZZI, "@Goodbye, witch...@", 0x0004);
 			var0009 = script GUSTACIO {
 				nohalt;
@@ -15904,7 +15904,7 @@ void Func032E shape#(0x32E) () {
 				UI_sprite_effect(ANIMATION_POOF, var000A[0x0001], var000A[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 				UI_play_sound_effect(0x0068);
 			}
-			var0009 = script 0xFFE1 {
+			var0009 = script ROTOLUNCIA {
 				nohalt;
 				wait 5;
 				face east;
@@ -15925,7 +15925,7 @@ void Func032E shape#(0x32E) () {
 				nohalt;
 				call Func032E;
 			};
-			Func097F(0xFFE1, "@How darest thou!@", 0x000A);
+			Func097F(ROTOLUNCIA, "@How darest thou!@", 0x000A);
 			abort;
 		}
 		if (FILBERCIO->get_npc_id() == 0x0007) {
@@ -15967,9 +15967,9 @@ void Func032E shape#(0x32E) () {
 				var000B->clear_item_flag(TEMPORARY);
 				var000A = AVATAR->get_object_position();
 				var0009 = UI_update_last_created([(var000A[0x0001] + 0x0002), var000A[0x0002], var000A[0x0003]]);
-				var0009 = 0xFFE1->set_to_attack(var000B, 0x0118);
+				var0009 = ROTOLUNCIA->set_to_attack(var000B, 0x0118);
 			}
-			var0009 = script 0xFFE1 {
+			var0009 = script ROTOLUNCIA {
 				nohalt;
 				actor frame standing;
 				say "@Mas Mas!@";
@@ -16000,9 +16000,9 @@ void Func032E shape#(0x32E) () {
 				var000B->clear_item_flag(TEMPORARY);
 				var000A = AVATAR->get_object_position();
 				var0009 = UI_update_last_created([(var000A[0x0001] - 0x0002), var000A[0x0002], var000A[0x0003]]);
-				var0009 = 0xFFE1->set_to_attack(var000B, 0x0118);
+				var0009 = ROTOLUNCIA->set_to_attack(var000B, 0x0118);
 			}
-			var0009 = script 0xFFE1 {
+			var0009 = script ROTOLUNCIA {
 				nohalt;
 				actor frame standing;
 				say "@Flam Mas!@";
@@ -16035,7 +16035,7 @@ void Func032E shape#(0x32E) () {
 			say("\"I hope, my dear, that ",
 				var0004,
 				" is the solution to our problems, rather than the cause...\"");
-			0xFFE1->show_npc_face1(0x0000);
+			ROTOLUNCIA->show_npc_face1(0x0000);
 			say("\"Thou art a fool, MageLord! Our guest is most certainly a factor in the supernatural disturbances that are threatening our world. Let us question ",
 				var0003,
 				" now!\"");
@@ -16047,9 +16047,9 @@ void Func032E shape#(0x32E) () {
 				var000B->clear_item_flag(TEMPORARY);
 				var000A = AVATAR->get_object_position();
 				var0009 = UI_update_last_created([var000A[0x0001], (var000A[0x0002] + 0x0002), var000A[0x0003]]);
-				var0009 = 0xFFE1->set_to_attack(var000B, 0x0118);
+				var0009 = ROTOLUNCIA->set_to_attack(var000B, 0x0118);
 			}
-			var0009 = script 0xFFE1 {
+			var0009 = script ROTOLUNCIA {
 				nohalt;
 				actor frame standing;
 				say "@Ex Ort Flam!@";
@@ -16081,14 +16081,14 @@ void Func032E shape#(0x32E) () {
 		if (FILBERCIO->get_npc_id() == 0x0002) {
 			FILBERCIO->set_npc_id(0x0003);
 			UI_init_conversation();
-			0xFFE1->show_npc_face0(0x0000);
+			ROTOLUNCIA->show_npc_face0(0x0000);
 			say("\"Filbercio is never lacking in social graces, ",
 				var0000,
 				". Now if he only attended to the problems of Moonshade as he doth attend to his mistresses. Speaking of which...\"");
 			FILBERCIO->show_npc_face1(0x0000);
 			say("\"Ahem--! Also present, as my dinner companion, is the most charming Frigidazzi. She, too, is a Mage.\"");
 			UI_end_conversation();
-			Func09AF(0xFFE1, FRIGIDAZZI, 0x0004, Func032E);
+			Func09AF(ROTOLUNCIA, FRIGIDAZZI, 0x0004, Func032E);
 			abort;
 		}
 		if (FILBERCIO->get_npc_id() == 0x0001) {
@@ -16101,7 +16101,7 @@ void Func032E shape#(0x32E) () {
 			FILBERCIO->show_npc_face1(0x0000);
 			say("\"Quite right, Gustacio... and here is Adept Rotoluncia, whom I believe thou hast met.\"");
 			UI_end_conversation();
-			Func09AF(GUSTACIO, 0xFFE1, 0x0004, Func032E);
+			Func09AF(GUSTACIO, ROTOLUNCIA, 0x0004, Func032E);
 			abort;
 		}
 		if (FILBERCIO->get_npc_id() == 0x0000) {
@@ -22542,7 +22542,7 @@ void Func0404 object#(0x404) () {
 			say("\"Hast thou done anything exciting lately?\"");
 			add("exciting");
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
+		if (gflags[0x00EA] && (!ROTOLUNCIA->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
 		converse (["bye"]) {
@@ -22946,7 +22946,7 @@ void Func040D object#(0x40D) () {
 			add(["provisions", "exchange"]);
 			var0009 = 0x0003;
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
+		if (gflags[0x00EA] && (!ROTOLUNCIA->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
 		if (Func0942(0xFFD6)) {
@@ -24012,7 +24012,7 @@ void Func040F object#(0x40F) () {
 		if (gflags[0x0113] && (!gflags[0x0291])) {
 			add("lost ring");
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
+		if (gflags[0x00EA] && (!ROTOLUNCIA->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
 		converse (["bye"]) {
@@ -24684,7 +24684,7 @@ void Func0411 object#(0x411) () {
 		if (gflags[0x00E4] && (!gflags[0x0128])) {
 			add("Gustacio's experiment");
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
+		if (gflags[0x00EA] && (!ROTOLUNCIA->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
 		if ((gflags[0x010B] && (!gflags[0x028C])) || ((gflags[0x010C] && (!gflags[0x0295])) || ((gflags[0x010E] && (!gflags[0x029A])) || ((gflags[0x0110] && (!gflags[0x028F])) || ((gflags[0x0112] && (!gflags[0x0290])) || (gflags[0x0114] && (!gflags[0x0293]))))))) {
@@ -24790,7 +24790,7 @@ void Func0411 object#(0x411) () {
 				say("\"The three Adepts are the most powerful wizards in the city. They compose the Council of Mages, which governs the city.\"");
 				say("\"One of the Adepts serves as MageLord. Currently, Filbercio rules as Lord of Moonshade.\"");
 				add("Filbercio");
-				if (0xFFE1->get_item_flag(DEAD)) {
+				if (ROTOLUNCIA->get_item_flag(DEAD)) {
 					if (gflags[0x00E2]) {
 						say("\"All is in an uproar, with Rotoluncia dead and her replacement -- the Necromancer Mortegro -- missing.\"");
 						say("\"Gustacio hath asked that I join the Council in this troubled time, and I have done so.\"");
@@ -25140,10 +25140,10 @@ void Func0412 object#(0x412) () {
 		var000A = FILBERCIO->get_item_flag(MET);
 		say("\"'Tis thee again. Hast thou good news?\"");
 		add(["duties", "politics"]);
-		if (gflags[0x00EA] && ((!gflags[0x00EB]) && (!0xFFE1->get_item_flag(DEAD)))) {
+		if (gflags[0x00EA] && ((!gflags[0x00EB]) && (!ROTOLUNCIA->get_item_flag(DEAD)))) {
 			add("kidnap");
 		}
-		if (gflags[0x00EB] && (!0xFFE1->is_dead())) {
+		if (gflags[0x00EB] && (!ROTOLUNCIA->is_dead())) {
 			add("search");
 		}
 		if (gflags[0x0110] && (!gflags[0x028F])) {
@@ -25201,7 +25201,7 @@ void Func0412 object#(0x412) () {
 			case "politics" (remove):
 				say("\"Is there no end to the bickering among the Mages? We have three factions here, and each elects its favorite to the Council of Moonshade.\"");
 				say("\"As the voice of compromise and experience, I have always been selected MageLord by the Adepts.\"");
-				if (0xFFE1->get_item_flag(DEAD)) {
+				if (ROTOLUNCIA->get_item_flag(DEAD)) {
 					say("\"My fellow Lords are Gustacio and Mortegro.\"");
 				} else {
 					say("\"My fellow Lords are Rotoluncia and Gustacio.\"");
@@ -25209,7 +25209,7 @@ void Func0412 object#(0x412) () {
 				Func0830();
 				UI_push_answers();
 				add(["Adept Gustacio"]);
-				if (0xFFE1->get_item_flag(DEAD)) {
+				if (ROTOLUNCIA->get_item_flag(DEAD)) {
 					add("Adept Mortegro");
 				} else {
 					add("Adept Rotoluncia");
@@ -25303,7 +25303,7 @@ void Func0412 object#(0x412) () {
 				fallthrough;
 
 			case "Rotoluncia" (remove):
-				if (0xFFE1->get_item_flag(DEAD)) {
+				if (ROTOLUNCIA->get_item_flag(DEAD)) {
 					say("\"A tragedy that the two of thee were unable to settle thy differences amicably.\"");
 					UI_pop_answers();
 				} else {
@@ -25449,7 +25449,7 @@ void Func0413 object#(0x413) () {
 		if (gflags[0x018D] && (!gflags[0x00E7])) {
 			add("Delin");
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
+		if (gflags[0x00EA] && (!ROTOLUNCIA->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
 		converse (["bye"]) {
@@ -26159,7 +26159,7 @@ void Func0417 object#(0x417) () {
 		if (gflags[0x0106] && (!gflags[0x011B])) {
 			add("Celennia's disappearance");
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
+		if (gflags[0x00EA] && (!ROTOLUNCIA->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
 		converse (["name", "wine", "bye"]) {
@@ -26954,11 +26954,11 @@ void Func0419 object#(0x419) () {
 		}
 	}
 	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
+		if (gflags[0x00EA] && (!ROTOLUNCIA->get_item_flag(DEAD))) {
 			0xFED6->show_npc_face0(0x0000);
 			say("\"Rotoluncia shall avenge my loss...\"");
 			gflags[0x00EB] = true;
-			0xFFE1->set_alignment(CHAOTIC);
+			ROTOLUNCIA->set_alignment(CHAOTIC);
 			UI_remove_npc_face0();
 		}
 		AUTO_MESSENGER->clear_item_flag(SI_TOURNAMENT);
@@ -27145,7 +27145,7 @@ void Func041A object#(0x41A) () {
 		if (gflags[0x0132]) {
 			add("seance");
 		}
-		if (gflags[0x013F] && (!0xFFE1->get_item_flag(DEAD))) {
+		if (gflags[0x013F] && (!ROTOLUNCIA->get_item_flag(DEAD))) {
 			add("accuse");
 		}
 		add(["Necromage", "learn spells"]);
@@ -27504,7 +27504,7 @@ void Func041B object#(0x41B) () {
 		if (gflags[0x0115] && (!gflags[0x0293])) {
 			add("slippers");
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
+		if (gflags[0x00EA] && (!ROTOLUNCIA->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
 		converse (["bye"]) {
@@ -27832,7 +27832,7 @@ void Func041C object#(0x41C) () {
 				}
 			}
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
+		if (gflags[0x00EA] && (!ROTOLUNCIA->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
 		if (var0004 && (!PETRA->get_item_flag(IN_PARTY))) {
@@ -28229,10 +28229,10 @@ void Func041D object#(0x41D) () {
 		if (gflags[0x00DC] && (!gflags[0x00E8])) {
 			add("secret");
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
+		if (gflags[0x00EA] && (!ROTOLUNCIA->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
-		if (!0xFFE1->get_item_flag(DEAD)) {
+		if (!ROTOLUNCIA->get_item_flag(DEAD)) {
 			add("Rotoluncia");
 		}
 		converse (["bye"]) {
@@ -28746,7 +28746,7 @@ void Func041E object#(0x41E) () {
 		if (gflags[0x0115] && (!gflags[0x0293])) {
 			add("slippers");
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
+		if (gflags[0x00EA] && (!ROTOLUNCIA->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
 		converse ("bye") {
@@ -29087,10 +29087,10 @@ void Func041F object#(0x41F) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	if ((event == DEATH) && 0xFFE1->get_item_flag(SI_TOURNAMENT)) {
-		0xFFE1->show_npc_face0(0x0000);
-		0xFFE1->clear_item_flag(SI_TOURNAMENT);
-		0xFFE1->reduce_health(0x0032, NORMAL_DAMAGE);
+	if ((event == DEATH) && ROTOLUNCIA->get_item_flag(SI_TOURNAMENT)) {
+		ROTOLUNCIA->show_npc_face0(0x0000);
+		ROTOLUNCIA->clear_item_flag(SI_TOURNAMENT);
+		ROTOLUNCIA->reduce_health(0x0032, NORMAL_DAMAGE);
 		var0003 = Func0992(0x0001, 0x0000, 0x0000, true);
 		Func097F(var0003, "@The witch is dead!@", 0x0005);
 		say("\"With my dying breath, I place the Curse of the Red Witch upon thee!\"");
@@ -29102,7 +29102,7 @@ void Func041F object#(0x41F) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Listen, witch!@");
-		Func097F(0xFFE1, "@Cretin!@", 0x0005);
+		Func097F(ROTOLUNCIA, "@Cretin!@", 0x0005);
 		var0004 = script item {
 			nohalt;
 			wait 5;
@@ -29110,17 +29110,17 @@ void Func041F object#(0x41F) () {
 		};
 	}
 	if (event == STARTED_TALKING) {
-		0xFFE1->show_npc_face0(0x0000);
+		ROTOLUNCIA->show_npc_face0(0x0000);
 		if (!gflags[0x0133]) {
 			say("\"So, thou hast come to rescue thy friend? Well, thou must kill me first -- I have the only key to his cell!\"");
 			say("\"Or wilt thou tell me the secret which I desire, the key to controlling Daemons!!!\"");
 			var0003 = Func0992(0x0001, "@But we know nothing about gargoyles... er, Daemons.@", "@But I know nothing of Daemons...@", false);
 			0x0000->set_conversation_slot();
 			say("\"Then thou shalt die, liar.\"");
-			Func09AD(0xFFE1);
-			0xFFE1->clear_item_say();
-			Func097F(0xFFE1, "@Kill the Avatar!@", 0x0000);
-			Func09AC(0xFFE1, -1, 0, IN_COMBAT);
+			Func09AD(ROTOLUNCIA);
+			ROTOLUNCIA->clear_item_say();
+			Func097F(ROTOLUNCIA, "@Kill the Avatar!@", 0x0000);
+			Func09AC(ROTOLUNCIA, -1, 0, IN_COMBAT);
 			var0004 = find_nearby(0x016B, 0x001E, MASK_NONE);
 			for (var0007 in var0004 with var0005 to var0006) {
 				Func09AD(var0007);
@@ -29133,7 +29133,7 @@ void Func041F object#(0x41F) () {
 			if (Func0955()) {
 				say("\"Thou shalt not live to regret this. Open thy mind to me!\"");
 				AVATAR->set_item_flag(DONT_MOVE);
-				0xFFE1->set_schedule_type(STANDTHERE);
+				ROTOLUNCIA->set_schedule_type(STANDTHERE);
 				AVATAR->set_schedule_type(WAIT);
 				gflags[0x0007] = true;
 				var0004 = script AVATAR {
@@ -29152,9 +29152,9 @@ void Func041F object#(0x41F) () {
 				abort;
 			}
 			say("\"Then thou shalt die with thy secret, Avatar...\"");
-			Func09AD(0xFFE1);
-			Func097F(0xFFE1, "@Die, fool!@", 0x0000);
-			Func09AC(0xFFE1, -1, 0, IN_COMBAT);
+			Func09AD(ROTOLUNCIA);
+			Func097F(ROTOLUNCIA, "@Die, fool!@", 0x0000);
+			Func09AC(ROTOLUNCIA, -1, 0, IN_COMBAT);
 			abort;
 		}
 		gflags[0x0148] = true;
@@ -29162,14 +29162,14 @@ void Func041F object#(0x41F) () {
 	if (event == SCRIPTED) {
 		if (gflags[0x000A]) {
 			gflags[0x000A] = false;
-			0xFFE1->set_schedule_type(TALK);
-			Func097F(0xFFE1, "@Surprised, Avatar?@", 0x0003);
+			ROTOLUNCIA->set_schedule_type(TALK);
+			Func097F(ROTOLUNCIA, "@Surprised, Avatar?@", 0x0003);
 			abort;
 		}
 		if (gflags[0x0009]) {
 			UI_fade_palette(0x000C, 0x0001, 0x0000);
 			AVATAR->move_object([0x0862, 0x0835, 0x0000]);
-			0xFFE1->move_object([0x086F, 0x0822, 0x0000]);
+			ROTOLUNCIA->move_object([0x086F, 0x0822, 0x0000]);
 			gflags[0x0009] = false;
 			gflags[0x000A] = true;
 			AVATAR->clear_item_flag(DONT_MOVE);
@@ -29193,7 +29193,7 @@ void Func041F object#(0x41F) () {
 				actor frame sleeping;
 			};
 			gflags[0x0008] = false;
-			Func09AC(0xFFE1, -1, 0, IN_COMBAT);
+			Func09AC(ROTOLUNCIA, -1, 0, IN_COMBAT);
 			abort;
 		}
 		if (gflags[0x0007]) {
@@ -29214,12 +29214,12 @@ void Func041F object#(0x41F) () {
 		}
 		if (gflags[0x0134] && (!gflags[0x00EA])) {
 			0xFED2->show_npc_face0(0x0000);
-			if (0xFFE1->get_item_flag(DEAD)) {
+			if (ROTOLUNCIA->get_item_flag(DEAD)) {
 				say("\"I am speaking to thee from beyond the grave. I shall have vengeance!\"");
 				abort;
 			}
 			say("\"Greetings, Stranger from Another Land. Once again, I am speaking to thee by means of a magic scroll.\"");
-			var0009 = UI_get_npc_name(0x0000 - 0xFFE1->get_npc_id());
+			var0009 = UI_get_npc_name(0x0000 - ROTOLUNCIA->get_npc_id());
 			say("\"If thou art looking for thy companion, ",
 				var0009,
 				", look no further -- I have kidnapped him.\"");
@@ -29313,7 +29313,7 @@ void Func041F object#(0x41F) () {
 						say("\"Then open thy mind to me, and let me withdraw the knowledge which I lust after!\"");
 						var0010 = Func0992(0x0001, "@No, my friend. Thou must not...!@", 0x0000, false);
 						if (var0010 != AVATAR) {
-							0xFFE1->set_npc_id(0x0000 - var0010);
+							ROTOLUNCIA->set_npc_id(0x0000 - var0010);
 							0x0000->set_conversation_slot();
 							say("\"Thy friends must learn not to interfere in the interests of mages. Let them learn now!!!\"");
 							var0008 = var0010->get_object_position();
@@ -29352,7 +29352,7 @@ void Func041F object#(0x41F) () {
 			AUTO_MESSENGER->move_object([0x09B9, 0x0715, 0x0000]);
 			AUTO_MESSENGER->set_schedule_type(WAIT);
 			AUTO_MESSENGER->set_item_flag(SI_TOURNAMENT);
-			var0010 = 0x0000 - 0xFFE1->get_npc_id();
+			var0010 = 0x0000 - ROTOLUNCIA->get_npc_id();
 			if ((var0010 == 0x0000) || var0010->get_item_flag(DEAD)) {
 				var0004 = [];
 				if (!SHAMINO->get_item_flag(DEAD)) {
@@ -29372,7 +29372,7 @@ void Func041F object#(0x41F) () {
 			}
 			gflags[0x00EA] = true;
 			if (var0010 != AVATAR) {
-				0xFFE1->set_npc_id(0x0000 - var0010);
+				ROTOLUNCIA->set_npc_id(0x0000 - var0010);
 				if (var0010->npc_nearby()) {
 					var0010->show_npc_face0(0x0000);
 					say("\"What! What's happening...\"");
@@ -29513,7 +29513,7 @@ void Func0420 object#(0x420) () {
 		if (0xFFE0->get_schedule_type() == WANDER) {
 			add("buy");
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
+		if (gflags[0x00EA] && (!ROTOLUNCIA->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
 		if (Func097D(PARTY, 0x0001, 0x02F8, QUALITY_ANY, FRAME_ANY)) {
@@ -29897,7 +29897,7 @@ void Func0421 object#(0x421) () {
 		if (gflags[0x00FF]) {
 			add("Worm Gems");
 		}
-		if (gflags[0x00EA] && (!0xFFE1->get_item_flag(DEAD))) {
+		if (gflags[0x00EA] && (!ROTOLUNCIA->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
 		if (gflags[0x00E2] && (!0xFF58->get_item_flag(DEAD))) {
@@ -30020,7 +30020,7 @@ void Func0421 object#(0x421) () {
 
 			case "politics" (remove):
 				say("\"Of course, nothing ever gets done without a little politics.");
-				if (0xFFE1->get_item_flag(DEAD)) {
+				if (ROTOLUNCIA->get_item_flag(DEAD)) {
 					say("\"I was allied with Rotoluncia, but her death makes our partnership void.\"");
 				} else {
 					say("\"One's enemies and allies are constantly shifting. That is why Rotoluncia and I have formed a sort of coalition, wherein we both work to protect each other's best interests.\"");
@@ -72196,7 +72196,7 @@ void Func0702 object#(0x702) () {
 	var var0003;
 	var var0004;
 
-	if (0xFFE1->get_item_flag(DEAD) && (event == EGG)) {
+	if (ROTOLUNCIA->get_item_flag(DEAD) && (event == EGG)) {
 		remove_item();
 		abort;
 	}
@@ -72217,31 +72217,31 @@ void Func0702 object#(0x702) () {
 		}
 	}
 	if (gflags[0x0148]) {
-		Func097F(0xFFE1, "@Aha!@", 0x0000);
-		0xFFE1->set_schedule_type(IN_COMBAT);
+		Func097F(ROTOLUNCIA, "@Aha!@", 0x0000);
+		ROTOLUNCIA->set_schedule_type(IN_COMBAT);
 	}
-	if ((0xFFE1->get_schedule_type() == IN_COMBAT) || (0xFFE1->get_schedule_type() == TALK)) {
+	if ((ROTOLUNCIA->get_schedule_type() == IN_COMBAT) || (ROTOLUNCIA->get_schedule_type() == TALK)) {
 		abort;
 	}
-	0xFFE1->clear_item_say();
+	ROTOLUNCIA->clear_item_say();
 	var0003 = UI_get_random(0x0006);
 	if (var0003 == 0x0001) {
-		Func097F(0xFFE1, "@Tell me!@", 0x0000);
+		Func097F(ROTOLUNCIA, "@Tell me!@", 0x0000);
 	}
 	if (var0003 == 0x0002) {
-		Func097F(0xFFE1, "@Bring tongs!@", 0x0000);
+		Func097F(ROTOLUNCIA, "@Bring tongs!@", 0x0000);
 	}
 	if (var0003 == 0x0003) {
-		Func097F(0xFFE1, "@Tell me the secret!@", 0x0003);
+		Func097F(ROTOLUNCIA, "@Tell me the secret!@", 0x0003);
 	}
 	if (var0003 == 0x0004) {
-		Func097F(0xFFE1, "@Bring the prisoner!@", 0x0000);
+		Func097F(ROTOLUNCIA, "@Bring the prisoner!@", 0x0000);
 	}
 	if (var0003 == 0x0005) {
-		Func097F(0xFFE1, "@Make him bleed.@", 0x0000);
+		Func097F(ROTOLUNCIA, "@Make him bleed.@", 0x0000);
 	}
 	if (var0003 == 0x0006) {
-		Func097F(0xFFE1, "@Torture him...@", 0x0000);
+		Func097F(ROTOLUNCIA, "@Torture him...@", 0x0000);
 	}
 	var0000 = find_nearby(0x016B, 0x001E, MASK_NONE);
 	var0004 = false;
@@ -79008,10 +79008,10 @@ void Func07DC object#(0x7DC) () {
 		}
 		FILBERCIO->move_object([0x090A, 0x0717, 0x0000]);
 		FRIGIDAZZI->move_object([0x090C, 0x071A, 0x0000]);
-		0xFFE1->move_object([0x090C, 0x0714, 0x0000]);
+		ROTOLUNCIA->move_object([0x090C, 0x0714, 0x0000]);
 		GUSTACIO->move_object([0x090F, 0x0714, 0x0000]);
 		POTHOS->move_object([0x0916, 0x072E, 0x0000]);
-		var0004 = [FILBERCIO, FRIGIDAZZI, 0xFFE1, GUSTACIO, POTHOS];
+		var0004 = [FILBERCIO, FRIGIDAZZI, ROTOLUNCIA, GUSTACIO, POTHOS];
 		var0007 = [0x0002, 0x0000, 0x0004, 0x0004, 0x0000];
 		var0009 = 0x0001;
 		for (var0003 in var0004 with var000D to var000E) {

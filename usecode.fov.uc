@@ -15949,7 +15949,7 @@ void Func041F object#(0x41F) () {
 	var var0003;
 
 	if (event == DOUBLECLICK) {
-		0xFFE1->show_npc_face(0x0000);
+		KRISTY->show_npc_face(0x0000);
 		var0000 = Func08F7(0xFFDE);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x00A0]) {
@@ -15964,13 +15964,13 @@ void Func041F object#(0x41F) () {
 				if (var0000) {
 					0xFFDE->say("\"Kristy, like Nicholas, is one of our orphans. She was found in an abandoned home in Paws by one of the Great Council members.\"");
 					0xFFDE->hide();
-					0xFFE1->show_npc_face(0x0000);
+					KRISTY->show_npc_face(0x0000);
 				}
 				remove("name");
 				fallthrough;
 
 			case "job":
-				var0001 = 0xFFE1->get_schedule_type();
+				var0001 = KRISTY->get_schedule_type();
 				if (var0001 == KID_GAMES) {
 					say("\"Tag! Playing tag!\"");
 					say("The toddler runs off in search of a nursery-mate.*");
@@ -16000,7 +16000,7 @@ void Func041F object#(0x41F) () {
 				if (var0000) {
 					0xFFDE->say("\"She keeps saying that. I am not sure what it means. Something to do with a competition.\"");
 					0xFFDE->hide();
-					0xFFE1->show_npc_face(0x0000);
+					KRISTY->show_npc_face(0x0000);
 				}
 				remove("winner");
 				fallthrough;
@@ -16011,7 +16011,7 @@ void Func041F object#(0x41F) () {
 		say("\"Bye bye!\"*");
 	}
 	if (event == PROXIMITY) {
-		var0001 = 0xFFE1->get_npc_object()->get_schedule_type();
+		var0001 = KRISTY->get_npc_object()->get_schedule_type();
 		if (var0001 == KID_GAMES) {
 			var0002 = UI_die_roll(0x0001, 0x0004);
 			if (var0002 == 0x0001) {
@@ -16026,7 +16026,7 @@ void Func041F object#(0x41F) () {
 			if (var0002 == 0x0004) {
 				var0003 = "@Catch me if thou can!@";
 			}
-			0xFFE1->item_say(var0003);
+			KRISTY->item_say(var0003);
 		}
 	}
 }
