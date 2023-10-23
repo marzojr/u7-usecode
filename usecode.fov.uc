@@ -19319,7 +19319,7 @@ void Func0438 object#(0x438) () {
 	var var0006;
 
 	if (event == DOUBLECLICK) {
-		0xFFC8->show_npc_face(0x0000);
+		DIANE->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
 		var0002 = UI_part_of_day();
@@ -19417,7 +19417,7 @@ void Func0438 object#(0x438) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFC8);
+		Func092E(DIANE);
 	}
 }
 

@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -39047,15 +39047,15 @@ void Func0438 object#(0x438) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@A moment if thou wilt, sir.@");
-		0xFFC8->Func07D1();
-		Func097F(0xFFC8, (("@At thy service, " + var0000) + ".@"), 0x0002);
-		0xFFC8->set_schedule_type(TALK);
+		LEON->Func07D1();
+		Func097F(LEON, (("@At thy service, " + var0000) + ".@"), 0x0002);
+		LEON->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFC8->run_schedule();
-		0xFFC8->clear_item_say();
-		0xFFC8->show_npc_face0(0x0000);
-		var0005 = 0xFFC8->get_item_flag(MET);
+		LEON->run_schedule();
+		LEON->clear_item_say();
+		LEON->show_npc_face0(0x0000);
+		var0005 = LEON->get_item_flag(MET);
 		if (var0005 == false) {
 			if (gflags[0x003E] == true) {
 				say("\"At last, the values of The Fellowship have reached into the ranks of the Pikemen! I am honored.\"");
@@ -39065,7 +39065,7 @@ void Func0438 object#(0x438) () {
 				say("\"I always have time for those who come seeking knowledge. Be welcome.\"");
 				say("\"I am Leon, a speaker for The Fellowship and former farmer.\"");
 			}
-			0xFFC8->set_item_flag(MET);
+			LEON->set_item_flag(MET);
 		} else {
 			say("\"As always, I am honored that thou choosest to visit me, ",
 				var0002,
@@ -39262,14 +39262,14 @@ void Func0438 object#(0x438) () {
 				say("\"Batlin must be told of this! If he returns to Britannia to explain to Lord British, I am sure that everything will be settled.\"");
 				say("\"Perhaps our good name was degraded by those wishing to stop our ministering... But that shows a lack of Trust.\"");
 				say("\"I must meditate on this. Mine Inner Voice will no doubt provide an answer for such horrible news.\"");
-				Func097F(0xFFC8, "@This cannot be!@", 0x0000);
-				0xFFC8->set_schedule_type(SHY);
+				Func097F(LEON, "@This cannot be!@", 0x0000);
+				LEON->set_schedule_type(SHY);
 				abort;
 
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Many thanks for thine help.@", 0x0000);
-				Func097F(0xFFC8, (("@Go in Fellowship, " + var0002) + ".@"), 0x0005);
+				Func097F(LEON, (("@Go in Fellowship, " + var0002) + ".@"), 0x0005);
 				break;
 		}
 	}
@@ -68450,11 +68450,11 @@ void Func06C0 object#(0x6C0) () {
 			// after the end of the script.
 			raw((byte)0x54); raw(0x001A);
 		};
-		if (!0xFFC8->is_dead()) {
-			0xFFC8->move_object([0x0498, 0x0765, 0x0000]);
-			0xFFC8->set_item_frame(0x0010);
-			0xFFC8->set_schedule_type(LOITER);
-			var0001 = script 0xFFC8 {
+		if (!LEON->is_dead()) {
+			LEON->move_object([0x0498, 0x0765, 0x0000]);
+			LEON->set_item_frame(0x0010);
+			LEON->set_schedule_type(LOITER);
+			var0001 = script LEON {
 				nohalt;
 				wait 24;
 				say "@Go in Unity!@";
@@ -78802,14 +78802,14 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(JORVIN, 0x03F2, 0x06D8, WAIT);
 		Func09AC(KYLISTA, 0x0406, 0x0795, WAIT);
 		Func09AC(DELPHYNIA, 0x0460, 0x06F6, WAIT);
-		Func09AC(0xFFC8, 0x03B5, 0x0697, WAIT);
+		Func09AC(LEON, 0x03B5, 0x0697, WAIT);
 		Func09AC(0xFFC7, 0x0407, 0x066E, WAIT);
 		Func09AC(0xFFC6, 0x0467, 0x06C9, WAIT);
 		Func09AC(0xFFC4, 0x0407, 0x0780, WAIT);
 		Func09AC(0xFFC3, 0x03F7, 0x0796, WAIT);
 		0xFFC5->set_new_schedules([DAWN, MORNING, NOON, AFTERNOON, EVENING, NIGHT], [LOITER, WANDER, WANDER, LOITER, EAT_AT_INN, SLEEP], [0x0406, 0x0777, 0x0409, 0x074E, 0x0406, 0x0718, 0x0466, 0x06ED, 0x03AF, 0x06E0, 0x03D6, 0x06C6]);
 		0xFFC5->run_schedule();
-		var0001 = 0xFFC8->add_cont_items(0x0001, 0x031D, 0x000A, 0x0000, 0x0000);
+		var0001 = LEON->add_cont_items(0x0001, 0x031D, 0x000A, 0x0000, 0x0000);
 		var0001 = 0xFFC3->add_cont_items(0x0001, 0x031D, 0x0007, 0x0000, 0x0000);
 		YELINDA->set_polymorph(0x0294);
 		YELINDA->move_object([0x0619, 0x05B9]);
@@ -80953,7 +80953,7 @@ void Func07F8 object#(0x7F8) () {
 				nohalt;
 				call Func07F8;
 			};
-			var0001 = [YELINDA, KYLISTA, VOLDIN, 0xFFC3, JOTH, GARTH, 0xFFC7, 0xFFC8, JENDON, DELPHYNIA, DELIN, JORVIN, 0xFFC4, 0xFFC5, ALYSSAND, 0xFFC6];
+			var0001 = [YELINDA, KYLISTA, VOLDIN, 0xFFC3, JOTH, GARTH, 0xFFC7, LEON, JENDON, DELPHYNIA, DELIN, JORVIN, 0xFFC4, 0xFFC5, ALYSSAND, 0xFFC6];
 			for (var0004 in var0001 with var0002 to var0003) {
 				var0004->remove_npc();
 				var0004->run_schedule();
@@ -81035,7 +81035,7 @@ void Func07F8 object#(0x7F8) () {
 		if (gflags[0x0170]) {
 			var000C = Func0992(0x0001, "@The trial awaits!@", "@The trial awaits our presence.@", true);
 			Func097F(DELIN, "@It's the stranger...@", 0x0016);
-			Func097F(0xFFC8, "@Now the trial begins!@", 0x001C);
+			Func097F(LEON, "@Now the trial begins!@", 0x001C);
 			Func097F(ALYSSAND, "@Hush!@", 0x0023);
 		} else {
 			var0001 = "@Let justice be swift!@";
@@ -81840,7 +81840,7 @@ void Func07FB object#(0x7FB) () {
 		UI_init_conversation();
 		VOLDIN->show_npc_face0(0x0000);
 		say("\"Thou knowest that thy presence here is for testifying only. Thou shalt be returned to thy camp immediately after thou hast answered our questions.\"");
-		0xFFC8->show_npc_face1(0x0000);
+		LEON->show_npc_face1(0x0000);
 		say("\"I have no wish to cause disunity in thy city, Captain. I only wish that thou wouldst come to trust me.\"");
 		UI_remove_npc_face1();
 		0x0000->set_conversation_slot();
@@ -81848,12 +81848,12 @@ void Func07FB object#(0x7FB) () {
 		say("\"What contact hath ",
 			var0003,
 			" had with thee?\"");
-		0xFFC8->show_npc_face1(0x0000);
+		LEON->show_npc_face1(0x0000);
 		say("\"He came to the Fellowship camp. We spoke privately.\"");
 		UI_remove_npc_face1();
 		0x0000->set_conversation_slot();
 		say("\"And no doubt the two of you did compare notes concerning The Fellowship blasphemy. Indeed, is not the traitor secretly a confederate of thyself?\"");
-		0xFFC8->show_npc_face1(0x0000);
+		LEON->show_npc_face1(0x0000);
 		say("\"I deny the charge of blasphemy. The Fellowship is not an evil doctrine, but is a system of beliefs which bring enlightenment to those who obey...\"");
 		UI_remove_npc_face1();
 		0x0000->set_conversation_slot();
@@ -81864,7 +81864,7 @@ void Func07FB object#(0x7FB) () {
 		Func097F(KYLISTA, "@Stone him!@", 0x0001);
 		Func097F(0xFFC3, "@Beware of Leon!@", 0x0003);
 		Func097F(ALYSSAND, "@Shame on us...@", 0x0007);
-		Func097F(0xFFC8, "@I forgive thee...@", 0x0003);
+		Func097F(LEON, "@I forgive thee...@", 0x0003);
 		si_path_run_usecode([0x0407, 0x0679, 0x0000], SI_PATH_SUCCESS, item, Func07FB, false);
 		abort;
 	}
@@ -82025,7 +82025,7 @@ void Func07FB object#(0x7FB) () {
 		Func097F(DELIN, "@Take that back!@", 0x0000);
 		Func097F(ALYSSAND, "@Daemons? Bah!@", 0x0004);
 		var0004 = "@Alyssand?@" & "@I never knew...@";
-		Func094F(0xFFC8, var0004);
+		Func094F(LEON, var0004);
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
 		var0005 = 0xFFC3->get_object_position() & (0x000A & 0x0006);
 		var0006 = var0005->find_nearby(0x0113, 0x0028, MASK_EGG);
@@ -103547,7 +103547,7 @@ void Func08C2 0x8C2 () {
 		}
 		if (var0006 == 0x000B) {
 			if (gflags[0x0170]) {
-				var0007 = 0xFFC8;
+				var0007 = LEON;
 				var0008 = 0x0002;
 			}
 		}
@@ -109553,7 +109553,7 @@ void Func093B 0x93B (var var0000) {
 			Func097F(DELIN, "@Not the Beast!@", 0x0000);
 			Func097F(0xFFC6, "@Execute him!@", 0x0003);
 			Func097F(VOLDIN, "@Blasphemy!@", 0x0005);
-			Func097F(0xFFC8, "@The lord of Britannia?@", 0x0002);
+			Func097F(LEON, "@The lord of Britannia?@", 0x0002);
 			Func097F(0xFFC3, "@Cleanse the Temple!@", 0x0004);
 		} else {
 			UI_init_conversation();
@@ -109724,7 +109724,7 @@ void Func093B 0x93B (var var0000) {
 			say("\"Namely, those who belong to the organization called The Fellowship, which doth dare to preach contrary to Beauty.\"");
 			say("\"I would remind our Fellowship guests that they are here on sufferance, and that they should mind their manners.\"");
 			UI_play_music(0x001A, Func09A0(0x0005, 0x0001));
-			0xFFC8->show_npc_face1(0x0000);
+			LEON->show_npc_face1(0x0000);
 			say("\"We shall behave ourselves, milord. The Fellowship is an enlightened brotherhood, not a group to be feared.\"");
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
@@ -109880,8 +109880,8 @@ void Func093B 0x93B (var var0000) {
 			}
 		}
 		if (!gflags[0x017D]) {
-			if (gflags[0x0170] && (0xFFC8->get_item_flag(MET) && (!0xFFC8->get_item_flag(DEAD)))) {
-				var0007 = 0xFFC8;
+			if (gflags[0x0170] && (LEON->get_item_flag(MET) && (!LEON->get_item_flag(DEAD)))) {
+				var0007 = LEON;
 			}
 			if (gflags[0x0172]) {
 				var0007 &= JOTH;
@@ -110068,7 +110068,7 @@ void Func093B 0x93B (var var0000) {
 		if (item == KYLISTA->get_npc_object()) {
 			var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x0029);
 		}
-		if ((item == 0xFFC8->get_npc_object()) || (item == JOTH->get_npc_object())) {
+		if ((item == LEON->get_npc_object()) || (item == JOTH->get_npc_object())) {
 			var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x002C);
 		}
 		if ((item == 0xFFC5->get_npc_object()) || (item == GARTH->get_npc_object())) {
