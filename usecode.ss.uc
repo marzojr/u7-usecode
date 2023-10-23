@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, 0xFFEA, 0xFFE8, 0xFFE9, 0xFFE2, 0xFFE0, 0xFFE3, 0xFFE5, 0xFFEE, 0xFFEC, 0xFFD6, 0xFFD5, 0xFFEB, 0xFFF0, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, 0xFFEA, 0xFFE8, 0xFFE9, 0xFFE2, 0xFFE0, 0xFFE3, 0xFFE5, 0xFFEE, 0xFFEC, 0xFFD6, 0xFFD5, 0xFFEB, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -9101,7 +9101,7 @@ void Func0207 shape#(0x207) () {
 			}
 			if ((Func0994() == 0x000E) && (gflags[0x00F0] && (!gflags[0x00E6]))) {
 				gflags[0x0128] = true;
-				var0001 = 0xFFF0;
+				var0001 = EDRIN;
 				var0002 = [0x036C, 0x094B, 0x0000];
 				0xFFDB->set_polymorph(0x00EF);
 				var0006 = [0x037D, 0x095A, 0x0000];
@@ -24296,65 +24296,65 @@ void Func0410 object#(0x410) () {
 		var0003 = "evening";
 	}
 	if (gflags[0x0128] && ((event == PROXIMITY) && (!gflags[0x00E6]))) {
-		0xFFF0->set_npc_id(0xFFF0->get_npc_id() + 0x0001);
-		if (0xFFF0->get_npc_id() == 0x0008) {
+		EDRIN->set_npc_id(EDRIN->get_npc_id() + 0x0001);
+		if (EDRIN->get_npc_id() == 0x0008) {
 			UI_play_sound_effect(0x0074);
-			var0004 = 0xFFF0->get_object_position();
+			var0004 = EDRIN->get_object_position();
 			UI_sprite_effect(ANIMATION_LIGHTNING_GREEN, var0004[0x0001], var0004[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			var0005 = script 0xFFF0 after 3 ticks {
+			var0005 = script EDRIN after 3 ticks {
 				nohalt;
 				call Func0410;
 			};
 		}
-		if (0xFFF0->get_npc_id() == 0x0007) {
-			Func097F(0xFFF0, "@Oh, no!@", 0x0000);
+		if (EDRIN->get_npc_id() == 0x0007) {
+			Func097F(EDRIN, "@Oh, no!@", 0x0000);
 			UI_play_sound_effect(0x0074);
-			var0004 = 0xFFF0->get_object_position();
+			var0004 = EDRIN->get_object_position();
 			var0004[0x0001] -= 0x0004;
 			var0004[0x0002] -= 0x0003;
 			UI_sprite_effect(ANIMATION_LIGHTNING_BLUE, var0004[0x0001], var0004[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		}
-		if (0xFFF0->get_npc_id() == 0x0006) {
-			Func097F(0xFFF0, "@Must hide...@", 0x0000);
+		if (EDRIN->get_npc_id() == 0x0006) {
+			Func097F(EDRIN, "@Must hide...@", 0x0000);
 			UI_play_sound_effect(0x0074);
-			var0004 = 0xFFF0->get_object_position();
+			var0004 = EDRIN->get_object_position();
 			var0004[0x0001] += 0x0011;
 			UI_sprite_effect(ANIMATION_LIGHTNING_RED, var0004[0x0001], var0004[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		}
-		if (0xFFF0->get_npc_id() == 0x0005) {
-			Func097F(0xFFF0, "@Teleport storm!@", 0x0000);
+		if (EDRIN->get_npc_id() == 0x0005) {
+			Func097F(EDRIN, "@Teleport storm!@", 0x0000);
 			UI_play_sound_effect(0x0074);
-			var0004 = 0xFFF0->get_object_position();
+			var0004 = EDRIN->get_object_position();
 			var0004[0x0001] += 0x000C;
 			var0004[0x0002] += 0x0007;
 			UI_sprite_effect(ANIMATION_LIGHTNING_YELLOW, var0004[0x0001], var0004[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		}
-		if (0xFFF0->get_npc_id() == 0x0004) {
+		if (EDRIN->get_npc_id() == 0x0004) {
 			UI_set_weather(SPARKLE);
-			Func097F(0xFFF0, "@'Tis so windy!@", 0x0003);
+			Func097F(EDRIN, "@'Tis so windy!@", 0x0003);
 			var0006 = 0x0247;
-			var0007 = 0xFFF0->find_nearby(var0006, 0x000A, MASK_NONE);
+			var0007 = EDRIN->find_nearby(var0006, 0x000A, MASK_NONE);
 			if (var0007) {
 				var0007->remove_item();
 			}
 		}
-		if (0xFFF0->get_npc_id() == 0x0003) {
-			Func097F(0xFFF0, "@I should fetch my belongings.@", 0x0000);
+		if (EDRIN->get_npc_id() == 0x0003) {
+			Func097F(EDRIN, "@I should fetch my belongings.@", 0x0000);
 			var0006 = 0x0321;
-			var0007 = 0xFFF0->find_nearby(var0006, 0x000A, MASK_NONE);
+			var0007 = EDRIN->find_nearby(var0006, 0x000A, MASK_NONE);
 			if (var0007) {
 				var0007->remove_item();
 			}
 		}
-		if (0xFFF0->get_npc_id() == 0x0002) {
+		if (EDRIN->get_npc_id() == 0x0002) {
 			UI_fade_palette(0x000C, 0x0001, 0x0001);
 			UI_play_music(0x000C, Func09A0(0x0005, 0x0001));
-			Func097F(0xFFF0, "@It doth foretell a storm...@", 0x0000);
+			Func097F(EDRIN, "@It doth foretell a storm...@", 0x0000);
 		}
-		if (0xFFF0->get_npc_id() == 0x0001) {
+		if (EDRIN->get_npc_id() == 0x0001) {
 			UI_play_sound_effect(0x0074);
 			UI_set_weather(RAIN);
-			var0008 = 0xFFF0->find_nearby(0x025F, 0x0014, MASK_EGG);
+			var0008 = EDRIN->find_nearby(0x025F, 0x0014, MASK_EGG);
 			var0009 = UI_create_new_object(0x0339);
 			if (var0009) {
 				var0009->set_item_flag(TEMPORARY);
@@ -24384,7 +24384,7 @@ void Func0410 object#(0x410) () {
 		0xFFDB->set_schedule_type(WANDER);
 		Func097F(0xFFDB, "@Awk!@", 0x0002);
 		0xFFDB->set_camera();
-		0xFFF0->remove_npc();
+		EDRIN->remove_npc();
 		0xFFDB->set_polymorph(0x0304);
 		var0005 = script 0xFFDB after 5 ticks {
 			nohalt;
@@ -24393,16 +24393,16 @@ void Func0410 object#(0x410) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Excuse me...@");
-		Func097F(0xFFF0, "@But of course!@", 0x0002);
-		0xFFF0->set_schedule_type(TALK);
+		Func097F(EDRIN, "@But of course!@", 0x0002);
+		EDRIN->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFF0->run_schedule();
-		0xFFF0->show_npc_face0(0x0000);
-		0xFFF0->clear_item_say();
-		var000D = 0xFFF0->get_item_flag(MET);
+		EDRIN->run_schedule();
+		EDRIN->show_npc_face0(0x0000);
+		EDRIN->clear_item_say();
+		var000D = EDRIN->get_item_flag(MET);
 		if (var000D == false) {
-			0xFFF0->set_item_flag(MET);
+			EDRIN->set_item_flag(MET);
 			say("\"I am a man! I am a man! I cannot tell thee how miserable it is to be a bird.\"");
 			add("bird");
 			UI_set_timer(0x0005);
@@ -24491,7 +24491,7 @@ void Func0410 object#(0x410) () {
 					0xFFD5->show_npc_face1(0x0000);
 					say("\"The Arabella.\"");
 					UI_remove_npc_face1();
-					0xFFF0->show_npc_face0(0x0000);
+					EDRIN->show_npc_face0(0x0000);
 					say("\"Ah, yes, now I remember. I thank thee.\"");
 					0xFFD5->show_npc_face1(0x0000);
 					say("\"Thou art welcome.\"");
@@ -24577,7 +24577,7 @@ void Func0410 object#(0x410) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Fare thee well!@", 0x0000);
-				Func097F(0xFFF0, "@Goodbye!@", 0x0002);
+				Func097F(EDRIN, "@Goodbye!@", 0x0002);
 				Func08FF();
 				break;
 		}
@@ -31305,7 +31305,7 @@ void Func0425 object#(0x425) () {
 		};
 		AVATAR->clear_item_flag(DONT_MOVE);
 		UI_init_conversation();
-		0xFFF0->set_npc_id(0x0000);
+		EDRIN->set_npc_id(0x0000);
 		0xFFDB->set_new_schedules(MIDNIGHT, WANDER, [0x09A7, 0x07F7]);
 		0xFFDB->run_schedule();
 		gflags[0x002A] = false;
@@ -55759,7 +55759,7 @@ void Func04B6 object#(0x4B6) () {
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
 	var0003 = Func097D(PARTY, 0x0001, 0x0289, QUALITY_ANY, 0x000A);
-	var0004 = 0xFFF0->get_item_flag(MET);
+	var0004 = EDRIN->get_item_flag(MET);
 	if (event == DOUBLECLICK) {
 		Func097F(AVATAR, "@Hello, there!@", 0x0000);
 		Func097F(0xFF4A, "@Yes?@", 0x0002);
@@ -55798,31 +55798,31 @@ void Func04B6 object#(0x4B6) () {
 		} else {
 			0xFF4A->show_npc_face0(0x0000);
 			say("\"Edrin! Thou hast come...\"");
-			0xFFF0->show_npc_face1(0x0000);
+			EDRIN->show_npc_face1(0x0000);
 			say("\"Siranush! I had despaired of seeing thee again! How I wish I could be with thee always...\"");
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
 			say("\"Thou hast filled my world with the love I never knew while my body lived. For that, I have called thee here for one last sight of thee...\"");
-			0xFFF0->show_npc_face1(0x0000);
+			EDRIN->show_npc_face1(0x0000);
 			say("\"Then the Hero hath succeeded in destroying the Dream Crystal?\"");
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
 			say("\"No, dear one, only I can undo what Rabindrinath hath done... The Hero hath defeated Rabindrinath and brought me the Crystal.\" *\"It is mine to destroy it.\"");
-			0xFFF0->show_npc_face1(0x0000);
+			EDRIN->show_npc_face1(0x0000);
 			say("\"Although I know it would be wrong, I wish with all mine heart that thou wouldst not. If I could join thee, I would gladly.\"");
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
 			say("\"I know that, dear Edrin. But thou hast life yet to live.\" *\"I must destroy the Crystal. My people and I must move on to what lies beyond... I will look for thee, and hope that thou dost join me in what waits ahead.\"");
-			0xFFF0->show_npc_face1(0x0000);
+			EDRIN->show_npc_face1(0x0000);
 			say("\"I have no wish to bind thee here, for all that I love thee. I will live my life and pray to meet thee beyond this world.\"");
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
 			say("\"Thou canst add my prayers to thine, Edrin. I love thee, now and always.\" *\"Although we will not meet here again, dream of me... Farewell, my love.\"");
-			0xFFF0->show_npc_face1(0x0000);
+			EDRIN->show_npc_face1(0x0000);
 			say("\"I love thee... And I shall dream of thee all the rest of my days.\" *\"Farewell...\"");
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
-			0xFFF0->remove_npc();
+			EDRIN->remove_npc();
 			say("\"Thou hast freed the tormented souls of my people, Avatar. Thy good deed shall be rewarded as promised.\" *\"I wish thee luck in thy quest. May thy sleep be peaceful...\"");
 			UI_remove_npc_face0();
 			Func095D(0x0190);
@@ -55877,13 +55877,13 @@ void Func04B6 object#(0x4B6) () {
 					UI_remove_npc_face0();
 					var0017 = 0xFF4A->get_object_position();
 					var0017[0x0001] += 0x0002;
-					0xFFF0->move_object(var0017);
+					EDRIN->move_object(var0017);
 					UI_sprite_effect(ANIMATION_TELEPORT, var0017[0x0001], var0017[0x0002], var0017[0x0003], 0x0000, 0x0000, LOOP_ONCE);
-					0xFFF0->set_schedule_type(WAIT);
+					EDRIN->set_schedule_type(WAIT);
 					0xFF4A->set_schedule_type(WAIT);
-					var0018 = 0xFFF0->find_direction(0xFF4A);
-					var0019 = 0xFF4A->find_direction(0xFFF0);
-					var0006 = script 0xFFF0 {
+					var0018 = EDRIN->find_direction(0xFF4A);
+					var0019 = 0xFF4A->find_direction(EDRIN);
+					var0006 = script EDRIN {
 						nohalt;
 						face var0018;
 						actor frame strike_2h;
@@ -55935,13 +55935,13 @@ void Func04B6 object#(0x4B6) () {
 						UI_remove_npc_face0();
 						var0017 = 0xFF4A->get_object_position();
 						var0017[0x0001] += 0x0002;
-						0xFFF0->move_object(var0017);
+						EDRIN->move_object(var0017);
 						UI_sprite_effect(ANIMATION_TELEPORT, var0017[0x0001], var0017[0x0002], var0017[0x0003], 0x0000, 0x0000, LOOP_ONCE);
-						0xFFF0->set_schedule_type(WAIT);
+						EDRIN->set_schedule_type(WAIT);
 						0xFF4A->set_schedule_type(WAIT);
-						var0018 = 0xFFF0->find_direction(0xFF4A);
-						var0019 = 0xFF4A->find_direction(0xFFF0);
-						var0006 = script 0xFFF0 {
+						var0018 = EDRIN->find_direction(0xFF4A);
+						var0019 = 0xFF4A->find_direction(EDRIN);
+						var0006 = script EDRIN {
 							nohalt;
 							face var0018;
 							actor frame strike_2h;
@@ -56120,13 +56120,13 @@ void Func04B6 object#(0x4B6) () {
 						UI_remove_npc_face0();
 						var0017 = 0xFF4A->get_object_position();
 						var0017[0x0001] += 0x0002;
-						0xFFF0->move_object(var0017);
+						EDRIN->move_object(var0017);
 						UI_sprite_effect(ANIMATION_TELEPORT, var0017[0x0001], var0017[0x0002], var0017[0x0003], 0x0000, 0x0000, LOOP_ONCE);
-						0xFFF0->set_schedule_type(WAIT);
+						EDRIN->set_schedule_type(WAIT);
 						0xFF4A->set_schedule_type(WAIT);
-						var0018 = 0xFFF0->find_direction(0xFF4A);
-						var0019 = 0xFF4A->find_direction(0xFFF0);
-						var0006 = script 0xFFF0 {
+						var0018 = EDRIN->find_direction(0xFF4A);
+						var0019 = 0xFF4A->find_direction(EDRIN);
+						var0006 = script EDRIN {
 							nohalt;
 							face var0018;
 							actor frame strike_2h;
@@ -78779,7 +78779,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(0xFFD6, 0x0994, 0x0754, WAIT);
 		Func09AC(0xFFD5, 0x0902, 0x0746, WAIT);
 		Func09AC(0xFFEB, 0x08B6, 0x0736, WAIT);
-		Func09AC(0xFFF0, 0x08C2, 0x0705, WAIT);
+		Func09AC(EDRIN, 0x08C2, 0x0705, WAIT);
 		Func09AC(COLUMNA, 0x0953, 0x07B5, WAIT);
 		0xFFDF->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, EVENING], [SLEEP, EAT, MAJOR_SIT, WANDER, EAT], [0x08F8, 0x071C, 0x090A, 0x0718, 0x08F7, 0x0737, 0x0915, 0x0722, 0x090A, 0x0718]);
 		DUCIO->set_new_schedules([MIDNIGHT, DAWN, MORNING], [SLEEP, EAT, TEND_SHOP], [0x0914, 0x06E7, 0x0919, 0x06E7, 0x093C, 0x0782]);
@@ -105345,9 +105345,9 @@ var Func08E2 0x8E2 (var var0000) {
 							var0010 = var000A->get_object_position();
 							UI_sprite_effect(ANIMATION_POOF, (var0010[0x0001] - 0x0006), (var0010[0x0002] - 0x0006), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 							var000A->remove_item();
-							0xFFF0->move_object(var0010);
-							0xFFF0->set_schedule_type(TALK);
-							0xFFF0->set_new_schedules(MIDNIGHT, WANDER, [var0010[0x0001], var0010[0x0002]]);
+							EDRIN->move_object(var0010);
+							EDRIN->set_schedule_type(TALK);
+							EDRIN->set_new_schedules(MIDNIGHT, WANDER, [var0010[0x0001], var0010[0x0002]]);
 							gflags[0x00E6] = true;
 						}
 					}

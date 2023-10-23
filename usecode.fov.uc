@@ -13174,7 +13174,7 @@ void Func040E object#(0x40E) () {
 	JOHNSON->show_npc_face(0x0000);
 	var0000 = UI_part_of_day();
 	if (var0000 == NIGHT) {
-		var0001 = Func08FC(JOHNSON, 0xFFF0);
+		var0001 = Func08FC(JOHNSON, KLOG);
 		if (var0001) {
 			say("\"I will speak with thee after the Fellowship meeting.\"*");
 		} else {
@@ -13409,7 +13409,7 @@ void Func0410 object#(0x410) () {
 		if (gflags[0x0040]) {
 			add("Crown Jewel");
 		}
-		0xFFF0->show_npc_face(0x0000);
+		KLOG->show_npc_face(0x0000);
 		if (!gflags[0x004F]) {
 			say("This man exudes kindness and geniality. \"Ah, Avatar! I recognized thee at once! Word has moved through town quickly. I had heard thou wert here.\"");
 			gflags[0x004F] = true;
@@ -13545,7 +13545,7 @@ void Func0410 object#(0x410) () {
 			", let me know.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFF0);
+		Func092E(KLOG);
 	}
 }
 
@@ -13669,7 +13669,7 @@ void Func0412 object#(0x412) () {
 		var0003 = 0xFFEE->get_npc_object()->get_schedule_type();
 		var0004 = "Avatar";
 		if (var0000 == NIGHT) {
-			var0005 = Func08FC(0xFFEE, 0xFFF0);
+			var0005 = Func08FC(0xFFEE, KLOG);
 			if (var0005) {
 				say("Dell frowns at you for distracting him during the Fellowship meeting.*");
 			} else {
@@ -14219,7 +14219,7 @@ void Func0416 object#(0x416) () {
 		0xFFEA->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		if (var0000 == NIGHT) {
-			var0001 = Func08FC(0xFFEA, 0xFFF0);
+			var0001 = Func08FC(0xFFEA, KLOG);
 			if (var0001) {
 				say("Caroline asks you to keep your voice down. The Fellowship meeting is in progress.*");
 			} else {
@@ -46539,7 +46539,7 @@ void Func04EC object#(0x4EC) () {
 		0xFF14->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		if (var0000 == NIGHT) {
-			var0001 = Func08FC(0xFF14, 0xFFF0);
+			var0001 = Func08FC(0xFF14, KLOG);
 			if (var0001) {
 				say("Ellen puts her finger to her lips. There is a Fellowship meeting going on.*");
 			} else {
@@ -71225,7 +71225,7 @@ void Func08AB 0x8AB () {
 	var0003 = Func08F7(0xFFEA);
 	var0004 = Func08F7(IOLO);
 	var0005 = Func08F7(SPARK);
-	0xFFF0->say("Klog is leading the town members in a Fellowship meeting.");
+	KLOG->say("Klog is leading the town members in a Fellowship meeting.");
 	say("\"Thank you, Fellowship members of Trinsic, for attending our meeting this evening.~~\"I am certain you are all sorely aware of the crimes that have been committed in our city. Now is a time to mourn those whom we have lost. We will always remember Christopher, our blacksmith, as a valuable citizen of our town as well as a dear friend. Inamo was an amiable and hard-working gargoyle. As their deaths show us, Britannia needs The Fellowship now more than ever.");
 	say("\"The Fellowship was created to advance a philosophy, a method of applying an optimistic order of thought to one's life. How dost thou follow this method? By applying the Triad of Inner Strength to thy life. The Triad is composed of three principles that, when applied in unison to thy life, can soothe the fever of a society that teaches thee to accept failure and banishes the destructive illusory thoughts and feelings from thy spirit.");
 	say("\"The first principle is to Strive For Unity. This means that we should reject divisiveness, put aside our differences and work together for the good of us all.");
@@ -71243,7 +71243,7 @@ void Func08AB 0x8AB () {
 	}
 	if (var0002) {
 		0xFFEE->say("\"The Fellowship has made me a happier, more agreeable person.\"*");
-		0xFFF0->say("\"Thank thee for sharing, brother!\"*");
+		KLOG->say("\"Thank thee for sharing, brother!\"*");
 		0xFFEE->hide();
 	}
 	if (var0003) {
@@ -71258,7 +71258,7 @@ void Func08AB 0x8AB () {
 		IOLO->say("Iolo slaps his own cheek to keep himself from dozing off. ~~\"Avatar, I do believe that we have heard enough of this.\"*");
 		IOLO->hide();
 	}
-	0xFFF0->say("It is apparent that the meeting will be continuing for some time... You decide you have more important matters to attend to.*");
+	KLOG->say("It is apparent that the meeting will be continuing for some time... You decide you have more important matters to attend to.*");
 	abort;
 }
 
