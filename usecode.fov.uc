@@ -18637,10 +18637,10 @@ void Func0434 object#(0x434) () {
 	var var000E;
 
 	if (event == DOUBLECLICK) {
-		0xFFCC->show_npc_face(0x0000);
+		WILLY->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func0908();
-		var0002 = 0xFFCC->get_npc_object()->get_schedule_type();
+		var0002 = WILLY->get_npc_object()->get_schedule_type();
 		var0003 = UI_part_of_day();
 		var0004 = Func08F7(SPARK);
 		add(["name", "job", "bye"]);
@@ -18680,12 +18680,12 @@ void Func0434 object#(0x434) () {
 							var0004 = Func08F7(SPARK);
 							if (var0004) {
 								SPARK->say("\"I want some!\"*");
-								0xFFCC->say("\"Here thou art, laddie.\" Willy hands Spark a pastry and the boy devours it in one gulp.*");
+								WILLY->say("\"Here thou art, laddie.\" Willy hands Spark a pastry and the boy devours it in one gulp.*");
 								SPARK->say("\"Mmmmm! I say, ",
 									var0001,
 									", I think we need a lot of this for the road. We had best buy some, all right?\"*");
 								SPARK->hide();
-								0xFFCC->show_npc_face(0x0000);
+								WILLY->show_npc_face(0x0000);
 							}
 						} else {
 							say("\"Thou dost not?! Why, do not be ridiculous! Of course thou dost!\"");
@@ -18825,7 +18825,7 @@ void Func0434 object#(0x434) () {
 	}
 	if (event == PROXIMITY) {
 		var0003 = UI_part_of_day();
-		var0002 = 0xFFCC->get_npc_object()->get_schedule_type();
+		var0002 = WILLY->get_npc_object()->get_schedule_type();
 		var000D = UI_die_roll(0x0001, 0x0004);
 		if (var0002 == BAKE) {
 			if (var000D == 0x0001) {
@@ -18840,9 +18840,9 @@ void Func0434 object#(0x434) () {
 			if (var000D == 0x0004) {
 				var000E = "@Fresh pastries!@";
 			}
-			0xFFCC->item_say(var000E);
+			WILLY->item_say(var000E);
 		} else {
-			Func092E(0xFFCC);
+			Func092E(WILLY);
 		}
 	}
 }
@@ -77082,7 +77082,7 @@ void Func0947 0x947 () {
 		var0007 = [];
 		for (var000A in var0001 with var0008 to var0009) {
 			if ((var000A->get_item_frame() == 0x0000) && var000A->get_item_flag(OKAY_TO_TAKE)) {
-				if (var000A->get_distance(0xFFCC) <= 0x0019) {
+				if (var000A->get_distance(WILLY) <= 0x0019) {
 					var0006 += 0x0001;
 					var0007 &= var000A;
 				}

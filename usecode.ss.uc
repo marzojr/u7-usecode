@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, 0xFFCC, 0xFFCB, 0xFFCA, DELPHYNIA, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, 0xFFCB, 0xFFCA, DELPHYNIA, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -36949,23 +36949,23 @@ void Func0434 object#(0x434) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say(("@Good " + var0002) + ", barkeep.@");
-		0xFFCC->Func07D1();
-		Func097F(0xFFCC, (((("@Good " + var0002) + ", ") + var0001) + ".@"), 0x0002);
-		0xFFCC->set_schedule_type(TALK);
+		JENDON->Func07D1();
+		Func097F(JENDON, (((("@Good " + var0002) + ", ") + var0001) + ".@"), 0x0002);
+		JENDON->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFCC->run_schedule();
-		0xFFCC->clear_item_say();
-		0xFFCC->show_npc_face0(0x0000);
+		JENDON->run_schedule();
+		JENDON->clear_item_say();
+		JENDON->show_npc_face0(0x0000);
 		var0003 = 0x0005;
 		if (gflags[0x0171] || (gflags[0x0170] && (!gflags[0x0172]))) {
 			say("\"I should have known that thou wert trouble! Askin' all those questions...\"");
 			say("\"I shall not speak to thee until the Oracle hath ruled!\"");
 			UI_remove_npc_face0();
-			Func097F(0xFFCC, "@Be gone!@", 0x0000);
+			Func097F(JENDON, "@Be gone!@", 0x0000);
 			abort;
 		}
-		if (!0xFFCC->get_item_flag(MET)) {
+		if (!JENDON->get_item_flag(MET)) {
 			if (UI_is_pc_female()) {
 				say("\"I am Jendon, ",
 					var0001,
@@ -36984,7 +36984,7 @@ void Func0434 object#(0x434) () {
 					var0002,
 					"?\"");
 			}
-			0xFFCC->set_item_flag(MET);
+			JENDON->set_item_flag(MET);
 			add("proprietor");
 		} else {
 			say("\"Returned so soon? How may I help thee now?\"");
@@ -36993,11 +36993,11 @@ void Func0434 object#(0x434) () {
 		if (Func0942(0xFFC6)) {
 			var0003 = 0x0003;
 		}
-		if (0xFFCC->get_schedule_type() == MAJOR_SIT) {
+		if (JENDON->get_schedule_type() == MAJOR_SIT) {
 			var0003 = 0x0001;
 		}
 		add(["information"]);
-		if (0xFFCC->get_schedule_type() == WAITER) {
+		if (JENDON->get_schedule_type() == WAITER) {
 			add("buy");
 		}
 		add("bye");
@@ -37600,8 +37600,8 @@ void Func0434 object#(0x434) () {
 			case "blue egg" (remove):
 				if (Func097D(PARTY, 0x0001, 0x0241, QUALITY_ANY, 0x0003)) {
 					say("\"A rotten egg! How it smells! Leave here with that!\"");
-					Func097F(0xFFCC, "@Whew!@", 0x0000);
-					0xFFCC->set_schedule_type(SHY);
+					Func097F(JENDON, "@Whew!@", 0x0000);
+					JENDON->set_schedule_type(SHY);
 					abort;
 				}
 				say("\"I have never heard of a blue egg.\"");
@@ -37697,7 +37697,7 @@ void Func0434 object#(0x434) () {
 				if (Func097D(PARTY, 0x0001, 0x031A, QUALITY_ANY, 0x0000)) {
 					say("\"What manner of beast art thou, to carry such things with thee?!\"");
 					say("\"Thou art as bad as those horrible wizards from Moonshade! No respect for life!\"");
-					Func097F(0xFFCC, "@Take it away!@", 0x0000);
+					Func097F(JENDON, "@Take it away!@", 0x0000);
 					abort;
 				}
 				say("\"Sounds like the work of those horrible wizards from Moonshade! No respect for life!\"");
@@ -37849,7 +37849,7 @@ void Func0434 object#(0x434) () {
 				Func08AB();
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Farewell!@", 0x0000);
-				Func097F(0xFFCC, "@Walk in Beauty!@", 0x0002);
+				Func097F(JENDON, "@Walk in Beauty!@", 0x0002);
 				Func08AA();
 				break;
 		}
@@ -39416,7 +39416,7 @@ void Func043A object#(0x43A) () {
 	var var0008;
 
 	var0000 = Func0954();
-	var0001 = Func0942(0xFFCC);
+	var0001 = Func0942(JENDON);
 	var0002 = Func0953();
 	var0003 = UI_is_pc_female();
 	var0004 = Func097D(PARTY, 0x0001, 0x0377, QUALITY_ANY, 0x0000);
@@ -39559,7 +39559,7 @@ void Func043A object#(0x43A) () {
 			case "island of cats":
 				say("\"There's this island... Can't at all remember where it is. No one lives there, though. A barren, uninviting place...\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"Oh, not that ale tale again, Olon! If thou drivest away what customers I have left, thou canst find somewhere else ta drink.\"");
 					0x0000->set_conversation_slot();
 					say("\"Quit thy complainin', Jendon. I'm the only reason anyone comes in here now, and thou knowest it! They come ta hear me tales...\"");
@@ -39592,7 +39592,7 @@ void Func043A object#(0x43A) () {
 			case "Delphynia":
 				say("\"Delphynia is an herbalist.\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"She's a Horticulturist, Olon. Thou shouldst only give facts...\"");
 					0x0000->set_conversation_slot();
 					if (var0003) {
@@ -39608,7 +39608,7 @@ void Func043A object#(0x43A) () {
 				}
 				say("\"She's what passes for a healer in these forsaken parts ever since the last healer were et by them goblins.\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					if (var0003) {
 						say("\"Don't rant on about the goblins, Olon! 'Tis not a fit subject ta discuss before a lady.\"");
 						0x0000->set_conversation_slot();
@@ -39643,7 +39643,7 @@ void Func043A object#(0x43A) () {
 			case "I was tricked.":
 				say("\"Aye, there are those that would do such things. Sometimes 'tis them that thou trustest most. Just like that ol' King of the White Dragon...\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"Olon, even I don't want ta hear that one... ever again!\"");
 					0x0000->set_conversation_slot();
 					say("\"Thou always didst lack a backbone, Jendon! Go ta Temple and soothe thy nerves with the Oracle's empty mouthings!\"");
@@ -39674,7 +39674,7 @@ void Func043A object#(0x43A) () {
 			case "King of the White Dragon":
 				say("\"Long ago, when the mountains were young, this land was ruled by two rival kings. One of those kings was called the King of the White Dragon.\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					if (var0003) {
 						say("\"I'll not stay here and listen ta this again! Lady, I see that thou art armed. If he doth offend thee, run him through. I'll make no complaint.\" *\"If thou hast need of me, I shall be in back.\"");
 						0x0000->set_conversation_slot();
@@ -39709,7 +39709,7 @@ void Func043A object#(0x43A) () {
 			case "love story":
 				say("\"This is not thine usual love story, no. This here's about dragons, ice dragons.\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"A love story about ice dragons! Now I've heard everything, even from thee, Olon.\"");
 					0x0000->set_conversation_slot();
 					say("\"Thou wouldst not recognize a love story if it hit thee between the eyes, Jendon.\"");
@@ -39728,7 +39728,7 @@ void Func043A object#(0x43A) () {
 				say("\"A few years later these same sailors spied TWO ice dragons sitting atop an icy peak, singin' ta one another. Them scholars over in Moonshade say that dragons mate for life. I'd wager that's what our lads came across -- a dragon out hunting for a mate.\"");
 				say("\"The only other thing I ever heard from those mages that made sense is that a dragon turns very hostile if its mate or young is killed.\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"Now that's truly touchin', Olon. Thou surely hast brought a tear ta mine eye, thou hast.\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -39739,14 +39739,14 @@ void Func043A object#(0x43A) () {
 			case "Alyssand":
 				say("\"Alyssand's the daughter of Delin, the shopkeeper. Thou mightest think she hath had enough sadness in her short life.\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"'Tis hard ta find many who have borne more, I'll wager.\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
 				}
 				say("\"Her mother died after givin' birth ta Delin's only son. Never saw a man take it harder. He near ta lost his mind. Then he did go a little crazy after the Magister took young Freli away during the annual testing.\" *\"Alyssand hath looked after him all alone ever since, helpin' mind the store and doin' her weavin'. Then she met Keth.\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"A sturdy lad, Keth was. 'Twere a pity ta lose him.\"");
 					0x0000->set_conversation_slot();
 					say("\"I'll thank thee to keep thy comments to thyself, Jendon. Thou art ruining my tale.\"");
@@ -39754,14 +39754,14 @@ void Func043A object#(0x43A) () {
 				}
 				say("\"Keth doted upon Alyssand. Treated her better than the Lady of Fawn, he did. Sent all the way ta Moonshade ta have an engagement ring made for her.\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"Cost him a pretty penny, I'll wager.\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
 				}
 				say("\"Then one day Keth didn't run fast enough ta shelter when one of those cursed storms hit. No one hath seen him since.\" *\"Until she lost her engagement ring ta another one of those storms here recently, Alyssand swore that Keth would return. She's a changed woman now.\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"Sounds like a love story to me...\"");
 					0x0000->set_conversation_slot();
 					say("\"An' I suppose that thou considerest the island of cats a tragedy then?\"");
@@ -39780,7 +39780,7 @@ void Func043A object#(0x43A) () {
 			case "engagement ring":
 				say("\"That could be it, right enough. Though thou shouldst ask Alyssand herself. Mine eyes are not what they were.\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"'Tis it, sure as the tide comes in! Keth flashed it around enough, I'd recognize it anywhere.\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -39792,7 +39792,7 @@ void Func043A object#(0x43A) () {
 			case "I am Monitor's Champion.":
 				say("\"Why not say that thou art the new Lady of Fawn, whilst thou art about it, bold wench? Methinks that thy tales must be taller than mine.\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"Now that be truly difficult, too.\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -39820,7 +39820,7 @@ void Func043A object#(0x43A) () {
 				} else {
 					say("\"They're the poor lads that Jendon prattles about all the time. Ta hear him talk, the Oracle all but shook down the Temple when Kylista asked if they were the cause of the storms.\"");
 					if (var0001 == true) {
-						0xFFCC->show_npc_face1(0x0000);
+						JENDON->show_npc_face1(0x0000);
 						say("\"Thou canst blaspheme all thou likest, Olon, I was there and heard it!\"");
 						UI_remove_npc_face1();
 						0x0000->set_conversation_slot();
@@ -39869,7 +39869,7 @@ void Func043A object#(0x43A) () {
 			case "King of the White Dragon":
 				say("\"Thou hast not heard of the King of the White Dragon? The bards of Monitor have been lax of late then. I'll wager that thou hast not heard of the island of cats neither. Or a proper love story, neither.\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"Listen ta him, wilt thou? Art thou sayin' that thou art Fawn's bard now, Olon?\"");
 					0x0000->set_conversation_slot();
 					say("\"Our 'ficial one went down with the Delyssia. Reckon I'm all there is now.\"");
@@ -39885,7 +39885,7 @@ void Func043A object#(0x43A) () {
 				say("\"They say he lives there still, feeding off any who pass by. One thing's for sure, the goblins don't go near that place ta this very day.\"");
 				if (var0001 == true) {
 					if (gflags[0x014E] == false) {
-						0xFFCC->show_npc_face1(0x0000);
+						JENDON->show_npc_face1(0x0000);
 						say("\"I'm sure that thou hast taken his mind off his problems, for sure, Olon. Why worry about goblins when thou canst worry about the King of the White Dragon?\"");
 						UI_remove_npc_face1();
 						0x0000->set_conversation_slot();
@@ -39898,7 +39898,7 @@ void Func043A object#(0x43A) () {
 			case "island of cats":
 				say("\"There's this island... Can't at all remember where it is. No one lives there, though. A barren, uninviting place...\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"Oh, not again, Olon! If thou drivest away what customers I have left, thou canst find somewhere else ta drink.\"");
 					0x0000->set_conversation_slot();
 					say("\"Cease thy complainin', Jendon. I'm the only reason anyone comes in here now, and thou knowest it! They come ta hear me tales...\" Now where was I? Oh, yes...\"");
@@ -39913,7 +39913,7 @@ void Func043A object#(0x43A) () {
 			case "Delphynia":
 				say("\"Delphynia is an herbalist.\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"She's a Hor-ti-culturist, Olon. Thou shouldst only give facts...\"");
 					0x0000->set_conversation_slot();
 					say("\"Thou wouldst have me say such things in front of a stranger? 'Tisn't polite ta speak of a lady in such a fashion, Jendon.\"");
@@ -39924,7 +39924,7 @@ void Func043A object#(0x43A) () {
 				}
 				say("\"She's what passes for a healer in these forsaken parts ever since the last healer was et by them goblins.\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"Don't rant on about the goblins, Olon! `Tis not a subject this young lord wishes ta hear right now, I'm certain.\"");
 					0x0000->set_conversation_slot();
 					say("\"Return ta washin' the glasses, Jendon! Thou art no judge of what a warrior wishes ta hear.\"");
@@ -39939,7 +39939,7 @@ void Func043A object#(0x43A) () {
 			case "love story":
 				say("\"This is not thine usual love story, no. This here's about dragons, ice dragons.\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"A love story about ice dragons! Now I've heard everything, even from thee, Olon.\"");
 					0x0000->set_conversation_slot();
 					say("\"Thou wouldst not recognize a love story if it hit thee between the eyes, Jendon.\"");
@@ -39958,7 +39958,7 @@ void Func043A object#(0x43A) () {
 				say("\"A few years later these same sailors spied TWO ice dragons sitting atop an icy peak, singing ta one another. Them scholars over in Moonshade say that dragons mate for life. I'd wager that's what our lads came across -- a dragon out hunting for a mate.\"");
 				say("\"The only other thing I ever heard from those mages that made sense is that a dragon is very hostile if its mate or young is killed.\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"Now that's truly touchin', Olon. Thou surely hast brought a tear ta mine eye, thou hast.\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -39970,7 +39970,7 @@ void Func043A object#(0x43A) () {
 			case "Alyssand":
 				say("\"Alyssand's the daughter of Delin, the shopkeeper. Thou mightest think she hath had enough sadness in her short life.\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"'Tis hard ta find many who have borne more, I'll wager.\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -39978,7 +39978,7 @@ void Func043A object#(0x43A) () {
 				say("\"Her mother died after givin' birth ta Delin's only son. Never saw a man take it harder. He near ta lost his mind.\"");
 				say("\"Then he did go a little crazy after the Magister took young Freli away during the annual testing.\" *\"Alyssand hath looked after him all alone ever since, helpin' mind the store and doin' her weavin'. Then she met Keth.\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"A sturdy lad, Keth was. 'Twere a pity ta lose him.\"");
 					0x0000->set_conversation_slot();
 					say("\"I'll thank thee ta keep thy comments ta thyself, Jendon. Thou art ruining my tale.\"");
@@ -39986,7 +39986,7 @@ void Func043A object#(0x43A) () {
 				}
 				say("\"Keth doted upon Alyssand. Treated her better than the Lady of Fawn, he did. Sent all the way ta Moonshade ta have an engagement ring made for her.\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"Cost him a pretty penny, I'll wager.\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -39994,7 +39994,7 @@ void Func043A object#(0x43A) () {
 				say("\"Then one day Keth didn't run fast enough ta shelter when one of those cursed storms hit. No one hath seen him since.\"");
 				say("\"Until she lost her engagement ring ta another one of those storms here recently, Alyssand swore that Keth would return. She's a changed woman now.\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"Sounds like a love story ta me...\"");
 					0x0000->set_conversation_slot();
 					say("\"Goes ta show what thou knowest!\"");
@@ -40009,7 +40009,7 @@ void Func043A object#(0x43A) () {
 			case "engagement ring":
 				say("\"That could be it, right enough. Though thou shouldst ask Alyssand herself. Mine eyes are not what they were.\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"'Tis it, sure as the tide comes in! Keth flashed it around enough, I'd recognize it anywhere.\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -40021,7 +40021,7 @@ void Func043A object#(0x43A) () {
 				if (var0003 == true) {
 					say("\"'Tis a drink from the heavens. Thou shouldst try it.\"");
 					if (var0001 == true) {
-						0xFFCC->show_npc_face1(0x0000);
+						JENDON->show_npc_face1(0x0000);
 						say("\"I'd advise against it, lady. There aren't many outside Fawn that care for its taste, I've found. I only export a bit ta Monitor now.\"");
 						add("Monitor");
 						UI_remove_npc_face1();
@@ -40031,7 +40031,7 @@ void Func043A object#(0x43A) () {
 				} else {
 					say("\"The drink of hard-workin' men! A drink ta put hair on thy chest and make the women throw themselves at thee.\" *\"Thou shouldst try it.\"");
 					if (var0001 == true) {
-						0xFFCC->show_npc_face1(0x0000);
+						JENDON->show_npc_face1(0x0000);
 						say("\"Be careful, Olon. There aren't many outside Fawn that care for its taste. I only export a bit ta Monitor now.\"");
 						add("Monitor");
 						UI_remove_npc_face1();
@@ -40043,7 +40043,7 @@ void Func043A object#(0x43A) () {
 				if (Func0955() == true) {
 					if (var0001 == true) {
 						say("\"Jendon! Bring thy lazy backside over here! Thou hast a payin' customer with a thirst.\"");
-						0xFFCC->show_npc_face1(0x0000);
+						JENDON->show_npc_face1(0x0000);
 						say("\"As sweet-tongued as always, Olon. Dost thou truly wish ta buy this sot a drink, ",
 							var0000,
 							"?\"");
@@ -40104,7 +40104,7 @@ void Func043A object#(0x43A) () {
 			case "Pomdirgun":
 				say("\"He's not like other goblins, no. ~He's smart, and clever. Almost makes me think he might be a Daemon of some sort, leadin' them ta take over the world. Cook us all if they can, they will.\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"They'll not cook thee, Olon. Thou art already pickled!\"");
 					0x0000->set_conversation_slot();
 					say("\"An' they'll not eat thy tongue, either... 'Tis too tough from overuse!\"");
@@ -40116,7 +40116,7 @@ void Func043A object#(0x43A) () {
 			case "Gwani":
 				say("\"Thou hast never heard of the Gwani? They're cousins ta the goblins that live north, beyond the frozen mountains.\" *\"Gwani make the goblins look like innocent children.\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"How wouldst thou know, Olon? Thou hast never seen one, I'll wager!\"");
 					0x0000->set_conversation_slot();
 					say("\"Nor would I like ta... Thou art enough ta scare a man half ta death!\"");
@@ -40132,14 +40132,14 @@ void Func043A object#(0x43A) () {
 			case "storms":
 				say("\"I would almost believe that the world was at an end. These horrible storms have all but destroyed the town! How's a body ta make a livin' without a ship? How can a fisherman fish from a wagon... it sinks!\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"Perhaps 'twould be best if thou didst not ask him about such things right now. He's no use like this.\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
 				}
 				say("\"Can't put a sail on a cart and expect it ta take thee out ta sea and back again! Drowned!\" *\"Good men all... gone ta the bottom o' the sea! An' I should 'ave been with them! They'll come for me. I know they will! Down to the bottom o' the sea!\"");
 				if (var0001 == true) {
-					0xFFCC->show_npc_face1(0x0000);
+					JENDON->show_npc_face1(0x0000);
 					say("\"Come back in a few hours, ",
 						var0000,
 						". He'll have had a drink or two ta calm him down. Then thou canst have him tell his tales.\"");
@@ -78798,7 +78798,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(GARTH, 0x0409, 0x0737, WAIT);
 		Func09AC(JOTH, 0x03C8, 0x070D, WAIT);
 		Func09AC(VOLDIN, 0x0447, 0x0722, WAIT);
-		Func09AC(0xFFCC, 0x0415, 0x0718, WAIT);
+		Func09AC(JENDON, 0x0415, 0x0718, WAIT);
 		Func09AC(0xFFCB, 0x03F2, 0x06D8, WAIT);
 		Func09AC(0xFFCA, 0x0406, 0x0795, WAIT);
 		Func09AC(DELPHYNIA, 0x0460, 0x06F6, WAIT);
@@ -80953,7 +80953,7 @@ void Func07F8 object#(0x7F8) () {
 				nohalt;
 				call Func07F8;
 			};
-			var0001 = [0xFFC9, 0xFFCA, VOLDIN, 0xFFC3, JOTH, GARTH, 0xFFC7, 0xFFC8, 0xFFCC, DELPHYNIA, DELIN, 0xFFCB, 0xFFC4, 0xFFC5, ALYSSAND, 0xFFC6];
+			var0001 = [0xFFC9, 0xFFCA, VOLDIN, 0xFFC3, JOTH, GARTH, 0xFFC7, 0xFFC8, JENDON, DELPHYNIA, DELIN, 0xFFCB, 0xFFC4, 0xFFC5, ALYSSAND, 0xFFC6];
 			for (var0004 in var0001 with var0002 to var0003) {
 				var0004->remove_npc();
 				var0004->run_schedule();
@@ -81683,12 +81683,12 @@ void Func07FB object#(0x7FB) () {
 		say("\"Dost thou recall having met ",
 			var0003,
 			" before?\"");
-		0xFFCC->show_npc_face1(0x0000);
+		JENDON->show_npc_face1(0x0000);
 		say("\"Yes, indeed. He came into the Broken Oar -- most people do, thou knowest. Asked me a great number of questions.\"");
 		UI_remove_npc_face1();
 		0x0000->set_conversation_slot();
 		say("\"About the usual sorts of things -- the weather, the goblin threat, and so forth?\"");
-		0xFFCC->show_npc_face1(0x0000);
+		JENDON->show_npc_face1(0x0000);
 		say("\"Not at all, Captain! He had so many questions.\"");
 		if (gflags[0x01AA]) {
 			say("\"He did ask me about strange objects, such as I had never heard of. They weren't normal items, sir!\"");
@@ -81705,7 +81705,7 @@ void Func07FB object#(0x7FB) () {
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
 			say("\"The ruins left by the Daemons who once dwelt in this land?\"");
-			0xFFCC->show_npc_face1(0x0000);
+			JENDON->show_npc_face1(0x0000);
 			say("\"Yes, captain. The Serpent Ruins.\"");
 			gflags[0x01AC] = true;
 		}
@@ -81715,7 +81715,7 @@ void Func07FB object#(0x7FB) () {
 		say("\"Thou mayest go, Jendon...\"");
 		UI_end_conversation();
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
-		var0005 = 0xFFCC->get_object_position() & (0x0010 & 0x0006);
+		var0005 = JENDON->get_object_position() & (0x0010 & 0x0006);
 		var0006 = var0005->find_nearby(0x0113, 0x0014, MASK_EGG);
 		if (var0006) {
 			var0007 = var0006->get_object_position();
@@ -82265,7 +82265,7 @@ labelFunc07FC_02C2:
 	}
 	if (var0000 == 0x0027) {
 		UI_init_conversation();
-		0xFFCC->show_npc_face0(0x0000);
+		JENDON->show_npc_face0(0x0000);
 		say("\"Why hast thou brought me before the Oracle, Avatar? Ask me thy questions.\"");
 		add(["the character of the accused", "Daemonism"]);
 		if (gflags[0x01AD]) {
@@ -82335,7 +82335,7 @@ labelFunc07FC_02C2:
 			case "the character of the accused":
 				remove(["the character of the accused", "no questions"]);
 				add("no further questions");
-				if (0xFFCC->get_item_flag(MET)) {
+				if (JENDON->get_item_flag(MET)) {
 					if (gflags[0x0174]) {
 						say("\"A prince of a man! Why, when he breaks into song, I can hardly keep the crowds out of mine inn!\"");
 						0xFFC9->show_npc_face1(0x0000);
@@ -82391,7 +82391,7 @@ labelFunc07FC_02C2:
 labelFunc07FC_0595:
 		gflags[0x0179] = true;
 		var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
-		var0004 = 0xFFCC->get_object_position() & (0x0010 & 0x0006);
+		var0004 = JENDON->get_object_position() & (0x0010 & 0x0006);
 		var0005 = var0004->find_nearby(0x0113, 0x0028, MASK_EGG);
 		if (var0005) {
 			var0006 = var0005->get_object_position();
@@ -82571,7 +82571,7 @@ labelFunc07FC_0904:
 		UI_init_conversation();
 		0xFFC6->show_npc_face0(0x0000);
 		say("\"Hail to Lady Yelinda, Hail to the Oracle, hail to... hail to everyone!\"");
-		0xFFCC->show_npc_face1(0x0000);
+		JENDON->show_npc_face1(0x0000);
 		say("\"I'm afraid he hath been drinking...\"");
 		UI_remove_npc_face1();
 		0x0000->set_conversation_slot();
@@ -91558,17 +91558,17 @@ void Func083D 0x83D () {
 		} else if (var000A == 0x0003) {
 			var000D = Func0992(0x0001, (("@But " + var0000) + ", we haven't the filari to pay for this.@"), 0x0000, false);
 			if (var000D != AVATAR) {
-				0xFFCC->show_npc_face0(0x0000);
+				JENDON->show_npc_face0(0x0000);
 				say("\"I do not allow beggars in here!\"");
 				abort;
 			}
 			say("\"If thou canst not pay, then thou canst leave!\"");
 			abort;
 			// Dead code
-			if (0x001F < (0xFFCC->get_npc_id() + 0x0006)) {
-				0xFFCC->set_npc_id(0x001F);
+			if (0x001F < (JENDON->get_npc_id() + 0x0006)) {
+				JENDON->set_npc_id(0x001F);
 			} else {
-				0xFFCC->set_npc_id(0xFFCC->get_npc_id() + 0x0006);
+				JENDON->set_npc_id(JENDON->get_npc_id() + 0x0006);
 			}
 			break;
 		}
@@ -91657,17 +91657,17 @@ void Func083E 0x83E () {
 		} else if (var000D == 0x0003) {
 			var000F = Func0992(0x0001, (("@But " + var0000) + ", we do not have the filari to pay for this.@"), 0x0000, false);
 			if (var000F != AVATAR) {
-				0xFFCC->show_npc_face0(0x0000);
+				JENDON->show_npc_face0(0x0000);
 				say("\"I don't allow no beggars in here!\"");
 				abort;
 			}
 			say("\"If thou canst not pay, then thou canst leave!\"");
 			abort;
 			// Dead code
-			if (0x001F < (0xFFCC->get_npc_id() + 0x0006)) {
-				0xFFCC->set_npc_id(0x001F);
+			if (0x001F < (JENDON->get_npc_id() + 0x0006)) {
+				JENDON->set_npc_id(0x001F);
 			} else {
-				0xFFCC->set_npc_id(0xFFCC->get_npc_id() + 0x0006);
+				JENDON->set_npc_id(JENDON->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Wouldst thou care for more?\"");
@@ -91701,12 +91701,12 @@ var Func083F 0x83F (var var0000, var var0001) {
 	var0002 = Func0954();
 	var0003 = var0000;
 	var0004 = (var0001 / 0x0003) * 0x0002;
-	var0005 = 0x000F - (0xFFCC->get_npc_id() / 0x0002);
+	var0005 = 0x000F - (JENDON->get_npc_id() / 0x0002);
 	var0006 = 0x0000;
 	var0007 = 0x0001;
 	var0008 = 0x0000;
 	var0009 = 0x0002;
-	var000A = 0xFFCC->get_npc_id();
+	var000A = JENDON->get_npc_id();
 	while (var0007) {
 		var000B = Func0956(["yes", "no", "haggle"]);
 		if (var000B == "no") {
@@ -91781,7 +91781,7 @@ var Func083F 0x83F (var var0000, var var0001) {
 				"?\"");
 			if (Func0955()) {
 				if (var000A > 0x0001) {
-					0xFFCC->set_npc_id(var000A - 0x0002);
+					JENDON->set_npc_id(var000A - 0x0002);
 				}
 				return var0003;
 			}
@@ -91795,9 +91795,9 @@ var Func083F 0x83F (var var0000, var var0001) {
 				say("\"Dost thou think me a fool, ta argue with me only ta change thy mind? I shall spread the word about thee in this town, wait and see!\"");
 			}
 			if (0x001F < (var000A + 0x000A)) {
-				0xFFCC->set_npc_id(0x001F);
+				JENDON->set_npc_id(0x001F);
 			} else {
-				0xFFCC->set_npc_id(var000A + 0x000A);
+				JENDON->set_npc_id(var000A + 0x000A);
 			}
 			return 0x0000;
 		}
@@ -91809,7 +91809,7 @@ var Func083F 0x83F (var var0000, var var0001) {
 					var0003,
 					" was my final offer. Dost thou accept?\"");
 				if (var000A < 0x001C) {
-					0xFFCC->set_npc_id(var000A + 0x0004);
+					JENDON->set_npc_id(var000A + 0x0004);
 				}
 				if (Func0955()) {
 					return var0003;
@@ -91820,7 +91820,7 @@ var Func083F 0x83F (var var0000, var var0001) {
 					var0003,
 					" filari is my final offer.\"");
 				if (var000A < 0x001E) {
-					0xFFCC->set_npc_id(var000A + 0x0002);
+					JENDON->set_npc_id(var000A + 0x0002);
 				}
 			}
 		} else {
@@ -91893,14 +91893,14 @@ var Func083F 0x83F (var var0000, var var0001) {
 						0xFFC6->show_npc_face1(0x0000);
 						say("\"Sounds good ta me!\"");
 						UI_remove_npc_face1();
-						0xFFCC->show_npc_face0(0x0000);
+						JENDON->show_npc_face0(0x0000);
 					}
 					say("\"",
 						var0003,
 						" filari is where I stand.\"");
 				}
 				if (var000A < 0x001F) {
-					0xFFCC->set_npc_id(var000A + 0x0001);
+					JENDON->set_npc_id(var000A + 0x0001);
 				}
 			}
 		}
@@ -102289,7 +102289,7 @@ void Func08AA 0x8AA () {
 	if (gflags[0x01B6]) {
 		abort;
 	}
-	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((ALYSSAND->get_item_flag(MET) + DELIN->get_item_flag(MET)) + DELPHYNIA->get_item_flag(MET)) + VOLDIN->get_item_flag(MET)) + 0xFFCC->get_item_flag(MET)) + 0xFFCB->get_item_flag(MET)) + 0xFFCA->get_item_flag(MET)) + 0xFFC6->get_item_flag(MET)) + GARTH->get_item_flag(MET)) + JOTH->get_item_flag(MET)) + 0xFFC3->get_item_flag(MET)) > 0x0004) && IOLO->npc_nearby())))) {
+	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((ALYSSAND->get_item_flag(MET) + DELIN->get_item_flag(MET)) + DELPHYNIA->get_item_flag(MET)) + VOLDIN->get_item_flag(MET)) + JENDON->get_item_flag(MET)) + 0xFFCB->get_item_flag(MET)) + 0xFFCA->get_item_flag(MET)) + 0xFFC6->get_item_flag(MET)) + GARTH->get_item_flag(MET)) + JOTH->get_item_flag(MET)) + 0xFFC3->get_item_flag(MET)) > 0x0004) && IOLO->npc_nearby())))) {
 		var0000 = script Func09A0(0x0005, 0x0001) after 200 ticks {
 			nohalt;
 			call Func0435;
@@ -102305,7 +102305,7 @@ extern var Func09A0 0x9A0 (var var0000, var var0001);
 void Func08AB 0x8AB () {
 	var var0000;
 
-	if ((Func0994() == 0x0003) && ((!0xFFC7->get_item_flag(DEAD)) && (gflags[0x0190] && 0xFFCC->get_item_flag(MET)))) {
+	if ((Func0994() == 0x0003) && ((!0xFFC7->get_item_flag(DEAD)) && (gflags[0x0190] && JENDON->get_item_flag(MET)))) {
 		var0000 = 0xFFC7->approach_avatar(0x0078, 0x0028);
 		if (var0000) {
 			Func09AD(0xFFC7);
@@ -102317,7 +102317,7 @@ void Func08AB 0x8AB () {
 			abort;
 		}
 	}
-	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((ALYSSAND->get_item_flag(MET) + DELIN->get_item_flag(MET)) + DELPHYNIA->get_item_flag(MET)) + GARTH->get_item_flag(MET)) + JOTH->get_item_flag(MET)) + VOLDIN->get_item_flag(MET)) + 0xFFCC->get_item_flag(MET)) + 0xFFCB->get_item_flag(MET)) + 0xFFC7->get_item_flag(MET)) + 0xFFCA->get_item_flag(MET)) + 0xFFC6->get_item_flag(MET)) + 0xFFC3->get_item_flag(MET)) > 0x0004)))) {
+	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((ALYSSAND->get_item_flag(MET) + DELIN->get_item_flag(MET)) + DELPHYNIA->get_item_flag(MET)) + GARTH->get_item_flag(MET)) + JOTH->get_item_flag(MET)) + VOLDIN->get_item_flag(MET)) + JENDON->get_item_flag(MET)) + 0xFFCB->get_item_flag(MET)) + 0xFFC7->get_item_flag(MET)) + 0xFFCA->get_item_flag(MET)) + 0xFFC6->get_item_flag(MET)) + 0xFFC3->get_item_flag(MET)) > 0x0004)))) {
 		0xFFCB->modify_schedule(NOON, STANDTHERE, [0x040E, 0x06BF]);
 		0xFFCB->modify_schedule(AFTERNOON, STANDTHERE, [0x040E, 0x06BF]);
 	}
@@ -103578,7 +103578,7 @@ void Func08C2 0x8C2 () {
 			}
 		}
 		if (var0006 == 0x0010) {
-			var0007 = 0xFFCC;
+			var0007 = JENDON;
 			var0008 = 0x0006;
 		}
 		if (var0006 == 0x0011) {
@@ -108953,7 +108953,7 @@ void Func093A 0x93A (var var0000) {
 					face north;
 				};
 			}
-			var0008 = [0xFFC6, DELIN, DELPHYNIA, 0xFFCC];
+			var0008 = [0xFFC6, DELIN, DELPHYNIA, JENDON];
 			for (var0004 in var0008 with var000D to var000E) {
 				var0003 = script var0004 after (0x0007 + UI_get_random(0x0005)) ticks {
 					actor frame bowing;
@@ -109017,7 +109017,7 @@ void Func093A 0x93A (var var0000) {
 				say("\"Such offense to Beauty cannot go unpunished... The stain of their presence must be washed away with their blood.\"");
 				Func097F(0xFFC3, "@It cries for their blood...@", 0x0000);
 				Func097F(GARTH, "@Stone them!@", 0x0003);
-				Func097F(0xFFCC, "@Behead the fiends!@", 0x0005);
+				Func097F(JENDON, "@Behead the fiends!@", 0x0005);
 				Func097F(Func08AC(true), "@What shall we do?@", 0x0001);
 				Func097F(0xFFC9, "@Oh, my...@", 0x0005);
 				UI_end_conversation();
@@ -109058,7 +109058,7 @@ void Func093A 0x93A (var var0000) {
 					face south;
 				};
 			}
-			var0008 = [0xFFC6, DELIN, DELPHYNIA, GARTH, JOTH, 0xFFCC];
+			var0008 = [0xFFC6, DELIN, DELPHYNIA, GARTH, JOTH, JENDON];
 			for (var0004 in var0008 with var0013 to var0014) {
 				var0003 = script var0004 after (0x0004 + UI_get_random(0x0004)) ticks {
 					actor frame bowing;
@@ -109188,7 +109188,7 @@ void Func093A 0x93A (var var0000) {
 					face north;
 				};
 			}
-			var0008 = [0xFFC6, DELIN, DELPHYNIA, 0xFFCC, VOLDIN, 0xFFCA, ALYSSAND, 0xFFCB];
+			var0008 = [0xFFC6, DELIN, DELPHYNIA, JENDON, VOLDIN, 0xFFCA, ALYSSAND, 0xFFCB];
 			for (var0004 in var0008 with var0019 to var001A) {
 				var0003 = script var0004 after (0x0007 + UI_get_random(0x0005)) ticks {
 					face north;
@@ -109335,7 +109335,7 @@ void Func093A 0x93A (var var0000) {
 					face south;
 				};
 			}
-			var0008 = [0xFFC6, DELIN, DELPHYNIA, GARTH, JOTH, 0xFFCC];
+			var0008 = [0xFFC6, DELIN, DELPHYNIA, GARTH, JOTH, JENDON];
 			for (var0004 in var0008 with var001F to var0020) {
 				var0003 = script var0004 after (0x0004 + UI_get_random(0x0004)) ticks {
 					actor frame bowing;
@@ -109476,7 +109476,7 @@ void Func093A 0x93A (var var0000) {
 			var0003 = script 0xFFC3 {
 				say "@This trial is now dismissed!@";
 			};
-			var0003 = [0xFFC6, DELIN, DELPHYNIA, 0xFFCC, GARTH, JOTH, 0xFFC9, 0xFFC3, 0xFFCB, ALYSSAND];
+			var0003 = [0xFFC6, DELIN, DELPHYNIA, JENDON, GARTH, JOTH, 0xFFC9, 0xFFC3, 0xFFCB, ALYSSAND];
 			for (var0004 in var0003 with var0029 to var002A) {
 				var0004->run_schedule();
 				var0008 = UI_get_random(0x0008);
@@ -109647,7 +109647,7 @@ void Func093B 0x93B (var var0000) {
 			UI_end_conversation();
 			Func08C6();
 			Func097F(GARTH, "@To the Lady!@", 0x0002);
-			Func097F(0xFFCC, "@All hail!@", 0x0000);
+			Func097F(JENDON, "@All hail!@", 0x0000);
 			Func097F(DELIN, "@Hail the Lady!@", 0x0005);
 			Func097F(DELPHYNIA, "@Oh great Lady!@", 0x0009);
 			Func097F(0xFFC6, "@Whatever...!@", 0x000F);
@@ -109850,11 +109850,11 @@ void Func093B 0x93B (var var0000) {
 			}
 		}
 		if (!gflags[0x0179]) {
-			if (gflags[0x0170] && 0xFFCC->get_item_flag(MET)) {
-				var0007 = 0xFFCC;
+			if (gflags[0x0170] && JENDON->get_item_flag(MET)) {
+				var0007 = JENDON;
 			}
 			if (gflags[0x0172]) {
-				var0007 &= 0xFFCC;
+				var0007 &= JENDON;
 			}
 		}
 		if ((!gflags[0x017A]) && (gflags[0x0170] && 0xFFCB->get_item_flag(MET))) {
@@ -110059,7 +110059,7 @@ void Func093B 0x93B (var var0000) {
 		if (item == DELPHYNIA->get_npc_object()) {
 			var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x0026);
 		}
-		if (item == 0xFFCC->get_npc_object()) {
+		if (item == JENDON->get_npc_object()) {
 			var0003 = Func09A0(0x0001, 0x0001)->set_item_quality(0x0027);
 		}
 		if (item == 0xFFCB->get_npc_object()) {
@@ -112748,25 +112748,25 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 var Func09AE 0x9AE (var var0000) {
 	var0000 -= 0x0001;
 	if (var0000 < 0x0000) {
-		if (item == 0xFFCC->get_npc_object()) {
+		if (item == JENDON->get_npc_object()) {
 			gflags[0x01A0] = true;
-			if (0xFFCC->get_schedule_type() == WAITER) {
+			if (JENDON->get_schedule_type() == WAITER) {
 				Func094E(0xFFC6, "@I need a drink...@");
 				0x0000->set_conversation_slot();
 				say("\"I've enjoyed jawin' with ye, mate, but I'd better be back to me duties...\"");
-				Func097F(0xFFCC, "@What'll ye have?@", 0x0000);
+				Func097F(JENDON, "@What'll ye have?@", 0x0000);
 			}
-			if (0xFFCC->get_schedule_type() == MAJOR_SIT) {
+			if (JENDON->get_schedule_type() == MAJOR_SIT) {
 				if (0xFFCA->npc_nearby()) {
 					Func094E(0xFFCA, "@Be still! Beauty is not irreverent.@");
 					0x0000->set_conversation_slot();
 				}
 				say("\"This isn't the place for a long talk, mate. Meet me later, back at the tavern, and we'll talk more.\"");
-				Func097F(0xFFCC, "@Not now...@", 0x0000);
+				Func097F(JENDON, "@Not now...@", 0x0000);
 			}
-			if (0xFFCC->get_schedule_type() == SLEEP) {
+			if (JENDON->get_schedule_type() == SLEEP) {
 				say("\"Better we talk in the morning, mate. As for right now, I'm goin' back to sleep...\"");
-				Func097F(0xFFCC, "@Time for bed!@", 0x0000);
+				Func097F(JENDON, "@Time for bed!@", 0x0000);
 			}
 		}
 		if (item == BUCIA->get_npc_object()) {
