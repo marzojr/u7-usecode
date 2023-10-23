@@ -18302,10 +18302,10 @@ void Func0431 object#(0x431) () {
 	var var0001;
 
 	if (event == DOUBLECLICK) {
-		0xFFCF->show_npc_face(0x0000);
+		DENBY->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		var0000 = UI_part_of_day();
-		var0001 = 0xFFCF->get_npc_object()->get_schedule_type();
+		var0001 = DENBY->get_npc_object()->get_schedule_type();
 		if (!gflags[0x00B2]) {
 			say("You see a fighter with intense eyes and a serious disposition.");
 			gflags[0x00B2] = true;
@@ -18356,7 +18356,7 @@ void Func0431 object#(0x431) () {
 		say("Denby puts his palms together and bows.*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFCF);
+		Func092E(DENBY);
 	}
 }
 
