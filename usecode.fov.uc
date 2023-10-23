@@ -18494,10 +18494,10 @@ void Func0433 object#(0x433) () {
 	var var0005;
 
 	if (event == DOUBLECLICK) {
-		0xFFCD->show_npc_face(0x0000);
+		KELLY->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFFCD->get_npc_object()->get_schedule_type();
+		var0002 = KELLY->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (!gflags[0x00B4]) {
 			say("You see a sturdy-looking farmer's wife. She gives you a hospitable smile before returning to her chores.");
@@ -18587,7 +18587,7 @@ void Func0433 object#(0x433) () {
 	}
 	if (event == PROXIMITY) {
 		var0001 = UI_part_of_day();
-		var0002 = 0xFFCD->get_npc_object()->get_schedule_type();
+		var0002 = KELLY->get_npc_object()->get_schedule_type();
 		var0004 = UI_die_roll(0x0001, 0x0004);
 		if (var0002 == TEND_SHOP) {
 			if (var0004 == 0x0001) {
@@ -18602,9 +18602,9 @@ void Func0433 object#(0x433) () {
 			if (var0004 == 0x0004) {
 				var0005 = "@Come one, come all!@";
 			}
-			0xFFCD->item_say(var0005);
+			KELLY->item_say(var0005);
 		} else {
-			Func092E(0xFFCD);
+			Func092E(KELLY);
 		}
 	}
 }
