@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, 0xFFD6, 0xFFD5, GOBLIN_MESSENGER, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, BYRIN, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, 0xFFD6, 0xFFD5, GOBLIN_MESSENGER, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, BYRIN, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -1444,9 +1444,9 @@ void Func00E4 shape#(0xE4) () {
 			add("Captain Hawk");
 		}
 		if (gflags[0x01CD] && (!gflags[0x01CE])) {
-			0xFFD8->set_npc_id(0x0001);
+			HAWK->set_npc_id(0x0001);
 		}
-		var000F = 0xFFD8->get_npc_id() * 0x0064;
+		var000F = HAWK->get_npc_id() * 0x0064;
 		if (gflags[0x01CE] && (!gflags[0x01D1])) {
 			add("pay fine");
 		}
@@ -1507,7 +1507,7 @@ void Func00E4 shape#(0xE4) () {
 					var000F = ((var0010 / 0x0064) + UI_get_random(0x0005)) * 0x0064;
 					if (var000F < 0x0BB8) {
 						var0000 = var000F / 0x0064;
-						0xFFD8->set_npc_id(var0000);
+						HAWK->set_npc_id(var0000);
 						var000F = var0000 * 0x0064;
 						say("\"Well, we changed our minds. Now we want ",
 							var000F,
@@ -1519,7 +1519,7 @@ void Func00E4 shape#(0xE4) () {
 						}
 					} else {
 						say("\"'Tis not enough. Bring us more!\"");
-						0xFFD8->set_npc_id(0x001F);
+						HAWK->set_npc_id(0x001F);
 					}
 					UI_pop_answers();
 				} else {
@@ -1552,7 +1552,7 @@ void Func00E4 shape#(0xE4) () {
 				}
 				gflags[0x01D1] = true;
 				var0002 = Func099B(AVATAR, 0x0001, 0x0281, 0x004F, 0x0001, 0x0000, true);
-				0xFFD8->set_npc_id(0x0000);
+				HAWK->set_npc_id(0x0000);
 				Func097F(item, "@Thanks for the gold!@", 0x0000);
 				abort;
 
@@ -24500,7 +24500,7 @@ void Func0410 object#(0x410) () {
 				} else {
 					say("\"Oh, well, I cannot remember.\"");
 				}
-				if (0xFFD8->get_item_flag(DEAD)) {
+				if (HAWK->get_item_flag(DEAD)) {
 					say("\"Anyway, now that he hath been killed, I know not what we'll do. I suppose we must await the arrival of another ship.\"");
 					add("killed");
 				} else {
@@ -24956,7 +24956,7 @@ void Func0411 object#(0x411) () {
 					say("\"A blue egg... have I ever read of such a thing? Blue hens, blue frogs -- but eggs?\"");
 				}
 				say("\"I do not know what it is! And if I do not know, then no one shall.\"");
-				if (!(0xFFD8->get_item_flag(DEAD) && Func0942(FRELI))) {
+				if (!(HAWK->get_item_flag(DEAD) && Func0942(FRELI))) {
 					FRELI->show_npc_face1(0x0000);
 					say("\"Cap'n Hawk might know! He hath been everywhere in the world!\"");
 					gflags[0x010A] = true;
@@ -31323,9 +31323,9 @@ void Func0425 object#(0x425) () {
 					step south;
 					step south;
 				};
-				var0004 = 0xFFD8->get_npc_id();
+				var0004 = HAWK->get_npc_id();
 				var0004 += 0x0001;
-				0xFFD8->set_npc_id(var0004);
+				HAWK->set_npc_id(var0004);
 			}
 		}
 	}
@@ -32155,8 +32155,8 @@ void Func0428 object#(0x428) () {
 	var var0016;
 	var var0017;
 
-	var0000 = 0xFFD8->get_npc_id();
-	var0001 = 0xFFD8->get_schedule_type();
+	var0000 = HAWK->get_npc_id();
+	var0001 = HAWK->get_schedule_type();
 	var0002 = Func0954();
 	var0003 = UI_is_pc_female();
 	var0004 = Func0953();
@@ -32169,11 +32169,11 @@ void Func0428 object#(0x428) () {
 		var0005 = "lass";
 	}
 	if (Func0839() && (var0000 == 0x0000)) {
-		0xFFD8->set_npc_id(0x0001);
+		HAWK->set_npc_id(0x0001);
 		var0000 = 0x0001;
 	}
 	if (event == SCRIPTED) {
-		var000A = 0xFFD8->find_nearby(0x025F, 0x0028, MASK_EGG);
+		var000A = HAWK->find_nearby(0x025F, 0x0028, MASK_EGG);
 		for (var000D in var000A with var000B to var000C) {
 			var000E = var000D->get_item_flag(TEMPORARY);
 			if (!var000E) {
@@ -32190,43 +32190,43 @@ void Func0428 object#(0x428) () {
 	if (event == PROXIMITY) {
 		if (var0001 == PATROL) {
 			if (var0000 == 0x0000) {
-				var000D = 0xFFD8->find_nearby(0x025F, 0x0002, MASK_EGG);
+				var000D = HAWK->find_nearby(0x025F, 0x0002, MASK_EGG);
 				var0013 = var000D->get_item_quality();
 				if (var0013 == 0x000F) {
 					var000D->remove_item();
-					0xFFD8->move_object([0x0503, 0x08C7, 0x0000]);
-					0xFFD8->set_new_schedules(MIDNIGHT, EAT_AT_INN, [0x0503, 0x08C7]);
-					0xFFD8->run_schedule();
+					HAWK->move_object([0x0503, 0x08C7, 0x0000]);
+					HAWK->set_new_schedules(MIDNIGHT, EAT_AT_INN, [0x0503, 0x08C7]);
+					HAWK->run_schedule();
 				}
 			}
 			if (var0000 > 0x0002) {
-				0xFFD8->set_schedule_type(WAIT);
-				var0011 = script 0xFFD8 {
+				HAWK->set_schedule_type(WAIT);
+				var0011 = script HAWK {
 					nohalt;
 					step north;
 					step east;
 				};
 				var0000 += 0x0001;
-				0xFFD8->set_npc_id(var0000);
+				HAWK->set_npc_id(var0000);
 			}
 		}
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Captain?@");
-		0xFFD8->Func07D1();
-		Func097F(0xFFD8, "@Aye, matey?@", 0x0002);
+		HAWK->Func07D1();
+		Func097F(HAWK, "@Aye, matey?@", 0x0002);
 		if (gflags[0x01D1]) {
-			0xFFD8->set_schedule_type(TALK);
+			HAWK->set_schedule_type(TALK);
 		} else {
-			0xFFD8->show_npc_face0(0x0000);
+			HAWK->show_npc_face0(0x0000);
 			say("\"Could ye unlock this door and let me go?\"");
-			Func097F(0xFFD8, "@I am cold...@", 0x0000);
+			Func097F(HAWK, "@I am cold...@", 0x0000);
 			abort;
 		}
 	}
 	if (event == STARTED_TALKING) {
-		0xFFD8->run_schedule();
-		0xFFD8->show_npc_face0(0x0000);
+		HAWK->run_schedule();
+		HAWK->show_npc_face0(0x0000);
 		if (gflags[0x0004]) {
 			say("\"I had hoped ta see ye again, ",
 				var0005,
@@ -32235,18 +32235,18 @@ void Func0428 object#(0x428) () {
 				var0005,
 				".\" ~\"An' thou wert willin' ta spend a bit o' thy time listening ta an old man's tales.\" *\"Thou... art...\" ~\"Worthy...\"");
 			var0014 = Func0992(0x0001, "@He is dead!@", "@He is dead.@", false);
-			0xFFD8->kill_npc();
+			HAWK->kill_npc();
 			abort;
 		}
-		var0015 = 0xFFD8->get_item_flag(MET);
+		var0015 = HAWK->get_item_flag(MET);
 		if (var0015 == false) {
 			say("\"How pleasant to make thine acquaintance, ",
 				var0005,
 				".\" ~\"I be Hawk, captain of the good ship Arabella.\"");
-			0xFFD8->set_npc_id(0x0000);
-			0xFFD8->set_new_schedules(MIDNIGHT, EAT_AT_INN, [0x0503, 0x08C7]);
-			0xFFD8->run_schedule();
-			0xFFD8->set_item_flag(MET);
+			HAWK->set_npc_id(0x0000);
+			HAWK->set_new_schedules(MIDNIGHT, EAT_AT_INN, [0x0503, 0x08C7]);
+			HAWK->run_schedule();
+			HAWK->set_item_flag(MET);
 		} else {
 			say("\"A pleasure ta see ye again, ",
 				var0004,
@@ -32257,7 +32257,7 @@ void Func0428 object#(0x428) () {
 				var0005,
 				".\"");
 			say("\"Thou canst talk ta me at the pub!\"");
-			var0016 = 0xFFD8->get_object_position();
+			var0016 = HAWK->get_object_position();
 			if ((var0016[0x0001] >= 0x0AF1) && ((var0016[0x0001] <= 0x0AFE) && ((var0016[0x0002] >= 0x00C1) && (var0016[0x0002] <= 0x00DE)))) {
 				var000D = UI_create_new_object(0x025F);
 				if (var000D) {
@@ -32273,9 +32273,9 @@ void Func0428 object#(0x428) () {
 					var000D->set_item_flag(TEMPORARY);
 					var0011 = UI_update_last_created([0x0AF6, 0x00DE, 0x0003]);
 				}
-				0xFFD8->set_schedule_type(PATROL);
+				HAWK->set_schedule_type(PATROL);
 			}
-			Func097F(0xFFD8, "@I need a drink!@", 0x0000);
+			Func097F(HAWK, "@I need a drink!@", 0x0000);
 			abort;
 		}
 		say("\"So what can I do for ye, ",
@@ -32424,9 +32424,9 @@ void Func0428 object#(0x428) () {
 					say("\"I can take ye to Moonshade, ",
 						var0005,
 						".\" ~\"Wait for me out on the Arabella, and we'll try to outrace these blasted storms!\"");
-					Func097F(0xFFD8, "The Arabella sails in two minutes!", 0x000A);
-					var0017 = 0xFFD8->get_npc_object();
-					0xFFD8->set_npc_id(0x0002);
+					Func097F(HAWK, "The Arabella sails in two minutes!", 0x000A);
+					var0017 = HAWK->get_npc_object();
+					HAWK->set_npc_id(0x0002);
 					var0000 = 0x0002;
 				}
 				abort;
@@ -32470,7 +32470,7 @@ void Func0428 object#(0x428) () {
 				if (Func097D(PARTY, 0x0001, 0x0108, QUALITY_ANY, FRAME_ANY)) {
 					say("\"Anyone can see 'tis a pinecone...\" ~\"What's thy question?\"");
 					var0014 = Func0992(0x0001, "@But where doth it come from?@", "@Where can I find pinecones?@", false);
-					0xFFD8->show_npc_face0(0x0000);
+					HAWK->show_npc_face0(0x0000);
 					0x0000->set_conversation_slot();
 					say("\"In the northern woods, of course.\" ~\"But thou canst not travel there no more -- no ship will sail there, and the Swamp of\tGorlab will let no man pass!\"");
 				} else {
@@ -32484,7 +32484,7 @@ void Func0428 object#(0x428) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Fair weather, Captain!@", 0x0000);
-				Func097F(0xFFD8, "@Smooth sailin'!@", 0x0002);
+				Func097F(HAWK, "@Smooth sailin'!@", 0x0002);
 				break;
 		}
 	}
@@ -32868,9 +32868,9 @@ void Func042A object#(0x42A) () {
 					step south;
 					step south;
 				};
-				var0008 = 0xFFD8->get_npc_id();
+				var0008 = HAWK->get_npc_id();
 				var0008 += 0x0001;
-				0xFFD8->set_npc_id(var0008);
+				HAWK->set_npc_id(var0008);
 			}
 		}
 	}
@@ -33395,9 +33395,9 @@ void Func042B object#(0x42B) () {
 					nohalt;
 					step south;
 				};
-				var0008 = 0xFFD8->get_npc_id();
+				var0008 = HAWK->get_npc_id();
 				var0008 += 0x0001;
-				0xFFD8->set_npc_id(var0008);
+				HAWK->set_npc_id(var0008);
 			}
 		}
 	}
@@ -78258,7 +78258,7 @@ void Func07B3 object#(0x7B3) () {
 	var var0008;
 	var var0009;
 
-	var0000 = 0xFFD8->get_npc_id();
+	var0000 = HAWK->get_npc_id();
 	var0001 = 0x0019;
 	var0002 = find_nearby(0x03C1, 0x0064, MASK_EGG);
 	if (var0000 == 0x0002) {
@@ -78268,7 +78268,7 @@ void Func07B3 object#(0x7B3) () {
 			var0003 = Func08E7(var0002);
 			if (var0003) {
 				gflags[0x01CB] = true;
-				0xFFD8->set_npc_id(0x0003);
+				HAWK->set_npc_id(0x0003);
 				var0000 = 0x0003;
 				var0003 = script item after var0001 ticks {
 					nohalt;
@@ -78303,14 +78303,14 @@ void Func07B3 object#(0x7B3) () {
 				var0003 = UI_update_last_created([0x056E, 0x08A4, 0x0001]);
 			}
 			var0005 = [0x0551, 0x08A7, 0x0002];
-			var0006 = [0xFFD8, 0xFFD6, ALE, 0xFFD5];
+			var0006 = [HAWK, 0xFFD6, ALE, 0xFFD5];
 			for (var0009 in var0006 with var0007 to var0008) {
 				var0009->move_object(var0005);
 				var0009->set_new_schedules([MIDNIGHT], [PATROL], [0x055B, 0x08A7]);
 				var0009->set_schedule_type(PATROL);
 			}
 			ALE->clear_item_flag(CAN_FLY);
-			0xFFD8->set_npc_id(0x0004);
+			HAWK->set_npc_id(0x0004);
 			var0000 = 0x0004;
 			var0003 = script item after var0001 ticks {
 				nohalt;
@@ -78334,7 +78334,7 @@ void Func07B3 object#(0x7B3) () {
 	if (var0000 == 0x0008) {
 		if (UI_on_barge()) {
 			halt_scheduled();
-			var0003 = script 0xFFD8 {
+			var0003 = script HAWK {
 				nohalt;
 				call Func0428;
 			};
@@ -78766,7 +78766,7 @@ void Func07D8 object#(0x7D8) () {
 		0xFF00->move_object([0x040C, 0x0A26]);
 		0xFF00->set_schedule_type(IN_COMBAT);
 		Func09AC(BUCIA, 0x0963, 0x0815, WAIT);
-		Func09AC(0xFFD8, 0x08C2, 0x0715, WAIT);
+		Func09AC(HAWK, 0x08C2, 0x0715, WAIT);
 		Func09AC(GUSTACIO, 0x0978, 0x0819, WAIT);
 		Func09AC(MELINO, 0x09B7, 0x07E5, WAIT);
 		Func09AC(JULIA, 0x096B, 0x07C2, WAIT);
@@ -79681,7 +79681,7 @@ void Func07E4 object#(0x7E4) () {
 	var0002 = AVATAR->find_nearby(0x03C1, 0x0064, MASK_EGG);
 	if (var0001 == 0x0000) {
 		UI_play_music(0x0010, var0000);
-		0xFFD8->set_schedule_type(WANDER);
+		HAWK->set_schedule_type(WANDER);
 		0xFFD5->set_schedule_type(WANDER);
 		ALE->set_schedule_type(WANDER);
 		0xFFD6->set_schedule_type(WANDER);
@@ -79764,7 +79764,7 @@ void Func07E4 object#(0x7E4) () {
 	}
 	if (var0001 == 0x0006) {
 		var0002->set_barge_dir(EAST);
-		0xFFD8->show_npc_face0(0x0000);
+		HAWK->show_npc_face0(0x0000);
 		say("\"Reef the sails an' hang on! There be one of those damned storms a bearin' down on us! Heavens help us!\"");
 		UI_remove_npc_face0();
 		UI_play_music(0x0016, var0000);
@@ -79818,7 +79818,7 @@ void Func07E5 object#(0x7E5) () {
 		var0008 = ["@Oh!@", "@Whee!@", "@Ouch!@", "@Whoa!@"];
 		var0009 = UI_die_roll(0x0001, UI_get_array_size(var0008));
 		var000A = var0008[var0009];
-		var000B = [0xFFD5, ALE, 0xFFD8, 0xFFD6];
+		var000B = [0xFFD5, ALE, HAWK, 0xFFD6];
 		var000C = UI_die_roll(0x0001, UI_get_array_size(var000B));
 		var000D = var000B[var000C];
 		var000D->item_say(var000A);
@@ -79858,7 +79858,7 @@ void Func07E6 object#(0x7E6) () {
 	if (!Func0910(var0001)) {
 		UI_error_message("Cannot lower Plank's constant");
 	}
-	0xFFD8->show_npc_face0(0x0000);
+	HAWK->show_npc_face0(0x0000);
 	var0002 = UI_is_pc_female();
 	if (var0002 == true) {
 		var0003 = "lass";
@@ -79873,14 +79873,14 @@ void Func07E6 object#(0x7E6) () {
 	UI_remove_npc_face0();
 	UI_set_weather(CLEAR_WEATHER);
 	AVATAR->clear_item_flag(UNKNOWN_FLAG_17);
-	0xFFD8->clear_item_flag(DONT_MOVE);
+	HAWK->clear_item_flag(DONT_MOVE);
 	ALE->set_item_flag(CAN_FLY);
 	AUTO_MESSENGER->set_item_flag(SI_TOURNAMENT);
-	var0004 = [0xFFD8, 0xFFD6, ALE, 0xFFD5];
+	var0004 = [HAWK, 0xFFD6, ALE, 0xFFD5];
 	var0005 = [0x08AC, 0x0718];
 	var0006 = [0x07BA, 0x08D3];
 	var0007 = [0x08C8, 0x0716];
-	0xFFD8->set_new_schedules([MIDNIGHT, MORNING, NOON], [SLEEP, TEND_SHOP, EAT_AT_INN], [var0005, var0006, var0007]);
+	HAWK->set_new_schedules([MIDNIGHT, MORNING, NOON], [SLEEP, TEND_SHOP, EAT_AT_INN], [var0005, var0006, var0007]);
 	var0008 = [0x0935, 0x06E3];
 	var0009 = [0x08B9, 0x070B];
 	var000A = [0x08CB, 0x074A];
@@ -79898,7 +79898,7 @@ void Func07E6 object#(0x7E6) () {
 	}
 	gflags[0x01CB] = false;
 	gflags[0x01CC] = true;
-	Func097F(0xFFD8, "@Never again!@", 0x023E);
+	Func097F(HAWK, "@Never again!@", 0x023E);
 }
 
 extern void Func08BB 0x8BB ();
@@ -91275,7 +91275,7 @@ extern var Func0944 0x944 (var var0000, var var0001, var var0002);
 var Func0839 0x839 () {
 	var var0000;
 
-	var0000 = 0xFFD8->get_object_position();
+	var0000 = HAWK->get_object_position();
 	return Func0944(var0000, [0x04F1, 0x08B0, 0x0000], [0x051E, 0x08CE, 0x0000]);
 }
 
@@ -91287,7 +91287,7 @@ void Func083A 0x83A (var var0000) {
 	var var0003;
 
 	var0001 = Func09A0(0x0002, 0x0001);
-	0xFFD8->show_npc_face0(0x0000);
+	HAWK->show_npc_face0(0x0000);
 	say("\"I'd advise ye ta hold fast an' keep a weather eye on that there horizon! We'll be runnin' afore the wind hard enough to splinter the mast as it is.\"");
 	UI_remove_npc_face0();
 	AVATAR->set_item_flag(UNKNOWN_FLAG_17);

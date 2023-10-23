@@ -16942,7 +16942,7 @@ void Func0428 object#(0x428) () {
 	var var0001;
 
 	if (event == DOUBLECLICK) {
-		0xFFD8->show_npc_face(0x0000);
+		JUDITH->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		if (var0000 == NIGHT) {
 			var0001 = Func08F7(0xFFCA);
@@ -17028,7 +17028,7 @@ void Func0428 object#(0x428) () {
 		say("Judith goes back to her instrument after a smile and a wave.*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFD8);
+		Func092E(JUDITH);
 	}
 }
 
@@ -19021,7 +19021,7 @@ void Func0436 object#(0x436) () {
 		var0003 = 0xFFCA->get_npc_object()->get_schedule_type();
 		if (var0002 == NIGHT) {
 			var0004 = Func08F7(NENO);
-			var0005 = Func08F7(0xFFD8);
+			var0005 = Func08F7(JUDITH);
 			if (var0004 && var0005) {
 				say("Coop is onstage with The Avatars. He sees you and says, \"Uhm, there is someone special listening tonight, and this next tune is dedicated to them.\"");
 				say("He signals to his partners and they begin to play. He sings the following lyrics:");
