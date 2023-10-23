@@ -19611,13 +19611,13 @@ void Func043A object#(0x43A) () {
 	var var000A;
 
 	if (event == DOUBLECLICK) {
-		0xFFC6->show_npc_face(0x0000);
+		GORDON->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
 		var0002 = UI_part_of_day();
-		var0003 = 0xFFC6->get_npc_object()->get_schedule_type();
+		var0003 = GORDON->get_npc_object()->get_schedule_type();
 		if (var0002 == NIGHT) {
-			var0004 = Func08FC(0xFFC6, BATLIN);
+			var0004 = Func08FC(GORDON, BATLIN);
 			if (var0004) {
 				say("Gordon is too involved in listening to the Fellowship meeting to hear you.*");
 				abort;
@@ -19742,7 +19742,7 @@ void Func043A object#(0x43A) () {
 	}
 	if (event == PROXIMITY) {
 		var0002 = UI_part_of_day();
-		var0003 = 0xFFC6->get_npc_object()->get_schedule_type();
+		var0003 = GORDON->get_npc_object()->get_schedule_type();
 		var0009 = UI_die_roll(0x0001, 0x0004);
 		if (var0003 == TEND_SHOP) {
 			if (var0009 == 0x0001) {
@@ -19757,9 +19757,9 @@ void Func043A object#(0x43A) () {
 			if (var0009 == 0x0004) {
 				var000A = "@Fish 'n' chips here!@";
 			}
-			0xFFC6->item_say(var000A);
+			GORDON->item_say(var000A);
 		} else {
-			Func092E(0xFFC6);
+			Func092E(GORDON);
 		}
 	}
 }
@@ -65436,11 +65436,11 @@ void Func084F 0x84F () {
 		GRAYSON->say("\"The Triad of Inner Strength has helped me to improve my skills and build better weapons,\" says Grayson.*");
 		GRAYSON->hide();
 	}
-	var0009 = Func08F7(0xFFC6);
+	var0009 = Func08F7(GORDON);
 	if (var0009) {
-		0xFFC6->say("\"The Fellowship has put me back on the path to prosperity,\" says Gordon.*");
+		GORDON->say("\"The Fellowship has put me back on the path to prosperity,\" says Gordon.*");
 		BATLIN->say("\"Yes! Thank thee for sharing, brother!\"*");
-		0xFFC6->hide();
+		GORDON->hide();
 	}
 	var000A = Func08F7(0xFFC5);
 	if (var000A) {
@@ -65583,11 +65583,11 @@ void Func0850 0x850 () {
 		GRAYSON->say("\"After joining The Fellowship I learned how to be a man's man,\" says Grayson.*");
 		GRAYSON->hide();
 	}
-	var0007 = Func08F7(0xFFC6);
+	var0007 = Func08F7(GORDON);
 	if (var0007) {
-		0xFFC6->say("\"The Fellowship is helping me back from the brink of personal and financial oblivion,\" says Gordon.*");
+		GORDON->say("\"The Fellowship is helping me back from the brink of personal and financial oblivion,\" says Gordon.*");
 		BATLIN->say("\"Right thou art, brother!\"*");
-		0xFFC6->hide();
+		GORDON->hide();
 	}
 	var0008 = Func08F7(0xFFC5);
 	if (var0008) {
