@@ -14796,7 +14796,7 @@ void Func0418 object#(0x418) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFFE8->show_npc_face(0x0000);
+	NYSTUL->show_npc_face(0x0000);
 	add(["name", "job", "bye"]);
 	if (!gflags[0x0099]) {
 		say("You see your old friend Nystul, now a decrepit old man in mage's robes. He seems lost in thought, far away.");
@@ -14832,7 +14832,7 @@ void Func0418 object#(0x418) () {
 				if (var0000) {
 					SPARK->say("\"Art thou sure this man is not really the jester?\"");
 					SPARK->hide();
-					0xFFE8->say("\"Anyway, as I was saying, uhm, what was I saying? Oh yes. Magic. I can still sell thee some spells or reagents if thou wouldst like.\"");
+					NYSTUL->say("\"Anyway, as I was saying, uhm, what was I saying? Oh yes. Magic. I can still sell thee some spells or reagents if thou wouldst like.\"");
 				}
 			} else {
 				say("\"The magic is much better now. My spells all work very nicely. I thank thee, Avatar, for clearing the ether. Interested in any spells or reagents?\"");

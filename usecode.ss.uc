@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, GUSTACIO, 0xFFE8, JULIA, 0xFFE2, 0xFFE0, 0xFFE3, 0xFFE5, FILBERCIO, FRIGIDAZZI, 0xFFD6, 0xFFD5, GOBLIN_MESSENGER, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, GUSTACIO, MELINO, JULIA, 0xFFE2, 0xFFE0, 0xFFE3, 0xFFE5, FILBERCIO, FRIGIDAZZI, 0xFFD6, 0xFFD5, GOBLIN_MESSENGER, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, 0xFFD2, 0xFFD1, 0xFFD0, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, 0xFFDE, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, 0xFFDF, 0xFFE6, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, 0xFFE8, GUSTACIO, 0xFFE5, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, 0xFFD2, 0xFFD1, 0xFFD0, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, 0xFFDE, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, 0xFFDF, 0xFFE6, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, 0xFFE5, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -26564,27 +26564,27 @@ void Func0418 object#(0x418) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("Hello there.");
-		0xFFE8->Func07D1();
-		Func097F(0xFFE8, (("@Greetings, " + var0002) + "."), 0x0002);
-		0xFFE8->set_schedule_type(TALK);
+		MELINO->Func07D1();
+		Func097F(MELINO, (("@Greetings, " + var0002) + "."), 0x0002);
+		MELINO->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFE8->run_schedule();
-		0xFFE8->clear_item_say();
-		0xFFE8->show_npc_face0(0x0000);
+		MELINO->run_schedule();
+		MELINO->clear_item_say();
+		MELINO->show_npc_face0(0x0000);
 		if (!gflags[0x00DB]) {
 			say("\"I am sorry, but thou hast mistaken me for someone else. Thou couldst not possibly be speaking to me, as I am a Mage... and thou art merely Mundane.\"");
-			Func097F(0xFFE8, "@Such impudence!@", 0x0000);
+			Func097F(MELINO, "@Such impudence!@", 0x0000);
 			abort;
 		}
 		if (gflags[0x011E] == true) {
 			say("\"I shall never speak to thee again!\"");
-			Func097F(0xFFE8, "@Never!@", 0x0000);
+			Func097F(MELINO, "@Never!@", 0x0000);
 			abort;
 		}
-		var0008 = 0xFFE8->get_item_flag(MET);
+		var0008 = MELINO->get_item_flag(MET);
 		if (var0008 == false) {
-			0xFFE8->set_item_flag(MET);
+			MELINO->set_item_flag(MET);
 			say("\"I do not believe that we have met. 'Tis so nice to make the acquaintance of a new, young Mage.\"");
 			say("\"I am Melino, husband of the Green Enchantress.\"");
 			add(["new Mage", "Green Enchantress"]);
@@ -26606,7 +26606,7 @@ void Func0418 object#(0x418) () {
 		if (var0003) {
 			add("Moonsilk stockings");
 		}
-		if (0xFFE8->get_schedule_type() == WANDER) {
+		if (MELINO->get_schedule_type() == WANDER) {
 			add("spells");
 		}
 		converse (["bye"]) {
@@ -26801,7 +26801,7 @@ void Func0418 object#(0x418) () {
 				say("\"Out! OUT! Take thyself from my sight and never return!\"");
 				gflags[0x011E] = true;
 				UI_remove_npc_face0();
-				Func097F(0xFFE8, "@Never return!@", 0x0002);
+				Func097F(MELINO, "@Never return!@", 0x0002);
 				break;
 
 			case "change subject":
@@ -26812,7 +26812,7 @@ void Func0418 object#(0x418) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@I must be leaving...@", 0x0000);
-				Func097F(0xFFE8, "@Farewell!@", 0x0002);
+				Func097F(MELINO, "@Farewell!@", 0x0002);
 				Func08FF();
 				break;
 		}
@@ -73815,7 +73815,7 @@ void Func0722 object#(0x722) () {
 			var0003 = 0x0000;
 			while (var0003 < 0x0008) {
 				var0008 = 0x0000;
-				while (var0008 > 0xFFE8) {
+				while (var0008 > -24) {
 					var0009 = UI_create_new_object(0x0121);
 					if (var0009) {
 						var0009->set_item_flag(TEMPORARY);
@@ -73846,7 +73846,7 @@ void Func0722 object#(0x722) () {
 			var0003 = 0x0000;
 			while (var0003 < 0x0008) {
 				var0008 = 0x0000;
-				while (var0008 > 0xFFE8) {
+				while (var0008 > -24) {
 					var0009 = UI_create_new_object(0x0121);
 					if (var0009) {
 						var0009->set_item_flag(TEMPORARY);
@@ -78768,7 +78768,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(BUCIA, 0x0963, 0x0815, WAIT);
 		Func09AC(0xFFD8, 0x08C2, 0x0715, WAIT);
 		Func09AC(GUSTACIO, 0x0978, 0x0819, WAIT);
-		Func09AC(0xFFE8, 0x09B7, 0x07E5, WAIT);
+		Func09AC(MELINO, 0x09B7, 0x07E5, WAIT);
 		Func09AC(JULIA, 0x096B, 0x07C2, WAIT);
 		Func09AC(0xFFE2, 0x098B, 0x07A6, WAIT);
 		Func09AC(0xFFE0, 0x0999, 0x07A2, WAIT);
@@ -94108,12 +94108,12 @@ var Func084C 0x84C (var var0000, var var0001) {
 
 	var0002 = var0000;
 	var0003 = (var0001 / 0x0003) * 0x0002;
-	var0004 = 0x000F - (0xFFE8->get_npc_id() / 0x0002);
+	var0004 = 0x000F - (MELINO->get_npc_id() / 0x0002);
 	var0005 = 0x0000;
 	var0006 = 0x0001;
 	var0007 = 0x0000;
 	var0008 = 0x0002;
-	var0009 = 0xFFE8->get_npc_id();
+	var0009 = MELINO->get_npc_id();
 	while (var0006) {
 		var000A = Func0956(["yes", "no", "haggle"]);
 		if (var000A == "no") {
@@ -94178,7 +94178,7 @@ var Func084C 0x84C (var var0000, var var0001) {
 				"?\"");
 			if (Func0955() == true) {
 				if (var0009 > 0x0001) {
-					0xFFE8->set_npc_id(var0009 - 0x0002);
+					MELINO->set_npc_id(var0009 - 0x0002);
 				}
 				return var0002;
 			}
@@ -94192,9 +94192,9 @@ var Func084C 0x84C (var var0000, var var0001) {
 				say("\"Thou art most rude to renege on an offer!\"");
 			}
 			if (0x001F < (var0009 + 0x000A)) {
-				0xFFE8->set_npc_id(0x001F);
+				MELINO->set_npc_id(0x001F);
 			} else {
-				0xFFE8->set_npc_id(var0009 + 0x000A);
+				MELINO->set_npc_id(var0009 + 0x000A);
 			}
 			return 0x0000;
 		}
@@ -94204,7 +94204,7 @@ var Func084C 0x84C (var var0000, var var0001) {
 					var0002,
 					" is my final offer. Dost thou want it at this price?\"");
 				if (var0009 < 0x001C) {
-					0xFFE8->set_npc_id(var0009 + 0x0004);
+					MELINO->set_npc_id(var0009 + 0x0004);
 				}
 				if (Func0955() == true) {
 					return var0002;
@@ -94215,7 +94215,7 @@ var Func084C 0x84C (var var0000, var var0001) {
 					var0002,
 					" is my final offer.  I will go no lower.\"");
 				if (var0009 < 0x001E) {
-					0xFFE8->set_npc_id(var0009 + 0x0002);
+					MELINO->set_npc_id(var0009 + 0x0002);
 				}
 			}
 		} else {
@@ -94288,7 +94288,7 @@ var Func084C 0x84C (var var0000, var var0001) {
 						".\"");
 				}
 				if (var0009 < 0x001F) {
-					0xFFE8->set_npc_id(var0009 + 0x0001);
+					MELINO->set_npc_id(var0009 + 0x0001);
 				}
 			}
 		}
@@ -106252,7 +106252,7 @@ void Func08FF 0x8FF () {
 	if (gflags[0x00D7]) {
 		abort;
 	}
-	var0000 = ((((((((((((((GUSTACIO->get_item_flag(MET) + 0xFFE6->get_item_flag(MET)) + FEDABIBLIO->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + COLUMNA->get_item_flag(MET)) + 0xFFE8->get_item_flag(MET)) + DUCIO->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + JULIA->get_item_flag(MET)) + 0xFFE2->get_item_flag(MET)) + 0xFFE4->get_item_flag(MET)) + BUCIA->get_item_flag(MET)) + 0xFFE5->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + FRELI->get_item_flag(MET)) + gflags[0x00D6];
+	var0000 = ((((((((((((((GUSTACIO->get_item_flag(MET) + 0xFFE6->get_item_flag(MET)) + FEDABIBLIO->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + COLUMNA->get_item_flag(MET)) + MELINO->get_item_flag(MET)) + DUCIO->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + JULIA->get_item_flag(MET)) + 0xFFE2->get_item_flag(MET)) + 0xFFE4->get_item_flag(MET)) + BUCIA->get_item_flag(MET)) + 0xFFE5->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + FRELI->get_item_flag(MET)) + gflags[0x00D6];
 	if ((var0000 >= 0x0003) && (!gflags[0x00D7])) {
 		var0001 = 0xFFE7->approach_avatar(0x005A, 0x0028);
 		if (var0001) {
