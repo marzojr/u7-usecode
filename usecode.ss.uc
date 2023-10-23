@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [ANDRAL, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [ANDRAL, 0xFF6A, 0xFFB0, CALADIN, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -1390,9 +1390,9 @@ void Func00E4 shape#(0xE4) () {
 			Func097F(var000A, "@Find the traitor!@", UI_get_random(0x0014));
 		}
 		0xFEF1->show_npc_face0(0x0000);
-		if (0xFFC1->npc_nearby()) {
+		if (CALADIN->npc_nearby()) {
 			say("\"Thou didst call, Lord Caladin?\"");
-			0xFFC1->show_npc_face1(0x0000);
+			CALADIN->show_npc_face1(0x0000);
 			say("\"Send thy men to arrest Lord Marsten! I have evidence that he is our traitor!\"");
 			0x0000->set_conversation_slot();
 			say("\"Arrest... Lord Marsten?\"");
@@ -1400,7 +1400,7 @@ void Func00E4 shape#(0xE4) () {
 			say("\"Look, man, thou art a Bear like myself! Obey me now, and all will be right.\"");
 			0x0000->set_conversation_slot();
 			say("\"Yes, milord.\"");
-			Func097F(0xFFC1, "@On thy way, then!@", 0x0000);
+			Func097F(CALADIN, "@On thy way, then!@", 0x0000);
 			Func097F(item, "@Yes, milord.@", 0x0003);
 		} else {
 			say("\"Avatar, I am pleased to report that my men are scouring the city for that traitor Marsten.\"");
@@ -1625,7 +1625,7 @@ labelFunc00E4_0956:
 			say("\"Where is he, anyway? Tell him to step forward before bothering me again.\"");
 			return;
 		}
-		var0014 = [0xFFC1, 0xFFB9, 0xFFB1];
+		var0014 = [CALADIN, 0xFFB9, 0xFFB1];
 		for (var0001 in var0014 with var0019 to var001A) {
 			if ((UI_game_hour() > 0x0008) && (UI_game_hour() < 0x000C)) {
 				if ((!Func0932(var0001)) && (!var0001->get_item_flag(DEAD))) {
@@ -1646,14 +1646,14 @@ labelFunc00E4_0956:
 				0xFF6A->move_object([0x03D4, 0x0A8C, 0x0000]);
 			}
 		}
-		if (!(Func0932(0xFFC1) || (Func0932(0xFFB6) || (Func0932(0xFF6A) || Func0932(0xFFB9))))) {
+		if (!(Func0932(CALADIN) || (Func0932(0xFFB6) || (Func0932(0xFF6A) || Func0932(0xFFB9))))) {
 			say("\"Sorry lad, but no one is around for thee to spar with. Come back some other time.\"");
 			return;
 		}
 		if (var0013 == 0x0003) {
 			do {
 				say("\"With whom dost thou wish to train?\"");
-				var0014 = [0x0000, 0xFFC1, 0xFFB6, 0xFF6A, 0xFFB9];
+				var0014 = [0x0000, CALADIN, 0xFFB6, 0xFF6A, 0xFFB9];
 				var001D = ["nobody", "Caladin", "Shazzana", "Brendann", "Luther"];
 				var001E = ["invalid time", "9am and noon", "noon and 3pm", "3pm and 6pm", "9am and noon"];
 				var001F = Func0957(var001D);
@@ -1689,7 +1689,7 @@ labelFunc00E4_0956:
 				UI_remove_npc_face0();
 				0xFF6A->set_npc_id(0x0000);
 				0xFFB1->set_npc_id(0x0000);
-				0xFFC1->set_npc_id(0x0000);
+				CALADIN->set_npc_id(0x0000);
 				0xFFB6->set_npc_id(0x0000);
 				0xFFB9->set_npc_id(0x0000);
 				Func0933(var0020, var0018);
@@ -6622,8 +6622,8 @@ void Func01C3 shape#(0x1C3) () {
 			0xFF6A->set_item_flag(MET);
 			Func097F(0xFFB3, "@Tell them to stop.@", 0x0019);
 			0xFFB3->set_item_flag(MET);
-			Func097F(0xFFC1, "@Strike, Luther!@", 0x000A);
-			0xFFC1->set_item_flag(MET);
+			Func097F(CALADIN, "@Strike, Luther!@", 0x000A);
+			CALADIN->set_item_flag(MET);
 			Func097F(AVATAR, "@Hey, careful!@", 0x0005);
 			var0003 = script 0xFFBB after 35 ticks {
 				nohalt;
@@ -6781,7 +6781,7 @@ void Func01C3 shape#(0x1C3) () {
 
 				case "the explosions" (remove):
 					say("\"But those are so easy to avoid...\"");
-					0xFFC1->show_npc_face1(0x0000);
+					CALADIN->show_npc_face1(0x0000);
 					say("\"Perhaps thou didst not walk fast enough. If thou dost lag, the explosions will catch thee.\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -6936,13 +6936,13 @@ labelFunc01C3_073B:
 		if (0xFFBB->get_npc_id() == 0x0003) {
 			0xFFBB->set_npc_id(0x0004);
 			UI_init_conversation();
-			0xFFC1->show_npc_face0(0x0000);
+			CALADIN->show_npc_face0(0x0000);
 			say("\"On behalf of the Bears -- which, by the way, are the mightiest warriors in the land -- I welcome thee to thy Knighthood Banquet.\"");
 			UI_end_conversation();
 			Func097F(0xFFB0, "@Welcome!@", 0x0002);
 			Func097F(0xFFB1, "@Aye! Bears!@", 0x0001);
 			Func097F(0xFFB9, "@Hear! Hear!@", 0x0000);
-			var0003 = script 0xFFC1 {
+			var0003 = script CALADIN {
 				nohalt;
 				actor frame bowing;
 				actor frame sitting;
@@ -6976,7 +6976,7 @@ labelFunc01C3_073B:
 				face east;
 				say "@The Bears...@";
 			};
-			var0003 = script 0xFFC1 after 4 ticks {
+			var0003 = script CALADIN after 4 ticks {
 				nohalt;
 				actor frame bowing;
 				actor frame standing;
@@ -7063,7 +7063,7 @@ labelFunc01C3_073B:
 				}
 				if (var0010 == 0x0007) {
 					var0012 = 0x0006;
-					var0011 = 0xFFC1;
+					var0011 = CALADIN;
 				}
 				if (var0010 == 0x0009) {
 					var0012 = 0x0006;
@@ -7109,14 +7109,14 @@ labelFunc01C3_073B:
 		Func097F(0xFFBB, "@Go home!@", 0x0000);
 		Func097F(0xFFB6, "@Until next time...@", 0x0004);
 		Func097F(0xFFB9, "@Coward!@", 0x0008);
-		Func097F(0xFFC1, "@I'm hungry!@", 0x000A);
+		Func097F(CALADIN, "@I'm hungry!@", 0x000A);
 		gflags[0x0048] = true;
-		var0018 = [0xFFBC, 0xFFBF, 0xFF6A, 0xFFB3, 0xFFB6, 0xFFBB, 0xFFBD, 0xFFB0, 0xFFC1, 0xFFBA, 0xFFB1, 0xFFB9];
+		var0018 = [0xFFBC, 0xFFBF, 0xFF6A, 0xFFB3, 0xFFB6, 0xFFBB, 0xFFBD, 0xFFB0, CALADIN, 0xFFBA, 0xFFB1, 0xFFB9];
 		for (var0005 in var0018 with var0019 to var001A) {
 			var0005->revert_schedule();
 			var0005->run_schedule();
 		}
-		var0018 = [0xFFB0, 0xFFC1, 0xFFB1, 0xFFB9];
+		var0018 = [0xFFB0, CALADIN, 0xFFB1, 0xFFB9];
 		for (var0005 in var0018 with var001B to var001C) {
 			var0005->set_schedule_type(EAT_AT_INN);
 		}
@@ -7282,7 +7282,7 @@ labelFunc01C3_073B:
 				wait 4;
 				call Func01C3;
 			};
-			Func097F(0xFFC1, "@Kill the Goblins!@", 0x0005);
+			Func097F(CALADIN, "@Kill the Goblins!@", 0x0005);
 			Func097F(0xFFBF, "@Poor dear!@", 0x0002);
 			0xFFBF->si_path_run_usecode([0x0422, 0x0A73, 0x0000], SI_PATH_SUCCESS, 0xFFBF->get_npc_object(), Func01C3, false);
 			UI_set_path_failure(Func01C3, 0xFFBF->get_npc_object(), SI_PATH_FAILURE);
@@ -15611,7 +15611,7 @@ void Func032B shape#(0x32B) () {
 		0xFEFB->set_item_flag(MET);
 		0xFF6D->set_item_flag(SI_ZOMBIE);
 		0xFF6B->set_item_flag(SI_ZOMBIE);
-		var0008 = [AVATAR, SELINA, KALEN, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, 0xFF33, 0xFF35, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, 0xFF4B, 0xFF4A, 0xFFC0, 0xFF6A, 0xFFB6, 0xFFC1, 0xFFB1, 0xFFB9, 0xFEF7, 0xFF89, 0xFF88, 0xFF87, 0xFF86, 0xFF85, 0xFF58];
+		var0008 = [AVATAR, SELINA, KALEN, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, 0xFF33, 0xFF35, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, 0xFF4B, 0xFF4A, 0xFFC0, 0xFF6A, 0xFFB6, CALADIN, 0xFFB1, 0xFFB9, 0xFEF7, 0xFF89, 0xFF88, 0xFF87, 0xFF86, 0xFF85, 0xFF58];
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -41499,7 +41499,7 @@ void Func043F object#(0x43F) () {
 
 	var0000 = Func0954();
 	var0001 = Func0953();
-	var0002 = 0xFFC1->get_item_flag(MET);
+	var0002 = CALADIN->get_item_flag(MET);
 	var0003 = UI_get_array_size(UI_get_party_list());
 	var0004 = false;
 	var0005 = false;
@@ -41508,7 +41508,7 @@ void Func043F object#(0x43F) () {
 	var0008 = false;
 	if (event == DEATH) {
 		if (gflags[0x0083]) {
-			var0009 = 0xFFC1->get_oppressor();
+			var0009 = CALADIN->get_oppressor();
 			var0009 = 0x0000 - var0009;
 			if (!var0009) {
 				var0009 = AVATAR;
@@ -41523,15 +41523,15 @@ void Func043F object#(0x43F) () {
 				} nobreak {
 					var000C = AVATAR;
 				}
-				0xFFC1->set_opponent(var000C);
+				CALADIN->set_opponent(var000C);
 				var0009->set_opponent(var000C);
-				Func0976(0xFFC1, 0x0003);
+				Func0976(CALADIN, 0x0003);
 				Func0976(var0009, 0x0003);
 				return;
 			}
 			if (!gflags[0x0007]) {
 				gflags[0x0007] = true;
-				Func0936(var0009->get_npc_object(), 0xFFC1->get_npc_object());
+				Func0936(var0009->get_npc_object(), CALADIN->get_npc_object());
 				return;
 			}
 			Func092E(var0009);
@@ -41545,34 +41545,34 @@ void Func043F object#(0x43F) () {
 	if (event == PROXIMITY) {
 		if (gflags[0x0083]) {
 			var000E = UI_die_roll(0x0001, 0x0003);
-			0xFFC1->clear_item_say();
+			CALADIN->clear_item_say();
 			if (var000E == 0x0001) {
-				Func097F(0xFFC1, "@What a hit!@", 0x0000);
+				Func097F(CALADIN, "@What a hit!@", 0x0000);
 			}
 			if (var000E == 0x0002) {
-				Func097F(0xFFC1, "@Most impressive!@", 0x0000);
+				Func097F(CALADIN, "@Most impressive!@", 0x0000);
 			}
 			if (var000E == 0x0003) {
-				Func097F(0xFFC1, "@What dost thou call that?@", 0x0000);
+				Func097F(CALADIN, "@What dost thou call that?@", 0x0000);
 			}
 		}
 		return;
 	}
 	if (event == DOUBLECLICK) {
 		Func097F(AVATAR, "@Greetings, Knight.@", 0x0000);
-		0xFFC1->Func07D1();
+		CALADIN->Func07D1();
 		if (gflags[0x0090] && (!gflags[0x004C])) {
-			Func097F(0xFFC1, "@Away with thee!@", 0x0000);
-			0xFFC1->set_schedule_type(SHY);
+			Func097F(CALADIN, "@Away with thee!@", 0x0000);
+			CALADIN->set_schedule_type(SHY);
 			abort;
 		}
-		Func097F(0xFFC1, "@Greetings.@", 0x0002);
-		0xFFC1->set_schedule_type(TALK);
+		Func097F(CALADIN, "@Greetings.@", 0x0002);
+		CALADIN->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFC1->run_schedule();
-		0xFFC1->clear_item_say();
-		0xFFC1->show_npc_face0(0x0000);
+		CALADIN->run_schedule();
+		CALADIN->clear_item_say();
+		CALADIN->show_npc_face0(0x0000);
 		Func08F0();
 		if (!var0002) {
 			say("\"I have not seen thee in Monitor before. Thou art new here. Welcome!\"");
@@ -41642,7 +41642,7 @@ void Func043F object#(0x43F) () {
 
 			case "name" (remove):
 				if (!var0002) {
-					0xFFC1->set_item_flag(MET);
+					CALADIN->set_item_flag(MET);
 					say("\"I am called Caladin, after mine own grandfather. He was a Champion Knight!\"");
 					add("Champion Knight");
 					if (!gflags[0x004C]) {
@@ -41871,7 +41871,7 @@ void Func043F object#(0x43F) () {
 			case "secrets" (remove):
 				if (gflags[0x003B]) {
 					say("\"I do not have time to repeat everything again! Go thou and ask young Cantra -- she hath nothing better to do.\"");
-					Func097F(0xFFC1, "@Ask Cantra!@", 0x0000);
+					Func097F(CALADIN, "@Ask Cantra!@", 0x0000);
 					abort;
 				}
 				say("\"I'll give thee three clues:\"");
@@ -41969,7 +41969,7 @@ void Func043F object#(0x43F) () {
 						0xFFB3->move_object([0x0448, 0x09D6, 0x0000]);
 						0xFFB3->set_new_schedules([NIGHT, DAWN], [SLEEP, TEND_SHOP], [0x0448, 0x09D6, 0x0448, 0x09D6]);
 					}
-					0xFFC1->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, EVENING, NIGHT], [SLEEP, DUEL, TEND_SHOP, DUEL, MAJOR_SIT, EAT_AT_INN], [0x03B1, 0x0A49, 0x03D7, 0x0A8A, 0x03CE, 0x09FF, 0x039B, 0x0A76, 0x03B2, 0x0A05, 0x041C, 0x0A57]);
+					CALADIN->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, EVENING, NIGHT], [SLEEP, DUEL, TEND_SHOP, DUEL, MAJOR_SIT, EAT_AT_INN], [0x03B1, 0x0A49, 0x03D7, 0x0A8A, 0x03CE, 0x09FF, 0x039B, 0x0A76, 0x03B2, 0x0A05, 0x041C, 0x0A57]);
 					var0014 = 0x0003;
 					while (var0014 > 0x0000) {
 						var0015 = AVATAR->get_object_position();
@@ -41985,7 +41985,7 @@ void Func043F object#(0x43F) () {
 						}
 						var0014 -= 0x0001;
 					}
-					var0018 = 0xFFC1->find_nearby(0x00E4, 0x001E, MASK_NONE);
+					var0018 = CALADIN->find_nearby(0x00E4, 0x001E, MASK_NONE);
 					if (var0018) {
 						for (var001B in var0018 with var0019 to var001A) {
 							var001B->set_schedule_type(TALK);
@@ -41998,8 +41998,8 @@ void Func043F object#(0x43F) () {
 						} else {
 							say("\"Do not worry -- I shall personally see that Marsten is hunted down like the dog he is.\"");
 						}
-						Func097F(0xFFC1, "@Pikemen!@", 0x0000);
-						0xFFC1->set_schedule_type(STANDTHERE);
+						Func097F(CALADIN, "@Pikemen!@", 0x0000);
+						CALADIN->set_schedule_type(STANDTHERE);
 						Func097F(var0018[0x0001], "@Yes, lord!@", 0x0002);
 						abort;
 					}
@@ -42008,14 +42008,14 @@ void Func043F object#(0x43F) () {
 					} else {
 						say("\"Do not worry, Avatar! I shall order the Pikemen to place the traitor under arrest!\"");
 					}
-					Func097F(0xFFC1, "@Pikemen!@", 0x0000);
-					0xFFC1->set_schedule_type(SHY);
+					Func097F(CALADIN, "@Pikemen!@", 0x0000);
+					CALADIN->set_schedule_type(SHY);
 					abort;
 				}
 				var0010 = Func0992(SHAMINO, "@We did not bring it with us.@", "@I did not bring it.@", false);
 				0x0000->set_conversation_slot();
 				say("\"Until thou dost bring proof, no one will believe thee, including myself!\"");
-				Func097F(0xFFC1, "@Bring proof!@", 0x0000);
+				Func097F(CALADIN, "@Bring proof!@", 0x0000);
 				abort;
 
 			case "bye":
@@ -42027,7 +42027,7 @@ void Func043F object#(0x43F) () {
 					gflags[0x0033] = true;
 				} else {
 					Func097F(AVATAR, "@Until later...@", 0x0000);
-					Func097F(0xFFC1, "@Courage!@", 0x0002);
+					Func097F(CALADIN, "@Courage!@", 0x0002);
 					break;
 				}
 		}
@@ -44149,13 +44149,13 @@ labelFunc0445_0257:
 		0xFFBB->show_npc_face0(0x0000);
 		do {
 			if (!var0002) {
-				var000E = [0xFF6A, 0xFFC1, 0xFFB7, 0xFFB3, 0xFFBB];
+				var000E = [0xFF6A, CALADIN, 0xFFB7, 0xFFB3, 0xFFBB];
 				for (var0014 in var000E with var0012 to var0013) {
 					var0014->revert_schedule();
 				}
 				say("\"Greetings, stranger. I am Lord Marsten. Thou hast come to this city at a grievous hour. We are here to entomb the ashes of this brave Pikeman Groat, as well as to mourn the loss of our Knight Champion.\"");
 				0xFFBB->set_item_flag(MET);
-				Func094E(0xFFC1, "@Astrid was the finest Knight that Monitor ever had!@");
+				Func094E(CALADIN, "@Astrid was the finest Knight that Monitor ever had!@");
 				UI_remove_npc_face1();
 				0x0000->set_conversation_slot();
 				say("\"The Goblins ambushed her patrol. They slew all but one of the Pikemen, and took Astrid's body back to their camp -- to be feasted upon and used to make their sickening trophies, no doubt! When the reinforcements came, they were mere moments too late. They managed to rescue Groat but his injuries were too severe. Not even our healer Harnna could save him.\"");
@@ -44598,7 +44598,7 @@ labelFunc0445_0257:
 			case "bye":
 				if (!gflags[0x0032]) {
 					say("\"But why hast thou come to our town? What is thy business here?\"");
-					0xFFC1->show_npc_face1(0x0000);
+					CALADIN->show_npc_face1(0x0000);
 					say("\"Perhaps ",
 						var000D,
 						" is a spy for the Goblins!\"");
@@ -44618,7 +44618,7 @@ labelFunc0445_0257:
 						SHAMINO->show_npc_face0(0x0000);
 						say("\"Could he be speaking of Iolo's wife, the good lady Gwenno?\"");
 					}
-					0xFFC1->show_npc_face1(0x0000);
+					CALADIN->show_npc_face1(0x0000);
 					say("\"And do not forget the enchanter who appeared in the midst of the funeral services for our deceased Pikemen!\"");
 					UI_remove_npc_face1();
 					gflags[0x00A9] = true;
@@ -44627,10 +44627,10 @@ labelFunc0445_0257:
 					say("\"Warriors, be still! There is no spy in Monitor, and I refuse to hear more of this!\"");
 					gflags[0x0032] = true;
 					Func097F(0xFFBB, "@There is no spy!@", 0x0000);
-					Func097F(0xFFC1, "@I am not convinced...@", 0x0004);
+					Func097F(CALADIN, "@I am not convinced...@", 0x0004);
 					Func097F(0xFF6A, "@Nor I!@", 0x0008);
 					0xFFBB->set_schedule_type(SHY);
-					0xFFC1->set_schedule_type(SHY);
+					CALADIN->set_schedule_type(SHY);
 					0xFF6A->set_schedule_type(SHY);
 					var000E = script Func09A0(0x0005, 0x0001) {
 						nohalt;
@@ -44657,7 +44657,7 @@ labelFunc0445_0257:
 				0xFFBB->item_say("@I ruled this town!@");
 			}
 		} else {
-			var0018 = [0xFFC1];
+			var0018 = [CALADIN];
 			for (var001B in var0018 with var0019 to var001A) {
 				if (!var001B->npc_nearby()) {
 					var0018 = Func0988(var001B, var0018);
@@ -46082,7 +46082,7 @@ void Func044A object#(0x44A) () {
 				Func097F(0xFFB6, "@Keep working.@", 0x0006);
 			}
 		} else {
-			var000F = [0xFFC1, 0xFF6A];
+			var000F = [CALADIN, 0xFF6A];
 			if (!gflags[0x0092]) {
 				var000F &= 0xFFB3;
 			}
@@ -47022,7 +47022,7 @@ void Func044D object#(0x44D) () {
 				0xFFB3->item_say("@I hate thee!@");
 			}
 		} else {
-			var0003 = [0xFFC1, 0xFF6A];
+			var0003 = [CALADIN, 0xFF6A];
 			if (!gflags[0x0038]) {
 				var0003 &= 0xFFBB;
 			} else {
@@ -47886,7 +47886,7 @@ void Func0450 object#(0x450) () {
 			}
 			say("\"Another stranger! Most suspicious. There have not been many travellers recently.\"");
 			Func09AC(0xFFBB, 0x0310, 0x0A66, PATROL);
-			Func09AC(0xFFC1, 0x030F, 0x0A64, PATROL);
+			Func09AC(CALADIN, 0x030F, 0x0A64, PATROL);
 			Func09AC(0xFF6A, 0x0310, 0x0A6A, PATROL);
 			Func09AC(0xFFB3, 0x030F, 0x0A68, PATROL);
 			add(["open the gate", "strangers"]);
@@ -51260,7 +51260,7 @@ void Func0496 object#(0x496) () {
 		};
 	}
 	if (event == PROXIMITY) {
-		var000C = [0xFFC1];
+		var000C = [CALADIN];
 		if (!gflags[0x0038]) {
 			var000C &= 0xFFBB;
 		} else {
@@ -51692,7 +51692,7 @@ void Func0496 object#(0x496) () {
 						0xFFB3->move_object([0x0448, 0x09D6, 0x0000]);
 						0xFFB3->set_new_schedules([NIGHT, DAWN], [SLEEP, TEND_SHOP], [0x0448, 0x09D6, 0x0448, 0x09D6]);
 					}
-					0xFFC1->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, EVENING, NIGHT], [SLEEP, DUEL, TEND_SHOP, DUEL, MAJOR_SIT, EAT_AT_INN], [0x03B1, 0x0A49, 0x03D7, 0x0A8A, 0x03CE, 0x09FF, 0x039B, 0x0A76, 0x03B2, 0x0A05, 0x041C, 0x0A57]);
+					CALADIN->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, EVENING, NIGHT], [SLEEP, DUEL, TEND_SHOP, DUEL, MAJOR_SIT, EAT_AT_INN], [0x03B1, 0x0A49, 0x03D7, 0x0A8A, 0x03CE, 0x09FF, 0x039B, 0x0A76, 0x03B2, 0x0A05, 0x041C, 0x0A57]);
 					var0013 = 0x0003;
 					while (var0013 > 0x0000) {
 						var0014 = AVATAR->get_object_position();
@@ -78748,7 +78748,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(ANDRAL, 0x0366, 0x0AA9, WAIT);
 		Func09AC(0xFF6A, 0x03B6, 0x0A54, WAIT);
 		Func09AC(0xFFB0, 0x0323, 0x0ABC, WAIT);
-		Func09AC(0xFFC1, 0x03B4, 0x0A17, WAIT);
+		Func09AC(CALADIN, 0x03B4, 0x0A17, WAIT);
 		Func09AC(0xFFBF, 0x03D3, 0x0A09, WAIT);
 		Func09AC(0xFFB6, 0x03B8, 0x0A53, WAIT);
 		Func09AC(0xFFBC, 0x0404, 0x0A23, WAIT);
@@ -78902,10 +78902,10 @@ void Func07DB object#(0x7DB) () {
 	var var0001;
 	var var0002;
 
-	var0000 = 0xFFC1->get_object_position();
+	var0000 = CALADIN->get_object_position();
 	if (gflags[0x0007]) {
 		UI_lightning();
-		0xFFC1->obj_sprite_effect(ANIMATION_LIGHTNING, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001);
+		CALADIN->obj_sprite_effect(ANIMATION_LIGHTNING, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001);
 		UI_play_sound_effect(0x0074);
 		gflags[0x0007] = false;
 		gflags[0x0008] = true;
@@ -78916,7 +78916,7 @@ void Func07DB object#(0x7DB) () {
 	}
 	if (gflags[0x0008]) {
 		UI_lightning();
-		0xFFC1->obj_sprite_effect(ANIMATION_LIGHTNING, 0x0000, 0x0000, 0x0000, 0x0000, 0x0003, 0x0001);
+		CALADIN->obj_sprite_effect(ANIMATION_LIGHTNING, 0x0000, 0x0000, 0x0000, 0x0000, 0x0003, 0x0001);
 		UI_play_sound_effect(0x0074);
 		gflags[0x0008] = false;
 		gflags[0x0009] = true;
@@ -78927,9 +78927,9 @@ void Func07DB object#(0x7DB) () {
 	}
 	if (gflags[0x0009]) {
 		UI_lightning();
-		0xFFC1->obj_sprite_effect(ANIMATION_LIGHTNING, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001);
-		0xFFC1->obj_sprite_effect(ANIMATION_LIGHTNING, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001, 0x0001);
-		0xFFC1->obj_sprite_effect(ANIMATION_LIGHTNING, 0x0000, 0x0000, 0x0000, 0x0000, 0x0002, 0x0001);
+		CALADIN->obj_sprite_effect(ANIMATION_LIGHTNING, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001);
+		CALADIN->obj_sprite_effect(ANIMATION_LIGHTNING, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001, 0x0001);
+		CALADIN->obj_sprite_effect(ANIMATION_LIGHTNING, 0x0000, 0x0000, 0x0000, 0x0000, 0x0002, 0x0001);
 		UI_play_sound_effect(0x0074);
 		gflags[0x0009] = false;
 		gflags[0x000A] = true;
@@ -78941,8 +78941,8 @@ void Func07DB object#(0x7DB) () {
 	if (gflags[0x000A]) {
 		UI_lightning();
 		gflags[0x000A] = false;
-		var0000 = 0xFFC1->get_object_position();
-		0xFFC1->remove_npc();
+		var0000 = CALADIN->get_object_position();
+		CALADIN->remove_npc();
 		var0002 = UI_create_new_object2(0x012E, var0000);
 		var0002->set_npc_id(0x000F);
 		var0002->set_item_flag(SI_TOURNAMENT);
@@ -81197,7 +81197,7 @@ void Func07F9 object#(0x7F9) () {
 			var0001 = find_nearest(0x025F, 0x000F);
 			var0008 = [0x0000, 0x0001, 0x0001, 0x0000];
 			var0009 = [0x0000, 0x0001, 0x0000, 0x0001];
-			var000A = [0xFFC1, 0xFFB1, 0xFFB6, 0xFFB9, 0xFF6A];
+			var000A = [CALADIN, 0xFFB1, 0xFFB6, 0xFFB9, 0xFF6A];
 			for (var000D in var000A with var000B to var000C) {
 				if (Func0932(var000D)) {
 					var000D->set_alignment(NEUTRAL);
@@ -81237,7 +81237,7 @@ void Func07F9 object#(0x7F9) () {
 		Func0937(item, var0001, var0008, var0009, var0013, Func07F9, item, SI_PATH_SUCCESS);
 	}
 	if (event == SI_PATH_SUCCESS) {
-		var000A = [0xFFC1, 0xFFB1, 0xFFB6, 0xFFB9, 0xFF6A];
+		var000A = [CALADIN, 0xFFB1, 0xFFB6, 0xFFB9, 0xFF6A];
 		for (var000D in var000A with var0014 to var0015) {
 			if (Func0932(var000D)) {
 				var0016 = var000D->get_npc_prop(HEALTH);
@@ -82986,7 +82986,7 @@ void Func07FF object#(0x7FF) () {
 			var0000->set_npc_id(0x0000);
 		}
 	}
-	var0005 = [0xFFC1, 0xFFB1, 0xFFB6, 0xFFB9, 0xFF6A];
+	var0005 = [CALADIN, 0xFFB1, 0xFFB6, 0xFFB9, 0xFF6A];
 	for (var0000 in var0005 with var0008 to var0009) {
 		if (Func0932(var0000)) {
 			var0000->clear_item_flag(DEAD);
@@ -105731,7 +105731,7 @@ void Func08EF 0x8EF () {
 	var0000 = script AVATAR after 8 ticks {
 		call Func07DB;
 	};
-	var0001 = 0xFEF9->direction_from(0xFFC1);
+	var0001 = 0xFEF9->direction_from(CALADIN);
 	var0000 = script 0xFEF9 {
 		face var0001;
 		actor frame cast_out;
@@ -105742,7 +105742,7 @@ void Func08EF 0x8EF () {
 		wait 2;
 		actor frame standing;
 	};
-	var0000 = script 0xFFC1 {
+	var0000 = script CALADIN {
 		nohalt;
 		wait 10;
 	};
@@ -107800,7 +107800,7 @@ void Func092E 0x92E (var var0000) {
 	var var0003;
 	var var0004;
 
-	var0001 = [0xFFC1, 0xFFB1, 0xFFB6, 0xFFB9, 0xFF6A];
+	var0001 = [CALADIN, 0xFFB1, 0xFFB6, 0xFFB9, 0xFF6A];
 	var0001 &= var0000;
 	UI_end_conversation();
 	AVATAR->set_item_flag(DONT_MOVE);
@@ -107992,7 +107992,7 @@ void Func0931 0x931 (var var0000) {
 			Func0963(var0000, 1);
 		}
 	}
-	if (0xFFC1->get_npc_id() && gflags[0x0084]) {
+	if (CALADIN->get_npc_id() && gflags[0x0084]) {
 		if (Func095C(var0000, STRENGTH) < 30) {
 			Func0960(var0000, 1);
 		}
@@ -108025,7 +108025,7 @@ void Func0931 0x931 (var var0000) {
 			Func0960(var0000, 1);
 		}
 	}
-	var0002 = [0xFFC1, 0xFFB1, 0xFFB6, 0xFFB9, 0xFF6A];
+	var0002 = [CALADIN, 0xFFB1, 0xFFB6, 0xFFB9, 0xFF6A];
 	for (var0005 in var0002 with var0003 to var0004) {
 		if (Func0932(var0005)) {
 			var0005->clear_item_flag(DEAD);
@@ -108125,7 +108125,7 @@ void Func0933 0x933 (var var0000, var var0001) {
 	var0000->show_npc_face0(0x0000);
 	0xFFB6->set_npc_id(0x0000);
 	0xFFB9->set_npc_id(0x0000);
-	0xFFC1->set_npc_id(0x0000);
+	CALADIN->set_npc_id(0x0000);
 	0xFFB1->set_npc_id(0x0000);
 	0xFF6A->set_npc_id(0x0000);
 	var0000->set_npc_id(0x0009);
@@ -108177,7 +108177,7 @@ void Func0933 0x933 (var var0000, var var0001) {
 		}
 		say("\"I will train thee now.\"");
 	}
-	if (var0000 == 0xFFC1) {
+	if (var0000 == CALADIN) {
 		var0000 = Func096E([0x0000, 0x0000, 0x0004], 0x03B7, 0x0032, var0001, 0x0003);
 		if (var0000 == 0x0000) {
 			say("\"Thou dost not have enough experience. Come back when thou art more knowledgeable of the world!\"");
@@ -108430,7 +108430,7 @@ void Func0936 0x936 (var var0000, var var0001) {
 				}
 				var0001->clear_item_say();
 				var0001->item_say("@Thou hast beaten me!@");
-				if (((!Func0932(0xFF6A)) || (Func0932(0xFF6A) && (0xFF6A->get_attack_mode() == FLEE))) && (((!Func0932(0xFFB9)) || (Func0932(0xFFB9) && (0xFFB9->get_attack_mode() == FLEE))) && (((!Func0932(0xFFB6)) || (Func0932(0xFFB6) && (0xFFB6->get_attack_mode() == FLEE))) && (((!Func0932(0xFFC1)) || (Func0932(0xFFC1) && (0xFFC1->get_attack_mode() == FLEE))) && ((!Func0932(0xFFB1)) || (Func0932(0xFFB1) && (0xFFB1->get_attack_mode() == FLEE))))))) {
+				if (((!Func0932(0xFF6A)) || (Func0932(0xFF6A) && (0xFF6A->get_attack_mode() == FLEE))) && (((!Func0932(0xFFB9)) || (Func0932(0xFFB9) && (0xFFB9->get_attack_mode() == FLEE))) && (((!Func0932(0xFFB6)) || (Func0932(0xFFB6) && (0xFFB6->get_attack_mode() == FLEE))) && (((!Func0932(CALADIN)) || (Func0932(CALADIN) && (CALADIN->get_attack_mode() == FLEE))) && ((!Func0932(0xFFB1)) || (Func0932(0xFFB1) && (0xFFB1->get_attack_mode() == FLEE))))))) {
 					0xFEED->show_npc_face0(0x0000);
 					var0002 = var0000->get_npc_name();
 					say("\"Nice show, ",
@@ -108488,9 +108488,9 @@ void Func0936 0x936 (var var0000, var var0001) {
 				gflags[0x0007] = false;
 				return;
 			}
-			if (var0001 == 0xFFC1->get_npc_object()) {
-				if (0xFFC1->get_npc_id() == 0x0009) {
-					0xFFC1->show_npc_face0(0x0000);
+			if (var0001 == CALADIN->get_npc_object()) {
+				if (CALADIN->get_npc_id() == 0x0009) {
+					CALADIN->show_npc_face0(0x0000);
 					say("\"Thou hast gotten lucky and bested me! Do not consider this the image of the wilds. The goblins are fierce.\"");
 					UI_remove_npc_face0();
 					Func092E(var0000);
@@ -108528,11 +108528,11 @@ void Func0936 0x936 (var var0000, var var0001) {
 				Func092E(var0001);
 				return;
 			}
-			if (!(0xFFC1->get_npc_id() == 0x0009)) {
+			if (!(CALADIN->get_npc_id() == 0x0009)) {
 				// I see no way other than this
 				goto labelFunc0936_0460;
 			}
-			0xFFC1->show_npc_face0(0x0000);
+			CALADIN->show_npc_face0(0x0000);
 			say("\"I have overwhelmed thee with sheer strength. Learn from this lesson, my friend.\"");
 			UI_remove_npc_face0();
 			Func092E(var0001);
@@ -108559,8 +108559,8 @@ void Func0936 0x936 (var var0000, var var0001) {
 			Func092E(var0001);
 			return;
 		}
-		if (var0000 == 0xFFC1->get_npc_object()) {
-			0xFFC1->show_npc_face0(0x0000);
+		if (var0000 == CALADIN->get_npc_object()) {
+			CALADIN->show_npc_face0(0x0000);
 			say("\"Thou hast lost to my prowess.\"");
 			UI_remove_npc_face0();
 			Func092E(var0001);

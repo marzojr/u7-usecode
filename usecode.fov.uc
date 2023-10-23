@@ -20571,12 +20571,12 @@ void Func043F object#(0x43F) () {
 	var var0007;
 
 	if (event == DOUBLECLICK) {
-		0xFFC1->show_npc_face(0x0000);
+		MILLIE->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
 		var0002 = UI_part_of_day();
 		if (var0002 == NIGHT) {
-			var0003 = Func08FC(0xFFC1, BATLIN);
+			var0003 = Func08FC(MILLIE, BATLIN);
 			if (var0003) {
 				say("Millie ignores your attempts to get her attention and goes back to intently watching the Fellowship ceremony.*");
 				abort;
@@ -20665,7 +20665,7 @@ void Func043F object#(0x43F) () {
 	}
 	if (event == PROXIMITY) {
 		var0002 = UI_part_of_day();
-		var0005 = 0xFFC1->get_npc_object()->get_schedule_type();
+		var0005 = MILLIE->get_npc_object()->get_schedule_type();
 		var0006 = UI_die_roll(0x0001, 0x0004);
 		if (var0005 == WANDER) {
 			if (var0006 == 0x0001) {
@@ -20680,9 +20680,9 @@ void Func043F object#(0x43F) () {
 			if (var0006 == 0x0004) {
 				var0007 = "@Worthiness Precedes Reward!@";
 			}
-			0xFFC1->item_say(var0007);
+			MILLIE->item_say(var0007);
 		} else {
-			Func092E(0xFFC1);
+			Func092E(MILLIE);
 		}
 	}
 }
@@ -65447,10 +65447,10 @@ void Func084F 0x84F () {
 		SEAN->say("\"The Fellowship has taught me not to be afraid of success,\" says Sean.*");
 		SEAN->hide();
 	}
-	var000B = Func08F7(0xFFC1);
+	var000B = Func08F7(MILLIE);
 	if (var000B) {
-		0xFFC1->say("\"The Fellowship has given my life a whole new purpose. Just today I have recruited two more potential members!\" says Millie.*");
-		0xFFC1->hide();
+		MILLIE->say("\"The Fellowship has given my life a whole new purpose. Just today I have recruited two more potential members!\" says Millie.*");
+		MILLIE->hide();
 	}
 	var000C = Func08F7(NANNA);
 	if (var000C) {
@@ -65594,10 +65594,10 @@ void Func0850 0x850 () {
 		SEAN->say("\"The Fellowship has freed me from the illusory appeals of mediocrity,\" says Sean.*");
 		SEAN->hide();
 	}
-	var0009 = Func08F7(0xFFC1);
+	var0009 = Func08F7(MILLIE);
 	if (var0009) {
-		0xFFC1->say("\"In The Fellowship I am learning that I need to devote my life to a special purpose,\" says Millie.*");
-		0xFFC1->hide();
+		MILLIE->say("\"In The Fellowship I am learning that I need to devote my life to a special purpose,\" says Millie.*");
+		MILLIE->hide();
 	}
 	var000A = Func08F7(SPARK);
 	if (var000A) {
