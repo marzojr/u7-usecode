@@ -18075,9 +18075,9 @@ void Func042F object#(0x42F) () {
 	var var0003;
 
 	if (event == DOUBLECLICK) {
-		0xFFD1->show_npc_face(0x0000);
+		JEANETTE->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
-		var0001 = 0xFFD1->get_npc_object()->get_schedule_type();
+		var0001 = JEANETTE->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (gflags[0x007B]) {
 			add("Charles");
@@ -18102,9 +18102,9 @@ void Func042F object#(0x42F) () {
 					if (var0002) {
 						say("\"Why, Sir Dupre! How good to see thee again!\"*");
 						DUPRE->say("\"Hello milady! I thought I might re-sample The Blue Boar's fine beverages!\"*");
-						0xFFD1->say("\"Any time, milord! Any time!\"*");
+						JEANETTE->say("\"Any time, milord! Any time!\"*");
 						DUPRE->hide();
-						0xFFD1->show_npc_face(0x0000);
+						JEANETTE->show_npc_face(0x0000);
 					}
 					add(["food", "drink", "buy"]);
 				} else {
@@ -18151,7 +18151,7 @@ void Func042F object#(0x42F) () {
 				if (var0003) {
 					LUCY->say("\"A moment, Jeanette! Thou hast it all wrong! Charles is a -servant-! Thou art an ignoramus! Charles is not 'upper class'! He is as working class as thee! 'Tis Willy who is the rich merchant! If thou dost ask me, 'tis Willy who is obnoxious and egotistical. Charles is a dream!\"");
 					LUCY->hide();
-					0xFFD1->show_npc_face(0x0000);
+					JEANETTE->show_npc_face(0x0000);
 				} else {
 					say("You point out to Jeanette that Charles is a servant.");
 				}
@@ -18167,7 +18167,7 @@ void Func042F object#(0x42F) () {
 		say("\"Farewell!\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFD1);
+		Func092E(JEANETTE);
 	}
 }
 
