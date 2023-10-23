@@ -19440,9 +19440,9 @@ void Func0439 object#(0x439) () {
 	var var000B;
 
 	if (event == DOUBLECLICK) {
-		0xFFC7->show_npc_face(0x0000);
+		CLINT->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
-		var0001 = 0xFFC7->get_npc_object()->get_schedule_type();
+		var0001 = CLINT->get_npc_object()->get_schedule_type();
 		var0002 = Func0909();
 		var0003 = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
@@ -19568,7 +19568,7 @@ void Func0439 object#(0x439) () {
 		say("\"May thy travels do well.\" *");
 	}
 	if (event == PROXIMITY) {
-		var0001 = 0xFFC7->get_npc_object()->get_schedule_type();
+		var0001 = CLINT->get_npc_object()->get_schedule_type();
 		var000A = UI_die_roll(0x0001, 0x0004);
 		if (var0001 == TEND_SHOP) {
 			if (var000A == 0x0001) {
@@ -19583,9 +19583,9 @@ void Func0439 object#(0x439) () {
 			if (var000A == 0x0004) {
 				var000B = "@Need a ship or sextant?@";
 			}
-			0xFFC7->item_say(var000B);
+			CLINT->item_say(var000B);
 		} else {
-			Func092E(0xFFC7);
+			Func092E(CLINT);
 		}
 	}
 }

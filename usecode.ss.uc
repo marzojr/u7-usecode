@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -15611,7 +15611,7 @@ void Func032B shape#(0x32B) () {
 		0xFEFB->set_item_flag(MET);
 		0xFF6D->set_item_flag(SI_ZOMBIE);
 		0xFF6B->set_item_flag(SI_ZOMBIE);
-		var0008 = [AVATAR, SELINA, 0xFFC7, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, 0xFF33, 0xFF35, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, 0xFF4B, 0xFF4A, 0xFFC0, 0xFF6A, 0xFFB6, 0xFFC1, 0xFFB1, 0xFFB9, 0xFEF7, 0xFF89, 0xFF88, 0xFF87, 0xFF86, 0xFF85, 0xFF58];
+		var0008 = [AVATAR, SELINA, KALEN, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, 0xFF33, 0xFF35, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, 0xFF4B, 0xFF4A, 0xFFC0, 0xFF6A, 0xFFB6, 0xFFC1, 0xFFB1, 0xFFB9, 0xFEF7, 0xFF89, 0xFF88, 0xFF87, 0xFF86, 0xFF85, 0xFF58];
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -39038,7 +39038,7 @@ void Func0438 object#(0x438) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	var0003 = Func0942(0xFFC7);
+	var0003 = Func0942(KALEN);
 	if (event == DEATH) {
 		var0004 = script item {
 			nohalt;
@@ -39294,15 +39294,15 @@ void Func0439 object#(0x439) () {
 	var0002 = Func0953();
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Greetings.@");
-		0xFFC7->Func07D1();
-		Func097F(0xFFC7, "@What dost thou want?@", 0x0005);
-		0xFFC7->set_schedule_type(TALK);
+		KALEN->Func07D1();
+		Func097F(KALEN, "@What dost thou want?@", 0x0005);
+		KALEN->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFC7->run_schedule();
-		0xFFC7->clear_item_say();
-		0xFFC7->show_npc_face0(0x0000);
-		var0003 = 0xFFC7->get_item_flag(MET);
+		KALEN->run_schedule();
+		KALEN->clear_item_say();
+		KALEN->show_npc_face0(0x0000);
+		var0003 = KALEN->get_item_flag(MET);
 		if (var0003 == false) {
 			if (gflags[0x003E] == true) {
 				if (var0001 == true) {
@@ -39313,7 +39313,7 @@ void Func0439 object#(0x439) () {
 			} else {
 				say("\"I have business to attend to. Be quick.\"");
 			}
-			0xFFC7->set_item_flag(MET);
+			KALEN->set_item_flag(MET);
 		} else {
 			say("\"Returned again?\"");
 		}
@@ -39350,37 +39350,37 @@ void Func0439 object#(0x439) () {
 
 			case "assassin":
 				say("\"Thou art hard to catch, Avatar. But now thou must die!\"");
-				0xFFC7->set_schedule_type(IN_COMBAT);
-				AVATAR->set_oppressor(0xFFC7);
+				KALEN->set_schedule_type(IN_COMBAT);
+				AVATAR->set_oppressor(KALEN);
 				abort;
 
 			case "Iolo the Mad":
 				say("\"He is Master of Fawn now, Avatar. Thou wouldst be wise to leave while it amuses him to let ye live.\" *\"He might grant to me that fine wench, Alyssand, if I bring him thine head...\"");
-				0xFFC7->set_schedule_type(IN_COMBAT);
-				AVATAR->set_oppressor(0xFFC7);
+				KALEN->set_schedule_type(IN_COMBAT);
+				AVATAR->set_oppressor(KALEN);
 				abort;
 
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Goodbye.@", 0x0000);
-				Func097F(0xFFC7, "@Good riddance.@", 0x0005);
+				Func097F(KALEN, "@Good riddance.@", 0x0005);
 				Func08AA();
 				break;
 		}
 	}
 	if (event == SCRIPTED) {
-		if (0xFFC7->get_item_flag(DEAD)) {
+		if (KALEN->get_item_flag(DEAD)) {
 			abort;
 		}
-		Func097F(0xFFC7, "@I shall return!@", 0x0000);
-		0xFFC7->set_attack_mode(FLEE);
+		Func097F(KALEN, "@I shall return!@", 0x0000);
+		KALEN->set_attack_mode(FLEE);
 	}
-	if ((event == DEATH) && 0xFFC7->get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && KALEN->get_item_flag(SI_TOURNAMENT)) {
 		gflags[0x015D] = true;
-		0xFFC7->show_npc_face0(0x0000);
-		0xFFC7->clear_item_flag(SI_TOURNAMENT);
-		0xFFC7->reduce_health(0x0032, NORMAL_DAMAGE);
-		Func097F(0xFFC7, "@Urgghh...@", 0x0000);
+		KALEN->show_npc_face0(0x0000);
+		KALEN->clear_item_flag(SI_TOURNAMENT);
+		KALEN->reduce_health(0x0032, NORMAL_DAMAGE);
+		Func097F(KALEN, "@Urgghh...@", 0x0000);
 		var0004 = Func0992(0x0001, 0x0000, 0x0000, true);
 		Func097F(var0004, "@He is dead...@", 0x0005);
 		if (gflags[0x0004] == true) {
@@ -68462,10 +68462,10 @@ void Func06C0 object#(0x6C0) () {
 				say "@Come again@";
 			};
 		}
-		if (!0xFFC7->is_dead()) {
-			0xFFC7->move_object([0x0493, 0x076A, 0x0000]);
-			0xFFC7->set_schedule_type(LOITER);
-			var0001 = script 0xFFC7 {
+		if (!KALEN->is_dead()) {
+			KALEN->move_object([0x0493, 0x076A, 0x0000]);
+			KALEN->set_schedule_type(LOITER);
+			var0001 = script KALEN {
 				nohalt;
 				wait 16;
 				say "@Very uplifting...@";
@@ -78803,7 +78803,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(KYLISTA, 0x0406, 0x0795, WAIT);
 		Func09AC(DELPHYNIA, 0x0460, 0x06F6, WAIT);
 		Func09AC(LEON, 0x03B5, 0x0697, WAIT);
-		Func09AC(0xFFC7, 0x0407, 0x066E, WAIT);
+		Func09AC(KALEN, 0x0407, 0x066E, WAIT);
 		Func09AC(0xFFC6, 0x0467, 0x06C9, WAIT);
 		Func09AC(0xFFC4, 0x0407, 0x0780, WAIT);
 		Func09AC(0xFFC3, 0x03F7, 0x0796, WAIT);
@@ -80953,7 +80953,7 @@ void Func07F8 object#(0x7F8) () {
 				nohalt;
 				call Func07F8;
 			};
-			var0001 = [YELINDA, KYLISTA, VOLDIN, 0xFFC3, JOTH, GARTH, 0xFFC7, LEON, JENDON, DELPHYNIA, DELIN, JORVIN, 0xFFC4, 0xFFC5, ALYSSAND, 0xFFC6];
+			var0001 = [YELINDA, KYLISTA, VOLDIN, 0xFFC3, JOTH, GARTH, KALEN, LEON, JENDON, DELPHYNIA, DELIN, JORVIN, 0xFFC4, 0xFFC5, ALYSSAND, 0xFFC6];
 			for (var0004 in var0001 with var0002 to var0003) {
 				var0004->remove_npc();
 				var0004->run_schedule();
@@ -102305,10 +102305,10 @@ extern var Func09A0 0x9A0 (var var0000, var var0001);
 void Func08AB 0x8AB () {
 	var var0000;
 
-	if ((Func0994() == 0x0003) && ((!0xFFC7->get_item_flag(DEAD)) && (gflags[0x0190] && JENDON->get_item_flag(MET)))) {
-		var0000 = 0xFFC7->approach_avatar(0x0078, 0x0028);
+	if ((Func0994() == 0x0003) && ((!KALEN->get_item_flag(DEAD)) && (gflags[0x0190] && JENDON->get_item_flag(MET)))) {
+		var0000 = KALEN->approach_avatar(0x0078, 0x0028);
 		if (var0000) {
-			Func09AD(0xFFC7);
+			Func09AD(KALEN);
 			gflags[0x015D] = true;
 			var0000 = script Func09A0(0x0005, 0x0001) after 50 ticks {
 				nohalt;
@@ -102317,7 +102317,7 @@ void Func08AB 0x8AB () {
 			abort;
 		}
 	}
-	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((ALYSSAND->get_item_flag(MET) + DELIN->get_item_flag(MET)) + DELPHYNIA->get_item_flag(MET)) + GARTH->get_item_flag(MET)) + JOTH->get_item_flag(MET)) + VOLDIN->get_item_flag(MET)) + JENDON->get_item_flag(MET)) + JORVIN->get_item_flag(MET)) + 0xFFC7->get_item_flag(MET)) + KYLISTA->get_item_flag(MET)) + 0xFFC6->get_item_flag(MET)) + 0xFFC3->get_item_flag(MET)) > 0x0004)))) {
+	if (gflags[0x018F] && (gflags[0x015D] && (gflags[0x0190] && ((((((((((((ALYSSAND->get_item_flag(MET) + DELIN->get_item_flag(MET)) + DELPHYNIA->get_item_flag(MET)) + GARTH->get_item_flag(MET)) + JOTH->get_item_flag(MET)) + VOLDIN->get_item_flag(MET)) + JENDON->get_item_flag(MET)) + JORVIN->get_item_flag(MET)) + KALEN->get_item_flag(MET)) + KYLISTA->get_item_flag(MET)) + 0xFFC6->get_item_flag(MET)) + 0xFFC3->get_item_flag(MET)) > 0x0004)))) {
 		JORVIN->modify_schedule(NOON, STANDTHERE, [0x040E, 0x06BF]);
 		JORVIN->modify_schedule(AFTERNOON, STANDTHERE, [0x040E, 0x06BF]);
 	}
