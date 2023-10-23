@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, 0xFFD6, 0xFFD5, GOBLIN_MESSENGER, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, 0xFFD6, 0xFFD5, GOBLIN_MESSENGER, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, BYRIN, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -22351,7 +22351,7 @@ void Func0403 object#(0x403) () {
 				fallthrough;
 
 			case "a song" (remove):
-				var0014 = 0xFFD9->get_item_flag(MET);
+				var0014 = BYRIN->get_item_flag(MET);
 				if (var0014) {
 					say("\"Dost thou wish me to repeat a song thou hast already heard? Or dost thou wish to hear a new song?\"");
 					var0015 = [];
@@ -31412,7 +31412,7 @@ void Func0426 object#(0x426) () {
 			ARGUS->item_say("@Art thou hungry?@");
 		}
 		if (var0006 == 0x0003) {
-			if (Func0942(0xFFD9)) {
+			if (Func0942(BYRIN)) {
 				ARGUS->item_say("@Sing us a song, Byrin!@");
 			} else {
 				ARGUS->item_say("@Have some ale.@");
@@ -31774,27 +31774,27 @@ void Func0427 object#(0x427) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	var0003 = 0xFFD9->get_item_flag(MET);
+	var0003 = BYRIN->get_item_flag(MET);
 	var0004 = Func0994();
 	var0005 = Func0942(IOLO);
 	var0006 = Func0942(DUPRE);
 	var0007 = Func0942(SHAMINO);
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Hail, minstrel!@");
-		0xFFD9->Func07D1();
-		Func097F(0xFFD9, (("@Greetings, " + var0000) + "!@"), 0x0005);
-		0xFFD9->set_schedule_type(TALK);
+		BYRIN->Func07D1();
+		Func097F(BYRIN, (("@Greetings, " + var0000) + "!@"), 0x0005);
+		BYRIN->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFD9->run_schedule();
-		0xFFD9->clear_item_say();
-		0xFFD9->show_npc_face0(0x0000);
+		BYRIN->run_schedule();
+		BYRIN->clear_item_say();
+		BYRIN->show_npc_face0(0x0000);
 		if (var0004 == 0x001F) {
 			if (var0003 == true) {
 				say("\"I had wondered when I would encounter thee here, Avatar. Thou wouldst like some answers, no doubt.\" *\"Or perhaps I could sing thee a song to ease thy way.\"");
 			} else {
 				say("\"Welcome, fellow dreamer! I am Byrin, a gleeman by trade.\" *\"Thou dost look perplexed. I'll warrant that thou wouldst like some answers. Or perhaps I could sing thee a song to ease thy way.\"");
-				0xFFD9->set_item_flag(MET);
+				BYRIN->set_item_flag(MET);
 			}
 			add(["answers", "song", "bye"]);
 		} else {
@@ -31808,7 +31808,7 @@ void Func0427 object#(0x427) () {
 				} else {
 					say("\"Thou art welcome to the Sleeping Bull, fellow traveller! I am Byrin, a wandering gleeman... or minstrel, if thou wilt. I know many tales and tunes to help pass the evenings.\"");
 				}
-				0xFFD9->set_item_flag(MET);
+				BYRIN->set_item_flag(MET);
 			} else {
 				say("\"",
 					var0002,
@@ -32110,7 +32110,7 @@ void Func0427 object#(0x427) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Farewell, gleeman!@", 0x0000);
-				Func097F(0xFFD9, "@May thy path be smooth!@", 0x0005);
+				Func097F(BYRIN, "@May thy path be smooth!@", 0x0005);
 				break;
 		}
 	}
@@ -58716,9 +58716,9 @@ void Func04DA object#(0x4DA) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	var0003 = 0xFFD9->get_item_flag(MET);
+	var0003 = BYRIN->get_item_flag(MET);
 	if (event == DEATH) {
-		0xFFD9->show_npc_face0(0x0000);
+		BYRIN->show_npc_face0(0x0000);
 		say("\"Art thou insane? Why art thou attacking me? This is my dream!\" *\"If I had a two-handed sword, I would make mincemeat of thee!\" *\"I must awaken...\"");
 		UI_remove_npc_face0();
 		var0004 = get_object_position();
@@ -58734,7 +58734,7 @@ void Func04DA object#(0x4DA) () {
 	}
 	if (event == STARTED_TALKING) {
 		0xFF26->set_schedule_type(WANDER);
-		0xFFD9->show_npc_face0(0x0000);
+		BYRIN->show_npc_face0(0x0000);
 		if (var0003 == true) {
 			say("\"I had wondered when I would encounter thee here, Avatar.\" ~\"I expect that thou wouldst like some answers, no doubt.\" *\"Or perhaps I could sing thee a song to ease thy way.\"");
 		} else {
@@ -59015,7 +59015,7 @@ void Func04DA object#(0x4DA) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Farewell, gleeman!@", 0x0000);
-				Func097F(0xFFD9, "@May thy path be smooth!@", 0x0005);
+				Func097F(BYRIN, "@May thy path be smooth!@", 0x0005);
 				break;
 		}
 	}
@@ -78822,7 +78822,7 @@ void Func07D8 object#(0x7D8) () {
 		}
 		Func09AC(0xFFAF, 0x0521, 0x08B8, WAIT);
 		Func09AC(ARGUS, 0x04E8, 0x08B9, WAIT);
-		Func09AC(0xFFD9, 0x0517, 0x0893, WAIT);
+		Func09AC(BYRIN, 0x0517, 0x0893, WAIT);
 		Func09AC(0xFFD7, 0x04F8, 0x08A6, WAIT);
 		0xFFD3->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, NIGHT], [SLEEP, EAT, TALK, LOITER, EAT], [0x0516, 0x08F7, 0x04F7, 0x08CC, 0x050D, 0x08B6, 0x0516, 0x08A2, 0x04F7, 0x08CC]);
 		0xFFD3->run_schedule();

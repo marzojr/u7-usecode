@@ -16873,7 +16873,7 @@ void Func0427 object#(0x427) () {
 	var var0001;
 
 	if (event == DOUBLECLICK) {
-		0xFFD9->show_npc_face(0x0000);
+		NENO->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		if (var0000 == NIGHT) {
 			var0001 = Func08F7(0xFFCA);
@@ -16930,7 +16930,7 @@ void Func0427 object#(0x427) () {
 		say("\"Farewell! Thou must watch the postings for our performance dates!\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFD9);
+		Func092E(NENO);
 	}
 }
 
@@ -19020,7 +19020,7 @@ void Func0436 object#(0x436) () {
 		var0002 = UI_part_of_day();
 		var0003 = 0xFFCA->get_npc_object()->get_schedule_type();
 		if (var0002 == NIGHT) {
-			var0004 = Func08F7(0xFFD9);
+			var0004 = Func08F7(NENO);
 			var0005 = Func08F7(0xFFD8);
 			if (var0004 && var0005) {
 				say("Coop is onstage with The Avatars. He sees you and says, \"Uhm, there is someone special listening tonight, and this next tune is dedicated to them.\"");
