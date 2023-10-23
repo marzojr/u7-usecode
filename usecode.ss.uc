@@ -1469,7 +1469,7 @@ void Func00E4 shape#(0xE4) () {
 					" Monetari.\"");
 				say("\"We also accept other precious items...\"");
 				if (!gflags[0x01CE]) {
-					Func09AC(0xFFD4, 0x0507, 0x08BF, TALK);
+					Func09AC(SELINA, 0x0507, 0x08BF, TALK);
 				}
 				gflags[0x01CE] = true;
 				add("pay fine");
@@ -4063,7 +4063,7 @@ void Func0128 shape#(0x128) () {
 			var0001 = Func099E(item);
 		}
 		if (event == UNREADIED) {
-			var0005 = Func0942(0xFFD4);
+			var0005 = Func0942(SELINA);
 			if (var0005) {
 				var0002 = script item {
 					nohalt;
@@ -4072,21 +4072,21 @@ void Func0128 shape#(0x128) () {
 			}
 		}
 		if (event == SCRIPTED) {
-			var0005 = Func0942(0xFFD4);
+			var0005 = Func0942(SELINA);
 			if (var0005) {
-				0xFFD4->item_say("Do not touch my ring!");
-				var0006 = 0xFFD4->get_npc_object();
-				var0007 = 0xFFD4->find_direction(item);
+				SELINA->item_say("Do not touch my ring!");
+				var0006 = SELINA->get_npc_object();
+				var0007 = SELINA->find_direction(item);
 				var0002 = script var0006 {
 					nohalt;
 					face var0007;
 					actor frame strike_2h;
 				};
 				if (var0001) {
-					var0002 = Func0996(var0001, 0xFFD4, 0x0001, 0x0128, QUALITY_ANY, 0x0002, false);
+					var0002 = Func0996(var0001, SELINA, 0x0001, 0x0128, QUALITY_ANY, 0x0002, false);
 				} else {
 					var0002 = set_last_created();
-					var0002 = 0xFFD4->give_last_created();
+					var0002 = SELINA->give_last_created();
 				}
 			}
 		}
@@ -10092,9 +10092,9 @@ void Func0281 shape#(0x281) () {
 			if (var0000->get_item_quality() == 0x0075) {
 				gflags[0x01E8] = true;
 			}
-			if ((!gflags[0x01E6]) && ((var0000->get_item_quality() == 0x0075) && (!0xFFD4->get_item_flag(IN_PARTY)))) {
-				0xFFD4->add_to_party();
-				Func097F(0xFFD4, "@Wait for me!@", 0x0002);
+			if ((!gflags[0x01E6]) && ((var0000->get_item_quality() == 0x0075) && (!SELINA->get_item_flag(IN_PARTY)))) {
+				SELINA->add_to_party();
+				Func097F(SELINA, "@Wait for me!@", 0x0002);
 			}
 		}
 		if (var0000[0x0001]->get_item_shape() in [0x0178, 0x010E, 0x01B0, 0x01B1]) {
@@ -15611,7 +15611,7 @@ void Func032B shape#(0x32B) () {
 		0xFEFB->set_item_flag(MET);
 		0xFF6D->set_item_flag(SI_ZOMBIE);
 		0xFF6B->set_item_flag(SI_ZOMBIE);
-		var0008 = [AVATAR, 0xFFD4, 0xFFC7, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, 0xFFCB, 0xFF33, 0xFF35, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, 0xFF4B, 0xFF4A, 0xFFC0, 0xFF6A, 0xFFB6, 0xFFC1, 0xFFB1, 0xFFB9, 0xFEF7, 0xFF89, 0xFF88, 0xFF87, 0xFF86, 0xFF85, 0xFF58];
+		var0008 = [AVATAR, SELINA, 0xFFC7, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, 0xFFCB, 0xFF33, 0xFF35, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, 0xFF4B, 0xFF4A, 0xFFC0, 0xFF6A, 0xFFB6, 0xFFC1, 0xFFB1, 0xFFB9, 0xFEF7, 0xFF89, 0xFF88, 0xFF87, 0xFF86, 0xFF85, 0xFF58];
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -33688,43 +33688,43 @@ void Func042C object#(0x42C) () {
 		} else {
 			AVATAR->item_say("@Excuse me, miss...@");
 		}
-		0xFFD4->Func07D1();
-		Func097F(0xFFD4, (("@Yes, " + var0000) + "?@"), 0x0002);
-		0xFFD4->set_schedule_type(TALK);
+		SELINA->Func07D1();
+		Func097F(SELINA, (("@Yes, " + var0000) + "?@"), 0x0002);
+		SELINA->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFD4->show_npc_face0(0x0000);
-		0xFFD4->clear_item_say();
+		SELINA->show_npc_face0(0x0000);
+		SELINA->clear_item_say();
 		if (Func0994() == 0x0018) {
 			say("\"I want to be alone.\"");
 			abort;
 		}
-		if (0xFFD4->get_item_flag(IN_PARTY)) {
-			0xFFD4->set_schedule_type(FOLLOW_AVATAR);
+		if (SELINA->get_item_flag(IN_PARTY)) {
+			SELINA->set_schedule_type(FOLLOW_AVATAR);
 			add("leave");
 		} else {
-			0xFFD4->run_schedule();
-			if (0xFFD4->get_schedule_type() == TALK) {
-				0xFFD4->revert_schedule();
-				0xFFD4->run_schedule();
+			SELINA->run_schedule();
+			if (SELINA->get_schedule_type() == TALK) {
+				SELINA->revert_schedule();
+				SELINA->run_schedule();
 			}
 		}
-		if ((!0xFFD4->get_item_flag(IN_PARTY)) && gflags[0x01CE]) {
+		if ((!SELINA->get_item_flag(IN_PARTY)) && gflags[0x01CE]) {
 			if (gflags[0x01E5]) {
 				say("\"If thou hast the stomach to face great danger, then perhaps we can resume the quest for the lost gold.\"");
 				add(["resume quest"]);
 			} else {
-				if (!0xFFD4->get_item_flag(MET)) {
+				if (!SELINA->get_item_flag(MET)) {
 					say("\"Allow me to introduce myself. My name is Selina. And I have heard that thou art in need of... finances, shall we say.\"");
 					say("\"I believe that I can be of help...\"");
-					0xFFD4->set_item_flag(MET);
+					SELINA->set_item_flag(MET);
 				} else {
 					say("\"I have heard that thou art in need of... finances, shall we say.\"");
 					say("\"I believe that I can be of help...\"");
 				}
 				add(["finances", "help"]);
 			}
-		} else if (!0xFFD4->get_item_flag(MET)) {
+		} else if (!SELINA->get_item_flag(MET)) {
 			if (UI_is_pc_female()) {
 				say("\"'Tis a pleasure to meet thee, ",
 					var0000,
@@ -33740,8 +33740,8 @@ void Func042C object#(0x42C) () {
 				say("\"I need thy protection.\"");
 				add("protection");
 			}
-			0xFFD4->set_item_flag(MET);
-		} else if (!0xFFD4->get_item_flag(IN_PARTY)) {
+			SELINA->set_item_flag(MET);
+		} else if (!SELINA->get_item_flag(IN_PARTY)) {
 			say("\"So, we meet again, ",
 				var0001,
 				"!\"");
@@ -33775,16 +33775,16 @@ void Func042C object#(0x42C) () {
 		if (gflags[0x028B] && (!gflags[0x029D])) {
 			add("Stoneheart");
 		}
-		if (gflags[0x0011] && ((!0xFFD4->get_item_flag(IN_PARTY)) && 0xFFD4->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY))) {
+		if (gflags[0x0011] && ((!SELINA->get_item_flag(IN_PARTY)) && SELINA->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY))) {
 			add("belongings");
 		}
-		if (0xFFD4->get_item_flag(IN_PARTY) && (!gflags[0x01E6])) {
+		if (SELINA->get_item_flag(IN_PARTY) && (!gflags[0x01E6])) {
 			add("Are we there yet?");
 		}
 		converse ("bye") {
 			case "Are we there yet?" (remove):
 				var0005 = [0x06D0, 0x0766, 0x0000];
-				var0006 = 0xFFD4->get_object_position();
+				var0006 = SELINA->get_object_position();
 				var0007 = var0005[0x0002] - var0006[0x0002];
 				var0008 = var0005[0x0001] - var0006[0x0001];
 				var0009 = var0007;
@@ -33815,7 +33815,7 @@ void Func042C object#(0x42C) () {
 					say("\"We still have a long way to travel.\"");
 				} else if (var000B < 0x0032) {
 					say("\"This is the place!\"");
-					Func097F(0xFFD4, "@We should find the gold!@", 0x0000);
+					Func097F(SELINA, "@We should find the gold!@", 0x0000);
 					abort;
 				} else {
 					say("\"We are very close!\"");
@@ -33915,29 +33915,29 @@ void Func042C object#(0x42C) () {
 							var0001,
 							"!\"");
 					}
-					0xFFD4->add_to_party();
+					SELINA->add_to_party();
 					gflags[0x0011] = true;
 					var000E = script Func09A0(0x0005, 0x0001) after 25 ticks {
 						nohalt;
 						call Func042C;
 					};
-					Func097F(0xFFD4, "@Onward!@", 0x0000);
+					Func097F(SELINA, "@Onward!@", 0x0000);
 					if (!gflags[0x01E5]) {
 						say("\"Here is the key I promised.\"");
 						var000E = Func099B(AVATAR, 0x0001, 0x0281, 0x0075, 0x0003, 0x0000, true);
 					}
 					gflags[0x01E5] = true;
-					var000E = 0xFFD4->find_object(0x0128, QUALITY_ANY, 0x0002);
+					var000E = SELINA->find_object(0x0128, QUALITY_ANY, 0x0002);
 					if (var000E) {
 						var000E = var000E->set_last_created();
-						var000E = 0xFFD4->give_last_created();
+						var000E = SELINA->give_last_created();
 					}
 					abort;
 				}
 				if (gflags[0x01E5]) {
 					say("\"But how shall I gain the gold, if thou dost not aid me?\"");
-					Func097F(0xFFD4, "@Oh!@", 0x0000);
-					0xFFD4->set_schedule_type(SHY);
+					Func097F(SELINA, "@Oh!@", 0x0000);
+					SELINA->set_schedule_type(SHY);
 					abort;
 				}
 				say("\"I had thought thou wouldst be interested! Oh, well, 'tis his loss for buying my... favors so cheaply! And thy loss for not joining me!\" *\"But, I will not hold it against thee, ",
@@ -34122,7 +34122,7 @@ void Func042C object#(0x42C) () {
 						say("\"Congratulations, ",
 							var0001,
 							"! Who is the lucky man?\"");
-						if (!0xFFD4->get_item_flag(IN_PARTY)) {
+						if (!SELINA->get_item_flag(IN_PARTY)) {
 							var0012 = Func0992(0x0001, "@Indeed, young lady!@", "@It isn't mine...@", false);
 							0x0000->set_conversation_slot();
 						}
@@ -34134,7 +34134,7 @@ void Func042C object#(0x42C) () {
 					} else {
 						say("\"An engagement ring!\"");
 						say("\"I suppose it would be too much to hope that it was for me...\"");
-						if (!0xFFD4->get_item_flag(IN_PARTY)) {
+						if (!SELINA->get_item_flag(IN_PARTY)) {
 							var0012 = Func0992(0x0001, "@Honestly, young lady!@", "@It isn't mine...@", false);
 							0x0000->set_conversation_slot();
 						}
@@ -34185,19 +34185,19 @@ void Func042C object#(0x42C) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Farewell, Selina!@", 0x0000);
-				Func097F(0xFFD4, "@Until we meet again...@", 0x0002);
+				Func097F(SELINA, "@Until we meet again...@", 0x0002);
 				abort;
 		}
 	}
 	if (event == SCRIPTED) {
-		var0013 = 0xFFD4->get_npc_id();
+		var0013 = SELINA->get_npc_id();
 		if (var0013 == 0x0000) {
-			if (!0xFFD4->get_item_flag(IN_PARTY)) {
+			if (!SELINA->get_item_flag(IN_PARTY)) {
 				abort;
 			}
-			var0005 = 0xFFD4->get_object_position();
+			var0005 = SELINA->get_object_position();
 			if ((var0005[0x0001] < 0x0479) || (var0005[0x0002] > 0x08D9)) {
-				0xFFD4->show_npc_face0(0x0000);
+				SELINA->show_npc_face0(0x0000);
 				if (!gflags[0x01E7]) {
 					say("\"Now look here, ",
 						var0001,
@@ -34205,7 +34205,7 @@ void Func042C object#(0x42C) () {
 					say("\"Wilt thou take me to the treasure, or no?\"");
 					if (Func0955()) {
 						say("\"Much better.\"");
-						Func097F(0xFFD4, "@To the gold!@", 0x0000);
+						Func097F(SELINA, "@To the gold!@", 0x0000);
 						gflags[0x01E7] = true;
 						var000E = script Func09A0(0x0005, 0x0001) after 50 ticks {
 							nohalt;
@@ -34214,20 +34214,20 @@ void Func042C object#(0x42C) () {
 						abort;
 					}
 					say("\"Then I'm leaving!\"");
-					0xFFD4->remove_from_party();
-					Func097F(0xFFD4, "@Fool!@", 0x0000);
+					SELINA->remove_from_party();
+					Func097F(SELINA, "@Fool!@", 0x0000);
 					Func0861();
-					0xFFD4->revert_schedule();
-					0xFFD4->run_schedule();
+					SELINA->revert_schedule();
+					SELINA->run_schedule();
 					gflags[0x01E7] = false;
 					abort;
 				}
 				say("\"Thou still goest the wrong way. I'm leaving!\"");
-				0xFFD4->remove_from_party();
-				Func097F(0xFFD4, "@Fool!@", 0x0000);
+				SELINA->remove_from_party();
+				Func097F(SELINA, "@Fool!@", 0x0000);
 				Func0861();
-				0xFFD4->revert_schedule();
-				0xFFD4->run_schedule();
+				SELINA->revert_schedule();
+				SELINA->run_schedule();
 				gflags[0x01E7] = false;
 				abort;
 			}
@@ -34258,7 +34258,7 @@ void Func042C object#(0x42C) () {
 			0xFEF0->set_polymorph(0x0373);
 			0xFF80->set_polymorph(0x01CA);
 			0xFF81->set_polymorph(0x0325);
-			0xFFD4->show_npc_face0(0x0000);
+			SELINA->show_npc_face0(0x0000);
 			say("\"Gloat if thou wilt! Even if thou slayest me here thou hast not truly defeated me!\"");
 			say("\"Even as we speak, Batlin is opening the Wall of Lights in the next room! With the Guardian's help he and I shall meet in the Eternal Void to conquer new realms together!\"");
 			say("\"Batlin! Guardian! I await thee in the Void!\"");
@@ -34277,8 +34277,8 @@ void Func042C object#(0x42C) () {
 				var000E = give_last_created();
 			}
 			if (var000E) {
-				0xFFD4->clear_item_flag(SI_TOURNAMENT);
-				0xFFD4->reduce_health(0x0032, NORMAL_DAMAGE);
+				SELINA->clear_item_flag(SI_TOURNAMENT);
+				SELINA->reduce_health(0x0032, NORMAL_DAMAGE);
 			}
 		}
 	}
@@ -34288,12 +34288,12 @@ void Func042C object#(0x42C) () {
 			var001A = 0xFF80->get_item_flag(DEAD);
 			var001B = 0xFF81->get_item_flag(DEAD);
 			if (var0019 && (var001A && var001B)) {
-				if (0xFFD4->get_npc_id() != 0x0001) {
+				if (SELINA->get_npc_id() != 0x0001) {
 					// Need to make UCC optimize this
 					goto labelFunc042C_0F80;
 				}
-				0xFFD4->set_npc_id(0x0002);
-				var001C = 0xFFD4->get_npc_object();
+				SELINA->set_npc_id(0x0002);
+				var001C = SELINA->get_npc_object();
 				var000E = script var001C after 25 ticks {
 					nohalt;
 					call Func042C;
@@ -34310,22 +34310,22 @@ void Func042C object#(0x42C) () {
 		if (gflags[0x01E8]) {
 			abort;
 		}
-		var0020 = Func097D(0xFFD4, 0x0001, 0x0128, QUALITY_ANY, 0x0002);
+		var0020 = Func097D(SELINA, 0x0001, 0x0128, QUALITY_ANY, 0x0002);
 		var0021 = Func097D(PARTY, 0x0001, 0x0286, QUALITY_ANY, 0x0002);
 		var0022 = Func097D(PARTY, 0x0001, 0x0281, 0x0075, 0x0003);
 		if (var0020) {
-			var0023 = 0xFFD4->get_oppressor();
+			var0023 = SELINA->get_oppressor();
 			if (var0023->get_item_flag(IN_PARTY)) {
-				0xFFD4->show_npc_face0(0x0000);
+				SELINA->show_npc_face0(0x0000);
 				say("\"Thou shalt not find me such easy prey, mighty Avatar!\"");
 				say("\"When thou dost least expect it, thou shalt find me a worthy opponent!\"");
 			} else {
-				0xFFD4->show_npc_face0(0x0000);
+				SELINA->show_npc_face0(0x0000);
 				say("\"I must retreat to the safety of the Sleeping Bull. Do not worry -- we shall meet again, Avatar!\"");
 			}
 			UI_remove_npc_face0();
-			Func097F(0xFFD4, "@We shall meet again!@", 0x0000);
-			var0005 = 0xFFD4->get_object_position();
+			Func097F(SELINA, "@We shall meet again!@", 0x0000);
+			var0005 = SELINA->get_object_position();
 			while (var0005[0x0003] > 0x0000) {
 				var0005[0x0001] -= 0x0001;
 				var0005[0x0002] -= 0x0001;
@@ -34333,12 +34333,12 @@ void Func042C object#(0x42C) () {
 			}
 			UI_sprite_effect(ANIMATION_PULSATING_DISC, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			UI_sprite_effect(ANIMATION_TELEPORT2, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			if (0xFFD4->get_item_flag(IN_PARTY)) {
-				0xFFD4->remove_from_party();
+			if (SELINA->get_item_flag(IN_PARTY)) {
+				SELINA->remove_from_party();
 			}
-			0xFFD4->remove_npc();
-			0xFFD4->revert_schedule();
-			0xFFD4->run_schedule();
+			SELINA->remove_npc();
+			SELINA->revert_schedule();
+			SELINA->run_schedule();
 		}
 	}
 labelFunc042C_0F80:
@@ -46407,8 +46407,8 @@ void Func044B object#(0x44B) () {
 					say("\"The Test of the Knights is a challenge which only one stout of heart, keen of mind and strong of arm can pass. It is specially designed to test thy might, thy fleetness, thy courage and thy wits. If thou dost complete the test thou shouldst follow the directions of the words contained in the scrolls that thou wilt find. Thy totem animal will then appear. Slay it and take it back to town. Cellia will take its skin to make a cloak for thee. Lucilla will cook its meat. All the Knights will have a banquet in thine honor -- if thou dost pass the test.\"");
 					if (UI_get_array_size(UI_get_party_list()) > 0x0001) {
 						say("\"It is a test which one must endure alone, without companions.\"");
-						if (0xFFD4->get_item_flag(IN_PARTY)) {
-							Func094E(0xFFD4, (("@But not before finishing our quest, " + var0000) + "!@"));
+						if (SELINA->get_item_flag(IN_PARTY)) {
+							Func094E(SELINA, (("@But not before finishing our quest, " + var0000) + "!@"));
 							0x0000->set_conversation_slot();
 						}
 					}
@@ -46441,8 +46441,8 @@ void Func044B object#(0x44B) () {
 							say("\"Steel thyself! If thou dost make it through to the other side, then all will know that thou art worthy to be a Knight of Monitor.\"");
 							if (UI_get_array_size(UI_get_party_list()) > 0x0001) {
 								say("\"Thy friends must wait for thee here.\"");
-								if (0xFFD4->get_item_flag(IN_PARTY)) {
-									Func094E(0xFFD4, "@Then he cannot take this Test! I refuse to leave!@");
+								if (SELINA->get_item_flag(IN_PARTY)) {
+									Func094E(SELINA, "@Then he cannot take this Test! I refuse to leave!@");
 									0x0000->set_conversation_slot();
 									say("\"I cannot change the rules of the Test. Therefore, I cannot admit thee, stranger.\"");
 									Func097F(0xFFB5, "@Good-bye.@", 0x0000);
@@ -68607,24 +68607,24 @@ void Func06C4 object#(0x6C4) () {
 	var var0009;
 	var var000A;
 
-	var0000 = 0xFFD4->get_item_flag(IN_PARTY);
+	var0000 = SELINA->get_item_flag(IN_PARTY);
 	if (gflags[0x01EA]) {
 		if (var0000) {
-			0xFFD4->show_npc_face0(0x0000);
+			SELINA->show_npc_face0(0x0000);
 			say("\"We are attacked again! Now that we have the gold, I think that it is time for me to use my Blink Ring to escape.\"");
 			say("\"I shall see thee at the inn!\"");
-			var0001 = 0xFFD4->get_object_position();
+			var0001 = SELINA->get_object_position();
 			UI_sprite_effect(ANIMATION_TELEPORT, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			0xFFD4->remove_from_party();
+			SELINA->remove_from_party();
 			Func0862();
-			0xFFD4->remove_npc();
+			SELINA->remove_npc();
 		}
 		0xFFD3->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, NIGHT], [SLEEP, EAT_AT_INN, TEND_SHOP, WANDER, EAT_AT_INN], [0x0516, 0x08F7, 0x04F7, 0x08CC, 0x050D, 0x08B6, 0x0516, 0x08A2, 0x04F7, 0x08CC]);
 		0xFFD3->run_schedule();
 		abort;
 	}
 	var0002 = Func097D(PARTY, 0x0001, 0x0286, QUALITY_ANY, 0x0002);
-	var0003 = 0xFFD4->find_nearby(0x0202, 0x001E, MASK_NONE);
+	var0003 = SELINA->find_nearby(0x0202, 0x001E, MASK_NONE);
 	if (var0002) {
 		gflags[0x01E6] = true;
 	}
@@ -68645,7 +68645,7 @@ void Func06C4 object#(0x6C4) () {
 				var0006->set_polymorph(0x0202);
 				var0006->reduce_health(0x0032, NORMAL_DAMAGE);
 			}
-			Func097F(0xFFD4, "@Oh, my!@", 0x0000);
+			Func097F(SELINA, "@Oh, my!@", 0x0000);
 			gflags[0x01EA] = true;
 			var0004 = script Func09A0(0x0005, 0x0001) after 7 ticks {
 				nohalt;
@@ -75074,19 +75074,19 @@ void Func073A object#(0x73A) () {
 
 	if (event == EGG) {
 		var0000 = get_object_position();
-		if (!0xFFD4->get_item_flag(IN_PARTY)) {
-			0xFFD4->move_object([0x0924, 0x01CF, 0x0000]);
-			0xFFD4->set_npc_id(0x0001);
+		if (!SELINA->get_item_flag(IN_PARTY)) {
+			SELINA->move_object([0x0924, 0x01CF, 0x0000]);
+			SELINA->set_npc_id(0x0001);
 			UI_sprite_effect(ANIMATION_TELEPORT, 0x0924, 0x01CF, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		}
-		0xFFD4->set_schedule_type(IN_COMBAT);
-		0xFFD4->set_alignment(EVIL);
-		0xFFD4->set_opponent(AVATAR);
-		0xFFD4->set_attack_mode(STRONGEST);
-		0xFFD4->set_oppressor(AVATAR);
-		0xFFD4->set_item_flag(SI_TOURNAMENT);
+		SELINA->set_schedule_type(IN_COMBAT);
+		SELINA->set_alignment(EVIL);
+		SELINA->set_opponent(AVATAR);
+		SELINA->set_attack_mode(STRONGEST);
+		SELINA->set_oppressor(AVATAR);
+		SELINA->set_item_flag(SI_TOURNAMENT);
 		gflags[0x024E] = true;
-		0xFFD4->item_say("@This should stop thee!@");
+		SELINA->item_say("@This should stop thee!@");
 		var0001 = UI_create_new_object(0x0300);
 		if (var0001) {
 			var0002 = UI_update_last_created([0x0928, 0x01DE, 0x0000]);
@@ -75124,7 +75124,7 @@ void Func073A object#(0x73A) () {
 		0xFF81->set_attack_mode(STRONGEST);
 		0xFF81->set_oppressor(AVATAR);
 		0xFF81->clear_item_flag(SI_TOURNAMENT);
-		var0005 = 0xFFD4->get_npc_object();
+		var0005 = SELINA->get_npc_object();
 		var0002 = script var0005 after 25 ticks {
 			nohalt;
 			call Func042C;
@@ -96846,12 +96846,12 @@ extern var Func09B3 0x9B3 (var var0000);
 void Func0861 0x861 () {
 	var var0000;
 
-	if (0xFFD4->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY)) {
+	if (SELINA->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY)) {
 		say("\"I have many items in my possession which may aid thee. Wouldst thou like to have them?\"");
 		if (Func0955()) {
 			say("\"Here they are.\"");
 			gflags[0x0011] = false;
-			var0000 = Func09B3(0xFFD4);
+			var0000 = Func09B3(SELINA);
 			if (var0000[0x0001] != 0x0000) {
 				say("\"Thy companions will have to help thee carry some of these things.\"");
 			}
@@ -96880,8 +96880,8 @@ void Func0862 0x862 () {
 	var var0003;
 	var var0004;
 
-	var0000 = 0xFFD4->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
-	var0001 = 0xFFD4->get_object_position();
+	var0000 = SELINA->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
+	var0001 = SELINA->get_object_position();
 	for (var0004 in var0000 with var0002 to var0003) {
 		if (!((var0004->get_item_shape() == 0x0128) && (var0004->get_item_frame() == 0x0002))) {
 			var0004 = var0004->set_last_created();
@@ -111797,7 +111797,7 @@ var Func098C 0x98C () {
 var Func098D 0x98D () {
 	var var0000;
 
-	var0000 = [DUPRE, SHAMINO, IOLO, 0xFF6B, PETRA, MORTEGRO, 0xFFD3, BOYDON, 0xFFD4, 0xFF68, 0xFF58];
+	var0000 = [DUPRE, SHAMINO, IOLO, 0xFF6B, PETRA, MORTEGRO, 0xFFD3, BOYDON, SELINA, 0xFF68, 0xFF58];
 	return var0000;
 }
 

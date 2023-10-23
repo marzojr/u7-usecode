@@ -3511,8 +3511,8 @@ void Func01F7 shape#(0x1F7) () {
 		if (in_usecode()) {
 			return;
 		}
-		if (0xFFD4->npc_nearby()) {
-			0xFFD4->say("\"Now is the time for the young and the old to dig in their pockets and give up the gold. * Dost thou wish to donate a gold piece?\"");
+		if (CARROCIO->npc_nearby()) {
+			CARROCIO->say("\"Now is the time for the young and the old to dig in their pockets and give up the gold. * Dost thou wish to donate a gold piece?\"");
 			if (Func090A()) {
 				var0000 = UI_remove_party_items(0x0001, 0x0284, QUALITY_ANY, FRAME_ANY, TEMPORARY_ANY);
 				var0000 = script item {
@@ -3538,7 +3538,7 @@ void Func01F7 shape#(0x1F7) () {
 					sfx 85;
 				};
 			}
-			0xFFD4->hide();
+			CARROCIO->hide();
 		}
 	}
 }
@@ -6558,8 +6558,8 @@ void Func02E7 shape#(0x2E7) () {
 				nohalt;
 				sfx 24;
 			};
-			if (0xFFD4->npc_nearby() && Func0937(0xFFD4)) {
-				var0004 = script 0xFFD4 after 15 ticks {
+			if (CARROCIO->npc_nearby() && Func0937(CARROCIO)) {
+				var0004 = script CARROCIO after 15 ticks {
 					nohalt;
 					say "@Avatar wins a Dragon!@";
 				};
@@ -17532,10 +17532,10 @@ void Func042C object#(0x42C) () {
 	var var0009;
 
 	if (event == DOUBLECLICK) {
-		0xFFD4->show_npc_face(0x0000);
+		CARROCIO->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFFD4->get_npc_object()->get_schedule_type();
+		var0002 = CARROCIO->get_npc_object()->get_schedule_type();
 		var0003 = UI_is_pc_female();
 		var0004 = Func08F7(SPARK);
 		add(["name", "job", "bye"]);
@@ -17670,7 +17670,7 @@ void Func042C object#(0x42C) () {
 	}
 	if (event == PROXIMITY) {
 		var0001 = UI_part_of_day();
-		var0002 = 0xFFD4->get_npc_object()->get_schedule_type();
+		var0002 = CARROCIO->get_npc_object()->get_schedule_type();
 		var0008 = UI_die_roll(0x0001, 0x0004);
 		if (var0002 == TEND_SHOP) {
 			if ((var0001 == MORNING) || ((var0001 == NOON) || ((var0001 == AFTERNOON) || (var0001 == EVENING)))) {
@@ -17686,10 +17686,10 @@ void Func042C object#(0x42C) () {
 				if (var0008 == 0x0004) {
 					var0009 = "@Measure thy might!@";
 				}
-				0xFFD4->item_say(var0009);
+				CARROCIO->item_say(var0009);
 			}
 		} else {
-			Func092E(0xFFD4);
+			Func092E(CARROCIO);
 		}
 	}
 }
