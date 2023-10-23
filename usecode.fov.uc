@@ -17193,7 +17193,7 @@ void Func042A object#(0x42A) () {
 	var var000F;
 
 	if (event == DOUBLECLICK) {
-		0xFFD6->show_npc_face(0x0000);
+		CYNTHIA->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
 		add(["name", "job", "bye"]);
@@ -17280,7 +17280,7 @@ void Func042A object#(0x42A) () {
 				fallthrough;
 
 			case "exchange":
-				var0003 = 0xFFD6->get_npc_object()->get_schedule_type();
+				var0003 = CYNTHIA->get_npc_object()->get_schedule_type();
 				if (var0003 == DESK_WORK) {
 					say("\"Dost thou have some gold that thou wouldst like to exchange?\"");
 					var0004 = Func090A();
@@ -17337,7 +17337,7 @@ void Func042A object#(0x42A) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFD6);
+		Func092E(CYNTHIA);
 	}
 }
 

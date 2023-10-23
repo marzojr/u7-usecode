@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, 0xFFD6, 0xFFD5, GOBLIN_MESSENGER, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, 0xFFD5, GOBLIN_MESSENGER, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -7546,7 +7546,7 @@ void Func01C7 shape#(0x1C7) () {
 			Func097F(IOLO, "@Do not despair!@", 0x0014);
 			Func097F(SHAMINO, "@We shall wait for thee!@", 0x000C);
 			Func097F(BOYDON, (((("@" + var0004) + " is a dead ") + var0005) + "!@"), 0x0000);
-			Func097F(0xFFD6, "@He made me do it...@", 0x000C);
+			Func097F(FLINDO, "@He made me do it...@", 0x000C);
 			var000A = script AVATAR {
 				nohalt;
 				wait 2;
@@ -7676,7 +7676,7 @@ void Func01C7 shape#(0x1C7) () {
 		if (FILBERCIO->get_npc_id() == 0x0006) {
 			FILBERCIO->set_npc_id(0x0007);
 			UI_init_conversation();
-			0xFFD6->show_npc_face0(0x0000);
+			FLINDO->show_npc_face0(0x0000);
 			say("\"I did travel with this person upon my recent voyage from the Inn of the Sleeping Bull, and I had many long talks with ",
 				var0003,
 				".\"");
@@ -7711,7 +7711,7 @@ void Func01C7 shape#(0x1C7) () {
 			say("\"Thanks for thy witness, good merchant.\"");
 			UI_end_conversation();
 			Func097F(FILBERCIO, "@Thou mayest be seated.@", 0x0000);
-			var000A = script 0xFFD6 {
+			var000A = script FLINDO {
 				nohalt;
 				actor frame bowing;
 				actor frame sitting;
@@ -7763,7 +7763,7 @@ void Func01C7 shape#(0x1C7) () {
 				actor frame bowing;
 				actor frame sitting;
 			};
-			var000A = script 0xFFD6 after 5 ticks {
+			var000A = script FLINDO after 5 ticks {
 				nohalt;
 				actor frame bowing;
 				actor frame standing;
@@ -7960,9 +7960,9 @@ void Func01C7 shape#(0x1C7) () {
 				actor frame bowing;
 				actor frame sitting;
 			};
-			0xFFD6->set_schedule_type(WAIT);
-			0xFFD6->move_object([0x0938, 0x0754, 0x0000]);
-			var000A = script 0xFFD6 after 12 ticks {
+			FLINDO->set_schedule_type(WAIT);
+			FLINDO->move_object([0x0938, 0x0754, 0x0000]);
+			var000A = script FLINDO after 12 ticks {
 				nohalt;
 				face west;
 				actor frame bowing;
@@ -22949,7 +22949,7 @@ void Func040D object#(0x40D) () {
 		if (gflags[0x00EA] && (!ROTOLUNCIA->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
-		if (Func0942(0xFFD6)) {
+		if (Func0942(FLINDO)) {
 			var0009 = 0x0001;
 		}
 		add(["information", "bye"]);
@@ -32162,7 +32162,7 @@ void Func0428 object#(0x428) () {
 	var0004 = Func0953();
 	var0005 = "lad";
 	var0006 = Func0994();
-	var0007 = Func0942(0xFFD6);
+	var0007 = Func0942(FLINDO);
 	var0008 = Func0942(ARGUS);
 	var0009 = Func0942(0xFFAF);
 	if (var0003 == true) {
@@ -32333,7 +32333,7 @@ void Func0428 object#(0x428) () {
 			case "Flindo":
 				say("\"That worm!\" ~\"He'd spit in yer last cup of grog he would, if he thought he could make money off it!\"");
 				if (var0007 == true) {
-					0xFFD6->show_npc_face1(0x0000);
+					FLINDO->show_npc_face1(0x0000);
 					say("\"Thou art a fine one to talk, thou bilge-water rat!\" ~\"Thou wouldst hold an honest merchant hostage to thy drinking sprees!\"");
 					0x0000->set_conversation_slot();
 					say("\"Why, thou overgrown dung beetle!\" ~\"I told ye when I landed that those seas were no safe place ta be with these forsaken storms!\" *\"And thou shouldst suck salt spray for days on end, ye 'honest' merchant!\" ~\"Then thou'd know the difference between a drunk and a man with a thirst!\"");
@@ -32854,14 +32854,14 @@ void Func042A object#(0x42A) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	var0003 = 0xFFD6->get_schedule_type();
+	var0003 = FLINDO->get_schedule_type();
 	var0004 = Func0994();
 	if (event == PROXIMITY) {
 		if (var0003 == PATROL) {
-			var0005 = 0xFFD6->find_nearby(0x025F, 0x0002, MASK_EGG);
+			var0005 = FLINDO->find_nearby(0x025F, 0x0002, MASK_EGG);
 			var0006 = var0005->get_item_quality();
 			if (var0006 == 0x000F) {
-				0xFFD6->set_schedule_type(WAIT);
+				FLINDO->set_schedule_type(WAIT);
 				var0007 = script item {
 					nohalt;
 					step south;
@@ -32876,15 +32876,15 @@ void Func042A object#(0x42A) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@May we speak?@");
-		0xFFD6->Func07D1();
-		Func097F(0xFFD6, "@I have little time!@", 0x0002);
-		0xFFD6->set_schedule_type(TALK);
+		FLINDO->Func07D1();
+		Func097F(FLINDO, "@I have little time!@", 0x0002);
+		FLINDO->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFD6->run_schedule();
-		0xFFD6->clear_item_say();
-		0xFFD6->show_npc_face0(0x0000);
-		var0009 = 0xFFD6->get_item_flag(MET);
+		FLINDO->run_schedule();
+		FLINDO->clear_item_say();
+		FLINDO->show_npc_face0(0x0000);
+		var0009 = FLINDO->get_item_flag(MET);
 		if (gflags[0x0004] == true) {
 			say("\"So, thou art still alive!\" ~\"I had wondered when thy companion arrived in such a strange state.\"");
 			say("\"I never thought I would live to see mighty Moonshade humbled, but Shamino hath certainly managed it quite handily.\"");
@@ -32899,7 +32899,7 @@ void Func042A object#(0x42A) () {
 			} else {
 				say("\"The name is Flindo. I own a provisioning shop in Moonshade and have many important connections there.\"");
 			}
-			0xFFD6->set_item_flag(MET);
+			FLINDO->set_item_flag(MET);
 		} else {
 			say("\"Returned again?\"");
 		}
@@ -33355,7 +33355,7 @@ void Func042A object#(0x42A) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Thanks for thine help.@", 0x0000);
-				Func097F(0xFFD6, "@Whatever...@", 0x0005);
+				Func097F(FLINDO, "@Whatever...@", 0x0005);
 				Func08FF();
 				break;
 		}
@@ -78303,7 +78303,7 @@ void Func07B3 object#(0x7B3) () {
 				var0003 = UI_update_last_created([0x056E, 0x08A4, 0x0001]);
 			}
 			var0005 = [0x0551, 0x08A7, 0x0002];
-			var0006 = [HAWK, 0xFFD6, ALE, 0xFFD5];
+			var0006 = [HAWK, FLINDO, ALE, 0xFFD5];
 			for (var0009 in var0006 with var0007 to var0008) {
 				var0009->move_object(var0005);
 				var0009->set_new_schedules([MIDNIGHT], [PATROL], [0x055B, 0x08A7]);
@@ -78776,7 +78776,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(MOSH, 0x0948, 0x0784, WAIT);
 		Func09AC(FILBERCIO, 0x0972, 0x0744, WAIT);
 		Func09AC(FRIGIDAZZI, 0x0977, 0x0743, WAIT);
-		Func09AC(0xFFD6, 0x0994, 0x0754, WAIT);
+		Func09AC(FLINDO, 0x0994, 0x0754, WAIT);
 		Func09AC(0xFFD5, 0x0902, 0x0746, WAIT);
 		Func09AC(GOBLIN_MESSENGER, 0x08B6, 0x0736, WAIT);
 		Func09AC(EDRIN, 0x08C2, 0x0705, WAIT);
@@ -79684,7 +79684,7 @@ void Func07E4 object#(0x7E4) () {
 		HAWK->set_schedule_type(WANDER);
 		0xFFD5->set_schedule_type(WANDER);
 		ALE->set_schedule_type(WANDER);
-		0xFFD6->set_schedule_type(WANDER);
+		FLINDO->set_schedule_type(WANDER);
 		var0002->set_barge_dir(EAST);
 		var0003 = new script {
 			finish;
@@ -79818,7 +79818,7 @@ void Func07E5 object#(0x7E5) () {
 		var0008 = ["@Oh!@", "@Whee!@", "@Ouch!@", "@Whoa!@"];
 		var0009 = UI_die_roll(0x0001, UI_get_array_size(var0008));
 		var000A = var0008[var0009];
-		var000B = [0xFFD5, ALE, HAWK, 0xFFD6];
+		var000B = [0xFFD5, ALE, HAWK, FLINDO];
 		var000C = UI_die_roll(0x0001, UI_get_array_size(var000B));
 		var000D = var000B[var000C];
 		var000D->item_say(var000A);
@@ -79876,7 +79876,7 @@ void Func07E6 object#(0x7E6) () {
 	HAWK->clear_item_flag(DONT_MOVE);
 	ALE->set_item_flag(CAN_FLY);
 	AUTO_MESSENGER->set_item_flag(SI_TOURNAMENT);
-	var0004 = [HAWK, 0xFFD6, ALE, 0xFFD5];
+	var0004 = [HAWK, FLINDO, ALE, 0xFFD5];
 	var0005 = [0x08AC, 0x0718];
 	var0006 = [0x07BA, 0x08D3];
 	var0007 = [0x08C8, 0x0716];
@@ -79886,7 +79886,7 @@ void Func07E6 object#(0x7E6) () {
 	var000A = [0x08CB, 0x074A];
 	var000B = [0x087E, 0x0747];
 	var000C = [0x0942, 0x077E];
-	0xFFD6->set_new_schedules([MIDNIGHT, MORNING, AFTERNOON, EVENING, NIGHT], [SLEEP, EAT_AT_INN, TEND_SHOP, TEND_SHOP, TEND_SHOP], [var0008, var0009, var000A, var000B, var000C]);
+	FLINDO->set_new_schedules([MIDNIGHT, MORNING, AFTERNOON, EVENING, NIGHT], [SLEEP, EAT_AT_INN, TEND_SHOP, TEND_SHOP, TEND_SHOP], [var0008, var0009, var000A, var000B, var000C]);
 	var000D = [0x08BD, 0x0713];
 	var000E = [0x0893, 0x0718];
 	ALE->set_new_schedules([DAWN, MORNING, NIGHT], [WANDER, HOUND, STANDTHERE], [var000D, var000D, var000E]);
@@ -106386,8 +106386,8 @@ void Func0901 0x901 () {
 	var000C = [0x08CB, 0x074A];
 	var000D = [0x087E, 0x0747];
 	var000E = [0x0942, 0x077E];
-	0xFFD6->set_new_schedules([MIDNIGHT, MORNING, AFTERNOON, EVENING, NIGHT], [SLEEP, EAT_AT_INN, TEND_SHOP, TEND_SHOP, TEND_SHOP], [var000A, var000B, var000C, var000D, var000E]);
-	0xFFD6->set_schedule_type(MAJOR_SIT);
+	FLINDO->set_new_schedules([MIDNIGHT, MORNING, AFTERNOON, EVENING, NIGHT], [SLEEP, EAT_AT_INN, TEND_SHOP, TEND_SHOP, TEND_SHOP], [var000A, var000B, var000C, var000D, var000E]);
+	FLINDO->set_schedule_type(MAJOR_SIT);
 	0xFFD5->set_new_schedules(MIDNIGHT, MAJOR_SIT, [0x09A6, 0x07F8]);
 	0xFFD5->run_schedule();
 	ALE->set_new_schedules(MIDNIGHT, WANDER, [0x09A7, 0x07F7]);
@@ -112773,7 +112773,7 @@ var Func09AE 0x9AE (var var0000) {
 			Func097F(BUCIA, "@Have a nice day!@", 0x0000);
 			gflags[0x0103] = true;
 			if (BUCIA->get_schedule_type() == TEND_SHOP) {
-				Func094E(0xFFD6, "@I do not pay thee to stand jabbering, Bucia.@");
+				Func094E(FLINDO, "@I do not pay thee to stand jabbering, Bucia.@");
 				0x0000->set_conversation_slot();
 				say("\"I must be getting back to work now. But it hath been nice talking with thee.\"");
 				if (BUCIA->get_npc_id() < 0x000F) {
