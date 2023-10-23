@@ -9540,7 +9540,7 @@ void Func0401 object#(0x401) () {
 				music 35, 1;
 				say "@There, there...@";
 			};
-			var0005 = script 0xFFF5->get_npc_object() after 16 ticks {
+			var0005 = script PETRE->get_npc_object() after 16 ticks {
 				nohalt;
 				say "@'Tis horrible!@";
 			};
@@ -9548,7 +9548,7 @@ void Func0401 object#(0x401) () {
 				nohalt;
 				say "@I know, 'tis shocking!@";
 			};
-			var0005 = script 0xFFF5->get_npc_object() after 49 ticks {
+			var0005 = script PETRE->get_npc_object() after 49 ticks {
 				nohalt;
 				say "@Who could have done it?@";
 			};
@@ -9556,7 +9556,7 @@ void Func0401 object#(0x401) () {
 				nohalt;
 				say "@I know not...@";
 			};
-			var0005 = script 0xFFF5->get_npc_object() after 81 ticks {
+			var0005 = script PETRE->get_npc_object() after 81 ticks {
 				nohalt;
 				say "@He had no enemies...@";
 			};
@@ -9564,7 +9564,7 @@ void Func0401 object#(0x401) () {
 				nohalt;
 				say "@Poor man.@";
 			};
-			var0005 = script 0xFFF5->get_npc_object() after 113 ticks {
+			var0005 = script PETRE->get_npc_object() after 113 ticks {
 				nohalt;
 				say "@What is to be done?@";
 			};
@@ -9584,7 +9584,7 @@ void Func0401 object#(0x401) () {
 			var0000,
 			", that it hath been 200 Britannian years since we last met? Why, thou hast not aged at all!\"");
 		say("Iolo winks conspiratorially. He whispers, \"Due no doubt to the difference in the structure of time in our original homeland and that of Britannia?\"~~He resumes speaking aloud. \"I have aged a little, as thou canst see. But of course, I have stayed here in Britannia all this time.~~\"Oh, but Avatar! Wait until I tell the others! They will be happy to see thee! Welcome to Trinsic!\"*");
-		0xFFF5->show_npc_face(0x0000);
+		PETRE->show_npc_face(0x0000);
 		if (var0004) {
 			var0006 = "her";
 		} else {
@@ -9593,7 +9593,7 @@ void Func0401 object#(0x401) () {
 		say("The distraught peasant interrupts Iolo. \"Show ",
 			var0006,
 			" the stables, milord. 'Tis horrible!\"*");
-		0xFFF5->hide();
+		PETRE->hide();
 		IOLO->say("Iolo nods, his joy fading quickly as he is reminded of the reason he was standing there in the first place.~~ \"Ah, yes. Our friend Petre here discovered something truly ghastly this morning. Take a look inside the stables. I shall accompany thee.\"");
 		if (!UI_mouse_exists()) {
 			say("Iolo takes you aside and whispers, \"Avatar, for the sake of our mutual sanity, I strongly suggest that thou shouldst purchase a mouse.\"");
@@ -9606,10 +9606,10 @@ void Func0401 object#(0x401) () {
 		};
 		Func08DD();
 		IOLO->add_to_party();
-		0xFFF5->get_npc_object()->set_schedule_type(TEND_SHOP);
+		PETRE->get_npc_object()->set_schedule_type(TEND_SHOP);
 		0xFFF4->get_npc_object()->set_schedule_type(TALK);
 		IOLO->get_npc_object()->halt_scheduled();
-		0xFFF5->get_npc_object()->halt_scheduled();
+		PETRE->get_npc_object()->halt_scheduled();
 		if (!gflags[0x003B]) {
 			var0005 = script item {
 				nohalt;
@@ -9625,7 +9625,7 @@ void Func0401 object#(0x401) () {
 		var0002 = IOLO->get_npc_object();
 		var0003 = Func0909();
 		IOLO->show_npc_face(0x0000);
-		var0008 = Func08F7(0xFFF5);
+		var0008 = Func08F7(PETRE);
 		var0009 = Func08F7(SHAMINO);
 		var000A = false;
 		var000B = false;
@@ -12560,7 +12560,7 @@ void Func040B object#(0x40B) () {
 		var0001 = UI_get_party_list();
 		var0002 = UI_is_pc_female();
 		add(["name", "job", "bye"]);
-		0xFFF5->show_npc_face(0x0000);
+		PETRE->show_npc_face(0x0000);
 		if (!gflags[0x0014]) {
 			if (var0002) {
 				var0003 = "woman";
@@ -12580,7 +12580,7 @@ void Func040B object#(0x40B) () {
 					var0000,
 					".\"");
 				gflags[0x004B] = true;
-				0xFFF5->set_schedule_type(LOITER);
+				PETRE->set_schedule_type(LOITER);
 			} else {
 				say("Petre looks confused. \"Thou shouldst not make fun of me!\" He turns away.*");
 				gflags[0x004B] = true;
@@ -12691,7 +12691,7 @@ void Func040B object#(0x40B) () {
 		say("\"Goodbye,\" the man sniffs.*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFF5);
+		Func092E(PETRE);
 	}
 }
 
@@ -12812,11 +12812,11 @@ void Func040C object#(0x40C) () {
 				say("\"A horrible murder has occurred. If thou art truly the Avatar, perhaps thou canst help us solve it. I would feel better if thou takest this matter into thine hands. Thou shalt be handsomely rewarded if thou dost discover the name of the killer. Dost thou accept?\"");
 				var0005 = Func090A();
 				if (var0005) {
-					var0007 = Func08F7(0xFFF5);
+					var0007 = Func08F7(PETRE);
 					if (var0007) {
 						say("\"Petre here knows something about all of this.\"*");
-						0xFFF5->say("The peasant interjects. \"I discovered poor Christopher and the Gargoyle Inamo early this morning.\"*");
-						0xFFF5->hide();
+						PETRE->say("The peasant interjects. \"I discovered poor Christopher and the Gargoyle Inamo early this morning.\"*");
+						PETRE->hide();
 					} else {
 						0xFFF4->say("\"Petre, the stables caretaker, discovered poor Christopher and Inamo early this morning.\"");
 					}
@@ -68455,11 +68455,11 @@ void Func0883 0x883 () {
 	var var0000;
 
 	0xFFF4->show_npc_face(0x0000);
-	var0000 = Func08F7(0xFFF5);
+	var0000 = Func08F7(PETRE);
 	if (var0000) {
 		say("\"Petre here knows something about all of this.\"*");
-		0xFFF5->say("The peasant interjects. \"I discovered poor Christopher and the Gargoyle Inamo early this morning.\"*");
-		0xFFF5->hide();
+		PETRE->say("The peasant interjects. \"I discovered poor Christopher and the Gargoyle Inamo early this morning.\"*");
+		PETRE->hide();
 	} else {
 		0xFFF4->say("\"Petre the stables caretaker discovered poor Christopher and Inamo early this morning.\"");
 	}
