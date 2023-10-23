@@ -16122,7 +16122,7 @@ void Func0421 object#(0x421) () {
 	var var0003;
 
 	if (event == DOUBLECLICK) {
-		0xFFDF->show_npc_face(0x0000);
+		NICHOLAS->show_npc_face(0x0000);
 		var0000 = Func08F7(0xFFDE);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x00A2]) {
@@ -16136,7 +16136,7 @@ void Func0421 object#(0x421) () {
 				if (var0000) {
 					0xFFDE->say("\"His name is Nicholas.\"");
 					0xFFDE->hide();
-					0xFFDF->show_npc_face(0x0000);
+					NICHOLAS->show_npc_face(0x0000);
 				} else {
 					say("\"Nick-las\".");
 				}
@@ -16144,17 +16144,17 @@ void Func0421 object#(0x421) () {
 				fallthrough;
 
 			case "job":
-				var0001 = 0xFFDF->get_schedule_type();
+				var0001 = NICHOLAS->get_schedule_type();
 				if (var0001 == KID_GAMES) {
 					say("The toddler is obviously deeply engaged in a game of tag and will not stop to speak.*");
 					abort;
 				}
 				if (var0000) {
 					0xFFDE->say("\"Why, his job is to wet his diaper! Is that not right, Nicholas?\" Nanna says in baby-talk.");
-					0xFFDF->say("\"Whee! Dia-per!\"");
+					NICHOLAS->say("\"Whee! Dia-per!\"");
 					0xFFDE->say("\"Nicholas is one of our orphans. He was left in front of the castle one morning. 'Tis a sad state of affairs when this kind of thing happens.\"");
 					0xFFDE->hide();
-					0xFFDF->show_npc_face(0x0000);
+					NICHOLAS->show_npc_face(0x0000);
 				} else {
 					say("\"Whee! Dia-per!\"");
 				}
@@ -16187,7 +16187,7 @@ void Func0421 object#(0x421) () {
 		say("\"Bye bye!\"*");
 	}
 	if (event == PROXIMITY) {
-		var0001 = 0xFFDF->get_npc_object()->get_schedule_type();
+		var0001 = NICHOLAS->get_npc_object()->get_schedule_type();
 		if (var0001 == KID_GAMES) {
 			var0002 = UI_die_roll(0x0001, 0x0004);
 			if (var0002 == 0x0001) {
@@ -16202,7 +16202,7 @@ void Func0421 object#(0x421) () {
 			if (var0002 == 0x0004) {
 				var0003 = "@Tag! Whee!@";
 			}
-			0xFFDF->item_say(var0003);
+			NICHOLAS->item_say(var0003);
 		}
 	}
 }
