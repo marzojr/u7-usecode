@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, 0xFFD6, 0xFFD5, GOBLIN_MESSENGER, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, 0xFFD6, 0xFFD5, GOBLIN_MESSENGER, EDRIN, COLUMNA, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, ARGUS, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -31399,47 +31399,47 @@ void Func0426 object#(0x426) () {
 	var0005 = false;
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Hello!@");
-		0xFFDA->Func07D1();
-		Func097F(0xFFDA, (("@Yes, " + var0000) + "?@"), 0x0002);
-		0xFFDA->set_schedule_type(TALK);
+		ARGUS->Func07D1();
+		Func097F(ARGUS, (("@Yes, " + var0000) + "?@"), 0x0002);
+		ARGUS->set_schedule_type(TALK);
 	}
 	if (event == PROXIMITY) {
 		var0006 = UI_get_random(0x0006);
 		if (var0006 == 0x0001) {
-			0xFFDA->item_say("@Dost thou want a drink?@");
+			ARGUS->item_say("@Dost thou want a drink?@");
 		}
 		if (var0006 == 0x0002) {
-			0xFFDA->item_say("@Art thou hungry?@");
+			ARGUS->item_say("@Art thou hungry?@");
 		}
 		if (var0006 == 0x0003) {
 			if (Func0942(0xFFD9)) {
-				0xFFDA->item_say("@Sing us a song, Byrin!@");
+				ARGUS->item_say("@Sing us a song, Byrin!@");
 			} else {
-				0xFFDA->item_say("@Have some ale.@");
+				ARGUS->item_say("@Have some ale.@");
 			}
 		}
 		if (var0006 == 0x0004) {
-			0xFFDA->item_say("@Dost thou want a room?@");
+			ARGUS->item_say("@Dost thou want a room?@");
 		}
 		if (var0006 == 0x0005) {
-			0xFFDA->item_say("@No brawls!@");
+			ARGUS->item_say("@No brawls!@");
 		}
 		if (var0006 == 0x0006) {
-			0xFFDA->item_say("@Do not break the chairs!@");
+			ARGUS->item_say("@Do not break the chairs!@");
 		}
 	}
 	if (event == STARTED_TALKING) {
-		0xFFDA->run_schedule();
-		0xFFDA->clear_item_say();
-		0xFFDA->show_npc_face0(0x0000);
-		var0007 = 0xFFDA->get_item_flag(MET);
+		ARGUS->run_schedule();
+		ARGUS->clear_item_say();
+		ARGUS->show_npc_face0(0x0000);
+		var0007 = ARGUS->get_item_flag(MET);
 		if (var0007 == false) {
 			if (gflags[0x003E] == true) {
 				say("\"Greetings, fellow Pikeman!\" ~\"Come in outta them strange storms and rest a bit...\" *\"This be the Inn of the Sleeping Bull.\" *\"And I be Argus, the innkeeper.\"");
 			} else {
 				say("\"Greetings, stranger.\" *\"Come in outta them strange storms and rest a bit...\" *\"This be the Inn of the Sleeping Bull.\" *\"And I be Argus, the innkeeper.\"");
 			}
-			0xFFDA->set_item_flag(MET);
+			ARGUS->set_item_flag(MET);
 		} else {
 			say("\"Welcome back, ",
 				var0002,
@@ -31680,11 +31680,11 @@ void Func0426 object#(0x426) () {
 
 			case "don't apologize":
 				say("\"So be it then!\" ~\"Prepare thyself to be thrashed!\"");
-				Func09AD(0xFFDA);
+				Func09AD(ARGUS);
 				abort;
 
 			case "food":
-				if ((0xFFDA->get_schedule_type() == TEND_SHOP) || (0xFFDA->get_schedule_type() == WAITER)) {
+				if ((ARGUS->get_schedule_type() == TEND_SHOP) || (ARGUS->get_schedule_type() == WAITER)) {
 					if (!var0005) {
 						say("\"Mother doth do all the cooking here... and she is very good.\"");
 						if (var0003 == true) {
@@ -31704,7 +31704,7 @@ void Func0426 object#(0x426) () {
 				fallthrough;
 
 			case "drink":
-				if ((0xFFDA->get_schedule_type() == TEND_SHOP) || (0xFFDA->get_schedule_type() == WAITER)) {
+				if ((ARGUS->get_schedule_type() == TEND_SHOP) || (ARGUS->get_schedule_type() == WAITER)) {
 					say("\"I am certain our selection will please thee, ",
 						var0000,
 						".\"");
@@ -31742,7 +31742,7 @@ void Func0426 object#(0x426) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Farewell!@", 0x0000);
-				Func097F(0xFFDA, "@Come again!@", 0x0002);
+				Func097F(ARGUS, "@Come again!@", 0x0002);
 				break;
 		}
 	}
@@ -32163,7 +32163,7 @@ void Func0428 object#(0x428) () {
 	var0005 = "lad";
 	var0006 = Func0994();
 	var0007 = Func0942(0xFFD6);
-	var0008 = Func0942(0xFFDA);
+	var0008 = Func0942(ARGUS);
 	var0009 = Func0942(0xFFAF);
 	if (var0003 == true) {
 		var0005 = "lass";
@@ -32343,7 +32343,7 @@ void Func0428 object#(0x428) () {
 					0x0000->set_conversation_slot();
 					say("\"Thief, is it!? When I turned down every offer thou didst make ta make me sail out ta sea again?\" ~\"And I fear nothing the sea can throw at me, thou barnacle!\" *\"But I'll not deal with things born of magics, for I'm no fool and no mage!\" ~\"And I warned ye about saying false ta my name before...\"");
 					if (var0008 == true) {
-						0xFFDA->show_npc_face1(0x0000);
+						ARGUS->show_npc_face1(0x0000);
 						say("\"Now stop that, both of you!\" ~\"This is precisely what happened before!\" *\"If thou dost break any more of my furniture, I will break thine head for thee!\"");
 						UI_remove_npc_face1();
 					}
@@ -32526,7 +32526,7 @@ void Func0429 object#(0x429) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	var0003 = Func0942(0xFFDA);
+	var0003 = Func0942(ARGUS);
 	var0004 = false;
 	var0005 = false;
 	var0006 = UI_part_of_day();
@@ -32556,9 +32556,9 @@ void Func0429 object#(0x429) () {
 			0xFFD7->item_say("@Good, clean rooms!@");
 		}
 		if (var0007 == 0x0005) {
-			if (Func0942(0xFFDA)) {
+			if (Func0942(ARGUS)) {
 				0xFFD7->item_say("@We need more clean mugs, son!@");
-				Func097F(0xFFDA, "@Aye, mother!@", 0x0002);
+				Func097F(ARGUS, "@Aye, mother!@", 0x0002);
 			} else {
 				0xFFD7->item_say("@Mine aching back!@");
 			}
@@ -32609,12 +32609,12 @@ void Func0429 object#(0x429) () {
 				} else {
 					say("\"Well, I still think 'tis the work of them mages! No good comes of controlling that type of power, I'll tell thee...\"");
 					if (var0003 == true) {
-						0xFFDA->show_npc_face1(0x0000);
+						ARGUS->show_npc_face1(0x0000);
 						say("\"Aye, mother. And thou wilt tell all who will listen! Do not harass what few customers we do have...\"");
 						UI_remove_npc_face1();
 						0x0000->set_conversation_slot();
 						say("\"Hast thou ever heard a boy so rude as to talk to his mother that way?\"");
-						0xFFDA->show_npc_face1(0x0000);
+						ARGUS->show_npc_face1(0x0000);
 						say("\"I am no boy, mother. For now, I'm the innkeeper here and I'll thank thee to remember that we have a mage staying here now.\"");
 						UI_remove_npc_face1();
 						0x0000->set_conversation_slot();
@@ -34394,7 +34394,7 @@ void Func042D object#(0x42D) () {
 			0xFFD3->item_say("@Where are the women?@");
 		}
 		if (var0007 == 0x0005) {
-			if (Func0942(0xFFDA)) {
+			if (Func0942(ARGUS)) {
 				0xFFD3->item_say("@Argus, thou art a coward!@");
 			} else {
 				0xFFD3->item_say("@I'm bored!@");
@@ -78821,7 +78821,7 @@ void Func07D8 object#(0x7D8) () {
 			var0001 = 0xFFC6->add_cont_items(0x0001, 0x0282, 0x007D, 0x0013, 0x0000);
 		}
 		Func09AC(0xFFAF, 0x0521, 0x08B8, WAIT);
-		Func09AC(0xFFDA, 0x04E8, 0x08B9, WAIT);
+		Func09AC(ARGUS, 0x04E8, 0x08B9, WAIT);
 		Func09AC(0xFFD9, 0x0517, 0x0893, WAIT);
 		Func09AC(0xFFD7, 0x04F8, 0x08A6, WAIT);
 		0xFFD3->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, NIGHT], [SLEEP, EAT, TALK, LOITER, EAT], [0x0516, 0x08F7, 0x04F7, 0x08CC, 0x050D, 0x08B6, 0x0516, 0x08A2, 0x04F7, 0x08CC]);
@@ -83747,10 +83747,10 @@ void Func0805 0x805 () {
 				".\"");
 		} else if (var000C == 0x0003) {
 			var000F = Func0992(0x0001, (("@But " + var0000) + ", we have not the coins to pay for this.@"), 0x0000, false);
-			if (0x001F < (0xFFDA->get_npc_id() + 0x0006)) {
-				0xFFDA->set_npc_id(0x001F);
+			if (0x001F < (ARGUS->get_npc_id() + 0x0006)) {
+				ARGUS->set_npc_id(0x001F);
 			} else {
-				0xFFDA->set_npc_id(0xFFDA->get_npc_id() + 0x0006);
+				ARGUS->set_npc_id(ARGUS->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Wouldst thou care for more?\"");
@@ -83856,10 +83856,10 @@ void Func0806 0x806 () {
 				say("\"I am afraid thou dost not have the money to pay, ",
 					var0000,
 					".\"");
-				if (0x001F < (0xFFDA->get_npc_id() + 0x0006)) {
-					0xFFDA->set_npc_id(0x001F);
+				if (0x001F < (ARGUS->get_npc_id() + 0x0006)) {
+					ARGUS->set_npc_id(0x001F);
 				} else {
-					0xFFDA->set_npc_id(0xFFDA->get_npc_id() + 0x0006);
+					ARGUS->set_npc_id(ARGUS->get_npc_id() + 0x0006);
 				}
 				abort;
 			}
@@ -83898,12 +83898,12 @@ var Func0807 0x807 (var var0000, var var0001) {
 	var0003 = UI_is_pc_female();
 	var0004 = var0000;
 	var0005 = (var0001 / 0x0003) * 0x0002;
-	var0006 = 0x000F - (0xFFDA->get_npc_id() / 0x0002);
+	var0006 = 0x000F - (ARGUS->get_npc_id() / 0x0002);
 	var0007 = 0x0000;
 	var0008 = 0x0001;
 	var0009 = 0x0000;
 	var000A = 0x0002;
-	var000B = 0xFFDA->get_npc_id();
+	var000B = ARGUS->get_npc_id();
 	while (var0008) {
 		var000C = Func0956(["yes", "no", "haggle"]);
 		if (var000C == "no") {
@@ -83988,7 +83988,7 @@ var Func0807 0x807 (var var0000, var var0001) {
 				"?\"");
 			if (Func0955()) {
 				if (var000B > 0x0001) {
-					0xFFDA->set_npc_id(var000B - 0x0002);
+					ARGUS->set_npc_id(var000B - 0x0002);
 				}
 				return var0004;
 			}
@@ -84002,9 +84002,9 @@ var Func0807 0x807 (var var0000, var var0001) {
 				say("\"Dost thou take me for a fool?\" ~\"I do not have all day to stand and argue!\"");
 			}
 			if (0x001F < (var000B + 0x000A)) {
-				0xFFDA->set_npc_id(0x001F);
+				ARGUS->set_npc_id(0x001F);
 			} else {
-				0xFFDA->set_npc_id(var000B + 0x000A);
+				ARGUS->set_npc_id(var000B + 0x000A);
 			}
 			return 0x0000;
 		}
@@ -84014,7 +84014,7 @@ var Func0807 0x807 (var var0000, var var0001) {
 					var0004,
 					" is my final offer.\" ~\"Dost thou accept?\"");
 				if (var000B < 0x001C) {
-					0xFFDA->set_npc_id(var000B + 0x0004);
+					ARGUS->set_npc_id(var000B + 0x0004);
 				}
 				if (Func0955()) {
 					return var0004;
@@ -84025,7 +84025,7 @@ var Func0807 0x807 (var var0000, var var0001) {
 					var0004,
 					" is my final offer.\"");
 				if (var000B < 0x001E) {
-					0xFFDA->set_npc_id(var000B + 0x0002);
+					ARGUS->set_npc_id(var000B + 0x0002);
 				}
 			}
 		} else {
@@ -84090,7 +84090,7 @@ var Func0807 0x807 (var var0000, var var0001) {
 					say("\"Mother, come and hear this! The customer jests with me!\"");
 					if (Func0942(0xFFD7)) {
 						Func094E(0xFFD7, (((("@" + var0002) + " we cannot possibly accept less than ") + var0004) + " gold coins.@"));
-						0xFFDA->show_npc_face0(0x0000);
+						ARGUS->show_npc_face0(0x0000);
 					} else {
 						say("\"",
 							var0004,
@@ -84111,7 +84111,7 @@ var Func0807 0x807 (var var0000, var var0001) {
 						" is where I stand!\"");
 				}
 				if (var000B < 0x001F) {
-					0xFFDA->set_npc_id(var000B + 0x0001);
+					ARGUS->set_npc_id(var000B + 0x0001);
 				}
 			}
 		}
@@ -88813,8 +88813,8 @@ var Func0820 0x820 (var var0000, var var0001) {
 				}
 				if (var0010 == 0x0003) {
 					say("\"It hath been quite a while since I was so defeated!\"");
-					if (Func0942(0xFFDA)) {
-						0xFFDA->show_npc_face1(0x0000);
+					if (Func0942(ARGUS)) {
+						ARGUS->show_npc_face1(0x0000);
 						say("\"To hear thee tell it, thou hast never been defeated, mother!\"");
 						UI_remove_npc_face1();
 						0x0000->set_conversation_slot();

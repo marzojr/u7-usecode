@@ -16725,10 +16725,10 @@ void Func0426 object#(0x426) () {
 	var var0006;
 
 	if (event == DOUBLECLICK) {
-		0xFFDA->show_npc_face(0x0000);
+		GREG->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFFDA->get_npc_object()->get_schedule_type();
+		var0002 = GREG->get_npc_object()->get_schedule_type();
 		var0003 = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
 		if (!gflags[0x00A7]) {
@@ -16843,7 +16843,7 @@ void Func0426 object#(0x426) () {
 	}
 	if (event == PROXIMITY) {
 		var0001 = UI_part_of_day();
-		var0002 = 0xFFDA->get_npc_object()->get_schedule_type();
+		var0002 = GREG->get_npc_object()->get_schedule_type();
 		var0005 = UI_die_roll(0x0001, 0x0004);
 		if (var0002 == TEND_SHOP) {
 			if (var0005 == 0x0001) {
@@ -16858,9 +16858,9 @@ void Func0426 object#(0x426) () {
 			if (var0005 == 0x0004) {
 				var0006 = "@Fine goods here!@";
 			}
-			0xFFDA->item_say(var0006);
+			GREG->item_say(var0006);
 		} else {
-			Func092E(0xFFDA);
+			Func092E(GREG);
 		}
 	}
 }
