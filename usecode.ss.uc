@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, 0xFFF3, 0xFFD8, 0xFFEA, 0xFFE8, 0xFFE9, 0xFFE2, 0xFFE0, 0xFFE3, 0xFFE5, 0xFFEE, 0xFFEC, 0xFFD6, 0xFFD5, 0xFFEB, 0xFFF0, 0xFFF2, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [0xFFC2, 0xFF6A, 0xFFB0, 0xFFC1, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, 0xFFD8, 0xFFEA, 0xFFE8, 0xFFE9, 0xFFE2, 0xFFE0, 0xFFE3, 0xFFE5, 0xFFEE, 0xFFEC, 0xFFD6, 0xFFD5, 0xFFEB, 0xFFF0, 0xFFF2, 0xFFD2, 0xFFD1, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFD0, 0xFFC8, 0xFFC7, 0xFFC6, 0xFFC4, 0xFFC3, 0xFFAF, 0xFFDA, 0xFFD9, 0xFFD7, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -7514,7 +7514,7 @@ void Func01C7 shape#(0x1C7) () {
 		if (0xFFEE->get_npc_id() == 0x000A) {
 			0xFFEE->set_npc_id(0x000B);
 			UI_init_conversation();
-			0xFFF3->show_npc_face0(0x0000);
+			BUCIA->show_npc_face0(0x0000);
 			say("\"Not that place! ",
 				var0004,
 				" shall never be seen alive again!\"");
@@ -7554,7 +7554,7 @@ void Func01C7 shape#(0x1C7) () {
 				wait 2;
 				face west;
 			};
-			var000A = script 0xFFF3 {
+			var000A = script BUCIA {
 				nohalt;
 				face west;
 				actor frame bowing;
@@ -7587,7 +7587,7 @@ void Func01C7 shape#(0x1C7) () {
 			say("\"As with all who offend the MageLord, this criminal must be sent to the hellhole known as Dungeon Freedom.\"");
 			UI_play_music(0x0017, Func09A0(0x0005, 0x0001));
 			UI_end_conversation();
-			var000A = script 0xFFF3 {
+			var000A = script BUCIA {
 				nohalt;
 				say "@Oh, no!@";
 				wait 2;
@@ -7728,7 +7728,7 @@ void Func01C7 shape#(0x1C7) () {
 		if (0xFFEE->get_npc_id() == 0x0005) {
 			0xFFEE->set_npc_id(0x0006);
 			UI_init_conversation();
-			0xFFF3->show_npc_face0(0x0000);
+			BUCIA->show_npc_face0(0x0000);
 			say("\"This stranger came into my shop and asked many strange and personal questions concerning the Sorceress Frigidazzi.\"");
 			var0016 = Func0956(["That's a lie", "I was only curious", "say nothing"]);
 			if (var0016 == "That's a lie") {
@@ -7758,7 +7758,7 @@ void Func01C7 shape#(0x1C7) () {
 			say("\"Let us hear from the next witness.\"");
 			UI_end_conversation();
 			Func097F(0xFFEE, "@Merchant Flindo!@", 0x0000);
-			var000A = script 0xFFF3 {
+			var000A = script BUCIA {
 				nohalt;
 				actor frame bowing;
 				actor frame sitting;
@@ -7809,7 +7809,7 @@ void Func01C7 shape#(0x1C7) () {
 				actor frame bowing;
 				actor frame sitting;
 			};
-			var000A = script 0xFFF3 after 5 ticks {
+			var000A = script BUCIA after 5 ticks {
 				nohalt;
 				actor frame bowing;
 				actor frame standing;
@@ -7950,9 +7950,9 @@ void Func01C7 shape#(0x1C7) () {
 				actor frame bowing;
 				actor frame sitting;
 			};
-			0xFFF3->set_schedule_type(WAIT);
-			0xFFF3->move_object([0x0938, 0x0756, 0x0000]);
-			var000A = script 0xFFF3 after 12 ticks {
+			BUCIA->set_schedule_type(WAIT);
+			BUCIA->move_object([0x0938, 0x0756, 0x0000]);
+			var000A = script BUCIA after 12 ticks {
 				nohalt;
 				wait 4;
 				say "@This should be interesting...@";
@@ -22834,7 +22834,7 @@ void Func040D object#(0x40D) () {
 	var var0010;
 
 	var0000 = false;
-	if (0xFFF3->get_schedule_type() == TEND_SHOP) {
+	if (BUCIA->get_schedule_type() == TEND_SHOP) {
 		var0000 = true;
 	}
 	var0001 = Func097D(PARTY, 0x0001, 0x034A, QUALITY_ANY, 0x000F);
@@ -22843,71 +22843,71 @@ void Func040D object#(0x40D) () {
 	var0004 = Func0953();
 	var0005 = 0x0000;
 	var0006 = false;
-	var0007 = 0xFFF3->get_item_flag(MET);
+	var0007 = BUCIA->get_item_flag(MET);
 	if (event == PROXIMITY) {
 		var0008 = UI_get_random(0x0006);
 		if (Func097D(PARTY, 0x0001, 0x0241, QUALITY_ANY, 0x0003)) {
 			if (var0008 == 0x0001) {
-				0xFFF3->item_say("@What is that smell?@");
+				BUCIA->item_say("@What is that smell?@");
 			}
 			if (var0008 == 0x0002) {
-				0xFFF3->item_say("@Phew!@");
+				BUCIA->item_say("@Phew!@");
 			}
 			if (var0008 == 0x0003) {
-				0xFFF3->item_say("@Putrid odor...@");
+				BUCIA->item_say("@Putrid odor...@");
 			}
 			if (var0008 == 0x0004) {
 				if (!gflags[0x0104]) {
-					0xFFF3->item_say("@Away from here!@");
+					BUCIA->item_say("@Away from here!@");
 				} else {
-					0xFFF3->item_say("@Something doth stink...@");
+					BUCIA->item_say("@Something doth stink...@");
 				}
 			}
 			if (var0008 == 0x0005) {
-				0xFFF3->item_say("@Open a window!@");
+				BUCIA->item_say("@Open a window!@");
 			}
 			if (var0008 == 0x0006) {
-				0xFFF3->item_say("@Bad stench!@");
+				BUCIA->item_say("@Bad stench!@");
 			}
 		} else {
 			if (var0008 == 0x0001) {
 				if (var0007) {
-					0xFFF3->item_say(("@Greetings, " + var0004) + "!@");
+					BUCIA->item_say(("@Greetings, " + var0004) + "!@");
 				} else {
-					0xFFF3->item_say("@Greetings, stranger!@");
+					BUCIA->item_say("@Greetings, stranger!@");
 				}
 			}
 			if (var0008 == 0x0002) {
-				0xFFF3->item_say("@Goods for sale!@");
+				BUCIA->item_say("@Goods for sale!@");
 			}
 			if (var0008 == 0x0003) {
-				0xFFF3->item_say("@What a nice day.@");
+				BUCIA->item_say("@What a nice day.@");
 			}
 			if (var0008 == 0x0004) {
 				if (!var0007) {
-					0xFFF3->item_say("@Art thou a visitor?@");
+					BUCIA->item_say("@Art thou a visitor?@");
 				} else {
-					0xFFF3->item_say("@So nice to see thee.@");
+					BUCIA->item_say("@So nice to see thee.@");
 				}
 			}
 			if (var0008 == 0x0005) {
-				0xFFF3->item_say("@Thou breakest, thou buyest.@");
+				BUCIA->item_say("@Thou breakest, thou buyest.@");
 			}
 			if (var0008 == 0x0006) {
-				0xFFF3->item_say("@Provisions!@");
+				BUCIA->item_say("@Provisions!@");
 			}
 		}
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Greetings!@");
-		0xFFF3->Func07D1();
-		Func097F(0xFFF3, (("@Yes, " + var0002) + "?@"), 0x0002);
+		BUCIA->Func07D1();
+		Func097F(BUCIA, (("@Yes, " + var0002) + "?@"), 0x0002);
 		if (!var0000) {
-			0xFFF3->set_schedule_type(TALK);
+			BUCIA->set_schedule_type(TALK);
 		} else {
-			0xFFF3->set_schedule_type(STANDTHERE);
-			0xFFF3->Func07D2();
-			var0008 = script 0xFFF3 {
+			BUCIA->set_schedule_type(STANDTHERE);
+			BUCIA->Func07D2();
+			var0008 = script BUCIA {
 				nohalt;
 				wait 7;
 				call Func040D;
@@ -22918,13 +22918,13 @@ void Func040D object#(0x40D) () {
 		event = STARTED_TALKING;
 	}
 	if (event == STARTED_TALKING) {
-		0xFFF3->run_schedule();
-		0xFFF3->clear_item_say();
+		BUCIA->run_schedule();
+		BUCIA->clear_item_say();
 		var0000 = false;
-		if (0xFFF3->get_schedule_type() == TEND_SHOP) {
+		if (BUCIA->get_schedule_type() == TEND_SHOP) {
 			var0000 = true;
 		}
-		0xFFF3->show_npc_face0(0x0000);
+		BUCIA->show_npc_face0(0x0000);
 		var0009 = 0x0006;
 		if (Func097D(PARTY, 0x0001, 0x0241, QUALITY_ANY, 0x0003) && gflags[0x0104]) {
 			say("\"Go away from me with that rotten egg. Phew!\"");
@@ -22936,7 +22936,7 @@ void Func040D object#(0x40D) () {
 			} else {
 				say("\"Strangers are always welcome in Moonshade. My name is Bucia -- if thou needest help, thou hast merely to ask.\"");
 			}
-			0xFFF3->set_item_flag(MET);
+			BUCIA->set_item_flag(MET);
 		} else {
 			say("\"I am so glad to see thee again, ",
 				var0002,
@@ -22960,7 +22960,7 @@ void Func040D object#(0x40D) () {
 				say("\"Oh, my! What to do? What to do?\"");
 				say("\"Call the Rangers! Consult the Mages! Such a crime cannot go unpunished.\"");
 				say("\"Perhaps this has something to do with the magical storms? Perhaps we are all in danger!\"");
-				Func097F(0xFFF3, "@I am so afraid!@", 0x0000);
+				Func097F(BUCIA, "@I am so afraid!@", 0x0000);
 				abort;
 
 			case "information" (remove):
@@ -23258,8 +23258,8 @@ void Func040D object#(0x40D) () {
 					gflags[0x0108] = true;
 					if (Func0955()) {
 						say("\"Thank thee!\"");
-						if (0xFFF3->get_npc_id() < 0x0019) {
-							0xFFF3->set_npc_id(0xFFF3->get_npc_id() + 0x0005);
+						if (BUCIA->get_npc_id() < 0x0019) {
+							BUCIA->set_npc_id(BUCIA->get_npc_id() + 0x0005);
 						}
 						var0008 = UI_remove_party_items(0x0001, 0x0108, QUALITY_ANY, FRAME_ANY, 0x0000);
 					} else {
@@ -23294,8 +23294,8 @@ void Func040D object#(0x40D) () {
 					say("\"May I... could I... wouldst thou mind if I kept this pair? No Mundane could ever own such finery!\"");
 					if (Func0955()) {
 						say("\"Ooooh!\"");
-						if (0xFFF3->get_npc_id() < 0x0014) {
-							0xFFF3->set_npc_id(0xFFF3->get_npc_id() + 0x000A);
+						if (BUCIA->get_npc_id() < 0x0014) {
+							BUCIA->set_npc_id(BUCIA->get_npc_id() + 0x000A);
 						}
 						var0008 = UI_remove_party_items(0x0001, 0x02A5, QUALITY_ANY, 0x0000, 0x0000);
 					} else {
@@ -23558,8 +23558,8 @@ void Func040D object#(0x40D) () {
 			case "bloody hand" (remove):
 				if (Func097D(PARTY, 0x0001, 0x031A, QUALITY_ANY, 0x0000)) {
 					say("\"What dost thou have there? Why, 'tis moving...\"");
-					Func097F(0xFFF3, "@Ah!!!@", 0x0000);
-					0xFFF3->set_schedule_type(SHY);
+					Func097F(BUCIA, "@Ah!!!@", 0x0000);
+					BUCIA->set_schedule_type(SHY);
 				} else {
 					say("\"How repugnant.\"");
 					say("\"Probably the work of the Goblins -- I have heard that they are most crude, though they do not bother us here on this island.\"");
@@ -23707,7 +23707,7 @@ void Func040D object#(0x40D) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@I must be going.@", 0x0000);
-				Func097F(0xFFF3, "@Do return sometime!@", 0x0002);
+				Func097F(BUCIA, "@Do return sometime!@", 0x0002);
 				Func08FF();
 				break;
 		}
@@ -78765,7 +78765,7 @@ void Func07D8 object#(0x7D8) () {
 		0xFF00->set_alignment(EVIL);
 		0xFF00->move_object([0x040C, 0x0A26]);
 		0xFF00->set_schedule_type(IN_COMBAT);
-		Func09AC(0xFFF3, 0x0963, 0x0815, WAIT);
+		Func09AC(BUCIA, 0x0963, 0x0815, WAIT);
 		Func09AC(0xFFD8, 0x08C2, 0x0715, WAIT);
 		Func09AC(0xFFEA, 0x0978, 0x0819, WAIT);
 		Func09AC(0xFFE8, 0x09B7, 0x07E5, WAIT);
@@ -85288,16 +85288,16 @@ void Func080C 0x80C () {
 			var000C = Func0992(0x0001, "@But we are short of funds!@", 0x0000, false);
 			var000C = Func0992(0x0001, "@How embarrassing...@", 0x0000, false);
 			if (var000C != AVATAR) {
-				0xFFF3->show_npc_face0(0x0000);
+				BUCIA->show_npc_face0(0x0000);
 				say("\"I would let thee have the goods for free, as I am sure that thou art a trustworthy person.\"");
 				say("\"But the shop's owner is a stern man, and very strict.\"");
 			} else {
 				say("\"But thou dost not have the coins to pay for thy purchase! Next time, thou shouldst count thy coins first.\"");
 			}
-			if (0x001F < (0xFFF3->get_npc_id() + 0x0004)) {
-				0xFFF3->set_npc_id(0x001F);
+			if (0x001F < (BUCIA->get_npc_id() + 0x0004)) {
+				BUCIA->set_npc_id(0x001F);
 			} else {
-				0xFFF3->set_npc_id(0xFFF3->get_npc_id() + 0x0004);
+				BUCIA->set_npc_id(BUCIA->get_npc_id() + 0x0004);
 			}
 		}
 		say("\"Dost thou wish to purchase anything else?\"");
@@ -85332,12 +85332,12 @@ var Func080D 0x80D (var var0000, var var0001) {
 	var0003 = UI_is_pc_female();
 	var0004 = var0000;
 	var0005 = (var0001 / 0x0003) * 0x0002;
-	var0006 = 0x000F - (0xFFF3->get_npc_id() / 0x0002);
+	var0006 = 0x000F - (BUCIA->get_npc_id() / 0x0002);
 	var0007 = 0x0000;
 	var0008 = 0x0001;
 	var0009 = 0x0000;
 	var000A = 0x0002;
-	var000B = 0xFFF3->get_npc_id();
+	var000B = BUCIA->get_npc_id();
 	while (var0008) {
 		var000C = Func0956(["yes", "no", "haggle"]);
 		if (var000C == "no") {
@@ -85415,7 +85415,7 @@ var Func080D 0x80D (var var0000, var var0001) {
 				"?\"");
 			if (Func0955()) {
 				if (var000B > 0x0001) {
-					0xFFF3->set_npc_id(var000B - 0x0002);
+					BUCIA->set_npc_id(var000B - 0x0002);
 				}
 				return var0004;
 			}
@@ -85431,9 +85431,9 @@ var Func080D 0x80D (var var0000, var var0001) {
 					"?\"");
 			}
 			if (0x001F < (var000B + 0x000A)) {
-				0xFFF3->set_npc_id(0x001F);
+				BUCIA->set_npc_id(0x001F);
 			} else {
-				0xFFF3->set_npc_id(var000B + 0x000A);
+				BUCIA->set_npc_id(var000B + 0x000A);
 			}
 			return 0x0000;
 		}
@@ -85445,7 +85445,7 @@ var Func080D 0x80D (var var0000, var var0001) {
 					var0004,
 					" guilders. Dost thou accept?\"");
 				if (var000B < 0x001C) {
-					0xFFF3->set_npc_id(var000B + 0x0004);
+					BUCIA->set_npc_id(var000B + 0x0004);
 				}
 				if (Func0955()) {
 					return var0004;
@@ -85456,7 +85456,7 @@ var Func080D 0x80D (var var0000, var var0001) {
 					var0004,
 					" guilders is my final offer. Is this acceptable to thee?\"");
 				if (var000B < 0x001E) {
-					0xFFF3->set_npc_id(var000B + 0x0002);
+					BUCIA->set_npc_id(var000B + 0x0002);
 				}
 			}
 		} else {
@@ -85529,7 +85529,7 @@ var Func080D 0x80D (var var0000, var var0001) {
 						" guilders is where I must stand.\"");
 				}
 				if (var000B < 0x001F) {
-					0xFFF3->set_npc_id(var000B + 0x0001);
+					BUCIA->set_npc_id(var000B + 0x0001);
 				}
 			}
 		}
@@ -106252,7 +106252,7 @@ void Func08FF 0x8FF () {
 	if (gflags[0x00D7]) {
 		abort;
 	}
-	var0000 = ((((((((((((((0xFFEA->get_item_flag(MET) + 0xFFE6->get_item_flag(MET)) + 0xFFEF->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + 0xFFF2->get_item_flag(MET)) + 0xFFE8->get_item_flag(MET)) + 0xFFF1->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + 0xFFE9->get_item_flag(MET)) + 0xFFE2->get_item_flag(MET)) + 0xFFE4->get_item_flag(MET)) + 0xFFF3->get_item_flag(MET)) + 0xFFE5->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + 0xFFED->get_item_flag(MET)) + gflags[0x00D6];
+	var0000 = ((((((((((((((0xFFEA->get_item_flag(MET) + 0xFFE6->get_item_flag(MET)) + 0xFFEF->get_item_flag(MET)) + 0xFFDF->get_item_flag(MET)) + 0xFFF2->get_item_flag(MET)) + 0xFFE8->get_item_flag(MET)) + 0xFFF1->get_item_flag(MET)) + 0xFFE0->get_item_flag(MET)) + 0xFFE9->get_item_flag(MET)) + 0xFFE2->get_item_flag(MET)) + 0xFFE4->get_item_flag(MET)) + BUCIA->get_item_flag(MET)) + 0xFFE5->get_item_flag(MET)) + ANDRIO->get_item_flag(MET)) + 0xFFED->get_item_flag(MET)) + gflags[0x00D6];
 	if ((var0000 >= 0x0003) && (!gflags[0x00D7])) {
 		var0001 = 0xFFE7->approach_avatar(0x005A, 0x0028);
 		if (var0001) {
@@ -106377,8 +106377,8 @@ void Func0901 0x901 () {
 	UI_init_conversation();
 	0xFFEE->remove_npc();
 	0xFFEC->remove_npc();
-	0xFFF3->revert_schedule();
-	0xFFF3->set_schedule_type(MAJOR_SIT);
+	BUCIA->revert_schedule();
+	BUCIA->set_schedule_type(MAJOR_SIT);
 	0xFFEA->revert_schedule();
 	0xFFEA->set_schedule_type(MAJOR_SIT);
 	var000A = [0x0935, 0x06E3];
@@ -112769,14 +112769,14 @@ var Func09AE 0x9AE (var var0000) {
 				Func097F(0xFFCC, "@Time for bed!@", 0x0000);
 			}
 		}
-		if (item == 0xFFF3->get_npc_object()) {
-			Func097F(0xFFF3, "@Have a nice day!@", 0x0000);
+		if (item == BUCIA->get_npc_object()) {
+			Func097F(BUCIA, "@Have a nice day!@", 0x0000);
 			gflags[0x0103] = true;
-			if (0xFFF3->get_schedule_type() == TEND_SHOP) {
+			if (BUCIA->get_schedule_type() == TEND_SHOP) {
 				Func094E(0xFFD6, "@I do not pay thee to stand jabbering, Bucia.@");
 				0x0000->set_conversation_slot();
 				say("\"I must be getting back to work now. But it hath been nice talking with thee.\"");
-				if (0xFFF3->get_npc_id() < 0x000F) {
+				if (BUCIA->get_npc_id() < 0x000F) {
 					say("\"If thou wert to be at the Blue Boar Inn at 10 tonight, I could discuss these things further with thee...\"");
 					gflags[0x013E] = true;
 				}

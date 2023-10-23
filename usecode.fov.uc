@@ -13033,7 +13033,7 @@ void Func040D object#(0x40D) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFFF3->show_npc_face(0x0000);
+	GILBERTO->show_npc_face(0x0000);
 	var0000 = UI_part_of_day();
 	add(["name", "job", "murder", "bye"]);
 	if (gflags[0x003D]) {
@@ -13051,7 +13051,7 @@ void Func040D object#(0x40D) () {
 	if (!gflags[0x004D]) {
 		say("You see a grumpy fellow with a bloody bandage on his head.");
 		gflags[0x004D] = true;
-		0xFFF3->get_npc_object()->set_schedule_type(MAJOR_SIT);
+		GILBERTO->get_npc_object()->set_schedule_type(MAJOR_SIT);
 	} else {
 		say("\"Dost thou need something else?\" Gilberto asks. You notice his wound is healing nicely.");
 	}
