@@ -15950,7 +15950,7 @@ void Func041F object#(0x41F) () {
 
 	if (event == DOUBLECLICK) {
 		KRISTY->show_npc_face(0x0000);
-		var0000 = Func08F7(0xFFDE);
+		var0000 = Func08F7(NANNA);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x00A0]) {
 			say("This is a cute toddler holding a baby doll.");
@@ -15962,8 +15962,8 @@ void Func041F object#(0x41F) () {
 			case "name":
 				say("\"Kwisty.\"");
 				if (var0000) {
-					0xFFDE->say("\"Kristy, like Nicholas, is one of our orphans. She was found in an abandoned home in Paws by one of the Great Council members.\"");
-					0xFFDE->hide();
+					NANNA->say("\"Kristy, like Nicholas, is one of our orphans. She was found in an abandoned home in Paws by one of the Great Council members.\"");
+					NANNA->hide();
 					KRISTY->show_npc_face(0x0000);
 				}
 				remove("name");
@@ -15998,8 +15998,8 @@ void Func041F object#(0x41F) () {
 			case "winner":
 				say("\"I am winner!\" she proclaims loudly.");
 				if (var0000) {
-					0xFFDE->say("\"She keeps saying that. I am not sure what it means. Something to do with a competition.\"");
-					0xFFDE->hide();
+					NANNA->say("\"She keeps saying that. I am not sure what it means. Something to do with a competition.\"");
+					NANNA->hide();
 					KRISTY->show_npc_face(0x0000);
 				}
 				remove("winner");
@@ -16051,10 +16051,10 @@ void Func0420 object#(0x420) () {
 		converse (0) {
 			case "name":
 				say("\"Makth.\"");
-				var0000 = Func08F7(0xFFDE);
+				var0000 = Func08F7(NANNA);
 				if (var0000) {
-					0xFFDE->say("\"He says his name is Max.\"");
-					0xFFDE->hide();
+					NANNA->say("\"He says his name is Max.\"");
+					NANNA->hide();
 					MAX->show_npc_face(0x0000);
 				}
 				remove("name");
@@ -16123,7 +16123,7 @@ void Func0421 object#(0x421) () {
 
 	if (event == DOUBLECLICK) {
 		NICHOLAS->show_npc_face(0x0000);
-		var0000 = Func08F7(0xFFDE);
+		var0000 = Func08F7(NANNA);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x00A2]) {
 			say("You see a child that has recently grown into toddlerhood.");
@@ -16134,8 +16134,8 @@ void Func0421 object#(0x421) () {
 		converse (0) {
 			case "name":
 				if (var0000) {
-					0xFFDE->say("\"His name is Nicholas.\"");
-					0xFFDE->hide();
+					NANNA->say("\"His name is Nicholas.\"");
+					NANNA->hide();
 					NICHOLAS->show_npc_face(0x0000);
 				} else {
 					say("\"Nick-las\".");
@@ -16150,10 +16150,10 @@ void Func0421 object#(0x421) () {
 					abort;
 				}
 				if (var0000) {
-					0xFFDE->say("\"Why, his job is to wet his diaper! Is that not right, Nicholas?\" Nanna says in baby-talk.");
+					NANNA->say("\"Why, his job is to wet his diaper! Is that not right, Nicholas?\" Nanna says in baby-talk.");
 					NICHOLAS->say("\"Whee! Dia-per!\"");
-					0xFFDE->say("\"Nicholas is one of our orphans. He was left in front of the castle one morning. 'Tis a sad state of affairs when this kind of thing happens.\"");
-					0xFFDE->hide();
+					NANNA->say("\"Nicholas is one of our orphans. He was left in front of the castle one morning. 'Tis a sad state of affairs when this kind of thing happens.\"");
+					NANNA->hide();
 					NICHOLAS->show_npc_face(0x0000);
 				} else {
 					say("\"Whee! Dia-per!\"");
@@ -16164,8 +16164,8 @@ void Func0421 object#(0x421) () {
 			case "wet":
 				say("You notice that Nicholas' diaper is wet.");
 				if (var0000) {
-					0xFFDE->say("\"Oh, my. He's wet, is he not? Couldst thou be a dear and change him for me? I would appreciate it!\"");
-					0xFFDE->hide();
+					NANNA->say("\"Oh, my. He's wet, is he not? Couldst thou be a dear and change him for me? I would appreciate it!\"");
+					NANNA->hide();
 				}
 				say("\"Yeeee! Dia-per! Geeee!\" Nicholas says happily.");
 				remove("wet");
@@ -16173,8 +16173,8 @@ void Func0421 object#(0x421) () {
 
 			case "diaper":
 				if (var0000) {
-					0xFFDE->say("\"The diapers are there on that table. If thou wouldst just use one\ton Nicholas....\"");
-					0xFFDE->hide();
+					NANNA->say("\"The diapers are there on that table. If thou wouldst just use one\ton Nicholas....\"");
+					NANNA->hide();
 				} else {
 					say("Nicholas points to the diapers on the table.");
 				}
@@ -16223,12 +16223,12 @@ void Func0422 object#(0x422) () {
 	var var0006;
 
 	if (event == DOUBLECLICK) {
-		0xFFDE->show_npc_face(0x0000);
+		NANNA->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
-		var0001 = 0xFFDE->get_npc_object()->get_schedule_type();
+		var0001 = NANNA->get_npc_object()->get_schedule_type();
 		var0002 = UI_wearing_fellowship();
 		if (var0000 == NIGHT) {
-			var0003 = Func08FC(0xFFDE, BATLIN);
+			var0003 = Func08FC(NANNA, BATLIN);
 			if (var0003) {
 				say("Nanna gives you a stern look for bothering her during The Fellowship meeting, much like the look of an elementary school teacher you once had.*");
 				abort;
@@ -16273,7 +16273,7 @@ void Func0422 object#(0x422) () {
 						IOLO->say("\"I believe that is the smell of diapers, boy. When thou art a father one day, thou wilt come to know that smell quite well.\"*");
 						IOLO->hide();
 					}
-					0xFFDE->show_npc_face(0x0000);
+					NANNA->show_npc_face(0x0000);
 				}
 				remove("Royal Nursery");
 				fallthrough;
@@ -16349,7 +16349,7 @@ void Func0422 object#(0x422) () {
 		say("\"Good day! Do come back and visit again soon!\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFDE);
+		Func092E(NANNA);
 	}
 }
 
@@ -65452,10 +65452,10 @@ void Func084F 0x84F () {
 		0xFFC1->say("\"The Fellowship has given my life a whole new purpose. Just today I have recruited two more potential members!\" says Millie.*");
 		0xFFC1->hide();
 	}
-	var000C = Func08F7(0xFFDE);
+	var000C = Func08F7(NANNA);
 	if (var000C) {
-		0xFFDE->say("\"The Fellowship has taught me about the evils of the class structure,\" says Nanna.*");
-		0xFFDE->hide();
+		NANNA->say("\"The Fellowship has taught me about the evils of the class structure,\" says Nanna.*");
+		NANNA->hide();
 	}
 	var0002 = Func08F7(IOLO);
 	var000D = Func08F7(SHAMINO);

@@ -2334,7 +2334,7 @@ void Func00E6 shape#(0xE6) () {
 		GOBLIN_MESSENGER->run_schedule();
 		GOBLIN_MESSENGER->clear_item_flag(ASLEEP);
 		Func097F(GOBLIN_MESSENGER, "@Tar gorlfog!@", 0x0003);
-		if ((var000C < 0x000F) && ((!IOLO->npc_nearby()) && ((!DUPRE->npc_nearby()) && ((!SHAMINO->npc_nearby()) && (!0xFFDE->npc_nearby()))))) {
+		if ((var000C < 0x000F) && ((!IOLO->npc_nearby()) && ((!DUPRE->npc_nearby()) && ((!SHAMINO->npc_nearby()) && (!BOYDON->npc_nearby()))))) {
 			say("\"I am so glad that thou hast agreed to meet me here.\"");
 			UI_play_music(0x001F, Func09A0(0x0005, 0x0001));
 			FRIGIDAZZI->set_npc_id(0x0001);
@@ -7545,7 +7545,7 @@ void Func01C7 shape#(0x1C7) () {
 			Func097F(DUPRE, "@Keep thy wits, Avatar!@", 0x0019);
 			Func097F(IOLO, "@Do not despair!@", 0x0014);
 			Func097F(SHAMINO, "@We shall wait for thee!@", 0x000C);
-			Func097F(0xFFDE, (((("@" + var0004) + " is a dead ") + var0005) + "!@"), 0x0000);
+			Func097F(BOYDON, (((("@" + var0004) + " is a dead ") + var0005) + "!@"), 0x0000);
 			Func097F(0xFFD6, "@He made me do it...@", 0x000C);
 			var000A = script AVATAR {
 				nohalt;
@@ -7879,9 +7879,9 @@ void Func01C7 shape#(0x1C7) () {
 					var0018 += 0x0002;
 				}
 			}
-			var000A = 0xFFDE->get_object_position();
+			var000A = BOYDON->get_object_position();
 			if (((var000A[0x0001] > 0x0859) && ((var000A[0x0001] < 0x0AB4) && ((var000A[0x0002] > 0x0500) && (var000A[0x0002] < 0x0994)))) || (((var000A[0x0001] > 0x0762) && ((var000A[0x0001] < 0x085B) && ((var000A[0x0002] > 0x0585) && (var000A[0x0002] < 0x0957)))) || (((var000A[0x0001] > 0x0744) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x06F9) && (var000A[0x0002] < 0x073D)))) || (((var000A[0x0001] > 0x071E) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x0828) && (var000A[0x0002] < 0x088D)))) || (((var000A[0x0001] > 0x06FC) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x07A6) && (var000A[0x0002] < 0x082A)))) || ((var000A[0x0001] > 0x074C) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x0719) && (var000A[0x0002] < 0x07A8))))))))) {
-				0xFFDE->set_npc_id(0x001E);
+				BOYDON->set_npc_id(0x001E);
 			}
 			var000A = IOLO->get_object_position();
 			if (((var000A[0x0001] > 0x0859) && ((var000A[0x0001] < 0x0AB4) && ((var000A[0x0002] > 0x0500) && (var000A[0x0002] < 0x0994)))) || (((var000A[0x0001] > 0x0762) && ((var000A[0x0001] < 0x085B) && ((var000A[0x0002] > 0x0585) && (var000A[0x0002] < 0x0957)))) || (((var000A[0x0001] > 0x0744) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x06F9) && (var000A[0x0002] < 0x073D)))) || (((var000A[0x0001] > 0x071E) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x0828) && (var000A[0x0002] < 0x088D)))) || (((var000A[0x0001] > 0x06FC) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x07A6) && (var000A[0x0002] < 0x082A)))) || ((var000A[0x0001] > 0x074C) && ((var000A[0x0001] < 0x0764) && ((var000A[0x0002] > 0x0719) && (var000A[0x0002] < 0x07A8))))))))) {
@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, 0xFFD2, 0xFFD1, 0xFFD0, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, 0xFFDE, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, 0xFFD2, 0xFFD1, 0xFFD0, 0xFFCF, 0xFFCE, 0xFFCD, 0xFFCC, 0xFFCB, 0xFFCA, 0xFFC9, 0xFFC8, 0xFFC6, 0xFFC5, 0xFFC4, 0xFFC3, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -21549,7 +21549,7 @@ void Func0401 object#(0x401) () {
 		if (IOLO->get_npc_id() == 0x001E) {
 			add("Iolo's whereabouts");
 		}
-		if (0xFFDE->get_npc_id() == 0x001E) {
+		if (BOYDON->get_npc_id() == 0x001E) {
 			add("Boydon's whereabouts");
 		}
 		if (gflags[0x0017] && ((!DUPRE->get_item_flag(IN_PARTY)) && DUPRE->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY))) {
@@ -21823,7 +21823,7 @@ labelFunc0402_02F8:
 			if (IOLO->get_npc_id() == 0x001E) {
 				add("Iolo's whereabouts");
 			}
-			if (0xFFDE->get_npc_id() == 0x001E) {
+			if (BOYDON->get_npc_id() == 0x001E) {
 				add("Boydon's whereabouts");
 			}
 			if ((!SHAMINO->get_item_flag(IN_PARTY)) && (SHAMINO->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY) && (gflags[0x0018] == true))) {
@@ -22203,7 +22203,7 @@ void Func0403 object#(0x403) () {
 		if (DUPRE->get_npc_id() == 0x001E) {
 			add("Dupre's whereabouts");
 		}
-		if (0xFFDE->get_npc_id() == 0x001E) {
+		if (BOYDON->get_npc_id() == 0x001E) {
 			add("Boydon's whereabouts");
 		}
 		if (gflags[0x0019] && (IOLO->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY) && (!IOLO->get_item_flag(IN_PARTY)))) {
@@ -30293,29 +30293,29 @@ void Func0422 object#(0x422) () {
 	var0002 = SHAMINO->get_item_flag(IN_PARTY);
 	var0003 = IOLO->get_item_flag(IN_PARTY);
 	var0004 = DUPRE->get_item_flag(IN_PARTY);
-	var0005 = 0xFFDE->get_item_flag(IN_PARTY);
-	var0006 = 0xFFDE->get_item_flag(MET);
-	var0007 = 0xFFDE->get_item_flag(DEAD);
+	var0005 = BOYDON->get_item_flag(IN_PARTY);
+	var0006 = BOYDON->get_item_flag(MET);
+	var0007 = BOYDON->get_item_flag(DEAD);
 	if ((event == DEATH) && gflags[0x0083]) {
-		var0008 = 0xFFDE->get_oppressor();
+		var0008 = BOYDON->get_oppressor();
 		var0008 = 0x0000 - var0008;
 		if (!gflags[0x0007]) {
 			gflags[0x0007] = true;
-			Func0936(var0008->get_npc_object(), 0xFFDE->get_npc_object());
+			Func0936(var0008->get_npc_object(), BOYDON->get_npc_object());
 			return;
 		}
 		Func092E(item);
 		return;
 	}
-	if ((event == DEATH) && 0xFFDE->get_item_flag(SI_TOURNAMENT)) {
-		0xFFDE->clear_item_flag(SI_TOURNAMENT);
-		var0009 = 0xFFDE->get_object_position();
+	if ((event == DEATH) && BOYDON->get_item_flag(SI_TOURNAMENT)) {
+		BOYDON->clear_item_flag(SI_TOURNAMENT);
+		var0009 = BOYDON->get_object_position();
 		UI_play_sound_effect(0x002A);
 		var0009[0x0001] -= var0009[0x0003] / 0x0002;
 		var0009[0x0002] -= var0009[0x0003] / 0x0002;
 		UI_sprite_effect(ANIMATION_BIG_RING_BLAST, var0009[0x0001], var0009[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-		var0009 = 0xFFDE->get_object_position();
-		0xFFDE->kill_npc();
+		var0009 = BOYDON->get_object_position();
+		BOYDON->kill_npc();
 		var000A = UI_create_new_object(0x031F);
 		if (var000A) {
 			var000A->set_item_frame(0x0012);
@@ -30355,39 +30355,39 @@ void Func0422 object#(0x422) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Ahem...@");
-		0xFFDE->Func07D1();
-		Func097F(0xFFDE, "@Thou didst speak?@", 0x0002);
-		0xFFDE->set_schedule_type(TALK);
+		BOYDON->Func07D1();
+		Func097F(BOYDON, "@Thou didst speak?@", 0x0002);
+		BOYDON->set_schedule_type(TALK);
 	}
 	if (event == SCRIPTED) {
 		event = STARTED_TALKING;
 	}
 	if (event == STARTED_TALKING) {
-		if (item == 0xFFDE->get_npc_object()) {
-			if (0xFFDE->get_item_flag(IN_PARTY)) {
-				0xFFDE->set_schedule_type(FOLLOW_AVATAR);
+		if (item == BOYDON->get_npc_object()) {
+			if (BOYDON->get_item_flag(IN_PARTY)) {
+				BOYDON->set_schedule_type(FOLLOW_AVATAR);
 				add("leave");
 			} else {
-				0xFFDE->run_schedule();
+				BOYDON->run_schedule();
 				if (gflags[0x01BA]) {
 					add("join");
 				}
 			}
-			0xFFDE->show_npc_face0(0x0000);
-			if (0xFFDE->get_npc_id() == 0x001E) {
+			BOYDON->show_npc_face0(0x0000);
+			if (BOYDON->get_npc_id() == 0x001E) {
 				say("\"Master, I am grateful that thou dost still live! I have grown fond of thee, almost as a son looks upon a parent...\"");
 				if (!gflags[0x0135]) {
 					say("\"It might please thee to know that there is good news!\"");
 					add("good news");
 				}
-				0xFFDE->set_npc_id(0x0000);
-				0xFFDE->add_to_party();
+				BOYDON->set_npc_id(0x0000);
+				BOYDON->add_to_party();
 				gflags[0x0013] = true;
 				remove("join");
 				add(["leave"]);
 			} else if (!var0006) {
 				say("\"I have a body! I have a body!\"");
-				0xFFDE->set_item_flag(MET);
+				BOYDON->set_item_flag(MET);
 			} else {
 				say("\"Hello, there!\"");
 			}
@@ -30403,7 +30403,7 @@ void Func0422 object#(0x422) () {
 				gflags[0x01C0] = true;
 			}
 		}
-		if (gflags[0x0013] && ((!0xFFDE->get_item_flag(IN_PARTY)) && 0xFFDE->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY))) {
+		if (gflags[0x0013] && ((!BOYDON->get_item_flag(IN_PARTY)) && BOYDON->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY))) {
 			add("return my belongings");
 		}
 		converse (["name", "duties", "bye"]) {
@@ -30518,7 +30518,7 @@ void Func0422 object#(0x422) () {
 					if (var0012 != AVATAR) {
 						0x0000->set_conversation_slot();
 					}
-					0xFFDE->add_to_party();
+					BOYDON->add_to_party();
 					gflags[0x0013] = true;
 				} else {
 					say("\"But there are so many in thy travelling party! I am not accustomed to crowds.\"");
@@ -30530,9 +30530,9 @@ void Func0422 object#(0x422) () {
 
 			case "leave" (remove):
 				say("\"If that is what thou dost truly want, I will leave. But if thou dost ever change thy mind, do ask me to join again and I will.\"");
-				0xFFDE->remove_from_party();
+				BOYDON->remove_from_party();
 				Func080A();
-				Func09B4(0xFFDE);
+				Func09B4(BOYDON);
 				var0012 = Func0992(DUPRE, ((("@I am also sad to see him go." * "But in truth, ") + "mine eyes were watering more while he was with us than ") + "when he left!@"), 0x0000, false);
 				if (var0012 != AVATAR) {
 					0x0000->set_conversation_slot();
@@ -30543,8 +30543,8 @@ void Func0422 object#(0x422) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Good luck!@", 0x0000);
-				if (item == 0xFFDE->get_npc_object()) {
-					Func097F(0xFFDE, "@And to thee!@", 0x0002);
+				if (item == BOYDON->get_npc_object()) {
+					Func097F(BOYDON, "@And to thee!@", 0x0002);
 				} else {
 					var000B = script item after 5 ticks {
 						nohalt;
@@ -30604,7 +30604,7 @@ void Func0423 object#(0x423) () {
 	var0000 = Func0954();
 	var0001 = Func0953();
 	var0002 = Func0942(0xFFDC);
-	var0003 = Func0942(0xFFDE);
+	var0003 = Func0942(BOYDON);
 	var0004 = 0xFFDD->get_item_flag(MET);
 	var0005 = Func097D(PARTY, 0x0001, 0x0268, QUALITY_ANY, 0x0010);
 	var0006 = Func097D(PARTY, 0x0001, 0x0252, QUALITY_ANY, FRAME_ANY);
@@ -51219,7 +51219,7 @@ void Func0496 object#(0x496) () {
 	var0004 = 0xFFB8->get_item_flag(DEAD);
 	if (gflags[0x003D] && ((0xFF6A->get_schedule_type() == SLEEP) && (Func08F1() < 0x000F))) {
 		var0005 = true;
-		if ((!IOLO->npc_nearby()) && ((!DUPRE->npc_nearby()) && ((!SHAMINO->npc_nearby()) && (!0xFFDE->npc_nearby())))) {
+		if ((!IOLO->npc_nearby()) && ((!DUPRE->npc_nearby()) && ((!SHAMINO->npc_nearby()) && (!BOYDON->npc_nearby())))) {
 			var0006 = true;
 		}
 	}
@@ -75588,9 +75588,9 @@ void Func073B object#(0x73B) () {
 				}
 			}
 			UI_sprite_effect(ANIMATION_MEDIUM_RING_BLAST, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			if (0xFFDE->npc_nearby()) {
-				var0000 = 0xFFDE->get_object_position();
-				var0002 = script 0xFFDE {
+			if (BOYDON->npc_nearby()) {
+				var0000 = BOYDON->get_object_position();
+				var0002 = script BOYDON {
 					nohalt;
 					wait 7;
 					hit 55, normal_damage;
@@ -76902,11 +76902,11 @@ void Func077E object#(0x77E) () {
 		var0001 = find_nearby(0x0315, 0x0028, MASK_NONE);
 		if (var0001) {
 			var0000 = var0001->get_object_position();
-			0xFFDE->move_object([(var0000[0x0001] - 0x0001), (var0000[0x0002] + 0x0001), 0x0000]);
-			0xFFDE->get_npc_object()->set_item_frame(0x0010);
+			BOYDON->move_object([(var0000[0x0001] - 0x0001), (var0000[0x0002] + 0x0001), 0x0000]);
+			BOYDON->get_npc_object()->set_item_frame(0x0010);
 			gflags[0x01BB] = true;
-			0xFFDE->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, EVENING, NIGHT], [SLEEP, EAT, WANDER, EAT, LOITER, EAT], [0x0813, 0x0525, 0x0817, 0x0540, 0x0802, 0x0550, 0x0817, 0x0540, 0x081A, 0x0534, 0x0817, 0x0540]);
-			0xFFDE->run_schedule();
+			BOYDON->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, EVENING, NIGHT], [SLEEP, EAT, WANDER, EAT, LOITER, EAT], [0x0813, 0x0525, 0x0817, 0x0540, 0x0802, 0x0550, 0x0817, 0x0540, 0x081A, 0x0534, 0x0817, 0x0540]);
+			BOYDON->run_schedule();
 			UI_play_sound_effect(0x0077);
 			var0002 = script 0xFFDD after 1 ticks {
 				nohalt;
@@ -76916,7 +76916,7 @@ void Func077E object#(0x77E) () {
 				nohalt;
 				say "Amazing!";
 			};
-			var0002 = script 0xFFDE after 5 ticks {
+			var0002 = script BOYDON after 5 ticks {
 				nohalt;
 				say "I live!";
 			};
@@ -84358,12 +84358,12 @@ extern var Func09B3 0x9B3 (var var0000);
 void Func080A 0x80A () {
 	var var0000;
 
-	if (0xFFDE->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY)) {
+	if (BOYDON->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY)) {
 		say("\"I have some of thy belongings in my possession. Wouldst thou like them returned?\"");
 		if (Func0955()) {
 			say("\"Here they are.\"");
 			gflags[0x0013] = false;
-			var0000 = Func09B3(0xFFDE);
+			var0000 = Func09B3(BOYDON);
 			if (var0000[0x0001] != 0x0000) {
 				say("\"Thy companions will have to help thee carry some of these things.\"");
 			}
@@ -104910,7 +104910,7 @@ void Func08DA 0x8DA (var var0000) {
 			if (gflags[0x01B8]) {
 				var0008 = AVATAR->get_object_position();
 				var0014 = true;
-				0xFFDE->move_object([(var0008[0x0001] + 0x0003), (var0008[0x0002] - 0x0002), var0008[0x0003]]);
+				BOYDON->move_object([(var0008[0x0001] + 0x0003), (var0008[0x0002] - 0x0002), var0008[0x0003]]);
 			}
 		}
 		if ((var0002 > 0x00DC) && (var0002 < 0x00EC)) {
@@ -106372,7 +106372,7 @@ void Func0901 0x901 () {
 		var0001 = AVATAR->remove_cont_items(QUANTITY_ANY, 0x019E, QUALITY_ANY, 0x0013, 0x0012);
 		var0001 = DUPRE->remove_cont_items(QUANTITY_ANY, 0x019E, QUALITY_ANY, 0x0013, 0x0012);
 		var0001 = IOLO->remove_cont_items(QUANTITY_ANY, 0x019E, QUALITY_ANY, 0x0013, 0x0012);
-		var0001 = 0xFFDE->remove_cont_items(QUANTITY_ANY, 0x019E, QUALITY_ANY, 0x0013, 0x0012);
+		var0001 = BOYDON->remove_cont_items(QUANTITY_ANY, 0x019E, QUALITY_ANY, 0x0013, 0x0012);
 	}
 	UI_init_conversation();
 	FILBERCIO->remove_npc();
@@ -106402,9 +106402,9 @@ void Func0901 0x901 () {
 	if (SHAMINO->get_npc_id() == 0x001E) {
 		Func09AC(SHAMINO, 0x07F8, 0x0799, WANDER);
 	}
-	if (0xFFDE->get_npc_id() == 0x001E) {
-		0xFFDE->set_new_schedules([MIDNIGHT, MORNING, NIGHT], [STANDTHERE, WANDER, MAJOR_SIT], [0x0912, 0x06D1, 0x08D5, 0x0754, 0x08C4, 0x070B]);
-		0xFFDE->run_schedule();
+	if (BOYDON->get_npc_id() == 0x001E) {
+		BOYDON->set_new_schedules([MIDNIGHT, MORNING, NIGHT], [STANDTHERE, WANDER, MAJOR_SIT], [0x0912, 0x06D1, 0x08D5, 0x0754, 0x08C4, 0x070B]);
+		BOYDON->run_schedule();
 	}
 	abort;
 }
@@ -111797,7 +111797,7 @@ var Func098C 0x98C () {
 var Func098D 0x98D () {
 	var var0000;
 
-	var0000 = [DUPRE, SHAMINO, IOLO, 0xFF6B, PETRA, MORTEGRO, 0xFFD3, 0xFFDE, 0xFFD4, 0xFF68, 0xFF58];
+	var0000 = [DUPRE, SHAMINO, IOLO, 0xFF6B, PETRA, MORTEGRO, 0xFFD3, BOYDON, 0xFFD4, 0xFF68, 0xFF58];
 	return var0000;
 }
 
@@ -112009,7 +112009,7 @@ var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003) {
 			// Dead code
 			abort;
 		}
-		if ((var0000 == 0xFFDE) && (0xFED3 in var0004)) {
+		if ((var0000 == BOYDON) && (0xFED3 in var0004)) {
 			var0000 = 0xFED3;
 			if (!var0003) {
 				Func094E(var0000, var0001);
