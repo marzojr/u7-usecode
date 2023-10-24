@@ -48645,13 +48645,13 @@ void Func0452 object#(0x452) () {
 	var0001 = Func0953();
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Speak, automaton!@");
-		0xFFAE->Func07D1();
-		Func097F(0xFFAE, "@Obedience... Failed...@", 0x0002);
-		0xFFAE->set_schedule_type(TALK);
+		LORD_OF_DISCIPLINE->Func07D1();
+		Func097F(LORD_OF_DISCIPLINE, "@Obedience... Failed...@", 0x0002);
+		LORD_OF_DISCIPLINE->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFAE->run_schedule();
-		0xFFAE->clear_item_say();
+		LORD_OF_DISCIPLINE->run_schedule();
+		LORD_OF_DISCIPLINE->clear_item_say();
 		0xFED6->show_npc_face0(0x0000);
 		say("\"Unfinished... Discipline...\"");
 		say("\"Master... Punishment... No Order...\"");

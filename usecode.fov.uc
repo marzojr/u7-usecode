@@ -22703,7 +22703,7 @@ void Func0451 object#(0x451) () {
 		if (gflags[0x0087]) {
 			add("Elizabeth and Abraham");
 		}
-		var0005 = Func08F7(0xFFAE);
+		var0005 = Func08F7(GREGOR);
 		if (var0005) {
 			if (var0004 == MAJOR_SIT) {
 				add("Gregor");
@@ -22947,12 +22947,12 @@ void Func0452 object#(0x452) () {
 	var var0004;
 
 	if (event == DOUBLECLICK) {
-		0xFFAE->show_npc_face(0x0000);
+		GREGOR->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
-		var0001 = 0xFFAE->get_npc_object()->get_schedule_type();
+		var0001 = GREGOR->get_npc_object()->get_schedule_type();
 		if (var0000 == NIGHT) {
 			if (var0001 == MAJOR_SIT) {
-				var0002 = Func08FC(0xFFAE, ELYNOR);
+				var0002 = Func08FC(GREGOR, ELYNOR);
 				if (var0002) {
 					say("Gregor is busy concentrating on the Fellowship meeting and cannot talk now.*");
 					abort;
@@ -23068,7 +23068,7 @@ void Func0452 object#(0x452) () {
 		say("\"Be on thy way then.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFAE);
+		Func092E(GREGOR);
 	}
 }
 
@@ -58897,7 +58897,7 @@ void Func06C7 object#(0x6C7) () {
 	var var0003;
 
 	if (event == EGG) {
-		var0000 = [0xFFA3, 0xFFA5, ELYNOR, 0xFFAE, 0xFFA6];
+		var0000 = [0xFFA3, 0xFFA5, ELYNOR, GREGOR, 0xFFA6];
 		for (var0003 in var0000 with var0001 to var0002) {
 			Func093F(var0003, LOITER);
 		}
@@ -68114,10 +68114,10 @@ void Func087B 0x87B () {
 	say("\"And there are those who are very uncertain about the merits of our Fellowship. Those who have heard the words of those who are against us but who see with their own eyes the substantial good that The Fellowship does and the difference it makes in the lives of its members every single day. Those undecided may still be brought into our family. We must Trust Our Brothers-yet-to-be. But most importantly, we must keep our enemies from spreading their prejudices against us. To do that we must show their beliefs to be untrue.\"");
 	say("\"We must prove ourselves worthy of the trust we would have our fellow citizens\tplace in us. Once we have sufficiently displayed this worthiness, it will only be a matter of time before we receive our reward of trust. It is as inevitable as night following day. As our enemies will one day receive their own inevitable reward for which they have made themselves worthy.\"");
 	say("\"Now I would like to hear from our members who have gathered here this evening. Share with us how The Fellowship has helped thee!\"");
-	var0000 = Func08F7(0xFFAE);
+	var0000 = Func08F7(GREGOR);
 	if (var0000) {
-		0xFFAE->say("\"The Fellowship has improved mine ability to run my business,\" says Gregor.*");
-		0xFFAE->hide();
+		GREGOR->say("\"The Fellowship has improved mine ability to run my business,\" says Gregor.*");
+		GREGOR->hide();
 	}
 	var0001 = Func08F7(0xFFA6);
 	if (var0001) {
