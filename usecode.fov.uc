@@ -22166,9 +22166,9 @@ void Func044C object#(0x44C) () {
 	var var0001;
 
 	if (event == DOUBLECLICK) {
-		0xFFB4->show_npc_face(0x0000);
+		RAYBURT->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
-		var0001 = 0xFFB4->get_npc_object()->get_schedule_type();
+		var0001 = RAYBURT->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (gflags[0x00E4]) {
 			if (gflags[0x00EE]) {
@@ -22239,7 +22239,7 @@ void Func044C object#(0x44C) () {
 		gflags[0x00EE] = true;
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFB4);
+		Func092E(RAYBURT);
 	}
 }
 

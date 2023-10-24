@@ -3072,7 +3072,7 @@ void Func0103 shape#(0x103) () {
 			if (gflags[0x0285] && (!gflags[0x0297])) {
 				add("strange wine");
 			}
-			if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
+			if (gflags[0x0045] && (SIMON->get_schedule_type() != WAIT)) {
 				add("brown bottle");
 			}
 			if (gflags[0x0118] && (!gflags[0x029C])) {
@@ -3223,7 +3223,7 @@ void Func0103 shape#(0x103) () {
 			if (gflags[0x0285] && (!gflags[0x0297])) {
 				add("strange wine");
 			}
-			if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
+			if (gflags[0x0045] && (SIMON->get_schedule_type() != WAIT)) {
 				add("brown bottle");
 			}
 			if (gflags[0x0118] && (!gflags[0x029C])) {
@@ -23227,7 +23227,7 @@ void Func040D object#(0x40D) () {
 				if (gflags[0x007B] && (!gflags[0x007C])) {
 					var000E &= "fish-net stockings";
 				}
-				if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
+				if (gflags[0x0045] && (SIMON->get_schedule_type() != WAIT)) {
 					var000E &= "brown bottle";
 				}
 				if (var000E == []) {
@@ -26153,7 +26153,7 @@ void Func0417 object#(0x417) () {
 		if (gflags[0x0285] && (!gflags[0x0297])) {
 			add("strange wine");
 		}
-		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
+		if (gflags[0x0045] && (SIMON->get_schedule_type() != WAIT)) {
 			add("brown bottle");
 		}
 		if (gflags[0x0106] && (!gflags[0x011B])) {
@@ -28740,7 +28740,7 @@ void Func041E object#(0x41E) () {
 		}
 		add(["Blue Boar", "visitors"]);
 		add(["food", "drink", "room"]);
-		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
+		if (gflags[0x0045] && (SIMON->get_schedule_type() != WAIT)) {
 			add("brown bottle");
 		}
 		if (gflags[0x0115] && (!gflags[0x0293])) {
@@ -37358,7 +37358,7 @@ void Func0434 object#(0x434) () {
 				if (gflags[0x007B] && (!gflags[0x007C])) {
 					var000D &= "fish-net stockings";
 				}
-				if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
+				if (gflags[0x0045] && (SIMON->get_schedule_type() != WAIT)) {
 					var000D &= "brown bottle";
 				}
 				if (var000D == []) {
@@ -41598,10 +41598,10 @@ void Func043F object#(0x43F) () {
 		if (gflags[0x00BB] || gflags[0x00BC]) {
 			add("trainer");
 		}
-		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
+		if (gflags[0x0045] && (SIMON->get_schedule_type() != WAIT)) {
 			add("brown bottle");
 		}
-		if (gflags[0x0048] && (!0xFFB4->get_item_flag(DEAD))) {
+		if (gflags[0x0048] && (!SIMON->get_item_flag(DEAD))) {
 			add("traitor");
 		}
 		if (gflags[0x002C]) {
@@ -42553,7 +42553,7 @@ void Func0442 object#(0x442) () {
 					G_SIMON->clear_item_flag(SI_TOURNAMENT);
 					G_SIMON->clear_item_flag(DEAD);
 					G_SIMON->kill_npc();
-					0xFFB4->set_item_flag(DEAD);
+					SIMON->set_item_flag(DEAD);
 					gflags[0x0046] = true;
 					abort;
 			}
@@ -43227,7 +43227,7 @@ void Func0443 object#(0x443) () {
 				if (gflags[0x007B] && (!gflags[0x007C])) {
 					var000B &= "fish-net stockings";
 				}
-				if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
+				if (gflags[0x0045] && (SIMON->get_schedule_type() != WAIT)) {
 					var000B &= "brown bottle";
 				}
 				if (var000B == []) {
@@ -43754,7 +43754,7 @@ void Func0444 object#(0x444) () {
 				if (gflags[0x00A6]) {
 					add("ruins");
 				}
-				if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
+				if (gflags[0x0045] && (SIMON->get_schedule_type() != WAIT)) {
 					add("brown bottle");
 				}
 				add("change subject");
@@ -44074,7 +44074,7 @@ void Func0445 object#(0x445) () {
 	var0009 = IOLO->get_item_flag(IN_PARTY);
 	var000A = SHAMINO->get_item_flag(IN_PARTY);
 	var000B = DUPRE->get_item_flag(IN_PARTY);
-	var000C = 0xFFB4->is_dead();
+	var000C = SIMON->is_dead();
 	var000D = "he";
 	if (UI_is_pc_female()) {
 		var000D = "she";
@@ -44200,7 +44200,7 @@ labelFunc0445_0257:
 			if ((MARSTEN->get_schedule_type() == TEND_SHOP) && (!gflags[0x0038])) {
 				add("Hall of Monitor");
 			}
-			if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
+			if (gflags[0x0045] && (SIMON->get_schedule_type() != WAIT)) {
 				add("brown bottle");
 			}
 		} while (false);
@@ -44810,10 +44810,10 @@ void Func0446 object#(0x446) () {
 		if (gflags[0x004A] && (!gflags[0x0091])) {
 			add("banquet stew");
 		}
-		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
+		if (gflags[0x0045] && (SIMON->get_schedule_type() != WAIT)) {
 			add("brown bottle");
 		}
-		if (gflags[0x0048] && (!(0xFFB4->get_item_flag(DEAD) && (!(gflags[0x0038] && (!gflags[0x0092])))))) {
+		if (gflags[0x0048] && (!(SIMON->get_item_flag(DEAD) && (!(gflags[0x0038] && (!gflags[0x0092])))))) {
 			add("traitor");
 		}
 		converse (["name", "buy", "bye"]) {
@@ -45243,10 +45243,10 @@ void Func0447 object#(0x447) () {
 		if (gflags[0x00AC] && (!gflags[0x00B2])) {
 			add("new shield");
 		}
-		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
+		if (gflags[0x0045] && (SIMON->get_schedule_type() != WAIT)) {
 			add("brown bottle");
 		}
-		if (gflags[0x0048] && (!0xFFB4->get_item_flag(DEAD))) {
+		if (gflags[0x0048] && (!SIMON->get_item_flag(DEAD))) {
 			add("traitor");
 		}
 		converse ("bye") {
@@ -45594,7 +45594,7 @@ void Func0448 object#(0x448) () {
 		if (gflags[0x004A] && (!gflags[0x003E])) {
 			add("tattoo");
 		}
-		if (gflags[0x0048] && (!0xFFB4->get_item_flag(DEAD))) {
+		if (gflags[0x0048] && (!SIMON->get_item_flag(DEAD))) {
 			add("traitor");
 		}
 		if (gflags[0x0035]) {
@@ -46593,20 +46593,20 @@ void Func044C object#(0x44C) () {
 	var var0014;
 
 	var0000 = Func0954();
-	var0001 = 0xFFB4->get_item_flag(MET);
+	var0001 = SIMON->get_item_flag(MET);
 	var0002 = Func0953();
 	var0003 = false;
-	if ((event == DEATH) && ((gflags[0x0045] || gflags[0x005F]) && ((!0xFFB4->get_item_flag(SI_ZOMBIE)) && (!gflags[0x0044])))) {
-		0xFFB4->show_npc_face0(0x0000);
+	if ((event == DEATH) && ((gflags[0x0045] || gflags[0x005F]) && ((!SIMON->get_item_flag(SI_ZOMBIE)) && (!gflags[0x0044])))) {
+		SIMON->show_npc_face0(0x0000);
 		say("\"So, thou hast found me out? Well, to the blazes with it all!\"");
-		0xFFB4->set_item_flag(SI_ZOMBIE);
-		0xFFB4->set_item_flag(DEAD);
-		var0004 = 0xFFB4->get_object_position();
+		SIMON->set_item_flag(SI_ZOMBIE);
+		SIMON->set_item_flag(DEAD);
+		var0004 = SIMON->get_object_position();
 		var0004[0x0001] -= var0004[0x0003] / 0x0002;
 		var0004[0x0002] -= var0004[0x0003] / 0x0002;
 		UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, var0004[0x0001], var0004[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		UI_play_sound_effect(0x0077);
-		0xFFB4->remove_npc();
+		SIMON->remove_npc();
 		G_SIMON->move_object(var0004);
 		G_SIMON->set_alignment(EVIL);
 		G_SIMON->set_new_schedules(MIDNIGHT, DANCE, [var0004[0x0001], var0004[0x0002]]);
@@ -46625,39 +46625,39 @@ void Func044C object#(0x44C) () {
 		}
 		abort;
 	}
-	if ((event == DOUBLECLICK) && (0xFFB4->get_schedule_type() != STANDTHERE)) {
+	if ((event == DOUBLECLICK) && (SIMON->get_schedule_type() != STANDTHERE)) {
 		Func097F(AVATAR, "@Hello!@", 0x0000);
-		0xFFB4->Func07D1();
-		Func097F(0xFFB4, "@Welcome!@", 0x0002);
-		if (0xFFB4->get_schedule_type() != TEND_SHOP) {
-			0xFFB4->set_schedule_type(TALK);
+		SIMON->Func07D1();
+		Func097F(SIMON, "@Welcome!@", 0x0002);
+		if (SIMON->get_schedule_type() != TEND_SHOP) {
+			SIMON->set_schedule_type(TALK);
 		} else {
-			var0005 = script 0xFFB4 after 5 ticks {
+			var0005 = script SIMON after 5 ticks {
 				nohalt;
 				call Func044C;
 			};
-			0xFFB4->set_schedule_type(STANDTHERE);
+			SIMON->set_schedule_type(STANDTHERE);
 		}
 	}
 	if (event == SCRIPTED) {
 		event = STARTED_TALKING;
 	}
 	if (event == STARTED_TALKING) {
-		0xFFB4->run_schedule();
-		0xFFB4->clear_item_say();
-		0xFFB4->show_npc_face0(0x0000);
+		SIMON->run_schedule();
+		SIMON->clear_item_say();
+		SIMON->show_npc_face0(0x0000);
 		if (item == AVATAR->get_npc_object()) {
 			AVATAR->clear_item_flag(IN_ACTION);
 			gflags[0x00B8] = true;
 			say("\"Unusual taste, eh? I dare say I am the only one outside of the city of Fawn who drinks it.\"");
 			say("\"I would share more with thee, but I think that thou dost not appreciate it. Besides, I must clean this foulness!\"");
-			0xFFB4->set_schedule_type(LOITER);
-			Func097F(0xFFB4, "@Such a waste!@", 0x0000);
+			SIMON->set_schedule_type(LOITER);
+			Func097F(SIMON, "@Such a waste!@", 0x0000);
 			abort;
 		}
 		if (!var0001) {
 			say("\"How may I help thee? My name is Simon.\"");
-			0xFFB4->set_item_flag(MET);
+			SIMON->set_item_flag(MET);
 		} else {
 			say("\"How can I help, ",
 				var0000,
@@ -46726,7 +46726,7 @@ void Func044C object#(0x44C) () {
 				fallthrough;
 
 			case "bed" (remove):
-				if (0xFFB4->get_schedule_type() == TEND_SHOP) {
+				if (SIMON->get_schedule_type() == TEND_SHOP) {
 					say("\"The cost is 5 monetari per person. Wouldst thou like a room for the night?\"");
 					if (Func0955()) {
 						var000A = UI_get_array_size(UI_get_party_list()) * 0x0005;
@@ -46761,7 +46761,7 @@ void Func044C object#(0x44C) () {
 				}
 				var000E = Func0955();
 				if (var000E) {
-					0xFFB4->set_schedule_type(WAIT);
+					SIMON->set_schedule_type(WAIT);
 					Func094E(AVATAR, "@Pfffz!@");
 					var000D = Func0992(0x0001, 0x0000, 0x0000, false);
 					if (var000D != AVATAR) {
@@ -46915,15 +46915,15 @@ void Func044C object#(0x44C) () {
 			case "Thou art lying!":
 				UI_play_music(0x0010, Func09A0(0x0005, 0x0001));
 				say("\"So I have been found out! Well, to the blazes with it all!!\"");
-				var0004 = 0xFFB4->get_object_position();
+				var0004 = SIMON->get_object_position();
 				while (var0004[0x0003] > 0x0000) {
 					var0004[0x0001] -= 0x0001;
 					var0004[0x0002] -= 0x0001;
 					var0004[0x0003] -= 0x0002;
 				}
-				0xFFB4->obj_sprite_effect(ANIMATION_PURPLE_BUBBLES, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-				var0004 = 0xFFB4->get_object_position();
-				0xFFB4->remove_npc();
+				SIMON->obj_sprite_effect(ANIMATION_PURPLE_BUBBLES, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
+				var0004 = SIMON->get_object_position();
+				SIMON->remove_npc();
 				G_SIMON->move_object(var0004);
 				G_SIMON->set_alignment(EVIL);
 				G_SIMON->set_new_schedules(MIDNIGHT, DANCE, [var0004[0x0001], var0004[0x0002]]);
@@ -46948,12 +46948,12 @@ void Func044C object#(0x44C) () {
 
 			case "bye":
 				Func097F(AVATAR, "@So long!@", 0x0000);
-				Func097F(0xFFB4, "@Come again!@", 0x0002);
+				Func097F(SIMON, "@Come again!@", 0x0002);
 				break;
 		}
 	}
 	if (event == PROXIMITY) {
-		var0012 = 0xFFB4->get_schedule_type();
+		var0012 = SIMON->get_schedule_type();
 		var0013 = UI_die_roll(0x0001, 0x0004);
 		if (var0012 == TEND_SHOP) {
 			if (var0013 == 0x0001) {
@@ -46968,7 +46968,7 @@ void Func044C object#(0x44C) () {
 			if (var0013 == 0x0004) {
 				var0014 = "@Sleep well here!@";
 			}
-			0xFFB4->item_say(var0014);
+			SIMON->item_say(var0014);
 		}
 	}
 }
@@ -47623,7 +47623,7 @@ void Func044F object#(0x44F) () {
 		if (gflags[0x00A4] && gflags[0x0048]) {
 			add("Goblins");
 		}
-		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
+		if (gflags[0x0045] && (SIMON->get_schedule_type() != WAIT)) {
 			add("brown bottle");
 		}
 		if (gflags[0x01CA] && gflags[0x0048]) {
@@ -47900,7 +47900,7 @@ void Func0450 object#(0x450) () {
 				add(["gate"]);
 			}
 		}
-		if (gflags[0x0048] && (!0xFFB4->get_item_flag(DEAD))) {
+		if (gflags[0x0048] && (!SIMON->get_item_flag(DEAD))) {
 			add("traitor");
 		}
 		if (gflags[0x00CC]) {
@@ -51384,7 +51384,7 @@ void Func0496 object#(0x496) () {
 		if (gflags[0x003D]) {
 			add("ready to spar");
 		}
-		if (gflags[0x0048] && (!0xFFB4->get_item_flag(DEAD))) {
+		if (gflags[0x0048] && (!SIMON->get_item_flag(DEAD))) {
 			add("traitor");
 		}
 		if (gflags[0x0093] && (!gflags[0x0038])) {
@@ -51402,7 +51402,7 @@ void Func0496 object#(0x496) () {
 		if (gflags[0x0038] && (!gflags[0x0078])) {
 			add("Iolo");
 		}
-		if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
+		if (gflags[0x0045] && (SIMON->get_schedule_type() != WAIT)) {
 			add("brown bottle");
 		}
 		if (gflags[0x002C]) {
@@ -67523,8 +67523,8 @@ void Func06AD object#(0x6AD) () {
 		}
 		if (UI_get_array_size(var0000) == 0x0000) {
 			gflags[0x0045] = true;
-			0xFFB4->set_alignment(CHAOTIC);
-			0xFFB4->set_item_flag(SI_TOURNAMENT);
+			SIMON->set_alignment(CHAOTIC);
+			SIMON->set_item_flag(SI_TOURNAMENT);
 			var0004 = Func0992(0x0001, "@A clue...@", "@A clue...@", true);
 			if (var0004 != AVATAR) {
 				var0005 = script var0004 after 10 ticks {
