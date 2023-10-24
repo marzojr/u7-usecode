@@ -1410,7 +1410,7 @@ void Func009B shape#(0x9B) () {
 					say("\"Dost thou wish... to return to the mainland?\"");
 					var0004 = Func090A();
 					if (var0004) {
-						var0006 = 0xFF70->get_npc_object();
+						var0006 = ROWENA->get_npc_object();
 						var0007 = UI_get_party_list();
 						var0008 = 0xFF6D->get_npc_object();
 						if ((var0006 in var0007) || (var0008 in var0007)) {
@@ -6634,9 +6634,9 @@ void Func02F0 shape#(0x2F0) () {
 		if (var0000 == 0x0000) {
 			set_item_frame(0x0001);
 			UI_play_music(0x0029, item);
-			if (Func08F7(0xFF70)) {
+			if (Func08F7(ROWENA)) {
 				gflags[0x01A7] = true;
-				0xFF70->get_npc_object()->Func0490();
+				ROWENA->get_npc_object()->Func0490();
 			}
 		} else {
 			set_item_frame(0x0000);
@@ -6690,7 +6690,7 @@ void Func02F2 shape#(0x2F2) () {
 	}
 	if (event == SCRIPTED) {
 		gflags[0x01AA] = true;
-		var0005 = [MORDRA, 0xFF70, MARKHAM, 0xFF6F, 0xFF6E, 0xFF6D, HORANCE];
+		var0005 = [MORDRA, ROWENA, MARKHAM, 0xFF6F, 0xFF6E, 0xFF6D, HORANCE];
 		for (var0008 in var0005 with var0006 to var0007) {
 			var0008->clear_item_flag(ASLEEP);
 			var0008->set_schedule_type(WAIT);
@@ -31819,11 +31819,11 @@ void Func048C object#(0x48C) () {
 				}
 			}
 		}
-		var0005 = Func08F7(0xFF70);
+		var0005 = Func08F7(ROWENA);
 		if (var0005) {
 			say("\"Oh, hello there, lady Rowena. 'Tis good to see ye again. It brings a ray o' sunshine into this old man's heart ta see yer beauteous face,\" he says, smiling.*");
-			0xFF70->say("She curtsies delicately and smiles back.~~\"Hello, Markham. It is good, indeed, to see that none of this horrible business can keep thee from giving a lady a compliment.\"*");
-			0xFF70->hide();
+			ROWENA->say("She curtsies delicately and smiles back.~~\"Hello, Markham. It is good, indeed, to see that none of this horrible business can keep thee from giving a lady a compliment.\"*");
+			ROWENA->hide();
 			MARKHAM->show_npc_face(0x0000);
 		}
 		var0006 = Func08F7(0xFF6D);
@@ -31963,7 +31963,7 @@ void Func048D object#(0x48D) () {
 		}
 		var0000 = Func0908();
 		var0001 = Func0909();
-		var0002 = Func08F7(0xFF70);
+		var0002 = Func08F7(ROWENA);
 		var0003 = false;
 		if (gflags[0x01A3]) {
 			if (!gflags[0x01AB]) {
@@ -32081,8 +32081,8 @@ void Func048D object#(0x48D) () {
 				say("A harsh cackle escapes his dry throat. \"I am the illustrious Lord of the Dead, soon to be Lord of all Britannia. Dost thou have any idea of the number of dead people and creatures there are? I thought not.~~\"The dead of the ages are mine to summon and control. The graves of beloved ancestors will spew forth their contents into an army. A special treat for the living, mine undead monsters will be. Imagine a skeletal dragon that cannot be killed. Consider a cabal of everliving mages eternally enthralled to me.~~\"And the most beautiful part of my plot is that, as the living die in these battles, and they will die, they will swell the ranks of the undead host. I will rule supreme -- a world of the dead!\" A terrifying glimpse of his sick and twisted future causes you to shiver\tever so slightly.~~\"And I will have a queen, the lovely Rowena.\"");
 				add("Rowena");
 				if (var0002) {
-					0xFF70->say("\"Yes, my Lord. I must be the happiest Lady in all the land.\" Her gaze never wanders from the horrid face of the Liche.");
-					0xFF70->hide();
+					ROWENA->say("\"Yes, my Lord. I must be the happiest Lady in all the land.\" Her gaze never wanders from the horrid face of the Liche.");
+					ROWENA->hide();
 					HORANCE->show_npc_face(0x0000);
 				}
 				fallthrough;
@@ -32326,7 +32326,7 @@ void Func048F object#(0x48F) () {
 			}
 		}
 		var000A = UI_get_party_list();
-		if (0xFF70->get_npc_object()->get_item_flag(IN_PARTY)) {
+		if (ROWENA->get_npc_object()->get_item_flag(IN_PARTY)) {
 			Func08C1();
 		}
 		if (0xFF6D->get_npc_object()->get_item_flag(IN_PARTY)) {
@@ -32528,7 +32528,7 @@ void Func0490 object#(0x490) () {
 
 	if (event == DOUBLECLICK) {
 		if (!gflags[0x01B8]) {
-			0xFF70->say("The beautiful ghost looks through you with a slack look. Nothing\tyou do seems to attract her attention.*");
+			ROWENA->say("The beautiful ghost looks through you with a slack look. Nothing\tyou do seems to attract her attention.*");
 			gflags[0x01A7] = false;
 			abort;
 		}
@@ -32538,31 +32538,31 @@ void Func0490 object#(0x490) () {
 		var0000 = UI_is_pc_female();
 		var0001 = Func0909();
 		if (gflags[0x01A6]) {
-			0xFF70->show_npc_face(0x0001);
+			ROWENA->show_npc_face(0x0001);
 			Func08D6();
 		}
 		if (gflags[0x01AA]) {
-			0xFF70->show_npc_face(0x0001);
+			ROWENA->show_npc_face(0x0001);
 			Func08D7();
 		}
 		if (gflags[0x01A7]) {
 			if (!gflags[0x01A9]) {
-				0xFF70->show_npc_face(0x0001);
+				ROWENA->show_npc_face(0x0001);
 				Func08D8();
 			}
 		}
 		var0002 = UI_part_of_day();
-		var0003 = 0xFF70->get_schedule_type();
+		var0003 = ROWENA->get_schedule_type();
 		if ((var0002 == MIDNIGHT) || (var0002 == EARLY)) {
 			if (var0003 == SLEEP) {
-				0xFF70->show_npc_face(0x0000);
+				ROWENA->show_npc_face(0x0000);
 				Func08D9();
 			} else if (!(var0003 == MAJOR_SIT)) {
-				0xFF70->show_npc_face(0x0000);
+				ROWENA->show_npc_face(0x0000);
 				Func08DA();
 			}
 		}
-		0xFF70->show_npc_face(0x0000);
+		ROWENA->show_npc_face(0x0000);
 		if (!gflags[0x01C9]) {
 			say("You see a ghostly lady wearing a long, black gown. Something is a bit strange about the way she looks, but you can't quite place it. After a pause, she says, \"Greetings, ",
 				var0001,
@@ -32656,12 +32656,12 @@ void Func0491 object#(0x491) () {
 			say("\"Go away! Thou art cruel and mean-hearted.\" She turns away, but not before you see the tears in her eyes.*");
 			abort;
 		}
-		var0006 = Func08F7(0xFF70);
+		var0006 = Func08F7(ROWENA);
 		if (var0006) {
 			if (!gflags[0x01BE]) {
 				say("Paulette perks up as she sees Rowena.~~\"Hello, milady. 'Tis good to see thee again. How art thou?\"*");
-				0xFF70->say("\"I am fine, Paulette. I thank thee for thy concern.\"*");
-				0xFF70->hide();
+				ROWENA->say("\"I am fine, Paulette. I thank thee for thy concern.\"*");
+				ROWENA->hide();
 				0xFF6F->say("\"'Tis good news indeed, milady.\"");
 				gflags[0x01BE] = true;
 			}
@@ -32864,15 +32864,15 @@ void Func0492 object#(0x492) () {
 			}
 		}
 		var0006 = UI_get_party_list();
-		var0007 = 0xFF70->get_npc_object();
+		var0007 = ROWENA->get_npc_object();
 		var0008 = 0xFF6D->get_npc_object();
 		if ((var0007 in var0006) || (var0008 in var0006)) {
 			if (var0007 in var0006) {
-				0xFF70->say("\"Hello, Quenton. I hope thou art doing well.\" Rowena gives the pale ghost a winning smile.*");
-				0xFF70->hide();
+				ROWENA->say("\"Hello, Quenton. I hope thou art doing well.\" Rowena gives the pale ghost a winning smile.*");
+				ROWENA->hide();
 				0xFF6E->say("\"Yes, milady. I am doing as well as can be expected. It gladdens mine heart to see that thou art once again free. Hast thou been to see Trent yet?\"*");
-				0xFF70->say("\"Alas, no. This kind person is taking me to him.\" She indicates you.*");
-				0xFF70->hide();
+				ROWENA->say("\"Alas, no. This kind person is taking me to him.\" She indicates you.*");
+				ROWENA->hide();
 				0xFF6E->say("\"These are glad tidings, for he misses thee so.\"*");
 			}
 			if (var0008 in var0006) {
@@ -69109,7 +69109,7 @@ void Func088B 0x88B () {
 	};
 	0xFF6D->remove_from_party();
 	0xFF6D->set_schedule_type(WAIT);
-	var0006 = [0xFF6D, MORDRA, TRENT, 0xFF70, MARKHAM, 0xFF6E, 0xFF6F];
+	var0006 = [0xFF6D, MORDRA, TRENT, ROWENA, MARKHAM, 0xFF6E, 0xFF6F];
 	for (var0009 in var0006 with var0007 to var0008) {
 		var0009->remove_npc();
 	}
@@ -72568,9 +72568,9 @@ void Func08C1 0x8C1 () {
 
 	var0000 = Func0908();
 	say("\"Sweet Rowena, I am so happy to see thee out of that horrid tower.\" Mordra's eyes begin to fill with tears of joy.*");
-	0xFF70->show_npc_face(0x0001);
+	ROWENA->show_npc_face(0x0001);
 	say("\"It was terrible, but the worst part was being away from mine husband. The whole time I was there with Horance, I felt like a hollow shell of a person. I must be with Trent to be whole again.\"*");
-	0xFF70->hide();
+	ROWENA->hide();
 	MORDRA->say("\"Yes, thou art quite right. ",
 		var0000,
 		", she must needs be taken to her husband, swiftly. I trust that thou wilt do so.\" She leaves the statement hanging and says her goodbyes to Rowena.*");
@@ -73901,7 +73901,7 @@ void Func08D6 0x8D6 () {
 					". She is my life. If thou takest her, thou takest mine heart.\" Trent holds on tightly to his wife.");
 				gflags[0x019D] = true;
 				TRENT->hide();
-				0xFF70->show_npc_face(0x0001);
+				ROWENA->show_npc_face(0x0001);
 			} else {
 				say("\"I cannot leave my lord like this. Surely thou canst understand, ",
 					var0000,
@@ -73933,13 +73933,13 @@ void Func08D7 0x8D7 () {
 
 	var0000 = Func0909();
 	var0001 = UI_get_party_list();
-	var0002 = 0xFF70->get_npc_object();
+	var0002 = ROWENA->get_npc_object();
 	if (var0002 in var0001) {
 		var0003 = Func08F7(TRENT);
 		if (var0003) {
-			0xFF70->remove_from_party();
+			ROWENA->remove_from_party();
 			say("The starcrossed lovers rush into each other's ghostly embrace. For a time it's hard to see where one spirit ends and the other begins, then the two slowly turn to face you. \"Thou hast done so much for us, I hope that in helping us, thou hast been assisted in thine own quest.\" Rowena performs a curtsey then turns to regard her handsome husband.*");
-			0xFF70->get_npc_object()->set_schedule_type(WAIT);
+			ROWENA->get_npc_object()->set_schedule_type(WAIT);
 			gflags[0x01A6] = true;
 			abort;
 		}
@@ -73976,7 +73976,7 @@ void Func08D7 0x8D7 () {
 			}
 			if (var0006 < 0x0008) {
 				say("She steps in line and motions for you to lead on.*");
-				0xFF70->add_to_party();
+				ROWENA->add_to_party();
 				var0005 = true;
 				abort;
 			}
@@ -74002,7 +74002,7 @@ void Func08D8 0x8D8 () {
 	var0000 = UI_is_pc_female();
 	var0001 = Func0909();
 	if (!gflags[0x01B8]) {
-		0xFF70->say("The beautiful ghost looks through you with a slack look. Nothing\tyou do seems to attract her attention.*");
+		ROWENA->say("The beautiful ghost looks through you with a slack look. Nothing\tyou do seems to attract her attention.*");
 		gflags[0x01A7] = false;
 		abort;
 	}
@@ -75037,10 +75037,10 @@ void Func08EF 0x8EF () {
 		if (gflags[0x01A8]) {
 			say("Trent paces around the burned-out remains of his shop. When he sees you return, he rushes forward, looking for his love, Rowena.");
 			var0002 = UI_get_party_list();
-			if (0xFF70->get_npc_object() in var0002) {
+			if (ROWENA->get_npc_object() in var0002) {
 				say("The starcrossed lovers rush into each other's ghostly embrace. For a time it's hard to see where one spirit begins and the other ends. You barely make out the image of Trent replacing Rowena's ring on her finger.~~Then the two slowly turn to face you. \"Thou hast done so much for us, I hope that in helping us, thou hast been assisted in thine own quest.\" Trent bows to you then turns to regard his lovely wife.*");
-				0xFF70->remove_from_party();
-				0xFF70->get_npc_object()->set_schedule_type(WAIT);
+				ROWENA->remove_from_party();
+				ROWENA->get_npc_object()->set_schedule_type(WAIT);
 				gflags[0x01A6] = true;
 				abort;
 			}
@@ -75113,18 +75113,18 @@ void Func08F0 0x8F0 () {
 	var var0001;
 
 	var0000 = Func0909();
-	var0001 = Func08F7(0xFF70);
+	var0001 = Func08F7(ROWENA);
 	if (var0001) {
 		say("The couple haven't released their embrace since they were first reunited as far as you can tell, and they show no sign of doing so any time in the near future.");
 		converse ("bye") {
 			case "sacrifice":
 				if (!gflags[0x019E]) {
-					0xFF70->show_npc_face(0x0001);
+					ROWENA->show_npc_face(0x0001);
 					say("\"No, ",
 						var0000,
 						". Wouldst thou take my beloved from me so shortly after our reunion? Another will have to perform this terrible task.\" Rowena holds on tightly to her husband.");
 					gflags[0x019E] = true;
-					0xFF70->hide();
+					ROWENA->hide();
 					TRENT->show_npc_face(0x0001);
 				} else {
 					say("\"I cannot leave my lady like this. Surely thou dost understand, ",
