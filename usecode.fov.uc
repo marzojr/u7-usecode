@@ -36138,7 +36138,7 @@ void Func04A7 object#(0x4A7) () {
 	var var0007;
 
 	if (event == DOUBLECLICK) {
-		0xFF59->show_npc_face(0x0000);
+		FERIDWYN->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
 		var0002 = false;
@@ -36154,14 +36154,14 @@ void Func04A7 object#(0x4A7) () {
 			if (var0004) {
 				0xFF56->say("\"That is correct! I am a witness that what Feridwyn has said is the truth!\"*");
 				0xFF56->hide();
-				0xFF59->show_npc_face(0x0000);
+				FERIDWYN->show_npc_face(0x0000);
 			}
 			say("\"I have often said that Tobias was no good. Now here is proof. He is the thief that has been praying upon one of our honest merchants! And to think I let him come into contact with my son! I hope he shall be dealt with in a manner appropriate to one who is leading youth astray from the way of The Fellowship.");
 			say("\"I suggest that thou go and speak with his mother at once! Camille should keep a tighter rein on her offspring!\"*");
 			gflags[0x0213] = true;
 			gflags[0x021C] = true;
 			0xFF4F->get_npc_object()->set_schedule_type(TALK);
-			0xFF59->get_npc_object()->set_schedule_type(LOITER);
+			FERIDWYN->get_npc_object()->set_schedule_type(LOITER);
 			abort;
 		}
 		add(["name", "job", "bye"]);
@@ -36221,7 +36221,7 @@ void Func04A7 object#(0x4A7) () {
 					if (var0007) {
 						0xFF58->say("\"Mine husband is such a flatterer. The truth is that our work for The Fellowship has brought us closer together.\"*");
 						0xFF58->hide();
-						0xFF59->show_npc_face(0x0000);
+						FERIDWYN->show_npc_face(0x0000);
 					}
 				} else {
 					say("\"As thou dost already know my wife Brita, I am certain thou wilt agree that thou couldst not find a more dedicated practitioner of The Fellowship's teachings.\"");
@@ -36378,7 +36378,7 @@ void Func04A7 object#(0x4A7) () {
 		}
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF59);
+		Func092E(FERIDWYN);
 	}
 }
 
@@ -36432,10 +36432,10 @@ void Func04A8 object#(0x4A8) () {
 					say("\"Mine husband is a good man who devotes himself selflessly to helping the poor of this town, something they do not appreciate. He is a good man and a dutiful Fellowship member.\"");
 				} else {
 					say("\"Mine husband is the most honorable man I have ever met in my life.\"");
-					var0002 = Func08F7(0xFF59);
+					var0002 = Func08F7(FERIDWYN);
 					if (var0002) {
-						0xFF59->say("\"Do not put stock in the proud boasts of wives, good Avatar. I am a simple man who only does what he can.\"*");
-						0xFF59->hide();
+						FERIDWYN->say("\"Do not put stock in the proud boasts of wives, good Avatar. I am a simple man who only does what he can.\"*");
+						FERIDWYN->hide();
 						0xFF58->show_npc_face(0x0000);
 					}
 				}
@@ -50610,10 +50610,10 @@ void Func060E object#(0x60E) () {
 				var0003->set_schedule_type(FOLLOW_AVATAR);
 			}
 			var001A = var0017;
-			if (!((0xFF59->get_schedule_type() == IN_COMBAT) || (0xFF58->get_schedule_type() == IN_COMBAT))) {
-				if (!Func0938(0xFF59)) {
-					var001A &= 0xFF59->get_npc_object();
-					0xFF59->set_schedule_type(LOITER);
+			if (!((FERIDWYN->get_schedule_type() == IN_COMBAT) || (0xFF58->get_schedule_type() == IN_COMBAT))) {
+				if (!Func0938(FERIDWYN)) {
+					var001A &= FERIDWYN->get_npc_object();
+					FERIDWYN->set_schedule_type(LOITER);
 				}
 				if (!Func0938(0xFF58)) {
 					var001A &= 0xFF58->get_npc_object();
@@ -50692,7 +50692,7 @@ void Func0610 object#(0x610) () {
 	}
 	var0004 = Func0909();
 	var0005 = Func0908();
-	var0006 = Func08F7(0xFF59);
+	var0006 = Func08F7(FERIDWYN);
 	var0007 = Func08F7(0xFF58);
 	var0008 = Func08F7(IOLO);
 	if (IOLO->get_item_flag(ASLEEP)) {
@@ -50707,9 +50707,9 @@ void Func0610 object#(0x610) () {
 		var000A = 0x0000;
 	}
 	if (var0006) {
-		0xFF59->show_npc_face(0x0000);
+		FERIDWYN->show_npc_face(0x0000);
 		Func08D5();
-		0xFF59->hide();
+		FERIDWYN->hide();
 	} else if (var0007) {
 		0xFF58->show_npc_face(0x0000);
 		Func08D5();
@@ -58882,7 +58882,7 @@ void Func06C6 object#(0x6C6) () {
 			gflags[0x0236] = true;
 		}
 		if (gflags[0x0236] && (!gflags[0x021C])) {
-			Func093F(0xFF59->get_npc_object(), TALK);
+			Func093F(FERIDWYN->get_npc_object(), TALK);
 		}
 		if (gflags[0x0213] && (!gflags[0x0234])) {
 			Func093F(0xFF4F->get_npc_object(), TALK);
