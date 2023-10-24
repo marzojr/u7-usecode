@@ -28136,11 +28136,11 @@ void Func0477 object#(0x477) () {
 	var var000A;
 
 	if (event == DOUBLECLICK) {
-		0xFF89->show_npc_face(0x0000);
+		DE_SNEL->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFF89->get_npc_object()->get_schedule_type();
-		var0003 = 0xFF89->get_npc_object();
+		var0002 = DE_SNEL->get_npc_object()->get_schedule_type();
+		var0003 = DE_SNEL->get_npc_object();
 		add(["name", "job", "bye"]);
 		if (!gflags[0x0171]) {
 			say("Though he does not seem hostile, the man greets you in a fighting stance.");
@@ -28285,7 +28285,7 @@ void Func0477 object#(0x477) () {
 		}
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF89);
+		Func092E(DE_SNEL);
 	}
 }
 
