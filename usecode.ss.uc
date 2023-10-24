@@ -44149,7 +44149,7 @@ labelFunc0445_0257:
 		MARSTEN->show_npc_face0(0x0000);
 		do {
 			if (!var0002) {
-				var000E = [0xFF6A, CALADIN, 0xFFB7, 0xFFB3, MARSTEN];
+				var000E = [0xFF6A, CALADIN, RENFRY, 0xFFB3, MARSTEN];
 				for (var0014 in var000E with var0012 to var0013) {
 					var0014->revert_schedule();
 				}
@@ -45786,15 +45786,15 @@ void Func0449 object#(0x449) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Greetings, sir.@");
-		0xFFB7->Func07D1();
-		Func097F(0xFFB7, "@What?@", 0x0002);
-		0xFFB7->set_schedule_type(TALK);
+		RENFRY->Func07D1();
+		Func097F(RENFRY, "@What?@", 0x0002);
+		RENFRY->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFB7->run_schedule();
-		0xFFB7->clear_item_say();
-		0xFFB7->show_npc_face0(0x0000);
-		var0001 = 0xFFB7->get_item_flag(MET);
+		RENFRY->run_schedule();
+		RENFRY->clear_item_say();
+		RENFRY->show_npc_face0(0x0000);
+		var0001 = RENFRY->get_item_flag(MET);
 		if (!gflags[0x0032]) {
 			say("\"Say here! I'm Renfry the Cremator and there is a funeral in progress. Lords Marsten, Spektor, Brendann and Caladin are all in the crypts paying their last respects.\"");
 			abort;
@@ -45803,7 +45803,7 @@ void Func0449 object#(0x449) () {
 			say("\"I say, I say who is that? Art thou a stranger?\"");
 			if (Func0955()) {
 				say("\"No, no, I do not speak with strangers... I only care to speak with my fellow Knights.\"");
-				Func097F(0xFFB7, "@Be gone...@", 0x0000);
+				Func097F(RENFRY, "@Be gone...@", 0x0000);
 			} else {
 				say("\"Pardon me for not recognizing thee, Sir Knight. I be an old man, and mine eyesight is not what it once was.\"");
 			}
@@ -45829,7 +45829,7 @@ void Func0449 object#(0x449) () {
 					0x0000->set_conversation_slot();
 					say("\"Oh. As thou canst tell, mine hearing is not what it once was. 'Tis the roar of the fires which hath done it...\"");
 					say("\"I am Renfry, Knight and Cremator.\"");
-					0xFFB7->set_item_flag(MET);
+					RENFRY->set_item_flag(MET);
 				}
 				fallthrough;
 
@@ -45850,7 +45850,7 @@ void Func0449 object#(0x449) () {
 						say("\"Then thou hast spent too much time on the list fields, and not enough time pondering the traditions of our people. Pay attention!\"");
 					} else {
 						say("\"I don't speak with strangers!\"");
-						Func097F(0xFFB7, "@To blazes!@", 0x0000);
+						Func097F(RENFRY, "@To blazes!@", 0x0000);
 						abort;
 					}
 				}
@@ -45956,7 +45956,7 @@ void Func0449 object#(0x449) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Bye!@", 0x0000);
-				Func097F(0xFFB7, "@What? Oh, goodbye.@", 0x0002);
+				Func097F(RENFRY, "@What? Oh, goodbye.@", 0x0002);
 				break;
 		}
 	}
@@ -78743,8 +78743,8 @@ void Func07D8 object#(0x7D8) () {
 			}
 		}
 		FEDABIBLIO->remove_npc();
-		0xFFB7->remove_npc();
-		0xFFB7->set_item_flag(DEAD);
+		RENFRY->remove_npc();
+		RENFRY->set_item_flag(DEAD);
 		Func09AC(ANDRAL, 0x0366, 0x0AA9, WAIT);
 		Func09AC(0xFF6A, 0x03B6, 0x0A54, WAIT);
 		Func09AC(0xFFB0, 0x0323, 0x0ABC, WAIT);

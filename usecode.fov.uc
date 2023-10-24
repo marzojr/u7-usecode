@@ -21702,7 +21702,7 @@ void Func0449 object#(0x449) () {
 	var var0007;
 
 	if (event == DOUBLECLICK) {
-		0xFFB7->show_npc_face(0x0000);
+		CHARLES->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (gflags[0x0076]) {
 			add("Nell");
@@ -21808,7 +21808,7 @@ void Func0449 object#(0x449) () {
 		say("Charles nods his head at you, then goes about his business.*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFB7);
+		Func092E(CHARLES);
 	}
 }
 
