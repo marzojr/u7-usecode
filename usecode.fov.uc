@@ -26024,7 +26024,7 @@ void Func0468 object#(0x468) () {
 	var var0002;
 
 	if (event == DOUBLECLICK) {
-		0xFF98->show_npc_face(0x0000);
+		BRADMAN->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
 		if (!gflags[0x0142]) {
@@ -26072,12 +26072,12 @@ void Func0468 object#(0x468) () {
 				if (var0001) {
 					IOLO->say("Iolo blushes. \"I am honored, my friend. I was not aware I had an admirer in this part of the land.\" He bows to Bradman, who returns the gesture.*");
 					IOLO->hide();
-					0xFF98->show_npc_face(0x0000);
+					BRADMAN->show_npc_face(0x0000);
 				}
 				if (var0002) {
 					TSERAMED->say("\"Thank you for thy kind words, good sir. Perhaps we may practice sometime in the future.\"*");
 					TSERAMED->hide();
-					0xFF98->say("\"I would be greatly honored, milord!\"");
+					BRADMAN->say("\"I would be greatly honored, milord!\"");
 				} else {
 					add("Tseramed");
 				}
@@ -26113,7 +26113,7 @@ void Func0468 object#(0x468) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF98);
+		Func092E(BRADMAN);
 	}
 }
 
