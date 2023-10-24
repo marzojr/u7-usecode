@@ -34720,7 +34720,7 @@ void Func049D object#(0x49D) () {
 	var var0003;
 
 	if (event == DOUBLECLICK) {
-		0xFF63->show_npc_face(0x0000);
+		TOLEMAC->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
 		add(["name", "job", "Fellowship", "bye"]);
@@ -34729,7 +34729,7 @@ void Func049D object#(0x49D) () {
 			abort;
 		}
 		if (var0001 == NIGHT) {
-			var0002 = Func08FC(0xFF63, 0xFF06);
+			var0002 = Func08FC(TOLEMAC, 0xFF06);
 			if (var0002) {
 				say("\"I am trying to pay attention!\" he says, glaring at you.");
 			} else {
@@ -34837,7 +34837,7 @@ void Func049D object#(0x49D) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF63);
+		Func092E(TOLEMAC);
 	}
 }
 
@@ -73437,7 +73437,7 @@ void Func08CF 0x8CF () {
 	var var0004;
 
 	var0000 = Func08F7(BALAYNA);
-	var0001 = Func08F7(0xFF63);
+	var0001 = Func08F7(TOLEMAC);
 	var0002 = Func08F7(IOLO);
 	var0003 = Func08F7(DUPRE);
 	say("\"Fellow members, each of thee has faced -- and doubtless shall face again -- a moment in which thou dost feel the heat of the fever. A moment when thy mind has been clouded with illusory thoughts and visions. A moment when thy recognition has simply vanished, without rhyme or reason. A moment when, perhaps, thou hast even doubted the very words of The Fellowship itself!\"*");
@@ -73448,8 +73448,8 @@ void Func08CF 0x8CF () {
 	}
 	say("\"The second principle of the Triad is `trust thy brother.' 'Tis a simple practice when thou dost know thy brother. But The Fellowship was not always known to thee. It may, at one time, have been difficult to put thy trust in something as large as The Fellowship.~~ \"However, to gain full knowledge of thine inner strength, one must have the courage to walk on the fire of trust!\"*");
 	if (var0001) {
-		0xFF63->say("\"'Tis true! Trust was the key to my freedom!\"*");
-		0xFF63->hide();
+		TOLEMAC->say("\"'Tis true! Trust was the key to my freedom!\"*");
+		TOLEMAC->hide();
 		0xFF06->show_npc_face(0x0000);
 	}
 	say("\"Trust requires great courage, and that courage exists within thyself.\"*");

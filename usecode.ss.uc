@@ -52122,7 +52122,7 @@ void Func049B object#(0x49B) () {
 			nohalt;
 			call Func049B;
 		};
-		if (0xFF62->npc_nearby() || (DRAYGAN->npc_nearby() || (0xFF63->npc_nearby() || 0xFF61->npc_nearby()))) {
+		if (0xFF62->npc_nearby() || (DRAYGAN->npc_nearby() || (HURD->npc_nearby() || 0xFF61->npc_nearby()))) {
 			abort;
 		}
 		var0003 = BERYL->approach_avatar(0x0078, 0x0028);
@@ -52510,7 +52510,7 @@ void Func049D object#(0x49D) () {
 	var var0000;
 
 	if (event == SCRIPTED) {
-		if (DRAYGAN->get_item_flag(DEAD) || ((Func0994() != 0x0007) || (0xFF63->get_item_flag(DEAD) || (0xFF63->get_npc_id() > 0x0003)))) {
+		if (DRAYGAN->get_item_flag(DEAD) || ((Func0994() != 0x0007) || (HURD->get_item_flag(DEAD) || (HURD->get_npc_id() > 0x0003)))) {
 			abort;
 		}
 		var0000 = script Func09A0(0x0005, 0x0001) after (0x0064 + UI_get_random(0x01F4)) ticks {
@@ -52520,24 +52520,24 @@ void Func049D object#(0x49D) () {
 		if (0xFF62->npc_nearby() || (DRAYGAN->npc_nearby() || (BERYL->npc_nearby() || 0xFF61->npc_nearby()))) {
 			abort;
 		}
-		var0000 = 0xFF63->approach_avatar(0x0078, 0x0028);
+		var0000 = HURD->approach_avatar(0x0078, 0x0028);
 		if (var0000) {
-			0xFF63->set_schedule_type(THIEF);
+			HURD->set_schedule_type(THIEF);
 		}
 		abort;
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Pardon me...@");
-		0xFF63->Func07D1();
+		HURD->Func07D1();
 		if (DRAYGAN->npc_nearby()) {
-			Func097F(0xFF63, "@Go away!@", 0x0003);
+			Func097F(HURD, "@Go away!@", 0x0003);
 			DRAYGAN->set_schedule_type(HOUND);
 			Func097F(DRAYGAN, "@Leave him alone!@", 0x0005);
 		} else {
-			Func097F(0xFF63, "@I am not a spy...@", 0x0003);
-			0xFF63->set_npc_id(0xFF63->get_npc_id() + 0x0001);
+			Func097F(HURD, "@I am not a spy...@", 0x0003);
+			HURD->set_npc_id(HURD->get_npc_id() + 0x0001);
 		}
-		0xFF63->set_schedule_type(SHY);
+		HURD->set_schedule_type(SHY);
 	}
 }
 
@@ -52558,7 +52558,7 @@ void Func049E object#(0x49E) () {
 			nohalt;
 			call Func049E;
 		};
-		if (0xFF63->npc_nearby() || (DRAYGAN->npc_nearby() || (BERYL->npc_nearby() || 0xFF61->npc_nearby()))) {
+		if (HURD->npc_nearby() || (DRAYGAN->npc_nearby() || (BERYL->npc_nearby() || 0xFF61->npc_nearby()))) {
 			abort;
 		}
 		var0000 = 0xFF62->approach_avatar(0x0078, 0x0028);
@@ -79513,9 +79513,9 @@ void Func07E1 object#(0x7E1) () {
 			var0002 = DRAYGAN->get_npc_prop(HEALTH);
 			Func0982(DRAYGAN, var0002 - 0x0001);
 			Func097F(DRAYGAN, "@zzzzzz....@", 0x0002);
-			if (0xFF63->npc_nearby()) {
-				Func09AD(0xFF63);
-				Func097F(0xFF63, "@I obey, Master!@", 0x0002);
+			if (HURD->npc_nearby()) {
+				Func09AD(HURD);
+				Func097F(HURD, "@I obey, Master!@", 0x0002);
 			}
 			if (0xFF62->npc_nearby()) {
 				Func09AD(0xFF62);
