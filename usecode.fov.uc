@@ -23825,7 +23825,7 @@ void Func0459 object#(0x459) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFFA7->show_npc_face(0x0000);
+	KARL->show_npc_face(0x0000);
 	var0000 = Func0909();
 	var0001 = false;
 	var0002 = UI_wearing_fellowship();
@@ -23912,7 +23912,7 @@ void Func0459 object#(0x459) () {
 			if (var0003) {
 				JULIA->say("\"Yes I would, Karl! Thou dost have too low opinion of thyself! Raise thy spirits, please!\"");
 				JULIA->hide();
-				0xFFA7->show_npc_face(0x0000);
+				KARL->show_npc_face(0x0000);
 			}
 			gflags[0x010B] = true;
 			remove("plans");
