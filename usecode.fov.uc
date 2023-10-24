@@ -32134,10 +32134,10 @@ void Func048E object#(0x48E) () {
 	var var0005;
 
 	if (event == DOUBLECLICK) {
-		0xFF72->show_npc_face(0x0000);
+		TRENT->show_npc_face(0x0000);
 		var0000 = Func0931(PARTY, 0x0001, 0x0127, 0x0000, FRAME_ANY);
 		var0001 = Func0909();
-		var0002 = 0xFF72->find_nearest(0x02EB, ON_SCREEN);
+		var0002 = TRENT->find_nearest(0x02EB, ON_SCREEN);
 		var0003 = false;
 		if (gflags[0x01CE]) {
 			say("Trent glares, giving his eyes an intensity that leaves no doubt in your mind about his attitude. \"If I thought that thou wert going to run off at a moment's notice I'd not have asked thee to help me free my love.~~\"Now please, take the cage and go to\tMordra. She will instruct thee in its use.\" His manner smoothes, \"I have placed mine only chance at reunion with Rowena in thy capable hands.\"*");
@@ -32163,11 +32163,11 @@ void Func048E object#(0x48E) () {
 			add("sacrifice");
 		}
 		if (gflags[0x01A6]) {
-			0xFF72->show_npc_face(0x0001);
+			TRENT->show_npc_face(0x0001);
 			Func08F0();
 		}
 		if (gflags[0x01A5]) {
-			0xFF72->show_npc_face(0x0001);
+			TRENT->show_npc_face(0x0001);
 			gflags[0x01C1] = false;
 			Func08EF();
 		}
@@ -32237,8 +32237,8 @@ void Func048E object#(0x48E) () {
 			case "ring":
 				var0005 = UI_remove_party_items(0x0001, 0x0127, 0x0000, FRAME_ANY, false);
 				say("You hold out the ring to Trent. At first he ignores you. Then, recognizing the ring, he takes it from you and holds it before him. Something in him snaps and his huge frame slumps forward.~~You let the ghost cry for a while, and when he finishes, you see a remarkable change in his appearance.");
-				0xFF72->hide();
-				0xFF72->show_npc_face(0x0001);
+				TRENT->hide();
+				TRENT->show_npc_face(0x0001);
 				say("The flames that once burned in his eyes are now gone, replaced by a deep shade of blue. He looks like a new man, or rather, ghost as it were.~ \"Forgive my behavior, ",
 					var0001,
 					". I know not what came over me. I remember flames, but they burned no hotter than mine own Hatred.\" He looks pained at the memory.~~ \"Thou hast seen her? Thou hast seen Rowena? And she still cares for me. Well, all the more reason to finish this Soul Cage. We must free her from Horance's vile sorcery.\"");
@@ -50926,8 +50926,8 @@ void Func0617 object#(0x617) () {
 	}
 	if (event == SCRIPTED) {
 		set_schedule_type(WAIT);
-		if (0xFF72->npc_nearby()) {
-			0xFF72->show_npc_face(0x0001);
+		if (TRENT->npc_nearby()) {
+			TRENT->show_npc_face(0x0001);
 			say("\"There. It is done. Now take the blasted thing to Mordra. She will instruct thee in its use.\"");
 			abort;
 		}
@@ -69109,7 +69109,7 @@ void Func088B 0x88B () {
 	};
 	0xFF6D->remove_from_party();
 	0xFF6D->set_schedule_type(WAIT);
-	var0006 = [0xFF6D, 0xFF71, 0xFF72, 0xFF70, MARKHAM, 0xFF6E, 0xFF6F];
+	var0006 = [0xFF6D, 0xFF71, TRENT, 0xFF70, MARKHAM, 0xFF6E, 0xFF6F];
 	for (var0009 in var0006 with var0007 to var0008) {
 		var0009->remove_npc();
 	}
@@ -73886,7 +73886,7 @@ void Func08D6 0x8D6 () {
 	var var0001;
 
 	var0000 = Func0909();
-	var0001 = Func08F7(0xFF72);
+	var0001 = Func08F7(TRENT);
 	if (!var0001) {
 		say("\"Where, oh where has my dear husband gone. I cannot stand to be away from him!\"*");
 		abort;
@@ -73895,12 +73895,12 @@ void Func08D6 0x8D6 () {
 	converse ("bye") {
 		case "sacrifice" (remove):
 			if (!gflags[0x019D]) {
-				0xFF72->show_npc_face(0x0001);
+				TRENT->show_npc_face(0x0001);
 				say("\"No, ",
 					var0000,
 					". She is my life. If thou takest her, thou takest mine heart.\" Trent holds on tightly to his wife.");
 				gflags[0x019D] = true;
-				0xFF72->hide();
+				TRENT->hide();
 				0xFF70->show_npc_face(0x0001);
 			} else {
 				say("\"I cannot leave my lord like this. Surely thou canst understand, ",
@@ -73935,7 +73935,7 @@ void Func08D7 0x8D7 () {
 	var0001 = UI_get_party_list();
 	var0002 = 0xFF70->get_npc_object();
 	if (var0002 in var0001) {
-		var0003 = Func08F7(0xFF72);
+		var0003 = Func08F7(TRENT);
 		if (var0003) {
 			0xFF70->remove_from_party();
 			say("The starcrossed lovers rush into each other's ghostly embrace. For a time it's hard to see where one spirit ends and the other begins, then the two slowly turn to face you. \"Thou hast done so much for us, I hope that in helping us, thou hast been assisted in thine own quest.\" Rowena performs a curtsey then turns to regard her handsome husband.*");
@@ -75031,7 +75031,7 @@ void Func08EF 0x8EF () {
 	var var0004;
 	var var0005;
 
-	var0000 = 0xFF72->find_nearest(0x02EB, ON_SCREEN);
+	var0000 = TRENT->find_nearest(0x02EB, ON_SCREEN);
 	var0001 = Func0909();
 	if (!gflags[0x01C1]) {
 		if (gflags[0x01A8]) {
@@ -75125,7 +75125,7 @@ void Func08F0 0x8F0 () {
 						". Wouldst thou take my beloved from me so shortly after our reunion? Another will have to perform this terrible task.\" Rowena holds on tightly to her husband.");
 					gflags[0x019E] = true;
 					0xFF70->hide();
-					0xFF72->show_npc_face(0x0001);
+					TRENT->show_npc_face(0x0001);
 				} else {
 					say("\"I cannot leave my lady like this. Surely thou dost understand, ",
 						var0000,
