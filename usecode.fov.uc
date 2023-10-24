@@ -10550,7 +10550,7 @@ void Func0404 object#(0x404) () {
 		var000A = SPRELLIC->get_npc_object()->is_dead();
 		var000B = VOKES->get_npc_object()->is_dead();
 		var000C = SYRIA->get_npc_object()->is_dead();
-		var000D = 0xFF81->get_npc_object()->is_dead();
+		var000D = TIMMONS->get_npc_object()->is_dead();
 		var000E = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
 		if (var0002 in var0001) {
@@ -28154,7 +28154,7 @@ void Func0477 object#(0x477) () {
 		}
 		var0005 = VOKES->is_dead();
 		var0006 = SYRIA->is_dead();
-		var0007 = 0xFF81->is_dead();
+		var0007 = TIMMONS->is_dead();
 		if (var0005 && (var0006 && var0007)) {
 			add("duellists");
 		}
@@ -28702,7 +28702,7 @@ void Func047A object#(0x47A) () {
 		}
 		var0005 = VOKES->get_npc_object()->is_dead();
 		var0006 = SYRIA->get_npc_object()->is_dead();
-		var0007 = 0xFF81->get_npc_object()->is_dead();
+		var0007 = TIMMONS->get_npc_object()->is_dead();
 		var0008 = SPRELLIC->get_npc_object()->is_dead();
 		if (gflags[0x0165]) {
 			if (var0005 && (var0006 && var0007)) {
@@ -28971,7 +28971,7 @@ void Func047B object#(0x47B) () {
 		var0005 = SPRELLIC->get_npc_object()->is_dead();
 		var0006 = VOKES->get_npc_object()->is_dead();
 		var0007 = SYRIA->get_npc_object()->is_dead();
-		var0008 = 0xFF81->get_npc_object()->is_dead();
+		var0008 = TIMMONS->get_npc_object()->is_dead();
 		if (var0005 || (var0006 || (var0007 || var0008))) {
 			var0004 = true;
 		}
@@ -29162,7 +29162,7 @@ void Func047C object#(0x47C) () {
 		var0002 = false;
 		var0003 = VOKES->get_npc_object()->is_dead();
 		var0004 = SYRIA->get_npc_object()->is_dead();
-		var0005 = 0xFF81->get_npc_object()->is_dead();
+		var0005 = TIMMONS->get_npc_object()->is_dead();
 		if (var0003 && (var0004 && var0005)) {
 			var0002 = true;
 		}
@@ -29415,10 +29415,10 @@ void Func047D object#(0x47D) () {
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
 		var0002 = VOKES->get_npc_object();
-		var0003 = 0xFF81->get_npc_object();
+		var0003 = TIMMONS->get_npc_object();
 		var0004 = SYRIA->get_npc_object();
 		var0005 = Func08F7(SYRIA);
-		var0006 = Func08F7(0xFF81);
+		var0006 = Func08F7(TIMMONS);
 		if (!gflags[0x0177]) {
 			say("You see a fighting man. His voice booms like thunder as he greets you. \"Hail to thee, ",
 				var0000,
@@ -29482,8 +29482,8 @@ void Func047D object#(0x47D) () {
 				if (!gflags[0x0164]) {
 					say("\"The bloody idiot had no idea that when he took our honor flag he would be seen doing it. Hence, he never considered the fact that he would have to fight a duel over our sullied honor. But now that the whole town is talking of the incident there is no way that we could refrain from standing up for ourselves. Especially since he has refused to return what he has taken from us.\"*");
 					if (var0006) {
-						0xFF81->say("\"Were he not such a cad, he would see the foolishness of his actions. 'Tis now up to us to show him!\"*");
-						0xFF81->hide();
+						TIMMONS->say("\"Were he not such a cad, he would see the foolishness of his actions. 'Tis now up to us to show him!\"*");
+						TIMMONS->hide();
 						VOKES->show_npc_face(0x0000);
 					}
 					add("honor flag");
@@ -29548,7 +29548,7 @@ void Func047E object#(0x47E) () {
 		var0001 = UI_part_of_day();
 		var0002 = SYRIA->get_npc_object();
 		var0003 = VOKES->get_npc_object();
-		var0004 = 0xFF81->get_npc_object();
+		var0004 = TIMMONS->get_npc_object();
 		var0005 = Func08F7(VOKES);
 		add(["name", "job", "bye"]);
 		if (gflags[0x0168]) {
@@ -29713,10 +29713,10 @@ void Func047F object#(0x47F) () {
 	var var0004;
 
 	if (event == DOUBLECLICK) {
-		0xFF81->show_npc_face(0x0000);
+		TIMMONS->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFF81->get_npc_object();
+		var0002 = TIMMONS->get_npc_object();
 		var0003 = SYRIA->get_npc_object();
 		var0004 = VOKES->get_npc_object();
 		if (!gflags[0x0179]) {
@@ -29795,7 +29795,7 @@ void Func047F object#(0x47F) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF81);
+		Func092E(TIMMONS);
 	}
 }
 

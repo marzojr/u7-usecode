@@ -4480,19 +4480,19 @@ void Func013E shape#(0x13E) () {
 			UI_init_conversation();
 			0xFEE1->show_npc_face0(0x0000);
 			say("\"Thou shalt be my door warden. I can count on thy strength to delay the Avatar...\"");
-			0xFF81->show_npc_face1(0x0000);
+			BRUNT->show_npc_face1(0x0000);
 			say("\"Dost thou wish ",
 				var0001,
 				" dead or mangled, Batlin?\"");
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
 			say("\"Mangled will suffice, mighty Brunt. But do as thou wishest...\"");
-			0xFF81->show_npc_face1(0x0000);
+			BRUNT->show_npc_face1(0x0000);
 			say("\"Good... Dead it is!\"");
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
 			UI_end_conversation();
-			0xFF81->set_schedule_type(LOITER);
+			BRUNT->set_schedule_type(LOITER);
 			var000C = [0x0924, 0x017E, 0x0000];
 			var000B = find_nearby(0x0373, 0x0014, MASK_NONE);
 			if (var000B) {
@@ -4504,7 +4504,7 @@ void Func013E shape#(0x13E) () {
 		}
 		if (get_npc_id() == 0x0006) {
 			var000D = [0x0926, 0x0187, 0x0000];
-			0xFF81->si_path_run_usecode(var000D, SI_PATH_SUCCESS, 0xFF81, Func047F, false);
+			BRUNT->si_path_run_usecode(var000D, SI_PATH_SUCCESS, BRUNT, Func047F, false);
 			Func097F(item, "@I must be certain...@", 0x0000);
 		}
 		if (get_npc_id() == 0x0005) {
@@ -4560,7 +4560,7 @@ void Func013E shape#(0x13E) () {
 		UI_init_conversation();
 		set_npc_id(0x0000);
 		gflags[0x0250] = true;
-		0xFF81->remove_npc();
+		BRUNT->remove_npc();
 		0xFF80->remove_npc();
 		gflags[0x002A] = false;
 	}
@@ -34248,7 +34248,7 @@ void Func042C object#(0x42C) () {
 				var000E->set_polymorph(0x01F5);
 				var000E->set_npc_id(0x0000);
 			}
-			var000E = 0xFF81->get_npc_object();
+			var000E = BRUNT->get_npc_object();
 			if (var000E) {
 				var000E->set_polymorph(0x01F5);
 				var000E->set_npc_id(0x0000);
@@ -34257,7 +34257,7 @@ void Func042C object#(0x42C) () {
 		if (var0013 == 0x0002) {
 			0xFEF0->set_polymorph(0x0373);
 			0xFF80->set_polymorph(0x01CA);
-			0xFF81->set_polymorph(0x0325);
+			BRUNT->set_polymorph(0x0325);
 			SELINA->show_npc_face0(0x0000);
 			say("\"Gloat if thou wilt! Even if thou slayest me here thou hast not truly defeated me!\"");
 			say("\"Even as we speak, Batlin is opening the Wall of Lights in the next room! With the Guardian's help he and I shall meet in the Eternal Void to conquer new realms together!\"");
@@ -34286,7 +34286,7 @@ void Func042C object#(0x42C) () {
 		if (gflags[0x024E]) {
 			var0019 = 0xFEF0->get_item_flag(DEAD);
 			var001A = 0xFF80->get_item_flag(DEAD);
-			var001B = 0xFF81->get_item_flag(DEAD);
+			var001B = BRUNT->get_item_flag(DEAD);
 			if (var0019 && (var001A && var001B)) {
 				if (SELINA->get_npc_id() != 0x0001) {
 					// Need to make UCC optimize this
@@ -49858,8 +49858,8 @@ void Func047F object#(0x47F) () {
 		set_polymorph(0x01F5);
 	}
 	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
-		0xFF81->set_schedule_type(WAIT);
-		var0001 = script 0xFF81 {
+		BRUNT->set_schedule_type(WAIT);
+		var0001 = script BRUNT {
 			nohalt;
 			actor frame bowing;
 			actor frame kneeling;
@@ -49868,19 +49868,19 @@ void Func047F object#(0x47F) () {
 	}
 	if ((event == SCRIPTED) && ((gflags[0x0007] == false) && (gflags[0x0253] == false))) {
 		gflags[0x0253] = true;
-		0xFF81->move_object([0x0797, 0x028B, 0x0000]);
-		0xFF81->si_path_run_usecode([0x0799, 0x027F, 0x0000], PATH_SUCCESS, 0xFF81, Func047F, true);
+		BRUNT->move_object([0x0797, 0x028B, 0x0000]);
+		BRUNT->si_path_run_usecode([0x0799, 0x027F, 0x0000], PATH_SUCCESS, BRUNT, Func047F, true);
 	}
 	if ((event == SCRIPTED) && gflags[0x0007]) {
 		gflags[0x0007] = false;
-		0xFF81->si_path_run_usecode([0x0794, 0x028F, 0x0000], PATH_FAILURE, 0xFF81, Func047F, true);
+		BRUNT->si_path_run_usecode([0x0794, 0x028F, 0x0000], PATH_FAILURE, BRUNT, Func047F, true);
 	}
 	if (event == PATH_SUCCESS) {
-		0xFF81->show_npc_face0(0x0000);
+		BRUNT->show_npc_face0(0x0000);
 		say("\"Avatar! That fiend Batlin will destroy us all if he is not stopped!\"* \"'Twill be our destruction! He is attempting to open that cursed Wall of Lights!\"* \"Quickly, follow me! I will lead thee straight to him.\"");
 		UI_remove_npc_face1();
 		gflags[0x0007] = true;
-		Func097F(0xFF81, "@Follow me!@", 0x0000);
+		Func097F(BRUNT, "@Follow me!@", 0x0000);
 		Func097F(AVATAR, "@Wait!@", 0x0005);
 		var0001 = script item after 2 ticks {
 			nohalt;
@@ -49896,7 +49896,7 @@ void Func047F object#(0x47F) () {
 				Func0924(var0005, SHAPE_ANY);
 			}
 		}
-		0xFF81->remove_npc();
+		BRUNT->remove_npc();
 		gflags[0x0256] = true;
 		abort;
 	}
@@ -75116,14 +75116,14 @@ void Func073A object#(0x73A) () {
 		0xFF80->set_attack_mode(STRONGEST);
 		0xFF80->set_oppressor(AVATAR);
 		0xFF80->clear_item_flag(SI_TOURNAMENT);
-		0xFF81->move_object([0x092A, 0x01CF, 0x0000]);
+		BRUNT->move_object([0x092A, 0x01CF, 0x0000]);
 		UI_sprite_effect(ANIMATION_TELEPORT, 0x092A, 0x01CF, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-		0xFF81->set_schedule_type(IN_COMBAT);
-		0xFF81->set_alignment(EVIL);
-		0xFF81->set_opponent(AVATAR);
-		0xFF81->set_attack_mode(STRONGEST);
-		0xFF81->set_oppressor(AVATAR);
-		0xFF81->clear_item_flag(SI_TOURNAMENT);
+		BRUNT->set_schedule_type(IN_COMBAT);
+		BRUNT->set_alignment(EVIL);
+		BRUNT->set_opponent(AVATAR);
+		BRUNT->set_attack_mode(STRONGEST);
+		BRUNT->set_oppressor(AVATAR);
+		BRUNT->clear_item_flag(SI_TOURNAMENT);
 		var0005 = SELINA->get_npc_object();
 		var0002 = script var0005 after 25 ticks {
 			nohalt;
@@ -113107,9 +113107,9 @@ void Func09B5 0x9B5 () {
 			0xFF80->set_schedule_type(WAIT);
 			0xFF80->move_object(var0002);
 			var0003 = [0x092B, 0x017E, 0x0000];
-			0xFF81->set_new_schedules(MIDNIGHT, WAIT, var0003);
-			0xFF81->set_schedule_type(WAIT);
-			0xFF81->move_object(var0003);
+			BRUNT->set_new_schedules(MIDNIGHT, WAIT, var0003);
+			BRUNT->set_schedule_type(WAIT);
+			BRUNT->move_object(var0003);
 			var0004 = [0x0921, 0x0176, 0x0000];
 			var0005 = UI_create_new_object2(0x0373, var0004);
 			var0005->set_npc_id(0x0002);
