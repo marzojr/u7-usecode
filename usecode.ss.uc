@@ -15617,7 +15617,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, D_STEFANO, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, CELLIA, FLICKEN, HARNNA, KRAYG, LUCILLA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, 0xFF64, MARSTEN, SPEKTOR, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, D_STEFANO, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, CELLIA, FLICKEN, HARNNA, KRAYG, LUCILLA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, DRAYGAN, MARSTEN, SPEKTOR, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -52113,16 +52113,16 @@ void Func049B object#(0x49B) () {
 
 	var0000 = Func0954();
 	var0001 = Func0953();
-	var0002 = Func0942(0xFF64);
+	var0002 = Func0942(DRAYGAN);
 	if (event == SCRIPTED) {
-		if ((Func0994() != 0x0007) || (BERYL->get_item_flag(DEAD) || (0xFF64->get_item_flag(DEAD) || (!gflags[0x02BE])))) {
+		if ((Func0994() != 0x0007) || (BERYL->get_item_flag(DEAD) || (DRAYGAN->get_item_flag(DEAD) || (!gflags[0x02BE])))) {
 			abort;
 		}
 		var0003 = script Func09A0(0x0005, 0x0001) after (0x0014 + UI_get_random(0x0032)) ticks {
 			nohalt;
 			call Func049B;
 		};
-		if (0xFF62->npc_nearby() || (0xFF64->npc_nearby() || (0xFF63->npc_nearby() || 0xFF61->npc_nearby()))) {
+		if (0xFF62->npc_nearby() || (DRAYGAN->npc_nearby() || (0xFF63->npc_nearby() || 0xFF61->npc_nearby()))) {
 			abort;
 		}
 		var0003 = BERYL->approach_avatar(0x0078, 0x0028);
@@ -52144,7 +52144,7 @@ void Func049B object#(0x49B) () {
 		BERYL->clear_item_say();
 		if (var0002) {
 			say("\"My name is Beryl. I need thine help, but I cannot speak now...\"");
-			0xFF64->show_npc_face1(0x0000);
+			DRAYGAN->show_npc_face1(0x0000);
 			say("\"What art thou saying to that stranger, Beryl?\"");
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
@@ -52156,14 +52156,14 @@ void Func049B object#(0x49B) () {
 				say("\"Nothing, Lord Draygan.\"");
 				Func097F(BERYL, "@Nothing.@", 0x0000);
 			}
-			0xFF64->set_schedule_type(HOUND);
+			DRAYGAN->set_schedule_type(HOUND);
 			var0003 = script Func09A0(0x0005, 0x0001) after 50 ticks {
 				nohalt;
 				call Func049B;
 			};
 			abort;
 		}
-		if (0xFF64->get_item_flag(DEAD)) {
+		if (DRAYGAN->get_item_flag(DEAD)) {
 			if (BERYL->get_item_flag(SI_ZOMBIE)) {
 				say("\"I am content now, ",
 					var0001,
@@ -52196,13 +52196,13 @@ void Func049B object#(0x49B) () {
 			BERYL->run_schedule();
 			abort;
 		}
-		if (gflags[0x02BF] && (!0xFF64->get_item_flag(DEAD))) {
+		if (gflags[0x02BF] && (!DRAYGAN->get_item_flag(DEAD))) {
 			say("\"Why dost thou wait? Use the arrow! Use it to strike down the tyrant Draygan!\"");
 			say("\"Then we shall find the secret of his power, and he shall not stop me from obtaining my freedom.\"");
 			Func097F(BERYL, "@Use the arrow!@", 0x0000);
 			abort;
 		}
-		if (gflags[0x02C0] && (!0xFF64->get_item_flag(DEAD))) {
+		if (gflags[0x02C0] && (!DRAYGAN->get_item_flag(DEAD))) {
 			say("\"Tell me -- hast thou prepared the arrow? To defeat the tyrant Draygan?\"");
 			if (Func0955()) {
 				if (Func097D(PARTY, 0x0001, 0x0238, QUALITY_ANY, FRAME_ANY)) {
@@ -52375,26 +52375,26 @@ void Func049C object#(0x49C) () {
 	var0001 = Func0953();
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Hello.@");
-		0xFF64->Func07D1();
-		Func097F(0xFF64, "@Speaking to me?@", 0x0002);
-		0xFF64->set_schedule_type(TALK);
+		DRAYGAN->Func07D1();
+		Func097F(DRAYGAN, "@Speaking to me?@", 0x0002);
+		DRAYGAN->set_schedule_type(TALK);
 	}
-	if ((event == PROXIMITY) && (0xFF64->get_schedule_type() == TEND_SHOP)) {
+	if ((event == PROXIMITY) && (DRAYGAN->get_schedule_type() == TEND_SHOP)) {
 		if (UI_get_random(0x000A) < 0x0007) {
 			abort;
 		}
 		var0002 = ["@Leave us!@", "@Go thy way!@", "@Do not steal...@", "@I am destiny.@", "@Ignore the others.@", "@I am Master here.@"];
-		Func097F(0xFF64, var0002[UI_get_random(UI_get_array_size(var0002))], 0x0000);
+		Func097F(DRAYGAN, var0002[UI_get_random(UI_get_array_size(var0002))], 0x0000);
 	}
-	if ((event == DEATH) && 0xFF64->get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && DRAYGAN->get_item_flag(SI_TOURNAMENT)) {
 		if (gflags[0x02BC]) {
 			var0003 = script Func09A0(0x0005, 0x0001) after 50 ticks {
 				nohalt;
 				call Func049F;
 			};
 			gflags[0x02BC] = false;
-			0xFF64->clear_item_flag(SI_TOURNAMENT);
-			Func0982(0xFF64, 0x0032);
+			DRAYGAN->clear_item_flag(SI_TOURNAMENT);
+			Func0982(DRAYGAN, 0x0032);
 			BERYL->run_schedule();
 			BERYL->set_alignment(NEUTRAL);
 			0xFF61->set_alignment(NEUTRAL);
@@ -52402,12 +52402,12 @@ void Func049C object#(0x49C) () {
 		}
 	}
 	if (event == STARTED_TALKING) {
-		0xFF64->run_schedule();
-		0xFF64->clear_item_say();
-		0xFF64->show_npc_face0(0x0000);
-		var0004 = 0xFF64->get_item_flag(MET);
+		DRAYGAN->run_schedule();
+		DRAYGAN->clear_item_say();
+		DRAYGAN->show_npc_face0(0x0000);
+		var0004 = DRAYGAN->get_item_flag(MET);
 		if (var0004 == false) {
-			0xFF64->set_item_flag(MET);
+			DRAYGAN->set_item_flag(MET);
 			say("\"I do not believe we have met. My name is Draygan. I am lord of all the land that I survey.\"");
 			say("\"At present, I am hard at work fulfilling mine appointed destiny. Conversing with thee is nothing but a useless distraction from achieving that end.\"");
 		} else {
@@ -52494,8 +52494,8 @@ void Func049C object#(0x49C) () {
 					call Func049D;
 				};
 				Func097F(AVATAR, "@Interesting....@", 0x0000);
-				Func097F(0xFF64, "@Do not return!@", 0x0003);
-				0xFF64->set_schedule_type(TEND_SHOP);
+				Func097F(DRAYGAN, "@Do not return!@", 0x0003);
+				DRAYGAN->set_schedule_type(TEND_SHOP);
 				abort;
 		}
 	}
@@ -52510,14 +52510,14 @@ void Func049D object#(0x49D) () {
 	var var0000;
 
 	if (event == SCRIPTED) {
-		if (0xFF64->get_item_flag(DEAD) || ((Func0994() != 0x0007) || (0xFF63->get_item_flag(DEAD) || (0xFF63->get_npc_id() > 0x0003)))) {
+		if (DRAYGAN->get_item_flag(DEAD) || ((Func0994() != 0x0007) || (0xFF63->get_item_flag(DEAD) || (0xFF63->get_npc_id() > 0x0003)))) {
 			abort;
 		}
 		var0000 = script Func09A0(0x0005, 0x0001) after (0x0064 + UI_get_random(0x01F4)) ticks {
 			nohalt;
 			call Func049D;
 		};
-		if (0xFF62->npc_nearby() || (0xFF64->npc_nearby() || (BERYL->npc_nearby() || 0xFF61->npc_nearby()))) {
+		if (0xFF62->npc_nearby() || (DRAYGAN->npc_nearby() || (BERYL->npc_nearby() || 0xFF61->npc_nearby()))) {
 			abort;
 		}
 		var0000 = 0xFF63->approach_avatar(0x0078, 0x0028);
@@ -52529,10 +52529,10 @@ void Func049D object#(0x49D) () {
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Pardon me...@");
 		0xFF63->Func07D1();
-		if (0xFF64->npc_nearby()) {
+		if (DRAYGAN->npc_nearby()) {
 			Func097F(0xFF63, "@Go away!@", 0x0003);
-			0xFF64->set_schedule_type(HOUND);
-			Func097F(0xFF64, "@Leave him alone!@", 0x0005);
+			DRAYGAN->set_schedule_type(HOUND);
+			Func097F(DRAYGAN, "@Leave him alone!@", 0x0005);
 		} else {
 			Func097F(0xFF63, "@I am not a spy...@", 0x0003);
 			0xFF63->set_npc_id(0xFF63->get_npc_id() + 0x0001);
@@ -52551,14 +52551,14 @@ void Func049E object#(0x49E) () {
 	var var0000;
 
 	if (event == SCRIPTED) {
-		if (0xFF64->get_item_flag(DEAD) || ((Func0994() != 0x0007) || (0xFF62->get_item_flag(DEAD) || (0xFF62->get_npc_id() > 0x0004)))) {
+		if (DRAYGAN->get_item_flag(DEAD) || ((Func0994() != 0x0007) || (0xFF62->get_item_flag(DEAD) || (0xFF62->get_npc_id() > 0x0004)))) {
 			abort;
 		}
 		var0000 = script Func09A0(0x0005, 0x0002) after UI_get_random(0x01F4) ticks {
 			nohalt;
 			call Func049E;
 		};
-		if (0xFF63->npc_nearby() || (0xFF64->npc_nearby() || (BERYL->npc_nearby() || 0xFF61->npc_nearby()))) {
+		if (0xFF63->npc_nearby() || (DRAYGAN->npc_nearby() || (BERYL->npc_nearby() || 0xFF61->npc_nearby()))) {
 			abort;
 		}
 		var0000 = 0xFF62->approach_avatar(0x0078, 0x0028);
@@ -52572,11 +52572,11 @@ void Func049E object#(0x49E) () {
 		AVATAR->item_say("@Greetings!@");
 		0xFF62->clear_item_say();
 		0xFF62->Func07D1();
-		if (0xFF64->npc_nearby()) {
+		if (DRAYGAN->npc_nearby()) {
 			Func097F(0xFF62, "@We cannot speak...@", 0x0003);
-			0xFF64->set_schedule_type(HOUND);
-			0xFF64->clear_item_say();
-			Func097F(0xFF64, "@Go away!@", 0x0005);
+			DRAYGAN->set_schedule_type(HOUND);
+			DRAYGAN->clear_item_say();
+			Func097F(DRAYGAN, "@Go away!@", 0x0005);
 			0xFF62->set_schedule_type(SHY);
 		} else {
 			Func097F(0xFF62, "@I'm no thief!@", 0x0003);
@@ -52644,7 +52644,7 @@ void Func049F object#(0x49F) () {
 		0xFF61->show_npc_face0(0x0000);
 		add(["Master"]);
 		var0005 = 0xFF61->get_item_flag(MET);
-		if (0xFF64->get_item_flag(DEAD) && (!gflags[0x02BB])) {
+		if (DRAYGAN->get_item_flag(DEAD) && (!gflags[0x02BB])) {
 			if (Func097D(PARTY, 0x0001, 0x01C2, QUALITY_ANY, 0x0000)) {
 				Func09AC(0xFF61, -1, 0, WANDER);
 				say("\"Thou must return the Heart of Elerion to me! I need it to restore balance to the forest and its creatures.\"");
@@ -52667,11 +52667,11 @@ void Func049F object#(0x49F) () {
 			} else {
 				say("\"There thou art! I knew thou wert here somewhere!\"");
 			}
-			if (gflags[0x02B9] && (!0xFF64->get_item_flag(DEAD))) {
+			if (gflags[0x02B9] && (!DRAYGAN->get_item_flag(DEAD))) {
 				add("King's Savior");
 			}
 		}
-		if (0xFF64->get_item_flag(DEAD) && gflags[0x02BB]) {
+		if (DRAYGAN->get_item_flag(DEAD) && gflags[0x02BB]) {
 			say("\"I thank thee for all that thou hast done. The forest and its animals are free from the evil that Draygan had instilled in them.\"");
 			say("\"Stay here as long as thou wishest, friend.\"");
 			add("Hound of Doskar");
@@ -79504,15 +79504,15 @@ void Func07E1 object#(0x7E1) () {
 		}
 		UI_play_sound_effect(0x005B);
 		var0001 = var0000->get_npc_number();
-		if (var0001 == 0xFF64) {
+		if (var0001 == DRAYGAN) {
 			gflags[0x02BC] = true;
-			0xFF64->set_item_flag(SI_TOURNAMENT);
-			0xFF64->set_alignment(CHAOTIC);
-			0xFF64->set_item_frame(0x000D);
-			0xFF64->set_schedule_type(WAIT);
-			var0002 = 0xFF64->get_npc_prop(HEALTH);
-			Func0982(0xFF64, var0002 - 0x0001);
-			Func097F(0xFF64, "@zzzzzz....@", 0x0002);
+			DRAYGAN->set_item_flag(SI_TOURNAMENT);
+			DRAYGAN->set_alignment(CHAOTIC);
+			DRAYGAN->set_item_frame(0x000D);
+			DRAYGAN->set_schedule_type(WAIT);
+			var0002 = DRAYGAN->get_npc_prop(HEALTH);
+			Func0982(DRAYGAN, var0002 - 0x0001);
+			Func097F(DRAYGAN, "@zzzzzz....@", 0x0002);
 			if (0xFF63->npc_nearby()) {
 				Func09AD(0xFF63);
 				Func097F(0xFF63, "@I obey, Master!@", 0x0002);
@@ -79535,8 +79535,8 @@ void Func07E1 object#(0x7E1) () {
 			}
 			BERYL->clear_item_flag(ASLEEP);
 			BERYL->set_schedule_type(IN_COMBAT);
-			BERYL->set_opponent(0xFF64);
-			BERYL->set_oppressor(0xFF64);
+			BERYL->set_opponent(DRAYGAN);
+			BERYL->set_oppressor(DRAYGAN);
 			BERYL->set_alignment(GOOD);
 			BERYL->clear_item_say();
 			Func094F(BERYL, ["Die, Draygan!", "I shall kill thee!", "Whoreson!"]);
@@ -79975,7 +79975,7 @@ void Func07E8 object#(0x7E8) () {
 	var0000 = get_container();
 	if (!(var0000 == 0x0000)) {
 		var0001 = var0000->get_npc_number();
-		if (var0001 == 0xFF64) {
+		if (var0001 == DRAYGAN) {
 			Func08BA();
 		}
 	}
@@ -103046,8 +103046,8 @@ void Func08BA 0x8BA () {
 	var var0005;
 
 	if (event == DOUBLECLICK) {
-		var0000 = 0xFF64->get_object_position();
-		0xFF64->obj_sprite_effect(ANIMATION_FIREWORKS, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
+		var0000 = DRAYGAN->get_object_position();
+		DRAYGAN->obj_sprite_effect(ANIMATION_FIREWORKS, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		var0001 = script item {
 			call Func0334;
 		};
@@ -103056,7 +103056,7 @@ void Func08BA 0x8BA () {
 		var0002 = UI_die_roll(0x0001, 0x0005);
 		var0003 = [0x0361, 0x0219, 0x012E, 0x0149, 0x036D];
 		var0004 = ["Spiders", "Wolves", "Bears", "Boars", "Doom"];
-		0xFF64->item_say(("Morghrim, send me " + var0004[var0002]) + ".");
+		DRAYGAN->item_say(("Morghrim, send me " + var0004[var0002]) + ".");
 		var0005 = UI_die_roll(0x0001, Func097E(var0002 - 0x0005));
 		while (var0005 > 0x0000) {
 			var0001 = Func09A1(var0003[var0002]);

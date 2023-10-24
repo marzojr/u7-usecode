@@ -34549,14 +34549,14 @@ void Func049C object#(0x49C) () {
 	var var0007;
 
 	if (event == DOUBLECLICK) {
-		0xFF64->show_npc_face(0x0000);
+		BALAYNA->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = UI_part_of_day();
 		var0003 = false;
 		add(["name", "job", "Fellowship", "bye"]);
 		if (var0002 == NIGHT) {
-			var0004 = Func08FC(0xFF64, 0xFF06);
+			var0004 = Func08FC(BALAYNA, 0xFF06);
 			if (var0004) {
 				say("Glaring, she puts a finger over her lips, indicating that you should be silent.*");
 				abort;
@@ -34597,7 +34597,7 @@ void Func049C object#(0x49C) () {
 				if (var0005) {
 					say("\"What's this?\" she asks, taking the vial from you. She opens it up and sniffs. \"Very good quality. I wonder why he...\" she clutches her throat and gasps. You notice a wispy smoke rise from the top of the vial now spilling out of her hands. Choking, she falls to the ground, and dies.*");
 					gflags[0x020D] = true;
-					0xFF64->get_npc_object()->kill_npc();
+					BALAYNA->get_npc_object()->kill_npc();
 					abort;
 				}
 				say("\"I am afraid I must first see what thou art referring to before I can answer thy question.\"");
@@ -34705,7 +34705,7 @@ void Func049C object#(0x49C) () {
 		}
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF64);
+		Func092E(BALAYNA);
 	}
 }
 
@@ -48835,7 +48835,7 @@ void Func04FA object#(0x4FA) () {
 		0xFF06->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = false;
-		var0002 = Func08F7(0xFF64);
+		var0002 = Func08F7(BALAYNA);
 		var0003 = UI_part_of_day();
 		var0004 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
 		if (var0003 == NIGHT) {
@@ -48922,7 +48922,7 @@ void Func04FA object#(0x4FA) () {
 					say("\"I have not seen her in some time, ",
 						var0000,
 						". Perhaps thou mayest find her in her house.\"");
-					0xFF64->remove_npc();
+					BALAYNA->remove_npc();
 					gflags[0x020C] = true;
 					UI_set_timer(0x0008);
 				}
@@ -49084,13 +49084,13 @@ void Func04FA object#(0x4FA) () {
 						} else {
 							say("\"Ah, well, thou art carrying too much. I will simply have to save it for when I have time to talk with her. Thank thee anyway.\"");
 							UI_set_timer(0x0008);
-							0xFF64->remove_npc();
+							BALAYNA->remove_npc();
 							gflags[0x020C] = true;
 						}
 					} else {
 						say("\"Very well. I will have to save it for when I have time to talk with her. Thank thee anyway.\"");
 						UI_set_timer(0x0008);
-						0xFF64->remove_npc();
+						BALAYNA->remove_npc();
 						gflags[0x020C] = true;
 					}
 					gflags[0x020A] = true;
@@ -73436,14 +73436,14 @@ void Func08CF 0x8CF () {
 	var var0003;
 	var var0004;
 
-	var0000 = Func08F7(0xFF64);
+	var0000 = Func08F7(BALAYNA);
 	var0001 = Func08F7(0xFF63);
 	var0002 = Func08F7(IOLO);
 	var0003 = Func08F7(DUPRE);
 	say("\"Fellow members, each of thee has faced -- and doubtless shall face again -- a moment in which thou dost feel the heat of the fever. A moment when thy mind has been clouded with illusory thoughts and visions. A moment when thy recognition has simply vanished, without rhyme or reason. A moment when, perhaps, thou hast even doubted the very words of The Fellowship itself!\"*");
 	if (var0000) {
-		0xFF64->say("You see the clerk gasp, her eyes widening in disbelief.*");
-		0xFF64->hide();
+		BALAYNA->say("You see the clerk gasp, her eyes widening in disbelief.*");
+		BALAYNA->hide();
 		0xFF06->show_npc_face(0x0000);
 	}
 	say("\"The second principle of the Triad is `trust thy brother.' 'Tis a simple practice when thou dost know thy brother. But The Fellowship was not always known to thee. It may, at one time, have been difficult to put thy trust in something as large as The Fellowship.~~ \"However, to gain full knowledge of thine inner strength, one must have the courage to walk on the fire of trust!\"*");
