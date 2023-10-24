@@ -26749,7 +26749,7 @@ void Func046D object#(0x46D) () {
 	var var0000;
 
 	if (event == DOUBLECLICK) {
-		0xFF93->show_npc_face(0x0000);
+		WAYNE->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
 		if (!gflags[0x02CA]) {
@@ -26863,7 +26863,7 @@ void Func046D object#(0x46D) () {
 		say("\"May thy good fortune guide thee down the trail of life.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF93);
+		Func092E(WAYNE);
 	}
 }
 
