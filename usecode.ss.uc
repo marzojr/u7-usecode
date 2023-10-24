@@ -42503,10 +42503,10 @@ void Func0442 object#(0x442) () {
 	var var0001;
 	var var0002;
 
-	var0000 = 0xFFBE->get_object_position();
+	var0000 = G_SIMON->get_object_position();
 	if (event == SCRIPTED) {
-		if (0xFFBE->get_item_flag(MET)) {
-			0xFFBE->show_npc_face0(0x0000);
+		if (G_SIMON->get_item_flag(MET)) {
+			G_SIMON->show_npc_face0(0x0000);
 			say("\"Thou hast slain me! My blood spills away... all because of Pomdirgun, that betrayer!\"");
 			say("\"Come nearer, that I may boast of my deeds before I die.\"");
 			converse (["deeds", "Pomdirgun", "bye"]) {
@@ -42550,29 +42550,29 @@ void Func0442 object#(0x442) () {
 					say("\"Urrgh...\"");
 					var0001 = Func0992(0x0001, "@He's dead.@", "@He's dead.@", true);
 					0x0000->set_conversation_slot();
-					0xFFBE->clear_item_flag(SI_TOURNAMENT);
-					0xFFBE->clear_item_flag(DEAD);
-					0xFFBE->kill_npc();
+					G_SIMON->clear_item_flag(SI_TOURNAMENT);
+					G_SIMON->clear_item_flag(DEAD);
+					G_SIMON->kill_npc();
 					0xFFB4->set_item_flag(DEAD);
 					gflags[0x0046] = true;
 					abort;
 			}
 		} else {
-			0xFFBE->show_npc_face0(0x0000);
+			G_SIMON->show_npc_face0(0x0000);
 			say("\"Thou hast found out my secret! Now, thou must die...\"");
-			0xFFBE->set_item_flag(SI_TOURNAMENT);
-			0xFFBE->set_alignment(EVIL);
-			Func097F(0xFFBE, "@Die!@", 0x0000);
-			0xFFBE->set_new_schedules(MIDNIGHT, IN_COMBAT, [var0000[0x0001], var0000[0x0002]]);
-			0xFFBE->run_schedule();
-			AVATAR->set_oppressor(0xFFBE);
+			G_SIMON->set_item_flag(SI_TOURNAMENT);
+			G_SIMON->set_alignment(EVIL);
+			Func097F(G_SIMON, "@Die!@", 0x0000);
+			G_SIMON->set_new_schedules(MIDNIGHT, IN_COMBAT, [var0000[0x0001], var0000[0x0002]]);
+			G_SIMON->run_schedule();
+			AVATAR->set_oppressor(G_SIMON);
 			abort;
 		}
 	}
-	if ((event == DEATH) && (!0xFFBE->get_item_flag(MET))) {
-		0xFFBE->set_schedule_type(WAIT);
-		0xFFBE->set_item_flag(DEAD);
-		var0002 = script 0xFFBE {
+	if ((event == DEATH) && (!G_SIMON->get_item_flag(MET))) {
+		G_SIMON->set_schedule_type(WAIT);
+		G_SIMON->set_item_flag(DEAD);
+		var0002 = script G_SIMON {
 			actor frame sleeping;
 			actor frame sleeping;
 			actor frame sleeping;
@@ -42584,7 +42584,7 @@ void Func0442 object#(0x442) () {
 			actor frame sleeping;
 			actor frame sleeping;
 		};
-		0xFFBE->set_item_flag(MET);
+		G_SIMON->set_item_flag(MET);
 		var0002 = script AVATAR {
 			nohalt;
 			wait 10;
@@ -46607,11 +46607,11 @@ void Func044C object#(0x44C) () {
 		UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, var0004[0x0001], var0004[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		UI_play_sound_effect(0x0077);
 		0xFFB4->remove_npc();
-		0xFFBE->move_object(var0004);
-		0xFFBE->set_alignment(EVIL);
-		0xFFBE->set_new_schedules(MIDNIGHT, DANCE, [var0004[0x0001], var0004[0x0002]]);
-		0xFFBE->run_schedule();
-		Func097F(0xFFBE, "@Lorfag Tar!@", 0x0002);
+		G_SIMON->move_object(var0004);
+		G_SIMON->set_alignment(EVIL);
+		G_SIMON->set_new_schedules(MIDNIGHT, DANCE, [var0004[0x0001], var0004[0x0002]]);
+		G_SIMON->run_schedule();
+		Func097F(G_SIMON, "@Lorfag Tar!@", 0x0002);
 		var0005 = script AVATAR {
 			nohalt;
 			wait 15;
@@ -46620,8 +46620,8 @@ void Func044C object#(0x44C) () {
 		gflags[0x0044] = true;
 		var0005 = AVATAR->find_nearby(ANY_SHAPE, 0x0028, MASK_NPC2);
 		for (var0008 in var0005 with var0006 to var0007) {
-			var0008->set_opponent(0xFFBE);
-			var0008->set_oppressor(0xFFBE);
+			var0008->set_opponent(G_SIMON);
+			var0008->set_oppressor(G_SIMON);
 		}
 		abort;
 	}
@@ -46924,11 +46924,11 @@ void Func044C object#(0x44C) () {
 				0xFFB4->obj_sprite_effect(ANIMATION_PURPLE_BUBBLES, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 				var0004 = 0xFFB4->get_object_position();
 				0xFFB4->remove_npc();
-				0xFFBE->move_object(var0004);
-				0xFFBE->set_alignment(EVIL);
-				0xFFBE->set_new_schedules(MIDNIGHT, DANCE, [var0004[0x0001], var0004[0x0002]]);
-				0xFFBE->run_schedule();
-				Func097F(0xFFBE, "@Lorfag Tar!@", 0x0002);
+				G_SIMON->move_object(var0004);
+				G_SIMON->set_alignment(EVIL);
+				G_SIMON->set_new_schedules(MIDNIGHT, DANCE, [var0004[0x0001], var0004[0x0002]]);
+				G_SIMON->run_schedule();
+				Func097F(G_SIMON, "@Lorfag Tar!@", 0x0002);
 				var0005 = script AVATAR {
 					nohalt;
 					wait 15;

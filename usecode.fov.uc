@@ -20852,7 +20852,7 @@ void Func0442 object#(0x442) () {
 	var var0008;
 
 	if (event == DOUBLECLICK) {
-		0xFFBE->show_npc_face(0x0000);
+		SHERRY->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		add(["name", "job", "bye"]);
@@ -20875,7 +20875,7 @@ void Func0442 object#(0x442) () {
 				fallthrough;
 
 			case "job":
-				var0002 = 0xFFBE->get_schedule_type();
+				var0002 = SHERRY->get_schedule_type();
 				if (var0002 == KID_GAMES) {
 					say("\"I am trying to keep up with these children! We are playing tag through the castle! I must run! Talk to me later in the nursery!\"*");
 					abort;
@@ -20951,7 +20951,7 @@ void Func0442 object#(0x442) () {
 			"!\"*");
 	}
 	if (event == PROXIMITY) {
-		var0002 = 0xFFBE->get_npc_object()->get_schedule_type();
+		var0002 = SHERRY->get_npc_object()->get_schedule_type();
 		if (var0002 == KID_GAMES) {
 			var0007 = UI_die_roll(0x0001, 0x0004);
 			if (var0007 == 0x0001) {
@@ -20966,7 +20966,7 @@ void Func0442 object#(0x442) () {
 			if (var0007 == 0x0004) {
 				var0008 = "@Catch me if thou can!@";
 			}
-			0xFFBE->item_say(var0008);
+			SHERRY->item_say(var0008);
 		}
 	}
 }
