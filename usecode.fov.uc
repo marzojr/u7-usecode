@@ -37625,7 +37625,7 @@ void Func04AE object#(0x4AE) () {
 	var var0008;
 
 	if (event == DOUBLECLICK) {
-		0xFF52->show_npc_face(0x0000);
+		KOMOR->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func08F7(0xFF51);
 		add(["name", "job", "bye"]);
@@ -37652,7 +37652,7 @@ void Func04AE object#(0x4AE) () {
 				if (var0001) {
 					0xFF51->say("\"Ha! Ha! Ha! Ha! Ha! Ha! 'Tis a ripe one, Komor!\"*");
 					0xFF51->hide();
-					0xFF52->show_npc_face(0x0000);
+					KOMOR->show_npc_face(0x0000);
 				}
 				fallthrough;
 
@@ -37670,7 +37670,7 @@ void Func04AE object#(0x4AE) () {
 				if (var0001) {
 					0xFF51->say("\"Ha! Ha! Ha! Ha! With thy wit thou shouldst be on stage!\"*");
 					0xFF51->hide();
-					0xFF52->show_npc_face(0x0000);
+					KOMOR->show_npc_face(0x0000);
 				}
 				fallthrough;
 
@@ -37681,7 +37681,7 @@ void Func04AE object#(0x4AE) () {
 					say("\"I would bet thee that thou didst not think we would end up like this. Eh, Fenn?\"*");
 					0xFF51->say("\"Not in me wildest dreams, Komor.*\"");
 					0xFF51->hide();
-					0xFF52->show_npc_face(0x0000);
+					KOMOR->show_npc_face(0x0000);
 				}
 				remove("chums");
 				fallthrough;
@@ -37758,7 +37758,7 @@ void Func04AE object#(0x4AE) () {
 	}
 	if (event == PROXIMITY) {
 		var0005 = UI_part_of_day();
-		var0006 = 0xFF52->get_npc_object()->get_schedule_type();
+		var0006 = KOMOR->get_npc_object()->get_schedule_type();
 		var0007 = UI_die_roll(0x0001, 0x0004);
 		if (var0006 == LOITER) {
 			if (var0007 == 0x0001) {
@@ -37773,9 +37773,9 @@ void Func04AE object#(0x4AE) () {
 			if (var0007 == 0x0004) {
 				var0008 = "@Any money for me, friend?@";
 			}
-			0xFF52->item_say(var0008);
+			KOMOR->item_say(var0008);
 		} else {
-			Func092E(0xFF52);
+			Func092E(KOMOR);
 		}
 	}
 }
@@ -37847,11 +37847,11 @@ void Func04AF object#(0x4AF) () {
 
 			case "Komor":
 				say("\"He is my best friend and the bravest man I know.\"");
-				var0001 = Func08F7(0xFF52);
+				var0001 = Func08F7(KOMOR);
 				if (var0001) {
 					say("*");
-					0xFF52->say("\"Oh, please! Thou art making mine eyes leak!\"*");
-					0xFF52->hide();
+					KOMOR->say("\"Oh, please! Thou art making mine eyes leak!\"*");
+					KOMOR->hide();
 					0xFF51->show_npc_face(0x0000);
 				}
 				remove("Komor");
@@ -37925,11 +37925,11 @@ void Func04AF object#(0x4AF) () {
 
 			case "Garritt":
 				say("\"He is the son of Feridwyn and Brita, who run the shelter. Garritt crosses the road to avoid us.\"");
-				var0001 = Func08F7(0xFF52);
+				var0001 = Func08F7(KOMOR);
 				if (var0001) {
 					say("*");
-					0xFF52->say("\"We would not want the likes of him walking down our side of the road anyway!\"*");
-					0xFF52->hide();
+					KOMOR->say("\"We would not want the likes of him walking down our side of the road anyway!\"*");
+					KOMOR->hide();
 					0xFF51->show_npc_face(0x0000);
 				}
 				remove("Garritt");
