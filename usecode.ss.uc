@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [ANDRAL, 0xFF6A, 0xFFB0, CALADIN, CELLIA, 0xFFB6, KRAYG, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, MARSTEN, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [ANDRAL, 0xFF6A, 0xFFB0, CALADIN, CELLIA, 0xFFB6, KRAYG, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, MARSTEN, 0xFFB3, LUCILLA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -6691,8 +6691,8 @@ void Func01C3 shape#(0x1C3) () {
 				wait 4;
 				call Func01C3;
 			};
-			0xFFBA->si_path_run_usecode([0x0439, 0x0A77, 0x0000], SI_PATH_SUCCESS, 0xFFBA->get_npc_object(), Func01C3, false);
-			UI_set_path_failure(Func01C3, 0xFFBA->get_npc_object(), SI_PATH_FAILURE);
+			LUCILLA->si_path_run_usecode([0x0439, 0x0A77, 0x0000], SI_PATH_SUCCESS, LUCILLA->get_npc_object(), Func01C3, false);
+			UI_set_path_failure(Func01C3, LUCILLA->get_npc_object(), SI_PATH_FAILURE);
 			abort;
 		}
 		if (MARSTEN->get_npc_id() == 0x0009) {
@@ -6735,7 +6735,7 @@ void Func01C3 shape#(0x1C3) () {
 			UI_end_conversation();
 			Func097F(0xFF6A, "@Templar is right!@", 0x0008);
 			Func097F(0xFFB9, "@Damn spy!@", 0x0000);
-			Func097F(0xFFBA, "@What shall we do?@", 0x0005);
+			Func097F(LUCILLA, "@What shall we do?@", 0x0005);
 			var0003 = script 0xFFB1 {
 				nohalt;
 				actor frame bowing;
@@ -6881,8 +6881,8 @@ labelFunc01C3_073B:
 			UI_init_conversation();
 			MARSTEN->show_npc_face0(0x0000);
 			say("\"And I am here, both as the Lord of Monitor, and as the leader of the Leopards.\"");
-			if (0xFFBA->get_schedule_type() == WAIT) {
-				0xFFBA->set_schedule_type(WAITER);
+			if (LUCILLA->get_schedule_type() == WAIT) {
+				LUCILLA->set_schedule_type(WAITER);
 			}
 			UI_end_conversation();
 			Func097F(0xFFB3, "@Hurrah!@", 0x0000);
@@ -6924,13 +6924,13 @@ labelFunc01C3_073B:
 			Func097F(CELLIA, "@Welcome, warrior.@", 0x0000);
 			Func097F(KRAYG, "@Wolves!@", 0x0001);
 			if (!UI_is_pc_female()) {
-				0xFFBA->set_schedule_type(WAIT);
-				0xFFBA->Func07D2();
-				Func097F(0xFFBA, "@I like his looks.@", 0x0003);
+				LUCILLA->set_schedule_type(WAIT);
+				LUCILLA->Func07D2();
+				Func097F(LUCILLA, "@I like his looks.@", 0x0003);
 			} else {
-				Func097F(0xFFBA, "@Glad to meet thee.@", 0x0003);
+				Func097F(LUCILLA, "@Glad to meet thee.@", 0x0003);
 			}
-			0xFFBA->set_item_flag(MET);
+			LUCILLA->set_item_flag(MET);
 			abort;
 		}
 		if (MARSTEN->get_npc_id() == 0x0003) {
@@ -7050,9 +7050,9 @@ labelFunc01C3_073B:
 					var0011 = KRAYG;
 				}
 				if (var0010 == 0x000C) {
-					0xFFBA->move_object(var000F);
-					0xFFBA->set_schedule_type(WAIT);
-					var0013 = script 0xFFBA {
+					LUCILLA->move_object(var000F);
+					LUCILLA->set_schedule_type(WAIT);
+					var0013 = script LUCILLA {
 						face west;
 						actor frame standing;
 					};
@@ -7111,7 +7111,7 @@ labelFunc01C3_073B:
 		Func097F(0xFFB9, "@Coward!@", 0x0008);
 		Func097F(CALADIN, "@I'm hungry!@", 0x000A);
 		gflags[0x0048] = true;
-		var0018 = [KRAYG, CELLIA, 0xFF6A, 0xFFB3, 0xFFB6, MARSTEN, HARNNA, 0xFFB0, CALADIN, 0xFFBA, 0xFFB1, 0xFFB9];
+		var0018 = [KRAYG, CELLIA, 0xFF6A, 0xFFB3, 0xFFB6, MARSTEN, HARNNA, 0xFFB0, CALADIN, LUCILLA, 0xFFB1, 0xFFB9];
 		for (var0005 in var0018 with var0019 to var001A) {
 			var0005->revert_schedule();
 			var0005->run_schedule();
@@ -7120,7 +7120,7 @@ labelFunc01C3_073B:
 		for (var0005 in var0018 with var001B to var001C) {
 			var0005->set_schedule_type(EAT_AT_INN);
 		}
-		0xFFBA->set_schedule_type(WAITER);
+		LUCILLA->set_schedule_type(WAITER);
 		var0003 = script CELLIA {
 			nohalt;
 			actor frame bowing;
@@ -7132,7 +7132,7 @@ labelFunc01C3_073B:
 			actor frame bowing;
 			actor frame standing;
 		};
-		var001D = [CELLIA, 0xFFB0, HARNNA, KRAYG, 0xFFBA, MARSTEN, 0xFFB3];
+		var001D = [CELLIA, 0xFFB0, HARNNA, KRAYG, LUCILLA, MARSTEN, 0xFFB3];
 		for (var0005 in var001D with var001E to var001F) {
 			var0005->clear_item_flag(SI_TOURNAMENT);
 		}
@@ -7321,7 +7321,7 @@ labelFunc01C3_073B:
 				wait 8;
 				call Func01C3;
 			};
-			Func09AC(0xFFBA, -1, 0, WAITER);
+			Func09AC(LUCILLA, -1, 0, WAITER);
 			abort;
 		}
 		if ((MARSTEN->get_npc_id() == 0x0000) && ((get_item_shape() == 0x01B0) || (get_item_shape() == 0x010E))) {
@@ -13501,28 +13501,28 @@ void Func02E6 shape#(0x2E6) () {
 	var var000B;
 
 	var0000 = Func0954();
-	var0001 = 0xFFBA->get_object_position();
+	var0001 = LUCILLA->get_object_position();
 	if (event == SI_PATH_FAILURE) {
-		if ((0xFFBA->get_npc_id() == 0x0008) && (item == AVATAR->get_npc_object())) {
+		if ((LUCILLA->get_npc_id() == 0x0008) && (item == AVATAR->get_npc_object())) {
 			event = SI_PATH_SUCCESS;
 		}
-		if ((0xFFBA->get_npc_id() == 0x0006) && (item == 0xFFBA->get_npc_object())) {
-			0xFFBA->set_npc_id(0x0007);
-			var0002 = script 0xFFBA {
+		if ((LUCILLA->get_npc_id() == 0x0006) && (item == LUCILLA->get_npc_object())) {
+			LUCILLA->set_npc_id(0x0007);
+			var0002 = script LUCILLA {
 				nohalt;
 				call Func02E6;
 			};
 			var0002 = "@Thank thee...@" & "@Goodbye!@";
-			Func094F(0xFFBA, var0002);
+			Func094F(LUCILLA, var0002);
 			abort;
 		}
-		if ((0xFFBA->get_npc_id() == 0x0002) && (item == AVATAR->get_npc_object())) {
+		if ((LUCILLA->get_npc_id() == 0x0002) && (item == AVATAR->get_npc_object())) {
 			AVATAR->clear_item_say();
 			Func097F(AVATAR, "@Yes!@", 0x0004);
-			0xFFBA->clear_item_say();
-			Func097F(0xFFBA, "@Oh, my!@", 0x0007);
+			LUCILLA->clear_item_say();
+			Func097F(LUCILLA, "@Oh, my!@", 0x0007);
 			AVATAR->set_schedule_type(WAIT);
-			0xFFBA->set_npc_id(0x0003);
+			LUCILLA->set_npc_id(0x0003);
 			var0002 = script AVATAR {
 				nohalt;
 				face west;
@@ -13531,21 +13531,21 @@ void Func02E6 shape#(0x2E6) () {
 			};
 			abort;
 		}
-		if ((0xFFBA->get_npc_id() < 0x0002) && (item == AVATAR->get_npc_object())) {
+		if ((LUCILLA->get_npc_id() < 0x0002) && (item == AVATAR->get_npc_object())) {
 			event = SI_PATH_SUCCESS;
 		}
-		if ((0xFFBA->get_npc_id() == 0x0000) && (item == 0xFFBA->get_npc_object())) {
-			0xFFBA->clear_item_say();
-			Func097F(0xFFBA, "@Hurry!@", 0x0003);
+		if ((LUCILLA->get_npc_id() == 0x0000) && (item == LUCILLA->get_npc_object())) {
+			LUCILLA->clear_item_say();
+			Func097F(LUCILLA, "@Hurry!@", 0x0003);
 			var0002 = find_nearby(0x02B8, 0x000C, MASK_NONE);
 			for (var0005 in var0002 with var0003 to var0004) {
 				if (var0005->get_item_frame() == 0x000B) {
 					var0005->set_item_frame(0x000C);
 				}
 			}
-			0xFFBA->set_npc_id(0x0001);
-			0xFFBA->set_schedule_type(WAIT);
-			var0002 = script 0xFFBA {
+			LUCILLA->set_npc_id(0x0001);
+			LUCILLA->set_schedule_type(WAIT);
+			var0002 = script LUCILLA {
 				nohalt;
 				face west;
 				wait 5;
@@ -13559,10 +13559,10 @@ void Func02E6 shape#(0x2E6) () {
 		}
 	}
 	if (event == SI_PATH_SUCCESS) {
-		if ((0xFFBA->get_npc_id() == 0x0008) && (item == AVATAR->get_npc_object())) {
+		if ((LUCILLA->get_npc_id() == 0x0008) && (item == AVATAR->get_npc_object())) {
 			AVATAR->set_polymorph(0x02D1);
 			UI_play_sound_effect(0x0001);
-			0xFFBA->set_npc_id(Func09A0(0x0005, 0x0003)->get_item_quality());
+			LUCILLA->set_npc_id(Func09A0(0x0005, 0x0003)->get_item_quality());
 			var0002 = Func09A0(0x0005, 0x0003)->set_item_quality(0x0000);
 			AVATAR->clear_item_flag(DONT_MOVE);
 			UI_init_conversation();
@@ -13570,9 +13570,9 @@ void Func02E6 shape#(0x2E6) () {
 			UI_play_music(0x0016, Func09A0(0x0005, 0x0001));
 			abort;
 		}
-		if ((0xFFBA->get_npc_id() == 0x0006) && (item == 0xFFBA->get_npc_object())) {
-			0xFFBA->set_npc_id(0x0007);
-			var0002 = script 0xFFBA {
+		if ((LUCILLA->get_npc_id() == 0x0006) && (item == LUCILLA->get_npc_object())) {
+			LUCILLA->set_npc_id(0x0007);
+			var0002 = script LUCILLA {
 				nohalt;
 				face south;
 				wait 2;
@@ -13583,16 +13583,16 @@ void Func02E6 shape#(0x2E6) () {
 				call Func02E6;
 			};
 			var0002 = "@Thank thee...@" & "@Goodbye!@";
-			Func094F(0xFFBA, var0002);
+			Func094F(LUCILLA, var0002);
 			abort;
 		}
-		if ((0xFFBA->get_npc_id() == 0x0002) && (item == AVATAR->get_npc_object())) {
+		if ((LUCILLA->get_npc_id() == 0x0002) && (item == AVATAR->get_npc_object())) {
 			AVATAR->clear_item_say();
 			Func097F(AVATAR, "@Yes!@", 0x0004);
-			0xFFBA->clear_item_say();
-			Func097F(0xFFBA, "@Oh, my!@", 0x0007);
+			LUCILLA->clear_item_say();
+			Func097F(LUCILLA, "@Oh, my!@", 0x0007);
 			AVATAR->set_schedule_type(WAIT);
-			0xFFBA->set_npc_id(0x0003);
+			LUCILLA->set_npc_id(0x0003);
 			var0002 = script AVATAR {
 				nohalt;
 				face west;
@@ -13607,9 +13607,9 @@ void Func02E6 shape#(0x2E6) () {
 			};
 			abort;
 		}
-		if ((0xFFBA->get_npc_id() < 0x0002) && (item == AVATAR->get_npc_object())) {
+		if ((LUCILLA->get_npc_id() < 0x0002) && (item == AVATAR->get_npc_object())) {
 			AVATAR->set_schedule_type(WAIT);
-			0xFFBA->set_npc_id(0x0002);
+			LUCILLA->set_npc_id(0x0002);
 			Func09B2();
 			UI_play_sound_effect(0x0001);
 			var0002 = script AVATAR {
@@ -13618,18 +13618,18 @@ void Func02E6 shape#(0x2E6) () {
 			};
 			abort;
 		}
-		if ((0xFFBA->get_npc_id() == 0x0000) && (item == 0xFFBA->get_npc_object())) {
-			0xFFBA->clear_item_say();
-			Func097F(0xFFBA, "@Hurry!@", 0x0003);
+		if ((LUCILLA->get_npc_id() == 0x0000) && (item == LUCILLA->get_npc_object())) {
+			LUCILLA->clear_item_say();
+			Func097F(LUCILLA, "@Hurry!@", 0x0003);
 			var0002 = find_nearby(0x02B8, 0x000C, MASK_NONE);
 			for (var0005 in var0002 with var0006 to var0007) {
 				if (var0005->get_item_frame() == 0x000B) {
 					var0005->set_item_frame(0x000C);
 				}
 			}
-			0xFFBA->set_npc_id(0x0001);
-			0xFFBA->set_schedule_type(WAIT);
-			var0002 = script 0xFFBA {
+			LUCILLA->set_npc_id(0x0001);
+			LUCILLA->set_schedule_type(WAIT);
+			var0002 = script LUCILLA {
 				nohalt;
 				face west;
 				wait 2;
@@ -13647,67 +13647,67 @@ void Func02E6 shape#(0x2E6) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		if (0xFFBA->get_npc_id() == 0x0008) {
+		if (LUCILLA->get_npc_id() == 0x0008) {
 			AVATAR->clear_item_say();
 			Func097F(AVATAR, "@I should dress...@", 0x0003);
 			AVATAR->si_path_run_usecode([0x043B, 0x0A52, 0x0000], SI_PATH_SUCCESS, AVATAR->get_npc_object(), Func02E6, false);
 			abort;
 		}
-		if (0xFFBA->get_npc_id() == 0x0007) {
-			0xFFBA->set_npc_id(0x0008);
-			0xFFBA->run_schedule();
+		if (LUCILLA->get_npc_id() == 0x0007) {
+			LUCILLA->set_npc_id(0x0008);
+			LUCILLA->run_schedule();
 			var0002 = script AVATAR after 5 ticks {
 				nohalt;
 				call Func02E6;
 			};
 			abort;
 		}
-		if (0xFFBA->get_npc_id() == 0x0006) {
-			0xFFBA->si_path_run_usecode([0x0437, 0x0A5A, 0x0000], SI_PATH_SUCCESS, 0xFFBA->get_npc_object(), Func02E6, false);
+		if (LUCILLA->get_npc_id() == 0x0006) {
+			LUCILLA->si_path_run_usecode([0x0437, 0x0A5A, 0x0000], SI_PATH_SUCCESS, LUCILLA->get_npc_object(), Func02E6, false);
 			abort;
 		}
-		if (0xFFBA->get_npc_id() == 0x0005) {
-			0xFFBA->set_npc_id(0x0006);
+		if (LUCILLA->get_npc_id() == 0x0005) {
+			LUCILLA->set_npc_id(0x0006);
 			UI_init_conversation();
-			0xFFBA->show_npc_face0(0x0000);
+			LUCILLA->show_npc_face0(0x0000);
 			say("\"Once again, thou hast proved thyself to be the love of my life. When I write my book, I shall dedicate it to thee, my love.\"");
 			UI_end_conversation();
-			var0002 = script 0xFFBA {
+			var0002 = script LUCILLA {
 				nohalt;
 				call Func02E6;
 			};
 			abort;
 		}
-		if (0xFFBA->get_npc_id() == 0x0004) {
-			0xFFBA->set_npc_id(0x0006);
+		if (LUCILLA->get_npc_id() == 0x0004) {
+			LUCILLA->set_npc_id(0x0006);
 			UI_init_conversation();
-			0xFFBA->show_npc_face0(0x0000);
+			LUCILLA->show_npc_face0(0x0000);
 			say("\"Thou art the man of my dreams! I have never felt so fulfilled. What an experience...\"");
 			say("\"As a sign of mine appreciation and great affection for thee, please accept this gift. 'Tis my greatest possession.\"");
 			say("\"Gwani cloaks are most rare, and are worn by the Goblins as a token of great bravery. My father slew the chieftain who once wore this cloak!\"");
 			say("\"Please wear it, and remember me always.\"");
-			0xFFBA->clear_item_say();
-			Func097F(0xFFBA, "@Always...@", 0x0000);
+			LUCILLA->clear_item_say();
+			Func097F(LUCILLA, "@Always...@", 0x0000);
 			var0002 = Func099B(AVATAR, 0x0001, 0x00E3, QUALITY_ANY, 0x0004, 0x0000, true);
 			UI_end_conversation();
 			gflags[0x008A] = true;
-			var0002 = script 0xFFBA {
+			var0002 = script LUCILLA {
 				nohalt;
 				call Func02E6;
 			};
 			abort;
 		}
-		if (0xFFBA->get_npc_id() == 0x0003) {
+		if (LUCILLA->get_npc_id() == 0x0003) {
 			if (gflags[0x008A]) {
-				0xFFBA->set_npc_id(0x0005);
+				LUCILLA->set_npc_id(0x0005);
 			} else {
-				0xFFBA->set_npc_id(0x0004);
+				LUCILLA->set_npc_id(0x0004);
 			}
 			UI_fade_palette(0x000C, 0x0001, 0x0000);
 			UI_advance_time(0x05DC * 0x0003);
-			0xFFBA->move_object([0x0435, 0x0A54, 0x0000]);
+			LUCILLA->move_object([0x0435, 0x0A54, 0x0000]);
 			AVATAR->move_object([0x0439, 0x0A5D, 0x0001]);
-			var0002 = script 0xFFBA after 30 ticks {
+			var0002 = script LUCILLA after 30 ticks {
 				nohalt;
 				face west;
 				actor frame sitting;
@@ -13723,21 +13723,21 @@ void Func02E6 shape#(0x2E6) () {
 			Func097F(AVATAR, "@Where am I?@", 0x0023);
 			abort;
 		}
-		if (0xFFBA->get_npc_id() == 0x0002) {
+		if (LUCILLA->get_npc_id() == 0x0002) {
 			AVATAR->clear_item_say();
 			Func097F(AVATAR, "@I'm ready...@", 0x0000);
-			0xFFBA->clear_item_say();
-			Func097F(0xFFBA, "@As am I!@", 0x0003);
+			LUCILLA->clear_item_say();
+			Func097F(LUCILLA, "@As am I!@", 0x0003);
 			AVATAR->si_path_run_usecode([0x043A, 0x0A5C, 0x0000], SI_PATH_SUCCESS, AVATAR->get_npc_object(), Func02E6, false);
 			abort;
 		}
-		if (0xFFBA->get_npc_id() == 0x0001) {
-			0xFFBA->move_object([0x0439, 0x0A5D, 0x0001]);
+		if (LUCILLA->get_npc_id() == 0x0001) {
+			LUCILLA->move_object([0x0439, 0x0A5D, 0x0001]);
 			abort;
 		}
-		if (0xFFBA->get_npc_id() == 0x0000) {
-			0xFFBA->show_npc_face0(0x0000);
-			var0001 = 0xFFBA->get_object_position();
+		if (LUCILLA->get_npc_id() == 0x0000) {
+			LUCILLA->show_npc_face0(0x0000);
+			var0001 = LUCILLA->get_object_position();
 			if ((var0001[0x0001] > 0x042F) && ((var0001[0x0001] < 0x043F) && ((var0001[0x0002] > 0x0A50) && (var0001[0x0002] < 0x0A5F)))) {
 				say("\"I am ready now! Come to bed, my love!\"");
 				if (UI_get_array_size(UI_get_party_list()) > 0x0001) {
@@ -13752,14 +13752,14 @@ void Func02E6 shape#(0x2E6) () {
 				}
 				UI_end_conversation();
 				AVATAR->set_item_flag(DONT_MOVE);
-				0xFFBA->si_path_run_usecode([0x043A, 0x0A5C, 0x0000], SI_PATH_SUCCESS, 0xFFBA->get_npc_object(), Func02E6, false);
-				0xFFBA->clear_item_say();
-				Func097F(0xFFBA, "@Come, my love!@", 0x0000);
+				LUCILLA->si_path_run_usecode([0x043A, 0x0A5C, 0x0000], SI_PATH_SUCCESS, LUCILLA->get_npc_object(), Func02E6, false);
+				LUCILLA->clear_item_say();
+				Func097F(LUCILLA, "@Come, my love!@", 0x0000);
 				abort;
 			}
 			say("\"Oh, darling! Meet me in my bedroom...\"");
-			Func097F(0xFFBA, "@I'm so sleepy...@", 0x0000);
-			0xFFBA->run_schedule();
+			Func097F(LUCILLA, "@I'm so sleepy...@", 0x0000);
+			LUCILLA->run_schedule();
 			abort;
 		}
 	}
@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, CELLIA, 0xFFB0, HARNNA, KRAYG, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, 0xFF64, MARSTEN, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, CELLIA, 0xFFB0, HARNNA, KRAYG, LUCILLA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, 0xFF64, MARSTEN, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -44743,40 +44743,40 @@ void Func0446 object#(0x446) () {
 			call Func01D0;
 		};
 	}
-	if ((event == DOUBLECLICK) && (0xFFBA->get_schedule_type() != WAIT)) {
-		var0002 = 0xFFBA->get_object_position();
-		if (gflags[0x0054] && ((0xFFBA->get_schedule_type() == SLEEP) && ((var0002[0x0001] > 0x042F) && ((var0002[0x0001] < 0x043F) && ((var0002[0x0002] > 0x0A50) && (var0002[0x0002] < 0x0A5F)))))) {
-			0xFFBA->Func07D2();
-			0xFFBA->set_schedule_type(WAIT);
-			Func097F(0xFFBA, "@Yes, love?@", 0x0002);
-			var0000 = script 0xFFBA after 10 ticks {
+	if ((event == DOUBLECLICK) && (LUCILLA->get_schedule_type() != WAIT)) {
+		var0002 = LUCILLA->get_object_position();
+		if (gflags[0x0054] && ((LUCILLA->get_schedule_type() == SLEEP) && ((var0002[0x0001] > 0x042F) && ((var0002[0x0001] < 0x043F) && ((var0002[0x0002] > 0x0A50) && (var0002[0x0002] < 0x0A5F)))))) {
+			LUCILLA->Func07D2();
+			LUCILLA->set_schedule_type(WAIT);
+			Func097F(LUCILLA, "@Yes, love?@", 0x0002);
+			var0000 = script LUCILLA after 10 ticks {
 				nohalt;
 				call Func02E6;
 			};
 			UI_play_music(0x001C, Func09A0(0x0005, 0x0001));
 		} else {
 			AVATAR->item_say("@Miss!@");
-			0xFFBA->Func07D1();
+			LUCILLA->Func07D1();
 			if (UI_is_pc_female()) {
-				Func097F(0xFFBA, "@Yes, dearie?@", 0x0002);
+				Func097F(LUCILLA, "@Yes, dearie?@", 0x0002);
 			} else {
-				Func097F(0xFFBA, "@Yes, handsome?@", 0x0002);
+				Func097F(LUCILLA, "@Yes, handsome?@", 0x0002);
 			}
-			Func097F(0xFFBA, "Hello.", 0x0002);
-			0xFFBA->set_schedule_type(TALK);
+			Func097F(LUCILLA, "Hello.", 0x0002);
+			LUCILLA->set_schedule_type(TALK);
 		}
 	}
 	if (event == STARTED_TALKING) {
-		0xFFBA->run_schedule();
-		0xFFBA->clear_item_say();
-		0xFFBA->show_npc_face0(0x0000);
-		if (gflags[0x0054] && (0xFFBA->get_schedule_type() == SLEEP)) {
+		LUCILLA->run_schedule();
+		LUCILLA->clear_item_say();
+		LUCILLA->show_npc_face0(0x0000);
+		if (gflags[0x0054] && (LUCILLA->get_schedule_type() == SLEEP)) {
 			say("\"Oh, darling! Let us meet in my bedroom...\"");
-			Func097F(0xFFBA, "@I am so sleepy...@", 0x0000);
-			0xFFBA->run_schedule();
+			Func097F(LUCILLA, "@I am so sleepy...@", 0x0000);
+			LUCILLA->run_schedule();
 			abort;
 		}
-		if (!0xFFBA->get_item_flag(MET)) {
+		if (!LUCILLA->get_item_flag(MET)) {
 			if (!UI_is_pc_female()) {
 				say("\"Forgive my boldness, but I must say that thou hast a fine build, milord! Surely, thou hast overcome many foes with the powerful thrust of thy weapon...\"");
 			} else {
@@ -44787,7 +44787,7 @@ void Func0446 object#(0x446) () {
 				0x0000->set_conversation_slot();
 			}
 			say("\"My name is Lucilla. Is there anything I can do for thee? Anything at all?\"");
-			0xFFBA->set_item_flag(MET);
+			LUCILLA->set_item_flag(MET);
 		} else {
 			say("\"Hello again!\"");
 		}
@@ -44841,12 +44841,12 @@ void Func0446 object#(0x446) () {
 
 			case "name" (remove):
 				say("\"My name is Lucilla.\"");
-				0xFFBA->set_item_flag(MET);
+				LUCILLA->set_item_flag(MET);
 				fallthrough;
 
 			case "duties" (remove):
 				say("\"I run the Slashing Sword, the best pub in Monitor. Thou mightest think that cooking is not a very Knightly activity, but I assure thee, feeding the warriors in this town is indeed a Quest of Courage!\"");
-				if (0xFFBA->get_schedule_type() == WAITER) {
+				if (LUCILLA->get_schedule_type() == WAITER) {
 					say("\"If thou dost want anything to eat or drink, thou hast merely to say so, ",
 						var0001,
 						".\"");
@@ -44855,14 +44855,14 @@ void Func0446 object#(0x446) () {
 				}
 				if (!gflags[0x0048]) {
 					say("\"And I would love to chat further, but I do not speak with strangers. My standards are very high, and thou art not a Knight of Monitor.\"");
-					Func097F(0xFFBA, "@Not a Knight!@", 0x0000);
+					Func097F(LUCILLA, "@Not a Knight!@", 0x0000);
 					abort;
 				}
 				add(["The Slashing Sword", "cooking", "Quest of Courage"]);
 				fallthrough;
 
 			case "buy":
-				if (0xFFBA->get_schedule_type() == WAITER) {
+				if (LUCILLA->get_schedule_type() == WAITER) {
 					say("\"What wouldst thou like, ",
 						var0001,
 						"?\"");
@@ -45013,7 +45013,7 @@ labelFunc0446_05A1:
 				0x0001->set_conversation_slot();
 				say("\"I shall!\"");
 				gflags[0x0055] = true;
-				Func097F(0xFFBA, "@Farewell!@", 0x0000);
+				Func097F(LUCILLA, "@Farewell!@", 0x0000);
 				Func097F(0xFFB3, "@Anon!@", 0x0002);
 				0xFFB3->si_path_run_usecode([0x041B, 0x0A52, 0x0000], SI_PATH_SUCCESS, 0xFFB3, Func044D, true);
 				abort;
@@ -45029,7 +45029,7 @@ labelFunc0446_05A1:
 					}
 				} else {
 					say("\"The time is not right. I cannot see thee now. Another time, my love...\"");
-					Func097F(0xFFBA, "@Not now!@", 0x0000);
+					Func097F(LUCILLA, "@Not now!@", 0x0000);
 					abort;
 				}
 				fallthrough;
@@ -45079,9 +45079,9 @@ labelFunc0446_05A1:
 			case "bye":
 				Func097F(AVATAR, "@Must be going...@", 0x0000);
 				if (!UI_is_pc_female()) {
-					Func097F(0xFFBA, "@Goodbye, lover.@", 0x0002);
+					Func097F(LUCILLA, "@Goodbye, lover.@", 0x0002);
 				} else {
-					Func097F(0xFFBA, "@Goodbye, milady.@", 0x0002);
+					Func097F(LUCILLA, "@Goodbye, milady.@", 0x0002);
 				}
 				break;
 		}
@@ -78759,7 +78759,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(0xFFB1, 0x0407, 0x0A47, WAIT);
 		Func09AC(MARSTEN, 0x0427, 0x09C7, WAIT);
 		Func09AC(0xFFB3, 0x0442, 0x09CA, WAIT);
-		Func09AC(0xFFBA, 0x03F6, 0x0A45, WAIT);
+		Func09AC(LUCILLA, 0x03F6, 0x0A45, WAIT);
 		HARNNA->set_new_schedules([DAWN, NOON, AFTERNOON, NIGHT], [0x000B, LOITER, WANDER, SLEEP], [0x034A, 0x0AB4, 0x0409, 0x0A24, 0x03A9, 0x0A1B, 0x035B, 0x0A8A]);
 		HARNNA->run_schedule();
 		0xFF00->set_alignment(EVIL);
@@ -93307,17 +93307,17 @@ void Func0845 0x845 () {
 		} else if (var000D == 0x0003) {
 			var0012 = Func0992(0x0001, (("@But " + var0000) + ", we have not the monetari to pay for this.@"), 0x0000, false);
 			if (var0012 != AVATAR) {
-				0xFFBA->show_npc_face0(0x0000);
+				LUCILLA->show_npc_face0(0x0000);
 				say("\"I am truly sorry, but thou dost not have enough money to pay for that, ",
 					var0000,
 					".\"");
 			} else {
 				say("\"It would appear thou dost not have enough monetari for that...\"");
 			}
-			if (0x001F < (0xFFBA->get_npc_id() + 0x0006)) {
-				0xFFBA->set_npc_id(0x001F);
+			if (0x001F < (LUCILLA->get_npc_id() + 0x0006)) {
+				LUCILLA->set_npc_id(0x001F);
 			} else {
-				0xFFBA->set_npc_id(0xFFBA->get_npc_id() + 0x0006);
+				LUCILLA->set_npc_id(LUCILLA->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Wouldst thou care for more?\"");
@@ -93435,15 +93435,15 @@ void Func0846 0x846 () {
 		} else if (var000E == 0x0003) {
 			var0011 = Func0992(0x0001, (("@But " + var0001) + ", we lack adequate funds!@"), 0x0000, false);
 			if (var0011 != AVATAR) {
-				0xFFBA->show_npc_face0(0x0000);
+				LUCILLA->show_npc_face0(0x0000);
 				say("\"Then thy thirst will not be quenched here.\"");
 			} else {
 				say("\"It seems thou dost not have the funds to pay me...\"");
 			}
-			if (0x001F < (0xFFBA->get_npc_id() + 0x0006)) {
-				0xFFBA->set_npc_id(0x001F);
+			if (0x001F < (LUCILLA->get_npc_id() + 0x0006)) {
+				LUCILLA->set_npc_id(0x001F);
 			} else {
-				0xFFBA->set_npc_id(0xFFBA->get_npc_id() + 0x0006);
+				LUCILLA->set_npc_id(LUCILLA->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Wouldst thou care for more?\"");
@@ -93501,12 +93501,12 @@ var Func0847 0x847 (var var0000, var var0001) {
 	}
 	var0006 = var0000;
 	var0007 = (var0001 / 0x0003) * 0x0002;
-	var0008 = 0x000F - (0xFFBA->get_npc_id() / 0x0002);
+	var0008 = 0x000F - (LUCILLA->get_npc_id() / 0x0002);
 	var0009 = 0x0000;
 	var000A = 0x0001;
 	var000B = 0x0000;
 	var000C = 0x0002;
-	var000D = 0xFFBA->get_npc_id();
+	var000D = LUCILLA->get_npc_id();
 	while (var000A) {
 		var000E = Func0956(["yes", "no", "haggle"]);
 		if (var000E == "no") {
@@ -93659,7 +93659,7 @@ var Func0847 0x847 (var var0000, var var0001) {
 			}
 			if (Func0955()) {
 				if (var000D > 0x0001) {
-					0xFFBA->set_npc_id(var000D - 0x0002);
+					LUCILLA->set_npc_id(var000D - 0x0002);
 				}
 				return var0006;
 			}
@@ -93692,9 +93692,9 @@ var Func0847 0x847 (var var0000, var var0001) {
 				}
 			}
 			if (0x001F < (var000D + 0x000A)) {
-				0xFFBA->set_npc_id(0x001F);
+				LUCILLA->set_npc_id(0x001F);
 			} else {
-				0xFFBA->set_npc_id(var000D + 0x000A);
+				LUCILLA->set_npc_id(var000D + 0x000A);
 			}
 			return 0x0000;
 		}
@@ -93704,7 +93704,7 @@ var Func0847 0x847 (var var0000, var var0001) {
 					var0006,
 					" was my final offer. Dost thou accept?\"");
 				if (var000D < 0x001C) {
-					0xFFBA->set_npc_id(var000D + 0x0004);
+					LUCILLA->set_npc_id(var000D + 0x0004);
 				}
 				if (Func0955()) {
 					return var0006;
@@ -93715,7 +93715,7 @@ var Func0847 0x847 (var var0000, var var0001) {
 					var0006,
 					" monetari is my final offer.\"");
 				if (var000D < 0x001E) {
-					0xFFBA->set_npc_id(var000D + 0x0002);
+					LUCILLA->set_npc_id(var000D + 0x0002);
 				}
 			}
 		} else {
@@ -93873,7 +93873,7 @@ var Func0847 0x847 (var var0000, var var0001) {
 					}
 				}
 				if (var000D < 0x001F) {
-					0xFFBA->set_npc_id(var000D + 0x0001);
+					LUCILLA->set_npc_id(var000D + 0x0001);
 				}
 			}
 		}
@@ -107054,7 +107054,7 @@ void Func091B 0x91B () {
 
 void Func091C 0x91C () {
 	if (event == DOUBLECLICK) {
-		0xFFBA->show_npc_face0(0x0000);
+		LUCILLA->show_npc_face0(0x0000);
 		say("\"Avatar! Save me!\"");
 		say("\"Some fell sorcery brought me here and nothing I do can unlock the door. Release me, I beg thee! -- Before the fiend that did this comes for me!\"");
 		UI_remove_npc_face0();

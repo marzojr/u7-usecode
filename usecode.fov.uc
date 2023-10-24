@@ -21344,7 +21344,7 @@ void Func0446 object#(0x446) () {
 	var var0007;
 
 	if (event == DOUBLECLICK) {
-		0xFFBA->show_npc_face(0x0000);
+		MIRANDA->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = UI_part_of_day();
 		add(["name", "job", "bye"]);
@@ -21398,7 +21398,7 @@ void Func0446 object#(0x446) () {
 						say("\"He's right here! Say hello to the Avatar, Max.\"*");
 						MAX->say("\"Hi. I'm a funny boy!\"*");
 						MAX->hide();
-						0xFFBA->say("\"He's quite precocious.");
+						MIRANDA->say("\"He's quite precocious.");
 					} else {
 						say("\"I wonder where he could be...");
 					}
@@ -21474,7 +21474,7 @@ void Func0446 object#(0x446) () {
 		say("\"We shall see thee again soon, I hope, Avatar.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFBA);
+		Func092E(MIRANDA);
 	}
 }
 
