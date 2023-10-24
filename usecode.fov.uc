@@ -6690,7 +6690,7 @@ void Func02F2 shape#(0x2F2) () {
 	}
 	if (event == SCRIPTED) {
 		gflags[0x01AA] = true;
-		var0005 = [MORDRA, ROWENA, MARKHAM, PAULETTE, 0xFF6E, 0xFF6D, HORANCE];
+		var0005 = [MORDRA, ROWENA, MARKHAM, PAULETTE, QUENTON, 0xFF6D, HORANCE];
 		for (var0008 in var0005 with var0006 to var0007) {
 			var0008->clear_item_flag(ASLEEP);
 			var0008->set_schedule_type(WAIT);
@@ -31846,7 +31846,7 @@ void Func048C object#(0x48C) () {
 				var0007 = Func08F7(PAULETTE);
 				if (var0007 && gflags[0x01B9]) {
 					if (var0002) {
-						0xFF6E->hide();
+						QUENTON->hide();
 					}
 					if (!gflags[0x01A4]) {
 						PAULETTE->say("The lovely ",
@@ -31867,10 +31867,10 @@ void Func048C object#(0x48C) () {
 			case "fire":
 				say("He looks uncomfortable, \"Caine blew the town to the four winds, and now we're all trapped here, slaves of that bastard Horance.\" Tiny blue flames appear in the pupils of his glazed eyes, then go out as he regains his composure.");
 				add(["Caine", "Horance"]);
-				var0008 = Func08F7(0xFF6E);
+				var0008 = Func08F7(QUENTON);
 				if (var0008 && gflags[0x01BA]) {
-					0xFF6E->say("\"Please, Markham. Have a little pity for Caine. He was trying to create something to save the town when he made his fatal mistake.\" The pale ghost looks deeply troubled.");
-					0xFF6E->hide();
+					QUENTON->say("\"Please, Markham. Have a little pity for Caine. He was trying to create something to save the town when he made his fatal mistake.\" The pale ghost looks deeply troubled.");
+					QUENTON->hide();
 					MARKHAM->show_npc_face(0x0000);
 					var0002 = true;
 					var0001 = "yer right Quen,";
@@ -31901,8 +31901,8 @@ void Func048C object#(0x48C) () {
 			case "Horance":
 				say("\"For all the years I've been in Skara Brae, he's been a raving lunatic. What with all o' them silly rhymes and his crazy laughter.~~\"Then one night, we all hears thunder when there isn't a cloud in the starry sky, and I seem to recall a full moon...\" He gets a thoughtful look on his face. \"But as I was sayin', there was this thunder, then this deep, dark laughter coming from the tower on the northern point -- Horance's Dark Tower.\" After this he falls silent for a moment.");
 				if (var0002) {
-					0xFF6E->say("The pale ghost moves forward and whispers, \"I was already living in the half world of the dead when these events took place, and ever since, I've felt a strange pull coming from the tower.\"*");
-					0xFF6E->hide();
+					QUENTON->say("The pale ghost moves forward and whispers, \"I was already living in the half world of the dead when these events took place, and ever since, I've felt a strange pull coming from the tower.\"*");
+					QUENTON->hide();
 					MARKHAM->show_npc_face(0x0000);
 				}
 				say("After a brief swig, he continues, \"Then, even worse... I'm out checkin' on the cows when I hears a sound like moanin'. It's off to the east, so I look that way, into the graveyard y'know, and what do I see?~~\"I'll tell ya what I seen. The graves, rippin' open like the people in 'em got a place to go.\" Eyes wide, he tips back another sip.");
@@ -32831,7 +32831,7 @@ void Func0492 object#(0x492) () {
 	var var0009;
 
 	if (event == DOUBLECLICK) {
-		0xFF6E->show_npc_face(0x0000);
+		QUENTON->show_npc_face(0x0000);
 		if (!gflags[0x01BA]) {
 			say("The pale ghost seems to see you but cannot speak to you for some reason. In frustration the ghost turns away.*");
 			abort;
@@ -32848,7 +32848,7 @@ void Func0492 object#(0x492) () {
 			add("sacrifice");
 		}
 		var0004 = UI_part_of_day();
-		var0005 = 0xFF6E->get_schedule_type();
+		var0005 = QUENTON->get_schedule_type();
 		if (!gflags[0x01AA]) {
 			if ((var0004 == MIDNIGHT) || (var0004 == EARLY)) {
 				if (var0005 == SLEEP) {
@@ -32870,23 +32870,23 @@ void Func0492 object#(0x492) () {
 			if (var0007 in var0006) {
 				ROWENA->say("\"Hello, Quenton. I hope thou art doing well.\" Rowena gives the pale ghost a winning smile.*");
 				ROWENA->hide();
-				0xFF6E->say("\"Yes, milady. I am doing as well as can be expected. It gladdens mine heart to see that thou art once again free. Hast thou been to see Trent yet?\"*");
+				QUENTON->say("\"Yes, milady. I am doing as well as can be expected. It gladdens mine heart to see that thou art once again free. Hast thou been to see Trent yet?\"*");
 				ROWENA->say("\"Alas, no. This kind person is taking me to him.\" She indicates you.*");
 				ROWENA->hide();
-				0xFF6E->say("\"These are glad tidings, for he misses thee so.\"*");
+				QUENTON->say("\"These are glad tidings, for he misses thee so.\"*");
 			}
 			if (var0008 in var0006) {
 				0xFF6D->say("\"Well met, Quenton.\" The Mayor's mustache spreads as he smiles.*");
 				0xFF6D->hide();
-				0xFF6E->say("\"Hello, Mayor. How dost thou fare, milord?\"*");
+				QUENTON->say("\"Hello, Mayor. How dost thou fare, milord?\"*");
 				0xFF6D->say("Forsythe seems taken aback by Quenton's sincere sounding query. \"Why, I fare well, Quenton. I thank thee for thy concern.\"*");
 				0xFF6D->hide();
-				0xFF6E->say("He smiles in acknowledgement of the Mayor's thanks.*");
+				QUENTON->say("He smiles in acknowledgement of the Mayor's thanks.*");
 			}
 			var0009 = true;
 		}
 		if (!var0009) {
-			0xFF6E->show_npc_face(0x0000);
+			QUENTON->show_npc_face(0x0000);
 		}
 		if (!gflags[0x01CB]) {
 			say("The pale-looking ghost turns in your direction and gives you a wan smile. \"Hello, could it be that we have met somewhere before, ",
@@ -32942,7 +32942,7 @@ void Func0492 object#(0x492) () {
 							var0001,
 							".~~\"He sometimes loses control like that when he talks about his daughter. Sure'n ya can understand, tho'.\"*");
 						MARKHAM->hide();
-						0xFF6E->show_npc_face(0x0000);
+						QUENTON->show_npc_face(0x0000);
 					}
 				} else {
 					say("Quenton regains control of himself. \"Forgive me, ",
@@ -32965,7 +32965,7 @@ void Func0492 object#(0x492) () {
 						MARKHAM->say(var0003,
 							" nods his head emphatically, \"'At's right, I seen it, I did.\"*");
 						MARKHAM->hide();
-						0xFF6E->show_npc_face(0x0000);
+						QUENTON->show_npc_face(0x0000);
 					}
 				}
 				say("\"They marched to his tower, and now they roam all over the island, performing his bidding.\"*");
@@ -32975,7 +32975,7 @@ void Func0492 object#(0x492) () {
 							var0003,
 							" looks a bit disgruntled.*");
 						MARKHAM->hide();
-						0xFF6E->show_npc_face(0x0000);
+						QUENTON->show_npc_face(0x0000);
 					}
 				}
 				remove("Liche");
@@ -69109,7 +69109,7 @@ void Func088B 0x88B () {
 	};
 	0xFF6D->remove_from_party();
 	0xFF6D->set_schedule_type(WAIT);
-	var0006 = [0xFF6D, MORDRA, TRENT, ROWENA, MARKHAM, 0xFF6E, PAULETTE];
+	var0006 = [0xFF6D, MORDRA, TRENT, ROWENA, MARKHAM, QUENTON, PAULETTE];
 	for (var0009 in var0006 with var0007 to var0008) {
 		var0009->remove_npc();
 	}

@@ -50456,13 +50456,13 @@ void Func0492 object#(0x492) () {
 
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Hail, Gwani elder!@");
-		Func097F(0xFF6E, "@Thou are here.@", 0x0003);
-		0xFF6E->set_schedule_type(TALK);
+		Func097F(MYAURI, "@Thou are here.@", 0x0003);
+		MYAURI->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF6E->run_schedule();
-		0xFF6E->clear_item_say();
-		0xFF6E->show_npc_face0(0x0000);
+		MYAURI->run_schedule();
+		MYAURI->clear_item_say();
+		MYAURI->show_npc_face0(0x0000);
 		say("\"It is one foretold by Gwenno!\"");
 		add(["name", "Gwenno", "bye"]);
 		if (gflags[0x0004]) {
@@ -50567,7 +50567,7 @@ void Func0492 object#(0x492) () {
 				UI_remove_npc_face0();
 				UI_remove_npc_face1();
 				Func097F(AVATAR, "@Goodbye!@", 0x0000);
-				Func097F(0xFF6E, "@Go in peace, my friend.@", 0x0003);
+				Func097F(MYAURI, "@Go in peace, my friend.@", 0x0003);
 				break;
 		}
 	}
