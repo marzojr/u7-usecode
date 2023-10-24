@@ -24647,12 +24647,12 @@ void Func045D object#(0x45D) () {
 	var var0005;
 
 	if (event == DOUBLECLICK) {
-		0xFFA3->show_npc_face(0x0000);
-		var0000 = 0xFFA3->get_npc_object()->get_schedule_type();
+		WILLIAM->show_npc_face(0x0000);
+		var0000 = WILLIAM->get_npc_object()->get_schedule_type();
 		var0001 = UI_part_of_day();
 		if (var0001 == NIGHT) {
 			if (var0000 == MAJOR_SIT) {
-				var0002 = Func08FC(0xFFA3, ELYNOR);
+				var0002 = Func08FC(WILLIAM, ELYNOR);
 				if (var0002) {
 					say("William does not want to avert his attention from the Fellowship meeting.*");
 					abort;
@@ -24744,7 +24744,7 @@ void Func045D object#(0x45D) () {
 		say("As soon as he has dismissed you, the overwrought William hides his face in his hands.*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFA3);
+		Func092E(WILLIAM);
 	}
 }
 
@@ -58897,7 +58897,7 @@ void Func06C7 object#(0x6C7) () {
 	var var0003;
 
 	if (event == EGG) {
-		var0000 = [0xFFA3, BURNSIDE, ELYNOR, GREGOR, OWEN];
+		var0000 = [WILLIAM, BURNSIDE, ELYNOR, GREGOR, OWEN];
 		for (var0003 in var0000 with var0001 to var0002) {
 			Func093F(var0003, LOITER);
 		}
@@ -68130,10 +68130,10 @@ void Func087B 0x87B () {
 		BURNSIDE->say("You notice that Burnside has apparently nodded off. After a nudge from the person next to him, his eyes pop open. \"Umm... what was that question again...?\" he asks sheepishly.*");
 		BURNSIDE->hide();
 	}
-	var0003 = Func08F7(0xFFA3);
+	var0003 = Func08F7(WILLIAM);
 	if (var0003) {
-		0xFFA3->say("\"The Fellowship has helped me to have more courage to deal with the unexpected terrors of life,\" says William.*");
-		0xFFA3->hide();
+		WILLIAM->say("\"The Fellowship has helped me to have more courage to deal with the unexpected terrors of life,\" says William.*");
+		WILLIAM->hide();
 	}
 	var0004 = Func08F7(0xFF9F);
 	if (var0004) {

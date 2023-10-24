@@ -71873,10 +71873,10 @@ void Func06FA object#(0x6FA) () {
 			AUTO3->set_item_flag(SI_TOURNAMENT);
 			AUTO3->move_object([0x071B, 0x0A66]);
 			AUTO3->set_schedule_type(WAIT);
-			0xFFA3->set_alignment(EVIL);
-			0xFFA3->set_item_flag(SI_TOURNAMENT);
-			0xFFA3->move_object([0x0754, 0x0A64]);
-			0xFFA3->set_schedule_type(WAIT);
+			AUTO4->set_alignment(EVIL);
+			AUTO4->set_item_flag(SI_TOURNAMENT);
+			AUTO4->move_object([0x0754, 0x0A64]);
+			AUTO4->set_schedule_type(WAIT);
 		}
 		gflags[0x0208] = true;
 		remove_item();
@@ -72130,7 +72130,7 @@ void Func06FF object#(0x6FF) () {
 		var0001 = AUTO2;
 	}
 	if (var0000 == 0x0044) {
-		var0001 = 0xFFA3;
+		var0001 = AUTO4;
 	}
 	if (var0001) {
 		var0001->set_new_schedules(MIDNIGHT, IN_COMBAT, [0x0733, 0x0A79]);
