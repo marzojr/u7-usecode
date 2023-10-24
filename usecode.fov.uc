@@ -24475,10 +24475,10 @@ void Func045C object#(0x45C) () {
 	var var000D;
 
 	if (event == DOUBLECLICK) {
-		0xFFA4->show_npc_face(0x0000);
+		RUTHERFORD->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFFA4->get_npc_object()->get_schedule_type();
+		var0002 = RUTHERFORD->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (gflags[0x011F]) {
 			add("murders");
@@ -24513,7 +24513,7 @@ void Func045C object#(0x45C) () {
 							say("\"Hello again, Sir Dupre! Didst thou enjoy mine establishment so much that thou hast returned?\"*");
 							DUPRE->say("\"My dear Rutherford, this is not a reflection on The Checquered Cork, but I simply like a good drink!\"*");
 							DUPRE->hide();
-							0xFFA4->show_npc_face(0x0000);
+							RUTHERFORD->show_npc_face(0x0000);
 						}
 					}
 					add(["Minoc", "events", "buy", "room"]);
@@ -24627,7 +24627,7 @@ void Func045C object#(0x45C) () {
 		say("\"I shall see thee later... At least I will if thou dost stay in the front o' me good eye.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFA4);
+		Func092E(RUTHERFORD);
 	}
 }
 
@@ -58104,7 +58104,7 @@ void Func06AB object#(0x6AB) () {
 
 	if (event == EGG) {
 		gflags[0x0122] = true;
-		var0000 = [ZORN, XANTHIA, 0xFFA4, OWEN];
+		var0000 = [ZORN, XANTHIA, RUTHERFORD, OWEN];
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0003->set_schedule_type(LOITER);
 		}
@@ -58945,7 +58945,7 @@ void Func06CA object#(0x6CA) () {
 	var var0003;
 
 	if (event == EGG) {
-		var0000 = [ZORN, XANTHIA, 0xFFA4];
+		var0000 = [ZORN, XANTHIA, RUTHERFORD];
 		for (var0003 in var0000 with var0001 to var0002) {
 			Func093F(var0003, LOITER);
 		}

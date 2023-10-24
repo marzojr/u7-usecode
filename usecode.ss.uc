@@ -71869,10 +71869,10 @@ void Func06FA object#(0x6FA) () {
 			AUTO2->set_item_flag(SI_TOURNAMENT);
 			AUTO2->move_object([0x074C, 0x0A67]);
 			AUTO2->set_schedule_type(WAIT);
-			0xFFA4->set_alignment(EVIL);
-			0xFFA4->set_item_flag(SI_TOURNAMENT);
-			0xFFA4->move_object([0x071B, 0x0A66]);
-			0xFFA4->set_schedule_type(WAIT);
+			AUTO3->set_alignment(EVIL);
+			AUTO3->set_item_flag(SI_TOURNAMENT);
+			AUTO3->move_object([0x071B, 0x0A66]);
+			AUTO3->set_schedule_type(WAIT);
 			0xFFA3->set_alignment(EVIL);
 			0xFFA3->set_item_flag(SI_TOURNAMENT);
 			0xFFA3->move_object([0x0754, 0x0A64]);
@@ -72121,7 +72121,7 @@ void Func06FF object#(0x6FF) () {
 	}
 	var0001 = false;
 	if (var0000 == 0x0041) {
-		var0001 = 0xFFA4;
+		var0001 = AUTO3;
 	}
 	if (var0000 == 0x0042) {
 		var0001 = AUTO1;
