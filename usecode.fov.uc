@@ -35659,7 +35659,7 @@ void Func04A4 object#(0x4A4) () {
 	var var0006;
 
 	if (event == DOUBLECLICK) {
-		0xFF5C->show_npc_face(0x0000);
+		ADDOM->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = false;
@@ -48544,7 +48544,7 @@ void Func04F8 object#(0x4F8) () {
 				if (var000F) {
 					say("\"Thou hast the crystal? Excellent.\" He takes the crystal that you got from the adventurer and begins attaching it to his orrery viewer. Shortly he is finished.");
 					gflags[0x01ED] = false;
-					0xFF5C->remove_npc();
+					ADDOM->remove_npc();
 					remove("have crystal");
 					add("want crystal");
 					var0010 = UI_remove_party_items(0x0001, 0x02EA, QUALITY_ANY, FRAME_ANY, false);
