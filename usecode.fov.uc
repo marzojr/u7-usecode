@@ -31602,7 +31602,7 @@ void Func048A object#(0x48A) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFF76->show_npc_face(0x0000);
+	GORN->show_npc_face(0x0000);
 	var0000 = Func0908();
 	var0001 = Func0909();
 	var0002 = Func08F7(IOLO);
@@ -31687,7 +31687,7 @@ void Func048A object#(0x48A) () {
 			if (var0002) {
 				IOLO->say("Iolo whispers to you, \"This fellow is quite sharp, is he not?\"*");
 				IOLO->hide();
-				0xFF76->show_npc_face(0x0000);
+				GORN->show_npc_face(0x0000);
 			}
 			remove("camp");
 			add("danger");
@@ -31697,10 +31697,10 @@ void Func048A object#(0x48A) () {
 			say("\"Zo far de only danger I haf found down here has been a female fighter. She vas beautiful. Vhen I vent to talk to her she hit me over de head mit her svord. Vhen I voke up she vas gone. I bet she tought she had killed me but mine head is harder dan dat. I vas not even vounded.\"");
 			if (var0003) {
 				SHAMINO->say("Shamino whispers to you. \"Luckily, Gorn was hit in the one spot where he has no feeling whatsoever -- his head!\"*");
-				0xFF76->say("\"Hey, vhat are you vhispering about over dere?\"*");
+				GORN->say("\"Hey, vhat are you vhispering about over dere?\"*");
 				SHAMINO->say("\"Oh, nothing. Nothing at all.\"*");
 				SHAMINO->hide();
-				0xFF76->show_npc_face(0x0000);
+				GORN->show_npc_face(0x0000);
 			}
 			remove("danger");
 			fallthrough;
@@ -31736,7 +31736,7 @@ void Func048A object#(0x48A) () {
 					var0000,
 					"?\"*");
 				DUPRE->hide();
-				0xFF76->show_npc_face(0x0000);
+				GORN->show_npc_face(0x0000);
 			}
 			remove("next strange thing");
 			add("find Brom");
@@ -31757,7 +31757,7 @@ void Func048A object#(0x48A) () {
 
 		case "look for Brom":
 			say("\"If dat is how thou vants it. Den I shall go on searching for Brom mit no vone else but myself. Good luck in vhatever qvest thou art on, Avatar. Farewell to thee!\"*");
-			0xFF76->get_npc_object()->set_schedule_type(WANDER);
+			GORN->get_npc_object()->set_schedule_type(WANDER);
 			abort;
 
 		case "it's a trick":
