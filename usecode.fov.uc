@@ -26886,7 +26886,7 @@ void Func046E object#(0x46E) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFF92->show_npc_face(0x0000);
+	GAROK->show_npc_face(0x0000);
 	add(["name", "job", "bye"]);
 	if (gflags[0x02CA]) {
 		add("Brother Wayne");
@@ -52157,7 +52157,7 @@ void Func0632 object#(0x632) () {
 	var var0001;
 
 	if (event == DOUBLECLICK) {
-		var0000 = 0xFF92->get_object_position();
+		var0000 = GAROK->get_object_position();
 		UI_sprite_effect(ANIMATION_TELEPORT, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		var0001 = script item {
 			nohalt;
@@ -52172,7 +52172,7 @@ void Func0632 object#(0x632) () {
 		};
 	}
 	if (event == SCRIPTED) {
-		0xFF92->get_npc_object()->remove_npc();
+		GAROK->get_npc_object()->remove_npc();
 	}
 }
 
