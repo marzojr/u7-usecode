@@ -25032,7 +25032,7 @@ void Func0460 object#(0x460) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFFA0->show_npc_face(0x0000);
+	JERGI->show_npc_face(0x0000);
 	var0000 = Func0909();
 	add(["name", "job", "bye"]);
 	var0001 = Func08F7(MARGARETA);
