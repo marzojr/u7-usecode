@@ -30351,7 +30351,7 @@ void Func0483 object#(0x483) () {
 	var var0004;
 
 	if (event == DOUBLECLICK) {
-		0xFF7D->show_npc_face(0x0000);
+		MAGENTA->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
 		if (gflags[0x017E] && (!gflags[0x017F])) {
@@ -30498,7 +30498,7 @@ void Func0483 object#(0x483) () {
 		say("\"I look forward to the next time when I will see thee.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF7D);
+		Func092E(MAGENTA);
 	}
 }
 
