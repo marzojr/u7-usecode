@@ -37068,13 +37068,13 @@ void Func04AC object#(0x4AC) () {
 	var var001A;
 
 	if (event == DOUBLECLICK) {
-		0xFF54->show_npc_face(0x0000);
+		MORFIN->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = "Avatar";
 		var0003 = "None of thy concern";
 		var0004 = UI_part_of_day();
-		var0005 = 0xFF54->get_npc_object()->get_schedule_type();
+		var0005 = MORFIN->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (gflags[0x022F]) {
 			var0006 = var0000;
@@ -37376,7 +37376,7 @@ void Func04AC object#(0x4AC) () {
 		say("\"Good day to thee.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF54);
+		Func092E(MORFIN);
 	}
 }
 

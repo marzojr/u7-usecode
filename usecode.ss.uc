@@ -54731,7 +54731,7 @@ void Func04AC object#(0x4AC) () {
 	var var0000;
 
 	if (event == DOUBLECLICK) {
-		if (0xFF54->get_schedule_type() == DANCE) {
+		if (SEX_02->get_schedule_type() == DANCE) {
 			item_say("@Later...@");
 		} else {
 			item_say("@Not the left button!@");
@@ -55240,14 +55240,14 @@ void Func04B3 object#(0x4B3) () {
 			if (var000F) {
 				Func097F(0xFF4D, "@I think 'tis THY turn...@", 0x0001);
 				var000F->set_schedule_type(WAIT);
-				0xFF54->clear_item_say();
-				Func097F(0xFF54, "@Yes, Shamino...@", 0x0002);
+				SEX_02->clear_item_say();
+				Func097F(SEX_02, "@Yes, Shamino...@", 0x0002);
 				var0006 = 0xFF4D->find_nearby(0x0178, 0x000A, MASK_NONE);
 				if (var0006) {
 					var0007 = var0006->get_object_position();
 					0xFF4D->set_npc_id(0x0000);
 					0xFF4D->si_path_run_usecode([(var0007[0x0001] + 0x0001), var0007[0x0002], var0007[0x0003]], PATH_SUCCESS, item, Func04B3, true);
-					0xFF54->si_path_run_usecode([(var0007[0x0001] + 0x0001), (var0007[0x0002] + 0x0002), var0007[0x0003]], PATH_SUCCESS, item, Func04B3, true);
+					SEX_02->si_path_run_usecode([(var0007[0x0001] + 0x0001), (var0007[0x0002] + 0x0002), var0007[0x0003]], PATH_SUCCESS, item, Func04B3, true);
 				}
 			}
 			Func097F(AVATAR, "@Hey, come back!@", 0x0003);
@@ -55288,9 +55288,9 @@ void Func04B3 object#(0x4B3) () {
 	if (event == PATH_SUCCESS) {
 		if (gflags[0x0202]) {
 			var0011 = 0xFF4D->get_object_position();
-			var0012 = 0xFF54->get_object_position();
+			var0012 = SEX_02->get_object_position();
 			Func09AC(0xFF4D, 0x001C, 0x066C, DANCE);
-			Func09AC(0xFF54, 0x0018, 0x066C, DANCE);
+			Func09AC(SEX_02, 0x0018, 0x066C, DANCE);
 			UI_sprite_effect(ANIMATION_TELEPORT2, var0011[0x0001], var0011[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			UI_sprite_effect(ANIMATION_TELEPORT2, var0012[0x0001], var0012[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			gflags[0x0202] = false;
@@ -61058,7 +61058,7 @@ void Func061E object#(0x61E) () {
 	if ((event == SCRIPTED) && ((var0000[0x0001] > 0x0010) && ((var0000[0x0001] < 0x004F) && ((var0000[0x0002] > 0x0660) && (var0000[0x0002] < 0x067A))))) {
 		var0001 = false;
 		var0002 = [0x0130, 0x02FE, 0x01D5, 0x0378];
-		if (!(0xFF54->get_schedule_type() == DANCE)) {
+		if (!(SEX_02->get_schedule_type() == DANCE)) {
 			var0002 &= 0x028C;
 		}
 		var0003 = ["@Help us!@", "@Press the right button!@", "@Free us with the right button!@", "@Be kind...@", "@Do not force us!@", "@Damn the buttons!@"];
@@ -107449,7 +107449,7 @@ void Func0926 0x926 (var var0000) {
 		Func0927();
 	}
 	if (var0000 == 0x0018) {
-		var0001 = [SEX_01, 0xFF54, 0xFF53, 0xFF52, 0xFF51];
+		var0001 = [SEX_01, SEX_02, 0xFF53, 0xFF52, 0xFF51];
 		var0002 = "@Thank thee!@" & ("@Bless thee!@" & ("@We are saved!@" & "@Praise the Hero!@"));
 		for (var0005 in var0001 with var0003 to var0004) {
 			var0005->clear_item_say();
@@ -107506,7 +107506,7 @@ void Func0927 0x927 () {
 	var var0008;
 
 	UI_play_music(0x001C, Func09A0(0x0005, 0x0001));
-	var0000 = [SEX_01, 0xFF54, 0xFF53, 0xFF52, 0xFF51];
+	var0000 = [SEX_01, SEX_02, 0xFF53, 0xFF52, 0xFF51];
 	var0001 = ["@Ohh! Yes!@", "@Most pleasant!@", "@Oh, my!@", "@Do thou that again!@", "@Oh, baby...@"];
 	for (var0004 in var0000 with var0002 to var0003) {
 		var0005 = UI_die_roll(0x0001, 0x0005);
