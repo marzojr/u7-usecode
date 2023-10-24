@@ -27252,7 +27252,7 @@ void Func0471 object#(0x471) () {
 	var var0006;
 
 	if (event == DOUBLECLICK) {
-		0xFF8F->show_npc_face(0x0000);
+		SMITH->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func08F7(IOLO);
 		var0002 = false;
@@ -27271,7 +27271,7 @@ void Func0471 object#(0x471) () {
 				remove("name");
 				if (var0001) {
 					IOLO->say("\"Scoundrel! When thou art asked thy name, thou shouldst respond politely and accurately! The Avatar has just asked thee for -thy- name.\"");
-					0xFF8F->say("\"My name? You can call\tme what you want, but I will only respond to Smith.\"");
+					SMITH->say("\"My name? You can call\tme what you want, but I will only respond to Smith.\"");
 					add("Smith");
 					IOLO->hide();
 				} else {
@@ -27377,9 +27377,9 @@ void Func0471 object#(0x471) () {
 				say("\"That's just fine. I was getting tired of you anyway.\"");
 				if (var0001) {
 					IOLO->say("\"Why, how dare thou speakest to the Avatar in that manner, Smith!\"");
-					0xFF8F->say("\"And who are you? My master?\"");
+					SMITH->say("\"And who are you? My master?\"");
 					IOLO->say("\"Why, as a matter of fact...\"");
-					0xFF8F->say("\"Sure, whatever.\"");
+					SMITH->say("\"Sure, whatever.\"");
 					IOLO->hide();
 				}
 				say("*");
