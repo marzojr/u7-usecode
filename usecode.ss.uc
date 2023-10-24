@@ -375,6 +375,7 @@ enum misc_npcs {
 	ZOMBIE03 = -137, // Gwani, starts at House of the Dead
 	ZOMBIE04 = -138, // Gwani, starts at House of the Dead
 	ZOMBIE05 = -139, // Gwani, starts at House of the Dead
+	MAN_ON_FIRE = -151,
 	DED_AUTOMATON = -185, // Automaton, in the middle of ocean
 	PERRY_STOKES = -195, // The software pirate
 	IAUTO = -197, // Automaton, starts at House of the Dead
@@ -13118,10 +13119,10 @@ void Func02C5 shape#(0x2C5) () {
 				nohalt;
 				call Func010E;
 			};
-			var0004 = 0xFF69->get_npc_prop(HEALTH);
-			var0003 = 0xFF69->set_npc_prop(HEALTH, 100 - var0004);
-			0xFF69->move_object([0x09E5, 0x032F, 0x0000]);
-			var0003 = script 0xFF69 {
+			var0004 = MAN_ON_FIRE->get_npc_prop(HEALTH);
+			var0003 = MAN_ON_FIRE->set_npc_prop(HEALTH, 100 - var0004);
+			MAN_ON_FIRE->move_object([0x09E5, 0x032F, 0x0000]);
+			var0003 = script MAN_ON_FIRE {
 				face FACE_SOUTH;
 			};
 		}
@@ -13845,7 +13846,7 @@ void Func02E8 shape#(0x2E8) () {
 		if (var0001) {
 			var0007 = get_object_position();
 			// BUG: This should use PATH_SUCCESS instead of BG_PATH_SUCCESS.
-			0xFF69->si_path_run_usecode(var0007, BG_PATH_SUCCESS, item, Func0314, false);
+			MAN_ON_FIRE->si_path_run_usecode(var0007, BG_PATH_SUCCESS, item, Func0314, false);
 			var0006 = script var0001 after 10 ticks {
 				nohalt;
 				say "@Thou didst risk thy life...@";
@@ -13854,7 +13855,7 @@ void Func02E8 shape#(0x2E8) () {
 				nohalt;
 				say "@Thou art truly ethical!@";
 			};
-			0xFF69->set_npc_id(0x0005);
+			MAN_ON_FIRE->set_npc_id(0x0005);
 		}
 		abort;
 	}
@@ -78864,8 +78865,8 @@ void Func07D9 object#(0x7D9) () {
 					};
 				}
 			}
-			0xFF69->set_npc_id(0x0005);
-			0xFF69->remove_npc();
+			MAN_ON_FIRE->set_npc_id(0x0005);
+			MAN_ON_FIRE->remove_npc();
 		}
 		var0004 = Func09A0(0x0000, 0x0001);
 		var0003 = script var0004 after 15 ticks {
@@ -86285,12 +86286,12 @@ void Func0815 0x815 (var var0000) {
 		if (var0001) {
 			var0007 = get_object_position();
 			// BUG: This should use PATH_SUCCESS instead of BG_PATH_SUCCESS.
-			0xFF69->si_path_run_usecode(var0007, BG_PATH_SUCCESS, item, Func0314, false);
+			MAN_ON_FIRE->si_path_run_usecode(var0007, BG_PATH_SUCCESS, item, Func0314, false);
 			var0006 = script var0001 after 10 ticks {
 				nohalt;
 				say "@Thou art truly ethical!@";
 			};
-			0xFF69->set_npc_id(0x0005);
+			MAN_ON_FIRE->set_npc_id(0x0005);
 		}
 		abort;
 	}

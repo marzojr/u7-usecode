@@ -33682,13 +33682,13 @@ void Func0497 object#(0x497) () {
 	var var0009;
 
 	if (event == DOUBLECLICK) {
-		0xFF69->show_npc_face(0x0000);
+		KISSME->show_npc_face(0x0000);
 		var0000 = Func08F7(IOLO);
 		var0001 = Func08F7(SPARK);
 		var0002 = Func08F7(DUPRE);
 		var0003 = Func08F7(SHAMINO);
 		var0004 = Func0909();
-		var0005 = 0xFF69->get_npc_object()->get_schedule_type();
+		var0005 = KISSME->get_npc_object()->get_schedule_type();
 		var0006 = UI_is_pc_female();
 		add(["name", "job", "bye"]);
 		if (!gflags[0x02C6]) {
@@ -33718,7 +33718,7 @@ void Func0497 object#(0x497) () {
 					DUPRE->say("\"My liege has asked thee thy -name-, foul creature!\"*");
 					DUPRE->hide();
 				}
-				0xFF69->say("\"But that -is- my name! Kissme! Kissme! It is true!\"");
+				KISSME->say("\"But that -is- my name! Kissme! Kissme! It is true!\"");
 				remove("name");
 				fallthrough;
 
@@ -33728,25 +33728,25 @@ void Func0497 object#(0x497) () {
 					say("She flutters over Shamino's head.~~\"I love -thee-, as well!\"*");
 					SHAMINO->say("\"If only thou wert a little larger...\"*");
 					SHAMINO->hide();
-					0xFF69->show_npc_face(0x0000);
+					KISSME->show_npc_face(0x0000);
 				}
 				if (var0001) {
 					say("Then she flies around Spark.~~\"Oooh, and I love -thee-, too!\"*");
 					SPARK->say("Spark blushes. \"Aww, cut it out!\"*");
 					SPARK->hide();
-					0xFF69->show_npc_face(0x0000);
+					KISSME->show_npc_face(0x0000);
 				}
 				if (var0002) {
 					say("Kissme then flies near Dupre.~~\"Handsome man! Handsome man! I love thee! It's true! It's true!\"*");
 					DUPRE->say("Dupre swats at the fairy. \"Away with thee! Thou dost not love me! Thou dost not even -know- me!\"*");
 					DUPRE->hide();
-					0xFF69->show_npc_face(0x0000);
+					KISSME->show_npc_face(0x0000);
 				}
 				if (var0000) {
 					say("Kissme glides over to Iolo and plants a big kiss on his cheek.~~\"Yes! I love thee! Yes, I do!\"*");
 					IOLO->say("Iolo makes a sour face and wipes his cheek.~~ \"Avatar, that was the sloppiest, wettest, most... -disgusting- kiss I have ever felt!\"*");
 					IOLO->hide();
-					0xFF69->show_npc_face(0x0000);
+					KISSME->show_npc_face(0x0000);
 				}
 				add(["Ambrosia", "love dust"]);
 				fallthrough;
@@ -33756,7 +33756,7 @@ void Func0497 object#(0x497) () {
 				if (var0000) {
 					IOLO->say("\"Ambrosia! Then it really does exist!\"*");
 					IOLO->hide();
-					0xFF69->show_npc_face(0x0000);
+					KISSME->show_npc_face(0x0000);
 				}
 				say("\"Ambrosia, the lost isle of Britannia! Thou art really here!\"");
 				remove("Ambrosia");
@@ -33821,7 +33821,7 @@ void Func0497 object#(0x497) () {
 						", do it quickly. We have not time to waste with such foolishness.\" Dupre looks distinctly disgusted with the whole affair.*");
 					DUPRE->hide();
 				}
-				0xFF69->say("Do you allow Kissme to kiss you?");
+				KISSME->say("Do you allow Kissme to kiss you?");
 				if (Func090A()) {
 					say("Kissme places the wettest, sloppiest, oozingest, and mushiest smack you have ever felt on your mouth. ~~\"Oh, yes! That was fun! I love thee! Yes, it's true!\"");
 				} else {
@@ -33837,7 +33837,7 @@ void Func0497 object#(0x497) () {
 	}
 	if (event == PROXIMITY) {
 		var0007 = UI_part_of_day();
-		var0005 = 0xFF69->get_npc_object()->get_schedule_type();
+		var0005 = KISSME->get_npc_object()->get_schedule_type();
 		var0008 = UI_die_roll(0x0001, 0x0004);
 		if (var0005 == DANCE) {
 			if (var0008 == 0x0001) {
@@ -33852,7 +33852,7 @@ void Func0497 object#(0x497) () {
 			if (var0008 == 0x0004) {
 				var0009 = "@Thou art my love!@";
 			}
-			0xFF69->item_say(var0009);
+			KISSME->item_say(var0009);
 		}
 	}
 }
