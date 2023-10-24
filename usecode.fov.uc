@@ -30857,7 +30857,7 @@ void Func0486 object#(0x486) () {
 		var0000 = Func0909();
 		var0001 = ROBIN->get_npc_object();
 		var0002 = 0xFF78->get_npc_object();
-		var0003 = 0xFF79->get_npc_object();
+		var0003 = BATTLES->get_npc_object();
 		var0004 = Func0931(AVATAR, 0x0001, 0x03BB, QUALITY_ANY, 0x0002);
 		var0005 = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
@@ -31070,7 +31070,7 @@ void Func0487 object#(0x487) () {
 	var var0003;
 
 	if (event == DOUBLECLICK) {
-		0xFF79->show_npc_face(0x0000);
+		BATTLES->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
 		var0002 = Func08F7(ROBIN);
@@ -31104,9 +31104,9 @@ void Func0487 object#(0x487) () {
 				say("\"Robin be a high stakes gamblin' gent who makes his living inna casino at Buccaneer's Den.\"");
 				if (var0002) {
 					ROBIN->say("\"A living that would not have been anything near as profitable if not for thy good works, Battles.\"*");
-					0xFF79->say("\"Thank yer, Milord.\"*");
+					BATTLES->say("\"Thank yer, Milord.\"*");
 					ROBIN->hide();
-					0xFF79->show_npc_face(0x0000);
+					BATTLES->show_npc_face(0x0000);
 				}
 				remove("Robin");
 				add(["gamblin' gent", "casino"]);
@@ -31117,7 +31117,7 @@ void Func0487 object#(0x487) () {
 				if (var0002) {
 					ROBIN->say("\"Why, I thank thee for the compliment, Battles!\"*");
 					ROBIN->hide();
-					0xFF79->show_npc_face(0x0000);
+					BATTLES->show_npc_face(0x0000);
 				}
 				remove("gamblin' gent");
 				fallthrough;
@@ -31131,9 +31131,9 @@ void Func0487 object#(0x487) () {
 				say("\"He's a lady's man, he is. But do not be thinkin' he cannot handle hissel' inna fight. T'would be yer last mistake.\"");
 				if (var0003) {
 					0xFF78->say("\"I can near out wrestle thee, Battles, ye old dog!\"*");
-					0xFF79->say("\"Har! Har! Har! Har!\"");
+					BATTLES->say("\"Har! Har! Har! Har!\"");
 					0xFF78->hide();
-					0xFF79->show_npc_face(0x0000);
+					BATTLES->show_npc_face(0x0000);
 				}
 				remove("Leavell");
 				add(["lady's man", "fight"]);
@@ -31144,7 +31144,7 @@ void Func0487 object#(0x487) () {
 				if (var0003) {
 					0xFF78->say("\"So many!\"*");
 					0xFF78->hide();
-					0xFF79->show_npc_face(0x0000);
+					BATTLES->show_npc_face(0x0000);
 				}
 				remove("lady's man");
 				fallthrough;
@@ -31187,7 +31187,7 @@ void Func0487 object#(0x487) () {
 		say("\"Be seein' ye.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF79);
+		Func092E(BATTLES);
 	}
 }
 
@@ -31206,7 +31206,7 @@ void Func0488 object#(0x488) () {
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
 		var0002 = Func08F7(ROBIN);
-		var0003 = Func08F7(0xFF79);
+		var0003 = Func08F7(BATTLES);
 		add(["name", "job", "bye"]);
 		if (gflags[0x017D]) {
 			add("locket");
@@ -31239,8 +31239,8 @@ void Func0488 object#(0x488) () {
 			case "Battles":
 				say("\"He has an eye like a hawk, and is quicker than a cat. 'Twould be wise of thee to pay him respect.\"");
 				if (var0003) {
-					0xFF79->say("\"Har! Har! Thou art too correct, Leavell!\"");
-					0xFF79->hide();
+					BATTLES->say("\"Har! Har! Thou art too correct, Leavell!\"");
+					BATTLES->hide();
 					0xFF78->show_npc_face(0x0000);
 				}
 				remove("Battles");
@@ -31315,8 +31315,8 @@ void Func0488 object#(0x488) () {
 			case "Sintag":
 				say("\"Battles and myself are more than capable of taking care of Sintag...\" *");
 				if (var0003) {
-					0xFF79->say("\"Yeh, thou art bloody right we coulda handled him! We'd a slit him like a sheep! Har!\" *");
-					0xFF79->hide();
+					BATTLES->say("\"Yeh, thou art bloody right we coulda handled him! We'd a slit him like a sheep! Har!\" *");
+					BATTLES->hide();
 					0xFF78->show_npc_face(0x0000);
 				}
 				say("\"But Gordy had hired a troupe of ruffians to chase after us. 'Tis a pity. I would have liked to teach him a lesson or two. In fact, one day I think I shall.\"");
