@@ -22495,9 +22495,9 @@ void Func044F object#(0x44F) () {
 	var var0000;
 
 	if (event == DOUBLECLICK) {
-		0xFFB1->show_npc_face(0x0000);
+		ZINAIDA->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
-		var0000 = 0xFFB1->get_npc_object()->get_schedule_type();
+		var0000 = ZINAIDA->get_npc_object()->get_schedule_type();
 		if (gflags[0x00E4]) {
 			if (gflags[0x00F1]) {
 				add("De Maria");
@@ -22564,7 +22564,7 @@ void Func044F object#(0x44F) () {
 		say("\"Come again soon!\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFB1);
+		Func092E(ZINAIDA);
 	}
 }
 
@@ -22645,10 +22645,10 @@ void Func0450 object#(0x450) () {
 
 			case "Zinaida":
 				say("\"My love! My flower! Mine angel! The provider of the sweetest nectar my mouth has ever known! She is the light of my day! The notes of my songs! The flesh of my...\"~~");
-				var0002 = Func08F7(0xFFB1);
+				var0002 = Func08F7(ZINAIDA);
 				if (var0002) {
-					0xFFB1->say("\"Enough, my love. I think the Avatar dost know thy meaning!\"*");
-					0xFFB1->hide();
+					ZINAIDA->say("\"Enough, my love. I think the Avatar dost know thy meaning!\"*");
+					ZINAIDA->hide();
 					0xFFB0->show_npc_face(0x0000);
 				}
 				say("De Maria stops his reverie, sighs, and smiles at you. \"Thou dost apprehend my meaning...\"");

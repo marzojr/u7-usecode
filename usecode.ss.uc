@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [ANDRAL, 0xFF6A, 0xFFB0, CALADIN, CELLIA, SHAZZANA, KRAYG, LUTHER, LYDIA, SHMED, STANDARR, 0xFFB1, MARSTEN, SPEKTOR, LUCILLA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [ANDRAL, 0xFF6A, 0xFFB0, CALADIN, CELLIA, SHAZZANA, KRAYG, LUTHER, LYDIA, SHMED, STANDARR, TEMPLAR, MARSTEN, SPEKTOR, LUCILLA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -1625,7 +1625,7 @@ labelFunc00E4_0956:
 			say("\"Where is he, anyway? Tell him to step forward before bothering me again.\"");
 			return;
 		}
-		var0014 = [CALADIN, LUTHER, 0xFFB1];
+		var0014 = [CALADIN, LUTHER, TEMPLAR];
 		for (var0001 in var0014 with var0019 to var001A) {
 			if ((UI_game_hour() > 0x0008) && (UI_game_hour() < 0x000C)) {
 				if ((!Func0932(var0001)) && (!var0001->get_item_flag(DEAD))) {
@@ -1633,7 +1633,7 @@ labelFunc00E4_0956:
 				}
 			}
 		}
-		var0014 = [SHAZZANA, 0xFFB1];
+		var0014 = [SHAZZANA, TEMPLAR];
 		for (var0001 in var0014 with var001B to var001C) {
 			if ((UI_game_hour() > 0x000B) && (UI_game_hour() < 0x000F)) {
 				if ((!Func0932(var0001)) && (!var0001->get_item_flag(DEAD))) {
@@ -1688,7 +1688,7 @@ labelFunc00E4_0956:
 					", this here warrior wants to train with ye!\"");
 				UI_remove_npc_face0();
 				0xFF6A->set_npc_id(0x0000);
-				0xFFB1->set_npc_id(0x0000);
+				TEMPLAR->set_npc_id(0x0000);
 				CALADIN->set_npc_id(0x0000);
 				SHAZZANA->set_npc_id(0x0000);
 				LUTHER->set_npc_id(0x0000);
@@ -6716,9 +6716,9 @@ void Func01C3 shape#(0x1C3) () {
 		if (MARSTEN->get_npc_id() == 0x0008) {
 			MARSTEN->set_npc_id(0x0009);
 			UI_init_conversation();
-			0xFFB1->show_npc_face0(0x0000);
+			TEMPLAR->show_npc_face0(0x0000);
 			say("\"Forgive me, lord, but I, too, have a serious matter to put before the leaders of Monitor.\"");
-			0xFFB1->set_item_flag(MET);
+			TEMPLAR->set_item_flag(MET);
 			SHAZZANA->show_npc_face1(0x0000);
 			say("\"Dost thou not need to rest thyself, Templar? Thou hast had no time to heal from thy wounds.\"");
 			UI_remove_npc_face1();
@@ -6736,7 +6736,7 @@ void Func01C3 shape#(0x1C3) () {
 			Func097F(0xFF6A, "@Templar is right!@", 0x0008);
 			Func097F(LUTHER, "@Damn spy!@", 0x0000);
 			Func097F(LUCILLA, "@What shall we do?@", 0x0005);
-			var0003 = script 0xFFB1 {
+			var0003 = script TEMPLAR {
 				nohalt;
 				actor frame bowing;
 				actor frame sitting;
@@ -6813,7 +6813,7 @@ void Func01C3 shape#(0x1C3) () {
 
 				case "the invisible man" (remove):
 					say("\"Oh, surely thou art mistaken!\"");
-					0xFFB1->show_npc_face1(0x0000);
+					TEMPLAR->show_npc_face1(0x0000);
 					say("\"Perhaps in the darkness, thou didst become disoriented and imagine such an enemy.\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
@@ -6940,7 +6940,7 @@ labelFunc01C3_073B:
 			say("\"On behalf of the Bears -- which, by the way, are the mightiest warriors in the land -- I welcome thee to thy Knighthood Banquet.\"");
 			UI_end_conversation();
 			Func097F(0xFFB0, "@Welcome!@", 0x0002);
-			Func097F(0xFFB1, "@Aye! Bears!@", 0x0001);
+			Func097F(TEMPLAR, "@Aye! Bears!@", 0x0001);
 			Func097F(LUTHER, "@Hear! Hear!@", 0x0000);
 			var0003 = script CALADIN {
 				nohalt;
@@ -7067,7 +7067,7 @@ labelFunc01C3_073B:
 				}
 				if (var0010 == 0x0009) {
 					var0012 = 0x0006;
-					var0011 = 0xFFB1;
+					var0011 = TEMPLAR;
 				}
 				if (var0010 == 0x000B) {
 					var0012 = 0x0006;
@@ -7111,12 +7111,12 @@ labelFunc01C3_073B:
 		Func097F(LUTHER, "@Coward!@", 0x0008);
 		Func097F(CALADIN, "@I'm hungry!@", 0x000A);
 		gflags[0x0048] = true;
-		var0018 = [KRAYG, CELLIA, 0xFF6A, SPEKTOR, SHAZZANA, MARSTEN, HARNNA, 0xFFB0, CALADIN, LUCILLA, 0xFFB1, LUTHER];
+		var0018 = [KRAYG, CELLIA, 0xFF6A, SPEKTOR, SHAZZANA, MARSTEN, HARNNA, 0xFFB0, CALADIN, LUCILLA, TEMPLAR, LUTHER];
 		for (var0005 in var0018 with var0019 to var001A) {
 			var0005->revert_schedule();
 			var0005->run_schedule();
 		}
-		var0018 = [0xFFB0, CALADIN, 0xFFB1, LUTHER];
+		var0018 = [0xFFB0, CALADIN, TEMPLAR, LUTHER];
 		for (var0005 in var0018 with var001B to var001C) {
 			var0005->set_schedule_type(EAT_AT_INN);
 		}
@@ -7249,7 +7249,7 @@ labelFunc01C3_073B:
 			UI_init_conversation();
 			HARNNA->show_npc_face0(0x0000);
 			say("\"My daughter Cantra is gone! I have looked everywhere for her. We need to send out a patrol!\"");
-			0xFFB1->show_npc_face1(0x0000);
+			TEMPLAR->show_npc_face1(0x0000);
 			say("\"The Goblins have struck again!\"");
 			say("\"I am sorry, Harnna, but if the Goblins have her, she is lost. There is not an ounce of mercy or remorse within them.\"");
 			UI_remove_npc_face1();
@@ -7273,7 +7273,7 @@ labelFunc01C3_073B:
 				actor frame kneeling;
 				actor frame sleeping;
 			};
-			var0003 = script 0xFFB1 after 20 ticks {
+			var0003 = script TEMPLAR after 20 ticks {
 				nohalt;
 				say "@Lord Marsten...@";
 				wait 2;
@@ -15611,7 +15611,7 @@ void Func032B shape#(0x32B) () {
 		0xFEFB->set_item_flag(MET);
 		0xFF6D->set_item_flag(SI_ZOMBIE);
 		0xFF6B->set_item_flag(SI_ZOMBIE);
-		var0008 = [AVATAR, SELINA, KALEN, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, 0xFF33, 0xFF35, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, 0xFF4B, 0xFF4A, CANTRA, 0xFF6A, SHAZZANA, CALADIN, 0xFFB1, LUTHER, 0xFEF7, 0xFF89, 0xFF88, 0xFF87, 0xFF86, 0xFF85, 0xFF58];
+		var0008 = [AVATAR, SELINA, KALEN, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, 0xFF33, 0xFF35, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, 0xFF4B, 0xFF4A, CANTRA, 0xFF6A, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, 0xFF89, 0xFF88, 0xFF87, 0xFF86, 0xFF85, 0xFF58];
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -47547,32 +47547,32 @@ void Func044F object#(0x44F) () {
 	var var000A;
 
 	var0000 = Func0954();
-	var0001 = 0xFFB1->get_item_flag(MET);
+	var0001 = TEMPLAR->get_item_flag(MET);
 	var0002 = Func097D(PARTY, 0x0001, 0x011D, QUALITY_ANY, 0x0006);
 	var0003 = false;
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Hail, Knight.@");
-		0xFFB1->Func07D1();
-		Func097F(0xFFB1, "@Hail.@", 0x0002);
-		0xFFB1->set_schedule_type(TALK);
+		TEMPLAR->Func07D1();
+		Func097F(TEMPLAR, "@Hail.@", 0x0002);
+		TEMPLAR->set_schedule_type(TALK);
 	}
 	if (event == PROXIMITY) {
 		if (gflags[0x0083]) {
 			var0004 = UI_die_roll(0x0001, 0x0003);
 			if (var0004 == 0x0001) {
-				0xFFB1->item_say("@Strong hit!@");
+				TEMPLAR->item_say("@Strong hit!@");
 			}
 			if (var0004 == 0x0002) {
-				0xFFB1->item_say("@Nice form!@");
+				TEMPLAR->item_say("@Nice form!@");
 			}
 			if (var0004 == 0x0003) {
-				0xFFB1->item_say("@I could do better.@");
+				TEMPLAR->item_say("@I could do better.@");
 			}
 		}
 	}
 	if (event == DEATH) {
 		if (gflags[0x0083]) {
-			var0005 = 0xFFB1->get_oppressor();
+			var0005 = TEMPLAR->get_oppressor();
 			var0005 = 0x0000 - var0005;
 			if (!var0005) {
 				var0005 = AVATAR;
@@ -47587,15 +47587,15 @@ void Func044F object#(0x44F) () {
 				} nobreak {
 					var0008 = AVATAR;
 				}
-				0xFFB1->set_opponent(var0008);
+				TEMPLAR->set_opponent(var0008);
 				var0005->set_opponent(var0008);
-				Func0976(0xFFB1, 0x0003);
+				Func0976(TEMPLAR, 0x0003);
 				Func0976(var0005, 0x0003);
 				return;
 			}
 			if (!gflags[0x0007]) {
 				gflags[0x0007] = true;
-				Func0936(var0005->get_npc_object(), 0xFFB1->get_npc_object());
+				Func0936(var0005->get_npc_object(), TEMPLAR->get_npc_object());
 				return;
 			}
 			Func092E(var0005);
@@ -47606,13 +47606,13 @@ void Func044F object#(0x44F) () {
 		};
 	}
 	if (event == STARTED_TALKING) {
-		0xFFB1->clear_item_say();
-		0xFFB1->run_schedule();
-		0xFFB1->show_npc_face0(0x0000);
+		TEMPLAR->clear_item_say();
+		TEMPLAR->run_schedule();
+		TEMPLAR->show_npc_face0(0x0000);
 		Func08F0();
 		if (!var0001) {
 			say("\"What can I do for thee? I am Templar.\"");
-			0xFFB1->set_item_flag(MET);
+			TEMPLAR->set_item_flag(MET);
 		} else {
 			say("\"Yes?\"");
 		}
@@ -47663,8 +47663,8 @@ void Func044F object#(0x44F) () {
 				if (!gflags[0x0048]) {
 					say("\"What business is it of thee, stranger? Canst thou not see that I am recovering from wounds?\"");
 					say("\"I do not wish to spend my limited vitality in idle chatter. I am a warrior, not a clerk...\"");
-					Func097F(0xFFB1, "@Excuse me...@", 0x0000);
-					0xFFB1->set_schedule_type(SHY);
+					Func097F(TEMPLAR, "@Excuse me...@", 0x0000);
+					TEMPLAR->set_schedule_type(SHY);
 					abort;
 				}
 				say("\"I am a Knight of Monitor, and a member of the Command of the Bear. I also serve Lord Marsten as his tactical adviser.\"");
@@ -47830,7 +47830,7 @@ void Func044F object#(0x44F) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Bye!@", 0x0000);
-				Func097F(0xFFB1, "@Vigilance!@", 0x0002);
+				Func097F(TEMPLAR, "@Vigilance!@", 0x0002);
 				break;
 		}
 	}
@@ -78756,7 +78756,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(LYDIA, 0x0415, 0x0A2B, WAIT);
 		Func09AC(SHMED, 0x0433, 0x0A77, WAIT);
 		Func09AC(STANDARR, 0x0402, 0x0A82, WAIT);
-		Func09AC(0xFFB1, 0x0407, 0x0A47, WAIT);
+		Func09AC(TEMPLAR, 0x0407, 0x0A47, WAIT);
 		Func09AC(MARSTEN, 0x0427, 0x09C7, WAIT);
 		Func09AC(SPEKTOR, 0x0442, 0x09CA, WAIT);
 		Func09AC(LUCILLA, 0x03F6, 0x0A45, WAIT);
@@ -81197,7 +81197,7 @@ void Func07F9 object#(0x7F9) () {
 			var0001 = find_nearest(0x025F, 0x000F);
 			var0008 = [0x0000, 0x0001, 0x0001, 0x0000];
 			var0009 = [0x0000, 0x0001, 0x0000, 0x0001];
-			var000A = [CALADIN, 0xFFB1, SHAZZANA, LUTHER, 0xFF6A];
+			var000A = [CALADIN, TEMPLAR, SHAZZANA, LUTHER, 0xFF6A];
 			for (var000D in var000A with var000B to var000C) {
 				if (Func0932(var000D)) {
 					var000D->set_alignment(NEUTRAL);
@@ -81237,7 +81237,7 @@ void Func07F9 object#(0x7F9) () {
 		Func0937(item, var0001, var0008, var0009, var0013, Func07F9, item, SI_PATH_SUCCESS);
 	}
 	if (event == SI_PATH_SUCCESS) {
-		var000A = [CALADIN, 0xFFB1, SHAZZANA, LUTHER, 0xFF6A];
+		var000A = [CALADIN, TEMPLAR, SHAZZANA, LUTHER, 0xFF6A];
 		for (var000D in var000A with var0014 to var0015) {
 			if (Func0932(var000D)) {
 				var0016 = var000D->get_npc_prop(HEALTH);
@@ -82986,7 +82986,7 @@ void Func07FF object#(0x7FF) () {
 			var0000->set_npc_id(0x0000);
 		}
 	}
-	var0005 = [CALADIN, 0xFFB1, SHAZZANA, LUTHER, 0xFF6A];
+	var0005 = [CALADIN, TEMPLAR, SHAZZANA, LUTHER, 0xFF6A];
 	for (var0000 in var0005 with var0008 to var0009) {
 		if (Func0932(var0000)) {
 			var0000->clear_item_flag(DEAD);
@@ -107800,7 +107800,7 @@ void Func092E 0x92E (var var0000) {
 	var var0003;
 	var var0004;
 
-	var0001 = [CALADIN, 0xFFB1, SHAZZANA, LUTHER, 0xFF6A];
+	var0001 = [CALADIN, TEMPLAR, SHAZZANA, LUTHER, 0xFF6A];
 	var0001 &= var0000;
 	UI_end_conversation();
 	AVATAR->set_item_flag(DONT_MOVE);
@@ -108025,7 +108025,7 @@ void Func0931 0x931 (var var0000) {
 			Func0960(var0000, 1);
 		}
 	}
-	var0002 = [CALADIN, 0xFFB1, SHAZZANA, LUTHER, 0xFF6A];
+	var0002 = [CALADIN, TEMPLAR, SHAZZANA, LUTHER, 0xFF6A];
 	for (var0005 in var0002 with var0003 to var0004) {
 		if (Func0932(var0005)) {
 			var0005->clear_item_flag(DEAD);
@@ -108126,7 +108126,7 @@ void Func0933 0x933 (var var0000, var var0001) {
 	SHAZZANA->set_npc_id(0x0000);
 	LUTHER->set_npc_id(0x0000);
 	CALADIN->set_npc_id(0x0000);
-	0xFFB1->set_npc_id(0x0000);
+	TEMPLAR->set_npc_id(0x0000);
 	0xFF6A->set_npc_id(0x0000);
 	var0000->set_npc_id(0x0009);
 	if (var0000 == 0xFF6A) {
@@ -108430,7 +108430,7 @@ void Func0936 0x936 (var var0000, var var0001) {
 				}
 				var0001->clear_item_say();
 				var0001->item_say("@Thou hast beaten me!@");
-				if (((!Func0932(0xFF6A)) || (Func0932(0xFF6A) && (0xFF6A->get_attack_mode() == FLEE))) && (((!Func0932(LUTHER)) || (Func0932(LUTHER) && (LUTHER->get_attack_mode() == FLEE))) && (((!Func0932(SHAZZANA)) || (Func0932(SHAZZANA) && (SHAZZANA->get_attack_mode() == FLEE))) && (((!Func0932(CALADIN)) || (Func0932(CALADIN) && (CALADIN->get_attack_mode() == FLEE))) && ((!Func0932(0xFFB1)) || (Func0932(0xFFB1) && (0xFFB1->get_attack_mode() == FLEE))))))) {
+				if (((!Func0932(0xFF6A)) || (Func0932(0xFF6A) && (0xFF6A->get_attack_mode() == FLEE))) && (((!Func0932(LUTHER)) || (Func0932(LUTHER) && (LUTHER->get_attack_mode() == FLEE))) && (((!Func0932(SHAZZANA)) || (Func0932(SHAZZANA) && (SHAZZANA->get_attack_mode() == FLEE))) && (((!Func0932(CALADIN)) || (Func0932(CALADIN) && (CALADIN->get_attack_mode() == FLEE))) && ((!Func0932(TEMPLAR)) || (Func0932(TEMPLAR) && (TEMPLAR->get_attack_mode() == FLEE))))))) {
 					0xFEED->show_npc_face0(0x0000);
 					var0002 = var0000->get_npc_name();
 					say("\"Nice show, ",
@@ -108566,8 +108566,8 @@ void Func0936 0x936 (var var0000, var var0001) {
 			Func092E(var0001);
 			return;
 		}
-		if (var0000 == 0xFFB1->get_npc_object()) {
-			0xFFB1->show_npc_face0(0x0000);
+		if (var0000 == TEMPLAR->get_npc_object()) {
+			TEMPLAR->show_npc_face0(0x0000);
 			say("\"I have beaten thee!\"");
 			UI_remove_npc_face0();
 			Func092E(var0001);
