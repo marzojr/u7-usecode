@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [ANDRAL, 0xFF6A, 0xFFB0, CALADIN, 0xFFBF, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [ANDRAL, 0xFF6A, 0xFFB0, CALADIN, CELLIA, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -6870,8 +6870,8 @@ labelFunc01C3_073B:
 				call Func01C3;
 			};
 			Func097F(0xFFB9, "@Hurry, Lucilla!@", 0x0004);
-			Func097F(0xFFBF, "@This knife is dull...@", 0x0008);
-			0xFFBF->set_item_flag(MET);
+			Func097F(CELLIA, "@This knife is dull...@", 0x0008);
+			CELLIA->set_item_flag(MET);
 			Func097F(0xFFB0, (("@" + var0001) + "...@"), 0x0010);
 			UI_play_music(0x0022, Func09A0(0x0005, 0x0001));
 			abort;
@@ -6921,7 +6921,7 @@ labelFunc01C3_073B:
 				nohalt;
 				face south;
 			};
-			Func097F(0xFFBF, "@Welcome, warrior.@", 0x0000);
+			Func097F(CELLIA, "@Welcome, warrior.@", 0x0000);
 			Func097F(0xFFBC, "@Wolves!@", 0x0001);
 			if (!UI_is_pc_female()) {
 				0xFFBA->set_schedule_type(WAIT);
@@ -7043,7 +7043,7 @@ labelFunc01C3_073B:
 				}
 				if (var0010 == 0x0008) {
 					var0012 = 0x0002;
-					var0011 = 0xFFBF;
+					var0011 = CELLIA;
 				}
 				if (var0010 == 0x000A) {
 					var0012 = 0x0002;
@@ -7111,7 +7111,7 @@ labelFunc01C3_073B:
 		Func097F(0xFFB9, "@Coward!@", 0x0008);
 		Func097F(CALADIN, "@I'm hungry!@", 0x000A);
 		gflags[0x0048] = true;
-		var0018 = [0xFFBC, 0xFFBF, 0xFF6A, 0xFFB3, 0xFFB6, 0xFFBB, 0xFFBD, 0xFFB0, CALADIN, 0xFFBA, 0xFFB1, 0xFFB9];
+		var0018 = [0xFFBC, CELLIA, 0xFF6A, 0xFFB3, 0xFFB6, 0xFFBB, 0xFFBD, 0xFFB0, CALADIN, 0xFFBA, 0xFFB1, 0xFFB9];
 		for (var0005 in var0018 with var0019 to var001A) {
 			var0005->revert_schedule();
 			var0005->run_schedule();
@@ -7121,7 +7121,7 @@ labelFunc01C3_073B:
 			var0005->set_schedule_type(EAT_AT_INN);
 		}
 		0xFFBA->set_schedule_type(WAITER);
-		var0003 = script 0xFFBF {
+		var0003 = script CELLIA {
 			nohalt;
 			actor frame bowing;
 			actor frame standing;
@@ -7132,15 +7132,15 @@ labelFunc01C3_073B:
 			actor frame bowing;
 			actor frame standing;
 		};
-		var001D = [0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, 0xFFBB, 0xFFB3];
+		var001D = [CELLIA, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, 0xFFBB, 0xFFB3];
 		for (var0005 in var001D with var001E to var001F) {
 			var0005->clear_item_flag(SI_TOURNAMENT);
 		}
 	}
 	if (event == SI_PATH_FAILURE) {
-		if ((item == 0xFFBF->get_npc_object()) && (0xFFBB->get_npc_id() == 0x0008)) {
-			0xFFBF->set_schedule_type(WAIT);
-			0xFFBF->item_say("@Poor Cantra...@");
+		if ((item == CELLIA->get_npc_object()) && (0xFFBB->get_npc_id() == 0x0008)) {
+			CELLIA->set_schedule_type(WAIT);
+			CELLIA->item_say("@Poor Cantra...@");
 			abort;
 		}
 		if ((item == 0xFFB6->get_npc_object()) && (0xFFBB->get_npc_id() == 0x000C)) {
@@ -7197,9 +7197,9 @@ labelFunc01C3_073B:
 		}
 	}
 	if (event == SI_PATH_SUCCESS) {
-		if ((item == 0xFFBF->get_npc_object()) && (0xFFBB->get_npc_id() == 0x0008)) {
-			0xFFBF->set_schedule_type(WAIT);
-			var0003 = script 0xFFBF {
+		if ((item == CELLIA->get_npc_object()) && (0xFFBB->get_npc_id() == 0x0008)) {
+			CELLIA->set_schedule_type(WAIT);
+			var0003 = script CELLIA {
 				nohalt;
 				face south;
 				wait 2;
@@ -7283,9 +7283,9 @@ labelFunc01C3_073B:
 				call Func01C3;
 			};
 			Func097F(CALADIN, "@Kill the Goblins!@", 0x0005);
-			Func097F(0xFFBF, "@Poor dear!@", 0x0002);
-			0xFFBF->si_path_run_usecode([0x0422, 0x0A73, 0x0000], SI_PATH_SUCCESS, 0xFFBF->get_npc_object(), Func01C3, false);
-			UI_set_path_failure(Func01C3, 0xFFBF->get_npc_object(), SI_PATH_FAILURE);
+			Func097F(CELLIA, "@Poor dear!@", 0x0002);
+			CELLIA->si_path_run_usecode([0x0422, 0x0A73, 0x0000], SI_PATH_SUCCESS, CELLIA->get_npc_object(), Func01C3, false);
+			UI_set_path_failure(Func01C3, CELLIA->get_npc_object(), SI_PATH_FAILURE);
 			UI_remove_npc_face1();
 			abort;
 		}
@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, 0xFFBF, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, CELLIA, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -42312,7 +42312,7 @@ void Func0441 object#(0x441) () {
 	var var000A;
 	var var000B;
 
-	var0000 = 0xFFBF->get_item_flag(MET);
+	var0000 = CELLIA->get_item_flag(MET);
 	var0001 = "stranger";
 	if (var0000) {
 		var0001 = Func0954();
@@ -42330,18 +42330,18 @@ void Func0441 object#(0x441) () {
 	}
 	if (event == DOUBLECLICK) {
 		Func097F(AVATAR, "@Pardon me....@", 0x0000);
-		0xFFBF->Func07D1();
-		Func097F(0xFFBF, (("@Yes, " + var0001) + "?@"), 0x0002);
-		0xFFBF->set_schedule_type(TALK);
+		CELLIA->Func07D1();
+		Func097F(CELLIA, (("@Yes, " + var0001) + "?@"), 0x0002);
+		CELLIA->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFBF->run_schedule();
-		0xFFBF->clear_item_say();
+		CELLIA->run_schedule();
+		CELLIA->clear_item_say();
 		var0005 = false;
-		if (0xFFBF->get_schedule_type() == TEND_SHOP) {
+		if (CELLIA->get_schedule_type() == TEND_SHOP) {
 			var0005 = true;
 		}
-		0xFFBF->show_npc_face0(0x0000);
+		CELLIA->show_npc_face0(0x0000);
 		if (!var0000) {
 			if (gflags[0x004A]) {
 				say("\"I am Cellia the Furrier. What may I do for thee, ",
@@ -42349,10 +42349,10 @@ void Func0441 object#(0x441) () {
 					"?\"");
 			} else {
 				say("\"When thou hast become a Knight, I can be of service to thee. Until then, go thy way.\"");
-				Func097F(0xFFBF, "@Farewell.@", 0x0000);
+				Func097F(CELLIA, "@Farewell.@", 0x0000);
 				abort;
 			}
-			0xFFBF->set_item_flag(MET);
+			CELLIA->set_item_flag(MET);
 		} else if (gflags[0x004A]) {
 			say("\"Glad to see thee again, ",
 				var0001,
@@ -42362,7 +42362,7 @@ void Func0441 object#(0x441) () {
 				var0001,
 				".\"");
 			say("\"When thou hast become a Knight, I can be of service to thee. Until then, be thou gone.\"");
-			Func097F(0xFFBF, "@Farewell.@", 0x0000);
+			Func097F(CELLIA, "@Farewell.@", 0x0000);
 			abort;
 		}
 		if (gflags[0x004A] && (!gflags[0x007D])) {
@@ -42405,7 +42405,7 @@ void Func0441 object#(0x441) () {
 						0x0000->set_conversation_slot();
 						say("\"I cannot make thee a cloak without an animal's skin!\"");
 						say("\"Return to Knight's Test, and bring me the slain wolf. Or else thou canst not achieve thy knighthood!\"");
-						Func097F(0xFFBF, "@Go!@", 0x0000);
+						Func097F(CELLIA, "@Go!@", 0x0000);
 						abort;
 					}
 				}
@@ -42420,7 +42420,7 @@ void Func0441 object#(0x441) () {
 						UI_remove_npc_face1();
 						say("\"And I know exactly where and how to use it...\"");
 					}
-					Func097F(0xFFBF, "@Give me time!@", 0x0000);
+					Func097F(CELLIA, "@Give me time!@", 0x0000);
 					abort;
 				}
 				say("\"It is ready.\"");
@@ -42469,7 +42469,7 @@ void Func0441 object#(0x441) () {
 				fallthrough;
 
 			case "buy":
-				if (0xFFBF->get_schedule_type() == TEND_SHOP) {
+				if (CELLIA->get_schedule_type() == TEND_SHOP) {
 					say("\"Dost thou wish to buy one of my pelts or cloaks?\"");
 					if (Func0955()) {
 						Func0811();
@@ -42488,7 +42488,7 @@ void Func0441 object#(0x441) () {
 
 			case "bye":
 				Func097F(AVATAR, "@Good day to thee.@", 0x0000);
-				Func097F(0xFFBF, "@Happy Hunting!@", 0x0002);
+				Func097F(CELLIA, "@Happy Hunting!@", 0x0002);
 				break;
 		}
 	}
@@ -78749,7 +78749,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(0xFF6A, 0x03B6, 0x0A54, WAIT);
 		Func09AC(0xFFB0, 0x0323, 0x0ABC, WAIT);
 		Func09AC(CALADIN, 0x03B4, 0x0A17, WAIT);
-		Func09AC(0xFFBF, 0x03D3, 0x0A09, WAIT);
+		Func09AC(CELLIA, 0x03D3, 0x0A09, WAIT);
 		Func09AC(0xFFB6, 0x03B8, 0x0A53, WAIT);
 		Func09AC(0xFFBC, 0x0404, 0x0A23, WAIT);
 		Func09AC(0xFFB9, 0x0412, 0x0A27, WAIT);
@@ -85924,15 +85924,15 @@ void Func0811 0x811 () {
 		} else if (var000F == 0x0003) {
 			var0013 = Func0992(0x0001, (("@But " + var0001) + ", we lack adequate funds!@"), 0x0000, false);
 			if (var0013 != AVATAR) {
-				0xFFBF->show_npc_face0(0x0000);
+				CELLIA->show_npc_face0(0x0000);
 				say("\"I am sorry, but I must make a living.\"");
 			} else {
 				say("\"Thou dost not have the monetari to pay me.\"");
 			}
-			if (0x001F < (0xFFBF->get_npc_id() + 0x0006)) {
-				0xFFBF->set_npc_id(0x001F);
+			if (0x001F < (CELLIA->get_npc_id() + 0x0006)) {
+				CELLIA->set_npc_id(0x001F);
 			} else {
-				0xFFBF->set_npc_id(0xFFBF->get_npc_id() + 0x0006);
+				CELLIA->set_npc_id(CELLIA->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Wouldst thou care for more?\"");
@@ -85973,12 +85973,12 @@ var Func0812 0x812 (var var0000, var var0001) {
 	}
 	var0005 = var0000;
 	var0006 = (var0001 / 0x0003) * 0x0002;
-	var0007 = 0x000F - (0xFFBF->get_npc_id() / 0x0002);
+	var0007 = 0x000F - (CELLIA->get_npc_id() / 0x0002);
 	var0008 = 0x0000;
 	var0009 = 0x0001;
 	var000A = 0x0000;
 	var000B = 0x0002;
-	var000C = 0xFFBF->get_npc_id();
+	var000C = CELLIA->get_npc_id();
 	while (var0009) {
 		var000D = Func0956(["yes", "no", "haggle"]);
 		if (var000D == "no") {
@@ -86065,7 +86065,7 @@ var Func0812 0x812 (var var0000, var var0001) {
 				"?\"");
 			if (Func0955()) {
 				if (var000C > 0x0001) {
-					0xFFBF->set_npc_id(var000C - 0x0002);
+					CELLIA->set_npc_id(var000C - 0x0002);
 				}
 				return var0005;
 			}
@@ -86082,9 +86082,9 @@ var Func0812 0x812 (var var0000, var var0001) {
 				abort;
 			}
 			if (0x001F < (var000C + 0x000A)) {
-				0xFFBF->set_npc_id(0x001F);
+				CELLIA->set_npc_id(0x001F);
 			} else {
-				0xFFBF->set_npc_id(var000C + 0x000A);
+				CELLIA->set_npc_id(var000C + 0x000A);
 			}
 			return 0x0000;
 		}
@@ -86094,7 +86094,7 @@ var Func0812 0x812 (var var0000, var var0001) {
 					var0005,
 					" was my final offer. Dost thou accept?\"");
 				if (var000C < 0x001C) {
-					0xFFBF->set_npc_id(var000C + 0x0004);
+					CELLIA->set_npc_id(var000C + 0x0004);
 				}
 				if (Func0955()) {
 					return var0005;
@@ -86105,7 +86105,7 @@ var Func0812 0x812 (var var0000, var var0001) {
 					var0005,
 					" monetari is my final offer.\"");
 				if (var000C < 0x001E) {
-					0xFFBF->set_npc_id(var000C + 0x0002);
+					CELLIA->set_npc_id(var000C + 0x0002);
 				}
 			}
 		} else {
@@ -86186,7 +86186,7 @@ var Func0812 0x812 (var var0000, var var0001) {
 						" monetari is as low as I will go!\"");
 				}
 				if (var000C < 0x001F) {
-					0xFFBF->set_npc_id(var000C + 0x0001);
+					CELLIA->set_npc_id(var000C + 0x0001);
 				}
 			}
 		}

@@ -20774,7 +20774,7 @@ void Func0441 object#(0x441) () {
 		abort;
 	}
 	if (event == DOUBLECLICK) {
-		0xFFBF->show_npc_face(0x0000);
+		WISLEM->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x00C2]) {
 			say("You see an impressive winged gargoyle with a stately demeanor.");
