@@ -54100,28 +54100,28 @@ void Func04A9 object#(0x4A9) () {
 	var var000A;
 
 	if (event == STARTED_TALKING) {
-		0xFF57->clear_item_say();
+		TELDRONO->clear_item_say();
 		var0000 = Func099F(0x034A, QUALITY_ANY, 0x000F);
 		var0001 = Func099F(0x034A, QUALITY_ANY, 0x0008);
 		if (var0000 || var0001) {
 			if (var0000 && var0001) {
-				0xFF57->item_say("@Die, thief!@");
+				TELDRONO->item_say("@Die, thief!@");
 			} else if (var0000) {
-				0xFF57->item_say("@Thou shalt not steal my bloodspawn!@");
+				TELDRONO->item_say("@Thou shalt not steal my bloodspawn!@");
 			} else {
-				0xFF57->item_say("@I shan't reveal my secret!@");
+				TELDRONO->item_say("@I shan't reveal my secret!@");
 			}
-			0xFF57->set_polymorph(0x012E);
+			TELDRONO->set_polymorph(0x012E);
 			gflags[0x0236] = false;
 			gflags[0x0237] = true;
-			0xFF57->set_schedule_type(IN_COMBAT);
-			0xFF57->set_alignment(CHAOTIC);
-			var0002 = 0xFF57->get_object_position();
+			TELDRONO->set_schedule_type(IN_COMBAT);
+			TELDRONO->set_alignment(CHAOTIC);
+			var0002 = TELDRONO->get_object_position();
 			UI_sprite_effect(ANIMATION_POOF, (var0002[0x0001] - 0x0001), (var0002[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			UI_play_sound_effect(0x0021);
 		} else {
-			0xFF57->item_say("@Thou shalt not have the reagent!@");
-			0xFF57->set_polymorph(0x01F2);
+			TELDRONO->item_say("@Thou shalt not have the reagent!@");
+			TELDRONO->set_polymorph(0x01F2);
 			gflags[0x0236] = true;
 			gflags[0x0237] = false;
 			set_schedule_type(WAIT);
@@ -54133,7 +54133,7 @@ void Func04A9 object#(0x4A9) () {
 		}
 	}
 	if (event == PATH_SUCCESS) {
-		var0003 = 0xFF57->get_object_position() & (QUANTITY_ANY & 0x0006);
+		var0003 = TELDRONO->get_object_position() & (QUANTITY_ANY & 0x0006);
 		var0004 = var0003->find_nearby(0x0113, 0x0001, MASK_EGG);
 		if (var0004) {
 			if (var0004->get_item_quality() == 0x0064) {
@@ -54167,7 +54167,7 @@ void Func04A9 object#(0x4A9) () {
 					UI_play_sound_effect(0x0043);
 				}
 				AVATAR->set_item_flag(DONT_MOVE);
-				0xFF57->set_schedule_type(WAIT);
+				TELDRONO->set_schedule_type(WAIT);
 			} else {
 				var0005 = script AVATAR after 1 ticks {
 					call Func04A9;
@@ -54183,18 +54183,18 @@ void Func04A9 object#(0x4A9) () {
 			UI_sprite_effect(ANIMATION_TELEPORT, (var0002[0x0001] - 0x0002), (var0002[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			UI_play_sound_effect(0x0082);
 		}
-		0xFF57->remove_npc();
+		TELDRONO->remove_npc();
 		Func09AA();
 	}
 	if (event == SCRIPTED) {
-		if (get_item_shape() == 0xFF57->get_item_shape()) {
-			var0003 = 0xFF57->get_object_position() & (QUANTITY_ANY & 0x0000);
+		if (get_item_shape() == TELDRONO->get_item_shape()) {
+			var0003 = TELDRONO->get_object_position() & (QUANTITY_ANY & 0x0000);
 			var0004 = var0003->find_nearby(0x025F, 0x0014, MASK_EGG);
 			if (var0004) {
 				var0007 = -1;
 				var0008 = -1;
 				var0009 = -3;
-				Func090E(0xFF57, var0004, var0007, var0008, var0009, Func04A9, 0xFF57->get_npc_object(), PATH_FAILURE, false);
+				Func090E(TELDRONO, var0004, var0007, var0008, var0009, Func04A9, TELDRONO->get_npc_object(), PATH_FAILURE, false);
 				// BUG: This should use SI_PATH_FAILURE instead of PATH_FAILURE.
 				UI_set_path_failure(Func04A9, item, PATH_FAILURE);
 			}
@@ -54218,7 +54218,7 @@ void Func04A9 object#(0x4A9) () {
 				var0005 = UI_update_last_created(var0002);
 			}
 		}
-		0xFF57->set_polymorph(0x0191);
+		TELDRONO->set_polymorph(0x0191);
 		gflags[0x0236] = false;
 		gflags[0x0237] = false;
 		set_alignment(NEUTRAL);
@@ -54227,11 +54227,11 @@ void Func04A9 object#(0x4A9) () {
 	}
 	if (event == BG_PATH_FAILURE) {
 		if (gflags[0x0236]) {
-			0xFF57->set_polymorph(0x01F2);
+			TELDRONO->set_polymorph(0x01F2);
 		} else if (gflags[0x0237]) {
-			0xFF57->set_polymorph(0x012E);
+			TELDRONO->set_polymorph(0x012E);
 		} else {
-			0xFF57->set_polymorph(0x0191);
+			TELDRONO->set_polymorph(0x0191);
 		}
 	}
 }
@@ -102489,12 +102489,12 @@ void Func08AE 0x8AE () {
 	var0000 = -1;
 	var0001 = -1;
 	var0002 = -3;
-	var0003 = 0xFF57->get_object_position() & (QUALITY_ANY & 0x0006);
+	var0003 = TELDRONO->get_object_position() & (QUALITY_ANY & 0x0006);
 	var0004 = var0003->find_nearby(0x0113, 0x0028, MASK_EGG);
 	for (var0007 in var0004 with var0005 to var0006) {
 		if (var0007->get_item_quality() == 0x0064) {
 			var0008 = var0007->get_object_position();
-			Func090E(0xFF57, var0007, var0000, var0001, var0002, Func04A9, 0xFF57->get_npc_object(), PATH_SUCCESS, true);
+			Func090E(TELDRONO, var0007, var0000, var0001, var0002, Func04A9, TELDRONO->get_npc_object(), PATH_SUCCESS, true);
 			// BUG: This should use SI_PATH_FAILURE instead of PATH_SUCCESS.
 			UI_set_path_failure(Func04A9, item, PATH_SUCCESS);
 			return;
@@ -102503,7 +102503,7 @@ void Func08AE 0x8AE () {
 	for (var0007 in var0004 with var0009 to var000A) {
 		if (var0007->get_item_quality() == 0x0000) {
 			var0008 = var0007->get_object_position();
-			Func090E(0xFF57, var0007, var0000, var0001, var0002, Func04A9, 0xFF57->get_npc_object(), PATH_SUCCESS, true);
+			Func090E(TELDRONO, var0007, var0000, var0001, var0002, Func04A9, TELDRONO->get_npc_object(), PATH_SUCCESS, true);
 			// BUG: This should use SI_PATH_FAILURE instead of PATH_SUCCESS.
 			UI_set_path_failure(Func04A9, item, PATH_SUCCESS);
 			// Need to make UCC optimize this
@@ -104119,8 +104119,8 @@ void Func08CB 0x8CB () {
 	gflags[0x000A] = false;
 	PRISON2->set_item_flag(SI_TOURNAMENT);
 	LORTHONDO->set_item_flag(SI_TOURNAMENT);
-	0xFF57->set_item_flag(SI_TOURNAMENT);
-	0xFF57->set_schedule_type(WAIT);
+	TELDRONO->set_item_flag(SI_TOURNAMENT);
+	TELDRONO->set_schedule_type(WAIT);
 	var0000 = find_nearest(0x02EB, 0x0014);
 	if (var0000) {
 		var0000->item_say("@Good morning.@");
@@ -104733,7 +104733,7 @@ void Func08D7 0x8D7 () {
 }
 
 void Func08D8 0x8D8 () {
-	0xFF57->set_schedule_type(TALK);
+	TELDRONO->set_schedule_type(TALK);
 }
 
 extern var Func0906 0x906 (var var0000);
