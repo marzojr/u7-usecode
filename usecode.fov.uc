@@ -25741,7 +25741,7 @@ void Func0466 object#(0x466) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFF9A->show_npc_face(0x0000);
+	NICODEMUS->show_npc_face(0x0000);
 	var0000 = Func0908();
 	add(["name", "job", "bye"]);
 	var0001 = UI_get_party_list();
