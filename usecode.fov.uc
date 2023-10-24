@@ -25427,7 +25427,7 @@ void Func0464 object#(0x464) () {
 
 	if (event == DOUBLECLICK) {
 		var0000 = Func0931(PARTY, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
-		0xFF9C->show_npc_face(0x0000);
+		TAVENOR->show_npc_face(0x0000);
 		if (!gflags[0x0154]) {
 			if (!var0000) {
 				say("The creature ignores you.*");
@@ -25479,7 +25479,7 @@ void Func0464 object#(0x464) () {
 					say("*");
 					TRELLEK->say("\"The truth is spoken by the human,\" Trellek says to the other Emp. \"He is to be trusted. His good will was felt by me.\"*");
 					TRELLEK->hide();
-					0xFF9C->say("The Emp nods at Trellek, and then turns to you. \"The truth is now clear to me. You are wished good luck.\"");
+					TAVENOR->say("The Emp nods at Trellek, and then turns to you. \"The truth is now clear to me. You are wished good luck.\"");
 				} else {
 					say("The Emp eyes you a little longer. \"Your good intentions are known to    me. You are asked to be the messenger. Humans will not be destroyers, please.\"");
 				}
@@ -74963,7 +74963,7 @@ void Func08ED 0x8ED () {
 	var var0000;
 	var var0001;
 
-	0xFF9C->say("The ape-like creature slowly and cautiously walks up to you. He, or she, sniffs for a moment, and then points to the honey you are carrying.");
+	TAVENOR->say("The ape-like creature slowly and cautiously walks up to you. He, or she, sniffs for a moment, and then points to the honey you are carrying.");
 	converse (["Want honey?", "Go away!"]) {
 		case "Want honey?":
 			say("\"Honey will be given by you to me?\"");

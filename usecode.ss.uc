@@ -49371,7 +49371,7 @@ void Func0464 object#(0x464) () {
 	var var0003;
 
 	AVATAR->clear_item_flag(DONT_MOVE);
-	if (0xFF9C->get_item_flag(SI_ZOMBIE)) {
+	if (ETH_AUTOMATON->get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
@@ -49379,7 +49379,7 @@ void Func0464 object#(0x464) () {
 		Func09AA();
 		UI_play_music(0x0040, Func09A0(0x0005, 0x0001));
 		0xFED6->show_npc_face0(0x0000);
-		var0000 = 0xFF9C->get_item_flag(MET);
+		var0000 = ETH_AUTOMATON->get_item_flag(MET);
 		if (var0000 == false) {
 			say("\"I am the Educator here, seeker. It is my task to determine how far thine Ethicality hath already progressed before the test may begin.\"");
 			say("\"Dost thou wish to begin the test?\"");
@@ -49424,7 +49424,7 @@ void Func0464 object#(0x464) () {
 						say("\"Thou hast answered well... Of all virtues, Ethicality is often the most subjective and tenuous.\" *\"Thou art worthy to begin the test...\"");
 						UI_pop_answers();
 						UI_pop_answers();
-						0xFF9C->set_item_flag(MET);
+						ETH_AUTOMATON->set_item_flag(MET);
 						UI_fade_palette(0x000C, 0x0001, 0x0000);
 						AVATAR->move_object([0x09AE, 0x036F, 0x0000]);
 						UI_play_sound_effect(0x0066);
