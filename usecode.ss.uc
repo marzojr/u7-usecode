@@ -15370,16 +15370,16 @@ void Func0326 shape#(0x326) () {
 			say("\"But thou wilt accept mine offer yet...\"");
 			UI_remove_npc_face0();
 		}
-		if (0xFF5D->npc_nearby() && (gflags[0x023A] == true)) {
+		if (LORTHONDO->npc_nearby() && (gflags[0x023A] == true)) {
 			AVATAR->set_item_flag(DONT_MOVE);
-			var0003 = 0xFF5D->find_nearby(0x0113, 0x0000, MASK_EGG);
+			var0003 = LORTHONDO->find_nearby(0x0113, 0x0000, MASK_EGG);
 			if (var0003) {
 				var0003->remove_item();
 			}
-			0xFF5D->clear_item_say();
-			Func097F(0xFF5D, "@No, wait!...@", 0x0000);
-			var0004 = 0xFF5D->find_nearby(0x0341, 0x0005, MASK_NONE);
-			var0004 &= 0xFF5D->find_nearby(0x0349, 0x0005, MASK_NONE);
+			LORTHONDO->clear_item_say();
+			Func097F(LORTHONDO, "@No, wait!...@", 0x0000);
+			var0004 = LORTHONDO->find_nearby(0x0341, 0x0005, MASK_NONE);
+			var0004 &= LORTHONDO->find_nearby(0x0349, 0x0005, MASK_NONE);
 			var0005 = script var0004[0x0001] {
 				wait 5;
 				call Func04A3;
@@ -15400,7 +15400,7 @@ void Func0326 shape#(0x326) () {
 				call Func04A3;
 				remove;
 			};
-			var0006 = 0xFF5D->find_nearest(0x031F, 0x000A);
+			var0006 = LORTHONDO->find_nearest(0x031F, 0x000A);
 			if (var0006) {
 				var0005 = script var0006 {
 					wait 16;
@@ -15411,15 +15411,15 @@ void Func0326 shape#(0x326) () {
 	}
 	if (event == SCRIPTED) {
 		if (gflags[0x00CF] == false) {
-			if (AVATAR->get_distance(0xFF5D) < 0x002D) {
+			if (AVATAR->get_distance(LORTHONDO) < 0x002D) {
 				0xFF00->say("\"Avatar! Because thou didst keep thy promise to release me\"");
 				say("\"now shall I return the favor.\"");
 				say("\"This dark sorcerer will trouble thee no more...\"");
 				UI_remove_npc_face0();
-				0xFF5D->clear_item_say();
-				Func097F(0xFF5D, "@No, wait! Please...@", 0x0000);
-				var0004 = 0xFF5D->find_nearby(0x0341, 0x0005, MASK_NONE);
-				var0004 &= 0xFF5D->find_nearby(0x0349, 0x0005, MASK_NONE);
+				LORTHONDO->clear_item_say();
+				Func097F(LORTHONDO, "@No, wait! Please...@", 0x0000);
+				var0004 = LORTHONDO->find_nearby(0x0341, 0x0005, MASK_NONE);
+				var0004 &= LORTHONDO->find_nearby(0x0349, 0x0005, MASK_NONE);
 				var0005 = script var0004[0x0001] {
 					wait 5;
 					call Func04A3;
@@ -15440,7 +15440,7 @@ void Func0326 shape#(0x326) () {
 					call Func04A3;
 					remove;
 				};
-				var0006 = 0xFF5D->find_nearest(0x031F, 0x000A);
+				var0006 = LORTHONDO->find_nearest(0x031F, 0x000A);
 				if (var0006) {
 					var0005 = script var0006 {
 						wait 16;
@@ -53224,10 +53224,10 @@ void Func04A3 object#(0x4A3) () {
 	var var0018;
 
 	if (event == EGG) {
-		var0000 = script 0xFF5D {
+		var0000 = script LORTHONDO {
 			call Func04A3;
 		};
-		Func097F(0xFF5D, "@Die, mortal!@", 0x0002);
+		Func097F(LORTHONDO, "@Die, mortal!@", 0x0002);
 	}
 	if (event == SCRIPTED) {
 		if (get_item_shape() == 0x0331) {
@@ -53244,7 +53244,7 @@ void Func04A3 object#(0x4A3) () {
 				Func097F(AVATAR, "@Liberate me, Avatar!@", 0x0005);
 				Func097F(0xFF58, "@Do it! Do it! Do it!@", 0x0009);
 			}
-			var0001 = 0xFF5D->find_nearby(0x0113, 0x0000, MASK_EGG);
+			var0001 = LORTHONDO->find_nearby(0x0113, 0x0000, MASK_EGG);
 			if (var0001) {
 				var0002 = UI_die_roll(0x0002, 0x0008);
 				var0000 = script var0001 after (0x0019 + var0002) ticks {
@@ -53252,12 +53252,12 @@ void Func04A3 object#(0x4A3) () {
 				};
 			}
 			var0002 = UI_die_roll(0x0001, 0x0004);
-			var0003 = 0xFF5D->direction_from(AVATAR);
+			var0003 = LORTHONDO->direction_from(AVATAR);
 			if (var0002 == 0x0001) {
-				var0004 = 0xFF5D->get_object_position();
+				var0004 = LORTHONDO->get_object_position();
 				UI_sprite_effect(ANIMATION_GREEN_BUBBLES, (var0004[0x0001] - 0x0001), (var0004[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 				UI_play_sound_effect(0x0074);
-				var0000 = script 0xFF5D {
+				var0000 = script LORTHONDO {
 					face var0003;
 					say "@Kal Ort Grav!@";
 					continue;
@@ -53314,7 +53314,7 @@ void Func04A3 object#(0x4A3) () {
 				UI_lightning();
 				UI_play_sound_effect(0x0074);
 				var0000 = UI_apply_damage(AVATAR->get_npc_prop(STRENGTH), 0x0004, LIGHTNING_DAMAGE, AVATAR);
-				var0000 = script 0xFF5D {
+				var0000 = script LORTHONDO {
 					face var0003;
 					say "@Kal Grav!@";
 					actor frame cast_up;
@@ -53351,7 +53351,7 @@ void Func04A3 object#(0x4A3) () {
 				for (var0008 in var0005 with var000C to var000D) {
 					var0000 = UI_apply_damage(var0008->get_npc_prop(STRENGTH), 0x0004, LIGHTNING_DAMAGE, var0008);
 				}
-				var0000 = script 0xFF5D {
+				var0000 = script LORTHONDO {
 					face var0003;
 					say "@Vas Flam!@";
 					actor frame ready;
@@ -53370,19 +53370,19 @@ void Func04A3 object#(0x4A3) () {
 			if (var0002 == 0x0004) {
 				var000A = UI_die_roll(0x0001, 0x0003);
 				if (var000A == 0x0001) {
-					var0000 = script 0xFF5D {
+					var0000 = script LORTHONDO {
 						face var0003;
 						say "@I will kill thee!@";
 					};
 				}
 				if (var000A == 0x0002) {
-					var0000 = script 0xFF5D {
+					var0000 = script LORTHONDO {
 						face var0003;
 						say "@Thou art no match for my power.@";
 					};
 				}
 				if (var000A == 0x0003) {
-					var0000 = script 0xFF5D {
+					var0000 = script LORTHONDO {
 						face var0003;
 						say "@Kneel before me, worm.@";
 					};
@@ -53391,7 +53391,7 @@ void Func04A3 object#(0x4A3) () {
 			abort;
 		}
 		if (get_item_shape() == 0x0341) {
-			var0004 = 0xFF5D->get_object_position();
+			var0004 = LORTHONDO->get_object_position();
 			var000E = get_object_position();
 			if (var000E[0x0001] < var0004[0x0001]) {
 				var000E[0x0001] = 0x09C7;
@@ -53406,7 +53406,7 @@ void Func04A3 object#(0x4A3) () {
 			UI_play_sound_effect(0x002A);
 		}
 		if (get_item_shape() == 0x0349) {
-			var0004 = 0xFF5D->get_object_position();
+			var0004 = LORTHONDO->get_object_position();
 			var000E = get_object_position();
 			if (var000E[0x0002] < var0004[0x0002]) {
 				var000E[0x0001] = 0x09C4;
@@ -53420,15 +53420,15 @@ void Func04A3 object#(0x4A3) () {
 		}
 		if (get_item_shape() == 0x031F) {
 			Func09AA();
-			var000F = 0xFF5D->find_nearby(0x031F, 0x001E, MASK_NONE);
-			var000F &= 0xFF5D->find_nearby(0x0339, 0x001E, MASK_NONE);
-			var000F &= 0xFF5D->find_nearby(0x00E0, 0x001E, MASK_NONE);
+			var000F = LORTHONDO->find_nearby(0x031F, 0x001E, MASK_NONE);
+			var000F &= LORTHONDO->find_nearby(0x0339, 0x001E, MASK_NONE);
+			var000F &= LORTHONDO->find_nearby(0x00E0, 0x001E, MASK_NONE);
 			for (var0012 in var000F with var0010 to var0011) {
 				var0004 = var0012->get_object_position();
 				var0004[0x0003] = 0x0000;
 				var0012->move_object(var0004);
 			}
-			var0013 = 0xFF5D->find_nearby(0x00A3, 0x001E, MASK_NONE);
+			var0013 = LORTHONDO->find_nearby(0x00A3, 0x001E, MASK_NONE);
 			for (var0016 in var0013 with var0014 to var0015) {
 				var0002 = UI_die_roll(0x0001, 0x0003);
 				var0000 = script var0016 {
@@ -53441,11 +53441,11 @@ void Func04A3 object#(0x4A3) () {
 					remove;
 				};
 			}
-			0xFF5D->remove_npc();
+			LORTHONDO->remove_npc();
 			var0005 = UI_get_party_list();
 		}
 		if (get_item_shape() == 0x01FB) {
-			var0000 = script 0xFF5D {
+			var0000 = script LORTHONDO {
 				say "@Perhaps I've a use for thee after all...@";
 				continue;
 				actor frame cast_out;
@@ -53479,9 +53479,9 @@ void Func04A3 object#(0x4A3) () {
 			abort;
 		}
 		if (get_item_shape() == 0x017D) {
-			var0018 = 0xFF5D->find_nearest(0x0124, 0x0005);
+			var0018 = LORTHONDO->find_nearest(0x0124, 0x0005);
 			if (var0018) {
-				var0000 = script 0xFF5D {
+				var0000 = script LORTHONDO {
 					wait 3;
 					actor frame bowing;
 					wait 2;
@@ -53496,15 +53496,15 @@ void Func04A3 object#(0x4A3) () {
 			abort;
 		}
 		if (get_item_shape() == 0x0124) {
-			var0017 = 0xFF5D->find_nearby(0x017D, 0x0014, MASK_NPC2);
+			var0017 = LORTHONDO->find_nearby(0x017D, 0x0014, MASK_NPC2);
 			if (var0017) {
 				var0017->set_schedule_type(IN_COMBAT);
 				var0000 = script var0017 {
 					say "@Die, mortal!@";
 				};
 			}
-			var0004 = 0xFF5D->get_object_position();
-			0xFF5D->remove_npc();
+			var0004 = LORTHONDO->get_object_position();
+			LORTHONDO->remove_npc();
 			UI_sprite_effect(ANIMATION_TELEPORT, (var0004[0x0001] - 0x0002), (var0004[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			UI_play_sound_effect(0x0082);
 			Func09AA();
@@ -104118,7 +104118,7 @@ void Func08CB 0x8CB () {
 	gflags[0x0009] = false;
 	gflags[0x000A] = false;
 	0xFF5B->set_item_flag(SI_TOURNAMENT);
-	0xFF5D->set_item_flag(SI_TOURNAMENT);
+	LORTHONDO->set_item_flag(SI_TOURNAMENT);
 	0xFF57->set_item_flag(SI_TOURNAMENT);
 	0xFF57->set_schedule_type(WAIT);
 	var0000 = find_nearest(0x02EB, 0x0014);
@@ -104213,8 +104213,8 @@ void Func08CD 0x8CD () {
 
 	if (event == EGG) {
 		var0000 = [0x08FA, 0x055F, 0x0001];
-		0xFF5D->move_object(var0000);
-		0xFF5D->set_schedule_type(WAIT);
+		LORTHONDO->move_object(var0000);
+		LORTHONDO->set_schedule_type(WAIT);
 		set_schedule_type(WAIT);
 		var0001 = find_nearby(0x017D, 0x0000, MASK_NPC2);
 		var0002 = var0001->get_object_position() & (QUALITY_ANY & 0x0000);
@@ -104229,7 +104229,7 @@ void Func08CD 0x8CD () {
 				wait 2;
 				actor frame kneeling;
 			};
-			var0004 = script 0xFF5D {
+			var0004 = script LORTHONDO {
 				face east;
 				actor frame sitting;
 				wait 2;
@@ -104376,13 +104376,13 @@ void Func08D0 0x8D0 () {
 		var0000 = var0005->get_object_position();
 		var0006 = false;
 		if (var0005->get_item_quality() == 0x0000) {
-			0xFF5D->clear_item_flag(DEAD);
-			0xFF5D->set_schedule_type(WAIT);
-			0xFF5D->move_object(var0000);
+			LORTHONDO->clear_item_flag(DEAD);
+			LORTHONDO->set_schedule_type(WAIT);
+			LORTHONDO->move_object(var0000);
 			UI_sprite_effect(ANIMATION_TELEPORT, (var0000[0x0001] - 0x0001), (var0000[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			UI_play_sound_effect(0x0082);
-			var0007 = 0xFF5D->direction_from(AVATAR);
-			var0008 = script 0xFF5D {
+			var0007 = LORTHONDO->direction_from(AVATAR);
+			var0008 = script LORTHONDO {
 				say "@Prepare to die...@";
 				face var0007;
 				actor frame cast_up;

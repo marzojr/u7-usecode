@@ -35408,14 +35408,14 @@ void Func04A3 object#(0x4A3) () {
 	var var0008;
 
 	if (event == DOUBLECLICK) {
-		0xFF5D->show_npc_face(0x0000);
+		PHEARCY->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = Func08F7(DUPRE);
 		var0003 = UI_part_of_day();
 		var0004 = false;
 		if (var0003 == NIGHT) {
-			var0005 = Func08FC(0xFF5D, 0xFF06);
+			var0005 = Func08FC(PHEARCY, 0xFF06);
 			if (var0005) {
 				say("\"Sorry, ",
 					var0001,
@@ -35432,7 +35432,7 @@ void Func04A3 object#(0x4A3) () {
 			say("\"Why, Hello, Sir Dupre. Things fare well I trust?\"");
 			DUPRE->say("\"Greetings, fair Phearcy. Yes, thank thee, things are well.\"");
 			DUPRE->hide();
-			0xFF5D->show_npc_face(0x0000);
+			PHEARCY->show_npc_face(0x0000);
 		}
 		if (!gflags[0x0205]) {
 			say("You see a man who gives you a friendly smile.");
@@ -35641,7 +35641,7 @@ void Func04A3 object#(0x4A3) () {
 		say("\"Remember! Tell them thou didst eat at the Friendly Knave!\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF5D);
+		Func092E(PHEARCY);
 	}
 }
 
