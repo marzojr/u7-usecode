@@ -26519,10 +26519,10 @@ void Func046C object#(0x46C) () {
 	var var0018;
 
 	if (event == DOUBLECLICK) {
-		0xFF94->show_npc_face(0x0000);
+		REYNA->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFF94;
+		var0002 = REYNA;
 		var0003 = false;
 		var0004 = false;
 		var0005 = Func0931(PARTY, 0x0001, 0x03E7, QUALITY_ANY, 0x0004);
@@ -26624,7 +26624,7 @@ void Func046C object#(0x46C) () {
 				gflags[0x0128] = true;
 				if (var0006) {
 					var0007 = "";
-					var0008 = 0xFF94->find_nearby(0x03E7, 0x000A, MASK_NONE);
+					var0008 = REYNA->find_nearby(0x03E7, 0x000A, MASK_NONE);
 					for (var000B in var0008 with var0009 to var000A) {
 						if (var000B->get_item_frame() == 0x0004) {
 							var0007 = "I realize there are already \r\n\t\t\t\t\t\tvery beautiful flowers here, \r\n\t\t\t\t\t\tbut there can never be enough \r\n\t\t\t\t\t\tto demonstrate how much she is \r\n\t\t\t\t\t\tmissed. ";
