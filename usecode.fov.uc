@@ -31395,11 +31395,11 @@ void Func0489 object#(0x489) () {
 	var var000F;
 
 	if (event == DOUBLECLICK) {
-		0xFF77->show_npc_face(0x0000);
+		SAM->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = UI_part_of_day();
-		var0003 = 0xFF77->get_npc_object()->get_schedule_type();
+		var0003 = SAM->get_npc_object()->get_schedule_type();
 		var0004 = "Avatar";
 		var0002 = UI_part_of_day();
 		var0005 = UI_is_pc_female();
@@ -31563,7 +31563,7 @@ void Func0489 object#(0x489) () {
 	}
 	if (event == PROXIMITY) {
 		var0002 = UI_part_of_day();
-		var0003 = 0xFF77->get_npc_object()->get_schedule_type();
+		var0003 = SAM->get_npc_object()->get_schedule_type();
 		var000E = UI_die_roll(0x0001, 0x0004);
 		if (var0003 == TEND_SHOP) {
 			if (var000E == 0x0001) {
@@ -31578,9 +31578,9 @@ void Func0489 object#(0x489) () {
 			if (var000E == 0x0004) {
 				var000F = "@Thou dost need beautiful flowers!@";
 			}
-			0xFF77->item_say(var000F);
+			SAM->item_say(var000F);
 		} else {
-			Func092E(0xFF77);
+			Func092E(SAM);
 		}
 	}
 }
