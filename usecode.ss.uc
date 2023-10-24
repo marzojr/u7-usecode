@@ -55302,14 +55302,14 @@ void Func04B3 object#(0x4B3) () {
 	if (event == DEATH) {
 		if (gflags[0x0202]) {
 			var0013 = AVATAR->get_object_position();
-			var0012 = 0xFF53->get_object_position();
-			0xFF53->remove_npc();
+			var0012 = SEX_03->get_object_position();
+			SEX_03->remove_npc();
 			UI_sprite_effect(ANIMATION_TELEPORT2, var0013[0x0001], var0013[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			UI_sprite_effect(ANIMATION_TELEPORT2, var0012[0x0001], var0012[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			AVATAR->clear_item_flag(DONT_MOVE);
 			0x0000->Func07F7();
 		} else {
-			Func097F(0xFF53, "@Come, Avatar...@", 0x0002);
+			Func097F(SEX_03, "@Come, Avatar...@", 0x0002);
 			var0006 = find_nearby(0x0178, 0x000A, MASK_NONE);
 			if (var0006) {
 				AVATAR->set_item_flag(DONT_MOVE);
@@ -107449,7 +107449,7 @@ void Func0926 0x926 (var var0000) {
 		Func0927();
 	}
 	if (var0000 == 0x0018) {
-		var0001 = [SEX_01, SEX_02, 0xFF53, 0xFF52, 0xFF51];
+		var0001 = [SEX_01, SEX_02, SEX_03, 0xFF52, 0xFF51];
 		var0002 = "@Thank thee!@" & ("@Bless thee!@" & ("@We are saved!@" & "@Praise the Hero!@"));
 		for (var0005 in var0001 with var0003 to var0004) {
 			var0005->clear_item_say();
@@ -107506,7 +107506,7 @@ void Func0927 0x927 () {
 	var var0008;
 
 	UI_play_music(0x001C, Func09A0(0x0005, 0x0001));
-	var0000 = [SEX_01, SEX_02, 0xFF53, 0xFF52, 0xFF51];
+	var0000 = [SEX_01, SEX_02, SEX_03, 0xFF52, 0xFF51];
 	var0001 = ["@Ohh! Yes!@", "@Most pleasant!@", "@Oh, my!@", "@Do thou that again!@", "@Oh, baby...@"];
 	for (var0004 in var0000 with var0002 to var0003) {
 		var0005 = UI_die_roll(0x0001, 0x0005);
@@ -107526,13 +107526,13 @@ void Func0927 0x927 () {
 			0xFF51->si_path_run_usecode([(var0008[0x0001] + 0x0001), var0008[0x0002], var0008[0x0003]], BG_PATH_SUCCESS, 0xFF51->get_npc_object(), Func04B3, true);
 		}
 	} else {
-		0xFF53->clear_item_say();
-		Func097F(0xFF53, "@I can't resist...@", 0x0000);
+		SEX_03->clear_item_say();
+		Func097F(SEX_03, "@I can't resist...@", 0x0000);
 		var0007 = find_nearby(0x0178, 0x000A, MASK_NONE);
 		if (var0007) {
 			var0008 = var0007->get_object_position();
 			// BUG: This should use PATH_SUCCESS instead of BG_PATH_SUCCESS.
-			0xFF53->si_path_run_usecode([(var0008[0x0001] + 0x0001), var0008[0x0002], var0008[0x0003]], BG_PATH_SUCCESS, 0xFF53->get_npc_object(), Func04B3, true);
+			SEX_03->si_path_run_usecode([(var0008[0x0001] + 0x0001), var0008[0x0002], var0008[0x0003]], BG_PATH_SUCCESS, SEX_03->get_npc_object(), Func04B3, true);
 		}
 	}
 	abort;

@@ -37407,10 +37407,10 @@ void Func04AD object#(0x4AD) () {
 	var var0013;
 
 	if (event == DOUBLECLICK) {
-		0xFF53->show_npc_face(0x0000);
+		BEVERLEA->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFF53->get_npc_object()->get_schedule_type();
+		var0002 = BEVERLEA->get_npc_object()->get_schedule_type();
 		var0003 = AVATAR->find_nearest(0x0347, ON_SCREEN);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x0226]) {
@@ -37585,7 +37585,7 @@ void Func04AD object#(0x4AD) () {
 			".\" *");
 	}
 	if (event == PROXIMITY) {
-		var0002 = 0xFF53->get_npc_object()->get_schedule_type();
+		var0002 = BEVERLEA->get_npc_object()->get_schedule_type();
 		if (var0002 == TEND_SHOP) {
 			var0012 = UI_die_roll(0x0001, 0x0004);
 			if (var0012 == 0x0001) {
@@ -37600,9 +37600,9 @@ void Func04AD object#(0x4AD) () {
 			if (var0012 == 0x0004) {
 				var0013 = "@Collectibles? Antiques?@";
 			}
-			0xFF53->item_say(var0013);
+			BEVERLEA->item_say(var0013);
 		} else {
-			Func092E(0xFF53);
+			Func092E(BEVERLEA);
 		}
 	}
 }
