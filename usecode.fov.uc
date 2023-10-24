@@ -2335,7 +2335,7 @@ void Func0154 shape#(0x154) () {
 			}
 			if (var0000 == 0x0004) {
 				var0001->clear_item_flag(ASLEEP);
-				if (var0001->get_npc_number() == 0xFF6A) {
+				if (var0001->get_npc_number() == PENUMBRA) {
 					var0001->set_schedule_type(TEND_SHOP);
 				}
 			}
@@ -33478,7 +33478,7 @@ void Func0496 object#(0x496) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFF6A->show_npc_face(0x0000);
+	PENUMBRA->show_npc_face(0x0000);
 	gflags[0x01E2] = Func08C9();
 	var0000 = Func0908();
 	var0001 = Func0931(PARTY, 0x0001, 0x02F7, QUALITY_ANY, FRAME_ANY);
@@ -33495,7 +33495,7 @@ void Func0496 object#(0x496) () {
 		say("Suddenly, Penumbra grabs her head in pain. \"Oh!\" she cries. \"Mine head! The pain! What is happening? What didst thou do to me?\" She closes her eyes and concentrates. \"There is a disturbance in the ether! I can feel my magical powers fading! Help me, ",
 			var0000,
 			"! Help me!!\"");
-		0xFF6A->get_npc_object()->set_schedule_type(LOITER);
+		PENUMBRA->get_npc_object()->set_schedule_type(LOITER);
 		add("ether");
 		gflags[0x01F8] = true;
 		Func0911(0x0320);
