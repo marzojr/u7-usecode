@@ -30853,9 +30853,9 @@ void Func0486 object#(0x486) () {
 	var var000A;
 
 	if (event == DOUBLECLICK) {
-		0xFF7A->show_npc_face(0x0000);
+		ROBIN->show_npc_face(0x0000);
 		var0000 = Func0909();
-		var0001 = 0xFF7A->get_npc_object();
+		var0001 = ROBIN->get_npc_object();
 		var0002 = 0xFF78->get_npc_object();
 		var0003 = 0xFF79->get_npc_object();
 		var0004 = Func0931(AVATAR, 0x0001, 0x03BB, QUALITY_ANY, 0x0002);
@@ -31055,7 +31055,7 @@ void Func0486 object#(0x486) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF7A);
+		Func092E(ROBIN);
 	}
 }
 
@@ -31073,7 +31073,7 @@ void Func0487 object#(0x487) () {
 		0xFF79->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = Func08F7(0xFF7A);
+		var0002 = Func08F7(ROBIN);
 		var0003 = Func08F7(0xFF78);
 		add(["name", "job", "bye"]);
 		if (gflags[0x017D]) {
@@ -31103,9 +31103,9 @@ void Func0487 object#(0x487) () {
 			case "Robin":
 				say("\"Robin be a high stakes gamblin' gent who makes his living inna casino at Buccaneer's Den.\"");
 				if (var0002) {
-					0xFF7A->say("\"A living that would not have been anything near as profitable if not for thy good works, Battles.\"*");
+					ROBIN->say("\"A living that would not have been anything near as profitable if not for thy good works, Battles.\"*");
 					0xFF79->say("\"Thank yer, Milord.\"*");
-					0xFF7A->hide();
+					ROBIN->hide();
 					0xFF79->show_npc_face(0x0000);
 				}
 				remove("Robin");
@@ -31115,8 +31115,8 @@ void Func0487 object#(0x487) () {
 			case "gamblin' gent":
 				say("\"Gamblin' is how Robin makes his living. I do not think he has had a regular post in all of his life!\"");
 				if (var0002) {
-					0xFF7A->say("\"Why, I thank thee for the compliment, Battles!\"*");
-					0xFF7A->hide();
+					ROBIN->say("\"Why, I thank thee for the compliment, Battles!\"*");
+					ROBIN->hide();
 					0xFF79->show_npc_face(0x0000);
 				}
 				remove("gamblin' gent");
@@ -31205,7 +31205,7 @@ void Func0488 object#(0x488) () {
 		0xFF78->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = Func08F7(0xFF7A);
+		var0002 = Func08F7(ROBIN);
 		var0003 = Func08F7(0xFF79);
 		add(["name", "job", "bye"]);
 		if (gflags[0x017D]) {
@@ -31276,8 +31276,8 @@ void Func0488 object#(0x488) () {
 			case "Robin":
 				say("\"He is a gambler by profession, who earns his winnings at the House of Games's tables on Buccaneer's Den.\"");
 				if (var0002) {
-					0xFF7A->say("\"Soon we shall return and the money will pour like sweet wine once again, eh, Leavell?\"");
-					0xFF7A->hide();
+					ROBIN->say("\"Soon we shall return and the money will pour like sweet wine once again, eh, Leavell?\"");
+					ROBIN->hide();
 					0xFF78->show_npc_face(0x0000);
 				}
 				add(["profession", "Buccaneer's Den"]);
@@ -31288,8 +31288,8 @@ void Func0488 object#(0x488) () {
 				say("\"Gambling is what Robin does for money. But he spends so much time talking about Lord British that thou wouldst think he was royalty or something!\"");
 				if (var0002) {
 					say("Suddenly Leavell gets an embarrassed look on his face and stops talking.*");
-					0xFF7A->say("\"Enough about that, Leavell!\"*");
-					0xFF7A->hide();
+					ROBIN->say("\"Enough about that, Leavell!\"*");
+					ROBIN->hide();
 					0xFF78->show_npc_face(0x0000);
 				}
 				remove("profession");
