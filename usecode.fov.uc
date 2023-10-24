@@ -24293,12 +24293,12 @@ void Func045B object#(0x45B) () {
 	var var0005;
 
 	if (event == DOUBLECLICK) {
-		0xFFA5->show_npc_face(0x0000);
-		var0000 = 0xFFA5->get_npc_object()->get_schedule_type();
+		BURNSIDE->show_npc_face(0x0000);
+		var0000 = BURNSIDE->get_npc_object()->get_schedule_type();
 		var0001 = UI_part_of_day();
 		if (var0001 == NIGHT) {
 			if (var0000 == MAJOR_SIT) {
-				var0002 = Func08FC(0xFFA5, ELYNOR);
+				var0002 = Func08FC(BURNSIDE, ELYNOR);
 				if (var0002) {
 					say("The Fellowship meeting is in progress, and Burnside will not speak with you now.*");
 					abort;
@@ -24447,7 +24447,7 @@ void Func045B object#(0x45B) () {
 		say("\"A pleasure, friend Avatar. A pleasure.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFA5);
+		Func092E(BURNSIDE);
 	}
 }
 
@@ -58897,7 +58897,7 @@ void Func06C7 object#(0x6C7) () {
 	var var0003;
 
 	if (event == EGG) {
-		var0000 = [0xFFA3, 0xFFA5, ELYNOR, GREGOR, OWEN];
+		var0000 = [0xFFA3, BURNSIDE, ELYNOR, GREGOR, OWEN];
 		for (var0003 in var0000 with var0001 to var0002) {
 			Func093F(var0003, LOITER);
 		}
@@ -68125,10 +68125,10 @@ void Func087B 0x87B () {
 		ELYNOR->say("\"Thank thee for sharing, brother!\"*");
 		OWEN->hide();
 	}
-	var0002 = Func08F7(0xFFA5);
+	var0002 = Func08F7(BURNSIDE);
 	if (var0002) {
-		0xFFA5->say("You notice that Burnside has apparently nodded off. After a nudge from the person next to him, his eyes pop open. \"Umm... what was that question again...?\" he asks sheepishly.*");
-		0xFFA5->hide();
+		BURNSIDE->say("You notice that Burnside has apparently nodded off. After a nudge from the person next to him, his eyes pop open. \"Umm... what was that question again...?\" he asks sheepishly.*");
+		BURNSIDE->hide();
 	}
 	var0003 = Func08F7(0xFFA3);
 	if (var0003) {
