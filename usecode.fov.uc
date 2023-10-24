@@ -34438,7 +34438,7 @@ void Func049B object#(0x49B) () {
 	var var0003;
 
 	if (event == DOUBLECLICK) {
-		0xFF65->show_npc_face(0x0000);
+		CUBOLT->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = false;
@@ -34529,7 +34529,7 @@ void Func049B object#(0x49B) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF65);
+		Func092E(CUBOLT);
 	}
 }
 

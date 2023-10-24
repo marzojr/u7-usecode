@@ -52115,7 +52115,7 @@ void Func049B object#(0x49B) () {
 	var0001 = Func0953();
 	var0002 = Func0942(0xFF64);
 	if (event == SCRIPTED) {
-		if ((Func0994() != 0x0007) || (0xFF65->get_item_flag(DEAD) || (0xFF64->get_item_flag(DEAD) || (!gflags[0x02BE])))) {
+		if ((Func0994() != 0x0007) || (BERYL->get_item_flag(DEAD) || (0xFF64->get_item_flag(DEAD) || (!gflags[0x02BE])))) {
 			abort;
 		}
 		var0003 = script Func09A0(0x0005, 0x0001) after (0x0014 + UI_get_random(0x0032)) ticks {
@@ -52125,23 +52125,23 @@ void Func049B object#(0x49B) () {
 		if (0xFF62->npc_nearby() || (0xFF64->npc_nearby() || (0xFF63->npc_nearby() || 0xFF61->npc_nearby()))) {
 			abort;
 		}
-		var0003 = 0xFF65->approach_avatar(0x0078, 0x0028);
+		var0003 = BERYL->approach_avatar(0x0078, 0x0028);
 		if (var0003) {
-			0xFF65->set_schedule_type(TALK);
+			BERYL->set_schedule_type(TALK);
 		}
 		abort;
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Hello.@");
-		0xFF65->Func07D1();
-		Func097F(0xFF65, "@Speaking to me?@", 0x0002);
-		0xFF65->set_schedule_type(TALK);
+		BERYL->Func07D1();
+		Func097F(BERYL, "@Speaking to me?@", 0x0002);
+		BERYL->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF65->run_schedule();
-		0xFF65->show_npc_face0(0x0000);
-		0xFF65->set_item_flag(MET);
-		0xFF65->clear_item_say();
+		BERYL->run_schedule();
+		BERYL->show_npc_face0(0x0000);
+		BERYL->set_item_flag(MET);
+		BERYL->clear_item_say();
 		if (var0002) {
 			say("\"My name is Beryl. I need thine help, but I cannot speak now...\"");
 			0xFF64->show_npc_face1(0x0000);
@@ -52150,11 +52150,11 @@ void Func049B object#(0x49B) () {
 			0x0000->set_conversation_slot();
 			if (gflags[0x02BD]) {
 				say("\"I shall meet thee as before. Now, go...\"");
-				Func097F(0xFF65, "@Nothing, Draygan...@", 0x0000);
+				Func097F(BERYL, "@Nothing, Draygan...@", 0x0000);
 				gflags[0x02BE] = true;
 			} else {
 				say("\"Nothing, Lord Draygan.\"");
-				Func097F(0xFF65, "@Nothing.@", 0x0000);
+				Func097F(BERYL, "@Nothing.@", 0x0000);
 			}
 			0xFF64->set_schedule_type(HOUND);
 			var0003 = script Func09A0(0x0005, 0x0001) after 50 ticks {
@@ -52164,14 +52164,14 @@ void Func049B object#(0x49B) () {
 			abort;
 		}
 		if (0xFF64->get_item_flag(DEAD)) {
-			if (0xFF65->get_item_flag(SI_ZOMBIE)) {
+			if (BERYL->get_item_flag(SI_ZOMBIE)) {
 				say("\"I am content now, ",
 					var0001,
 					". There is such a peacefulness in my life, now that Morghrim doth care for me.\"");
-				Func097F(0xFF65, "@Good fortune!@", 0x0000);
+				Func097F(BERYL, "@Good fortune!@", 0x0000);
 				abort;
 			}
-			0xFF65->set_item_flag(SI_ZOMBIE);
+			BERYL->set_item_flag(SI_ZOMBIE);
 			say("\"I am so glad that the tyrant is dead! Thanks to thee, ",
 				var0001,
 				".\"");
@@ -52183,23 +52183,23 @@ void Func049B object#(0x49B) () {
 				0x0000->set_conversation_slot();
 				say("\"I shall accept thy kind offer, Forest Master.\"");
 				Func097F(0xFF61, "@Stay with me.@", 0x0000);
-				Func097F(0xFF65, "@I shall.@", 0x0005);
-				0xFF65->set_new_schedules([MIDNIGHT, DAWN, EVENING], [SLEEP, TEND_SHOP, WANDER], [0x02B1, 0x0676, 0x02B9, 0x0686, 0x02C1, 0x06AD]);
-				0xFF65->run_schedule();
+				Func097F(BERYL, "@I shall.@", 0x0005);
+				BERYL->set_new_schedules([MIDNIGHT, DAWN, EVENING], [SLEEP, TEND_SHOP, WANDER], [0x02B1, 0x0676, 0x02B9, 0x0686, 0x02C1, 0x06AD]);
+				BERYL->run_schedule();
 				abort;
 			}
 			say("\"I shall go to the Forest Master and beg for a place by his side. He is old, and doth need a help from time to time.\"");
 			say("\"Thank thee Avatar for thine help. Thou hast given me back my life.\"");
-			Func097F(0xFF65, "@Fear not for me!@", 0x0000);
+			Func097F(BERYL, "@Fear not for me!@", 0x0000);
 			Func097F(AVATAR, "@Live long and prosper!@", 0x0000);
-			0xFF65->set_new_schedules([MIDNIGHT, DAWN, EVENING], [SLEEP, TEND_SHOP, WANDER], [0x02B1, 0x0676, 0x02B9, 0x0686, 0x02C1, 0x06AD]);
-			0xFF65->run_schedule();
+			BERYL->set_new_schedules([MIDNIGHT, DAWN, EVENING], [SLEEP, TEND_SHOP, WANDER], [0x02B1, 0x0676, 0x02B9, 0x0686, 0x02C1, 0x06AD]);
+			BERYL->run_schedule();
 			abort;
 		}
 		if (gflags[0x02BF] && (!0xFF64->get_item_flag(DEAD))) {
 			say("\"Why dost thou wait? Use the arrow! Use it to strike down the tyrant Draygan!\"");
 			say("\"Then we shall find the secret of his power, and he shall not stop me from obtaining my freedom.\"");
-			Func097F(0xFF65, "@Use the arrow!@", 0x0000);
+			Func097F(BERYL, "@Use the arrow!@", 0x0000);
 			abort;
 		}
 		if (gflags[0x02C0] && (!0xFF64->get_item_flag(DEAD))) {
@@ -52209,15 +52209,15 @@ void Func049B object#(0x49B) () {
 					gflags[0x02BF] = true;
 					say("\"Then use it! Use it to numb the tyrant Draygan!\"");
 					say("\"Then we shall find the secret of his power, and prevent him from stopping mine escape.\"");
-					Func097F(0xFF65, "@Use the arrow!@", 0x0000);
+					Func097F(BERYL, "@Use the arrow!@", 0x0000);
 					abort;
 				}
 				say("\"Do not thou give me false hopes, stranger! I see no arrow...\"");
-				Func097F(0xFF65, "@Bring the arrow...@", 0x0000);
+				Func097F(BERYL, "@Bring the arrow...@", 0x0000);
 				abort;
 			}
 			say("\"Thou must treat an arrow with the juices from the King's Savior plant.\"");
-			Func097F(0xFF65, "@Prepare the arrow!@", 0x0000);
+			Func097F(BERYL, "@Prepare the arrow!@", 0x0000);
 			abort;
 		}
 		if (gflags[0x02B9]) {
@@ -52226,14 +52226,14 @@ void Func049B object#(0x49B) () {
 				if (Func097D(PARTY, 0x0001, 0x01D3, QUALITY_ANY, 0x0000) || Func097D(PARTY, 0x0001, 0x01D3, QUALITY_ANY, 0x0001)) {
 					gflags[0x02C0] = true;
 					say("\"Very good. Now, thou must treat an arrow with the juices from the King's Savior plant. I have hidden some arrows away in my quarters. If thou dost need one, get one there.\"");
-					Func097F(0xFF65, "@Prepare the arrow!@", 0x0000);
+					Func097F(BERYL, "@Prepare the arrow!@", 0x0000);
 					abort;
 				}
 				if (Func097D(PARTY, 0x0001, 0x0238, QUALITY_ANY, FRAME_ANY)) {
 					gflags[0x02BF] = true;
 					say("\"And thou hast enchanted the arrow? Then use it -- use it to numb the tyrant Draygan!\"");
 					say("\"Then we shall find the secret of his power, and prevent him from stopping mine escape!\"");
-					Func097F(0xFF65, "@Use the arrow!@", 0x0000);
+					Func097F(BERYL, "@Use the arrow!@", 0x0000);
 					abort;
 				}
 				say("\"Do not give me false hopes, stranger! I see no King's Savior.\"");
@@ -52347,7 +52347,7 @@ void Func049B object#(0x49B) () {
 				UI_remove_npc_face0();
 				UI_remove_npc_face1();
 				Func097F(AVATAR, "@Go now. Be safe.@", 0x0000);
-				Func097F(0xFF65, "@Do not forget me!@", 0x0003);
+				Func097F(BERYL, "@Do not forget me!@", 0x0003);
 				break;
 		}
 	}
@@ -52395,10 +52395,10 @@ void Func049C object#(0x49C) () {
 			gflags[0x02BC] = false;
 			0xFF64->clear_item_flag(SI_TOURNAMENT);
 			Func0982(0xFF64, 0x0032);
-			0xFF65->run_schedule();
-			0xFF65->set_alignment(NEUTRAL);
+			BERYL->run_schedule();
+			BERYL->set_alignment(NEUTRAL);
 			0xFF61->set_alignment(NEUTRAL);
-			0xFF65->set_schedule_type(TALK);
+			BERYL->set_schedule_type(TALK);
 		}
 	}
 	if (event == STARTED_TALKING) {
@@ -52517,7 +52517,7 @@ void Func049D object#(0x49D) () {
 			nohalt;
 			call Func049D;
 		};
-		if (0xFF62->npc_nearby() || (0xFF64->npc_nearby() || (0xFF65->npc_nearby() || 0xFF61->npc_nearby()))) {
+		if (0xFF62->npc_nearby() || (0xFF64->npc_nearby() || (BERYL->npc_nearby() || 0xFF61->npc_nearby()))) {
 			abort;
 		}
 		var0000 = 0xFF63->approach_avatar(0x0078, 0x0028);
@@ -52558,7 +52558,7 @@ void Func049E object#(0x49E) () {
 			nohalt;
 			call Func049E;
 		};
-		if (0xFF63->npc_nearby() || (0xFF64->npc_nearby() || (0xFF65->npc_nearby() || 0xFF61->npc_nearby()))) {
+		if (0xFF63->npc_nearby() || (0xFF64->npc_nearby() || (BERYL->npc_nearby() || 0xFF61->npc_nearby()))) {
 			abort;
 		}
 		var0000 = 0xFF62->approach_avatar(0x0078, 0x0028);
@@ -52649,13 +52649,13 @@ void Func049F object#(0x49F) () {
 				Func09AC(0xFF61, -1, 0, WANDER);
 				say("\"Thou must return the Heart of Elerion to me! I need it to restore balance to the forest and its creatures.\"");
 				0xFF61->set_schedule_type(HOUND);
-				0xFF65->set_schedule_type(HOUND);
-				0xFF65->set_alignment(NEUTRAL);
+				BERYL->set_schedule_type(HOUND);
+				BERYL->set_alignment(NEUTRAL);
 				add("give Orb");
 				remove("Master");
 			} else {
-				0xFF65->set_schedule_type(HOUND);
-				0xFF65->set_alignment(NEUTRAL);
+				BERYL->set_schedule_type(HOUND);
+				BERYL->set_alignment(NEUTRAL);
 				0xFF61->set_schedule_type(HOUND);
 				say("\"I must have the Heart of Elerion. Draygan had it, but it belongs to me. If thou canst find it, I shall reward thee.\"");
 				add("reward");
@@ -79521,11 +79521,11 @@ void Func07E1 object#(0x7E1) () {
 				Func09AD(0xFF62);
 				Func097F(0xFF62, "@Hold on, Master!@", 0x0007);
 			}
-			if (0xFF65->get_item_flag(DEAD)) {
+			if (BERYL->get_item_flag(DEAD)) {
 				abort;
 			}
 			if (!find_nearby(0x02E6, ON_SCREEN, MASK_ALL_UNSEEN)) {
-				var0002 = 0xFF65->approach_avatar(0x008C, 0x0028);
+				var0002 = BERYL->approach_avatar(0x008C, 0x0028);
 				var0002 = script var0000 {
 					actor frame standing;
 					actor frame bowing;
@@ -79533,13 +79533,13 @@ void Func07E1 object#(0x7E1) () {
 					actor frame sleeping;
 				};
 			}
-			0xFF65->clear_item_flag(ASLEEP);
-			0xFF65->set_schedule_type(IN_COMBAT);
-			0xFF65->set_opponent(0xFF64);
-			0xFF65->set_oppressor(0xFF64);
-			0xFF65->set_alignment(GOOD);
-			0xFF65->clear_item_say();
-			Func094F(0xFF65, ["Die, Draygan!", "I shall kill thee!", "Whoreson!"]);
+			BERYL->clear_item_flag(ASLEEP);
+			BERYL->set_schedule_type(IN_COMBAT);
+			BERYL->set_opponent(0xFF64);
+			BERYL->set_oppressor(0xFF64);
+			BERYL->set_alignment(GOOD);
+			BERYL->clear_item_say();
+			Func094F(BERYL, ["Die, Draygan!", "I shall kill thee!", "Whoreson!"]);
 		} else {
 			var0000->set_item_flag(ASLEEP);
 			var0000->set_schedule_type(SLEEP);
