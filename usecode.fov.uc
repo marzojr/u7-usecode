@@ -6603,13 +6603,13 @@ void Func02EB shape#(0x2EB) () {
 		var0001 = UI_click_on_item();
 		if (var0000 == 0x0000) {
 			if (var0001->get_item_shape() == 0x0207) {
-				var0002 = 0xFF73->find_nearest(0x03F3, 0x0001);
-				if ((var0002->get_item_frame() == 0x0001) && ((0xFF73->get_schedule_type() == SLEEP) && (0xFF73->get_item_frame() == 0x000D))) {
-					0xFF73->halt_scheduled();
+				var0002 = HORANCE->find_nearest(0x03F3, 0x0001);
+				if ((var0002->get_item_frame() == 0x0001) && ((HORANCE->get_schedule_type() == SLEEP) && (HORANCE->get_item_frame() == 0x000D))) {
+					HORANCE->halt_scheduled();
 					var0003 = set_last_created();
 					if (var0003) {
-						var0003 = UI_update_last_created(0xFF73->get_object_position());
-						0xFF73->set_schedule_type(WAIT);
+						var0003 = UI_update_last_created(HORANCE->get_object_position());
+						HORANCE->set_schedule_type(WAIT);
 						gflags[0x01AF] = true;
 					}
 				}
@@ -6690,12 +6690,12 @@ void Func02F2 shape#(0x2F2) () {
 	}
 	if (event == SCRIPTED) {
 		gflags[0x01AA] = true;
-		var0005 = [0xFF71, 0xFF70, MARKHAM, 0xFF6F, 0xFF6E, 0xFF6D, 0xFF73];
+		var0005 = [0xFF71, 0xFF70, MARKHAM, 0xFF6F, 0xFF6E, 0xFF6D, HORANCE];
 		for (var0008 in var0005 with var0006 to var0007) {
 			var0008->clear_item_flag(ASLEEP);
 			var0008->set_schedule_type(WAIT);
 		}
-		0xFF73->show_npc_face(0x0001);
+		HORANCE->show_npc_face(0x0001);
 		say("As the Soul Cage dissolves into dust, a great transformation comes upon the Liche. Where the evil spirit was caged you see the form of a familiar person. It's Horance! He's a ghost, but he much more resembles a man than an undead terror. ");
 		Func08AD();
 	}
@@ -31958,7 +31958,7 @@ void Func048D object#(0x48D) () {
 
 	if (event == DOUBLECLICK) {
 		if (!gflags[0x01B5]) {
-			0xFF73->say("You attempt to speak to the undead creature, but it does not, or cannot, respond.*");
+			HORANCE->say("You attempt to speak to the undead creature, but it does not, or cannot, respond.*");
 			abort;
 		}
 		var0000 = Func0908();
@@ -31978,10 +31978,10 @@ void Func048D object#(0x48D) () {
 		if (gflags[0x01AA]) {
 			Func08AD();
 		} else {
-			0xFF73->show_npc_face(0x0000);
+			HORANCE->show_npc_face(0x0000);
 		}
 		var0004 = UI_part_of_day();
-		var0005 = 0xFF73->get_schedule_type();
+		var0005 = HORANCE->get_schedule_type();
 		if ((var0004 == MIDNIGHT) || (var0004 == EARLY)) {
 			if (var0005 == SLEEP) {
 				Func08B0();
@@ -32003,13 +32003,13 @@ void Func048D object#(0x48D) () {
 					var0001,
 					". Methinks he'll cause naught but evil.\"");
 				SHAMINO->hide();
-				0xFF73->show_npc_face(0x0000);
+				HORANCE->show_npc_face(0x0000);
 			} else if (var0007) {
 				IOLO->say("Iolo steps near you and speaks in a whispered tone.~~\"Do not trust this one, ",
 					var0001,
 					". Methinks he'll cause naught but evil.\"");
 				IOLO->hide();
-				0xFF73->show_npc_face(0x0000);
+				HORANCE->show_npc_face(0x0000);
 			}
 			var0008 = Func08F7(SPARK);
 			if (var0008) {
@@ -32017,7 +32017,7 @@ void Func048D object#(0x48D) () {
 					var0001,
 					"? I am ready to go now,\" he says to you, cowering from the undead creature.*");
 				SPARK->hide();
-				0xFF73->show_npc_face(0x0000);
+				HORANCE->show_npc_face(0x0000);
 			}
 			gflags[0x01C5] = true;
 		} else {
@@ -32083,7 +32083,7 @@ void Func048D object#(0x48D) () {
 				if (var0002) {
 					0xFF70->say("\"Yes, my Lord. I must be the happiest Lady in all the land.\" Her gaze never wanders from the horrid face of the Liche.");
 					0xFF70->hide();
-					0xFF73->show_npc_face(0x0000);
+					HORANCE->show_npc_face(0x0000);
 				}
 				fallthrough;
 
@@ -32108,11 +32108,11 @@ void Func048D object#(0x48D) () {
 				if (var0009) {
 					DUPRE->say("\"Yeah, right.\"*");
 					DUPRE->hide();
-					0xFF73->show_npc_face(0x0000);
+					HORANCE->show_npc_face(0x0000);
 				} else if (var0007) {
 					IOLO->say("\"Yeah, right.\"*");
 					IOLO->hide();
-					0xFF73->show_npc_face(0x0000);
+					HORANCE->show_npc_face(0x0000);
 				}
 				say("\"Feel free to explore mine humble abode. Though, have a care. My guardians are none too intelligent and will most likely assault anything living.\" He smiles with his death's head grin.*");
 				abort;
@@ -71358,7 +71358,7 @@ void Func08AD 0x8AD () {
 	var var0002;
 	var var0003;
 
-	0xFF73->show_npc_face(0x0001);
+	HORANCE->show_npc_face(0x0001);
 	var0000 = Func0909();
 	var0001 = Func0908();
 	if (!gflags[0x01AD]) {
@@ -71440,7 +71440,7 @@ void Func08AF 0x8AF () {
 	var var0002;
 	var var0003;
 
-	0xFF73->show_npc_face(0x0001);
+	HORANCE->show_npc_face(0x0001);
 	var0000 = UI_get_party_list();
 	if (!(0xFF6D->get_npc_object() in var0000)) {
 		say("\"Is there a problem? Art thou confounded by thy task?\"");
@@ -71492,7 +71492,7 @@ void Func08B1 0x8B1 () {
 	var var0002;
 	var var0003;
 
-	0xFF73->show_npc_face(0x0001);
+	HORANCE->show_npc_face(0x0001);
 	var0000 = Func0908();
 	say("\"Once again, Avatar, thou hast proven that thou art ever the defender of Britannia and the innocent. I cannot adequately express my gratitude; however, please take this small token of my thanks. I hope it will help thee in thy quest.\"");
 	var0001 = UI_create_new_object(0x0229);
@@ -71517,7 +71517,7 @@ extern var Func0908 0x908 ();
 void Func08B2 0x8B2 () {
 	var var0000;
 
-	0xFF73->show_npc_face(0x0001);
+	HORANCE->show_npc_face(0x0001);
 	var0000 = Func0908();
 	say("Horance looks at you curiously, \"Thy task is done here in Skara Brae. Thou hast my respect and lifelong gratitude.\"");
 	if (gflags[0x017C]) {
@@ -74007,7 +74007,7 @@ void Func08D8 0x8D8 () {
 		abort;
 	}
 	if (!gflags[0x01A9]) {
-		var0002 = Func08F7(0xFF73);
+		var0002 = Func08F7(HORANCE);
 		if (var0002) {
 			say("The music of the little box makes Rowena turn her head in your direction. She blinks several times as if waking from a dream, or, in this case, a nightmare. When she sees the Liche, she pretends to be enthralled, but as soon as he is no longer looking in her direction, she motions for you to come closer.");
 		} else {
