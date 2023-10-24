@@ -23512,10 +23512,10 @@ void Func0457 object#(0x457) () {
 	var var0009;
 
 	if (event == DOUBLECLICK) {
-		0xFFA9->show_npc_face(0x0000);
+		ZORN->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFFA9->get_npc_object()->get_schedule_type();
+		var0002 = ZORN->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		var0003 = Func0931(PARTY, 0x0001, 0x02D8, QUALITY_ANY, FRAME_ANY);
 		if (var0003) {
@@ -23662,7 +23662,7 @@ void Func0457 object#(0x457) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		var0002 = 0xFFA9->get_npc_object()->get_schedule_type();
+		var0002 = ZORN->get_npc_object()->get_schedule_type();
 		if (var0002 == BLACKSMITH) {
 			var0008 = UI_die_roll(0x0001, 0x0004);
 			if (var0008 == 0x0001) {
@@ -23677,9 +23677,9 @@ void Func0457 object#(0x457) () {
 			if (var0008 == 0x0004) {
 				var0009 = "@Need armour or weapons?@";
 			}
-			0xFFA9->item_say(var0009);
+			ZORN->item_say(var0009);
 		} else {
-			Func092E(0xFFA9);
+			Func092E(ZORN);
 		}
 	}
 }
@@ -58104,7 +58104,7 @@ void Func06AB object#(0x6AB) () {
 
 	if (event == EGG) {
 		gflags[0x0122] = true;
-		var0000 = [0xFFA9, XANTHIA, 0xFFA4, 0xFFA6];
+		var0000 = [ZORN, XANTHIA, 0xFFA4, 0xFFA6];
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0003->set_schedule_type(LOITER);
 		}
@@ -58945,7 +58945,7 @@ void Func06CA object#(0x6CA) () {
 	var var0003;
 
 	if (event == EGG) {
-		var0000 = [0xFFA9, XANTHIA, 0xFFA4];
+		var0000 = [ZORN, XANTHIA, 0xFFA4];
 		for (var0003 in var0000 with var0001 to var0002) {
 			Func093F(var0003, LOITER);
 		}
