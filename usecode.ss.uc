@@ -50080,7 +50080,7 @@ void Func0482 object#(0x482) () {
 				GUARD12->set_schedule_type(IN_COMBAT);
 				GUARD13->set_schedule_type(IN_COMBAT);
 				GUARD14->set_schedule_type(IN_COMBAT);
-				0xFF7B->set_schedule_type(IN_COMBAT);
+				GUARD15->set_schedule_type(IN_COMBAT);
 				abort;
 
 			case "bye":

@@ -30665,7 +30665,7 @@ void Func0485 object#(0x485) () {
 	var var0006;
 
 	if (event == DOUBLECLICK) {
-		0xFF7B->show_npc_face(0x0000);
+		CONSTANCE->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func08F7(SHAMINO);
 		var0002 = Func08F7(IOLO);
@@ -30711,12 +30711,12 @@ void Func0485 object#(0x485) () {
 					if (var0002) {
 						IOLO->say("\"Actually, I feel quite parched myself. Might I have some as well?\" Constance nods yes, and hands him a\tdipper of water. He drinks with loud gulping sounds.*");
 						IOLO->hide();
-						0xFF7B->show_npc_face(0x0000);
+						CONSTANCE->show_npc_face(0x0000);
 					}
 					if (var0001) {
 						SHAMINO->say("\"I, too, am feeling dry. Wouldst thou share thy water with me, milady?\" Constance fills the dipper with water for Shamino and he drinks until water runs down his chin.*");
 						SHAMINO->hide();
-						0xFF7B->show_npc_face(0x0000);
+						CONSTANCE->show_npc_face(0x0000);
 					}
 					if (var0003) {
 						if (var0001) {
@@ -30724,13 +30724,13 @@ void Func0485 object#(0x485) () {
 							SHAMINO->hide();
 							DUPRE->say("\"I shall wait until we find something a bit stronger than water to quench my thirst.\"*");
 							DUPRE->hide();
-							0xFF7B->show_npc_face(0x0000);
+							CONSTANCE->show_npc_face(0x0000);
 						}
 					}
 					if (var0004) {
 						SPARK->say("Constance hands Spark a dipper full of water. He drinks it down in one long slurp. Upon finishing it, he burps. With an\tembarrassed grin he bows\tapologetically to Constance\tas he hands her back the dipper.");
 						SPARK->hide();
-						0xFF7B->show_npc_face(0x0000);
+						CONSTANCE->show_npc_face(0x0000);
 					}
 				} else {
 					say("\"If thou wouldst ever change thy mind thou needest only let me know.\"");
@@ -30765,9 +30765,9 @@ void Func0485 object#(0x485) () {
 				say("You tell Constance of how you have returned the locket that has been stolen from Henry. \"Oh, how could I ever have doubted my dear darling Henry?\" she frowns. \"I thank thee for telling me the truth.\"");
 				if (var0005) {
 					HENRY->say("\"Constance, I am sorry that things ran afoul as they did, but if thou wilt, I would like thee to have this locket as a symbol of my love.\"*");
-					0xFF7B->say("\"My sweet Henry, mine heart belongs to only thee.\"*");
+					CONSTANCE->say("\"My sweet Henry, mine heart belongs to only thee.\"*");
 					HENRY->hide();
-					0xFF7B->show_npc_face(0x0000);
+					CONSTANCE->show_npc_face(0x0000);
 				}
 				remove("locket found");
 				fallthrough;
@@ -30829,7 +30829,7 @@ void Func0485 object#(0x485) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF7B);
+		Func092E(CONSTANCE);
 	}
 }
 
