@@ -25364,7 +25364,7 @@ void Func0463 object#(0x463) () {
 		abort;
 	}
 	if (event == DOUBLECLICK) {
-		0xFF9D->show_npc_face(0x0000);
+		FODUS->show_npc_face(0x0000);
 		var0000 = Func0909();
 		if (!gflags[0x011D]) {
 			say("You see a wingless gargoyle with a terrible skin disease. It looks as if his face is falling off in patches.");
