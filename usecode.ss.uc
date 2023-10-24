@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [ANDRAL, 0xFF6A, 0xFFB0, CALADIN, CELLIA, SHAZZANA, KRAYG, LUTHER, LYDIA, SHMED, 0xFFB2, 0xFFB1, MARSTEN, SPEKTOR, LUCILLA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [ANDRAL, 0xFF6A, 0xFFB0, CALADIN, CELLIA, SHAZZANA, KRAYG, LUTHER, LYDIA, SHMED, STANDARR, 0xFFB1, MARSTEN, SPEKTOR, LUCILLA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -47373,27 +47373,27 @@ void Func044E object#(0x44E) () {
 	if (gflags[0x0048]) {
 		var0000 = "Knight";
 	}
-	var0001 = 0xFFB2->get_item_flag(MET);
-	if (0xFFB2->get_schedule_type() == BLACKSMITH) {
+	var0001 = STANDARR->get_item_flag(MET);
+	if (STANDARR->get_schedule_type() == BLACKSMITH) {
 		var0002 = true;
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Hail there!@");
-		0xFFB2->Func07D1();
-		Func097F(0xFFB2, "@Greetings.@", 0x0003);
-		0xFFB2->set_schedule_type(TALK);
+		STANDARR->Func07D1();
+		Func097F(STANDARR, "@Greetings.@", 0x0003);
+		STANDARR->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFB2->run_schedule();
-		0xFFB2->clear_item_say();
-		0xFFB2->show_npc_face0(0x0000);
+		STANDARR->run_schedule();
+		STANDARR->clear_item_say();
+		STANDARR->show_npc_face0(0x0000);
 		if (var0001) {
 			say("\"What dost thou wish of me, ",
 				var0000,
 				"?\"");
 		} else {
 			say("\"I am Standarr the Armourer. What dost thou wish of me?\"");
-			0xFFB2->set_item_flag(MET);
+			STANDARR->set_item_flag(MET);
 		}
 		if (gflags[0x009F] && (!gflags[0x0294])) {
 			add("strange breastplate");
@@ -47443,7 +47443,7 @@ void Func044E object#(0x44E) () {
 				fallthrough;
 
 			case "buy":
-				if (0xFFB2->get_schedule_type() == BLACKSMITH) {
+				if (STANDARR->get_schedule_type() == BLACKSMITH) {
 					say("\"Wouldst thou be interested in buying or selling?\"");
 					var0003 = Func0956(["nothing", "buying", "selling"]);
 					if (var0003 == "buying") {
@@ -47496,7 +47496,7 @@ void Func044E object#(0x44E) () {
 				UI_remove_npc_face0();
 				UI_remove_npc_face1();
 				Func097F(AVATAR, "@Stay well!@", 0x0000);
-				Func097F(0xFFB2, "@Farewell!@", 0x0003);
+				Func097F(STANDARR, "@Farewell!@", 0x0003);
 				break;
 		}
 	}
@@ -47515,9 +47515,9 @@ void Func044E object#(0x44E) () {
 			if (var0006 == 0x0004) {
 				var0007 = "@Best weapons in Monitor!@";
 			}
-			0xFFB2->item_say(var0007);
+			STANDARR->item_say(var0007);
 		} else {
-			Func097A(0xFFB2);
+			Func097A(STANDARR);
 		}
 	}
 }
@@ -78755,7 +78755,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(LUTHER, 0x0412, 0x0A27, WAIT);
 		Func09AC(LYDIA, 0x0415, 0x0A2B, WAIT);
 		Func09AC(SHMED, 0x0433, 0x0A77, WAIT);
-		Func09AC(0xFFB2, 0x0402, 0x0A82, WAIT);
+		Func09AC(STANDARR, 0x0402, 0x0A82, WAIT);
 		Func09AC(0xFFB1, 0x0407, 0x0A47, WAIT);
 		Func09AC(MARSTEN, 0x0427, 0x09C7, WAIT);
 		Func09AC(SPEKTOR, 0x0442, 0x09CA, WAIT);
@@ -97502,7 +97502,7 @@ void Func0866 0x866 () {
 	var var0013;
 
 	var0000 = "friend";
-	var0001 = 0xFFB2->get_item_flag(MET);
+	var0001 = STANDARR->get_item_flag(MET);
 	if (!var0001) {
 		var0000 = "stranger";
 	}
@@ -97665,15 +97665,15 @@ void Func0866 0x866 () {
 		} else if (var000E == 0x0003) {
 			var0013 = Func0992(0x0001, (("@But " + var0000) + ", we do not have the monetari to purchase this.@"), 0x0000, false);
 			if (var0013 != AVATAR) {
-				0xFFB2->show_npc_face0(0x0000);
+				STANDARR->show_npc_face0(0x0000);
 				say("\"If thou canst not pay, please leave!\"");
 			} else {
 				say("\"Thou dost not have enough monetari to purchase this...\"");
 			}
-			if (0x001F < (0xFFB2->get_npc_id() + 0x0006)) {
-				0xFFB2->set_npc_id(0x001F);
+			if (0x001F < (STANDARR->get_npc_id() + 0x0006)) {
+				STANDARR->set_npc_id(0x001F);
 			} else {
-				0xFFB2->set_npc_id(0xFFB2->get_npc_id() + 0x0006);
+				STANDARR->set_npc_id(STANDARR->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Dost thou want to buy more armour?\"");
@@ -97711,7 +97711,7 @@ void Func0867 0x867 () {
 	var var0013;
 
 	var0000 = "friend";
-	var0001 = 0xFFB2->get_item_flag(MET);
+	var0001 = STANDARR->get_item_flag(MET);
 	if (!var0001) {
 		var0000 = "stranger";
 	}
@@ -97875,15 +97875,15 @@ void Func0867 0x867 () {
 		} else if (var000E == 0x0003) {
 			var0013 = Func0992(0x0001, (("@But " + var0000) + ", we do not have the monetari to purchase this.@"), 0x0000, false);
 			if (var0013 != AVATAR) {
-				0xFFB2->show_npc_face0(0x0000);
+				STANDARR->show_npc_face0(0x0000);
 				say("\"If thou canst not pay, please leave!\"");
 			} else {
 				say("\"Thou dost not have enough monetari to purchase this!\"");
 			}
-			if (0x001F < (0xFFB2->get_npc_id() + 0x0006)) {
-				0xFFB2->set_npc_id(0x001F);
+			if (0x001F < (STANDARR->get_npc_id() + 0x0006)) {
+				STANDARR->set_npc_id(0x001F);
 			} else {
-				0xFFB2->set_npc_id(0xFFB2->get_npc_id() + 0x0006);
+				STANDARR->set_npc_id(STANDARR->get_npc_id() + 0x0006);
 			}
 		}
 		say("\"Dost thou wish to purchase more weapons?\"");
@@ -97923,7 +97923,7 @@ void Func0868 0x868 () {
 	var var0017;
 
 	var0000 = "friend";
-	var0001 = 0xFFB2->get_item_flag(MET);
+	var0001 = STANDARR->get_item_flag(MET);
 	if (!var0001) {
 		var0000 = "stranger";
 	}
@@ -98367,7 +98367,7 @@ var Func0869 0x869 (var var0000, var var0001) {
 	var var0012;
 
 	var0002 = "friend";
-	var0003 = 0xFFB2->get_item_flag(MET);
+	var0003 = STANDARR->get_item_flag(MET);
 	if (!var0003) {
 		var0002 = "stranger";
 	}
@@ -98379,12 +98379,12 @@ var Func0869 0x869 (var var0000, var var0001) {
 	}
 	var0006 = var0000;
 	var0007 = (var0001 / 0x0003) * 0x0002;
-	var0008 = 0x000F - (0xFFB2->get_npc_id() / 0x0002);
+	var0008 = 0x000F - (STANDARR->get_npc_id() / 0x0002);
 	var0009 = 0x0000;
 	var000A = 0x0001;
 	var000B = 0x0000;
 	var000C = 0x0002;
-	var000D = 0xFFB2->get_npc_id();
+	var000D = STANDARR->get_npc_id();
 	while (var000A) {
 		var000E = Func0956(["yes", "no", "haggle"]);
 		if (var000E == "no") {
@@ -98475,7 +98475,7 @@ var Func0869 0x869 (var var0000, var var0001) {
 				"?\"");
 			if (Func0955()) {
 				if (var000D > 0x0001) {
-					0xFFB2->set_npc_id(var000D - 0x0002);
+					STANDARR->set_npc_id(var000D - 0x0002);
 				}
 				return var0006;
 			}
@@ -98492,9 +98492,9 @@ var Func0869 0x869 (var var0000, var var0001) {
 				abort;
 			}
 			if (0x001F < (var000D + 0x000A)) {
-				0xFFB2->set_npc_id(0x001F);
+				STANDARR->set_npc_id(0x001F);
 			} else {
-				0xFFB2->set_npc_id(var000D + 0x000A);
+				STANDARR->set_npc_id(var000D + 0x000A);
 			}
 			return 0x0000;
 		}
@@ -98504,7 +98504,7 @@ var Func0869 0x869 (var var0000, var var0001) {
 					var0006,
 					" was my final offer. Dost thou accept?\"");
 				if (var000D < 0x001C) {
-					0xFFB2->set_npc_id(var000D + 0x0004);
+					STANDARR->set_npc_id(var000D + 0x0004);
 				}
 				if (Func0955()) {
 					return var0006;
@@ -98515,7 +98515,7 @@ var Func0869 0x869 (var var0000, var var0001) {
 					var0006,
 					" monetari is my final offer.\"");
 				if (var000D < 0x001E) {
-					0xFFB2->set_npc_id(var000D + 0x0002);
+					STANDARR->set_npc_id(var000D + 0x0002);
 				}
 			}
 		} else {
@@ -98595,7 +98595,7 @@ var Func0869 0x869 (var var0000, var var0001) {
 						" monetari is as low as I will go! I must eat and pay for my supplies...\"");
 				}
 				if (var000D < 0x001F) {
-					0xFFB2->set_npc_id(var000D + 0x0001);
+					STANDARR->set_npc_id(var000D + 0x0001);
 				}
 			}
 		}

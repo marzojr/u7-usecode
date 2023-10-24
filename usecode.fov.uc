@@ -22397,9 +22397,9 @@ void Func044E object#(0x44E) () {
 	var var0009;
 
 	if (event == DOUBLECLICK) {
-		0xFFB2->show_npc_face(0x0000);
+		PAMELA->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
-		var0000 = 0xFFB2->get_npc_object()->get_schedule_type();
+		var0000 = PAMELA->get_npc_object()->get_schedule_type();
 		if (gflags[0x00E4]) {
 			if (gflags[0x00F0]) {
 				add("Rayburt");
@@ -22484,7 +22484,7 @@ void Func044E object#(0x44E) () {
 		say("\"See thee soon!\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFB2);
+		Func092E(PAMELA);
 	}
 }
 
