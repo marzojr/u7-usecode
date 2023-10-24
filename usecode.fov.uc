@@ -27408,7 +27408,7 @@ void Func0472 object#(0x472) () {
 	var var0008;
 
 	if (event == DOUBLECLICK) {
-		0xFF8E->show_npc_face(0x0000);
+		AIMI->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = false;
 		add(["name", "job", "bye"]);
@@ -27536,7 +27536,7 @@ void Func0472 object#(0x472) () {
 		}
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF8E);
+		Func092E(AIMI);
 	}
 }
 
