@@ -27130,7 +27130,7 @@ void Func0470 object#(0x470) () {
 	var var0006;
 
 	if (event == DOUBLECLICK) {
-		0xFF90->show_npc_face(0x0000);
+		D_REL->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = false;
