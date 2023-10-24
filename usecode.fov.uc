@@ -22579,7 +22579,7 @@ void Func0450 object#(0x450) () {
 	var var0002;
 
 	if (event == DOUBLECLICK) {
-		0xFFB0->show_npc_face(0x0000);
+		DE_MARIA->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (gflags[0x00E3]) {
 			add("Nastassia");
@@ -22649,7 +22649,7 @@ void Func0450 object#(0x450) () {
 				if (var0002) {
 					ZINAIDA->say("\"Enough, my love. I think the Avatar dost know thy meaning!\"*");
 					ZINAIDA->hide();
-					0xFFB0->show_npc_face(0x0000);
+					DE_MARIA->show_npc_face(0x0000);
 				}
 				say("De Maria stops his reverie, sighs, and smiles at you. \"Thou dost apprehend my meaning...\"");
 				remove("Zinaida");
@@ -22661,7 +22661,7 @@ void Func0450 object#(0x450) () {
 		say("\"Do take care of thyself!\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFB0);
+		Func092E(DE_MARIA);
 	}
 }
 

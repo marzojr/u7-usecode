@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [ANDRAL, 0xFF6A, 0xFFB0, CALADIN, CELLIA, SHAZZANA, KRAYG, LUTHER, LYDIA, SHMED, STANDARR, TEMPLAR, MARSTEN, SPEKTOR, LUCILLA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [ANDRAL, 0xFF6A, FLICKEN, CALADIN, CELLIA, SHAZZANA, KRAYG, LUTHER, LYDIA, SHMED, STANDARR, TEMPLAR, MARSTEN, SPEKTOR, LUCILLA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -6755,7 +6755,7 @@ void Func01C3 shape#(0x1C3) () {
 		if (MARSTEN->get_npc_id() == 0x0007) {
 			MARSTEN->set_npc_id(0x0008);
 			UI_init_conversation();
-			0xFFB0->show_npc_face0(0x0000);
+			FLICKEN->show_npc_face0(0x0000);
 			say("\"What didst thou think of the Knight's Test? Didst thou have any harrowing experiences?\"");
 			LUTHER->show_npc_face1(0x0000);
 			say("\"Oh, it isn't that much of a challenge. After all, thou didst survive it, Flicken!\"");
@@ -6839,10 +6839,10 @@ labelFunc01C3_073B:
 				Func097F(LUTHER, "@I doubt it...@", 0x0000);
 			} else if (var0005 < 0x0003) {
 				say("\"Shmed is the Master of Knight's Test. If I were thee, I would speak to him about thy strange experiences.\"");
-				Func097F(0xFFB0, "@Such a story!@", 0x0000);
+				Func097F(FLICKEN, "@Such a story!@", 0x0000);
 			} else {
 				say("\"My friend, I am convinced thou hast been the victim of an evil scheme! Tomorrow, I shall speak with Shmed personally.\"");
-				Func097F(0xFFB0, "@An outrage!@", 0x0000);
+				Func097F(FLICKEN, "@An outrage!@", 0x0000);
 			}
 			UI_end_conversation();
 			HARNNA->move_object([0x0437, 0x0A7C, 0x0000]);
@@ -6872,7 +6872,7 @@ labelFunc01C3_073B:
 			Func097F(LUTHER, "@Hurry, Lucilla!@", 0x0004);
 			Func097F(CELLIA, "@This knife is dull...@", 0x0008);
 			CELLIA->set_item_flag(MET);
-			Func097F(0xFFB0, (("@" + var0001) + "...@"), 0x0010);
+			Func097F(FLICKEN, (("@" + var0001) + "...@"), 0x0010);
 			UI_play_music(0x0022, Func09A0(0x0005, 0x0001));
 			abort;
 		}
@@ -6939,7 +6939,7 @@ labelFunc01C3_073B:
 			CALADIN->show_npc_face0(0x0000);
 			say("\"On behalf of the Bears -- which, by the way, are the mightiest warriors in the land -- I welcome thee to thy Knighthood Banquet.\"");
 			UI_end_conversation();
-			Func097F(0xFFB0, "@Welcome!@", 0x0002);
+			Func097F(FLICKEN, "@Welcome!@", 0x0002);
 			Func097F(TEMPLAR, "@Aye! Bears!@", 0x0001);
 			Func097F(LUTHER, "@Hear! Hear!@", 0x0000);
 			var0003 = script CALADIN {
@@ -7059,7 +7059,7 @@ labelFunc01C3_073B:
 				}
 				if (var0010 == 0x0005) {
 					var0012 = 0x0004;
-					var0011 = 0xFFB0;
+					var0011 = FLICKEN;
 				}
 				if (var0010 == 0x0007) {
 					var0012 = 0x0006;
@@ -7111,12 +7111,12 @@ labelFunc01C3_073B:
 		Func097F(LUTHER, "@Coward!@", 0x0008);
 		Func097F(CALADIN, "@I'm hungry!@", 0x000A);
 		gflags[0x0048] = true;
-		var0018 = [KRAYG, CELLIA, 0xFF6A, SPEKTOR, SHAZZANA, MARSTEN, HARNNA, 0xFFB0, CALADIN, LUCILLA, TEMPLAR, LUTHER];
+		var0018 = [KRAYG, CELLIA, 0xFF6A, SPEKTOR, SHAZZANA, MARSTEN, HARNNA, FLICKEN, CALADIN, LUCILLA, TEMPLAR, LUTHER];
 		for (var0005 in var0018 with var0019 to var001A) {
 			var0005->revert_schedule();
 			var0005->run_schedule();
 		}
-		var0018 = [0xFFB0, CALADIN, TEMPLAR, LUTHER];
+		var0018 = [FLICKEN, CALADIN, TEMPLAR, LUTHER];
 		for (var0005 in var0018 with var001B to var001C) {
 			var0005->set_schedule_type(EAT_AT_INN);
 		}
@@ -7132,7 +7132,7 @@ labelFunc01C3_073B:
 			actor frame bowing;
 			actor frame standing;
 		};
-		var001D = [CELLIA, 0xFFB0, HARNNA, KRAYG, LUCILLA, MARSTEN, SPEKTOR];
+		var001D = [CELLIA, FLICKEN, HARNNA, KRAYG, LUCILLA, MARSTEN, SPEKTOR];
 		for (var0005 in var001D with var001E to var001F) {
 			var0005->clear_item_flag(SI_TOURNAMENT);
 		}
@@ -7327,7 +7327,7 @@ labelFunc01C3_073B:
 		if ((MARSTEN->get_npc_id() == 0x0000) && ((get_item_shape() == 0x01B0) || (get_item_shape() == 0x010E))) {
 			MARSTEN->set_npc_id(0x0001);
 			Func097F(AVATAR, "@Look! Everyone is here...@", 0x0003);
-			Func097F(0xFFB0, "@Where is Harnna?@", 0x0017);
+			Func097F(FLICKEN, "@Where is Harnna?@", 0x0017);
 			Func097F(SPEKTOR, "@Our guest is here...@", 0x0016);
 			var0003 = AVATAR->find_nearby(0x010E, 0x000A, MASK_NONE) & AVATAR->find_nearby(0x01B0, 0x000A, MASK_NONE);
 			for (var0009 in var0003 with var0020 to var0021) {
@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, CELLIA, 0xFFB0, HARNNA, KRAYG, LUCILLA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, 0xFF64, MARSTEN, SPEKTOR, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, CELLIA, FLICKEN, HARNNA, KRAYG, LUCILLA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, 0xFF64, MARSTEN, SPEKTOR, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -47855,7 +47855,7 @@ void Func0450 object#(0x450) () {
 	var var0008;
 
 	var0000 = false;
-	var0001 = 0xFFB0->get_item_flag(MET);
+	var0001 = FLICKEN->get_item_flag(MET);
 	var0002 = Func0953();
 	if (event == DEATH) {
 		var0003 = script item {
@@ -47864,14 +47864,14 @@ void Func0450 object#(0x450) () {
 		};
 	}
 	if ((event == PATH_SUCCESS) || (event == SCRIPTED)) {
-		0xFFB0->Func07D1();
+		FLICKEN->Func07D1();
 		Func0833(event);
 	}
 	if (event == DOUBLECLICK) {
 		Func097F(AVATAR, "@Hail!@", 0x0000);
-		0xFFB0->Func07D1();
-		0xFFB0->clear_item_say();
-		0xFFB0->show_npc_face0(0x0000);
+		FLICKEN->Func07D1();
+		FLICKEN->clear_item_say();
+		FLICKEN->show_npc_face0(0x0000);
 		if (!var0001) {
 			say("\"Halt! Who art thou and what is thy business?\"");
 			var0004 = Func0956(["I am the Avatar", ("I am " + var0002), "Who doth wish to know?"]);
@@ -47893,7 +47893,7 @@ void Func0450 object#(0x450) () {
 		} else {
 			say("\"What is it now?\"");
 			add(["name", "duties"]);
-			var0005 = 0xFFB0->get_object_position();
+			var0005 = FLICKEN->get_object_position();
 			var0006 = var0005[0x0001];
 			var0007 = var0005[0x0002];
 			if ((var0006 > 0x0310) && ((var0006 < 0x0330) && ((var0007 > 0x0AA0) && (var0007 < 0x0AD0)))) {
@@ -47934,7 +47934,7 @@ void Func0450 object#(0x450) () {
 					say("\"I do not know thou art a friend... I shall let thee in, but thou must have an escort until thou hast spoken to Lord Marsten.\"");
 					say("\"Thou canst find him at the Crematorium, mourning for the dead. Follow the road north.\"");
 					say("\"Remember, we shall be keeping an eye upon thee!\"");
-					Func097F(0xFFB0, "@Pikemen!@", 0x0001);
+					Func097F(FLICKEN, "@Pikemen!@", 0x0001);
 					var0008 = UI_create_new_object2(0x00E4, [0x032E, 0x0AAF, 0x0000]);
 					if (var0008) {
 						var0008->set_npc_id(0x0003);
@@ -47951,11 +47951,11 @@ void Func0450 object#(0x450) () {
 					}
 					AVATAR->set_item_flag(DONT_MOVE);
 					Func0833(event);
-					0xFFB0->set_item_flag(MET);
+					FLICKEN->set_item_flag(MET);
 					abort;
 				}
 				say("\"Then I shall certainly not let thee in.\"");
-				Func097F(0xFFB0, "@Be thou gone!@", 0x0000);
+				Func097F(FLICKEN, "@Be thou gone!@", 0x0000);
 				abort;
 
 			case "strangers" (remove):
@@ -48096,7 +48096,7 @@ void Func0450 object#(0x450) () {
 				}
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Thank thee.@", 0x0000);
-				Func097F(0xFFB0, "@Courage!@", 0x0002);
+				Func097F(FLICKEN, "@Courage!@", 0x0002);
 				break;
 		}
 	}
@@ -78747,7 +78747,7 @@ void Func07D8 object#(0x7D8) () {
 		RENFRY->set_item_flag(DEAD);
 		Func09AC(ANDRAL, 0x0366, 0x0AA9, WAIT);
 		Func09AC(0xFF6A, 0x03B6, 0x0A54, WAIT);
-		Func09AC(0xFFB0, 0x0323, 0x0ABC, WAIT);
+		Func09AC(FLICKEN, 0x0323, 0x0ABC, WAIT);
 		Func09AC(CALADIN, 0x03B4, 0x0A17, WAIT);
 		Func09AC(CELLIA, 0x03D3, 0x0A09, WAIT);
 		Func09AC(SHAZZANA, 0x03B8, 0x0A53, WAIT);
@@ -90545,15 +90545,15 @@ void Func0833 0x833 (var var0000) {
 	var var0009;
 	var var000A;
 
-	var0001 = 0xFFB0->find_nearby(0x03B5, 0x0014, MASK_NONE);
+	var0001 = FLICKEN->find_nearby(0x03B5, 0x0014, MASK_NONE);
 	if (var0000 == 0x0001) {
 		if (var0001) {
 			var0002 = var0001->get_object_position();
-			0xFFB0->si_path_run_usecode(var0002, PATH_SUCCESS, 0xFFB0->get_npc_object(), Func0450, true);
+			FLICKEN->si_path_run_usecode(var0002, PATH_SUCCESS, FLICKEN->get_npc_object(), Func0450, true);
 		}
 	}
 	if (var0000 == 0x000A) {
-		0xFFB0->set_schedule_type(WAIT);
+		FLICKEN->set_schedule_type(WAIT);
 		var0003 = UI_find_nearby_avatar(0x010F) & UI_find_nearby_avatar(0x0110);
 		var0004 = false;
 		for (var0007 in var0003 with var0005 to var0006) {
@@ -90566,7 +90566,7 @@ void Func0833 0x833 (var var0000) {
 			};
 			var0004 = true;
 		}
-		var0008 = script 0xFFB0 {
+		var0008 = script FLICKEN {
 			face west;
 			continue;
 			repeat 4 {
@@ -90580,9 +90580,9 @@ void Func0833 0x833 (var var0000) {
 		};
 	}
 	if (var0000 == 0x0002) {
-		0xFFB0->run_schedule();
+		FLICKEN->run_schedule();
 		AVATAR->clear_item_flag(DONT_MOVE);
-		var0009 = 0xFFB0->find_nearby(0x010F, 0x0014, MASK_NONE);
+		var0009 = FLICKEN->find_nearby(0x010F, 0x0014, MASK_NONE);
 		if (var0009) {
 			if (var0009->npc_nearby()) {
 				var0008 = script var0009 after 20 ticks {
@@ -105981,7 +105981,7 @@ var Func08F9 0x8F9 () {
 	if (var0001 == 0x000C) {
 		return true;
 	}
-	if (!0xFFB0->get_item_flag(MET)) {
+	if (!FLICKEN->get_item_flag(MET)) {
 		return true;
 	}
 	if (Func08F8(var0000, [0x08A3, 0x07B1], [0x08CE, 0x07DF]) || Func08F8(var0000, [0x0853, 0x0821], [0x087E, 0x083D])) {
