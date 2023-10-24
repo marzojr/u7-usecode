@@ -25140,10 +25140,10 @@ void Func0461 object#(0x461) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFF9F->show_npc_face(0x0000);
+	MIKOS->show_npc_face(0x0000);
 	var0000 = UI_part_of_day();
 	if (var0000 == NIGHT) {
-		var0001 = Func08FC(0xFF9F, ELYNOR);
+		var0001 = Func08FC(MIKOS, ELYNOR);
 		if (var0001) {
 			say("Mikos is lost in meditation at the Fellowship meeting and does not hear you.*");
 			abort;
@@ -68135,10 +68135,10 @@ void Func087B 0x87B () {
 		WILLIAM->say("\"The Fellowship has helped me to have more courage to deal with the unexpected terrors of life,\" says William.*");
 		WILLIAM->hide();
 	}
-	var0004 = Func08F7(0xFF9F);
+	var0004 = Func08F7(MIKOS);
 	if (var0004) {
-		0xFF9F->say("\"The Fellowship has helped me to have the firm hand that is necessary as the supervisor of the mine,\" says Mikos.*");
-		0xFF9F->hide();
+		MIKOS->say("\"The Fellowship has helped me to have the firm hand that is necessary as the supervisor of the mine,\" says Mikos.*");
+		MIKOS->hide();
 	}
 	var0005 = Func08F7(SPARK);
 	if (var0005) {
