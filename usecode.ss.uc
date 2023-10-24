@@ -50052,13 +50052,13 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 void Func0482 object#(0x482) () {
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@A metal man!@");
-		0xFF7E->Func07D1();
-		Func097F(0xFF7E, "@Who goes there?@", 0x0003);
-		0xFF7E->set_schedule_type(TALK);
+		GUARD12->Func07D1();
+		Func097F(GUARD12, "@Who goes there?@", 0x0003);
+		GUARD12->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF7E->run_schedule();
-		0xFF7E->clear_item_say();
+		GUARD12->run_schedule();
+		GUARD12->clear_item_say();
 		0xFED6->show_npc_face0(0x0000);
 		say("\"Halt! It is our duty to question thee. Dost thou serve Order or dost thou serve Chaos?\"");
 		converse (["I serve Order", "I serve Chaos"]) {
@@ -50077,7 +50077,7 @@ void Func0482 object#(0x482) () {
 
 			case "I serve Chaos" (remove):
 				say("\"Thanks to thee for thine identification.\"");
-				0xFF7E->set_schedule_type(IN_COMBAT);
+				GUARD12->set_schedule_type(IN_COMBAT);
 				0xFF7D->set_schedule_type(IN_COMBAT);
 				0xFF7C->set_schedule_type(IN_COMBAT);
 				0xFF7B->set_schedule_type(IN_COMBAT);
@@ -50087,7 +50087,7 @@ void Func0482 object#(0x482) () {
 				UI_remove_npc_face0();
 				UI_remove_npc_face1();
 				Func097F(AVATAR, "@I have heard enough.@", 0x0000);
-				Func097F(0xFF7E, "@Always serving.@", 0x0003);
+				Func097F(GUARD12, "@Always serving.@", 0x0003);
 				break;
 		}
 	}

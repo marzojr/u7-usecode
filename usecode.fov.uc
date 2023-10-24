@@ -30112,10 +30112,10 @@ void Func0482 object#(0x482) () {
 	var var000F;
 
 	if (event == DOUBLECLICK) {
-		0xFF7E->show_npc_face(0x0000);
+		BORIS->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFF7E->get_npc_object()->get_schedule_type();
+		var0002 = BORIS->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (gflags[0x0180]) {
 			add("strangers");
@@ -30140,9 +30140,9 @@ void Func0482 object#(0x482) () {
 				if (var0003) {
 					say("\"Well if it isn't Dupre! -Sir- Dupre now, is it?\"");
 					DUPRE->say("\"That it is, Boris.\"");
-					0xFF7E->say("\"Hmmm-- it seems to me thou dost have a tab still going here? Yes?\"");
+					BORIS->say("\"Hmmm-- it seems to me thou dost have a tab still going here? Yes?\"");
 					DUPRE->say("\"Oh? Do I?\"");
-					0xFF7E->say("\"Yes indeed! Let me see... I believe the total that thou dost owe is 74 gold pieces. I am afraid that thou must pay up before I can speak with thee or anyone else with thee.\"");
+					BORIS->say("\"Yes indeed! Let me see... I believe the total that thou dost owe is 74 gold pieces. I am afraid that thou must pay up before I can speak with thee or anyone else with thee.\"");
 					DUPRE->say("Dupre looks embarrassed. He turns to you. \"My friend, wilt thou help me out?\"");
 					if (Func090A()) {
 labelFunc0482_00E5:
@@ -30153,9 +30153,9 @@ labelFunc0482_00E5:
 								DUPRE->say("\"I thank thee, Avatar.\"");
 								say("You hand the gold over to Boris.");
 								gflags[0x0195] = false;
-								0xFF7E->say("\"'Tis a pleasure to do business with thee, Sir Dupre! And welcome to my pub!\"");
+								BORIS->say("\"'Tis a pleasure to do business with thee, Sir Dupre! And welcome to my pub!\"");
 								DUPRE->hide();
-								0xFF7E->show_npc_face(0x0000);
+								BORIS->show_npc_face(0x0000);
 							} else {
 								say("\"Hmmm, where did our gold go?\"*");
 								gflags[0x0195] = true;
@@ -30167,7 +30167,7 @@ labelFunc0482_00E5:
 							abort;
 						}
 					} else {
-						0xFF7E->say("\"Well, I wilt not be serving thee or speaking to thee until thy bill is paid!\"*");
+						BORIS->say("\"Well, I wilt not be serving thee or speaking to thee until thy bill is paid!\"*");
 						gflags[0x0195] = true;
 						abort;
 					}
@@ -30281,11 +30281,11 @@ labelFunc0482_00E5:
 				var000F = Func08F7(KATRINA);
 				if (var000F) {
 					KATRINA->say("\"That is because the Avatar is one my dearest friends.\"");
-					0xFF7E->say("\"Am I not one of thy dearest friends, Katrina?\"");
+					BORIS->say("\"Am I not one of thy dearest friends, Katrina?\"");
 					KATRINA->say("\"Thou art a flirt, Boris! Dost Magenta know how thou dost want to be dearest friends with the other women living on the island?\"");
-					0xFF7E->say("\"Thou dost torture me, Katrina!\" He laughs.");
+					BORIS->say("\"Thou dost torture me, Katrina!\" He laughs.");
 					KATRINA->hide();
-					0xFF7E->show_npc_face(0x0000);
+					BORIS->show_npc_face(0x0000);
 				}
 				remove("Katrina");
 				fallthrough;
@@ -30334,7 +30334,7 @@ labelFunc0482_00E5:
 		say("\"Good journey!\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF7E);
+		Func092E(BORIS);
 	}
 }
 
