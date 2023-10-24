@@ -27987,7 +27987,7 @@ void Func0476 object#(0x476) () {
 	var var0004;
 
 	if (event == DOUBLECLICK) {
-		0xFF8A->show_npc_face(0x0000);
+		CARLYN->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
 		var0002 = false;
@@ -28110,7 +28110,7 @@ void Func0476 object#(0x476) () {
 		}
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF8A);
+		Func092E(CARLYN);
 	}
 }
 
