@@ -10547,7 +10547,7 @@ void Func0404 object#(0x404) () {
 		var0007 = IOLO->get_npc_object()->is_dead();
 		var0008 = SHAMINO->get_npc_object()->is_dead();
 		var0009 = SPARK->get_npc_object()->is_dead();
-		var000A = 0xFF84->get_npc_object()->is_dead();
+		var000A = SPRELLIC->get_npc_object()->is_dead();
 		var000B = 0xFF83->get_npc_object()->is_dead();
 		var000C = 0xFF82->get_npc_object()->is_dead();
 		var000D = 0xFF81->get_npc_object()->is_dead();
@@ -28148,7 +28148,7 @@ void Func0477 object#(0x477) () {
 		} else {
 			say("\"What dost thou need?\" asks De Snel.");
 		}
-		var0004 = 0xFF84->is_dead();
+		var0004 = SPRELLIC->is_dead();
 		if (var0004) {
 			add("Sprellic");
 		}
@@ -28703,7 +28703,7 @@ void Func047A object#(0x47A) () {
 		var0005 = 0xFF83->get_npc_object()->is_dead();
 		var0006 = 0xFF82->get_npc_object()->is_dead();
 		var0007 = 0xFF81->get_npc_object()->is_dead();
-		var0008 = 0xFF84->get_npc_object()->is_dead();
+		var0008 = SPRELLIC->get_npc_object()->is_dead();
 		if (gflags[0x0165]) {
 			if (var0005 && (var0006 && var0007)) {
 				add("winnings");
@@ -28968,7 +28968,7 @@ void Func047B object#(0x47B) () {
 		var0002 = DAPHNE->get_npc_object()->get_schedule_type();
 		var0003 = Func08F7(OPHELIA);
 		var0004 = false;
-		var0005 = 0xFF84->get_npc_object()->is_dead();
+		var0005 = SPRELLIC->get_npc_object()->is_dead();
 		var0006 = 0xFF83->get_npc_object()->is_dead();
 		var0007 = 0xFF82->get_npc_object()->is_dead();
 		var0008 = 0xFF81->get_npc_object()->is_dead();
@@ -29156,7 +29156,7 @@ void Func047C object#(0x47C) () {
 	var var0007;
 
 	if (event == DOUBLECLICK) {
-		0xFF84->show_npc_face(0x0000);
+		SPRELLIC->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
 		var0002 = false;
@@ -29392,7 +29392,7 @@ void Func047C object#(0x47C) () {
 		say("\"Good day to thee, Avatar.\"");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF84);
+		Func092E(SPRELLIC);
 	}
 }
 
