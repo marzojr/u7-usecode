@@ -34065,7 +34065,7 @@ void Func0499 object#(0x499) () {
 	var var0005;
 
 	if (event == DOUBLECLICK) {
-		0xFF67->show_npc_face(0x0000);
+		MARIAH->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func0908();
 		add(["name", "job", "bye"]);
@@ -34088,7 +34088,7 @@ void Func0499 object#(0x499) () {
 					if (var0002) {
 						IOLO->say("\"Surely thou dost recognize thine old companion, Mariah?\"*");
 						IOLO->hide();
-						0xFF67->show_npc_face(0x0000);
+						MARIAH->show_npc_face(0x0000);
 					} else {
 						say("\"Hast thou already forgotten me, ",
 							var0001,
@@ -34105,7 +34105,7 @@ void Func0499 object#(0x499) () {
 					fallthrough;
 
 				case "spells":
-					Func08BB(0xFF67);
+					Func08BB(MARIAH);
 					fallthrough;
 
 				case "reagents":
@@ -34137,7 +34137,7 @@ void Func0499 object#(0x499) () {
 					if (var0002) {
 						IOLO->say("\"Surely thou dost recognize thine old companion, Mariah?\"*");
 						IOLO->hide();
-						0xFF67->say("\"Yes, dost thou not recognize me?\" She pauses, glaring at you. \"But who art thou, and where are my pastries?\"");
+						MARIAH->say("\"Yes, dost thou not recognize me?\" She pauses, glaring at you. \"But who art thou, and where are my pastries?\"");
 					} else {
 						say("\"Yes, thou mayest tell me thy name,\" she says, glancing around the building. \"Are not the many books beautiful?\"");
 					}
@@ -34181,7 +34181,7 @@ void Func0499 object#(0x499) () {
 
 				case "which day":
 					say("\"Why, today. Thou art in luck. Buy a spell.\"");
-					Func08BB(0xFF67);
+					Func08BB(MARIAH);
 					remove("which day");
 					fallthrough;
 
@@ -34200,7 +34200,7 @@ void Func0499 object#(0x499) () {
 		}
 	}
 	if (event == PROXIMITY) {
-		var0003 = 0xFF67->get_npc_object()->get_schedule_type();
+		var0003 = MARIAH->get_npc_object()->get_schedule_type();
 		var0004 = UI_die_roll(0x0001, 0x0004);
 		if (var0003 == LOITER) {
 			if (!gflags[0x0003]) {
@@ -34216,10 +34216,10 @@ void Func0499 object#(0x499) () {
 				if (var0004 == 0x0004) {
 					var0005 = "@Magic is in the air...@";
 				}
-				0xFF67->item_say(var0005);
+				MARIAH->item_say(var0005);
 			}
 		} else {
-			Func092E(0xFF67);
+			Func092E(MARIAH);
 		}
 	}
 }
@@ -72169,7 +72169,7 @@ void Func08BC 0x8BC (var var0000) {
 	}
 	var0009 = 0x0000;
 	var000A = 0x0001;
-	var000B = 0xFF67;
+	var000B = MARIAH;
 	say("\"What wouldst thou like to buy?\"");
 	while (var0001) {
 		var000C = Func090C(var0002);

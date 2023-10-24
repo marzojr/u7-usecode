@@ -936,7 +936,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [ANDRAL, BRENDANN, FLICKEN, CALADIN, CELLIA, SHAZZANA, KRAYG, LUTHER, LYDIA, SHMED, STANDARR, TEMPLAR, MARSTEN, SPEKTOR, LUCILLA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, ENSORCIO, ARGUS, BYRIN, DEVRA, BAIYANDA, BWUNDIAI, MWAERNO, 0xFF67, 0xFF66];
+			var0000 = [ANDRAL, BRENDANN, FLICKEN, CALADIN, CELLIA, SHAZZANA, KRAYG, LUTHER, LYDIA, SHMED, STANDARR, TEMPLAR, MARSTEN, SPEKTOR, LUCILLA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, ENSORCIO, ARGUS, BYRIN, DEVRA, BAIYANDA, BWUNDIAI, MWAERNO, GILWOYAI, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -51986,16 +51986,16 @@ void Func0499 object#(0x499) () {
 
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Hail, Gwani hunter!@");
-		0xFF67->Func07D1();
-		Func097F(0xFF67, "@Noo Koomba!@", 0x0003);
-		0xFF67->set_schedule_type(TALK);
+		GILWOYAI->Func07D1();
+		Func097F(GILWOYAI, "@Noo Koomba!@", 0x0003);
+		GILWOYAI->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF67->set_new_schedules([MIDNIGHT, MORNING, NOON], [SLEEP, EAT, WANDER], [0x03A6, 0x035F, 0x03A6, 0x035F, 0x03A6, 0x035F]);
-		0xFF67->run_schedule();
-		0xFF67->clear_item_say();
-		0xFF67->show_npc_face0(0x0000);
-		var0000 = 0xFF67->get_item_flag(MET);
+		GILWOYAI->set_new_schedules([MIDNIGHT, MORNING, NOON], [SLEEP, EAT, WANDER], [0x03A6, 0x035F, 0x03A6, 0x035F, 0x03A6, 0x035F]);
+		GILWOYAI->run_schedule();
+		GILWOYAI->clear_item_say();
+		GILWOYAI->show_npc_face0(0x0000);
+		var0000 = GILWOYAI->get_item_flag(MET);
 		if (var0000) {
 			say("\"Greetings again.\"");
 		} else {
@@ -52007,7 +52007,7 @@ void Func0499 object#(0x499) () {
 					say("\"Am still Gilwoyai.\"");
 				} else {
 					say("\"Am Gilwoyai, means @Of the Wind@.\"");
-					0xFF67->set_item_flag(MET);
+					GILWOYAI->set_item_flag(MET);
 				}
 				fallthrough;
 
@@ -52029,7 +52029,7 @@ void Func0499 object#(0x499) () {
 				UI_remove_npc_face1();
 				set_schedule_type(SHY);
 				Func097F(AVATAR, "@Go home now!@", 0x0000);
-				Func097F(0xFF67, "@Kill Ice Dragon!@", 0x0003);
+				Func097F(GILWOYAI, "@Kill Ice Dragon!@", 0x0003);
 				abort;
 		}
 	}
@@ -78831,7 +78831,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(BAIYANDA, 0x0436, 0x036B, WAIT);
 		Func09AC(BWUNDIAI, 0x0440, 0x0348, WAIT);
 		Func09AC(MWAERNO, 0x0479, 0x0354, WAIT);
-		Func09AC(0xFF67, 0x0404, 0x039B, WAIT);
+		Func09AC(GILWOYAI, 0x0404, 0x039B, WAIT);
 		Func09AC(0xFF66, 0x0438, 0x0353, WAIT);
 		0x0000->Func068C();
 	}
@@ -102838,7 +102838,7 @@ void Func08B7 0x8B7 () {
 	var0002 = [MORNING, EVENING, 8];
 	var0003 = [SLEEP, WANDER, WANDER];
 	0xFF66->get_npc_object()->set_new_schedules(var0002, var0003, var0000);
-	0xFF67->get_npc_object()->set_new_schedules(var0002, var0003, var0001);
+	GILWOYAI->get_npc_object()->set_new_schedules(var0002, var0003, var0001);
 }
 
 void Func08B8 0x8B8 () {
