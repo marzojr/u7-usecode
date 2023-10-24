@@ -35812,7 +35812,7 @@ void Func04A5 object#(0x4A5) () {
 	var var0005;
 
 	if (event == DOUBLECLICK) {
-		0xFF5B->show_npc_face(0x0000);
+		FRANK->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = false;
@@ -35860,7 +35860,7 @@ void Func04A5 object#(0x4A5) () {
 				if (var0003) {
 					DUPRE->say("\"Hey, I don't think --\"*");
 					DUPRE->hide();
-					0xFF5B->show_npc_face(0x0000);
+					FRANK->show_npc_face(0x0000);
 				}
 				say("\"Yes, from what I have been told, that Dupre has no will when confronted by a tankard of, well, anything.~~\"As a matter of fact, thou hast fairly poor taste in companions overall.\"");
 				add("companions");
@@ -35875,7 +35875,7 @@ void Func04A5 object#(0x4A5) () {
 				if (var0004) {
 					IOLO->say("\"Too much? What dost thou mean, too --\"*");
 					IOLO->hide();
-					0xFF5B->show_npc_face(0x0000);
+					FRANK->show_npc_face(0x0000);
 				}
 				say("\"His bows and crossbows just aren't of the quality that is worth the kind of gold he charges.\"~~He takes a step back.~~\"Gads! Thy breath could gag an ox. Thou shouldst consider taking better care of thy teeth, or thy fellows will leave thee.\"");
 				add("teeth");
@@ -35888,7 +35888,7 @@ void Func04A5 object#(0x4A5) () {
 				if (var0005) {
 					SHAMINO->say("\"Thou must be mad!\" Shamino turns to you. \"This rogue needs to be taught a lesson.\"*");
 					SHAMINO->hide();
-					0xFF5B->say("\"And thy friend, Shamino, ",
+					FRANK->say("\"And thy friend, Shamino, ",
 						var0000,
 						", has quite a bellicose temper.\"");
 					add("bellicose");
@@ -35911,7 +35911,7 @@ void Func04A5 object#(0x4A5) () {
 				if (var0003) {
 					DUPRE->say("\"Oh, this is too much!\"*");
 					DUPRE->hide();
-					0xFF5B->show_npc_face(0x0000);
+					FRANK->show_npc_face(0x0000);
 				}
 				remove("unschooled");
 				fallthrough;

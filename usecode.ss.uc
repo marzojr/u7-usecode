@@ -53522,10 +53522,10 @@ void Func04A5 object#(0x4A5) () {
 	var var0000;
 	var var0001;
 
-	if ((event == DEATH) && 0xFF5B->get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && PRISON2->get_item_flag(SI_TOURNAMENT)) {
 		var0000 = get_cont_items(0x0326, QUALITY_ANY, FRAME_ANY);
 		if (var0000) {
-			0xFF5B->clear_item_flag(SI_TOURNAMENT);
+			PRISON2->clear_item_flag(SI_TOURNAMENT);
 			UI_play_sound_effect(0x004C);
 			gflags[0x0234] = true;
 			var0001 = script var0000 after 2 ticks {
@@ -102548,7 +102548,7 @@ void Func08AF 0x8AF (var var0000, var var0001) {
 				} else {
 					var0006 = UI_update_last_created(var0003);
 				}
-				Func08B1(AVATAR, var0000, 0x0001, 0xFF5B);
+				Func08B1(AVATAR, var0000, 0x0001, PRISON2);
 				if (Func08B0(var0004, var0005, 0x0000)) {
 					// Need to make UCC optimize this
 					goto labelFunc08AF_018C;
@@ -104117,7 +104117,7 @@ void Func08CB 0x8CB () {
 	gflags[0x0008] = false;
 	gflags[0x0009] = false;
 	gflags[0x000A] = false;
-	0xFF5B->set_item_flag(SI_TOURNAMENT);
+	PRISON2->set_item_flag(SI_TOURNAMENT);
 	LORTHONDO->set_item_flag(SI_TOURNAMENT);
 	0xFF57->set_item_flag(SI_TOURNAMENT);
 	0xFF57->set_schedule_type(WAIT);
