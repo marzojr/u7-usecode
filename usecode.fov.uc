@@ -21959,7 +21959,7 @@ void Func044B object#(0x44B) () {
 		};
 		return;
 	}
-	0xFFB5->show_npc_face(0x0000);
+	NASTASSIA->show_npc_face(0x0000);
 	var0001 = false;
 	var0002 = false;
 	var0003 = false;

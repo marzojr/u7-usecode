@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [ANDRAL, 0xFF6A, 0xFFB0, CALADIN, CELLIA, SHAZZANA, KRAYG, LUTHER, LYDIA, 0xFFB5, 0xFFB2, 0xFFB1, MARSTEN, 0xFFB3, LUCILLA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [ANDRAL, 0xFF6A, 0xFFB0, CALADIN, CELLIA, SHAZZANA, KRAYG, LUTHER, LYDIA, SHMED, 0xFFB2, 0xFFB1, MARSTEN, 0xFFB3, LUCILLA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -8512,8 +8512,8 @@ void Func01DF shape#(0x1DF) () {
 				Func09AC(CANTRA, 0x00A0, 0x002E, WAIT);
 				CANTRA->remove_npc();
 				gflags[0x004A] = true;
-				0xFFB5->set_alignment(CHAOTIC);
-				0xFFB5->set_item_flag(SI_TOURNAMENT);
+				SHMED->set_alignment(CHAOTIC);
+				SHMED->set_item_flag(SI_TOURNAMENT);
 			} else {
 				Func0948(0x003C);
 			}
@@ -21576,8 +21576,8 @@ void Func0401 object#(0x401) () {
 					say("\"But Sir Shmed said that the Test is only for one, ",
 						var0001,
 						"! I cannot come with thee.\"");
-					Func094E(0xFFB5, "@Thou must enter alone, stranger.@");
-					Func097F(0xFFB5, "@Alone!@", 0x0000);
+					Func094E(SHMED, "@Thou must enter alone, stranger.@");
+					Func097F(SHMED, "@Alone!@", 0x0000);
 					Func097F(DUPRE, "@Be brave!@", 0x0000);
 					abort;
 				}
@@ -21915,8 +21915,8 @@ labelFunc0402_02F8:
 					say("\"And disregard the rules of the Test of Knighthood? ",
 						var0001,
 						", I am shocked.\"");
-					Func094E(0xFFB5, "@Thou must go alone.@");
-					Func097F(0xFFB5, "@Alone!@", 0x0000);
+					Func094E(SHMED, "@Thou must go alone.@");
+					Func097F(SHMED, "@Alone!@", 0x0000);
 					Func097F(SHAMINO, "@Shocked!@", 0x0002);
 					abort;
 				}
@@ -22252,14 +22252,14 @@ void Func0403 object#(0x403) () {
 
 			case "join":
 				if (gflags[0x0082] && (!gflags[0x004A])) {
-					if (Func0942(0xFFB5)) {
+					if (Func0942(SHMED)) {
 						say("\"But ",
 							var0001,
 							", the Guardian of the Test is standing right here. If thou desirest to cheat, thou shouldst at least do so\tcovertly...\"");
-						0xFFB5->show_npc_face1(0x0000);
+						SHMED->show_npc_face1(0x0000);
 						say("\"No cheating, stranger!\"");
 						UI_remove_npc_face1();
-						Func097F(0xFFB5, "@No cheating!@", 0x0002);
+						Func097F(SHMED, "@No cheating!@", 0x0002);
 					} else {
 						say("\"I cannot join thee, friend. Even if thou wouldst cheat at the Test, I cannot aid thee in so doing. I am thy true friend.\"");
 					}
@@ -41804,12 +41804,12 @@ void Func043F object#(0x43F) () {
 					}
 					say("\"Someone should question that weakling, and see if his guilt can be proven.\"");
 				}
-				if (LYDIA->get_item_flag(DEAD) || 0xFFB5->get_item_flag(DEAD)) {
+				if (LYDIA->get_item_flag(DEAD) || SHMED->get_item_flag(DEAD)) {
 					UI_push_answers();
 					if (LYDIA->get_item_flag(DEAD)) {
 						add("Was Lydia the traitor?");
 					}
-					if (0xFFB5->get_item_flag(DEAD)) {
+					if (SHMED->get_item_flag(DEAD)) {
 						add("Was Shmed the traitor?");
 					}
 					add("change subject");
@@ -43047,7 +43047,7 @@ void Func0443 object#(0x443) () {
 				fallthrough;
 
 			case "Shmed" (remove):
-				if (0xFFB5->get_item_flag(DEAD)) {
+				if (SHMED->get_item_flag(DEAD)) {
 					say("\"They say that Shmed was the traitor who sold our secrets to the Goblins.\"");
 					say("\"Mine heart tells me that they were wrong. Shmed was a coward, a fool, and a reprobate -- but not a traitor.\"");
 				} else {
@@ -44442,12 +44442,12 @@ labelFunc0445_0257:
 					say("\"Thou hast done us a valuable service by rooting out that miserable traitor, Simon. Although in the true sense of the word, he was merely a loyal Goblin, not a traitor... Bah! A pox on all Goblins!\"");
 				} else if (LYDIA->get_item_flag(DEAD)) {
 					say("\"Thou hast slain the traitor, Knight! Well done!");
-					if (0xFFB5->get_item_flag(DEAD)) {
+					if (SHMED->get_item_flag(DEAD)) {
 						say("\"Lydia must have been part of Shmed's secret conspiracy. But that no longer matters -- both of the Goblin spies are dead!\"");
 					} else {
 						say("\"The Goblins shall no more steal our secrets, eh!\"");
 					}
-				} else if (0xFFB5->get_item_flag(DEAD)) {
+				} else if (SHMED->get_item_flag(DEAD)) {
 					say("\"I must apologize to thee for the attack upon thee by the traitor, Shmed.\"");
 					say("\"I did not believe that there was a traitor, but this evidence proves it.\"");
 				} else {
@@ -46330,56 +46330,56 @@ void Func044B object#(0x44B) () {
 	var0001 = Func0994();
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Greetings, Guard!@");
-		0xFFB5->Func07D1();
+		SHMED->Func07D1();
 		if (gflags[0x0004]) {
-			0xFFB5->show_npc_face0(0x0000);
+			SHMED->show_npc_face0(0x0000);
 			say("\"It was horrible! I was a wolf! I know I was! I saw myself in a reflection on a puddle of water!\"");
-			0xFFB5->set_attack_mode(FLEE);
-			Func097F(0xFFB5, "@Aieee!!@", 0x0000);
+			SHMED->set_attack_mode(FLEE);
+			Func097F(SHMED, "@Aieee!!@", 0x0000);
 			abort;
 		} else if (!gflags[0x004A]) {
-			Func097F(0xFFB5, "@Greetings!@", 0x0002);
+			Func097F(SHMED, "@Greetings!@", 0x0002);
 		} else {
-			Func097F(0xFFB5, "@It cannot be!@", 0x0002);
+			Func097F(SHMED, "@It cannot be!@", 0x0002);
 		}
-		0xFFB5->set_schedule_type(TALK);
+		SHMED->set_schedule_type(TALK);
 	}
-	if ((event == DEATH) && 0xFFB5->get_item_flag(SI_TOURNAMENT)) {
-		0xFFB5->clear_item_say();
+	if ((event == DEATH) && SHMED->get_item_flag(SI_TOURNAMENT)) {
+		SHMED->clear_item_say();
 		if (!gflags[0x00C5]) {
-			0xFFB5->show_npc_face0(0x0000);
+			SHMED->show_npc_face0(0x0000);
 			say("\"But I don't understand. How didst thou survive the Knight's Test? We fixed the place with traps to be absolutely fatal!\"");
 			say("\"I did not want to do it. She seduced me into trying to kill thee! Yet even now, I cannot betray her...\"");
 		}
-		0xFFB5->clear_item_flag(SI_TOURNAMENT);
-		Func097F(0xFFB5, "@My love!@", 0x0000);
+		SHMED->clear_item_flag(SI_TOURNAMENT);
+		Func097F(SHMED, "@My love!@", 0x0000);
 		Func097F(AVATAR, "@Die with dishonor!@", 0x0005);
-		0xFFB5->reduce_health(0x0037, NORMAL_DAMAGE);
+		SHMED->reduce_health(0x0037, NORMAL_DAMAGE);
 		abort;
 	}
 	if (event == STARTED_TALKING) {
-		0xFFB5->run_schedule();
-		0xFFB5->clear_item_say();
+		SHMED->run_schedule();
+		SHMED->clear_item_say();
 		var0002 = false;
 		if (var0001 == 0x000C) {
 			var0002 = true;
 		}
-		0xFFB5->show_npc_face0(0x0000);
+		SHMED->show_npc_face0(0x0000);
 		if (gflags[0x004A]) {
 			say("\"But I don't understand. How didst thou survive the Knight's Test? We fixed the place with traps to be absolutely fatal!\"");
 			say("\"I did not want to do it. She seduced me into trying to kill thee! Yet even now, I cannot betray her...\"");
-			Func09AD(0xFFB5);
-			0xFFB5->set_item_flag(SI_TOURNAMENT);
-			Func097F(0xFFB5, "@Take this!@", 0x0000);
+			Func09AD(SHMED);
+			SHMED->set_item_flag(SI_TOURNAMENT);
+			Func097F(SHMED, "@Take this!@", 0x0000);
 			gflags[0x00C5] = true;
 			abort;
 		}
-		var0003 = 0xFFB5->get_item_flag(MET);
+		var0003 = SHMED->get_item_flag(MET);
 		if (var0003) {
 			say("\"Hello again.\"");
 		} else {
 			say("\"My name is Shmed. I am a Knight of Monitor, at thy service...\"");
-			0xFFB5->set_item_flag(MET);
+			SHMED->set_item_flag(MET);
 			var0004 = false;
 		}
 		if (gflags[0x0080]) {
@@ -46419,19 +46419,19 @@ void Func044B object#(0x44B) () {
 						say("\"Dost thou wish to test thy mettle by taking the Test of Knighthood?\"");
 						var0005 = Func0955();
 						if (var0005) {
-							var0006 = 0xFFB5->get_object_position();
+							var0006 = SHMED->get_object_position();
 							var0007 = var0006[0x0001];
 							var0008 = var0006[0x0002];
 							if (!((var0007 > 0x0319) && ((var0007 < 0x0347) && ((var0008 > 0x08BD) && (var0008 < 0x08E2))))) {
-								0xFFB5->show_npc_face0(0x0000);
+								SHMED->show_npc_face0(0x0000);
 								say("\"Come to the building just south of the entrance to Knight's Test. There I can properly attend to thee before the test.\"");
 								UI_remove_npc_face0();
 								UI_remove_npc_face1();
 								AVATAR->item_say("@Farewell.@");
-								Func097F(0xFFB5, "@See thee there...@", 0x0002);
+								Func097F(SHMED, "@See thee there...@", 0x0002);
 								abort;
 							}
-							0xFFB5->show_npc_face0(0x0000);
+							SHMED->show_npc_face0(0x0000);
 							say("\"Pray tell, what be the password?\"");
 							AVATAR->show_npc_face1(0x0000);
 							0x0001->set_conversation_slot();
@@ -46445,11 +46445,11 @@ void Func044B object#(0x44B) () {
 									Func094E(SELINA, "@Then he cannot take this Test! I refuse to leave!@");
 									0x0000->set_conversation_slot();
 									say("\"I cannot change the rules of the Test. Therefore, I cannot admit thee, stranger.\"");
-									Func097F(0xFFB5, "@Good-bye.@", 0x0000);
+									Func097F(SHMED, "@Good-bye.@", 0x0000);
 									abort;
 								}
 								gflags[0x0082] = true;
-								Func09AC(0xFFB5, -1, 0, LOITER);
+								Func09AC(SHMED, -1, 0, LOITER);
 								var0009 = Func0992(DUPRE, "@Couldn't we wait at the pub in town?@", 0x0000, false);
 								if (var0009 != AVATAR) {
 									if (UI_get_array_size(UI_get_party_list()) > 0x0002) {
@@ -46474,7 +46474,7 @@ void Func044B object#(0x44B) () {
 								}
 							}
 							AVATAR->clear_item_flag(INVISIBLE);
-							var0010 = 0xFFB5->find_nearby(0x020A, 0x0064, MASK_NONE);
+							var0010 = SHMED->find_nearby(0x020A, 0x0064, MASK_NONE);
 							var0011 = 0x0000;
 							for (var0014 in var0010 with var0012 to var0013) {
 								if (var0014->get_item_quality() == 0x0048) {
@@ -46517,15 +46517,15 @@ void Func044B object#(0x44B) () {
 							var0015 = AVATAR->add_cont_items(0x0001, 0x0293, QUALITY_ANY, 0x0000, false);
 							var0015 = AVATAR->add_cont_items(0x0001, 0x0239, QUALITY_ANY, 0x0000, false);
 							// BUG: This should use PATH_SUCCESS instead of BG_PATH_SUCCESS.
-							0xFFB5->si_path_run_usecode([0x0339, 0x08D7, 0x0000], BG_PATH_SUCCESS, AVATAR, Func0739, true);
-							Func097F(0xFFB5, "@Follow me...@", 0x0002);
+							SHMED->si_path_run_usecode([0x0339, 0x08D7, 0x0000], BG_PATH_SUCCESS, AVATAR, Func0739, true);
+							Func097F(SHMED, "@Follow me...@", 0x0002);
 							Func097F(AVATAR, "@Lead onwards...@", 0x0005);
 							AVATAR->set_item_flag(DONT_MOVE);
 							UI_end_conversation();
 							abort;
 						}
 						say("\"Harrumph! Perhaps when thou hast found a bit of courage!\"");
-						Func097F(0xFFB5, "@Be on thy way then!@", 0x0003);
+						Func097F(SHMED, "@Be on thy way then!@", 0x0003);
 						abort;
 					} else {
 						say("\"If thou dost meet me at the Place of the Test, thou canst take the Test of Knighthood.\"");
@@ -46539,7 +46539,7 @@ void Func044B object#(0x44B) () {
 				UI_remove_npc_face0();
 				UI_remove_npc_face1();
 				Func097F(AVATAR, "@Farewell.@", 0x0000);
-				Func097F(0xFFB5, "@On thy way, then.@", 0x0002);
+				Func097F(SHMED, "@On thy way, then.@", 0x0002);
 				return;
 		}
 	}
@@ -51503,12 +51503,12 @@ void Func0496 object#(0x496) () {
 					}
 					add(["Luther", "List Field"]);
 					if ((!gflags[0x0038]) && (!gflags[0x0092])) {
-						if (LYDIA->get_item_flag(DEAD) || 0xFFB5->get_item_flag(DEAD)) {
+						if (LYDIA->get_item_flag(DEAD) || SHMED->get_item_flag(DEAD)) {
 							UI_push_answers();
 							if (LYDIA->get_item_flag(DEAD)) {
 								add("Was Lydia the traitor?");
 							}
-							if (0xFFB5->get_item_flag(DEAD)) {
+							if (SHMED->get_item_flag(DEAD)) {
 								add("Was Shmed the traitor?");
 							}
 							add("change subject");
@@ -75012,7 +75012,7 @@ void Func0739 object#(0x739) () {
 		abort;
 	}
 	if (event == PROXIMITY) {
-		0xFFB5->si_path_run_usecode([0x0339, 0x08C4, 0x0000], EGG, 0xFFB5, Func0739, true);
+		SHMED->si_path_run_usecode([0x0339, 0x08C4, 0x0000], EGG, SHMED, Func0739, true);
 		Func097F(AVATAR, "@To the test!@", 0x0000);
 		abort;
 	}
@@ -75025,8 +75025,8 @@ void Func0739 object#(0x739) () {
 		var0000 = script AVATAR {
 			face west;
 		};
-		0xFFB5->set_schedule_type(STANDTHERE);
-		Func097F(0xFFB5, "@To the test!@", 0x0000);
+		SHMED->set_schedule_type(STANDTHERE);
+		Func097F(SHMED, "@To the test!@", 0x0000);
 		abort;
 	}
 	if (event == PATH_SUCCESS) {
@@ -75037,7 +75037,7 @@ void Func0739 object#(0x739) () {
 			UI_play_sound_effect(0x0020);
 			var0006 = Func09AB(0x0178, 0x000E, 0x0048, true, var0005);
 		}
-		Func097F(0xFFB5, "@heh, heh...@", 0x0000);
+		Func097F(SHMED, "@heh, heh...@", 0x0000);
 		var0006 = script item after 3 ticks {
 			nohalt;
 			call Func0739;
@@ -78754,7 +78754,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(KRAYG, 0x0404, 0x0A23, WAIT);
 		Func09AC(LUTHER, 0x0412, 0x0A27, WAIT);
 		Func09AC(LYDIA, 0x0415, 0x0A2B, WAIT);
-		Func09AC(0xFFB5, 0x0433, 0x0A77, WAIT);
+		Func09AC(SHMED, 0x0433, 0x0A77, WAIT);
 		Func09AC(0xFFB2, 0x0402, 0x0A82, WAIT);
 		Func09AC(0xFFB1, 0x0407, 0x0A47, WAIT);
 		Func09AC(MARSTEN, 0x0427, 0x09C7, WAIT);
@@ -79622,9 +79622,9 @@ void Func07E2 object#(0x7E2) () {
 			}
 		}
 		Func097F(AVATAR, "@I made it!@", 0x0002);
-		Func097F(0xFFB5, "@Thou didst survive?@", 0x000A);
-		0xFFB5->set_schedule_type(TALK);
-		Func09AC(0xFFB5, 0x0337, 0x08C8, TALK);
+		Func097F(SHMED, "@Thou didst survive?@", 0x000A);
+		SHMED->set_schedule_type(TALK);
+		Func09AC(SHMED, 0x0337, 0x08C8, TALK);
 	}
 	if (var0000 == 0x0003) {
 		var000A = Func09A1(0x0212);
@@ -102736,7 +102736,7 @@ void Func08B3 0x8B3 (var var0000) {
 
 	abort;
 	// Dead code
-	var0001 = 0xFFB5->find_nearby(0x0320, 0x0064, MASK_NONE);
+	var0001 = SHMED->find_nearby(0x0320, 0x0064, MASK_NONE);
 	var0002 = 0x0000;
 	for (var0005 in var0001 with var0003 to var0004) {
 		if (var0005->get_item_quality() == 0x0000) {
