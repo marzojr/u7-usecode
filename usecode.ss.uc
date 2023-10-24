@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [ANDRAL, 0xFF6A, FLICKEN, CALADIN, CELLIA, SHAZZANA, KRAYG, LUTHER, LYDIA, SHMED, STANDARR, TEMPLAR, MARSTEN, SPEKTOR, LUCILLA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, ENSORCIO, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [ANDRAL, 0xFF6A, FLICKEN, CALADIN, CELLIA, SHAZZANA, KRAYG, LUTHER, LYDIA, SHMED, STANDARR, TEMPLAR, MARSTEN, SPEKTOR, LUCILLA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, ENSORCIO, ARGUS, BYRIN, DEVRA, BAIYANDA, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -50124,15 +50124,15 @@ void Func048F object#(0x48F) () {
 
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Greetings@");
-		Func097F(0xFF71, "@We knew thou would come.@", 0x0003);
-		0xFF71->set_schedule_type(TALK);
+		Func097F(BAIYANDA, "@We knew thou would come.@", 0x0003);
+		BAIYANDA->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF71->run_schedule();
-		0xFF71->clear_item_say();
-		0xFF71->show_npc_face0(0x0000);
+		BAIYANDA->run_schedule();
+		BAIYANDA->clear_item_say();
+		BAIYANDA->show_npc_face0(0x0000);
 		var0000 = Func097D(PARTY, 0x0001, 0x032A, 0x0009, 0x0002);
-		var0001 = 0xFF71->get_item_flag(MET);
+		var0001 = BAIYANDA->get_item_flag(MET);
 		if (var0001) {
 			say("\"We meet again.\"");
 		} else {
@@ -50149,7 +50149,7 @@ void Func048F object#(0x48F) () {
 
 			case "name" (remove):
 				say("\"I am Baiyanda, mate of Mwaerno and healer for Gwani people.\"");
-				0xFF71->set_item_flag(MET);
+				BAIYANDA->set_item_flag(MET);
 				add(["Mwaerno", "healer"]);
 				fallthrough;
 
@@ -50300,7 +50300,7 @@ void Func048F object#(0x48F) () {
 				UI_remove_npc_face0();
 				UI_remove_npc_face1();
 				Func097F(AVATAR, "@I thank thee.@", 0x0000);
-				Func097F(0xFF71, "@Very good.@", 0x0003);
+				Func097F(BAIYANDA, "@Very good.@", 0x0003);
 				break;
 		}
 	}
@@ -50620,7 +50620,7 @@ void Func0493 object#(0x493) () {
 				fallthrough;
 
 			case "Baiyanda" (remove):
-				var0003 = 0xFF71->get_item_flag(DEAD);
+				var0003 = BAIYANDA->get_item_flag(DEAD);
 				if (var0003) {
 					say("\"I not see her in long time! I miss her lot.\"");
 				} else {
@@ -50630,7 +50630,7 @@ void Func0493 object#(0x493) () {
 
 			case "lessons" (remove):
 				say("\"Mother tells me the stories of the old days. She also teach me language of Men. She say Gwani very good at learn languages. Especially young ones.\"");
-				var0003 = 0xFF71->get_item_flag(DEAD);
+				var0003 = BAIYANDA->get_item_flag(DEAD);
 				if (!var0003) {
 					say("\"Baiyanda teach me about plants and things.\"");
 				}
@@ -78826,7 +78826,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(DEVRA, 0x04F8, 0x08A6, WAIT);
 		WILFRED->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, NIGHT], [SLEEP, EAT, TALK, LOITER, EAT], [0x0516, 0x08F7, 0x04F7, 0x08CC, 0x050D, 0x08B6, 0x0516, 0x08A2, 0x04F7, 0x08CC]);
 		WILFRED->run_schedule();
-		Func09AC(0xFF71, 0x0436, 0x036B, WAIT);
+		Func09AC(BAIYANDA, 0x0436, 0x036B, WAIT);
 		Func09AC(0xFF70, 0x0440, 0x0348, WAIT);
 		Func09AC(0xFF6F, 0x0479, 0x0354, WAIT);
 		Func09AC(0xFF67, 0x0404, 0x039B, WAIT);

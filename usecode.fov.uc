@@ -6690,7 +6690,7 @@ void Func02F2 shape#(0x2F2) () {
 	}
 	if (event == SCRIPTED) {
 		gflags[0x01AA] = true;
-		var0005 = [0xFF71, 0xFF70, MARKHAM, 0xFF6F, 0xFF6E, 0xFF6D, HORANCE];
+		var0005 = [MORDRA, 0xFF70, MARKHAM, 0xFF6F, 0xFF6E, 0xFF6D, HORANCE];
 		for (var0008 in var0005 with var0006 to var0007) {
 			var0008->clear_item_flag(ASLEEP);
 			var0008->set_schedule_type(WAIT);
@@ -32291,7 +32291,7 @@ void Func048F object#(0x48F) () {
 	var var0014;
 
 	if (event == DOUBLECLICK) {
-		0xFF71->show_npc_face(0x0000);
+		MORDRA->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func0908();
 		var0002 = false;
@@ -32301,7 +32301,7 @@ void Func048F object#(0x48F) () {
 		var0006 = UI_part_of_day();
 		var0007 = false;
 		var0008 = false;
-		var0009 = 0xFF71->get_schedule_type();
+		var0009 = MORDRA->get_schedule_type();
 		if (!gflags[0x01B7]) {
 			say("The old, ghostly woman hums the tune to an ancient ballad and smiles up at you. This old woman brings to mind every grandmother you've ever seen.~~Apparently she is not entirely oblivious to your presence. However, when you speak to her, it seems as if your words fall on deaf ears. She looks puzzled for a moment, then moves her arms in magical passes. You recognize the words to be a variant of the Seance spell.");
 			gflags[0x01B7] = true;
@@ -69109,7 +69109,7 @@ void Func088B 0x88B () {
 	};
 	0xFF6D->remove_from_party();
 	0xFF6D->set_schedule_type(WAIT);
-	var0006 = [0xFF6D, 0xFF71, TRENT, 0xFF70, MARKHAM, 0xFF6E, 0xFF6F];
+	var0006 = [0xFF6D, MORDRA, TRENT, 0xFF70, MARKHAM, 0xFF6E, 0xFF6F];
 	for (var0009 in var0006 with var0007 to var0008) {
 		var0009->remove_npc();
 	}
@@ -72571,7 +72571,7 @@ void Func08C1 0x8C1 () {
 	0xFF70->show_npc_face(0x0001);
 	say("\"It was terrible, but the worst part was being away from mine husband. The whole time I was there with Horance, I felt like a hollow shell of a person. I must be with Trent to be whole again.\"*");
 	0xFF70->hide();
-	0xFF71->say("\"Yes, thou art quite right. ",
+	MORDRA->say("\"Yes, thou art quite right. ",
 		var0000,
 		", she must needs be taken to her husband, swiftly. I trust that thou wilt do so.\" She leaves the statement hanging and says her goodbyes to Rowena.*");
 	abort;
@@ -72589,18 +72589,18 @@ void Func08C2 0x8C2 () {
 	say("\"Well, hello, Mayor Forsythe. Thou has finally decided to assist in the salvation of our town.\" She gives him a pointed look.*");
 	0xFF6D->say("\"Look here, I wasn't the one who gave that fool recipe to Caine, now was I?\"*");
 	0xFF6D->hide();
-	0xFF71->say("\"That fool recipe just got rid of Horance for us.\" Mistress Mordra speaks through clenched teeth.*");
+	MORDRA->say("\"That fool recipe just got rid of Horance for us.\" Mistress Mordra speaks through clenched teeth.*");
 	0xFF6D->say("\"Hmmph. Thou hast taken thy sweet time, madam. And now I am off to jump in a well.\"*");
 	0xFF6D->hide();
-	0xFF71->say("\"Ignorant fool!\"*");
+	MORDRA->say("\"Ignorant fool!\"*");
 	0xFF6D->say("\"Old biddy!\"*");
 	0xFF6D->hide();
-	0xFF71->say("\"Thou wilt regret that, Toad.\" Fire flares in the depths of her eyes and electricity crackles in her hair. She lifts her arms as if to cast some dreadful spell, but Forsythe whimpers and hides behind you. She sees the look on your face and slowly lowers her arms. The flames and lightning flicker, and die.~~\"Forgive my behavior, ",
+	MORDRA->say("\"Thou wilt regret that, Toad.\" Fire flares in the depths of her eyes and electricity crackles in her hair. She lifts her arms as if to cast some dreadful spell, but Forsythe whimpers and hides behind you. She sees the look on your face and slowly lowers her arms. The flames and lightning flicker, and die.~~\"Forgive my behavior, ",
 		var0000,
 		". What was that about a well.\" You explain that Forsythe has volunteered to sacrifice himself for the spirits of the others. She looks him in the eyes. He brushes himself off and stands up straight. \"I didst not think that thou had it in thee, Mayor. I am in thy debt.\"*");
 	0xFF6D->say("\"Yes, well. Thou art welcome, I guess.\" He looks as if his dignity has been somewhat replenished.*");
 	0xFF6D->hide();
-	0xFF71->say("\"I suppose thou hadst better get thee hence, then. Fare thee well, Forsythe. 'Tis not all that bad, roaming the ether. At least not once thou becomest accustomed to it.\"~~She turns to you. \"Goodbye, ",
+	MORDRA->say("\"I suppose thou hadst better get thee hence, then. Fare thee well, Forsythe. 'Tis not all that bad, roaming the ether. At least not once thou becomest accustomed to it.\"~~She turns to you. \"Goodbye, ",
 		var0001,
 		". If thou art successful, I will not see thee again. May thy fortunes be good.*\"");
 	abort;
