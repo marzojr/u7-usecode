@@ -34248,7 +34248,7 @@ void Func049A object#(0x49A) () {
 	var var000E;
 
 	if (event == DOUBLECLICK) {
-		0xFF66->show_npc_face(0x0000);
+		GROD->show_npc_face(0x0000);
 		add(["name", "job", "Fellowship", "bye"]);
 		var0000 = Func08F7(IOLO);
 		var0001 = Func08F7(SPARK);
@@ -34256,7 +34256,7 @@ void Func049A object#(0x49A) () {
 		var0003 = Func08F7(0xFF24);
 		var0004 = Func0909();
 		var0005 = Func0908();
-		0xFF66->get_npc_object()->set_alignment(EVIL);
+		GROD->get_npc_object()->set_alignment(EVIL);
 		if (!gflags[0x02BE]) {
 			say("The troll snarls at you, obviously displeased at your presence.");
 			gflags[0x02BE] = true;
@@ -34285,12 +34285,12 @@ void Func049A object#(0x49A) () {
 								var0008,
 								" sarcastically.*");
 							0xFF10->hide();
-							0xFF66->show_npc_face(0x0000);
+							GROD->show_npc_face(0x0000);
 						}
 						if (var0002 && var0003) {
 							0xFF24->say("\"Now, now, Anton, the nice person was simply answering a question.\"*");
 							0xFF24->hide();
-							0xFF66->show_npc_face(0x0000);
+							GROD->show_npc_face(0x0000);
 						}
 					} else {
 						say("\"Good. I do my job good!\"");
@@ -34318,7 +34318,7 @@ void Func049A object#(0x49A) () {
 				if (var0001) {
 					SPARK->say("Spark's eyes light up.~\"Torture? Wow! He quickly looks at you and changes expressions.~~ \"I, er, mean, that is very awful.\"*");
 					SPARK->hide();
-					0xFF66->show_npc_face(0x0000);
+					GROD->show_npc_face(0x0000);
 				}
 				var000B = UI_wearing_fellowship();
 				if (var000B) {
@@ -34337,7 +34337,7 @@ void Func049A object#(0x49A) () {
 							0xFF10->hide();
 							0xFF24->say("\"I thank thee,\" he says to the other.*");
 							0xFF24->hide();
-							0xFF66->say("\"Go ahead,\" says Grod.*");
+							GROD->say("\"Go ahead,\" says Grod.*");
 							var000D = UI_add_party_items(0x0001, 0x026E, QUALITY_ANY, FRAME_ANY, true);
 							if (var000D) {
 								say("He hands you a whip.");
@@ -34389,7 +34389,7 @@ void Func049A object#(0x49A) () {
 							"?\" he says, smiling.");
 						0xFF24->hide();
 					}
-					0xFF66->show_npc_face(0x0000);
+					GROD->show_npc_face(0x0000);
 				}
 				remove("prisoners");
 				fallthrough;
@@ -34404,7 +34404,7 @@ void Func049A object#(0x49A) () {
 						var0005,
 						". We must command him to stop!\"*");
 					IOLO->hide();
-					0xFF66->show_npc_face(0x0000);
+					GROD->show_npc_face(0x0000);
 					if (var0003) {
 						say("\"I try make him stop. But he talk and talk. You try? Maybe he stop.\"");
 					}
@@ -44298,7 +44298,7 @@ void Func04DC object#(0x4DC) () {
 		var0000 = Func0909();
 		var0001 = Func0908();
 		var0002 = Func08F7(0xFF10);
-		var0003 = Func08F7(0xFF66);
+		var0003 = Func08F7(GROD);
 		var0004 = false;
 		add(["name", "job", "Fellowship", "bye"]);
 		if (gflags[0x02E2]) {
@@ -44398,8 +44398,8 @@ void Func04DC object#(0x4DC) () {
 					say("\"Oh, just that I have been impersonating thee for some time now to take items from shopkeepers without paying for them. Well, -had- been actually. Now I am being properly castigated for it.\"");
 					if (var0003) {
 						say("*");
-						0xFF66->say("\"I thank thee.\"*");
-						0xFF66->hide();
+						GROD->say("\"I thank thee.\"*");
+						GROD->hide();
 						0xFF24->say("\"Thou art welcome.\" He nods.*");
 					}
 				}
@@ -47036,7 +47036,7 @@ void Func04F0 object#(0x4F0) () {
 		0xFF10->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func08F7(0xFF24);
-		var0002 = Func08F7(0xFF66);
+		var0002 = Func08F7(GROD);
 		var0003 = false;
 		var0004 = false;
 		add(["name", "job", "bye"]);
@@ -47073,8 +47073,8 @@ void Func04F0 object#(0x4F0) () {
 				say("\"What kind of bloody stupid question is that? I am in the prison! What kind of job could I possibly have?\"");
 				if (var0002) {
 					say("*");
-					0xFF66->say("\"Yeah, stupid question.\"");
-					0xFF66->hide();
+					GROD->say("\"Yeah, stupid question.\"");
+					GROD->hide();
 				}
 				if (var0001) {
 					say("*");
@@ -47087,8 +47087,8 @@ void Func04F0 object#(0x4F0) () {
 					0xFF24->hide();
 					if (var0002) {
 						say("Anton turns to the troll.~~\"I did?\"*");
-						0xFF66->say("The troll nods.*");
-						0xFF66->hide();
+						GROD->say("The troll nods.*");
+						GROD->hide();
 						0xFF10->show_npc_face(0x0000);
 					}
 					say("\"Oh, well, then. Carry on!\"*");

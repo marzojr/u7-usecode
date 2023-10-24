@@ -936,7 +936,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [ANDRAL, BRENDANN, FLICKEN, CALADIN, CELLIA, SHAZZANA, KRAYG, LUTHER, LYDIA, SHMED, STANDARR, TEMPLAR, MARSTEN, SPEKTOR, LUCILLA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, ENSORCIO, ARGUS, BYRIN, DEVRA, BAIYANDA, BWUNDIAI, MWAERNO, GILWOYAI, 0xFF66];
+			var0000 = [ANDRAL, BRENDANN, FLICKEN, CALADIN, CELLIA, SHAZZANA, KRAYG, LUTHER, LYDIA, SHMED, STANDARR, TEMPLAR, MARSTEN, SPEKTOR, LUCILLA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, ENSORCIO, ARGUS, BYRIN, DEVRA, BAIYANDA, BWUNDIAI, MWAERNO, GILWOYAI, KAPYUNDI];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -50512,7 +50512,7 @@ void Func0492 object#(0x492) () {
 				fallthrough;
 
 			case "Kapyundi" (remove):
-				var0001 = 0xFF66->get_item_flag(DEAD);
+				var0001 = KAPYUNDI->get_item_flag(DEAD);
 				if (var0001) {
 					say("\"The Trapper killed him. He was great hunter. He fought fiercely for his life and his people. My heart burn at loss of him but he live forever in my memory.\"");
 				} else {
@@ -52042,14 +52042,14 @@ void Func049A object#(0x49A) () {
 
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Hail, Gwani!@");
-		Func097F(0xFF66, "@Noocha Ta, Avatar!@", 0x0003);
-		0xFF66->set_schedule_type(TALK);
+		Func097F(KAPYUNDI, "@Noocha Ta, Avatar!@", 0x0003);
+		KAPYUNDI->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF66->run_schedule();
-		0xFF66->clear_item_say();
-		0xFF66->show_npc_face0(0x0000);
-		var0000 = 0xFF66->get_item_flag(MET);
+		KAPYUNDI->run_schedule();
+		KAPYUNDI->clear_item_say();
+		KAPYUNDI->show_npc_face0(0x0000);
+		var0000 = KAPYUNDI->get_item_flag(MET);
 		if (var0000) {
 			say("\"Greetings, great hunter.\"");
 		} else {
@@ -52058,7 +52058,7 @@ void Func049A object#(0x49A) () {
 		converse (["name", "hunt", "bye"]) {
 			case "name" (remove):
 				say("\"Me Kapyundi, mean @little glacier@. Me son of Yenani and Myauri.\"");
-				0xFF66->set_item_flag(MET);
+				KAPYUNDI->set_item_flag(MET);
 				fallthrough;
 
 			case "hunt" (remove):
@@ -52089,7 +52089,7 @@ void Func049A object#(0x49A) () {
 				UI_remove_npc_face0();
 				UI_remove_npc_face1();
 				Func097F(AVATAR, "@Safe journey to thee.@", 0x0000);
-				Func097F(0xFF66, "@Good luck.@", 0x0003);
+				Func097F(KAPYUNDI, "@Good luck.@", 0x0003);
 				break;
 		}
 	}
@@ -78832,7 +78832,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(BWUNDIAI, 0x0440, 0x0348, WAIT);
 		Func09AC(MWAERNO, 0x0479, 0x0354, WAIT);
 		Func09AC(GILWOYAI, 0x0404, 0x039B, WAIT);
-		Func09AC(0xFF66, 0x0438, 0x0353, WAIT);
+		Func09AC(KAPYUNDI, 0x0438, 0x0353, WAIT);
 		0x0000->Func068C();
 	}
 }
@@ -102837,7 +102837,7 @@ void Func08B7 0x8B7 () {
 	// BUG: 8 is not a valid time. Maybe it was meant to be MIDNIGHT?
 	var0002 = [MORNING, EVENING, 8];
 	var0003 = [SLEEP, WANDER, WANDER];
-	0xFF66->get_npc_object()->set_new_schedules(var0002, var0003, var0000);
+	KAPYUNDI->get_npc_object()->set_new_schedules(var0002, var0003, var0000);
 	GILWOYAI->get_npc_object()->set_new_schedules(var0002, var0003, var0001);
 }
 
