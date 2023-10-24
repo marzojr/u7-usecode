@@ -53082,17 +53082,17 @@ void Func04A1 object#(0x4A1) () {
 	if (event == PROXIMITY) {
 		var0003 = UI_die_roll(0x0001, 0x0003);
 		if (var0003 == 0x0001) {
-			0xFF5F->item_say("@Healing potions!@");
+			JAIL_02->item_say("@Healing potions!@");
 		}
 		if (var0003 == 0x0002) {
-			0xFF5F->item_say("@Food!@");
+			JAIL_02->item_say("@Food!@");
 		}
 		if (var0003 == 0x0003) {
-			0xFF5F->item_say("@Bandages!@");
+			JAIL_02->item_say("@Bandages!@");
 		}
 	}
 	if (event == DOUBLECLICK) {
-		0xFF5F->Func07D1();
+		JAIL_02->Func07D1();
 		0xFED6->show_npc_face0(0x0000);
 		say("\"Greetings, felon!\"");
 		say("\"Art thou in need of food or healing?\"");

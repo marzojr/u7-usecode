@@ -35160,7 +35160,7 @@ void Func04A1 object#(0x4A1) () {
 	var var0007;
 
 	if (event == DOUBLECLICK) {
-		0xFF5F->show_npc_face(0x0000);
+		CHAD->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = "Avatar";
@@ -35206,7 +35206,7 @@ void Func04A1 object#(0x4A1) () {
 					if (var0005) {
 						SHAMINO->say("\"Thou art a fool! Cannot thy feeble eyes see this is the Avatar?\"*");
 						SHAMINO->hide();
-						0xFF5F->say("\"Yes, yes! I can see that,\" he laughs. \"Then I must be Iolo!\"*");
+						CHAD->say("\"Yes, yes! I can see that,\" he laughs. \"Then I must be Iolo!\"*");
 						var0006 = Func08F7(IOLO);
 						SHAMINO->show_npc_face(0x0000);
 						if (var0006) {
@@ -35215,7 +35215,7 @@ void Func04A1 object#(0x4A1) () {
 							say("\"No, rogue, thou art a blind idiot!\"*");
 						}
 						SHAMINO->hide();
-						0xFF5F->show_npc_face(0x0000);
+						CHAD->show_npc_face(0x0000);
 					}
 					gflags[0x01F3] = true;
 				}
@@ -35264,7 +35264,7 @@ void Func04A1 object#(0x4A1) () {
 		say("\"Remember, always keeps thy wits about and thy blade ready.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF5F);
+		Func092E(CHAD);
 	}
 }
 
