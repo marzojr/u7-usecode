@@ -36217,10 +36217,10 @@ void Func04A7 object#(0x4A7) () {
 			case "Brita":
 				if (!gflags[0x0221]) {
 					say("\"A wonderful woman. Thou shouldst meet her.\"");
-					var0007 = Func08F7(0xFF58);
+					var0007 = Func08F7(BRITA);
 					if (var0007) {
-						0xFF58->say("\"Mine husband is such a flatterer. The truth is that our work for The Fellowship has brought us closer together.\"*");
-						0xFF58->hide();
+						BRITA->say("\"Mine husband is such a flatterer. The truth is that our work for The Fellowship has brought us closer together.\"*");
+						BRITA->hide();
 						FERIDWYN->show_npc_face(0x0000);
 					}
 				} else {
@@ -36395,7 +36395,7 @@ void Func04A8 object#(0x4A8) () {
 	var var0003;
 
 	if (event == DOUBLECLICK) {
-		0xFF58->show_npc_face(0x0000);
+		BRITA->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
 		if (gflags[0x0212] && (!gflags[0x0218])) {
@@ -36436,7 +36436,7 @@ void Func04A8 object#(0x4A8) () {
 					if (var0002) {
 						FERIDWYN->say("\"Do not put stock in the proud boasts of wives, good Avatar. I am a simple man who only does what he can.\"*");
 						FERIDWYN->hide();
-						0xFF58->show_npc_face(0x0000);
+						BRITA->show_npc_face(0x0000);
 					}
 				}
 				remove("Feridwyn");
@@ -36532,7 +36532,7 @@ void Func04A8 object#(0x4A8) () {
 		}
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF58);
+		Func092E(BRITA);
 	}
 }
 
@@ -50610,14 +50610,14 @@ void Func060E object#(0x60E) () {
 				var0003->set_schedule_type(FOLLOW_AVATAR);
 			}
 			var001A = var0017;
-			if (!((FERIDWYN->get_schedule_type() == IN_COMBAT) || (0xFF58->get_schedule_type() == IN_COMBAT))) {
+			if (!((FERIDWYN->get_schedule_type() == IN_COMBAT) || (BRITA->get_schedule_type() == IN_COMBAT))) {
 				if (!Func0938(FERIDWYN)) {
 					var001A &= FERIDWYN->get_npc_object();
 					FERIDWYN->set_schedule_type(LOITER);
 				}
-				if (!Func0938(0xFF58)) {
-					var001A &= 0xFF58->get_npc_object();
-					0xFF58->set_schedule_type(LOITER);
+				if (!Func0938(BRITA)) {
+					var001A &= BRITA->get_npc_object();
+					BRITA->set_schedule_type(LOITER);
 				}
 			}
 			PARTY->move_object(var0010);
@@ -50693,7 +50693,7 @@ void Func0610 object#(0x610) () {
 	var0004 = Func0909();
 	var0005 = Func0908();
 	var0006 = Func08F7(FERIDWYN);
-	var0007 = Func08F7(0xFF58);
+	var0007 = Func08F7(BRITA);
 	var0008 = Func08F7(IOLO);
 	if (IOLO->get_item_flag(ASLEEP)) {
 		var0008 = 0x0000;
@@ -50711,9 +50711,9 @@ void Func0610 object#(0x610) () {
 		Func08D5();
 		FERIDWYN->hide();
 	} else if (var0007) {
-		0xFF58->show_npc_face(0x0000);
+		BRITA->show_npc_face(0x0000);
 		Func08D5();
-		0xFF58->hide();
+		BRITA->hide();
 	}
 	if (var0008) {
 		IOLO->say("\"I am gladdened to see thee still alive, my good friend. I was sorely grieved at thine apparent demise.~~\"In the midst of our battle I did lose track of thee. It is good to find thee safe.~~\"If thou art feeling up to it, let us then continue our quest.\"*");

@@ -2370,7 +2370,7 @@ void Func00E6 shape#(0xE6) () {
 				var0017 = Func0988(AVATAR->get_npc_object(), var0017);
 				var0017 = Func0988(PETRA, var0017);
 				var0017 = Func0988(MORTEGRO, var0017);
-				var0017 = Func0988(0xFF58, var0017);
+				var0017 = Func0988(STEFANO, var0017);
 				for (var000F in var0017 with var001A to var001B) {
 					if (var000F->get_item_flag(IN_PARTY)) {
 						var000F->remove_from_party();
@@ -2406,7 +2406,7 @@ void Func00E6 shape#(0xE6) () {
 		var0017 = Func0988(AVATAR->get_npc_object(), var0017);
 		var0017 = Func0988(PETRA, var0017);
 		var0017 = Func0988(MORTEGRO, var0017);
-		var0017 = Func0988(0xFF58, var0017);
+		var0017 = Func0988(STEFANO, var0017);
 		for (var000F in var0017 with var001E to var001F) {
 			if (var000F->get_item_flag(IN_PARTY)) {
 				var000F->remove_from_party();
@@ -7866,7 +7866,7 @@ void Func01C7 shape#(0x1C7) () {
 			var0017 = Func098D();
 			var0017 = Func0988(PETRA, var0017);
 			var0017 = Func0988(MORTEGRO, var0017);
-			var0017 = Func0988(0xFF58, var0017);
+			var0017 = Func0988(STEFANO, var0017);
 			var0018 = 0x0000;
 			for (var0016 in var0017 with var0019 to var001A) {
 				if (var0016->npc_nearby2()) {
@@ -8038,7 +8038,7 @@ void Func01C7 shape#(0x1C7) () {
 			var0017 = [AVATAR, FRIGIDAZZI, FILBERCIO] & Func098D();
 			var0017 = Func0988(PETRA, var0017);
 			var0017 = Func0988(MORTEGRO, var0017);
-			var0017 = Func0988(0xFF58, var0017);
+			var0017 = Func0988(STEFANO, var0017);
 			for (var0016 in var0017 with var001B to var001C) {
 				var000A = var0016->get_npc_name();
 				if (var0016->npc_nearby()) {
@@ -14286,9 +14286,9 @@ void Func0313 shape#(0x313) () {
 							actor frame standing;
 						};
 						Func08DA(var0006);
-					} else if (0xFF58->get_schedule_type() == FOLLOW_AVATAR) {
-						0xFF58->item_say("@I shall set the other lever...@");
-						0xFF58->set_schedule_type(WAIT);
+					} else if (STEFANO->get_schedule_type() == FOLLOW_AVATAR) {
+						STEFANO->item_say("@I shall set the other lever...@");
+						STEFANO->set_schedule_type(WAIT);
 						var000C = AVATAR->find_nearby(0x0313, 0x0028, MASK_NONE);
 						var000D = false;
 						for (var0010 in var000C with var000E to var000F) {
@@ -14298,8 +14298,8 @@ void Func0313 shape#(0x313) () {
 						}
 						var0011 = var000D->get_object_position();
 						var0011[0x0002] += 0x0001;
-						0xFF58->si_path_run_usecode(var0011, PATH_SUCCESS, 0xFF58, Func04A8, true);
-						UI_set_path_failure([Func04A8], 0xFF58, SI_PATH_FAILURE);
+						STEFANO->si_path_run_usecode(var0011, PATH_SUCCESS, STEFANO, Func04A8, true);
+						UI_set_path_failure([Func04A8], STEFANO, SI_PATH_FAILURE);
 						abort;
 					} else {
 						AVATAR->item_say("@The lever will not move.@");
@@ -15613,7 +15613,7 @@ void Func032B shape#(0x32B) () {
 		0xFEFB->set_item_flag(MET);
 		NEYOBI->set_item_flag(SI_ZOMBIE);
 		GWENNO->set_item_flag(SI_ZOMBIE);
-		var0008 = [AVATAR, SELINA, KALEN, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, 0xFF33, 0xFF35, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, 0xFF4B, 0xFF4A, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, 0xFF58];
+		var0008 = [AVATAR, SELINA, KALEN, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, 0xFF33, 0xFF35, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, 0xFF4B, 0xFF4A, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -23771,7 +23771,7 @@ void Func040E object#(0x40E) () {
 		COLUMNA->clear_item_say();
 		COLUMNA->halt_scheduled();
 		AVATAR->halt_scheduled();
-		var0005 = 0xFF58->get_item_flag(DEAD);
+		var0005 = STEFANO->get_item_flag(DEAD);
 		if (gflags[0x00E2]) {
 			if (!var0005) {
 				add("Stefano");
@@ -29902,7 +29902,7 @@ void Func0421 object#(0x421) () {
 		if (gflags[0x00EA] && (!ROTOLUNCIA->get_item_flag(DEAD))) {
 			add("kidnap");
 		}
-		if (gflags[0x00E2] && (!0xFF58->get_item_flag(DEAD))) {
+		if (gflags[0x00E2] && (!STEFANO->get_item_flag(DEAD))) {
 			add("Stefano");
 		}
 		if (Func097D(PARTY, 0x0001, 0x02A5, QUALITY_ANY, 0x0000) && (!gflags[0x013B])) {
@@ -49733,7 +49733,7 @@ void Func047C object#(0x47C) () {
 	var var0000;
 
 	if (event == DEATH) {
-		0xFF58->show_npc_face0(0x0000);
+		STEFANO->show_npc_face0(0x0000);
 		say("\"Why dost thou interrupt my dreaming? Canst thou not see that I have important matters to attend to?\" *\"Argh! I am waking...\"");
 		UI_remove_npc_face0();
 		var0000 = get_object_position();
@@ -49742,7 +49742,7 @@ void Func047C object#(0x47C) () {
 		D_STEFANO->remove_npc();
 	}
 	if (event == DOUBLECLICK) {
-		0xFF58->show_npc_face0(0x0000);
+		STEFANO->show_npc_face0(0x0000);
 		say("\"Ah, Avatar!\" ~\"This is as it should be... The food is good, the wine is sweet and the company is warm! Wouldst thou care to join me?\"");
 		say("\"Still bound by thy quest, I see.\" ~\"Well, if thou dost change thy mind, thou art welcome here any time.\" *\"Oh, and Avatar?\" ~\"Thou shouldst honestly relax a bit...\"");
 		UI_remove_npc_face0();
@@ -53234,15 +53234,15 @@ void Func04A3 object#(0x4A3) () {
 			var0001 = UI_die_roll(0x0001, 0x0003);
 			if ((var0001 == 0x0001) && (gflags[0x023A] == false)) {
 				Func097F(AVATAR, "@Free me, Avatar!@", 0x0005);
-				Func097F(0xFF58, "@Listen to thy sword!@", 0x000F);
+				Func097F(STEFANO, "@Listen to thy sword!@", 0x000F);
 			}
 			if ((var0001 == 0x0002) && (gflags[0x023A] == false)) {
 				Func097F(AVATAR, "@Release me, Avatar!@", 0x0005);
-				Func097F(0xFF58, "@Do what thy sword says!@", 0x000C);
+				Func097F(STEFANO, "@Do what thy sword says!@", 0x000C);
 			}
 			if ((var0001 == 0x0003) && (gflags[0x023A] == false)) {
 				Func097F(AVATAR, "@Liberate me, Avatar!@", 0x0005);
-				Func097F(0xFF58, "@Do it! Do it! Do it!@", 0x0009);
+				Func097F(STEFANO, "@Do it! Do it! Do it!@", 0x0009);
 			}
 			var0001 = LORTHONDO->find_nearby(0x0113, 0x0000, MASK_EGG);
 			if (var0001) {
@@ -53605,22 +53605,22 @@ void Func04A8 object#(0x4A8) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Hello!@");
-		0xFF58->Func07D1();
-		Func097F(0xFF58, (("@Felicitations, " + var0000) + ".@"), 0x0002);
-		0xFF58->set_schedule_type(TALK);
+		STEFANO->Func07D1();
+		Func097F(STEFANO, (("@Felicitations, " + var0000) + ".@"), 0x0002);
+		STEFANO->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF58->run_schedule();
-		0xFF58->clear_item_say();
-		0xFF58->show_npc_face0(0x0000);
-		if (0xFF58->get_item_flag(IN_PARTY)) {
-			0xFF58->set_schedule_type(FOLLOW_AVATAR);
+		STEFANO->run_schedule();
+		STEFANO->clear_item_say();
+		STEFANO->show_npc_face0(0x0000);
+		if (STEFANO->get_item_flag(IN_PARTY)) {
+			STEFANO->set_schedule_type(FOLLOW_AVATAR);
 			add("leave");
 		} else {
-			0xFF58->run_schedule();
+			STEFANO->run_schedule();
 			add("join");
 		}
-		var0006 = 0xFF58->get_item_flag(MET);
+		var0006 = STEFANO->get_item_flag(MET);
 		if (gflags[0x0004]) {
 			if (!0xFF22->get_item_flag(DEAD)) {
 				say("\"I am not a cowardly man, ",
@@ -53628,7 +53628,7 @@ void Func04A8 object#(0x4A8) () {
 					", but I am powerfully glad to see thee again. I am in terrible trouble.\"");
 				if (UI_get_array_size(UI_get_party_list2()) < 0x0005) {
 					say("\"In fact, I think that I will stay close by thee -- that will be safest for me!\"");
-					0xFF58->add_to_party();
+					STEFANO->add_to_party();
 					gflags[0x000F] = true;
 					remove("join");
 					add("leave");
@@ -53647,13 +53647,13 @@ void Func04A8 object#(0x4A8) () {
 				say("\"If I were not quaking with fear, ",
 					var0000,
 					", I would go down on both knees before thee. I am so grateful for thine aid.\"");
-				if (0xFF58->get_item_flag(IN_PARTY)) {
-					0xFF58->remove_from_party();
+				if (STEFANO->get_item_flag(IN_PARTY)) {
+					STEFANO->remove_from_party();
 					Func086A();
 					remove("leave");
 				}
-				0xFF58->set_new_schedules([MIDNIGHT, NOON, AFTERNOON, EVENING, NIGHT], [SLEEP, EAT_AT_INN, WANDER, EAT_AT_INN, DANCE], [0x09A7, 0x0778, 0x08C7, 0x0714, 0x099F, 0x078F, 0x08BE, 0x0707, 0x08B6, 0x070C]);
-				0xFF58->set_schedule_type(WANDER);
+				STEFANO->set_new_schedules([MIDNIGHT, NOON, AFTERNOON, EVENING, NIGHT], [SLEEP, EAT_AT_INN, WANDER, EAT_AT_INN, DANCE], [0x09A7, 0x0778, 0x08C7, 0x0714, 0x099F, 0x078F, 0x08BE, 0x0707, 0x08B6, 0x070C]);
+				STEFANO->set_schedule_type(WANDER);
 				add("grateful");
 			}
 			add("happenings");
@@ -53662,9 +53662,9 @@ void Func04A8 object#(0x4A8) () {
 			}
 		} else if (var0003 == 0x000F) {
 			if (var0006 == false) {
-				0xFF58->set_item_flag(MET);
-				Func09AC(0xFF58, -1, 0, WANDER);
-				0xFF58->set_schedule_type(SHY);
+				STEFANO->set_item_flag(MET);
+				Func09AC(STEFANO, -1, 0, WANDER);
+				STEFANO->set_schedule_type(SHY);
 				say("\"I am Stefano, late of Moonshade, and obtainer of rarities...\"");
 				say("\"I was unjustly imprisoned here, ",
 					var0000,
@@ -53677,7 +53677,7 @@ void Func04A8 object#(0x4A8) () {
 			say("\"I see that thou art still hale and whole, Avatar!\"");
 			add(["Moonshade", "rarities"]);
 		}
-		if (gflags[0x000F] && ((!0xFF58->get_item_flag(IN_PARTY)) && 0xFF58->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY))) {
+		if (gflags[0x000F] && ((!STEFANO->get_item_flag(IN_PARTY)) && STEFANO->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY))) {
 			add("belongings");
 		}
 		converse (["bye"]) {
@@ -53751,7 +53751,7 @@ void Func04A8 object#(0x4A8) () {
 			case "slay" (remove):
 				say("\"Well, I don't know how to kill him. I only know that he is very, very tough. Mayhap immortal.\"");
 				var0008 = Func0992(0x0001, 0x0000, 0x0000, false);
-				if ((var0008 != 0xFF58) && (var0008 != AVATAR)) {
+				if ((var0008 != STEFANO) && (var0008 != AVATAR)) {
 					var0008->show_npc_face1(0x0000);
 					say("\"Perhaps nothing can stop a Death Knight.\"");
 					UI_remove_npc_face1();
@@ -53933,7 +53933,7 @@ void Func04A8 object#(0x4A8) () {
 					remove("join");
 					add("leave");
 					say("\"Thou and I, we'll do good together!\"");
-					0xFF58->add_to_party();
+					STEFANO->add_to_party();
 					gflags[0x000F] = true;
 				}
 				fallthrough;
@@ -53964,31 +53964,31 @@ void Func04A8 object#(0x4A8) () {
 					gflags[0x00FA] = true;
 				}
 				UI_remove_npc_face0();
-				if (0xFF58->get_item_flag(IN_PARTY)) {
-					Func097F(0xFF58, "@Pleased to be of service.@", 0x0002);
+				if (STEFANO->get_item_flag(IN_PARTY)) {
+					Func097F(STEFANO, "@Pleased to be of service.@", 0x0002);
 					Func097F(AVATAR, "@Thanks!@", 0x0000);
 				} else {
 					Func097F(AVATAR, "@So long!@", 0x0000);
 					if (gflags[0x0004] && (!0xFF22->get_item_flag(DEAD))) {
-						Func097F(0xFF58, "@Please protect me...@", 0x0000);
+						Func097F(STEFANO, "@Please protect me...@", 0x0000);
 					} else {
-						Func097F(0xFF58, "@'Til we meet again!@", 0x0002);
+						Func097F(STEFANO, "@'Til we meet again!@", 0x0002);
 					}
 				}
 				abort;
 		}
 	}
 	if (event == SI_PATH_FAILURE) {
-		Func097F(0xFF58, "@Eeek! A spider!@", 0x0002);
-		Func097F(0xFF58, "@Kill it, Avatar!@", 0x0016);
+		Func097F(STEFANO, "@Eeek! A spider!@", 0x0002);
+		Func097F(STEFANO, "@Kill it, Avatar!@", 0x0016);
 		abort;
 	}
 	if (event == PATH_SUCCESS) {
 		var000A = AVATAR->find_nearest(0x0313, 0x0003);
-		var000B = 0xFF58->find_nearest(0x0313, 0x0003);
+		var000B = STEFANO->find_nearest(0x0313, 0x0003);
 		if (var000A && var000B) {
 			var000C = AVATAR->direction_from(var000A);
-			var000D = 0xFF58->direction_from(var000B);
+			var000D = STEFANO->direction_from(var000B);
 			var000E = script AVATAR {
 				nohalt;
 				wait 5;
@@ -53999,7 +53999,7 @@ void Func04A8 object#(0x4A8) () {
 				wait 2;
 				actor frame standing;
 			};
-			var000E = script 0xFF58 {
+			var000E = script STEFANO {
 				nohalt;
 				wait 5;
 				wait 2;
@@ -54022,20 +54022,20 @@ void Func04A8 object#(0x4A8) () {
 				call Func04A8;
 			};
 		}
-		0xFF58->set_schedule_type(FOLLOW_AVATAR);
+		STEFANO->set_schedule_type(FOLLOW_AVATAR);
 	}
 	if (event == SCRIPTED) {
 		if (gflags[0x0007]) {
 			gflags[0x0007] = false;
-			0xFF58->show_npc_face0(0x0000);
+			STEFANO->show_npc_face0(0x0000);
 			say("\"We are back in Moonshade! This means that we have won our freedom!\" *\"What a team we made! With thy muscle and mine intellect we showed them who they can and cannot keep in that prison. Thank thee, Avatar.\" *\"I must away now for other duties call. But if thou art ever in need of my talents, do but call and I shall accommodate thee.\"");
-			Func097F(0xFF58, "@See thee someday...@", 0x0000);
+			Func097F(STEFANO, "@See thee someday...@", 0x0000);
 			Func097F(AVATAR, "@So long, Stefano.@", 0x0005);
-			0xFF58->remove_from_party();
+			STEFANO->remove_from_party();
 			Func086A();
-			0xFF58->set_new_schedules([MIDNIGHT, NOON, AFTERNOON, EVENING, NIGHT], [SLEEP, EAT_AT_INN, WANDER, EAT_AT_INN, DANCE], [0x09A7, 0x0778, 0x08C7, 0x0714, 0x099F, 0x078F, 0x08BE, 0x0707, 0x08B6, 0x070C]);
-			0xFF58->set_schedule_type(SHY);
-			0xFF58->run_schedule();
+			STEFANO->set_new_schedules([MIDNIGHT, NOON, AFTERNOON, EVENING, NIGHT], [SLEEP, EAT_AT_INN, WANDER, EAT_AT_INN, DANCE], [0x09A7, 0x0778, 0x08C7, 0x0714, 0x099F, 0x078F, 0x08BE, 0x0707, 0x08B6, 0x070C]);
+			STEFANO->set_schedule_type(SHY);
+			STEFANO->run_schedule();
 			abort;
 		}
 		if (gflags[0x0004]) {
@@ -54046,7 +54046,7 @@ void Func04A8 object#(0x4A8) () {
 				nohalt;
 				call Func04A8;
 			};
-			if (0xFF58->npc_nearby()) {
+			if (STEFANO->npc_nearby()) {
 				UI_play_music(0x001E, Func09A0(0x0005, 0x0001));
 				var0007 = 0xFF22->approach_avatar(0x0078, 0x0028);
 				if (!var0007) {
@@ -54058,14 +54058,14 @@ void Func04A8 object#(0x4A8) () {
 				}
 				0xFF22->set_alignment(EVIL);
 				0xFF22->set_schedule_type(IN_COMBAT);
-				0xFF22->set_opponent(0xFF58);
-				0xFF22->set_oppressor(0xFF58);
+				0xFF22->set_opponent(STEFANO);
+				0xFF22->set_oppressor(STEFANO);
 				0xFF22->clear_item_say();
 				Func097F(0xFF22, "@Die, Stefano!@", 0x0000);
-				0xFF58->clear_item_say();
-				Func097F(0xFF58, "@Save me!@", 0x0002);
-				0xFF58->set_schedule_type(IN_COMBAT);
-				0xFF58->set_attack_mode(FLEE);
+				STEFANO->clear_item_say();
+				Func097F(STEFANO, "@Save me!@", 0x0002);
+				STEFANO->set_schedule_type(IN_COMBAT);
+				STEFANO->set_attack_mode(FLEE);
 			}
 		} else {
 			var000F = find_nearby(0x00E9, 0x0028, MASK_NONE);
@@ -59069,13 +59069,13 @@ void Func04DE object#(0x4DE) () {
 	if ((event == DEATH) && 0xFF22->get_item_flag(SI_TOURNAMENT)) {
 		0xFF22->clear_item_flag(SI_TOURNAMENT);
 		0xFF22->reduce_health(0x0032, NORMAL_DAMAGE);
-		if (0xFF58->get_item_flag(IN_PARTY)) {
-			0xFF58->set_schedule_type(FOLLOW_AVATAR);
+		if (STEFANO->get_item_flag(IN_PARTY)) {
+			STEFANO->set_schedule_type(FOLLOW_AVATAR);
 		} else {
-			0xFF58->set_new_schedules([MIDNIGHT, NOON, AFTERNOON, EVENING, NIGHT], [SLEEP, EAT_AT_INN, WANDER, EAT_AT_INN, DANCE], [0x09A7, 0x0778, 0x08C7, 0x0714, 0x099F, 0x078F, 0x08BE, 0x0707, 0x08B6, 0x070C]);
-			0xFF58->set_schedule_type(TALK);
+			STEFANO->set_new_schedules([MIDNIGHT, NOON, AFTERNOON, EVENING, NIGHT], [SLEEP, EAT_AT_INN, WANDER, EAT_AT_INN, DANCE], [0x09A7, 0x0778, 0x08C7, 0x0714, 0x099F, 0x078F, 0x08BE, 0x0707, 0x08B6, 0x070C]);
+			STEFANO->set_schedule_type(TALK);
 		}
-		Func097F(0xFF58, "@I am saved!@", 0x0000);
+		Func097F(STEFANO, "@I am saved!@", 0x0000);
 	}
 }
 
@@ -78791,8 +78791,8 @@ void Func07D8 object#(0x7D8) () {
 		DUCIO->run_schedule();
 		FRELI->run_schedule();
 		ANDRIO->run_schedule();
-		if (0xFF58->get_item_flag(DEAD)) {
-			0xFF58->resurrect_npc();
+		if (STEFANO->get_item_flag(DEAD)) {
+			STEFANO->resurrect_npc();
 			gflags[0x0149] = true;
 		}
 		Func09AC(ALYSSAND, 0x03E6, 0x0756, WAIT);
@@ -79305,12 +79305,12 @@ void Func07DF object#(0x7DF) () {
 					var0000 = [0x0A15, 0x0557, 0x0000];
 				}
 				if (var0000) {
-					if ((get_item_quality() == 0x00CF) && ((gflags[0x0239] == false) && 0xFF58->get_item_flag(IN_PARTY))) {
+					if ((get_item_quality() == 0x00CF) && ((gflags[0x0239] == false) && STEFANO->get_item_flag(IN_PARTY))) {
 						PARTY->move_object(var0000);
 						UI_sprite_effect(ANIMATION_TELEPORT, (var0000[0x0001] - 0x0001), (var0000[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 						UI_play_sound_effect(0x0053);
 						gflags[0x0239] = true;
-						0xFF58->clear_item_flag(SI_TOURNAMENT);
+						STEFANO->clear_item_flag(SI_TOURNAMENT);
 						gflags[0x0007] = true;
 						var000B = script AVATAR after 15 ticks {
 							nohalt;
@@ -98611,12 +98611,12 @@ extern var Func09B3 0x9B3 (var var0000);
 void Func086A 0x86A () {
 	var var0000;
 
-	if (0xFF58->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY)) {
+	if (STEFANO->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY)) {
 		say("\"I have many of thy belongings in my possession. Dost thou want them returned?\"");
 		if (Func0955()) {
 			say("\"Here they are.\"");
 			gflags[0x000F] = false;
-			var0000 = Func09B3(0xFF58);
+			var0000 = Func09B3(STEFANO);
 			if (var0000[0x0001] != 0x0000) {
 				say("\"Thy companions will have to help thee with this burden.\"");
 			}
@@ -104862,7 +104862,7 @@ void Func08DA 0x8DA (var var0000) {
 			}
 			if (var0002 == 0x00A1) {
 				Func097F(AVATAR, "@That did something.@", 0x0002);
-				Func097F(0xFF58, "@I hope nothing bad...@", 0x0012);
+				Func097F(STEFANO, "@I hope nothing bad...@", 0x0012);
 				UI_play_sound_effect(0x0058);
 				if (get_item_frame() == 0x0000) {
 					set_item_frame(0x0001);
@@ -111799,7 +111799,7 @@ var Func098C 0x98C () {
 var Func098D 0x98D () {
 	var var0000;
 
-	var0000 = [DUPRE, SHAMINO, IOLO, GWENNO, PETRA, MORTEGRO, WILFRED, BOYDON, SELINA, SETHYS, 0xFF58];
+	var0000 = [DUPRE, SHAMINO, IOLO, GWENNO, PETRA, MORTEGRO, WILFRED, BOYDON, SELINA, SETHYS, STEFANO];
 	return var0000;
 }
 
