@@ -6690,7 +6690,7 @@ void Func02F2 shape#(0x2F2) () {
 	}
 	if (event == SCRIPTED) {
 		gflags[0x01AA] = true;
-		var0005 = [0xFF71, 0xFF70, 0xFF74, 0xFF6F, 0xFF6E, 0xFF6D, 0xFF73];
+		var0005 = [0xFF71, 0xFF70, MARKHAM, 0xFF6F, 0xFF6E, 0xFF6D, 0xFF73];
 		for (var0008 in var0005 with var0006 to var0007) {
 			var0008->clear_item_flag(ASLEEP);
 			var0008->set_schedule_type(WAIT);
@@ -31790,7 +31790,7 @@ void Func048C object#(0x48C) () {
 	var var0008;
 
 	if (event == DOUBLECLICK) {
-		0xFF74->show_npc_face(0x0000);
+		MARKHAM->show_npc_face(0x0000);
 		if (!gflags[0x01B4]) {
 			say("This undead fellow looks through you. Though he is obviously aware of his surroundings, you are quite sure that he doesn't even see you.*");
 			abort;
@@ -31806,7 +31806,7 @@ void Func048C object#(0x48C) () {
 			add("sacrifice");
 		}
 		var0003 = UI_part_of_day();
-		var0004 = 0xFF74->get_schedule_type();
+		var0004 = MARKHAM->get_schedule_type();
 		if (!gflags[0x01AA]) {
 			if ((var0003 == MIDNIGHT) || (var0003 == EARLY)) {
 				if (var0004 == SLEEP) {
@@ -31824,14 +31824,14 @@ void Func048C object#(0x48C) () {
 			say("\"Oh, hello there, lady Rowena. 'Tis good to see ye again. It brings a ray o' sunshine into this old man's heart ta see yer beauteous face,\" he says, smiling.*");
 			0xFF70->say("She curtsies delicately and smiles back.~~\"Hello, Markham. It is good, indeed, to see that none of this horrible business can keep thee from giving a lady a compliment.\"*");
 			0xFF70->hide();
-			0xFF74->show_npc_face(0x0000);
+			MARKHAM->show_npc_face(0x0000);
 		}
 		var0006 = Func08F7(0xFF6D);
 		if (var0006) {
 			say("\"Oh, uh, hello there Mayor. I thought ye were sequestered in the Town Hall. Well, uh, it's good ta see ya again.\"*");
 			0xFF6D->say("\"Yes, well, it is good to see thee again, too.\"*");
 			0xFF6D->hide();
-			0xFF74->show_npc_face(0x0000);
+			MARKHAM->show_npc_face(0x0000);
 			gflags[0x01BD] = true;
 		}
 		if (!gflags[0x01C4]) {
@@ -31853,7 +31853,7 @@ void Func048C object#(0x48C) () {
 							var0000,
 							" strolls over and pats Markham's rather large belly. \"Yes, he's Markham of the Keg, all right.\" She smiles sweetly down at the older man.*");
 						0xFF6F->hide();
-						0xFF74->say("\"That's enough of that!\" Markham smacks the pretty young woman on her ghostly posterior.~~ \"Make yerself useful and fetch me a haunch o' venison.\" She turns away, giggling. He looks at you with a mirthful expression, \"I just don't know what I'm goin' ta do with that girl.\"");
+						MARKHAM->say("\"That's enough of that!\" Markham smacks the pretty young woman on her ghostly posterior.~~ \"Make yerself useful and fetch me a haunch o' venison.\" She turns away, giggling. He looks at you with a mirthful expression, \"I just don't know what I'm goin' ta do with that girl.\"");
 					}
 				}
 				remove("name");
@@ -31871,7 +31871,7 @@ void Func048C object#(0x48C) () {
 				if (var0008 && gflags[0x01BA]) {
 					0xFF6E->say("\"Please, Markham. Have a little pity for Caine. He was trying to create something to save the town when he made his fatal mistake.\" The pale ghost looks deeply troubled.");
 					0xFF6E->hide();
-					0xFF74->show_npc_face(0x0000);
+					MARKHAM->show_npc_face(0x0000);
 					var0002 = true;
 					var0001 = "yer right Quen,";
 				}
@@ -31903,7 +31903,7 @@ void Func048C object#(0x48C) () {
 				if (var0002) {
 					0xFF6E->say("The pale ghost moves forward and whispers, \"I was already living in the half world of the dead when these events took place, and ever since, I've felt a strange pull coming from the tower.\"*");
 					0xFF6E->hide();
-					0xFF74->show_npc_face(0x0000);
+					MARKHAM->show_npc_face(0x0000);
 				}
 				say("After a brief swig, he continues, \"Then, even worse... I'm out checkin' on the cows when I hears a sound like moanin'. It's off to the east, so I look that way, into the graveyard y'know, and what do I see?~~\"I'll tell ya what I seen. The graves, rippin' open like the people in 'em got a place to go.\" Eyes wide, he tips back another sip.");
 				remove("Horance");
@@ -32731,10 +32731,10 @@ void Func0491 object#(0x491) () {
 					say("\"I am sorry, ",
 						var0000,
 						",\" she giggles, \"but all we serve here are... spirits!\"*");
-					var0009 = Func08F7(0xFF74);
+					var0009 = Func08F7(MARKHAM);
 					if (var0009 && gflags[0x01B4]) {
-						0xFF74->say("\"That's a good one, wench,\" laughs the portly ghost.*");
-						0xFF74->hide();
+						MARKHAM->say("\"That's a good one, wench,\" laughs the portly ghost.*");
+						MARKHAM->hide();
 						0xFF6F->show_npc_face(0x0000);
 					}
 				} else {
@@ -32838,7 +32838,7 @@ void Func0492 object#(0x492) () {
 		}
 		var0000 = false;
 		var0001 = Func0909();
-		var0002 = Func08F7(0xFF74);
+		var0002 = Func08F7(MARKHAM);
 		if (gflags[0x01C4]) {
 			var0003 = "Markham";
 		} else {
@@ -32936,12 +32936,12 @@ void Func0492 object#(0x492) () {
 				say("\"After I was murdered, my good friend, Yorl, cared for her as his own. He tried his best, but her sickness only worsened. After several months she weakened, and died.\" He stops here, tears filling his ghostly eyes, then, angrily, he says, \"And now her spirit is held by Horance the Liche. Thou must rescue her from that foul beast!\" He attempts to grab you, but his hands pass through without resistance.*");
 				if (var0002) {
 					if (gflags[0x01B4]) {
-						0xFF74->say("\"Now, now, Quen. Settle down.\" ",
+						MARKHAM->say("\"Now, now, Quen. Settle down.\" ",
 							var0003,
 							" moves closer to you and whispers, \"Fergive him, ",
 							var0001,
 							".~~\"He sometimes loses control like that when he talks about his daughter. Sure'n ya can understand, tho'.\"*");
-						0xFF74->hide();
+						MARKHAM->hide();
 						0xFF6E->show_npc_face(0x0000);
 					}
 				} else {
@@ -32962,19 +32962,19 @@ void Func0492 object#(0x492) () {
 				say("\"Once, over two centuries ago, I knew a gifted mage named Horance. His two loves in life were the study of magic, and writing lovely poetry. The people of Skara Brae felt safe in the knowledge that this sort of mage protected the town. Then he began to change.~~\"First his beautiful sonnets became a rhyming doggerel. It became the only way in which he would speak. His spells, which he displayed before the townsfolk, became destructive and violent. People began to fear him. My death occurred at about this time. Not long after that, he became reclusive. He had a tower built on the northern point and never removed himself from it.~~ \"Then, one night, the graves in the graveyard opened and the dead began to walk.\"*");
 				if (var0002) {
 					if (gflags[0x01B4]) {
-						0xFF74->say(var0003,
+						MARKHAM->say(var0003,
 							" nods his head emphatically, \"'At's right, I seen it, I did.\"*");
-						0xFF74->hide();
+						MARKHAM->hide();
 						0xFF6E->show_npc_face(0x0000);
 					}
 				}
 				say("\"They marched to his tower, and now they roam all over the island, performing his bidding.\"*");
 				if (var0002) {
 					if (gflags[0x01B4]) {
-						0xFF74->say("\"It be gettin' so's a ghost cannot make an honest livin' no more. Hmph.\" ",
+						MARKHAM->say("\"It be gettin' so's a ghost cannot make an honest livin' no more. Hmph.\" ",
 							var0003,
 							" looks a bit disgruntled.*");
-						0xFF74->hide();
+						MARKHAM->hide();
 						0xFF6E->show_npc_face(0x0000);
 					}
 				}
@@ -33025,7 +33025,7 @@ void Func0492 object#(0x492) () {
 		say("\"Goodbye, ",
 			var0001,
 			".\"*");
-		if (Func08F7(0xFF74)) {
+		if (Func08F7(MARKHAM)) {
 			say("He turns back to his conversation with ",
 				var0003,
 				".*");
@@ -69109,7 +69109,7 @@ void Func088B 0x88B () {
 	};
 	0xFF6D->remove_from_party();
 	0xFF6D->set_schedule_type(WAIT);
-	var0006 = [0xFF6D, 0xFF71, 0xFF72, 0xFF70, 0xFF74, 0xFF6E, 0xFF6F];
+	var0006 = [0xFF6D, 0xFF71, 0xFF72, 0xFF70, MARKHAM, 0xFF6E, 0xFF6F];
 	for (var0009 in var0006 with var0007 to var0008) {
 		var0009->remove_npc();
 	}
