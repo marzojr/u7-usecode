@@ -25554,7 +25554,7 @@ void Func0465 object#(0x465) () {
 
 	if (event == DOUBLECLICK) {
 		var0000 = Func0931(PARTY, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
-		0xFF9B->show_npc_face(0x0000);
+		SALAMON->show_npc_face(0x0000);
 		if (!gflags[0x0154]) {
 			if (!var0000) {
 				say("The creature ignores you.*");
@@ -25695,7 +25695,7 @@ void Func0465 object#(0x465) () {
 		say("\"My hope is for your welfare, human.\"*");
 	}
 	if (event == PROXIMITY) {
-		var0007 = 0xFF9B->get_npc_object()->get_schedule_type();
+		var0007 = SALAMON->get_npc_object()->get_schedule_type();
 		var0008 = UI_die_roll(0x0001, 0x0004);
 		var0000 = Func0931(PARTY, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
 		if (var0007 == LOITER) {
@@ -25714,7 +25714,7 @@ void Func0465 object#(0x465) () {
 				}
 			}
 		}
-		0xFF9B->item_say(var0009);
+		SALAMON->item_say(var0009);
 	}
 }
 
@@ -74397,7 +74397,7 @@ void Func08DF 0x8DF () {
 	var var0000;
 	var var0001;
 
-	0xFF9B->say("The ape-like creature slowly and cautiously walks up to you. He, or she, sniffs for a moment, and then points to the honey you are carrying.");
+	SALAMON->say("The ape-like creature slowly and cautiously walks up to you. He, or she, sniffs for a moment, and then points to the honey you are carrying.");
 	converse (["Want honey?", "Go away!"]) {
 		case "Want honey?":
 			say("\"Honey will be given by you to me?\"");
