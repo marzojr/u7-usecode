@@ -35028,7 +35028,7 @@ void Func04A0 object#(0x4A0) () {
 	var var0009;
 
 	if (event == DOUBLECLICK) {
-		0xFF60->show_npc_face(0x0000);
+		EFFREM->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = "the Avatar";
@@ -35108,7 +35108,7 @@ void Func04A0 object#(0x4A0) () {
 				if (var0005) {
 					JILLIAN->say("\"Now Effrem! Thou knowest perfectly well what we agreed when little Mikhail was born. Thou shouldst be ashamed, talking such nonsense.\"*");
 					JILLIAN->hide();
-					0xFF60->say("He raises his shoulders, making him appear quite sheepish.");
+					EFFREM->say("He raises his shoulders, making him appear quite sheepish.");
 				}
 				remove(["wife", "Jillian"]);
 				var0004 = true;
@@ -35137,7 +35137,7 @@ void Func04A0 object#(0x4A0) () {
 		}
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF60);
+		Func092E(EFFREM);
 	}
 }
 

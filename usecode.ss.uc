@@ -53040,7 +53040,7 @@ void Func04A0 object#(0x4A0) () {
 			var000D[0x0003] -= 0x0002;
 		}
 		do {
-			var0016 = 0xFF60->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
+			var0016 = JAIL_01->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
 			if (!var0016) {
 				break;
 			}
@@ -53051,7 +53051,7 @@ void Func04A0 object#(0x4A0) () {
 		} while (true);
 		UI_sprite_effect(ANIMATION_SMALL_RING_BLAST, (var000D[0x0001] - 0x0001), (var000D[0x0002] - 0x0001), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		UI_play_sound_effect(0x002A);
-		0xFF60->remove_npc();
+		JAIL_01->remove_npc();
 	}
 }
 
