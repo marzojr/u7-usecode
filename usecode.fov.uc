@@ -28297,7 +28297,7 @@ void Func0478 object#(0x478) () {
 	var var0001;
 
 	if (event == DOUBLECLICK) {
-		0xFF88->show_npc_face(0x0000);
+		JOSEPH->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
@@ -28439,7 +28439,7 @@ void Func0478 object#(0x478) () {
 		say("\"Enjoy thy stay in my city. But if thou hast no stomach for fighting thou shouldst not stay long.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF88);
+		Func092E(JOSEPH);
 	}
 }
 
