@@ -24810,11 +24810,11 @@ void Func045E object#(0x45E) () {
 
 			case "Jakher":
 				say("\"He is quite an able trainer in his own right. Not as skilled as myself, obviously. But I do think he is cute, though I bid thee, do not tell him that I spoke of this. It will only encourage him.\"");
-				var0003 = Func08F7(0xFFA1);
+				var0003 = Func08F7(JAKHER);
 				if (var0003) {
-					0xFFA1->say("\"Art thou speaking about me? Mine ears are burning!\"*");
+					JAKHER->say("\"Art thou speaking about me? Mine ears are burning!\"*");
 					KARENNA->say("\"Nothing thou shouldst be concerned about, Jakher.\" She winks at you.*");
-					0xFFA1->hide();
+					JAKHER->hide();
 					KARENNA->show_npc_face(0x0000);
 				}
 				gflags[0x00F6] = true;
@@ -24855,11 +24855,11 @@ void Func045E object#(0x45E) () {
 
 			case "attractive":
 				say("\"Jakher told thee he doth find me attractive? He denies it, of course, but I have known for years that he doth have feelings for me.\"");
-				var0003 = Func08F7(0xFFA1);
+				var0003 = Func08F7(JAKHER);
 				if (var0003) {
-					0xFFA1->say("\"What? What didst thou say?\"*");
+					JAKHER->say("\"What? What didst thou say?\"*");
 					KARENNA->say("\"Nothing, Jakher. Go away.\" She giggles conspiratorally at you.*");
-					0xFFA1->hide();
+					JAKHER->hide();
 					KARENNA->show_npc_face(0x0000);
 				}
 				remove("attractive");
@@ -24900,10 +24900,10 @@ void Func045F object#(0x45F) () {
 	var var0004;
 
 	if (event == DOUBLECLICK) {
-		0xFFA1->show_npc_face(0x0000);
+		JAKHER->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFFA1->get_npc_object()->get_schedule_type();
+		var0002 = JAKHER->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (gflags[0x00F6]) {
 			add("cute");
@@ -24969,9 +24969,9 @@ void Func045F object#(0x45F) () {
 				var0003 = Func08F7(KARENNA);
 				if (var0003) {
 					KARENNA->say("\"What art thou whispering about over there?\"*");
-					0xFFA1->say("\"Nothing! Nothing at all!\" Jakher winks at you.*");
+					JAKHER->say("\"Nothing! Nothing at all!\" Jakher winks at you.*");
 					KARENNA->hide();
-					0xFFA1->show_npc_face(0x0000);
+					JAKHER->show_npc_face(0x0000);
 				}
 				remove("Karenna");
 				var0004 = true;
@@ -24983,9 +24983,9 @@ void Func045F object#(0x45F) () {
 				var0003 = Func08F7(KARENNA);
 				if (var0003) {
 					KARENNA->say("\"Art thou talking about me? I feel mine ears burning!\"*");
-					0xFFA1->say("\"Thou art dreaming, Karenna. Why would I talk about thee?\" He giggles conspiratorially at you.*");
+					JAKHER->say("\"Thou art dreaming, Karenna. Why would I talk about thee?\" He giggles conspiratorially at you.*");
 					KARENNA->hide();
-					0xFFA1->show_npc_face(0x0000);
+					JAKHER->show_npc_face(0x0000);
 				}
 				remove("short-sighted");
 				fallthrough;
@@ -25018,7 +25018,7 @@ void Func045F object#(0x45F) () {
 		say("\"It has been a pleasure speaking with thee.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFA1);
+		Func092E(JAKHER);
 	}
 }
 
@@ -58929,7 +58929,7 @@ void Func06C9 object#(0x6C9) () {
 	var var0003;
 
 	if (event == EGG) {
-		var0000 = [0xFFA1, KARENNA];
+		var0000 = [JAKHER, KARENNA];
 		for (var0003 in var0000 with var0001 to var0002) {
 			Func093F(var0003, LOITER);
 		}
