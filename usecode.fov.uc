@@ -21588,7 +21588,7 @@ void Func0448 object#(0x448) () {
 	if (event == DOUBLECLICK) {
 		var0000 = Func0908();
 		var0001 = "Avatar";
-		0xFFB8->show_npc_face(0x0000);
+		NELL->show_npc_face(0x0000);
 		if (gflags[0x0078]) {
 			var0002 = var0000;
 		}
@@ -21684,7 +21684,7 @@ void Func0448 object#(0x448) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFB8);
+		Func092E(NELL);
 	}
 }
 

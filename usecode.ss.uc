@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [ANDRAL, 0xFF6A, 0xFFB0, CALADIN, CELLIA, 0xFFB6, KRAYG, LUTHER, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, MARSTEN, 0xFFB3, LUCILLA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [ANDRAL, 0xFF6A, 0xFFB0, CALADIN, CELLIA, 0xFFB6, KRAYG, LUTHER, LYDIA, 0xFFB5, 0xFFB2, 0xFFB1, MARSTEN, 0xFFB3, LUCILLA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -10950,29 +10950,29 @@ void Func028C shape#(0x28C) () {
 	var0000 = UI_is_pc_female();
 	var0001 = Func0953();
 	var0002 = UI_get_party_list();
-	var0003 = 0xFFB8->find_nearby(0x0381, 0x0014, MASK_NONE);
+	var0003 = LYDIA->find_nearby(0x0381, 0x0014, MASK_NONE);
 	if (event == SI_PATH_FAILURE) {
 		var0004 = var0003->get_object_position();
-		if (item == 0xFFB8->get_npc_object()) {
+		if (item == LYDIA->get_npc_object()) {
 			var0004[0x0002] += 0x0001;
 		} else {
 			var0004[0x0001] += 0x0001;
 		}
 		move_object(var0004);
-		var0005 = script 0xFFB8 {
+		var0005 = script LYDIA {
 			nohalt;
 			call Func028C;
 		};
 	}
 	if (event == SCRIPTED) {
-		if (0xFFB8->get_npc_id() == 0x0003) {
-			0xFFB8->set_npc_id(0x0004);
+		if (LYDIA->get_npc_id() == 0x0003) {
+			LYDIA->set_npc_id(0x0004);
 			var0005 = UI_create_new_object(0x0390);
 			if (var0005) {
 				var0005->set_item_flag(TEMPORARY);
 				var0005 = UI_update_last_created(AVATAR->get_object_position());
 			}
-			var0005 = script 0xFFB8 {
+			var0005 = script LYDIA {
 				nohalt;
 				wait 4;
 				actor frame step_left;
@@ -10992,9 +10992,9 @@ void Func028C shape#(0x28C) () {
 			};
 			abort;
 		}
-		if (0xFFB8->get_npc_id() == 0x0002) {
-			0xFFB8->set_npc_id(0x0003);
-			var0005 = script 0xFFB8 {
+		if (LYDIA->get_npc_id() == 0x0002) {
+			LYDIA->set_npc_id(0x0003);
+			var0005 = script LYDIA {
 				nohalt;
 				say "@Thou art doing well...@";
 				actor frame reach_1h;
@@ -11016,10 +11016,10 @@ void Func028C shape#(0x28C) () {
 			};
 			abort;
 		}
-		if (0xFFB8->get_npc_id() == 0x0001) {
-			0xFFB8->set_schedule_type(WAIT);
-			0xFFB8->set_npc_id(0x0002);
-			var0005 = script 0xFFB8 {
+		if (LYDIA->get_npc_id() == 0x0001) {
+			LYDIA->set_schedule_type(WAIT);
+			LYDIA->set_npc_id(0x0002);
+			var0005 = script LYDIA {
 				nohalt;
 				call Func07D2;
 				say "@Hold thy breath.@";
@@ -11035,13 +11035,13 @@ void Func028C shape#(0x28C) () {
 			};
 			abort;
 		}
-		if (0xFFB8->get_npc_id() == 0x0000) {
+		if (LYDIA->get_npc_id() == 0x0000) {
 			AVATAR->set_schedule_type(WAIT);
-			0xFFB8->set_npc_id(0x0001);
-			Func097F(0xFFB8, "@Now we begin...@", 0x0000);
+			LYDIA->set_npc_id(0x0001);
+			Func097F(LYDIA, "@Now we begin...@", 0x0000);
 			var0004 = var0003->get_object_position();
 			var0004[0x0002] += 0x0001;
-			0xFFB8->si_path_run_usecode(var0004, SCRIPTED, item, Func028C, false);
+			LYDIA->si_path_run_usecode(var0004, SCRIPTED, item, Func028C, false);
 			UI_set_path_failure(Func028C, item, SI_PATH_FAILURE);
 			var0005 = script AVATAR {
 				nohalt;
@@ -11052,12 +11052,12 @@ void Func028C shape#(0x28C) () {
 			abort;
 		}
 		UI_init_conversation();
-		0xFFB8->show_npc_face0(0x0000);
+		LYDIA->show_npc_face0(0x0000);
 		say("\"Use a cloth to soak up the blood...\"");
 		for (var0008 in var0002 with var0006 to var0007) {
 			var0008->set_schedule_type(FOLLOW_AVATAR);
 		}
-		0xFFB8->run_schedule();
+		LYDIA->run_schedule();
 		AVATAR->set_item_flag(TATTOOED);
 		AVATAR->clear_item_flag(DONT_MOVE);
 		gflags[0x0098] = true;
@@ -41804,9 +41804,9 @@ void Func043F object#(0x43F) () {
 					}
 					say("\"Someone should question that weakling, and see if his guilt can be proven.\"");
 				}
-				if (0xFFB8->get_item_flag(DEAD) || 0xFFB5->get_item_flag(DEAD)) {
+				if (LYDIA->get_item_flag(DEAD) || 0xFFB5->get_item_flag(DEAD)) {
 					UI_push_answers();
-					if (0xFFB8->get_item_flag(DEAD)) {
+					if (LYDIA->get_item_flag(DEAD)) {
 						add("Was Lydia the traitor?");
 					}
 					if (0xFFB5->get_item_flag(DEAD)) {
@@ -42879,7 +42879,7 @@ void Func0443 object#(0x443) () {
 					say("\"Didst thou speak with Lydia?\"");
 					AVATAR->show_npc_face1(0x0000);
 					say("\"Indeed, the wench hath confessed to her crime!\"");
-					if (0xFFB8->get_item_flag(DEAD)) {
+					if (LYDIA->get_item_flag(DEAD)) {
 						say("\"Moreover, she hath paid for her treachery in blood. She is slain.\"");
 					}
 					UI_remove_npc_face1();
@@ -42897,8 +42897,8 @@ void Func0443 object#(0x443) () {
 					say("\"I know that Lydia must have given thee this tattoo, yet I find it difficult to believe she would poison a stranger.\"");
 					say("\"Thou shouldst have words with her, I think.\"");
 					gflags[0x0035] = true;
-					0xFFB8->set_alignment(CHAOTIC);
-					0xFFB8->set_item_flag(SI_TOURNAMENT);
+					LYDIA->set_alignment(CHAOTIC);
+					LYDIA->set_item_flag(SI_TOURNAMENT);
 				}
 				gflags[0x00CB] = true;
 				fallthrough;
@@ -44440,7 +44440,7 @@ labelFunc0445_0257:
 			case "traitor" (remove):
 				if (var000C) {
 					say("\"Thou hast done us a valuable service by rooting out that miserable traitor, Simon. Although in the true sense of the word, he was merely a loyal Goblin, not a traitor... Bah! A pox on all Goblins!\"");
-				} else if (0xFFB8->get_item_flag(DEAD)) {
+				} else if (LYDIA->get_item_flag(DEAD)) {
 					say("\"Thou hast slain the traitor, Knight! Well done!");
 					if (0xFFB5->get_item_flag(DEAD)) {
 						say("\"Lydia must have been part of Shmed's secret conspiracy. But that no longer matters -- both of the Goblin spies are dead!\"");
@@ -45328,7 +45328,7 @@ void Func0447 object#(0x447) () {
 
 			case "bully" (remove):
 				say("\"How darest thou call me a bully! That little whore Lydia must have put thee up to this...\"");
-				if (0xFFB8->get_item_flag(DEAD)) {
+				if (LYDIA->get_item_flag(DEAD)) {
 					say("\"I am glad that she is dead, the bitch!\"");
 				} else {
 					say("\"So, thou and she are teaming against me, aye? Spreading lies and rumors? Poisoning my reputation?\"");
@@ -45491,12 +45491,12 @@ void Func0448 object#(0x448) () {
 	var0000 = Func0953();
 	var0001 = Func0954();
 	var0002 = UI_is_pc_female();
-	var0003 = 0xFFB8->get_item_flag(MET);
+	var0003 = LYDIA->get_item_flag(MET);
 	var0004 = Func098E();
-	var0005 = 0xFFB8->find_nearby(0x0381, 0x0014, MASK_NONE);
+	var0005 = LYDIA->find_nearby(0x0381, 0x0014, MASK_NONE);
 	var0006 = Func0942(DUPRE);
-	if ((event == DEATH) && 0xFFB8->get_item_flag(SI_TOURNAMENT)) {
-		0xFFB8->show_npc_face0(0x0000);
+	if ((event == DEATH) && LYDIA->get_item_flag(SI_TOURNAMENT)) {
+		LYDIA->show_npc_face0(0x0000);
 		if (!gflags[0x00CA]) {
 			say("\"So! Thou hast discovered me!\"");
 			say("\"Yes, I poisoned thee, but I will not say who did instruct me to do so!\"");
@@ -45505,13 +45505,13 @@ void Func0448 object#(0x448) () {
 			}
 		}
 		say("\"I spit upon thee, pawn of the Demon British!\"");
-		0xFFB8->clear_item_flag(SI_TOURNAMENT);
-		0xFFB8->reduce_health(0x0032, NORMAL_DAMAGE);
+		LYDIA->clear_item_flag(SI_TOURNAMENT);
+		LYDIA->reduce_health(0x0032, NORMAL_DAMAGE);
 		Func097F(AVATAR, "@Whew!@", 0x0002);
 		abort;
 	}
 	if (event == SCRIPTED) {
-		if (0xFFB8->get_item_flag(SI_ZOMBIE) && (item == Func09A0(0x0005, 0x0002))) {
+		if (LYDIA->get_item_flag(SI_ZOMBIE) && (item == Func09A0(0x0005, 0x0002))) {
 			if (AVATAR->get_item_flag(DONT_MOVE) || (Func0994() == 0x001F)) {
 				var0007 = Func09A0(0x0005, 0x0002);
 				var0008 = script var0007 after 100 ticks {
@@ -45520,7 +45520,7 @@ void Func0448 object#(0x448) () {
 				};
 				abort;
 			}
-			0xFFB8->clear_item_flag(SI_ZOMBIE);
+			LYDIA->clear_item_flag(SI_ZOMBIE);
 			var0009 = Func0992(SHAMINO, 0x0000, 0x0000, false);
 			if ((var0009 != AVATAR) && Func0942(var0009)) {
 				var0009->show_npc_face0(0x0000);
@@ -45535,7 +45535,7 @@ void Func0448 object#(0x448) () {
 		if (AVATAR->get_item_flag(POISONED) && (item == Func09A0(0x0005, 0x0002))) {
 			var0009 = Func0992(SHAMINO, "@Art thou all right?@", "@Oh...@", true);
 			if (var0009 != AVATAR) {
-				0xFFB8->set_item_flag(SI_ZOMBIE);
+				LYDIA->set_item_flag(SI_ZOMBIE);
 				var0007 = Func09A0(0x0005, 0x0002);
 				var0008 = script var0007 after 5 ticks {
 					nohalt;
@@ -45564,27 +45564,27 @@ void Func0448 object#(0x448) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Hello, there.@");
-		0xFFB8->Func07D1();
-		0xFFB8->set_schedule_type(TALK);
-		Func097F(0xFFB8, "@Hello.@", 0x0002);
-		0xFFB8->clear_item_say();
+		LYDIA->Func07D1();
+		LYDIA->set_schedule_type(TALK);
+		Func097F(LYDIA, "@Hello.@", 0x0002);
+		LYDIA->clear_item_say();
 	}
 	if (event == STARTED_TALKING) {
-		0xFFB8->run_schedule();
+		LYDIA->run_schedule();
 		var000A = false;
-		if (0xFFB8->get_schedule_type() == TEND_SHOP) {
+		if (LYDIA->get_schedule_type() == TEND_SHOP) {
 			var000A = true;
 		}
-		0xFFB8->show_npc_face0(0x0000);
+		LYDIA->show_npc_face0(0x0000);
 		if (!gflags[0x004A]) {
 			say("\"Begone with thee, stranger. No one who hath not passed the Test of Knighthood is worthy of my time.\"");
-			Func097F(0xFFB8, "@Good day.@", 0x0000);
+			Func097F(LYDIA, "@Good day.@", 0x0000);
 			abort;
 		} else if (!var0003) {
 			say("\"I am Lydia. What can I do for thee, ",
 				var0001,
 				"?\"");
-			0xFFB8->set_item_flag(MET);
+			LYDIA->set_item_flag(MET);
 		} else {
 			say("\"Hello, ",
 				var0001,
@@ -45695,7 +45695,7 @@ void Func0448 object#(0x448) () {
 					var000C = Func0956(["Yes", "No", "Will it hurt?"]);
 					if (var000C == "Yes") {
 						say("\"We shall now begin the process. This will hurt, but as a warrior, thou art accustomed to suffering.\"");
-						Func097F(0xFFB8, "@Be seated.@", 0x0000);
+						Func097F(LYDIA, "@Be seated.@", 0x0000);
 						for (var000F in var0004 with var000D to var000E) {
 							Func09AC(var000F, -1, 0, MAJOR_SIT);
 						}
@@ -45703,11 +45703,11 @@ void Func0448 object#(0x448) () {
 						UI_end_conversation();
 						var0010 = var0005->get_object_position();
 						var0010[0x0001] += 0x0001;
-						0xFFB8->set_npc_id(0x0000);
+						LYDIA->set_npc_id(0x0000);
 						AVATAR->si_path_run_usecode(var0010, SCRIPTED, item, Func028C, false);
 						UI_set_path_failure(Func028C, item, SI_PATH_FAILURE);
 						UI_play_music(0x001D, Func09A0(0x0005, 0x0001));
-						0xFFB8->set_schedule_type(WAIT);
+						LYDIA->set_schedule_type(WAIT);
 						abort;
 					}
 					if (var000C == "Will it hurt?") {
@@ -45717,7 +45717,7 @@ void Func0448 object#(0x448) () {
 						} else {
 							say("\"Come back when thou art ready to be a man!\"");
 						}
-						Func097F(0xFFB8, "@Away!@", 0x0000);
+						Func097F(LYDIA, "@Away!@", 0x0000);
 						abort;
 					}
 					say("\"Then perhaps later.\"");
@@ -45746,17 +45746,17 @@ void Func0448 object#(0x448) () {
 					say("\"Thou canst not take me to the dungeons without a fight!\"");
 				}
 				gflags[0x00CA] = true;
-				0xFFB8->clear_item_say();
-				Func097F(0xFFB8, "@En garde!@", 0x0000);
+				LYDIA->clear_item_say();
+				Func097F(LYDIA, "@En garde!@", 0x0000);
 				Func097F(IOLO, "@Stop her!@", 0x0002);
-				Func09AC(0xFFB8, -1, 0, IN_COMBAT);
-				Func09AD(0xFFB8);
+				Func09AC(LYDIA, -1, 0, IN_COMBAT);
+				Func09AD(LYDIA);
 				abort;
 
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@So long...@", 0x0000);
-				Func097F(0xFFB8, "@Good day!@", 0x0002);
+				Func097F(LYDIA, "@Good day!@", 0x0002);
 				break;
 		}
 	}
@@ -51216,7 +51216,7 @@ void Func0496 object#(0x496) () {
 	var0001 = Func0954();
 	var0002 = Func0953();
 	var0003 = false;
-	var0004 = 0xFFB8->get_item_flag(DEAD);
+	var0004 = LYDIA->get_item_flag(DEAD);
 	if (gflags[0x003D] && ((0xFF6A->get_schedule_type() == SLEEP) && (Func08F1() < 0x000F))) {
 		var0005 = true;
 		if ((!IOLO->npc_nearby()) && ((!DUPRE->npc_nearby()) && ((!SHAMINO->npc_nearby()) && (!BOYDON->npc_nearby())))) {
@@ -51503,9 +51503,9 @@ void Func0496 object#(0x496) () {
 					}
 					add(["Luther", "List Field"]);
 					if ((!gflags[0x0038]) && (!gflags[0x0092])) {
-						if (0xFFB8->get_item_flag(DEAD) || 0xFFB5->get_item_flag(DEAD)) {
+						if (LYDIA->get_item_flag(DEAD) || 0xFFB5->get_item_flag(DEAD)) {
 							UI_push_answers();
-							if (0xFFB8->get_item_flag(DEAD)) {
+							if (LYDIA->get_item_flag(DEAD)) {
 								add("Was Lydia the traitor?");
 							}
 							if (0xFFB5->get_item_flag(DEAD)) {
@@ -51529,7 +51529,7 @@ void Func0496 object#(0x496) () {
 					var0002,
 					"? Hast thou been to Moonshade?\"");
 				say("\"Lord Marsten may want us to believe that the traitor hath been caught, but I do not believe it.\"");
-				if (!0xFFB8->get_item_flag(DEAD)) {
+				if (!LYDIA->get_item_flag(DEAD)) {
 					say("\"As a favor to me, please continue searching for the spy. Surely, conclusive evidence shall appear sooner or later...\"");
 				}
 				fallthrough;
@@ -78753,7 +78753,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(0xFFB6, 0x03B8, 0x0A53, WAIT);
 		Func09AC(KRAYG, 0x0404, 0x0A23, WAIT);
 		Func09AC(LUTHER, 0x0412, 0x0A27, WAIT);
-		Func09AC(0xFFB8, 0x0415, 0x0A2B, WAIT);
+		Func09AC(LYDIA, 0x0415, 0x0A2B, WAIT);
 		Func09AC(0xFFB5, 0x0433, 0x0A77, WAIT);
 		Func09AC(0xFFB2, 0x0402, 0x0A82, WAIT);
 		Func09AC(0xFFB1, 0x0407, 0x0A47, WAIT);
