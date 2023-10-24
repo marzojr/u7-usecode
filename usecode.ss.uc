@@ -50079,7 +50079,7 @@ void Func0482 object#(0x482) () {
 				say("\"Thanks to thee for thine identification.\"");
 				GUARD12->set_schedule_type(IN_COMBAT);
 				GUARD13->set_schedule_type(IN_COMBAT);
-				0xFF7C->set_schedule_type(IN_COMBAT);
+				GUARD14->set_schedule_type(IN_COMBAT);
 				0xFF7B->set_schedule_type(IN_COMBAT);
 				abort;
 

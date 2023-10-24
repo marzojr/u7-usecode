@@ -30516,7 +30516,7 @@ void Func0484 object#(0x484) () {
 	var var0004;
 
 	if (event == DOUBLECLICK) {
-		0xFF7C->show_npc_face(0x0000);
+		HENRY->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
 		if (gflags[0x0180]) {
@@ -30590,10 +30590,10 @@ void Func0484 object#(0x484) () {
 				var0001 = Func08F7(KATRINA);
 				if (var0001) {
 					KATRINA->say("\"We have had some good memories, have we not, Henry?\"");
-					0xFF7C->say("\"Oh that we have! But thou wouldst not be my sweetheart, so we resigned ourselves to being 'just friends' a long time ago, is that not true?\"");
+					HENRY->say("\"Oh that we have! But thou wouldst not be my sweetheart, so we resigned ourselves to being 'just friends' a long time ago, is that not true?\"");
 					KATRINA->say("\"Whatever thou dost say, dear Henry.\"");
 					KATRINA->hide();
-					0xFF7C->show_npc_face(0x0000);
+					HENRY->show_npc_face(0x0000);
 				}
 				remove("Katrina");
 				fallthrough;
@@ -30630,9 +30630,9 @@ void Func0484 object#(0x484) () {
 					var0004 = Func08F7(KATRINA);
 					if (var0004) {
 						KATRINA->say("\"I am glad that this situation has concluded in thy favor, dear Henry.\"");
-						0xFF7C->say("\"My thanks to thee, Katrina.\"");
+						HENRY->say("\"My thanks to thee, Katrina.\"");
 						KATRINA->hide();
-						0xFF7C->show_npc_face(0x0000);
+						HENRY->show_npc_face(0x0000);
 					}
 				} else {
 					say("He looks distraught when you make no move to give it to him. \"Where is it?! I need it if I am to prove myself to the woman I love!\"");
@@ -30646,7 +30646,7 @@ void Func0484 object#(0x484) () {
 		say("\"Travel safely and be well.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF7C);
+		Func092E(HENRY);
 	}
 }
 
@@ -30671,7 +30671,7 @@ void Func0485 object#(0x485) () {
 		var0002 = Func08F7(IOLO);
 		var0003 = Func08F7(DUPRE);
 		var0004 = Func08F7(SPARK);
-		var0005 = Func08F7(0xFF7C);
+		var0005 = Func08F7(HENRY);
 		add(["name", "job", "bye"]);
 		if (gflags[0x0180]) {
 			add("strangers");
@@ -30764,9 +30764,9 @@ void Func0485 object#(0x485) () {
 			case "locket found":
 				say("You tell Constance of how you have returned the locket that has been stolen from Henry. \"Oh, how could I ever have doubted my dear darling Henry?\" she frowns. \"I thank thee for telling me the truth.\"");
 				if (var0005) {
-					0xFF7C->say("\"Constance, I am sorry that things ran afoul as they did, but if thou wilt, I would like thee to have this locket as a symbol of my love.\"*");
+					HENRY->say("\"Constance, I am sorry that things ran afoul as they did, but if thou wilt, I would like thee to have this locket as a symbol of my love.\"*");
 					0xFF7B->say("\"My sweet Henry, mine heart belongs to only thee.\"*");
-					0xFF7C->hide();
+					HENRY->hide();
 					0xFF7B->show_npc_face(0x0000);
 				}
 				remove("locket found");
