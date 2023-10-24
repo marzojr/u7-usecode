@@ -15610,7 +15610,7 @@ void Func032B shape#(0x32B) () {
 		IOLO->set_item_flag(MET);
 		0xFEFC->set_item_flag(MET);
 		0xFEFB->set_item_flag(MET);
-		0xFF6D->set_item_flag(SI_ZOMBIE);
+		NEYOBI->set_item_flag(SI_ZOMBIE);
 		0xFF6B->set_item_flag(SI_ZOMBIE);
 		var0008 = [AVATAR, SELINA, KALEN, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, 0xFF33, 0xFF35, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, 0xFF4B, 0xFF4A, CANTRA, 0xFF6A, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, 0xFF58];
 		for (var000B in var0008 with var0009 to var000A) {
@@ -50262,7 +50262,7 @@ void Func048F object#(0x48F) () {
 				say("\"Special things about blood of Ice Dragon that can cure almost any sickness.\"");
 				say("\"But Ice Dragons very rare creatures. Gwani honor all life -- try everything before we hunt them.\"");
 				say("\"One did live north of our village. We drove different one east many years ago.\"");
-				var0012 = 0xFF6D->get_item_flag(SI_ZOMBIE);
+				var0012 = NEYOBI->get_item_flag(SI_ZOMBIE);
 				if (var0012) {
 					say("\"Ice Dragon blood maybe only thing powerful enough to cure Neyobi. But it so rare that it very hard to find. Five of our hunters looking for it.\"");
 					say("\"Gwenno said thou help people in need. Thou must find some Ice Dragon blood for Neyobi! It is the last hope!\"");
@@ -50289,7 +50289,7 @@ void Func048F object#(0x48F) () {
 				fallthrough;
 
 			case "Neyobi" (remove):
-				var0012 = 0xFF6D->get_item_flag(SI_ZOMBIE);
+				var0012 = NEYOBI->get_item_flag(SI_ZOMBIE);
 				if (var0012) {
 					say("\"Neyobi ill from strange sickness. Baiyanda never seen before. Nothing Baiyanda tried help her. Ice Dragon blood only thing that could save her.\"");
 				} else {
@@ -50488,7 +50488,7 @@ void Func0492 object#(0x492) () {
 				fallthrough;
 
 			case "Neyobi" (remove):
-				var0000 = 0xFF6D->get_item_flag(SI_ZOMBIE);
+				var0000 = NEYOBI->get_item_flag(SI_ZOMBIE);
 				if (var0000) {
 					say("\"Neyobi my only daughter. She very sick. Strange sickness put her to sleep. Now she not wake. If she not cured soon, sleeping sickness kill her.\"");
 					add(["strange sickness", "When did this happen?", "cure"]);
@@ -50585,20 +50585,20 @@ void Func0493 object#(0x493) () {
 	var var0003;
 
 	if (event == DOUBLECLICK) {
-		var0000 = 0xFF6D->get_item_flag(SI_ZOMBIE);
+		var0000 = NEYOBI->get_item_flag(SI_ZOMBIE);
 		if (var0000) {
 			AVATAR->item_say("@Wake up, little one!@");
 			var0001 = Func0992(0x0001, "@She cannot wake, Avatar. She is very sick.@", "@Poor little one! She is very sick.@", false);
 			abort;
 		}
 		AVATAR->item_say("@Good morning, little one!@");
-		Func097F(0xFF6D, "@Tee hee hee hee!@", 0x0003);
-		0xFF6D->set_schedule_type(TALK);
+		Func097F(NEYOBI, "@Tee hee hee hee!@", 0x0003);
+		NEYOBI->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF6D->run_schedule();
-		0xFF6D->clear_item_say();
-		0xFF6D->show_npc_face0(0x0000);
+		NEYOBI->run_schedule();
+		NEYOBI->clear_item_say();
+		NEYOBI->show_npc_face0(0x0000);
 		say("\"Thou be Avatar! Thou nice!\"");
 		converse (["name", "What art thou doing?", "bye"]) {
 			case "name" (remove):
@@ -50641,7 +50641,7 @@ void Func0493 object#(0x493) () {
 				UI_remove_npc_face0();
 				UI_remove_npc_face1();
 				Func097F(AVATAR, "@Have fun, little one.@", 0x0000);
-				Func097F(0xFF6D, "@Bye!@", 0x0003);
+				Func097F(NEYOBI, "@Bye!@", 0x0003);
 				break;
 		}
 	}
@@ -50727,7 +50727,7 @@ void Func0494 object#(0x494) () {
 				fallthrough;
 
 			case "Neyobi" (remove):
-				var0005 = 0xFF6D->get_item_flag(SI_ZOMBIE);
+				var0005 = NEYOBI->get_item_flag(SI_ZOMBIE);
 				if (var0005) {
 					say("\"My daughter have severe fever. She dying and only thou canst save her!\"");
 					add("save Neyobi");
@@ -50800,7 +50800,7 @@ void Func0494 object#(0x494) () {
 						add("valuable secret");
 					}
 					gflags[0x0260] = true;
-					0xFF6D->clear_item_flag(SI_ZOMBIE);
+					NEYOBI->clear_item_flag(SI_ZOMBIE);
 				} else {
 					say("\"Thou must give me the blood of an ice dragon so I save daughter.\"");
 				}

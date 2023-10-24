@@ -1414,7 +1414,7 @@ void Func009B shape#(0x9B) () {
 					if (var0004) {
 						var0006 = ROWENA->get_npc_object();
 						var0007 = UI_get_party_list();
-						var0008 = 0xFF6D->get_npc_object();
+						var0008 = FORSYTHE->get_npc_object();
 						if ((var0006 in var0007) || (var0008 in var0007)) {
 							say("\"I may not carry spirits to the mainland.\" He holds his pole in front of himself, blocking your way onto the boat.");
 						} else {
@@ -6692,7 +6692,7 @@ void Func02F2 shape#(0x2F2) () {
 	}
 	if (event == SCRIPTED) {
 		gflags[0x01AA] = true;
-		var0005 = [MORDRA, ROWENA, MARKHAM, PAULETTE, QUENTON, 0xFF6D, HORANCE];
+		var0005 = [MORDRA, ROWENA, MARKHAM, PAULETTE, QUENTON, FORSYTHE, HORANCE];
 		for (var0008 in var0005 with var0006 to var0007) {
 			var0008->clear_item_flag(ASLEEP);
 			var0008->set_schedule_type(WAIT);
@@ -31828,11 +31828,11 @@ void Func048C object#(0x48C) () {
 			ROWENA->hide();
 			MARKHAM->show_npc_face(0x0000);
 		}
-		var0006 = Func08F7(0xFF6D);
+		var0006 = Func08F7(FORSYTHE);
 		if (var0006) {
 			say("\"Oh, uh, hello there Mayor. I thought ye were sequestered in the Town Hall. Well, uh, it's good ta see ya again.\"*");
-			0xFF6D->say("\"Yes, well, it is good to see thee again, too.\"*");
-			0xFF6D->hide();
+			FORSYTHE->say("\"Yes, well, it is good to see thee again, too.\"*");
+			FORSYTHE->hide();
 			MARKHAM->show_npc_face(0x0000);
 			gflags[0x01BD] = true;
 		}
@@ -32331,7 +32331,7 @@ void Func048F object#(0x48F) () {
 		if (ROWENA->get_npc_object()->get_item_flag(IN_PARTY)) {
 			Func08C1();
 		}
-		if (0xFF6D->get_npc_object()->get_item_flag(IN_PARTY)) {
+		if (FORSYTHE->get_npc_object()->get_item_flag(IN_PARTY)) {
 			Func08C2();
 		}
 		if (gflags[0x0198]) {
@@ -32668,12 +32668,12 @@ void Func0491 object#(0x491) () {
 				gflags[0x01BE] = true;
 			}
 		}
-		var0007 = Func08F7(0xFF6D);
+		var0007 = Func08F7(FORSYTHE);
 		if (var0007) {
 			if (!gflags[0x01BD]) {
 				say("\"Hello, Mayor. It has been quite a while since we've seen thee in our tavern. There was a time, I remember, when we couldn't keep thee away.\"*");
-				0xFF6D->say("The mayor becomes quickly embarrassed as he tries to quiet the rather friendly Paulette.~~\"I, er, used to be a wine connoisseur of sorts,\" he says to you.*");
-				0xFF6D->hide();
+				FORSYTHE->say("The mayor becomes quickly embarrassed as he tries to quiet the rather friendly Paulette.~~\"I, er, used to be a wine connoisseur of sorts,\" he says to you.*");
+				FORSYTHE->hide();
 				PAULETTE->say("\"'Tis not all thou wert a connoisseur of,\" adds Paulette, eyes twinkling. \"I seem to remember thou had quite a taste for redheads.\"");
 				gflags[0x01BD] = true;
 			}
@@ -32867,7 +32867,7 @@ void Func0492 object#(0x492) () {
 		}
 		var0006 = UI_get_party_list();
 		var0007 = ROWENA->get_npc_object();
-		var0008 = 0xFF6D->get_npc_object();
+		var0008 = FORSYTHE->get_npc_object();
 		if ((var0007 in var0006) || (var0008 in var0006)) {
 			if (var0007 in var0006) {
 				ROWENA->say("\"Hello, Quenton. I hope thou art doing well.\" Rowena gives the pale ghost a winning smile.*");
@@ -32878,11 +32878,11 @@ void Func0492 object#(0x492) () {
 				QUENTON->say("\"These are glad tidings, for he misses thee so.\"*");
 			}
 			if (var0008 in var0006) {
-				0xFF6D->say("\"Well met, Quenton.\" The Mayor's mustache spreads as he smiles.*");
-				0xFF6D->hide();
+				FORSYTHE->say("\"Well met, Quenton.\" The Mayor's mustache spreads as he smiles.*");
+				FORSYTHE->hide();
 				QUENTON->say("\"Hello, Mayor. How dost thou fare, milord?\"*");
-				0xFF6D->say("Forsythe seems taken aback by Quenton's sincere sounding query. \"Why, I fare well, Quenton. I thank thee for thy concern.\"*");
-				0xFF6D->hide();
+				FORSYTHE->say("Forsythe seems taken aback by Quenton's sincere sounding query. \"Why, I fare well, Quenton. I thank thee for thy concern.\"*");
+				FORSYTHE->hide();
 				QUENTON->say("He smiles in acknowledgement of the Mayor's thanks.*");
 			}
 			var0009 = true;
@@ -33054,16 +33054,16 @@ void Func0493 object#(0x493) () {
 	var var0008;
 
 	if (event == DOUBLECLICK) {
-		0xFF6D->show_npc_face(0x0000);
+		FORSYTHE->show_npc_face(0x0000);
 		var0000 = false;
 		var0001 = UI_part_of_day();
-		var0002 = 0xFF6D->get_schedule_type();
+		var0002 = FORSYTHE->get_schedule_type();
 		if (!gflags[0x01BB]) {
 			say("You see a ghostly man cowering in the corner. Holding up an ankh in a protective fashion, he looks around the room frantically, but takes no notice of you.*");
 			abort;
 		}
 		var0003 = UI_get_party_list();
-		if (0xFF6D->get_npc_object() in var0003) {
+		if (FORSYTHE->get_npc_object() in var0003) {
 			add("leave");
 			var0004 = AVATAR->find_nearby(0x02EC, 0x001E, MASK_NONE);
 			if (var0004) {
@@ -33251,8 +33251,8 @@ void Func0493 object#(0x493) () {
 
 			case "leave":
 				say("\"As thou wishest!\"");
-				0xFF6D->remove_from_party();
-				0xFF6D->set_schedule_type(LOITER);
+				FORSYTHE->remove_from_party();
+				FORSYTHE->set_schedule_type(LOITER);
 				fallthrough;
 
 			case "Trent":
@@ -69079,7 +69079,7 @@ void Func088A 0x88A () {
 	}
 	if (var0001 < 0x0008) {
 		say("He steps in line and motions for you to lead on.*");
-		0xFF6D->add_to_party();
+		FORSYTHE->add_to_party();
 		gflags[0x0198] = false;
 		abort;
 	}
@@ -69109,9 +69109,9 @@ void Func088B 0x88B () {
 	var0005 = script var0000 after var0001 ticks {
 		frame 0;
 	};
-	0xFF6D->remove_from_party();
-	0xFF6D->set_schedule_type(WAIT);
-	var0006 = [0xFF6D, MORDRA, TRENT, ROWENA, MARKHAM, QUENTON, PAULETTE];
+	FORSYTHE->remove_from_party();
+	FORSYTHE->set_schedule_type(WAIT);
+	var0006 = [FORSYTHE, MORDRA, TRENT, ROWENA, MARKHAM, QUENTON, PAULETTE];
 	for (var0009 in var0006 with var0007 to var0008) {
 		var0009->remove_npc();
 	}
@@ -71444,7 +71444,7 @@ void Func08AF 0x8AF () {
 
 	HORANCE->show_npc_face(0x0001);
 	var0000 = UI_get_party_list();
-	if (!(0xFF6D->get_npc_object() in var0000)) {
+	if (!(FORSYTHE->get_npc_object() in var0000)) {
 		say("\"Is there a problem? Art thou confounded by thy task?\"");
 		var0001 = Func090A();
 		if (!var0001) {
@@ -71462,7 +71462,7 @@ void Func08AF 0x8AF () {
 	}
 	if (!gflags[0x01A3]) {
 		say("\"Very good, now thou shalt take the Mayor to the well and he must enter it of his own free will. When he does that, the souls of the island and the well will be free to go on to their destiny. Unfortunately, Mayor Forsythe will be lost for all time.\"");
-		var0003 = Func08F7(0xFF6D);
+		var0003 = Func08F7(FORSYTHE);
 		if (var0003) {
 			say(" He looks sadly at the ghostly gentleman.");
 		}
@@ -72589,19 +72589,19 @@ void Func08C2 0x8C2 () {
 	var0000 = Func0909();
 	var0001 = Func0908();
 	say("\"Well, hello, Mayor Forsythe. Thou has finally decided to assist in the salvation of our town.\" She gives him a pointed look.*");
-	0xFF6D->say("\"Look here, I wasn't the one who gave that fool recipe to Caine, now was I?\"*");
-	0xFF6D->hide();
+	FORSYTHE->say("\"Look here, I wasn't the one who gave that fool recipe to Caine, now was I?\"*");
+	FORSYTHE->hide();
 	MORDRA->say("\"That fool recipe just got rid of Horance for us.\" Mistress Mordra speaks through clenched teeth.*");
-	0xFF6D->say("\"Hmmph. Thou hast taken thy sweet time, madam. And now I am off to jump in a well.\"*");
-	0xFF6D->hide();
+	FORSYTHE->say("\"Hmmph. Thou hast taken thy sweet time, madam. And now I am off to jump in a well.\"*");
+	FORSYTHE->hide();
 	MORDRA->say("\"Ignorant fool!\"*");
-	0xFF6D->say("\"Old biddy!\"*");
-	0xFF6D->hide();
+	FORSYTHE->say("\"Old biddy!\"*");
+	FORSYTHE->hide();
 	MORDRA->say("\"Thou wilt regret that, Toad.\" Fire flares in the depths of her eyes and electricity crackles in her hair. She lifts her arms as if to cast some dreadful spell, but Forsythe whimpers and hides behind you. She sees the look on your face and slowly lowers her arms. The flames and lightning flicker, and die.~~\"Forgive my behavior, ",
 		var0000,
 		". What was that about a well.\" You explain that Forsythe has volunteered to sacrifice himself for the spirits of the others. She looks him in the eyes. He brushes himself off and stands up straight. \"I didst not think that thou had it in thee, Mayor. I am in thy debt.\"*");
-	0xFF6D->say("\"Yes, well. Thou art welcome, I guess.\" He looks as if his dignity has been somewhat replenished.*");
-	0xFF6D->hide();
+	FORSYTHE->say("\"Yes, well. Thou art welcome, I guess.\" He looks as if his dignity has been somewhat replenished.*");
+	FORSYTHE->hide();
 	MORDRA->say("\"I suppose thou hadst better get thee hence, then. Fare thee well, Forsythe. 'Tis not all that bad, roaming the ether. At least not once thou becomest accustomed to it.\"~~She turns to you. \"Goodbye, ",
 		var0001,
 		". If thou art successful, I will not see thee again. May thy fortunes be good.*\"");
