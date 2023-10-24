@@ -71998,10 +71998,10 @@ void Func06FD object#(0x6FD) () {
 		set_schedule_type(WANDER);
 	}
 	if (event == SI_PATH_SUCCESS) {
-		0xFFAC->set_schedule_type(WAIT);
+		GUARD1->set_schedule_type(WAIT);
 		var0000 = get_object_position();
 		UI_sprite_effect(ANIMATION_TELEPORT, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-		0xFFAC->move_object([0x0722, 0x0273, 0x0000]);
+		GUARD1->move_object([0x0722, 0x0273, 0x0000]);
 		UI_sprite_effect(ANIMATION_TELEPORT, 0x0722, 0x0273, 0x0000, 0x0000, 0x000F, LOOP_ONCE2);
 	}
 	if (event == SCRIPTED) {
@@ -72009,9 +72009,9 @@ void Func06FD object#(0x6FD) () {
 		if ((get_schedule_type() == WAIT) || (get_schedule_type() == SPECIAL)) {
 			abort;
 		}
-		0xFFAC->set_schedule_type(WAIT);
+		GUARD1->set_schedule_type(WAIT);
 		UI_sprite_effect(ANIMATION_TELEPORT, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-		0xFFAC->move_object([0x0722, 0x0273, 0x0000]);
+		GUARD1->move_object([0x0722, 0x0273, 0x0000]);
 		UI_sprite_effect(ANIMATION_TELEPORT, 0x0722, 0x0273, 0x0000, 0x0000, 0x000F, LOOP_ONCE2);
 	}
 	if (event == EGG) {
@@ -72027,24 +72027,24 @@ void Func06FD object#(0x6FD) () {
 			var0004->remove_item();
 			if (gflags[0x0229]) {
 				if (gflags[0x022A]) {
-					if ((0xFFAC->get_schedule_type() != WAIT) || 0xFFAC->get_item_flag(SI_ZOMBIE)) {
+					if ((GUARD1->get_schedule_type() != WAIT) || GUARD1->get_item_flag(SI_ZOMBIE)) {
 						abort;
 					}
-					0xFFAC->set_npc_id(0x000D);
-					var0000 = 0xFFAC->get_object_position();
+					GUARD1->set_npc_id(0x000D);
+					var0000 = GUARD1->get_object_position();
 					UI_sprite_effect(ANIMATION_TELEPORT, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 					var0000 = get_object_position();
-					0xFFAC->move_object([(var0000[0x0001] - 0x0004), var0000[0x0002], 0x0000]);
+					GUARD1->move_object([(var0000[0x0001] - 0x0004), var0000[0x0002], 0x0000]);
 					UI_sprite_effect(ANIMATION_TELEPORT, (var0000[0x0001] - 0x0004), var0000[0x0002], 0x0000, 0x0000, 0x000F, LOOP_ONCE2);
-					var0005 = script 0xFFAC {
+					var0005 = script GUARD1 {
 						nohalt;
 						wait 60;
 						call Func06FD;
 					};
-					0xFFAC->set_alignment(CHAOTIC);
-					0xFFAC->set_npc_id(0x000D);
-					Func09AC(0xFFAC, (var0000[0x0001] - 0x0004), var0000[0x0002], WANDER);
-					0xFFAC->si_path_run_usecode([0x071E, 0x0277, 0x0000], SI_PATH_SUCCESS, 0xFFAC->get_npc_object(), Func06FD, false);
+					GUARD1->set_alignment(CHAOTIC);
+					GUARD1->set_npc_id(0x000D);
+					Func09AC(GUARD1, (var0000[0x0001] - 0x0004), var0000[0x0002], WANDER);
+					GUARD1->si_path_run_usecode([0x071E, 0x0277, 0x0000], SI_PATH_SUCCESS, GUARD1->get_npc_object(), Func06FD, false);
 				} else {
 					gflags[0x022A] = true;
 				}

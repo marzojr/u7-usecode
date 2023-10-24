@@ -23192,7 +23192,7 @@ void Func0454 object#(0x454) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFFAC->show_npc_face(0x0000);
+	SASHA->show_npc_face(0x0000);
 	var0000 = Func0909();
 	add(["name", "job", "bye"]);
 	if (!gflags[0x010F]) {
