@@ -53155,7 +53155,7 @@ void Func04A2 object#(0x4A2) () {
 	var0002 = Func0953();
 	if (event == DOUBLECLICK) {
 		item_say("@Well done!@");
-		0xFF5E->Func07D1();
+		JAIL_03->Func07D1();
 		var0003 = script item {
 			wait 2;
 			call Func04A2;
@@ -53175,8 +53175,8 @@ void Func04A2 object#(0x4A2) () {
 			}
 		} else {
 			say("\"But it is my task to bar thine exit still. If thou canst defeat me, thou mayest take the key and be free!\"* \"But if thou canst not, thou wilt remain here. Forever!\"");
-			Func097F(0xFF5E, "@To arms, felon!@", 0x0002);
-			Func09AD(0xFF5E);
+			Func097F(JAIL_03, "@To arms, felon!@", 0x0002);
+			Func09AD(JAIL_03);
 			abort;
 		}
 	}

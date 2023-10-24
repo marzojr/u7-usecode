@@ -35279,7 +35279,7 @@ void Func04A2 object#(0x4A2) () {
 	var var0002;
 
 	if (event == DOUBLECLICK) {
-		0xFF5E->show_npc_face(0x0000);
+		ELAD->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		add(["name", "job", "bye"]);
@@ -35383,7 +35383,7 @@ void Func04A2 object#(0x4A2) () {
 			", I will have the opportunity to join thee. Pleasant journey, my friend.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF5E);
+		Func092E(ELAD);
 	}
 }
 
