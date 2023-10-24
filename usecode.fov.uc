@@ -25224,7 +25224,7 @@ void Func0462 object#(0x462) () {
 
 	if (event == DOUBLECLICK) {
 		var0000 = Func0931(PARTY, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
-		0xFF9E->show_npc_face(0x0000);
+		SARALEK->show_npc_face(0x0000);
 		if (!gflags[0x0154]) {
 			if (!var0000) {
 				say("The creature ignores you.*");
@@ -74427,7 +74427,7 @@ void Func08E0 0x8E0 () {
 	var var0000;
 	var var0001;
 
-	0xFF9E->say("The ape-like creature slowly and cautiously walks up to you. He, or she, sniffs for a moment, and then points to the honey you are carrying.");
+	SARALEK->say("The ape-like creature slowly and cautiously walks up to you. He, or she, sniffs for a moment, and then points to the honey you are carrying.");
 	converse (["Want honey?", "Go away!"]) {
 		case "Want honey?":
 			say("\"Honey will be given by you to me?\"");

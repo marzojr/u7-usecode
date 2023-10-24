@@ -48852,7 +48852,7 @@ void Func045E object#(0x45E) () {
 					Func094E(0xFF9D, "@It cannot be! I was with Number 1!@");
 					0x0000->set_conversation_slot();
 					say("\"Thou hast wronged me!\"");
-					var0002 = [MURDER1, MURDER2, MURDER3, MURDER4, 0xFF9E, 0xFF9D];
+					var0002 = [MURDER1, MURDER2, MURDER3, MURDER4, MURDER5, 0xFF9D];
 					for (var0005 in var0002 with var0003 to var0004) {
 						var0005->set_alignment(CHAOTIC);
 						var0005->set_schedule_type(IN_COMBAT);
@@ -48961,7 +48961,7 @@ void Func045F object#(0x45F) () {
 					Func094E(MURDER1, "@Number 2 was with me, as was Number 6!@");
 					0x0000->set_conversation_slot();
 					say("\"Thou shalt pay!\"");
-					var0002 = [MURDER1, MURDER2, MURDER3, MURDER4, 0xFF9E, 0xFF9D];
+					var0002 = [MURDER1, MURDER2, MURDER3, MURDER4, MURDER5, 0xFF9D];
 					for (var0005 in var0002 with var0003 to var0004) {
 						var0005->set_alignment(CHAOTIC);
 						var0005->set_schedule_type(IN_COMBAT);
@@ -49047,10 +49047,10 @@ void Func0460 object#(0x460) () {
 				say("\"Dost thou accuse me?\"");
 				if (Func0955()) {
 					say("\"Thou art mad! I was with Number 5 when Number 7 disappeared!\"");
-					Func094E(0xFF9E, "@Number 3 was with me!@");
+					Func094E(MURDER5, "@Number 3 was with me!@");
 					0x0000->set_conversation_slot();
 					say("\"I shall make thee bleed!\"");
-					var0002 = [MURDER1, MURDER2, MURDER3, MURDER4, 0xFF9E, 0xFF9D];
+					var0002 = [MURDER1, MURDER2, MURDER3, MURDER4, MURDER5, 0xFF9D];
 					for (var0005 in var0002 with var0003 to var0004) {
 						var0005->set_alignment(CHAOTIC);
 						var0005->set_schedule_type(IN_COMBAT);
@@ -49186,14 +49186,14 @@ void Func0462 object#(0x462) () {
 	var0001 = Func0953();
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@May we speak?@");
-		0xFF9E->Func07D1();
-		Func097F(0xFF9E, (("@Yes, " + var0000) + "?@"), 0x0002);
-		0xFF9E->set_schedule_type(TALK);
+		MURDER5->Func07D1();
+		Func097F(MURDER5, (("@Yes, " + var0000) + "?@"), 0x0002);
+		MURDER5->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF9E->run_schedule();
-		0xFF9E->clear_item_say();
-		0xFF9E->show_npc_face0(0x0000);
+		MURDER5->run_schedule();
+		MURDER5->clear_item_say();
+		MURDER5->show_npc_face0(0x0000);
 		if (gflags[0x0233]) {
 			say("\"That hath made good use of thy Logic, ",
 				var0000,
@@ -49243,7 +49243,7 @@ void Func0462 object#(0x462) () {
 					Func094E(MURDER3, "@It is true, Number 5 was with me!@");
 					0x0000->set_conversation_slot();
 					say("\"I shall have thine head for this outrage!\"");
-					var0002 = [MURDER1, MURDER2, MURDER3, MURDER4, 0xFF9E, 0xFF9D];
+					var0002 = [MURDER1, MURDER2, MURDER3, MURDER4, MURDER5, 0xFF9D];
 					for (var0005 in var0002 with var0003 to var0004) {
 						var0005->set_alignment(CHAOTIC);
 						var0005->set_schedule_type(IN_COMBAT);
@@ -49259,8 +49259,8 @@ void Func0462 object#(0x462) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Many thanks!@", 0x0000);
-				Func097F(0xFF9E, "@Use thy Logic!@", 0x0002);
-				0xFF9E->set_schedule_type(LOITER);
+				Func097F(MURDER5, "@Use thy Logic!@", 0x0002);
+				MURDER5->set_schedule_type(LOITER);
 				break;
 		}
 	}
@@ -49334,7 +49334,7 @@ void Func0463 object#(0x463) () {
 					Func094E(MURDER2, "@It cannot be! I was with Number 1!@");
 					0x0000->set_conversation_slot();
 					say("\"Thou shalt regret thy words!\"");
-					var0002 = [MURDER1, MURDER2, MURDER3, MURDER4, 0xFF9E, 0xFF9D];
+					var0002 = [MURDER1, MURDER2, MURDER3, MURDER4, MURDER5, 0xFF9D];
 					for (var0005 in var0002 with var0003 to var0004) {
 						var0005->set_alignment(CHAOTIC);
 						var0005->set_schedule_type(IN_COMBAT);
