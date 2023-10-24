@@ -107449,7 +107449,7 @@ void Func0926 0x926 (var var0000) {
 		Func0927();
 	}
 	if (var0000 == 0x0018) {
-		var0001 = [0xFF55, 0xFF54, 0xFF53, 0xFF52, 0xFF51];
+		var0001 = [SEX_01, 0xFF54, 0xFF53, 0xFF52, 0xFF51];
 		var0002 = "@Thank thee!@" & ("@Bless thee!@" & ("@We are saved!@" & "@Praise the Hero!@"));
 		for (var0005 in var0001 with var0003 to var0004) {
 			var0005->clear_item_say();
@@ -107506,7 +107506,7 @@ void Func0927 0x927 () {
 	var var0008;
 
 	UI_play_music(0x001C, Func09A0(0x0005, 0x0001));
-	var0000 = [0xFF55, 0xFF54, 0xFF53, 0xFF52, 0xFF51];
+	var0000 = [SEX_01, 0xFF54, 0xFF53, 0xFF52, 0xFF51];
 	var0001 = ["@Ohh! Yes!@", "@Most pleasant!@", "@Oh, my!@", "@Do thou that again!@", "@Oh, baby...@"];
 	for (var0004 in var0000 with var0002 to var0003) {
 		var0005 = UI_die_roll(0x0001, 0x0005);

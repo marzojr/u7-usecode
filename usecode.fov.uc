@@ -36824,7 +36824,7 @@ void Func04AB object#(0x4AB) () {
 	var var0008;
 
 	if (event == DOUBLECLICK) {
-		0xFF55->show_npc_face(0x0000);
+		GARRITT->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
@@ -37005,11 +37005,11 @@ void Func04AB object#(0x4AB) () {
 		}
 		say("\"Goodbye, then.\"*");
 		if (gflags[0x0218]) {
-			0xFF55->get_npc_object()->set_schedule_type(LOITER);
+			GARRITT->get_npc_object()->set_schedule_type(LOITER);
 		}
 	}
 	if (event == PROXIMITY) {
-		var0006 = 0xFF55->get_npc_object()->get_schedule_type();
+		var0006 = GARRITT->get_npc_object()->get_schedule_type();
 		var0007 = UI_die_roll(0x0001, 0x0004);
 		if (var0006 == KID_GAMES) {
 			if (var0007 == 0x0001) {
@@ -37024,9 +37024,9 @@ void Func04AB object#(0x4AB) () {
 			if (var0007 == 0x0004) {
 				var0008 = "@Tag! Thou art it!@";
 			}
-			0xFF55->item_say(var0008);
+			GARRITT->item_say(var0008);
 		} else {
-			Func092E(0xFF55);
+			Func092E(GARRITT);
 		}
 	}
 }
