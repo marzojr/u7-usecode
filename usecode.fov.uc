@@ -35948,10 +35948,10 @@ void Func04A6 object#(0x4A6) () {
 	var var0009;
 
 	if (event == DOUBLECLICK) {
-		0xFF5A->show_npc_face(0x0000);
+		THURSTON->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFF5A->get_npc_object()->get_schedule_type();
+		var0002 = THURSTON->get_npc_object()->get_schedule_type();
 		var0003 = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
 		if (gflags[0x0212] && (!gflags[0x0218])) {
@@ -36117,7 +36117,7 @@ labelFunc04A6_02F6:
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF5A);
+		Func092E(THURSTON);
 	}
 }
 
