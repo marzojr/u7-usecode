@@ -27038,7 +27038,7 @@ void Func046F object#(0x46F) () {
 	var var0003;
 
 	if (event == DOUBLECLICK) {
-		0xFF91->show_npc_face(0x0000);
+		GHARL->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		add(["name", "job", "bye"]);
