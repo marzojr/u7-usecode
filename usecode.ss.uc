@@ -6845,11 +6845,11 @@ labelFunc01C3_073B:
 				Func097F(0xFFB0, "@An outrage!@", 0x0000);
 			}
 			UI_end_conversation();
-			0xFFBD->move_object([0x0437, 0x0A7C, 0x0000]);
-			0xFFBD->si_path_run_usecode([0x0421, 0x0A74, 0x0000], SI_PATH_SUCCESS, 0xFFBD->get_npc_object(), Func01C3, false);
-			UI_set_path_failure(Func01C3, 0xFFBD->get_npc_object(), SI_PATH_FAILURE);
-			Func097F(0xFFBD, "@Terrible news!@", 0x000A);
-			0xFFBD->set_item_flag(MET);
+			HARNNA->move_object([0x0437, 0x0A7C, 0x0000]);
+			HARNNA->si_path_run_usecode([0x0421, 0x0A74, 0x0000], SI_PATH_SUCCESS, HARNNA->get_npc_object(), Func01C3, false);
+			UI_set_path_failure(Func01C3, HARNNA->get_npc_object(), SI_PATH_FAILURE);
+			Func097F(HARNNA, "@Terrible news!@", 0x000A);
+			HARNNA->set_item_flag(MET);
 			UI_play_music(0x001E, Func09A0(0x0005, 0x0001));
 			abort;
 		}
@@ -7111,7 +7111,7 @@ labelFunc01C3_073B:
 		Func097F(0xFFB9, "@Coward!@", 0x0008);
 		Func097F(CALADIN, "@I'm hungry!@", 0x000A);
 		gflags[0x0048] = true;
-		var0018 = [0xFFBC, CELLIA, 0xFF6A, 0xFFB3, 0xFFB6, 0xFFBB, 0xFFBD, 0xFFB0, CALADIN, 0xFFBA, 0xFFB1, 0xFFB9];
+		var0018 = [0xFFBC, CELLIA, 0xFF6A, 0xFFB3, 0xFFB6, 0xFFBB, HARNNA, 0xFFB0, CALADIN, 0xFFBA, 0xFFB1, 0xFFB9];
 		for (var0005 in var0018 with var0019 to var001A) {
 			var0005->revert_schedule();
 			var0005->run_schedule();
@@ -7126,13 +7126,13 @@ labelFunc01C3_073B:
 			actor frame bowing;
 			actor frame standing;
 		};
-		var0003 = script 0xFFBD {
+		var0003 = script HARNNA {
 			nohalt;
 			actor frame kneeling;
 			actor frame bowing;
 			actor frame standing;
 		};
-		var001D = [CELLIA, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, 0xFFBB, 0xFFB3];
+		var001D = [CELLIA, 0xFFB0, HARNNA, 0xFFBC, 0xFFBA, 0xFFBB, 0xFFB3];
 		for (var0005 in var001D with var001E to var001F) {
 			var0005->clear_item_flag(SI_TOURNAMENT);
 		}
@@ -7175,8 +7175,8 @@ labelFunc01C3_073B:
 			UI_set_path_failure(Func01C3, 0xFFB6->get_npc_object(), SI_PATH_FAILURE);
 			abort;
 		}
-		if (item == 0xFFBD->get_npc_object()) {
-			0xFFBD->move_object([0x0421, 0x0A74, 0x0000]);
+		if (item == HARNNA->get_npc_object()) {
+			HARNNA->move_object([0x0421, 0x0A74, 0x0000]);
 			event = SI_PATH_SUCCESS;
 		}
 		if ((item == 0xFFBC->get_npc_object()) && (0xFFBB->get_npc_id() == 0x000C)) {
@@ -7243,11 +7243,11 @@ labelFunc01C3_073B:
 			UI_set_path_failure(Func01C3, 0xFFB6->get_npc_object(), SI_PATH_FAILURE);
 			abort;
 		}
-		if (item == 0xFFBD->get_npc_object()) {
+		if (item == HARNNA->get_npc_object()) {
 			gflags[0x0079] = true;
-			0xFFBD->set_schedule_type(WAIT);
+			HARNNA->set_schedule_type(WAIT);
 			UI_init_conversation();
-			0xFFBD->show_npc_face0(0x0000);
+			HARNNA->show_npc_face0(0x0000);
 			say("\"My daughter Cantra is gone! I have looked everywhere for her. We need to send out a patrol!\"");
 			0xFFB1->show_npc_face1(0x0000);
 			say("\"The Goblins have struck again!\"");
@@ -7258,7 +7258,7 @@ labelFunc01C3_073B:
 			0xFF6A->show_npc_face1(0x0000);
 			say("\"Thou canst not know any such thing. It must have been the Goblins. Remember, they killed thine husband right outside this city, not even leaving a body!\"");
 			UI_end_conversation();
-			var0003 = script 0xFFBD {
+			var0003 = script HARNNA {
 				nohalt;
 				say "@My daughter!@";
 				actor frame bowing;
@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, CELLIA, 0xFFB0, 0xFFBD, 0xFFBC, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, CELLIA, 0xFFB0, HARNNA, 0xFFBC, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -42097,14 +42097,14 @@ void Func0440 object#(0x440) () {
 		0xFEDB->run_schedule();
 		CANTRA->remove_npc();
 		if (gflags[0x0095] && (!gflags[0x005B])) {
-			0xFFBD->move_object([0x0345, 0x0A8B, 0x0000]);
-			Func09AC(0xFFBD, -1, -1, WAIT);
-			0xFFBD->clear_item_flag(ASLEEP);
-			var0003 = script 0xFFBD {
+			HARNNA->move_object([0x0345, 0x0A8B, 0x0000]);
+			Func09AC(HARNNA, -1, -1, WAIT);
+			HARNNA->clear_item_flag(ASLEEP);
+			var0003 = script HARNNA {
 				nohalt;
 				face east;
 			};
-			var0003 = script 0xFFBD after 30 ticks {
+			var0003 = script HARNNA after 30 ticks {
 				nohalt;
 				call Func0443;
 			};
@@ -42638,22 +42638,22 @@ void Func0443 object#(0x443) () {
 		};
 	}
 	if (event == SCRIPTED) {
-		Func09AC(0xFFBD, -1, -1, TALK);
+		Func09AC(HARNNA, -1, -1, TALK);
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Greetings, milady.@");
-		0xFFBD->Func07D1();
-		Func097F(0xFFBD, "@Greetings to thee.@", 0x0002);
-		0xFFBD->set_schedule_type(TALK);
+		HARNNA->Func07D1();
+		Func097F(HARNNA, "@Greetings to thee.@", 0x0002);
+		HARNNA->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFBD->clear_item_say();
-		0xFFBD->run_schedule();
-		0xFFBD->show_npc_face0(0x0000);
+		HARNNA->clear_item_say();
+		HARNNA->run_schedule();
+		HARNNA->show_npc_face0(0x0000);
 		if (gflags[0x0095] && (!gflags[0x005B])) {
 			if (gflags[0x008C]) {
-				0xFFBD->revert_schedule();
-				0xFFBD->run_schedule();
+				HARNNA->revert_schedule();
+				HARNNA->run_schedule();
 				say("\"As thou hast now seen, the peril that faces Cantra doth go beyond merely being taken by the Goblins. Some foul thing doth possess her.\"");
 				say("\"The worst the Goblins could do would be to kill her and destroy her body. This new uncertain danger is nothing less than a threat to her spirit, the very essence of her being!\"");
 				say("\"I implore thee, please find her and rescue her. It is certain to be a perilous undertaking and I cannot blame thee if thou wouldst refuse the pleas of a simple woman.\"");
@@ -42667,27 +42667,27 @@ void Func0443 object#(0x443) () {
 					say("\"This is the very same practice sword that Cantra used every day.\"");
 					say("\"Now that thou hast my daughter's sword, thou shouldst find one of the legendary Hounds of Doskar. They will be able to sniff Cantra's essence from the sword, and then track her to anywhere in the Serpent Isle.\"");
 					say("\"The only dilemma thou dost face now is to find one of the Hounds of Doskar. I do not know where one may be found, but I foresee that thou must find the Hound before thou canst rescue my daughter.\"");
-					0xFFBD->set_schedule_type(SHY);
+					HARNNA->set_schedule_type(SHY);
 				} else {
 					say("\"Then mine only daughter Cantra shall soon be dead... or worse. Leave thou me now.\"");
-					0xFFBD->set_schedule_type(SHY);
-					Func097F(0xFFBD, "@Oh...@", 0x0000);
+					HARNNA->set_schedule_type(SHY);
+					Func097F(HARNNA, "@Oh...@", 0x0000);
 					abort;
 				}
 			} else {
 				say("\"Thou must find the crystal and gaze into it. Go to mine home. It is there, on the table.\"");
 				say("\"I beg of thee, for thy sake as well as the sake of my missing child, look into the glass.\"");
-				Func097F(0xFFBD, "@The crystal!@", 0x0000);
+				Func097F(HARNNA, "@The crystal!@", 0x0000);
 				abort;
 			}
 		} else if (gflags[0x0048]) {
 			if (!gflags[0x0079]) {
 				say("\"My daughter Cantra is missing! I know she would never run away from me, but I feel certain that the Goblins did not take her.\"");
 				gflags[0x0079] = true;
-				if (!0xFFBD->get_item_flag(MET)) {
+				if (!HARNNA->get_item_flag(MET)) {
 					say("\"Pray excuse my poor manners, stranger! I am Widow Harnna, the Healer of Monitor. I also sell vegetables from my garden.\"");
 					add(["widow", "healing", "food", "information"]);
-					0xFFBD->set_item_flag(MET);
+					HARNNA->set_item_flag(MET);
 				} else {
 					say("\"Pray excuse mine outburst, ",
 						var0002,
@@ -42695,27 +42695,27 @@ void Func0443 object#(0x443) () {
 				}
 				add(["healing", "food", "information"]);
 			} else {
-				if (!0xFFBD->get_item_flag(MET)) {
+				if (!HARNNA->get_item_flag(MET)) {
 					say("\"I am Widow Harnna, the Healer of Monitor. I also sell vegetables from my garden.\"");
 					add(["widow", "healing", "food", "information"]);
-					0xFFBD->set_item_flag(MET);
+					HARNNA->set_item_flag(MET);
 				} else {
 					say("\"How may I help thee now? Dost thou have need of healing, or dost thou wish to buy my vegetables?\"");
 				}
 				add(["healing", "food", "information"]);
 			}
 		} else {
-			var0004 = 0xFFBD->find_nearby(0x0334, 0x0014, MASK_NONE);
+			var0004 = HARNNA->find_nearby(0x0334, 0x0014, MASK_NONE);
 			for (var0007 in var0004 with var0005 to var0006) {
 				if (var0007->get_item_quality() == 0x0048) {
 					say("\"Perhaps we may speak at another time. Mine husband is recently dead, and I am in mourning.\"");
 					abort;
 				}
 			}
-			if (!0xFFBD->get_item_flag(MET)) {
+			if (!HARNNA->get_item_flag(MET)) {
 				say("\"How may I help thee? I am Widow Harnna, the Healer of Monitor. I also grow mine own food.\"");
 				add(["widow", "healing", "food", "information"]);
-				0xFFBD->set_item_flag(MET);
+				HARNNA->set_item_flag(MET);
 			} else {
 				say("\"How may I help thee now? Dost thou have need of healing, or dost thou wish to buy my vegetables?\"");
 			}
@@ -42776,7 +42776,7 @@ void Func0443 object#(0x443) () {
 						say("\"It is a comfort to know that my daughter is among the monks. Yet I have a foreboding...\"");
 						say("\"Something is coming to me... a thought... a premonition...\"");
 						say("\"Go! The monks have need of thee. My daughter hath need of thee!\"");
-						Func097F(0xFFBD, "@Go to Monk Isle!@", 0x0000);
+						Func097F(HARNNA, "@Go to Monk Isle!@", 0x0000);
 						abort;
 					}
 					say("\"I know that mine only daughter Cantra is now dead. Her spirit hath been haunting me. She is suffering and tormented.\"");
@@ -42798,12 +42798,12 @@ void Func0443 object#(0x443) () {
 						say("\"What I have to show thee should quell any doubts thou mayest yet have.\"");
 					}
 					gflags[0x0095] = true;
-					if (0xFFBD->get_schedule_type() != PATROL) {
+					if (HARNNA->get_schedule_type() != PATROL) {
 						say("\"Go to mine home. There thou shalt find a crystal ball. Gaze into it, and let thy mind be clear.\"");
 					} else {
 						say("\"Look into my crystal ball. Thou shalt find it on the table within mine home. Let thy mind be clear.\"");
 					}
-					Func097F(0xFFBD, "@The crystal!@", 0x0000);
+					Func097F(HARNNA, "@The crystal!@", 0x0000);
 					abort;
 				} else if (!gflags[0x0047]) {
 					say("\"I am so grateful that thou hast taken on the quest of saving my daughter. If I can help thee, ask.\"");
@@ -42858,7 +42858,7 @@ void Func0443 object#(0x443) () {
 							}
 							say("\"In order for me to provide a permanent cure to thine affliction, thou must bring me five leaves of the Varo plant.\"");
 							Func0836();
-							Func097F(0xFFBD, "@Quickly...@", 0x0000);
+							Func097F(HARNNA, "@Quickly...@", 0x0000);
 							abort;
 						} while (false);
 					}
@@ -43619,7 +43619,7 @@ void Func0443 object#(0x443) () {
 					UI_remove_npc_face0();
 					UI_remove_npc_face1();
 					Func097F(AVATAR, (("@Good " + var0000) + "!@"), 0x0000);
-					Func097F(0xFFBD, "@And to thee.@", 0x0002);
+					Func097F(HARNNA, "@And to thee.@", 0x0002);
 					abort;
 				}
 
@@ -78760,8 +78760,8 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(0xFFBB, 0x0427, 0x09C7, WAIT);
 		Func09AC(0xFFB3, 0x0442, 0x09CA, WAIT);
 		Func09AC(0xFFBA, 0x03F6, 0x0A45, WAIT);
-		0xFFBD->set_new_schedules([DAWN, NOON, AFTERNOON, NIGHT], [0x000B, LOITER, WANDER, SLEEP], [0x034A, 0x0AB4, 0x0409, 0x0A24, 0x03A9, 0x0A1B, 0x035B, 0x0A8A]);
-		0xFFBD->run_schedule();
+		HARNNA->set_new_schedules([DAWN, NOON, AFTERNOON, NIGHT], [0x000B, LOITER, WANDER, SLEEP], [0x034A, 0x0AB4, 0x0409, 0x0A24, 0x03A9, 0x0A1B, 0x035B, 0x0A8A]);
+		HARNNA->run_schedule();
 		0xFF00->set_alignment(EVIL);
 		0xFF00->move_object([0x040C, 0x0A26]);
 		0xFF00->set_schedule_type(IN_COMBAT);
@@ -91013,17 +91013,17 @@ void Func0837 0x837 () {
 		} else if (var000F == 0x0003) {
 			var0014 = Func0992(0x0001, (("@But " + var0000) + ", we have not the monetari to purchase this.@"), 0x0000, false);
 			if (var0014 != AVATAR) {
-				0xFFBD->show_npc_face0(0x0000);
+				HARNNA->show_npc_face0(0x0000);
 				say("\"Then I am afraid thou canst not purchase any of my goods, ",
 					var0000,
 					".\"");
 			} else {
 				say("\"I am afraid thou dost not have enough to pay for this...\"");
 			}
-			if (0x001F < (0xFFBD->get_npc_id() + 0x0006)) {
-				0xFFBD->set_npc_id(0x001F);
+			if (0x001F < (HARNNA->get_npc_id() + 0x0006)) {
+				HARNNA->set_npc_id(0x001F);
 			} else {
-				0xFFBD->set_npc_id(0xFFBD->get_npc_id() + 0x0006);
+				HARNNA->set_npc_id(HARNNA->get_npc_id() + 0x0006);
 			}
 			break;
 		}
@@ -91063,12 +91063,12 @@ var Func0838 0x838 (var var0000, var var0001) {
 	}
 	var0004 = var0000;
 	var0005 = (var0001 / 0x0003) * 0x0002;
-	var0006 = 0x000F - (0xFFBD->get_npc_id() / 0x0002);
+	var0006 = 0x000F - (HARNNA->get_npc_id() / 0x0002);
 	var0007 = 0x0000;
 	var0008 = 0x0001;
 	var0009 = 0x0000;
 	var000A = 0x0002;
-	var000B = 0xFFBD->get_npc_id();
+	var000B = HARNNA->get_npc_id();
 	while (var0008) {
 		var000C = Func0956(["yes", "no", "haggle"]);
 		if (var000C == "no") {
@@ -91149,7 +91149,7 @@ var Func0838 0x838 (var var0000, var var0001) {
 				"?\"");
 			if (Func0955()) {
 				if (var000B > 0x0001) {
-					0xFFBD->set_npc_id(var000B - 0x0002);
+					HARNNA->set_npc_id(var000B - 0x0002);
 				}
 				return var0004;
 			}
@@ -91163,9 +91163,9 @@ var Func0838 0x838 (var var0000, var var0001) {
 				say("\"I thought thou wert in need of my produce!\"");
 			}
 			if (0x001F < (var000B + 0x000A)) {
-				0xFFBD->set_npc_id(0x001F);
+				HARNNA->set_npc_id(0x001F);
 			} else {
-				0xFFBD->set_npc_id(var000B + 0x000A);
+				HARNNA->set_npc_id(var000B + 0x000A);
 			}
 			return 0x0000;
 		}
@@ -91177,7 +91177,7 @@ var Func0838 0x838 (var var0000, var var0001) {
 					var0004,
 					" was my final offer. Dost thou accept?\"");
 				if (var000B < 0x001C) {
-					0xFFBD->set_npc_id(var000B + 0x0004);
+					HARNNA->set_npc_id(var000B + 0x0004);
 				}
 				if (Func0955()) {
 					return var0004;
@@ -91188,7 +91188,7 @@ var Func0838 0x838 (var var0000, var var0001) {
 					var0004,
 					" monetari is my final offer.\"");
 				if (var000B < 0x001E) {
-					0xFFBD->set_npc_id(var000B + 0x0002);
+					HARNNA->set_npc_id(var000B + 0x0002);
 				}
 			}
 		} else {
@@ -91262,7 +91262,7 @@ var Func0838 0x838 (var var0000, var var0001) {
 						" monetari is where I stand. I must pay someone to stand watch while I garden.\"");
 				}
 				if (var000B < 0x001F) {
-					0xFFBD->set_npc_id(var000B + 0x0001);
+					HARNNA->set_npc_id(var000B + 0x0001);
 				}
 			}
 		}
@@ -112784,20 +112784,20 @@ var Func09AE 0x9AE (var var0000) {
 				say("\"It is getting late! I have truly enjoyed our talk, but I think I shall eat my dinner now.\"");
 			}
 		}
-		if (item == 0xFFBD->get_npc_object()) {
+		if (item == HARNNA->get_npc_object()) {
 			gflags[0x0097] = true;
 			if (gflags[0x005B] && (!gflags[0x0047])) {
-				Func097F(0xFFBD, "@Remember Cantra...@", 0x0000);
+				Func097F(HARNNA, "@Remember Cantra...@", 0x0000);
 			} else {
-				Func097F(0xFFBD, "@Courage to thee!@", 0x0000);
+				Func097F(HARNNA, "@Courage to thee!@", 0x0000);
 			}
-			if (0xFFBD->get_schedule_type() == FARM) {
+			if (HARNNA->get_schedule_type() == FARM) {
 				say("\"I must return to my duties. These crops will not wait!\"");
 			}
-			if (0xFFBD->get_schedule_type() == EAT) {
+			if (HARNNA->get_schedule_type() == EAT) {
 				say("\"Pardon me, but my dinner is wasting. We can talk again later.\"");
 			}
-			if (0xFFBD->get_schedule_type() == SLEEP) {
+			if (HARNNA->get_schedule_type() == SLEEP) {
 				say("\"I must get some sleep! Thou shouldst return tomorrow...\"");
 			}
 		}

@@ -20979,7 +20979,7 @@ void Func0443 object#(0x443) () {
 	var var0000;
 
 	if (event == DOUBLECLICK) {
-		0xFFBD->show_npc_face(0x0000);
+		BOOTS->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (gflags[0x0072] == true) {
 			add("mutton");
@@ -21053,7 +21053,7 @@ void Func0443 object#(0x443) () {
 		say("\"Bye now!\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFBD);
+		Func092E(BOOTS);
 	}
 }
 
