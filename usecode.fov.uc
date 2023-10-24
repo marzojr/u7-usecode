@@ -33327,8 +33327,8 @@ void Func0495 object#(0x495) () {
 		gflags[0x02C7] = true;
 	} else {
 		say("\"We are not talking to thee! We are trying to eat thee!\"*");
-		0xFF6B->get_npc_object()->set_alignment(EVIL);
-		0xFF6B->get_npc_object()->set_schedule_type(IN_COMBAT);
+		HYDRA->get_npc_object()->set_alignment(EVIL);
+		HYDRA->get_npc_object()->set_schedule_type(IN_COMBAT);
 		abort;
 	}
 	converse (0) {
@@ -33445,8 +33445,8 @@ void Func0495 object#(0x495) () {
 			0xFEE7->say("Shanda nods his head furiously, licking his lips.*");
 			0xFEE7->hide();
 			0xFEE8->say("\"Very well! Let's eat it!\"*");
-			0xFF6B->get_npc_object()->set_alignment(EVIL);
-			0xFF6B->get_npc_object()->set_schedule_type(IN_COMBAT);
+			HYDRA->get_npc_object()->set_alignment(EVIL);
+			HYDRA->get_npc_object()->set_schedule_type(IN_COMBAT);
 			abort;
 
 		case "bye":
@@ -58142,7 +58142,7 @@ extern void Func0495 object#(0x495) ();
 
 void Func06AE object#(0x6AE) () {
 	if (event == EGG) {
-		0xFF6B->get_npc_object()->Func0495();
+		HYDRA->get_npc_object()->Func0495();
 	}
 }
 

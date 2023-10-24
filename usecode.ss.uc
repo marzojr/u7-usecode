@@ -10753,7 +10753,7 @@ void Func0289 shape#(0x289) () {
 						var0007->Func02C0();
 						for (var0013 in var0010 with var0011 to var0012) {
 							if ((var0013->get_item_shape() == 0x0190) && (var0013->get_item_frame() == 0x0008)) {
-								var0014 = 0xFF6B->set_npc_prop(HEALTH, 1);
+								var0014 = GWENNO->set_npc_prop(HEALTH, 1);
 								gflags[0x025F] = true;
 								gflags[0x0262] = true;
 							}
@@ -15611,7 +15611,7 @@ void Func032B shape#(0x32B) () {
 		0xFEFC->set_item_flag(MET);
 		0xFEFB->set_item_flag(MET);
 		NEYOBI->set_item_flag(SI_ZOMBIE);
-		0xFF6B->set_item_flag(SI_ZOMBIE);
+		GWENNO->set_item_flag(SI_ZOMBIE);
 		var0008 = [AVATAR, SELINA, KALEN, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, 0xFF33, 0xFF35, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, 0xFF4B, 0xFF4A, CANTRA, 0xFF6A, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, 0xFF58];
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
@@ -22331,8 +22331,8 @@ void Func0403 object#(0x403) () {
 				fallthrough;
 
 			case "Gwenno" (remove):
-				var000B = Func0942(0xFF6B);
-				if (0xFF6B->get_item_flag(IN_PARTY) || (var000B && (!0xFF6B->get_item_flag(SI_ZOMBIE)))) {
+				var000B = Func0942(GWENNO);
+				if (GWENNO->get_item_flag(IN_PARTY) || (var000B && (!GWENNO->get_item_flag(SI_ZOMBIE)))) {
 					say("\"No truer friend have I had in all of my life than thee, ",
 						var0002,
 						". With my lady love Gwenno returned to my side where she doth belong, my life is once again complete.\"");
@@ -22344,7 +22344,7 @@ void Func0403 object#(0x403) () {
 						", how could our good and noble quest have ended in such tragedy!\"");
 				} else if (gflags[0x026A]) {
 					say("\"Now that we have succeeded in freeing Gwenno's body, perhaps the Monks of Monk Isle -- the self-professed masters of life and death -- may be able to help her.\"");
-				} else if (0xFF6B->get_item_flag(SI_ZOMBIE)) {
+				} else if (GWENNO->get_item_flag(SI_ZOMBIE)) {
 					say("\"We must find some way of restoring Gwenno's mind! Unless we can do that her precious spirit is lost to me.\"");
 				} else {
 					say("\"My soul is at peace. Joy is to know Gwenno, and to have her once more in thriving good health.\"");
@@ -50169,7 +50169,7 @@ void Func048F object#(0x48F) () {
 				fallthrough;
 
 			case "Gwenno" (remove):
-				var0002 = 0xFF6B->get_schedule_type();
+				var0002 = GWENNO->get_schedule_type();
 				if (var0002 == WAIT) {
 					say("\"Gwenno dead. She good woman. Very generous. She once make gift of bucket to Baiyanda. Baiyanda place body at sacred Gwani Death Temple.\"");
 					gflags[0x0262] = true;
@@ -50528,7 +50528,7 @@ void Func0492 object#(0x492) () {
 				fallthrough;
 
 			case "Gwenno" (remove):
-				var0002 = 0xFF6B->get_schedule_type();
+				var0002 = GWENNO->get_schedule_type();
 				if (var0002 == WAIT) {
 					say("\"Gwenno great friend to our people. It thanks to her that many of our people speak thy tongue. She even told us all about thou. She said thou would come. Her death tragedy.\"");
 					gflags[0x0262] = true;
@@ -50665,16 +50665,16 @@ void Func0494 object#(0x494) () {
 	var0000 = Func097D(PARTY, 0x0001, 0x01DF, QUALITY_ANY, 0x0002);
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Hail there, Gwani person.@");
-		0xFF6C->Func07D1();
-		Func097F(0xFF6C, "@Hello there, Avatar!@", 0x0003);
-		0xFF6C->set_schedule_type(TALK);
+		YENANI->Func07D1();
+		Func097F(YENANI, "@Hello there, Avatar!@", 0x0003);
+		YENANI->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF6C->run_schedule();
-		0xFF6C->clear_item_say();
-		0xFF6C->show_npc_face0(0x0000);
+		YENANI->run_schedule();
+		YENANI->clear_item_say();
+		YENANI->show_npc_face0(0x0000);
 		var0001 = Func097D(PARTY, 0x0001, 0x032A, 0x0009, 0x0002);
-		var0002 = 0xFF6C->get_item_flag(MET);
+		var0002 = YENANI->get_item_flag(MET);
 		add(["name", "bye"]);
 		if (var0001) {
 			add("got blood");
@@ -50707,7 +50707,7 @@ void Func0494 object#(0x494) () {
 
 			case "name":
 				say("\"I am Yenani, mate of Myauri, mother of Neyobi and Kapyundi, leader of Gwani people and teller of Gwani history.\"");
-				0xFF6C->set_item_flag(MET);
+				YENANI->set_item_flag(MET);
 				remove("name");
 				add(["Myauri", "Neyobi", "Kapyundi", "history"]);
 				fallthrough;
@@ -50758,7 +50758,7 @@ void Func0494 object#(0x494) () {
 				fallthrough;
 
 			case "Gwenno":
-				var0006 = 0xFF6B->get_schedule_type();
+				var0006 = GWENNO->get_schedule_type();
 				if (var0006 == WAIT) {
 					say("\"Gwenno was good friend to us. She spent weeks teaching me human language. Over time I slowly teaching others.\tMany days we have mourned death of good woman Gwenno. She horribly killed by men of one we call The Trapper. She spoke of thee often.\"");
 					gflags[0x0262] = true;
@@ -50820,7 +50820,7 @@ void Func0494 object#(0x494) () {
 				UI_remove_npc_face0();
 				UI_remove_npc_face1();
 				Func097F(AVATAR, "@Be safe, my friend.@", 0x0001);
-				Func097F(0xFF6C, "@And thee, as well.@", 0x0005);
+				Func097F(YENANI, "@And thee, as well.@", 0x0005);
 				break;
 		}
 	}
@@ -50852,13 +50852,13 @@ void Func0495 object#(0x495) () {
 	var0003 = UI_part_of_day();
 	if ((event == DOUBLECLICK) || (event == SCRIPTED)) {
 		AVATAR->item_say("@A pleasure to see thee...@");
-		0xFF6B->Func07D1();
-		if (!0xFF6B->get_item_flag(SI_ZOMBIE)) {
-			Func097F(0xFF6B, "@'Tis good to see thee!@", 0x0002);
-			0xFF6B->set_schedule_type(TALK);
+		GWENNO->Func07D1();
+		if (!GWENNO->get_item_flag(SI_ZOMBIE)) {
+			Func097F(GWENNO, "@'Tis good to see thee!@", 0x0002);
+			GWENNO->set_schedule_type(TALK);
 		} else {
-			0xFF6B->set_new_schedules(MIDNIGHT, DESK_WORK, [0x0977, 0x048C]);
-			0xFF6B->run_schedule();
+			GWENNO->set_new_schedules(MIDNIGHT, DESK_WORK, [0x0977, 0x048C]);
+			GWENNO->run_schedule();
 			if (!gflags[0x02DD]) {
 				gflags[0x02DD] = true;
 				var0004 = script Func09A0(0x0005, 0x0004) after 30 ticks {
@@ -50868,30 +50868,30 @@ void Func0495 object#(0x495) () {
 			}
 			var0005 = UI_die_roll(0x0001, 0x0004);
 			if (var0005 == 0x0001) {
-				Func097F(0xFF6B, "@I must sate mine hunger!@", 0x0002);
+				Func097F(GWENNO, "@I must sate mine hunger!@", 0x0002);
 			}
 			if (var0005 == 0x0002) {
-				Func097F(0xFF6B, "@Come, allow me to feed upon thee!@", 0x0002);
+				Func097F(GWENNO, "@Come, allow me to feed upon thee!@", 0x0002);
 			}
 			if (var0005 == 0x0003) {
-				Func097F(0xFF6B, "@Blood! Blood everywhere!@", 0x0002);
+				Func097F(GWENNO, "@Blood! Blood everywhere!@", 0x0002);
 			}
 			if (var0005 == 0x0004) {
-				Func097F(0xFF6B, "@Let me feel thy naked flesh!@", 0x0002);
+				Func097F(GWENNO, "@Let me feel thy naked flesh!@", 0x0002);
 			}
 		}
 	}
 	if (event == STARTED_TALKING) {
-		if (0xFF6B->get_item_flag(IN_PARTY)) {
-			0xFF6B->set_schedule_type(FOLLOW_AVATAR);
+		if (GWENNO->get_item_flag(IN_PARTY)) {
+			GWENNO->set_schedule_type(FOLLOW_AVATAR);
 			add("leave");
 		} else {
-			0xFF6B->run_schedule();
+			GWENNO->run_schedule();
 			add("join");
 		}
-		0xFF6B->clear_item_say();
-		0xFF6B->show_npc_face0(0x0000);
-		var0006 = 0xFF6B->get_item_flag(MET);
+		GWENNO->clear_item_say();
+		GWENNO->show_npc_face0(0x0000);
+		var0006 = GWENNO->get_item_flag(MET);
 		if (((!IOLO->get_item_flag(SI_ZOMBIE)) && gflags[0x00D5]) && (!gflags[0x0275])) {
 			say("\"Iolo! My beloved Iolo!\"");
 			say("\"Oh, I had feared that I would never see thee again!\"");
@@ -50905,7 +50905,7 @@ void Func0495 object#(0x495) () {
 			if (Func097D(PARTY, 0x0001, 0x03BB, QUALITY_ANY, 0x0005)) {
 				say("\"The Lady of Fawn gave me this necklace to give to thee, when at last I found thee, my love.\"");
 				say("\"Take it as a token of my love.\"");
-				var0007 = Func0996(IOLO, 0xFF6B, 0x0001, 0x03BB, QUALITY_ANY, 0x0005, true);
+				var0007 = Func0996(IOLO, GWENNO, 0x0001, 0x03BB, QUALITY_ANY, 0x0005, true);
 			} else {
 				say("\"The Lady of Fawn gave me a necklace to give to thee, my love. But in all my trials to find thee, I seem to have lost it.\"");
 				say("\"I had thought to give it to thee as a token of my love.\"");
@@ -50928,8 +50928,8 @@ void Func0495 object#(0x495) () {
 			say("\"I grieve that his wits seem to have left him. But at least he is safe with me.\"");
 			say("\"I shall do all that I can to aid thee in restoring him. Or gladly care for him all the remainder of my days... even as he is.\"");
 		}
-		if (!0xFF6B->get_item_flag(MET)) {
-			0xFF6B->set_item_flag(MET);
+		if (!GWENNO->get_item_flag(MET)) {
+			GWENNO->set_item_flag(MET);
 			say("\"What a relief to see thee again, ",
 				var0002,
 				".\"");
@@ -50952,7 +50952,7 @@ void Func0495 object#(0x495) () {
 			say("\"Now I understand what Xenka meant by being aided by specters. But, unless thou canst find the grave of the last Chaos Hierophant, I know not how thou wilt restore Balance.\"");
 			say("\"Perhaps if thou wouldst ask one of the monks -- perhaps Thoxa -- she could try to divine where the Chaos Hierophant lies.\"");
 		}
-		if (gflags[0x0010] && ((!0xFF6B->get_item_flag(IN_PARTY)) && 0xFF6B->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY))) {
+		if (gflags[0x0010] && ((!GWENNO->get_item_flag(IN_PARTY)) && GWENNO->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY))) {
 			add("belongings");
 		}
 		converse (["bye"]) {
@@ -50965,7 +50965,7 @@ void Func0495 object#(0x495) () {
 					if (UI_get_array_size(UI_get_party_list2()) < 0x0005) {
 						add("leave");
 						say("\"If thou dost think I can be of use...\"");
-						0xFF6B->add_to_party();
+						GWENNO->add_to_party();
 						gflags[0x0010] = true;
 					} else {
 						say("\"I hardly think that thou hast need of me, Avatar. Look at all thy fine companions!\"");
@@ -50983,8 +50983,8 @@ void Func0495 object#(0x495) () {
 				say("\"I understand, ",
 					var0002,
 					"...\"");
-				0xFF6B->remove_from_party();
-				Func09B4(0xFF6B);
+				GWENNO->remove_from_party();
+				Func09B4(GWENNO);
 				fallthrough;
 
 			case "Batlin's deeds" (remove):
@@ -51153,7 +51153,7 @@ void Func0495 object#(0x495) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@I shall return...@", 0x0000);
-				Func097F(0xFF6B, "@Hurry back!@", 0x0002);
+				Func097F(GWENNO, "@Hurry back!@", 0x0002);
 				break;
 		}
 	}
@@ -57320,7 +57320,7 @@ void Func04CF object#(0x4CF) () {
 				if (gflags[0x025F]) {
 					if (gflags[0x026A]) {
 						say("\"I share thy grief over the loss of Goodwife Gwenno. I am sure that we can resurrect her, if thou dost wish.\"");
-					} else if (!0xFF6B->get_item_flag(SI_ZOMBIE)) {
+					} else if (!GWENNO->get_item_flag(SI_ZOMBIE)) {
 						say("\"It hath been quite a pleasure having Gwenno here, ",
 							var0000,
 							". She is quite knowledgeable, and shares her wisdom willingly.\"");
@@ -57841,8 +57841,8 @@ void Func04D3 object#(0x4D3) () {
 				fallthrough;
 
 			case "visitors" (remove):
-				if (Func0942(0xFF6B)) {
-					if (!0xFF6B->get_item_flag(SI_ZOMBIE)) {
+				if (Func0942(GWENNO)) {
+					if (!GWENNO->get_item_flag(SI_ZOMBIE)) {
 						say("\"Such visitors are rare, for the journey here is not an easy one. As I remember it, Gwenno was our last visitor.\"");
 					} else {
 						say("\"Such visitors are rare, for the journey here is not an easy one. As I remember it, our last visitor was poor Gwenno.\"");
@@ -57854,8 +57854,8 @@ void Func04D3 object#(0x4D3) () {
 				fallthrough;
 
 			case "Gwenno" (remove):
-				if (Func0942(0xFF6B)) {
-					if (!0xFF6B->get_item_flag(SI_ZOMBIE)) {
+				if (Func0942(GWENNO)) {
+					if (!GWENNO->get_item_flag(SI_ZOMBIE)) {
 						say("\"It is a pleasure having her here, my ",
 							var0003,
 							", now that her proper state of mind hath been restored.\"");
@@ -58244,7 +58244,7 @@ void Func04D5 object#(0x4D5) () {
 			say("\"Welcome again, Hero from Another World! Thy destiny hath again brought thee to the place of Xenka's wisdom!\"");
 			add(["Hero From Another World", "Xenka", "destiny"]);
 		}
-		if (gflags[0x02DD] && 0xFF6B->get_item_flag(SI_ZOMBIE)) {
+		if (gflags[0x02DD] && GWENNO->get_item_flag(SI_ZOMBIE)) {
 			add("Gwenno");
 		}
 		if (Func08FC()) {
@@ -67644,7 +67644,7 @@ void Func06AE object#(0x6AE) () {
 			UI_remove_npc_face1();
 		}
 		if (var0001) {
-			var000D = [IOLO, SHAMINO, DUPRE, 0xFF6B];
+			var000D = [IOLO, SHAMINO, DUPRE, GWENNO];
 			if (get_npc_number() in var000D) {
 				say("\"A hall of sleeping gargoyles...\"");
 				say("\"'Tis reminiscent of the problems that are occurring in Britannia this very instant!\"");
@@ -90695,12 +90695,12 @@ extern var Func09B3 0x9B3 (var var0000);
 void Func0835 0x835 () {
 	var var0000;
 
-	if (0xFF6B->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY)) {
+	if (GWENNO->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY)) {
 		say("\"I have many items in my possession which may aid thee in thy journeys. Wouldst thou like them?\"");
 		if (Func0955()) {
 			say("\"Here they are.\"");
 			gflags[0x0010] = false;
-			var0000 = Func09B3(0xFF6B);
+			var0000 = Func09B3(GWENNO);
 			if (var0000[0x0001] != 0x0000) {
 				say("\"Thy companions will have to help thee with this burden.\"");
 			}
@@ -101218,10 +101218,10 @@ void Func088A 0x88A (var var0000) {
 					}
 					Func08F4();
 				}
-				if ((var0002 == 0x000F) && (var0003 == 0xFF6B)) {
-					0xFF6B->clear_item_flag(SI_ZOMBIE);
-					if (!0xFF6B->get_item_flag(IN_PARTY)) {
-						0xFF6B->set_schedule_type(TALK);
+				if ((var0002 == 0x000F) && (var0003 == GWENNO)) {
+					GWENNO->clear_item_flag(SI_ZOMBIE);
+					if (!GWENNO->get_item_flag(IN_PARTY)) {
+						GWENNO->set_schedule_type(TALK);
 					}
 					Func08F4();
 				}
@@ -106218,8 +106218,8 @@ void Func08FE 0x8FE () {
 				if (var0006 == CANTRA) {
 					gflags[0x0047] = true;
 				}
-				if (var0006 == 0xFF6B) {
-					0xFF6B->set_schedule_type(TALK);
+				if (var0006 == GWENNO) {
+					GWENNO->set_schedule_type(TALK);
 					gflags[0x026A] = false;
 					var000A = script AVATAR->get_npc_object() after 5 ticks {
 						call Func0495;
@@ -106838,7 +106838,7 @@ extern void Func0922 0x922 (var var0000);
 extern var Func0994 0x994 ();
 
 void Func0916 0x916 () {
-	if (0xFF6B->get_item_flag(SI_ZOMBIE) && gflags[0x025F]) {
+	if (GWENNO->get_item_flag(SI_ZOMBIE) && gflags[0x025F]) {
 		Func0922(0x000F);
 		abort;
 	}
@@ -111798,7 +111798,7 @@ var Func098C 0x98C () {
 var Func098D 0x98D () {
 	var var0000;
 
-	var0000 = [DUPRE, SHAMINO, IOLO, 0xFF6B, PETRA, MORTEGRO, WILFRED, BOYDON, SELINA, 0xFF68, 0xFF58];
+	var0000 = [DUPRE, SHAMINO, IOLO, GWENNO, PETRA, MORTEGRO, WILFRED, BOYDON, SELINA, 0xFF68, 0xFF58];
 	return var0000;
 }
 
@@ -113039,7 +113039,7 @@ void Func09B4 0x9B4 (var var0000) {
 
 	var0001 = var0000->get_object_position();
 	if (var0001[0x0003] != 0x0000) {
-		if (var0000 == 0xFF6B) {
+		if (var0000 == GWENNO) {
 			var0000->set_schedule_type(WAIT);
 			say("\"We must plan for every eventuality, Avatar. Should I not be able to remain here, I shall await thee on Monk Isle.\"");
 			var0000->set_new_schedules(MIDNIGHT, DESK_WORK, [0x0977, 0x048C]);
