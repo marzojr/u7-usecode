@@ -26321,7 +26321,7 @@ void Func046B object#(0x46B) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFF95->show_npc_face(0x0000);
+	ISKANDER->show_npc_face(0x0000);
 	var0000 = Func0908();
 	var0001 = "Avatar";
 	var0002 = Func0909();
