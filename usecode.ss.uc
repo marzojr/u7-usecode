@@ -48679,13 +48679,13 @@ void Func0453 object#(0x453) () {
 	var0001 = Func0953();
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@May we speak?@");
-		0xFFAD->Func07D1();
-		Func097F(0xFFAD, "@Speak... Creak... Weak...@", 0x0002);
-		0xFFAD->set_schedule_type(TALK);
+		ACID_AUTOMATON->Func07D1();
+		Func097F(ACID_AUTOMATON, "@Speak... Creak... Weak...@", 0x0002);
+		ACID_AUTOMATON->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFAD->run_schedule();
-		0xFFAD->clear_item_say();
+		ACID_AUTOMATON->run_schedule();
+		ACID_AUTOMATON->clear_item_say();
 		0xFED6->show_npc_face0(0x0000);
 		say("\"Soldiers... Discipline... fountain...\"");
 		say("\"Seek... Meek...\"");

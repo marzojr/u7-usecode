@@ -23082,7 +23082,7 @@ void Func0453 object#(0x453) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFFAD->show_npc_face(0x0000);
+	MARGARETA->show_npc_face(0x0000);
 	var0000 = UI_wearing_fellowship();
 	add(["name", "job", "bye"]);
 	if (gflags[0x00FE]) {
@@ -25035,7 +25035,7 @@ void Func0460 object#(0x460) () {
 	0xFFA0->show_npc_face(0x0000);
 	var0000 = Func0909();
 	add(["name", "job", "bye"]);
-	var0001 = Func08F7(0xFFAD);
+	var0001 = Func08F7(MARGARETA);
 	if (var0001) {
 		add("Margareta");
 	}
