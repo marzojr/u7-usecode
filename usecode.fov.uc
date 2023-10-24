@@ -34850,7 +34850,7 @@ void Func049E object#(0x49E) () {
 	var var0001;
 
 	if (event == DOUBLECLICK) {
-		0xFF62->show_npc_face(0x0000);
+		MORZ->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		add(["name", "job", "bye"]);

@@ -52122,7 +52122,7 @@ void Func049B object#(0x49B) () {
 			nohalt;
 			call Func049B;
 		};
-		if (0xFF62->npc_nearby() || (DRAYGAN->npc_nearby() || (HURD->npc_nearby() || 0xFF61->npc_nearby()))) {
+		if (IVOR->npc_nearby() || (DRAYGAN->npc_nearby() || (HURD->npc_nearby() || 0xFF61->npc_nearby()))) {
 			abort;
 		}
 		var0003 = BERYL->approach_avatar(0x0078, 0x0028);
@@ -52517,7 +52517,7 @@ void Func049D object#(0x49D) () {
 			nohalt;
 			call Func049D;
 		};
-		if (0xFF62->npc_nearby() || (DRAYGAN->npc_nearby() || (BERYL->npc_nearby() || 0xFF61->npc_nearby()))) {
+		if (IVOR->npc_nearby() || (DRAYGAN->npc_nearby() || (BERYL->npc_nearby() || 0xFF61->npc_nearby()))) {
 			abort;
 		}
 		var0000 = HURD->approach_avatar(0x0078, 0x0028);
@@ -52551,7 +52551,7 @@ void Func049E object#(0x49E) () {
 	var var0000;
 
 	if (event == SCRIPTED) {
-		if (DRAYGAN->get_item_flag(DEAD) || ((Func0994() != 0x0007) || (0xFF62->get_item_flag(DEAD) || (0xFF62->get_npc_id() > 0x0004)))) {
+		if (DRAYGAN->get_item_flag(DEAD) || ((Func0994() != 0x0007) || (IVOR->get_item_flag(DEAD) || (IVOR->get_npc_id() > 0x0004)))) {
 			abort;
 		}
 		var0000 = script Func09A0(0x0005, 0x0002) after UI_get_random(0x01F4) ticks {
@@ -52561,29 +52561,29 @@ void Func049E object#(0x49E) () {
 		if (HURD->npc_nearby() || (DRAYGAN->npc_nearby() || (BERYL->npc_nearby() || 0xFF61->npc_nearby()))) {
 			abort;
 		}
-		var0000 = 0xFF62->approach_avatar(0x0078, 0x0028);
+		var0000 = IVOR->approach_avatar(0x0078, 0x0028);
 		if (var0000) {
-			0xFF62->set_schedule_type(SHY);
-			0xFF62->set_npc_id(0xFF62->get_npc_id() + 0x0001);
+			IVOR->set_schedule_type(SHY);
+			IVOR->set_npc_id(IVOR->get_npc_id() + 0x0001);
 		}
 		abort;
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Greetings!@");
-		0xFF62->clear_item_say();
-		0xFF62->Func07D1();
+		IVOR->clear_item_say();
+		IVOR->Func07D1();
 		if (DRAYGAN->npc_nearby()) {
-			Func097F(0xFF62, "@We cannot speak...@", 0x0003);
+			Func097F(IVOR, "@We cannot speak...@", 0x0003);
 			DRAYGAN->set_schedule_type(HOUND);
 			DRAYGAN->clear_item_say();
 			Func097F(DRAYGAN, "@Go away!@", 0x0005);
-			0xFF62->set_schedule_type(SHY);
+			IVOR->set_schedule_type(SHY);
 		} else {
-			Func097F(0xFF62, "@I'm no thief!@", 0x0003);
-			if (0xFF62->get_npc_id() > 0x0003) {
-				Func09AD(0xFF62);
+			Func097F(IVOR, "@I'm no thief!@", 0x0003);
+			if (IVOR->get_npc_id() > 0x0003) {
+				Func09AD(IVOR);
 			} else {
-				0xFF62->set_schedule_type(WANDER);
+				IVOR->set_schedule_type(WANDER);
 			}
 		}
 	}
@@ -79517,9 +79517,9 @@ void Func07E1 object#(0x7E1) () {
 				Func09AD(HURD);
 				Func097F(HURD, "@I obey, Master!@", 0x0002);
 			}
-			if (0xFF62->npc_nearby()) {
-				Func09AD(0xFF62);
-				Func097F(0xFF62, "@Hold on, Master!@", 0x0007);
+			if (IVOR->npc_nearby()) {
+				Func09AD(IVOR);
+				Func097F(IVOR, "@Hold on, Master!@", 0x0007);
 			}
 			if (BERYL->get_item_flag(DEAD)) {
 				abort;
