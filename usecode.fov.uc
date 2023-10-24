@@ -23973,16 +23973,16 @@ void Func045A object#(0x45A) () {
 	var var0011;
 
 	if (event == DOUBLECLICK) {
-		0xFFA6->show_npc_face(0x0000);
+		OWEN->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
-		var0001 = 0xFFA6->get_npc_object()->get_schedule_type();
+		var0001 = OWEN->get_npc_object()->get_schedule_type();
 		var0002 = Func0909();
 		var0003 = false;
 		var0004 = UI_wearing_fellowship();
 		var0000 = UI_part_of_day();
 		if (var0000 == NIGHT) {
 			if (!(var0001 == WAIT)) {
-				var0005 = Func08FC(0xFFA6, ELYNOR);
+				var0005 = Func08FC(OWEN, ELYNOR);
 				if (var0005) {
 					say("Owen will not interrupt his participation in The Fellowship meeting to talk with you.*");
 					abort;
@@ -24008,7 +24008,7 @@ void Func045A object#(0x45A) () {
 		if (!gflags[0x0115]) {
 			say("You see a young man dressed in an expensive tunic. He is very serious.");
 			gflags[0x0115] = true;
-			0xFFA6->get_npc_object()->set_schedule_type(LOITER);
+			OWEN->get_npc_object()->set_schedule_type(LOITER);
 		} else {
 			say("Owen looks at you and sniffs. \"It would appear thou dost wish to speak with me again.\"");
 		}
@@ -24237,7 +24237,7 @@ void Func045A object#(0x45A) () {
 			case "tribute":
 				say("\"I know! My work will stand as my monument! My name will endure long after any statue has worn away to dust! People will remember -me-, I promise thee that!\"");
 				say("And, with a dramatic flourish, Owen produces a dagger. Before you can stop him, he plunges it into his chest. He coughs loudly as blood spurts from his mouth, soaking his fine linen tunic in wine-red guilt. After a moment, it is all over. Owen, the greatest shipwright who ever lived, is dead.*");
-				0xFFA6->get_npc_object()->kill_npc();
+				OWEN->get_npc_object()->kill_npc();
 				Func0911(0x0064);
 				abort;
 
@@ -24275,7 +24275,7 @@ void Func045A object#(0x45A) () {
 		}
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFA6);
+		Func092E(OWEN);
 	}
 }
 
@@ -58104,7 +58104,7 @@ void Func06AB object#(0x6AB) () {
 
 	if (event == EGG) {
 		gflags[0x0122] = true;
-		var0000 = [ZORN, XANTHIA, 0xFFA4, 0xFFA6];
+		var0000 = [ZORN, XANTHIA, 0xFFA4, OWEN];
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0003->set_schedule_type(LOITER);
 		}
@@ -58897,7 +58897,7 @@ void Func06C7 object#(0x6C7) () {
 	var var0003;
 
 	if (event == EGG) {
-		var0000 = [0xFFA3, 0xFFA5, ELYNOR, GREGOR, 0xFFA6];
+		var0000 = [0xFFA3, 0xFFA5, ELYNOR, GREGOR, OWEN];
 		for (var0003 in var0000 with var0001 to var0002) {
 			Func093F(var0003, LOITER);
 		}
@@ -68119,11 +68119,11 @@ void Func087B 0x87B () {
 		GREGOR->say("\"The Fellowship has improved mine ability to run my business,\" says Gregor.*");
 		GREGOR->hide();
 	}
-	var0001 = Func08F7(0xFFA6);
+	var0001 = Func08F7(OWEN);
 	if (var0001) {
-		0xFFA6->say("\"The Fellowship has taught me how to face mine own potential for greatness unquestioningly,\" says Owen.*");
+		OWEN->say("\"The Fellowship has taught me how to face mine own potential for greatness unquestioningly,\" says Owen.*");
 		ELYNOR->say("\"Thank thee for sharing, brother!\"*");
-		0xFFA6->hide();
+		OWEN->hide();
 	}
 	var0002 = Func08F7(0xFFA5);
 	if (var0002) {
