@@ -10549,7 +10549,7 @@ void Func0404 object#(0x404) () {
 		var0009 = SPARK->get_npc_object()->is_dead();
 		var000A = SPRELLIC->get_npc_object()->is_dead();
 		var000B = VOKES->get_npc_object()->is_dead();
-		var000C = 0xFF82->get_npc_object()->is_dead();
+		var000C = SYRIA->get_npc_object()->is_dead();
 		var000D = 0xFF81->get_npc_object()->is_dead();
 		var000E = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
@@ -28153,7 +28153,7 @@ void Func0477 object#(0x477) () {
 			add("Sprellic");
 		}
 		var0005 = VOKES->is_dead();
-		var0006 = 0xFF82->is_dead();
+		var0006 = SYRIA->is_dead();
 		var0007 = 0xFF81->is_dead();
 		if (var0005 && (var0006 && var0007)) {
 			add("duellists");
@@ -28701,7 +28701,7 @@ void Func047A object#(0x47A) () {
 			add("Sprellic");
 		}
 		var0005 = VOKES->get_npc_object()->is_dead();
-		var0006 = 0xFF82->get_npc_object()->is_dead();
+		var0006 = SYRIA->get_npc_object()->is_dead();
 		var0007 = 0xFF81->get_npc_object()->is_dead();
 		var0008 = SPRELLIC->get_npc_object()->is_dead();
 		if (gflags[0x0165]) {
@@ -28970,7 +28970,7 @@ void Func047B object#(0x47B) () {
 		var0004 = false;
 		var0005 = SPRELLIC->get_npc_object()->is_dead();
 		var0006 = VOKES->get_npc_object()->is_dead();
-		var0007 = 0xFF82->get_npc_object()->is_dead();
+		var0007 = SYRIA->get_npc_object()->is_dead();
 		var0008 = 0xFF81->get_npc_object()->is_dead();
 		if (var0005 || (var0006 || (var0007 || var0008))) {
 			var0004 = true;
@@ -29161,7 +29161,7 @@ void Func047C object#(0x47C) () {
 		var0001 = UI_wearing_fellowship();
 		var0002 = false;
 		var0003 = VOKES->get_npc_object()->is_dead();
-		var0004 = 0xFF82->get_npc_object()->is_dead();
+		var0004 = SYRIA->get_npc_object()->is_dead();
 		var0005 = 0xFF81->get_npc_object()->is_dead();
 		if (var0003 && (var0004 && var0005)) {
 			var0002 = true;
@@ -29416,8 +29416,8 @@ void Func047D object#(0x47D) () {
 		var0001 = UI_part_of_day();
 		var0002 = VOKES->get_npc_object();
 		var0003 = 0xFF81->get_npc_object();
-		var0004 = 0xFF82->get_npc_object();
-		var0005 = Func08F7(0xFF82);
+		var0004 = SYRIA->get_npc_object();
+		var0005 = Func08F7(SYRIA);
 		var0006 = Func08F7(0xFF81);
 		if (!gflags[0x0177]) {
 			say("You see a fighting man. His voice booms like thunder as he greets you. \"Hail to thee, ",
@@ -29470,8 +29470,8 @@ void Func047D object#(0x47D) () {
 			case "duel":
 				say("\"A responsibility, yes, even a necessity. The cost of being honorable is that one must defend one's honor. There is no telling just where or when the next stain on one's honor may appear. Like this Sprellic fool, for instance. The perfect example!\"*");
 				if (var0005) {
-					0xFF82->say("\"I'll make a stain on his honor, that's for sure. A blood red one!\"*");
-					0xFF82->hide();
+					SYRIA->say("\"I'll make a stain on his honor, that's for sure. A blood red one!\"*");
+					SYRIA->hide();
 					VOKES->show_npc_face(0x0000);
 				}
 				add("Sprellic");
@@ -29543,10 +29543,10 @@ void Func047E object#(0x47E) () {
 	var var0006;
 
 	if (event == DOUBLECLICK) {
-		0xFF82->show_npc_face(0x0000);
+		SYRIA->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFF82->get_npc_object();
+		var0002 = SYRIA->get_npc_object();
 		var0003 = VOKES->get_npc_object();
 		var0004 = 0xFF81->get_npc_object();
 		var0005 = Func08F7(VOKES);
@@ -29633,7 +29633,7 @@ void Func047E object#(0x47E) () {
 				if (var0005) {
 					VOKES->say("\"And I shall grievously insult him-- through his heart!\"*");
 					VOKES->hide();
-					0xFF82->show_npc_face(0x0000);
+					SYRIA->show_npc_face(0x0000);
 				}
 				remove("return");
 				fallthrough;
@@ -29652,7 +29652,7 @@ void Func047E object#(0x47E) () {
 				if (var0005) {
 					VOKES->say("\"Here! Here!\"*");
 					VOKES->hide();
-					0xFF82->show_npc_face(0x0000);
+					SYRIA->show_npc_face(0x0000);
 				}
 				remove("Library of Scars");
 				fallthrough;
@@ -29697,7 +29697,7 @@ void Func047E object#(0x47E) () {
 		say("\"We do not appreciate people who interfere in our private matters. We shall be watching thee.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF82);
+		Func092E(SYRIA);
 	}
 }
 
@@ -29717,7 +29717,7 @@ void Func047F object#(0x47F) () {
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
 		var0002 = 0xFF81->get_npc_object();
-		var0003 = 0xFF82->get_npc_object();
+		var0003 = SYRIA->get_npc_object();
 		var0004 = VOKES->get_npc_object();
 		if (!gflags[0x0179]) {
 			say("You see a very serious young man. He carries himself like a learned and mannered gentleman.");

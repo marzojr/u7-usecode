@@ -49823,7 +49823,7 @@ void Func047E object#(0x47E) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("A guard of metal!@");
-		Func097F(0xFF82, "@Thou art a fool!@", 0x0003);
+		Func097F(GUARD_11, "@Thou art a fool!@", 0x0003);
 		set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
@@ -49835,9 +49835,9 @@ void Func047E object#(0x47E) () {
 		say("\"Canst thou hear me, Avatar? Thou art too late! By the time thou hast found the Shrine of Order, I shall have become as powerful as the Guardian himself!\"");
 		say("\"Come! Come and witness mine ascent to power.\"");
 		say("\"Come, Avatar... Come and meet thy death!\"");
-		0xFF82->set_schedule_type(IN_COMBAT);
-		0xFF82->set_alignment(EVIL);
-		AVATAR->set_oppressor(0xFF82);
+		GUARD_11->set_schedule_type(IN_COMBAT);
+		GUARD_11->set_alignment(EVIL);
+		AVATAR->set_oppressor(GUARD_11);
 		UI_remove_npc_face0();
 	}
 }
