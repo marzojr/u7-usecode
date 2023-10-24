@@ -22687,12 +22687,12 @@ void Func0451 object#(0x451) () {
 	var var000A;
 
 	if (event == DOUBLECLICK) {
-		0xFFAF->show_npc_face(0x0000);
+		ELYNOR->show_npc_face(0x0000);
 		var0000 = UI_wearing_fellowship();
 		var0001 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
 		var0002 = Func0909();
 		var0003 = UI_part_of_day();
-		var0004 = 0xFFAF->get_npc_object()->get_schedule_type();
+		var0004 = ELYNOR->get_npc_object()->get_schedule_type();
 		if (var0003 == NIGHT) {
 			if (var0004 == PREACH) {
 				say("\"It is time for the ceremony to begin.\" says Elynor.");
@@ -22930,7 +22930,7 @@ void Func0451 object#(0x451) () {
 		say("\"I have a feeling that we shall see each other again.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFAF);
+		Func092E(ELYNOR);
 	}
 }
 
@@ -22952,7 +22952,7 @@ void Func0452 object#(0x452) () {
 		var0001 = 0xFFAE->get_npc_object()->get_schedule_type();
 		if (var0000 == NIGHT) {
 			if (var0001 == MAJOR_SIT) {
-				var0002 = Func08FC(0xFFAE, 0xFFAF);
+				var0002 = Func08FC(0xFFAE, ELYNOR);
 				if (var0002) {
 					say("Gregor is busy concentrating on the Fellowship meeting and cannot talk now.*");
 					abort;
@@ -22963,7 +22963,7 @@ void Func0452 object#(0x452) () {
 		}
 		var0003 = Func0909();
 		add(["name", "job", "bye"]);
-		var0004 = Func08F7(0xFFAF);
+		var0004 = Func08F7(ELYNOR);
 		if (var0004) {
 			if (var0000 == MIDNIGHT) {
 				if (var0001 == MAJOR_SIT) {
@@ -23982,7 +23982,7 @@ void Func045A object#(0x45A) () {
 		var0000 = UI_part_of_day();
 		if (var0000 == NIGHT) {
 			if (!(var0001 == WAIT)) {
-				var0005 = Func08FC(0xFFA6, 0xFFAF);
+				var0005 = Func08FC(0xFFA6, ELYNOR);
 				if (var0005) {
 					say("Owen will not interrupt his participation in The Fellowship meeting to talk with you.*");
 					abort;
@@ -24298,7 +24298,7 @@ void Func045B object#(0x45B) () {
 		var0001 = UI_part_of_day();
 		if (var0001 == NIGHT) {
 			if (var0000 == MAJOR_SIT) {
-				var0002 = Func08FC(0xFFA5, 0xFFAF);
+				var0002 = Func08FC(0xFFA5, ELYNOR);
 				if (var0002) {
 					say("The Fellowship meeting is in progress, and Burnside will not speak with you now.*");
 					abort;
@@ -24652,7 +24652,7 @@ void Func045D object#(0x45D) () {
 		var0001 = UI_part_of_day();
 		if (var0001 == NIGHT) {
 			if (var0000 == MAJOR_SIT) {
-				var0002 = Func08FC(0xFFA3, 0xFFAF);
+				var0002 = Func08FC(0xFFA3, ELYNOR);
 				if (var0002) {
 					say("William does not want to avert his attention from the Fellowship meeting.*");
 					abort;
@@ -25143,7 +25143,7 @@ void Func0461 object#(0x461) () {
 	0xFF9F->show_npc_face(0x0000);
 	var0000 = UI_part_of_day();
 	if (var0000 == NIGHT) {
-		var0001 = Func08FC(0xFF9F, 0xFFAF);
+		var0001 = Func08FC(0xFF9F, ELYNOR);
 		if (var0001) {
 			say("Mikos is lost in meditation at the Fellowship meeting and does not hear you.*");
 			abort;
@@ -58897,7 +58897,7 @@ void Func06C7 object#(0x6C7) () {
 	var var0003;
 
 	if (event == EGG) {
-		var0000 = [0xFFA3, 0xFFA5, 0xFFAF, 0xFFAE, 0xFFA6];
+		var0000 = [0xFFA3, 0xFFA5, ELYNOR, 0xFFAE, 0xFFA6];
 		for (var0003 in var0000 with var0001 to var0002) {
 			Func093F(var0003, LOITER);
 		}
@@ -68122,7 +68122,7 @@ void Func087B 0x87B () {
 	var0001 = Func08F7(0xFFA6);
 	if (var0001) {
 		0xFFA6->say("\"The Fellowship has taught me how to face mine own potential for greatness unquestioningly,\" says Owen.*");
-		0xFFAF->say("\"Thank thee for sharing, brother!\"*");
+		ELYNOR->say("\"Thank thee for sharing, brother!\"*");
 		0xFFA6->hide();
 	}
 	var0002 = Func08F7(0xFFA5);
@@ -68160,7 +68160,7 @@ void Func087B 0x87B () {
 		DUPRE->say("\"Why are these people so fascinated by The Fellowship anyway? I do not understand it.\"*");
 		DUPRE->hide();
 	}
-	0xFFAF->say("With that Elynor is once again the center of attention of the meeting. \"Let us now begin our evening's meditations.\" After a few minutes of silence you begin to realize\tthat this meditation is going to continue for quite some time and that now might be a good time to leave inconspicuously.*");
+	ELYNOR->say("With that Elynor is once again the center of attention of the meeting. \"Let us now begin our evening's meditations.\" After a few minutes of silence you begin to realize\tthat this meditation is going to continue for quite some time and that now might be a good time to leave inconspicuously.*");
 	abort;
 }
 

@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [ANDRAL, 0xFF6A, FLICKEN, CALADIN, CELLIA, SHAZZANA, KRAYG, LUTHER, LYDIA, SHMED, STANDARR, TEMPLAR, MARSTEN, SPEKTOR, LUCILLA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [ANDRAL, 0xFF6A, FLICKEN, CALADIN, CELLIA, SHAZZANA, KRAYG, LUTHER, LYDIA, SHMED, STANDARR, TEMPLAR, MARSTEN, SPEKTOR, LUCILLA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, ENSORCIO, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -32164,7 +32164,7 @@ void Func0428 object#(0x428) () {
 	var0006 = Func0994();
 	var0007 = Func0942(FLINDO);
 	var0008 = Func0942(ARGUS);
-	var0009 = Func0942(0xFFAF);
+	var0009 = Func0942(ENSORCIO);
 	if (var0003 == true) {
 		var0005 = "lass";
 	}
@@ -32348,7 +32348,7 @@ void Func0428 object#(0x428) () {
 						UI_remove_npc_face1();
 					}
 					if (var0009 == true) {
-						0xFFAF->show_npc_face1(0x0000);
+						ENSORCIO->show_npc_face1(0x0000);
 						say("\"Will you two be quiet!\" ~\"You are loud enough to wake the dead...\" ~\"And I am beginning to lose patience with both of you!\"");
 						UI_remove_npc_face1();
 					}
@@ -48140,7 +48140,7 @@ void Func0451 object#(0x451) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	var0003 = 0xFFAF->get_item_flag(MET);
+	var0003 = ENSORCIO->get_item_flag(MET);
 	var0004 = Func0994();
 	var0005 = Func0942(DUPRE);
 	var0006 = Func0942(SHAMINO);
@@ -48153,40 +48153,40 @@ void Func0451 object#(0x451) () {
 	if (event == PROXIMITY) {
 		var000D = UI_get_random(0x0006);
 		if (var000D == 0x0001) {
-			0xFFAF->item_say("@I shall have revenge!@");
+			ENSORCIO->item_say("@I shall have revenge!@");
 		}
 		if (var000D == 0x0002) {
-			0xFFAF->item_say("@I am an Adept!@");
+			ENSORCIO->item_say("@I am an Adept!@");
 		}
 		if (var000D == 0x0003) {
-			0xFFAF->item_say("@Bide thee...@");
+			ENSORCIO->item_say("@Bide thee...@");
 		}
 		if (var000D == 0x0004) {
-			0xFFAF->item_say("@They shall see...@");
+			ENSORCIO->item_say("@They shall see...@");
 		}
 		if (var000D == 0x0005) {
 			if (Func0942(KANE)) {
-				0xFFAF->item_say("@Stay thou away from me!@");
+				ENSORCIO->item_say("@Stay thou away from me!@");
 				Func097F(KANE, "@Yes, m'lord.@", 0x0002);
 			} else {
-				0xFFAF->item_say("@I shall prevail!@");
+				ENSORCIO->item_say("@I shall prevail!@");
 			}
 		}
 		if (var000D == 0x0006) {
-			0xFFAF->item_say("@What do I here?@");
+			ENSORCIO->item_say("@What do I here?@");
 		}
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Greetings!@");
-		0xFFAF->Func07D1();
-		Func097F(0xFFAF, "@Art thou speaking to me?@", 0x0005);
-		0xFFAF->set_schedule_type(TALK);
+		ENSORCIO->Func07D1();
+		Func097F(ENSORCIO, "@Art thou speaking to me?@", 0x0005);
+		ENSORCIO->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFAF->run_schedule();
-		0xFFAF->clear_item_say();
-		0xFFAF->show_npc_face0(0x0000);
-		if (0xFFAF->get_schedule_type() == TEND_SHOP) {
+		ENSORCIO->run_schedule();
+		ENSORCIO->clear_item_say();
+		ENSORCIO->show_npc_face0(0x0000);
+		if (ENSORCIO->get_schedule_type() == TEND_SHOP) {
 			var000E = true;
 		}
 		if ((gflags[0x0004] == true) && (gflags[0x00D4] == false)) {
@@ -48206,7 +48206,7 @@ void Func0451 object#(0x451) () {
 					say("\"So, leave thou before I grow tired of thee and thou dost feel the wrath of Ensorcio the Adept!\"");
 					add(["hero", "wrongs", "bye"]);
 				}
-				0xFFAF->set_item_flag(MET);
+				ENSORCIO->set_item_flag(MET);
 			} else if (gflags[0x003E] == true) {
 				say("\"So, thou art returned... Failed in thy puny quest already, Pikeman?\"");
 			} else {
@@ -48459,7 +48459,7 @@ void Func0451 object#(0x451) () {
 							var000F,
 							", I shall teach thee how to put thy Stoneheart to use. Agreed?\"");
 						if (Func0955() == true) {
-							var0014 = Func0996(AVATAR, 0xFFAF, var0012, var0010, QUALITY_ANY, FRAME_ANY, true);
+							var0014 = Func0996(AVATAR, ENSORCIO, var0012, var0010, QUALITY_ANY, FRAME_ANY, true);
 							say("\"First, thou must have a ritual blood-letting device... Most mages possess one, even though they are technically illegal.\"");
 							say("\"Then thou must fill a small container with blood, using this device. The blood can be thine or that of any of thy companions... Whichever thou dost find more convenient.\"");
 							say("\"Once thou hast the blood, thou must use the blood on the Stoneheart. This produces the Bloodspawn that thou wilt need for death spells.\"");
@@ -48607,14 +48607,14 @@ void Func0451 object#(0x451) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Goodbye!@", 0x0000);
-				Func097F(0xFFAF, "@Fare well...@", 0x0005);
+				Func097F(ENSORCIO, "@Fare well...@", 0x0005);
 				break;
 		}
 	}
 	if (event == EGG) {
 		if (var0004 == 0x001F) {
 			FILBERCIO->item_say("@Save me from this madman!@");
-			0xFFAF->show_npc_face0(0x0000);
+			ENSORCIO->show_npc_face0(0x0000);
 			if (var0003 == true) {
 				say("\"Do not interfere with me, Avatar!\" ~\"I am the MageLord now...\"");
 				say("\"Thou dost know that Filbercio is lower than swine...\" ~\"He doth deserve to be tortured for all the ill that he hath done.\"");
@@ -59027,9 +59027,9 @@ void Func04DB object#(0x4DB) () {
 	var var0000;
 	var var0001;
 
-	var0000 = 0xFFAF->get_item_flag(MET);
+	var0000 = ENSORCIO->get_item_flag(MET);
 	if (event == STARTED_TALKING) {
-		0xFFAF->show_npc_face0(0x0000);
+		ENSORCIO->show_npc_face0(0x0000);
 		if (var0000 == true) {
 			say("\"Do not interfere with me, Avatar!\" ~\"I am the MageLord now...");
 			say("\"Thou dost know that Filbercio is lower than swine...\" ~\"He doth deserve to be tortured for all the ill that he hath done.\"");
@@ -59043,7 +59043,7 @@ void Func04DB object#(0x4DB) () {
 			say("\"Help me, Please! I beseech thee... It is he who is evil, not I.\" *\"I cannot survive much more of this torture...\"");
 			UI_remove_npc_face1();
 		}
-		0xFFAF->show_npc_face0(0x0000);
+		ENSORCIO->show_npc_face0(0x0000);
 		say("Ha, ha, ha, ha, ha!");
 		UI_remove_npc_face0();
 		0xFF25->set_schedule_type(STANDTHERE);
@@ -78820,7 +78820,7 @@ void Func07D8 object#(0x7D8) () {
 			var0001 = OLON->add_cont_items(0x0001, 0x0282, 0x007C, 0x0004, 0x0000);
 			var0001 = OLON->add_cont_items(0x0001, 0x0282, 0x007D, 0x0013, 0x0000);
 		}
-		Func09AC(0xFFAF, 0x0521, 0x08B8, WAIT);
+		Func09AC(ENSORCIO, 0x0521, 0x08B8, WAIT);
 		Func09AC(ARGUS, 0x04E8, 0x08B9, WAIT);
 		Func09AC(BYRIN, 0x0517, 0x0893, WAIT);
 		Func09AC(DEVRA, 0x04F8, 0x08A6, WAIT);
@@ -90196,12 +90196,12 @@ var Func082E 0x82E (var var0000, var var0001) {
 
 	var0002 = var0000;
 	var0003 = (var0001 / 0x0003) * 0x0002;
-	var0004 = 0x000F - (0xFFAF->get_npc_id() / 0x0002);
+	var0004 = 0x000F - (ENSORCIO->get_npc_id() / 0x0002);
 	var0005 = 0x0000;
 	var0006 = 0x0001;
 	var0007 = 0x0000;
 	var0008 = 0x0002;
-	var0009 = 0xFFAF->get_npc_id();
+	var0009 = ENSORCIO->get_npc_id();
 	while (var0006) {
 		var000A = Func0956(["yes", "no", "haggle"]);
 		if (var000A == "no") {
@@ -90268,7 +90268,7 @@ var Func082E 0x82E (var var0000, var var0001) {
 				"?\"");
 			if (Func0955() == true) {
 				if (var0009 > 0x0001) {
-					0xFFAF->set_npc_id(var0009 - 0x0002);
+					ENSORCIO->set_npc_id(var0009 - 0x0002);
 				}
 				return var0002;
 			}
@@ -90282,9 +90282,9 @@ var Func082E 0x82E (var var0000, var var0001) {
 				say("\"Do not expect me to be so courteous to thee next time!\"");
 			}
 			if (0x001F < (var0009 + 0x000A)) {
-				0xFFAF->set_npc_id(0x001F);
+				ENSORCIO->set_npc_id(0x001F);
 			} else {
-				0xFFAF->set_npc_id(var0009 + 0x000A);
+				ENSORCIO->set_npc_id(var0009 + 0x000A);
 			}
 			return 0x0000;
 		}
@@ -90294,7 +90294,7 @@ var Func082E 0x82E (var var0000, var var0001) {
 					var0002,
 					" is my final offer. Dost thou want it at this price?\"");
 				if (var0009 < 0x001C) {
-					0xFFAF->set_npc_id(var0009 + 0x0004);
+					ENSORCIO->set_npc_id(var0009 + 0x0004);
 				}
 				if (Func0955() == true) {
 					return var0002;
@@ -90305,7 +90305,7 @@ var Func082E 0x82E (var var0000, var var0001) {
 					var0002,
 					" is my final offer.  I will go no lower.\"");
 				if (var0009 < 0x001E) {
-					0xFFAF->set_npc_id(var0009 + 0x0002);
+					ENSORCIO->set_npc_id(var0009 + 0x0002);
 				}
 			}
 		} else {
@@ -90378,7 +90378,7 @@ var Func082E 0x82E (var var0000, var var0001) {
 						".\"");
 				}
 				if (var0009 < 0x001F) {
-					0xFFAF->set_npc_id(var0009 + 0x0001);
+					ENSORCIO->set_npc_id(var0009 + 0x0001);
 				}
 			}
 		}
