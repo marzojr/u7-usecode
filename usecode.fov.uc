@@ -34942,7 +34942,7 @@ void Func049F object#(0x49F) () {
 	var var0002;
 
 	if (event == DOUBLECLICK) {
-		0xFF61->show_npc_face(0x0000);
+		JILLIAN->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = UI_part_of_day();
@@ -35005,7 +35005,7 @@ void Func049F object#(0x49F) () {
 			",\" she says, returning to her previous activity.*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF61);
+		Func092E(JILLIAN);
 	}
 }
 
@@ -35034,7 +35034,7 @@ void Func04A0 object#(0x4A0) () {
 		var0002 = "the Avatar";
 		var0003 = UI_is_pc_female();
 		var0004 = false;
-		var0005 = Func08F7(0xFF61);
+		var0005 = Func08F7(JILLIAN);
 		if (var0003) {
 			var0006 = "woman";
 			var0007 = "she";
@@ -35106,8 +35106,8 @@ void Func04A0 object#(0x4A0) () {
 					var0001,
 					"? This is not what a man ought to be doing. Staying at home raising the children, like this. 'Tis a disgrace!\"~~He begins to stroke the infant's small tuft of hair.*");
 				if (var0005) {
-					0xFF61->say("\"Now Effrem! Thou knowest perfectly well what we agreed when little Mikhail was born. Thou shouldst be ashamed, talking such nonsense.\"*");
-					0xFF61->hide();
+					JILLIAN->say("\"Now Effrem! Thou knowest perfectly well what we agreed when little Mikhail was born. Thou shouldst be ashamed, talking such nonsense.\"*");
+					JILLIAN->hide();
 					0xFF60->say("He raises his shoulders, making him appear quite sheepish.");
 				}
 				remove(["wife", "Jillian"]);

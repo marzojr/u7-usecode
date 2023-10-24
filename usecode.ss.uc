@@ -15617,7 +15617,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, D_STEFANO, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, CELLIA, FLICKEN, HARNNA, KRAYG, LUCILLA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, DRAYGAN, MARSTEN, SPEKTOR, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, D_STEFANO, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, CELLIA, FLICKEN, HARNNA, KRAYG, LUCILLA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, DRAYGAN, MARSTEN, SPEKTOR, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, MORGHRIM];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -52122,7 +52122,7 @@ void Func049B object#(0x49B) () {
 			nohalt;
 			call Func049B;
 		};
-		if (IVOR->npc_nearby() || (DRAYGAN->npc_nearby() || (HURD->npc_nearby() || 0xFF61->npc_nearby()))) {
+		if (IVOR->npc_nearby() || (DRAYGAN->npc_nearby() || (HURD->npc_nearby() || MORGHRIM->npc_nearby()))) {
 			abort;
 		}
 		var0003 = BERYL->approach_avatar(0x0078, 0x0028);
@@ -52176,13 +52176,13 @@ void Func049B object#(0x49B) () {
 				var0001,
 				".\"");
 			say("\"Do not fear for me -- I can care for myself, now that Draygan cannot use his magical secrets to control me.\"");
-			if (0xFF61->npc_nearby()) {
-				0xFF61->show_npc_face1(0x0000);
+			if (MORGHRIM->npc_nearby()) {
+				MORGHRIM->show_npc_face1(0x0000);
 				say("\"Thou canst come and stay with me, woman, until thou art ready to return to thy kind. My camp is clean, and the forest animals enjoy thy company.\"");
 				UI_remove_npc_face1();
 				0x0000->set_conversation_slot();
 				say("\"I shall accept thy kind offer, Forest Master.\"");
-				Func097F(0xFF61, "@Stay with me.@", 0x0000);
+				Func097F(MORGHRIM, "@Stay with me.@", 0x0000);
 				Func097F(BERYL, "@I shall.@", 0x0005);
 				BERYL->set_new_schedules([MIDNIGHT, DAWN, EVENING], [SLEEP, TEND_SHOP, WANDER], [0x02B1, 0x0676, 0x02B9, 0x0686, 0x02C1, 0x06AD]);
 				BERYL->run_schedule();
@@ -52397,7 +52397,7 @@ void Func049C object#(0x49C) () {
 			Func0982(DRAYGAN, 0x0032);
 			BERYL->run_schedule();
 			BERYL->set_alignment(NEUTRAL);
-			0xFF61->set_alignment(NEUTRAL);
+			MORGHRIM->set_alignment(NEUTRAL);
 			BERYL->set_schedule_type(TALK);
 		}
 	}
@@ -52517,7 +52517,7 @@ void Func049D object#(0x49D) () {
 			nohalt;
 			call Func049D;
 		};
-		if (IVOR->npc_nearby() || (DRAYGAN->npc_nearby() || (BERYL->npc_nearby() || 0xFF61->npc_nearby()))) {
+		if (IVOR->npc_nearby() || (DRAYGAN->npc_nearby() || (BERYL->npc_nearby() || MORGHRIM->npc_nearby()))) {
 			abort;
 		}
 		var0000 = HURD->approach_avatar(0x0078, 0x0028);
@@ -52558,7 +52558,7 @@ void Func049E object#(0x49E) () {
 			nohalt;
 			call Func049E;
 		};
-		if (HURD->npc_nearby() || (DRAYGAN->npc_nearby() || (BERYL->npc_nearby() || 0xFF61->npc_nearby()))) {
+		if (HURD->npc_nearby() || (DRAYGAN->npc_nearby() || (BERYL->npc_nearby() || MORGHRIM->npc_nearby()))) {
 			abort;
 		}
 		var0000 = IVOR->approach_avatar(0x0078, 0x0028);
@@ -52609,24 +52609,24 @@ void Func049F object#(0x49F) () {
 	var var0006;
 	var var0007;
 
-	var0000 = 0xFF61->get_npc_id();
+	var0000 = MORGHRIM->get_npc_id();
 	var0001 = Func0954();
 	var0002 = Func0953();
 	var0003 = Func097D(PARTY, 0x0001, 0x01C2, QUALITY_ANY, 0x0000);
 	if (event == SCRIPTED) {
-		if (0xFF61->get_item_flag(SI_ZOMBIE)) {
-			Func09AC(0xFF61, -1, 0, TALK);
+		if (MORGHRIM->get_item_flag(SI_ZOMBIE)) {
+			Func09AC(MORGHRIM, -1, 0, TALK);
 		} else {
 			UI_play_sound_effect(0x0077);
-			0xFF61->set_item_flag(SI_ZOMBIE);
-			0xFF61->clear_item_flag(ASLEEP);
-			0xFF61->set_item_frame(0x001E);
-			0xFF61->move_object([0x063E, 0x044D, 0x0000]);
-			0xFF61->set_schedule_type(WAIT);
+			MORGHRIM->set_item_flag(SI_ZOMBIE);
+			MORGHRIM->clear_item_flag(ASLEEP);
+			MORGHRIM->set_item_frame(0x001E);
+			MORGHRIM->move_object([0x063E, 0x044D, 0x0000]);
+			MORGHRIM->set_schedule_type(WAIT);
 			UI_sprite_effect(ANIMATION_TELEPORT, 0x063E, 0x044D, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			UI_sprite_effect(ANIMATION_TELEPORT, 0x063E, 0x044D, 0x0000, 0x0000, 0x000C, LOOP_ONCE2);
-			Func097F(0xFF61, "Draygan's power is broken!", 0x0003);
-			var0004 = script 0xFF61 after 10 ticks {
+			Func097F(MORGHRIM, "Draygan's power is broken!", 0x0003);
+			var0004 = script MORGHRIM after 10 ticks {
 				nohalt;
 				call Func049F;
 			};
@@ -52634,21 +52634,21 @@ void Func049F object#(0x49F) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Greetings, old man...@");
-		0xFF61->Func07D1();
-		Func097F(0xFF61, "@Who calleth me old?@", 0x0002);
-		0xFF61->set_schedule_type(TALK);
+		MORGHRIM->Func07D1();
+		Func097F(MORGHRIM, "@Who calleth me old?@", 0x0002);
+		MORGHRIM->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF61->run_schedule();
-		0xFF61->clear_item_say();
-		0xFF61->show_npc_face0(0x0000);
+		MORGHRIM->run_schedule();
+		MORGHRIM->clear_item_say();
+		MORGHRIM->show_npc_face0(0x0000);
 		add(["Master"]);
-		var0005 = 0xFF61->get_item_flag(MET);
+		var0005 = MORGHRIM->get_item_flag(MET);
 		if (DRAYGAN->get_item_flag(DEAD) && (!gflags[0x02BB])) {
 			if (Func097D(PARTY, 0x0001, 0x01C2, QUALITY_ANY, 0x0000)) {
-				Func09AC(0xFF61, -1, 0, WANDER);
+				Func09AC(MORGHRIM, -1, 0, WANDER);
 				say("\"Thou must return the Heart of Elerion to me! I need it to restore balance to the forest and its creatures.\"");
-				0xFF61->set_schedule_type(HOUND);
+				MORGHRIM->set_schedule_type(HOUND);
 				BERYL->set_schedule_type(HOUND);
 				BERYL->set_alignment(NEUTRAL);
 				add("give Orb");
@@ -52656,7 +52656,7 @@ void Func049F object#(0x49F) () {
 			} else {
 				BERYL->set_schedule_type(HOUND);
 				BERYL->set_alignment(NEUTRAL);
-				0xFF61->set_schedule_type(HOUND);
+				MORGHRIM->set_schedule_type(HOUND);
 				say("\"I must have the Heart of Elerion. Draygan had it, but it belongs to me. If thou canst find it, I shall reward thee.\"");
 				add("reward");
 				remove("Master");
@@ -52690,8 +52690,8 @@ void Func049F object#(0x49F) () {
 				var0004 = UI_remove_party_items(0x0001, 0x01C2, QUALITY_ANY, 0x0000, 0x0000);
 				Func095D(0x012C);
 				var0004 = Func099B(AVATAR, 0x0001, 0x0289, 0x0000, 0x0004, false, true);
-				0xFF61->revert_schedule();
-				0xFF61->run_schedule();
+				MORGHRIM->revert_schedule();
+				MORGHRIM->run_schedule();
 				fallthrough;
 
 			case "reward" (remove):
@@ -52707,7 +52707,7 @@ void Func049F object#(0x49F) () {
 
 			case "Master" (remove):
 				say("\"That is correct! I am the Forest Master! Friend to Windrunner! Former protector of Elerion, and now refugee of Pagan! Of course that will mean nothing to a foreigner like thyself. Dost thou know that I can speak to animals and trees? Do not smirk, knave!\"");
-				0xFF61->set_item_flag(MET);
+				MORGHRIM->set_item_flag(MET);
 				add(["Windrunner", "Pagan", "Elerion", "speak to animals and trees"]);
 				fallthrough;
 
@@ -52819,7 +52819,7 @@ void Func049F object#(0x49F) () {
 						say("\"I cannot help thee until mine Orb, the Heart of Elerion, is returned...\"");
 					} else {
 						say("\"Then why are we talking about the Hound of Doskar?! Bah! I have heard more coherent conversations from trees!\"");
-						Func097F(0xFF61, "@Bah!@", 0x0000);
+						Func097F(MORGHRIM, "@Bah!@", 0x0000);
 						abort;
 					}
 				} else {
@@ -52858,7 +52858,7 @@ void Func049F object#(0x49F) () {
 					gflags[0x02BA] = true;
 				} else {
 					say("\"Then I have nothing more to say to thee!\"");
-					Func097F(0xFF61, "@I am alone...@", 0x0000);
+					Func097F(MORGHRIM, "@I am alone...@", 0x0000);
 					abort;
 				}
 				fallthrough;
@@ -52867,7 +52867,7 @@ void Func049F object#(0x49F) () {
 				UI_remove_npc_face0();
 				UI_remove_npc_face1();
 				Func097F(AVATAR, "@Goodbye.@", 0x0000);
-				Func097F(0xFF61, "@Take care!@", 0x0003);
+				Func097F(MORGHRIM, "@Take care!@", 0x0003);
 				break;
 		}
 	}
