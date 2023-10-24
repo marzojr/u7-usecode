@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [ANDRAL, 0xFF6A, FLICKEN, CALADIN, CELLIA, SHAZZANA, KRAYG, LUTHER, LYDIA, SHMED, STANDARR, TEMPLAR, MARSTEN, SPEKTOR, LUCILLA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, ENSORCIO, ARGUS, BYRIN, DEVRA, BAIYANDA, BWUNDIAI, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [ANDRAL, 0xFF6A, FLICKEN, CALADIN, CELLIA, SHAZZANA, KRAYG, LUTHER, LYDIA, SHMED, STANDARR, TEMPLAR, MARSTEN, SPEKTOR, LUCILLA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, ENSORCIO, ARGUS, BYRIN, DEVRA, BAIYANDA, BWUNDIAI, MWAERNO, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -50327,14 +50327,14 @@ void Func0490 object#(0x490) () {
 		BWUNDIAI->run_schedule();
 		BWUNDIAI->clear_item_say();
 		BWUNDIAI->show_npc_face0(0x0000);
-		var0000 = Func0942(0xFF6F);
+		var0000 = Func0942(MWAERNO);
 		var0001 = Func097D(PARTY, 0x0001, 0x03D1, QUALITY_ANY, 0x0008);
 		var0002 = Func097D(PARTY, 0x0001, 0x0002, QUALITY_ANY, 0x0004);
 		var0003 = get_item_flag(MET);
 		if (var0001 || var0002) {
 			say("\"Botoka na guta!\" *This creature looks at you with eyes so filled with hate that it is painful to look at them.");
 			if (var0000) {
-				0xFF6F->show_npc_face1(0x0000);
+				MWAERNO->show_npc_face1(0x0000);
 				0x0001->set_conversation_slot();
 				say("\"Umgabar fotuba na Gwani!\" *This one looks at you with eyes that are cold and feral.");
 				UI_remove_npc_face1();
@@ -50382,13 +50382,13 @@ void Func0491 object#(0x491) () {
 
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Hail there!@");
-		Func097F(0xFF6F, "@Gruk! Barama tu!@", 0x0003);
-		0xFF6F->set_schedule_type(TALK);
+		Func097F(MWAERNO, "@Gruk! Barama tu!@", 0x0003);
+		MWAERNO->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF6F->run_schedule();
-		0xFF6F->clear_item_say();
-		0xFF6F->show_npc_face0(0x0000);
+		MWAERNO->run_schedule();
+		MWAERNO->clear_item_say();
+		MWAERNO->show_npc_face0(0x0000);
 		var0000 = Func0942(BWUNDIAI);
 		var0001 = IOLO->get_item_flag(IN_PARTY);
 		var0002 = SHAMINO->get_item_flag(IN_PARTY);
@@ -50441,7 +50441,7 @@ void Func0491 object#(0x491) () {
 				UI_remove_npc_face0();
 				UI_remove_npc_face1();
 				Func097F(AVATAR, "@Goodbye!@", 0x0000);
-				Func097F(0xFF6F, "@Atala dak!@", 0x0003);
+				Func097F(MWAERNO, "@Atala dak!@", 0x0003);
 				break;
 		}
 	}
@@ -78828,7 +78828,7 @@ void Func07D8 object#(0x7D8) () {
 		WILFRED->run_schedule();
 		Func09AC(BAIYANDA, 0x0436, 0x036B, WAIT);
 		Func09AC(BWUNDIAI, 0x0440, 0x0348, WAIT);
-		Func09AC(0xFF6F, 0x0479, 0x0354, WAIT);
+		Func09AC(MWAERNO, 0x0479, 0x0354, WAIT);
 		Func09AC(0xFF67, 0x0404, 0x039B, WAIT);
 		Func09AC(0xFF66, 0x0438, 0x0353, WAIT);
 		0x0000->Func068C();

@@ -6690,7 +6690,7 @@ void Func02F2 shape#(0x2F2) () {
 	}
 	if (event == SCRIPTED) {
 		gflags[0x01AA] = true;
-		var0005 = [MORDRA, ROWENA, MARKHAM, 0xFF6F, 0xFF6E, 0xFF6D, HORANCE];
+		var0005 = [MORDRA, ROWENA, MARKHAM, PAULETTE, 0xFF6E, 0xFF6D, HORANCE];
 		for (var0008 in var0005 with var0006 to var0007) {
 			var0008->clear_item_flag(ASLEEP);
 			var0008->set_schedule_type(WAIT);
@@ -31843,16 +31843,16 @@ void Func048C object#(0x48C) () {
 		converse (["name", "job", "bye"]) {
 			case "name":
 				say("The heavy-set zombie wipes his mouth off on the back of his hand. \"I be Markham. Markham o' the Keg.\" He pats the large keg of wine he carries.");
-				var0007 = Func08F7(0xFF6F);
+				var0007 = Func08F7(PAULETTE);
 				if (var0007 && gflags[0x01B9]) {
 					if (var0002) {
 						0xFF6E->hide();
 					}
 					if (!gflags[0x01A4]) {
-						0xFF6F->say("The lovely ",
+						PAULETTE->say("The lovely ",
 							var0000,
 							" strolls over and pats Markham's rather large belly. \"Yes, he's Markham of the Keg, all right.\" She smiles sweetly down at the older man.*");
-						0xFF6F->hide();
+						PAULETTE->hide();
 						MARKHAM->say("\"That's enough of that!\" Markham smacks the pretty young woman on her ghostly posterior.~~ \"Make yerself useful and fetch me a haunch o' venison.\" She turns away, giggling. He looks at you with a mirthful expression, \"I just don't know what I'm goin' ta do with that girl.\"");
 					}
 				}
@@ -32625,11 +32625,11 @@ void Func0491 object#(0x491) () {
 	var var000B;
 
 	if (event == DOUBLECLICK) {
-		0xFF6F->show_npc_face(0x0000);
+		PAULETTE->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_is_pc_female();
 		var0002 = UI_part_of_day();
-		var0003 = 0xFF6F->get_schedule_type();
+		var0003 = PAULETTE->get_schedule_type();
 		var0004 = false;
 		var0005 = false;
 		add(["name", "job", "bye"]);
@@ -32662,7 +32662,7 @@ void Func0491 object#(0x491) () {
 				say("Paulette perks up as she sees Rowena.~~\"Hello, milady. 'Tis good to see thee again. How art thou?\"*");
 				ROWENA->say("\"I am fine, Paulette. I thank thee for thy concern.\"*");
 				ROWENA->hide();
-				0xFF6F->say("\"'Tis good news indeed, milady.\"");
+				PAULETTE->say("\"'Tis good news indeed, milady.\"");
 				gflags[0x01BE] = true;
 			}
 		}
@@ -32672,7 +32672,7 @@ void Func0491 object#(0x491) () {
 				say("\"Hello, Mayor. It has been quite a while since we've seen thee in our tavern. There was a time, I remember, when we couldn't keep thee away.\"*");
 				0xFF6D->say("The mayor becomes quickly embarrassed as he tries to quiet the rather friendly Paulette.~~\"I, er, used to be a wine connoisseur of sorts,\" he says to you.*");
 				0xFF6D->hide();
-				0xFF6F->say("\"'Tis not all thou wert a connoisseur of,\" adds Paulette, eyes twinkling. \"I seem to remember thou had quite a taste for redheads.\"");
+				PAULETTE->say("\"'Tis not all thou wert a connoisseur of,\" adds Paulette, eyes twinkling. \"I seem to remember thou had quite a taste for redheads.\"");
 				gflags[0x01BD] = true;
 			}
 		}
@@ -32735,7 +32735,7 @@ void Func0491 object#(0x491) () {
 					if (var0009 && gflags[0x01B4]) {
 						MARKHAM->say("\"That's a good one, wench,\" laughs the portly ghost.*");
 						MARKHAM->hide();
-						0xFF6F->show_npc_face(0x0000);
+						PAULETTE->show_npc_face(0x0000);
 					}
 				} else {
 					say("\"Very well, ",
@@ -69109,7 +69109,7 @@ void Func088B 0x88B () {
 	};
 	0xFF6D->remove_from_party();
 	0xFF6D->set_schedule_type(WAIT);
-	var0006 = [0xFF6D, MORDRA, TRENT, ROWENA, MARKHAM, 0xFF6E, 0xFF6F];
+	var0006 = [0xFF6D, MORDRA, TRENT, ROWENA, MARKHAM, 0xFF6E, PAULETTE];
 	for (var0009 in var0006 with var0007 to var0008) {
 		var0009->remove_npc();
 	}
