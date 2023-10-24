@@ -28460,10 +28460,10 @@ void Func0479 object#(0x479) () {
 	var var0007;
 
 	if (event == DOUBLECLICK) {
-		0xFF87->show_npc_face(0x0000);
+		KLIFTIN->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFF87->get_npc_object()->get_schedule_type();
+		var0002 = KLIFTIN->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (gflags[0x0186]) {
 			add("Sprellic");
@@ -28623,7 +28623,7 @@ void Func0479 object#(0x479) () {
 	}
 	if (event == PROXIMITY) {
 		var0001 = UI_part_of_day();
-		var0002 = 0xFF87->get_npc_object()->get_schedule_type();
+		var0002 = KLIFTIN->get_npc_object()->get_schedule_type();
 		var0006 = UI_die_roll(0x0001, 0x0004);
 		if ((var0002 == TEND_SHOP) || (var0002 == SEW)) {
 			if (var0006 == 0x0001) {
@@ -28638,9 +28638,9 @@ void Func0479 object#(0x479) () {
 			if (var0006 == 0x0004) {
 				var0007 = "@I have the strongest armour!@";
 			}
-			0xFF87->item_say(var0007);
+			KLIFTIN->item_say(var0007);
 		} else {
-			Func092E(0xFF87);
+			Func092E(KLIFTIN);
 		}
 	}
 }
