@@ -23393,7 +23393,7 @@ void Func0456 object#(0x456) () {
 	var var0001;
 
 	if (event == DOUBLECLICK) {
-		0xFFAA->show_npc_face(0x0000);
+		XANTHIA->show_npc_face(0x0000);
 		var0000 = Func0909();
 		if (!gflags[0x0111]) {
 			say("You see a cheerful woman with bright eyes and blonde hair.");
@@ -23488,7 +23488,7 @@ void Func0456 object#(0x456) () {
 			". I hope I was of some assistance to thee.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFAA);
+		Func092E(XANTHIA);
 	}
 }
 
@@ -58104,7 +58104,7 @@ void Func06AB object#(0x6AB) () {
 
 	if (event == EGG) {
 		gflags[0x0122] = true;
-		var0000 = [0xFFA9, 0xFFAA, 0xFFA4, 0xFFA6];
+		var0000 = [0xFFA9, XANTHIA, 0xFFA4, 0xFFA6];
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0003->set_schedule_type(LOITER);
 		}
@@ -58945,7 +58945,7 @@ void Func06CA object#(0x6CA) () {
 	var var0003;
 
 	if (event == EGG) {
-		var0000 = [0xFFA9, 0xFFAA, 0xFFA4];
+		var0000 = [0xFFA9, XANTHIA, 0xFFA4];
 		for (var0003 in var0000 with var0001 to var0002) {
 			Func093F(var0003, LOITER);
 		}
