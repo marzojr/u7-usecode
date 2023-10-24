@@ -21075,7 +21075,7 @@ void Func0444 object#(0x444) () {
 	var var000A;
 
 	if (event == DOUBLECLICK) {
-		0xFFBC->show_npc_face(0x0000);
+		BENNIE->show_npc_face(0x0000);
 		var0000 = Func0908();
 		add(["name", "job", "bye"]);
 		if (gflags[0x0071]) {
@@ -21159,7 +21159,7 @@ void Func0444 object#(0x444) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFBC);
+		Func092E(BENNIE);
 	}
 }
 

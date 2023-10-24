@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [ANDRAL, 0xFF6A, 0xFFB0, CALADIN, CELLIA, 0xFFB6, 0xFFBC, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [ANDRAL, 0xFF6A, 0xFFB0, CALADIN, CELLIA, 0xFFB6, KRAYG, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -6571,15 +6571,15 @@ void Func01C3 shape#(0x1C3) () {
 		var0002 = "she";
 	}
 	if (event == SCRIPTED) {
-		if ((0xFFBB->get_npc_id() == 0x000C) && (item == 0xFFBC->get_npc_object())) {
-			Func097F(0xFFBC, "@Keep him away from me!@", 0x0000);
-			0xFFBC->set_item_flag(MET);
-			0xFFBC->si_path_run_usecode([0x0413, 0x0A8B, 0x0000], SI_PATH_SUCCESS, item, Func01C3, false);
+		if ((0xFFBB->get_npc_id() == 0x000C) && (item == KRAYG->get_npc_object())) {
+			Func097F(KRAYG, "@Keep him away from me!@", 0x0000);
+			KRAYG->set_item_flag(MET);
+			KRAYG->si_path_run_usecode([0x0413, 0x0A8B, 0x0000], SI_PATH_SUCCESS, item, Func01C3, false);
 			UI_set_path_failure(Func01C3, item, SI_PATH_FAILURE);
 			abort;
 		}
-		if ((0xFFBB->get_npc_id() == 0x0001) && (item == 0xFFBC->get_npc_object())) {
-			0xFFBC->si_path_run_usecode([0x0415, 0x0A7D, 0x0000], SI_PATH_SUCCESS, item, Func01C3, false);
+		if ((0xFFBB->get_npc_id() == 0x0001) && (item == KRAYG->get_npc_object())) {
+			KRAYG->si_path_run_usecode([0x0415, 0x0A7D, 0x0000], SI_PATH_SUCCESS, item, Func01C3, false);
 			UI_set_path_failure(Func01C3, item, SI_PATH_FAILURE);
 			abort;
 		}
@@ -6643,13 +6643,13 @@ void Func01C3 shape#(0x1C3) () {
 		if (0xFFBB->get_npc_id() == 0x000B) {
 			0xFFBB->set_npc_id(0x000C);
 			UI_init_conversation();
-			0xFFBC->show_npc_face0(0x0000);
+			KRAYG->show_npc_face0(0x0000);
 			say("\"I am weary of thine insults, Luther! I am no more of a traitor than thou art!\"");
 			UI_end_conversation();
 			0xFFB6->set_schedule_type(IN_COMBAT);
 			0xFFB9->si_path_run_usecode([0x0425, 0x0A82, 0x0000], SI_PATH_SUCCESS, 0xFFB9->get_npc_object(), Func01C3, false);
 			UI_set_path_failure(Func01C3, 0xFFB9->get_npc_object(), SI_PATH_FAILURE);
-			var0003 = script 0xFFBC after 10 ticks {
+			var0003 = script KRAYG after 10 ticks {
 				nohalt;
 				call Func01C3;
 			};
@@ -6657,7 +6657,7 @@ void Func01C3 shape#(0x1C3) () {
 			gflags[0x004E] = true;
 			Func097F(0xFFB3, "@This is unseemly...@", 0x0000);
 			Func097F(0xFFB6, "@Cease!@", 0x0002);
-			Func097F(0xFFBC, "@Leave me alone!@", 0x0000);
+			Func097F(KRAYG, "@Leave me alone!@", 0x0000);
 			abort;
 		}
 		if (0xFFBB->get_npc_id() == 0x000A) {
@@ -6682,7 +6682,7 @@ void Func01C3 shape#(0x1C3) () {
 				actor frame bowing;
 				actor frame sitting;
 			};
-			var0003 = script 0xFFBC {
+			var0003 = script KRAYG {
 				nohalt;
 				wait 7;
 				say "@Curse thee, Luther!@";
@@ -6922,7 +6922,7 @@ labelFunc01C3_073B:
 				face south;
 			};
 			Func097F(CELLIA, "@Welcome, warrior.@", 0x0000);
-			Func097F(0xFFBC, "@Wolves!@", 0x0001);
+			Func097F(KRAYG, "@Wolves!@", 0x0001);
 			if (!UI_is_pc_female()) {
 				0xFFBA->set_schedule_type(WAIT);
 				0xFFBA->Func07D2();
@@ -6988,7 +6988,7 @@ labelFunc01C3_073B:
 		if (0xFFBB->get_npc_id() == 0x0001) {
 			AVATAR->si_path_run_usecode([0x041F, 0x0A7B, 0x0000], SI_PATH_SUCCESS, item, Func01C3, false);
 			UI_set_path_failure(Func01C3, item, SI_PATH_FAILURE);
-			var0003 = script 0xFFBC after 15 ticks {
+			var0003 = script KRAYG after 15 ticks {
 				nohalt;
 				call Func01C3;
 			};
@@ -7047,7 +7047,7 @@ labelFunc01C3_073B:
 				}
 				if (var0010 == 0x000A) {
 					var0012 = 0x0002;
-					var0011 = 0xFFBC;
+					var0011 = KRAYG;
 				}
 				if (var0010 == 0x000C) {
 					0xFFBA->move_object(var000F);
@@ -7111,7 +7111,7 @@ labelFunc01C3_073B:
 		Func097F(0xFFB9, "@Coward!@", 0x0008);
 		Func097F(CALADIN, "@I'm hungry!@", 0x000A);
 		gflags[0x0048] = true;
-		var0018 = [0xFFBC, CELLIA, 0xFF6A, 0xFFB3, 0xFFB6, 0xFFBB, HARNNA, 0xFFB0, CALADIN, 0xFFBA, 0xFFB1, 0xFFB9];
+		var0018 = [KRAYG, CELLIA, 0xFF6A, 0xFFB3, 0xFFB6, 0xFFBB, HARNNA, 0xFFB0, CALADIN, 0xFFBA, 0xFFB1, 0xFFB9];
 		for (var0005 in var0018 with var0019 to var001A) {
 			var0005->revert_schedule();
 			var0005->run_schedule();
@@ -7132,7 +7132,7 @@ labelFunc01C3_073B:
 			actor frame bowing;
 			actor frame standing;
 		};
-		var001D = [CELLIA, 0xFFB0, HARNNA, 0xFFBC, 0xFFBA, 0xFFBB, 0xFFB3];
+		var001D = [CELLIA, 0xFFB0, HARNNA, KRAYG, 0xFFBA, 0xFFBB, 0xFFB3];
 		for (var0005 in var001D with var001E to var001F) {
 			var0005->clear_item_flag(SI_TOURNAMENT);
 		}
@@ -7179,12 +7179,12 @@ labelFunc01C3_073B:
 			HARNNA->move_object([0x0421, 0x0A74, 0x0000]);
 			event = SI_PATH_SUCCESS;
 		}
-		if ((item == 0xFFBC->get_npc_object()) && (0xFFBB->get_npc_id() == 0x000C)) {
-			0xFFBC->set_schedule_type(WAIT);
+		if ((item == KRAYG->get_npc_object()) && (0xFFBB->get_npc_id() == 0x000C)) {
+			KRAYG->set_schedule_type(WAIT);
 			abort;
 		}
-		if ((item == 0xFFBC->get_npc_object()) && (0xFFBB->get_npc_id() == 0x0002)) {
-			0xFFBC->move_object([0x0415, 0x0A7D, 0x0000]);
+		if ((item == KRAYG->get_npc_object()) && (0xFFBB->get_npc_id() == 0x0002)) {
+			KRAYG->move_object([0x0415, 0x0A7D, 0x0000]);
 			event = SI_PATH_SUCCESS;
 		}
 		if ((0xFFBB->get_npc_id() == 0x0001) && (item == AVATAR->get_npc_object())) {
@@ -7289,19 +7289,19 @@ labelFunc01C3_073B:
 			UI_remove_npc_face1();
 			abort;
 		}
-		if ((item == 0xFFBC->get_npc_object()) && (0xFFBB->get_npc_id() == 0x000C)) {
-			0xFFBC->set_schedule_type(WAIT);
+		if ((item == KRAYG->get_npc_object()) && (0xFFBB->get_npc_id() == 0x000C)) {
+			KRAYG->set_schedule_type(WAIT);
 			abort;
 		}
-		if ((item == 0xFFBC->get_npc_object()) && (0xFFBB->get_npc_id() == 0x0002)) {
-			var0003 = script 0xFFBC {
+		if ((item == KRAYG->get_npc_object()) && (0xFFBB->get_npc_id() == 0x0002)) {
+			var0003 = script KRAYG {
 				nohalt;
 				say "@I am sorry that I am late...@";
 				face east;
 				actor frame bowing;
 				actor frame sitting;
 			};
-			0xFFBC->set_schedule_type(WAIT);
+			KRAYG->set_schedule_type(WAIT);
 			abort;
 		}
 		if ((0xFFBB->get_npc_id() == 0x0001) && (item == AVATAR->get_npc_object())) {
@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, CELLIA, 0xFFB0, HARNNA, 0xFFBC, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, CELLIA, 0xFFB0, HARNNA, KRAYG, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -43659,7 +43659,7 @@ void Func0444 object#(0x444) () {
 	var var000E;
 
 	var0000 = false;
-	if (0xFFBC->get_schedule_type() == TEND_SHOP) {
+	if (KRAYG->get_schedule_type() == TEND_SHOP) {
 		var0000 = true;
 	}
 	var0001 = Func0954();
@@ -43681,34 +43681,34 @@ void Func0444 object#(0x444) () {
 			call Func01D0;
 		};
 	}
-	if ((event == DOUBLECLICK) && (0xFFBC->get_schedule_type() != STANDTHERE)) {
+	if ((event == DOUBLECLICK) && (KRAYG->get_schedule_type() != STANDTHERE)) {
 		AVATAR->item_say("@Hello, sir.@");
-		0xFFBC->Func07D1();
+		KRAYG->Func07D1();
 		if (var0000) {
-			Func097F(0xFFBC, "@Hello.@", 0x0002);
-			0xFFBC->set_schedule_type(STANDTHERE);
-			0xFFBC->Func07D2();
-			var0009 = script 0xFFBC after 7 ticks {
+			Func097F(KRAYG, "@Hello.@", 0x0002);
+			KRAYG->set_schedule_type(STANDTHERE);
+			KRAYG->Func07D2();
+			var0009 = script KRAYG after 7 ticks {
 				nohalt;
 				call Func0444;
 			};
 		} else {
-			Func097F(0xFFBC, "@Hello.@", 0x0002);
-			0xFFBC->set_schedule_type(TALK);
+			Func097F(KRAYG, "@Hello.@", 0x0002);
+			KRAYG->set_schedule_type(TALK);
 		}
 	}
 	if (event == SCRIPTED) {
 		event = STARTED_TALKING;
 	}
 	if (event == STARTED_TALKING) {
-		0xFFBC->run_schedule();
-		0xFFBC->clear_item_say();
-		if (0xFFBC->get_schedule_type() == TEND_SHOP) {
+		KRAYG->run_schedule();
+		KRAYG->clear_item_say();
+		if (KRAYG->get_schedule_type() == TEND_SHOP) {
 			var0000 = true;
 		}
-		0xFFBC->show_npc_face0(0x0000);
+		KRAYG->show_npc_face0(0x0000);
 		Func08F0();
-		var000A = 0xFFBC->get_item_flag(MET);
+		var000A = KRAYG->get_item_flag(MET);
 		if (!var000A) {
 			if (var0000) {
 				say("\"Hello, ",
@@ -43719,7 +43719,7 @@ void Func0444 object#(0x444) () {
 					var0001,
 					". How can I help thee?\"");
 			}
-			0xFFBC->set_item_flag(MET);
+			KRAYG->set_item_flag(MET);
 		} else if (gflags[0x0048]) {
 			say("\"Hello again, ",
 				var0001,
@@ -43772,7 +43772,7 @@ void Func0444 object#(0x444) () {
 						var0009,
 						"! Ask anyone -- they will tell thee that I am not a drinking man.\"");
 					say("\"'Tis due to mine injuries. Milk is all that I can tolerate. Boiled milk.\"");
-					Func097F(0xFFBC, "@Leave me alone...@", 0x0000);
+					Func097F(KRAYG, "@Leave me alone...@", 0x0000);
 					abort;
 				}
 				fallthrough;
@@ -43986,7 +43986,7 @@ void Func0444 object#(0x444) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Must go now!@", 0x0000);
-				Func097F(0xFFBC, "@Walk in Courage!@", 0x0002);
+				Func097F(KRAYG, "@Walk in Courage!@", 0x0002);
 				break;
 		}
 	}
@@ -44008,9 +44008,9 @@ void Func0444 object#(0x444) () {
 			if (var000D == 0x0005) {
 				var000E = "@Bedroll?@";
 			}
-			0xFFBC->item_say(var000E);
+			KRAYG->item_say(var000E);
 		} else {
-			Func097A(0xFFBC);
+			Func097A(KRAYG);
 		}
 	}
 }
@@ -78751,7 +78751,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(CALADIN, 0x03B4, 0x0A17, WAIT);
 		Func09AC(CELLIA, 0x03D3, 0x0A09, WAIT);
 		Func09AC(0xFFB6, 0x03B8, 0x0A53, WAIT);
-		Func09AC(0xFFBC, 0x0404, 0x0A23, WAIT);
+		Func09AC(KRAYG, 0x0404, 0x0A23, WAIT);
 		Func09AC(0xFFB9, 0x0412, 0x0A27, WAIT);
 		Func09AC(0xFFB8, 0x0415, 0x0A2B, WAIT);
 		Func09AC(0xFFB5, 0x0433, 0x0A77, WAIT);
@@ -92507,15 +92507,15 @@ void Func0842 0x842 () {
 			} else if (var000E == 0x0003) {
 				var0013 = Func0992(0x0001, (("@But " + var0000) + ", we haven't the coins to purchase this.@"), 0x0000, false);
 				if (var0013 != AVATAR) {
-					0xFFBC->show_npc_face0(0x0000);
+					KRAYG->show_npc_face0(0x0000);
 					say("\"If thou canst not pay, please leave!\"");
 				} else {
 					say("\"Thou dost not have enough monetari to purchase this...\"");
 				}
-				if (0x001F < (0xFFBC->get_npc_id() + 0x0006)) {
-					0xFFBC->set_npc_id(0x001F);
+				if (0x001F < (KRAYG->get_npc_id() + 0x0006)) {
+					KRAYG->set_npc_id(0x001F);
 				} else {
-					0xFFBC->set_npc_id(0xFFBC->get_npc_id() + 0x0006);
+					KRAYG->set_npc_id(KRAYG->get_npc_id() + 0x0006);
 				}
 			}
 		}
@@ -92910,12 +92910,12 @@ var Func0844 0x844 (var var0000, var var0001) {
 	}
 	var0005 = var0000;
 	var0006 = (var0001 / 0x0003) * 0x0002;
-	var0007 = 0x000F - (0xFFBC->get_npc_id() / 0x0002);
+	var0007 = 0x000F - (KRAYG->get_npc_id() / 0x0002);
 	var0008 = 0x0000;
 	var0009 = 0x0001;
 	var000A = 0x0000;
 	var000B = 0x0002;
-	var000C = 0xFFBC->get_npc_id();
+	var000C = KRAYG->get_npc_id();
 	while (var0009) {
 		var000D = Func0956(["yes", "no", "haggle"]);
 		if (var000D == "no") {
@@ -93006,7 +93006,7 @@ var Func0844 0x844 (var var0000, var var0001) {
 				"?\"");
 			if (Func0955()) {
 				if (var000C > 0x0001) {
-					0xFFBC->set_npc_id(var000C - 0x0002);
+					KRAYG->set_npc_id(var000C - 0x0002);
 				}
 				return var0005;
 			}
@@ -93023,9 +93023,9 @@ var Func0844 0x844 (var var0000, var var0001) {
 				abort;
 			}
 			if (0x001F < (var000C + 0x000A)) {
-				0xFFBC->set_npc_id(0x001F);
+				KRAYG->set_npc_id(0x001F);
 			} else {
-				0xFFBC->set_npc_id(var000C + 0x000A);
+				KRAYG->set_npc_id(var000C + 0x000A);
 			}
 			return 0x0000;
 		}
@@ -93035,7 +93035,7 @@ var Func0844 0x844 (var var0000, var var0001) {
 					var0005,
 					" was my final offer. Dost thou accept?\"");
 				if (var000C < 0x001C) {
-					0xFFBC->set_npc_id(var000C + 0x0004);
+					KRAYG->set_npc_id(var000C + 0x0004);
 				}
 				if (Func0955()) {
 					return var0005;
@@ -93046,7 +93046,7 @@ var Func0844 0x844 (var var0000, var var0001) {
 					var0005,
 					" monetari is my final offer.\"");
 				if (var000C < 0x001E) {
-					0xFFBC->set_npc_id(var000C + 0x0002);
+					KRAYG->set_npc_id(var000C + 0x0002);
 				}
 			}
 		} else {
@@ -93127,7 +93127,7 @@ var Func0844 0x844 (var var0000, var var0001) {
 						" monetari is as low as I will go!\"");
 				}
 				if (var000C < 0x001F) {
-					0xFFBC->set_npc_id(var000C + 0x0001);
+					KRAYG->set_npc_id(var000C + 0x0001);
 				}
 			}
 		}
