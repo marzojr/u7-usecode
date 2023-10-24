@@ -49981,12 +49981,12 @@ void Func0481 object#(0x481) () {
 	if (event == DOUBLECLICK) {
 		Func097F(AVATAR, "@Hail, metal servant!@", 0x0000);
 		Func097F(item, "@Halt, stranger!@", 0x0001);
-		0xFF7F->set_schedule_type(STANDTHERE);
+		PASSWORD->set_schedule_type(STANDTHERE);
 		si_path_run_usecode([0x0766, 0x027C, 0x0000], PATH_SUCCESS, item, Func0481, true);
 	}
 	if (event == PATH_SUCCESS) {
-		0xFF7F->set_schedule_type(PATROL);
-		0xFF7F->set_item_frame(0x0010);
+		PASSWORD->set_schedule_type(PATROL);
+		PASSWORD->set_item_frame(0x0010);
 		var0000 = script item after 3 ticks {
 			nohalt;
 			call Func0481;
@@ -49996,7 +49996,7 @@ void Func0481 object#(0x481) () {
 		run_schedule();
 		AVATAR->clear_item_say();
 		clear_item_say();
-		0xFF7F->set_schedule_type(PATROL);
+		PASSWORD->set_schedule_type(PATROL);
 		var0001 = DUPRE->get_item_flag(IN_PARTY);
 		0xFED6->show_npc_face0(0x0000);
 		say("\"I am the guardian of the city of Order. Dost thou wish to enter the great city of Spinebreaker?\"");

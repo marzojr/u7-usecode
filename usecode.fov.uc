@@ -29900,10 +29900,10 @@ void Func0481 object#(0x481) () {
 	var var000B;
 
 	if (event == DOUBLECLICK) {
-		0xFF7F->show_npc_face(0x0000);
+		RUSSELL->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFF7F->get_npc_object()->get_schedule_type();
+		var0002 = RUSSELL->get_npc_object()->get_schedule_type();
 		var0003 = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
 		if (gflags[0x017D]) {
@@ -30083,7 +30083,7 @@ void Func0481 object#(0x481) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF7F);
+		Func092E(RUSSELL);
 	}
 }
 
