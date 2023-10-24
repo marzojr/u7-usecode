@@ -54288,7 +54288,7 @@ void Func04AA object#(0x4AA) () {
 	var0004 = UI_is_pc_female();
 	var0005 = Func0953();
 	var0006 = Func097D(PARTY, 0x0001, 0x0268, QUALITY_ANY, 0x0014);
-	var0007 = 0xFF56->get_item_flag(MET);
+	var0007 = ZHELKAS->get_item_flag(MET);
 	var0008 = ("I am " + var0005) + ".";
 	var0009 = "his";
 	var000A = "him";
@@ -54305,9 +54305,9 @@ void Func04AA object#(0x4AA) () {
 			var000E = var000C->get_item_frame() + 0x0001;
 			var000C->set_item_frame(var000E);
 			Func087A();
-			Func094F(0xFF56, "To enter our realm...");
+			Func094F(ZHELKAS, "To enter our realm...");
 			gflags[0x01FE] = true;
-			Func097F(0xFF56, "@To seek the Pillars!@", 0x0010);
+			Func097F(ZHELKAS, "@To seek the Pillars!@", 0x0010);
 			Func0878();
 			abort;
 		}
@@ -54316,7 +54316,7 @@ void Func04AA object#(0x4AA) () {
 			var000E = var000C->get_item_frame() + 0x0001;
 			var000C->set_item_frame(var000E);
 			Func0924(0x0049, SHAPE_ANY);
-			Func094F(0xFF56, "To go in Virtue!");
+			Func094F(ZHELKAS, "To go in Virtue!");
 			Func097F(AVATAR, "@May Virtue be with thee!@", 0x0010);
 			Func0878();
 			var000F = find_nearby(0x0314, 0x001E, MASK_NONE);
@@ -54333,35 +54333,35 @@ void Func04AA object#(0x4AA) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Greetings, fine Gargoyle!@");
-		0xFF56->Func07D1();
-		Func097F(0xFF56, "@To say greetings.@", 0x0002);
+		ZHELKAS->Func07D1();
+		Func097F(ZHELKAS, "@To say greetings.@", 0x0002);
 		if (gflags[0x01FE]) {
-			0xFF56->set_schedule_type(TALK);
-		} else if (0xFF56->get_schedule_type() != WAIT) {
-			0xFF56->set_schedule_type(WAIT);
-			0xFF56->Func07D2();
-			var0014 = script 0xFF56 after 7 ticks {
+			ZHELKAS->set_schedule_type(TALK);
+		} else if (ZHELKAS->get_schedule_type() != WAIT) {
+			ZHELKAS->set_schedule_type(WAIT);
+			ZHELKAS->Func07D2();
+			var0014 = script ZHELKAS after 7 ticks {
 				nohalt;
 				call Func04AA;
 			};
 		}
 	}
 	if (event == SCRIPTED) {
-		if (item == 0xFF56->get_npc_object()) {
+		if (item == ZHELKAS->get_npc_object()) {
 			event = STARTED_TALKING;
 		} else {
 			Func087A();
 		}
 	}
 	if (event == STARTED_TALKING) {
-		0xFF56->run_schedule();
-		0xFF56->clear_item_say();
-		0xFF56->show_npc_face0(0x0000);
+		ZHELKAS->run_schedule();
+		ZHELKAS->clear_item_say();
+		ZHELKAS->show_npc_face0(0x0000);
 		if (gflags[0x01FE] && (!gflags[0x01FB])) {
 			say("\"To have told you to seek the Pillar of Fire. To grasp it and enter the Test of the Ancients.\"");
 			say("\"To delay no longer.\"");
-			Func097F(0xFF56, "@The Pillar!@", 0x0000);
-			0xFF56->set_schedule_type(SHY);
+			Func097F(ZHELKAS, "@The Pillar!@", 0x0000);
+			ZHELKAS->set_schedule_type(SHY);
 			abort;
 		}
 		if (gflags[0x01FB]) {
@@ -54390,7 +54390,7 @@ void Func04AA object#(0x4AA) () {
 						0x0000->set_conversation_slot();
 						say("\"To wonder if you jest. To say you do not have the Goblet. To be unwilling to deal with you until you have gotten it.\"");
 						UI_remove_npc_face0();
-						Func097F(0xFF56, "@Not until then.@", 0x0002);
+						Func097F(ZHELKAS, "@Not until then.@", 0x0002);
 						abort;
 					}
 				} else if (var0006 == true) {
@@ -54405,7 +54405,7 @@ void Func04AA object#(0x4AA) () {
 					0x0000->set_conversation_slot();
 					say("\"To be displeased that you do not have the Goblet. To be unwilling to deal with you until you have gotten it.\"");
 					UI_remove_npc_face0();
-					Func097F(0xFF56, "@Not until then.@", 0x0002);
+					Func097F(ZHELKAS, "@Not until then.@", 0x0002);
 					abort;
 				}
 			} else {
@@ -54417,7 +54417,7 @@ void Func04AA object#(0x4AA) () {
 				Func0879();
 			} else {
 				say("\"To waste our precious time! To leave now!\"");
-				0xFF56->set_schedule_type(WANDER);
+				ZHELKAS->set_schedule_type(WANDER);
 				abort;
 			}
 		} else {
@@ -54498,8 +54498,8 @@ void Func04AA object#(0x4AA) () {
 			case "I am not the Hero":
 				say("\"To go your way! To leave my people to their slumbers, and the fate which grasps them in the night.\"");
 				say("\"To hope the Hero comes soon...\"");
-				Func097F(0xFF56, "@Soon...@", 0x0000);
-				0xFF56->set_schedule_type(WANDER);
+				Func097F(ZHELKAS, "@Soon...@", 0x0000);
+				ZHELKAS->set_schedule_type(WANDER);
 				abort;
 
 			case "tell me more":
@@ -54567,8 +54567,8 @@ void Func04AA object#(0x4AA) () {
 					Func0879();
 				} else {
 					say("\"To be sad... To know that we are fading rapidly. To hope that the Hero comes soon.\"");
-					Func097F(0xFF56, "@Depart...@", 0x0000);
-					0xFF56->set_schedule_type(WANDER);
+					Func097F(ZHELKAS, "@Depart...@", 0x0000);
+					ZHELKAS->set_schedule_type(WANDER);
 					abort;
 				}
 				fallthrough;
@@ -54590,8 +54590,8 @@ void Func04AA object#(0x4AA) () {
 
 			case "I am lost...":
 				say("\"To think that you wish to do us harm, like all of your kind. To think that you are here to steal our treasures. To demand that you leave now!\"");
-				Func097F(0xFF56, "@Leave!@", 0x0000);
-				0xFF56->set_schedule_type(WANDER);
+				Func097F(ZHELKAS, "@Leave!@", 0x0000);
+				ZHELKAS->set_schedule_type(WANDER);
 				abort;
 
 			case "dreaming sickness":
@@ -54642,7 +54642,7 @@ void Func04AA object#(0x4AA) () {
 				fallthrough;
 
 			case "second chance" (remove):
-				0xFF56->set_npc_id(0x0001);
+				ZHELKAS->set_npc_id(0x0001);
 				say("\"To need one last task from you. To be without doubt. To be done before giving thee the artifact.\"");
 				var0016 = Func0992(SHAMINO, "@The Avatar took thy test willingly! Nothing was said about passing all the tests!@", 0x0000, false);
 				if (var0016 != AVATAR) {
@@ -54668,25 +54668,25 @@ void Func04AA object#(0x4AA) () {
 
 			case "never mind" (remove):
 				say("\"To refuse to give you the Ring of the Serpent. To ask that you submit further proof of your Virtue.\"");
-				Func097F(0xFF56, "@Proof!@", 0x0000);
+				Func097F(ZHELKAS, "@Proof!@", 0x0000);
 				Func0878();
 				abort;
 
 			case "leave Furnace" (remove):
-				var0018 = 0xFF56->find_nearby(0x0313, 0x0014, MASK_NONE);
+				var0018 = ZHELKAS->find_nearby(0x0313, 0x0014, MASK_NONE);
 				if (var0018->get_item_quality() == 0x0049) {
 					say("\"To open the brass gate, that you may gain the surface.\"");
-					Func097F(0xFF56, "@To wait.@", 0x0000);
-					0xFF56->set_new_schedules(MIDNIGHT, PATROL, 0xFF56->get_object_position());
-					0xFF56->run_schedule();
+					Func097F(ZHELKAS, "@To wait.@", 0x0000);
+					ZHELKAS->set_new_schedules(MIDNIGHT, PATROL, ZHELKAS->get_object_position());
+					ZHELKAS->run_schedule();
 				} else {
 					say("\"To know that the only exit is at the brass gate at where we first met. To know that Men are too weak to pull the levers to open it.\"");
 					say("\"To go now to the brass gate, Hero. To meet you there and\tto let you return to the surface.\"");
-					Func097F(0xFF56, "@To meet you there...@", 0x0000);
+					Func097F(ZHELKAS, "@To meet you there...@", 0x0000);
 					Func097F(AVATAR, "@See thee at the gate...@", 0x0000);
 					var0019 = [0x05C4, 0x09B3];
-					0xFF56->set_new_schedules(MIDNIGHT, STANDTHERE, [var0019]);
-					0xFF56->run_schedule();
+					ZHELKAS->set_new_schedules(MIDNIGHT, STANDTHERE, [var0019]);
+					ZHELKAS->run_schedule();
 					abort;
 				}
 				fallthrough;
@@ -54699,22 +54699,22 @@ void Func04AA object#(0x4AA) () {
 				fallthrough;
 
 			case "bye":
-				if (0xFF56->get_npc_id() == 0x0001) {
-					0xFF56->set_npc_id(0x0000);
+				if (ZHELKAS->get_npc_id() == 0x0001) {
+					ZHELKAS->set_npc_id(0x0000);
 					say("\"To give me your answer -- will you bring me the Goblet of the Conjury?\"");
 					if (Func0955()) {
 						say("\"To have nothing to fear, if you are the Hero. To meditate to give you strength.\"");
-						Func097F(0xFF56, "@To be strong!@", 0x0000);
+						Func097F(ZHELKAS, "@To be strong!@", 0x0000);
 					} else {
 						say("\"To know that time is short. To wish that the true Hero shall come soon.\"");
-						Func097F(0xFF56, "@Soon...@", 0x0000);
+						Func097F(ZHELKAS, "@Soon...@", 0x0000);
 					}
-					0xFF56->set_schedule_type(SHY);
+					ZHELKAS->set_schedule_type(SHY);
 					abort;
 				}
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Well met!@", 0x0000);
-				Func097F(0xFF56, "@To wish you luck!@", 0x0002);
+				Func097F(ZHELKAS, "@To wish you luck!@", 0x0002);
 				break;
 
 		}
@@ -80880,8 +80880,8 @@ void Func07F7 object#(0x7F7) () {
 			UI_play_music(0x0027, Func09A0(0x0005, 0x0001));
 			UI_fade_palette(0x000C, 0x0001, 0x0000);
 			UI_play_sound_effect(0x0082);
-			0xFF56->move_object([0x074A, 0x0A03, 0x0000]);
-			0xFF56->set_schedule_type(TALK);
+			ZHELKAS->move_object([0x074A, 0x0A03, 0x0000]);
+			ZHELKAS->set_schedule_type(TALK);
 			var0000 = script Func09A0(0x0005, 0x0002) {
 				nohalt;
 				call Func07F7;
@@ -99964,13 +99964,13 @@ void Func0876 0x876 () {
 	var0000 = Func0953();
 	var0001 = ("I am " + var0000) + ".";
 	if (!gflags[0x01FE]) {
-		var0002 = 0xFF56->get_item_flag(MET);
+		var0002 = ZHELKAS->get_item_flag(MET);
 		if (var0002) {
 			say("\"To be asking what you want with Zhelkas, ruler of Gargoyles! To be thinking how sad and sorry you look as you cower over to speak. To be telling you to be brave!  To be telling you to have pride.  To be telling you announce yourself.\"");
 		} else {
 			say("\"To be called ruler of gargoyles. To respond to Zhelkas. To mean `Iron Helm.'\"");
 			say("\"To ask who you are and why you are here.\"");
-			0xFF56->set_item_flag(MET);
+			ZHELKAS->set_item_flag(MET);
 		}
 		add([var0001, "I am the Avatar.", "I am lost..."]);
 		if (!gflags[0x02DA]) {
@@ -100037,8 +100037,8 @@ void Func0878 0x878 () {
 	var0004 = [0x06EB, 0x0A37];
 	var0005 = [0x063B, 0x0A37];
 	var0006 = [0x06AB, 0x0A38];
-	0xFF56->set_new_schedules([MIDNIGHT, EARLY, DAWN, MORNING, NOON, AFTERNOON, EVENING], [LOITER, WANDER, WANDER, PACE_VERTICAL, PACE_HORIZONTAL, WANDER, WANDER], [var0000, var0001, var0002, var0003, var0004, var0005, var0006]);
-	0xFF56->run_schedule();
+	ZHELKAS->set_new_schedules([MIDNIGHT, EARLY, DAWN, MORNING, NOON, AFTERNOON, EVENING], [LOITER, WANDER, WANDER, PACE_VERTICAL, PACE_HORIZONTAL, WANDER, WANDER], [var0000, var0001, var0002, var0003, var0004, var0005, var0006]);
+	ZHELKAS->run_schedule();
 }
 
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
@@ -100047,9 +100047,9 @@ void Func0879 0x879 () {
 	say("\"To be pleased... To bid you to go to the Pillars of Purity.\"");
 	say("\"To ask you to prepare yourself in virtue. Then to grasp the Pillar of Fire and let the Test begin...\"");
 	say("\"To admit you to the Underground City.\"");
-	Func097F(0xFF56, "@A moment!@", 0x0000);
-	0xFF56->set_new_schedules(MIDNIGHT, PATROL, 0xFF56->get_object_position());
-	0xFF56->run_schedule();
+	Func097F(ZHELKAS, "@A moment!@", 0x0000);
+	ZHELKAS->set_new_schedules(MIDNIGHT, PATROL, ZHELKAS->get_object_position());
+	ZHELKAS->run_schedule();
 	abort;
 }
 
@@ -100062,7 +100062,7 @@ void Func087A 0x87A () {
 	var var0003;
 	var var0004;
 
-	var0000 = 0xFF56->find_nearby(0x0203, 0x000A, MASK_NONE);
+	var0000 = ZHELKAS->find_nearby(0x0203, 0x000A, MASK_NONE);
 	if (var0000) {
 		var0001 = var0000->get_item_frame();
 		if (var0001 == 0x0005) {

@@ -36150,10 +36150,10 @@ void Func04A7 object#(0x4A7) () {
 				say("\"Avatar! Oh Avatar! I have news!\"");
 			}
 			say("\"Garritt, my son, told me that Tobias was in possession of some silver snake venom. I went to investigate and found Tobias with it!\"*");
-			var0004 = Func08F7(0xFF56);
+			var0004 = Func08F7(MERRICK);
 			if (var0004) {
-				0xFF56->say("\"That is correct! I am a witness that what Feridwyn has said is the truth!\"*");
-				0xFF56->hide();
+				MERRICK->say("\"That is correct! I am a witness that what Feridwyn has said is the truth!\"*");
+				MERRICK->hide();
 				FERIDWYN->show_npc_face(0x0000);
 			}
 			say("\"I have often said that Tobias was no good. Now here is proof. He is the thief that has been praying upon one of our honest merchants! And to think I let him come into contact with my son! I hope he shall be dealt with in a manner appropriate to one who is leading youth astray from the way of The Fellowship.");
@@ -36660,7 +36660,7 @@ void Func04AA object#(0x4AA) () {
 	var var0006;
 
 	if (event == DOUBLECLICK) {
-		0xFF56->show_npc_face(0x0000);
+		MERRICK->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = "Avatar";
 		var0002 = "None of thy concern";
@@ -36801,7 +36801,7 @@ void Func04AA object#(0x4AA) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF56);
+		Func092E(MERRICK);
 	}
 }
 
