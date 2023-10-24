@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [ANDRAL, 0xFF6A, 0xFFB0, CALADIN, CELLIA, 0xFFB6, KRAYG, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, 0xFFBB, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [ANDRAL, 0xFF6A, 0xFFB0, CALADIN, CELLIA, 0xFFB6, KRAYG, 0xFFB9, 0xFFB8, 0xFFB5, 0xFFB2, 0xFFB1, MARSTEN, 0xFFB3, 0xFFBA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -1371,7 +1371,7 @@ void Func00E4 shape#(0xE4) () {
 	if ((event == STARTED_TALKING) && (var0000 == 0x0003)) {
 		set_schedule_type(HOUND);
 		0xFEED->show_npc_face0(0x0000);
-		if (!0xFFBB->get_item_flag(MET)) {
+		if (!MARSTEN->get_item_flag(MET)) {
 			say("\"I will not discuss matters with a stranger to Monitor. Thou shouldst speak with Lord Marsten.\"");
 		} else if (!gflags[0x0048]) {
 			say("\"Thou art not a Knight. Only warriors are welcome here. Move along before thou dost feel the cold steel of mine halberd.\"");
@@ -6571,30 +6571,30 @@ void Func01C3 shape#(0x1C3) () {
 		var0002 = "she";
 	}
 	if (event == SCRIPTED) {
-		if ((0xFFBB->get_npc_id() == 0x000C) && (item == KRAYG->get_npc_object())) {
+		if ((MARSTEN->get_npc_id() == 0x000C) && (item == KRAYG->get_npc_object())) {
 			Func097F(KRAYG, "@Keep him away from me!@", 0x0000);
 			KRAYG->set_item_flag(MET);
 			KRAYG->si_path_run_usecode([0x0413, 0x0A8B, 0x0000], SI_PATH_SUCCESS, item, Func01C3, false);
 			UI_set_path_failure(Func01C3, item, SI_PATH_FAILURE);
 			abort;
 		}
-		if ((0xFFBB->get_npc_id() == 0x0001) && (item == KRAYG->get_npc_object())) {
+		if ((MARSTEN->get_npc_id() == 0x0001) && (item == KRAYG->get_npc_object())) {
 			KRAYG->si_path_run_usecode([0x0415, 0x0A7D, 0x0000], SI_PATH_SUCCESS, item, Func01C3, false);
 			UI_set_path_failure(Func01C3, item, SI_PATH_FAILURE);
 			abort;
 		}
-		if (0xFFBB->get_npc_id() == 0x000E) {
-			0xFFBB->set_npc_id(0x000F);
+		if (MARSTEN->get_npc_id() == 0x000E) {
+			MARSTEN->set_npc_id(0x000F);
 			AVATAR->set_alignment(GOOD);
-			Func097F(0xFFBB, "@Stop this!@", 0x0000);
-			0xFFBB->set_item_flag(MET);
+			Func097F(MARSTEN, "@Stop this!@", 0x0000);
+			MARSTEN->set_item_flag(MET);
 			0xFFB6->set_item_flag(DEAD);
 			0xFFB6->set_schedule_type(WAIT);
 			0xFFB6->set_alignment(NEUTRAL);
 			0xFFB9->set_item_flag(DEAD);
 			0xFFB9->set_schedule_type(WAIT);
 			0xFFB9->set_alignment(NEUTRAL);
-			var0003 = script 0xFFBB after 10 ticks {
+			var0003 = script MARSTEN after 10 ticks {
 				nohalt;
 				call Func01C3;
 			};
@@ -6605,8 +6605,8 @@ void Func01C3 shape#(0x1C3) () {
 			var0003 = 0xFFB9->set_npc_prop(HEALTH, 0xFFB6->get_npc_prop(STRENGTH) - var0004);
 			abort;
 		}
-		if (0xFFBB->get_npc_id() == 0x000D) {
-			0xFFBB->set_npc_id(0x000E);
+		if (MARSTEN->get_npc_id() == 0x000D) {
+			MARSTEN->set_npc_id(0x000E);
 			AVATAR->set_alignment(NEUTRAL);
 			0xFFB9->set_attack_mode(NEAREST);
 			0xFFB6->set_attack_mode(NEAREST);
@@ -6625,7 +6625,7 @@ void Func01C3 shape#(0x1C3) () {
 			Func097F(CALADIN, "@Strike, Luther!@", 0x000A);
 			CALADIN->set_item_flag(MET);
 			Func097F(AVATAR, "@Hey, careful!@", 0x0005);
-			var0003 = script 0xFFBB after 35 ticks {
+			var0003 = script MARSTEN after 35 ticks {
 				nohalt;
 				actor frame bowing;
 				actor frame standing;
@@ -6634,14 +6634,14 @@ void Func01C3 shape#(0x1C3) () {
 			};
 			abort;
 		}
-		if (0xFFBB->get_npc_id() == 0x000C) {
-			0xFFBB->set_npc_id(0x000D);
+		if (MARSTEN->get_npc_id() == 0x000C) {
+			MARSTEN->set_npc_id(0x000D);
 			0xFFB6->si_path_run_usecode([0x041B, 0x0A84, 0x0000], SI_PATH_SUCCESS, 0xFFB6->get_npc_object(), Func01C3, false);
 			UI_set_path_failure(Func01C3, 0xFFB6->get_npc_object(), SI_PATH_FAILURE);
 			abort;
 		}
-		if (0xFFBB->get_npc_id() == 0x000B) {
-			0xFFBB->set_npc_id(0x000C);
+		if (MARSTEN->get_npc_id() == 0x000B) {
+			MARSTEN->set_npc_id(0x000C);
 			UI_init_conversation();
 			KRAYG->show_npc_face0(0x0000);
 			say("\"I am weary of thine insults, Luther! I am no more of a traitor than thou art!\"");
@@ -6660,8 +6660,8 @@ void Func01C3 shape#(0x1C3) () {
 			Func097F(KRAYG, "@Leave me alone!@", 0x0000);
 			abort;
 		}
-		if (0xFFBB->get_npc_id() == 0x000A) {
-			0xFFBB->set_npc_id(0x000B);
+		if (MARSTEN->get_npc_id() == 0x000A) {
+			MARSTEN->set_npc_id(0x000B);
 			UI_init_conversation();
 			0xFFB9->show_npc_face0(0x0000);
 			say("\"Listen, Knights -- it doth not take a wizard to untangle this skein. Who among us acts strangely, doth do things in secret, and avoids his knightly duties?\"");
@@ -6695,8 +6695,8 @@ void Func01C3 shape#(0x1C3) () {
 			UI_set_path_failure(Func01C3, 0xFFBA->get_npc_object(), SI_PATH_FAILURE);
 			abort;
 		}
-		if (0xFFBB->get_npc_id() == 0x0009) {
-			0xFFBB->set_npc_id(0x000A);
+		if (MARSTEN->get_npc_id() == 0x0009) {
+			MARSTEN->set_npc_id(0x000A);
 			UI_init_conversation();
 			0xFFB3->show_npc_face0(0x0000);
 			say("\"I think this talk of a traitor in Monitor is all rather speculative. Surely, no one suspects anyone at this table of being a Goblin spy.\"");
@@ -6713,8 +6713,8 @@ void Func01C3 shape#(0x1C3) () {
 			};
 			abort;
 		}
-		if (0xFFBB->get_npc_id() == 0x0008) {
-			0xFFBB->set_npc_id(0x0009);
+		if (MARSTEN->get_npc_id() == 0x0008) {
+			MARSTEN->set_npc_id(0x0009);
 			UI_init_conversation();
 			0xFFB1->show_npc_face0(0x0000);
 			say("\"Forgive me, lord, but I, too, have a serious matter to put before the leaders of Monitor.\"");
@@ -6725,7 +6725,7 @@ void Func01C3 shape#(0x1C3) () {
 			0xFFB6->set_item_flag(MET);
 			0x0000->set_conversation_slot();
 			say("\"I am right enough, Shazzana. And I cannot rest until I have aired my concerns.\"");
-			0xFFBB->show_npc_face1(0x0000);
+			MARSTEN->show_npc_face1(0x0000);
 			say("\"Speak thy mind, then, warrior.\"");
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
@@ -6752,8 +6752,8 @@ void Func01C3 shape#(0x1C3) () {
 			};
 			abort;
 		}
-		if (0xFFBB->get_npc_id() == 0x0007) {
-			0xFFBB->set_npc_id(0x0008);
+		if (MARSTEN->get_npc_id() == 0x0007) {
+			MARSTEN->set_npc_id(0x0008);
 			UI_init_conversation();
 			0xFFB0->show_npc_face0(0x0000);
 			say("\"What didst thou think of the Knight's Test? Didst thou have any harrowing experiences?\"");
@@ -6833,7 +6833,7 @@ void Func01C3 shape#(0x1C3) () {
 					goto labelFunc01C3_073B;
 			}
 labelFunc01C3_073B:
-			0xFFBB->show_npc_face1(0x0000);
+			MARSTEN->show_npc_face1(0x0000);
 			if (var0005 == 0x0000) {
 				say("\"It is good to see a Knight who is not boastful. Luther, thou couldst learn from this one.\"");
 				Func097F(0xFFB9, "@I doubt it...@", 0x0000);
@@ -6853,14 +6853,14 @@ labelFunc01C3_073B:
 			UI_play_music(0x001E, Func09A0(0x0005, 0x0001));
 			abort;
 		}
-		if (0xFFBB->get_npc_id() == 0x0006) {
-			0xFFBB->set_npc_id(0x0007);
+		if (MARSTEN->get_npc_id() == 0x0006) {
+			MARSTEN->set_npc_id(0x0007);
 			UI_init_conversation();
-			0xFFBB->show_npc_face0(0x0000);
+			MARSTEN->show_npc_face0(0x0000);
 			say("\"Lucilla hath prepared this feast, the main dish of which includes meat from the wolf which thou didst slay in the Knight's Test.\"");
 			say("\"Now let us eat, and as we do so, let us extend our fellowship to this new Knight.\"");
 			UI_end_conversation();
-			var0003 = script 0xFFBB {
+			var0003 = script MARSTEN {
 				nohalt;
 				say "@Let us eat...@";
 				wait 2;
@@ -6876,10 +6876,10 @@ labelFunc01C3_073B:
 			UI_play_music(0x0022, Func09A0(0x0005, 0x0001));
 			abort;
 		}
-		if (0xFFBB->get_npc_id() == 0x0005) {
-			0xFFBB->set_npc_id(0x0006);
+		if (MARSTEN->get_npc_id() == 0x0005) {
+			MARSTEN->set_npc_id(0x0006);
 			UI_init_conversation();
-			0xFFBB->show_npc_face0(0x0000);
+			MARSTEN->show_npc_face0(0x0000);
 			say("\"And I am here, both as the Lord of Monitor, and as the leader of the Leopards.\"");
 			if (0xFFBA->get_schedule_type() == WAIT) {
 				0xFFBA->set_schedule_type(WAITER);
@@ -6887,7 +6887,7 @@ labelFunc01C3_073B:
 			UI_end_conversation();
 			Func097F(0xFFB3, "@Hurrah!@", 0x0000);
 			Func097F(0xFFB6, "@Leopards!@", 0x0002);
-			var0003 = script 0xFFBB {
+			var0003 = script MARSTEN {
 				nohalt;
 				actor frame reach_1h;
 				wait 6;
@@ -6897,8 +6897,8 @@ labelFunc01C3_073B:
 			};
 			abort;
 		}
-		if (0xFFBB->get_npc_id() == 0x0004) {
-			0xFFBB->set_npc_id(0x0005);
+		if (MARSTEN->get_npc_id() == 0x0004) {
+			MARSTEN->set_npc_id(0x0005);
 			UI_init_conversation();
 			0xFF6A->show_npc_face0(0x0000);
 			say("\"As the leader of the Wolves -- \"");
@@ -6917,7 +6917,7 @@ labelFunc01C3_073B:
 				wait 6;
 				call Func01C3;
 			};
-			var0003 = script 0xFFBB after 3 ticks {
+			var0003 = script MARSTEN after 3 ticks {
 				nohalt;
 				face south;
 			};
@@ -6933,8 +6933,8 @@ labelFunc01C3_073B:
 			0xFFBA->set_item_flag(MET);
 			abort;
 		}
-		if (0xFFBB->get_npc_id() == 0x0003) {
-			0xFFBB->set_npc_id(0x0004);
+		if (MARSTEN->get_npc_id() == 0x0003) {
+			MARSTEN->set_npc_id(0x0004);
 			UI_init_conversation();
 			CALADIN->show_npc_face0(0x0000);
 			say("\"On behalf of the Bears -- which, by the way, are the mightiest warriors in the land -- I welcome thee to thy Knighthood Banquet.\"");
@@ -6952,7 +6952,7 @@ labelFunc01C3_073B:
 				actor frame bowing;
 				actor frame standing;
 			};
-			var0003 = script 0xFFBB {
+			var0003 = script MARSTEN {
 				nohalt;
 				face south;
 				wait 6;
@@ -6963,15 +6963,15 @@ labelFunc01C3_073B:
 			};
 			abort;
 		}
-		if (0xFFBB->get_npc_id() == 0x0002) {
-			0xFFBB->set_npc_id(0x0003);
+		if (MARSTEN->get_npc_id() == 0x0002) {
+			MARSTEN->set_npc_id(0x0003);
 			UI_init_conversation();
-			0xFFBB->show_npc_face0(0x0000);
+			MARSTEN->show_npc_face0(0x0000);
 			say("\"Congratulations on successfully completing the Knight's Test.\"");
 			say("\"Thus thou hast proven thyself worthy of joining an elite band of warriors.\"");
 			say("\"In thine honor, all of the Commands of Monitor have sent their representatives to thy Knighthood Banquet.\"");
 			UI_end_conversation();
-			var0003 = script 0xFFBB {
+			var0003 = script MARSTEN {
 				nohalt;
 				face east;
 				say "@The Bears...@";
@@ -6985,7 +6985,7 @@ labelFunc01C3_073B:
 			};
 			abort;
 		}
-		if (0xFFBB->get_npc_id() == 0x0001) {
+		if (MARSTEN->get_npc_id() == 0x0001) {
 			AVATAR->si_path_run_usecode([0x041F, 0x0A7B, 0x0000], SI_PATH_SUCCESS, item, Func01C3, false);
 			UI_set_path_failure(Func01C3, item, SI_PATH_FAILURE);
 			var0003 = script KRAYG after 15 ticks {
@@ -6994,7 +6994,7 @@ labelFunc01C3_073B:
 			};
 			abort;
 		}
-		if (0xFFBB->get_npc_id() == 0x0000) {
+		if (MARSTEN->get_npc_id() == 0x0000) {
 			UI_play_music(0x000F, Func09A0(0x0005, 0x0001));
 			AVATAR->set_item_flag(DONT_MOVE);
 			var0004 = 0xFFB6->get_npc_prop(HEALTH);
@@ -7027,7 +7027,7 @@ labelFunc01C3_073B:
 				var0011 = false;
 				if (var0010 == 0x0001) {
 					var0012 = 0x0004;
-					var0011 = 0xFFBB;
+					var0011 = MARSTEN;
 				}
 				if (var0010 == 0x0002) {
 					var0012 = 0x0004;
@@ -7094,7 +7094,7 @@ labelFunc01C3_073B:
 		0xFFB9->clear_item_flag(DEAD);
 		0xFFB6->clear_item_flag(DEAD);
 		UI_init_conversation();
-		0xFFBB->show_npc_face0(0x0000);
+		MARSTEN->show_npc_face0(0x0000);
 		say("\"Lay down thine arms, Knights! Such fighting belongs on the List Field, not in the banquet hall.\"");
 		say("\"Thy behavior hath disrupted this celebration. In the interest of calming all of our tempers, I declare this banquet to be over.\"");
 		say("\"",
@@ -7106,12 +7106,12 @@ labelFunc01C3_073B:
 				Func0907(var0009, 0x0001);
 			}
 		}
-		Func097F(0xFFBB, "@Go home!@", 0x0000);
+		Func097F(MARSTEN, "@Go home!@", 0x0000);
 		Func097F(0xFFB6, "@Until next time...@", 0x0004);
 		Func097F(0xFFB9, "@Coward!@", 0x0008);
 		Func097F(CALADIN, "@I'm hungry!@", 0x000A);
 		gflags[0x0048] = true;
-		var0018 = [KRAYG, CELLIA, 0xFF6A, 0xFFB3, 0xFFB6, 0xFFBB, HARNNA, 0xFFB0, CALADIN, 0xFFBA, 0xFFB1, 0xFFB9];
+		var0018 = [KRAYG, CELLIA, 0xFF6A, 0xFFB3, 0xFFB6, MARSTEN, HARNNA, 0xFFB0, CALADIN, 0xFFBA, 0xFFB1, 0xFFB9];
 		for (var0005 in var0018 with var0019 to var001A) {
 			var0005->revert_schedule();
 			var0005->run_schedule();
@@ -7132,19 +7132,19 @@ labelFunc01C3_073B:
 			actor frame bowing;
 			actor frame standing;
 		};
-		var001D = [CELLIA, 0xFFB0, HARNNA, KRAYG, 0xFFBA, 0xFFBB, 0xFFB3];
+		var001D = [CELLIA, 0xFFB0, HARNNA, KRAYG, 0xFFBA, MARSTEN, 0xFFB3];
 		for (var0005 in var001D with var001E to var001F) {
 			var0005->clear_item_flag(SI_TOURNAMENT);
 		}
 	}
 	if (event == SI_PATH_FAILURE) {
-		if ((item == CELLIA->get_npc_object()) && (0xFFBB->get_npc_id() == 0x0008)) {
+		if ((item == CELLIA->get_npc_object()) && (MARSTEN->get_npc_id() == 0x0008)) {
 			CELLIA->set_schedule_type(WAIT);
 			CELLIA->item_say("@Poor Cantra...@");
 			abort;
 		}
-		if ((item == 0xFFB6->get_npc_object()) && (0xFFBB->get_npc_id() == 0x000C)) {
-			0xFFBB->set_npc_id(0x000D);
+		if ((item == 0xFFB6->get_npc_object()) && (MARSTEN->get_npc_id() == 0x000C)) {
+			MARSTEN->set_npc_id(0x000D);
 			0xFFB6->set_schedule_type(WAIT);
 			var0003 = script 0xFFB6 {
 				nohalt;
@@ -7161,7 +7161,7 @@ labelFunc01C3_073B:
 			};
 			abort;
 		}
-		if ((item == 0xFFB9->get_npc_object()) && (0xFFBB->get_npc_id() == 0x000C)) {
+		if ((item == 0xFFB9->get_npc_object()) && (MARSTEN->get_npc_id() == 0x000C)) {
 			0xFFB9->set_schedule_type(WAIT);
 			UI_init_conversation();
 			0xFFB6->show_npc_face0(0x0000);
@@ -7179,25 +7179,25 @@ labelFunc01C3_073B:
 			HARNNA->move_object([0x0421, 0x0A74, 0x0000]);
 			event = SI_PATH_SUCCESS;
 		}
-		if ((item == KRAYG->get_npc_object()) && (0xFFBB->get_npc_id() == 0x000C)) {
+		if ((item == KRAYG->get_npc_object()) && (MARSTEN->get_npc_id() == 0x000C)) {
 			KRAYG->set_schedule_type(WAIT);
 			abort;
 		}
-		if ((item == KRAYG->get_npc_object()) && (0xFFBB->get_npc_id() == 0x0002)) {
+		if ((item == KRAYG->get_npc_object()) && (MARSTEN->get_npc_id() == 0x0002)) {
 			KRAYG->move_object([0x0415, 0x0A7D, 0x0000]);
 			event = SI_PATH_SUCCESS;
 		}
-		if ((0xFFBB->get_npc_id() == 0x0001) && (item == AVATAR->get_npc_object())) {
+		if ((MARSTEN->get_npc_id() == 0x0001) && (item == AVATAR->get_npc_object())) {
 			AVATAR->move_object([0x041F, 0x0A7B, 0x0000]);
 			event = SI_PATH_SUCCESS;
 		}
-		if ((0xFFBB->get_npc_id() == 0x0000) && ((get_item_shape() == 0x01B0) || (get_item_shape() == 0x010E))) {
+		if ((MARSTEN->get_npc_id() == 0x0000) && ((get_item_shape() == 0x01B0) || (get_item_shape() == 0x010E))) {
 			AVATAR->move_object([0x041F, 0x0A90, 0x0000]);
 			event = SI_PATH_SUCCESS;
 		}
 	}
 	if (event == SI_PATH_SUCCESS) {
-		if ((item == CELLIA->get_npc_object()) && (0xFFBB->get_npc_id() == 0x0008)) {
+		if ((item == CELLIA->get_npc_object()) && (MARSTEN->get_npc_id() == 0x0008)) {
 			CELLIA->set_schedule_type(WAIT);
 			var0003 = script CELLIA {
 				nohalt;
@@ -7211,8 +7211,8 @@ labelFunc01C3_073B:
 			};
 			abort;
 		}
-		if ((item == 0xFFB6->get_npc_object()) && (0xFFBB->get_npc_id() == 0x000C)) {
-			0xFFBB->set_npc_id(0x000D);
+		if ((item == 0xFFB6->get_npc_object()) && (MARSTEN->get_npc_id() == 0x000C)) {
+			MARSTEN->set_npc_id(0x000D);
 			0xFFB6->set_schedule_type(WAIT);
 			var0003 = script 0xFFB6 {
 				nohalt;
@@ -7229,7 +7229,7 @@ labelFunc01C3_073B:
 			};
 			abort;
 		}
-		if ((item == 0xFFB9->get_npc_object()) && (0xFFBB->get_npc_id() == 0x000C)) {
+		if ((item == 0xFFB9->get_npc_object()) && (MARSTEN->get_npc_id() == 0x000C)) {
 			0xFFB9->set_schedule_type(WAIT);
 			UI_init_conversation();
 			0xFFB6->show_npc_face0(0x0000);
@@ -7289,11 +7289,11 @@ labelFunc01C3_073B:
 			UI_remove_npc_face1();
 			abort;
 		}
-		if ((item == KRAYG->get_npc_object()) && (0xFFBB->get_npc_id() == 0x000C)) {
+		if ((item == KRAYG->get_npc_object()) && (MARSTEN->get_npc_id() == 0x000C)) {
 			KRAYG->set_schedule_type(WAIT);
 			abort;
 		}
-		if ((item == KRAYG->get_npc_object()) && (0xFFBB->get_npc_id() == 0x0002)) {
+		if ((item == KRAYG->get_npc_object()) && (MARSTEN->get_npc_id() == 0x0002)) {
 			var0003 = script KRAYG {
 				nohalt;
 				say "@I am sorry that I am late...@";
@@ -7304,10 +7304,10 @@ labelFunc01C3_073B:
 			KRAYG->set_schedule_type(WAIT);
 			abort;
 		}
-		if ((0xFFBB->get_npc_id() == 0x0001) && (item == AVATAR->get_npc_object())) {
-			0xFFBB->set_npc_id(0x0002);
-			Func097F(0xFFBB, (("@Please be seated, " + var0001) + ".@"), 0x0003);
-			var0003 = script 0xFFBB after 2 ticks {
+		if ((MARSTEN->get_npc_id() == 0x0001) && (item == AVATAR->get_npc_object())) {
+			MARSTEN->set_npc_id(0x0002);
+			Func097F(MARSTEN, (("@Please be seated, " + var0001) + ".@"), 0x0003);
+			var0003 = script MARSTEN after 2 ticks {
 				nohalt;
 				actor frame bowing;
 				actor frame standing;
@@ -7324,8 +7324,8 @@ labelFunc01C3_073B:
 			Func09AC(0xFFBA, -1, 0, WAITER);
 			abort;
 		}
-		if ((0xFFBB->get_npc_id() == 0x0000) && ((get_item_shape() == 0x01B0) || (get_item_shape() == 0x010E))) {
-			0xFFBB->set_npc_id(0x0001);
+		if ((MARSTEN->get_npc_id() == 0x0000) && ((get_item_shape() == 0x01B0) || (get_item_shape() == 0x010E))) {
+			MARSTEN->set_npc_id(0x0001);
 			Func097F(AVATAR, "@Look! Everyone is here...@", 0x0003);
 			Func097F(0xFFB0, "@Where is Harnna?@", 0x0017);
 			Func097F(0xFFB3, "@Our guest is here...@", 0x0016);
@@ -14976,18 +14976,18 @@ void Func031D shape#(0x31D) () {
 			say("Rotoluncia,~~ I saw thee staring at that pig Torrissio at the banquet last night and I know now that thine affections shown toward me were false. Thou art a cow and a shabby sorceress as well!~ Do not try to pretend otherwise, for I know the truth now. I want nothing more from thee ever again!~~ Filbercio ");
 		} else if (var0003 == 0x0078) {
 			say("Marsten, Lord of Monitor:~~ The destruction of thine enemies is certain. My brave Goblin warriors have already plundered the Fawn Tower, and the Wolves which guarded it.~ Next, we shall strike the Bull Tower, and the Bears which serve there. Hail to victory! Soon, the Wolves and Bears shall cease to trouble thee. Then Monitor and the Goblins shall live in peace, and thou shalt be King of the Monitorians.~~ Do not let this messenger fall into the hands of our enemies.~~ Pomdirgun,~Chieftain of the Goblin Horde");
-			0xFFBB->set_item_flag(SI_TOURNAMENT);
+			MARSTEN->set_item_flag(SI_TOURNAMENT);
 			gflags[0x0093] = true;
 		} else if (var0003 == 0x0079) {
 			say("   Honor be to thee, Pomdirgun, Chieftain of the Goblin Horde:~~ Letting thee know that all of our plans in these parts fare well. I have learned from the Wolves that they plan to launch a patrol in the early morning hours of the seventh day of the new moon.~ If thou dost ambush the patrol, then it shall be easy for thee to overrun Fawn Tower itself.~ The Wolves shall be critically weakened, and the City of Fawn shall quake in fear!~ But if thou canst, spare the life of the leader of the patrol. She is a favorite of my liege.~~ We beg of thee not to let this messenger fall into the hands of our enemies, the Wolves.~~ Spektor, writing on behalf of Lord Marsten");
 			gflags[0x0093] = true;
-			0xFFBB->set_item_flag(SI_TOURNAMENT);
+			MARSTEN->set_item_flag(SI_TOURNAMENT);
 			gflags[0x0094] = true;
 			0xFFB3->set_item_flag(SI_TOURNAMENT);
 		} else if (var0003 == 0x007A) {
 			say("   Honor be to thee, Pomdirgun, Chieftain of the Goblin Horde:~~ Letting thee know that all of our plans in these parts fare well. Having learned from our successful experience with Fawn Tower, we have decided to withdraw, on the fourth night of the coming moon, as many troops as possible from Bull Tower.~ The Bears shall be marching westward on the plains, and shall be easily slaughtered.~ Then thou canst take the Tower, and plunder the Inn of the Sleeping Bull.~~ We want to remind thee of the supreme importance not to let this messenger fall into the hands of our enemies, the Wolves and the Bears.~~ Marsten, King of Monitor");
 			gflags[0x0093] = true;
-			0xFFBB->set_item_flag(SI_TOURNAMENT);
+			MARSTEN->set_item_flag(SI_TOURNAMENT);
 		} else if (var0003 == 0x007B) {
 			say("   Old man, if thou dost truly wish to survive Freedom, but dost feel that thou canst live to tell the tale of Lorthondo's final test, thou hast only to serve in my slave pit. Tend to my pets and I shall personally show thee to the door and to the blue skies of daylight and freedom. Guard my nightmare and care for him well.~ He is a treasure and a daemon in one. Take him through the teleporter once each day and let him feel the grass beneath his hooves.~ Take care, for one strike of his hoof could kill an old fool such as thou.~ Be thou sure to keep Sabrina from him. I fear that she doth frighten him. I find it strange that such a wild, untamed creature such as that should be frightened of her touch. Then again, mayhaps I can fathom why. ~");
 			say("   Lastly, take great care of my small furry prize. Do not be fooled by its diminutive size, it hath taken the lives of many a foolhardy man who dared to approach thinking it might make a tasty morsel.~ Thou shouldst treat it with as much respect as thou wouldst bestow upon me. If thou dost not, either one of us could end thy miserable existence.~ In the supply room, thou wilt find a year's worth of carrots for Buggs. Feed him but one per day. Place the carrots upon his golden plate -- 'tis the only way that he will feed. He is of royal lineage -- a born predator. If thou dost not, thou mayest find that thou art his next meal.~ Serve me well, old man, and thou mayest live to see the outside of this prison some year...");
@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, CELLIA, 0xFFB0, HARNNA, KRAYG, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, 0xFF64, 0xFFBB, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, CELLIA, 0xFFB0, HARNNA, KRAYG, 0xFFBA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, 0xFF64, MARSTEN, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -21518,8 +21518,8 @@ void Func0401 object#(0x401) () {
 				"! I thought I would never find thee!\"");
 			say("\"When that strange storm struck, there was a flash, and then I found myself in a wilderness.\"");
 			say("\"Fearing to be slain by the Goblins patrolling the woods, I instead took shelter in this walled city. But these Pikemen insist on escorting me to their leader!\"");
-			if (0xFFBB->npc_nearby()) {
-				0xFFBB->show_npc_face1(0x0000);
+			if (MARSTEN->npc_nearby()) {
+				MARSTEN->show_npc_face1(0x0000);
 				say("\"That is all right. If thou art with my friend here, thou needest not speak with me.\"");
 				UI_remove_npc_face1();
 				0x0000->set_conversation_slot();
@@ -41961,9 +41961,9 @@ void Func043F object#(0x43F) () {
 						say("\"Marsten sought to betray Bull Tower! I will send a messenger to alert them immediately!\"");
 						gflags[0x0038] = true;
 					}
-					if (gflags[0x0038] && (!0xFFBB->get_item_flag(DEAD))) {
-						0xFFBB->move_object([0x0446, 0x09C5, 0x0000]);
-						0xFFBB->set_new_schedules([NIGHT, DAWN], [SLEEP, TEND_SHOP], [0x0446, 0x09C5, 0x0446, 0x09C5]);
+					if (gflags[0x0038] && (!MARSTEN->get_item_flag(DEAD))) {
+						MARSTEN->move_object([0x0446, 0x09C5, 0x0000]);
+						MARSTEN->set_new_schedules([NIGHT, DAWN], [SLEEP, TEND_SHOP], [0x0446, 0x09C5, 0x0446, 0x09C5]);
 					}
 					if (gflags[0x0092] && (!0xFFB3->get_item_flag(DEAD))) {
 						0xFFB3->move_object([0x0448, 0x09D6, 0x0000]);
@@ -44064,7 +44064,7 @@ void Func0445 object#(0x445) () {
 
 	var0000 = Func0954();
 	var0001 = Func0953();
-	var0002 = 0xFFBB->get_item_flag(MET);
+	var0002 = MARSTEN->get_item_flag(MET);
 	var0003 = "I serve Lord British";
 	var0004 = false;
 	var0005 = false;
@@ -44081,7 +44081,7 @@ void Func0445 object#(0x445) () {
 	}
 	if (event == SCRIPTED) {
 		if (gflags[0x0038]) {
-			0xFFBB->run_schedule();
+			MARSTEN->run_schedule();
 			// I see no way other than this
 			goto labelFunc0445_0257;
 		} else {
@@ -44111,14 +44111,14 @@ void Func0445 object#(0x445) () {
 			abort;
 		}
 	}
-	if ((event == DEATH) && 0xFFBB->get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && MARSTEN->get_item_flag(SI_TOURNAMENT)) {
 		if (gflags[0x0093]) {
-			0xFFBB->show_npc_face0(0x0000);
+			MARSTEN->show_npc_face0(0x0000);
 			say("\"Thou hast ruined everything! With the current emotional and spiritual state of the city, the Goblins are certain to win this war against us!\"");
 			say("\"The problem lies with the Bears and Wolves -- their bickering weakens us. So I had a plan! The Leopards would rule, and I would be King.\"");
 			say("\"And with the miracle weapons in our hidden arsenal, not even the Goblins could have taken this city...\"");
-			0xFFBB->clear_item_flag(SI_TOURNAMENT);
-			0xFFBB->reduce_health(0x0032, NORMAL_DAMAGE);
+			MARSTEN->clear_item_flag(SI_TOURNAMENT);
+			MARSTEN->reduce_health(0x0032, NORMAL_DAMAGE);
 			abort;
 		}
 		var000E = script item {
@@ -44128,33 +44128,33 @@ void Func0445 object#(0x445) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Greetings, sir.@");
-		0xFFBB->Func07D1();
+		MARSTEN->Func07D1();
 		if (gflags[0x0038]) {
-			0xFFBB->set_schedule_type(WAIT);
-			Func097F(0xFFBB, "@What!@", 0x0002);
-			0xFFBB->Func07D2();
-			var000E = script 0xFFBB after 7 ticks {
+			MARSTEN->set_schedule_type(WAIT);
+			Func097F(MARSTEN, "@What!@", 0x0002);
+			MARSTEN->Func07D2();
+			var000E = script MARSTEN after 7 ticks {
 				nohalt;
 				call Func0445;
 			};
 			abort;
 		}
-		Func097F(0xFFBB, "@Hello.@", 0x0002);
-		0xFFBB->set_schedule_type(TALK);
+		Func097F(MARSTEN, "@Hello.@", 0x0002);
+		MARSTEN->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFFBB->run_schedule();
+		MARSTEN->run_schedule();
 labelFunc0445_0257:
-		0xFFBB->clear_item_say();
-		0xFFBB->show_npc_face0(0x0000);
+		MARSTEN->clear_item_say();
+		MARSTEN->show_npc_face0(0x0000);
 		do {
 			if (!var0002) {
-				var000E = [0xFF6A, CALADIN, 0xFFB7, 0xFFB3, 0xFFBB];
+				var000E = [0xFF6A, CALADIN, 0xFFB7, 0xFFB3, MARSTEN];
 				for (var0014 in var000E with var0012 to var0013) {
 					var0014->revert_schedule();
 				}
 				say("\"Greetings, stranger. I am Lord Marsten. Thou hast come to this city at a grievous hour. We are here to entomb the ashes of this brave Pikeman Groat, as well as to mourn the loss of our Knight Champion.\"");
-				0xFFBB->set_item_flag(MET);
+				MARSTEN->set_item_flag(MET);
 				Func094E(CALADIN, "@Astrid was the finest Knight that Monitor ever had!@");
 				UI_remove_npc_face1();
 				0x0000->set_conversation_slot();
@@ -44197,7 +44197,7 @@ labelFunc0445_0257:
 			if (gflags[0x00A9] && (!gflags[0x0078])) {
 				add("enchanter");
 			}
-			if ((0xFFBB->get_schedule_type() == TEND_SHOP) && (!gflags[0x0038])) {
+			if ((MARSTEN->get_schedule_type() == TEND_SHOP) && (!gflags[0x0038])) {
 				add("Hall of Monitor");
 			}
 			if (gflags[0x0045] && (0xFFB4->get_schedule_type() != WAIT)) {
@@ -44208,7 +44208,7 @@ labelFunc0445_0257:
 			case "brown bottle" (remove):
 				if (Func097D(PARTY, 0x0001, 0x0268, QUALITY_ANY, 0x0009)) {
 					say("\"Leave me with that dirty bottle! It doth look to have been lying in the woods for weeks...\"");
-					Func097F(0xFFBB, "@'Sblood!@", 0x0000);
+					Func097F(MARSTEN, "@'Sblood!@", 0x0000);
 					abort;
 				}
 				say("\"I care not what thou didst find in the woods. 'Tis probably Goblin loot.\"");
@@ -44330,9 +44330,9 @@ labelFunc0445_0257:
 						say("\"What?! I should have known that evil tyrant would yet live! Beware -- no servant of the Beast shall be aided by any Knight of Monitor!\"");
 						gflags[0x002D] = true;
 						if (gflags[0x00B7]) {
-							0xFFBB->revert_schedule();
+							MARSTEN->revert_schedule();
 						}
-						Func097F(0xFFBB, "@Begone!@", 0x0000);
+						Func097F(MARSTEN, "@Begone!@", 0x0000);
 						abort;
 					}
 				} else {
@@ -44505,7 +44505,7 @@ labelFunc0445_0257:
 
 			case "accuse" (remove):
 				say("\"What art thou talking about? Thou dost know nothing! Leave at once, or I shall call the Pikemen!\"");
-				Func097F(0xFFBB, "@Leave!@", 0x0000);
+				Func097F(MARSTEN, "@Leave!@", 0x0000);
 				abort;
 
 			case "enchanter" (remove):
@@ -44527,7 +44527,7 @@ labelFunc0445_0257:
 							say("\"Then how did he appear in the middle of the funeral? Doth he fly?\"");
 							var0016 = Func0956(["@Yes, he does.@", "@He was hit by lightning.@", "@I do not know.@"]);
 							if (var0016 == "@Yes, he does.@") {
-								Func097F(0xFFBB, "@Bah!@", 0x0000);
+								Func097F(MARSTEN, "@Bah!@", 0x0000);
 								abort;
 							}
 							if (var0016 == "@I do not know.@") {
@@ -44546,7 +44546,7 @@ labelFunc0445_0257:
 					if (gflags[0x0048]) {
 						if (gflags[0x00CD]) {
 							say("\"Art thou daft? I have already given thee the key. Thy friend is locked in the jail. It is in the northeast part of town.\"");
-							Func097F(0xFFBB, "@Free thy friend!@", 0x0000);
+							Func097F(MARSTEN, "@Free thy friend!@", 0x0000);
 							abort;
 						}
 						say("\"If thou wilt vouch for thy friend's future behavior, then I shall let him go free.\"");
@@ -44623,13 +44623,13 @@ labelFunc0445_0257:
 					UI_remove_npc_face1();
 					gflags[0x00A9] = true;
 					UI_remove_npc_face0();
-					0xFFBB->show_npc_face0(0x0000);
+					MARSTEN->show_npc_face0(0x0000);
 					say("\"Warriors, be still! There is no spy in Monitor, and I refuse to hear more of this!\"");
 					gflags[0x0032] = true;
-					Func097F(0xFFBB, "@There is no spy!@", 0x0000);
+					Func097F(MARSTEN, "@There is no spy!@", 0x0000);
 					Func097F(CALADIN, "@I am not convinced...@", 0x0004);
 					Func097F(0xFF6A, "@Nor I!@", 0x0008);
-					0xFFBB->set_schedule_type(SHY);
+					MARSTEN->set_schedule_type(SHY);
 					CALADIN->set_schedule_type(SHY);
 					0xFF6A->set_schedule_type(SHY);
 					var000E = script Func09A0(0x0005, 0x0001) {
@@ -44638,7 +44638,7 @@ labelFunc0445_0257:
 					};
 				} else {
 					Func097F(AVATAR, "@Good day!@", 0x0000);
-					Func097F(0xFFBB, "@Certainly...@", 0x0002);
+					Func097F(MARSTEN, "@Certainly...@", 0x0002);
 				}
 				// I see no way other than this
 				goto labelFunc0445_0D4F;
@@ -44648,13 +44648,13 @@ labelFunc0445_0257:
 		if (gflags[0x0038]) {
 			var0017 = UI_die_roll(0x0001, 0x0003);
 			if (var0017 == 0x0001) {
-				0xFFBB->item_say("@Damn that Avatar!@");
+				MARSTEN->item_say("@Damn that Avatar!@");
 			}
 			if (var0017 == 0x0002) {
-				0xFFBB->item_say("@Never trust a Goblin!@");
+				MARSTEN->item_say("@Never trust a Goblin!@");
 			}
 			if (var0017 == 0x0003) {
-				0xFFBB->item_say("@I ruled this town!@");
+				MARSTEN->item_say("@I ruled this town!@");
 			}
 		} else {
 			var0018 = [CALADIN];
@@ -44667,41 +44667,41 @@ labelFunc0445_0D4F:
 			if (var0018 == []) {
 				abort;
 			}
-			0xFFBB->clear_item_say();
+			MARSTEN->clear_item_say();
 			var0015 = var0018[UI_get_random(UI_get_array_size(var0018))];
 			var0015->clear_item_say();
 			var001C = UI_get_random(0x0006);
 			if (var001C == 0x0001) {
-				0xFFBB->item_say("@We need law and order!@");
+				MARSTEN->item_say("@We need law and order!@");
 				Func097F(var0015, "@Attack the Goblins!@", 0x0003);
 			}
 			if (var001C == 0x0002) {
-				0xFFBB->item_say("@Calm yourselves.@");
+				MARSTEN->item_say("@Calm yourselves.@");
 			}
 			if (var001C == 0x0003) {
 				if (0xFEF7->get_item_flag(DEAD)) {
 					var0015->item_say("@The Goblins are no threat.@");
-					Func097F(0xFFBB, "@I told thee so.@", 0x0003);
+					Func097F(MARSTEN, "@I told thee so.@", 0x0003);
 				} else {
 					var0015->item_say("@The Goblins are pressing south!@");
-					Func097F(0xFFBB, "@Do not be alarmed.@", 0x0003);
+					Func097F(MARSTEN, "@Do not be alarmed.@", 0x0003);
 				}
 			}
 			if (var001C == 0x0004) {
-				0xFFBB->item_say("@I am in charge here!@");
+				MARSTEN->item_say("@I am in charge here!@");
 				Func097F(var0015, "@Yes, milord.@", 0x0003);
 			}
 			if (var001C == 0x0005) {
 				if (gflags[0x0044]) {
-					0xFFBB->item_say("@The traitor is dead.@");
+					MARSTEN->item_say("@The traitor is dead.@");
 					Func097F(var0015, "@Was he working alone?@", 0x0002);
 				} else {
-					0xFFBB->item_say("@There is no traitor.@");
+					MARSTEN->item_say("@There is no traitor.@");
 					Func097F(var0015, "@Only a rumor.@", 0x0002);
 				}
 			}
 			if (var001C == 0x0006) {
-				0xFFBB->item_say("@Listen to me!@");
+				MARSTEN->item_say("@Listen to me!@");
 			}
 		}
 	}
@@ -47014,8 +47014,8 @@ void Func044D object#(0x44D) () {
 			}
 			if (var0002 == 0x0002) {
 				0xFFB3->item_say("@It was his plan!@");
-				if (0xFFBB->npc_nearby()) {
-					Func097F(0xFFBB, "@Quiet!@", 0x0003);
+				if (MARSTEN->npc_nearby()) {
+					Func097F(MARSTEN, "@Quiet!@", 0x0003);
 				}
 			}
 			if (var0002 == 0x0003) {
@@ -47024,7 +47024,7 @@ void Func044D object#(0x44D) () {
 		} else {
 			var0003 = [CALADIN, 0xFF6A];
 			if (!gflags[0x0038]) {
-				var0003 &= 0xFFBB;
+				var0003 &= MARSTEN;
 			} else {
 				var0003 &= 0xFFB6;
 			}
@@ -47885,7 +47885,7 @@ void Func0450 object#(0x450) () {
 				say("\"I ask the questions here.\"");
 			}
 			say("\"Another stranger! Most suspicious. There have not been many travellers recently.\"");
-			Func09AC(0xFFBB, 0x0310, 0x0A66, PATROL);
+			Func09AC(MARSTEN, 0x0310, 0x0A66, PATROL);
 			Func09AC(CALADIN, 0x030F, 0x0A64, PATROL);
 			Func09AC(0xFF6A, 0x0310, 0x0A6A, PATROL);
 			Func09AC(0xFFB3, 0x030F, 0x0A68, PATROL);
@@ -51262,7 +51262,7 @@ void Func0496 object#(0x496) () {
 	if (event == PROXIMITY) {
 		var000C = [CALADIN];
 		if (!gflags[0x0038]) {
-			var000C &= 0xFFBB;
+			var000C &= MARSTEN;
 		} else {
 			var000C &= 0xFFB6;
 		}
@@ -51684,9 +51684,9 @@ void Func0496 object#(0x496) () {
 					} else if (var0000 > 0x0001) {
 						say("\"I thank thee for showing me these documents. Justice will be served. Thou mayest keep these documents if thou wishest.\"");
 					}
-					if (gflags[0x0038] && (!0xFFBB->get_item_flag(DEAD))) {
-						0xFFBB->move_object([0x0446, 0x09C5, 0x0000]);
-						0xFFBB->set_new_schedules([NIGHT, DAWN], [SLEEP, TEND_SHOP], [0x0446, 0x09C5, 0x0446, 0x09C5]);
+					if (gflags[0x0038] && (!MARSTEN->get_item_flag(DEAD))) {
+						MARSTEN->move_object([0x0446, 0x09C5, 0x0000]);
+						MARSTEN->set_new_schedules([NIGHT, DAWN], [SLEEP, TEND_SHOP], [0x0446, 0x09C5, 0x0446, 0x09C5]);
 					}
 					if (gflags[0x0092] && (!0xFFB3->get_item_flag(DEAD))) {
 						0xFFB3->move_object([0x0448, 0x09D6, 0x0000]);
@@ -78757,7 +78757,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(0xFFB5, 0x0433, 0x0A77, WAIT);
 		Func09AC(0xFFB2, 0x0402, 0x0A82, WAIT);
 		Func09AC(0xFFB1, 0x0407, 0x0A47, WAIT);
-		Func09AC(0xFFBB, 0x0427, 0x09C7, WAIT);
+		Func09AC(MARSTEN, 0x0427, 0x09C7, WAIT);
 		Func09AC(0xFFB3, 0x0442, 0x09CA, WAIT);
 		Func09AC(0xFFBA, 0x03F6, 0x0A45, WAIT);
 		HARNNA->set_new_schedules([DAWN, NOON, AFTERNOON, NIGHT], [0x000B, LOITER, WANDER, SLEEP], [0x034A, 0x0AB4, 0x0409, 0x0A24, 0x03A9, 0x0A1B, 0x035B, 0x0A8A]);
@@ -105670,7 +105670,7 @@ var Func08ED 0x8ED (var var0000) {
 	}
 	if (var0000 == 0x0004) {
 		say("\"There must be something wrong...\"");
-		0xFFBB->show_npc_face1(0x0000);
+		MARSTEN->show_npc_face1(0x0000);
 		say("\"I shall have a talk with Shmed tomorrow. If half of what this Knight says is true, then the dungeonkeeper hath been seriously delinquent in his duties.\"");
 		UI_remove_npc_face1();
 		0x0000->set_conversation_slot();

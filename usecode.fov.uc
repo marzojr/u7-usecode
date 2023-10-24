@@ -14680,7 +14680,7 @@ labelFunc0417_000C:
 				say("Lord British listens to your story about Weston. He looks concerned.~~\"I do not recall this case. Let me check... Hmmm...\" He quickly scans a large scroll.~~\"Imprisoned for the theft of one apple from the Royal Orchards... Ludicrous! Someone must have usurped mine authority. Thou mayest consider this man pardoned. An investigation will commence immediately into the circumstances surrounding his arrest, and into this fellow, Figg. My thanks to thee, Avatar.\"");
 				gflags[0x00CC] = true;
 				Func0911(0x0014);
-				0xFFBB->remove_npc();
+				WESTON->remove_npc();
 				remove("Weston");
 				fallthrough;
 
@@ -21173,7 +21173,7 @@ void Func0445 object#(0x445) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFFBB->show_npc_face(0x0000);
+	WESTON->show_npc_face(0x0000);
 	var0000 = Func0909();
 	add(["name", "job", "bye"]);
 	var0001 = AVATAR->find_nearest(0x018A, ON_SCREEN);
@@ -21196,7 +21196,7 @@ void Func0445 object#(0x445) () {
 			if (var0001) {
 				0xFEFE->say("\"Thy job is to pay for the crime thou hast committed.\"*");
 				0xFEFE->hide();
-				0xFFBB->show_npc_face(0x0000);
+				WESTON->show_npc_face(0x0000);
 			}
 			add("prison");
 			fallthrough;
@@ -21206,7 +21206,7 @@ void Func0445 object#(0x445) () {
 			if (var0001) {
 				0xFEFE->say("\"A-ha! Not only an unrepentant criminal but also a potential professional thief! Looks like this one has ended in the right place and just in the nick o' time.\"*");
 				0xFEFE->hide();
-				0xFFBB->show_npc_face(0x0000);
+				WESTON->show_npc_face(0x0000);
 			}
 			remove("prison");
 			add(["stealing apples", "circumstances"]);
@@ -21217,7 +21217,7 @@ void Func0445 object#(0x445) () {
 			if (var0001) {
 				0xFEFE->say("\"See how the common criminal blames his type of immoral behavior on others, all the while denying it in himself! This one is irredeemable, he is.\"*");
 				0xFEFE->hide();
-				0xFFBB->show_npc_face(0x0000);
+				WESTON->show_npc_face(0x0000);
 			}
 			remove("stealing apples");
 			add(["Figg", "admit"]);
@@ -21231,7 +21231,7 @@ void Func0445 object#(0x445) () {
 					var0000,
 					"! It is hearsay!\"*");
 				0xFEFE->hide();
-				0xFFBB->show_npc_face(0x0000);
+				WESTON->show_npc_face(0x0000);
 			}
 			remove("Figg");
 			fallthrough;
@@ -21248,7 +21248,7 @@ void Func0445 object#(0x445) () {
 			if (var0001) {
 				0xFEFE->say("\"This prisoner is from Paws! I bloody knew it! To his credit he was in town nearly an entire day before he stole something. For a citizen of Paws that is as honest as they come!\"*");
 				0xFEFE->hide();
-				0xFFBB->show_npc_face(0x0000);
+				WESTON->show_npc_face(0x0000);
 			}
 			remove("circumstances");
 			add("Paws");
@@ -21261,7 +21261,7 @@ void Func0445 object#(0x445) () {
 			if (var0001) {
 				0xFEFE->say("\"Oh bloody 'ell! Now I suppose he is going to go and tell us his whole pathetic life's story! Couldst thou wait until I get out mine handkerchief so I do not interrupt thee with all my wailing!\"*");
 				0xFEFE->hide();
-				0xFFBB->show_npc_face(0x0000);
+				WESTON->show_npc_face(0x0000);
 			}
 			fallthrough;
 
@@ -21275,7 +21275,7 @@ void Func0445 object#(0x445) () {
 			if (var0001) {
 				0xFEFE->say("\"Oh, now! Do not go and bring up poverty as an excuse as to why thou hast turned to crime! My father was so poor he and his family had to eat dirt. But he still raised me proper. Beat the stuffings out of me if he ever so much as imagined I did anything wrong, I can tell thee that!\"*");
 				0xFEFE->hide();
-				0xFFBB->show_npc_face(0x0000);
+				WESTON->show_npc_face(0x0000);
 			}
 			remove("poverty");
 			add(["family", "starving"]);
@@ -21291,7 +21291,7 @@ void Func0445 object#(0x445) () {
 			if (var0001) {
 				0xFEFE->say("\"Oh, that reminds me it is nearly time for my meal break! The trout is supposed to be delicious today at the Farmer's Market.\"");
 				0xFEFE->hide();
-				0xFFBB->show_npc_face(0x0000);
+				WESTON->show_npc_face(0x0000);
 			}
 			remove("starving");
 			add(["fools", "class system"]);
@@ -21307,7 +21307,7 @@ void Func0445 object#(0x445) () {
 			if (var0001) {
 				0xFEFE->say("\"All right! That is enough noise out of thee! All day long yakkata-yakkata about the awful terrible class system! Why, the next thing thou knowest thou shalt be sayin' society is to blame for thy crimes. Not a word from anybody about any appreciation for keeping the laws and order. No, of course not! But all the pity in the world for the dangerous lawbreakers who are the real threat to society.\"*");
 				0xFEFE->hide();
-				0xFFBB->show_npc_face(0x0000);
+				WESTON->show_npc_face(0x0000);
 			}
 			say("\"Wouldst thou speak with Lord British about me? I would bet that he is completely unaware of my case! Please! Wilt thou speak with him?\"");
 			if (Func090A()) {
