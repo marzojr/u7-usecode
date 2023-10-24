@@ -28679,11 +28679,11 @@ void Func047A object#(0x47A) () {
 	var var0019;
 
 	if (event == DOUBLECLICK) {
-		0xFF86->show_npc_face(0x0000);
+		OPHELIA->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_is_pc_female();
 		var0002 = UI_part_of_day();
-		var0003 = 0xFF86->get_npc_object()->get_schedule_type();
+		var0003 = OPHELIA->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		var0004 = Func08F7(0xFF85);
 		if (!gflags[0x0174]) {
@@ -28738,10 +28738,10 @@ void Func047A object#(0x47A) () {
 				var0004 = Func08F7(0xFF85);
 				if (var0004) {
 					0xFF85->say("\"I heard that, Ophelia. Thou art a spiteful wench!\"*");
-					0xFF86->say("\"Now, now, Daphne. Temper, Temper! We don't want to scare off the patrons with a poor disposition in addition to a poor face!\"*");
+					OPHELIA->say("\"Now, now, Daphne. Temper, Temper! We don't want to scare off the patrons with a poor disposition in addition to a poor face!\"*");
 					0xFF85->say("\"Witch!\"*");
 					0xFF85->hide();
-					0xFF86->show_npc_face(0x0000);
+					OPHELIA->show_npc_face(0x0000);
 				}
 				remove("Daphne");
 				fallthrough;
@@ -28906,10 +28906,10 @@ labelFunc047A_0447:
 				say("\"Who? Oh, he is a local boy who comes in here and moons over me on occasion. Do not concern thyself with him. I do not.\"");
 				if (var0004) {
 					0xFF85->say("\"Why what kind of way is that to speak of he who will soon become thy betrothed! Finally, I can make thee move out of mine house! Every moment of sharing my life with thee has been intolerable!\"*");
-					0xFF86->say("\"Do not get thine hopes up yet, my dear Daphne! I have put a condition on our marriage and poor Cosmo will never be able to fulfill it!\"");
+					OPHELIA->say("\"Do not get thine hopes up yet, my dear Daphne! I have put a condition on our marriage and poor Cosmo will never be able to fulfill it!\"");
 					0xFF85->say("\"Thou dost never know! The thought of thee in thy wedding gown with thy groom Cosmo at thy side is simply delicious! Perhaps he is the man who will finally teach thee to be a lady at last!\"");
 					0xFF85->hide();
-					0xFF86->show_npc_face(0x0000);
+					OPHELIA->show_npc_face(0x0000);
 				}
 				remove("Cosmo");
 				fallthrough;
@@ -28928,7 +28928,7 @@ labelFunc047A_0447:
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF86);
+		Func092E(OPHELIA);
 	}
 }
 
@@ -28966,7 +28966,7 @@ void Func047B object#(0x47B) () {
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
 		var0002 = 0xFF85->get_npc_object()->get_schedule_type();
-		var0003 = Func08F7(0xFF86);
+		var0003 = Func08F7(OPHELIA);
 		var0004 = false;
 		var0005 = 0xFF84->get_npc_object()->is_dead();
 		var0006 = 0xFF83->get_npc_object()->is_dead();
@@ -29038,13 +29038,13 @@ void Func047B object#(0x47B) () {
 			case "Ophelia":
 				say("\"Ophelia this! Ophelia that! That is all I ever hear all bloody day! If all thou dost want to talk about is her, talk to someone else!\"");
 				if (var0003) {
-					0xFF86->say("\"Do not hate me just because I am beautiful, Daphne.\"*");
+					OPHELIA->say("\"Do not hate me just because I am beautiful, Daphne.\"*");
 					0xFF85->say("\"That is not the reason I hate thee, Ophelia!\"*");
-					0xFF86->say("\"Oh, yes, I remember now. Thou dost hate me because I am beautiful, and thou art not!\"*");
+					OPHELIA->say("\"Oh, yes, I remember now. Thou dost hate me because I am beautiful, and thou art not!\"*");
 					0xFF85->say("\"Thank thee so much, ",
 						var0000,
 						", for bringing up my favorite subject.\"*");
-					0xFF86->hide();
+					OPHELIA->hide();
 					0xFF85->show_npc_face(0x0000);
 				}
 				remove("Ophelia");
