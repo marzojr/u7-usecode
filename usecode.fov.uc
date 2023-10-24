@@ -27558,12 +27558,12 @@ void Func0473 object#(0x473) () {
 	var var0007;
 
 	if (event == DOUBLECLICK) {
-		0xFF8D->show_npc_face(0x0000);
+		PENNI->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = false;
 		var0003 = false;
-		var0004 = 0xFF8D->get_npc_object()->get_schedule_type();
+		var0004 = PENNI->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (!gflags[0x014D]) {
 			say("The woman you see in front of you has a concerned expression on her face, as if her thoughts were far away.");
@@ -27636,7 +27636,7 @@ void Func0473 object#(0x473) () {
 				var0005 = Func08F7(IOLO);
 				if (var0005) {
 					IOLO->say("\"I resent that, my friend. Bows and crossbows can be wielded with deadly effect.\"");
-					0xFF8D->say("She smiles, nodding to Iolo. \"Perhaps thou art correct, friend archer, but I prefer more physical challenges.\"");
+					PENNI->say("She smiles, nodding to Iolo. \"Perhaps thou art correct, friend archer, but I prefer more physical challenges.\"");
 					IOLO->hide();
 				} else {
 					say("\"Although I consider him a true friend and an honorable companion, I wonder about his physical prowess.\"");
@@ -27671,7 +27671,7 @@ void Func0473 object#(0x473) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF8D);
+		Func092E(PENNI);
 	}
 }
 
