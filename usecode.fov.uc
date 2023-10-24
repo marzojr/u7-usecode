@@ -25919,10 +25919,10 @@ void Func0467 object#(0x467) () {
 	var var0005;
 
 	if (event == DOUBLECLICK) {
-		0xFF99->show_npc_face(0x0000);
+		THAD->show_npc_face(0x0000);
 		var0000 = UI_wearing_fellowship();
 		if (var0000) {
-			var0001 = 0xFF99->get_npc_object();
+			var0001 = THAD->get_npc_object();
 			say("The man scowls at you. \"Thou wearest the symbol of that most foul of groups, The Fellowship. Prepare to die!\"*");
 			var0001->set_alignment(EVIL);
 			var0001->set_schedule_type(IN_COMBAT);
@@ -58018,10 +58018,10 @@ extern void Func0467 object#(0x467) ();
 void Func06A5 object#(0x6A5) () {
 	if (event == EGG) {
 		if (gflags[0x0006]) {
-			0xFF99->get_npc_object()->set_schedule_type(IN_COMBAT);
-			Func0904(0xFF99, "@Fellowship scum!@");
+			THAD->get_npc_object()->set_schedule_type(IN_COMBAT);
+			Func0904(THAD, "@Fellowship scum!@");
 		} else {
-			0xFF99->get_npc_object()->Func0467();
+			THAD->get_npc_object()->Func0467();
 		}
 	}
 }
