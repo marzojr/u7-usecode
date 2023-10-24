@@ -37627,7 +37627,7 @@ void Func04AE object#(0x4AE) () {
 	if (event == DOUBLECLICK) {
 		KOMOR->show_npc_face(0x0000);
 		var0000 = Func0909();
-		var0001 = Func08F7(0xFF51);
+		var0001 = Func08F7(FENN);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x0227]) {
 			say("You see a beggar leaning on a crutch. His eyes shine like diamonds with sheer bitterness.");
@@ -37648,10 +37648,10 @@ void Func04AE object#(0x4AE) () {
 					var0000,
 					".\" He cannot keep a straight face and almost falls off his crutches.*");
 				add("beggar");
-				var0001 = Func08F7(0xFF51);
+				var0001 = Func08F7(FENN);
 				if (var0001) {
-					0xFF51->say("\"Ha! Ha! Ha! Ha! Ha! Ha! 'Tis a ripe one, Komor!\"*");
-					0xFF51->hide();
+					FENN->say("\"Ha! Ha! Ha! Ha! Ha! Ha! 'Tis a ripe one, Komor!\"*");
+					FENN->hide();
 					KOMOR->show_npc_face(0x0000);
 				}
 				fallthrough;
@@ -37666,21 +37666,21 @@ void Func04AE object#(0x4AE) () {
 				say("\"Fenn and me are chums and will be to the day we die. We share in each other's vast expanses of wealth.\"*");
 				remove("Fenn");
 				add(["chums", "wealth"]);
-				var0001 = Func08F7(0xFF51);
+				var0001 = Func08F7(FENN);
 				if (var0001) {
-					0xFF51->say("\"Ha! Ha! Ha! Ha! With thy wit thou shouldst be on stage!\"*");
-					0xFF51->hide();
+					FENN->say("\"Ha! Ha! Ha! Ha! With thy wit thou shouldst be on stage!\"*");
+					FENN->hide();
 					KOMOR->show_npc_face(0x0000);
 				}
 				fallthrough;
 
 			case "chums":
 				say("\"Fenn and me have been friends since we were little tiny babes.\"");
-				var0001 = Func08F7(0xFF51);
+				var0001 = Func08F7(FENN);
 				if (var0001) {
 					say("\"I would bet thee that thou didst not think we would end up like this. Eh, Fenn?\"*");
-					0xFF51->say("\"Not in me wildest dreams, Komor.*\"");
-					0xFF51->hide();
+					FENN->say("\"Not in me wildest dreams, Komor.*\"");
+					FENN->hide();
 					KOMOR->show_npc_face(0x0000);
 				}
 				remove("chums");
@@ -37798,7 +37798,7 @@ void Func04AF object#(0x4AF) () {
 	var var0008;
 
 	if (event == DOUBLECLICK) {
-		0xFF51->show_npc_face(0x0000);
+		FENN->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
 		if (gflags[0x0212]) {
@@ -37852,7 +37852,7 @@ void Func04AF object#(0x4AF) () {
 					say("*");
 					KOMOR->say("\"Oh, please! Thou art making mine eyes leak!\"*");
 					KOMOR->hide();
-					0xFF51->show_npc_face(0x0000);
+					FENN->show_npc_face(0x0000);
 				}
 				remove("Komor");
 				fallthrough;
@@ -37930,7 +37930,7 @@ void Func04AF object#(0x4AF) () {
 					say("*");
 					KOMOR->say("\"We would not want the likes of him walking down our side of the road anyway!\"*");
 					KOMOR->hide();
-					0xFF51->show_npc_face(0x0000);
+					FENN->show_npc_face(0x0000);
 				}
 				remove("Garritt");
 				fallthrough;
@@ -37971,7 +37971,7 @@ void Func04AF object#(0x4AF) () {
 	}
 	if (event == PROXIMITY) {
 		var0005 = UI_part_of_day();
-		var0006 = 0xFF51->get_npc_object()->get_schedule_type();
+		var0006 = FENN->get_npc_object()->get_schedule_type();
 		var0007 = UI_die_roll(0x0001, 0x0004);
 		if (var0006 == LOITER) {
 			if (var0007 == 0x0001) {
@@ -37986,9 +37986,9 @@ void Func04AF object#(0x4AF) () {
 			if (var0007 == 0x0004) {
 				var0008 = "@Help one less fortunate!@";
 			}
-			0xFF51->item_say(var0008);
+			FENN->item_say(var0008);
 		} else {
-			Func092E(0xFF51);
+			Func092E(FENN);
 		}
 	}
 }

@@ -107449,7 +107449,7 @@ void Func0926 0x926 (var var0000) {
 		Func0927();
 	}
 	if (var0000 == 0x0018) {
-		var0001 = [SEX_01, SEX_02, SEX_03, SEX_04, 0xFF51];
+		var0001 = [SEX_01, SEX_02, SEX_03, SEX_04, SEX_05];
 		var0002 = "@Thank thee!@" & ("@Bless thee!@" & ("@We are saved!@" & "@Praise the Hero!@"));
 		for (var0005 in var0001 with var0003 to var0004) {
 			var0005->clear_item_say();
@@ -107506,7 +107506,7 @@ void Func0927 0x927 () {
 	var var0008;
 
 	UI_play_music(0x001C, Func09A0(0x0005, 0x0001));
-	var0000 = [SEX_01, SEX_02, SEX_03, SEX_04, 0xFF51];
+	var0000 = [SEX_01, SEX_02, SEX_03, SEX_04, SEX_05];
 	var0001 = ["@Ohh! Yes!@", "@Most pleasant!@", "@Oh, my!@", "@Do thou that again!@", "@Oh, baby...@"];
 	for (var0004 in var0000 with var0002 to var0003) {
 		var0005 = UI_die_roll(0x0001, 0x0005);
@@ -107517,13 +107517,13 @@ void Func0927 0x927 () {
 			call Func04B3;
 		};
 	} else if (UI_is_pc_female()) {
-		0xFF51->clear_item_say();
-		Func097F(0xFF51, "@I can't resist...@", 0x0000);
+		SEX_05->clear_item_say();
+		Func097F(SEX_05, "@I can't resist...@", 0x0000);
 		var0007 = find_nearby(0x0178, 0x000A, MASK_NONE);
 		if (var0007) {
 			var0008 = var0007->get_object_position();
 			// BUG: This should use PATH_SUCCESS instead of BG_PATH_SUCCESS.
-			0xFF51->si_path_run_usecode([(var0008[0x0001] + 0x0001), var0008[0x0002], var0008[0x0003]], BG_PATH_SUCCESS, 0xFF51->get_npc_object(), Func04B3, true);
+			SEX_05->si_path_run_usecode([(var0008[0x0001] + 0x0001), var0008[0x0002], var0008[0x0003]], BG_PATH_SUCCESS, SEX_05->get_npc_object(), Func04B3, true);
 		}
 	} else {
 		SEX_03->clear_item_say();
