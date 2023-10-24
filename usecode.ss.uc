@@ -934,7 +934,7 @@ void Func00A0 shape#(0xA0) () {
 			gflags[0x000A] = false;
 		}
 		if (gflags[0x0004]) {
-			var0000 = [ANDRAL, 0xFF6A, 0xFFB0, CALADIN, CELLIA, SHAZZANA, KRAYG, LUTHER, LYDIA, SHMED, 0xFFB2, 0xFFB1, MARSTEN, 0xFFB3, LUCILLA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
+			var0000 = [ANDRAL, 0xFF6A, 0xFFB0, CALADIN, CELLIA, SHAZZANA, KRAYG, LUTHER, LYDIA, SHMED, 0xFFB2, 0xFFB1, MARSTEN, SPEKTOR, LUCILLA, BUCIA, HAWK, GUSTACIO, MELINO, JULIA, ROCCO, TOPO, POTHOS, MOSH, FILBERCIO, FRIGIDAZZI, FLINDO, KANE, GOBLIN_MESSENGER, EDRIN, COLUMNA, ALYSSAND, DELIN, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, DELPHYNIA, LEON, KALEN, OLON, SCOTS, ZULITH, 0xFFAF, ARGUS, BYRIN, DEVRA, 0xFF71, 0xFF70, 0xFF6F, 0xFF67, 0xFF66];
 			for (var0003 in var0000 with var0001 to var0002) {
 				if ((var0003->get_schedule_type() != WAIT) && (!var0003->get_item_flag(DEAD))) {
 					UI_error_message(("NPC #" + var0003) + " is moving - get his schedule!");
@@ -6620,8 +6620,8 @@ void Func01C3 shape#(0x1C3) () {
 			SHAZZANA->set_oppressor(LUTHER);
 			Func097F(0xFF6A, "@Strike for his eyes!@", 0x000F);
 			0xFF6A->set_item_flag(MET);
-			Func097F(0xFFB3, "@Tell them to stop.@", 0x0019);
-			0xFFB3->set_item_flag(MET);
+			Func097F(SPEKTOR, "@Tell them to stop.@", 0x0019);
+			SPEKTOR->set_item_flag(MET);
 			Func097F(CALADIN, "@Strike, Luther!@", 0x000A);
 			CALADIN->set_item_flag(MET);
 			Func097F(AVATAR, "@Hey, careful!@", 0x0005);
@@ -6655,7 +6655,7 @@ void Func01C3 shape#(0x1C3) () {
 			};
 			Func097F(LUTHER, "@I shall make him talk!@", 0x0002);
 			gflags[0x004E] = true;
-			Func097F(0xFFB3, "@This is unseemly...@", 0x0000);
+			Func097F(SPEKTOR, "@This is unseemly...@", 0x0000);
 			Func097F(SHAZZANA, "@Cease!@", 0x0002);
 			Func097F(KRAYG, "@Leave me alone!@", 0x0000);
 			abort;
@@ -6677,7 +6677,7 @@ void Func01C3 shape#(0x1C3) () {
 				wait 7;
 				say "@Krayg!@";
 			};
-			var0003 = script 0xFFB3 after 5 ticks {
+			var0003 = script SPEKTOR after 5 ticks {
 				nohalt;
 				actor frame bowing;
 				actor frame sitting;
@@ -6698,7 +6698,7 @@ void Func01C3 shape#(0x1C3) () {
 		if (MARSTEN->get_npc_id() == 0x0009) {
 			MARSTEN->set_npc_id(0x000A);
 			UI_init_conversation();
-			0xFFB3->show_npc_face0(0x0000);
+			SPEKTOR->show_npc_face0(0x0000);
 			say("\"I think this talk of a traitor in Monitor is all rather speculative. Surely, no one suspects anyone at this table of being a Goblin spy.\"");
 			UI_end_conversation();
 			Func097F(SHAZZANA, "@Sit down, Luther!@", 0x0006);
@@ -6741,7 +6741,7 @@ void Func01C3 shape#(0x1C3) () {
 				actor frame bowing;
 				actor frame sitting;
 			};
-			var0003 = script 0xFFB3 {
+			var0003 = script SPEKTOR {
 				nohalt;
 				wait 15;
 				actor frame bowing;
@@ -6885,7 +6885,7 @@ labelFunc01C3_073B:
 				LUCILLA->set_schedule_type(WAITER);
 			}
 			UI_end_conversation();
-			Func097F(0xFFB3, "@Hurrah!@", 0x0000);
+			Func097F(SPEKTOR, "@Hurrah!@", 0x0000);
 			Func097F(SHAZZANA, "@Leopards!@", 0x0002);
 			var0003 = script MARSTEN {
 				nohalt;
@@ -7031,7 +7031,7 @@ labelFunc01C3_073B:
 				}
 				if (var0010 == 0x0002) {
 					var0012 = 0x0004;
-					var0011 = 0xFFB3;
+					var0011 = SPEKTOR;
 				}
 				if (var0010 == 0x0004) {
 					var0012 = 0x0004;
@@ -7111,7 +7111,7 @@ labelFunc01C3_073B:
 		Func097F(LUTHER, "@Coward!@", 0x0008);
 		Func097F(CALADIN, "@I'm hungry!@", 0x000A);
 		gflags[0x0048] = true;
-		var0018 = [KRAYG, CELLIA, 0xFF6A, 0xFFB3, SHAZZANA, MARSTEN, HARNNA, 0xFFB0, CALADIN, LUCILLA, 0xFFB1, LUTHER];
+		var0018 = [KRAYG, CELLIA, 0xFF6A, SPEKTOR, SHAZZANA, MARSTEN, HARNNA, 0xFFB0, CALADIN, LUCILLA, 0xFFB1, LUTHER];
 		for (var0005 in var0018 with var0019 to var001A) {
 			var0005->revert_schedule();
 			var0005->run_schedule();
@@ -7132,7 +7132,7 @@ labelFunc01C3_073B:
 			actor frame bowing;
 			actor frame standing;
 		};
-		var001D = [CELLIA, 0xFFB0, HARNNA, KRAYG, LUCILLA, MARSTEN, 0xFFB3];
+		var001D = [CELLIA, 0xFFB0, HARNNA, KRAYG, LUCILLA, MARSTEN, SPEKTOR];
 		for (var0005 in var001D with var001E to var001F) {
 			var0005->clear_item_flag(SI_TOURNAMENT);
 		}
@@ -7328,7 +7328,7 @@ labelFunc01C3_073B:
 			MARSTEN->set_npc_id(0x0001);
 			Func097F(AVATAR, "@Look! Everyone is here...@", 0x0003);
 			Func097F(0xFFB0, "@Where is Harnna?@", 0x0017);
-			Func097F(0xFFB3, "@Our guest is here...@", 0x0016);
+			Func097F(SPEKTOR, "@Our guest is here...@", 0x0016);
 			var0003 = AVATAR->find_nearby(0x010E, 0x000A, MASK_NONE) & AVATAR->find_nearby(0x01B0, 0x000A, MASK_NONE);
 			for (var0009 in var0003 with var0020 to var0021) {
 				var0009->remove_item();
@@ -11656,8 +11656,8 @@ void Func02A3 shape#(0x2A3) () {
 					};
 					frame 18;
 				};
-				if (0xFFB3->npc_nearby()) {
-					Func097F(0xFFB3, "@That is truly strange!@", 0x0005);
+				if (SPEKTOR->npc_nearby()) {
+					Func097F(SPEKTOR, "@That is truly strange!@", 0x0005);
 				}
 			}
 		}
@@ -14983,7 +14983,7 @@ void Func031D shape#(0x31D) () {
 			gflags[0x0093] = true;
 			MARSTEN->set_item_flag(SI_TOURNAMENT);
 			gflags[0x0094] = true;
-			0xFFB3->set_item_flag(SI_TOURNAMENT);
+			SPEKTOR->set_item_flag(SI_TOURNAMENT);
 		} else if (var0003 == 0x007A) {
 			say("   Honor be to thee, Pomdirgun, Chieftain of the Goblin Horde:~~ Letting thee know that all of our plans in these parts fare well. Having learned from our successful experience with Fawn Tower, we have decided to withdraw, on the fourth night of the coming moon, as many troops as possible from Bull Tower.~ The Bears shall be marching westward on the plains, and shall be easily slaughtered.~ Then thou canst take the Tower, and plunder the Inn of the Sleeping Bull.~~ We want to remind thee of the supreme importance not to let this messenger fall into the hands of our enemies, the Wolves and the Bears.~~ Marsten, King of Monitor");
 			gflags[0x0093] = true;
@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, CELLIA, 0xFFB0, HARNNA, KRAYG, LUCILLA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, 0xFF64, MARSTEN, 0xFFB3, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
+		var0008 = [0xFEED, 0xFEE8, 0xFF84, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, CELLIA, 0xFFB0, HARNNA, KRAYG, LUCILLA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, 0xFF64, MARSTEN, SPEKTOR, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, 0xFF61];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -41965,9 +41965,9 @@ void Func043F object#(0x43F) () {
 						MARSTEN->move_object([0x0446, 0x09C5, 0x0000]);
 						MARSTEN->set_new_schedules([NIGHT, DAWN], [SLEEP, TEND_SHOP], [0x0446, 0x09C5, 0x0446, 0x09C5]);
 					}
-					if (gflags[0x0092] && (!0xFFB3->get_item_flag(DEAD))) {
-						0xFFB3->move_object([0x0448, 0x09D6, 0x0000]);
-						0xFFB3->set_new_schedules([NIGHT, DAWN], [SLEEP, TEND_SHOP], [0x0448, 0x09D6, 0x0448, 0x09D6]);
+					if (gflags[0x0092] && (!SPEKTOR->get_item_flag(DEAD))) {
+						SPEKTOR->move_object([0x0448, 0x09D6, 0x0000]);
+						SPEKTOR->set_new_schedules([NIGHT, DAWN], [SLEEP, TEND_SHOP], [0x0448, 0x09D6, 0x0448, 0x09D6]);
 					}
 					CALADIN->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, EVENING, NIGHT], [SLEEP, DUEL, TEND_SHOP, DUEL, MAJOR_SIT, EAT_AT_INN], [0x03B1, 0x0A49, 0x03D7, 0x0A8A, 0x03CE, 0x09FF, 0x039B, 0x0A76, 0x03B2, 0x0A05, 0x041C, 0x0A57]);
 					var0014 = 0x0003;
@@ -44149,7 +44149,7 @@ labelFunc0445_0257:
 		MARSTEN->show_npc_face0(0x0000);
 		do {
 			if (!var0002) {
-				var000E = [0xFF6A, CALADIN, RENFRY, 0xFFB3, MARSTEN];
+				var000E = [0xFF6A, CALADIN, RENFRY, SPEKTOR, MARSTEN];
 				for (var0014 in var000E with var0012 to var0013) {
 					var0014->revert_schedule();
 				}
@@ -44782,8 +44782,8 @@ void Func0446 object#(0x446) () {
 			} else {
 				say("\"What can I do for thee, dear?\"");
 			}
-			if (0xFFB3->npc_nearby()) {
-				Func094E(0xFFB3, "@I do hope that I am not interrupting...@");
+			if (SPEKTOR->npc_nearby()) {
+				Func094E(SPEKTOR, "@I do hope that I am not interrupting...@");
 				0x0000->set_conversation_slot();
 			}
 			say("\"My name is Lucilla. Is there anything I can do for thee? Anything at all?\"");
@@ -44792,7 +44792,7 @@ void Func0446 object#(0x446) () {
 			say("\"Hello again!\"");
 		}
 		add(["duties"]);
-		if (Func0942(0xFFB3)) {
+		if (Func0942(SPEKTOR)) {
 			add("interrupting");
 		}
 		if (gflags[0x0053]) {
@@ -45006,7 +45006,7 @@ labelFunc0446_05A1:
 
 			case "interrupting" (remove):
 				say("\"Surely, thou dost know Spektor the Financier?\"");
-				0xFFB3->show_npc_face1(0x0000);
+				SPEKTOR->show_npc_face1(0x0000);
 				say("\"I must be going. Pressing town business, that sort of thing.\"");
 				0x0000->set_conversation_slot();
 				say("\"And it is so seldom that we are able to talk! Be sure to give my greetings to Lord Marsten.\"");
@@ -45014,8 +45014,8 @@ labelFunc0446_05A1:
 				say("\"I shall!\"");
 				gflags[0x0055] = true;
 				Func097F(LUCILLA, "@Farewell!@", 0x0000);
-				Func097F(0xFFB3, "@Anon!@", 0x0002);
-				0xFFB3->si_path_run_usecode([0x041B, 0x0A52, 0x0000], SI_PATH_SUCCESS, 0xFFB3, Func044D, true);
+				Func097F(SPEKTOR, "@Anon!@", 0x0002);
+				SPEKTOR->si_path_run_usecode([0x041B, 0x0A52, 0x0000], SI_PATH_SUCCESS, SPEKTOR, Func044D, true);
 				abort;
 
 			case "rendezvous" (remove):
@@ -46084,7 +46084,7 @@ void Func044A object#(0x44A) () {
 		} else {
 			var000F = [CALADIN, 0xFF6A];
 			if (!gflags[0x0092]) {
-				var000F &= 0xFFB3;
+				var000F &= SPEKTOR;
 			}
 			for (var000C in var000F with var0010 to var0011) {
 				if (!var000C->npc_nearby()) {
@@ -47004,22 +47004,22 @@ void Func044D object#(0x44D) () {
 	var0000 = Func0954();
 	var0001 = Func0953();
 	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
-		0xFFB3->set_schedule_type(WANDER);
+		SPEKTOR->set_schedule_type(WANDER);
 	}
 	if (event == PROXIMITY) {
 		if (gflags[0x0092]) {
 			var0002 = UI_die_roll(0x0001, 0x0003);
 			if (var0002 == 0x0001) {
-				0xFFB3->item_say("@My money...@");
+				SPEKTOR->item_say("@My money...@");
 			}
 			if (var0002 == 0x0002) {
-				0xFFB3->item_say("@It was his plan!@");
+				SPEKTOR->item_say("@It was his plan!@");
 				if (MARSTEN->npc_nearby()) {
 					Func097F(MARSTEN, "@Quiet!@", 0x0003);
 				}
 			}
 			if (var0002 == 0x0003) {
-				0xFFB3->item_say("@I hate thee!@");
+				SPEKTOR->item_say("@I hate thee!@");
 			}
 		} else {
 			var0003 = [CALADIN, 0xFF6A];
@@ -47036,62 +47036,62 @@ void Func044D object#(0x44D) () {
 			if (var0003 == []) {
 				abort;
 			}
-			0xFFB3->clear_item_say();
+			SPEKTOR->clear_item_say();
 			var0007 = var0003[UI_get_random(UI_get_array_size(var0003))];
 			var0007->clear_item_say();
 			var0008 = UI_get_random(0x0006);
 			if (var0008 == 0x0001) {
-				0xFFB3->item_say("@Stop the rumors!@");
+				SPEKTOR->item_say("@Stop the rumors!@");
 				Func097F(var0007, "@Impossible.@", 0x0003);
 			}
 			if (var0008 == 0x0002) {
-				0xFFB3->item_say("@Must write this down.@");
+				SPEKTOR->item_say("@Must write this down.@");
 			}
 			if (var0008 == 0x0003) {
 				if (0xFEF7->get_item_flag(DEAD)) {
 					var0007->item_say("@The Goblins are weak.@");
-					Func097F(0xFFB3, "@Be cautious...@", 0x0003);
+					Func097F(SPEKTOR, "@Be cautious...@", 0x0003);
 				} else {
 					var0007->item_say("@Where are the Goblins?@");
-					Func097F(0xFFB3, "@Send a patrol.@", 0x0003);
+					Func097F(SPEKTOR, "@Send a patrol.@", 0x0003);
 				}
 			}
 			if (var0008 == 0x0004) {
 				if (!gflags[0x00B4]) {
-					0xFFB3->item_say("@A storm approaches.@");
+					SPEKTOR->item_say("@A storm approaches.@");
 					Func097F(var0007, "@Another one?@", 0x0003);
 					UI_set_weather(RAIN);
 				} else {
-					0xFFB3->item_say("@I am not a thief.@");
+					SPEKTOR->item_say("@I am not a thief.@");
 					Func097F(var0007, "@Of course not.@", 0x0003);
 				}
 			}
 			if (var0008 == 0x0005) {
 				if (gflags[0x0044]) {
-					0xFFB3->item_say("@Poor Simon...@");
+					SPEKTOR->item_say("@Poor Simon...@");
 					Func097F(var0007, "@But he was a traitor!@", 0x0002);
 				} else if (gflags[0x0038]) {
-					0xFFB3->item_say("@Kill Marsten now!@");
+					SPEKTOR->item_say("@Kill Marsten now!@");
 					Func097F(var0007, "@Why so hastily?@", 0x0002);
 				} else {
-					0xFFB3->item_say("@There is no traitor.@");
+					SPEKTOR->item_say("@There is no traitor.@");
 					Func097F(var0007, "@I disagree.@", 0x0002);
 				}
 			}
 			if (var0008 == 0x0006) {
-				0xFFB3->item_say("@Money is short.@");
+				SPEKTOR->item_say("@Money is short.@");
 			}
 		}
 	}
-	if ((event == DEATH) && 0xFFB3->get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && SPEKTOR->get_item_flag(SI_TOURNAMENT)) {
 		if (gflags[0x0094]) {
-			0xFFB3->show_npc_face0(0x0000);
+			SPEKTOR->show_npc_face0(0x0000);
 			say("\"Very well, I have been found out. Listen to my secrets, brute, for I must confess all with my dying breath...\"");
 			say("\"Yes, Marsten and I did plot with the Goblins -- but we did think to cheat them in the end! Then the Leopards would have ruled Monitor.\"");
 			say("\"And it was I who stole from the town treasury, for we needed the money to acquire a cache of powerful weapons -- explosive weapons...\"");
 			say("\"The blood of Cantra's father weighs upon my soul. He did stumble into our secret, so he had to be killed. If our secret had not been protected, Marsten would have killed me.\"");
-			0xFFB3->clear_item_flag(SI_TOURNAMENT);
-			0xFFB3->reduce_health(0x0032, NORMAL_DAMAGE);
+			SPEKTOR->clear_item_flag(SI_TOURNAMENT);
+			SPEKTOR->reduce_health(0x0032, NORMAL_DAMAGE);
 			gflags[0x00B4] = true;
 			abort;
 		}
@@ -47100,21 +47100,21 @@ void Func044D object#(0x44D) () {
 			call Func01D0;
 		};
 	}
-	if ((event == DOUBLECLICK) && (0xFFB3->get_schedule_type() != WAIT)) {
+	if ((event == DOUBLECLICK) && (SPEKTOR->get_schedule_type() != WAIT)) {
 		AVATAR->item_say("@Greetings, milord.@");
-		0xFFB3->Func07D1();
+		SPEKTOR->Func07D1();
 		if (gflags[0x0092]) {
-			0xFFB3->set_schedule_type(WAIT);
-			Func097F(0xFFB3, "@Not thee!@", 0x0002);
-			0xFFB3->Func07D2();
-			var0009 = script 0xFFB3 after 7 ticks {
+			SPEKTOR->set_schedule_type(WAIT);
+			Func097F(SPEKTOR, "@Not thee!@", 0x0002);
+			SPEKTOR->Func07D2();
+			var0009 = script SPEKTOR after 7 ticks {
 				nohalt;
 				call Func044D;
 			};
 			abort;
 		}
-		Func097F(0xFFB3, "Yes?", 0x0002);
-		0xFFB3->set_schedule_type(TALK);
+		Func097F(SPEKTOR, "Yes?", 0x0002);
+		SPEKTOR->set_schedule_type(TALK);
 	}
 	if (event != SCRIPTED) {
 		if (event != STARTED_TALKING) {
@@ -47122,9 +47122,9 @@ void Func044D object#(0x44D) () {
 			goto labelFunc044C_09C6;
 		}
 	}
-	0xFFB3->run_schedule();
-	0xFFB3->clear_item_say();
-	0xFFB3->show_npc_face0(0x0000);
+	SPEKTOR->run_schedule();
+	SPEKTOR->clear_item_say();
+	SPEKTOR->show_npc_face0(0x0000);
 	if (gflags[0x0092]) {
 		if (gflags[0x00B4]) {
 			say("\"Mine actions stand beyond the shallow morality of any tribunal. No court can condemn me. The only crime of which I am truly guilty is that I allowed myself to be caught.\"");
@@ -47135,12 +47135,12 @@ void Func044D object#(0x44D) () {
 			gflags[0x00B4] = true;
 		}
 	} else {
-		var000A = 0xFFB3->get_item_flag(MET);
+		var000A = SPEKTOR->get_item_flag(MET);
 		if (var000A) {
 			say("\"Yes, how may I help?\"");
 		} else {
 			say("\"I am Spektor, treasurer of Monitor.\"");
-			0xFFB3->set_item_flag(MET);
+			SPEKTOR->set_item_flag(MET);
 		}
 		add(["duties", "exchange coins"]);
 		if (gflags[0x0093] && (!(gflags[0x0038] || gflags[0x00B3]))) {
@@ -47264,8 +47264,8 @@ void Func044D object#(0x44D) () {
 		case "know traitor" (remove):
 			if (gflags[0x0094]) {
 				say("\"What!? What dost thou mean? Art thou calling me a traitor? I may not be much of a fighter, but I can defend myself!\"");
-				0xFFB3->set_schedule_type(SHY);
-				Func097F(0xFFB3, "@Beware!@", 0x0000);
+				SPEKTOR->set_schedule_type(SHY);
+				Func097F(SPEKTOR, "@Beware!@", 0x0000);
 				abort;
 			}
 			say("\"Marsten is the traitor? This is too incredible to believe. Hast thou proof?\"");
@@ -47276,20 +47276,20 @@ void Func044D object#(0x44D) () {
 					0x0000->set_conversation_slot();
 					say("\"Then I can do nothing for thee. Unseen evidence is useless evidence.\"");
 				} else if (Func0955()) {
-					var0009 = Func0996(PARTY, 0xFFB3, 0x0001, 0x031D, 0x0078, FRAME_ANY, 0x0000);
-					var0009 = Func0996(PARTY, 0xFFB3, 0x0001, 0x031D, 0x0079, FRAME_ANY, 0x0000);
-					var0009 = Func0996(PARTY, 0xFFB3, 0x0001, 0x031D, 0x007A, FRAME_ANY, 0x0000);
+					var0009 = Func0996(PARTY, SPEKTOR, 0x0001, 0x031D, 0x0078, FRAME_ANY, 0x0000);
+					var0009 = Func0996(PARTY, SPEKTOR, 0x0001, 0x031D, 0x0079, FRAME_ANY, 0x0000);
+					var0009 = Func0996(PARTY, SPEKTOR, 0x0001, 0x031D, 0x007A, FRAME_ANY, 0x0000);
 					say("\"I shall study this evidence, and if thou art right, I will bring it before the other Lords.\"");
 					gflags[0x00B3] = true;
 					say("\"Now leave me, so that I may peruse this matter.\"");
-					Func097F(0xFFB3, "@Let me be.@", 0x0000);
+					Func097F(SPEKTOR, "@Let me be.@", 0x0000);
 					abort;
 				} else {
 					say("\"Then I can do nothing for thee. Unseen evidence is useless evidence.\"");
 				}
 			} else {
 				say("\"Then be on thy way! Marsten is the traitor -- what a lark!\"");
-				Func097F(0xFFB3, "@Don't waste my time...@", 0x0000);
+				Func097F(SPEKTOR, "@Don't waste my time...@", 0x0000);
 				abort;
 			}
 			fallthrough;
@@ -47298,7 +47298,7 @@ void Func044D object#(0x44D) () {
 			say("\"Give me time, ",
 				var0000,
 				"! Such matters are not quickly resolved.\"");
-			Func097F(0xFFB3, "@More time!@", 0x0000);
+			Func097F(SPEKTOR, "@More time!@", 0x0000);
 			abort;
 
 		case "enchanter" (remove):
@@ -47342,7 +47342,7 @@ void Func044D object#(0x44D) () {
 			UI_remove_npc_face0();
 			UI_remove_npc_face1();
 			Func097F(AVATAR, "Goodbye!", 0x0000);
-			Func097F(0xFFB3, "Go in Courage!", 0x0002);
+			Func097F(SPEKTOR, "Go in Courage!", 0x0002);
 			break;
 	}
 labelFunc044C_09C6:
@@ -47888,7 +47888,7 @@ void Func0450 object#(0x450) () {
 			Func09AC(MARSTEN, 0x0310, 0x0A66, PATROL);
 			Func09AC(CALADIN, 0x030F, 0x0A64, PATROL);
 			Func09AC(0xFF6A, 0x0310, 0x0A6A, PATROL);
-			Func09AC(0xFFB3, 0x030F, 0x0A68, PATROL);
+			Func09AC(SPEKTOR, 0x030F, 0x0A68, PATROL);
 			add(["open the gate", "strangers"]);
 		} else {
 			say("\"What is it now?\"");
@@ -51267,7 +51267,7 @@ void Func0496 object#(0x496) () {
 			var000C &= SHAZZANA;
 		}
 		if (!gflags[0x0092]) {
-			var000C &= 0xFFB3;
+			var000C &= SPEKTOR;
 		}
 		for (var000F in var000C with var000D to var000E) {
 			if (!var000F->npc_nearby()) {
@@ -51688,9 +51688,9 @@ void Func0496 object#(0x496) () {
 						MARSTEN->move_object([0x0446, 0x09C5, 0x0000]);
 						MARSTEN->set_new_schedules([NIGHT, DAWN], [SLEEP, TEND_SHOP], [0x0446, 0x09C5, 0x0446, 0x09C5]);
 					}
-					if (gflags[0x0092] && (!0xFFB3->get_item_flag(DEAD))) {
-						0xFFB3->move_object([0x0448, 0x09D6, 0x0000]);
-						0xFFB3->set_new_schedules([NIGHT, DAWN], [SLEEP, TEND_SHOP], [0x0448, 0x09D6, 0x0448, 0x09D6]);
+					if (gflags[0x0092] && (!SPEKTOR->get_item_flag(DEAD))) {
+						SPEKTOR->move_object([0x0448, 0x09D6, 0x0000]);
+						SPEKTOR->set_new_schedules([NIGHT, DAWN], [SLEEP, TEND_SHOP], [0x0448, 0x09D6, 0x0448, 0x09D6]);
 					}
 					CALADIN->set_new_schedules([MIDNIGHT, MORNING, NOON, AFTERNOON, EVENING, NIGHT], [SLEEP, DUEL, TEND_SHOP, DUEL, MAJOR_SIT, EAT_AT_INN], [0x03B1, 0x0A49, 0x03D7, 0x0A8A, 0x03CE, 0x09FF, 0x039B, 0x0A76, 0x03B2, 0x0A05, 0x041C, 0x0A57]);
 					var0013 = 0x0003;
@@ -78758,7 +78758,7 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(0xFFB2, 0x0402, 0x0A82, WAIT);
 		Func09AC(0xFFB1, 0x0407, 0x0A47, WAIT);
 		Func09AC(MARSTEN, 0x0427, 0x09C7, WAIT);
-		Func09AC(0xFFB3, 0x0442, 0x09CA, WAIT);
+		Func09AC(SPEKTOR, 0x0442, 0x09CA, WAIT);
 		Func09AC(LUCILLA, 0x03F6, 0x0A45, WAIT);
 		HARNNA->set_new_schedules([DAWN, NOON, AFTERNOON, NIGHT], [0x000B, LOITER, WANDER, SLEEP], [0x034A, 0x0AB4, 0x0409, 0x0A24, 0x03A9, 0x0A1B, 0x035B, 0x0A8A]);
 		HARNNA->run_schedule();
@@ -105661,7 +105661,7 @@ var Func08ED 0x8ED (var var0000) {
 	}
 	if (var0000 == 0x0003) {
 		say("\"Knights, have you been listening? Our new warrior hath had a terrible experience...\"");
-		0xFFB3->show_npc_face1(0x0000);
+		SPEKTOR->show_npc_face1(0x0000);
 		say("\"I'm sure there is an explanation for everything.\"");
 		UI_remove_npc_face1();
 		0x0000->set_conversation_slot();

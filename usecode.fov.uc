@@ -10910,14 +10910,14 @@ void Func0405 object#(0x405) () {
 			case "Lord Heather":
 				say("Jaana blushes. \"Yes, I have been seeing our Town Mayor for some time now.\"");
 				remove("Lord Heather");
-				var000A = Func08F7(0xFFB3);
+				var000A = Func08F7(LORD_HEATHER);
 				if (var000A) {
-					0xFFB3->say("\"I see that thou art leaving Cove for a while, my dear?\"*");
+					LORD_HEATHER->say("\"I see that thou art leaving Cove for a while, my dear?\"*");
 					JAANA->say("\"Yes, milord. But I shall return. I promise thee.\"*");
-					0xFFB3->say("\"I shall try not to worry about thee, but it will be difficult.\"*");
+					LORD_HEATHER->say("\"I shall try not to worry about thee, but it will be difficult.\"*");
 					JAANA->say("\"Do not worry. I shall be safe with the Avatar.\"*");
-					0xFFB3->say("\"I do hope so.\" The Mayor embraces Jaana.*");
-					0xFFB3->hide();
+					LORD_HEATHER->say("\"I do hope so.\" The Mayor embraces Jaana.*");
+					LORD_HEATHER->hide();
 					JAANA->show_npc_face(0x0000);
 				}
 				fallthrough;
@@ -22256,7 +22256,7 @@ void Func044D object#(0x44D) () {
 	var var0005;
 
 	if (event == DOUBLECLICK) {
-		0xFFB3->show_npc_face(0x0000);
+		LORD_HEATHER->show_npc_face(0x0000);
 		var0000 = UI_is_pc_female();
 		add(["name", "job", "bye"]);
 		if (gflags[0x00E0]) {
@@ -22306,13 +22306,13 @@ void Func044D object#(0x44D) () {
 				if (var0001) {
 					IOLO->say("\"Sounds like bad theatre to me!\"");
 					IOLO->hide();
-					0xFFB3->show_npc_face(0x0000);
+					LORD_HEATHER->show_npc_face(0x0000);
 				}
 				var0002 = Func08F7(SPARK);
 				if (var0002) {
 					SPARK->say("\"Any wenches mine own age around here?\"*");
 					SPARK->hide();
-					0xFFB3->show_npc_face(0x0000);
+					LORD_HEATHER->show_npc_face(0x0000);
 				}
 				gflags[0x00E4] = true;
 				remove("everyone");
@@ -22320,11 +22320,11 @@ void Func044D object#(0x44D) () {
 				if (var0003) {
 					say("\"I see that thou art leaving Cove for a while, my dear?\"*");
 					JAANA->say("\"Yes, milord. But I shall return. I promise thee.\"*");
-					0xFFB3->say("\"I shall try not to worry about thee, but it will be difficult.\"*");
+					LORD_HEATHER->say("\"I shall try not to worry about thee, but it will be difficult.\"*");
 					JAANA->say("\"Do not worry. I shall be safe with the Avatar.\"*");
-					0xFFB3->say("\"I do hope so.\" The Mayor embraces Jaana.*");
+					LORD_HEATHER->say("\"I do hope so.\" The Mayor embraces Jaana.*");
 					JAANA->hide();
-					0xFFB3->show_npc_face(0x0000);
+					LORD_HEATHER->show_npc_face(0x0000);
 				}
 				fallthrough;
 
@@ -22377,7 +22377,7 @@ void Func044D object#(0x44D) () {
 		say("\"Do come and visit again, Avatar!\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFB3);
+		Func092E(LORD_HEATHER);
 	}
 }
 
