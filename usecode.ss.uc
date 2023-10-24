@@ -49768,7 +49768,7 @@ void Func047D object#(0x47D) () {
 		if (gflags[0x024D]) {
 			0xFED6->show_npc_face0(0x0000);
 			say("\"Thou dost have the sceptre. My work is complete. I must rest. I have waited for thee for so long...\"*");
-			var0000 = script 0xFF83 after 15 ticks {
+			var0000 = script BUTLER after 15 ticks {
 				nohalt;
 				hit 50, normal_damage;
 			};
@@ -49797,15 +49797,15 @@ void Func047D object#(0x47D) () {
 			gflags[0x024D] = true;
 			var0000 = Func099B(AVATAR, 0x0001, 0x039E, QUALITY_ANY, 0x0000, 0x0000, true);
 			say("\"It is good that I successfully carried out mine instructions.\" *\"Now, I must rest...\"");
-			var0000 = script 0xFF83 after 15 ticks {
+			var0000 = script BUTLER after 15 ticks {
 				nohalt;
 				hit 50, normal_damage;
 			};
-			0xFF83->set_schedule_type(SHY);
+			BUTLER->set_schedule_type(SHY);
 			abort;
 		}
 		say("\"Error! I have waited centuries for the Hierophant and to have almost given the Serpent Sceptre to a total stranger!\"* \"Error! To almost let the key to the Great Library fall into the wrong hands! I should have my works examined...\"* \"Begone! Thou art a hazard to the safety of the Great Library.\" *\"Now what was it that the Hierophant wanted...?\"");
-		0xFF83->set_schedule_type(SHY);
+		BUTLER->set_schedule_type(SHY);
 		abort;
 	}
 }

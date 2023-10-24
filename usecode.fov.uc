@@ -10548,7 +10548,7 @@ void Func0404 object#(0x404) () {
 		var0008 = SHAMINO->get_npc_object()->is_dead();
 		var0009 = SPARK->get_npc_object()->is_dead();
 		var000A = SPRELLIC->get_npc_object()->is_dead();
-		var000B = 0xFF83->get_npc_object()->is_dead();
+		var000B = VOKES->get_npc_object()->is_dead();
 		var000C = 0xFF82->get_npc_object()->is_dead();
 		var000D = 0xFF81->get_npc_object()->is_dead();
 		var000E = UI_wearing_fellowship();
@@ -28152,7 +28152,7 @@ void Func0477 object#(0x477) () {
 		if (var0004) {
 			add("Sprellic");
 		}
-		var0005 = 0xFF83->is_dead();
+		var0005 = VOKES->is_dead();
 		var0006 = 0xFF82->is_dead();
 		var0007 = 0xFF81->is_dead();
 		if (var0005 && (var0006 && var0007)) {
@@ -28700,7 +28700,7 @@ void Func047A object#(0x47A) () {
 		if (gflags[0x016E]) {
 			add("Sprellic");
 		}
-		var0005 = 0xFF83->get_npc_object()->is_dead();
+		var0005 = VOKES->get_npc_object()->is_dead();
 		var0006 = 0xFF82->get_npc_object()->is_dead();
 		var0007 = 0xFF81->get_npc_object()->is_dead();
 		var0008 = SPRELLIC->get_npc_object()->is_dead();
@@ -28969,7 +28969,7 @@ void Func047B object#(0x47B) () {
 		var0003 = Func08F7(OPHELIA);
 		var0004 = false;
 		var0005 = SPRELLIC->get_npc_object()->is_dead();
-		var0006 = 0xFF83->get_npc_object()->is_dead();
+		var0006 = VOKES->get_npc_object()->is_dead();
 		var0007 = 0xFF82->get_npc_object()->is_dead();
 		var0008 = 0xFF81->get_npc_object()->is_dead();
 		if (var0005 || (var0006 || (var0007 || var0008))) {
@@ -29160,7 +29160,7 @@ void Func047C object#(0x47C) () {
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
 		var0002 = false;
-		var0003 = 0xFF83->get_npc_object()->is_dead();
+		var0003 = VOKES->get_npc_object()->is_dead();
 		var0004 = 0xFF82->get_npc_object()->is_dead();
 		var0005 = 0xFF81->get_npc_object()->is_dead();
 		if (var0003 && (var0004 && var0005)) {
@@ -29411,10 +29411,10 @@ void Func047D object#(0x47D) () {
 	var var0006;
 
 	if (event == DOUBLECLICK) {
-		0xFF83->show_npc_face(0x0000);
+		VOKES->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFF83->get_npc_object();
+		var0002 = VOKES->get_npc_object();
 		var0003 = 0xFF81->get_npc_object();
 		var0004 = 0xFF82->get_npc_object();
 		var0005 = Func08F7(0xFF82);
@@ -29472,7 +29472,7 @@ void Func047D object#(0x47D) () {
 				if (var0005) {
 					0xFF82->say("\"I'll make a stain on his honor, that's for sure. A blood red one!\"*");
 					0xFF82->hide();
-					0xFF83->show_npc_face(0x0000);
+					VOKES->show_npc_face(0x0000);
 				}
 				add("Sprellic");
 				remove("duel");
@@ -29484,7 +29484,7 @@ void Func047D object#(0x47D) () {
 					if (var0006) {
 						0xFF81->say("\"Were he not such a cad, he would see the foolishness of his actions. 'Tis now up to us to show him!\"*");
 						0xFF81->hide();
-						0xFF83->show_npc_face(0x0000);
+						VOKES->show_npc_face(0x0000);
 					}
 					add("honor flag");
 					if (gflags[0x0186]) {
@@ -29524,7 +29524,7 @@ void Func047D object#(0x47D) () {
 		say("\"If I am not killed and thou art not killed perhaps we may raise a\tglass together some day!\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF83);
+		Func092E(VOKES);
 	}
 }
 
@@ -29547,9 +29547,9 @@ void Func047E object#(0x47E) () {
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
 		var0002 = 0xFF82->get_npc_object();
-		var0003 = 0xFF83->get_npc_object();
+		var0003 = VOKES->get_npc_object();
 		var0004 = 0xFF81->get_npc_object();
-		var0005 = Func08F7(0xFF83);
+		var0005 = Func08F7(VOKES);
 		add(["name", "job", "bye"]);
 		if (gflags[0x0168]) {
 			if (!(var0001 == NOON)) {
@@ -29631,8 +29631,8 @@ void Func047E object#(0x47E) () {
 			case "return":
 				say("\"Since Sprellic has not done this, it proves that he is sincere in the grievous insult that he has made against us.\"*");
 				if (var0005) {
-					0xFF83->say("\"And I shall grievously insult him-- through his heart!\"*");
-					0xFF83->hide();
+					VOKES->say("\"And I shall grievously insult him-- through his heart!\"*");
+					VOKES->hide();
 					0xFF82->show_npc_face(0x0000);
 				}
 				remove("return");
@@ -29650,8 +29650,8 @@ void Func047E object#(0x47E) () {
 			case "Library of Scars":
 				say("\"The Library of Scars is the greatest guild of fighters in Britannia.\"*");
 				if (var0005) {
-					0xFF83->say("\"Here! Here!\"*");
-					0xFF83->hide();
+					VOKES->say("\"Here! Here!\"*");
+					VOKES->hide();
 					0xFF82->show_npc_face(0x0000);
 				}
 				remove("Library of Scars");
@@ -29718,7 +29718,7 @@ void Func047F object#(0x47F) () {
 		var0001 = UI_part_of_day();
 		var0002 = 0xFF81->get_npc_object();
 		var0003 = 0xFF82->get_npc_object();
-		var0004 = 0xFF83->get_npc_object();
+		var0004 = VOKES->get_npc_object();
 		if (!gflags[0x0179]) {
 			say("You see a very serious young man. He carries himself like a learned and mannered gentleman.");
 			gflags[0x0179] = true;
