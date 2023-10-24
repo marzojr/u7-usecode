@@ -24761,10 +24761,10 @@ void Func045E object#(0x45E) () {
 	var var0003;
 
 	if (event == DOUBLECLICK) {
-		0xFFA2->show_npc_face(0x0000);
+		KARENNA->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFFA2->get_npc_object()->get_schedule_type();
+		var0002 = KARENNA->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye", "murders"]);
 		if (gflags[0x00F4]) {
 			add("gypsies");
@@ -24813,9 +24813,9 @@ void Func045E object#(0x45E) () {
 				var0003 = Func08F7(0xFFA1);
 				if (var0003) {
 					0xFFA1->say("\"Art thou speaking about me? Mine ears are burning!\"*");
-					0xFFA2->say("\"Nothing thou shouldst be concerned about, Jakher.\" She winks at you.*");
+					KARENNA->say("\"Nothing thou shouldst be concerned about, Jakher.\" She winks at you.*");
 					0xFFA1->hide();
-					0xFFA2->show_npc_face(0x0000);
+					KARENNA->show_npc_face(0x0000);
 				}
 				gflags[0x00F6] = true;
 				remove("Jakher");
@@ -24858,9 +24858,9 @@ void Func045E object#(0x45E) () {
 				var0003 = Func08F7(0xFFA1);
 				if (var0003) {
 					0xFFA1->say("\"What? What didst thou say?\"*");
-					0xFFA2->say("\"Nothing, Jakher. Go away.\" She giggles conspiratorally at you.*");
+					KARENNA->say("\"Nothing, Jakher. Go away.\" She giggles conspiratorally at you.*");
 					0xFFA1->hide();
-					0xFFA2->show_npc_face(0x0000);
+					KARENNA->show_npc_face(0x0000);
 				}
 				remove("attractive");
 				fallthrough;
@@ -24882,7 +24882,7 @@ void Func045E object#(0x45E) () {
 		say("\"Farewell. May all thy journeys be interesting ones.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFA2);
+		Func092E(KARENNA);
 	}
 }
 
@@ -24966,11 +24966,11 @@ void Func045F object#(0x45F) () {
 
 			case "Karenna":
 				say("\"A skillful and fierce battler, but a bit short-sighted when it comes to tactics, I'm afraid. Still, a woman as attractive as\tshe is diverting enough when encountered. But do not mention to her that I said that. It would just encourage her. It is uncomfortable enough sharing the same roof with her as it is.\"");
-				var0003 = Func08F7(0xFFA2);
+				var0003 = Func08F7(KARENNA);
 				if (var0003) {
-					0xFFA2->say("\"What art thou whispering about over there?\"*");
+					KARENNA->say("\"What art thou whispering about over there?\"*");
 					0xFFA1->say("\"Nothing! Nothing at all!\" Jakher winks at you.*");
-					0xFFA2->hide();
+					KARENNA->hide();
 					0xFFA1->show_npc_face(0x0000);
 				}
 				remove("Karenna");
@@ -24980,11 +24980,11 @@ void Func045F object#(0x45F) () {
 
 			case "short-sighted":
 				say("\"She is the sort of person who labors under the belief that all problems can be solved in one of three ways. Hit them harder. Hit them faster. Or, hit them some more.\"");
-				var0003 = Func08F7(0xFFA2);
+				var0003 = Func08F7(KARENNA);
 				if (var0003) {
-					0xFFA2->say("\"Art thou talking about me? I feel mine ears burning!\"*");
+					KARENNA->say("\"Art thou talking about me? I feel mine ears burning!\"*");
 					0xFFA1->say("\"Thou art dreaming, Karenna. Why would I talk about thee?\" He giggles conspiratorially at you.*");
-					0xFFA2->hide();
+					KARENNA->hide();
 					0xFFA1->show_npc_face(0x0000);
 				}
 				remove("short-sighted");
@@ -58929,7 +58929,7 @@ void Func06C9 object#(0x6C9) () {
 	var var0003;
 
 	if (event == EGG) {
-		var0000 = [0xFFA1, 0xFFA2];
+		var0000 = [0xFFA1, KARENNA];
 		for (var0003 in var0000 with var0001 to var0002) {
 			Func093F(var0003, LOITER);
 		}
