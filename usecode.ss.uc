@@ -4511,7 +4511,7 @@ void Func013E shape#(0x13E) () {
 			UI_init_conversation();
 			0xFEE1->show_npc_face0(0x0000);
 			say("\"To thee I give the anchor's job... The Avatar must not enter the Shrine of Balance before the Wall of Lights is fully open. Thou must stop the Avatar, should the others fail.\"");
-			0xFF80->show_npc_face1(0x0000);
+			DEADEYE->show_npc_face1(0x0000);
 			say("\"I'll split ",
 				var0001,
 				" from stem ta stern afore I let ",
@@ -4523,7 +4523,7 @@ void Func013E shape#(0x13E) () {
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
 			say("\"Ah, yes... I had nearly forgotten.\"");
-			0xFF80->set_schedule_type(LOITER);
+			DEADEYE->set_schedule_type(LOITER);
 			UI_end_conversation();
 		}
 		if (get_npc_id() == 0x0004) {
@@ -4535,7 +4535,7 @@ void Func013E shape#(0x13E) () {
 			say("\"I must prepare an appropriate welcome for mine old enemy!\"");
 			UI_end_conversation();
 			var000E = [0x092A, 0x0199, 0x0000];
-			0xFF80->si_path_run_usecode(var000E, SI_PATH_SUCCESS, 0xFF80, Func0480, false);
+			DEADEYE->si_path_run_usecode(var000E, SI_PATH_SUCCESS, DEADEYE, Func0480, false);
 		}
 		if (get_npc_id() == 0x0002) {
 			Func097F(item, "@...before the Avatar cometh.@", 0x0000);
@@ -4561,7 +4561,7 @@ void Func013E shape#(0x13E) () {
 		set_npc_id(0x0000);
 		gflags[0x0250] = true;
 		BRUNT->remove_npc();
-		0xFF80->remove_npc();
+		DEADEYE->remove_npc();
 		gflags[0x002A] = false;
 	}
 	if ((event == EGG) && (var0002 == 0x001F)) {
@@ -34243,7 +34243,7 @@ void Func042C object#(0x42C) () {
 				var000E->set_polymorph(0x01F5);
 				var000E->set_npc_id(0x0000);
 			}
-			var000E = 0xFF80->get_npc_object();
+			var000E = DEADEYE->get_npc_object();
 			if (var000E) {
 				var000E->set_polymorph(0x01F5);
 				var000E->set_npc_id(0x0000);
@@ -34256,7 +34256,7 @@ void Func042C object#(0x42C) () {
 		}
 		if (var0013 == 0x0002) {
 			0xFEF0->set_polymorph(0x0373);
-			0xFF80->set_polymorph(0x01CA);
+			DEADEYE->set_polymorph(0x01CA);
 			BRUNT->set_polymorph(0x0325);
 			SELINA->show_npc_face0(0x0000);
 			say("\"Gloat if thou wilt! Even if thou slayest me here thou hast not truly defeated me!\"");
@@ -34285,7 +34285,7 @@ void Func042C object#(0x42C) () {
 	if (event == DEATH) {
 		if (gflags[0x024E]) {
 			var0019 = 0xFEF0->get_item_flag(DEAD);
-			var001A = 0xFF80->get_item_flag(DEAD);
+			var001A = DEADEYE->get_item_flag(DEAD);
 			var001B = BRUNT->get_item_flag(DEAD);
 			if (var0019 && (var001A && var001B)) {
 				if (SELINA->get_npc_id() != 0x0001) {
@@ -49917,8 +49917,8 @@ void Func0480 object#(0x480) () {
 		set_polymorph(0x01F5);
 	}
 	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
-		0xFF80->set_schedule_type(WAIT);
-		var0000 = script 0xFF80 {
+		DEADEYE->set_schedule_type(WAIT);
+		var0000 = script DEADEYE {
 			nohalt;
 			actor frame bowing;
 			actor frame kneeling;
@@ -49927,19 +49927,19 @@ void Func0480 object#(0x480) () {
 	}
 	if ((event == SCRIPTED) && ((gflags[0x0007] == false) && (gflags[0x0255] == false))) {
 		gflags[0x0255] = true;
-		0xFF80->move_object([0x0926, 0x0284, 0x0000]);
-		0xFF80->si_path_run_usecode([0x0927, 0x028D, 0x0000], PATH_SUCCESS, 0xFF80, Func0480, true);
+		DEADEYE->move_object([0x0926, 0x0284, 0x0000]);
+		DEADEYE->si_path_run_usecode([0x0927, 0x028D, 0x0000], PATH_SUCCESS, DEADEYE, Func0480, true);
 	}
 	if ((event == SCRIPTED) && gflags[0x0007]) {
 		gflags[0x0007] = false;
-		0xFF80->si_path_run_usecode([0x092A, 0x0284, 0x0000], PATH_FAILURE, 0xFF80, Func0480, true);
+		DEADEYE->si_path_run_usecode([0x092A, 0x0284, 0x0000], PATH_FAILURE, DEADEYE, Func0480, true);
 	}
 	if (event == PATH_SUCCESS) {
-		0xFF80->show_npc_face0(0x0000);
+		DEADEYE->show_npc_face0(0x0000);
 		say("\"The time hath come for thee to feel me steel!\"* \"Face me, Avatar, if thou dost have the courage!\"* \"I shall cut thee for bait, then feed thee to the minnows shouldst thou try to cross me sword!\"");
 		UI_remove_npc_face1();
 		gflags[0x0007] = true;
-		Func097F(0xFF80, "@Ha,ha,ha!@", 0x0000);
+		Func097F(DEADEYE, "@Ha,ha,ha!@", 0x0000);
 		Func097F(AVATAR, "@Hold!@", 0x0005);
 		var0000 = script item after 2 ticks {
 			nohalt;
@@ -49955,7 +49955,7 @@ void Func0480 object#(0x480) () {
 				Func0924(var0004, SHAPE_ANY);
 			}
 		}
-		0xFF80->remove_npc();
+		DEADEYE->remove_npc();
 		gflags[0x0258] = true;
 		abort;
 	}
@@ -75108,14 +75108,14 @@ void Func073A object#(0x73A) () {
 		0xFEF0->set_attack_mode(STRONGEST);
 		0xFEF0->set_oppressor(AVATAR);
 		0xFEF0->clear_item_flag(SI_TOURNAMENT);
-		0xFF80->move_object([0x0928, 0x01CF, 0x0000]);
+		DEADEYE->move_object([0x0928, 0x01CF, 0x0000]);
 		UI_sprite_effect(ANIMATION_TELEPORT, 0x0928, 0x01CF, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-		0xFF80->set_schedule_type(IN_COMBAT);
-		0xFF80->set_alignment(EVIL);
-		0xFF80->set_opponent(AVATAR);
-		0xFF80->set_attack_mode(STRONGEST);
-		0xFF80->set_oppressor(AVATAR);
-		0xFF80->clear_item_flag(SI_TOURNAMENT);
+		DEADEYE->set_schedule_type(IN_COMBAT);
+		DEADEYE->set_alignment(EVIL);
+		DEADEYE->set_opponent(AVATAR);
+		DEADEYE->set_attack_mode(STRONGEST);
+		DEADEYE->set_oppressor(AVATAR);
+		DEADEYE->clear_item_flag(SI_TOURNAMENT);
 		BRUNT->move_object([0x092A, 0x01CF, 0x0000]);
 		UI_sprite_effect(ANIMATION_TELEPORT, 0x092A, 0x01CF, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		BRUNT->set_schedule_type(IN_COMBAT);
@@ -113103,9 +113103,9 @@ void Func09B5 0x9B5 () {
 	if ((!gflags[0x0004]) && (!gflags[0x0250])) {
 		if (!gflags[0x024F]) {
 			var0002 = [0x0931, 0x0190, 0x0000];
-			0xFF80->set_new_schedules(MIDNIGHT, WAIT, var0002);
-			0xFF80->set_schedule_type(WAIT);
-			0xFF80->move_object(var0002);
+			DEADEYE->set_new_schedules(MIDNIGHT, WAIT, var0002);
+			DEADEYE->set_schedule_type(WAIT);
+			DEADEYE->move_object(var0002);
 			var0003 = [0x092B, 0x017E, 0x0000];
 			BRUNT->set_new_schedules(MIDNIGHT, WAIT, var0003);
 			BRUNT->set_schedule_type(WAIT);

@@ -29812,7 +29812,7 @@ void Func0480 object#(0x480) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFF80->show_npc_face(0x0000);
+	IRIALE->show_npc_face(0x0000);
 	var0000 = Func0908();
 	add(["name", "job", "bye"]);
 	if (gflags[0x02BB]) {
@@ -29852,7 +29852,7 @@ void Func0480 object#(0x480) () {
 					var0000,
 					", we had better leave. I believe this woman is serious.\"");
 				IOLO->hide();
-				0xFF80->show_npc_face(0x0000);
+				IRIALE->show_npc_face(0x0000);
 			}
 			fallthrough;
 
@@ -29866,18 +29866,18 @@ void Func0480 object#(0x480) () {
 			say("\"Wilt thou leave?\"");
 			if (Func090A()) {
 				say("\"Do so and I shall spare thee!\" She watches as you turn away.*");
-				0xFF80->get_npc_object()->set_schedule_type(TEND_SHOP);
+				IRIALE->get_npc_object()->set_schedule_type(TEND_SHOP);
 				abort;
 			}
 			say("She sees your jaw set with determination and nods her head. \"Then die, foolish one!\"*");
-			0xFF80->get_npc_object()->set_schedule_type(IN_COMBAT);
+			IRIALE->get_npc_object()->set_schedule_type(IN_COMBAT);
 			abort;
 
 		case "bye":
 			break;
 	}
 	say("\"Away with thee!\"*");
-	0xFF80->get_npc_object()->set_schedule_type(TEND_SHOP);
+	IRIALE->get_npc_object()->set_schedule_type(TEND_SHOP);
 }
 
 extern var Func0909 0x909 ();
@@ -59260,7 +59260,7 @@ void Func06E1 object#(0x6E1) () {
 
 void Func06E2 object#(0x6E2) () {
 	if (event == EGG) {
-		0xFF80->get_npc_object()->set_schedule_type(IN_COMBAT);
+		IRIALE->get_npc_object()->set_schedule_type(IN_COMBAT);
 	}
 }
 
