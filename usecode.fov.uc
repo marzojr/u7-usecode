@@ -21482,7 +21482,7 @@ extern void Func092F 0x92F (var var0000);
 
 void Func0447 object#(0x447) () {
 	if (event == DOUBLECLICK) {
-		0xFFB9->show_npc_face(0x0000);
+		INWISLOKLEM->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x00C8]) {
 			say("A winged gargoyle looks at you with interest and obvious intelligence.");
@@ -21569,7 +21569,7 @@ void Func0447 object#(0x447) () {
 		say("\"To say farewell.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092F(0xFFB9);
+		Func092F(INWISLOKLEM);
 	}
 }
 
