@@ -51813,33 +51813,33 @@ void Func0498 object#(0x498) () {
 	var0001 = Func0953();
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Greetings, friend!@");
-		0xFF68->Func07D1();
+		SETHYS->Func07D1();
 		if (gflags[0x0279]) {
-			Func097F(0xFF68, "@I know thee...@", 0x0002);
+			Func097F(SETHYS, "@I know thee...@", 0x0002);
 		} else {
-			Func097F(0xFF68, "@Don't hurt me!@", 0x0002);
+			Func097F(SETHYS, "@Don't hurt me!@", 0x0002);
 		}
-		0xFF68->set_schedule_type(TALK);
+		SETHYS->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF68->clear_item_say();
-		0xFF68->show_npc_face0(0x0000);
-		if (0xFF68->get_item_flag(IN_PARTY)) {
+		SETHYS->clear_item_say();
+		SETHYS->show_npc_face0(0x0000);
+		if (SETHYS->get_item_flag(IN_PARTY)) {
 			say("\"We must hasten to the Serpent Gate!\"");
-			0xFF68->set_schedule_type(FOLLOW_AVATAR);
+			SETHYS->set_schedule_type(FOLLOW_AVATAR);
 			add("leave");
 		} else {
-			0xFF68->run_schedule();
-			var0002 = 0xFF68->get_item_flag(MET);
+			SETHYS->run_schedule();
+			var0002 = SETHYS->get_item_flag(MET);
 			if (gflags[0x0279]) {
 				say("\"Thou art late! I have been waiting for thee for a very long time...\"");
 				add(["waiting", "long time"]);
 			} else {
-				if (0xFF68->get_item_flag(MET)) {
+				if (SETHYS->get_item_flag(MET)) {
 					say("\"Thou art returned! What tortures hast thou devised for me, Order dog?\"");
 				} else {
 					say("\"I knew that thou wouldst come for me, Order dog! Thou canst take my life, but the key is gone! Gone!\" *\"Sethys shall not fail the Chaos Hierophant!\"");
-					0xFF68->set_item_flag(MET);
+					SETHYS->set_item_flag(MET);
 				}
 				add(["Order dog", "key", "Chaos Hierophant"]);
 			}
@@ -51895,8 +51895,8 @@ void Func0498 object#(0x498) () {
 
 			case "fled":
 				say("\"Down that small tunnel in the wall...\" *\"I have tried to enlarge the hole so that I might retrieve the key... But I have nothing as strong and sharp as a rat's teeth.\" *\"Oh, I am doomed!\"");
-				Func097F(0xFF68, "@Doomed!@", 0x0000);
-				0xFF68->set_schedule_type(SHY);
+				Func097F(SETHYS, "@Doomed!@", 0x0000);
+				SETHYS->set_schedule_type(SHY);
 				abort;
 
 			case "Chaos Hierophant" (remove):
@@ -51956,8 +51956,8 @@ void Func0498 object#(0x498) () {
 				if (UI_get_array_size(UI_get_party_list2()) < 0x0005) {
 					say("\"But I would like to return the key to the Chaos Hierophant. Perhaps it would not hurt to go to the Temple of Enthusiasm, briefly.\"");
 					say("\"Very well! I shall join with thee.\"");
-					0xFF68->add_to_party();
-					Func097F(0xFF68, "@Onward!@", 0x0000);
+					SETHYS->add_to_party();
+					Func097F(SETHYS, "@Onward!@", 0x0000);
 					abort;
 				}
 				say("\"Ah, but thou hast so many companions! Surely I would only be a nuisance to thee...\"");
@@ -51966,12 +51966,12 @@ void Func0498 object#(0x498) () {
 
 			case "bye":
 				UI_remove_npc_face0();
-				if (0xFF68->get_item_flag(IN_PARTY)) {
+				if (SETHYS->get_item_flag(IN_PARTY)) {
 					Func097F(AVATAR, "@Thank thee!@", 0x0000);
-					Func097F(0xFF68, "@Hasten!@", 0x0002);
+					Func097F(SETHYS, "@Hasten!@", 0x0002);
 				} else {
 					Func097F(AVATAR, "@Farewell, ancient!@", 0x0000);
-					Func097F(0xFF68, "@Go in Chaos!@", 0x0002);
+					Func097F(SETHYS, "@Go in Chaos!@", 0x0002);
 				}
 				abort;
 		}
@@ -57783,7 +57783,7 @@ void Func04D3 object#(0x4D3) () {
 			say("\"I see... Thou hast made great progress in thy quest, my ",
 				var0003,
 				". But before thou canst continue, thou must seek the wisdom of the last child of Chaos. He alone holds the key to the location of the Chaos Hierophant.\"");
-			if (0xFF68->get_item_flag(MET)) {
+			if (SETHYS->get_item_flag(MET)) {
 				say("\"Thou didst meet him in his imprisonment, my ",
 					var0003,
 					". Yet he remains a prisoner out of time. Seek him within the Shrine that is his home.\"");
@@ -72760,17 +72760,17 @@ void Func0718 object#(0x718) () {
 	var var0008;
 
 	if (event == SCRIPTED) {
-		0xFF68->show_npc_face0(0x0000);
+		SETHYS->show_npc_face0(0x0000);
 		say("\"I am undone -- I am outside the Temple, and now the years burden me...\"");
 		say("\"Take the Chaos Stone from my dead body... it shall be the token that thou needest to summon the shade...\"");
 		say("\"The body lies in the garden of the Temple of Enthusiasm, in the northeast by the Gate of the Serpent...\"");
 		say("\"Now I go into the Void!\"");
-		var0000 = 0xFF68->get_object_position();
+		var0000 = SETHYS->get_object_position();
 		var0000[0x0001] -= var0000[0x0003] / 0x0002;
 		var0000[0x0002] -= var0000[0x0003] / 0x0002;
 		UI_sprite_effect(ANIMATION_POOF, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-		var0000 = 0xFF68->get_object_position();
-		0xFF68->remove_npc();
+		var0000 = SETHYS->get_object_position();
+		SETHYS->remove_npc();
 		var0001 = UI_create_new_object(0x019E);
 		if (var0001) {
 			var0001->set_item_frame(0x0018);
@@ -72788,7 +72788,7 @@ void Func0718 object#(0x718) () {
 				var0002 = UI_update_last_created([var0000[0x0001], (var0000[0x0002] + 0x0002), var0000[0x0003]]);
 			}
 			if (var0002) {
-				var0003 = 0xFF68->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
+				var0003 = SETHYS->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
 				for (var0006 in var0003 with var0004 to var0005) {
 					var0007 = var0006->set_last_created();
 					if (var0007) {
@@ -72808,11 +72808,11 @@ void Func0718 object#(0x718) () {
 	}
 	if (event == EGG) {
 		var0008 = UI_get_party_list2();
-		if (0xFF68->get_npc_object() in var0008) {
-			0xFF68->remove_from_party();
-			0xFF68->set_schedule_type(WAIT);
+		if (SETHYS->get_npc_object() in var0008) {
+			SETHYS->remove_from_party();
+			SETHYS->set_schedule_type(WAIT);
 			AVATAR->set_item_flag(DONT_MOVE);
-			var0002 = script 0xFF68 {
+			var0002 = script SETHYS {
 				nohalt;
 				say "@The weight of the years!@";
 				actor frame bowing;
@@ -111799,7 +111799,7 @@ var Func098C 0x98C () {
 var Func098D 0x98D () {
 	var var0000;
 
-	var0000 = [DUPRE, SHAMINO, IOLO, GWENNO, PETRA, MORTEGRO, WILFRED, BOYDON, SELINA, 0xFF68, 0xFF58];
+	var0000 = [DUPRE, SHAMINO, IOLO, GWENNO, PETRA, MORTEGRO, WILFRED, BOYDON, SELINA, SETHYS, 0xFF58];
 	return var0000;
 }
 

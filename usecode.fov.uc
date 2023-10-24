@@ -33874,7 +33874,7 @@ void Func0498 object#(0x498) () {
 	var var0008;
 
 	if (event == DOUBLECLICK) {
-		0xFF68->show_npc_face(0x0000);
+		ZELDA->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = false;
