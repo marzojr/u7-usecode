@@ -21824,7 +21824,7 @@ void Func044A object#(0x44A) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFFB6->show_npc_face(0x0000);
+	RUDYOM->show_npc_face(0x0000);
 	add(["name", "job", "bye"]);
 	if (gflags[0x0065]) {
 		add(["blackrock", "Moongates"]);
