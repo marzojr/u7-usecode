@@ -54775,12 +54775,12 @@ void Func04B0 object#(0x4B0) () {
 	var var0007;
 
 	if (event == DOUBLECLICK) {
-		0xFF50->item_say("@Water, please!@");
+		THIEF1->item_say("@Water, please!@");
 	}
 	if (event == STARTED_TALKING) {
-		0xFF50->set_schedule_type(TEND_SHOP);
-		0xFF50->item_say("@Water, please!@");
-		var0000 = script 0xFF50 after 80 ticks {
+		THIEF1->set_schedule_type(TEND_SHOP);
+		THIEF1->item_say("@Water, please!@");
+		var0000 = script THIEF1 after 80 ticks {
 			nohalt;
 			call Func04B0;
 		};
@@ -54789,7 +54789,7 @@ void Func04B0 object#(0x4B0) () {
 		var0001 = UI_die_roll(0x0001, 0x0003);
 		var0002 = ["Give me some water!", "Water! I'm thirsty!", "I must have water!"];
 		var0003 = var0002[var0001];
-		0xFF50->item_say(var0003);
+		THIEF1->item_say(var0003);
 	}
 	if (event == SCRIPTED) {
 		var0004 = find_nearby(SHAPE_ANY, 0x0028, MASK_NPC2);

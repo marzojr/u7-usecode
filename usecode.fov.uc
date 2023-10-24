@@ -38013,10 +38013,10 @@ void Func04B0 object#(0x4B0) () {
 	var var000C;
 
 	if (event == DOUBLECLICK) {
-		0xFF50->show_npc_face(0x0000);
+		ANDREW->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFF50->get_npc_object()->get_schedule_type();
+		var0002 = ANDREW->get_npc_object()->get_schedule_type();
 		var0003 = false;
 		add(["name", "job", "bye"]);
 		if (gflags[0x0212]) {
@@ -38189,7 +38189,7 @@ labelFunc04B0_0332:
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF50);
+		Func092E(ANDREW);
 	}
 }
 
