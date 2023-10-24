@@ -71861,10 +71861,10 @@ void Func06FA object#(0x6FA) () {
 				call Func06FA;
 			};
 			var0016 = Func0992(0x0001, "@Look -- the gates!@", "@The gates are closing!@", true);
-			0xFFAB->set_alignment(EVIL);
-			0xFFAB->set_item_flag(SI_TOURNAMENT);
-			0xFFAB->move_object([0x0723, 0x0A65]);
-			0xFFAB->set_schedule_type(WAIT);
+			AUTO1->set_alignment(EVIL);
+			AUTO1->set_item_flag(SI_TOURNAMENT);
+			AUTO1->move_object([0x0723, 0x0A65]);
+			AUTO1->set_schedule_type(WAIT);
 			0xFFA9->set_alignment(EVIL);
 			0xFFA9->set_item_flag(SI_TOURNAMENT);
 			0xFFA9->move_object([0x074C, 0x0A67]);
@@ -72124,7 +72124,7 @@ void Func06FF object#(0x6FF) () {
 		var0001 = 0xFFA4;
 	}
 	if (var0000 == 0x0042) {
-		var0001 = 0xFFAB;
+		var0001 = AUTO1;
 	}
 	if (var0000 == 0x0043) {
 		var0001 = 0xFFA9;

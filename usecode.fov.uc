@@ -23271,7 +23271,7 @@ void Func0455 object#(0x455) () {
 	var var0002;
 
 	if (event == DOUBLECLICK) {
-		0xFFAB->show_npc_face(0x0000);
+		GLADSTONE->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
@@ -23380,7 +23380,7 @@ void Func0455 object#(0x455) () {
 		say("\"Good journey, my friend.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFFAB);
+		Func092E(GLADSTONE);
 	}
 }
 
@@ -58913,7 +58913,7 @@ void Func06C8 object#(0x6C8) () {
 	var var0003;
 
 	if (event == EGG) {
-		var0000 = [0xFFA8, JULIA, 0xFFAB];
+		var0000 = [0xFFA8, JULIA, GLADSTONE];
 		for (var0003 in var0000 with var0001 to var0002) {
 			Func093F(var0003, LOITER);
 		}
