@@ -364,6 +364,7 @@ enum batlingoons_npcs {
 
 // All other NPCs
 enum misc_npcs {
+	INVALID_NPC = 0,
 	GUARD12 = -130, // Automaton, starts at House of the Dead
 	GUARD13 = -131, // Automaton, starts at House of the Dead
 	GUARD14 = -132, // Automaton, starts at House of the Dead
@@ -1653,7 +1654,7 @@ labelFunc00E4_0956:
 		if (var0013 == 0x0003) {
 			do {
 				say("\"With whom dost thou wish to train?\"");
-				var0014 = [0x0000, CALADIN, SHAZZANA, 0xFF6A, LUTHER];
+				var0014 = [INVALID_NPC, CALADIN, SHAZZANA, 0xFF6A, LUTHER];
 				var001D = ["nobody", "Caladin", "Shazzana", "Brendann", "Luther"];
 				var001E = ["invalid time", "9am and noon", "noon and 3pm", "3pm and 6pm", "9am and noon"];
 				var001F = Func0957(var001D);
@@ -110882,7 +110883,7 @@ var Func096D 0x96D (var var0000) {
 		}
 		var0002 = var0004;
 		var0003 = var0005;
-		var0009 = [0x0000, var0003];
+		var0009 = [INVALID_NPC, var0003];
 		var000A = Func0957(["Nobody", var0002]);
 		var000B = var0009[var000A];
 		if (var000B == 0x0000) {

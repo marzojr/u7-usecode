@@ -314,6 +314,8 @@ enum buccaneers_den_npcs {
 
 //Miscellaneous NPCs (dungeons and other minor locations)
 enum misc_npcs {
+	INVALID_NPC		= 0,
+
 	MARTINGO	= -191, //Sultan of Spektran
 
 	IRIALE		= -128,	//Fellowship Retreat, guardian of the Cube
@@ -70324,7 +70326,7 @@ void Func089E 0x89E (var var0000, var var0001, var var0002) {
 						var000D &= var0010;
 					}
 				}
-				var0011 = [0x0000, var000D];
+				var0011 = [INVALID_NPC, var000D];
 				var0012 = Func090C(["Nobody", var000C]);
 				var0013 = var0011[var0012];
 				if (var0013 == 0x0000) {
@@ -75844,7 +75846,7 @@ var Func090D 0x90D () {
 
 	var0000 = Func08FB();
 	var0001 = UI_get_party_list();
-	var0002 = [0x0000, var0001];
+	var0002 = [INVALID_NPC, var0001];
 	var0003 = Func090C(["Nobody", var0000]);
 	var0004 = var0002[var0003];
 	if (var0004 == 0x0000) {
@@ -75864,7 +75866,7 @@ var Func090E 0x90E () {
 
 	var0000 = UI_get_party_list2()->get_npc_name();
 	var0001 = UI_get_party_list2();
-	var0002 = [0x0000, var0001];
+	var0002 = [INVALID_NPC, var0001];
 	var0003 = Func090C(["Nobody", var0000]);
 	var0004 = var0002[var0003];
 	if (var0004 == 0x0000) {
@@ -76182,7 +76184,7 @@ var Func0921 0x921 (var var0000) {
 		}
 		var0002 = var0004;
 		var0003 = var0005;
-		var0009 = [0x0000, var0003];
+		var0009 = [INVALID_NPC, var0003];
 		var000A = Func090C(["Nobody", var0002]);
 		var000B = var0009[var000A];
 		if (var000B == 0x0000) {
