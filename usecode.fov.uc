@@ -30856,7 +30856,7 @@ void Func0486 object#(0x486) () {
 		ROBIN->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = ROBIN->get_npc_object();
-		var0002 = 0xFF78->get_npc_object();
+		var0002 = LEAVELL->get_npc_object();
 		var0003 = BATTLES->get_npc_object();
 		var0004 = Func0931(AVATAR, 0x0001, 0x03BB, QUALITY_ANY, 0x0002);
 		var0005 = UI_wearing_fellowship();
@@ -31074,7 +31074,7 @@ void Func0487 object#(0x487) () {
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
 		var0002 = Func08F7(ROBIN);
-		var0003 = Func08F7(0xFF78);
+		var0003 = Func08F7(LEAVELL);
 		add(["name", "job", "bye"]);
 		if (gflags[0x017D]) {
 			add("locket");
@@ -31130,9 +31130,9 @@ void Func0487 object#(0x487) () {
 			case "Leavell":
 				say("\"He's a lady's man, he is. But do not be thinkin' he cannot handle hissel' inna fight. T'would be yer last mistake.\"");
 				if (var0003) {
-					0xFF78->say("\"I can near out wrestle thee, Battles, ye old dog!\"*");
+					LEAVELL->say("\"I can near out wrestle thee, Battles, ye old dog!\"*");
 					BATTLES->say("\"Har! Har! Har! Har!\"");
-					0xFF78->hide();
+					LEAVELL->hide();
 					BATTLES->show_npc_face(0x0000);
 				}
 				remove("Leavell");
@@ -31142,8 +31142,8 @@ void Func0487 object#(0x487) () {
 			case "lady's man":
 				say("\"Why, I reckon Leavell has broken near as many hearts as I have made stop beating!\"");
 				if (var0003) {
-					0xFF78->say("\"So many!\"*");
-					0xFF78->hide();
+					LEAVELL->say("\"So many!\"*");
+					LEAVELL->hide();
 					BATTLES->show_npc_face(0x0000);
 				}
 				remove("lady's man");
@@ -31202,7 +31202,7 @@ void Func0488 object#(0x488) () {
 	var var0003;
 
 	if (event == DOUBLECLICK) {
-		0xFF78->show_npc_face(0x0000);
+		LEAVELL->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
 		var0002 = Func08F7(ROBIN);
@@ -31241,7 +31241,7 @@ void Func0488 object#(0x488) () {
 				if (var0003) {
 					BATTLES->say("\"Har! Har! Thou art too correct, Leavell!\"");
 					BATTLES->hide();
-					0xFF78->show_npc_face(0x0000);
+					LEAVELL->show_npc_face(0x0000);
 				}
 				remove("Battles");
 				add(["eye", "quick", "respect"]);
@@ -31278,7 +31278,7 @@ void Func0488 object#(0x488) () {
 				if (var0002) {
 					ROBIN->say("\"Soon we shall return and the money will pour like sweet wine once again, eh, Leavell?\"");
 					ROBIN->hide();
-					0xFF78->show_npc_face(0x0000);
+					LEAVELL->show_npc_face(0x0000);
 				}
 				add(["profession", "Buccaneer's Den"]);
 				remove("Robin");
@@ -31290,7 +31290,7 @@ void Func0488 object#(0x488) () {
 					say("Suddenly Leavell gets an embarrassed look on his face and stops talking.*");
 					ROBIN->say("\"Enough about that, Leavell!\"*");
 					ROBIN->hide();
-					0xFF78->show_npc_face(0x0000);
+					LEAVELL->show_npc_face(0x0000);
 				}
 				remove("profession");
 				fallthrough;
@@ -31317,7 +31317,7 @@ void Func0488 object#(0x488) () {
 				if (var0003) {
 					BATTLES->say("\"Yeh, thou art bloody right we coulda handled him! We'd a slit him like a sheep! Har!\" *");
 					BATTLES->hide();
-					0xFF78->show_npc_face(0x0000);
+					LEAVELL->show_npc_face(0x0000);
 				}
 				say("\"But Gordy had hired a troupe of ruffians to chase after us. 'Tis a pity. I would have liked to teach him a lesson or two. In fact, one day I think I shall.\"");
 				remove("Sintag");
@@ -31366,7 +31366,7 @@ void Func0488 object#(0x488) () {
 		say("With that Leavell goes back to playing with his dagger.*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF78);
+		Func092E(LEAVELL);
 	}
 }
 
