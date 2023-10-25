@@ -56245,34 +56245,34 @@ void Func04BA object#(0x4BA) () {
 		Func0809();
 		abort;
 	}
-	if ((event == DOUBLECLICK) && (0xFF46->get_schedule_type() != WAIT)) {
+	if ((event == DOUBLECLICK) && (GUARD18->get_schedule_type() != WAIT)) {
 		AVATAR->item_say("@Hello!@");
-		0xFF46->Func07D1();
-		Func097F(0xFF46, "@Intruder!@", 0x0005);
-		0xFF46->Func07D2();
-		0xFF46->set_schedule_type(WAIT);
-		var0000 = script 0xFF46 after 10 ticks {
+		GUARD18->Func07D1();
+		Func097F(GUARD18, "@Intruder!@", 0x0005);
+		GUARD18->Func07D2();
+		GUARD18->set_schedule_type(WAIT);
+		var0000 = script GUARD18 after 10 ticks {
 			nohalt;
 			call Func04BA;
 		};
 	}
 	if (event == SCRIPTED) {
-		if (item != 0xFF46->get_npc_object()) {
-			Func097F(0xFF46, "@Intruder!@", 0x0005);
-			0xFF46->Func07D2();
-			0xFF46->set_schedule_type(WAIT);
-			var0000 = script 0xFF46 after 10 ticks {
+		if (item != GUARD18->get_npc_object()) {
+			Func097F(GUARD18, "@Intruder!@", 0x0005);
+			GUARD18->Func07D2();
+			GUARD18->set_schedule_type(WAIT);
+			var0000 = script GUARD18 after 10 ticks {
 				nohalt;
 				call Func04BA;
 			};
 		} else {
-			0xFF46->clear_item_say();
-			0xFF46->run_schedule();
+			GUARD18->clear_item_say();
+			GUARD18->run_schedule();
 			0xFED6->show_npc_face0(0x0000);
 			say("\"These doors have been sealed by the Serpent of Order, and none shall enter. By approaching thus far, thou hath shown thyself to be mine enemy.\"");
 			say("\"Now I must kill thee, lest the Serpent judge me unworthy. Bless my blade, master!\"");
-			Func097F(0xFF46, "@I shall prevail!@", 0x0000);
-			Func09AD(0xFF46);
+			Func097F(GUARD18, "@I shall prevail!@", 0x0000);
+			Func09AD(GUARD18);
 			Func09AD(0xFF45);
 		}
 	}

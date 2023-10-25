@@ -39511,12 +39511,12 @@ void Func04BA object#(0x4BA) () {
 	var var0003;
 
 	if (event == DOUBLECLICK) {
-		0xFF46->show_npc_face(0x0000);
+		QUAEVEN->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = false;
 		add(["name", "job", "Fellowship", "bye"]);
 		if (var0000 == NIGHT) {
-			var0002 = Func08FC(0xFF46, QUAN);
+			var0002 = Func08FC(QUAEVEN, QUAN);
 			if (var0002) {
 				say("\"To have not the time to speak now. To talk after meeting.\"*");
 			} else {
@@ -39639,7 +39639,7 @@ void Func04BA object#(0x4BA) () {
 		say("\"To hope for your well-being and happiness.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092F(0xFF46);
+		Func092F(QUAEVEN);
 	}
 }
 
@@ -73390,7 +73390,7 @@ void Func08CE 0x8CE () {
 
 	var0000 = Func08F7(RUNEB);
 	var0001 = Func08F7(0xFF44);
-	var0002 = Func08F7(0xFF46);
+	var0002 = Func08F7(QUAEVEN);
 	var0003 = Func08F7(SPARK);
 	var0004 = Func0908();
 	say("The winged gargoyle begins his sermon.");
@@ -73399,8 +73399,8 @@ void Func08CE 0x8CE () {
 	}
 	say("\"To talk tonight about why The Fellowship is important to your lives. To know that each of us sought The Fellowship to feel complete. To have had dreams and longings.\"*");
 	if (var0002) {
-		0xFF46->say("\"To be very true.\"*");
-		0xFF46->hide();
+		QUAEVEN->say("\"To be very true.\"*");
+		QUAEVEN->hide();
 		QUAN->show_npc_face(0x0000);
 	}
 	say("\"To know that others who are not members have given up their dreams. To see that they succumb to the mediocrity of their lives to find stability.\"*");
