@@ -40162,7 +40162,7 @@ void Func04BF object#(0x4BF) () {
 	var var0009;
 
 	if (event == DOUBLECLICK) {
-		0xFF41->show_npc_face(0x0000);
+		MARTINGO->show_npc_face(0x0000);
 		var0000 = UI_is_pc_female();
 		var0001 = Func0908();
 		add(["name", "job", "bye"]);
@@ -40239,7 +40239,7 @@ void Func04BF object#(0x4BF) () {
 				if (var0005) {
 					IOLO->say("Iolo whispers to you. \"This fellow is quite daft. Be careful.\"");
 					IOLO->hide();
-					0xFF41->show_npc_face(0x0000);
+					MARTINGO->show_npc_face(0x0000);
 				}
 				remove("Spektran");
 				fallthrough;
@@ -40309,7 +40309,7 @@ void Func04BF object#(0x4BF) () {
 		say("\"Fine. Go away. It shall do thee good!\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF41);
+		Func092E(MARTINGO);
 	}
 }
 
