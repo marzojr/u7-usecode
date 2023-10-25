@@ -42708,7 +42708,7 @@ void Func04CF object#(0x4CF) () {
 	var var000D;
 
 	if (event == DOUBLECLICK) {
-		0xFF31->show_npc_face(0x0000);
+		YONGI->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = "the Avatar";
@@ -42721,7 +42721,7 @@ void Func04CF object#(0x4CF) () {
 			say("\"Ah, me good friend, Dupre. What kinna do fer ye this fine day?\"");
 			DUPRE->say("\"Ah, master Yongi, always ready to offer a tankard of thy finest.\"");
 			DUPRE->hide();
-			0xFF31->show_npc_face(0x0000);
+			YONGI->show_npc_face(0x0000);
 		}
 		if (!gflags[0x028C]) {
 			say("Tending the bar is a jovial-looking man. \"Welcome ta the Gilded Lizard.\"");
@@ -42846,7 +42846,7 @@ void Func04CF object#(0x4CF) () {
 	}
 	if (event == PROXIMITY) {
 		var000A = UI_part_of_day();
-		var000B = 0xFF31->get_npc_object()->get_schedule_type();
+		var000B = YONGI->get_npc_object()->get_schedule_type();
 		var000C = UI_die_roll(0x0001, 0x0004);
 		if ((var000A >= EARLY) && (var000A <= MORNING)) {
 			if (var000B == SLEEP) {
@@ -42869,7 +42869,7 @@ void Func04CF object#(0x4CF) () {
 				}
 			}
 		}
-		0xFF31->item_say(var000D);
+		YONGI->item_say(var000D);
 	}
 }
 

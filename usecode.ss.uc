@@ -2845,7 +2845,7 @@ void Func00FA shape#(0xFA) () {
 	var0000 = Func09A0(0x0005, 0x0001);
 	var0001 = Func09A0(0x0005, 0x0002);
 	if ((item == var0000) || (item == var0001)) {
-		var0002 = [0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B];
+		var0002 = [KARNAX, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B];
 		if (gflags[0x0270]) {
 			var0002 &= 0xFF29;
 		}
@@ -3463,25 +3463,25 @@ void Func0109 shape#(0x109) () {
 	}
 	if (event == SCRIPTED) {
 		if (Func0994() == 0x0002) {
-			if (!0xFF31->npc_nearby()) {
-				0xFF31->set_schedule_type(TEND_SHOP);
+			if (!KARNAX->npc_nearby()) {
+				KARNAX->set_schedule_type(TEND_SHOP);
 				abort;
 			}
 			var0001 = Func09A0(0x0002, 0x0001);
 			var0002 = [0x095D, 0x0477, 0x0000];
-			0xFF31->Func07D2();
-			0xFF31->set_npc_id(0xFF31->get_npc_id() + 0x0001);
-			0xFF31->clear_item_say();
-			var0003 = 0xFF31->find_nearby(ANY_SHAPE, 0x0014, MASK_NPC2);
+			KARNAX->Func07D2();
+			KARNAX->set_npc_id(KARNAX->get_npc_id() + 0x0001);
+			KARNAX->clear_item_say();
+			var0003 = KARNAX->find_nearby(ANY_SHAPE, 0x0014, MASK_NPC2);
 			var0004 = [];
 			for (var0007 in var0003 with var0005 to var0006) {
 				if (var0007->get_schedule_type() == WAIT) {
 					var0004 &= var0007;
 				}
 			}
-			if (0xFF31->get_npc_id() == 0x0008) {
+			if (KARNAX->get_npc_id() == 0x0008) {
 				AVATAR->clear_item_flag(DONT_MOVE);
-				0xFF31->set_npc_id(0x0000);
+				KARNAX->set_npc_id(0x0000);
 				UI_set_weather(CLEAR_WEATHER);
 				0xFF29->set_schedule_type(TALK);
 				var0008 = script Func09A0(0x0005, 0x0001) after 1000 ticks {
@@ -3490,8 +3490,8 @@ void Func0109 shape#(0x109) () {
 				};
 				abort;
 			}
-			if (0xFF31->get_npc_id() == 0x0007) {
-				0xFF31->show_npc_face0(0x0000);
+			if (KARNAX->get_npc_id() == 0x0007) {
+				KARNAX->show_npc_face0(0x0000);
 				say("\"The energies from beyond the Void now converge upon this place and time. It is the moment when Xenka shall move across the eons and bring us the light of prophecy...\"");
 				var0009 = AVATAR->find_nearby(0x02D6, 0x0014, MASK_NONE);
 				var0009->remove_item();
@@ -3505,7 +3505,7 @@ void Func0109 shape#(0x109) () {
 					actor frame cast_out;
 				};
 				Func097F(0xFF29, "@It is I...@", 0x0005);
-				Func097F(0xFF31, "@Come to us, Xenka!@", 0x0000);
+				Func097F(KARNAX, "@Come to us, Xenka!@", 0x0000);
 				var0008 = script Func09A0(0x0005, 0x0003) after 10 ticks {
 					nohalt;
 					call Func0109;
@@ -3513,58 +3513,58 @@ void Func0109 shape#(0x109) () {
 				gflags[0x0270] = true;
 				abort;
 			}
-			if (0xFF31->get_npc_id() == 0x0006) {
-				0xFF31->item_say("@Xenka is near!@");
+			if (KARNAX->get_npc_id() == 0x0006) {
+				KARNAX->item_say("@Xenka is near!@");
 				var000A = "@Xenka!@";
 				var0008 = script Func09A0(0x0005, 0x0003) after 10 ticks {
 					nohalt;
 					call Func0109;
 				};
 			}
-			if (0xFF31->get_npc_id() == 0x0005) {
+			if (KARNAX->get_npc_id() == 0x0005) {
 				UI_sprite_effect(ANIMATION_GREEN_BUBBLES, 0x0968, 0x0474, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-				0xFF31->item_say("@Invoke her name!@");
+				KARNAX->item_say("@Invoke her name!@");
 				var000A = "@Xenka!@";
 				var0008 = script Func09A0(0x0005, 0x0003) after 10 ticks {
 					nohalt;
 					call Func0109;
 				};
 			}
-			if (0xFF31->get_npc_id() == 0x0004) {
-				0xFF31->item_say("@The time is at hand!@");
+			if (KARNAX->get_npc_id() == 0x0004) {
+				KARNAX->item_say("@The time is at hand!@");
 				var000A = "@The time!@";
 				var0008 = script Func09A0(0x0005, 0x0003) after 10 ticks {
 					nohalt;
 					call Func0109;
 				};
 			}
-			if (0xFF31->get_npc_id() == 0x0003) {
-				0xFF31->item_say("@Xenka returns!@");
+			if (KARNAX->get_npc_id() == 0x0003) {
+				KARNAX->item_say("@Xenka returns!@");
 				var000A = "@She is pure.@";
 				var0008 = script Func09A0(0x0005, 0x0003) after 10 ticks {
 					nohalt;
 					call Func0109;
 				};
 			}
-			if (0xFF31->get_npc_id() == 0x0002) {
+			if (KARNAX->get_npc_id() == 0x0002) {
 				var0009 = UI_create_new_object(0x02D6);
 				if (var0009) {
 					var0009->set_item_frame(0x0006);
 					var0008 = UI_update_last_created(var0002);
 					UI_play_sound_effect(0x0046);
 				}
-				0xFF31->item_say("@Our vigil is over!@");
+				KARNAX->item_say("@Our vigil is over!@");
 				var000A = "@Xenka comes!@";
 				var0008 = script Func09A0(0x0005, 0x0003) after 10 ticks {
 					nohalt;
 					call Func0109;
 				};
 			}
-			if (0xFF31->get_npc_id() == 0x0001) {
+			if (KARNAX->get_npc_id() == 0x0001) {
 				UI_set_weather(SPARKLE);
 				UI_play_music(0x0041, var0001);
 				AVATAR->set_item_flag(DONT_MOVE);
-				0xFF31->item_say("@Long have we waited...@");
+				KARNAX->item_say("@Long have we waited...@");
 				var000A = "@No more!@";
 				var0008 = script Func09A0(0x0005, 0x0003) after 10 ticks {
 					nohalt;
@@ -3588,7 +3588,7 @@ void Func0109 shape#(0x109) () {
 		}
 		if (Func0994() == 0x001B) {
 			UI_init_conversation();
-			0xFF31->show_npc_face0(0x0000);
+			KARNAX->show_npc_face0(0x0000);
 			say("\"Thou shouldst know better than to meddle in the affairs of Fate, Thoxa. By merely talking with the Hero, thou mayest be condemning us.\"");
 			0xFF2D->show_npc_face1(0x0000);
 			say("\"We must intervene, Karnax. The very fabric that weaves the tapestry of the Cosmos may depend upon it.\"");
@@ -3599,7 +3599,7 @@ void Func0109 shape#(0x109) () {
 				var0000,
 				" greatest calamities!\"");
 			say("\"I must stop thee, before thou sendest us all to our doom!\"");
-			Func097F(0xFF31, "@I must stop thee...@", 0x0000);
+			Func097F(KARNAX, "@I must stop thee...@", 0x0000);
 			UI_remove_npc_face1();
 			UI_remove_npc_face0();
 			UI_end_conversation();
@@ -3616,7 +3616,7 @@ void Func0109 shape#(0x109) () {
 			};
 			Func097F(0xFF2D, "@Flam Mas Flam!@", 0x0002);
 			gflags[0x000A] = true;
-			var0008 = script 0xFF31 after 10 ticks {
+			var0008 = script KARNAX after 10 ticks {
 				nohalt;
 				actor frame reach_1h;
 				wait 2;
@@ -3629,7 +3629,7 @@ void Func0109 shape#(0x109) () {
 				actor frame standing;
 				call Func07EC;
 			};
-			var000D = 0xFF31->get_object_position();
+			var000D = KARNAX->get_object_position();
 			var000E = 0xFF2D->get_object_position();
 			UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, (var000E[0x0001] - 0x0002), (var000E[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			var000F = [-2,  0,  2,  0,  1,  0,  0];
@@ -15613,7 +15613,7 @@ void Func032B shape#(0x32B) () {
 		0xFEFB->set_item_flag(MET);
 		NEYOBI->set_item_flag(SI_ZOMBIE);
 		GWENNO->set_item_flag(SI_ZOMBIE);
-		var0008 = [AVATAR, SELINA, KALEN, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, HENCH1, HENCH2, HENCH3, 0xFEF0, 0xFEDB, 0xFF29, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
+		var0008 = [AVATAR, SELINA, KALEN, ALE, KARNAX, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, HENCH1, HENCH2, HENCH3, 0xFEF0, 0xFEDB, 0xFF29, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -17610,10 +17610,10 @@ void Func0363 shape#(0x363) () {
 						var0007 = 0xFF2D->get_object_position();
 						var0007[0x0001] += 0x000C;
 						var0007[0x0002] -= 0x0003;
-						0xFF31->move_object(var0007);
+						KARNAX->move_object(var0007);
 						UI_play_sound_effect(0x0051);
 						UI_sprite_effect(ANIMATION_TELEPORT2, var0007[0x0001], var0007[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-						var0005 = script 0xFF31 after 20 ticks {
+						var0005 = script KARNAX after 20 ticks {
 							nohalt;
 							call Func0109;
 						};
@@ -17624,7 +17624,7 @@ void Func0363 shape#(0x363) () {
 							actor frame ready;
 						};
 						var0005 = "@Thoxa!@" & ("" & ("@Vex Ort!@" & ("@Mas Ort!@" & ("@Vex Ort!@" & ("" & "@She lives!@")))));
-						Func094F(0xFF31, var0005);
+						Func094F(KARNAX, var0005);
 						abort;
 				}
 			} else {
@@ -21279,7 +21279,7 @@ void Func0400 object#(0x400) () {
 				nohalt;
 				call Func0636;
 			};
-			var0017 = [0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E];
+			var0017 = [KARNAX, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E];
 			if (!gflags[0x01CC]) {
 				var0017 = Func0988(0xFF2F, var0017);
 			}
@@ -21295,7 +21295,7 @@ void Func0400 object#(0x400) () {
 				var0003->move_object(Func084E(var0003, 0x0003));
 				var0003->set_new_schedules(MIDNIGHT, MAJOR_SIT, Func084E(var0003, 0x0003));
 				var0003->run_schedule();
-				if (var0003 == 0xFF31) {
+				if (var0003 == KARNAX) {
 					var0003->clear_item_flag(ASLEEP);
 					var0003->clear_item_flag(CHARMED);
 					var0003->clear_item_flag(CURSED);
@@ -21304,9 +21304,9 @@ void Func0400 object#(0x400) () {
 					var0003->clear_item_flag(PARALYZED);
 					var0003->clear_item_flag(POISONED);
 					var0003->clear_item_flag(DONT_MOVE);
-					0xFF31->set_npc_id(0x0000);
-					0xFF31->set_schedule_type(TALK);
-					var0000 = script 0xFF31 {
+					KARNAX->set_npc_id(0x0000);
+					KARNAX->set_schedule_type(TALK);
+					var0000 = script KARNAX {
 						face south;
 						actor frame standing;
 						actor frame cast_up;
@@ -56917,9 +56917,9 @@ void Func04CF object#(0x4CF) () {
 	var0005 = Func0953();
 	if (event == SCRIPTED) {
 		if (gflags[0x02FD]) {
-			0xFF31->item_say("@What a wonder!@");
-			0xFF31->Func07D1();
-			0xFF31->show_npc_face0(0x0000);
+			KARNAX->item_say("@What a wonder!@");
+			KARNAX->Func07D1();
+			KARNAX->show_npc_face0(0x0000);
 			say("\"I am honored to have been present for such a miracle! Even I had not expected anything this momentous.");
 			if (gflags[0x0004]) {
 				say("\"Now that the Tree of Balance thrives in this hallowed glade, it's strong roots shall begin healing the wrents in our land.");
@@ -56936,13 +56936,13 @@ void Func04CF object#(0x4CF) () {
 					", it is time that you return to thy quest.\"");
 			}
 			UI_remove_npc_face0();
-			var0006 = 0xFF31->get_object_position();
+			var0006 = KARNAX->get_object_position();
 			UI_sprite_effect(ANIMATION_TELEPORT2, var0006[0x0001], var0006[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			0xFF31->remove_npc();
+			KARNAX->remove_npc();
 		} else {
-			0xFF31->item_say(("@Well done, my " + var0002) + "!@");
-			0xFF31->Func07D1();
-			0xFF31->show_npc_face0(0x0000);
+			KARNAX->item_say(("@Well done, my " + var0002) + "!@");
+			KARNAX->Func07D1();
+			KARNAX->show_npc_face0(0x0000);
 			say("\"Thou hast found the Silver Seed! Now all that remains is for thee to plant it here in this hallowed glade.");
 			say("\"Xenka's prophecies spoke of the Hero restoring the Tree of Balance. But even Xenka herself could not say where the seed of such a tree could be found.");
 			say("\"When the Forest Master first entered our world we thought that perhaps he was to be the Hero from Another World. But we learned that the seed he possessed had been warped by his passage through the Void. It will never grow...\"");
@@ -56951,21 +56951,21 @@ void Func04CF object#(0x4CF) () {
 				var0002,
 				". It looks just large enough for the seed, as if it were the seed's very own cradle. The water here will nourish it well.\"");
 			UI_remove_npc_face0();
-			Func097F(0xFF31, "@Plant it now.@", 0x0002);
+			Func097F(KARNAX, "@Plant it now.@", 0x0002);
 		}
 	}
 	if (event == DOUBLECLICK) {
-		if (0xFF31->get_npc_id() != 0x0000) {
+		if (KARNAX->get_npc_id() != 0x0000) {
 			abort;
 		}
 		AVATAR->item_say("@Pardon me...@");
-		0xFF31->Func07D1();
-		Func097F(0xFF31, (("@Yes, my " + var0002) + "?@"), 0x0002);
-		0xFF31->set_schedule_type(TALK);
+		KARNAX->Func07D1();
+		Func097F(KARNAX, (("@Yes, my " + var0002) + "?@"), 0x0002);
+		KARNAX->set_schedule_type(TALK);
 	}
 	if (event == PROXIMITY) {
 		if ((Func09A0(0x0005, 0x0001)->get_item_quality() == 0x000A) && (!0xFF29->get_item_flag(MET))) {
-			0xFF31->set_schedule_type(WAIT);
+			KARNAX->set_schedule_type(WAIT);
 			var0007 = script Func09A0(0x0005, 0x0003) {
 				nohalt;
 				call Func0109;
@@ -56973,13 +56973,13 @@ void Func04CF object#(0x4CF) () {
 		}
 	}
 	if (event == STARTED_TALKING) {
-		0xFF31->run_schedule();
-		0xFF31->clear_item_say();
-		0xFF31->show_npc_face0(0x0000);
-		var0008 = 0xFF31->get_item_flag(MET);
+		KARNAX->run_schedule();
+		KARNAX->clear_item_say();
+		KARNAX->show_npc_face0(0x0000);
+		var0008 = KARNAX->get_item_flag(MET);
 		var0009 = false;
-		if (0xFF31->get_npc_id() == 0x001F) {
-			0xFF31->set_npc_id(0x0000);
+		if (KARNAX->get_npc_id() == 0x001F) {
+			KARNAX->set_npc_id(0x0000);
 			say("\"The bells are signaling the return of Xenka!\"");
 			say("\"Thou art the Hero from Another World. It is for thee that she doth return. We must hurry!\"");
 			var000A = AVATAR->get_object_position();
@@ -57030,7 +57030,7 @@ void Func04CF object#(0x4CF) () {
 			var0018 = [];
 			var000D = [];
 			var000E = [];
-			var0019 = [0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E];
+			var0019 = [KARNAX, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E];
 			var001A = 0x000A;
 			for (var0012 in var0019 with var001B to var001C) {
 				var001D = Func084E(var0012, var001A);
@@ -57050,12 +57050,12 @@ void Func04CF object#(0x4CF) () {
 			};
 			abort;
 		}
-		if (!0xFF31->get_item_flag(MET)) {
+		if (!KARNAX->get_item_flag(MET)) {
 			say("\"I am Karnax, a Xenkan monk. Please forgive our previous meeting, my ",
 				var0002,
 				".\"");
 			say("\"I have nothing against thee, but I fear that Thoxa's willful interference shall be the undoing of all for which we have prepared.\"");
-			0xFF31->set_item_flag(MET);
+			KARNAX->set_item_flag(MET);
 			add(["previous meeting", "Thoxa", "interference"]);
 		} else {
 			if ((gflags[0x0267] == true) && (!gflags[0x0274])) {
@@ -57382,12 +57382,12 @@ void Func04CF object#(0x4CF) () {
 				break;
 		}
 		if (gflags[0x026F]) {
-			0xFF31->show_npc_face0(0x0000);
+			KARNAX->show_npc_face0(0x0000);
 			Func08FA();
 		}
 	}
 	if (event == DEATH) {
-		Func08F5(0xFF31);
+		Func08F5(KARNAX);
 	}
 }
 
@@ -57445,7 +57445,7 @@ void Func04D1 object#(0x4D1) () {
 	}
 	var0004 = Func0953();
 	if (event == DOUBLECLICK) {
-		if (0xFF31->get_npc_id() != 0x0000) {
+		if (KARNAX->get_npc_id() != 0x0000) {
 			0xFF2F->item_say("@Be silent...@");
 			abort;
 		}
@@ -57725,7 +57725,7 @@ void Func04D3 object#(0x4D3) () {
 	}
 	var0007 = Func0953();
 	if (event == DOUBLECLICK) {
-		if (0xFF31->get_npc_id() != 0x0000) {
+		if (KARNAX->get_npc_id() != 0x0000) {
 			0xFF2D->item_say("@Not now...@");
 			abort;
 		}
@@ -57999,7 +57999,7 @@ void Func04D4 object#(0x4D4) () {
 		abort;
 	}
 	if (event == DOUBLECLICK) {
-		if (0xFF31->get_npc_id() != 0x0000) {
+		if (KARNAX->get_npc_id() != 0x0000) {
 			0xFF2C->item_say("@Not now...@");
 			abort;
 		}
@@ -58138,7 +58138,7 @@ void Func04D4 object#(0x4D4) () {
 		}
 	}
 	if (event == DEATH) {
-		Func08F5(0xFF31);
+		Func08F5(KARNAX);
 	}
 }
 
@@ -58223,7 +58223,7 @@ void Func04D5 object#(0x4D5) () {
 		}
 	}
 	if (event == DOUBLECLICK) {
-		if (0xFF31->get_npc_id() != 0x0000) {
+		if (KARNAX->get_npc_id() != 0x0000) {
 			0xFF2B->item_say("@Hush...@");
 			abort;
 		}
@@ -75915,8 +75915,8 @@ void Func075A object#(0x75A) () {
 		};
 		UI_sprite_effect(ANIMATION_TELEPORT, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		UI_play_sound_effect(0x0051);
-		0xFF31->set_schedule_type(WAIT);
-		var0001 = script 0xFF31 {
+		KARNAX->set_schedule_type(WAIT);
+		var0001 = script KARNAX {
 			face FACE_WEST;
 		};
 		var0002 = Func09A0(0x0000, 0x0001);
@@ -76862,22 +76862,22 @@ void Func076B object#(0x76B) () {
 		}
 		if (Func097D(PARTY, 0x0001, 0x0289, QUALITY_ANY, 0x000C)) {
 			var0000 = get_object_position();
-			0xFF31->move_object(var0000);
-			Func09AC(0xFF31, var0000[0x0001], var0000[0x0002], WAIT);
+			KARNAX->move_object(var0000);
+			Func09AC(KARNAX, var0000[0x0001], var0000[0x0002], WAIT);
 			UI_sprite_effect(ANIMATION_TELEPORT2, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			UI_play_sound_effect(0x0051);
 			var0001 = Func09A0(0x0000, 0x0001);
 			UI_play_music(0x003F, var0001);
-			var0002 = script 0xFF31 after 2 ticks {
+			var0002 = script KARNAX after 2 ticks {
 				nohalt;
 				call Func07D2;
 			};
-			Func097F(0xFF31, "@Avatar...@", 0x0003);
+			Func097F(KARNAX, "@Avatar...@", 0x0003);
 			var0002 = script AVATAR after 6 ticks {
 				nohalt;
 				call Func07D1;
 			};
-			var0002 = script 0xFF31 after 13 ticks {
+			var0002 = script KARNAX after 13 ticks {
 				nohalt;
 				call Func04CF;
 			};
@@ -77757,7 +77757,7 @@ void Func07AB object#(0x7AB) () {
 		if (!gflags[0x0273]) {
 			abort;
 		}
-		var0000 = [0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2A, 0xFF30, 0xFF2E];
+		var0000 = [KARNAX, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2A, 0xFF30, 0xFF2E];
 		if (0xFF29->get_item_flag(MET)) {
 			var0000 &= 0xFF29;
 		}
@@ -79080,7 +79080,7 @@ void Func07DE object#(0x7DE) () {
 	} else {
 		if (Func0994() == 0x0002) {
 			var0000 = [0x0974, 0x0470, 0x0000];
-			var0001 = [0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E];
+			var0001 = [KARNAX, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E];
 			if (0xFF29->get_item_flag(MET)) {
 				var0001 &= 0xFF29;
 			}
@@ -80208,19 +80208,19 @@ void Func07EC object#(0x7EC) () {
 	var var000A;
 
 	if ((event == SCRIPTED) && ((gflags[0x0007] == false) && (gflags[0x0008] == false))) {
-		var0000 = 0xFF31->get_object_position();
+		var0000 = KARNAX->get_object_position();
 		UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, (var0000[0x0001] - 0x0002), (var0000[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		UI_play_sound_effect(0x0082);
 		var0001 = 0xFF2D->get_npc_object()->find_nearby(0x0113, 0x0002, MASK_EGG);
-		var0002 = 0xFF31->set_to_attack(var0001, 0x0118);
-		var0003 = script 0xFF31 {
+		var0002 = KARNAX->set_to_attack(var0001, 0x0118);
+		var0003 = script KARNAX {
 			nohalt;
 			actor frame cast_up;
 			actor frame strike_1h;
 			continue;
 			attack;
 		};
-		var0004 = 0xFF2D->get_distance(0xFF31);
+		var0004 = 0xFF2D->get_distance(KARNAX);
 		var0005 = var0004 / 0x0002;
 		while (var0005 < 0x002D) {
 			var0003 = script 0xFF2D after var0005 ticks {
@@ -80231,7 +80231,7 @@ void Func07EC object#(0x7EC) () {
 				nohalt;
 				call Func075A;
 			};
-			var0003 = script 0xFF31 after var0005 ticks {
+			var0003 = script KARNAX after var0005 ticks {
 				nohalt;
 				actor frame cast_up;
 				actor frame cast_out;
@@ -80272,7 +80272,7 @@ void Func07EC object#(0x7EC) () {
 		var0003 = "@In Frio Grav!@" & ("@Mas Frio!@" & "@Take that!@");
 		Func094F(0xFF2D, var0003);
 		var0003 = "" & "@Ah!@";
-		Func094F(0xFF31, var0003);
+		Func094F(KARNAX, var0003);
 		var0003 = UI_create_new_object(0x0390);
 		if (var0003) {
 			var0003->set_item_flag(TEMPORARY);
@@ -80291,7 +80291,7 @@ void Func07EC object#(0x7EC) () {
 				call Func07EC;
 			};
 		}
-		var0003 = script 0xFF31 after ((var0007 + (var0004 / 0x0002)) + 0x0002) ticks {
+		var0003 = script KARNAX after ((var0007 + (var0004 / 0x0002)) + 0x0002) ticks {
 			nohalt;
 			call Func07ED;
 		};
@@ -80324,14 +80324,14 @@ void Func07ED object#(0x7ED) () {
 		UI_set_weather(CLEAR_WEATHER);
 		gflags[0x0008] = false;
 		UI_init_conversation();
-		0xFF31->show_npc_face0(0x0000);
+		KARNAX->show_npc_face0(0x0000);
 		say("\"Hero, listen to me before the fires consume me! Beware of thy friends -- they shall only bring destruction upon thee!\"");
 		UI_end_conversation();
-		Func097F(0xFF31, "@Vile witch!@", 0x0007);
+		Func097F(KARNAX, "@Vile witch!@", 0x0007);
 		var0000 = get_object_position();
 		UI_sprite_effect(ANIMATION_SMALL_RING_BLAST, (var0000[0x0001] - 0x0002), (var0000[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		UI_play_sound_effect(0x002A);
-		var0001 = script 0xFF31 after 6 ticks {
+		var0001 = script KARNAX after 6 ticks {
 			nohalt;
 			actor frame bowing;
 			wait 2;
@@ -80373,7 +80373,7 @@ void Func07ED object#(0x7ED) () {
 			// does not exist. Maybe they are just for making the NPCs move to
 			// where var0005 is?
 			Func090E(0xFF2D, var0005, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, PROXIMITY, true);
-			Func090E(0xFF31, var0005, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, PROXIMITY, true);
+			Func090E(KARNAX, var0005, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, PROXIMITY, true);
 			var0001 = script var0005 after (var0007 - 0x0002) ticks {
 				call Func07ED;
 			};
@@ -80386,8 +80386,8 @@ void Func07ED object#(0x7ED) () {
 		var0000 = get_object_position();
 		UI_sprite_effect(ANIMATION_MEDIUM_RING_BLAST, var0000[0x0001], var0000[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		UI_play_sound_effect(0x002A);
-		0xFF31->set_schedule_type(WAIT);
-		var0001 = script 0xFF31 {
+		KARNAX->set_schedule_type(WAIT);
+		var0001 = script KARNAX {
 			say "@Aaahhh!@";
 			actor frame bowing;
 			wait 2;
@@ -80461,14 +80461,14 @@ void Func07EE object#(0x7EE) () {
 	}
 	if ((event == SCRIPTED) && (gflags[0x000A] == true)) {
 		0xFF2D->set_schedule_type(WAIT);
-		var0002 = 0xFF31->get_object_position();
+		var0002 = KARNAX->get_object_position();
 		UI_play_sound_effect(0x0051);
 		UI_sprite_effect(ANIMATION_TELEPORT2, var0002[0x0001], var0002[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-		0xFF31->remove_npc();
+		KARNAX->remove_npc();
 		var0001 = UI_create_new_object(0x0390);
 		if (var0001) {
 			var0001->set_item_flag(TEMPORARY);
-			var0001 = UI_update_last_created(0xFF31->get_object_position());
+			var0001 = UI_update_last_created(KARNAX->get_object_position());
 		}
 		Func097F(0xFF2D, "@Goodbye...@", 0x0002);
 		Func097F(0xFF2D, "@Hero...@", 0x0016);
@@ -94315,7 +94315,7 @@ var Func084D 0x84D (var var0000, var var0001) {
 		return FARM;
 	}
 	if ((var0001 == 0x0003) || (var0001 == 0x000A)) {
-		if ((var0000 == 0xFF31) || (var0000 == 0xFF29)) {
+		if ((var0000 == KARNAX) || (var0000 == 0xFF29)) {
 			return TEND_SHOP;
 		}
 		return MAJOR_SIT;
@@ -94339,7 +94339,7 @@ var Func084D 0x84D (var var0000, var var0001) {
 		return TEND_SHOP;
 	}
 	if (var0001 == 0x0007) {
-		if ((var0000 == 0xFF29) || ((var0000 == 0xFF2F) || (var0000 == 0xFF31))) {
+		if ((var0000 == 0xFF29) || ((var0000 == 0xFF2F) || (var0000 == KARNAX))) {
 			return DESK_WORK;
 		}
 		if ((var0000 == 0xFF2D) || (var0000 == 0xFF2B)) {
@@ -94369,7 +94369,7 @@ var Func084E 0x84E (var var0000, var var0001) {
 	if (var0000 > 0x0000) {
 		var0000 = var0000->get_npc_number();
 	}
-	if (var0000 == 0xFF31) {
+	if (var0000 == KARNAX) {
 		if (var0001 == 0x0001) {
 			return [0x096D, 0x0464, 0x0000];
 		}
@@ -105801,7 +105801,7 @@ void Func08F2 0x8F2 (var var0000) {
 	var var0003;
 
 	var0000[0x0002] -= 0x0003;
-	var0001 = [0xFF2D, 0xFF2C, 0xFF2B, 0xFF31, 0xFF2F, 0xFF2A, 0xFF30, 0xFF2E];
+	var0001 = [0xFF2D, 0xFF2C, 0xFF2B, KARNAX, 0xFF2F, 0xFF2A, 0xFF30, 0xFF2E];
 	var0002 = 0x0000;
 	while (var0002 < 0x0007) {
 		if (var0002 > 0x0003) {
@@ -105831,10 +105831,10 @@ void Func08F4 0x8F4 () {
 	if (Func08F3() && (!0xFF29->get_item_flag(MET))) {
 		var0000 = AVATAR->get_object_position();
 		var0000[0x0002] -= 0x0002;
-		0xFF31->move_object(var0000);
+		KARNAX->move_object(var0000);
 		UI_play_sound_effect(0x0051);
-		0xFF31->set_npc_id(0x001F);
-		0xFF31->set_schedule_type(TALK);
+		KARNAX->set_npc_id(0x001F);
+		KARNAX->set_schedule_type(TALK);
 	}
 }
 
@@ -105867,7 +105867,7 @@ void Func08F5 0x8F5 (var var0000) {
 	UI_sprite_effect(ANIMATION_TELEPORT2, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 	UI_sprite_effect(ANIMATION_TELEPORT, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 	UI_sprite_effect(ANIMATION_TELEPORT, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-	var0002 = [0xFF2D, 0xFF2C, 0xFF2B, 0xFF31, 0xFF2F, 0xFF2A, 0xFF30, 0xFF2E];
+	var0002 = [0xFF2D, 0xFF2C, 0xFF2B, KARNAX, 0xFF2F, 0xFF2A, 0xFF30, 0xFF2E];
 	for (var0005 in var0002 with var0003 to var0004) {
 		var0005->halt_scheduled();
 		var0006 = var0005->get_npc_object();
