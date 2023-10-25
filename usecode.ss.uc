@@ -15613,7 +15613,7 @@ void Func032B shape#(0x32B) () {
 		0xFEFB->set_item_flag(MET);
 		NEYOBI->set_item_flag(SI_ZOMBIE);
 		GWENNO->set_item_flag(SI_ZOMBIE);
-		var0008 = [AVATAR, SELINA, KALEN, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, 0xFF33, 0xFF35, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, 0xFF4B, 0xFF4A, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
+		var0008 = [AVATAR, SELINA, KALEN, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, 0xFF33, 0xFF35, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, RABINDRINATH, 0xFF4A, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -55601,17 +55601,17 @@ void Func04B5 object#(0x4B5) () {
 	var0003 = Func097D(PARTY, 0x0001, 0x017F, QUALITY_ANY, 0x0001);
 	var0004 = Func097D(PARTY, 0x0001, 0x0289, QUALITY_ANY, 0x0003);
 	var0005 = Func097D(PARTY, 0x0001, 0x0289, QUALITY_ANY, 0x000B);
-	var0006 = 0xFF4B->get_npc_id();
+	var0006 = RABINDRINATH->get_npc_id();
 	if (event == SCRIPTED) {
 		if ((var0006 == 0x0001) || ((var0006 == 0x0007) || (var0006 == 0x0008))) {
 			if (var0006 == 0x0001) {
-				0xFF4B->set_npc_id(0x0000);
+				RABINDRINATH->set_npc_id(0x0000);
 			}
 			if (var0006 == 0x0007) {
-				0xFF4B->set_npc_id(0x0005);
+				RABINDRINATH->set_npc_id(0x0005);
 			}
 			if (var0006 == 0x0008) {
-				0xFF4B->set_npc_id(0x0006);
+				RABINDRINATH->set_npc_id(0x0006);
 			}
 			UI_play_sound_effect(0x0029);
 			AVATAR->obj_sprite_effect(ANIMATION_BIG_BLAST, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
@@ -55622,8 +55622,8 @@ void Func04B5 object#(0x4B5) () {
 		} else {
 			UI_play_sound_effect(0x0030);
 			AVATAR->obj_sprite_effect(ANIMATION_POOF, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			0xFF4B->set_schedule_type(TALK);
-			var0007 = script 0xFF4B {
+			RABINDRINATH->set_schedule_type(TALK);
+			var0007 = script RABINDRINATH {
 				actor frame reach_1h;
 				actor frame raise_1h;
 				actor frame raise_2h;
@@ -55637,25 +55637,25 @@ void Func04B5 object#(0x4B5) () {
 	}
 	if (event == DOUBLECLICK) {
 		Func097F(AVATAR, "@Excuse me...@", 0x0000);
-		Func097F(0xFF4B, "@Who art thou?@", 0x0002);
-		var0007 = script 0xFF4B {
+		Func097F(RABINDRINATH, "@Who art thou?@", 0x0002);
+		var0007 = script RABINDRINATH {
 			nop2;
 		};
-		0xFF4B->set_schedule_type(TALK);
-		0xFF4B->Func07D1();
+		RABINDRINATH->set_schedule_type(TALK);
+		RABINDRINATH->Func07D1();
 	}
 	if (event == STARTED_TALKING) {
-		0xFF4B->run_schedule();
-		0xFF4B->clear_item_say();
-		0xFF4B->show_npc_face0(0x0000);
+		RABINDRINATH->run_schedule();
+		RABINDRINATH->clear_item_say();
+		RABINDRINATH->show_npc_face0(0x0000);
 		if (var0006 == 0x0000) {
 			say("\"Hast thou seen the firebird's death or followed thy dreams to seek power? Canst thou touch the face of a dream that clutches thee with bony claws? How wouldst thou know the power that leaps from dream to dream, devouring death as it went?\"");
-			0xFF4B->set_item_flag(MET);
+			RABINDRINATH->set_item_flag(MET);
 			say("\"Dost thou have the protection of Courage to face thy dreams? Can thine helm face the power and kiss the lips of sweet death?\"");
 			if (var0003 == true) {
-				0xFF4B->set_npc_id(0x0002);
+				RABINDRINATH->set_npc_id(0x0002);
 			} else {
-				0xFF4B->set_npc_id(0x0001);
+				RABINDRINATH->set_npc_id(0x0001);
 			}
 			Func085C();
 			abort;
@@ -55664,16 +55664,16 @@ void Func04B5 object#(0x4B5) () {
 			if (var0003 == true) {
 				say("\"Curse the pot metal protection that thou dost call Courage! Thou hast not danced with the maker of dreams upon the cold stone grave of power...\"");
 			}
-			0xFF4B->set_npc_id(0x0005);
+			RABINDRINATH->set_npc_id(0x0005);
 			Func085D(0x0B66, 0x05C7);
 			abort;
 		}
 		if (var0006 == 0x0005) {
 			say("\"Dost thou have the glass petals of Love to bind thy dreams? Canst thou swim the seas of death and come forth the father of power?\"");
 			if (var0004 == true) {
-				0xFF4B->set_npc_id(0x0003);
+				RABINDRINATH->set_npc_id(0x0003);
 			} else {
-				0xFF4B->set_npc_id(0x0007);
+				RABINDRINATH->set_npc_id(0x0007);
 			}
 			Func085C();
 			abort;
@@ -55682,16 +55682,16 @@ void Func04B5 object#(0x4B5) () {
 			if (var0004 == true) {
 				say("\"A thousand plagues upon the putrid flower thou dost call Love! Thou canst not walk amongst the clouds of dreams and reap the withered souls of weaklings...\"");
 			}
-			0xFF4B->set_npc_id(0x0006);
+			RABINDRINATH->set_npc_id(0x0006);
 			Func085D(0x0B3A, 0x0594);
 			abort;
 		}
 		if (var0006 == 0x0006) {
 			say("\"Dost thou have the reflection of Truth to make thy dreams real? Canst thou mirror the ride of the spiraling serpent of death down to the peak of moonlit dreams?\"");
 			if (var0005 == true) {
-				0xFF4B->set_npc_id(0x0004);
+				RABINDRINATH->set_npc_id(0x0004);
 			} else {
-				0xFF4B->set_npc_id(0x0008);
+				RABINDRINATH->set_npc_id(0x0008);
 			}
 			Func085C();
 			abort;
@@ -55701,10 +55701,10 @@ void Func04B5 object#(0x4B5) () {
 				say("\"Damnation to the false reflection that thou dost call Truth! Thou didst not fly to the vaulted tombs of vilified saints to grasp at the reins of the sun...\"");
 				say("\"Nooooo!\"");
 				UI_earthquake(0x0005);
-				0xFF4B->kill_npc();
+				RABINDRINATH->kill_npc();
 			}
 		} else {
-			0xFF4B->set_npc_id(0x0001);
+			RABINDRINATH->set_npc_id(0x0001);
 			Func085C();
 		}
 	}
@@ -55915,7 +55915,7 @@ void Func04B6 object#(0x4B6) () {
 		}
 		if ((var0004 == true) && (!gflags[0x020D])) {
 			if (var0015 == false) {
-				var001A = 0xFF4B->get_item_flag(DEAD);
+				var001A = RABINDRINATH->get_item_flag(DEAD);
 				if (var001A) {
 					say("\"I am Siranush. I have been expecting thee...\"");
 					say("\"Now that the foul mage Rabindrinath is dead, we have some hope of escaping his evil spell.\"");
@@ -96266,8 +96266,8 @@ void Func085C 0x85C () {
 	var var0000;
 	var var0001;
 
-	var0000 = 0xFF4B->find_direction(AVATAR);
-	var0001 = script 0xFF4B {
+	var0000 = RABINDRINATH->find_direction(AVATAR);
+	var0001 = script RABINDRINATH {
 		face var0000;
 		actor frame raise_2h;
 		actor frame raise_1h;
@@ -96285,12 +96285,12 @@ void Func085C 0x85C () {
 void Func085D 0x85D (var var0000, var var0001) {
 	var var0002;
 
-	var0002 = 0xFF4B->get_object_position();
+	var0002 = RABINDRINATH->get_object_position();
 	UI_sprite_effect(ANIMATION_LIGHTNING, var0002[0x0001], var0002[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 	UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, var0002[0x0001], var0002[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-	0xFF4B->move_object([var0000, var0001, 0x0000]);
-	0xFF4B->set_new_schedules(MIDNIGHT, TEND_SHOP, [var0000, var0001]);
-	0xFF4B->run_schedule();
+	RABINDRINATH->move_object([var0000, var0001, 0x0000]);
+	RABINDRINATH->set_new_schedules(MIDNIGHT, TEND_SHOP, [var0000, var0001]);
+	RABINDRINATH->run_schedule();
 }
 
 extern var Func0954 0x954 ();

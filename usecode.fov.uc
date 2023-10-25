@@ -38848,7 +38848,7 @@ void Func04B5 object#(0x4B5) () {
 	var var0001;
 
 	if (event == DOUBLECLICK) {
-		0xFF4B->show_npc_face(0x0000);
+		INFORLEM->show_npc_face(0x0000);
 		var0000 = false;
 		var0001 = UI_part_of_day();
 		add(["name", "job", "bye"]);
@@ -38945,7 +38945,7 @@ void Func04B5 object#(0x4B5) () {
 		say("\"To expect to see you again, human.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092F(0xFF4B);
+		Func092F(INFORLEM);
 	}
 }
 
