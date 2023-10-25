@@ -84156,7 +84156,7 @@ void Func0808 0x808 (var var0000, var var0001) {
 		item->Func07D1();
 		Func097F(item, "@Yes?@", 0x0002);
 		var0006 = get_npc_number();
-		if ((var0006 == MUSIC01) || ((var0006 == 0xFF39) || (var0006 == 0xFF38))) {
+		if ((var0006 == MUSIC01) || ((var0006 == MUSIC02) || (var0006 == 0xFF38))) {
 			set_schedule_type(STANDTHERE);
 			item->Func07D2();
 			var0006 = 0x0400 - var0006;

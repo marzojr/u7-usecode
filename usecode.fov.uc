@@ -41484,7 +41484,7 @@ void Func04C7 object#(0x4C7) () {
 	var var0008;
 
 	if (event == DOUBLECLICK) {
-		0xFF39->show_npc_face(0x0000);
+		DENTON->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = Func08F7(DUPRE);
@@ -41504,7 +41504,7 @@ void Func04C7 object#(0x4C7) () {
 			say("\"Greetings to thee, Sir Dupre. Art thou back again for thy study of wines for Brommer?\"");
 			DUPRE->say("\"Why, ah, yes, my good friend, Denton. I am, uh, still conducting that study.\" He turns to you and shrugs, grinning sheepishly.");
 			DUPRE->hide();
-			0xFF39->show_npc_face(0x0000);
+			DENTON->show_npc_face(0x0000);
 		}
 		if (!gflags[0x0270]) {
 			say("The man before you seems to stare at you blankly.");
@@ -41635,7 +41635,7 @@ void Func04C7 object#(0x4C7) () {
 							", we have heard that one before. 'Tis best we leave him before he indulges in another joke.\"");
 						IOLO->hide();
 					}
-					0xFF39->show_npc_face(0x0000);
+					DENTON->show_npc_face(0x0000);
 					UI_push_answers();
 					add(["to get to the other side", "I don't know"]);
 				} else {
@@ -41672,7 +41672,7 @@ void Func04C7 object#(0x4C7) () {
 				if (var0005) {
 					SPARK->say("\"This Denton fellow is really long-winded.\"*");
 					SPARK->hide();
-					0xFF39->show_npc_face(0x0000);
+					DENTON->show_npc_face(0x0000);
 				}
 				say("\"Strive for unity seems to mean that The Fellowship wants others to work together for the weal of society. Trust thy brother implies that each person should not question the actions of others. Worthiness precedes reward indicates that The Fellowship's attitude towards reward is that one must do well to be rewarded.\"");
 				var0007 = UI_wearing_fellowship();
@@ -41716,7 +41716,7 @@ void Func04C7 object#(0x4C7) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF39);
+		Func092E(DENTON);
 	}
 }
 
