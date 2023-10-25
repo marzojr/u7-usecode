@@ -42429,10 +42429,10 @@ void Func04CD object#(0x4CD) () {
 	var var0005;
 
 	if (event == DOUBLECLICK) {
-		0xFF33->show_npc_face(0x0000);
+		ZAKSAM->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
-		var0002 = 0xFF33->get_npc_object()->get_schedule_type();
+		var0002 = ZAKSAM->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (!gflags[0x028A]) {
 			say("A strong, powerful man looks at you and nods acknowledgment.");
@@ -42517,7 +42517,7 @@ void Func04CD object#(0x4CD) () {
 		say("\"May thy strength be thy guide.\"*");
 	}
 	if (event == PROXIMITY) {
-		var0002 = 0xFF33->get_npc_object()->get_schedule_type();
+		var0002 = ZAKSAM->get_npc_object()->get_schedule_type();
 		var0003 = UI_part_of_day();
 		var0004 = UI_die_roll(0x0001, 0x0004);
 		if ((var0003 == NIGHT) || ((var0003 == MIDNIGHT) || (var0003 == EARLY))) {
@@ -42546,7 +42546,7 @@ void Func04CD object#(0x4CD) () {
 				var0005 = "@Mmmmm, excellent wine!@";
 			}
 		}
-		0xFF33->item_say(var0005);
+		ZAKSAM->item_say(var0005);
 	}
 }
 

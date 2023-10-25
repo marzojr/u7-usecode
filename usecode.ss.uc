@@ -15613,7 +15613,7 @@ void Func032B shape#(0x32B) () {
 		0xFEFB->set_item_flag(MET);
 		NEYOBI->set_item_flag(SI_ZOMBIE);
 		GWENNO->set_item_flag(SI_ZOMBIE);
-		var0008 = [AVATAR, SELINA, KALEN, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, 0xFF33, HENCH2, HENCH3, 0xFEF0, 0xFEDB, 0xFF29, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
+		var0008 = [AVATAR, SELINA, KALEN, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, HENCH1, HENCH2, HENCH3, 0xFEF0, 0xFEDB, 0xFF29, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -42093,7 +42093,7 @@ void Func0440 object#(0x440) () {
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		AVATAR->set_camera();
 		gflags[0x008B] = false;
-		0xFF33->run_schedule();
+		HENCH1->run_schedule();
 		HENCH2->run_schedule();
 		HENCH3->run_schedule();
 		0xFEDB->run_schedule();
@@ -56796,36 +56796,36 @@ void Func04CD object#(0x4CD) () {
 	var0002 = Func0953();
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("Could we speak?");
-		0xFF33->Func07D1();
-		Func09AD(0xFF33);
+		HENCH1->Func07D1();
+		Func09AD(HENCH1);
 	}
 	if (event == PROXIMITY) {
-		var0003 = 0xFF33->get_distance(AVATAR);
+		var0003 = HENCH1->get_distance(AVATAR);
 		if (UI_get_random(0x000C) > var0003) {
 			Func097F(item, "@'Tis him!@", 0x0005);
-			Func09AD(0xFF33);
+			Func09AD(HENCH1);
 		} else {
 			if (UI_get_music_track() != 0x000C) {
 				UI_play_music(0x000C, Func09A0(0x0005, 0x0001));
 			}
 			var0004 = UI_get_random(0x0006);
 			if (var0004 == 0x0001) {
-				0xFF33->item_say("@I am hungry!@");
+				HENCH1->item_say("@I am hungry!@");
 			}
 			if (var0004 == 0x0002) {
-				0xFF33->item_say("@Where is the food?@");
+				HENCH1->item_say("@Where is the food?@");
 			}
 			if (var0004 == 0x0003) {
-				0xFF33->item_say("@Nothing but dust...@");
+				HENCH1->item_say("@Nothing but dust...@");
 			}
 			if (var0004 == 0x0004) {
-				0xFF33->item_say("@Must eat...@");
+				HENCH1->item_say("@Must eat...@");
 			}
 			if (var0004 == 0x0005) {
-				0xFF33->item_say("@There must be food!@");
+				HENCH1->item_say("@There must be food!@");
 			}
 			if (var0004 == 0x0006) {
-				0xFF33->item_say("@So hungry!@");
+				HENCH1->item_say("@So hungry!@");
 			}
 		}
 	}
@@ -106990,7 +106990,7 @@ void Func0919 0x919 (var var0000) {
 	var var0006;
 	var var0007;
 
-	var0001 = [0xFEDB, 0xFF33, HENCH2, HENCH3];
+	var0001 = [0xFEDB, HENCH1, HENCH2, HENCH3];
 	if (HENCH3->get_npc_id() == 0x0000) {
 		for (var0004 in var0001 with var0002 to var0003) {
 			var0004->clear_item_say();
