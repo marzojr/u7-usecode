@@ -39718,11 +39718,11 @@ void Func04BC object#(0x4BC) () {
 	var var0004;
 
 	if (event == DOUBLECLICK) {
-		0xFF44->show_npc_face(0x0000);
+		SARPLING->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
-		var0001 = 0xFF44->get_npc_object()->get_schedule_type();
+		var0001 = SARPLING->get_npc_object()->get_schedule_type();
 		if (var0000 == NIGHT) {
-			var0002 = Func08FC(0xFF44, QUAN);
+			var0002 = Func08FC(SARPLING, QUAN);
 			if (var0002) {
 				say("The gargoyle is too involved with the Fellowship meeting to talk to you at this moment.*");
 			} else {
@@ -39831,7 +39831,7 @@ void Func04BC object#(0x4BC) () {
 		say("\"To give you farewell, human.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092F(0xFF44);
+		Func092F(SARPLING);
 	}
 }
 
@@ -73389,7 +73389,7 @@ void Func08CE 0x8CE () {
 	var var0005;
 
 	var0000 = Func08F7(RUNEB);
-	var0001 = Func08F7(0xFF44);
+	var0001 = Func08F7(SARPLING);
 	var0002 = Func08F7(QUAEVEN);
 	var0003 = Func08F7(SPARK);
 	var0004 = Func0908();
@@ -73411,8 +73411,8 @@ void Func08CE 0x8CE () {
 	}
 	say("\"To see them begin to produce unreal ideas and become misaligned. To stray from the true path to what they seek. To lose contact with reality.\" He sighs. \"To find failure, not success in what they do.\"*");
 	if (var0001) {
-		0xFF44->say("\"To be very sad.\"*");
-		0xFF44->hide();
+		SARPLING->say("\"To be very sad.\"*");
+		SARPLING->hide();
 		QUAN->show_npc_face(0x0000);
 	}
 	say("\"To know,\" he smiles, \"that each of the members present has faced such an awakening into the real world. To find in the order a clear path to reach what we seek!\"~~ The members present all stand and shout.*");

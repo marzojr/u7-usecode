@@ -56304,44 +56304,44 @@ void Func04BC object#(0x4BC) () {
 		Func0809();
 		abort;
 	}
-	if ((event == DOUBLECLICK) && (0xFF44->get_schedule_type() != WAIT)) {
+	if ((event == DOUBLECLICK) && (GUARD20->get_schedule_type() != WAIT)) {
 		AVATAR->item_say("@Greetings!@");
-		0xFF44->Func07D1();
-		Func097F(0xFF44, "@Keep away!@", 0x0005);
-		0xFF44->Func07D2();
-		0xFF44->set_schedule_type(WAIT);
-		var0000 = script 0xFF44 after 10 ticks {
+		GUARD20->Func07D1();
+		Func097F(GUARD20, "@Keep away!@", 0x0005);
+		GUARD20->Func07D2();
+		GUARD20->set_schedule_type(WAIT);
+		var0000 = script GUARD20 after 10 ticks {
 			nohalt;
 			call Func04BC;
 		};
 	}
 	if (event == SCRIPTED) {
-		if (item != 0xFF44->get_npc_object()) {
-			Func097F(0xFF44, "@Keep Away!@", 0x0005);
-			0xFF44->Func07D2();
-			0xFF44->set_schedule_type(WAIT);
-			var0000 = script 0xFF44 after 10 ticks {
+		if (item != GUARD20->get_npc_object()) {
+			Func097F(GUARD20, "@Keep Away!@", 0x0005);
+			GUARD20->Func07D2();
+			GUARD20->set_schedule_type(WAIT);
+			var0000 = script GUARD20 after 10 ticks {
 				nohalt;
 				call Func04BC;
 			};
 		} else {
-			0xFF44->clear_item_say();
-			0xFF44->set_schedule_type(HOUND);
+			GUARD20->clear_item_say();
+			GUARD20->set_schedule_type(HOUND);
 			0xFED6->show_npc_face0(0x0000);
 			say("\"Thou art not permitted here. It is dangerous here. The forces beyond these doors are not of mortal understanding.\"");
-			Func097F(0xFF44, "@Be on thy way!@", 0x0000);
+			Func097F(GUARD20, "@Be on thy way!@", 0x0000);
 		}
 	}
 	if (event == PROXIMITY) {
 		var0001 = UI_get_random(0x000A);
 		if (var0001 == 0x0006) {
-			Func097F(0xFF44, "@I asked nicely...@", 0x0000);
-			Func09AD(0xFF44);
+			Func097F(GUARD20, "@I asked nicely...@", 0x0000);
+			Func09AD(GUARD20);
 			abort;
 		}
 		if (var0001 < 0x0006) {
 			var0002 = ["@Move on!@", "@Dangers lurk here.@", "@Thou must go!@", "@I beg thee to go...@", "@Please leave.@"];
-			Func097F(0xFF44, var0002[var0001], 0x0000);
+			Func097F(GUARD20, var0002[var0001], 0x0000);
 		}
 	}
 }
