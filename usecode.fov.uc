@@ -39075,7 +39075,7 @@ void Func04B7 object#(0x4B7) () {
 	var var0005;
 
 	if (event == DOUBLECLICK) {
-		0xFF49->show_npc_face(0x0000);
+		TEREGUS->show_npc_face(0x0000);
 		var0000 = Func0908();
 		add(["name", "job", "bye"]);
 		if (!gflags[0x0248]) {
@@ -39227,7 +39227,7 @@ void Func04B7 object#(0x4B7) () {
 		say("\"To tell you goodbye for now, human. To return and be welcome.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092F(0xFF49);
+		Func092F(TEREGUS);
 	}
 }
 

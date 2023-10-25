@@ -56181,14 +56181,14 @@ void Func04B7 object#(0x4B7) () {
 	var var0002;
 
 	if (event == DOUBLECLICK) {
-		0xFF49->item_say("@Dammit, I need water!@");
+		THIEF3->item_say("@Dammit, I need water!@");
 	}
 	if ((event == STARTED_TALKING) || (event == PROXIMITY)) {
 		var0000 = UI_die_roll(0x0001, 0x0003);
 		var0001 = ["Just a drop!", "Water, dammit!", "I have to have water!!!"];
 		var0002 = var0001[var0000];
-		0xFF49->item_say(var0002);
-		0xFF49->set_schedule_type(TEND_SHOP);
+		THIEF3->item_say(var0002);
+		THIEF3->set_schedule_type(TEND_SHOP);
 	}
 }
 
