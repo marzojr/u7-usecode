@@ -56387,29 +56387,29 @@ void Func04BE object#(0x4BE) () {
 		Func0809();
 		abort;
 	}
-	if ((event == DOUBLECLICK) && (0xFF42->get_schedule_type() != WAIT)) {
+	if ((event == DOUBLECLICK) && (GUARD17->get_schedule_type() != WAIT)) {
 		AVATAR->item_say("@Pardon me...@");
-		0xFF42->Func07D1();
-		Func097F(0xFF42, "@Hold!@", 0x0005);
-		0xFF42->Func07D2();
-		0xFF42->set_schedule_type(WAIT);
-		var0000 = script 0xFF42 after 10 ticks {
+		GUARD17->Func07D1();
+		Func097F(GUARD17, "@Hold!@", 0x0005);
+		GUARD17->Func07D2();
+		GUARD17->set_schedule_type(WAIT);
+		var0000 = script GUARD17 after 10 ticks {
 			nohalt;
 			call Func04BE;
 		};
 	}
 	if (event == SCRIPTED) {
-		if (item != 0xFF42->get_npc_object()) {
-			Func097F(0xFF42, "@Hold!@", 0x0005);
-			0xFF42->Func07D2();
-			0xFF42->set_schedule_type(WAIT);
-			var0000 = script 0xFF42 after 10 ticks {
+		if (item != GUARD17->get_npc_object()) {
+			Func097F(GUARD17, "@Hold!@", 0x0005);
+			GUARD17->Func07D2();
+			GUARD17->set_schedule_type(WAIT);
+			var0000 = script GUARD17 after 10 ticks {
 				nohalt;
 				call Func04BE;
 			};
 		} else {
-			0xFF42->clear_item_say();
-			0xFF42->run_schedule();
+			GUARD17->clear_item_say();
+			GUARD17->run_schedule();
 			0xFED6->show_npc_face0(0x0000);
 			say("\"Thou art not permitted here! I and my kind are the only beings allowed to prowl these tunnels. We are here to maintain Order.\"");
 			say("\"Unless thou canst show me thy Medallion of Order, I shall have to slay thee. Dost thou have one?\"");
@@ -56419,16 +56419,16 @@ void Func04BE object#(0x4BE) () {
 				if (var0001 != AVATAR) {
 					0x0000->set_conversation_slot();
 					say("\"Aha! Then die, Spawn of Chaos!\"");
-					Func097F(0xFF42, "@To battle!@", 0x0000);
+					Func097F(GUARD17, "@To battle!@", 0x0000);
 				} else {
 					say("\"Thou dost lie! Now I must certainly slay thee.\"");
-					Func097F(0xFF42, "@Die, Spawn of Chaos!@", 0x0000);
+					Func097F(GUARD17, "@Die, Spawn of Chaos!@", 0x0000);
 				}
 			} else {
 				say("\"Then die, Spawn of Chaos!\"");
-				Func097F(0xFF42, "@To battle!@", 0x0000);
+				Func097F(GUARD17, "@To battle!@", 0x0000);
 			}
-			Func09AD(0xFF42);
+			Func09AD(GUARD17);
 		}
 	}
 }

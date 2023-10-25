@@ -40033,7 +40033,7 @@ void Func04BE object#(0x4BE) () {
 	var var0002;
 
 	if (event == DOUBLECLICK) {
-		0xFF42->show_npc_face(0x0000);
+		BETRA->show_npc_face(0x0000);
 		var0000 = false;
 		add(["name", "job", "bye"]);
 		if (!gflags[0x024F]) {
@@ -40097,7 +40097,7 @@ void Func04BE object#(0x4BE) () {
 				fallthrough;
 
 			case "buy":
-				var0002 = 0xFF42->get_npc_object()->get_schedule_type();
+				var0002 = BETRA->get_npc_object()->get_schedule_type();
 				if (var0002 == TEND_SHOP) {
 					Func0853();
 				} else {
@@ -40139,7 +40139,7 @@ void Func04BE object#(0x4BE) () {
 		say("\"To wish you safe travels, human.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092F(0xFF42);
+		Func092F(BETRA);
 	}
 }
 
