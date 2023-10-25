@@ -56202,18 +56202,18 @@ void Func04B8 object#(0x4B8) () {
 	var var0001;
 	var var0002;
 
-	var0000 = 0xFF48->get_npc_id();
+	var0000 = MURDER7->get_npc_id();
 	var0001 = Func0954();
 	var0002 = Func0953();
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@May we speak?@");
-		0xFF48->Func07D1();
-		Func097F(0xFF48, (("@Yes, " + var0001) + "?@"), 0x0002);
-		0xFF48->set_schedule_type(TALK);
+		MURDER7->Func07D1();
+		Func097F(MURDER7, (("@Yes, " + var0001) + "?@"), 0x0002);
+		MURDER7->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF48->run_schedule();
-		0xFF48->show_npc_face0(0x0000);
+		MURDER7->run_schedule();
+		MURDER7->show_npc_face0(0x0000);
 		say("\"What... hath... happened? Where... am I? Who am I?\"");
 		say("\"I remember! I am Number 7!\"");
 		say("\"Oh, foul betrayal! Number 4 murdered me and took the key!\"");

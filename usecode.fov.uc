@@ -38815,7 +38815,7 @@ void Func04B4 object#(0x4B4) () {
 
 			case "Runeb":
 				say("\"To mean, in your language, `Red Mist'. To have been given that name because that is all he leaves behind of an adversary in battle. Before his conversion by The Fellowship, to have been known as a particularly cruel and dangerous gargoyle.\"");
-				var0002 = 0xFF48->get_npc_object()->is_dead();
+				var0002 = RUNEB->get_npc_object()->is_dead();
 				if (var0002) {
 					say("\"To be gone -- dead -- now.\"");
 				}
@@ -39114,7 +39114,7 @@ void Func04B7 object#(0x4B7) () {
 				fallthrough;
 
 			case "Fellowship":
-				var0001 = 0xFF48->is_dead();
+				var0001 = RUNEB->is_dead();
 				if (var0001) {
 					say("\"To be glad that Quan is now running our branch. To believe that he is misguided, but to be a much more reasonable gargoyle to deal with now that Runeb is gone.\"");
 				} else {
@@ -39125,7 +39125,7 @@ void Func04B7 object#(0x4B7) () {
 				fallthrough;
 
 			case "rumors":
-				var0001 = 0xFF48->get_npc_object()->is_dead();
+				var0001 = RUNEB->get_npc_object()->is_dead();
 				if (var0001) {
 					say("\"To be sorry that we have lost Runeb. Perhaps to be for the best. To be certainly overjoyed to have avoided damage to the altars.\"");
 				} else {
@@ -39241,11 +39241,11 @@ void Func04B8 object#(0x4B8) () {
 	var var0003;
 
 	if (event == DOUBLECLICK) {
-		0xFF48->show_npc_face(0x0000);
+		RUNEB->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
-		var0001 = 0xFF48->get_npc_object();
+		var0001 = RUNEB->get_npc_object();
 		if (var0000 == NIGHT) {
-			var0002 = Func08FC(0xFF48, 0xFF47);
+			var0002 = Func08FC(RUNEB, 0xFF47);
 			if (var0002) {
 				say("The gargoyle turns to you, frowning. He moves his massive hand to his mouth and use one finger to cross his lips. The Fellowship meeting is in progress.*");
 			} else {
@@ -39456,7 +39456,7 @@ void Func04B9 object#(0x4B9) () {
 				fallthrough;
 
 			case "Runeb":
-				var0004 = 0xFF48->get_npc_object()->is_dead();
+				var0004 = RUNEB->get_npc_object()->is_dead();
 				if (var0004) {
 					say("\"To have been the clerk of The Fellowship here.\"");
 				} else {
@@ -39980,7 +39980,7 @@ void Func04BD object#(0x4BD) () {
 			case "clerk":
 				say("\"To be extremely violent.\" He shakes his head. \"To be named Runeb, which means `red mist.' To be all that he leaves of a foe after combat.\"");
 				remove("clerk");
-				var0006 = 0xFF48->get_npc_object()->is_dead();
+				var0006 = RUNEB->get_npc_object()->is_dead();
 				if (var0006) {
 					say("\"To be dead now, though.\"");
 				}
@@ -73388,7 +73388,7 @@ void Func08CE 0x8CE () {
 	var var0004;
 	var var0005;
 
-	var0000 = Func08F7(0xFF48);
+	var0000 = Func08F7(RUNEB);
 	var0001 = Func08F7(0xFF44);
 	var0002 = Func08F7(0xFF46);
 	var0003 = Func08F7(SPARK);
