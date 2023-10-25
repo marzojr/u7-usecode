@@ -42180,12 +42180,12 @@ void Func04CB object#(0x4CB) () {
 	var var0008;
 
 	if (event == DOUBLECLICK) {
-		0xFF35->show_npc_face(0x0000);
+		CADOR->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func0908();
 		var0002 = "the Avatar";
 		var0003 = UI_part_of_day();
-		var0004 = 0xFF35->get_npc_object();
+		var0004 = CADOR->get_npc_object();
 		var0005 = 0xFF34->get_npc_object();
 		var0006 = var0004->get_schedule_type();
 		var0007 = var0004->get_alignment();
@@ -42321,7 +42321,7 @@ void Func04CC object#(0x4CC) () {
 		var0001 = Func0908();
 		var0002 = "the Avatar";
 		var0003 = 0xFF34->get_npc_object();
-		var0004 = 0xFF35->get_npc_object();
+		var0004 = CADOR->get_npc_object();
 		add(["name", "job", "bye"]);
 		var0005 = UI_part_of_day();
 		var0006 = var0003->get_schedule_type();
@@ -42789,7 +42789,7 @@ void Func04CF object#(0x4CF) () {
 				fallthrough;
 
 			case "Cador":
-				var0008 = 0xFF35->get_npc_object()->is_dead();
+				var0008 = CADOR->get_npc_object()->is_dead();
 				if (var0008) {
 					say("\"He used ta come here every night, 'til he was killed in a brawl.\" The bartender's eyes narrow as he talks.");
 				} else {
@@ -43050,7 +43050,7 @@ void Func04D1 object#(0x4D1) () {
 				fallthrough;
 
 			case "people":
-				var0004 = 0xFF35->get_npc_object()->is_dead();
+				var0004 = CADOR->get_npc_object()->is_dead();
 				if (var0004) {
 					add("shame");
 					var0005 = " -- 'tis a shame about him -- ";
@@ -43220,7 +43220,7 @@ void Func04D2 object#(0x4D2) () {
 				fallthrough;
 
 			case "Cador":
-				var0005 = 0xFF35->get_npc_object()->is_dead();
+				var0005 = CADOR->get_npc_object()->is_dead();
 				if (var0005) {
 					say("\"'Tis too bad he is dead. I have heard many compliment his abilities as a leader at the mines.\"");
 					add("dead");
@@ -43387,7 +43387,7 @@ void Func04D4 object#(0x4D4) () {
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = false;
-		var0003 = 0xFF35->get_npc_object()->is_dead();
+		var0003 = CADOR->get_npc_object()->is_dead();
 		var0004 = "the Avatar";
 		add(["name", "job", "Fellowship", "bye"]);
 		if (gflags[0x027E] && (!gflags[0x0285])) {
@@ -43604,7 +43604,7 @@ void Func04D5 object#(0x4D5) () {
 				say("\"He is the overseer at the mines, ",
 					var0000,
 					" Avatar.\"");
-				var0002 = 0xFF35->get_npc_object()->is_dead();
+				var0002 = CADOR->get_npc_object()->is_dead();
 				if (var0002) {
 					say("\"Of course, he's gone now...\" She looks down at her feet.");
 				}

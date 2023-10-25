@@ -15613,7 +15613,7 @@ void Func032B shape#(0x32B) () {
 		0xFEFB->set_item_flag(MET);
 		NEYOBI->set_item_flag(SI_ZOMBIE);
 		GWENNO->set_item_flag(SI_ZOMBIE);
-		var0008 = [AVATAR, SELINA, KALEN, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, 0xFF33, 0xFF35, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
+		var0008 = [AVATAR, SELINA, KALEN, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, 0xFF33, HENCH2, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -42094,7 +42094,7 @@ void Func0440 object#(0x440) () {
 		AVATAR->set_camera();
 		gflags[0x008B] = false;
 		0xFF33->run_schedule();
-		0xFF35->run_schedule();
+		HENCH2->run_schedule();
 		0xFF34->run_schedule();
 		0xFEDB->run_schedule();
 		CANTRA->remove_npc();
@@ -56744,7 +56744,7 @@ extern void Func0919 0x919 (var var0000);
 void Func04CB object#(0x4CB) () {
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("Excuse me...");
-		0xFF35->Func07D1();
+		HENCH2->Func07D1();
 		Func0919(item);
 	}
 	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
@@ -56756,7 +56756,7 @@ void Func04CB object#(0x4CB) () {
 		set_schedule_type(WAIT);
 	}
 	if (event == SCRIPTED) {
-		0xFF35->Func07D1();
+		HENCH2->Func07D1();
 		Func0919(item);
 	}
 }
@@ -71893,11 +71893,11 @@ void Func06FB object#(0x6FB) () {
 	var var0000;
 
 	UI_play_music(0x0012, Func09A0(0x0005, 0x0001));
-	0xFF35->move_object([0x0762, 0x03ED, 0x0000]);
-	0xFF35->set_new_schedules(MIDNIGHT, WANDER, [0x0762, 0x03ED]);
-	0xFF35->si_path_run_usecode([0x0762, 0x03F1, 0x0000], SI_PATH_SUCCESS, 0xFF35->get_npc_object(), Func04CB, false);
-	UI_set_path_failure(Func04CB, 0xFF35->get_npc_object(), SI_PATH_FAILURE);
-	var0000 = script 0xFF35 after 8 ticks {
+	HENCH2->move_object([0x0762, 0x03ED, 0x0000]);
+	HENCH2->set_new_schedules(MIDNIGHT, WANDER, [0x0762, 0x03ED]);
+	HENCH2->si_path_run_usecode([0x0762, 0x03F1, 0x0000], SI_PATH_SUCCESS, HENCH2->get_npc_object(), Func04CB, false);
+	UI_set_path_failure(Func04CB, HENCH2->get_npc_object(), SI_PATH_FAILURE);
+	var0000 = script HENCH2 after 8 ticks {
 		nohalt;
 		wait while far 10;
 		say "@I will steal this!@";
@@ -106990,7 +106990,7 @@ void Func0919 0x919 (var var0000) {
 	var var0006;
 	var var0007;
 
-	var0001 = [0xFEDB, 0xFF33, 0xFF35, 0xFF34];
+	var0001 = [0xFEDB, 0xFF33, HENCH2, 0xFF34];
 	if (0xFF34->get_npc_id() == 0x0000) {
 		for (var0004 in var0001 with var0002 to var0003) {
 			var0004->clear_item_say();
