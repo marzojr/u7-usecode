@@ -42561,9 +42561,9 @@ void Func04CE object#(0x4CE) () {
 	var var0004;
 
 	if (event == DOUBLECLICK) {
-		0xFF32->show_npc_face(0x0000);
+		ELDROTH->show_npc_face(0x0000);
 		var0000 = Func0909();
-		var0001 = 0xFF32->get_npc_object()->get_schedule_type();
+		var0001 = ELDROTH->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (!gflags[0x028B]) {
 			say("A very neat, well-groomed, kindly man stands before you.");
@@ -42662,7 +42662,7 @@ void Func04CE object#(0x4CE) () {
 	}
 	if (event == PROXIMITY) {
 		var0002 = UI_part_of_day();
-		var0001 = 0xFF32->get_npc_object()->get_schedule_type();
+		var0001 = ELDROTH->get_npc_object()->get_schedule_type();
 		var0003 = UI_die_roll(0x0001, 0x0004);
 		if ((var0002 >= DAWN) || (var0002 <= EVENING)) {
 			if ((var0001 == TEND_SHOP) || (var0001 == EAT)) {
@@ -42679,7 +42679,7 @@ void Func04CE object#(0x4CE) () {
 					var0004 = "@A bird in the hand squirms.@";
 				}
 			}
-			0xFF32->item_say(var0004);
+			ELDROTH->item_say(var0004);
 		}
 	}
 }
