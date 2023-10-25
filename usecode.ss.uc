@@ -70089,7 +70089,7 @@ void Func06DA object#(0x6DA) () {
 			if (DUPRE->npc_nearby()) {
 				Func097F(DUPRE, "@Die, Wares-thief!@", 0x0030);
 			}
-			Func09AD(0xFF3D);
+			Func09AD(PERRY_STOKES);
 		}
 		if (var0000 == 0x0002) {
 			Func097F(AVATAR, "@Look at the bones!@", 0x0000);

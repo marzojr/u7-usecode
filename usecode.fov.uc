@@ -40762,7 +40762,7 @@ void Func04C3 object#(0x4C3) () {
 	var var0006;
 
 	if (event == DOUBLECLICK) {
-		0xFF3D->show_npc_face(0x0000);
+		JOHN_PAUL->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = Func08F7(0xFF3B);
@@ -40770,7 +40770,7 @@ void Func04C3 object#(0x4C3) () {
 		add(["name", "job", "bye"]);
 		if (!gflags[0x026C]) {
 			say("The very serious man breaks into a half-smile as he greets you.");
-			var0004 = 0xFF3D->get_distance(0xFF3B);
+			var0004 = JOHN_PAUL->get_distance(0xFF3B);
 			if (var0004 < 0x000A) {
 				if (gflags[0x026E]) {
 					say("Horffe is standing at attention just behind him.");
@@ -40855,7 +40855,7 @@ void Func04C3 object#(0x4C3) () {
 				if (var0002) {
 					0xFF3B->say("\"To thank you, Sir!\"");
 					0xFF3B->hide();
-					0xFF3D->show_npc_face(0x0000);
+					JOHN_PAUL->show_npc_face(0x0000);
 				}
 				if (var0003) {
 					say("\"He seems to have taken a dislike for The Fellowship, however. I have noticed he is reluctant to mention this around Sir Richter.\" He shrugs.");
@@ -40933,7 +40933,7 @@ void Func04C3 object#(0x4C3) () {
 						say("*");
 						0xFF3B->say("\"To have no need! To be happy the true vandal is discovered.\"*");
 						0xFF3B->hide();
-						0xFF3D->show_npc_face(0x0000);
+						JOHN_PAUL->show_npc_face(0x0000);
 					}
 				}
 				gflags[0x0261] = true;
@@ -41196,7 +41196,7 @@ void Func04C5 object#(0x4C5) () {
 		0xFF3B->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x026E]) {
-			var0000 = 0xFF3B->get_distance(0xFF3D);
+			var0000 = 0xFF3B->get_distance(JOHN_PAUL);
 			if (var0000 < 0x000B) {
 				if (gflags[0x026C]) {
 					var0001 = " standing at attention just behind Lord John-Paul.";
@@ -41209,7 +41209,7 @@ void Func04C5 object#(0x4C5) () {
 			say("You see a gargoyle with a very stern expression on his face",
 				var0001,
 				"");
-			var0002 = Func08F7(0xFF3D);
+			var0002 = Func08F7(JOHN_PAUL);
 			gflags[0x026E] = true;
 		} else {
 			say("\"To ask how to be of assistance.\" His eyes narrow.");
