@@ -41740,7 +41740,7 @@ void Func04C8 object#(0x4C8) () {
 	var var0008;
 
 	if (event == DOUBLECLICK) {
-		0xFF38->show_npc_face(0x0000);
+		TORY->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = false;
@@ -41905,7 +41905,7 @@ void Func04C8 object#(0x4C8) () {
 						var0000,
 						".\"");
 					IOLO->hide();
-					0xFF38->show_npc_face(0x0000);
+					TORY->show_npc_face(0x0000);
 				}
 				remove("Sir Jordan");
 				fallthrough;
@@ -41916,7 +41916,7 @@ void Func04C8 object#(0x4C8) () {
 		say("\"I sense thou hast pressing engagements elsewhere. I bid thee farewell.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF38);
+		Func092E(TORY);
 	}
 }
 
