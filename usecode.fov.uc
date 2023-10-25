@@ -40326,9 +40326,9 @@ void Func04C0 object#(0x4C0) () {
 	var var0004;
 
 	if (event == DOUBLECLICK) {
-		0xFF40->show_npc_face(0x0000);
+		MENION->show_npc_face(0x0000);
 		var0000 = Func0909();
-		var0001 = 0xFF40->get_npc_object()->get_schedule_type();
+		var0001 = MENION->get_npc_object()->get_schedule_type();
 		var0002 = UI_part_of_day();
 		add(["name", "job", "bye"]);
 		if (!gflags[0x0269]) {
@@ -40416,7 +40416,7 @@ void Func04C0 object#(0x4C0) () {
 		say("\"May the strength in thine arms always match the strength of thy will.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF40);
+		Func092E(MENION);
 	}
 }
 
