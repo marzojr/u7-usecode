@@ -22445,7 +22445,7 @@ void Func0403 object#(0x403) () {
 			say("\"Forgive me. I shall go seeking my wife and leave thee to thy dream.\"");
 			UI_remove_npc_face0();
 			Func097F(IOLO, "@Pleasant dreams!@", 0x0002);
-			var001A = 0xFF4E->get_object_position();
+			var001A = CLONE_IOLO->get_object_position();
 			UI_sprite_effect(ANIMATION_TELEPORT2, var001A[0x0001], var001A[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			UI_play_sound_effect(0x0051);
 			var000B = set_item_quality(0x0003);
@@ -54858,9 +54858,9 @@ void Func04B2 object#(0x4B2) () {
 				var0007 = UI_update_last_created(var0005);
 			}
 		}
-		0xFF4E->run_schedule();
-		0xFF4E->set_schedule_type(WAIT);
-		0xFF4E->show_npc_face0(0x0000);
+		CLONE_IOLO->run_schedule();
+		CLONE_IOLO->set_schedule_type(WAIT);
+		CLONE_IOLO->show_npc_face0(0x0000);
 		say("\"Thank the heavens I have found thee! Thou didst disappear...\"");
 		say("\"When the Guardian appeared, we feared thou wert taken. Thou must hurry, I have found a way for thee to return home!\"");
 		converse (["disappear", "Guardian", "return home"]) {
@@ -54908,7 +54908,7 @@ void Func04B2 object#(0x4B2) () {
 						AVATAR->si_path_run_usecode(var0005, PATH_SUCCESS, var0008, Func04B2, true);
 						var0009 = Func09A0(0x0000, 0x0001);
 						var0005[0x0001] -= 0x0002;
-						0xFF4E->si_path_run_usecode(var0005, PATH_FAILURE, var0009, Func04B2, false);
+						CLONE_IOLO->si_path_run_usecode(var0005, PATH_FAILURE, var0009, Func04B2, false);
 					} else {
 						AVATAR->clear_item_flag(DONT_MOVE);
 					}
@@ -54973,7 +54973,7 @@ void Func04B2 object#(0x4B2) () {
 						AVATAR->si_path_run_usecode(var0005, PATH_SUCCESS, var0008, Func04B2, true);
 						var0009 = Func09A0(0x0000, 0x0001);
 						var0005[0x0001] -= 0x0002;
-						0xFF4E->si_path_run_usecode(var0005, PATH_FAILURE, var0009, Func04B2, false);
+						CLONE_IOLO->si_path_run_usecode(var0005, PATH_FAILURE, var0009, Func04B2, false);
 					} else {
 						AVATAR->clear_item_flag(DONT_MOVE);
 					}
@@ -55016,7 +55016,7 @@ void Func04B2 object#(0x4B2) () {
 						AVATAR->si_path_run_usecode(var0005, PATH_SUCCESS, var0008, Func04B2, true);
 						var0009 = Func09A0(0x0000, 0x0001);
 						var0005[0x0001] -= 0x0002;
-						0xFF4E->si_path_run_usecode(var0005, PATH_FAILURE, var0009, Func04B2, false);
+						CLONE_IOLO->si_path_run_usecode(var0005, PATH_FAILURE, var0009, Func04B2, false);
 					} else {
 						AVATAR->clear_item_flag(DONT_MOVE);
 					}
@@ -55038,9 +55038,9 @@ void Func04B2 object#(0x4B2) () {
 	if (event == PATH_SUCCESS) {
 		var0008 = AVATAR->find_nearby(0x0360, 0x000A, MASK_NONE);
 		Func09AA();
-		var0005 = 0xFF4E->get_object_position();
+		var0005 = CLONE_IOLO->get_object_position();
 		UI_sprite_effect(ANIMATION_TELEPORT2, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-		0xFF4E->remove_npc();
+		CLONE_IOLO->remove_npc();
 		var0005 = AVATAR->get_object_position();
 		UI_sprite_effect(ANIMATION_TELEPORT2, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		AVATAR->set_polymorph(0x00EF);
@@ -55052,9 +55052,9 @@ void Func04B2 object#(0x4B2) () {
 		abort;
 	}
 	if (event == SI_PATH_SUCCESS) {
-		var0005 = 0xFF4E->get_object_position();
+		var0005 = CLONE_IOLO->get_object_position();
 		UI_sprite_effect(ANIMATION_TELEPORT2, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-		0xFF4E->remove_npc();
+		CLONE_IOLO->remove_npc();
 		var0007 = script AVATAR after 20 ticks {
 			nohalt;
 			call Func07F7;
@@ -69918,21 +69918,21 @@ void Func06D9 object#(0x6D9) () {
 		if (var0002 == 0x0002) {
 			UI_play_sound_effect(0x0051);
 			UI_sprite_effect(ANIMATION_TELEPORT2, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x000C, LOOP_ONCE2);
-			0xFF4E->move_object(var0003);
-			0xFF4E->set_schedule_type(STANDTHERE);
-			Func097F(0xFF4E, "@Avatar!@", 0x0001);
+			CLONE_IOLO->move_object(var0003);
+			CLONE_IOLO->set_schedule_type(STANDTHERE);
+			Func097F(CLONE_IOLO, "@Avatar!@", 0x0001);
 			var0005 = script item after 8 ticks {
 				nohalt;
 				call Func0403;
 			};
 			var0005 = set_item_quality(0x00FF);
-			0xFF4E->Func07D2();
+			CLONE_IOLO->Func07D2();
 		}
 		if (var0002 == 0x0003) {
 			remove_item();
 			var0003 = [0x0061, 0x0644, 0x0000];
-			0xFF4E->set_schedule_type(SHY);
-			0xFF4E->move_object(var0003);
+			CLONE_IOLO->set_schedule_type(SHY);
+			CLONE_IOLO->move_object(var0003);
 		}
 		if (var0002 == 0x0004) {
 			UI_play_sound_effect(0x0051);
@@ -80771,7 +80771,7 @@ void Func07F6 object#(0x7F6) () {
 			var0003 = var0001->get_object_position();
 			AVATAR->si_path_run_usecode(var0003, PATH_SUCCESS, var0001, Func07F6, false);
 			if (var0000 == 0x0005) {
-				var0004 = script 0xFF4E after (var0002 + 0x000A) ticks {
+				var0004 = script CLONE_IOLO after (var0002 + 0x000A) ticks {
 					call Func07F6;
 				};
 				gflags[0x0203] = true;
@@ -80795,8 +80795,8 @@ void Func07F6 object#(0x7F6) () {
 	if ((event == SCRIPTED) && (gflags[0x0007] == true)) {
 		gflags[0x0007] = false;
 		set_schedule_type(TALK);
-		if (get_npc_number() == 0xFF4E) {
-			0xFF4E->item_say("@Avatar! Avatar!@");
+		if (get_npc_number() == CLONE_IOLO) {
+			CLONE_IOLO->item_say("@Avatar! Avatar!@");
 			abort;
 		}
 		if (get_npc_number() == 0xFF4D) {
@@ -86237,13 +86237,13 @@ void Func0814 0x814 () {
 	var var0001;
 	var var0002;
 
-	0xFF4E->item_say("@Thy loss, Avatar.@");
-	var0000 = 0xFF4E->find_nearby(0x0360, 0x0019, MASK_NONE);
+	CLONE_IOLO->item_say("@Thy loss, Avatar.@");
+	var0000 = CLONE_IOLO->find_nearby(0x0360, 0x0019, MASK_NONE);
 	if (var0000) {
-		var0001 = 0xFF4E->get_distance(var0000);
+		var0001 = CLONE_IOLO->get_distance(var0000);
 		var0002 = var0000->get_object_position();
 		var0002[0x0001] -= 0x0002;
-		0xFF4E->si_path_run_usecode(var0002, SI_PATH_SUCCESS, 0xFF4E->get_npc_object(), Func04B2, true);
+		CLONE_IOLO->si_path_run_usecode(var0002, SI_PATH_SUCCESS, CLONE_IOLO->get_npc_object(), Func04B2, true);
 	}
 }
 

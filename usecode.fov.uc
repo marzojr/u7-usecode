@@ -38374,9 +38374,9 @@ void Func04B2 object#(0x4B2) () {
 	var var0002;
 
 	if (event == DOUBLECLICK) {
-		0xFF4E->show_npc_face(0x0000);
+		TOBIAS->show_npc_face(0x0000);
 		var0000 = Func0909();
-		var0001 = 0xFF4E->get_npc_object()->get_schedule_type();
+		var0001 = TOBIAS->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (gflags[0x0212]) {
 			if (!gflags[0x0218]) {
@@ -38535,7 +38535,7 @@ void Func04B2 object#(0x4B2) () {
 		}
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF4E);
+		Func092E(TOBIAS);
 	}
 }
 
