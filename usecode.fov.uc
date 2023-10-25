@@ -40992,11 +40992,11 @@ void Func04C4 object#(0x4C4) () {
 	var var0009;
 
 	if (event == DOUBLECLICK) {
-		0xFF3C->show_npc_face(0x0000);
+		RICHTER->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func0908();
 		var0002 = "the Avatar";
-		var0003 = 0xFF3C->get_npc_object()->get_schedule_type();
+		var0003 = RICHTER->get_npc_object()->get_schedule_type();
 		add(["name", "job", "Fellowship", "bye"]);
 		if (gflags[0x0266]) {
 			var0004 = var0001;
@@ -41180,7 +41180,7 @@ void Func04C4 object#(0x4C4) () {
 		say("\"Pleasant journeys. Remember, trust thy brother.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF3C);
+		Func092E(RICHTER);
 	}
 }
 
