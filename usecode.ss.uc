@@ -55377,7 +55377,7 @@ void Func04B4 object#(0x4B4) () {
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
 	if ((event == DOUBLECLICK) && (gflags[0x01F3] == true)) {
-		0xFF4C->show_npc_face0(0x0000);
+		CLONE_DUPRE->show_npc_face0(0x0000);
 		say("\"No time to talk, Avatar. There is exploring to be done!\"");
 		UI_remove_npc_face0();
 		abort;
@@ -55400,13 +55400,13 @@ void Func04B4 object#(0x4B4) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		0xFF4C->move_object([0x00A7, 0x0655, 0x0000]);
-		0xFF4C->set_new_schedules(MIDNIGHT, TALK, [0x00A6, 0x0664]);
+		CLONE_DUPRE->move_object([0x00A7, 0x0655, 0x0000]);
+		CLONE_DUPRE->set_new_schedules(MIDNIGHT, TALK, [0x00A6, 0x0664]);
 		set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF4C->set_new_schedules(MIDNIGHT, TEND_SHOP, [0x00AB, 0x0631]);
-		0xFF4C->run_schedule();
+		CLONE_DUPRE->set_new_schedules(MIDNIGHT, TEND_SHOP, [0x00AB, 0x0631]);
+		CLONE_DUPRE->run_schedule();
 		AVATAR->clear_item_flag(DONT_MOVE);
 		var0005 = AVATAR->find_nearby(0x010E, 0x0050, MASK_NONE);
 		for (var0008 in var0005 with var0006 to var0007) {
@@ -55424,15 +55424,15 @@ void Func04B4 object#(0x4B4) () {
 				var0003 = UI_update_last_created(var000B);
 			}
 		}
-		0xFF4C->show_npc_face0(0x0000);
+		CLONE_DUPRE->show_npc_face0(0x0000);
 		if ((gflags[0x01F3] == true) && ((gflags[0x01F7] == true) && (!(gflags[0x01F8] == true)))) {
 			say("\"Avatar! Thou must come and look at what I have found! Come now... Zhelkas may not allow thee the time to see this. Wilt thou come look? Thou canst finish off the last Worm when thou dost return.\"");
 			if (Func0955() == true) {
 				say("\"'Tis just through here...\"");
-				Func097F(0xFF4C, "@Follow me!@", 0x0000);
+				Func097F(CLONE_DUPRE, "@Follow me!@", 0x0000);
 			} else {
 				say("\"It looks important, though I am no judge of such things. Thou shouldst come look while thou hast the chance...\"");
-				Func097F(0xFF4C, "@'Tis thy loss...@", 0x0000);
+				Func097F(CLONE_DUPRE, "@'Tis thy loss...@", 0x0000);
 				gflags[0x01ED] = true;
 			}
 			gflags[0x01F8] = true;
@@ -55440,22 +55440,22 @@ void Func04B4 object#(0x4B4) () {
 		}
 		if ((gflags[0x01F3] == true) && ((gflags[0x01F6] == true) && (!(gflags[0x01F8] == true)))) {
 			say("\"There is no wine, Avatar. But thou shouldst see the weapons! If thou dost not finish soon, I cannot promise to share...\"");
-			Func097F(0xFF4C, "@This is wonderful!@", 0x0000);
+			Func097F(CLONE_DUPRE, "@This is wonderful!@", 0x0000);
 			abort;
 		}
 		if ((gflags[0x01F3] == true) && ((gflags[0x01F5] == true) && (!(gflags[0x01F8] == true)))) {
 			say("\"Avatar! Thou shouldst see the treasure that I have found! Stay and finish the Game. I shall try to bring some to thee...\"");
-			Func097F(0xFF4C, "@Wait here...@", 0x0000);
+			Func097F(CLONE_DUPRE, "@Wait here...@", 0x0000);
 			abort;
 		}
 		if ((gflags[0x01F3] == true) && ((gflags[0x01F4] == true) && (!(gflags[0x01F8] == true)))) {
 			say("\"This is boring, indeed. I will leave thee to the Game, Avatar. I am going exploring...\"");
-			Func097F(0xFF4C, "@So long...@", 0x0000);
+			Func097F(CLONE_DUPRE, "@So long...@", 0x0000);
 			abort;
 		}
 		if ((gflags[0x01F3] == true) && ((gflags[0x01F4] == true) && (gflags[0x01F8] == true))) {
 			say("\"Damn thee, Avatar! Damn thee! Thou hast destroyed the worms. Perhaps with such a weapon, thou dost not have any need for what I have found here...\"");
-			Func097F(0xFF4C, "@Damn thee!@", 0x0000);
+			Func097F(CLONE_DUPRE, "@Damn thee!@", 0x0000);
 			var0003 = script AVATAR after 25 ticks {
 				nohalt;
 				call Func07F7;
@@ -55564,9 +55564,9 @@ void Func04B4 object#(0x4B4) () {
 				fallthrough;
 
 			case "begin":
-				Func097F(0xFF4C, "@Then let the Game begin!@", 0x0000);
+				Func097F(CLONE_DUPRE, "@Then let the Game begin!@", 0x0000);
 				gflags[0x01F3] = true;
-				0xFF4C->set_npc_id(0x0001);
+				CLONE_DUPRE->set_npc_id(0x0001);
 				var000D = Func09A0(0x0004, 0x0001);
 				var0003 = var000D->set_item_quality(0x0001);
 				var000D = Func09A0(0x0004, 0x0002);
@@ -80783,7 +80783,7 @@ void Func07F6 object#(0x7F6) () {
 				gflags[0x0204] = true;
 			}
 			if (var0000 == 0x0007) {
-				var0004 = script 0xFF4C after (var0002 + 0x000A) ticks {
+				var0004 = script CLONE_DUPRE after (var0002 + 0x000A) ticks {
 					call Func07F6;
 				};
 				gflags[0x0205] = true;
@@ -80803,8 +80803,8 @@ void Func07F6 object#(0x7F6) () {
 			CLONE_SHAMINO->item_say("@Avatar, thou hast returned!@");
 			abort;
 		}
-		if (get_npc_number() == 0xFF4C) {
-			0xFF4C->item_say("@Art thou ready, Avatar?@");
+		if (get_npc_number() == CLONE_DUPRE) {
+			CLONE_DUPRE->item_say("@Art thou ready, Avatar?@");
 			abort;
 		}
 	}
@@ -113519,35 +113519,35 @@ void Func09C0 0x9C0 (var var0000) {
 
 	gflags[0x01F4] = true;
 	if (var0000 == 0x0001) {
-		var0001 = script 0xFF4C {
+		var0001 = script CLONE_DUPRE {
 			nohalt;
 			call Func04B4;
 		};
 	}
 	if (gflags[0x01F4] && (var0000 == 0x0004)) {
 		gflags[0x01F5] = true;
-		var0001 = script 0xFF4C {
+		var0001 = script CLONE_DUPRE {
 			nohalt;
 			call Func04B4;
 		};
 	}
 	if (gflags[0x01F5] && (var0000 == 0x0007)) {
 		gflags[0x01F6] = true;
-		var0001 = script 0xFF4C {
+		var0001 = script CLONE_DUPRE {
 			nohalt;
 			call Func04B4;
 		};
 	}
 	if ((gflags[0x01F6] == true) && (var0000 == 0x0009)) {
 		gflags[0x01F7] = true;
-		var0001 = script 0xFF4C {
+		var0001 = script CLONE_DUPRE {
 			nohalt;
 			call Func04B4;
 		};
 	}
 	if (gflags[0x01F7] && (var0000 == 0x000A)) {
 		gflags[0x01F8] = true;
-		var0001 = script 0xFF4C {
+		var0001 = script CLONE_DUPRE {
 			nohalt;
 			call Func04B4;
 		};
