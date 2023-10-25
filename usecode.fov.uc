@@ -40560,7 +40560,7 @@ void Func04C2 object#(0x4C2) () {
 	var var000C;
 
 	if (event == DOUBLECLICK) {
-		0xFF3E->show_npc_face(0x0000);
+		JEHANNE->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = false;
@@ -40672,7 +40672,7 @@ void Func04C2 object#(0x4C2) () {
 				fallthrough;
 
 			case "provisions":
-				var0008 = 0xFF3E->get_npc_object()->get_schedule_type();
+				var0008 = JEHANNE->get_npc_object()->get_schedule_type();
 				if (var0008 == TEND_SHOP) {
 					say("\"Thou wishest to buy something?\"");
 					var0009 = Func090A();
@@ -40712,7 +40712,7 @@ void Func04C2 object#(0x4C2) () {
 	}
 	if (event == PROXIMITY) {
 		var000A = UI_part_of_day();
-		var0008 = 0xFF3E->get_npc_object()->get_schedule_type();
+		var0008 = JEHANNE->get_npc_object()->get_schedule_type();
 		var000B = UI_die_roll(0x0001, 0x0004);
 		if (var0008 == TEND_SHOP) {
 			if (var000B == 0x0001) {
@@ -40742,7 +40742,7 @@ void Func04C2 object#(0x4C2) () {
 				var000C = "@I am full.@";
 			}
 		}
-		0xFF3E->item_say(var000C);
+		JEHANNE->item_say(var000C);
 	}
 }
 
