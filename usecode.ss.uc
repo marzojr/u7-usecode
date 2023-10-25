@@ -56356,16 +56356,16 @@ void Func04BD object#(0x4BD) () {
 		Func0809();
 		abort;
 	}
-	if ((event == DOUBLECLICK) && (0xFF43->get_schedule_type() != WAIT)) {
+	if ((event == DOUBLECLICK) && (GUARD21->get_schedule_type() != WAIT)) {
 		AVATAR->item_say("@Hello!@");
-		0xFF43->Func07D1();
-		Func097F(0xFF43, "@Die, fool!@", 0x0005);
-		Func09AD(0xFF43);
+		GUARD21->Func07D1();
+		Func097F(GUARD21, "@Die, fool!@", 0x0005);
+		Func09AD(GUARD21);
 	}
 	if (event == SCRIPTED) {
-		if (item != 0xFF43->get_npc_object()) {
-			Func097F(0xFF43, "@Die, intruder!@", 0x0005);
-			Func09AD(0xFF43);
+		if (item != GUARD21->get_npc_object()) {
+			Func097F(GUARD21, "@Die, intruder!@", 0x0005);
+			Func09AD(GUARD21);
 		}
 	}
 }

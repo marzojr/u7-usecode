@@ -39850,7 +39850,7 @@ void Func04BD object#(0x4BD) () {
 	var var0006;
 
 	if (event == DOUBLECLICK) {
-		0xFF43->show_npc_face(0x0000);
+		FORBRAK->show_npc_face(0x0000);
 		var0000 = false;
 		var0001 = false;
 		var0002 = Func08F7(DUPRE);
@@ -39860,7 +39860,7 @@ void Func04BD object#(0x4BD) () {
 			DUPRE->say("\"Why 'tis progressing nicely, friend Forbrak.\"");
 			var0003 = Func08F7(SHAMINO);
 			if (var0003 && (!gflags[0x024E])) {
-				0xFF43->hide();
+				FORBRAK->hide();
 				SHAMINO->say("\"-What- study?\"");
 				DUPRE->say("\"Why, er, surely thou hast heard of the famous guides compiled for Brommer!\"");
 				SHAMINO->say("\"Aye, I have. But I'll be tarred if there is one detailing various drinking establishments!\"");
@@ -39869,7 +39869,7 @@ void Func04BD object#(0x4BD) () {
 				SHAMINO->hide();
 			}
 			DUPRE->hide();
-			0xFF43->show_npc_face(0x0000);
+			FORBRAK->show_npc_face(0x0000);
 		}
 		if (!gflags[0x024E]) {
 			say("The gargoyle tending bar lifts a tankard to you.");
@@ -39896,7 +39896,7 @@ void Func04BD object#(0x4BD) () {
 				fallthrough;
 
 			case "buy":
-				var0004 = 0xFF43->get_npc_object()->get_schedule_type();
+				var0004 = FORBRAK->get_npc_object()->get_schedule_type();
 				if (var0004 == TEND_SHOP) {
 					Func0889();
 				} else {
@@ -40019,7 +40019,7 @@ void Func04BD object#(0x4BD) () {
 		say("\"To wish you well, human.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092F(0xFF43);
+		Func092F(FORBRAK);
 	}
 }
 
