@@ -22966,7 +22966,7 @@ void Func040D object#(0x40D) () {
 				abort;
 
 			case "information" (remove):
-				if ((0xFF3A->npc_nearby() || (PETRA->npc_nearby() || ROCCO->npc_nearby())) && gflags[0x013E]) {
+				if ((MUSIC01->npc_nearby() || (PETRA->npc_nearby() || ROCCO->npc_nearby())) && gflags[0x013E]) {
 					var0009 = 0x0064;
 					gflags[0x013E] = false;
 					say("\"'Tis so flattering to be asked so many questions by thee, ",
@@ -84156,7 +84156,7 @@ void Func0808 0x808 (var var0000, var var0001) {
 		item->Func07D1();
 		Func097F(item, "@Yes?@", 0x0002);
 		var0006 = get_npc_number();
-		if ((var0006 == 0xFF3A) || ((var0006 == 0xFF39) || (var0006 == 0xFF38))) {
+		if ((var0006 == MUSIC01) || ((var0006 == 0xFF39) || (var0006 == 0xFF38))) {
 			set_schedule_type(STANDTHERE);
 			item->Func07D2();
 			var0006 = 0x0400 - var0006;

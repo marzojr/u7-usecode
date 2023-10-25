@@ -41318,7 +41318,7 @@ void Func04C6 object#(0x4C6) () {
 	var var0007;
 
 	if (event == DOUBLECLICK) {
-		0xFF3A->show_npc_face(0x0000);
+		JORDAN->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func0908();
 		var0002 = "Avatar";
@@ -41345,15 +41345,15 @@ void Func04C6 object#(0x4C6) () {
 				if (var0003) {
 					IOLO->say("\"'Tis true, Sir Jordan. He is the Avatar.\"*");
 					IOLO->hide();
-					0xFF3A->say("Jordan smiles. \"I see. And who wouldst thou be? Shamino?\"*");
+					JORDAN->say("Jordan smiles. \"I see. And who wouldst thou be? Shamino?\"*");
 					if (var0004) {
 						IOLO->say("\"No.\" He points to Shamino. \"He is. I am Iolo!\"*");
 						IOLO->hide();
-						0xFF3A->show_npc_face(0x0000);
+						JORDAN->show_npc_face(0x0000);
 					} else {
 						IOLO->say("\"No. I am Iolo, not Shamino!\"*");
 						IOLO->hide();
-						0xFF3A->show_npc_face(0x0000);
+						JORDAN->show_npc_face(0x0000);
 					}
 					say("\"Of course!\" He says, patronizingly. \"How could I not recognize the great Iolo.\"");
 				}
@@ -41404,9 +41404,9 @@ void Func04C6 object#(0x4C6) () {
 				if (var0003) {
 					say("*");
 					IOLO->say("\"I, er, thank thee for thy compliment.\"*");
-					0xFF3A->say("\"'Twould mean more wert thou Iolo!\"*");
+					JORDAN->say("\"'Twould mean more wert thou Iolo!\"*");
 					IOLO->say("\"Listen, here, rogue, I truly -am-...\"*");
-					0xFF3A->say("\"Yes, yes, I know. Thou really -art- Iolo... And I am Lord British!\"*");
+					JORDAN->say("\"Yes, yes, I know. Thou really -art- Iolo... And I am Lord British!\"*");
 					IOLO->hide();
 				}
 				remove("original branch");
@@ -41418,7 +41418,7 @@ void Func04C6 object#(0x4C6) () {
 				fallthrough;
 
 			case "sell":
-				var0007 = 0xFF3A->get_npc_object()->get_schedule_type();
+				var0007 = JORDAN->get_npc_object()->get_schedule_type();
 				if (var0007 == TEND_SHOP) {
 					say("\"Weapons or missiles?\"");
 					UI_push_answers();
@@ -41461,7 +41461,7 @@ void Func04C6 object#(0x4C6) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF3A);
+		Func092E(JORDAN);
 	}
 }
 
