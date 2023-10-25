@@ -36160,7 +36160,7 @@ void Func04A7 object#(0x4A7) () {
 			say("\"I suggest that thou go and speak with his mother at once! Camille should keep a tighter rein on her offspring!\"*");
 			gflags[0x0213] = true;
 			gflags[0x021C] = true;
-			0xFF4F->get_npc_object()->set_schedule_type(TALK);
+			CAMILLE->get_npc_object()->set_schedule_type(TALK);
 			FERIDWYN->get_npc_object()->set_schedule_type(LOITER);
 			abort;
 		}
@@ -38210,13 +38210,13 @@ void Func04B1 object#(0x4B1) () {
 	var var0009;
 
 	if (event == DOUBLECLICK) {
-		0xFF4F->show_npc_face(0x0000);
+		CAMILLE->show_npc_face(0x0000);
 		var0000 = Func0909();
 		if (gflags[0x0213] && (!gflags[0x0234])) {
 			say("\"Avatar! My son Tobias has been wrongly accused! He is no thief! And I cannot believe a vial of venom was found in his possession. I truly believe it was planted there! Please -- I beg thee! Please clear my son's name. He has done no wrong!");
 			say("\"I know my son Tobias has suffered for not having a father. I have tried my best on mine own to raise him well, but this farm requires so much work that I fear I do not have enough time to devote to him. But I know in mine heart that my son is not a thief.\"*");
 			say("\"Might I suggest that thou speak with Morfin again. He may have recognized signs of usage of this foul substance in other members of the village.\"");
-			0xFF4F->get_npc_object()->set_schedule_type(LOITER);
+			CAMILLE->get_npc_object()->set_schedule_type(LOITER);
 			gflags[0x0234] = true;
 			abort;
 		}
@@ -38360,7 +38360,7 @@ void Func04B1 object#(0x4B1) () {
 		say("\"Pleasant journey, Avatar.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF4F);
+		Func092E(CAMILLE);
 	}
 }
 
@@ -58885,7 +58885,7 @@ void Func06C6 object#(0x6C6) () {
 			Func093F(FERIDWYN->get_npc_object(), TALK);
 		}
 		if (gflags[0x0213] && (!gflags[0x0234])) {
-			Func093F(0xFF4F->get_npc_object(), TALK);
+			Func093F(CAMILLE->get_npc_object(), TALK);
 		}
 	}
 }
