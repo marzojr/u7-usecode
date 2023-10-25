@@ -39245,7 +39245,7 @@ void Func04B8 object#(0x4B8) () {
 		var0000 = UI_part_of_day();
 		var0001 = RUNEB->get_npc_object();
 		if (var0000 == NIGHT) {
-			var0002 = Func08FC(RUNEB, 0xFF47);
+			var0002 = Func08FC(RUNEB, QUAN);
 			if (var0002) {
 				say("The gargoyle turns to you, frowning. He moves his massive hand to his mouth and use one finger to cross his lips. The Fellowship meeting is in progress.*");
 			} else {
@@ -39331,7 +39331,7 @@ void Func04B9 object#(0x4B9) () {
 	var var0004;
 
 	if (event == DOUBLECLICK) {
-		0xFF47->show_npc_face(0x0000);
+		QUAN->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = UI_part_of_day();
 		var0002 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
@@ -39497,7 +39497,7 @@ void Func04B9 object#(0x4B9) () {
 		}
 	}
 	if (event == PROXIMITY) {
-		Func092F(0xFF47);
+		Func092F(QUAN);
 	}
 }
 
@@ -39516,7 +39516,7 @@ void Func04BA object#(0x4BA) () {
 		var0001 = false;
 		add(["name", "job", "Fellowship", "bye"]);
 		if (var0000 == NIGHT) {
-			var0002 = Func08FC(0xFF46, 0xFF47);
+			var0002 = Func08FC(0xFF46, QUAN);
 			if (var0002) {
 				say("\"To have not the time to speak now. To talk after meeting.\"*");
 			} else {
@@ -39722,7 +39722,7 @@ void Func04BC object#(0x4BC) () {
 		var0000 = UI_part_of_day();
 		var0001 = 0xFF44->get_npc_object()->get_schedule_type();
 		if (var0000 == NIGHT) {
-			var0002 = Func08FC(0xFF44, 0xFF47);
+			var0002 = Func08FC(0xFF44, QUAN);
 			if (var0002) {
 				say("The gargoyle is too involved with the Fellowship meeting to talk to you at this moment.*");
 			} else {
@@ -73401,19 +73401,19 @@ void Func08CE 0x8CE () {
 	if (var0002) {
 		0xFF46->say("\"To be very true.\"*");
 		0xFF46->hide();
-		0xFF47->show_npc_face(0x0000);
+		QUAN->show_npc_face(0x0000);
 	}
 	say("\"To know that others who are not members have given up their dreams. To see that they succumb to the mediocrity of their lives to find stability.\"*");
 	if (var0003) {
 		SPARK->say("\"This is truly boring. Let us get some food -- I am hungry!\"*");
 		SPARK->hide();
-		0xFF47->show_npc_face(0x0000);
+		QUAN->show_npc_face(0x0000);
 	}
 	say("\"To see them begin to produce unreal ideas and become misaligned. To stray from the true path to what they seek. To lose contact with reality.\" He sighs. \"To find failure, not success in what they do.\"*");
 	if (var0001) {
 		0xFF44->say("\"To be very sad.\"*");
 		0xFF44->hide();
-		0xFF47->show_npc_face(0x0000);
+		QUAN->show_npc_face(0x0000);
 	}
 	say("\"To know,\" he smiles, \"that each of the members present has faced such an awakening into the real world. To find in the order a clear path to reach what we seek!\"~~ The members present all stand and shout.*");
 	var0005 = Func08F7(IOLO);
