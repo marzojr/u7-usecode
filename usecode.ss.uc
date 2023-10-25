@@ -15613,7 +15613,7 @@ void Func032B shape#(0x32B) () {
 		0xFEFB->set_item_flag(MET);
 		NEYOBI->set_item_flag(SI_ZOMBIE);
 		GWENNO->set_item_flag(SI_ZOMBIE);
-		var0008 = [AVATAR, SELINA, KALEN, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, 0xFF33, HENCH2, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
+		var0008 = [AVATAR, SELINA, KALEN, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, 0xFF33, HENCH2, HENCH3, 0xFEF0, 0xFEDB, 0xFF29, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -42095,7 +42095,7 @@ void Func0440 object#(0x440) () {
 		gflags[0x008B] = false;
 		0xFF33->run_schedule();
 		HENCH2->run_schedule();
-		0xFF34->run_schedule();
+		HENCH3->run_schedule();
 		0xFEDB->run_schedule();
 		CANTRA->remove_npc();
 		if (gflags[0x0095] && (!gflags[0x005B])) {
@@ -56767,7 +56767,7 @@ extern void Func0919 0x919 (var var0000);
 void Func04CC object#(0x4CC) () {
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("Excuse me...");
-		0xFF34->Func07D1();
+		HENCH3->Func07D1();
 		Func0919(item);
 	}
 	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
@@ -71907,10 +71907,10 @@ void Func06FB object#(0x6FB) () {
 		wait 10;
 		call Func04CB;
 	};
-	0xFF34->move_object([0x076C, 0x03E7, 0x0000]);
-	0xFF34->set_new_schedules(MIDNIGHT, WANDER, [0x076C, 0x03E7]);
-	0xFF34->run_schedule();
-	Func097F(0xFF34, "@I be bored.@", 0x0003);
+	HENCH3->move_object([0x076C, 0x03E7, 0x0000]);
+	HENCH3->set_new_schedules(MIDNIGHT, WANDER, [0x076C, 0x03E7]);
+	HENCH3->run_schedule();
+	Func097F(HENCH3, "@I be bored.@", 0x0003);
 	0xFEDB->move_object([0x0767, 0x03E4, 0x0001]);
 	0xFEDB->set_schedule_type(WAIT);
 	var0000 = script 0xFEDB {
@@ -106990,14 +106990,14 @@ void Func0919 0x919 (var var0000) {
 	var var0006;
 	var var0007;
 
-	var0001 = [0xFEDB, 0xFF33, HENCH2, 0xFF34];
-	if (0xFF34->get_npc_id() == 0x0000) {
+	var0001 = [0xFEDB, 0xFF33, HENCH2, HENCH3];
+	if (HENCH3->get_npc_id() == 0x0000) {
 		for (var0004 in var0001 with var0002 to var0003) {
 			var0004->clear_item_say();
 			Func09AD(var0004);
 		}
-		0xFF34->set_npc_id(0x0001);
-	} else if (0xFF34->get_npc_id() == 0x0001) {
+		HENCH3->set_npc_id(0x0001);
+	} else if (HENCH3->get_npc_id() == 0x0001) {
 		Func097F(0xFEDB, "@Master!@", 0x0000);
 		Func097F(0xFEDB, "@Come quickly!@", 0x0007);
 		var0005 = [0x0752, 0x03E5, 0x0006];
@@ -107006,7 +107006,7 @@ void Func0919 0x919 (var var0000) {
 			var0006->set_alignment(NEUTRAL);
 			var0006->set_schedule_type(PATROL);
 			var0006->set_item_flag(SI_TOURNAMENT);
-			0xFF34->set_npc_id(0x0002);
+			HENCH3->set_npc_id(0x0002);
 			var0007 = var0006->add_cont_items(0x0001, 0x0321, QUALITY_ANY, 0x0000, 0x0012);
 			var0007 = var0006->add_cont_items(0x0001, 0x0358, 0x0003, FRAME_ANY, 0x0012);
 			var0007 = var0006->add_cont_items(0x0001, 0x0327, 0x0003, FRAME_ANY, 0x0012);

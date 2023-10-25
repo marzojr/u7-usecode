@@ -42186,7 +42186,7 @@ void Func04CB object#(0x4CB) () {
 		var0002 = "the Avatar";
 		var0003 = UI_part_of_day();
 		var0004 = CADOR->get_npc_object();
-		var0005 = 0xFF34->get_npc_object();
+		var0005 = MARA->get_npc_object();
 		var0006 = var0004->get_schedule_type();
 		var0007 = var0004->get_alignment();
 		add(["name", "job", "bye", "Fellowship"]);
@@ -42316,11 +42316,11 @@ void Func04CC object#(0x4CC) () {
 	var var0008;
 
 	if (event == DOUBLECLICK) {
-		0xFF34->show_npc_face(0x0000);
+		MARA->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func0908();
 		var0002 = "the Avatar";
-		var0003 = 0xFF34->get_npc_object();
+		var0003 = MARA->get_npc_object();
 		var0004 = CADOR->get_npc_object();
 		add(["name", "job", "bye"]);
 		var0005 = UI_part_of_day();
@@ -42411,7 +42411,7 @@ void Func04CC object#(0x4CC) () {
 		say("Mara shakes your hand and slaps you on the back, saying, \"Fare thee well, friend!\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF34);
+		Func092E(MARA);
 	}
 }
 
@@ -42799,7 +42799,7 @@ void Func04CF object#(0x4CF) () {
 				fallthrough;
 
 			case "Mara":
-				var0009 = 0xFF34->get_npc_object()->is_dead();
+				var0009 = MARA->get_npc_object()->is_dead();
 				if (var0009) {
 					say("\"She worked with Cador at the mines. She was more man than most men, that one was. An' she died like it, too -- in a brawl here at the tavern!\" He says, eyeing you suspiciously.");
 				} else {
@@ -43171,7 +43171,7 @@ void Func04D2 object#(0x4D2) () {
 				fallthrough;
 
 			case "Mara":
-				var0003 = 0xFF34->get_npc_object()->is_dead();
+				var0003 = MARA->get_npc_object()->is_dead();
 				if (var0003) {
 					say("\"I feel bad about the things I said now that she is gone. Too bad she was killed in that bar fight.\"");
 				} else {
