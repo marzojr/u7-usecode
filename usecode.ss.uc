@@ -56273,7 +56273,7 @@ void Func04BA object#(0x4BA) () {
 			say("\"Now I must kill thee, lest the Serpent judge me unworthy. Bless my blade, master!\"");
 			Func097F(GUARD18, "@I shall prevail!@", 0x0000);
 			Func09AD(GUARD18);
-			Func09AD(0xFF45);
+			Func09AD(GUARD19);
 		}
 	}
 }

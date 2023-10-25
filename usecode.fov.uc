@@ -39645,7 +39645,7 @@ void Func04BA object#(0x4BA) () {
 
 void Func04BB object#(0x4BB) () {
 	if (event == DOUBLECLICK) {
-		0xFF45->show_npc_face(0x0000);
+		SILAMO->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x024C]) {
 			say("You see a frowning gargoyle.");
