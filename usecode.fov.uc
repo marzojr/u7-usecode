@@ -40428,7 +40428,7 @@ void Func04C1 object#(0x4C1) () {
 	var var0001;
 
 	if (event == DOUBLECLICK) {
-		0xFF3F->show_npc_face(0x0000);
+		PENDARAN->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = false;
 		add(["name", "job", "bye"]);
@@ -40535,7 +40535,7 @@ void Func04C1 object#(0x4C1) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF3F);
+		Func092E(PENDARAN);
 	}
 }
 
