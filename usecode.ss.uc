@@ -56591,9 +56591,9 @@ void Func04CA object#(0x4CA) () {
 		Func0809();
 		abort;
 	}
-	var0000 = 0xFF36->get_item_flag(MET);
+	var0000 = METAL_MAN->get_item_flag(MET);
 	if (event == DOUBLECLICK) {
-		0xFF36->clear_item_say();
+		METAL_MAN->clear_item_say();
 		0xFED6->show_npc_face0(0x0000);
 		if (!var0000) {
 			say("\"Halt! Only a true follower of Order may pass this portal. Art thou such a disciple?\"");
@@ -56693,7 +56693,7 @@ void Func04CA object#(0x4CA) () {
 						Func0924(var0004, 0x0000);
 					}
 				}
-				Func097F(0xFF36, "@Seek Order.@", 0x0003);
+				Func097F(METAL_MAN, "@Seek Order.@", 0x0003);
 				abort;
 
 			case "grand shrine" (remove):
@@ -56723,16 +56723,16 @@ void Func04CA object#(0x4CA) () {
 
 			case "I follow Chaos" (remove):
 				say("\"Then thou shalt not pass.\"");
-				Func097F(0xFF36, "@Duty.@", 0x0003);
-				0xFF36->set_schedule_type(PATROL);
+				Func097F(METAL_MAN, "@Duty.@", 0x0003);
+				METAL_MAN->set_schedule_type(PATROL);
 				break;
 
 			case "bye":
 				UI_remove_npc_face0();
 				UI_remove_npc_face1();
 				Func097F(AVATAR, "@I have heard enough.@", 0x0000);
-				Func097F(0xFF36, "@Always follow Order.@", 0x0003);
-				0xFF36->set_schedule_type(PATROL);
+				Func097F(METAL_MAN, "@Always follow Order.@", 0x0003);
+				METAL_MAN->set_schedule_type(PATROL);
 				break;
 		}
 	}

@@ -42047,7 +42047,7 @@ void Func04CA object#(0x4CA) () {
 	var var0002;
 
 	if (event == DOUBLECLICK) {
-		0xFF36->show_npc_face(0x0000);
+		IAN->show_npc_face(0x0000);
 		var0000 = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
 		if (gflags[0x0243]) {
@@ -42120,7 +42120,7 @@ void Func04CA object#(0x4CA) () {
 						var0001 = UI_add_party_items(0x0001, 0x0281, 0x00F9, 0x0007, false);
 						if (var0001) {
 							say("\"Then here is thy key. Be happy! Oh, one more thing. There is a rule which must be followed.\"");
-							0xFF36->get_npc_object()->set_schedule_type(LOITER);
+							IAN->get_npc_object()->set_schedule_type(LOITER);
 							add("rule");
 						}
 					} else {
@@ -42160,7 +42160,7 @@ void Func04CA object#(0x4CA) () {
 		say("\"Goodbye.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF36);
+		Func092E(IAN);
 	}
 }
 
