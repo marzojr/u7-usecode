@@ -40765,12 +40765,12 @@ void Func04C3 object#(0x4C3) () {
 		JOHN_PAUL->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
-		var0002 = Func08F7(0xFF3B);
+		var0002 = Func08F7(HORFFE);
 		var0003 = false;
 		add(["name", "job", "bye"]);
 		if (!gflags[0x026C]) {
 			say("The very serious man breaks into a half-smile as he greets you.");
-			var0004 = JOHN_PAUL->get_distance(0xFF3B);
+			var0004 = JOHN_PAUL->get_distance(HORFFE);
 			if (var0004 < 0x000A) {
 				if (gflags[0x026E]) {
 					say("Horffe is standing at attention just behind him.");
@@ -40853,8 +40853,8 @@ void Func04C3 object#(0x4C3) () {
 			case "Sir Horffe":
 				say("\"He is the captain of the guards. I would have no other for his position. He is the most honorable warrior I have ever met.\"");
 				if (var0002) {
-					0xFF3B->say("\"To thank you, Sir!\"");
-					0xFF3B->hide();
+					HORFFE->say("\"To thank you, Sir!\"");
+					HORFFE->hide();
 					JOHN_PAUL->show_npc_face(0x0000);
 				}
 				if (var0003) {
@@ -40931,8 +40931,8 @@ void Func04C3 object#(0x4C3) () {
 					say("\"Now I must apologize to Sir Horffe!\"");
 					if (var0002) {
 						say("*");
-						0xFF3B->say("\"To have no need! To be happy the true vandal is discovered.\"*");
-						0xFF3B->hide();
+						HORFFE->say("\"To have no need! To be happy the true vandal is discovered.\"*");
+						HORFFE->hide();
 						JOHN_PAUL->show_npc_face(0x0000);
 					}
 				}
@@ -41193,10 +41193,10 @@ void Func04C5 object#(0x4C5) () {
 	var var0002;
 
 	if (event == DOUBLECLICK) {
-		0xFF3B->show_npc_face(0x0000);
+		HORFFE->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x026E]) {
-			var0000 = 0xFF3B->get_distance(JOHN_PAUL);
+			var0000 = HORFFE->get_distance(JOHN_PAUL);
 			if (var0000 < 0x000B) {
 				if (gflags[0x026C]) {
 					var0001 = " standing at attention just behind Lord John-Paul.";
@@ -41295,7 +41295,7 @@ void Func04C5 object#(0x4C5) () {
 		say("\"To say goodbye.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092F(0xFF3B);
+		Func092F(HORFFE);
 	}
 }
 
