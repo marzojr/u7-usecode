@@ -15613,7 +15613,7 @@ void Func032B shape#(0x32B) () {
 		0xFEFB->set_item_flag(MET);
 		NEYOBI->set_item_flag(SI_ZOMBIE);
 		GWENNO->set_item_flag(SI_ZOMBIE);
-		var0008 = [AVATAR, SELINA, KALEN, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, 0xFF33, 0xFF35, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, RABINDRINATH, 0xFF4A, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
+		var0008 = [AVATAR, SELINA, KALEN, ALE, 0xFF31, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, 0xFF30, 0xFF2E, JORVIN, 0xFF33, 0xFF35, 0xFF34, 0xFEF0, 0xFEDB, 0xFF29, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -55764,9 +55764,9 @@ void Func04B6 object#(0x4B6) () {
 	var0004 = EDRIN->get_item_flag(MET);
 	if (event == DOUBLECLICK) {
 		Func097F(AVATAR, "@Hello, there!@", 0x0000);
-		Func097F(0xFF4A, "@Yes?@", 0x0002);
-		0xFF4A->set_schedule_type(TALK);
-		0xFF4A->Func07D1();
+		Func097F(SIRANUSH, "@Yes?@", 0x0002);
+		SIRANUSH->set_schedule_type(TALK);
+		SIRANUSH->Func07D1();
 	}
 	if (event == SCRIPTED) {
 		if (gflags[0x0211]) {
@@ -55798,7 +55798,7 @@ void Func04B6 object#(0x4B6) () {
 			}
 			AVATAR->move_object([0x05B4, 0x0652, 0x0000]);
 		} else {
-			0xFF4A->show_npc_face0(0x0000);
+			SIRANUSH->show_npc_face0(0x0000);
 			say("\"Edrin! Thou hast come...\"");
 			EDRIN->show_npc_face1(0x0000);
 			say("\"Siranush! I had despaired of seeing thee again! How I wish I could be with thee always...\"");
@@ -55857,7 +55857,7 @@ void Func04B6 object#(0x4B6) () {
 				var000E = 0xFF1B->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
 			}
 			gflags[0x0211] = true;
-			var0006 = script 0xFF4A {
+			var0006 = script SIRANUSH {
 				nohalt;
 				call Func04B6;
 			};
@@ -55865,32 +55865,32 @@ void Func04B6 object#(0x4B6) () {
 		abort;
 	}
 	if (event == STARTED_TALKING) {
-		0xFF4A->run_schedule();
-		0xFF4A->clear_item_say();
-		0xFF4A->show_npc_face0(0x0000);
-		var0015 = 0xFF4A->get_item_flag(MET);
+		SIRANUSH->run_schedule();
+		SIRANUSH->clear_item_say();
+		SIRANUSH->show_npc_face0(0x0000);
+		var0015 = SIRANUSH->get_item_flag(MET);
 		if (gflags[0x020D] == true) {
 			if (var0003) {
 				say("\"Hast thou reconsidered my request, Avatar? Wilt thou give to me the Dream Crystal?\"");
 				if (Func0955() == true) {
 					say("\"I knew that Edrin could not be so misled...\"");
-					var0016 = Func0996(AVATAR, 0xFF4A, QUANTITY_ANY, 0x0289, QUALITY_ANY, 0x000A, true);
+					var0016 = Func0996(AVATAR, SIRANUSH, QUANTITY_ANY, 0x0289, QUALITY_ANY, 0x000A, true);
 					say("\"After all these centuries of waiting... I had almost given up hope.\" *\"But there is one that I must see one last time, before our paths forever separate.\"");
 					UI_remove_npc_face0();
-					var0017 = 0xFF4A->get_object_position();
+					var0017 = SIRANUSH->get_object_position();
 					var0017[0x0001] += 0x0002;
 					EDRIN->move_object(var0017);
 					UI_sprite_effect(ANIMATION_TELEPORT, var0017[0x0001], var0017[0x0002], var0017[0x0003], 0x0000, 0x0000, LOOP_ONCE);
 					EDRIN->set_schedule_type(WAIT);
-					0xFF4A->set_schedule_type(WAIT);
-					var0018 = EDRIN->find_direction(0xFF4A);
-					var0019 = 0xFF4A->find_direction(EDRIN);
+					SIRANUSH->set_schedule_type(WAIT);
+					var0018 = EDRIN->find_direction(SIRANUSH);
+					var0019 = SIRANUSH->find_direction(EDRIN);
 					var0006 = script EDRIN {
 						nohalt;
 						face var0018;
 						actor frame strike_2h;
 					};
-					var0006 = script 0xFF4A {
+					var0006 = script SIRANUSH {
 						nohalt;
 						face var0019;
 						actor frame strike_2h;
@@ -55919,11 +55919,11 @@ void Func04B6 object#(0x4B6) () {
 				if (var001A) {
 					say("\"I am Siranush. I have been expecting thee...\"");
 					say("\"Now that the foul mage Rabindrinath is dead, we have some hope of escaping his evil spell.\"");
-					0xFF4A->set_item_flag(MET);
+					SIRANUSH->set_item_flag(MET);
 					add(["expecting", "Rabindrinath", "evil spell"]);
 				} else {
 					say("\"Thou hast come at last! I am Siranush. I have been expecting thee... I knew that thou wert the one destined to free us from Rabindrinath's evil spell.\"");
-					0xFF4A->set_item_flag(MET);
+					SIRANUSH->set_item_flag(MET);
 					add(["expecting", "Rabindrinath", "evil spell"]);
 				}
 			} else {
@@ -55932,23 +55932,23 @@ void Func04B6 object#(0x4B6) () {
 					"?\"");
 				if (Func0955() == true) {
 					if (var0003 == true) {
-						var0016 = Func0996(AVATAR, 0xFF4A, QUANTITY_ANY, 0x0289, QUALITY_ANY, 0x000A, true);
+						var0016 = Func0996(AVATAR, SIRANUSH, QUANTITY_ANY, 0x0289, QUALITY_ANY, 0x000A, true);
 						say("\"After all these centuries of waiting... I had almost given up hope.\" *\"But there is one that I must see one last time, before our paths forever separate.\"");
 						UI_remove_npc_face0();
-						var0017 = 0xFF4A->get_object_position();
+						var0017 = SIRANUSH->get_object_position();
 						var0017[0x0001] += 0x0002;
 						EDRIN->move_object(var0017);
 						UI_sprite_effect(ANIMATION_TELEPORT, var0017[0x0001], var0017[0x0002], var0017[0x0003], 0x0000, 0x0000, LOOP_ONCE);
 						EDRIN->set_schedule_type(WAIT);
-						0xFF4A->set_schedule_type(WAIT);
-						var0018 = EDRIN->find_direction(0xFF4A);
-						var0019 = 0xFF4A->find_direction(EDRIN);
+						SIRANUSH->set_schedule_type(WAIT);
+						var0018 = EDRIN->find_direction(SIRANUSH);
+						var0019 = SIRANUSH->find_direction(EDRIN);
 						var0006 = script EDRIN {
 							nohalt;
 							face var0018;
 							actor frame strike_2h;
 						};
-						var0006 = script 0xFF4A {
+						var0006 = script SIRANUSH {
 							nohalt;
 							face var0019;
 							actor frame strike_2h;
@@ -55974,7 +55974,7 @@ void Func04B6 object#(0x4B6) () {
 				say("\"Remember, death is a dreamer's fiery door to life.\"");
 			}
 			UI_remove_npc_face0();
-			Func097F(0xFF4A, "@Go quickly!@", 0x0000);
+			Func097F(SIRANUSH, "@Go quickly!@", 0x0000);
 			abort;
 		}
 		converse (0) {
@@ -56117,23 +56117,23 @@ void Func04B6 object#(0x4B6) () {
 				if (var0003) {
 					say("\"Wilt thou give to me the Dream Crystal so that we may at last find peace?\"");
 					if (Func0955() == true) {
-						var0016 = Func0996(AVATAR, 0xFF4A, QUANTITY_ANY, 0x0289, QUALITY_ANY, 0x000A, true);
+						var0016 = Func0996(AVATAR, SIRANUSH, QUANTITY_ANY, 0x0289, QUALITY_ANY, 0x000A, true);
 						say("\"After all these centuries of waiting... I had almost given up hope.\" *\"But there is one that I must see one last time, before our paths forever separate.\"");
 						UI_remove_npc_face0();
-						var0017 = 0xFF4A->get_object_position();
+						var0017 = SIRANUSH->get_object_position();
 						var0017[0x0001] += 0x0002;
 						EDRIN->move_object(var0017);
 						UI_sprite_effect(ANIMATION_TELEPORT, var0017[0x0001], var0017[0x0002], var0017[0x0003], 0x0000, 0x0000, LOOP_ONCE);
 						EDRIN->set_schedule_type(WAIT);
-						0xFF4A->set_schedule_type(WAIT);
-						var0018 = EDRIN->find_direction(0xFF4A);
-						var0019 = 0xFF4A->find_direction(EDRIN);
+						SIRANUSH->set_schedule_type(WAIT);
+						var0018 = EDRIN->find_direction(SIRANUSH);
+						var0019 = SIRANUSH->find_direction(EDRIN);
 						var0006 = script EDRIN {
 							nohalt;
 							face var0018;
 							actor frame strike_2h;
 						};
-						var0006 = script 0xFF4A {
+						var0006 = script SIRANUSH {
 							nohalt;
 							face var0019;
 							actor frame strike_2h;
@@ -74978,7 +74978,7 @@ void Func0738 object#(0x738) () {
 	var var0004;
 
 	if (event == EGG) {
-		var0000 = 0xFF4A->get_item_flag(MET);
+		var0000 = SIRANUSH->get_item_flag(MET);
 		if (var0000) {
 			var0001 = find_nearby(0x010F, 0x0006, MASK_NONE);
 			for (var0004 in var0001 with var0002 to var0003) {

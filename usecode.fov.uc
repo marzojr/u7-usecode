@@ -38957,8 +38957,8 @@ void Func04B6 object#(0x4B6) () {
 	var var0001;
 
 	if (event == DOUBLECLICK) {
-		0xFF4A->show_npc_face(0x0000);
-		var0000 = 0xFF4A;
+		INMANILEM->show_npc_face(0x0000);
+		var0000 = INMANILEM;
 		add(["name", "job", "bye"]);
 		if (!gflags[0x0247]) {
 			say("You are greeted by a friendly gargoyle.");
@@ -39058,7 +39058,7 @@ void Func04B6 object#(0x4B6) () {
 		say("\"To wish you good health, human.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092F(0xFF4A);
+		Func092F(INMANILEM);
 	}
 }
 
