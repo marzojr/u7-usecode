@@ -55107,12 +55107,12 @@ void Func04B3 object#(0x4B3) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Old friend...@");
-		0xFF4D->Func07D1();
-		Func097F(0xFF4D, "@What dost thou wish?@", 0x0002);
-		0xFF4D->set_schedule_type(TALK);
+		CLONE_SHAMINO->Func07D1();
+		Func097F(CLONE_SHAMINO, "@What dost thou wish?@", 0x0002);
+		CLONE_SHAMINO->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF4D->clear_item_say();
+		CLONE_SHAMINO->clear_item_say();
 		if (AVATAR->get_item_flag(DONT_MOVE)) {
 			var0004 = Func09A0(0x0000, 0x0001);
 			var0005 = script var0004 after 2 ticks {
@@ -55131,14 +55131,14 @@ void Func04B3 object#(0x4B3) () {
 				}
 			}
 		}
-		0xFF4D->set_schedule_type(WAIT);
+		CLONE_SHAMINO->set_schedule_type(WAIT);
 		SHAMINO->show_npc_face0(0x0000);
 		say("\"We feared for thee when thou didst disappear from between the pillars. While searching, I became trapped here. I cannot seem to find the way out. Though I suspect that those buttons on the wall might be part of the answer.\"");
 		converse (["disappear", "trapped", "buttons", "bye"]) {
 			case "bye":
-				0xFF4D->run_schedule();
+				CLONE_SHAMINO->run_schedule();
 				Func097F(AVATAR, "@Thanks...@", 0x0000);
-				Func097F(0xFF4D, "@Try the left button!@", 0x0002);
+				Func097F(CLONE_SHAMINO, "@Try the left button!@", 0x0002);
 				abort;
 
 			case "disappear":
@@ -55187,18 +55187,18 @@ void Func04B3 object#(0x4B3) () {
 				say("\"Wouldst thou like me to do it?\"");
 				if (Func0955() == true) {
 					UI_remove_npc_face0();
-					Func097F(0xFF4D, "@Watch this!@", 0x0000);
+					Func097F(CLONE_SHAMINO, "@Watch this!@", 0x0000);
 					gflags[0x01EE] = true;
 					var0009 = AVATAR->find_nearby(0x0314, 0x0014, MASK_NONE);
 					for (var000C in var0009 with var000A to var000B) {
 						var000D = var000C->get_item_quality();
 						if (var000D == 0x0017) {
 							UI_play_music(0x001C, Func09A0(0x0005, 0x0001));
-							var000E = 0xFF4D->get_distance(var000C);
+							var000E = CLONE_SHAMINO->get_distance(var000C);
 							var0007 = var000C->get_object_position();
 							var0007[0x0001] += 0x0001;
-							0xFF4D->set_npc_id(0x0001);
-							0xFF4D->si_path_run_usecode(var0007, SI_PATH_SUCCESS, 0xFF4D->get_npc_object(), Func04B3, true);
+							CLONE_SHAMINO->set_npc_id(0x0001);
+							CLONE_SHAMINO->si_path_run_usecode(var0007, SI_PATH_SUCCESS, CLONE_SHAMINO->get_npc_object(), Func04B3, true);
 						}
 					}
 					abort;
@@ -55236,17 +55236,17 @@ void Func04B3 object#(0x4B3) () {
 			say("\"I do not think I'll be back for quite a while, Avatar. Thou shalt have to find the way out thyself.\"");
 			say("\"If thou wishest to...\"");
 			UI_remove_npc_face0();
-			var000F = 0xFF4D->find_nearby(0x028C, 0x001E, MASK_NPC);
+			var000F = CLONE_SHAMINO->find_nearby(0x028C, 0x001E, MASK_NPC);
 			if (var000F) {
-				Func097F(0xFF4D, "@I think 'tis THY turn...@", 0x0001);
+				Func097F(CLONE_SHAMINO, "@I think 'tis THY turn...@", 0x0001);
 				var000F->set_schedule_type(WAIT);
 				SEX_02->clear_item_say();
 				Func097F(SEX_02, "@Yes, Shamino...@", 0x0002);
-				var0006 = 0xFF4D->find_nearby(0x0178, 0x000A, MASK_NONE);
+				var0006 = CLONE_SHAMINO->find_nearby(0x0178, 0x000A, MASK_NONE);
 				if (var0006) {
 					var0007 = var0006->get_object_position();
-					0xFF4D->set_npc_id(0x0000);
-					0xFF4D->si_path_run_usecode([(var0007[0x0001] + 0x0001), var0007[0x0002], var0007[0x0003]], PATH_SUCCESS, item, Func04B3, true);
+					CLONE_SHAMINO->set_npc_id(0x0000);
+					CLONE_SHAMINO->si_path_run_usecode([(var0007[0x0001] + 0x0001), var0007[0x0002], var0007[0x0003]], PATH_SUCCESS, item, Func04B3, true);
 					SEX_02->si_path_run_usecode([(var0007[0x0001] + 0x0001), (var0007[0x0002] + 0x0002), var0007[0x0003]], PATH_SUCCESS, item, Func04B3, true);
 				}
 			}
@@ -55269,10 +55269,10 @@ void Func04B3 object#(0x4B3) () {
 		if ((var0010 == 0x02D1) && (gflags[0x0202] == true)) {
 			event = DEATH;
 		}
-		if ((var0010 == 0x01E7) && (0xFF4D->get_npc_id() == 0x0001)) {
+		if ((var0010 == 0x01E7) && (CLONE_SHAMINO->get_npc_id() == 0x0001)) {
 			event = SI_PATH_SUCCESS;
 		}
-		if ((var0010 == 0x01E7) && (0xFF4D->get_npc_id() == 0x0000)) {
+		if ((var0010 == 0x01E7) && (CLONE_SHAMINO->get_npc_id() == 0x0000)) {
 			event = PATH_SUCCESS;
 		}
 		if (var0010 == 0x028C) {
@@ -55280,16 +55280,16 @@ void Func04B3 object#(0x4B3) () {
 		}
 	}
 	if (event == SI_PATH_SUCCESS) {
-		var0005 = script 0xFF4D {
+		var0005 = script CLONE_SHAMINO {
 			call Func072A;
 		};
 		abort;
 	}
 	if (event == PATH_SUCCESS) {
 		if (gflags[0x0202]) {
-			var0011 = 0xFF4D->get_object_position();
+			var0011 = CLONE_SHAMINO->get_object_position();
 			var0012 = SEX_02->get_object_position();
-			Func09AC(0xFF4D, 0x001C, 0x066C, DANCE);
+			Func09AC(CLONE_SHAMINO, 0x001C, 0x066C, DANCE);
 			Func09AC(SEX_02, 0x0018, 0x066C, DANCE);
 			UI_sprite_effect(ANIMATION_TELEPORT2, var0011[0x0001], var0011[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			UI_sprite_effect(ANIMATION_TELEPORT2, var0012[0x0001], var0012[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
@@ -55332,7 +55332,7 @@ void Func04B3 object#(0x4B3) () {
 			var0007 = AVATAR->get_object_position();
 			UI_sprite_effect(ANIMATION_TELEPORT, var0007[0x0001], var0007[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			if (AVATAR->find_nearby(0x01E7, 0x0014, MASK_NONE)) {
-				0xFF4D->show_npc_face0(0x0000);
+				CLONE_SHAMINO->show_npc_face0(0x0000);
 				say("\"The slaves, Avatar! Thou didst release them all! Damn thee!\"");
 				UI_remove_npc_face0();
 			}
@@ -74476,7 +74476,7 @@ void Func072A object#(0x72A) () {
 	var var0001;
 
 	if (event == SCRIPTED) {
-		var0000 = 0xFF4D->find_nearby(0x0314, 0x0004, MASK_NONE);
+		var0000 = CLONE_SHAMINO->find_nearby(0x0314, 0x0004, MASK_NONE);
 		if (var0000) {
 			var0001 = var0000->get_item_quality();
 			Func0815(var0001);
@@ -80777,7 +80777,7 @@ void Func07F6 object#(0x7F6) () {
 				gflags[0x0203] = true;
 			}
 			if (var0000 == 0x0006) {
-				var0004 = script 0xFF4D after (var0002 + 0x000A) ticks {
+				var0004 = script CLONE_SHAMINO after (var0002 + 0x000A) ticks {
 					call Func07F6;
 				};
 				gflags[0x0204] = true;
@@ -80799,8 +80799,8 @@ void Func07F6 object#(0x7F6) () {
 			CLONE_IOLO->item_say("@Avatar! Avatar!@");
 			abort;
 		}
-		if (get_npc_number() == 0xFF4D) {
-			0xFF4D->item_say("@Avatar, thou hast returned!@");
+		if (get_npc_number() == CLONE_SHAMINO) {
+			CLONE_SHAMINO->item_say("@Avatar, thou hast returned!@");
 			abort;
 		}
 		if (get_npc_number() == 0xFF4C) {
@@ -107513,7 +107513,7 @@ void Func0927 0x927 () {
 		Func097F(var0004, var0001[var0005], UI_get_random(0x000A));
 	}
 	if (gflags[0x01EE] == true) {
-		var0006 = script 0xFF4D after 25 ticks {
+		var0006 = script CLONE_SHAMINO after 25 ticks {
 			call Func04B3;
 		};
 	} else if (UI_is_pc_female()) {

@@ -38559,10 +38559,10 @@ void Func04B3 object#(0x4B3) () {
 	var var000B;
 
 	if (event == DOUBLECLICK) {
-		0xFF4D->show_npc_face(0x0000);
+		POLLY->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFF4D->get_npc_object()->get_schedule_type();
+		var0002 = POLLY->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (gflags[0x0212]) {
 			add("thief");
@@ -38675,7 +38675,7 @@ void Func04B3 object#(0x4B3) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF4D);
+		Func092E(POLLY);
 	}
 }
 
