@@ -42884,7 +42884,7 @@ void Func04D0 object#(0x4D0) () {
 	var var0004;
 
 	if (event == DOUBLECLICK) {
-		0xFF30->show_npc_face(0x0000);
+		BLORN->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
 		if (!gflags[0x028D]) {
