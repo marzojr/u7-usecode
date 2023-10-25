@@ -15617,7 +15617,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, D_STEFANO, 0xFF37, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, CELLIA, FLICKEN, HARNNA, KRAYG, LUCILLA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, DRAYGAN, MARSTEN, SPEKTOR, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, MORGHRIM];
+		var0008 = [0xFEED, 0xFEE8, D_STEFANO, D_CANTRA, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, CELLIA, FLICKEN, HARNNA, KRAYG, LUCILLA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, DRAYGAN, MARSTEN, SPEKTOR, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, MORGHRIM];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -56526,7 +56526,7 @@ void Func04C9 object#(0x4C9) () {
 	var var0001;
 	var var0002;
 
-	var0000 = 0xFF37->get_item_flag(MET);
+	var0000 = D_CANTRA->get_item_flag(MET);
 	if (event == DEATH) {
 		CANTRA->show_npc_face0(0x0000);
 		say("\"Why dost thou attack me? Do thine eyes deceive thee so?\" *\"Slay the foul bane that wishes to devour me instead! If it is not stopped, it will destroy us all!\" *\"I can stand this nightmare no more...\"");
@@ -56534,36 +56534,36 @@ void Func04C9 object#(0x4C9) () {
 		var0001 = get_object_position();
 		UI_play_sound_effect(0x0074);
 		UI_sprite_effect(ANIMATION_SMALL_RING_BLAST, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-		0xFF37->remove_npc();
+		D_CANTRA->remove_npc();
 	}
 	if (event == PROXIMITY) {
 		var0002 = UI_die_roll(0x0001, 0x0004);
 		if (var0002 == 0x0001) {
-			Func097F(0xFF37, "@Make it stop!@", 0x0000);
+			Func097F(D_CANTRA, "@Make it stop!@", 0x0000);
 		}
 		if (var0002 == 0x0002) {
-			Func097F(0xFF37, "@It will kill me!@", 0x0000);
+			Func097F(D_CANTRA, "@It will kill me!@", 0x0000);
 		}
 		if (var0002 == 0x0003) {
-			Func097F(0xFF37, "@Canst thou not see it!@", 0x0000);
+			Func097F(D_CANTRA, "@Canst thou not see it!@", 0x0000);
 		}
 		if (var0002 == 0x0004) {
-			Func097F(0xFF37, "@It is pure evil!@", 0x0000);
+			Func097F(D_CANTRA, "@It is pure evil!@", 0x0000);
 		}
 	}
 	if (event == DOUBLECLICK) {
 		if (var0000 != true) {
 			CANTRA->show_npc_face0(0x0000);
 			say("\"Iieeeee.... Help me!\" ~\"I cannot escape...\" ~\"It will catch and devour me!\" *\"Canst thou not see it? Please, help me!\"");
-			0xFF37->set_item_flag(MET);
+			D_CANTRA->set_item_flag(MET);
 			UI_remove_npc_face0();
-			0xFF37->set_schedule_type(PATROL);
+			D_CANTRA->set_schedule_type(PATROL);
 			abort;
 		}
 		CANTRA->show_npc_face0(0x0000);
 		say("\"Art thou blind! Canst thou not see the foul beast?\" *\"Have mercy! I beg thee to slay such an horror! Please, thou must kill it before it takes me!\"");
 		UI_remove_npc_face0();
-		0xFF37->set_schedule_type(PATROL);
+		D_CANTRA->set_schedule_type(PATROL);
 		abort;
 	}
 }

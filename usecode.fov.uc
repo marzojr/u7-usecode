@@ -41931,9 +41931,9 @@ void Func04C9 object#(0x4C9) () {
 	var var0002;
 
 	if (event == DOUBLECLICK) {
-		0xFF37->show_npc_face(0x0000);
+		LEIGH->show_npc_face(0x0000);
 		var0000 = Func0909();
-		var0001 = 0xFF37->get_npc_object()->get_schedule_type();
+		var0001 = LEIGH->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (gflags[0x0259]) {
 			if (gflags[0x027A]) {
@@ -42034,7 +42034,7 @@ void Func04C9 object#(0x4C9) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF37);
+		Func092E(LEIGH);
 	}
 }
 
