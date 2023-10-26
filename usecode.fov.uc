@@ -45100,9 +45100,9 @@ void Func04E1 object#(0x4E1) () {
 	var var0005;
 
 	if (event == DOUBLECLICK) {
-		0xFF1F->show_npc_face(0x0000);
+		SINTAG->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
-		var0001 = 0xFF1F->get_npc_object()->get_schedule_type();
+		var0001 = SINTAG->get_npc_object()->get_schedule_type();
 		var0002 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
 		add(["name", "job", "bye"]);
 		if (gflags[0x0104] || gflags[0x0135]) {
@@ -45208,7 +45208,7 @@ void Func04E1 object#(0x4E1) () {
 		say("Sintag grunts.*");
 	}
 	if (event == PROXIMITY) {
-		var0001 = 0xFF1F->get_npc_object()->get_schedule_type();
+		var0001 = SINTAG->get_npc_object()->get_schedule_type();
 		var0004 = UI_die_roll(0x0001, 0x0004);
 		if (var0001 == TEND_SHOP) {
 			if (var0004 == 0x0001) {
@@ -45223,7 +45223,7 @@ void Func04E1 object#(0x4E1) () {
 			if (var0004 == 0x0004) {
 				var0005 = "@No funny stuff with the games.@";
 			}
-			0xFF1F->item_say(var0005);
+			SINTAG->item_say(var0005);
 		} else {
 			abort;
 		}
