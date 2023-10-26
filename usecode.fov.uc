@@ -46621,9 +46621,9 @@ void Func04ED object#(0x4ED) () {
 	var var0009;
 
 	if (event == DOUBLECLICK) {
-		0xFF13->show_npc_face(0x0000);
+		KESSLER->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
-		var0001 = 0xFF13->get_npc_object()->get_schedule_type();
+		var0001 = KESSLER->get_npc_object()->get_schedule_type();
 		var0002 = Func0909();
 		add(["name", "job", "bye"]);
 		var0003 = Func0931(PARTY, 0x0001, 0x0289, QUALITY_ANY, FRAME_ANY);
@@ -46783,7 +46783,7 @@ void Func04ED object#(0x4ED) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF13);
+		Func092E(KESSLER);
 	}
 }
 
