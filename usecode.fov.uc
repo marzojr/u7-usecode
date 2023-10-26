@@ -46001,9 +46001,9 @@ void Func04E7 object#(0x4E7) () {
 	var var000E;
 
 	if (event == DOUBLECLICK) {
-		0xFF19->show_npc_face(0x0000);
+		MANDY->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
-		var0001 = 0xFF19->get_npc_object()->get_schedule_type();
+		var0001 = MANDY->get_npc_object()->get_schedule_type();
 		var0002 = Func0909();
 		add(["name", "job", "bye"]);
 		if (var0001 == WAITER) {
@@ -46029,18 +46029,18 @@ void Func04E7 object#(0x4E7) () {
 					if (var0003) {
 						say("Mandy looks at Dupre and says, \"Don't I know thee?\"*");
 						DUPRE->say("\"Yes, milady. I was here a few months ago.\"*");
-						0xFF19->say("\"I remember! Thou art working for Brommer's Britannian travel guides! Thou art a pub critic!\"*");
+						MANDY->say("\"I remember! Thou art working for Brommer's Britannian travel guides! Thou art a pub critic!\"*");
 						DUPRE->say("\"That is right, milady.\"*");
-						0xFF19->say("\"Welcome back! Please try anything on the menu. It is all still very good.\"*");
+						MANDY->say("\"Welcome back! Please try anything on the menu. It is all still very good.\"*");
 						DUPRE->say("\"I thank thee, milady.\"*");
 						DUPRE->hide();
-						0xFF19->show_npc_face(0x0000);
+						MANDY->show_npc_face(0x0000);
 						var0004 = Func08F7(IOLO);
 						if (var0004) {
 							IOLO->say("\"Thou art a swine, Dupre.\"*");
 							IOLO->hide();
 						}
-						0xFF19->show_npc_face(0x0000);
+						MANDY->show_npc_face(0x0000);
 					}
 					add(["food", "drink", "room", "buy"]);
 				} else {
@@ -46241,7 +46241,7 @@ void Func04E7 object#(0x4E7) () {
 		say("\"Nice talking with thee. I shall see thee later, I hope.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF19);
+		Func092E(MANDY);
 	}
 }
 
