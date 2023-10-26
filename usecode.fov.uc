@@ -46403,7 +46403,7 @@ void Func04E9 object#(0x4E9) () {
 					say("\"Wouldst thou like to see our Passion Play?\"");
 					if (Func090A()) {
 						var0001 = Func08F7(MERYL);
-						var0002 = Func08F7(0xFF15);
+						var0002 = Func08F7(DUSTIN);
 						if (var0001 && var0002) {
 							var0003 = UI_get_party_list();
 							var0004 = 0x0000;
@@ -46503,11 +46503,11 @@ void Func04EB object#(0x4EB) () {
 	var var0003;
 
 	if (event == DOUBLECLICK) {
-		0xFF15->say("You see a short, stocky actor in his mid- to late forties. He cannot speak to you now because he is concentrating on his lines for the Passion Play. Perhaps you should speak to Paul.");
+		DUSTIN->say("You see a short, stocky actor in his mid- to late forties. He cannot speak to you now because he is concentrating on his lines for the Passion Play. Perhaps you should speak to Paul.");
 	}
 	if (event == PROXIMITY) {
 		var0000 = UI_part_of_day();
-		var0001 = 0xFF15->get_npc_object()->get_schedule_type();
+		var0001 = DUSTIN->get_npc_object()->get_schedule_type();
 		var0002 = UI_die_roll(0x0001, 0x0004);
 		if (var0001 == PATROL) {
 			if (var0002 == 0x0001) {
@@ -46522,9 +46522,9 @@ void Func04EB object#(0x4EB) () {
 			if (var0002 == 0x0004) {
 				var0003 = "@We shall entertain thee!@";
 			}
-			0xFF15->item_say(var0003);
+			DUSTIN->item_say(var0003);
 		} else {
-			Func092E(0xFF15);
+			Func092E(DUSTIN);
 		}
 	}
 }
@@ -72915,27 +72915,27 @@ void Func08C7 0x8C7 () {
 	say("\"Welcome to Our Tale, ~A tale so true to life. ~'Tis a tale of tragedy ~A man has lost his wife.");
 	say("\"But the story need not be sad ~When The Fellowship is here. ~The Triad of Inner Strength ~Gives one no cause to fear.\"*");
 	PAUL->hide();
-	0xFF15->say("Dustin takes the stage as Paul moves away. Meryl lies on the ground in front of him and assumes a death-like pose.");
+	DUSTIN->say("Dustin takes the stage as Paul moves away. Meryl lies on the ground in front of him and assumes a death-like pose.");
 	say("\"'Tis doom! 'Tis despair! 'Tis death! ~My beloved wife is gone! ~Disease has taken her away ~And left me with but a song.\"");
 	say("Dustin puts his head in his hands and mimes sobbing. As he sobs, Meryl rises from her \"death\" in a ghost-like fashion, then addresses Dustin.*");
 	MERYL->say("\"Mine husband, my love! ~Do not despair! 'Tis not doom! ~Thou shalt rise above ~All this melancholy and gloom!\"*");
-	0xFF15->say("\"Who doth speak to me? ~Could it be she? ~Or have I indeed gone mad? ~But who else -could- it be?\"*");
+	DUSTIN->say("\"Who doth speak to me? ~Could it be she? ~Or have I indeed gone mad? ~But who else -could- it be?\"*");
 	MERYL->say("\"Mine husband, thou must listen. ~Thou hast thy comfort within thy grip. ~Thou must only seek them out -- ~Those that can help -- The Fellowship!\"*");
 	MERYL->hide();
-	0xFF15->say("Meryl drifts off stage, leaving Dustin alone.");
+	DUSTIN->say("Meryl drifts off stage, leaving Dustin alone.");
 	say("\"The Fellowship, she said? ~But what do I need with it? ~I have mine eight virtues and mine healers ~With these nothing else will fit!\"*");
 	PAUL->say("Paul enters the stage with Meryl, who now wears a different mask.");
 	say("\"But that is where thou art wrong! ~The Fellowship exists to help thee! ~The Triad of Inner Strength is here ~To give thee a sense of unity!\"");
 	say("\"Join us now and thou wilt see. ~Join thy brothers and our plan ~To promote the tenets of our group -- ~Thou wilt be a better man.\"");
 	say("At this point, an elaborate mimed sequence reveals how Dustin joins The Fellowship, receives his medallion from a \"branch leader\", portrayed by Paul, and receives congratulations from Meryl.");
 	say("\"Strive for Unity at all times, ~And Trust Thy Brother through all ill, ~For Worthiness Precedes thine own Reward ~Hark to our words -- it surely will!\"*");
-	0xFF15->say("\"I shall give half my wealth to thee! ~I shall do thy bidding and then wait. ~My reward shall come one day ~And free me from mine awful fate.\"");
+	DUSTIN->say("\"I shall give half my wealth to thee! ~I shall do thy bidding and then wait. ~My reward shall come one day ~And free me from mine awful fate.\"");
 	say("Dustin mimes giving Paul some money. Paul exits, then Dustin lies down on the stage and mimes going to sleep. After a moment, Meryl enters the stage, dances around Dustin's body, sprinkling some kind of sparkling dust on him.*");
 	if (var0000) {
 		PAUL->hide();
 		IOLO->say("Iolo whispers to you. \"I am particularly enjoying the visual effects. The script is a little weak, dost thou not think?\"*");
 		IOLO->hide();
-		0xFF15->show_npc_face(0x0000);
+		DUSTIN->show_npc_face(0x0000);
 	}
 	say("Meryl leaves the stage and Dustin 'wakes up'. Lo and behold, he finds a bag near his place of sleep. Upon opening it, he finds a bundle of gold!");
 	say("\"By Lord British I declare! ~'Tis my reward! From the air! ~The voice I heard at night was right ~About my wretched life I will not care!");
@@ -72944,7 +72944,7 @@ void Func08C7 0x8C7 () {
 	if (var0001) {
 		SPARK->say("\"This is really awful.\"*");
 		SPARK->hide();
-		0xFF15->show_npc_face(0x0000);
+		DUSTIN->show_npc_face(0x0000);
 	}
 	say("Paul and Meryl join Dustin on stage and they all hold hands.*");
 	PAUL->say("\"The Fellowship can give thee purpose ~To join is thine only choice ~Commit thyself to our just cause ~And find thine inner voice.\"");
