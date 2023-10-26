@@ -53622,7 +53622,7 @@ void Func04A8 object#(0x4A8) () {
 		}
 		var0006 = STEFANO->get_item_flag(MET);
 		if (gflags[0x0004]) {
-			if (!0xFF22->get_item_flag(DEAD)) {
+			if (!DEATH_KNIGHT->get_item_flag(DEAD)) {
 				say("\"I am not a cowardly man, ",
 					var0000,
 					", but I am powerfully glad to see thee again. I am in terrible trouble.\"");
@@ -53969,7 +53969,7 @@ void Func04A8 object#(0x4A8) () {
 					Func097F(AVATAR, "@Thanks!@", 0x0000);
 				} else {
 					Func097F(AVATAR, "@So long!@", 0x0000);
-					if (gflags[0x0004] && (!0xFF22->get_item_flag(DEAD))) {
+					if (gflags[0x0004] && (!DEATH_KNIGHT->get_item_flag(DEAD))) {
 						Func097F(STEFANO, "@Please protect me...@", 0x0000);
 					} else {
 						Func097F(STEFANO, "@'Til we meet again!@", 0x0002);
@@ -54039,7 +54039,7 @@ void Func04A8 object#(0x4A8) () {
 			abort;
 		}
 		if (gflags[0x0004]) {
-			if (0xFF22->get_item_flag(DEAD)) {
+			if (DEATH_KNIGHT->get_item_flag(DEAD)) {
 				abort;
 			}
 			var0007 = script Func09A0(0x0005, 0x0002) after (UI_get_random(0x0064) + 0x0032) ticks {
@@ -54048,20 +54048,20 @@ void Func04A8 object#(0x4A8) () {
 			};
 			if (STEFANO->npc_nearby()) {
 				UI_play_music(0x001E, Func09A0(0x0005, 0x0001));
-				var0007 = 0xFF22->approach_avatar(0x0078, 0x0028);
+				var0007 = DEATH_KNIGHT->approach_avatar(0x0078, 0x0028);
 				if (!var0007) {
 					var0007 = AVATAR->get_object_position();
 					var0007[0x0001] += 0x000A;
-					0xFF22->move_object(var0007);
+					DEATH_KNIGHT->move_object(var0007);
 					UI_sprite_effect(ANIMATION_TELEPORT2, var0007[0x0001], var0007[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 					UI_play_sound_effect(0x0082);
 				}
-				0xFF22->set_alignment(EVIL);
-				0xFF22->set_schedule_type(IN_COMBAT);
-				0xFF22->set_opponent(STEFANO);
-				0xFF22->set_oppressor(STEFANO);
-				0xFF22->clear_item_say();
-				Func097F(0xFF22, "@Die, Stefano!@", 0x0000);
+				DEATH_KNIGHT->set_alignment(EVIL);
+				DEATH_KNIGHT->set_schedule_type(IN_COMBAT);
+				DEATH_KNIGHT->set_opponent(STEFANO);
+				DEATH_KNIGHT->set_oppressor(STEFANO);
+				DEATH_KNIGHT->clear_item_say();
+				Func097F(DEATH_KNIGHT, "@Die, Stefano!@", 0x0000);
 				STEFANO->clear_item_say();
 				Func097F(STEFANO, "@Save me!@", 0x0002);
 				STEFANO->set_schedule_type(IN_COMBAT);
@@ -59066,9 +59066,9 @@ void Func04DB object#(0x4DB) () {
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
 void Func04DE object#(0x4DE) () {
-	if ((event == DEATH) && 0xFF22->get_item_flag(SI_TOURNAMENT)) {
-		0xFF22->clear_item_flag(SI_TOURNAMENT);
-		0xFF22->reduce_health(0x0032, NORMAL_DAMAGE);
+	if ((event == DEATH) && DEATH_KNIGHT->get_item_flag(SI_TOURNAMENT)) {
+		DEATH_KNIGHT->clear_item_flag(SI_TOURNAMENT);
+		DEATH_KNIGHT->reduce_health(0x0032, NORMAL_DAMAGE);
 		if (STEFANO->get_item_flag(IN_PARTY)) {
 			STEFANO->set_schedule_type(FOLLOW_AVATAR);
 		} else {

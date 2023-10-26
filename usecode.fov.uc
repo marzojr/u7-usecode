@@ -44636,7 +44636,7 @@ void Func04DE object#(0x4DE) () {
 	var var0009;
 
 	if (event == DOUBLECLICK) {
-		0xFF22->show_npc_face(0x0000);
+		GLENNO->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
@@ -44685,9 +44685,9 @@ void Func04DE object#(0x4DE) () {
 					if (var0005) {
 						say("\"Uhm, wait a minute. How old art thou, boy?\"*");
 						SPARK->say("\"Uhm, eighteen.\"*");
-						0xFF22->say("\"Thou dost not look eighteen.\"*");
+						GLENNO->say("\"Thou dost not look eighteen.\"*");
 						SPARK->say("\"All right, I am sixteen.\"*");
-						0xFF22->say("\"Thou dost not look sixteen either. Well, never mind. Thou canst enter. But make sure the management doth not see thee.\" Glenno scratches his head. \"Yes, but... no! I am the management! All right, come on. Just don't cause any trouble.\"*");
+						GLENNO->say("\"Thou dost not look sixteen either. Well, never mind. Thou canst enter. But make sure the management doth not see thee.\" Glenno scratches his head. \"Yes, but... no! I am the management! All right, come on. Just don't cause any trouble.\"*");
 						SPARK->say("\"All right! Wenches!\"*");
 						SPARK->hide();
 						var0006 = Func08F7(IOLO);
@@ -44695,7 +44695,7 @@ void Func04DE object#(0x4DE) () {
 							IOLO->say("Iolo whispers to you, \"Methinks young Spark hath learned a lot whilst adventuring with thee!\"*");
 							IOLO->hide();
 						}
-						0xFF22->show_npc_face(0x0000);
+						GLENNO->show_npc_face(0x0000);
 					}
 					add(["The Baths", "drink"]);
 				} else {
@@ -44751,7 +44751,7 @@ void Func04DE object#(0x4DE) () {
 	}
 	if (event == PROXIMITY) {
 		var0000 = UI_part_of_day();
-		var0007 = 0xFF22->get_npc_object()->get_schedule_type();
+		var0007 = GLENNO->get_npc_object()->get_schedule_type();
 		var0008 = UI_die_roll(0x0001, 0x0004);
 		if (var0007 == LOITER) {
 			if ((var0000 == AFTERNOON) || ((var0000 == NIGHT) || (var0000 == MIDNIGHT))) {
@@ -44767,10 +44767,10 @@ void Func04DE object#(0x4DE) () {
 				if (var0008 == 0x0004) {
 					var0009 = "@Relax here in The Baths!@";
 				}
-				0xFF22->item_say(var0009);
+				GLENNO->item_say(var0009);
 			}
 		} else {
-			Func092E(0xFF22);
+			Func092E(GLENNO);
 		}
 	}
 }
