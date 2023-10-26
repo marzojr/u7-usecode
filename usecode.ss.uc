@@ -2847,7 +2847,7 @@ void Func00FA shape#(0xFA) () {
 	if ((item == var0000) || (item == var0001)) {
 		var0002 = [KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA];
 		if (gflags[0x0270]) {
-			var0002 &= 0xFF29;
+			var0002 &= XENKA;
 		}
 		var0003 = var0002 & [SILENT1, SILENT2, SILENT3];
 		var0004 = var0000->get_item_quality();
@@ -2858,7 +2858,7 @@ void Func00FA shape#(0xFA) () {
 			while (var0004 == get_item_quality()) {
 				var0004 = UI_get_random(0x0009);
 			}
-			if (gflags[0x00D4] && (gflags[0x00D5] && (gflags[0x00D3] && ((!SHAMINO->get_item_flag(SI_ZOMBIE)) && ((!IOLO->get_item_flag(SI_ZOMBIE)) && ((!DUPRE->get_item_flag(SI_ZOMBIE)) && (!0xFF29->get_item_flag(MET)))))))) {
+			if (gflags[0x00D4] && (gflags[0x00D5] && (gflags[0x00D3] && ((!SHAMINO->get_item_flag(SI_ZOMBIE)) && ((!IOLO->get_item_flag(SI_ZOMBIE)) && ((!DUPRE->get_item_flag(SI_ZOMBIE)) && (!XENKA->get_item_flag(MET)))))))) {
 				var0004 = 0x000A;
 			}
 			var0005 = set_item_quality(var0004);
@@ -3483,7 +3483,7 @@ void Func0109 shape#(0x109) () {
 				AVATAR->clear_item_flag(DONT_MOVE);
 				KARNAX->set_npc_id(0x0000);
 				UI_set_weather(CLEAR_WEATHER);
-				0xFF29->set_schedule_type(TALK);
+				XENKA->set_schedule_type(TALK);
 				var0008 = script Func09A0(0x0005, 0x0001) after 1000 ticks {
 					nohalt;
 					call Func00FA;
@@ -3496,15 +3496,15 @@ void Func0109 shape#(0x109) () {
 				var0009 = AVATAR->find_nearby(0x02D6, 0x0014, MASK_NONE);
 				var0009->remove_item();
 				UI_play_music(0x003F, var0001);
-				0xFF29->move_object(var0002);
+				XENKA->move_object(var0002);
 				UI_sprite_effect(ANIMATION_TELEPORT2, var0002[0x0001], var0002[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-				var0008 = script 0xFF29 {
+				var0008 = script XENKA {
 					nohalt;
 					face east;
 					continue;
 					actor frame cast_out;
 				};
-				Func097F(0xFF29, "@It is I...@", 0x0005);
+				Func097F(XENKA, "@It is I...@", 0x0005);
 				Func097F(KARNAX, "@Come to us, Xenka!@", 0x0000);
 				var0008 = script Func09A0(0x0005, 0x0003) after 10 ticks {
 					nohalt;
@@ -15613,7 +15613,7 @@ void Func032B shape#(0x32B) () {
 		0xFEFB->set_item_flag(MET);
 		NEYOBI->set_item_flag(SI_ZOMBIE);
 		GWENNO->set_item_flag(SI_ZOMBIE);
-		var0008 = [AVATAR, SELINA, KALEN, ALE, KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA, SILENT1, SILENT2, SILENT3, JORVIN, HENCH1, HENCH2, HENCH3, 0xFEF0, 0xFEDB, 0xFF29, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
+		var0008 = [AVATAR, SELINA, KALEN, ALE, KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA, SILENT1, SILENT2, SILENT3, JORVIN, HENCH1, HENCH2, HENCH3, 0xFEF0, 0xFEDB, XENKA, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -21284,7 +21284,7 @@ void Func0400 object#(0x400) () {
 				var0017 = Func0988(MIGGIM, var0017);
 			}
 			if (Func08F3()) {
-				var0017 &= 0xFF29;
+				var0017 &= XENKA;
 			}
 			var0000 = Func09A0(0x0005, 0x0001)->set_item_quality(0x0003);
 			var0000 = script Func09A0(0x0005, 0x0001) after 200 ticks {
@@ -56964,7 +56964,7 @@ void Func04CF object#(0x4CF) () {
 		KARNAX->set_schedule_type(TALK);
 	}
 	if (event == PROXIMITY) {
-		if ((Func09A0(0x0005, 0x0001)->get_item_quality() == 0x000A) && (!0xFF29->get_item_flag(MET))) {
+		if ((Func09A0(0x0005, 0x0001)->get_item_quality() == 0x000A) && (!XENKA->get_item_flag(MET))) {
 			KARNAX->set_schedule_type(WAIT);
 			var0007 = script Func09A0(0x0005, 0x0003) {
 				nohalt;
@@ -58471,22 +58471,22 @@ void Func04D7 object#(0x4D7) () {
 	var0000 = Func0954();
 	var0001 = UI_is_pc_female();
 	var0002 = Func0953();
-	var0003 = 0xFF29->get_item_flag(MET);
+	var0003 = XENKA->get_item_flag(MET);
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("Most honored one...");
-		0xFF29->Func07D1();
-		Func097F(0xFF29, "@What?@", 0x0002);
-		0xFF29->set_schedule_type(TALK);
+		XENKA->Func07D1();
+		Func097F(XENKA, "@What?@", 0x0002);
+		XENKA->set_schedule_type(TALK);
 	}
 	if ((event == STARTED_TALKING) || (event == SCRIPTED)) {
-		0xFF29->set_schedule_type(STANDTHERE);
-		0xFF29->show_npc_face0(0x0000);
+		XENKA->set_schedule_type(STANDTHERE);
+		XENKA->show_npc_face0(0x0000);
 		if (var0003) {
 			say("\"We meet again, ",
 				var0002,
 				".  How may I aid thee?\"");
 		} else {
-			0xFF29->set_item_flag(MET);
+			XENKA->set_item_flag(MET);
 			say("\"Let the bells ring... for Xenka hath returned!!!\"");
 			say("\"So, ",
 				var0002,
@@ -58510,7 +58510,7 @@ void Func04D7 object#(0x4D7) () {
 		if (gflags[0x0276]) {
 			say("\"There is no time left! Go to Sunrise Isle!\"");
 			UI_remove_npc_face0();
-			Func097F(0xFF29, "@Hurry!@", 0x0002);
+			Func097F(XENKA, "@Hurry!@", 0x0002);
 			abort;
 		}
 		if (gflags[0x0061]) {
@@ -58662,7 +58662,7 @@ void Func04D7 object#(0x4D7) () {
 			case "bye":
 				UI_remove_npc_face0();
 				Func097F(AVATAR, "@Goodbye!@", 0x0000);
-				Func097F(0xFF29, "@Fulfill thy destiny!@", 0x0002);
+				Func097F(XENKA, "@Fulfill thy destiny!@", 0x0002);
 				break;
 		}
 	}
@@ -72468,7 +72468,7 @@ void Func0709 object#(0x709) () {
 	}
 	if (gflags[0x023E] && (gflags[0x0242] && (gflags[0x0240] && (gflags[0x0241] && gflags[0x023F])))) {
 		Func0922(0x0019);
-		0xFF29->show_npc_face0(0x0000);
+		XENKA->show_npc_face0(0x0000);
 		say("\"I am Xenka. Thou must take this Serpent Sword and go to Sunrise Isle.\"");
 		var0005 = Func099B(AVATAR, 0x0001, 0x02C6, 0x0000, 0x0000, false, true);
 		UI_remove_npc_face0();
@@ -77758,8 +77758,8 @@ void Func07AB object#(0x7AB) () {
 			abort;
 		}
 		var0000 = [KARNAX, THOXA, MIGGIM, BRACCUS, SILENT1, SILENT2, SILENT3];
-		if (0xFF29->get_item_flag(MET)) {
-			var0000 &= 0xFF29;
+		if (XENKA->get_item_flag(MET)) {
+			var0000 &= XENKA;
 		}
 		var0001 = 0x0005;
 		var0002 = Func09A0(0x0005, 0x0001);
@@ -79081,8 +79081,8 @@ void Func07DE object#(0x7DE) () {
 		if (Func0994() == 0x0002) {
 			var0000 = [0x0974, 0x0470, 0x0000];
 			var0001 = [KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA, SILENT1, SILENT2, SILENT3];
-			if (0xFF29->get_item_flag(MET)) {
-				var0001 &= 0xFF29;
+			if (XENKA->get_item_flag(MET)) {
+				var0001 &= XENKA;
 			}
 			var0002 = UI_get_random(0x0008);
 			var0003 = Func09A0(0x0005, 0x0001);
@@ -94315,7 +94315,7 @@ var Func084D 0x84D (var var0000, var var0001) {
 		return FARM;
 	}
 	if ((var0001 == 0x0003) || (var0001 == 0x000A)) {
-		if ((var0000 == KARNAX) || (var0000 == 0xFF29)) {
+		if ((var0000 == KARNAX) || (var0000 == XENKA)) {
 			return TEND_SHOP;
 		}
 		return MAJOR_SIT;
@@ -94330,7 +94330,7 @@ var Func084D 0x84D (var var0000, var var0001) {
 		return DESK_WORK;
 	}
 	if (var0001 == 0x0005) {
-		if ((var0000 == DRAXTA) || (var0000 == 0xFF29)) {
+		if ((var0000 == DRAXTA) || (var0000 == XENKA)) {
 			return TEND_SHOP;
 		}
 		return MAJOR_SIT;
@@ -94339,7 +94339,7 @@ var Func084D 0x84D (var var0000, var var0001) {
 		return TEND_SHOP;
 	}
 	if (var0001 == 0x0007) {
-		if ((var0000 == 0xFF29) || ((var0000 == MIGGIM) || (var0000 == KARNAX))) {
+		if ((var0000 == XENKA) || ((var0000 == MIGGIM) || (var0000 == KARNAX))) {
 			return DESK_WORK;
 		}
 		if ((var0000 == THOXA) || (var0000 == DRAXTA)) {
@@ -94585,7 +94585,7 @@ var Func084E 0x84E (var var0000, var var0001) {
 		}
 		return [0x0968, 0x04B1, 0x0000];
 	}
-	if (var0000 == 0xFF29) {
+	if (var0000 == XENKA) {
 		if (var0001 == 0x0001) {
 			return [0x0965, 0x0467, 0x0000];
 		}
@@ -103402,20 +103402,20 @@ void Func08BF 0x8BF () {
 					var001C[0x0002] = 0x04AA;
 					var001C[0x0003] = 0x0000;
 					var001B = 0x0000;
-					0xFF29->set_item_frame(0x000C);
+					XENKA->set_item_frame(0x000C);
 				} else {
 					var001C[0x0001] = 0x03FF;
 					var001C[0x0002] = 0x04A2;
 					var001C[0x0003] = 0x0000;
 					var001B = 0x0004;
-					0xFF29->set_item_frame(0x001C);
+					XENKA->set_item_frame(0x001C);
 				}
 				var001D = UI_part_of_day();
-				0xFF29->move_object(var001C);
-				Func097F(0xFF29, "@Wait!@", 0x0000);
-				0xFF29->set_schedule_type(TALK);
-				0xFF29->set_new_schedules(MIDNIGHT, TALK, var001C);
-				var000C = script 0xFF29 {
+				XENKA->move_object(var001C);
+				Func097F(XENKA, "@Wait!@", 0x0000);
+				XENKA->set_schedule_type(TALK);
+				XENKA->set_new_schedules(MIDNIGHT, TALK, var001C);
+				var000C = script XENKA {
 					actor frame kneeling;
 					wait 3;
 					actor frame bowing;
@@ -103423,7 +103423,7 @@ void Func08BF 0x8BF () {
 					actor frame standing;
 					wait 3;
 				};
-				0xFF29->obj_sprite_effect(ANIMATION_TELEPORT, 0x0001, 0x0001, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
+				XENKA->obj_sprite_effect(ANIMATION_TELEPORT, 0x0001, 0x0001, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 				UI_play_sound_effect(0x0051);
 			} else {
 				gflags[0x024A] = true;
@@ -105828,7 +105828,7 @@ extern var Func08F3 0x8F3 ();
 void Func08F4 0x8F4 () {
 	var var0000;
 
-	if (Func08F3() && (!0xFF29->get_item_flag(MET))) {
+	if (Func08F3() && (!XENKA->get_item_flag(MET))) {
 		var0000 = AVATAR->get_object_position();
 		var0000[0x0002] -= 0x0002;
 		KARNAX->move_object(var0000);

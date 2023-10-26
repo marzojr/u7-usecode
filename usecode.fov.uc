@@ -43750,7 +43750,7 @@ void Func04D7 object#(0x4D7) () {
 	var var0005;
 
 	if (event == DOUBLECLICK) {
-		0xFF29->show_npc_face(0x0000);
+		ANSIKART->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x0294]) {
 			say("The winged gargoyle has a very calm air about him. As he first sees you, a smile of recognition appears on his face. \"To present greetings, Avatar.\"");
@@ -43776,7 +43776,7 @@ void Func04D7 object#(0x4D7) () {
 				fallthrough;
 
 			case "buy":
-				var0000 = 0xFF29->get_npc_object()->get_schedule_type();
+				var0000 = ANSIKART->get_npc_object()->get_schedule_type();
 				if (var0000 == TEND_SHOP) {
 					Func0841();
 				} else {
@@ -43868,7 +43868,7 @@ void Func04D7 object#(0x4D7) () {
 		say("\"To hope you will bring peace again to our people, Avatar.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092F(0xFF29);
+		Func092F(ANSIKART);
 	}
 }
 
