@@ -43835,7 +43835,7 @@ void Func04D7 object#(0x4D7) () {
 				fallthrough;
 
 			case "Anmanivas":
-				var0002 = 0xFF27->get_npc_object()->is_dead();
+				var0002 = ANMANIVAS->get_npc_object()->is_dead();
 				if (var0002) {
 					var0003 = "have been";
 					say("\"To have been killed by you in this very tavern. To remember not?~~\"To have been his fault, but still, to tell you I feel remorse for him and his brother.\"");
@@ -44022,8 +44022,8 @@ void Func04D9 object#(0x4D9) () {
 	var var000F;
 
 	if (event == DOUBLECLICK) {
-		0xFF27->show_npc_face(0x0000);
-		var0000 = 0xFF27->get_npc_object();
+		ANMANIVAS->show_npc_face(0x0000);
+		var0000 = ANMANIVAS->get_npc_object();
 		var0001 = 0xFF26->get_npc_object();
 		var0002 = Func0908();
 		var0003 = Func0909();
@@ -44069,7 +44069,7 @@ void Func04D9 object#(0x4D9) () {
 								var000D,
 								", to die!\"*");
 							0xFF26->hide();
-							0xFF27->say("The two gargoyles force the table from their path with ease as they charge to attack you.*");
+							ANMANIVAS->say("The two gargoyles force the table from their path with ease as they charge to attack you.*");
 						} else {
 							say("He forces the table from his path with ease as he charges to attack you.*");
 						}
@@ -44126,7 +44126,7 @@ void Func04DA object#(0x4DA) () {
 	if (event == DOUBLECLICK) {
 		0xFF26->show_npc_face(0x0000);
 		var0000 = 0xFF26->get_npc_object();
-		var0001 = 0xFF27->get_npc_object();
+		var0001 = ANMANIVAS->get_npc_object();
 		var0002 = Func0908();
 		var0003 = Func0909();
 		var0004 = "the Avatar";
@@ -44158,13 +44158,13 @@ void Func04DA object#(0x4DA) () {
 							var000D = "humans";
 						}
 						say("The gargoyle growls as he turns to look at you. He stands, ");
-						var000E = Func08F7(0xFF27);
+						var000E = Func08F7(ANMANIVAS);
 						if (var000E) {
 							say("setting a hand on the shoulder of the gargoyle next to him.*");
-							0xFF27->say("The other gargoyle also stands. Anger flashes across his face as he points a finger at you.~~ \"To be the cause for our unhappiness, ",
+							ANMANIVAS->say("The other gargoyle also stands. Anger flashes across his face as he points a finger at you.~~ \"To be the cause for our unhappiness, ",
 								var000D,
 								"!\"*");
-							0xFF27->hide();
+							ANMANIVAS->hide();
 							0xFF26->show_npc_face(0x0000);
 						}
 						say("\"To be the reason for our poverty. To die, ",
@@ -55840,7 +55840,7 @@ void Func067D object#(0x67D) () {
 	}
 	if (event == SCRIPTED) {
 		var0007 = get_npc_number();
-		if (!(var0007 in [0xFF27, 0xFF26, AVATAR])) {
+		if (!(var0007 in [ANMANIVAS, 0xFF26, AVATAR])) {
 			var0008 = AVATAR->get_alignment();
 			if (var0008) {
 				set_item_flag(CHARMED);

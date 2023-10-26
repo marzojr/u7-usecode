@@ -58683,9 +58683,9 @@ void Func04D9 object#(0x4D9) () {
 	var var0000;
 	var var0001;
 
-	0xFF27->clear_item_say();
-	var0000 = 0xFF27->direction_from(AVATAR);
-	var0001 = script 0xFF27 {
+	SABRINA->clear_item_say();
+	var0000 = SABRINA->direction_from(AVATAR);
+	var0001 = script SABRINA {
 		actor frame step_right;
 		face var0000;
 		wait 2;
@@ -58693,8 +58693,8 @@ void Func04D9 object#(0x4D9) () {
 		wait 15;
 		say "@I beg of thee...@";
 	};
-	0xFF27->set_alignment(NEUTRAL);
-	0xFF27->set_schedule_type(HOUND);
+	SABRINA->set_alignment(NEUTRAL);
+	SABRINA->set_schedule_type(HOUND);
 }
 
 extern var Func0954 0x954 ();
@@ -79361,7 +79361,7 @@ void Func07DF object#(0x7DF) () {
 			}
 		}
 		if (event == PATH_SUCCESS) {
-			if (get_item_shape() == 0xFF27->get_item_shape()) {
+			if (get_item_shape() == SABRINA->get_item_shape()) {
 				Func08D4();
 			}
 			if (get_item_shape() == 0x0103) {
@@ -104319,10 +104319,10 @@ void Func08CE 0x8CE () {
 	var var0001;
 	var var0002;
 
-	0xFF27->set_schedule_type(WAIT);
+	SABRINA->set_schedule_type(WAIT);
 	var0000 = [0x0A18, 0x054F, 0x0001];
-	0xFF27->move_object(var0000);
-	var0001 = script 0xFF27 {
+	SABRINA->move_object(var0000);
+	var0001 = script SABRINA {
 		face west;
 		continue;
 		actor frame sleeping;
@@ -104469,18 +104469,18 @@ void Func08D2 0x8D2 () {
 	var var0006;
 	var var0007;
 
-	var0000 = 0xFF27->get_object_position() & (QUALITY_ANY & 0x0007);
+	var0000 = SABRINA->get_object_position() & (QUALITY_ANY & 0x0007);
 	var0001 = var0000->find_nearby(0x0113, 0x0005, MASK_EGG);
-	var0001 &= 0xFF27->find_nearby(0x01B8, 0x0005, MASK_TRANSLUCENT);
+	var0001 &= SABRINA->find_nearby(0x01B8, 0x0005, MASK_TRANSLUCENT);
 	for (var0004 in var0001 with var0002 to var0003) {
 		var0004->remove_item();
 	}
 	var0005[0x0001] = var0000[0x0001] + 0x0001;
 	var0005[0x0002] = var0000[0x0002] + 0x0001;
 	var0005[0x0003] = 0x0000;
-	0xFF27->move_object(var0005);
-	var0006 = 0xFF27->direction_from(AVATAR);
-	var0007 = script 0xFF27 {
+	SABRINA->move_object(var0005);
+	var0006 = SABRINA->direction_from(AVATAR);
+	var0007 = script SABRINA {
 		actor frame step_right;
 		face var0006;
 		wait 2;
@@ -104491,8 +104491,8 @@ void Func08D2 0x8D2 () {
 	var0007 = script AVATAR {
 		wait 3;
 	};
-	0xFF27->set_alignment(NEUTRAL);
-	0xFF27->set_schedule_type(HOUND);
+	SABRINA->set_alignment(NEUTRAL);
+	SABRINA->set_schedule_type(HOUND);
 }
 
 void Func08D3 0x8D3 () {
@@ -104532,13 +104532,13 @@ void Func08D4 0x8D4 () {
 	if (event == EGG) {
 		var0000 = find_nearby(0x0375, 0x000C, MASK_NONE);
 		if (var0000) {
-			0xFF27->set_schedule_type(WAIT);
+			SABRINA->set_schedule_type(WAIT);
 			var0001 = -1;
 			var0002 = -1;
 			var0003 = -3;
-			Func090E(0xFF27, item, var0001, var0002, var0003, Func07DF, 0xFF27->get_npc_object(), PATH_SUCCESS, true);
+			Func090E(SABRINA, item, var0001, var0002, var0003, Func07DF, SABRINA->get_npc_object(), PATH_SUCCESS, true);
 			// BUG: This should use SI_PATH_FAILURE instead of PATH_SUCCESS.
-			UI_set_path_failure(Func07DF, 0xFF27->get_npc_object(), PATH_SUCCESS);
+			UI_set_path_failure(Func07DF, SABRINA->get_npc_object(), PATH_SUCCESS);
 		}
 	}
 	if (event == PATH_SUCCESS) {
@@ -104566,7 +104566,7 @@ void Func08D4 0x8D4 () {
 	}
 	if (event == SCRIPTED) {
 		if (get_item_shape() == 0x0375) {
-			var0007 = 0xFF27->get_cont_items(0x0179, QUALITY_ANY, 0x0012);
+			var0007 = SABRINA->get_cont_items(0x0179, QUALITY_ANY, 0x0012);
 			if (var0007) {
 				var0005 = script item {
 					wait 5;
@@ -104589,7 +104589,7 @@ void Func08D4 0x8D4 () {
 		if (get_item_shape() == 0x0179) {
 			var0000 = find_nearby(0x0375, 0x000A, MASK_NONE);
 			if (var0000) {
-				0xFF27->kill_npc();
+				SABRINA->kill_npc();
 				var0000->clear_item_flag(DEAD);
 				var0005 = script var0000 {
 					wait 5;
