@@ -45563,9 +45563,9 @@ void Func04E4 object#(0x4E4) () {
 	var var0003;
 
 	if (event == DOUBLECLICK) {
-		0xFF1C->show_npc_face(0x0000);
+		LUCKY->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
-		var0001 = 0xFF1C->get_npc_object()->get_schedule_type();
+		var0001 = LUCKY->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (!gflags[0x02B1]) {
 			say("You see a man whose sinewy body is like steel. The glint in his eye tells you that he is no fool.");
@@ -45621,7 +45621,7 @@ void Func04E4 object#(0x4E4) () {
 		say("\"Be careful, my friend.\"*");
 	}
 	if (event == PROXIMITY) {
-		var0001 = 0xFF1C->get_npc_object()->get_schedule_type();
+		var0001 = LUCKY->get_npc_object()->get_schedule_type();
 		if (var0001 == LOITER) {
 			var0002 = UI_die_roll(0x0001, 0x0004);
 			if (var0002 == 0x0001) {
@@ -45636,9 +45636,9 @@ void Func04E4 object#(0x4E4) () {
 			if (var0002 == 0x0004) {
 				var0003 = "@Damn parrot droppings...@";
 			}
-			0xFF1C->item_say(var0003);
+			LUCKY->item_say(var0003);
 		} else {
-			Func092E(0xFF1C);
+			Func092E(LUCKY);
 		}
 	}
 }
