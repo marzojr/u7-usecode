@@ -68653,7 +68653,7 @@ void Func06C4 object#(0x6C4) () {
 				nohalt;
 				call Func06C4;
 			};
-			var0007 = [0xFF23, 0xFF21, 0xFF20, 0xFF1F, 0xFF1E, 0xFF1D];
+			var0007 = [LOAF1, 0xFF21, 0xFF20, 0xFF1F, 0xFF1E, 0xFF1D];
 			for (var000A in var0007 with var0008 to var0009) {
 				var0004 = var000A->approach_avatar(0x0078, 0x0028);
 				Func09AD(var000A);
