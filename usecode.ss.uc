@@ -2845,7 +2845,7 @@ void Func00FA shape#(0xFA) () {
 	var0000 = Func09A0(0x0005, 0x0001);
 	var0001 = Func09A0(0x0005, 0x0002);
 	if ((item == var0000) || (item == var0001)) {
-		var0002 = [KARNAX, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B];
+		var0002 = [KARNAX, 0xFF2D, MIGGIM, 0xFF2C, 0xFF2B];
 		if (gflags[0x0270]) {
 			var0002 &= 0xFF29;
 		}
@@ -9764,7 +9764,7 @@ void Func0266 shape#(0x266) () {
 	}
 	if (var0004 == 0x0005) {
 		UI_play_music(0x0017, item);
-		Func097F(0xFF2F, "@Another tune!@", 0x0002);
+		Func097F(MIGGIM, "@Another tune!@", 0x0002);
 		Func097F(IOLO, "@This tune is most dark...@", 0x000A);
 	}
 	if (var0004 == 0x0006) {
@@ -15613,7 +15613,7 @@ void Func032B shape#(0x32B) () {
 		0xFEFB->set_item_flag(MET);
 		NEYOBI->set_item_flag(SI_ZOMBIE);
 		GWENNO->set_item_flag(SI_ZOMBIE);
-		var0008 = [AVATAR, SELINA, KALEN, ALE, KARNAX, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, SILENT2, 0xFF2E, JORVIN, HENCH1, HENCH2, HENCH3, 0xFEF0, 0xFEDB, 0xFF29, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
+		var0008 = [AVATAR, SELINA, KALEN, ALE, KARNAX, 0xFF2D, MIGGIM, 0xFF2C, 0xFF2B, 0xFF2A, SILENT2, 0xFF2E, JORVIN, HENCH1, HENCH2, HENCH3, 0xFEF0, 0xFEDB, 0xFF29, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -21279,9 +21279,9 @@ void Func0400 object#(0x400) () {
 				nohalt;
 				call Func0636;
 			};
-			var0017 = [KARNAX, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, SILENT2, 0xFF2E];
+			var0017 = [KARNAX, 0xFF2D, MIGGIM, 0xFF2C, 0xFF2B, 0xFF2A, SILENT2, 0xFF2E];
 			if (!gflags[0x01CC]) {
-				var0017 = Func0988(0xFF2F, var0017);
+				var0017 = Func0988(MIGGIM, var0017);
 			}
 			if (Func08F3()) {
 				var0017 &= 0xFF29;
@@ -57030,7 +57030,7 @@ void Func04CF object#(0x4CF) () {
 			var0018 = [];
 			var000D = [];
 			var000E = [];
-			var0019 = [KARNAX, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, SILENT2, 0xFF2E];
+			var0019 = [KARNAX, 0xFF2D, MIGGIM, 0xFF2C, 0xFF2B, 0xFF2A, SILENT2, 0xFF2E];
 			var001A = 0x000A;
 			for (var0012 in var0019 with var001B to var001C) {
 				var001D = Func084E(var0012, var001A);
@@ -57446,28 +57446,28 @@ void Func04D1 object#(0x4D1) () {
 	var0004 = Func0953();
 	if (event == DOUBLECLICK) {
 		if (KARNAX->get_npc_id() != 0x0000) {
-			0xFF2F->item_say("@Be silent...@");
+			MIGGIM->item_say("@Be silent...@");
 			abort;
 		}
 		AVATAR->item_say("@A moment, monk!@");
-		0xFF2F->Func07D1();
-		Func097F(0xFF2F, (("@Yes, my " + var0003) + "?@"), 0x0002);
-		0xFF2F->set_schedule_type(TALK);
+		MIGGIM->Func07D1();
+		Func097F(MIGGIM, (("@Yes, my " + var0003) + "?@"), 0x0002);
+		MIGGIM->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF2F->run_schedule();
-		0xFF2F->clear_item_say();
-		0xFF2F->show_npc_face0(0x0000);
-		var0005 = 0xFF2F->get_item_flag(MET);
+		MIGGIM->run_schedule();
+		MIGGIM->clear_item_say();
+		MIGGIM->show_npc_face0(0x0000);
+		var0005 = MIGGIM->get_item_flag(MET);
 		if (var0002 == 0x0009) {
 			say("\"My name is Miggim. I am the librarian on Monk Isle.\"");
 			say("\"I have been awaiting thine arrival...\"");
-			0xFF2F->set_item_flag(MET);
+			MIGGIM->set_item_flag(MET);
 			add(["librarian", "Monk Isle", "arrival"]);
 		} else if (var0005 == false) {
 			say("\"So, thou art the one whose arrival we have been awaiting.\"");
 			say("\"I am Miggim, the librarian here on Monk Isle.\"");
-			0xFF2F->set_item_flag(MET);
+			MIGGIM->set_item_flag(MET);
 			add(["arrival", "librarian", "Monk Isle"]);
 		} else {
 			say("\"Welcome to Monk Isle, ",
@@ -57654,7 +57654,7 @@ void Func04D1 object#(0x4D1) () {
 		}
 	}
 	if (event == DEATH) {
-		Func08F5(0xFF2F);
+		Func08F5(MIGGIM);
 	}
 }
 
@@ -77757,7 +77757,7 @@ void Func07AB object#(0x7AB) () {
 		if (!gflags[0x0273]) {
 			abort;
 		}
-		var0000 = [KARNAX, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2A, SILENT2, 0xFF2E];
+		var0000 = [KARNAX, 0xFF2D, MIGGIM, 0xFF2C, 0xFF2A, SILENT2, 0xFF2E];
 		if (0xFF29->get_item_flag(MET)) {
 			var0000 &= 0xFF29;
 		}
@@ -79080,7 +79080,7 @@ void Func07DE object#(0x7DE) () {
 	} else {
 		if (Func0994() == 0x0002) {
 			var0000 = [0x0974, 0x0470, 0x0000];
-			var0001 = [KARNAX, 0xFF2D, 0xFF2F, 0xFF2C, 0xFF2B, 0xFF2A, SILENT2, 0xFF2E];
+			var0001 = [KARNAX, 0xFF2D, MIGGIM, 0xFF2C, 0xFF2B, 0xFF2A, SILENT2, 0xFF2E];
 			if (0xFF29->get_item_flag(MET)) {
 				var0001 &= 0xFF29;
 			}
@@ -94309,7 +94309,7 @@ var Func084D 0x84D (var var0000, var var0001) {
 		return EAT_AT_INN;
 	}
 	if (var0001 == 0x0002) {
-		if ((var0000 == 0xFF2D) || ((var0000 == 0xFF2F) || (var0000 == 0xFF2C))) {
+		if ((var0000 == 0xFF2D) || ((var0000 == MIGGIM) || (var0000 == 0xFF2C))) {
 			return TEND_SHOP;
 		}
 		return FARM;
@@ -94339,7 +94339,7 @@ var Func084D 0x84D (var var0000, var var0001) {
 		return TEND_SHOP;
 	}
 	if (var0001 == 0x0007) {
-		if ((var0000 == 0xFF29) || ((var0000 == 0xFF2F) || (var0000 == KARNAX))) {
+		if ((var0000 == 0xFF29) || ((var0000 == MIGGIM) || (var0000 == KARNAX))) {
 			return DESK_WORK;
 		}
 		if ((var0000 == 0xFF2D) || (var0000 == 0xFF2B)) {
@@ -94423,7 +94423,7 @@ var Func084E 0x84E (var var0000, var var0001) {
 		}
 		return [0x0980, 0x04B1, 0x0000];
 	}
-	if (var0000 == 0xFF2F) {
+	if (var0000 == MIGGIM) {
 		if (var0001 == 0x0001) {
 			return [0x0967, 0x046A, 0x0000];
 		}
@@ -105801,7 +105801,7 @@ void Func08F2 0x8F2 (var var0000) {
 	var var0003;
 
 	var0000[0x0002] -= 0x0003;
-	var0001 = [0xFF2D, 0xFF2C, 0xFF2B, KARNAX, 0xFF2F, 0xFF2A, SILENT2, 0xFF2E];
+	var0001 = [0xFF2D, 0xFF2C, 0xFF2B, KARNAX, MIGGIM, 0xFF2A, SILENT2, 0xFF2E];
 	var0002 = 0x0000;
 	while (var0002 < 0x0007) {
 		if (var0002 > 0x0003) {
@@ -105867,7 +105867,7 @@ void Func08F5 0x8F5 (var var0000) {
 	UI_sprite_effect(ANIMATION_TELEPORT2, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 	UI_sprite_effect(ANIMATION_TELEPORT, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 	UI_sprite_effect(ANIMATION_TELEPORT, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-	var0002 = [0xFF2D, 0xFF2C, 0xFF2B, KARNAX, 0xFF2F, 0xFF2A, SILENT2, 0xFF2E];
+	var0002 = [0xFF2D, 0xFF2C, 0xFF2B, KARNAX, MIGGIM, 0xFF2A, SILENT2, 0xFF2E];
 	for (var0005 in var0002 with var0003 to var0004) {
 		var0005->halt_scheduled();
 		var0006 = var0005->get_npc_object();

@@ -42989,7 +42989,7 @@ void Func04D1 object#(0x4D1) () {
 	var var0005;
 
 	if (event == DOUBLECLICK) {
-		0xFF2F->show_npc_face(0x0000);
+		AUSTON->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = false;
