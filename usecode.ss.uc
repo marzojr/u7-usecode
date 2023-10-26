@@ -59048,15 +59048,15 @@ void Func04DB object#(0x4DB) () {
 		ENSORCIO->show_npc_face0(0x0000);
 		say("Ha, ha, ha, ha, ha!");
 		UI_remove_npc_face0();
-		0xFF25->set_schedule_type(STANDTHERE);
-		var0001 = 0xFF25->get_object_position();
+		D_ENSORCIO->set_schedule_type(STANDTHERE);
+		var0001 = D_ENSORCIO->get_object_position();
 		UI_sprite_effect(ANIMATION_MEDIUM_BLAST, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		var0001 = 0xFF24->get_object_position();
 		UI_sprite_effect(ANIMATION_MEDIUM_BLAST, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		UI_play_sound_effect(0x0029);
-		Func097F(0xFF25, "@Ha, ha, ha!@", 0x0000);
+		Func097F(D_ENSORCIO, "@Ha, ha, ha!@", 0x0000);
 		Func097F(0xFF24, "@Have mercy!@", 0x0000);
-		0xFF25->remove_npc();
+		D_ENSORCIO->remove_npc();
 		0xFF24->remove_npc();
 		remove_item();
 		abort;
@@ -69952,11 +69952,11 @@ void Func06D9 object#(0x6D9) () {
 			remove_item();
 		}
 		if (var0002 == 0x0006) {
-			0xFF25->set_schedule_type(TALK);
+			D_ENSORCIO->set_schedule_type(TALK);
 			var0005 = set_item_quality(0x00FF);
 		}
 		if (var0002 == 0x0007) {
-			0xFF25->remove_npc();
+			D_ENSORCIO->remove_npc();
 			0xFF24->remove_npc();
 			remove_item();
 		}

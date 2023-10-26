@@ -44207,7 +44207,7 @@ void Func04DB object#(0x4DB) () {
 	var var0002;
 
 	if (event == DOUBLECLICK) {
-		0xFF25->show_npc_face(0x0000);
+		AURVIDLEM->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x0298]) {
 			say("The gargoyle standing before you has a sour expression on his face.");
@@ -44232,7 +44232,7 @@ void Func04DB object#(0x4DB) () {
 				fallthrough;
 
 			case "buy provisions":
-				var0000 = 0xFF25->get_npc_object()->get_schedule_type();
+				var0000 = AURVIDLEM->get_npc_object()->get_schedule_type();
 				if (!(var0000 == TEND_SHOP)) {
 					say("\"To be not selling at this time. To come back tomorrow to buy provisions.\"");
 				} else {
@@ -44273,7 +44273,7 @@ void Func04DB object#(0x4DB) () {
 		say("\"To bid you goodbye.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092F(0xFF25);
+		Func092F(AURVIDLEM);
 	}
 }
 
