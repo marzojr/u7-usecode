@@ -6289,10 +6289,10 @@ void Func02D5 shape#(0x2D5) () {
 			call Func060A;
 		};
 		if ((UI_game_hour() >= 0x000F) || (UI_game_hour() <= 0x0003)) {
-			if (Func0937(0xFF18)) {
-				Func0904(0xFF18, ["@Place your bets.@", "@Round she goes!@"]);
+			if (Func0937(SMITHY)) {
+				Func0904(SMITHY, ["@Place your bets.@", "@Round she goes!@"]);
 			}
-			0xFF18->set_schedule_type(HOUND);
+			SMITHY->set_schedule_type(HOUND);
 			var0002 = find_nearby(0x0208, 0x0007, MASK_NONE);
 			var0003 = var0002->find_nearby(0x0284, 0x0005, MASK_NONE);
 			for (var0006 in var0003 with var0004 to var0005) {
@@ -6812,7 +6812,7 @@ extern void Func082F 0x82F ();
 void Func02FB shape#(0x2FB) () {
 	if ((!in_usecode()) && (event == DOUBLECLICK)) {
 		if ((UI_game_hour() >= 0x000F) || (UI_game_hour() <= 0x0003)) {
-			0xFF18->set_schedule_type(HOUND);
+			SMITHY->set_schedule_type(HOUND);
 		}
 		Func082F();
 	}
@@ -7617,7 +7617,7 @@ void Func0329 shape#(0x329) () {
 			for (var0003 in var0000 with var0001 to var0002) {
 				var0003->clear_item_flag(OKAY_TO_TAKE);
 			}
-			0xFF18->set_schedule_type(HOUND);
+			SMITHY->set_schedule_type(HOUND);
 		}
 		var0004 = UI_find_nearby_avatar(0x032E);
 		var0005 = UI_find_nearby_avatar(0x0329);
@@ -46259,10 +46259,10 @@ void Func04E8 object#(0x4E8) () {
 	var var0005;
 
 	if (event == DOUBLECLICK) {
-		0xFF18->show_npc_face(0x0000);
+		SMITHY->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_part_of_day();
-		var0002 = 0xFF18->get_npc_object()->get_schedule_type();
+		var0002 = SMITHY->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (!gflags[0x02B5]) {
 			say("You see a well-dressed pirate with oil in his hair.");
@@ -46323,7 +46323,7 @@ void Func04E8 object#(0x4E8) () {
 	}
 	if (event == PROXIMITY) {
 		var0001 = UI_part_of_day();
-		var0002 = 0xFF18->get_npc_object()->get_schedule_type();
+		var0002 = SMITHY->get_npc_object()->get_schedule_type();
 		var0004 = UI_die_roll(0x0001, 0x0004);
 		if (var0002 == STANDTHERE) {
 			if (var0004 == 0x0001) {
@@ -46338,9 +46338,9 @@ void Func04E8 object#(0x4E8) () {
 			if (var0004 == 0x0004) {
 				var0005 = "@The House wins.@";
 			}
-			0xFF18->item_say(var0005);
+			SMITHY->item_say(var0005);
 		} else {
-			Func092E(0xFF18);
+			Func092E(SMITHY);
 		}
 	}
 }
@@ -50228,8 +50228,8 @@ void Func060A object#(0x60A) () {
 	if (event != SCRIPTED) {
 		return;
 	}
-	if (0xFF18->get_schedule_type() == HOUND) {
-		0xFF18->set_schedule_type(STANDTHERE);
+	if (SMITHY->get_schedule_type() == HOUND) {
+		SMITHY->set_schedule_type(STANDTHERE);
 	}
 	var0000 = find_nearby(0x0208, 0x0007, MASK_NONE);
 	var0001 = var0000->find_nearby(0x0284, 0x0005, MASK_NONE);
@@ -50278,7 +50278,7 @@ void Func060A object#(0x60A) () {
 		var0006 = "Yellow";
 	}
 	var0007 = false;
-	if (!0xFF18->npc_nearby()) {
+	if (!SMITHY->npc_nearby()) {
 		var0008 = [];
 		var0009 = "";
 	} else {
@@ -50309,16 +50309,16 @@ void Func060A object#(0x60A) () {
 				var0011 = var0008->set_item_quantity(var0010);
 				var0011 = UI_update_last_created(var000E);
 			}
-			if (Func0937(0xFF18)) {
-				Func0904(0xFF18, (("@A winner on " + var0006) + ".@"));
+			if (Func0937(SMITHY)) {
+				Func0904(SMITHY, (("@A winner on " + var0006) + ".@"));
 			}
 			var0007 = true;
 		}
 		var000D->remove_item();
 	}
 	if (!var0007) {
-		if (Func0937(0xFF18)) {
-			Func0904(0xFF18, (("@It is " + var0006) + ".@"));
+		if (Func0937(SMITHY)) {
+			Func0904(SMITHY, (("@It is " + var0006) + ".@"));
 		}
 	}
 }
@@ -50370,10 +50370,10 @@ void Func060C object#(0x60C) () {
 	var var0016;
 	var var0017;
 
-	if (0xFF18->get_schedule_type() == HOUND) {
-		0xFF18->set_schedule_type(STANDTHERE);
+	if (SMITHY->get_schedule_type() == HOUND) {
+		SMITHY->set_schedule_type(STANDTHERE);
 	}
-	if (!0xFF18->npc_nearby()) {
+	if (!SMITHY->npc_nearby()) {
 		var0000 = AVATAR->find_nearby(0x02FC, 0x0032, MASK_NONE);
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0003->set_item_frame(0x0000);
@@ -50429,7 +50429,7 @@ void Func060C object#(0x60C) () {
 					var0010->set_item_flag(OKAY_TO_TAKE);
 					var0014 = Func0932((var000B[0x0002] - var0005[0x0002]) - 0x0004);
 					var0015 = ("@A winnah in lane " + var0014) + "!@";
-					Func0933(0xFF18, var0015, 0x0001);
+					Func0933(SMITHY, var0015, 0x0001);
 				}
 				var0010->remove_item();
 			}
@@ -64559,15 +64559,15 @@ void Func083D 0x83D () {
 	var var0015;
 	var var0016;
 
-	if (0xFF18->get_schedule_type() == HOUND) {
-		0xFF18->set_schedule_type(STANDTHERE);
+	if (SMITHY->get_schedule_type() == HOUND) {
+		SMITHY->set_schedule_type(STANDTHERE);
 	}
 	var0000 = Func083A();
 	var0001 = Func083B();
 	var0002 = var0001[0x0001];
 	var0003 = var0001[0x0002];
 	var0004 = Func083C(var0000);
-	if (!0xFF18->npc_nearby()) {
+	if (!SMITHY->npc_nearby()) {
 		for (var0007 in var0004 with var0005 to var0006) {
 			var0007->set_item_flag(OKAY_TO_TAKE);
 		}
@@ -64575,7 +64575,7 @@ void Func083D 0x83D () {
 	}
 	var0008 = "@Too bad...@";
 	if (UI_get_array_size(var0004) == 0x0000) {
-		Func0933(0xFF18, var0008, 0x0000);
+		Func0933(SMITHY, var0008, 0x0000);
 	}
 	if (var0002 == 0x0006) {
 		if (var0003) {
@@ -64662,7 +64662,7 @@ void Func083D 0x83D () {
 		}
 		var0007->remove_item();
 	}
-	Func0933(0xFF18, var0008, 0x0000);
+	Func0933(SMITHY, var0008, 0x0000);
 }
 
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
