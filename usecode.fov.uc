@@ -43566,7 +43566,7 @@ void Func04D5 object#(0x4D5) () {
 	var var0002;
 
 	if (event == DOUBLECLICK) {
-		0xFF2B->show_npc_face(0x0000);
+		CATHERINE->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
 		var0001 = Func08F7(0xFF2A);
@@ -43660,7 +43660,7 @@ void Func04D6 object#(0x4D6) () {
 	if (event == DOUBLECLICK) {
 		0xFF2A->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
-		var0000 = Func08F7(0xFF2B);
+		var0000 = Func08F7(CATHERINE);
 		if (var0000) {
 			add("girl");
 		}

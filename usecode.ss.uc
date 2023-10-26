@@ -2845,7 +2845,7 @@ void Func00FA shape#(0xFA) () {
 	var0000 = Func09A0(0x0005, 0x0001);
 	var0001 = Func09A0(0x0005, 0x0002);
 	if ((item == var0000) || (item == var0001)) {
-		var0002 = [KARNAX, THOXA, MIGGIM, BRACCUS, 0xFF2B];
+		var0002 = [KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA];
 		if (gflags[0x0270]) {
 			var0002 &= 0xFF29;
 		}
@@ -15613,7 +15613,7 @@ void Func032B shape#(0x32B) () {
 		0xFEFB->set_item_flag(MET);
 		NEYOBI->set_item_flag(SI_ZOMBIE);
 		GWENNO->set_item_flag(SI_ZOMBIE);
-		var0008 = [AVATAR, SELINA, KALEN, ALE, KARNAX, THOXA, MIGGIM, BRACCUS, 0xFF2B, 0xFF2A, SILENT2, SILENT3, JORVIN, HENCH1, HENCH2, HENCH3, 0xFEF0, 0xFEDB, 0xFF29, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
+		var0008 = [AVATAR, SELINA, KALEN, ALE, KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA, 0xFF2A, SILENT2, SILENT3, JORVIN, HENCH1, HENCH2, HENCH3, 0xFEF0, 0xFEDB, 0xFF29, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -21279,7 +21279,7 @@ void Func0400 object#(0x400) () {
 				nohalt;
 				call Func0636;
 			};
-			var0017 = [KARNAX, THOXA, MIGGIM, BRACCUS, 0xFF2B, 0xFF2A, SILENT2, SILENT3];
+			var0017 = [KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA, 0xFF2A, SILENT2, SILENT3];
 			if (!gflags[0x01CC]) {
 				var0017 = Func0988(MIGGIM, var0017);
 			}
@@ -57030,7 +57030,7 @@ void Func04CF object#(0x4CF) () {
 			var0018 = [];
 			var000D = [];
 			var000E = [];
-			var0019 = [KARNAX, THOXA, MIGGIM, BRACCUS, 0xFF2B, 0xFF2A, SILENT2, SILENT3];
+			var0019 = [KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA, 0xFF2A, SILENT2, SILENT3];
 			var001A = 0x000A;
 			for (var0012 in var0019 with var001B to var001C) {
 				var001D = Func084E(var0012, var001A);
@@ -58182,7 +58182,7 @@ void Func04D5 object#(0x4D5) () {
 		var0004 = "her";
 	}
 	if (event == PROXIMITY) {
-		var0005 = 0xFF2B->find_nearby(ANY_SHAPE, 0x0014, MASK_NPC2);
+		var0005 = DRAXTA->find_nearby(ANY_SHAPE, 0x0014, MASK_NPC2);
 		var0006 = [];
 		for (var0009 in var0005 with var0007 to var0008) {
 			if (var0009->get_schedule_type() == DANCE) {
@@ -58192,53 +58192,53 @@ void Func04D5 object#(0x4D5) () {
 		if (var0006 == []) {
 			abort;
 		}
-		0xFF2B->clear_item_say();
+		DRAXTA->clear_item_say();
 		var000A = var0006[UI_get_random(UI_get_array_size(var0006))];
 		var000A->clear_item_say();
 		var000B = UI_get_random(0x0006);
 		if (var000B == 0x0001) {
-			0xFF2B->item_say("@Do not falter!@");
+			DRAXTA->item_say("@Do not falter!@");
 			Func097F(var000A, "@Pardon, Draxta.@", 0x0003);
 		}
 		if (var000B == 0x0002) {
-			0xFF2B->item_say("@Rhythm is pure!@");
+			DRAXTA->item_say("@Rhythm is pure!@");
 			Func097F(var000A, "@Walk in Rhythm.@", 0x0003);
 		}
 		if (var000B == 0x0003) {
 			var000A->item_say("@May we stop?@");
-			Func097F(0xFF2B, "@It is not time...@", 0x0003);
+			Func097F(DRAXTA, "@It is not time...@", 0x0003);
 		}
 		if (var000B == 0x0004) {
-			0xFF2B->item_say("@With vigor!@");
+			DRAXTA->item_say("@With vigor!@");
 			Func097F(var000A, "@Vigor is good.@", 0x0003);
 		}
 		if (var000B == 0x0005) {
-			0xFF2B->item_say("@Do not fail Xenka!@");
+			DRAXTA->item_say("@Do not fail Xenka!@");
 			Func097F(var000A, "@I am weak...@", 0x0003);
 		}
 		if (var000B == 0x0006) {
-			0xFF2B->item_say("@Xenka is pleased!@");
+			DRAXTA->item_say("@Xenka is pleased!@");
 			Func097F(var000A, "@Hail the Prophetess!@", 0x0005);
-			Func097F(0xFF2B, "@Peace to all.@", 0x000A);
+			Func097F(DRAXTA, "@Peace to all.@", 0x000A);
 		}
 	}
 	if (event == DOUBLECLICK) {
 		if (KARNAX->get_npc_id() != 0x0000) {
-			0xFF2B->item_say("@Hush...@");
+			DRAXTA->item_say("@Hush...@");
 			abort;
 		}
 		AVATAR->item_say("@Might we speak?@");
-		0xFF2B->Func07D1();
-		Func097F(0xFF2B, (("@Yes, " + var0003) + "?@"), 0x0002);
-		0xFF2B->set_schedule_type(TALK);
+		DRAXTA->Func07D1();
+		Func097F(DRAXTA, (("@Yes, " + var0003) + "?@"), 0x0002);
+		DRAXTA->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF2B->run_schedule();
-		0xFF2B->clear_item_say();
-		0xFF2B->show_npc_face0(0x0000);
-		var000C = 0xFF2B->get_item_flag(MET);
+		DRAXTA->run_schedule();
+		DRAXTA->clear_item_say();
+		DRAXTA->show_npc_face0(0x0000);
+		var000C = DRAXTA->get_item_flag(MET);
 		if (var000C == false) {
-			0xFF2B->set_item_flag(MET);
+			DRAXTA->set_item_flag(MET);
 			say("\"I tremble before the Hero from Another World! Thou art even as Xenka said!\"");
 			add(["name", "Hero From Another World", "Xenka"]);
 		} else {
@@ -58400,17 +58400,17 @@ void Func04D5 object#(0x4D5) () {
 
 			case "vision" (remove):
 				say("\"Silence, please! We shall now listen to the song of the Void, which whispers of events both past and present...\"");
-				var000D = 0xFF2B->find_nearest(0x0308, 0x0014);
+				var000D = DRAXTA->find_nearest(0x0308, 0x0014);
 				if (var000D) {
 					var000E = var000D->get_object_position();
 					var000F = (0x0008 * (var000E[0x0001] - 0x0920)) + 0x0064;
 					var0010 = (0x0008 * (var000E[0x0002] - 0x0420)) + 0x0028;
 					var000D->obj_sprite_effect(ANIMATION_PETRA_VISION, var000F, var0010, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-					Func097F(0xFF2B, "@Behold, the vision!@", 0x0007);
+					Func097F(DRAXTA, "@Behold, the vision!@", 0x0007);
 					gflags[0x0273] = false;
 				} else {
 					say("\"Let us move closer to the great wall...\"");
-					Func097F(0xFF2B, "@To the wall...@", 0x0000);
+					Func097F(DRAXTA, "@To the wall...@", 0x0000);
 				}
 				abort;
 
@@ -58422,7 +58422,7 @@ void Func04D5 object#(0x4D5) () {
 		}
 	}
 	if (event == DEATH) {
-		Func08F5(0xFF2B);
+		Func08F5(DRAXTA);
 	}
 }
 
@@ -77771,15 +77771,15 @@ void Func07AB object#(0x7AB) () {
 			var0006->run_schedule();
 		}
 		var0008 = get_object_position();
-		0xFF2B->move_object(var0008);
-		0xFF2B->set_schedule_type(WAIT);
-		var0003 = script 0xFF2B {
+		DRAXTA->move_object(var0008);
+		DRAXTA->set_schedule_type(WAIT);
+		var0003 = script DRAXTA {
 			nohalt;
 			face south;
 			wait while far 10;
 			say "@Now is the Time of Visions!@";
 		};
-		Func09AC(0xFF2B, var0008[0x0001], var0008[0x0002], WAIT);
+		Func09AC(DRAXTA, var0008[0x0001], var0008[0x0002], WAIT);
 		UI_play_music(0x003F, var0002);
 	}
 }
@@ -79080,7 +79080,7 @@ void Func07DE object#(0x7DE) () {
 	} else {
 		if (Func0994() == 0x0002) {
 			var0000 = [0x0974, 0x0470, 0x0000];
-			var0001 = [KARNAX, THOXA, MIGGIM, BRACCUS, 0xFF2B, 0xFF2A, SILENT2, SILENT3];
+			var0001 = [KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA, 0xFF2A, SILENT2, SILENT3];
 			if (0xFF29->get_item_flag(MET)) {
 				var0001 &= 0xFF29;
 			}
@@ -89090,7 +89090,7 @@ void Func0824 0x824 () {
 var Func0825 0x825 () {
 	var var0000;
 
-	var0000 = 0xFF2B->get_object_position();
+	var0000 = DRAXTA->get_object_position();
 	if ((var0000[0x0001] > 0x090C) && ((var0000[0x0001] < 0x0920) && ((var0000[0x0002] > 0x0412) && (var0000[0x0002] < 0x0426)))) {
 		return true;
 	}
@@ -94330,7 +94330,7 @@ var Func084D 0x84D (var var0000, var var0001) {
 		return DESK_WORK;
 	}
 	if (var0001 == 0x0005) {
-		if ((var0000 == 0xFF2B) || (var0000 == 0xFF29)) {
+		if ((var0000 == DRAXTA) || (var0000 == 0xFF29)) {
 			return TEND_SHOP;
 		}
 		return MAJOR_SIT;
@@ -94342,7 +94342,7 @@ var Func084D 0x84D (var var0000, var var0001) {
 		if ((var0000 == 0xFF29) || ((var0000 == MIGGIM) || (var0000 == KARNAX))) {
 			return DESK_WORK;
 		}
-		if ((var0000 == THOXA) || (var0000 == 0xFF2B)) {
+		if ((var0000 == THOXA) || (var0000 == DRAXTA)) {
 			return WANDER;
 		}
 		if (var0000 == BRACCUS) {
@@ -94357,7 +94357,7 @@ var Func084D 0x84D (var var0000, var var0001) {
 		return SLEEP;
 	}
 	if (var0001 == 0x0009) {
-		if (var0000 == 0xFF2B) {
+		if (var0000 == DRAXTA) {
 			return TEND_SHOP;
 		}
 		return DANCE;
@@ -94477,7 +94477,7 @@ var Func084E 0x84E (var var0000, var var0001) {
 		}
 		return [0x096A, 0x04B1, 0x0000];
 	}
-	if (var0000 == 0xFF2B) {
+	if (var0000 == DRAXTA) {
 		if (var0001 == 0x0001) {
 			return [0x0973, 0x0464, 0x0000];
 		}
@@ -105801,7 +105801,7 @@ void Func08F2 0x8F2 (var var0000) {
 	var var0003;
 
 	var0000[0x0002] -= 0x0003;
-	var0001 = [THOXA, BRACCUS, 0xFF2B, KARNAX, MIGGIM, 0xFF2A, SILENT2, SILENT3];
+	var0001 = [THOXA, BRACCUS, DRAXTA, KARNAX, MIGGIM, 0xFF2A, SILENT2, SILENT3];
 	var0002 = 0x0000;
 	while (var0002 < 0x0007) {
 		if (var0002 > 0x0003) {
@@ -105867,7 +105867,7 @@ void Func08F5 0x8F5 (var var0000) {
 	UI_sprite_effect(ANIMATION_TELEPORT2, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 	UI_sprite_effect(ANIMATION_TELEPORT, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 	UI_sprite_effect(ANIMATION_TELEPORT, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-	var0002 = [THOXA, BRACCUS, 0xFF2B, KARNAX, MIGGIM, 0xFF2A, SILENT2, SILENT3];
+	var0002 = [THOXA, BRACCUS, DRAXTA, KARNAX, MIGGIM, 0xFF2A, SILENT2, SILENT3];
 	for (var0005 in var0002 with var0003 to var0004) {
 		var0005->halt_scheduled();
 		var0006 = var0005->get_npc_object();
