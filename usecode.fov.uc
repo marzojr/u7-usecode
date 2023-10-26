@@ -45251,11 +45251,11 @@ void Func04E2 object#(0x4E2) () {
 	var var000B;
 
 	if (event == DOUBLECLICK) {
-		0xFF1E->show_npc_face(0x0000);
+		BLACKTOOTH->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = UI_wearing_fellowship();
 		var0002 = "Avatar";
-		var0003 = 0xFF1E->get_npc_object();
+		var0003 = BLACKTOOTH->get_npc_object();
 		if (gflags[0x02A3]) {
 			var0004 = var0000;
 		}
@@ -45343,7 +45343,7 @@ void Func04E2 object#(0x4E2) () {
 						DUPRE->say("Dupre turns away to suppress a smirk.*");
 						DUPRE->hide();
 					}
-					0xFF1E->show_npc_face(0x0000);
+					BLACKTOOTH->show_npc_face(0x0000);
 				}
 				say("You can see that the pirate is upset, so you decide to leave him alone.~~\"Yeah, go away. That's right! I never can keep any friends!");
 				if (gflags[0x02A4]) {
@@ -45380,7 +45380,7 @@ void Func04E2 object#(0x4E2) () {
 		}
 	}
 	if (event == PROXIMITY) {
-		var0009 = 0xFF1E->get_npc_object()->get_schedule_type();
+		var0009 = BLACKTOOTH->get_npc_object()->get_schedule_type();
 		if (var0009 == LOITER) {
 			var000A = UI_die_roll(0x0001, 0x0004);
 			if (var000A == 0x0001) {
@@ -45395,9 +45395,9 @@ void Func04E2 object#(0x4E2) () {
 			if (var000A == 0x0004) {
 				var000B = "@Damn parrot droppings...@";
 			}
-			0xFF1E->item_say(var000B);
+			BLACKTOOTH->item_say(var000B);
 		} else {
-			Func092E(0xFF1E);
+			Func092E(BLACKTOOTH);
 		}
 	}
 }
