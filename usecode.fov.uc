@@ -34252,7 +34252,7 @@ void Func049A object#(0x49A) () {
 		add(["name", "job", "Fellowship", "bye"]);
 		var0000 = Func08F7(IOLO);
 		var0001 = Func08F7(SPARK);
-		var0002 = Func08F7(0xFF10);
+		var0002 = Func08F7(ANTON);
 		var0003 = Func08F7(SULLIVAN);
 		var0004 = Func0909();
 		var0005 = Func0908();
@@ -34273,7 +34273,7 @@ void Func049A object#(0x49A) () {
 						say("He seems truly worried.~~\"I will do job better. I promise! I beat harder and more often!\"");
 						if (var0002) {
 							say("*");
-							0xFF10->show_npc_face(0x0000);
+							ANTON->show_npc_face(0x0000);
 							if (gflags[0x02C3]) {
 								var0008 = "Anton,";
 							} else {
@@ -34284,7 +34284,7 @@ void Func049A object#(0x49A) () {
 								",\" says ",
 								var0008,
 								" sarcastically.*");
-							0xFF10->hide();
+							ANTON->hide();
 							GROD->show_npc_face(0x0000);
 						}
 						if (var0002 && var0003) {
@@ -34331,10 +34331,10 @@ void Func049A object#(0x49A) () {
 								var0004,
 								". Torture me, first.\"*");
 							SULLIVAN->hide();
-							0xFF10->say("\"Yes, ",
+							ANTON->say("\"Yes, ",
 								var0004,
 								". Torture him first.\"*");
-							0xFF10->hide();
+							ANTON->hide();
 							SULLIVAN->say("\"I thank thee,\" he says to the other.*");
 							SULLIVAN->hide();
 							GROD->say("\"Go ahead,\" says Grod.*");
@@ -44297,7 +44297,7 @@ void Func04DC object#(0x4DC) () {
 		SULLIVAN->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func0908();
-		var0002 = Func08F7(0xFF10);
+		var0002 = Func08F7(ANTON);
 		var0003 = Func08F7(GROD);
 		var0004 = false;
 		add(["name", "job", "Fellowship", "bye"]);
@@ -44352,8 +44352,8 @@ void Func04DC object#(0x4DC) () {
 					". We spread guidance and prosperity to the people who reside in our fair land. Of course, at the moment, my fellow members are a bit... displeased with me.\"");
 				if (var0002) {
 					say("*");
-					0xFF10->say("\"That's a bit of an understatement!\"*");
-					0xFF10->hide();
+					ANTON->say("\"That's a bit of an understatement!\"*");
+					ANTON->hide();
 					SULLIVAN->show_npc_face(0x0000);
 				}
 				remove("Fellowship");
@@ -44391,8 +44391,8 @@ void Func04DC object#(0x4DC) () {
 
 			case "Oops":
 				if (var0002) {
-					0xFF10->say("\"What the fool means is that he used to don a costume and pretend to be thee in an attempt to woo goods from the proprietors.\"*");
-					0xFF10->hide();
+					ANTON->say("\"What the fool means is that he used to don a costume and pretend to be thee in an attempt to woo goods from the proprietors.\"*");
+					ANTON->hide();
 					SULLIVAN->say("\"Quite true, Avatar. The ruse worked far too well. 'Twas a true shame, to be honest. I should not have gotten away with it, and, indeed, am being properly castigated for it now.\"");
 				} else {
 					say("\"Oh, just that I have been impersonating thee for some time now to take items from shopkeepers without paying for them. Well, -had- been actually. Now I am being properly castigated for it.\"");
@@ -44412,10 +44412,10 @@ void Func04DC object#(0x4DC) () {
 					".\"");
 				if (var0002) {
 					say("*");
-					0xFF10->say("\"Ask him about his taxes, ",
+					ANTON->say("\"Ask him about his taxes, ",
 						var0000,
 						".\"*");
-					0xFF10->hide();
+					ANTON->hide();
 					SULLIVAN->show_npc_face(0x0000);
 					add("taxes");
 				}
@@ -47033,7 +47033,7 @@ void Func04F0 object#(0x4F0) () {
 	var var0006;
 
 	if (event == DOUBLECLICK) {
-		0xFF10->show_npc_face(0x0000);
+		ANTON->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func08F7(SULLIVAN);
 		var0002 = Func08F7(GROD);
@@ -47046,7 +47046,7 @@ void Func04F0 object#(0x4F0) () {
 				". Truly thou possesseth great honor! I hope one day to be able to repay thee for thy kindness!\"*");
 			abort;
 		}
-		var0005 = 0xFF10->get_npc_object();
+		var0005 = ANTON->get_npc_object();
 		var0005->set_schedule_type(WAIT);
 		if (!gflags[0x02C3]) {
 			say("You are greeted by a man with a sour expression.");
@@ -47063,7 +47063,7 @@ void Func04F0 object#(0x4F0) () {
 						var0000,
 						" is truly interested in thy name.\"");
 					SULLIVAN->hide();
-					0xFF10->show_npc_face(0x0000);
+					ANTON->show_npc_face(0x0000);
 				}
 				remove("name");
 				add(["concerned", "stocks"]);
@@ -47079,17 +47079,17 @@ void Func04F0 object#(0x4F0) () {
 				if (var0001) {
 					say("*");
 					SULLIVAN->say("\"Relax, Anton. I am sure that thou wilt have a job again soon enough.\" He turns to you.~~\"He was apprenticed to the sage Alagner who bade him find out information about The Fellowship...\"");
-					0xFF10->say("\"Silence, fool! They will slay me for sure, now!\" He looks at you with despair.*");
+					ANTON->say("\"Silence, fool! They will slay me for sure, now!\" He looks at you with despair.*");
 					SULLIVAN->say("\"Hast thou already forgotten, dear Anton? Thou didst divulge that information to them some time ago.\"*");
-					0xFF10->say("\"I did?\"*");
+					ANTON->say("\"I did?\"*");
 					SULLIVAN->say("He nods.*");
-					0xFF10->show_npc_face(0x0000);
+					ANTON->show_npc_face(0x0000);
 					SULLIVAN->hide();
 					if (var0002) {
 						say("Anton turns to the troll.~~\"I did?\"*");
 						GROD->say("The troll nods.*");
 						GROD->hide();
-						0xFF10->show_npc_face(0x0000);
+						ANTON->show_npc_face(0x0000);
 					}
 					say("\"Oh, well, then. Carry on!\"*");
 					SULLIVAN->say("\"As I was saying, his instructor sent him to observe the Fellowship. Of course, he was discovered and brought here for torturing.\" He turns back to Anton.~~\"Never fear, however, Anton. 'Twill be no time before thou art free again, able to return to thy tutor, Alagner, and resume thy studies,\" he says, smiling.*");
@@ -47100,7 +47100,7 @@ void Func04F0 object#(0x4F0) () {
 						add("Fellowship");
 					}
 				}
-				0xFF10->show_npc_face(0x0000);
+				ANTON->show_npc_face(0x0000);
 				fallthrough;
 
 			case "stocks":
@@ -47147,7 +47147,7 @@ void Func04F0 object#(0x4F0) () {
 					say("*");
 					SULLIVAN->say("\"Come, come, Anton, surely it cannot be that terrible. After all, The Fellowship is providing us with a place to stay and more food than we could... more food... Well, they are also giving us food!\"*");
 					SULLIVAN->hide();
-					0xFF10->show_npc_face(0x0000);
+					ANTON->show_npc_face(0x0000);
 				}
 				remove("lashings");
 				fallthrough;
