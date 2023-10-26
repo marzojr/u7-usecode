@@ -44952,9 +44952,9 @@ void Func04E0 object#(0x4E0) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFF20->show_npc_face(0x0000);
+	ROBERTO->show_npc_face(0x0000);
 	var0000 = UI_part_of_day();
-	var0001 = 0xFF20->get_npc_object()->get_schedule_type();
+	var0001 = ROBERTO->get_npc_object()->get_schedule_type();
 	var0002 = Func0908();
 	var0003 = "Avatar";
 	var0004 = UI_is_pc_female();
