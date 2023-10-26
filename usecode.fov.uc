@@ -46402,7 +46402,7 @@ void Func04E9 object#(0x4E9) () {
 				} else {
 					say("\"Wouldst thou like to see our Passion Play?\"");
 					if (Func090A()) {
-						var0001 = Func08F7(0xFF16);
+						var0001 = Func08F7(MERYL);
 						var0002 = Func08F7(0xFF15);
 						if (var0001 && var0002) {
 							var0003 = UI_get_party_list();
@@ -46468,11 +46468,11 @@ void Func04EA object#(0x4EA) () {
 	var var0003;
 
 	if (event == DOUBLECLICK) {
-		0xFF16->say("You see a middle-aged actress with a very serious expression. She is unable to speak with you because she is concentrating on her part in the Passion Play. Perhaps you should speak to Paul.*");
+		MERYL->say("You see a middle-aged actress with a very serious expression. She is unable to speak with you because she is concentrating on her part in the Passion Play. Perhaps you should speak to Paul.*");
 	}
 	if (event == PROXIMITY) {
 		var0000 = UI_part_of_day();
-		var0001 = 0xFF16->get_npc_object()->get_schedule_type();
+		var0001 = MERYL->get_npc_object()->get_schedule_type();
 		var0002 = UI_die_roll(0x0001, 0x0004);
 		if (var0001 == PATROL) {
 			if (var0002 == 0x0001) {
@@ -46487,9 +46487,9 @@ void Func04EA object#(0x4EA) () {
 			if (var0002 == 0x0004) {
 				var0003 = "@We shall entertain thee!@";
 			}
-			0xFF16->item_say(var0003);
+			MERYL->item_say(var0003);
 		} else {
-			Func092E(0xFF16);
+			Func092E(MERYL);
 		}
 	}
 }
@@ -72918,10 +72918,10 @@ void Func08C7 0x8C7 () {
 	0xFF15->say("Dustin takes the stage as Paul moves away. Meryl lies on the ground in front of him and assumes a death-like pose.");
 	say("\"'Tis doom! 'Tis despair! 'Tis death! ~My beloved wife is gone! ~Disease has taken her away ~And left me with but a song.\"");
 	say("Dustin puts his head in his hands and mimes sobbing. As he sobs, Meryl rises from her \"death\" in a ghost-like fashion, then addresses Dustin.*");
-	0xFF16->say("\"Mine husband, my love! ~Do not despair! 'Tis not doom! ~Thou shalt rise above ~All this melancholy and gloom!\"*");
+	MERYL->say("\"Mine husband, my love! ~Do not despair! 'Tis not doom! ~Thou shalt rise above ~All this melancholy and gloom!\"*");
 	0xFF15->say("\"Who doth speak to me? ~Could it be she? ~Or have I indeed gone mad? ~But who else -could- it be?\"*");
-	0xFF16->say("\"Mine husband, thou must listen. ~Thou hast thy comfort within thy grip. ~Thou must only seek them out -- ~Those that can help -- The Fellowship!\"*");
-	0xFF16->hide();
+	MERYL->say("\"Mine husband, thou must listen. ~Thou hast thy comfort within thy grip. ~Thou must only seek them out -- ~Those that can help -- The Fellowship!\"*");
+	MERYL->hide();
 	0xFF15->say("Meryl drifts off stage, leaving Dustin alone.");
 	say("\"The Fellowship, she said? ~But what do I need with it? ~I have mine eight virtues and mine healers ~With these nothing else will fit!\"*");
 	PAUL->say("Paul enters the stage with Meryl, who now wears a different mask.");
