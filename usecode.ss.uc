@@ -2845,7 +2845,7 @@ void Func00FA shape#(0xFA) () {
 	var0000 = Func09A0(0x0005, 0x0001);
 	var0001 = Func09A0(0x0005, 0x0002);
 	if ((item == var0000) || (item == var0001)) {
-		var0002 = [KARNAX, THOXA, MIGGIM, 0xFF2C, 0xFF2B];
+		var0002 = [KARNAX, THOXA, MIGGIM, BRACCUS, 0xFF2B];
 		if (gflags[0x0270]) {
 			var0002 &= 0xFF29;
 		}
@@ -15613,7 +15613,7 @@ void Func032B shape#(0x32B) () {
 		0xFEFB->set_item_flag(MET);
 		NEYOBI->set_item_flag(SI_ZOMBIE);
 		GWENNO->set_item_flag(SI_ZOMBIE);
-		var0008 = [AVATAR, SELINA, KALEN, ALE, KARNAX, THOXA, MIGGIM, 0xFF2C, 0xFF2B, 0xFF2A, SILENT2, SILENT3, JORVIN, HENCH1, HENCH2, HENCH3, 0xFEF0, 0xFEDB, 0xFF29, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
+		var0008 = [AVATAR, SELINA, KALEN, ALE, KARNAX, THOXA, MIGGIM, BRACCUS, 0xFF2B, 0xFF2A, SILENT2, SILENT3, JORVIN, HENCH1, HENCH2, HENCH3, 0xFEF0, 0xFEDB, 0xFF29, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -21279,7 +21279,7 @@ void Func0400 object#(0x400) () {
 				nohalt;
 				call Func0636;
 			};
-			var0017 = [KARNAX, THOXA, MIGGIM, 0xFF2C, 0xFF2B, 0xFF2A, SILENT2, SILENT3];
+			var0017 = [KARNAX, THOXA, MIGGIM, BRACCUS, 0xFF2B, 0xFF2A, SILENT2, SILENT3];
 			if (!gflags[0x01CC]) {
 				var0017 = Func0988(MIGGIM, var0017);
 			}
@@ -57030,7 +57030,7 @@ void Func04CF object#(0x4CF) () {
 			var0018 = [];
 			var000D = [];
 			var000E = [];
-			var0019 = [KARNAX, THOXA, MIGGIM, 0xFF2C, 0xFF2B, 0xFF2A, SILENT2, SILENT3];
+			var0019 = [KARNAX, THOXA, MIGGIM, BRACCUS, 0xFF2B, 0xFF2A, SILENT2, SILENT3];
 			var001A = 0x000A;
 			for (var0012 in var0019 with var001B to var001C) {
 				var001D = Func084E(var0012, var001A);
@@ -57950,7 +57950,7 @@ void Func04D4 object#(0x4D4) () {
 		if (gflags[0x0004]) {
 			AVATAR->clear_item_flag(DONT_MOVE);
 			UI_init_conversation();
-			0xFF2C->show_npc_face0(0x0000);
+			BRACCUS->show_npc_face0(0x0000);
 			say("\"Well done, my ",
 				var0003,
 				". I shall take Yelinda back to her rightful place.\"");
@@ -57963,16 +57963,16 @@ void Func04D4 object#(0x4D4) () {
 				", thou must continue toward thine union with the Powers...\"");
 			UI_remove_npc_face0();
 			Func097F(item, "@Peace.@", 0x0002);
-			var0005 = 0xFF2C->get_object_position();
+			var0005 = BRACCUS->get_object_position();
 			UI_sprite_effect(ANIMATION_TELEPORT, (var0005[0x0001] - 0x0003), (var0005[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			var0006 = YELINDA->get_object_position();
 			UI_sprite_effect(ANIMATION_TELEPORT, (var0006[0x0001] - 0x0003), (var0006[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			0xFF2C->remove_npc();
+			BRACCUS->remove_npc();
 			Func09AC(YELINDA, 0x0404, 0x06B8, WANDER);
 			UI_play_sound_effect(0x0051);
 		} else {
 			UI_init_conversation();
-			0xFF2C->show_npc_face0(0x0000);
+			BRACCUS->show_npc_face0(0x0000);
 			AVATAR->clear_item_flag(DONT_MOVE);
 			say("\"We mourn with thee, Hero From Another World, for this purposeless death of the girl once known as Cantra.\"");
 			say("\"We shall take her lifeless body to Monk Isle, where perhaps we can restore life where death doth now reign.\"");
@@ -57988,9 +57988,9 @@ void Func04D4 object#(0x4D4) () {
 					}
 				}
 			}
-			var0005 = 0xFF2C->get_object_position();
+			var0005 = BRACCUS->get_object_position();
 			UI_sprite_effect(ANIMATION_TELEPORT, (var0005[0x0001] - 0x0003), (var0005[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			0xFF2C->remove_npc();
+			BRACCUS->remove_npc();
 			CANTRA->clear_item_flag(DEAD);
 			Func09AC(CANTRA, 0x097D, 0x0469, WANDER);
 			CANTRA->set_item_flag(SI_ZOMBIE);
@@ -58000,18 +58000,18 @@ void Func04D4 object#(0x4D4) () {
 	}
 	if (event == DOUBLECLICK) {
 		if (KARNAX->get_npc_id() != 0x0000) {
-			0xFF2C->item_say("@Not now...@");
+			BRACCUS->item_say("@Not now...@");
 			abort;
 		}
 		AVATAR->item_say("@Excuse me...@");
-		0xFF2C->Func07D1();
-		Func097F(0xFF2C, (("@Yes, my " + var0003) + "?@"), 0x0002);
-		0xFF2C->set_schedule_type(TALK);
+		BRACCUS->Func07D1();
+		Func097F(BRACCUS, (("@Yes, my " + var0003) + "?@"), 0x0002);
+		BRACCUS->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF2C->run_schedule();
-		0xFF2C->clear_item_say();
-		0xFF2C->show_npc_face0(0x0000);
+		BRACCUS->run_schedule();
+		BRACCUS->clear_item_say();
+		BRACCUS->show_npc_face0(0x0000);
 		say("\"I am but a humble monk. I can be of no help to thee in any way, I fear.\"");
 		var000C = false;
 		var000D = false;
@@ -69290,13 +69290,13 @@ void Func06D1 object#(0x6D1) () {
 			var0001 = AVATAR->get_object_position();
 			var0001[0x0001] += 0x0005;
 			UI_sprite_effect(ANIMATION_TELEPORT, (var0001[0x0001] - 0x0003), (var0001[0x0002] - 0x0003), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			0xFF2C->move_object(var0001);
+			BRACCUS->move_object(var0001);
 			UI_play_sound_effect(0x0051);
-			0xFF2C->Func07D1();
-			0xFF2C->Func07D2();
-			Func097F(0xFF2C, "@Hero...@", 0x0002);
+			BRACCUS->Func07D1();
+			BRACCUS->Func07D2();
+			Func097F(BRACCUS, "@Hero...@", 0x0002);
 			UI_play_music(0x003F, Func09A0(0x0005, 0x0001));
-			var0000 = script 0xFF2C after 14 ticks {
+			var0000 = script BRACCUS after 14 ticks {
 				nohalt;
 				call Func04D4;
 			};
@@ -77757,7 +77757,7 @@ void Func07AB object#(0x7AB) () {
 		if (!gflags[0x0273]) {
 			abort;
 		}
-		var0000 = [KARNAX, THOXA, MIGGIM, 0xFF2C, 0xFF2A, SILENT2, SILENT3];
+		var0000 = [KARNAX, THOXA, MIGGIM, BRACCUS, 0xFF2A, SILENT2, SILENT3];
 		if (0xFF29->get_item_flag(MET)) {
 			var0000 &= 0xFF29;
 		}
@@ -79080,7 +79080,7 @@ void Func07DE object#(0x7DE) () {
 	} else {
 		if (Func0994() == 0x0002) {
 			var0000 = [0x0974, 0x0470, 0x0000];
-			var0001 = [KARNAX, THOXA, MIGGIM, 0xFF2C, 0xFF2B, 0xFF2A, SILENT2, SILENT3];
+			var0001 = [KARNAX, THOXA, MIGGIM, BRACCUS, 0xFF2B, 0xFF2A, SILENT2, SILENT3];
 			if (0xFF29->get_item_flag(MET)) {
 				var0001 &= 0xFF29;
 			}
@@ -94309,7 +94309,7 @@ var Func084D 0x84D (var var0000, var var0001) {
 		return EAT_AT_INN;
 	}
 	if (var0001 == 0x0002) {
-		if ((var0000 == THOXA) || ((var0000 == MIGGIM) || (var0000 == 0xFF2C))) {
+		if ((var0000 == THOXA) || ((var0000 == MIGGIM) || (var0000 == BRACCUS))) {
 			return TEND_SHOP;
 		}
 		return FARM;
@@ -94345,7 +94345,7 @@ var Func084D 0x84D (var var0000, var var0001) {
 		if ((var0000 == THOXA) || (var0000 == 0xFF2B)) {
 			return WANDER;
 		}
-		if (var0000 == 0xFF2C) {
+		if (var0000 == BRACCUS) {
 			return FARM;
 		}
 		if (var0000 == SILENT3) {
@@ -94450,7 +94450,7 @@ var Func084E 0x84E (var var0000, var var0001) {
 		}
 		return [0x096F, 0x04B1, 0x0000];
 	}
-	if (var0000 == 0xFF2C) {
+	if (var0000 == BRACCUS) {
 		if (var0001 == 0x0001) {
 			return [0x0973, 0x046A, 0x0000];
 		}
@@ -96966,12 +96966,12 @@ void Func0864 0x864 () {
 	YELINDA->set_polymorph(var0003);
 	YELINDA->set_new_schedules([MIDNIGHT, MORNING, NOON], [SLEEP, EAT, WANDER], [0x0436, 0x06C9, 0x03AD, 0x06DD, 0x0407, 0x075B]);
 	UI_sprite_effect(ANIMATION_GREEN_BUBBLES, (var0002[0x0001] + 0x0002), (var0002[0x0002] + 0x0002), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-	0xFF2C->move_object([(var0002[0x0001] + 0x0002), (var0002[0x0002] + 0x0002), 0x0000]);
-	0xFF2C->set_schedule_type(WAIT);
+	BRACCUS->move_object([(var0002[0x0001] + 0x0002), (var0002[0x0002] + 0x0002), 0x0000]);
+	BRACCUS->set_schedule_type(WAIT);
 	YELINDA->set_schedule_type(WAIT);
 	AVATAR->set_item_flag(DONT_MOVE);
 	UI_end_conversation();
-	var0001 = script 0xFF2C after 10 ticks {
+	var0001 = script BRACCUS after 10 ticks {
 		nohalt;
 		actor frame standing;
 		call Func04D4;
@@ -105801,7 +105801,7 @@ void Func08F2 0x8F2 (var var0000) {
 	var var0003;
 
 	var0000[0x0002] -= 0x0003;
-	var0001 = [THOXA, 0xFF2C, 0xFF2B, KARNAX, MIGGIM, 0xFF2A, SILENT2, SILENT3];
+	var0001 = [THOXA, BRACCUS, 0xFF2B, KARNAX, MIGGIM, 0xFF2A, SILENT2, SILENT3];
 	var0002 = 0x0000;
 	while (var0002 < 0x0007) {
 		if (var0002 > 0x0003) {
@@ -105867,7 +105867,7 @@ void Func08F5 0x8F5 (var var0000) {
 	UI_sprite_effect(ANIMATION_TELEPORT2, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 	UI_sprite_effect(ANIMATION_TELEPORT, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 	UI_sprite_effect(ANIMATION_TELEPORT, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-	var0002 = [THOXA, 0xFF2C, 0xFF2B, KARNAX, MIGGIM, 0xFF2A, SILENT2, SILENT3];
+	var0002 = [THOXA, BRACCUS, 0xFF2B, KARNAX, MIGGIM, 0xFF2A, SILENT2, SILENT3];
 	for (var0005 in var0002 with var0003 to var0004) {
 		var0005->halt_scheduled();
 		var0006 = var0005->get_npc_object();

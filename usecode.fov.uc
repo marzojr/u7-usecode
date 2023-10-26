@@ -43383,7 +43383,7 @@ void Func04D4 object#(0x4D4) () {
 	var var000B;
 
 	if (event == DOUBLECLICK) {
-		0xFF2C->show_npc_face(0x0000);
+		YVELLA->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = false;
@@ -43553,7 +43553,7 @@ void Func04D4 object#(0x4D4) () {
 			".\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF2C);
+		Func092E(YVELLA);
 	}
 }
 
