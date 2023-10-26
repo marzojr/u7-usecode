@@ -46538,10 +46538,10 @@ void Func04EC object#(0x4EC) () {
 	var var0001;
 
 	if (event == DOUBLECLICK) {
-		0xFF14->show_npc_face(0x0000);
+		ELLEN->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		if (var0000 == NIGHT) {
-			var0001 = Func08FC(0xFF14, KLOG);
+			var0001 = Func08FC(ELLEN, KLOG);
 			if (var0001) {
 				say("Ellen puts her finger to her lips. There is a Fellowship meeting going on.*");
 			} else {
@@ -46598,7 +46598,7 @@ void Func04EC object#(0x4EC) () {
 		say("\"Goodbye. I hope to see thee again, soon.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF14);
+		Func092E(ELLEN);
 	}
 }
 
@@ -71222,7 +71222,7 @@ void Func08AB 0x8AB () {
 	var var0005;
 
 	var0000 = Func08F7(JOHNSON);
-	var0001 = Func08F7(0xFF14);
+	var0001 = Func08F7(ELLEN);
 	var0002 = Func08F7(DELL);
 	var0003 = Func08F7(CAROLINE);
 	var0004 = Func08F7(IOLO);
@@ -71236,8 +71236,8 @@ void Func08AB 0x8AB () {
 	say("\"We must spread the philosophy to everyone who can hear it. For who is there to lift the disunited, mistrustful, and unworthy Britannia up from its sad state but we of The Fellowship?");
 	say("\"And now is the time we ask each of our members to give testimonial aloud, and tell how walking with The Fellowship has affected their life.\"*");
 	if (var0001) {
-		0xFF14->say("\"The Fellowship has enabled me to reach out and help people where before I have been too preoccupied.\"*");
-		0xFF14->hide();
+		ELLEN->say("\"The Fellowship has enabled me to reach out and help people where before I have been too preoccupied.\"*");
+		ELLEN->hide();
 	}
 	if (var0000) {
 		JOHNSON->say("\"The Fellowship has made me more alert and thorough in the execution of my job as a Trinsic guard.\"*");
