@@ -45417,10 +45417,10 @@ void Func04E3 object#(0x4E3) () {
 	var var0006;
 
 	if (event == DOUBLECLICK) {
-		0xFF1D->show_npc_face(0x0000);
+		MOLE->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = UI_wearing_fellowship();
-		var0002 = 0xFF1D->get_npc_object();
+		var0002 = MOLE->get_npc_object();
 		add(["name", "job", "bye"]);
 		if (gflags[0x02A7]) {
 			if (gflags[0x02A5]) {
@@ -45453,7 +45453,7 @@ void Func04E3 object#(0x4E3) () {
 					if (var0003) {
 						IOLO->say("\"I thought thou said it was a long story.\"*");
 						IOLO->hide();
-						0xFF1D->show_npc_face(0x0000);
+						MOLE->show_npc_face(0x0000);
 					}
 				} else {
 					say("\"Very well. How 'bout if I just say that I was born in a cave, so my mother named me Mole.\"");
@@ -45530,7 +45530,7 @@ void Func04E3 object#(0x4E3) () {
 		say("\"Goodbye, stranger.\"*");
 	}
 	if (event == PROXIMITY) {
-		var0004 = 0xFF1D->get_npc_object()->get_schedule_type();
+		var0004 = MOLE->get_npc_object()->get_schedule_type();
 		if (var0004 == LOITER) {
 			var0005 = UI_die_roll(0x0001, 0x0004);
 			if (var0005 == 0x0001) {
@@ -45545,9 +45545,9 @@ void Func04E3 object#(0x4E3) () {
 			if (var0005 == 0x0004) {
 				var0006 = "@Damn parrot droppings...@";
 			}
-			0xFF1D->item_say(var0006);
+			MOLE->item_say(var0006);
 		} else {
-			Func092E(0xFF1D);
+			Func092E(MOLE);
 		}
 	}
 }
