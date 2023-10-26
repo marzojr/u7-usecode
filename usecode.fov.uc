@@ -46800,7 +46800,7 @@ void Func04EE object#(0x4EE) () {
 	var var0003;
 
 	if (event == DOUBLECLICK) {
-		0xFF12->show_npc_face(0x0000);
+		PERRIN->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		add(["name", "job", "bye"]);
@@ -46886,7 +46886,7 @@ void Func04EE object#(0x4EE) () {
 			". Best of luck in thy journeys.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF12);
+		Func092E(PERRIN);
 	}
 }
 
