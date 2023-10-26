@@ -59051,13 +59051,13 @@ void Func04DB object#(0x4DB) () {
 		D_ENSORCIO->set_schedule_type(STANDTHERE);
 		var0001 = D_ENSORCIO->get_object_position();
 		UI_sprite_effect(ANIMATION_MEDIUM_BLAST, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-		var0001 = 0xFF24->get_object_position();
+		var0001 = D_FILBERTIO->get_object_position();
 		UI_sprite_effect(ANIMATION_MEDIUM_BLAST, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		UI_play_sound_effect(0x0029);
 		Func097F(D_ENSORCIO, "@Ha, ha, ha!@", 0x0000);
-		Func097F(0xFF24, "@Have mercy!@", 0x0000);
+		Func097F(D_FILBERTIO, "@Have mercy!@", 0x0000);
 		D_ENSORCIO->remove_npc();
-		0xFF24->remove_npc();
+		D_FILBERTIO->remove_npc();
 		remove_item();
 		abort;
 	}
@@ -69957,7 +69957,7 @@ void Func06D9 object#(0x6D9) () {
 		}
 		if (var0002 == 0x0007) {
 			D_ENSORCIO->remove_npc();
-			0xFF24->remove_npc();
+			D_FILBERTIO->remove_npc();
 			remove_item();
 		}
 		if (var0002 == 0x0008) {
