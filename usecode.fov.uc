@@ -43261,7 +43261,7 @@ void Func04D3 object#(0x4D3) () {
 	var var0002;
 
 	if (event == DOUBLECLICK) {
-		0xFF2D->show_npc_face(0x0000);
+		LAP_LEM->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x0290]) {
 			say("You are greeted with a smile from this gargoyle.");
@@ -43358,7 +43358,7 @@ void Func04D3 object#(0x4D3) () {
 		say("\"To hope to see you again soon.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092F(0xFF2D);
+		Func092F(LAP_LEM);
 	}
 }
 

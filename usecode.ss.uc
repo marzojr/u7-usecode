@@ -2845,7 +2845,7 @@ void Func00FA shape#(0xFA) () {
 	var0000 = Func09A0(0x0005, 0x0001);
 	var0001 = Func09A0(0x0005, 0x0002);
 	if ((item == var0000) || (item == var0001)) {
-		var0002 = [KARNAX, 0xFF2D, MIGGIM, 0xFF2C, 0xFF2B];
+		var0002 = [KARNAX, THOXA, MIGGIM, 0xFF2C, 0xFF2B];
 		if (gflags[0x0270]) {
 			var0002 &= 0xFF29;
 		}
@@ -3590,7 +3590,7 @@ void Func0109 shape#(0x109) () {
 			UI_init_conversation();
 			KARNAX->show_npc_face0(0x0000);
 			say("\"Thou shouldst know better than to meddle in the affairs of Fate, Thoxa. By merely talking with the Hero, thou mayest be condemning us.\"");
-			0xFF2D->show_npc_face1(0x0000);
+			THOXA->show_npc_face1(0x0000);
 			say("\"We must intervene, Karnax. The very fabric that weaves the tapestry of the Cosmos may depend upon it.\"");
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
@@ -3604,7 +3604,7 @@ void Func0109 shape#(0x109) () {
 			UI_remove_npc_face0();
 			UI_end_conversation();
 			AVATAR->set_item_flag(DONT_MOVE);
-			var0008 = script 0xFF2D {
+			var0008 = script THOXA {
 				nohalt;
 				face FACE_NORTH;
 				actor frame cast_out;
@@ -3614,7 +3614,7 @@ void Func0109 shape#(0x109) () {
 				actor frame strike_1h;
 				call Func075A;
 			};
-			Func097F(0xFF2D, "@Flam Mas Flam!@", 0x0002);
+			Func097F(THOXA, "@Flam Mas Flam!@", 0x0002);
 			gflags[0x000A] = true;
 			var0008 = script KARNAX after 10 ticks {
 				nohalt;
@@ -3630,7 +3630,7 @@ void Func0109 shape#(0x109) () {
 				call Func07EC;
 			};
 			var000D = KARNAX->get_object_position();
-			var000E = 0xFF2D->get_object_position();
+			var000E = THOXA->get_object_position();
 			UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, (var000E[0x0001] - 0x0002), (var000E[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			var000F = [-2,  0,  2,  0,  1,  0,  0];
 			var0010 = [-2, -3,  2,  2, -2, -3,  0];
@@ -15613,7 +15613,7 @@ void Func032B shape#(0x32B) () {
 		0xFEFB->set_item_flag(MET);
 		NEYOBI->set_item_flag(SI_ZOMBIE);
 		GWENNO->set_item_flag(SI_ZOMBIE);
-		var0008 = [AVATAR, SELINA, KALEN, ALE, KARNAX, 0xFF2D, MIGGIM, 0xFF2C, 0xFF2B, 0xFF2A, SILENT2, SILENT3, JORVIN, HENCH1, HENCH2, HENCH3, 0xFEF0, 0xFEDB, 0xFF29, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
+		var0008 = [AVATAR, SELINA, KALEN, ALE, KARNAX, THOXA, MIGGIM, 0xFF2C, 0xFF2B, 0xFF2A, SILENT2, SILENT3, JORVIN, HENCH1, HENCH2, HENCH3, 0xFEF0, 0xFEDB, 0xFF29, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -16968,10 +16968,10 @@ void Func0347 shape#(0x347) () {
 			if (var0002) {
 				if (Func08FC()) {
 					var0008 = AVATAR->get_object_position();
-					0xFF2D->move_object(var0008);
-					0xFF2D->Func07D2();
-					0xFF2D->set_schedule_type(TALK);
-					0xFF2D->obj_sprite_effect(ANIMATION_TELEPORT, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
+					THOXA->move_object(var0008);
+					THOXA->Func07D2();
+					THOXA->set_schedule_type(TALK);
+					THOXA->obj_sprite_effect(ANIMATION_TELEPORT, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 					UI_play_sound_effect(0x0051);
 					var0009 = Func09A0(0x0002, 0x0001);
 					if (var0009) {
@@ -17479,17 +17479,17 @@ void Func0363 shape#(0x363) () {
 	var0000 = UI_is_pc_female();
 	var0001 = Func0994();
 	var0002 = "son";
-	var0003 = 0xFF2D->get_npc_object();
+	var0003 = THOXA->get_npc_object();
 	if (var0000) {
 		var0002 = "daughter";
 	}
 	if ((event == EGG) && (var0001 == 0x001F)) {
-		0xFF2D->show_npc_face0(0x0000);
+		THOXA->show_npc_face0(0x0000);
 		say("Greetings, hero from another world!\"");
 		say("\"I foretold that we would meet again, though I had not expected thee in the realm of dreams.\" *\"That which thou dost see before thee is the Moon's Eye. It is thy goal in the waking world.\"");
 		say("\"Seek out the true Moon's Eye in the Temple of the Ancient Ones in the icy wastes to the north. It will show thee what thou must know...\"");
 		UI_remove_npc_face0();
-		Func097F(0xFF2D, "@Seek the Moon's Eye...@", 0x0002);
+		Func097F(THOXA, "@Seek the Moon's Eye...@", 0x0002);
 		Func097F(AVATAR, "@Wait...@", 0x000C);
 		var0004 = get_object_position();
 		UI_sprite_effect(ANIMATION_TELEPORT, var0004[0x0001], var0004[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
@@ -17503,14 +17503,14 @@ void Func0363 shape#(0x363) () {
 	}
 	if (event == SCRIPTED) {
 		if ((item == var0003) && (var0001 == 0x0018)) {
-			var0006 = 0xFF2D->get_object_position();
+			var0006 = THOXA->get_object_position();
 			while (var0006[0x0003] > 0x0000) {
 				var0006[0x0001] -= 0x0001;
 				var0006[0x0002] -= 0x0001;
 				var0006[0x0003] -= 0x0002;
 			}
 			UI_sprite_effect(ANIMATION_TELEPORT, var0006[0x0001], var0006[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			0xFF2D->remove_npc();
+			THOXA->remove_npc();
 			DUPRE->clear_item_flag(ASLEEP);
 			SHAMINO->clear_item_flag(ASLEEP);
 			IOLO->clear_item_flag(ASLEEP);
@@ -17518,7 +17518,7 @@ void Func0363 shape#(0x363) () {
 		}
 		if (var0001 == 0x001B) {
 			UI_init_conversation();
-			0xFF2D->show_npc_face0(0x0000);
+			THOXA->show_npc_face0(0x0000);
 			say("\"Even as was foretold! I have travelled a great distance to meet with thee. My name is Thoxa.\"");
 			say("\"But wait! I proceed too quickly. Perhaps thou art not the promised Hero... I must test thee, lest I give mine assistance in error.\"");
 			if (Func098C()) {
@@ -17604,10 +17604,10 @@ void Func0363 shape#(0x363) () {
 					case "bye":
 						say("\"I must go now, before those who oppose me find that I have been here.\"");
 						var0005 = "@Farewell!@" & "@No!@";
-						Func094F(0xFF2D, var0005);
+						Func094F(THOXA, var0005);
 						UI_end_conversation();
 						UI_remove_npc_face0();
-						var0007 = 0xFF2D->get_object_position();
+						var0007 = THOXA->get_object_position();
 						var0007[0x0001] += 0x000C;
 						var0007[0x0002] -= 0x0003;
 						KARNAX->move_object(var0007);
@@ -17628,9 +17628,9 @@ void Func0363 shape#(0x363) () {
 						abort;
 				}
 			} else {
-				0xFF2D->set_schedule_type(SHY);
-				0xFF2D->clear_item_say();
-				Func097F(0xFF2D, "@An impostor!@", 0x0000);
+				THOXA->set_schedule_type(SHY);
+				THOXA->clear_item_say();
+				Func097F(THOXA, "@An impostor!@", 0x0000);
 				AVATAR->clear_item_flag(DONT_MOVE);
 				abort;
 			}
@@ -21279,7 +21279,7 @@ void Func0400 object#(0x400) () {
 				nohalt;
 				call Func0636;
 			};
-			var0017 = [KARNAX, 0xFF2D, MIGGIM, 0xFF2C, 0xFF2B, 0xFF2A, SILENT2, SILENT3];
+			var0017 = [KARNAX, THOXA, MIGGIM, 0xFF2C, 0xFF2B, 0xFF2A, SILENT2, SILENT3];
 			if (!gflags[0x01CC]) {
 				var0017 = Func0988(MIGGIM, var0017);
 			}
@@ -57030,7 +57030,7 @@ void Func04CF object#(0x4CF) () {
 			var0018 = [];
 			var000D = [];
 			var000E = [];
-			var0019 = [KARNAX, 0xFF2D, MIGGIM, 0xFF2C, 0xFF2B, 0xFF2A, SILENT2, SILENT3];
+			var0019 = [KARNAX, THOXA, MIGGIM, 0xFF2C, 0xFF2B, 0xFF2A, SILENT2, SILENT3];
 			var001A = 0x000A;
 			for (var0012 in var0019 with var001B to var001C) {
 				var001D = Func084E(var0012, var001A);
@@ -57718,31 +57718,31 @@ void Func04D3 object#(0x4D3) () {
 	var0002 = Func0994();
 	var0003 = "son";
 	var0004 = Func09A0(0x0002, 0x0001);
-	var0005 = 0xFF2D->get_npc_object();
-	var0006 = 0xFF2D->get_item_flag(MET);
+	var0005 = THOXA->get_npc_object();
+	var0006 = THOXA->get_item_flag(MET);
 	if (var0001) {
 		var0003 = "daughter";
 	}
 	var0007 = Func0953();
 	if (event == DOUBLECLICK) {
 		if (KARNAX->get_npc_id() != 0x0000) {
-			0xFF2D->item_say("@Not now...@");
+			THOXA->item_say("@Not now...@");
 			abort;
 		}
 		AVATAR->item_say("@Excuse me...@");
-		0xFF2D->Func07D1();
-		Func097F(0xFF2D, (("@Yes, my " + var0003) + "?@"), 0x0002);
-		0xFF2D->set_schedule_type(TALK);
+		THOXA->Func07D1();
+		Func097F(THOXA, (("@Yes, my " + var0003) + "?@"), 0x0002);
+		THOXA->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF2D->run_schedule();
-		0xFF2D->clear_item_say();
-		0xFF2D->show_npc_face0(0x0000);
+		THOXA->run_schedule();
+		THOXA->clear_item_say();
+		THOXA->show_npc_face0(0x0000);
 		if ((var0002 == 0x000D) && (gflags[0x0060] && (!gflags[0x0061]))) {
 			say("\"It is written that 'The Hero from Another World shall face the end as the beginning'! Thou didst enter our land with thy three companions, they must be present at the final moment to forestall disaster!\"");
 			UI_remove_npc_face0();
-			Func097F(0xFF2D, "@I shall pray for thee!@", 0x0000);
-			0xFF2D->move_object([0x05FA, 0x078F, 0x0000]);
+			Func097F(THOXA, "@I shall pray for thee!@", 0x0000);
+			THOXA->move_object([0x05FA, 0x078F, 0x0000]);
 			var0008 = [IOLO, SHAMINO, DUPRE];
 			for (var000B in var0008 with var0009 to var000A) {
 				if (!var000B->npc_nearby()) {
@@ -57755,7 +57755,7 @@ void Func04D3 object#(0x4D3) () {
 			abort;
 		}
 		0x0000->set_conversation_slot();
-		var000D = 0xFF2D->get_object_position();
+		var000D = THOXA->get_object_position();
 		if (Func08F8(var000D, [0x0914, 0x01BB], [0x0939, 0x01D9])) {
 			say("\"Thou must not enter this door without thy three stalwart companions, Hero from Another World!\"");
 			say("\"It matters not if any others venture with thee, but through this portal the four must pass!\"");
@@ -57896,17 +57896,17 @@ void Func04D3 object#(0x4D3) () {
 				}
 				say("\"I must return to Monk Isle.\"");
 				UI_remove_npc_face0();
-				var000D = 0xFF2D->get_object_position();
+				var000D = THOXA->get_object_position();
 				var000D[0x0001] -= var000D[0x0003] / 0x0002;
 				var000D[0x0002] -= var000D[0x0003] / 0x0002;
 				UI_sprite_effect(ANIMATION_TELEPORT, var000D[0x0001], var000D[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 				UI_play_sound_effect(0x0051);
-				0xFF2D->remove_npc();
+				THOXA->remove_npc();
 				abort;
 		}
 	}
 	if (event == DEATH) {
-		Func08F5(0xFF2D);
+		Func08F5(THOXA);
 	}
 }
 
@@ -69937,10 +69937,10 @@ void Func06D9 object#(0x6D9) () {
 		if (var0002 == 0x0004) {
 			UI_play_sound_effect(0x0051);
 			UI_sprite_effect(ANIMATION_TELEPORT, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x000C, LOOP_ONCE2);
-			0xFF2D->move_object(var0003);
-			0xFF2D->set_schedule_type(STANDTHERE);
-			0xFF2D->Func07D2();
-			Func097F(0xFF2D, "@Avatar!@", 0x0001);
+			THOXA->move_object(var0003);
+			THOXA->set_schedule_type(STANDTHERE);
+			THOXA->Func07D2();
+			Func097F(THOXA, "@Avatar!@", 0x0001);
 			var0005 = script item after 10 ticks {
 				nohalt;
 				call Func0363;
@@ -69948,7 +69948,7 @@ void Func06D9 object#(0x6D9) () {
 			var0005 = set_item_quality(0x00FF);
 		}
 		if (var0002 == 0x0005) {
-			0xFF2D->remove_npc();
+			THOXA->remove_npc();
 			remove_item();
 		}
 		if (var0002 == 0x0006) {
@@ -71661,10 +71661,10 @@ void Func06F5 object#(0x6F5) () {
 	if ((!gflags[0x0060]) || (gflags[0x0061] || (SHAMINO->npc_nearby() && (DUPRE->npc_nearby() && IOLO->npc_nearby())))) {
 		abort;
 	}
-	var0000 = 0xFF2D->approach_avatar(0x0050, 0x0028);
+	var0000 = THOXA->approach_avatar(0x0050, 0x0028);
 	UI_play_sound_effect(0x0051);
-	Func097F(0xFF2D, "@Avatar!@", 0x0005);
-	0xFF2D->set_schedule_type(TALK);
+	Func097F(THOXA, "@Avatar!@", 0x0005);
+	THOXA->set_schedule_type(TALK);
 }
 
 extern void Func09AD 0x9AD (var var0000);
@@ -75625,12 +75625,12 @@ void Func073C object#(0x73C) () {
 		var0002 = UI_die_roll(-3, 3);
 		var0000[0x0001] += var0001;
 		var0000[0x0002] += var0002;
-		0xFF2D->move_object(var0000);
+		THOXA->move_object(var0000);
 		var0000[0x0001] -= var0000[0x0003] / 0x0002;
 		var0000[0x0002] -= var0000[0x0003] / 0x0002;
 		UI_sprite_effect(ANIMATION_TELEPORT, var0000[0x0001], var0000[0x0002], 0, 0, 0, LOOP_ONCE);
-		0xFF2D->set_schedule_type(TALK);
-		0xFF2D->set_alignment(NEUTRAL);
+		THOXA->set_schedule_type(TALK);
+		THOXA->set_alignment(NEUTRAL);
 	}
 }
 
@@ -75904,12 +75904,12 @@ void Func075A object#(0x75A) () {
 		AVATAR->clear_item_say();
 		var0000 = AVATAR->get_object_position();
 		var0000[0x0002] += 0x0007;
-		0xFF2D->set_schedule_type(WAIT);
-		0xFF2D->move_object(var0000);
-		Func097F(0xFF2D, "@Thou hast arrived!@", 0x0000);
+		THOXA->set_schedule_type(WAIT);
+		THOXA->move_object(var0000);
+		Func097F(THOXA, "@Thou hast arrived!@", 0x0000);
 		Func097F(AVATAR, "@Who said that?@", 0x0003);
-		0xFF2D->Func07D2();
-		var0001 = script 0xFF2D after 20 ticks {
+		THOXA->Func07D2();
+		var0001 = script THOXA after 20 ticks {
 			nohalt;
 			call Func0363;
 		};
@@ -75924,7 +75924,7 @@ void Func075A object#(0x75A) () {
 	}
 	if ((event == SCRIPTED) && (gflags[0x000A] == true)) {
 		UI_init_conversation();
-		0xFF2D->show_npc_face0(0x0000);
+		THOXA->show_npc_face0(0x0000);
 		say("\"This fire ring shall save thee from being destroyed during this battle, Hero. Neither of us means thee harm, but errors can occur in the heat of combat. Remain within the ring!\"");
 		UI_end_conversation();
 		var0002 = Func09A0(0x0007, 0x0001);
@@ -75932,7 +75932,7 @@ void Func075A object#(0x75A) () {
 			UI_play_music(0x0002, var0002);
 		}
 		Func0998(AVATAR->get_npc_object(), 0x037F);
-		var0001 = script 0xFF2D {
+		var0001 = script THOXA {
 			nohalt;
 			face east;
 			actor frame ready;
@@ -75942,7 +75942,7 @@ void Func075A object#(0x75A) () {
 	}
 	if (event == SCRIPTED) {
 		UI_play_sound_effect(0x0047);
-		0xFF2D->obj_sprite_effect(ANIMATION_LIGHTNING, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
+		THOXA->obj_sprite_effect(ANIMATION_LIGHTNING, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 	}
 }
 
@@ -77757,7 +77757,7 @@ void Func07AB object#(0x7AB) () {
 		if (!gflags[0x0273]) {
 			abort;
 		}
-		var0000 = [KARNAX, 0xFF2D, MIGGIM, 0xFF2C, 0xFF2A, SILENT2, SILENT3];
+		var0000 = [KARNAX, THOXA, MIGGIM, 0xFF2C, 0xFF2A, SILENT2, SILENT3];
 		if (0xFF29->get_item_flag(MET)) {
 			var0000 &= 0xFF29;
 		}
@@ -79080,7 +79080,7 @@ void Func07DE object#(0x7DE) () {
 	} else {
 		if (Func0994() == 0x0002) {
 			var0000 = [0x0974, 0x0470, 0x0000];
-			var0001 = [KARNAX, 0xFF2D, MIGGIM, 0xFF2C, 0xFF2B, 0xFF2A, SILENT2, SILENT3];
+			var0001 = [KARNAX, THOXA, MIGGIM, 0xFF2C, 0xFF2B, 0xFF2A, SILENT2, SILENT3];
 			if (0xFF29->get_item_flag(MET)) {
 				var0001 &= 0xFF29;
 			}
@@ -80211,7 +80211,7 @@ void Func07EC object#(0x7EC) () {
 		var0000 = KARNAX->get_object_position();
 		UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, (var0000[0x0001] - 0x0002), (var0000[0x0002] - 0x0002), 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		UI_play_sound_effect(0x0082);
-		var0001 = 0xFF2D->get_npc_object()->find_nearby(0x0113, 0x0002, MASK_EGG);
+		var0001 = THOXA->get_npc_object()->find_nearby(0x0113, 0x0002, MASK_EGG);
 		var0002 = KARNAX->set_to_attack(var0001, 0x0118);
 		var0003 = script KARNAX {
 			nohalt;
@@ -80220,14 +80220,14 @@ void Func07EC object#(0x7EC) () {
 			continue;
 			attack;
 		};
-		var0004 = 0xFF2D->get_distance(KARNAX);
+		var0004 = THOXA->get_distance(KARNAX);
 		var0005 = var0004 / 0x0002;
 		while (var0005 < 0x002D) {
-			var0003 = script 0xFF2D after var0005 ticks {
+			var0003 = script THOXA after var0005 ticks {
 				nohalt;
 				call Func075A;
 			};
-			var0003 = script 0xFF2D after (var0005 + 0x0001) ticks {
+			var0003 = script THOXA after (var0005 + 0x0001) ticks {
 				nohalt;
 				call Func075A;
 			};
@@ -80240,9 +80240,9 @@ void Func07EC object#(0x7EC) () {
 			};
 			var0005 += 0x000A;
 		}
-		Func097F(0xFF2D, "@Damn thee!@", 0x000A);
-		Func097F(0xFF2D, "@Oh...@", 0x0011);
-		var0003 = script 0xFF2D after 1 ticks {
+		Func097F(THOXA, "@Damn thee!@", 0x000A);
+		Func097F(THOXA, "@Oh...@", 0x0011);
+		var0003 = script THOXA after 1 ticks {
 			nohalt;
 			wait 6;
 			actor frame bowing;
@@ -80266,19 +80266,19 @@ void Func07EC object#(0x7EC) () {
 	}
 	if ((event == SCRIPTED) && (gflags[0x0007] == true)) {
 		UI_init_conversation();
-		0xFF2D->show_npc_face0(0x0000);
+		THOXA->show_npc_face0(0x0000);
 		say("\"I'm not so easily defeated, friend monk...\"");
 		UI_end_conversation();
 		var0003 = "@In Frio Grav!@" & ("@Mas Frio!@" & "@Take that!@");
-		Func094F(0xFF2D, var0003);
+		Func094F(THOXA, var0003);
 		var0003 = "" & "@Ah!@";
 		Func094F(KARNAX, var0003);
 		var0003 = UI_create_new_object(0x0390);
 		if (var0003) {
 			var0003->set_item_flag(TEMPORARY);
-			var0003 = UI_update_last_created(0xFF2D->get_object_position());
+			var0003 = UI_update_last_created(THOXA->get_object_position());
 		}
-		var0006 = 0xFF2D->get_npc_object()->find_nearby(0x025F, 0x0019, MASK_EGG);
+		var0006 = THOXA->get_npc_object()->find_nearby(0x025F, 0x0019, MASK_EGG);
 		var0007 = 0x0001;
 		for (var000A in var0006 with var0008 to var0009) {
 			var0003 = script var000A after var0007 ticks {
@@ -80286,7 +80286,7 @@ void Func07EC object#(0x7EC) () {
 				call Func07EE;
 			};
 			var0007 += 0x0003;
-			var0004 = 0xFF2D->get_distance(var000A);
+			var0004 = THOXA->get_distance(var000A);
 			var0003 = script var000A after (var0007 + (var0004 / 0x0002)) ticks {
 				call Func07EC;
 			};
@@ -80364,15 +80364,15 @@ void Func07ED object#(0x7ED) () {
 		var0005 = UI_create_new_object(0x025F);
 		if (var0005) {
 			var0005->clear_item_flag(TEMPORARY);
-			var0000 = 0xFF2D->get_object_position();
+			var0000 = THOXA->get_object_position();
 			var0000[0x0001] += 0x0008;
 			var0000[0x0002] += 0x0003;
 			var0001 = UI_update_last_created(var0000);
-			var0007 = 0xFF2D->get_distance(var0005);
+			var0007 = THOXA->get_distance(var0005);
 			// Note: these generate si_path_run_usecode calls to Func0000, which
 			// does not exist. Maybe they are just for making the NPCs move to
 			// where var0005 is?
-			Func090E(0xFF2D, var0005, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, PROXIMITY, true);
+			Func090E(THOXA, var0005, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, PROXIMITY, true);
 			Func090E(KARNAX, var0005, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, PROXIMITY, true);
 			var0001 = script var0005 after (var0007 - 0x0002) ticks {
 				call Func07ED;
@@ -80395,7 +80395,7 @@ void Func07ED object#(0x7ED) () {
 			wait 2;
 			actor frame sleeping;
 		};
-		var0001 = script 0xFF2D {
+		var0001 = script THOXA {
 			wait 8;
 			face FACE_WEST;
 			// Bug: the next line is interpreted as a 'step FACE_WEST, 0x53',
@@ -80448,8 +80448,8 @@ void Func07EE object#(0x7EE) () {
 		abort;
 	}
 	if ((event == SCRIPTED) && (gflags[0x0008] == true)) {
-		var0000 = 0xFF2D->set_to_attack(item, 0x0118);
-		var0001 = script 0xFF2D {
+		var0000 = THOXA->set_to_attack(item, 0x0118);
+		var0001 = script THOXA {
 			nohalt;
 			actor frame reach_1h;
 			actor frame reach_2h;
@@ -80460,7 +80460,7 @@ void Func07EE object#(0x7EE) () {
 		abort;
 	}
 	if ((event == SCRIPTED) && (gflags[0x000A] == true)) {
-		0xFF2D->set_schedule_type(WAIT);
+		THOXA->set_schedule_type(WAIT);
 		var0002 = KARNAX->get_object_position();
 		UI_play_sound_effect(0x0051);
 		UI_sprite_effect(ANIMATION_TELEPORT2, var0002[0x0001], var0002[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
@@ -80470,9 +80470,9 @@ void Func07EE object#(0x7EE) () {
 			var0001->set_item_flag(TEMPORARY);
 			var0001 = UI_update_last_created(KARNAX->get_object_position());
 		}
-		Func097F(0xFF2D, "@Goodbye...@", 0x0002);
-		Func097F(0xFF2D, "@Hero...@", 0x0016);
-		var0001 = script 0xFF2D after 25 ticks {
+		Func097F(THOXA, "@Goodbye...@", 0x0002);
+		Func097F(THOXA, "@Hero...@", 0x0016);
+		var0001 = script THOXA after 25 ticks {
 			nohalt;
 			actor frame bowing;
 			wait 2;
@@ -80486,7 +80486,7 @@ void Func07EE object#(0x7EE) () {
 	}
 	if ((event == SCRIPTED) && (gflags[0x0007] == true)) {
 		UI_init_conversation();
-		0xFF2D->show_npc_face0(0x0000);
+		THOXA->show_npc_face0(0x0000);
 		AVATAR->clear_item_flag(DONT_MOVE);
 		say("\"Karnax is defeated, for now... I am weak, and must leave...\"");
 		if (gflags[0x02C3]) {
@@ -80504,18 +80504,18 @@ void Func07EE object#(0x7EE) () {
 		}
 		say("\"Seek out thy black sword with the caged demon that thou didst bring with thee from the other land. Thou must have it to complete thy quest.\"");
 		UI_remove_npc_face0();
-		var0003 = 0xFF2D->get_object_position();
+		var0003 = THOXA->get_object_position();
 		UI_sprite_effect(ANIMATION_TELEPORT, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		var0004 = Func09A0(0x0007, 0x0001);
 		if (var0004) {
 			UI_play_music(0x0031, var0004);
 		}
 		UI_play_sound_effect(0x0051);
-		0xFF2D->remove_npc();
+		THOXA->remove_npc();
 		var0001 = UI_create_new_object(0x0390);
 		if (var0001) {
 			var0001->set_item_flag(TEMPORARY);
-			var0001 = UI_update_last_created(0xFF2D->get_object_position());
+			var0001 = UI_update_last_created(THOXA->get_object_position());
 		}
 		var0005 = AVATAR->find_nearby(0x037F, 0x000A, MASK_NONE);
 		for (var0008 in var0005 with var0006 to var0007) {
@@ -94309,7 +94309,7 @@ var Func084D 0x84D (var var0000, var var0001) {
 		return EAT_AT_INN;
 	}
 	if (var0001 == 0x0002) {
-		if ((var0000 == 0xFF2D) || ((var0000 == MIGGIM) || (var0000 == 0xFF2C))) {
+		if ((var0000 == THOXA) || ((var0000 == MIGGIM) || (var0000 == 0xFF2C))) {
 			return TEND_SHOP;
 		}
 		return FARM;
@@ -94342,7 +94342,7 @@ var Func084D 0x84D (var var0000, var var0001) {
 		if ((var0000 == 0xFF29) || ((var0000 == MIGGIM) || (var0000 == KARNAX))) {
 			return DESK_WORK;
 		}
-		if ((var0000 == 0xFF2D) || (var0000 == 0xFF2B)) {
+		if ((var0000 == THOXA) || (var0000 == 0xFF2B)) {
 			return WANDER;
 		}
 		if (var0000 == 0xFF2C) {
@@ -94396,7 +94396,7 @@ var Func084E 0x84E (var var0000, var var0001) {
 		}
 		return [0x095C, 0x04B1, 0x0000];
 	}
-	if (var0000 == 0xFF2D) {
+	if (var0000 == THOXA) {
 		if (var0001 == 0x0001) {
 			return [0x096D, 0x046A, 0x0000];
 		}
@@ -105801,7 +105801,7 @@ void Func08F2 0x8F2 (var var0000) {
 	var var0003;
 
 	var0000[0x0002] -= 0x0003;
-	var0001 = [0xFF2D, 0xFF2C, 0xFF2B, KARNAX, MIGGIM, 0xFF2A, SILENT2, SILENT3];
+	var0001 = [THOXA, 0xFF2C, 0xFF2B, KARNAX, MIGGIM, 0xFF2A, SILENT2, SILENT3];
 	var0002 = 0x0000;
 	while (var0002 < 0x0007) {
 		if (var0002 > 0x0003) {
@@ -105867,7 +105867,7 @@ void Func08F5 0x8F5 (var var0000) {
 	UI_sprite_effect(ANIMATION_TELEPORT2, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 	UI_sprite_effect(ANIMATION_TELEPORT, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 	UI_sprite_effect(ANIMATION_TELEPORT, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-	var0002 = [0xFF2D, 0xFF2C, 0xFF2B, KARNAX, MIGGIM, 0xFF2A, SILENT2, SILENT3];
+	var0002 = [THOXA, 0xFF2C, 0xFF2B, KARNAX, MIGGIM, 0xFF2A, SILENT2, SILENT3];
 	for (var0005 in var0002 with var0003 to var0004) {
 		var0005->halt_scheduled();
 		var0006 = var0005->get_npc_object();
