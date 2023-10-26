@@ -21144,7 +21144,7 @@ void Func0400 object#(0x400) () {
 				}
 			}
 			var0008 = 0x0000;
-			var0004 = 0xFF1B->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
+			var0004 = AUTO_3->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
 			while (var0008 < 0x0002) {
 				for (var0007 in var0004 with var0009 to var000A) {
 					if (Func09A6(var0007) || (var0008 == 0x0001)) {
@@ -21157,7 +21157,7 @@ void Func0400 object#(0x400) () {
 					}
 				}
 				var0008 += 0x0001;
-				var0004 = 0xFF1B->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
+				var0004 = AUTO_3->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
 			}
 			UI_play_music(0x0016, Func09A0(0x0005, 0x0001));
 			AVATAR->move_object([0x05B4, 0x0652, 0x0000]);
@@ -55841,7 +55841,7 @@ void Func04B6 object#(0x4B6) () {
 			}
 			var0006 = AVATAR->add_cont_items(0x0001, 0x03BB, QUALITY_ANY, 0x0002, 0x0000);
 			var0012 = 0x0000;
-			var000E = 0xFF1B->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
+			var000E = AUTO_3->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
 			while (var0012 < 0x0002) {
 				for (var0011 in var000E with var0013 to var0014) {
 					if (Func09A6(var0011) || (var0012 == 0x0001)) {
@@ -55854,7 +55854,7 @@ void Func04B6 object#(0x4B6) () {
 					}
 				}
 				var0012 += 0x0001;
-				var000E = 0xFF1B->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
+				var000E = AUTO_3->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
 			}
 			gflags[0x0211] = true;
 			var0006 = script SIRANUSH {
@@ -67954,7 +67954,7 @@ void Func06B3 object#(0x6B3) () {
 							if (!var0015->set_last_created()) {
 								Func092F(AVATAR, 0x0011);
 							}
-							if (!0xFF1B->give_last_created()) {
+							if (!AUTO_3->give_last_created()) {
 								Func092F(AVATAR, 0x0012);
 							}
 						}
@@ -67964,13 +67964,13 @@ void Func06B3 object#(0x6B3) () {
 				var0012 = AVATAR->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
 			}
 			var0001 = AVATAR->add_cont_items(0x0001, 0x0321, QUALITY_ANY, 0x0000, 0x0000);
-			if (Func097D(0xFF1B, 0x0001, 0x0289, QUALITY_ANY, 0x0003)) {
+			if (Func097D(AUTO_3, 0x0001, 0x0289, QUALITY_ANY, 0x0003)) {
 				var0001 = AVATAR->add_cont_items(0x0001, 0x0289, QUALITY_ANY, 0x0003, 0x0000);
 			}
-			if (Func097D(0xFF1B, 0x0001, 0x017F, QUALITY_ANY, 0x0001)) {
+			if (Func097D(AUTO_3, 0x0001, 0x017F, QUALITY_ANY, 0x0001)) {
 				var0001 = AVATAR->add_cont_items(0x0001, 0x017F, QUALITY_ANY, 0x0001, 0x0000);
 			}
-			if (Func097D(0xFF1B, 0x0001, 0x0289, QUALITY_ANY, 0x000B)) {
+			if (Func097D(AUTO_3, 0x0001, 0x0289, QUALITY_ANY, 0x000B)) {
 				var0001 = AVATAR->add_cont_items(0x0001, 0x0289, QUALITY_ANY, 0x000B, 0x0000);
 			}
 			UI_fade_palette(0x000C, 0x0001, 0x0001);

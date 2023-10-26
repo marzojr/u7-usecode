@@ -45667,9 +45667,9 @@ void Func04E5 object#(0x4E5) () {
 	var var000C;
 
 	if (event == DOUBLECLICK) {
-		0xFF1B->show_npc_face(0x0000);
+		BUDO->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
-		var0001 = 0xFF1B->get_npc_object()->get_schedule_type();
+		var0001 = BUDO->get_npc_object()->get_schedule_type();
 		var0002 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
 		add(["name", "job", "bye"]);
 		if (gflags[0x0135] || gflags[0x0104]) {
@@ -45689,7 +45689,7 @@ void Func04E5 object#(0x4E5) () {
 						IOLO->hide();
 					}
 				}
-				0xFF1B->show_npc_face(0x0000);
+				BUDO->show_npc_face(0x0000);
 			} else {
 				say("\"Hello! How art thou, my friend?\"");
 			}
@@ -45814,7 +45814,7 @@ void Func04E5 object#(0x4E5) () {
 	}
 	if (event == PROXIMITY) {
 		var0000 = UI_part_of_day();
-		var0001 = 0xFF1B->get_npc_object()->get_schedule_type();
+		var0001 = BUDO->get_npc_object()->get_schedule_type();
 		var000B = UI_die_roll(0x0001, 0x0004);
 		if (var0001 == TEND_SHOP) {
 			if (var000B == 0x0001) {
@@ -45829,9 +45829,9 @@ void Func04E5 object#(0x4E5) () {
 			if (var000B == 0x0004) {
 				var000C = "@Step right in! We're open!@";
 			}
-			0xFF1B->item_say(var000C);
+			BUDO->item_say(var000C);
 		} else {
-			Func092E(0xFF1B);
+			Func092E(BUDO);
 		}
 	}
 }
