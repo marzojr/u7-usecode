@@ -45855,7 +45855,7 @@ void Func04E6 object#(0x4E6) () {
 	var var0008;
 
 	if (event == DOUBLECLICK) {
-		0xFF1A->show_npc_face(0x0000);
+		GORDY->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = UI_wearing_fellowship();
 		var0002 = Func0909();
@@ -45972,7 +45972,7 @@ void Func04E6 object#(0x4E6) () {
 		say("\"Farewell, friend. I look forward to thy return.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF1A);
+		Func092E(GORDY);
 	}
 }
 
