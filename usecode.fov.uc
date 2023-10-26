@@ -46366,8 +46366,8 @@ void Func04E9 object#(0x4E9) () {
 	var var000C;
 
 	if (event == DOUBLECLICK) {
-		0xFF17->show_npc_face(0x0000);
-		var0000 = 0xFF17->get_npc_object()->get_schedule_type();
+		PAUL->show_npc_face(0x0000);
+		var0000 = PAUL->get_npc_object()->get_schedule_type();
 		add(["name", "job", "bye"]);
 		if (!gflags[0x02B8]) {
 			say("You see a young entertainer who beckons to you.");
@@ -46437,7 +46437,7 @@ void Func04E9 object#(0x4E9) () {
 	}
 	if (event == PROXIMITY) {
 		var000A = UI_part_of_day();
-		var0000 = 0xFF17->get_npc_object()->get_schedule_type();
+		var0000 = PAUL->get_npc_object()->get_schedule_type();
 		var000B = UI_die_roll(0x0001, 0x0004);
 		if (var0000 == PATROL) {
 			if (var000B == 0x0001) {
@@ -46452,9 +46452,9 @@ void Func04E9 object#(0x4E9) () {
 			if (var000B == 0x0004) {
 				var000C = "@We shall entertain thee!@";
 			}
-			0xFF17->item_say(var000C);
+			PAUL->item_say(var000C);
 		} else {
-			Func092E(0xFF17);
+			Func092E(PAUL);
 		}
 	}
 }
@@ -72902,19 +72902,19 @@ void Func08C7 0x8C7 () {
 	var var0000;
 	var var0001;
 
-	0xFF17->show_npc_face(0x0000);
+	PAUL->show_npc_face(0x0000);
 	var0000 = Func08F7(IOLO);
 	var0001 = Func08F7(SPARK);
 	say("As the actors take their places and don masks, you settle down to watch the action.*");
 	if (var0001) {
 		SPARK->say("Spark whispers to you, \"I wish there was a confectioner that sold candied apples!\"*");
 		SPARK->hide();
-		0xFF17->show_npc_face(0x0000);
+		PAUL->show_npc_face(0x0000);
 	}
 	say("The music starts the play, as Paul takes center stage and addresses the audience.");
 	say("\"Welcome to Our Tale, ~A tale so true to life. ~'Tis a tale of tragedy ~A man has lost his wife.");
 	say("\"But the story need not be sad ~When The Fellowship is here. ~The Triad of Inner Strength ~Gives one no cause to fear.\"*");
-	0xFF17->hide();
+	PAUL->hide();
 	0xFF15->say("Dustin takes the stage as Paul moves away. Meryl lies on the ground in front of him and assumes a death-like pose.");
 	say("\"'Tis doom! 'Tis despair! 'Tis death! ~My beloved wife is gone! ~Disease has taken her away ~And left me with but a song.\"");
 	say("Dustin puts his head in his hands and mimes sobbing. As he sobs, Meryl rises from her \"death\" in a ghost-like fashion, then addresses Dustin.*");
@@ -72924,7 +72924,7 @@ void Func08C7 0x8C7 () {
 	0xFF16->hide();
 	0xFF15->say("Meryl drifts off stage, leaving Dustin alone.");
 	say("\"The Fellowship, she said? ~But what do I need with it? ~I have mine eight virtues and mine healers ~With these nothing else will fit!\"*");
-	0xFF17->say("Paul enters the stage with Meryl, who now wears a different mask.");
+	PAUL->say("Paul enters the stage with Meryl, who now wears a different mask.");
 	say("\"But that is where thou art wrong! ~The Fellowship exists to help thee! ~The Triad of Inner Strength is here ~To give thee a sense of unity!\"");
 	say("\"Join us now and thou wilt see. ~Join thy brothers and our plan ~To promote the tenets of our group -- ~Thou wilt be a better man.\"");
 	say("At this point, an elaborate mimed sequence reveals how Dustin joins The Fellowship, receives his medallion from a \"branch leader\", portrayed by Paul, and receives congratulations from Meryl.");
@@ -72932,7 +72932,7 @@ void Func08C7 0x8C7 () {
 	0xFF15->say("\"I shall give half my wealth to thee! ~I shall do thy bidding and then wait. ~My reward shall come one day ~And free me from mine awful fate.\"");
 	say("Dustin mimes giving Paul some money. Paul exits, then Dustin lies down on the stage and mimes going to sleep. After a moment, Meryl enters the stage, dances around Dustin's body, sprinkling some kind of sparkling dust on him.*");
 	if (var0000) {
-		0xFF17->hide();
+		PAUL->hide();
 		IOLO->say("Iolo whispers to you. \"I am particularly enjoying the visual effects. The script is a little weak, dost thou not think?\"*");
 		IOLO->hide();
 		0xFF15->show_npc_face(0x0000);
@@ -72947,11 +72947,11 @@ void Func08C7 0x8C7 () {
 		0xFF15->show_npc_face(0x0000);
 	}
 	say("Paul and Meryl join Dustin on stage and they all hold hands.*");
-	0xFF17->say("\"The Fellowship can give thee purpose ~To join is thine only choice ~Commit thyself to our just cause ~And find thine inner voice.\"");
+	PAUL->say("\"The Fellowship can give thee purpose ~To join is thine only choice ~Commit thyself to our just cause ~And find thine inner voice.\"");
 	say("At that point, the actors bow, and you realize it is the end. You give them polite applause.*");
 	gflags[0x000A] = true;
 	if (var0000) {
-		0xFF17->hide();
+		PAUL->hide();
 		IOLO->say("\"What do they mean about the voice? I am not sure I understand. 'Twas a confusing play. I did not like it at all. We have wasted our time and money! That is the last time that I let thee decide how best we entertain ourselves!\"*");
 		IOLO->hide();
 	}
