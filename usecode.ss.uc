@@ -15617,7 +15617,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, D_STEFANO, D_CANTRA, 0xFF26, 0xFEF8, 0xFEF9, 0xFEFA, CELLIA, FLICKEN, HARNNA, KRAYG, LUCILLA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, DRAYGAN, MARSTEN, SPEKTOR, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, MORGHRIM];
+		var0008 = [0xFEED, 0xFEE8, D_STEFANO, D_CANTRA, D_BYRIN, 0xFEF8, 0xFEF9, 0xFEFA, CELLIA, FLICKEN, HARNNA, KRAYG, LUCILLA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, DRAYGAN, MARSTEN, SPEKTOR, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, MORGHRIM];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -58726,16 +58726,16 @@ void Func04DA object#(0x4DA) () {
 		var0004 = get_object_position();
 		UI_play_sound_effect(0x004C);
 		UI_sprite_effect(ANIMATION_TELEPORT, var0004[0x0001], var0004[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-		0xFF26->remove_npc();
+		D_BYRIN->remove_npc();
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Hail, minstrel!@");
-		0xFF26->Func07D1();
-		Func097F(0xFF26, (("@Greetings, " + var0000) + "!@"), 0x0005);
-		0xFF26->set_schedule_type(TALK);
+		D_BYRIN->Func07D1();
+		Func097F(D_BYRIN, (("@Greetings, " + var0000) + "!@"), 0x0005);
+		D_BYRIN->set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFF26->set_schedule_type(WANDER);
+		D_BYRIN->set_schedule_type(WANDER);
 		BYRIN->show_npc_face0(0x0000);
 		if (var0003 == true) {
 			say("\"I had wondered when I would encounter thee here, Avatar.\" ~\"I expect that thou wouldst like some answers, no doubt.\" *\"Or perhaps I could sing thee a song to ease thy way.\"");

@@ -43850,7 +43850,7 @@ void Func04D7 object#(0x4D7) () {
 				fallthrough;
 
 			case "Foranamo":
-				var0004 = 0xFF26->get_npc_object()->is_dead();
+				var0004 = FORANAMO->get_npc_object()->is_dead();
 				if (var0004) {
 					var0005 = "have been";
 				} else {
@@ -44024,7 +44024,7 @@ void Func04D9 object#(0x4D9) () {
 	if (event == DOUBLECLICK) {
 		ANMANIVAS->show_npc_face(0x0000);
 		var0000 = ANMANIVAS->get_npc_object();
-		var0001 = 0xFF26->get_npc_object();
+		var0001 = FORANAMO->get_npc_object();
 		var0002 = Func0908();
 		var0003 = Func0909();
 		var0004 = "the Avatar";
@@ -44063,12 +44063,12 @@ void Func04D9 object#(0x4D9) () {
 							"!\"",
 							var000E,
 							" \"To be the cause for our unhappiness.\"");
-						var000F = Func08F7(0xFF26);
+						var000F = Func08F7(FORANAMO);
 						if (var000F) {
-							0xFF26->say("The gargoyle by his side also rises.~~\"To be the reason for our poverty. To die, ",
+							FORANAMO->say("The gargoyle by his side also rises.~~\"To be the reason for our poverty. To die, ",
 								var000D,
 								", to die!\"*");
-							0xFF26->hide();
+							FORANAMO->hide();
 							ANMANIVAS->say("The two gargoyles force the table from their path with ease as they charge to attack you.*");
 						} else {
 							say("He forces the table from his path with ease as he charges to attack you.*");
@@ -44124,8 +44124,8 @@ void Func04DA object#(0x4DA) () {
 	var var000E;
 
 	if (event == DOUBLECLICK) {
-		0xFF26->show_npc_face(0x0000);
-		var0000 = 0xFF26->get_npc_object();
+		FORANAMO->show_npc_face(0x0000);
+		var0000 = FORANAMO->get_npc_object();
 		var0001 = ANMANIVAS->get_npc_object();
 		var0002 = Func0908();
 		var0003 = Func0909();
@@ -44165,7 +44165,7 @@ void Func04DA object#(0x4DA) () {
 								var000D,
 								"!\"*");
 							ANMANIVAS->hide();
-							0xFF26->show_npc_face(0x0000);
+							FORANAMO->show_npc_face(0x0000);
 						}
 						say("\"To be the reason for our poverty. To die, ",
 							var000D,
@@ -55840,7 +55840,7 @@ void Func067D object#(0x67D) () {
 	}
 	if (event == SCRIPTED) {
 		var0007 = get_npc_number();
-		if (!(var0007 in [ANMANIVAS, 0xFF26, AVATAR])) {
+		if (!(var0007 in [ANMANIVAS, FORANAMO, AVATAR])) {
 			var0008 = AVATAR->get_alignment();
 			if (var0008) {
 				set_item_flag(CHARMED);
