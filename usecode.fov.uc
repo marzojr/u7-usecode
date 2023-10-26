@@ -43883,7 +43883,7 @@ void Func04D8 object#(0x4D8) () {
 	var var0001;
 
 	if (event == DOUBLECLICK) {
-		0xFF28->show_npc_face(0x0000);
+		WIS_SUR->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		if (gflags[0x0003]) {
 			if (!gflags[0x0295]) {
@@ -77216,7 +77216,7 @@ void Func0949 0x949 () {
 					var000C = Func091C(var0006[var000A], var0001[var000A], var0007, var000B, var0008);
 				} else {
 					var000B = var0005[var000A];
-					var000B = Func094B(var000B, 0xFF28);
+					var000B = Func094B(var000B, WIS_SUR);
 					var000C = Func091C(var0006[var000A], var0001[var000A], var0007, var000B, var0008);
 					if (var000B == 0x0000) {
 						break;
@@ -77296,7 +77296,7 @@ void Func094A 0x94A () {
 					var000C = Func091C(var0006, var0001[var000A], var0007, var000B, var0008);
 				} else {
 					var000B = var0005[var000A];
-					var000B = Func094B(var000B, 0xFF28);
+					var000B = Func094B(var000B, WIS_SUR);
 					var000C = Func091C(var0006, var0001[var000A], var0007, var000B, var0008);
 					if (var000B == 0x0000) {
 						break;
