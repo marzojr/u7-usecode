@@ -43131,7 +43131,7 @@ void Func04D2 object#(0x4D2) () {
 	var var0005;
 
 	if (event == DOUBLECLICK) {
-		0xFF2E->show_npc_face(0x0000);
+		LIANA->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = false;
