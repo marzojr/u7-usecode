@@ -43522,7 +43522,7 @@ void Func04D4 object#(0x4D4) () {
 								say("\"If only her father were here today, he would show that loathsome creature his place!\"");
 							} else {
 								say("\"Just wait until I tell her father about this! He and Mara will certainly take care of the situation.!\"");
-								0xFF2A->remove_npc();
+								FOR_LEM->remove_npc();
 							}
 							say("\"I thank thee, ",
 								var0005,
@@ -43569,7 +43569,7 @@ void Func04D5 object#(0x4D5) () {
 		CATHERINE->show_npc_face(0x0000);
 		var0000 = Func0909();
 		add(["name", "job", "bye"]);
-		var0001 = Func08F7(0xFF2A);
+		var0001 = Func08F7(FOR_LEM);
 		if (var0001) {
 			add("gargoyle");
 		}
@@ -43658,7 +43658,7 @@ void Func04D6 object#(0x4D6) () {
 	var var0001;
 
 	if (event == DOUBLECLICK) {
-		0xFF2A->show_npc_face(0x0000);
+		FOR_LEM->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		var0000 = Func08F7(CATHERINE);
 		if (var0000) {
@@ -43733,7 +43733,7 @@ void Func04D6 object#(0x4D6) () {
 		say("\"To tell you goodbye, human.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092F(0xFF2A);
+		Func092F(FOR_LEM);
 	}
 }
 

@@ -2849,7 +2849,7 @@ void Func00FA shape#(0xFA) () {
 		if (gflags[0x0270]) {
 			var0002 &= 0xFF29;
 		}
-		var0003 = var0002 & [0xFF2A, SILENT2, SILENT3];
+		var0003 = var0002 & [SILENT1, SILENT2, SILENT3];
 		var0004 = var0000->get_item_quality();
 		if (item == var0000) {
 			if (Func0994() != 0x0002) {
@@ -15613,7 +15613,7 @@ void Func032B shape#(0x32B) () {
 		0xFEFB->set_item_flag(MET);
 		NEYOBI->set_item_flag(SI_ZOMBIE);
 		GWENNO->set_item_flag(SI_ZOMBIE);
-		var0008 = [AVATAR, SELINA, KALEN, ALE, KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA, 0xFF2A, SILENT2, SILENT3, JORVIN, HENCH1, HENCH2, HENCH3, 0xFEF0, 0xFEDB, 0xFF29, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
+		var0008 = [AVATAR, SELINA, KALEN, ALE, KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA, SILENT1, SILENT2, SILENT3, JORVIN, HENCH1, HENCH2, HENCH3, 0xFEF0, 0xFEDB, 0xFF29, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -21279,7 +21279,7 @@ void Func0400 object#(0x400) () {
 				nohalt;
 				call Func0636;
 			};
-			var0017 = [KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA, 0xFF2A, SILENT2, SILENT3];
+			var0017 = [KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA, SILENT1, SILENT2, SILENT3];
 			if (!gflags[0x01CC]) {
 				var0017 = Func0988(MIGGIM, var0017);
 			}
@@ -57030,7 +57030,7 @@ void Func04CF object#(0x4CF) () {
 			var0018 = [];
 			var000D = [];
 			var000E = [];
-			var0019 = [KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA, 0xFF2A, SILENT2, SILENT3];
+			var0019 = [KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA, SILENT1, SILENT2, SILENT3];
 			var001A = 0x000A;
 			for (var0012 in var0019 with var001B to var001C) {
 				var001D = Func084E(var0012, var001A);
@@ -57401,8 +57401,8 @@ void Func04D0 object#(0x4D0) () {
 	if (event == DOUBLECLICK) {
 		SILENT2->set_schedule_type(SHY);
 		var0000 = SILENT2->find_nearby(0x00FA, 0x000A, MASK_NONE);
-		if (0xFF2A->get_npc_object() in var0000) {
-			var0000 = Func0988(0xFF2A->get_npc_object(), var0000);
+		if (SILENT1->get_npc_object() in var0000) {
+			var0000 = Func0988(SILENT1->get_npc_object(), var0000);
 		}
 		if (SILENT2->get_npc_object() in var0000) {
 			var0000 = Func0988(SILENT2->get_npc_object(), var0000);
@@ -57668,8 +57668,8 @@ void Func04D2 object#(0x4D2) () {
 	if (event == DOUBLECLICK) {
 		SILENT3->set_schedule_type(SHY);
 		var0000 = SILENT3->find_nearby(0x00FA, 0x000A, MASK_NONE);
-		if (0xFF2A->get_npc_object() in var0000) {
-			var0000 = Func0988(0xFF2A->get_npc_object(), var0000);
+		if (SILENT1->get_npc_object() in var0000) {
+			var0000 = Func0988(SILENT1->get_npc_object(), var0000);
 		}
 		if (SILENT2->get_npc_object() in var0000) {
 			var0000 = Func0988(SILENT2->get_npc_object(), var0000);
@@ -58434,10 +58434,10 @@ void Func04D6 object#(0x4D6) () {
 	var var0001;
 
 	if (event == DOUBLECLICK) {
-		0xFF2A->set_schedule_type(SHY);
-		var0000 = 0xFF2A->find_nearby(0x00FA, 0x000A, MASK_NONE);
-		if (0xFF2A->get_npc_object() in var0000) {
-			var0000 = Func0988(0xFF2A->get_npc_object(), var0000);
+		SILENT1->set_schedule_type(SHY);
+		var0000 = SILENT1->find_nearby(0x00FA, 0x000A, MASK_NONE);
+		if (SILENT1->get_npc_object() in var0000) {
+			var0000 = Func0988(SILENT1->get_npc_object(), var0000);
 		}
 		if (SILENT2->get_npc_object() in var0000) {
 			var0000 = Func0988(SILENT2->get_npc_object(), var0000);
@@ -77757,7 +77757,7 @@ void Func07AB object#(0x7AB) () {
 		if (!gflags[0x0273]) {
 			abort;
 		}
-		var0000 = [KARNAX, THOXA, MIGGIM, BRACCUS, 0xFF2A, SILENT2, SILENT3];
+		var0000 = [KARNAX, THOXA, MIGGIM, BRACCUS, SILENT1, SILENT2, SILENT3];
 		if (0xFF29->get_item_flag(MET)) {
 			var0000 &= 0xFF29;
 		}
@@ -79080,7 +79080,7 @@ void Func07DE object#(0x7DE) () {
 	} else {
 		if (Func0994() == 0x0002) {
 			var0000 = [0x0974, 0x0470, 0x0000];
-			var0001 = [KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA, 0xFF2A, SILENT2, SILENT3];
+			var0001 = [KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA, SILENT1, SILENT2, SILENT3];
 			if (0xFF29->get_item_flag(MET)) {
 				var0001 &= 0xFF29;
 			}
@@ -94300,7 +94300,7 @@ var Func084C 0x84C (var var0000, var var0001) {
 
 var Func084D 0x84D (var var0000, var var0001) {
 	if (var0001 == 0x0001) {
-		if (var0000 == 0xFF2A) {
+		if (var0000 == SILENT1) {
 			return BAKE;
 		}
 		if ((var0000 == SILENT2) || (var0000 == SILENT3)) {
@@ -94324,7 +94324,7 @@ var Func084D 0x84D (var var0000, var var0001) {
 		if ((var0000 == SILENT2) || (var0000 == SILENT3)) {
 			return WANDER;
 		}
-		if (var0000 == 0xFF2A) {
+		if (var0000 == SILENT1) {
 			return PACE_VERTICAL;
 		}
 		return DESK_WORK;
@@ -94504,7 +94504,7 @@ var Func084E 0x84E (var var0000, var var0001) {
 		}
 		return [0x0968, 0x04BA, 0x0000];
 	}
-	if (var0000 == 0xFF2A) {
+	if (var0000 == SILENT1) {
 		if (var0001 == 0x0001) {
 			return [0x0963, 0x0463, 0x0000];
 		}
@@ -105801,7 +105801,7 @@ void Func08F2 0x8F2 (var var0000) {
 	var var0003;
 
 	var0000[0x0002] -= 0x0003;
-	var0001 = [THOXA, BRACCUS, DRAXTA, KARNAX, MIGGIM, 0xFF2A, SILENT2, SILENT3];
+	var0001 = [THOXA, BRACCUS, DRAXTA, KARNAX, MIGGIM, SILENT1, SILENT2, SILENT3];
 	var0002 = 0x0000;
 	while (var0002 < 0x0007) {
 		if (var0002 > 0x0003) {
@@ -105867,7 +105867,7 @@ void Func08F5 0x8F5 (var var0000) {
 	UI_sprite_effect(ANIMATION_TELEPORT2, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 	UI_sprite_effect(ANIMATION_TELEPORT, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 	UI_sprite_effect(ANIMATION_TELEPORT, var0001[0x0001], var0001[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-	var0002 = [THOXA, BRACCUS, DRAXTA, KARNAX, MIGGIM, 0xFF2A, SILENT2, SILENT3];
+	var0002 = [THOXA, BRACCUS, DRAXTA, KARNAX, MIGGIM, SILENT1, SILENT2, SILENT3];
 	for (var0005 in var0002 with var0003 to var0004) {
 		var0005->halt_scheduled();
 		var0006 = var0005->get_npc_object();
