@@ -2710,7 +2710,7 @@ void Func00F9 shape#(0xF9) () {
 	}
 	var0003 = false;
 	if (event == SCRIPTED) {
-		0xFEFB->show_npc_face0(0x0000);
+		SMUDGE->show_npc_face0(0x0000);
 		say("\"What dost thou wish, Master?\"");
 		if (gflags[0x0171]) {
 			add(["revelation", "change revelation"]);
@@ -15612,7 +15612,7 @@ void Func032B shape#(0x32B) () {
 		SHAMINO->set_item_flag(MET);
 		IOLO->set_item_flag(MET);
 		BUSTER->set_item_flag(MET);
-		0xFEFB->set_item_flag(MET);
+		SMUDGE->set_item_flag(MET);
 		NEYOBI->set_item_flag(SI_ZOMBIE);
 		GWENNO->set_item_flag(SI_ZOMBIE);
 		var0008 = [AVATAR, SELINA, KALEN, ALE, KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA, SILENT1, SILENT2, SILENT3, JORVIN, HENCH1, HENCH2, HENCH3, 0xFEF0, 0xFEDB, XENKA, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
@@ -108994,7 +108994,7 @@ void Func093A 0x93A (var var0000) {
 		}
 		if (var0000 == 0x0058) {
 			UI_init_conversation();
-			0xFEFB->show_npc_face0(0x0000);
+			SMUDGE->show_npc_face0(0x0000);
 			var0003 = Func08AC(false);
 			if (gflags[0x016E]) {
 				say("\"",
@@ -109221,7 +109221,7 @@ void Func093A 0x93A (var var0000) {
 		}
 		if (var0000 == 0x005E) {
 			UI_init_conversation();
-			0xFEFB->show_npc_face0(0x0000);
+			SMUDGE->show_npc_face0(0x0000);
 			say("\"Kylista and Voldin have defiled these proceedings! False evidence hath been offered! This trial is a farce!\"");
 			var0003 = Func08AC(false);
 			say("\"",
