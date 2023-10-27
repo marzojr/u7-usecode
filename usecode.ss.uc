@@ -12163,7 +12163,7 @@ void Func02BE shape#(0x2BE) () {
 		}
 	}
 	if (event == PATH_SUCCESS) {
-		0xFEF0->show_npc_face0(0x0000);
+		PALOS->show_npc_face0(0x0000);
 		say("\"It is a phoenix egg. It is obviously quite rare, and it possesses magical qualities that go beyond explanation.\"");
 		var0002 = Func099B(AVATAR, 0x0001, 0x0289, 0x0000, 0x0001, 0x0000, true);
 		gflags[0x01BC] = true;
@@ -12182,12 +12182,12 @@ void Func02BE shape#(0x2BE) () {
 				gflags[0x0007] = false;
 				abort;
 			}
-			0xFEF0->show_npc_face0(0x0000);
+			PALOS->show_npc_face0(0x0000);
 			say("\"Greetings to thee!\"");
 			add(["name", "bye"]);
 		}
 		if (event == PATH_FAILURE) {
-			0xFEF0->show_npc_face0(0x0000);
+			PALOS->show_npc_face0(0x0000);
 			say("\"That is the greatest gift that I can give to thee. Use it wisely.\"");
 			UI_play_sound_effect(0x000F);
 			add(["bye"]);
@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		SMUDGE->set_item_flag(MET);
 		NEYOBI->set_item_flag(SI_ZOMBIE);
 		GWENNO->set_item_flag(SI_ZOMBIE);
-		var0008 = [AVATAR, SELINA, KALEN, ALE, KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA, SILENT1, SILENT2, SILENT3, JORVIN, HENCH1, HENCH2, HENCH3, 0xFEF0, 0xFEDB, XENKA, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, GOBLIN_KING, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
+		var0008 = [AVATAR, SELINA, KALEN, ALE, KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA, SILENT1, SILENT2, SILENT3, JORVIN, HENCH1, HENCH2, HENCH3, PALOS, 0xFEDB, XENKA, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, GOBLIN_KING, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -34242,7 +34242,7 @@ void Func042C object#(0x42C) () {
 			gflags[0x01E7] = false;
 		}
 		if (var0013 == 0x0001) {
-			var000E = 0xFEF0->get_npc_object();
+			var000E = PALOS->get_npc_object();
 			if (var000E) {
 				var000E->set_polymorph(0x01F5);
 				var000E->set_npc_id(0x0000);
@@ -34259,7 +34259,7 @@ void Func042C object#(0x42C) () {
 			}
 		}
 		if (var0013 == 0x0002) {
-			0xFEF0->set_polymorph(0x0373);
+			PALOS->set_polymorph(0x0373);
 			DEADEYE->set_polymorph(0x01CA);
 			BRUNT->set_polymorph(0x0325);
 			SELINA->show_npc_face0(0x0000);
@@ -34288,7 +34288,7 @@ void Func042C object#(0x42C) () {
 	}
 	if (event == DEATH) {
 		if (gflags[0x024E]) {
-			var0019 = 0xFEF0->get_item_flag(DEAD);
+			var0019 = PALOS->get_item_flag(DEAD);
 			var001A = DEADEYE->get_item_flag(DEAD);
 			var001B = BRUNT->get_item_flag(DEAD);
 			if (var0019 && (var001A && var001B)) {
@@ -59151,8 +59151,8 @@ void Func0510 object#(0x510) () {
 		set_polymorph(0x01F5);
 	}
 	if ((event == SI_PATH_SUCCESS) || (event == SI_PATH_FAILURE)) {
-		0xFEF0->set_schedule_type(WAIT);
-		var0000 = script 0xFEF0 {
+		PALOS->set_schedule_type(WAIT);
+		var0000 = script PALOS {
 			nohalt;
 			actor frame bowing;
 			actor frame kneeling;
@@ -59161,19 +59161,19 @@ void Func0510 object#(0x510) () {
 	}
 	if ((event == SCRIPTED) && ((gflags[0x0007] == false) && (gflags[0x0254] == false))) {
 		gflags[0x0254] = true;
-		0xFEF0->move_object([0x08AF, 0x02C6, 0x0000]);
-		0xFEF0->si_path_run_usecode([0x08A2, 0x02C6, 0x0000], PATH_SUCCESS, 0xFEF0, Func0510, true);
+		PALOS->move_object([0x08AF, 0x02C6, 0x0000]);
+		PALOS->si_path_run_usecode([0x08A2, 0x02C6, 0x0000], PATH_SUCCESS, PALOS, Func0510, true);
 	}
 	if ((event == SCRIPTED) && gflags[0x0007]) {
 		gflags[0x0007] = false;
-		0xFEF0->si_path_run_usecode([0x08B2, 0x02C8, 0x0000], PATH_FAILURE, 0xFEF0, Func0510, true);
+		PALOS->si_path_run_usecode([0x08B2, 0x02C8, 0x0000], PATH_FAILURE, PALOS, Func0510, true);
 	}
 	if (event == PATH_SUCCESS) {
 		0xFEEF->show_npc_face0(0x0000);
 		say("\"To meet at last the false hero! To serve my master and to avenge the death of many of my people thou didst slay in ancient times.\" *\"To see thy bones with thy skin burned from thy body! To smell thy flesh as it is eaten away by fire and flame!\" *\"To avenge and to serve my master! To thy death, false hero!\"");
 		UI_remove_npc_face1();
 		gflags[0x0007] = true;
-		Func097F(0xFEF0, "@To kill thee!@", 0x0000);
+		Func097F(PALOS, "@To kill thee!@", 0x0000);
 		Func097F(AVATAR, "@Stop!@", 0x0005);
 		var0000 = script item after 2 ticks {
 			nohalt;
@@ -59189,7 +59189,7 @@ void Func0510 object#(0x510) () {
 				Func0924(var0004, SHAPE_ANY);
 			}
 		}
-		0xFEF0->remove_npc();
+		PALOS->remove_npc();
 		gflags[0x0257] = true;
 		abort;
 	}
@@ -75104,14 +75104,14 @@ void Func073A object#(0x73A) () {
 			}
 			var0003 += 0x0003;
 		}
-		0xFEF0->move_object([0x0926, 0x01CF, 0x0000]);
+		PALOS->move_object([0x0926, 0x01CF, 0x0000]);
 		UI_sprite_effect(ANIMATION_TELEPORT, 0x0926, 0x01CF, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-		0xFEF0->set_schedule_type(IN_COMBAT);
-		0xFEF0->set_alignment(EVIL);
-		0xFEF0->set_opponent(AVATAR);
-		0xFEF0->set_attack_mode(STRONGEST);
-		0xFEF0->set_oppressor(AVATAR);
-		0xFEF0->clear_item_flag(SI_TOURNAMENT);
+		PALOS->set_schedule_type(IN_COMBAT);
+		PALOS->set_alignment(EVIL);
+		PALOS->set_opponent(AVATAR);
+		PALOS->set_attack_mode(STRONGEST);
+		PALOS->set_oppressor(AVATAR);
+		PALOS->clear_item_flag(SI_TOURNAMENT);
 		DEADEYE->move_object([0x0928, 0x01CF, 0x0000]);
 		UI_sprite_effect(ANIMATION_TELEPORT, 0x0928, 0x01CF, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		DEADEYE->set_schedule_type(IN_COMBAT);
