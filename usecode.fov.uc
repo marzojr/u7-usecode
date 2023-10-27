@@ -338,6 +338,7 @@ enum misc_npcs {
 	COSMO		= -253,	//Dungeon Destard, virgin
 	LASHER		= -254,	//Dungeon Destard, unicorn and virgin-detector
 
+	JUGGERNAUT	= -259,	//Isle of the Avatar, enemy
 	HOOK		= -291,	//Isle of the Avatar, arch-villain
 	FORSKIS		= -298,	//Isle of the Avatar, arch-villain
 	ABRAHAM		= -299,	//Isle of the Avatar, arch-villain
@@ -7548,7 +7549,7 @@ void Func0326 shape#(0x326) () {
 		abort;
 	}
 	var0000 = get_npc_object()->get_schedule_type();
-	0xFEFD->show_npc_face(0x0000);
+	JUGGERNAUT->show_npc_face(0x0000);
 	add(["name", "job", "bye"]);
 	if (gflags[0x003D]) {
 		add("password");
@@ -51531,8 +51532,8 @@ void Func0625 object#(0x625) () {
 		var0002 = [0x01B8, 0x0133];
 		var0003 = AVATAR->get_object_position();
 		if (Func093E()) {
-			0xFEFD->say("You see an irate guard.~~Years of indoctrination have instilled in him an overly developed sense of discipline~~and a zealous devotion to the maintainance of order. All of this zeal is now directed against you.~~ \"Such behavior will never be tolerated inside the sanctuary of Trinsic's walls.~~Thy red cloak and blonde curls show only that thou art a vile imposter and not a true Avatar.~~To the Death!\"");
-			0xFEFD->hide();
+			JUGGERNAUT->say("You see an irate guard.~~Years of indoctrination have instilled in him an overly developed sense of discipline~~and a zealous devotion to the maintainance of order. All of this zeal is now directed against you.~~ \"Such behavior will never be tolerated inside the sanctuary of Trinsic's walls.~~Thy red cloak and blonde curls show only that thou art a vile imposter and not a true Avatar.~~To the Death!\"");
+			JUGGERNAUT->hide();
 			UI_attack_avatar();
 			return;
 		}
