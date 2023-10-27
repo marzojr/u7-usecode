@@ -1347,7 +1347,7 @@ void Func00E4 shape#(0xE4) () {
 	}
 	if ((event == STARTED_TALKING) && (var0000 == 0x000A)) {
 		set_schedule_type(WANDER);
-		0xFEF1->show_npc_face0(0x0000);
+		HENCHMAN->show_npc_face0(0x0000);
 		say("\"Why dost thou interrupt? I am a Pikeman of Monitor.\"");
 		say("\"I must return to my duties lest the goblin horde take us.\"");
 		UI_remove_npc_face0();
@@ -1393,7 +1393,7 @@ void Func00E4 shape#(0xE4) () {
 			var000A->set_schedule_type(SHY);
 			Func097F(var000A, "@Find the traitor!@", UI_get_random(0x0014));
 		}
-		0xFEF1->show_npc_face0(0x0000);
+		HENCHMAN->show_npc_face0(0x0000);
 		if (CALADIN->npc_nearby()) {
 			say("\"Thou didst call, Lord Caladin?\"");
 			CALADIN->show_npc_face1(0x0000);
@@ -1441,7 +1441,7 @@ void Func00E4 shape#(0xE4) () {
 	}
 	if ((event == STARTED_TALKING) && (var0000 == 0x0001)) {
 		set_schedule_type(TEND_SHOP);
-		0xFEF1->show_npc_face0(0x0000);
+		HENCHMAN->show_npc_face0(0x0000);
 		say("\"This is the Bull Tower, knave. State thy business or be gone. We have no time for idle chit-chat with Goblins about.\"");
 		add(["Goblins", "pikeman", "Bull Tower"]);
 		if (gflags[0x01CD] && (!gflags[0x01D1])) {
