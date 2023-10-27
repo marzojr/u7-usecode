@@ -5351,7 +5351,7 @@ void Func0175 shape#(0x175) () {
 	}
 	if (event == STARTED_TALKING) {
 		UI_play_music(0x0032, Func09A0(0x0005, 0x0001));
-		0xFEF5->show_npc_face0(0x0000);
+		YEARL->show_npc_face0(0x0000);
 		gflags[0x0279] = true;
 		say("\"At last, I am awakened from the slumber of death. I know thee, for the Great Earth Serpent hath whispered to me of thee. Welcome, noble Avatar! Thou hast arrived on the very brink of disaster. It is up to thee to restore the land to its needful Balance.\"");
 		if (Func097D(PARTY, 0x0001, 0x0280, QUALITY_ANY, 0x0000) && (Func097D(PARTY, 0x0001, 0x027E, QUALITY_ANY, 0x0000) && Func097D(PARTY, 0x0001, 0x03EC, QUALITY_ANY, 0x0002))) {
@@ -19402,7 +19402,7 @@ void Func03BD shape#(0x3BD) () {
 		} else {
 			AVATAR->item_say("@Ho, Yurel!@");
 		}
-		0xFEF5->Func07D1();
+		YEARL->Func07D1();
 		if (!var0000) {
 			Func097F(item, "@I am no monster!@", 0x0002);
 		} else {
