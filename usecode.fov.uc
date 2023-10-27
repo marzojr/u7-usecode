@@ -159,7 +159,9 @@ enum yew_npcs {
 	PAPA		= -241,	//Bee Caves, nudist
 	MAMA		= -255,	//Bee Caves, nudist
 
-	XORINIA		= -256	//will-o-wisp
+	XORINIA		= -256,	//will-o-wisp
+
+	RANDOM_EMP	= -283	//generic emp
 };
 
 //Jhelom residents
@@ -3348,7 +3350,7 @@ void Func01DF shape#(0x1DF) () {
 
 	if (event == DOUBLECLICK) {
 		var0000 = Func0931(PARTY, 0x0001, 0x0304, QUALITY_ANY, FRAME_ANY);
-		0xFEE5->show_npc_face(0x0000);
+		RANDOM_EMP->show_npc_face(0x0000);
 		if (!gflags[0x0154]) {
 			if (!var0000) {
 				say("The creature ignores you.*");
@@ -68185,7 +68187,7 @@ void Func087C 0x87C () {
 	var var0000;
 	var var0001;
 
-	0xFEE5->show_npc_face(0x0000);
+	RANDOM_EMP->show_npc_face(0x0000);
 	if (!gflags[0x0154]) {
 		say("The ape-like creature slowly and cautiously walks up to you. He, or she, sniffs for a moment, and then points to the honey you are carrying.");
 	}
