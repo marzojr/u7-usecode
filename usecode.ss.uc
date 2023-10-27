@@ -4236,7 +4236,7 @@ void Func013D shape#(0x13D) () {
 				nohalt;
 				face east;
 			};
-			var0003 = script 0xFEF9 {
+			var0003 = script ANTI_DUPRE {
 				nohalt;
 				face east;
 			};
@@ -4264,10 +4264,10 @@ void Func013D shape#(0x13D) () {
 			say("\"Let us bring this world to its knees! Let these pitiful mortals worship us... even as they die!\"");
 			say("\"And I have special plans for the Avatar...!\"");
 			var0003 = "@Blood!@" & ("@More blood!@" & "@Bleed to death!@");
-			Func094F(0xFEF9, var0003);
+			Func094F(ANTI_DUPRE, var0003);
 			UI_end_conversation();
 			ANTI_IOLO->set_npc_id(0x0002);
-			0xFEF9->si_path_run_usecode([0x0998, 0x0075, 0x0001], SI_PATH_SUCCESS, 0xFEF9->get_npc_object(), Func038A, true);
+			ANTI_DUPRE->si_path_run_usecode([0x0998, 0x0075, 0x0001], SI_PATH_SUCCESS, ANTI_DUPRE->get_npc_object(), Func038A, true);
 		}
 		abort;
 	}
@@ -4282,7 +4282,7 @@ void Func013D shape#(0x13D) () {
 		UI_init_conversation();
 		set_npc_id(0x0000);
 		ANTI_IOLO->set_npc_id(0x0000);
-		0xFEF9->set_npc_id(0x0000);
+		ANTI_DUPRE->set_npc_id(0x0000);
 		gflags[0x022D] = true;
 		gflags[0x002A] = false;
 		abort;
@@ -15619,7 +15619,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, D_STEFANO, D_CANTRA, D_BYRIN, 0xFEF8, 0xFEF9, ANTI_IOLO, CELLIA, FLICKEN, HARNNA, KRAYG, LUCILLA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, DRAYGAN, MARSTEN, SPEKTOR, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, MORGHRIM];
+		var0008 = [0xFEED, 0xFEE8, D_STEFANO, D_CANTRA, D_BYRIN, 0xFEF8, ANTI_DUPRE, ANTI_IOLO, CELLIA, FLICKEN, HARNNA, KRAYG, LUCILLA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, DRAYGAN, MARSTEN, SPEKTOR, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, MORGHRIM];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -26327,7 +26327,7 @@ void Func0417 object#(0x417) () {
 				fallthrough;
 
 			case "MageLord" (remove):
-				if (gflags[0x0004] && (0xFEF9->get_schedule_type() != WAIT)) {
+				if (gflags[0x0004] && (ANTI_DUPRE->get_schedule_type() != WAIT)) {
 					say("\"Our city is ruled by Shamino the Anarch, a most powerful wizard.\"");
 					say("\"He is a great improvement over our previous MageLord, who was indolent and deceitful. I am glad that Shamino rules.\"");
 				} else {
@@ -26339,7 +26339,7 @@ void Func0417 object#(0x417) () {
 				fallthrough;
 
 			case "transgressor" (remove):
-				if (gflags[0x0004] && (0xFEF9->get_schedule_type() != WAIT)) {
+				if (gflags[0x0004] && (ANTI_DUPRE->get_schedule_type() != WAIT)) {
 					say("\"'Tis best not to try and second guess Shamino the Anarch. His definition of a transgression changes from moment to moment...\"");
 					say("\"And the fine could be as insignificant as a verbal upbraiding, or as serious as thy life.\"");
 				} else {
@@ -59132,7 +59132,7 @@ void Func0506 object#(0x506) () {
 }
 
 void Func0507 object#(0x507) () {
-	0xFEF9->show_npc_face0(0x0000);
+	ANTI_DUPRE->show_npc_face0(0x0000);
 	say("\"Avatar, when our paths cross once more I shall chop thee into little pieces and feed them to the dogs!\"");
 }
 
@@ -70867,7 +70867,7 @@ void Func06E6 object#(0x6E6) () {
 		var0002 = get_item_quality();
 		var0003 = 0x0000;
 		var0004 = 0x0000;
-		var0005 = [ANTI_IOLO, 0xFEF8, 0xFEF9];
+		var0005 = [ANTI_IOLO, 0xFEF8, ANTI_DUPRE];
 		var0006 = var0005[UI_die_roll(0x0001, 0x0003)];
 		if (var0002 == 0x0000) {
 			UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, 0x0715, 0x0582, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
@@ -71055,7 +71055,7 @@ void Func06E6 object#(0x6E6) () {
 		if (var0006 == ANTI_IOLO) {
 			0xFEE0->show_npc_face0(0x0000);
 		}
-		if (var0006 == 0xFEF9) {
+		if (var0006 == ANTI_DUPRE) {
 			0xFEE6->show_npc_face0(0x0000);
 		}
 		if (var0006 == 0xFEF8) {
@@ -71251,7 +71251,7 @@ void Func06EA object#(0x6EA) () {
 			say("\"I had almost tired of waiting for thee, Avatar. Thou'rt some hero... it\ttook thee long enough.\"");
 			UI_remove_npc_face0();
 		}
-		var0000 = [ANTI_IOLO, 0xFEF9, 0xFEF8];
+		var0000 = [ANTI_IOLO, ANTI_DUPRE, 0xFEF8];
 		if (!gflags[0x00D5]) {
 			ANTI_IOLO->set_item_flag(SI_TOURNAMENT);
 			ANTI_IOLO->set_alignment(EVIL);
@@ -71259,10 +71259,10 @@ void Func06EA object#(0x6EA) () {
 			Func09AD(ANTI_IOLO);
 		}
 		if (!gflags[0x00D3]) {
-			0xFEF9->set_item_flag(SI_TOURNAMENT);
-			0xFEF9->set_alignment(EVIL);
-			0xFEF9->set_schedule_type(IN_COMBAT);
-			Func09AD(0xFEF9);
+			ANTI_DUPRE->set_item_flag(SI_TOURNAMENT);
+			ANTI_DUPRE->set_alignment(EVIL);
+			ANTI_DUPRE->set_schedule_type(IN_COMBAT);
+			Func09AD(ANTI_DUPRE);
 		}
 		if (!gflags[0x00D4]) {
 			0xFEF8->set_item_flag(SI_TOURNAMENT);
@@ -105735,8 +105735,8 @@ void Func08EF 0x8EF () {
 	var0000 = script AVATAR after 8 ticks {
 		call Func07DB;
 	};
-	var0001 = 0xFEF9->direction_from(CALADIN);
-	var0000 = script 0xFEF9 {
+	var0001 = ANTI_DUPRE->direction_from(CALADIN);
+	var0000 = script ANTI_DUPRE {
 		face var0001;
 		actor frame cast_out;
 		actor frame cast_up;
@@ -113131,8 +113131,8 @@ void Func09B5 0x9B5 () {
 		ANTI_IOLO->set_schedule_type(WAIT);
 		ANTI_IOLO->move_object(var0006);
 		var0007 = [0x099F, 0x0073, 0x0000];
-		0xFEF9->set_schedule_type(WAIT);
-		0xFEF9->move_object(var0007);
+		ANTI_DUPRE->set_schedule_type(WAIT);
+		ANTI_DUPRE->move_object(var0007);
 	}
 	Func09B6(var0000, var0001);
 }
@@ -113235,9 +113235,9 @@ void Func09B8 0x9B8 () {
 		ANTI_IOLO->set_schedule_type(MAJOR_SIT);
 	}
 	if (!gflags[0x00D3]) {
-		0xFEF9->move_object([0x0999, 0x0075, 0x0001]);
-		0xFEF9->set_alignment(NEUTRAL);
-		0xFEF9->set_schedule_type(MAJOR_SIT);
+		ANTI_DUPRE->move_object([0x0999, 0x0075, 0x0001]);
+		ANTI_DUPRE->set_alignment(NEUTRAL);
+		ANTI_DUPRE->set_schedule_type(MAJOR_SIT);
 	}
 	if (!gflags[0x00D4]) {
 		0xFEF8->move_object([0x0999, 0x0069, 0x0001]);
