@@ -4243,7 +4243,7 @@ void Func013D shape#(0x13D) () {
 			UI_play_music(0x0033, Func09A0(0x0005, 0x0001));
 		}
 		if ((ANTI_IOLO->get_npc_id() == 0x0000) && var0001) {
-			0xFEF4->show_npc_face0(0x0000);
+			BRENDA->show_npc_face0(0x0000);
 			UI_init_conversation();
 			say("\"Now that we are together, my brothers in Chaos, no one in the world may stand before us! We shall crush that insignificant Avatar... as we have killed all the others!\"");
 			0xFEE0->show_npc_face1(0x0000);
@@ -4257,7 +4257,7 @@ void Func013D shape#(0x13D) () {
 			ANTI_IOLO->si_path_run_usecode([0x0998, 0x0069, 0x0001], SI_PATH_SUCCESS, ANTI_IOLO->get_npc_object(), Func0370, true);
 		}
 		if ((ANTI_IOLO->get_npc_id() == 0x0001) && var0002) {
-			0xFEF4->show_npc_face0(0x0000);
+			BRENDA->show_npc_face0(0x0000);
 			UI_init_conversation();
 			say("\"Those who followed now lead! Those who were master are now slave! The world shall return to its natural course... once we have rid ourselves of that cursed Avatar!\"");
 			0xFEE6->show_npc_face1(0x0000);
@@ -4296,7 +4296,7 @@ void Func013D shape#(0x13D) () {
 		}
 		if (get_oppressor() == 0x0000) {
 			if (AVATAR->get_weapon() == 0x0326) {
-				0xFEF4->show_npc_face0(0x0000);
+				BRENDA->show_npc_face0(0x0000);
 				say("\"I shall not forget that thou hast beaten me, vile human!\"");
 				UI_remove_npc_face0();
 				var0004 = get_object_position();
@@ -4314,7 +4314,7 @@ void Func013D shape#(0x13D) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		0xFEF4->show_npc_face0(0x0000);
+		BRENDA->show_npc_face0(0x0000);
 		say("\"Stop!\"");
 		UI_remove_npc_face0();
 	}
@@ -71059,7 +71059,7 @@ void Func06E6 object#(0x6E6) () {
 			0xFEE6->show_npc_face0(0x0000);
 		}
 		if (var0006 == ANTI_SHAM) {
-			0xFEF4->show_npc_face0(0x0000);
+			BRENDA->show_npc_face0(0x0000);
 		}
 		say(var0008,
 			"");
