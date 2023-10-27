@@ -401,7 +401,9 @@ enum misc_npcs {
 	PIBB = -284, // Starts at the House of the Dead
 	CINDY = -287, // Naked girl S of turtle-summoning bell
 	DBEYER = -293, // Gargoyle, starts at the House of the Dead
-	FITCH = -295 // Trapper, the one dying at the edge of the Ice Plains
+	FITCH = -295, // Trapper, the one dying at the edge of the Ice Plains
+
+	LAST_TRUE_NPC = -255	// ID of last NPC from NPC.DAT. All others are in MONSNPCS.DAT
 };
 
 enum sprite_repeats {
@@ -75786,7 +75788,7 @@ void Func0759 object#(0x759) () {
 		UI_play_sound_effect(0x0074);
 		var0002->Func07D1();
 		var0004 = 0x0000;
-		if (var0002->get_npc_number() < 0xFF01) {
+		if (var0002->get_npc_number() < LAST_TRUE_NPC) {
 			UI_sprite_effect(ANIMATION_LIGHTNING_BLUE, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			UI_sprite_effect(ANIMATION_POOF, var0003[0x0001], var0003[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			var0002->move_object([(0x05F0 + var0004), 0x078D, 0x0000]);

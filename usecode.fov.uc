@@ -49776,7 +49776,7 @@ void Func04FF object#(0x4FF) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFF01->show_npc_face(0x0000);
+	MAMA->show_npc_face(0x0000);
 	var0000 = Func08F7(PAPA);
 	var0001 = Func08F7(SPARK);
 	var0002 = Func08F7(IOLO);
@@ -49790,16 +49790,16 @@ void Func04FF object#(0x4FF) () {
 			SPARK->hide();
 			IOLO->say("\"Close thy mouth, boy. An insect may fly in. And put thine eyes back in thine head. They shall look strange dangling out of their sockets.\"*");
 			IOLO->hide();
-			0xFF01->show_npc_face(0x0000);
+			MAMA->show_npc_face(0x0000);
 		}
 		say("\"Me Mama!\" the woman exclaims proudly.");
 		if (gflags[0x02D4]) {
 			if (var0000) {
 				PAPA->say("\"Forget it, Myrtle. The jig is up. They know all about us.\"*");
-				0xFF01->say("\"Murray! Didst thou give us away? How couldst thou do it? This just isn't going to be much fun anymore knowing that someone is aware of the truth!\"*");
+				MAMA->say("\"Murray! Didst thou give us away? How couldst thou do it? This just isn't going to be much fun anymore knowing that someone is aware of the truth!\"*");
 				PAPA->say("\"Sorry, dear.\"*");
 				PAPA->hide();
-				0xFF01->show_npc_face(0x0000);
+				MAMA->show_npc_face(0x0000);
 				var0004 = true;
 			} else {
 				say("You tell the woman what Papa said about their past lives.~~\"Well, blast it! Why did he tell our secret? I will never forgive him! What a knave!\"");
@@ -49838,7 +49838,7 @@ void Func04FF object#(0x4FF) () {
 				if (var0003) {
 					DUPRE->say("\"What else is there?\"*");
 					DUPRE->hide();
-					0xFF01->show_npc_face(0x0000);
+					MAMA->show_npc_face(0x0000);
 				}
 			} else {
 				say("\"We do our best to eat, sleep, and love each other down here isolated from the rest of society.\"");
