@@ -4200,7 +4200,7 @@ void Func013D shape#(0x13D) () {
 	var var0003;
 	var var0004;
 
-	var0000 = 0xFEF8->get_npc_id();
+	var0000 = ANTI_SHAM->get_npc_id();
 	if (gflags[0x022C] && ((event == PROXIMITY) && (!gflags[0x022D]))) {
 		set_npc_id(get_npc_id() + 0x0001);
 		var0001 = find_nearby(0x0370, 0x0005, MASK_NONE);
@@ -15619,7 +15619,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, D_STEFANO, D_CANTRA, D_BYRIN, 0xFEF8, ANTI_DUPRE, ANTI_IOLO, CELLIA, FLICKEN, HARNNA, KRAYG, LUCILLA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, DRAYGAN, MARSTEN, SPEKTOR, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, MORGHRIM];
+		var0008 = [0xFEED, 0xFEE8, D_STEFANO, D_CANTRA, D_BYRIN, ANTI_SHAM, ANTI_DUPRE, ANTI_IOLO, CELLIA, FLICKEN, HARNNA, KRAYG, LUCILLA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, DRAYGAN, MARSTEN, SPEKTOR, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, MORGHRIM];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -59222,7 +59222,7 @@ void Func0526 object#(0x526) () {
 	if (event == DOUBLECLICK) {
 labelFunc0526_0008:
 		Func09AA();
-		0xFEF8->show_npc_face0(0x0000);
+		ANTI_SHAM->show_npc_face0(0x0000);
 		say("\"Why hast thou disturbed my slumber?\"");
 		AVATAR->show_npc_face1(0x0000);
 		say("\"Back, creature of the undead! Thou art a thing of evil!\"");
@@ -59235,7 +59235,7 @@ labelFunc0526_0008:
 		say("\"And thou art the cattle upon which I prey!\" *\"Who sent thee to destroy Vasculio? Was it those rotting worms of Moonshade?\" *\"I know it was! Soon I shall have my vengeance for what they have done to me!\" *\"Who sent thee? Filbercio?! Mortegro?! Gustacio?! Torrissio?!\"");
 		converse (["Filbercio", "Mortegro", "Gustacio", "Torrissio", "vengeance"]) {
 			case "bye":
-				0xFEF8->show_npc_face0(0x0000);
+				ANTI_SHAM->show_npc_face0(0x0000);
 				say("\"Foolish mortal! The time hath come to relieve thee of the burden of thy life for it is also my time to feed!\"");
 				Func09AD(0xFEDA);
 				UI_remove_npc_face0();
@@ -59292,7 +59292,7 @@ labelFunc0526_0008:
 			case "vengeance" (remove):
 				add("bye");
 				if (var0003) {
-					0xFEF8->show_npc_face0(0x0000);
+					ANTI_SHAM->show_npc_face0(0x0000);
 					say("\"Ah! But thou dost have the Magebane! I will make thee a deal then, Avatar. In exchange for thy blue sword I shall teach thee my greatest spell, one that can dispatch any foe. Dost thou agree?\"");
 					if (var0000) {
 						IOLO->show_npc_face1(0x0000);
@@ -59309,30 +59309,30 @@ labelFunc0526_0008:
 						say("\"Avatar, thou must refuse!\"");
 						UI_remove_npc_face1();
 					}
-					0xFEF8->show_npc_face0(0x0000);
+					ANTI_SHAM->show_npc_face0(0x0000);
 					say("\"Avatar, ignore the whimperings of thy companions! I will trade thee thy sword for a scroll that can let thee strike men dead! What sayest thou to the bargain?\"");
 					var0008 = Func0955();
 					if (var0008) {
-						0xFEF8->show_npc_face0(0x0000);
+						ANTI_SHAM->show_npc_face0(0x0000);
 						say("\"I knew thou couldst not resist a chance at such power!\" *\"Take this scroll. It will vanquish any foe who threatens thee.\"");
 						var0009 = Func099B(AVATAR, 0x0001, 0x02CB, 0x0041, QUALITY_ANY, 0x0000, true);
-						0xFEF8->show_npc_face0(0x0000);
+						ANTI_SHAM->show_npc_face0(0x0000);
 						say("\"Fool! Now I have the weapon that thou couldst have slain me with! Thou hast sealed thy fate for no mere mortal can defeat me! Prepare to die, foolish mortal!\"");
 						var0009 = UI_remove_party_items(0x0001, 0x00E7, QUALITY_ANY, FRAME_ANY, 0x0000);
 						Func09AD(0xFEDA);
 						Func097F(0xFEDA, "@Enjoy thy death!@", 0x0000);
 						abort;
 					}
-					0xFEF8->show_npc_face0(0x0000);
+					ANTI_SHAM->show_npc_face0(0x0000);
 					say("\"Then thou dost leave me no choice!\"");
 					Func09AD(0xFEDA);
 					Func097F(0xFEDA, "@Enjoy thy death!@", 0x0000);
 					abort;
 				}
-				0xFEF8->show_npc_face0(0x0000);
+				ANTI_SHAM->show_npc_face0(0x0000);
 				say("\"Thou hast sealed thy fate for no mere mortal can defeat me! Prepare for thy death!\"");
 				if (var0000 || (var0001 || var0002)) {
-					0xFEF8->show_npc_face0(0x0000);
+					ANTI_SHAM->show_npc_face0(0x0000);
 					say("\"But I can be merciful. I will spare thee, Avatar, if thou wilt give me one of thy companions. I hunger for fresh blood. Dost thou accept mine offer?\"");
 					if (var0000) {
 						IOLO->show_npc_face1(0x0000);
@@ -59349,7 +59349,7 @@ labelFunc0526_0008:
 						say("\"Thou wilt not accept this ghoul's offer, wilt thou, Avatar?\"");
 						UI_remove_npc_face1();
 					}
-					0xFEF8->show_npc_face0(0x0000);
+					ANTI_SHAM->show_npc_face0(0x0000);
 					say("\"So, Avatar, wilt thou listen to the whimperings of thy companions, or trade their life for thine own?\"");
 					say("\"True, they do not compare to thee, but I am not too selective in my tastes. One flesh is as good as another when one hungers.\"");
 					var000A = Func0955();
@@ -59368,13 +59368,13 @@ labelFunc0526_0008:
 							DUPRE->show_npc_face1(0x0000);
 							say("\"This is not funny in the least, Avatar.\"");
 						}
-						0xFEF8->show_npc_face0(0x0000);
+						ANTI_SHAM->show_npc_face0(0x0000);
 						say("\"A pity! Then what I do not receive willingly, I will have to take by force!\"");
 						Func09AD(0xFEDA);
 						Func097F(0xFEDA, "@Enjoy thy death!@", 0x0000);
 						abort;
 					}
-					0xFEF8->show_npc_face0(0x0000);
+					ANTI_SHAM->show_npc_face0(0x0000);
 					say("\"A pity! Then what I do not receive willingly, I will have to take by force!\"");
 					Func09AD(0xFEDA);
 					Func097F(0xFEDA, "@Enjoy thy death!@", 0x0000);
@@ -70867,7 +70867,7 @@ void Func06E6 object#(0x6E6) () {
 		var0002 = get_item_quality();
 		var0003 = 0x0000;
 		var0004 = 0x0000;
-		var0005 = [ANTI_IOLO, 0xFEF8, ANTI_DUPRE];
+		var0005 = [ANTI_IOLO, ANTI_SHAM, ANTI_DUPRE];
 		var0006 = var0005[UI_die_roll(0x0001, 0x0003)];
 		if (var0002 == 0x0000) {
 			UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, 0x0715, 0x0582, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
@@ -71058,7 +71058,7 @@ void Func06E6 object#(0x6E6) () {
 		if (var0006 == ANTI_DUPRE) {
 			0xFEE6->show_npc_face0(0x0000);
 		}
-		if (var0006 == 0xFEF8) {
+		if (var0006 == ANTI_SHAM) {
 			0xFEF4->show_npc_face0(0x0000);
 		}
 		say(var0008,
@@ -71251,7 +71251,7 @@ void Func06EA object#(0x6EA) () {
 			say("\"I had almost tired of waiting for thee, Avatar. Thou'rt some hero... it\ttook thee long enough.\"");
 			UI_remove_npc_face0();
 		}
-		var0000 = [ANTI_IOLO, ANTI_DUPRE, 0xFEF8];
+		var0000 = [ANTI_IOLO, ANTI_DUPRE, ANTI_SHAM];
 		if (!gflags[0x00D5]) {
 			ANTI_IOLO->set_item_flag(SI_TOURNAMENT);
 			ANTI_IOLO->set_alignment(EVIL);
@@ -71265,10 +71265,10 @@ void Func06EA object#(0x6EA) () {
 			Func09AD(ANTI_DUPRE);
 		}
 		if (!gflags[0x00D4]) {
-			0xFEF8->set_item_flag(SI_TOURNAMENT);
-			0xFEF8->set_alignment(EVIL);
-			0xFEF8->set_schedule_type(IN_COMBAT);
-			Func09AD(0xFEF8);
+			ANTI_SHAM->set_item_flag(SI_TOURNAMENT);
+			ANTI_SHAM->set_alignment(EVIL);
+			ANTI_SHAM->set_schedule_type(IN_COMBAT);
+			Func09AD(ANTI_SHAM);
 		}
 	}
 }
@@ -113125,7 +113125,7 @@ void Func09B5 0x9B5 () {
 	}
 	if (gflags[0x0004] && ((!gflags[0x022D]) && (!(gflags[0x00D4] || (gflags[0x00D5] || gflags[0x00D3]))))) {
 		gflags[0x022C] = true;
-		var0000 = 0xFEF8;
+		var0000 = ANTI_SHAM;
 		var0001 = [0x09D9, 0x004E, 0x0000];
 		var0006 = [0x09AC, 0x006E, 0x0000];
 		ANTI_IOLO->set_schedule_type(WAIT);
@@ -113165,7 +113165,7 @@ void Func09B6 0x9B6 (var var0000, var var0001) {
 			var0000->set_item_flag(TEMPORARY);
 		} else {
 			var0000->move_object(var0001);
-			if (var0000 != 0xFEF8) {
+			if (var0000 != ANTI_SHAM) {
 				var0000->set_new_schedules(MIDNIGHT, PATROL, [var0001[0x0001], var0001[0x0002]]);
 			}
 		}
@@ -113240,9 +113240,9 @@ void Func09B8 0x9B8 () {
 		ANTI_DUPRE->set_schedule_type(MAJOR_SIT);
 	}
 	if (!gflags[0x00D4]) {
-		0xFEF8->move_object([0x0999, 0x0069, 0x0001]);
-		0xFEF8->set_alignment(NEUTRAL);
-		0xFEF8->set_schedule_type(MAJOR_SIT);
+		ANTI_SHAM->move_object([0x0999, 0x0069, 0x0001]);
+		ANTI_SHAM->set_alignment(NEUTRAL);
+		ANTI_SHAM->set_schedule_type(MAJOR_SIT);
 	}
 }
 
