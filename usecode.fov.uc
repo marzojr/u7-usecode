@@ -48347,7 +48347,7 @@ void Func04F8 object#(0x4F8) () {
 	var var0011;
 
 	if (event == DOUBLECLICK) {
-		0xFF08->show_npc_face(0x0000);
+		BRION->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		var0002 = false;
@@ -48570,7 +48570,7 @@ void Func04F8 object#(0x4F8) () {
 		}
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF08);
+		Func092E(BRION);
 	}
 }
 
