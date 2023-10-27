@@ -17786,7 +17786,7 @@ void Func036A shape#(0x36A) () {
 	}
 	if (event == STARTED_TALKING) {
 		HOUND_OF_DOSKAR->set_schedule_type(HOUND);
-		0xFEE9->show_npc_face0(0x0000);
+		EMMIT->show_npc_face0(0x0000);
 		say("\"Woof!\"");
 		converse (["trick", "track", "attack", "bye"]) {
 			case "track":
