@@ -47672,7 +47672,7 @@ void Func04F4 object#(0x4F4) () {
 
 	if (event == DOUBLECLICK) {
 		CAIRBRE->show_npc_face(0x0000);
-		var0000 = Func08F7(0xFF03);
+		var0000 = Func08F7(COSMO);
 		var0001 = Func08F7(KALLIBRUS);
 		var0002 = Func0909();
 		add(["name", "job", "bye"]);
@@ -47717,8 +47717,8 @@ void Func04F4 object#(0x4F4) () {
 				say("\"'Tis a long story. Cosmo is looking for the unicorn that supposedly inhabits this cavern.\" He looks you in the eye and shrugs.~~\"He is a fool.\"");
 				if (var0000) {
 					say("*");
-					0xFF03->say("\"I heard that, Cairbre!\"*");
-					0xFF03->hide();
+					COSMO->say("\"I heard that, Cairbre!\"*");
+					COSMO->hide();
 					CAIRBRE->show_npc_face(0x0000);
 				}
 				gflags[0x02E0] = true;
@@ -49319,7 +49319,7 @@ void Func04FC object#(0x4FC) () {
 
 	if (event == DOUBLECLICK) {
 		KALLIBRUS->show_npc_face(0x0000);
-		var0000 = Func08F7(0xFF03);
+		var0000 = Func08F7(COSMO);
 		var0001 = Func08F7(CAIRBRE);
 		var0002 = false;
 		var0003 = Func0909();
@@ -49424,7 +49424,7 @@ void Func04FD object#(0x4FD) () {
 	var var0002;
 
 	if (event == DOUBLECLICK) {
-		0xFF03->show_npc_face(0x0000);
+		COSMO->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func08F7(KALLIBRUS);
 		var0002 = Func08F7(CAIRBRE);
@@ -49462,7 +49462,7 @@ void Func04FD object#(0x4FD) () {
 					say("*");
 					CAIRBRE->say("\"Oh, please!\" He rolls his eyes.*");
 					CAIRBRE->hide();
-					0xFF03->show_npc_face(0x0000);
+					COSMO->show_npc_face(0x0000);
 				}
 				remove("betrothed");
 				fallthrough;
@@ -49476,7 +49476,7 @@ void Func04FD object#(0x4FD) () {
 					CAIRBRE->say("\"What he is searching for, ",
 						var0000,
 						", is his virginity!\"*");
-					0xFF03->say("\"That is not true!\" He blushes.~~\"I am looking for a way to -prove-... my virginity!\"*");
+					COSMO->say("\"That is not true!\" He blushes.~~\"I am looking for a way to -prove-... my virginity!\"*");
 					CAIRBRE->hide();
 					add("proof");
 				}
@@ -66870,7 +66870,7 @@ void Func0864 0x864 () {
 	var var0002;
 	var var0003;
 
-	var0000 = 0xFF03->get_npc_object();
+	var0000 = COSMO->get_npc_object();
 	var0001 = var0000->get_schedule_type();
 	var0002 = "";
 	var0003 = UI_die_roll(0x0001, 0x0004);
