@@ -47671,7 +47671,7 @@ void Func04F4 object#(0x4F4) () {
 	var var0002;
 
 	if (event == DOUBLECLICK) {
-		0xFF0C->show_npc_face(0x0000);
+		CAIRBRE->show_npc_face(0x0000);
 		var0000 = Func08F7(0xFF03);
 		var0001 = Func08F7(0xFF04);
 		var0002 = Func0909();
@@ -47719,7 +47719,7 @@ void Func04F4 object#(0x4F4) () {
 					say("*");
 					0xFF03->say("\"I heard that, Cairbre!\"*");
 					0xFF03->hide();
-					0xFF0C->show_npc_face(0x0000);
+					CAIRBRE->show_npc_face(0x0000);
 				}
 				gflags[0x02E0] = true;
 				remove("senses");
@@ -49320,7 +49320,7 @@ void Func04FC object#(0x4FC) () {
 	if (event == DOUBLECLICK) {
 		0xFF04->show_npc_face(0x0000);
 		var0000 = Func08F7(0xFF03);
-		var0001 = Func08F7(0xFF0C);
+		var0001 = Func08F7(CAIRBRE);
 		var0002 = false;
 		var0003 = Func0909();
 		add(["name", "job", "bye"]);
@@ -49356,8 +49356,8 @@ void Func04FC object#(0x4FC) () {
 				say("\"To have been partners for many, many years. To have been bonded for even longer!\"");
 				if (var0001) {
 					say("*");
-					0xFF0C->say("\"He, uh, means by bonded, that we are very good friends.\" He turns to the gargoyle.~~\"I told thee to be careful how thou dost phrase things. Thou couldst start many false rumors if thou wert not more specific.\"~~The gargoyle nods sheepishly.*");
-					0xFF0C->hide();
+					CAIRBRE->say("\"He, uh, means by bonded, that we are very good friends.\" He turns to the gargoyle.~~\"I told thee to be careful how thou dost phrase things. Thou couldst start many false rumors if thou wert not more specific.\"~~The gargoyle nods sheepishly.*");
+					CAIRBRE->hide();
 					0xFF04->show_npc_face(0x0000);
 				}
 				var0002 = true;
@@ -49393,10 +49393,10 @@ void Func04FC object#(0x4FC) () {
 				say("\"To be related to difference in genders, I know, but to see no such thing in gargoyles. To believe there is a certain human... woman... who sent him here.~~\"To have heard Cosmo say, `love,' but Cairbre claims there is no such thing. To comprehend not, but to help friends anyway.\"");
 				if (var0001) {
 					say("*");
-					0xFF0C->say("\"That is what I like about him, ",
+					CAIRBRE->say("\"That is what I like about him, ",
 						var0003,
 						", loyal to the end!\" he says, patting the gargoyle on the shoulder.*");
-					0xFF0C->hide();
+					CAIRBRE->hide();
 					0xFF04->show_npc_face(0x0000);
 				}
 				remove("woman");
@@ -49427,7 +49427,7 @@ void Func04FD object#(0x4FD) () {
 		0xFF03->show_npc_face(0x0000);
 		var0000 = Func0909();
 		var0001 = Func08F7(0xFF04);
-		var0002 = Func08F7(0xFF0C);
+		var0002 = Func08F7(CAIRBRE);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x02CB]) {
 			say("The wide-eyed expression of this youth seems indicative of his naivete.");
@@ -49460,8 +49460,8 @@ void Func04FD object#(0x4FD) () {
 					", we are to be wed as soon I return to her silky arms.\"");
 				if (var0002) {
 					say("*");
-					0xFF0C->say("\"Oh, please!\" He rolls his eyes.*");
-					0xFF0C->hide();
+					CAIRBRE->say("\"Oh, please!\" He rolls his eyes.*");
+					CAIRBRE->hide();
 					0xFF03->show_npc_face(0x0000);
 				}
 				remove("betrothed");
@@ -49473,11 +49473,11 @@ void Func04FD object#(0x4FD) () {
 					", 'tis a bit of a personal matter.\"");
 				if (var0002) {
 					say("*");
-					0xFF0C->say("\"What he is searching for, ",
+					CAIRBRE->say("\"What he is searching for, ",
 						var0000,
 						", is his virginity!\"*");
 					0xFF03->say("\"That is not true!\" He blushes.~~\"I am looking for a way to -prove-... my virginity!\"*");
-					0xFF0C->hide();
+					CAIRBRE->hide();
 					add("proof");
 				}
 				add("personal");
@@ -66289,7 +66289,7 @@ void Func085B 0x85B () {
 	var var0002;
 	var var0003;
 
-	var0000 = 0xFF0C->get_npc_object();
+	var0000 = CAIRBRE->get_npc_object();
 	var0001 = var0000->get_schedule_type();
 	var0002 = "";
 	var0003 = UI_die_roll(0x0001, 0x0004);
