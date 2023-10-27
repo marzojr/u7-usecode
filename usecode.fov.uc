@@ -48097,7 +48097,7 @@ void Func04F7 object#(0x4F7) () {
 	var var0004;
 
 	if (event == DOUBLECLICK) {
-		0xFF09->show_npc_face(0x0000);
+		CAINE->show_npc_face(0x0000);
 		if (!gflags[0x01B2]) {
 			say("The non-corporeal man stares past you, seemingly past the confines of the building, and, perhaps, of the world. Then, he suddenly shudders, as if he is filled with pain.*");
 			abort;
