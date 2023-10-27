@@ -47781,9 +47781,9 @@ void Func04F5 object#(0x4F5) () {
 	var var0007;
 
 	if (event == DOUBLECLICK) {
-		0xFF0B->show_npc_face(0x0000);
+		KREG->show_npc_face(0x0000);
 		var0000 = Func0909();
-		var0001 = 0xFF0B->get_npc_object();
+		var0001 = KREG->get_npc_object();
 		add(["name", "job", "bye"]);
 		var0002 = var0001->get_alignment();
 		if (var0002 == EVIL) {
@@ -47822,10 +47822,10 @@ void Func04F5 object#(0x4F5) () {
 			case "Thief!":
 				say("\"Ah! Found me out, didst thou? 'Tis too bad... for thee!\"*");
 				Func0911(0x0064);
-				var0003 = 0xFF0B->count_objects(0x0231, QUALITY_ANY, FRAME_ANY);
+				var0003 = KREG->count_objects(0x0231, QUALITY_ANY, FRAME_ANY);
 				if (var0003 < 0x0001) {
 					var0004 = UI_create_new_object(0x0231);
-					var0005 = 0xFF0B->give_last_created();
+					var0005 = KREG->give_last_created();
 				}
 				var0001->set_alignment(EVIL);
 				var0001->set_schedule_type(IN_COMBAT);
@@ -47887,7 +47887,7 @@ void Func04F5 object#(0x4F5) () {
 					say("He takes the potion from you and quickly drinks it. \"Thank thee, ",
 						var0000,
 						", for helping in mine escape!\" As he fades from view, his laughter fills your ears.*");
-					0xFF0B->remove_npc();
+					KREG->remove_npc();
 					abort;
 				}
 				say("\"Thou dost not have a potion to give,\" he says sadly. \"My research will again have to wait.\"");
@@ -47900,7 +47900,7 @@ void Func04F5 object#(0x4F5) () {
 		say("He nods farewell to you.*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF0B);
+		Func092E(KREG);
 	}
 }
 
