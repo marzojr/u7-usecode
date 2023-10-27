@@ -49552,7 +49552,7 @@ void Func04FE object#(0x4FE) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFF02->show_npc_face(0x0000);
+	LASHER->show_npc_face(0x0000);
 	var0000 = Func0909();
 	if (!gflags[0x02CD]) {
 		say("You see a creature the size and shape of a horse. From its head protrudes a single straight horn. It looks at you with eyes that shine with intelligence.");
@@ -49652,17 +49652,17 @@ void Func04FE object#(0x4FE) () {
 						if (var0004) {
 							IOLO->say("\"There's no shame in it, milord,\" says Iolo, looking very serious.*");
 							IOLO->hide();
-							0xFF02->show_npc_face(0x0000);
+							LASHER->show_npc_face(0x0000);
 						}
 						if (var0005) {
 							SHAMINO->say("\"No, it is perfectly understandable. Thou hast been so busy lately,\" says Shamino. You sense he is struggling to maintain a straight face.*");
 							SHAMINO->hide();
-							0xFF02->show_npc_face(0x0000);
+							LASHER->show_npc_face(0x0000);
 						}
 						if (var0006) {
 							DUPRE->say("\"Why dost thou not go and pet the nice horsey. We would do it, but I think he prefers thee.\" With that, you hear an explosion of snorts and giggles.*");
 							DUPRE->hide();
-							0xFF02->show_npc_face(0x0000);
+							LASHER->show_npc_face(0x0000);
 						}
 						add("virginity");
 					}
