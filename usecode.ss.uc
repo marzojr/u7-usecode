@@ -401,6 +401,7 @@ enum misc_npcs {
 	CRUSTY = -281, // Clown, SW of Captain Stokes tower
 	PIBB = -284, // Starts at the House of the Dead
 	CINDY = -287, // Naked girl S of turtle-summoning bell
+	BRAX = -288,	// Naked girl, starts at the House of the Dead
 	DBEYER = -293, // Gargoyle, starts at the House of the Dead
 	FITCH = -295, // Trapper, the one dying at the edge of the Ice Plains
 
@@ -4247,7 +4248,7 @@ void Func013D shape#(0x13D) () {
 			BRENDA->show_npc_face0(0x0000);
 			UI_init_conversation();
 			say("\"Now that we are together, my brothers in Chaos, no one in the world may stand before us! We shall crush that insignificant Avatar... as we have killed all the others!\"");
-			0xFEE0->show_npc_face1(0x0000);
+			BRAX->show_npc_face1(0x0000);
 			say("\"Together... together... until the fiery, peaceful end! Now enemies... once friends!\"");
 			say("\"Twist and turn and twine about... What was wrong is right, and what was in, is out...\"");
 			say("\"Hide! Hide! For the Avatar seeks!\"");
@@ -17930,7 +17931,7 @@ void Func0370 shape#(0x370) () {
 		}
 		if (get_oppressor() == 0x0000) {
 			if (AVATAR->get_weapon() == 0x0326) {
-				0xFEE0->show_npc_face0(0x0000);
+				BRAX->show_npc_face0(0x0000);
 				say("\"Thou hast beaten me, vile human. I will remember this day!\"");
 				UI_remove_npc_face0();
 				var0001 = get_object_position();
@@ -70598,7 +70599,7 @@ void Func06E3 object#(0x6E3) () {
 	}
 	if (event == SCRIPTED) {
 		if ((gflags[0x0007] == false) && (gflags[0x0008] == false)) {
-			0xFEE0->show_npc_face0(0x0000);
+			BRAX->show_npc_face0(0x0000);
 			say("\"Come and see the freak show, Avatar!\"");
 			UI_remove_npc_face0();
 			Func09B8();
@@ -70714,7 +70715,7 @@ void Func06E4 object#(0x6E4) () {
 		abort;
 	}
 	if ((event == SCRIPTED) && (gflags[0x0007] == false)) {
-		0xFEE0->show_npc_face0(0x0000);
+		BRAX->show_npc_face0(0x0000);
 		say("\"Want to try some spinning...\"* \"...and dying, Avatar?\"");
 		UI_remove_npc_face0();
 		var0004 = find_nearby(0x0178, 0x000A, MASK_NONE);
@@ -70831,7 +70832,7 @@ void Func06E5 object#(0x6E5) () {
 		remove_item();
 	}
 	if ((event == SCRIPTED) && (gflags[0x0007] == false)) {
-		0xFEE0->show_npc_face0(0x0000);
+		BRAX->show_npc_face0(0x0000);
 		say("\"Want to sing an opera, Avatar?\"");
 		UI_remove_npc_face0();
 		Func09B8();
@@ -71054,7 +71055,7 @@ void Func06E6 object#(0x6E6) () {
 			UI_play_music(0x0033, var0004);
 		}
 		if (var0006 == ANTI_IOLO) {
-			0xFEE0->show_npc_face0(0x0000);
+			BRAX->show_npc_face0(0x0000);
 		}
 		if (var0006 == ANTI_DUPRE) {
 			WATSON->show_npc_face0(0x0000);
@@ -71123,7 +71124,7 @@ void Func06E7 object#(0x6E7) () {
 		remove_item();
 	}
 	if (event == SCRIPTED) {
-		0xFEE0->show_npc_face0(0x0000);
+		BRAX->show_npc_face0(0x0000);
 		say("\"Welcome to mine own private shooting gallery, Avatar.\"");
 		UI_remove_npc_face0();
 		Func09B8();
@@ -71248,7 +71249,7 @@ void Func06EA object#(0x6EA) () {
 
 	if (event == EGG) {
 		if (!gflags[0x00D5]) {
-			0xFEE0->show_npc_face0(0x0000);
+			BRAX->show_npc_face0(0x0000);
 			say("\"I had almost tired of waiting for thee, Avatar. Thou'rt some hero... it\ttook thee long enough.\"");
 			UI_remove_npc_face0();
 		}
@@ -71339,7 +71340,7 @@ void Func06EB object#(0x6EB) () {
 			}
 		}
 		if (var0001) {
-			0xFEE0->show_npc_face0(0x0000);
+			BRAX->show_npc_face0(0x0000);
 			say("\"Hurry, Avatar, I am waiting for thee...\"");
 			UI_remove_npc_face0();
 		}
@@ -71410,7 +71411,7 @@ void Func06EC object#(0x6EC) () {
 		remove_item();
 	}
 	if (event == SCRIPTED) {
-		0xFEE0->show_npc_face0(0x0000);
+		BRAX->show_npc_face0(0x0000);
 		say("\"Thou'rt not here to sleep, Avatar.\"");
 		UI_remove_npc_face0();
 		Func09B8();

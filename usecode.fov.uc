@@ -355,6 +355,7 @@ enum misc_npcs {
 
 	ERETHIAN			= -286,	//Isle of Fire
 	SHRINE_OF_PRINCIPLE	= -287,	//Isle of Fire
+	ADJHAR				= -288,	//Isle of Fire, smart golem
 
 	JUGGERNAUT	= -259,	//Isle of the Avatar, enemy
 	HOOK		= -291,	//Isle of the Avatar, arch-villain
@@ -9449,7 +9450,7 @@ void Func03F7 shape#(0x3F7) () {
 
 	if (event == DOUBLECLICK) {
 		if (get_cont_items(0x031D, 0x00F3, 0x0004)) {
-			0xFEE0->show_npc_face(0x0000);
+			ADJHAR->show_npc_face(0x0000);
 			if (gflags[0x0328]) {
 				Func0893();
 			}
@@ -69352,7 +69353,7 @@ extern void Func0891 0x891 ();
 void Func0890 0x890 () {
 	var var0000;
 
-	0xFEE0->show_npc_face(0x0000);
+	ADJHAR->show_npc_face(0x0000);
 	if (!gflags[0x0314]) {
 		add(["Don't know", "sacrificed", "bye"]);
 		gflags[0x0314] = true;
@@ -69476,9 +69477,9 @@ extern void Func08FF 0x8FF (var var0000);
 void Func0891 0x891 () {
 	gflags[0x0322] = true;
 	say("\"'Tis as I suspected. Bollux thought he must sacrifice his own heart to return my life.\"~If you were to believe it possible, you would feel positive you had just seen a drop of water fall from the golem's right eye.~\"The poor fool gave his life for mine. I can only hope I would have done the same.~\"Doing so now, however, would help nothing, for once I was gone Bollux would simply repeat his act.\" You hear a sigh come from the golem.");
-	0xFEE0->hide();
+	ADJHAR->hide();
 	Func08FF("I don't mean to be irreverent, but did the matter not involve death, 'twould be a humorous sight: the two golems popping up and down as each one passed the `heart' to the other...@");
-	0xFEE0->say("\"However,\" smiles Adjhar, \"'tis not necessary, for had Bollux known what is covered by this smudge, he could have told thee that a new heart may be cut from the Tree of Life. Look here,\" he says, pointing to a line in the tome smeared with dried mud. \"I remember this from before. Thou canst take the very same pick with which thou didst collect the blood and procure a `heart' for Bollux. Of course, after thou dost place the heart upon Bollux's body, thou must again perform the same ritual of blood.\"");
+	ADJHAR->say("\"However,\" smiles Adjhar, \"'tis not necessary, for had Bollux known what is covered by this smudge, he could have told thee that a new heart may be cut from the Tree of Life. Look here,\" he says, pointing to a line in the tome smeared with dried mud. \"I remember this from before. Thou canst take the very same pick with which thou didst collect the blood and procure a `heart' for Bollux. Of course, after thou dost place the heart upon Bollux's body, thou must again perform the same ritual of blood.\"");
 	gflags[0x0321] = true;
 }
 
@@ -69490,7 +69491,7 @@ void Func0892 0x892 () {
 	var var0000;
 	var var0001;
 
-	0xFEE0->say("Adjhar appears to have resumed the stance of a more traditional golem guardian -- staunch and unmoving. However, it is impossible to miss the glimmer of intelligence in his eyes.");
+	ADJHAR->say("Adjhar appears to have resumed the stance of a more traditional golem guardian -- staunch and unmoving. However, it is impossible to miss the glimmer of intelligence in his eyes.");
 	add(["name", "job", "bye"]);
 	var0000 = false;
 	converse (0) {
@@ -69541,7 +69542,7 @@ labelFunc0892_00CA:
 }
 
 void Func0893 0x893 () {
-	0xFEE0->say("Adjhar appears to have resumed the stance of a more traditional golem guardian -- staunch and distant. However, it is impossible to miss the glimmer of intelligence in his eyes.");
+	ADJHAR->say("Adjhar appears to have resumed the stance of a more traditional golem guardian -- staunch and distant. However, it is impossible to miss the glimmer of intelligence in his eyes.");
 	converse (["name", "job", "bye"]) {
 		case "name":
 			say("\"I am and always will be the one called Adjhar.\"");
@@ -69727,7 +69728,7 @@ void Func0895 0x895 () {
 			say("\"Bollux turns to see Adjar standing nearby, quite alive. Instantly, Bollux's expression changes detectably.");
 			0xFEDF->hide();
 			0xFEDF->show_npc_face(0x0001);
-			0xFEE0->say("Adjhar simply smiles.~\"Greetings, brother.\"");
+			ADJHAR->say("Adjhar simply smiles.~\"Greetings, brother.\"");
 		}
 	}
 	converse (["name", "job", "bye"]) {
