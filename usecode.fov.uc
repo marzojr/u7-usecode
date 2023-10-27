@@ -50178,8 +50178,8 @@ void Func0608 object#(0x608) () {
 			var0002,
 			" throat! I say we attack -now-!\"*");
 		CLONE_HOOK->hide();
-		0xFEEE->say("Forskis shouts, \"To kill! To kill!\"*");
-		0xFEEE->hide();
+		CLONE_FORSKIS->say("Forskis shouts, \"To kill! To kill!\"*");
+		CLONE_FORSKIS->hide();
 		0xFEED->say("Abraham yells, \"Let us make fish bait out of ",
 			var0003,
 			"!\"*");

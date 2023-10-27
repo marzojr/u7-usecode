@@ -3071,7 +3071,7 @@ void Func0103 shape#(0x103) () {
 		if (var0001 == 0x0000) {
 			set_schedule_type(TEND_SHOP);
 			clear_item_say();
-			0xFEEE->show_npc_face0(0x0000);
+			CHUCK->show_npc_face0(0x0000);
 			say("\"How may I help thee? As a Ranger, I must help thee in any way that I can.\"");
 			if (gflags[0x0285] && (!gflags[0x0297])) {
 				add("strange wine");
@@ -3370,7 +3370,7 @@ void Func0103 shape#(0x103) () {
 	}
 	if (var0001 == 0x0002) {
 		clear_item_say();
-		0xFEEE->show_npc_face0(0x0000);
+		CHUCK->show_npc_face0(0x0000);
 		say("\"Please, I cannot speak with thee at this time. My grief doth take the words from my mouth and leave me only with tears.\" ~\"Please away, I do not wish to be seen in this state.\"");
 		Func097F(item, "@If only I had flowers...@", 0x0002);
 		set_schedule_type(WAIT);
@@ -61327,7 +61327,7 @@ void Func0625 object#(0x625) () {
 				return;
 			}
 			if ((var0000 == 0x01CD) || (var0000 == 0x0103)) {
-				0xFEEE->show_npc_face(0x0000);
+				CHUCK->show_npc_face(0x0000);
 			} else if (var0000 == 0x02EB) {
 				0xFED6->show_npc_face(0x0000);
 			} else if ((var0000 == 0x017D) || (var0000 == 0x02D0)) {
