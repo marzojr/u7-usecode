@@ -47190,7 +47190,7 @@ void Func04F1 object#(0x4F1) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFF0F->show_npc_face(0x0000);
+	PAPA->show_npc_face(0x0000);
 	if (gflags[0x02D3]) {
 		say("\"Go away, bee killers!\"*");
 		abort;
@@ -47256,7 +47256,7 @@ void Func04F1 object#(0x4F1) () {
 			if (var0002) {
 				IOLO->say("\"I may puke.\"*");
 				IOLO->hide();
-				0xFF0F->show_npc_face(0x0000);
+				PAPA->show_npc_face(0x0000);
 			}
 			remove("cave");
 			add(["bees", "honey", "mice"]);
@@ -47317,7 +47317,7 @@ void Func04F1 object#(0x4F1) () {
 				if (var0002) {
 					IOLO->say("\"Avatar! They must have been abandoned in here! Why, they must be brother and sister!\"");
 					IOLO->hide();
-					0xFF0F->show_npc_face(0x0000);
+					PAPA->show_npc_face(0x0000);
 				}
 				add("babies");
 			}
@@ -49777,7 +49777,7 @@ void Func04FF object#(0x4FF) () {
 		abort;
 	}
 	0xFF01->show_npc_face(0x0000);
-	var0000 = Func08F7(0xFF0F);
+	var0000 = Func08F7(PAPA);
 	var0001 = Func08F7(SPARK);
 	var0002 = Func08F7(IOLO);
 	var0003 = Func08F7(DUPRE);
@@ -49795,10 +49795,10 @@ void Func04FF object#(0x4FF) () {
 		say("\"Me Mama!\" the woman exclaims proudly.");
 		if (gflags[0x02D4]) {
 			if (var0000) {
-				0xFF0F->say("\"Forget it, Myrtle. The jig is up. They know all about us.\"*");
+				PAPA->say("\"Forget it, Myrtle. The jig is up. They know all about us.\"*");
 				0xFF01->say("\"Murray! Didst thou give us away? How couldst thou do it? This just isn't going to be much fun anymore knowing that someone is aware of the truth!\"*");
-				0xFF0F->say("\"Sorry, dear.\"*");
-				0xFF0F->hide();
+				PAPA->say("\"Sorry, dear.\"*");
+				PAPA->hide();
 				0xFF01->show_npc_face(0x0000);
 				var0004 = true;
 			} else {
