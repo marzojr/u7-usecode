@@ -5805,7 +5805,7 @@ void Func017D shape#(0x17D) () {
 		var0003 = get_npc_id();
 	}
 	if (var0003 == 0x0007) {
-		0xFEF3->show_npc_face0(0x0000);
+		HOUND_OF_DOSKAR->show_npc_face0(0x0000);
 		say("\"Thou art a dog, to have brutalized an innocent townsperson. Thy place is behind stout iron bars!!!\"");
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		AVATAR->move_object([0x03DC, 0x0625, 0x0000]);
@@ -5829,7 +5829,7 @@ void Func017D shape#(0x17D) () {
 		if (event == STARTED_TALKING) {
 			set_schedule_type(STANDTHERE);
 			clear_item_say();
-			0xFEF3->show_npc_face0(0x0000);
+			HOUND_OF_DOSKAR->show_npc_face0(0x0000);
 			if (gflags[0x014F] == true) {
 				if (gflags[0x0168] == false) {
 					var0008 = RUGGS->get_schedule_type();
@@ -5970,7 +5970,7 @@ void Func017D shape#(0x17D) () {
 		if (event == STARTED_TALKING) {
 			set_schedule_type(STANDTHERE);
 			clear_item_say();
-			0xFEF3->show_npc_face0(0x0000);
+			HOUND_OF_DOSKAR->show_npc_face0(0x0000);
 			var000D = UI_die_roll(0x0001, 0x0004);
 			if (var000D == 0x0001) {
 				say("\"Thou shouldst address me by rank while I am on duty, ",
@@ -6056,7 +6056,7 @@ void Func017D shape#(0x17D) () {
 		if (event == STARTED_TALKING) {
 			set_schedule_type(STANDTHERE);
 			clear_item_say();
-			0xFEF3->show_npc_face0(0x0000);
+			HOUND_OF_DOSKAR->show_npc_face0(0x0000);
 			var000D = UI_die_roll(0x0001, 0x0004);
 			if (var0003 == 0x0003) {
 				say("\"Thou shouldst address me by rank while I am on duty, ",
@@ -10701,11 +10701,11 @@ void Func0289 shape#(0x289) () {
 			UI_play_sound_effect(0x001D);
 			var0009 = AVATAR->find_nearby(0x036A, 0x001E, MASK_NONE);
 			if (var0009 == []) {
-				0xFEF3->set_item_flag(SI_TOURNAMENT);
-				0xFEF3->set_alignment(GOOD);
-				var000A = 0xFEF3->approach_avatar(0x0078, 0x0028);
+				HOUND_OF_DOSKAR->set_item_flag(SI_TOURNAMENT);
+				HOUND_OF_DOSKAR->set_alignment(GOOD);
+				var000A = HOUND_OF_DOSKAR->approach_avatar(0x0078, 0x0028);
 				if (var000A) {
-					0xFEF3->si_path_run_usecode([0x0000, 0x0000, 0x0000], STARTED_TALKING, 0xFEF3->get_npc_object(), Func036A, true);
+					HOUND_OF_DOSKAR->si_path_run_usecode([0x0000, 0x0000, 0x0000], STARTED_TALKING, HOUND_OF_DOSKAR->get_npc_object(), Func036A, true);
 				} else {
 					gflags[0x0007] = true;
 					var0002 = script Func09A0(0x0005, 0x0001) after 15 ticks {
@@ -17708,12 +17708,12 @@ void Func036A shape#(0x36A) () {
 	}
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@Come here, boy!@");
-		0xFEF3->Func07D1();
+		HOUND_OF_DOSKAR->Func07D1();
 		var0001 = script item after 2 ticks {
 			nohalt;
 			say "@Woof!@";
 		};
-		0xFEF3->set_schedule_type(TALK);
+		HOUND_OF_DOSKAR->set_schedule_type(TALK);
 	}
 	if (event == SCRIPTED) {
 		if (item == Func09A0(0x0005, 0x0001)) {
@@ -17785,7 +17785,7 @@ void Func036A shape#(0x36A) () {
 		abort;
 	}
 	if (event == STARTED_TALKING) {
-		0xFEF3->set_schedule_type(HOUND);
+		HOUND_OF_DOSKAR->set_schedule_type(HOUND);
 		0xFEE9->show_npc_face0(0x0000);
 		say("\"Woof!\"");
 		converse (["trick", "track", "attack", "bye"]) {
@@ -17855,10 +17855,10 @@ void Func036A shape#(0x36A) () {
 	if (event == PROXIMITY) {
 		var0008 = UI_die_roll(0x0001, 0x0002);
 		if (var0008 == 0x0001) {
-			0xFEF3->item_say("@Woof!@");
+			HOUND_OF_DOSKAR->item_say("@Woof!@");
 		}
 		if (var0008 == 0x0002) {
-			0xFEF3->item_say("@Bark!@");
+			HOUND_OF_DOSKAR->item_say("@Bark!@");
 		}
 	}
 }
@@ -61331,7 +61331,7 @@ void Func0625 object#(0x625) () {
 			} else if (var0000 == 0x02EB) {
 				0xFED6->show_npc_face(0x0000);
 			} else if ((var0000 == 0x017D) || (var0000 == 0x02D0)) {
-				0xFEF3->show_npc_face(0x0000);
+				HOUND_OF_DOSKAR->show_npc_face(0x0000);
 			} else {
 				var0003 = get_npc_number();
 				var0003->show_npc_face(0x0000);
