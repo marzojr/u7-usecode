@@ -4232,7 +4232,7 @@ void Func013D shape#(0x13D) () {
 		if (get_npc_id() == 0x0001) {
 			UI_fade_palette(0x000C, 0x0001, 0x0001);
 			Func097F(item, "@We shall never be found...@", 0x0000);
-			var0003 = script 0xFEFA {
+			var0003 = script ANTI_IOLO {
 				nohalt;
 				face east;
 			};
@@ -4242,7 +4242,7 @@ void Func013D shape#(0x13D) () {
 			};
 			UI_play_music(0x0033, Func09A0(0x0005, 0x0001));
 		}
-		if ((0xFEFA->get_npc_id() == 0x0000) && var0001) {
+		if ((ANTI_IOLO->get_npc_id() == 0x0000) && var0001) {
 			0xFEF4->show_npc_face0(0x0000);
 			UI_init_conversation();
 			say("\"Now that we are together, my brothers in Chaos, no one in the world may stand before us! We shall crush that insignificant Avatar... as we have killed all the others!\"");
@@ -4251,12 +4251,12 @@ void Func013D shape#(0x13D) () {
 			say("\"Twist and turn and twine about... What was wrong is right, and what was in, is out...\"");
 			say("\"Hide! Hide! For the Avatar seeks!\"");
 			var0003 = "@Hide!@" & ("@Then we strike!@" & "@What fun!@");
-			Func094F(0xFEFA, var0003);
+			Func094F(ANTI_IOLO, var0003);
 			UI_end_conversation();
-			0xFEFA->set_npc_id(0x0001);
-			0xFEFA->si_path_run_usecode([0x0998, 0x0069, 0x0001], SI_PATH_SUCCESS, 0xFEFA->get_npc_object(), Func0370, true);
+			ANTI_IOLO->set_npc_id(0x0001);
+			ANTI_IOLO->si_path_run_usecode([0x0998, 0x0069, 0x0001], SI_PATH_SUCCESS, ANTI_IOLO->get_npc_object(), Func0370, true);
 		}
-		if ((0xFEFA->get_npc_id() == 0x0001) && var0002) {
+		if ((ANTI_IOLO->get_npc_id() == 0x0001) && var0002) {
 			0xFEF4->show_npc_face0(0x0000);
 			UI_init_conversation();
 			say("\"Those who followed now lead! Those who were master are now slave! The world shall return to its natural course... once we have rid ourselves of that cursed Avatar!\"");
@@ -4266,7 +4266,7 @@ void Func013D shape#(0x13D) () {
 			var0003 = "@Blood!@" & ("@More blood!@" & "@Bleed to death!@");
 			Func094F(0xFEF9, var0003);
 			UI_end_conversation();
-			0xFEFA->set_npc_id(0x0002);
+			ANTI_IOLO->set_npc_id(0x0002);
 			0xFEF9->si_path_run_usecode([0x0998, 0x0075, 0x0001], SI_PATH_SUCCESS, 0xFEF9->get_npc_object(), Func038A, true);
 		}
 		abort;
@@ -4281,7 +4281,7 @@ void Func013D shape#(0x13D) () {
 		AVATAR->clear_item_flag(DONT_MOVE);
 		UI_init_conversation();
 		set_npc_id(0x0000);
-		0xFEFA->set_npc_id(0x0000);
+		ANTI_IOLO->set_npc_id(0x0000);
 		0xFEF9->set_npc_id(0x0000);
 		gflags[0x022D] = true;
 		gflags[0x002A] = false;
@@ -15619,7 +15619,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, D_STEFANO, D_CANTRA, D_BYRIN, 0xFEF8, 0xFEF9, 0xFEFA, CELLIA, FLICKEN, HARNNA, KRAYG, LUCILLA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, DRAYGAN, MARSTEN, SPEKTOR, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, MORGHRIM];
+		var0008 = [0xFEED, 0xFEE8, D_STEFANO, D_CANTRA, D_BYRIN, 0xFEF8, 0xFEF9, ANTI_IOLO, CELLIA, FLICKEN, HARNNA, KRAYG, LUCILLA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, DRAYGAN, MARSTEN, SPEKTOR, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, MORGHRIM];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -59127,7 +59127,7 @@ void Func04E8 object#(0x4E8) () {
 }
 
 void Func0506 object#(0x506) () {
-	0xFEFA->show_npc_face0(0x0000);
+	ANTI_IOLO->show_npc_face0(0x0000);
 	say("\"Avatar, when next we meet I shall wear thine eyeballs for earrings!\"");
 }
 
@@ -70337,7 +70337,7 @@ void Func06DE object#(0x6DE) () {
 	var var0004;
 
 	if (event == EGG) {
-		if (gflags[0x0004] && (!0xFEFA->is_dead())) {
+		if (gflags[0x0004] && (!ANTI_IOLO->is_dead())) {
 			var0000 = get_item_quality();
 			var0001 = get_object_position();
 			var0002 = UI_create_new_object2(0x00F7, var0001);
@@ -70563,14 +70563,14 @@ void Func06E3 object#(0x6E3) () {
 		var0002 = get_item_quality();
 		if (var0002 == 0x0000) {
 			UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, 0x071E, 0x05A6, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			0xFEFA->move_object([0x071E, 0x05A6, 0x0000]);
-			0xFEFA->set_schedule_type(WAIT);
-			var0003 = script 0xFEFA {
+			ANTI_IOLO->move_object([0x071E, 0x05A6, 0x0000]);
+			ANTI_IOLO->set_schedule_type(WAIT);
+			var0003 = script ANTI_IOLO {
 				nohalt;
 				actor frame standing;
 				face FACE_EAST;
 			};
-			var0003 = script 0xFEFA after 10 ticks {
+			var0003 = script ANTI_IOLO after 10 ticks {
 				nohalt;
 				call Func06E3;
 			};
@@ -70690,14 +70690,14 @@ void Func06E4 object#(0x6E4) () {
 	if ((event == EGG) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
 		UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, 0x06D8, 0x0591, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		UI_play_sound_effect(0x0051);
-		0xFEFA->move_object([0x06D8, 0x0591, 0x0000]);
-		0xFEFA->set_schedule_type(WAIT);
-		var0002 = script 0xFEFA {
+		ANTI_IOLO->move_object([0x06D8, 0x0591, 0x0000]);
+		ANTI_IOLO->set_schedule_type(WAIT);
+		var0002 = script ANTI_IOLO {
 			nohalt;
 			actor frame standing;
 			face FACE_SOUTH;
 		};
-		var0002 = script 0xFEFA after 10 ticks {
+		var0002 = script ANTI_IOLO after 10 ticks {
 			nohalt;
 			call Func06E4;
 		};
@@ -70772,14 +70772,14 @@ void Func06E5 object#(0x6E5) () {
 	if ((event == EGG) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
 		UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, 0x06F2, 0x05A5, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		UI_play_sound_effect(0x0051);
-		0xFEFA->move_object([0x06F2, 0x05A5, 0x0000]);
-		0xFEFA->set_schedule_type(WAIT);
-		var0002 = script 0xFEFA {
+		ANTI_IOLO->move_object([0x06F2, 0x05A5, 0x0000]);
+		ANTI_IOLO->set_schedule_type(WAIT);
+		var0002 = script ANTI_IOLO {
 			nohalt;
 			actor frame standing;
 			face FACE_NORTH;
 		};
-		var0002 = script 0xFEFA after 10 ticks {
+		var0002 = script ANTI_IOLO after 10 ticks {
 			nohalt;
 			call Func06E5;
 		};
@@ -70867,7 +70867,7 @@ void Func06E6 object#(0x6E6) () {
 		var0002 = get_item_quality();
 		var0003 = 0x0000;
 		var0004 = 0x0000;
-		var0005 = [0xFEFA, 0xFEF8, 0xFEF9];
+		var0005 = [ANTI_IOLO, 0xFEF8, 0xFEF9];
 		var0006 = var0005[UI_die_roll(0x0001, 0x0003)];
 		if (var0002 == 0x0000) {
 			UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, 0x0715, 0x0582, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
@@ -71052,7 +71052,7 @@ void Func06E6 object#(0x6E6) () {
 			var0004 = Func09A0(0x0000, 0x0001);
 			UI_play_music(0x0033, var0004);
 		}
-		if (var0006 == 0xFEFA) {
+		if (var0006 == ANTI_IOLO) {
 			0xFEE0->show_npc_face0(0x0000);
 		}
 		if (var0006 == 0xFEF9) {
@@ -71102,13 +71102,13 @@ void Func06E7 object#(0x6E7) () {
 	if ((event == EGG) && (Func097E(var0000[0x0003] - var0001[0x0003]) < 0x0003)) {
 		UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, 0x06C9, 0x0588, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 		UI_play_sound_effect(0x0051);
-		0xFEFA->move_object([0x06C9, 0x0588, 0x0000]);
-		var0002 = script 0xFEFA {
+		ANTI_IOLO->move_object([0x06C9, 0x0588, 0x0000]);
+		var0002 = script ANTI_IOLO {
 			nohalt;
 			actor frame standing;
 			face FACE_SOUTH;
 		};
-		var0002 = script 0xFEFA after 10 ticks {
+		var0002 = script ANTI_IOLO after 10 ticks {
 			nohalt;
 			call Func06E7;
 		};
@@ -71251,12 +71251,12 @@ void Func06EA object#(0x6EA) () {
 			say("\"I had almost tired of waiting for thee, Avatar. Thou'rt some hero... it\ttook thee long enough.\"");
 			UI_remove_npc_face0();
 		}
-		var0000 = [0xFEFA, 0xFEF9, 0xFEF8];
+		var0000 = [ANTI_IOLO, 0xFEF9, 0xFEF8];
 		if (!gflags[0x00D5]) {
-			0xFEFA->set_item_flag(SI_TOURNAMENT);
-			0xFEFA->set_alignment(EVIL);
-			0xFEFA->set_schedule_type(IN_COMBAT);
-			Func09AD(0xFEFA);
+			ANTI_IOLO->set_item_flag(SI_TOURNAMENT);
+			ANTI_IOLO->set_alignment(EVIL);
+			ANTI_IOLO->set_schedule_type(IN_COMBAT);
+			Func09AD(ANTI_IOLO);
 		}
 		if (!gflags[0x00D3]) {
 			0xFEF9->set_item_flag(SI_TOURNAMENT);
@@ -71303,13 +71303,13 @@ void Func06EB object#(0x6EB) () {
 		if (var0001) {
 			UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, 0x09B3, 0x0027, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			UI_play_sound_effect(0x0051);
-			0xFEFA->move_object([0x09B3, 0x0027, 0x0000]);
-			var0006 = script 0xFEFA {
+			ANTI_IOLO->move_object([0x09B3, 0x0027, 0x0000]);
+			var0006 = script ANTI_IOLO {
 				nohalt;
 				actor frame standing;
 				face FACE_EAST;
 			};
-			var0006 = script 0xFEFA after 10 ticks {
+			var0006 = script ANTI_IOLO after 10 ticks {
 				nohalt;
 				call Func06EB;
 			};
@@ -71370,36 +71370,36 @@ void Func06EC object#(0x6EC) () {
 			if (var0003 == 0x0000) {
 				UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, 0x09A0, 0x0027, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 				UI_play_sound_effect(0x0051);
-				0xFEFA->move_object([0x09A0, 0x0027, 0x0000]);
+				ANTI_IOLO->move_object([0x09A0, 0x0027, 0x0000]);
 				var0004 = FACE_EAST;
 			}
 			if (var0003 == 0x0001) {
 				UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, 0x09C1, 0x0024, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 				UI_play_sound_effect(0x0051);
-				0xFEFA->move_object([0x09C1, 0x0024, 0x0000]);
+				ANTI_IOLO->move_object([0x09C1, 0x0024, 0x0000]);
 				var0004 = FACE_SOUTH;
 			}
 			if (var0003 == 0x0002) {
 				UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, 0x099F, 0x0035, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 				UI_play_sound_effect(0x0051);
-				0xFEFA->move_object([0x099F, 0x0035, 0x0000]);
+				ANTI_IOLO->move_object([0x099F, 0x0035, 0x0000]);
 				var0004 = FACE_EAST;
 			}
 			if (var0003 == 0x0003) {
 				UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, 0x09C7, 0x0031, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 				UI_play_sound_effect(0x0051);
-				0xFEFA->move_object([0x09C7, 0x0031, 0x0000]);
+				ANTI_IOLO->move_object([0x09C7, 0x0031, 0x0000]);
 				var0004 = FACE_SOUTH;
 			}
 			// Bug: this comparison is always true. I'm not sure what it was
 			// supposed to be. Maybe var0004?
-			if (0xFEFA) {
-				var0005 = script 0xFEFA {
+			if (ANTI_IOLO) {
+				var0005 = script ANTI_IOLO {
 					nohalt;
 					actor frame standing;
 					face var0004;
 				};
-				var0005 = script 0xFEFA after 10 ticks {
+				var0005 = script ANTI_IOLO after 10 ticks {
 					nohalt;
 					call Func06EC;
 				};
@@ -113128,8 +113128,8 @@ void Func09B5 0x9B5 () {
 		var0000 = 0xFEF8;
 		var0001 = [0x09D9, 0x004E, 0x0000];
 		var0006 = [0x09AC, 0x006E, 0x0000];
-		0xFEFA->set_schedule_type(WAIT);
-		0xFEFA->move_object(var0006);
+		ANTI_IOLO->set_schedule_type(WAIT);
+		ANTI_IOLO->move_object(var0006);
 		var0007 = [0x099F, 0x0073, 0x0000];
 		0xFEF9->set_schedule_type(WAIT);
 		0xFEF9->move_object(var0007);
@@ -113230,9 +113230,9 @@ void Func09B7 0x9B7 () {
 
 void Func09B8 0x9B8 () {
 	if (!gflags[0x00D5]) {
-		0xFEFA->move_object([0x0995, 0x006E, 0x0002]);
-		0xFEFA->set_alignment(NEUTRAL);
-		0xFEFA->set_schedule_type(MAJOR_SIT);
+		ANTI_IOLO->move_object([0x0995, 0x006E, 0x0002]);
+		ANTI_IOLO->set_alignment(NEUTRAL);
+		ANTI_IOLO->set_schedule_type(MAJOR_SIT);
 	}
 	if (!gflags[0x00D3]) {
 		0xFEF9->move_object([0x0999, 0x0075, 0x0001]);
