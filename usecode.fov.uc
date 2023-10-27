@@ -350,6 +350,8 @@ enum misc_npcs {
 	HYDRA_SHANDA	= -281,	//hydra head
 	HYDRA_SHANDO	= -282,	//hydra head
 
+	TIME_LORD	= -284,
+
 	JUGGERNAUT	= -259,	//Isle of the Avatar, enemy
 	HOOK		= -291,	//Isle of the Avatar, arch-villain
 	FORSKIS		= -298,	//Isle of the Avatar, arch-villain
@@ -3798,7 +3800,7 @@ void Func0269 shape#(0x269) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFEE4->show_npc_face(0x0000);
+	TIME_LORD->show_npc_face(0x0000);
 	var0000 = Func0931(PARTY, 0x0001, 0x0347, QUALITY_ANY, 0x0000);
 	if (gflags[0x0004] && (!gflags[0x0012])) {
 		say("\"Congratulations, Avatar, on destroying the Sphere. I am free from my celestial prison. I thank thee. But I regret to inform thee that The Guardian engineered the Sphere such that its destruction has permanently disabled the Moongates, and thine Orb of the Moons as well. Thou canst not return to thine home by way of a red Moongate.~~");

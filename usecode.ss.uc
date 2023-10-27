@@ -17087,7 +17087,7 @@ void Func0355 shape#(0x355) () {
 		abort;
 	}
 	UI_play_music(0x0035, Func09A0(0x0005, 0x0001));
-	0xFEE4->show_npc_face0(0x0000);
+	PIBB->show_npc_face0(0x0000);
 	say("\"Who dares to disturb the restless repose of the Hierophant of Chaos!\"");
 	say("\"Wait -- I know thee! The Void hath whispered to me of thy coming, Hero from a Distant Land. But dost thou dare to hear the answers to thy questions?\"");
 	gflags[0x022B] = true;
@@ -79648,13 +79648,13 @@ void Func07E2 object#(0x7E2) () {
 		UI_play_sound_effect(0x0077);
 		var000B = get_object_position();
 		UI_sprite_effect(ANIMATION_TELEPORT, var000B[0x0001], var000B[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-		0xFEE4->move_object(var000B);
-		0xFEE4->set_item_flag(SI_TOURNAMENT);
-		0xFEE4->set_item_flag(INVISIBLE);
-		0xFEE4->set_npc_id(0x000E);
-		Func09AD(0xFEE4);
-		Func097F(0xFEE4, "@Accept thy death, Avatar!@", 0x0002);
-		var0005 = script 0xFEE4 after 6 ticks {
+		PIBB->move_object(var000B);
+		PIBB->set_item_flag(SI_TOURNAMENT);
+		PIBB->set_item_flag(INVISIBLE);
+		PIBB->set_npc_id(0x000E);
+		Func09AD(PIBB);
+		Func097F(PIBB, "@Accept thy death, Avatar!@", 0x0002);
+		var0005 = script PIBB after 6 ticks {
 			nohalt;
 			call Func00E4;
 		};
