@@ -1268,23 +1268,23 @@ void Func00E4 shape#(0xE4) () {
 		}
 		if (var0000 == 0x001E) {
 			clear_item_say();
-			0xFEEA->show_npc_face0(0x0000);
+			ELSI->show_npc_face0(0x0000);
 			say("\"I suppose thou dost wish me to operate the gate?\"");
 			if (Func0955()) {
 				if (!gflags[0x0048]) {
-					0xFEEA->show_npc_face0(0x0000);
+					ELSI->show_npc_face0(0x0000);
 					say("\"Stand back while I crank the winch. 'Tis heavy and dangerous. Thou dost never know when it might come down upon thine head.\"");
 					event = STARTED_TALKING;
 					Func0855(event);
 					abort;
 				}
-				0xFEEA->show_npc_face0(0x0000);
+				ELSI->show_npc_face0(0x0000);
 				say("\"Gladly I will for a fellow Knight. Have a pleasant day and may goblin blood stain thy sword soon.\"");
 				event = STARTED_TALKING;
 				Func0855(event);
 				abort;
 			}
-			0xFEEA->show_npc_face0(0x0000);
+			ELSI->show_npc_face0(0x0000);
 			say("\"Then bother me not! I must be about my duty!\"");
 			Func097F(item, "@Watch out for goblins...@", 0x0002);
 			abort;
@@ -1365,7 +1365,7 @@ void Func00E4 shape#(0xE4) () {
 	}
 	if ((event == STARTED_TALKING) && (var0000 == 0x000C)) {
 		set_schedule_type(WANDER);
-		0xFEEA->show_npc_face0(0x0000);
+		ELSI->show_npc_face0(0x0000);
 		say("\"Greetings. I'm a Pikeman of Monitor.\"");
 		say("\"The Goblins are dangerous. Watch out for them. As for me, I must return to my duties now.\"");
 		UI_remove_npc_face0();
