@@ -203,6 +203,7 @@ enum skara_brae_npcs {
 	FORSYTHE	= -147,	//mayor and coward
 	CAINE		= -247,	//alchemist and The Tortured One
 	UUUNGH		= -277,	//skeleton guard
+	FERRYMAN	= -285,
 };
 
 //Moonglow residents
@@ -1333,7 +1334,7 @@ void Func009B shape#(0x9B) () {
 	var var0008;
 
 	if (event == DOUBLECLICK) {
-		0xFEE3->show_npc_face(0x0000);
+		FERRYMAN->show_npc_face(0x0000);
 		var0000 = Func08F7(SPARK);
 		var0001 = Func08F7(SHAMINO);
 		var0002 = Func0908();
@@ -1401,7 +1402,7 @@ void Func009B shape#(0x9B) () {
 							SPARK->say("\"No, sir. I am not afraid of a skeleton,\" he says. As he looks at the ferryman, however, he\tgulps.*");
 							SPARK->hide();
 						}
-						0xFEE3->show_npc_face(0x0000);
+						FERRYMAN->show_npc_face(0x0000);
 					}
 				} else {
 					say("The gaunt figure looks around as if perplexed. \"This... is Skara Brae.\"");
