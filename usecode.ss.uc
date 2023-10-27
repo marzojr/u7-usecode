@@ -3217,7 +3217,7 @@ void Func0103 shape#(0x103) () {
 		if (var0001 == 0x0001) {
 			set_schedule_type(TEND_SHOP);
 			clear_item_say();
-			0xFEE7->show_npc_face0(0x0000);
+			CRUSTY->show_npc_face0(0x0000);
 			say("\"My name is Ernesto the Ranger. How may I be of service, ",
 				var0002,
 				"?\"");
