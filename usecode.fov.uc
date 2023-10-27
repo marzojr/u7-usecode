@@ -33328,13 +33328,13 @@ void Func0495 object#(0x495) () {
 	add(["name", "job", "bye"]);
 	if (!gflags[0x02C7]) {
 		say("You see a three-headed hydra. The head on the left speaks.~~ \"Wake up, there is something here.\"");
-		0xFEE6->say("The head on the right looks up and at you.~~\"I wonder if it is good to eat.\"*");
-		0xFEE6->hide();
+		HYDRA_SHANDO->say("The head on the right looks up and at you.~~\"I wonder if it is good to eat.\"*");
+		HYDRA_SHANDO->hide();
 		HYDRA_SHANDA->say("The middle head wakes with a start, sees you, becomes alarmed, and begins to snort excitedly.*");
 		HYDRA_SHANDU->say("\"Fear not, brother; we know it's there.\"*");
 		HYDRA_SHANDA->hide();
-		0xFEE6->say("\"I wonder if it talks?\"*");
-		0xFEE6->hide();
+		HYDRA_SHANDO->say("\"I wonder if it talks?\"*");
+		HYDRA_SHANDO->hide();
 		HYDRA_SHANDU->show_npc_face(0x0000);
 		gflags[0x02C7] = true;
 	} else {
@@ -33346,8 +33346,8 @@ void Func0495 object#(0x495) () {
 	converse (0) {
 		case "name":
 			say("\"My name is Shandu. My brother next to me is Shanda. My brother next to him is Shando.\"*");
-			0xFEE6->say("\"It does not matter what our names are!\"*");
-			0xFEE6->hide();
+			HYDRA_SHANDO->say("\"It does not matter what our names are!\"*");
+			HYDRA_SHANDO->hide();
 			HYDRA_SHANDA->say("Shanda shakes his head and glares at you.*");
 			HYDRA_SHANDA->hide();
 			HYDRA_SHANDU->show_npc_face(0x0000);
@@ -33363,18 +33363,18 @@ void Func0495 object#(0x495) () {
 		case "Shanda":
 			HYDRA_SHANDA->say("Shanda rolls his eyes and exhales a puff of smoke from his nostrils.*");
 			HYDRA_SHANDA->hide();
-			0xFEE6->say("\"Shanda says that thou shouldst refrain from saying his name. He does not like it when his food says his name.\"*");
-			0xFEE6->hide();
+			HYDRA_SHANDO->say("\"Shanda says that thou shouldst refrain from saying his name. He does not like it when his food says his name.\"*");
+			HYDRA_SHANDO->hide();
 			HYDRA_SHANDU->show_npc_face(0x0000);
 			remove("Shanda");
 			fallthrough;
 
 		case "Shando":
-			0xFEE6->say("\"That is me. I am the oldest brother.\"*");
+			HYDRA_SHANDO->say("\"That is me. I am the oldest brother.\"*");
 			HYDRA_SHANDU->say("\"We are all connected, Shando! Thou cannot be older!\"*");
-			0xFEE6->say("\"Mine head was the first to breathe the air.\"*");
+			HYDRA_SHANDO->say("\"Mine head was the first to breathe the air.\"*");
 			HYDRA_SHANDU->say("Shandu spits.~~\"What does it matter? Our food does not care which of us is the eldest!\"*");
-			0xFEE6->hide();
+			HYDRA_SHANDO->hide();
 			HYDRA_SHANDU->show_npc_face(0x0000);
 			remove("Shando");
 			fallthrough;
@@ -33383,11 +33383,11 @@ void Func0495 object#(0x495) () {
 			say("\"Job?\"");
 			HYDRA_SHANDA->say("Shanda opens his mouth wide and emits a burst of flame.*");
 			HYDRA_SHANDA->hide();
-			0xFEE6->say("\"He thinks that is a joke. Job! Ha! I think it is amusing, too. I have never heard my food tell jokes.\"*");
+			HYDRA_SHANDO->say("\"He thinks that is a joke. Job! Ha! I think it is amusing, too. I have never heard my food tell jokes.\"*");
 			HYDRA_SHANDU->say("\"Ah, but brothers, we -do- have a job.\"*");
-			0xFEE6->say("\"We do?\"*");
+			HYDRA_SHANDO->say("\"We do?\"*");
 			HYDRA_SHANDU->say("\"We guard the Caddellite, do we not? Our purpose in life is to guard the Caddellite!\"");
-			0xFEE6->hide();
+			HYDRA_SHANDO->hide();
 			HYDRA_SHANDU->show_npc_face(0x0000);
 			add("Caddellite");
 			fallthrough;
@@ -33414,13 +33414,13 @@ void Func0495 object#(0x495) () {
 			fallthrough;
 
 		case "guarding":
-			0xFEE6->say("\"The creature seems to echo everything we say, Shandu.\"*");
-			0xFEE6->hide();
+			HYDRA_SHANDO->say("\"The creature seems to echo everything we say, Shandu.\"*");
+			HYDRA_SHANDO->hide();
 			HYDRA_SHANDA->say("Shanda makes a horrid growling noise.*");
 			HYDRA_SHANDA->hide();
 			HYDRA_SHANDU->say("\"Shanda says he is hungry!\"*");
-			0xFEE6->say("\"So am I!\"*");
-			0xFEE6->hide();
+			HYDRA_SHANDO->say("\"So am I!\"*");
+			HYDRA_SHANDO->hide();
 			HYDRA_SHANDU->say("\"Now that thou dost mention it, I am feeling a few hunger pangs myself. If we did not have to protect the Caddellite, I would eat this creature in a single gulp!\"");
 			remove("guarding");
 			add(["echo", "protect"]);
@@ -33428,8 +33428,8 @@ void Func0495 object#(0x495) () {
 
 		case "echo":
 			say("\"Hearing this creature repeat whatever we say is making me hungry!\"*");
-			0xFEE6->say("\"It amuses me! Obviously it is a creature of severely limited intelligence!\"*");
-			0xFEE6->hide();
+			HYDRA_SHANDO->say("\"It amuses me! Obviously it is a creature of severely limited intelligence!\"*");
+			HYDRA_SHANDO->hide();
 			HYDRA_SHANDA->say("Shanda lets out a low growl.*");
 			HYDRA_SHANDA->hide();
 			HYDRA_SHANDU->say("\"Shanda says he wants something to eat!\"");
@@ -33440,8 +33440,8 @@ void Func0495 object#(0x495) () {
 			say("\"I suppose we must protect the Caddellite from creatures like thee who come around once every 1000 years or so wanting to take it.\"*");
 			HYDRA_SHANDA->say("Shanda growls louder than before, then breathes a bit of fire.*");
 			HYDRA_SHANDA->hide();
-			0xFEE6->say("\"Creature! Thou art making Shanda angry! He thinks that thou art attempting to steal the Caddellite! Beware!\"*");
-			0xFEE6->hide();
+			HYDRA_SHANDO->say("\"Creature! Thou art making Shanda angry! He thinks that thou art attempting to steal the Caddellite! Beware!\"*");
+			HYDRA_SHANDO->hide();
 			HYDRA_SHANDU->show_npc_face(0x0000);
 			remove("protect");
 			add("steal");
@@ -33452,8 +33452,8 @@ void Func0495 object#(0x495) () {
 			HYDRA_SHANDA->say("Shanda roars angrily!*");
 			HYDRA_SHANDA->hide();
 			HYDRA_SHANDU->say("\"That is a good idea, my brother!\"~~Shandu turns to you.~~ [\"This creature vaguely resembles a troll, only it smells a little more pleasant. Dost thou think it might taste better than a troll, Shando?\"*");
-			0xFEE6->say("\"We shall not know until we try!\"*");
-			0xFEE6->hide();
+			HYDRA_SHANDO->say("\"We shall not know until we try!\"*");
+			HYDRA_SHANDO->hide();
 			HYDRA_SHANDA->say("Shanda nods his head furiously, licking his lips.*");
 			HYDRA_SHANDA->hide();
 			HYDRA_SHANDU->say("\"Very well! Let's eat it!\"*");

@@ -4260,7 +4260,7 @@ void Func013D shape#(0x13D) () {
 			BRENDA->show_npc_face0(0x0000);
 			UI_init_conversation();
 			say("\"Those who followed now lead! Those who were master are now slave! The world shall return to its natural course... once we have rid ourselves of that cursed Avatar!\"");
-			0xFEE6->show_npc_face1(0x0000);
+			WATSON->show_npc_face1(0x0000);
 			say("\"Let us bring this world to its knees! Let these pitiful mortals worship us... even as they die!\"");
 			say("\"And I have special plans for the Avatar...!\"");
 			var0003 = "@Blood!@" & ("@More blood!@" & "@Bleed to death!@");
@@ -18161,7 +18161,7 @@ void Func038A shape#(0x38A) () {
 		}
 		if (get_oppressor() == 0x0000) {
 			if (AVATAR->get_weapon() == 0x0326) {
-				0xFEE6->show_npc_face0(0x0000);
+				WATSON->show_npc_face0(0x0000);
 				say("\"Vanquished! By a mere mortal!\"");
 				UI_remove_npc_face0();
 				var0001 = get_object_position();
@@ -18179,7 +18179,7 @@ void Func038A shape#(0x38A) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		0xFEE6->show_npc_face0(0x0000);
+		WATSON->show_npc_face0(0x0000);
 		say("\"Puny mortal!\"");
 		UI_remove_npc_face0();
 	}
@@ -71056,7 +71056,7 @@ void Func06E6 object#(0x6E6) () {
 			0xFEE0->show_npc_face0(0x0000);
 		}
 		if (var0006 == ANTI_DUPRE) {
-			0xFEE6->show_npc_face0(0x0000);
+			WATSON->show_npc_face0(0x0000);
 		}
 		if (var0006 == ANTI_SHAM) {
 			BRENDA->show_npc_face0(0x0000);
