@@ -34556,7 +34556,7 @@ void Func049C object#(0x49C) () {
 		var0003 = false;
 		add(["name", "job", "Fellowship", "bye"]);
 		if (var0002 == NIGHT) {
-			var0004 = Func08FC(BALAYNA, 0xFF06);
+			var0004 = Func08FC(BALAYNA, RANKIN);
 			if (var0004) {
 				say("Glaring, she puts a finger over her lips, indicating that you should be silent.*");
 				abort;
@@ -34729,7 +34729,7 @@ void Func049D object#(0x49D) () {
 			abort;
 		}
 		if (var0001 == NIGHT) {
-			var0002 = Func08FC(TOLEMAC, 0xFF06);
+			var0002 = Func08FC(TOLEMAC, RANKIN);
 			if (var0002) {
 				say("\"I am trying to pay attention!\" he says, glaring at you.");
 			} else {
@@ -35415,7 +35415,7 @@ void Func04A3 object#(0x4A3) () {
 		var0003 = UI_part_of_day();
 		var0004 = false;
 		if (var0003 == NIGHT) {
-			var0005 = Func08FC(PHEARCY, 0xFF06);
+			var0005 = Func08FC(PHEARCY, RANKIN);
 			if (var0005) {
 				say("\"Sorry, ",
 					var0001,
@@ -48832,7 +48832,7 @@ void Func04FA object#(0x4FA) () {
 	var var000B;
 
 	if (event == DOUBLECLICK) {
-		0xFF06->show_npc_face(0x0000);
+		RANKIN->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = false;
 		var0002 = Func08F7(BALAYNA);
@@ -49113,7 +49113,7 @@ void Func04FA object#(0x4FA) () {
 		}
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF06);
+		Func092E(RANKIN);
 	}
 }
 
@@ -73444,13 +73444,13 @@ void Func08CF 0x8CF () {
 	if (var0000) {
 		BALAYNA->say("You see the clerk gasp, her eyes widening in disbelief.*");
 		BALAYNA->hide();
-		0xFF06->show_npc_face(0x0000);
+		RANKIN->show_npc_face(0x0000);
 	}
 	say("\"The second principle of the Triad is `trust thy brother.' 'Tis a simple practice when thou dost know thy brother. But The Fellowship was not always known to thee. It may, at one time, have been difficult to put thy trust in something as large as The Fellowship.~~ \"However, to gain full knowledge of thine inner strength, one must have the courage to walk on the fire of trust!\"*");
 	if (var0001) {
 		TOLEMAC->say("\"'Tis true! Trust was the key to my freedom!\"*");
 		TOLEMAC->hide();
-		0xFF06->show_npc_face(0x0000);
+		RANKIN->show_npc_face(0x0000);
 	}
 	say("\"Trust requires great courage, and that courage exists within thyself.\"*");
 	if (var0002) {
@@ -73462,7 +73462,7 @@ void Func08CF 0x8CF () {
 		}
 		say("Iolo sighs deeply.*");
 		IOLO->hide();
-		0xFF06->show_npc_face(0x0000);
+		RANKIN->show_npc_face(0x0000);
 	}
 	say("\"But as long as one remains aware, this problem will not plague thee.\"*");
 	if (var0003) {
