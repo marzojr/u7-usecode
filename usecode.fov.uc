@@ -199,7 +199,8 @@ enum skara_brae_npcs {
 	PAULETTE	= -145,	//barmaid
 	QUENTON		= -146,	//persistent murder victim from Ultima VI
 	FORSYTHE	= -147,	//mayor and coward
-	CAINE		= -247	//alchemist and The Tortured One
+	CAINE		= -247,	//alchemist and The Tortured One
+	UUUNGH		= -277,	//skeleton guard
 };
 
 //Moonglow residents
@@ -50784,126 +50785,126 @@ void Func0613 object#(0x613) () {
 void Func0614 object#(0x614) () {
 	var var0000;
 
-	0xFEEB->show_npc_face(0x0000);
+	UUUNGH->show_npc_face(0x0000);
 	var0000 = UI_get_speech_track();
 	if (var0000 == 0x0001) {
 		say("\"Yes, rest, my friend. Rest and heal, so that you are strong and able to face the perils before you. Pleasant dreams!\"");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	if (var0000 == 0x0002) {
 		say("\"Go inside. Tell them you are the Avatar!\"");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	if (var0000 == 0x0003) {
 		say("\"Thank you for the information in the notebook, Avatar! It was most useful! Ha ha ha ha ha!\"");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	if (var0000 == 0x0004) {
 		say("\"Do not go in! It is a trap! Do you not see? It is a trap!\"");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	if (var0000 == 0x0005) {
 		say("\"You are not going to trust the Time Lord are you? Careful, my friend -- do not believe him!\"");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	if (var0000 == 0x0006) {
 		say("\"Do not go in! You will surely die!\"");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	if (var0000 == 0x0007) {
 		say("\"Avatar, you are not welcome here!\"");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	if (var0000 == 0x0008) {
 		say("\"Are you sure? Think again!\"");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	if (var0000 == 0x0009) {
 		say("\"At least one sign is true, and at least one sign is false.\"");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	if (var0000 == 0x000A) {
 		say("\"Two of these signs are either true or false!\"");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	if (var0000 == 0x000B) {
 		say("\"No no no! Think again!\"");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	if (var0000 == 0x000C) {
 		say("\"Each sign could be either true or false!\"");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	if (var0000 == 0x000D) {
 		say("\"Stop the Avatar! I will come through the Black Gate now! Do not let him near!\"");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	if (var0000 == 0x000E) {
 		say("\"So, Avatar! The moment of truth has come! You can destroy the Black Gate, but you will never return to your beloved Earth. Or you can come through now and go home! It is your choice!\"");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	if ((var0000 > 0x0011) && (var0000 < 0x0016)) {
 		say("\"Ha ha ha ha ha ha!\"*");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	if (var0000 == 0x0016) {
 		say("\"Poor Avatar... poor, poor Avatar...\"");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	if (var0000 == 0x0017) {
 		say("\"Well done, my friend! You are truly an Avatar!\"");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	if (var0000 == 0x0018) {
 		say("\"You are travelling in the wrong direction, my friend!\"");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	if (var0000 == 0x0019) {
 		say("\"Go away!!\"");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	if (var0000 == 0x001A) {
 		say("\"That is precisely the thing to do, Avatar!\"");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	if (var0000 == 0x001B) {
 		say("\"You had best not do that, Avatar!\"");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	if (var0000 == 0x001C) {
 		say("\"Do you really know where you are going, Avatar?\"");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	if (var0000 == 0x001D) {
 		say("\"Yes, that is the proper direction to travel, Avatar.\"");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	if (var0000 > 0x001D) {
 		say("\"Ha ha ha ha ha ha!\"");
-		0xFEEB->hide();
+		UUUNGH->hide();
 		return;
 	}
 	say("\"Ho ho ha ha heh heh heh!\"");

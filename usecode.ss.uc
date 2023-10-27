@@ -4872,22 +4872,22 @@ void Func0151 shape#(0x151) () {
 			set_schedule_type(SHY);
 		}
 		if (var0000 == 0x0001) {
-			0xFEEB->show_npc_face0(0x0000);
+			SMITHZHORSE->show_npc_face0(0x0000);
 			say("\"I can only be disturbed for a moment, as the others will miss me. We must continue our Dirge.\"");
 			add(["name", "others", "Dirge"]);
 		}
 		if (var0000 == 0x0002) {
-			0xFEEB->show_npc_face0(0x0000);
+			SMITHZHORSE->show_npc_face0(0x0000);
 			say("\"How darest thou interrupt the Ceremony! Dost thou not recognize the influence of Chaos in this place?\"");
 			add(["name", "Ceremony", "Chaos"]);
 		}
 		if (var0000 == 0x0003) {
-			0xFEEB->show_npc_face0(0x0000);
+			SMITHZHORSE->show_npc_face0(0x0000);
 			say("\"At last, a stranger! Oh, but have we met before? This existence is confusing...\"");
 			add(["name", "met", "existence"]);
 		}
 		if (var0000 == 0x0004) {
-			0xFEEB->show_npc_face0(0x0000);
+			SMITHZHORSE->show_npc_face0(0x0000);
 			say("\"Art thou a spy? Come, friends, we must kill the spy sent by the Hierophant of Order!\"");
 			add(["spy", "Hierophant", "Order"]);
 		}
@@ -4908,7 +4908,7 @@ void Func0151 shape#(0x151) () {
 			abort;
 		}
 		if (var0000 == 0x0006) {
-			0xFEEB->show_npc_face0(0x0000);
+			SMITHZHORSE->show_npc_face0(0x0000);
 			say("\"Canst thou not see that we are trying to help thee! Everything that we say hath meaning. Thou must vanquish the foe...\"");
 			add(["help", "we?", "foe"]);
 		}
@@ -27243,7 +27243,7 @@ void Func041A object#(0x41A) () {
 						say("\"It is time for the seance to begin. I have already prepared all of the elaborate reagents and incantations necessary to open my mind, as a portal through which the spirits of the dead may speak. What thou shalt see are not dreams or hallucinations, but actual ghosts who will join with us in communion. Do not be afraid.\"");
 						say("\"I summon you, ghosts! Come join us here and speak with us. Share with us thy visions of this world and the next.\"");
 						if (!gflags[0x0129]) {
-							0xFEEB->show_npc_face1(0x0000);
+							SMITHZHORSE->show_npc_face1(0x0000);
 							say("\"I have heard thy call, Mortegro! In life I was Christopher, blacksmith of Trinsic. My time here is short and I wish to have words with the one who is called the Avatar.\"");
 							say("\"Avatar, I thank thee for protecting my son and for breaking The Fellowship's evil grip over Britannia. But I also bring thee a warning. Many are the spirits in this realm who await thee, and there is but one thing on their mind -- to have their revenge against thee! There is one thing... that thou must... always... remember...\"");
 							UI_remove_npc_face1();
@@ -27251,7 +27251,7 @@ void Func041A object#(0x41A) () {
 							say("\"Oh! I have lost contact with the spirit! Forgive me, but with a contact that intense, the length of time that I can maintain is always shorter.\"");
 							gflags[0x0129] = true;
 						} else if (IOLO->npc_nearby() && (!gflags[0x0131])) {
-							0xFEEB->show_npc_face1(0x0001);
+							SMITHZHORSE->show_npc_face1(0x0001);
 							say("\"My darling husband, Iolo, although I am dead I must tell thee that my love for thee shall never die. Always remember me. Farewell.\"");
 							UI_remove_npc_face1();
 							0x0000->set_conversation_slot();
@@ -70472,13 +70472,13 @@ void Func06E1 object#(0x6E1) () {
 		var0003 = find_nearby(0x0151, 0x000A, MASK_NONE);
 		if (SHAMINO in var0005) {
 			if (var0003) {
-				0xFEEB->show_npc_face0(0x0002);
+				SMITHZHORSE->show_npc_face0(0x0002);
 				say("\"Traitor! Foul murderer! Thou didst kill my Beatrix, faithless liar!\"");
 				say("\"Thou shalt see the power of the King of the White Dragon!\"");
 				UI_remove_npc_face0();
 			}
 		} else if (var0003) {
-			0xFEEB->show_npc_face0(0x0002);
+			SMITHZHORSE->show_npc_face0(0x0002);
 			say("\"I am the King of the White Dragon!\"");
 			say("\"I shall protect thee... I shall take thee beyond all mortal concerns -- into my kingdom of death!\"");
 			UI_remove_npc_face0();
