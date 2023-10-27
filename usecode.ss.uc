@@ -5212,7 +5212,7 @@ void Func0162 shape#(0x162) () {
 		set_item_flag(SI_ZOMBIE);
 		clear_item_say();
 		set_schedule_type(IN_COMBAT);
-		0xFEF2->show_npc_face0(0x0000);
+		HENCH_MAN->show_npc_face0(0x0000);
 		say("\"So, brave warrior come to kill King Goblin? Ha! We speak first...\"");
 		converse (["name", "goblins", "Helm of Monitor", "Simon", "bye"]) {
 			case "name" (remove):
