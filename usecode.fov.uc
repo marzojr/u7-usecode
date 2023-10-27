@@ -353,6 +353,8 @@ enum misc_npcs {
 
 	TIME_LORD	= -284,
 
+	ERETHIAN	= -286,	//Isle of Fire
+
 	JUGGERNAUT	= -259,	//Isle of the Avatar, enemy
 	HOOK		= -291,	//Isle of the Avatar, arch-villain
 	FORSKIS		= -298,	//Isle of the Avatar, arch-villain
@@ -947,12 +949,12 @@ void Func009A shape#(0x9A) () {
 	if (event == SCRIPTED) {
 		var0013 = Func0908();
 		if (gflags[0x030E]) {
-			0xFEE2->show_npc_face(0x0001);
+			ERETHIAN->show_npc_face(0x0001);
 			say("\"I'll speak to thee no more, Avatar!\" He ignores you.*");
 			abort;
 		}
 		if (!gflags[0x0310]) {
-			0xFEE2->say("At your approach, the old man straightens and looking directly at you he says, \"Well met, ",
+			ERETHIAN->say("At your approach, the old man straightens and looking directly at you he says, \"Well met, ",
 				var0013,
 				". I am called Erethian. Although thou dost not know me, I know thee well.");
 			say("I have seen thee destroy Mondain's power and so defeat that misguided mage, I have seen thee vanquish the enchantress Minax, I have also seen, in a very unique way, how thou brought low the hellspawn Exodus.\"");
@@ -961,11 +963,11 @@ void Func009A shape#(0x9A) () {
 			add(["name", "job", "Mondain", "Minax", "Exodus", "bye"]);
 		} else {
 			if (!(gflags[0x032A] || gflags[0x032B])) {
-				0xFEE2->say("\"Greetings once again, ",
+				ERETHIAN->say("\"Greetings once again, ",
 					var0013,
 					". How may I assist thee?\" The blind old man looks unerringly in your direction.");
 			} else {
-				0xFEE2->show_npc_face(0x0001);
+				ERETHIAN->show_npc_face(0x0001);
 				say("\"I'll never get any work done like this! What do you wish of me?\" Erethian seems a little pevish at this point.");
 			}
 			add(["name", "job", "bye"]);
@@ -1013,14 +1015,14 @@ void Func009A shape#(0x9A) () {
 		var0017 = false;
 		converse (0) {
 			case "the Psyche returns":
-				0xFEE2->say("\"Could this possibly be true?\" Erethian's blind eyes light up with unabashed glee. \"What an opportunity I have here.\"");
-				0xFEE2->show_npc_face(0x0001);
+				ERETHIAN->say("\"Could this possibly be true?\" Erethian's blind eyes light up with unabashed glee. \"What an opportunity I have here.\"");
+				ERETHIAN->show_npc_face(0x0001);
 				say("He once again notices your presence. \"Now, do not let any strange ideas of destruction enter thy mind, Avatar. I shan't let thee deprive me of this chance to experience a true wonder of the world. Run along now... Is there not a right to be wronged, somewhere else?");
 				remove("the Psyche returns");
 				fallthrough;
 
 			case "great evil":
-				0xFEE2->show_npc_face(0x0001);
+				ERETHIAN->show_npc_face(0x0001);
 				say("The elderly mage frowns. \"I sense no great evil, but then I never did quite get the knack of cosmic awareness. Nevertheless, don't worry thyself over much. These things tend to work themselves out.\" You feel as if you've just been patted on the head and asked to go play elsewhere.");
 				remove("great evil");
 				fallthrough;
@@ -1034,7 +1036,7 @@ void Func009A shape#(0x9A) () {
 							say("\"If thou dost not have the scroll, I cannot help thee in this matter.\"");
 						} else {
 							say("\"Here we are. Now then, it appears to be written in a strange format. One might even say a code of sorts... I have it! Apparently, the Talisman currently resides in the Great Void. A plane somewhat removed from ours. If thou wishest to gain access to this void, thou shalt need to craft two lenses: one concave, the other convex. Light focused through the properly enchanted lenses will open a conduit between our realm and the void. I believe this treatise speaks of three Talismans of Principle that send out a call to the Infinity Talisman and bring it here. Once here, it would seem that its sole purpose is to coerce a powerful force into the void.\" A thought hits the mage like lightning strikes a tree. \"Oh no, Avatar... Thou shan't gain any more aid from me. I may be blind, but I see through thy sham. I'll not help thee send the Core into the void.\" Erethian falls silent, and it would appear that he'll speak no more.");
-							0xFEE2->hide();
+							ERETHIAN->hide();
 							0xFEDC->say("Arcadion's voice whispers to you like ripple in still pond, \"Fear not, my master. I have some knowledge of these matters.\"*");
 							gflags[0x030E] = true;
 							abort;
@@ -1049,7 +1051,7 @@ void Func009A shape#(0x9A) () {
 							say("\"I needs must touch the scroll to glean its meaning. Else I'll not be able to help thee in this matter.\"");
 						} else {
 							say("\"Here we are. Now then, it appears to be written in a strange format. One might even say a code of sorts... I have it! Apparently, the Talisman currently resides in the Great Void. A plane somewhat removed from ours. If thou wishest to gain access to this void, thou shalt need to craft two lenses: one concave, the other convex. Light focused through the properly enchanted lenses will open a conduit between our realm and the void. I believe this treatise speaks of three Talismans of Principle that send out a call to the Infinity Talisman and bring it here. Once here, it would seem that its sole purpose is to coerce a powerful force into the void.\" A thought hits the mage like lightning strikes a tree. \"Oh no, Avatar... Thou shan't gain any more aid from me. I may be blind, but I see through thy sham. I'll not help thee send the Core into the void.\" Erethian falls silent, and it would appear that he'll speak no more.");
-							0xFEE2->hide();
+							ERETHIAN->hide();
 							0xFEDC->say("Arcadion's voice whispers to you like ripple in still pond, \"Fear not, my master. I have some knowledge of these matters.\"*");
 							gflags[0x030E] = true;
 							abort;
@@ -1067,12 +1069,12 @@ void Func009A shape#(0x9A) () {
 				break;
 
 			case "black sword":
-				0xFEE2->show_npc_face(0x0001);
+				ERETHIAN->show_npc_face(0x0001);
 				say("Erethian nods his head when you tell him of your dilemma with the black sword. \"Yes, I can see how the blade would be too clumsy to swing in combat. However, if thou were to bind a magical source of power into the hilt of the blade, thou mightest be able to counteract the unwieldy nature of the sword.\"");
 				if (AVATAR->get_npc_object()->get_cont_items(0x02F8, QUALITY_ANY, 0x000D)) {
 					0xFEDD->say("The little gem sparks up at this turn of the conversation. \"I believe that in my current form, I could serve perfectly well as the blade's stabilizing force. In truth, this would allow me to give thee access to some of my more dramatic powers.\" The daemon sounds excited at this prospect, perhaps a little too excited.");
 					0xFEDD->hide();
-					0xFEE2->show_npc_face(0x0001);
+					ERETHIAN->show_npc_face(0x0001);
 					say("Erethian's voice is quiet as he says, \"Consider well before thou bindest Arcadion into the sword. For it is true that he will be able to solve the sword's problem of balance, but will he be able to solve his own problems as well?\"");
 					add("problems");
 				} else if (gflags[0x032F]) {
@@ -1130,9 +1132,9 @@ void Func009A shape#(0x9A) () {
 				say("And that thou didst, with the Quicksword, Enilno. That\tact will most likely have tales sung about it for the next eon.\" Under his breath he adds, \"Even if Iolo's the only one who sings it.\"");
 				if (find_nearest(0x01D1, 0x0028)) {
 					IOLO->say("With a look of indignation Iolo says, \"Pardon me, sir. But I'll have thee know that ballads of the Avatar still grace all of the finest drinking establishments of Britannia.\"");
-					0xFEE2->say("\"And what a dubious distinction that is.\" The corners of the mage's mouth come up in a delicate smile.");
+					ERETHIAN->say("\"And what a dubious distinction that is.\" The corners of the mage's mouth come up in a delicate smile.");
 					IOLO->say("An angry retort dies on Iolo's lips as the elderly mage lifts his hands in a gesture of peace.");
-					0xFEE2->say("\"Please, forgive the offense I have given. Thou shouldst know that I have seen, almost first hand, the Avatar's bravery in the face of adversity.");
+					ERETHIAN->say("\"Please, forgive the offense I have given. Thou shouldst know that I have seen, almost first hand, the Avatar's bravery in the face of adversity.");
 					say("I have nothing but the highest regard for the Destroyer of the Age of Darkness and Harbinger of the Age of Enlightenment.");
 					IOLO->hide();
 				}
@@ -1287,9 +1289,9 @@ void Func009A shape#(0x9A) () {
 				if (AVATAR->get_npc_object()->get_cont_items(0x02F8, QUALITY_ANY, 0x000D)) {
 					0xFEDD->say("The gem glows brighter, \"'Tis good to see the last of thee, also, old man. Perhaps in another life, I shall be thy master, and thou the slave.\" The daemon lets out a chilling little laugh.");
 					0xFEDD->hide();
-					0xFEE2->show_npc_face(0x0001);
+					ERETHIAN->show_npc_face(0x0001);
 					say("Erethian looks a little shaken at hearing the daemon's voice, but quickly recovers his composure. \"I think not, daemon. I'm not at all sure that there is a way for thou to get out of that little gem.\" The elderly mage's expression is unreadable.*");
-					0xFEE2->show_npc_face(0x0000);
+					ERETHIAN->show_npc_face(0x0000);
 				}
 				remove("daemon gem");
 				fallthrough;
@@ -56740,7 +56742,7 @@ void Func0696 object#(0x696) () {
 			} else {
 				var0007 = UI_update_last_created(var0006);
 				Func087D();
-				0xFEE2->show_npc_face(0x0001);
+				ERETHIAN->show_npc_face(0x0001);
 				say("Erethian looks irritated by your question, \"'Tis not a hindrance for one sensitive enough to feel the ridges the ink\tmakes on the page.");
 				say("Dost thou think me an invalid? Know that in my searches, I\thave faced dangers that would turn even one such as thee to quivering flesh.\"");
 				say("The mage's eyes begin to glow softly. \"My magic is strong enough to tear down the fabric of reality and reconstruct it as I see fit.");
@@ -56750,19 +56752,19 @@ void Func0696 object#(0x696) () {
 				var0000 = true;
 			}
 		} else if (!gflags[0x032C]) {
-			0xFEE2->show_npc_face(0x0003);
+			ERETHIAN->show_npc_face(0x0003);
 			say("\"Even the great dragon's form is not beyond my power.\" Erethian begins speaking softly, then rises to a crescendo with the words,");
 			say("\"Rel An-Quas Ailem In BAL-ZEN\"!*");
 			var0001 = true;
 		} else {
-			0xFEE2->show_npc_face(0x0002);
+			ERETHIAN->show_npc_face(0x0002);
 			say("The dragon looks down its snout menacingly at what you guess is meant to be you. Even in this powerful form, it would seem that Erethian is still blind, however, you get the impression that he is quite capable of taking care of himself.");
 			say("\"Enough of these silly charades, I really am quite busy with my studies.\" He intones the words,");
 			say("\"An Ort Rel\"!*");
 			var0005 = true;
 		}
 	} else {
-		0xFEE2->show_npc_face(0x0001);
+		ERETHIAN->show_npc_face(0x0001);
 		if (!gflags[0x032B]) {
 			var0007 = set_last_created();
 			if (!UI_is_not_blocked(var0006, 0x01F4, 0x0000)) {
@@ -56877,7 +56879,7 @@ void Func0696 object#(0x696) () {
 		};
 	}
 	if (var0004) {
-		0xFEE2->show_npc_face(0x0001);
+		ERETHIAN->show_npc_face(0x0001);
 		if (!gflags[0x032A]) {
 			say("The old mage seems on the verge of saying something, stops then says, \"Were quarter's not so confined here, I'd show thee that my blindness in no way hampers my abilities.\" His affliction seems to be a touchy subject with the mage.*");
 		} else {
@@ -57326,7 +57328,7 @@ void Func069E object#(0x69E) () {
 	var var0000;
 	var var0001;
 
-	0xFEE2->show_npc_face(0x0001);
+	ERETHIAN->show_npc_face(0x0001);
 	say("A look of grim determination comes to Erethian's lined features. He pushes up his sleeves like a blacksmith about to shoe a high strung horse,");
 	say("\"Careful, now.\" The old mage says solicitously, \"The powers I am about to release are capricious and fickle. I wouldst not like to see something untoward happen to thee.\"");
 	if (gflags[0x0003]) {
@@ -57334,7 +57336,7 @@ void Func069E object#(0x69E) () {
 	} else {
 		say("You feel a great surge in the ether, which seems to temporarily stabilize it in this area.*");
 	}
-	0xFEE2->hide();
+	ERETHIAN->hide();
 	var0000 = script item {
 		wait 2;
 		actor frame bowing;
@@ -57522,10 +57524,10 @@ void Func06A0 object#(0x6A0) () {
 	}
 	if (var0001) {
 		if (var0003) {
-			0xFEE2->show_npc_face(0x0001);
+			ERETHIAN->show_npc_face(0x0001);
 			say("Amidst muttered curses detailing the uselessness of ether and bothersome inter-dimensional beings, Erethian intones the magical words,");
 			say("\"An Vas Ailem!   Kal Bet Ailem!\"*");
-			0xFEE2->hide();
+			ERETHIAN->hide();
 			var000D = script item {
 				actor frame cast_up;
 				wait 4;
@@ -57562,7 +57564,7 @@ void Func06A0 object#(0x6A0) () {
 				}
 			}
 		}
-		0xFEE2->show_npc_face(0x0001);
+		ERETHIAN->show_npc_face(0x0001);
 		say("Little beads of sweat appear on the elderly mage's furrowed brow. \"That was a bit harder than I'd expected.\" He pauses to mop his forehead with the tip of his sleeve, \"I had to redirect a small underground river for the well to tap. Now, then. Thou shalt have need of some few tools to make use of this equipment, shan't thee?\" His rhetorical question goes unanswered\tas he once again prepares to unleash his will upon the world.");
 		if (var000E) {
 			var0016 = var000E->get_item_quality();
@@ -57570,7 +57572,7 @@ void Func06A0 object#(0x6A0) () {
 				say("He stops himself for a moment and says, \"If perchance thou hadst some item or other laying upon the floor here, thou'lt find it within yonder chest.\" He motions to the chest sitting on the floor, then continues with his spell.*");
 			}
 		}
-		0xFEE2->hide();
+		ERETHIAN->hide();
 		if (gflags[0x0003]) {
 			var000D = script item {
 				wait 2;
@@ -59297,7 +59299,7 @@ void Func06F5 object#(0x6F5) () {
 	var var0007;
 	var var0008;
 
-	0xFEE2->show_npc_face(0x0001);
+	ERETHIAN->show_npc_face(0x0001);
 	say("Erethian's face begins to take on an ashen palor, but he looks contented with a job well done. \"As I have said, I myself once attempted to create an artifact of great power. I crafted the hilt from a dark substance that is immutable, save by magical means. The blade, however, is cast of an alloy of this substance and the purest metals known to Britannia. My artistic skills served me well enough to fashion the hilt but, alas, the strength was not in my arm to beat a good temper into the blade. Perhaps, thou canst finish this great artifact for me...\" He pulls a poorly worked blade with a fine hilt out of thin air. \"Fear not to touch the hilt when the blade is hot, for heat apparently does not travel well across the medium of the pure, black substance. I wish thee good luck.\"");
 	var0000 = UI_create_new_object(0x029C);
 	var0000->set_item_frame(0x000D);
@@ -59312,7 +59314,7 @@ void Func06F5 object#(0x6F5) () {
 		var0003[0x0003] += 0x0002;
 		var0004 = UI_update_last_created(var0003);
 	}
-	0xFEE2->hide();
+	ERETHIAN->hide();
 	set_schedule_type(PATROL);
 	AVATAR->get_npc_object()->clear_item_flag(DONT_RENDER);
 	var0005 = script item {
@@ -59390,7 +59392,7 @@ void Func06F6 object#(0x6F6) () {
 		}
 		if (var0000) {
 			say("\"Yes, Master. How may I serve thee?\" The dark form in the mirror bows deeply.");
-			0xFEE2->show_npc_face(0x0001);
+			ERETHIAN->show_npc_face(0x0001);
 			var0005 = "Erethian";
 			if (!gflags[0x0310]) {
 				var0005 = "the mage";
@@ -60604,7 +60606,7 @@ void Func06F8 object#(0x6F8) () {
 		}
 		if (gflags[0x033F]) {
 			if (!gflags[0x02EE]) {
-				0xFEE2->show_npc_face(0x0001);
+				ERETHIAN->show_npc_face(0x0001);
 				say("\"No! Thou must not do this!\" Erethian's voice is full of anguish. He raises his arms and begins a powerful spell.");
 				say("\"Vas Ort Rel Tym...\"");
 				say("He stops mid-spell and begins another, pointing towards the Talisman of Infinity.");

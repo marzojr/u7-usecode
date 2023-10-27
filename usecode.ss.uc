@@ -327,7 +327,8 @@ enum test_of_purity {
 enum shamino_castle {
 	HENCH1 = -205,
 	HENCH2 = -203, // Starts at House of the Dead
-	HENCH3 = -204 // Starts at House of the Dead
+	HENCH3 = -204, // Starts at House of the Dead
+	BEATRIX	= -286,
 };
 
 // Monk Isle residents
@@ -21717,7 +21718,7 @@ void Func0402 object#(0x402) () {
 		}
 		if (gflags[0x025B]) {
 			if ((Func0994() != 0x0010) && ((!gflags[0x0004]) && (Func0994() != 0x0018))) {
-				0xFEE2->show_npc_face0(0x0000);
+				BEATRIX->show_npc_face0(0x0000);
 				say("\"Do not die, my sweet King...\"");
 				SHAMINO->show_npc_face1(0x0000);
 				say("\"Beatrix, is that thee?\"");
@@ -71944,7 +71945,7 @@ void Func06FC object#(0x6FC) () {
 	var0001 = var0000->add_cont_items(0x0001, 0x02A4, 0x0005, FRAME_ANY, 0x0012);
 	var0002 = get_item_quality();
 	remove_item();
-	0xFEE2->show_npc_face0(0x0000);
+	BEATRIX->show_npc_face0(0x0000);
 	if (var0002 == 0x0000) {
 		say("\"So, thou didst finally think to return, King? It is too late! All are dead, the Goblins conquered all...\"");
 		var0001 = script var0000 {
