@@ -11215,7 +11215,7 @@ void Func0294 shape#(0x294) () {
 	if (event == SCRIPTED) {
 		run_schedule();
 		clear_item_say();
-		0xFEF6->show_npc_face0(0x0000);
+		GARG_PRISONER->show_npc_face0(0x0000);
 		if (gflags[0x0004] == false) {
 			abort;
 		}
