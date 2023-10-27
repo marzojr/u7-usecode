@@ -14480,7 +14480,7 @@ void Func0319 shape#(0x319) () {
 		set_schedule_type(TALK);
 	}
 	if (event == DEATH) {
-		0xFEEC->show_npc_face0(0x0000);
+		SONAR->show_npc_face0(0x0000);
 		say("\"This nightmare hath become too much to bear! The Avatar himself hath turned against me!\" *\"The Guardian's foul deeds have even corrupted our last bastion of virtue. Britannia is lost without its hero! I must awake...\"");
 		UI_remove_npc_face0();
 		var0004 = get_object_position();
@@ -14489,7 +14489,7 @@ void Func0319 shape#(0x319) () {
 		kill_npc();
 	}
 	if (event == DOUBLECLICK) {
-		0xFEEC->show_npc_face0(0x0000);
+		SONAR->show_npc_face0(0x0000);
 		say("\"Avatar! At last thou hast come. Seeing thee again hath brought me strength.\"");
 		say("\"Dost thou know that I expected to find thee here, in my dreams? I wish that thou wert truly here to counsel me...");
 		converse (["name", "job", "bye"]) {

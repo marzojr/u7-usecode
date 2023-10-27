@@ -50184,8 +50184,8 @@ void Func0608 object#(0x608) () {
 			var0003,
 			"!\"*");
 		CLONE_ELIZABETH->hide();
-		0xFEEC->say("\"Death to the Avatar! Long live The Guardian!\" screams Elizabeth.*");
-		0xFEEC->hide();
+		CLONE_ABRAHAM->say("\"Death to the Avatar! Long live The Guardian!\" screams Elizabeth.*");
+		CLONE_ABRAHAM->hide();
 		BATLIN->say("\"So be it! The Fellowship hereby sentences the Avatar to immediate death! Kill ",
 			var0003,
 			" now!\"*");
