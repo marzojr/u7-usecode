@@ -15611,7 +15611,7 @@ void Func032B shape#(0x32B) () {
 		DUPRE->set_item_flag(MET);
 		SHAMINO->set_item_flag(MET);
 		IOLO->set_item_flag(MET);
-		0xFEFC->set_item_flag(MET);
+		BUSTER->set_item_flag(MET);
 		0xFEFB->set_item_flag(MET);
 		NEYOBI->set_item_flag(SI_ZOMBIE);
 		GWENNO->set_item_flag(SI_ZOMBIE);
