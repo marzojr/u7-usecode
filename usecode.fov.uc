@@ -47673,7 +47673,7 @@ void Func04F4 object#(0x4F4) () {
 	if (event == DOUBLECLICK) {
 		CAIRBRE->show_npc_face(0x0000);
 		var0000 = Func08F7(0xFF03);
-		var0001 = Func08F7(0xFF04);
+		var0001 = Func08F7(KALLIBRUS);
 		var0002 = Func0909();
 		add(["name", "job", "bye"]);
 		if (!gflags[0x02C8]) {
@@ -49318,7 +49318,7 @@ void Func04FC object#(0x4FC) () {
 	var var0004;
 
 	if (event == DOUBLECLICK) {
-		0xFF04->show_npc_face(0x0000);
+		KALLIBRUS->show_npc_face(0x0000);
 		var0000 = Func08F7(0xFF03);
 		var0001 = Func08F7(CAIRBRE);
 		var0002 = false;
@@ -49358,7 +49358,7 @@ void Func04FC object#(0x4FC) () {
 					say("*");
 					CAIRBRE->say("\"He, uh, means by bonded, that we are very good friends.\" He turns to the gargoyle.~~\"I told thee to be careful how thou dost phrase things. Thou couldst start many false rumors if thou wert not more specific.\"~~The gargoyle nods sheepishly.*");
 					CAIRBRE->hide();
-					0xFF04->show_npc_face(0x0000);
+					KALLIBRUS->show_npc_face(0x0000);
 				}
 				var0002 = true;
 				remove("Cairbre");
@@ -49397,7 +49397,7 @@ void Func04FC object#(0x4FC) () {
 						var0003,
 						", loyal to the end!\" he says, patting the gargoyle on the shoulder.*");
 					CAIRBRE->hide();
-					0xFF04->show_npc_face(0x0000);
+					KALLIBRUS->show_npc_face(0x0000);
 				}
 				remove("woman");
 				fallthrough;
@@ -49426,7 +49426,7 @@ void Func04FD object#(0x4FD) () {
 	if (event == DOUBLECLICK) {
 		0xFF03->show_npc_face(0x0000);
 		var0000 = Func0909();
-		var0001 = Func08F7(0xFF04);
+		var0001 = Func08F7(KALLIBRUS);
 		var0002 = Func08F7(CAIRBRE);
 		add(["name", "job", "bye"]);
 		if (!gflags[0x02CB]) {
@@ -70844,7 +70844,7 @@ void Func08A5 0x8A5 () {
 	var var0002;
 	var var0003;
 
-	var0000 = 0xFF04->get_npc_object();
+	var0000 = KALLIBRUS->get_npc_object();
 	var0001 = var0000->get_schedule_type();
 	var0002 = "";
 	var0003 = UI_die_roll(0x0001, 0x0004);
