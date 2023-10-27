@@ -15619,7 +15619,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [HAZARD, 0xFEE8, D_STEFANO, D_CANTRA, D_BYRIN, ANTI_SHAM, ANTI_DUPRE, ANTI_IOLO, CELLIA, FLICKEN, HARNNA, KRAYG, LUCILLA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, DRAYGAN, MARSTEN, SPEKTOR, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, MORGHRIM];
+		var0008 = [HAZARD, LORD_BRITISH, D_STEFANO, D_CANTRA, D_BYRIN, ANTI_SHAM, ANTI_DUPRE, ANTI_IOLO, CELLIA, FLICKEN, HARNNA, KRAYG, LUCILLA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, DRAYGAN, MARSTEN, SPEKTOR, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, MORGHRIM];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -18203,7 +18203,7 @@ void Func0395 shape#(0x395) () {
 		var0000 = true;
 	}
 	if ((event == DEATH) && HAZARD->get_item_flag(SI_TOURNAMENT)) {
-		0xFEE8->show_npc_face0(0x0000);
+		LORD_BRITISH->show_npc_face0(0x0000);
 		say("\"Argh! Thou thinkest thou canst save thy precious Gwani by slaying me? Fool! Thou hast the brain of a headless!\" *\"I laugh at thee, even as I lie here dying in mine own blood. The Gwani are doomed I tell thee, doomed like a feeble rabbit in my trap, hahaha...\"");
 		UI_remove_npc_face0();
 		HAZARD->clear_item_flag(SI_TOURNAMENT);
@@ -18226,7 +18226,7 @@ void Func0395 shape#(0x395) () {
 	if (event == STARTED_TALKING) {
 		run_schedule();
 		clear_item_say();
-		0xFEE8->show_npc_face0(0x0000);
+		LORD_BRITISH->show_npc_face0(0x0000);
 		say("\"We have stalked each other long enough!\"");
 		converse (["Are you The Trapper?", "bye"]) {
 			case "Are you The Trapper?" (remove):

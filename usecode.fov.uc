@@ -344,6 +344,10 @@ enum misc_npcs {
 	CLONE_ELIZABETH	= -275,	//Alagner's murder cutscene
 	CLONE_ABRAHAM	= -276,	//Alagner's murder cutscene
 
+	HYDRA_SHANDU	= -280,	//hydra head
+	HYDRA_SHANDA	= -281,	//hydra head
+	HYDRA_SHANDO	= -282,	//hydra head
+
 	JUGGERNAUT	= -259,	//Isle of the Avatar, enemy
 	HOOK		= -291,	//Isle of the Avatar, arch-villain
 	FORSKIS		= -298,	//Isle of the Avatar, arch-villain
@@ -33314,7 +33318,7 @@ void Func0495 object#(0x495) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFEE8->show_npc_face(0x0000);
+	HYDRA_SHANDU->show_npc_face(0x0000);
 	var0000 = 0x0000;
 	var0001 = UI_get_party_list();
 	var0002 = 0x0000;
@@ -33327,11 +33331,11 @@ void Func0495 object#(0x495) () {
 		0xFEE6->say("The head on the right looks up and at you.~~\"I wonder if it is good to eat.\"*");
 		0xFEE6->hide();
 		0xFEE7->say("The middle head wakes with a start, sees you, becomes alarmed, and begins to snort excitedly.*");
-		0xFEE8->say("\"Fear not, brother; we know it's there.\"*");
+		HYDRA_SHANDU->say("\"Fear not, brother; we know it's there.\"*");
 		0xFEE7->hide();
 		0xFEE6->say("\"I wonder if it talks?\"*");
 		0xFEE6->hide();
-		0xFEE8->show_npc_face(0x0000);
+		HYDRA_SHANDU->show_npc_face(0x0000);
 		gflags[0x02C7] = true;
 	} else {
 		say("\"We are not talking to thee! We are trying to eat thee!\"*");
@@ -33346,7 +33350,7 @@ void Func0495 object#(0x495) () {
 			0xFEE6->hide();
 			0xFEE7->say("Shanda shakes his head and glares at you.*");
 			0xFEE7->hide();
-			0xFEE8->show_npc_face(0x0000);
+			HYDRA_SHANDU->show_npc_face(0x0000);
 			remove("name");
 			add(["Shandu", "Shanda", "Shando"]);
 			fallthrough;
@@ -33361,17 +33365,17 @@ void Func0495 object#(0x495) () {
 			0xFEE7->hide();
 			0xFEE6->say("\"Shanda says that thou shouldst refrain from saying his name. He does not like it when his food says his name.\"*");
 			0xFEE6->hide();
-			0xFEE8->show_npc_face(0x0000);
+			HYDRA_SHANDU->show_npc_face(0x0000);
 			remove("Shanda");
 			fallthrough;
 
 		case "Shando":
 			0xFEE6->say("\"That is me. I am the oldest brother.\"*");
-			0xFEE8->say("\"We are all connected, Shando! Thou cannot be older!\"*");
+			HYDRA_SHANDU->say("\"We are all connected, Shando! Thou cannot be older!\"*");
 			0xFEE6->say("\"Mine head was the first to breathe the air.\"*");
-			0xFEE8->say("Shandu spits.~~\"What does it matter? Our food does not care which of us is the eldest!\"*");
+			HYDRA_SHANDU->say("Shandu spits.~~\"What does it matter? Our food does not care which of us is the eldest!\"*");
 			0xFEE6->hide();
-			0xFEE8->show_npc_face(0x0000);
+			HYDRA_SHANDU->show_npc_face(0x0000);
 			remove("Shando");
 			fallthrough;
 
@@ -33380,11 +33384,11 @@ void Func0495 object#(0x495) () {
 			0xFEE7->say("Shanda opens his mouth wide and emits a burst of flame.*");
 			0xFEE7->hide();
 			0xFEE6->say("\"He thinks that is a joke. Job! Ha! I think it is amusing, too. I have never heard my food tell jokes.\"*");
-			0xFEE8->say("\"Ah, but brothers, we -do- have a job.\"*");
+			HYDRA_SHANDU->say("\"Ah, but brothers, we -do- have a job.\"*");
 			0xFEE6->say("\"We do?\"*");
-			0xFEE8->say("\"We guard the Caddellite, do we not? Our purpose in life is to guard the Caddellite!\"");
+			HYDRA_SHANDU->say("\"We guard the Caddellite, do we not? Our purpose in life is to guard the Caddellite!\"");
 			0xFEE6->hide();
-			0xFEE8->show_npc_face(0x0000);
+			HYDRA_SHANDU->show_npc_face(0x0000);
 			add("Caddellite");
 			fallthrough;
 
@@ -33392,7 +33396,7 @@ void Func0495 object#(0x495) () {
 			if (var0000 == 0x0000) {
 				0xFEE7->say("Shanda becomes excited and snorts as if he were saying several sentences.");
 				0xFEE7->hide();
-				0xFEE8->show_npc_face(0x0000);
+				HYDRA_SHANDU->show_npc_face(0x0000);
 				remove("Caddellite");
 				add("What did he say?");
 				var0000 = 0x0001;
@@ -33414,10 +33418,10 @@ void Func0495 object#(0x495) () {
 			0xFEE6->hide();
 			0xFEE7->say("Shanda makes a horrid growling noise.*");
 			0xFEE7->hide();
-			0xFEE8->say("\"Shanda says he is hungry!\"*");
+			HYDRA_SHANDU->say("\"Shanda says he is hungry!\"*");
 			0xFEE6->say("\"So am I!\"*");
 			0xFEE6->hide();
-			0xFEE8->say("\"Now that thou dost mention it, I am feeling a few hunger pangs myself. If we did not have to protect the Caddellite, I would eat this creature in a single gulp!\"");
+			HYDRA_SHANDU->say("\"Now that thou dost mention it, I am feeling a few hunger pangs myself. If we did not have to protect the Caddellite, I would eat this creature in a single gulp!\"");
 			remove("guarding");
 			add(["echo", "protect"]);
 			fallthrough;
@@ -33428,7 +33432,7 @@ void Func0495 object#(0x495) () {
 			0xFEE6->hide();
 			0xFEE7->say("Shanda lets out a low growl.*");
 			0xFEE7->hide();
-			0xFEE8->say("\"Shanda says he wants something to eat!\"");
+			HYDRA_SHANDU->say("\"Shanda says he wants something to eat!\"");
 			remove("echo");
 			fallthrough;
 
@@ -33438,7 +33442,7 @@ void Func0495 object#(0x495) () {
 			0xFEE7->hide();
 			0xFEE6->say("\"Creature! Thou art making Shanda angry! He thinks that thou art attempting to steal the Caddellite! Beware!\"*");
 			0xFEE6->hide();
-			0xFEE8->show_npc_face(0x0000);
+			HYDRA_SHANDU->show_npc_face(0x0000);
 			remove("protect");
 			add("steal");
 			fallthrough;
@@ -33447,12 +33451,12 @@ void Func0495 object#(0x495) () {
 			say("Shandu becomes enraged.~~\"I knew it! It is trying to steal our Caddellite!\"~~Shandu addresses his brothers.~~\"We must not delay any longer.\"*");
 			0xFEE7->say("Shanda roars angrily!*");
 			0xFEE7->hide();
-			0xFEE8->say("\"That is a good idea, my brother!\"~~Shandu turns to you.~~ [\"This creature vaguely resembles a troll, only it smells a little more pleasant. Dost thou think it might taste better than a troll, Shando?\"*");
+			HYDRA_SHANDU->say("\"That is a good idea, my brother!\"~~Shandu turns to you.~~ [\"This creature vaguely resembles a troll, only it smells a little more pleasant. Dost thou think it might taste better than a troll, Shando?\"*");
 			0xFEE6->say("\"We shall not know until we try!\"*");
 			0xFEE6->hide();
 			0xFEE7->say("Shanda nods his head furiously, licking his lips.*");
 			0xFEE7->hide();
-			0xFEE8->say("\"Very well! Let's eat it!\"*");
+			HYDRA_SHANDU->say("\"Very well! Let's eat it!\"*");
 			HYDRA->get_npc_object()->set_alignment(EVIL);
 			HYDRA->get_npc_object()->set_schedule_type(IN_COMBAT);
 			abort;
