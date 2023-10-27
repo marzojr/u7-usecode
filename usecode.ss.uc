@@ -15414,7 +15414,7 @@ void Func0326 shape#(0x326) () {
 	if (event == SCRIPTED) {
 		if (gflags[0x00CF] == false) {
 			if (AVATAR->get_distance(LORTHONDO) < 0x002D) {
-				0xFF00->say("\"Avatar! Because thou didst keep thy promise to release me\"");
+				SUPER_GOBLIN->say("\"Avatar! Because thou didst keep thy promise to release me\"");
 				say("\"now shall I return the favor.\"");
 				say("\"This dark sorcerer will trouble thee no more...\"");
 				UI_remove_npc_face0();
@@ -60374,13 +60374,13 @@ void Func0614 object#(0x614) () {
 		return;
 	}
 	if (var0000 == 0x0017) {
-		0xFF00->say("\"Hah hah hah hah!\"");
-		0xFF00->hide();
+		SUPER_GOBLIN->say("\"Hah hah hah hah!\"");
+		SUPER_GOBLIN->hide();
 		return;
 	}
 	if (var0000 == 0x0018) {
-		0xFF00->say("\"I have paid my debt to thee, and our bargain is concluded. I shall not aid thee again. Beware the Banes of Chaos, Avatar!\"");
-		0xFF00->hide();
+		SUPER_GOBLIN->say("\"I have paid my debt to thee, and our bargain is concluded. I shall not aid thee again. Beware the Banes of Chaos, Avatar!\"");
+		SUPER_GOBLIN->hide();
 		return;
 	}
 	if (var0000 == 0x0019) {
@@ -78766,9 +78766,9 @@ void Func07D8 object#(0x7D8) () {
 		Func09AC(LUCILLA, 0x03F6, 0x0A45, WAIT);
 		HARNNA->set_new_schedules([DAWN, NOON, AFTERNOON, NIGHT], [0x000B, LOITER, WANDER, SLEEP], [0x034A, 0x0AB4, 0x0409, 0x0A24, 0x03A9, 0x0A1B, 0x035B, 0x0A8A]);
 		HARNNA->run_schedule();
-		0xFF00->set_alignment(EVIL);
-		0xFF00->move_object([0x040C, 0x0A26]);
-		0xFF00->set_schedule_type(IN_COMBAT);
+		SUPER_GOBLIN->set_alignment(EVIL);
+		SUPER_GOBLIN->move_object([0x040C, 0x0A26]);
+		SUPER_GOBLIN->set_schedule_type(IN_COMBAT);
 		Func09AC(BUCIA, 0x0963, 0x0815, WAIT);
 		Func09AC(HAWK, 0x08C2, 0x0715, WAIT);
 		Func09AC(GUSTACIO, 0x0978, 0x0819, WAIT);

@@ -49886,7 +49886,7 @@ void Func0500 object#(0x500) () {
 	}
 	var0000 = UI_get_party_list();
 	var0001 = get_npc_object()->get_schedule_type();
-	0xFF00->show_npc_face(0x0000);
+	XORINIA->show_npc_face(0x0000);
 	if (!(var0001 == TALK)) {
 		say("The wisp does not respond.*");
 		abort;
