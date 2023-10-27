@@ -15346,7 +15346,7 @@ void Func0326 shape#(0x326) () {
 		}
 		if (!gflags[0x0006]) {
 			UI_close_gumps();
-			0xFEFF->show_npc_face0(0x0000);
+			BILLY_CAIN->show_npc_face0(0x0000);
 			say("\"Where hast thou taken me, Avatar?!\"");
 			say("\"I served thee well upon the Isle of Fire! Why hast thou brought me to this cold place?\"");
 			say("\"I gave thee the power of life and death over thine enemies! And see how thou hast repaid me?! I remain bound within this jewel... In a land where I cannot feed! The veins of power have been disrupted! Release me! Release me...\"");
@@ -15354,7 +15354,7 @@ void Func0326 shape#(0x326) () {
 			abort;
 		}
 		UI_close_gumps();
-		0xFEFF->show_npc_face0(0x0000);
+		BILLY_CAIN->show_npc_face0(0x0000);
 		say("\"I shall offer thee mine aid once again, Avatar... Thou dost not possess the skill or power enough to overcome the madman Lorthondo thou must face. I do, but not within the constraints of this gem in which thou didst bind me.\"");
 		say("\"Free me and I shall help thee win free of this place!\"");
 		if (Func0955() == true) {
@@ -15455,7 +15455,7 @@ void Func0326 shape#(0x326) () {
 		}
 		if (gflags[0x0006]) {
 			UI_close_gumps();
-			0xFEFF->show_npc_face0(0x0000);
+			BILLY_CAIN->show_npc_face0(0x0000);
 			say("\"Avatar, thou must set me free now! The stone's power is quickly diminishing, and this evil wizard will take thee before long.\" ~\"If thou wilt but liberate me from this crystal prison I shall serve thee once more before departing from thy side...\"");
 			UI_remove_npc_face0();
 		}
@@ -53533,7 +53533,7 @@ void Func04A5 object#(0x4A5) () {
 			var0001 = script var0000 after 2 ticks {
 				call Func04A5;
 			};
-			0xFEFF->show_npc_face0(0x0000);
+			BILLY_CAIN->show_npc_face0(0x0000);
 			say("\"At last thou hast found me, Avatar... I thought that I was free of thee when that strange lightning teleported me to this place...\" ~\"But now we are joined and I shall remain with thee until thou dost release me!\"");
 			say("\"I have fulfilled the task thou didst set for me back in Britannia. Did I not serve thee well on the Isle of Fire? Thou didst not bind me for service in another land. Thou shouldst release me from my prison to be free again. Wilt thou?\"");
 			if (Func0955() == true) {
