@@ -338,6 +338,11 @@ enum misc_npcs {
 	COSMO		= -253,	//Dungeon Destard, virgin
 	LASHER		= -254,	//Dungeon Destard, unicorn and virgin-detector
 
+	CLONE_HOOK		= -273,	//Alagner's murder cutscene
+	CLONE_FORSKIS	= -274,	//Alagner's murder cutscene
+	CLONE_ELIZABETH	= -275,	//Alagner's murder cutscene
+	CLONE_ABRAHAM	= -276,	//Alagner's murder cutscene
+
 	JUGGERNAUT	= -259,	//Isle of the Avatar, enemy
 	HOOK		= -291,	//Isle of the Avatar, arch-villain
 	FORSKIS		= -298,	//Isle of the Avatar, arch-villain
@@ -50156,7 +50161,7 @@ void Func0608 object#(0x608) () {
 		var0000 = UI_is_pc_female();
 		BATLIN->say("\"Avatar! Stop where thou art! Thou shalt not succeed in thy quest to destroy the Black Gate! Art thou mad??! The Guardian is much too powerful for thee! He shall crush thee like an insect! The fate of Britannia now belongs to him and to The Fellowship! The Guardian is the land's true ruler! Bow down to him, Avatar, and perhaps he shall give thee a place at his side. Bow down to him -now-!\"*");
 		BATLIN->hide();
-		0xFEEF->show_npc_face(0x0000);
+		CLONE_HOOK->show_npc_face(0x0000);
 		if (var0000) {
 			var0001 = "She";
 			var0002 = "her";
@@ -50172,7 +50177,7 @@ void Func0608 object#(0x608) () {
 			" is dangerous! Cut ",
 			var0002,
 			" throat! I say we attack -now-!\"*");
-		0xFEEF->hide();
+		CLONE_HOOK->hide();
 		0xFEEE->say("Forskis shouts, \"To kill! To kill!\"*");
 		0xFEEE->hide();
 		0xFEED->say("Abraham yells, \"Let us make fish bait out of ",

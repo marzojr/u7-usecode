@@ -4463,7 +4463,7 @@ void Func013E shape#(0x13E) () {
 			UI_init_conversation();
 			0xFEE1->show_npc_face0(0x0000);
 			say("\"Thy fire shall warm the heart of my trap, Palos. I shall rely on thee to make sure the Avatar feels the warmth of our welcome.\"");
-			0xFEEF->show_npc_face1(0x0000);
+			MEELOSE->show_npc_face1(0x0000);
 			say("\"To be my great pleasure. To look forward to the meeting...\"");
 			UI_remove_npc_face1();
 			0x0000->set_conversation_slot();
@@ -59169,7 +59169,7 @@ void Func0510 object#(0x510) () {
 		PALOS->si_path_run_usecode([0x08B2, 0x02C8, 0x0000], PATH_FAILURE, PALOS, Func0510, true);
 	}
 	if (event == PATH_SUCCESS) {
-		0xFEEF->show_npc_face0(0x0000);
+		MEELOSE->show_npc_face0(0x0000);
 		say("\"To meet at last the false hero! To serve my master and to avenge the death of many of my people thou didst slay in ancient times.\" *\"To see thy bones with thy skin burned from thy body! To smell thy flesh as it is eaten away by fire and flame!\" *\"To avenge and to serve my master! To thy death, false hero!\"");
 		UI_remove_npc_face1();
 		gflags[0x0007] = true;
