@@ -1356,7 +1356,7 @@ void Func00E4 shape#(0xE4) () {
 	}
 	if ((event == STARTED_TALKING) && (var0000 == 0x000B)) {
 		set_schedule_type(WANDER);
-		0xFEED->show_npc_face0(0x0000);
+		HAZARD->show_npc_face0(0x0000);
 		say("\"I would have words with thee but my duties call.\"");
 		say("\"Please consult me when I am not on duty.\"");
 		UI_remove_npc_face0();
@@ -1374,7 +1374,7 @@ void Func00E4 shape#(0xE4) () {
 	}
 	if ((event == STARTED_TALKING) && (var0000 == 0x0003)) {
 		set_schedule_type(HOUND);
-		0xFEED->show_npc_face0(0x0000);
+		HAZARD->show_npc_face0(0x0000);
 		if (!MARSTEN->get_item_flag(MET)) {
 			say("\"I will not discuss matters with a stranger to Monitor. Thou shouldst speak with Lord Marsten.\"");
 		} else if (!gflags[0x0048]) {
@@ -1414,7 +1414,7 @@ void Func00E4 shape#(0xE4) () {
 	}
 	if ((event == STARTED_TALKING) && (var0000 == 0x000F)) {
 		set_schedule_type(HOUND);
-		0xFEED->show_npc_face0(0x0000);
+		HAZARD->show_npc_face0(0x0000);
 		say("\"Please spare me! I shall do anything! I do not want to be roasted over a goblin's fire...\"");
 		say("\"Oh, er, hello there. My name is Johnson. Pardon mine outburst, but I thought thou mightest be a goblin. I was attempting to scare them, surprise them, before I rushed them.\"");
 		say("\"Thou art most fortunate. I might have accidentally killed thee had I not recognized thee as being from Monitor. I was going to kill as many of those green devils as I could before making my way back.\"");
@@ -1425,7 +1425,7 @@ void Func00E4 shape#(0xE4) () {
 	}
 	if ((event == DOUBLECLICK) && (var0000 == 0x0010)) {
 		set_schedule_type(HOUND);
-		0xFEED->show_npc_face0(0x0000);
+		HAZARD->show_npc_face0(0x0000);
 		say("\"There is no time for small talk! We must be on our way back to Monitor!\" *\"Thou wouldst not want us to be eaten before we have the chance to become heroes, wouldst thou?\" *\" Of course not! Let us be on our way!\"");
 		UI_remove_npc_face0();
 		Func097F(item, "@I shan't fear goblins...@", 0x0005);
@@ -1580,7 +1580,7 @@ labelFunc00E4_0956:
 			Func097F(item, "@Who said that?!@", 0x0008);
 			abort;
 		}
-		0xFEED->show_npc_face0(0x0000);
+		HAZARD->show_npc_face0(0x0000);
 		if (gflags[0x0083]) {
 			say("\"Sorry, but we have too many people in there already.\"");
 			return;
@@ -15619,7 +15619,7 @@ void Func032B shape#(0x32B) () {
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
-		var0008 = [0xFEED, 0xFEE8, D_STEFANO, D_CANTRA, D_BYRIN, ANTI_SHAM, ANTI_DUPRE, ANTI_IOLO, CELLIA, FLICKEN, HARNNA, KRAYG, LUCILLA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, DRAYGAN, MARSTEN, SPEKTOR, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, MORGHRIM];
+		var0008 = [HAZARD, 0xFEE8, D_STEFANO, D_CANTRA, D_BYRIN, ANTI_SHAM, ANTI_DUPRE, ANTI_IOLO, CELLIA, FLICKEN, HARNNA, KRAYG, LUCILLA, ALYSSAND, DELIN, DELPHYNIA, GARTH, JOTH, VOLDIN, JENDON, JORVIN, KYLISTA, YELINDA, LEON, OLON, RUGGS, SCOTS, ZULITH, BOYDON, DRAYGAN, MARSTEN, SPEKTOR, FILBERCIO, TORRISSIO, MORTEGRO, FRIGIDAZZI, FEDABIBLIO, ANDRIO, FRELI, COLUMNA, MELINO, GUSTACIO, MOSH, MORGHRIM];
 		for (var000B in var0008 with var000C to var000D) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -18202,13 +18202,13 @@ void Func0395 shape#(0x395) () {
 	if ((var0002 > 0x0498) && ((var0002 < 0x04F8) && ((var0003 > 0x01AF) && (var0003 < 0x021F)))) {
 		var0000 = true;
 	}
-	if ((event == DEATH) && 0xFEED->get_item_flag(SI_TOURNAMENT)) {
+	if ((event == DEATH) && HAZARD->get_item_flag(SI_TOURNAMENT)) {
 		0xFEE8->show_npc_face0(0x0000);
 		say("\"Argh! Thou thinkest thou canst save thy precious Gwani by slaying me? Fool! Thou hast the brain of a headless!\" *\"I laugh at thee, even as I lie here dying in mine own blood. The Gwani are doomed I tell thee, doomed like a feeble rabbit in my trap, hahaha...\"");
 		UI_remove_npc_face0();
-		0xFEED->clear_item_flag(SI_TOURNAMENT);
+		HAZARD->clear_item_flag(SI_TOURNAMENT);
 		Func097F(AVATAR, "@Taste my steel, trapper!@", 0x0001);
-		0xFEED->reduce_health(0x0037, NORMAL_DAMAGE);
+		HAZARD->reduce_health(0x0037, NORMAL_DAMAGE);
 		gflags[0x0263] = true;
 	}
 	if ((event == DOUBLECLICK) && (var0000 == false)) {
@@ -61320,7 +61320,7 @@ void Func0625 object#(0x625) () {
 			var0002 = "he";
 		}
 		if (var0000 == 0x00E4) {
-			0xFEED->show_npc_face(0x0000);
+			HAZARD->show_npc_face(0x0000);
 		} else {
 			if ((var0000 == 0x012A) || (var0000 == 0x0210)) {
 				UI_attack_avatar();
@@ -69907,7 +69907,7 @@ void Func06D9 object#(0x6D9) () {
 			var0004 = find_nearby(0x00E4, 0x0014, MASK_NONE);
 			if (var0004) {
 				var0004->clear_item_say();
-				0xFEED->show_npc_face0(0x0000);
+				HAZARD->show_npc_face0(0x0000);
 				say("\"Aaargh! I cannot keep pace with thee! My chest feels as though it shall soon explode!\"");
 				var0005 = script var0004 after 8 ticks {
 					nohalt;
@@ -83046,7 +83046,7 @@ void Func07FF object#(0x7FF) () {
 		}
 	} while (false);
 	Func09AA();
-	0xFEED->show_npc_face0(0x0000);
+	HAZARD->show_npc_face0(0x0000);
 	var0013 = get_object_position();
 	var0014 = var0013[0x0001];
 	var0015 = var0013[0x0003];
@@ -107850,7 +107850,7 @@ void Func092F 0x92F (var var0000, var var0001) {
 	var var0002;
 
 	UI_init_conversation();
-	0xFEED->show_npc_face0(0x0000);
+	HAZARD->show_npc_face0(0x0000);
 	if (var0001 == 0x0001) {
 		say("\"Failure in NowSettleDownBoys() because we could not find the tournament door.\"");
 	}
@@ -108041,7 +108041,7 @@ void Func0931 0x931 (var var0000) {
 	if (!(AVATAR->get_npc_object() == var0000)) {
 		var0000->clear_item_flag(SI_TOURNAMENT);
 	}
-	0xFEED->show_npc_face0(0x0000);
+	HAZARD->show_npc_face0(0x0000);
 	say("\"Very good, very good,\" he says as he returns your equipment.");
 	var0000->set_alignment(GOOD);
 	var0006 = var0000->find_nearby(0x020A, 0x002D, MASK_NONE);
@@ -108301,7 +108301,7 @@ void Func0935 0x935 (var var0000) {
 	var var000D;
 	var var000E;
 
-	0xFEED->show_npc_face0(0x0000);
+	HAZARD->show_npc_face0(0x0000);
 	say("\"What weapon dost thou favor?\"");
 	var0001 = ["nothing", "sword", "spear", "hammer", "morning star", "mace", "halberd", "battle axe"];
 	var0002 = Func0957(var0001);
@@ -108435,7 +108435,7 @@ void Func0936 0x936 (var var0000, var var0001) {
 				var0001->clear_item_say();
 				var0001->item_say("@Thou hast beaten me!@");
 				if (((!Func0932(BRENDANN)) || (Func0932(BRENDANN) && (BRENDANN->get_attack_mode() == FLEE))) && (((!Func0932(LUTHER)) || (Func0932(LUTHER) && (LUTHER->get_attack_mode() == FLEE))) && (((!Func0932(SHAZZANA)) || (Func0932(SHAZZANA) && (SHAZZANA->get_attack_mode() == FLEE))) && (((!Func0932(CALADIN)) || (Func0932(CALADIN) && (CALADIN->get_attack_mode() == FLEE))) && ((!Func0932(TEMPLAR)) || (Func0932(TEMPLAR) && (TEMPLAR->get_attack_mode() == FLEE))))))) {
-					0xFEED->show_npc_face0(0x0000);
+					HAZARD->show_npc_face0(0x0000);
 					var0002 = var0000->get_npc_name();
 					say("\"Nice show, ",
 						var0002,

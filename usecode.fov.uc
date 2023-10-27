@@ -50180,10 +50180,10 @@ void Func0608 object#(0x608) () {
 		CLONE_HOOK->hide();
 		CLONE_FORSKIS->say("Forskis shouts, \"To kill! To kill!\"*");
 		CLONE_FORSKIS->hide();
-		0xFEED->say("Abraham yells, \"Let us make fish bait out of ",
+		CLONE_ELIZABETH->say("Abraham yells, \"Let us make fish bait out of ",
 			var0003,
 			"!\"*");
-		0xFEED->hide();
+		CLONE_ELIZABETH->hide();
 		0xFEEC->say("\"Death to the Avatar! Long live The Guardian!\" screams Elizabeth.*");
 		0xFEEC->hide();
 		BATLIN->say("\"So be it! The Fellowship hereby sentences the Avatar to immediate death! Kill ",
