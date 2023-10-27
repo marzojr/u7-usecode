@@ -47918,7 +47918,7 @@ void Func04F6 object#(0x4F6) () {
 	var var0004;
 
 	if (event == DOUBLECLICK) {
-		0xFF0A->show_npc_face(0x0000);
+		ALAGNER->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = UI_wearing_fellowship();
 		add(["name", "job", "bye"]);
@@ -48081,7 +48081,7 @@ void Func04F6 object#(0x4F6) () {
 		say("\"Farewell. May thy journeys be profitable.\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF0A);
+		Func092E(ALAGNER);
 	}
 }
 
@@ -58764,7 +58764,7 @@ void Func06C1 object#(0x6C1) () {
 
 	if (event == EGG) {
 		if (gflags[0x0157] && (!gflags[0x0194])) {
-			0xFF0A->remove_npc();
+			ALAGNER->remove_npc();
 			var0000 = find_nearby(0x0363, 0x000F, MASK_NONE);
 			var0001 = find_nearby(0x0152, 0x000F, MASK_NONE);
 			var0002 = find_nearby(0x032A, 0x000F, MASK_NONE);
