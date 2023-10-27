@@ -48601,7 +48601,7 @@ void Func04F9 object#(0x4F9) () {
 	var var0013;
 
 	if (event == DOUBLECLICK) {
-		0xFF07->show_npc_face(0x0000);
+		NELSON->show_npc_face(0x0000);
 		var0000 = Func0908();
 		var0001 = Func0909();
 		add(["name", "job", "bye"]);
@@ -48803,7 +48803,7 @@ void Func04F9 object#(0x4F9) () {
 		}
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF07);
+		Func092E(NELSON);
 	}
 }
 
