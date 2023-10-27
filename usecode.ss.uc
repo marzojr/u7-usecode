@@ -15615,7 +15615,7 @@ void Func032B shape#(0x32B) () {
 		SMUDGE->set_item_flag(MET);
 		NEYOBI->set_item_flag(SI_ZOMBIE);
 		GWENNO->set_item_flag(SI_ZOMBIE);
-		var0008 = [AVATAR, SELINA, KALEN, ALE, KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA, SILENT1, SILENT2, SILENT3, JORVIN, HENCH1, HENCH2, HENCH3, 0xFEF0, 0xFEDB, XENKA, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, 0xFEF7, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
+		var0008 = [AVATAR, SELINA, KALEN, ALE, KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA, SILENT1, SILENT2, SILENT3, JORVIN, HENCH1, HENCH2, HENCH3, 0xFEF0, 0xFEDB, XENKA, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, GOBLIN_KING, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -41763,7 +41763,7 @@ void Func043F object#(0x43F) () {
 				say("\"The wretched beasts! I suppose thou hast heard of the ambush at Fawn Tower. They do not fight fair!\"");
 				say("\"Poor Astrid... she was an inspiring warrior, as well as a lusty wench. Damn, but she could kill Goblins...\"");
 				add("Fawn Tower");
-				if (!0xFEF7->get_item_flag(DEAD)) {
+				if (!GOBLIN_KING->get_item_flag(DEAD)) {
 					say("\"The Wolves and Leopards are useless in a crisis like this, but the Bears shall exact revenge from the Goblins. And if I ever find out who betrayed that patrol...\"");
 					add(["useless", "betrayed"]);
 				} else {
@@ -44272,7 +44272,7 @@ labelFunc0445_0257:
 				if (!var0008) {
 					add("Knight Champion");
 				}
-				if (!0xFEF7->get_item_flag(DEAD)) {
+				if (!GOBLIN_KING->get_item_flag(DEAD)) {
 					say("\"We need to reclaim it! Else, the Goblins shall again build their Horde and invade this great city.\"");
 					add("raid the Goblins");
 				}
@@ -44683,7 +44683,7 @@ labelFunc0445_0D4F:
 				MARSTEN->item_say("@Calm yourselves.@");
 			}
 			if (var001C == 0x0003) {
-				if (0xFEF7->get_item_flag(DEAD)) {
+				if (GOBLIN_KING->get_item_flag(DEAD)) {
 					var0015->item_say("@The Goblins are no threat.@");
 					Func097F(MARSTEN, "@I told thee so.@", 0x0003);
 				} else {
@@ -45440,7 +45440,7 @@ void Func0447 object#(0x447) () {
 				}
 				0x0000->set_conversation_slot();
 				say("\"Thou couldst use a warrior like myself, to guard thee against thine enemies. With me on hand, nothing could harm thee!\"");
-				if (0xFEF7->get_item_flag(DEAD)) {
+				if (GOBLIN_KING->get_item_flag(DEAD)) {
 					say("\"But alas, my duty as a Knight keeps me here in Monitor. The Goblins are a constant threat, even though thou hast slain their king.\"");
 				} else {
 					say("\"But alas, my duty as a Knight keeps me here in Monitor. The Goblins are a constant threat.\"");
@@ -47052,7 +47052,7 @@ void Func044D object#(0x44D) () {
 				SPEKTOR->item_say("@Must write this down.@");
 			}
 			if (var0008 == 0x0003) {
-				if (0xFEF7->get_item_flag(DEAD)) {
+				if (GOBLIN_KING->get_item_flag(DEAD)) {
 					var0007->item_say("@The Goblins are weak.@");
 					Func097F(SPEKTOR, "@Be cautious...@", 0x0003);
 				} else {
@@ -47177,7 +47177,7 @@ void Func044D object#(0x44D) () {
 		case "taxes" (remove):
 			say("\"Our Pikemen patrol the major roads connecting Monitor with Fawn and Sleeping Bull, and man the guard towers.\"");
 			say("\"In better times, caravans travelled these routes, and we collected a fat reward from merchants eager for our protection.\"");
-			if (0xFEF7->get_item_flag(DEAD)) {
+			if (GOBLIN_KING->get_item_flag(DEAD)) {
 				say("\"With the Goblin King slain, perhaps the roads will again be filled. But the storms also discourage travel...\"");
 			} else {
 				say("\"But now, the rumors of a gathering Goblin invasion have scared the travellers off the roads! Frankly, this is nonsense.\"");
