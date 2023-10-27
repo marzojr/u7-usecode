@@ -4360,7 +4360,7 @@ void Func013E shape#(0x13E) () {
 	if (gflags[0x021E]) {
 		var0003 = AVATAR->find_nearby(0x013E, 0x0014, MASK_NONE);
 		if (event == SCRIPTED) {
-			0xFEE1->show_npc_face0(0x0000);
+			CINDY->show_npc_face0(0x0000);
 			say("\"Well, well, well... If it isn't the Avatar!\" *\"Fool! Thou didst think me dead... But now it is time for thee to die!\"");
 			var0004 = var0003->add_cont_items(0x0001, 0x0321, QUALITY_ANY, 0x0000, 0x0012);
 			var0004 = var0003->add_cont_items(0x0001, 0x0358, 0x0003, FRAME_ANY, 0x0012);
@@ -4385,7 +4385,7 @@ void Func013E shape#(0x13E) () {
 			}
 		}
 		if (event == DEATH) {
-			0xFEE1->show_npc_face0(0x0000);
+			CINDY->show_npc_face0(0x0000);
 			var0006 = UI_die_roll(0x0001, 0x0003);
 			if (var0006 == 0x0001) {
 				say("\"Fool! Dost thou think thou canst actually kill me?\" *\"I am forever!\" *\"I am eternity!\"");
@@ -4405,7 +4405,7 @@ void Func013E shape#(0x13E) () {
 	}
 	if (Func0994() == 0x0010) {
 		if (event == SCRIPTED) {
-			0xFEE1->show_npc_face0(0x0001);
+			CINDY->show_npc_face0(0x0001);
 			say("\"Thou art too late, Avatar! Nothing can stop me now! The girl is dead and the last Bane is mine!\"");
 			say("\"Soon I shall rival the Guardian himself and crush thee like the irritating insect thou art!\"");
 			say("\"I shall open the Wall of Lights and destroy the world! And thou art powerless to follow me!\"");
@@ -4462,7 +4462,7 @@ void Func013E shape#(0x13E) () {
 		set_npc_id(get_npc_id() + 0x0001);
 		if (get_npc_id() == 0x000A) {
 			UI_init_conversation();
-			0xFEE1->show_npc_face0(0x0000);
+			CINDY->show_npc_face0(0x0000);
 			say("\"Thy fire shall warm the heart of my trap, Palos. I shall rely on thee to make sure the Avatar feels the warmth of our welcome.\"");
 			MEELOSE->show_npc_face1(0x0000);
 			say("\"To be my great pleasure. To look forward to the meeting...\"");
@@ -4483,7 +4483,7 @@ void Func013E shape#(0x13E) () {
 		}
 		if (get_npc_id() == 0x0008) {
 			UI_init_conversation();
-			0xFEE1->show_npc_face0(0x0000);
+			CINDY->show_npc_face0(0x0000);
 			say("\"Thou shalt be my door warden. I can count on thy strength to delay the Avatar...\"");
 			BRUNT->show_npc_face1(0x0000);
 			say("\"Dost thou wish ",
@@ -4514,7 +4514,7 @@ void Func013E shape#(0x13E) () {
 		}
 		if (get_npc_id() == 0x0005) {
 			UI_init_conversation();
-			0xFEE1->show_npc_face0(0x0000);
+			CINDY->show_npc_face0(0x0000);
 			say("\"To thee I give the anchor's job... The Avatar must not enter the Shrine of Balance before the Wall of Lights is fully open. Thou must stop the Avatar, should the others fail.\"");
 			DEADEYE->show_npc_face1(0x0000);
 			say("\"I'll split ",
@@ -4536,7 +4536,7 @@ void Func013E shape#(0x13E) () {
 		}
 		if (get_npc_id() == 0x0003) {
 			UI_init_conversation();
-			0xFEE1->show_npc_face0(0x0000);
+			CINDY->show_npc_face0(0x0000);
 			say("\"I must prepare an appropriate welcome for mine old enemy!\"");
 			UI_end_conversation();
 			var000E = [0x092A, 0x0199, 0x0000];
@@ -4570,7 +4570,7 @@ void Func013E shape#(0x13E) () {
 		gflags[0x002A] = false;
 	}
 	if ((event == EGG) && (var0002 == 0x001F)) {
-		0xFEE1->show_npc_face0(0x0000);
+		CINDY->show_npc_face0(0x0000);
 		say("\"Ah, Avatar! Thou wert ne'er a match for me...\" *\"Soon I will have power to rival even the Guardian himself! And thou wilt be powerless, just as thou art now.\" *\"I will bury my blade deep within thine entrails, twisting it ever so slowly, enjoying each of thy pitiful screams.\" *\"Farewell, hero of Britannia. Though thou wilt beg for a quick end to thy life, I shall resist. I want to enjoy thy death...\"");
 		UI_remove_npc_face0();
 		Func097F(item, "@Enjoy thy death!@", 0x0002);
@@ -21331,7 +21331,7 @@ void Func0400 object#(0x400) () {
 	if (event == SCRIPTED) {
 		if (gflags[0x021E]) {
 			set_schedule_type(IN_COMBAT);
-			0xFEE1->show_npc_face0(0x0000);
+			CINDY->show_npc_face0(0x0000);
 			AVATAR->set_item_flag(DONT_MOVE);
 			set_schedule_type(WAIT);
 			say("\"Thou art nearly dead, Avatar!\"");
@@ -75239,7 +75239,7 @@ void Func073B object#(0x73B) () {
 		var0004 = var0003->get_item_quality();
 		if (var0004 == 0x0000) {
 			var0001 = AVATAR->find_nearby(0x013E, 0x0014, MASK_NONE);
-			0xFEE1->show_npc_face0(0x0001);
+			CINDY->show_npc_face0(0x0001);
 			say("\"Fool! Thou art too late. Now I shall enter the Wall of Lights and become immortal!\"");
 			say("\"Then I shall return to destroy thy mortal soul!\"");
 			UI_remove_npc_face0();
@@ -75282,7 +75282,7 @@ void Func073B object#(0x73B) () {
 			if (!var0001) {
 				UI_error_message("No Batlin");
 			}
-			0xFEE1->show_npc_face0(0x0001);
+			CINDY->show_npc_face0(0x0001);
 			say("\"Wait... No! The wall is not opening for me! This cannot be!\"");
 			say("\"No... The banes, they have... Oh, what have I done!\"");
 			say("\"I have been tricked! Avatar! I beseech thee! Help me before...\"");
@@ -85550,12 +85550,12 @@ void Func080E 0x80E () {
 	UI_init_conversation();
 	CANTRA->show_npc_face0(0x0000);
 	say("\"Leave me alone, mage. I am but a little girl.\"");
-	0xFEE1->show_npc_face1(0x0000);
+	CINDY->show_npc_face1(0x0000);
 	say("\"I know what thou art, Bane of Chaos. That body is but a shell that thou dost wear.\"");
 	UI_remove_npc_face1();
 	0x0000->set_conversation_slot();
 	say("\"I can escape thee! My powers dwarf thine...\"");
-	0xFEE1->show_npc_face1(0x0000);
+	CINDY->show_npc_face1(0x0000);
 	say("\"Thy powers have dwindled due to thine imprisonment. Thou art no match for me, now...\"");
 	UI_remove_npc_face1();
 	UI_remove_npc_face0();

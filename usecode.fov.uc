@@ -353,7 +353,8 @@ enum misc_npcs {
 
 	TIME_LORD	= -284,
 
-	ERETHIAN	= -286,	//Isle of Fire
+	ERETHIAN			= -286,	//Isle of Fire
+	SHRINE_OF_PRINCIPLE	= -287,	//Isle of Fire
 
 	JUGGERNAUT	= -259,	//Isle of the Avatar, enemy
 	HOOK		= -291,	//Isle of the Avatar, arch-villain
@@ -8687,7 +8688,7 @@ void Func0356 shape#(0x356) () {
 		}
 		var0000 = get_item_frame();
 		if (var0000 == 0x0010) {
-			0xFEE1->show_npc_face(0x0000);
+			SHRINE_OF_PRINCIPLE->show_npc_face(0x0000);
 			if (gflags[0x030C]) {
 				say("\"Our gratitude is thine, Avatar. Thou hast saved Britannia from what might have become a second Age of Darkness. Again, thou dost prove thy worthiness to be the instrument of Lord British.\"");
 				abort;
@@ -8714,7 +8715,7 @@ void Func0356 shape#(0x356) () {
 			}
 		}
 		if (var0000 == 0x000E) {
-			0xFEE1->show_npc_face(0x0001);
+			SHRINE_OF_PRINCIPLE->show_npc_face(0x0001);
 			if (gflags[0x030C]) {
 				say("\"Thy Love for life is boundless. Thine heart-felt actions are a shining example to all of Britannia.\"*");
 				abort;
@@ -8732,7 +8733,7 @@ void Func0356 shape#(0x356) () {
 			abort;
 		}
 		if (var0000 == 0x000F) {
-			0xFEE1->show_npc_face(0x0002);
+			SHRINE_OF_PRINCIPLE->show_npc_face(0x0002);
 			if (gflags[0x030C]) {
 				say("\"Thine onus is abated and Britannia is free of Exodus' grasp once more. Thy deeds will long be rembered as the most courageous in the history of this land.\"*");
 				abort;
@@ -8753,17 +8754,17 @@ void Func0356 shape#(0x356) () {
 	if (event == WEAPON) {
 		var0000 = get_item_frame();
 		if (var0000 == 0x0010) {
-			0xFEE1->say("\"Thou hast mastered the Test of Truth, and so a boon of great intellect and magical ability will be bestowed upon thee. Use -- and respect -- thy powers well, Avatar.\"");
+			SHRINE_OF_PRINCIPLE->say("\"Thou hast mastered the Test of Truth, and so a boon of great intellect and magical ability will be bestowed upon thee. Use -- and respect -- thy powers well, Avatar.\"");
 		}
 		if (var0000 == 0x000E) {
-			0xFEE1->show_npc_face(0x0001);
+			SHRINE_OF_PRINCIPLE->show_npc_face(0x0001);
 			say("\"My heart is gladdened to learn that Love is a Principle thou dost hold dear, evident by thy successful completion of the Test of Love. Now, then, shall a blessing of quickness and skill be thine.\"");
 		}
 		if (var0000 == 0x000F) {
-			0xFEE1->show_npc_face(0x0002);
+			SHRINE_OF_PRINCIPLE->show_npc_face(0x0002);
 			say("\"Well done, mighty warrior! The unsurpassed Courage which flows through thy veins could be none other than that of the Avatar. Thou hast proven thyself worthy of the reward of Courage with Valor, Sacrifice, Honor, and Spirituality... Receive it now\tin Humility.\"*");
 		}
-		0xFEE1->hide();
+		SHRINE_OF_PRINCIPLE->hide();
 		var0002 = script AVATAR->get_npc_object() {
 			wait 2;
 			actor frame bowing;
@@ -8802,7 +8803,7 @@ void Func0356 shape#(0x356) () {
 					call Func0356;
 				};
 			} else {
-				0xFEE1->say("\"Thou hast now experienced the full meaning of the Principle of Truth. The value of such is beyond measure, for truth shall guide thee throughout thy life's endeavors.\"");
+				SHRINE_OF_PRINCIPLE->say("\"Thou hast now experienced the full meaning of the Principle of Truth. The value of such is beyond measure, for truth shall guide thee throughout thy life's endeavors.\"");
 				say("The statue's voice takes on a warning tone. \"Know this Truth: the Psyche returns to the Core...\" With that said, the statue becomes quiet once more.*");
 				gflags[0x0317] = false;
 				abort;
@@ -8827,7 +8828,7 @@ void Func0356 shape#(0x356) () {
 					call Func0356;
 				};
 			} else {
-				0xFEE1->show_npc_face(0x0001);
+				SHRINE_OF_PRINCIPLE->show_npc_face(0x0001);
 				say("\"Now hast thou earnestly experienced all that is Love. 'Tis a benefit never to be taken lightly, for Love is a formidible motivator. Remember always the lessons in Compassion, Sacrifice, and Justice thou hast mastered.\"");
 				say("The voice of the Keeper of Love fills with compassion as she speaks. \"Do have a care, Avatar. For a great evil stirs within Britannia, I know not the source.\"*");
 				gflags[0x0317] = false;
@@ -8854,7 +8855,7 @@ void Func0356 shape#(0x356) () {
 				};
 				return;
 			}
-			0xFEE1->show_npc_face(0x0002);
+			SHRINE_OF_PRINCIPLE->show_npc_face(0x0002);
 			say("Urgency breaks into the voice of the statue. \"I lay upon thee a geas, and as thou art the Avatar, thou art bound to respond. Thy quest is to seek the Talisman of Infinity. Within this castle there lies a scroll which can tell thee of its use. Go now, for time grows short.*");
 			gflags[0x0317] = false;
 			abort;
