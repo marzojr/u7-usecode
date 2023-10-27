@@ -13234,7 +13234,7 @@ void Func02D8 shape#(0x2D8) () {
 		};
 	}
 	if (event == SCRIPTED) {
-		0xFEFE->show_npc_face0(0x0000);
+		STEVE_POWERS->show_npc_face0(0x0000);
 		say("\"I am trapped! Help me!\"");
 		converse (["name", "Trapped?", "bye"]) {
 			case "name" (remove):

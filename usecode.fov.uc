@@ -35,7 +35,8 @@ enum trinsic_npcs {
 	MERYL		= -234,	//Passion Play actress
 	DUSTIN		= -235,	//Passion Play actor
 
-	ELLEN		= -236	//wife of Klog
+	ELLEN		= -236,	//wife of Klog
+	BOB			= -258	//guard at south gate
 };
 
 //Britain residents
@@ -2761,7 +2762,7 @@ void Func018A shape#(0x18A) () {
 
 	var0000 = 0x018A->get_npc_object()->get_schedule_type();
 	if (event == DOUBLECLICK) {
-		0xFEFE->show_npc_face(0x0000);
+		BOB->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
 		say("You see a tough-looking palace guard who takes his job -very- seriously.");
 		converse (0) {
@@ -9091,7 +9092,7 @@ void Func03B2 shape#(0x3B2) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFEFE->show_npc_face(0x0000);
+	BOB->show_npc_face(0x0000);
 	add(["name", "job", "bye"]);
 	say("You see a tough-looking guard who takes his job -very- seriously.");
 	converse (0) {
@@ -21196,8 +21197,8 @@ void Func0445 object#(0x445) () {
 		case "job":
 			say("\"I have none so long as I am left to rot here in this prison.\"");
 			if (var0001) {
-				0xFEFE->say("\"Thy job is to pay for the crime thou hast committed.\"*");
-				0xFEFE->hide();
+				BOB->say("\"Thy job is to pay for the crime thou hast committed.\"*");
+				BOB->hide();
 				WESTON->show_npc_face(0x0000);
 			}
 			add("prison");
@@ -21206,8 +21207,8 @@ void Func0445 object#(0x445) () {
 		case "prison":
 			say("\"My crime was stealing apples from the Royal Orchards. This I did and I admit it freely. If given the same set of circumstances I would do it again.\"");
 			if (var0001) {
-				0xFEFE->say("\"A-ha! Not only an unrepentant criminal but also a potential professional thief! Looks like this one has ended in the right place and just in the nick o' time.\"*");
-				0xFEFE->hide();
+				BOB->say("\"A-ha! Not only an unrepentant criminal but also a potential professional thief! Looks like this one has ended in the right place and just in the nick o' time.\"*");
+				BOB->hide();
 				WESTON->show_npc_face(0x0000);
 			}
 			remove("prison");
@@ -21217,8 +21218,8 @@ void Func0445 object#(0x445) () {
 		case "stealing apples":
 			say("\"I had offered to buy them first, but Figg, the caretaker of the orchard, set an exorbitant price which I am certain he would have pocketed for himself. So, yes, I admit to stealing them.\"");
 			if (var0001) {
-				0xFEFE->say("\"See how the common criminal blames his type of immoral behavior on others, all the while denying it in himself! This one is irredeemable, he is.\"*");
-				0xFEFE->hide();
+				BOB->say("\"See how the common criminal blames his type of immoral behavior on others, all the while denying it in himself! This one is irredeemable, he is.\"*");
+				BOB->hide();
 				WESTON->show_npc_face(0x0000);
 			}
 			remove("stealing apples");
@@ -21229,10 +21230,10 @@ void Func0445 object#(0x445) () {
 			say("\"He gives baskets of fruit free to The Fellowship without Lord British's consent, I am quite certain.\"");
 			gflags[0x0094] = true;
 			if (var0001) {
-				0xFEFE->say("\"Thou shouldst not listen to this obvious slander, ",
+				BOB->say("\"Thou shouldst not listen to this obvious slander, ",
 					var0000,
 					"! It is hearsay!\"*");
-				0xFEFE->hide();
+				BOB->hide();
 				WESTON->show_npc_face(0x0000);
 			}
 			remove("Figg");
@@ -21248,8 +21249,8 @@ void Func0445 object#(0x445) () {
 				var0000,
 				". I am from Paws and it is another reason why they believe I can be trifled with.\"");
 			if (var0001) {
-				0xFEFE->say("\"This prisoner is from Paws! I bloody knew it! To his credit he was in town nearly an entire day before he stole something. For a citizen of Paws that is as honest as they come!\"*");
-				0xFEFE->hide();
+				BOB->say("\"This prisoner is from Paws! I bloody knew it! To his credit he was in town nearly an entire day before he stole something. For a citizen of Paws that is as honest as they come!\"*");
+				BOB->hide();
 				WESTON->show_npc_face(0x0000);
 			}
 			remove("circumstances");
@@ -21261,8 +21262,8 @@ void Func0445 object#(0x445) () {
 			remove("Paws");
 			add(["town", "poverty"]);
 			if (var0001) {
-				0xFEFE->say("\"Oh bloody 'ell! Now I suppose he is going to go and tell us his whole pathetic life's story! Couldst thou wait until I get out mine handkerchief so I do not interrupt thee with all my wailing!\"*");
-				0xFEFE->hide();
+				BOB->say("\"Oh bloody 'ell! Now I suppose he is going to go and tell us his whole pathetic life's story! Couldst thou wait until I get out mine handkerchief so I do not interrupt thee with all my wailing!\"*");
+				BOB->hide();
 				WESTON->show_npc_face(0x0000);
 			}
 			fallthrough;
@@ -21275,8 +21276,8 @@ void Func0445 object#(0x445) () {
 		case "poverty":
 			say("\"I do not wish to bemoan my fate, but my family lives in Paws -- my wife Alina and my child Cassie. They were starving and I came to Britain to get food for them.\"");
 			if (var0001) {
-				0xFEFE->say("\"Oh, now! Do not go and bring up poverty as an excuse as to why thou hast turned to crime! My father was so poor he and his family had to eat dirt. But he still raised me proper. Beat the stuffings out of me if he ever so much as imagined I did anything wrong, I can tell thee that!\"*");
-				0xFEFE->hide();
+				BOB->say("\"Oh, now! Do not go and bring up poverty as an excuse as to why thou hast turned to crime! My father was so poor he and his family had to eat dirt. But he still raised me proper. Beat the stuffings out of me if he ever so much as imagined I did anything wrong, I can tell thee that!\"*");
+				BOB->hide();
 				WESTON->show_npc_face(0x0000);
 			}
 			remove("poverty");
@@ -21291,8 +21292,8 @@ void Func0445 object#(0x445) () {
 		case "starving":
 			say("\"Although there are fools who will speak otherwise, the people of Britannia are being crushed by the vicious tyranny of the class system. While a few have more than they could ever enjoy, there are many who go to sleep hungry every night. My wife and daughter to name two of them.\"");
 			if (var0001) {
-				0xFEFE->say("\"Oh, that reminds me it is nearly time for my meal break! The trout is supposed to be delicious today at the Farmer's Market.\"");
-				0xFEFE->hide();
+				BOB->say("\"Oh, that reminds me it is nearly time for my meal break! The trout is supposed to be delicious today at the Farmer's Market.\"");
+				BOB->hide();
 				WESTON->show_npc_face(0x0000);
 			}
 			remove("starving");
@@ -21307,8 +21308,8 @@ void Func0445 object#(0x445) () {
 		case "class system":
 			say("\"While I am certain Lord British is a just and fair ruler, he must be quite unaware of all that goes on in his kingdom. Surely he would not tolerate such inequity.\"");
 			if (var0001) {
-				0xFEFE->say("\"All right! That is enough noise out of thee! All day long yakkata-yakkata about the awful terrible class system! Why, the next thing thou knowest thou shalt be sayin' society is to blame for thy crimes. Not a word from anybody about any appreciation for keeping the laws and order. No, of course not! But all the pity in the world for the dangerous lawbreakers who are the real threat to society.\"*");
-				0xFEFE->hide();
+				BOB->say("\"All right! That is enough noise out of thee! All day long yakkata-yakkata about the awful terrible class system! Why, the next thing thou knowest thou shalt be sayin' society is to blame for thy crimes. Not a word from anybody about any appreciation for keeping the laws and order. No, of course not! But all the pity in the world for the dangerous lawbreakers who are the real threat to society.\"*");
+				BOB->hide();
 				WESTON->show_npc_face(0x0000);
 			}
 			say("\"Wouldst thou speak with Lord British about me? I would bet that he is completely unaware of my case! Please! Wilt thou speak with him?\"");
@@ -51536,12 +51537,12 @@ void Func0625 object#(0x625) () {
 			return;
 		}
 		if (Func08F9(var0003, var0001, var0002)) {
-			0xFEFE->say("The guard glares at you. \"Unrepentant scoundrel!\"");
-			0xFEFE->hide();
+			BOB->say("The guard glares at you. \"Unrepentant scoundrel!\"");
+			BOB->hide();
 			UI_attack_avatar();
 			return;
 		}
-		0xFEFE->show_npc_face(0x0000);
+		BOB->show_npc_face(0x0000);
 		var0004 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 		if ((UI_die_roll(0x0001, 0x0002) == 0x0001) && var0004) {
 			say("You see an angry guard. \"Cease and desist immediately!.~~Dost thou wish to avoid the unpleasantries of a lengthy trial?\"");
@@ -51585,7 +51586,7 @@ void Func0625 object#(0x625) () {
 			say("You see an angry guard. \"Cease and desist immediately!.~~Wilt thou come quietly?\"");
 			if (Func090A()) {
 				say("\"Very well. Thou shalt remain in prison until we see fit to release thee.\"");
-				0xFEFE->hide();
+				BOB->hide();
 				AVATAR->halt_scheduled();
 				var0013 = script AVATAR after 2 ticks {
 					call Func0625;
