@@ -49127,7 +49127,7 @@ void Func04FB object#(0x4FB) () {
 	var var0002;
 
 	if (event == DOUBLECLICK) {
-		0xFF05->show_npc_face(0x0000);
+		DANAG->show_npc_face(0x0000);
 		var0000 = UI_part_of_day();
 		var0001 = UI_wearing_fellowship();
 		var0002 = Func0931(PARTY, 0x0001, 0x03D5, QUALITY_ANY, 0x0001);
@@ -49301,7 +49301,7 @@ void Func04FB object#(0x4FB) () {
 		say("\"Farewell!\"*");
 	}
 	if (event == PROXIMITY) {
-		Func092E(0xFF05);
+		Func092E(DANAG);
 	}
 }
 
