@@ -46905,7 +46905,7 @@ void Func04EF object#(0x4EF) () {
 	}
 	OWINGS->show_npc_face(0x0000);
 	var0000 = Func0909();
-	var0001 = Func08F7(0xFF0D);
+	var0001 = Func08F7(MALLOY);
 	var0002 = Func08F7(IOLO);
 	var0003 = Func08F7(SHAMINO);
 	var0004 = Func08F7(DUPRE);
@@ -46931,12 +46931,12 @@ void Func04EF object#(0x4EF) () {
 		case "job":
 			if (var0001) {
 				say("\"I do what he does.\" Owings jerks his thumb towards Malloy digging away next to him. The fat man is trying to chisel through the rock wall using only a spoon. Owings's thumb hits him in the back.");
-				0xFF0D->say("Malloy looks over at you and gives you a friendly wave as he goes to stand up. As he does this, he bumps his head. There is a loud knocking noise. He says, \"Oooooooohh!\" very loudly. His cry echoes through the length of the mineshaft. You can feel dust from the cracks in the ceiling settling on your shoulder.*");
+				MALLOY->say("Malloy looks over at you and gives you a friendly wave as he goes to stand up. As he does this, he bumps his head. There is a loud knocking noise. He says, \"Oooooooohh!\" very loudly. His cry echoes through the length of the mineshaft. You can feel dust from the cracks in the ceiling settling on your shoulder.*");
 				OWINGS->say("Owings suddenly looks very nervous and throws both of his arms over his head. There is a terrible rumble and you feel the ground beneath you start to shake. After a moment the tremor subsides. Both of them look very relieved.*");
-				0xFF0D->say("Malloy puts one hand up to his bruised head and feels around on the ground with the other. He eventually finds and picks up a metal mining helmet. He gingerly places it over his head which appears to still be causing him pain. You can see that the top of Malloy's head barely fits into it.*");
+				MALLOY->say("Malloy puts one hand up to his bruised head and feels around on the ground with the other. He eventually finds and picks up a metal mining helmet. He gingerly places it over his head which appears to still be causing him pain. You can see that the top of Malloy's head barely fits into it.*");
 				OWINGS->say("\"Allow me to rephrase that. I do what he does, except I always wears me helmet.\" With that Owings gives a big nod, throwing his head up and down. This causes his helmet to fall down over his eyes.*");
-				0xFF0D->say("Malloy looks over at you and at Owings, giving both of you an incredulous pouting grimace.*");
-				0xFF0D->hide();
+				MALLOY->say("Malloy looks over at you and at Owings, giving both of you an incredulous pouting grimace.*");
+				MALLOY->hide();
 				OWINGS->show_npc_face(0x0000);
 				add(["tremor", "helmet", "eyes"]);
 			} else {
@@ -46946,10 +46946,10 @@ void Func04EF object#(0x4EF) () {
 
 		case "tremor":
 			say("Owings puts his hand on your shoulder and puts a finger up to his lips. \"Shhhhh! Be very quiet! This is an old tunnel. Mikos, the foreman, says that any sudden loud noise could trigger a cave-in!\"*");
-			0xFF0D->say("Malloy goes back to digging. The exertion from his work causes his helmet to fall off. He sighs, picks it up, puts it back on and goes back to work. Almost immediately it falls off again. He puts it back on. It falls off. He puts it back on. Malloy grunts and sighs. It falls off. Dejected, he puts it back on. This happens again and again so many times that it is almost painful to watch. Finally, Malloy just lets the helmet lie there and throws a tantrum. He trembles and bites into his hand to keep from crying out in frustration.*");
+			MALLOY->say("Malloy goes back to digging. The exertion from his work causes his helmet to fall off. He sighs, picks it up, puts it back on and goes back to work. Almost immediately it falls off again. He puts it back on. It falls off. He puts it back on. Malloy grunts and sighs. It falls off. Dejected, he puts it back on. This happens again and again so many times that it is almost painful to watch. Finally, Malloy just lets the helmet lie there and throws a tantrum. He trembles and bites into his hand to keep from crying out in frustration.*");
 			OWINGS->say("Owings steps up to Malloy and puts his finger to his lips. \"Shhhhhh!\" Looking down, Owings sees Malloy's helmet on the ground. \"Dost thou not remember Mikos telling thee to always wear thine helmet?\" he says. Owings picks it up and dusts it off. He pushes it down on top of Malloy's sore head, causing Malloy to wrinkle his face in pain. \"No need to thank me!\" Owings says. With that, he nods his head up and down, causing the front of his helmet to fall down over his eyes. He reaches out with his arms blindly.*");
-			0xFF0D->say("Malloy looks over at Owings and at you, giving you both a pouting grimace.*");
-			0xFF0D->hide();
+			MALLOY->say("Malloy looks over at Owings and at you, giving you both a pouting grimace.*");
+			MALLOY->hide();
 			OWINGS->show_npc_face(0x0000);
 			gflags[0x02D8] = true;
 			remove("tremor");
@@ -46958,8 +46958,8 @@ void Func04EF object#(0x4EF) () {
 
 		case "eyes":
 			say("You reach up and tip Owings's helmet back so that it is no longer covering his eyes. He smiles at you thankfully. He takes off his helmet to scratch at the top of his head. He puts it back on and it immediately tilts back down over his eyes.*");
-			0xFF0D->say("Malloy watches this, smirks and slowly shakes his head.*");
-			0xFF0D->hide();
+			MALLOY->say("Malloy watches this, smirks and slowly shakes his head.*");
+			MALLOY->hide();
 			OWINGS->show_npc_face(0x0000);
 			remove("eyes");
 			if (gflags[0x02D8]) {
@@ -46969,17 +46969,17 @@ void Func04EF object#(0x4EF) () {
 
 		case "helmet":
 			say("\"Mikos, the foreman of this mine told us to always wear a helmet. It is very important. The two of us even sent a mining helmet to Lord British. A funny man dressed just like the Avatar told us of how Lord British had been hit in the head with falling objects - twice! So we sent a helmet to him.\"*");
-			0xFF0D->say("It appears Malloy can no longer stand being left out of the conversation. \"It was -mine- idea to send Lord British the helmet,\" he says proudly. \"While we have not yet heard back from him about it I am sure he will find some way to thank us.\" Malloy's helmet falls off and he stands there a long time before regaining the composure to pick it up again.*");
-			0xFF0D->hide();
+			MALLOY->say("It appears Malloy can no longer stand being left out of the conversation. \"It was -mine- idea to send Lord British the helmet,\" he says proudly. \"While we have not yet heard back from him about it I am sure he will find some way to thank us.\" Malloy's helmet falls off and he stands there a long time before regaining the composure to pick it up again.*");
+			MALLOY->hide();
 			OWINGS->show_npc_face(0x0000);
 			remove("helmet");
 			fallthrough;
 
 		case "Owings's helmet":
 			say("\"Thou art a kind person to fix mine helmet for me,\" Owings says, giving you a big grin.");
-			0xFF0D->say("You see Malloy look very suspiciously at Owings's helmet. \"Thou art wearing mine hat!\" He lets out a growling \"Hmmmf!\" and snatches Owings's helmet off of his head. Malloy removes his helmet, casually tossing it to the ground. He then puts Owings's helmet on. It fits him perfectly. Malloy flashes you both a big condescending smile. With a curt nod he turns to go back to work.*");
+			MALLOY->say("You see Malloy look very suspiciously at Owings's helmet. \"Thou art wearing mine hat!\" He lets out a growling \"Hmmmf!\" and snatches Owings's helmet off of his head. Malloy removes his helmet, casually tossing it to the ground. He then puts Owings's helmet on. It fits him perfectly. Malloy flashes you both a big condescending smile. With a curt nod he turns to go back to work.*");
 			OWINGS->say("Owings looks at Malloy and then back to you. He is very confused. \"That was not very nice, Malloy! Thou didst take mine hat!\" Owings's face is covered with a large frown. His lower lip starts to tremble.");
-			0xFF0D->hide();
+			MALLOY->hide();
 			OWINGS->show_npc_face(0x0000);
 			remove(["Owings's helmet", "eyes"]);
 			add("mine hat");
@@ -46987,12 +46987,12 @@ void Func04EF object#(0x4EF) () {
 
 		case "mine hat":
 			say("Owings reaches over and takes the mining helmet off Malloy's head so carefully that he does not notice. Owings puts the helmet back on with a little sneaky laugh of triumph. Pointing to the hat he taps Malloy on the back to let him know what he's done.*");
-			0xFF0D->say("Malloy stops digging and goes to stand up. As he does this he hits his head on the ceiling. Once again it makes a loud knocking noise. Malloy says \"Oooooh!\" After shaking his head clear, he slowly steps toward Owings. He is quite angry - so angry that he does not notice that he has stepped into the other helmet and it is stuck onto his foot. Taking his spoon he whaps Owings in the nose with it.*");
+			MALLOY->say("Malloy stops digging and goes to stand up. As he does this he hits his head on the ceiling. Once again it makes a loud knocking noise. Malloy says \"Oooooh!\" After shaking his head clear, he slowly steps toward Owings. He is quite angry - so angry that he does not notice that he has stepped into the other helmet and it is stuck onto his foot. Taking his spoon he whaps Owings in the nose with it.*");
 			UI_play_sound_effect(0x0053);
 			gflags[0x02D9] = true;
 			OWINGS->say("Upon getting hit in the nose, Owings jerks his head back, causing his helmet to fall off. \"Ooh! Mine helmet!\" he cries.*");
-			0xFF0D->say("Malloy is so angry that he can no longer contain himself. \"That is not thine helmet! It is mine helmet!\" he shouts. This sends a thunderous echo down the mineshaft. You can feel a shower of falling dust and rocks. There is a low rumble and an ominous vibration of the earth. Owings and Malloy are so scared that in their panic they run right into each other. Malloy's foot - the one with the helmet stuck on it - slides out from under him and he lands on his posterior. Both cover their heads in anticipation of a massive cave-in.*");
-			0xFF0D->hide();
+			MALLOY->say("Malloy is so angry that he can no longer contain himself. \"That is not thine helmet! It is mine helmet!\" he shouts. This sends a thunderous echo down the mineshaft. You can feel a shower of falling dust and rocks. There is a low rumble and an ominous vibration of the earth. Owings and Malloy are so scared that in their panic they run right into each other. Malloy's foot - the one with the helmet stuck on it - slides out from under him and he lands on his posterior. Both cover their heads in anticipation of a massive cave-in.*");
+			MALLOY->hide();
 			OWINGS->show_npc_face(0x0000);
 			remove("mine hat");
 			add("cave-in");
@@ -47001,9 +47001,9 @@ void Func04EF object#(0x4EF) () {
 		case "cave-in":
 			say("After a few moments of fearful anticipation, the tremor subsides. The tunnel is still standing, none the worse for wear. \"I thought I was done for!\" says Owings. With that, a large piece of rock falls from the ceiling and lands squarely on Owings's head. It makes a loud knocking noise. Owings starts to pout and cry very childishly.");
 			UI_play_sound_effect(0x0053);
-			0xFF0D->say("Malloy points at Owings and laughs until tears run down his face. Glancing up at the ceiling, Malloy starts feeling around for his helmet. Finally, feeling underneath himself, he pulls out his helmet, on top of which he had fallen! Looking at the hat, Malloy discovers that his bulk has crumpled it. It is ruined. He puts it on anyway, looking most ridiculous, and his tears of laughter turn to tears of sorrow. Now, both of them break down into fits of childish bawling. Malloy looks at Owings and says \"This is another fine mess thou hast gotten us into!\"*");
+			MALLOY->say("Malloy points at Owings and laughs until tears run down his face. Glancing up at the ceiling, Malloy starts feeling around for his helmet. Finally, feeling underneath himself, he pulls out his helmet, on top of which he had fallen! Looking at the hat, Malloy discovers that his bulk has crumpled it. It is ruined. He puts it on anyway, looking most ridiculous, and his tears of laughter turn to tears of sorrow. Now, both of them break down into fits of childish bawling. Malloy looks at Owings and says \"This is another fine mess thou hast gotten us into!\"*");
 			gflags[0x02DA] = true;
-			0xFF0D->hide();
+			MALLOY->hide();
 			OWINGS->show_npc_face(0x0000);
 			remove("cave-in");
 			fallthrough;
@@ -47533,7 +47533,7 @@ void Func04F3 object#(0x4F3) () {
 	if (event == PROXIMITY) {
 		abort;
 	}
-	0xFF0D->show_npc_face(0x0000);
+	MALLOY->show_npc_face(0x0000);
 	var0000 = Func0909();
 	var0001 = Func08F7(OWINGS);
 	var0002 = Func08F7(IOLO);
@@ -47561,7 +47561,7 @@ void Func04F3 object#(0x4F3) () {
 					}
 					OWINGS->say("\"Hello there!\" says Owings, giving you a big smile. The front of his mining helmet falls down over his eyes. Blinded, he gropes the air around him.*");
 					OWINGS->hide();
-					0xFF0D->say("Malloy shakes his head sadly.*");
+					MALLOY->say("Malloy shakes his head sadly.*");
 				}
 			} else {
 				say("Malloy regains his composure. \"Hello there, I am Malloy. I do apologize for my partner's childish antics.\"");
@@ -47581,7 +47581,7 @@ void Func04F3 object#(0x4F3) () {
 					say("\"That is absolutely right, Malloy,\" says Owings. He gives a big nod which causes his helmet to fall down over his eyes.*");
 				}
 				OWINGS->hide();
-				0xFF0D->show_npc_face(0x0000);
+				MALLOY->show_npc_face(0x0000);
 			}
 			add(["mining engineers", "special project"]);
 			fallthrough;
@@ -47590,10 +47590,10 @@ void Func04F3 object#(0x4F3) () {
 			say("\"My partner and I are not exactly mining engineers, although we did travel to Minoc to become miners. We came here with a map...\"*");
 			OWINGS->say("\"It was the map that the funny man dressed like the Avatar sold us!\"*");
 			OWINGS->hide();
-			0xFF0D->say("\"That is correct. But when we got here we discovered that the Britannian Mining Company owned the rights to this area of land already!\"*");
+			MALLOY->say("\"That is correct. But when we got here we discovered that the Britannian Mining Company owned the rights to this area of land already!\"*");
 			OWINGS->say("\"That funny man dressed like the Avatar lied to us.\" Owings scratches his head thoughtfully. \"The Britannian Mining Company wanted to throw us in the prisons of Yew for claim jumping!\"*");
 			OWINGS->hide();
-			0xFF0D->say("\"I was able to convince them that we would be more valuable to the Britannian Mining Company if we could come to work for them.\" Malloy beams proudly.*");
+			MALLOY->say("\"I was able to convince them that we would be more valuable to the Britannian Mining Company if we could come to work for them.\" Malloy beams proudly.*");
 			remove("mining engineers");
 			add(["map", "funny man"]);
 			fallthrough;
@@ -47615,12 +47615,12 @@ void Func04F3 object#(0x4F3) () {
 				say("\"In that case I thank thee for thine honesty. I do not really mind if a person is untrustworthy. But someone who is untrustworthy and dishonest about it, that is something that I cannot abide.\"*");
 				OWINGS->say("You see Owings nod his head most enthusiastically. A second later he has a very confused expression on his face.*");
 				OWINGS->hide();
-				0xFF0D->show_npc_face(0x0000);
+				MALLOY->show_npc_face(0x0000);
 			} else {
 				say("\"The Britannian Mining Company has asked us to dig a tunnel to New Magincia! It will revolutionize the mining industry.\"");
 				OWINGS->say("\"They do not want anybody to find out about it. They said that bringing more mining equipment over here would just make people suspicious, so they told us to start by using these spoons!\" Owings proudly holds up his spoon to show it to you. He smiles.");
 				OWINGS->hide();
-				0xFF0D->say("\"Yes, it was such a special project they told us we were the only ones they could think of who would even attempt to do such a thing!\" Malloy beams proudly. \"Well come on, Owings, we had best get back to work. We have a schedule to meet.\"");
+				MALLOY->say("\"Yes, it was such a special project they told us we were the only ones they could think of who would even attempt to do such a thing!\" Malloy beams proudly. \"Well come on, Owings, we had best get back to work. We have a schedule to meet.\"");
 				remove("special project");
 				add(["tunnel", "schedule"]);
 			}
@@ -47635,7 +47635,7 @@ void Func04F3 object#(0x4F3) () {
 			say("\"Owings, have a look at that schedule and find out how we are doing.\"");
 			OWINGS->say("Owings bends over and goes to pick up a very large scroll. As he touches the tip of it he sends it rolling away down the mineshaft. As it rolls away it is unravelling leaving a lengthy trail of paper behind it. Owings chases after it but succeeds in doing little else but tangling up his legs in the long roll of the paper. When at last he has the other end, it is an unreadable mess.");
 			OWINGS->hide();
-			0xFF0D->say("\"Give me that!\" says Malloy as he snatches a piece of the scroll away. He examines it for a moment. \"According to this we shall be finished in... one hundred and seventy three years! Owings, we have got to start working faster!\" The two of them go back to digging with their spoons. As they dig Malloy turns to Owings and says, \"This is another fine mess thou hast gotten me into!\"");
+			MALLOY->say("\"Give me that!\" says Malloy as he snatches a piece of the scroll away. He examines it for a moment. \"According to this we shall be finished in... one hundred and seventy three years! Owings, we have got to start working faster!\" The two of them go back to digging with their spoons. As they dig Malloy turns to Owings and says, \"This is another fine mess thou hast gotten me into!\"");
 			remove("schedule");
 			fallthrough;
 
@@ -47644,7 +47644,7 @@ void Func04F3 object#(0x4F3) () {
 			OWINGS->say("Owings grabs the helmet on Malloy's foot and attempts to dislodge it. After several fierce tugs it comes off with a loud popping noise. Owings pulls the helmet right into his own face and this makes a loud knocking noise.");
 			UI_play_sound_effect(0x0053);
 			OWINGS->hide();
-			0xFF0D->say("Malloy goes hurling backwards, crying out in panic. He smacks the back of his head on the rock wall behind him. He takes off his crumpled helmet and points to it. \"A good thing I was wearing this or I might have been hurt!\" With that a loose rock tumbles down from the ceiling landing squarely on his head. Malloy says \"Ooooooh!\" Owings breaks into a giggling fit. Malloy flashes you an incredulous pouting grimace.");
+			MALLOY->say("Malloy goes hurling backwards, crying out in panic. He smacks the back of his head on the rock wall behind him. He takes off his crumpled helmet and points to it. \"A good thing I was wearing this or I might have been hurt!\" With that a loose rock tumbles down from the ceiling landing squarely on his head. Malloy says \"Ooooooh!\" Owings breaks into a giggling fit. Malloy flashes you an incredulous pouting grimace.");
 			UI_play_sound_effect(0x000F);
 			remove("helmet on foot");
 			fallthrough;
