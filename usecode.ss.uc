@@ -75511,7 +75511,7 @@ void Func073B object#(0x73B) () {
 			say("\"Hahaha! I am the Wantonness Bane!\"");
 			say("\"Wherever I pass, people shall frolic and sate their wild desires! I shall drive thee to feed thy darkest hungers!\"");
 			UI_remove_npc_face0();
-			0xFEDC->show_npc_face0(0x0000);
+			INSANITY->show_npc_face0(0x0000);
 			say("\"I -- hahaha! -- am the Insanity Bane! Hahaha!\"");
 			say("\"All those who fall within my shadow shall have their reason clouded and their wits addled! Their greatest love shall lie in the rubbish they once loathed! Hahaha!\"");
 			UI_remove_npc_face0();

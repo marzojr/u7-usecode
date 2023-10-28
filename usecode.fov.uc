@@ -359,6 +359,7 @@ enum misc_npcs {
 	BOLLUX				= -289,	//Isle of Fire, not so smart golem
 	ARCADION			= -290,	//Demon form
 	ARCADION_GEM		= -291,	//Gem form
+	ARCADION_SWORD		= -292,	//Sword form
 
 	JUGGERNAUT	= -259,	//Isle of the Avatar, enemy
 	HOOK		= -291,	//Isle of the Avatar, arch-villain
@@ -1042,7 +1043,7 @@ void Func009A shape#(0x9A) () {
 						} else {
 							say("\"Here we are. Now then, it appears to be written in a strange format. One might even say a code of sorts... I have it! Apparently, the Talisman currently resides in the Great Void. A plane somewhat removed from ours. If thou wishest to gain access to this void, thou shalt need to craft two lenses: one concave, the other convex. Light focused through the properly enchanted lenses will open a conduit between our realm and the void. I believe this treatise speaks of three Talismans of Principle that send out a call to the Infinity Talisman and bring it here. Once here, it would seem that its sole purpose is to coerce a powerful force into the void.\" A thought hits the mage like lightning strikes a tree. \"Oh no, Avatar... Thou shan't gain any more aid from me. I may be blind, but I see through thy sham. I'll not help thee send the Core into the void.\" Erethian falls silent, and it would appear that he'll speak no more.");
 							ERETHIAN->hide();
-							0xFEDC->say("Arcadion's voice whispers to you like ripple in still pond, \"Fear not, my master. I have some knowledge of these matters.\"*");
+							ARCADION_SWORD->say("Arcadion's voice whispers to you like ripple in still pond, \"Fear not, my master. I have some knowledge of these matters.\"*");
 							gflags[0x030E] = true;
 							abort;
 						}
@@ -1057,7 +1058,7 @@ void Func009A shape#(0x9A) () {
 						} else {
 							say("\"Here we are. Now then, it appears to be written in a strange format. One might even say a code of sorts... I have it! Apparently, the Talisman currently resides in the Great Void. A plane somewhat removed from ours. If thou wishest to gain access to this void, thou shalt need to craft two lenses: one concave, the other convex. Light focused through the properly enchanted lenses will open a conduit between our realm and the void. I believe this treatise speaks of three Talismans of Principle that send out a call to the Infinity Talisman and bring it here. Once here, it would seem that its sole purpose is to coerce a powerful force into the void.\" A thought hits the mage like lightning strikes a tree. \"Oh no, Avatar... Thou shan't gain any more aid from me. I may be blind, but I see through thy sham. I'll not help thee send the Core into the void.\" Erethian falls silent, and it would appear that he'll speak no more.");
 							ERETHIAN->hide();
-							0xFEDC->say("Arcadion's voice whispers to you like ripple in still pond, \"Fear not, my master. I have some knowledge of these matters.\"*");
+							ARCADION_SWORD->say("Arcadion's voice whispers to you like ripple in still pond, \"Fear not, my master. I have some knowledge of these matters.\"*");
 							gflags[0x030E] = true;
 							abort;
 						}
@@ -59744,10 +59745,10 @@ void Func06F6 object#(0x6F6) () {
 				gflags[0x0344] = true;
 				return;
 			}
-			0xFEDC->say("The sword glimmers darkly as you speak to it. \"Greetings, my master. And how can thy humble servant aid thee?\" The daemon's voice has regained much of its oddly disturbing humor.");
+			ARCADION_SWORD->say("The sword glimmers darkly as you speak to it. \"Greetings, my master. And how can thy humble servant aid thee?\" The daemon's voice has regained much of its oddly disturbing humor.");
 			gflags[0x0313] = true;
 		} else {
-			0xFEDC->say("\"Yes, master. What dost thou seek of thy servant?\" Arcadion asks you in a deep, harmonic voice.");
+			ARCADION_SWORD->say("\"Yes, master. What dost thou seek of thy servant?\" Arcadion asks you in a deep, harmonic voice.");
 		}
 		add(["name", "job", "bye", "powers"]);
 		if (gflags[0x030E] && (!gflags[0x030C])) {
@@ -59811,11 +59812,11 @@ void Func06F6 object#(0x6F6) () {
 
 			case "Death":
 				say("\"Where is the corpse of which thou dost speak?\" The dark sword begins to vibrate in your hand.*");
-				0xFEDC->hide();
+				ARCADION_SWORD->hide();
 				var0011 = UI_click_on_item();
 				var0017 = var0011->get_item_shape();
 				var0018 = var0011->get_object_position();
-				0xFEDC->show_npc_face(0x0000);
+				ARCADION_SWORD->show_npc_face(0x0000);
 				if (var0011->is_npc()) {
 					do {
 						if ((var0017 == 0x02D1) || (var0017 == 0x03DD)) {
@@ -59829,7 +59830,7 @@ void Func06F6 object#(0x6F6) () {
 								LORD_BRITISH->say("\"",
 									var0019,
 									", for what reason art thou brandishing that black sword in my presence?\"");
-								0xFEDC->hide();
+								ARCADION_SWORD->hide();
 								AVATAR->say("The daemon responds, using your mouth. \"This blade is thy doom,...\" You spit the words, \"Lord British!\"");
 								LORD_BRITISH->say("Lord British looks truly taken aback, his eyes narrow calculatingly. \"What foul treachery is this?\"");
 								AVATAR->say("You find yourself unable to respond, and your muscles are clenching as if to lash out with the wicked blade in your hand.");
@@ -59855,7 +59856,7 @@ void Func06F6 object#(0x6F6) () {
 									say("\"Ah, Dracothraxus. We meet once again. 'Tis a pity thou shan't survive our meeting this time. Perhaps if thou hadst given the gem to me when first I asked, none of this unpleasantness would be necessary.\"");
 									0xFEDB->say("The dragon responds with great resignation. \"My will is not mine own in this matter, Arcadion. Mayhap thou art finding too, that thy will is not thine own.\"");
 									0xFEDB->hide();
-									0xFEDC->say("The daemon, possibly stung by the dragon's repartee, falls silent and goes to its bloody work.*");
+									ARCADION_SWORD->say("The daemon, possibly stung by the dragon's repartee, falls silent and goes to its bloody work.*");
 									var0015 = true;
 									goto labelFunc06F6_0B89;
 								}
@@ -59924,7 +59925,7 @@ void Func06F6 object#(0x6F6) () {
 
 			case "Fire":
 				say("\"And what, pray tell, is the intended target of thy immense and most puissant wrath, O' Master of Infinite Destruction?\"");
-				0xFEDC->hide();
+				ARCADION_SWORD->hide();
 				var0012 = true;
 				goto labelFunc06F6_0B89;
 
