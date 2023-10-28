@@ -75507,7 +75507,7 @@ void Func073B object#(0x73B) () {
 			say("\"I am Anarchy! Hahaha!\"");
 			say("\"The world shall quail before me! Wrong shall become right! And right shall become lost! Nothing shall escape my touch!\"");
 			UI_remove_npc_face0();
-			0xFEDD->show_npc_face0(0x0000);
+			WANTONNES->show_npc_face0(0x0000);
 			say("\"Hahaha! I am the Wantonness Bane!\"");
 			say("\"Wherever I pass, people shall frolic and sate their wild desires! I shall drive thee to feed thy darkest hungers!\"");
 			UI_remove_npc_face0();

@@ -358,6 +358,7 @@ enum misc_npcs {
 	ADJHAR				= -288,	//Isle of Fire, smart golem
 	BOLLUX				= -289,	//Isle of Fire, not so smart golem
 	ARCADION			= -290,	//Demon form
+	ARCADION_GEM		= -291,	//Gem form
 
 	JUGGERNAUT	= -259,	//Isle of the Avatar, enemy
 	HOOK		= -291,	//Isle of the Avatar, arch-villain
@@ -1076,8 +1077,8 @@ void Func009A shape#(0x9A) () {
 				ERETHIAN->show_npc_face(0x0001);
 				say("Erethian nods his head when you tell him of your dilemma with the black sword. \"Yes, I can see how the blade would be too clumsy to swing in combat. However, if thou were to bind a magical source of power into the hilt of the blade, thou mightest be able to counteract the unwieldy nature of the sword.\"");
 				if (AVATAR->get_npc_object()->get_cont_items(0x02F8, QUALITY_ANY, 0x000D)) {
-					0xFEDD->say("The little gem sparks up at this turn of the conversation. \"I believe that in my current form, I could serve perfectly well as the blade's stabilizing force. In truth, this would allow me to give thee access to some of my more dramatic powers.\" The daemon sounds excited at this prospect, perhaps a little too excited.");
-					0xFEDD->hide();
+					ARCADION_GEM->say("The little gem sparks up at this turn of the conversation. \"I believe that in my current form, I could serve perfectly well as the blade's stabilizing force. In truth, this would allow me to give thee access to some of my more dramatic powers.\" The daemon sounds excited at this prospect, perhaps a little too excited.");
+					ARCADION_GEM->hide();
 					ERETHIAN->show_npc_face(0x0001);
 					say("Erethian's voice is quiet as he says, \"Consider well before thou bindest Arcadion into the sword. For it is true that he will be able to solve the sword's problem of balance, but will he be able to solve his own problems as well?\"");
 					add("problems");
@@ -1291,8 +1292,8 @@ void Func009A shape#(0x9A) () {
 			case "daemon gem":
 				say("\"So... thou hast made a servant of Arcadion. 'Tis good to be rid of his incessant whining. I hope that thou findest him to be as useful as I didst.\" You're not sure, but his words might be construed as a curse.");
 				if (AVATAR->get_npc_object()->get_cont_items(0x02F8, QUALITY_ANY, 0x000D)) {
-					0xFEDD->say("The gem glows brighter, \"'Tis good to see the last of thee, also, old man. Perhaps in another life, I shall be thy master, and thou the slave.\" The daemon lets out a chilling little laugh.");
-					0xFEDD->hide();
+					ARCADION_GEM->say("The gem glows brighter, \"'Tis good to see the last of thee, also, old man. Perhaps in another life, I shall be thy master, and thou the slave.\" The daemon lets out a chilling little laugh.");
+					ARCADION_GEM->hide();
 					ERETHIAN->show_npc_face(0x0001);
 					say("Erethian looks a little shaken at hearing the daemon's voice, but quickly recovers his composure. \"I think not, daemon. I'm not at all sure that there is a way for thou to get out of that little gem.\" The elderly mage's expression is unreadable.*");
 					ERETHIAN->show_npc_face(0x0000);
@@ -59554,7 +59555,7 @@ void Func06F6 object#(0x6F6) () {
 		if (!(event == SCRIPTED)) {
 			return;
 		}
-		0xFEDD->show_npc_face(0x0000);
+		ARCADION_GEM->show_npc_face(0x0000);
 		var0009 = false;
 		if (!gflags[0x0313]) {
 			say("The little gem pulses with energy, \"Now all Britannia shall feel my wrath. I'll make them all pay for every decade I spent within that accursed mirror!\" The gem glows brighter, and you expect the world to come apart at the seams... then, nothing. \"NO!\" The daemon's primal scream sounds a bit crystalline through the medium of the gem. \"This cannot be! That old fool was right. I'm still trapped!\" The daemon's anguished voice falls silent.");
