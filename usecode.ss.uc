@@ -422,6 +422,7 @@ enum misc_npcs {
 	THE_FIEND = -305,
 	ISSTANAR = -306,	// Commander of Serpent's Fang
 	ELISSA = -307,		// Order mage of Serpent's Fang
+	SUROK = -308,		// Healer of Serpent's Fang
 
 	LAST_TRUE_NPC = -255	// ID of last NPC from NPC.DAT. All others are in MONSNPCS.DAT
 };
@@ -18847,7 +18848,7 @@ void Func03B2 shape#(0x3B2) () {
 	if (event == STARTED_TALKING) {
 		set_schedule_type(STANDTHERE);
 		clear_item_say();
-		0xFECC->show_npc_face0(0x0000);
+		SUROK->show_npc_face0(0x0000);
 		var0008 = get_npc_id();
 		if (gflags[0x02FC] || gflags[0x0313]) {
 			say("\"Who would have thought that lowly Surok would be speaking with the Champion of Balance? I am honored.");
