@@ -67,6 +67,7 @@ enum moonshade_npcs {
 	POTHOS = -29,
 	ROCCO = -30, // Innkeeper
 	ROTOLUNCIA = -31,
+	ROTOLUNCIA_SCROLL = -302,
 	TOPO = -32,
 	TORRISSIO = -33,
 	SERV09 = -191, // Stefano's
@@ -29232,7 +29233,7 @@ void Func041F object#(0x41F) () {
 			abort;
 		}
 		if (gflags[0x0134] && (!gflags[0x00EA])) {
-			0xFED2->show_npc_face0(0x0000);
+			ROTOLUNCIA_SCROLL->show_npc_face0(0x0000);
 			if (ROTOLUNCIA->get_item_flag(DEAD)) {
 				say("\"I am speaking to thee from beyond the grave. I shall have vengeance!\"");
 				abort;
@@ -29255,7 +29256,7 @@ void Func041F object#(0x41F) () {
 			var000B = false;
 			var000C = false;
 			var000D = UI_get_array_size(UI_get_party_list());
-			0xFED2->show_npc_face0(0x0000);
+			ROTOLUNCIA_SCROLL->show_npc_face0(0x0000);
 			say("\"Greetings, Stranger from Another Land. I am speaking to thee by means of this magic scroll -- there is no need to be afraid.\"");
 			var000E = Func0900(0x0002);
 			if (var000E != false) {
