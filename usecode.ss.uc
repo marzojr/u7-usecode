@@ -427,6 +427,7 @@ enum misc_npcs {
 	DRAXINAR = -310,	// Green dragon also known as 'Stumpy'
 	YUREL = -311,		// Catman in maze
 	RIEYA = -312,		// Wicked witch of the south-west
+	SOLARIA = -313,		// Wicked witch of the north
 
 	LAST_TRUE_NPC = -255	// ID of last NPC from NPC.DAT. All others are in MONSNPCS.DAT
 };
@@ -60857,7 +60858,7 @@ void Func061B object#(0x61B) () {
 	if (event == SCRIPTED) {
 		set_schedule_type(STANDTHERE);
 		clear_item_say();
-		0xFEC7->show_npc_face0(0x0000);
+		SOLARIA->show_npc_face0(0x0000);
 		if (!gflags[0x0311]) {
 			say("\"Well hello, ",
 				var0001,
@@ -62214,7 +62215,7 @@ void Func0632 object#(0x632) () {
 			"! This shall not be as easy as we were led to believe!\"");
 		RIEYA->show_npc_face0(0x0000);
 		say("\"Then we shall have to work together...\"");
-		0xFEC7->show_npc_face1(0x0000);
+		SOLARIA->show_npc_face1(0x0000);
 		say("\"The Guide shall make our aim true! The Guide shall lead the way to our truly perfect world!\"");
 		0x0000->set_conversation_slot();
 		UI_remove_npc_face1();
@@ -76743,7 +76744,7 @@ void Func0768 object#(0x768) () {
 		say("\"Bright wit?! I would have said half-wit, trying to keep this flawed world alive!");
 		say("\"One would think that a pawn of prophecy would be... I don't know, more intelligent!\"");
 		UI_remove_npc_face1();
-		0xFEC7->show_npc_face1(0x0000);
+		SOLARIA->show_npc_face1(0x0000);
 		say("\"Oh, don't be so hard on ",
 			var000B,
 			"! It's not ",
