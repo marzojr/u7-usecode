@@ -5014,7 +5014,7 @@ labelFunc0151_0462:
 
 			case "spy" (remove):
 				say("\"One sent by the Soldiers of Order, to break our wills and stop the Ode to Chaos. Why else dost thou listen so attentively?\"");
-				if (!0xFEDA->get_item_flag(DEAD)) {
+				if (!VASCULIO->get_item_flag(DEAD)) {
 					say("\"I predict this: I see thee lying dead at the feet of one who prowls this labyrinth.\"");
 					if (!Func097D(PARTY, 0x0001, 0x00E7, QUALITY_ANY, FRAME_ANY)) {
 						say("\"Thou hast not the weapon to defeat him! His powers overwhelm thee, and thou dost die!\"");
@@ -9604,9 +9604,9 @@ extern void Func0526 object#(0x526) ();
 void Func024C shape#(0x24C) () {
 	var var0000;
 
-	if (get_npc_number() == 0xFEDA) {
+	if (get_npc_number() == VASCULIO) {
 		AVATAR->set_item_flag(DONT_MOVE);
-		Func097F(0xFEDA, "@Ahhh, a victim...@", 0x0000);
+		Func097F(VASCULIO, "@Ahhh, a victim...@", 0x0000);
 		var0000 = script item {
 			nohalt;
 			wait 10;
@@ -59243,10 +59243,10 @@ labelFunc0526_0008:
 			case "bye":
 				ANTI_SHAM->show_npc_face0(0x0000);
 				say("\"Foolish mortal! The time hath come to relieve thee of the burden of thy life for it is also my time to feed!\"");
-				Func09AD(0xFEDA);
+				Func09AD(VASCULIO);
 				UI_remove_npc_face0();
 				UI_remove_npc_face1();
-				Func097F(0xFEDA, "@Enjoy thy death!@", 0x0000);
+				Func097F(VASCULIO, "@Enjoy thy death!@", 0x0000);
 				abort;
 
 			case "Filbercio":
@@ -59325,14 +59325,14 @@ labelFunc0526_0008:
 						ANTI_SHAM->show_npc_face0(0x0000);
 						say("\"Fool! Now I have the weapon that thou couldst have slain me with! Thou hast sealed thy fate for no mere mortal can defeat me! Prepare to die, foolish mortal!\"");
 						var0009 = UI_remove_party_items(0x0001, 0x00E7, QUALITY_ANY, FRAME_ANY, 0x0000);
-						Func09AD(0xFEDA);
-						Func097F(0xFEDA, "@Enjoy thy death!@", 0x0000);
+						Func09AD(VASCULIO);
+						Func097F(VASCULIO, "@Enjoy thy death!@", 0x0000);
 						abort;
 					}
 					ANTI_SHAM->show_npc_face0(0x0000);
 					say("\"Then thou dost leave me no choice!\"");
-					Func09AD(0xFEDA);
-					Func097F(0xFEDA, "@Enjoy thy death!@", 0x0000);
+					Func09AD(VASCULIO);
+					Func097F(VASCULIO, "@Enjoy thy death!@", 0x0000);
 					abort;
 				}
 				ANTI_SHAM->show_npc_face0(0x0000);
@@ -59376,18 +59376,18 @@ labelFunc0526_0008:
 						}
 						ANTI_SHAM->show_npc_face0(0x0000);
 						say("\"A pity! Then what I do not receive willingly, I will have to take by force!\"");
-						Func09AD(0xFEDA);
-						Func097F(0xFEDA, "@Enjoy thy death!@", 0x0000);
+						Func09AD(VASCULIO);
+						Func097F(VASCULIO, "@Enjoy thy death!@", 0x0000);
 						abort;
 					}
 					ANTI_SHAM->show_npc_face0(0x0000);
 					say("\"A pity! Then what I do not receive willingly, I will have to take by force!\"");
-					Func09AD(0xFEDA);
-					Func097F(0xFEDA, "@Enjoy thy death!@", 0x0000);
+					Func09AD(VASCULIO);
+					Func097F(VASCULIO, "@Enjoy thy death!@", 0x0000);
 					abort;
 				}
-				Func09AD(0xFEDA);
-				Func097F(0xFEDA, "@Enjoy thy death!@", 0x0000);
+				Func09AD(VASCULIO);
+				Func097F(VASCULIO, "@Enjoy thy death!@", 0x0000);
 				abort;
 		}
 	}
@@ -59396,7 +59396,7 @@ labelFunc0526_0008:
 			break;
 		}
 		if (get_item_shape() == 0x024C) {
-			Func097F(0xFEDA, "@Back to the pit!@", 0x0001);
+			Func097F(VASCULIO, "@Back to the pit!@", 0x0001);
 			return;
 		}
 		if (get_item_shape() == 0x00F3) {
@@ -59435,8 +59435,8 @@ labelFunc0526_0008:
 			}
 			UI_play_sound_effect(0x002A);
 			var000B[0x0002] += 0x0002;
-			0xFEDA->move_object(var000B);
-			var000C = script 0xFEDA {
+			VASCULIO->move_object(var000B);
+			var000C = script VASCULIO {
 				face south;
 			};
 			// I see no way other than this
@@ -60395,8 +60395,8 @@ void Func0614 object#(0x614) () {
 		return;
 	}
 	if (var0000 == 0x001A) {
-		0xFEDA->say("\"Dost thou think that thou canst chain the Serpent of Order within a prison of Balance? Never! Servants of Order, attack!\"");
-		0xFEDA->hide();
+		VASCULIO->say("\"Dost thou think that thou canst chain the Serpent of Order within a prison of Balance? Never! Servants of Order, attack!\"");
+		VASCULIO->hide();
 	}
 }
 
@@ -69245,7 +69245,7 @@ void Func06CF object#(0x6CF) () {
 extern void Func0922 0x922 (var var0000);
 
 void Func06D0 object#(0x6D0) () {
-	if (0xFEDA->get_item_flag(DEAD)) {
+	if (VASCULIO->get_item_flag(DEAD)) {
 		remove_item();
 	} else {
 		Func0922(0x000D);
@@ -106851,7 +106851,7 @@ void Func0916 0x916 () {
 		Func0922(0x000F);
 		abort;
 	}
-	if ((Func0994() == 0x0017) && (!0xFEDA->get_item_flag(DEAD))) {
+	if ((Func0994() == 0x0017) && (!VASCULIO->get_item_flag(DEAD))) {
 		Func0922(0x000D);
 		abort;
 	}
