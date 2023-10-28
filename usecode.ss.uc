@@ -18,6 +18,7 @@ enum party_members {
 
 	// Serpent Isle:
 	BOYDON = -34, // Created at Mad Mage Isle, remains until he dies
+	BOYDON_HEAD = -301, // Boydon's talking head
 
 	// Temporary NPCs:
 	// Both join in Temple of Tolerance, both die soon after:
@@ -30410,7 +30411,7 @@ void Func0422 object#(0x422) () {
 				say("\"Hello, there!\"");
 			}
 		} else {
-			0xFED3->show_npc_face0(0x0000);
+			BOYDON_HEAD->show_npc_face0(0x0000);
 			say("\"Now I see thee. Greetings! I am Boydon, the Living Head.\"");
 			if (!gflags[0x01C0]) {
 				var0012 = Func0992(IOLO, "The severed head speaks!", 0x0000, false);
@@ -67621,7 +67622,7 @@ void Func06AE object#(0x6AE) () {
 		} else {
 			abort;
 		}
-		if ((var0003 != AVATAR) && ((var0003 != 0xFED3) && (var0003 != AUTOMATON_FACE))) {
+		if ((var0003 != AVATAR) && ((var0003 != BOYDON_HEAD) && (var0003 != AUTOMATON_FACE))) {
 			var0009 = script var0003 after 7 ticks {
 				nohalt;
 				call Func06AE;
@@ -110415,7 +110416,7 @@ void Func094E 0x94E (var var0000, var var0001) {
 	var var0005;
 	var var0006;
 
-	if (var0000 == 0xFED3) {
+	if (var0000 == BOYDON_HEAD) {
 		var0000->show_npc_face1(0x0000);
 		if (var0000->get_item_flag(CONFUSED)) {
 			say("\"Slurp\"");
@@ -111907,7 +111908,7 @@ var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003) {
 
 	var0004 = Func098E();
 	if (Func097D(PARTY, 0x0001, 0x031F, QUALITY_ANY, 0x0012) && (!var0003)) {
-		var0004 &= 0xFED3;
+		var0004 &= BOYDON_HEAD;
 	}
 	var0005 = UI_get_array_size(var0004);
 	if (var0005 == 0x0001) {
@@ -111946,8 +111947,8 @@ var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003) {
 				var0013 = true;
 			}
 		}
-		if (var0004[var0014] == 0xFED3) {
-			var0000 = 0xFED3;
+		if (var0004[var0014] == BOYDON_HEAD) {
+			var0000 = BOYDON_HEAD;
 		} else {
 			var0000 = var0004[var0014]->get_npc_number();
 		}
@@ -112027,8 +112028,8 @@ var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003) {
 			// Dead code
 			abort;
 		}
-		if ((var0000 == BOYDON) && (0xFED3 in var0004)) {
-			var0000 = 0xFED3;
+		if ((var0000 == BOYDON) && (BOYDON_HEAD in var0004)) {
+			var0000 = BOYDON_HEAD;
 			if (!var0003) {
 				Func094E(var0000, var0001);
 			}
@@ -112045,7 +112046,7 @@ var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003) {
 		var0017 &= var001B & var001B->get_npc_name();
 	}
 	if (Func097D(PARTY, 0x0001, 0x031F, QUALITY_ANY, 0x0012) && (!var0003)) {
-		var0017 &= 0xFED3 & "Boydon's head in party";
+		var0017 &= BOYDON_HEAD & "Boydon's head in party";
 	}
 	UI_error_message("Copy down this information with the error");
 	UI_error_message(var0017);
