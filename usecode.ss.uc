@@ -409,6 +409,8 @@ enum misc_npcs {
 	DBEYER = -293, // Gargoyle, starts at the House of the Dead
 	FITCH = -295, // Trapper, the one dying at the edge of the Ice Plains
 
+	BALANCE_SERPENT = -295,	// Face constant
+
 	LAST_TRUE_NPC = -255	// ID of last NPC from NPC.DAT. All others are in MONSNPCS.DAT
 };
 
@@ -60258,7 +60260,7 @@ void Func0614 object#(0x614) () {
 		var0002 = 0xFED4;
 		for (var0005 in var0001 with var0003 to var0004) {
 			if ((var0005->get_item_shape() == 0x0377) && (var0005->get_item_frame() == 0x0002)) {
-				var0002 = 0xFED9;
+				var0002 = BALANCE_SERPENT;
 			}
 		}
 	}
@@ -69206,7 +69208,7 @@ void Func06CF object#(0x6CF) () {
 	var var0000;
 
 	if (event == EGG) {
-		0xFED9->item_say("@Help me...@");
+		FITCH->item_say("@Help me...@");
 		var0000 = script AVATAR after 10 ticks {
 			nohalt;
 			call Func06CF;
@@ -69230,10 +69232,10 @@ void Func06CF object#(0x6CF) () {
 
 			case "Rest easy.":
 				say("\"I am glad thou didst find me. I'd have hated to have died out here alone...\"");
-				Func097F(0xFED9, "@The pain!@", 0x0000);
+				Func097F(FITCH, "@The pain!@", 0x0000);
 				UI_remove_npc_face0();
 				UI_remove_npc_face1();
-				var0000 = script 0xFED9 after 5 ticks {
+				var0000 = script FITCH after 5 ticks {
 					nohalt;
 					hit 50, normal_damage;
 				};
