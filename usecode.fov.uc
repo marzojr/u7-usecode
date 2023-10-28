@@ -357,6 +357,7 @@ enum misc_npcs {
 	SHRINE_OF_PRINCIPLE	= -287,	//Isle of Fire
 	ADJHAR				= -288,	//Isle of Fire, smart golem
 	BOLLUX				= -289,	//Isle of Fire, not so smart golem
+	ARCADION			= -290,	//Demon form
 
 	JUGGERNAUT	= -259,	//Isle of the Avatar, enemy
 	HOOK		= -291,	//Isle of the Avatar, arch-villain
@@ -59385,7 +59386,7 @@ void Func06F6 object#(0x6F6) () {
 	var var001D;
 
 	if (!gflags[0x032F]) {
-		0xFEDE->show_npc_face(0x0000);
+		ARCADION->show_npc_face(0x0000);
 		var0000 = false;
 		var0001 = find_nearby(0x009A, 0x000A, MASK_NPC2);
 		for (var0004 in var0001 with var0002 to var0003) {
@@ -59403,7 +59404,7 @@ void Func06F6 object#(0x6F6) () {
 			say("Suprised, ",
 				var0005,
 				" looks around and says, \"I don't recall summoning thee. Nevermind, I have no need of thee at the current time. Begone!\" The old man waves his hand, negligently.");
-			0xFEDE->say("Through a tightly clenched smile, the figure replies, \"Very well...\" And after a significant pause, \"Master.\"*");
+			ARCADION->say("Through a tightly clenched smile, the figure replies, \"Very well...\" And after a significant pause, \"Master.\"*");
 			Func0843();
 		} else if (gflags[0x0332]) {
 			if (gflags[0x0333]) {
@@ -59501,9 +59502,9 @@ void Func06F6 object#(0x6F6) () {
 					add("release");
 				} else {
 					gflags[0x0331] = true;
-					0xFEDE->show_npc_face(0x0001);
+					ARCADION->show_npc_face(0x0001);
 					say("Arcadion looks as if he's about to force his way through the mirror, then once again masters his incredible rage.");
-					0xFEDE->say("He folds massive arms across a broad chest and slowly restores his gruesome smile, \"I can respect thy cowardice in this situation. After all, Erethian is\ta powerful mage, not the sort that a sheep like thyself should be trifling with.\" His contemtuous sneer begins to fade as the daemon takes his leave.*");
+					ARCADION->say("He folds massive arms across a broad chest and slowly restores his gruesome smile, \"I can respect thy cowardice in this situation. After all, Erethian is\ta powerful mage, not the sort that a sheep like thyself should be trifling with.\" His contemtuous sneer begins to fade as the daemon takes his leave.*");
 					Func0843();
 				}
 				fallthrough;
@@ -64964,7 +64965,7 @@ void Func0842 0x842 () {
 void Func0843 0x843 () {
 	var var0000;
 
-	0xFEDE->hide();
+	ARCADION->hide();
 	var0000 = script item {
 		frame 8;
 		sfx 67;

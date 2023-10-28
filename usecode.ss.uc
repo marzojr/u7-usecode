@@ -403,6 +403,9 @@ enum misc_npcs {
 	CINDY = -287, // Naked girl S of turtle-summoning bell
 	BRAX = -288,	// Naked girl, starts at the House of the Dead
 	FITCH_FACE = -289,	// One of Hazard's trappers
+	ANARCHY = -290,		// Bane faces
+	WANTONNES = -291,	// Bane faces
+	INSANITY = -292,	// Bane faces
 	DBEYER = -293, // Gargoyle, starts at the House of the Dead
 	FITCH = -295, // Trapper, the one dying at the edge of the Ice Plains
 
@@ -75500,7 +75503,7 @@ void Func073B object#(0x73B) () {
 			}
 		}
 		if (var0004 == 0x0007) {
-			0xFEDE->show_npc_face0(0x0000);
+			ANARCHY->show_npc_face0(0x0000);
 			say("\"I am Anarchy! Hahaha!\"");
 			say("\"The world shall quail before me! Wrong shall become right! And right shall become lost! Nothing shall escape my touch!\"");
 			UI_remove_npc_face0();
