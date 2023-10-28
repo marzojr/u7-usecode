@@ -419,6 +419,8 @@ enum misc_npcs {
 
 	AUTOMATON_FACE = -298,
 
+	THE_FIEND = -305,
+
 	LAST_TRUE_NPC = -255	// ID of last NPC from NPC.DAT. All others are in MONSNPCS.DAT
 };
 
@@ -19712,7 +19714,7 @@ void Func03CF shape#(0x3CF) () {
 	}
 	if (event == STARTED_TALKING) {
 		set_schedule_type(DANCE);
-		0xFECF->show_npc_face0(0x0000);
+		THE_FIEND->show_npc_face0(0x0000);
 		add(["name", "bye"]);
 		var0003 = get_npc_id();
 		if (var0003) {
