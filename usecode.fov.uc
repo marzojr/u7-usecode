@@ -360,6 +360,7 @@ enum misc_npcs {
 	ARCADION			= -290,	//Demon form
 	ARCADION_GEM		= -291,	//Gem form
 	ARCADION_SWORD		= -292,	//Sword form
+	DRACOTHRAXUS		= -293,	//Invincible red dragon
 
 	JUGGERNAUT	= -259,	//Isle of the Avatar, enemy
 	HOOK		= -291,	//Isle of the Avatar, arch-villain
@@ -3609,32 +3610,32 @@ void Func01F8 shape#(0x1F8) () {
 		if (!var0000->get_cont_items(0x031D, 0x00F1, 0x0004)) {
 			return;
 		}
-		0xFEDB->show_npc_face(0x0000);
+		DRACOTHRAXUS->show_npc_face(0x0000);
 		if (!gflags[0x0311]) {
 			say("\"Well met, seeker. I am Dracothraxus. Thy test, and I fear, thy defeat lies before thee. For thou shouldst know that I am made immortal by the Keeper of Courage. 'Twould take a truly powerful artifact to destroy me... one that does not exist.\" The great dragon paws the earth in expectation of your imminent battle.");
-			0xFEDB->hide();
+			DRACOTHRAXUS->hide();
 			gflags[0x0311] = true;
 			var0000->set_schedule_type(IN_COMBAT);
 		} else if (PARTY->count_objects(0x02C3, QUALITY_ANY, FRAME_ANY)) {
 			say("Dracothraxus sniffs the air distastefully, \"I sense my doom nearby. Perhaps I am to be released at long last. I wish thee good luck mortal. Defend thyself!\"  With that, the dragon leaps at you.");
-			0xFEDB->hide();
+			DRACOTHRAXUS->hide();
 			var0000->set_schedule_type(IN_COMBAT);
 		} else if (var0000->find_nearest(0x02C3, 0x001E)) {
 			say("Dracothraxus sniffs the air distastefully, \"I sense my doom nearby. Perhaps I am to be released at long last. I wish thee good luck mortal. Defend thyself!\"  With that, the dragon leaps at you.");
-			0xFEDB->hide();
+			DRACOTHRAXUS->hide();
 			var0000->set_schedule_type(IN_COMBAT);
 		} else {
 			say("\"Thou hast returned to test thy mettle, little one. Thy courage does thee honor, however, I think that thou shalt take thine honor to the grave with thee.\"*");
-			0xFEDB->hide();
+			DRACOTHRAXUS->hide();
 			var0000->set_schedule_type(IN_COMBAT);
 		}
 	}
 	if (event == SCRIPTED) {
-		0xFEDB->show_npc_face(0x0000);
+		DRACOTHRAXUS->show_npc_face(0x0000);
 		if (gflags[0x02EF]) {
 			say("The dragon lets out a searing sigh, \"Released at last. I go now to seek my reward, for this has been a test of my courage as well as thine. Thy reward lies beyond the door to the north. Enter the blue gate and the Amulet of Courage will be thine.\"*");
 			remove_item();
-			0xFEDB->hide();
+			DRACOTHRAXUS->hide();
 			var0006 = AVATAR->get_npc_object()->find_nearby(0x036C, 0x0028, MASK_NONE);
 			for (var0009 in var0006 with var0007 to var0008) {
 				if (var0009->get_item_quality() == 0x000A) {
@@ -3681,7 +3682,7 @@ void Func01F8 shape#(0x1F8) () {
 		say("\"I go now to rest, but I shall return. The door will not open until thou hast found a way to best me for good and for all. Farewell, little mortal.*");
 		remove_item();
 		gflags[0x0336] = true;
-		0xFEDB->hide();
+		DRACOTHRAXUS->hide();
 	}
 }
 
@@ -59854,8 +59855,8 @@ void Func06F6 object#(0x6F6) () {
 							if (AVATAR->get_npc_object()->get_distance(var0011) < 0x0005) {
 								if (var0011->get_cont_items(0x031D, 0x00F1, 0x0004)) {
 									say("\"Ah, Dracothraxus. We meet once again. 'Tis a pity thou shan't survive our meeting this time. Perhaps if thou hadst given the gem to me when first I asked, none of this unpleasantness would be necessary.\"");
-									0xFEDB->say("The dragon responds with great resignation. \"My will is not mine own in this matter, Arcadion. Mayhap thou art finding too, that thy will is not thine own.\"");
-									0xFEDB->hide();
+									DRACOTHRAXUS->say("The dragon responds with great resignation. \"My will is not mine own in this matter, Arcadion. Mayhap thou art finding too, that thy will is not thine own.\"");
+									DRACOTHRAXUS->hide();
 									ARCADION_SWORD->say("The daemon, possibly stung by the dragon's repartee, falls silent and goes to its bloody work.*");
 									var0015 = true;
 									goto labelFunc06F6_0B89;

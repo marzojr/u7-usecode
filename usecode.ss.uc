@@ -4416,12 +4416,12 @@ void Func013E shape#(0x13E) () {
 			say("\"I shall open the Wall of Lights and destroy the world! And thou art powerless to follow me!\"");
 			var0008 = get_object_position();
 			UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, var0008[0x0001], var0008[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			if (0xFEDB->npc_nearby()) {
+			if (DBEYER->npc_nearby()) {
 				say("\"Come, Palos! Destiny awaits beyond the frozen mountains!\"");
-				var0008 = 0xFEDB->get_object_position();
+				var0008 = DBEYER->get_object_position();
 				UI_sprite_effect(ANIMATION_PURPLE_BUBBLES, var0008[0x0001], var0008[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 			}
-			0xFEDB->remove_item();
+			DBEYER->remove_item();
 			Func09A3(item);
 			UI_play_sound_effect(0x0082);
 			gflags[0x02E2] = true;
@@ -15621,7 +15621,7 @@ void Func032B shape#(0x32B) () {
 		SMUDGE->set_item_flag(MET);
 		NEYOBI->set_item_flag(SI_ZOMBIE);
 		GWENNO->set_item_flag(SI_ZOMBIE);
-		var0008 = [AVATAR, SELINA, KALEN, ALE, KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA, SILENT1, SILENT2, SILENT3, JORVIN, HENCH1, HENCH2, HENCH3, PALOS, 0xFEDB, XENKA, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, GOBLIN_KING, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
+		var0008 = [AVATAR, SELINA, KALEN, ALE, KARNAX, THOXA, MIGGIM, BRACCUS, DRAXTA, SILENT1, SILENT2, SILENT3, JORVIN, HENCH1, HENCH2, HENCH3, PALOS, DBEYER, XENKA, RABINDRINATH, SIRANUSH, CANTRA, BRENDANN, SHAZZANA, CALADIN, TEMPLAR, LUTHER, GOBLIN_KING, GOBL19, GOBL21, GOBL22, GOBL23, GOBL24, STEFANO];
 		for (var000B in var0008 with var0009 to var000A) {
 			var000B->set_item_flag(SI_TOURNAMENT);
 		}
@@ -17969,8 +17969,8 @@ void Func0373 shape#(0x373) () {
 
 	var0000 = get_npc_number();
 	var0001 = get_npc_id();
-	if (var0000 == 0xFEDB) {
-		Func0919(0xFEDB);
+	if (var0000 == DBEYER) {
+		Func0919(DBEYER);
 		abort;
 	}
 	if (event == BG_PATH_FAILURE) {
@@ -42104,7 +42104,7 @@ void Func0440 object#(0x440) () {
 		HENCH1->run_schedule();
 		HENCH2->run_schedule();
 		HENCH3->run_schedule();
-		0xFEDB->run_schedule();
+		DBEYER->run_schedule();
 		CANTRA->remove_npc();
 		if (gflags[0x0095] && (!gflags[0x005B])) {
 			HARNNA->move_object([0x0345, 0x0A8B, 0x0000]);
@@ -60390,8 +60390,8 @@ void Func0614 object#(0x614) () {
 		return;
 	}
 	if (var0000 == 0x0019) {
-		0xFEDB->say("\"Avatar! It is I, Dupre! My soul has been fused with the Serpent of Chaos. I am keeping it from attacking thee, but I do not know how much longer I can hold out! Quickly! Thou must go to Sunrise Isle!\"");
-		0xFEDB->hide();
+		DBEYER->say("\"Avatar! It is I, Dupre! My soul has been fused with the Serpent of Chaos. I am keeping it from attacking thee, but I do not know how much longer I can hold out! Quickly! Thou must go to Sunrise Isle!\"");
+		DBEYER->hide();
 		return;
 	}
 	if (var0000 == 0x001A) {
@@ -71919,9 +71919,9 @@ void Func06FB object#(0x6FB) () {
 	HENCH3->set_new_schedules(MIDNIGHT, WANDER, [0x076C, 0x03E7]);
 	HENCH3->run_schedule();
 	Func097F(HENCH3, "@I be bored.@", 0x0003);
-	0xFEDB->move_object([0x0767, 0x03E4, 0x0001]);
-	0xFEDB->set_schedule_type(WAIT);
-	var0000 = script 0xFEDB {
+	DBEYER->move_object([0x0767, 0x03E4, 0x0001]);
+	DBEYER->set_schedule_type(WAIT);
+	var0000 = script DBEYER {
 		nohalt;
 		face south;
 	};
@@ -106998,7 +106998,7 @@ void Func0919 0x919 (var var0000) {
 	var var0006;
 	var var0007;
 
-	var0001 = [0xFEDB, HENCH1, HENCH2, HENCH3];
+	var0001 = [DBEYER, HENCH1, HENCH2, HENCH3];
 	if (HENCH3->get_npc_id() == 0x0000) {
 		for (var0004 in var0001 with var0002 to var0003) {
 			var0004->clear_item_say();
@@ -107006,8 +107006,8 @@ void Func0919 0x919 (var var0000) {
 		}
 		HENCH3->set_npc_id(0x0001);
 	} else if (HENCH3->get_npc_id() == 0x0001) {
-		Func097F(0xFEDB, "@Master!@", 0x0000);
-		Func097F(0xFEDB, "@Come quickly!@", 0x0007);
+		Func097F(DBEYER, "@Master!@", 0x0000);
+		Func097F(DBEYER, "@Come quickly!@", 0x0007);
 		var0005 = [0x0752, 0x03E5, 0x0006];
 		var0006 = UI_create_new_object2(0x013E, var0005);
 		if (var0006) {
