@@ -414,6 +414,8 @@ enum misc_npcs {
 	BALANCE_SERPENT = -295,	// Face constant
 	GUARDIAN = -296,	// Face constant
 
+	AUTOMATON_FACE = -298,
+
 	LAST_TRUE_NPC = -255	// ID of last NPC from NPC.DAT. All others are in MONSNPCS.DAT
 };
 
@@ -25259,7 +25261,7 @@ void Func0412 object#(0x412) () {
 				if (Func097D(PARTY, 0x0001, 0x02ED, QUALITY_ANY, 0x0001)) {
 					say("\"Allow me to see what thou hast -- it had better not be one of mine own!\"");
 					if (SERV_06->npc_nearby()) {
-						0xFED6->show_npc_face1(0x0000);
+						AUTOMATON_FACE->show_npc_face1(0x0000);
 						say("\"Thieves could not take thy goods, MageLord. I protect them well.\"");
 						UI_remove_npc_face1();
 						0x0000->set_conversation_slot();
@@ -26885,7 +26887,7 @@ void Func0419 object#(0x419) () {
 	if (event == STARTED_TALKING) {
 		AUTO_MESSENGER->run_schedule();
 		AUTO_MESSENGER->clear_item_say();
-		0xFED6->show_npc_face0(0x0000);
+		AUTOMATON_FACE->show_npc_face0(0x0000);
 		if (!gflags[0x00E9]) {
 			if (gflags[0x00D7]) {
 				say("\"Again we meet, ",
@@ -26970,7 +26972,7 @@ void Func0419 object#(0x419) () {
 	}
 	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		if (gflags[0x00EA] && (!ROTOLUNCIA->get_item_flag(DEAD))) {
-			0xFED6->show_npc_face0(0x0000);
+			AUTOMATON_FACE->show_npc_face0(0x0000);
 			say("\"Rotoluncia shall avenge my loss...\"");
 			gflags[0x00EB] = true;
 			ROTOLUNCIA->set_alignment(CHAOTIC);
@@ -48667,7 +48669,7 @@ void Func0452 object#(0x452) () {
 	if (event == STARTED_TALKING) {
 		LORD_OF_DISCIPLINE->run_schedule();
 		LORD_OF_DISCIPLINE->clear_item_say();
-		0xFED6->show_npc_face0(0x0000);
+		AUTOMATON_FACE->show_npc_face0(0x0000);
 		say("\"Unfinished... Discipline...\"");
 		say("\"Master... Punishment... No Order...\"");
 		say("\"Alcoves... Pain... Cannot succeed...\"");
@@ -48701,7 +48703,7 @@ void Func0453 object#(0x453) () {
 	if (event == STARTED_TALKING) {
 		ACID_AUTOMATON->run_schedule();
 		ACID_AUTOMATON->clear_item_say();
-		0xFED6->show_npc_face0(0x0000);
+		AUTOMATON_FACE->show_npc_face0(0x0000);
 		say("\"Soldiers... Discipline... fountain...\"");
 		say("\"Seek... Meek...\"");
 		say("\"Die in acid!... automaton... fetches Water!\"");
@@ -49393,7 +49395,7 @@ void Func0464 object#(0x464) () {
 	if (event == SCRIPTED) {
 		Func09AA();
 		UI_play_music(0x0040, Func09A0(0x0005, 0x0001));
-		0xFED6->show_npc_face0(0x0000);
+		AUTOMATON_FACE->show_npc_face0(0x0000);
 		var0000 = ETH_AUTOMATON->get_item_flag(MET);
 		if (var0000 == false) {
 			say("\"I am the Educator here, seeker. It is my task to determine how far thine Ethicality hath already progressed before the test may begin.\"");
@@ -49781,7 +49783,7 @@ void Func047D object#(0x47D) () {
 	}
 	if (event == DOUBLECLICK) {
 		if (gflags[0x024D]) {
-			0xFED6->show_npc_face0(0x0000);
+			AUTOMATON_FACE->show_npc_face0(0x0000);
 			say("\"Thou dost have the sceptre. My work is complete. I must rest. I have waited for thee for so long...\"*");
 			var0000 = script BUTLER after 15 ticks {
 				nohalt;
@@ -49796,14 +49798,14 @@ void Func047D object#(0x47D) () {
 	if (event == STARTED_TALKING) {
 		run_schedule();
 		clear_item_say();
-		0xFED6->show_npc_face0(0x0000);
+		AUTOMATON_FACE->show_npc_face0(0x0000);
 		say("\"Hierophant! Thou hast returned!\"");
 		say("\"But, thou art not the Hierophant. Pardon, mine energy is low.\"");
 		say("\"I have been waiting since all of the citizens of this city left through the Wall of Lights for their new world. Since that time\tI have been carefully attending thy belongings...\" *\"Pardon. I mean, the Hierophant's belongings.\" *\"Before he led the people through the Wall of Lights, he gave me an item of extreme importance, the Serpent Sceptre.\"* \"I have been guarding it for centuries now.\"");
 		var0001 = ["@This machine did mistake thee for the Hierophant, Avatar.@"];
 		var0002 = ["@By the Virtues, it thought I was this Hierophant person.@"];
 		var0000 = Func0992(SHAMINO, var0001, var0002, false);
-		0xFED6->show_npc_face0(0x0000);
+		AUTOMATON_FACE->show_npc_face0(0x0000);
 		say("\"Pardon, but did I just hear thou art the Hierophant? Is it true thou art the Hierophant of Order?\"");
 		var0003 = Func0955();
 		if (var0003) {
@@ -49842,7 +49844,7 @@ void Func047E object#(0x47E) () {
 		set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFED6->show_npc_face0(0x0000);
+		AUTOMATON_FACE->show_npc_face0(0x0000);
 		say("\"Avatar, thou shalt fail!\"");
 		var0000 = Func0992(DUPRE, "@Why, Avatar! Canst thou not hear it?! This automaton speaks with Batlin's voice!@", "@I recognize that voice! Batlin!@", false);
 		0x0000->set_conversation_slot();
@@ -50013,7 +50015,7 @@ void Func0481 object#(0x481) () {
 		clear_item_say();
 		PASSWORD->set_schedule_type(PATROL);
 		var0001 = DUPRE->get_item_flag(IN_PARTY);
-		0xFED6->show_npc_face0(0x0000);
+		AUTOMATON_FACE->show_npc_face0(0x0000);
 		say("\"I am the guardian of the city of Order. Dost thou wish to enter the great city of Spinebreaker?\"");
 		var0002 = Func0955();
 		if (var0002) {
@@ -50074,7 +50076,7 @@ void Func0482 object#(0x482) () {
 	if (event == STARTED_TALKING) {
 		GUARD12->run_schedule();
 		GUARD12->clear_item_say();
-		0xFED6->show_npc_face0(0x0000);
+		AUTOMATON_FACE->show_npc_face0(0x0000);
 		say("\"Halt! It is our duty to question thee. Dost thou serve Order or dost thou serve Chaos?\"");
 		converse (["I serve Order", "I serve Chaos"]) {
 			case "I serve Order" (remove):
@@ -52987,7 +52989,7 @@ void Func04A0 object#(0x4A0) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		0xFED6->show_npc_face0(0x0000);
+		AUTOMATON_FACE->show_npc_face0(0x0000);
 		if (gflags[0x023B]) {
 			say("\"Yes, felon?\"");
 			say("\"'Tis gratifying to see that I shant have to collect thy skull yet. Such stamina shall be useful to thee here, certainly.\"");
@@ -53106,7 +53108,7 @@ void Func04A1 object#(0x4A1) () {
 	}
 	if (event == DOUBLECLICK) {
 		JAIL_02->Func07D1();
-		0xFED6->show_npc_face0(0x0000);
+		AUTOMATON_FACE->show_npc_face0(0x0000);
 		say("\"Greetings, felon!\"");
 		say("\"Art thou in need of food or healing?\"");
 		if (Func0955() == true) {
@@ -53175,7 +53177,7 @@ void Func04A2 object#(0x4A2) () {
 		};
 	}
 	if (event == SCRIPTED) {
-		0xFED6->show_npc_face0(0x0000);
+		AUTOMATON_FACE->show_npc_face0(0x0000);
 		say("\"Thou hast made it this far... Dost thou wish to purchase food or healing potions?\"");
 		if (Func0955() == true) {
 			say("\"Such items are very valuable here, felon. Thou mayest find the prices steep...\"");
@@ -53194,7 +53196,7 @@ void Func04A2 object#(0x4A2) () {
 		}
 	}
 	if (event == DEATH) {
-		0xFED6->show_npc_face0(0x0000);
+		AUTOMATON_FACE->show_npc_face0(0x0000);
 		say("\"Congratulations, ",
 			var0000,
 			"! Thou hast proven thine innocence...\"");
@@ -56281,7 +56283,7 @@ void Func04BA object#(0x4BA) () {
 		} else {
 			GUARD18->clear_item_say();
 			GUARD18->run_schedule();
-			0xFED6->show_npc_face0(0x0000);
+			AUTOMATON_FACE->show_npc_face0(0x0000);
 			say("\"These doors have been sealed by the Serpent of Order, and none shall enter. By approaching thus far, thou hath shown thyself to be mine enemy.\"");
 			say("\"Now I must kill thee, lest the Serpent judge me unworthy. Bless my blade, master!\"");
 			Func097F(GUARD18, "@I shall prevail!@", 0x0000);
@@ -56340,7 +56342,7 @@ void Func04BC object#(0x4BC) () {
 		} else {
 			GUARD20->clear_item_say();
 			GUARD20->set_schedule_type(HOUND);
-			0xFED6->show_npc_face0(0x0000);
+			AUTOMATON_FACE->show_npc_face0(0x0000);
 			say("\"Thou art not permitted here. It is dangerous here. The forces beyond these doors are not of mortal understanding.\"");
 			Func097F(GUARD20, "@Be on thy way!@", 0x0000);
 		}
@@ -56423,7 +56425,7 @@ void Func04BE object#(0x4BE) () {
 		} else {
 			GUARD17->clear_item_say();
 			GUARD17->run_schedule();
-			0xFED6->show_npc_face0(0x0000);
+			AUTOMATON_FACE->show_npc_face0(0x0000);
 			say("\"Thou art not permitted here! I and my kind are the only beings allowed to prowl these tunnels. We are here to maintain Order.\"");
 			say("\"Unless thou canst show me thy Medallion of Order, I shall have to slay thee. Dost thou have one?\"");
 			if (Func0955()) {
@@ -56607,7 +56609,7 @@ void Func04CA object#(0x4CA) () {
 	var0000 = METAL_MAN->get_item_flag(MET);
 	if (event == DOUBLECLICK) {
 		METAL_MAN->clear_item_say();
-		0xFED6->show_npc_face0(0x0000);
+		AUTOMATON_FACE->show_npc_face0(0x0000);
 		if (!var0000) {
 			say("\"Halt! Only a true follower of Order may pass this portal. Art thou such a disciple?\"");
 			add(["I follow Order", "I follow Chaos"]);
@@ -61340,7 +61342,7 @@ void Func0625 object#(0x625) () {
 			if ((var0000 == 0x01CD) || (var0000 == 0x0103)) {
 				CHUCK->show_npc_face(0x0000);
 			} else if (var0000 == 0x02EB) {
-				0xFED6->show_npc_face(0x0000);
+				AUTOMATON_FACE->show_npc_face(0x0000);
 			} else if ((var0000 == 0x017D) || (var0000 == 0x02D0)) {
 				HOUND_OF_DOSKAR->show_npc_face(0x0000);
 			} else {
@@ -67558,7 +67560,7 @@ void Func06AD object#(0x6AD) () {
 		}
 		var0004 = get_npc_number();
 		if (var0004->get_item_shape() == 0x02EB) {
-			0xFED6->show_npc_face0(0x0000);
+			AUTOMATON_FACE->show_npc_face0(0x0000);
 		} else {
 			var0004->show_npc_face0(0x0000);
 		}
@@ -67618,7 +67620,7 @@ void Func06AE object#(0x6AE) () {
 		} else {
 			abort;
 		}
-		if ((var0003 != AVATAR) && ((var0003 != 0xFED3) && (var0003 != 0xFED6))) {
+		if ((var0003 != AVATAR) && ((var0003 != 0xFED3) && (var0003 != AUTOMATON_FACE))) {
 			var0009 = script var0003 after 7 ticks {
 				nohalt;
 				call Func06AE;
@@ -84185,7 +84187,7 @@ void Func0808 0x808 (var var0000, var var0001) {
 	if ((event == STARTED_TALKING) || (event == SCRIPTED)) {
 		run_schedule();
 		clear_item_say();
-		0xFED6->show_npc_face0(0x0000);
+		AUTOMATON_FACE->show_npc_face0(0x0000);
 		if ((var0000 == "Canton") || (var0000 == "Seminarium")) {
 			say("\"I am the servant and protector here at the ",
 				var0000,
@@ -84311,7 +84313,7 @@ void Func0809 0x809 () {
 		set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFED6->show_npc_face0(0x0000);
+		AUTOMATON_FACE->show_npc_face0(0x0000);
 		clear_item_say();
 		run_schedule();
 		say("\"What dost thou wish?\"");
@@ -90430,7 +90432,7 @@ void Func0830 0x830 () {
 	var var0003;
 
 	if ((UI_get_random(0x0003) == 0x0001) && SERV_06->npc_nearby()) {
-		0xFED6->show_npc_face1(0x0000);
+		AUTOMATON_FACE->show_npc_face1(0x0000);
 		var0000 = ["MageLord, the documents are ready for thy signature.", "The sorceress Frigidazzi hath arrived, honor.", "Thou art needed in the treasury, MageLord.", "It is time for thine appointment, MageLord.", "MageLord, thou art needed to handle a tax matter.", "Thou art urgently needed, MageLord."];
 		var0001 = var0000[UI_get_random(UI_get_array_size(var0000))];
 		say("\"",
@@ -110427,7 +110429,7 @@ void Func094E 0x94E (var var0000, var var0001) {
 	}
 	if (var0000->npc_nearby()) {
 		if (var0000->get_item_shape() == 0x02EB) {
-			var0000 = 0xFED6;
+			var0000 = AUTOMATON_FACE;
 		}
 		var0000->show_npc_face1(0x0000);
 		if (var0000->get_item_flag(CONFUSED)) {
