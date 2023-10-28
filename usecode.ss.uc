@@ -425,6 +425,7 @@ enum misc_npcs {
 	SUROK = -308,		// Healer of Serpent's Fang
 	TSANDAR = -309,		// Sub-commander of Serpent's Fang
 	DRAXINAR = -310,	// Green dragon also known as 'Stumpy'
+	YUREL = -311,		// Catman in maze
 
 	LAST_TRUE_NPC = -255	// ID of last NPC from NPC.DAT. All others are in MONSNPCS.DAT
 };
@@ -19436,7 +19437,7 @@ void Func03BD shape#(0x3BD) () {
 	if (event == STARTED_TALKING) {
 		set_schedule_type(STANDTHERE);
 		clear_item_say();
-		0xFEC9->show_npc_face0(0x0000);
+		YUREL->show_npc_face0(0x0000);
 		var0000 = get_npc_id();
 		if (!var0000) {
 			say("\"I am Yurel. Yurel is no monster. Yurel means no one harm.");
