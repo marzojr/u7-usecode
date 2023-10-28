@@ -423,6 +423,7 @@ enum misc_npcs {
 	ISSTANAR = -306,	// Commander of Serpent's Fang
 	ELISSA = -307,		// Order mage of Serpent's Fang
 	SUROK = -308,		// Healer of Serpent's Fang
+	TSANDAR = -309,		// Sub-commander of Serpent's Fang
 
 	LAST_TRUE_NPC = -255	// ID of last NPC from NPC.DAT. All others are in MONSNPCS.DAT
 };
@@ -19088,7 +19089,7 @@ void Func03B3 shape#(0x3B3) () {
 	if (event == STARTED_TALKING) {
 		set_schedule_type(STANDTHERE);
 		clear_item_say();
-		0xFECB->show_npc_face0(0x0000);
+		TSANDAR->show_npc_face0(0x0000);
 		if (!var0000) {
 			say("\"Who art thou?! But wait -- Thou dost wear the Amulet of Balance!");
 			say("\"I am no lord, stranger. I am merely a warrior. Thou mayest address me by name or title. I am SubCommander Tsandar.\"");
