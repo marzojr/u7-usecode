@@ -424,6 +424,7 @@ enum misc_npcs {
 	ELISSA = -307,		// Order mage of Serpent's Fang
 	SUROK = -308,		// Healer of Serpent's Fang
 	TSANDAR = -309,		// Sub-commander of Serpent's Fang
+	DRAXINAR = -310,	// Green dragon also known as 'Stumpy'
 
 	LAST_TRUE_NPC = -255	// ID of last NPC from NPC.DAT. All others are in MONSNPCS.DAT
 };
@@ -19947,7 +19948,7 @@ void Func03D2 shape#(0x3D2) () {
 		set_schedule_type(TALK);
 	}
 	if (event == STARTED_TALKING) {
-		0xFECA->show_npc_face0(0x0000);
+		DRAXINAR->show_npc_face0(0x0000);
 		if (var0000 == false) {
 			say("\"A human. How interesting. What dost thou want?\"");
 			add(["Who art thou?", "bye"]);
