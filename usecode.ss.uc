@@ -421,6 +421,7 @@ enum misc_npcs {
 
 	THE_FIEND = -305,
 	ISSTANAR = -306,	// Commander of Serpent's Fang
+	ELISSA = -307,		// Order mage of Serpent's Fang
 
 	LAST_TRUE_NPC = -255	// ID of last NPC from NPC.DAT. All others are in MONSNPCS.DAT
 };
@@ -20738,7 +20739,7 @@ void Func03F7 shape#(0x3F7) () {
 	if (event == STARTED_TALKING) {
 		set_schedule_type(STANDTHERE);
 		clear_item_say();
-		0xFECD->show_npc_face0(0x0000);
+		ELISSA->show_npc_face0(0x0000);
 		var0002 = get_npc_id();
 		if (gflags[0x02FC] || gflags[0x0313]) {
 			say("\"I am pleased to see thee, Champion of Balance.");
