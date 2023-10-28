@@ -428,6 +428,7 @@ enum misc_npcs {
 	YUREL = -311,		// Catman in maze
 	RIEYA = -312,		// Wicked witch of the south-west
 	SOLARIA = -313,		// Wicked witch of the north
+	DRUSILLA = -314,	// Wicked witch of the north-west
 
 	LAST_TRUE_NPC = -255	// ID of last NPC from NPC.DAT. All others are in MONSNPCS.DAT
 };
@@ -60620,7 +60621,7 @@ void Func0619 object#(0x619) () {
 	if (event == SCRIPTED) {
 		set_schedule_type(STANDTHERE);
 		clear_item_say();
-		0xFEC6->show_npc_face0(0x0000);
+		DRUSILLA->show_npc_face0(0x0000);
 		if (!gflags[0x0310]) {
 			say("\"Well, now, sweet cakes. It's about time ye showed up. I was beginnin' to get tired a waitin'. Me name's Drusilla.");
 			say("\"Ye aren't what I expected. But who am I to know what a pawn of prophecy looks like?\"");
@@ -62209,7 +62210,7 @@ void Func0632 object#(0x632) () {
 	}
 	if ((event == SCRIPTED) && (gflags[0x0007] == true)) {
 		gflags[0x0007] = false;
-		0xFEC6->show_npc_face0(0x0000);
+		DRUSILLA->show_npc_face0(0x0000);
 		say("\"Blast! The Amulet seems to be protecting ",
 			var0002,
 			"! This shall not be as easy as we were led to believe!\"");
@@ -76729,7 +76730,7 @@ void Func0768 object#(0x768) () {
 			var000B = "her";
 			var000C = "her";
 		}
-		0xFEC6->show_npc_face0(0x0000);
+		DRUSILLA->show_npc_face0(0x0000);
 		say("\"Not so fast, deary! Ye don't think that ye kin just dance outta here with that little seed so easy, now do ye?\"");
 		AVATAR->show_npc_face1(0x0000);
 		say("\"And who will stop me, hag? Thou?\"");
@@ -76738,7 +76739,7 @@ void Func0768 object#(0x768) () {
 		RIEYA->show_npc_face0(0x0000);
 		say("\"I don't know about thee, Drusilla, but I think that lout would do well as a candlestick. What thinkest thou?\"");
 		UI_remove_npc_face1();
-		0xFEC6->show_npc_face1(0x0000);
+		DRUSILLA->show_npc_face1(0x0000);
 		say("\"With such a bright wit, I think it would be fitting indeed!\"");
 		0x0000->set_conversation_slot();
 		say("\"Bright wit?! I would have said half-wit, trying to keep this flawed world alive!");
