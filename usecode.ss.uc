@@ -426,6 +426,7 @@ enum misc_npcs {
 	TSANDAR = -309,		// Sub-commander of Serpent's Fang
 	DRAXINAR = -310,	// Green dragon also known as 'Stumpy'
 	YUREL = -311,		// Catman in maze
+	RIEYA = -312,		// Wicked witch of the south-west
 
 	LAST_TRUE_NPC = -255	// ID of last NPC from NPC.DAT. All others are in MONSNPCS.DAT
 };
@@ -60727,7 +60728,7 @@ void Func061A object#(0x61A) () {
 	if (event == SCRIPTED) {
 		set_schedule_type(STANDTHERE);
 		clear_item_say();
-		0xFEC8->show_npc_face0(0x0000);
+		RIEYA->show_npc_face0(0x0000);
 		if (!gflags[0x030F]) {
 			say("\"Didst thy mother never tell thee not to speak with strange women then? Hmmmph!");
 			say("\"A fine one thou art to be wasting Rieya's time. Thou shouldst watch thy step, my bonny pawn of prophecy, lest I forget the aid that I was meant to give thee.\"");
@@ -62211,7 +62212,7 @@ void Func0632 object#(0x632) () {
 		say("\"Blast! The Amulet seems to be protecting ",
 			var0002,
 			"! This shall not be as easy as we were led to believe!\"");
-		0xFEC8->show_npc_face0(0x0000);
+		RIEYA->show_npc_face0(0x0000);
 		say("\"Then we shall have to work together...\"");
 		0xFEC7->show_npc_face1(0x0000);
 		say("\"The Guide shall make our aim true! The Guide shall lead the way to our truly perfect world!\"");
@@ -76733,7 +76734,7 @@ void Func0768 object#(0x768) () {
 		say("\"And who will stop me, hag? Thou?\"");
 		0x0000->set_conversation_slot();
 		say("\"Hag, now is it?! Well, we shall see about that, deary!\"");
-		0xFEC8->show_npc_face0(0x0000);
+		RIEYA->show_npc_face0(0x0000);
 		say("\"I don't know about thee, Drusilla, but I think that lout would do well as a candlestick. What thinkest thou?\"");
 		UI_remove_npc_face1();
 		0xFEC6->show_npc_face1(0x0000);
