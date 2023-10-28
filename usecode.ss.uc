@@ -413,6 +413,7 @@ enum misc_npcs {
 
 	BALANCE_SERPENT = -295,	// Face constant
 	GUARDIAN = -296,	// Face constant
+	BALANCE_SERPENT2 = -300,	// Translucent face constant
 
 	AUTOMATON_FACE = -298,
 
@@ -60262,7 +60263,7 @@ void Func0614 object#(0x614) () {
 	if ((var0000 >= 0x0000) && (var0000 < 0x0015)) {
 		var0001 = AVATAR->get_readied(SI_RIGHT_RING);
 		var0001 &= AVATAR->get_readied(SI_LEFT_RING);
-		var0002 = 0xFED4;
+		var0002 = BALANCE_SERPENT2;
 		for (var0005 in var0001 with var0003 to var0004) {
 			if ((var0005->get_item_shape() == 0x0377) && (var0005->get_item_frame() == 0x0002)) {
 				var0002 = BALANCE_SERPENT;
