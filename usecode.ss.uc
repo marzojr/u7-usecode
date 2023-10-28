@@ -409,7 +409,10 @@ enum misc_npcs {
 	DBEYER = -293, // Gargoyle, starts at the House of the Dead
 	FITCH = -295, // Trapper, the one dying at the edge of the Ice Plains
 
+	SMITH_HORSE = -296,	// Smith NPC
+
 	BALANCE_SERPENT = -295,	// Face constant
+	GUARDIAN = -296,	// Face constant
 
 	LAST_TRUE_NPC = -255	// ID of last NPC from NPC.DAT. All others are in MONSNPCS.DAT
 };
@@ -18073,23 +18076,23 @@ void Func0375 shape#(0x375) () {
 	var var0000;
 
 	if (event == STARTED_TALKING) {
-		0xFED8->show_npc_face0(0x0000);
+		SMITH_HORSE->show_npc_face0(0x0000);
 		say("\"Avatar! How good it is to see thee! How long hath it been since we last met?\"");
 		AVATAR->show_npc_face1(0x0000);
 		say("\"Ahhhh... Errrr... Well....\"");
 		UI_remove_npc_face1();
-		0xFED8->show_npc_face0(0x0000);
+		SMITH_HORSE->show_npc_face0(0x0000);
 		say("\"Do not tell me that thou dost not recognize me? Come now, Avatar, it hath not been that long.\"");
 		AVATAR->show_npc_face1(0x0000);
 		say("\"Welll... Maybe...\"");
 		UI_remove_npc_face1();
-		0xFED8->show_npc_face0(0x0000);
+		SMITH_HORSE->show_npc_face0(0x0000);
 		say("\"It is I! Smith the Horse! Only the finest steed in all of Britannia.\"* \"Oh, I suppose thou wouldst not recognize me such as I am. This is the appearance I take here at the Realm of Dreams.\"* \"Ah, this is the life. Mine own keep, as much hay as I could want, no insects to bother me... Who could ask for more?\" *\"Where are my wits! Avatar, I have something important to tell thee. But what was it?\"");
 		say("\"Oh, yes! Avatar, thou must take Rudyom's wand to the Isle of the Avatar!\"* \"There thou wilt find a monolith made of blackrock that Batlin is using to create a gateway to bring the Guardian into our world!\"* \"The future of Britannia doth lie in thine hands, Avatar!\"");
 		AVATAR->show_npc_face1(0x0000);
 		say("\"Ahh, Smith, the Guardian hath been stopped. Everything is safe.\"");
 		UI_remove_npc_face1();
-		0xFED8->show_npc_face0(0x0000);
+		SMITH_HORSE->show_npc_face0(0x0000);
 		say("\"Oh...\" *\"I feel like I have made a mule of myself. Never mind...\" *\"Now I remember! Thou hast left Britannia and hast journeyed to the Serpent Isle in search of Batlin!\" *\"Poor Iolo, he must be distraught to have found that Gwenno left on that voyage with that fiend. I hope that thou wilt find her before that evil man doth do something to her. She, at least, hath always been kind to me.\" *\"Wait! Avatar, I do have some information thou canst use!\" *\"Batlin and his band of hired swords are waiting for thee at...\" *\"Yummie! Here comes someone with more hay...\"");
 		UI_remove_npc_face0();
 		var0000 = get_object_position();
@@ -60370,15 +60373,15 @@ void Func0614 object#(0x614) () {
 		return;
 	}
 	if (var0000 == 0x0015) {
-		0xFED8->say("\"Pleasant dreams, Avatar...\"");
+		GUARDIAN->say("\"Pleasant dreams, Avatar...\"");
 		say("\"Ha ha hah hah!\"");
-		0xFED8->hide();
+		GUARDIAN->hide();
 		return;
 	}
 	if (var0000 == 0x0016) {
-		0xFED8->say("\"See how I reward those who fail me!\"");
+		GUARDIAN->say("\"See how I reward those who fail me!\"");
 		say("\"Hah hah hah hah!\"");
-		0xFED8->hide();
+		GUARDIAN->hide();
 		return;
 	}
 	if (var0000 == 0x0017) {
