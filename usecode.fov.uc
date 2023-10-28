@@ -356,6 +356,7 @@ enum misc_npcs {
 	ERETHIAN			= -286,	//Isle of Fire
 	SHRINE_OF_PRINCIPLE	= -287,	//Isle of Fire
 	ADJHAR				= -288,	//Isle of Fire, smart golem
+	BOLLUX				= -289,	//Isle of Fire, not so smart golem
 
 	JUGGERNAUT	= -259,	//Isle of the Avatar, enemy
 	HOOK		= -291,	//Isle of the Avatar, arch-villain
@@ -62328,19 +62329,19 @@ void Func0714 object#(0x714) () {
 			}
 			Func08FF("@According to the tome, a `heart' will be necessary to perform this ritual.@");
 			if (!gflags[0x031C]) {
-				0xFEDF->say("\"I will give him mine!\"");
-				0xFEDF->hide();
+				BOLLUX->say("\"I will give him mine!\"");
+				BOLLUX->hide();
 				var000D = script AVATAR {
 					wait 500;
 				};
 				var0000 = find_nearby(0x019E, 0x0050, MASK_NONE);
 				for (var0005 in var0000 with var000E to var000F) {
 					if (var0005->get_cont_items(0x031D, 0x00F3, 0x0004)) {
-						0xFEDF->say("You watch in stunned horror as Bollux pierces his chest open with his fingers.");
-						0xFEDF->hide();
+						BOLLUX->say("You watch in stunned horror as Bollux pierces his chest open with his fingers.");
+						BOLLUX->hide();
 						var0010 = var0002->direction_from(var0005);
-						0xFEDF->say("He pulls forth a heart-shape stone and, with a final flurry of action, drops the stone upon Adjhar's chest as he falls dead to the ground.");
-						0xFEDF->hide();
+						BOLLUX->say("He pulls forth a heart-shape stone and, with a final flurry of action, drops the stone upon Adjhar's chest as he falls dead to the ground.");
+						BOLLUX->hide();
 						var0011 = script var0002 {
 							face var0010;
 							wait 2;
@@ -69574,7 +69575,7 @@ void Func0894 0x894 (var var0000) {
 		var0000->set_schedule_type(LOITER);
 	}
 	if (event == DOUBLECLICK) {
-		0xFEDF->show_npc_face(0x0000);
+		BOLLUX->show_npc_face(0x0000);
 		if (gflags[0x0324] && (!gflags[0x031C])) {
 			say("\"I -must- return his life to him. He -will- have a new heart!\" The determination is quite evident by his forceful glare and stance.");
 		}
@@ -69589,7 +69590,7 @@ void Func0894 0x894 (var var0000) {
 			say("The stone statue stands with a lowered head. Despite its granite features, a downcast look is apparent on its face. Surprisingly, it turns to speak with you.");
 			Func08FF("@Why, by the stars, I believe it \r\n\t\t\t\tis a creature!@");
 			say("Slowly, as if with great effort, it raises it head.");
-			0xFEDF->show_npc_face(0x0000);
+			BOLLUX->show_npc_face(0x0000);
 			var0001 = AVATAR->find_nearest(0x019E, 0x0028)->get_item_frame();
 			if (!((var0001 == 0x0004) || (var0001 == 0x0005))) {
 				say("\"What dost thou... want?\" it asks slowly.");
@@ -69605,7 +69606,7 @@ void Func0894 0x894 (var var0000) {
 		var0002 = false;
 		var0003 = false;
 		converse (0) {
-			0xFEDF->show_npc_face(0x0000);
+			BOLLUX->show_npc_face(0x0000);
 			case "name" (remove):
 				if (gflags[0x031D]) {
 					say("He tilts his head and stares at you quizzicaly.~ \"I apologize. Did I not already tell thee my master called me Bollux?\"");
@@ -69721,13 +69722,13 @@ void Func0895 0x895 () {
 	var var0002;
 	var var0003;
 
-	0xFEDF->say("Bollux stares ahead, almost vacantly. Despite his features and lack of motion, it is apparent by his expression that some of Castambre's magic still resides within.");
+	BOLLUX->say("Bollux stares ahead, almost vacantly. Despite his features and lack of motion, it is apparent by his expression that some of Castambre's magic still resides within.");
 	var0000 = find_nearby(0x03F7, 0x0028, MASK_NONE);
 	for (var0003 in var0000 with var0001 to var0002) {
 		if (get_cont_items(0x031D, 0x00F3, 0x0004) || (find_nearby(0x031D, 0x0001, MASK_ALL_UNSEEN)->get_item_quality() == 0x00F3)) {
 			say("\"Bollux turns to see Adjar standing nearby, quite alive. Instantly, Bollux's expression changes detectably.");
-			0xFEDF->hide();
-			0xFEDF->show_npc_face(0x0001);
+			BOLLUX->hide();
+			BOLLUX->show_npc_face(0x0001);
 			ADJHAR->say("Adjhar simply smiles.~\"Greetings, brother.\"");
 		}
 	}
@@ -69753,7 +69754,7 @@ void Func0895 0x895 () {
 }
 
 void Func0896 0x896 () {
-	0xFEDF->say("The golem seems to have regained his staid composure. However, life is still evident within his gem-like eyes.");
+	BOLLUX->say("The golem seems to have regained his staid composure. However, life is still evident within his gem-like eyes.");
 	converse (["name", "job", "bye"]) {
 		case "name" (remove):
 			if (gflags[0x031D]) {

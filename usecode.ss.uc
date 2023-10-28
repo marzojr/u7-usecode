@@ -402,6 +402,7 @@ enum misc_npcs {
 	PIBB = -284, // Starts at the House of the Dead
 	CINDY = -287, // Naked girl S of turtle-summoning bell
 	BRAX = -288,	// Naked girl, starts at the House of the Dead
+	FITCH_FACE = -289,	// One of Hazard's trappers
 	DBEYER = -293, // Gargoyle, starts at the House of the Dead
 	FITCH = -295, // Trapper, the one dying at the edge of the Ice Plains
 
@@ -69209,7 +69210,7 @@ void Func06CF object#(0x6CF) () {
 		};
 	}
 	if (event == SCRIPTED) {
-		0xFEDF->show_npc_face0(0x0000);
+		FITCH_FACE->show_npc_face0(0x0000);
 		say("\"Oh, the pain... The end is near...\"");
 		converse (["Who art thou?", "What happened?"]) {
 			case "Who art thou?":
