@@ -420,6 +420,7 @@ enum misc_npcs {
 	AUTOMATON_FACE = -298,
 
 	THE_FIEND = -305,
+	ISSTANAR = -306,	// Commander of Serpent's Fang
 
 	LAST_TRUE_NPC = -255	// ID of last NPC from NPC.DAT. All others are in MONSNPCS.DAT
 };
@@ -18526,7 +18527,7 @@ void Func03B1 shape#(0x3B1) () {
 	if (event == STARTED_TALKING) {
 		set_schedule_type(STANDTHERE);
 		clear_item_say();
-		0xFECE->show_npc_face0(0x0000);
+		ISSTANAR->show_npc_face0(0x0000);
 		var0003 = get_npc_id();
 		if (var0003 == false) {
 			set_npc_id(0x0001);
