@@ -14652,561 +14652,558 @@ void Func031D shape#(0x31D) () {
 	if (event != DOUBLECLICK) {
 		return;
 	}
-	var0000 = UI_is_pc_female();
-	var0001 = "him";
-	var0002 = "his";
-	if (var0000) {
-		var0001 = "her";
-		var0002 = "her";
-	}
-	var0003 = get_item_quality();
-	UI_play_sound_effect2(0x005E, item);
-	book_mode();
-	if (var0003 == 0x0000) {
-		say("One bird in thine hand is better than two birds in the bush.");
-	} else {
-		if (var0003 == 0x0001) {
-			say("To the adventurer actively looking for me treasure:~~ Yes, thou be looking for me gold, I ken that much.~~Beware!~~ All is not as easy as it seems. All is not as it appears. Thou may not see what is there and what thou do not see can harm ye. Nevertheless, what thou do not see may save thy life.~ Thy rewards will make ye rich. In order to go there, thou hast to find the entrance. Obvious, yes? Yes, but the entrance is not to be found easily, for it is a hidden one.~ Good luck to ye!~~Silverpate.");
-			return;
+	do {
+		var0000 = UI_is_pc_female();
+		var0001 = "him";
+		var0002 = "his";
+		if (var0000) {
+			var0001 = "her";
+			var0002 = "her";
 		}
-		if (var0003 == 0x0002) {
-			var0004 = Func0953();
-			say("To Gustacio, wisest of Mages --");
-			say("The Mundane outsider, ",
-				var0004,
-				", carried with ",
-				var0001,
-				" a very rare and powerful weapon. The blade gained its considerable power from a Daemon bound within the blade by a most puissant enchantment.");
-			say("I would very much like to study the Mundane's blade. Unfortunately, ",
-				var0004,
-				" released the Daemon from the sword in order to escape from the Mountains of Freedom.");
-			say("I wonder... how doth a mere Mundane obtain such a weapon?");
-			say("Now the blade needs to have its sorcerous energies realigned if it is to ever contain another bound spirit.");
-			say("I could repair it if I coud use thy flux analyzer. I know that the device was stolen from thee years ago. Hast thou ever recovered it?");
-			say("-- Melino");
-			if (gflags[0x00CE]) {
-				// Need to make UCC optimize this
-				goto labelFunc031D_0A44;
-			}
-			if (gflags[0x023C]) {
-				var0005 = Func0992(0x0001, "@We found it in Skullcrusher!@", "@I found it in Skullcrusher!@", true);
-			} else {
-				var0005 = Func0992(0x0001, "@We must seek this flux analyzer!@", "@I must find this flux analyzer!@", true);
-			}
-			return;
-		}
-		if (var0003 == 0x0003) {
-			say("I See the @Hero From Another Land@ in the frozen lands of the North. The Hero seeks the wife of ",
-				var0002,
-				" oldest companion. A wall of ice doth prevent the Hero from reaching the woman. The Hero lifts a horn -- the Horn of the Gwani -- to ",
-				var0002,
-				" lips and blows. The sound of the horn is deafening! The wall of ice is shattered!");
-			return;
-		}
-		if (var0003 == 0x0004) {
-			say("Dearest Delphynia,~~ The enchanted afternoon when I first saw thy precious face, thou wert in the full bloom of thy beauty and I was blinded. I forgot everything, everyone. I forgot all about Batlin standing next to me and the reagents we were supposed to purchase. That day I fell in love with thee, my Delphynia. But I fear thou wert blinded by my physical appearance as well. Alas! The scars that twist my face are not a pretty sight.~ Look beyond mine appearance, Delphynia. Let thy mind's eye see my soul. Thy mind is less deceitful than thine eyes which only glance at the surface of things and people. If thou wilt but look, thou wouldst see the hidden treasures of thy\tscarred Ruggs. For I am a good man. My heart is pure and so is my mind, Delphynia. I beg of thee, look at me. 'Til I see thee again,~~Ruggs.");
-			return;
-		}
-		if (var0003 == 0x0005) {
-			say("  Oh, Great Captains, my Great Captains! So powerful you were yesterday, so pitiful you are today. Rulers of the City are now prisoners of the Oracle. What a fate you might have met! Iolo is pleased that such powerful creatures as you, Great Captains, have lost power, herein uncovering the fools in them... ~~Iolo");
-			return;
-		}
-		if (var0003 == 0x0006) {
-			say("Everyone is in search of The Lady of Fawn. For The Lady hath been lost since dawn. Barking their strange tune throughout the city, All of them, townsfolk and priests. Iolo did it, enjoying such feasts. Avatar, is it not pretty?~~");
-			say("      Iolo");
-			return;
-		}
-		if (var0003 == 0x0007) {
-			say("   I must seek out Voldin. He will know what can be done against the power that this \"Mad\" Iolo doth exhibit. I still can hardly believe what hath befallen me, Zulith, Chancellor of Fawn -- the most clever man on Serpent Isle: forced to flee from an insane mage!~ ~Still, all is not lost: the treasure room is well hidden and I have one of its two keys. Lady Yelinda doth have the other, though I doubt she remembers it. ~The so-called Serpent Armour is safe from that devil Iolo, and I still have my freedom and my life. Yet I cannot leave Fawn till I have secured all of the treasure!~ ~Hah! 'Tis laughable to think about the titular ruler of Fawn -- Lady Yelinda -- a woman that hath the intelligence of a fish. 'Tis best that she spend the rest of her days trapped in Gorlab, the fool! She thought that I was merely redecorating her throneroom when in sooth I had constructed (with the help of a Moonshadian mage) an illusionary wall in the southeast room of the palace! ~That is where I had to store the Serpent Armour. 'Tis safe from all, I tell you!~~");
-			say("PS: I must incorporate these writings into my diary lest I forget!");
-			return;
-		}
-		if (var0003 == 0x0008) {
-			say("Kylista needs must speak with thee, Avatar, now that is interesting... Heretofore, she was in communication with the Oracle and now she wants thee. Is there any hidden meaning to this change of heart? Thou shouldst know the answer to that, Avatar. When a woman needs to speak to one such as thee, thou dost not want her to wait, Avatar, or dost thou? Is there anything we should be aware of?~ Thy good old friend Iolo wants to know, Avatar...");
-			return;
-		}
-		if (var0003 == 0x0009) {
-			say("  Journey to the mint; ambush the hero there. Succeed in thy mission and thou shalt be richly rewarded. There is but one penalty for failure -- death!");
-			say("~  Remember, the Avatar often travels with accursed companions, and they may be with ",
-				var0001,
-				". Ignore the companions -- direct thine energies to one goal: the destruction of the Avatar! Destroy this note.~");
-			say("   No evidence should be left behind thee. ~~  Batlin");
-			return;
-		}
-		if (var0003 == 0x000A) {
-			say("  Honor be to thee, dear reader. This piece of parchment is mine only means of communication with thee. Mad Iolo cruelly removed my tongue, that I might lead by example and not by words!");
-			say("  I am so disenchanted... I cannot bear the fact that I could not save the city from further plagues. Moreover, there is absolutely no sign of the return of Batlin.");
-			say("  What is going to happen? Thou shouldst tell me, I beg of thee. ~~   Leon.");
-			return;
-		}
-		if (var0003 == 0x000B) {
-			say("Right adventurous Avatar,~");
-			say("   I greet thee well, Avatar, sending thee my blessings and letting thee know that it appears that thou art not paying due attention to my clues.");
-			say("   I require thee that thou dost so. ~~Faithfully thine, ~~                  Iolo");
-			return;
-		}
-		if (var0003 == 0x000C) {
-			say("Thou art required at the temple for the trial");
-			return;
-		}
-		if (var0003 == 0x000D) {
-			say("Order be to thee, my right good reader!~~ Beware that when the virtues are in imbalance, a whole new system is set in motion. The Chaos Forces without the Order Forces create the Chaos Anti-Forces. I hope thou dost understand what the implications of such a change mean.~ A virtue like Tolerance without Ethicality creates a lack of standards of conduct and would lead, without a doubt, to Anarchy.~ Enthusiasm without Discipline promises actions without self-restraint that is Wantonness.~ Emotion deprived of Logic would foster an inability to overcome emotional impulses with rational thoughts, which augurs Insanity.~~");
-			say("On the other hand, the Order Forces without the Chaos Forces create the Order Anti-Forces.~ In this case, it means that Ethicality without Tolerance would bring about disrespect for the beliefs and rights of others.~ Discipline without Enthusiasm would foster a spirit of hopelessness which retards positive action. That is called Apathy.~ Logic without Emotion leads to self-advancing actions taken without regard to the wants or needs of others. That is called Ruthlessness. Hence, it is now obvious that only Discipline can correct Gwenno.~ Have this in remembrance and take care of thyself,~~Karnax");
-			return;
-		}
-		if (var0003 == 0x000E) {
-			say("Through darkness and despair~ The land was bare~ Looking for Thee, Mondain~ Alas, but in vain~ My soul and mine heart~ Pierced by Cupid's dart~ Will never heal~ Without Mondain's will~ Love is a desolate land~ Unless Thou, Mondain~ Takest me by the hand~ To thy youth fountain ~~Minax");
-			return;
-		}
-		if (var0003 == 0x0014) {
-			say("Notes to myself~~by Erstam~");
-			say("Methinks I knowest now why the blink spell no longer works. These cursed teleportation storms disturb the ether in such a way that the spell often ceases to function. Other times, it is partially successful, as when I cast it on Vasel's predecessor. Nasty business, that.");
-			return;
-		}
-		if (var0003 == 0x0015) {
-			say("After many weeks of fruitless study, I can only conclude that the blink spell simply no longer works correctly. Nine times out of ten, nothing at all happens, while the results of the tenth occurrence are best not pondered. The most obvious reason for these failures is this blasted weather we have been experiencing. Maybe when the storms lessen, I can divine the answer. Until then, I will continue in mine attempts to find the answer.~ Notes this day, by Gustacio.");
-			return;
-		}
-		if (var0003 == 0x001B) {
-			say("Most esteemed Ruggs,");
-			say("  I cannot forget the day I first beheld thy face, for it is never far from my mind. As thou art never far from mine heart. I will admit that to thee, though it may shame me. I cannot promise when, or if, we can ever be together, dear Ruggs. For thou art in exile, and I am the only healer in Fawn. I cannot dwell outside of the gates with thee, no matter how much mine heart may wish it. But someday, if the heavens smile upon us, I shall be able to cast aside my doubts and come to thee as thy love. Until then, I remain ever thine.~~Delphynia");
-			return;
-		}
-		if (var0003 == 0x001F) {
-			say("The Magic Compass~~This is said to be the legendary artifact which guided Erstam the Mad during the voyage to Serpent Isle. ~ To use it, thou must set the Compass upon the ground, and then chant the mantra 'Yleg Ort.' ~According to legend, the compass will show thee the way to travel, but only if thou art worthy.~~As for myself, I have never been able to make the damn thing work. Hence, I am donating it to the Seminarium.~~Filbercio the MageLord");
-			gflags[0x012A] = true;
-			return;
-		}
-		if (var0003 == 0x0025) {
-			say("~~All is not as it seems...");
-			return;
-		}
-		if (var0003 == 0x0026) {
-			say("   This shall be the last of my writings. The freakish storms have continued to worsen. The laborers have all fled in terror, despite mine offer of greater remuneration. It seems fate hath decreed my country estate shall never be completed...");
-			return;
-		}
-		if (var0003 == 0x002A) {
-			say("     I have been here for more days than I am able to remember, though I have not forgotten the day I entered this forsaken cave which has become my tomb. That was 2-29-0227. But my food was depleted long ago, and the rats are more interested in eating me than letting me eat them. My strength is gone, as is my will. If thou dost find this, please tell Mythra I love her.~~");
-			say("     --Denyel");
-			return;
-		}
-		if (var0003 == 0x002B) {
-			say("Welcome, travellers, and be at ease.~ This rest house is open to all who Walk in Beauty.~");
-			say("Feel free to take whatever food thou mayest need.~");
-			say("As a courtesy to other travellers, please leave the rest house in the manner that thou didst find it...");
-			return;
-		}
-		if (var0003 == 0x002C) {
-			say("Welcome to the Broken Oar, the finest inn in the known world!~");
-			say("While thou art staying at our fine inn, thou mayest like to try our fine food. Inquire downstairs with the bartender, Jendon.~");
-			say("We hope that thou dost enjoy thy stay at our establishment...");
-			return;
-		}
-		if (var0003 == 0x002D) {
-			say("Dearest Devra,~~ I hate having to leave thee for even a moment, but my father is as unmovable as a mountain!~ The months that we shared have been unforgettable.~ I will miss thee so much! I will miss thy wondrous red hair, thy silken skin, and thy lovely voice.~ I will miss all of thee. Please write to me. As thou knowest, I shall be going back to our inn, the Sleeping Bull.~~ Love, Angus");
-			return;
-		}
-		if (var0003 == 0x002E) {
-			say("ERAX'S JOURNAL~~");
-			say("I alone have managed to safely return to the surface. Mine arrogant curiosity was almost mine undoing. The ruined Ophidian structure in the caverns below the swamp is very dangerous. My companions fell to the blows of the undead. No monk should ever return there. I have taken the key that opens the gate to the area and hidden it in the hollow tree near the southeastern portion of the ruin\tin the swamp. I pray that no one shall ever find that key...");
-			return;
-		}
-		if (var0003 == 0x002F) {
-			say("XENKA'S PROPHECIES~");
-			say("Scattered Verses, Part I~~");
-			say("Madness! Madness is all I can see! The world hath turned inside out. The stars shine blood red... Men are beasts... Beasts are men... Ashes... Ashes. The End is upon us all... Snakes leering in the void... Dancing a dance of death.~~ The vision is over. I am without Sight...");
-			return;
-		}
-		if (var0003 == 0x0030) {
-			say("XENKA'S PROPHECIES~");
-			say("Scattered Verses, Part II~~");
-			say("I see the Hero From Another World ringing the bells!");
-			say("I am not there. I am dead. Ring the bells. Oh, joy!");
-			say("What sweet music the bells make");
-			say("I am dreaming. I hear the bells and I wake...");
-			return;
-		}
-		if (var0003 == 0x0031) {
-			say("XENKA'S PROPHECIES~");
-			say("Scattered Verses, Part III~~");
-			say("I See the frozen waste...");
-			say("The Hero From Another World is there...");
-			say("I See men who are not men covered in fur...");
-			say("I See the Hero From Another World strike...");
-			say("No! The world is collapsing! I cannot breathe!");
-			return;
-		}
-		if (var0003 == 0x0032) {
-			say("XENKA'S VISIONS~");
-			say("Scattered Verses, Part IV~~");
-			say("The Hero From Another World will meet the descendants of the Silver Captain under the\tsign of the Bull. The Hero From Another World will be betrayed by a follower of the Other...");
-			return;
-		}
-		if (var0003 == 0x0033) {
-			say("HORTICULTURAL NOTES~~");
-			say("The Mandrake Root, by Trexin the Gardener~");
-			say("The mandrake root is a short-stemmed plant that hath a fleshy, often forked root, somewhat resembling a man. This tuber, though not particularly pleasant to gaze upon, doth have useful qualities. The root seems to add power to certain spells of the greater circles. The mandrake root, contrary to what my colleague Moxa thinks, can indeed be found on our lonely isle. The root can be found growing in the swamp that is located on the northern part of the island. Most peculiarly, the root doth seemingly appear at random times...");
-			return;
-		}
-		if (var0003 == 0x0034) {
-			say("HORTICULTURAL NOTES~~");
-			say("The Berry Bush, by Trexin the Gardener~");
-			say("I have discovered a wonderful plant that I have named the Berry Bush.\tThe fruit of this plant hath a wonderfully bittersweet, tangy taste. Furthermore, the bush doth grow well in our intemperate clime and needs little maintenance to produce an abundant crop.");
-			return;
-		}
-		if (var0003 == 0x0036) {
-			say("XENKA'S VISIONS~");
-			say("Scattered Verses, Part V~~");
-			say("In the City of Mages, on the Isle of Beyond,~");
-			say("Doth the Hero walk~");
-			say("Mages with two faces prance about~");
-			say("To prove his worth, The Hero From Another World");
-			say("Must survive the perils of Freedom...");
-			return;
-		}
-		if (var0003 == 0x0039) {
-			say("I returned home to the Bull as soon as I received Mother's letter. It was not easy to relinquish my command, but Mother needed me, and so here I am.~ I have examined the grounds and found nothing. Mother says she heard noises from the cellar the night Father disappeared. When I investigated, I found crates overturned, but nothing else. I feel so\tuseless! If only I had something, some shred of evidence indicating what became of Father...");
-			return;
-		}
-		if (var0003 == 0x003A) {
-			say("   Welcome to the Sleeping Bull Inn! Our inn hath been owned by the same family for four generations. We have a long tradition of service. We will do our best to ensure that thy stay at the inn will be most enjoyable.~ If thou hast any questions, please inquire of Mistress Devra or Master Angus.");
-			return;
-		}
-		if (var0003 == 0x003B) {
-			say("This day Silverpate came to see me. The black-harted demon came to glote, and to give me scroll and kwill.~");
-			say("He said that I could rite whate'er I wanted, fer I would never see daylite agin. I fear he is rite.~ Silverpate beleves that I stole from him, the paranoid old coot! I ne'er woud beleve me mates when they spoke of the \"littel demons\" in the cap'in's pate, tellin him what to do.~ Corse, I beleved em rite enuf when ol' Pate tole me these things hisself!~ Alas, I lerned too late to prevent me imprisonment.~ I figure ol' Pate will ne'er read me words, and if he do, then so be it.~ Whomever ye be that reads me words, be warned aginst Cap'in Silverpate. He uses majic wardrobes to spy on his own mates! The littel swiches at the Bull don't work, the cap'in said, unless the \"Master Wardrobe\" is used. This \"Master Wardrobe\" be sichuated down in these here catacomes.~ I also herd the evil-harted bastard yammer bout sum Serpint Gate. Ol' Pate said the gate was hidden. It be rite hard to be thinkin strate, but I think the cap'n said something bout too torches markin the hidden entrans.");
-			say("Maybe this Serpint Gate cood help thee. Corse, it be likely that no bloke will e'er read me scribling...~ Pate thinks everyone be after his trezhure. So distrustful be ol' Pate, he even spies on his own famly!~ Let it be nown that I, Bren, cheef bosun on the Black Gull, were a pirate who ne'er turned aginst one o' his own...");
-			return;
-		}
-		if (var0003 == 0x003C) {
-			say("MAGIC SCROLLS -- A Primer~");
-			say("   The process of inscribing scrolls with mystic runes is beyond the scope of this primer. Using these enchanted scrolls, however, is a trivial matter. To unleash the power of the spell, simply unroll the parchment. The Runes of Power, and the scroll itself, will be totally consumed by the energies that are released.");
-			return;
-		}
-		if (var0003 == 0x003D) {
-			say("Beloved Shamino:~");
-			say("   Right beloved Sir, I recommend me to thee, greeting thee well and sending thee my blessings. I have to confess and apologize to thee for I have\tlooted the King's private arms. I beg of thee not to condemn me too hastily for I committed that horrible action when the castle was under siege. Danger was everywhere and so were the goblins. Thou wert not here and I had to take action. We need thee at the castle, prithee, when art thou returning? Life without thee is an endless torment. The goblins seemed to be a deliverance more than a threat to me. I am right sorry for this and wish it hath been otherwise. I wait daily for thee to come hither.~~Faithfully, thy Beatrix");
-			return;
-		}
-		if (var0003 == 0x003E) {
-			say("Come in and join the party...");
-			return;
-		}
-		if (var0003 == 0x003F) {
-			say("   I know I did evil things whilst I was under the control of the Bane. In order to atone for the harm I have caused, I shall sacrifice myself to the Crematorium. If mine ashes can help restore the balance, then I might be partially redeemed for mine evil acts.~~");
-			say("    Farewell,~");
-			say("             Dupre");
-			return;
-		}
-		if (var0003 == 0x0040) {
-			say("Me Map, but I don't need to say that, because if it's anybody but me what's looking at this, I don't want to tell where me treasure is, so read no further, ye dog, lest I leave yer fate to the briny deep! This is dead-reckoning right, but I'm awfully drunk and mebbe I'm holdin' this thing upside-down.");
-			say("98S,28W");
-			say("33 Paces past the rock, excludin' that break I took fer drinkin'.");
-			say("11 Paces east of the whatever that blasted thing is.");
-			say("30 Paces, I think, because I was staggerin' about a bit and I stumbled and lost me count a couple o' times, past whatever me stinkin' map says is supposed to be there; I was sober when I drew that beauty. Unless this is me what's readin' this, I hope the treasure's already gone, ye thief!");
-			return;
-		}
-		if (var0003 == 0x0042) {
-			say("I have paid thee -- and paid thee well -- to fulfill the contract.");
-			say("Only fools would pay a great sum for an easy task... And I am no fool.");
-			say("Remember, I have chosen thee because thou art the best weapon available to me at the moment. Make no mistake, the Avatar is not an easy target and certainly the most challenging thou hast ever had.");
-			say("Dispose of the Avatar quickly. Destroy this note. No evidence should be left behind thee.");
-			say("X");
-			return;
-		}
-		if (var0003 == 0x0043) {
-			say("My dearest,~~ I beg thy forgiveness for my behavior last night. This difficulty with the Avatar hath disrupted my performance, but I assure thee that once we have taken care of ",
-				var0001,
-				", I will hold a private celebration thou shalt not soon forget...");
-			return;
-		}
-		if (var0003 == 0x0045) {
-			say("Parting Verses: by Vasculio~~ As they lower me down,~ To this hole in the ground,~ I scream for help,~ But they can't hear a sound.~ I scratch on this lid,~ My fingers they bleed.~ They plant me deep,~ Like an evil seed.~ Now my bones decompose,~ My flesh doth rot,~ But soon I will rise,~ And torture the lot.");
-			var0006 = AVATAR->find_nearby(0x00F3, 0x0028, MASK_NONE);
-			if (!var0006) {
-				// Need to make UCC optimize this
-				goto labelFunc031D_0A44;
-			}
-			if (gflags[0x0248]) {
-				// Need to make UCC optimize this
-				goto labelFunc031D_0A44;
-			}
-			gflags[0x0248] = true;
-			var0007 = AVATAR->direction_from(var0006);
-			var0008 = script AVATAR {
-				nohalt;
-				face var0007;
-				wait 5;
-				call Func0526;
-			};
-			remove_item();
-			return;
-		}
-		if (var0003 == 0x0046) {
-			say("Right Heartily and Beloved Father,~~ I recommend me to thee, letting thee know I am doing exceedingly well! Though I miss thee and my beloved sister, Alyssand, I am so excited. I have been learning so much magic, thou wouldst not believe thine eyes. I am good. Honest. I swear to thee, that's what the Mages here are saying. 'Tis fun, but frightening as well.~ I am a dedicated student, Father, thou canst be proud of me. And Alyssand, too. I miss thee so much. Thou shouldst visit. The Palace is a sight to see. Gorgeous! These Mages are incredible!~ Learning how to be a Mage is not easy, but I love it as much as I miss thee.~ Thou art on my mind everyday. I hope to see thee soon.~~ Eternal love,~~ Freli");
-			return;
-		}
-		if (var0003 == 0x0047) {
-			say("   To thee, fine warrior, who hast made it this far:");
-			say("If thou seekest to be a Knight of Monitor, thou must be willing");
-			say("to shed thy blood for the defense of others. To prove thy resolve,");
-			say("take this claw and use it upon thy person. Let thy blood be thine oath.~~");
-			say("   --Shmed, Master of Knight's Test");
-			return;
-		}
-		if (var0003 == 0x0048) {
-			say("   To thee, fine warrior, who hast made it this far:");
-			say("If thou seekest to be a Knight of Monitor, thou must mingle thy");
-			say("blood with the ashes of our ancient foe, Gurnordir the goblin king.");
-			say("Thy blood pledges vengeance against our enemies, and will give thee");
-			say("thy totem animal, the key to thy soul.~~");
-			say("  --Shmed, Master of Knight's Test");
-			return;
-		}
-		if (var0003 == 0x0049) {
-			say("   I love thee, father. I hope thou dost kill more than thy share of");
-			say("goblins. Come home soon.~~");
-			say("     Cantra");
-			gflags[0x00C6] = true;
-			return;
-		}
-		if (var0003 == 0x004A) {
-			say("   Note to myself for further exploration of the North:");
-			say("I seem to have lost the Serpent Tooth I took from the Mad Mage.");
-			say("Need to check the area near the savages, as that was where I last");
-			say("remember having it with me.~~");
-			say("     Frigidazzi");
-			return;
-		}
-		if (var0003 == 0x0050) {
-			UI_play_music(0x0032, Func09A0(0x0005, 0x0001));
-			say("Dearest Drogeni,~");
-			say("   What follows is an excerpt from my translation of an ancient manuscript. The translation is crude since I do not as yet fully understand the Serpent Runes, but I think thou wilt find this very exciting.~ Until we meet again,~~-- Erstam, thy devoted servant~~");
-			say("   I write this in great haste, for I can already hear the forces of Order breaching the keep walls. I know not how this missive will survive to reach the outside lands, or for that matter, future generations. Mine only hope is that this speedily-drafted work");
-			say(" will offer record of our hallowed philosophy. For our culture to have any chance of enduring the ages, someone, somewhere must find this.~ Please, reader, I beseech thee, spread the word of our peoples. Release the spirit of our word and learn from the wisdom of the past.~~");
-			say("   Balance -- The harmony between the Principles of Order and Chaos -- is the one pure axiom we hold true.  All three Principles are symbolized in our hieroglyphs: The Great Earth Serpent, keeper of Balance, lies on a vertical plane, around which the two opposing serpents of Chaos and Order wrap themselves.~~");
-			say("   Chaos and Order each embrace three Forces. These six Forces, when combined, form the three Principles of Balance. The Forces of Chaos are Tolerance, Enthusiasm, and Emotion; the Forces of Order are Ethicality, Discipline, and Logic.~~");
-			say("CHAOS~Tolerance is that which encourages the acceptance of all things. Enthusiasm is the energy that allows one to perform great tasks. Emotion is the ability to perceive those feelings that come from the heart, as opposed to coming from the mind.~~");
-			say("ORDER~Ethicality is the belief that there is great value in abiding by rules of conduct. Discipline is the drive to complete a task and avoid the distractions that will prevent its completion. Logic permits clear, reasoned thought, free from any instinctual biases.~~");
-			say("BALANCE~From the marriage between two Forces, one each from Chaos and Order, come the Principles.~ Tolerance and Ethicality combine to form Harmony, the ability to be at peace with the self, the individual, and the world.~ From the union of Enthusiasm and Discipline springs Dedication, that which permits one to surmount obstacles and lead others.~");
-			say("And finally, Emotion tempered by Logic results in Rationality, the ability to comprehend life and understand the world around us.~~");
-			say("   The Forces of Chaos and Order must ever remain in Balance, for imbalance leads to disaster. Witness the war-torn state of our world today! ~~As thou canst surely see, my world hath been torn asunder by disregard for Balance -- our dearest axiom! If thou dost thrive");
-			say("in a time less violent, I can do no more than plead with thee to help restore Balance to the Serpent Isle! I must end this brief explication here, for I can hear mine attackers pounding upon the oaken door downstairs. I wish thee and thy world better fortune than mine own.~~ -- Ssithnos, the Great Hierophant");
-			return;
-		}
-		if (var0003 == 0x0064) {
-			say("My darling Rotoluncia,~~ I know thy feelings about my letters, but I cannot help myself -- I think of thee day and night! Thou art the light of my miserable existence. Thou art like the sun, blinding all who doth gaze upon thy beauty. Thy lips are more luscious than the sweetest fruit. Thy skin is smoother than the most glorious rose. Thou art the essence of womanhood; none can surpass thee!~ Please, I beg of thee, say that thou wilt be mine!~~ Anxiously awaiting thy reply,~~ Filbercio ");
-			return;
-		}
-		if (var0003 == 0x0065) {
-			say("My darling Rotoluncia,~~ I know that thou dost love me as much as I love thee. Let us forget all of the intrigue that plagues this city and flee to the mainland! I can have built for us a modest love nest where we may spend the rest of our days in bliss!~ Thy servant,~~ Filbercio ");
-		}
-		if (var0003 == 0x0066) {
-			say("My darling Rotoluncia,~~ I tried to sleep after our dalliance this night, yet I cannot. The feel of thy silken hair and the sweet taste of thy lips linger. Oh, my darling, I cannot wait until I see thee again. I feel that I shall go mad if I cannot make thee mine!~~ Thy lover,~~ Filbercio ");
-		} else if (var0003 == 0x0067) {
-			say("Rotoluncia,~~ I saw thee staring at that pig Torrissio at the banquet last night and I know now that thine affections shown toward me were false. Thou art a cow and a shabby sorceress as well!~ Do not try to pretend otherwise, for I know the truth now. I want nothing more from thee ever again!~~ Filbercio ");
-		} else if (var0003 == 0x0078) {
-			say("Marsten, Lord of Monitor:~~ The destruction of thine enemies is certain. My brave Goblin warriors have already plundered the Fawn Tower, and the Wolves which guarded it.~ Next, we shall strike the Bull Tower, and the Bears which serve there. Hail to victory! Soon, the Wolves and Bears shall cease to trouble thee. Then Monitor and the Goblins shall live in peace, and thou shalt be King of the Monitorians.~~ Do not let this messenger fall into the hands of our enemies.~~ Pomdirgun,~Chieftain of the Goblin Horde");
-			MARSTEN->set_item_flag(SI_TOURNAMENT);
-			gflags[0x0093] = true;
-		} else if (var0003 == 0x0079) {
-			say("   Honor be to thee, Pomdirgun, Chieftain of the Goblin Horde:~~ Letting thee know that all of our plans in these parts fare well. I have learned from the Wolves that they plan to launch a patrol in the early morning hours of the seventh day of the new moon.~ If thou dost ambush the patrol, then it shall be easy for thee to overrun Fawn Tower itself.~ The Wolves shall be critically weakened, and the City of Fawn shall quake in fear!~ But if thou canst, spare the life of the leader of the patrol. She is a favorite of my liege.~~ We beg of thee not to let this messenger fall into the hands of our enemies, the Wolves.~~ Spektor, writing on behalf of Lord Marsten");
-			gflags[0x0093] = true;
-			MARSTEN->set_item_flag(SI_TOURNAMENT);
-			gflags[0x0094] = true;
-			SPEKTOR->set_item_flag(SI_TOURNAMENT);
-		} else if (var0003 == 0x007A) {
-			say("   Honor be to thee, Pomdirgun, Chieftain of the Goblin Horde:~~ Letting thee know that all of our plans in these parts fare well. Having learned from our successful experience with Fawn Tower, we have decided to withdraw, on the fourth night of the coming moon, as many troops as possible from Bull Tower.~ The Bears shall be marching westward on the plains, and shall be easily slaughtered.~ Then thou canst take the Tower, and plunder the Inn of the Sleeping Bull.~~ We want to remind thee of the supreme importance not to let this messenger fall into the hands of our enemies, the Wolves and the Bears.~~ Marsten, King of Monitor");
-			gflags[0x0093] = true;
-			MARSTEN->set_item_flag(SI_TOURNAMENT);
-		} else if (var0003 == 0x007B) {
-			say("   Old man, if thou dost truly wish to survive Freedom, but dost feel that thou canst live to tell the tale of Lorthondo's final test, thou hast only to serve in my slave pit. Tend to my pets and I shall personally show thee to the door and to the blue skies of daylight and freedom. Guard my nightmare and care for him well.~ He is a treasure and a daemon in one. Take him through the teleporter once each day and let him feel the grass beneath his hooves.~ Take care, for one strike of his hoof could kill an old fool such as thou.~ Be thou sure to keep Sabrina from him. I fear that she doth frighten him. I find it strange that such a wild, untamed creature such as that should be frightened of her touch. Then again, mayhaps I can fathom why. ~");
-			say("   Lastly, take great care of my small furry prize. Do not be fooled by its diminutive size, it hath taken the lives of many a foolhardy man who dared to approach thinking it might make a tasty morsel.~ Thou shouldst treat it with as much respect as thou wouldst bestow upon me. If thou dost not, either one of us could end thy miserable existence.~ In the supply room, thou wilt find a year's worth of carrots for Buggs. Feed him but one per day. Place the carrots upon his golden plate -- 'tis the only way that he will feed. He is of royal lineage -- a born predator. If thou dost not, thou mayest find that thou art his next meal.~ Serve me well, old man, and thou mayest live to see the outside of this prison some year...");
-		} else if (var0003 == 0x007F) {
-			say("To me fellow trappers:~~ Greetings to ye.~~ I will be heading north when ye be reading this message. Make sure ye guard the cave and protect our goods well. If I find out ye let some ne'er-do-well steal our goods, I'll personally skin every one of ye bastards, hang yer hide on me walls, and eat yer black hearts for supper!~ By the way, don't be lookin fer the wonderful glass sword that appeared after the last storm, for I took it with me. I be headin' back to the North.~ This fancy sword should be mighty handy for slaying some dragon or other fearsome beast...~ Slaughter a beast in mine honor.~~Hazard");
-			gflags[0x028C] = true;
-		} else if (var0003 == 0x0082) {
-			say("Virtues ----------------------------- ~ Tolerance, Enthusiasm, and Emotion Ethicality, Discipline, and Logic ~ ----------------------------- ~~");
-			say("Anti-Virtues ----------------------------- ~ Anarchy, Wantonness, and Insanity Prejudice, Apathy, and Ruthlessness ~ ----------------------------- ");
-		} else if (var0003 == 0x0087) {
-			say("I, Purlonio, merchant of Moonshade, am about to tell my tale.~~ Back in the early days of the Sosarian colonization of Serpent Isle, I had accumulated -- I have to tell thee -- a massive fortune in the city. After a most unusual dream, I called upon an enchantress for help. She was expensive, but of good and right advice. Drogeni, the Wizard, warned me that I was about to lose all of my cherished wealth in the near future and that there was nothing she could do to prevent this from happening.~");
-			say("I thought I could outsmart Fate... I took all of my possessions, all of my gold, in a ship to this cave in the far northern reaches for safe storage.~ I hired Drogeni to create a series of tunnels in the rear of the cave so that a magic map would be required and no one could survive without it.~ Thereupon, I had the wizard conjure an Ice Dragon to guard my riches. Once this was done, we sailed back to the southern plains where I rid myself of the enchantress so that no one would ever know the secret to my riches.~");
-			say("Unfortunately, upon the death of the wizard, the magical map disintegrated. Fearing that the prophecy had come true, I went back to the cave and tried to find the route to my riches. To this day, I have not found my treasure.");
-		} else if (var0003 == 0x008D) {
-			say("   In my life as a criminal, as they call me, I have had many a task to overcome. None before was as hard as the ones I am about to describe. This is done so that thou mayest save thy time and thy life.~ Of all the traps I had to overcome, the most interesting ones were the spear traps.~ First of all, thou needest to enter the caretaker's room. After many an observation and many more days than thou wouldst think, I discovered the routine of the caretaker.~ He usually is on patrol during the whole afternoon. He makes his rounds at noon and midnight.~ In his storehouse, thou shouldst find barrels and chests. Rummaging through the barrels I found a hidden lever. That lever, I came to realize later, turns off the spear traps in the corridor.~ Make good use of that, my friend. Blessings upon thee.");
-		} else if (var0003 == 0x0095) {
-			say("To My Good Brethren and Comrades In Arms,~~");
-			say("After many long, arduous and harrowing adventures I have collected this considerable treasure. While this fair measure of wealth would be enough to keep a man happy for the rest of his days, I cannot possess it without remembering my good fellow knights -- many to whom I owe my very life. It is to thee that I leave this bountiful reward. It is secured by the soundest means that I currently have at my disposal. To obtain it, one need only use THE KEY.~~ Ever-faithful,~~   Pendar-");
-		} else if (var0003 == 0x0096) {
-			say("Hark, adventurer, and read these words well.~~ Many know me as Gannt the Bard, singer of songs, and writer of fine poetry for all to enjoy. Though many know of me, most do not know of my life, or at least of how I came to this end. Read, and read well, dear adventurer.~ If thou hast any justice in thine heart, or any pity in thy soul, then thou wilt seek vengeance for mine untimely death. If thou, hearty adventurer, hast any sense of duty to avenge evils, then thou must seek out the craven and cowardly Captain Stokes of the rusty old bucket 'The Mustang' and exact just payment, for alas, since I am not of this world, I cannot.~~ One day as I was at the Inn of Sleeping Bull, plucking my lute, not bothering anyone, but practicing my trade, in walked the swine, Captain Stokes, billowing foul fog upon us with his ill-smelling fag.~");
-			say("Seeing that no one in the fair establishment could stomach the pungent smell of his tobacco-like rot, I dared to ask him to put it out, for the sake of all our healths. He stared at me, then turned a blind eye. I went back to strumming my lute, 'til again the smell began to bring tears to mine eyes. Again I asked him, begged him to stop, but again he turned away.~ Finally, as gentle ladies began to leave for air, and good children began to cough and cry from the Captain's reeking root, I tried once more. This time, though, he answered with the blade of his dagger. He thrust well through my lute and into mine entrails, stuffing it deep into my belly.~");
-			say("He grinned and twisted the blade, not once nor twice, but thrice! Being but a humble bard and quite mortal, I had little choice but to expire. I fell in a pool of mine own blood, mine hand strumming my last chord as I fell.~ I ask thee, I beg of thee to give me peace, and exact vengeance for my death. Before thee is the key to his rotten hovel which thou mayest find to the west of Fawn, above the forest of Knight's Test. Many ill-begotten instruments doth he hide in his house of ill-wares. Beware them! Please, noble adventurer, exact justice for my death, and exact the toll from that evil Captain Stokes.  Do this and let my spirit rest peacefully...~~Gannt...");
-		} else if (var0003 == 0x00B5) {
-			say("The Art of Winemaking~~ The art of winemaking is not a difficult trade; indeed, making fine wine is the simplest of tasks. There are those laymen, however, who doth think making wine is some great secret. Nothing could be further from the truth!~ Sorcery hath made the process of making wine very easy, but sorcery cannot make the wine taste good. To make great wine, thou needest but one commodity -- great grapes! That is the secret to making a truly great vintage, one that shall be remembered by all who partake. ");
-		} else if (var0003 == 0x00BC) {
-			var0004 = Func0953();
-			say("Dear ",
-				var0004,
-				", ~All of the portents indicate that this Quest to Find Batlin shall severely tax thine abilities. Consequently, I have ordered the armouries of the kingdom opened in order to equip thee and thy good companions. ~~Thou shalt be given these things -- ~~The Glass Sword, which can slay any foe (but which is destroyed in the act of such slaughter). ~~The MageBane, a fabled weapon which thou didst recover in thy previous encounter with Batlin. It steals the magic from sorcerers who oppose thee. ~~The Daemon Sword which thou didst obtain at the Forge of Virtue. It is truly a terrible weapon, but thou wilt surely need it. Beware the Daemon within!");
-			say("Rudyom's Wand, which doth make blackrock to explode. ~~The strange Serpent of Blackrock, which thou didst obtain from netherworlds during thy most recent adventure. Its powers are unknown, but those who gave it thee promised that it would be useful to thee soon. ~~A spellbook, to which hath been added every spell that could be speedily obtained. ~~For thee to wear, a set of armour of the best enchantments: breastplate, helm, and gauntlets. ~~For Iolo the Bard: a crossbow, which he doth wield so well. ~~For noble Dupre: a Magic Shield which I have prepared for him. ~~For Shamino the Ranger: a Magic Bow, and a goodly supply of Burst Arrows, which he shall no doubt use to good purpose. ~~As well as such common items as torches, a pair of swamp boots, a good dagger, and much food for an extended journey.");
-			say("~~Travel in safety, and may the villain Batlin soon fall into thine hands! Also, I hope that thou shalt soon find Iolo's lost wife, the goodwoman Gwenno. ~~~-- Lord British, thy liege.");
-		} else if (var0003 == 0x00BD) {
-			say("The list of items which we found ourselves with after the storm:~~");
-			say("Prepared by Shamino.");
-			if (gflags[0x00B7]) {
-				say("With additional notes by Dupre.");
-			}
-			if (gflags[0x0078]) {
-				say("And further comments by Iolo, since being freed from that vile Monitorian prison cell!");
-			}
-			say("~~");
-			if (gflags[0x027A] && (!gflags[0x028C])) {
-				say("A pinecone (or, at least, it appears to be one).");
-			}
-			if (gflags[0x028C]) {
-				say("A pinecone from the northern woods.");
-			}
-			if (gflags[0x027B] && (!gflags[0x028D])) {
-				say("A fine pair of sheer stockings, probably women's attire.");
-			}
-			if (gflags[0x028D]) {
-				say("A pair of moonsilk stockings, such as the enchantress Columna doth wear.");
-			}
-			if (gflags[0x027C] && (!gflags[0x028E])) {
-				say("Some sort of vase, with soot inside.");
-			}
-			if (gflags[0x028E]) {
-				say("A funerary urn containing the Ashes of the Dead, taken from the Caves of Monitor.");
-			}
-			if (gflags[0x027D] && (!gflags[0x0110])) {
-				say("A strange apparatus of glass and copper.");
-			}
-			if (gflags[0x0110] && (!gflags[0x028F])) {
-				say("A specimen of laboratory apparatus from a mage's laboratory.");
-			}
-			if (gflags[0x0110] && gflags[0x028F]) {
-				say("The missing apparatus from the laboratory of Erstam, the so-called Mad Mage.");
-			}
-			if (gflags[0x027E] && (!gflags[0x0290])) {
-				say("A rock.");
-			}
-			if (gflags[0x0290]) {
-				say("A pumice rock from the fiery depths of some dungeon.");
-			}
-			if (gflags[0x027F] && (!gflags[0x014C])) {
-				say("A finely crafted ring, of silver, of a size to fit a small woman or a child.");
-			}
-			if (gflags[0x014C] && (!gflags[0x0291])) {
-				say("A finely crafted silver ring, probably the lost engagement ring of a lass named Alyssand.");
-			}
-			if (gflags[0x0291]) {
-				say("The engagement ring belonging to Alyssand of Fawn.");
-			}
-			if (gflags[0x0280] && (!gflags[0x02A0])) {
-				say("A ridiculous fur cap.");
-			}
-			if (gflags[0x02A0] && (!gflags[0x0292])) {
-				say("An expensive fur cap, which the MageLord of Moonshade obtained for one of his many lovers.");
-			}
-			if (gflags[0x0292]) {
-				say("The elegant fur cap which Filbercio the MageLord purchased for his favorite, the sorceress Frigidazzi.");
-			}
-			if (gflags[0x0281] && (!gflags[0x0293])) {
-				say("Some very old and worn slippers, such as might be worn in the privacy of one's home.");
-			}
-			if (gflags[0x0293]) {
-				say("The well-worn slippers belonging to Devra, the mistress of the Inn of the Sleeping Bull.");
-			}
-			if (gflags[0x0282] && (!gflags[0x0294])) {
-				say("An enameled breastplate, suitable for ceremonial occasions.");
-			}
-			if (gflags[0x0294]) {
-				say("The ceremonial breastplate of the Priestess of Beauty, who is Kylista of Fawn. A very attractive lady, I should add.");
-			}
-			if (gflags[0x0283] && (!gflags[0x0295])) {
-				say("A strange blue egg.");
-			}
-			if (gflags[0x0295]) {
-				say("A penguin egg, such as may be found in the ice fields of the distant north.");
-			}
-			if (gflags[0x0284] && (!gflags[0x0296])) {
-				say("A crude brush.");
-			}
-			if (gflags[0x0296]) {
-				say("A grisly brush made from the bones of some poor victim of the Goblins. How foul!");
-			}
-			if (gflags[0x0285] && (!gflags[0x0297])) {
-				say("A bottle of ice wine -- whatever that is!");
-			}
-			if (gflags[0x0297]) {
-				say("A bottle of that excellent vintage of wine sold by the Rangers of Moonshade. Why, I should sample some now...");
-			}
-			if (gflags[0x0287] && (!gflags[0x0299])) {
-				say("Strange baubles -- silver disks with jewels in the center.");
-			}
-			if (gflags[0x0299]) {
-				say("Jeweled coins from the City of Beauty, Fawn.");
-			}
-			if (gflags[0x0288] && (!gflags[0x029A])) {
-				say("A large skull, no doubt belonging to some large and dead animal.");
-			}
-			if (gflags[0x029A]) {
-				say("The skull of a great mountain bear.");
-			}
-			if (gflags[0x0289] && (!gflags[0x029B])) {
-				say("A bloody hand, severed from its corpse. It shows no sign of decay, yet...");
-			}
-			if (gflags[0x029B]) {
-				say("The severed hand from one of the Mad Mage's experiments. It is not dead, yet not living -- it doth not decay.");
-			}
-			if (gflags[0x028A] && (!gflags[0x029C])) {
-				say("An inexpensive shield, sturdy and suitable for battle.");
-			}
-			if (gflags[0x029C]) {
-				say("One of the common shields used by the Pikemen of Monitor.");
-			}
-			if (gflags[0x028B] && (!gflags[0x029D])) {
-				say("A red hunk of stone.");
-			}
-			if (gflags[0x029D]) {
-				say("The dangerous mineral known as Stoneheart, which is used to produce the illegal reagent Bloodspawn.");
-			}
-		} else if (var0003 == 0x00BE) {
-			say(" Inventory swap list as updated by Iolo");
-		} else if (var0003 == 0x00BF) {
-			say("Inventory swap list as updated by Dupre");
-		} else if (var0003 == 0x00C9) {
-			say("This certificate entitles the bearer to commit thievery up to a maximum of one hour.~~Shamino the Anarch.");
-		} else if (var0003 == 0x00CA) {
-			say("This is an invitation for thee and thy friends to dine at the MageLord's Palace.");
-		} else if (var0003 == 0x00CB) {
-			say("Dearest Avatar,~~ I would like to congratulate thee from the bottom of mine heart, on obtaining thy spellbook. That was not an easy task. Thou didst accomplish it most admirably.~ Also, I have been told that thou art asking questions about me. I think I would be the best person from whom to obtain the ultimate answers to thy questions. That is, the ones concerning myself.~ For all those reasons and so many more, I would like for thee to come to my manor. ~~Frigidazzi.");
-		} else if (var0003 == 0x00CC) {
-			say("Dearest Avatar,~~ ~Love and Honor be to thee. Letting thee know that I cannot wait to see thee again. I cannot think of time far from thy strong person and handsome body. Thy broad shoulders and great arms are such an open invitation for a woman like me. Thine eyes, Avatar, so piercing yet so full of love. I could feel that love during thy last visit.~ I beg of thee, come visit me tonight. Thou dost remember where my manor is, dost thou not? I have a very rare spell (a true tongue-twister) I could teach thee and thou wouldst be the only one enjoying that treasured spell of mine. Once more, I beg of thee, do come tonight and do come alone.~~ Thy love,      ~~Frigidazzi.");
-		} else if (var0003 == 0x00CD) {
-			say("Dearest Avatar,~~ A thousand apologies is what I present thee with. I am the one who caused thee to be arrested and I cannot forgive myself.~ Thou hauntest my dreams. Memories of thee flash in front of mine eyes and the only way I can solve this nightmare is by presenting thee with a very special gift.~ I beg of thee to accept these Serpent Earrings, a token of mine affection for thee, Avatar. ~~Frigidazzi.");
-		} else if (var0003 == 0x00CE) {
-			say("   Fedabiblio, this is a message to let thee know that all is not well.~ I desperately need thine help. I beg of thee to answer my call.~ Thou must needs use the Crystal Ball.~~Gustacio.");
-		} else if (var0003 == 0x00CF) {
-			say("To the right good Avatar,~~ Thou must not think thy quest is done. For I offer ye a great challenge. To ye I leave my treasure -- if thou canst find it.~ Within this booty lies a Serpent Crown, waiting for ye to discover its hiding place.~~Captain Hawk.");
-		} else if (var0003 == 0x00D0) {
-			say("Avatar,~~ I have in my possession something extremely valuable which would be even more vital to thee. Thou couldst make good use of it, believe me.~ If thou art interested (and thou shouldst be), come to the cabin in the forest.~~Stefano.");
-		} else if (var0003 == 0x00D1) {
-			say("From Flindo~~ To Torrissio:~~ Dearest and most Powerful Mage,~~ I recommend me to thee as well as the bearer of this message.~ This letter of introduction entitles the bearer to a chat with thee. Trust thy righteous friend, Torrissio, the bearer is worth thy time.~ I thank thee for thine understanding. Treat the bearer the way thou wouldst treat me.~~ With a right good will, sincerely thy,~~Flindo");
-		} else if (var0003 == 0x00D2) {
-			say("To Melino and Columna:~~ Dearest and most Powerful Mages,~~ I recommend me to thee as well as the bearer of this message. This letter of introduction entitles the bearer to a chat with you. Trust thy righteous friend, the bearer is worth your time.~ I thank you for your understanding. Treat the bearer the way you would treat me.~~ With a right good will, faithfully,~~Flindo");
-		} else if (var0003 == 0x00D3) {
-			say("Dearest Avatar,~~ Love and Honor be to thee. Letting thee know that I cannot wait to see thee again. I cannot think of time far from thy strong and good-hearted person.~ Thine eyes, Avatar, so piercing yet so full of love. I could feel that love during thy last visit. I beg of thee, come visit me tonight.~ I have a very rare spell I could teach thee and thou wouldst be the only one learning it.~ Once more, I beg of thee, do come tonight and do come alone.~~ Sincerely thy,\t~~Frigidazzi.");
-		} else if (var0003 == 0x00D4) {
-			say("   I have made the most wonderful discovery about the Comb that I took from that empty-headed ruler of Fawn! No longer shall I be forced to content myself with the bumbling attentions of Melino, my pitiful excuse for a husband!~ For upon using the Comb on myself, I have become beautiful and desirable! No one will ever guess now that Mosh and I are twins! Now I may use my wits for better things... like the Adept Torrissio!~~Columna");
-		} else if (var0003 == 0x00D5) {
-			say("Know, adventurer, that to proceed onward thou must pass three puzzles. At the first test, throw two down. At the second test: throw three down to get eight. At the third test: throw four down to get twelve.\tIf the levers are not in the correct position when the button is depressed, thou wilt surely be destroyed.~ Aram-Dol ");
+		var0003 = get_item_quality();
+		UI_play_sound_effect2(0x005E, item);
+		book_mode();
+		if (var0003 == 0x0000) {
+			say("One bird in thine hand is better than two birds in the bush.");
 		} else {
-			say("     QA, report this scroll.");
+			if (var0003 == 0x0001) {
+				say("To the adventurer actively looking for me treasure:~~ Yes, thou be looking for me gold, I ken that much.~~Beware!~~ All is not as easy as it seems. All is not as it appears. Thou may not see what is there and what thou do not see can harm ye. Nevertheless, what thou do not see may save thy life.~ Thy rewards will make ye rich. In order to go there, thou hast to find the entrance. Obvious, yes? Yes, but the entrance is not to be found easily, for it is a hidden one.~ Good luck to ye!~~Silverpate.");
+				return;
+			}
+			if (var0003 == 0x0002) {
+				var0004 = Func0953();
+				say("To Gustacio, wisest of Mages --");
+				say("The Mundane outsider, ",
+					var0004,
+					", carried with ",
+					var0001,
+					" a very rare and powerful weapon. The blade gained its considerable power from a Daemon bound within the blade by a most puissant enchantment.");
+				say("I would very much like to study the Mundane's blade. Unfortunately, ",
+					var0004,
+					" released the Daemon from the sword in order to escape from the Mountains of Freedom.");
+				say("I wonder... how doth a mere Mundane obtain such a weapon?");
+				say("Now the blade needs to have its sorcerous energies realigned if it is to ever contain another bound spirit.");
+				say("I could repair it if I coud use thy flux analyzer. I know that the device was stolen from thee years ago. Hast thou ever recovered it?");
+				say("-- Melino");
+				if (gflags[0x00CE]) {
+					break;
+				}
+				if (gflags[0x023C]) {
+					var0005 = Func0992(0x0001, "@We found it in Skullcrusher!@", "@I found it in Skullcrusher!@", true);
+				} else {
+					var0005 = Func0992(0x0001, "@We must seek this flux analyzer!@", "@I must find this flux analyzer!@", true);
+				}
+				return;
+			}
+			if (var0003 == 0x0003) {
+				say("I See the @Hero From Another Land@ in the frozen lands of the North. The Hero seeks the wife of ",
+					var0002,
+					" oldest companion. A wall of ice doth prevent the Hero from reaching the woman. The Hero lifts a horn -- the Horn of the Gwani -- to ",
+					var0002,
+					" lips and blows. The sound of the horn is deafening! The wall of ice is shattered!");
+				return;
+			}
+			if (var0003 == 0x0004) {
+				say("Dearest Delphynia,~~ The enchanted afternoon when I first saw thy precious face, thou wert in the full bloom of thy beauty and I was blinded. I forgot everything, everyone. I forgot all about Batlin standing next to me and the reagents we were supposed to purchase. That day I fell in love with thee, my Delphynia. But I fear thou wert blinded by my physical appearance as well. Alas! The scars that twist my face are not a pretty sight.~ Look beyond mine appearance, Delphynia. Let thy mind's eye see my soul. Thy mind is less deceitful than thine eyes which only glance at the surface of things and people. If thou wilt but look, thou wouldst see the hidden treasures of thy\tscarred Ruggs. For I am a good man. My heart is pure and so is my mind, Delphynia. I beg of thee, look at me. 'Til I see thee again,~~Ruggs.");
+				return;
+			}
+			if (var0003 == 0x0005) {
+				say("  Oh, Great Captains, my Great Captains! So powerful you were yesterday, so pitiful you are today. Rulers of the City are now prisoners of the Oracle. What a fate you might have met! Iolo is pleased that such powerful creatures as you, Great Captains, have lost power, herein uncovering the fools in them... ~~Iolo");
+				return;
+			}
+			if (var0003 == 0x0006) {
+				say("Everyone is in search of The Lady of Fawn. For The Lady hath been lost since dawn. Barking their strange tune throughout the city, All of them, townsfolk and priests. Iolo did it, enjoying such feasts. Avatar, is it not pretty?~~");
+				say("      Iolo");
+				return;
+			}
+			if (var0003 == 0x0007) {
+				say("   I must seek out Voldin. He will know what can be done against the power that this \"Mad\" Iolo doth exhibit. I still can hardly believe what hath befallen me, Zulith, Chancellor of Fawn -- the most clever man on Serpent Isle: forced to flee from an insane mage!~ ~Still, all is not lost: the treasure room is well hidden and I have one of its two keys. Lady Yelinda doth have the other, though I doubt she remembers it. ~The so-called Serpent Armour is safe from that devil Iolo, and I still have my freedom and my life. Yet I cannot leave Fawn till I have secured all of the treasure!~ ~Hah! 'Tis laughable to think about the titular ruler of Fawn -- Lady Yelinda -- a woman that hath the intelligence of a fish. 'Tis best that she spend the rest of her days trapped in Gorlab, the fool! She thought that I was merely redecorating her throneroom when in sooth I had constructed (with the help of a Moonshadian mage) an illusionary wall in the southeast room of the palace! ~That is where I had to store the Serpent Armour. 'Tis safe from all, I tell you!~~");
+				say("PS: I must incorporate these writings into my diary lest I forget!");
+				return;
+			}
+			if (var0003 == 0x0008) {
+				say("Kylista needs must speak with thee, Avatar, now that is interesting... Heretofore, she was in communication with the Oracle and now she wants thee. Is there any hidden meaning to this change of heart? Thou shouldst know the answer to that, Avatar. When a woman needs to speak to one such as thee, thou dost not want her to wait, Avatar, or dost thou? Is there anything we should be aware of?~ Thy good old friend Iolo wants to know, Avatar...");
+				return;
+			}
+			if (var0003 == 0x0009) {
+				say("  Journey to the mint; ambush the hero there. Succeed in thy mission and thou shalt be richly rewarded. There is but one penalty for failure -- death!");
+				say("~  Remember, the Avatar often travels with accursed companions, and they may be with ",
+					var0001,
+					". Ignore the companions -- direct thine energies to one goal: the destruction of the Avatar! Destroy this note.~");
+				say("   No evidence should be left behind thee. ~~  Batlin");
+				return;
+			}
+			if (var0003 == 0x000A) {
+				say("  Honor be to thee, dear reader. This piece of parchment is mine only means of communication with thee. Mad Iolo cruelly removed my tongue, that I might lead by example and not by words!");
+				say("  I am so disenchanted... I cannot bear the fact that I could not save the city from further plagues. Moreover, there is absolutely no sign of the return of Batlin.");
+				say("  What is going to happen? Thou shouldst tell me, I beg of thee. ~~   Leon.");
+				return;
+			}
+			if (var0003 == 0x000B) {
+				say("Right adventurous Avatar,~");
+				say("   I greet thee well, Avatar, sending thee my blessings and letting thee know that it appears that thou art not paying due attention to my clues.");
+				say("   I require thee that thou dost so. ~~Faithfully thine, ~~                  Iolo");
+				return;
+			}
+			if (var0003 == 0x000C) {
+				say("Thou art required at the temple for the trial");
+				return;
+			}
+			if (var0003 == 0x000D) {
+				say("Order be to thee, my right good reader!~~ Beware that when the virtues are in imbalance, a whole new system is set in motion. The Chaos Forces without the Order Forces create the Chaos Anti-Forces. I hope thou dost understand what the implications of such a change mean.~ A virtue like Tolerance without Ethicality creates a lack of standards of conduct and would lead, without a doubt, to Anarchy.~ Enthusiasm without Discipline promises actions without self-restraint that is Wantonness.~ Emotion deprived of Logic would foster an inability to overcome emotional impulses with rational thoughts, which augurs Insanity.~~");
+				say("On the other hand, the Order Forces without the Chaos Forces create the Order Anti-Forces.~ In this case, it means that Ethicality without Tolerance would bring about disrespect for the beliefs and rights of others.~ Discipline without Enthusiasm would foster a spirit of hopelessness which retards positive action. That is called Apathy.~ Logic without Emotion leads to self-advancing actions taken without regard to the wants or needs of others. That is called Ruthlessness. Hence, it is now obvious that only Discipline can correct Gwenno.~ Have this in remembrance and take care of thyself,~~Karnax");
+				return;
+			}
+			if (var0003 == 0x000E) {
+				say("Through darkness and despair~ The land was bare~ Looking for Thee, Mondain~ Alas, but in vain~ My soul and mine heart~ Pierced by Cupid's dart~ Will never heal~ Without Mondain's will~ Love is a desolate land~ Unless Thou, Mondain~ Takest me by the hand~ To thy youth fountain ~~Minax");
+				return;
+			}
+			if (var0003 == 0x0014) {
+				say("Notes to myself~~by Erstam~");
+				say("Methinks I knowest now why the blink spell no longer works. These cursed teleportation storms disturb the ether in such a way that the spell often ceases to function. Other times, it is partially successful, as when I cast it on Vasel's predecessor. Nasty business, that.");
+				return;
+			}
+			if (var0003 == 0x0015) {
+				say("After many weeks of fruitless study, I can only conclude that the blink spell simply no longer works correctly. Nine times out of ten, nothing at all happens, while the results of the tenth occurrence are best not pondered. The most obvious reason for these failures is this blasted weather we have been experiencing. Maybe when the storms lessen, I can divine the answer. Until then, I will continue in mine attempts to find the answer.~ Notes this day, by Gustacio.");
+				return;
+			}
+			if (var0003 == 0x001B) {
+				say("Most esteemed Ruggs,");
+				say("  I cannot forget the day I first beheld thy face, for it is never far from my mind. As thou art never far from mine heart. I will admit that to thee, though it may shame me. I cannot promise when, or if, we can ever be together, dear Ruggs. For thou art in exile, and I am the only healer in Fawn. I cannot dwell outside of the gates with thee, no matter how much mine heart may wish it. But someday, if the heavens smile upon us, I shall be able to cast aside my doubts and come to thee as thy love. Until then, I remain ever thine.~~Delphynia");
+				return;
+			}
+			if (var0003 == 0x001F) {
+				say("The Magic Compass~~This is said to be the legendary artifact which guided Erstam the Mad during the voyage to Serpent Isle. ~ To use it, thou must set the Compass upon the ground, and then chant the mantra 'Yleg Ort.' ~According to legend, the compass will show thee the way to travel, but only if thou art worthy.~~As for myself, I have never been able to make the damn thing work. Hence, I am donating it to the Seminarium.~~Filbercio the MageLord");
+				gflags[0x012A] = true;
+				return;
+			}
+			if (var0003 == 0x0025) {
+				say("~~All is not as it seems...");
+				return;
+			}
+			if (var0003 == 0x0026) {
+				say("   This shall be the last of my writings. The freakish storms have continued to worsen. The laborers have all fled in terror, despite mine offer of greater remuneration. It seems fate hath decreed my country estate shall never be completed...");
+				return;
+			}
+			if (var0003 == 0x002A) {
+				say("     I have been here for more days than I am able to remember, though I have not forgotten the day I entered this forsaken cave which has become my tomb. That was 2-29-0227. But my food was depleted long ago, and the rats are more interested in eating me than letting me eat them. My strength is gone, as is my will. If thou dost find this, please tell Mythra I love her.~~");
+				say("     --Denyel");
+				return;
+			}
+			if (var0003 == 0x002B) {
+				say("Welcome, travellers, and be at ease.~ This rest house is open to all who Walk in Beauty.~");
+				say("Feel free to take whatever food thou mayest need.~");
+				say("As a courtesy to other travellers, please leave the rest house in the manner that thou didst find it...");
+				return;
+			}
+			if (var0003 == 0x002C) {
+				say("Welcome to the Broken Oar, the finest inn in the known world!~");
+				say("While thou art staying at our fine inn, thou mayest like to try our fine food. Inquire downstairs with the bartender, Jendon.~");
+				say("We hope that thou dost enjoy thy stay at our establishment...");
+				return;
+			}
+			if (var0003 == 0x002D) {
+				say("Dearest Devra,~~ I hate having to leave thee for even a moment, but my father is as unmovable as a mountain!~ The months that we shared have been unforgettable.~ I will miss thee so much! I will miss thy wondrous red hair, thy silken skin, and thy lovely voice.~ I will miss all of thee. Please write to me. As thou knowest, I shall be going back to our inn, the Sleeping Bull.~~ Love, Angus");
+				return;
+			}
+			if (var0003 == 0x002E) {
+				say("ERAX'S JOURNAL~~");
+				say("I alone have managed to safely return to the surface. Mine arrogant curiosity was almost mine undoing. The ruined Ophidian structure in the caverns below the swamp is very dangerous. My companions fell to the blows of the undead. No monk should ever return there. I have taken the key that opens the gate to the area and hidden it in the hollow tree near the southeastern portion of the ruin\tin the swamp. I pray that no one shall ever find that key...");
+				return;
+			}
+			if (var0003 == 0x002F) {
+				say("XENKA'S PROPHECIES~");
+				say("Scattered Verses, Part I~~");
+				say("Madness! Madness is all I can see! The world hath turned inside out. The stars shine blood red... Men are beasts... Beasts are men... Ashes... Ashes. The End is upon us all... Snakes leering in the void... Dancing a dance of death.~~ The vision is over. I am without Sight...");
+				return;
+			}
+			if (var0003 == 0x0030) {
+				say("XENKA'S PROPHECIES~");
+				say("Scattered Verses, Part II~~");
+				say("I see the Hero From Another World ringing the bells!");
+				say("I am not there. I am dead. Ring the bells. Oh, joy!");
+				say("What sweet music the bells make");
+				say("I am dreaming. I hear the bells and I wake...");
+				return;
+			}
+			if (var0003 == 0x0031) {
+				say("XENKA'S PROPHECIES~");
+				say("Scattered Verses, Part III~~");
+				say("I See the frozen waste...");
+				say("The Hero From Another World is there...");
+				say("I See men who are not men covered in fur...");
+				say("I See the Hero From Another World strike...");
+				say("No! The world is collapsing! I cannot breathe!");
+				return;
+			}
+			if (var0003 == 0x0032) {
+				say("XENKA'S VISIONS~");
+				say("Scattered Verses, Part IV~~");
+				say("The Hero From Another World will meet the descendants of the Silver Captain under the\tsign of the Bull. The Hero From Another World will be betrayed by a follower of the Other...");
+				return;
+			}
+			if (var0003 == 0x0033) {
+				say("HORTICULTURAL NOTES~~");
+				say("The Mandrake Root, by Trexin the Gardener~");
+				say("The mandrake root is a short-stemmed plant that hath a fleshy, often forked root, somewhat resembling a man. This tuber, though not particularly pleasant to gaze upon, doth have useful qualities. The root seems to add power to certain spells of the greater circles. The mandrake root, contrary to what my colleague Moxa thinks, can indeed be found on our lonely isle. The root can be found growing in the swamp that is located on the northern part of the island. Most peculiarly, the root doth seemingly appear at random times...");
+				return;
+			}
+			if (var0003 == 0x0034) {
+				say("HORTICULTURAL NOTES~~");
+				say("The Berry Bush, by Trexin the Gardener~");
+				say("I have discovered a wonderful plant that I have named the Berry Bush.\tThe fruit of this plant hath a wonderfully bittersweet, tangy taste. Furthermore, the bush doth grow well in our intemperate clime and needs little maintenance to produce an abundant crop.");
+				return;
+			}
+			if (var0003 == 0x0036) {
+				say("XENKA'S VISIONS~");
+				say("Scattered Verses, Part V~~");
+				say("In the City of Mages, on the Isle of Beyond,~");
+				say("Doth the Hero walk~");
+				say("Mages with two faces prance about~");
+				say("To prove his worth, The Hero From Another World");
+				say("Must survive the perils of Freedom...");
+				return;
+			}
+			if (var0003 == 0x0039) {
+				say("I returned home to the Bull as soon as I received Mother's letter. It was not easy to relinquish my command, but Mother needed me, and so here I am.~ I have examined the grounds and found nothing. Mother says she heard noises from the cellar the night Father disappeared. When I investigated, I found crates overturned, but nothing else. I feel so\tuseless! If only I had something, some shred of evidence indicating what became of Father...");
+				return;
+			}
+			if (var0003 == 0x003A) {
+				say("   Welcome to the Sleeping Bull Inn! Our inn hath been owned by the same family for four generations. We have a long tradition of service. We will do our best to ensure that thy stay at the inn will be most enjoyable.~ If thou hast any questions, please inquire of Mistress Devra or Master Angus.");
+				return;
+			}
+			if (var0003 == 0x003B) {
+				say("This day Silverpate came to see me. The black-harted demon came to glote, and to give me scroll and kwill.~");
+				say("He said that I could rite whate'er I wanted, fer I would never see daylite agin. I fear he is rite.~ Silverpate beleves that I stole from him, the paranoid old coot! I ne'er woud beleve me mates when they spoke of the \"littel demons\" in the cap'in's pate, tellin him what to do.~ Corse, I beleved em rite enuf when ol' Pate tole me these things hisself!~ Alas, I lerned too late to prevent me imprisonment.~ I figure ol' Pate will ne'er read me words, and if he do, then so be it.~ Whomever ye be that reads me words, be warned aginst Cap'in Silverpate. He uses majic wardrobes to spy on his own mates! The littel swiches at the Bull don't work, the cap'in said, unless the \"Master Wardrobe\" is used. This \"Master Wardrobe\" be sichuated down in these here catacomes.~ I also herd the evil-harted bastard yammer bout sum Serpint Gate. Ol' Pate said the gate was hidden. It be rite hard to be thinkin strate, but I think the cap'n said something bout too torches markin the hidden entrans.");
+				say("Maybe this Serpint Gate cood help thee. Corse, it be likely that no bloke will e'er read me scribling...~ Pate thinks everyone be after his trezhure. So distrustful be ol' Pate, he even spies on his own famly!~ Let it be nown that I, Bren, cheef bosun on the Black Gull, were a pirate who ne'er turned aginst one o' his own...");
+				return;
+			}
+			if (var0003 == 0x003C) {
+				say("MAGIC SCROLLS -- A Primer~");
+				say("   The process of inscribing scrolls with mystic runes is beyond the scope of this primer. Using these enchanted scrolls, however, is a trivial matter. To unleash the power of the spell, simply unroll the parchment. The Runes of Power, and the scroll itself, will be totally consumed by the energies that are released.");
+				return;
+			}
+			if (var0003 == 0x003D) {
+				say("Beloved Shamino:~");
+				say("   Right beloved Sir, I recommend me to thee, greeting thee well and sending thee my blessings. I have to confess and apologize to thee for I have\tlooted the King's private arms. I beg of thee not to condemn me too hastily for I committed that horrible action when the castle was under siege. Danger was everywhere and so were the goblins. Thou wert not here and I had to take action. We need thee at the castle, prithee, when art thou returning? Life without thee is an endless torment. The goblins seemed to be a deliverance more than a threat to me. I am right sorry for this and wish it hath been otherwise. I wait daily for thee to come hither.~~Faithfully, thy Beatrix");
+				return;
+			}
+			if (var0003 == 0x003E) {
+				say("Come in and join the party...");
+				return;
+			}
+			if (var0003 == 0x003F) {
+				say("   I know I did evil things whilst I was under the control of the Bane. In order to atone for the harm I have caused, I shall sacrifice myself to the Crematorium. If mine ashes can help restore the balance, then I might be partially redeemed for mine evil acts.~~");
+				say("    Farewell,~");
+				say("             Dupre");
+				return;
+			}
+			if (var0003 == 0x0040) {
+				say("Me Map, but I don't need to say that, because if it's anybody but me what's looking at this, I don't want to tell where me treasure is, so read no further, ye dog, lest I leave yer fate to the briny deep! This is dead-reckoning right, but I'm awfully drunk and mebbe I'm holdin' this thing upside-down.");
+				say("98S,28W");
+				say("33 Paces past the rock, excludin' that break I took fer drinkin'.");
+				say("11 Paces east of the whatever that blasted thing is.");
+				say("30 Paces, I think, because I was staggerin' about a bit and I stumbled and lost me count a couple o' times, past whatever me stinkin' map says is supposed to be there; I was sober when I drew that beauty. Unless this is me what's readin' this, I hope the treasure's already gone, ye thief!");
+				return;
+			}
+			if (var0003 == 0x0042) {
+				say("I have paid thee -- and paid thee well -- to fulfill the contract.");
+				say("Only fools would pay a great sum for an easy task... And I am no fool.");
+				say("Remember, I have chosen thee because thou art the best weapon available to me at the moment. Make no mistake, the Avatar is not an easy target and certainly the most challenging thou hast ever had.");
+				say("Dispose of the Avatar quickly. Destroy this note. No evidence should be left behind thee.");
+				say("X");
+				return;
+			}
+			if (var0003 == 0x0043) {
+				say("My dearest,~~ I beg thy forgiveness for my behavior last night. This difficulty with the Avatar hath disrupted my performance, but I assure thee that once we have taken care of ",
+					var0001,
+					", I will hold a private celebration thou shalt not soon forget...");
+				return;
+			}
+			if (var0003 == 0x0045) {
+				say("Parting Verses: by Vasculio~~ As they lower me down,~ To this hole in the ground,~ I scream for help,~ But they can't hear a sound.~ I scratch on this lid,~ My fingers they bleed.~ They plant me deep,~ Like an evil seed.~ Now my bones decompose,~ My flesh doth rot,~ But soon I will rise,~ And torture the lot.");
+				var0006 = AVATAR->find_nearby(0x00F3, 0x0028, MASK_NONE);
+				if (!var0006) {
+					break;
+				}
+				if (gflags[0x0248]) {
+					break;
+				}
+				gflags[0x0248] = true;
+				var0007 = AVATAR->direction_from(var0006);
+				var0008 = script AVATAR {
+					nohalt;
+					face var0007;
+					wait 5;
+					call Func0526;
+				};
+				remove_item();
+				return;
+			}
+			if (var0003 == 0x0046) {
+				say("Right Heartily and Beloved Father,~~ I recommend me to thee, letting thee know I am doing exceedingly well! Though I miss thee and my beloved sister, Alyssand, I am so excited. I have been learning so much magic, thou wouldst not believe thine eyes. I am good. Honest. I swear to thee, that's what the Mages here are saying. 'Tis fun, but frightening as well.~ I am a dedicated student, Father, thou canst be proud of me. And Alyssand, too. I miss thee so much. Thou shouldst visit. The Palace is a sight to see. Gorgeous! These Mages are incredible!~ Learning how to be a Mage is not easy, but I love it as much as I miss thee.~ Thou art on my mind everyday. I hope to see thee soon.~~ Eternal love,~~ Freli");
+				return;
+			}
+			if (var0003 == 0x0047) {
+				say("   To thee, fine warrior, who hast made it this far:");
+				say("If thou seekest to be a Knight of Monitor, thou must be willing");
+				say("to shed thy blood for the defense of others. To prove thy resolve,");
+				say("take this claw and use it upon thy person. Let thy blood be thine oath.~~");
+				say("   --Shmed, Master of Knight's Test");
+				return;
+			}
+			if (var0003 == 0x0048) {
+				say("   To thee, fine warrior, who hast made it this far:");
+				say("If thou seekest to be a Knight of Monitor, thou must mingle thy");
+				say("blood with the ashes of our ancient foe, Gurnordir the goblin king.");
+				say("Thy blood pledges vengeance against our enemies, and will give thee");
+				say("thy totem animal, the key to thy soul.~~");
+				say("  --Shmed, Master of Knight's Test");
+				return;
+			}
+			if (var0003 == 0x0049) {
+				say("   I love thee, father. I hope thou dost kill more than thy share of");
+				say("goblins. Come home soon.~~");
+				say("     Cantra");
+				gflags[0x00C6] = true;
+				return;
+			}
+			if (var0003 == 0x004A) {
+				say("   Note to myself for further exploration of the North:");
+				say("I seem to have lost the Serpent Tooth I took from the Mad Mage.");
+				say("Need to check the area near the savages, as that was where I last");
+				say("remember having it with me.~~");
+				say("     Frigidazzi");
+				return;
+			}
+			if (var0003 == 0x0050) {
+				UI_play_music(0x0032, Func09A0(0x0005, 0x0001));
+				say("Dearest Drogeni,~");
+				say("   What follows is an excerpt from my translation of an ancient manuscript. The translation is crude since I do not as yet fully understand the Serpent Runes, but I think thou wilt find this very exciting.~ Until we meet again,~~-- Erstam, thy devoted servant~~");
+				say("   I write this in great haste, for I can already hear the forces of Order breaching the keep walls. I know not how this missive will survive to reach the outside lands, or for that matter, future generations. Mine only hope is that this speedily-drafted work");
+				say(" will offer record of our hallowed philosophy. For our culture to have any chance of enduring the ages, someone, somewhere must find this.~ Please, reader, I beseech thee, spread the word of our peoples. Release the spirit of our word and learn from the wisdom of the past.~~");
+				say("   Balance -- The harmony between the Principles of Order and Chaos -- is the one pure axiom we hold true.  All three Principles are symbolized in our hieroglyphs: The Great Earth Serpent, keeper of Balance, lies on a vertical plane, around which the two opposing serpents of Chaos and Order wrap themselves.~~");
+				say("   Chaos and Order each embrace three Forces. These six Forces, when combined, form the three Principles of Balance. The Forces of Chaos are Tolerance, Enthusiasm, and Emotion; the Forces of Order are Ethicality, Discipline, and Logic.~~");
+				say("CHAOS~Tolerance is that which encourages the acceptance of all things. Enthusiasm is the energy that allows one to perform great tasks. Emotion is the ability to perceive those feelings that come from the heart, as opposed to coming from the mind.~~");
+				say("ORDER~Ethicality is the belief that there is great value in abiding by rules of conduct. Discipline is the drive to complete a task and avoid the distractions that will prevent its completion. Logic permits clear, reasoned thought, free from any instinctual biases.~~");
+				say("BALANCE~From the marriage between two Forces, one each from Chaos and Order, come the Principles.~ Tolerance and Ethicality combine to form Harmony, the ability to be at peace with the self, the individual, and the world.~ From the union of Enthusiasm and Discipline springs Dedication, that which permits one to surmount obstacles and lead others.~");
+				say("And finally, Emotion tempered by Logic results in Rationality, the ability to comprehend life and understand the world around us.~~");
+				say("   The Forces of Chaos and Order must ever remain in Balance, for imbalance leads to disaster. Witness the war-torn state of our world today! ~~As thou canst surely see, my world hath been torn asunder by disregard for Balance -- our dearest axiom! If thou dost thrive");
+				say("in a time less violent, I can do no more than plead with thee to help restore Balance to the Serpent Isle! I must end this brief explication here, for I can hear mine attackers pounding upon the oaken door downstairs. I wish thee and thy world better fortune than mine own.~~ -- Ssithnos, the Great Hierophant");
+				return;
+			}
+			if (var0003 == 0x0064) {
+				say("My darling Rotoluncia,~~ I know thy feelings about my letters, but I cannot help myself -- I think of thee day and night! Thou art the light of my miserable existence. Thou art like the sun, blinding all who doth gaze upon thy beauty. Thy lips are more luscious than the sweetest fruit. Thy skin is smoother than the most glorious rose. Thou art the essence of womanhood; none can surpass thee!~ Please, I beg of thee, say that thou wilt be mine!~~ Anxiously awaiting thy reply,~~ Filbercio ");
+				return;
+			}
+			if (var0003 == 0x0065) {
+				say("My darling Rotoluncia,~~ I know that thou dost love me as much as I love thee. Let us forget all of the intrigue that plagues this city and flee to the mainland! I can have built for us a modest love nest where we may spend the rest of our days in bliss!~ Thy servant,~~ Filbercio ");
+			}
+			if (var0003 == 0x0066) {
+				say("My darling Rotoluncia,~~ I tried to sleep after our dalliance this night, yet I cannot. The feel of thy silken hair and the sweet taste of thy lips linger. Oh, my darling, I cannot wait until I see thee again. I feel that I shall go mad if I cannot make thee mine!~~ Thy lover,~~ Filbercio ");
+			} else if (var0003 == 0x0067) {
+				say("Rotoluncia,~~ I saw thee staring at that pig Torrissio at the banquet last night and I know now that thine affections shown toward me were false. Thou art a cow and a shabby sorceress as well!~ Do not try to pretend otherwise, for I know the truth now. I want nothing more from thee ever again!~~ Filbercio ");
+			} else if (var0003 == 0x0078) {
+				say("Marsten, Lord of Monitor:~~ The destruction of thine enemies is certain. My brave Goblin warriors have already plundered the Fawn Tower, and the Wolves which guarded it.~ Next, we shall strike the Bull Tower, and the Bears which serve there. Hail to victory! Soon, the Wolves and Bears shall cease to trouble thee. Then Monitor and the Goblins shall live in peace, and thou shalt be King of the Monitorians.~~ Do not let this messenger fall into the hands of our enemies.~~ Pomdirgun,~Chieftain of the Goblin Horde");
+				MARSTEN->set_item_flag(SI_TOURNAMENT);
+				gflags[0x0093] = true;
+			} else if (var0003 == 0x0079) {
+				say("   Honor be to thee, Pomdirgun, Chieftain of the Goblin Horde:~~ Letting thee know that all of our plans in these parts fare well. I have learned from the Wolves that they plan to launch a patrol in the early morning hours of the seventh day of the new moon.~ If thou dost ambush the patrol, then it shall be easy for thee to overrun Fawn Tower itself.~ The Wolves shall be critically weakened, and the City of Fawn shall quake in fear!~ But if thou canst, spare the life of the leader of the patrol. She is a favorite of my liege.~~ We beg of thee not to let this messenger fall into the hands of our enemies, the Wolves.~~ Spektor, writing on behalf of Lord Marsten");
+				gflags[0x0093] = true;
+				MARSTEN->set_item_flag(SI_TOURNAMENT);
+				gflags[0x0094] = true;
+				SPEKTOR->set_item_flag(SI_TOURNAMENT);
+			} else if (var0003 == 0x007A) {
+				say("   Honor be to thee, Pomdirgun, Chieftain of the Goblin Horde:~~ Letting thee know that all of our plans in these parts fare well. Having learned from our successful experience with Fawn Tower, we have decided to withdraw, on the fourth night of the coming moon, as many troops as possible from Bull Tower.~ The Bears shall be marching westward on the plains, and shall be easily slaughtered.~ Then thou canst take the Tower, and plunder the Inn of the Sleeping Bull.~~ We want to remind thee of the supreme importance not to let this messenger fall into the hands of our enemies, the Wolves and the Bears.~~ Marsten, King of Monitor");
+				gflags[0x0093] = true;
+				MARSTEN->set_item_flag(SI_TOURNAMENT);
+			} else if (var0003 == 0x007B) {
+				say("   Old man, if thou dost truly wish to survive Freedom, but dost feel that thou canst live to tell the tale of Lorthondo's final test, thou hast only to serve in my slave pit. Tend to my pets and I shall personally show thee to the door and to the blue skies of daylight and freedom. Guard my nightmare and care for him well.~ He is a treasure and a daemon in one. Take him through the teleporter once each day and let him feel the grass beneath his hooves.~ Take care, for one strike of his hoof could kill an old fool such as thou.~ Be thou sure to keep Sabrina from him. I fear that she doth frighten him. I find it strange that such a wild, untamed creature such as that should be frightened of her touch. Then again, mayhaps I can fathom why. ~");
+				say("   Lastly, take great care of my small furry prize. Do not be fooled by its diminutive size, it hath taken the lives of many a foolhardy man who dared to approach thinking it might make a tasty morsel.~ Thou shouldst treat it with as much respect as thou wouldst bestow upon me. If thou dost not, either one of us could end thy miserable existence.~ In the supply room, thou wilt find a year's worth of carrots for Buggs. Feed him but one per day. Place the carrots upon his golden plate -- 'tis the only way that he will feed. He is of royal lineage -- a born predator. If thou dost not, thou mayest find that thou art his next meal.~ Serve me well, old man, and thou mayest live to see the outside of this prison some year...");
+			} else if (var0003 == 0x007F) {
+				say("To me fellow trappers:~~ Greetings to ye.~~ I will be heading north when ye be reading this message. Make sure ye guard the cave and protect our goods well. If I find out ye let some ne'er-do-well steal our goods, I'll personally skin every one of ye bastards, hang yer hide on me walls, and eat yer black hearts for supper!~ By the way, don't be lookin fer the wonderful glass sword that appeared after the last storm, for I took it with me. I be headin' back to the North.~ This fancy sword should be mighty handy for slaying some dragon or other fearsome beast...~ Slaughter a beast in mine honor.~~Hazard");
+				gflags[0x028C] = true;
+			} else if (var0003 == 0x0082) {
+				say("Virtues ----------------------------- ~ Tolerance, Enthusiasm, and Emotion Ethicality, Discipline, and Logic ~ ----------------------------- ~~");
+				say("Anti-Virtues ----------------------------- ~ Anarchy, Wantonness, and Insanity Prejudice, Apathy, and Ruthlessness ~ ----------------------------- ");
+			} else if (var0003 == 0x0087) {
+				say("I, Purlonio, merchant of Moonshade, am about to tell my tale.~~ Back in the early days of the Sosarian colonization of Serpent Isle, I had accumulated -- I have to tell thee -- a massive fortune in the city. After a most unusual dream, I called upon an enchantress for help. She was expensive, but of good and right advice. Drogeni, the Wizard, warned me that I was about to lose all of my cherished wealth in the near future and that there was nothing she could do to prevent this from happening.~");
+				say("I thought I could outsmart Fate... I took all of my possessions, all of my gold, in a ship to this cave in the far northern reaches for safe storage.~ I hired Drogeni to create a series of tunnels in the rear of the cave so that a magic map would be required and no one could survive without it.~ Thereupon, I had the wizard conjure an Ice Dragon to guard my riches. Once this was done, we sailed back to the southern plains where I rid myself of the enchantress so that no one would ever know the secret to my riches.~");
+				say("Unfortunately, upon the death of the wizard, the magical map disintegrated. Fearing that the prophecy had come true, I went back to the cave and tried to find the route to my riches. To this day, I have not found my treasure.");
+			} else if (var0003 == 0x008D) {
+				say("   In my life as a criminal, as they call me, I have had many a task to overcome. None before was as hard as the ones I am about to describe. This is done so that thou mayest save thy time and thy life.~ Of all the traps I had to overcome, the most interesting ones were the spear traps.~ First of all, thou needest to enter the caretaker's room. After many an observation and many more days than thou wouldst think, I discovered the routine of the caretaker.~ He usually is on patrol during the whole afternoon. He makes his rounds at noon and midnight.~ In his storehouse, thou shouldst find barrels and chests. Rummaging through the barrels I found a hidden lever. That lever, I came to realize later, turns off the spear traps in the corridor.~ Make good use of that, my friend. Blessings upon thee.");
+			} else if (var0003 == 0x0095) {
+				say("To My Good Brethren and Comrades In Arms,~~");
+				say("After many long, arduous and harrowing adventures I have collected this considerable treasure. While this fair measure of wealth would be enough to keep a man happy for the rest of his days, I cannot possess it without remembering my good fellow knights -- many to whom I owe my very life. It is to thee that I leave this bountiful reward. It is secured by the soundest means that I currently have at my disposal. To obtain it, one need only use THE KEY.~~ Ever-faithful,~~   Pendar-");
+			} else if (var0003 == 0x0096) {
+				say("Hark, adventurer, and read these words well.~~ Many know me as Gannt the Bard, singer of songs, and writer of fine poetry for all to enjoy. Though many know of me, most do not know of my life, or at least of how I came to this end. Read, and read well, dear adventurer.~ If thou hast any justice in thine heart, or any pity in thy soul, then thou wilt seek vengeance for mine untimely death. If thou, hearty adventurer, hast any sense of duty to avenge evils, then thou must seek out the craven and cowardly Captain Stokes of the rusty old bucket 'The Mustang' and exact just payment, for alas, since I am not of this world, I cannot.~~ One day as I was at the Inn of Sleeping Bull, plucking my lute, not bothering anyone, but practicing my trade, in walked the swine, Captain Stokes, billowing foul fog upon us with his ill-smelling fag.~");
+				say("Seeing that no one in the fair establishment could stomach the pungent smell of his tobacco-like rot, I dared to ask him to put it out, for the sake of all our healths. He stared at me, then turned a blind eye. I went back to strumming my lute, 'til again the smell began to bring tears to mine eyes. Again I asked him, begged him to stop, but again he turned away.~ Finally, as gentle ladies began to leave for air, and good children began to cough and cry from the Captain's reeking root, I tried once more. This time, though, he answered with the blade of his dagger. He thrust well through my lute and into mine entrails, stuffing it deep into my belly.~");
+				say("He grinned and twisted the blade, not once nor twice, but thrice! Being but a humble bard and quite mortal, I had little choice but to expire. I fell in a pool of mine own blood, mine hand strumming my last chord as I fell.~ I ask thee, I beg of thee to give me peace, and exact vengeance for my death. Before thee is the key to his rotten hovel which thou mayest find to the west of Fawn, above the forest of Knight's Test. Many ill-begotten instruments doth he hide in his house of ill-wares. Beware them! Please, noble adventurer, exact justice for my death, and exact the toll from that evil Captain Stokes.  Do this and let my spirit rest peacefully...~~Gannt...");
+			} else if (var0003 == 0x00B5) {
+				say("The Art of Winemaking~~ The art of winemaking is not a difficult trade; indeed, making fine wine is the simplest of tasks. There are those laymen, however, who doth think making wine is some great secret. Nothing could be further from the truth!~ Sorcery hath made the process of making wine very easy, but sorcery cannot make the wine taste good. To make great wine, thou needest but one commodity -- great grapes! That is the secret to making a truly great vintage, one that shall be remembered by all who partake. ");
+			} else if (var0003 == 0x00BC) {
+				var0004 = Func0953();
+				say("Dear ",
+					var0004,
+					", ~All of the portents indicate that this Quest to Find Batlin shall severely tax thine abilities. Consequently, I have ordered the armouries of the kingdom opened in order to equip thee and thy good companions. ~~Thou shalt be given these things -- ~~The Glass Sword, which can slay any foe (but which is destroyed in the act of such slaughter). ~~The MageBane, a fabled weapon which thou didst recover in thy previous encounter with Batlin. It steals the magic from sorcerers who oppose thee. ~~The Daemon Sword which thou didst obtain at the Forge of Virtue. It is truly a terrible weapon, but thou wilt surely need it. Beware the Daemon within!");
+				say("Rudyom's Wand, which doth make blackrock to explode. ~~The strange Serpent of Blackrock, which thou didst obtain from netherworlds during thy most recent adventure. Its powers are unknown, but those who gave it thee promised that it would be useful to thee soon. ~~A spellbook, to which hath been added every spell that could be speedily obtained. ~~For thee to wear, a set of armour of the best enchantments: breastplate, helm, and gauntlets. ~~For Iolo the Bard: a crossbow, which he doth wield so well. ~~For noble Dupre: a Magic Shield which I have prepared for him. ~~For Shamino the Ranger: a Magic Bow, and a goodly supply of Burst Arrows, which he shall no doubt use to good purpose. ~~As well as such common items as torches, a pair of swamp boots, a good dagger, and much food for an extended journey.");
+				say("~~Travel in safety, and may the villain Batlin soon fall into thine hands! Also, I hope that thou shalt soon find Iolo's lost wife, the goodwoman Gwenno. ~~~-- Lord British, thy liege.");
+			} else if (var0003 == 0x00BD) {
+				say("The list of items which we found ourselves with after the storm:~~");
+				say("Prepared by Shamino.");
+				if (gflags[0x00B7]) {
+					say("With additional notes by Dupre.");
+				}
+				if (gflags[0x0078]) {
+					say("And further comments by Iolo, since being freed from that vile Monitorian prison cell!");
+				}
+				say("~~");
+				if (gflags[0x027A] && (!gflags[0x028C])) {
+					say("A pinecone (or, at least, it appears to be one).");
+				}
+				if (gflags[0x028C]) {
+					say("A pinecone from the northern woods.");
+				}
+				if (gflags[0x027B] && (!gflags[0x028D])) {
+					say("A fine pair of sheer stockings, probably women's attire.");
+				}
+				if (gflags[0x028D]) {
+					say("A pair of moonsilk stockings, such as the enchantress Columna doth wear.");
+				}
+				if (gflags[0x027C] && (!gflags[0x028E])) {
+					say("Some sort of vase, with soot inside.");
+				}
+				if (gflags[0x028E]) {
+					say("A funerary urn containing the Ashes of the Dead, taken from the Caves of Monitor.");
+				}
+				if (gflags[0x027D] && (!gflags[0x0110])) {
+					say("A strange apparatus of glass and copper.");
+				}
+				if (gflags[0x0110] && (!gflags[0x028F])) {
+					say("A specimen of laboratory apparatus from a mage's laboratory.");
+				}
+				if (gflags[0x0110] && gflags[0x028F]) {
+					say("The missing apparatus from the laboratory of Erstam, the so-called Mad Mage.");
+				}
+				if (gflags[0x027E] && (!gflags[0x0290])) {
+					say("A rock.");
+				}
+				if (gflags[0x0290]) {
+					say("A pumice rock from the fiery depths of some dungeon.");
+				}
+				if (gflags[0x027F] && (!gflags[0x014C])) {
+					say("A finely crafted ring, of silver, of a size to fit a small woman or a child.");
+				}
+				if (gflags[0x014C] && (!gflags[0x0291])) {
+					say("A finely crafted silver ring, probably the lost engagement ring of a lass named Alyssand.");
+				}
+				if (gflags[0x0291]) {
+					say("The engagement ring belonging to Alyssand of Fawn.");
+				}
+				if (gflags[0x0280] && (!gflags[0x02A0])) {
+					say("A ridiculous fur cap.");
+				}
+				if (gflags[0x02A0] && (!gflags[0x0292])) {
+					say("An expensive fur cap, which the MageLord of Moonshade obtained for one of his many lovers.");
+				}
+				if (gflags[0x0292]) {
+					say("The elegant fur cap which Filbercio the MageLord purchased for his favorite, the sorceress Frigidazzi.");
+				}
+				if (gflags[0x0281] && (!gflags[0x0293])) {
+					say("Some very old and worn slippers, such as might be worn in the privacy of one's home.");
+				}
+				if (gflags[0x0293]) {
+					say("The well-worn slippers belonging to Devra, the mistress of the Inn of the Sleeping Bull.");
+				}
+				if (gflags[0x0282] && (!gflags[0x0294])) {
+					say("An enameled breastplate, suitable for ceremonial occasions.");
+				}
+				if (gflags[0x0294]) {
+					say("The ceremonial breastplate of the Priestess of Beauty, who is Kylista of Fawn. A very attractive lady, I should add.");
+				}
+				if (gflags[0x0283] && (!gflags[0x0295])) {
+					say("A strange blue egg.");
+				}
+				if (gflags[0x0295]) {
+					say("A penguin egg, such as may be found in the ice fields of the distant north.");
+				}
+				if (gflags[0x0284] && (!gflags[0x0296])) {
+					say("A crude brush.");
+				}
+				if (gflags[0x0296]) {
+					say("A grisly brush made from the bones of some poor victim of the Goblins. How foul!");
+				}
+				if (gflags[0x0285] && (!gflags[0x0297])) {
+					say("A bottle of ice wine -- whatever that is!");
+				}
+				if (gflags[0x0297]) {
+					say("A bottle of that excellent vintage of wine sold by the Rangers of Moonshade. Why, I should sample some now...");
+				}
+				if (gflags[0x0287] && (!gflags[0x0299])) {
+					say("Strange baubles -- silver disks with jewels in the center.");
+				}
+				if (gflags[0x0299]) {
+					say("Jeweled coins from the City of Beauty, Fawn.");
+				}
+				if (gflags[0x0288] && (!gflags[0x029A])) {
+					say("A large skull, no doubt belonging to some large and dead animal.");
+				}
+				if (gflags[0x029A]) {
+					say("The skull of a great mountain bear.");
+				}
+				if (gflags[0x0289] && (!gflags[0x029B])) {
+					say("A bloody hand, severed from its corpse. It shows no sign of decay, yet...");
+				}
+				if (gflags[0x029B]) {
+					say("The severed hand from one of the Mad Mage's experiments. It is not dead, yet not living -- it doth not decay.");
+				}
+				if (gflags[0x028A] && (!gflags[0x029C])) {
+					say("An inexpensive shield, sturdy and suitable for battle.");
+				}
+				if (gflags[0x029C]) {
+					say("One of the common shields used by the Pikemen of Monitor.");
+				}
+				if (gflags[0x028B] && (!gflags[0x029D])) {
+					say("A red hunk of stone.");
+				}
+				if (gflags[0x029D]) {
+					say("The dangerous mineral known as Stoneheart, which is used to produce the illegal reagent Bloodspawn.");
+				}
+			} else if (var0003 == 0x00BE) {
+				say(" Inventory swap list as updated by Iolo");
+			} else if (var0003 == 0x00BF) {
+				say("Inventory swap list as updated by Dupre");
+			} else if (var0003 == 0x00C9) {
+				say("This certificate entitles the bearer to commit thievery up to a maximum of one hour.~~Shamino the Anarch.");
+			} else if (var0003 == 0x00CA) {
+				say("This is an invitation for thee and thy friends to dine at the MageLord's Palace.");
+			} else if (var0003 == 0x00CB) {
+				say("Dearest Avatar,~~ I would like to congratulate thee from the bottom of mine heart, on obtaining thy spellbook. That was not an easy task. Thou didst accomplish it most admirably.~ Also, I have been told that thou art asking questions about me. I think I would be the best person from whom to obtain the ultimate answers to thy questions. That is, the ones concerning myself.~ For all those reasons and so many more, I would like for thee to come to my manor. ~~Frigidazzi.");
+			} else if (var0003 == 0x00CC) {
+				say("Dearest Avatar,~~ ~Love and Honor be to thee. Letting thee know that I cannot wait to see thee again. I cannot think of time far from thy strong person and handsome body. Thy broad shoulders and great arms are such an open invitation for a woman like me. Thine eyes, Avatar, so piercing yet so full of love. I could feel that love during thy last visit.~ I beg of thee, come visit me tonight. Thou dost remember where my manor is, dost thou not? I have a very rare spell (a true tongue-twister) I could teach thee and thou wouldst be the only one enjoying that treasured spell of mine. Once more, I beg of thee, do come tonight and do come alone.~~ Thy love,      ~~Frigidazzi.");
+			} else if (var0003 == 0x00CD) {
+				say("Dearest Avatar,~~ A thousand apologies is what I present thee with. I am the one who caused thee to be arrested and I cannot forgive myself.~ Thou hauntest my dreams. Memories of thee flash in front of mine eyes and the only way I can solve this nightmare is by presenting thee with a very special gift.~ I beg of thee to accept these Serpent Earrings, a token of mine affection for thee, Avatar. ~~Frigidazzi.");
+			} else if (var0003 == 0x00CE) {
+				say("   Fedabiblio, this is a message to let thee know that all is not well.~ I desperately need thine help. I beg of thee to answer my call.~ Thou must needs use the Crystal Ball.~~Gustacio.");
+			} else if (var0003 == 0x00CF) {
+				say("To the right good Avatar,~~ Thou must not think thy quest is done. For I offer ye a great challenge. To ye I leave my treasure -- if thou canst find it.~ Within this booty lies a Serpent Crown, waiting for ye to discover its hiding place.~~Captain Hawk.");
+			} else if (var0003 == 0x00D0) {
+				say("Avatar,~~ I have in my possession something extremely valuable which would be even more vital to thee. Thou couldst make good use of it, believe me.~ If thou art interested (and thou shouldst be), come to the cabin in the forest.~~Stefano.");
+			} else if (var0003 == 0x00D1) {
+				say("From Flindo~~ To Torrissio:~~ Dearest and most Powerful Mage,~~ I recommend me to thee as well as the bearer of this message.~ This letter of introduction entitles the bearer to a chat with thee. Trust thy righteous friend, Torrissio, the bearer is worth thy time.~ I thank thee for thine understanding. Treat the bearer the way thou wouldst treat me.~~ With a right good will, sincerely thy,~~Flindo");
+			} else if (var0003 == 0x00D2) {
+				say("To Melino and Columna:~~ Dearest and most Powerful Mages,~~ I recommend me to thee as well as the bearer of this message. This letter of introduction entitles the bearer to a chat with you. Trust thy righteous friend, the bearer is worth your time.~ I thank you for your understanding. Treat the bearer the way you would treat me.~~ With a right good will, faithfully,~~Flindo");
+			} else if (var0003 == 0x00D3) {
+				say("Dearest Avatar,~~ Love and Honor be to thee. Letting thee know that I cannot wait to see thee again. I cannot think of time far from thy strong and good-hearted person.~ Thine eyes, Avatar, so piercing yet so full of love. I could feel that love during thy last visit. I beg of thee, come visit me tonight.~ I have a very rare spell I could teach thee and thou wouldst be the only one learning it.~ Once more, I beg of thee, do come tonight and do come alone.~~ Sincerely thy,\t~~Frigidazzi.");
+			} else if (var0003 == 0x00D4) {
+				say("   I have made the most wonderful discovery about the Comb that I took from that empty-headed ruler of Fawn! No longer shall I be forced to content myself with the bumbling attentions of Melino, my pitiful excuse for a husband!~ For upon using the Comb on myself, I have become beautiful and desirable! No one will ever guess now that Mosh and I are twins! Now I may use my wits for better things... like the Adept Torrissio!~~Columna");
+			} else if (var0003 == 0x00D5) {
+				say("Know, adventurer, that to proceed onward thou must pass three puzzles. At the first test, throw two down. At the second test: throw three down to get eight. At the third test: throw four down to get twelve.\tIf the levers are not in the correct position when the button is depressed, thou wilt surely be destroyed.~ Aram-Dol ");
+			} else {
+				say("     QA, report this scroll.");
+			}
 		}
-	}
-labelFunc031D_0A44:
-	return;
+	} while (false);
 }
 
 extern void Func0422 object#(0x422) ();
@@ -34313,67 +34310,66 @@ void Func042C object#(0x42C) () {
 			}
 		}
 	}
-	if (event == DEATH) {
-		if (gflags[0x024E]) {
-			var0019 = PALOS->get_item_flag(DEAD);
-			var001A = DEADEYE->get_item_flag(DEAD);
-			var001B = BRUNT->get_item_flag(DEAD);
-			if (var0019 && (var001A && var001B)) {
-				if (SELINA->get_npc_id() != 0x0001) {
-					// Need to make UCC optimize this
-					goto labelFunc042C_0F80;
+	do {
+		if (event == DEATH) {
+			if (gflags[0x024E]) {
+				var0019 = PALOS->get_item_flag(DEAD);
+				var001A = DEADEYE->get_item_flag(DEAD);
+				var001B = BRUNT->get_item_flag(DEAD);
+				if (var0019 && (var001A && var001B)) {
+					if (SELINA->get_npc_id() != 0x0001) {
+						break;
+					}
+					SELINA->set_npc_id(0x0002);
+					var001C = SELINA->get_npc_object();
+					var000E = script var001C after 25 ticks {
+						nohalt;
+						call Func042C;
+					};
+					return;
 				}
-				SELINA->set_npc_id(0x0002);
-				var001C = SELINA->get_npc_object();
-				var000E = script var001C after 25 ticks {
-					nohalt;
-					call Func042C;
-				};
+				var001D = UI_get_party_list();
+				var001E = UI_die_roll(0x0001, Func0977(var001D));
+				var001F = var001D[var001E];
+				var000E = set_to_attack(var001F, 0x0276);
+				var001F->obj_sprite_effect(ANIMATION_PULSATING_DISC, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
 				return;
 			}
-			var001D = UI_get_party_list();
-			var001E = UI_die_roll(0x0001, Func0977(var001D));
-			var001F = var001D[var001E];
-			var000E = set_to_attack(var001F, 0x0276);
-			var001F->obj_sprite_effect(ANIMATION_PULSATING_DISC, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			return;
-		}
-		if (gflags[0x01E8]) {
-			abort;
-		}
-		var0020 = Func097D(SELINA, 0x0001, 0x0128, QUALITY_ANY, 0x0002);
-		var0021 = Func097D(PARTY, 0x0001, 0x0286, QUALITY_ANY, 0x0002);
-		var0022 = Func097D(PARTY, 0x0001, 0x0281, 0x0075, 0x0003);
-		if (var0020) {
-			var0023 = SELINA->get_oppressor();
-			if (var0023->get_item_flag(IN_PARTY)) {
-				SELINA->show_npc_face0(0x0000);
-				say("\"Thou shalt not find me such easy prey, mighty Avatar!\"");
-				say("\"When thou dost least expect it, thou shalt find me a worthy opponent!\"");
-			} else {
-				SELINA->show_npc_face0(0x0000);
-				say("\"I must retreat to the safety of the Sleeping Bull. Do not worry -- we shall meet again, Avatar!\"");
+			if (gflags[0x01E8]) {
+				abort;
 			}
-			UI_remove_npc_face0();
-			Func097F(SELINA, "@We shall meet again!@", 0x0000);
-			var0005 = SELINA->get_object_position();
-			while (var0005[0x0003] > 0x0000) {
-				var0005[0x0001] -= 0x0001;
-				var0005[0x0002] -= 0x0001;
-				var0005[0x0003] -= 0x0002;
+			var0020 = Func097D(SELINA, 0x0001, 0x0128, QUALITY_ANY, 0x0002);
+			var0021 = Func097D(PARTY, 0x0001, 0x0286, QUALITY_ANY, 0x0002);
+			var0022 = Func097D(PARTY, 0x0001, 0x0281, 0x0075, 0x0003);
+			if (var0020) {
+				var0023 = SELINA->get_oppressor();
+				if (var0023->get_item_flag(IN_PARTY)) {
+					SELINA->show_npc_face0(0x0000);
+					say("\"Thou shalt not find me such easy prey, mighty Avatar!\"");
+					say("\"When thou dost least expect it, thou shalt find me a worthy opponent!\"");
+				} else {
+					SELINA->show_npc_face0(0x0000);
+					say("\"I must retreat to the safety of the Sleeping Bull. Do not worry -- we shall meet again, Avatar!\"");
+				}
+				UI_remove_npc_face0();
+				Func097F(SELINA, "@We shall meet again!@", 0x0000);
+				var0005 = SELINA->get_object_position();
+				while (var0005[0x0003] > 0x0000) {
+					var0005[0x0001] -= 0x0001;
+					var0005[0x0002] -= 0x0001;
+					var0005[0x0003] -= 0x0002;
+				}
+				UI_sprite_effect(ANIMATION_PULSATING_DISC, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
+				UI_sprite_effect(ANIMATION_TELEPORT2, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
+				if (SELINA->get_item_flag(IN_PARTY)) {
+					SELINA->remove_from_party();
+				}
+				SELINA->remove_npc();
+				SELINA->revert_schedule();
+				SELINA->run_schedule();
 			}
-			UI_sprite_effect(ANIMATION_PULSATING_DISC, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			UI_sprite_effect(ANIMATION_TELEPORT2, var0005[0x0001], var0005[0x0002], 0x0000, 0x0000, 0x0000, LOOP_ONCE);
-			if (SELINA->get_item_flag(IN_PARTY)) {
-				SELINA->remove_from_party();
-			}
-			SELINA->remove_npc();
-			SELINA->revert_schedule();
-			SELINA->run_schedule();
 		}
-	}
-labelFunc042C_0F80:
-	return;
+	} while (false);
 }
 
 extern var Func0954 0x954 ();
@@ -36665,266 +36661,265 @@ void Func0433 object#(0x433) () {
 			VOLDIN->set_schedule_type(TALK);
 		}
 	}
-	if (event == SCRIPTED) {
-		VOLDIN->run_schedule();
-		VOLDIN->clear_item_say();
-		VOLDIN->show_npc_face0(0x0000);
-		say("\"So thou hast come to pity me, eh, ",
-			var0002,
-			"? Well, I'm not done yet!\"");
-		add(["false Oracle", "Kylista", "not done yet"]);
-	} else if (!(event == STARTED_TALKING)) {
-		// Need to make UCC optimize this
-		goto labelFunc0433_05E8;
-	} else {
-		VOLDIN->run_schedule();
-		VOLDIN->clear_item_say();
-		VOLDIN->show_npc_face0(0x0000);
-		var0005 = VOLDIN->get_item_flag(MET);
-		if (gflags[0x0171] || (gflags[0x0170] && (!gflags[0x0172]))) {
-			say("\"Thou dost dare to confront me? Thou, that didst bring the blasphemer to Lady Yelinda!\"");
-			UI_remove_npc_face0();
-			Func097F(VOLDIN, "@Spare me thy presence!@", 0x0000);
-			VOLDIN->set_schedule_type(SHY);
-			abort;
-		}
-		if (var0005 == false) {
-			if (gflags[0x003E] == true) {
-				if (var0001 == true) {
-					say("\"Another of Monitor's female Pikemen, I see. Odd that they encourage women to disfigure themselves.\" *\"I am Great Captain Voldin.\"");
-				} else {
-					say("\"Welcome, good Pikeman. Thy presence honors us.\" *\"I am Great Captain Voldin.\"");
-				}
-			} else if (var0001 == true) {
-				say("\"Thy Beauty enriches us. Welcome to Fawn, ",
-					var0000,
-					".\" *\"I am Great Captain Voldin.\"");
-			} else {
-				say("\"It is a pleasure to meet thee. I am Great Captain Voldin.\" *\"Fawn is in sore need of more men to help hold the Goblins at bay.\"");
-			}
-			VOLDIN->set_item_flag(MET);
-		} else {
-			say("\"How might I be of service this time, ",
+	do {
+		if (event == SCRIPTED) {
+			VOLDIN->run_schedule();
+			VOLDIN->clear_item_say();
+			VOLDIN->show_npc_face0(0x0000);
+			say("\"So thou hast come to pity me, eh, ",
 				var0002,
-				"?\"");
-		}
-		add(["storms", "Goblins"]);
-	}
-	converse ("bye") {
-		case "false Oracle" (remove):
-			say("\"The Oracle hath always been a fraud! Dost thou not comprehend?\"");
-			say("\"Even in our ancient homeland, the Statue of Beauty was controlled by the Great Captains. It said what we told it to.\"");
-			add(["fraud", "Why?"]);
-			fallthrough;
-
-		case "fraud" (remove):
-			say("\"For centuries, the women of our culture have believed themselves to be divine. Yet the men governed secretly, through the revelations issued by the Oracle.\"");
-			say("\"Thou hast destroyed a great tradition, foreigner! It was glorious, while it lasted...\"");
-			fallthrough;
-
-		case "Why?" (remove):
-			if (UI_is_pc_female()) {
-				say("\"Thou wouldst not understand...\"");
-			} else {
-				say("\"Learn from our experience, ",
-					var0002,
-					"! Women are easily controlled by their vanity. Tell them that they are superior -- and then manipulate them. That's the key!\"");
-				say("\"The females of our race are exceedingly willful, yet they lack common sense. Without men to dominate them, they would ruin everything.\"");
+				"? Well, I'm not done yet!\"");
+			add(["false Oracle", "Kylista", "not done yet"]);
+		} else if (!(event == STARTED_TALKING)) {
+			break;
+		} else {
+			VOLDIN->run_schedule();
+			VOLDIN->clear_item_say();
+			VOLDIN->show_npc_face0(0x0000);
+			var0005 = VOLDIN->get_item_flag(MET);
+			if (gflags[0x0171] || (gflags[0x0170] && (!gflags[0x0172]))) {
+				say("\"Thou dost dare to confront me? Thou, that didst bring the blasphemer to Lady Yelinda!\"");
+				UI_remove_npc_face0();
+				Func097F(VOLDIN, "@Spare me thy presence!@", 0x0000);
+				VOLDIN->set_schedule_type(SHY);
+				abort;
 			}
-			fallthrough;
-
-		case "Kylista" (remove):
-			say("\"She was merely our pawn -- a pretty thing, clever in a limited way, but always our tool.\"");
-			if (KYLISTA->npc_nearby()) {
-				KYLISTA->show_npc_face1(0x0000);
-				say("\"Close thy trap, Voldin, or I'll scratch thine eyes out!\"");
-				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
-				say("\"Such a clever threat, girl! Dost thou not realize that thou dost live at my pleasure?\"");
-				if (!UI_is_pc_female()) {
-					say("\"Fear not -- so long as the nights remain cold, I shall have a use for thee...\"");
-				}
-			}
-			fallthrough;
-
-		case "not done yet" (remove):
-			say("\"Surely, thou dost not think that Leon the Preacher and Alyssand the Weaver have won? They don't have the strength to govern.\"");
-			say("\"Give it time. Perhaps three moons. And then the people will clamor for the old ways, and remember Voldin in his jail cell.\"");
-			say("\"Then I shall rule as I always deserved, as King of Fawn!\"");
-			fallthrough;
-
-		case "storms":
-			say("\"The storms are a regrettable consequence of incurring the heavens' displeasure. I'm certain that our punishment will end soon if we adhere to Beauty's truth.\"");
-			remove("storms");
-			add(["the heavens' displeasure", "Beauty's truth"]);
-			fallthrough;
-
-		case "the heavens' displeasure":
-			say("\"Out of misguided kindness, we allowed infidels to enter our city. They spread their contagion, corrupting many of our people to their misguided ways. This displeased the heavens. The storms were clearly sent to punish us.\"");
-			remove("the heavens' displeasure");
-			add(["infidels", "misguided ways"]);
-			fallthrough;
-
-		case "infidels":
-			say("\"The sailors camped outside of the city are infidels. They do not follow the path of Beauty.\" *\"They came to our city claiming to be from Britannia, which -- as any sailor knows -- is pure fiction. The Priestess was right to remove their ugly dishonesty from our midst.\"");
-			remove("infidels");
-			add("Priestess");
-			fallthrough;
-
-		case "Priestess":
-			say("\"Kylista is the Priestess of Beauty. She receives the wisdom of the Oracle and interprets it for those of us who cannot understand the words of the heavens.\" *\"Kylista tried to dissuade us from allowing that false prophet into our city. Now we are paying for our folly.\"");
-			remove("Priestess");
-			add("Oracle");
-			fallthrough;
-
-		case "Oracle":
-			say("\"The Oracle is an instrument of the heavens. Its words are divine revelations to those who follow Beauty's truth.\"");
-			remove("Oracle");
-			add("revelations");
-			fallthrough;
-
-		case "revelations":
-			say("\"Thou hast not heard a revelation from the Oracle yet?\"");
-			var0006 = Func0955();
-			if (var0006) {
-				say("\"Then thou knowest that these are words meant to enlighten and guide our lives to Beauty.\"");
-			} else {
-				say("\"Thou shouldst go to the Temple. Judging by the time, there will be another revelation soon.\" *\"I'm certain that thou wilt find it an enlightening experience.\"");
-			}
-			remove("revelations");
-			fallthrough;
-
-		case "misguided ways":
-			say("\"There is one among them, Leon, who preaches of something they call The Fellowship. While I'll grant that he is a powerful speaker, he is clearly a misguided fool.\" *\"Who in their right mind would believe that the world could be changed by such simplistic views?\"");
-			remove("misguided ways");
-			add("simplistic views");
-			fallthrough;
-
-		case "simplistic views":
-			if (var0001 == true) {
-				say("\"Forgive me, ",
-					var0000,
-					". I did not intend to enter a philosophical discussion. Thy Beauty distracted me, I must confess.\"");
-			} else {
-				say("\"What man could honestly expect that the neighbor who covets thy land would not do everything possible to acquire it?\" *\"Wouldst thou, like a trusting woman, trust such a neighbor to act in Unity with thee, and work to become Worthy of owning thy land?\"");
-				var0007 = Func0955();
-				if (var0007) {
-					say("\"Then thou art destined for a dismal life, my friend. For the world is what thou makest of it. Thou canst acquire only what thou takest.\"");
-				} else {
-					say("\"Of course not! Thou art a man of the world. Thou knowest that thou canst acquire only what thou takest.\"");
-				}
-			}
-			remove("simplistic views");
-			fallthrough;
-
-		case "Beauty's truth":
-			say("\"Everyone is drawn to that which is beautiful. Therefore, if we strive to honor and protect all things beautiful, our lives will be fulfilled.\" *\"All good and honest people are Beautiful.\"");
-			remove("Beauty's truth");
-			fallthrough;
-
-		case "Goblins":
-			if (gflags[0x003E] == true) {
-				if (gflags[0x014E] == true) {
+			if (var0005 == false) {
+				if (gflags[0x003E] == true) {
 					if (var0001 == true) {
-						say("\"Please convey Fawn's thanks to thy fellow Pikemen who retook the tower from Pomdirgun and the Goblins. 'Twas most nobly done and Monitor doth have Lady Yelinda's gratitude.\"");
+						say("\"Another of Monitor's female Pikemen, I see. Odd that they encourage women to disfigure themselves.\" *\"I am Great Captain Voldin.\"");
 					} else {
-						say("\"Thou hast Fawn's thanks, noble Pikeman. Lady Yelinda was quite distraught until thou didst retake the tower from Pomdirgun and the Goblins.\"");
+						say("\"Welcome, good Pikeman. Thy presence honors us.\" *\"I am Great Captain Voldin.\"");
 					}
 				} else if (var0001 == true) {
-					say("\"Not to belittle thy prowess, ",
+					say("\"Thy Beauty enriches us. Welcome to Fawn, ",
 						var0000,
-						", but thou shouldst remain here in safety with Lady Yelinda. Leave the retaking of the tower to thy larger male companions.\" *\"The battle will likely be more fierce than thou canst imagine with Pomdirgun goading them on.\"");
+						".\" *\"I am Great Captain Voldin.\"");
 				} else {
-					say("\"I will feel more secure in the knowledge that thou wilt be among the fighters seeking to reclaim our tower. With Pomdirgun goading them on, the battle will most likely be quite fierce.\" *\"I wish it were not my duty to protect Lady Yelinda. I would join thee in the fray if I could.\"");
+					say("\"It is a pleasure to meet thee. I am Great Captain Voldin.\" *\"Fawn is in sore need of more men to help hold the Goblins at bay.\"");
 				}
-			} else if (var0001 == true) {
-				say("\"Thou shouldst have remained in the safety of the city, noble ",
-					var0000,
-					". The Pikemen have been driven from the tower by Pomdirgun and his Goblin hordes.\" *\"I have advised Lady Yelinda to order that the gates remain closed at night until the tower is retaken.\"");
+				VOLDIN->set_item_flag(MET);
 			} else {
-				say("\"Thou art just in time for a fine fight, brave ",
-					var0000,
-					"! Pomdirgun and his Goblin hordes must be driven from the Pikeman tower.\" *\"Lady Yelinda will be most grateful to all who join in the fray.\"");
+				say("\"How might I be of service this time, ",
+					var0002,
+					"?\"");
 			}
-			remove("Goblins");
-			add(["Lady Yelinda", "Pomdirgun"]);
-			fallthrough;
+			add(["storms", "Goblins"]);
+		}
+		converse ("bye") {
+			case "false Oracle" (remove):
+				say("\"The Oracle hath always been a fraud! Dost thou not comprehend?\"");
+				say("\"Even in our ancient homeland, the Statue of Beauty was controlled by the Great Captains. It said what we told it to.\"");
+				add(["fraud", "Why?"]);
+				fallthrough;
 
-		case "Lady Yelinda":
-			say("\"Lady Yelinda is the most beautiful woman in the city. She rules Fawn with the aid of the Chancellor and the Great Captain's Council.\"");
-			remove("Lady Yelinda");
-			add(["Chancellor", "Great Captain's Council"]);
-			fallthrough;
+			case "fraud" (remove):
+				say("\"For centuries, the women of our culture have believed themselves to be divine. Yet the men governed secretly, through the revelations issued by the Oracle.\"");
+				say("\"Thou hast destroyed a great tradition, foreigner! It was glorious, while it lasted...\"");
+				fallthrough;
 
-		case "Chancellor":
-			say("\"The Chancellor is Lady Yelinda's chief assistant. He conveys messages to and from the Council to her Ladyship and makes public proclamations of Lady Yelinda's judgments.\" *\"If thou wishest a matter brought before her Ladyship, thou must first speak with Zulith. Look for a small man wearing bright green robes. That will be the Chancellor.\"");
-			remove("Chancellor");
-			fallthrough;
+			case "Why?" (remove):
+				if (UI_is_pc_female()) {
+					say("\"Thou wouldst not understand...\"");
+				} else {
+					say("\"Learn from our experience, ",
+						var0002,
+						"! Women are easily controlled by their vanity. Tell them that they are superior -- and then manipulate them. That's the key!\"");
+					say("\"The females of our race are exceedingly willful, yet they lack common sense. Without men to dominate them, they would ruin everything.\"");
+				}
+				fallthrough;
 
-		case "Great Captain's Council":
-			say("\"The Great Captains take much of the weight of mundane affairs from Lady Yelinda's schedule. Garth, Joth and I oversee trade and the disposition of the fleets.\"");
-			remove("Great Captain's Council");
-			add(["Garth", "Joth", "fleet"]);
-			fallthrough;
+			case "Kylista" (remove):
+				say("\"She was merely our pawn -- a pretty thing, clever in a limited way, but always our tool.\"");
+				if (KYLISTA->npc_nearby()) {
+					KYLISTA->show_npc_face1(0x0000);
+					say("\"Close thy trap, Voldin, or I'll scratch thine eyes out!\"");
+					UI_remove_npc_face1();
+					0x0000->set_conversation_slot();
+					say("\"Such a clever threat, girl! Dost thou not realize that thou dost live at my pleasure?\"");
+					if (!UI_is_pc_female()) {
+						say("\"Fear not -- so long as the nights remain cold, I shall have a use for thee...\"");
+					}
+				}
+				fallthrough;
 
-		case "Garth":
-			say("\"Garth is merely a lad. He could never have gotten a Council seat without his family's money.\" *\"He spends his days chasing skirts. Which is just as well, as it keeps him out from under foot.\"");
-			remove("Garth");
-			fallthrough;
+			case "not done yet" (remove):
+				say("\"Surely, thou dost not think that Leon the Preacher and Alyssand the Weaver have won? They don't have the strength to govern.\"");
+				say("\"Give it time. Perhaps three moons. And then the people will clamor for the old ways, and remember Voldin in his jail cell.\"");
+				say("\"Then I shall rule as I always deserved, as King of Fawn!\"");
+				fallthrough;
 
-		case "Joth":
-			say("\"Joth is an old fishing captain who had to be forcibly removed from the fleet, I'm afraid. I don't think that he quite realizes that he isn't on the deck of a ship anymore, poor man.\" *\"He thinks we can rebuild the fleet with little or no money. We humor him as best we can.\"");
-			remove("Joth");
-			fallthrough;
+			case "storms":
+				say("\"The storms are a regrettable consequence of incurring the heavens' displeasure. I'm certain that our punishment will end soon if we adhere to Beauty's truth.\"");
+				remove("storms");
+				add(["the heavens' displeasure", "Beauty's truth"]);
+				fallthrough;
 
-		case "fleet":
-			say("\"These severe storms have caused the total loss of all our fishing ships. Fawn once supplied fish to the other cities. But that is a thing of the past, I'm afraid.\" *\"Even if we were able to rebuild the ships, we have almost no able-bodied men to crew them. This may be the death knell of Fawn without the proper guidance.\"");
-			remove("fleet");
-			fallthrough;
+			case "the heavens' displeasure":
+				say("\"Out of misguided kindness, we allowed infidels to enter our city. They spread their contagion, corrupting many of our people to their misguided ways. This displeased the heavens. The storms were clearly sent to punish us.\"");
+				remove("the heavens' displeasure");
+				add(["infidels", "misguided ways"]);
+				fallthrough;
 
-		case "Pomdirgun":
-			say("\"I do not know what evil spawned such a fearful creature. Pomdirgun is easily larger than the other Goblins, and twice as fierce. All the other Goblins fear him.\" *\"His first foray against Fawn cost us our healer, Seth. And now he hath led the Goblins to overtake the Pikeman tower. I'd give much to see his head on a pike!\"");
-			remove("Pomdirgun");
-			add("Seth");
-			fallthrough;
+			case "infidels":
+				say("\"The sailors camped outside of the city are infidels. They do not follow the path of Beauty.\" *\"They came to our city claiming to be from Britannia, which -- as any sailor knows -- is pure fiction. The Priestess was right to remove their ugly dishonesty from our midst.\"");
+				remove("infidels");
+				add("Priestess");
+				fallthrough;
 
-		case "Seth":
-			say("\"Seth was a stubborn man. But a good healer. He refused to take a guard contingent along with him to hunt herbs. He said that the guards did nothing but trample what he was looking for.\" *\"Unfortunately, such stubbornness cost him his life.\"");
-			if (var0001 == true) {
-				say("\"The details are best left unmentioned. 'Tis not a tale for a beautiful lady.\" *\"The result is that Delphynia is all Fawn doth have in the way of a healer.\"");
-			} else {
-				say("\"By the time the guards caught up with the foul creatures, they had eaten all but his head!\" *\"But perhaps the worst part of the tale is that Fawn is left with only Delphynia as a healer!\"");
-			}
-			remove("Seth");
-			add("Delphynia");
-			fallthrough;
+			case "Priestess":
+				say("\"Kylista is the Priestess of Beauty. She receives the wisdom of the Oracle and interprets it for those of us who cannot understand the words of the heavens.\" *\"Kylista tried to dissuade us from allowing that false prophet into our city. Now we are paying for our folly.\"");
+				remove("Priestess");
+				add("Oracle");
+				fallthrough;
 
-		case "Delphynia":
-			say("\"Delphynia is a nice enough woman. But she is no healer. She's a horticulturist. Not even an herbalist. But she's all we have until these cursed storms lighten.\"");
-			say("\"I fear, however, that she hath fallen under the spell of one of those infidels! Ruggs, I think his name is.\"");
-			remove("Delphynia");
-			add("Ruggs");
-			fallthrough;
+			case "Oracle":
+				say("\"The Oracle is an instrument of the heavens. Its words are divine revelations to those who follow Beauty's truth.\"");
+				remove("Oracle");
+				add("revelations");
+				fallthrough;
 
-		case "Ruggs":
-			say("\"Ruggs is so ugly that his sins are written plain for all to see. But Delphynia seems to find him compelling. I'm told he speaks sweetly, as doth his companion Leon.\" *\"But I expect all evil things are compelling in some manner. Else how would any good person be tempted by them?\"");
-			remove("Ruggs");
-			fallthrough;
+			case "revelations":
+				say("\"Thou hast not heard a revelation from the Oracle yet?\"");
+				var0006 = Func0955();
+				if (var0006) {
+					say("\"Then thou knowest that these are words meant to enlighten and guide our lives to Beauty.\"");
+				} else {
+					say("\"Thou shouldst go to the Temple. Judging by the time, there will be another revelation soon.\" *\"I'm certain that thou wilt find it an enlightening experience.\"");
+				}
+				remove("revelations");
+				fallthrough;
 
-		case "bye":
-			Func08AB();
-			UI_remove_npc_face0();
-			Func097F(AVATAR, "@Goodbye.@", 0x0000);
-			if ((gflags[0x0170] && gflags[0x0172]) && (!gflags[0x016E])) {
-				Func097F(VOLDIN, "@Thou shalt see!@", 0x0002);
-			} else {
-				Func097F(VOLDIN, "@Walk in Beauty.@", 0x0002);
-			}
-			Func08AA();
-			break;
-	}
-labelFunc0433_05E8:
-	return;
+			case "misguided ways":
+				say("\"There is one among them, Leon, who preaches of something they call The Fellowship. While I'll grant that he is a powerful speaker, he is clearly a misguided fool.\" *\"Who in their right mind would believe that the world could be changed by such simplistic views?\"");
+				remove("misguided ways");
+				add("simplistic views");
+				fallthrough;
+
+			case "simplistic views":
+				if (var0001 == true) {
+					say("\"Forgive me, ",
+						var0000,
+						". I did not intend to enter a philosophical discussion. Thy Beauty distracted me, I must confess.\"");
+				} else {
+					say("\"What man could honestly expect that the neighbor who covets thy land would not do everything possible to acquire it?\" *\"Wouldst thou, like a trusting woman, trust such a neighbor to act in Unity with thee, and work to become Worthy of owning thy land?\"");
+					var0007 = Func0955();
+					if (var0007) {
+						say("\"Then thou art destined for a dismal life, my friend. For the world is what thou makest of it. Thou canst acquire only what thou takest.\"");
+					} else {
+						say("\"Of course not! Thou art a man of the world. Thou knowest that thou canst acquire only what thou takest.\"");
+					}
+				}
+				remove("simplistic views");
+				fallthrough;
+
+			case "Beauty's truth":
+				say("\"Everyone is drawn to that which is beautiful. Therefore, if we strive to honor and protect all things beautiful, our lives will be fulfilled.\" *\"All good and honest people are Beautiful.\"");
+				remove("Beauty's truth");
+				fallthrough;
+
+			case "Goblins":
+				if (gflags[0x003E] == true) {
+					if (gflags[0x014E] == true) {
+						if (var0001 == true) {
+							say("\"Please convey Fawn's thanks to thy fellow Pikemen who retook the tower from Pomdirgun and the Goblins. 'Twas most nobly done and Monitor doth have Lady Yelinda's gratitude.\"");
+						} else {
+							say("\"Thou hast Fawn's thanks, noble Pikeman. Lady Yelinda was quite distraught until thou didst retake the tower from Pomdirgun and the Goblins.\"");
+						}
+					} else if (var0001 == true) {
+						say("\"Not to belittle thy prowess, ",
+							var0000,
+							", but thou shouldst remain here in safety with Lady Yelinda. Leave the retaking of the tower to thy larger male companions.\" *\"The battle will likely be more fierce than thou canst imagine with Pomdirgun goading them on.\"");
+					} else {
+						say("\"I will feel more secure in the knowledge that thou wilt be among the fighters seeking to reclaim our tower. With Pomdirgun goading them on, the battle will most likely be quite fierce.\" *\"I wish it were not my duty to protect Lady Yelinda. I would join thee in the fray if I could.\"");
+					}
+				} else if (var0001 == true) {
+					say("\"Thou shouldst have remained in the safety of the city, noble ",
+						var0000,
+						". The Pikemen have been driven from the tower by Pomdirgun and his Goblin hordes.\" *\"I have advised Lady Yelinda to order that the gates remain closed at night until the tower is retaken.\"");
+				} else {
+					say("\"Thou art just in time for a fine fight, brave ",
+						var0000,
+						"! Pomdirgun and his Goblin hordes must be driven from the Pikeman tower.\" *\"Lady Yelinda will be most grateful to all who join in the fray.\"");
+				}
+				remove("Goblins");
+				add(["Lady Yelinda", "Pomdirgun"]);
+				fallthrough;
+
+			case "Lady Yelinda":
+				say("\"Lady Yelinda is the most beautiful woman in the city. She rules Fawn with the aid of the Chancellor and the Great Captain's Council.\"");
+				remove("Lady Yelinda");
+				add(["Chancellor", "Great Captain's Council"]);
+				fallthrough;
+
+			case "Chancellor":
+				say("\"The Chancellor is Lady Yelinda's chief assistant. He conveys messages to and from the Council to her Ladyship and makes public proclamations of Lady Yelinda's judgments.\" *\"If thou wishest a matter brought before her Ladyship, thou must first speak with Zulith. Look for a small man wearing bright green robes. That will be the Chancellor.\"");
+				remove("Chancellor");
+				fallthrough;
+
+			case "Great Captain's Council":
+				say("\"The Great Captains take much of the weight of mundane affairs from Lady Yelinda's schedule. Garth, Joth and I oversee trade and the disposition of the fleets.\"");
+				remove("Great Captain's Council");
+				add(["Garth", "Joth", "fleet"]);
+				fallthrough;
+
+			case "Garth":
+				say("\"Garth is merely a lad. He could never have gotten a Council seat without his family's money.\" *\"He spends his days chasing skirts. Which is just as well, as it keeps him out from under foot.\"");
+				remove("Garth");
+				fallthrough;
+
+			case "Joth":
+				say("\"Joth is an old fishing captain who had to be forcibly removed from the fleet, I'm afraid. I don't think that he quite realizes that he isn't on the deck of a ship anymore, poor man.\" *\"He thinks we can rebuild the fleet with little or no money. We humor him as best we can.\"");
+				remove("Joth");
+				fallthrough;
+
+			case "fleet":
+				say("\"These severe storms have caused the total loss of all our fishing ships. Fawn once supplied fish to the other cities. But that is a thing of the past, I'm afraid.\" *\"Even if we were able to rebuild the ships, we have almost no able-bodied men to crew them. This may be the death knell of Fawn without the proper guidance.\"");
+				remove("fleet");
+				fallthrough;
+
+			case "Pomdirgun":
+				say("\"I do not know what evil spawned such a fearful creature. Pomdirgun is easily larger than the other Goblins, and twice as fierce. All the other Goblins fear him.\" *\"His first foray against Fawn cost us our healer, Seth. And now he hath led the Goblins to overtake the Pikeman tower. I'd give much to see his head on a pike!\"");
+				remove("Pomdirgun");
+				add("Seth");
+				fallthrough;
+
+			case "Seth":
+				say("\"Seth was a stubborn man. But a good healer. He refused to take a guard contingent along with him to hunt herbs. He said that the guards did nothing but trample what he was looking for.\" *\"Unfortunately, such stubbornness cost him his life.\"");
+				if (var0001 == true) {
+					say("\"The details are best left unmentioned. 'Tis not a tale for a beautiful lady.\" *\"The result is that Delphynia is all Fawn doth have in the way of a healer.\"");
+				} else {
+					say("\"By the time the guards caught up with the foul creatures, they had eaten all but his head!\" *\"But perhaps the worst part of the tale is that Fawn is left with only Delphynia as a healer!\"");
+				}
+				remove("Seth");
+				add("Delphynia");
+				fallthrough;
+
+			case "Delphynia":
+				say("\"Delphynia is a nice enough woman. But she is no healer. She's a horticulturist. Not even an herbalist. But she's all we have until these cursed storms lighten.\"");
+				say("\"I fear, however, that she hath fallen under the spell of one of those infidels! Ruggs, I think his name is.\"");
+				remove("Delphynia");
+				add("Ruggs");
+				fallthrough;
+
+			case "Ruggs":
+				say("\"Ruggs is so ugly that his sins are written plain for all to see. But Delphynia seems to find him compelling. I'm told he speaks sweetly, as doth his companion Leon.\" *\"But I expect all evil things are compelling in some manner. Else how would any good person be tempted by them?\"");
+				remove("Ruggs");
+				fallthrough;
+
+			case "bye":
+				Func08AB();
+				UI_remove_npc_face0();
+				Func097F(AVATAR, "@Goodbye.@", 0x0000);
+				if ((gflags[0x0170] && gflags[0x0172]) && (!gflags[0x016E])) {
+					Func097F(VOLDIN, "@Thou shalt see!@", 0x0002);
+				} else {
+					Func097F(VOLDIN, "@Walk in Beauty.@", 0x0002);
+				}
+				Func08AA();
+				break;
+		}
+	} while (false);
 }
 
 extern var Func0954 0x954 ();
@@ -38350,260 +38345,259 @@ void Func0436 object#(0x436) () {
 			KYLISTA->set_schedule_type(TALK);
 		}
 	}
-	if (event == SCRIPTED) {
-		KYLISTA->run_schedule();
-		KYLISTA->clear_item_say();
-		KYLISTA->show_npc_face0(0x0000);
-		say("\"I am so grateful that thou hast come to visit me, ",
-			var0002,
-			"! Everyone else hath forgotten me. I am so lonely here...\"");
-		add(["plot", "Voldin", "lonely"]);
-	} else if (event != STARTED_TALKING) {
-		// Need to make UCC optimize this
-		goto labelFunc0436_0679;
-	} else {
-		KYLISTA->run_schedule();
-		KYLISTA->clear_item_say();
-		KYLISTA->show_npc_face0(0x0000);
-		var0007 = KYLISTA->get_item_flag(MET);
-		if (gflags[0x0171] || (gflags[0x0170] && (!gflags[0x0172]))) {
-			say("\"Thou dost make my spine shiver, thou who dost associate with the enemies of Beauty!");
-			say("\"I beg thee to depart...\"");
-			UI_remove_npc_face0();
-			Func097F(KYLISTA, "@Depart from me!@", 0x0000);
-			abort;
-		}
-		if (var0007 == false) {
-			if (gflags[0x003E] == true) {
-				if (var0001 == true) {
-					say("\"One of Monitor's famed Pikemen! I am Kylista, Priestess of Beauty.\"");
-					say("\"I have always thought it daring of Monitorian women to wear a tattoo. Tell me, do the Monitorian men find this alluring?\"");
-					var0008 = Func0955();
-					if (var0008) {
-						say("\"Most men seem to find me attractive... Except for the Pikemen. I had wondered why. Thank thee for the enlightening information.\"");
-					} else {
-						say("\"Perhaps the sight is too common to affect them. I am certain that Fawn males will not be as... unaffected, shall we say.\"");
-					}
-				} else {
-					say("\"One of Monitor's famed Pikemen! I am Kylista, Priestess of Beauty.\"");
-					say("\"What a pleasure to meet one who is brave as well as handsome.\"");
-				}
-			} else if (var0001 == true) {
-				say("\"Welcome to Fawn. I am Kylista, Priestess of Beauty.\"");
-				say("\"Mayest thou walk in Beauty.\"");
-			} else {
-				say("\"Welcome to Fawn, the city of Beauty. I am Kylista, Priestess of Beauty.\"");
-				say("\"Hast thou come for instruction in the path of Beauty?\"");
-				var0009 = Func0955();
-				if (var0009) {
-					say("\"Hmmm... Perhaps we could arrange private instruction...\"");
-				} else {
-					say("\"A pity. Private instruction is available.\"");
-				}
-			}
-			KYLISTA->set_item_flag(MET);
-		} else if (gflags[0x015E] == true) {
-			KYLISTA->set_schedule_type(IN_COMBAT);
-			KYLISTA->set_attack_mode(FLEE);
-			say("\"Thou hast found me out! The Oracle is a fraud!\"");
-			abort;
-		} else {
-			say("\"Thou dost honor us with thy presence, ",
+	do {
+		if (event == SCRIPTED) {
+			KYLISTA->run_schedule();
+			KYLISTA->clear_item_say();
+			KYLISTA->show_npc_face0(0x0000);
+			say("\"I am so grateful that thou hast come to visit me, ",
 				var0002,
-				".\"");
-		}
-		add(["goblins", "storms", "Oracle", "revelations", "bye"]);
-		if ((gflags[0x0282] || gflags[0x009F]) && (!gflags[0x0294])) {
-			add("white breastplate");
-		}
-	}
-	converse ("bye") {
-		case "plot" (remove):
-			say("\"I see now that Captain Voldin and his men did take advantage of me, through the deception called the Oracle.\"");
-			if (VOLDIN->npc_nearby()) {
-				VOLDIN->show_npc_face1(0x0000);
-				say("\"Of course we did, Priestess. Men have always had the advantage over the weaker sex...\"");
-				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
-				say("\"Be still, Voldin. Thou hast been brought low, even as I have.\"");
+				"! Everyone else hath forgotten me. I am so lonely here...\"");
+			add(["plot", "Voldin", "lonely"]);
+		} else if (event != STARTED_TALKING) {
+			break;
+		} else {
+			KYLISTA->run_schedule();
+			KYLISTA->clear_item_say();
+			KYLISTA->show_npc_face0(0x0000);
+			var0007 = KYLISTA->get_item_flag(MET);
+			if (gflags[0x0171] || (gflags[0x0170] && (!gflags[0x0172]))) {
+				say("\"Thou dost make my spine shiver, thou who dost associate with the enemies of Beauty!");
+				say("\"I beg thee to depart...\"");
+				UI_remove_npc_face0();
+				Func097F(KYLISTA, "@Depart from me!@", 0x0000);
+				abort;
 			}
-			say("\"How could I have been so naive? I was never part of their plans, but only a tool.\"");
-			say("\"Perhaps Lady Yelinda will spare my life, when she understands my role -- I, too, was a victim!\"");
-			fallthrough;
-
-		case "lonely" (remove):
-			if (VOLDIN->npc_nearby()) {
-				say("\"Voldin doth not count -- he is an animal. What I need is companionship...\"");
-			}
-			if (UI_is_pc_female()) {
-				say("\"Come and visit me often, ",
-					var0002,
-					". I am touched that thou didst come down into this dungeon to visit me.\"");
-				say("\"Perhaps we could become friends.\"");
-			} else {
-				say("\"Look at me, ",
-					var0002,
-					". I am a woman in the full bloom of my youth. Such beauty doth not deserve to dwell in the squalor of a jail cell...\"");
-				say("\"They say that thou hast been making friends with young Alyssand, the weaver. I think we, too, could be friends.\"");
-				say("\"And I'm the kind of friend who could keep thee warm on a cold winter's night. Not like that thin-framed weaver wench.\"");
-				say("\"Think of me, ",
-					var0002,
-					". I'll be thinking of thee...\"");
-			}
-			fallthrough;
-
-		case "goblins" (remove):
-			say("\"The very antithesis of Beauty! Goblins are base savages with no appreciation of Beauty and no grasp of Beauty's truth.\"");
-			add("Beauty's truth");
-			fallthrough;
-
-		case "Beauty's truth" (remove):
-			say("\"All things good possess an innate Beauty that attracts all living things.\"");
-			say("\"To goblins, who are vile, ugly monsters, Beauty is a lie. To Pomdirgun, Beauty is something to be exterminated, not cherished.\"");
-			add("Pomdirgun");
-			fallthrough;
-
-		case "Pomdirgun" (remove):
-			say("\"Pomdirgun is the epitome of all repulsive things. He hath risen to unite the goblins against all things good and Beautiful.\"");
-			say("\"The heavens have tired of our wandering from Beauty's truth. They have sent Pomdirgun to destroy those that fall short of the mark.\"");
-			fallthrough;
-
-		case "storms" (remove):
-			say("\"Another sign that the heavens are displeased with our associations with false prophets!\"");
-			say("\"We allowed corruption to enter our city, to visit the very heart of Beauty. Some even encouraged its growth. Now we must pay for our transgressions.\"");
-			say("\"Once we have been brought low enough to see only Beauty, the storms will stop and Fawn will once again prosper. But while all traces of untrue beliefs linger, the punishment will remain.\"");
-			add("false prophets");
-			fallthrough;
-
-		case "false prophets" (remove):
-			say("\"Those who call themselves Britannians -- the sailors that dwell outside the city gates to the northeast -- are false prophets!\"");
-			say("\"We thought them poor, confused seamen worthy of our embrace. But we were fooled! All they brought were lies!\"");
-			say("\"The one they call Leon denounced Beauty as a mere shadow of The Fellowship's truth! And then -- then -- did the storms come! To smite those who would utter such blasphemy!\"");
-			say("\"The storms will not end until the blight of the blasphemers' existence hath been wiped from Beauty's face!\"");
-			if (var0003 == true) {
-				IOLO->show_npc_face1(0x0000);
-				say("\"I would say that she feels rather strongly about this, Avatar.\tBut what she is proposing to stop the storms seems a bit extreme.\"");
-				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
-			}
-			add(["Leon", "Fellowship"]);
-			fallthrough;
-
-		case "Leon" (remove):
-			say("\"Leon seeks to divert unsuspecting people from Beauty's path. He is the one that hath brought the anger of the heavens down upon us!\"");
-			say("\"Lady Yelinda should have ordered him executed for the woes that he hath brought upon our city!\"");
-			add("Lady Yelinda");
-			fallthrough;
-
-		case "Lady Yelinda" (remove):
-			say("\"Lady Yelinda, honor to her, is the ruler of Fawn.\"");
-			say("\"I recommended that she have these foreign blasphemers killed -- let their blood wash away the evil they have wrought. But Lady Yelinda is a soft-hearted woman who doth not know the harshness of the heavens' anger.\"");
-			say("\"I fear that the Great Captains urged her to leniency in favor of their common ties with the sea.\"");
-			add("Great Captains");
-			fallthrough;
-
-		case "Great Captains" (remove):
-			say("\"The Great Captains are advisors to Lady Yelinda. They ensure that Lady Yelinda is not overtaxed with the tedious daily problems of ruling the city.\"");
-			say("\"Joth and Garth allowed themselves to be swayed by feelings of kinship with these foreign sailors. Only Voldin recognized their true danger.\"");
-			add(["Joth", "Garth", "Voldin"]);
-			fallthrough;
-
-		case "Joth" (remove):
-			say("\"Joth is a good man, with a fine sense of what needs to be done to keep the fleets in good order.\"");
-			say("\"He is not, I fear, a good advisor when it comes to political matters. In fact, Zulith would be better in that respect.\"");
-			add("Zulith");
-			fallthrough;
-
-		case "Zulith" (remove):
-			say("\"Zulith is Lady Yelinda's secretary. He schedules her audiences and acts as a messenger between her Ladyship and the Great Captains.\"");
-			say("\"His official title is Chancellor, I believe.\"");
-			fallthrough;
-
-		case "Garth" (remove):
-			say("\"Garth is no more than a boy! He blows with the wind of anything that catches his fancy, most notably young ladies.\"");
-			say("\"Garth is of little use in all but representing the interests of the merchant captains.\"");
-			fallthrough;
-
-		case "Voldin" (remove):
-			if ((gflags[0x0170] && gflags[0x0172]) && (!gflags[0x016E])) {
-				if (VOLDIN->get_item_flag(DEAD)) {
-					say("\"He was an evil man, Avatar. Captain Voldin forced me to do his bidding, beating me when I refused!\"");
-					say("\"I am glad that thou didst kill him -- glad!\"");
+			if (var0007 == false) {
+				if (gflags[0x003E] == true) {
+					if (var0001 == true) {
+						say("\"One of Monitor's famed Pikemen! I am Kylista, Priestess of Beauty.\"");
+						say("\"I have always thought it daring of Monitorian women to wear a tattoo. Tell me, do the Monitorian men find this alluring?\"");
+						var0008 = Func0955();
+						if (var0008) {
+							say("\"Most men seem to find me attractive... Except for the Pikemen. I had wondered why. Thank thee for the enlightening information.\"");
+						} else {
+							say("\"Perhaps the sight is too common to affect them. I am certain that Fawn males will not be as... unaffected, shall we say.\"");
+						}
+					} else {
+						say("\"One of Monitor's famed Pikemen! I am Kylista, Priestess of Beauty.\"");
+						say("\"What a pleasure to meet one who is brave as well as handsome.\"");
+					}
+				} else if (var0001 == true) {
+					say("\"Welcome to Fawn. I am Kylista, Priestess of Beauty.\"");
+					say("\"Mayest thou walk in Beauty.\"");
 				} else {
-					say("\"The whole scheme was his -- not mine! I did only what I was told. He forced me to serve him...\"");
-					if (VOLDIN->npc_nearby()) {
-						VOLDIN->show_npc_face1(0x0000);
-						say("\"Liar! Thou didst enjoy thy role as Priestess, using thy sensual powers over men.\"");
-						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
-						say("\"Oh, ",
-							var0002,
-							"! Thou must rescue me from the presence of this evil man!\"");
+					say("\"Welcome to Fawn, the city of Beauty. I am Kylista, Priestess of Beauty.\"");
+					say("\"Hast thou come for instruction in the path of Beauty?\"");
+					var0009 = Func0955();
+					if (var0009) {
+						say("\"Hmmm... Perhaps we could arrange private instruction...\"");
+					} else {
+						say("\"A pity. Private instruction is available.\"");
 					}
 				}
+				KYLISTA->set_item_flag(MET);
+			} else if (gflags[0x015E] == true) {
+				KYLISTA->set_schedule_type(IN_COMBAT);
+				KYLISTA->set_attack_mode(FLEE);
+				say("\"Thou hast found me out! The Oracle is a fraud!\"");
+				abort;
 			} else {
-				say("\"Now Voldin is truly what Fawn needs as an advisor! His record of service on land and sea is impeccable.\"");
-				say("\"I fear it takes all his expertise to explain most situations to his companions. Fawn would fare much better if Voldin were Lady Yelinda's only advisor.\"");
+				say("\"Thou dost honor us with thy presence, ",
+					var0002,
+					".\"");
 			}
-			fallthrough;
+			add(["goblins", "storms", "Oracle", "revelations", "bye"]);
+			if ((gflags[0x0282] || gflags[0x009F]) && (!gflags[0x0294])) {
+				add("white breastplate");
+			}
+		}
+		converse ("bye") {
+			case "plot" (remove):
+				say("\"I see now that Captain Voldin and his men did take advantage of me, through the deception called the Oracle.\"");
+				if (VOLDIN->npc_nearby()) {
+					VOLDIN->show_npc_face1(0x0000);
+					say("\"Of course we did, Priestess. Men have always had the advantage over the weaker sex...\"");
+					UI_remove_npc_face1();
+					0x0000->set_conversation_slot();
+					say("\"Be still, Voldin. Thou hast been brought low, even as I have.\"");
+				}
+				say("\"How could I have been so naive? I was never part of their plans, but only a tool.\"");
+				say("\"Perhaps Lady Yelinda will spare my life, when she understands my role -- I, too, was a victim!\"");
+				fallthrough;
 
-		case "Fellowship" (remove):
-			say("\"Lies! Lies! Simplistic half truths meant to snare the unwitting and twist Beauty's truth!\"");
-			say("\"How can any person tell heaven's will without benefit of divine guidance? The deluded fools have not heard the voice of the Oracle or felt the heavens' anger.\"");
-			fallthrough;
+			case "lonely" (remove):
+				if (VOLDIN->npc_nearby()) {
+					say("\"Voldin doth not count -- he is an animal. What I need is companionship...\"");
+				}
+				if (UI_is_pc_female()) {
+					say("\"Come and visit me often, ",
+						var0002,
+						". I am touched that thou didst come down into this dungeon to visit me.\"");
+					say("\"Perhaps we could become friends.\"");
+				} else {
+					say("\"Look at me, ",
+						var0002,
+						". I am a woman in the full bloom of my youth. Such beauty doth not deserve to dwell in the squalor of a jail cell...\"");
+					say("\"They say that thou hast been making friends with young Alyssand, the weaver. I think we, too, could be friends.\"");
+					say("\"And I'm the kind of friend who could keep thee warm on a cold winter's night. Not like that thin-framed weaver wench.\"");
+					say("\"Think of me, ",
+						var0002,
+						". I'll be thinking of thee...\"");
+				}
+				fallthrough;
 
-		case "Oracle" (remove):
-			say("\"The Oracle was commissioned by Lady Fawn, many years ago, as an instrument to speak the heavens' truths.\"");
-			say("\"The Mages of Old Sosaria labored for nearly a year before the task was done. The revealed wonder was the Oracle.\"");
-			say("\"As Priestess of Beauty, I have the power to call forth a revelation from the Oracle. In times past, before the storms began, people came from all around to hear the Oracle's divine words.\"");
-			fallthrough;
+			case "goblins" (remove):
+				say("\"The very antithesis of Beauty! Goblins are base savages with no appreciation of Beauty and no grasp of Beauty's truth.\"");
+				add("Beauty's truth");
+				fallthrough;
 
-		case "revelations":
-			say("\"The revelations are truths of heaven filtered through a mouth of stone!\"");
-			say("\"It is a pity that thou wilt not hear a revelation... I have decided to close the rituals to all outsiders. We cannot be too careful, after what happened with the false prophets.\"");
-			remove("revelations");
-			fallthrough;
+			case "Beauty's truth" (remove):
+				say("\"All things good possess an innate Beauty that attracts all living things.\"");
+				say("\"To goblins, who are vile, ugly monsters, Beauty is a lie. To Pomdirgun, Beauty is something to be exterminated, not cherished.\"");
+				add("Pomdirgun");
+				fallthrough;
 
-		case "white breastplate" (remove):
-			gflags[0x0294] = true;
-			if (Func097D(PARTY, 0x0001, 0x01A3, QUALITY_ANY, 0x0000)) {
-				say("\"Thou hast the Armour of Beauty! Oh, what a sign from the heavens!\"");
-				say("\"Return it to me... Perhaps the heavens shall once again smile upon Fawn.\"");
-				if (Func0955() == true) {
+			case "Pomdirgun" (remove):
+				say("\"Pomdirgun is the epitome of all repulsive things. He hath risen to unite the goblins against all things good and Beautiful.\"");
+				say("\"The heavens have tired of our wandering from Beauty's truth. They have sent Pomdirgun to destroy those that fall short of the mark.\"");
+				fallthrough;
+
+			case "storms" (remove):
+				say("\"Another sign that the heavens are displeased with our associations with false prophets!\"");
+				say("\"We allowed corruption to enter our city, to visit the very heart of Beauty. Some even encouraged its growth. Now we must pay for our transgressions.\"");
+				say("\"Once we have been brought low enough to see only Beauty, the storms will stop and Fawn will once again prosper. But while all traces of untrue beliefs linger, the punishment will remain.\"");
+				add("false prophets");
+				fallthrough;
+
+			case "false prophets" (remove):
+				say("\"Those who call themselves Britannians -- the sailors that dwell outside the city gates to the northeast -- are false prophets!\"");
+				say("\"We thought them poor, confused seamen worthy of our embrace. But we were fooled! All they brought were lies!\"");
+				say("\"The one they call Leon denounced Beauty as a mere shadow of The Fellowship's truth! And then -- then -- did the storms come! To smite those who would utter such blasphemy!\"");
+				say("\"The storms will not end until the blight of the blasphemers' existence hath been wiped from Beauty's face!\"");
+				if (var0003 == true) {
+					IOLO->show_npc_face1(0x0000);
+					say("\"I would say that she feels rather strongly about this, Avatar.\tBut what she is proposing to stop the storms seems a bit extreme.\"");
+					UI_remove_npc_face1();
+					0x0000->set_conversation_slot();
+				}
+				add(["Leon", "Fellowship"]);
+				fallthrough;
+
+			case "Leon" (remove):
+				say("\"Leon seeks to divert unsuspecting people from Beauty's path. He is the one that hath brought the anger of the heavens down upon us!\"");
+				say("\"Lady Yelinda should have ordered him executed for the woes that he hath brought upon our city!\"");
+				add("Lady Yelinda");
+				fallthrough;
+
+			case "Lady Yelinda" (remove):
+				say("\"Lady Yelinda, honor to her, is the ruler of Fawn.\"");
+				say("\"I recommended that she have these foreign blasphemers killed -- let their blood wash away the evil they have wrought. But Lady Yelinda is a soft-hearted woman who doth not know the harshness of the heavens' anger.\"");
+				say("\"I fear that the Great Captains urged her to leniency in favor of their common ties with the sea.\"");
+				add("Great Captains");
+				fallthrough;
+
+			case "Great Captains" (remove):
+				say("\"The Great Captains are advisors to Lady Yelinda. They ensure that Lady Yelinda is not overtaxed with the tedious daily problems of ruling the city.\"");
+				say("\"Joth and Garth allowed themselves to be swayed by feelings of kinship with these foreign sailors. Only Voldin recognized their true danger.\"");
+				add(["Joth", "Garth", "Voldin"]);
+				fallthrough;
+
+			case "Joth" (remove):
+				say("\"Joth is a good man, with a fine sense of what needs to be done to keep the fleets in good order.\"");
+				say("\"He is not, I fear, a good advisor when it comes to political matters. In fact, Zulith would be better in that respect.\"");
+				add("Zulith");
+				fallthrough;
+
+			case "Zulith" (remove):
+				say("\"Zulith is Lady Yelinda's secretary. He schedules her audiences and acts as a messenger between her Ladyship and the Great Captains.\"");
+				say("\"His official title is Chancellor, I believe.\"");
+				fallthrough;
+
+			case "Garth" (remove):
+				say("\"Garth is no more than a boy! He blows with the wind of anything that catches his fancy, most notably young ladies.\"");
+				say("\"Garth is of little use in all but representing the interests of the merchant captains.\"");
+				fallthrough;
+
+			case "Voldin" (remove):
+				if ((gflags[0x0170] && gflags[0x0172]) && (!gflags[0x016E])) {
+					if (VOLDIN->get_item_flag(DEAD)) {
+						say("\"He was an evil man, Avatar. Captain Voldin forced me to do his bidding, beating me when I refused!\"");
+						say("\"I am glad that thou didst kill him -- glad!\"");
+					} else {
+						say("\"The whole scheme was his -- not mine! I did only what I was told. He forced me to serve him...\"");
+						if (VOLDIN->npc_nearby()) {
+							VOLDIN->show_npc_face1(0x0000);
+							say("\"Liar! Thou didst enjoy thy role as Priestess, using thy sensual powers over men.\"");
+							UI_remove_npc_face1();
+							0x0000->set_conversation_slot();
+							say("\"Oh, ",
+								var0002,
+								"! Thou must rescue me from the presence of this evil man!\"");
+						}
+					}
+				} else {
+					say("\"Now Voldin is truly what Fawn needs as an advisor! His record of service on land and sea is impeccable.\"");
+					say("\"I fear it takes all his expertise to explain most situations to his companions. Fawn would fare much better if Voldin were Lady Yelinda's only advisor.\"");
+				}
+				fallthrough;
+
+			case "Fellowship" (remove):
+				say("\"Lies! Lies! Simplistic half truths meant to snare the unwitting and twist Beauty's truth!\"");
+				say("\"How can any person tell heaven's will without benefit of divine guidance? The deluded fools have not heard the voice of the Oracle or felt the heavens' anger.\"");
+				fallthrough;
+
+			case "Oracle" (remove):
+				say("\"The Oracle was commissioned by Lady Fawn, many years ago, as an instrument to speak the heavens' truths.\"");
+				say("\"The Mages of Old Sosaria labored for nearly a year before the task was done. The revealed wonder was the Oracle.\"");
+				say("\"As Priestess of Beauty, I have the power to call forth a revelation from the Oracle. In times past, before the storms began, people came from all around to hear the Oracle's divine words.\"");
+				fallthrough;
+
+			case "revelations":
+				say("\"The revelations are truths of heaven filtered through a mouth of stone!\"");
+				say("\"It is a pity that thou wilt not hear a revelation... I have decided to close the rituals to all outsiders. We cannot be too careful, after what happened with the false prophets.\"");
+				remove("revelations");
+				fallthrough;
+
+			case "white breastplate" (remove):
+				gflags[0x0294] = true;
+				if (Func097D(PARTY, 0x0001, 0x01A3, QUALITY_ANY, 0x0000)) {
+					say("\"Thou hast the Armour of Beauty! Oh, what a sign from the heavens!\"");
+					say("\"Return it to me... Perhaps the heavens shall once again smile upon Fawn.\"");
+					if (Func0955() == true) {
+						var000A = Func0992(0x0001, "@But what about thine own armour, Avatar?@", "@But what of mine own armour?@", false);
+						if (var000A != AVATAR) {
+							0x0000->set_conversation_slot();
+						}
+						say("\"Oh, was that strange armour that appeared in my bedchamber thine?\"");
+						say("\"I cannot recall what I did with it. Perhaps I still have it... Perhaps thou wilt come by some evening and I will look for it.\"");
+						var000B = Func0996(PARTY, KYLISTA, 0x0001, 0x01A3, QUALITY_ANY, 0x0000, false);
+						say("\"I thank thee, ",
+							var0000,
+							"!\"");
+					} else {
+						say("\"Why dost thou not give it to me?\"");
+					}
+				} else {
+					say("\"Thou hast seen the Armour of Beauty! Oh, will the heavens never smile upon Fawn again?. I would that thou hadst brought it with thee.\"");
 					var000A = Func0992(0x0001, "@But what about thine own armour, Avatar?@", "@But what of mine own armour?@", false);
 					if (var000A != AVATAR) {
 						0x0000->set_conversation_slot();
 					}
 					say("\"Oh, was that strange armour that appeared in my bedchamber thine?\"");
 					say("\"I cannot recall what I did with it. Perhaps I still have it... Perhaps thou wilt come by some evening and I will look for it.\"");
-					var000B = Func0996(PARTY, KYLISTA, 0x0001, 0x01A3, QUALITY_ANY, 0x0000, false);
-					say("\"I thank thee, ",
-						var0000,
-						"!\"");
-				} else {
-					say("\"Why dost thou not give it to me?\"");
 				}
-			} else {
-				say("\"Thou hast seen the Armour of Beauty! Oh, will the heavens never smile upon Fawn again?. I would that thou hadst brought it with thee.\"");
-				var000A = Func0992(0x0001, "@But what about thine own armour, Avatar?@", "@But what of mine own armour?@", false);
-				if (var000A != AVATAR) {
-					0x0000->set_conversation_slot();
-				}
-				say("\"Oh, was that strange armour that appeared in my bedchamber thine?\"");
-				say("\"I cannot recall what I did with it. Perhaps I still have it... Perhaps thou wilt come by some evening and I will look for it.\"");
-			}
-			fallthrough;
+				fallthrough;
 
-		case "bye":
-			Func08AB();
-			UI_remove_npc_face0();
-			Func097F(AVATAR, "@Farewell.@", 0x0000);
-			Func097F(KYLISTA, (("@Walk in Beauty, " + var0002) + ".@"), 0x0002);
-			Func08AA();
-			break;
-	}
-labelFunc0436_0679:
-	return;
+			case "bye":
+				Func08AB();
+				UI_remove_npc_face0();
+				Func097F(AVATAR, "@Farewell.@", 0x0000);
+				Func097F(KYLISTA, (("@Walk in Beauty, " + var0002) + ".@"), 0x0002);
+				Func08AA();
+				break;
+		}
+	} while (false);
 }
 
 extern var Func0954 0x954 ();
@@ -47147,237 +47141,236 @@ void Func044D object#(0x44D) () {
 		Func097F(SPEKTOR, "Yes?", 0x0002);
 		SPEKTOR->set_schedule_type(TALK);
 	}
-	if (event != SCRIPTED) {
-		if (event != STARTED_TALKING) {
-			// Need to make UCC optimize this
-			goto labelFunc044C_09C6;
+	do {
+		if (event != SCRIPTED) {
+			if (event != STARTED_TALKING) {
+				break;
+			}
 		}
-	}
-	SPEKTOR->run_schedule();
-	SPEKTOR->clear_item_say();
-	SPEKTOR->show_npc_face0(0x0000);
-	if (gflags[0x0092]) {
-		if (gflags[0x00B4]) {
-			say("\"Mine actions stand beyond the shallow morality of any tribunal. No court can condemn me. The only crime of which I am truly guilty is that I allowed myself to be caught.\"");
-		} else {
-			say("\"Very well, I have been found out. There is no point in denying my guilt any longer. It was I who stole the money from the treasury.\"");
-			say("\"I was in league with Lord Marsten, who schemed to become King of Monitor. The Bears and Wolves would have been powerless!\"");
-			say("\"Cantra's father stumbled into our secret cave, so he had to be killed. If the secret of the explosive weapons had been revealed, Marsten would have killed me...\"");
-			gflags[0x00B4] = true;
-		}
-	} else {
-		var000A = SPEKTOR->get_item_flag(MET);
-		if (var000A) {
-			say("\"Yes, how may I help?\"");
-		} else {
-			say("\"I am Spektor, treasurer of Monitor.\"");
-			SPEKTOR->set_item_flag(MET);
-		}
-		add(["duties", "exchange coins"]);
-		if (gflags[0x0093] && (!(gflags[0x0038] || gflags[0x00B3]))) {
-			add("know traitor");
-		}
-		if (gflags[0x00A2] && (!gflags[0x0299])) {
-			add("strange coins");
-		}
-		if (gflags[0x00A7]) {
-			add("Gwenno");
-		}
-		if (!(gflags[0x0078] && gflags[0x00A9])) {
-			add("enchanter");
-		}
-		if (gflags[0x00B3] && (!gflags[0x0038])) {
-			add("evidence");
-		}
-		if (gflags[0x00B6] && (!gflags[0x00B4])) {
-			add("thief");
-		}
-	}
-	converse ("bye") {
-		case "duties" (remove):
-			say("\"Frankly, I do so many things. I am Monitor's treasurer. Lord Marsten may order things done, but I must find a way to pay for it all!\"");
-			say("\"I handle the books and the paperwork, and I'm the local money exchanger. I also collect and administer the taxes.\"");
-			say("\"Frankly, I'm not much of a fighter, even though I am a Knight.\"");
-			add(["taxes", "Knight", "exchange coins"]);
-			fallthrough;
-
-		case "taxes" (remove):
-			say("\"Our Pikemen patrol the major roads connecting Monitor with Fawn and Sleeping Bull, and man the guard towers.\"");
-			say("\"In better times, caravans travelled these routes, and we collected a fat reward from merchants eager for our protection.\"");
-			if (GOBLIN_KING->get_item_flag(DEAD)) {
-				say("\"With the Goblin King slain, perhaps the roads will again be filled. But the storms also discourage travel...\"");
+		SPEKTOR->run_schedule();
+		SPEKTOR->clear_item_say();
+		SPEKTOR->show_npc_face0(0x0000);
+		if (gflags[0x0092]) {
+			if (gflags[0x00B4]) {
+				say("\"Mine actions stand beyond the shallow morality of any tribunal. No court can condemn me. The only crime of which I am truly guilty is that I allowed myself to be caught.\"");
 			} else {
-				say("\"But now, the rumors of a gathering Goblin invasion have scared the travellers off the roads! Frankly, this is nonsense.\"");
-				add("invasion");
+				say("\"Very well, I have been found out. There is no point in denying my guilt any longer. It was I who stole the money from the treasury.\"");
+				say("\"I was in league with Lord Marsten, who schemed to become King of Monitor. The Bears and Wolves would have been powerless!\"");
+				say("\"Cantra's father stumbled into our secret cave, so he had to be killed. If the secret of the explosive weapons had been revealed, Marsten would have killed me...\"");
+				gflags[0x00B4] = true;
 			}
-			fallthrough;
-
-		case "invasion" (remove):
-			say("\"The Knights of Monitor have repelled such Goblin aggressions successfully in the past and they shall do so again.\"");
-			fallthrough;
-
-		case "Knight" (remove):
-			say("\"Well, I dutifully passed the Test of Knighthood when I was fifteen. But frankly, not everyone was born to be a Knight. I admit it.\"");
-			say("\"What I am is an intellectual. Other Knights may scoff, but I don't care. I might be an easy target on the List Field, but in a debate I'm a killer!\"");
-			if (!gflags[0x004A]) {
-				say("\"Perhaps thou shouldst consider taking the Test of Knighthood. It is not so difficult, with proper training.\"");
-				say("\"We citizens are so much nicer to thee when thou art a Knight, rather than a stranger. We distrust outsiders.\"");
-				add("Test of Knighthood");
+		} else {
+			var000A = SPEKTOR->get_item_flag(MET);
+			if (var000A) {
+				say("\"Yes, how may I help?\"");
+			} else {
+				say("\"I am Spektor, treasurer of Monitor.\"");
+				SPEKTOR->set_item_flag(MET);
 			}
-			fallthrough;
-
-		case "thief" (remove):
-			say("\"Yes, frankly, 'tis true. But I do not like to talk about it.\"");
-			say("\"Someone in Monitor is a thief. Money is being taken from the treasury. 'Tis a mystery.\"");
-			say("\"The Bears think the Wolves are responsible. And, of course, the Wolves think the Bears are responsible. We Leopards are doing our best to keep them from killing each other.\"");
-			say("\"Please keep this to thyself. Only a few select individuals are aware of this crime. Frankly, we do not want a panic.\"");
-			add(["Bears", "Wolves", "Leopards", "frankly"]);
-			fallthrough;
-
-		case "Bears", "Wolves", "Leopards" (remove):
-			say("\"I tire of this entire system. Wolves! Bears! Leopards! Why can we not be united, rather than divided into Commands?\"");
-			say("\"I am a Leopard, and frankly, we're the only level- headed ones. When a Leopard like Lord Marsten is in residence as Lord of Monitor, things are much more in... balance.\"");
-			say("\"As for the Wolves and the Bears, they are like children. \"");
-			fallthrough;
-
-		case "frankly" (remove):
-			say("\"Yes, I do say that a lot, do I not? I apologize. 'Tis a bad habit. Frankly... er, to tell the truth, I should stop.\"");
-			fallthrough;
-
-		case "Gwenno" (remove):
-			say("\"There was a woman here a while ago who spent much time in the Hall of Monitor, examining our museum display. Very friendly.\"");
-			var0007 = Func0992(IOLO, "@Where did she go from here? Dost thou know?@", 0x0000, false);
-			if (var0007 != AVATAR) {
-				0x0000->set_conversation_slot();
+			add(["duties", "exchange coins"]);
+			if (gflags[0x0093] && (!(gflags[0x0038] || gflags[0x00B3]))) {
+				add("know traitor");
 			}
-			say("\"She left here for the east. To study at the library on Monk Isle, as I recall.\"");
-			add("Monk Isle");
-			var0007 = Func0992(IOLO, "@Avatar! We must journey onward and find her!@", 0x0000, false);
-			if (var0007 != AVATAR) {
-				0x0000->set_conversation_slot();
+			if (gflags[0x00A2] && (!gflags[0x0299])) {
+				add("strange coins");
 			}
-			fallthrough;
+			if (gflags[0x00A7]) {
+				add("Gwenno");
+			}
+			if (!(gflags[0x0078] && gflags[0x00A9])) {
+				add("enchanter");
+			}
+			if (gflags[0x00B3] && (!gflags[0x0038])) {
+				add("evidence");
+			}
+			if (gflags[0x00B6] && (!gflags[0x00B4])) {
+				add("thief");
+			}
+		}
+		converse ("bye") {
+			case "duties" (remove):
+				say("\"Frankly, I do so many things. I am Monitor's treasurer. Lord Marsten may order things done, but I must find a way to pay for it all!\"");
+				say("\"I handle the books and the paperwork, and I'm the local money exchanger. I also collect and administer the taxes.\"");
+				say("\"Frankly, I'm not much of a fighter, even though I am a Knight.\"");
+				add(["taxes", "Knight", "exchange coins"]);
+				fallthrough;
 
-		case "Monk Isle" (remove):
-			say("\"Frankly, 'tis a mysterious place. I do not know much about it, except the legend that wise monks dwell there.\"");
-			say("\"The only way to go there is by ship, but there are no sailors here -- the storms have discouraged them.\"");
-			say("\"Perhaps thou couldst hire a captain in Fawn -- which is the city of fishermen -- or at the hamlet of Sleeping Bull.\"");
-			add(["Fawn", "Sleeping Bull"]);
-			fallthrough;
+			case "taxes" (remove):
+				say("\"Our Pikemen patrol the major roads connecting Monitor with Fawn and Sleeping Bull, and man the guard towers.\"");
+				say("\"In better times, caravans travelled these routes, and we collected a fat reward from merchants eager for our protection.\"");
+				if (GOBLIN_KING->get_item_flag(DEAD)) {
+					say("\"With the Goblin King slain, perhaps the roads will again be filled. But the storms also discourage travel...\"");
+				} else {
+					say("\"But now, the rumors of a gathering Goblin invasion have scared the travellers off the roads! Frankly, this is nonsense.\"");
+					add("invasion");
+				}
+				fallthrough;
 
-		case "Fawn" (remove):
-			say("\"Fawn is a coastal town filled with the worshippers of beauty. Frankly, I find those people to be a little too superficial for my liking.\"");
-			fallthrough;
+			case "invasion" (remove):
+				say("\"The Knights of Monitor have repelled such Goblin aggressions successfully in the past and they shall do so again.\"");
+				fallthrough;
 
-		case "Sleeping Bull" (remove):
-			say("\"The inn there is a very old establishment, built in the days before the founding of the Three Cities. The village is built around the inn.\"");
-			say("\"Since it is such a crossroads, thou canst often meet all sorts of interesting folk there. And it is the direct link to the City of Mages.\"");
-			add("City of Mages");
-			fallthrough;
+			case "Knight" (remove):
+				say("\"Well, I dutifully passed the Test of Knighthood when I was fifteen. But frankly, not everyone was born to be a Knight. I admit it.\"");
+				say("\"What I am is an intellectual. Other Knights may scoff, but I don't care. I might be an easy target on the List Field, but in a debate I'm a killer!\"");
+				if (!gflags[0x004A]) {
+					say("\"Perhaps thou shouldst consider taking the Test of Knighthood. It is not so difficult, with proper training.\"");
+					say("\"We citizens are so much nicer to thee when thou art a Knight, rather than a stranger. We distrust outsiders.\"");
+					add("Test of Knighthood");
+				}
+				fallthrough;
 
-		case "City of Mages" (remove):
-			say("\"A place where I shall never be seen! I distrust magic in all its forms.\"");
-			say("\"Moonshade is on the Isle of Beyond, which is across the channel from Sleeping Bull. Thou wouldst need a boat to journey there.\"");
-			if (!gflags[0x00DB]) {
-				var0007 = Func0992(IOLO, "@Perhaps thou couldst obtain a new spellbook there...@", 0x0000, false);
+			case "thief" (remove):
+				say("\"Yes, frankly, 'tis true. But I do not like to talk about it.\"");
+				say("\"Someone in Monitor is a thief. Money is being taken from the treasury. 'Tis a mystery.\"");
+				say("\"The Bears think the Wolves are responsible. And, of course, the Wolves think the Bears are responsible. We Leopards are doing our best to keep them from killing each other.\"");
+				say("\"Please keep this to thyself. Only a few select individuals are aware of this crime. Frankly, we do not want a panic.\"");
+				add(["Bears", "Wolves", "Leopards", "frankly"]);
+				fallthrough;
+
+			case "Bears", "Wolves", "Leopards" (remove):
+				say("\"I tire of this entire system. Wolves! Bears! Leopards! Why can we not be united, rather than divided into Commands?\"");
+				say("\"I am a Leopard, and frankly, we're the only level- headed ones. When a Leopard like Lord Marsten is in residence as Lord of Monitor, things are much more in... balance.\"");
+				say("\"As for the Wolves and the Bears, they are like children. \"");
+				fallthrough;
+
+			case "frankly" (remove):
+				say("\"Yes, I do say that a lot, do I not? I apologize. 'Tis a bad habit. Frankly... er, to tell the truth, I should stop.\"");
+				fallthrough;
+
+			case "Gwenno" (remove):
+				say("\"There was a woman here a while ago who spent much time in the Hall of Monitor, examining our museum display. Very friendly.\"");
+				var0007 = Func0992(IOLO, "@Where did she go from here? Dost thou know?@", 0x0000, false);
 				if (var0007 != AVATAR) {
 					0x0000->set_conversation_slot();
 				}
-			}
-			fallthrough;
-
-		case "Test of Knighthood" (remove):
-			say("\"'Tis actually quite easy. Do not believe what the Knights will tell thee. Frankly, if I can pass it, anyone can!\"");
-			say("\"If thou desirest to know more, I would suggest speaking with Caladin. He is the instructor for young Knight candidates.\"");
-			say("\"Also, thou couldst speak with little Cantra. She is preparing to take the Test next month, and is full of information.\"");
-			fallthrough;
-
-		case "know traitor" (remove):
-			if (gflags[0x0094]) {
-				say("\"What!? What dost thou mean? Art thou calling me a traitor? I may not be much of a fighter, but I can defend myself!\"");
-				SPEKTOR->set_schedule_type(SHY);
-				Func097F(SPEKTOR, "@Beware!@", 0x0000);
-				abort;
-			}
-			say("\"Marsten is the traitor? This is too incredible to believe. Hast thou proof?\"");
-			if (Func0955()) {
-				say("\"I must see this. Might I see the evidence?\"");
-				if (!(Func097D(PARTY, 0x0001, 0x031D, 0x0078, FRAME_ANY) || (Func097D(PARTY, 0x0001, 0x031D, 0x0079, FRAME_ANY) || Func097D(PARTY, 0x0001, 0x031D, 0x007A, FRAME_ANY)))) {
-					var0007 = Func0992(IOLO, "@We did not bring it with us...@", "@I did not bring it.@", false);
+				say("\"She left here for the east. To study at the library on Monk Isle, as I recall.\"");
+				add("Monk Isle");
+				var0007 = Func0992(IOLO, "@Avatar! We must journey onward and find her!@", 0x0000, false);
+				if (var0007 != AVATAR) {
 					0x0000->set_conversation_slot();
-					say("\"Then I can do nothing for thee. Unseen evidence is useless evidence.\"");
-				} else if (Func0955()) {
-					var0009 = Func0996(PARTY, SPEKTOR, 0x0001, 0x031D, 0x0078, FRAME_ANY, 0x0000);
-					var0009 = Func0996(PARTY, SPEKTOR, 0x0001, 0x031D, 0x0079, FRAME_ANY, 0x0000);
-					var0009 = Func0996(PARTY, SPEKTOR, 0x0001, 0x031D, 0x007A, FRAME_ANY, 0x0000);
-					say("\"I shall study this evidence, and if thou art right, I will bring it before the other Lords.\"");
-					gflags[0x00B3] = true;
-					say("\"Now leave me, so that I may peruse this matter.\"");
-					Func097F(SPEKTOR, "@Let me be.@", 0x0000);
-					abort;
-				} else {
-					say("\"Then I can do nothing for thee. Unseen evidence is useless evidence.\"");
 				}
-			} else {
-				say("\"Then be on thy way! Marsten is the traitor -- what a lark!\"");
-				Func097F(SPEKTOR, "@Don't waste my time...@", 0x0000);
+				fallthrough;
+
+			case "Monk Isle" (remove):
+				say("\"Frankly, 'tis a mysterious place. I do not know much about it, except the legend that wise monks dwell there.\"");
+				say("\"The only way to go there is by ship, but there are no sailors here -- the storms have discouraged them.\"");
+				say("\"Perhaps thou couldst hire a captain in Fawn -- which is the city of fishermen -- or at the hamlet of Sleeping Bull.\"");
+				add(["Fawn", "Sleeping Bull"]);
+				fallthrough;
+
+			case "Fawn" (remove):
+				say("\"Fawn is a coastal town filled with the worshippers of beauty. Frankly, I find those people to be a little too superficial for my liking.\"");
+				fallthrough;
+
+			case "Sleeping Bull" (remove):
+				say("\"The inn there is a very old establishment, built in the days before the founding of the Three Cities. The village is built around the inn.\"");
+				say("\"Since it is such a crossroads, thou canst often meet all sorts of interesting folk there. And it is the direct link to the City of Mages.\"");
+				add("City of Mages");
+				fallthrough;
+
+			case "City of Mages" (remove):
+				say("\"A place where I shall never be seen! I distrust magic in all its forms.\"");
+				say("\"Moonshade is on the Isle of Beyond, which is across the channel from Sleeping Bull. Thou wouldst need a boat to journey there.\"");
+				if (!gflags[0x00DB]) {
+					var0007 = Func0992(IOLO, "@Perhaps thou couldst obtain a new spellbook there...@", 0x0000, false);
+					if (var0007 != AVATAR) {
+						0x0000->set_conversation_slot();
+					}
+				}
+				fallthrough;
+
+			case "Test of Knighthood" (remove):
+				say("\"'Tis actually quite easy. Do not believe what the Knights will tell thee. Frankly, if I can pass it, anyone can!\"");
+				say("\"If thou desirest to know more, I would suggest speaking with Caladin. He is the instructor for young Knight candidates.\"");
+				say("\"Also, thou couldst speak with little Cantra. She is preparing to take the Test next month, and is full of information.\"");
+				fallthrough;
+
+			case "know traitor" (remove):
+				if (gflags[0x0094]) {
+					say("\"What!? What dost thou mean? Art thou calling me a traitor? I may not be much of a fighter, but I can defend myself!\"");
+					SPEKTOR->set_schedule_type(SHY);
+					Func097F(SPEKTOR, "@Beware!@", 0x0000);
+					abort;
+				}
+				say("\"Marsten is the traitor? This is too incredible to believe. Hast thou proof?\"");
+				if (Func0955()) {
+					say("\"I must see this. Might I see the evidence?\"");
+					if (!(Func097D(PARTY, 0x0001, 0x031D, 0x0078, FRAME_ANY) || (Func097D(PARTY, 0x0001, 0x031D, 0x0079, FRAME_ANY) || Func097D(PARTY, 0x0001, 0x031D, 0x007A, FRAME_ANY)))) {
+						var0007 = Func0992(IOLO, "@We did not bring it with us...@", "@I did not bring it.@", false);
+						0x0000->set_conversation_slot();
+						say("\"Then I can do nothing for thee. Unseen evidence is useless evidence.\"");
+					} else if (Func0955()) {
+						var0009 = Func0996(PARTY, SPEKTOR, 0x0001, 0x031D, 0x0078, FRAME_ANY, 0x0000);
+						var0009 = Func0996(PARTY, SPEKTOR, 0x0001, 0x031D, 0x0079, FRAME_ANY, 0x0000);
+						var0009 = Func0996(PARTY, SPEKTOR, 0x0001, 0x031D, 0x007A, FRAME_ANY, 0x0000);
+						say("\"I shall study this evidence, and if thou art right, I will bring it before the other Lords.\"");
+						gflags[0x00B3] = true;
+						say("\"Now leave me, so that I may peruse this matter.\"");
+						Func097F(SPEKTOR, "@Let me be.@", 0x0000);
+						abort;
+					} else {
+						say("\"Then I can do nothing for thee. Unseen evidence is useless evidence.\"");
+					}
+				} else {
+					say("\"Then be on thy way! Marsten is the traitor -- what a lark!\"");
+					Func097F(SPEKTOR, "@Don't waste my time...@", 0x0000);
+					abort;
+				}
+				fallthrough;
+
+			case "evidence" (remove):
+				say("\"Give me time, ",
+					var0000,
+					"! Such matters are not quickly resolved.\"");
+				Func097F(SPEKTOR, "@More time!@", 0x0000);
 				abort;
-			}
-			fallthrough;
 
-		case "evidence" (remove):
-			say("\"Give me time, ",
-				var0000,
-				"! Such matters are not quickly resolved.\"");
-			Func097F(SPEKTOR, "@More time!@", 0x0000);
-			abort;
-
-		case "enchanter" (remove):
-			if (gflags[0x00B9]) {
-				say("\"I am still not certain if we can trust Iolo, that enchanter friend of thine. Tell him he had better be on his best behavior. That is a friendly warning.\"");
-			} else if (gflags[0x00B5]) {
-				say("\"Perhaps thou shouldst pay me, say -- a fine -- yes, a fine! That's it. To pay for this rogue Iolo's misdeeds. After all, I am the city treasurer, thou dost know. So t'would be most proper.\"");
-				add("fine");
-			} else {
-				say("\"Oh, thou must be speaking of that wild rogue mage that was recently arrested trying to disrupt Groat's funeral! I believe he said his name was Iolo. Thou shouldst speak with Lord Marsten. He dealt with him.\"");
-			}
-			fallthrough;
-
-		case "fine" (remove):
-			say("\"Wouldst thou be willing to pay a fine of 30 Monetari?\"");
-			var000B = Func0955();
-			if (var000B) {
-				var000C = UI_remove_party_items(0x001E, 0x03B7, QUALITY_ANY, FRAME_ANY, false);
-				if (var000C) {
-					say("\"Very well. Here is the key to the offender's cell. Tell him to consider himself lucky. Seldom is the town of Monitor so forgiving of the trespasses of others.\"");
-					var0009 = Func099B(AVATAR, 0x0001, 0x0281, 0x0068, 0x0000, 0x0000, true);
-					gflags[0x00B9] = true;
+			case "enchanter" (remove):
+				if (gflags[0x00B9]) {
+					say("\"I am still not certain if we can trust Iolo, that enchanter friend of thine. Tell him he had better be on his best behavior. That is a friendly warning.\"");
+				} else if (gflags[0x00B5]) {
+					say("\"Perhaps thou shouldst pay me, say -- a fine -- yes, a fine! That's it. To pay for this rogue Iolo's misdeeds. After all, I am the city treasurer, thou dost know. So t'would be most proper.\"");
+					add("fine");
 				} else {
-					say("\"Thou dost not have 30 Monetari! Art thou trying to swindle me! Bah!\"");
-					abort;
+					say("\"Oh, thou must be speaking of that wild rogue mage that was recently arrested trying to disrupt Groat's funeral! I believe he said his name was Iolo. Thou shouldst speak with Lord Marsten. He dealt with him.\"");
 				}
-			} else {
-				say("\"So! Thy friend is not worth the price of justice, eh? Then let him rot!\"");
-			}
-			fallthrough;
+				fallthrough;
 
-		case "exchange coins":
-			Func0865();
-			fallthrough;
+			case "fine" (remove):
+				say("\"Wouldst thou be willing to pay a fine of 30 Monetari?\"");
+				var000B = Func0955();
+				if (var000B) {
+					var000C = UI_remove_party_items(0x001E, 0x03B7, QUALITY_ANY, FRAME_ANY, false);
+					if (var000C) {
+						say("\"Very well. Here is the key to the offender's cell. Tell him to consider himself lucky. Seldom is the town of Monitor so forgiving of the trespasses of others.\"");
+						var0009 = Func099B(AVATAR, 0x0001, 0x0281, 0x0068, 0x0000, 0x0000, true);
+						gflags[0x00B9] = true;
+					} else {
+						say("\"Thou dost not have 30 Monetari! Art thou trying to swindle me! Bah!\"");
+						abort;
+					}
+				} else {
+					say("\"So! Thy friend is not worth the price of justice, eh? Then let him rot!\"");
+				}
+				fallthrough;
 
-		case "strange coins" (remove):
-			say("\"The coins thou hast described are the currency of the city of Fawn. But where thou mayest have gotten them, without travelling to Fawn, I haven't a clue!\"");
-			fallthrough;
+			case "exchange coins":
+				Func0865();
+				fallthrough;
 
-		case "bye":
-			UI_remove_npc_face0();
-			UI_remove_npc_face1();
-			Func097F(AVATAR, "Goodbye!", 0x0000);
-			Func097F(SPEKTOR, "Go in Courage!", 0x0002);
-			break;
-	}
-labelFunc044C_09C6:
-	return;
+			case "strange coins" (remove):
+				say("\"The coins thou hast described are the currency of the city of Fawn. But where thou mayest have gotten them, without travelling to Fawn, I haven't a clue!\"");
+				fallthrough;
+
+			case "bye":
+				UI_remove_npc_face0();
+				UI_remove_npc_face1();
+				Func097F(AVATAR, "Goodbye!", 0x0000);
+				Func097F(SPEKTOR, "Go in Courage!", 0x0002);
+				break;
+		}
+	} while (false);
 }
 
 extern var Func0954 0x954 ();
@@ -59467,7 +59460,6 @@ labelFunc0526_0008:
 	nobreak {
 		Func097F(AVATAR, "@Spooky place.@", 0x0001);
 	}
-	return;
 }
 
 void Func0600 object#(0x600) () {
@@ -62250,46 +62242,46 @@ extern void Func09AC 0x9AC (var var0000, var var0001, var var0002, var var0003);
 void Func0633 object#(0x633) () {
 	var var0000;
 
-	if (!((event == DOUBLECLICK) || (event == SCRIPTED))) {
-		// Need to make UCC optimize this
-		goto labelFunc0633_0128;
-	}
-	if (gflags[0x000E]) {
-		UI_call_guards();
-		gflags[0x000E] = false;
-	}
-	return;
-	// Dead code.
-	item->Func063A();
-	if (UI_die_roll(0x0001, 0x0008) == 0x0001) {
-		if (DUPRE->get_item_flag(IN_PARTY) && Func0983(DUPRE)) {
-			DUPRE->clear_item_say();
-			Func097F(DUPRE, "@I am leaving!@", 0x0000);
-			DUPRE->remove_from_party();
-			var0000 = DUPRE->get_object_position();
-			Func09AC(DUPRE, var0000[0x0001], var0000[0x0002], WANDER);
-			gflags[0x02D4] = true;
-			return;
+	do {
+		if (!((event == DOUBLECLICK) || (event == SCRIPTED))) {
+			break;
 		}
-		if (SHAMINO->get_item_flag(IN_PARTY) && Func0983(SHAMINO)) {
-			SHAMINO->clear_item_say();
-			Func097F(SHAMINO, "@I am leaving!@", 0x0000);
-			gflags[0x02D5] = true;
-			SHAMINO->remove_from_party();
-			var0000 = SHAMINO->get_object_position();
-			Func09AC(SHAMINO, var0000[0x0001], var0000[0x0002], WANDER);
-			return;
+		if (gflags[0x000E]) {
+			UI_call_guards();
+			gflags[0x000E] = false;
 		}
-		if (IOLO->get_item_flag(IN_PARTY) && Func0983(IOLO)) {
-			IOLO->clear_item_say();
-			Func097F(IOLO, "@I am leaving!@", 0x0000);
-			gflags[0x02D3] = true;
-			IOLO->remove_from_party();
-			var0000 = IOLO->get_object_position();
-			Func09AC(IOLO, var0000[0x0001], var0000[0x0002], WANDER);
+		return;
+		// Dead code.
+		item->Func063A();
+		if (UI_die_roll(0x0001, 0x0008) == 0x0001) {
+			if (DUPRE->get_item_flag(IN_PARTY) && Func0983(DUPRE)) {
+				DUPRE->clear_item_say();
+				Func097F(DUPRE, "@I am leaving!@", 0x0000);
+				DUPRE->remove_from_party();
+				var0000 = DUPRE->get_object_position();
+				Func09AC(DUPRE, var0000[0x0001], var0000[0x0002], WANDER);
+				gflags[0x02D4] = true;
+				return;
+			}
+			if (SHAMINO->get_item_flag(IN_PARTY) && Func0983(SHAMINO)) {
+				SHAMINO->clear_item_say();
+				Func097F(SHAMINO, "@I am leaving!@", 0x0000);
+				gflags[0x02D5] = true;
+				SHAMINO->remove_from_party();
+				var0000 = SHAMINO->get_object_position();
+				Func09AC(SHAMINO, var0000[0x0001], var0000[0x0002], WANDER);
+				return;
+			}
+			if (IOLO->get_item_flag(IN_PARTY) && Func0983(IOLO)) {
+				IOLO->clear_item_say();
+				Func097F(IOLO, "@I am leaving!@", 0x0000);
+				gflags[0x02D3] = true;
+				IOLO->remove_from_party();
+				var0000 = IOLO->get_object_position();
+				Func09AC(IOLO, var0000[0x0001], var0000[0x0002], WANDER);
+			}
 		}
-	}
-labelFunc0633_0128:
+	} while (false);
 	return;
 }
 
@@ -82779,39 +82771,39 @@ labelFunc07FC_0CC8:
 			case "following me":
 				remove(["following me", "no questions"]);
 				add("no further questions");
-				if (gflags[0x01B0]) {
-					say("\"As I stated in the earlier session of these proceedings, ",
-						var0002,
-						" was too sharp for me. However, I did see him conferring with Delin's daughter, and she is a known sympathizer with The Fellowship!\"");
-				} else {
-					say("\"I do not have to answer that question. This is a matter of state security.\"");
-					var0003 = Func0956(["protest", "accept"]);
-					if (var0003 == "protest") {
-						say("\"I don't have to answer thy questions, traitor!\"");
-						YELINDA->show_npc_face1(0x0000);
-						say("\"The Oracle must hear all of the facts, if it is to decide fairly. Chancellor, I give my permission to speak of thy secrets.\"");
+				do {
+					if (gflags[0x01B0]) {
+						say("\"As I stated in the earlier session of these proceedings, ",
+							var0002,
+							" was too sharp for me. However, I did see him conferring with Delin's daughter, and she is a known sympathizer with The Fellowship!\"");
+					} else {
+						say("\"I do not have to answer that question. This is a matter of state security.\"");
+						var0003 = Func0956(["protest", "accept"]);
+						if (var0003 == "protest") {
+							say("\"I don't have to answer thy questions, traitor!\"");
+							YELINDA->show_npc_face1(0x0000);
+							say("\"The Oracle must hear all of the facts, if it is to decide fairly. Chancellor, I give my permission to speak of thy secrets.\"");
+							UI_remove_npc_face1();
+							0x0000->set_conversation_slot();
+						} else {
+							say("\"Ask me something else...\"");
+							break;
+						}
+						say("\"I followed ",
+							var0002,
+							" about this town, until he spotted me. No doubt I prevented him from great evil!\"");
+						DELPHYNIA->show_npc_face1(0x0000);
+						say("\"But thou didst not see him actually perform any vile acts?\"");
 						UI_remove_npc_face1();
 						0x0000->set_conversation_slot();
-					} else {
-						say("\"Ask me something else...\"");
-						// I see no way other than this
-						goto labelFunc07FC_0E12;
+						say("\"He contacted Alyssand, madam! I saw them speaking together, and casting many sly glances in my direction.\"");
 					}
-					say("\"I followed ",
-						var0002,
-						" about this town, until he spotted me. No doubt I prevented him from great evil!\"");
-					DELPHYNIA->show_npc_face1(0x0000);
-					say("\"But thou didst not see him actually perform any vile acts?\"");
+					DELIN->show_npc_face1(0x0000);
+					say("\"My daughter is not on trial here, chancellor...\"");
 					UI_remove_npc_face1();
 					0x0000->set_conversation_slot();
-					say("\"He contacted Alyssand, madam! I saw them speaking together, and casting many sly glances in my direction.\"");
-				}
-				DELIN->show_npc_face1(0x0000);
-				say("\"My daughter is not on trial here, chancellor...\"");
-				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
-				say("\"Well... I suppose not...\"");
-labelFunc07FC_0E12:
+					say("\"Well... I suppose not...\"");
+				} while (false);
 				var0003 = 0x0001;
 				fallthrough;
 
@@ -99883,101 +99875,102 @@ void Func0875 0x875 () {
 	var var000C;
 	var var000D;
 
-	var0000 = 0x03B7;
-	var0001 = [0x0000, 0x0004];
-	var0002 = 0x001E;
 	do {
-		if ((gflags[0x01E1] == false) || ((gflags[0x01E3] == true) || (gflags[0x01E2] == true))) {
-			say("\"I charge 30 monetari to instruct students in my knowledge of combat. Dost thou agree?\"");
-			var0003 = Func0956(["Yes", "No"]);
-		} else {
-			say("\"Since I have joined thee, I will not ask for mine usual fee!\"");
-			var0002 = 0x0000;
-			break;
-		}
-	} while (false)
-	nobreak {
-		if (var0003 == "No") {
-			say("\"Thou art a lout not to pay me!\"");
-			abort;
-		}
-		if (!(var0003 == "Yes")) {
-			// Need to make UCC optimize this
-			goto labelFunc0875_0216;
-		}
-	}
-	say("\"Whom dost thou wish to train?\"");
-	var0004 = Func098E();
-	var0004 = 0x0000 & var0004;
-	var0005 = ["Nobody"];
-	for (var0008 in var0004 with var0006 to var0007) {
-		if (!(var0008 == 0x0000)) {
-			var0005 &= var0008->get_npc_name();
-		}
-	}
-	var0009 = Func0957(var0005);
-	var0009 = var0004[var0009];
-	var000A = var0009->get_npc_number();
-	var000B = var0009->get_npc_name();
-	if (var0009 == 0x0000) {
-		say("\"Very well, but thou shouldst make up thy mind!\"");
-	} else if (var000A == WILFRED) {
-		say("\"I do not train myself!\"");
-	} else {
-		var000C = Func096E(var0001, var0000, var0002, var000A, 0x0002);
-		if (Func095C(var0009, TRAINING) < 2) {
-			var000C = 0x0000;
-		}
-		if (var000C == 0x0000) {
-			if (var000A == AVATAR) {
-				say("\"Thou art not ready to learn yet!\"");
-			} else {
-				say("\"",
-					var000B,
-					" is not ready to learn yet!\"");
-			}
-		}
-		if (var000C == 0x0001) {
+		var0000 = 0x03B7;
+		var0001 = [0x0000, 0x0004];
+		var0002 = 0x001E;
+		do {
 			if ((gflags[0x01E1] == false) || ((gflags[0x01E3] == true) || (gflags[0x01E2] == true))) {
-				say("\"Thou dost not have 30 monetari! Talk to me again when thou canst pay me!\"");
+				say("\"I charge 30 monetari to instruct students in my knowledge of combat. Dost thou agree?\"");
+				var0003 = Func0956(["Yes", "No"]);
+			} else {
+				say("\"Since I have joined thee, I will not ask for mine usual fee!\"");
+				var0002 = 0x0000;
+				break;
+			}
+		} while (false)
+		nobreak {
+			if (var0003 == "No") {
+				say("\"Thou art a lout not to pay me!\"");
 				abort;
 			}
+			if (!(var0003 == "Yes")) {
+				break;
+			}
+		}
+		say("\"Whom dost thou wish to train?\"");
+		var0004 = Func098E();
+		var0004 = 0x0000 & var0004;
+		var0005 = ["Nobody"];
+		for (var0008 in var0004 with var0006 to var0007) {
+			if (!(var0008 == 0x0000)) {
+				var0005 &= var0008->get_npc_name();
+			}
+		}
+		var0009 = Func0957(var0005);
+		var0009 = var0004[var0009];
+		var000A = var0009->get_npc_number();
+		var000B = var0009->get_npc_name();
+		if (var0009 == 0x0000) {
+			say("\"Very well, but thou shouldst make up thy mind!\"");
+		} else if (var000A == WILFRED) {
+			say("\"I do not train myself!\"");
 		} else {
-			do {
-				if (var000C == 0x0002) {
-					if (Func095C(var0009, COMBAT) < 30) {
+			var000C = Func096E(var0001, var0000, var0002, var000A, 0x0002);
+			if (Func095C(var0009, TRAINING) < 2) {
+				var000C = 0x0000;
+			}
+			if (var000C == 0x0000) {
+				if (var000A == AVATAR) {
+					say("\"Thou art not ready to learn yet!\"");
+				} else {
+					say("\"",
+						var000B,
+						" is not ready to learn yet!\"");
+				}
+			}
+			if (var000C == 0x0001) {
+				if ((gflags[0x01E1] == false) || ((gflags[0x01E3] == true) || (gflags[0x01E2] == true))) {
+					say("\"Thou dost not have 30 monetari! Talk to me again when thou canst pay me!\"");
+					abort;
+				}
+			} else {
+				do {
+					if (var000C == 0x0002) {
+						if (Func095C(var0009, COMBAT) < 30) {
+							break;
+						}
+						if (Func095C(var0009, STRENGTH) < 30) {
+							break;
+						}
+						if (var000A == AVATAR) {
+							say("\"Thou dost already possess more skill than I could teach thee!\"");
+						} else {
+							say("\"",
+								var000B,
+								" doth already possess more skill than I could ever teach!\"");
+						}
+					}
+				} while (false)
+				nobreak {
+					if (var000C != 0x0003) {
 						break;
 					}
-					if (Func095C(var0009, STRENGTH) < 30) {
-						break;
-					}
-					if (var000A == AVATAR) {
-						say("\"Thou dost already possess more skill than I could teach thee!\"");
-					} else {
-						say("\"",
-							var000B,
-							" doth already possess more skill than I could ever teach!\"");
-					}
 				}
-				if (var000C != 0x0003) {
-					// Need to make UCC optimize this
-					goto labelFunc0875_0216;
-				}
-			} while (false);
+			}
+			say("\"First, let me see thy stance.\"");
+			say("\"Hmmm... If thou dost hold thy weapon higher, thou wilt have better leverage with which to smash thy foes.\"");
+			say("\"Secondly, thou shouldst always carry through with thy swing, as it will improve thy chances of recovering to land succeeding blows.\"");
+			say("\"I do see some improvement in thee!\"");
+			var000D = UI_remove_party_items(var0002, var0000, QUALITY_ANY, FRAME_ANY, true);
+			if (Func095C(var0009, COMBAT) < 30) {
+				Func0963(var0009, 1);
+			}
+			if (Func095C(var0009, STRENGTH) < 30) {
+				Func0960(var0009, 1);
+			}
 		}
-		say("\"First, let me see thy stance.\"");
-		say("\"Hmmm... If thou dost hold thy weapon higher, thou wilt have better leverage with which to smash thy foes.\"");
-		say("\"Secondly, thou shouldst always carry through with thy swing, as it will improve thy chances of recovering to land succeeding blows.\"");
-		say("\"I do see some improvement in thee!\"");
-		var000D = UI_remove_party_items(var0002, var0000, QUALITY_ANY, FRAME_ANY, true);
-		if (Func095C(var0009, COMBAT) < 30) {
-			Func0963(var0009, 1);
-		}
-		if (Func095C(var0009, STRENGTH) < 30) {
-			Func0960(var0009, 1);
-		}
-	}
-labelFunc0875_0216:
+	} while (false);
 	return;
 }
 
@@ -102565,60 +102558,57 @@ void Func08AF 0x8AF (var var0000, var var0001) {
 		var0002 = 0x0000;
 		var0003 = var0000->get_object_position();
 	}
-	if (var0001) {
-		var0004 = AVATAR->get_readied(SI_WEAPON_HAND);
-		var0005 = AVATAR->get_readied(SI_SHIELD_HAND);
-		if (var0004 || var0005) {
-			var0006 = Func08B0(var0004, var0005, 0x0001);
-			var0006 = var0000->set_last_created();
-			if (!AVATAR->give_last_created()) {
-				if (var0002) {
-					var0006 = var0003->give_last_created();
-				} else {
-					var0006 = UI_update_last_created(var0003);
+	do {
+		if (var0001) {
+			var0004 = AVATAR->get_readied(SI_WEAPON_HAND);
+			var0005 = AVATAR->get_readied(SI_SHIELD_HAND);
+			if (var0004 || var0005) {
+				var0006 = Func08B0(var0004, var0005, 0x0001);
+				var0006 = var0000->set_last_created();
+				if (!AVATAR->give_last_created()) {
+					if (var0002) {
+						var0006 = var0003->give_last_created();
+					} else {
+						var0006 = UI_update_last_created(var0003);
+					}
+					Func08B1(AVATAR, var0000, 0x0001, PRISON2);
+					if (Func08B0(var0004, var0005, 0x0000)) {
+						break;
+					}
+					var0007 = AVATAR->get_object_position();
+					if (var0004) {
+						var0006 = UI_update_last_created(var0007);
+					}
+					if (!var0005) {
+						break;
+					}
+					var0006 = UI_update_last_created(var0007);
+					return;
 				}
-				Func08B1(AVATAR, var0000, 0x0001, PRISON2);
 				if (Func08B0(var0004, var0005, 0x0000)) {
-					// Need to make UCC optimize this
-					goto labelFunc08AF_018C;
+					break;
 				}
 				var0007 = AVATAR->get_object_position();
 				if (var0004) {
 					var0006 = UI_update_last_created(var0007);
 				}
 				if (!var0005) {
-					// Need to make UCC optimize this
-					goto labelFunc08AF_018C;
+					break;
 				}
 				var0006 = UI_update_last_created(var0007);
 				return;
 			}
-			if (Func08B0(var0004, var0005, 0x0000)) {
-				// Need to make UCC optimize this
-				goto labelFunc08AF_018C;
-			}
-			var0007 = AVATAR->get_object_position();
-			if (var0004) {
-				var0006 = UI_update_last_created(var0007);
-			}
-			if (!var0005) {
-				// Need to make UCC optimize this
-				goto labelFunc08AF_018C;
-			}
-			var0006 = UI_update_last_created(var0007);
-			return;
 		}
-	}
-	var0006 = var0000->set_last_created();
-	if (!AVATAR->give_last_created()) {
-		if (var0002) {
-			var0006 = var0003->give_last_created();
-		} else {
-			var0006 = UI_update_last_created(var0003);
+		var0006 = var0000->set_last_created();
+		if (!AVATAR->give_last_created()) {
+			if (var0002) {
+				var0006 = var0003->give_last_created();
+			} else {
+				var0006 = UI_update_last_created(var0003);
+			}
+			Func08B1(AVATAR, var0000, var0002, var0003);
 		}
-		Func08B1(AVATAR, var0000, var0002, var0003);
-	}
-labelFunc08AF_018C:
+	} while (false);
 	return;
 }
 
@@ -103830,105 +103820,105 @@ void Func08C9 0x8C9 () {
 	}
 	var0001 = var0000->get_item_shape();
 	var0002 = var0000->get_item_quality();
-	if (var0002 <= 0x001A) {
-		var0003 = AVATAR->get_cont_items(0x022B, QUALITY_ANY, FRAME_ANY);
-		var0004 = var0003->get_cont_items(0x022F, QUALITY_ANY, FRAME_ANY);
-		if (var0003) {
-			var0005 = UI_get_array_size(var0004);
-			var0006 = 0x0000;
-			if (var0004) {
-				for (var0009 in var0004 with var0007 to var0008) {
-					var000A = var0009->get_item_frame() + 0x0001;
-					var0006 += 0x0001;
-					do {
-						if ((var0002 == 0x0013) && ((var000A == 0x0002) || (var000A == 0x0003))) {
-							continue;
+	do {
+		if (var0002 <= 0x001A) {
+			var0003 = AVATAR->get_cont_items(0x022B, QUALITY_ANY, FRAME_ANY);
+			var0004 = var0003->get_cont_items(0x022F, QUALITY_ANY, FRAME_ANY);
+			if (var0003) {
+				var0005 = UI_get_array_size(var0004);
+				var0006 = 0x0000;
+				if (var0004) {
+					for (var0009 in var0004 with var0007 to var0008) {
+						var000A = var0009->get_item_frame() + 0x0001;
+						var0006 += 0x0001;
+						do {
+							if ((var0002 == 0x0013) && ((var000A == 0x0002) || (var000A == 0x0003))) {
+								continue;
+							}
+							if ((var0002 == 0x0014) && ((var000A == 0x0004) || (var000A == 0x0005))) {
+								continue;
+							}
+							if ((var0002 == 0x0015) && ((var000A == 0x000A) || ((var000A == 0x000B) || ((var000A == 0x000C) || (var000A == 0x000D))))) {
+								continue;
+							}
+							if ((var0002 == 0x0016) && ((var000A == 0x0006) || ((var000A == 0x0007) || ((var000A == 0x0008) || (var000A == 0x0009))))) {
+								continue;
+							}
+							if ((var0002 == 0x0017) && ((var000A == 0x000E) || (var000A == 0x000F))) {
+								continue;
+							}
+							if ((var0002 == 0x0018) && ((var000A == 0x0011) || (var000A == 0x0012))) {
+								continue;
+							}
+							if (var000A != var0002) {
+								break;
+							}
+						} while (false)
+						nobreak {
+							var000B = false;
+							if (var0001 == 0x012F) {
+								var000C = Func03A8;
+								var000B = true;
+							}
+							if (var0001 == 0x036C) {
+								var000C = Func03A7;
+								var000B = true;
+							}
+							if (var000B) {
+								var000D = script var0000 {
+									wait 1;
+									frame 13;
+									wait 1;
+									frame 12;
+									wait 1;
+									frame 11;
+									wait 1;
+									frame 10;
+									wait 1;
+									call var000C;
+								};
+								UI_play_sound_effect(0x0059);
+							}
+							abort;
 						}
-						if ((var0002 == 0x0014) && ((var000A == 0x0004) || (var000A == 0x0005))) {
-							continue;
-						}
-						if ((var0002 == 0x0015) && ((var000A == 0x000A) || ((var000A == 0x000B) || ((var000A == 0x000C) || (var000A == 0x000D))))) {
-							continue;
-						}
-						if ((var0002 == 0x0016) && ((var000A == 0x0006) || ((var000A == 0x0007) || ((var000A == 0x0008) || (var000A == 0x0009))))) {
-							continue;
-						}
-						if ((var0002 == 0x0017) && ((var000A == 0x000E) || (var000A == 0x000F))) {
-							continue;
-						}
-						if ((var0002 == 0x0018) && ((var000A == 0x0011) || (var000A == 0x0012))) {
-							continue;
-						}
-						if (var000A != var0002) {
+						if (var0006 == var0005) {
 							break;
 						}
-					} while (false)
-					nobreak {
-						var000B = false;
-						if (var0001 == 0x012F) {
-							var000C = Func03A8;
-							var000B = true;
-						}
-						if (var0001 == 0x036C) {
-							var000C = Func03A7;
-							var000B = true;
-						}
-						if (var000B) {
-							var000D = script var0000 {
-								wait 1;
-								frame 13;
-								wait 1;
-								frame 12;
-								wait 1;
-								frame 11;
-								wait 1;
-								frame 10;
-								wait 1;
-								call var000C;
-							};
-							UI_play_sound_effect(0x0059);
-						}
-						abort;
-					}
-					if (var0006 == var0005) {
+					} nobreak {
 						break;
 					}
-				} nobreak {
-					// Need to make UCC optimize this
-					goto labelFunc08C9_02E4;
 				}
+				var000B = false;
+				if (var0001 == 0x03A8) {
+					var000B = true;
+					var000E = UI_create_new_object(0x012F);
+				}
+				if (var0001 == 0x03A7) {
+					var000B = true;
+					var000E = UI_create_new_object(0x036C);
+				}
+				if (var000B) {
+					var000F = var0000->get_object_position();
+					var000E->set_item_frame(0x000A);
+					var000D = var000E->set_item_quality(var0002);
+					var0000->remove_item();
+					var000D = UI_update_last_created(var000F);
+					var000D = script var000E {
+						wait 1;
+						frame 11;
+						wait 1;
+						frame 12;
+						wait 1;
+						frame 13;
+						wait 1;
+						frame 14;
+					};
+					UI_play_sound_effect(0x0058);
+				}
+				abort;
 			}
-			var000B = false;
-			if (var0001 == 0x03A8) {
-				var000B = true;
-				var000E = UI_create_new_object(0x012F);
-			}
-			if (var0001 == 0x03A7) {
-				var000B = true;
-				var000E = UI_create_new_object(0x036C);
-			}
-			if (var000B) {
-				var000F = var0000->get_object_position();
-				var000E->set_item_frame(0x000A);
-				var000D = var000E->set_item_quality(var0002);
-				var0000->remove_item();
-				var000D = UI_update_last_created(var000F);
-				var000D = script var000E {
-					wait 1;
-					frame 11;
-					wait 1;
-					frame 12;
-					wait 1;
-					frame 13;
-					wait 1;
-					frame 14;
-				};
-				UI_play_sound_effect(0x0058);
-			}
-			abort;
 		}
-	}
-labelFunc08C9_02E4:
+	} while (false);
 	return;
 }
 
