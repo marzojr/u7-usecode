@@ -13,11 +13,11 @@ enum Globals {
 	TIMELORD_SAID_PENUMBRA = 0x7,
 	TIMELORD_SAID_BRION = 0x8,
 	SEEN_BLACKGATE = 0x9,
-	SAW_PASSIONPLAY = 0xA,
+	SAW_PASSION_PLAY = 0xA,
 	AVATAR_INVENTORY = 0xB,
 	AVATAR_WAIT = 0xC,
-	AVATAR_SINGLEFILE = 0xD,
-	AVATAR_FORMUP = 0xE,
+	AVATAR_SINGLE_FILE = 0xD,
+	AVATAR_FORM_UP = 0xE,
 	AVATAR_ATTACK = 0xF,
 	AVATAR_RETREAT = 0x10,
 	AVATAR_HELP = 0x11,
@@ -366,7 +366,7 @@ enum Globals {
 	TSERAMED_THINKS_MAGE = 0x15E,
 	TSERAMED_INTRO = 0x15F,
 	TSERAMED_TRADE = 0x160,
-	TSERMED_KNOWS_AVATAR = 0x161,
+	TSERAMED_KNOWS_AVATAR = 0x161,
 	TSERAMED_SAID_PREF = 0x162,
 	REYNA_TOLD_JOB = 0x163,
 
@@ -421,7 +421,7 @@ enum Globals {
 	MET_LEAVELL = 0x191,
 	MET_SAM = 0x192,
 	SOLD_WHITE_GULL = 0x193,
-	SEEN_NEW_MAGICIA_MURDER = 0x194,
+	SEEN_NEW_MAGINCIA_MURDER = 0x194,
 	BILL_NOT_PAID = 0x195,
 
 	// Skara Brae
@@ -442,7 +442,7 @@ enum Globals {
 	CRY_PAULETTE = 0x1A4,
 	TRENT_AWARE = 0x1A5,
 	REUNITED = 0x1A6,
-	MUSICBOX = 0x1A7,
+	MUSIC_BOX = 0x1A7,
 	CAGE_MADE = 0x1A8,
 	BOX_FIRST_TIME = 0x1A9,
 	HORANCE_GONE = 0x1AA,
@@ -505,7 +505,7 @@ enum Globals {
 	BLACKROCK_QUEST = 0x1DF,
 	RING_QUEST = 0x1E0,
 	RING_ENCHANTED = 0x1E1,
-	BLACKROC_KDONE = 0x1E2,
+	BLACKROCK_DONE = 0x1E2,
 	ZELDA_RESPOND = 0x1E3,
 	NELSON_STAND = 0x1E4,
 	NELSON_MARK = 0x1E5,
@@ -515,7 +515,7 @@ enum Globals {
 	BRION_MAGNIFY = 0x1E9,
 	BRION_KITE = 0x1EA,
 	BRION_SHOWN = 0x1EB,
-	NELSHOWN = 0x1EC,
+	NEL_SHOWN = 0x1EC,
 	GOT_CRYSTAL = 0x1ED,
 	SAI_DNO = 0x1EE,
 	EA_GONE_TO_TERFIN = 0x1EF,
@@ -967,7 +967,7 @@ enum cove_npcs {
 	NASTASSIA		= -75,	//caretaker of shrine of Compassion and feeble love-interest
 	RAYBURT			= -76,	//trainer and Pamela's main squeeze
 	LORD_HEATHER	= -77,	//mayor and Jaana's main squeeze
-	PAMELA			= -78,	//inkeeper and Rayburt's main squeeze
+	PAMELA			= -78,	//innkeeper and Rayburt's main squeeze
 	ZINAIDA			= -79,	//tavernkeeper and de Maria's main squeeze
 	DE_MARIA		= -80,	//tavernkeeper and Zinaida's main squeeze
 	REGAL			= -271	//Rayburt's dog (not sure why he gets an NPC number, it's not like he does anything - maybe for schedules?)
@@ -7528,7 +7528,7 @@ void Func02F0 shape#(0x2F0) () {
 			set_item_frame(0x0001);
 			UI_play_music(0x0029, item);
 			if (Func08F7(ROWENA)) {
-				gflags[MUSICBOX] = true;
+				gflags[MUSIC_BOX] = true;
 				ROWENA->get_npc_object()->Func0490();
 			}
 		} else {
@@ -12983,14 +12983,14 @@ void Func040A object#(0x40A) () {
 					UI_push_answers();
 					var0009 += 0x0001;
 					add([var0000, "Fellowship"]);
-					if (!gflags[TSERMED_KNOWS_AVATAR]) {
+					if (!gflags[TSERAMED_KNOWS_AVATAR]) {
 						add("Avatar");
 					}
 				}
 				fallthrough;
 
 			case "Avatar" (remove):
-				gflags[TSERMED_KNOWS_AVATAR] = true;
+				gflags[TSERAMED_KNOWS_AVATAR] = true;
 				say("\"The Avatar! This is a strange chance. Tell me Avatar, by what name art thou called?\"");
 				fallthrough;
 
@@ -13000,7 +13000,7 @@ void Func040A object#(0x40A) () {
 				say("\"Well met, ",
 					var0000,
 					"\"");
-				if (gflags[TSERMED_KNOWS_AVATAR]) {
+				if (gflags[TSERAMED_KNOWS_AVATAR]) {
 					say("Thy demeanor is noble.");
 				}
 				if (var0007 == 0x0001) {
@@ -13051,7 +13051,7 @@ void Func040A object#(0x40A) () {
 					UI_pop_answers();
 					gflags[TSERAMED_HATES_YOU] = true;
 					var001E = "";
-					if (gflags[TSERMED_KNOWS_AVATAR]) {
+					if (gflags[TSERAMED_KNOWS_AVATAR]) {
 						var001E = "thou dost tarnish the title of Avatar!";
 					}
 					say("\"Knave, ",
@@ -13381,7 +13381,7 @@ void Func040A object#(0x40A) () {
 				if (var000D) {
 					remove("forest");
 				}
-				if (gflags[TSERMED_KNOWS_AVATAR] && ((var0004 in var0002) && (!gflags[TSERAMED_SAID_PREF]))) {
+				if (gflags[TSERAMED_KNOWS_AVATAR] && ((var0004 in var0002) && (!gflags[TSERAMED_SAID_PREF]))) {
 					Func08F3(var0002);
 					gflags[TSERAMED_SAID_PREF] = true;
 				}
@@ -13395,7 +13395,7 @@ void Func040A object#(0x40A) () {
 					var0016 = true;
 				}
 				if (gflags[MET_TSERAMED] && (!var0016)) {
-					if (!gflags[TSERMED_KNOWS_AVATAR]) {
+					if (!gflags[TSERAMED_KNOWS_AVATAR]) {
 						say("\"Thy pardon, ",
 							var0001,
 							", but thy visage brings to my mind a statue that I once saw.  'Twas a likeness of the ancient hero known as the Avatar.");
@@ -13408,7 +13408,7 @@ void Func040A object#(0x40A) () {
 							say("\"Noble hero, it is an honor to make thine aquaintance. ",
 								var002A,
 								"\"");
-							gflags[TSERMED_KNOWS_AVATAR] = true;
+							gflags[TSERAMED_KNOWS_AVATAR] = true;
 						} else {
 							say("\"I must be mistaken. Farewell.\"");
 							break;
@@ -16072,7 +16072,7 @@ void Func041A object#(0x41A) () {
 		if (gflags[FIGG_GIVES_APPLES]) {
 			add("apples");
 		}
-		if (gflags[MILLIE_SAID_VOICE] || (gflags[CANDICE_TOLD_ABOUT_VOICE] || gflags[SAW_PASSIONPLAY])) {
+		if (gflags[MILLIE_SAID_VOICE] || (gflags[CANDICE_TOLD_ABOUT_VOICE] || gflags[SAW_PASSION_PLAY])) {
 			add("voice");
 		}
 		if (gflags[MILLIE_SAID_RETREAT]) {
@@ -33422,7 +33422,7 @@ void Func0490 object#(0x490) () {
 	if (event == DOUBLECLICK) {
 		if (!gflags[SEANCE_ROWENA]) {
 			ROWENA->say("The beautiful ghost looks through you with a slack look. Nothing\tyou do seems to attract her attention.*");
-			gflags[MUSICBOX] = false;
+			gflags[MUSIC_BOX] = false;
 			abort;
 		}
 		if (gflags[FIND_SACRIFICE]) {
@@ -33438,7 +33438,7 @@ void Func0490 object#(0x490) () {
 			ROWENA->show_npc_face(0x0001);
 			Func08D7();
 		}
-		if (gflags[MUSICBOX]) {
+		if (gflags[MUSIC_BOX]) {
 			if (!gflags[BOX_FIRST_TIME]) {
 				ROWENA->show_npc_face(0x0001);
 				Func08D8();
@@ -34370,7 +34370,7 @@ void Func0496 object#(0x496) () {
 		abort;
 	}
 	PENUMBRA->show_npc_face(0x0000);
-	gflags[BLACKROC_KDONE] = Func08C9();
+	gflags[BLACKROCK_DONE] = Func08C9();
 	var0000 = Func0908();
 	var0001 = Func0931(PARTY, 0x0001, 0x02F7, QUALITY_ANY, FRAME_ANY);
 	var0002 = Func0909();
@@ -34392,7 +34392,7 @@ void Func0496 object#(0x496) () {
 		Func0911(0x0320);
 	} else {
 		if (!gflags[BROKE_TETRA]) {
-			if (!gflags[BLACKROC_KDONE]) {
+			if (!gflags[BLACKROCK_DONE]) {
 				say("Penumbra is in so much pain she can barely speak. \"Yes, ",
 					var0000,
 					"?\"");
@@ -34413,7 +34413,7 @@ void Func0496 object#(0x496) () {
 			fallthrough;
 
 		case "job":
-			if (!gflags[BLACKROC_KDONE]) {
+			if (!gflags[BLACKROCK_DONE]) {
 				say("Penumbra is in pain. \"I cannot think straight whilst the ether is disturbed. I can do nothing until it is flowing smoothly again!\"");
 			} else {
 				say("\"I am a practicing mage. Once I get my business going again, I should be able to sell spells and reagents. After all, I have been asleep for 200 years!\"");
@@ -34422,7 +34422,7 @@ void Func0496 object#(0x496) () {
 
 		case "ether":
 			if (!gflags[BROKE_TETRA]) {
-				if (!gflags[BLACKROC_KDONE]) {
+				if (!gflags[BLACKROCK_DONE]) {
 					say("\"The ether controls all the magic in the world. When there is a disturbance in the ether, no mage can cast successful spells. A mage might even lose his mind after a long period of time! Thou must find a way to protect me from the warped ethereal waves!\"");
 					add("protect");
 				} else {
@@ -34451,7 +34451,7 @@ void Func0496 object#(0x496) () {
 
 		case "Tetrahedron":
 			if (!gflags[BROKE_TETRA]) {
-				if (!gflags[BLACKROC_KDONE]) {
+				if (!gflags[BLACKROCK_DONE]) {
 					say("\"Please! I cannot help thee until I am protected from the damaged ether!\"");
 				} else {
 					say("\"Yes, that is the shape of the thing I have seen in my mind's eye. It appears to be some type of magic generator which damages the ethereal flow.\"");
@@ -34497,7 +34497,7 @@ void Func0496 object#(0x496) () {
 
 		case "blackrock":
 			if (!gflags[BROKE_TETRA]) {
-				if (!gflags[BLACKROC_KDONE]) {
+				if (!gflags[BLACKROCK_DONE]) {
 					var0005 = Func0931(PARTY, 0x0004, 0x0392, QUALITY_ANY, FRAME_ANY);
 					if (var0005) {
 						say("\"Thou hast brought the blackrock! I did not think I could manage much longer! Hurry! Place the pieces on the pedestals at the north, south, east, and west ends of the room! I shall wait here!\"*");
@@ -34547,7 +34547,7 @@ void Func0496 object#(0x496) () {
 		case "bye":
 			break;
 	}
-	if (!gflags[BLACKROC_KDONE]) {
+	if (!gflags[BLACKROCK_DONE]) {
 		say("Penumbra waves at you and then closes her eyes in pain.*");
 	} else {
 		say("\"Farewell, ",
@@ -59654,7 +59654,7 @@ void Func06C1 object#(0x6C1) () {
 	var var0010;
 
 	if (event == EGG) {
-		if (gflags[WISP_READ_NOTEBOOK] && (!gflags[SEEN_NEW_MAGICIA_MURDER])) {
+		if (gflags[WISP_READ_NOTEBOOK] && (!gflags[SEEN_NEW_MAGINCIA_MURDER])) {
 			ALAGNER->remove_npc();
 			var0000 = find_nearby(0x0363, 0x000F, MASK_NONE);
 			var0001 = find_nearby(0x0152, 0x000F, MASK_NONE);
@@ -59683,7 +59683,7 @@ void Func06C1 object#(0x6C1) () {
 					var000F->remove_item();
 				}
 			}
-			gflags[SEEN_NEW_MAGICIA_MURDER] = true;
+			gflags[SEEN_NEW_MAGINCIA_MURDER] = true;
 			UI_set_timer(0x0006);
 		} else if (gflags[WISP_READ_NOTEBOOK]) {
 			var0010 = UI_get_timer(0x0006);
@@ -60126,7 +60126,7 @@ void Func06E1 object#(0x6E1) () {
 		if (gflags[WISP_SAID_EAST]) {
 			var0001 += 0x0001;
 		}
-		if (gflags[BLACKROC_KDONE]) {
+		if (gflags[BLACKROCK_DONE]) {
 			var0001 += 0x0001;
 		}
 		if (gflags[HARPY_AWAKENED]) {
@@ -73840,7 +73840,7 @@ void Func08C7 0x8C7 () {
 	say("Paul and Meryl join Dustin on stage and they all hold hands.*");
 	PAUL->say("\"The Fellowship can give thee purpose ~To join is thine only choice ~Commit thyself to our just cause ~And find thine inner voice.\"");
 	say("At that point, the actors bow, and you realize it is the end. You give them polite applause.*");
-	gflags[SAW_PASSIONPLAY] = true;
+	gflags[SAW_PASSION_PLAY] = true;
 	if (var0000) {
 		PAUL->hide();
 		IOLO->say("\"What do they mean about the voice? I am not sure I understand. 'Twas a confusing play. I did not like it at all. We have wasted our time and money! That is the last time that I let thee decide how best we entertain ourselves!\"*");
@@ -74896,7 +74896,7 @@ void Func08D8 0x8D8 () {
 	var0001 = Func0909();
 	if (!gflags[SEANCE_ROWENA]) {
 		ROWENA->say("The beautiful ghost looks through you with a slack look. Nothing\tyou do seems to attract her attention.*");
-		gflags[MUSICBOX] = false;
+		gflags[MUSIC_BOX] = false;
 		abort;
 	}
 	if (!gflags[BOX_FIRST_TIME]) {
@@ -76107,7 +76107,7 @@ void Func08F2 0x8F2 (var var0000, var var0001) {
 				var0004,
 				". Confess now thy true identity!\"");
 			add(var0000);
-			if (!gflags[TSERMED_KNOWS_AVATAR]) {
+			if (!gflags[TSERAMED_KNOWS_AVATAR]) {
 				add("Avatar");
 			}
 			fallthrough;
@@ -76124,7 +76124,7 @@ void Func08F2 0x8F2 (var var0000, var var0001) {
 		case "Avatar" (remove):
 			say("\"I doubt but thou deceivest me further. If true, thou dost shame the title. Admit now thy true name!\"");
 			var0002 = true;
-			gflags[TSERMED_KNOWS_AVATAR] = true;
+			gflags[TSERAMED_KNOWS_AVATAR] = true;
 			fallthrough;
 
 		case var0000:
@@ -76392,11 +76392,11 @@ var Func08F5 0x8F5 (var var0000, var var0001) {
 			TSERAMED->show_npc_face(0x0000);
 			var000C = true;
 		}
-		if (var0007 && (!gflags[TSERMED_KNOWS_AVATAR])) {
+		if (var0007 && (!gflags[TSERAMED_KNOWS_AVATAR])) {
 			say("\"But did I hear thee say 'Avatar?' Say not that thy leader is the one -true- Avatar!\"");
 			var000B->say("\"It is indeed true.\"");
 			TSERAMED->say("\"'Tis an honor to meet thee, Avatar.\"");
-			gflags[TSERMED_KNOWS_AVATAR] = true;
+			gflags[TSERAMED_KNOWS_AVATAR] = true;
 		}
 		var000B->hide();
 		var0008 = UI_get_array_size(var0003);
