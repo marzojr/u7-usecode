@@ -3987,6 +3987,7 @@ void Func0103 shape#(0x103) () {
 					fallthrough;
 
 				case "MageLord" (remove):
+					// Note: this should probably have been 'item' instead of 0x038A
 					if (gflags[BANES_RELEASED] && (0x038A->get_schedule_type() != WAIT)) {
 						say("\"Shamino the Anarch is the current MageLord. He hath brought great change to our city...\"");
 						say("\"No longer must a Mage or Mundane be bound by petty rules. It is quite exciting!\"");
@@ -18712,6 +18713,7 @@ void Func0373 shape#(0x373) () {
 		var0004 = UI_is_pc_female();
 		var0005 = Func0953();
 		if (event == DOUBLECLICK) {
+			// Note: this should probably have been 'item' instead of 0x0373
 			0x0373->set_schedule_type(TALK);
 		}
 		if (event == PROXIMITY) {
@@ -18738,6 +18740,7 @@ void Func0373 shape#(0x373) () {
 		var0004 = UI_is_pc_female();
 		var0005 = Func0953();
 		if (event == DOUBLECLICK) {
+			// Note: this should probably have been 'item' instead of 0x0373
 			0x0373->set_schedule_type(TALK);
 		}
 		if (event == PROXIMITY) {
@@ -18764,6 +18767,7 @@ void Func0373 shape#(0x373) () {
 		var0004 = UI_is_pc_female();
 		var0005 = Func0953();
 		if (event == DOUBLECLICK) {
+			// Note: this should probably have been 'item' instead of 0x0373
 			0x0373->set_schedule_type(TALK);
 		}
 		if (event == PROXIMITY) {
@@ -18941,12 +18945,14 @@ void Func0395 shape#(0x395) () {
 	}
 	if ((event == DOUBLECLICK) && (var0000 == false)) {
 		AVATAR->item_say("@Stand fast, trapper!@");
+		// Note: these should probably have been 'item' instead of 0x0395
 		0x0395->Func07D1();
 		Func097F(0x0395, "@Thou shalt not take me!@", 0x0003);
 		Func09AD(item);
 	}
 	if ((event == DOUBLECLICK) && var0000) {
 		AVATAR->item_say("@Stand fast, Trapper!@");
+		// Note: these should probably have been 'item' instead of 0x0395
 		0x0395->Func07D1();
 		Func097F(0x0395, "@At last!@", 0x0003);
 		set_schedule_type(TALK);
@@ -33022,6 +33028,7 @@ void Func0428 object#(0x428) () {
 		if ((!gflags[HAWK_IN_MOONSHADE]) && (!gflags[BOATING_TO_MOONSHADE])) {
 			add("journey");
 		}
+		// Note: this should probably have been 'item' instead of 0x01E0
 		if (gflags[HAWK_IN_MOONSHADE] && (!0x01E0->get_item_flag(MET))) {
 			add("leave island");
 		}
@@ -63004,6 +63011,7 @@ void Func0634 object#(0x634) () {
 		var0001 = Func088F(item);
 		if (var0001 == 0x0316) {
 			AVATAR->clear_item_flag(ACTIVE_SAILOR);
+			// Note: this should probably have been 'var0000' instead of 0x0001
 			0x0001->set_item_flag(ON_MOVING_BARGE);
 			AVATAR->get_barge()->set_item_flag(ACTIVE_BARGE);
 		}
@@ -90496,11 +90504,13 @@ var Func082B 0x82B (var var0000, var var0001) {
 	var0002 = var0000;
 	var0003 = (var0001 / 0x0003) * 0x0002;
 	var0004 = Func0954();
+	// Note: this should probably have been 'item' instead of 0x03F7
 	var0005 = 0x000F - (0x03F7->get_npc_id() / 0x0002);
 	var0006 = 0x0000;
 	var0007 = 0x0001;
 	var0008 = 0x0000;
 	var0009 = 0x0002;
+	// Note: this should probably have been 'item' instead of 0x03F7
 	var000A = 0x03F7->get_npc_id();
 	while (var0007) {
 		var000B = Func0956(["yes", "no", "haggle"]);
@@ -90572,6 +90582,7 @@ var Func082B 0x82B (var var0000, var var0001) {
 				"?\"");
 			if (Func0955() == true) {
 				if (var000A > 0x0001) {
+					// Note: this should probably have been 'item' instead of 0x03F7
 					0x03F7->set_npc_id(var000A - 0x0002);
 				}
 				return var0002;
@@ -90586,8 +90597,10 @@ var Func082B 0x82B (var var0000, var var0001) {
 				say("\"Where are thy manners\"?!\"");
 			}
 			if (0x001F < (var000A + 0x000A)) {
+				// Note: this should probably have been 'item' instead of 0x03F7
 				0x03F7->set_npc_id(0x001F);
 			} else {
+				// Note: this should probably have been 'item' instead of 0x03F7
 				0x03F7->set_npc_id(var000A + 0x000A);
 			}
 			return 0x0000;
@@ -90598,6 +90611,7 @@ var Func082B 0x82B (var var0000, var var0001) {
 					var0002,
 					" is my final offer. Dost thou want it at this price?\"");
 				if (var000A < 0x001C) {
+					// Note: this should probably have been 'item' instead of 0x03F7
 					0x03F7->set_npc_id(var000A + 0x0004);
 				}
 				if (Func0955() == true) {
@@ -90609,6 +90623,7 @@ var Func082B 0x82B (var var0000, var var0001) {
 					var0002,
 					".  I will go no lower.\"");
 				if (var000A < 0x001E) {
+					// Note: this should probably have been 'item' instead of 0x03F7
 					0x03F7->set_npc_id(var000A + 0x0002);
 				}
 			}
@@ -90682,6 +90697,7 @@ var Func082B 0x82B (var var0000, var var0001) {
 						". Thou art a stranger, after all. I know not what use thou wilt make of this.\"");
 				}
 				if (var000A < 0x001F) {
+					// Note: this should probably have been 'item' instead of 0x03F7
 					0x03F7->set_npc_id(var000A + 0x0001);
 				}
 			}
@@ -113528,14 +113544,18 @@ var Func09AE 0x9AE (var var0000) {
 				say("\"I must get some sleep! Thou shouldst return tomorrow...\"");
 			}
 		}
+		// Note: this should probably have been 'item' instead of 0x03B2
 		if (item == 0x03B2->get_npc_object()) {
 			gflags[ASKED_SUROK_TOO_MUCH] = true;
+			// Note: this should probably have been 'item' instead of 0x03B2
 			if (0x03B2->get_schedule_type() == LAB) {
 				say("\"I must return to my duties...\"");
 			}
+			// Note: this should probably have been 'item' instead of 0x03B2
 			if (0x03B2->get_schedule_type() == EAT) {
 				say("\"I am sorry, but my dinner is waiting. We can talk again later.\"");
 			}
+			// Note: this should probably have been 'item' instead of 0x03B2
 			if (0x03B2->get_schedule_type() == SLEEP) {
 				say("\"I need rest! Return tomorrow...\"");
 			}

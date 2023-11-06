@@ -3650,6 +3650,7 @@ void Func018A shape#(0x18A) () {
 	var var0002;
 	var var0003;
 
+	// Note: this should probably have been 'item' instead of 0x018A
 	var0000 = 0x018A->get_npc_object()->get_schedule_type();
 	if (event == DOUBLECLICK) {
 		BOB->show_npc_face(0x0000);
@@ -3671,6 +3672,7 @@ void Func018A shape#(0x18A) () {
 		say("\"Goodbye.\"*");
 	}
 	if (event == PROXIMITY) {
+		// Note: this should probably have been 'item' instead of 0x018A
 		var0001 = 0x018A->get_npc_object()->get_schedule_type();
 		if (var0001 == PATROL) {
 			var0002 = UI_die_roll(0x0001, 0x0004);
@@ -3686,6 +3688,7 @@ void Func018A shape#(0x18A) () {
 			if (var0002 == 0x0004) {
 				var0003 = "@Keep moving!@";
 			}
+			// Note: this should probably have been 'item' instead of 0x018A
 			0x018A->item_say(var0003);
 		}
 	}
@@ -9442,6 +9445,7 @@ void Func0347 shape#(0x347) () {
 		var0000 = get_item_frame();
 		if (var0000 == 0x0001) {
 			if (gflags[BROKE_SPHERE]) {
+				// Note: this should probably have been 'item' instead of 0x0269
 				0x0269->get_npc_object()->Func0269();
 				UI_play_sound_effect2(0x0043, item);
 			}
@@ -10381,6 +10385,7 @@ void Func03F7 shape#(0x3F7) () {
 extern void Func0269 shape#(0x269) ();
 
 void Func03FD shape#(0x3FD) () {
+	// Note: this should probably have been 'item' instead of 0x0269
 	0x0269->get_npc_object()->Func0269();
 }
 
@@ -51863,6 +51868,7 @@ void Func061B object#(0x61B) () {
 
 	if (event == SCRIPTED) {
 		Func0806(0x00EA, item);
+		// Note: these should probably have been 'item' instead of 0x0269
 		var0000 = 0x0269->get_npc_object();
 		0x0269->set_schedule_type(WAIT);
 		var0001 = script 0x0269 after 25 ticks {
@@ -55946,6 +55952,7 @@ void Func0671 object#(0x671) () {
 		var0001 = Func092D(var0000);
 		halt_scheduled();
 		item_say("@In Quas Xen@");
+		// Note: this should probably have been 'var0000' instead of 0x0000
 		if (Func0906() && (var0000->is_npc() && (!(0x0000->get_item_flag(UNKNOWN_FLAG_27) == -1)))) {
 			var0002 = script item {
 				actor frame raise_1h;
@@ -63944,6 +63951,7 @@ void Func0812 0x812 (var var0000) {
 			};
 		};
 		UI_play_music(0x0019, 0x0000);
+		// Note: this should probably have been 'var0001' instead of 0x0002
 		0x0002->set_item_flag(ON_MOVING_BARGE);
 		var0001->set_item_flag(ACTIVE_BARGE);
 	}
