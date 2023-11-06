@@ -2128,11 +2128,11 @@ void Func00E4 shape#(0xE4) () {
 			say("\"Thou didst call, Lord Caladin?\"");
 			CALADIN->show_npc_face1(0x0000);
 			say("\"Send thy men to arrest Lord Marsten! I have evidence that he is our traitor!\"");
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"Arrest... Lord Marsten?\"");
-			0x0001->set_conversation_slot();
+			UI_set_conversation_slot(1);
 			say("\"Look, man, thou art a Bear like myself! Obey me now, and all will be right.\"");
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"Yes, milord.\"");
 			Func097F(CALADIN, "@On thy way, then!@", 0x0000);
 			Func097F(item, "@Yes, milord.@", 0x0003);
@@ -2233,11 +2233,11 @@ void Func00E4 shape#(0xE4) () {
 				say("\"Now that's something we like! How much dost thou have?\"");
 				var0010 = PARTY->count_objects(0x03B7, QUALITY_ANY, FRAME_ANY);
 				var0011 = Func0992(SHAMINO, (("@We've got " + var0010) + " Monetari, sir.@"), (("@I've got " + var0010) + " Monetari.@"), false);
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				if (var0010 > var000F) {
 					say("\"'Tis not enough!\"");
 					var0011 = Func0992(0x0001, (("@But thou didst say the ransom was " + var000F) + " Monetari!@"), (("@But thou didst say the ransom was " + var000F) + " Monetari!@"), false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					var000F = ((var0010 / 0x0064) + UI_get_random(0x0005)) * 0x0064;
 					if (var000F < 0x0BB8) {
 						var0000 = var000F / 0x0064;
@@ -2248,7 +2248,7 @@ void Func00E4 shape#(0xE4) () {
 							" Monetari!\"");
 						var0011 = Func0992(0x0001, "@They are thieves!@", 0x0000, false);
 						if (var0011 != AVATAR) {
-							0x0000->set_conversation_slot();
+							UI_set_conversation_slot(0);
 							UI_remove_npc_face1();
 						}
 					} else {
@@ -4325,7 +4325,7 @@ void Func0109 shape#(0x109) () {
 			THOXA->show_npc_face1(0x0000);
 			say("\"We must intervene, Karnax. The very fabric that weaves the tapestry of the Cosmos may depend upon it.\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"Thou art as foolish as ever, girl...\"");
 			say("\"Xenka's writings are crystal clear -- those who seek to aid the Hero, shall cause ",
 				var0000,
@@ -5197,7 +5197,7 @@ void Func013E shape#(0x13E) () {
 			MEELOSE->show_npc_face1(0x0000);
 			say("\"To be my great pleasure. To look forward to the meeting...\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			var000B = find_nearby(0x0373, 0x0014, MASK_NONE);
 			if (var000B) {
 				var000B->set_schedule_type(LOITER);
@@ -5220,12 +5220,12 @@ void Func013E shape#(0x13E) () {
 				var0001,
 				" dead or mangled, Batlin?\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"Mangled will suffice, mighty Brunt. But do as thou wishest...\"");
 			BRUNT->show_npc_face1(0x0000);
 			say("\"Good... Dead it is!\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			UI_end_conversation();
 			BRUNT->set_schedule_type(LOITER);
 			var000C = [0x0924, 0x017E, 0x0000];
@@ -5256,7 +5256,7 @@ void Func013E shape#(0x13E) () {
 				var0001,
 				" again, too...\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"Ah, yes... I had nearly forgotten.\"");
 			DEADEYE->set_schedule_type(LOITER);
 			UI_end_conversation();
@@ -7458,12 +7458,12 @@ void Func01C3 shape#(0x1C3) () {
 			say("\"Dost thou not need to rest thyself, Templar? Thou hast had no time to heal from thy wounds.\"");
 			UI_remove_npc_face1();
 			SHAZZANA->set_item_flag(MET);
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"I am right enough, Shazzana. And I cannot rest until I have aired my concerns.\"");
 			MARSTEN->show_npc_face1(0x0000);
 			say("\"Speak thy mind, then, warrior.\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"As thou knowest, I am the sole survivor of the patrol which the Goblins ambushed -- when Astrid was taken.\"");
 			say("\"The Goblins were ready for us, milord! It could not have been by accident.\"");
 			say("\"Lord Marsten, there is a traitor in our midst.\"");
@@ -7495,7 +7495,7 @@ void Func01C3 shape#(0x1C3) () {
 			LUTHER->show_npc_face1(0x0000);
 			say("\"Oh, it isn't that much of a challenge. After all, thou didst survive it, Flicken!\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"Never mind that lout. What part of the dungeon was the most difficult, ",
 				var0001,
 				"?\"");
@@ -7519,7 +7519,7 @@ void Func01C3 shape#(0x1C3) () {
 					CALADIN->show_npc_face1(0x0000);
 					say("\"Perhaps thou didst not walk fast enough. If thou dost lag, the explosions will catch thee.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					var0005 = Func08ED(var0005);
 					if (var0005 == 0x0004) {
 						// This could be a break instead; the original
@@ -7536,7 +7536,7 @@ void Func01C3 shape#(0x1C3) () {
 					BRENDANN->show_npc_face1(0x0000);
 					say("\"We must speak with Shmed about this. Our dungeon is strictly a test of fighting ability -- no magic allowed!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					var0005 = Func08ED(var0005);
 					if (var0005 == 0x0004) {
 						// This could be a break instead; the original
@@ -7551,7 +7551,7 @@ void Func01C3 shape#(0x1C3) () {
 					TEMPLAR->show_npc_face1(0x0000);
 					say("\"Perhaps in the darkness, thou didst become disoriented and imagine such an enemy.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					var0005 = Func08ED(var0005);
 					if (var0005 == 0x0004) {
 						// This could be a break instead; the original
@@ -7988,7 +7988,7 @@ labelFunc01C3_073B:
 			say("\"The Goblins have struck again!\"");
 			say("\"I am sorry, Harnna, but if the Goblins have her, she is lost. There is not an ounce of mercy or remorse within them.\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"But the Goblins did not take her!\"");
 			BRENDANN->show_npc_face1(0x0000);
 			say("\"Thou canst not know any such thing. It must have been the Goblins. Remember, they killed thine husband right outside this city, not even leaving a body!\"");
@@ -8474,7 +8474,7 @@ void Func01C7 shape#(0x1C7) () {
 				GUSTACIO->show_npc_face1(0x0000);
 				say("\"Such curiosity seems most impudent, considering that thou art a stranger in this land...\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"And ",
 					var0004,
 					" did ask many questions about many other people, and about strange objects which I was not familiar with...\"");
@@ -8574,7 +8574,7 @@ void Func01C7 shape#(0x1C7) () {
 				IOLO->show_npc_face1(0x0000);
 				say("\"Since when is this a crime? What doth the lady say?\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"Be silent, or thou too wilt be sentenced to the Pit -- for thine insolence!\"");
 			}
 			UI_end_conversation();
@@ -8724,7 +8724,7 @@ void Func01C7 shape#(0x1C7) () {
 			FRIGIDAZZI->show_npc_face1(var0008);
 			say("\"Darling! This is such a surprise... I have an explanation for everything...\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"I am not daft, sorceress. I can see very well what hath been happening here.\"");
 			say("\"What dost thou have to say in thy defense, ",
 				var0006,
@@ -8737,14 +8737,14 @@ void Func01C7 shape#(0x1C7) () {
 					var0006,
 					"! Thou shouldst not have said such a thing -- the wrath of the MageLord is legendary!\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 			} else if (var0016 == "I'm innocent") {
 				if (FRIGIDAZZI->get_npc_id() == 0x000C) {
 					say("\"Idiot! Dost thou not think that I recognize the after-effects of the Dance of Passion?!\"");
 					FRIGIDAZZI->show_npc_face1(var0008);
 					say("\"Oh, no...\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				} else if ((FRIGIDAZZI->get_npc_id() > 0x000C) && (FRIGIDAZZI->get_npc_id() != 0x0011)) {
 					say("\"Thou dost stand there without clothes, and claim to be innocent? Ha!\"");
 				} else {
@@ -8754,7 +8754,7 @@ void Func01C7 shape#(0x1C7) () {
 						var0003,
 						" what thou didst to the others...\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 			} else {
 				say("\"Not so fast, peasant! I have a special punishment reserved for those who dare to play games with my mistresses...\"");
@@ -8763,7 +8763,7 @@ void Func01C7 shape#(0x1C7) () {
 					var0003,
 					" into the Pit...\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 			}
 			say("\"I demand that this criminal be punished by the Council of Mages. Let the quorum of Mages be convened instantly!\"");
 			UI_play_sound_effect(0x0082);
@@ -12004,7 +12004,7 @@ void Func0294 shape#(0x294) () {
 				say("\"I would give Fawn's greatest treasure if only I could find the Comb of Beauty!\"");
 				if (Func097D(PARTY, 0x0001, 0x0289, QUALITY_ANY, 0x0000)) {
 					var0006 = Func0992(0x0001, "@Avatar, what about the comb thou didst take from Columna?@", "@I wonder... What about Columna's comb?!@", false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					add("Columna");
 				}
 				var0004 = true;
@@ -16763,7 +16763,7 @@ void Func032E shape#(0x32E) () {
 				var0004,
 				" be responsible for the storms which plague the land? Or for the growing strangenesses which afflict our spellcasting?\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"I hope, my dear, that ",
 				var0004,
 				" is the solution to our problems, rather than the cause...\"");
@@ -20783,7 +20783,7 @@ void Func03D2 shape#(0x3D2) () {
 					if ((var000E == IOLO) || ((var000E == SHAMINO) || (var000E == DUPRE))) {
 						var000F = "@That is one of the worst nicknames I have ever\r\n\t\t\t\t\t\theard!@";
 						var000E = Func0992(var000E, var000F, 0x0000, false);
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					}
 				} else {
 					say("\"Tis my nickname. Perhaps when I know thee better, I shall tell thee the reason I was given this nickname...\"");
@@ -20830,7 +20830,7 @@ void Func03D2 shape#(0x3D2) () {
 				if ((var000E == IOLO) || ((var000E == SHAMINO) || (var000E == DUPRE))) {
 					var000F = "@I suppose there has never been a dragon that was evil, eh?!@";
 					var000E = Func0992(var000E, var000F, 0x0000, false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					Func097F(var000E, "@Bloody Wyrm!@", 0x0000);
 				}
 				fallthrough;
@@ -20859,7 +20859,7 @@ void Func03D2 shape#(0x3D2) () {
 						if ((var000E == IOLO) || ((var000E == SHAMINO) || (var000E == DUPRE))) {
 							var000F = "@The Avatar has fought the undead before and triumphed!@";
 							var000E = Func0992(var000E, var000F, 0x0000, false);
-							0x0000->set_conversation_slot();
+							UI_set_conversation_slot(0);
 							Func097F(var000E, "@<PCName> is not afraid!@", 0x0000);
 						}
 						say("\"Aram-Dol is not easily reached. The liche hath surrounded his lair with many creatures.\"");
@@ -20875,7 +20875,7 @@ void Func03D2 shape#(0x3D2) () {
 					if ((var000E == IOLO) || ((var000E == SHAMINO) || (var000E == DUPRE))) {
 						var000F = "@The Avatar has fought the undead before and triumphed!@";
 						var000E = Func0992(var000E, var000F, 0x0000, false);
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						Func097F(var000E, "@<PCName> is not afraid!@", 0x0000);
 					}
 					say("\"Aram-Dol is not easily reached. The liche hath surrounded his lair with many creatures.\"");
@@ -20914,7 +20914,7 @@ void Func03D2 shape#(0x3D2) () {
 				if ((var000E == IOLO) || ((var000E == SHAMINO) || (var000E == DUPRE))) {
 					var000F = "@By the virtues! Such foul creatures should be exterminated!@";
 					var000E = Func0992(var000E, var000F, 0x0000, false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					Func097F(var000E, "@Eaten alive. Yuch!@", 0x0000);
 				}
 				fallthrough;
@@ -20933,7 +20933,7 @@ void Func03D2 shape#(0x3D2) () {
 				if ((var000E == IOLO) || ((var000E == SHAMINO) || (var000E == DUPRE))) {
 					var000F = "@Thou art an insufferable wyrm!@";
 					var000E = Func0992(var000E, var000F, 0x0000, false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					Func097F(var000E, "@What arrogance!@", 0x0000);
 				}
 				say("\"To answer thy question, however, I know, or have heard of, many 'people'. Who, in particular, wert thou interested in?\"");
@@ -20947,13 +20947,13 @@ void Func03D2 shape#(0x3D2) () {
 				if ((var000E == IOLO) || ((var000E == SHAMINO) || (var000E == DUPRE))) {
 					var000F = "@Now see here! There is no cause to be insulting!@";
 					var000E = Func0992(var000E, var000F, 0x0000, false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					Func097F(var000E, "@Insolent dragon!@", 0x0000);
 				}
 				if (var000E == PETRA) {
 					var000F = "@I'll take that as a compliment!@";
 					var000E = Func0992(var000E, var000F, 0x0000, false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				fallthrough;
 
@@ -21502,7 +21502,7 @@ void Func03F7 shape#(0x3F7) () {
 							" is the Avatar! Thou dost not need any further proof than the fact that the Amulet didst bring us here!\"");
 						UI_remove_npc_face1();
 						IOLO->item_say("@Nosey biddy!@");
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					}
 					if (Func0942(SHAMINO)) {
 						SHAMINO->show_npc_face1(0x0000);
@@ -21513,7 +21513,7 @@ void Func03F7 shape#(0x3F7) () {
 						} else {
 							SHAMINO->item_say("@I am sick of these rules!@");
 						}
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					}
 					if (Func0942(DUPRE)) {
 						DUPRE->show_npc_face1(0x0000);
@@ -21521,7 +21521,7 @@ void Func03F7 shape#(0x3F7) () {
 						say("\"Avatar, let us use the Amulet to return to where we were. We have enough to worry with on this quest without such presumptuous women!\"");
 						UI_remove_npc_face1();
 						DUPRE->item_say("@Arrogant wench!@");
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					}
 					say("\"I have no idea what it is that thy friends speak of, ",
 						var0000,
@@ -21576,20 +21576,20 @@ void Func03F7 shape#(0x3F7) () {
 					IOLO->show_npc_face1(0x0000);
 					say("\"Thou dost take too much upon thyself, woman!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				if (Func0942(SHAMINO)) {
 					SHAMINO->show_npc_face1(0x0000);
 					say("\"I doubt it shall be as easy as thou dost imagine. Thou dost not speak to an ordinary warrior...");
 					say("\"This is the Avatar thou dost question!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				if (Func0942(DUPRE)) {
 					DUPRE->show_npc_face1(0x0000);
 					say("\"If she tries anything, Avatar, I shall gladly lop her head off for the effort!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"This is a time of war! Thou canst not think to wander about unchallenged. 'Twould be a breach of duty if I did not stop and question thee.\"");
 				if (Func0942(IOLO)) {
@@ -21597,21 +21597,21 @@ void Func03F7 shape#(0x3F7) () {
 					say("\"I am sorry, good Mage. Thou art quite right.\"");
 					UI_remove_npc_face1();
 					IOLO->item_say("@My apologies.@");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				if (Func0942(SHAMINO)) {
 					SHAMINO->show_npc_face1(0x0000);
 					say("\"We are strangers here. Thou dost well in questioning us. We wrong thee with our demands to be unaccountable.\"");
 					UI_remove_npc_face1();
 					SHAMINO->item_say("@Remain vigilant.@");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				if (Func0942(DUPRE)) {
 					DUPRE->show_npc_face1(0x0000);
 					say("\"Thou must honor thy duty. I apologize for speaking ill of a honorable warrior such as thyself.\"");
 					UI_remove_npc_face1();
 					DUPRE->item_say("@Duty is our honor...@");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				fallthrough;
 
@@ -22230,7 +22230,7 @@ void Func0401 object#(0x401) () {
 				"! Knowing that thou wouldst soon return, I have waited for thee at this establishment.\"");
 			if (Func0942(ROCCO)) {
 				Func094E(ROCCO, "@And he hath developed quite a bar tab!@");
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"One that I shall pay, worry thou not!\"");
 			}
 			if (!gflags[AFTER_FREEDOM_NEWS]) {
@@ -22254,7 +22254,7 @@ void Func0401 object#(0x401) () {
 				MARSTEN->show_npc_face1(0x0000);
 				say("\"That is all right. If thou art with my friend here, thou needest not speak with me.\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 			}
 			DUPRE->add_to_party();
 			remove("join");
@@ -22369,7 +22369,7 @@ void Func0401 object#(0x401) () {
 					say("\"I shall prepare a list.\"");
 					if (SHAMINO->npc_nearby()) {
 						Func094E(SHAMINO, "@I have already begun one.@");
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"Then I shall add to it.\"");
 					}
 					Func092B();
@@ -22450,7 +22450,7 @@ void Func0402 object#(0x402) () {
 				SHAMINO->show_npc_face1(0x0000);
 				say("\"Beatrix, is that thee?\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"I forgive thee for deserting us, King Shamino. To prove that my love for thee is stronger than eternity, I shall heal thee of thy wounds.\"");
 				say("\"Keep this book as a keepsake between us. Now I must go into the Void, but remember me always...\"");
 				var0006 = Func095C(SHAMINO, STRENGTH);
@@ -22843,7 +22843,7 @@ void Func0403 object#(0x403) () {
 			DUPRE->show_npc_face1(0x0000);
 			say("\"We may be on the ship, but the ship is upon dry land! I think that thou art correct, Iolo. We did fly!\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"Brrr. Dost thou notice the chill in the air? 'Tis much colder here than at home.\"");
 			say("\"I hope Gwenno brought enough warm clothing...\"");
 			SHAMINO->show_npc_face1(0x0000);
@@ -22852,7 +22852,7 @@ void Func0403 object#(0x403) () {
 			DUPRE->show_npc_face1(0x0000);
 			say("\"And that fiend, Batlin, I hope!\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"Look, ",
 				var0002,
 				"! A strange storm is nearly upon us. This is certainly not Britannia!\"");
@@ -22877,13 +22877,13 @@ void Func0403 object#(0x403) () {
 				SHAMINO->show_npc_face1(0x0000);
 				say("\"I am making a list of the strange items which the storm gave us.\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"Then I shall add to it.\"");
 			} else if (Func0942(DUPRE)) {
 				DUPRE->show_npc_face1(0x0000);
 				say("\"I have a list of the strange items which the storm gave us.\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"I shall add to it.\"");
 			} else {
 				say("\"I shall make a list of the strange things I have found in my packs. Perhaps these are clues to where our real belongings have gone.\"");
@@ -22913,7 +22913,7 @@ void Func0403 object#(0x403) () {
 				GUSTACIO->show_npc_face1(0x0000);
 				say("\"'Tis said that only a superb Mage can leave the Mountains of Freedom alive.\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 			}
 			say("\"The Sorcerer Gustacio hath been instructing me somewhat in the magic of this land, ",
 				var0001,
@@ -23370,11 +23370,11 @@ void Func0404 object#(0x404) () {
 				if (Func0942(FRELI)) {
 					FRELI->show_npc_face1(0x0000);
 					say("\"Almost!\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Well...\"");
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"Better!\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Thou art mad!\"");
 					UI_push_answers();
 					add(["Stop this bickering!", "bye"]);
@@ -23388,7 +23388,7 @@ void Func0404 object#(0x404) () {
 					var0000,
 					". I am sorry.\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"Ah, yes, ",
 					var0000,
 					". I, too, am truly sorry.\"");
@@ -23873,7 +23873,7 @@ void Func040D object#(0x40D) () {
 						}
 						var000D = Func0992(var000D, "@Ah, but Batlin can be very gentlemanly when it suits his purposes.@", 0x0000, false);
 					}
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"A visit to the Chief Ranger might be a good idea. Thou canst find her at the Winery, in the western part of town.\"");
 				var0009 = Func09AE(var0009);
@@ -23964,7 +23964,7 @@ void Func040D object#(0x40D) () {
 				}
 				if (var000E == []) {
 					var000C = Func0992(0x0001, (("@But we have no strange objects to ask about, " + var0002) + ".@"), 0x0000, false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"I do not think I can help thee, but if I think of anything, I'll inform thee!\"");
 				} else {
 					say("\"What sort of items art thou inquiring about?\"");
@@ -24017,7 +24017,7 @@ void Func040D object#(0x40D) () {
 				say("\"From thy description, the stockings could only be one kind -- Moonsilk Stockings.\"");
 				say("\"I sell them here in the store, but not often. Only the Mages can afford luxuries like these.\"");
 				var000C = Func0992(DUPRE, "@And who buys these fripperies?@", "@Whom dost thou sell them to, milady?@", false);
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"The Green Sorceress, Columna -- she dresses in only the finest materials.\"");
 				say("\"She also has a moonsilk sleeping gown, which cost more guilders than I shall ever make!\"");
 				if (Func097D(PARTY, 0x0001, 0x02A5, QUALITY_ANY, 0x0000)) {
@@ -24128,7 +24128,7 @@ void Func040D object#(0x40D) () {
 					say("\"Ordered it special from the furrier in Monitor. She obtained it from the far north, where the Trappers hunt bears, snow leopards, and the man-eating Gwani.\"");
 					say("\"With the storms, though, 'tis too dangerous to sail to the north. And we cannot trade by way of land, for the Swamp of Gorlab cuts the mainland in half.\"");
 					var000C = Func0992(0x0001, "@About the fur cap...@", "@About the fur cap...@", false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Yes, yes, yes, I remember. I sold it to the MageLord, who gave it to his favorite at the Feast of Illusions. I'm surprised that unusual fellow never bought one, what with all the other furs he was collecting.\"");
 					gflags[HAS_CLUE_FUR_CAP] = true;
 					add("unusual fellow");
@@ -24234,11 +24234,11 @@ void Func040D object#(0x40D) () {
 					say("\"Allow me to see that bottle. But of course! This is Moonshade wine, made by the Rangers of our town!\"");
 					say("\"If thou desirest more, simply inquire at the Winery on the west side of town.\"");
 					var000C = Func0992(DUPRE, "@Very good idea. Let's go.@", 0x0000, false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				} else {
 					say("\"Perhaps thou shouldst inquire at the Winery. The Rangers are most knowledgeable about wines.\"");
 					var000C = Func0992(DUPRE, "@A visit to the Winery seems in order!@", 0x0000, false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				var0009 = Func09AE(var0009);
 				if (!var0006) {
@@ -24366,7 +24366,7 @@ void Func040D object#(0x40D) () {
 				say("\"I do not stock such goods any more, but I know where they can be obtained -- Fawn, the sea-city.\"");
 				var000C = Func0992(SHAMINO, "@But thou used to sell these stockings?@", 0x0000, false);
 				if (var000C != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					if (var0010) {
 						// Typo: it should be "Celennia", not "Selenia".
 						say("\"Oh, yes. To the Sorceress of the Night, Selenia. But she hath been absent from this city for many weeks now.\"");
@@ -24395,11 +24395,11 @@ void Func040D object#(0x40D) () {
 					say("\"Could I see thy bottle? Hmm... A bitter ale of some kind.\"");
 					say("\"If I were thee, I'd discard this bile and replace it with some of our excellent Moonshadian wine. If thou desirest some, simply inquire at the Winery on the west side of town.\"");
 					var000C = Func0992(DUPRE, "@Can we go?@", 0x0000, false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				} else {
 					say("\"Perhaps thou shouldst inquire at the Winery. Ernesto is most knowledgeable about wines.\"");
 					var000C = Func0992(DUPRE, "@I enjoy visiting wineries!@", 0x0000, false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				var0009 = Func09AE(var0009);
 				if (!var0006) {
@@ -25230,7 +25230,7 @@ void Func0410 object#(0x410) () {
 					KANE->show_npc_face1(0x0000);
 					say("\"Thou art welcome.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				} else {
 					say("\"Oh, well, I cannot remember.\"");
 				}
@@ -25248,7 +25248,7 @@ void Func0410 object#(0x410) () {
 					KANE->show_npc_face1(0x0000);
 					say("\"Nor did I!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"Nor did Kane. However, he was in the tavern when Hawk scuffled with a man named Flindo. We can only guess the outcome, ",
 					var0000,
@@ -25694,7 +25694,7 @@ void Func0411 object#(0x411) () {
 					FRELI->show_npc_face1(0x0000);
 					say("\"Cap'n Hawk might know! He hath been everywhere in the world!\"");
 					gflags[ASKED_FEDABIBLIO_ABOUT_BLUE_EGG] = true;
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"The lad doth have a point. Also...\"");
 					say("\"Erstam the Mad Mage would almost certainly know, but he doth not share his information with anyone.\"");
 				}
@@ -25718,7 +25718,7 @@ void Func0411 object#(0x411) () {
 			case "gratitude" (remove):
 				say("\"Thank thee for saving me. Now that I am no longer imprisoned within stone, I can continue my researches. There must be some way to stop Shamino the Anarch!\"");
 				var0008 = Func0992(0x0001, "@We seek the Scroll of the Serpent, sir.@", "@I seek the Scroll of the Serpent, sir.@", false);
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"The ancient scroll? Be warned -- it is written entirely in the ancient runes of the Daemons who once dwelt in this land. I can understand none of it.\"");
 				say("\"It is said that Erstam translated portions of it, but the translation was lost many years ago.\"");
 				say("\"As a token of my gratitude, please accept this, the Scroll of the Serpent.\"");
@@ -25981,17 +25981,17 @@ void Func0412 object#(0x412) () {
 						AUTOMATON_FACE->show_npc_face1(0x0000);
 						say("\"Thieves could not take thy goods, MageLord. I protect them well.\"");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"That had best be true, or thou wilt find thyself on the scrap heap!\"");
 					}
 					var000B = Func0992(0x0001, "@This be it.@", "@Here it is.@", false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Ah, good! 'Tis not mine at all. Thou must understand that every item of magical equipment must be custom-made for each Mage.\"");
 					say("\"I do not know to whom this belongs, but it is not mine.\"");
 				} else {
 					say("\"Hast thou brought this object with thee?\"");
 					var000B = Func0992(0x0001, "@No, we do not have it with us.@", "@No, I have not.@", false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Then I can tell thee nothing. But if thou hast stolen this from me, I shall not pay ransom for it!\"");
 				}
 				Func0830();
@@ -26241,14 +26241,14 @@ void Func0413 object#(0x413) () {
 				if (Func0942(ANDRIO)) {
 					ANDRIO->show_npc_face1(0x0000);
 					say("\"I am not!\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Yes, thou art!\"");
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"'Tis a lie! Besides, thou art afraid of him as well!\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"That is, uh, not at all true!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"Why, Andrio will not even pass his house before 9 in the morning.\"");
 				add("nine");
@@ -26626,10 +26626,10 @@ void Func0416 object#(0x416) () {
 					var0005 = Func0992(0x0001, "@We found it in Skullcrusher!@", "@I found it in Skullcrusher!@", false);
 					var0006 = PARTY->count_objects(0x01C8, QUALITY_ANY, FRAME_ANY);
 					if (var0006 > 0x0000) {
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"Excellent! Now we can repair thy sword.\"~ \"Place it here and activate it. When the machine is working, use it on the sword.\"");
 					} else {
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"Thou didst? But then where is it?\"~ \"Thou wouldst have me think that thou didst find it!\"");
 					}
 				} else {
@@ -26720,7 +26720,7 @@ void Func0416 object#(0x416) () {
 				say("\"Next, thou shouldst engage the winch. This will seal thee within the tower, and activate the levers. It will also summon a magical storm.\"");
 				var0005 = Func0992(0x0001, "@Thou dost want us to summon a storm? This is madness!@", 0x0000, false);
 				if (var0005 != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"I assure thee, thou art in no danger! I would do this myself, but at mine age, climbing stairs is very difficult...\"");
 				}
 				say("\"Pull the levers one at a time. This will draw down lightning from the storm, and cause it to strike the objects which I have placed on the tower.\"");
@@ -26979,12 +26979,12 @@ void Func0417 object#(0x417) () {
 				var000B &= ["@I serve Lord British!@", "say nothing"];
 				if (var000A != 0x0000) {
 					var000B &= ("@Hush, " + Func095B(var000A)) + "@";
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				var000C = Func0957(var000B);
 				if (var000C == 0x0003) {
 					Func094E(var000A, "@But she doth slander our liege!@");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				if (var000C == 0x0001) {
 					say("\"There is no need to be vulgar. The Daemon King hath been dead for many centuries. No one doth serve him now.\"");
@@ -26993,7 +26993,7 @@ void Func0417 object#(0x417) () {
 				say("\"The Mages and Rangers were bound by the travesty known as the Oath of Honesty!\"");
 				var000A = Func0992(SHAMINO, "@But what is improper about\r\n\t\t\t\t\t\t\t\t\thonesty?@", 0x0000, false);
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"Nothing is more cruel than unflinching Honesty. It doth shatter hearts, instill insecurity, and promote civil strife.\"");
 				say("\"Therefore, our ancestors fled the City of Moon in the\tland British conquered, and sailed until they found this land.\"");
 				fallthrough;
@@ -27043,7 +27043,7 @@ void Func0417 object#(0x417) () {
 				say("\"Thou art certainly ignorant!\"");
 				var000A = Func0992(0x0001, "@Thou art rude!@", 0x0000, false);
 				if (var000A != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"My, thou art touchy! I meant no offense... Only that thou didst not know things that are common knowledge here.\"");
 				}
 				say("\"Stoneheart is the ore that produces Bloodspawn. I know not how this is done. I am not a Mage.\"");
@@ -27977,14 +27977,14 @@ void Func041A object#(0x41A) () {
 							say("\"I have heard thy call, Mortegro! In life I was Christopher, blacksmith of Trinsic. My time here is short and I wish to have words with the one who is called the Avatar.\"");
 							say("\"Avatar, I thank thee for protecting my son and for breaking The Fellowship's evil grip over Britannia. But I also bring thee a warning. Many are the spirits in this realm who await thee, and there is but one thing on their mind -- to have their revenge against thee! There is one thing... that thou must... always... remember...\"");
 							UI_remove_npc_face1();
-							0x0000->set_conversation_slot();
+							UI_set_conversation_slot(0);
 							say("\"Oh! I have lost contact with the spirit! Forgive me, but with a contact that intense, the length of time that I can maintain is always shorter.\"");
 							gflags[SEANCE_CHRISTOPHER] = true;
 						} else if (IOLO->npc_nearby() && (!gflags[SEANCE_GWENNO])) {
 							SMITHZHORSE->show_npc_face1(0x0001);
 							say("\"My darling husband, Iolo, although I am dead I must tell thee that my love for thee shall never die. Always remember me. Farewell.\"");
 							UI_remove_npc_face1();
-							0x0000->set_conversation_slot();
+							UI_set_conversation_slot(0);
 							say("\"I have lost the contact -- there are strange forces connected with this spirit!\"");
 							IOLO->show_npc_face1(0x0000);
 							say("\"No! It cannot be true! She cannot be dead! I refuse to believe it!\"");
@@ -27997,7 +27997,7 @@ void Func041A object#(0x41A) () {
 							MORTEGRO->show_npc_face0(0x0000);
 							say("\"Once again I call out to the spirit of Edrin, brother of Kane. If thou canst hear me, Edrin, please contact us. Thy brother Kane dost need to know if thou hast perished. Thou hast been missing for so long that even thy brother dost think that he shall never see thee again. If thou canst hear my words, please contact us.\"");
 							var000D = Func0992(0x0001, "@There seems to be no reply.@", "@There is no reply.@", false);
-							0x0000->set_conversation_slot();
+							UI_set_conversation_slot(0);
 							say("\"This is a favorable sign for Kane. It may well mean that his brother is not in the realm of ghosts.\"");
 						}
 					}
@@ -28277,7 +28277,7 @@ void Func041B object#(0x41B) () {
 				say("\"'Tis not a bad place to live.\"");
 				var000C = Func0992(0x0001, "@The sewers not bad? Art thou daft?@", 0x0000, false);
 				if (var000C != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Scowl not at Mosh. Thou knowest nothing of what thou sayest. Each one of us makes of life what we can, whether by fate or the treachery of others. Dost thou see me judging ye?\"");
 				} else {
 					say("\"Each one of us makes of life what we can, whether by fate or the treachery of others. Dost thou see me judging ye?\"");
@@ -28312,7 +28312,7 @@ void Func041B object#(0x41B) () {
 				say("\"Where hath he gone? Bah, I know not. Nor, for that matter, do I care!\"");
 				var000C = Func0992(IOLO, "@Ah, but I can see that thou dost still care, madam.@", 0x0000, false);
 				if (var000C != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Rubbish! 'Tis long gone, and I am an old woman now.\"");
 				}
 				fallthrough;
@@ -28677,7 +28677,7 @@ void Func041C object#(0x41C) () {
 					ROCCO->show_npc_face1(0x0000);
 					say("\"What madness art thou saying, Petra?\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"It is not madness, Rocco. I am proud of thee...\"");
 				}
 				say("\"Rocco, the innkeeper. A finer man thou shalt not find.\"");
@@ -29198,10 +29198,10 @@ void Func041D object#(0x41D) () {
 					say("\"To learn its meaning, translate it from the language of Magic.\"");
 					say("\"Alas -- as is often the case, 'tis not required to understand power to use it.\"");
 					var0006 = Func0992(IOLO, (((("@" + var0003) + " learned ") + var0002) + " lessons well in the days of the False Prophet.@"), "@I was taught well in the days of the False Prophet...@", false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Whom?\"");
 					var0006 = Func0992(0x0001, "@Never mind...@", "@Never mind...@", false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					gflags[KNOWS_TURTLE_MANTRA] = true;
 				} else {
 					say("\"No, no, no -- thou shouldst learn of the password first! Thou dost need it most of all, for Erstam shall not speak with thee without it!\"");
@@ -29498,7 +29498,7 @@ void Func041E object#(0x41E) () {
 						var0002,
 						" should go to Julia, dear. The Rangers must investigate this crime.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Nah -- she'll only try to extort money from ",
 						var0004,
 						". Julia is a thief...\"");
@@ -29511,7 +29511,7 @@ void Func041E object#(0x41E) () {
 			case "Blue Boar" (remove):
 				say("\"Interesting name, is it not?\"");
 				var0008 = Func0992(0x0001, "@That sounds just like the one in Britannia!@", "@I have heard of that name before.@", false);
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"Anything is possible, I suppose. I inherited this inn from my parents, and they from theirs. 'Tis an old name... perhaps from the time of the crossing.\"");
 				add("crossing");
 				fallthrough;
@@ -29524,7 +29524,7 @@ void Func041E object#(0x41E) () {
 			case "usurper king" (remove):
 				say("\"Back in the old lands, a domineering man named... Brattish, or Brutish, or somesuch, usurped the throne. His rule was hard and unjust, so many people fled across the seas to this land.\"");
 				var0008 = Func0992(0x0001, "@It sounds like he is talking about Lord British!@", 0x0000, false);
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				add(["old lands", "this land"]);
 				fallthrough;
 
@@ -29713,7 +29713,7 @@ void Func041E object#(0x41E) () {
 					PETRA->show_npc_face1(0x0000);
 					say("\"Sounds dangerous to me...\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"That is because thou canst not swim, Petra.\"");
 				}
 				fallthrough;
@@ -29726,7 +29726,7 @@ void Func041E object#(0x41E) () {
 					PETRA->show_npc_face1(0x0000);
 					say("\"Again?! When is Stefano not in trouble?\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				add("Death Knight");
 				fallthrough;
@@ -29737,7 +29737,7 @@ void Func041E object#(0x41E) () {
 					PETRA->show_npc_face1(0x0000);
 					say("\"I knew thou wert learning, Rocco.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Oh, go on with thee!\"");
 				}
 				say("\"Some say that it is a Daemon summoned to hunt the unfortunate person. Others say that it is an automaton designed to kill. I do not know, nor do I wish to ask!\"");
@@ -29748,12 +29748,12 @@ void Func041E object#(0x41E) () {
 				if (Func0942(PETRA)) {
 					PETRA->show_npc_face1(0x0000);
 					say("\"I would know that it was cold, dear Rocco, but it would not trouble me.\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"See there?\"");
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"But thou mightest ask Bucia. She may sell something like that.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Good idea, Petra!\"");
 				}
 				add("Bucia");
@@ -29765,7 +29765,7 @@ void Func041E object#(0x41E) () {
 					PETRA->show_npc_face1(0x0000);
 					say("\"And its greatest gossip, as well!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Petra, honestly!\"");
 				}
 				say("\"Bucia may be able to tell thee if she sells anything like them. And who purchased them.\"");
@@ -29849,7 +29849,7 @@ void Func041F object#(0x41F) () {
 			say("\"So, thou hast come to rescue thy friend? Well, thou must kill me first -- I have the only key to his cell!\"");
 			say("\"Or wilt thou tell me the secret which I desire, the key to controlling Daemons!!!\"");
 			var0003 = Func0992(0x0001, "@But we know nothing about gargoyles... er, Daemons.@", "@But I know nothing of Daemons...@", false);
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"Then thou shalt die, liar.\"");
 			Func09AD(ROTOLUNCIA);
 			ROTOLUNCIA->clear_item_say();
@@ -29977,7 +29977,7 @@ void Func041F object#(0x41F) () {
 				var000E[0x0001]->show_npc_face1(0x0000);
 				say("\"Afraid? Why, the Avatar is not afraid of magic.\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"But all barbarians fear sorcery.\"");
 				var000E[0x0002]->show_npc_face1(0x0000);
 				var0003 = Func095B(var000E[0x0001]);
@@ -29985,7 +29985,7 @@ void Func041F object#(0x41F) () {
 					var0003,
 					". That witch can hear thee through that scroll!\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"Who said that! Death draws near for those who taunt Rotoluncia the Red Witch.\"");
 			}
 			converse (["magic", "Council", "not afraid", "bye"]) {
@@ -29996,7 +29996,7 @@ void Func041F object#(0x41F) () {
 						var000E[0x0001]->show_npc_face1(0x0000);
 						say("\"But the Avatar is not a Mundane...\"");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"What is this that they say?\"");
 						var000E[0x0002]->show_npc_face1(0x0000);
 						var0003 = Func095B(var000E[0x0001]);
@@ -30004,7 +30004,7 @@ void Func041F object#(0x41F) () {
 							var0003,
 							".\"");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					}
 					say("\"Thou art not a mage, or I would have detected thy powers by now.\"");
 					say("\"Or... perhaps thou dost shield thine abilities from my senses? Most interesting...\"");
@@ -30048,7 +30048,7 @@ void Func041F object#(0x41F) () {
 						var0010 = Func0992(0x0001, "@No, my friend. Thou must not...!@", 0x0000, false);
 						if (var0010 != AVATAR) {
 							ROTOLUNCIA->set_npc_id(0x0000 - var0010);
-							0x0000->set_conversation_slot();
+							UI_set_conversation_slot(0);
 							say("\"Thy friends must learn not to interfere in the interests of mages. Let them learn now!!!\"");
 							var0008 = var0010->get_object_position();
 							var0010->get_npc_object()->obj_sprite_effect(ANIMATION_GREEN_BUBBLES, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, LOOP_ONCE);
@@ -30216,7 +30216,7 @@ void Func0420 object#(0x420) () {
 			if (Func0942(DUCIO)) {
 				say("\"I'm a lucky man, to serve such a talented craftsman.\"");
 				Func094E(DUCIO, "@He's a good boy.@");
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 			} else {
 				say("\"Someday I hope to be as rich and lazy as my master!\"");
 				say("\"He spends all his time asleep or at the inn, except when he comes here to make me crazy with his nagging.\"");
@@ -30226,7 +30226,7 @@ void Func0420 object#(0x420) () {
 			say("\"Again, welcome! Might I be able to help thee today?\"");
 			Func094E(DUCIO, "@Do not be so wordy.@");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"Yes, master...\"");
 		} else {
 			say("\"Again, welcome! As thou canst see, Master Ducio is not here at present. Perhaps I can help thee.\"");
@@ -30257,7 +30257,7 @@ void Func0420 object#(0x420) () {
 			case "kidnap" (remove):
 				say("\"I am terribly sorry for thee at this sensitive time. Grief is a natural emotion...\"");
 				var0006 = Func0992(0x0001, "@Our friend is missing -- not DEAD!@", "@Canst thou be of aid?@", false);
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"Thou shouldst bring this matter to the attention of the Rangers. Julia would not let such an injustice stand, I am sure of it.\"");
 				gflags[SHOULD_TELL_JULIA_OF_KIDNAP] = true;
 				fallthrough;
@@ -30268,7 +30268,7 @@ void Func0420 object#(0x420) () {
 					DUCIO->show_npc_face1(0x0000);
 					say("\"Thou art an apprentice, boy! Thou dost not work with me. Thou dost work for me! Understand?\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Yes, master...\"");
 				}
 				say("\"I work with the pottery. The automatons have trouble handling the slip... They generally crush a piece before 'tis fully formed and ready to fire. After firing, they are fine, but before -- that is where I work.\"");
@@ -30299,12 +30299,12 @@ void Func0420 object#(0x420) () {
 				if (Func0942(DUCIO)) {
 					DUCIO->show_npc_face1(0x0000);
 					say("\"Art thou a Mage, Topo?\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"No, master... I am a Mundane apprentice.\"");
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"Then thou dost not know what a Mage may or may not know!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Yes, master...\"");
 				}
 				say("\"Though most of the automatons Torrissio makes are strictly utilitarian, he is capable of making far more sophisticated models... Thou hast only to look at Petra.\"");
@@ -30324,7 +30324,7 @@ void Func0420 object#(0x420) () {
 					DUCIO->show_npc_face1(0x0000);
 					say("\"Enough talk! Back to work!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Yes, master...\"");
 				}
 				fallthrough;
@@ -30335,12 +30335,12 @@ void Func0420 object#(0x420) () {
 				if (Func0942(DUCIO)) {
 					DUCIO->show_npc_face1(0x0000);
 					say("\"How many times have I told thee to stay away from that thief, boy?! Dost thou think stealing is funny?\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Nooo, master...\"");
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"I should hope not! Or I'd break thine head for thee!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Yes, master...\"");
 				} else {
 					say("\"Now, if only someone would turn Ducio into a workbench, it would be the most useful he's ever been!\"");
@@ -30356,7 +30356,7 @@ void Func0420 object#(0x420) () {
 					DUCIO->show_npc_face1(0x0000);
 					say("\"Mud?! Mud! Back to work! Thou must lack for things to do...\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Yes, master... I mean, no, Master...\"");
 				}
 				fallthrough;
@@ -30375,7 +30375,7 @@ void Func0420 object#(0x420) () {
 					DUCIO->show_npc_face1(0x0000);
 					say("\"Who made thee a teacher, apprentice?! Back to work!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Yes, master...\"");
 				}
 				fallthrough;
@@ -30385,7 +30385,7 @@ void Func0420 object#(0x420) () {
 					say("\"Ducio is my Master. He produces the finest goods in all the city! His pottery is famed throughout the other islands as well...\"");
 					DUCIO->show_npc_face1(0x0000);
 					say("\"Enough bragging. Humility. Thou must learn humility.@\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				} else {
 					say("\"If ever I believed in shape changing, I believe it with Ducio! That man is too lazy to be human... a slug, maybe. But a human, no.\"");
 					say("\"If it weren't for me and the automatons, he'd have to join old Mosh out begging!\"");
@@ -30436,7 +30436,7 @@ void Func0420 object#(0x420) () {
 				say("\"Show me thine urn, and I shall unlock its secrets for thee.\"");
 				if (Func0942(DUCIO)) {
 					Func094E(DUCIO, "@Don't be so boastful. Thou art making a\r\n\t\t\t\t\t\tfool of thyself!@");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Yes, master.\"");
 				}
 				if (Func097D(PARTY, 0x0001, 0x0392, QUALITY_ANY, 0x0000)) {
@@ -30445,11 +30445,11 @@ void Func0420 object#(0x420) () {
 					say("\"Thou dost carry the funeral remains of one of\tthe good citizens of Monitor, the warrior city.\"");
 					gflags[KNOWS_URN_ORIGIN] = true;
 					Func094E(DUCIO, "@They'll want it back. Monitorians revere\r\n\t\t\t\t\t\ttheir dead.@");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					add("Monitor");
 				} else {
 					var0006 = Func0992(IOLO, "@But we don't have it with\r\n\t\t\t\t\t\t\t\tus...@", "@I've not brought it with me.@", false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Bring it by, and I shall give thee thine answer.\"");
 				}
 				fallthrough;
@@ -30464,7 +30464,7 @@ void Func0420 object#(0x420) () {
 					DUCIO->show_npc_face1(0x0000);
 					say("\"Since when art thou a guide? Back to work!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Yes, master...\"");
 				}
 				fallthrough;
@@ -30485,7 +30485,7 @@ void Func0420 object#(0x420) () {
 					DUCIO->show_npc_face1(0x0000);
 					say("\"Thou art a fine one to talk! Work! Or I shall rip out thy tongue!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Yes, master...\"");
 				}
 				fallthrough;
@@ -30494,7 +30494,7 @@ void Func0420 object#(0x420) () {
 				say("\"As an expert craftsman, I can tell thee what most materials are, if I can examine the item.\"");
 				if (Func0942(DUCIO)) {
 					Func094E(DUCIO, "@Thou art a braggart. Thou art trying my\r\n\t\t\t\t\t\tpatience!@");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Yes, master.\"");
 				}
 				if (Func097D(PARTY, 0x0001, 0x011D, QUALITY_ANY, 0x0005)) {
@@ -30506,7 +30506,7 @@ void Func0420 object#(0x420) () {
 					add("Mortegro");
 				} else {
 					var0006 = Func0992(IOLO, "@But it's not here...@", "@I've not brought it with me.@", false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Bring it with thee some time and I shall tell thee what it is made of.\"");
 				}
 				fallthrough;
@@ -31131,7 +31131,7 @@ void Func0422 object#(0x422) () {
 			if (!gflags[MET_BOYDON_AS_HEAD]) {
 				var0012 = Func0992(IOLO, "The severed head speaks!", 0x0000, false);
 				if (var0012 != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Yes, I do. Strange, is it not?\"");
 				}
 				gflags[MET_BOYDON_AS_HEAD] = true;
@@ -31166,7 +31166,7 @@ void Func0422 object#(0x422) () {
 					if (!var0005) {
 						var0012 = Func0992(DUPRE, ((("@My first job would be to " + "take a long hot bath. I swear some of those ") + "body parts must have been lying about ") + "Erstam's Manor for some time!@"), 0x0000, false);
 						if (var0012 != AVATAR) {
-							0x0000->set_conversation_slot();
+							UI_set_conversation_slot(0);
 						}
 					}
 					if (var0005) {
@@ -31207,7 +31207,7 @@ void Func0422 object#(0x422) () {
 				if (!var0005) {
 					var0012 = Func0992(IOLO, (("@Thou dost not need to observe. " + "Not when the smell reaches one ") + "first! Phew!@"), 0x0000, false);
 					if (var0012 != AVATAR) {
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					}
 				}
 				add("strange feelings");
@@ -31228,7 +31228,7 @@ void Func0422 object#(0x422) () {
 						gflags[ASK_ERSTAM_IF_BOYDON_CAN_JOIN] = true;
 						var0012 = Func0992(SHAMINO, (((("@Art thou certain about this, " + var0001) + "? Boydon seems game enough, but he is also ") + "extremely gamey. I am surprised thou hast ") + "not noticed this for thyself.@"), 0x0000, false);
 						if (var0012 != AVATAR) {
-							0x0000->set_conversation_slot();
+							UI_set_conversation_slot(0);
 						}
 					} else {
 						say("\"If thou wouldst ever change thy mind, or find thyself in need of a companion, I would be most honored if thou wouldst consider me.\"");
@@ -31237,7 +31237,7 @@ void Func0422 object#(0x422) () {
 							var0012->show_npc_face1(0x0000);
 							say("\"That was a near escape. I could not believe thou wouldst consider having that fellow join us. Just the smell of him is near enough to kill a dragon! He is otherwise a most pleasant fellow, I will concede.\"");
 							UI_remove_npc_face1();
-							0x0000->set_conversation_slot();
+							UI_set_conversation_slot(0);
 						}
 					}
 				}
@@ -31250,7 +31250,7 @@ void Func0422 object#(0x422) () {
 					say("\"That is wonderful news! Lead on!\"");
 					var0012 = Func0992(SHAMINO, (("@Far be it from me to question thy judgment, Avatar. " + "But are thy senses so dulled that thou dost not notice ") + "the potent aroma emanating from this fellow?@"), 0x0000, false);
 					if (var0012 != AVATAR) {
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					}
 					BOYDON->add_to_party();
 					gflags[BOYDON_HAS_BELONGINGS] = true;
@@ -31269,7 +31269,7 @@ void Func0422 object#(0x422) () {
 				Func09B4(BOYDON);
 				var0012 = Func0992(DUPRE, ((("@I am also sad to see him go." * "But in truth, ") + "mine eyes were watering more while he was with us than ") + "when he left!@"), 0x0000, false);
 				if (var0012 != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				add("join");
 				fallthrough;
@@ -31389,10 +31389,10 @@ void Func0423 object#(0x423) () {
 			say("\"Thou dost have the distinct bearing of a Britannian about thee! No doubt thou art some fiend in league with that evil Beast British!\"");
 			say("\"Why, I ought to cast a spell on thee! I could tear thee limb from limb but still leave thee alive! In fact I may do it yet! Now, out with it! Why hast thou come to disturb me here?! Bah! In truth I care not! Begone!\"");
 			var0010 = Func0992(IOLO, "@The password! Avatar, tell him the password!@", 0x0000, false);
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"What is this I hear?\"");
 			Func094E(AVATAR, "@A mutual friend told me to mention Iskatradeeth to thee.@");
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"Iskatradeeth! The password? Then I shall not feed thee to the whales...\"");
 			say("\"I shall speak with thee... for the moment.\"");
 			gflags[TOLD_ERSTAM_PASSWORD] = true;
@@ -31525,12 +31525,12 @@ void Func0423 object#(0x423) () {
 				if (var0002) {
 					VASEL->show_npc_face1(0x0000);
 					say("\"But Master, thou dost know something of teleportation! What about the...?\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Silence thine imbecilic rantings, Vasel! Not another word from thee! Pay my silly servant no mind. He is daft in the head. I know nothing about this teleportation business. I have no secrets to share with thee!\"");
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"So I have given away thy secret? Do not beat me! Please Master! Do not beat me!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				remove("teleportation");
 				fallthrough;
@@ -31846,7 +31846,7 @@ void Func0424 object#(0x424) () {
 				say("\"As a child, I was called a freak because I collected bugs! But when I went to dispose of my collection, I was called grotesque! I was so upset I could barely finish eating! But now I am called by an honorable gentleman's name, given to me by the Master.\"");
 				var0006 = Func0992(IOLO, "@Avatar, talking to this little fellow doth turn my stomach.@", 0x0000, false);
 				if (var0006 != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				add(["freak", "grotesque", "master"]);
 				fallthrough;
@@ -31866,7 +31866,7 @@ void Func0424 object#(0x424) () {
 					ERSTAM->show_npc_face1(0x0000);
 					say("\"They shall be carving that name on thy tombstone if thou dost not return to work!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				add("Who is thy master?");
 				fallthrough;
@@ -31886,7 +31886,7 @@ void Func0424 object#(0x424) () {
 					ERSTAM->show_npc_face1(0x0000);
 					say("\"Thou dost dare to speak that name in my presence, thou cretin?! I said I do not want to hear that name come from thy lips ever again!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Never again! Never again! I promise! Do not beat me, Master!\"");
 				}
 				add("mad mage");
@@ -31906,7 +31906,7 @@ void Func0424 object#(0x424) () {
 				if (var0002) {
 					ERSTAM->show_npc_face1(0x0000);
 					say("\"That is correct, Vasel! Thou shouldst be returning to thine appointed chores!\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					UI_remove_npc_face1();
 				}
 				fallthrough;
@@ -31922,7 +31922,7 @@ void Func0424 object#(0x424) () {
 					ERSTAM->show_npc_face1(0x0000);
 					say("\"Vasel, thou art a fool! I will not tolerate thee giving away my precious secrets! Stop it at once!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Yes, Master... I am sorry... Please do not beat me...!\"");
 				}
 				fallthrough;
@@ -31938,7 +31938,7 @@ void Func0424 object#(0x424) () {
 					ERSTAM->show_npc_face1(0x0000);
 					say("\"Hmph!  A lazy lout he was, as well. We shall not miss him!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				fallthrough;
 
@@ -31948,12 +31948,12 @@ void Func0424 object#(0x424) () {
 					ERSTAM->show_npc_face1(0x0000);
 					say("\"He was another one who was dead from the neck up!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Dost thou not actually mean dead from the neck down?\"");
 					ERSTAM->show_npc_face1(0x0000);
 					say("\"Yes, very well, Vasel. I shall concede that point.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				fallthrough;
 
@@ -31963,7 +31963,7 @@ void Func0424 object#(0x424) () {
 					ERSTAM->show_npc_face1(0x0000);
 					say("\"Enough with this maudlin waste of time! Back to work with thee, Vasel!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				fallthrough;
 
@@ -31973,7 +31973,7 @@ void Func0424 object#(0x424) () {
 					ERSTAM->show_npc_face1(0x0000);
 					say("\"Stop thy whining, Vasel! Back to work with thee!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				add(["Why so much cleaning?", "Why hate cleaning?"]);
 				fallthrough;
@@ -31987,7 +31987,7 @@ void Func0424 object#(0x424) () {
 				var0006 = Func0992(SHAMINO, "@Things?! Squirming things?! What sort of squirming things?! Not snakes!@", 0x0000, false);
 				UI_remove_npc_face1();
 				if (var0006 != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Snakes would be pleasant compared to what thou canst find here...\"");
 				}
 				fallthrough;
@@ -31998,7 +31998,7 @@ void Func0424 object#(0x424) () {
 				var0006 = Func0992(SHAMINO, "@Thou dost mean one must actually touch such a hideous thing?! I simply cannot abide snakes!@", 0x0000, false);
 				UI_remove_npc_face1();
 				if (var0006 != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"'Tis not so hideous. Sometimes I amuse myself, taking the Teeth out and putting them back into the Jawbone...\"");
 				}
 				fallthrough;
@@ -32201,7 +32201,7 @@ void Func0426 object#(0x426) () {
 						DEVRA->show_npc_face1(0x0000);
 						say("\"Ha! Thou wert fishin' for a way to tell thy tales!\" *\"I thought I broke thee of lying when thou wert a lad...\" *\"Mind thee... Captain... I can still warm thy backside if I've a mind to.\"");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"And I do not doubt that she could... and would!\"");
 					}
 					say("\"Until my father disappeared six months ago, I was a Captain in the Monitor Wolf Command.\"");
@@ -32253,7 +32253,7 @@ void Func0426 object#(0x426) () {
 				if (var0003 == true) {
 					DEVRA->show_npc_face1(0x0000);
 					say("\"Aye, indeed! Thou and thy friends didst pry into everything and dug holes from here to Monitor when thou wert young! I never stopped thee... I thought thy father had done the same when he was young.\" *\"But I whaled thee good when I caught thee digging in me garden!\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Aye... I stood up to dinner that night. I remember.\"");
 					UI_remove_npc_face1();
 				}
@@ -32330,7 +32330,7 @@ void Func0426 object#(0x426) () {
 					DEVRA->show_npc_face1(0x0000);
 					say("\"Fine! More like ransom, I'd call it! Thou knowest as well as I, Argus, that Hawk can't pay...\" *\"Not if he doesn't put out from here. And he swore he wouldn't until these storms stop.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				gflags[KNOW_PIKEMEN_HAVE_HAWK] = true;
 				remove("Captain Hawk");
@@ -32369,7 +32369,7 @@ void Func0426 object#(0x426) () {
 					DEVRA->show_npc_face1(0x0000);
 					say("\"Bah! She's no more afraid of those storms than thou art! She follows thee about right well enough, storm or no!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Mother!\"");
 				}
 				say("\"Byrin's here, which is a blessing. 'Tis good to have a gleeman to pass the weary hours between storms. And then there be that new fellow, Miggim. I don't know too much about him... He hath only been here a few days and is rarely out of his room.\"");
@@ -32425,7 +32425,7 @@ void Func0426 object#(0x426) () {
 							DEVRA->show_npc_face1(0x0000);
 							say("\"What a nice son! He compliments me so!\"");
 							UI_remove_npc_face1();
-							0x0000->set_conversation_slot();
+							UI_set_conversation_slot(0);
 							say("\"It IS true.\"");
 						}
 						var0005 = true;
@@ -32686,7 +32686,7 @@ void Func0427 object#(0x427) () {
 				if (var0007 == true) {
 					SHAMINO->show_npc_face1(0x0000);
 					say("\"Wait! What art thou talking about? It seems... But no! It could not be!\" *\"Hast thou any more to tell of this @lost king@? Dost thou know his name?\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Few in truth have ventured within that castle, lord. They fear the wrath of she who dwells there...\" *\"And none have ever returned from the other castle. But the name that is given for the lost king is... Lord Shamino.\"");
 					UI_remove_npc_face1();
 				}
@@ -32694,13 +32694,13 @@ void Func0427 object#(0x427) () {
 					DUPRE->show_npc_face1(0x0000);
 					say("\"It can't be!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				if (var0005 == true) {
 					IOLO->show_npc_face1(0x0000);
 					say("\"There must be some mistake!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				if (gflags[HEARD_BEATRIX_SONG] == false) {
 					say("\"There is a song about the lady.\" ~\"Wouldst thou care to hear it?\"");
@@ -33069,12 +33069,12 @@ void Func0428 object#(0x428) () {
 				if (var0007 == true) {
 					FLINDO->show_npc_face1(0x0000);
 					say("\"Thou art a fine one to talk, thou bilge-water rat!\" ~\"Thou wouldst hold an honest merchant hostage to thy drinking sprees!\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Why, thou overgrown dung beetle!\" ~\"I told ye when I landed that those seas were no safe place ta be with these forsaken storms!\" *\"And thou shouldst suck salt spray for days on end, ye 'honest' merchant!\" ~\"Then thou'd know the difference between a drunk and a man with a thirst!\"");
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"Thou art the braggart that said he could sail through the fires of hell and back!\" ~\"And the only thirst thou hast is for more money, thou thief!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Thief, is it!? When I turned down every offer thou didst make ta make me sail out ta sea again?\" ~\"And I fear nothing the sea can throw at me, thou barnacle!\" *\"But I'll not deal with things born of magics, for I'm no fool and no mage!\" ~\"And I warned ye about saying false ta my name before...\"");
 					if (var0008 == true) {
 						ARGUS->show_npc_face1(0x0000);
@@ -33086,7 +33086,7 @@ void Func0428 object#(0x428) () {
 						say("\"Will you two be quiet!\" ~\"You are loud enough to wake the dead...\" ~\"And I am beginning to lose patience with both of you!\"");
 						UI_remove_npc_face1();
 					}
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"Flindo was the one that bribed the Pikemen into pulling me away from the fight he started!\"");
 				remove("Flindo");
@@ -33183,7 +33183,7 @@ void Func0428 object#(0x428) () {
 						ROCCO->show_npc_face1(0x0000);
 						say("\"Take that thing out of here!\" ~\"My patrons are trying to eat!\"");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						Func097F(PETRA, "@Phew!@", 0x0005);
 						abort;
 					}
@@ -33192,7 +33192,7 @@ void Func0428 object#(0x428) () {
 						var0005,
 						", I have never seen or heard of any such thing in all my\ttravels.\" *\"Might be that thou shouldst ask a scholar, like Fedabiblio the Magister, though.\"");
 					var0014 = Func0992(0x0001, "@But he sent us to thee!@", 0x0000, false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					if (var0014 != AVATAR) {
 						say("\"Then ye be out of luck, matey.\"");
 					}
@@ -33205,7 +33205,7 @@ void Func0428 object#(0x428) () {
 					say("\"Anyone can see 'tis a pinecone...\" ~\"What's thy question?\"");
 					var0014 = Func0992(0x0001, "@But where doth it come from?@", "@Where can I find pinecones?@", false);
 					HAWK->show_npc_face0(0x0000);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"In the northern woods, of course.\" ~\"But thou canst not travel there no more -- no ship will sail there, and the Swamp of\tGorlab will let no man pass!\"");
 				} else {
 					say("\"Pinecones come from the northern woods.\" ~\"Purty things, ain't they? I collect 'em and give 'em to sweet gals like Bucia at the Canton.\"");
@@ -33346,12 +33346,12 @@ void Func0429 object#(0x429) () {
 						ARGUS->show_npc_face1(0x0000);
 						say("\"Aye, mother. And thou wilt tell all who will listen! Do not harass what few customers we do have...\"");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"Hast thou ever heard a boy so rude as to talk to his mother that way?\"");
 						ARGUS->show_npc_face1(0x0000);
 						say("\"I am no boy, mother. For now, I'm the innkeeper here and I'll thank thee to remember that we have a mage staying here now.\"");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					}
 				}
 				remove("Moonshade");
@@ -33391,7 +33391,7 @@ void Func0429 object#(0x429) () {
 				if (!gflags[RETURNED_SLIPPERS]) {
 					say("\"They were hanging on the line to dry when one of those storms hit. When I went out to gather the wash later, there were these huge boots hanging where my slippers had been.\" *\"I'd gladly give these things away, if only I had my slippers back!\"");
 					var0009 = Func0992(0x0001, "@Avatar, those look like thy swamp boots!@", "@Those look like my swamp boots!@", false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"If thou hast my slippers, ",
 						var0000,
 						", I would gladly trade thee these boots for them. I have no great fondness for them other than to keep my feet dry.\"");
@@ -34645,7 +34645,7 @@ void Func042C object#(0x42C) () {
 						var000E->set_schedule_type(WANDER);
 						Func097F(var000E, "@So long...@", 0x0000);
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"We'll be fine without that troublemaker, ",
 							var0001,
 							"!\"");
@@ -34859,7 +34859,7 @@ void Func042C object#(0x42C) () {
 							"! Who is the lucky man?\"");
 						if (!SELINA->get_item_flag(IN_PARTY)) {
 							var0012 = Func0992(0x0001, "@Indeed, young lady!@", "@It isn't mine...@", false);
-							0x0000->set_conversation_slot();
+							UI_set_conversation_slot(0);
 						}
 						say("\"Forgive me, ",
 							var0001,
@@ -34871,7 +34871,7 @@ void Func042C object#(0x42C) () {
 						say("\"I suppose it would be too much to hope that it was for me...\"");
 						if (!SELINA->get_item_flag(IN_PARTY)) {
 							var0012 = Func0992(0x0001, "@Honestly, young lady!@", "@It isn't mine...@", false);
-							0x0000->set_conversation_slot();
+							UI_set_conversation_slot(0);
 						}
 						say("\"Forgive me, ",
 							var0001,
@@ -35302,7 +35302,7 @@ void Func042D object#(0x42D) () {
 			case "Sleeping Bull" (remove):
 				say("\"Well, if thou art so rude to ask...\"");
 				var000B = Func0992(0x0001, "@Thou art the rude one!@", 0x0000, false);
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"Devra and Angus, proprietors of the inn, are my parents. I was born here.\"");
 				fallthrough;
 
@@ -35324,19 +35324,19 @@ void Func042D object#(0x42D) () {
 					DUPRE->show_npc_face1(0x0000);
 					say("\"Retract thy words, or eat them! Thou art speaking about the Avatar!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				if (var0004 == true) {
 					IOLO->show_npc_face1(0x0000);
 					say("\"Take the wind out of this egotistical dog's sails, Avatar!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				if (var0006 == true) {
 					SHAMINO->show_npc_face1(0x0000);
 					say("\"Thou dost tread on dangerous ground with such accusations...\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"Perhaps I was too hasty, ",
 					var0000,
@@ -35880,7 +35880,7 @@ void Func042E object#(0x42E) () {
 				if ((var000E == IOLO) || ((var000E == DUPRE) || (var000E == SHAMINO))) {
 					var000B = "@I had thought we had rid ourselves of that blight." & "@But it seems that it is following in Batlin's footsteps.@";
 					var000E = Func0992(var000E, var000B, 0x0000, false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				remove("Leon");
 				add("Fellowship");
@@ -35900,7 +35900,7 @@ void Func042E object#(0x42E) () {
 						}
 						var000F = Func0992(var000F, ("@Another one who hath fallen prey to the empty promises " + "of The Fellowship, Avatar.@"), 0x0000, false);
 					}
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				remove("Fellowship");
 				fallthrough;
@@ -36173,7 +36173,7 @@ void Func042F object#(0x42F) () {
 					ALYSSAND->show_npc_face1(0x0000);
 					say("\"Father, thou WILT stay indoors when those storms come through town!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Ah... I suppose I must if thou sayest so, my dear.\"");
 				}
 				remove("storms");
@@ -36192,7 +36192,7 @@ void Func042F object#(0x42F) () {
 					ALYSSAND->show_npc_face1(0x0000);
 					say("\"Thou dost need me, father. Thy business is much too complex for thee to run by thyself!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Ah, er... I can do fine without thee, my dear.\"");
 					say("\"Hmmm... what were we discussing, ",
 						var0000,
@@ -36208,7 +36208,7 @@ void Func042F object#(0x42F) () {
 					ALYSSAND->show_npc_face1(0x0000);
 					say("\"Father, that is my business!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Er... I am sorry, daughter.\"");
 				} else {
 					add("Keth");
@@ -36227,7 +36227,7 @@ void Func042F object#(0x42F) () {
 				say("\"Keth was passing proud of that ring. He ordered it specially from someone in Moonshade...\" \"Mine Elissia was from Moonshade. Oh, my poor Elissia... She's gone. Gone.\"");
 				var0003 = Func0992(SHAMINO, "@Art thou daft, old man!@", 0x0000, false);
 				if (var0003 != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					if (UI_get_array_size(UI_get_party_list()) > 0x0002) {
 						var0005 = var0003;
 						while (var0005 == var0003) {
@@ -36239,7 +36239,7 @@ void Func042F object#(0x42F) () {
 						}
 					}
 				}
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"I'm sorry... very sorry, ",
 					var0000,
 					". I still mourn the loss of my wife.\"");
@@ -36266,7 +36266,7 @@ void Func042F object#(0x42F) () {
 				say("\"I went to open my shop the next morning and there was a bundle of food in place of the Filari Alyssand had put there the night before.\"");
 				var0003 = Func0992(0x0001, "@That is what happened to our food!@", 0x0000, false);
 				if (var0003 != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				Func08A9();
 				remove("ring");
@@ -36286,7 +36286,7 @@ void Func042F object#(0x42F) () {
 					say("\"Yes... yes. Those are Filari.\"");
 					say("\"That is as much as the storm took from me...\"");
 					var0003 = Func0992(0x0001, "@These must be his coins then, Avatar!@", 0x0000, false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					if (DELIN->get_schedule_type() == TEND_SHOP) {
 						say("\"I would accept thy money if thou dost wish to purchase something.\"");
 						Func0818();
@@ -36323,10 +36323,10 @@ void Func042F object#(0x42F) () {
 				var0003 = Func0992(DUPRE, 0x0000, 0x0000, false);
 				if ((var0003 != IOLO) && IOLO->npc_nearby()) {
 					var0003 = Func0992(var0003, "@Sounds like he doth have a sense of humor like thine, Iolo!@", 0x0000, false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				} else if (var0003 != AVATAR) {
 					var0003 = Func0992(var0003, "@This man is quite jovial!@", 0x0000, false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				if (var0003 != AVATAR) {
 					if (UI_get_array_size(UI_get_party_list()) > 0x0002) {
@@ -36335,12 +36335,12 @@ void Func042F object#(0x42F) () {
 							var0005 = Func0992(0x0001, 0x0000, 0x0000, false);
 						}
 						if (var0005 != AVATAR) {
-							0x0000->set_conversation_slot();
+							UI_set_conversation_slot(0);
 							say("\"'Tis such an incredible sight. Ho ho hee!\"");
 							var0005 = Func0992(var0005, "@'Tis not very funny if what was hit was a person!@", 0x0000, false);
 						}
 					}
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				remove("two reasons");
 				fallthrough;
@@ -36349,7 +36349,7 @@ void Func042F object#(0x42F) () {
 				say("\"Why wouldst thou want to talk about them? The storms are much more fun...\"");
 				var0003 = Func0992(SHAMINO, "@We do not have time for this!@", 0x0000, false);
 				if (var0003 != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Oh, all right! Don't be testy!\"");
 				}
 				say("\"Thou dost not need to scowl so. Everyone is so serious these days! 'Tis not healthy, thou knowest.\" *\"The Goblins are large, mean and hateful. They prefer to eat humans and they make it unsafe to travel. But I never travel since they took away my son, Freli...\"");
@@ -36366,7 +36366,7 @@ void Func042F object#(0x42F) () {
 				}
 				var0003 = Func0992(IOLO, ("@If thou couldst return to the subject at hand, " + ("Delin, we would be most grateful.@" & "@I fear that my <Check> becoming a bit impatient.@")), 0x0000, false);
 				if (var0003 != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"I wandered off again, didn't I? What was I saying...?\" *\"The Goblins have killed our healer, and now we have to make do with a horticulturist. Imagine that! And, of course, the Goblins have attacked the Fawn Tower.\"");
 				remove("unsafe");
@@ -36390,13 +36390,13 @@ void Func042F object#(0x42F) () {
 					var0003->show_npc_face1(0x0000);
 					say("\"Our friend Iolo shares thy grief, milord. His wife is lost somewhere in these lands.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"For thy sake, I hope that she doth live, stranger Iolo.\"");
 					IOLO->show_npc_face1(0x0000);
 					say("\"If Gwenno were lost from me forever, perhaps I too would be a little confused.\"");
 					say("\"Condolences to thee, Delin, and apologies if we have been unfeeling.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"They say that I shall feel better soon...\"");
 					say("\"But I don't believe it.\"");
 				}
@@ -36488,7 +36488,7 @@ void Func042F object#(0x42F) () {
 			case "Batlin":
 				say("\"Bats? What bats?\"");
 				var0003 = Func0992(0x0001, "@Not bats! B-A-T-L-I-N!@", "@Not bats! B-A-T-L-I-N!@", false);
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"No need to shout. I'm not deaf.\"");
 				say("\"Batlin... ah, I remember he came here asking about some sort of rock sculpture or something. Black rock...\"");
 				say("\"I told him I am a simple merchant. I do not carry such luxuries. I directed him to Monitor. There is a sculptor there.\"");
@@ -36521,7 +36521,7 @@ void Func042F object#(0x42F) () {
 						ALYSSAND->show_npc_face1(0x0000);
 						say("\"I am here, father! Tell me how Freli fares. Hath he become a Mage?\"");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"A moment, a moment... It will take me a moment. His writing is terrible!\"");
 					}
 					say("\"Oh, for this piece of good work, ",
@@ -37442,7 +37442,7 @@ void Func0433 object#(0x433) () {
 					KYLISTA->show_npc_face1(0x0000);
 					say("\"Close thy trap, Voldin, or I'll scratch thine eyes out!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Such a clever threat, girl! Dost thou not realize that thou dost live at my pleasure?\"");
 					if (!UI_is_pc_female()) {
 						say("\"Fear not -- so long as the nights remain cold, I shall have a use for thee...\"");
@@ -37876,7 +37876,7 @@ void Func0434 object#(0x434) () {
 					OLON->show_npc_face1(0x0000);
 					say("\"Aye! An' the Lady be sweet on him, too!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Thou shouldst not speak of the Lady so!\"");
 				}
 				var0003 = Func09AE(var0003);
@@ -38096,7 +38096,7 @@ void Func0434 object#(0x434) () {
 				}
 				if (var000D == []) {
 					var000E = Func0992(0x0001, (("@But we have no strange objects to ask about, " + var0001) + ".@"), 0x0000, false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"If thou dost think of anything, let me know!\"");
 				} else {
 					say("\"What sort of items art thou inquiring about?\"");
@@ -38141,7 +38141,7 @@ void Func0434 object#(0x434) () {
 							var0001,
 							"? Showing thy stockings about like that...\"");
 						var000E = Func0992(0x0001, "@They are not hers!@", "@They are not mine!@", false);
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"Oh... They are fine things, not what thou wouldst find among the women of fisher-folk.\"");
 					} else {
 						say("\"These are fine things, not what thou wouldst find among the women of fisher-folk.\"");
@@ -38155,7 +38155,7 @@ void Func0434 object#(0x434) () {
 						OLON->show_npc_face1(0x0000);
 						say("\"Aye! That be the truth! No woman would have him!\"");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					}
 					say("\"Seek thou Alyssand. She makes stockings. She might be able to help thee.\"");
 				} else {
@@ -38179,7 +38179,7 @@ void Func0434 object#(0x434) () {
 				if (Func097D(PARTY, 0x0001, 0x0392, QUALITY_ANY, 0x0000)) {
 					say("\"Why art thou carrying a dead person with thee? Was it someone kin to thee?\"");
 					var000E = Func0992(0x0001, "@What?!@", "@What?!@", false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Thou didst not know? That urn holds the ashes of one of Monitor's dead warriors.\"");
 					say("\"I am sure they would appreciate its return, ",
 						var0001,
@@ -38244,7 +38244,7 @@ void Func0434 object#(0x434) () {
 						OLON->show_npc_face1(0x0000);
 						say("\"Aye, sure as ships sail. That be Alyssand's ring all right. Keth showed it to me enough times, I should know.\"");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					}
 					say("\"Thou shouldst find Alyssand and give to her the ring, ",
 						var0001,
@@ -38494,7 +38494,7 @@ void Func0434 object#(0x434) () {
 							var0001,
 							", flaunting personal garments about like that!\"");
 						var000E = Func0992(0x0001, "@They are not hers!@", "@They are not mine!@", false);
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"Well... uh... these are made right here, by young Alyssand.\"");
 					} else {
 						say("\"These are stockings thou mayest find our fisher women wearing. They are made right here, by young Alyssand.\"");
@@ -38507,7 +38507,7 @@ void Func0434 object#(0x434) () {
 							var0001,
 							", Jendon knows nothing of the fairer sex!\"");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					}
 					say("\"Seek another woman to help thee... Alyssand, perhaps. She makes stockings.\"");
 				} else {
@@ -38534,7 +38534,7 @@ void Func0434 object#(0x434) () {
 					OLON->show_npc_face1(0x0000);
 					say("\"Thou dost speak in error, friend. Remember, thou hast a customer in Monitor...\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Aye. The innkeeper in Monitor doth order Fawnish ale from time to time, but I know not for whom.\"");
 				}
 				say("\"Wouldst thou like more Fawnish ale?\"");
@@ -39126,7 +39126,7 @@ void Func0436 object#(0x436) () {
 					VOLDIN->show_npc_face1(0x0000);
 					say("\"Of course we did, Priestess. Men have always had the advantage over the weaker sex...\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Be still, Voldin. Thou hast been brought low, even as I have.\"");
 				}
 				say("\"How could I have been so naive? I was never part of their plans, but only a tool.\"");
@@ -39186,7 +39186,7 @@ void Func0436 object#(0x436) () {
 					IOLO->show_npc_face1(0x0000);
 					say("\"I would say that she feels rather strongly about this, Avatar.\tBut what she is proposing to stop the storms seems a bit extreme.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				add(["Leon", "Fellowship"]);
 				fallthrough;
@@ -39237,7 +39237,7 @@ void Func0436 object#(0x436) () {
 							VOLDIN->show_npc_face1(0x0000);
 							say("\"Liar! Thou didst enjoy thy role as Priestess, using thy sensual powers over men.\"");
 							UI_remove_npc_face1();
-							0x0000->set_conversation_slot();
+							UI_set_conversation_slot(0);
 							say("\"Oh, ",
 								var0002,
 								"! Thou must rescue me from the presence of this evil man!\"");
@@ -39274,7 +39274,7 @@ void Func0436 object#(0x436) () {
 					if (Func0955() == true) {
 						var000A = Func0992(0x0001, "@But what about thine own armour, Avatar?@", "@But what of mine own armour?@", false);
 						if (var000A != AVATAR) {
-							0x0000->set_conversation_slot();
+							UI_set_conversation_slot(0);
 						}
 						say("\"Oh, was that strange armour that appeared in my bedchamber thine?\"");
 						say("\"I cannot recall what I did with it. Perhaps I still have it... Perhaps thou wilt come by some evening and I will look for it.\"");
@@ -39289,7 +39289,7 @@ void Func0436 object#(0x436) () {
 					say("\"Thou hast seen the Armour of Beauty! Oh, will the heavens never smile upon Fawn again?. I would that thou hadst brought it with thee.\"");
 					var000A = Func0992(0x0001, "@But what about thine own armour, Avatar?@", "@But what of mine own armour?@", false);
 					if (var000A != AVATAR) {
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					}
 					say("\"Oh, was that strange armour that appeared in my bedchamber thine?\"");
 					say("\"I cannot recall what I did with it. Perhaps I still have it... Perhaps thou wilt come by some evening and I will look for it.\"");
@@ -39531,13 +39531,13 @@ void Func0437 object#(0x437) () {
 					IOLO->show_npc_face1(0x0000);
 					say("\"Thou art too kind, Lady! I thank thee, and shall give it to Gwenno upon our reunion!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"This calls for a toast. Hail to Beauty!\"");
 					var0015 = Func0992(0x0001, "@To Beauty!@", "@To Beauty!@", false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"And to love! Let us drink to the virtues of romance and bliss!\"");
 					var0015 = Func0992(0x0001, "@To bliss!@", "@To bliss!@", false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"And to good rulers, such as beloved Queen Fawn, who founded our fine society.\"");
 					var0015 = false;
 					var0016 = UI_get_party_list();
@@ -39555,12 +39555,12 @@ void Func0437 object#(0x437) () {
 					say("\"Thou must not forget our distant liege, Lady Yelinda. All hail Lord British and the glory that is Britannia!\"");
 					UI_remove_npc_face1();
 					UI_play_music(0x001E, Func09A0(0x0005, 0x0001));
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Oh, my!\"");
 					JORVIN->show_npc_face1(0x0000);
 					say("\"Milady, this one is allied with that foul fiend, Beast British!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"This is blasphemy! Jorvin, lock that criminal away and call for a speedy trial. Let this intruder be executed, even as Beast British slew our forefathers during his conquest of Sosaria!\"");
 					UI_remove_npc_face0();
 					JORVIN->set_schedule_type(WAIT);
@@ -40196,7 +40196,7 @@ void Func043A object#(0x43A) () {
 			IOLO->show_npc_face1(0x0000);
 			say("\"Yes, I am, though as of late I do not feel the music within me.\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"I beg of thee, canst thou indulge me for but one song? The sinister thunder doth linger in mine ears.\"");
 			say("\"A few strums from thy strings may bring comfort to this sorrowful town...\"");
 			IOLO->show_npc_face1(0x0000);
@@ -40293,16 +40293,16 @@ void Func043A object#(0x43A) () {
 				if (var0001 == true) {
 					JENDON->show_npc_face1(0x0000);
 					say("\"Oh, not that ale tale again, Olon! If thou drivest away what customers I have left, thou canst find somewhere else ta drink.\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Quit thy complainin', Jendon. I'm the only reason anyone comes in here now, and thou knowest it! They come ta hear me tales...\"");
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"Be that as may be, Olon. 'Tis not some bar maid that thou art speakin' with. Some of thy tales are not fit for any but a sailor's ears.\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"What objection hast thou of this tale?\"");
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					if (var0003) {
 						say("\"None ta this one, though it is a bigger tale than the story about the flying whale. But I know thee! Let thee start on one tale and thou must tell them all. And I'll not have thee frightening the lady.\"");
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						if (gflags[HAVE_WOLF_TATTOO]) {
 							say("\"Frighten a saucy thing that wears a tattoo? Now where was I? Oh, yes...\"");
 						} else {
@@ -40311,7 +40311,7 @@ void Func043A object#(0x43A) () {
 						UI_remove_npc_face1();
 					} else {
 						say("\"None ta this one, though it is a bigger tale than the story about the flying whale. But I know thee! Let thee start on one tale and thou must tell them all. And I'll not have thee makin' a payin' customer sick wit' thy stories.\"");
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"Turn the stomach of so bold a lad? Now where was I? Oh, yes...\"");
 						UI_remove_npc_face1();
 					}
@@ -40326,15 +40326,15 @@ void Func043A object#(0x43A) () {
 				if (var0001 == true) {
 					JENDON->show_npc_face1(0x0000);
 					say("\"She's a Horticulturist, Olon. Thou shouldst only give facts...\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					if (var0003) {
 						say("\"Thou wouldst have me say such things in front of a lady? Weren't thou the one what was tellin' me ta mind me manners?\"");
 					} else {
 						say("\"Thou wouldst have me say such things of a lady? Weren't thou the one what was tellin' me ta mind me manners?\"");
 					}
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"Oh, I surrender!\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"An' him worried about what's proper an' what's not...\"");
 					UI_remove_npc_face1();
 				}
@@ -40343,17 +40343,17 @@ void Func043A object#(0x43A) () {
 					JENDON->show_npc_face1(0x0000);
 					if (var0003) {
 						say("\"Don't rant on about the goblins, Olon! 'Tis not a fit subject ta discuss before a lady.\"");
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"Go back ta washin' the glasses, Jendon! Thou art no judge of what ta say in front of ladies.\"");
 					} else {
 						say("\"Don't rant on about the goblins, Olon! Thou canst turn the stomach of a bilge rat when thou dost have a mind to.\"");
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"Go back ta washin' the glasses, Jendon! Thou art no judge of what a darin' adventurer like this 'ere lad might like ta hear.\"");
 					}
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"I'd throw thee out, if thou weren't mine only steady customer. I would.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"Wouldst thou care to spend a while longer listenin' to another story?\"");
 				if (Func0955() == true) {
@@ -40377,15 +40377,15 @@ void Func043A object#(0x43A) () {
 				if (var0001 == true) {
 					JENDON->show_npc_face1(0x0000);
 					say("\"Olon, even I don't want ta hear that one... ever again!\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Thou always didst lack a backbone, Jendon! Go ta Temple and soothe thy nerves with the Oracle's empty mouthings!\"");
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"Now 'tis blasphemy, is it, Olon? I would never have guessed thou hadst been taken in by that lot of fools.\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Thou art a fine one ta be talkin' about being taken in, Jendon. An' I've said so often enough.\"");
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"That's all thou ever dost, Olon -- talk.\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					add(["Temple", "Oracle"]);
 					UI_remove_npc_face1();
 				}
@@ -40409,7 +40409,7 @@ void Func043A object#(0x43A) () {
 					JENDON->show_npc_face1(0x0000);
 					if (var0003) {
 						say("\"I'll not stay here and listen ta this again! Lady, I see that thou art armed. If he doth offend thee, run him through. I'll make no complaint.\" *\"If thou hast need of me, I shall be in back.\"");
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"Perhaps he is right. Perhaps this tale is too rough for thy pretty ears. Dost thou wish me ta tell another tale instead?\"");
 						if (Func0955() == true) {
 							say("\"Then perhaps thou wouldst prefer ta hear a tale of a timeless love story that crosses the frozen wastes.\"");
@@ -40420,7 +40420,7 @@ void Func043A object#(0x43A) () {
 						UI_remove_npc_face1();
 					} else {
 						say("\"I'll not stay here and listen ta this again! Milord, I see that thou art armed. If he doth offend thee, run him through. I'll make no complaint.\" *\"If thou hast need of me, I shall be in back.\"");
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"Perhaps he is right. Perhaps this tale is too brutal even for thee. Dost thou wish me ta tell another tale instead?\"");
 						if (Func0955() == true) {
 							say("\"Then perhaps thou wouldst prefer ta hear a tale of a timeless love story that crosses the frozen wastes.\"");
@@ -40443,15 +40443,15 @@ void Func043A object#(0x43A) () {
 				if (var0001 == true) {
 					JENDON->show_npc_face1(0x0000);
 					say("\"A love story about ice dragons! Now I've heard everything, even from thee, Olon.\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Thou wouldst not recognize a love story if it hit thee between the eyes, Jendon.\"");
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"So sayest thou, Olon. I think Alyssand's story qualifies well enough.\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Shows what thou knowest, Jendon. We bards would call that a tragedy.\"");
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"Thou wouldst style thyself a bard now? Perhaps I should bow.\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Do that, and quiet! Thou hast interrupted all my tales so far. 'Tis rude.\"");
 					add("Alyssand");
 					UI_remove_npc_face1();
@@ -40463,7 +40463,7 @@ void Func043A object#(0x43A) () {
 					JENDON->show_npc_face1(0x0000);
 					say("\"Now that's truly touchin', Olon. Thou surely hast brought a tear ta mine eye, thou hast.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				remove("love story");
 				fallthrough;
@@ -40474,13 +40474,13 @@ void Func043A object#(0x43A) () {
 					JENDON->show_npc_face1(0x0000);
 					say("\"'Tis hard ta find many who have borne more, I'll wager.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"Her mother died after givin' birth ta Delin's only son. Never saw a man take it harder. He near ta lost his mind. Then he did go a little crazy after the Magister took young Freli away during the annual testing.\" *\"Alyssand hath looked after him all alone ever since, helpin' mind the store and doin' her weavin'. Then she met Keth.\"");
 				if (var0001 == true) {
 					JENDON->show_npc_face1(0x0000);
 					say("\"A sturdy lad, Keth was. 'Twere a pity ta lose him.\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"I'll thank thee to keep thy comments to thyself, Jendon. Thou art ruining my tale.\"");
 					UI_remove_npc_face1();
 				}
@@ -40489,18 +40489,18 @@ void Func043A object#(0x43A) () {
 					JENDON->show_npc_face1(0x0000);
 					say("\"Cost him a pretty penny, I'll wager.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"Then one day Keth didn't run fast enough ta shelter when one of those cursed storms hit. No one hath seen him since.\" *\"Until she lost her engagement ring ta another one of those storms here recently, Alyssand swore that Keth would return. She's a changed woman now.\"");
 				if (var0001 == true) {
 					JENDON->show_npc_face1(0x0000);
 					say("\"Sounds like a love story to me...\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"An' I suppose that thou considerest the island of cats a tragedy then?\"");
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"No, I'd call it an ale tale.. made from the fumes of mine ale!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				remove("Alyssand");
 				add("island of cats");
@@ -40515,7 +40515,7 @@ void Func043A object#(0x43A) () {
 					JENDON->show_npc_face1(0x0000);
 					say("\"'Tis it, sure as the tide comes in! Keth flashed it around enough, I'd recognize it anywhere.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				Func08A9();
 				remove("engagement ring");
@@ -40527,7 +40527,7 @@ void Func043A object#(0x43A) () {
 					JENDON->show_npc_face1(0x0000);
 					say("\"Now that be truly difficult, too.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"I think that thou wouldst benefit from the wisdom of an honest tradesman. Perhaps it would divert thy mind from a foolish girl's dreams.\"");
 				remove(["I don't remember.", "I was tricked.", "I am Monitor's Champion."]);
@@ -40555,7 +40555,7 @@ void Func043A object#(0x43A) () {
 						JENDON->show_npc_face1(0x0000);
 						say("\"Thou canst blaspheme all thou likest, Olon, I was there and heard it!\"");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					}
 					add(["Temple", "Oracle", "Kylista"]);
 				}
@@ -40603,12 +40603,12 @@ void Func043A object#(0x43A) () {
 				if (var0001 == true) {
 					JENDON->show_npc_face1(0x0000);
 					say("\"Listen ta him, wilt thou? Art thou sayin' that thou art Fawn's bard now, Olon?\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Our 'ficial one went down with the Delyssia. Reckon I'm all there is now.\"");
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"I'd better start washin' more mugs, then. I may not have enough ta last, when word o' this gets out... If thou art not thrown out of town for thy braggin' first!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"Long ago, when the mountains were young, this land was ruled by two rival kings. One of those kings was called the King of the White Dragon.\"");
 				say("\"The King of the White Dragon drove away his rival king, but he could not enjoy his victory, for the goblins were come. Hordes and hordes of goblins... and there wasn't nothin' the old King of the White Dragon could do ta hold them back.\"");
@@ -40620,7 +40620,7 @@ void Func043A object#(0x43A) () {
 						JENDON->show_npc_face1(0x0000);
 						say("\"I'm sure that thou hast taken his mind off his problems, for sure, Olon. Why worry about goblins when thou canst worry about the King of the White Dragon?\"");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					}
 				}
 				remove("King of the White Dragon");
@@ -40632,7 +40632,7 @@ void Func043A object#(0x43A) () {
 				if (var0001 == true) {
 					JENDON->show_npc_face1(0x0000);
 					say("\"Oh, not again, Olon! If thou drivest away what customers I have left, thou canst find somewhere else ta drink.\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Cease thy complainin', Jendon. I'm the only reason anyone comes in here now, and thou knowest it! They come ta hear me tales...\" Now where was I? Oh, yes...\"");
 					UI_remove_npc_face1();
 				}
@@ -40647,23 +40647,23 @@ void Func043A object#(0x43A) () {
 				if (var0001 == true) {
 					JENDON->show_npc_face1(0x0000);
 					say("\"She's a Hor-ti-culturist, Olon. Thou shouldst only give facts...\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Thou wouldst have me say such things in front of a stranger? 'Tisn't polite ta speak of a lady in such a fashion, Jendon.\"");
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"Oh, I surrender!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"She's what passes for a healer in these forsaken parts ever since the last healer was et by them goblins.\"");
 				if (var0001 == true) {
 					JENDON->show_npc_face1(0x0000);
 					say("\"Don't rant on about the goblins, Olon! `Tis not a subject this young lord wishes ta hear right now, I'm certain.\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Return ta washin' the glasses, Jendon! Thou art no judge of what a warrior wishes ta hear.\"");
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"And thou art? I'd throw thee out, if thou weren't mine only steady customer. I would.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				remove("Delphynia");
 				fallthrough;
@@ -40673,15 +40673,15 @@ void Func043A object#(0x43A) () {
 				if (var0001 == true) {
 					JENDON->show_npc_face1(0x0000);
 					say("\"A love story about ice dragons! Now I've heard everything, even from thee, Olon.\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Thou wouldst not recognize a love story if it hit thee between the eyes, Jendon.\"");
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"So sayest thou, Olon. I think Alyssand's story qualifies well enough.\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Shows what thou knowest, Jendon. We bards would call that a tragedy.\"");
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"Perhaps I should bow.\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Do that, and quiet! Thou art rude to interrupt.\"");
 					add("Alyssand");
 					UI_remove_npc_face1();
@@ -40693,7 +40693,7 @@ void Func043A object#(0x43A) () {
 					JENDON->show_npc_face1(0x0000);
 					say("\"Now that's truly touchin', Olon. Thou surely hast brought a tear ta mine eye, thou hast.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				remove("love story");
 				add("Alyssand");
@@ -40705,14 +40705,14 @@ void Func043A object#(0x43A) () {
 					JENDON->show_npc_face1(0x0000);
 					say("\"'Tis hard ta find many who have borne more, I'll wager.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"Her mother died after givin' birth ta Delin's only son. Never saw a man take it harder. He near ta lost his mind.\"");
 				say("\"Then he did go a little crazy after the Magister took young Freli away during the annual testing.\" *\"Alyssand hath looked after him all alone ever since, helpin' mind the store and doin' her weavin'. Then she met Keth.\"");
 				if (var0001 == true) {
 					JENDON->show_npc_face1(0x0000);
 					say("\"A sturdy lad, Keth was. 'Twere a pity ta lose him.\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"I'll thank thee ta keep thy comments ta thyself, Jendon. Thou art ruining my tale.\"");
 					UI_remove_npc_face1();
 				}
@@ -40721,14 +40721,14 @@ void Func043A object#(0x43A) () {
 					JENDON->show_npc_face1(0x0000);
 					say("\"Cost him a pretty penny, I'll wager.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"Then one day Keth didn't run fast enough ta shelter when one of those cursed storms hit. No one hath seen him since.\"");
 				say("\"Until she lost her engagement ring ta another one of those storms here recently, Alyssand swore that Keth would return. She's a changed woman now.\"");
 				if (var0001 == true) {
 					JENDON->show_npc_face1(0x0000);
 					say("\"Sounds like a love story ta me...\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Goes ta show what thou knowest!\"");
 					UI_remove_npc_face1();
 				}
@@ -40744,7 +40744,7 @@ void Func043A object#(0x43A) () {
 					JENDON->show_npc_face1(0x0000);
 					say("\"'Tis it, sure as the tide comes in! Keth flashed it around enough, I'd recognize it anywhere.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				remove("engagement ring");
 				fallthrough;
@@ -40757,7 +40757,7 @@ void Func043A object#(0x43A) () {
 						say("\"I'd advise against it, lady. There aren't many outside Fawn that care for its taste, I've found. I only export a bit ta Monitor now.\"");
 						add("Monitor");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					}
 					say("\"If thou wishest Fawn ale, it only comes in brown bottles.\"");
 				} else {
@@ -40767,7 +40767,7 @@ void Func043A object#(0x43A) () {
 						say("\"Be careful, Olon. There aren't many outside Fawn that care for its taste. I only export a bit ta Monitor now.\"");
 						add("Monitor");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					}
 					say("\"If thou wishest Fawn ale, it comes only in brown bottles.\"");
 				}
@@ -40784,7 +40784,7 @@ void Func043A object#(0x43A) () {
 							if (PARTY->count_objects(0x03B4, QUALITY_ANY, FRAME_ANY) > 0x0009) {
 								var0007 = UI_remove_party_items(0x000A, 0x03B4, QUALITY_ANY, FRAME_ANY, true);
 							} else {
-								0x0000->set_conversation_slot();
+								UI_set_conversation_slot(0);
 								say("\"Not enough filari, no drink. No drink, no stories. Well, thou knowest where ta find me, if thou dost wish ta hear me stories.\"");
 								Func097F(OLON, "@I'm thirsty...@", 0x0000);
 								OLON->set_schedule_type(EAT_AT_INN);
@@ -40796,7 +40796,7 @@ void Func043A object#(0x43A) () {
 							OLON->set_schedule_type(EAT_AT_INN);
 							abort;
 						}
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					} else {
 						say("\"Jendon doth not seem ta be around right now. Perhaps thou couldst buy that drink when he comes back. An' then me throat won't be too dry ta tell thee those stories.\"");
 					}
@@ -40838,7 +40838,7 @@ void Func043A object#(0x43A) () {
 				if (var0001 == true) {
 					JENDON->show_npc_face1(0x0000);
 					say("\"They'll not cook thee, Olon. Thou art already pickled!\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"An' they'll not eat thy tongue, either... 'Tis too tough from overuse!\"");
 					UI_remove_npc_face1();
 				}
@@ -40850,12 +40850,12 @@ void Func043A object#(0x43A) () {
 				if (var0001 == true) {
 					JENDON->show_npc_face1(0x0000);
 					say("\"How wouldst thou know, Olon? Thou hast never seen one, I'll wager!\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Nor would I like ta... Thou art enough ta scare a man half ta death!\"");
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"If thou weren't mine only steady customer, Olon, I'd throw thee out on thine ear! I would.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"'Tis true, upon my sire's grave I swear it! They'll eat their own -- as well as outsiders!\" *\"If thou dost travel inta the northern wastes, thou art risking ending thy life in the cookpot of a fur-covered goblin!\"");
 				remove("Gwani");
@@ -40867,7 +40867,7 @@ void Func043A object#(0x43A) () {
 					JENDON->show_npc_face1(0x0000);
 					say("\"Perhaps 'twould be best if thou didst not ask him about such things right now. He's no use like this.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"Can't put a sail on a cart and expect it ta take thee out ta sea and back again! Drowned!\" *\"Good men all... gone ta the bottom o' the sea! An' I should 'ave been with them! They'll come for me. I know they will! Down to the bottom o' the sea!\"");
 				if (var0001 == true) {
@@ -40876,7 +40876,7 @@ void Func043A object#(0x43A) () {
 						var0000,
 						". He'll have had a drink or two ta calm him down. Then thou canst have him tell his tales.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				gflags[OLON_SPOKE_STORMS] = true;
 				gflags[OLON_NEEDS_DRINK] = true;
@@ -41032,7 +41032,7 @@ void Func043B object#(0x43B) () {
 				say("\"How can thine heart be so hard, Avatar? Thou wouldst search every corner of the land and sea to help me find Gwenno.\"");
 				say("\"Wilt thou reconsider and aid this poor soul's search for love?\"");
 				if (Func0955() == true) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"There may be hope after all... Here is the scroll.\"");
 					var0008 = Func099B(AVATAR, 0x0001, 0x031D, 0x0004, 0x0005, false, true);
 					say("\"Take this to Delphynia, the herbalist. Thou mayest find her at the greenhouse.\"");
@@ -41050,7 +41050,7 @@ void Func043B object#(0x43B) () {
 				}
 				say("\"I am sure that thou hast thy reasons, Avatar. But I am sorely disappointed.\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"The Avatar! Forgive me... unlike these local folk, I know whom thou art!\"");
 				say("\"I am certain that thy business is far more urgent.\"");
 				gflags[REFUSED_RUGGS_LETTER] = true;
@@ -41067,19 +41067,19 @@ void Func043B object#(0x43B) () {
 				DUPRE->show_npc_face1(0x0000);
 				say("\"Have a drink or two... Thou wilt soon forget her.\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 			}
 			if (var0005 == true) {
 				SHAMINO->show_npc_face1(0x0000);
 				say("\"Oh, no... Why is it that everyone expects the Avatar to help with their love life?\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"Why... I...\"");
 				if (var0003 == true) {
 					IOLO->show_npc_face1(0x0000);
 					say("\"Thou wouldst not be so hard, Shamino, if thou hadst lost thy love!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 			}
 			gflags[REFUSED_RUGGS_LETTER] = true;
@@ -41157,7 +41157,7 @@ void Func043B object#(0x43B) () {
 				say("\"He is a pious and worthy man, for all that he doth have strange companions.\"");
 				var0015 = Func0992(0x0001, "@His description doth not much fit the Batlin we know, doth it, Avatar?@", 0x0000, false);
 				if (var0015 != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				remove("Batlin");
 				add("companions");
@@ -42016,7 +42016,7 @@ void Func043E object#(0x43E) () {
 				say("\"He travelled with many companions, including a tall, cloaked stranger.\"");
 				say("\"On the night that Batlin the Sage left town, someone stole an ancient relic from mine home. I suspect that he was the thief!\"");
 				var0003 = Func0992(DUPRE, "@Batlin! Why, he is our enemy, too!@", 0x0000, false);
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				gflags[ASKED_ANDRAL_ABOUT_ROBBERY] = true;
 				UI_push_answers();
 				add(["Batlin", "companions", "artifact", "nothing more"]);
@@ -42057,7 +42057,7 @@ void Func043E object#(0x43E) () {
 				say("\"To be honest, we were afraid to discard it. It had a demonic appearance, being shaped like a serpent, and composed of a dark rock never before seen.\"");
 				var0003 = Func0992(0x0001, "@Perhaps blackrock, Avatar...@", 0x0000, false);
 				if (var0003 != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"We hated the object, yet we were afraid to be parted from it. I cannot explain this. But it was so.\"");
 				add(["demonic appearance", "serpent-shaped"]);
@@ -42074,10 +42074,10 @@ void Func043E object#(0x43E) () {
 				say("\"'Tis not uncommon to see the symbol of the serpent among the ruins, yet I have never seen before or since any such Rock Serpent.\"");
 				var0003 = Func0992(SHAMINO, "@Couldst thou describe the curvings of the serpent?@", 0x0000, false);
 				if (var0003 != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Umm... why, the head curved to the right, and the body was most sinuous. Why dost thou ask?\"");
 					var0003 = Func0992(var0003, "@Avatar, this man's stolen relic was a\tperfect match for the one thou lost in the Storm, except that it faced the opposite way!", 0x0000, false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				fallthrough;
 
@@ -42433,7 +42433,7 @@ void Func043F object#(0x43F) () {
 				var0007 = true;
 				say("\"Thou dost? An Urn of the Dead? How didst thou chance upon it? Perhaps thou hast slain the thieves who insulted mine ancestor's soul!\"");
 				var0010 = Func0992(IOLO, "@Why... um... we found it, milord.@", "@I found it.@", false);
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"Might I examine it, please?\"");
 				if (Func0955()) {
 					if (Func097D(PARTY, 0x0001, 0x0392, 0x00FF, 0x0000)) {
@@ -42668,7 +42668,7 @@ void Func043F object#(0x43F) () {
 			case "know traitor" (remove):
 				say("\"What? Thou dost know who did betray Astrid to the Goblins! How dost thou know? Tell me now!\"");
 				var0010 = Func0992(SHAMINO, "@We found evidence among the Goblins. Documents signed by\r\n\t\t\t\t\t\t\tthe traitor!@", "@I found evidence in the Goblin camp.@", false);
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"May I see this evidence?\"");
 				if (Func097D(PARTY, 0x0001, 0x031D, 0x0078, FRAME_ANY) || (Func097D(PARTY, 0x0001, 0x031D, 0x0079, FRAME_ANY) || Func097D(PARTY, 0x0001, 0x031D, 0x007A, FRAME_ANY))) {
 					if (((Func097D(PARTY, 0x0001, 0x031D, 0x0078, FRAME_ANY) + Func097D(PARTY, 0x0001, 0x031D, 0x0079, FRAME_ANY)) + Func097D(PARTY, 0x0001, 0x031D, 0x007A, FRAME_ANY)) > 0x0001) {
@@ -42676,7 +42676,7 @@ void Func043F object#(0x43F) () {
 					} else {
 						var0010 = Func0992(IOLO, "@Here it is.@", "@Here it is.@", false);
 					}
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"What is this scroll? By the blazes of Furnace! This is proof!\"");
 					if (Func097D(PARTY, 0x0001, 0x031D, 0x0078, FRAME_ANY)) {
 						say("\"This is proof that Lord Marsten hath been conspiring with the Goblins! That old goat!\"");
@@ -42745,7 +42745,7 @@ void Func043F object#(0x43F) () {
 					abort;
 				}
 				var0010 = Func0992(SHAMINO, "@We did not bring it with us.@", "@I did not bring it.@", false);
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"Until thou dost bring proof, no one will believe thee, including myself!\"");
 				Func097F(CALADIN, "@Bring proof!@", 0x0000);
 				abort;
@@ -43125,7 +43125,7 @@ void Func0441 object#(0x441) () {
 						}
 						var000B = Func0992(IOLO, "@The Avatar is quite skilled at killing large animals.@", 0x0000, false);
 						if (var000B != AVATAR) {
-							0x0000->set_conversation_slot();
+							UI_set_conversation_slot(0);
 							UI_remove_npc_face1();
 						}
 						say("\"Return in one day. I shall have thy cloak by then.\"");
@@ -43134,7 +43134,7 @@ void Func0441 object#(0x441) () {
 					} else {
 						var000B = Func0992(0x0001, "@But we do not have the body with us.@", "@I do not have the wolf's body.@", false);
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"I cannot make thee a cloak without an animal's skin!\"");
 						say("\"Return to Knight's Test, and bring me the slain wolf. Or else thou canst not achieve thy knighthood!\"");
 						Func097F(CELLIA, "@Go!@", 0x0000);
@@ -43148,7 +43148,7 @@ void Func0441 object#(0x441) () {
 					say("\"It is not time! I must have the full 24 hours!\"");
 					var000B = Func0992(0x0001, (("@Take care, " + var0003) + ". She hath a very sharp knife!@"), 0x0000, false);
 					if (var000B != AVATAR) {
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						UI_remove_npc_face1();
 						say("\"And I know exactly where and how to use it...\"");
 					}
@@ -43159,7 +43159,7 @@ void Func0441 object#(0x441) () {
 				var000B = Func0992(IOLO, (("@'Tis beautiful, " + var0003) + "!@"), 0x0000, false);
 				if (var000B != AVATAR) {
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"What didst thou expect?\"");
 				}
 				var0004 = Func099B(AVATAR, 0x0001, 0x00E3, QUALITY_ANY, 0x0003, 0x0000, true);
@@ -43281,7 +43281,7 @@ void Func0442 object#(0x442) () {
 					}
 					say("\"Urrgh...\"");
 					var0001 = Func0992(0x0001, "@He's dead.@", "@He's dead.@", true);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					G_SIMON->clear_item_flag(SI_TOURNAMENT);
 					G_SIMON->clear_item_flag(DEAD);
 					G_SIMON->kill_npc();
@@ -43513,7 +43513,7 @@ void Func0443 object#(0x443) () {
 					}
 					say("\"I know that mine only daughter Cantra is now dead. Her spirit hath been haunting me. She is suffering and tormented.\"");
 					var000A = Func0992(SHAMINO, "@The monks have taken Cantra to their island.@", "@The monks have taken Cantra to their island.@", false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"I thank thee! Perhaps now there is hope that my daughter shall return home to me.\"");
 					gflags[TOLD_CANTRA_IS_ALIVE] = true;
 				} else if (!gflags[KNOWS_CANTRA_IS_MISSING]) {
@@ -43555,7 +43555,7 @@ void Func0443 object#(0x443) () {
 				say("\"I am not a magical healer. Monitorians are quite suspicious of magic. I use a natural healing method, which uses herbs. Art thou in need of a healer?\"");
 				if (gflags[POISONED_BY_LYDIA] && (gflags[AVATAR_IS_POISONED] && (!gflags[CURED_LYDIA_POISON]))) {
 					var000A = Func0992(IOLO, "@The Avatar is burning with fever!@", "@Oh... yes... mine head...@", false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					do {
 						if (gflags[KNOWS_ABOUT_VARO_LEAVES] == false) {
 							say("\"I can temporarily restore thy body, but thou art suffering from an affliction that cannot easily be cured.\"");
@@ -43615,7 +43615,7 @@ void Func0443 object#(0x443) () {
 						say("\"Moreover, she hath paid for her treachery in blood. She is slain.\"");
 					}
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"I see. Thou dost appear to have many enemies in my land, ",
 						var0002,
 						". Be thou careful whom thou dost trust!\"");
@@ -43623,7 +43623,7 @@ void Func0443 object#(0x443) () {
 					say("\"Thy suffering came from no accidental affliction -- the venom which mixes with thy blood is not common.\"");
 					var000A = Func0992(DUPRE, "@Who did this to the Avatar?@", 0x0000, false);
 					if (var000A != AVATAR) {
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					}
 					say("\"I strongly suspect that the source of thine infection is the tattoo thou hast been given.\"");
 					say("\"I know that Lydia must have given thee this tattoo, yet I find it difficult to believe she would poison a stranger.\"");
@@ -43705,7 +43705,7 @@ void Func0443 object#(0x443) () {
 				AVATAR->show_npc_face1(0x0000);
 				say("\"I found a scroll, obviously written by Cantra, upon the body of a slain Pikeman. 'Twas thine husband I fear. He was betrayed...\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"I thank thee, ",
 					var0002,
 					", for solving the mystery of mine husband's disappearance. 'Tis better to know what truly happened than to be left knowing nothing. I have grieved for mine husband, and I shed tears not for him, but for myself and the waste that all hath become.\"");
@@ -43964,7 +43964,7 @@ void Func0443 object#(0x443) () {
 				}
 				if (var000B == []) {
 					var000A = Func0992(0x0001, (("@But we have no strange objects to ask about, " + var0002) + ".@"), 0x0000, false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"I do not think I can assist thee, but if I think of anything, I will let thee know!\"");
 				} else {
 					say("\"What sort of items art thou inquiring about?\"");
@@ -44684,7 +44684,7 @@ void Func0444 object#(0x444) () {
 				var000C = Func0992(DUPRE, "@But was he Goblin or Man?@", 0x0000, false);
 				if (var000C != AVATAR) {
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"He was not Goblin! They never travel in the woods except in war parties. Yet there was something in his gait that was not entirely Man-like, either.\"");
 				} else {
 					say("\"He could not have been Goblin, for they never walk in the woods alone. Therefore... I think he must have been the Monitorian traitor!\"");
@@ -44889,11 +44889,11 @@ labelFunc0445_0257:
 				MARSTEN->set_item_flag(MET);
 				Func094E(CALADIN, "@Astrid was the finest Knight that Monitor ever had!@");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"The Goblins ambushed her patrol. They slew all but one of the Pikemen, and took Astrid's body back to their camp -- to be feasted upon and used to make their sickening trophies, no doubt! When the reinforcements came, they were mere moments too late. They managed to rescue Groat but his injuries were too severe. Not even our healer Harnna could save him.\"");
 				Func094E(BRENDANN, "@Damn the Goblins! They should be exterminated...@");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"What business dost thou have with me, stranger?\"");
 				add(["Astrid", "Knight Champion"]);
 			} else if (gflags[TOLD_MARSTEN_SERVES_LORD_BRITISH] && (!gflags[RENOUNCED_BRITISH])) {
@@ -44951,27 +44951,27 @@ labelFunc0445_0257:
 				remove(["I renounce Lord British", "I serve Lord British"]);
 				say("\"Yes? Thou dost wish to say something to me?\"");
 				AVATAR->show_npc_face1(0x0000);
-				0x0001->set_conversation_slot();
+				UI_set_conversation_slot(1);
 				say("\"I renounce Lord British and everything for which he stands. From this moment forward, I am his friend and servant no longer.\"");
 				UI_remove_npc_face1();
 				if (var0009) {
 					IOLO->show_npc_face1(0x0000);
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"Avatar! I cannot believe thy words!\"");
 					UI_remove_npc_face1();
 				}
 				if (var000A) {
 					SHAMINO->show_npc_face1(0x0000);
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"How could thee renounce thy rightful liege?\"");
 					UI_remove_npc_face1();
 				}
 				if (var000B) {
 					DUPRE->show_npc_face1(0x0000);
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"Very well, Avatar. Do what thou must.\"");
 				}
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"Thou must feel better to have purged thyself of that burden. Thou wilt now be accepted by all of Monitor.\"");
 				say("\"Who doth know? Perhaps one day thou couldst become a true knight of Monitor. But only if thou passest the Test of Knighthood.\"");
 				add("Test of Knighthood");
@@ -44986,7 +44986,7 @@ labelFunc0445_0257:
 				say("\"Canst thou imagine the horrors of being devoured alive?! She was a masterful warrior, and deserved a finer death than this...\"");
 				if (!gflags[FIRST_TALK_WITH_MARSTEN]) {
 					Func094E(BRENDANN, "@Understand, stranger, that Marsten and this woman\twere bedmates.@");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					add("bedmates");
 				}
 				say("\"There is none to replace her, and certainly none able to reclaim the Helm of Monitor from the Goblins.\"");
@@ -45031,12 +45031,12 @@ labelFunc0445_0257:
 				BRENDANN->show_npc_face1(0x0000);
 				say("\"As shall I....\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"What was that thou saidest, Brendann!\"");
 				BRENDANN->show_npc_face1(0x0000);
 				say("\"What??! Oh, nothing, merely mentioning that we shall all miss her presence. She was a fine warrior.\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				fallthrough;
 
 			case "Goblins" (remove):
@@ -45245,7 +45245,7 @@ labelFunc0445_0257:
 					say("\"It was most disrespectful, the way that enchanter did interrupt our memorial service. The white-haired wizard appeared on top of the Cremator, in the most reverent part of the ceremony!\"");
 					say("\"I ordered him jailed. We are very strict here in Monitor.\"");
 					var0015 = Func0992(0x0001, (("@Could this be our friend Iolo, " + var0000) + "?@"), "@Could this be my friend Iolo?", false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Then thou shouldst visit the criminal at jail. We have our hands full in this town with the Goblins and we do not need such pranksters in Monitor!\"");
 				} else {
 					if (!gflags[TOLD_MARSTEN_ABOUT_IOLO]) {
@@ -45311,7 +45311,7 @@ labelFunc0445_0257:
 				say("\"There are many fine exhibits in our museum. Thou shouldst especially note the artifacts captured from the Goblins...\"");
 				say("\"Many of the artifacts are crafted from the bones of defeated Knights, I am certain. And the drum -- I think the skin across the top is human!\"");
 				var0015 = Func0992(IOLO, "@I find this discussion disgusting.@", 0x0000, false);
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"Oh, show courage! Thou dost look like thou mightest lose thy last meal!\"");
 				fallthrough;
 
@@ -45335,12 +45335,12 @@ labelFunc0445_0257:
 						var000D,
 						" is a spy for the Goblins!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Now, I do not agree with all this talk of a spy in our midst. Do not let these rumors divide our city, Caladin.\"");
 					BRENDANN->show_npc_face1(0x0000);
 					say("\"Yet there was that other suspicious stranger, the fat sage...\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Whom I threw out of town...\"");
 					BRENDANN->show_npc_face1(0x0000);
 					say("\"And that scholar -- a woman with fine bone structure, but a little too old to pleasure me...\"");
@@ -45516,7 +45516,7 @@ void Func0446 object#(0x446) () {
 			}
 			if (SPEKTOR->npc_nearby()) {
 				Func094E(SPEKTOR, "@I do hope that I am not interrupting...@");
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 			}
 			say("\"My name is Lucilla. Is there anything I can do for thee? Anything at all?\"");
 			LUCILLA->set_item_flag(MET);
@@ -45554,7 +45554,7 @@ void Func0446 object#(0x446) () {
 				say("\"Yet I have also heard that there is certainly no traitor, and that we should not indulge in hysteria...\"");
 				var0003 = Func0992(0x0001, "@Who told thee this, madam?@", 0x0000, false);
 				if (var0003 != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Um... no single person, actually. I have merely heard it said in conversation. In a tavern, one hears everything.\"");
 				}
 				fallthrough;
@@ -45649,7 +45649,7 @@ void Func0446 object#(0x446) () {
 				} else {
 					var0003 = Func0992(0x0001, "@Perhaps this is a quest for the Avatar?@", 0x0000, false);
 					if (var0003 != AVATAR) {
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					}
 				}
 				fallthrough;
@@ -45740,9 +45740,9 @@ labelFunc0446_05A1:
 				say("\"Surely, thou dost know Spektor the Financier?\"");
 				SPEKTOR->show_npc_face1(0x0000);
 				say("\"I must be going. Pressing town business, that sort of thing.\"");
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"And it is so seldom that we are able to talk! Be sure to give my greetings to Lord Marsten.\"");
-				0x0001->set_conversation_slot();
+				UI_set_conversation_slot(1);
 				say("\"I shall!\"");
 				gflags[KNOWS_OF_LUCILLA_AND_SPEKTOR] = true;
 				Func097F(LUCILLA, "@Farewell!@", 0x0000);
@@ -46112,15 +46112,15 @@ void Func0447 object#(0x447) () {
 				say("\"So, thou hast heard of my new shield! No one hath ever seen the like of it before. It is so light, yet blows seem to bounce off of it...\"");
 				if (DUPRE->npc_nearby()) {
 					var000B = Func0992(DUPRE, "@Look! He doth have my missing shield!@", 0x0000, false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				} else {
 					var000B = Func0992(0x0001, "@Look! He doth have Dupre's missing shield!@", "@Why I think that is Dupre's missing shield!@", false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				if ((gflags[HAS_DUPRE_SHIELD] == false) && gflags[STORM_MONITOR_SHIELD]) {
 					Func094E(var000B, "@And that mystery shield we have must be his!@");
 					add("found shield");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				if (var000B != AVATAR) {
 					say("\"What did he say?!\"");
@@ -46166,7 +46166,7 @@ void Func0447 object#(0x447) () {
 					}
 					var000E += 0x0001;
 				}
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"Thou couldst use a warrior like myself, to guard thee against thine enemies. With me on hand, nothing could harm thee!\"");
 				if (GOBLIN_KING->get_item_flag(DEAD)) {
 					say("\"But alas, my duty as a Knight keeps me here in Monitor. The Goblins are a constant threat, even though thou hast slain their king.\"");
@@ -46398,12 +46398,12 @@ void Func0448 object#(0x448) () {
 					DUPRE->show_npc_face1(0x0000);
 					say("\"Milady, I would be very interested in seeing all of thy tattoos. Perhaps we could step into...\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"I am not on display, sir! Thou shouldst not think that any lout can see the entire gallery.\"");
 					DUPRE->show_npc_face1(0x0000);
 					say("\"Sorry, milady.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Later, perhaps... handsome stranger.\"");
 				}
 				fallthrough;
@@ -46468,7 +46468,7 @@ void Func0448 object#(0x448) () {
 				var0009 = Func0992(SHAMINO, (("@Thou hast poisoned " + var0000) + " for the sake of Lord British?@"), 0x0000, false);
 				if (var0009 != AVATAR) {
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Yes, Fiend British!\"");
 				}
 				say("\"I hate that monster! He represents all that is evil!\"");
@@ -46558,7 +46558,7 @@ void Func0449 object#(0x449) () {
 				say("\"Flame? Oh, yes, we keep the fires going constantly.\"");
 				var0005 = Func0992(0x0001, (("@@" + var0000) + " said NAME, old man. Not FLAME.@"), 0x0000, false);
 				if (var0005 != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Oh. As thou canst tell, mine hearing is not what it once was. 'Tis the roar of the fires which hath done it...\"");
 					say("\"I am Renfry, Knight and Cremator.\"");
 					RENFRY->set_item_flag(MET);
@@ -46626,10 +46626,10 @@ void Func0449 object#(0x449) () {
 				gflags[HEARD_BATLIN_IS_THIEF] = true;
 				var0005 = Func0992(0x0001, "@Dost thou know the name of this sage?@", 0x0000, false);
 				if (var0005 != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"I have a perfect memory for names. 'Twas Badwin, I think. A very large man, with a hooded companion.\"");
 					Func094E(var0005, "@Must be Batlin!@");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				fallthrough;
 
@@ -46951,7 +46951,7 @@ void Func044A object#(0x44A) () {
 						say("\"I believe it was thee she was referring to, Avatar.\"");
 						UI_remove_npc_face1();
 					}
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"I can train anyone.\"");
 				}
 				fallthrough;
@@ -47141,7 +47141,7 @@ void Func044B object#(0x44B) () {
 						say("\"It is a test which one must endure alone, without companions.\"");
 						if (SELINA->get_item_flag(IN_PARTY)) {
 							Func094E(SELINA, (("@But not before finishing our quest, " + var0000) + "!@"));
-							0x0000->set_conversation_slot();
+							UI_set_conversation_slot(0);
 						}
 					}
 					if (!gflags[LORD_MARSTEN_GAVE_PERMISSION]) {
@@ -47166,16 +47166,16 @@ void Func044B object#(0x44B) () {
 							SHMED->show_npc_face0(0x0000);
 							say("\"Pray tell, what be the password?\"");
 							AVATAR->show_npc_face1(0x0000);
-							0x0001->set_conversation_slot();
+							UI_set_conversation_slot(1);
 							say("\"Courage is the Soul of Life.\"");
 							UI_remove_npc_face1();
-							0x0000->set_conversation_slot();
+							UI_set_conversation_slot(0);
 							say("\"Steel thyself! If thou dost make it through to the other side, then all will know that thou art worthy to be a Knight of Monitor.\"");
 							if (UI_get_array_size(UI_get_party_list()) > 0x0001) {
 								say("\"Thy friends must wait for thee here.\"");
 								if (SELINA->get_item_flag(IN_PARTY)) {
 									Func094E(SELINA, "@Then he cannot take this Test! I refuse to leave!@");
-									0x0000->set_conversation_slot();
+									UI_set_conversation_slot(0);
 									say("\"I cannot change the rules of the Test. Therefore, I cannot admit thee, stranger.\"");
 									Func097F(SHMED, "@Good-bye.@", 0x0000);
 									abort;
@@ -47191,7 +47191,7 @@ void Func044B object#(0x44B) () {
 										}
 										var000A = Func0992(var000A, (("@Of course not. We shall wait faithfully for thee here, " + var0000) + ".@"), 0x0000, false);
 									}
-									0x0000->set_conversation_slot();
+									UI_set_conversation_slot(0);
 								}
 								var000B = UI_get_party_list2();
 								if (var000B) {
@@ -47469,11 +47469,11 @@ void Func044C object#(0x44C) () {
 							var0005 = Func099B(AVATAR, 0x0001, 0x0281, 0x004A, 0x0006, 0x0000, true);
 						} else {
 							var000D = Func0992(0x0001, "@But we do not have enough money...@", 0x0000, false);
-							0x0000->set_conversation_slot();
+							UI_set_conversation_slot(0);
 							if (var000D == AVATAR) {
 								say("\"I do believe thou dost not have enough monetari. Please return when thou dost have the appropriate amount.\"");
 							} else {
-								0x0000->set_conversation_slot();
+								UI_set_conversation_slot(0);
 								say("\"Please return when thou dost have the appropriate amount.\"");
 							}
 						}
@@ -47503,7 +47503,7 @@ void Func044C object#(0x44C) () {
 							"! Art thou all right?\"");
 						Func097F(var000D, "@What a mess!@", 0x0005);
 						UI_remove_npc_face0();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					}
 					AVATAR->halt_scheduled();
 					AVATAR->Func0620();
@@ -47550,13 +47550,13 @@ void Func044C object#(0x44C) () {
 				say("\"I believe he went northeast from here, towards the little hamlet of Sleeping Bull.\"");
 				var000D = Func0992(DUPRE, "@The man's name -- dost thou recall?!@", 0x0000, false);
 				if (var000D != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"Now what was that man's name? It was a simple name, unpleasant sounding and mean...\"");
 				say("\"Batlin, that was it. He called himself the Sage Batlin.\"");
 				var000D = Func0992(SHAMINO, "@We have found Batlin's trail!@", 0x0000, false);
 				if (var000D != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"Oh, and did I mention that he had several underlings travelling with him? There was a warrior, a sailor, and a hooded man.\"");
 				UI_remove_npc_face1();
@@ -47582,29 +47582,29 @@ void Func044C object#(0x44C) () {
 				gflags[ASKED_SPEKTOR_ABOUT_GWENNO] = true;
 				if (IOLO->npc_nearby()) {
 					IOLO->show_npc_face1(0x0000);
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"Gwenno! It must have been Gwenno!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Yes, I believe that was her name...\"");
 					IOLO->show_npc_face1(0x0000);
 					say("\"",
 						var0002,
 						"! What luck! We have found a trail to follow! Oh, Gwenno! Dost thou know where she went from here, milord?\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"I believe she went east, anxious to learn the wisdom of the Xenkan Monks. She set sail with Captain Hawk, bound for Moonshade and points beyond.\"");
 					say("\"Of course, this was before the Storms. No sailor will brave these dangerous waters now.\"");
 					IOLO->show_npc_face1(0x0000);
 					say("\"Praise Virtue! This means she is alive and well! I thank thee, sir, for this woman is my wife!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Very kind woman, she was, sir.\"");
 				} else {
 					say("\"Her name was Gwenno. She left here for the east, anxious to learn the wisdom of the Xenkan Monks.\"");
 					say("\"Of course, this was before the Storms. No sailor will brave these dangerous waters now.\"");
 					var000D = Func0992(0x0001, "@What luck! We have found a trail to follow!@", 0x0000, false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				fallthrough;
 
@@ -47634,12 +47634,12 @@ void Func044C object#(0x44C) () {
 					var000D->show_npc_face1(0x0000);
 					say("\"So thou dost go there often?\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Er, no, not at all. I only meant I did not see any Goblins then.\"");
 					var000D->show_npc_face1(0x0000);
 					say("\"Mine instincts tell me this man is lying, Avatar!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				add("Thou art lying!");
 				fallthrough;
@@ -47949,13 +47949,13 @@ void Func044D object#(0x44D) () {
 				say("\"There was a woman here a while ago who spent much time in the Hall of Monitor, examining our museum display. Very friendly.\"");
 				var0007 = Func0992(IOLO, "@Where did she go from here? Dost thou know?@", 0x0000, false);
 				if (var0007 != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"She left here for the east. To study at the library on Monk Isle, as I recall.\"");
 				add("Monk Isle");
 				var0007 = Func0992(IOLO, "@Avatar! We must journey onward and find her!@", 0x0000, false);
 				if (var0007 != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				fallthrough;
 
@@ -47982,7 +47982,7 @@ void Func044D object#(0x44D) () {
 				if (!gflags[HAVE_NEW_SPELLBOOK]) {
 					var0007 = Func0992(IOLO, "@Perhaps thou couldst obtain a new spellbook there...@", 0x0000, false);
 					if (var0007 != AVATAR) {
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					}
 				}
 				fallthrough;
@@ -48005,7 +48005,7 @@ void Func044D object#(0x44D) () {
 					say("\"I must see this. Might I see the evidence?\"");
 					if (!(Func097D(PARTY, 0x0001, 0x031D, 0x0078, FRAME_ANY) || (Func097D(PARTY, 0x0001, 0x031D, 0x0079, FRAME_ANY) || Func097D(PARTY, 0x0001, 0x031D, 0x007A, FRAME_ANY)))) {
 						var0007 = Func0992(IOLO, "@We did not bring it with us...@", "@I did not bring it.@", false);
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"Then I can do nothing for thee. Unseen evidence is useless evidence.\"");
 					} else if (Func0955()) {
 						var0009 = Func0996(PARTY, SPEKTOR, 0x0001, 0x031D, 0x0078, FRAME_ANY, 0x0000);
@@ -48968,19 +48968,19 @@ void Func0451 object#(0x451) () {
 					DUPRE->show_npc_face1(0x0000);
 					say("\"Thou dost not speak to an ordinary Pikeman!\" *\"This is the Avatar!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				if (var0006 == true) {
 					SHAMINO->show_npc_face1(0x0000);
 					say("\"Thou mayest not judge the Avatar by this mark alone!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				if (var0007 == true) {
 					IOLO->show_npc_face1(0x0000);
 					say("\"Do not let him say such things about thee, Avatar!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"I see thee draw thyself up... Have I offended thee? And what wilt thou do, Pikeman? Drag me to thy jail as thy comrades did drag Hawk?\"");
 				remove("tyrant");
@@ -49003,7 +49003,7 @@ void Func0451 object#(0x451) () {
 					IOLO->show_npc_face1(0x0000);
 					say("\"He's a fine one to talk of attitude...\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"Wilfred ran away to prove to the world that he was better than his brother... A better bully, a better ruffian and a better murderer thou shalt not find!\"");
 				remove("Wilfred");
@@ -49236,19 +49236,19 @@ void Func0451 object#(0x451) () {
 					DUPRE->show_npc_face1(0x0000);
 					say("\"Thou dost not speak to an ordinary adventurer!\" *\"This is the Avatar!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				if (var0006 == true) {
 					SHAMINO->show_npc_face1(0x0000);
 					say("\"Thou mayest not judge the Avatar so!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				if (var0007 == true) {
 					IOLO->show_npc_face1(0x0000);
 					say("\"Do not let him say such things about thee, Avatar!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"I see thee draw thyself up... Have I offended thee? And what wilt thou do, hero? Imprison me? Or wilt thou simply murder me?\"");
 				remove("hero");
@@ -49581,7 +49581,7 @@ void Func045E object#(0x45E) () {
 					say("\"Thou hast no proof! Both Number 2 and Number 6 can attest that I was with them when Number 7 disappeared!\"");
 					Func094E(MURDER2, "@Number 1 was with me!@");
 					Func094E(MURDER6, "@It cannot be! I was with Number 1!@");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Thou hast wronged me!\"");
 					var0002 = [MURDER1, MURDER2, MURDER3, MURDER4, MURDER5, MURDER6];
 					for (var0005 in var0002 with var0003 to var0004) {
@@ -49690,7 +49690,7 @@ void Func045F object#(0x45F) () {
 				if (Func0955()) {
 					say("\"Thou art wrong! Number 1 can tell thee where I was when Number 7 disappeared!\"");
 					Func094E(MURDER1, "@Number 2 was with me, as was Number 6!@");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Thou shalt pay!\"");
 					var0002 = [MURDER1, MURDER2, MURDER3, MURDER4, MURDER5, MURDER6];
 					for (var0005 in var0002 with var0003 to var0004) {
@@ -49779,7 +49779,7 @@ void Func0460 object#(0x460) () {
 				if (Func0955()) {
 					say("\"Thou art mad! I was with Number 5 when Number 7 disappeared!\"");
 					Func094E(MURDER5, "@Number 3 was with me!@");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"I shall make thee bleed!\"");
 					var0002 = [MURDER1, MURDER2, MURDER3, MURDER4, MURDER5, MURDER6];
 					for (var0005 in var0002 with var0003 to var0004) {
@@ -49868,7 +49868,7 @@ void Func0461 object#(0x461) () {
 				if (Func0955()) {
 					say("\"What art thou saying?! I was with Number 2 when Number 7 disappeared!\"");
 					Func094E(MURDER2, "@That is a lie! I was with Number 1 and Number 6, not Number 4!@");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Thou hast caught me! Very well... the key is thine.\"");
 					var0002 = Func099B(AVATAR, 0x0001, 0x0281, 0x0046, 0x0005, false, true);
 					say("\"I confess. It was I that destroyed Number 7... as I shall destroy thee! I should have been the keeper of the key all along! Number 7 was wrong not to give it to me!\"");
@@ -49972,7 +49972,7 @@ void Func0462 object#(0x462) () {
 				if (Func0955()) {
 					say("\"Lies! Number 3 will remember that we were together when Number 7 disappeared!\"");
 					Func094E(MURDER3, "@It is true, Number 5 was with me!@");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"I shall have thine head for this outrage!\"");
 					var0002 = [MURDER1, MURDER2, MURDER3, MURDER4, MURDER5, MURDER6];
 					for (var0005 in var0002 with var0003 to var0004) {
@@ -50063,7 +50063,7 @@ void Func0463 object#(0x463) () {
 					say("\"Where is thy Logic?! Both Number 2 and Number 1 can attest that I was with them when Number 7 disappeared!\"");
 					Func094E(MURDER1, "@Number 1 was with me!@");
 					Func094E(MURDER2, "@It cannot be! I was with Number 1!@");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Thou shalt regret thy words!\"");
 					var0002 = [MURDER1, MURDER2, MURDER3, MURDER4, MURDER5, MURDER6];
 					for (var0005 in var0002 with var0003 to var0004) {
@@ -50561,7 +50561,7 @@ void Func047E object#(0x47E) () {
 		AUTOMATON_FACE->show_npc_face0(0x0000);
 		say("\"Avatar, thou shalt fail!\"");
 		var0000 = Func0992(DUPRE, "@Why, Avatar! Canst thou not hear it?! This automaton speaks with Batlin's voice!@", "@I recognize that voice! Batlin!@", false);
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		UI_remove_npc_face1();
 		say("\"Canst thou hear me, Avatar? Thou art too late! By the time thou hast found the Shrine of Order, I shall have become as powerful as the Guardian himself!\"");
 		say("\"Come! Come and witness mine ascent to power.\"");
@@ -50738,9 +50738,9 @@ void Func0481 object#(0x481) () {
 			if (var0003) {
 				if (var0001) {
 					DUPRE->show_npc_face1(0x0000);
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"But Avatar, surely thou dost not know the password! How canst thou fool this infernal thing?\"");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					UI_remove_npc_face1();
 				}
 				say("\"I am waiting to receive the password.\"");
@@ -50760,16 +50760,16 @@ void Func0481 object#(0x481) () {
 
 			case "try to guess the password":
 				AVATAR->show_npc_face1(0x0000);
-				0x0001->set_conversation_slot();
+				UI_set_conversation_slot(1);
 				say("Having no idea what the password actually is, you take a wild guess, saying something that sounds like it might make a proper password.");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"That is not the correct password! Thou art forbidden to enter!\"");
 				say("\"Thou shouldst not loiter about here. Thou must leave this place immediately.\"");
 				var0001 = DUPRE->get_item_flag(IN_PARTY);
 				if (var0001) {
 					DUPRE->show_npc_face1(0x0000);
-					0x0001->set_conversation_slot();
+					UI_set_conversation_slot(1);
 					say("\"I take it that was a guess! Ha! I knew thou couldst not know the proper password! I suggest we cease trying to guess the password and find a better way of entering this place. Simply guessing could take forever!\"");
 				}
 				abort;
@@ -51066,7 +51066,7 @@ void Func0490 object#(0x490) () {
 			say("\"Botoka na guta!\" *This creature looks at you with eyes so filled with hate that it is painful to look at them.");
 			if (var0000) {
 				MWAERNO->show_npc_face1(0x0000);
-				0x0001->set_conversation_slot();
+				UI_set_conversation_slot(1);
 				say("\"Umgabar fotuba na Gwani!\" *This one looks at you with eyes that are cold and feral.");
 				UI_remove_npc_face1();
 			}
@@ -51130,27 +51130,27 @@ void Func0491 object#(0x491) () {
 			say("\"Rrrow! Meteka Gwani adu laseka!\" This creature looks at you with angry eyes.");
 			if (var0000) {
 				BWUNDAI->show_npc_face1(0x0000);
-				0x0001->set_conversation_slot();
+				UI_set_conversation_slot(1);
 				say("\"Soko terama dok!\" This one gives you a mean look and spits.");
 				UI_remove_npc_face1();
 			}
 			if (var0001) {
 				IOLO->show_npc_face1(0x0000);
-				0x0001->set_conversation_slot();
+				UI_set_conversation_slot(1);
 				say("\"Avatar, 'tis the pelts! They can smell that we have Gwani pelts on us! I suggest we throw them away!\"");
 				UI_remove_npc_face1();
 				abort;
 			}
 			if (var0002) {
 				SHAMINO->show_npc_face1(0x0000);
-				0x0001->set_conversation_slot();
+				UI_set_conversation_slot(1);
 				say("\"Avatar, 'tis the pelts! They can smell that we have Gwani pelts on us! I suggest we throw them away!\"");
 				UI_remove_npc_face1();
 				abort;
 			}
 			if (var0003) {
 				DUPRE->show_npc_face1(0x0000);
-				0x0001->set_conversation_slot();
+				UI_set_conversation_slot(1);
 				say("\"Avatar, 'tis the pelts! They can smell we have Gwani pelts on us! I suggest that we throw them away!\"");
 				UI_remove_npc_face1();
 				abort;
@@ -51628,10 +51628,10 @@ void Func0495 object#(0x495) () {
 			IOLO->show_npc_face1(0x0000);
 			say("\"My lovely Gwenno!\"");
 			say("\"Now mine heart can sing, at the sight of thee!\"");
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"Thou dost look pale, dear Iolo.\"");
 			say("\"Thou didst never take care of thyself when I was away...\"");
-			0x0001->set_conversation_slot();
+			UI_set_conversation_slot(1);
 			if (Func097D(PARTY, 0x0001, 0x03BB, QUALITY_ANY, 0x0005)) {
 				say("\"The Lady of Fawn gave me this necklace to give to thee, when at last I found thee, my love.\"");
 				say("\"Take it as a token of my love.\"");
@@ -51641,7 +51641,7 @@ void Func0495 object#(0x495) () {
 				say("\"I had thought to give it to thee as a token of my love.\"");
 			}
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			if (var0007 == true) {
 				say("\"I shall cherish it always, Iolo.\"");
 				say("\"But thou didst not have to give me anything to prove thy love. That thou art here now is proof enough.\"");
@@ -52381,7 +52381,7 @@ void Func0496 object#(0x496) () {
 				say("\"Aha! I always knew that buffoon Luther was the criminal. Those Bears shall sing a different tune now!\"");
 				say("\"But dost thou have proof?\"");
 				var0010 = Func0992(DUPRE, "@We found evidence among the Goblins. Documents signed by the traitor!@", "@I found evidence in the Goblin camp.@", false);
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"May I see?\"");
 				if (Func097D(PARTY, 0x0001, 0x031D, 0x0078, FRAME_ANY) || (Func097D(PARTY, 0x0001, 0x031D, 0x0079, FRAME_ANY) || Func097D(PARTY, 0x0001, 0x031D, 0x007A, FRAME_ANY))) {
 					if (((Func097D(PARTY, 0x0001, 0x031D, 0x0078, FRAME_ANY) + Func097D(PARTY, 0x0001, 0x031D, 0x0079, FRAME_ANY)) + Func097D(PARTY, 0x0001, 0x031D, 0x007A, FRAME_ANY)) > 0x0001) {
@@ -52389,7 +52389,7 @@ void Func0496 object#(0x496) () {
 					} else {
 						var0010 = Func0992(IOLO, "@Here it is.@", "@Here it is.@", false);
 					}
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"But this is not what I expected...\"");
 					var0000 = 0x0000;
 					if (Func097D(PARTY, 0x0001, 0x031D, 0x0078, FRAME_ANY)) {
@@ -52471,7 +52471,7 @@ void Func0496 object#(0x496) () {
 					abort;
 				}
 				var0010 = Func0992(SHAMINO, "@We did not bring it with us.@", "@I did not bring it.@", false);
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"Until thou dost bring proof, no one will believe us...\"");
 				Func097F(BRENDANN, "@Bring proof!@", 0x0000);
 				abort;
@@ -52876,7 +52876,7 @@ void Func049B object#(0x49B) () {
 			DRAYGAN->show_npc_face1(0x0000);
 			say("\"What art thou saying to that stranger, Beryl?\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			if (gflags[BERYL_MET_AVATAR]) {
 				say("\"I shall meet thee as before. Now, go...\"");
 				Func097F(BERYL, "@Nothing, Draygan...@", 0x0000);
@@ -52909,7 +52909,7 @@ void Func049B object#(0x49B) () {
 				MORGHRIM->show_npc_face1(0x0000);
 				say("\"Thou canst come and stay with me, woman, until thou art ready to return to thy kind. My camp is clean, and the forest animals enjoy thy company.\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"I shall accept thy kind offer, Forest Master.\"");
 				Func097F(MORGHRIM, "@Stay with me.@", 0x0000);
 				Func097F(BERYL, "@I shall.@", 0x0005);
@@ -54484,7 +54484,7 @@ void Func04A8 object#(0x4A8) () {
 					var0008->show_npc_face1(0x0000);
 					say("\"Perhaps nothing can stop a Death Knight.\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"Don't let me discourage thee from making the attempt to slay the thing. My life depends on it, friend!\"");
 				fallthrough;
@@ -55109,14 +55109,14 @@ void Func04AA object#(0x4AA) () {
 				if (Func0955() == true) {
 					if (var0006 == true) {
 						var0016 = Func0992(0x0001, "@We have brought the Goblet!@", "@I have the Goblet...@", false);
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"To be true! To apologize most sincerely for doubting you...\"");
 						say("\"To keep the Goblet, Hero From Another World. To hope that it might have powers to aid you on your quest.\"");
 						Func0877();
 						gflags[BROUGHT_GOBLET_TO_ZHELKAS] = true;
 					} else {
 						var0016 = Func0992(0x0001, "@We do not have the Goblet!@", 0x0000, false);
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"To wonder if you jest. To say you do not have the Goblet. To be unwilling to deal with you until you have gotten it.\"");
 						UI_remove_npc_face0();
 						Func097F(ZHELKAS, "@Not until then.@", 0x0002);
@@ -55124,14 +55124,14 @@ void Func04AA object#(0x4AA) () {
 					}
 				} else if (var0006 == true) {
 					var0016 = Func0992(0x0001, "@But we do have the Goblet!@", 0x0000, false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"To say that you are confused, but to give you the ring as promised. To say that I am certain that you are the Hero from our dream.\"");
 					say("\"To keep the Goblet, Hero From Another World. To hope that it might have powers to aid you on your quest.\"");
 					Func0877();
 					gflags[BROUGHT_GOBLET_TO_ZHELKAS] = true;
 				} else {
 					var0016 = Func0992(0x0001, "@We do not have the Goblet!@", 0x0000, false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"To be displeased that you do not have the Goblet. To be unwilling to deal with you until you have gotten it.\"");
 					UI_remove_npc_face0();
 					Func097F(ZHELKAS, "@Not until then.@", 0x0002);
@@ -55218,7 +55218,7 @@ void Func04AA object#(0x4AA) () {
 						}
 						var0017 = Func0992(var0017, "@The Avatar is the Hero... No doubt about it!@", 0x0000, false);
 					}
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"To wonder if you are the Hero.\"");
 				add(["I am not the Hero", "tell me more"]);
@@ -55308,7 +55308,7 @@ void Func04AA object#(0x4AA) () {
 				say("\"To be wary that you are not like other Men, and to hope that you are not here to steal our treasures.\"");
 				var0016 = Func0992(IOLO, "@The Avatar is the Champion of Virtue, dear gargoyle.@", 0x0000, false);
 				if (var0016 != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"To be possible? To be the Hero that we have dreamed of?\"");
 				} else {
 					say("\"To seem to recognize you, as if from the vision of my slumbers... To wonder if you are the Hero of the Dream...\"");
@@ -55375,7 +55375,7 @@ void Func04AA object#(0x4AA) () {
 				say("\"To need one last task from you. To be without doubt. To be done before giving thee the artifact.\"");
 				var0016 = Func0992(SHAMINO, "@The Avatar took thy test willingly! Nothing was said about passing all the tests!@", 0x0000, false);
 				if (var0016 != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"To be sure that your friends are hasty in your behalf.\"");
 				}
 				say("\"To be unwilling to allow the ring to fall into the wrong hands. To say that the Dream warns of the deceitfulness of the Spectral Trinity.\"");
@@ -56531,27 +56531,27 @@ void Func04B6 object#(0x4B6) () {
 			EDRIN->show_npc_face1(0x0000);
 			say("\"Siranush! I had despaired of seeing thee again! How I wish I could be with thee always...\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"Thou hast filled my world with the love I never knew while my body lived. For that, I have called thee here for one last sight of thee...\"");
 			EDRIN->show_npc_face1(0x0000);
 			say("\"Then the Hero hath succeeded in destroying the Dream Crystal?\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"No, dear one, only I can undo what Rabindrinath hath done... The Hero hath defeated Rabindrinath and brought me the Crystal.\" *\"It is mine to destroy it.\"");
 			EDRIN->show_npc_face1(0x0000);
 			say("\"Although I know it would be wrong, I wish with all mine heart that thou wouldst not. If I could join thee, I would gladly.\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"I know that, dear Edrin. But thou hast life yet to live.\" *\"I must destroy the Crystal. My people and I must move on to what lies beyond... I will look for thee, and hope that thou dost join me in what waits ahead.\"");
 			EDRIN->show_npc_face1(0x0000);
 			say("\"I have no wish to bind thee here, for all that I love thee. I will live my life and pray to meet thee beyond this world.\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"Thou canst add my prayers to thine, Edrin. I love thee, now and always.\" *\"Although we will not meet here again, dream of me... Farewell, my love.\"");
 			EDRIN->show_npc_face1(0x0000);
 			say("\"I love thee... And I shall dream of thee all the rest of my days.\" *\"Farewell...\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			EDRIN->remove_npc();
 			say("\"Thou hast freed the tormented souls of my people, Avatar. Thy good deed shall be rewarded as promised.\" *\"I wish thee luck in thy quest. May thy sleep be peaceful...\"");
 			UI_remove_npc_face0();
@@ -57145,7 +57145,7 @@ void Func04BE object#(0x4BE) () {
 				var0000 = ("@But " + Func0954()) + ", we have no such thing!@";
 				var0001 = Func0992(0x0001, var0000, 0x0000, false);
 				if (var0001 != AVATAR) {
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Aha! Then die, Spawn of Chaos!\"");
 					Func097F(GUARD17, "@To battle!@", 0x0000);
 				} else {
@@ -57934,7 +57934,7 @@ void Func04CF object#(0x4CF) () {
 			case "ending of the world" (remove):
 				say("\"Xenka foresaw that people would turn from their basic goodness until the very land itself would rise up in revolt against their twisted ways.\"");
 				var0022 = Func0992(0x0001, "@Grim tidings, indeed.@", 0x0000, false);
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"Even now the storms flay the land. Soon the earthquakes will unleash the fire that will engulf the world.\"");
 				add(["storms", "earthquakes"]);
 				fallthrough;
@@ -58249,7 +58249,7 @@ void Func04D1 object#(0x4D1) () {
 					say("\"Why, that is unthinkable! I have never heard of such a preposterous thing!\"");
 					UI_remove_npc_face1();
 					Func097F(DUPRE, "@Rubbish!@", 0x0000);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				fallthrough;
 
@@ -58482,7 +58482,7 @@ void Func04D3 object#(0x4D3) () {
 			}
 			abort;
 		}
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		var000D = THOXA->get_object_position();
 		if (Func08F8(var000D, [0x0914, 0x01BB], [0x0939, 0x01D9])) {
 			say("\"Thou must not enter this door without thy three stalwart companions, Hero from Another World!\"");
@@ -58685,7 +58685,7 @@ void Func04D4 object#(0x4D4) () {
 			YELINDA->show_npc_face1(0x0000);
 			say("\"Oh, thank thee, kind monk!\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"As for thee, ",
 				var0002,
 				", thou must continue toward thine union with the Powers...\"");
@@ -58765,7 +58765,7 @@ void Func04D4 object#(0x4D4) () {
 			case "name" (remove):
 				say("\"I no longer believe in names. Doth the corn in the field have a name? Canst thou hear the cry of the corn?\"");
 				var000E = Func0992(IOLO, (("@" + var0000) + ", this monk is a mystical man indeed...@"), 0x0000, false);
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				add(["beliefs", "corn"]);
 				fallthrough;
 
@@ -58800,7 +58800,7 @@ void Func04D4 object#(0x4D4) () {
 				say("\"Corn is tall and green, king of the grasses, and its fruit is sweet when roasted.\"");
 				say("\"I seek to find union with the corn. I am a Child of the Corn.\"");
 				var000E = Func0992(IOLO, (("@As I said, " + var0000) + "...@"), 0x0000, false);
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				fallthrough;
 
 			case "duties" (remove):
@@ -58991,7 +58991,7 @@ void Func04D5 object#(0x4D5) () {
 			case "name" (remove):
 				say("\"My name is insignificant, oh great one. I am but a shadow in thy destiny and the glory of Xenka.\"");
 				var000A = Func0992(0x0001, "@Another mystic...@", 0x0000, false);
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"But, if thou wilt suffer to call me by name, I am Draxta.\"");
 				add("destiny");
 				fallthrough;
@@ -59004,7 +59004,7 @@ void Func04D5 object#(0x4D5) () {
 			case "blessed book" (remove):
 				say("\"A work of divine wisdom, certainly! It is where Xenka inscribed all of her visions.\"");
 				var000A = Func0992(0x0001, "@Such wisdom might aid thee in thy quest, Avatar.@", 0x0000, false);
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				if (find_nearby(0x03E6, 0x000F, MASK_NONE)) {
 					say("\"Thou mayest find the book here in the Chapel, upon the altar.\"");
 				} else {
@@ -59103,7 +59103,7 @@ void Func04D5 object#(0x4D5) () {
 			case "Gwenno" (remove):
 				say("\"Thy friend Gwenno doth not seem right, oh great one.\"");
 				var000A = Func0992(0x0001, "@She is a fine one to talk...@", 0x0000, false);
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"Karnax could divine what ails her, to be certain.\"");
 				add("Karnax");
 				fallthrough;
@@ -59957,7 +59957,7 @@ labelFunc0526_0008:
 		var0002 = DUPRE->get_item_flag(IN_PARTY);
 		var0003 = Func097D(PARTY, 0x0001, 0x00E7, QUALITY_ANY, FRAME_ANY);
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"And thou art the cattle upon which I prey!\" *\"Who sent thee to destroy Vasculio? Was it those rotting worms of Moonshade?\" *\"I know it was! Soon I shall have my vengeance for what they have done to me!\" *\"Who sent thee? Filbercio?! Mortegro?! Gustacio?! Torrissio?!\"");
 		converse (["Filbercio", "Mortegro", "Gustacio", "Torrissio", "vengeance"]) {
 			case "bye":
@@ -62916,7 +62916,7 @@ void Func0632 object#(0x632) () {
 		say("\"Then we shall have to work together...\"");
 		SOLARIA->show_npc_face1(0x0000);
 		say("\"The Guide shall make our aim true! The Guide shall lead the way to our truly perfect world!\"");
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		UI_remove_npc_face1();
 		say("\"Let us be done with this! Once this pathetic pawn is dead we can cross into the new world, and let this decaying husk die as it was meant to!\"");
 		UI_remove_npc_face0();
@@ -77432,14 +77432,14 @@ void Func0768 object#(0x768) () {
 		say("\"Not so fast, deary! Ye don't think that ye kin just dance outta here with that little seed so easy, now do ye?\"");
 		AVATAR->show_npc_face1(0x0000);
 		say("\"And who will stop me, hag? Thou?\"");
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"Hag, now is it?! Well, we shall see about that, deary!\"");
 		RIEYA->show_npc_face0(0x0000);
 		say("\"I don't know about thee, Drusilla, but I think that lout would do well as a candlestick. What thinkest thou?\"");
 		UI_remove_npc_face1();
 		DRUSILLA->show_npc_face1(0x0000);
 		say("\"With such a bright wit, I think it would be fitting indeed!\"");
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"Bright wit?! I would have said half-wit, trying to keep this flawed world alive!");
 		say("\"One would think that a pawn of prophecy would be... I don't know, more intelligent!\"");
 		UI_remove_npc_face1();
@@ -77456,7 +77456,7 @@ void Func0768 object#(0x768) () {
 		say("\"Besides, I think ",
 			var000A,
 			" is rather cute...\"");
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"Hsssst! Solaria! Thou shouldst not speak of the Guide to outsiders! Now thou hast sealed ",
 			var000C,
 			" fate! Wilt thou never learn to think beyond thy bed?!\"");
@@ -82219,16 +82219,16 @@ void Func07FB object#(0x7FB) () {
 		ALYSSAND->show_npc_face1(0x0000);
 		say("\"I remember that we spoke of the strange storms, and other such things...\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"Thou art holding back something...\"");
 		KYLISTA->show_npc_face1(0x0000);
 		say("\"Alyssand, beware! The Oracle is the instrument of divine Truth, and it shall not be mocked!\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"What did the strangers ask of thee, Alyssand? There was a particular item...\"");
 		ALYSSAND->show_npc_face1(0x0000);
 		say("\"Well, yes... mine engagement ring, which was lost...\"");
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		UI_remove_npc_face1();
 		say("\"In fact, the traitor had thy missing jewelry! So the Beast hath taught him to steal... using Daemonic powers, I suspect...\"");
 		say("\"I have no further questions. I thank thee.\"");
@@ -82283,12 +82283,12 @@ void Func07FB object#(0x7FB) () {
 		DELIN->show_npc_face1(0x0000);
 		say("\"Good day, uh... Voldin. Met who?\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"The man standing in that box, right in front of thee. Hast thou ever met him?\"");
 		DELIN->show_npc_face1(0x0000);
 		say("\"Handsome lad... I do not recall him. Dost thou think he would be a worthy suitor for mine Alyssand?\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"Uh... I do not think so, Delin.\"");
 		say("\"I renounce any further questions! I thank thee, Delin. Thou mayest go.\"");
 		UI_end_conversation();
@@ -82343,12 +82343,12 @@ void Func07FB object#(0x7FB) () {
 		say("\"Avatar, what dost thou recommend?\"");
 		var0004 = Func0956(["continue the testimony", "no more witnesses"]);
 		if (var0004 == "continue the testimony") {
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"I would hear the full weight of the testimony against me, Lady Yelinda.\"");
 			YELINDA->show_npc_face1(0x0000);
 			say("\"Very well. Thou mayest resume, Captain Voldin.\"");
 		} else {
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"I believe no purpose would be served by continuing this charade, Lady Yelinda.\"");
 			YELINDA->show_npc_face1(0x0000);
 			say("\"Do not mock the Oracle, stranger.\"");
@@ -82387,12 +82387,12 @@ void Func07FB object#(0x7FB) () {
 		DELPHYNIA->show_npc_face1(0x0000);
 		say("\"Yes, Captain. He came with his accomplice, who was seeking a certain magical leaf...\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"Aha! And what didst thou conclude from this?\"");
 		DELPHYNIA->show_npc_face1(0x0000);
 		say("\"The leaf is known to counteract certain poisons and curses, milord. So I must conclude that the defendant suffers from some sort of malady.\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"Perhaps from his association with the Beast! How sinister...\"");
 		say("\"I have no more questions. Many thanks for thy service, Delphynia. Return to thy seat, if thou wilt.\"");
 		UI_end_conversation();
@@ -82415,7 +82415,7 @@ void Func07FB object#(0x7FB) () {
 		JENDON->show_npc_face1(0x0000);
 		say("\"Yes, indeed. He came into the Broken Oar -- most people do, thou knowest. Asked me a great number of questions.\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"About the usual sorts of things -- the weather, the goblin threat, and so forth?\"");
 		JENDON->show_npc_face1(0x0000);
 		say("\"Not at all, Captain! He had so many questions.\"");
@@ -82432,14 +82432,14 @@ void Func07FB object#(0x7FB) () {
 				var0003,
 				" had a powerful curiosity about the ancient ruins of this land! I could not tell him enough. He was quite angry with me...\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"The ruins left by the Daemons who once dwelt in this land?\"");
 			JENDON->show_npc_face1(0x0000);
 			say("\"Yes, captain. The Serpent Ruins.\"");
 			gflags[TRIAL_ASK_DELIN_FUR_CAP] = true;
 		}
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"And so we can plainly see that the accused doth have a most perverted sense of curiosity. Perhaps a weakness gained from associating with the Beast!\"");
 		say("\"Thou mayest go, Jendon...\"");
 		UI_end_conversation();
@@ -82466,13 +82466,13 @@ void Func07FB object#(0x7FB) () {
 			var0002,
 			" before thou didst apprehend the accused, didst thou not?\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"I did see them, Captain, even if they did not see me. It is my business to watch strangers.\"");
 		say("\"The traitor was a most curious man, and did often enter into buildings where he did not belong. He did open many drawers and barrels without permission.\"");
 		VOLDIN->show_npc_face1(0x0000);
 		say("\"How wouldst thou characterize such behavior?\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"Peculiar, lord. Almost as if the man were hunting for something.\"");
 		VOLDIN->show_npc_face1(0x0000);
 		say("\"According to legend, there have been men who have sold their souls to Beast British. Such men then scour the world, hoping to find their lost spirits once again.\"");
@@ -82503,7 +82503,7 @@ void Func07FB object#(0x7FB) () {
 			var0002,
 			", his companion. I found their lack of understanding of Beauty appalling!\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"So they did not seem to have a true appreciation of Beauty?\"");
 		var0008 = Func0992(IOLO, "@Beauty lies in the eye of the beholder...@", 0x0000, false);
 		if (var0008 == AVATAR) {
@@ -82552,7 +82552,7 @@ void Func07FB object#(0x7FB) () {
 		say("\"As the Priestess of Beauty, I must warn all of thee to remain wary of these strangers! They preach doctrines which deny the primacy of Beauty. The Fellowship is an insidious philosophy which threatens to undermine our common society.\"");
 		say("\"I believe that The Fellowship is an invention of Beast British, by which he means to destroy us!\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"Thy vigilance will be our salvation, Priestess. Many thanks for responding to mine unusual summons.\"");
 		UI_end_conversation();
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x001D);
@@ -82572,7 +82572,7 @@ void Func07FB object#(0x7FB) () {
 		LEON->show_npc_face1(0x0000);
 		say("\"I have no wish to cause disunity in thy city, Captain. I only wish that thou wouldst come to trust me.\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"Confine thyself to my questions only, please.\"");
 		say("\"What contact hath ",
 			var0003,
@@ -82580,12 +82580,12 @@ void Func07FB object#(0x7FB) () {
 		LEON->show_npc_face1(0x0000);
 		say("\"He came to the Fellowship camp. We spoke privately.\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"And no doubt the two of you did compare notes concerning The Fellowship blasphemy. Indeed, is not the traitor secretly a confederate of thyself?\"");
 		LEON->show_npc_face1(0x0000);
 		say("\"I deny the charge of blasphemy. The Fellowship is not an evil doctrine, but is a system of beliefs which bring enlightenment to those who obey...\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"Enough! Leave our fair city now.\"");
 		UI_end_conversation();
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(var0000 + 0x0001);
@@ -82630,19 +82630,19 @@ void Func07FB object#(0x7FB) () {
 		RUGGS->show_npc_face1(0x0000);
 		say("\"I have hope for only one thing, Captain. And that dwells deep within mine heart, as Delphynia knows...\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"Do not digress! Now, I am told that thou hast been seen speaking with the accused traitor...\"");
 		RUGGS->show_npc_face1(0x0000);
 		say("\"Yes, Captain. I asked a favor of him, to deliver a document for me.\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"No doubt a document containing instructions from Leon, to his secret ally, ",
 			var0003,
 			"! No further questions...\"");
 		RUGGS->show_npc_face1(0x0000);
 		say("\"No! 'Twas a letter to my beloved Delphynia...\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"Return to thy camp.\"");
 		UI_end_conversation();
 		Func097F(RUGGS, "@I love thee, Delphynia!@", 0x0000);
@@ -82661,12 +82661,12 @@ void Func07FB object#(0x7FB) () {
 		say("\"I'm a geographer, sir. And a sailor. Though I was brought here by The Fellowship to study this land, I do not practice their beliefs.\"");
 		say("\"However, I see nothing wrong with The Fellowship. If anything, it seems that Leon speaks more of the truth than thine own Priestess.\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"Heresy! Leave this Temple and never return to our fair city, upon pain of death!\"");
 		SCOTS->show_npc_face1(0x0000);
 		say("\"And Lord British is no Daemon! He's a good man, and hath often commissioned me to create new maps for him...\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"Jorvin, if that man speaks another word, blast him with thy wand!\"");
 		UI_end_conversation();
 		Func097F(SCOTS, "@Not the wand!@", 0x0000);
@@ -82723,13 +82723,13 @@ void Func07FB object#(0x7FB) () {
 		VOLDIN->show_npc_face1(0x0000);
 		say("\"Yet the course of this trial could affect state security, chancellor. This man is accused of aiding a Daemon to overthrow our city!\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"I must defer to the Lady...\"");
 		YELINDA->show_npc_face1(0x0000);
 		say("\"I don't see why thou couldst not speak freely, Zulith.\"");
 		say("\"I know! If thou art about to reveal some important secret, I shall signal thee by clapping sharply. Then thou shouldst be silent.\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"Very well, Lady Yelinda.\"");
 		say("\"Let it be known, therefore, that I have spent much of my recent time following ",
 			var0003,
@@ -82737,14 +82737,14 @@ void Func07FB object#(0x7FB) () {
 		VOLDIN->show_npc_face1(0x0000);
 		say("\"And what didst thou learn?\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"Nothing -- ",
 			var0003,
 			" was too sharp for me, and spotted me before I could learn much. However, I did see him conferring with Delin's daughter, and she is a known sympathizer with The Fellowship!\"");
 		DELIN->show_npc_face1(0x0000);
 		say("\"Watch thy words, Zulith! Or thou shalt have to reckon with me. I may be old, but I'm mean...\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"I meant no disrespect. Only everyone knows that The Fellowship is a Daemonic heresy, and that Alyssand hath become infatuated with Leon the Preacher.\"");
 		VOLDIN->show_npc_face1(0x0000);
 		say("\"And so Beast British, who is the force behind The Fellowship heresy, uses Alyssand to communicate with agents such as ",
@@ -82772,7 +82772,7 @@ void Func07FB object#(0x7FB) () {
 		VOLDIN->show_npc_face1(0x0000);
 		say("\"Please bear with me, Zulith. This is for the good of Fawn.\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"Very well, but there is no reason for the Lady to take the stand. She may speak from where she is.\"");
 		UI_end_conversation();
 		var0004 = Func09A0(0x0001, 0x0001)->set_item_quality(0x0035);
@@ -82805,13 +82805,13 @@ void Func07FB object#(0x7FB) () {
 			var0003,
 			" suddenly burst out with a vile and blasphemous oath!\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"Dost thou remember his precise words?\"");
 		YELINDA->show_npc_face1(0x0000);
 		say("\"To be truthful, the discussion was so distasteful that I quickly put it from my mind.\"");
 		say("\"I believe he said -- Curse you all, and Beast British shall drink thy blood...\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"I thank thee for thy time, Lady Yelinda. Thou hast spoken fairly, as always.\"");
 		UI_end_conversation();
 		Func097F(Func08AC(true), "@I didn't say that!", 0x0000);
@@ -82947,12 +82947,12 @@ labelFunc07FC_0135:
 						var0003,
 						".\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Why, thou art right, sailor. Nevertheless, I stand by my sworn testimony!\"");
 					OLON->show_npc_face1(0x0000);
 					say("\"I may be drunk, but I'm not stupid...\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				fallthrough;
 
@@ -83017,7 +83017,7 @@ labelFunc07FC_02C2:
 					var0002,
 					" brought me strange items, and asked me to identify them.\"");
 				var0008 = Func0992(0x0001, "@But thou art an innkeeper! Surely, many folks bring thee mysteries...@", 0x0000, false);
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"Mayhaps, stranger. But nothing half so strange...\"");
 				fallthrough;
 
@@ -83028,14 +83028,14 @@ labelFunc07FC_02C2:
 					var0002,
 					" did ask me about the ancient ruins, indeed. Very suspicious.\"");
 				var0008 = Func0992(0x0001, "@Surely, others ask of these same things?@", 0x0000, false);
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"Indeed, the sage Batlin was also curious about the ruins.\"");
 				GARTH->show_npc_face1(0x0000);
 				say("\"See how the evidence convicts him! I tell thee, this ",
 					var0002,
 					" works for Batlin, and both are tools of Beast British!\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				fallthrough;
 
 			case "savages":
@@ -83047,7 +83047,7 @@ labelFunc07FC_02C2:
 				OLON->show_npc_face1(0x0000);
 				say("\"Ah, but thou dost tell that tale to everyone, Jendon. Thou canst not convict a man for listening to thy tales...\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				fallthrough;
 
 			case "Gwenno":
@@ -83070,7 +83070,7 @@ labelFunc07FC_02C2:
 						YELINDA->show_npc_face1(0x0000);
 						say("\"Such a man hardly sounds like the servant of Daemons, innkeeper.\"");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"Aye. But then again, doth legend not claim that Daemons have silver tongues? This Iolo doth certainly have charm...\"");
 					}
 					if (gflags[SHAMINO_ACCUSED]) {
@@ -83080,7 +83080,7 @@ labelFunc07FC_02C2:
 						ZULITH->show_npc_face1(0x0000);
 						say("\"Doth Shamino not have the passions of a normal man, Jendon?\"");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"Perhaps. Or he may merely be driven by his cause. Shamino is far too serious.\"");
 					}
 					if (gflags[DUPRE_ACCUSED]) {
@@ -83150,14 +83150,14 @@ labelFunc07FC_0595:
 					var0002,
 					" who was cursed, Delphynia. 'Twas I, poisoned by a treacherous woman in the city of Monitor.\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"Mine apologies, ",
 					var0001,
 					". I did not know...\"");
 				GARTH->show_npc_face1(0x0000);
 				say("\"How do we know this to be true? I say that he lies!\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				fallthrough;
 
 			case "the character of the accused":
@@ -83240,7 +83240,7 @@ labelFunc07FC_074A:
 					say("\"This is not the time for idle chat, good man. My life is at stake!\"");
 				}
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"I know that the Priestess fears that the ring was stolen by magical means. But what about the storms! They steal things every day. Could not a storm have taken my daughter's ring?\"");
 				fallthrough;
 
@@ -83303,7 +83303,7 @@ labelFunc07FC_0904:
 		JENDON->show_npc_face1(0x0000);
 		say("\"I'm afraid he hath been drinking...\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"I drinks ta forget my pain, innkeeper. Go ahead, Avatar. Ask me thy questions.\"");
 		converse (["the character of the accused", "Daemonism", "drinking", "no questions"]) {
 			case "the character of the accused":
@@ -83321,7 +83321,7 @@ labelFunc07FC_0904:
 						ZULITH->show_npc_face1(0x0000);
 						say("\"I don't think that would be advisable.\"");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"I have my lute with me...\"");
 						UI_play_music(0x003B, Func09A0(0x0005, 0x0001));
 						say("\"If all the young ladies were bricks in a pile,\"");
@@ -83350,7 +83350,7 @@ labelFunc07FC_0904:
 				GARTH->show_npc_face1(0x0000);
 				say("\"Foul blasphemy! Hold thy tongue, rogue, or face the wrath of the Oracle.\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"I may be a drunk, but I be an honest drunk. I shall follow no hypocrite ta a watery grave.\"");
 				Func097F(OLON, "@That's all I have to say...@", 0x0000);
 				// This could be a break instead; the original
@@ -83410,7 +83410,7 @@ labelFunc07FC_0B2E:
 				Func08AC(true)->show_npc_face1(0x0000);
 				say("\"These were mine exact words, Lady -- All hail Lord British and the glory that is Britannia!\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"Beauty forbid! Thou hast spouted the blasphemy again!\"");
 				Func097F(YELINDA, "@I cannot bear this!@", 0x0000);
 				// This could be a break instead; the original
@@ -83490,7 +83490,7 @@ labelFunc07FC_0CC8:
 							YELINDA->show_npc_face1(0x0000);
 							say("\"The Oracle must hear all of the facts, if it is to decide fairly. Chancellor, I give my permission to speak of thy secrets.\"");
 							UI_remove_npc_face1();
-							0x0000->set_conversation_slot();
+							UI_set_conversation_slot(0);
 						} else {
 							say("\"Ask me something else...\"");
 							break;
@@ -83501,13 +83501,13 @@ labelFunc07FC_0CC8:
 						DELPHYNIA->show_npc_face1(0x0000);
 						say("\"But thou didst not see him actually perform any vile acts?\"");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"He contacted Alyssand, madam! I saw them speaking together, and casting many sly glances in my direction.\"");
 					}
 					DELIN->show_npc_face1(0x0000);
 					say("\"My daughter is not on trial here, chancellor...\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Well... I suppose not...\"");
 				} while (false);
 				var0003 = 0x0001;
@@ -84658,7 +84658,7 @@ var Func0807 0x807 (var var0000, var var0001) {
 						DEVRA->show_npc_face1(0x0000);
 						say("\"Thou woolly-headed wolf! Thine head is fine. 'Tis thine heart that is soft...\"");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					}
 				}
 				if (var0010 == 0x0002) {
@@ -84932,7 +84932,7 @@ void Func0808 0x808 (var var0000, var var0001) {
 					say("\"As I have said, I serve and protect my master's household. This have I done for a great many years.\"");
 					var0007 = Func0992(IOLO, "@Why, this being doth move so silently!@", 0x0000, false);
 					if (var0007 != AVATAR) {
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"Master Filbercio hath enchanted my feet to prevent them from clattering as I walk. He was greatly disturbed by the noise.\"");
 					}
 					add(["many years"]);
@@ -84968,17 +84968,17 @@ void Func0808 0x808 (var var0000, var var0001) {
 						ROCCO->show_npc_face1(0x0000);
 						say("\"And thou art indeed a master, musician automaton.\"");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					} else if (PETRA->npc_nearby()) {
 						PETRA->show_npc_face1(0x0000);
 						say("\"There are some who say that when it comes to music, we automatons have a tin ear.\"");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"That is patently untrue.\"");
 						PETRA->show_npc_face1(0x0000);
 						say("\"I was making a humorous remark, musician.\"");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 						say("\"I do not understand humor, milady.\"");
 					}
 				}
@@ -85045,7 +85045,7 @@ void Func0809 0x809 () {
 				} else {
 					say("\"But I cannot, master.\"");
 					var0000 = Func0992(0x0001, "@Our travelling group would be too large, Avatar.@", 0x0000, false);
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				fallthrough;
 
@@ -86277,7 +86277,7 @@ void Func080E 0x80E () {
 	CINDY->show_npc_face1(0x0000);
 	say("\"I know what thou art, Bane of Chaos. That body is but a shell that thou dost wear.\"");
 	UI_remove_npc_face1();
-	0x0000->set_conversation_slot();
+	UI_set_conversation_slot(0);
 	say("\"I can escape thee! My powers dwarf thine...\"");
 	CINDY->show_npc_face1(0x0000);
 	say("\"Thy powers have dwindled due to thine imprisonment. Thou art no match for me, now...\"");
@@ -87517,7 +87517,7 @@ void Func0818 0x818 () {
 					var000E,
 					" filari!\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"Ah, er... thou art right, my dear!\"");
 			} else {
 				say("\"Er, that's not right... oh, I am sorry, ",
@@ -87595,7 +87595,7 @@ void Func0818 0x818 () {
 					var000E,
 					" filari!\"");
 				UI_remove_npc_face1();
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"Ah, thou art correct, daughter...\"");
 			} else {
 				say("\"Uh, hmmm... I do believe I made a mistake, ",
@@ -87625,19 +87625,19 @@ void Func0818 0x818 () {
 					ALYSSAND->show_npc_face1(0x0000);
 					say("\"Father! Watch thy tongue!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"But, dear... he is a customer...\"");
 					ALYSSAND->show_npc_face1(0x0000);
 					say("\"'Tis rude of thee, father, to discuss such matters in public!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 					say("\"Ah, hmmm... she is very shrewish today, ",
 						var0000,
 						". I... er, apologize to thee for her behavior.\"");
 					ALYSSAND->show_npc_face1(0x0000);
 					say("\"FATHER!!!\"");
 					UI_remove_npc_face1();
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 			}
 			say("\"Ah, where was I? Oh, yes... For a pair of these fine stockings I ask ",
@@ -89546,7 +89546,7 @@ var Func0820 0x820 (var var0000, var var0001) {
 						ARGUS->show_npc_face1(0x0000);
 						say("\"To hear thee tell it, thou hast never been defeated, mother!\"");
 						UI_remove_npc_face1();
-						0x0000->set_conversation_slot();
+						UI_set_conversation_slot(0);
 					}
 				}
 			} else if (var0004 < (var0001 + ((var0000 - var0001) / 0x0003))) {
@@ -91150,7 +91150,7 @@ void Func0830 0x830 () {
 		say("\"",
 			var0001,
 			"\"");
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		var0001 = UI_get_random(0x0003);
 		if (var0001 == 0x0001) {
 			var0002 = Func0953();
@@ -94627,7 +94627,7 @@ void Func0848 0x848 () {
 	say("\"Now I shall have to find myself another shield...\"");
 	if (gflags[STORM_MONITOR_SHIELD] && Func097D(PARTY, 0x0001, 0x02D9, QUALITY_ANY, 0x0000)) {
 		var0001 = Func0992(0x0001, "@But thou canst have this shield which we found!@", 0x0000, false);
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"That is most gracious of thee! Yes, this is my shield which so strangely disappeared during that storm!\"");
 		var0000 = LUTHER->add_cont_items(0x0001, 0x02D9, QUALITY_ANY, 0x0000, 0x0012);
 		if (var0000) {
@@ -99618,7 +99618,7 @@ void Func086F 0x86F () {
 			say("\"Oh, we sell all manner of things. Cloaks, swords...\"");
 			Func094E(DUCIO, "@Shovels, too...@");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"Yes, Master, shovels too. Pitchers and other containers. Cloth and a few weapons. We also sell baked goods.\"");
 		} else {
 			say("\"Oh, we sell all manner of things. Cloaks, swords, and shovels, too. Pitchers and other containers. Cloth and a few weapons. We also sell baked goods.\"");
@@ -106382,7 +106382,7 @@ var Func08ED 0x8ED (var var0000) {
 			say("\"Listen to his tales -- I think that he is attracted to thee, Shazzana.\"");
 		}
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"Be still, Luther -- I think something strange is happening. Tell me more of what thou didst see...\"");
 		return var0000;
 	}
@@ -106391,7 +106391,7 @@ var Func08ED 0x8ED (var var0000) {
 		SPEKTOR->show_npc_face1(0x0000);
 		say("\"I'm sure there is an explanation for everything.\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"This time, I think thou art wrong, Spektor! What else didst thou see in the dungeon?\"");
 		return var0000;
 	}
@@ -106400,7 +106400,7 @@ var Func08ED 0x8ED (var var0000) {
 		MARSTEN->show_npc_face1(0x0000);
 		say("\"I shall have a talk with Shmed tomorrow. If half of what this Knight says is true, then the dungeonkeeper hath been seriously delinquent in his duties.\"");
 		UI_remove_npc_face1();
-		0x0000->set_conversation_slot();
+		UI_set_conversation_slot(0);
 		say("\"",
 			var0001,
 			", I apologize for what hath been done to thee in the Knight's Test. 'Tis an outrage!\"");
@@ -109547,7 +109547,7 @@ void Func093A 0x93A (var var0000) {
 			YELINDA->show_npc_face1(0x0000);
 			say("\"Oh... why, yes... of course. Make it so.\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"",
 				var0003,
 				", know that thou mayest defend thyself or appoint any willing person to speak on thy behalf. Dost thou have a preference?\"");
@@ -109556,7 +109556,7 @@ void Func093A 0x93A (var var0000) {
 				var0001,
 				", the Avatar -- to present my case. I have faith that I will be acquitted.\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"Very well, ",
 				var0001,
 				" shall be thy champion. Guard, please take the defendant to his cell.\"");
@@ -109816,7 +109816,7 @@ void Func093A 0x93A (var var0000) {
 			YELINDA->show_npc_face1(0x0000);
 			say("\"What is this all about, Captain Jorvin?\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"Now we know the truth about this town...\"");
 			JORVIN->show_npc_face1(0x0000);
 			say("\"I have grave news, dearest Lady. There have been foul deeds done in this Temple!\"");
@@ -109874,7 +109874,7 @@ void Func093A 0x93A (var var0000) {
 			}
 			say("\"Silence, chit! What dost thou know of these matters?\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"I am certain that heaven built the levers in the secret room! Kylista, hath it been a great boon to thee, being a mouthpiece of the heavens?\"");
 			KYLISTA->show_npc_face1(0x0000);
 			say("\"Delin, take thy daughter in hand! She speaks out of turn.\"");
@@ -110098,7 +110098,7 @@ void Func093A 0x93A (var var0000) {
 			YELINDA->show_npc_face1(0x0000);
 			say("\"Thou hast acted correctly, Jorvin -- the Oracle hath just denounced them...\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"The Priestess of Beauty hath confessed to me that she and Great Captain Voldin were united in an evil conspiracy.\"");
 			say("\"By use of secret levers, they dared to control the utterings of the sacred Oracle! Only by the actions of the brave ",
 				var0001,
@@ -110106,7 +110106,7 @@ void Func093A 0x93A (var var0000) {
 			ALYSSAND->show_npc_face1(0x0000);
 			say("\"Who knows how long this deception hath been practiced! Have the citizens of Fawn always been the victims of the Great Captains and the Priestess?\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"I did mistrust thy words previously, Alyssand, but now that Kylista hath confessed... I know not what to believe.\"");
 			YELINDA->show_npc_face1(0x0000);
 			if (VOLDIN->get_item_flag(DEAD)) {
@@ -110289,7 +110289,7 @@ void Func093B 0x93B (var var0000) {
 			ZULITH->show_npc_face1(0x0000);
 			say("\"Um... I am not sure, thy Ladyship. Nor is Jorvin to be found.\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"It is most improper that neither Voldin nor Kylista are here... But I shall not have justice detained.\"");
 			say("\"I shall continue in Kylista's place...\"");
 			UI_end_conversation();
@@ -110334,7 +110334,7 @@ void Func093B 0x93B (var var0000) {
 			KYLISTA->show_npc_face1(0x0000);
 			say("\"Wouldst thou wish one of thy Councillors to act in thy stead?\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"Let it be so! As most senior of my Councillors, Voldin always doth have my best interests at heart.\"");
 			UI_end_conversation();
 			var0003 = script YELINDA {
@@ -110454,7 +110454,7 @@ void Func093B 0x93B (var var0000) {
 			LEON->show_npc_face1(0x0000);
 			say("\"We shall behave ourselves, milord. The Fellowship is an enlightened brotherhood, not a group to be feared.\"");
 			UI_remove_npc_face1();
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 			say("\"We shall see...\"");
 			UI_end_conversation();
 			var0003 = script JORVIN after 4 ticks {
@@ -113144,7 +113144,7 @@ var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0
 		}
 		for (var0002 in var0005 with var0008 to var0009) {
 			Func094E(var0002->get_npc_number(), "@I'll help carry it.@");
-			0x0000->set_conversation_slot();
+			UI_set_conversation_slot(0);
 		}
 	}
 	if (var0001 > 0x0000) {
@@ -113479,14 +113479,14 @@ var Func09AE 0x9AE (var var0000) {
 			gflags[ASKED_JENDON_TOO_MUCH] = true;
 			if (JENDON->get_schedule_type() == WAITER) {
 				Func094E(OLON, "@I need a drink...@");
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"I've enjoyed jawin' with ye, mate, but I'd better be back to me duties...\"");
 				Func097F(JENDON, "@What'll ye have?@", 0x0000);
 			}
 			if (JENDON->get_schedule_type() == MAJOR_SIT) {
 				if (KYLISTA->npc_nearby()) {
 					Func094E(KYLISTA, "@Be still! Beauty is not irreverent.@");
-					0x0000->set_conversation_slot();
+					UI_set_conversation_slot(0);
 				}
 				say("\"This isn't the place for a long talk, mate. Meet me later, back at the tavern, and we'll talk more.\"");
 				Func097F(JENDON, "@Not now...@", 0x0000);
@@ -113501,7 +113501,7 @@ var Func09AE 0x9AE (var var0000) {
 			gflags[ASKED_BUCIA_TOO_MUCH] = true;
 			if (BUCIA->get_schedule_type() == TEND_SHOP) {
 				Func094E(FLINDO, "@I do not pay thee to stand jabbering, Bucia.@");
-				0x0000->set_conversation_slot();
+				UI_set_conversation_slot(0);
 				say("\"I must be getting back to work now. But it hath been nice talking with thee.\"");
 				if (BUCIA->get_npc_id() < 0x000F) {
 					say("\"If thou wert to be at the Blue Boar Inn at 10 tonight, I could discuss these things further with thee...\"");
