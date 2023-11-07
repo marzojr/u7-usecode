@@ -1,6 +1,11 @@
 #game "blackgate"
 #strictbraces "true"
 
+enum intrinsics {
+	UI_UNKNOWN_70 = 0x70,
+	UI_UNKNOWN_83 = 0x83,
+};
+
 // Global flags
 enum Globals {
 	SEEN_TETRA = 0x0,
@@ -51449,7 +51454,7 @@ void Func060E object#(0x60E) () {
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		UI_play_music(0x00FF, 0x0000);
 		UI_play_music(0x0011, 0x0000);
-		(@0x83)();
+		(@UI_UNKNOWN_83)();
 		var0000 = get_dead_party();
 		for (var0003 in var0000 with var0001 to var0002) {
 			var0004 = var0003->resurrect();
@@ -51857,7 +51862,7 @@ void Func0619 object#(0x619) () {
 }
 
 void Func061A object#(0x61A) () {
-	(@0x70)();
+	(@UI_UNKNOWN_70)();
 }
 
 extern void Func0806 0x806 (var var0000, var var0001);
@@ -58165,7 +58170,7 @@ void Func069D object#(0x69D) () {
 	var var0005;
 
 	if (event == BG_PATH_SUCCESS) {
-		(@0x70)();
+		(@UI_UNKNOWN_70)();
 		return;
 	}
 	var0000 = Func0881();
