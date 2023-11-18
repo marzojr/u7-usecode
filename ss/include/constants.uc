@@ -1,3 +1,4 @@
+const int FIRST_NPC_FUNCTION = 0x400;
 
 enum sprite_repeats {
 	LOOP_ONCE = -1,

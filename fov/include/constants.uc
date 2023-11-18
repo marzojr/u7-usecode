@@ -1,3 +1,5 @@
+const int FIRST_NPC_FUNCTION = 0x400;
+
 enum intrinsics {
 	UI_UNKNOWN_70 = 0x70,
 	UI_UNKNOWN_83 = 0x83,

@@ -3459,8 +3459,8 @@ extern void Func0636 object#(0x636) ();
 extern void Func06D9 object#(0x6D9) ();
 extern void Func0377 shape#(0x377) ();
 extern void Func0373 shape#(0x373) ();
-extern void Func047F object#(0x47F) ();
-extern void Func0480 object#(0x480) ();
+extern void FuncBrunt object#(FIRST_NPC_FUNCTION - BRUNT) ();
+extern void FuncDeadeye object#(FIRST_NPC_FUNCTION - DEADEYE) ();
 
 void Func013E shape#(0x13E) () {
 	var var0000;
@@ -3637,7 +3637,7 @@ void Func013E shape#(0x13E) () {
 		}
 		if (get_npc_id() == 0x0006) {
 			var000D = [0x0926, 0x0187, 0x0000];
-			BRUNT->si_path_run_usecode(var000D, SI_PATH_SUCCESS, BRUNT, Func047F, false);
+			BRUNT->si_path_run_usecode(var000D, SI_PATH_SUCCESS, BRUNT, FuncBrunt, false);
 			Func097F(item, "@I must be certain...@", 0x0000);
 		}
 		if (get_npc_id() == 0x0005) {
@@ -3668,7 +3668,7 @@ void Func013E shape#(0x13E) () {
 			say("\"I must prepare an appropriate welcome for mine old enemy!\"");
 			UI_end_conversation();
 			var000E = [0x092A, 0x0199, 0x0000];
-			DEADEYE->si_path_run_usecode(var000E, SI_PATH_SUCCESS, DEADEYE, Func0480, false);
+			DEADEYE->si_path_run_usecode(var000E, SI_PATH_SUCCESS, DEADEYE, FuncDeadeye, false);
 		}
 		if (get_npc_id() == 0x0002) {
 			Func097F(item, "@...before the Avatar cometh.@", 0x0000);
@@ -8722,7 +8722,7 @@ void Func0247 shape#(0x247) () {
 }
 
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
-extern void Func0526 object#(0x526) ();
+extern void FuncVasculio object#(FIRST_NPC_FUNCTION - VASCULIO) ();
 
 void Func024C shape#(0x24C) () {
 	var var0000;
@@ -8733,7 +8733,7 @@ void Func024C shape#(0x24C) () {
 		var0000 = script item {
 			nohalt;
 			wait 10;
-			call Func0526;
+			call FuncVasculio;
 		};
 		abort;
 	}
@@ -10064,7 +10064,7 @@ extern var Func0953 0x953 ();
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern var Func09A0 0x9A0 (var var0000, var var0001);
 extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
-extern void Func0448 object#(0x448) ();
+extern void FuncLydia object#(FIRST_NPC_FUNCTION - LYDIA) ();
 
 void Func028C shape#(0x28C) () {
 	var var0000;
@@ -10197,7 +10197,7 @@ void Func028C shape#(0x28C) () {
 		gflags[HAVE_WOLF_TATTOO] = true;
 		var0005 = script Func09A0(0x0005, 0x0001) after 1000 ticks {
 			nohalt;
-			call Func0448;
+			call FuncLydia;
 		};
 		var0009 = Func0992(IOLO, "@Thou dost look magnificent, Avatar!@", 0x0000, false);
 		if (var0009 != AVATAR) {
@@ -11921,7 +11921,7 @@ void Func02C1 shape#(0x2C1) () {
 
 extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern var Func09A0 0x9A0 (var var0000, var var0001);
-extern void Func041F object#(0x41F) ();
+extern void FuncRotoluncia object#(FIRST_NPC_FUNCTION - ROTOLUNCIA) ();
 extern void Func0603 object#(0x603) ();
 
 void Func02C3 shape#(0x2C3) () {
@@ -11945,7 +11945,7 @@ void Func02C3 shape#(0x2C3) () {
 		var0003 = script Func09A0(0x0005, 0x0001) {
 			nohalt;
 			wait 13;
-			call Func041F;
+			call FuncRotoluncia;
 		};
 		abort;
 	}
@@ -12923,9 +12923,9 @@ extern void Func0926 0x926 (var var0000);
 extern void Func0928 0x928 (var var0000);
 extern void Func07FA object#(0x7FA) ();
 extern void Func07DA object#(0x7DA) ();
-extern void Func0510 object#(0x510) ();
-extern void Func047F object#(0x47F) ();
-extern void Func0480 object#(0x480) ();
+extern void FuncPalos object#(FIRST_NPC_FUNCTION - PALOS) ();
+extern void FuncBrunt object#(FIRST_NPC_FUNCTION - BRUNT) ();
+extern void FuncDeadeye object#(FIRST_NPC_FUNCTION - DEADEYE) ();
 extern void Func0602 object#(0x602) ();
 extern void Func0605 object#(0x605) ();
 extern void Func0314 shape#(0x314) ();
@@ -13046,7 +13046,7 @@ void Func02E8 shape#(0x2E8) () {
 	if ((var0000 == 0x0091) && (gflags[PALOS_TALKS_TO_AVATAR] == false)) {
 		var0006 = script item after 1 ticks {
 			nohalt;
-			call Func0510;
+			call FuncPalos;
 		};
 		abort;
 	}
@@ -13056,7 +13056,7 @@ void Func02E8 shape#(0x2E8) () {
 	if ((var0000 == 0x0092) && (gflags[BRUNT_TALKS_TO_AVATAR] == false)) {
 		var0006 = script item after 1 ticks {
 			nohalt;
-			call Func047F;
+			call FuncBrunt;
 		};
 		abort;
 	}
@@ -13066,7 +13066,7 @@ void Func02E8 shape#(0x2E8) () {
 	if ((var0000 == 0x0093) && (gflags[DEADEYE_TALKS_TO_AVATAR] == false)) {
 		var0006 = script item after 1 ticks {
 			nohalt;
-			call Func0480;
+			call FuncDeadeye;
 		};
 		abort;
 	}
@@ -13355,7 +13355,7 @@ void Func0310 shape#(0x310) () {
 
 extern void Func090D 0x90D (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern void Func08DA 0x8DA (var var0000);
-extern void Func04A8 object#(0x4A8) ();
+extern void FuncStefano object#(FIRST_NPC_FUNCTION - STEFANO) ();
 
 void Func0313 shape#(0x313) () {
 	var var0000;
@@ -13429,8 +13429,8 @@ void Func0313 shape#(0x313) () {
 						}
 						var0011 = var000D->get_object_position();
 						var0011.y += 1;
-						STEFANO->si_path_run_usecode(var0011, PATH_SUCCESS, STEFANO, Func04A8, true);
-						UI_set_path_failure([Func04A8], STEFANO, SI_PATH_FAILURE);
+						STEFANO->si_path_run_usecode(var0011, PATH_SUCCESS, STEFANO, FuncStefano, true);
+						UI_set_path_failure([FuncStefano], STEFANO, SI_PATH_FAILURE);
 						abort;
 					} else {
 						AVATAR->item_say("@The lever will not move.@");
@@ -13738,7 +13738,7 @@ void Func0319 shape#(0x319) () {
 extern var Func0953 0x953 ();
 extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern var Func09A0 0x9A0 (var var0000, var var0001);
-extern void Func0526 object#(0x526) ();
+extern void FuncVasculio object#(FIRST_NPC_FUNCTION - VASCULIO) ();
 
 void Func031D shape#(0x31D) () {
 	var var0000;
@@ -14037,7 +14037,7 @@ void Func031D shape#(0x31D) () {
 					nohalt;
 					face var0007;
 					wait 5;
-					call Func0526;
+					call FuncVasculio;
 				};
 				remove_item();
 				return;
@@ -14308,7 +14308,7 @@ void Func031D shape#(0x31D) () {
 	} while (false);
 }
 
-extern void Func0422 object#(0x422) ();
+extern void FuncBoydon object#(FIRST_NPC_FUNCTION - BOYDON) ();
 
 void Func031F shape#(0x31F) () {
 	var var0000;
@@ -14322,7 +14322,7 @@ void Func031F shape#(0x31F) () {
 			nohalt;
 			say "@Who said that?@";
 			wait 7;
-			call Func0422;
+			call FuncBoydon;
 		};
 	}
 }
@@ -14424,7 +14424,7 @@ extern void Func08AF 0x8AF (var var0000, var var0001);
 extern var Func0955 0x955 ();
 extern void Func0922 0x922 (var var0000);
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
-extern void Func04A3 object#(0x4A3) ();
+extern void FuncLorthondo object#(FIRST_NPC_FUNCTION - LORTHONDO) ();
 
 void Func0326 shape#(0x326) () {
 	struct<ObjPos> var0000;
@@ -14510,29 +14510,29 @@ void Func0326 shape#(0x326) () {
 			var0004 &= LORTHONDO->find_nearby(0x0349, 0x0005, MASK_NONE);
 			var0005 = script var0004[0x0001] {
 				wait 5;
-				call Func04A3;
+				call FuncLorthondo;
 				remove;
 			};
 			var0005 = script var0004[0x0003] {
 				wait 8;
-				call Func04A3;
+				call FuncLorthondo;
 				remove;
 			};
 			var0005 = script var0004[0x0002] {
 				wait 10;
-				call Func04A3;
+				call FuncLorthondo;
 				remove;
 			};
 			var0005 = script var0004[0x0004] {
 				wait 14;
-				call Func04A3;
+				call FuncLorthondo;
 				remove;
 			};
 			var0006 = LORTHONDO->find_nearest(0x031F, 0x000A);
 			if (var0006) {
 				var0005 = script var0006 {
 					wait 16;
-					call Func04A3;
+					call FuncLorthondo;
 				};
 			}
 		}
@@ -14550,29 +14550,29 @@ void Func0326 shape#(0x326) () {
 				var0004 &= LORTHONDO->find_nearby(0x0349, 0x0005, MASK_NONE);
 				var0005 = script var0004[0x0001] {
 					wait 5;
-					call Func04A3;
+					call FuncLorthondo;
 					remove;
 				};
 				var0005 = script var0004[0x0003] {
 					wait 8;
-					call Func04A3;
+					call FuncLorthondo;
 					remove;
 				};
 				var0005 = script var0004[0x0002] {
 					wait 10;
-					call Func04A3;
+					call FuncLorthondo;
 					remove;
 				};
 				var0005 = script var0004[0x0004] {
 					wait 14;
-					call Func04A3;
+					call FuncLorthondo;
 					remove;
 				};
 				var0006 = LORTHONDO->find_nearest(0x031F, 0x000A);
 				if (var0006) {
 					var0005 = script var0006 {
 						wait 16;
-						call Func04A3;
+						call FuncLorthondo;
 					};
 				}
 				abort;
@@ -18664,7 +18664,7 @@ void Func03BD shape#(0x3BD) () {
 extern var Func097D 0x97D (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern void Func0887 0x887 (var var0000);
-extern void Func0400 object#(0x400) ();
+extern void FuncAvatar object#(FIRST_NPC_FUNCTION) ();
 
 void Func03BE shape#(0x3BE) () {
 	var var0000;
@@ -18675,7 +18675,7 @@ void Func03BE shape#(0x3BE) () {
 	if (event == DOUBLECLICK) {
 		if (var0000 || gflags[ROPE_ON_WELL]) {
 			AVATAR->si_path_run_usecode(get_object_position(), SI_PATH_SUCCESS, item, Func03BE, true);
-			UI_set_path_failure([Func0400], item, SI_PATH_FAILURE);
+			UI_set_path_failure([FuncAvatar], item, SI_PATH_FAILURE);
 		} else if ((!var0000) || (!gflags[ROPE_ON_WELL])) {
 			var0001 = Func0992(0x0001, "@Maybe we can climb down?!@", "@Maybe I can climb down?!@", true);
 			var0002 = Func0992(0x0001, "@But with what?@", 0x0000, true);
@@ -20175,7 +20175,7 @@ extern void Func060C object#(0x60C) ();
 extern void Func07DA object#(0x7DA) ();
 extern void Func07DC object#(0x7DC) ();
 
-void Func0400 object#(0x400) () {
+void FuncAvatar object#(FIRST_NPC_FUNCTION) () {
 	var var0000;
 	var var0001;
 	struct<Position> var0002;
@@ -20273,7 +20273,7 @@ void Func0400 object#(0x400) () {
 			var0003->set_schedule_type(WAIT);
 			var0000 = script var0003 after 5 ticks {
 				nohalt;
-				call Func0400;
+				call FuncAvatar;
 			};
 		}
 		if (var0001 == 0x001F) {
@@ -20555,7 +20555,7 @@ void Func0400 object#(0x400) () {
 				};
 				var0000 = script AVATAR after 5 ticks {
 					nohalt;
-					call Func0400;
+					call FuncAvatar;
 				};
 				abort;
 			}
@@ -20576,7 +20576,7 @@ extern void Func09B4 0x9B4 (var var0000);
 extern void Func092B 0x92B ();
 extern var Func0994 0x994 ();
 
-void Func0401 object#(0x401) () {
+void FuncDupre object#(FIRST_NPC_FUNCTION - DUPRE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -20821,7 +20821,7 @@ extern void Func0863 0x863 ();
 extern void Func094E 0x94E (var var0000, var var0001);
 extern void Func09B4 0x9B4 (var var0000);
 
-void Func0402 object#(0x402) () {
+void FuncShamino object#(FIRST_NPC_FUNCTION - SHAMINO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -20946,7 +20946,7 @@ void Func0402 object#(0x402) () {
 				}
 				remove("join");
 				break;
-labelFunc0402_02F8:
+labelFuncShamino_02F8:
 				SHAMINO->add_to_party();
 				gflags[SHAMINO_HAS_BELONGINGS] = true;
 				SHAMINO->set_npc_id(0x0000);
@@ -20984,7 +20984,7 @@ labelFunc0402_02F8:
 				say("\"The one called Karnax said that I must fulfill my purpose, or the world itself would be in jeopardy...\"");
 				if (var000B && var000C) {
 					// I see no way other than this
-					goto labelFunc0402_02F8;
+					goto labelFuncShamino_02F8;
 				}
 				fallthrough;
 
@@ -20992,7 +20992,7 @@ labelFunc0402_02F8:
 				say("\"That is right, I was dead when last we saw one another. However, the good monks found my body and returned life to me.\"");
 				if (var000B && var000C) {
 					// I see no way other than this
-					goto labelFunc0402_02F8;
+					goto labelFuncShamino_02F8;
 				}
 				fallthrough;
 
@@ -21008,7 +21008,7 @@ labelFunc0402_02F8:
 				}
 				if (var000B && var000C) {
 					// I see no way other than this
-					goto labelFunc0402_02F8;
+					goto labelFuncShamino_02F8;
 				}
 				fallthrough;
 
@@ -21026,7 +21026,7 @@ labelFunc0402_02F8:
 				}
 				if (var000B && var000C) {
 					// I see no way other than this
-					goto labelFunc0402_02F8;
+					goto labelFuncShamino_02F8;
 				}
 				fallthrough;
 
@@ -21049,7 +21049,7 @@ labelFunc0402_02F8:
 				gflags[HAVE_CHILL_SPELL] = true;
 				if (var000B && var000C) {
 					// I see no way other than this
-					goto labelFunc0402_02F8;
+					goto labelFuncShamino_02F8;
 				}
 				fallthrough;
 
@@ -21145,7 +21145,7 @@ extern void Func09B0 0x9B0 (var var0000);
 extern var Func0994 0x994 ();
 extern void Func06D9 object#(0x6D9) ();
 
-void Func0403 object#(0x403) () {
+void FuncIolo object#(FIRST_NPC_FUNCTION - IOLO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -21630,7 +21630,7 @@ extern var Func0955 0x955 ();
 extern var Func0942 0x942 (var var0000);
 extern void Func08FF 0x8FF ();
 
-void Func0404 object#(0x404) () {
+void FuncAndrio object#(FIRST_NPC_FUNCTION - ANDRIO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -21856,7 +21856,7 @@ void Func0404 object#(0x404) () {
 
 extern void Func0808 0x808 (var var0000, var var0001);
 
-void Func0405 object#(0x405) () {
+void FuncServ01 object#(FIRST_NPC_FUNCTION - SERV_01) () {
 	var var0000;
 	var var0001;
 
@@ -21867,7 +21867,7 @@ void Func0405 object#(0x405) () {
 
 extern void Func0808 0x808 (var var0000, var var0001);
 
-void Func0406 object#(0x406) () {
+void FuncServ02 object#(FIRST_NPC_FUNCTION - SERV_02) () {
 	var var0000;
 	var var0001;
 
@@ -21878,7 +21878,7 @@ void Func0406 object#(0x406) () {
 
 extern void Func0808 0x808 (var var0000, var var0001);
 
-void Func0407 object#(0x407) () {
+void FuncServ03 object#(FIRST_NPC_FUNCTION - SERV_03) () {
 	var var0000;
 	var var0001;
 
@@ -21889,7 +21889,7 @@ void Func0407 object#(0x407) () {
 
 extern void Func0808 0x808 (var var0000, var var0001);
 
-void Func0408 object#(0x408) () {
+void FuncServ04 object#(FIRST_NPC_FUNCTION - SERV_04) () {
 	var var0000;
 	var var0001;
 
@@ -21900,7 +21900,7 @@ void Func0408 object#(0x408) () {
 
 extern void Func0808 0x808 (var var0000, var var0001);
 
-void Func0409 object#(0x409) () {
+void FuncServ05 object#(FIRST_NPC_FUNCTION - SERV_05) () {
 	var var0000;
 	var var0001;
 
@@ -21911,7 +21911,7 @@ void Func0409 object#(0x409) () {
 
 extern void Func0808 0x808 (var var0000, var var0001);
 
-void Func040A object#(0x40A) () {
+void FuncServ06 object#(FIRST_NPC_FUNCTION - SERV_06) () {
 	var var0000;
 	var var0001;
 
@@ -21922,7 +21922,7 @@ void Func040A object#(0x40A) () {
 
 extern void Func0808 0x808 (var var0000, var var0001);
 
-void Func040B object#(0x40B) () {
+void FuncServ07 object#(FIRST_NPC_FUNCTION - SERV_07) () {
 	var var0000;
 	var var0001;
 
@@ -21933,7 +21933,7 @@ void Func040B object#(0x40B) () {
 
 extern void Func0808 0x808 (var var0000, var var0001);
 
-void Func040C object#(0x40C) () {
+void FuncServ08 object#(FIRST_NPC_FUNCTION - SERV_08) () {
 	var var0000;
 	var var0001;
 
@@ -21957,7 +21957,7 @@ extern void Func080C 0x80C ();
 extern void Func080B 0x80B ();
 extern void Func08FF 0x8FF ();
 
-void Func040D object#(0x40D) () {
+void FuncBucia object#(FIRST_NPC_FUNCTION - BUCIA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -22053,7 +22053,7 @@ void Func040D object#(0x40D) () {
 			var0008 = script BUCIA {
 				nohalt;
 				wait 7;
-				call Func040D;
+				call FuncBucia;
 			};
 		}
 	}
@@ -22867,7 +22867,7 @@ extern void Func0816 0x816 ();
 extern var Func0955 0x955 ();
 extern void Func08FF 0x8FF ();
 
-void Func040E object#(0x40E) () {
+void FuncColumna object#(FIRST_NPC_FUNCTION - COLUMNA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -23092,7 +23092,7 @@ extern var Func0956 0x956 (var var0000);
 extern void Func0827 0x827 ();
 extern void Func08FF 0x8FF ();
 
-void Func040F object#(0x40F) () {
+void FuncDucio object#(FIRST_NPC_FUNCTION - DUCIO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -23237,13 +23237,13 @@ void Func040F object#(0x40F) () {
 				say("\"Dost thou have something thou wishest me to look at?\"");
 				if (Func0955() == true) {
 					// I see no way other than this
-					goto labelFunc040F_032A;
+					goto labelFuncDucio_032A;
 				}
 				say("\"Fine.\"");
 				fallthrough;
 
 			case "apparatus":
-labelFunc040F_032A:
+labelFuncDucio_032A:
 				remove("apparatus");
 				if (var0005) {
 					if (Func097D(PARTY, 0x0001, 0x02ED, QUALITY_ANY, 0x0001)) {
@@ -23295,7 +23295,7 @@ labelFunc040F_032A:
 				if (var0008 == "buy") {
 					add("buy");
 					// I see no way other than this
-					goto labelFunc040F_046D;
+					goto labelFuncDucio_046D;
 				} else {
 					if (var0008 == "look") {
 						say("\"Looking is free. Inspect the automaton-made goods.\"");
@@ -23309,7 +23309,7 @@ labelFunc040F_032A:
 				fallthrough;
 
 			case "buy":
-labelFunc040F_046D:
+labelFuncDucio_046D:
 				if (var0004 == false) {
 					if (gflags[BANES_RELEASED]) {
 						say("\"If thou seest something thou dost like, tell me. If thou desirest something I do not have, let me know. I can either make it for thee or direct thee to someone who can.\"");
@@ -23410,9 +23410,9 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern var Func09A0 0x9A0 (var var0000, var var0001);
 extern var Func0942 0x942 (var var0000);
 extern void Func08FF 0x8FF ();
-extern void Func0425 object#(0x425) ();
+extern void FuncAle object#(FIRST_NPC_FUNCTION - ALE) ();
 
-void Func0410 object#(0x410) () {
+void FuncEdrin object#(FIRST_NPC_FUNCTION - EDRIN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -23448,7 +23448,7 @@ void Func0410 object#(0x410) () {
 			UI_sprite_effect(ANIMATION_LIGHTNING_GREEN, var0004.x, var0004.y, 0, 0, 0, LOOP_ONCE);
 			var0005 = script EDRIN after 3 ticks {
 				nohalt;
-				call Func0410;
+				call FuncEdrin;
 			};
 		}
 		if (EDRIN->get_npc_id() == 0x0007) {
@@ -23533,7 +23533,7 @@ void Func0410 object#(0x410) () {
 		ALE->set_polymorph(0x0304);
 		var0005 = script ALE after 5 ticks {
 			nohalt;
-			call Func0425;
+			call FuncAle;
 		};
 	}
 	if (event == DOUBLECLICK) {
@@ -23740,7 +23740,7 @@ extern var Func098C 0x98C ();
 extern var Func099F 0x99F (var var0000, var var0001, var var0002);
 extern void Func08FF 0x8FF ();
 
-void Func0411 object#(0x411) () {
+void FuncFedabiblio object#(FIRST_NPC_FUNCTION - FEDABIBLIO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -24228,7 +24228,7 @@ extern void Func0830 0x830 ();
 extern var Func097D 0x97D (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 
-void Func0412 object#(0x412) () {
+void FuncFilbercio object#(FIRST_NPC_FUNCTION - FILBERCIO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -24538,7 +24538,7 @@ extern var Func0942 0x942 (var var0000);
 extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern void Func08FF 0x8FF ();
 
-void Func0413 object#(0x413) () {
+void FuncFreli object#(FIRST_NPC_FUNCTION - FRELI) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -24741,7 +24741,7 @@ extern var Func0955 0x955 ();
 extern void Func0907 0x907 (var var0000, var var0001);
 extern void Func08FF 0x8FF ();
 
-void Func0414 object#(0x414) () {
+void FuncFrigidazzi object#(FIRST_NPC_FUNCTION - FRIGIDAZZI) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -24903,7 +24903,7 @@ void Func0414 object#(0x414) () {
 extern var Func0954 0x954 ();
 extern var Func0953 0x953 ();
 
-void Func0415 object#(0x415) () {
+void FuncGoblinMessenger object#(FIRST_NPC_FUNCTION - GOBLIN_MESSENGER) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -24924,7 +24924,7 @@ extern void Func095D 0x95D (var var0000);
 extern var Func09A0 0x9A0 (var var0000, var var0001);
 extern void Func08FF 0x8FF ();
 
-void Func0416 object#(0x416) () {
+void FuncGustacio object#(FIRST_NPC_FUNCTION - GUSTACIO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -25211,7 +25211,7 @@ extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, v
 extern var Func097D 0x97D (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func08FF 0x8FF ();
 
-void Func0417 object#(0x417) () {
+void FuncJulia object#(FIRST_NPC_FUNCTION - JULIA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -25672,7 +25672,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern void Func084B 0x84B ();
 extern void Func08FF 0x8FF ();
 
-void Func0418 object#(0x418) () {
+void FuncMelino object#(FIRST_NPC_FUNCTION - MELINO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -25970,7 +25970,7 @@ extern var Func0953 0x953 ();
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 
-void Func0419 object#(0x419) () {
+void FuncAutoMessenger object#(FIRST_NPC_FUNCTION - AUTO_MESSENGER) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -26126,7 +26126,7 @@ extern void Func094F 0x94F (var var0000, var var0001);
 extern void Func084F 0x84F ();
 extern void Func08FF 0x8FF ();
 
-void Func041A object#(0x41A) () {
+void FuncMortegro object#(FIRST_NPC_FUNCTION - MORTEGRO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -26171,7 +26171,7 @@ void Func041A object#(0x41A) () {
 			Func097F(MORTEGRO, "@Help!", 0x0002);
 			var0006 = script MORTEGRO after 7 ticks {
 				nohalt;
-				call Func041A;
+				call FuncMortegro;
 			};
 		} else {
 			Func097F(MORTEGRO, "@What dost thou wish?@", 0x0005);
@@ -26536,7 +26536,7 @@ extern var Func0956 0x956 (var var0000);
 extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern void Func08FF 0x8FF ();
 
-void Func041B object#(0x41B) () {
+void FuncMosh object#(FIRST_NPC_FUNCTION - MOSH) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -26840,7 +26840,7 @@ extern void Func090E 0x90E (var var0000, var var0001, var var0002, var var0003, 
 extern void Func08FF 0x8FF ();
 extern void Func070A object#(0x70A) ();
 
-void Func041C object#(0x41C) () {
+void FuncPetra object#(FIRST_NPC_FUNCTION - PETRA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -27221,7 +27221,7 @@ void Func041C object#(0x41C) () {
 							var0003 = UI_update_last_created([var000E.x - 1, var000E.y - 1, var000E.z + 1]);
 							if (var0003) {
 								PETRA->set_schedule_type(WAIT);
-								Func090E(PETRA, var000F, 0, 0, -1, Func041C, PETRA->get_npc_object(), PATH_SUCCESS, false);
+								Func090E(PETRA, var000F, 0, 0, -1, FuncPetra, PETRA->get_npc_object(), PATH_SUCCESS, false);
 							}
 						}
 						return;
@@ -27263,9 +27263,9 @@ extern void Func0859 0x859 ();
 extern void Func085A 0x85A ();
 extern void Func0857 0x857 ();
 extern void Func08FF 0x8FF ();
-extern void Func041F object#(0x41F) ();
+extern void FuncRotoluncia object#(FIRST_NPC_FUNCTION - ROTOLUNCIA) ();
 
-void Func041D object#(0x41D) () {
+void FuncPothos object#(FIRST_NPC_FUNCTION - POTHOS) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -27336,7 +27336,7 @@ void Func041D object#(0x41D) () {
 				var0004 = script Func09A0(0x0005, 0x0001) {
 					nohalt;
 					wait 130;
-					call Func041F;
+					call FuncRotoluncia;
 				};
 			} else {
 				say("\"I am waiting for the Blood Moss, ",
@@ -27813,7 +27813,7 @@ extern var Func0955 0x955 ();
 extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern void Func08FF 0x8FF ();
 
-void Func041E object#(0x41E) () {
+void FuncRocco object#(FIRST_NPC_FUNCTION - ROCCO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -28206,7 +28206,7 @@ extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, v
 extern var Func0988 0x988 (var var0000, var var0001);
 extern void Func0636 object#(0x636) ();
 
-void Func041F object#(0x41F) () {
+void FuncRotoluncia object#(FIRST_NPC_FUNCTION - ROTOLUNCIA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -28251,7 +28251,7 @@ void Func041F object#(0x41F) () {
 		var0004 = script item {
 			nohalt;
 			wait 5;
-			call Func041F;
+			call FuncRotoluncia;
 		};
 	}
 	if (event == STARTED_TALKING) {
@@ -28292,7 +28292,7 @@ void Func041F object#(0x41F) () {
 					actor frame sleeping;
 					say "@Mine head!@";
 					wait 6;
-					call Func041F;
+					call FuncRotoluncia;
 				};
 				abort;
 			}
@@ -28322,7 +28322,7 @@ void Func041F object#(0x41F) () {
 				nohalt;
 				call Func0636;
 				wait 8;
-				call Func041F;
+				call FuncRotoluncia;
 			};
 			abort;
 		}
@@ -28352,7 +28352,7 @@ void Func041F object#(0x41F) () {
 				nohalt;
 				actor frame sleeping;
 				continue;
-				call Func041F;
+				call FuncRotoluncia;
 				actor frame sleeping;
 			};
 			abort;
@@ -28483,7 +28483,7 @@ void Func041F object#(0x41F) () {
 								actor frame sleeping;
 								say "@Mine head!@";
 								wait 6;
-								call Func041F;
+								call FuncRotoluncia;
 							};
 							abort;
 						}
@@ -28571,7 +28571,7 @@ void Func041F object#(0x41F) () {
 			AVATAR->obj_sprite_effect(ANIMATION_TELEPORT2, 0, 0, 0, 0, 0, LOOP_ONCE);
 			var0004 = script AVATAR after 13 ticks {
 				nohalt;
-				call Func041F;
+				call FuncRotoluncia;
 			};
 			gflags[TEMP_FLAG_3] = true;
 			abort;
@@ -28591,7 +28591,7 @@ extern void Func086F 0x86F ();
 extern void Func086E 0x86E ();
 extern void Func08FF 0x8FF ();
 
-void Func0420 object#(0x420) () {
+void FuncTopo object#(FIRST_NPC_FUNCTION - TOPO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -28969,7 +28969,7 @@ extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, v
 extern void Func08FF 0x8FF ();
 extern void Func0636 object#(0x636) ();
 
-void Func0421 object#(0x421) () {
+void FuncTorrissio object#(FIRST_NPC_FUNCTION - TORRISSIO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -29227,7 +29227,7 @@ void Func0421 object#(0x421) () {
 				if (var0001) {
 					if (gflags[REFUSED_TO_GIVE_MOONSILK_STOCKINGS]) {
 						// I see no way other than this
-						goto labelFunc0421_0614;
+						goto labelFuncTorrissio_0614;
 					}
 					say("\"I beseech thee to turn over to me that which is the instrument of humiliation against a woman who hath done thee no harm. They belong to my lover Columna and they were stolen by the bandit Stefano. Columna's stockings can be used as evidence of our affair. I neither know nor care how thou hast come into possession of them. But know this: I shall have them!\"");
 					say("\"Those stockings are of no use to thee. I know thou wilt do the proper thing. Within thy chest beats a human heart. Thou art a woman of feelings.\"");
@@ -29269,13 +29269,13 @@ void Func0421 object#(0x421) () {
 						}
 						say("\"Bah! Thou art only trying to taunt me! Leave me at once!\"");
 						abort;
-labelFunc0421_0614:
+labelFuncTorrissio_0614:
 						say("\"I ask thee again -- surrender those stockings to me!\"");
 					} while (true);
 				} else {
 					if (gflags[REFUSED_TO_GIVE_MOONSILK_STOCKINGS]) {
 						// I see no way other than this
-						goto labelFunc0421_06AC;
+						goto labelFuncTorrissio_06AC;
 					}
 					say("\"I shall be frank with thee. I want the stockings to protect the honor of the woman I love. The stockings rightfully belong to my lover Columna, but they were stolen by the bandit Stefano. I neither know nor care how thou hast come into possession of them, but I must have them from thee.\"");
 					say("\"As thou dost have something I want, then I am obliged to provide something to thee that thou couldst want.\"");
@@ -29302,7 +29302,7 @@ labelFunc0421_0614:
 						// Dead code
 						Func097F(TORRISSIO, "@Begone, foul knave.@", 0x0000);
 						TORRISSIO->set_schedule_type(WANDER);
-labelFunc0421_06AC:
+labelFuncTorrissio_06AC:
 						say("\"I ask thee again -- surrender those stockings to me!\"");
 					} while (true);
 				}
@@ -29411,7 +29411,7 @@ extern void Func080A 0x80A ();
 extern var Func0955 0x955 ();
 extern void Func09B4 0x9B4 (var var0000);
 
-void Func0422 object#(0x422) () {
+void FuncBoydon object#(FIRST_NPC_FUNCTION - BOYDON) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -29715,7 +29715,7 @@ extern var Func0955 0x955 ();
 extern var Func0956 0x956 (var var0000);
 extern void Func0636 object#(0x636) ();
 
-void Func0423 object#(0x423) () {
+void FuncErstam object#(FIRST_NPC_FUNCTION - ERSTAM) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -30017,7 +30017,7 @@ void Func0423 object#(0x423) () {
 					UI_play_sound_effect(0x0077);
 					var000F = script ERSTAM after 7 ticks {
 						nohalt;
-						call Func0423;
+						call FuncErstam;
 					};
 					abort;
 				}
@@ -30042,7 +30042,7 @@ void Func0423 object#(0x423) () {
 						UI_play_sound_effect(0x0077);
 						var000F = script ERSTAM after 7 ticks {
 							nohalt;
-							call Func0423;
+							call FuncErstam;
 						};
 						abort;
 					}
@@ -30053,7 +30053,7 @@ void Func0423 object#(0x423) () {
 					UI_play_sound_effect(0x0077);
 					var000F = script ERSTAM after 7 ticks {
 						nohalt;
-						call Func0423;
+						call FuncErstam;
 					};
 					abort;
 				}
@@ -30201,7 +30201,7 @@ extern void Func094F 0x94F (var var0000, var var0001);
 extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
-void Func0424 object#(0x424) () {
+void FuncVasel object#(FIRST_NPC_FUNCTION - VASEL) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -30430,7 +30430,7 @@ extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern void Func0636 object#(0x636) ();
 
-void Func0425 object#(0x425) () {
+void FuncAle object#(FIRST_NPC_FUNCTION - ALE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -30517,7 +30517,7 @@ extern void Func0806 0x806 ();
 extern var Func0955 0x955 ();
 extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 
-void Func0426 object#(0x426) () {
+void FuncArgus object#(FIRST_NPC_FUNCTION - ARGUS) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -30903,7 +30903,7 @@ extern var Func0957 0x957 (var var0000);
 extern void Func09B0 0x9B0 (var var0000);
 extern var Func0955 0x955 ();
 
-void Func0427 object#(0x427) () {
+void FuncByrin object#(FIRST_NPC_FUNCTION - BYRIN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -31274,7 +31274,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern var Func097D 0x97D (var var0000, var var0001, var var0002, var var0003, var var0004);
 
-void Func0428 object#(0x428) () {
+void FuncHawk object#(FIRST_NPC_FUNCTION - HAWK) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -31649,7 +31649,7 @@ extern void Func081E 0x81E ();
 extern void Func081F 0x81F ();
 extern void Func081D 0x81D ();
 
-void Func0429 object#(0x429) () {
+void FuncDevra object#(FIRST_NPC_FUNCTION - DEVRA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -31984,7 +31984,7 @@ extern var Func09A0 0x9A0 (var var0000, var var0001);
 extern void Func08FF 0x8FF ();
 extern void Func07DC object#(0x7DC) ();
 
-void Func042A object#(0x42A) () {
+void FuncFlindo object#(FIRST_NPC_FUNCTION - FLINDO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -32514,7 +32514,7 @@ extern var Func0994 0x994 ();
 extern void Func07D1 object#(0x7D1) ();
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
-void Func042B object#(0x42B) () {
+void FuncKane object#(FIRST_NPC_FUNCTION - KANE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -32785,7 +32785,7 @@ extern var Func097D 0x97D (var var0000, var var0001, var var0002, var var0003, v
 extern void Func0971 0x971 (var var0000);
 extern var Func0977 0x977 (var var0000);
 
-void Func042C object#(0x42C) () {
+void FuncSelina object#(FIRST_NPC_FUNCTION - SELINA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -33066,7 +33066,7 @@ void Func042C object#(0x42C) () {
 					gflags[SELINA_HAS_BELONGINGS] = true;
 					var000E = script Func09A0(0x0005, 0x0001) after 25 ticks {
 						nohalt;
-						call Func042C;
+						call FuncSelina;
 					};
 					Func097F(SELINA, "@Onward!@", 0x0000);
 					if (!gflags[SELINA_GAVE_KEY]) {
@@ -33356,7 +33356,7 @@ void Func042C object#(0x42C) () {
 						gflags[SELINA_WARNED_WRONG_WAY] = true;
 						var000E = script Func09A0(0x0005, 0x0001) after 50 ticks {
 							nohalt;
-							call Func042C;
+							call FuncSelina;
 						};
 						abort;
 					}
@@ -33380,7 +33380,7 @@ void Func042C object#(0x42C) () {
 			}
 			var000E = script Func09A0(0x0005, 0x0001) after 50 ticks {
 				nohalt;
-				call Func042C;
+				call FuncSelina;
 			};
 			gflags[SELINA_WARNED_WRONG_WAY] = false;
 		}
@@ -33443,7 +33443,7 @@ void Func042C object#(0x42C) () {
 					var001C = SELINA->get_npc_object();
 					var000E = script var001C after 25 ticks {
 						nohalt;
-						call Func042C;
+						call FuncSelina;
 					};
 					return;
 				}
@@ -33504,7 +33504,7 @@ extern var Func0956 0x956 (var var0000);
 extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern void Func0875 0x875 ();
 
-void Func042D object#(0x42D) () {
+void FuncWilfred object#(FIRST_NPC_FUNCTION - WILFRED) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -33572,7 +33572,7 @@ void Func042D object#(0x42D) () {
 			Func097F(WILFRED, "@I am dying!@", 0x0000);
 			var0008 = script WILFRED after 7 ticks {
 				nohalt;
-				call Func042D;
+				call FuncWilfred;
 			};
 		}
 	}
@@ -33847,9 +33847,9 @@ extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern var Func097D 0x97D (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func08AB 0x8AB ();
 extern void Func08AA 0x8AA ();
-extern void Func043D object#(0x43D) ();
+extern void FuncZulith object#(FIRST_NPC_FUNCTION - ZULITH) ();
 
-void Func042E object#(0x42E) () {
+void FuncAlyssand object#(FIRST_NPC_FUNCTION - ALYSSAND) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -33893,7 +33893,7 @@ void Func042E object#(0x42E) () {
 		ALYSSAND->set_schedule_type(TALK);
 		var000B = script Func09A0(0x0001, 0x0002) after 50 ticks {
 			nohalt;
-			call Func042E;
+			call FuncAlyssand;
 		};
 		var000B = "" & ("@Psst!@" & "@Avatar...@");
 		Func094F(ALYSSAND, var000B);
@@ -34403,7 +34403,7 @@ void Func042E object#(0x42E) () {
 				ZULITH->set_new_schedules([MIDNIGHT, DAWN, MORNING, NOON, AFTERNOON, EVENING, NIGHT], [HOUND, HOUND, HOUND, HOUND, HOUND, HOUND, HOUND], [0x0408, 0x0778, 0x03A8, 0x0728, 0x03A8, 0x06C8, 0x0448, 0x06C4, 0x0408, 0x0788, 0x03A8, 0x0728, 0x0448, 0x06C4]);
 				var000B = script Func09A0(0x0005, 0x0001) after 100 ticks {
 					nohalt;
-					call Func043D;
+					call FuncZulith;
 				};
 				gflags[KNOWS_RING_OWNER] = true;
 				UI_push_answers();
@@ -34464,7 +34464,7 @@ extern var Func0955 0x955 ();
 extern void Func08AB 0x8AB ();
 extern void Func08AA 0x8AA ();
 
-void Func042F object#(0x42F) () {
+void FuncDelin object#(FIRST_NPC_FUNCTION - DELIN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -34978,7 +34978,7 @@ extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, v
 extern void Func08AB 0x8AB ();
 extern void Func08AA 0x8AA ();
 
-void Func0430 object#(0x430) () {
+void FuncDelphynia object#(FIRST_NPC_FUNCTION - DELPHYNIA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -35301,7 +35301,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern void Func08AB 0x8AB ();
 extern void Func08AA 0x8AA ();
 
-void Func0431 object#(0x431) () {
+void FuncGarth object#(FIRST_NPC_FUNCTION - GARTH) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -35558,7 +35558,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern void Func08AB 0x8AB ();
 extern void Func08AA 0x8AA ();
 
-void Func0432 object#(0x432) () {
+void FuncJoth object#(FIRST_NPC_FUNCTION - JOTH) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -35741,7 +35741,7 @@ extern var Func0955 0x955 ();
 extern void Func08AB 0x8AB ();
 extern void Func08AA 0x8AA ();
 
-void Func0433 object#(0x433) () {
+void FuncVoldin object#(FIRST_NPC_FUNCTION - VOLDIN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -35776,7 +35776,7 @@ void Func0433 object#(0x433) () {
 			VOLDIN->Func07D2();
 			var0003 = script VOLDIN after 7 ticks {
 				nohalt;
-				call Func0433;
+				call FuncVoldin;
 			};
 		} else {
 			AVATAR->item_say("@A moment of thy time, sir.@");
@@ -36061,7 +36061,7 @@ extern void Func08A9 0x8A9 ();
 extern void Func08AB 0x8AB ();
 extern void Func08AA 0x8AA ();
 
-void Func0434 object#(0x434) () {
+void FuncJendon object#(FIRST_NPC_FUNCTION - JENDON) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -37016,7 +37016,7 @@ extern var Func0955 0x955 ();
 extern void Func08A9 0x8A9 ();
 extern void Func08AB 0x8AB ();
 
-void Func0435 object#(0x435) () {
+void FuncJorvin object#(FIRST_NPC_FUNCTION - JORVIN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -37042,7 +37042,7 @@ void Func0435 object#(0x435) () {
 		if (Func0994() == 0x0003) {
 			var0005 = script Func09A0(0x0005, 0x0001) after 75 ticks {
 				nohalt;
-				call Func0435;
+				call FuncJorvin;
 			};
 			var0005 = JORVIN->approach_avatar(0x0078, 0x0028);
 			JORVIN->set_schedule_type(TALK);
@@ -37050,7 +37050,7 @@ void Func0435 object#(0x435) () {
 		} else {
 			var0005 = script Func09A0(0x0005, 0x0001) after 150 ticks {
 				nohalt;
-				call Func0435;
+				call FuncJorvin;
 			};
 		}
 	}
@@ -37416,7 +37416,7 @@ extern var Func0996 0x996 (var var0000, var var0001, var var0002, var var0003, v
 extern void Func08AB 0x8AB ();
 extern void Func08AA 0x8AA ();
 
-void Func0436 object#(0x436) () {
+void FuncKylista object#(FIRST_NPC_FUNCTION - KYLISTA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -37459,7 +37459,7 @@ void Func0436 object#(0x436) () {
 			KYLISTA->Func07D2();
 			var0005 = script KYLISTA after 7 ticks {
 				nohalt;
-				call Func0436;
+				call FuncKylista;
 			};
 		} else {
 			AVATAR->item_say("@Greetings, noble lady!@");
@@ -37733,9 +37733,9 @@ extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, v
 extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern void Func07D2 object#(0x7D2) ();
 extern void Func08AB 0x8AB ();
-extern void Func0435 object#(0x435) ();
+extern void FuncJorvin object#(FIRST_NPC_FUNCTION - JORVIN) ();
 
-void Func0437 object#(0x437) () {
+void FuncYelinda object#(FIRST_NPC_FUNCTION - YELINDA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -37820,7 +37820,7 @@ void Func0437 object#(0x437) () {
 			AVATAR->move_object(var000A);
 			var0000 = script AVATAR after 10 ticks {
 				nohalt;
-				call Func0400;
+				call FuncAvatar;
 			};
 			gflags[TEMP_FLAG_1] = false;
 			YELINDA->revert_schedule();
@@ -37864,7 +37864,7 @@ void Func0437 object#(0x437) () {
 			};
 			var0000 = script AVATAR after 2 ticks {
 				nohalt;
-				call Func0437;
+				call FuncYelinda;
 			};
 		} else if (JORVIN->get_item_flag(SI_ZOMBIE)) {
 			gflags[TEMP_FLAG_1] = true;
@@ -37880,7 +37880,7 @@ void Func0437 object#(0x437) () {
 				actor frame bowing;
 				actor frame kneeling;
 				actor frame sleeping;
-				call Func0437;
+				call FuncYelinda;
 			};
 		} else {
 			var0000 = JORVIN->set_to_attack(AVATAR, 0x0118);
@@ -37892,7 +37892,7 @@ void Func0437 object#(0x437) () {
 			};
 			var0000 = script AVATAR after 2 ticks {
 				nohalt;
-				call Func0437;
+				call FuncYelinda;
 			};
 			JORVIN->set_item_flag(SI_ZOMBIE);
 		}
@@ -37910,7 +37910,7 @@ void Func0437 object#(0x437) () {
 			Func097F(YELINDA, "@Greetings, " + var0001 + ".@", 0x0002);
 			YELINDA->set_schedule_type(TALK);
 			if (gflags[HAVE_YELINDA_AUDIENCE] && (!(gflags[DUPRE_ACCUSED] || (gflags[SHAMINO_ACCUSED] || gflags[IOLO_ACCUSED])))) {
-				JORVIN->si_path_run_usecode(YELINDA->get_object_position(), SI_PATH_SUCCESS, JORVIN->get_npc_object(), Func0435, false);
+				JORVIN->si_path_run_usecode(YELINDA->get_object_position(), SI_PATH_SUCCESS, JORVIN->get_npc_object(), FuncJorvin, false);
 			}
 		}
 	}
@@ -37983,7 +37983,7 @@ void Func0437 object#(0x437) () {
 					JORVIN->Func07D2();
 					var0000 = script AVATAR after 0 ticks {
 						nohalt;
-						call Func0437;
+						call FuncYelinda;
 					};
 					Func097F(JORVIN, "@Take this!@", 0x0000);
 					YELINDA->set_new_schedules(MIDNIGHT, SHY, [0x0000, 0x0000]);
@@ -38174,7 +38174,7 @@ extern void Func0965 0x965 ();
 extern void Func0966 0x966 ();
 extern var Func0955 0x955 ();
 
-void Func0438 object#(0x438) () {
+void FuncLeon object#(FIRST_NPC_FUNCTION - LEON) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -38430,7 +38430,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern void Func08AA 0x8AA ();
 extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 
-void Func0439 object#(0x439) () {
+void FuncKalen object#(FIRST_NPC_FUNCTION - KALEN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -38552,7 +38552,7 @@ extern void Func08A9 0x8A9 ();
 extern void Func08AB 0x8AB ();
 extern void Func08AA 0x8AA ();
 
-void Func043A object#(0x43A) () {
+void FuncOlon object#(FIRST_NPC_FUNCTION - OLON) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -38579,7 +38579,7 @@ void Func043A object#(0x43A) () {
 		if (Func0994() == 0x0003) {
 			var0007 = script Func09A0(0x0005, 0x0001) after 20 ticks {
 				nohalt;
-				call Func043A;
+				call FuncOlon;
 			};
 			var0007 = OLON->approach_avatar(0x0078, 0x0028);
 			OLON->set_schedule_type(TALK);
@@ -38587,7 +38587,7 @@ void Func043A object#(0x43A) () {
 		} else {
 			var0007 = script Func09A0(0x0005, 0x0001) after 50 ticks {
 				nohalt;
-				call Func043A;
+				call FuncOlon;
 			};
 		}
 	}
@@ -39352,7 +39352,7 @@ extern var Func097D 0x97D (var var0000, var var0001, var var0002, var var0003, v
 extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern void Func094F 0x94F (var var0000, var var0001);
 
-void Func043B object#(0x43B) () {
+void FuncRuggs object#(FIRST_NPC_FUNCTION - RUGGS) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -39439,7 +39439,7 @@ void Func043B object#(0x43B) () {
 						var000E->set_schedule_type(TALK);
 					}
 				}
-				RUGGS->si_path_run_usecode(var0007, PROXIMITY, item, Func043B, false);
+				RUGGS->si_path_run_usecode(var0007, PROXIMITY, item, FuncRuggs, false);
 				abort;
 			}
 			say("\"I have searched all my life for a woman who would overlook my deformity and learn to love me. Somehow I will find a way to tell Delphynia of my love...\"");
@@ -39461,7 +39461,7 @@ void Func043B object#(0x43B) () {
 							var000E->set_schedule_type(TALK);
 						}
 					}
-					RUGGS->si_path_run_usecode(var0007, PROXIMITY, item, Func043B, false);
+					RUGGS->si_path_run_usecode(var0007, PROXIMITY, item, FuncRuggs, false);
 					abort;
 				}
 				say("\"I am sure that thou hast thy reasons, Avatar. But I am sorely disappointed.\"");
@@ -39476,7 +39476,7 @@ void Func043B object#(0x43B) () {
 						var000E->set_schedule_type(TALK);
 					}
 				}
-				RUGGS->si_path_run_usecode(var0007, PROXIMITY, item, Func043B, false);
+				RUGGS->si_path_run_usecode(var0007, PROXIMITY, item, FuncRuggs, false);
 				abort;
 			}
 			if (var0004 == true) {
@@ -39499,7 +39499,7 @@ void Func043B object#(0x43B) () {
 				}
 			}
 			gflags[REFUSED_RUGGS_LETTER] = true;
-			RUGGS->si_path_run_usecode(var0007, PROXIMITY, item, Func043B, false);
+			RUGGS->si_path_run_usecode(var0007, PROXIMITY, item, FuncRuggs, false);
 			var000B = AVATAR->find_nearby(0x017D, 0x0014, MASK_NONE);
 			for (var000E in var000B with var0013 to var0014) {
 				if (var000E->get_npc_id() == 0x0001) {
@@ -39805,7 +39805,7 @@ extern void Func07D1 object#(0x7D1) ();
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 
-void Func043C object#(0x43C) () {
+void FuncScots object#(FIRST_NPC_FUNCTION - SCOTS) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -40013,7 +40013,7 @@ extern void Func087B 0x87B ();
 extern void Func08AB 0x8AB ();
 extern void Func08AA 0x8AA ();
 
-void Func043D object#(0x43D) () {
+void FuncZulith object#(FIRST_NPC_FUNCTION - ZULITH) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -40049,14 +40049,14 @@ void Func043D object#(0x43D) () {
 		if (Func0994() == 0x0003) {
 			var0008 = script Func09A0(0x0005, 0x0001) after 50 ticks {
 				nohalt;
-				call Func043D;
+				call FuncZulith;
 			};
 			var0008 = ZULITH->approach_avatar(0x0078, 0x0028);
 			ZULITH->set_schedule_type(HOUND);
 		} else {
 			var0008 = script Func09A0(0x0005, 0x0001) after 100 ticks {
 				nohalt;
-				call Func043D;
+				call FuncZulith;
 			};
 		}
 	}
@@ -40341,7 +40341,7 @@ extern void Func07D1 object#(0x7D1) ();
 extern var Func0955 0x955 ();
 extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 
-void Func043E object#(0x43E) () {
+void FuncAndral object#(FIRST_NPC_FUNCTION - ANDRAL) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -40552,8 +40552,8 @@ void Func043E object#(0x43E) () {
 				Func097F(ANDRAL, "@Aha!@", 0x0000);
 				var0006 = ANDRAL->find_nearby(0x037E, 0x000A, MASK_NONE);
 				if (var0006) {
-					ANDRAL->si_path_run_usecode(var0006->get_object_position(), SI_PATH_SUCCESS, item, Func043E, false);
-					UI_set_path_failure([Func043E], item, SI_PATH_FAILURE);
+					ANDRAL->si_path_run_usecode(var0006->get_object_position(), SI_PATH_SUCCESS, item, FuncAndral, false);
+					UI_set_path_failure([FuncAndral], item, SI_PATH_FAILURE);
 				}
 			}
 		} else {
@@ -40586,7 +40586,7 @@ void Func043E object#(0x43E) () {
 					actor frame ready;
 					wait 2;
 				};
-				call Func043E;
+				call FuncAndral;
 			};
 		} else {
 			ANDRAL->run_schedule();
@@ -40615,7 +40615,7 @@ extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern var Func0955 0x955 ();
 extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 
-void Func043F object#(0x43F) () {
+void FuncCaladin object#(FIRST_NPC_FUNCTION - CALADIN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -41190,9 +41190,9 @@ extern void Func09AC 0x9AC (var var0000, var var0001, var var0002, var var0003);
 extern void Func07D1 object#(0x7D1) ();
 extern var Func0994 0x994 ();
 extern void Func0636 object#(0x636) ();
-extern void Func0443 object#(0x443) ();
+extern void FuncHarnna object#(FIRST_NPC_FUNCTION - HARNNA) ();
 
-void Func0440 object#(0x440) () {
+void FuncCantra object#(FIRST_NPC_FUNCTION - CANTRA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -41254,7 +41254,7 @@ void Func0440 object#(0x440) () {
 			};
 			var0003 = script HARNNA after 30 ticks {
 				nohalt;
-				call Func0443;
+				call FuncHarnna;
 			};
 		}
 		var0003 = script Func09A0(0x0005, 0x0001) after 30 ticks {
@@ -41446,7 +41446,7 @@ extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, v
 extern var Func0955 0x955 ();
 extern void Func0811 0x811 ();
 
-void Func0441 object#(0x441) () {
+void FuncCellia object#(FIRST_NPC_FUNCTION - CELLIA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -41646,7 +41646,7 @@ extern var Func0955 0x955 ();
 extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
-void Func0442 object#(0x442) () {
+void FuncGSimon object#(FIRST_NPC_FUNCTION - G_SIMON) () {
 	struct<Position> var0000;
 	var var0001;
 	var var0002;
@@ -41736,7 +41736,7 @@ void Func0442 object#(0x442) () {
 		var0002 = script AVATAR {
 			nohalt;
 			wait 10;
-			call Func0442;
+			call FuncGSimon;
 		};
 	}
 }
@@ -41754,7 +41754,7 @@ extern void Func0837 0x837 ();
 extern var Func09AE 0x9AE (var var0000);
 extern var Func0988 0x988 (var var0000, var var0001);
 
-void Func0443 object#(0x443) () {
+void FuncHarnna object#(FIRST_NPC_FUNCTION - HARNNA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -42789,7 +42789,7 @@ extern void Func0843 0x843 ();
 extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern void Func097A 0x97A (var var0000);
 
-void Func0444 object#(0x444) () {
+void FuncKrayg object#(FIRST_NPC_FUNCTION - KRAYG) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -42838,7 +42838,7 @@ void Func0444 object#(0x444) () {
 			KRAYG->Func07D2();
 			var0009 = script KRAYG after 7 ticks {
 				nohalt;
-				call Func0444;
+				call FuncKrayg;
 			};
 		} else {
 			Func097F(KRAYG, "@Hello.@", 0x0002);
@@ -43179,7 +43179,7 @@ extern var Func0955 0x955 ();
 extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern var Func0988 0x988 (var var0000, var var0001);
 
-void Func0445 object#(0x445) () {
+void FuncMarsten object#(FIRST_NPC_FUNCTION - MARSTEN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -43231,14 +43231,14 @@ void Func0445 object#(0x445) () {
 		if (gflags[PROVED_MARSTEN_IS_TRAITOR]) {
 			MARSTEN->run_schedule();
 			// I see no way other than this
-			goto labelFunc0445_0257;
+			goto labelFuncMarsten_0257;
 		} else {
 			if (gflags[DUPRE_MADE_EQUIPMENT_LIST]) {
 				abort;
 			}
 			var000E = script Func09A0(0x0005, 0x0001) after 200 ticks {
 				nohalt;
-				call Func0445;
+				call FuncMarsten;
 			};
 			if (!DUPRE->npc_nearby()) {
 				var000E = DUPRE->approach_avatar(0x0064, 0x0028);
@@ -43283,7 +43283,7 @@ void Func0445 object#(0x445) () {
 			MARSTEN->Func07D2();
 			var000E = script MARSTEN after 7 ticks {
 				nohalt;
-				call Func0445;
+				call FuncMarsten;
 			};
 			abort;
 		}
@@ -43292,7 +43292,7 @@ void Func0445 object#(0x445) () {
 	}
 	if (event == STARTED_TALKING) {
 		MARSTEN->run_schedule();
-labelFunc0445_0257:
+labelFuncMarsten_0257:
 		MARSTEN->clear_item_say();
 		MARSTEN->show_npc_face0(0x0000);
 		do {
@@ -43782,14 +43782,14 @@ labelFunc0445_0257:
 					BRENDANN->set_schedule_type(SHY);
 					var000E = script Func09A0(0x0005, 0x0001) {
 						nohalt;
-						call Func0445;
+						call FuncMarsten;
 					};
 				} else {
 					Func097F(AVATAR, "@Good day!@", 0x0000);
 					Func097F(MARSTEN, "@Certainly...@", 0x0002);
 				}
 				// I see no way other than this
-				goto labelFunc0445_0D4F;
+				goto labelFuncMarsten_0D4F;
 		}
 	}
 	if (event == PROXIMITY) {
@@ -43811,7 +43811,7 @@ labelFunc0445_0257:
 					var0018 = Func0988(var001B, var0018);
 				}
 			}
-labelFunc0445_0D4F:
+labelFuncMarsten_0D4F:
 			if (var0018 == []) {
 				abort;
 			}
@@ -43870,9 +43870,9 @@ extern void Func0845 0x845 ();
 extern void Func0846 0x846 ();
 extern var Func0955 0x955 ();
 extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
-extern void Func044D object#(0x44D) ();
+extern void FuncSpektor object#(FIRST_NPC_FUNCTION - SPEKTOR) ();
 
-void Func0446 object#(0x446) () {
+void FuncLucilla object#(FIRST_NPC_FUNCTION - LUCILLA) () {
 	struct<Position> var0000;
 	var var0001;
 	struct<Position> var0002;
@@ -44119,7 +44119,7 @@ void Func0446 object#(0x446) () {
 					say("\"Wouldst thou like to meet later?\"");
 					gflags[COURTED_LUCILLA] = true;
 					if (Func0955()) {
-labelFunc0446_05A1:
+labelFuncLucilla_05A1:
 						say("\"Then meet me at the pub after we have closed, in the wee hours before dawn. 'Tis the only time I can be alone with thee since I work so late.\"");
 						say("\"I cannot wait.\"");
 						gflags[ACCEPTED_LUCILLA_PROPOSAL] = true;
@@ -44163,7 +44163,7 @@ labelFunc0446_05A1:
 				gflags[KNOWS_OF_LUCILLA_AND_SPEKTOR] = true;
 				Func097F(LUCILLA, "@Farewell!@", 0x0000);
 				Func097F(SPEKTOR, "@Anon!@", 0x0002);
-				SPEKTOR->si_path_run_usecode([0x041B, 0x0A52, 0x0000], SI_PATH_SUCCESS, SPEKTOR, Func044D, true);
+				SPEKTOR->si_path_run_usecode([0x041B, 0x0A52, 0x0000], SI_PATH_SUCCESS, SPEKTOR, FuncSpektor, true);
 				abort;
 
 			case "rendezvous" (remove):
@@ -44171,7 +44171,7 @@ labelFunc0446_05A1:
 					say("\"Hast thou changed thy mind about meeting?\"");
 					if (Func0955()) {
 						// I see no way other than this
-						goto labelFunc0446_05A1;
+						goto labelFuncLucilla_05A1;
 					} else {
 						say("\"Suit thyself.\"");
 					}
@@ -44255,7 +44255,7 @@ extern var Func0956 0x956 (var var0000);
 extern void Func0848 0x848 ();
 extern var Func0988 0x988 (var var0000, var var0001);
 
-void Func0447 object#(0x447) () {
+void FuncLuther object#(FIRST_NPC_FUNCTION - LUTHER) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -44350,7 +44350,7 @@ void Func0447 object#(0x447) () {
 		if ((LUTHER->get_schedule_type() == MAJOR_SIT) && ANDRAL->npc_nearby()) {
 			var0008 = script LUTHER after 5 ticks {
 				nohalt;
-				call Func0447;
+				call FuncLuther;
 			};
 		} else {
 			LUTHER->set_schedule_type(TALK);
@@ -44617,7 +44617,7 @@ extern void Func09AC 0x9AC (var var0000, var var0001, var var0002, var var0003);
 extern void Func09AD 0x9AD (var var0000);
 extern void Func028C shape#(0x28C) ();
 
-void Func0448 object#(0x448) () {
+void FuncLydia object#(FIRST_NPC_FUNCTION - LYDIA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -44664,7 +44664,7 @@ void Func0448 object#(0x448) () {
 				var0007 = Func09A0(0x0005, 0x0002);
 				var0008 = script var0007 after 100 ticks {
 					nohalt;
-					call Func0448;
+					call FuncLydia;
 				};
 				abort;
 			}
@@ -44687,7 +44687,7 @@ void Func0448 object#(0x448) () {
 				var0007 = Func09A0(0x0005, 0x0002);
 				var0008 = script var0007 after 5 ticks {
 					nohalt;
-					call Func0448;
+					call FuncLydia;
 				};
 			}
 		}
@@ -44699,14 +44699,14 @@ void Func0448 object#(0x448) () {
 					var0007 = Func09A0(0x0005, 0x0002);
 					var0008 = script var0007 after 20 ticks {
 						nohalt;
-						call Func0448;
+						call FuncLydia;
 					};
 				}
 			}
 			var0007 = Func09A0(0x0005, 0x0001);
 			var0008 = script var0007 after 1000 ticks {
 				nohalt;
-				call Func0448;
+				call FuncLydia;
 			};
 		}
 	}
@@ -44918,7 +44918,7 @@ extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern void Func094E 0x94E (var var0000, var var0001);
 extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 
-void Func0449 object#(0x449) () {
+void FuncRenfry object#(FIRST_NPC_FUNCTION - RENFRY) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -45121,7 +45121,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern void Func07D1 object#(0x7D1) ();
 extern var Func0955 0x955 ();
 
-void Func044A object#(0x44A) () {
+void FuncShazzana object#(FIRST_NPC_FUNCTION - SHAZZANA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -45439,7 +45439,7 @@ extern void Func0907 0x907 (var var0000, var var0001);
 extern void Func094F 0x94F (var var0000, var var0001);
 extern void Func0739 object#(0x739) ();
 
-void Func044B object#(0x44B) () {
+void FuncShmed object#(FIRST_NPC_FUNCTION - SHMED) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -45717,7 +45717,7 @@ extern void Func094F 0x94F (var var0000, var var0001);
 extern var Func09A0 0x9A0 (var var0000, var var0001);
 extern void Func0795 object#(0x795) ();
 
-void Func044C object#(0x44C) () {
+void FuncSimon object#(FIRST_NPC_FUNCTION - SIMON) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -45763,7 +45763,7 @@ void Func044C object#(0x44C) () {
 		var0005 = script AVATAR {
 			nohalt;
 			wait 15;
-			call Func0442;
+			call FuncGSimon;
 		};
 		gflags[GOBLIN_SIMON_DEAD] = true;
 		var0005 = AVATAR->find_nearby(ANY_SHAPE, 0x0028, MASK_NPC2);
@@ -45782,7 +45782,7 @@ void Func044C object#(0x44C) () {
 		} else {
 			var0005 = script SIMON after 5 ticks {
 				nohalt;
-				call Func044C;
+				call FuncSimon;
 			};
 			SIMON->set_schedule_type(STANDTHERE);
 		}
@@ -45925,7 +45925,7 @@ void Func044C object#(0x44C) () {
 					AVATAR->Func0620();
 					var0005 = script AVATAR after 25 ticks {
 						nohalt;
-						call Func044C;
+						call FuncSimon;
 					};
 					var0005 = script AVATAR {
 						nohalt;
@@ -46080,7 +46080,7 @@ void Func044C object#(0x44C) () {
 				var0005 = script AVATAR {
 					nohalt;
 					wait 15;
-					call Func0442;
+					call FuncGSimon;
 				};
 				gflags[GOBLIN_SIMON_DEAD] = true;
 				abort;
@@ -46134,7 +46134,7 @@ extern var Func0996 0x996 (var var0000, var var0001, var var0002, var var0003, v
 extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern void Func0865 0x865 ();
 
-void Func044D object#(0x44D) () {
+void FuncSpektor object#(FIRST_NPC_FUNCTION - SPEKTOR) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -46257,7 +46257,7 @@ void Func044D object#(0x44D) () {
 			SPEKTOR->Func07D2();
 			var0009 = script SPEKTOR after 7 ticks {
 				nohalt;
-				call Func044D;
+				call FuncSpektor;
 			};
 			abort;
 		}
@@ -46506,7 +46506,7 @@ extern void Func0868 0x868 ();
 extern var Func097D 0x97D (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func097A 0x97A (var var0000);
 
-void Func044E object#(0x44E) () {
+void FuncStandarr object#(FIRST_NPC_FUNCTION - STANDARR) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -46680,7 +46680,7 @@ extern void Func0936 0x936 (var var0000, var var0001);
 extern void Func092E 0x92E (var var0000);
 extern void Func08F0 0x8F0 ();
 
-void Func044F object#(0x44F) () {
+void FuncTemplar object#(FIRST_NPC_FUNCTION - TEMPLAR) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -46990,7 +46990,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern var Func0956 0x956 (var var0000);
 extern void Func09AC 0x9AC (var var0000, var var0001, var var0002, var var0003);
 
-void Func0450 object#(0x450) () {
+void FuncFlicken object#(FIRST_NPC_FUNCTION - FLICKEN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -47261,7 +47261,7 @@ extern var Func0955 0x955 ();
 extern var Func0996 0x996 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern void Func082D 0x82D ();
 
-void Func0451 object#(0x451) () {
+void FuncEnsorcio object#(FIRST_NPC_FUNCTION - ENSORCIO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -47781,7 +47781,7 @@ extern var Func0953 0x953 ();
 extern void Func07D1 object#(0x7D1) ();
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
-void Func0452 object#(0x452) () {
+void FuncLordOfDiscipline object#(FIRST_NPC_FUNCTION - LORD_OF_DISCIPLINE) () {
 	var var0000;
 	var var0001;
 
@@ -47815,7 +47815,7 @@ extern var Func0953 0x953 ();
 extern void Func07D1 object#(0x7D1) ();
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
-void Func0453 object#(0x453) () {
+void FuncAcidAutomaton object#(FIRST_NPC_FUNCTION - ACID_AUTOMATON) () {
 	var var0000;
 	var var0001;
 
@@ -47847,7 +47847,7 @@ void Func0453 object#(0x453) () {
 extern void Func0809 0x809 ();
 extern void Func09AD 0x9AD (var var0000);
 
-void Func0454 object#(0x454) () {
+void FuncGuard1 object#(FIRST_NPC_FUNCTION - GUARD1) () {
 	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 	} else {
@@ -47857,7 +47857,7 @@ void Func0454 object#(0x454) () {
 
 extern void Func08B2 0x8B2 ();
 
-void Func0455 object#(0x455) () {
+void FuncAuto1 object#(FIRST_NPC_FUNCTION - AUTO1) () {
 	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		clear_item_flag(SI_TOURNAMENT);
 		reduce_health(0x0032, NORMAL_DAMAGE);
@@ -47869,13 +47869,13 @@ void Func0455 object#(0x455) () {
 
 extern void Func0809 0x809 ();
 
-void Func0456 object#(0x456) () {
+void FuncGuard3 object#(FIRST_NPC_FUNCTION - GUARD3) () {
 	Func0809();
 }
 
 extern void Func08B2 0x8B2 ();
 
-void Func0457 object#(0x457) () {
+void FuncAuto2 object#(FIRST_NPC_FUNCTION - AUTO2) () {
 	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		clear_item_flag(SI_TOURNAMENT);
 		reduce_health(0x0032, NORMAL_DAMAGE);
@@ -47887,31 +47887,31 @@ void Func0457 object#(0x457) () {
 
 extern void Func0809 0x809 ();
 
-void Func0458 object#(0x458) () {
+void FuncGuard5 object#(FIRST_NPC_FUNCTION - GUARD5) () {
 	Func0809();
 }
 
 extern void Func0809 0x809 ();
 
-void Func0459 object#(0x459) () {
+void FuncGuard6 object#(FIRST_NPC_FUNCTION - GUARD6) () {
 	Func0809();
 }
 
 extern void Func0809 0x809 ();
 
-void Func045A object#(0x45A) () {
+void FuncGuard7 object#(FIRST_NPC_FUNCTION - GUARD7) () {
 	Func0809();
 }
 
 extern void Func0809 0x809 ();
 
-void Func045B object#(0x45B) () {
+void FuncGuard8 object#(FIRST_NPC_FUNCTION - GUARD8) () {
 	Func0809();
 }
 
 extern void Func08B2 0x8B2 ();
 
-void Func045C object#(0x45C) () {
+void FuncAuto3 object#(FIRST_NPC_FUNCTION - AUTO3) () {
 	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		clear_item_flag(SI_TOURNAMENT);
 		reduce_health(0x0032, NORMAL_DAMAGE);
@@ -47923,7 +47923,7 @@ void Func045C object#(0x45C) () {
 
 extern void Func08B2 0x8B2 ();
 
-void Func045D object#(0x45D) () {
+void FuncAuto4 object#(FIRST_NPC_FUNCTION - AUTO4) () {
 	if ((event == DEATH) && get_item_flag(SI_TOURNAMENT)) {
 		clear_item_flag(SI_TOURNAMENT);
 		reduce_health(0x0032, NORMAL_DAMAGE);
@@ -47941,7 +47941,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern var Func0955 0x955 ();
 extern void Func094E 0x94E (var var0000, var var0001);
 
-void Func045E object#(0x45E) () {
+void FuncMurder1 object#(FIRST_NPC_FUNCTION - MURDER1) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -48030,7 +48030,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern var Func0955 0x955 ();
 extern void Func094E 0x94E (var var0000, var var0001);
 
-void Func045F object#(0x45F) () {
+void FuncMurder2 object#(FIRST_NPC_FUNCTION - MURDER2) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -48139,7 +48139,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern var Func0955 0x955 ();
 extern void Func094E 0x94E (var var0000, var var0001);
 
-void Func0460 object#(0x460) () {
+void FuncMurder3 object#(FIRST_NPC_FUNCTION - MURDER3) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -48229,7 +48229,7 @@ extern var Func0955 0x955 ();
 extern void Func094E 0x94E (var var0000, var var0001);
 extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 
-void Func0461 object#(0x461) () {
+void FuncMurder4 object#(FIRST_NPC_FUNCTION - MURDER4) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -48317,7 +48317,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern var Func0955 0x955 ();
 extern void Func094E 0x94E (var var0000, var var0001);
 
-void Func0462 object#(0x462) () {
+void FuncMurder5 object#(FIRST_NPC_FUNCTION - MURDER5) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -48421,7 +48421,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern var Func0955 0x955 ();
 extern void Func094E 0x94E (var var0000, var var0001);
 
-void Func0463 object#(0x463) () {
+void FuncMurder6 object#(FIRST_NPC_FUNCTION - MURDER6) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -48511,7 +48511,7 @@ extern var Func0955 0x955 ();
 extern void Func082F 0x82F ();
 extern void Func0636 object#(0x636) ();
 
-void Func0464 object#(0x464) () {
+void FuncEthAutomaton object#(FIRST_NPC_FUNCTION - ETH_AUTOMATON) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -48547,7 +48547,7 @@ void Func0464 object#(0x464) () {
 						// This could be a break instead; the original
 						// skips the endconv from a break, which is why
 						// I did it this way
-						goto labelFunc0464_0169;
+						goto labelFuncEthAutomaton_0169;
 
 					case "Leave the Money":
 						say("\"Thou art correct, seeker. Thou wouldst have no idea what the money was to be used for.\" *\"Ethicality demands that thou not takest anything without permission, no matter what the need. If thou wouldst stand in judgment of another, thou must be sure of thine Ethicality.\"");
@@ -48564,7 +48564,7 @@ void Func0464 object#(0x464) () {
 						// This could be a break instead; the original
 						// skips the endconv from a break, which is why
 						// I did it this way
-						goto labelFunc0464_0169;
+						goto labelFuncEthAutomaton_0169;
 
 					case "Continue":
 						say("\"Thou art correct, and brave as well, seeker. Thou dost know that yielding to evil is to admit the dominion of that evil.\" *\"Ethicality demands that thou shouldst maintain thy virtue and oppose evil, even at the cost of thy life.\"");
@@ -48588,9 +48588,9 @@ void Func0464 object#(0x464) () {
 						// This could be a break instead; the original
 						// skips the endconv from a break, which is why
 						// I did it this way
-						goto labelFunc0464_0169;
+						goto labelFuncEthAutomaton_0169;
 				}
-labelFunc0464_0169:
+labelFuncEthAutomaton_0169:
 				say("\"I am sorry, seeker. It is necessary for thee to think more about these questions before undergoing the tests. Please return after further meditation.\"");
 				UI_fade_palette(0x000C, 0x0001, 0x0000);
 				AVATAR->move_object([0x0AA0, 0x03C0, 0x0000]);
@@ -48836,7 +48836,7 @@ labelFunc0464_0169:
 
 extern void Func09B7 0x9B7 ();
 
-void Func0477 object#(0x477) () {
+void FuncGoblin19 object#(FIRST_NPC_FUNCTION - GOBLIN_19) () {
 	if ((event == DEATH) || (event == SCRIPTED)) {
 		Func09B7();
 	}
@@ -48844,7 +48844,7 @@ void Func0477 object#(0x477) () {
 
 extern void Func09B7 0x9B7 ();
 
-void Func0478 object#(0x478) () {
+void FuncGoblin21 object#(FIRST_NPC_FUNCTION - GOBLIN_21) () {
 	if ((event == DEATH) || (event == SCRIPTED)) {
 		Func09B7();
 	}
@@ -48852,7 +48852,7 @@ void Func0478 object#(0x478) () {
 
 extern void Func09B7 0x9B7 ();
 
-void Func0479 object#(0x479) () {
+void FuncGoblin22 object#(FIRST_NPC_FUNCTION - GOBLIN_22) () {
 	if ((event == DEATH) || (event == SCRIPTED)) {
 		Func09B7();
 	}
@@ -48860,7 +48860,7 @@ void Func0479 object#(0x479) () {
 
 extern void Func09B7 0x9B7 ();
 
-void Func047A object#(0x47A) () {
+void FuncGoblin23 object#(FIRST_NPC_FUNCTION - GOBLIN_23) () {
 	if ((event == DEATH) || (event == SCRIPTED)) {
 		Func09B7();
 	}
@@ -48868,13 +48868,13 @@ void Func047A object#(0x47A) () {
 
 extern void Func09B7 0x9B7 ();
 
-void Func047B object#(0x47B) () {
+void FuncGoblin24 object#(FIRST_NPC_FUNCTION - GOBLIN_24) () {
 	if ((event == DEATH) || (event == SCRIPTED)) {
 		Func09B7();
 	}
 }
 
-void Func047C object#(0x47C) () {
+void FuncDStefano object#(FIRST_NPC_FUNCTION - D_STEFANO) () {
 	struct<Position> var0000;
 
 	if (event == DEATH) {
@@ -48901,7 +48901,7 @@ extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern var Func0955 0x955 ();
 extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 
-void Func047D object#(0x47D) () {
+void FuncButler object#(FIRST_NPC_FUNCTION - BUTLER) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -48961,7 +48961,7 @@ extern void Func0809 0x809 ();
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 
-void Func047E object#(0x47E) () {
+void FuncGuard11 object#(FIRST_NPC_FUNCTION - GUARD_11) () {
 	var var0000;
 
 	if (get_item_flag(SI_ZOMBIE)) {
@@ -48992,7 +48992,7 @@ void Func047E object#(0x47E) () {
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern void Func0924 0x924 (var var0000, var var0001);
 
-void Func047F object#(0x47F) () {
+void FuncBrunt object#(FIRST_NPC_FUNCTION - BRUNT) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -49016,11 +49016,11 @@ void Func047F object#(0x47F) () {
 	if ((event == SCRIPTED) && ((gflags[TEMP_FLAG_1] == false) && (gflags[BRUNT_TALKS_TO_AVATAR] == false))) {
 		gflags[BRUNT_TALKS_TO_AVATAR] = true;
 		BRUNT->move_object([0x0797, 0x028B, 0x0000]);
-		BRUNT->si_path_run_usecode([0x0799, 0x027F, 0x0000], PATH_SUCCESS, BRUNT, Func047F, true);
+		BRUNT->si_path_run_usecode([0x0799, 0x027F, 0x0000], PATH_SUCCESS, BRUNT, FuncBrunt, true);
 	}
 	if ((event == SCRIPTED) && gflags[TEMP_FLAG_1]) {
 		gflags[TEMP_FLAG_1] = false;
-		BRUNT->si_path_run_usecode([0x0794, 0x028F, 0x0000], PATH_FAILURE, BRUNT, Func047F, true);
+		BRUNT->si_path_run_usecode([0x0794, 0x028F, 0x0000], PATH_FAILURE, BRUNT, FuncBrunt, true);
 	}
 	if (event == PATH_SUCCESS) {
 		BRUNT->show_npc_face0(0x0000);
@@ -49031,7 +49031,7 @@ void Func047F object#(0x47F) () {
 		Func097F(AVATAR, "@Wait!@", 0x0005);
 		var0001 = script item after 2 ticks {
 			nohalt;
-			call Func047F;
+			call FuncBrunt;
 		};
 		abort;
 	}
@@ -49052,7 +49052,7 @@ void Func047F object#(0x47F) () {
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern void Func0924 0x924 (var var0000, var var0001);
 
-void Func0480 object#(0x480) () {
+void FuncDeadeye object#(FIRST_NPC_FUNCTION - DEADEYE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -49075,11 +49075,11 @@ void Func0480 object#(0x480) () {
 	if ((event == SCRIPTED) && ((gflags[TEMP_FLAG_1] == false) && (gflags[DEADEYE_TALKS_TO_AVATAR] == false))) {
 		gflags[DEADEYE_TALKS_TO_AVATAR] = true;
 		DEADEYE->move_object([0x0926, 0x0284, 0x0000]);
-		DEADEYE->si_path_run_usecode([0x0927, 0x028D, 0x0000], PATH_SUCCESS, DEADEYE, Func0480, true);
+		DEADEYE->si_path_run_usecode([0x0927, 0x028D, 0x0000], PATH_SUCCESS, DEADEYE, FuncDeadeye, true);
 	}
 	if ((event == SCRIPTED) && gflags[TEMP_FLAG_1]) {
 		gflags[TEMP_FLAG_1] = false;
-		DEADEYE->si_path_run_usecode([0x092A, 0x0284, 0x0000], PATH_FAILURE, DEADEYE, Func0480, true);
+		DEADEYE->si_path_run_usecode([0x092A, 0x0284, 0x0000], PATH_FAILURE, DEADEYE, FuncDeadeye, true);
 	}
 	if (event == PATH_SUCCESS) {
 		DEADEYE->show_npc_face0(0x0000);
@@ -49090,7 +49090,7 @@ void Func0480 object#(0x480) () {
 		Func097F(AVATAR, "@Hold!@", 0x0005);
 		var0000 = script item after 2 ticks {
 			nohalt;
-			call Func0480;
+			call FuncDeadeye;
 		};
 		abort;
 	}
@@ -49112,7 +49112,7 @@ extern void Func0809 0x809 ();
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern var Func0955 0x955 ();
 
-void Func0481 object#(0x481) () {
+void FuncPassword object#(FIRST_NPC_FUNCTION - PASSWORD) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -49129,14 +49129,14 @@ void Func0481 object#(0x481) () {
 		Func097F(AVATAR, "@Hail, metal servant!@", 0x0000);
 		Func097F(item, "@Halt, stranger!@", 0x0001);
 		PASSWORD->set_schedule_type(STANDTHERE);
-		si_path_run_usecode([0x0766, 0x027C, 0x0000], PATH_SUCCESS, item, Func0481, true);
+		si_path_run_usecode([0x0766, 0x027C, 0x0000], PATH_SUCCESS, item, FuncPassword, true);
 	}
 	if (event == PATH_SUCCESS) {
 		PASSWORD->set_schedule_type(PATROL);
 		PASSWORD->set_item_frame(0x0010);
 		var0000 = script item after 3 ticks {
 			nohalt;
-			call Func0481;
+			call FuncPassword;
 		};
 	}
 	if (event == SCRIPTED) {
@@ -49196,7 +49196,7 @@ void Func0481 object#(0x481) () {
 extern void Func07D1 object#(0x7D1) ();
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
-void Func0482 object#(0x482) () {
+void FuncGuard12 object#(FIRST_NPC_FUNCTION - GUARD12) () {
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("@A metal man!@");
 		GUARD12->Func07D1();
@@ -49247,7 +49247,7 @@ extern var Func0957 0x957 (var var0000);
 extern var Func0955 0x955 ();
 extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 
-void Func048F object#(0x48F) () {
+void FuncBaiyanda object#(FIRST_NPC_FUNCTION - BAIYANDA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -49458,7 +49458,7 @@ extern var Func0942 0x942 (var var0000);
 extern var Func097D 0x97D (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 
-void Func0490 object#(0x490) () {
+void FuncBwundai object#(FIRST_NPC_FUNCTION - BWUNDAI) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -49519,7 +49519,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern var Func0942 0x942 (var var0000);
 extern var Func097D 0x97D (var var0000, var var0001, var var0002, var var0003, var var0004);
 
-void Func0491 object#(0x491) () {
+void FuncMwaerno object#(FIRST_NPC_FUNCTION - MWAERNO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -49596,7 +49596,7 @@ void Func0491 object#(0x491) () {
 
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
-void Func0492 object#(0x492) () {
+void FuncMyauri object#(FIRST_NPC_FUNCTION - MYAURI) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -49724,7 +49724,7 @@ extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern var Func0955 0x955 ();
 
-void Func0493 object#(0x493) () {
+void FuncNeyobi object#(FIRST_NPC_FUNCTION - NEYOBI) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -49798,7 +49798,7 @@ extern void Func07D1 object#(0x7D1) ();
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 
-void Func0494 object#(0x494) () {
+void FuncYenani object#(FIRST_NPC_FUNCTION - YENANI) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -49982,7 +49982,7 @@ extern var Func0996 0x996 (var var0000, var var0001, var var0002, var var0003, v
 extern void Func0835 0x835 ();
 extern void Func09B4 0x9B4 (var var0000);
 
-void Func0495 object#(0x495) () {
+void FuncGwenno object#(FIRST_NPC_FUNCTION - GWENNO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -50325,7 +50325,7 @@ extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern var Func0955 0x955 ();
 extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 
-void Func0496 object#(0x496) () {
+void FuncBrendann object#(FIRST_NPC_FUNCTION - BRENDANN) () {
 	struct<Position> var0000;
 	var var0001;
 	var var0002;
@@ -50482,7 +50482,7 @@ void Func0496 object#(0x496) () {
 			gflags[TEMP_FLAG_3] = false;
 			var0000 = script BRENDANN after 10 ticks {
 				nohalt;
-				call Func0496;
+				call FuncBrendann;
 			};
 		} else {
 			Func097F(AVATAR, "@Greetings, sir.@", 0x0000);
@@ -50949,7 +50949,7 @@ extern var Func0953 0x953 ();
 extern void Func07D1 object#(0x7D1) ();
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
-void Func0498 object#(0x498) () {
+void FuncSethys object#(FIRST_NPC_FUNCTION - SETHYS) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -51126,7 +51126,7 @@ void Func0498 object#(0x498) () {
 extern void Func07D1 object#(0x7D1) ();
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
-void Func0499 object#(0x499) () {
+void FuncGilwoyai object#(FIRST_NPC_FUNCTION - GILWOYAI) () {
 	var var0000;
 
 	if (event == DOUBLECLICK) {
@@ -51182,7 +51182,7 @@ void Func0499 object#(0x499) () {
 
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
-void Func049A object#(0x49A) () {
+void FuncKapyundi object#(FIRST_NPC_FUNCTION - KAPYUNDI) () {
 	var var0000;
 
 	if (event == DOUBLECLICK) {
@@ -51250,7 +51250,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern var Func0955 0x955 ();
 extern var Func097D 0x97D (var var0000, var var0001, var var0002, var var0003, var var0004);
 
-void Func049B object#(0x49B) () {
+void FuncBeryl object#(FIRST_NPC_FUNCTION - BERYL) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -51265,7 +51265,7 @@ void Func049B object#(0x49B) () {
 		}
 		var0003 = script Func09A0(0x0005, 0x0001) after (0x0014 + UI_get_random(0x0032)) ticks {
 			nohalt;
-			call Func049B;
+			call FuncBeryl;
 		};
 		if (IVOR->npc_nearby() || (DRAYGAN->npc_nearby() || (HURD->npc_nearby() || MORGHRIM->npc_nearby()))) {
 			abort;
@@ -51304,7 +51304,7 @@ void Func049B object#(0x49B) () {
 			DRAYGAN->set_schedule_type(HOUND);
 			var0003 = script Func09A0(0x0005, 0x0001) after 50 ticks {
 				nohalt;
-				call Func049B;
+				call FuncBeryl;
 			};
 			abort;
 		}
@@ -51504,12 +51504,12 @@ extern void Func07D1 object#(0x7D1) ();
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern var Func09A0 0x9A0 (var var0000, var var0001);
 extern void Func0982 0x982 (var var0000, var var0001);
-extern void Func049B object#(0x49B) ();
-extern void Func049D object#(0x49D) ();
-extern void Func049E object#(0x49E) ();
-extern void Func049F object#(0x49F) ();
+extern void FuncBeryl object#(FIRST_NPC_FUNCTION - BERYL) ();
+extern void FuncHurd object#(FIRST_NPC_FUNCTION - HURD) ();
+extern void FuncIvor object#(FIRST_NPC_FUNCTION - IVOR) ();
+extern void FuncMorghrim object#(FIRST_NPC_FUNCTION - MORGHRIM) ();
 
-void Func049C object#(0x49C) () {
+void FuncDraygan object#(FIRST_NPC_FUNCTION - DRAYGAN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -51535,7 +51535,7 @@ void Func049C object#(0x49C) () {
 		if (gflags[DRAYGAN_IS_IMMORTAL]) {
 			var0003 = script Func09A0(0x0005, 0x0001) after 50 ticks {
 				nohalt;
-				call Func049F;
+				call FuncMorghrim;
 			};
 			gflags[DRAYGAN_IS_IMMORTAL] = false;
 			DRAYGAN->clear_item_flag(SI_TOURNAMENT);
@@ -51627,16 +51627,16 @@ void Func049C object#(0x49C) () {
 					gflags[BERYL_WILL_MEET_AVATAR] = true;
 					var0003 = script Func09A0(0x0005, 0x0001) after 75 ticks {
 						nohalt;
-						call Func049B;
+						call FuncBeryl;
 					};
 				}
 				var0003 = script Func09A0(0x0005, 0x0002) after 300 ticks {
 					nohalt;
-					call Func049E;
+					call FuncIvor;
 				};
 				var0003 = script Func09A0(0x0005, 0x0003) after 200 ticks {
 					nohalt;
-					call Func049D;
+					call FuncHurd;
 				};
 				Func097F(AVATAR, "@Interesting....@", 0x0000);
 				Func097F(DRAYGAN, "@Do not return!@", 0x0003);
@@ -51651,7 +51651,7 @@ extern var Func09A0 0x9A0 (var var0000, var var0001);
 extern void Func07D1 object#(0x7D1) ();
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
-void Func049D object#(0x49D) () {
+void FuncHurd object#(FIRST_NPC_FUNCTION - HURD) () {
 	var var0000;
 
 	if (event == SCRIPTED) {
@@ -51660,7 +51660,7 @@ void Func049D object#(0x49D) () {
 		}
 		var0000 = script Func09A0(0x0005, 0x0001) after (0x0064 + UI_get_random(0x01F4)) ticks {
 			nohalt;
-			call Func049D;
+			call FuncHurd;
 		};
 		if (IVOR->npc_nearby() || (DRAYGAN->npc_nearby() || (BERYL->npc_nearby() || MORGHRIM->npc_nearby()))) {
 			abort;
@@ -51692,7 +51692,7 @@ extern void Func07D1 object#(0x7D1) ();
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern void Func09AD 0x9AD (var var0000);
 
-void Func049E object#(0x49E) () {
+void FuncIvor object#(FIRST_NPC_FUNCTION - IVOR) () {
 	var var0000;
 
 	if (event == SCRIPTED) {
@@ -51701,7 +51701,7 @@ void Func049E object#(0x49E) () {
 		}
 		var0000 = script Func09A0(0x0005, 0x0002) after UI_get_random(0x01F4) ticks {
 			nohalt;
-			call Func049E;
+			call FuncIvor;
 		};
 		if (HURD->npc_nearby() || (DRAYGAN->npc_nearby() || (BERYL->npc_nearby() || MORGHRIM->npc_nearby()))) {
 			abort;
@@ -51744,7 +51744,7 @@ extern void Func095D 0x95D (var var0000);
 extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern var Func0955 0x955 ();
 
-void Func049F object#(0x49F) () {
+void FuncMorghrim object#(FIRST_NPC_FUNCTION - MORGHRIM) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -51773,7 +51773,7 @@ void Func049F object#(0x49F) () {
 			Func097F(MORGHRIM, "Draygan's power is broken!", 0x0003);
 			var0004 = script MORGHRIM after 10 ticks {
 				nohalt;
-				call Func049F;
+				call FuncMorghrim;
 			};
 		}
 	}
@@ -52024,7 +52024,7 @@ extern var Func0953 0x953 ();
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern var Func0956 0x956 (var var0000);
 
-void Func04A0 object#(0x4A0) () {
+void FuncJail01 object#(FIRST_NPC_FUNCTION - JAIL_01) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -52174,7 +52174,7 @@ void Func04A0 object#(0x4A0) () {
 	if (event == DOUBLECLICK) {
 		var0010 = script item {
 			wait 2;
-			call Func04A0;
+			call FuncJail01;
 		};
 	}
 	if (event == DEATH) {
@@ -52209,7 +52209,7 @@ extern var Func0956 0x956 (var var0000);
 extern void Func080F 0x80F ();
 extern void Func0810 0x810 ();
 
-void Func04A1 object#(0x4A1) () {
+void FuncJail02 object#(FIRST_NPC_FUNCTION - JAIL_02) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -52283,7 +52283,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern void Func09AD 0x9AD (var var0000);
 extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 
-void Func04A2 object#(0x4A2) () {
+void FuncJail03 object#(FIRST_NPC_FUNCTION - JAIL_03) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -52303,7 +52303,7 @@ void Func04A2 object#(0x4A2) () {
 		JAIL_03->Func07D1();
 		var0003 = script item {
 			wait 2;
-			call Func04A2;
+			call FuncJail03;
 		};
 	}
 	if (event == SCRIPTED) {
@@ -52341,7 +52341,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern void Func09AA 0x9AA ();
 extern void Func09AD 0x9AD (var var0000);
 
-void Func04A3 object#(0x4A3) () {
+void FuncLorthondo object#(FIRST_NPC_FUNCTION - LORTHONDO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -52370,7 +52370,7 @@ void Func04A3 object#(0x4A3) () {
 
 	if (event == EGG) {
 		var0000 = script LORTHONDO {
-			call Func04A3;
+			call FuncLorthondo;
 		};
 		Func097F(LORTHONDO, "@Die, mortal!@", 0x0002);
 	}
@@ -52393,7 +52393,7 @@ void Func04A3 object#(0x4A3) () {
 			if (var0001) {
 				var0002 = UI_die_roll(0x0002, 0x0008);
 				var0000 = script var0001 after (0x0019 + var0002) ticks {
-					call Func04A3;
+					call FuncLorthondo;
 				};
 			}
 			var0002 = UI_die_roll(0x0001, 0x0004);
@@ -52619,7 +52619,7 @@ void Func04A3 object#(0x4A3) () {
 				wait 3;
 				actor frame strike_1h;
 				wait 4;
-				call Func04A3;
+				call FuncLorthondo;
 			};
 			abort;
 		}
@@ -52635,7 +52635,7 @@ void Func04A3 object#(0x4A3) () {
 				var0000 = script var0018 {
 					say "@And now, I fear I must be going.@";
 					wait 7;
-					call Func04A3;
+					call FuncLorthondo;
 				};
 			}
 			abort;
@@ -52663,7 +52663,7 @@ extern void Func0922 0x922 (var var0000);
 extern var Func099D 0x99D (var var0000);
 extern void Func08AF 0x8AF (var var0000, var var0001);
 
-void Func04A5 object#(0x4A5) () {
+void FuncPrison2 object#(FIRST_NPC_FUNCTION - PRISON2) () {
 	var var0000;
 	var var0001;
 
@@ -52674,7 +52674,7 @@ void Func04A5 object#(0x4A5) () {
 			UI_play_sound_effect(0x004C);
 			gflags[GOT_BLACK_SWORD] = true;
 			var0001 = script var0000 after 2 ticks {
-				call Func04A5;
+				call FuncPrison2;
 			};
 			BILLY_CAIN->show_npc_face0(0x0000);
 			say("\"At last thou hast found me, Avatar... I thought that I was free of thee when that strange lightning teleported me to this place...\" ~\"But now we are joined and I shall remain with thee until thou dost release me!\"");
@@ -52715,7 +52715,7 @@ extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, v
 extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern var Func09A0 0x9A0 (var var0000, var var0001);
 
-void Func04A8 object#(0x4A8) () {
+void FuncStefano object#(FIRST_NPC_FUNCTION - STEFANO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -53104,7 +53104,7 @@ void Func04A8 object#(0x4A8) () {
 					var0007 = Func099B(AVATAR, 0x0001, 0x022F, 0x0000, 0x000E, 0x0000, true);
 					var0007 = script Func09A0(0x0005, 0x0002) after 20 ticks {
 						nohalt;
-						call Func04A8;
+						call FuncStefano;
 					};
 					gflags[STEFANO_GAVE_TEETH] = true;
 				}
@@ -53164,7 +53164,7 @@ void Func04A8 object#(0x4A8) () {
 				nohalt;
 				wait 12;
 				call Func0313;
-				call Func04A8;
+				call FuncStefano;
 			};
 		}
 		STEFANO->set_schedule_type(FOLLOW_AVATAR);
@@ -53189,7 +53189,7 @@ void Func04A8 object#(0x4A8) () {
 			}
 			var0007 = script Func09A0(0x0005, 0x0002) after (UI_get_random(0x0064) + 0x0032) ticks {
 				nohalt;
-				call Func04A8;
+				call FuncStefano;
 			};
 			if (STEFANO->npc_nearby()) {
 				UI_play_music(0x001E, Func09A0(0x0005, 0x0001));
@@ -53231,7 +53231,7 @@ extern void Func08AE 0x8AE ();
 extern void Func09AA 0x9AA ();
 extern void Func090E 0x90E (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006, var var0007, var var0008);
 
-void Func04A9 object#(0x4A9) () {
+void FuncTeldrono object#(FIRST_NPC_FUNCTION - TELDRONO) () {
 	var var0000;
 	var var0001;
 	struct<Position> var0002;
@@ -53291,7 +53291,7 @@ void Func04A9 object#(0x4A9) () {
 						wait 2;
 						actor frame strike_2h;
 						wait 3;
-						call Func04A9;
+						call FuncTeldrono;
 					};
 				} else {
 					var0005 = script item {
@@ -53301,7 +53301,7 @@ void Func04A9 object#(0x4A9) () {
 						wait 3;
 						actor frame bowing;
 						wait 2;
-						call Func04A9;
+						call FuncTeldrono;
 					};
 				}
 				var0006 = find_nearest(0x00E9, 0x000A);
@@ -53315,7 +53315,7 @@ void Func04A9 object#(0x4A9) () {
 				TELDRONO->set_schedule_type(WAIT);
 			} else {
 				var0005 = script AVATAR after 1 ticks {
-					call Func04A9;
+					call FuncTeldrono;
 				};
 			}
 		}
@@ -53339,9 +53339,9 @@ void Func04A9 object#(0x4A9) () {
 				var0007 = -1;
 				var0008 = -1;
 				var0009 = -3;
-				Func090E(TELDRONO, var0004, var0007, var0008, var0009, Func04A9, TELDRONO->get_npc_object(), PATH_FAILURE, false);
+				Func090E(TELDRONO, var0004, var0007, var0008, var0009, FuncTeldrono, TELDRONO->get_npc_object(), PATH_FAILURE, false);
 				// BUG: This should use SI_PATH_FAILURE instead of PATH_FAILURE.
-				UI_set_path_failure(Func04A9, item, PATH_FAILURE);
+				UI_set_path_failure(FuncTeldrono, item, PATH_FAILURE);
 			}
 		} else {
 			Func08AE();
@@ -53398,7 +53398,7 @@ extern var Func0955 0x955 ();
 extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern void Func0879 0x879 ();
 
-void Func04AA object#(0x4AA) () {
+void FuncZhelkas object#(FIRST_NPC_FUNCTION - ZHELKAS) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -53487,7 +53487,7 @@ void Func04AA object#(0x4AA) () {
 			ZHELKAS->Func07D2();
 			var0014 = script ZHELKAS after 7 ticks {
 				nohalt;
-				call Func04AA;
+				call FuncZhelkas;
 			};
 		}
 	}
@@ -53866,13 +53866,13 @@ void Func04AA object#(0x4AA) () {
 	}
 }
 
-void Func04AB object#(0x4AB) () {
+void FuncSex01 object#(FIRST_NPC_FUNCTION - SEX_01) () {
 	if (event == DOUBLECLICK) {
 		item_say("@Save us, stranger!@");
 	}
 }
 
-void Func04AC object#(0x4AC) () {
+void FuncSex02 object#(FIRST_NPC_FUNCTION - SEX_02) () {
 	var var0000;
 
 	if (event == DOUBLECLICK) {
@@ -53888,19 +53888,19 @@ void Func04AC object#(0x4AC) () {
 	}
 }
 
-void Func04AD object#(0x4AD) () {
+void FuncSex03 object#(FIRST_NPC_FUNCTION - SEX_03) () {
 	if (event == DOUBLECLICK) {
 		item_say("@Please free me...@");
 	}
 }
 
-void Func04AE object#(0x4AE) () {
+void FuncSex04 object#(FIRST_NPC_FUNCTION - SEX_04) () {
 	if (event == DOUBLECLICK) {
 		item_say("@Thy friend lies...@");
 	}
 }
 
-void Func04AF object#(0x4AF) () {
+void FuncSex05 object#(FIRST_NPC_FUNCTION - SEX_05) () {
 	if (event == DOUBLECLICK) {
 		item_say("@Spare us!@");
 	}
@@ -53909,7 +53909,7 @@ void Func04AF object#(0x4AF) () {
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern void Func09AD 0x9AD (var var0000);
 
-void Func04B0 object#(0x4B0) () {
+void FuncThief1 object#(FIRST_NPC_FUNCTION - THIEF1) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -53927,7 +53927,7 @@ void Func04B0 object#(0x4B0) () {
 		THIEF1->item_say("@Water, please!@");
 		var0000 = script THIEF1 after 80 ticks {
 			nohalt;
-			call Func04B0;
+			call FuncThief1;
 		};
 	}
 	if (event == STARTED_TALKING) {
@@ -53949,7 +53949,7 @@ void Func04B0 object#(0x4B0) () {
 	}
 }
 
-void Func04B1 object#(0x4B1) () {
+void FuncThief2 object#(FIRST_NPC_FUNCTION - THIEF2) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -53974,7 +53974,7 @@ extern var Func09A0 0x9A0 (var var0000, var var0001);
 extern void Func09AA 0x9AA ();
 extern void Func07F7 object#(0x7F7) ();
 
-void Func04B2 object#(0x4B2) () {
+void FuncCloneIolo object#(FIRST_NPC_FUNCTION - CLONE_IOLO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -54050,10 +54050,10 @@ void Func04B2 object#(0x4B2) () {
 						var0005 = var0008->get_object_position();
 						var0005.x -= 1;
 						var0005.y += 1;
-						AVATAR->si_path_run_usecode(var0005, PATH_SUCCESS, var0008, Func04B2, true);
+						AVATAR->si_path_run_usecode(var0005, PATH_SUCCESS, var0008, FuncCloneIolo, true);
 						var0009 = Func09A0(0x0000, 0x0001);
 						var0005.x -= 2;
-						CLONE_IOLO->si_path_run_usecode(var0005, PATH_FAILURE, var0009, Func04B2, false);
+						CLONE_IOLO->si_path_run_usecode(var0005, PATH_FAILURE, var0009, FuncCloneIolo, false);
 					} else {
 						AVATAR->clear_item_flag(DONT_MOVE);
 					}
@@ -54115,10 +54115,10 @@ void Func04B2 object#(0x4B2) () {
 						var0005 = var0008->get_object_position();
 						var0005.x -= 1;
 						var0005.y += 1;
-						AVATAR->si_path_run_usecode(var0005, PATH_SUCCESS, var0008, Func04B2, true);
+						AVATAR->si_path_run_usecode(var0005, PATH_SUCCESS, var0008, FuncCloneIolo, true);
 						var0009 = Func09A0(0x0000, 0x0001);
 						var0005.x -= 2;
-						CLONE_IOLO->si_path_run_usecode(var0005, PATH_FAILURE, var0009, Func04B2, false);
+						CLONE_IOLO->si_path_run_usecode(var0005, PATH_FAILURE, var0009, FuncCloneIolo, false);
 					} else {
 						AVATAR->clear_item_flag(DONT_MOVE);
 					}
@@ -54158,10 +54158,10 @@ void Func04B2 object#(0x4B2) () {
 						var0005 = var0008->get_object_position();
 						var0005.x -= 1;
 						var0005.y += 1;
-						AVATAR->si_path_run_usecode(var0005, PATH_SUCCESS, var0008, Func04B2, true);
+						AVATAR->si_path_run_usecode(var0005, PATH_SUCCESS, var0008, FuncCloneIolo, true);
 						var0009 = Func09A0(0x0000, 0x0001);
 						var0005.x -= 2;
-						CLONE_IOLO->si_path_run_usecode(var0005, PATH_FAILURE, var0009, Func04B2, false);
+						CLONE_IOLO->si_path_run_usecode(var0005, PATH_FAILURE, var0009, FuncCloneIolo, false);
 					} else {
 						AVATAR->clear_item_flag(DONT_MOVE);
 					}
@@ -54219,7 +54219,7 @@ extern void Func07F7 object#(0x7F7) ();
 extern void Func072A object#(0x72A) ();
 extern void Func061E object#(0x61E) ();
 
-void Func04B3 object#(0x4B3) () {
+void FuncCloneShamino object#(FIRST_NPC_FUNCTION - CLONE_SHAMINO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -54343,7 +54343,7 @@ void Func04B3 object#(0x4B3) () {
 							var0007 = var000C->get_object_position();
 							var0007.x += 1;
 							CLONE_SHAMINO->set_npc_id(0x0001);
-							CLONE_SHAMINO->si_path_run_usecode(var0007, SI_PATH_SUCCESS, CLONE_SHAMINO->get_npc_object(), Func04B3, true);
+							CLONE_SHAMINO->si_path_run_usecode(var0007, SI_PATH_SUCCESS, CLONE_SHAMINO->get_npc_object(), FuncCloneShamino, true);
 						}
 					}
 					abort;
@@ -54391,8 +54391,8 @@ void Func04B3 object#(0x4B3) () {
 				if (var0006) {
 					var0007 = var0006->get_object_position();
 					CLONE_SHAMINO->set_npc_id(0x0000);
-					CLONE_SHAMINO->si_path_run_usecode([var0007.x + 1, var0007.y, var0007.z], PATH_SUCCESS, item, Func04B3, true);
-					SEX_02->si_path_run_usecode([var0007.x + 1, var0007.y + 2, var0007.z], PATH_SUCCESS, item, Func04B3, true);
+					CLONE_SHAMINO->si_path_run_usecode([var0007.x + 1, var0007.y, var0007.z], PATH_SUCCESS, item, FuncCloneShamino, true);
+					SEX_02->si_path_run_usecode([var0007.x + 1, var0007.y + 2, var0007.z], PATH_SUCCESS, item, FuncCloneShamino, true);
 				}
 			}
 			Func097F(AVATAR, "@Hey, come back!@", 0x0003);
@@ -54461,7 +54461,7 @@ void Func04B3 object#(0x4B3) () {
 				var0007 = var0006->get_object_position();
 				var0007.x += 1;
 				var0007.y -= 2;
-				AVATAR->si_path_run_usecode(var0007, BG_PATH_SUCCESS, AVATAR->get_npc_object(), Func04B3, true);
+				AVATAR->si_path_run_usecode(var0007, BG_PATH_SUCCESS, AVATAR->get_npc_object(), FuncCloneShamino, true);
 			}
 			gflags[REACHED_CLONE_SHAMINO_TEST] = true;
 		}
@@ -54501,7 +54501,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern var Func09A0 0x9A0 (var var0000, var var0001);
 extern void Func09BF 0x9BF ();
 
-void Func04B4 object#(0x4B4) () {
+void FuncCloneDupre object#(FIRST_NPC_FUNCTION - CLONE_DUPRE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -54729,7 +54729,7 @@ extern void Func07D1 object#(0x7D1) ();
 extern void Func085C 0x85C ();
 extern void Func085D 0x85D (var var0000, var var0001);
 
-void Func04B5 object#(0x4B5) () {
+void FuncRabindrinath object#(FIRST_NPC_FUNCTION - RABINDRINATH) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -54871,7 +54871,7 @@ extern var Func0955 0x955 ();
 extern var Func0996 0x996 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern void Func0636 object#(0x636) ();
 
-void Func04B6 object#(0x4B6) () {
+void FuncSiranush object#(FIRST_NPC_FUNCTION - SIRANUSH) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -55003,7 +55003,7 @@ void Func04B6 object#(0x4B6) () {
 			gflags[FINISHED_DREAM_QUEST] = true;
 			var0006 = script SIRANUSH {
 				nohalt;
-				call Func04B6;
+				call FuncSiranush;
 			};
 		}
 		abort;
@@ -55041,7 +55041,7 @@ void Func04B6 object#(0x4B6) () {
 					};
 					var0006 = script item after 15 ticks {
 						nohalt;
-						call Func04B6;
+						call FuncSiranush;
 					};
 					abort;
 				}
@@ -55099,7 +55099,7 @@ void Func04B6 object#(0x4B6) () {
 						};
 						var0006 = script item after 15 ticks {
 							nohalt;
-							call Func04B6;
+							call FuncSiranush;
 						};
 						abort;
 					}
@@ -55284,7 +55284,7 @@ void Func04B6 object#(0x4B6) () {
 						};
 						var0006 = script item after 15 ticks {
 							nohalt;
-							call Func04B6;
+							call FuncSiranush;
 						};
 						abort;
 					}
@@ -55319,7 +55319,7 @@ void Func04B6 object#(0x4B6) () {
 	}
 }
 
-void Func04B7 object#(0x4B7) () {
+void FuncThief3 object#(FIRST_NPC_FUNCTION - THIEF3) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -55341,7 +55341,7 @@ extern var Func0953 0x953 ();
 extern void Func07D1 object#(0x7D1) ();
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
-void Func04B8 object#(0x4B8) () {
+void FuncMurder7 object#(FIRST_NPC_FUNCTION - MURDER7) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -55369,7 +55369,7 @@ void Func04B8 object#(0x4B8) () {
 
 extern void Func0809 0x809 ();
 
-void Func04B9 object#(0x4B9) () {
+void FuncDedAutomaton object#(FIRST_NPC_FUNCTION - DED_AUTOMATON) () {
 	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
@@ -55382,7 +55382,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern void Func07D2 object#(0x7D2) ();
 extern void Func09AD 0x9AD (var var0000);
 
-void Func04BA object#(0x4BA) () {
+void FuncGuard18 object#(FIRST_NPC_FUNCTION - GUARD18) () {
 	var var0000;
 
 	if (get_item_flag(SI_ZOMBIE)) {
@@ -55397,7 +55397,7 @@ void Func04BA object#(0x4BA) () {
 		GUARD18->set_schedule_type(WAIT);
 		var0000 = script GUARD18 after 10 ticks {
 			nohalt;
-			call Func04BA;
+			call FuncGuard18;
 		};
 	}
 	if (event == SCRIPTED) {
@@ -55407,7 +55407,7 @@ void Func04BA object#(0x4BA) () {
 			GUARD18->set_schedule_type(WAIT);
 			var0000 = script GUARD18 after 10 ticks {
 				nohalt;
-				call Func04BA;
+				call FuncGuard18;
 			};
 		} else {
 			GUARD18->clear_item_say();
@@ -55423,14 +55423,14 @@ void Func04BA object#(0x4BA) () {
 }
 
 extern void Func0809 0x809 ();
-extern void Func04BA object#(0x4BA) ();
+extern void FuncGuard18 object#(FIRST_NPC_FUNCTION - GUARD18) ();
 
-void Func04BB object#(0x4BB) () {
+void FuncGuard19 object#(FIRST_NPC_FUNCTION - GUARD19) () {
 	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
-	item->Func04BA();
+	item->FuncGuard18();
 }
 
 extern void Func0809 0x809 ();
@@ -55439,7 +55439,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern void Func07D2 object#(0x7D2) ();
 extern void Func09AD 0x9AD (var var0000);
 
-void Func04BC object#(0x4BC) () {
+void FuncGuard20 object#(FIRST_NPC_FUNCTION - GUARD20) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -55456,7 +55456,7 @@ void Func04BC object#(0x4BC) () {
 		GUARD20->set_schedule_type(WAIT);
 		var0000 = script GUARD20 after 10 ticks {
 			nohalt;
-			call Func04BC;
+			call FuncGuard20;
 		};
 	}
 	if (event == SCRIPTED) {
@@ -55466,7 +55466,7 @@ void Func04BC object#(0x4BC) () {
 			GUARD20->set_schedule_type(WAIT);
 			var0000 = script GUARD20 after 10 ticks {
 				nohalt;
-				call Func04BC;
+				call FuncGuard20;
 			};
 		} else {
 			GUARD20->clear_item_say();
@@ -55495,7 +55495,7 @@ extern void Func07D1 object#(0x7D1) ();
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern void Func09AD 0x9AD (var var0000);
 
-void Func04BD object#(0x4BD) () {
+void FuncGuard21 object#(FIRST_NPC_FUNCTION - GUARD21) () {
 	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
@@ -55523,7 +55523,7 @@ extern var Func0954 0x954 ();
 extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern void Func09AD 0x9AD (var var0000);
 
-void Func04BE object#(0x4BE) () {
+void FuncGuard17 object#(FIRST_NPC_FUNCTION - GUARD17) () {
 	var var0000;
 	var var0001;
 
@@ -55539,7 +55539,7 @@ void Func04BE object#(0x4BE) () {
 		GUARD17->set_schedule_type(WAIT);
 		var0000 = script GUARD17 after 10 ticks {
 			nohalt;
-			call Func04BE;
+			call FuncGuard17;
 		};
 	}
 	if (event == SCRIPTED) {
@@ -55549,7 +55549,7 @@ void Func04BE object#(0x4BE) () {
 			GUARD17->set_schedule_type(WAIT);
 			var0000 = script GUARD17 after 10 ticks {
 				nohalt;
-				call Func04BE;
+				call FuncGuard17;
 			};
 		} else {
 			GUARD17->clear_item_say();
@@ -55579,7 +55579,7 @@ void Func04BE object#(0x4BE) () {
 
 extern void Func0808 0x808 (var var0000, var var0001);
 
-void Func04BF object#(0x4BF) () {
+void FuncServ09 object#(FIRST_NPC_FUNCTION - SERV09) () {
 	var var0000;
 	var var0001;
 
@@ -55590,7 +55590,7 @@ void Func04BF object#(0x4BF) () {
 
 extern void Func0808 0x808 (var var0000, var var0001);
 
-void Func04C0 object#(0x4C0) () {
+void FuncServ10 object#(FIRST_NPC_FUNCTION - SERV10) () {
 	var var0000;
 	var var0001;
 
@@ -55601,7 +55601,7 @@ void Func04C0 object#(0x4C0) () {
 
 extern void Func0808 0x808 (var var0000, var var0001);
 
-void Func04C1 object#(0x4C1) () {
+void FuncServ11 object#(FIRST_NPC_FUNCTION - SERV11) () {
 	var var0000;
 	var var0001;
 
@@ -55612,7 +55612,7 @@ void Func04C1 object#(0x4C1) () {
 
 extern void Func0808 0x808 (var var0000, var var0001);
 
-void Func04C2 object#(0x4C2) () {
+void FuncServ12 object#(FIRST_NPC_FUNCTION - SERV12) () {
 	var var0000;
 	var var0001;
 
@@ -55623,7 +55623,7 @@ void Func04C2 object#(0x4C2) () {
 
 extern void Func0809 0x809 ();
 
-void Func04C5 object#(0x4C5) () {
+void FuncIauto object#(FIRST_NPC_FUNCTION - IAUTO) () {
 	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
@@ -55632,7 +55632,7 @@ void Func04C5 object#(0x4C5) () {
 
 extern void Func0808 0x808 (var var0000, var var0001);
 
-void Func04C6 object#(0x4C6) () {
+void FuncMusic01 object#(FIRST_NPC_FUNCTION - MUSIC01) () {
 	var var0000;
 	var var0001;
 
@@ -55643,7 +55643,7 @@ void Func04C6 object#(0x4C6) () {
 
 extern void Func0808 0x808 (var var0000, var var0001);
 
-void Func04C7 object#(0x4C7) () {
+void FuncMusic02 object#(FIRST_NPC_FUNCTION - MUSIC02) () {
 	var var0000;
 	var var0001;
 
@@ -55654,7 +55654,7 @@ void Func04C7 object#(0x4C7) () {
 
 extern void Func0808 0x808 (var var0000, var var0001);
 
-void Func04C8 object#(0x4C8) () {
+void FuncMusic03 object#(FIRST_NPC_FUNCTION - MUSIC03) () {
 	var var0000;
 	var var0001;
 
@@ -55665,7 +55665,7 @@ void Func04C8 object#(0x4C8) () {
 
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
-void Func04C9 object#(0x4C9) () {
+void FuncDCantra object#(FIRST_NPC_FUNCTION - D_CANTRA) () {
 	var var0000;
 	struct<Position> var0001;
 	var var0002;
@@ -55716,7 +55716,7 @@ extern void Func0809 0x809 ();
 extern void Func0924 0x924 (var var0000, var var0001);
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
-void Func04CA object#(0x4CA) () {
+void FuncMetalMan object#(FIRST_NPC_FUNCTION - METAL_MAN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -55885,7 +55885,7 @@ void Func04CA object#(0x4CA) () {
 extern void Func07D1 object#(0x7D1) ();
 extern void Func0919 0x919 (var var0000);
 
-void Func04CB object#(0x4CB) () {
+void FuncHench2 object#(FIRST_NPC_FUNCTION - HENCH2) () {
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("Excuse me...");
 		HENCH2->Func07D1();
@@ -55908,7 +55908,7 @@ void Func04CB object#(0x4CB) () {
 extern void Func07D1 object#(0x7D1) ();
 extern void Func0919 0x919 (var var0000);
 
-void Func04CC object#(0x4CC) () {
+void FuncHench3 object#(FIRST_NPC_FUNCTION - HENCH3) () {
 	if (event == DOUBLECLICK) {
 		AVATAR->item_say("Excuse me...");
 		HENCH3->Func07D1();
@@ -55928,7 +55928,7 @@ extern void Func09AD 0x9AD (var var0000);
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern var Func09A0 0x9A0 (var var0000, var var0001);
 
-void Func04CD object#(0x4CD) () {
+void FuncHench1 object#(FIRST_NPC_FUNCTION - HENCH1) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -55980,7 +55980,7 @@ void Func04CD object#(0x4CD) () {
 
 extern void Func0808 0x808 (var var0000, var var0001);
 
-void Func04CE object#(0x4CE) () {
+void FuncServSew object#(FIRST_NPC_FUNCTION - SERV_SEW) () {
 	var var0000;
 	var var0001;
 
@@ -56010,7 +56010,7 @@ extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern void Func08F5 0x8F5 (var var0000);
 extern void Func0612 object#(0x612) ();
 
-void Func04CF object#(0x4CF) () {
+void FuncKarnax object#(FIRST_NPC_FUNCTION - KARNAX) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -56538,7 +56538,7 @@ void Func04CF object#(0x4CF) () {
 extern var Func0988 0x988 (var var0000, var var0001);
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
-void Func04D0 object#(0x4D0) () {
+void FuncSilent2 object#(FIRST_NPC_FUNCTION - SILENT2) () {
 	var var0000;
 	var var0001;
 
@@ -56571,7 +56571,7 @@ extern void Func08FE 0x8FE ();
 extern var Func0942 0x942 (var var0000);
 extern void Func08F5 0x8F5 (var var0000);
 
-void Func04D1 object#(0x4D1) () {
+void FuncMiggim object#(FIRST_NPC_FUNCTION - MIGGIM) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -56805,7 +56805,7 @@ void Func04D1 object#(0x4D1) () {
 extern var Func0988 0x988 (var var0000, var var0001);
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
-void Func04D2 object#(0x4D2) () {
+void FuncSilent3 object#(FIRST_NPC_FUNCTION - SILENT3) () {
 	var var0000;
 	var var0001;
 
@@ -56841,7 +56841,7 @@ extern void Func08FE 0x8FE ();
 extern var Func0942 0x942 (var var0000);
 extern void Func08F5 0x8F5 (var var0000);
 
-void Func04D3 object#(0x4D3) () {
+void FuncThoxa object#(FIRST_NPC_FUNCTION - THOXA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -57065,7 +57065,7 @@ extern void Func08FE 0x8FE ();
 extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern void Func08F5 0x8F5 (var var0000);
 
-void Func04D4 object#(0x4D4) () {
+void FuncBraccus object#(FIRST_NPC_FUNCTION - BRACCUS) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -57297,7 +57297,7 @@ extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern var Func0955 0x955 ();
 extern void Func08F5 0x8F5 (var var0000);
 
-void Func04D5 object#(0x4D5) () {
+void FuncDraxta object#(FIRST_NPC_FUNCTION - DRAXTA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -57573,7 +57573,7 @@ void Func04D5 object#(0x4D5) () {
 extern var Func0988 0x988 (var var0000, var var0001);
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
-void Func04D6 object#(0x4D6) () {
+void FuncSilent1 object#(FIRST_NPC_FUNCTION - SILENT1) () {
 	var var0000;
 	var var0001;
 
@@ -57605,7 +57605,7 @@ extern void Func08FE 0x8FE ();
 extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 extern var Func097D 0x97D (var var0000, var var0001, var var0002, var var0003, var var0004);
 
-void Func04D7 object#(0x4D7) () {
+void FuncXenka object#(FIRST_NPC_FUNCTION - XENKA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -57814,7 +57814,7 @@ void Func04D7 object#(0x4D7) () {
 
 extern void Func0808 0x808 (var var0000, var var0001);
 
-void Func04D8 object#(0x4D8) () {
+void FuncAutoguard object#(FIRST_NPC_FUNCTION - AUTOGUARD) () {
 	var var0000;
 	var var0001;
 
@@ -57823,7 +57823,7 @@ void Func04D8 object#(0x4D8) () {
 	Func0808(var0000, var0001);
 }
 
-void Func04D9 object#(0x4D9) () {
+void FuncSabrina object#(FIRST_NPC_FUNCTION - SABRINA) () {
 	var var0000;
 	var var0001;
 
@@ -57849,7 +57849,7 @@ extern var Func0957 0x957 (var var0000);
 extern void Func09B0 0x9B0 (var var0000);
 extern var Func0955 0x955 ();
 
-void Func04DA object#(0x4DA) () {
+void FuncDByrin object#(FIRST_NPC_FUNCTION - D_BYRIN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -58169,7 +58169,7 @@ void Func04DA object#(0x4DA) () {
 
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
-void Func04DB object#(0x4DB) () {
+void FuncDEnsorcio object#(FIRST_NPC_FUNCTION - D_ENSORCIO) () {
 	var var0000;
 	struct<Position> var0001;
 
@@ -58209,7 +58209,7 @@ void Func04DB object#(0x4DB) () {
 
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 
-void Func04DE object#(0x4DE) () {
+void FuncDeathKnight object#(FIRST_NPC_FUNCTION - DEATH_KNIGHT) () {
 	if ((event == DEATH) && DEATH_KNIGHT->get_item_flag(SI_TOURNAMENT)) {
 		DEATH_KNIGHT->clear_item_flag(SI_TOURNAMENT);
 		DEATH_KNIGHT->reduce_health(0x0032, NORMAL_DAMAGE);
@@ -58225,7 +58225,7 @@ void Func04DE object#(0x4DE) () {
 
 extern void Func0809 0x809 ();
 
-void Func04E4 object#(0x4E4) () {
+void FuncAuto_2 object#(FIRST_NPC_FUNCTION - AUTO_2) () {
 	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
@@ -58234,7 +58234,7 @@ void Func04E4 object#(0x4E4) () {
 
 extern void Func0809 0x809 ();
 
-void Func04E5 object#(0x4E5) () {
+void FuncAuto_3 object#(FIRST_NPC_FUNCTION - AUTO_3) () {
 	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
@@ -58243,7 +58243,7 @@ void Func04E5 object#(0x4E5) () {
 
 extern void Func0809 0x809 ();
 
-void Func04E6 object#(0x4E6) () {
+void FuncAuto_4 object#(FIRST_NPC_FUNCTION - AUTO_4) () {
 	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
@@ -58252,7 +58252,7 @@ void Func04E6 object#(0x4E6) () {
 
 extern void Func0809 0x809 ();
 
-void Func04E7 object#(0x4E7) () {
+void FuncLarry object#(FIRST_NPC_FUNCTION - LARRY) () {
 	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
@@ -58261,19 +58261,19 @@ void Func04E7 object#(0x4E7) () {
 
 extern void Func0809 0x809 ();
 
-void Func04E8 object#(0x4E8) () {
+void FuncStan object#(FIRST_NPC_FUNCTION - STAN) () {
 	if (get_item_flag(SI_ZOMBIE)) {
 		Func0809();
 		abort;
 	}
 }
 
-void Func0506 object#(0x506) () {
+void FuncAntiIolo object#(FIRST_NPC_FUNCTION - ANTI_IOLO) () {
 	ANTI_IOLO->show_npc_face0(0x0000);
 	say("\"Avatar, when next we meet I shall wear thine eyeballs for earrings!\"");
 }
 
-void Func0507 object#(0x507) () {
+void FuncAntiDupre object#(FIRST_NPC_FUNCTION - ANTI_DUPRE) () {
 	ANTI_DUPRE->show_npc_face0(0x0000);
 	say("\"Avatar, when our paths cross once more I shall chop thee into little pieces and feed them to the dogs!\"");
 }
@@ -58281,7 +58281,7 @@ void Func0507 object#(0x507) () {
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern void Func0924 0x924 (var var0000, var var0001);
 
-void Func0510 object#(0x510) () {
+void FuncPalos object#(FIRST_NPC_FUNCTION - PALOS) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -58304,11 +58304,11 @@ void Func0510 object#(0x510) () {
 	if ((event == SCRIPTED) && ((gflags[TEMP_FLAG_1] == false) && (gflags[PALOS_TALKS_TO_AVATAR] == false))) {
 		gflags[PALOS_TALKS_TO_AVATAR] = true;
 		PALOS->move_object([0x08AF, 0x02C6, 0x0000]);
-		PALOS->si_path_run_usecode([0x08A2, 0x02C6, 0x0000], PATH_SUCCESS, PALOS, Func0510, true);
+		PALOS->si_path_run_usecode([0x08A2, 0x02C6, 0x0000], PATH_SUCCESS, PALOS, FuncPalos, true);
 	}
 	if ((event == SCRIPTED) && gflags[TEMP_FLAG_1]) {
 		gflags[TEMP_FLAG_1] = false;
-		PALOS->si_path_run_usecode([0x08B2, 0x02C8, 0x0000], PATH_FAILURE, PALOS, Func0510, true);
+		PALOS->si_path_run_usecode([0x08B2, 0x02C8, 0x0000], PATH_FAILURE, PALOS, FuncPalos, true);
 	}
 	if (event == PATH_SUCCESS) {
 		MEELOSE->show_npc_face0(0x0000);
@@ -58319,7 +58319,7 @@ void Func0510 object#(0x510) () {
 		Func097F(AVATAR, "@Stop!@", 0x0005);
 		var0000 = script item after 2 ticks {
 			nohalt;
-			call Func0510;
+			call FuncPalos;
 		};
 		abort;
 	}
@@ -58344,7 +58344,7 @@ extern void Func097F 0x97F (var var0000, var var0001, var var0002);
 extern var Func0955 0x955 ();
 extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
 
-void Func0526 object#(0x526) () {
+void FuncVasculio object#(FIRST_NPC_FUNCTION - VASCULIO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -58362,7 +58362,7 @@ void Func0526 object#(0x526) () {
 	var var000E;
 
 	if (event == DOUBLECLICK) {
-labelFunc0526_0008:
+labelFuncVasculio_0008:
 		Func09AA();
 		ANTI_SHAM->show_npc_face0(0x0000);
 		say("\"Why hast thou disturbed my slumber?\"");
@@ -58544,7 +58544,7 @@ labelFunc0526_0008:
 			var000C = script AVATAR {
 				nohalt;
 				wait 5;
-				call Func0526;
+				call FuncVasculio;
 			};
 			return;
 		}
@@ -58562,7 +58562,7 @@ labelFunc0526_0008:
 				};
 				var000C = script AVATAR after 18 ticks {
 					nohalt;
-					call Func0526;
+					call FuncVasculio;
 				};
 				abort;
 			}
@@ -58576,7 +58576,7 @@ labelFunc0526_0008:
 				face south;
 			};
 			// I see no way other than this
-			goto labelFunc0526_0008;
+			goto labelFuncVasculio_0008;
 		}
 	} while (false)
 	nobreak {
@@ -59687,7 +59687,7 @@ void Func0618 object#(0x618) () {
 		UI_remove_npc_face0();
 		var0002 = script item {
 			nohalt;
-			call Func04CF;
+			call FuncKarnax;
 		};
 		gflags[TEMP_FLAG_4] = false;
 		var0003 = AVATAR->get_npc_prop(EXPERIENCE);
@@ -66502,7 +66502,7 @@ void Func06A8 object#(0x6A8) () {
 		var0001 = find_nearby(0x02EB, 0x0005, MASK_NONE);
 		if (var0001) {
 			var0000 = script var0001 after 2 ticks {
-				call Func0464;
+				call FuncEthAutomaton;
 			};
 		} else {
 			gflags[TEMP_FLAG_1] = false;
@@ -67359,8 +67359,8 @@ void Func06B9 object#(0x6B9) () {
 	if (var0000) {
 		// Bug: NPC numbers returned are always negative, hence this
 		// will result in the *wrong* *function*.
-		// It should be '0x400 - var0000->get_npc_number()' instead.
-		var0004 = var0000->get_npc_number() + 0x0400;
+		// It should be 'FIRST_NPC_FUNCTION - var0000->get_npc_number()' instead.
+		var0004 = var0000->get_npc_number() + FIRST_NPC_FUNCTION;
 		var0005 = script item {
 			nohalt;
 			call var0004;
@@ -67529,7 +67529,7 @@ void Func06BC object#(0x6BC) () {
 			var0003 = var0000->set_item_quality(var0002 + 0x0001);
 			var0003 = script Func09A0(0x0005, 0x0001) after 45 ticks {
 				nohalt;
-				call Func043A;
+				call FuncOlon;
 			};
 			var0003 = DELPHYNIA->approach_avatar(0x0078, 0x0028);
 			if (var0003) {
@@ -67672,13 +67672,13 @@ void Func06C2 object#(0x6C2) () {
 	if (event == EGG) {
 		var0000 = script AVATAR {
 			nohalt;
-			call Func0437;
+			call FuncYelinda;
 		};
 	}
 	if (event == SCRIPTED) {
 		var0000 = script AVATAR {
 			nohalt;
-			call Func0437;
+			call FuncYelinda;
 		};
 	}
 }
@@ -68443,7 +68443,7 @@ void Func06D1 object#(0x6D1) () {
 			UI_play_music(0x003F, Func09A0(0x0005, 0x0001));
 			var0000 = script BRACCUS after 14 ticks {
 				nohalt;
-				call Func04D4;
+				call FuncBraccus;
 			};
 		} else {
 			var0000 = script Func09A0(0x0005, 0x0001) after 2 ticks {
@@ -69068,7 +69068,7 @@ void Func06D9 object#(0x6D9) () {
 			Func097F(CLONE_IOLO, "@Avatar!@", 0x0001);
 			var0005 = script item after 8 ticks {
 				nohalt;
-				call Func0403;
+				call FuncIolo;
 			};
 			var0005 = set_item_quality(0x00FF);
 			CLONE_IOLO->Func07D2();
@@ -71032,7 +71032,7 @@ void Func06FA object#(0x6FA) () {
 
 extern var Func09A0 0x9A0 (var var0000, var var0001);
 extern void Func097F 0x97F (var var0000, var var0001, var var0002);
-extern void Func04CB object#(0x4CB) ();
+extern void FuncHench2 object#(FIRST_NPC_FUNCTION - HENCH2) ();
 
 void Func06FB object#(0x6FB) () {
 	var var0000;
@@ -71040,8 +71040,8 @@ void Func06FB object#(0x6FB) () {
 	UI_play_music(0x0012, Func09A0(0x0005, 0x0001));
 	HENCH2->move_object([0x0762, 0x03ED, 0x0000]);
 	HENCH2->set_new_schedules(MIDNIGHT, WANDER, [0x0762, 0x03ED]);
-	HENCH2->si_path_run_usecode([0x0762, 0x03F1, 0x0000], SI_PATH_SUCCESS, HENCH2->get_npc_object(), Func04CB, false);
-	UI_set_path_failure(Func04CB, HENCH2->get_npc_object(), SI_PATH_FAILURE);
+	HENCH2->si_path_run_usecode([0x0762, 0x03F1, 0x0000], SI_PATH_SUCCESS, HENCH2->get_npc_object(), FuncHench2, false);
+	UI_set_path_failure(FuncHench2, HENCH2->get_npc_object(), SI_PATH_FAILURE);
 	var0000 = script HENCH2 after 8 ticks {
 		nohalt;
 		wait while far 10;
@@ -71050,7 +71050,7 @@ void Func06FB object#(0x6FB) () {
 		face east;
 		say "@'Tis the Avatar!@";
 		wait 10;
-		call Func04CB;
+		call FuncHench2;
 	};
 	HENCH3->move_object([0x076C, 0x03E7, 0x0000]);
 	HENCH3->set_new_schedules(MIDNIGHT, WANDER, [0x076C, 0x03E7]);
@@ -71238,7 +71238,7 @@ void Func06FE object#(0x6FE) () {
 
 extern var Func0992 0x992 (var var0000, var var0001, var var0002, var var0003);
 extern void Func0924 0x924 (var var0000, var var0001);
-extern void Func0455 object#(0x455) ();
+extern void FuncAuto1 object#(FIRST_NPC_FUNCTION - AUTO1) ();
 
 void Func06FF object#(0x6FF) () {
 	var var0000;
@@ -71282,8 +71282,8 @@ void Func06FF object#(0x6FF) () {
 	if (var0001) {
 		var0001->set_new_schedules(MIDNIGHT, IN_COMBAT, [0x0733, 0x0A79]);
 		var0006 = var0001->get_object_position();
-		var0001->si_path_run_usecode([var0006.x, var0006.y + 15, 0], SI_PATH_SUCCESS, var0001->get_npc_object(), Func0455, true);
-		UI_set_path_failure(Func0455, var0001->get_npc_object(), SI_PATH_FAILURE);
+		var0001->si_path_run_usecode([var0006.x, var0006.y + 15, 0], SI_PATH_SUCCESS, var0001->get_npc_object(), FuncAuto1, true);
+		UI_set_path_failure(FuncAuto1, var0001->get_npc_object(), SI_PATH_FAILURE);
 	}
 	remove_item();
 }
@@ -74274,7 +74274,7 @@ void Func073A object#(0x73A) () {
 		var0005 = SELINA->get_npc_object();
 		var0002 = script var0005 after 25 ticks {
 			nohalt;
-			call Func042C;
+			call FuncSelina;
 		};
 	}
 }
@@ -76024,7 +76024,7 @@ void Func076B object#(0x76B) () {
 			};
 			var0002 = script KARNAX after 13 ticks {
 				nohalt;
-				call Func04CF;
+				call FuncKarnax;
 			};
 		}
 	}
@@ -76071,7 +76071,7 @@ void Func077E object#(0x77E) () {
 				gflags[TEMP_FLAG_1] = true;
 				ERSTAM->move_object([0x0813, 0x053A, 0x0000]);
 				UI_sprite_effect(ANIMATION_TELEPORT, var0000.x - 2, var0000.y - 2, 0, 0, 0, LOOP_ONCE);
-				ERSTAM->si_path_run_usecode([0x081A, 0x052A, 0x0000], SCRIPTED, ERSTAM, Func0423, true);
+				ERSTAM->si_path_run_usecode([0x081A, 0x052A, 0x0000], SCRIPTED, ERSTAM, FuncErstam, true);
 				abort;
 			}
 		}
@@ -77483,7 +77483,7 @@ void Func07B3 object#(0x7B3) () {
 			halt_scheduled();
 			var0003 = script HAWK {
 				nohalt;
-				call Func0428;
+				call FuncHawk;
 			};
 		} else {
 			var0003 = script item after var0001 ticks {
@@ -78459,7 +78459,7 @@ void Func07DF object#(0x7DF) () {
 						gflags[TEMP_FLAG_1] = true;
 						var000B = script AVATAR after 15 ticks {
 							nohalt;
-							call Func04A8;
+							call FuncStefano;
 						};
 					} else {
 						PARTY->move_object(var0000);
@@ -84703,7 +84703,7 @@ void Func080E 0x80E () {
 	UI_remove_npc_face0();
 	var0001 = script CANTRA after 60 ticks {
 		nohalt;
-		call Func0440;
+		call FuncCantra;
 	};
 	if (var0000) {
 		var0000->set_item_flag(SI_TOURNAMENT);
@@ -85388,7 +85388,7 @@ void Func0814 0x814 () {
 		var0001 = CLONE_IOLO->get_distance(var0000);
 		var0002 = var0000->get_object_position();
 		var0002.x -= 2;
-		CLONE_IOLO->si_path_run_usecode(var0002, SI_PATH_SUCCESS, CLONE_IOLO->get_npc_object(), Func04B2, true);
+		CLONE_IOLO->si_path_run_usecode(var0002, SI_PATH_SUCCESS, CLONE_IOLO->get_npc_object(), FuncCloneIolo, true);
 	}
 }
 
@@ -88244,7 +88244,7 @@ var Func0825 0x825 () {
 
 extern var Func090C 0x90C (var var0000, var var0001);
 extern var Func099B 0x99B (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
-extern void Func040F object#(0x40F) ();
+extern void FuncDucio object#(FIRST_NPC_FUNCTION - DUCIO) ();
 
 void Func0826 0x826 (var var0000) {
 	var var0001;
@@ -88258,8 +88258,8 @@ void Func0826 0x826 (var var0000) {
 	var0002 = var0001->get_object_position();
 	if (var0000 == 0x0009) {
 		if (var0001) {
-			DUCIO->si_path_run_usecode(var0002, PATH_SUCCESS, DUCIO->get_npc_object(), Func040F, true);
-			UI_set_path_failure([Func040F], item, SI_PATH_FAILURE);
+			DUCIO->si_path_run_usecode(var0002, PATH_SUCCESS, DUCIO->get_npc_object(), FuncDucio, true);
+			UI_set_path_failure([FuncDucio], item, SI_PATH_FAILURE);
 		}
 	}
 	if (var0000 == 0x000A) {
@@ -89704,7 +89704,7 @@ void Func0833 0x833 (var var0000) {
 	if (var0000 == 0x0001) {
 		if (var0001) {
 			var0002 = var0001->get_object_position();
-			FLICKEN->si_path_run_usecode(var0002, PATH_SUCCESS, FLICKEN->get_npc_object(), Func0450, true);
+			FLICKEN->si_path_run_usecode(var0002, PATH_SUCCESS, FLICKEN->get_npc_object(), FuncFlicken, true);
 		}
 	}
 	if (var0000 == 0x000A) {
@@ -89731,7 +89731,7 @@ void Func0833 0x833 (var var0000) {
 		};
 		var0008 = script var0003 after 20 ticks {
 			nohalt;
-			call Func0450;
+			call FuncFlicken;
 		};
 	}
 	if (var0000 == 0x0002) {
@@ -89742,7 +89742,7 @@ void Func0833 0x833 (var var0000) {
 			if (var0009->npc_nearby()) {
 				var0008 = script var0009 after 20 ticks {
 					nohalt;
-					call Func0450;
+					call FuncFlicken;
 				};
 			} else {
 				var000A = var0009->get_object_position();
@@ -95431,7 +95431,7 @@ void Func085C 0x85C () {
 		actor frame standing;
 	};
 	var0001 = script Func09A0(0x0000, 0x0001) after 10 ticks {
-		call Func04B5;
+		call FuncRabindrinath;
 	};
 }
 
@@ -96127,7 +96127,7 @@ void Func0864 0x864 () {
 	var0001 = script BRACCUS after 10 ticks {
 		nohalt;
 		actor frame standing;
-		call Func04D4;
+		call FuncBraccus;
 	};
 	gflags[RETURNED_COMB_OF_BEAUTY] = true;
 	UI_remove_npc_face0();
@@ -99223,7 +99223,7 @@ void Func087A 0x87A () {
 			var0000->set_item_frame(0x0007);
 			var0002 = script var0000 after 2 ticks {
 				nohalt;
-				call Func04AA;
+				call FuncZhelkas;
 			};
 		}
 		if (var0001 == 0x0007) {
@@ -101450,7 +101450,7 @@ void Func08AA 0x8AA () {
 	if (gflags[ZULITH_CAUGHT_TAILING] && (gflags[KALEN_IS_DEAD] && (gflags[IOLO_HAS_SUNG_FAWN] && ((((((((((((ALYSSAND->get_item_flag(MET) + DELIN->get_item_flag(MET)) + DELPHYNIA->get_item_flag(MET)) + VOLDIN->get_item_flag(MET)) + JENDON->get_item_flag(MET)) + JORVIN->get_item_flag(MET)) + KYLISTA->get_item_flag(MET)) + OLON->get_item_flag(MET)) + GARTH->get_item_flag(MET)) + JOTH->get_item_flag(MET)) + ZULITH->get_item_flag(MET)) > 0x0004) && IOLO->npc_nearby())))) {
 		var0000 = script Func09A0(0x0005, 0x0001) after 200 ticks {
 			nohalt;
-			call Func0435;
+			call FuncJorvin;
 		};
 		gflags[JORVIN_SUMMONS_AVATAR] = true;
 	}
@@ -101470,7 +101470,7 @@ void Func08AB 0x8AB () {
 			gflags[KALEN_IS_DEAD] = true;
 			var0000 = script Func09A0(0x0005, 0x0001) after 50 ticks {
 				nohalt;
-				call Func0439;
+				call FuncKalen;
 			};
 			abort;
 		}
@@ -101627,7 +101627,7 @@ void Func08AD 0x8AD (var var0000, var var0001, var var0002, var var0003) {
 }
 
 extern void Func090E 0x90E (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006, var var0007, var var0008);
-extern void Func04A9 object#(0x4A9) ();
+extern void FuncTeldrono object#(FIRST_NPC_FUNCTION - TELDRONO) ();
 
 void Func08AE 0x8AE () {
 	var var0000;
@@ -101650,18 +101650,18 @@ void Func08AE 0x8AE () {
 	for (var0007 in var0004 with var0005 to var0006) {
 		if (var0007->get_item_quality() == 0x0064) {
 			var0008 = var0007->get_object_position();
-			Func090E(TELDRONO, var0007, var0000, var0001, var0002, Func04A9, TELDRONO->get_npc_object(), PATH_SUCCESS, true);
+			Func090E(TELDRONO, var0007, var0000, var0001, var0002, FuncTeldrono, TELDRONO->get_npc_object(), PATH_SUCCESS, true);
 			// BUG: This should use SI_PATH_FAILURE instead of PATH_SUCCESS.
-			UI_set_path_failure(Func04A9, item, PATH_SUCCESS);
+			UI_set_path_failure(FuncTeldrono, item, PATH_SUCCESS);
 			return;
 		}
 	}
 	for (var0007 in var0004 with var0009 to var000A) {
 		if (var0007->get_item_quality() == 0x0000) {
 			var0008 = var0007->get_object_position();
-			Func090E(TELDRONO, var0007, var0000, var0001, var0002, Func04A9, TELDRONO->get_npc_object(), PATH_SUCCESS, true);
+			Func090E(TELDRONO, var0007, var0000, var0001, var0002, FuncTeldrono, TELDRONO->get_npc_object(), PATH_SUCCESS, true);
 			// BUG: This should use SI_PATH_FAILURE instead of PATH_SUCCESS.
-			UI_set_path_failure(Func04A9, item, PATH_SUCCESS);
+			UI_set_path_failure(FuncTeldrono, item, PATH_SUCCESS);
 			// Need to make UCC optimize this
 			goto labelFunc08AE_00DD;
 		}
@@ -102324,7 +102324,7 @@ void Func08BC 0x8BC () {
 				if (var0000) {
 					var0001 = script var0000 {
 						wait 5;
-						call Func0526;
+						call FuncVasculio;
 					};
 				}
 			}
@@ -102335,7 +102335,7 @@ void Func08BC 0x8BC () {
 				var0001 = script AVATAR {
 					nohalt;
 					wait 15;
-					call Func0526;
+					call FuncVasculio;
 				};
 				remove_item();
 			}
@@ -103279,7 +103279,7 @@ void Func08CB 0x8CB () {
 		var0000->item_say("@Good morning.@");
 		var0001 = script var0000 {
 			wait 12;
-			call Func04A0;
+			call FuncJail01;
 		};
 	}
 }
@@ -103452,7 +103452,7 @@ void Func08CD 0x8CD () {
 				var0004 = script var000A {
 					say "@NOOOooooo!!!@";
 					wait 21;
-					call Func04A3;
+					call FuncLorthondo;
 				};
 			}
 			if (var0009) {
@@ -103543,7 +103543,7 @@ void Func08D0 0x8D0 () {
 				actor frame cast_out;
 				wait 3;
 				actor frame standing;
-				call Func04A3;
+				call FuncLorthondo;
 			};
 		}
 		if (var0005->get_item_quality() == 0x0064) {
@@ -105376,7 +105376,7 @@ void Func08FE 0x8FE () {
 					GWENNO->set_schedule_type(TALK);
 					gflags[GWENNO_IS_DEAD] = false;
 					var000A = script AVATAR->get_npc_object() after 5 ticks {
-						call Func0495;
+						call FuncGwenno;
 					};
 				}
 			} else {
@@ -106674,7 +106674,7 @@ void Func0927 0x927 () {
 	}
 	if (gflags[CLONE_SHAMINO_PRESSED_SEX_BUTTON] == true) {
 		var0006 = script CLONE_SHAMINO after 25 ticks {
-			call Func04B3;
+			call FuncCloneShamino;
 		};
 	} else if (UI_is_pc_female()) {
 		SEX_05->clear_item_say();
@@ -106683,7 +106683,7 @@ void Func0927 0x927 () {
 		if (var0007) {
 			var0008 = var0007->get_object_position();
 			// BUG: This should use PATH_SUCCESS instead of BG_PATH_SUCCESS.
-			SEX_05->si_path_run_usecode([var0008.x + 1, var0008.y, var0008.z], BG_PATH_SUCCESS, SEX_05->get_npc_object(), Func04B3, true);
+			SEX_05->si_path_run_usecode([var0008.x + 1, var0008.y, var0008.z], BG_PATH_SUCCESS, SEX_05->get_npc_object(), FuncCloneShamino, true);
 		}
 	} else {
 		SEX_03->clear_item_say();
@@ -106692,7 +106692,7 @@ void Func0927 0x927 () {
 		if (var0007) {
 			var0008 = var0007->get_object_position();
 			// BUG: This should use PATH_SUCCESS instead of BG_PATH_SUCCESS.
-			SEX_03->si_path_run_usecode([var0008.x + 1, var0008.y, var0008.z], BG_PATH_SUCCESS, SEX_03->get_npc_object(), Func04B3, true);
+			SEX_03->si_path_run_usecode([var0008.x + 1, var0008.y, var0008.z], BG_PATH_SUCCESS, SEX_03->get_npc_object(), FuncCloneShamino, true);
 		}
 	}
 	abort;
@@ -108064,7 +108064,7 @@ void Func093A 0x93A (var var0000) {
 			var0003 = Func09A0(0x0001, 0x0002)->set_item_quality(0x0000);
 			var0003 = script Func09A0(0x0001, 0x0002) after 500 ticks {
 				nohalt;
-				call Func042E;
+				call FuncAlyssand;
 			};
 			var0003 = script Func09A0(0x0001, 0x0002) {
 				nohalt;
@@ -112687,35 +112687,35 @@ void Func09C0 0x9C0 (var var0000) {
 	if (var0000 == 0x0001) {
 		var0001 = script CLONE_DUPRE {
 			nohalt;
-			call Func04B4;
+			call FuncCloneDupre;
 		};
 	}
 	if (gflags[KILLED_FIRST_WORM] && (var0000 == 0x0004)) {
 		gflags[KILLED_FOUR_WORMS] = true;
 		var0001 = script CLONE_DUPRE {
 			nohalt;
-			call Func04B4;
+			call FuncCloneDupre;
 		};
 	}
 	if (gflags[KILLED_FOUR_WORMS] && (var0000 == 0x0007)) {
 		gflags[KILLED_SEVEN_WORMS] = true;
 		var0001 = script CLONE_DUPRE {
 			nohalt;
-			call Func04B4;
+			call FuncCloneDupre;
 		};
 	}
 	if ((gflags[KILLED_SEVEN_WORMS] == true) && (var0000 == 0x0009)) {
 		gflags[KILLED_NINE_WORMS] = true;
 		var0001 = script CLONE_DUPRE {
 			nohalt;
-			call Func04B4;
+			call FuncCloneDupre;
 		};
 	}
 	if (gflags[KILLED_NINE_WORMS] && (var0000 == 0x000A)) {
 		gflags[PASSED_WORM_TEST] = true;
 		var0001 = script CLONE_DUPRE {
 			nohalt;
-			call Func04B4;
+			call FuncCloneDupre;
 		};
 	}
 	if ((var0000 > 0x0002) && (var0000 < 0x000A)) {

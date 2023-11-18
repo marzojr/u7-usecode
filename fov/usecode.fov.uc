@@ -2931,10 +2931,10 @@ void Func020E shape#(0x20E) () {
 	}
 }
 
-extern void Func0500 object#(0x500) ();
+extern void FuncXorinia object#(FIRST_NPC_FUNCTION - XORINIA) ();
 
 void Func0216 shape#(0x216) () {
-	item->Func0500();
+	item->FuncXorinia();
 }
 
 extern void Func0828 0x828 (var var0000, var var0001, var var0002, var var0003, var var0004, var var0005, var var0006);
@@ -5852,7 +5852,7 @@ void Func02EB shape#(0x2EB) () {
 }
 
 extern var Func08F7 0x8F7 (var var0000);
-extern void Func0490 object#(0x490) ();
+extern void FuncRowena object#(FIRST_NPC_FUNCTION - ROWENA) ();
 
 void Func02F0 shape#(0x2F0) () {
 	var var0000;
@@ -5864,7 +5864,7 @@ void Func02F0 shape#(0x2F0) () {
 			UI_play_music(0x0029, item);
 			if (Func08F7(ROWENA)) {
 				gflags[MUSIC_BOX] = true;
-				ROWENA->get_npc_object()->Func0490();
+				ROWENA->get_npc_object()->FuncRowena();
 			}
 		} else {
 			set_item_frame(0x0000);
@@ -8732,7 +8732,7 @@ extern void Func092E 0x92E (var var0000);
 extern void Func06AA object#(0x6AA) ();
 extern void Func06FA object#(0x6FA) ();
 
-void Func0401 object#(0x401) () {
+void FuncIolo object#(FIRST_NPC_FUNCTION - IOLO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -9124,7 +9124,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 
-void Func0402 object#(0x402) () {
+void FuncSpark object#(FIRST_NPC_FUNCTION - SPARK) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -9483,7 +9483,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern var Func090B 0x90B (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func0403 object#(0x403) () {
+void FuncShamino object#(FIRST_NPC_FUNCTION - SHAMINO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -9734,7 +9734,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern var Func090B 0x90B (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func0404 object#(0x404) () {
+void FuncDupre object#(FIRST_NPC_FUNCTION - DUPRE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -10009,7 +10009,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0405 object#(0x405) () {
+void FuncJaana object#(FIRST_NPC_FUNCTION - JAANA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -10227,7 +10227,7 @@ extern var Func090B 0x90B (var var0000);
 extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
 
-void Func0406 object#(0x406) () {
+void FuncTrellek object#(FIRST_NPC_FUNCTION - TRELLEK) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -10485,7 +10485,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func092E 0x92E (var var0000);
 
-void Func0407 object#(0x407) () {
+void FuncSentri object#(FIRST_NPC_FUNCTION - SENTRI) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -10694,7 +10694,7 @@ extern var Func090B 0x90B (var var0000);
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func092E 0x92E (var var0000);
 
-void Func0408 object#(0x408) () {
+void FuncJulia object#(FIRST_NPC_FUNCTION - JULIA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -10942,7 +10942,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern var Func090B 0x90B (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func0409 object#(0x409) () {
+void FuncKatrina object#(FIRST_NPC_FUNCTION - KATRINA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -11177,7 +11177,7 @@ extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
 extern void Func08F3 0x8F3 (var var0000);
 
-void Func040A object#(0x40A) () {
+void FuncTseramed object#(FIRST_NPC_FUNCTION - TSERAMED) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -11775,7 +11775,7 @@ extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func040B object#(0x40B) () {
+void FuncPetre object#(FIRST_NPC_FUNCTION - PETRE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -11938,7 +11938,7 @@ extern var Func0886 0x886 ();
 extern void Func0911 0x911 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func040C object#(0x40C) () {
+void FuncFinnigan object#(FIRST_NPC_FUNCTION - FINNIGAN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -12255,7 +12255,7 @@ void Func040C object#(0x40C) () {
 extern var Func090B 0x90B (var var0000);
 extern var Func0834 0x834 ();
 
-void Func040D object#(0x40D) () {
+void FuncGilberto object#(FIRST_NPC_FUNCTION - GILBERTO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -12392,7 +12392,7 @@ extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
 extern var Func0834 0x834 ();
 
-void Func040E object#(0x40E) () {
+void FuncJohnson object#(FIRST_NPC_FUNCTION - JOHNSON) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -12514,7 +12514,7 @@ void Func040E object#(0x40E) () {
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 
-void Func040F object#(0x40F) () {
+void FuncEiko object#(FIRST_NPC_FUNCTION - EIKO) () {
 	var var0000;
 	var var0001;
 
@@ -12612,7 +12612,7 @@ extern void Func0919 0x919 ();
 extern void Func091A 0x91A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0410 object#(0x410) () {
+void FuncKlog object#(FIRST_NPC_FUNCTION - KLOG) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -12784,7 +12784,7 @@ extern var Func0909 0x909 ();
 extern void Func0860 0x860 (var var0000, var var0001, var var0002);
 extern void Func092E 0x92E (var var0000);
 
-void Func0411 object#(0x411) () {
+void FuncChantu object#(FIRST_NPC_FUNCTION - CHANTU) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -12880,7 +12880,7 @@ extern void Func0873 0x873 ();
 extern void Func0874 0x874 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0412 object#(0x412) () {
+void FuncDell object#(FIRST_NPC_FUNCTION - DELL) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -13027,7 +13027,7 @@ extern var Func090A 0x90A ();
 extern void Func0842 0x842 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0413 object#(0x413) () {
+void FuncApollonia object#(FIRST_NPC_FUNCTION - APOLLONIA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -13172,7 +13172,7 @@ extern var Func090A 0x90A ();
 extern void Func08BD 0x8BD (var var0000, var var0001);
 extern void Func092E 0x92E (var var0000);
 
-void Func0414 object#(0x414) () {
+void FuncMarkus object#(FIRST_NPC_FUNCTION - MARKUS) () {
 	var var0000;
 	var var0001;
 
@@ -13238,7 +13238,7 @@ extern var Func090A 0x90A ();
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func0415 object#(0x415) () {
+void FuncGargan object#(FIRST_NPC_FUNCTION - GARGAN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -13439,7 +13439,7 @@ extern void Func0919 0x919 ();
 extern void Func091A 0x91A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0416 object#(0x416) () {
+void FuncCaroline object#(FIRST_NPC_FUNCTION - CAROLINE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -13540,7 +13540,7 @@ extern void Func08B5 0x8B5 ();
 extern void Func092E 0x92E (var var0000);
 extern var Func092D 0x92D (var var0000);
 
-void Func0417 object#(0x417) () {
+void FuncLordBritish object#(FIRST_NPC_FUNCTION - LORD_BRITISH) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -13562,7 +13562,7 @@ void Func0417 object#(0x417) () {
 
 	var0000 = false;
 	if (event == DOUBLECLICK) {
-labelFunc0417_000C:
+labelFuncLordBritish_000C:
 		var0001 = Func0908();
 		if (gflags[CAST_ARMAGEDDON]) {
 			LORD_BRITISH->say("\"Fool!! What possessed thee to cast that damned Armageddon Spell? I knew it was dangerous! Thou didst know it was dangerous!! Now look at us! We are all alone on the entire planet! Britannia is ruined! What kind of Avatar art thou!?! Now, with no Moongates working, we are both forced to spend eternity in this blasted wasteland!~~\"Of course, it could be viewed as a clever solution to all of our problems. After all, not even this so-called Guardian would want Britannia now!\"*");
@@ -13573,7 +13573,7 @@ labelFunc0417_000C:
 				var0000 = true;
 				LORD_BRITISH->say("\"I felt the passing of the remains of Exodus from this realm. It has lifted a great weight from my shoulders. And so Avatar, I cannot let this accomplishment go unrewarded. Please kneel, my friend.\" Lord British holds out his hands as you obey his command.");
 				// I see no way other than this
-				goto labelFunc0417_0743;
+				goto labelFuncLordBritish_0743;
 			}
 		} else if (!gflags[TALKED_ABOUT_RUMBLE]) {
 			add("rumble");
@@ -13955,7 +13955,7 @@ labelFunc0417_000C:
 	if (event == PROXIMITY) {
 		Func092E(LORD_BRITISH);
 	}
-labelFunc0417_0743:
+labelFuncLordBritish_0743:
 	if (var0000 == true) {
 		var000B = Func092D(item);
 		var000C = (var000B + 0x0004) % 0x0008;
@@ -13964,11 +13964,11 @@ labelFunc0417_0743:
 			wait 1;
 			wait 2;
 			wait 3;
-			call Func0417;
+			call FuncLordBritish;
 			wait 3;
 			wait 2;
 			wait 11;
-			call Func0417;
+			call FuncLordBritish;
 		};
 		var000E = script AVATAR->get_npc_object() {
 			face var000B;
@@ -13986,7 +13986,7 @@ labelFunc0417_0743:
 		if (gflags[CAST_ARMAGEDDON]) {
 			event = DOUBLECLICK;
 			// I see no way other than this
-			goto labelFunc0417_000C;
+			goto labelFuncLordBritish_000C;
 			// Dead code
 			abort;
 		}
@@ -14019,7 +14019,7 @@ extern var Func090A 0x90A ();
 extern void Func08C5 0x8C5 ();
 extern void Func08C6 0x8C6 ();
 
-void Func0418 object#(0x418) () {
+void FuncNystul object#(FIRST_NPC_FUNCTION - NYSTUL) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -14116,7 +14116,7 @@ extern void Func0862 0x862 ();
 extern void Func0861 0x861 ();
 extern var Func090B 0x90B (var var0000);
 
-void Func0419 object#(0x419) () {
+void FuncChuckles object#(FIRST_NPC_FUNCTION - CHUCKLES) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -14290,7 +14290,7 @@ extern void Func084D 0x84D ();
 extern void Func0851 0x851 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func041A object#(0x41A) () {
+void FuncBatlin object#(FIRST_NPC_FUNCTION - BATLIN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -14680,7 +14680,7 @@ extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, v
 extern void Func08D1 0x8D1 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func041B object#(0x41B) () {
+void FuncRaymundo object#(FIRST_NPC_FUNCTION - RAYMUNDO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -14849,7 +14849,7 @@ void Func041B object#(0x41B) () {
 
 extern void Func092E 0x92E (var var0000);
 
-void Func041C object#(0x41C) () {
+void FuncJesse object#(FIRST_NPC_FUNCTION - JESSE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -14962,7 +14962,7 @@ void Func041C object#(0x41C) () {
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func041D object#(0x41D) () {
+void FuncStuart object#(FIRST_NPC_FUNCTION - STUART) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -15059,7 +15059,7 @@ void Func041D object#(0x41D) () {
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func041E object#(0x41E) () {
+void FuncAmber object#(FIRST_NPC_FUNCTION - AMBER) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -15173,7 +15173,7 @@ void Func041E object#(0x41E) () {
 
 extern var Func08F7 0x8F7 (var var0000);
 
-void Func041F object#(0x41F) () {
+void FuncKristy object#(FIRST_NPC_FUNCTION - KRISTY) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -15264,7 +15264,7 @@ void Func041F object#(0x41F) () {
 
 extern var Func08F7 0x8F7 (var var0000);
 
-void Func0420 object#(0x420) () {
+void FuncMax object#(FIRST_NPC_FUNCTION - MAX) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -15346,7 +15346,7 @@ void Func0420 object#(0x420) () {
 
 extern var Func08F7 0x8F7 (var var0000);
 
-void Func0421 object#(0x421) () {
+void FuncNicholas object#(FIRST_NPC_FUNCTION - NICHOLAS) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -15444,7 +15444,7 @@ extern void Func0919 0x919 ();
 extern void Func091A 0x91A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0422 object#(0x422) () {
+void FuncNanna object#(FIRST_NPC_FUNCTION - NANNA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -15589,7 +15589,7 @@ extern var Func090A 0x90A ();
 extern void Func0870 0x870 (var var0000, var var0001, var var0002);
 extern void Func092E 0x92E (var var0000);
 
-void Func0423 object#(0x423) () {
+void FuncCsil object#(FIRST_NPC_FUNCTION - CSIL) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -15700,7 +15700,7 @@ extern var Func090A 0x90A ();
 extern void Func0950 0x950 (var var0000, var var0001);
 extern void Func092E 0x92E (var var0000);
 
-void Func0424 object#(0x424) () {
+void FuncZella object#(FIRST_NPC_FUNCTION - ZELLA) () {
 	var var0000;
 	var var0001;
 
@@ -15784,7 +15784,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern void Func08B7 0x8B7 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0425 object#(0x425) () {
+void FuncLucy object#(FIRST_NPC_FUNCTION - LUCY) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -15946,7 +15946,7 @@ extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, v
 extern void Func0899 0x899 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0426 object#(0x426) () {
+void FuncGreg object#(FIRST_NPC_FUNCTION - GREG) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -16099,7 +16099,7 @@ void Func0426 object#(0x426) () {
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func0427 object#(0x427) () {
+void FuncNeno object#(FIRST_NPC_FUNCTION - NENO) () {
 	var var0000;
 	var var0001;
 
@@ -16168,7 +16168,7 @@ void Func0427 object#(0x427) () {
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func0428 object#(0x428) () {
+void FuncJudith object#(FIRST_NPC_FUNCTION - JUDITH) () {
 	var var0000;
 	var var0001;
 
@@ -16267,7 +16267,7 @@ extern var Func08FC 0x8FC (var var0000, var var0001);
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func0429 object#(0x429) () {
+void FuncCandice object#(FIRST_NPC_FUNCTION - CANDICE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -16405,7 +16405,7 @@ extern var Func090A 0x90A ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func092E 0x92E (var var0000);
 
-void Func042A object#(0x42A) () {
+void FuncCynthia object#(FIRST_NPC_FUNCTION - CYNTHIA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -16577,7 +16577,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern void Func0911 0x911 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func042B object#(0x42B) () {
+void FuncPatterson object#(FIRST_NPC_FUNCTION - PATTERSON) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -16750,7 +16750,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func042C object#(0x42C) () {
+void FuncCarrocio object#(FIRST_NPC_FUNCTION - CARROCIO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -16932,7 +16932,7 @@ extern void Func0919 0x919 ();
 extern void Func091A 0x91A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func042D object#(0x42D) () {
+void FuncFigg object#(FIRST_NPC_FUNCTION - FIGG) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -17117,7 +17117,7 @@ extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func042E object#(0x42E) () {
+void FuncJames object#(FIRST_NPC_FUNCTION - JAMES) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -17299,7 +17299,7 @@ extern void Func08A0 0x8A0 ();
 extern void Func0911 0x911 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func042F object#(0x42F) () {
+void FuncJeanette object#(FIRST_NPC_FUNCTION - JEANETTE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -17405,7 +17405,7 @@ void Func042F object#(0x42F) () {
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 
-void Func0430 object#(0x430) () {
+void FuncAmanda object#(FIRST_NPC_FUNCTION - AMANDA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -17528,7 +17528,7 @@ extern var Func090A 0x90A ();
 extern void Func0875 0x875 (var var0000, var var0001);
 extern void Func092E 0x92E (var var0000);
 
-void Func0431 object#(0x431) () {
+void FuncDenby object#(FIRST_NPC_FUNCTION - DENBY) () {
 	var var0000;
 	var var0001;
 
@@ -17596,7 +17596,7 @@ extern var Func090A 0x90A ();
 extern void Func088C 0x88C ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0432 object#(0x432) () {
+void FuncFred object#(FIRST_NPC_FUNCTION - FRED) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -17716,7 +17716,7 @@ extern var Func090A 0x90A ();
 extern void Func08A7 0x8A7 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0433 object#(0x433) () {
+void FuncKelly object#(FIRST_NPC_FUNCTION - KELLY) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -17850,7 +17850,7 @@ extern void Func0947 0x947 ();
 extern void Func0948 0x948 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0434 object#(0x434) () {
+void FuncWilly object#(FIRST_NPC_FUNCTION - WILLY) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -18085,7 +18085,7 @@ extern void Func088E 0x88E ();
 extern void Func0919 0x919 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0435 object#(0x435) () {
+void FuncGaye object#(FIRST_NPC_FUNCTION - GAYE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -18233,7 +18233,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern void Func0863 0x863 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0436 object#(0x436) () {
+void FuncCoop object#(FIRST_NPC_FUNCTION - COOP) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -18398,7 +18398,7 @@ extern void Func0897 0x897 ();
 extern void Func0898 0x898 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0437 object#(0x437) () {
+void FuncGrayson object#(FIRST_NPC_FUNCTION - GRAYSON) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -18540,7 +18540,7 @@ extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0438 object#(0x438) () {
+void FuncDiane object#(FIRST_NPC_FUNCTION - DIANE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -18656,7 +18656,7 @@ extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0439 object#(0x439) () {
+void FuncClint object#(FIRST_NPC_FUNCTION - CLINT) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -18828,7 +18828,7 @@ extern void Func0919 0x919 ();
 extern void Func091A 0x91A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func043A object#(0x43A) () {
+void FuncGordon object#(FIRST_NPC_FUNCTION - GORDON) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -19003,7 +19003,7 @@ extern void Func091A 0x91A ();
 extern void Func08E3 0x8E3 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func043B object#(0x43B) () {
+void FuncSean object#(FIRST_NPC_FUNCTION - SEAN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -19212,7 +19212,7 @@ extern var Func090A 0x90A ();
 extern void Func0857 0x857 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func043C object#(0x43C) () {
+void FuncBrownie object#(FIRST_NPC_FUNCTION - BROWNIE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -19362,7 +19362,7 @@ extern var Func090A 0x90A ();
 extern void Func08B8 0x8B8 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func043D object#(0x43D) () {
+void FuncMack object#(FIRST_NPC_FUNCTION - MACK) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -19544,7 +19544,7 @@ extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func043E object#(0x43E) () {
+void FuncSnaz object#(FIRST_NPC_FUNCTION - SNAZ) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -19791,7 +19791,7 @@ extern void Func0919 0x919 ();
 extern void Func091A 0x91A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func043F object#(0x43F) () {
+void FuncMillie object#(FIRST_NPC_FUNCTION - MILLIE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -19921,7 +19921,7 @@ void Func043F object#(0x43F) () {
 extern var Func0908 0x908 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0440 object#(0x440) () {
+void FuncGeoffrey object#(FIRST_NPC_FUNCTION - GEOFFREY) () {
 	var var0000;
 
 	if (event == DOUBLECLICK) {
@@ -19998,7 +19998,7 @@ void Func0440 object#(0x440) () {
 
 extern var Func090A 0x90A ();
 
-void Func0441 object#(0x441) () {
+void FuncWislem object#(FIRST_NPC_FUNCTION - WISLEM) () {
 	var var0000;
 
 	if (event == PROXIMITY) {
@@ -20071,7 +20071,7 @@ extern var Func090A 0x90A ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func08EC 0x8EC ();
 
-void Func0442 object#(0x442) () {
+void FuncSherry object#(FIRST_NPC_FUNCTION - SHERRY) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -20206,7 +20206,7 @@ extern var Func090A 0x90A ();
 extern void Func0854 0x854 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0443 object#(0x443) () {
+void FuncBoots object#(FIRST_NPC_FUNCTION - BOOTS) () {
 	var var0000;
 
 	if (event == DOUBLECLICK) {
@@ -20292,7 +20292,7 @@ extern var Func0908 0x908 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0444 object#(0x444) () {
+void FuncBennie object#(FIRST_NPC_FUNCTION - BENNIE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -20397,7 +20397,7 @@ void Func0444 object#(0x444) () {
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 
-void Func0445 object#(0x445) () {
+void FuncWeston object#(FIRST_NPC_FUNCTION - WESTON) () {
 	var var0000;
 	var var0001;
 
@@ -20564,7 +20564,7 @@ extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, v
 extern void Func0911 0x911 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func0446 object#(0x446) () {
+void FuncMiranda object#(FIRST_NPC_FUNCTION - MIRANDA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -20711,7 +20711,7 @@ void Func0446 object#(0x446) () {
 
 extern void Func092F 0x92F (var var0000);
 
-void Func0447 object#(0x447) () {
+void FuncInwisloklem object#(FIRST_NPC_FUNCTION - INWISLOKLEM) () {
 	if (event == DOUBLECLICK) {
 		INWISLOKLEM->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
@@ -20809,7 +20809,7 @@ extern var Func090B 0x90B (var var0000);
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0448 object#(0x448) () {
+void FuncNell object#(FIRST_NPC_FUNCTION - NELL) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -20922,7 +20922,7 @@ void Func0448 object#(0x448) () {
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0449 object#(0x449) () {
+void FuncCharles object#(FIRST_NPC_FUNCTION - CHARLES) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -21048,7 +21048,7 @@ extern void Func08DB 0x8DB ();
 extern void Func08DC 0x8DC ();
 extern void Func0911 0x911 (var var0000);
 
-void Func044A object#(0x44A) () {
+void FuncRudyom object#(FIRST_NPC_FUNCTION - RUDYOM) () {
 	var var0000;
 	var var0001;
 
@@ -21166,7 +21166,7 @@ extern var Func0908 0x908 ();
 extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
 
-void Func044B object#(0x44B) () {
+void FuncNastassia object#(FIRST_NPC_FUNCTION - NASTASSIA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -21185,7 +21185,7 @@ void Func044B object#(0x44B) () {
 			nohalt;
 			music 26, 1;
 			continue;
-			call Func044B;
+			call FuncNastassia;
 			nop;
 		};
 		return;
@@ -21392,7 +21392,7 @@ extern var Func090A 0x90A ();
 extern void Func08D0 0x8D0 (var var0000, var var0001);
 extern void Func092E 0x92E (var var0000);
 
-void Func044C object#(0x44C) () {
+void FuncRayburt object#(FIRST_NPC_FUNCTION - RAYBURT) () {
 	var var0000;
 	var var0001;
 
@@ -21478,7 +21478,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func092E 0x92E (var var0000);
 
-void Func044D object#(0x44D) () {
+void FuncLordHeather object#(FIRST_NPC_FUNCTION - LORD_HEATHER) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -21615,7 +21615,7 @@ void Func044D object#(0x44D) () {
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func044E object#(0x44E) () {
+void FuncPamela object#(FIRST_NPC_FUNCTION - PAMELA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -21722,7 +21722,7 @@ void Func044E object#(0x44E) () {
 extern void Func0951 0x951 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func044F object#(0x44F) () {
+void FuncZinaida object#(FIRST_NPC_FUNCTION - ZINAIDA) () {
 	var var0000;
 
 	if (event == DOUBLECLICK) {
@@ -21804,7 +21804,7 @@ extern void Func0877 0x877 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func0450 object#(0x450) () {
+void FuncDeMaria object#(FIRST_NPC_FUNCTION - DE_MARIA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -21904,7 +21904,7 @@ extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func0451 object#(0x451) () {
+void FuncElynor object#(FIRST_NPC_FUNCTION - ELYNOR) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -22170,7 +22170,7 @@ extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func0452 object#(0x452) () {
+void FuncGregor object#(FIRST_NPC_FUNCTION - GREGOR) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -22306,7 +22306,7 @@ void Func0452 object#(0x452) () {
 extern var Func090A 0x90A ();
 extern void Func08BA 0x8BA ();
 
-void Func0453 object#(0x453) () {
+void FuncMargareta object#(FIRST_NPC_FUNCTION - MARGARETA) () {
 	var var0000;
 	var var0001;
 
@@ -22417,7 +22417,7 @@ extern var Func0909 0x909 ();
 extern void Func0919 0x919 ();
 extern void Func091A 0x91A ();
 
-void Func0454 object#(0x454) () {
+void FuncSasha object#(FIRST_NPC_FUNCTION - SASHA) () {
 	var var0000;
 
 	if (event == PROXIMITY) {
@@ -22496,7 +22496,7 @@ extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0455 object#(0x455) () {
+void FuncGladstone object#(FIRST_NPC_FUNCTION - GLADSTONE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -22619,7 +22619,7 @@ extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0456 object#(0x456) () {
+void FuncXanthia object#(FIRST_NPC_FUNCTION - XANTHIA) () {
 	var var0000;
 	var var0001;
 
@@ -22730,7 +22730,7 @@ extern void Func0953 0x953 ();
 extern void Func0911 0x911 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func0457 object#(0x457) () {
+void FuncZorn object#(FIRST_NPC_FUNCTION - ZORN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -22919,7 +22919,7 @@ extern var Func0909 0x909 ();
 extern void Func0919 0x919 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0458 object#(0x458) () {
+void FuncSeara object#(FIRST_NPC_FUNCTION - SEARA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -23047,7 +23047,7 @@ void Func0458 object#(0x458) () {
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 
-void Func0459 object#(0x459) () {
+void FuncKarl object#(FIRST_NPC_FUNCTION - KARL) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -23183,7 +23183,7 @@ extern void Func091A 0x91A ();
 extern void Func0911 0x911 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func045A object#(0x45A) () {
+void FuncOwen object#(FIRST_NPC_FUNCTION - OWEN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -23515,7 +23515,7 @@ extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func045B object#(0x45B) () {
+void FuncBurnside object#(FIRST_NPC_FUNCTION - BURNSIDE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -23689,7 +23689,7 @@ extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func045C object#(0x45C) () {
+void FuncRutherford object#(FIRST_NPC_FUNCTION - RUTHERFORD) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -23869,7 +23869,7 @@ extern void Func0919 0x919 ();
 extern void Func091A 0x91A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func045D object#(0x45D) () {
+void FuncWilliam object#(FIRST_NPC_FUNCTION - WILLIAM) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -23985,7 +23985,7 @@ extern var Func090A 0x90A ();
 extern void Func08A6 0x8A6 (var var0000, var var0001);
 extern void Func092E 0x92E (var var0000);
 
-void Func045E object#(0x45E) () {
+void FuncKarenna object#(FIRST_NPC_FUNCTION - KARENNA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -24123,7 +24123,7 @@ extern void Func089F 0x89F (var var0000, var var0001);
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func045F object#(0x45F) () {
+void FuncJakher object#(FIRST_NPC_FUNCTION - JAKHER) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -24256,7 +24256,7 @@ void Func045F object#(0x45F) () {
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 
-void Func0460 object#(0x460) () {
+void FuncJergi object#(FIRST_NPC_FUNCTION - JERGI) () {
 	var var0000;
 	var var0001;
 
@@ -24363,7 +24363,7 @@ void Func0460 object#(0x460) () {
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern var Func0909 0x909 ();
 
-void Func0461 object#(0x461) () {
+void FuncMikos object#(FIRST_NPC_FUNCTION - MIKOS) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -24447,7 +24447,7 @@ extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, v
 extern void Func08E0 0x8E0 ();
 extern var Func090A 0x90A ();
 
-void Func0462 object#(0x462) () {
+void FuncSaralek object#(FIRST_NPC_FUNCTION - SARALEK) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -24588,7 +24588,7 @@ void Func0462 object#(0x462) () {
 
 extern var Func0909 0x909 ();
 
-void Func0463 object#(0x463) () {
+void FuncFodus object#(FIRST_NPC_FUNCTION - FODUS) () {
 	var var0000;
 
 	if (event == PROXIMITY) {
@@ -24650,7 +24650,7 @@ extern void Func08ED 0x8ED ();
 extern var Func090A 0x90A ();
 extern var Func08F7 0x8F7 (var var0000);
 
-void Func0464 object#(0x464) () {
+void FuncTavenor object#(FIRST_NPC_FUNCTION - TAVENOR) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -24771,7 +24771,7 @@ extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, v
 extern void Func08DF 0x8DF ();
 extern var Func090A 0x90A ();
 
-void Func0465 object#(0x465) () {
+void FuncSalamon object#(FIRST_NPC_FUNCTION - SALAMON) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -24955,7 +24955,7 @@ extern void Func08C3 0x8C3 ();
 extern void Func08C4 0x8C4 ();
 extern void Func0911 0x911 (var var0000);
 
-void Func0466 object#(0x466) () {
+void FuncNicodemus object#(FIRST_NPC_FUNCTION - NICODEMUS) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -25141,7 +25141,7 @@ void Func0466 object#(0x466) () {
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 
-void Func0467 object#(0x467) () {
+void FuncThad object#(FIRST_NPC_FUNCTION - THAD) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -25249,7 +25249,7 @@ extern var Func090A 0x90A ();
 extern void Func0856 0x856 (var var0000, var var0001);
 extern void Func092E 0x92E (var var0000);
 
-void Func0468 object#(0x468) () {
+void FuncBradman object#(FIRST_NPC_FUNCTION - BRADMAN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -25351,7 +25351,7 @@ void Func0468 object#(0x468) () {
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 
-void Func0469 object#(0x469) () {
+void FuncSirJeff object#(FIRST_NPC_FUNCTION - SIR_JEFF) () {
 	var var0000;
 	var var0001;
 
@@ -25435,7 +25435,7 @@ extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 
-void Func046A object#(0x46A) () {
+void FuncTiery object#(FIRST_NPC_FUNCTION - TIERY) () {
 	var var0000;
 	var var0001;
 
@@ -25542,7 +25542,7 @@ extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090B 0x90B (var var0000);
 
-void Func046B object#(0x46B) () {
+void FuncIskander object#(FIRST_NPC_FUNCTION - ISKANDER) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -25722,7 +25722,7 @@ extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, v
 extern void Func0911 0x911 (var var0000);
 extern void Func08D2 0x8D2 (var var0000, var var0001, var var0002);
 
-void Func046C object#(0x46C) () {
+void FuncReyna object#(FIRST_NPC_FUNCTION - REYNA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -25976,7 +25976,7 @@ void Func046C object#(0x46C) () {
 extern var Func0909 0x909 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func046D object#(0x46D) () {
+void FuncWayne object#(FIRST_NPC_FUNCTION - WAYNE) () {
 	var var0000;
 
 	if (event == DOUBLECLICK) {
@@ -26101,7 +26101,7 @@ void Func046D object#(0x46D) () {
 extern var Func090A 0x90A ();
 extern void Func0632 object#(0x632) ();
 
-void Func046E object#(0x46E) () {
+void FuncGarok object#(FIRST_NPC_FUNCTION - GAROK) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -26262,7 +26262,7 @@ extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 
-void Func046F object#(0x46F) () {
+void FuncGharl object#(FIRST_NPC_FUNCTION - GHARL) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -26351,7 +26351,7 @@ extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
 extern void Func0911 0x911 (var var0000);
 
-void Func0470 object#(0x470) () {
+void FuncDRel object#(FIRST_NPC_FUNCTION - D_REL) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -26473,7 +26473,7 @@ extern var Func0908 0x908 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
 
-void Func0471 object#(0x471) () {
+void FuncSmith object#(FIRST_NPC_FUNCTION - SMITH) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -26627,7 +26627,7 @@ extern var Func090A 0x90A ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func092E 0x92E (var var0000);
 
-void Func0472 object#(0x472) () {
+void FuncAimi object#(FIRST_NPC_FUNCTION - AIMI) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -26778,7 +26778,7 @@ extern void Func08C8 0x8C8 (var var0000, var var0001);
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func0473 object#(0x473) () {
+void FuncPenni object#(FIRST_NPC_FUNCTION - PENNI) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -26912,7 +26912,7 @@ extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, v
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func0911 0x911 (var var0000);
 
-void Func0474 object#(0x474) () {
+void FuncBen object#(FIRST_NPC_FUNCTION - BEN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -27050,7 +27050,7 @@ void Func0474 object#(0x474) () {
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 
-void Func0475 object#(0x475) () {
+void FuncGoth object#(FIRST_NPC_FUNCTION - GOTH) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -27210,7 +27210,7 @@ extern var Func090A 0x90A ();
 extern void Func085C 0x85C ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0476 object#(0x476) () {
+void FuncCarlyn object#(FIRST_NPC_FUNCTION - CARLYN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -27353,7 +27353,7 @@ extern void Func0911 0x911 (var var0000);
 extern void Func0878 0x878 (var var0000, var var0001);
 extern void Func092E 0x92E (var var0000);
 
-void Func0477 object#(0x477) () {
+void FuncDeSnel object#(FIRST_NPC_FUNCTION - DE_SNEL) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -27523,7 +27523,7 @@ void Func0477 object#(0x477) () {
 extern var Func0909 0x909 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0478 object#(0x478) () {
+void FuncJoseph object#(FIRST_NPC_FUNCTION - JOSEPH) () {
 	var var0000;
 	var var0001;
 
@@ -27680,7 +27680,7 @@ extern void Func08A9 0x8A9 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0479 object#(0x479) () {
+void FuncKliftin object#(FIRST_NPC_FUNCTION - KLIFTIN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -27881,7 +27881,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func047A object#(0x47A) () {
+void FuncOphelia object#(FIRST_NPC_FUNCTION - OPHELIA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -28078,7 +28078,7 @@ void Func047A object#(0x47A) () {
 							if (var0012 == 0x0000) {
 								say("\"Perhaps thou art not truly serious about thy convictions. Mayhaps Daphne will take thy line of bets.\"");
 								// I see no way other than this
-								goto labelFunc047A_0447;
+								goto labelFuncOphelia_0447;
 							}
 							say("\"Thou wouldst bet ",
 								var0012,
@@ -28111,7 +28111,7 @@ void Func047A object#(0x47A) () {
 						say("\"Then if thou wouldst like to bet against Sprellic, thou mayest see Daphne, but I warn thee thou wilt be throwing thy money away!\"");
 					}
 				}
-labelFunc047A_0447:
+labelFuncOphelia_0447:
 				remove("betting");
 				fallthrough;
 
@@ -28169,7 +28169,7 @@ extern void Func0871 0x871 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func047B object#(0x47B) () {
+void FuncDaphne object#(FIRST_NPC_FUNCTION - DAPHNE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -28311,7 +28311,7 @@ void Func047B object#(0x47B) () {
 							if (var000B == 0x0000) {
 								say("\"Perhaps thou art not truly serious about thy convictions. Mayhaps the princess will take thy line of bets.\"");
 								// I see no way other than this
-								goto labelFunc047B_0352;
+								goto labelFuncDaphne_0352;
 							}
 							say("\"Thou wouldst bet ",
 								var000B,
@@ -28342,7 +28342,7 @@ void Func047B object#(0x47B) () {
 						say("\"Then if thou wouldst like to bet in favor of Sprellic, thou mayest see Ophelia, but I warn thee thou wilt be throwing thy money away!\"");
 					}
 				}
-labelFunc047B_0352:
+labelFuncDaphne_0352:
 				remove("gambling");
 				fallthrough;
 
@@ -28376,7 +28376,7 @@ extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func047C object#(0x47C) () {
+void FuncSprellic object#(FIRST_NPC_FUNCTION - SPRELLIC) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -28632,7 +28632,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern void Func0911 0x911 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func047D object#(0x47D) () {
+void FuncVokes object#(FIRST_NPC_FUNCTION - VOKES) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -28764,7 +28764,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern void Func0911 0x911 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func047E object#(0x47E) () {
+void FuncSyria object#(FIRST_NPC_FUNCTION - SYRIA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -28936,7 +28936,7 @@ extern var Func0909 0x909 ();
 extern void Func0911 0x911 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func047F object#(0x47F) () {
+void FuncTimmons object#(FIRST_NPC_FUNCTION - TIMMONS) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -29035,7 +29035,7 @@ extern var Func090B 0x90B (var var0000);
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
 
-void Func0480 object#(0x480) () {
+void FuncIriale object#(FIRST_NPC_FUNCTION - IRIALE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -29116,7 +29116,7 @@ extern var Func090A 0x90A ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func092E 0x92E (var var0000);
 
-void Func0481 object#(0x481) () {
+void FuncRussell object#(FIRST_NPC_FUNCTION - RUSSELL) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -29324,7 +29324,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern void Func0855 0x855 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0482 object#(0x482) () {
+void FuncBoris object#(FIRST_NPC_FUNCTION - BORIS) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -29358,7 +29358,7 @@ void Func0482 object#(0x482) () {
 			say("\"Art thou ready to pay thy bill?\"");
 			if (Func090A()) {
 				// I see no way other than this
-				goto labelFunc0482_00E5;
+				goto labelFuncBoris_00E5;
 			}
 			say("\"Goodbye, then!\"*");
 			abort;
@@ -29376,7 +29376,7 @@ void Func0482 object#(0x482) () {
 					BORIS->say("\"Yes indeed! Let me see... I believe the total that thou dost owe is 74 gold pieces. I am afraid that thou must pay up before I can speak with thee or anyone else with thee.\"");
 					DUPRE->say("Dupre looks embarrassed. He turns to you. \"My friend, wilt thou help me out?\"");
 					if (Func090A()) {
-labelFunc0482_00E5:
+labelFuncBoris_00E5:
 						var0004 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 						if (var0004 >= 0x004A) {
 							var0005 = UI_remove_party_items(0x004A, 0x0284, QUALITY_ANY, FRAME_ANY, true);
@@ -29574,7 +29574,7 @@ extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func0483 object#(0x483) () {
+void FuncMagenta object#(FIRST_NPC_FUNCTION - MAGENTA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -29739,7 +29739,7 @@ extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func0484 object#(0x484) () {
+void FuncHenry object#(FIRST_NPC_FUNCTION - HENRY) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -29886,7 +29886,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0485 object#(0x485) () {
+void FuncConstance object#(FIRST_NPC_FUNCTION - CONSTANCE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -30070,7 +30070,7 @@ extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func0486 object#(0x486) () {
+void FuncRobin object#(FIRST_NPC_FUNCTION - ROBIN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -30294,7 +30294,7 @@ extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func0487 object#(0x487) () {
+void FuncBattles object#(FIRST_NPC_FUNCTION - BATTLES) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -30426,7 +30426,7 @@ extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func0488 object#(0x488) () {
+void FuncLeavell object#(FIRST_NPC_FUNCTION - LEAVELL) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -30607,7 +30607,7 @@ extern var Func090B 0x90B (var var0000);
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func0489 object#(0x489) () {
+void FuncSam object#(FIRST_NPC_FUNCTION - SAM) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -30821,7 +30821,7 @@ extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
 
-void Func048A object#(0x48A) () {
+void FuncGorn object#(FIRST_NPC_FUNCTION - GORN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -31009,7 +31009,7 @@ void Func048A object#(0x48A) () {
 
 extern var Func08F7 0x8F7 (var var0000);
 
-void Func048C object#(0x48C) () {
+void FuncMarkham object#(FIRST_NPC_FUNCTION - MARKHAM) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -31175,7 +31175,7 @@ extern void Func08AF 0x8AF ();
 extern void Func08AD 0x8AD ();
 extern void Func08B0 0x8B0 ();
 
-void Func048D object#(0x48D) () {
+void FuncHorance object#(FIRST_NPC_FUNCTION - HORANCE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -31356,7 +31356,7 @@ extern var Func0909 0x909 ();
 extern void Func08F0 0x8F0 ();
 extern void Func08EF 0x8EF ();
 
-void Func048E object#(0x48E) () {
+void FuncTrent object#(FIRST_NPC_FUNCTION - TRENT) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -31498,7 +31498,7 @@ extern void Func08BF 0x8BF (var var0000);
 extern var Func090A 0x90A ();
 extern void Func08C0 0x8C0 ();
 
-void Func048F object#(0x48F) () {
+void FuncMordra object#(FIRST_NPC_FUNCTION - MORDRA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -31751,7 +31751,7 @@ extern void Func08D8 0x8D8 ();
 extern void Func08D9 0x8D9 ();
 extern void Func08DA 0x8DA ();
 
-void Func0490 object#(0x490) () {
+void FuncRowena object#(FIRST_NPC_FUNCTION - ROWENA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -31841,7 +31841,7 @@ extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
 
-void Func0491 object#(0x491) () {
+void FuncPaulette object#(FIRST_NPC_FUNCTION - PAULETTE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -32049,7 +32049,7 @@ void Func0491 object#(0x491) () {
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 
-void Func0492 object#(0x492) () {
+void FuncQuenton object#(FIRST_NPC_FUNCTION - QUENTON) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -32271,7 +32271,7 @@ extern void Func088B 0x88B ();
 extern var Func0909 0x909 ();
 extern void Func088A 0x88A ();
 
-void Func0493 object#(0x493) () {
+void FuncForsythe object#(FIRST_NPC_FUNCTION - FORSYTHE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -32524,7 +32524,7 @@ void Func0493 object#(0x493) () {
 	}
 }
 
-void Func0495 object#(0x495) () {
+void FuncHydra object#(FIRST_NPC_FUNCTION - HYDRA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -32694,7 +32694,7 @@ extern void Func0911 0x911 (var var0000);
 extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
 
-void Func0496 object#(0x496) () {
+void FuncPenumbra object#(FIRST_NPC_FUNCTION - PENUMBRA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -32898,7 +32898,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 
-void Func0497 object#(0x497) () {
+void FuncKissme object#(FIRST_NPC_FUNCTION - KISSME) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -33091,7 +33091,7 @@ extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
 
-void Func0498 object#(0x498) () {
+void FuncZelda object#(FIRST_NPC_FUNCTION - ZELDA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -33285,7 +33285,7 @@ extern void Func08BB 0x8BB (var var0000);
 extern void Func08BC 0x8BC (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func0499 object#(0x499) () {
+void FuncMariah object#(FIRST_NPC_FUNCTION - MARIAH) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -33459,7 +33459,7 @@ extern var Func0908 0x908 ();
 extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
 
-void Func049A object#(0x49A) () {
+void FuncGrod object#(FIRST_NPC_FUNCTION - GROD) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -33660,7 +33660,7 @@ extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func049B object#(0x49B) () {
+void FuncCubolt object#(FIRST_NPC_FUNCTION - CUBOLT) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -33767,7 +33767,7 @@ extern var Func0909 0x909 ();
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern void Func092E 0x92E (var var0000);
 
-void Func049C object#(0x49C) () {
+void FuncBalayna object#(FIRST_NPC_FUNCTION - BALAYNA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -33942,7 +33942,7 @@ extern var Func0909 0x909 ();
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern void Func092E 0x92E (var var0000);
 
-void Func049D object#(0x49D) () {
+void FuncTolemac object#(FIRST_NPC_FUNCTION - TOLEMAC) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -34074,7 +34074,7 @@ extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern void Func0911 0x911 (var var0000);
 
-void Func049E object#(0x49E) () {
+void FuncMorz object#(FIRST_NPC_FUNCTION - MORZ) () {
 	var var0000;
 	var var0001;
 
@@ -34165,7 +34165,7 @@ extern var Func090A 0x90A ();
 extern void Func08A2 0x8A2 (var var0000, var var0001);
 extern void Func092E 0x92E (var var0000);
 
-void Func049F object#(0x49F) () {
+void FuncJillian object#(FIRST_NPC_FUNCTION - JILLIAN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -34244,7 +34244,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern var Func090B 0x90B (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func04A0 object#(0x4A0) () {
+void FuncEffrem object#(FIRST_NPC_FUNCTION - EFFREM) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -34378,7 +34378,7 @@ extern var Func090A 0x90A ();
 extern void Func085F 0x85F (var var0000, var var0001);
 extern void Func092E 0x92E (var var0000);
 
-void Func04A1 object#(0x4A1) () {
+void FuncChad object#(FIRST_NPC_FUNCTION - CHAD) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -34502,7 +34502,7 @@ extern var Func0909 0x909 ();
 extern void Func0879 0x879 (var var0000, var var0001, var var0002);
 extern void Func092E 0x92E (var var0000);
 
-void Func04A2 object#(0x4A2) () {
+void FuncElad object#(FIRST_NPC_FUNCTION - ELAD) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -34625,7 +34625,7 @@ extern void Func08CB 0x8CB ();
 extern void Func08CC 0x8CC ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04A3 object#(0x4A3) () {
+void FuncPhearcy object#(FIRST_NPC_FUNCTION - PHEARCY) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -34878,7 +34878,7 @@ extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 
-void Func04A4 object#(0x4A4) () {
+void FuncAddom object#(FIRST_NPC_FUNCTION - ADDOM) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -35032,7 +35032,7 @@ extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 
-void Func04A5 object#(0x4A5) () {
+void FuncFrank object#(FIRST_NPC_FUNCTION - FRANK) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -35164,7 +35164,7 @@ extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04A6 object#(0x4A6) () {
+void FuncThurston object#(FIRST_NPC_FUNCTION - THURSTON) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -35236,7 +35236,7 @@ void Func04A6 object#(0x4A6) () {
 											continue;
 										}
 										// I see no way other than this
-										goto labelFunc04A6_02F6;
+										goto labelFuncThurston_02F6;
 									}
 									break;
 								}
@@ -35337,7 +35337,7 @@ void Func04A6 object#(0x4A6) () {
 				fallthrough;
 
 			case "bye":
-labelFunc04A6_02F6:
+labelFuncThurston_02F6:
 				break;
 		}
 
@@ -35356,7 +35356,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04A7 object#(0x4A7) () {
+void FuncFeridwyn object#(FIRST_NPC_FUNCTION - FERIDWYN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -35617,7 +35617,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04A8 object#(0x4A8) () {
+void FuncBrita object#(FIRST_NPC_FUNCTION - BRITA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -35768,7 +35768,7 @@ void Func04A8 object#(0x4A8) () {
 extern var Func0909 0x909 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04A9 object#(0x4A9) () {
+void FuncAlina object#(FIRST_NPC_FUNCTION - ALINA) () {
 	var var0000;
 	var var0001;
 
@@ -35879,7 +35879,7 @@ extern void Func0919 0x919 ();
 extern void Func091A 0x91A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04AA object#(0x4AA) () {
+void FuncMerrick object#(FIRST_NPC_FUNCTION - MERRICK) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -36041,7 +36041,7 @@ extern void Func0919 0x919 ();
 extern void Func0911 0x911 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func04AB object#(0x4AB) () {
+void FuncGarritt object#(FIRST_NPC_FUNCTION - GARRITT) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -36267,7 +36267,7 @@ extern var Func090B 0x90B (var var0000);
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04AC object#(0x4AC) () {
+void FuncMorfin object#(FIRST_NPC_FUNCTION - MORFIN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -36613,7 +36613,7 @@ extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04AD object#(0x4AD) () {
+void FuncBeverlea object#(FIRST_NPC_FUNCTION - BEVERLEA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -36842,7 +36842,7 @@ extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func04AE object#(0x4AE) () {
+void FuncKomor object#(FIRST_NPC_FUNCTION - KOMOR) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -37015,7 +37015,7 @@ extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func04AF object#(0x4AF) () {
+void FuncFenn object#(FIRST_NPC_FUNCTION - FENN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -37226,7 +37226,7 @@ extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04B0 object#(0x4B0) () {
+void FuncAndrew object#(FIRST_NPC_FUNCTION - ANDREW) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -37297,7 +37297,7 @@ void Func04B0 object#(0x4B0) () {
 										continue;
 									}
 									// I see no way other than this
-									goto labelFunc04B0_0332;
+									goto labelFuncAndrew_0332;
 								}
 								say("\"Thou hast not the room for the jug.\"");
 								var0007 = UI_add_party_items(0x0003, 0x0284, QUALITY_ANY, FRAME_ANY, true);
@@ -37411,7 +37411,7 @@ void Func04B0 object#(0x4B0) () {
 				break;
 		}
 		nobreak {
-labelFunc04B0_0332:
+labelFuncAndrew_0332:
 		}
 		say("\"I hope I was of some assistance to thee, ",
 			var0000,
@@ -37426,7 +37426,7 @@ extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04B1 object#(0x4B1) () {
+void FuncCamille object#(FIRST_NPC_FUNCTION - CAMILLE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -37597,7 +37597,7 @@ extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04B2 object#(0x4B2) () {
+void FuncTobias object#(FIRST_NPC_FUNCTION - TOBIAS) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -37773,7 +37773,7 @@ extern void Func08CD 0x8CD ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04B3 object#(0x4B3) () {
+void FuncPolly object#(FIRST_NPC_FUNCTION - POLLY) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -37912,7 +37912,7 @@ extern var Func0908 0x908 ();
 extern void Func0911 0x911 (var var0000);
 extern var Func090A 0x90A ();
 
-void Func04B4 object#(0x4B4) () {
+void FuncDraxinusom object#(FIRST_NPC_FUNCTION - DRAXINUSOM) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -38072,7 +38072,7 @@ extern void Func089B 0x89B (var var0000, var var0001);
 extern void Func089A 0x89A (var var0000, var var0001);
 extern void Func092F 0x92F (var var0000);
 
-void Func04B5 object#(0x4B5) () {
+void FuncInforlem object#(FIRST_NPC_FUNCTION - INFORLEM) () {
 	var var0000;
 	var var0001;
 
@@ -38181,7 +38181,7 @@ void Func04B5 object#(0x4B5) () {
 extern void Func089D 0x89D (var var0000, var var0001, var var0002);
 extern void Func092F 0x92F (var var0000);
 
-void Func04B6 object#(0x4B6) () {
+void FuncInmanilem object#(FIRST_NPC_FUNCTION - INMANILEM) () {
 	var var0000;
 	var var0001;
 
@@ -38295,7 +38295,7 @@ extern var Func0908 0x908 ();
 extern var Func090A 0x90A ();
 extern void Func092F 0x92F (var var0000);
 
-void Func04B7 object#(0x4B7) () {
+void FuncTeregus object#(FIRST_NPC_FUNCTION - TEREGUS) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -38463,7 +38463,7 @@ void Func04B7 object#(0x4B7) () {
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern void Func0911 0x911 (var var0000);
 
-void Func04B8 object#(0x4B8) () {
+void FuncRuneb object#(FIRST_NPC_FUNCTION - RUNEB) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -38552,7 +38552,7 @@ extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, v
 extern void Func08CE 0x8CE ();
 extern void Func092F 0x92F (var var0000);
 
-void Func04B9 object#(0x4B9) () {
+void FuncQuan object#(FIRST_NPC_FUNCTION - QUAN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -38733,7 +38733,7 @@ void Func04B9 object#(0x4B9) () {
 extern var Func08FC 0x8FC (var var0000, var var0001);
 extern void Func092F 0x92F (var var0000);
 
-void Func04BA object#(0x4BA) () {
+void FuncQuaeven object#(FIRST_NPC_FUNCTION - QUAEVEN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -38872,7 +38872,7 @@ void Func04BA object#(0x4BA) () {
 	}
 }
 
-void Func04BB object#(0x4BB) () {
+void FuncSilamo object#(FIRST_NPC_FUNCTION - SILAMO) () {
 	if (event == DOUBLECLICK) {
 		SILAMO->show_npc_face(0x0000);
 		add(["name", "job", "bye"]);
@@ -38939,7 +38939,7 @@ extern void Func08E2 0x8E2 ();
 extern void Func08E1 0x8E1 ();
 extern void Func092F 0x92F (var var0000);
 
-void Func04BC object#(0x4BC) () {
+void FuncSarpling object#(FIRST_NPC_FUNCTION - SARPLING) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -39069,7 +39069,7 @@ extern void Func0889 0x889 ();
 extern var Func090A 0x90A ();
 extern void Func092F 0x92F (var var0000);
 
-void Func04BD object#(0x4BD) () {
+void FuncForbrak object#(FIRST_NPC_FUNCTION - FORBRAK) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -39256,7 +39256,7 @@ extern var Func090A 0x90A ();
 extern void Func0853 0x853 ();
 extern void Func092F 0x92F (var var0000);
 
-void Func04BE object#(0x4BE) () {
+void FuncBetra object#(FIRST_NPC_FUNCTION - BETRA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -39378,7 +39378,7 @@ extern var Func090A 0x90A ();
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func04BF object#(0x4BF) () {
+void FuncMartingo object#(FIRST_NPC_FUNCTION - MARTINGO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -39547,7 +39547,7 @@ extern var Func090A 0x90A ();
 extern void Func08BE 0x8BE (var var0000, var var0001);
 extern void Func092E 0x92E (var var0000);
 
-void Func04C0 object#(0x4C0) () {
+void FuncMenion object#(FIRST_NPC_FUNCTION - MENION) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -39652,7 +39652,7 @@ void Func04C0 object#(0x4C0) () {
 extern var Func0909 0x909 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04C1 object#(0x4C1) () {
+void FuncPendaran object#(FIRST_NPC_FUNCTION - PENDARAN) () {
 	var var0000;
 	var var0001;
 
@@ -39773,7 +39773,7 @@ extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func08A1 0x8A1 ();
 
-void Func04C2 object#(0x4C2) () {
+void FuncJehanne object#(FIRST_NPC_FUNCTION - JEHANNE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -39981,7 +39981,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
 
-void Func04C3 object#(0x4C3) () {
+void FuncJohnPaul object#(FIRST_NPC_FUNCTION - JOHN_PAUL) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -40208,7 +40208,7 @@ extern void Func08D3 0x8D3 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04C4 object#(0x4C4) () {
+void FuncRichter object#(FIRST_NPC_FUNCTION - RICHTER) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -40416,7 +40416,7 @@ void Func04C4 object#(0x4C4) () {
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092F 0x92F (var var0000);
 
-void Func04C5 object#(0x4C5) () {
+void FuncHorffe object#(FIRST_NPC_FUNCTION - HORFFE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -40536,7 +40536,7 @@ extern void Func08A4 0x8A4 ();
 extern void Func08A3 0x8A3 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04C6 object#(0x4C6) () {
+void FuncJordan object#(FIRST_NPC_FUNCTION - JORDAN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -40701,7 +40701,7 @@ extern void Func0876 0x876 ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04C7 object#(0x4C7) () {
+void FuncDenton object#(FIRST_NPC_FUNCTION - DENTON) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -40957,7 +40957,7 @@ extern void Func0911 0x911 (var var0000);
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func04C8 object#(0x4C8) () {
+void FuncTory object#(FIRST_NPC_FUNCTION - TORY) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -41154,7 +41154,7 @@ extern void Func08AC 0x8AC (var var0000, var var0001, var var0002);
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func092E 0x92E (var var0000);
 
-void Func04C9 object#(0x4C9) () {
+void FuncLeigh object#(FIRST_NPC_FUNCTION - LEIGH) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -41270,7 +41270,7 @@ void Func04C9 object#(0x4C9) () {
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04CA object#(0x4CA) () {
+void FuncIan object#(FIRST_NPC_FUNCTION - IAN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -41397,7 +41397,7 @@ extern var Func0909 0x909 ();
 extern var Func0908 0x908 ();
 extern var Func090B 0x90B (var var0000);
 
-void Func04CB object#(0x4CB) () {
+void FuncCador object#(FIRST_NPC_FUNCTION - CADOR) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -41533,7 +41533,7 @@ extern var Func0908 0x908 ();
 extern var Func090B 0x90B (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func04CC object#(0x4CC) () {
+void FuncMara object#(FIRST_NPC_FUNCTION - MARA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -41649,7 +41649,7 @@ extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func094F 0x94F (var var0000, var var0001);
 
-void Func04CD object#(0x4CD) () {
+void FuncZaksam object#(FIRST_NPC_FUNCTION - ZAKSAM) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -41782,7 +41782,7 @@ void Func04CD object#(0x4CD) () {
 extern var Func0909 0x909 ();
 extern void Func087A 0x87A ();
 
-void Func04CE object#(0x4CE) () {
+void FuncEldroth object#(FIRST_NPC_FUNCTION - ELDROTH) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -41920,7 +41920,7 @@ extern var Func090B 0x90B (var var0000);
 extern void Func094D 0x94D ();
 extern void Func094E 0x94E ();
 
-void Func04CF object#(0x4CF) () {
+void FuncYongi object#(FIRST_NPC_FUNCTION - YONGI) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -42105,7 +42105,7 @@ void Func04CF object#(0x4CF) () {
 extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 
-void Func04D0 object#(0x4D0) () {
+void FuncBlorn object#(FIRST_NPC_FUNCTION - BLORN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -42209,7 +42209,7 @@ void Func04D0 object#(0x4D0) () {
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 
-void Func04D1 object#(0x4D1) () {
+void FuncAuston object#(FIRST_NPC_FUNCTION - AUSTON) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -42351,7 +42351,7 @@ void Func04D1 object#(0x4D1) () {
 extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 
-void Func04D2 object#(0x4D2) () {
+void FuncLiana object#(FIRST_NPC_FUNCTION - LIANA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -42484,7 +42484,7 @@ extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
 extern void Func092F 0x92F (var var0000);
 
-void Func04D3 object#(0x4D3) () {
+void FuncLapLem object#(FIRST_NPC_FUNCTION - LAP_LEM) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -42597,7 +42597,7 @@ extern var Func090B 0x90B (var var0000);
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04D4 object#(0x4D4) () {
+void FuncYvella object#(FIRST_NPC_FUNCTION - YVELLA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -42789,7 +42789,7 @@ void Func04D4 object#(0x4D4) () {
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 
-void Func04D5 object#(0x4D5) () {
+void FuncCatherine object#(FIRST_NPC_FUNCTION - CATHERINE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -42882,7 +42882,7 @@ extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
 extern void Func092F 0x92F (var var0000);
 
-void Func04D6 object#(0x4D6) () {
+void FuncForLem object#(FIRST_NPC_FUNCTION - FOR_LEM) () {
 	var var0000;
 	var var0001;
 
@@ -42970,7 +42970,7 @@ extern void Func0841 0x841 ();
 extern var Func090A 0x90A ();
 extern void Func092F 0x92F (var var0000);
 
-void Func04D7 object#(0x4D7) () {
+void FuncAnsikart object#(FIRST_NPC_FUNCTION - ANSIKART) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -43107,7 +43107,7 @@ extern void Func0949 0x949 ();
 extern var Func090B 0x90B (var var0000);
 extern void Func094C 0x94C ();
 
-void Func04D8 object#(0x4D8) () {
+void FuncWisSur object#(FIRST_NPC_FUNCTION - WIS_SUR) () {
 	var var0000;
 	var var0001;
 
@@ -43232,7 +43232,7 @@ extern var Func0909 0x909 ();
 extern var Func090B 0x90B (var var0000);
 extern var Func08F7 0x8F7 (var var0000);
 
-void Func04D9 object#(0x4D9) () {
+void FuncAnmanivas object#(FIRST_NPC_FUNCTION - ANMANIVAS) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -43335,7 +43335,7 @@ extern var Func0909 0x909 ();
 extern var Func090B 0x90B (var var0000);
 extern var Func08F7 0x8F7 (var var0000);
 
-void Func04DA object#(0x4DA) () {
+void FuncForanamo object#(FIRST_NPC_FUNCTION - FORANAMO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -43430,7 +43430,7 @@ void Func04DA object#(0x4DA) () {
 extern void Func084C 0x84C ();
 extern void Func092F 0x92F (var var0000);
 
-void Func04DB object#(0x4DB) () {
+void FuncAurvidlem object#(FIRST_NPC_FUNCTION - AURVIDLEM) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -43512,7 +43512,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern var Func090B 0x90B (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func04DC object#(0x4DC) () {
+void FuncSullivan object#(FIRST_NPC_FUNCTION - SULLIVAN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -43687,7 +43687,7 @@ extern var Func0908 0x908 ();
 extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
 
-void Func04DD object#(0x4DD) () {
+void FuncWench object#(FIRST_NPC_FUNCTION - WENCH) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -43852,7 +43852,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern void Func088F 0x88F ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04DE object#(0x4DE) () {
+void FuncGlenno object#(FIRST_NPC_FUNCTION - GLENNO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -44008,7 +44008,7 @@ extern var Func0908 0x908 ();
 extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
 
-void Func04DF object#(0x4DF) () {
+void FuncMartine object#(FIRST_NPC_FUNCTION - MARTINE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -44164,7 +44164,7 @@ extern var Func0908 0x908 ();
 extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
 
-void Func04E0 object#(0x4E0) () {
+void FuncRoberto object#(FIRST_NPC_FUNCTION - ROBERTO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -44320,7 +44320,7 @@ extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, v
 extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
 
-void Func04E1 object#(0x4E1) () {
+void FuncSintag object#(FIRST_NPC_FUNCTION - SINTAG) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -44465,7 +44465,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern void Func0911 0x911 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func04E2 object#(0x4E2) () {
+void FuncBlacktooth object#(FIRST_NPC_FUNCTION - BLACKTOOTH) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -44636,7 +44636,7 @@ extern var Func090A 0x90A ();
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func04E3 object#(0x4E3) () {
+void FuncMole object#(FIRST_NPC_FUNCTION - MOLE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -44785,7 +44785,7 @@ extern var Func090A 0x90A ();
 extern void Func08B6 0x8B6 (var var0000, var var0001);
 extern void Func092E 0x92E (var var0000);
 
-void Func04E4 object#(0x4E4) () {
+void FuncLucky object#(FIRST_NPC_FUNCTION - LUCKY) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -44880,7 +44880,7 @@ extern void Func085A 0x85A ();
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04E5 object#(0x4E5) () {
+void FuncBudo object#(FIRST_NPC_FUNCTION - BUDO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -45072,7 +45072,7 @@ extern var Func090A 0x90A ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func092E 0x92E (var var0000);
 
-void Func04E6 object#(0x4E6) () {
+void FuncGordy object#(FIRST_NPC_FUNCTION - GORDY) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -45212,7 +45212,7 @@ extern void Func08B9 0x8B9 ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func092E 0x92E (var var0000);
 
-void Func04E7 object#(0x4E7) () {
+void FuncMandy object#(FIRST_NPC_FUNCTION - MANDY) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -45479,7 +45479,7 @@ extern var Func090A 0x90A ();
 extern var Func090B 0x90B (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func04E8 object#(0x4E8) () {
+void FuncSmithy object#(FIRST_NPC_FUNCTION - SMITHY) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -45579,7 +45579,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern void Func08C7 0x8C7 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04E9 object#(0x4E9) () {
+void FuncPaul object#(FIRST_NPC_FUNCTION - PAUL) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -45690,7 +45690,7 @@ void Func04E9 object#(0x4E9) () {
 
 extern void Func092E 0x92E (var var0000);
 
-void Func04EA object#(0x4EA) () {
+void FuncMeryl object#(FIRST_NPC_FUNCTION - MERYL) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -45725,7 +45725,7 @@ void Func04EA object#(0x4EA) () {
 
 extern void Func092E 0x92E (var var0000);
 
-void Func04EB object#(0x4EB) () {
+void FuncDustin object#(FIRST_NPC_FUNCTION - DUSTIN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -45762,7 +45762,7 @@ extern var Func08FC 0x8FC (var var0000, var var0001);
 extern void Func091A 0x91A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04EC object#(0x4EC) () {
+void FuncEllen object#(FIRST_NPC_FUNCTION - ELLEN) () {
 	var var0000;
 	var var0001;
 
@@ -45837,7 +45837,7 @@ extern var Func090A 0x90A ();
 extern void Func08A8 0x8A8 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04ED object#(0x4ED) () {
+void FuncKessler object#(FIRST_NPC_FUNCTION - KESSLER) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -46022,7 +46022,7 @@ extern var Func090A 0x90A ();
 extern void Func08CA 0x8CA (var var0000, var var0001);
 extern void Func092E 0x92E (var var0000);
 
-void Func04EE object#(0x4EE) () {
+void FuncPerrin object#(FIRST_NPC_FUNCTION - PERRIN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -46122,7 +46122,7 @@ void Func04EE object#(0x4EE) () {
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 
-void Func04EF object#(0x4EF) () {
+void FuncOwings object#(FIRST_NPC_FUNCTION - OWINGS) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -46252,7 +46252,7 @@ void Func04EF object#(0x4EF) () {
 extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 
-void Func04F0 object#(0x4F0) () {
+void FuncAnton object#(FIRST_NPC_FUNCTION - ANTON) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -46411,7 +46411,7 @@ void Func04F0 object#(0x4F0) () {
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
 
-void Func04F1 object#(0x4F1) () {
+void FuncPapa object#(FIRST_NPC_FUNCTION - PAPA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -46583,7 +46583,7 @@ extern var Func0909 0x909 ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern var Func090A 0x90A ();
 
-void Func04F2 object#(0x4F2) () {
+void FuncTaylor object#(FIRST_NPC_FUNCTION - TAYLOR) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -46751,7 +46751,7 @@ extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern var Func090A 0x90A ();
 
-void Func04F3 object#(0x4F3) () {
+void FuncMalloy object#(FIRST_NPC_FUNCTION - MALLOY) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -46894,7 +46894,7 @@ extern var Func08F7 0x8F7 (var var0000);
 extern var Func0909 0x909 ();
 extern void Func085B 0x85B ();
 
-void Func04F4 object#(0x4F4) () {
+void FuncCairbre object#(FIRST_NPC_FUNCTION - CAIRBRE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -46999,7 +46999,7 @@ extern void Func0911 0x911 (var var0000);
 extern var Func090A 0x90A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04F5 object#(0x4F5) () {
+void FuncKreg object#(FIRST_NPC_FUNCTION - KREG) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -47139,7 +47139,7 @@ extern var Func090A 0x90A ();
 extern void Func0840 0x840 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04F6 object#(0x4F6) () {
+void FuncAlagner object#(FIRST_NPC_FUNCTION - ALAGNER) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -47318,7 +47318,7 @@ extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func0911 0x911 (var var0000);
 
-void Func04F7 object#(0x4F7) () {
+void FuncCaine object#(FIRST_NPC_FUNCTION - CAINE) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -47555,7 +47555,7 @@ extern var Func090A 0x90A ();
 extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, var var0004);
 extern void Func092E 0x92E (var var0000);
 
-void Func04F8 object#(0x4F8) () {
+void FuncBrion object#(FIRST_NPC_FUNCTION - BRION) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -47807,7 +47807,7 @@ extern var Func0908 0x908 ();
 extern var Func0909 0x909 ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04F9 object#(0x4F9) () {
+void FuncNelson object#(FIRST_NPC_FUNCTION - NELSON) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -48046,7 +48046,7 @@ extern void Func0919 0x919 ();
 extern void Func091A 0x91A ();
 extern void Func092E 0x92E (var var0000);
 
-void Func04FA object#(0x4FA) () {
+void FuncRankin object#(FIRST_NPC_FUNCTION - RANKIN) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -48350,7 +48350,7 @@ extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, v
 extern void Func0911 0x911 (var var0000);
 extern void Func092E 0x92E (var var0000);
 
-void Func04FB object#(0x4FB) () {
+void FuncDanag object#(FIRST_NPC_FUNCTION - DANAG) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -48539,7 +48539,7 @@ extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern void Func08A5 0x8A5 ();
 
-void Func04FC object#(0x4FC) () {
+void FuncKallibrus object#(FIRST_NPC_FUNCTION - KALLIBRUS) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -48647,7 +48647,7 @@ extern var Func0909 0x909 ();
 extern var Func08F7 0x8F7 (var var0000);
 extern void Func0864 0x864 ();
 
-void Func04FD object#(0x4FD) () {
+void FuncCosmo object#(FIRST_NPC_FUNCTION - COSMO) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -48769,7 +48769,7 @@ extern var Func0909 0x909 ();
 extern var Func090A 0x90A ();
 extern var Func08F7 0x8F7 (var var0000);
 
-void Func04FE object#(0x4FE) () {
+void FuncLasher object#(FIRST_NPC_FUNCTION - LASHER) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -48995,7 +48995,7 @@ void Func04FE object#(0x4FE) () {
 
 extern var Func08F7 0x8F7 (var var0000);
 
-void Func04FF object#(0x4FF) () {
+void FuncMama object#(FIRST_NPC_FUNCTION - MAMA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -49103,7 +49103,7 @@ extern var Func0931 0x931 (var var0000, var var0001, var var0002, var var0003, v
 extern void Func0911 0x911 (var var0000);
 extern var Func090A 0x90A ();
 
-void Func0500 object#(0x500) () {
+void FuncXorinia object#(FIRST_NPC_FUNCTION - XORINIA) () {
 	var var0000;
 	var var0001;
 	var var0002;
@@ -49238,49 +49238,49 @@ void Func0500 object#(0x500) () {
 
 extern void Func0326 shape#(0x326) ();
 
-void Func0501 object#(0x501) () {
+void FuncDoug object#(FIRST_NPC_FUNCTION - DOUG) () {
 	item->Func0326();
 }
 
 extern void Func0326 shape#(0x326) ();
 
-void Func0502 object#(0x502) () {
+void FuncBob object#(FIRST_NPC_FUNCTION - BOB) () {
 	item->Func0326();
 }
 
 extern void Func03B2 shape#(0x3B2) ();
 
-void Func0506 object#(0x506) () {
+void FuncRodric object#(FIRST_NPC_FUNCTION - RODRIC) () {
 	item->Func03B2();
 }
 
 extern void Func03B2 shape#(0x3B2) ();
 
-void Func0507 object#(0x507) () {
+void FuncStanley object#(FIRST_NPC_FUNCTION - STANLEY) () {
 	item->Func03B2();
 }
 
 extern void Func03B2 shape#(0x3B2) ();
 
-void Func0508 object#(0x508) () {
+void FuncMicael object#(FIRST_NPC_FUNCTION - MICAEL) () {
 	item->Func03B2();
 }
 
 extern void Func03B2 shape#(0x3B2) ();
 
-void Func0509 object#(0x509) () {
+void FuncJohn object#(FIRST_NPC_FUNCTION - JOHN) () {
 	item->Func03B2();
 }
 
 extern void Func03B2 shape#(0x3B2) ();
 
-void Func050A object#(0x50A) () {
+void FuncBrennon object#(FIRST_NPC_FUNCTION - BRENNON) () {
 	item->Func03B2();
 }
 
 extern void Func03B2 shape#(0x3B2) ();
 
-void Func050D object#(0x50D) () {
+void FuncDaniel object#(FIRST_NPC_FUNCTION - DANIEL) () {
 	item->Func03B2();
 }
 
@@ -50178,7 +50178,7 @@ void Func0618 object#(0x618) () {
 			step FACE_WEST, 0;
 			step FACE_WEST, 0;
 			wait 10;
-			call Func0401;
+			call FuncIolo;
 			call Func061A;
 		};
 	}
@@ -57246,7 +57246,7 @@ void Func06A4 object#(0x6A4) () {
 }
 
 extern void Func0904 0x904 (var var0000, var var0001);
-extern void Func0467 object#(0x467) ();
+extern void FuncThad object#(FIRST_NPC_FUNCTION - THAD) ();
 
 void Func06A5 object#(0x6A5) () {
 	if (event == EGG) {
@@ -57254,7 +57254,7 @@ void Func06A5 object#(0x6A5) () {
 			THAD->get_npc_object()->set_schedule_type(IN_COMBAT);
 			Func0904(THAD, "@Fellowship scum!@");
 		} else {
-			THAD->get_npc_object()->Func0467();
+			THAD->get_npc_object()->FuncThad();
 		}
 	}
 }
@@ -57369,11 +57369,11 @@ void Func06AD object#(0x6AD) () {
 	}
 }
 
-extern void Func0495 object#(0x495) ();
+extern void FuncHydra object#(FIRST_NPC_FUNCTION - HYDRA) ();
 
 void Func06AE object#(0x6AE) () {
 	if (event == EGG) {
-		HYDRA->get_npc_object()->Func0495();
+		HYDRA->get_npc_object()->FuncHydra();
 	}
 }
 

@@ -11,7 +11,7 @@ enum party_members {
 	SENTRI		= -7,
 	JULIA		= -8,
 	KATRINA		= -9,
-	TSERAMED	= -10
+	TSERAMED	= -10,
 };
 
 //Trinsic residents
@@ -33,7 +33,8 @@ enum trinsic_npcs {
 	DUSTIN		= -235,	//Passion Play actor
 
 	ELLEN		= -236,	//wife of Klog
-	BOB			= -258	//guard at south gate
+	DOUG		= -257,	//guard at north gate
+	BOB			= -258,	//guard at south gate
 };
 
 //Britain residents
@@ -89,8 +90,14 @@ enum britain_npcs {
 	INWISLOKLEM	= -71,	//Castle British, council member and gargoyle representative
 	NELL		= -72,	//Castle British, servant, sister of Charles, and secret lover of at least Carrocio and Lord British (slut)
 	CHARLES		= -73,	//Castle British, servant, brother of Nell and courter of Jeanette
+	RODRIC		= -262,	// SW guard in throne room
+	STANLEY		= -263,	// NW guard in throne room
+	MICAEL		= -264,	// SE guard in throne room
+	JOHN		= -265,	// NE guard in throne room
+	BRENNON		= -266,	// Patrolling guard at south end of roof
+	DANIEL		= -269,	// Cell guard at SW of roof
 
-	KESSLER		= -237	//apothecary
+	KESSLER		= -237,	//apothecary
 };
 
 //Cove residents
@@ -102,7 +109,7 @@ enum cove_npcs {
 	PAMELA			= -78,	//innkeeper and Rayburt's main squeeze
 	ZINAIDA			= -79,	//tavernkeeper and de Maria's main squeeze
 	DE_MARIA		= -80,	//tavernkeeper and Zinaida's main squeeze
-	REGAL			= -271	//Rayburt's dog (not sure why he gets an NPC number, it's not like he does anything - maybe for schedules?)
+	REGAL			= -271,	//Rayburt's dog (not sure why he gets an NPC number, it's not like he does anything - maybe for schedules?)
 };
 
 //Minoc residents
@@ -127,7 +134,7 @@ enum minoc_npcs {
 	MIKOS		= -97,	//mine foreman
 	FODUS		= -99,	//miner and drug addict
 	OWINGS		= -239,	//miner and moron
-	MALLOY		= -243	//miner and moron
+	MALLOY		= -243,	//miner and moron
 };
 
 //Yew/great forest residents
@@ -158,7 +165,7 @@ enum yew_npcs {
 
 	XORINIA		= -256,	//will-o-wisp
 
-	RANDOM_EMP	= -283	//generic emp
+	RANDOM_EMP	= -283,	//generic emp
 };
 
 //Jhelom residents
@@ -171,7 +178,7 @@ enum jhelom_npcs {
 	SPRELLIC	= -124,	//tavern owner and wimp
 	VOKES		= -125,	//big dumb fighter
 	SYRIA		= -126,	//fighter
-	TIMMONS		= -127	//fighter
+	TIMMONS		= -127,	//fighter
 };
 
 //New Magincia residents
@@ -185,7 +192,7 @@ enum new_magincia_npcs {
 	BATTLES		= -135,	//thug for Robin
 	LEAVELL		= -136,	//thug for Robin
 	SAM			= -137,	//flower man and total hippie
-	ALAGNER		= -246	//scholar and plot device
+	ALAGNER		= -246,	//scholar and plot device
 };
 
 //Skara Brae residents
@@ -222,7 +229,7 @@ enum moonglow_npcs {
 	FRANK		= -165,	//Lycaeum, smartarse fox
 	BRION		= -248,	//Lycaeum, astronomer
 	NELSON		= -249,	//Lycaeum, curator
-	RANKIN		= -250	//fellowship leader and murderer of Balayna
+	RANKIN		= -250,	//fellowship leader and murderer of Balayna
 };
 
 //Paws residents
@@ -240,7 +247,7 @@ enum paws_npcs {
 	ANDREW		= -176,	//dairy owner
 	CAMILLE		= -177,	//farmer, widow and mother of Tobias
 	TOBIAS		= -178,	//obnoxious son of Camille
-	POLLY		= -179	//tavernkeeper and courter of Thurston
+	POLLY		= -179,	//tavernkeeper and courter of Thurston
 };
 
 //Terfin residents
@@ -255,7 +262,7 @@ enum terfin_npcs {
 	SILAMO		= -187,	//gardener
 	SARPLING	= -188,	//jeweller and magic provisioner
 	FORBRAK		= -189,	//tavernkeeper
-	BETRA		= -190	//provisioner
+	BETRA		= -190,	//provisioner
 };
 
 //residents of the U.S.S. Serpent's Hold
@@ -269,7 +276,7 @@ enum serpents_hold_npcs {
 	JORDAN		= -198, //blind arms dealer for Iolo's South who can't even recognise his own boss
 	DENTON		= -199, //bartender, logician, and particularly lame Star Trek reference
 	TORY		= -200, //empath and unconvincingly distraught mother of baby Riky, stolen by dingos (er, harpies)
-	LEIGH		= -201	//healer
+	LEIGH		= -201,	//healer
 };
 
 //Vesper residents
@@ -290,7 +297,7 @@ enum vesper_npcs {
 	WIS_SUR		= -216,	//gargoyle magic provisioner
 	ANMANIVAS	= -217,	//gargoyle ex-miner
 	FORANAMO	= -218,	//gargoyle ex-miner
-	AURVIDLEM	= -219	//provisioner
+	AURVIDLEM	= -219,	//provisioner
 };
 
 //Buccaneer's Den residents
@@ -311,7 +318,7 @@ enum buccaneers_den_npcs {
 	DANAG		= -251,	//fellowship leader
 
 	GROD		= -154,	//troll and fellowship torturer
-	ANTON		= -240	//fellowship prisoner
+	ANTON		= -240,	//fellowship prisoner
 };
 
 //Miscellaneous NPCs (dungeons and other minor locations)
@@ -363,5 +370,5 @@ enum misc_npcs {
 	HOOK		= -291,	//Isle of the Avatar, arch-villain
 	FORSKIS		= -298,	//Isle of the Avatar, arch-villain
 	ABRAHAM		= -299,	//Isle of the Avatar, arch-villain
-	ELIZABETH	= -300	//Isle of the Avatar, arch-villain
+	ELIZABETH	= -300,	//Isle of the Avatar, arch-villain
 };
