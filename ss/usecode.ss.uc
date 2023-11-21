@@ -34139,7 +34139,7 @@ void FuncAlyssand object#(FIRST_NPC_FUNCTION - ALYSSAND) () {
 					UI_push_answers();
 					var000A = "Cause";
 					add(["false traditions", "evil schemes", "change subject"]);
-				};
+				}
 				fallthrough;
 
 			case "the Cause" (remove):
@@ -44516,7 +44516,7 @@ void FuncLuther object#(FIRST_NPC_FUNCTION - LUTHER) () {
 						say("\"I have not lost my shield. Thou art mistaken.\"");
 					}
 					say("\"Besides, I have this new shield -- which, by the way, is a family heirloom. Thank thee very much.\"");
-				};
+				}
 				fallthrough;
 
 			case "new shield" (remove):
