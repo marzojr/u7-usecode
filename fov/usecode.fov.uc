@@ -2395,7 +2395,7 @@ void Func01DF shape#(0x1DF) () {
 							var0003 = Func093C(var0008, var0003);
 						}
 					}
-					while (true) {
+					forever {
 						var0002 = UI_die_roll(0x0001, 0x0004);
 						if (!var0003) {
 							break;
@@ -5811,7 +5811,7 @@ void Func0311 shape#(0x311) () {
 					UI_set_path_failure(Func0311, var0009, BG_PATH_FAILURE);
 					var var000F = get_container();
 					var var0010 = UI_get_party_list();
-					while (true) {
+					forever {
 						if (var000F) {
 							if (var000F in var0010) {
 								break;
@@ -11094,7 +11094,7 @@ void FuncFinnigan object#(FIRST_NPC_FUNCTION - FINNIGAN) () {
 		var var0001 = Func0908();
 		var var0002 = Func08F7(SPARK);
 		var var0003 = UI_is_pc_female();
-		do {
+		breakable {
 			declare var var0005;
 			if ((gflags[EXPECTED_TO_LOOK_IN_STABLES] == true) && (gflags[REPORTED_CHRISTOPHERS_KEY] == false)) {
 				say("\"Hast thou properly searched the stables?\"");
@@ -11196,7 +11196,7 @@ void FuncFinnigan object#(FIRST_NPC_FUNCTION - FINNIGAN) () {
 			} else {
 				say("\"Yes, Avatar?\" Finnigan asks.");
 			}
-		} while (false);
+		}
 		add(["name", "job", "murder", "bye"]);
 		if (gflags[CAN_GIVE_MURDER_REPORT]) {
 			add("report");
@@ -18504,7 +18504,7 @@ void FuncSnaz object#(FIRST_NPC_FUNCTION - SNAZ) () {
 				if (var000B) {
 					var var000C = UI_remove_party_items(0x0001, 0x0284, QUALITY_ANY, FRAME_ANY, true);
 					if (var000C) {
-						do {
+						forever {
 							UI_play_sound_effect(0x0017);
 							say("\"Thank thee very much! Now, goodbye!\"");
 							say("\"Dost thou get it? Ha! Ha! Ha! Ha! If not, it would be my pleasure to repeat it.\"");
@@ -18523,7 +18523,7 @@ void FuncSnaz object#(FIRST_NPC_FUNCTION - SNAZ) () {
 								var0000,
 								". Good day to thee!\"");
 							abort;
-						} while (true);
+						}
 					} else {
 						say("\"I can see thou art so poor that thou cannot even afford a sense of humor!\"");
 					}
@@ -26445,7 +26445,7 @@ void FuncOphelia object#(FIRST_NPC_FUNCTION - OPHELIA) () {
 					var var0012 = Func090A();
 					if (var0012) {
 						say("\"How much wouldst thou like to bet that Sprellic defeats all three of his challengers?\"");
-						do {
+						forever {
 							var0012 = UI_input_numeric_value(0x0000, 0x00C8, 0x000A, 0x0000);
 							if (var0012 == 0x0000) {
 								say("\"Perhaps thou art not truly serious about thy convictions. Mayhaps Daphne will take thy line of bets.\"");
@@ -26460,7 +26460,7 @@ void FuncOphelia object#(FIRST_NPC_FUNCTION - OPHELIA) () {
 								break;
 							}
 							say("\"Very well. How much wouldst thou like to bet?\"");
-						} while (true);
+						}
 						var000F = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 						if (var000F >= var0012) {
 							say("\"Very well. Let me give thee markers for thy gold. Each one is worth 10 gold coins. If Sprellic wins, thou mayest come collect twice that amount of gold from me.~~\"Should he lose, ",
@@ -26657,7 +26657,7 @@ void FuncDaphne object#(FIRST_NPC_FUNCTION - DAPHNE) () {
 					if (var000A) {
 						say("\"How much wouldst thou like to bet?\"");
 						declare var var000B;
-						do {
+						forever {
 							var000B = UI_input_numeric_value(0x0000, 0x00C8, 0x000A, 0x0000);
 							if (var000B == 0x0000) {
 								say("\"Perhaps thou art not truly serious about thy convictions. Mayhaps the princess will take thy line of bets.\"");
@@ -26672,7 +26672,7 @@ void FuncDaphne object#(FIRST_NPC_FUNCTION - DAPHNE) () {
 								break;
 							}
 							say("\"Very well. How much wouldst thou like to bet?\"");
-						} while (true);
+						}
 						var var000D = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 						if (var000D >= var000B) {
 							var var000E = UI_add_party_items(var000B / 0x000A, 0x0399, QUALITY_ANY, 0x0001, false);
@@ -33237,7 +33237,7 @@ void FuncThurston object#(FIRST_NPC_FUNCTION - THURSTON) () {
 				if (var0002 == TEND_SHOP) {
 					say("\"A sack will cost thee 12 gold. Art thou interested in purchasing some?\"");
 					if (Func090A()) {
-						while (true) {
+						forever {
 							var var0004 = PARTY->count_objects(0x0284, QUALITY_ANY, FRAME_ANY);
 							if (var0004 >= 0x000C) {
 								var var0005 = UI_add_party_items(0x0001, 0x035F, QUALITY_ANY, 0x000E, true);
@@ -35190,7 +35190,7 @@ void FuncAndrew object#(FIRST_NPC_FUNCTION - ANDREW) () {
 				if (var0002 == TEND_SHOP) {
 					say("\"A gallon will cost thee 3 gold. Art thou interested in buying some?\"");
 					if (Func090A()) {
-						while (true) {
+						forever {
 							var var0004 = UI_remove_party_items(0x0003, 0x0284, QUALITY_ANY, FRAME_ANY, true);
 							if (var0004) {
 								var var0005 = UI_add_party_items(0x0001, 0x0268, QUALITY_ANY, 0x0007, true);
@@ -47899,7 +47899,7 @@ void Func0625 object#(0x625) () {
 			var var0005 = Func090A();
 			if (var0005) {
 				say("\"What is your liberty worth?\"");
-				do {
+				breakable {
 					if (!Func084B(var0004)) {
 						say("The guard looks unimpressed by your paltry offer. \"How about a bit more? Our jail is populated by some unsavory characters.\"");
 						if (!Func084B(var0004)) {
@@ -47931,7 +47931,7 @@ void Func0625 object#(0x625) () {
 						". I will take care of this disturbance.\"");
 					UI_play_music(0x00FF, item);
 					abort;
-				} while (false);
+				}
 			}
 		} else {
 			say("You see an angry guard. \"Cease and desist immediately!.~~Wilt thou come quietly?\"");
@@ -49240,7 +49240,7 @@ extern var Func0906 0x906 ();
 void Func0645 object#(0x645) () {
 	if (event == DOUBLECLICK) {
 		halt_scheduled();
-		do {
+		breakable {
 			declare var var0000;
 			if (gflags[GOT_TRINSIC_PASSWORD] != false) {
 				item_say("@Kal Lor@");
@@ -49275,7 +49275,7 @@ void Func0645 object#(0x645) () {
 				actor frame cast_up;
 				call Func0606;
 			};
-		} while (false);
+		}
 	}
 	if (event == SCRIPTED) {
 		struct<Position> var0005 = [0x03A8, 0x047A, 0x0000];
@@ -50603,7 +50603,7 @@ void Func0667 object#(0x667) () {
 		var var0003 = [0x010E, 0x0178, 0x01B0, 0x01B1, 0x034D, 0x033C];
 		var var0004 = [0x01B0, 0x01B1, 0x010E, 0x0178];
 		item_say("@Ex Por@");
-		do {
+		breakable {
 			declare var var0006;
 			if (Func0906()) {
 				if (var0001 in var0003) {
@@ -50631,7 +50631,7 @@ void Func0667 object#(0x667) () {
 				actor frame strike_1h;
 				call Func0606;
 			};
-		} while (false);
+		}
 	}
 	if (event == SCRIPTED) {
 		var0005 = get_item_frame();
@@ -53869,7 +53869,7 @@ void Func06B5 object#(0x6B5) () {
 		}
 		var0000 = Func093D(var0000, var0001);
 		var var0005 = 1;
-		do {
+		forever {
 			var0004 = var0000[var0005];
 			if (!var0004) {
 				// Note: this should be a return.
@@ -53880,7 +53880,7 @@ void Func06B5 object#(0x6B5) () {
 				break;
 			}
 			var0005 += 1;
-		} while (true);
+		}
 		var var0006 = var0004->get_item_shape();
 		if (var0006 == 0x010E) {
 			var0004->Func010E();
@@ -55135,7 +55135,7 @@ void Func06F6 object#(0x6F6) () {
 				struct<Position> var0018 = var0011->get_object_position();
 				ARCADION_SWORD->show_npc_face(0x0000);
 				if (var0011->is_npc()) {
-					do {
+					breakable {
 						if ((var0017 == 0x02D1) || (var0017 == 0x03DD)) {
 							say("The daemon speaks with a sanctimonious tone. \"I could not in honor take the life of my most wondrous master.\"");
 							break;
@@ -55207,7 +55207,7 @@ void Func06F6 object#(0x6F6) () {
 						} else {
 							say("The daemon sword abruptly ceases its vibration. \"This being is hardly worth a death the likes of which I would visit upon it. Call upon me again when thou art faced with a more worthy opponent.\"");
 						}
-					} while (false);
+					}
 				} else if (Func0847(var0017)) {
 					say("\"Perhaps thou misunderstands my meaning. I do not raise the dead... I slay the living.\" The last is spoken in a sibilant whisper.");
 				} else if (!var0017) {
@@ -55659,7 +55659,7 @@ void Func06F8 object#(0x6F8) () {
 	declare var var0016;
 	if (event == EGG) {
 		var var0000 = get_item_quality();
-		do {
+		breakable {
 			if (var0000 == 0x0000) {
 				var var0001 = find_nearest(0x0350, 0x000A);
 				var var0002 = var0001->get_item_frame();
@@ -55696,7 +55696,7 @@ void Func06F8 object#(0x6F8) () {
 				}
 			}
 			return;
-		} while (false);
+		}
 		var var0004 = find_nearest(0x03DE, 0x000A);
 		if (var0004) {
 			var0005 = var0004->get_object_position();
@@ -59490,7 +59490,7 @@ void Func0842 0x842 () {
 			var0002 = false;
 			continue;
 		}
-		do {
+		breakable {
 			if (var000B == 0x0006) {
 				if (gflags[DOC_SIGNED]) {
 					say("\"I have none to sell thee, ",
@@ -59522,7 +59522,7 @@ void Func0842 0x842 () {
 			} else if (var000D == 0x0003) {
 				say("\"Hmmm. Thou dost not have enough gold!\"");
 			}
-		} while (false);
+		}
 		say("\"Wouldst thou like something else?\"");
 		var0002 = Func090A();
 	}
@@ -60300,7 +60300,7 @@ extern var Func0909 0x909 ();
 void Func0854 0x854 () {
 	var var0000 = Func0909();
 	declare var var0001;
-	do {
+	forever {
 		say("\"How many portions wouldst thou wish to sell?\"");
 		var0001 = UI_input_numeric_value(0x0000, 0x000A, 0x0001, 0x0000);
 		if (var0001 == 0x0000) {
@@ -60312,7 +60312,7 @@ void Func0854 0x854 () {
 			break;
 		}
 		say("\"Thou cannot sell me what thou dost not have! Now, truly...!\"");
-	} while (true);
+	}
 	say("\"Excellent! I accept the trade, ",
 		var0000,
 		". Here is thy gold.\"");
@@ -60758,7 +60758,7 @@ void Func085D 0x85D () {
 			var0001 = false;
 			continue;
 		}
-		do {
+		breakable {
 			if (var000A == 0x0004) {
 				if (gflags[DOC_SIGNED]) {
 					say("\"Phearcy has said that we can no longer sell Silverleaf because we have no more and cannot again acquire the meal. I am truly sorry. Perhaps thou wouldst be interested in something else.\"");
@@ -60789,7 +60789,7 @@ void Func085D 0x85D () {
 			} else if (var000C == 0x0003) {
 				say("\"Thou hast not the gold for that!\"");
 			}
-		} while (false);
+		}
 		say("\"Wouldst thou like something else?\"");
 		var0001 = Func090A();
 	}
@@ -60937,7 +60937,7 @@ void Func0860 0x860 (var var0000, var var0001, var var0002) {
 	say("\"I am able to heal, cure poison, and resurrect. Art thou in need of one of these services?\"");
 	UI_push_answers();
 	var var0004 = Func090A();
-	do {
+	breakable {
 		if (var0004) {
 			say("\"Which of my services dost thou need?\"");
 			var var0005 = ["heal", "cure poison", "resurrect"];
@@ -61002,7 +61002,7 @@ void Func0860 0x860 (var var0000, var var0001, var var0002) {
 		} else {
 			say("\"Well, if thou dost decide that my services are needed, I am always here.\"");
 		}
-	} while (false);
+	}
 	UI_pop_answers();
 }
 
@@ -61545,7 +61545,7 @@ void Func0870 0x870 (var var0000, var var0001, var var0002) {
 	say("\"I am qualified to heal, cure poison, and resurrect. Art thou interested in one of these services?\"");
 	UI_push_answers();
 	var var0003 = Func090A();
-	do {
+	breakable {
 		if (var0003) {
 			say("\"Which of my services dost thou have need of?\"");
 			var var0004 = ["heal", "cure poison", "resurrect"];
@@ -61608,7 +61608,7 @@ void Func0870 0x870 (var var0000, var var0001, var var0002) {
 		} else {
 			say("\"If thou hast need of my services later, I will be here.\"");
 		}
-	} while (false);
+	}
 	UI_pop_answers();
 }
 
@@ -61638,7 +61638,7 @@ void Func0871 0x871 () {
 			var0001 = false;
 			continue;
 		}
-		do {
+		breakable {
 			if (var000A == 0x0006) {
 				if (gflags[DOC_SIGNED]) {
 					say("\"I have no more. For some reason, no one is sending Silverleaf to us, so I cannot make a meal from it.\"");
@@ -61677,7 +61677,7 @@ void Func0871 0x871 () {
 					var0000,
 					", thou hast not enough gold for that.\"");
 			}
-		} while (false);
+		}
 		say("\"Wouldst thou like something else?\"");
 		var0001 = Func090A();
 	}
@@ -62077,7 +62077,7 @@ void Func0879 0x879 (var var0000, var var0001, var var0002) {
 	say("\"Art thou in need of healing, curing, or resurrection?\"");
 	UI_push_answers();
 	var var0003 = Func090A();
-	do {
+	breakable {
 		if (var0003) {
 			say("\"Which of my services dost thou have need of?\"");
 			var var0004 = ["heal", "cure poison", "resurrect"];
@@ -62139,7 +62139,7 @@ void Func0879 0x879 (var var0000, var var0001, var var0002) {
 		} else {
 			say("\"Very well. If thou hast need of my services later, I will be available.\"");
 		}
-	} while (false);
+	}
 	UI_pop_answers();
 }
 
@@ -63969,7 +63969,7 @@ void Func089D 0x89D (var var0000, var var0001, var var0002) {
 	say("\"To be able to heal, cure poison, and resurrect. To be interested in one of these services?\"");
 	UI_push_answers();
 	var var0003 = Func090A();
-	do {
+	breakable {
 		if (var0003) {
 			say("\"To need which of my services?\"");
 			var var0004 = ["heal", "cure poison", "resurrect"];
@@ -64057,7 +64057,7 @@ void Func089D 0x89D (var var0000, var var0001, var var0002) {
 		} else {
 			say("\"To be here later if you need me.\"");
 		}
-	} while (false);
+	}
 	UI_pop_answers();
 }
 
@@ -64074,7 +64074,7 @@ void Func089E 0x89E (var var0000, var var0001, var var0002) {
 	say("\"I am able to heal, cure poison, and resurrect. Art thou interested in one of these services?\"");
 	UI_push_answers();
 	var var0005 = Func090A();
-	do {
+	breakable {
 		if (var0005) {
 			say("\"Which of my services dost thou have need of?\"");
 			var var0006 = ["heal", "cure poison", "resurrect"];
@@ -64176,7 +64176,7 @@ void Func089E 0x89E (var var0000, var var0001, var var0002) {
 		} else {
 			say("\"If thou hast need of my services later, I will be here.\"");
 		}
-	} while (false);
+	}
 	UI_pop_answers();
 }
 
@@ -64195,7 +64195,7 @@ void Func089F 0x89F (var var0000, var var0001) {
 	if (var0003 == var0004) {
 		var0003 = "you";
 	}
-	do {
+	breakable {
 		if (var0002 != 0x0000) {
 			var var0005 = 0x0002;
 			var var0006 = Func0922(var0000, var0001, var0002, var0005);
@@ -64235,7 +64235,7 @@ void Func089F 0x89F (var var0000, var var0001) {
 				}
 			}
 		}
-	} while (false);
+	}
 	say("\"I look forward to thy return.\"");
 }
 
@@ -64265,7 +64265,7 @@ void Func08A0 0x8A0 () {
 			var0001 = false;
 			continue;
 		}
-		do {
+		breakable {
 			if (var000A == 0x0007) {
 				if (gflags[DOC_SIGNED]) {
 					say("\"'Tis all gone, ",
@@ -64295,7 +64295,7 @@ void Func08A0 0x8A0 () {
 			} else if (var000C == 0x0003) {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
-		} while (false);
+		}
 		say("\"Wouldst thou like something else?\"");
 		var0001 = Func090A();
 	}
@@ -64896,7 +64896,7 @@ void Func08AC 0x8AC (var var0000, var var0001, var var0002) {
 	say("\"I am qualified to heal, cure poison, and resurrect. Art thou interested in one of these services?\"");
 	UI_push_answers();
 	var var0003 = Func090A();
-	do {
+	breakable {
 		if (var0003) {
 			say("\"Which of my services dost thou have need of?\"");
 			var var0004 = ["heal", "cure poison", "resurrect"];
@@ -64960,7 +64960,7 @@ void Func08AC 0x8AC (var var0000, var var0001, var var0002) {
 		} else {
 			say("\"If thou needest my services later, I will be here.\"");
 		}
-	} while (false);
+	}
 	UI_pop_answers();
 }
 
@@ -65200,7 +65200,7 @@ void Func08B4 0x8B4 (var var0000, var var0001, var var0002) {
 	say("\"I can still heal, cure poison, and sometimes resurrect. Art thou in need of one of these?\"");
 	UI_push_answers();
 	var var0003 = Func090A();
-	do {
+	breakable {
 		declare var var0005;
 		declare var var0006;
 		declare var var0007;
@@ -65259,7 +65259,7 @@ void Func08B4 0x8B4 (var var0000, var var0001, var var0002) {
 		} else {
 			say("\"If thou hast need of my services later, I will be here.\"");
 		}
-	} while (false);
+	}
 	UI_pop_answers();
 }
 
@@ -65384,7 +65384,7 @@ void Func08B7 0x8B7 () {
 			var0001 = false;
 			continue;
 		}
-		do {
+		breakable {
 			if (var000B == 0x0007) {
 				if (gflags[DOC_SIGNED]) {
 					say("\"Oh, I am so terribly sorry, ",
@@ -65414,7 +65414,7 @@ void Func08B7 0x8B7 () {
 			} else if (var000D == 0x0003) {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
-		} while (false);
+		}
 		say("\"Wouldst thou like something else?\"");
 		var0001 = Func090A();
 	}
@@ -65718,7 +65718,7 @@ extern void Func0917 0x917 (var var0000, var var0001);
 void Func08BD 0x8BD (var var0000, var var0001) {
 	var var0002 = Func0920();
 	var var0003 = var0002->get_npc_name();
-	do {
+	breakable {
 		if (var0002 != 0x0000) {
 			declare var var0004;
 			if (var0002 == AVATAR) {
@@ -65765,7 +65765,7 @@ void Func08BD 0x8BD (var var0000, var var0001) {
 				Func0917(var0002, 1);
 			}
 		}
-	} while (false);
+	}
 }
 
 extern var Func0920 0x920 ();
@@ -65777,7 +65777,7 @@ extern void Func0917 0x917 (var var0000, var var0001);
 
 void Func08BE 0x8BE (var var0000, var var0001) {
 	var var0002 = Func0920();
-	do {
+	breakable {
 		if (var0002 != 0x0000) {
 			var var0003 = 0x0003;
 			var var0004 = Func0922(var0000, var0001, var0002, var0003);
@@ -65828,7 +65828,7 @@ void Func08BE 0x8BE (var var0000, var var0001) {
 				}
 			}
 		}
-	} while (false);
+	}
 }
 
 extern var Func0910 0x910 (var var0000, var var0001);
@@ -66388,7 +66388,7 @@ extern void Func0917 0x917 (var var0000, var var0001);
 void Func08C8 0x8C8 (var var0000, var var0001) {
 	var var0002 = Func0920();
 	var var0003 = var0002->get_npc_name();
-	do {
+	breakable {
 		if (var0002 != 0x0000) {
 			var var0004 = 0x0002;
 			var var0005 = Func0922(var0000, var0001, var0002, var0004);
@@ -66446,7 +66446,7 @@ void Func08C8 0x8C8 (var var0000, var var0001) {
 				Func0917(var0002, 1);
 			}
 		}
-	} while (false);
+	}
 }
 
 extern var Func0932 0x932 (var var0000);
@@ -66485,7 +66485,7 @@ extern void Func0918 0x918 (var var0000, var var0001);
 
 void Func08CA 0x8CA (var var0000, var var0001) {
 	var var0002 = Func0920();
-	do {
+	breakable {
 		if (var0002 != 0x0000) {
 			var var0003 = 0x0003;
 			var var0004 = Func0922(var0000, var0001, var0002, var0003);
@@ -66546,7 +66546,7 @@ void Func08CA 0x8CA (var var0000, var var0001) {
 				Func0918(var0002, 1);
 			}
 		}
-	} while (false);
+	}
 }
 
 extern var Func0909 0x909 ();
@@ -66577,7 +66577,7 @@ void Func08CB 0x8CB () {
 			var0001 = false;
 			continue;
 		}
-		do {
+		breakable {
 			if (var000A == 0x0004) {
 				if (gflags[DOC_SIGNED]) {
 					say("\"I am truly sorry, ",
@@ -66604,7 +66604,7 @@ void Func08CB 0x8CB () {
 			} else if (var000E == 0x0003) {
 				say("\"Thou hast not the gold for that!\"");
 			}
-		} while (false);
+		}
 		say("\"Wouldst thou like something else?\"");
 		var0001 = Func090A();
 	}
@@ -66824,7 +66824,7 @@ void Func08D0 0x8D0 (var var0000, var var0001) {
 	} else {
 		var0006 = "him";
 	}
-	do {
+	breakable {
 		if (var0002 != 0x0000) {
 			var var0007 = 0x0003;
 			var var0008 = Func0922(var0000, var0001, var0002, var0007);
@@ -66871,7 +66871,7 @@ void Func08D0 0x8D0 (var var0000, var var0001) {
 				Func0917(var0002, 1);
 			}
 		}
-	} while (false);
+	}
 }
 
 extern var Func08F7 0x8F7 (var var0000);
@@ -66930,7 +66930,7 @@ void Func08D2 0x8D2 (var var0000, var var0001, var var0002) {
 	say("\"Dost thou want mine aid?\"");
 	UI_push_answers();
 	var var0004 = Func090A();
-	do {
+	breakable {
 		if (var0004) {
 			say("\"What is thy need?\"");
 			var var0005 = ["healing", "curing", "resurrection"];
@@ -66998,7 +66998,7 @@ void Func08D2 0x8D2 (var var0000, var var0001, var var0002) {
 				var0003,
 				". I am happy to help those in need, but I would be far happier if there were never a need!\"");
 		}
-	} while (false);
+	}
 	UI_pop_answers();
 }
 
@@ -67560,7 +67560,7 @@ void Func08DE 0x8DE () {
 			var0001 = false;
 			continue;
 		}
-		do {
+		breakable {
 			if (var000A == 0x0005) {
 				if (gflags[DOC_SIGNED]) {
 					say("\"I am all out of Silverleaf, ",
@@ -67590,7 +67590,7 @@ void Func08DE 0x8DE () {
 			} else if (var000C == 0x0003) {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
-		} while (false);
+		}
 		say("\"Wouldst thou like to purchase anything else?\"");
 		var0001 = Func090A();
 	}
@@ -67806,7 +67806,7 @@ void Func08E5 0x8E5 (var var0000, var var0001) {
 	} else {
 		var0003 = false;
 	}
-	do {
+	breakable {
 		if (var0002 != 0x0000) {
 			var var0004 = 0x0001;
 			var var0005 = Func0922(var0000, var0001, var0002, var0004);
@@ -67888,11 +67888,11 @@ void Func08E5 0x8E5 (var var0000, var var0001) {
 				Func0915(var0002, 0x0001);
 			}
 		}
-	} while (false);
+	}
 }
 
 void Func08E6 0x8E6 (var var0000) {
-	do {
+	forever {
 		var var0001 = var0000->get_cont_items(SHAPE_ANY, QUALITY_ANY, FRAME_ANY);
 		if (!var0001) {
 			break;
@@ -67900,7 +67900,7 @@ void Func08E6 0x8E6 (var var0000) {
 		for (var0004 in var0001) {
 			var0004->remove_item();
 		}
-	} while (true);
+	}
 	var0000->remove_item();
 }
 
@@ -68405,7 +68405,7 @@ void Func08F3 0x8F3 (var var0000) {
 				// after the nobreak from ever executing, and some dialog gets
 				// lost because of it.
 				declare var var0008;
-				do {
+				breakable {
 					for (var0008 in var0000) {
 						if (var0008->get_npc_prop(SEX_FLAG) == 1) {
 							var0005 = true;
@@ -68418,8 +68418,7 @@ void Func08F3 0x8F3 (var var0000) {
 					} nobreak {
 						break;
 					}
-				} while (false)
-				nobreak {
+				} nobreak {
 					break;
 				}
 				// Dead code
@@ -69940,7 +69939,7 @@ void Func0949 0x949 () {
 			}
 			var0000 = false;
 		} else {
-			do {
+			breakable {
 				declare var var000B;
 				declare var var000C;
 				if (gflags[BROKE_TETRA]) {
@@ -69969,7 +69968,7 @@ void Func0949 0x949 () {
 				} else if (var000D == 0x0003) {
 					say("\"To have not enough gold for that!\"");
 				}
-			} while (false);
+			}
 			say("\"To want something else?\"");
 			var0000 = Func090A();
 		}
@@ -70006,7 +70005,7 @@ void Func094A 0x94A () {
 			}
 			var0000 = false;
 		} else {
-			do {
+			breakable {
 				declare var var000B;
 				declare var var000C;
 				if (gflags[BROKE_TETRA]) {
@@ -70036,7 +70035,7 @@ void Func094A 0x94A () {
 				} else if (var000D == 0x0003) {
 					say("\"To have not enough gold for that!\"");
 				}
-			} while (false);
+			}
 			say("\"To want something else?\"");
 			var0000 = Func090A();
 		}
@@ -70329,7 +70328,7 @@ extern void Func0917 0x917 (var var0000, var var0001);
 void Func094F 0x94F (var var0000, var var0001) {
 	var var0002 = Func0920();
 	var var0003 = var0002->get_npc_name();
-	do {
+	breakable {
 		if (var0002 != 0x0000) {
 			var var0004 = 0x0003;
 			var var0005 = Func0922(var0000, var0001, var0002, var0004);
@@ -70388,7 +70387,7 @@ void Func094F 0x94F (var var0000, var var0001) {
 				Func0917(var0002, 2);
 			}
 		}
-	} while (false);
+	}
 }
 
 extern var Func0920 0x920 ();
@@ -70434,7 +70433,7 @@ void Func0950 0x950 (var var0000, var var0001) {
 		var000B = "has";
 		var000C = "learns";
 	}
-	do {
+	breakable {
 		if (var0002 != 0x0000) {
 			var var000D = 0x0002;
 			var var000E = Func0922(var0000, var0001, var0002, var000D);
@@ -70494,7 +70493,7 @@ void Func0950 0x950 (var var0000, var var0001) {
 				Func0917(var0002, 1);
 			}
 		}
-	} while (false);
+	}
 }
 
 extern var Func0909 0x909 ();
@@ -70523,7 +70522,7 @@ void Func0951 0x951 () {
 			var0001 = false;
 			continue;
 		}
-		do {
+		breakable {
 			if (var000A == 0x0006) {
 				if (gflags[DOC_SIGNED]) {
 					say("\"I regret to tell thee that this fine establishment will no longer be able to provide our fine customers with Silverleaf. The person who provides me with the delicate meal is no longer able to procure it. I am dreadfully sorry, ",
@@ -70553,7 +70552,7 @@ void Func0951 0x951 () {
 			} else if (var000C == 0x0003) {
 				say("\"Thou dost not have enough gold for that!\"");
 			}
-		} while (false);
+		}
 		say("\"Wouldst thou like something else?\"");
 		var0001 = Func090A();
 	}
