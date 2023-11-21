@@ -1,3 +1,5 @@
+const int NULL_OBJ = 0;
+
 const int FIRST_NPC_FUNCTION = 0x400;
 
 enum intrinsics {
