@@ -12618,401 +12618,401 @@ extern var Func092D 0x92D (var var0000);
 void FuncLordBritish object#(FIRST_NPC_FUNCTION - LORD_BRITISH) () {
 	var var0000 = false;
 	declare var var0001;
-	if (event == DOUBLECLICK) {
+	breakable {
+		if (event == DOUBLECLICK) {
 labelFuncLordBritish_000C:
-		var0001 = Func0908();
-		if (gflags[CAST_ARMAGEDDON]) {
-			LORD_BRITISH->say("\"Fool!! What possessed thee to cast that damned Armageddon Spell? I knew it was dangerous! Thou didst know it was dangerous!! Now look at us! We are all alone on the entire planet! Britannia is ruined! What kind of Avatar art thou!?! Now, with no Moongates working, we are both forced to spend eternity in this blasted wasteland!~~\"Of course, it could be viewed as a clever solution to all of our problems. After all, not even this so-called Guardian would want Britannia now!\"*");
-			abort;
-		}
-		if (gflags[BANISHED_EXODUS]) {
-			if (!gflags[LB_REWARDED_FOR_FOV]) {
-				var0000 = true;
-				LORD_BRITISH->say("\"I felt the passing of the remains of Exodus from this realm. It has lifted a great weight from my shoulders. And so Avatar, I cannot let this accomplishment go unrewarded. Please kneel, my friend.\" Lord British holds out his hands as you obey his command.");
-				// I see no way other than this
-				goto labelFuncLordBritish_0743;
+			var0001 = Func0908();
+			if (gflags[CAST_ARMAGEDDON]) {
+				LORD_BRITISH->say("\"Fool!! What possessed thee to cast that damned Armageddon Spell? I knew it was dangerous! Thou didst know it was dangerous!! Now look at us! We are all alone on the entire planet! Britannia is ruined! What kind of Avatar art thou!?! Now, with no Moongates working, we are both forced to spend eternity in this blasted wasteland!~~\"Of course, it could be viewed as a clever solution to all of our problems. After all, not even this so-called Guardian would want Britannia now!\"*");
+				abort;
 			}
-		} else if (!gflags[TALKED_ABOUT_RUMBLE]) {
-			add("rumble");
-		}
-		var var0002 = UI_get_party_list();
-		var var0003 = Func08F7(IOLO);
-		var var0004 = Func08F7(DUPRE);
-		var var0005 = Func08F7(SHAMINO);
-		LORD_BRITISH->show_npc_face(0x0000);
-		var var0006 = false;
-		var var0007 = false;
-		var var0008 = false;
-		add(["name", "job", "bye", "Fellowship"]);
-		if (!gflags[LB_GAVE_ORB]) {
-			add("Orb of the Moons");
-		}
-		if (gflags[WESTON_QUEST] && (!gflags[WESTON_FREED])) {
-			add("Weston");
-		}
-		if (gflags[ASKED_LB_ABOUT_HEAL]) {
-			add("heal");
-		}
-		if (gflags[WISP_SAID_GUARDIAN]) {
-			add("The Guardian");
-		}
-		if (gflags[ASKED_LB_ABOUT_GUARDIAN]) {
-			remove("The Guardian");
-		}
-		if (!gflags[MET_LORD_BRITISH]) {
-			say("You see your old friend Lord British, looking a bit older than when you last saw him. His eyes gleam at the sight of you.~~\"Welcome, my friend,\" he says, embracing you. \"Please. Tell me what brings thee to Britannia! Or, more importantly, what 'brought' thee here?\"");
-			gflags[MET_LORD_BRITISH] = true;
-			add(["red Moongate", "Orb of the Moons"]);
-		} else {
-			say("\"Yes, ",
-				var0001,
-				"?\" Lord British asks.");
-		}
-		converse (0) {
-			case "name":
-				say("Lord British laughs. \"What, art thou joking, Avatar? Dost thou not recognize thine old friend?\"");
-				remove("name");
-				fallthrough;
-
-			case "job":
-				say("Lord British rolls his eyes. \"Must we go through this formality?\" He laughs, shaking his head.");
-				say("\"Very well. As thou well knowest, I am sovereign of Britannia and have been for some time now. Even though I come from thine homeland, I have chosen to live my life here.\"");
-				add(["Britannia", "homeland"]);
-				fallthrough;
-
-			case "homeland":
-				say("\"I know that it has been many a year since I visited our Earth, but surely thou dost remember that the two of us hail from the same time and place? And, as brothers in origin, thou shouldst also remember that thou canst ask me for aid at any time thou mightest require it.\"");
-				remove("homeland");
-				add("aid");
-				fallthrough;
-
-			case "aid":
-				say("\"Do not forget, Avatar, that I have the power to heal thee. That is one bit of magic that still seems to work for me. And I could probably provide thee with some equipment and a spellbook.\"");
-				add(["equipment", "spellbook"]);
-				if (!gflags[ASKED_LB_ABOUT_HEAL]) {
-					add("heal");
+			if (gflags[BANISHED_EXODUS]) {
+				if (!gflags[LB_REWARDED_FOR_FOV]) {
+					var0000 = true;
+					LORD_BRITISH->say("\"I felt the passing of the remains of Exodus from this realm. It has lifted a great weight from my shoulders. And so Avatar, I cannot let this accomplishment go unrewarded. Please kneel, my friend.\" Lord British holds out his hands as you obey his command.");
+					break;
 				}
-				gflags[ASKED_LB_ABOUT_HEAL] = true;
-				remove("aid");
-				fallthrough;
-
-			case "Britannia":
-				say("\"The state of the land could not be more prosperous. Dost thou realize that thou hast been away for 200 Britannian years?\" Lord British wags a finger at you.~~ \"I am certain that thy friends have rued thine absence. 'Tis a shame thou didst stay away so long! But... I am so very happy to see thee. Britannia is prosperous and abundant. Look around thee. Explore the newly refurbished castle. Travel the land. Peace is prominent in all quarters.~~\"Yes, Britannia has never been better. Well, almost never.\"");
-				remove("Britannia");
-				add(["friends", "castle", "almost never"]);
-				if (!gflags[ASKED_LB_ABOUT_MAGIC]) {
-					add("magic");
-				}
-				fallthrough;
-
-			case "almost never":
-				say("\"Well, 'things' are indeed fine. It is the 'people' I am concerned about.~~\"There is something wrong in Britannia, but I do not know what it is. Something is hanging over the heads of the Britannian people. They are unhappy. One can see it in their eyes. There is nothing that is unifying the population, since there has been peace for so long.~~\"Perhaps thou couldst determine what is happening. I implore thee to go out amongst the people. Watch them in their daily tasks. Speak with them. Work with them. Break bread with them. Perhaps they need someone like the Avatar to take an interest in their lives.\"");
-				remove("almost never");
-				fallthrough;
-
-			case "red Moongate":
-				say("You relate the story of how a red Moongate appeared behind your house and mysteriously took you to Trinsic.~~Lord British's brow creases as you speak. Finally he says, \"I did not send the red Moongate to fetch thee. Someone or something must have activated that Moongate. And that is strange indeed, because we have been having a bit of trouble with Moongates as of late. In fact, we have been having trouble with magic in general!\"");
-				remove("red Moongate");
-				if (!var0007) {
-					add("Moongates");
-				}
-				if (!var0008) {
-					add("magic");
-				}
-				fallthrough;
-
-			case "Orb of the Moons":
-				say("\"Mine has not worked since the troubles with magic began. In fact, none of the Moongates have been working reliably for quite a while!");
-				say("\"Didst thou bring thine Orb of the Moons?\"");
-				if (Func090A()) {
-					say("\"Really? Where is it? Thou dost not have it on thee! ");
-				} else {
-					say("\"I see. ");
-				}
-				say("\"Hmmm. Thou might be stranded in Britannia. Here. Why not try mine? I shall let thee borrow it. Perhaps it will work for thee. Be careful, though. The Moongates have become dangerous.\"");
-				var var0009 = UI_add_party_items(0x0001, 0x0311, QUALITY_ANY, FRAME_ANY, false);
-				if (var0009) {
-					say("Lord British hands you his Orb of the Moons.");
-					gflags[LB_GAVE_ORB] = true;
-				} else {
-					say("\"Thine hands are too full to take the Orb!\"");
-				}
-				remove("Orb of the Moons");
-				if (!var0007) {
-					add("Moongates");
-				}
-				if (!var0008) {
-					add("magic");
-				}
-				fallthrough;
-
-			case "castle":
-				say("\"Yes, it has been redecorated since thy last visit. The architects and workers did a splendid job.\"~~The ruler leans toward you with a sour look on his face.~~ \"The only mar in the entire complex is that damn nursery!\"");
-				remove("castle");
-				add("nursery");
-				fallthrough;
-
-			case "nursery":
-				say("\"I will not go near the place! Kings and dirty diapers do not mix. The Great Council talked me into implementing the nursery after several of my staff started having families. Although it was probably a necessity, I shall pretend it does not exist!\"");
-				remove("nursery");
-				fallthrough;
-
-			case "Trinsic":
-				say("\"I have not been down there in many years. Has something happened there?\"");
-				remove("Trinsic");
-				UI_push_answers();
-				add(["a murder", "nothing much"]);
-				fallthrough;
-
-			case "nothing much":
-				say("\"Indeed. Then it seems that Trinsic has not changed much since I saw it last.\" His eyes twinkle.");
-				UI_pop_answers();
-				remove("nothing much");
-				fallthrough;
-
-			case "a murder":
-				say("\"Murder? In Trinsic?\" The ruler looks concerned.~~\"I have heard nothing about it. Art thou investigating it?\"");
-				var var000A = Func090A();
-				if (var000A) {
-					say("\"Very good. It pleases me that thou art concerned about my people.\"");
-				} else {
-					say("\"Ah, but perhaps thou shouldst!\"");
-				}
-				say("The king pauses a moment. \"Now that thou dost mention it, I have had reports of other similar murders in the past few months. In fact, there was one here in Britain three or four years ago. The body was mutilated in a ritualistic fashion. Apparently there is a maddened killer on the loose. But I have no doubt that someone such as thee, Avatar, can find him!\"");
-				remove("a murder");
-				UI_pop_answers();
-				add(["ritualistic", "killer"]);
-				fallthrough;
-
-			case "ritualistic":
-				say("\"I do not recall many details. Thou shouldst ask Patterson, the town mayor, about it. He may remember more.\"");
-				remove("ritualistic");
-				gflags[LEARNED_ABOUT_BRITAIN_MURDER] = true;
-				fallthrough;
-
-			case "killer":
-				say("\"That is, of course, only an assumption on my part. But that is all we have had to work with. Unless thou hast already uncovered some useful information?\"");
-				remove("killer");
-				if (gflags[SPARK_SAID_HOOK]) {
-					add("Hook");
-				}
-				if (gflags[GILBERTO_SAID_CROWN]) {
-					add("Crown Jewel");
-				}
-				fallthrough;
-
-			case "Fellowship":
-				say("\"They are an extremely useful and productive group of citizens. Thou shouldst most certainly visit the Fellowship Headquarters here in Britain and speak with Batlin. The Fellowship has done many good deeds throughout Britannia, including feeding the poor, educating and helping those in need, and promoting general good will and peace.\"");
-				remove("Fellowship");
-				add(["Batlin", "Headquarters"]);
-				fallthrough;
-
-			case "Headquarters":
-				say("\"Yes, it is not far from the castle, to the southwest. It is just south of the theatre.\"");
-				remove("Headquarters");
-				fallthrough;
-
-			case "Batlin":
-				say("\"He is a druid who began The Fellowship about twenty years ago. He is highly intelligent, and is a warm and gentle human being.\"");
-				remove("Batlin");
-				fallthrough;
-
-			case "Hook":
-				say("\"A man with a hook?\" The king rubs his chin.~~\"No, I do not recall ever meeting a man with a hook.\"");
-				remove("Hook");
-				fallthrough;
-
-			case "Crown Jewel":
-				say("\"I am afraid I cannot possibly know of every ship that comes through our ports. Thou shouldst check with Clint the Shipwright if thou hast not done so.\"");
-				remove("Crown Jewel");
-				fallthrough;
-
-			case "friends":
-				say("\"Thou must mean Iolo, Shamino, and Dupre, of course.\"");
-				remove("friends");
-				add(["Iolo", "Shamino", "Dupre"]);
-				fallthrough;
-
-			case "Iolo":
-				say("\"I have seen our friend rarely over the years. I understand he has been spending most of his time in Trinsic.\"");
-				if (var0003) {
-					say("\"Hello, Iolo! How art thou?\"*");
-					IOLO->say("\"I am well, my liege! 'Tis good to see thee!\"*");
-					IOLO->hide();
-					LORD_BRITISH->show_npc_face(0x0000);
-				}
-				remove("Iolo");
-				add("Trinsic");
-				fallthrough;
-
-			case "Shamino":
-				say("\"That rascal does not come around very often, though I understand he spends most of his time in Britain these days!\"");
-				if (var0005) {
-					say("\"What dost thou have to say for thyself, Shamino?\"*");
-					SHAMINO->say("\"Mine apologies, milord,\" Shamino says.*");
-					LORD_BRITISH->say("\"What's this I hear of a woman? An actress? Hmmmm?\"*");
-					SHAMINO->say("Shamino blushes and shuffles his feet.*");
-					LORD_BRITISH->say("\"I suspected as much!\" the ruler says, laughing.");
-					SHAMINO->hide();
-					LORD_BRITISH->show_npc_face(0x0000);
-				}
-				remove("Shamino");
-				fallthrough;
-
-			case "Dupre":
-				say("\"I have not seen that one since I knighted him. Typical -- I do the man a favor and he disappears! I heard he might be in Jhelom.\"");
-				if (var0004) {
-					say("\"Where hast thou been, Sir Dupre?\"*");
-					DUPRE->say("\"Oh, here and there, milord,\" the fighter replies.*");
-					LORD_BRITISH->say("\"I have very few friends from our homeland here in Britannia. Thou must make a point to visit more often! Especially since thou art a knight!\"*");
-					DUPRE->say("\"If thou dost wish it, milord,\" Dupre says, bowing.*");
-					DUPRE->hide();
-					LORD_BRITISH->show_npc_face(0x0000);
-				}
-				remove("Dupre");
-				add("Jhelom");
-				fallthrough;
-
-			case "Jhelom":
-				say("\"A rather violent place, by all accounts. I have not had the pleasure of a visit in quite a while.\"");
-				remove("Jhelom");
-				fallthrough;
-
-			case "magic":
-				say("\"Something is awry. Magic has not been working for the longest time. I even have trouble creating food with magic! It must be something to do with the magical ether.~~\"There are those who say that magic is dying, what with the trouble with the Moongates and the situation with Nystul. I am beginning to suspect that they might be right!\"");
-				say("Lord British studies you a moment.");
-				say("\"Perhaps magic will work much better for thee. Thou hast not been in Britannia long. It is possible that whatever has affected magic has not made its mark upon thee yet. Please try it. A spellbook is stored with the rest of thine equipment.\"");
-				gflags[ASKED_LB_ABOUT_MAGIC] = true;
-				remove("magic");
-				add(["Nystul", "spellbook", "equipment"]);
-				var0008 = true;
-				if (!var0007) {
-					add("Moongates");
-				}
-				fallthrough;
-
-			case "Nystul":
-				if (!gflags[BROKE_TETRA]) {
-					if (!gflags[MET_NYSTUL]) {
-						say("\"Er... try talking to him.\"");
-					} else {
-						say("The king lowers his voice.~~\"He is acting oddly, isn't he? Something has happened to his mind. He doesn't seem to be able to concentrate on magic anymore.\"");
-					}
-				} else {
-					say("\"He is beginning to act much more normally.\"");
-				}
-				remove("Nystul");
-				fallthrough;
-
-			case "Moongates":
-				say("\"The Moongates are not functioning! We cannot use them as we have in the past. Not only are they dysfunctional, they are, in fact, dangerous! One of my trusted sages used mine own Orb of the Moons to travel to the Shrine of Humility, and his body did shatter upon entering the gate! If only that mage in Cove hadn't gone mad!\"");
-				remove("Moongates");
-				add(["mad mage", "Cove"]);
-				var0007 = true;
-				fallthrough;
-
-			case "mad mage":
-				say("The ruler leans forward and speaks quietly.~~\"There is a mad mage in Cove by the name of Rudyom. Dost thou remember him? Rudyom was working with a magical substance called 'blackrock'. Before he went mad, he claimed that this mineral could solve the problems of the Moongates. I suggest that thou shouldst go to Cove and find him. Try to learn what it was he was doing with this blackrock material. It could be our only hope.\"");
-				gflags[LEARNED_ABOUT_BLACKROCK] = true;
-				Func0911(0x0014);
-				remove("mad mage");
-				add("Rudyom");
-				fallthrough;
-
-			case "Rudyom":
-				say("\"He was a brilliant and respected mage. But something happened to him in recent years. He seemed to go completely senile.\"");
-				if (gflags[MET_NYSTUL]) {
-					say("Suddenly, something jars Lord British's memory. \"I wonder if there is a connection with what happened to Rudyom and what has befallen Nystul!\"");
-				}
-				remove("Rudyom");
-				fallthrough;
-
-			case "Cove":
-				say("\"Surely thou dost remember Cove. It is a very pleasant town to the east of Britain. Quite relaxing.\"");
-				remove("Cove");
-				fallthrough;
-
-			case "The Guardian":
-				say("\"I do not know of a 'Guardian'. Art thou sure he really exists? Thou shouldst investigate further.\"");
-				gflags[ASKED_LB_ABOUT_GUARDIAN] = true;
+			} else if (!gflags[TALKED_ABOUT_RUMBLE]) {
+				add("rumble");
+			}
+			var var0002 = UI_get_party_list();
+			var var0003 = Func08F7(IOLO);
+			var var0004 = Func08F7(DUPRE);
+			var var0005 = Func08F7(SHAMINO);
+			LORD_BRITISH->show_npc_face(0x0000);
+			var var0006 = false;
+			var var0007 = false;
+			var var0008 = false;
+			add(["name", "job", "bye", "Fellowship"]);
+			if (!gflags[LB_GAVE_ORB]) {
+				add("Orb of the Moons");
+			}
+			if (gflags[WESTON_QUEST] && (!gflags[WESTON_FREED])) {
+				add("Weston");
+			}
+			if (gflags[ASKED_LB_ABOUT_HEAL]) {
+				add("heal");
+			}
+			if (gflags[WISP_SAID_GUARDIAN]) {
+				add("The Guardian");
+			}
+			if (gflags[ASKED_LB_ABOUT_GUARDIAN]) {
 				remove("The Guardian");
-				fallthrough;
-
-			case "spellbook":
-				say("\"Yes, I have a spellbook stored away with the rest of the equipment.\"");
-				remove("spellbook");
-				fallthrough;
-
-			case "equipment":
-				say("\"Thou art welcome to any of mine equipment. I keep it in a locked storeroom here in the castle. Thou wilt find the key in my study.\"");
-				remove("equipment");
-				add(["storeroom", "study"]);
-				fallthrough;
-
-			case "storeroom":
-				say("\"I am sure thou canst find it.\"~~The ruler smiles slyly. \"Consider it something of a game!\"");
-				remove("storeroom");
-				fallthrough;
-
-			case "study":
-				say("\"'Tis in the western end of the castle.\"");
-				remove("study");
-				fallthrough;
-
-			case "heal":
-				Func08B4(0x0000, 0x0000, 0x0000);
-				var0006 = true;
-				fallthrough;
-
-			case "Weston":
-				say("Lord British listens to your story about Weston. He looks concerned.~~\"I do not recall this case. Let me check... Hmmm...\" He quickly scans a large scroll.~~\"Imprisoned for the theft of one apple from the Royal Orchards... Ludicrous! Someone must have usurped mine authority. Thou mayest consider this man pardoned. An investigation will commence immediately into the circumstances surrounding his arrest, and into this fellow, Figg. My thanks to thee, Avatar.\"");
-				gflags[WESTON_FREED] = true;
-				Func0911(0x0014);
-				WESTON->remove_npc();
-				remove("Weston");
-				fallthrough;
-
-			case "rumble":
-				say("Lord British looks at you gravely, \"The foundation of Britannia was shaken with the rising of an island. This event was no random disaster, it was one of sorcerous intent.\"");
-				add("island");
-				remove("rumble");
-				fallthrough;
-
-			case "island":
+			}
+			if (!gflags[MET_LORD_BRITISH]) {
+				say("You see your old friend Lord British, looking a bit older than when you last saw him. His eyes gleam at the sight of you.~~\"Welcome, my friend,\" he says, embracing you. \"Please. Tell me what brings thee to Britannia! Or, more importantly, what 'brought' thee here?\"");
+				gflags[MET_LORD_BRITISH] = true;
+				add(["red Moongate", "Orb of the Moons"]);
+			} else {
 				say("\"Yes, ",
 					var0001,
-					". I felt a great disturbance in the ether when this island arose from the sea. The island is none other than the Isle of Fire where thou defeated the Hellspawn Exodus.\"");
-				add(["Isle of Fire", "Exodus"]);
-				remove("island");
-				fallthrough;
+					"?\" Lord British asks.");
+			}
+			converse (0) {
+				case "name":
+					say("Lord British laughs. \"What, art thou joking, Avatar? Dost thou not recognize thine old friend?\"");
+					remove("name");
+					fallthrough;
 
-			case "Isle of Fire":
-				say("\"",
-					var0001,
-					", thou shouldst know that when I created the shrines of the Virtues, I also set upon this island three great shrines, dedicated to the Priciples of Truth, Love, and Courage.");
-				say("They reside within the walls of the Castle of Fire. I never revealed this to thee before as I thought them forever lost when the Isle of Fire mysteriously sank beneath the waves.");
-				say("The shrines are meant for the use of an Avatar only, and therefore a talisman will be necessary to use one.");
-				say("The talismans are guarded by tests that thou shouldst have no problem passing if thou wishest to seek thier counsel.\"");
-				Func08B5();
-				remove("Isle of Fire");
-				fallthrough;
+				case "job":
+					say("Lord British rolls his eyes. \"Must we go through this formality?\" He laughs, shaking his head.");
+					say("\"Very well. As thou well knowest, I am sovereign of Britannia and have been for some time now. Even though I come from thine homeland, I have chosen to live my life here.\"");
+					add(["Britannia", "homeland"]);
+					fallthrough;
 
-			case "Exodus":
-				say("\"Thy battle with that strange mixture of machine and spirit is now legendary. Do be careful if thou art going to the isle, for the remains of that being now reside in one of the chambers of the Castle of Fire.\"");
-				remove("Exodus");
-				fallthrough;
+				case "homeland":
+					say("\"I know that it has been many a year since I visited our Earth, but surely thou dost remember that the two of us hail from the same time and place? And, as brothers in origin, thou shouldst also remember that thou canst ask me for aid at any time thou mightest require it.\"");
+					remove("homeland");
+					add("aid");
+					fallthrough;
 
-			case "bye":
-				break;
+				case "aid":
+					say("\"Do not forget, Avatar, that I have the power to heal thee. That is one bit of magic that still seems to work for me. And I could probably provide thee with some equipment and a spellbook.\"");
+					add(["equipment", "spellbook"]);
+					if (!gflags[ASKED_LB_ABOUT_HEAL]) {
+						add("heal");
+					}
+					gflags[ASKED_LB_ABOUT_HEAL] = true;
+					remove("aid");
+					fallthrough;
+
+				case "Britannia":
+					say("\"The state of the land could not be more prosperous. Dost thou realize that thou hast been away for 200 Britannian years?\" Lord British wags a finger at you.~~ \"I am certain that thy friends have rued thine absence. 'Tis a shame thou didst stay away so long! But... I am so very happy to see thee. Britannia is prosperous and abundant. Look around thee. Explore the newly refurbished castle. Travel the land. Peace is prominent in all quarters.~~\"Yes, Britannia has never been better. Well, almost never.\"");
+					remove("Britannia");
+					add(["friends", "castle", "almost never"]);
+					if (!gflags[ASKED_LB_ABOUT_MAGIC]) {
+						add("magic");
+					}
+					fallthrough;
+
+				case "almost never":
+					say("\"Well, 'things' are indeed fine. It is the 'people' I am concerned about.~~\"There is something wrong in Britannia, but I do not know what it is. Something is hanging over the heads of the Britannian people. They are unhappy. One can see it in their eyes. There is nothing that is unifying the population, since there has been peace for so long.~~\"Perhaps thou couldst determine what is happening. I implore thee to go out amongst the people. Watch them in their daily tasks. Speak with them. Work with them. Break bread with them. Perhaps they need someone like the Avatar to take an interest in their lives.\"");
+					remove("almost never");
+					fallthrough;
+
+				case "red Moongate":
+					say("You relate the story of how a red Moongate appeared behind your house and mysteriously took you to Trinsic.~~Lord British's brow creases as you speak. Finally he says, \"I did not send the red Moongate to fetch thee. Someone or something must have activated that Moongate. And that is strange indeed, because we have been having a bit of trouble with Moongates as of late. In fact, we have been having trouble with magic in general!\"");
+					remove("red Moongate");
+					if (!var0007) {
+						add("Moongates");
+					}
+					if (!var0008) {
+						add("magic");
+					}
+					fallthrough;
+
+				case "Orb of the Moons":
+					say("\"Mine has not worked since the troubles with magic began. In fact, none of the Moongates have been working reliably for quite a while!");
+					say("\"Didst thou bring thine Orb of the Moons?\"");
+					if (Func090A()) {
+						say("\"Really? Where is it? Thou dost not have it on thee! ");
+					} else {
+						say("\"I see. ");
+					}
+					say("\"Hmmm. Thou might be stranded in Britannia. Here. Why not try mine? I shall let thee borrow it. Perhaps it will work for thee. Be careful, though. The Moongates have become dangerous.\"");
+					var var0009 = UI_add_party_items(0x0001, 0x0311, QUALITY_ANY, FRAME_ANY, false);
+					if (var0009) {
+						say("Lord British hands you his Orb of the Moons.");
+						gflags[LB_GAVE_ORB] = true;
+					} else {
+						say("\"Thine hands are too full to take the Orb!\"");
+					}
+					remove("Orb of the Moons");
+					if (!var0007) {
+						add("Moongates");
+					}
+					if (!var0008) {
+						add("magic");
+					}
+					fallthrough;
+
+				case "castle":
+					say("\"Yes, it has been redecorated since thy last visit. The architects and workers did a splendid job.\"~~The ruler leans toward you with a sour look on his face.~~ \"The only mar in the entire complex is that damn nursery!\"");
+					remove("castle");
+					add("nursery");
+					fallthrough;
+
+				case "nursery":
+					say("\"I will not go near the place! Kings and dirty diapers do not mix. The Great Council talked me into implementing the nursery after several of my staff started having families. Although it was probably a necessity, I shall pretend it does not exist!\"");
+					remove("nursery");
+					fallthrough;
+
+				case "Trinsic":
+					say("\"I have not been down there in many years. Has something happened there?\"");
+					remove("Trinsic");
+					UI_push_answers();
+					add(["a murder", "nothing much"]);
+					fallthrough;
+
+				case "nothing much":
+					say("\"Indeed. Then it seems that Trinsic has not changed much since I saw it last.\" His eyes twinkle.");
+					UI_pop_answers();
+					remove("nothing much");
+					fallthrough;
+
+				case "a murder":
+					say("\"Murder? In Trinsic?\" The ruler looks concerned.~~\"I have heard nothing about it. Art thou investigating it?\"");
+					var var000A = Func090A();
+					if (var000A) {
+						say("\"Very good. It pleases me that thou art concerned about my people.\"");
+					} else {
+						say("\"Ah, but perhaps thou shouldst!\"");
+					}
+					say("The king pauses a moment. \"Now that thou dost mention it, I have had reports of other similar murders in the past few months. In fact, there was one here in Britain three or four years ago. The body was mutilated in a ritualistic fashion. Apparently there is a maddened killer on the loose. But I have no doubt that someone such as thee, Avatar, can find him!\"");
+					remove("a murder");
+					UI_pop_answers();
+					add(["ritualistic", "killer"]);
+					fallthrough;
+
+				case "ritualistic":
+					say("\"I do not recall many details. Thou shouldst ask Patterson, the town mayor, about it. He may remember more.\"");
+					remove("ritualistic");
+					gflags[LEARNED_ABOUT_BRITAIN_MURDER] = true;
+					fallthrough;
+
+				case "killer":
+					say("\"That is, of course, only an assumption on my part. But that is all we have had to work with. Unless thou hast already uncovered some useful information?\"");
+					remove("killer");
+					if (gflags[SPARK_SAID_HOOK]) {
+						add("Hook");
+					}
+					if (gflags[GILBERTO_SAID_CROWN]) {
+						add("Crown Jewel");
+					}
+					fallthrough;
+
+				case "Fellowship":
+					say("\"They are an extremely useful and productive group of citizens. Thou shouldst most certainly visit the Fellowship Headquarters here in Britain and speak with Batlin. The Fellowship has done many good deeds throughout Britannia, including feeding the poor, educating and helping those in need, and promoting general good will and peace.\"");
+					remove("Fellowship");
+					add(["Batlin", "Headquarters"]);
+					fallthrough;
+
+				case "Headquarters":
+					say("\"Yes, it is not far from the castle, to the southwest. It is just south of the theatre.\"");
+					remove("Headquarters");
+					fallthrough;
+
+				case "Batlin":
+					say("\"He is a druid who began The Fellowship about twenty years ago. He is highly intelligent, and is a warm and gentle human being.\"");
+					remove("Batlin");
+					fallthrough;
+
+				case "Hook":
+					say("\"A man with a hook?\" The king rubs his chin.~~\"No, I do not recall ever meeting a man with a hook.\"");
+					remove("Hook");
+					fallthrough;
+
+				case "Crown Jewel":
+					say("\"I am afraid I cannot possibly know of every ship that comes through our ports. Thou shouldst check with Clint the Shipwright if thou hast not done so.\"");
+					remove("Crown Jewel");
+					fallthrough;
+
+				case "friends":
+					say("\"Thou must mean Iolo, Shamino, and Dupre, of course.\"");
+					remove("friends");
+					add(["Iolo", "Shamino", "Dupre"]);
+					fallthrough;
+
+				case "Iolo":
+					say("\"I have seen our friend rarely over the years. I understand he has been spending most of his time in Trinsic.\"");
+					if (var0003) {
+						say("\"Hello, Iolo! How art thou?\"*");
+						IOLO->say("\"I am well, my liege! 'Tis good to see thee!\"*");
+						IOLO->hide();
+						LORD_BRITISH->show_npc_face(0x0000);
+					}
+					remove("Iolo");
+					add("Trinsic");
+					fallthrough;
+
+				case "Shamino":
+					say("\"That rascal does not come around very often, though I understand he spends most of his time in Britain these days!\"");
+					if (var0005) {
+						say("\"What dost thou have to say for thyself, Shamino?\"*");
+						SHAMINO->say("\"Mine apologies, milord,\" Shamino says.*");
+						LORD_BRITISH->say("\"What's this I hear of a woman? An actress? Hmmmm?\"*");
+						SHAMINO->say("Shamino blushes and shuffles his feet.*");
+						LORD_BRITISH->say("\"I suspected as much!\" the ruler says, laughing.");
+						SHAMINO->hide();
+						LORD_BRITISH->show_npc_face(0x0000);
+					}
+					remove("Shamino");
+					fallthrough;
+
+				case "Dupre":
+					say("\"I have not seen that one since I knighted him. Typical -- I do the man a favor and he disappears! I heard he might be in Jhelom.\"");
+					if (var0004) {
+						say("\"Where hast thou been, Sir Dupre?\"*");
+						DUPRE->say("\"Oh, here and there, milord,\" the fighter replies.*");
+						LORD_BRITISH->say("\"I have very few friends from our homeland here in Britannia. Thou must make a point to visit more often! Especially since thou art a knight!\"*");
+						DUPRE->say("\"If thou dost wish it, milord,\" Dupre says, bowing.*");
+						DUPRE->hide();
+						LORD_BRITISH->show_npc_face(0x0000);
+					}
+					remove("Dupre");
+					add("Jhelom");
+					fallthrough;
+
+				case "Jhelom":
+					say("\"A rather violent place, by all accounts. I have not had the pleasure of a visit in quite a while.\"");
+					remove("Jhelom");
+					fallthrough;
+
+				case "magic":
+					say("\"Something is awry. Magic has not been working for the longest time. I even have trouble creating food with magic! It must be something to do with the magical ether.~~\"There are those who say that magic is dying, what with the trouble with the Moongates and the situation with Nystul. I am beginning to suspect that they might be right!\"");
+					say("Lord British studies you a moment.");
+					say("\"Perhaps magic will work much better for thee. Thou hast not been in Britannia long. It is possible that whatever has affected magic has not made its mark upon thee yet. Please try it. A spellbook is stored with the rest of thine equipment.\"");
+					gflags[ASKED_LB_ABOUT_MAGIC] = true;
+					remove("magic");
+					add(["Nystul", "spellbook", "equipment"]);
+					var0008 = true;
+					if (!var0007) {
+						add("Moongates");
+					}
+					fallthrough;
+
+				case "Nystul":
+					if (!gflags[BROKE_TETRA]) {
+						if (!gflags[MET_NYSTUL]) {
+							say("\"Er... try talking to him.\"");
+						} else {
+							say("The king lowers his voice.~~\"He is acting oddly, isn't he? Something has happened to his mind. He doesn't seem to be able to concentrate on magic anymore.\"");
+						}
+					} else {
+						say("\"He is beginning to act much more normally.\"");
+					}
+					remove("Nystul");
+					fallthrough;
+
+				case "Moongates":
+					say("\"The Moongates are not functioning! We cannot use them as we have in the past. Not only are they dysfunctional, they are, in fact, dangerous! One of my trusted sages used mine own Orb of the Moons to travel to the Shrine of Humility, and his body did shatter upon entering the gate! If only that mage in Cove hadn't gone mad!\"");
+					remove("Moongates");
+					add(["mad mage", "Cove"]);
+					var0007 = true;
+					fallthrough;
+
+				case "mad mage":
+					say("The ruler leans forward and speaks quietly.~~\"There is a mad mage in Cove by the name of Rudyom. Dost thou remember him? Rudyom was working with a magical substance called 'blackrock'. Before he went mad, he claimed that this mineral could solve the problems of the Moongates. I suggest that thou shouldst go to Cove and find him. Try to learn what it was he was doing with this blackrock material. It could be our only hope.\"");
+					gflags[LEARNED_ABOUT_BLACKROCK] = true;
+					Func0911(0x0014);
+					remove("mad mage");
+					add("Rudyom");
+					fallthrough;
+
+				case "Rudyom":
+					say("\"He was a brilliant and respected mage. But something happened to him in recent years. He seemed to go completely senile.\"");
+					if (gflags[MET_NYSTUL]) {
+						say("Suddenly, something jars Lord British's memory. \"I wonder if there is a connection with what happened to Rudyom and what has befallen Nystul!\"");
+					}
+					remove("Rudyom");
+					fallthrough;
+
+				case "Cove":
+					say("\"Surely thou dost remember Cove. It is a very pleasant town to the east of Britain. Quite relaxing.\"");
+					remove("Cove");
+					fallthrough;
+
+				case "The Guardian":
+					say("\"I do not know of a 'Guardian'. Art thou sure he really exists? Thou shouldst investigate further.\"");
+					gflags[ASKED_LB_ABOUT_GUARDIAN] = true;
+					remove("The Guardian");
+					fallthrough;
+
+				case "spellbook":
+					say("\"Yes, I have a spellbook stored away with the rest of the equipment.\"");
+					remove("spellbook");
+					fallthrough;
+
+				case "equipment":
+					say("\"Thou art welcome to any of mine equipment. I keep it in a locked storeroom here in the castle. Thou wilt find the key in my study.\"");
+					remove("equipment");
+					add(["storeroom", "study"]);
+					fallthrough;
+
+				case "storeroom":
+					say("\"I am sure thou canst find it.\"~~The ruler smiles slyly. \"Consider it something of a game!\"");
+					remove("storeroom");
+					fallthrough;
+
+				case "study":
+					say("\"'Tis in the western end of the castle.\"");
+					remove("study");
+					fallthrough;
+
+				case "heal":
+					Func08B4(0x0000, 0x0000, 0x0000);
+					var0006 = true;
+					fallthrough;
+
+				case "Weston":
+					say("Lord British listens to your story about Weston. He looks concerned.~~\"I do not recall this case. Let me check... Hmmm...\" He quickly scans a large scroll.~~\"Imprisoned for the theft of one apple from the Royal Orchards... Ludicrous! Someone must have usurped mine authority. Thou mayest consider this man pardoned. An investigation will commence immediately into the circumstances surrounding his arrest, and into this fellow, Figg. My thanks to thee, Avatar.\"");
+					gflags[WESTON_FREED] = true;
+					Func0911(0x0014);
+					WESTON->remove_npc();
+					remove("Weston");
+					fallthrough;
+
+				case "rumble":
+					say("Lord British looks at you gravely, \"The foundation of Britannia was shaken with the rising of an island. This event was no random disaster, it was one of sorcerous intent.\"");
+					add("island");
+					remove("rumble");
+					fallthrough;
+
+				case "island":
+					say("\"Yes, ",
+						var0001,
+						". I felt a great disturbance in the ether when this island arose from the sea. The island is none other than the Isle of Fire where thou defeated the Hellspawn Exodus.\"");
+					add(["Isle of Fire", "Exodus"]);
+					remove("island");
+					fallthrough;
+
+				case "Isle of Fire":
+					say("\"",
+						var0001,
+						", thou shouldst know that when I created the shrines of the Virtues, I also set upon this island three great shrines, dedicated to the Priciples of Truth, Love, and Courage.");
+					say("They reside within the walls of the Castle of Fire. I never revealed this to thee before as I thought them forever lost when the Isle of Fire mysteriously sank beneath the waves.");
+					say("The shrines are meant for the use of an Avatar only, and therefore a talisman will be necessary to use one.");
+					say("The talismans are guarded by tests that thou shouldst have no problem passing if thou wishest to seek thier counsel.\"");
+					Func08B5();
+					remove("Isle of Fire");
+					fallthrough;
+
+				case "Exodus":
+					say("\"Thy battle with that strange mixture of machine and spirit is now legendary. Do be careful if thou art going to the isle, for the remains of that being now reside in one of the chambers of the Castle of Fire.\"");
+					remove("Exodus");
+					fallthrough;
+
+				case "bye":
+					break;
+			}
+			say("\"Goodbye, ",
+				var0001,
+				". Do come back soon.\"*");
 		}
-		say("\"Goodbye, ",
-			var0001,
-			". Do come back soon.\"*");
+		if (event == PROXIMITY) {
+			Func092E(LORD_BRITISH);
+		}
 	}
-	if (event == PROXIMITY) {
-		Func092E(LORD_BRITISH);
-	}
-labelFuncLordBritish_0743:
 	if (var0000 == true) {
 		var var000B = Func092D(item);
 		var var000C = (var000B + 0x0004) % 0x0008;
@@ -63389,6 +63389,9 @@ void Func0892 0x892 () {
 				if (var0001) {
 					say("He places the Talisman in your palm. ~\"Thou hast earned this and the honors and powers associated with it. Thou art truly an Avatar.\"");
 					gflags[GOT_TALISMAN_OF_LOVE] = true;
+					// This could be a break instead; the original
+					// skips the endconv from a break, which is why
+					// I did it this way
 					goto labelFunc0892_00CA;
 				} else {
 					say("\"I am sorry, but thou must be less burdened to receive this one of three greatest of all blessings.\"");
