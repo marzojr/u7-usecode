@@ -399,7 +399,7 @@ extern void Func09B5 0x9B5 ();
 extern void Func09B6 0x9B6 (var var0000, struct<Position> var0001);
 extern void Func09B7 0x9B7 ();
 extern void Func09B8 0x9B8 ();
-extern var Func09B9 0x9B9 (var var0000, var var0001);
+extern struct<Position> Func09B9 0x9B9 (var var0000, var var0001);
 extern var Func09BA 0x9BA ();
 extern void Func09BB 0x9BB (var var0000, var var0001);
 extern void Func09BC 0x9BC (var var0000);
