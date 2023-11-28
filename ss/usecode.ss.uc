@@ -9514,6 +9514,7 @@ void Func02A3 shape#(0x2A3) () {
 			if (var0003 == 0x0005) {
 				var0002 = script item {
 					nohalt;
+					// TYPO: Could be Gimme
 					say "@Gimmee a cracker!@";
 				};
 			}
@@ -10308,7 +10309,9 @@ void Func02C1 shape#(0x2C1) () {
 				say("~~ ~~Denizens of the Caves~~ ~~by Isstherios~~");
 				say("\tDuring our inhabitance of this remote outpost we have been assaulted by creatures of such uniqueness and variety that I have taken it upon myself to create a bestiary.~");
 				say("\tArachnian:  This terrifying creature has the full body, head and legs of the giant spider common to our island, with the torso, head and arms of a man growing from just behind its spider-head.  Speculation abounds as to the origin of these horrible hybrids; some claim the mad servants of Chaos created it in one of their endless foolish experiments, others say it was the work of a long-dead lunatic mage.  Regardless of how they came to be, the Arachnian is perhaps the deadliest of all foes we face here at Serpent's Fang.*");
+				// TYPO: Should be "reticent"
 				say("\tLiche:  This is not so much a creature as it is a being, but I consider it worthy of note here.  All of the folk I have spoken to in the keep are rather retiscent about the liche, but I have compiled the following information:  The liche was here before the keep was established.  It is undead; once alive, it entered a state of \"unliving\" which heightened its power but nullified what humanity it may have had when it was alive.  It can command undead and hurl the most devastating of spells.~");
+				// TYPO: Should be "volleys"
 				say("\tNaga:  A fearsome creature whose lower half is that of a giant snake and upper half is that of a human woman, the Naga is capable of delivering devastating vollies of arrows at those who dare intrude upon its lair.  The Naga's origin, like that of the Arachnian (see above) is questionable.  It is best, when a Naga is spotted, to close for battle immediately, lest their arrows bring thee down before thou hast a chance to flee.  Additionally, they have been known to use snakes as a front line while the Naga pick intruders off with arrows.*");
 				say("\tShasrajah:  These menacing, scaled freaks have intimidating forms of attack; with their long, snake-like necks they thrust their heads toward their enemy, latching on with their rending teeth, then with their strong neck muscles ripping flesh off.  Though they seldom land hits, they are deceptively quick and resilient to blows.  However, they are enormously stupid, unable to even open doors.  They often attack in groups, making them more dangerous, but they are easily led into traps.  Thus have we been able to repel their regular attacks.~");
 				say("\tI have considerable information on the origin of these beasts; basically, they were an attempt by the forces of Chaos to fuse viper and man.  The Lords of Discipline (those fortunate soldiers whose minds were transferred into the bodies of automatons) had brought the advantage to Order in the war, and these Shasrajah were their attempt to tip the scales in their favor.  Fortunately, the soldiers sacrificed to this wasteful end went insane in their new bodies. They escaped from the lab and began spreading their foul race all over the subterranean realms of our isle...");
@@ -10319,6 +10322,7 @@ void Func02C1 shape#(0x2C1) () {
 				say("  \tThe first orb, golden in hue, was stored within the keep in a secret location until stolen by a soldier of Chaos.  He imbibed a potion of invisibility and followed behind the commander, who had gone to retrieve the orb.  When he found the room, he attacked the unwary commander and stole the orb.  However, his invisibility wore off as he was making good his escape and he was seen by a troop of guards.  The guards chased the thief until he was cornered southeast of the keep; his only escape from the guards would have been to plunge into the Fiend's Domain.  This he did, and was never seen again.  We presume it has come into the Fiend's possession and expect he will try to use it to his advantage.~");
 				say("  The purple orb, reputedly housed in the Commander's bedchambers, was also purloined by a Chaosite, though this one was no soldier.  Those few who saw it will never forget it; they know not whether the thing was man, beast, or both.  The thing was bipedal and vaguely humanoid, but it had the fur, large ears, feline face, and claws of a cat.  It was being held prisoner in the keep, but an undisciplined soldier on duty relaxed on his watch and the cat-man escaped.  I know not how it found its way into the Commander's bedchambers; I assume that its escape was not well-planned and he happened upon it by chance.  However it did find the orb, the cat-man stole it and ran into the Maze.  No one has seen the creature or the orb since.*");
 				say("  The red orb was not stolen, but is out of our hands all the same.  Prior to the closure of the addition to the outpost, to the southwest of the keep, SubCommander Gareth was charged with the task of transporting the orb to this area; we can assume he accomplished his mission, but Gareth never did return.  Shortly thereafter the area was surrendered to the creatures that currently reign there.  It is my presumption that the orb still rests within this catacomb.");
+				// TYPO: Should be "seized"
 				say("  The blue orb is certainly the strangest tale, but its possessor is a known entity; it rests in the decayed hands of the lich Aram-Dol.  How that malevolent entity came to possess the blue orb is where the strange tale doth lie. Approximately the same time the red orb was carried to presumed safety, the blue orb was to be carried to a location only SubCommander Gareth knew.  The six automatons sent on this mission were ambushed not far from the outpost; lookouts witnessed the battle but could not send aid in time.  The attackers were assumed to be spies of Chaos, but their identities will forever be unknown. They outnumbered the automatons by fully a score; the battle was quick.  They fled away with great haste.  Later a merchant traveling to the keep from Shasavrah reported that he had seen the thieves in a small town west of the keep, but the orb was stolen from them, along with much of their supplies, in the night. The orb appeared again in the hands of authorities in Thiriastith, who siezed it from a suspected stolen goods fence.  Not knowing its import, the authorities auctioned it as a bauble to a wizard who knew what the orb was.  This wizard, who was known only as the Asp, aspired to steal the silver seed.  He came to Serpent's Fang as an adventure seeker and was told that the other orbs were stolen or lost.  He discerned their whereabouts from this information, but that which he was told was apparently not true, for he set out immediately for Aram-Dol's lair.  Foolishly, he brought the one orb he possessed with him into those foul tunnels of Aram-Dol's lair.  The dead that walk those caverns and tunnels soon forced the Asp to join them in their ever-living death.  This new soldier of Aram-Dol brought the orb to the lich, thus bringing a momentary end to its lengthy sojourn.*");
 			}
 			if (var0000 == 0x0063) {
@@ -10864,6 +10868,7 @@ void Func02C5 shape#(0x2C5) () {
 	} else if (var0000 == 0x0090) {
 		var0001 = ["ENTHUSIASM"];
 	} else if (var0000 == 0x0091) {
+		// TYPO: Invalid word. No idea what it is meant to be,
 		var0001 = ["SUSTICALITY"];
 	} else if (var0000 == 0x0092) {
 		var0001 = ["SYMBOL", "OF", "CHAOS"];
@@ -10872,6 +10877,7 @@ void Func02C5 shape#(0x2C5) () {
 	} else if (var0000 == 0x0094) {
 		var0001 = ["CHAMBER", "OF", "BALANCE"];
 	} else if (var0000 == 0x0095) {
+		// TYPO: Should be "CHAOS"
 		var0001 = ["PLACE HERE", "THE CUBES", "OF BOTH", "CHOAS AND ORDER"];
 	} else if (var0000 == 0x0096) {
 		var0001 = ["ORDER SYMBOL", "THAT DOTH SPEAK", "OF PRINCIPLES", "AND WISDOM"];

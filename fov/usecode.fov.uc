@@ -126,6 +126,7 @@ void Func009A shape#(0x9A) () {
 					". How may I assist thee?\" The blind old man looks unerringly in your direction.");
 			} else {
 				ERETHIAN->show_npc_face(0x0001);
+				// TYPO: Should be "peevish"
 				say("\"I'll never get any work done like this! What do you wish of me?\" Erethian seems a little pevish at this point.");
 			}
 			add(["name", "job", "bye"]);
@@ -248,6 +249,7 @@ void Func009A shape#(0x9A) () {
 				remove("name");
 				fallthrough;
 			case "job":
+				// TYPO: Should be "Lycaeum"
 				say("\"I am a follower of the principle of Truth. But unlike those of the Lyceaum, I would prefer to seek out the knowledge instead of waiting for it to come to me.");
 				say("It is this curiosity which has brought me to this island from which Exodus, the spawn of Mondain and Minax, sought to rule the world.");
 				say("The books and scrolls here have taught me much of Britannia's\thistory and other... interesting subjects.\"");
@@ -289,6 +291,7 @@ void Func009A shape#(0x9A) () {
 				remove("Minax");
 				fallthrough;
 			case "Exodus":
+				// TYPO: Should be "Lycaeum"
 				say("\"That being has become a passion of mine, lately.\" He almost glows with excitement. \"Indeed, 'tis what brought me here. While I\twas at the Lyceaum, I happened upon a passage in a manuscript that described an Island of Fire.");
 				say("Upon further research, I found that the entity known as Exodus was not truly destroyed. The interface between its two parts and the world was merely severed.\"");
 				add(["two parts", "interface"]);
@@ -333,6 +336,7 @@ void Func009A shape#(0x9A) () {
 				fallthrough;
 			case "Dark Core":
 				if (AVATAR->get_npc_object()->find_nearest(0x03DE, 0x0007)) {
+					// TYPO: Should be "pedestal"
 					say("\"Yes, here it is. It is the cylinder sitting upon yon pedastal.\" He motions in the direction of the Dark Core.");
 				}
 				say("\"I have found it to be quite a treasure trove of useful facts. Its sole purpose seems to be the storage of information.");
@@ -350,6 +354,7 @@ void Func009A shape#(0x9A) () {
 				if (var0018) {
 					say("\"Yes, 'tis a pity to lose such an item of antiquity. Perhaps as time unfolds it will turn up. These things have a way of surfacing at the strangest times.\"");
 				} else {
+					// TYPO: Should be "mischievously"
 					say("\"No? It didst seem to serve thee well enough to dispatch the enchantress Minax. But then I suppose only a poor bard blames his instrument.\" He winks mischieviously in your general direction.");
 				}
 				remove("Enilno");
@@ -357,6 +362,7 @@ void Func009A shape#(0x9A) () {
 			case "Gem of Immortality":
 				say("Milky eyes glitter up at you like twin marbles, \"Ah, yes. But thou knowest all too well about that little bauble.");
 				say("After all, it was thee who smashed it into the shards which caused thee so much trouble during the regency of Lord Blackthorn.");
+				// TYPO: Should be "amends"
 				say("So much power that even in a shattered state, its magic still flowed. 'Tis sad to lose such an artifact.\" As if suddenly remembering with whom he is speaking, he ammends, \"Much better than having Mondain running about mucking with things, I suppose.\"");
 				remove("Gem of Immortality");
 				fallthrough;
@@ -370,6 +376,7 @@ void Func009A shape#(0x9A) () {
 				remove("daemon mirror");
 				fallthrough;
 			case "whining":
+				// TYPO: Should be "pastime"
 				say("\"'Tis his favorite passtime. He begs, pleads, and threatens me to free him from that stupid mirror. Believe me, if I could I would have done it long ago.\" Erethian's lined face shows his chagrin.");
 				remove("whining");
 				fallthrough;
@@ -389,11 +396,13 @@ void Func009A shape#(0x9A) () {
 				remove("Ether Gem");
 				fallthrough;
 			case "golems":
+				// TYPO: Should be "man-shaped", "constructs"
 				say("\"Mmmm... Yes. This pair of manshaped, magical constucts used to guard the Shrine of Principle, but alas, one fell pray to falling rocks when the dragon assaulted the castle. The other picked up his, ah... brother, for lack of a better word, and carried him off through the portal to the Test of Love.\"");
 				add("Test of Love");
 				remove("golems");
 				fallthrough;
 			case "Shrine of Principle":
+				// TYPO: Should be "British"
 				say("\"The shrine lies through the doors at the rear of the main hall. There thou canst find three statues, each one dedicated to a Principle set forth by Lord Britsh at the beginning of the Age of Enlightenment.\" Conspiratorially he adds, \"A bit stuffy, but they make nice cloakracks.\"");
 				remove("Shrine of Principle");
 				fallthrough;
@@ -3057,6 +3066,7 @@ void Func0282 shape#(0x282) () {
 			say("This is @not a @valid book");
 		}
 		if (var0002 == 0x0000) {
+			// TYPO: Should be "UNFINISHED"
 			say("~~ ~~MORGAN'S GUIDE TO UNIFINISHED NOVELS~~  ~~by Morgan*");
 			say("~~     An enlightening discourse on the enigma of blank tomes.");
 			say("~Beginning with the heretofore unresolved mysteries of empty...*Page 2*Page 3*Page 4*Page 5*Page 6*Page7");
@@ -3095,10 +3105,12 @@ void Func0282 shape#(0x282) () {
 		}
 		if (var0002 == 0x0004) {
 			say("~~ ~~ STRANGER IN A STRANGE LAND~~ ~~by Robert Heinlein~~First Edition*");
+			// TYPO: Should be "difficulty"
 			say("  The struggles of an individual from another planet who finds difficutly assimilating into his new society and culture.");
 		}
 		if (var0002 == 0x0005) {
 			say("~~ ~~CHITTY-CHITTY-BANG-BANG~~ ~~by Ian Fleming*");
+			// TYPO: Should be "children's"
 			say("    This wonderful childrens's story of a car that could fly has been pleasing youths and adults alike for many generations.");
 		}
 		if (var0002 == 0x0006) {
@@ -3114,6 +3126,7 @@ void Func0282 shape#(0x282) () {
 		if (var0002 == 0x0008) {
 			say("~~RECORDS OF THE HIGH COURT OF YEW~~ ~~ ~~");
 			gflags[HOOK_POST] = true;
+			// TYPO: Should be "scallywags"
 			say("... Hook -- Hook is known to be an extremely dangerous killer, a pirate who left his own band of scalliwags to become a freelance assassin for whomever might meet his price. It is believed that he is linked to at least fourteen murders in Britannia. All of the victims had been mutilated with a sharp object believed to be the handiwork of a hook-hand.");
 			say("     It is not known where Hook resides, but many believe he has a secret hideout on Buccaneer's Den. His most recent sighting confirmed that he is travelling with a warrior gargoyle named Forskis.~~");
 			say("... Kellin... is wanted in several townships for thievery. He uses many aliases, including Tervis, Kreg, and Hodge. He was last seen near the forest of Yew and is believed to have gone into hiding.~~");
@@ -3140,14 +3153,17 @@ void Func0282 shape#(0x282) () {
 		}
 		if (var0002 == 0x000D) {
 			say("~~ ~~ENCYCLOPEDIA BRITANNIA ~~ ~~Volume II. F - L.*");
+			// TYPO: Should be "Lycaeum"
 			say("     Here is another volume in a long series of books detailing every known geographical location and historical personage. This work covers Faalga, the ancient sage of reptiles, through Lyceaum, the reknowned library that is now a part of Moonglow.");
 		}
 		if (var0002 == 0x000E) {
 			say("~~ ~~ENCYCLOPEDIA BRITANNIA~~ ~~Volume III. M - P.*");
+			// TYPO: Should be "originator"
 			say("     Here is another volume in a long series of books detailing every known geographical location and historical personage. This tome covers Kanos, an historical tower in ancient Yew, through Pusmoran, the orginator of the rarely-used fourth person point of view.");
 		}
 		if (var0002 == 0x000F) {
 			say("~~ ~~ENCYCLOPEDIA BRITANNIA~~ ~~Volume IV. Q - U.*");
+			// TYPO: Should be "mythological"
 			say("     Here is another volume in a long series of books detailing every known geographical location and historical personage. This book covers Quaaxetlornicom, the mythilogical snow beast of the North, through, Utopia, the proposed manifestation of the time-honored concept of a perfect society.");
 		}
 		if (var0002 == 0x0010) {
@@ -3174,10 +3190,12 @@ void Func0282 shape#(0x282) () {
 		}
 		if (var0002 == 0x0015) {
 			say("~~ ~~MURDER BY MONGBAT~~ ~~by J. Dial.*");
+			// TYPO: Should be "extraordinary"
 			say("     This extraordianary work depicts an enthralling, but far too gory thriller. Chapter after chapter describes innovative and impressive ways to disembowel people and animals.");
 		}
 		if (var0002 == 0x0016) {
 			say("~~ ~~DOLPHIN IN THE DUNES~~ ~~by Pietre Hueman.*");
+			// TYPO: Should be "undertones"
 			say("     Contained within the pages of this book is what seems to be an allegory for human familial relations. The work is obviously fiction, but the understones suggest extensive study on Hueman's part. Halfway through the work, the point of view shifts, permitting the reader to see multiple sides of each issue.");
 		}
 		if (var0002 == 0x0017) {
@@ -3239,6 +3257,7 @@ void Func0282 shape#(0x282) () {
 		}
 		if (var0002 == 0x0022) {
 			say("~~ ~~KARENNA'S TOTAL BODY WORKOUT~~ ~~by Karenna.*");
+			// TYPO: Should be "received"
 			say("     Found upon the pages of this combat and exercise training manual are words that expand upon the original edition. Sadly, this work has recieved much less attention than Karenna's other two.");
 		}
 		if (var0002 == 0x0023) {
@@ -3259,18 +3278,21 @@ void Func0282 shape#(0x282) () {
 		}
 		if (var0002 == 0x0027) {
 			say("~~ ~~THE APOTHECARY'S DESK REFERENCE~~ ~~by Fetoau*");
+			// TYPO: Should be "alchemical"
 			say("     It is the author's expectation that thou art reading this to familiarize thyself with the effects of various potions based on their color. The first part of this work will discuss such aspects, with the remaining pages covering the materials and steps required to make such alchemal creations.*");
 			say("     Definitions:~~Black potion: Drinking this will render the individual invisible for several minutes.~Blue potion: This mixture will put the imbiber into a deep sleep.~Orange potion: This potion will awaken an individual who was magically put to sleep.~Purple potion: This concoction will provide magical protection for several minutes of hard fighting.~White potion: This potion will provide a small bit of illumination, much like a candle, for a few minutes.~ Yellow potion: This powerful mixture will give healing aid to the imbiber's wounds.~~WARNING: Green potion: This potion is a dangerous toxin, and will poison the imbiber, possibly killing the individual.~ Red potion: This fabulous drink will cure most poisons, including those acquired from the slugs in the swamps and that gained from drinking a GREEN potion.*");
 			say("     This next section details how one can best recreate these uncanny concoctions...");
 		}
 		if (var0002 == 0x0028) {
 			say("~~ ~~MAGIC AND THE ART OF HORSE-AND-WAGON MAINTENANCE*");
+			// TYPO: Should be "possessions"
 			say("     This lengthy tome contains wonderous jewels of wisdom concerning all aspects of life. The words exalt the value of basic, common pleasures and denounce the relevance that material possesions have to happiness. The philosophy is simple enough to be easily grasped, yet complete enough to be quite comprehensive.~");
 			say("     The main irony of the title is apparent to anyone who has ever cared for a horse, for, as any stablemaster or horse owner can attest, horses need no food or rest.");
 		}
 		if (var0002 == 0x0029) {
 			say("~~ ~~JESSE'S BOOK OF PERFORMANCE ART~~ ~~by Jesse.*");
 			say("     This anthology is filled with many performance art scripts. The author, a controversial and eccentric Britannian actor, maintains that many aspects of both acting and performance art are quite similar.~");
+			// TYPO: Should be "playwright"
 			say("     ...Consider the actor. He uses dialogue, facial changes, and movement to convey his lines. His actions, called a PERFORMANCE, combined with the playwrite's script, express an emotion or a message. The performance artist uses the very same techniques. The one possible exception is that he is both the writer AND the performer. In fact, the practice of many facets of performance art can better an actor's skill...");
 		}
 		if (var0002 == 0x002A) {
@@ -3284,11 +3306,13 @@ void Func0282 shape#(0x282) () {
 		if (var0002 == 0x002C) {
 			say("~~ ~~THE PROVISIONER'S GUIDE TO USEFUL EQUIPMENT~~ ~~by Dell*");
 			say("     While most suppliers will rave about the effectiveness of a good sword or specially fitted armour, I personally feel that proper exploring gear is much more necessary.~");
+			// TYPO: Should be "encounter"
 			say("     Consider this, dear reader. While thou might happen to encouter a wild bear in thy travels, or, even less likely, a troll, thou art doubtless going to be in need of much more mundane equipment.~");
 			say("     With thou possibly be outside city walls when darkness comes? Then buy a torch. And how wilt thou carry thy provisions? A backpack wilt prove necessary. And what about a container for thy refreshment? Purchase a jug or bucket. As for...");
 		}
 		if (var0002 == 0x002D) {
 			say("~~ ~~THE ACCEDENS OF ARMOURY~~ ~~by Legh*");
+			// TYPO: Should be "conception"
 			say("     This book on heraldry not only describes various houses for ease of recognition, but also demonstrates elements used in their concepton. Thus, this book will also permit the reader to formalize an heraldric symbol of his own.");
 		}
 		if (var0002 == 0x002E) {
@@ -3298,6 +3322,7 @@ void Func0282 shape#(0x282) () {
 		}
 		if (var0002 == 0x002F) {
 			say("~~ ~~WHAT COLOR IS THY BLADE? ~~ ~~by Menion*");
+			// TYPO: Should be "extremely"
 			say("The first step in effective sword-forging is to fill a crucible with metal. Then, with the bellows, the fire should be made extrememly hot When the flame no longer continues to grow in its glow, set the crucible on the fire to melt the metal.~");
 			say("     Afterwards, pour the molten metal\tinto the blade mold and let it cool. Be warned! The crucible is at an extremely high temperature. Lift the cooled blade from the mold. Again heat up the fire and set the blade within. Be careful not to let it lose its shape though. Just set it in there long enough for the blade to become malleable.~");
 			say("     When it is ready, finish shaping it on the anvil with the hammer. When thou hast formed a blade of the desired shape, use the quenching barrel to cool the metal. It will harden quickly, so make sure the blade is as sharp as thou dost want it to be.~");
@@ -3351,13 +3376,16 @@ void Func0282 shape#(0x282) () {
 		}
 		if (var0002 == 0x0039) {
 			say("~~ ~~TWO IN THE FOLD~~ ~~by Morian*");
+			// TYPO: Should be "guards"
 			say("     Herein lies a fable of treachery in the fair city of Britain. A despicable guild of thieves who seek political power in the government sends two of its best members to infiltrate the Royal castle. The true conflict arises when two of the Royal gaurds begin to bicker so violently with each other that they miss important pieces if evidence that lead to the two thieves.");
 		}
 		if (var0002 == 0x003A) {
 			say("~~ ~~THE FOREST OF YEW~~ ~~by Taylor*");
 			say("     Though once the large, prosperous city of Justice, Yew has been swallowed by the Deep Forest. However, let not it be said that this turn of events was not by the will of the people.~");
+			// TYPO: Should be "existances"
 			say("     As the cities grew throughout the land, many found it difficult to continue peaceful existances as simple farmers and herders. More and more it became necessary to learn trades involving the exchange of goods and services, and the was considerably less instances of of self-sufficiency. While most Britannian found this pleasing, there were those who wanted a return to the less mechanical side of life.~");
 			say("     And those same people, many of whom came from Yew, began to populate the Deep Forest. Though it will not be long before the growing cities and towns catch up to them, for now, many are able to lose themselves amongst the trees, the deer, and the Emps.~");
+			// TYPO: Should be "never"
 			say("     Oddly enough, very few people have actually encountered these ape-like creatures. Little is known about them, they seem to shun human contact. However, observations have revealed that they are definitely herbivores, nevering eating meat. The Emps forge homes from the wood of dead trees, and built shelters high up in the limbs of Silverleaf trees.~");
 			say("     Of course, Emps are not the only creatures who...");
 		}
@@ -3375,6 +3403,7 @@ void Func0282 shape#(0x282) () {
 		}
 		if (var0002 == 0x003E) {
 			say("~~ ~~WHAT COULD BE LEFT BUT THE ASHES~~ ~~by N. Flaims*");
+			// TYPO: Should be "in-depth", "testimonials"
 			say("     Herein are the many essays covering an indepth study of the aftermath of a volcanic eruption. The work was extensively researched, and is filled with testamonials from many a survivor. The most interesting story is told by Fendora, a young woman from Minoc, who claims to have experienced a volcanic eruption near every one of the five towns in which she has lived.");
 		}
 		if (var0002 == 0x003F) {
@@ -3447,11 +3476,13 @@ void Func0282 shape#(0x282) () {
 		}
 		if (var0002 == 0x004E) {
 			say("~~ ~~STEALING THE WIND~~ ~~by Brianna*");
+			// TYPO: Should be "crisscross"
 			say("     Kite-building techniques thou hast never seen before, from the simple box kite to the mind-numbing criscross butterfly. Each kite is presented in several forms, from beginning to end. At the end of the essay is a listing of wind variables and flying styles.");
 		}
 		if (var0002 == 0x004F) {
 			say("~~ ~~BROMMER'S FLORA~~ ~~by Brommer*");
 			say("     This large tome describes most of common plants indigenous to Britannia.~~");
+			// TYPO: Should be "wrapped"
 			say("  ...The Greer plant is especially fascinating, for it spends most of its life huddled with its leaves wrapperd up in a tight ball. However, every so often, the leaves will unfurl, radiating out from the stem...~~");
 			say("  ...The Reaper is unique in that it is both plant and animal. Resembling a large tree, the Reaper is able capable of self-animation as well as self-locomotion. Reapers have been known to attack those who cause harm to their home (i.e. the forests), but seldom reveal themselves otherwise...");
 		}
@@ -3485,6 +3516,7 @@ void Func0282 shape#(0x282) () {
 		}
 		if (var0002 == 0x0055) {
 			say("~~ ~~HOW TO CONQUER THE WORLD IN THREE EASY STEPS~~ ~~by Maximillian the Amazingly Mean*");
+			// TYPO: Should be "megalomaniac"
 			say("     Found within are the ravings of a deranged meglomaniac cleric, describing his plans for the domination of Britannia.");
 			say("     ...and after I have acquired the Vas Corp spell, there will be no one to defy me, for all will fear my casting of the spell. Even the loft Lord Brit, himself, will offer his obeisance to me...");
 		}
@@ -3498,10 +3530,13 @@ void Func0282 shape#(0x282) () {
 		}
 		if (var0002 == 0x0058) {
 			say("~~ ~~MY CUP RUNNETH OVER~~ ~~by Marseine*");
+			// TYPO: Should be "techniques"
 			say("     This illustrious volume holds many detailed instructions for neophyte vintners. The books even includes tips on selecting choice grapes and proper labeling techiniques. The tome lists several monks from the Brotherhood of the Rose as sources.");
 		}
 		if (var0002 == 0x0059) {
+			// TYPO: Should be "AUTUMN"
 			say("~~ ~~SPRING PLANTING, AUTUMNM HARVEST*");
+			// TYPO: Should be "explanation"
 			say("     Held within these pages is the explaination of agriculture in detail, including the much misunderstood mulching process. The middle section is an illustrated guide to many gardening implements.");
 		}
 		if (var0002 == 0x005A) {
@@ -3528,6 +3563,7 @@ void Func0282 shape#(0x282) () {
 		}
 		if (var0002 == 0x005F) {
 			say("~~ ~~WHEN STARTS THE ADVENTURE~~ ~~by Sabra*");
+			// TYPO: Should be "ideology"
 			say("     Herein can be found a novel relating the travels of a fledgling warrior, struggling to gain skill and respect in a treacherous world. As the warrior gains experience in dealing with opposition, he begins to notice how well the land is balanced in ideaology:  for every evil, there seems to be a good, and vice-versa.");
 		}
 		if (var0002 == 0x0060) {
@@ -3535,6 +3571,7 @@ void Func0282 shape#(0x282) () {
 			say("     Within the pages of this book is the story of a bard, a blonde, and a bottle -- the perfect combination for a classic tale of the war between the sexes.");
 		}
 		if (var0002 == 0x0061) {
+			// TYPO: Should be "COMPLETE"
 			say("~~ ~~THE COMPLEATE HISTORY OF THE LUTE~~ ~~by Devonaillion, with foreword by the Master Bard, Iolo*");
 			say("     Herein are the words penned by the illustrious master lute-player, himself. The voluminous work begins with a description of the building process and carefully leads into the music theory. I heartfully and willingly share my title with this young and very talented virtuoso, and recommend that thee follow his words of wisdom well~");
 			say("          -- Iolo Arbalest");
@@ -3542,6 +3579,7 @@ void Func0282 shape#(0x282) () {
 		if (var0002 == 0x0062) {
 			say("~~ ~~BIRDS OF BRITANNIA~~ ~~by Brother Wayne*");
 			say("     Bound here is the comprehensive guide to the avian species, beautifully and colorfully illustrated by many different artists.");
+			// TYPO: Should be "prevalent"
 			say("     ...Surprising to many is that the Silver-Winged Pharcelot is not the most prevelent bird in Britannia, though arguably the most visible. Far more popular is the Black-Tipped Grackle, but it's predilection for dark, cool areas make is considerable less visible.");
 		}
 		if (var0002 == 0x0063) {
@@ -3577,6 +3615,7 @@ void Func0284 shape#(0x284) () {
 
 void Func0285 shape#(0x285) () {
 	if (event == DOUBLECLICK) {
+		// TYPO: Should be "Britain"
 		var var0000 = "@I believe that the current exchange rate is " + "ten crowns per nugget at the mint in Britian.@";
 		Func08FF(var0000);
 	}
@@ -4480,6 +4519,7 @@ void Func02CB shape#(0x2CB) () {
 			UI_display_runes(0x0032, ["\{dot}charles\{dot}c\{dot}", "guest", "victim"]);
 		}
 		if (var0001 == 0x001D) {
+			// TYPO: Should be "departed"
 			UI_display_runes(0x0032, ["\{dot}danny\{dot}", "dearly", "depainted"]);
 		}
 		if (var0001 == 0x001E) {
@@ -4543,6 +4583,7 @@ void Func02CB shape#(0x2CB) () {
 			UI_display_runes(0x0032, ["\{dot}raymond\{dot}", "\{th}e\{dot}world", "is\{dot}not", "enough"]);
 		}
 		if (var0001 == 0x0032) {
+			// TYPO: Should be "garrote"
 			UI_display_runes(0x0032, ["\{dot}Beth\{dot}", "died", "by", "garriot"]);
 		}
 		if (var0001 == 0x0033) {
@@ -4567,6 +4608,7 @@ void Func02CB shape#(0x2CB) () {
 			UI_display_runes(0x0032, ["\{dot}j\{dot}shelton", "here\{dot}i\{dot}lie", "but\{dot}\{st}ill", "i\{dot}roam"]);
 		}
 		if (var0001 == 0x003A) {
+			// TYPO: Should be "underground"
 			UI_display_runes(0x0032, ["\{dot}marco\{dot}", "underfed", "under\{dot}gun", "undergrnd"]);
 		}
 		if (var0001 == 0x003B) {
@@ -4594,6 +4636,7 @@ void Func02CB shape#(0x2CB) () {
 			UI_display_runes(0x0032, ["\{dot}scott\{dot}", "buried\{dot}an", "axe\{dot}in", "his\{dot}h\{ea}d"]);
 		}
 		if (var0001 == 0x0043) {
+			// Caesar joke: I came, I saw, I left
 			UI_display_runes(0x0032, ["\{dot}duke\{dot}", "veni", "vidi", "exii"]);
 		}
 		if (var0001 == 0x0044) {
@@ -4630,6 +4673,7 @@ void Func02CB shape#(0x2CB) () {
 			UI_display_runes(0x0032, ["\{dot}jackie\{dot}", "d\{dot}", "as\{dot}in\{dot}d\{dot}", "for", "dinner"]);
 		}
 		if (var0001 == 0x004F) {
+		// TYPO: Should be "attained" maybe?
 			UI_display_runes(0x0032, ["\{dot}b\{dot}adams\{dot}", "spained", "a", "perfect", "record"]);
 		}
 		if (var0001 == 0x0050) {
@@ -5597,7 +5641,9 @@ void Func031D shape#(0x31D) () {
 		return;
 	}
 	if (var0000 == 0x0004) {
+		// TYPO: Should be "Punitive"
 		say("Bill of Punative Action for the Distribution of Waste Products in Lock Lake~~78934979.S3, section 835~~");
+		// TYPO: Should be "referred"
 		say("Whereby the members of the offending party shall be immersed in the lake, heretofore refered to as Lock Lake, up to their necks for not more than three consecutive days and not fewer than...");
 		return;
 	}
@@ -5637,6 +5683,7 @@ void Func031D shape#(0x31D) () {
 		return;
 	}
 	if (var0000 == 0x000B) {
+		// TYPO: Should be "ensure", "octagonal"
 		say("The Narwhal shall be a fine, fine vessel, measuring 100 cubits from bow to stern. She shall be constructed of the finest Yew wood, with a ballast of thirty-seven cubits. After the planks are retrograded, I shall preceriprocate the bottom decks to insure their verbosity.~Each bunk shall fit exactly within the 3 foot by four 14 cubit cabin, except for the first mate and sergeant's quarters, which will be octagnal the size...~~ ~~Owen of Minoc");
 		return;
 	}
@@ -5710,6 +5757,7 @@ void Func031D shape#(0x31D) () {
 		return;
 	}
 	if (var0000 == 0x001B) {
+		// TYPO: Should be "Diligence"
 		say("~~Between these columns, upon this pedestal, once sat the CODEX OF ULTIMATE WISDOM.~~Now it lies in the infinite darkness of the Void, forever shining as a beacon of knowledge to the races of man and gargoyle.~~Those who would seek the wisdom contained therein must unite the mystic lenses in the same manner as the Avatar did more than two hundred years ago.~Lord British~~To search for Singularity through Control, Passion, and Dilligence.~~Lord Draxinusom");
 		return;
 	}
@@ -5733,6 +5781,7 @@ void Func031D shape#(0x31D) () {
 	}
 	if (var0000 == 0x0020) {
 		say("Bill of Cabin Construction Near Granite Zoned Districts~~ 48923013.Q4, section 193~~");
+		// TYPO: Should be "complaints"
 		say("Whereby the participants belonging to the Stone Masons's Guild may register compliants unto the party of the Cabin Builders, represented here as and/or by members for the Wood-Builders Guild with the intent of...");
 		return;
 	}
@@ -5772,6 +5821,7 @@ void Func031D shape#(0x31D) () {
 	}
 	if (var0000 == 0x0028) {
 		say("~     Selwyn's Last Will:~~");
+		// TYPO: Should be "hereby"
 		say("     I do hearby bequeath my firedoom staff to anyone who is mighty and cunning enough to penetrate the defenses of my fortress and slay my pet.~~");
 		say("     May all who read this rot in death!~");
 		say("          Selwyn");
@@ -5806,6 +5856,7 @@ void Func031D shape#(0x31D) () {
 		say("Day 3: I found a large chamber, one in which I can see fully its entire contents. Yet, there are invisible barriers that prevent me from entering.");
 		say("Day 4: The barriers are not what I first suspected. They are walls. I can see the exit, and yet I cannot reach it. This is maddening!");
 		say("Day 5: I wish I had brought more rations. I did not expect to be caught like this. I will starve soon if I do not find the way out... and food and water!");
+		// TYPO: Should be "see" and "help"
 		say("Day: I am still without food and whales... I seee but cannot... well hilp arrive in time!? I think but am thoughtful...");
 		return;
 	}
@@ -5814,11 +5865,13 @@ void Func031D shape#(0x31D) () {
 		return;
 	}
 	if (var0000 == 0x0031) {
+		// TYPO: Should be "reflect"
 		say("... I write this with what little hope I have left. Frenke has now died -- killed by shooting balls of flame. I will attempt to navigate the treacherous tunnel of fire alone. Should my quest succeed, I will emerge the Avatar. I relflect not upon my other destiny...");
 		say("     This will be my last entry. My ink is all but gone, much like my will. I no longer marvel at how a man can give up, like the poor fool we found at the end of the invisible maze. But I refuse to succumb to the call of my weary bones. I will trudge on.");
 		return;
 	}
 	if (var0000 == 0x0032) {
+		// TYPO: Should be "InfinityAction"
 		say("       SCROLL OF INFINITY~~ artifact TalismanOfInfinity -~ if Reality is Magic -~ if Locale(Artifact) is Void -~ Convex is FindInBritannia(ConvexLens)~ Concave is FindInBritannia(ConcaveLens)~ ~ if DoLightTest(Concave, Convex) -~ TalismanList is BritanniaSearch(Talisman)~ ~~ Counter is 0~ foreach Talisman in TalismanList -~ if KnowType(Talisman) is Truth -~ Counter is Counter and 1~ --~ if KnowType(Talisman) is Love -~ Counter is Counter and 1~ --~ if KnowType(Talisman) is Courage -~ Counter is Counter and 1~ --~ ~ if Counter is 3 -~ DoVoidAccess()~ ~~ InifinityAction is Action(Instance,~ aPlanarTravel, Britannia,~ aCallBack, TalismanOfInfinity)~ --~ if Reality is PseudoScience -~ EvilEntity is EntitySearch(All, Powerful, Evil)~ if EvilEntity -~ Check is PushReality(EvilEntity)~ if not Check -~ Test(\"Thou shalt never see this!\")");
 		return;
 	}
@@ -6818,6 +6871,7 @@ void Func0350 shape#(0x350) () {
 
 void Func0353 shape#(0x353) () {
 	if (event == DOUBLECLICK) {
+		// TYPO: Should be "perhaps"
 		var var0000 = "@That appears to be fine cloth, no doubt it would fetch " + "a fair price in Minoc. Or, perhapse, thou couldst cut " + "it into bandages with shears.@";
 		Func08FF(var0000);
 	}
@@ -6879,6 +6933,7 @@ void Func0356 shape#(0x356) () {
 		if (var0000 == 0x000F) {
 			SHRINE_OF_PRINCIPLE->show_npc_face(0x0002);
 			if (gflags[BANISHED_EXODUS]) {
+				// TYPO: Should be "remembered"
 				say("\"Thine onus is abated and Britannia is free of Exodus' grasp once more. Thy deeds will long be rembered as the most courageous in the history of this land.\"*");
 				abort;
 			}
@@ -6977,6 +7032,7 @@ void Func0356 shape#(0x356) () {
 				};
 			} else {
 				SHRINE_OF_PRINCIPLE->show_npc_face(0x0001);
+				// TYPO: Should be "formidable"
 				say("\"Now hast thou earnestly experienced all that is Love. 'Tis a benefit never to be taken lightly, for Love is a formidible motivator. Remember always the lessons in Compassion, Sacrifice, and Justice thou hast mastered.\"");
 				say("The voice of the Keeper of Love fills with compassion as she speaks. \"Do have a care, Avatar. For a great evil stirs within Britannia, I know not the source.\"*");
 				gflags[CAN_TALK_SHRINE_OF_PRINCIPLE] = false;
@@ -7506,6 +7562,7 @@ void Func03F7 shape#(0x3F7) () {
 				if (!gflags[ADJHAR_READ_BOOK]) {
 					var var0000 = Func0931(PARTY, 0x0001, 0x0282, 0x0090, FRAME_ANY);
 					if (var0000) {
+						// TYPO: Should be "possession"
 						say("\"Hast thou in thy possesion the book on the Stone of Castambre?\"");
 						if (Func090A()) {
 							say("His eyes reveal his hope. As he takes the book from you, it almost appears as if he is smiling.\"");
@@ -8556,6 +8613,7 @@ void FuncDupre object#(FIRST_NPC_FUNCTION - DUPRE) () {
 						say("\"Right now the town is buzzing about three local fighters, all of whom have challenged another man to a duel. The challenged one's name is Sprellic.\"");
 						add(["fighters", "Sprellic"]);
 					} else {
+						// TYPO: Should be "smitten"
 						say("\"Perhaps now that several of Jhelom's local ruffians have been well smited things in that town will calm down. Although I doubt they will for long.\"");
 					}
 				} else {
@@ -9879,6 +9937,7 @@ void FuncTseramed object#(FIRST_NPC_FUNCTION - TSERAMED) () {
 				}
 				if (var001F == 0x0002) {
 					var000C = true;
+					// TYPO: Shuold be "hum"
 					say("\"North of my hut is a deep bore-hole into the mountains. Within live bees of a size to rival sheep, or hounds. Their wings stir up leaves as they fly, and they humm with a noise to make men flee in fear.\"");
 					say("\"Some have entered, never to return. Perhaps they are there still... Death is greedy, and holds a fate for those of like intent.\"");
 					add(["mountains", "bees", "death"]);
@@ -10129,6 +10188,7 @@ void FuncTseramed object#(FIRST_NPC_FUNCTION - TSERAMED) () {
 							if (UI_is_pc_female() == 0x0001) {
 								var002A = "Thou art more fair by far than any likeness in stone could portray.";
 							}
+							// TYPO: should be "acquaintance"
 							say("\"Noble hero, it is an honor to make thine aquaintance. ",
 								var002A,
 								"\"");
@@ -11973,6 +12033,7 @@ labelFuncLordBritish_000C:
 				case "Isle of Fire":
 					say("\"",
 						var0001,
+						// TYPO: whould be "Principles"
 						", thou shouldst know that when I created the shrines of the Virtues, I also set upon this island three great shrines, dedicated to the Priciples of Truth, Love, and Courage.");
 					say("They reside within the walls of the Castle of Fire. I never revealed this to thee before as I thought them forever lost when the Isle of Fire mysteriously sank beneath the waves.");
 					say("The shrines are meant for the use of an Avatar only, and therefore a talisman will be necessary to use one.");
