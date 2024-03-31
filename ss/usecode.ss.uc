@@ -63360,6 +63360,9 @@ void FuncMetalMan object#(FIRST_NPC_FUNCTION - METAL_MAN)() {
 			var0001 = find_nearby(0x03A7, 0x0014, MASK_NONE);
 			for (var000A in var0001) {
 				var0006 = var000A->set_item_quality(0x0093);
+				// BUG: This should have been var0004 instead of var0001.
+				// As is, it works by luck as var0004 is kept from the previous
+				// loop.
 				var0001 = find_nearby(0x0314, 0x0014, MASK_NONE);
 				var0005 = var0004->get_item_quality();
 				if (var0005 == 0x0093) {
