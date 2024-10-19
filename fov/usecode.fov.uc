@@ -8386,7 +8386,7 @@ void Func0334 shape#(SHAPE_PLAQUE) () {
 			Func08FE(["", "@He's dead, Avatar!@", "@Yancey-Hausman will pay!@"]);
 			var0007 = script AVATAR {
 				nohalt;
-				speech 26;
+				speech SPEECH_GUARDIAN_PRECISELY;
 			};
 			return;
 		}
@@ -15240,7 +15240,7 @@ void FuncBatlin object#(FIRST_NPC_FUNCTION - BATLIN)() {
 					}
 					var var0003 = script item {
 						nohalt;
-						speech 23;
+						speech SPEECH_GUARDIAN_WELL_DONE;
 					};
 					abort;
 				}
@@ -52586,7 +52586,7 @@ void Func0607 object#(0x607) () {
 
 void Func0608 object#(0x608) () {
 	if (event == EGG) {
-		Func0941(0x000D);
+		Func0941(SPEECH_GUARDIAN_STOP_AVATAR);
 		var var0000 = UI_is_pc_female();
 		BATLIN->say("\"Avatar! Stop where thou art! Thou shalt not succeed in "
 					"thy quest to destroy the Black Gate! Art thou mad??! The "
@@ -53148,98 +53148,99 @@ void Func0613 object#(0x613) () {
 void Func0614 object#(0x614) () {
 	UUUNGH->show_npc_face(0x0000);
 	var var0000 = UI_get_speech_track();
-	if (var0000 == 0x0001) {
+	if (var0000 == SPEECH_GUARDIAN_REST) {
 		say("\"Yes, rest, my friend. Rest and heal, so that you are strong and "
 			"able to face the perils before you. Pleasant dreams!\"");
 		UUUNGH->hide();
 		return;
 	}
-	if (var0000 == 0x0002) {
+	if (var0000 == SPEECH_GUARDIAN_GO_INSIDE) {
 		say("\"Go inside. Tell them you are the Avatar!\"");
 		UUUNGH->hide();
 		return;
 	}
-	if (var0000 == 0x0003) {
+	if (var0000 == SPEECH_GUARDIAN_THANKS_NOTEBOOK) {
 		say("\"Thank you for the information in the notebook, Avatar! It was "
 			"most useful! Ha ha ha ha ha!\"");
 		UUUNGH->hide();
 		return;
 	}
-	if (var0000 == 0x0004) {
+	if (var0000 == SPEECH_GUARDIAN_TRAP_WARNING) {
 		say("\"Do not go in! It is a trap! Do you not see? It is a trap!\"");
 		UUUNGH->hide();
 		return;
 	}
-	if (var0000 == 0x0005) {
+	if (var0000 == SPEECH_GUARDIAN_DONT_TRUST_TIME_LORD) {
 		say("\"You are not going to trust the Time Lord are you? Careful, my "
 			"friend -- do not believe him!\"");
 		UUUNGH->hide();
 		return;
 	}
-	if (var0000 == 0x0006) {
+	if (var0000 == SPEECH_GUARDIAN_SURE_DEATH) {
 		say("\"Do not go in! You will surely die!\"");
 		UUUNGH->hide();
 		return;
 	}
-	if (var0000 == 0x0007) {
+	if (var0000 == SPEECH_GUARDIAN_NOT_WELCOME) {
 		say("\"Avatar, you are not welcome here!\"");
 		UUUNGH->hide();
 		return;
 	}
-	if (var0000 == 0x0008) {
+	if (var0000 == SPEECH_GUARDIAN_THINK_AGAIN) {
 		say("\"Are you sure? Think again!\"");
 		UUUNGH->hide();
 		return;
 	}
-	if (var0000 == 0x0009) {
+	if (var0000 == SPEECH_GUARDIAN_ONE_TRUE_ONE_FALSE) {
 		say("\"At least one sign is true, and at least one sign is false.\"");
 		UUUNGH->hide();
 		return;
 	}
-	if (var0000 == 0x000A) {
+	if (var0000 == SPEECH_GUARDIAN_TWO_TRUE_OR_FALSE) {
 		say("\"Two of these signs are either true or false!\"");
 		UUUNGH->hide();
 		return;
 	}
-	if (var0000 == 0x000B) {
+	if (var0000 == SPEECH_GUARDIAN_NO_THINK_AGAIN) {
 		say("\"No no no! Think again!\"");
 		UUUNGH->hide();
 		return;
 	}
-	if (var0000 == 0x000C) {
+	if (var0000 == SPEECH_GUARDIAN_EITHER_TRUE_OR_FALSE) {
 		say("\"Each sign could be either true or false!\"");
 		UUUNGH->hide();
 		return;
 	}
-	if (var0000 == 0x000D) {
+	if (var0000 == SPEECH_GUARDIAN_STOP_AVATAR) {
 		say("\"Stop the Avatar! I will come through the Black Gate now! Do not "
 			"let him near!\"");
 		UUUNGH->hide();
 		return;
 	}
-	if (var0000 == 0x000E) {
+	if (var0000 == SPEECH_GUARDIAN_MOMENT_OF_TRUTH) {
 		say("\"So, Avatar! The moment of truth has come! You can destroy the "
 			"Black Gate, but you will never return to your beloved Earth. Or "
 			"you can come through now and go home! It is your choice!\"");
 		UUUNGH->hide();
 		return;
 	}
-	if ((var0000 > 0x0011) && (var0000 < 0x0016)) {
+	if (var0000 > (SPEECH_GUARDIAN_LAUGH_RANGE_START - 1)
+			&& var0000 < (SPEECH_GUARDIAN_LAUGH_RANGE_END + 1)) {
 		say("\"Ha ha ha ha ha ha!\"*");
 		UUUNGH->hide();
 		return;
 	}
-	if (var0000 == 0x0016) {
+	if (var0000 == SPEECH_GUARDIAN_POOR_AVATAR) {
 		say("\"Poor Avatar... poor, poor Avatar...\"");
 		UUUNGH->hide();
 		return;
 	}
-	if (var0000 == 0x0017) {
+	if (var0000 == SPEECH_GUARDIAN_WELL_DONE) {
 		say("\"Well done, my friend! You are truly an Avatar!\"");
 		UUUNGH->hide();
 		return;
 	}
-	if (var0000 == 0x0018) {
+	if (var0000 == SPEECH_GUARDIAN_WRONG_DIRECTION) {
 		say("\"You are travelling in the wrong direction, my friend!\"");
 		UUUNGH->hide();
 		return;
@@ -53249,27 +53250,27 @@ void Func0614 object#(0x614) () {
 		UUUNGH->hide();
 		return;
 	}
-	if (var0000 == 0x001A) {
+	if (var0000 == SPEECH_GUARDIAN_PRECISELY) {
 		say("\"That is precisely the thing to do, Avatar!\"");
 		UUUNGH->hide();
 		return;
 	}
-	if (var0000 == 0x001B) {
+	if (var0000 == SPEECH_GUARDIAN_BEST_NOT_DO) {
 		say("\"You had best not do that, Avatar!\"");
 		UUUNGH->hide();
 		return;
 	}
-	if (var0000 == 0x001C) {
+	if (var0000 == SPEECH_GUARDIAN_KNOW_WHERE_GOING) {
 		say("\"Do you really know where you are going, Avatar?\"");
 		UUUNGH->hide();
 		return;
 	}
-	if (var0000 == 0x001D) {
+	if (var0000 == SPEECH_GUARDIAN_PROPER_DIRECTION) {
 		say("\"Yes, that is the proper direction to travel, Avatar.\"");
 		UUUNGH->hide();
 		return;
 	}
-	if (var0000 > 0x001D) {
+	if (var0000 > SPEECH_GUARDIAN_PROPER_DIRECTION) {
 		say("\"Ha ha ha ha ha ha!\"");
 		UUUNGH->hide();
 		return;
@@ -53712,8 +53713,8 @@ void Func0622 object#(0x622) () {
 			say("\"Pleasant dreams.\"");
 			var0001->hide();
 		}
-		if (UI_die_roll(0x0001, 0x0004) == 0x0001) {
-			Func0940(0x0001);
+		if (UI_die_roll(1, 4) == 1) {
+			Func0940(SPEECH_GUARDIAN_REST);
 		}
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
 		var var0009 = var0002 * 0x05DC;
@@ -55372,7 +55373,7 @@ void Func063A object#(0x63A) () {
 		var var0000 = UI_get_array_size(UI_get_party_list());
 		var var0001 = UI_die_roll(1, 4);
 		if (var0001 == 1) {
-			Func0940(0x001B);
+			Func0940(SPEECH_GUARDIAN_BEST_NOT_DO);
 		}
 		if (var0000 == 1) {
 			return;
@@ -55456,7 +55457,7 @@ void Func063E object#(0x63E) () {
 		// BUG: using 0x56 as object. This probably should have been something
 		// like this instead:
 		// var0000 = script item {
-		//	speech 21;
+		//	speech SPEECH_GUARDIAN_LAUGH_RANGE_END;
 		//};
 		var0000 = UI_execute_usecode_array((byte)0x56, 0x0015);
 		var var0002 = UI_get_party_list();
@@ -60844,7 +60845,7 @@ void Func06D6 object#(0x6D6) () {
 void Func06D7 object#(0x6D7) () {
 	if (event == EGG) {
 		if (gflags[MET_TIME_LORD]) {
-			Func0940(0x0005);
+			Func0940(SPEECH_GUARDIAN_DONT_TRUST_TIME_LORD);
 			remove_item();
 		}
 	}
@@ -60853,7 +60854,7 @@ void Func06D7 object#(0x6D7) () {
 void Func06D8 object#(0x6D8) () {
 	if (event == EGG) {
 		if (gflags[WISP_READ_NOTEBOOK]) {
-			Func0940(0x0003);
+			Func0940(SPEECH_GUARDIAN_THANKS_NOTEBOOK);
 			remove_item();
 		}
 	}
@@ -60862,7 +60863,7 @@ void Func06D8 object#(0x6D8) () {
 void Func06D9 object#(0x6D9) () {
 	if (event == EGG) {
 		if (gflags[CHEST_QUEST]) {
-			Func0940(0x0004);
+			Func0940(SPEECH_GUARDIAN_TRAP_WARNING);
 			remove_item();
 		}
 	}
@@ -65304,7 +65305,7 @@ var Func082E 0x82E (var var0000) {
 				var000D->remove_item();
 			}
 			if (var000D) {
-				Func0940(0x000E);
+				Func0940(SPEECH_GUARDIAN_MOMENT_OF_TRUTH);
 			}
 		} else {
 			for (var000D in var0001) {
