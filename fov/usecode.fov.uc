@@ -1051,7 +1051,7 @@ void Func00FB shape#(SHAPE_SAILS) () {
 			Func0830(var0001, 0);
 			clear_item_flag(ON_MOVING_BARGE);
 			clear_item_flag(ACTIVE_BARGE);
-			UI_play_music(0x00FF, 0x0000);
+			UI_play_music(MUSIC_STOP, NULL_OBJ);
 		}
 	}
 }
@@ -1152,7 +1152,7 @@ void Func0105 shape#(SHAPE_LOOM) () {
 
 void Func010B shape#(SHAPE_MYSTERIOUS_CRAFT) () {
 	if (event == DOUBLECLICK) {
-		UI_play_music(0x0027, item);
+		UI_play_music(MUSIC_PRINCE_THRAKHATHS_THEME, item);
 	}
 }
 
@@ -5437,31 +5437,31 @@ void Func02A6 shape#(SHAPE_CURTAINS_EW) () {
 
 void Func02B1 shape#(SHAPE_HARPSICORD) () {
 	if (event == DOUBLECLICK) {
-		UI_play_music(0x0039, item);
+		UI_play_music(MUSIC_HARPSICHORD, item);
 	}
 }
 
 void Func02B2 shape#(SHAPE_XYLOPHONE) () {
 	if (event == DOUBLECLICK) {
-		UI_play_music(0x0038, item);
+		UI_play_music(MUSIC_XYLOPHONE, item);
 	}
 }
 
 void Func02B3 shape#(SHAPE_LYRE) () {
 	if (event == DOUBLECLICK) {
-		UI_play_music(0x003A, item);
+		UI_play_music(MUSIC_HARP, item);
 	}
 }
 
 void Func02B4 shape#(SHAPE_LUTE) () {
 	if (event == DOUBLECLICK) {
-		UI_play_music(0x003B, item);
+		UI_play_music(MUSIC_LUTE, item);
 	}
 }
 
 void Func02B5 shape#(SHAPE_WHISTLE) () {
 	if (event == DOUBLECLICK) {
-		UI_play_music(0x0037, item);
+		UI_play_music(MUSIC_WISP_CALL, item);
 		if (get_item_frame() == FRAME_WHISTLE_WISP_WHISTLE) {
 			UI_close_gumps();
 			var var0000 = UI_find_nearby_avatar(SHAPE_WISP);
@@ -6579,7 +6579,7 @@ void Func02E8 shape#(SHAPE_TELESCOPE) () {
 
 void Func02E9 shape#(SHAPE_HARP) () {
 	if (event == DOUBLECLICK) {
-		UI_play_music(0x003A, item);
+		UI_play_music(MUSIC_HARP, item);
 	}
 }
 
@@ -6617,14 +6617,14 @@ void Func02F0 shape#(SHAPE_MUSIC_BOX) () {
 		var var0000 = get_item_frame();
 		if (var0000 == FRAME_MUSIC_BOX_CLOSED) {
 			set_item_frame(FRAME_MUSIC_BOX_OPEN);
-			UI_play_music(0x0029, item);
+			UI_play_music(MUSIC_MUSIC_BOX, item);
 			if (Func08F7(ROWENA)) {
 				gflags[MUSIC_BOX] = true;
 				ROWENA->get_npc_object()->FuncRowena();
 			}
 		} else {
 			set_item_frame(FRAME_MUSIC_BOX_CLOSED);
-			UI_play_music(0x00FF, item);
+			UI_play_music(MUSIC_STOP, item);
 		}
 	}
 }
@@ -6953,7 +6953,7 @@ void Func0311 shape#(SHAPE_ORB_OF_THE_MOONS) () {
 				UI_close_gumps();
 				var var000A = UI_update_last_created(var0001);
 				var0001[var0003] -= 2;
-				UI_play_music(0x0033, 0x0000);
+				UI_play_music(MUSIC_ORB_OF_THE_MOONS, NULL_OBJ);
 				var0009->set_item_flag(TEMPORARY);
 				var000A = var0009->set_item_quality(var0002);
 				var000A = script var0009 {
@@ -8606,7 +8606,7 @@ void Func0348 shape#(SHAPE_FLYING_CARPET) () {
 					nop;
 				};
 			};
-			UI_play_music(0x00FF, 0x0000);
+			UI_play_music(MUSIC_STOP, NULL_OBJ);
 		} else {
 			Func08FF("@I do not believe that we can land here safely.@");
 		}
@@ -8987,7 +8987,7 @@ void Func036C shape#(SHAPE_METAL_WALL_NS) () {
 void Func0378 shape#(SHAPE_HORN) () {
 	if (event == DOUBLECLICK) {
 		if (get_item_frame() == FRAME_HORN_FERRYMAN) {
-			UI_play_music(0x0030, item);
+			UI_play_music(MUSIC_SHRINE_OF_SPIRITUALITY, item);
 			struct<Position> var0000
 					= Func093C(item, find_nearby(SHAPE_HORN, 125, MASK_NONE));
 			if (UI_get_array_size(var0000) == 1) {
@@ -9015,7 +9015,7 @@ void Func0378 shape#(SHAPE_HORN) () {
 				}
 			}
 		} else {
-			UI_play_music(0x0018, item);
+			UI_play_music(MUSIC_FANFARE_OF_LORD_BRITISH, item);
 		}
 	}
 }
@@ -9510,14 +9510,14 @@ void FuncIolo object#(FIRST_NPC_FUNCTION - IOLO)() {
 	if (event == EGG) {
 		if ((!gflags[START_GAME])
 			&& ((!gflags[IOLO_BARKED]) && AVATAR->get_item_flag(DONT_RENDER))) {
-			UI_play_music(0x0023, 0x0000);
+			UI_play_music(MUSIC_FELLOWSHIP_THEME, NULL_OBJ);
 			var0005 = script AVATAR->get_npc_object() after 125 ticks {
 				nohalt;
 				call Func06AA;
 			};
 			var0005 = script IOLO->get_npc_object() {
 				nohalt;
-				music 35, 1;
+				music MUSIC_FELLOWSHIP_THEME, PLAY_REPEAT;
 				say "@There, there...@";
 			};
 			var0005 = script PETRE->get_npc_object() after 16 ticks {
@@ -9612,7 +9612,10 @@ void FuncIolo object#(FIRST_NPC_FUNCTION - IOLO)() {
 		if (!gflags[START_GAME]) {
 			var0005 = script item {
 				nohalt;
-				music 0, 0;
+				// BUG: This was supposed to play some music. But it seems to
+				// play notihng at all. I wonder what music it was supposed
+				// to be?
+				music MUSIC_INVALID, PLAY_ONCE;
 			};
 			gflags[START_GAME] = true;
 		}
@@ -11230,7 +11233,7 @@ void FuncTrellek object#(FIRST_NPC_FUNCTION - TRELLEK)() {
 			remove("talk to wisps");
 			fallthrough;
 		case "Julius":
-			UI_play_music(0x001A, 0x0000);
+			UI_play_music(MUSIC_LOVE_THEME, NULL_OBJ);
 			say("\"Julius was a good human. His great deed was saving Emp "
 				"family from big fire years ago.\" He stares at you "
 				"directly.~~\"But, his story is sad, being about his death "
@@ -22629,7 +22632,7 @@ void FuncNastassia object#(FIRST_NPC_FUNCTION - NASTASSIA)() {
 	if (event == DOUBLECLICK) {
 		var0000 = script item {
 			nohalt;
-			music 26, 1;
+			music MUSIC_LOVE_THEME, PLAY_REPEAT;
 			continue;
 			call FuncNastassia;
 			nop;
@@ -22768,7 +22771,7 @@ void FuncNastassia object#(FIRST_NPC_FUNCTION - NASTASSIA)() {
 					"\"Very well. Please leave me alone.\"*");
 				var0000 = script item {
 					nohalt;
-					music 26, 0;
+					music MUSIC_LOVE_THEME, PLAY_ONCE;
 				};
 				abort;
 			}
@@ -22839,7 +22842,7 @@ void FuncNastassia object#(FIRST_NPC_FUNCTION - NASTASSIA)() {
 	case "bye":
 		var0000 = script item {
 			nohalt;
-			music 26, 0;
+			music MUSIC_LOVE_THEME, PLAY_ONCE;
 		};
 		break;
 	}
@@ -52908,8 +52911,8 @@ void Func060E object#(0x60E) () {
 	declare var var0004;
 	if (event == WEAPON) {
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
-		UI_play_music(0x00FF, 0x0000);
-		UI_play_music(0x0011, 0x0000);
+		UI_play_music(MUSIC_STOP, NULL_OBJ);
+		UI_play_music(MUSIC_WILDERNESS, NULL_OBJ);
 		(@UI_UNKNOWN_83)();
 		var var0000 = get_dead_party();
 		for (var0003 in var0000) {
@@ -53857,7 +53860,7 @@ void Func0625 object#(0x625) () {
 					say("The guard winks. \"I am pleased to see that thou art "
 						"a thinking ",
 						var0006, ". I will take care of this disturbance.\"");
-					UI_play_music(0x00FF, item);
+					UI_play_music(MUSIC_STOP, item);
 					abort;
 				}
 			}
@@ -53890,7 +53893,7 @@ void Func0625 object#(0x625) () {
 		}
 		struct<Position> var0018 = [0x01A4, 0x0127, 0x0000];
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
-		UI_play_music(0x00FF, item);
+		UI_play_music(MUSIC_STOP, item);
 		PARTY->move_object(var0018);
 		var var0019 = AVATAR->find_nearby(SHAPE_WALL_BOTTOM, 10, MASK_NONE);
 		if (var0019 && (Func081B(var0019) == 1)) {
@@ -58333,7 +58336,7 @@ void Func0684 object#(0x684) () {
 				actor frame standing;
 				actor frame cast_up;
 			};
-			UI_play_music(0x000F, 0x0000);
+			UI_play_music(MUSIC_WINNER, NULL_OBJ);
 			UI_sprite_effect(
 					ANIMATION_LIGHTNING, var0002.x, var0002.y, 0, 0, 0,
 					LOOP_ONCE);
@@ -62538,7 +62541,7 @@ void Func06F8 object#(0x6F8) () {
 			}
 			var0015 = UI_update_last_created(var0028);
 			gflags[ERETHIAN_IS_DEAD] = true;
-			UI_play_music(0x0011, 0x0000);
+			UI_play_music(MUSIC_WILDERNESS, NULL_OBJ);
 		}
 		UI_sprite_effect(
 				ANIMATION_LIGHTNING, var0005.x - 2, var0005.y - 2, 0, 0, 0,
@@ -64208,7 +64211,7 @@ void Func0800 0x800 (var var0000) {
 		if (Func0801(item)) {
 			var var000B = script AVATAR {
 				nohalt;
-				music 30, 0;
+				music MUSIC_CAMPING, PLAY_ONCE;
 			};
 		}
 		var var000C = Func093C(AVATAR->get_npc_object(), UI_get_party_list());
@@ -64591,7 +64594,7 @@ void Func0812 0x812 (var var0000) {
 				nop;
 			};
 		};
-		UI_play_music(0x0019, 0x0000);
+		UI_play_music(MUSIC_DRAGONS_FLIGHT, NULL_OBJ);
 		// BUG: this should probably have been 'var0001' instead of 2
 		2->set_item_flag(ON_MOVING_BARGE);
 		var0001->set_item_flag(ACTIVE_BARGE);
@@ -65506,7 +65509,7 @@ void Func0830 0x830 (var var0000, var var0001) {
 		var0003 = 0x0058;
 		var0004 = var0000[1]->find_nearby(SHAPE_MAST, 25, MASK_NONE);
 		var0005 = script var0004 {
-			music 21, 0;
+			music MUSIC_SEA_SHANTY, PLAY_ONCE;
 		};
 	}
 	if (var0001 == 0) {
@@ -73297,7 +73300,7 @@ void Func08BA 0x8BA () {
 		say("Margareta turns away from you.*");
 		abort;
 	}
-	UI_play_music(0x001F, 0x0000);
+	UI_play_music(MUSIC_FORTUNE_TELLER, NULL_OBJ);
 	say("The gypsy woman peers into her crystal ball.");
 	if (!var0000) {
 		if (gflags[JULIUS_QUEST]) {
