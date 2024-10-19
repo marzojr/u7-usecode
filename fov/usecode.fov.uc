@@ -42,7 +42,7 @@ void Func009A shape#(SHAPE_MONSTER_MAGE) () {
 					UI_sprite_effect(
 							ANIMATION_SMALL_BLAST, var0008.x - 1, var0008.y - 1,
 							0, 0, 0, LOOP_ONCE);
-					UI_play_sound_effect(0x0008);
+					UI_play_sound_effect(SFX_EXPLOSION_MEDIUM);
 				}
 				var0009 = script item {
 					actor frame cast_up;
@@ -935,7 +935,7 @@ void Func00E1 shape#(SHAPE_ABBEY_DOOR_CLOSED_RIGHT) () {
 	if (var0000 == FRAME_DOOR_OPENED) {
 		if (Func081D(item, SHAPE_ABBEY_DOOR_OPEN_RIGHT , FRAME_DOOR_CLOSED, 0, 0, 0x0007)) {
 			Func081E(item, SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_OPENED, X, SHAPE_ABBEY_DOOR_OPEN_LEFT, FRAME_DOOR_CLOSED, 0, 3, 0x0005);
-			UI_play_sound_effect2(0x001F, item);
+			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
 		} else {
 			Func0818();
 		}
@@ -943,7 +943,7 @@ void Func00E1 shape#(SHAPE_ABBEY_DOOR_CLOSED_RIGHT) () {
 	if (var0000 == FRAME_DOOR_CLOSED) {
 		if (Func081D(item, SHAPE_ABBEY_DOOR_OPEN_RIGHT , FRAME_DOOR_OPENED, 0, 0, 0x0007)) {
 			Func081E(item, SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_CLOSED, Y, SHAPE_ABBEY_DOOR_OPEN_LEFT, FRAME_DOOR_OPENED, -3, 0, 0x0007);
-			UI_play_sound_effect2(0x001E, item);
+			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
 		} else {
 			Func0818();
 		}
@@ -964,7 +964,7 @@ void Func00F6 shape#(SHAPE_ABBEY_DOOR_CLOSED_LEFT) () {
 	if (var0000 == FRAME_DOOR_OPENED) {
 		if (Func081D(item, SHAPE_ABBEY_DOOR_OPEN_LEFT   , FRAME_DOOR_CLOSED, 0, 3, 0x0005)) {
 			Func081E(item, SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_OPENED, X, SHAPE_ABBEY_DOOR_OPEN_RIGHT, FRAME_DOOR_CLOSED, 0, 0, 0x0007);
-			UI_play_sound_effect2(0x001F, item);
+			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
 		} else {
 			Func0818();
 		}
@@ -972,7 +972,7 @@ void Func00F6 shape#(SHAPE_ABBEY_DOOR_CLOSED_LEFT) () {
 	if (var0000 == FRAME_DOOR_CLOSED) {
 		if (Func081D(item, SHAPE_ABBEY_DOOR_OPEN_LEFT   , FRAME_DOOR_OPENED, -3, 0, 0x0007)) {
 			Func081E(item, SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_CLOSED, Y, SHAPE_ABBEY_DOOR_OPEN_RIGHT, FRAME_DOOR_OPENED, 0, 0, 0x0007);
-			UI_play_sound_effect2(0x001E, item);
+			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
 		} else {
 			Func0818();
 		}
@@ -993,7 +993,7 @@ void Func00FA shape#(SHAPE_ABBEY_DOOR_OPEN_LEFT) () {
 	if (var0000 == FRAME_DOOR_OPENED) {
 		if (Func081D(item, SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_CLOSED, 3, 0, 0x0001)) {
 			Func081E(item, SHAPE_ABBEY_DOOR_OPEN_RIGHT , FRAME_DOOR_OPENED, Y, SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_CLOSED, 0, 0, 0x0007);
-			UI_play_sound_effect2(0x001F, item);
+			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
 		} else {
 			Func0818();
 		}
@@ -1001,7 +1001,7 @@ void Func00FA shape#(SHAPE_ABBEY_DOOR_OPEN_LEFT) () {
 	if (var0000 == FRAME_DOOR_CLOSED) {
 		if (Func081D(item, SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_OPENED, 0, -3, 0x0007)) {
 			Func081E(item, SHAPE_ABBEY_DOOR_OPEN_RIGHT , FRAME_DOOR_CLOSED, X, SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_OPENED, 0, 0, 0x0007);
-			UI_play_sound_effect2(0x001E, item);
+			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
 		} else {
 			Func0818();
 		}
@@ -1113,7 +1113,7 @@ void Func0105 shape#(SHAPE_LOOM) () {
 			repeat 32 {
 				next frame cycle;
 				continue;
-				sfx 6;
+				sfx SFX_ROTATING_WOOSH;
 			};
 			call Func0105;
 		};
@@ -1164,7 +1164,7 @@ void Func010E shape#(SHAPE_DOOR_NS_RIGHT) () {
 	if (var0000 == FRAME_DOOR_OPENED) {
 		if (Func081D(item, SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_CLOSED, 0, 0, 0x0007)) {
 			Func081E(item, SHAPE_DOOR_NS_LEFT  , FRAME_DOOR_OPENED, X, SHAPE_DOOR_EW_TOP, FRAME_DOOR_CLOSED, 0, 3, 0x0005);
-			UI_play_sound_effect2(0x001F, item);
+			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
 		} else {
 			Func0818();
 		}
@@ -1172,7 +1172,7 @@ void Func010E shape#(SHAPE_DOOR_NS_RIGHT) () {
 	if (var0000 == FRAME_DOOR_CLOSED) {
 		if (Func081D(item, SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_OPENED, 0, 0, 0x0007)) {
 			Func081E(item, SHAPE_DOOR_NS_LEFT  , FRAME_DOOR_CLOSED, Y, SHAPE_DOOR_EW_TOP, FRAME_DOOR_OPENED, -3, 0, 0x0007);
-			UI_play_sound_effect2(0x001E, item);
+			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
 		} else {
 			Func0818();
 		}
@@ -1215,14 +1215,14 @@ void Func011C shape#(SHAPE_SUNDIAL) () {
 void Func0122 shape#(SHAPE_CLOSED_SHUTTERS_NS) () {
 	if (event == DOUBLECLICK) {
 		set_item_shape(SHAPE_OPEN_SHUTTERS_NS);
-		UI_play_sound_effect2(0x0002, item);
+		UI_play_sound_effect2(SFX_BLADE_SWING, item);
 	}
 }
 
 void Func0123 shape#(SHAPE_CLOSED_SHUTTERS_EW) () {
 	if (event == DOUBLECLICK) {
 		set_item_shape(SHAPE_OPEN_SHUTTERS_EW);
-		UI_play_sound_effect2(0x0002, item);
+		UI_play_sound_effect2(SFX_BLADE_SWING, item);
 	}
 }
 
@@ -1265,7 +1265,7 @@ void Func0124 shape#(SHAPE_SEAT) () {
 			var0005.y += 2;
 			UI_sprite_effect(
 					ANIMATION_LIGHTNING, var0005.x, var0005.y, 0, 0, 0, 1);
-			UI_play_sound_effect2(0x003E, item);
+			UI_play_sound_effect2(SFX_THUNDER, item);
 			UI_lightning();
 			var var0007 = UI_create_new_object(SHAPE_FIRE_FIELD);
 			if (var0007) {
@@ -1445,7 +1445,7 @@ void Func0133 shape#(SHAPE_LABORATORY_BURNER) () {
 									&& (var0014.z == (var0000.z + 2)))) {
 								var0015 = script item {
 									next frame cycle;
-									sfx 67;
+									sfx SFX_WIZARD_MAGIC;
 									wait 10;
 									previous frame cycle;
 								};
@@ -1481,7 +1481,7 @@ void Func0133 shape#(SHAPE_LABORATORY_BURNER) () {
 			}
 			var0015 = script item {
 				next frame cycle;
-				sfx 69;
+				sfx SFX_SPELL_FAIL;
 				wait 10;
 				previous frame cycle;
 			};
@@ -1494,7 +1494,7 @@ void Func0133 shape#(SHAPE_LABORATORY_BURNER) () {
 void Func0142 shape#(SHAPE_OPEN_SHUTTERS_EW) () {
 	if (event == DOUBLECLICK) {
 		set_item_shape(SHAPE_CLOSED_SHUTTERS_EW);
-		UI_play_sound_effect2(0x0002, item);
+		UI_play_sound_effect2(SFX_BLADE_SWING, item);
 	}
 }
 
@@ -1593,10 +1593,10 @@ void Func0154 shape#(SHAPE_POTION) () {
 		var var0000 = get_item_frame();
 		struct<ObjPos> var0001 = UI_click_on_item();
 		var var0002 = var0001->is_npc();
-		UI_play_sound_effect2(0x005A, item);
+		UI_play_sound_effect2(SFX_QUAFF, item);
 		declare var var0003;
 		if (var0002) {
-			UI_play_sound_effect(0x0044);
+			UI_play_sound_effect(SFX_GENERAL_MAGIC);
 			if (var0000 == FRAME_POTION_SLEEP) {
 				var0001->set_item_flag(ASLEEP);
 			}
@@ -1657,7 +1657,7 @@ void Func0154 shape#(SHAPE_POTION) () {
 void Func0174 shape#(SHAPE_OPEN_SHUTTERS_NS) () {
 	if (event == DOUBLECLICK) {
 		set_item_shape(SHAPE_CLOSED_SHUTTERS_NS);
-		UI_play_sound_effect2(0x0002, item);
+		UI_play_sound_effect2(SFX_BLADE_SWING, item);
 	}
 }
 
@@ -1669,7 +1669,7 @@ void Func0178 shape#(SHAPE_DOOR_EW_BOTTOM) () {
 	if (var0000 == FRAME_DOOR_OPENED) {
 		if (Func081D(item, SHAPE_DOOR_NS_RIGHT, FRAME_DOOR_CLOSED, 0, 0, 0x0007)) {
 			Func081E(item, SHAPE_DOOR_EW_TOP  , FRAME_DOOR_OPENED, Y, SHAPE_DOOR_NS_LEFT, FRAME_DOOR_CLOSED, 3, 0, 0x0001);
-			UI_play_sound_effect2(0x001F, item);
+			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
 		} else {
 			Func0818();
 		}
@@ -1677,7 +1677,7 @@ void Func0178 shape#(SHAPE_DOOR_EW_BOTTOM) () {
 	if (var0000 == FRAME_DOOR_CLOSED) {
 		if (Func081D(item, SHAPE_DOOR_NS_RIGHT, FRAME_DOOR_OPENED, 0, 0, 0x0007)) {
 			Func081E(item, SHAPE_DOOR_EW_TOP  , FRAME_DOOR_CLOSED, X, SHAPE_DOOR_NS_LEFT, FRAME_DOOR_OPENED, 0, -3, 0x0007);
-			UI_play_sound_effect2(0x001E, item);
+			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
 		} else {
 			Func0818();
 		}
@@ -1698,7 +1698,7 @@ void Func0179 shape#(SHAPE_FOOD) () {
 		 3,  1,  9,  2, 31,  8,  6,  0
 	];
 	var var0001 = var0000[get_item_frame() + 1];
-	Func0813(item, var0001, 0x005B);
+	Func0813(item, var0001, SFX_GULP);
 }
 
 void Func017B shape#(SHAPE_SIGN) () {
@@ -2007,7 +2007,7 @@ void Func0188 shape#(SHAPE_ABBEY_DOOR_OPEN_RIGHT) () {
 	if (var0000 == FRAME_DOOR_OPENED) {
 		if (Func081D(item, SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_CLOSED, 0, 0, 0x0007)) {
 			Func081E(item, SHAPE_ABBEY_DOOR_OPEN_LEFT   , FRAME_DOOR_OPENED, Y, SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_CLOSED, 3, 0, 0x0001);
-			UI_play_sound_effect2(0x001F, item);
+			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
 		} else {
 			Func0818();
 		}
@@ -2015,7 +2015,7 @@ void Func0188 shape#(SHAPE_ABBEY_DOOR_OPEN_RIGHT) () {
 	if (var0000 == FRAME_DOOR_CLOSED) {
 		if (Func081D(item, SHAPE_ABBEY_DOOR_CLOSED_RIGHT, FRAME_DOOR_OPENED, 0, 0, 0x0007)) {
 			Func081E(item, SHAPE_ABBEY_DOOR_OPEN_LEFT   , FRAME_DOOR_CLOSED, X, SHAPE_ABBEY_DOOR_CLOSED_LEFT, FRAME_DOOR_OPENED, 0, -3, 0x0007);
-			UI_play_sound_effect2(0x001E, item);
+			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
 		} else {
 			Func0818();
 		}
@@ -2085,8 +2085,8 @@ void Func019A shape#(SHAPE_MINING_MACHINE) () {
 			var0002 = script item {
 				frame 0;
 				frame 1;
-				sfx 37;
-				sfx 76;
+				sfx SFX_GLASS_SHATTERING;
+				sfx SFX_FAIL_BUZZ;
 			};
 		} else {
 			var var0003 = [
@@ -2099,7 +2099,7 @@ void Func019A shape#(SHAPE_MINING_MACHINE) () {
 					repeat 3, 4 {
 						next frame;
 						continue;
-						sfx 8;
+						sfx SFX_EXPLOSION_MEDIUM;
 					};
 				};
 			};
@@ -2108,7 +2108,7 @@ void Func019A shape#(SHAPE_MINING_MACHINE) () {
 				repeat 24 {
 					next frame cycle;
 					continue;
-					sfx 15;
+					sfx SFX_GAVEL_THUD;
 					call Func060D;
 				};
 			};
@@ -2150,7 +2150,7 @@ void Func01AF shape#(SHAPE_BELLOWS) () {
 		}
 		if (event == BG_PATH_SUCCESS) {
 			var var0001 = script item {
-				sfx 47;
+				sfx SFX_BLACKSMITH_BELLOWS;
 				continue;
 				frame 4;
 				wait 1;
@@ -2304,7 +2304,7 @@ void Func01AF shape#(SHAPE_BELLOWS) () {
 		if (event == BG_PATH_SUCCESS) {
 			halt_scheduled();
 			var var000A = script item {
-				sfx 47;
+				sfx SFX_BLACKSMITH_BELLOWS;
 				continue;
 				frame 0;
 				frame 1;
@@ -2342,7 +2342,7 @@ void Func01AF shape#(SHAPE_BELLOWS) () {
 				if (var000F == FRAME_NORMAL_FIREPIT_COLD) {
 					var000A = script var000E {
 						nohalt;
-						sfx 47;
+						sfx SFX_BLACKSMITH_BELLOWS;
 						frame 0;
 						frame 1;
 						frame 2;
@@ -2360,7 +2360,7 @@ void Func01AF shape#(SHAPE_BELLOWS) () {
 				if (var000F == FRAME_NORMAL_FIREPIT_EMBERS) {
 					var000A = script var000E {
 						nohalt;
-						sfx 47;
+						sfx SFX_BLACKSMITH_BELLOWS;
 						frame 1;
 						frame 2;
 						frame 3;
@@ -2377,7 +2377,7 @@ void Func01AF shape#(SHAPE_BELLOWS) () {
 				if (var000F == FRAME_NORMAL_FIREPIT_HOT) {
 					var000A = script var000E {
 						nohalt;
-						sfx 47;
+						sfx SFX_BLACKSMITH_BELLOWS;
 						frame 2;
 						frame 3;
 					};
@@ -2393,7 +2393,7 @@ void Func01AF shape#(SHAPE_BELLOWS) () {
 				if (var000F == FRAME_NORMAL_FIREPIT_FLAME) {
 					var000A = script var000E {
 						nohalt;
-						sfx 47;
+						sfx SFX_BLACKSMITH_BELLOWS;
 						frame 3;
 					};
 					var000A = script var000E after 15 ticks {
@@ -2418,7 +2418,7 @@ void Func01B0 shape#(SHAPE_DOOR_NS_LEFT) () {
 	if (var0000 == FRAME_DOOR_OPENED) {
 		if (Func081D(item, SHAPE_DOOR_EW_TOP  , FRAME_DOOR_CLOSED, 0, 3, 0x0005)) {
 			Func081E(item, SHAPE_DOOR_NS_RIGHT, FRAME_DOOR_OPENED, X, SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_CLOSED, 0, 0, 0x0007);
-			UI_play_sound_effect2(0x001F, item);
+			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
 		} else {
 			Func0818();
 		}
@@ -2426,7 +2426,7 @@ void Func01B0 shape#(SHAPE_DOOR_NS_LEFT) () {
 	if (var0000 == FRAME_DOOR_CLOSED) {
 		if (Func081D(item, SHAPE_DOOR_EW_TOP  , FRAME_DOOR_OPENED, -3, 0, 0x0007)) {
 			Func081E(item, SHAPE_DOOR_NS_RIGHT, FRAME_DOOR_CLOSED, Y, SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_OPENED, 0, 0, 0x0007);
-			UI_play_sound_effect2(0x001E, item);
+			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
 		} else {
 			Func0818();
 		}
@@ -2447,7 +2447,7 @@ void Func01B1 shape#(SHAPE_DOOR_EW_TOP) () {
 	if (var0000 == FRAME_DOOR_OPENED) {
 		if (Func081D(item, SHAPE_DOOR_NS_LEFT  , FRAME_DOOR_CLOSED, 3, 0, 0x0001)) {
 			Func081E(item, SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_OPENED, Y, SHAPE_DOOR_NS_RIGHT, FRAME_DOOR_CLOSED, 0, 0, 0x0007);
-			UI_play_sound_effect2(0x001F, item);
+			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
 		} else {
 			Func0818();
 		}
@@ -2455,7 +2455,7 @@ void Func01B1 shape#(SHAPE_DOOR_EW_TOP) () {
 	if (var0000 == FRAME_DOOR_CLOSED) {
 		if (Func081D(item, SHAPE_DOOR_NS_LEFT  , FRAME_DOOR_OPENED, 0, -3, 0x0007)) {
 			Func081E(item, SHAPE_DOOR_EW_BOTTOM, FRAME_DOOR_CLOSED, X, SHAPE_DOOR_NS_RIGHT, FRAME_DOOR_OPENED, 0, 0, 0x0007);
-			UI_play_sound_effect2(0x001E, item);
+			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
 		} else {
 			Func0818();
 		}
@@ -2717,16 +2717,16 @@ void Func01F7 shape#(SHAPE_PUPPET_SHOW) () {
 				var0000 = script item {
 					nohalt;
 					wait 11;
-					sfx 85;
-					sfx 83;
-					sfx 84;
+					sfx SFX_BIRD_CHIRP;
+					sfx SFX_COMEDIC_SLAP;
+					sfx SFX_COMEDIC_THUD;
 					wait 1;
-					sfx 85;
-					sfx 83;
+					sfx SFX_BIRD_CHIRP;
+					sfx SFX_COMEDIC_SLAP;
 					wait 3;
-					sfx 83;
+					sfx SFX_COMEDIC_SLAP;
 					wait 2;
-					sfx 85;
+					sfx SFX_BIRD_CHIRP;
 				};
 			}
 			CARROCIO->hide();
@@ -2807,7 +2807,7 @@ void Func01F8 shape#(SHAPE_DRAGON) () {
 				if (var0009->get_item_quality() == 0x000A) {
 					var000A = script var0009 {
 						frame 4;
-						sfx 33;
+						sfx SFX_PORTCULLIS_CLOSE;
 						repeat 3 {
 							previous frame cycle;
 						};
@@ -2918,7 +2918,7 @@ void Func020E shape#(SHAPE_LIT_LAMP) () {
 				&& ((var0001.y == var0005.y) && (var0001.z == var0005.z))) {
 				var0004->remove_item();
 				set_item_shape(SHAPE_LAMP_POST);
-				UI_play_sound_effect2(0x002E, item);
+				UI_play_sound_effect2(SFX_BLACKSMITH_DOUSING, item);
 			}
 		}
 	}
@@ -2976,7 +2976,7 @@ void Func0253 shape#(SHAPE_TORCH) () {
 }
 
 void Func0268 shape#(SHAPE_BOTTLE) () {
-	Func0813(item, 1, 0x005A);
+	Func0813(item, 1, SFX_QUAFF);
 }
 
 void Func0269 shape#(SHAPE_TIME_LORD) () {
@@ -3460,7 +3460,7 @@ void Func0270 shape#(SHAPE_PICK) () {
 void Func0273 shape#(SHAPE_LOCKPICK) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
-		UI_play_sound_effect2(0x001B, item);
+		UI_play_sound_effect2(SFX_KEY_CLICK, item);
 		var var0001 = var0000->get_item_shape();
 		var var0002 = var0000->get_item_quality();
 		declare var var0003;
@@ -3557,7 +3557,7 @@ void Func0276 shape#(SHAPE_FIRE_WAND) () {
 void Func0281 shape#(SHAPE_KEY) () {
 	if (event == DOUBLECLICK) {
 		struct<ObjPos> var0000 = UI_click_on_item();
-		UI_play_sound_effect2(0x001B, item);
+		UI_play_sound_effect2(SFX_KEY_CLICK, item);
 		var var0001 = var0000->get_item_shape();
 		var var0002 = get_item_quality();
 		var var0003 = var0000->get_item_quality();
@@ -3602,7 +3602,7 @@ void Func0281 shape#(SHAPE_KEY) () {
 void Func0282 shape#(SHAPE_BOOK) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = QUALITY_BOOK_CHICKEN_RAISING;
-		UI_play_sound_effect2(0x000E, item);
+		UI_play_sound_effect2(SFX_GUMP, item);
 		book_mode();
 		var var0001 = item;
 		var var0002 = var0001->get_item_quality();
@@ -4778,7 +4778,7 @@ void Func0282 shape#(SHAPE_BOOK) () {
 void Func0284 shape#(SHAPE_GOLD_COIN) () {
 	if (event == DOUBLECLICK) {
 		UI_close_gumps();
-		UI_play_sound_effect2(0x0017, item);
+		UI_play_sound_effect2(SFX_BELL_DING, item);
 		if (!(Func0937(AVATAR) || (!Func0937(IOLO)))) {
 			return;
 		}
@@ -4853,12 +4853,12 @@ void Func0289 shape#(SHAPE_VENOM) () {
 			Func0835(var0000, STRENGTH, var0001);
 			Func0835(var0000, DEXTERITY, var0002);
 			Func0835(var0000, INTELLIGENCE, var0003);
-			UI_play_sound_effect2(0x0048, item);
+			UI_play_sound_effect2(SFX_VENOM_EFFECT, item);
 			var var0004 = script var0000 {
 				nohalt;
 				wait 1 hours;
 				call Func0603;
-				sfx 71;
+				sfx SFX_VENOM_DRAIN;
 			};
 			remove_item();
 		} else {
@@ -4913,7 +4913,7 @@ void Func028B shape#(SHAPE_SPINNING_WHEEL) () {
 			repeat 12 {
 				next frame cycle;
 				continue;
-				sfx 6;
+				sfx SFX_ROTATING_WOOSH;
 			};
 			call Func028B;
 		};
@@ -5308,7 +5308,7 @@ void Func02A3 shape#(SHAPE_DESK_ITEMS) () {
 		declare var var0002;
 		if (var0000 == FRAME_DESK_ITEM_GAVEL) {
 			struct<ObjPos> var0001 = UI_click_on_item();
-			UI_play_sound_effect2(0x000F, item);
+			UI_play_sound_effect2(SFX_GAVEL_THUD, item);
 			if (var0001->is_npc()) {
 				var0001->item_say("@Hey, that hurt!@");
 				return;
@@ -5391,9 +5391,9 @@ void Func02A3 shape#(SHAPE_DESK_ITEMS) () {
 			if (!in_usecode()) {
 				var0002 = script item {
 					repeat 12 {
-						sfx 17;
+						sfx SFX_GRANDFATHER_CLOCK_TICK;
 						frame 17;
-						sfx 18;
+						sfx SFX_GRANDFATHER_CLOCK_TOCK;
 						frame 19;
 					};
 					frame 18;
@@ -5414,7 +5414,7 @@ void Func02A3 shape#(SHAPE_DESK_ITEMS) () {
 		if (var0000 == FRAME_DESK_ITEM_BELL) {
 			var0002 = script item {
 				repeat 4 {
-					sfx 23;
+					sfx SFX_BELL_DING;
 				};
 			};
 		}
@@ -5618,7 +5618,7 @@ void Func02C4 shape#(SHAPE_STOCKS) () {
 		if (var0000 == FRAME_STOCKS_OPEN) {
 			var0001 = FRAME_STOCKS_CLOSED;
 		}
-		UI_play_sound_effect2(0x001C, item);
+		UI_play_sound_effect2(SFX_LEVER_SWITCH, item);
 		set_item_frame(var0001);
 	}
 }
@@ -6269,7 +6269,7 @@ void Func02D5 shape#(SHAPE_VIRTUE_ROULETTE_WHEEL) () {
 		halt_scheduled();
 		var var0001 = script item {
 			repeat var0000 {
-				sfx 29;
+				sfx SFX_ROULETTE_WHEEL;
 				next frame cycle;
 				continue;
 				next frame cycle;
@@ -6281,7 +6281,7 @@ void Func02D5 shape#(SHAPE_VIRTUE_ROULETTE_WHEEL) () {
 				next frame cycle;
 				continue;
 				next frame cycle;
-				sfx 29;
+				sfx SFX_ROULETTE_WHEEL;
 			};
 			repeat 3 {
 				next frame cycle;
@@ -6292,12 +6292,12 @@ void Func02D5 shape#(SHAPE_VIRTUE_ROULETTE_WHEEL) () {
 				wait 1;
 				next frame cycle;
 				wait 1;
-				sfx 29;
+				sfx SFX_ROULETTE_WHEEL;
 			};
 			next frame cycle;
 			wait 3;
 			next frame cycle;
-			sfx 29;
+			sfx SFX_ROULETTE_WHEEL;
 			call Func060A;
 		};
 		if ((UI_game_hour() >= 15) || (UI_game_hour() <= 3)) {
@@ -6396,33 +6396,33 @@ void Func02DE shape#(SHAPE_GUILLOTINE) () {
 				set_item_frame(FRAME_GUILLOTINE_READY);
 				var0000 = script item {
 					repeat 4 {
-						sfx 35;
+						sfx SFX_DRAWBRIDGE_CLOSE;
 						next frame cycle;
 					};
 				};
 				return;
 			}
-			UI_play_sound_effect2(35, item);
+			UI_play_sound_effect2(SFX_DRAWBRIDGE_CLOSE, item);
 			var var0001 = get_item_frame();
 			if (var0001 < FRAME_GUILLOTINE_RISING6) {
 				var0000 = script item {
 					repeat 1 {
-						sfx 34;
+						sfx SFX_DRAWBRIDGE_OPEN;
 						next frame cycle;
 					};
-					sfx 35;
+					sfx SFX_DRAWBRIDGE_CLOSE;
 				};
 			}
 			if (var0001 == FRAME_GUILLOTINE_RISING6) {
 				var0000 = script item {
-					sfx 35;
+					sfx SFX_DRAWBRIDGE_CLOSE;
 					frame FRAME_GUILLOTINE_RISING7;
-					sfx 35;
+					sfx SFX_DRAWBRIDGE_CLOSE;
 					frame FRAME_GUILLOTINE_READY;
 				};
 			}
 			if (var0001 == FRAME_GUILLOTINE_RISING7) {
-				UI_play_sound_effect2(35, item);
+				UI_play_sound_effect2(SFX_DRAWBRIDGE_CLOSE, item);
 				set_item_frame(FRAME_GUILLOTINE_READY);
 			}
 		}
@@ -6540,7 +6540,7 @@ void Func02E7 shape#(SHAPE_STRENGTH_TESTER) () {
 		if (var0005 > 7) {
 			var0004 = script item after(var0005 + 1) ticks {
 				nohalt;
-				sfx 24;
+				sfx SFX_BELL_DONG;
 			};
 			if (CARROCIO->npc_nearby() && Func0937(CARROCIO)) {
 				var0004 = script CARROCIO after 15 ticks {
@@ -6554,7 +6554,7 @@ void Func02E7 shape#(SHAPE_STRENGTH_TESTER) () {
 		}
 		var0004 = script item {
 			frame 0;
-			sfx 4;
+			sfx SFX_BLUNT_THUD;
 			repeat var0005 {
 				next frame;
 			};
@@ -6641,12 +6641,12 @@ void Func02F2 shape#(SHAPE_VIAL) () {
 					if (var0002) {
 						var0003 = script var0002 {
 							frame FRAME_SOUL_CAGE_NORMAL;
-							sfx 45;
+							sfx SFX_BLACKSMITH_HAMMER_CLANG;
 							repeat 7 {
 								wait 2;
-								sfx 37;
+								sfx SFX_GLASS_SHATTERING;
 							};
-							sfx 9;
+							sfx SFX_EXPLOSION_LARGE;
 							remove;
 						};
 						struct<Position> var0004
@@ -6704,7 +6704,7 @@ void Func02F8 shape#(SHAPE_GEM) () {
 					return;
 				}
 				remove_item();
-				UI_play_sound_effect(0x0025);
+				UI_play_sound_effect(SFX_GLASS_SHATTERING);
 			}
 			if (gflags[BROKE_MIRROR]) {
 				if (!gflags[COMMANDED_BOND]) {
@@ -6753,7 +6753,7 @@ void Func02F8 shape#(SHAPE_GEM) () {
 			actor frame reach_1h;
 			wait 2;
 			actor frame strike_1h;
-			sfx 37;
+			sfx SFX_GLASS_SHATTERING;
 		};
 		var0003 = script item {
 			wait 10;
@@ -6854,7 +6854,7 @@ void Func0303 shape#(SHAPE_RUDYOMS_WAND) () {
 				abort;
 			}
 		}
-		UI_play_sound_effect(0x003E);
+		UI_play_sound_effect(SFX_THUNDER);
 		UI_lightning();
 	}
 }
@@ -7087,7 +7087,7 @@ void Func0314 shape#(SHAPE_SWITCH) () {
 		} else {
 			set_item_frame(var0005 - 1);
 		}
-		UI_play_sound_effect2(0x001C, item);
+		UI_play_sound_effect2(SFX_LEVER_SWITCH, item);
 		var var0006 = get_item_quality();
 		var var0007 = find_nearby(SHAPE_DRAWBRIDGE, 15, MASK_NONE);
 		var var0008 = find_nearby(SHAPE_CLOSED_DRAWBRIDGE, 15, MASK_NONE);
@@ -7114,7 +7114,7 @@ void Func0316 shape#(SHAPE_INVISIBILITY_DUST) () {
 			}
 			Func08FE("@Do not waste that!@");
 		}
-		UI_play_sound_effect2(0x0043, item);
+		UI_play_sound_effect2(SFX_WIZARD_MAGIC, item);
 		Func0925(item);
 	}
 }
@@ -7131,7 +7131,7 @@ void Func031D shape#(SHAPE_SCROLL) () {
 		item->Func0710();
 		return;
 	}
-	UI_play_sound_effect2(0x000E, item);
+	UI_play_sound_effect2(SFX_GUMP, item);
 	book_mode();
 	if (var0000 > QUALITY_SCROLL_DIARY_OF_ERETHIAN) {
 		say("This is not a valid scroll");
@@ -7606,7 +7606,7 @@ void Func031D shape#(SHAPE_SCROLL) () {
 void Func031E shape#(SHAPE_SEALED_BOX) () {
 	if (event == DOUBLECLICK) {
 		set_item_shape(SHAPE_UNSEALED_BOX);
-		UI_play_sound_effect2(0x000E, item);
+		UI_play_sound_effect2(SFX_GUMP, item);
 	}
 }
 
@@ -7685,11 +7685,11 @@ void Func0329 shape#(SHAPE_TRIPLES_GAME_WHEEL) () {
 						var var000B = script var0009 {
 							repeat 22 {
 								next frame cycle;
-								sfx 29;
+								sfx SFX_ROULETTE_WHEEL;
 							};
 							repeat var000A {
 								next frame cycle;
-								sfx 29;
+								sfx SFX_ROULETTE_WHEEL;
 							};
 							call Func060B;
 						};
@@ -7975,7 +7975,7 @@ void Func032A shape#(SHAPE_BUCKET) () {
 				wait 2;
 				frame var0012;
 				continue;
-				sfx 40;
+				sfx SFX_LIQUID_SPLASH;
 			};
 			var000F = script item {
 				wait 2;
@@ -8092,7 +8092,7 @@ void Func032A shape#(SHAPE_BUCKET) () {
 			var001D.y = var0017.y - var0018;
 			UI_sprite_effect(
 					ANIMATION_POOF, var001D.x, var001D.y, 0, 0, 0, LOOP_ONCE);
-			UI_play_sound_effect(0x002E);
+			UI_play_sound_effect(SFX_BLACKSMITH_DOUSING);
 		}
 		if (var0007 == SHAPE_CAMPFIRE) {
 			if (var0015 == FRAME_CAMPFIRE_COALS) {
@@ -8112,7 +8112,7 @@ void Func032A shape#(SHAPE_BUCKET) () {
 			struct<Position> var001F = get_object_position();
 			UI_sprite_effect(
 					ANIMATION_POOF, var001F.x, var001F.y, 0, 0, 0, LOOP_ONCE);
-			UI_play_sound_effect(0x002E);
+			UI_play_sound_effect(SFX_BLACKSMITH_DOUSING);
 		}
 		if (var0007 == SHAPE_DOUGH) {
 			if (var0015 == FRAME_DOUGH_FLOUR) {
@@ -8231,7 +8231,7 @@ void Func0334 shape#(SHAPE_PLAQUE) () {
 				UI_sprite_effect(
 						ANIMATION_TELEPORT, var0008.x, var0008.y, 0, 0, 0,
 						LOOP_ONCE);
-				UI_play_sound_effect(0x0044);
+				UI_play_sound_effect(SFX_GENERAL_MAGIC);
 				var0000->remove_item();
 				UI_close_gumps();
 				abort;
@@ -8375,10 +8375,10 @@ void Func0334 shape#(SHAPE_PLAQUE) () {
 			};
 			var0007 = script LORD_BRITISH {
 				wait 3;
-				sfx 19;
+				sfx SFX_GRANDFATHER_CLOCK_CHIME;
 				actor frame standing;
 				actor frame kneeling;
-				sfx 86;
+				sfx SFX_HEAVY_THUD;
 				continue;
 				actor frame sleeping;
 				call Func0334;
@@ -8582,7 +8582,7 @@ void Func0347 shape#(SHAPE_HOURGLASS) () {
 				// BUG: this should probably have been 'item' instead of
 				// SHAPE_TIME_LORD
 				SHAPE_TIME_LORD->get_npc_object()->Func0269();
-				UI_play_sound_effect2(0x0043, item);
+				UI_play_sound_effect2(SFX_WIZARD_MAGIC, item);
 			}
 		}
 	}
@@ -8615,7 +8615,7 @@ void Func0348 shape#(SHAPE_FLYING_CARPET) () {
 
 void Func034A shape#(SHAPE_REAGENT) () {
 	if (get_item_frame() == FRAME_REAGENT_GARLIC) {
-		Func0813(item, 0x0002, 0x005B);
+		Func0813(item, 0x0002, SFX_GULP);
 	}
 }
 
@@ -8633,7 +8633,7 @@ void Func0350 shape#(SHAPE_MIRROR_NS) () {
 		var var0000 = get_item_frame();
 		if (var0000 == FRAME_MIRROR_MAGIC) {
 			var var0001 = script item {
-				sfx 67;
+				sfx SFX_WIZARD_MAGIC;
 				continue;
 				repeat 4 {
 					next frame cycle;
@@ -8808,7 +8808,7 @@ void Func0356 shape#(SHAPE_STATUE) () {
 				UI_sprite_effect(
 						ANIMATION_TELEPORT, var0003.x - 1, var0003.y - 1, 0, 0,
 						0, LOOP_ONCE);
-				UI_play_sound_effect(0x0043);
+				UI_play_sound_effect(SFX_WIZARD_MAGIC);
 				var0004 = AVATAR->get_npc_object()->get_npc_prop(INTELLIGENCE);
 				var0004 &= AVATAR->get_npc_object()->get_npc_prop(MAX_MANA);
 				var0004 &= AVATAR->get_npc_object()->get_npc_prop(MANA);
@@ -8846,7 +8846,7 @@ void Func0356 shape#(SHAPE_STATUE) () {
 				UI_sprite_effect(
 						ANIMATION_TELEPORT, var0003.x - 1, var0003.y - 1, 0, 0,
 						0, LOOP_ONCE);
-				UI_play_sound_effect(0x0043);
+				UI_play_sound_effect(SFX_WIZARD_MAGIC);
 				var0004 = AVATAR->get_npc_object()->get_npc_prop(DEXTERITY);
 				var0004 &= AVATAR->get_npc_object()->get_npc_prop(COMBAT);
 				if (!(var0004[1] >= 30)) {
@@ -8882,7 +8882,7 @@ void Func0356 shape#(SHAPE_STATUE) () {
 				UI_sprite_effect(
 						ANIMATION_TELEPORT, var0003.x - 1, var0003.y - 1, 0, 0,
 						0, LOOP_ONCE);
-				UI_play_sound_effect(0x0043);
+				UI_play_sound_effect(SFX_WIZARD_MAGIC);
 				var0004 = AVATAR->get_npc_object()->get_npc_prop(STRENGTH);
 				var0004 &= AVATAR->get_npc_object()->get_npc_prop(HEALTH);
 				if (!(var0004[1] >= 30)) {
@@ -9030,7 +9030,7 @@ void Func0379 shape#(SHAPE_LAMP_POST) () {
 			var0000->set_item_frame(UI_die_roll(0, 7));
 			if (UI_update_last_created(var0001)) {
 				set_item_shape(SHAPE_LIT_LAMP);
-				UI_play_sound_effect2(0x006A, item);
+				UI_play_sound_effect2(SFX_IGNITE, item);
 			}
 		}
 	}
@@ -9040,7 +9040,7 @@ void Func037D shape#(SHAPE_POOL_OF_WATER) () {
 	if (event == DOUBLECLICK) {
 		var var0000 = get_item_quality();
 		struct<ObjPos> var0001 = UI_click_on_item();
-		UI_play_sound_effect2(0x005A, item);
+		UI_play_sound_effect2(SFX_QUAFF, item);
 		if (var0000 == QUALITY_POOL_OF_SLEEPING) {
 			var0001->set_item_flag(ASLEEP);
 		}
@@ -9105,7 +9105,7 @@ void Func03B0 shape#(SHAPE_POT) () {
 				AVATAR->item_say("ptui!");
 				if (!UI_in_gump_mode()) {
 					var var0000 = script item after 3 ticks {
-						sfx 24;
+						sfx SFX_BELL_DONG;
 					};
 				}
 			}
@@ -9197,13 +9197,13 @@ void Func03DB shape#(SHAPE_BABY_IN_A_CRADLE) () {
 		//		frame 0;
 		//		frame 1;
 		//		frame 2;
-		//		sfx 17;
+		//		sfx SFX_GRANDFATHER_CLOCK_TICK;
 		//		frame 2;
 		//		frame 1;
 		//		frame 0;
 		//		frame 3;
 		//		frame 4;
-		//		sfx 17;
+		//		sfx SFX_GRANDFATHER_CLOCK_TICK;
 		//		frame 4;
 		//		frame 3;
 		//		frame 0;
@@ -9213,13 +9213,13 @@ void Func03DB shape#(SHAPE_BABY_IN_A_CRADLE) () {
 			frame 0;
 			frame 1;
 			frame 2;
-			sfx 17;
+			sfx SFX_GRANDFATHER_CLOCK_TICK;
 			frame 2;
 			frame 1;
 			frame 0;
 			frame 3;
 			frame 4;
-			sfx 17;
+			sfx SFX_GRANDFATHER_CLOCK_TICK;
 			frame 4;
 			frame 3;
 			frame 0;
@@ -9325,13 +9325,13 @@ void Func03E0 shape#(SHAPE_CRADLE) () {
 		//		frame 0;
 		//		frame 1;
 		//		frame 2;
-		//		sfx 17;
+		//		sfx SFX_GRANDFATHER_CLOCK_TICK;
 		//		frame 2;
 		//		frame 1;
 		//		frame 0;
 		//		frame 3;
 		//		frame 4;
-		//		sfx 17;
+		//		sfx SFX_GRANDFATHER_CLOCK_TICK;
 		//		frame 4;
 		//		frame 3;
 		//		frame 0;
@@ -9341,13 +9341,13 @@ void Func03E0 shape#(SHAPE_CRADLE) () {
 			frame 0;
 			frame 1;
 			frame 2;
-			sfx 17;
+			sfx SFX_GRANDFATHER_CLOCK_TICK;
 			frame 2;
 			frame 1;
 			frame 0;
 			frame 3;
 			frame 4;
-			sfx 17;
+			sfx SFX_GRANDFATHER_CLOCK_TICK;
 			frame 4;
 			frame 3;
 			frame 0;
@@ -9375,13 +9375,13 @@ void Func03F5 shape#(SHAPE_ROCKING_HORSE) () {
 			//		frame 0;
 			//		frame 1;
 			//		frame 2;
-			//		sfx 17;
+			//		sfx SFX_GRANDFATHER_CLOCK_TICK;
 			//		frame 2;
 			//		frame 1;
 			//		frame 0;
 			//		frame 3;
 			//		frame 4;
-			//		sfx 17;
+			//		sfx SFX_GRANDFATHER_CLOCK_TICK;
 			//		frame 4;
 			//		frame 3;
 			//		frame 0;
@@ -9391,13 +9391,13 @@ void Func03F5 shape#(SHAPE_ROCKING_HORSE) () {
 				frame 0;
 				frame 1;
 				frame 2;
-				sfx 17;
+				sfx SFX_GRANDFATHER_CLOCK_TICK;
 				frame 2;
 				frame 1;
 				frame 0;
 				frame 3;
 				frame 4;
-				sfx 17;
+				sfx SFX_GRANDFATHER_CLOCK_TICK;
 				frame 4;
 				frame 3;
 				frame 0;
@@ -10113,7 +10113,7 @@ void FuncSpark object#(FIRST_NPC_FUNCTION - SPARK)() {
 							"out of the air. You laugh as Iolo\tyelps, jumps "
 							"away, curses and runs his fingers through his "
 							"hair. ");
-						UI_play_sound_effect(0x0001);
+						UI_play_sound_effect(SFX_MISSILE_HIT);
 					} else {
 						say("Suddenly, Spark lets his sling fly. His target, a "
 							"small fly hovering above your head, is smacked "
@@ -14887,7 +14887,7 @@ void FuncLordBritish object#(FIRST_NPC_FUNCTION - LORD_BRITISH)() {
 			UI_sprite_effect(
 					ANIMATION_TELEPORT, var000F.x - 1, var000F.y - 1, 0, 0, 0,
 					LOOP_ONCE);
-			UI_play_sound_effect(0x0043);
+			UI_play_sound_effect(SFX_WIZARD_MAGIC);
 			var var0010 = AVATAR->get_npc_object()->get_npc_prop(STRENGTH);
 			var0010 &= AVATAR->get_npc_object()->get_npc_prop(HEALTH);
 			declare var var0011;
@@ -21095,7 +21095,7 @@ void FuncSnaz object#(FIRST_NPC_FUNCTION - SNAZ)() {
 						1, SHAPE_GOLD_COIN, QUALITY_ANY, FRAME_ANY, true);
 				if (var000C) {
 					forever {
-						UI_play_sound_effect(0x0017);
+						UI_play_sound_effect(SFX_BELL_DING);
 						say("\"Thank thee very much! Now, goodbye!\"");
 						say("\"Dost thou get it? Ha! Ha! Ha! Ha! If not, it "
 							"would be my pleasure to repeat it.\"");
@@ -49142,7 +49142,7 @@ void FuncOwings object#(FIRST_NPC_FUNCTION - OWINGS)() {
 				"- so angry that he does not notice that he has stepped into "
 				"the other helmet and it is stuck onto his foot. Taking his "
 				"spoon he whaps Owings in the nose with it.*");
-		UI_play_sound_effect(0x0053);
+		UI_play_sound_effect(SFX_COMEDIC_SLAP);
 		gflags[MALLOY_FOOT_IN_HAT] = true;
 		OWINGS->say("Upon getting hit in the nose, Owings jerks his head back, "
 					"causing his helmet to fall off. \"Ooh! Mine helmet!\" he "
@@ -49169,7 +49169,7 @@ void FuncOwings object#(FIRST_NPC_FUNCTION - OWINGS)() {
 			"of rock falls from the ceiling and lands squarely on Owings's "
 			"head. It makes a loud knocking noise. Owings starts to pout and "
 			"cry very childishly.");
-		UI_play_sound_effect(0x0053);
+		UI_play_sound_effect(SFX_COMEDIC_SLAP);
 		MALLOY->say(
 				"Malloy points at Owings and laughs until tears run down his "
 				"face. Glancing up at the ceiling, Malloy starts feeling "
@@ -49899,7 +49899,7 @@ void FuncMalloy object#(FIRST_NPC_FUNCTION - MALLOY)() {
 					"dislodge it. After several fierce tugs it comes off with "
 					"a loud popping noise. Owings pulls the helmet right into "
 					"his own face and this makes a loud knocking noise.");
-		UI_play_sound_effect(0x0053);
+		UI_play_sound_effect(SFX_COMEDIC_SLAP);
 		OWINGS->hide();
 		MALLOY->say("Malloy goes hurling backwards, crying out in panic. He "
 					"smacks the back of his head on the rock wall behind him. "
@@ -49909,7 +49909,7 @@ void FuncMalloy object#(FIRST_NPC_FUNCTION - MALLOY)() {
 					"ceiling landing squarely on his head. Malloy says "
 					"\"Ooooooh!\" Owings breaks into a giggling fit. Malloy "
 					"flashes you an incredulous pouting grimace.");
-		UI_play_sound_effect(0x000F);
+		UI_play_sound_effect(SFX_GAVEL_THUD);
 		remove("helmet on foot");
 		fallthrough;
 	case "bye":
@@ -52545,7 +52545,7 @@ void Func0600 object#(0x600) () {
 		if (var0002 == SHAPE_LIT_SCONCE) {
 			set_item_shape(SHAPE_SPENT_SCONCE);
 		}
-		UI_play_sound_effect(0x006A);
+		UI_play_sound_effect(SFX_IGNITE);
 	} else {
 		var var0003 = script item after 50 ticks {
 			call Func0600;
@@ -52579,7 +52579,7 @@ void Func0606 object#(0x606) () {
 	var0001 -= 3;
 	var0002 -= 4;
 	UI_sprite_effect(ANIMATION_POOF, var0001, var0002, 0, 0, 0, LOOP_ONCE);
-	UI_play_sound_effect(0x0045);
+	UI_play_sound_effect(SFX_SPELL_FAIL);
 }
 
 void Func0607 object#(0x607) () {
@@ -52804,11 +52804,11 @@ void Func060C object#(0x60C) () {
 	}
 	var var000D = script var0006 {
 		frame FRAME_RAT_RACE_GAME_RIGHT_CLOSE;
-		sfx 73;
+		sfx SFX_RAT_RACE_CLOSE;
 		frame FRAME_RAT_RACE_GAME_RIGHT_OPEN;
-		sfx 74;
+		sfx SFX_RAT_RACE_OPEN;
 		frame FRAME_RAT_RACE_GAME_RIGHT_CLOSE;
-		sfx 73;
+		sfx SFX_RAT_RACE_CLOSE;
 	};
 	if (gflags[RAT_1] == false) {
 		gflags[RAT_1] = true;
@@ -53044,7 +53044,7 @@ void Func060E object#(0x60E) () {
 void Func060F object#(0x60F) () {
 	struct<Position> var0000 = get_object_position();
 	UI_sprite_effect(ANIMATION_LIGHTNING, var0000.x, var0000.y, 0, 0, 0, 1);
-	UI_play_sound_effect(0x003E);
+	UI_play_sound_effect(SFX_THUNDER);
 	UI_lightning();
 	var var0001 = UI_apply_damage(
 			get_npc_prop(STRENGTH), 0x000C, LIGHTNING_DAMAGE, item);
@@ -53936,14 +53936,14 @@ void Func0626 object#(0x626) () {
 				var000B += 1;
 			}
 		}
-		UI_play_sound_effect2(0x0025, item);
+		UI_play_sound_effect2(SFX_GLASS_SHATTERING, item);
 		remove_item();
 		return;
 	}
 	if ((var0000 == SHAPE_MIRROR_NS) || (var0000 == SHAPE_MIRROR_EW)) {
 		if (!(get_item_frame() == FRAME_MIRROR_BROKEN)) {
 			var var000D = script item {
-				sfx 37;
+				sfx SFX_GLASS_SHATTERING;
 				continue;
 				frame 2;
 			};
@@ -54501,7 +54501,7 @@ void Func0638 object#(0x638) () {
 			return;
 		}
 	}
-	UI_play_sound_effect2(0x000E, item);
+	UI_play_sound_effect2(SFX_GUMP, item);
 	book_mode();
 	if (var0000 > QUALITY_BOOK_CONVERTING_MOONGATES) {
 		say("This is @not a @valid book");
@@ -55455,7 +55455,7 @@ void Func063E object#(0x63E) () {
 				"doubt, showing this!");
 		say("For the atrocious crime of cheating against the virtues of "
 			"Britannia, I find you guilty.*");
-		UI_play_sound_effect(0x000F);
+		UI_play_sound_effect(SFX_GAVEL_THUD);
 		say("Judgement rendered.* Sentence selected:* Death.*");
 		// BUG: using 0x56 as object. This probably should have been something
 		// like this instead:
@@ -55500,7 +55500,7 @@ void Func0640 object#(0x640) () {
 		if (Func0906() && (var0000.obj != NULL_OBJ)) {
 			var0002 = script item {
 				face var0001;
-				sfx 64;
+				sfx SFX_HEALING_MAGIC;
 				actor frame raise_1h;
 				actor frame strike_1h;
 			};
@@ -55535,7 +55535,7 @@ void Func0641 object#(0x641) () {
 			var0000 = script item {
 				actor frame raise_1h;
 				actor frame strike_1h;
-				sfx 68;
+				sfx SFX_GENERAL_MAGIC;
 			};
 			var var0001 = [CLEAR_WEATHER, SNOWING, RAIN];
 			if (UI_get_weather() == CLEAR_WEATHER) {
@@ -55587,7 +55587,7 @@ void Func0642 object#(0x642) () {
 			var0002 = script item {
 				call var0003;
 			};
-			UI_play_sound_effect(0x002E);
+			UI_play_sound_effect(SFX_BLACKSMITH_DOUSING);
 		} else {
 			Func08FD(0x003C);
 		}
@@ -55603,7 +55603,7 @@ void Func0643 object#(0x643) () {
 			var0000 = script item {
 				actor frame cast_out;
 				actor frame cast_up;
-				sfx 36;
+				sfx SFX_FUSE;
 				call Func0643;
 			};
 		} else {
@@ -55630,7 +55630,7 @@ void Func0644 object#(0x644) () {
 		if (Func0906()) {
 			var0000 = script item {
 				nohalt;
-				sfx 68;
+				sfx SFX_GENERAL_MAGIC;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0644;
@@ -55658,7 +55658,7 @@ void Func0645 object#(0x645) () {
 				if (Func0906()) {
 					gflags[HELP_USED] = true;
 					var0000 = script item {
-						sfx 64;
+						sfx SFX_HEALING_MAGIC;
 						actor frame cast_up;
 						actor frame standing;
 						actor frame bowing;
@@ -55744,7 +55744,7 @@ void Func0647 object#(0x647) () {
 			var0000 = script item {
 				actor frame reach_2h;
 				actor frame strike_2h;
-				sfx 62;
+				sfx SFX_THUNDER;
 			};
 		} else {
 			var0000 = script item {
@@ -55763,7 +55763,7 @@ void Func0648 object#(0x648) () {
 		item_say("@In Mani Ylem@");
 		if (Func0906()) {
 			var0000 = script item {
-				sfx 68;
+				sfx SFX_GENERAL_MAGIC;
 				actor frame reach_1h;
 				actor frame raise_1h;
 				actor frame strike_1h;
@@ -55804,7 +55804,7 @@ void Func0649 object#(0x649) () {
 			if (var0000->is_npc()) {
 				var0002 = script item {
 					face var0001;
-					sfx 64;
+					sfx SFX_HEALING_MAGIC;
 					actor frame reach_1h;
 					actor frame raise_1h;
 					actor frame strike_1h;
@@ -55845,7 +55845,7 @@ void Func064A object#(0x64A) () {
 		declare var var0000;
 		if (Func0906()) {
 			var0000 = script item {
-				sfx 66;
+				sfx SFX_ITEM_MAGIC;
 				actor frame raise_1h;
 				actor frame strike_1h;
 			};
@@ -55970,7 +55970,7 @@ void Func064D object#(0x64D) () {
 		if (Func0906()) {
 			var0000 = script item {
 				nohalt;
-				sfx 68;
+				sfx SFX_GENERAL_MAGIC;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func064D;
@@ -55994,7 +55994,7 @@ void Func064E object#(0x64E) () {
 		declare var var0000;
 		if (Func0906()) {
 			var0000 = script item {
-				sfx 67;
+				sfx SFX_WIZARD_MAGIC;
 				actor frame kneeling;
 				actor frame standing;
 				actor frame cast_up;
@@ -56041,7 +56041,7 @@ void Func064F object#(0x64F) () {
 					ANIMATION_TELEPORT, var0000.x - 2, var0000.y - 2, 0, 0, 0,
 					LOOP_ONCE);
 			var0001 = script item {
-				sfx 68;
+				sfx SFX_GENERAL_MAGIC;
 				actor frame raise_1h;
 				actor frame strike_1h;
 			};
@@ -56092,7 +56092,7 @@ void Func0650 object#(0x650) () {
 					UI_sprite_effect(
 							ANIMATION_GREEN_BUBBLES, var0000.x, var0000.y, 0, 0,
 							0, LOOP_ONCE);
-					UI_play_sound_effect(0x0042);
+					UI_play_sound_effect(SFX_ITEM_MAGIC);
 				}
 			}
 			var0003 = find_nearby(SHAPE_LOCKED_CHEST, 2, MASK_ALL_UNSEEN);
@@ -56103,7 +56103,7 @@ void Func0650 object#(0x650) () {
 					UI_sprite_effect(
 							ANIMATION_GREEN_BUBBLES, var0000.x, var0000.y, 0, 0,
 							0, LOOP_ONCE);
-					UI_play_sound_effect(0x0042);
+					UI_play_sound_effect(SFX_ITEM_MAGIC);
 				}
 			}
 		} else {
@@ -56130,7 +56130,7 @@ void Func0651 object#(0x651) () {
 		if (Func0906() && (var0003 in var0000)) {
 			var0005 = script item {
 				face var0004;
-				sfx 67;
+				sfx SFX_WIZARD_MAGIC;
 				actor frame reach_1h;
 				actor frame raise_1h;
 				actor frame strike_1h;
@@ -56171,7 +56171,7 @@ void Func0652 object#(0x652) () {
 			var var0002 = set_to_attack(var0000, SHAPE_SPELL_FIRE_BOLT);
 			var0003 = script item {
 				face var0001;
-				sfx 65;
+				sfx SFX_COMBAT_MAGIC;
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame strike_2h;
@@ -56199,7 +56199,7 @@ void Func0653 object#(0x653) () {
 		if (Func0906()) {
 			var0000 = script item {
 				nohalt;
-				sfx 68;
+				sfx SFX_GENERAL_MAGIC;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				call Func0653;
@@ -56230,7 +56230,7 @@ void Func0654 object#(0x654) () {
 				actor frame reach_1h;
 				actor frame raise_1h;
 				actor frame strike_1h;
-				sfx 64;
+				sfx SFX_HEALING_MAGIC;
 				call Func0654;
 			};
 		} else {
@@ -56262,7 +56262,7 @@ void Func0655 object#(0x655) () {
 		if (Func0906() && var0000->is_npc()) {
 			var0002 = script item {
 				face var0001;
-				sfx 109;
+				sfx SFX_PROTECT_SPELL;
 				actor frame cast_up;
 				actor frame raise_1h;
 				actor frame strike_2h;
@@ -56303,7 +56303,7 @@ void Func0656 object#(0x656) () {
 			var0002 = set_to_attack(var0000, SHAPE_SPELL_TELEKINESIS);
 			var0002 = script item {
 				face var0001;
-				sfx 67;
+				sfx SFX_WIZARD_MAGIC;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				attack;
@@ -56351,7 +56351,7 @@ void Func0657 object#(0x657) () {
 		if (Func0906()) {
 			var0000 = script item {
 				actor frame cast_up;
-				sfx 67;
+				sfx SFX_WIZARD_MAGIC;
 				actor frame cast_out;
 				actor frame cast_up;
 				actor frame strike_2h;
@@ -56389,7 +56389,7 @@ void Func0658 object#(0x658) () {
 			var var0002 = set_to_attack(var0000, SHAPE_SPELL_CURSE);
 			var0003 = script item {
 				face var0001;
-				sfx 67;
+				sfx SFX_WIZARD_MAGIC;
 				actor frame raise_1h;
 				actor frame cast_out;
 				actor frame strike_2h;
@@ -56418,7 +56418,7 @@ void Func0659 object#(0x659) () {
 			var0002 = script item {
 				face var0001;
 				actor frame kneeling;
-				sfx 64;
+				sfx SFX_HEALING_MAGIC;
 				actor frame standing;
 				actor frame reach_1h;
 				actor frame raise_1h;
@@ -56460,7 +56460,7 @@ void Func065A object#(0x65A) () {
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame strike_2h;
-				sfx 65;
+				sfx SFX_COMBAT_MAGIC;
 				call Func065A;
 			};
 		} else {
@@ -56506,7 +56506,7 @@ void Func065B object#(0x65B) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		UI_play_sound_effect(0x006D);
+		UI_play_sound_effect(SFX_PROTECT_SPELL);
 		struct<Position> var0001 = get_object_position();
 		UI_sprite_effect(
 				ANIMATION_TELEPORT, var0001.x - 2, var0001.y - 2, 0, 0, 0,
@@ -56554,7 +56554,7 @@ void Func065D object#(0x65D) () {
 		item_say("@Vas Wis@");
 		if (Func0906()) {
 			var0000 = script item {
-				sfx 67;
+				sfx SFX_WIZARD_MAGIC;
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame cast_up;
@@ -56584,7 +56584,7 @@ void Func065E object#(0x65E) () {
 			var var0002 = set_to_attack(var0000, SHAPE_SPELL_POISON);
 			var0003 = script item {
 				face var0001;
-				sfx 110;
+				sfx SFX_POISON_SPELL;
 				actor frame raise_1h;
 				actor frame strike_1h;
 				actor frame strike_1h;
@@ -56637,7 +56637,7 @@ void Func0660 object#(0x660) () {
 		declare var var0000;
 		if (Func0906()) {
 			var0000 = script item {
-				sfx 65;
+				sfx SFX_COMBAT_MAGIC;
 				actor frame raise_1h;
 				actor frame reach_1h;
 				actor frame strike_1h;
@@ -56692,7 +56692,7 @@ void Func0661 object#(0x661) () {
 				face var0001;
 				actor frame raise_1h;
 				actor frame cast_up;
-				sfx 65;
+				sfx SFX_COMBAT_MAGIC;
 				actor frame cast_out;
 				actor frame strike_2h;
 				actor frame strike_2h;
@@ -56726,7 +56726,7 @@ void Func0662 object#(0x662) () {
 						call Func0612;
 					};
 					var0002 = script item {
-						sfx 67;
+						sfx SFX_WIZARD_MAGIC;
 						actor frame cast_up;
 						actor frame cast_out;
 						actor frame strike_2h;
@@ -56761,7 +56761,7 @@ void Func0663 object#(0x663) () {
 					LOOP_ONCE);
 			var0001 = script item {
 				actor frame cast_up;
-				sfx 65;
+				sfx SFX_COMBAT_MAGIC;
 				actor frame cast_out;
 				actor frame cast_up;
 				actor frame strike_2h;
@@ -56838,7 +56838,7 @@ void Func0665 object#(0x665) () {
 		declare var var0002;
 		if (Func0906()) {
 			var0002 = script item {
-				sfx 67;
+				sfx SFX_WIZARD_MAGIC;
 				actor frame raise_1h;
 				actor frame reach_1h;
 				actor frame strike_1h;
@@ -56898,7 +56898,7 @@ void Func0666 object#(0x666) () {
 		declare var var0000;
 		if (Func0906()) {
 			var0000 = script item {
-				sfx 67;
+				sfx SFX_WIZARD_MAGIC;
 				actor frame reach_1h;
 				actor frame raise_1h;
 				actor frame strike_1h;
@@ -56990,7 +56990,7 @@ void Func0667 object#(0x667) () {
 							actor frame reach_1h;
 							actor frame raise_1h;
 							actor frame strike_1h;
-							sfx 66;
+							sfx SFX_ITEM_MAGIC;
 						};
 						var0006 = script var0000 after 6 ticks {
 							nohalt;
@@ -57027,7 +57027,7 @@ void Func0668 object#(0x668) () {
 			var0002 = set_to_attack(var0000, SHAPE_SPELL_CHARM);
 			var0002 = script item {
 				face var0001;
-				sfx 68;
+				sfx SFX_GENERAL_MAGIC;
 				actor frame raise_1h;
 				actor frame cast_out;
 				actor frame strike_2h;
@@ -57052,7 +57052,7 @@ void Func0669 object#(0x669) () {
 		item_say("@Por Xen@");
 		if (Func0906()) {
 			var0000 = script item {
-				sfx 67;
+				sfx SFX_WIZARD_MAGIC;
 				actor frame raise_1h;
 				actor frame cast_out;
 				actor frame strike_2h;
@@ -57110,7 +57110,7 @@ void Func066A object#(0x66A) () {
 		declare var var0003;
 		if (Func0906()) {
 			var0003 = script item {
-				sfx 65;
+				sfx SFX_COMBAT_MAGIC;
 				face var0001;
 				actor frame cast_up;
 				actor frame cast_out;
@@ -57148,7 +57148,7 @@ void Func066B object#(0x66B) () {
 			var0002 = set_to_attack(var0000, SHAPE_SPELL_EXPLOSION);
 			var0002 = script item {
 				face var0001;
-				sfx 65;
+				sfx SFX_COMBAT_MAGIC;
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame strike_1h;
@@ -57181,7 +57181,7 @@ void Func066C object#(0x66C) () {
 				actor frame reach_1h;
 				actor frame raise_1h;
 				actor frame strike_1h;
-				sfx 64;
+				sfx SFX_HEALING_MAGIC;
 			};
 			if (var0000->is_npc()) {
 				var var0003 = var0000->get_npc_prop(STRENGTH);
@@ -57210,7 +57210,7 @@ void Func066D object#(0x66D) () {
 		if (Func0906()) {
 			var0002 = script item {
 				face var0001;
-				sfx 67;
+				sfx SFX_WIZARD_MAGIC;
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame strike_2h;
@@ -57243,7 +57243,7 @@ void Func066E object#(0x66E) () {
 		declare var var0002;
 		if (Func0906()) {
 			var0002 = script item {
-				sfx 65;
+				sfx SFX_COMBAT_MAGIC;
 				face var0001;
 				actor frame raise_1h;
 				actor frame reach_1h;
@@ -57285,7 +57285,7 @@ void Func066F object#(0x66F) () {
 					ANIMATION_TELEPORT, var0000.x - 2, var0000.y - 2, 0, 0, 0,
 					LOOP_ONCE);
 			var0001 = script item {
-				sfx 65;
+				sfx SFX_COMBAT_MAGIC;
 				actor frame standing;
 				actor frame raise_1h;
 				actor frame cast_up;
@@ -57324,7 +57324,7 @@ void Func0670 object#(0x670) () {
 		declare var var0000;
 		if (Func0906()) {
 			var0000 = script item {
-				sfx 65;
+				sfx SFX_COMBAT_MAGIC;
 				actor frame kneeling;
 				actor frame standing;
 				actor frame reach_1h;
@@ -57404,7 +57404,7 @@ void Func0672 object#(0x672) () {
 		if (Func0906()) {
 			var0002 = script item {
 				face var0001;
-				sfx 65;
+				sfx SFX_COMBAT_MAGIC;
 				actor frame reach_1h;
 				actor frame strike_1h;
 				actor frame raise_1h;
@@ -57477,7 +57477,7 @@ void Func0673 object#(0x673) () {
 		declare var var0002;
 		if (Func0906()) {
 			var0002 = script item {
-				sfx 65;
+				sfx SFX_COMBAT_MAGIC;
 				actor frame bowing;
 				actor frame kneeling;
 				actor frame bowing;
@@ -57526,7 +57526,7 @@ void Func0674 object#(0x674) () {
 			gflags[MAGIC_STORM_SPELL] = true;
 			UI_set_weather(RAIN);
 			var0001 = script item {
-				sfx 65;
+				sfx SFX_COMBAT_MAGIC;
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame cast_up;
@@ -57581,7 +57581,7 @@ void Func0675 object#(0x675) () {
 		if (Func0906()) {
 			var0002 = script item {
 				face var0001;
-				sfx 110;
+				sfx SFX_POISON_SPELL;
 				actor frame raise_1h;
 				actor frame reach_1h;
 				actor frame strike_1h;
@@ -57616,7 +57616,7 @@ void Func0676 object#(0x676) () {
 		declare var var0002;
 		if (Func0906()) {
 			var0002 = script item {
-				sfx 65;
+				sfx SFX_COMBAT_MAGIC;
 				face var0001;
 				actor frame raise_1h;
 				actor frame reach_1h;
@@ -57653,7 +57653,7 @@ void Func0677 object#(0x677) () {
 				actor frame raise_2h;
 				actor frame standing;
 				actor frame kneeling;
-				sfx 67;
+				sfx SFX_WIZARD_MAGIC;
 				call Func0677;
 			};
 		} else {
@@ -57776,7 +57776,7 @@ void Func0678 object#(0x678) () {
 		if (Func0906() && var0000->get_item_shape() == SHAPE_CHUNKS_OF_LEAD) {
 			var0002 = script item {
 				face var0001;
-				sfx 66;
+				sfx SFX_ITEM_MAGIC;
 				actor frame raise_1h;
 				actor frame strike_1h;
 			};
@@ -57817,7 +57817,7 @@ void Func0679 object#(0x679) () {
 			var0002 = script item {
 				face var0001;
 				actor frame cast_up;
-				sfx 65;
+				sfx SFX_COMBAT_MAGIC;
 				actor frame cast_out;
 				actor frame cast_up;
 				actor frame strike_2h;
@@ -57882,7 +57882,7 @@ void Func067A object#(0x67A) () {
 					};
 					var0005 = script item {
 						face var0002;
-						sfx 65;
+						sfx SFX_COMBAT_MAGIC;
 						actor frame strike_2h;
 						actor frame cast_out;
 						actor frame cast_up;
@@ -57970,7 +57970,7 @@ void Func067C object#(0x67C) () {
 			var0002 = set_to_attack(var0000, SHAPE_SPELL_ENERGY_MYST);
 			var0002 = script item {
 				face var0001;
-				sfx 65;
+				sfx SFX_COMBAT_MAGIC;
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame cast_up;
@@ -57997,7 +57997,7 @@ void Func067D object#(0x67D) () {
 		declare var var0000;
 		if (Func0906()) {
 			var0000 = script item {
-				sfx 65;
+				sfx SFX_COMBAT_MAGIC;
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame cast_up;
@@ -58051,7 +58051,7 @@ void Func067E object#(0x67E) () {
 		if (Func0906()) {
 			var0000 = script item {
 				actor frame cast_up;
-				sfx 64;
+				sfx SFX_HEALING_MAGIC;
 				actor frame cast_out;
 				actor frame cast_up;
 				actor frame strike_2h;
@@ -58095,7 +58095,7 @@ void Func067F object#(0x67F) () {
 				actor frame raise_1h;
 				actor frame cast_out;
 				actor frame strike_2h;
-				sfx 64;
+				sfx SFX_HEALING_MAGIC;
 			};
 			var var0001 = UI_get_party_list();
 			for (var0004 in var0001) {
@@ -58131,14 +58131,14 @@ void Func0680 object#(0x680) () {
 			UI_set_weather(RAIN);
 			halt_scheduled();
 			var0001 = script item {
-				sfx 65;
+				sfx SFX_COMBAT_MAGIC;
 				actor frame kneeling;
 				actor frame kneeling;
 				actor frame kneeling;
 				actor frame standing;
 				actor frame cast_up;
 				actor frame cast_out;
-				sfx 67;
+				sfx SFX_WIZARD_MAGIC;
 				actor frame cast_up;
 				actor frame strike_1h;
 				actor frame bowing;
@@ -58180,7 +58180,7 @@ void Func0681 object#(0x681) () {
 			var0002 = set_to_attack(var0000, SHAPE_SPELL_DEATH_VORTEX);
 			var var0003 = script item {
 				face var0001;
-				sfx 65;
+				sfx SFX_COMBAT_MAGIC;
 				actor frame cast_up;
 				actor frame strike_1h;
 				attack;
@@ -58208,12 +58208,12 @@ void Func0682 object#(0x682) () {
 					ANIMATION_TELEPORT, var0000.x - 2, var0000.y - 2, 0, 0, 0,
 					LOOP_ONCE);
 			var0001 = script item {
-				sfx 65;
+				sfx SFX_COMBAT_MAGIC;
 				actor frame kneeling;
 				actor frame standing;
 				actor frame cast_up;
 				actor frame cast_out;
-				sfx 67;
+				sfx SFX_WIZARD_MAGIC;
 			};
 			var var0002 = 25;
 			var var0003 = find_nearby(ANY_SHAPE, var0002, MASK_NPC);
@@ -58237,7 +58237,7 @@ void Func0682 object#(0x682) () {
 				var0004 = UI_get_party_list();
 				for (var000B in var0004) {
 					var000C = var000B->get_npc_prop(HEALTH);
-					Func0936(var000B, var000C - 0x0002);
+					Func0936(var000B, var000C - 2);
 				}
 			}
 		} else {
@@ -58254,7 +58254,7 @@ void Func0682 object#(0x682) () {
 		var var000D = get_item_flag(CANT_DIE);
 		if (var000D == false) {
 			var000C = get_npc_prop(HEALTH);
-			Func0936(item, var000C - 0x0002);
+			Func0936(item, var000C - 2);
 			Func0936(item, 50);
 		}
 	}
@@ -58271,7 +58271,7 @@ void Func0683 object#(0x683) () {
 					LOOP_ONCE);
 			var var0001 = script item {
 				actor frame raise_1h;
-				sfx 67;
+				sfx SFX_WIZARD_MAGIC;
 				actor frame standing;
 				actor frame cast_up;
 				actor frame standing;
@@ -58280,7 +58280,7 @@ void Func0683 object#(0x683) () {
 			var var0002 = UI_get_party_list();
 			for (var0005 in var0002) {
 				var var0006 = get_distance(var0005);
-				var0006 = (var0006 / 0x0003) + 0x0005;
+				var0006 = (var0006 / 3) + 5;
 				var0001 = script var0005 after var0006 ticks {
 					nohalt;
 					call Func0683;
@@ -58331,7 +58331,7 @@ void Func0684 object#(0x684) () {
 			var0007 = 1;
 			var0008 = script item {
 				face var0003;
-				sfx 64;
+				sfx SFX_HEALING_MAGIC;
 				actor frame kneeling;
 				actor frame standing;
 				actor frame cast_up;
@@ -58368,7 +58368,7 @@ void Func0685 object#(0x685) () {
 				actor frame cast_up;
 				actor frame cast_out;
 				actor frame strike_2h;
-				sfx 65;
+				sfx SFX_COMBAT_MAGIC;
 				call Func0685;
 			};
 		} else {
@@ -58426,7 +58426,7 @@ void Func0686 object#(0x686) () {
 			var var0002 = set_to_attack(var0000, SHAPE_SPELL_SWORDSTRIKE);
 			var0003 = script item {
 				face var0001;
-				sfx 65;
+				sfx SFX_COMBAT_MAGIC;
 				actor frame raise_1h;
 				actor frame standing;
 				actor frame cast_up;
@@ -58457,7 +58457,7 @@ void Func0687 object#(0x687) () {
 		declare var var0000;
 		if (Func0906()) {
 			var0000 = script item {
-				sfx 67;
+				sfx SFX_WIZARD_MAGIC;
 				actor frame strike_2h;
 				actor frame cast_out;
 				call Func0687;
@@ -58471,7 +58471,7 @@ void Func0687 object#(0x687) () {
 		}
 	}
 	if (event == SCRIPTED) {
-		UI_stop_time(0x0064);
+		UI_stop_time(100);
 	}
 }
 
@@ -58537,7 +58537,7 @@ void Func068E object#(0x68E) () {
 		UI_sprite_effect(
 				ANIMATION_POOF, var0001.x - 3, var0001.y - 3, 0, 0, 0,
 				LOOP_ONCE);
-		UI_play_sound_effect(0x002E);
+		UI_play_sound_effect(SFX_BLACKSMITH_DOUSING);
 		var var0002 = script item {
 			frame 8;
 			call Func068F;
@@ -58599,7 +58599,7 @@ void Func0691 object#(0x691) () {
 		var var0000 = AVATAR->get_npc_object()->find_nearest(SHAPE_SWORD_BLANK, 2);
 		struct<Position> var0001 = var0000->get_object_position();
 		var0002 = script item {
-			sfx 45;
+			sfx SFX_BLACKSMITH_HAMMER_CLANG;
 		};
 		var0002 = script item {
 			nohalt;
@@ -58668,7 +58668,7 @@ void Func0693 object#(0x693) () {
 	var0001.x = var0000.x - 3;
 	var0001.y = var0000.y - 4;
 	UI_sprite_effect(ANIMATION_POOF, var0001.x, var0001.y, 0, 0, 0, LOOP_ONCE);
-	UI_play_sound_effect(0x002E);
+	UI_play_sound_effect(SFX_BLACKSMITH_DOUSING);
 }
 
 void Func0694 object#(0x694) () {
@@ -58712,7 +58712,7 @@ void Func0694 object#(0x694) () {
 			frame 0;
 		};
 	}
-	UI_play_sound_effect(0x0028);
+	UI_play_sound_effect(SFX_LIQUID_SPLASH);
 }
 
 void Func0695 object#(0x695) () {
@@ -58752,7 +58752,7 @@ void Func0695 object#(0x695) () {
 		var var0004 = script item {
 			frame 1;
 		};
-		UI_play_sound_effect(0x0028);
+		UI_play_sound_effect(SFX_LIQUID_SPLASH);
 	}
 }
 
@@ -58972,7 +58972,7 @@ void Func0697 object#(0x697) () {
 			UI_sprite_effect(
 					ANIMATION_TELEPORT, var0000.x - 2, var0000.y - 2, 0, 0, 0,
 					LOOP_ONCE);
-			UI_play_sound_effect(0x0043);
+			UI_play_sound_effect(SFX_WIZARD_MAGIC);
 			set_item_frame(SWING_1_NORTH);
 			var0001 = UI_create_new_object(SHAPE_GARGOYLE_WARRIOR);
 			var0001->set_item_frame(KNEEL_SOUTH);
@@ -58998,7 +58998,7 @@ void Func0697 object#(0x697) () {
 			UI_sprite_effect(
 					ANIMATION_MEDIUM_BLAST, var0000.x - 2, var0000.y - 2, 0, 0,
 					0, LOOP_ONCE);
-			UI_play_sound_effect(0x0009);
+			UI_play_sound_effect(SFX_EXPLOSION_LARGE);
 			var0001 = find_nearest(SHAPE_GARGOYLE_WARRIOR, 1);
 			var0001->remove_item();
 			var var0005 = UI_create_new_object(SHAPE_DRAGON);
@@ -59026,7 +59026,7 @@ void Func0697 object#(0x697) () {
 			UI_sprite_effect(
 					ANIMATION_TELEPORT, var0000.x, var0000.y, 0, 0, 0,
 					LOOP_ONCE);
-			UI_play_sound_effect(0x0008);
+			UI_play_sound_effect(SFX_EXPLOSION_MEDIUM);
 			var0006 = find_nearest(SHAPE_MONSTER_MAGE, 1);
 			remove_item();
 			var0006->set_item_frame(KNEEL_SOUTH);
@@ -59054,7 +59054,7 @@ void Func0697 object#(0x697) () {
 		UI_sprite_effect(
 				ANIMATION_GREEN_BUBBLES, var0000.x, var0000.y, 0, 0, 0,
 				LOOP_ONCE);
-		UI_play_sound_effect(0x0043);
+		UI_play_sound_effect(SFX_WIZARD_MAGIC);
 		set_item_frame(SWING_1_NORTH);
 		var var000B = UI_create_new_object(SHAPE_MOUSE);
 		var000B->set_item_frame(STAND_SOUTH);
@@ -59088,7 +59088,7 @@ void Func0697 object#(0x697) () {
 				ANIMATION_LIGHTNING, var0000.x, var0000.y, 0, 0, 0, LOOP_ONCE);
 		UI_sprite_effect(
 				ANIMATION_TELEPORT, var0000.x, var0000.y, 0, 0, 0, LOOP_ONCE);
-		UI_play_sound_effect(0x003E);
+		UI_play_sound_effect(SFX_THUNDER);
 		set_item_frame(SWING_1_NORTH);
 		var var000D = UI_create_new_object(SHAPE_COW);
 		var000D->set_item_frame(SWING_2H_1_SOUTH);
@@ -59128,7 +59128,7 @@ void Func0698 object#(0x698) () {
 		UI_sprite_effect(
 				ANIMATION_GREEN_BUBBLES, var0000.x, var0000.y, 0, 0, 0,
 				LOOP_ONCE);
-		UI_play_sound_effect(0x0043);
+		UI_play_sound_effect(SFX_WIZARD_MAGIC);
 		var0001->remove_item();
 		set_item_frame(KNEEL_SOUTH);
 		var0003 = script item {
@@ -59146,7 +59146,7 @@ void Func0698 object#(0x698) () {
 				ANIMATION_LIGHTNING, var0000.x, var0000.y, 0, 0, 0, LOOP_ONCE);
 		UI_sprite_effect(
 				ANIMATION_TELEPORT, var0000.x, var0000.y, 0, 0, 0, LOOP_ONCE);
-		UI_play_sound_effect(0x003E);
+		UI_play_sound_effect(SFX_THUNDER);
 		var0002->remove_item();
 		set_item_frame(CAST_1_SOUTH);
 		var0003 = script item {
@@ -59247,7 +59247,7 @@ void Func069A object#(0x69A) () {
 	UI_sprite_effect(
 			ANIMATION_TELEPORT, var0001.x - 2, var0001.y - 2, 0, 0, 0,
 			LOOP_ONCE);
-	UI_play_sound_effect(0x0044);
+	UI_play_sound_effect(SFX_GENERAL_MAGIC);
 	var var0002 = Func092D(item);
 	var var0003 = (var0002 + 0x0004) % 0x0008;
 	var var0004 = script item {
@@ -59284,7 +59284,7 @@ void Func069C object#(0x69C) () {
 	UI_sprite_effect(
 			ANIMATION_TELEPORT, var0001.x - 2, var0001.y - 2, 0, 0, 0,
 			LOOP_ONCE);
-	UI_play_sound_effect(0x0044);
+	UI_play_sound_effect(SFX_GENERAL_MAGIC);
 	var var0002 = script item {
 		face south;
 		actor frame cast_up;
@@ -59382,7 +59382,7 @@ void Func069E object#(0x69E) () {
 			ANIMATION_LIGHTNING, var0001.x, var0001.y, 0, 0, 0, LOOP_ONCE);
 	UI_sprite_effect(
 			ANIMATION_TELEPORT, var0001.x, var0001.y, 0, 0, 0, LOOP_ONCE);
-	UI_play_sound_effect(0x003E);
+	UI_play_sound_effect(SFX_THUNDER);
 }
 
 void Func069F object#(0x69F) () {
@@ -59474,7 +59474,7 @@ void Func069F object#(0x69F) () {
 		wait 5;
 		call Func06A0;
 	};
-	UI_play_sound_effect(0x0043);
+	UI_play_sound_effect(SFX_WIZARD_MAGIC);
 }
 
 void Func06A0 object#(0x6A0) () {
@@ -59542,7 +59542,7 @@ void Func06A0 object#(0x6A0) () {
 			UI_sprite_effect(
 					ANIMATION_MEDIUM_BLAST, var0004.x - 1, var0004.y - 2, 0, 0,
 					0, LOOP_ONCE);
-			UI_play_sound_effect(0x0008);
+			UI_play_sound_effect(SFX_EXPLOSION_MEDIUM);
 		}
 	} else {
 		var var000E = false;
@@ -59651,7 +59651,7 @@ void Func06A1 object#(0x6A1) () {
 		wait 2;
 		call Func06F5;
 	};
-	UI_play_sound_effect(0x0044);
+	UI_play_sound_effect(SFX_GENERAL_MAGIC);
 }
 
 void Func06A2 object#(0x6A2) () {
@@ -59688,7 +59688,7 @@ void Func06A2 object#(0x6A2) () {
 		wait 14;
 		call Func06A0;
 	};
-	UI_play_sound_effect(0x0044);
+	UI_play_sound_effect(SFX_GENERAL_MAGIC);
 }
 
 void Func06A3 object#(0x6A3) () {
@@ -60141,7 +60141,7 @@ void Func06AE object#(0x6AE) () {
 
 void Func06AF object#(0x6AF) () {
 	if (event == EGG) {
-		UI_play_sound_effect(0x001C);
+		UI_play_sound_effect(SFX_LEVER_SWITCH);
 		var var0000 = UI_get_party_list();
 		for (var0003 in var0000) {
 			if (!UI_roll_to_win(
@@ -60160,7 +60160,7 @@ void Func06AF object#(0x6AF) () {
 
 void Func06B0 object#(0x6B0) () {
 	if (event == EGG) {
-		UI_play_sound_effect(0x001C);
+		UI_play_sound_effect(SFX_LEVER_SWITCH);
 		var var0000 = UI_get_party_list();
 		for (var0003 in var0000) {
 			if (!UI_roll_to_win(
@@ -60173,7 +60173,7 @@ void Func06B0 object#(0x6B0) () {
 
 void Func06B1 object#(0x6B1) () {
 	if (event == EGG) {
-		UI_play_sound_effect(0x001C);
+		UI_play_sound_effect(SFX_LEVER_SWITCH);
 		var var0000 = UI_get_party_list();
 		for (var0003 in var0000) {
 			if (!UI_roll_to_win(
@@ -60193,7 +60193,7 @@ void Func06B1 object#(0x6B1) () {
 void Func06B2 object#(0x6B2) () {
 	if (event == EGG) {
 		event = DOUBLECLICK;
-		UI_play_sound_effect(0x001C);
+		UI_play_sound_effect(SFX_LEVER_SWITCH);
 		var var0000 = get_item_quality();
 		var var0001 = find_nearby(SHAPE_LIGHT_SOURCE, var0000, MASK_NONE);
 		declare var var0004;
@@ -60213,7 +60213,7 @@ void Func06B2 object#(0x6B2) () {
 
 void Func06B3 object#(0x6B3) () {
 	if (event == EGG) {
-		UI_play_sound_effect(0x001C);
+		UI_play_sound_effect(SFX_LEVER_SWITCH);
 		event = DOUBLECLICK;
 		var var0000 = get_item_quality();
 		var var0001 = find_nearby(SHAPE_LIT_LIGHT_SOURCE, var0000, MASK_NONE);
@@ -60234,7 +60234,7 @@ void Func06B3 object#(0x6B3) () {
 
 void Func06B4 object#(0x6B4) () {
 	if (event == EGG) {
-		UI_play_sound_effect(0x001C);
+		UI_play_sound_effect(SFX_LEVER_SWITCH);
 		var var0000 = UI_get_party_list();
 		var var0001 = Func092B(var0000);
 		var var0002 = UI_die_roll(1, var0001);
@@ -60281,7 +60281,7 @@ labelFunc06B5_00BE:
 
 void Func06B6 object#(0x6B6) () {
 	if (event == EGG) {
-		UI_play_sound_effect(0x001C);
+		UI_play_sound_effect(SFX_LEVER_SWITCH);
 		event = DOUBLECLICK;
 		var var0000 = find_nearby(SHAPE_CHAIR, 20, MASK_NONE);
 		var var0001 = [];
@@ -60297,13 +60297,13 @@ void Func06B6 object#(0x6B6) () {
 			declare var var0007;
 			if (var0006 < (WEST / 2)) {
 				var0007 = script var0004 {
-					sfx 83;
+					sfx SFX_COMEDIC_SLAP;
 					next frame cycle;
 				};
 			} else {
 				var0005 -= var0006;
 				var0007 = script var0004 {
-					sfx 83;
+					sfx SFX_COMEDIC_SLAP;
 					frame var0005;
 				};
 			}
@@ -60313,7 +60313,7 @@ void Func06B6 object#(0x6B6) () {
 
 void Func06B7 object#(0x6B7) () {
 	if (event == EGG) {
-		UI_play_sound_effect(0x001C);
+		UI_play_sound_effect(SFX_LEVER_SWITCH);
 		var var0000 = UI_get_party_list();
 		var var0001 = UI_die_roll(1, Func092B(var0000));
 		var0000[var0001]->Func060F();
@@ -61489,7 +61489,7 @@ void Func06F6 object#(0x6F6) () {
 				UI_sprite_effect(
 						ANIMATION_LIGHTNING, var000D.x, var000D.y, 0, 0, 0,
 						LOOP_ONCE);
-				UI_play_sound_effect(0x003E);
+				UI_play_sound_effect(SFX_THUNDER);
 				var000F = script item {
 					wait 3;
 					call Func06F6;
@@ -61922,7 +61922,7 @@ void Func06F7 object#(0x6F7) () {
 			UI_sprite_effect(
 					ANIMATION_MEDIUM_BLAST, var000C.x - 2, var000C.y - 2, 0, 0,
 					0, LOOP_ONCE);
-			UI_play_sound_effect(0x0009);
+			UI_play_sound_effect(SFX_EXPLOSION_LARGE);
 			var var000D = UI_create_new_object(SHAPE_DRAGON);
 			var000D->set_item_frame(USE_SOUTH);
 			var000D->set_item_flag(TEMPORARY);
@@ -62348,7 +62348,7 @@ void Func06F8 object#(0x6F8) () {
 					UI_sprite_effect(
 							ANIMATION_TELEPORT, var0005.x - 2, var0005.y - 2, 0,
 							0, 0, LOOP_ONCE);
-					UI_play_sound_effect(0x0044);
+					UI_play_sound_effect(SFX_GENERAL_MAGIC);
 					var0016 = script var0004 {
 						frame FRAME_DARK_CORE_AMULETS5;
 						repeat 24 {
@@ -62437,7 +62437,7 @@ void Func06F8 object#(0x6F8) () {
 			UI_sprite_effect(
 					ANIMATION_LIGHTNING, var0013.x, var0013.y, 0, 0, 0,
 					LOOP_ONCE);
-			UI_play_sound_effect(0x003E);
+			UI_play_sound_effect(SFX_THUNDER);
 			gflags[PLACED_SECOND_LENS] = false;
 			var0021 = script item after 7 ticks {
 				call Func06F8;
@@ -62518,7 +62518,7 @@ void Func06F8 object#(0x6F8) () {
 			UI_sprite_effect(
 					ANIMATION_LIGHTNING, var0013.x, var0013.y, 0, 0, 0,
 					LOOP_ONCE);
-			UI_play_sound_effect(0x0009);
+			UI_play_sound_effect(SFX_EXPLOSION_LARGE);
 			gflags[PLACED_FIRST_LENS] = false;
 			gflags[PLACED_SECOND_LENS] = false;
 			var0021 = script item after 5 ticks {
@@ -62549,7 +62549,7 @@ void Func06F8 object#(0x6F8) () {
 		UI_sprite_effect(
 				ANIMATION_DEATH_VORTEX, var0005.x - 2, var0005.y - 2, 0, 0, 0,
 				LOOP_ONCE);
-		UI_play_sound_effect(0x0009);
+		UI_play_sound_effect(SFX_EXPLOSION_LARGE);
 		var0006 = find_nearby(SHAPE_AMULET, 1, MASK_NONE);
 		for (var000A in var0006) {
 			var000B = var000A->get_item_frame();
@@ -62729,7 +62729,7 @@ void Func06F9 object#(0x6F9) () {
 				UI_sprite_effect(
 						ANIMATION_TELEPORT, var0014.x - 2, var0014.y - 2, 0, 0,
 						0, LOOP_ONCE);
-				UI_play_sound_effect(0x0043);
+				UI_play_sound_effect(SFX_WIZARD_MAGIC);
 			}
 			var0009 = AVATAR->get_npc_object()->find_nearby(
 					SHAPE_AMULET, 25, MASK_NONE);
@@ -62742,7 +62742,7 @@ void Func06F9 object#(0x6F9) () {
 						UI_sprite_effect(
 								ANIMATION_TELEPORT, var0014.x - 2,
 								var0014.y - 2, 0, 0, 0, LOOP_ONCE);
-						UI_play_sound_effect(0x0043);
+						UI_play_sound_effect(SFX_WIZARD_MAGIC);
 					}
 				}
 			}
@@ -62801,7 +62801,7 @@ void Func06F9 object#(0x6F9) () {
 				UI_sprite_effect(
 						ANIMATION_TELEPORT, var0014.x - 2, var0014.y - 2, 0, 0,
 						0, LOOP_ONCE);
-				UI_play_sound_effect(0x0043);
+				UI_play_sound_effect(SFX_WIZARD_MAGIC);
 			}
 			var0009 = AVATAR->get_npc_object()->find_nearby(
 					SHAPE_AMULET, 25, MASK_NONE);
@@ -62814,7 +62814,7 @@ void Func06F9 object#(0x6F9) () {
 						UI_sprite_effect(
 								ANIMATION_TELEPORT, var0014.x - 2,
 								var0014.y - 2, 0, 0, 0, LOOP_ONCE);
-						UI_play_sound_effect(0x0043);
+						UI_play_sound_effect(SFX_WIZARD_MAGIC);
 					}
 				}
 			}
@@ -62868,7 +62868,7 @@ void Func06F9 object#(0x6F9) () {
 			var var002E = find_nearest(SHAPE_MIRROR_EW, 3);
 			if (var002E) {
 				var002E->set_item_frame(FRAME_MIRROR_BROKEN);
-				UI_play_sound_effect(0x0025);
+				UI_play_sound_effect(SFX_GLASS_SHATTERING);
 			}
 		}
 	}
@@ -63033,7 +63033,7 @@ void Func06FC object#(0x6FC) () {
 					UI_sprite_effect(
 							ANIMATION_POOF, var0003.x, var0003.y, 0, 0, 0,
 							LOOP_ONCE);
-					UI_play_sound_effect(0x002E);
+					UI_play_sound_effect(SFX_BLACKSMITH_DOUSING);
 					var0004->remove_item();
 					return;
 				}
@@ -63062,7 +63062,7 @@ void Func06FC object#(0x6FC) () {
 					UI_sprite_effect(
 							ANIMATION_POOF, var0011.x - 1, var0011.y - 1, 0, 0,
 							0, LOOP_ONCE);
-					UI_play_sound_effect(0x002E);
+					UI_play_sound_effect(SFX_BLACKSMITH_DOUSING);
 					return;
 				}
 			}
@@ -63116,7 +63116,7 @@ void Func06FD object#(0x6FD) () {
 					UI_sprite_effect(
 							ANIMATION_MEDIUM_BLAST, var0009.x, var0009.y, 0, 0,
 							0, LOOP_ONCE);
-					UI_play_sound_effect(0x0009);
+					UI_play_sound_effect(SFX_EXPLOSION_LARGE);
 					var000C = UI_create_new_object(SHAPE_EGG);
 					var000C->set_item_frame(FRAME_EGG_PATH);
 					var000C->set_item_flag(TEMPORARY);
@@ -63156,7 +63156,7 @@ void Func06FD object#(0x6FD) () {
 					UI_sprite_effect(
 							ANIMATION_MEDIUM_BLAST, var0009.x, var0009.y, 0, 0,
 							0, LOOP_ONCE);
-					UI_play_sound_effect(0x0009);
+					UI_play_sound_effect(SFX_EXPLOSION_LARGE);
 					var000C = UI_create_new_object(SHAPE_EGG);
 					var000C->set_item_frame(FRAME_EGG_PATH);
 					var000C->set_item_flag(TEMPORARY);
@@ -63329,7 +63329,7 @@ void Func070A object#(0x70A) () {
 				UI_sprite_effect(
 						ANIMATION_TELEPORT, var0021.x - 2, var0021.y - 2, 0, 0,
 						0, LOOP_ONCE);
-				UI_play_sound_effect(0x0034);
+				UI_play_sound_effect(SFX_WEAK_WOOSH1);
 				var0001->set_item_frame(USE_SOUTH);
 				var0002 = script var0001 {
 					face south;
@@ -63541,7 +63541,7 @@ void Func070C object#(0x70C) () {
 				UI_sprite_effect(
 						ANIMATION_GREEN_BUBBLES, var0003.x - 1, var0003.y - 2,
 						0, 0, 0, LOOP_ONCE);
-				UI_play_sound_effect(0x0025);
+				UI_play_sound_effect(SFX_GLASS_SHATTERING);
 			}
 		}
 	}
@@ -63564,7 +63564,7 @@ void Func070D object#(0x70D) () {
 				if (var0007->get_item_quality() == 12) {
 					var0008 = script var0007 {
 						frame 4;
-						sfx 33;
+						sfx SFX_PORTCULLIS_CLOSE;
 						repeat 3 {
 							previous frame cycle;
 						};
@@ -63578,7 +63578,7 @@ void Func070D object#(0x70D) () {
 				if (var0007->get_item_quality() == 12) {
 					var0008 = script var0007 {
 						call Func012F;
-						sfx 32;
+						sfx SFX_PORTCULLIS_OPEN;
 						repeat 3 {
 							next frame cycle;
 						};
@@ -63586,9 +63586,9 @@ void Func070D object#(0x70D) () {
 				}
 			}
 			if (var0004) {
-				UI_play_sound_effect(0x001C);
+				UI_play_sound_effect(SFX_LEVER_SWITCH);
 			} else {
-				UI_play_sound_effect(0x001C);
+				UI_play_sound_effect(SFX_LEVER_SWITCH);
 			}
 		}
 	} else {
@@ -63600,7 +63600,7 @@ void Func070D object#(0x70D) () {
 				if (var0007->get_item_quality() == 11) {
 					var0008 = script var0007 {
 						frame 4;
-						sfx 33;
+						sfx SFX_PORTCULLIS_CLOSE;
 						repeat 3 {
 							previous frame cycle;
 						};
@@ -63614,7 +63614,7 @@ void Func070D object#(0x70D) () {
 				if (var0007->get_item_quality() == 11) {
 					var0008 = script var0007 {
 						call Func012F;
-						sfx 32;
+						sfx SFX_PORTCULLIS_OPEN;
 						repeat 3 {
 							next frame cycle;
 						};
@@ -63622,9 +63622,9 @@ void Func070D object#(0x70D) () {
 				}
 			}
 			if (var0003) {
-				UI_play_sound_effect(0x001C);
+				UI_play_sound_effect(SFX_LEVER_SWITCH);
 			} else {
-				UI_play_sound_effect(0x001C);
+				UI_play_sound_effect(SFX_LEVER_SWITCH);
 			}
 		}
 	}
@@ -63726,7 +63726,7 @@ void Func070F object#(0x70F) () {
 				= AVATAR->get_npc_object()->get_object_position();
 		UI_sprite_effect(
 				ANIMATION_LIGHTNING, var0001.x, var0001.y, 0, 0, 0, LOOP_ONCE);
-		UI_play_sound_effect(0x003E);
+		UI_play_sound_effect(SFX_THUNDER);
 		var0002 = AVATAR->get_npc_object()->find_nearby(
 				ANY_SHAPE, 80, MASK_NPC2);
 		for (var0005 in var0002) {
@@ -63757,7 +63757,7 @@ void Func070F object#(0x70F) () {
 		};
 	} else {
 		var var000C = get_alignment();
-		UI_play_sound_effect(0x0004);
+		UI_play_sound_effect(SFX_BLUNT_THUD);
 		if (!get_item_flag(TEMPORARY)) {
 			kill_npc();
 			remove_npc();
@@ -63895,7 +63895,7 @@ void Func0710 object#(0x710) () {
 				}
 			}
 		}
-		UI_play_sound_effect2(0x000E, item);
+		UI_play_sound_effect2(SFX_GUMP, item);
 		book_mode();
 		say("     Vas Flam Uus~~");
 		say("This scroll will permit thee to perform the ritual necessary to "
@@ -63954,7 +63954,7 @@ void Func0713 object#(0x713) () {
 		struct<Position> var0001 = var0000->get_object_position();
 		UI_sprite_effect(
 				ANIMATION_FIREWORKS, var0001.x, var0001.y, 0, 0, 0, LOOP_ONCE);
-		UI_play_sound_effect(0x003E);
+		UI_play_sound_effect(SFX_THUNDER);
 		if (var0000->get_item_frame() == FRAME_TREE_OF_LIFE_WILTED) {
 			var0000->set_item_frame(FRAME_TREE_OF_LIFE_FULL);
 		}
@@ -63963,7 +63963,7 @@ void Func0713 object#(0x713) () {
 			UI_sprite_effect(
 					ANIMATION_FIREWORKS, var0001.x, var0001.y, 0, 0, 0,
 					LOOP_ONCE);
-			UI_play_sound_effect(0x003E);
+			UI_play_sound_effect(SFX_THUNDER);
 			var0005->remove_item();
 		}
 	}
@@ -64111,7 +64111,7 @@ void Func0715 object#(0x715) () {
 		};
 		struct<Position> var0006 = var0001->get_object_position();
 		UI_sprite_effect(ANIMATION_LIGHTNING, var0006.x, var0006.y, 0, 0, 0, 1);
-		UI_play_sound_effect(0x003E);
+		UI_play_sound_effect(SFX_THUNDER);
 		UI_lightning();
 	}
 	var0000 = AVATAR->find_nearby(SHAPE_BLOOD, 40, MASK_ALL_UNSEEN);
@@ -64120,7 +64120,7 @@ void Func0715 object#(0x715) () {
 		var var000B = UI_create_new_object(SHAPE_FIRE_FIELD);
 		var var000C = UI_update_last_created(var000A);
 		var0009->remove_item();
-		var0005 = script var000B after UI_die_roll(40, 150) ticks {
+		var0005 = script var000B after UI_die_roll(50, 150) ticks {
 			nohalt;
 			finish;
 			remove;
@@ -64491,29 +64491,29 @@ var Func080E 0x80E (var var0000) {
 			var000E = script var0003 {
 				frame 0;
 				continue;
-				sfx 34;
+				sfx SFX_DRAWBRIDGE_OPEN;
 				frame 1;
 				continue;
-				sfx 34;
+				sfx SFX_DRAWBRIDGE_OPEN;
 				call Func0611;
 				continue;
 				frame 0;
 				continue;
-				sfx 34;
+				sfx SFX_DRAWBRIDGE_OPEN;
 			};
 		} else {
 			var000E = script var0003 {
 				frame 0;
 				continue;
-				sfx 34;
+				sfx SFX_DRAWBRIDGE_OPEN;
 				call Func0611;
 				continue;
 				frame 1;
 				continue;
-				sfx 34;
+				sfx SFX_DRAWBRIDGE_OPEN;
 				frame 0;
 				continue;
-				sfx 34;
+				sfx SFX_DRAWBRIDGE_OPEN;
 			};
 		}
 	}
@@ -64563,7 +64563,7 @@ void Func0810 0x810 (var var0000, var var0001) {
 			if (var0009) {
 				var000A = var0009->set_last_created();
 				var000A = UI_update_last_created(FLAG_DESTROY);
-				UI_play_sound_effect(0x000A);
+				UI_play_sound_effect(SFX_WHIP_CRACK);
 			}
 		} else if (var0009 == NULL_OBJ) {
 			var var000B = UI_create_new_object(var0000);
@@ -64571,7 +64571,7 @@ void Func0810 0x810 (var var0000, var var0001) {
 			var000A = UI_update_last_created(var0003);
 			var000A = var0009->set_last_created();
 			var000A = UI_update_last_created(FLAG_DESTROY);
-			UI_play_sound_effect(0x0053);
+			UI_play_sound_effect(SFX_COMEDIC_SLAP);
 		}
 	}
 }
@@ -64842,7 +64842,7 @@ void Func0816 0x816 (var var0000) {
 		for (var001F in var001A) {
 			if (var001F->get_item_quality() == var0015) {
 				var0001 = script var001F {
-					sfx 32;
+					sfx SFX_PORTCULLIS_OPEN;
 					frame 1;
 					repeat 6 {
 						next frame cycle;
@@ -64864,7 +64864,7 @@ void Func0816 0x816 (var var0000) {
 		} else {
 			var0000->set_item_frame(var0021 - FRAME_LEVER_UP);
 		}
-		UI_play_sound_effect2(0x001C, item);
+		UI_play_sound_effect2(SFX_LEVER_SWITCH, item);
 	} else {
 		UI_flash_mouse(CURSOR_HAND);
 	}
@@ -64891,7 +64891,7 @@ void Func0817 0x817 (var var0000) {
 				frame 1;
 				continue;
 				nohalt;
-				sfx 16;
+				sfx SFX_TREADLE;
 				nop;
 				frame 0;
 			};
@@ -64959,7 +64959,7 @@ var Func081F 0x81F (var var0000) {
 	var var0001 = Func081B(var0000);
 	if (var0001 == FRAME_DOOR_OPENED) {
 		if (Func081D(var0000, SHAPE_WALL_NS_RIGHT, FRAME_DOOR_CLOSED, 0, 0, 0x0007)) {
-			UI_play_sound_effect2(0x001F, item);
+			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
 		} else {
 			Func0818();
 			return false;
@@ -64967,7 +64967,7 @@ var Func081F 0x81F (var var0000) {
 	}
 	if (var0001 == FRAME_DOOR_CLOSED) {
 		if (Func081D(var0000, SHAPE_WALL_NS_RIGHT, FRAME_DOOR_OPENED, 0, 0, 0x0007)) {
-			UI_play_sound_effect2(0x001E, item);
+			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
 		} else {
 			Func0818();
 			return false;
@@ -64980,7 +64980,7 @@ var Func0820 0x820 (var var0000) {
 	var var0001 = Func081B(var0000);
 	if (var0001 == FRAME_DOOR_OPENED) {
 		if (Func081D(var0000, SHAPE_WALL_BOTTOM, FRAME_DOOR_CLOSED, 0, 0, 0x0007)) {
-			UI_play_sound_effect2(0x001F, item);
+			UI_play_sound_effect2(SFX_DOOR_CLOSE, item);
 		} else {
 			Func0818();
 			return false;
@@ -64988,7 +64988,7 @@ var Func0820 0x820 (var var0000) {
 	}
 	if (var0001 == FRAME_DOOR_CLOSED) {
 		if (Func081D(var0000, SHAPE_WALL_BOTTOM, FRAME_DOOR_OPENED, 0, 0, 0x0007)) {
-			UI_play_sound_effect2(0x001E, item);
+			UI_play_sound_effect2(SFX_DOOR_OPEN, item);
 		} else {
 			Func0818();
 			return false;
@@ -65041,7 +65041,7 @@ void Func0824 0x824 (var var0000) {
 	if ((UI_die_roll(1, 3) == 1)
 		&& (!(var0000->get_item_quality() == 8))) {
 		AVATAR->reduce_health(3, ETHEREAL_DAMAGE);
-		UI_play_sound_effect2(0x003E, item);
+		UI_play_sound_effect2(SFX_THUNDER, item);
 		struct<Position> var0001 = AVATAR->get_object_position();
 		struct<Position> var0002 = var0000->get_object_position();
 		var var0003 = var0000->get_item_shape();
@@ -65056,7 +65056,7 @@ void Func0824 0x824 (var var0000) {
 		AVATAR->move_object(var0001);
 	} else {
 		UI_fade_palette(0x000C, 0x0001, 0x0000);
-		UI_play_sound_effect2(0x000B, item);
+		UI_play_sound_effect2(SFX_LIGHTNING_WHIP, item);
 		PARTY->move_object(Func0823(var0000));
 		var var0004 = script AVATAR {
 			nohalt;
@@ -65506,7 +65506,7 @@ void Func0830 0x830 (var var0000, var var0001) {
 	declare var var0005;
 	if (var0001 == 1) {
 		var0002 = -4;
-		var0003 = 0x0058;
+		var0003 = SFX_SAIL_UNFURL;
 		var0004 = var0000[1]->find_nearby(SHAPE_MAST, 25, MASK_NONE);
 		var0005 = script var0004 {
 			music MUSIC_SEA_SHANTY, PLAY_ONCE;
@@ -65514,7 +65514,7 @@ void Func0830 0x830 (var var0000, var var0001) {
 	}
 	if (var0001 == 0) {
 		var0002 = 4;
-		var0003 = 0x0057;
+		var0003 = SFX_SAIL_FURL;
 	}
 	for (var0008 in var0000) {
 		var var0009 = var0008->get_item_frame_rot();
@@ -65547,10 +65547,10 @@ void Func0832 0x832 (var var0000, var var0001) {
 		frame 4;
 		repeat 3 {
 			previous frame cycle;
-			sfx 32;
+			sfx SFX_PORTCULLIS_OPEN;
 		};
 		call var0001;
-		sfx 33;
+		sfx SFX_PORTCULLIS_CLOSE;
 	};
 }
 
@@ -65559,9 +65559,9 @@ void Func0833 0x833 (var var0000, var var0001) {
 		call var0001;
 		repeat 3 {
 			next frame cycle;
-			sfx 32;
+			sfx SFX_PORTCULLIS_OPEN;
 		};
-		sfx 33;
+		sfx SFX_PORTCULLIS_CLOSE;
 	};
 }
 
@@ -65580,7 +65580,7 @@ var Func0834 0x834 () {
 		if (var0005 == 0) {
 			var0006 = script var0004 {
 				repeat 3 {
-					sfx 32;
+					sfx SFX_PORTCULLIS_OPEN;
 					call Func0607;
 					frame 0;
 				};
@@ -65597,7 +65597,7 @@ var Func0834 0x834 () {
 			var0006 = script var0004 {
 				nohalt;
 				repeat 2 {
-					sfx 32;
+					sfx SFX_PORTCULLIS_OPEN;
 					call Func0607;
 					frame 1;
 				};
@@ -65612,7 +65612,7 @@ var Func0834 0x834 () {
 		if (var0005 == 2) {
 			var0006 = script var0004 {
 				repeat 1 {
-					sfx 32;
+					sfx SFX_PORTCULLIS_OPEN;
 					call Func0607;
 					frame 2;
 				};
@@ -65625,7 +65625,7 @@ var Func0834 0x834 () {
 		}
 		if (var0005 == 3) {
 			var0006 = script var0004 {
-				sfx 32;
+				sfx SFX_PORTCULLIS_OPEN;
 				call Func0607;
 				frame 2;
 			};
@@ -65638,7 +65638,7 @@ var Func0834 0x834 () {
 		if (var0005 == 4) {
 			var0006 = script var0004 {
 				repeat 3 {
-					sfx 32;
+					sfx SFX_PORTCULLIS_OPEN;
 					call Func0609;
 					frame 3;
 				};
@@ -65704,7 +65704,7 @@ var Func0837 0x837 (
 	var var0008 = set_last_created();
 	if (UI_is_not_blocked(var0005, get_item_shape(), get_item_frame())) {
 		if (UI_update_last_created(var0005)) {
-			UI_play_sound_effect(0x0049);
+			UI_play_sound_effect(SFX_RAT_RACE_CLOSE);
 			return 1;
 		}
 	} else {
@@ -65789,13 +65789,13 @@ void Func0839 0x839 (var var0000, var var0001, var var0002) {
 	if (var0002 == DOUBLECLICK || var0002 == SCRIPTED) {
 		var0000->set_item_shape(var0001);
 		var0000->halt_scheduled();
-		UI_play_sound_effect(0x002E);
+		UI_play_sound_effect(SFX_BLACKSMITH_DOUSING);
 		set_light(true);
 	}
 	if (var0002 == DEATH) {
 		var0000->set_item_shape(var0001);
 		var0000->halt_scheduled();
-		UI_play_sound_effect(0x002E);
+		UI_play_sound_effect(SFX_BLACKSMITH_DOUSING);
 		set_light(true);
 	}
 	if (var0002 == READIED) {
@@ -66229,7 +66229,7 @@ void Func0843 0x843 () {
 	ARCADION->hide();
 	var var0000 = script item {
 		frame 8;
-		sfx 67;
+		sfx SFX_WIZARD_MAGIC;
 		continue;
 		repeat 4 {
 			previous frame cycle;
@@ -70316,7 +70316,7 @@ struct<Position> Func0887 0x887 (
 		UI_sprite_effect(
 				ANIMATION_MEDIUM_BLAST, var0000.x - 1, var0000.y - 1, 0, 0, 0,
 				LOOP_ONCE);
-		UI_play_sound_effect(0x0009);
+		UI_play_sound_effect(SFX_EXPLOSION_LARGE);
 		var var000C = UI_create_new_object(SHAPE_EGG);
 		var000C->set_item_frame(FRAME_EGG_PATH);
 		var000C->set_item_flag(TEMPORARY);
@@ -76895,7 +76895,7 @@ var Func08FC 0x8FC (var var0000, var var0001) {
 }
 
 void Func08FD 0x8FD (var var0000) {
-	UI_play_sound_effect(0x004C);
+	UI_play_sound_effect(SFX_FAIL_BUZZ);
 	if (var0000 > 6) {
 		var0000 = 1;
 	}
@@ -77451,7 +77451,7 @@ void Func0927 0x927 (var var0000) {
 			"water", "blood", "wine", "beer", "ale", "stuff", "stuff", "stuff",
 			"stuff", "stuff", "last stuff"
 		];
-		UI_play_sound_effect(0x005A);
+		UI_play_sound_effect(SFX_QUAFF);
 		var var0003 = UI_die_roll(1, 10);
 		var var0004 = var0002[var0001];
 		var var0005 = "Gee, I bet that " + var0004 + " was pretty good....";
@@ -77489,7 +77489,7 @@ void Func0928 0x928 (var var0000) {
 				var0008 = "Gee, I bet that " + var0007 + " was pretty good....";
 			}
 		}
-		UI_play_sound_effect(0x005A);
+		UI_play_sound_effect(SFX_QUAFF);
 		var var0009 = UI_die_roll(1, 10);
 		if (var0009 == 1) {
 			Func08FF("mmmm... I bet that would sure wet a body's whistle.");
@@ -77542,7 +77542,7 @@ var Func092B 0x92B (var var0000) {
 }
 
 void Func092C 0x92C (var var0000) {
-	UI_play_sound_effect(0x004B);
+	UI_play_sound_effect(SFX_SUCCESS_BUZZ);
 }
 
 var Func092D 0x92D (var var0000) {
